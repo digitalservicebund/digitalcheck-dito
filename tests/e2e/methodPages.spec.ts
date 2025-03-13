@@ -47,6 +47,7 @@ test.describe("test method page link flow", () => {
 test.describe("test method sub pages", () => {
   test.beforeEach("Go to methods page", async ({ page }) => {
     await page.goto(ROUTE_METHODS.url);
+    await page.waitForURL(ROUTE_METHODS.url);
   });
 
   test("links to responsible actors", async ({ page }) => {

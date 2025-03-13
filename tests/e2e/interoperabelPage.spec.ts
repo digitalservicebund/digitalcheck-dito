@@ -7,6 +7,7 @@ import {
 test.describe("test interoperabel landing page", () => {
   test.beforeEach("Go to interoperabel landing page", async ({ page }) => {
     await page.goto(ROUTE_INTEROPERABILITY.url);
+    await page.waitForURL(ROUTE_INTEROPERABILITY.url);
   });
 
   test("links to pre-check", async ({ page }) => {
