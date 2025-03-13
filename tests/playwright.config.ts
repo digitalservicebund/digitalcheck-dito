@@ -73,7 +73,7 @@ const config: PlaywrightTestConfig = {
   ],
   projects: defaultProjects,
   webServer: {
-    command: "npm run dev -- --port 5172",
+    command: "npm run build && PORT=5172 npm run start",
     port: 5172,
     timeout: parseInt(process.env.WAIT_ON_TIMEOUT ?? `${5 * 1000}`),
   },
