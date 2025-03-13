@@ -220,7 +220,7 @@ async function registerMailInterceptionHandlerAndExpect(
     body?: string[];
   },
 ) {
-  await page.route("/vorpruefung/ergebnis*", async (route) => {
+  await page.route(`${ROUTE_RESULT.url}*`, async (route) => {
     const response = await route.fetch({ maxRedirects: 0 });
     const location = response.headers()["location"];
 
