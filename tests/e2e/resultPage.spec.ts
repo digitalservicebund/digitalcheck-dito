@@ -1,4 +1,4 @@
-import { type BrowserContext, expect, type Page, test } from "@playwright/test";
+import { expect, type Page, test } from "@playwright/test";
 import { preCheck } from "~/resources/content";
 import {
   ROUTE_DOCUMENTATION,
@@ -255,20 +255,6 @@ async function interceptMailAndExpect(
   await page.waitForTimeout(1000);
 }
 
-let context: BrowserContext;
-test.beforeAll(
-  `create shared browser context for all tests`,
-  async ({ browser }) => {
-    context = await browser.newContext();
-  },
-);
-
-test.afterAll(`close shared browser context`, async () => {
-  if (context) {
-    await context.close();
-  }
-});
-
 // Generate tests for each scenario
 for (const scenario of scenarios) {
   test.describe(`test ${scenario.name}`, () => {
@@ -277,8 +263,8 @@ for (const scenario of scenarios) {
     let page: Page;
     test.beforeAll(
       `answer questions according to scenario and go to result page`,
-      async () => {
-        page = await context.newPage();
+      async ({ browser }) => {
+        page = await browser.newPage();
         await page.goto(questions[0].url);
         for (const question of questions) {
           await page.waitForURL(question.url);
