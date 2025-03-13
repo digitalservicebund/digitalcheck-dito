@@ -339,7 +339,7 @@ for (const scenario of scenarios) {
           await page
             .getByLabel("Arbeitstitel des Vorhabens")
             .fill("Policy ABC");
-          await interceptMailAndExpect(page);
+          await page.getByRole("button", { name: "E-Mail erstellen" }).click();
           await expect(
             page.getByTestId(NEGATIVE_REASONING_ERROR),
           ).toBeVisible();
@@ -351,18 +351,32 @@ for (const scenario of scenarios) {
         test("negative reasoning input is not visible", async () => {
           await expect(page.getByLabel("Begründung")).not.toBeVisible();
         });
+
+        test("email body does not contain negative reasoning", async () => {
+          await page
+            .getByLabel("Arbeitstitel des Vorhabens")
+            .fill("Policy ABC");
+          await interceptMailAndExpect(page, undefined, {
+            body: ["Begründung:"],
+          });
+        });
       }
 
       test("no error shown when email and title are filled", async () => {
         await page.getByLabel("Ihre E-Mail Adresse").fill("foo@bar.de");
         await page.getByLabel("Arbeitstitel des Vorhabens").fill("Policy ABC");
+        if (scenario.expected.showsNegativeReasoning) {
+          await page
+            .getByLabel("Begründung")
+            .fill("Darum brauchen wir das nicht.");
+        }
         await interceptMailAndExpect(page);
         await expect(page.getByTestId(EMAIL_INPUT_ERROR)).not.toBeVisible();
         await expect(page.getByTestId(TITLE_INPUT_ERROR)).not.toBeVisible();
       });
 
       test("error is shown if title is empty", async () => {
-        await interceptMailAndExpect(page);
+        await page.getByRole("button", { name: "E-Mail erstellen" }).click();
         await expect(page.getByTestId(TITLE_INPUT_ERROR)).toBeVisible();
         await expect(page.locator("main")).toContainText(
           "Bitte geben Sie einen Titel für Ihr Vorhaben an.",
@@ -373,13 +387,18 @@ for (const scenario of scenarios) {
         await page
           .getByLabel("Arbeitstitel des Vorhabens")
           .fill("A".repeat(101));
-        await interceptMailAndExpect(page);
+        await page.getByRole("button", { name: "E-Mail erstellen" }).click();
         await expect(page.getByTestId(TITLE_INPUT_ERROR)).toBeVisible();
         await expect(page.locator("main")).toContainText("kürzeren Titel");
       });
 
       test("email subject includes title", async () => {
         await page.getByLabel("Arbeitstitel des Vorhabens").fill("Policy ABC");
+        if (scenario.expected.showsNegativeReasoning) {
+          await page
+            .getByLabel("Begründung")
+            .fill("Darum brauchen wir das nicht.");
+        }
         await interceptMailAndExpect(page, {
           subject: "Digitalcheck Vorprüfung: „Policy ABC“",
         });
@@ -387,6 +406,11 @@ for (const scenario of scenarios) {
 
       test("email recipients include nkr", async () => {
         await page.getByLabel("Arbeitstitel des Vorhabens").fill("Policy ABC");
+        if (scenario.expected.showsNegativeReasoning) {
+          await page
+            .getByLabel("Begründung")
+            .fill("Darum brauchen wir das nicht.");
+        }
         await interceptMailAndExpect(page, {
           recipients: ["nkr@bmj.bund.de"],
         });
@@ -395,15 +419,13 @@ for (const scenario of scenarios) {
       test("email cc includes email from email input", async () => {
         await page.getByLabel("Arbeitstitel des Vorhabens").fill("Policy ABC");
         await page.getByLabel("Ihre E-Mail Adresse").fill("foo@bar.de");
+        if (scenario.expected.showsNegativeReasoning) {
+          await page
+            .getByLabel("Begründung")
+            .fill("Darum brauchen wir das nicht.");
+        }
         await interceptMailAndExpect(page, {
           cc: ["foo@bar.de"],
-        });
-      });
-
-      test("email body does not contain negative reasoning", async () => {
-        await page.getByLabel("Arbeitstitel des Vorhabens").fill("Policy ABC");
-        await interceptMailAndExpect(page, undefined, {
-          body: ["Begründung:"],
         });
       });
 
@@ -412,6 +434,11 @@ for (const scenario of scenarios) {
           await page
             .getByLabel("Arbeitstitel des Vorhabens")
             .fill("Policy ABC");
+          if (scenario.expected.showsNegativeReasoning) {
+            await page
+              .getByLabel("Begründung")
+              .fill("Darum brauchen wir das nicht.");
+          }
           await interceptMailAndExpect(page, {
             recipients: ["interoperabel@digitalservice.bund.de"],
           });
@@ -421,6 +448,11 @@ for (const scenario of scenarios) {
           await page
             .getByLabel("Arbeitstitel des Vorhabens")
             .fill("Policy ABC");
+          if (scenario.expected.showsNegativeReasoning) {
+            await page
+              .getByLabel("Begründung")
+              .fill("Darum brauchen wir das nicht.");
+          }
           await interceptMailAndExpect(page, undefined, {
             recipients: ["interoperabel@digitalservice.bund.de"],
           });
@@ -429,6 +461,11 @@ for (const scenario of scenarios) {
 
       test("email body contains result title", async () => {
         await page.getByLabel("Arbeitstitel des Vorhabens").fill("Policy ABC");
+        if (scenario.expected.showsNegativeReasoning) {
+          await page
+            .getByLabel("Begründung")
+            .fill("Darum brauchen wir das nicht.");
+        }
         await interceptMailAndExpect(page, {
           body: [scenario.expected.headline],
         });
@@ -439,6 +476,11 @@ for (const scenario of scenarios) {
           await page
             .getByLabel("Arbeitstitel des Vorhabens")
             .fill("Policy ABC");
+          if (scenario.expected.showsNegativeReasoning) {
+            await page
+              .getByLabel("Begründung")
+              .fill("Darum brauchen wir das nicht.");
+          }
           await interceptMailAndExpect(page, {
             body: [
               "Bitte beachten Sie: Wenn Ihr Vorhaben keinen Digitalbezug aufweist, können die Anforderungen der Interoperabilität nicht erfüllt werden",
@@ -511,6 +553,9 @@ for (const scenario of scenarios) {
     if (scenario.expected.allNegative) {
       test("email body contains all answers in negative form", async () => {
         await page.getByLabel("Arbeitstitel des Vorhabens").fill("Policy ABC");
+        await page
+          .getByLabel("Begründung")
+          .fill("Darum brauchen wir das nicht.");
         const bodyContains = [
           "In Bezug auf digitale Aspekte führt ihr Regelungsvorhaben zu...",
           "In Bezug auf Interoperabilität führt ihr Regelungsvorhaben zu...",
@@ -548,6 +593,11 @@ for (const scenario of scenarios) {
     if (scenario.expected.emailBodyContains) {
       test("email body contains expected content", async () => {
         await page.getByLabel("Arbeitstitel des Vorhabens").fill("Policy ABC");
+        if (scenario.expected.showsNegativeReasoning) {
+          await page
+            .getByLabel("Begründung")
+            .fill("Darum brauchen wir das nicht.");
+        }
         await interceptMailAndExpect(page, {
           body: scenario.expected.emailBodyContains,
         });
