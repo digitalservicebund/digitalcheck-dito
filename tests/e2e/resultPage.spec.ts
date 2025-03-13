@@ -272,7 +272,7 @@ test.afterAll(`close shared browser context`, async () => {
 // Generate tests for each scenario
 for (const scenario of scenarios) {
   test.describe(`test ${scenario.name}`, () => {
-    test.describe.configure({ mode: "serial" });
+    test.describe.configure({ mode: "default" });
 
     let page: Page;
     test.beforeAll(
@@ -602,7 +602,7 @@ for (const scenario of scenarios) {
 }
 
 test.describe("test redirect to pre-check in case of missing answers", () => {
-  test.describe.configure({ mode: "serial" });
+  test.describe.configure({ mode: "default" });
 
   test("result page redirects to pre-check landing page if no question was answered", async ({
     page,
