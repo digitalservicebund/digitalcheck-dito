@@ -1,4 +1,4 @@
-import { expect, type Page, test } from "@playwright/test";
+import { type BrowserContext, expect, type Page, test } from "@playwright/test";
 import { preCheck } from "~/resources/content";
 import {
   ROUTE_DOCUMENTATION,
@@ -220,8 +220,8 @@ async function registerMailInterceptionHandlerAndExpect(
     body?: string[];
   },
 ) {
-  await page.route("**", async (route) => {
-    const response = await route.fetch();
+  await page.route("/vorpruefung/ergebnis*", async (route) => {
+    const response = await route.fetch({ maxRedirects: 0 });
     const location = response.headers()["location"];
 
     if (!location?.startsWith("mailto:")) {
@@ -260,11 +260,13 @@ for (const scenario of scenarios) {
   test.describe(`test ${scenario.name}`, () => {
     test.describe.configure({ mode: "default" });
 
+    let context: BrowserContext;
     let page: Page;
     test.beforeAll(
       `answer questions according to scenario and go to result page`,
       async ({ browser }) => {
-        page = await browser.newPage();
+        context = await browser.newContext();
+        page = await context.newPage();
         await page.goto(questions[0].url);
         for (const question of questions) {
           await page.waitForURL(question.url);
