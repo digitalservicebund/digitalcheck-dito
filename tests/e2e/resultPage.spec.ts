@@ -221,38 +221,48 @@ async function interceptMailAndExpect(
   },
 ) {
   const routeToIntercept = "**/vorpruefung/ergebnis.data";
-  await page.route(routeToIntercept, async (route) => {
-    const response = await route.fetch();
-    const location = response.headers()["location"];
 
-    const mailTo = new URL(location);
-    if (expected?.subject)
-      expect(mailTo.searchParams.get("subject")).toBe(expected?.subject);
-    expected?.recipients?.forEach((expectedRecipient) =>
-      expect(decodeURIComponent(mailTo.pathname)).toContain(expectedRecipient),
-    );
-    expected?.cc?.forEach((expectedCC) =>
-      expect(mailTo.searchParams.get("cc")).toContain(expectedCC),
-    );
-    expected?.body?.forEach((expectedString) => {
-      expect(mailTo.searchParams.get("body")).toContain(expectedString);
+  // Create a promise that will resolve when the route is handled
+  const routeHandledPromise = new Promise<void>((resolve) => {
+    page.route(routeToIntercept, async (route) => {
+      const response = await route.fetch();
+      const location = response.headers()["location"];
+
+      const mailTo = new URL(location);
+      if (expected?.subject)
+        expect(mailTo.searchParams.get("subject")).toBe(expected?.subject);
+      expected?.recipients?.forEach((expectedRecipient) =>
+        expect(decodeURIComponent(mailTo.pathname)).toContain(
+          expectedRecipient,
+        ),
+      );
+      expected?.cc?.forEach((expectedCC) =>
+        expect(mailTo.searchParams.get("cc")).toContain(expectedCC),
+      );
+      expected?.body?.forEach((expectedString) => {
+        expect(mailTo.searchParams.get("body")).toContain(expectedString);
+      });
+
+      notExpected?.recipients?.forEach((notExpectedRecipient) =>
+        expect(decodeURIComponent(mailTo.pathname)).not.toContain(
+          notExpectedRecipient,
+        ),
+      );
+      notExpected?.body?.forEach((notExpectedString) => {
+        expect(mailTo.searchParams.get("body")).not.toContain(
+          notExpectedString,
+        );
+      });
+
+      await route.abort();
+      await page.unroute(routeToIntercept);
+      resolve();
     });
-
-    notExpected?.recipients?.forEach((notExpectedRecipient) =>
-      expect(decodeURIComponent(mailTo.pathname)).not.toContain(
-        notExpectedRecipient,
-      ),
-    );
-    notExpected?.body?.forEach((notExpectedString) => {
-      expect(mailTo.searchParams.get("body")).not.toContain(notExpectedString);
-    });
-
-    await route.abort();
-    await page.unroute(routeToIntercept);
   });
+
   await page.getByRole("button", { name: "E-Mail erstellen" }).click();
-  // wait that the mail is opened in the default mail app
-  await page.waitForTimeout(1000);
+  // Wait for the route to be handled instead of a fixed timeout
+  await routeHandledPromise;
 }
 
 // Generate tests for each scenario
