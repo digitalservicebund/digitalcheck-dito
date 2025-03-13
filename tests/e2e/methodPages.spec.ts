@@ -59,8 +59,6 @@ test.describe("test method sub pages", () => {
   });
 
   test("links to tasks & processes", async ({ page }) => {
-    await page.goto(ROUTE_METHODS.url);
-
     await page
       .getByRole("link", { name: "Aufgaben und Abläufe klären" })
       .click();
@@ -71,8 +69,6 @@ test.describe("test method sub pages", () => {
   });
 
   test("links to collect it-systems", async ({ page }) => {
-    await page.goto(ROUTE_METHODS.url);
-
     await page.getByRole("link", { name: "IT-Landschaft verstehen" }).click();
     await expect(page).toHaveURL(ROUTE_METHODS_COLLECT_IT_SYSTEMS.url);
     await expect(page.getByRole("main")).toContainText(
@@ -81,8 +77,6 @@ test.describe("test method sub pages", () => {
   });
 
   test("links to five principles", async ({ page }) => {
-    await page.goto(ROUTE_METHODS.url);
-
     await page.getByRole("link", { name: "Fünf Prinzipien nutzen" }).click();
     await expect(page).toHaveURL(ROUTE_METHODS_FIVE_PRINCIPLES.url);
     await expect(page.getByRole("main")).toContainText(
@@ -91,8 +85,6 @@ test.describe("test method sub pages", () => {
   });
 
   test("links to technical feasibility", async ({ page }) => {
-    await page.goto(ROUTE_METHODS.url);
-
     await page.getByRole("link", { name: "IT-Auswirkungen prüfen" }).click();
     await expect(page).toHaveURL(ROUTE_METHODS_TECHNICAL_FEASIBILITY.url);
     await expect(page.getByRole("main")).toContainText(
