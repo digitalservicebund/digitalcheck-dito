@@ -53,7 +53,7 @@ const defaultProjects = allProjects.filter(
 const config: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI, // Fail the build on CI if test.only is present
   retries: process.env.CI ? 1 : 0, // Retry on CI only
-  fullyParallel: true,
+  fullyParallel: false,
   // Limit the number of workers on CI, use default locally
   workers: process.env.CI ? 1 : undefined,
   use: {
