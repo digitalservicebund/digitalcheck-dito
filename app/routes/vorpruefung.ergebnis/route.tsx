@@ -113,6 +113,7 @@ export async function action({ request }: Route.ActionArgs) {
       formData.get("email") as string,
       formData.get("negativeReasoning") as string,
     ),
+    { shouldRevalidate: true } as ResponseInit,
   );
 }
 
