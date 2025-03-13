@@ -261,7 +261,6 @@ async function interceptMailAndExpect(
   });
 
   await page.getByRole("button", { name: "E-Mail erstellen" }).click();
-  // Wait for the route to be handled instead of a fixed timeout
   await routeHandledPromise;
 }
 
@@ -288,6 +287,7 @@ for (const scenario of scenarios) {
       if (page.url() !== ROUTE_RESULT.url) {
         await page.goto(ROUTE_RESULT.url);
       }
+      await page.waitForURL(ROUTE_RESULT.url);
     });
 
     test.afterAll(`close shared page for test iteration`, async () => {
