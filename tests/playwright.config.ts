@@ -54,7 +54,8 @@ const config: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI, // Fail the build on CI if test.only is present
   retries: process.env.CI ? 1 : 0, // Retry on CI only
   fullyParallel: true,
-  timeout: 15000,
+  // Limit the number of workers on CI, use default locally
+  workers: process.env.CI ? 1 : undefined,
   use: {
     viewport: { width: 1280, height: 720 },
     acceptDownloads: true,
