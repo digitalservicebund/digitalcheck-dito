@@ -255,17 +255,29 @@ async function registerMailInterceptionHandlerAndExpect(
   });
 }
 
+let context: BrowserContext;
+test.beforeAll(
+  `create shared browser context for all tests`,
+  async ({ browser }) => {
+    context = await browser.newContext();
+  },
+);
+
+test.afterAll(`close shared browser context`, async () => {
+  if (context) {
+    await context.close();
+  }
+});
+
 // Generate tests for each scenario
 for (const scenario of scenarios) {
   test.describe(`test ${scenario.name}`, () => {
     test.describe.configure({ mode: "default" });
 
-    let context: BrowserContext;
     let page: Page;
     test.beforeAll(
       `answer questions according to scenario and go to result page`,
-      async ({ browser }) => {
-        context = await browser.newContext();
+      async () => {
         page = await context.newPage();
         await page.goto(questions[0].url);
         for (const question of questions) {
@@ -282,7 +294,7 @@ for (const scenario of scenarios) {
       }
     });
 
-    test.afterAll(async () => {
+    test.afterAll(`close shared page for test iteration`, async () => {
       if (page) {
         await page.close();
       }
