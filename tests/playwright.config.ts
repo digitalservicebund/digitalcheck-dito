@@ -61,6 +61,7 @@ const config: PlaywrightTestConfig = {
     acceptDownloads: true,
     screenshot: "only-on-failure",
     trace: "retain-on-failure",
+    navigationTimeout: 30000,
   },
   reporter: [
     [process.env.CI ? "blob" : "list"],
