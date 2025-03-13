@@ -11,6 +11,7 @@ test.describe("test interoperabel landing page", () => {
 
   test("links to pre-check", async ({ page }) => {
     await page.getByRole("link", { name: "Zur Vorprüfung" }).click();
+    await page.waitForURL(ROUTE_PRECHECK.url);
     await expect(page).toHaveURL(ROUTE_PRECHECK.url);
     await expect(page.getByRole("main")).toContainText(
       "Vorprüfung: Digitalbezug einschätzen",
