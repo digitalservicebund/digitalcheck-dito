@@ -290,7 +290,7 @@ for (const scenario of scenarios) {
       await page.waitForURL(ROUTE_RESULT.url);
     });
 
-    test.afterAll(`close shared page for test iteration`, async () => {
+    test.afterAll("close shared page for test iteration", async () => {
       if (page) {
         await page.close();
       }
