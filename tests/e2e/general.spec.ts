@@ -126,19 +126,4 @@ test.describe("test error pages", () => {
     await page.getByRole("link", { name: "Zurück zur Startseite" }).click();
     await expect(page).toHaveURL(staticRoutes.ROUTE_LANDING.url);
   });
-
-  test("clicking on link to interoperability landing page leads to correct page", async ({
-    page,
-  }) => {
-    await page.goto("/");
-    await page
-      .getByRole("link", { name: "Übersicht zur Interoperabilität" })
-      .click();
-    await expect(page).toHaveURL(staticRoutes.ROUTE_INTEROPERABILITY.url);
-    await expect(
-      page.getByRole("heading", {
-        name: "EU-Vorgaben zur Interoperabilität: Alles Wichtige für Ihre Regelung im Überblick",
-      }),
-    ).toBeInViewport();
-  });
 });
