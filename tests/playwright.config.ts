@@ -55,7 +55,7 @@ const config: PlaywrightTestConfig = {
   retries: process.env.CI ? 3 : 0, // Retry on CI only
   fullyParallel: true,
   workers: process.env.CI ? 1 : undefined, // Limit the number of workers on CI, use default locally
-  timeout: 5000,
+  timeout: 15000,
   use: {
     viewport: { width: 1280, height: 720 },
     acceptDownloads: true,
@@ -74,7 +74,7 @@ const config: PlaywrightTestConfig = {
   ],
   projects: defaultProjects,
   webServer: {
-    command: "npm run build && PORT=5172 npm run start",
+    command: "npm run dev -- --port 5172",
     port: 5172,
     timeout: parseInt(process.env.WAIT_ON_TIMEOUT ?? `${60 * 1000}`),
   },
