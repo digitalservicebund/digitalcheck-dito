@@ -148,7 +148,7 @@ jobs:
 
   send-failure-to-slack:
     needs: [licenses-format-lint-typecheck-unit-tests, run-e2e-a11y-tests]
-    if: failure() && (needs.licenses-format-lint-typecheck-unit-tests.result == 'failure' || needs.run-e2e-a11y-tests.result == 'failure')
+    if: failure() && github.ref == 'refs/heads/main' && (needs.licenses-format-lint-typecheck-unit-tests.result == 'failure' || needs.run-e2e-a11y-tests.result == 'failure')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
