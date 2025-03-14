@@ -4,6 +4,23 @@ import {
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
 
+test("clicking on link to interoperability landing page leads to correct page", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.waitForURL("/");
+  await page
+    .getByRole("link", { name: "Übersicht zur Interoperabilität" })
+    .click();
+  await page.waitForURL(ROUTE_INTEROPERABILITY.url);
+  await expect(page).toHaveURL(ROUTE_INTEROPERABILITY.url);
+  await expect(
+    page.getByRole("heading", {
+      name: "EU-Vorgaben zur Interoperabilität: Alles Wichtige für Ihre Regelung im Überblick",
+    }),
+  ).toBeInViewport();
+});
+
 test.describe("test interoperabel landing page", () => {
   test.beforeEach("Go to interoperabel landing page", async ({ page }) => {
     await page.goto(ROUTE_INTEROPERABILITY.url);
