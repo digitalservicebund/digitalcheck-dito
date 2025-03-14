@@ -16,18 +16,19 @@ import logResponseStatus from "~/utils/logging";
 import { NonceProvider } from "~/utils/nonce";
 
 if (process.env.MOCK_EXTERNAL_APIS === "true") {
-  const { mockServer } = await import("./mocks/node");
-  console.warn("Mock external APIs.");
-  mockServer.listen({
-    onUnhandledRequest(request, print) {
-      const url = new URL(request.url);
+  import("./mocks/node").then(({ mockServer }) => {
+    console.warn("Mock external APIs.");
+    mockServer.listen({
+      onUnhandledRequest(request, print) {
+        const url = new URL(request.url);
 
-      if (url.hostname.includes("strapiapp.com")) {
-        return;
-      }
+        if (url.hostname.includes("strapiapp.com")) {
+          return;
+        }
 
-      print.warning();
-    },
+        print.warning();
+      },
+    });
   });
 }
 
