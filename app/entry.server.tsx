@@ -14,21 +14,23 @@ import type { EntryContext } from "react-router";
 import { ServerRouter } from "react-router";
 import logResponseStatus from "~/utils/logging";
 import { NonceProvider } from "~/utils/nonce";
+import { mockServer } from "./mocks/node";
 
-if (process.env.MOCK_EXTERNAL_APIS === "true") {
-  import("./mocks/node").then(({ mockServer }) => {
-    console.warn("Mock external APIs.");
-    mockServer.listen({
-      onUnhandledRequest(request, print) {
-        const url = new URL(request.url);
+if (
+  process.env.MOCK_EXTERNAL_APIS === "true" &&
+  process.env.NODE_ENV !== "production"
+) {
+  console.warn("Mocking external APIs.");
+  mockServer.listen({
+    onUnhandledRequest(request, print) {
+      const url = new URL(request.url);
 
-        if (url.hostname.includes("strapiapp.com")) {
-          return;
-        }
+      if (url.hostname.includes("strapiapp.com")) {
+        return;
+      }
 
-        print.warning();
-      },
-    });
+      print.warning();
+    },
   });
 }
 
