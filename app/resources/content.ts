@@ -136,10 +136,10 @@ export const steps = {
     ...stepNKR,
     content:
       stepNKR.content +
-      `<br class="block content-[''] !mb-24" />
+      `<br class="block content-[''] mb-24!" />
 Senden Sie die von Ihnen erstellte Dokumentation per E-Mail an folgende Adresse: 
 [nkr@bmj.bund.de](mailto:nkr@bmj.bund.de)
-<br class="block content-[''] !mb-24" />
+<br class="block content-[''] mb-24!" />
 Damit ist der Digitalcheck für Sie beendet.`,
   },
 };
@@ -206,7 +206,7 @@ export const landing = {
           text: "Was ist Digitaltauglichkeit?",
         },
         content: `Regelungen werden vermehrt digital umgesetzt. Beispiele sind eine Gesetzesänderung, mit der ein Papierantrag durch einen Online-Antrag ersetzt wird oder eine Verordnung, die Änderungen in den IT-Verfahren nachgelagerter Behörden erfordert.
-<br class="block content-[''] !mb-24" />
+<br class="block content-[''] mb-24!" />
 Damit die digitale Umsetzung reibungslos klappt, muss die Regelung digitaltauglich gestaltet sein. Das heißt erstens, dass der digitalen Umsetzung nichts im Wege steht, wie zum Beispiel das persönliche Einreichen von Dokumenten. Zweitens soll aktiv gefördert werden, dass möglichst viele Schritte von Computern durchgeführt oder unterstützt werden.`,
       },
       {
@@ -700,7 +700,7 @@ hiermit erhalten Sie das Ergebnis Ihrer Vorprüfung:`,
 export const methods = {
   title: "2. Erarbeiten eines digitaltauglichen Regelungsvorhabens",
   subtitle: `Hier finden Sie passende Methoden und Werkzeuge, um Digitaltauglichkeit in Ihrer Regelung sicherzustellen. 
-<br class="block content-[''] !mb-24" />
+<br class="block content-[''] mb-24!" />
 Gehen Sie am besten in der vorgeschlagenen Reihenfolge vor.`,
   steps: {
     items: [
@@ -900,7 +900,7 @@ export const digitalSuitability = {
     {
       title: "Die 5 Prinzipien im Regelungstext",
       content: `Die 5 Prinzipien für Digitaltaugliche Gesetzgebung dienen Ihnen als Inspiration und gemeinsame Sprache für die Erarbeitung und Begleitung der Regelungsarbeit. Sie geben Anhaltspunkte wie Ihnen Digitalisierung beim Design der Wirklogik Ihrer Regelung helfen kann.
-      <br class="block content-[''] !mb-24" />
+      <br class="block content-[''] mb-24!" />
       Hier finden Sie Formulierungen, wie Ihre Kolleginnen und Kollegen die Prinzipien für Digitaltaugliche Gesetzgebung genutzt haben um den Regelungstext digitaltauglich zu formulieren.`,
       buttons: [
         {
@@ -912,7 +912,7 @@ export const digitalSuitability = {
     {
       title: "Visualisierungen",
       content: `Visualisierungen helfen, komplexe Sachverhalte zu strukturieren und dadurch schneller und intuitiver erfassbar zu machen – Zusammenhänge werden sichtbar und Möglichkeiten der Digitalisierung können einfach identifiziert werden.
-      <br class="block content-[''] !mb-24" />
+      <br class="block content-[''] mb-24!" />
       Hier finden Sie Visualisierungen, welche Legistinnen und Legisten beim Erarbeiten der Digitaltauglichkeit geholfen haben und veröffentlicht wurden.`,
       buttons: [
         {
@@ -925,7 +925,7 @@ export const digitalSuitability = {
     // {
     //   title: "NKR-Stellungnahmen",
     //   content: `Der Nationalen Normenkontrollrat prüft die Digitaltauglichkeit von Regelungsvorhaben. In seiner Stellungnahme finden sich zum Beispiel weiter Vorschläge oder Hinweise auf Bereiche die noch nicht Digitaltauglich sind. Außerdem weißt er auf gute digitale Wirklogiken hin.
-    //   <br class="block content-[''] !mb-24" />
+    //   <br class="block content-[''] mb-24!" />
     //   Hier finden Sie Regelungen mit einer Stellungnahme vom Nationalen Normenkontrollrat.`,
     //   buttons: [
     //     {
@@ -936,7 +936,7 @@ export const digitalSuitability = {
     // {
     //   title: "Digitaltaugliche Regelungen",
     //   content: `Nach der Novelle ist vor der Novelle. Hier finden sie Regelungen mit Digitalbezug und deren Umsetzung der Digitaltauglichkeit ggf. mit Visualisierung. Dies kann Ihnen als Absprungspunkt für Ihre nächste Regelung dienen.
-    //   <br class="block content-[''] !mb-24" />
+    //   <br class="block content-[''] mb-24!" />
     //   Hier finden Sie eine Auswahl von Regelungen mit Digitalbezug.`,
     //   buttons: [
     //     {
@@ -1004,11 +1004,11 @@ export const responsibleActors = {
     icon: DrawOutlined,
     title: "Finden Sie konstruktive Gesprächspartnerinnen und -&shy;partner",
     text: `Beginnen Sie mit der Kontaktaufnahme oben in der Hierarchie, lassen Sie ggf. über Ihre Referats- und (Unter-)abteilungsleitung den Kontakt herstellen. Fragen Sie nach den Fachexpertinnen und -experten auf Arbeitsebene, hier steckt in der Regel das tiefste Praxiswissen.
-<br class="block content-[''] !mb-24" />
+<br class="block content-[''] mb-24!" />
 - **Kommunen:** Bitten Sie Ansprechpersonen auf Landesebene um Kontakte und nutzen Sie  das gesammelte Wissen in den Kommunalen Spitzenverbänden. 
 - **Behörden und Träger:** Nutzen Sie die offiziellen Wege der Häuser.
 - **Unternehmen, Sozialpartner, weitere Organisationen:** Fragen Sie in Spitzenverbänden nach Ansprechpersonen für Ihren konkreten Anwendungsfall. 
-<br class="block content-[''] !mb-24" />
+<br class="block content-[''] mb-24!" />
 
 Wenn Sie keine persönlichen Kontakte nutzen können, greifen sie auf Organigramme oder interne Datenbanken zu, z. B. das X500-Verzeichnis.`,
   },
@@ -1181,7 +1181,7 @@ export const collectITSystems = {
     icon: DrawOutlined,
     title: "So erfassen Sie die IT-Systeme",
     text: `Dokumentieren Sie die verwendeten IT-Systeme mit ihren Funktionalitäten, Schnittstellen und Anforderungen. 
-<br class="block content-[''] !mb-24" />
+<br class="block content-[''] mb-24!" />
 Ein Überblick über die IT-Landschaft hilft Ihnen dabei, 
 - alle relevanten Aspekte aufzuschlüsseln und potenziell blinde Flecken zu identifizieren,
 - auf bestehende Standards und Prozesse aufzusetzen,
@@ -1247,11 +1247,11 @@ export const fivePrinciples = {
       content: `### Als konkrete Umsetzungstipps
 
 Nutzen Sie die Tipps als Inspiration, um in Ihrem Regelungsvorhaben die Möglichkeiten des Digitalen auszuschöpfen und Hindernisse zu erkennen.
-<br class="block content-[''] !mb-48" />
+<br class="block content-[''] mb-48!" />
 ### Als Checkliste für den Gesamtprozess
 
 Besonders erkenntnisreich sind die fünf Prinzipien, wenn Sie diese auf eine Skizze des geplanten Umsetzungsprozesses anwenden. Skizzieren Sie Schritt für Schritt die Umsetzung und markieren Sie die Stellen, an denen eines oder mehrere Prinzipien wichtig sind. Mehr Infos zu Visualisierungen finden Sie auf [visualisieren.digitalcheck.bund.de](https://visualisieren.digitalcheck.bund.de).
-<br class="block content-[''] !mb-48" />
+<br class="block content-[''] mb-48!" />
 ### Als Startpunkt für ihren Regelungstext
 
 Nutzen Sie die gesammelten Beispiele als Startpunkt für Ihre Formulierungen. Bauen Sie auf Formulierungen auf, oder lassen Sie sich durch die Wirklogiken Ihrer Kolleginnen und Kollegen inspirieren. Sie finden gute Formulierungen, Einordnungen und deren Kontext im Regelungstext auf:
@@ -1263,9 +1263,9 @@ Nutzen Sie die gesammelten Beispiele als Startpunkt für Ihre Formulierungen. Ba
       content: `### Darum ist das wichtig
 
 Bürgerinnen und Bürger, Mitarbeitende in Unternehmen, weiteren Organisationen und der Verwaltung sind meist an digitale Kommunikation gewöhnt. In der Verwaltung und den Behörden erlaubt eine durchgehend digitale Dokumentation, Bearbeitung und ggf. Prüfung eine effizientere Bearbeitung.
-<br class="block content-[''] !mb-24" />
+<br class="block content-[''] mb-24!" />
 Digitale Kommunikation sollte immer bedarfsorientiert und inklusiv sein — in bestimmten Fällen kann z. B. ergänzend auch die Schriftform sinnvoll sein, sofern eine digitale Weiterverarbeitung sichergestellt ist.
-<br class="block content-[''] !mb-48" />
+<br class="block content-[''] mb-48!" />
 ### Tipps für Ihr Regelungsvorhaben
 
 - Wählen Sie Formulierungen, die den Einsatz von unterschiedlichen Medien, Technologien und Verfahren ermöglichen.
@@ -1280,7 +1280,7 @@ Digitale Kommunikation sollte immer bedarfsorientiert und inklusiv sein — in b
       content: `### Darum ist das wichtig
 
 Häufig sind Daten von Personen oder Organisationen in verschiedenen Prozessen relevant. Das heißt, dass die Daten, die für Ihr Regelungsvorhaben benötigt werden, an anderer Stelle bereits vorliegen könnten. Sie sollten wiederverwendet werden, damit Bürgerinnen und Bürger oder Unternehmen Daten kein weiteres Mal angeben müssen und Verfahren vereinfacht werden. Auch die Wiederverwendung von Open-Source-Software, Standards oder sogar einzelner Design- oder Software-Komponenten vereinfacht Verfahren und spart Ressourcen.
-<br class="block content-[''] !mb-48" />
+<br class="block content-[''] mb-48!" />
 ### Tipps für Ihr Regelungsvorhaben
 
 Recherchieren Sie für Ihr Regelungsvorhaben relevante bestehende Standards, Komponenten, Richtlinien, Verfahren zur Datenerfassung, Datenaustauschverfahren (Once-Only-Prinzip) sowie Register und weitere Quellen. Erste Anhaltspunkte finden Sie zum Beispiel auf:
@@ -1294,7 +1294,7 @@ Recherchieren Sie für Ihr Regelungsvorhaben relevante bestehende Standards, Kom
       content: `### Darum ist das wichtig
 
 Datenschutz und Informationssicherheit sind zentrale Voraussetzungen für praxistaugliche Digitalisierung — frühzeitig mitgedacht können Bedürfnisse von Betroffenen auf einfache Weise mit Daten- und Informationssicherheit vereinbart werden. Das Regelungsvorhaben soll eine datenschutzkonforme Umsetzung ermöglichen: Vor der Erhebung von Daten muss definiert werden, welche Daten zu welchem Zweck benötigt und wie sie geschützt werden.
-<br class="block content-[''] !mb-48" />
+<br class="block content-[''] mb-48!" />
 ### Tipps für Ihr Regelungsvorhaben
 
 - Beteiligen Sie frühzeitig Expertinnen und Experten für Datenschutz und Informationssicherheit, um datenschutzkonforme Regelungen zu schreiben. Anhaltspunkte dafür geben auch geltende Richtlinien und Ausführungsbestimmungen z.B. vom BSI.
@@ -1307,7 +1307,7 @@ Datenschutz und Informationssicherheit sind zentrale Voraussetzungen für praxis
       content: `### Darum ist das wichtig
 
 Durch eindeutige und klare Formulierungen können die Regelungen verständlich dargestellt und die digitale Umsetzung erleichtert werden. Komplizierte, schwer verständliche Regelungskonstrukte erschweren eine digitale Ausführung.
-<br class="block content-[''] !mb-48" />
+<br class="block content-[''] mb-48!" />
 ### Tipps für Ihr Regelungsvorhaben
 
 - Formulieren Sie die Texte Ihres Regelungsvorhaben so, dass es in der Umsetzung in Aufgaben und chronologische Schritte übersetzt werden kann.
@@ -1320,7 +1320,7 @@ Durch eindeutige und klare Formulierungen können die Regelungen verständlich d
       content: `### Darum ist das wichtig
 
 Digitale Lösungen zu erstellen, ist zunächst aufwändig. Die „Duplikation“ oder Skalierung kostet jedoch (fast) nichts. Daher ist es personell und wirtschaftlich sinnvoll, sich wiederholende Schritte, Prozesse oder Vorgehen zu automatisieren. Ein Regelungsvorhaben, das Ermessensspielraum lässt, kann nicht vollständig automatisiert werden: Soweit es dem Regelungsziel dient, sollte darauf verzichtet werden. Dadurch entstehen zeitliche und finanzielle Freiräume für Fälle, die eine gesonderte Auseinandersetzung benötigen.
-<br class="block content-[''] !mb-48" />
+<br class="block content-[''] mb-48!" />
 ### Tipps für Ihr Regelungsvorhaben
 
 - Schaffen Sie die rechtlichen Möglichkeiten für automatisierte und/oder antragslose Verfahren. Prüfen Sie z. B. die Möglichkeit von Pauschalen.
@@ -1373,7 +1373,7 @@ export const technicalFeasibility = {
 So erfahren Sie
 - welche IT-Systeme für Ihr Vorhaben verwendet werden können
 - und an welchen Stellen Änderungen nötig sind.
-<br class="block content-[''] !mb-24" />
+<br class="block content-[''] mb-24!" />
 
 <h3 class="ds-subhead font-bold">Sie müssen nicht alles allein bewältigen</h3>
 
@@ -1423,7 +1423,7 @@ Das PDF ist barrierearm/barrierefrei.`,
 - als **neutrale Moderation** in Gesprächen mit zuständigen Akteurinnen und Akteuren, um potenzielle Interessenkonflikte durch Fachlichkeit zu entschärfen,
 - **Erkenntnisse visuell aufzubereiten** – das ist die beste Grundlage für interne und externe Beteiligungsprozesse – und
 - die **Aussagen externer Dienstleister** zu reflektieren: Wirtschaftlichkeit kann eine Motivation für aufwändige Lösungen sein.
-<br class="block content-[''] !mb-24" />
+<br class="block content-[''] mb-24!" />
 
 Für ein einstündiges Videotelefonat schreiben Sie eine E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de) oder buchen Sie direkt einen Termin.`,
     buttons: [
@@ -1530,16 +1530,16 @@ export const support = {
           {
             title: "Digitalbezug einschätzen lassen",
             text: `Wir unterstützen Sie, den Digitalbezug Ihres Verfahrens einzuschätzen, indem wir die Vorprüfung gemeinsam durchgehen. 
-<br class="block content-[''] !mb-32" />
+<br class="block content-[''] mb-32!" />
 Je nach Ziel Ihres Vorhabens und Grad des Digitalbezugs, variiert der Zeitaufwand, den Sie für die Erarbeitung digitaler Aspekte einplanen sollten. 
-<br class="block content-[''] !mb-32" />
+<br class="block content-[''] mb-32!" />
 **Beispiele für einen starken Digitalbezug: Prozess/Dienstleistung/Interaktion neu aufsetzen**
 
 z. B. bei folgenden Zielen einer Regelung:
 
 - Voraussetzungen für eine Digitalisierung schaffen
 - bestehenden Umsetzungsprozesse verbessern oder neu aufsetzen
-<br class="block content-[''] !mb-24" />
+<br class="block content-[''] mb-24!" />
 
 **Beispiele für einen leichten bis mittleren Digitalbezug: bestehenden Prozess anpassen**
 
@@ -1566,9 +1566,9 @@ z. B. bei folgenden Zielen einer Regelung:
           {
             title: "IT-Wissen einfach erklärt",
             text: `Im geschützten Rahmen eines Gesprächs beantworten unsere Expert:innen Ihnen alle **Fragen zur IT**. 
-<br class="block content-[''] !mb-32" />
+<br class="block content-[''] mb-32!" />
 Jede Frage ist berechtigt — jede verstandene Antwort wird die Regelung digitaltauglicher machen.  
-<br class="block content-[''] !mb-32" />
+<br class="block content-[''] mb-32!" />
 Beispiele für Fragen:
 
 - Was ist eine Schnittstelle?
@@ -1598,9 +1598,9 @@ Beispiele für Fragen:
           {
             title: "Visualisierungen erstellen",
             text: `Wir erstellen Visualisierungen für Sie oder digitalisieren Ihre Papier-und-Stift-Skizzen.
-<br class="block content-[''] !mb-32" />
+<br class="block content-[''] mb-32!" />
 Ein Bild sagt mehr als tausend Worte — genauso helfen Visualisierungen bei Abstimmungen im Haus, zwischen Ressorts oder mit dem NKR.
-<br class="block content-[''] !mb-32" />
+<br class="block content-[''] mb-32!" />
 Die Art der Visualisierung richtet sich nach Ihren Anforderungen:
 
 - **Antragsstrecke oder ein Datenfluss im Detail verstehen**, visualisiert als Flussdiagramm
@@ -1635,7 +1635,7 @@ Die Art der Visualisierung richtet sich nach Ihren Anforderungen:
           {
             title: "Digitale Umsetzung erarbeiten",
             text: `Wenn die technischen Anforderungen komplex werden, helfen wir als neutraler Akteur dabei, die **technische Umsetzung** im Detail zu durchdenken und Nutzerfreundlichkeit, Datenverwendung und IT-Sicherheit zu beachten. 
-<br class="block content-[''] !mb-32" />
+<br class="block content-[''] mb-32!" />
 Maßnahmen, die wir z. B. für Sie erledigen:
 
 - Durchführung von **Beteiligungsformaten mit umsetzenden Akteuren und Normadressaten**, z. B. moderierte Gespräche mit nachgelagerten Behörden
@@ -1678,9 +1678,9 @@ Maßnahmen, die wir z. B. für Sie erledigen:
             title:
               "Regelungen digitaltauglich gestalten – praktische Tipps für den Digitalcheck",
             text: `Fast alles, was wir heutzutage in der Verwaltung tun, hat einen Daten- oder Digitalbezug. Regelungsvorhaben sind daher die zentrale Voraussetzung für digitale Leistungen und Prozesse und schaffen die Grundlage für einen digitalen Staat.
-<br class="block content-[''] !mb-32" />
+<br class="block content-[''] mb-32!" />
 In dieser Online-Schulung erfahren Sie, wie Sie Regelungen so formulieren, dass Sie den **Digitalcheck erfolgreich bestehen**. Wir zeigen an **Beispielen**, wie Sie Ihre Regelungen digitaltauglich schreiben können. Anhand der fünf bewährten **Prinzipien für Digitaltauglichkeit** erläutern wir, wie Sie Begriffe und Konzepte wie Automatisierung und Standardisierung optimal nutzen, um Ihre Vorhaben fit für die digitale Zukunft zu machen.
-<br class="block content-[''] !mb-32" />
+<br class="block content-[''] mb-32!" />
 Das Angebot richtet sich an alle, die in den Bundesministerien Regelungen erarbeiten. Vorkenntnisse sind nicht erforderlich.`,
             button: {
               text: "Per E-Mail anmelden",
@@ -1726,9 +1726,9 @@ Mit freundlichen Grüßen`,
           {
             title: "Visualisierungen – Komplexes einfach darstellen",
             text: `Digitaltaugliche Regelungen müssen von Beginn an aus der Umsetzungsperspektive gedacht werden. Visualisierungsmethoden bieten dafür wertvolle Unterstützung: Mit ihrer Hilfe lassen sich einzelne **Prozessschritte, Zielgruppen und beteiligte Akteure** darstellen. **Mögliche Hindernisse** für eine digitale Umsetzung werden sicht- und bearbeitbar.
-<br class="block content-[''] !mb-32" />
+<br class="block content-[''] mb-32!" />
 In unserer interaktiven Online-Schulung erfahren Sie, wie Sie Visualisierungen gezielt für Ihr Regelungsvorhaben nutzen können. Anhand konkreter Beispiele lernen Sie, **eigene Visualisierungen zu erstellen** und so komplexe Vorhaben klar und verständlich zu präsentieren.
-<br class="block content-[''] !mb-32" />
+<br class="block content-[''] mb-32!" />
 Das Angebot richtet sich an alle, die in den Bundesministerien Regelungen erarbeiten. Vorkenntnisse sind nicht erforderlich.`,
             button: {
               text: "Per E-Mail anmelden",
@@ -1790,7 +1790,7 @@ Telefon: [+49 30 18681-0](tel:+4930186810)<br />
 Fax: [+49 30 18681-12926](tel:+49301868112926)<br />
 E-Mail: [poststelle@bmi.bund.de](mailto:poststelle@bmi.bund.de)<br />
 DE-Mail: [poststelle@bmi-bund.de-mail.de](mailto:poststelle@bmi-bund.de-mail.de)
-<br class="block content-[''] !mb-24" />
+<br class="block content-[''] mb-24!" />
 
 ### Weitere Kontaktmöglichkeiten
 
@@ -1799,7 +1799,7 @@ Abteilung DV (Digitale Verwaltung; Steuerung OZG)<br />
 Referat DV I 3 — Digitale Verwaltungstransformation; Digitalcheck<br />
 Verantwortlich: Dany Homilius (Referatsleiterin DV I 3)<br />
 E-Mail: [DVI3@bmi.bund.de](mailto:DVI3@bmi.bund.de) 
-<br class="block content-[''] !mb-24" />
+<br class="block content-[''] mb-24!" />
 
 ### Realisierung, Design, Hosting
 
@@ -1808,12 +1808,12 @@ Frau Anja Theurer<br />
 Prinzessinnenstraße 8-14<br />
 10969 Berlin<br />
 E-Mail: [hallo@digitalservice.bund.de](mailto:hallo@digitalservice.bund.de)
-<br class="block content-[''] !mb-24" />
+<br class="block content-[''] mb-24!" />
 
 ### Datenschutz
 
 Erfahren Sie mehr hierzu in der [Datenschutzerklärung](${ROUTE_PRIVACY.url})
-<br class="block content-[''] !mb-24" />
+<br class="block content-[''] mb-24!" />
 
 ### Barrierefreiheit
 
@@ -1843,12 +1843,12 @@ Alt-Moabit 140<br />
 10557 Berlin<br />
 Tel.: [030 / 18 681-0](tel:+4930186810)<br />
 E-Mail: [bds@bmi.bund.de](mailto:bds@bmi.bund.de)<br />
-<br class="block content-[''] !mb-24" />
+<br class="block content-[''] mb-24!" />
 
 ### 1.2 Personenbezogene Daten
 
 Personenbezogene Daten sind alle Informationen, die sich auf eine identifizierte oder identifizierbare natürliche Person beziehen. Als identifizierbar wird eine natürliche Person angesehen, die direkt oder indirekt — insbesondere mittels Zuordnung zu einer Kennung wie einem Namen, zu einer Kennnummer, zu Standortdaten und/oder zu einer Online-Kennung — identifiziert werden kann.
-<br class="block content-[''] !mb-24" />
+<br class="block content-[''] mb-24!" />
 
 ### 1.3 Auftragsverarbeiter
 
@@ -1863,7 +1863,7 @@ DigitalService ist eine Bundes GmbH. Die Bundesrepublik Deutschland — vertrete
 Des Weiteren können Sie datenschutzrechtliche Fragen auch an den Datenschutzbeauftragten des DigitalService richten. Diesen erreichen Sie unter folgender Adresse:
 
 E-Mail: [datenschutz@digitalservice.bund.de](mailto:datenschutz@digitalservice.bund.de)
-<br class="block content-[''] !mb-48" />
+<br class="block content-[''] mb-48!" />
 
 ## 2. Verarbeitung personenbezogener Daten im Zusammenhang mit der Nutzung der Website und Rechtsgrundlagen
 <br />
@@ -1897,7 +1897,7 @@ Um die Stabilität (Fehlerkorrektur) und Sicherheit des Angebotes zu gewährleis
 Der Datenverkehr zwischen Ihrem Webbrowser und den Servern des Dienstes erfolgt über eine verschlüsselte HTTPS-Verbindung. HTTPS ist eine gesicherte Variante des Verbindungsprotokolls (HTTP), mit dem Webbrowser und Server Daten (bspw.: Ihre Eingaben) über das Internet austauschen, um zu verhindern, dass unbefugte Dritte von diesen Kenntnis erhalten. 
 
 Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. e) DSGVO i.V.m. § 3 BDSG. Die Datenverarbeitung dient der zielgerichteten und ausgewogenen Öffentlichkeitsarbeit sowie dem Schutz der IT-Infrastruktur des Bundes. Die damit verbundene Verarbeitung Ihrer Daten beim Besuch der Seite geschieht zu diesem Zweck. Für die Erfüllung dieser Verarbeitungszwecke ist die Verarbeitung der genannten personenbezogenen Daten erforderlich. 
-<br class="block content-[''] !mb-24" />
+<br class="block content-[''] mb-24!" />
 
 ### 2.2 Kontaktaufnahme
 Die Verarbeitung personenbezogener Daten erfolgt in Abhängigkeit des Kontaktweges. Hierbei kann zwischen Kontaktaufnahme per E-Mail, per Kontaktformular oder Telefon unterschieden werden.  Die Verarbeitung der Daten ist zur Wahrnehmung unserer Aufgaben erforderlich (Art. 6 Abs. 1 UAbs. 1 lit. e) DSGVO in Verbindung mit § 3 BDSG). Nähere Details zur Verarbeitung Ihrer Daten im Falle der Kontaktaufnahme mit dem BMI entnehmen Sie bitte der allgemeinen [Datenschutzerklärung](https://www.bmi.bund.de/DE/service/datenschutz/datenschutz_node.htm) des BMI.
@@ -1925,19 +1925,19 @@ Bei Nutzung des Services wird ein technischer Cookie verwendet welcher in einer 
 - beinhaltet keine personenbezogenen Daten,
 - basiert nicht auf IP oder anderen auf tatsächlichen Nutzer zurückverfolgbaren Informationen,
 - Gültigkeit endet mit Ablauf der Sitzung, spätestens nach 7 Tagen.
-<br class="block content-[''] !mb-48" />
+<br class="block content-[''] mb-48!" />
 
 ## 3. Datenempfänger
 
 Das BMI setzt im Rahmen einer Auftragsverarbeitung die DigitalService GmbH des Bundes als Dienstleister ein. Mit diesem Dienstleister wurde ein Vertrag gemäß Artikel 28 Abs. 3 DSGVO geschlossen; datenschutzrechtlich verantwortlich ist das BMI. 
 
 Darüber hinaus kann es im Einzelfall zur Weitergabe von Daten an Dritte kommen, soweit wir hierzu rechtlich verpflichtet sind oder dies zur Abwehr einer Gefahr für die öffentliche Sicherheit, zur Verfolgung von Straftaten oder zur Abwehr von Angriffen auf unsere IT-Infrastrukturen erforderlich ist. Eine Weitergabe in anderen Fällen erfolgt nicht. Eine Zusammenführung dieser Daten mit anderen Datenquellen zum Beispiel zum Anlegen von Nutzerprofilen erfolgt durch das BMI nicht.
-<br class="block content-[''] !mb-48" />
+<br class="block content-[''] mb-48!" />
 
 ## 4. Werden personenbezogene Daten an Dritte weitergegeben?
 
 Personenbezogene Daten werden ausschließlich in Deutschland verarbeitet und nicht an Dritte weitergeleitet. 
-<br class="block content-[''] !mb-48" />
+<br class="block content-[''] mb-48!" />
 
 ## 5. Maßnahmen zur Einhaltung der Datensicherheit
 
@@ -1957,7 +1957,7 @@ Im Rahmen der Verwendung des Dienstes Plausible wurden weitere Maßnahmen zur Si
 - Beschränkte Zugriffsrechte auf die Daten
 - Anonymisierung von IP-Adressen
 - Wir sammeln nur Datenpunkte, die relevant sind für die weitere Produktentwicklung im Sinne der Nutzerfreundlichkeit und Erweiterung von Funktionen
-<br class="block content-[''] !mb-48" />
+<br class="block content-[''] mb-48!" />
 
 ## 6. Ihre Rechte
 
@@ -1992,14 +1992,14 @@ Ihnen steht zudem gemäß Art. 77 DSGVO ein Beschwerderecht bei der datenschutzr
 export const accessibility = {
   title: "Erklärung zur Barrierefreiheit",
   content: `*Informationen über die Zugänglichkeit dieser Webseiten gemäß § 12 Behindertengleichstellungsgesetz (BGG) sowie über diesbezügliche Kontaktmöglichkeiten.*
-<br class="block content-[''] !mb-24" />
+<br class="block content-[''] mb-24!" />
 
 Das Bundesministerium des Innern, für Bau und Heimat (BMI) ist bemüht, seine Webseite [erarbeiten.digitalcheck.bund.de](https://erarbeiten.digitalcheck.bund.de) so weit wie möglich barrierefrei zu gestalten. Rechtsgrundlage sind das Behindertengleichstellungsgesetz (BGG), die Barrierefreie-Informationstechnik-Verordnung (BITV 2.0) und die harmonisierte europäische Norm EN 301 549 in ihrer jeweils gültigen Fassung.
 
 Im Rahmen eines internen Tests wurde jedoch festgestellt, dass der Webauftritt noch keine vollständige Barrierefreiheit gewährleistet. Das BMI arbeitet dementsprechend mit Nachdruck daran, die barrierefreie Gestaltung seiner Webseite weiter zu verbessern.
 
 Diese Erklärung wurde am 11. Juli 2024 erstellt.
-<br class="block content-[''] !mb-48" />
+<br class="block content-[''] mb-48!" />
 
 ## Welche Bereiche sind nicht barrierefrei?
 
@@ -2008,7 +2008,7 @@ Teilbereiche, die nicht barrierefrei sind:
 - Externe Links können nicht immer barrierefrei angeboten werden, da sie auf Inhalte oder Ressourcen außerhalb des aktuellen Angebots verweisen, auf die wir keinen direkten Einfluss haben.
 - Anderssprachige Abschnitte und Wörter sind nicht immer technisch als solche gekennzeichnet, was zu unverständlicher Aussprache in Vorlese-Software führen kann.
 - An einzelnen Stellen wird ein \`<br/>\` benutzt diese werden noch entfernt.
-<br class="block content-[''] !mb-48" />
+<br class="block content-[''] mb-48!" />
 
 ## Barriere melden! Hinweise zur Barrierefreiheit
 
@@ -2020,7 +2020,7 @@ Alt Moabit 140<br />
 Telefon: [03018 681-0](tel:+4930186810)<br />
 Telefax: [03018 681 - 12926](tel:+49301868112926)<br />
 E-Mail: [DVI3@bmi.bund.de](mailto:DVI3@bmi.bund.de)
-<br class="block content-[''] !mb-48" />
+<br class="block content-[''] mb-48!" />
 
 ## Schlichtungsverfahren
 

@@ -187,7 +187,7 @@ export function ScrollAndFocus() {
     <div
       ref={mainRef}
       tabIndex={-1}
-      className="absolute top-0 left-0 outline-none focus-visible:outline-auto"
+      className="focus-visible:outline-auto absolute top-0 left-0 outline-hidden"
     />
   );
 }

@@ -226,7 +226,7 @@ export default function Result() {
                 ResultType.NEGATIVE && (
                 <div className="mt-40">
                   <b>{preCheck.result.interoperability.info.title}</b>
-                  <p className="mb-20 mt-8">
+                  <p className="mt-8 mb-20">
                     {preCheck.result.interoperability.info.content}
                   </p>
                   <Button {...preCheck.result.interoperability.info.button} />

@@ -41,7 +41,7 @@ export default function Index() {
           items={landing.list.items}
         />
       </Container>
-      {/* <Container className="max-sm:!p-0">
+      {/* <Container className="max-sm:p-0!">
         <InlineNotice
           look="warning"
           title={landing.dataNotice.headline}

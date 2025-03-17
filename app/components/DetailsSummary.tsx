@@ -17,16 +17,16 @@ export default function DetailsSummary({
   open = false,
 }: Readonly<DetailsSummaryProps>) {
   const summaryClasses = twJoin(
-    "summary-content inline-flex focus:outline-none cursor-pointer bg-no-repeat pl-[24px] [&::-webkit-details-marker]:hidden",
+    "summary-content inline-flex focus:outline-hidden cursor-pointer bg-no-repeat pl-[24px] [&::-webkit-details-marker]:hidden",
     bold ? "ds-label-01-bold" : "ds-label-01-reg",
   );
   return (
     <details
       open={open}
-      className="details text-blue-800 has-[:focus-visible]:outline has-[:focus-visible]:outline-4 has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-blue-800"
+      className="details text-blue-800 has-focus-visible:outline has-focus-visible:outline-4 has-focus-visible:outline-offset-4 has-focus-visible:outline-blue-800"
     >
       <summary className={summaryClasses}>{title}</summary>
-      <span className="block pl-[24px] pt-4 text-black">
+      <span className="block pt-4 pl-[24px] text-black">
         {typeof content === "string" ? (
           <RichText markdown={content} />
         ) : (

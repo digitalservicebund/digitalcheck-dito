@@ -97,7 +97,7 @@ export default function Interoperability() {
               />
             </div>
             <div className="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">
-              <div className="w-[630px] bg-[#cce5ef] lg:w-[50vw] [&>img]:object-contain [&>img]:lg:h-[626px]">
+              <div className="w-[630px] bg-[#cce5ef] lg:w-[50vw] [&>img]:object-contain lg:[&>img]:h-[626px]">
                 <Image
                   url={interoperability.andDigitalReadiness.image.url}
                   alternativeText={
@@ -143,7 +143,7 @@ export default function Interoperability() {
               className="h-auto w-full"
             />
             <ZoomInOutlined
-              className="absolute bottom-16 left-16 size-48 bg-blue-800 p-1 shadow"
+              className="absolute bottom-16 left-16 size-48 bg-blue-800 p-1 shadow-sm"
               fill="white"
             />
           </Link>
@@ -177,14 +177,14 @@ export default function Interoperability() {
               className="h-auto w-full"
             />
             <ZoomInOutlined
-              className="absolute bottom-16 left-16 size-48 bg-blue-800 p-1 shadow"
+              className="absolute bottom-16 left-16 size-48 bg-blue-800 p-1 shadow-sm"
               fill="white"
             />
           </Link>
         </Container>
       </div>
       <div id={interoperability.resources.id}>
-        <Background backgroundColor="blue" className="pb-48 pt-48">
+        <Background backgroundColor="blue" className="pt-48 pb-48">
           <Container backgroundColor="white" overhangingBackground>
             <Heading
               tagName="h2"

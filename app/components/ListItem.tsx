@@ -57,7 +57,7 @@ const ListItem = ({
         )}
       >
         {spacer && (
-          <div className={twJoin("!-mb-12", numeric && "border-t-2 pb-16")}>
+          <div className={twJoin("-mb-12!", numeric && "border-t-2 pb-16")}>
             {spacer !== true && (
               <div
                 className={twJoin(
