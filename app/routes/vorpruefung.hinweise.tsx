@@ -5,7 +5,7 @@ import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import InlineNotice from "~/components/InlineNotice";
 import RichText from "~/components/RichText";
-import { general, preCheck } from "~/resources/content";
+import { global, preCheck } from "~/resources/content";
 import { ROUTE_GENERAL_INFO, ROUTE_PRECHECK } from "~/resources/staticRoutes";
 import { getAnswersFromCookie } from "~/utils/cookies.server";
 import prependMetaTitle from "~/utils/metaTitle";
@@ -55,7 +55,7 @@ export default function GeneralInfo() {
               },
               {
                 id: "generalInfo-back-button",
-                text: general.buttonBack.text,
+                text: global.buttonBack.text,
                 href: ROUTE_PRECHECK.url,
                 look: "tertiary",
               },

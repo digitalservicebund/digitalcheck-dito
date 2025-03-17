@@ -8,7 +8,7 @@ import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import LinkBar from "~/components/LinkBar";
 import Question from "~/components/Question";
-import { general, preCheck } from "~/resources/content";
+import { global, preCheck } from "~/resources/content";
 import { ROUTE_PRECHECK } from "~/resources/staticRoutes";
 import {
   getAnswersFromCookie,
@@ -197,7 +197,7 @@ export default function Index() {
                 },
                 {
                   id: "preCheck-back-button",
-                  text: general.buttonBack.text,
+                  text: global.buttonBack.text,
                   href: question.prevLink,
                   look: "tertiary",
                 },

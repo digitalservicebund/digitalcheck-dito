@@ -1,0 +1,131 @@
+title = "Digitaltaugliche Regelungen erarbeiten"
+subtitle = """
+Hier erfahren Sie,
+  - was Digitaltauglichkeit für Ihr Regelungsvorhaben bedeutet,
+  - wie Sie eine reibungslose Umsetzung des Vorhabens ermöglichen,
+  - welche Unterlagen Sie benötigen."""
+
+[list]
+title = "So gehen Sie vor"
+
+[[list.items]]
+content = "Finden Sie heraus, ob Sie in Ihrem Regelungsvorhaben Aspekte der digitalen Umsetzung und EU-Anforderungen an Interoperabilität beachten müssen. Danach entscheidet sich, ob die weiteren Schritte für Sie relevant sind."
+
+[list.items.headline]
+text = "Vorprüfung: Digitalbezug einschätzen"
+
+[[list.items.buttons]]
+text = "Digitalbezug einschätzen"
+href = "/vorpruefung"
+
+[list.items.finished]
+isDisabled = true
+
+[list.items.finished.headline]
+text = "Abgeschlossene Vorprüfung: Der Digitalbezug wurde eingeschätzt."
+
+[[list.items]]
+content = "Nutzen Sie passende Methoden und Werkzeuge, um Digitaltauglichkeit und Interoperabilität in Ihrer Regelung sicherzustellen. Das Digitalcheck-Team steht Ihnen bei der Erarbeitung zur Verfügung."
+
+[list.items.spacer]
+text = "Bei positiver Vorprüfung:"
+
+[list.items.headline]
+text = "Erarbeiten des Regelungsvorhabens"
+
+[[list.items.buttons]]
+text = "Zu „Erarbeiten“"
+href = "/methoden"
+look = "link"
+
+[list.items.finished]
+isDisabled = true
+
+[list.items.finished.headline]
+text = "Abgeschlossene Erarbeitung eines digitaltauglichen Regelungsvorhabens."
+
+[[list.items]]
+content = "Dokumentieren Sie in einem Fragebogen, auf welche Aspekte der Digitaltauglichkeit  Sie besonders geachtet haben. Beschreiben Sie wie Sie diese in das Regelungsvorhaben einfließen lassen. Die Erkenntnisse der vorigen Schritte helfen Ihnen beim Ausfüllen."
+
+[list.items.headline]
+text = "Dokumentieren des Regelungsvorhabens"
+
+[[list.items.buttons]]
+text = "Zu „Dokumentieren“"
+href = "/dokumentation"
+look = "link"
+
+[list.items.finished]
+isDisabled = true
+
+[list.items.finished.headline]
+text = "Abgeschlossene Dokumentation der Digitaltauglichkeit."
+
+[[list.items]]
+content = "Der NKR (Nationaler Normenkontrollrat) prüft Ihr Vorhaben hinsichtlich der Berücksichtigung der Prinzipien digitaltauglicher Gesetzgebung. Bei Fragen wird der NKR auf Sie zukommen."
+
+[list.items.headline]
+text = "Prüfen durch den NKR"
+
+[dataNotice]
+headline = "Ihre Arbeitsstände werden eine Woche lang gespeichert."
+content = "Um in dieser Zeit zu Ihrem alten Arbeitsstand zurückzukehren, nutzen Sie bitte denselben Rechner und Browser."
+
+[trainings]
+title = "Beispiele für Digitaltauglichkeit"
+text = """
+Auf dieser Seite finden Sie Beispiele für digitaltaugliche Regelungsvorhaben. Lassen Sie sich inspirieren durch:
+- die Umsetzung der 5 Prinzipien in Regelungstexten durch konkrete Formulierungen
+- geeignete Visualisierungen einzelner Sachverhalte und ganzer Regelungsvorhaben"""
+
+[trainings.link]
+text = "Jetzt Beispiele entdecken"
+href = "/beispiele"
+look = "link"
+
+[interoperability]
+title = "EU-Vorgaben zur Interoperabilität in Regelungen"
+text = "Seit Januar 2025 tritt die [Verordnung für ein interoperables Europa (EU 2024/903)](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903) in Kraft. Bestimmte Regelungsvorhaben müssen daher die EU-Anforderungen an Interoperabilität erfüllen. Ob und wie die Verordnung Ihr Vorhaben betrifft, erfahren Sie in unserer [Vorprüfung](/vorpruefung) und auf der Übersichtsseite zur Interoperabilität."
+
+[interoperability.link]
+text = "Übersicht zur Interoperabilität"
+href = "/interoperabel"
+look = "link"
+
+[summary]
+title = "Zusammengefasst"
+
+[[summary.items]]
+content = """
+Regelungen werden vermehrt digital umgesetzt. Beispiele sind eine Gesetzesänderung, mit der ein Papierantrag durch einen Online-Antrag ersetzt wird oder eine Verordnung, die Änderungen in den IT-Verfahren nachgelagerter Behörden erfordert.
+<br class="block content-[''] !mb-24" />
+Damit die digitale Umsetzung reibungslos klappt, muss die Regelung digitaltauglich gestaltet sein. Das heißt erstens, dass der digitalen Umsetzung nichts im Wege steht, wie zum Beispiel das persönliche Einreichen von Dokumenten. Zweitens soll aktiv gefördert werden, dass möglichst viele Schritte von Computern durchgeführt oder unterstützt werden."""
+
+[summary.items.headline]
+text = "Was ist Digitaltauglichkeit?"
+
+[[summary.items]]
+content = "Eine gute digitale Umsetzung spart langfristig Zeit und sorgt dafür, dass Ziel und Wirkung des Vorhabens erreicht werden: auf Seiten der Normadressaten und -adressatinnen und auf Seiten der Verwaltung."
+
+[summary.items.headline]
+text = "Digitaltaugliche Regelungen sparen Ressourcen"
+
+[[summary.items]]
+content = "Der Digitalcheck gilt für alle Regelungsvorhaben (Gesetze, Verordnungen und Verwaltungsvorschriften), sowohl für neue Vorhaben als auch für Änderungen an bestehenden Regelungen."
+
+[summary.items.headline]
+text = "Alle Regelungsvorhaben sind betroffen"
+
+[principles]
+title = "5 Prinzipien für digitaltaugliche Gesetzgebung"
+content = [
+    "Prinzip 1: Digitale Kommunikation sicherstellen",
+    "Prinzip 2: Wiederverwendung von Daten und Standards ermöglichen",
+    "Prinzip 3: Datenschutz und Informationssicherheit gewährleisten",
+    "Prinzip 4: Klare Regelungen für eine digitale Ausführung finden",
+    "Prinzip 5: Automatisierung ermöglichen"
+]
+
+[principles.link]
+text = "Details und Beispiele"
+href = "/methoden/fuenf-prinzipien"

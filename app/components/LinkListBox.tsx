@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import Heading from "~/components/Heading";
-import { general } from "~/resources/content";
+import { global } from "~/resources/content";
 
 export type LinkItem = {
   id: string;
@@ -14,7 +14,7 @@ export default function LinkListBox({
     <div className="mt-64">
       <Heading
         tagName="div"
-        text={general.tableOfContents.headline}
+        text={global.tableOfContents.headline}
         className="font-bold"
       />
       <ol className="list-unstyled mt-16 ds-stack-8">

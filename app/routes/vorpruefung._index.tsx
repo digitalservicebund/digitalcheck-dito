@@ -11,7 +11,7 @@ import Image from "~/components/Image";
 import InfoBox from "~/components/InfoBox";
 import SupportBanner from "~/components/SupportBanner";
 import { PRE_CHECK_START_BUTTON_ID } from "~/resources/constants";
-import { general, preCheck } from "~/resources/content";
+import { global, preCheck } from "~/resources/content";
 import { features } from "~/resources/features";
 import {
   ROUTE_GENERAL_INFO,
@@ -64,7 +64,7 @@ export default function Index() {
               },
               {
                 id: "preCheck-back-button",
-                text: general.buttonBack.text,
+                text: global.buttonBack.text,
                 href: ROUTE_LANDING.url,
                 look: "tertiary",
               },

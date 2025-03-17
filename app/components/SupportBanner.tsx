@@ -1,7 +1,7 @@
 import Background from "~/components/Background";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
-import { supportBanner } from "~/resources/content";
+import { support } from "~/resources/content";
 
 export default function SupportBanner({
   withFeedbackBanner = true,
@@ -14,10 +14,10 @@ export default function SupportBanner({
             heading={{
               tagName: "h2",
               look: "ds-subhead font-bold",
-              text: supportBanner.feedback.title,
+              text: support.banner.feedback.title,
             }}
             content={{
-              markdown: supportBanner.feedback.text,
+              markdown: support.banner.feedback.text,
             }}
           ></Box>
         )}
@@ -25,10 +25,10 @@ export default function SupportBanner({
           heading={{
             tagName: "h2",
             look: "ds-subhead font-bold",
-            text: supportBanner.support.title,
+            text: support.banner.support.title,
           }}
           content={{
-            markdown: supportBanner.support.text,
+            markdown: support.banner.support.text,
           }}
         ></Box>
       </Container>

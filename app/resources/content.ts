@@ -2,7 +2,6 @@ import type { TQuestion } from "~/routes/vorpruefung.$questionId/route";
 import {
   ROUTE_DOCUMENTATION,
   ROUTE_DOCUMENTATION_STATIC_PDF,
-  ROUTE_EXAMPLES,
   ROUTE_GENERAL_INFO,
   ROUTE_INTEROPERABILITY,
   ROUTE_LANDING,
@@ -17,10 +16,8 @@ import {
   ROUTE_RESULT,
   ROUTE_SUPPORT,
   ROUTE_VISUALISATIONS,
-  TOOLFINDER,
 } from "./staticRoutes";
 
-import { DriveFileRenameOutline, Source } from "@digitalservicebund/icons";
 import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
 import ContactSupportOutlined from "@digitalservicebund/icons/ContactSupportOutlined";
 import DrawOutlined from "@digitalservicebund/icons/DrawOutlined";
@@ -29,31 +26,6 @@ import LightbulbOutlined from "@digitalservicebund/icons/LightbulbOutlined";
 import StickyNote2Outlined from "@digitalservicebund/icons/StickyNote2Outlined";
 import SupportOutlined from "@digitalservicebund/icons/SupportOutlined";
 import TimerOutlined from "@digitalservicebund/icons/TimerOutlined";
-
-export const siteMeta = {
-  title: "Digitalcheck: Digitaltaugliche Regelungen erarbeiten",
-  description:
-    "Hier erfahren Sie als Legistin oder Legist, was Digitaltauglichkeit für Ihr Regelungsvorhaben bedeutet, wie Sie eine reibungslose Umsetzung des Vorhabens ermöglichen und welche Unterlagen Sie benötigen.",
-};
-
-export const header = {
-  title: "Digitalcheck",
-  contact: {
-    msg: "Kontaktieren Sie den Support",
-    number: "0151/40 76 78 39",
-  },
-  underConstruction:
-    "Dieses Angebot befindet sich im Aufbau und wird auf Basis Ihrer Rückmeldung weiterentwickelt.",
-};
-
-export const general = {
-  buttonBack: {
-    text: "Zurück",
-  },
-  tableOfContents: {
-    headline: "Inhalt",
-  },
-};
 
 const stepNKR = {
   headline: {
@@ -130,149 +102,6 @@ Senden Sie die von Ihnen erstellte Dokumentation per E-Mail an folgende Adresse:
 [nkr@bmj.bund.de](mailto:nkr@bmj.bund.de)
 <br class="block content-[''] !mb-24" />
 Damit ist der Digitalcheck für Sie beendet.`,
-  },
-};
-
-export const landing = {
-  title: "Digitaltaugliche Regelungen erarbeiten",
-  subtitle: `Hier erfahren Sie,
-  - was Digitaltauglichkeit für Ihr Regelungsvorhaben bedeutet,
-  - wie Sie eine reibungslose Umsetzung des Vorhabens ermöglichen,
-  - welche Unterlagen Sie benötigen.`,
-  list: {
-    title: "So gehen Sie vor",
-    items: [
-      steps.preCheck,
-      {
-        spacer: {
-          text: "Bei positiver Vorprüfung:",
-        },
-        ...steps.methods,
-      },
-      steps.documentation,
-      steps.nkr,
-    ],
-  },
-  dataNotice: {
-    headline: "Ihre Arbeitsstände werden eine Woche lang gespeichert.",
-    content:
-      "Um in dieser Zeit zu Ihrem alten Arbeitsstand zurückzukehren, nutzen Sie bitte denselben Rechner und Browser.",
-  },
-  trainings: {
-    title: "Beispiele für Digitaltauglichkeit",
-    text: `Auf dieser Seite finden Sie Beispiele für digitaltaugliche Regelungsvorhaben. Lassen Sie sich inspirieren durch:
-- die Umsetzung der 5 Prinzipien in Regelungstexten durch konkrete Formulierungen
-- geeignete Visualisierungen einzelner Sachverhalte und ganzer Regelungsvorhaben`,
-    link: {
-      text: "Jetzt Beispiele entdecken",
-      href: ROUTE_EXAMPLES.url,
-      look: "link" as const,
-    },
-    /*    title: "Schulungsangebote im Herbst",
-    text: `In den kommenden Monaten bieten wir 90-minütige Online-Schulungen an zu folgenden Themen:
-- **Regelungen digitaltauglich gestalten** – praktische Tipps für den Digitalcheck
-- **Visualisieren lernen** – Komplexes einfach darstellen`,
-    link: {
-      text: "Zu Schulungen anmelden",
-      href: ROUTE_SUPPORT.url + "#angebote",
-      look: "link" as const,
-    },*/
-  },
-  interoperability: {
-    title: "EU-Vorgaben zur Interoperabilität in Regelungen",
-    text: `Seit Januar 2025 tritt die [Verordnung für ein interoperables Europa (EU 2024/903)](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903) in Kraft. Bestimmte Regelungsvorhaben müssen daher die EU-Anforderungen an Interoperabilität erfüllen. Ob und wie die Verordnung Ihr Vorhaben betrifft, erfahren Sie in unserer [Vorprüfung](/vorpruefung) und auf der Übersichtsseite zur Interoperabilität.`,
-    link: {
-      text: "Übersicht zur Interoperabilität",
-      href: ROUTE_INTEROPERABILITY.url,
-      look: "link" as const,
-    },
-  },
-  summary: {
-    title: "Zusammengefasst",
-    items: [
-      {
-        headline: {
-          text: "Was ist Digitaltauglichkeit?",
-        },
-        content: `Regelungen werden vermehrt digital umgesetzt. Beispiele sind eine Gesetzesänderung, mit der ein Papierantrag durch einen Online-Antrag ersetzt wird oder eine Verordnung, die Änderungen in den IT-Verfahren nachgelagerter Behörden erfordert.
-<br class="block content-[''] !mb-24" />
-Damit die digitale Umsetzung reibungslos klappt, muss die Regelung digitaltauglich gestaltet sein. Das heißt erstens, dass der digitalen Umsetzung nichts im Wege steht, wie zum Beispiel das persönliche Einreichen von Dokumenten. Zweitens soll aktiv gefördert werden, dass möglichst viele Schritte von Computern durchgeführt oder unterstützt werden.`,
-      },
-      {
-        headline: {
-          text: "Digitaltaugliche Regelungen sparen Ressourcen",
-        },
-        content: `Eine gute digitale Umsetzung spart langfristig Zeit und sorgt dafür, dass Ziel und Wirkung des Vorhabens erreicht werden: auf Seiten der Normadressaten und -adressatinnen und auf Seiten der Verwaltung.`,
-      },
-      {
-        headline: {
-          text: "Alle Regelungsvorhaben sind betroffen",
-        },
-        content: `Der Digitalcheck gilt für alle Regelungsvorhaben (Gesetze, Verordnungen und Verwaltungsvorschriften), sowohl für neue Vorhaben als auch für Änderungen an bestehenden Regelungen.`,
-      },
-    ],
-  },
-  links: {
-    title: "Weitere Unterstützungsangebote für Ihr Vorhaben",
-    subtitle:
-      "Nutzen Sie unsere Services die Ihnen dabei helfen digitaltaugliche Regelungen zu schreiben.",
-    items: [
-      {
-        headline: {
-          text: "Werkzeuge für Visualisierung",
-        },
-        label: "Werkzeugfinder",
-        icon: DriveFileRenameOutline,
-        content: `Finden Sie mit dem Werkzeugfinder die passenden Werkzeuge und Methoden, um Prozesse zu visualisieren.`,
-        buttons: [
-          {
-            text: "Werkzeugfinder nutzen",
-            href: TOOLFINDER,
-            look: "tertiary" as const,
-          },
-        ],
-      },
-      {
-        headline: {
-          text: "Digitaltaugliche Beispiele",
-        },
-        label: "Beispielsammlung",
-        icon: Source,
-        content: `Sehen Sie Beispiele von Regelungen an, die digitaltaugliche Aspekte berücksichtigen und die Prinzipien für Digitaltauglichkeit bedacht haben.`,
-        buttons: [
-          {
-            text: "Beispiele ansehen",
-            href: ROUTE_EXAMPLES.url,
-            look: "tertiary" as const,
-          },
-        ],
-      },
-    ],
-  },
-  principles: {
-    title: "5 Prinzipien für digitaltaugliche Gesetzgebung",
-    content: [
-      "Prinzip 1: Digitale Kommunikation sicherstellen",
-      "Prinzip 2: Wiederverwendung von Daten und Standards ermöglichen",
-      "Prinzip 3: Datenschutz und Informationssicherheit gewährleisten",
-      "Prinzip 4: Klare Regelungen für eine digitale Ausführung finden",
-      "Prinzip 5: Automatisierung ermöglichen",
-    ],
-    link: {
-      text: "Details und Beispiele",
-      href: ROUTE_METHODS_FIVE_PRINCIPLES.url,
-    },
-  },
-};
-
-export const supportBanner = {
-  feedback: {
-    title: "Haben Sie Fragen oder Anmerkungen?",
-    text: "Dieser Dienst ist im Aufbau. Wenn Ihnen etwas fehlt oder etwas nicht funktioniert, kontaktieren Sie uns über [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Anmerkungen:%20erarbeiten.digitalcheck.bund.de). Ihr Feedback trägt dazu bei, Informationen und Gestaltung der Webseite für alle Nutzenden zu verbessern.",
-  },
-  support: {
-    title: "Sie haben Gesprächsbedarf zu Ihrem Vorhaben?",
-    text: `Bei inhaltlichen Anliegen zu Ihrem Regelungsvorhaben helfen wir Ihnen gerne weiter. Schreiben Sie uns über [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Gesprächsbedarf:%20erarbeiten.digitalcheck.bund.de) oder rufen Sie uns an unter [0151/40 76 78 39](tel:+4915140767839).`,
   },
 };
 
@@ -1446,10 +1275,31 @@ import supportContent from "app/resources/content/support.toml";
 import visualisationsContent from "app/resources/content/visualisierungen.toml";
 import accessibilityContent from "~/resources/content/barrierefreiheit.toml";
 import regulationsContent from "~/resources/content/beispiele.toml";
+import globalContent from "~/resources/content/global.toml";
+import headerContent from "~/resources/content/header.toml";
+import interviewBannerContent from "~/resources/content/interviewBanner.toml";
+import metaContent from "~/resources/content/meta.toml";
+import landingContent from "~/resources/content/startseite.toml";
 export const interoperability = interoperabilityContent;
 export const visualisations = visualisationsContent;
 export const accessibility = accessibilityContent;
 export const privacy = privacyContent;
 export const imprint = imprintContent;
 export const support = supportContent;
+export const global = globalContent;
+export const header = headerContent;
+export const siteMeta = metaContent;
+export const landing = landingContent;
+export const interviewBanner = interviewBannerContent;
 export const regulations = regulationsContent;
+
+// import fs from "fs";
+// import yaml from "js-yaml";
+//
+// const fileName = "interviewBanner";
+// fs.writeFileSync(
+//   `app/resources/content/${fileName}.yml`,
+//   yaml.dump(interviewBanner),
+//   "utf8",
+// );
+// fs.writeFileSync(`app/resources/content/${fileName}.toml`, "", "utf8");
