@@ -1,3 +1,6 @@
+import CheckCircleOutlined from "@digitalservicebund/icons/CheckCircleOutlined";
+import FormatListBulletedOutlined from "@digitalservicebund/icons/FormatListBulletedOutlined";
+import TimerOutlined from "@digitalservicebund/icons/TimerOutlined";
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
@@ -18,9 +21,12 @@ type Offering = {
   title: string;
   text: string;
   sellingPoints: string;
+  email?: {
+    subject: string;
+    body: string;
+  };
   button?: ButtonProps;
   details: {
-    icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
     title: string;
     text: string;
   }[];
@@ -106,76 +112,96 @@ export default function SupportTabs() {
           aria-labelledby={`tab-${index + 1}`}
           hidden={activeTab !== index}
         >
-          {tab.offerings.map((offering: Offering) => (
-            <Container
-              key={offering.title}
-              className="mb-32 flex gap-32 rounded-xl px-40 max-md:flex-col"
-              backgroundColor="blue"
-            >
-              <Box
-                heading={{
-                  tagName: "h2",
-                  text: offering.title,
-                }}
-                content={{
-                  markdown: offering.text,
-                }}
-                buttons={offering.button ? [offering.button] : []}
-              />
-              <div className="flex-none space-y-20 md:w-[310px]">
-                <Background backgroundColor="white">
-                  <div className="p-28">
-                    <Header
-                      heading={{
-                        tagName: "h4",
-                        text: offering.sellingPoints,
-                      }}
-                    />
-                    <div className="divide-y divide-gray-700">
-                      {offering.details.map((detail) => (
-                        <div key={detail.title} className="py-16">
-                          <div className="flex items-center gap-8 pb-8">
-                            {detail.icon && (
-                              <detail.icon className="size-24 fill-gray-800" />
-                            )}
-                            <Heading
-                              tagName="p"
-                              look="ds-label-01-bold"
-                              text={detail.title}
-                            />
-                          </div>
-                          <RichText
-                            markdown={detail.text}
-                            className="text-base"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </Background>
-                {offering.examples && (
+          {tab.offerings.map((offering: Offering) => {
+            const offeringButtons: ButtonProps[] = [];
+            if (offering.email && offering.button) {
+              offeringButtons.push({
+                text: offering.button.text,
+                href: encodeURI(
+                  `mailto:digitalcheck@digitalservice.bund.de?subject=${offering.email.subject}&body=${offering.email.body}`,
+                ),
+                look: "tertiary",
+              });
+            } else if (offering.button) {
+              offeringButtons.push(offering.button);
+            }
+            return (
+              <Container
+                key={offering.title}
+                className="mb-32 flex gap-32 rounded-xl px-40 max-md:flex-col"
+                backgroundColor="blue"
+              >
+                <Box
+                  heading={{
+                    tagName: "h2",
+                    text: offering.title,
+                  }}
+                  content={{
+                    markdown: offering.text,
+                  }}
+                  buttons={offeringButtons}
+                />
+                <div className="flex-none space-y-20 md:w-[310px]">
                   <Background backgroundColor="white">
-                    <div className="divide-y divide-gray-700">
-                      {offering.examples.map((example) => (
-                        <div key={example.text}>
-                          {example.image && (
-                            <Image
-                              url={example.image.src}
-                              alternativeText={example.image.alt}
-                            />
-                          )}
-                          <RichText
-                            markdown={example.text}
-                            className="p-20 text-base"
-                          />
-                        </div>
-                      ))}
+                    <div className="p-28">
+                      <Header
+                        heading={{
+                          tagName: "h4",
+                          text: offering.sellingPoints,
+                        }}
+                      />
+                      <div className="divide-y divide-gray-700">
+                        {offering.details.map((detail, offeringIndex) => {
+                          const icons = [
+                            TimerOutlined,
+                            CheckCircleOutlined,
+                            FormatListBulletedOutlined,
+                          ];
+                          const IconComponent = icons[offeringIndex];
+                          return (
+                            <div key={detail.title} className="py-16">
+                              <div className="flex items-center gap-8 pb-8">
+                                <IconComponent className="size-24 fill-gray-800" />
+                                <Heading
+                                  tagName="p"
+                                  look="ds-label-01-bold"
+                                  text={detail.title}
+                                />
+                              </div>
+                              <RichText
+                                markdown={detail.text}
+                                className="text-base"
+                              />
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   </Background>
-                )}
-              </div>
-            </Container>
-          ))}
+                  {offering.examples && (
+                    <Background backgroundColor="white">
+                      <div className="divide-y divide-gray-700">
+                        {offering.examples.map((example) => (
+                          <div key={example.text}>
+                            {example.image && (
+                              <Image
+                                url={example.image.src}
+                                alternativeText={example.image.alt}
+                              />
+                            )}
+                            <RichText
+                              markdown={example.text}
+                              className="p-20 text-base"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </Background>
+                  )}
+                </div>
+              </Container>
+            );
+          })}
         </div>
       ))}
     </div>

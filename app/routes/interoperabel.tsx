@@ -1,3 +1,4 @@
+import { Apps, Layers } from "@digitalservicebund/icons";
 import ZoomInOutlined from "@digitalservicebund/icons/ZoomInOutlined";
 import { Link, type MetaArgs } from "react-router";
 import Accordion from "~/components/Accordion";
@@ -34,6 +35,17 @@ export default function Interoperability() {
       status: 404,
     });
   }
+
+  const resourceGroups = [
+    {
+      icon: Apps,
+      ...interoperability.resources.groups.general,
+    },
+    {
+      icon: Layers,
+      ...interoperability.resources.groups.interoperability,
+    },
+  ];
 
   return (
     <>
@@ -193,7 +205,7 @@ export default function Interoperability() {
               className="mb-8"
             />
             <p>{interoperability.resources.subtitle}</p>
-            {interoperability.resources.groups.map((group) => (
+            {resourceGroups.map((group) => (
               <div key={group.title} className="mt-10 p-24 pl-0">
                 <div className="mb-10 flex items-center">
                   <group.icon className="mr-10 size-32" />

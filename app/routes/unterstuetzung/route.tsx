@@ -1,3 +1,6 @@
+import AdsClickOutlined from "@digitalservicebund/icons/AdsClickOutlined";
+import DrawOutlined from "@digitalservicebund/icons/DrawOutlined";
+import PlaylistAddCheckOutlined from "@digitalservicebund/icons/PlaylistAddCheckOutlined";
 import { useState } from "react";
 import { type MetaArgs } from "react-router";
 import { twJoin } from "tailwind-merge";
@@ -63,6 +66,21 @@ export default function Index() {
     },
   ];
 
+  const supportTypes = [
+    {
+      icon: DrawOutlined,
+      ...support.supportWhat.supportTypes.visualisation,
+    },
+    {
+      icon: PlaylistAddCheckOutlined,
+      ...support.supportWhat.supportTypes.quick,
+    },
+    {
+      icon: AdsClickOutlined,
+      ...support.supportWhat.supportTypes.extensive,
+    },
+  ];
+
   return (
     <>
       <Background backgroundColor="blue">
@@ -114,8 +132,8 @@ export default function Index() {
           }}
         />
         <div className="mt-40 flex gap-32 max-sm:flex-col">
-          {supportWhat.supportTypes.length > 0 &&
-            supportWhat.supportTypes.map((supportType) => (
+          {supportTypes.length > 0 &&
+            supportTypes.map((supportType) => (
               <div
                 key={supportType.title}
                 className="flex gap-16 max-lg:flex-col"

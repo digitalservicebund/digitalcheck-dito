@@ -27,8 +27,11 @@
       "@react-router/node",
       "vite/client",
       "vitest/globals",
-      "@testing-library/react"
+      "@testing-library/react",
+      "@modyfi/vite-plugin-yaml/modules",
+      "@types/js-yaml"
     ],
+    "plugins": [{ "name": "typescript-plugin-toml" }],
     "paths": {
       "~/*": ["./app/*"],
       "@digitalservicebund/icons/*": [
