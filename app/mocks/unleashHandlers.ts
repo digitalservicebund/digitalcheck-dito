@@ -5,7 +5,6 @@ import { UNLEASH_API_URL } from "~/utils/constants";
 
 const unleashHandlers: RequestHandler[] = [
   http.get(`${UNLEASH_API_URL}client/features`, () => {
-    console.warn("Mocking Unleash features.");
     const response = { ...exampleFeaturesResponse };
     const exampleFeature = { ...response.features[0] };
     for (const featureName of Object.values(features)) {
@@ -17,7 +16,6 @@ const unleashHandlers: RequestHandler[] = [
     return HttpResponse.json(response);
   }),
   http.post(`${UNLEASH_API_URL}client/register`, () => {
-    console.warn("Mocking Unleash register.");
     return new HttpResponse(null, {
       status: 202,
     });
