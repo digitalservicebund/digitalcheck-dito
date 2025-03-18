@@ -14,6 +14,9 @@ import type { EntryContext } from "react-router";
 import { ServerRouter } from "react-router";
 import logResponseStatus from "~/utils/logging";
 import { NonceProvider } from "~/utils/nonce";
+// We need to import the mock server here (which unfortunately also happens in production)
+// because we couldn't get the mocks to register in time otherwise in CI,
+// as awaiting a dynamic esm import did not work with npm run start & npm run start.
 import { mockServer } from "./mocks/node";
 
 if (
