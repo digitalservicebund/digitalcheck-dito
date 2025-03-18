@@ -186,9 +186,8 @@ const scenarios: TestScenario[] = [
   {
     name: "mixed answers result",
     answers: (question) => {
-      if (questions.indexOf(question as TQuestion) === 0) return "Nein";
-      if (questions.indexOf(question as TQuestion) === 1)
-        return "Ich bin unsicher";
+      if (questions.indexOf(question) === 0) return "Nein";
+      if (questions.indexOf(question) === 1) return "Ich bin unsicher";
       return "Ja";
     },
     expected: {

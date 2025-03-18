@@ -51,7 +51,7 @@ module.exports = {
   overrides: [
     // React
     {
-      files: ["app/**/*.{js,jsx,ts,tsx}"],
+      files: ["app/**/*.{ts,tsx}", "tests/**/*.{ts,tsx}"],
       plugins: ["react", "jsx-a11y", "react-refresh"],
       extends: [
         "plugin:react/recommended",
@@ -85,7 +85,7 @@ module.exports = {
 
     // Typescript
     {
-      files: ["app/**/*.{ts,tsx}"],
+      files: ["app/**/*.{ts,tsx}", "tests/**/*.{ts,tsx}"],
       plugins: ["@typescript-eslint", "import", "testing-library"],
       extends: [
         "plugin:@typescript-eslint/recommended-type-checked",
