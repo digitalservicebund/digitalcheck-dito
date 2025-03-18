@@ -3,6 +3,7 @@ import { openInNewIconElement } from "~/components/openInNewWindow";
 import { A11Y_MESSAGE_NEW_WINDOW } from "./Aria";
 import Container from "./Container";
 import Image from "./Image";
+// eslint-disable-next-line import/no-unresolved
 import bmiLogo from "/logo/bmi-logo.png";
 
 type LinkProps = {
