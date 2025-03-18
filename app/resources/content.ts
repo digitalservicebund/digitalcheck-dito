@@ -2269,7 +2269,7 @@ Der Bericht wird im EU-Portal hochgeladen und automatisch in maschinenlesbarem F
 
 1. **Vorprüfung starten**
     - In der geführten Vorprüfung ermitteln Sie, ob Ihr Regelungsvorhaben einen Digitalbezug hat und ob Interoperabilitätsanforderungen auf EU-Ebene berücksichtigt werden müssen.
-2. **Ergebnis erhalten**
+2. **Ergebnis übermitteln**
     - Das Prüfergebnis wird per E-Mail an den Normenkontrollrat gesendet.
     - Falls Interoperabilitätsanforderungen bestehen, schicken Sie die Mail außerdem an das Digitalcheck-Team. Dieses unterstützt Sie bei den weiteren Schritten.
 3. **Erarbeitung der Regelung**
@@ -2297,7 +2297,7 @@ Der Bericht wird im EU-Portal hochgeladen und automatisch in maschinenlesbarem F
           text: "Was ist das Ziel der Verordnung für ein interoperables Europa?",
         },
         content:
-          "Das Ziel der [Verordnung für ein interoperables Europa (EU 2024/903)](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903) ist es, digitale öffentliche Dienste in der EU zu verbessern. Die Dienste einzelner Mitgliedsstaaten sollen miteinander kompatibel sein. Dafür braucht es gemeinsame Standards, um Daten zwischen den Mitgliedsstaaten auszutauschen. Um digitale Potentiale und Hindernisse zu berücksichtigen, müssen europäische öffentliche Stellen die Interoperabilität neuer Dienste bewerten. Die Verordnung schafft dafür einen Kooperationsrahmen zwischen Mitgliedsstaaten und der Europäischen Kommission.",
+          "Das Ziel der [Verordnung für ein interoperables Europa (EU 2024/903)](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903) ist es, digitale öffentliche Dienste zu verbessern. Die Dienste einzelner Mitgliedsstaaten sollen miteinander kompatibel sein. Dafür braucht es gemeinsame Standards, um Daten zwischen den Mitgliedsstaaten auszutauschen. Um digitale Potentiale und Hindernisse zu berücksichtigen, müssen öffentliche Stellen die Interoperabilität neuer Dienste berücksichtigen.",
         detailsSummary: {
           title: "Welche positiven Effekte sollen dadurch erreicht werden?",
           content: `Die Vorschriften erleichtern den Datenaustausch und die Wiederverwendung von Lösungen, indem sie bürokratische Hürden abbauen. Dies spart Kosten und Zeit für Bürgerinnen und Bürger, Unternehmen und Verwaltungen.
@@ -2314,11 +2314,11 @@ Quellen:
         headline: {
           text: "Was sind Interoperabilitätsbewertungen und warum sind sie notwendig?",
         },
-        content: `Wenn Sie eine Interoperabilitätsbewertung durchführen und den Bericht veröffentlichen, unterstützen Sie zwei Ziele der Verordnung für ein interoperables Europa: 
-- Gemeinsame Nutzung grenzüberschreitender Daten
-- Verbesserung der Qualität und Zugänglichkeit digitaler öffentlicher Dienste.
+        content: `Wenn Sie eine Interoperabilitätsbewertung durchführen und den Bericht veröffentlichen, unterstützen Sie damit ein interoperables Europa: 
+- Die Nutzung grenzüberschreitender Daten wird ermöglicht.
+- Die Qualität und Zugänglichkeit digitaler öffentlicher Dienste wird verbessert.
 
-Durch den Prozess der Interoperabilitätsbewertung ermitteln Sie Potenziale und Hindernisse für Interoperabilität. Damit legen Sie die Grundlage für Gesetze, die Interoperabilität ermöglichen. Eine Vorgehensweise ganz ähnlich, wie sie es von der Arbeit an digitaltauglichen Regelungen kennen.
+Durch den Prozess der Interoperabilitätsbewertung ermitteln Sie Potenziale und Hindernisse für grenzüberschreitende Zusammenarbeit. Damit legen Sie die Grundlage für Regelungen, die Interoperabilität ermöglichen. Eine Vorgehensweise ganz ähnlich, wie sie es von der Arbeit an digitaltauglichen Regelungen kennen.
         `,
         detailsSummary: {
           title: "Wie läuft eine Interoperabilitätsbewertung ab?",
