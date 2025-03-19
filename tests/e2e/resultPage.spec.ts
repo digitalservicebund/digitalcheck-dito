@@ -206,24 +206,12 @@ const scenarios: TestScenario[] = [
   },
 ];
 
-async function interceptMailAndExpect(
-  page: Page,
-  expected?: {
-    subject?: string;
-    recipients?: string[];
-    cc?: string[];
-    body?: string[];
-  },
-  notExpected?: {
-    recipients?: string[];
-    body?: string[];
-  },
-) {
+async function interceptMail(page: Page): Promise<URL> {
   const routeToIntercept = "**/vorpruefung/ergebnis.data";
 
   // Create a promise that will be resolved when the interception completes
-  let interceptionResolve: () => void;
-  const interceptionPromise = new Promise<void>((resolve) => {
+  let interceptionResolve: (value: URL | PromiseLike<URL>) => void;
+  const interceptionPromise = new Promise<URL>((resolve) => {
     interceptionResolve = resolve;
   });
 
@@ -231,47 +219,16 @@ async function interceptMailAndExpect(
   await page.route(
     routeToIntercept,
     async (route) => {
-      try {
-        const response = await route.fetch();
-        const location = response.headers()["location"];
-
-        const mailTo = new URL(location);
-        if (expected?.subject)
-          expect(mailTo.searchParams.get("subject")).toBe(expected?.subject);
-        expected?.recipients?.forEach((expectedRecipient) =>
-          expect(decodeURIComponent(mailTo.pathname)).toContain(
-            expectedRecipient,
-          ),
-        );
-        expected?.cc?.forEach((expectedCC) =>
-          expect(mailTo.searchParams.get("cc")).toContain(expectedCC),
-        );
-        expected?.body?.forEach((expectedString) => {
-          expect(mailTo.searchParams.get("body")).toContain(expectedString);
-        });
-
-        notExpected?.recipients?.forEach((notExpectedRecipient) =>
-          expect(decodeURIComponent(mailTo.pathname)).not.toContain(
-            notExpectedRecipient,
-          ),
-        );
-        notExpected?.body?.forEach((notExpectedString) => {
-          expect(mailTo.searchParams.get("body")).not.toContain(
-            notExpectedString,
-          );
-        });
-
-        await route.abort();
-      } finally {
-        // Signal that the handler has executed
-        interceptionResolve();
-      }
+      const response = await route.fetch();
+      const location = response.headers()["location"];
+      await route.abort();
+      interceptionResolve(new URL(location));
     },
     { times: 1 },
   );
 
   await page.getByRole("button", { name: "E-Mail erstellen" }).click();
-  await interceptionPromise;
+  return interceptionPromise;
 }
 
 // Generate tests for each scenario
@@ -376,9 +333,8 @@ for (const scenario of scenarios) {
           await page
             .getByLabel("Arbeitstitel des Vorhabens")
             .fill("Policy ABC");
-          await interceptMailAndExpect(page, undefined, {
-            body: ["Begründung:"],
-          });
+          const mailTo = await interceptMail(page);
+          expect(mailTo.searchParams.get("body")).not.toContain("Begründung:");
         });
       }
 
@@ -390,7 +346,7 @@ for (const scenario of scenarios) {
             .getByLabel("Begründung")
             .fill("Darum brauchen wir das nicht.");
         }
-        await interceptMailAndExpect(page);
+        await interceptMail(page);
         await expect(page.getByTestId(EMAIL_INPUT_ERROR)).not.toBeVisible();
         await expect(page.getByTestId(TITLE_INPUT_ERROR)).not.toBeVisible();
       });
@@ -419,9 +375,10 @@ for (const scenario of scenarios) {
             .getByLabel("Begründung")
             .fill("Darum brauchen wir das nicht.");
         }
-        await interceptMailAndExpect(page, {
-          subject: "Digitalcheck Vorprüfung: „Policy ABC“",
-        });
+        const mailTo = await interceptMail(page);
+        expect(mailTo.searchParams.get("subject")).toBe(
+          "Digitalcheck Vorprüfung: „Policy ABC“",
+        );
       });
 
       test("email recipients include nkr", async () => {
@@ -431,9 +388,10 @@ for (const scenario of scenarios) {
             .getByLabel("Begründung")
             .fill("Darum brauchen wir das nicht.");
         }
-        await interceptMailAndExpect(page, {
-          recipients: ["nkr@bmj.bund.de"],
-        });
+        const mailTo = await interceptMail(page);
+        expect(decodeURIComponent(mailTo.pathname)).toContain(
+          "nkr@bmj.bund.de",
+        );
       });
 
       test("email cc includes email from email input", async () => {
@@ -444,9 +402,8 @@ for (const scenario of scenarios) {
             .getByLabel("Begründung")
             .fill("Darum brauchen wir das nicht.");
         }
-        await interceptMailAndExpect(page, {
-          cc: ["foo@bar.de"],
-        });
+        const mailTo = await interceptMail(page);
+        expect(mailTo.searchParams.get("cc")).toContain("foo@bar.de");
       });
 
       if (scenario.expected.includesInterop) {
@@ -459,9 +416,10 @@ for (const scenario of scenarios) {
               .getByLabel("Begründung")
               .fill("Darum brauchen wir das nicht.");
           }
-          await interceptMailAndExpect(page, {
-            recipients: ["interoperabel@digitalservice.bund.de"],
-          });
+          const mailTo = await interceptMail(page);
+          expect(decodeURIComponent(mailTo.pathname)).toContain(
+            "interoperabel@digitalservice.bund.de",
+          );
         });
       } else {
         test("email recipients do not include digitalcheck team", async () => {
@@ -473,9 +431,10 @@ for (const scenario of scenarios) {
               .getByLabel("Begründung")
               .fill("Darum brauchen wir das nicht.");
           }
-          await interceptMailAndExpect(page, undefined, {
-            recipients: ["interoperabel@digitalservice.bund.de"],
-          });
+          const mailTo = await interceptMail(page);
+          expect(decodeURIComponent(mailTo.pathname)).not.toContain(
+            "interoperabel@digitalservice.bund.de",
+          );
         });
       }
 
@@ -486,9 +445,10 @@ for (const scenario of scenarios) {
             .getByLabel("Begründung")
             .fill("Darum brauchen wir das nicht.");
         }
-        await interceptMailAndExpect(page, {
-          body: [scenario.expected.headline],
-        });
+        const mailTo = await interceptMail(page);
+        expect(mailTo.searchParams.get("body")).toContain(
+          scenario.expected.headline,
+        );
       });
 
       if (scenario.expected.warningInteropWithoutDigital) {
@@ -501,11 +461,10 @@ for (const scenario of scenarios) {
               .getByLabel("Begründung")
               .fill("Darum brauchen wir das nicht.");
           }
-          await interceptMailAndExpect(page, {
-            body: [
-              "Bitte beachten Sie: Wenn Ihr Vorhaben keinen Digitalbezug aufweist, können die Anforderungen der Interoperabilität nicht erfüllt werden",
-            ],
-          });
+          const mailTo = await interceptMail(page);
+          expect(mailTo.searchParams.get("body")).toContain(
+            "Bitte beachten Sie: Wenn Ihr Vorhaben keinen Digitalbezug aufweist, können die Anforderungen der Interoperabilität nicht erfüllt werden",
+          );
         });
       }
     } else {
@@ -530,8 +489,9 @@ for (const scenario of scenarios) {
           `? ${questions[1].positiveResult}`,
           `+ ${questions[2].positiveResult}`,
         ];
-        await interceptMailAndExpect(page, {
-          body: bodyContains,
+        const mailTo = await interceptMail(page);
+        bodyContains.forEach((containedString) => {
+          expect(mailTo.searchParams.get("body")).toContain(containedString);
         });
       });
     }
@@ -564,8 +524,9 @@ for (const scenario of scenarios) {
           bodyContains.push(question.positiveResult);
         });
 
-        await interceptMailAndExpect(page, {
-          body: bodyContains,
+        const mailTo = await interceptMail(page);
+        bodyContains.forEach((containedString) => {
+          expect(mailTo.searchParams.get("body")).toContain(containedString);
         });
       });
     }
@@ -585,8 +546,9 @@ for (const scenario of scenarios) {
           bodyContains.push(question.negativeResult);
         }
 
-        await interceptMailAndExpect(page, {
-          body: bodyContains,
+        const mailTo = await interceptMail(page);
+        bodyContains.forEach((containedString) => {
+          expect(mailTo.searchParams.get("body")).toContain(containedString);
         });
       });
     }
@@ -604,8 +566,9 @@ for (const scenario of scenarios) {
             bodyContains.push(question.positiveResult);
           });
 
-        await interceptMailAndExpect(page, {
-          body: bodyContains,
+        const mailTo = await interceptMail(page);
+        bodyContains.forEach((containedString) => {
+          expect(mailTo.searchParams.get("body")).toContain(containedString);
         });
       });
     }
@@ -618,8 +581,9 @@ for (const scenario of scenarios) {
             .getByLabel("Begründung")
             .fill("Darum brauchen wir das nicht.");
         }
-        await interceptMailAndExpect(page, {
-          body: scenario.expected.emailBodyContains,
+        const mailTo = await interceptMail(page);
+        scenario.expected.emailBodyContains?.forEach((containedString) => {
+          expect(mailTo.searchParams.get("body")).toContain(containedString);
         });
       });
     }
@@ -630,9 +594,9 @@ for (const scenario of scenarios) {
         await page.getByLabel("Arbeitstitel des Vorhabens").fill("Policy ABC");
         await page.getByLabel("Begründung").fill(reasoningText);
 
-        await interceptMailAndExpect(page, {
-          body: ["Begründung:", reasoningText],
-        });
+        const mailTo = await interceptMail(page);
+        expect(mailTo.searchParams.get("body")).toContain("Begründung:");
+        expect(mailTo.searchParams.get("body")).toContain(reasoningText);
       });
     }
   });
