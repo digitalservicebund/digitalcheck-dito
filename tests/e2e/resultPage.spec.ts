@@ -221,46 +221,57 @@ async function interceptMailAndExpect(
 ) {
   const routeToIntercept = "**/vorpruefung/ergebnis.data";
 
-  // Create a promise that will resolve when the route is handled
-  const routeHandledPromise = new Promise<void>((resolve) => {
-    void page.route(routeToIntercept, async (route) => {
-      const response = await route.fetch();
-      const location = response.headers()["location"];
-
-      const mailTo = new URL(location);
-      if (expected?.subject)
-        expect(mailTo.searchParams.get("subject")).toBe(expected?.subject);
-      expected?.recipients?.forEach((expectedRecipient) =>
-        expect(decodeURIComponent(mailTo.pathname)).toContain(
-          expectedRecipient,
-        ),
-      );
-      expected?.cc?.forEach((expectedCC) =>
-        expect(mailTo.searchParams.get("cc")).toContain(expectedCC),
-      );
-      expected?.body?.forEach((expectedString) => {
-        expect(mailTo.searchParams.get("body")).toContain(expectedString);
-      });
-
-      notExpected?.recipients?.forEach((notExpectedRecipient) =>
-        expect(decodeURIComponent(mailTo.pathname)).not.toContain(
-          notExpectedRecipient,
-        ),
-      );
-      notExpected?.body?.forEach((notExpectedString) => {
-        expect(mailTo.searchParams.get("body")).not.toContain(
-          notExpectedString,
-        );
-      });
-
-      await route.abort();
-      await page.unroute(routeToIntercept);
-      resolve();
-    });
+  // Create a promise that will be resolved when the interception completes
+  let interceptionResolve: () => void;
+  const interceptionPromise = new Promise<void>((resolve) => {
+    interceptionResolve = resolve;
   });
 
+  // First wait for the route to be registered
+  await page.route(
+    routeToIntercept,
+    async (route) => {
+      try {
+        const response = await route.fetch();
+        const location = response.headers()["location"];
+
+        const mailTo = new URL(location);
+        if (expected?.subject)
+          expect(mailTo.searchParams.get("subject")).toBe(expected?.subject);
+        expected?.recipients?.forEach((expectedRecipient) =>
+          expect(decodeURIComponent(mailTo.pathname)).toContain(
+            expectedRecipient,
+          ),
+        );
+        expected?.cc?.forEach((expectedCC) =>
+          expect(mailTo.searchParams.get("cc")).toContain(expectedCC),
+        );
+        expected?.body?.forEach((expectedString) => {
+          expect(mailTo.searchParams.get("body")).toContain(expectedString);
+        });
+
+        notExpected?.recipients?.forEach((notExpectedRecipient) =>
+          expect(decodeURIComponent(mailTo.pathname)).not.toContain(
+            notExpectedRecipient,
+          ),
+        );
+        notExpected?.body?.forEach((notExpectedString) => {
+          expect(mailTo.searchParams.get("body")).not.toContain(
+            notExpectedString,
+          );
+        });
+
+        await route.abort();
+      } finally {
+        // Signal that the handler has executed
+        interceptionResolve();
+      }
+    },
+    { times: 1 },
+  );
+
   await page.getByRole("button", { name: "E-Mail erstellen" }).click();
-  await routeHandledPromise;
+  await interceptionPromise;
 }
 
 // Generate tests for each scenario
