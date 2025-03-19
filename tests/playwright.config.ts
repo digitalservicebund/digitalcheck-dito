@@ -77,7 +77,6 @@ const config: PlaywrightTestConfig = {
     // We're testing the built code, but set the NODE_ENV to enable mocks
     command: "npm run build && NODE_ENV=development PORT=5172 npm run start",
     port: 5172,
-    timeout: parseInt(process.env.WAIT_ON_TIMEOUT ?? `${60 * 1000}`),
   },
 };
 
