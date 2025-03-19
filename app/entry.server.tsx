@@ -16,7 +16,7 @@ import logResponseStatus from "~/utils/logging";
 import { NonceProvider } from "~/utils/nonce";
 // We need to import the mock server here (which unfortunately also happens in production)
 // because we couldn't get the mocks to register in time otherwise in CI,
-// as awaiting a dynamic esm import did not work with npm run start & npm run start.
+// as awaiting a dynamic esm import did not work with npm run build & npm run start.
 import { mockServer } from "./mocks/node";
 
 if (
