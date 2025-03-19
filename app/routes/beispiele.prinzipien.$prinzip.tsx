@@ -58,7 +58,7 @@ query GetPrinzips($slug: String!) {
 export const loader = async ({ params }: Route.LoaderArgs) => {
   const prinzipData = await fetchStrapiData<{ prinzips: Prinzip[] }>(
     GET_PRINZIPS_QUERY,
-    { slug: params.prinzip as string },
+    { slug: params.prinzip },
   );
 
   if ("error" in prinzipData) {

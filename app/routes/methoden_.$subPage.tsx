@@ -83,7 +83,7 @@ export default function Index() {
           {content.guidance && (
             <RichText
               markdown={content.guidance}
-              className="ds-stack-0 mt-24"
+              className="mt-24 ds-stack-0"
             />
           )}
         </Container>

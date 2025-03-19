@@ -73,7 +73,7 @@ query GetRegelungsvorhabens($slug: String!) {
 export const loader = async ({ params }: Route.LoaderArgs) => {
   const regelungData = await fetchStrapiData<{
     regelungsvorhabens: Regelungsvorhaben[];
-  }>(GET_REGELUNGSVORHABENS_BY_SLUG_QUERY, { slug: params.regelung as string });
+  }>(GET_REGELUNGSVORHABENS_BY_SLUG_QUERY, { slug: params.regelung });
 
   if ("error" in regelungData) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
@@ -196,7 +196,7 @@ export default function Gesetz() {
           </Container>
         )}
       {regelung.Digitalchecks.map((digitalcheck, index) => (
-        <Container key={digitalcheck.documentId} className="ds-stack-64 pb-80">
+        <Container key={digitalcheck.documentId} className="pb-80 ds-stack-64">
           {/* ----- Formulierungen / Prinziperfüllungen ----- */}
           {digitalcheck.Paragraphen.length > 0 && (
             <>

@@ -133,7 +133,7 @@ export default function ResultForm({
           />
         </div>
       )}
-      <div className="ds-stack-16 mt-40">
+      <div className="mt-40 ds-stack-16">
         <Heading
           tagName="h3"
           className="ds-label-section"

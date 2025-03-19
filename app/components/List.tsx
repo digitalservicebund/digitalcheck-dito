@@ -10,10 +10,10 @@ type BaseListProps = {
 
 const NumberedList = ({ identifier, items, heading }: BaseListProps) => {
   return (
-    <div className="ds-stack-8 relative scroll-my-40" id={identifier}>
+    <div className="relative scroll-my-40 ds-stack-8" id={identifier}>
       {heading && <Heading className="max-sm:ds-heading-02-reg" {...heading} />}
       <ol
-        className="list-unstyled ds-stack-32 relative"
+        className="list-unstyled relative ds-stack-32"
         aria-live="polite"
         aria-labelledby={identifier ? `${identifier}-heading` : undefined}
       >
@@ -52,7 +52,7 @@ const NumberedList = ({ identifier, items, heading }: BaseListProps) => {
 
 const BulletList = ({ identifier, items, heading }: BaseListProps) => {
   return (
-    <div className="ds-stack-8 relative scroll-my-40" id={identifier}>
+    <div className="relative scroll-my-40 ds-stack-8" id={identifier}>
       {heading && <Heading className="max-sm:ds-heading-02-reg" {...heading} />}
       <div className="absolute bottom-0 left-[8px] top-32 w-[4px] bg-blue-300">
         <div className="absolute -left-8 w-20 rotate-180 bg-white text-center text-xl leading-none text-blue-300">
@@ -63,7 +63,7 @@ const BulletList = ({ identifier, items, heading }: BaseListProps) => {
         </div>
       </div>
       <ol
-        className="list-unstyled ds-stack-32 relative"
+        className="list-unstyled relative ds-stack-32"
         aria-live="polite"
         aria-labelledby={identifier ? `${identifier}-heading` : undefined}
       >

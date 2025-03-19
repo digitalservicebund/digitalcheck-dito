@@ -223,7 +223,7 @@ async function interceptMailAndExpect(
 
   // Create a promise that will resolve when the route is handled
   const routeHandledPromise = new Promise<void>((resolve) => {
-    page.route(routeToIntercept, async (route) => {
+    void page.route(routeToIntercept, async (route) => {
       const response = await route.fetch();
       const location = response.headers()["location"];
 
