@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/react";
+import { type MetaArgs } from "react-router";
 import Accordion from "~/components/Accordion";
 import Background from "~/components/Background";
 import Box from "~/components/Box";
@@ -18,10 +18,10 @@ import {
   ROUTE_LANDING,
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
-import useFeatureFlag from "~/utils/featureFlags";
+import { useFeatureFlag } from "~/utils/featureFlags";
 import prependMetaTitle from "~/utils/metaTitle";
 
-export const meta: MetaFunction = ({ matches }) => {
+export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_PRECHECK.title, matches);
 };
 
@@ -45,7 +45,7 @@ export default function Index() {
           ></Header>
         </Container>
         <Container className="pt-0">
-          <div className="ds-stack-16 mb-40">
+          <div className="mb-40 ds-stack-16">
             {preCheck.start.hints.map((hint) => (
               <DetailsSummary
                 key={hint.title}

@@ -1,4 +1,4 @@
-import { Link } from "@remix-run/react";
+import { Link } from "react-router";
 import Heading from "~/components/Heading";
 import { general } from "~/resources/content";
 
@@ -17,7 +17,7 @@ export default function LinkListBox({
         text={general.tableOfContents.headline}
         className="font-bold"
       />
-      <ol className="list-unstyled ds-stack-8 mt-16">
+      <ol className="list-unstyled mt-16 ds-stack-8">
         {links.map((link) => (
           <li key={link.id}>
             <Link

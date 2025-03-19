@@ -1,25 +1,22 @@
 import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
-import type {
-  HeadersFunction,
-  LinksFunction,
-  LoaderFunctionArgs,
-} from "@remix-run/node";
+import { marked, type Tokens } from "marked";
+import React, { type ReactNode, useEffect, useRef } from "react";
 import {
+  type HeadersFunction,
+  isRouteErrorResponse,
   Link,
   Links,
+  type LinksFunction,
   Meta,
-  MetaFunction,
   Outlet,
   Scripts,
   ScrollRestoration,
-  isRouteErrorResponse,
   useLoaderData,
   useLocation,
   useRouteError,
   useRouteLoaderData,
-} from "@remix-run/react";
-import { marked, type Tokens } from "marked";
-import React, { useEffect, useRef, type ReactNode } from "react";
+} from "react-router";
+
 import Background from "~/components/Background";
 import Breadcrumbs from "~/components/Breadcrumbs";
 import Button from "~/components/Button";
@@ -44,8 +41,9 @@ import {
 import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants.server";
 import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
+import type { Route } from "./+types/root";
 
-export function loader({ request }: LoaderFunctionArgs) {
+export function loader({ request }: Route.LoaderArgs) {
   const featureFlags = getFeatureFlags();
 
   const requestUrl = new URL(request.url);
@@ -63,11 +61,7 @@ export function loader({ request }: LoaderFunctionArgs) {
   };
 }
 
-export const meta: MetaFunction<typeof loader> = ({
-  data,
-  location,
-  error,
-}) => {
+export const meta: Route.MetaFunction = ({ data, location, error }) => {
   const title = error ? `Fehler — ${siteMeta.title}` : siteMeta.title;
 
   const baseMeta = [
@@ -192,7 +186,7 @@ export function ScrollAndFocus() {
     <div
       ref={mainRef}
       tabIndex={-1}
-      className="focus-visible:outline-auto absolute left-0 top-0 outline-none"
+      className="absolute left-0 top-0 outline-none"
     />
   );
 }

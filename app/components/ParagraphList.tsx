@@ -1,7 +1,7 @@
 import ArrowUpwardOutlined from "@digitalservicebund/icons/ArrowUpwardOutlined";
-import { Link, useLocation } from "@remix-run/react";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { ReactNode, useState } from "react";
+import { Link, useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
@@ -181,7 +181,7 @@ const AbsatzContent = ({
           }}
         />
         {absatzGroup.PrinzipErfuellungen.length > 0 && (
-          <div className="ds-stack-8 mt-8">
+          <div className="mt-8 ds-stack-8">
             <span className="ds-subhead font-bold" id={baseLabelID}>
               {digitalSuitability.paragraphs.explanation}
             </span>
@@ -299,7 +299,7 @@ function Paragraph({
           className="font-bold"
         />
         <p className="ds-subhead font-bold">{paragraph.Titel}</p>
-        <div className="ds-stack-16 border-l-4 border-gray-300 pl-8">
+        <div className="border-l-4 border-gray-300 pl-8 ds-stack-16">
           {groupedAbsaetze.map((absatzGroup) => (
             <AbsatzContent
               key={"id" in absatzGroup ? absatzGroup.id : absatzGroup[0].number}

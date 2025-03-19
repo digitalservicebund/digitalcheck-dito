@@ -1,4 +1,4 @@
-import { Link } from "@remix-run/react";
+import { Link } from "react-router";
 import Background from "~/components/Background";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
@@ -9,7 +9,7 @@ import { NumberedList } from "~/components/List";
 import SupportBanner from "~/components/SupportBanner";
 import { landing } from "~/resources/content";
 import { features } from "~/resources/features";
-import useFeatureFlag from "~/utils/featureFlags";
+import { useFeatureFlag } from "~/utils/featureFlags";
 
 export default function Index() {
   const showInteroperabilitySection = useFeatureFlag(
@@ -80,7 +80,7 @@ export default function Index() {
       <SupportBanner />
       <Background backgroundColor="darkBlue" className="py-24">
         <Container>
-          <div className="ds-stack-32 scroll-my-40">
+          <div className="scroll-my-40 ds-stack-32">
             <Heading tagName="h2" text={landing.principles.title} />
             <ol className="list-unstyled space-y-8">
               {landing.principles.content.map((principle) => (

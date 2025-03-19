@@ -1,6 +1,7 @@
-import { MetaFunction } from "@remix-run/react";
 import { useState } from "react";
+import { type MetaArgs } from "react-router";
 import { twJoin } from "tailwind-merge";
+
 import Background from "~/components/Background";
 import Box from "~/components/Box";
 import ButtonContainer from "~/components/ButtonContainer";
@@ -23,7 +24,7 @@ const {
   subtitle,
 } = support;
 
-export const meta: MetaFunction = ({ matches }) => {
+export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_SUPPORT.title, matches);
 };
 
@@ -138,7 +139,7 @@ export default function Index() {
           <Heading tagName="h2" text={supportHow.title} />
           {supportHow.supportTypes.length > 0 &&
             supportHow.supportTypes.map((supportType) => (
-              <div key={supportType.title} className="ds-stack-16 pb-40 pt-32">
+              <div key={supportType.title} className="pb-40 pt-32 ds-stack-16">
                 <Box
                   heading={{
                     tagName: "h3",

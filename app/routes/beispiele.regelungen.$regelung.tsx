@@ -1,12 +1,12 @@
-import { type LoaderFunctionArgs } from "@remix-run/node";
-import {
-  Link,
-  MetaFunction,
-  useLoaderData,
-  useOutletContext,
-} from "@remix-run/react";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import React from "react";
+import {
+  Link,
+  useLoaderData,
+  useOutletContext,
+  type MetaArgs,
+} from "react-router";
+
 import Background from "~/components/Background";
 import Container from "~/components/Container";
 import CustomLink from "~/components/CustomLink";
@@ -28,8 +28,9 @@ import {
   visualisationFields,
 } from "~/utils/strapiData.server";
 import { formatDate, gesetzStatusMap, slugify } from "~/utils/utilFunctions";
+import type { Route } from "./+types/beispiele.regelungen.$regelung";
 
-export const meta: MetaFunction = ({ matches }) => {
+export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_LAWS.title, matches);
 };
 
@@ -69,10 +70,10 @@ query GetRegelungsvorhabens($slug: String!) {
   }
 }`;
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
+export const loader = async ({ params }: Route.LoaderArgs) => {
   const regelungData = await fetchStrapiData<{
     regelungsvorhabens: Regelungsvorhaben[];
-  }>(GET_REGELUNGSVORHABENS_BY_SLUG_QUERY, { slug: params.regelung as string });
+  }>(GET_REGELUNGSVORHABENS_BY_SLUG_QUERY, { slug: params.regelung });
 
   if ("error" in regelungData) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
@@ -195,7 +196,7 @@ export default function Gesetz() {
           </Container>
         )}
       {regelung.Digitalchecks.map((digitalcheck, index) => (
-        <Container key={digitalcheck.documentId} className="ds-stack-64 pb-80">
+        <Container key={digitalcheck.documentId} className="pb-80 ds-stack-64">
           {/* ----- Formulierungen / Prinziperfüllungen ----- */}
           {digitalcheck.Paragraphen.length > 0 && (
             <>

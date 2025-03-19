@@ -54,7 +54,8 @@ const config: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI, // Fail the build on CI if test.only is present
   retries: process.env.CI ? 1 : 0, // Retry on CI only
   fullyParallel: true,
-  timeout: 10000,
+  workers: process.env.CI ? 1 : undefined, // Limit the number of workers on CI, use default locally
+  timeout: 5000,
   use: {
     viewport: { width: 1280, height: 720 },
     acceptDownloads: true,
@@ -73,9 +74,9 @@ const config: PlaywrightTestConfig = {
   ],
   projects: defaultProjects,
   webServer: {
-    command: "npm run dev -- --port 5172",
+    // We're testing the built code, but set the NODE_ENV to enable mocks
+    command: "npm run build && NODE_ENV=development PORT=5172 npm run start",
     port: 5172,
-    timeout: parseInt(process.env.WAIT_ON_TIMEOUT ?? `${5 * 1000}`),
   },
 };
 

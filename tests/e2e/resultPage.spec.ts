@@ -206,53 +206,43 @@ const scenarios: TestScenario[] = [
   },
 ];
 
-async function registerMailInterceptionHandlerAndExpect(
-  page: Page,
-  expected?: {
-    subject?: string;
-    recipients?: string[];
-    cc?: string[];
-    body?: string[];
-  },
-  notExpected?: {
-    recipients?: string[];
-    body?: string[];
-  },
-) {
-  await page.route("**", async (route) => {
-    const response = await route.fetch();
-    const status = response.headers()["x-remix-status"];
-    const redirectUrl = response.headers()["x-remix-redirect"];
+type Mail = {
+  subject: string;
+  body: string;
+  recipients: string;
+  cc: string;
+};
 
-    if (status !== "302" || !redirectUrl?.startsWith("mailto:")) {
-      await route.continue();
-      return;
-    }
+async function interceptMail(page: Page): Promise<Mail> {
+  const routeToIntercept = "**/vorpruefung/ergebnis.data";
 
-    const mailTo = new URL(redirectUrl);
-    if (expected?.subject)
-      expect(mailTo.searchParams.get("subject")).toBe(expected?.subject);
-    expected?.recipients?.forEach((expectedRecipient) =>
-      expect(decodeURIComponent(mailTo.pathname)).toContain(expectedRecipient),
-    );
-    expected?.cc?.forEach((expectedCC) =>
-      expect(mailTo.searchParams.get("cc")).toContain(expectedCC),
-    );
-    expected?.body?.forEach((expectedString) => {
-      expect(mailTo.searchParams.get("body")).toContain(expectedString);
-    });
-
-    notExpected?.recipients?.forEach((notExpectedRecipient) =>
-      expect(decodeURIComponent(mailTo.pathname)).not.toContain(
-        notExpectedRecipient,
-      ),
-    );
-    notExpected?.body?.forEach((notExpectedString) => {
-      expect(mailTo.searchParams.get("body")).not.toContain(notExpectedString);
-    });
-
-    await route.abort();
+  // Create a promise that will be resolved when the interception completes
+  let interceptionResolve: (value: Mail | PromiseLike<Mail>) => void;
+  const interceptionPromise = new Promise<Mail>((resolve) => {
+    interceptionResolve = resolve;
   });
+
+  // First wait for the route to be registered
+  await page.route(
+    routeToIntercept,
+    async (route) => {
+      const response = await route.fetch();
+      const location = response.headers()["location"];
+      await route.abort();
+      const mailTo = new URL(location);
+
+      interceptionResolve({
+        subject: mailTo.searchParams.get("subject") as string,
+        body: mailTo.searchParams.get("body") as string,
+        recipients: decodeURIComponent(mailTo.pathname),
+        cc: mailTo.searchParams.get("cc") as string,
+      });
+    },
+    { times: 1 },
+  );
+
+  await page.getByRole("button", { name: "E-Mail erstellen" }).click();
+  return interceptionPromise;
 }
 
 // Generate tests for each scenario
@@ -278,9 +268,10 @@ for (const scenario of scenarios) {
       if (page.url() !== ROUTE_RESULT.url) {
         await page.goto(ROUTE_RESULT.url);
       }
+      await page.waitForURL(ROUTE_RESULT.url);
     });
 
-    test.afterAll(async () => {
+    test.afterAll("close shared page for test iteration", async () => {
       if (page) {
         await page.close();
       }
@@ -339,7 +330,6 @@ for (const scenario of scenarios) {
           await page
             .getByLabel("Arbeitstitel des Vorhabens")
             .fill("Policy ABC");
-          await registerMailInterceptionHandlerAndExpect(page);
           await page.getByRole("button", { name: "E-Mail erstellen" }).click();
           await expect(
             page.getByTestId(NEGATIVE_REASONING_ERROR),
@@ -352,19 +342,30 @@ for (const scenario of scenarios) {
         test("negative reasoning input is not visible", async () => {
           await expect(page.getByLabel("Begründung")).not.toBeVisible();
         });
+
+        test("email body does not contain negative reasoning", async () => {
+          await page
+            .getByLabel("Arbeitstitel des Vorhabens")
+            .fill("Policy ABC");
+          const { body } = await interceptMail(page);
+          expect(body).not.toContain("Begründung:");
+        });
       }
 
       test("no error shown when email and title are filled", async () => {
         await page.getByLabel("Ihre E-Mail Adresse").fill("foo@bar.de");
         await page.getByLabel("Arbeitstitel des Vorhabens").fill("Policy ABC");
-        await registerMailInterceptionHandlerAndExpect(page);
-        await page.getByRole("button", { name: "E-Mail erstellen" }).click();
+        if (scenario.expected.showsNegativeReasoning) {
+          await page
+            .getByLabel("Begründung")
+            .fill("Darum brauchen wir das nicht.");
+        }
+        await interceptMail(page);
         await expect(page.getByTestId(EMAIL_INPUT_ERROR)).not.toBeVisible();
         await expect(page.getByTestId(TITLE_INPUT_ERROR)).not.toBeVisible();
       });
 
       test("error is shown if title is empty", async () => {
-        await registerMailInterceptionHandlerAndExpect(page);
         await page.getByRole("button", { name: "E-Mail erstellen" }).click();
         await expect(page.getByTestId(TITLE_INPUT_ERROR)).toBeVisible();
         await expect(page.locator("main")).toContainText(
@@ -376,7 +377,6 @@ for (const scenario of scenarios) {
         await page
           .getByLabel("Arbeitstitel des Vorhabens")
           .fill("A".repeat(101));
-        await registerMailInterceptionHandlerAndExpect(page);
         await page.getByRole("button", { name: "E-Mail erstellen" }).click();
         await expect(page.getByTestId(TITLE_INPUT_ERROR)).toBeVisible();
         await expect(page.locator("main")).toContainText("kürzeren Titel");
@@ -384,35 +384,36 @@ for (const scenario of scenarios) {
 
       test("email subject includes title", async () => {
         await page.getByLabel("Arbeitstitel des Vorhabens").fill("Policy ABC");
-        await registerMailInterceptionHandlerAndExpect(page, {
-          subject: "Digitalcheck Vorprüfung: „Policy ABC“",
-        });
-        await page.getByRole("button", { name: "E-Mail erstellen" }).click();
+        if (scenario.expected.showsNegativeReasoning) {
+          await page
+            .getByLabel("Begründung")
+            .fill("Darum brauchen wir das nicht.");
+        }
+        const { subject } = await interceptMail(page);
+        expect(subject).toBe("Digitalcheck Vorprüfung: „Policy ABC“");
       });
 
       test("email recipients include nkr", async () => {
         await page.getByLabel("Arbeitstitel des Vorhabens").fill("Policy ABC");
-        await registerMailInterceptionHandlerAndExpect(page, {
-          recipients: ["nkr@bmj.bund.de"],
-        });
-        await page.getByRole("button", { name: "E-Mail erstellen" }).click();
+        if (scenario.expected.showsNegativeReasoning) {
+          await page
+            .getByLabel("Begründung")
+            .fill("Darum brauchen wir das nicht.");
+        }
+        const { recipients } = await interceptMail(page);
+        expect(recipients).toContain("nkr@bmj.bund.de");
       });
 
       test("email cc includes email from email input", async () => {
         await page.getByLabel("Arbeitstitel des Vorhabens").fill("Policy ABC");
         await page.getByLabel("Ihre E-Mail Adresse").fill("foo@bar.de");
-        await registerMailInterceptionHandlerAndExpect(page, {
-          cc: ["foo@bar.de"],
-        });
-        await page.getByRole("button", { name: "E-Mail erstellen" }).click();
-      });
-
-      test("email body does not contain negative reasoning", async () => {
-        await page.getByLabel("Arbeitstitel des Vorhabens").fill("Policy ABC");
-        await registerMailInterceptionHandlerAndExpect(page, undefined, {
-          body: ["Begründung:"],
-        });
-        await page.getByRole("button", { name: "E-Mail erstellen" }).click();
+        if (scenario.expected.showsNegativeReasoning) {
+          await page
+            .getByLabel("Begründung")
+            .fill("Darum brauchen wir das nicht.");
+        }
+        const { cc } = await interceptMail(page);
+        expect(cc).toContain("foo@bar.de");
       });
 
       if (scenario.expected.includesInterop) {
@@ -420,29 +421,40 @@ for (const scenario of scenarios) {
           await page
             .getByLabel("Arbeitstitel des Vorhabens")
             .fill("Policy ABC");
-          await registerMailInterceptionHandlerAndExpect(page, {
-            recipients: ["interoperabel@digitalservice.bund.de"],
-          });
-          await page.getByRole("button", { name: "E-Mail erstellen" }).click();
+          if (scenario.expected.showsNegativeReasoning) {
+            await page
+              .getByLabel("Begründung")
+              .fill("Darum brauchen wir das nicht.");
+          }
+          const { recipients } = await interceptMail(page);
+          expect(recipients).toContain("interoperabel@digitalservice.bund.de");
         });
       } else {
         test("email recipients do not include digitalcheck team", async () => {
           await page
             .getByLabel("Arbeitstitel des Vorhabens")
             .fill("Policy ABC");
-          await registerMailInterceptionHandlerAndExpect(page, undefined, {
-            recipients: ["interoperabel@digitalservice.bund.de"],
-          });
-          await page.getByRole("button", { name: "E-Mail erstellen" }).click();
+          if (scenario.expected.showsNegativeReasoning) {
+            await page
+              .getByLabel("Begründung")
+              .fill("Darum brauchen wir das nicht.");
+          }
+          const { recipients } = await interceptMail(page);
+          expect(recipients).not.toContain(
+            "interoperabel@digitalservice.bund.de",
+          );
         });
       }
 
       test("email body contains result title", async () => {
         await page.getByLabel("Arbeitstitel des Vorhabens").fill("Policy ABC");
-        await registerMailInterceptionHandlerAndExpect(page, {
-          body: [scenario.expected.headline],
-        });
-        await page.getByRole("button", { name: "E-Mail erstellen" }).click();
+        if (scenario.expected.showsNegativeReasoning) {
+          await page
+            .getByLabel("Begründung")
+            .fill("Darum brauchen wir das nicht.");
+        }
+        const { body } = await interceptMail(page);
+        expect(body).toContain(scenario.expected.headline);
       });
 
       if (scenario.expected.warningInteropWithoutDigital) {
@@ -450,12 +462,15 @@ for (const scenario of scenarios) {
           await page
             .getByLabel("Arbeitstitel des Vorhabens")
             .fill("Policy ABC");
-          await registerMailInterceptionHandlerAndExpect(page, {
-            body: [
-              "Bitte beachten Sie: Wenn Ihr Vorhaben keinen Digitalbezug aufweist, können die Anforderungen der Interoperabilität nicht erfüllt werden",
-            ],
-          });
-          await page.getByRole("button", { name: "E-Mail erstellen" }).click();
+          if (scenario.expected.showsNegativeReasoning) {
+            await page
+              .getByLabel("Begründung")
+              .fill("Darum brauchen wir das nicht.");
+          }
+          const { body } = await interceptMail(page);
+          expect(body).toContain(
+            "Bitte beachten Sie: Wenn Ihr Vorhaben keinen Digitalbezug aufweist, können die Anforderungen der Interoperabilität nicht erfüllt werden",
+          );
         });
       }
     } else {
@@ -480,10 +495,10 @@ for (const scenario of scenarios) {
           `? ${questions[1].positiveResult}`,
           `+ ${questions[2].positiveResult}`,
         ];
-        await registerMailInterceptionHandlerAndExpect(page, {
-          body: bodyContains,
+        const { body } = await interceptMail(page);
+        bodyContains.forEach((containedString) => {
+          expect(body).toContain(containedString);
         });
-        await page.getByRole("button", { name: "E-Mail erstellen" }).click();
       });
     }
 
@@ -515,16 +530,19 @@ for (const scenario of scenarios) {
           bodyContains.push(question.positiveResult);
         });
 
-        await registerMailInterceptionHandlerAndExpect(page, {
-          body: bodyContains,
+        const { body } = await interceptMail(page);
+        bodyContains.forEach((containedString) => {
+          expect(body).toContain(containedString);
         });
-        await page.getByRole("button", { name: "E-Mail erstellen" }).click();
       });
     }
 
     if (scenario.expected.allNegative) {
       test("email body contains all answers in negative form", async () => {
         await page.getByLabel("Arbeitstitel des Vorhabens").fill("Policy ABC");
+        await page
+          .getByLabel("Begründung")
+          .fill("Darum brauchen wir das nicht.");
         const bodyContains = [
           "In Bezug auf digitale Aspekte führt ihr Regelungsvorhaben zu...",
           "In Bezug auf Interoperabilität führt ihr Regelungsvorhaben zu...",
@@ -534,10 +552,10 @@ for (const scenario of scenarios) {
           bodyContains.push(question.negativeResult);
         }
 
-        await registerMailInterceptionHandlerAndExpect(page, {
-          body: bodyContains,
+        const { body } = await interceptMail(page);
+        bodyContains.forEach((containedString) => {
+          expect(body).toContain(containedString);
         });
-        await page.getByRole("button", { name: "E-Mail erstellen" }).click();
       });
     }
 
@@ -554,20 +572,25 @@ for (const scenario of scenarios) {
             bodyContains.push(question.positiveResult);
           });
 
-        await registerMailInterceptionHandlerAndExpect(page, {
-          body: bodyContains,
+        const { body } = await interceptMail(page);
+        bodyContains.forEach((containedString) => {
+          expect(body).toContain(containedString);
         });
-        await page.getByRole("button", { name: "E-Mail erstellen" }).click();
       });
     }
 
     if (scenario.expected.emailBodyContains) {
       test("email body contains expected content", async () => {
         await page.getByLabel("Arbeitstitel des Vorhabens").fill("Policy ABC");
-        await registerMailInterceptionHandlerAndExpect(page, {
-          body: scenario.expected.emailBodyContains,
+        if (scenario.expected.showsNegativeReasoning) {
+          await page
+            .getByLabel("Begründung")
+            .fill("Darum brauchen wir das nicht.");
+        }
+        const { body } = await interceptMail(page);
+        scenario.expected.emailBodyContains?.forEach((containedString) => {
+          expect(body).toContain(containedString);
         });
-        await page.getByRole("button", { name: "E-Mail erstellen" }).click();
       });
     }
 
@@ -577,11 +600,9 @@ for (const scenario of scenarios) {
         await page.getByLabel("Arbeitstitel des Vorhabens").fill("Policy ABC");
         await page.getByLabel("Begründung").fill(reasoningText);
 
-        await registerMailInterceptionHandlerAndExpect(page, {
-          body: ["Begründung:", reasoningText],
-        });
-
-        await page.getByRole("button", { name: "E-Mail erstellen" }).click();
+        const { body } = await interceptMail(page);
+        expect(body).toContain("Begründung:");
+        expect(body).toContain(reasoningText);
       });
     }
   });

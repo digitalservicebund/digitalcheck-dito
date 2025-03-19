@@ -1,5 +1,5 @@
 import ZoomInOutlined from "@digitalservicebund/icons/ZoomInOutlined";
-import { Link, MetaFunction } from "@remix-run/react";
+import { Link, type MetaArgs } from "react-router";
 import Accordion from "~/components/Accordion";
 import Background from "~/components/Background";
 import ButtonContainer from "~/components/ButtonContainer";
@@ -21,7 +21,7 @@ import {
 import { useFeatureFlag } from "~/utils/featureFlags";
 import prependMetaTitle from "~/utils/metaTitle";
 
-export const meta: MetaFunction = ({ matches }) => {
+export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_INTEROPERABILITY.title, matches);
 };
 
@@ -29,6 +29,7 @@ export default function Interoperability() {
   const showPage = useFeatureFlag(features.showIOLandingPage);
 
   if (!showPage) {
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw new Response("Feature is not enabled for this environment", {
       status: 404,
     });
@@ -150,7 +151,7 @@ export default function Interoperability() {
           <Heading
             tagName="h3"
             text={interoperability.andPolicyMaking.law.headline}
-            className="mt-40 mb-8"
+            className="mb-8 mt-40"
           />
           <RichText markdown={interoperability.andPolicyMaking.law.content} />
         </Container>
@@ -184,7 +185,7 @@ export default function Interoperability() {
         </Container>
       </div>
       <div id={interoperability.resources.id}>
-        <Background backgroundColor="blue" className="pb-48 pt-48">
+        <Background backgroundColor="blue" className="py-48">
           <Container backgroundColor="white" overhangingBackground>
             <Heading
               tagName="h2"
