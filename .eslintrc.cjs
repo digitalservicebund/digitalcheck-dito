@@ -51,7 +51,7 @@ module.exports = {
   overrides: [
     // React
     {
-      files: ["app/**/*.{ts,tsx}", "tests/**/*.{ts,tsx}"],
+      files: ["app/**/*.{js,jsx,ts,tsx}", "tests/**/*.{js,jsx,ts,tsx}"],
       plugins: ["react", "jsx-a11y", "react-refresh"],
       extends: [
         "plugin:react/recommended",
