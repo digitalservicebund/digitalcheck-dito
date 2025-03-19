@@ -44,8 +44,6 @@ import {
 import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants.server";
 import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
-// eslint-disable-next-line import/no-unresolved
-import bundLogo from "/logo/bund-logo.png";
 
 export function loader({ request }: LoaderFunctionArgs) {
   const featureFlags = getFeatureFlags();
@@ -246,7 +244,7 @@ const PageHeader = ({
   <header>
     <div className="flex min-h-64 items-center justify-between p-16">
       <Link to={ROUTE_LANDING.url}>
-        <img src={bundLogo} alt="Logo des Bundes" width={54} />
+        <img src="/logo/bund-logo.png" alt="Logo des Bundes" width={54} />
       </Link>
       <div className="flex items-center max-lg:hidden">
         <div className="text-lg">
