@@ -3,7 +3,6 @@ import { openInNewIconElement } from "~/components/openInNewWindow";
 import { A11Y_MESSAGE_NEW_WINDOW } from "./Aria";
 import Container from "./Container";
 import Image from "./Image";
-import bmiLogo from "/logo/bmi-logo.png";
 
 type LinkProps = {
   preText?: string;
@@ -53,7 +52,7 @@ export default function Footer({ links }: Readonly<FooterProps>) {
         <div className="flex flex-wrap items-start justify-between gap-y-32">
           <div className="flex flex-col-reverse gap-16 sm:flex-row">
             <Image
-              url={bmiLogo}
+              url="/logo/bmi-logo.png"
               width={120}
               alternativeText="Logo des Bundesministerium des Innern und für Heimat"
             />

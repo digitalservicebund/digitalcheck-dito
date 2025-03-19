@@ -42,7 +42,6 @@ import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants.server";
 import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
 import type { Route } from "./+types/root";
-import bundLogo from "/logo/bund-logo.png";
 
 export function loader({ request }: Route.LoaderArgs) {
   const featureFlags = getFeatureFlags();
@@ -187,7 +186,7 @@ export function ScrollAndFocus() {
     <div
       ref={mainRef}
       tabIndex={-1}
-      className="absolute top-0 left-0 outline-none focus-visible:outline-auto"
+      className="focus-visible:outline-auto absolute left-0 top-0 outline-none"
     />
   );
 }
@@ -239,7 +238,7 @@ const PageHeader = ({
   <header>
     <div className="flex min-h-64 items-center justify-between p-16">
       <Link to={ROUTE_LANDING.url}>
-        <img src={bundLogo} alt="Logo des Bundes" width={54} />
+        <img src="/logo/bund-logo.png" alt="Logo des Bundes" width={54} />
       </Link>
       <div className="flex items-center max-lg:hidden">
         <div className="text-lg">
@@ -254,7 +253,7 @@ const PageHeader = ({
         <PhoneOutlined className="mx-8" />
         <a
           href={`tel:${header.contact.number}`}
-          className="ds-link-01-bold plausible-event-name=Phone+Click plausible-event-position=header"
+          className="plausible-event-name=Phone+Click plausible-event-position=header ds-link-01-bold"
         >
           {header.contact.number}
         </a>
@@ -370,7 +369,7 @@ Vielen Dank für Ihr Verständnis.`;
       <main id="error" className="grow">
         <div className="border-t-2 border-t-gray-400">
           <Container>
-            <div className="ds-stack-8 mb-32">
+            <div className="mb-32 ds-stack-8">
               <span className="ds-label-01-bold">{errorStatus}</span>
               <Heading text={errorTitle} className="ds-heading-02-reg" />
               <RichText markdown={errorMessage} className="ds-subhead" />
