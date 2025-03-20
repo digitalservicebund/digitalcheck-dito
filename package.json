@@ -43,6 +43,7 @@
     "isbot": "^5.1.4",
     "js-toml": "^1.0.1",
     "js-yaml": "^4.1.0",
+    "json-to-ts": "^2.1.0",
     "marked": "^15.0.0",
     "mime-types": "^2.1.35",
     "msw": "^2.7.0",
@@ -96,7 +97,8 @@
     "vite": "^6.2.2",
     "vite-plugin-toml": "^0.7.0",
     "vite-tsconfig-paths": "^5.1.0",
-    "vitest": "^3.0.5"
+    "vitest": "^3.0.5",
+    "yaml": "^2.7.0"
   },
   "engines": {
     "node": ">=20.0.0"

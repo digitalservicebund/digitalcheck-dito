@@ -130,11 +130,6 @@ const feedbackForm = {
   ],
 };
 
-export const interviewBanner = {
-  title: "Wir suchen Gesprächspartner und Gesprächspartnerinnen!",
-  text: `Um diese Seite weiterzuentwickeln, suchen wir nach Personen, die uns in einem 45-minütigen Gespräch Feedback geben. Schreiben Sie uns gerne eine E-Mail und wir melden uns bei Ihnen: [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Gesprächspartner:%20erarbeiten.digitalcheck.bund.de).`,
-};
-
 export const preCheck = {
   start: {
     title: "1. Vorprüfung: Digitalbezug einschätzen",
@@ -172,7 +167,7 @@ export const preCheck = {
 - **Digitalisierungsbezug frühzeitig erkennen:** Setzen Sie sich frühzeitig mit Chancen der Digitalisierung auseinander, um den Regelungstext so zu gestalten, dass er die praxisnahe Umsetzung ermöglicht.<br/><br/>
 - **EU-Anforderungen identifizieren:** Im Rahmen der Vorprüfung ermitteln Sie, ob grenzüberschreitende Interoperabilität für Ihr Vorhaben relevant ist. Regelungen die  Interoperabilität fördern, ermöglichen technische Standardisierung, rechtliche Harmonisierung und digitale bürgerzentrierte Dienste innerhalb der EU.<br/><br/>
 - **Rechtliche Grundlage:** Seit Juni 2024 ist es verpflichtend nationale Regelungsvorhaben auf Digitaltauglichkeit zu prüfen. Die Grundlage dafür ist das Onlinezugangsgesetz (OZG) von 2017. Zusätzlich müssen ab Januar 2025 bestimmte Regelungsvorhaben die Anforderungen an Interoperabilität auf EU-Ebene unterstützen. Dies ergibt sich aus der EU-Verordnung [Interoperable Europe Act](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903).<br/><br/>
-          `,
+`,
         },
       ],
     },
@@ -182,7 +177,7 @@ export const preCheck = {
 Interoperabilität bedeutet, dass verschiedene öffentliche Institutionen über Ländergrenzen hinweg zusammenarbeiten können.
 <br /><br />
 Wenn ein Vorhaben die EU-Anforderungen für Interoperabilität erfüllen muss, hat es automatisch auch einen Digitalbezug. 
-      `,
+`,
       image: {
         src: "/images/digital-readiness-meets-interop.svg",
         alt: `Illustration von Datenaustausch zwischen zwei Computer-Systemen mit EU-Flagge, symbolisiert europäische digitale Zusammenarbeit.`,
@@ -201,7 +196,7 @@ Wenn ein Vorhaben die EU-Anforderungen für Interoperabilität erfüllen muss, h
         content: `Interoperabilität bedeutet, dass Verwaltungen und öffentliche Einrichtungen in der EU zusammenarbeiten und Informationen austauschen können. So können digitale Dienstleistungen, wie z. B. das Beantragen von Dokumenten oder der Austausch von Gesundheitsdaten, über Länder- und Organisationsgrenzen hinweg einfach bereitgestellt werden.
 
 Das [European Interoperability Framework (EIF)](https://interoperable-europe.ec.europa.eu/collection/nifo-national-interoperability-framework-observatory/european-interoperability-framework-detail) legt hierfür Standards und Regeln fest, die sicherstellen, dass IT-Systeme in der EU miteinander kompatibel sind. Das macht es für Bürger:innen und Unternehmen leichter, öffentliche Dienste in der gesamten EU zu nutzen.
-        `,
+`,
       },
       {
         headline: "Was bedeutet Interoperabilität in meinem Vorhaben?",
@@ -211,7 +206,7 @@ Das [European Interoperability Framework (EIF)](https://interoperable-europe.ec.
         headline:
           "Welche Rolle spielt der Digitalcheck bei interoperablen Regelungsvorhaben?",
         content: `Der Digitalcheck begleitet Sie bei der Erarbeitung für digitaltaugliche und ab Januar 2025 interoperable Regelungsvorhaben. Dieser Auftrag wurde dem Digitalcheck vom BMI erteilt.
-        <br/><br/>
+<br/><br/>
 Wenn Ihr Regelungsvorhaben Anforderungen an Interoperabilität beinhaltet, unterstützen wir Sie dabei, diese optimal umzusetzen. In diesem Fall wird das Digitalcheck-Team automatisch über das Ergebnis informiert, sobald Sie es per E-Mail absenden. Wir setzen uns dann mit Ihnen in Verbindung, um gemeinsam die weiteren Schritte zu planen und umzusetzen. Sollten Sie vorab Fragen haben, können Sie sich jederzeit direkt an uns wenden - telefonisch unter [0151/40 76 78 39](tel:+4915140767839) oder per E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de).`,
       },
       {
@@ -266,8 +261,8 @@ Der Digitalcheck gilt für alle Regelungsvorhaben - Gesetze, Verordnungen und Ve
       hint: {
         title: "Was ist ein IT-System?",
         text: `IT-Systeme sind technische Lösungen, die aus Hardware (wie Computer, Kartenlesegeräte, Router) oder Software (Programme wie ELSTER und Word, Websiten, Apps) bestehen, um Informationen zu speichern, zu verarbeiten und zu übertragen. 
-      <br />
-      Mit ihnen können Aufgaben ausgeführt werden, wie das Übermitteln der Einkommenssteuererklärung mit ELSTER.`,
+<br />
+Mit ihnen können Aufgaben ausgeführt werden, wie das Übermitteln der Einkommenssteuererklärung mit ELSTER.`,
       },
     },
     {
@@ -343,7 +338,7 @@ Beispiele für Akteur:innen sind:
       hint: {
         title: "Wen betrifft dieser Daten- und Informationsaustausch?",
         text: `Daten und Informationen können zwischen den digitalen öffentlichen Diensten in der EU ausgetauscht werden:
-      <br />
+<br />
 - Zwischen Verwaltungen von EU-Mitgliedstaaten, um gemeinsame Aufgaben oder Dienste zu erfüllen.
 - Zwischen EU-Institutionen, etwa bei der Zusammenarbeit zur Umsetzung von EU-Programmen oder Richtlinien.
 - Zwischen EU-Institutionen und nationalen Verwaltungen, z. B. bei der Übermittlung von Informationen oder der Koordination von Maßnahmen auf europäischer Ebene.`,
@@ -443,7 +438,7 @@ Beispiele für Akteur:innen sind:
     form: {
       formLegend: "Vorprüfung senden",
       instructions: `Wir erstellen für Sie eine E-Mail mit dem Ergebnis der Vorprüfung, die sich in Ihrem E-Mail-Programm öffnet. Diese können Sie anschließend an den Nationalen Normenkontrollrat (NKR), das Digitalcheck-Team und an Ihre eigene E-Mail-Adresse senden. Geben Sie Ihre eigene E-Mail-Adresse an, um sich diese als **Teil der Dokumentation** zu schicken.
-      <br/><br/>
+<br/><br/>
 - Falls Ihr Vorhaben Interoperabilitäts-Anforderungen erfüllt, lassen Sie das Digitalcheck-Team bitte im Kopie-Feld der E-Mail. Wir erhalten somit das Vorprüfungsergebnisses in Kopie und kontaktieren Sie für die nächsten Schritte. Bei Fragen können Sie uns auch direkt unter [0151/40 76 78 39](tel:+4915140767839) erreichen.<br/><br/> 
 - Je früher und tiefer Sie sich mit dem NKR über den Digitalbezug Ihres Regelungsvorhabens austauschen, desto schneller wird die Prüfung abgeschlossen.`,
       emailLabel: "Ihre E-Mail Adresse (optional)",
@@ -718,8 +713,8 @@ export const digitalSuitability = {
     {
       title: "Die 5 Prinzipien im Regelungstext",
       content: `Die 5 Prinzipien für Digitaltaugliche Gesetzgebung dienen Ihnen als Inspiration und gemeinsame Sprache für die Erarbeitung und Begleitung der Regelungsarbeit. Sie geben Anhaltspunkte wie Ihnen Digitalisierung beim Design der Wirklogik Ihrer Regelung helfen kann.
-      <br class="block content-[''] !mb-24" />
-      Hier finden Sie Formulierungen, wie Ihre Kolleginnen und Kollegen die Prinzipien für Digitaltaugliche Gesetzgebung genutzt haben um den Regelungstext digitaltauglich zu formulieren.`,
+<br class="block content-[''] !mb-24" />
+Hier finden Sie Formulierungen, wie Ihre Kolleginnen und Kollegen die Prinzipien für Digitaltaugliche Gesetzgebung genutzt haben um den Regelungstext digitaltauglich zu formulieren.`,
       buttons: [
         {
           text: "Zu den Prinzipien",
@@ -730,8 +725,8 @@ export const digitalSuitability = {
     {
       title: "Visualisierungen",
       content: `Visualisierungen helfen, komplexe Sachverhalte zu strukturieren und dadurch schneller und intuitiver erfassbar zu machen – Zusammenhänge werden sichtbar und Möglichkeiten der Digitalisierung können einfach identifiziert werden.
-      <br class="block content-[''] !mb-24" />
-      Hier finden Sie Visualisierungen, welche Legistinnen und Legisten beim Erarbeiten der Digitaltauglichkeit geholfen haben und veröffentlicht wurden.`,
+<br class="block content-[''] !mb-24" />
+Hier finden Sie Visualisierungen, welche Legistinnen und Legisten beim Erarbeiten der Digitaltauglichkeit geholfen haben und veröffentlicht wurden.`,
       buttons: [
         {
           text: "Zu den Visualisierungen",
@@ -1073,7 +1068,7 @@ Besonders erkenntnisreich sind die fünf Prinzipien, wenn Sie diese auf eine Ski
 ### Als Startpunkt für ihren Regelungstext
 
 Nutzen Sie die gesammelten Beispiele als Startpunkt für Ihre Formulierungen. Bauen Sie auf Formulierungen auf, oder lassen Sie sich durch die Wirklogiken Ihrer Kolleginnen und Kollegen inspirieren. Sie finden gute Formulierungen, Einordnungen und deren Kontext im Regelungstext auf:
-      `,
+`,
     },
     {
       label: "Prinzip 1",
@@ -1280,26 +1275,15 @@ import headerContent from "~/resources/content/header.toml";
 import interviewBannerContent from "~/resources/content/interviewBanner.toml";
 import metaContent from "~/resources/content/meta.toml";
 import landingContent from "~/resources/content/startseite.toml";
-export const interoperability = interoperabilityContent;
-export const visualisations = visualisationsContent;
-export const accessibility = accessibilityContent;
-export const privacy = privacyContent;
-export const imprint = imprintContent;
-export const support = supportContent;
-export const global = globalContent;
-export const header = headerContent;
-export const siteMeta = metaContent;
-export const landing = landingContent;
-export const interviewBanner = interviewBannerContent;
-export const regulations = regulationsContent;
-
-// import fs from "fs";
-// import yaml from "js-yaml";
-//
-// const fileName = "interviewBanner";
-// fs.writeFileSync(
-//   `app/resources/content/${fileName}.yml`,
-//   yaml.dump(interviewBanner),
-//   "utf8",
-// );
-// fs.writeFileSync(`app/resources/content/${fileName}.toml`, "", "utf8");
+export const interoperability: Interoperabel = interoperabilityContent;
+export const visualisations: Visualisierungen = visualisationsContent;
+export const accessibility: Barrierefreiheit = accessibilityContent;
+export const privacy: Datenschutz = privacyContent;
+export const imprint: Impressum = imprintContent;
+export const support: Support = supportContent;
+export const global: Global = globalContent;
+export const header: Header = headerContent;
+export const siteMeta: Meta = metaContent;
+export const landing: Startseite = landingContent;
+export const interviewBanner: InterviewBanner = interviewBannerContent;
+export const regulations: Beispiele = regulationsContent;
