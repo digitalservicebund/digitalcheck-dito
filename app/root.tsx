@@ -186,7 +186,7 @@ export function ScrollAndFocus() {
     <div
       ref={mainRef}
       tabIndex={-1}
-      className="absolute left-0 top-0 outline-none"
+      className="absolute top-0 left-0 outline-hidden"
     />
   );
 }
@@ -369,7 +369,7 @@ Vielen Dank für Ihr Verständnis.`;
       <main id="error" className="grow">
         <div className="border-t-2 border-t-gray-400">
           <Container>
-            <div className="mb-32 ds-stack-8">
+            <div className="ds-stack-8 mb-32">
               <span className="ds-label-01-bold">{errorStatus}</span>
               <Heading text={errorTitle} className="ds-heading-02-reg" />
               <RichText markdown={errorMessage} className="ds-subhead" />

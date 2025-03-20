@@ -55,7 +55,7 @@ const Alert = ({
   return (
     <div
       className={twJoin(
-        "ds-stack-8 max-w-prose scroll-my-40 p-16 border-l-2 shadow-md",
+        "ds-stack-8 max-w-prose scroll-my-40 border-l-2 p-16 shadow-md",
         backgroundColor,
         borderColor,
       )}

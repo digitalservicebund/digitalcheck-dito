@@ -1,10 +1,31 @@
-@import "@digitalservice4germany/angie/fonts.css";
+@import "@digitalservice4germany/angie/fonts.css" layer(base);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
+@config "@digitalservice4germany/style-dictionary/tailwind";
+@plugin "@digitalservice4germany/angie";
+
+@theme {
+  --font-sans: BundesSansWeb;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
 @layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
   html {
     /* Keep 16px, don't change! (e.g. angie library depends on it) */
     font-size: 16px;
@@ -33,7 +54,7 @@
 
   ul:not(.list-unstyled),
   ol:not(.list-unstyled) {
-    @apply pl-24 space-y-8;
+    @apply space-y-8 pl-24;
   }
 
   ul:not(.list-unstyled) {
@@ -64,7 +85,7 @@
   }
 
   *:focus-visible {
-    @apply outline outline-2 no-underline outline-offset-1 text-blue-800 outline-blue-800;
+    @apply text-blue-800 no-underline outline outline-2 outline-offset-1 outline-blue-800;
   }
 }
 
@@ -72,9 +93,6 @@
   /*************
    * CONTAINER *
    *************/
-
-  /* Tailwind's container core plugin is disabled,
-   * because its breakpoint-based nature does not fit our needs */
   .container {
     @apply mx-auto;
     max-width: 59rem;
@@ -101,21 +119,18 @@
    *********/
 
   .text-link {
-    @apply text-blue-800 underline underline-offset-4 decoration-1 visited:text-[#4c2c92] active:text-black;
-  }
+    @apply text-blue-800 underline decoration-1 underline-offset-4 visited:text-[#4c2c92] active:text-black;
 
-  .text-link:focus-visible {
-    @apply !no-underline !text-blue-800;
-  }
+    &:focus-visible {
+      @apply text-blue-800! no-underline!;
+    }
 
-  .text-white .text-link {
-    @apply text-gray-100 visited:text-gray-300;
-  }
-
-  /* Only apply hover effect on devices that support it, see https://stackoverflow.com/a/28058919 */
-  @media (hover: hover) {
-    .text-link:hover {
+    &:hover {
       @apply decoration-[3px];
+    }
+
+    .text-white & {
+      @apply text-gray-100 visited:text-gray-300;
     }
   }
 
@@ -123,19 +138,17 @@
    * DETAILS *
    ***********/
 
-  .details .summary-content {
-    @apply bg-[position:0_8px];
-    background-image: url("data:image/svg+xml,%3Csvg width='16' height='10' viewBox='0 0 16 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 0L16 0L8 10L0 0Z' fill='%23005576'/%3E%3C/svg%3E%0A");
-  }
+  .summary-content {
+    .details & {
+      @apply bg-[position:0_8px];
+      background-image: url("data:image/svg+xml,%3Csvg width='16' height='10' viewBox='0 0 16 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 0L16 0L8 10L0 0Z' fill='%23005576'/%3E%3C/svg%3E%0A");
+    }
 
-  .details[open] .summary-content {
-    background-image: url("data:image/svg+xml,%3Csvg width='16' height='10' viewBox='0 0 16 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 10L16 10L8 0L0 10Z' fill='%23005576'/%3E%3C/svg%3E%0A");
-  }
-
-  /* Only apply hover effect on devices that support it, see https://stackoverflow.com/a/28058919 */
-  @media (hover: hover) {
-    .summary-content:hover {
-      @apply !underline underline-offset-2 decoration-2;
+    .details[open] & {
+      background-image: url("data:image/svg+xml,%3Csvg width='16' height='10' viewBox='0 0 16 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 10L16 10L8 0L0 10Z' fill='%23005576'/%3E%3C/svg%3E%0A");
+    }
+    &:hover {
+      @apply underline! decoration-2 underline-offset-2;
     }
   }
 
@@ -149,17 +162,15 @@
   }
 }
 
-@layer utilities {
-  .increase-tap-area {
-    @apply relative inline-block;
-  }
+@utility increase-tap-area {
+  @apply relative inline-block;
 
-  .increase-tap-area::before {
-    @apply absolute -top-12 -left-12 -right-12 -bottom-12 content-[''];
+  &::before {
+    @apply absolute -top-12 -right-12 -bottom-12 -left-12 content-[''];
   }
+}
 
-  .max-w-prose {
-    /* 70ch @ 18px font size = 630px */
-    max-width: 630px;
-  }
+@utility max-w-prose {
+  /* 70ch @ 18px font size = 630px */
+  max-width: 630px;
 }

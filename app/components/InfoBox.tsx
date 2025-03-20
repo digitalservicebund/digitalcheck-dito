@@ -18,7 +18,7 @@ const InfoBox = ({
   separator = true,
 }: InfoBoxProps) => {
   return (
-    <div className="scroll-my-40 ds-stack-8" id={identifier}>
+    <div className="ds-stack-8 scroll-my-40" id={identifier}>
       {label && <Heading {...label} />}
       {heading && <Heading className="max-sm:ds-heading-02-reg" {...heading} />}
       <ul

@@ -15,7 +15,7 @@ function LabelWithIcon(
   );
   const labelClassNames = twJoin(
     look == "secondary" &&
-      "label-03-bold text-blue-800 bg-blue-300 px-8 py-4 rounded text-sm normal-case",
+      "label-03-bold text-blue-800 bg-blue-300 px-8 py-4 rounded-sm text-sm normal-case",
   );
   const wrapperClassNames = twJoin(
     look == "primary" && "gap-4",
