@@ -3,6 +3,7 @@
 ## Status
 
 - 2024-08-30: Accepted
+- 2025-03-20: Updated (see final section)
 
 ## Context
 
@@ -35,3 +36,7 @@ We will migrate all forms to RVF.
 We will use `@rvf/react` for the tool finder and `@rvf/react-router` for DiTo.
 
 We will use `@rvf/zod` for direct integration with our form validation.
+
+## Update (2025-03-20)
+
+We have now upgraded to the newest version of this library, which supports React Router 7.

@@ -3,6 +3,7 @@
 ## Status
 
 - 2024-05-17: Accepted
+- 2025-03-20: Updated (see final section)
 
 ## Context
 
@@ -39,3 +40,7 @@ We will use the [Remix template](https://github.com/digitalservicebund/remix-app
 We will proactively share knowledge about how to best structure code / data loading to get a common understanding of best practices and pitfalls.
 
 We will make sure to split files once they get too large to keep the project maintainable.
+
+## Update (2025-03-20)
+
+We have now upgraded to the newest version of this library, which is not called Remix, but React Router 7.
