@@ -5,7 +5,7 @@ import routes, {
   type Route,
 } from "./staticRoutes";
 
-// TODO: use remix breadcrumbs: https://remix.run/docs/ja/main/guides/breadcrumbs
+// TODO: use recommended breadcrumbs: https://remix.run/docs/ja/main/guides/breadcrumbs
 const principles = [
   {
     slug: "digitale-kommunikation-sicherstellen",
