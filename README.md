@@ -1,8 +1,7 @@
 # Digitalcheck Digital Touchpoint (DiTo)
 
-[![Pipeline](https://github.com/digitalservicebund/remix-application-template/actions/workflows/pipeline.yml/badge.svg)](https://github.com/digitalservicebund/remix-application-template/actions/workflows/pipeline.yml)
-[![Scan](https://github.com/digitalservicebund/remix-application-template/actions/workflows/scan.yml/badge.svg)](https://github.com/digitalservicebund/remix-application-template/actions/workflows/scan.yml)
-[![Secrets Check](https://github.com/digitalservicebund/remix-application-template/actions/workflows/secrets-check.yml/badge.svg)](https://github.com/digitalservicebund/remix-application-template/actions/workflows/secrets-check.yml)
+[![Pipeline](https://github.com/digitalservicebund/digitalcheck-dito/actions/workflows/pipeline.yml/badge.svg)](https://github.com/digitalservicebund/digitalcheck-dito/actions/workflows/pipeline.yml)
+[![Scan](https://github.com/digitalservicebund/digitalcheck-dito/actions/workflows/scan.yml/badge.svg)](https://github.com/digitalservicebund/digitalcheck-dito/actions/workflows/scan.yml)
 
 A digital touchpoint for the Digitalcheck: Digitaltaugliche Regelung erarbeiten.
 
