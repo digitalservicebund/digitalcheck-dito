@@ -3,7 +3,7 @@ import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
 import typescriptEslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
-import _import from "eslint-plugin-import";
+import importPlugin from "eslint-plugin-import";
 import jsxA11Y from "eslint-plugin-jsx-a11y";
 import react from "eslint-plugin-react";
 import reactRefresh from "eslint-plugin-react-refresh";
@@ -45,7 +45,8 @@ export default defineConfig([
       "jsx-a11y": fixupPluginRules(jsxA11Y),
       "react-refresh": reactRefresh,
       "@typescript-eslint": fixupPluginRules(typescriptEslint),
-      import: fixupPluginRules(_import),
+      // Should we keep this?
+      import: fixupPluginRules(importPlugin),
     },
 
     languageOptions: {
