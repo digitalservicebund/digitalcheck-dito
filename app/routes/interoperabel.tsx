@@ -1,4 +1,3 @@
-import { Apps, Layers } from "@digitalservicebund/icons";
 import ZoomInOutlined from "@digitalservicebund/icons/ZoomInOutlined";
 import { Link, type MetaArgs } from "react-router";
 import Accordion from "~/components/Accordion";
@@ -8,6 +7,7 @@ import Container from "~/components/Container";
 import FeedbackForm from "~/components/FeedbackForm";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
+import Icon from "~/components/Icon";
 import Image from "~/components/Image";
 import InfoBox from "~/components/InfoBox";
 import LinkListBox from "~/components/LinkListBox";
@@ -36,21 +36,11 @@ export default function Interoperability() {
     });
   }
 
-  const resourceGroups = [
-    {
-      icon: Apps,
-      ...interoperability.resources.groups.general,
-    },
-    {
-      icon: Layers,
-      ...interoperability.resources.groups.interoperability,
-    },
-  ];
-
   return (
     <>
       <Background backgroundColor="blue">
         <Container>
+          <Icon name="Apps"></Icon>
           <Header
             heading={{
               tagName: "h1",
@@ -205,10 +195,10 @@ export default function Interoperability() {
               className="mb-8"
             />
             <p>{interoperability.resources.subtitle}</p>
-            {resourceGroups.map((group) => (
+            {interoperability.resources.groups.map((group) => (
               <div key={group.title} className="mt-10 p-24 pl-0">
                 <div className="mb-10 flex items-center">
-                  <group.icon className="mr-10 size-32" />
+                  <Icon name={group.icon} className="mr-10 size-32" />
                   <Heading
                     tagName="h3"
                     look="ds-label-01-bold"

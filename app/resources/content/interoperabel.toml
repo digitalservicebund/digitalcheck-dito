@@ -146,16 +146,18 @@ id = "ressourcen"
 headline = "Ressourcen und Links zu Interoperabilität"
 subtitle = "Hier finden Sie alle relevanten Links und Ressourcen zu den Anforderungen der EU an Interoperabilität, die für Ihre Regelung relevant sind."
 
-[resources.groups.general]
+[[resources.groups]]
 title = "Allgemein"
 subtitle = "Hier finden Sie die wichtigsten Informationen zu der EU-Verordnung."
+icon = "Apps"
 content = """
 - [Verordnung für ein interoperables Europa (EU 2024/903)](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903)
 - [Ressourcen auf dem Interoperable Europe Portal](https://interoperable-europe.ec.europa.eu/): Hier finden sich zusätzliche Informationen, Best Practices und Tools zur Unterstützung bei der Durchführung von Interoperabilitätsbewertungen."""
 
-[resources.groups.interoperability]
+[[resources.groups]]
 title = "Interoperabilitätsbewertungen"
 subtitle = "Hier finden Sie die wichtigsten Informationen zu Interoperabilitätsbewertungen."
+icon = "Layers"
 content = """
 - [Interoperabilitätsrahmen](https://interoperable-europe.ec.europa.eu/collection/nifo-national-interoperability-framework-observatory/solution/european-interoperability-framework-eif-toolbox): Rahmenwerk mit Prinzipien zur Erarbeitung von interoperablen Regelungen
 - [Richtlinien Interoperabilitätsbewertungen](https://interoperable-europe.ec.europa.eu/collection/assessments/assessment-guidelines): Anleitung zur Bewertung der Interoperabilität in Regelungen """

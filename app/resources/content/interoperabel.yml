@@ -333,9 +333,9 @@ resources:
     Hier finden Sie alle relevanten Links und Ressourcen zu den Anforderungen
     der EU an Interoperabilität, die für Ihre Regelung relevant sind.
   groups:
-    general:
-      title: Allgemein
+    - title: Allgemein
       subtitle: Hier finden Sie die wichtigsten Informationen zu der EU-Verordnung.
+      icon: Apps
       content: >-
         - [Verordnung für ein interoperables Europa (EU
         2024/903)](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903)
@@ -344,11 +344,11 @@ resources:
         Portal](https://interoperable-europe.ec.europa.eu/): Hier finden sich
         zusätzliche Informationen, Best Practices und Tools zur Unterstützung
         bei der Durchführung von Interoperabilitätsbewertungen.
-    interoperability:
-      title: Interoperabilitätsbewertungen
+    - title: Interoperabilitätsbewertungen
       subtitle: >-
         Hier finden Sie die wichtigsten Informationen zu
         Interoperabilitätsbewertungen.
+      icon: Layers
       content: >-
         -
         [Interoperabilitätsrahmen](https://interoperable-europe.ec.europa.eu/collection/nifo-national-interoperability-framework-observatory/solution/european-interoperability-framework-eif-toolbox):
