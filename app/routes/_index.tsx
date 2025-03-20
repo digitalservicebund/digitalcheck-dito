@@ -80,7 +80,7 @@ export default function Index() {
       <SupportBanner />
       <Background backgroundColor="darkBlue" className="py-24">
         <Container>
-          <div className="ds-stack-32 scroll-my-40">
+          <div className="ds-stack ds-stack-32 scroll-my-40">
             <Heading tagName="h2" text={landing.principles.title} />
             <ol className="list-unstyled space-y-8">
               {landing.principles.content.map((principle) => (

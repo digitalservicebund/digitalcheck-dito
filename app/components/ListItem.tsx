@@ -52,7 +52,7 @@ const ListItem = ({
       )}
       <div
         className={twJoin(
-          "ds-stack-16 w-full break-words",
+          "ds-stack ds-stack-16 w-full break-words",
           image && "min-[500px]:ml-16",
         )}
       >

@@ -83,7 +83,7 @@ export default function Index() {
           {content.guidance && (
             <RichText
               markdown={content.guidance}
-              className="ds-stack-0 mt-24"
+              className="ds-stack ds-stack-0 mt-24"
             />
           )}
         </Container>
@@ -96,7 +96,7 @@ export default function Index() {
           />
         </Container>
       )}
-      <Container className="ds-stack-32">
+      <Container className="ds-stack ds-stack-32">
         <Box
           heading={{ text: content.content.title, look: "ds-heading-03-reg" }}
           label={{ text: LabelWithIcon(content.content) }}

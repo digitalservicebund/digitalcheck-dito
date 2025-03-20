@@ -18,12 +18,12 @@ const InfoBox = ({
   separator = true,
 }: InfoBoxProps) => {
   return (
-    <div className="ds-stack-8 scroll-my-40" id={identifier}>
+    <div className="ds-stack ds-stack-8 scroll-my-40" id={identifier}>
       {label && <Heading {...label} />}
       {heading && <Heading className="max-sm:ds-heading-02-reg" {...heading} />}
       <ul
         className={twJoin(
-          "list-unstyled info-box",
+          "list-unstyled info-box ds-stack",
           separator ? "ds-stack-32" : "ds-stack-48",
         )}
       >

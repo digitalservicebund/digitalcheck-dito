@@ -116,7 +116,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
         </Container>
       </Background>
       {GuteUmsetzungen.length > 0 && (
-        <Container className="ds-stack-64">
+        <Container className="ds-stack ds-stack-64">
           {GuteUmsetzungen.map(
             (digitalcheck) =>
               digitalcheck.Regelungsvorhaben && (

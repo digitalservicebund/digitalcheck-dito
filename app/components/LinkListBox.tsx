@@ -17,7 +17,7 @@ export default function LinkListBox({
         text={general.tableOfContents.headline}
         className="font-bold"
       />
-      <ol className="list-unstyled ds-stack-8 mt-16">
+      <ol className="list-unstyled ds-stack ds-stack-8 mt-16">
         {links.map((link) => (
           <li key={link.id}>
             <Link

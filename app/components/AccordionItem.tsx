@@ -24,7 +24,7 @@ export default function AccordionItem({
       </summary>
       <div className="p-24">
         {typeof content === "string" ? (
-          <RichText markdown={content} className="ds-stack-28" />
+          <RichText markdown={content} className="ds-stack ds-stack-28" />
         ) : (
           content
         )}

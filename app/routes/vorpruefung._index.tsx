@@ -45,7 +45,7 @@ export default function Index() {
           ></Header>
         </Container>
         <Container className="pt-0">
-          <div className="ds-stack-16 mb-40">
+          <div className="ds-stack ds-stack-16 mb-40">
             {preCheck.start.hints.map((hint) => (
               <DetailsSummary
                 key={hint.title}

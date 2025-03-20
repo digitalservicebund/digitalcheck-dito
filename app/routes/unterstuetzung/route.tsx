@@ -139,7 +139,10 @@ export default function Index() {
           <Heading tagName="h2" text={supportHow.title} />
           {supportHow.supportTypes.length > 0 &&
             supportHow.supportTypes.map((supportType) => (
-              <div key={supportType.title} className="ds-stack-16 pt-32 pb-40">
+              <div
+                key={supportType.title}
+                className="ds-stack ds-stack-16 pt-32 pb-40"
+              >
                 <Box
                   heading={{
                     tagName: "h3",

@@ -196,7 +196,10 @@ export default function Gesetz() {
           </Container>
         )}
       {regelung.Digitalchecks.map((digitalcheck, index) => (
-        <Container key={digitalcheck.documentId} className="ds-stack-64 pb-80">
+        <Container
+          key={digitalcheck.documentId}
+          className="ds-stack ds-stack-64 pb-80"
+        >
           {/* ----- Formulierungen / Prinziperfüllungen ----- */}
           {digitalcheck.Paragraphen.length > 0 && (
             <>
@@ -217,7 +220,7 @@ export default function Gesetz() {
 
           {/* ----- Visualisierungen ----- */}
           {digitalcheck.Visualisierungen.length > 0 && (
-            <div className="ds-stack-32">
+            <div className="ds-stack ds-stack-32">
               <Header
                 heading={{
                   id: `${slugify(regulations.visualisations.title)}-${index}`,
