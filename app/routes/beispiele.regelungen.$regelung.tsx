@@ -255,7 +255,7 @@ export default function Gesetz() {
                   markdown: regulations.nkr.subtitle,
                 }}
               />
-              <div className="my-32 border-l-4 border-gray-300 pl-8">
+              <div className="my-32 border-l-4 border-gray-400 pl-8">
                 <BlocksRenderer content={digitalcheck.NKRStellungnahmeDCText} />
               </div>
               {regelung.NKRStellungnahmeLink && (

@@ -299,7 +299,7 @@ function Paragraph({
           className="font-bold"
         />
         <p className="ds-subhead font-bold">{paragraph.Titel}</p>
-        <div className="ds-stack ds-stack ds-stack-16 border-l-4 border-gray-300 pl-8">
+        <div className="ds-stack ds-stack ds-stack-16 border-l-4 border-gray-400 pl-8">
           {groupedAbsaetze.map((absatzGroup) => (
             <AbsatzContent
               key={"id" in absatzGroup ? absatzGroup.id : absatzGroup[0].number}
