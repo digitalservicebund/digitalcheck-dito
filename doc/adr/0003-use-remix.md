@@ -1,10 +1,8 @@
 # 3. Use Remix as the meta framework for React
 
-Date: 2024-05-17
-
 ## Status
 
-Accepted
+- 2024-05-17: Accepted
 
 ## Context
 

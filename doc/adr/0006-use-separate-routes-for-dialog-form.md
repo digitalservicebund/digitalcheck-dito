@@ -1,10 +1,8 @@
 # 6. Use separate routes for each page of the dialog form
 
-Date: 2024-05-22
-
 ## Status
 
-Accepted
+- 2024-05-22: Accepted
 
 ## Context
 

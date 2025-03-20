@@ -1,10 +1,8 @@
 # 8. Store content in a global file
 
-Date: 2024-05-23
-
 ## Status
 
-Accepted
+- 2024-05-23: Accepted
 
 ## Context
 

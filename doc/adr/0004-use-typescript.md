@@ -1,10 +1,8 @@
 # 4. Use TypeScript
 
-Date: 2024-05-18
-
 ## Status
 
-Accepted
+- 2024-05-18: Accepted
 
 ## Context
 

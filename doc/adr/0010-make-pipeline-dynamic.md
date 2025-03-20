@@ -1,10 +1,9 @@
 # 10. Make pipeline run dynamically for applications based on changes
 
-Date: 2024-05-24
-
 ## Status
 
-Superceded by [0018](0018-switch-back-to-polyrepo.md)
+- 2024-05-24: Accepted
+- 2025-03-03: Superceded by [0018](0018-switch-back-to-polyrepo.md)
 
 ## Context
 
