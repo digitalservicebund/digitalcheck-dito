@@ -7,6 +7,7 @@ import type {
   PreCheckAnswers,
   TQuestion,
 } from "~/routes/vorpruefung.$questionId/route";
+import customTwMerge from "~/utils/tailwindMerge";
 
 type PreCheckNavigationProps = Readonly<{
   question?: TQuestion;
@@ -65,7 +66,7 @@ function NavItem({
   );
 
   // Transparent left borders to avoid layout shifts
-  const itemClassNames = twJoin(
+  const itemClassNames = customTwMerge(
     "bg-blue-100 w-full ds-label-02-reg p-16 flex gap-x-4 items-center hover:underline hover:bg-blue-300 active:bg-white focus-visible:shadow-[inset_0px_0px_0px_4px] focus:shadow-blue-800",
     isCurrent && "ds-label-02-bold bg-blue-400",
   );
