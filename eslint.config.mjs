@@ -1,52 +1,49 @@
-import { fixupConfigRules, fixupPluginRules } from "@eslint/compat";
-import { FlatCompat } from "@eslint/eslintrc";
-import js from "@eslint/js";
-import typescriptEslint from "@typescript-eslint/eslint-plugin";
+import eslint from "@eslint/js";
 import tsParser from "@typescript-eslint/parser";
 import importPlugin from "eslint-plugin-import";
-import jsxA11Y from "eslint-plugin-jsx-a11y";
-import react from "eslint-plugin-react";
+import jsxA11y from "eslint-plugin-jsx-a11y";
+import playwright from "eslint-plugin-playwright";
+import prettierPlugin from "eslint-plugin-prettier/recommended";
+import reactPlugin from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
+import tailwind from "eslint-plugin-tailwindcss";
 import testingLibrary from "eslint-plugin-testing-library";
-import { defineConfig } from "eslint/config";
 import globals from "globals";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import tseslint from "typescript-eslint";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-});
 
-export default defineConfig([
+export default tseslint.config(
   {
-    name: "basic config",
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+      ecmaVersion: "latest",
+      sourceType: "module",
+    },
+  },
+  {
     ignores: ["**/*", "!app/**/*.{ts,tsx}", "!tests/**/*.{ts,tsx}"],
-    extends: fixupConfigRules(
-      compat.extends(
-        "plugin:react/recommended",
-        "plugin:react/jsx-runtime",
-        "plugin:react-hooks/recommended",
-        "plugin:jsx-a11y/recommended",
-        "plugin:@typescript-eslint/recommended-type-checked",
-        "plugin:import/recommended",
-        "plugin:import/typescript",
-        "plugin:tailwindcss/recommended",
-        "plugin:prettier/recommended", // needs to be the last item in the config
-      ),
-    ),
-
+    extends: [
+      eslint.configs.recommended,
+      tseslint.configs.recommended,
+      reactPlugin.configs.flat.recommended,
+      reactPlugin.configs.flat["jsx-runtime"],
+      reactHooks.configs["recommended-latest"],
+      jsxA11y.flatConfigs.recommended,
+      importPlugin.flatConfigs.recommended,
+      importPlugin.flatConfigs.typescript,
+      tailwind.configs["flat/recommended"],
+      prettierPlugin,
+    ],
     plugins: {
       "testing-library": testingLibrary,
-      react: fixupPluginRules(react),
-      "jsx-a11y": fixupPluginRules(jsxA11Y),
       "react-refresh": reactRefresh,
-      "@typescript-eslint": fixupPluginRules(typescriptEslint),
-      // Should we keep this?
-      import: fixupPluginRules(importPlugin),
     },
 
     languageOptions: {
@@ -155,26 +152,15 @@ export default defineConfig([
   // Tests
   {
     files: ["**/a11y/*.test.{js,ts,jsx,tsx}", "**/e2e/*.test.{js,ts,jsx,tsx}"],
-    extends: compat.extends("plugin:playwright/recommended"),
+    extends: [playwright.configs["flat/recommended"]],
   },
   // Config files
   {
-    files: ["*.js", "*.cjs", "*.mjs"],
-    ignores: ["app/**/*", "tests/**/*"],
-
-    extends: compat.extends("eslint:recommended"),
-
-    languageOptions: {
-      globals: {
-        ...globals.node,
-      },
-      ecmaVersion: "latest",
-      sourceType: "module",
-    },
-
+    extends: [eslint.configs.recommended],
+    ignores: ["**/*", "!*.js", "!*.cjs", "!*.mjs"],
     rules: {
       "no-unused-vars": "warn",
-      "no-undef": "error",
+      "no-undef": "off",
     },
   },
-]);
+);
