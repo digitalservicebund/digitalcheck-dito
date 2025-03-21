@@ -65,7 +65,7 @@
   p,
   ul:not(.list-unstyled),
   ol:not(.list-unstyled) {
-    @apply max-w-prose;
+    max-width: 630px;
   }
 
   *:focus-visible {
