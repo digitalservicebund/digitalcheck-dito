@@ -17,7 +17,7 @@ export default function InlineInfoList({
   return (
     <div
       className={twMerge(
-        "flex max-md:flex-col gap-8 md:gap-16 bg-blue-200 py-16",
+        "flex gap-8 bg-blue-200 py-16 max-md:flex-col md:gap-16",
         className,
       )}
     >

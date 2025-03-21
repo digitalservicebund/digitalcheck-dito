@@ -186,7 +186,7 @@ export default function Index() {
             }}
             ariaLabel={`Frage ${questionIdx + 1} von ${questions.length}`}
           />
-          <Container className="pb-40 pt-0">
+          <Container className="pt-0 pb-40">
             <ButtonContainer
               buttons={[
                 {

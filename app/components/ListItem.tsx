@@ -52,12 +52,17 @@ const ListItem = ({
       )}
       <div
         className={twJoin(
-          "ds-stack-16 w-full break-words",
+          "ds-stack ds-stack-16 w-full break-words",
           image && "min-[500px]:ml-16",
         )}
       >
         {spacer && (
-          <div className={twJoin("!-mb-12", numeric && "border-t-2 pb-16")}>
+          <div
+            className={twJoin(
+              "-mb-12!",
+              numeric && "border-t-2 border-gray-400 pb-16",
+            )}
+          >
             {spacer !== true && (
               <div
                 className={twJoin(

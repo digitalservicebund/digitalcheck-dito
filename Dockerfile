@@ -23,7 +23,7 @@ WORKDIR /src
 COPY --from=build-dependencies /src/node_modules node_modules/
 
 # Copy root level files
-COPY package.json package-lock.json tailwind.config.js tsconfig.json postcss.config.js vite.config.ts ./
+COPY package.json package-lock.json tsconfig.json vite.config.ts ./
 COPY app/ app/
 COPY public/ public/
 

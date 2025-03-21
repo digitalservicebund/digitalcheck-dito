@@ -116,7 +116,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
         </Container>
       </Background>
       {GuteUmsetzungen.length > 0 && (
-        <Container className="ds-stack-64">
+        <Container className="ds-stack ds-stack-64">
           {GuteUmsetzungen.map(
             (digitalcheck) =>
               digitalcheck.Regelungsvorhaben && (
@@ -136,7 +136,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
                       look="ds-heading-03-bold"
                       className="text-link inline max-w-full"
                     />
-                    <OpenInNewIcon className="mb-6 ml-4 !inline scale-90 fill-blue-800" />
+                    <OpenInNewIcon className="mb-6 ml-4 inline! scale-90 fill-blue-800" />
                   </Link>
                   <InlineInfoList
                     className="my-32 pl-16"

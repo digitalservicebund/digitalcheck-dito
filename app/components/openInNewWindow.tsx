@@ -5,7 +5,7 @@ export const openInNewIconElement = (
   <OpenInNewIcon
     height="1.2em"
     width="1.2em"
-    className="mb-4 ml-[0.2em] !inline-block fill-current"
+    className="mb-4 ml-[0.2em] inline-block! fill-current"
   />
 );
 

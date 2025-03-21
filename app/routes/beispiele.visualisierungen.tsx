@@ -74,11 +74,11 @@ export default function BeispieleVisualisierungen() {
           />
         </Container>
       </Background>
-      <Container className="ds-stack-48">
+      <Container className="ds-stack ds-stack-48">
         {Object.entries(groupedVisualisations).map(
           ([regelungTitle, visualisations]) => (
             <div key={regelungTitle}>
-              <div className="ds-stack-32">
+              <div className="ds-stack ds-stack-32">
                 <Link
                   to={`${ROUTE_LAWS.url}/${visualisations[0].Digitalcheck?.Regelungsvorhaben?.URLBezeichnung}`}
                   prefetch="viewport"

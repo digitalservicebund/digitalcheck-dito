@@ -45,7 +45,7 @@ const Textarea = ({
         name={name}
         id={name}
         className={twJoin(
-          "ds-textarea forced-color-adjust-none placeholder-gray-600",
+          "ds-textarea placeholder-gray-600 forced-color-adjust-none",
           error && "has-error",
         )}
         aria-invalid={error !== undefined}

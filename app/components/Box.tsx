@@ -27,10 +27,10 @@ const Box = ({
   const labelId = `${headingId}-label`;
   return (
     <div
-      className={twMerge("box ds-stack-16 scroll-my-40", className)}
+      className={twMerge("box ds-stack ds-stack-16 scroll-my-40", className)}
       id={identifier}
     >
-      <div className="ds-stack-8">
+      <div className="ds-stack ds-stack-8">
         {label && (
           <Heading
             tagName="div"

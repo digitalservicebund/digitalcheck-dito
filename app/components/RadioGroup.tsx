@@ -32,7 +32,7 @@ const RadioGroup = ({
       aria-errormessage={errorId}
       aria-invalid={hasError}
     >
-      <ul className="m-0 border-0 p-0 ds-stack-16">
+      <ul className="ds-stack ds-stack-16 m-0 border-0 p-0">
         {options.map(({ value, text, subText }) => {
           const id = `${name}-${value}`;
           const checked = selectedValue === value;

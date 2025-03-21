@@ -38,7 +38,7 @@ export default function Question({
 }: PropsWithChildren<QuestionProps>) {
   const cssClasses = twMerge(
     "container pt-0 pb-80",
-    `ds-stack-${stack ?? 16}`,
+    `ds-stack ds-stack-${stack ?? 16}`,
     backgroundColor !== "default" && "text-black",
     className,
   );
@@ -46,7 +46,7 @@ export default function Question({
   return (
     <fieldset className={cssClasses}>
       <span className="sr-only">{ariaLabel}</span>
-      <legend className="ds-stack-16">
+      <legend className="ds-stack ds-stack-16">
         {box && <Box {...box} />}
         {heading && <Heading {...heading} />}
         {content && (

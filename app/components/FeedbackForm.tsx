@@ -82,7 +82,7 @@ function FeedbackQuestion({
   return (
     <fieldset
       className={twJoin(
-        "flex flex-col lg:flex-row gap-20 lg:gap-24 pt-24 pb-20 border-blue-300 border-b-2 last:border-b-0",
+        "flex flex-col gap-20 border-b-2 border-blue-300 pt-24 pb-20 last:border-b-0 lg:flex-row lg:gap-24",
       )}
     >
       <div className="lg:w-1/2">
@@ -156,7 +156,7 @@ export default function FeedbackForm(props: Readonly<FeedbackFormProps>) {
   if (submitted) {
     return (
       <div ref={thankYouMessageRef} tabIndex={-1} aria-live="polite">
-        <Background backgroundColor="blue" className="pb-48 pt-40">
+        <Background backgroundColor="blue" className="pt-40 pb-48">
           <Container backgroundColor="white" overhangingBackground>
             <h2>{props.success.heading}</h2>
             <br />
@@ -168,7 +168,7 @@ export default function FeedbackForm(props: Readonly<FeedbackFormProps>) {
   }
 
   return (
-    <Background backgroundColor="blue" className="pb-48 pt-40">
+    <Background backgroundColor="blue" className="pt-40 pb-48">
       <Container backgroundColor="white" overhangingBackground>
         <h2>{props.heading}</h2>
         <form onSubmit={handleSubmit} className="mb-48">

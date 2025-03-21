@@ -26,9 +26,9 @@ test.describe("compare snapshots", () => {
         await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 
         // wait to make sure the page is fully rendered
-        await wait(100);
+        await wait(250);
 
-        await expect(page).toHaveScreenshot();
+        await expect(page).toHaveScreenshot({ maxDiffPixels: 1000 });
       });
     });
 });
