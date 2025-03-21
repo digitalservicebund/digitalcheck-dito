@@ -1,5 +1,5 @@
 import { promises as fs } from "fs";
-import mime from "mime-types";
+import { contentType } from "mime-types";
 import path from "path";
 import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/download.$fileName";
@@ -15,7 +15,7 @@ export async function loader({ params, request }: Route.LoaderArgs) {
   try {
     const filePath = path.join("public", "documents", fileName);
     const fileData = await fs.readFile(filePath);
-    const mimeType = mime.contentType(fileName) || "";
+    const mimeType = contentType(fileName) || "";
 
     void trackCustomEvent(request, { name: `Download`, props: { fileName } });
     return new Response(fileData, {

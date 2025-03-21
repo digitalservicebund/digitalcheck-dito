@@ -14,6 +14,8 @@ type Props = {
   onClickCallback?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 };
 
+type ReactElementWithClassname = ReactElement<{ className: string }>;
+
 export interface ButtonProps
   extends React.ComponentPropsWithoutRef<"button">,
     Props {}
@@ -21,7 +23,7 @@ export interface ButtonLinkProps
   extends React.ComponentPropsWithoutRef<"a">,
     Props {}
 
-function formatIcon(icon: ReactElement | undefined) {
+function formatIcon(icon: ReactElementWithClassname) {
   if (!icon) return undefined;
   const className = `ds-button-icon ${icon.props.className ?? ""}`;
   return cloneElement(icon, { className });
