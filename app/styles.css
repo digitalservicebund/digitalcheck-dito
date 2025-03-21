@@ -65,11 +65,16 @@
   p,
   ul:not(.list-unstyled),
   ol:not(.list-unstyled) {
-    max-width: 630px;
+    @apply max-w-a11y;
   }
 
   *:focus-visible {
     @apply text-blue-800 no-underline outline outline-2 outline-offset-1 outline-blue-800;
+  }
+
+  .ds-textarea.has-error {
+    box-shadow: inset 0 0 0 2px #b0243f;
+    background-color: #f9e5ec;
   }
 }
 
@@ -81,48 +86,45 @@
   padding-right: clamp(1rem, 5vw, 3rem);
 }
 
+@utility container-overhanging-background {
+  margin-left: clamp(1rem, 5vw, 3rem);
+  margin-right: clamp(1rem, 5vw, 3rem);
+}
+
+@utility ds-button {
+  @apply max-sm:ds-button-full-width sm:ds-button-large;
+}
+
+@utility text-link {
+  @apply text-blue-800 underline decoration-1 underline-offset-4 visited:text-[#4c2c92] active:text-black;
+
+  &:focus-visible {
+    @apply text-blue-800! no-underline!;
+  }
+
+  &:hover {
+    @apply decoration-[3px];
+  }
+
+  .text-white & {
+    @apply text-gray-100 visited:text-gray-300;
+  }
+}
+
+@utility increase-tap-area {
+  @apply relative inline-block;
+
+  &::before {
+    @apply absolute -top-12 -right-12 -bottom-12 -left-12 content-[''];
+  }
+}
+
+@utility max-w-a11y {
+  /* 70ch @ 18px font size = 630px */
+  max-width: 630px;
+}
+
 @layer components {
-  /*************
-   * CONTAINER *
-   *************/
-
-  .container-overhanging-background {
-    margin-left: clamp(1rem, 5vw, 3rem);
-    margin-right: clamp(1rem, 5vw, 3rem);
-  }
-
-  /***********
-   * BUTTONS *
-   ***********/
-
-  .ds-button {
-    @apply max-sm:ds-button-full-width sm:ds-button-large;
-  }
-
-  /*********
-   * LINKS *
-   *********/
-
-  .text-link {
-    @apply text-blue-800 underline decoration-1 underline-offset-4 visited:text-[#4c2c92] active:text-black;
-
-    &:focus-visible {
-      @apply text-blue-800! no-underline!;
-    }
-
-    &:hover {
-      @apply decoration-[3px];
-    }
-
-    .text-white & {
-      @apply text-gray-100 visited:text-gray-300;
-    }
-  }
-
-  /***********
-   * DETAILS *
-   ***********/
-
   .summary-content {
     .details & {
       @apply bg-[position:0_8px];
@@ -136,26 +138,4 @@
       @apply underline! decoration-2 underline-offset-2;
     }
   }
-
-  /********
-   * MISC *
-   ********/
-
-  .ds-textarea.has-error {
-    box-shadow: inset 0 0 0 2px #b0243f;
-    background-color: #f9e5ec;
-  }
-}
-
-@utility increase-tap-area {
-  @apply relative inline-block;
-
-  &::before {
-    @apply absolute -top-12 -right-12 -bottom-12 -left-12 content-[''];
-  }
-}
-
-@utility max-w-prose {
-  /* 70ch @ 18px font size = 630px */
-  max-width: 630px;
 }
