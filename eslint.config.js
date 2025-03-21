@@ -136,6 +136,14 @@ export default tseslint.config(
       "**/e2e/*.{spec,test}.{js,ts,jsx,tsx}",
     ],
     extends: [playwright.configs["flat/recommended"]],
+    rules: {
+      "playwright/no-skipped-test": [
+        "error",
+        {
+          allowConditional: true,
+        },
+      ],
+    },
   },
   // Config files in root folder
   {
