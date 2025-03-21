@@ -48,9 +48,9 @@ export default function Sitemap(): ReactNode {
 
   const renderRoutes = (routes: Route[]): ReactNode => (
     // [&_li>ul] styles the nested ul elements
-    <ul className="list-unstyled space-y-8 [&_li>ul]:ml-8 [&_li>ul]:border-l [&_li>ul]:border-gray-400 [&_li>ul]:pl-8">
+    <ul className="list-unstyled [&_li>ul]:ml-8 [&_li>ul]:border-l [&_li>ul]:border-gray-400 [&_li>ul]:pl-8">
       {routes.map((route) => (
-        <li key={route.url} className="mb-4 space-y-8">
+        <li key={route.url} className="my-8 mb-4">
           <a href={route.url} className="text-link hover:underline">
             {route.title}
           </a>
