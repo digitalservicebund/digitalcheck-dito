@@ -1,3 +1,4 @@
+import { includeIgnoreFile } from "@eslint/compat";
 import eslint from "@eslint/js";
 import tsParser from "@typescript-eslint/parser";
 import importPlugin from "eslint-plugin-import";
@@ -18,17 +19,28 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default tseslint.config(
+  // Global ignores
+  includeIgnoreFile(fileURLToPath(new URL(".gitignore", import.meta.url))),
+  // Global settings
   {
     languageOptions: {
-      globals: {
-        ...globals.node,
-      },
+      parser: tsParser,
       ecmaVersion: "latest",
       sourceType: "module",
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+      parserOptions: {
+        ecmaFeatures: { jsx: true },
+        tsconfigRootDir: __dirname,
+        project: [path.join(__dirname, "tsconfig.json")],
+      },
     },
   },
+  // React & Typescript
   {
-    ignores: ["**/*", "!app/**/*.{ts,tsx}", "!tests/**/*.{ts,tsx}"],
+    files: ["app/**/*.{ts,tsx}", "tests/**/*.{ts,tsx}"],
     extends: [
       eslint.configs.recommended,
       tseslint.configs.recommended,
@@ -46,47 +58,17 @@ export default tseslint.config(
       "react-refresh": reactRefresh,
     },
 
-    languageOptions: {
-      parser: tsParser,
-      globals: {
-        ...globals.browser,
-        ...globals.node,
-      },
-
-      ecmaVersion: "latest",
-      sourceType: "module",
-
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-        tsconfigRootDir: __dirname,
-        project: ["**/tsconfig.json"],
-      },
-    },
-
     settings: {
-      react: {
-        version: "detect",
-      },
-
+      react: { version: "detect" },
       formComponents: ["Form"],
       linkComponents: [
-        {
-          name: "Link",
-          linkAttribute: "to",
-        },
-        {
-          name: "NavLink",
-          linkAttribute: "to",
-        },
+        { name: "Link", linkAttribute: "to" },
+        { name: "NavLink", linkAttribute: "to" },
       ],
 
       "import/internal-regex": "^~/",
       "import/resolver": {
-        node: {
-          extensions: [".ts", ".tsx"],
-        },
+        node: { extensions: [".ts", ".tsx"] },
         typescript: {
           alwaysTryTypes: true,
           tsconfigRootDir: __dirname,
@@ -126,14 +108,12 @@ export default tseslint.config(
 
       "@typescript-eslint/no-misused-promises": [
         "error",
-        {
-          checksVoidReturn: {
-            attributes: false,
-          },
-        },
+        { checksVoidReturn: { attributes: false } },
       ],
-
-      // Other rules
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      ],
       "no-restricted-imports": [
         "error",
         {
@@ -149,15 +129,15 @@ export default tseslint.config(
       ],
     },
   },
-  // Tests
+  // Additional Rules for test files
   {
-    files: ["**/a11y/*.test.{js,ts,jsx,tsx}", "**/e2e/*.test.{js,ts,jsx,tsx}"],
+    files: ["**/a11y/*.spec.{js,ts,jsx,tsx}", "**/e2e/*.spec.{js,ts,jsx,tsx}"],
     extends: [playwright.configs["flat/recommended"]],
   },
-  // Config files
+  // Config files in root folder
   {
     extends: [eslint.configs.recommended],
-    ignores: ["**/*", "!*.js", "!*.cjs", "!*.mjs"],
+    ignores: ["**/*", "!*.js", "!*.cjs", "!*.mjs", "!*.ts"],
     rules: {
       "no-unused-vars": "warn",
       "no-undef": "off",
