@@ -51,11 +51,11 @@ export default tseslint.config(
       importPlugin.flatConfigs.recommended,
       importPlugin.flatConfigs.typescript,
       tailwind.configs["flat/recommended"],
-      prettierPlugin,
+      prettierPlugin, // should be the last one in the list
     ],
     plugins: {
-      "testing-library": testingLibrary,
-      "react-refresh": reactRefresh,
+      "testing-library": testingLibrary, // TODO: needed?
+      "react-refresh": reactRefresh, // TODO: use reactRefresh.configs.recommended,
     },
 
     settings: {
