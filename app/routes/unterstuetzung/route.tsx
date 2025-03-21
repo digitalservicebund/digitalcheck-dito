@@ -84,7 +84,7 @@ export default function Index() {
           <div className="py-32 sm:py-48 lg:w-1/2 lg:self-center">
             <RichText
               markdown={socialProof.text}
-              className="w-[370px] text-2xl/10 sm:text-3xl sm:max-lg:w-[480px]"
+              className="w-[370px] text-2xl leading-40 sm:text-3xl sm:max-lg:w-[480px]"
             />
           </div>
           <div className="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">
