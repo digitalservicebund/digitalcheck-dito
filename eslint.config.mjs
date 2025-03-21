@@ -131,7 +131,10 @@ export default tseslint.config(
   },
   // Additional Rules for test files
   {
-    files: ["**/a11y/*.spec.{js,ts,jsx,tsx}", "**/e2e/*.spec.{js,ts,jsx,tsx}"],
+    files: [
+      "**/a11y/*.{spec,test}.{js,ts,jsx,tsx}",
+      "**/e2e/*.{spec,test}.{js,ts,jsx,tsx}",
+    ],
     extends: [playwright.configs["flat/recommended"]],
   },
   // Config files in root folder
