@@ -1,7 +1,8 @@
-import { theme } from "@digitalservice4germany/style-dictionary/tailwind";
+import tailwindPreset from "@digitalservice4germany/style-dictionary/tailwind";
 import { extendTailwindMerge } from "tailwind-merge";
 
-const spacing = Object.keys(theme.spacing);
+// eslint-disable-next-line import/no-named-as-default-member
+const spacing = Object.keys(tailwindPreset.theme.spacing);
 const typographyVariants = [
   "01-reg",
   "01-bold",
