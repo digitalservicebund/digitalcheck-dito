@@ -3,6 +3,7 @@ import DrawOutlined from "@digitalservicebund/icons/DrawOutlined";
 import LightbulbOutlined from "@digitalservicebund/icons/LightbulbOutlined";
 import StickyNote2Outlined from "@digitalservicebund/icons/StickyNote2Outlined";
 import { ROUTE_METHODS_TASKS_PROCESSES } from "~/resources/staticRoutes";
+import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsResponsibleActors = {
   title: "2.1. Zuständige Akteurinnen und Akteure auflisten",
@@ -17,14 +18,16 @@ export const methodsResponsibleActors = {
     label: "Anleitung",
     icon: DrawOutlined,
     title: "Finden Sie konstruktive Gesprächspartnerinnen und -&shy;partner",
-    text: `Beginnen Sie mit der Kontaktaufnahme oben in der Hierarchie, lassen Sie ggf. über Ihre Referats- und (Unter-)abteilungsleitung den Kontakt herstellen. Fragen Sie nach den Fachexpertinnen und -experten auf Arbeitsebene, hier steckt in der Regel das tiefste Praxiswissen.
-<br class="block content-[''] !mb-24" />
-- **Kommunen:** Bitten Sie Ansprechpersonen auf Landesebene um Kontakte und nutzen Sie  das gesammelte Wissen in den Kommunalen Spitzenverbänden. 
-- **Behörden und Träger:** Nutzen Sie die offiziellen Wege der Häuser.
-- **Unternehmen, Sozialpartner, weitere Organisationen:** Fragen Sie in Spitzenverbänden nach Ansprechpersonen für Ihren konkreten Anwendungsfall. 
-<br class="block content-[''] !mb-24" />
-
-Wenn Sie keine persönlichen Kontakte nutzen können, greifen sie auf Organigramme oder interne Datenbanken zu, z. B. das X500-Verzeichnis.`,
+    text: dedent`
+      Beginnen Sie mit der Kontaktaufnahme oben in der Hierarchie, lassen Sie ggf. über Ihre Referats- und (Unter-)abteilungsleitung den Kontakt herstellen. Fragen Sie nach den Fachexpertinnen und -experten auf Arbeitsebene, hier steckt in der Regel das tiefste Praxiswissen.
+      <br class="block content-[''] !mb-24" />
+      - **Kommunen:** Bitten Sie Ansprechpersonen auf Landesebene um Kontakte und nutzen Sie  das gesammelte Wissen in den Kommunalen Spitzenverbänden. 
+      - **Behörden und Träger:** Nutzen Sie die offiziellen Wege der Häuser.
+      - **Unternehmen, Sozialpartner, weitere Organisationen:** Fragen Sie in Spitzenverbänden nach Ansprechpersonen für Ihren konkreten Anwendungsfall. 
+      <br class="block content-[''] !mb-24" />
+      
+      Wenn Sie keine persönlichen Kontakte nutzen können, greifen sie auf Organigramme oder interne Datenbanken zu, z. B. das X500-Verzeichnis.
+    `,
   },
   boxes: [
     {
@@ -48,9 +51,11 @@ Wenn Sie keine persönlichen Kontakte nutzen können, greifen sie auf Organigram
     label: "Tipps",
     icon: LightbulbOutlined,
     title: "Gespräche über die aktuelle Umsetzungspraxis",
-    text: `- **Keine Sorge vor falscher Kontaktaufnahme:** Es kann nichts passieren, außer dass man Sie an die richtige Ansprechperson verweist.
-- **Persönliche Gespräche statt Schriftverkehr:** Bitten Sie um persönliche Gespräche bei der Kontaktaufnahme. Schriftlicher Austausch lädt zu Missverständnissen ein.  
-- **Der Austausch über den Ist-Stand ist sicher:** Nur Mut bei der Ansprache, über die aktuelle Umsetzung dürfen Sie immer sprechen.`,
+    text: dedent`
+      - **Keine Sorge vor falscher Kontaktaufnahme:** Es kann nichts passieren, außer dass man Sie an die richtige Ansprechperson verweist.
+      - **Persönliche Gespräche statt Schriftverkehr:** Bitten Sie um persönliche Gespräche bei der Kontaktaufnahme. Schriftlicher Austausch lädt zu Missverständnissen ein.  
+      - **Der Austausch über den Ist-Stand ist sicher:** Nur Mut bei der Ansprache, über die aktuelle Umsetzung dürfen Sie immer sprechen.
+    `,
   },
   nextStep: {
     label: "So geht es weiter:",

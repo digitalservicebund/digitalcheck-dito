@@ -9,13 +9,17 @@ import {
   ROUTE_METHODS_FIVE_PRINCIPLES,
   TOOLFINDER,
 } from "~/resources/staticRoutes";
+import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const index = {
   title: "Digitaltaugliche Regelungen erarbeiten",
-  subtitle: `Hier erfahren Sie,
-  - was Digitaltauglichkeit für Ihr Regelungsvorhaben bedeutet,
-  - wie Sie eine reibungslose Umsetzung des Vorhabens ermöglichen,
-  - welche Unterlagen Sie benötigen.`,
+  subtitle: dedent`
+    Hier erfahren Sie,
+
+    - was Digitaltauglichkeit für Ihr Regelungsvorhaben bedeutet,
+    - wie Sie eine reibungslose Umsetzung des Vorhabens ermöglichen,
+    - welche Unterlagen Sie benötigen.
+  `,
   list: {
     title: "So gehen Sie vor",
     items: [
@@ -37,23 +41,15 @@ export const index = {
   },
   trainings: {
     title: "Beispiele für Digitaltauglichkeit",
-    text: `Auf dieser Seite finden Sie Beispiele für digitaltaugliche Regelungsvorhaben. Lassen Sie sich inspirieren durch:
-- die Umsetzung der 5 Prinzipien in Regelungstexten durch konkrete Formulierungen
-- geeignete Visualisierungen einzelner Sachverhalte und ganzer Regelungsvorhaben`,
+    text: dedent`
+      Auf dieser Seite finden Sie Beispiele für digitaltaugliche Regelungsvorhaben. Lassen Sie sich inspirieren durch:
+      - die Umsetzung der 5 Prinzipien in Regelungstexten durch konkrete Formulierungen
+      - geeignete Visualisierungen einzelner Sachverhalte und ganzer Regelungsvorhaben`,
     link: {
       text: "Jetzt Beispiele entdecken",
       href: ROUTE_EXAMPLES.url,
       look: "link" as const,
     },
-    /*    title: "Schulungsangebote im Herbst",
-    text: `In den kommenden Monaten bieten wir 90-minütige Online-Schulungen an zu folgenden Themen:
-- **Regelungen digitaltauglich gestalten** – praktische Tipps für den Digitalcheck
-- **Visualisieren lernen** – Komplexes einfach darstellen`,
-    link: {
-      text: "Zu Schulungen anmelden",
-      href: ROUTE_SUPPORT.url + "#angebote",
-      look: "link" as const,
-    },*/
   },
   interoperability: {
     title: "EU-Vorgaben zur Interoperabilität in Regelungen",
@@ -71,9 +67,15 @@ export const index = {
         headline: {
           text: "Was ist Digitaltauglichkeit?",
         },
-        content: `Regelungen werden vermehrt digital umgesetzt. Beispiele sind eine Gesetzesänderung, mit der ein Papierantrag durch einen Online-Antrag ersetzt wird oder eine Verordnung, die Änderungen in den IT-Verfahren nachgelagerter Behörden erfordert.
-<br class="block content-[''] !mb-24" />
-Damit die digitale Umsetzung reibungslos klappt, muss die Regelung digitaltauglich gestaltet sein. Das heißt erstens, dass der digitalen Umsetzung nichts im Wege steht, wie zum Beispiel das persönliche Einreichen von Dokumenten. Zweitens soll aktiv gefördert werden, dass möglichst viele Schritte von Computern durchgeführt oder unterstützt werden.`,
+        content: dedent`
+          Regelungen werden vermehrt digital umgesetzt. Beispiele sind eine Gesetzesänderung, mit der ein Papierantrag 
+          durch einen Online-Antrag ersetzt wird oder eine Verordnung, die Änderungen in den IT-Verfahren nachgelagerter 
+          Behörden erfordert.
+          <br class="block content-[''] !mb-24" />
+          Damit die digitale Umsetzung reibungslos klappt, muss die Regelung digitaltauglich gestaltet sein. Das heißt 
+          erstens, dass der digitalen Umsetzung nichts im Wege steht, wie zum Beispiel das persönliche Einreichen von 
+          Dokumenten. Zweitens soll aktiv gefördert werden, dass möglichst viele Schritte von Computern durchgeführt 
+          oder unterstützt werden.`,
       },
       {
         headline: {

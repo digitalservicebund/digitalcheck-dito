@@ -10,26 +10,31 @@ import {
   ROUTE_METHODS_TASKS_PROCESSES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
 } from "~/resources/staticRoutes";
+import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methods = {
   title: "2. Erarbeiten eines digitaltauglichen Regelungsvorhabens",
-  subtitle: `Hier finden Sie passende Methoden und Werkzeuge, um Digitaltauglichkeit in Ihrer Regelung sicherzustellen. 
-<br class="block content-[''] !mb-24" />
-Gehen Sie am besten in der vorgeschlagenen Reihenfolge vor.`,
+  subtitle: dedent`
+    Hier finden Sie passende Methoden und Werkzeuge, um Digitaltauglichkeit in Ihrer Regelung sicherzustellen. 
+    <br class="block content-[''] !mb-24" />
+    Gehen Sie am besten in der vorgeschlagenen Reihenfolge vor.
+  `,
   steps: {
     items: [
       {
         spacer: { text: "Der sichere Einstieg in jede Regelung" },
         headline: { text: "Erfassen Sie den Ist-Zustand" },
-        text: `Ein solides Verständnis über den Ist-Zustand ist ein sinnvoller und sicherer Einstieg. Tauschen Sie sich mit den umsetzenden Akteurinnen und Akteuren aus. Bei dieser Gelegenheit können Sie auch nach Problemen in der aktuellen Praxis fragen.
-Wenn Sie in den Gesprächen nichts Neues mehr erfahren, haben Sie den Status Quo erfasst.
-
-**Ein Austausch über die aktuelle Praxis darf auch während des Entwurfsprozesses stattfinden.**
-
-Mit diesen Informationen sind Sie gut vorbereitet, um  
-- **Anforderungen** für die neue Regelung zu erarbeiten,  
-- **Abstimmungsprozesse** zwischen Bund, Ländern, umsetzenden Behörden und Dienstleistern zu navigieren, 
-- in der **formellen Beteiligung** eine wirkungsvolle Umsetzung zu besprechen.`,
+        text: dedent`
+          Ein solides Verständnis über den Ist-Zustand ist ein sinnvoller und sicherer Einstieg. Tauschen Sie sich mit den umsetzenden Akteurinnen und Akteuren aus. Bei dieser Gelegenheit können Sie auch nach Problemen in der aktuellen Praxis fragen.
+          Wenn Sie in den Gesprächen nichts Neues mehr erfahren, haben Sie den Status Quo erfasst.
+          
+          **Ein Austausch über die aktuelle Praxis darf auch während des Entwurfsprozesses stattfinden.**
+          
+          Mit diesen Informationen sind Sie gut vorbereitet, um  
+          - **Anforderungen** für die neue Regelung zu erarbeiten,  
+          - **Abstimmungsprozesse** zwischen Bund, Ländern, umsetzenden Behörden und Dienstleistern zu navigieren, 
+          - in der **formellen Beteiligung** eine wirkungsvolle Umsetzung zu besprechen.
+        `,
       },
       {
         isSubstep: true,
@@ -156,12 +161,14 @@ Mit diesen Informationen sind Sie gut vorbereitet, um
       {
         spacer: { text: "Eine digitale, verwaltungsarme Regelung Schreiben" },
         headline: { text: "Verfassen Sie den Regelungsentwurf" },
-        text: `Nun folgt der gewohnte Schreibprozess sowie die formelle Beteiligung, Abstimmungen im Haus und zwischen den Ressorts. 
-
-Die Erkenntnisse und Ergebnisse aus den vorigen Schritten helfen Ihnen dabei,  
-- Ihren **Regelungstext zu strukturieren**, insbesondere in Abschnitten, die die Umsetzung betreffen,
-- in der **Gesetzesbegründung** auf Probleme im Ist-Zustand einzugehen,
-- den **Umsetzungsprozess einfach besprechbar** zu machen in Abstimmungen anhand von Visualisierungen.`,
+        text: dedent`
+          Nun folgt der gewohnte Schreibprozess sowie die formelle Beteiligung, Abstimmungen im Haus und zwischen den Ressorts. 
+          
+          Die Erkenntnisse und Ergebnisse aus den vorigen Schritten helfen Ihnen dabei,  
+          - Ihren **Regelungstext zu strukturieren**, insbesondere in Abschnitten, die die Umsetzung betreffen,
+          - in der **Gesetzesbegründung** auf Probleme im Ist-Zustand einzugehen,
+          - den **Umsetzungsprozess einfach besprechbar** zu machen in Abstimmungen anhand von Visualisierungen.
+        `,
       },
       {
         isSubstep: true,

@@ -3,6 +3,7 @@ import {
   ROUTE_METHODS,
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
+import { dedent } from "~/utils/dedentMultilineStrings";
 
 const stepNKR = {
   headline: {
@@ -74,10 +75,12 @@ export const steps = {
     ...stepNKR,
     content:
       stepNKR.content +
-      `<br class="block content-[''] !mb-24" />
-Senden Sie die von Ihnen erstellte Dokumentation per E-Mail an folgende Adresse: 
-[nkr@bmj.bund.de](mailto:nkr@bmj.bund.de)
-<br class="block content-[''] !mb-24" />
-Damit ist der Digitalcheck für Sie beendet.`,
+      dedent`
+        <br class="block content-[''] !mb-24" />
+        Senden Sie die von Ihnen erstellte Dokumentation per E-Mail an folgende Adresse: 
+        [nkr@bmj.bund.de](mailto:nkr@bmj.bund.de)
+        <br class="block content-[''] !mb-24" />
+        Damit ist der Digitalcheck für Sie beendet.
+      `,
   },
 };

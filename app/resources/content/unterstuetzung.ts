@@ -4,6 +4,7 @@ import DrawOutlined from "@digitalservicebund/icons/DrawOutlined";
 import FormatListBulletedOutlined from "@digitalservicebund/icons/FormatListBulletedOutlined";
 import PlaylistAddCheckOutlined from "@digitalservicebund/icons/PlaylistAddCheckOutlined";
 import TimerOutlined from "@digitalservicebund/icons/TimerOutlined";
+import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const support = {
   title: "Hilfe für digitaltaugliche Regelungsvorhaben",
@@ -84,64 +85,76 @@ export const support = {
         offerings: [
           {
             title: "Digitalbezug einschätzen lassen",
-            text: `Wir unterstützen Sie, den Digitalbezug Ihres Verfahrens einzuschätzen, indem wir die Vorprüfung gemeinsam durchgehen. 
-<br class="block content-[''] !mb-32" />
-Je nach Ziel Ihres Vorhabens und Grad des Digitalbezugs, variiert der Zeitaufwand, den Sie für die Erarbeitung digitaler Aspekte einplanen sollten. 
-<br class="block content-[''] !mb-32" />
-**Beispiele für einen starken Digitalbezug: Prozess/Dienstleistung/Interaktion neu aufsetzen**
-
-z. B. bei folgenden Zielen einer Regelung:
-
-- Voraussetzungen für eine Digitalisierung schaffen
-- bestehenden Umsetzungsprozesse verbessern oder neu aufsetzen
-<br class="block content-[''] !mb-24" />
-
-**Beispiele für einen leichten bis mittleren Digitalbezug: bestehenden Prozess anpassen**
-
-z. B. bei folgenden Zielen einer Regelung:
-
-- Anpassungen von Nachweispflichten
-- Anpassungen von Pauschalen`,
+            text: dedent`
+              Wir unterstützen Sie, den Digitalbezug Ihres Verfahrens einzuschätzen, indem wir die Vorprüfung gemeinsam durchgehen. 
+              <br class="block content-[''] !mb-32" />
+              Je nach Ziel Ihres Vorhabens und Grad des Digitalbezugs, variiert der Zeitaufwand, den Sie für die Erarbeitung digitaler Aspekte einplanen sollten. 
+              <br class="block content-[''] !mb-32" />
+              **Beispiele für einen starken Digitalbezug: Prozess/Dienstleistung/Interaktion neu aufsetzen**
+              
+              z. B. bei folgenden Zielen einer Regelung:
+              
+              - Voraussetzungen für eine Digitalisierung schaffen
+              - bestehenden Umsetzungsprozesse verbessern oder neu aufsetzen
+              <br class="block content-[''] !mb-24" />
+              
+              **Beispiele für einen leichten bis mittleren Digitalbezug: bestehenden Prozess anpassen**
+              
+              z. B. bei folgenden Zielen einer Regelung:
+              
+              - Anpassungen von Nachweispflichten
+              - Anpassungen von Pauschalen
+            `,
             sellingPoints: "Ihr Vorteil auf einen Blick",
             details: [
               {
                 icon: TimerOutlined,
                 title: "Zeitaufwand",
-                text: `- **Fachreferat:** 1-2 Stunden
-- **DigitalService-Team:** 1-2 Stunden`,
+                text: dedent`
+                  - **Fachreferat:** 1-2 Stunden
+                  - **DigitalService-Team:** 1-2 Stunden
+                `,
               },
               {
                 icon: CheckCircleOutlined,
                 title: "Was sie bekommen",
-                text: `- Expert:innen-Einschätzung zum Digitalbezug des Regelungsverfahrens: Grundlage für Planung des Regelungsvorhabens
-- richtige Ansprechperson im NKR-Sekretariat`,
+                text: dedent`
+                  - Expert:innen-Einschätzung zum Digitalbezug des Regelungsverfahrens: Grundlage für Planung des Regelungsvorhabens
+                  - richtige Ansprechperson im NKR-Sekretariat
+                `,
               },
             ],
           },
           {
             title: "IT-Wissen einfach erklärt",
-            text: `Im geschützten Rahmen eines Gesprächs beantworten unsere Expert:innen Ihnen alle **Fragen zur IT**. 
-<br class="block content-[''] !mb-32" />
-Jede Frage ist berechtigt — jede verstandene Antwort wird die Regelung digitaltauglicher machen.  
-<br class="block content-[''] !mb-32" />
-Beispiele für Fragen:
-
-- Was ist eine Schnittstelle?
-- Wie unterscheiden sich Vertrauensniveaus?
-- Welchen Datenstandard sollte das Antragsformular berücksichtigen?`,
+            text: dedent`
+              Im geschützten Rahmen eines Gesprächs beantworten unsere Expert:innen Ihnen alle **Fragen zur IT**. 
+              <br class="block content-[''] !mb-32" />
+              Jede Frage ist berechtigt — jede verstandene Antwort wird die Regelung digitaltauglicher machen.  
+              <br class="block content-[''] !mb-32" />
+              Beispiele für Fragen:
+              
+              - Was ist eine Schnittstelle?
+              - Wie unterscheiden sich Vertrauensniveaus?
+              - Welchen Datenstandard sollte das Antragsformular berücksichtigen?
+            `,
             sellingPoints: "Ihr Vorteil auf einen Blick",
             details: [
               {
                 icon: TimerOutlined,
                 title: "Zeitaufwand",
-                text: `- **Fachreferat:** 1-2 Stunden
-- **DigitalService-Team:** 1-2 Stunden`,
+                text: dedent`
+                  - **Fachreferat:** 1-2 Stunden
+                  - **DigitalService-Team:** 1-2 Stunden
+                `,
               },
               {
                 icon: CheckCircleOutlined,
                 title: "Was sie bekommen",
-                text: `- besseres Verständnis der digitalen Aspekte der Regelung
-- Sicherheit in Abstimmungen mit umsetzenden Akteuren`,
+                text: dedent`
+                  - besseres Verständnis der digitalen Aspekte der Regelung
+                  - Sicherheit in Abstimmungen mit umsetzenden Akteuren
+                `,
               },
             ],
           },
@@ -152,29 +165,35 @@ Beispiele für Fragen:
         offerings: [
           {
             title: "Visualisierungen erstellen",
-            text: `Wir erstellen Visualisierungen für Sie oder digitalisieren Ihre Papier-und-Stift-Skizzen.
-<br class="block content-[''] !mb-32" />
-Ein Bild sagt mehr als tausend Worte — genauso helfen Visualisierungen bei Abstimmungen im Haus, zwischen Ressorts oder mit dem NKR.
-<br class="block content-[''] !mb-32" />
-Die Art der Visualisierung richtet sich nach Ihren Anforderungen:
-
-- **Antragsstrecke oder ein Datenfluss im Detail verstehen**, visualisiert als Flussdiagramm
-- **beteiligte Akteure identifizieren**, visualisiert als Flussdiagramm
-- **Logik und Struktur des Regelungstextes prüfen**, visualisiert als Entscheidungsbaum
-- Überblick über das Verfahren geben zur **Kommunikation im Haus, mit dem NKR oder zwischen Ressorts**, visualisiert als Schaubild`,
+            text: dedent`
+              Wir erstellen Visualisierungen für Sie oder digitalisieren Ihre Papier-und-Stift-Skizzen.
+              <br class="block content-[''] !mb-32" />
+              Ein Bild sagt mehr als tausend Worte — genauso helfen Visualisierungen bei Abstimmungen im Haus, zwischen Ressorts oder mit dem NKR.
+              <br class="block content-[''] !mb-32" />
+              Die Art der Visualisierung richtet sich nach Ihren Anforderungen:
+              
+              - **Antragsstrecke oder ein Datenfluss im Detail verstehen**, visualisiert als Flussdiagramm
+              - **beteiligte Akteure identifizieren**, visualisiert als Flussdiagramm
+              - **Logik und Struktur des Regelungstextes prüfen**, visualisiert als Entscheidungsbaum
+              - Überblick über das Verfahren geben zur **Kommunikation im Haus, mit dem NKR oder zwischen Ressorts**, visualisiert als Schaubild
+            `,
             sellingPoints: "Ihr Vorteil auf einen Blick",
             details: [
               {
                 icon: TimerOutlined,
                 title: "Zeitaufwand",
-                text: `- **Fachreferat:** einige Stunden für gemeinsame Arbeitssitzungen
-- **DigitalService-Team:** 1-5 Tage`,
+                text: dedent`
+                  - **Fachreferat:** einige Stunden für gemeinsame Arbeitssitzungen
+                  - **DigitalService-Team:** 1-5 Tage
+                `,
               },
               {
                 icon: CheckCircleOutlined,
                 title: "Was sie bekommen",
-                text: `- tieferes Verständnis der digitaler Aspekte der Regelung
-- eine Visualisierung, die die Prüfung durch den NKR informiert`,
+                text: dedent`
+                  - tieferes Verständnis der digitaler Aspekte der Regelung
+                  - eine Visualisierung, die die Prüfung durch den NKR informiert
+                `,
               },
             ],
             examples: [
@@ -189,33 +208,41 @@ Die Art der Visualisierung richtet sich nach Ihren Anforderungen:
           },
           {
             title: "Digitale Umsetzung erarbeiten",
-            text: `Wenn die technischen Anforderungen komplex werden, helfen wir als neutraler Akteur dabei, die **technische Umsetzung** im Detail zu durchdenken und Nutzerfreundlichkeit, Datenverwendung und IT-Sicherheit zu beachten. 
-<br class="block content-[''] !mb-32" />
-Maßnahmen, die wir z. B. für Sie erledigen:
-
-- Durchführung von **Beteiligungsformaten mit umsetzenden Akteuren und Normadressaten**, z. B. moderierte Gespräche mit nachgelagerten Behörden
-- Erstellung von **Visualisierungen** und Stakeholder Maps
-- Klärung von **Fragen zur technischen Umsetzung**
-- **Analyse von Rahmenbedingungen** für eine reibungslose Umsetzung, z. B. durch die Evaluation bestehender IT-Verfahren`,
+            text: dedent`
+              Wenn die technischen Anforderungen komplex werden, helfen wir als neutraler Akteur dabei, die **technische Umsetzung** im Detail zu durchdenken und Nutzerfreundlichkeit, Datenverwendung und IT-Sicherheit zu beachten. 
+              <br class="block content-[''] !mb-32" />
+              Maßnahmen, die wir z. B. für Sie erledigen:
+              
+              - Durchführung von **Beteiligungsformaten mit umsetzenden Akteuren und Normadressaten**, z. B. moderierte Gespräche mit nachgelagerten Behörden
+              - Erstellung von **Visualisierungen** und Stakeholder Maps
+              - Klärung von **Fragen zur technischen Umsetzung**
+              - **Analyse von Rahmenbedingungen** für eine reibungslose Umsetzung, z. B. durch die Evaluation bestehender IT-Verfahren
+            `,
             sellingPoints: "Ihr Vorteil auf einen Blick",
             details: [
               {
                 icon: TimerOutlined,
                 title: "Zeitaufwand",
-                text: `- **Fachreferat:** 5+ Tage für gemeinsame Arbeitssitzungen
-- **DigitalService-Team:** 4+ Wochen`,
+                text: dedent`
+                  - **Fachreferat:** 5+ Tage für gemeinsame Arbeitssitzungen
+                  - **DigitalService-Team:** 4+ Wochen
+                `,
               },
               {
                 icon: CheckCircleOutlined,
                 title: "Was sie bekommen",
-                text: `- Antworten auf Fragen zur digitalen Umsetzung der Regelung
-- Material, Wissen und Argumente für Abstimmungen und Beteiligungen`,
+                text: dedent`
+                  - Antworten auf Fragen zur digitalen Umsetzung der Regelung
+                  - Material, Wissen und Argumente für Abstimmungen und Beteiligungen
+                `,
               },
               {
                 icon: FormatListBulletedOutlined,
                 title: "Voraussetzungen",
-                text: `- Regelungsverfahren befindet sich in frühem Stadium: Vorbereitung des Regelungstextes
-- inhaltliche Zusammenarbeit mit umsetzenden Akteur:innen ist möglich`,
+                text: dedent`
+                  - Regelungsverfahren befindet sich in frühem Stadium: Vorbereitung des Regelungstextes
+                  - inhaltliche Zusammenarbeit mit umsetzenden Akteur:innen ist möglich
+                `,
               },
             ],
             examples: [
@@ -232,25 +259,29 @@ Maßnahmen, die wir z. B. für Sie erledigen:
           {
             title:
               "Regelungen digitaltauglich gestalten – praktische Tipps für den Digitalcheck",
-            text: `Fast alles, was wir heutzutage in der Verwaltung tun, hat einen Daten- oder Digitalbezug. Regelungsvorhaben sind daher die zentrale Voraussetzung für digitale Leistungen und Prozesse und schaffen die Grundlage für einen digitalen Staat.
-<br class="block content-[''] !mb-32" />
-In dieser Online-Schulung erfahren Sie, wie Sie Regelungen so formulieren, dass Sie den **Digitalcheck erfolgreich bestehen**. Wir zeigen an **Beispielen**, wie Sie Ihre Regelungen digitaltauglich schreiben können. Anhand der fünf bewährten **Prinzipien für Digitaltauglichkeit** erläutern wir, wie Sie Begriffe und Konzepte wie Automatisierung und Standardisierung optimal nutzen, um Ihre Vorhaben fit für die digitale Zukunft zu machen.
-<br class="block content-[''] !mb-32" />
-Das Angebot richtet sich an alle, die in den Bundesministerien Regelungen erarbeiten. Vorkenntnisse sind nicht erforderlich.`,
+            text: dedent`
+              Fast alles, was wir heutzutage in der Verwaltung tun, hat einen Daten- oder Digitalbezug. Regelungsvorhaben sind daher die zentrale Voraussetzung für digitale Leistungen und Prozesse und schaffen die Grundlage für einen digitalen Staat.
+              <br class="block content-[''] !mb-32" />
+              In dieser Online-Schulung erfahren Sie, wie Sie Regelungen so formulieren, dass Sie den **Digitalcheck erfolgreich bestehen**. Wir zeigen an **Beispielen**, wie Sie Ihre Regelungen digitaltauglich schreiben können. Anhand der fünf bewährten **Prinzipien für Digitaltauglichkeit** erläutern wir, wie Sie Begriffe und Konzepte wie Automatisierung und Standardisierung optimal nutzen, um Ihre Vorhaben fit für die digitale Zukunft zu machen.
+              <br class="block content-[''] !mb-32" />
+              Das Angebot richtet sich an alle, die in den Bundesministerien Regelungen erarbeiten. Vorkenntnisse sind nicht erforderlich.
+            `,
             button: {
               text: "Per E-Mail anmelden",
               href: encodeURI(
-                `mailto:digitalcheck@digitalservice.bund.de?subject=[Digitalcheck Schulung] Anmeldung digitaltaugliche Regelungen&body=Guten Tag,
-
-ich möchte mich gerne für die Online-Schulung anmelden:
-
-Regelungen digitaltauglich gestalten – praktische Tipps für den Digitalcheck
-
-am
-
-[Wunsch-Datum einfügen]
-
-Mit freundlichen Grüßen`,
+                dedent`mailto:digitalcheck@digitalservice.bund.de?subject=[Digitalcheck Schulung] Anmeldung digitaltaugliche Regelungen&body=
+                  Guten Tag,
+                  
+                  ich möchte mich gerne für die Online-Schulung anmelden:
+                  
+                  Regelungen digitaltauglich gestalten – praktische Tipps für den Digitalcheck
+                  
+                  am
+                  
+                  [Wunsch-Datum einfügen]
+                  
+                  Mit freundlichen Grüßen
+                `,
               ),
               look: "tertiary" as const,
             },
@@ -263,42 +294,33 @@ Mit freundlichen Grüßen`,
                   "Wir planen bald neue Termine für Schulungen in 2025. Schreiben Sie uns eine E-Mail und wir setzen Sie auf die Warteliste.\n" +
                   "Sie können sich bis dahin das [Schulungsmaterial ansehen](https://github.com/digitalservicebund/digitalcheck-content/tree/main/src/online-schulungen).",
               },
-              /*                text: `
-- **Donnerstag, 14. November,**<br class="max-md:hidden"> 10:30–12:00 Uhr
-- **Dienstag, 19. November,**<br class="max-md:hidden"> 13:00–14:30 Uhr
-- **Donnerstag, 28. November,**<br class="max-md:hidden"> 11:00–12:30 Uhr`,
-              },
-              {
-                icon: CheckCircleOutlined,
-                title: "Was Sie bekommen",
-                text: `
-- Tipps für einen erfolgreichen Digitalcheck
-- Beispiele für digitaltaugliche Formulierungen
-- Einführung zum Anwenden der Prinzipien für Digitaltauglichkeit`,
-              },*/
             ],
           },
           {
             title: "Visualisierungen – Komplexes einfach darstellen",
-            text: `Digitaltaugliche Regelungen müssen von Beginn an aus der Umsetzungsperspektive gedacht werden. Visualisierungsmethoden bieten dafür wertvolle Unterstützung: Mit ihrer Hilfe lassen sich einzelne **Prozessschritte, Zielgruppen und beteiligte Akteure** darstellen. **Mögliche Hindernisse** für eine digitale Umsetzung werden sicht- und bearbeitbar.
-<br class="block content-[''] !mb-32" />
-In unserer interaktiven Online-Schulung erfahren Sie, wie Sie Visualisierungen gezielt für Ihr Regelungsvorhaben nutzen können. Anhand konkreter Beispiele lernen Sie, **eigene Visualisierungen zu erstellen** und so komplexe Vorhaben klar und verständlich zu präsentieren.
-<br class="block content-[''] !mb-32" />
-Das Angebot richtet sich an alle, die in den Bundesministerien Regelungen erarbeiten. Vorkenntnisse sind nicht erforderlich.`,
+            text: dedent`
+              Digitaltaugliche Regelungen müssen von Beginn an aus der Umsetzungsperspektive gedacht werden. Visualisierungsmethoden bieten dafür wertvolle Unterstützung: Mit ihrer Hilfe lassen sich einzelne **Prozessschritte, Zielgruppen und beteiligte Akteure** darstellen. **Mögliche Hindernisse** für eine digitale Umsetzung werden sicht- und bearbeitbar.
+              <br class="block content-[''] !mb-32" />
+              In unserer interaktiven Online-Schulung erfahren Sie, wie Sie Visualisierungen gezielt für Ihr Regelungsvorhaben nutzen können. Anhand konkreter Beispiele lernen Sie, **eigene Visualisierungen zu erstellen** und so komplexe Vorhaben klar und verständlich zu präsentieren.
+              <br class="block content-[''] !mb-32" />
+              Das Angebot richtet sich an alle, die in den Bundesministerien Regelungen erarbeiten. Vorkenntnisse sind nicht erforderlich.
+            `,
             button: {
               text: "Per E-Mail anmelden",
               href: encodeURI(
-                `mailto:digitalcheck@digitalservice.bund.de?subject=[Digitalcheck Schulung] Anmeldung Visualisierungen&body=Guten Tag,
-
-ich möchte mich gerne für die Online-Schulung anmelden:
-
-Visualisierungen – Komplexes einfach darstellen
-
-am
-
-[Wunsch-Datum einfügen]
-
-Mit freundlichen Grüßen`,
+                dedent`mailto:digitalcheck@digitalservice.bund.de?subject=[Digitalcheck Schulung] Anmeldung Visualisierungen&body=
+                  Guten Tag,
+                  
+                  ich möchte mich gerne für die Online-Schulung anmelden:
+                  
+                  Visualisierungen – Komplexes einfach darstellen
+                  
+                  am
+                  
+                  [Wunsch-Datum einfügen]
+                  
+                  Mit freundlichen Grüßen
+                `,
               ),
               look: "tertiary" as const,
             },
@@ -311,21 +333,6 @@ Mit freundlichen Grüßen`,
                   "Wir planen bald neue Termine für Schulungen in 2025. Schreiben Sie uns eine E-Mail und wir setzen Sie auf die Warteliste.\n" +
                   "Sie können sich bis dahin das [Schulungsmaterial ansehen](https://github.com/digitalservicebund/digitalcheck-content/tree/main/src/online-schulungen).",
               },
-              /*              {
-                icon: TimerOutlined,
-                title: "Nächste Termine",
-                text: `
-- **Mittwoch, 13. November,**<br class="max-md:hidden"> 13:00–14:30 Uhr
-- **Freitag, 15. November,**<br class="max-md:hidden"> 10:00–11:30 Uhr
-- **Donnerstag, 21. November,**<br class="max-md:hidden"> 09:00–10:30 Uhr`,
-              },
-              {
-                icon: CheckCircleOutlined,
-                title: "Was Sie bekommen",
-                text: `
-- verschiedene Arten von Visualisierungen kennenlernen
-- Übung selbst Visualisierungen zu erstellen`,
-              },*/
             ],
           },
         ],

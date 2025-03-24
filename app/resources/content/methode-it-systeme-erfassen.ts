@@ -6,15 +6,18 @@ import {
   ROUTE_METHODS_FIVE_PRINCIPLES,
   ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
+import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsITSystems = {
   title: "2.3. IT-Systeme gemeinsam erfassen",
   subtitle: `Nutzen Sie das Fachwissen der zuständigen Akteurinnen und Akteure, um die verwendete IT-Infrastruktur für die im vorigen Schritt identifizierten Abläufe zu erfassen und zu verstehen.`,
-  guidance: `**Zeit:** ca. sechs Stunden
-
-**Kollaborativ:** Arbeiten Sie mit umsetzenden Akteurinnen und Akteuren
-
-**Support:** Eine neutrale Drittmeinung erhalten Sie vom Digitalcheck-Support`,
+  guidance: dedent`
+    **Zeit:** ca. sechs Stunden
+    
+    **Kollaborativ:** Arbeiten Sie mit umsetzenden Akteurinnen und Akteuren
+    
+    **Support:** Eine neutrale Drittmeinung erhalten Sie vom Digitalcheck-Support
+  `,
   accordion: {
     title:
       "Was ist zu tun, wenn Länder oder Kommunen für die Umsetzung zuständig sind?",
@@ -24,12 +27,14 @@ export const methodsITSystems = {
     label: "Anleitung",
     icon: DrawOutlined,
     title: "So erfassen Sie die IT-Systeme",
-    text: `Dokumentieren Sie die verwendeten IT-Systeme mit ihren Funktionalitäten, Schnittstellen und Anforderungen. 
-<br class="block content-[''] !mb-24" />
-Ein Überblick über die IT-Landschaft hilft Ihnen dabei, 
-- alle relevanten Aspekte aufzuschlüsseln und potenziell blinde Flecken zu identifizieren,
-- auf bestehende Standards und Prozesse aufzusetzen,
-- oder Potenzial für Vereinheitlichung zu nutzen.`,
+    text: dedent`
+      Dokumentieren Sie die verwendeten IT-Systeme mit ihren Funktionalitäten, Schnittstellen und Anforderungen. 
+      <br class="block content-[''] !mb-24" />
+      Ein Überblick über die IT-Landschaft hilft Ihnen dabei, 
+      - alle relevanten Aspekte aufzuschlüsseln und potenziell blinde Flecken zu identifizieren,
+      - auf bestehende Standards und Prozesse aufzusetzen,
+      - oder Potenzial für Vereinheitlichung zu nutzen.
+    `,
   },
   boxes: [
     {
@@ -53,9 +58,11 @@ Ein Überblick über die IT-Landschaft hilft Ihnen dabei,
     label: "Unterstützungsangebot",
     icon: SupportOutlined,
     title: "IT-Wissen einfach erklärt",
-    text: `Der Digitalcheck-Support unterstützt Sie mit kostenloser IT-Beratung, um Erkenntnisse zu erläutern und für Ihre Regelung zu nutzen, z. B. durch IT-Hintergrundwissen zu Schnittstellen. Jede Frage ist berechtigt – jede verstandene Antwort wird die Regelung digitaltauglicher machen. 
-
-Für ein einstündiges Videotelefonat schreiben Sie eine E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de) oder buchen Sie direkt einen Termin.`,
+    text: dedent`
+      Der Digitalcheck-Support unterstützt Sie mit kostenloser IT-Beratung, um Erkenntnisse zu erläutern und für Ihre Regelung zu nutzen, z. B. durch IT-Hintergrundwissen zu Schnittstellen. Jede Frage ist berechtigt – jede verstandene Antwort wird die Regelung digitaltauglicher machen. 
+      
+      Für ein einstündiges Videotelefonat schreiben Sie eine E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de) oder buchen Sie direkt einen Termin.
+    `,
     buttons: [
       {
         text: "Termin buchen",

@@ -4,6 +4,7 @@ import {
   ROUTE_METHODS,
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
+import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const preCheckResult = {
   title: "Ergebnis der Vorprüfung",
@@ -83,10 +84,12 @@ export const preCheckResult = {
   },
   form: {
     formLegend: "Vorprüfung senden",
-    instructions: `Wir erstellen für Sie eine E-Mail mit dem Ergebnis der Vorprüfung, die sich in Ihrem E-Mail-Programm öffnet. Diese können Sie anschließend an den Nationalen Normenkontrollrat (NKR), das Digitalcheck-Team und an Ihre eigene E-Mail-Adresse senden. Geben Sie Ihre eigene E-Mail-Adresse an, um sich diese als **Teil der Dokumentation** zu schicken.
+    instructions: dedent`
+      Wir erstellen für Sie eine E-Mail mit dem Ergebnis der Vorprüfung, die sich in Ihrem E-Mail-Programm öffnet. Diese können Sie anschließend an den Nationalen Normenkontrollrat (NKR), das Digitalcheck-Team und an Ihre eigene E-Mail-Adresse senden. Geben Sie Ihre eigene E-Mail-Adresse an, um sich diese als **Teil der Dokumentation** zu schicken.
       <br/><br/>
-- Falls Ihr Vorhaben Interoperabilitäts-Anforderungen erfüllt, lassen Sie das Digitalcheck-Team bitte im Kopie-Feld der E-Mail. Wir erhalten somit das Vorprüfungsergebnisses in Kopie und kontaktieren Sie für die nächsten Schritte. Bei Fragen können Sie uns auch direkt unter [0151/40 76 78 39](tel:+4915140767839) erreichen.<br/><br/> 
-- Je früher und tiefer Sie sich mit dem NKR über den Digitalbezug Ihres Regelungsvorhabens austauschen, desto schneller wird die Prüfung abgeschlossen.`,
+      - Falls Ihr Vorhaben Interoperabilitäts-Anforderungen erfüllt, lassen Sie das Digitalcheck-Team bitte im Kopie-Feld der E-Mail. Wir erhalten somit das Vorprüfungsergebnisses in Kopie und kontaktieren Sie für die nächsten Schritte. Bei Fragen können Sie uns auch direkt unter [0151/40 76 78 39](tel:+4915140767839) erreichen.<br/><br/> 
+      - Je früher und tiefer Sie sich mit dem NKR über den Digitalbezug Ihres Regelungsvorhabens austauschen, desto schneller wird die Prüfung abgeschlossen.
+    `,
     emailLabel: "Ihre E-Mail Adresse (optional)",
     policyTitleLabel: "Vorläufiger Arbeitstitel des Vorhabens",
     policyTitleRequired: "Bitte geben Sie einen Titel für Ihr Vorhaben an.",
@@ -113,16 +116,17 @@ export const preCheckResult = {
         },
         {
           label: "Wie wird das Ergebnis der Vorprüfung dokumentiert?",
-          text: `Wenn Sie das Ergebnis für Ihre Dokumentation benötigen, schicken Sie das Ergebnis per E-Mail an sich selbst und ggf. an Ihre Kolleg:innen. Es gibt zwei Möglichkeiten, die E-Mail zu verakten:
-
-**Manuell über Outlook:**
-- Klicken Sie in Outlook auf „Drucken“.
-- Wählen Sie „Speichern als PDF“ und speichern Sie die Datei ab.
-- Fügen Sie das PDF anschließend in Ihr E-Akten-System ein.
-
-**Direkte Veraktung:**
-- Nutzen Sie, falls vorhanden, die direkte Veraktungsfunktion in Outlook.
-`,
+          text: dedent`
+            Wenn Sie das Ergebnis für Ihre Dokumentation benötigen, schicken Sie das Ergebnis per E-Mail an sich selbst und ggf. an Ihre Kolleg:innen. Es gibt zwei Möglichkeiten, die E-Mail zu verakten:
+            
+            **Manuell über Outlook:**
+            - Klicken Sie in Outlook auf „Drucken“.
+            - Wählen Sie „Speichern als PDF“ und speichern Sie die Datei ab.
+            - Fügen Sie das PDF anschließend in Ihr E-Akten-System ein.
+            
+            **Direkte Veraktung:**
+            - Nutzen Sie, falls vorhanden, die direkte Veraktungsfunktion in Outlook.
+          `,
         },
         {
           label: "Warum die Vorprüfung an den NKR schicken?",
@@ -140,13 +144,16 @@ export const preCheckResult = {
       toNkr: "nkr@bmj.bund.de",
       toDC: "interoperabel@digitalservice.bund.de",
       subject: "Digitalcheck Vorprüfung",
-      bodyBefore: `Guten Tag,
-
-hiermit erhalten Sie das Ergebnis Ihrer Vorprüfung:`,
-      bodyAfter: `Mit freundlichen Grüßen
-
-*Diese E-Mail wurde automatisch erstellt.*
-`,
+      bodyBefore: dedent`
+        Guten Tag,
+        
+        hiermit erhalten Sie das Ergebnis Ihrer Vorprüfung:
+      `,
+      bodyAfter: dedent`
+        Mit freundlichen Grüßen
+        
+        *Diese E-Mail wurde automatisch erstellt.*
+      `,
     },
     downloadStarted: "Vorprüfung wird heruntergeladen",
   },
