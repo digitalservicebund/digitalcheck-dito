@@ -16,7 +16,7 @@ import InlineInfoList from "~/components/InlineInfoList";
 import InlineNotice from "~/components/InlineNotice";
 import ParagraphList from "~/components/ParagraphList";
 import VisualisationItem from "~/components/VisualisationItem";
-import { regulations } from "~/resources/content/beispiele-regelungen";
+import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import { ROUTE_LAWS } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 import {
@@ -102,11 +102,11 @@ export default function Gesetz() {
               className: "max-w-full",
             }}
             content={{
-              markdown: regulations.subtitle[0],
+              markdown: examplesRegelungen.subtitle[0],
             }}
           />
           <p className="ds-subhead mt-24 font-bold">
-            <b>{regulations.subtitle[1]}</b>
+            <b>{examplesRegelungen.subtitle[1]}</b>
           </p>
           <ol className="list-unstyled mt-16">
             {regelung.Digitalchecks.map((digitalcheck, index) => (
@@ -115,10 +115,10 @@ export default function Gesetz() {
                   <li>
                     ↓
                     <Link
-                      to={`#${slugify(regulations.principles.title)}-${index}`}
+                      to={`#${slugify(examplesRegelungen.principles.title)}-${index}`}
                       className="ml-4 underline decoration-1 underline-offset-4"
                     >
-                      {regulations.principles.title}
+                      {examplesRegelungen.principles.title}
                     </Link>
                   </li>
                 )}
@@ -126,10 +126,10 @@ export default function Gesetz() {
                   <li>
                     ↓
                     <Link
-                      to={`#${slugify(regulations.visualisations.title)}-${index}`}
+                      to={`#${slugify(examplesRegelungen.visualisations.title)}-${index}`}
                       className="ml-4 underline decoration-1 underline-offset-4"
                     >
-                      {regulations.visualisations.title}
+                      {examplesRegelungen.visualisations.title}
                     </Link>
                   </li>
                 )}
@@ -137,10 +137,10 @@ export default function Gesetz() {
                   <li>
                     ↓
                     <Link
-                      to={`#${slugify(regulations.nkr.title)}-${index}`}
+                      to={`#${slugify(examplesRegelungen.nkr.title)}-${index}`}
                       className="ml-4 underline decoration-1 underline-offset-4"
                     >
-                      {regulations.nkr.title}
+                      {examplesRegelungen.nkr.title}
                     </Link>
                   </li>
                 )}
@@ -154,13 +154,13 @@ export default function Gesetz() {
           <InlineInfoList
             items={[
               {
-                label: regulations.infoLabels[0],
+                label: examplesRegelungen.infoLabels[0],
                 value: regelung.VeroeffentlichungsDatum
                   ? formatDate(regelung.VeroeffentlichungsDatum)
                   : "",
               },
               {
-                key: regulations.infoLabels[1],
+                key: examplesRegelungen.infoLabels[1],
                 value: regelung.LinkRegelungstext ? (
                   <CustomLink
                     to={regelung.LinkRegelungstext}
@@ -170,12 +170,12 @@ export default function Gesetz() {
                   >
                     {regelung?.GesetzStatus
                       ? gesetzStatusMap[regelung.GesetzStatus]
-                      : regulations.infoLabels[1]}
+                      : examplesRegelungen.infoLabels[1]}
                   </CustomLink>
                 ) : null,
               },
               {
-                label: regulations.infoLabels[2],
+                label: examplesRegelungen.infoLabels[2],
                 value: regelung.Ressort,
               },
             ]}
@@ -188,10 +188,10 @@ export default function Gesetz() {
         regelung.GesetzStatus !== "Verkuendetes_Gesetz_aktuelle_Fassung" && (
           <Container className="pb-0">
             <InlineNotice
-              title={regulations.infoTitle}
+              title={examplesRegelungen.infoTitle}
               look="tips"
               tagName="h2"
-              content={regulations.infoText}
+              content={examplesRegelungen.infoText}
             />
           </Container>
         )}
@@ -201,11 +201,11 @@ export default function Gesetz() {
           {digitalcheck.Paragraphen.length > 0 && (
             <>
               <Heading
-                id={`${slugify(regulations.principles.title)}-${index}`}
+                id={`${slugify(examplesRegelungen.principles.title)}-${index}`}
                 tagName="h2"
                 look="ds-heading-02-bold"
               >
-                {regulations.principles.title}
+                {examplesRegelungen.principles.title}
               </Heading>
 
               <ParagraphList
@@ -220,13 +220,13 @@ export default function Gesetz() {
             <div className="ds-stack-32">
               <Header
                 heading={{
-                  id: `${slugify(regulations.visualisations.title)}-${index}`,
-                  text: regulations.visualisations.title,
+                  id: `${slugify(examplesRegelungen.visualisations.title)}-${index}`,
+                  text: examplesRegelungen.visualisations.title,
                   tagName: "h2",
                   look: "ds-heading-02-bold",
                 }}
                 content={{
-                  markdown: regulations.visualisations.subtitle,
+                  markdown: examplesRegelungen.visualisations.subtitle,
                 }}
               />
               {digitalcheck.Visualisierungen.map((visualisierung) => (
@@ -243,13 +243,13 @@ export default function Gesetz() {
             <div>
               <Header
                 heading={{
-                  id: `${slugify(regulations.nkr.title)}-${index}`,
-                  text: regulations.nkr.title,
+                  id: `${slugify(examplesRegelungen.nkr.title)}-${index}`,
+                  text: examplesRegelungen.nkr.title,
                   tagName: "h2",
                   look: "ds-heading-02-bold",
                 }}
                 content={{
-                  markdown: regulations.nkr.subtitle,
+                  markdown: examplesRegelungen.nkr.subtitle,
                 }}
               />
               <div className="my-32 border-l-4 border-gray-300 pl-8">
@@ -257,7 +257,7 @@ export default function Gesetz() {
               </div>
               {regelung.NKRStellungnahmeLink && (
                 <div>
-                  {regulations.nkr.linkText}
+                  {examplesRegelungen.nkr.linkText}
                   <CustomLink
                     target="_blank"
                     to={regelung.NKRStellungnahmeLink}

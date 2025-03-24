@@ -5,7 +5,7 @@ import {
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
 } from "~/resources/staticRoutes";
 
-export const fivePrinciples = {
+export const methodsFivePrinciples = {
   title: "Fünf Prinzipien für digitaltaugliche Gesetzgebung",
   buttonText: "Beispiele betrachten",
   principles: [

@@ -3,7 +3,7 @@ import {
   ROUTE_VISUALISATIONS,
 } from "~/resources/staticRoutes";
 
-export const digitalSuitability = {
+export const examples = {
   title: "Beispiele für Digitaltauglichkeit",
   subtitle:
     "Hier finden Sie Beispiele für digitaltaugliche Regelungen, sowie aus deren Erarbeitungsprozess. " +

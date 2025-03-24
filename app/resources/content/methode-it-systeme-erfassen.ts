@@ -7,7 +7,7 @@ import {
   ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
 
-export const collectITSystems = {
+export const methodsITSystems = {
   title: "2.3. IT-Systeme gemeinsam erfassen",
   subtitle: `Nutzen Sie das Fachwissen der zuständigen Akteurinnen und Akteure, um die verwendete IT-Infrastruktur für die im vorigen Schritt identifizierten Abläufe zu erfassen und zu verstehen.`,
   guidance: `**Zeit:** ca. sechs Stunden

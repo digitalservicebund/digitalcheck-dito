@@ -10,10 +10,10 @@ import InterviewBanner from "~/components/InterviewBanner";
 import LabelWithIcon from "~/components/LabelWithIcon";
 import RichText from "~/components/RichText";
 import allRoutes from "~/resources/allRoutes";
-import { tasksProcesses } from "~/resources/content/methode-ablaeufe-aufgaben-erfassen";
-import { collectITSystems } from "~/resources/content/methode-it-systeme-erfassen";
-import { technicalFeasibility } from "~/resources/content/methode-technische-umsetzbarkeit";
-import { responsibleActors } from "~/resources/content/methode-zustaendige-akteurinnen-auflisten";
+import { methodsTasksProcesses } from "~/resources/content/methode-ablaeufe-aufgaben-erfassen";
+import { methodsITSystems } from "~/resources/content/methode-it-systeme-erfassen";
+import { methodsTechnicalFeasibility } from "~/resources/content/methode-technische-umsetzbarkeit";
+import { methodsResponsibleActors } from "~/resources/content/methode-zustaendige-akteurinnen-auflisten";
 import {
   ROUTE_METHODS,
   ROUTE_METHODS_COLLECT_IT_SYSTEMS,
@@ -25,10 +25,10 @@ import prependMetaTitle from "~/utils/metaTitle";
 import type { Route } from "./+types/methoden_.$subPage";
 
 const contentMap = {
-  [ROUTE_METHODS_RESPONSIBLE_ACTORS.title]: responsibleActors,
-  [ROUTE_METHODS_TASKS_PROCESSES.title]: tasksProcesses,
-  [ROUTE_METHODS_COLLECT_IT_SYSTEMS.title]: collectITSystems,
-  [ROUTE_METHODS_TECHNICAL_FEASIBILITY.title]: technicalFeasibility,
+  [ROUTE_METHODS_RESPONSIBLE_ACTORS.title]: methodsResponsibleActors,
+  [ROUTE_METHODS_TASKS_PROCESSES.title]: methodsTasksProcesses,
+  [ROUTE_METHODS_COLLECT_IT_SYSTEMS.title]: methodsITSystems,
+  [ROUTE_METHODS_TECHNICAL_FEASIBILITY.title]: methodsTechnicalFeasibility,
 };
 
 const notFound = new Response("Method page not found", {

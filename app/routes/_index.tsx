@@ -7,7 +7,7 @@ import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
 import { NumberedList } from "~/components/List";
 import SupportBanner from "~/components/SupportBanner";
-import { landing } from "~/resources/content/startseite";
+import { index } from "~/resources/content/startseite";
 import { features } from "~/resources/features";
 import { useFeatureFlag } from "~/utils/featureFlags";
 
@@ -23,10 +23,10 @@ export default function Index() {
           <Header
             heading={{
               tagName: "h1",
-              text: landing.title,
+              text: index.title,
             }}
             content={{
-              markdown: landing.subtitle,
+              markdown: index.subtitle,
               className: "md:text-2xl",
             }}
           ></Header>
@@ -36,9 +36,9 @@ export default function Index() {
         <NumberedList
           heading={{
             tagName: "h2",
-            text: landing.list.title,
+            text: index.list.title,
           }}
-          items={landing.list.items}
+          items={index.list.items}
         />
       </Container>
       {/* <Container className="max-sm:!p-0">
@@ -54,15 +54,15 @@ export default function Index() {
           <div className="max-w-[630px] rounded-lg bg-white px-16 py-28 md:px-80 md:py-40">
             {showInteroperabilitySection ? (
               <Box
-                heading={{ text: landing.interoperability.title }}
-                content={{ markdown: landing.interoperability.text }}
-                buttons={[landing.interoperability.link]}
+                heading={{ text: index.interoperability.title }}
+                content={{ markdown: index.interoperability.text }}
+                buttons={[index.interoperability.link]}
               />
             ) : (
               <Box
-                heading={{ text: landing.trainings.title }}
-                content={{ markdown: landing.trainings.text }}
-                buttons={[landing.trainings.link]}
+                heading={{ text: index.trainings.title }}
+                content={{ markdown: index.trainings.text }}
+                buttons={[index.trainings.link]}
               />
             )}
           </div>
@@ -72,18 +72,18 @@ export default function Index() {
         <InfoBox
           heading={{
             tagName: "h2",
-            text: landing.summary.title,
+            text: index.summary.title,
           }}
-          items={landing.summary.items}
+          items={index.summary.items}
         />
       </Container>
       <SupportBanner />
       <Background backgroundColor="darkBlue" className="py-24">
         <Container>
           <div className="scroll-my-40 ds-stack-32">
-            <Heading tagName="h2" text={landing.principles.title} />
+            <Heading tagName="h2" text={index.principles.title} />
             <ol className="list-unstyled space-y-8">
-              {landing.principles.content.map((principle) => (
+              {index.principles.content.map((principle) => (
                 <li
                   key={principle}
                   className="before:mb-8 before:block before:w-1/2 before:border-t before:border-blue-700 before:content-[''] first:before:content-none"
@@ -93,10 +93,10 @@ export default function Index() {
               ))}
             </ol>
             <Link
-              to={landing.principles.link.href}
+              to={index.principles.link.href}
               className="text-link font-bold"
             >
-              {landing.principles.link.text}
+              {index.principles.link.text}
             </Link>
           </div>
         </Container>

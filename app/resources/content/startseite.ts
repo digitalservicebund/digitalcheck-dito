@@ -10,7 +10,7 @@ import {
   TOOLFINDER,
 } from "~/resources/staticRoutes";
 
-export const landing = {
+export const index = {
   title: "Digitaltaugliche Regelungen erarbeiten",
   subtitle: `Hier erfahren Sie,
   - was Digitaltauglichkeit für Ihr Regelungsvorhaben bedeutet,

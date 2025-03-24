@@ -4,7 +4,7 @@ import LightbulbOutlined from "@digitalservicebund/icons/LightbulbOutlined";
 import StickyNote2Outlined from "@digitalservicebund/icons/StickyNote2Outlined";
 import { ROUTE_METHODS_TASKS_PROCESSES } from "~/resources/staticRoutes";
 
-export const responsibleActors = {
+export const methodsResponsibleActors = {
   title: "2.1. Zuständige Akteurinnen und Akteure auflisten",
   subtitle: `Wenn Sie ein Regelungsvorhaben erarbeiten, ist es entscheidend, die **Zuständigkeiten der umsetzenden Akteurinnen und Akteure** zu kennen: Sie sind die Expertinnen und Experten für die digitale, praktische Umsetzung in der Praxis und damit wertvolle Gesprächspartnerinnen und -partner.`,
   guidance: `**Zeit:** ca. vier Stunden`,

@@ -5,7 +5,7 @@ import Container from "~/components/Container";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import VisualisationItem from "~/components/VisualisationItem";
-import { visualisations } from "~/resources/content/beispiele-visualisierungen";
+import { examplesVisualisations } from "~/resources/content/beispiele-visualisierungen";
 import { ROUTE_LAWS, ROUTE_VISUALISATIONS } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 import {
@@ -64,12 +64,12 @@ export default function BeispieleVisualisierungen() {
         <Container>
           <Header
             heading={{
-              text: visualisations.title,
+              text: examplesVisualisations.title,
               tagName: "h1",
               className: "max-w-full",
             }}
             content={{
-              markdown: visualisations.subtitle,
+              markdown: examplesVisualisations.subtitle,
             }}
           />
         </Container>

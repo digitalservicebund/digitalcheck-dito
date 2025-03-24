@@ -1,4 +1,4 @@
-export const regulations = {
+export const examplesRegelungen = {
   subtitle: [
     "Hier finden Sie alles zur Digitaltauglichkeit dieser Regelung.",
     "Inhalt",

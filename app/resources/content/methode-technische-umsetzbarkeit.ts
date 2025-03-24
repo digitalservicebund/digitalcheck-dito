@@ -9,7 +9,7 @@ import {
   ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
 
-export const technicalFeasibility = {
+export const methodsTechnicalFeasibility = {
   title: "2.5. Technische Umsetzbarkeit sicherstellen",
   subtitle: `Analysieren Sie die Auswirkungen Ihres Regelungsvorhabens auf bestehende und neue Abläufe und IT-Systeme. Damit stellen Sie die technische Machbarkeit sicher. Greifen Sie dafür auf das Fachwissen der zuständigen Akteurinnen und Akteure zurück und holen Sie sich Hilfe von neutralen IT-Expertinnen und -Experten.`,
   guidance: `**Zeit:** Richtet sich nach der Komplexität des Vorhabens
