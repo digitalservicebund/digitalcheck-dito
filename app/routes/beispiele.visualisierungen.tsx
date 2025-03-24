@@ -5,7 +5,7 @@ import Container from "~/components/Container";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import VisualisationItem from "~/components/VisualisationItem";
-import { visualisations } from "~/resources/content";
+import { visualisations } from "~/resources/content/beispiele-visualisierungen";
 import { ROUTE_LAWS, ROUTE_VISUALISATIONS } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 import {

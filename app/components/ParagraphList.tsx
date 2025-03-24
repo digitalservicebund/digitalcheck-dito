@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
-import { digitalSuitability } from "~/resources/content";
+import { digitalSuitability } from "~/resources/content/beispiele";
 import {
   AbsatzWithNumber,
   isStandaloneAbsatz,

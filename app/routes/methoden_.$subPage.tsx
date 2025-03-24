@@ -10,12 +10,10 @@ import InterviewBanner from "~/components/InterviewBanner";
 import LabelWithIcon from "~/components/LabelWithIcon";
 import RichText from "~/components/RichText";
 import allRoutes from "~/resources/allRoutes";
-import {
-  collectITSystems,
-  responsibleActors,
-  tasksProcesses,
-  technicalFeasibility,
-} from "~/resources/content";
+import { tasksProcesses } from "~/resources/content/methode-ablaeufe-aufgaben-erfassen";
+import { collectITSystems } from "~/resources/content/methode-it-systeme-erfassen";
+import { technicalFeasibility } from "~/resources/content/methode-technische-umsetzbarkeit";
+import { responsibleActors } from "~/resources/content/methode-zustaendige-akteurinnen-auflisten";
 import {
   ROUTE_METHODS,
   ROUTE_METHODS_COLLECT_IT_SYSTEMS,

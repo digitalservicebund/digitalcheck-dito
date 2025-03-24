@@ -1,5 +1,5 @@
 import { expect, type Page, test } from "@playwright/test";
-import { preCheck } from "~/resources/content";
+import { preCheck } from "~/resources/content/vorpruefung";
 import {
   ROUTE_DOCUMENTATION,
   ROUTE_INTEROPERABILITY,

@@ -7,7 +7,7 @@ import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
 import { NumberedList } from "~/components/List";
 import SupportBanner from "~/components/SupportBanner";
-import { landing } from "~/resources/content";
+import { landing } from "~/resources/content/startseite";
 import { features } from "~/resources/features";
 import { useFeatureFlag } from "~/utils/featureFlags";
 

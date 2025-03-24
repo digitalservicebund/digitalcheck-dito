@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import Heading from "~/components/Heading";
-import { general } from "~/resources/content";
+import { general } from "~/resources/content/shared/general";
 
 export type LinkItem = {
   id: string;

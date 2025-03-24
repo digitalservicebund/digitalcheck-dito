@@ -1,7 +1,7 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { PDFBool, PDFDocument, PDFName } from "pdf-lib";
-import { preCheck } from "~/resources/content";
+import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
 import { userAnswers } from "~/utils/cookies.server";
 import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/vorpruefung.ergebnis.$fileName[.pdf]";
@@ -118,14 +118,14 @@ export async function action({ params, request }: Route.ActionArgs) {
 
   if (!isPreCheckAnswers(filteredAnswers)) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(preCheck.result.form.precheckAnswersRequired, {
+    throw new Response(preCheckResult.form.precheckAnswersRequired, {
       status: 400,
     });
   }
 
   if (typeof title !== "string" || title === "") {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(preCheck.result.form.policyTitleRequired, {
+    throw new Response(preCheckResult.form.policyTitleRequired, {
       status: 400,
     });
   }
@@ -138,7 +138,7 @@ export async function action({ params, request }: Route.ActionArgs) {
       negativeReasoning === "")
   ) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(preCheck.result.form.reasonRequired, {
+    throw new Response(preCheckResult.form.reasonRequired, {
       status: 400,
     });
   }
@@ -146,14 +146,14 @@ export async function action({ params, request }: Route.ActionArgs) {
   // reject requests with long titles or negativeReasonings to prevent DOS and maybe memory overflow attacks
   if (title && title.length > 500) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(preCheck.result.form.policyTitleTooLong, {
+    throw new Response(preCheckResult.form.policyTitleTooLong, {
       status: 413,
     });
   }
 
   if (negativeReasoning && negativeReasoning.length > 5000) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(preCheck.result.form.reasonTooLong, {
+    throw new Response(preCheckResult.form.reasonTooLong, {
       status: 413,
     });
   }

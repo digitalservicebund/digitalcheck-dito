@@ -16,7 +16,7 @@ import InlineInfoList from "~/components/InlineInfoList";
 import InlineNotice from "~/components/InlineNotice";
 import ParagraphList from "~/components/ParagraphList";
 import VisualisationItem from "~/components/VisualisationItem";
-import { regulations } from "~/resources/content";
+import { regulations } from "~/resources/content/beispiele-regelungen";
 import { ROUTE_LAWS } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 import {

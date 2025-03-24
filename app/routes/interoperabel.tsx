@@ -12,7 +12,7 @@ import InfoBox from "~/components/InfoBox";
 import LinkListBox from "~/components/LinkListBox";
 import RichText from "~/components/RichText";
 import SupportBanner from "~/components/SupportBanner";
-import { interoperability } from "~/resources/content";
+import { interoperability } from "~/resources/content/interoperabel";
 import { features } from "~/resources/features";
 import {
   ROUTE_INTEROPERABILITY,

@@ -11,7 +11,8 @@ import Image from "~/components/Image";
 import InfoBox from "~/components/InfoBox";
 import SupportBanner from "~/components/SupportBanner";
 import { PRE_CHECK_START_BUTTON_ID } from "~/resources/constants";
-import { general, preCheck } from "~/resources/content";
+import { general } from "~/resources/content/shared/general";
+import { preCheck } from "~/resources/content/vorpruefung";
 import { features } from "~/resources/features";
 import {
   ROUTE_GENERAL_INFO,

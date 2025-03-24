@@ -3,7 +3,7 @@ import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { Link } from "react-router";
 import Heading from "~/components/Heading";
 import Image from "~/components/Image";
-import { regulations } from "~/resources/content";
+import { regulations } from "~/resources/content/beispiele-regelungen";
 import { ROUTE_VISUALISATION } from "~/resources/staticRoutes";
 import { Visualisierung } from "~/utils/strapiData.server";
 import { formatDate } from "~/utils/utilFunctions";

@@ -1,7 +1,7 @@
 import Background from "~/components/Background";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
-import { supportBanner } from "~/resources/content";
+import { supportBanner } from "~/resources/content/components/support-banner";
 
 export default function SupportBanner({
   withFeedbackBanner = true,

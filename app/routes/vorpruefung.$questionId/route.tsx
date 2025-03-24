@@ -8,7 +8,8 @@ import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import LinkBar from "~/components/LinkBar";
 import Question from "~/components/Question";
-import { general, preCheck } from "~/resources/content";
+import { general } from "~/resources/content/shared/general";
+import { preCheck } from "~/resources/content/vorpruefung";
 import { ROUTE_PRECHECK } from "~/resources/staticRoutes";
 import {
   getAnswersFromCookie,

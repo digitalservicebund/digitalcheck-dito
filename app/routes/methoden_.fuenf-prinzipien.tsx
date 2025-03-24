@@ -6,7 +6,7 @@ import Header from "~/components/Header";
 import InfoBox from "~/components/InfoBox";
 import LinkListBox from "~/components/LinkListBox";
 import SupportBanner from "~/components/SupportBanner";
-import { fivePrinciples } from "~/resources/content";
+import { fivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import {
   ROUTE_EXAMPLES,
   ROUTE_METHODS,

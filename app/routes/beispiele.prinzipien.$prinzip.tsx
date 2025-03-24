@@ -14,7 +14,7 @@ import CustomLink from "~/components/CustomLink";
 import Heading from "~/components/Heading";
 import InlineInfoList from "~/components/InlineInfoList";
 import ParagraphList from "~/components/ParagraphList";
-import { regulations } from "~/resources/content";
+import { regulations } from "~/resources/content/beispiele-regelungen";
 import { ROUTE_LAWS, ROUTE_PRINCIPLES } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 import {

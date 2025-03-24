@@ -10,7 +10,7 @@ import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import Image from "~/components/Image";
 import RichText from "~/components/RichText";
-import { support } from "~/resources/content";
+import { support } from "~/resources/content/unterstuetzung";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 import SupportTabs from "./SupportTabList";

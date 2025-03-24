@@ -3,7 +3,7 @@ import Background from "~/components/Background";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
 import RichText from "~/components/RichText";
-import { accessibility } from "~/resources/content";
+import { accessibility } from "~/resources/content/barrierefreiheit";
 import { ROUTE_A11Y } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 

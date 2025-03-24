@@ -9,7 +9,7 @@ import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import Image from "~/components/Image";
 import RichText from "~/components/RichText";
-import { support } from "~/resources/content";
+import { support } from "~/resources/content/unterstuetzung";
 
 const { supportOfferings } = support;
 const { tabs } = supportOfferings;

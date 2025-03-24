@@ -8,7 +8,7 @@ import Header from "~/components/Header";
 import { BulletList, NumberedList } from "~/components/List";
 import { ListItemProps } from "~/components/ListItem";
 import SupportBanner from "~/components/SupportBanner";
-import { methods } from "~/resources/content";
+import { methods } from "~/resources/content/methoden";
 import { ROUTE_METHODS } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 

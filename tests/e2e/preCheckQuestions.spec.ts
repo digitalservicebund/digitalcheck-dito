@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { PRE_CHECK_START_BUTTON_ID } from "~/resources/constants";
-import { preCheck } from "~/resources/content";
+import { preCheck } from "~/resources/content/vorpruefung";
 import {
   ROUTE_GENERAL_INFO,
   ROUTE_PRECHECK,

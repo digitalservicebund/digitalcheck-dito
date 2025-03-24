@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import allRoutes from "~/resources/allRoutes";
-import { preCheck } from "~/resources/content";
+import { preCheck } from "~/resources/content/vorpruefung";
 import * as staticRoutes from "~/resources/staticRoutes";
 
 test.describe("test breadcrumbs and titles", () => {
