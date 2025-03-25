@@ -45,11 +45,11 @@ function buildEmailBody(
 export default function buildMailtoRedirectUri(
   result: PreCheckResult,
   resultContent: ResultContent,
-  policyTitle: string,
+  vorhabenTitle: string,
   userEmail?: string,
   negativeReasoning?: string,
 ) {
-  const subject = `${emailTemplate.subject}: „${policyTitle}“`;
+  const subject = `${emailTemplate.subject}: „${vorhabenTitle}“`;
   const cc = userEmail ? `&cc=${userEmail}` : "";
   const recipients = encodeURIComponent(resolveRecipients(result));
   const body = buildEmailBody(resultContent, negativeReasoning);

@@ -17,11 +17,11 @@ import { PreCheckResult, ResultType } from "./PreCheckResult";
 export default function ResultForm({
   result,
   answers,
-  setPolicyTitle,
+  setVorhabenTitle,
 }: Readonly<{
   result: PreCheckResult;
   answers: PreCheckAnswers;
-  setPolicyTitle: Dispatch<SetStateAction<string>>;
+  setVorhabenTitle: Dispatch<SetStateAction<string>>;
 }>) {
   const showSaveToPdf = useFeatureFlag(features.showSaveToPdfOption);
 
@@ -34,10 +34,10 @@ export default function ResultForm({
     },
   });
 
-  const handlePolicyTitleChange = (
+  const handleVorhabenTitleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    setPolicyTitle(event.target.value);
+    setVorhabenTitle(event.target.value);
   };
 
   const [warning, setWarning] = useState<string | null>(null);
@@ -76,9 +76,9 @@ export default function ResultForm({
           />
           <Input
             name="title"
-            label={preCheckResult.form.policyTitleLabel}
+            label={preCheckResult.form.vorhabenTitleLabel}
             error={form.error("title")}
-            onChange={handlePolicyTitleChange}
+            onChange={handleVorhabenTitleChange}
           />
           {result.digital === ResultType.NEGATIVE && (
             <Textarea

@@ -32,7 +32,7 @@ export const examplesRegelungen = {
     subtitle: "Diese Ausführungen sind der Stellungnahme des NKR entnommen.",
     linkText: "Die ganze Stellungnahme können Sie hier finden: ",
   },
-  yourRegulation: {
+  yourExample: {
     title: "Sie möchten Ihr Beispiel hier sehen?",
     text: "Wir nehmen gerne Vorschläge für Beispiele entgegen. Wenn Sie einen digitaltauglichen Regelungstext oder eine Visualisierung haben, schreiben Sie uns eine E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Beispiel:%20Digitaltauglichkeit). Wir melden uns zeitnah bei Ihnen.",
   },

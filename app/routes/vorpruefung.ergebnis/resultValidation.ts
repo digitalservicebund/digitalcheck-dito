@@ -6,8 +6,8 @@ import type { PreCheckAnswers } from "~/routes/vorpruefung.$questionId/route";
 const positiveValidation = z.object({
   title: z
     .string()
-    .min(1, { message: preCheckResult.form.policyTitleRequired })
-    .max(100, { message: preCheckResult.form.policyTitleTooLong }),
+    .min(1, { message: preCheckResult.form.vorhabenTitleRequired })
+    .max(100, { message: preCheckResult.form.vorhabenTitleTooLong }),
 });
 
 const negativeValidation = positiveValidation.extend({

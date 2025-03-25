@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import {
-  ROUTE_LAWS,
   ROUTE_PRINCIPLES,
+  ROUTE_REGELUNGEN,
   ROUTE_VISUALISATIONS,
 } from "~/resources/staticRoutes";
 
@@ -71,7 +71,7 @@ test.describe("Prinzipien Detail", () => {
       const url = `${ROUTE_PRINCIPLES.url}/${principle}`;
       await page.goto(url);
 
-      const lawLinks = page.locator(`a[href^="${ROUTE_LAWS.url}"]`);
+      const lawLinks = page.locator(`a[href^="${ROUTE_REGELUNGEN.url}"]`);
       await expect(lawLinks.first()).toBeVisible();
 
       const [newTab] = await Promise.all([
@@ -80,7 +80,7 @@ test.describe("Prinzipien Detail", () => {
       ]);
 
       await newTab.waitForLoadState("networkidle");
-      await expect(newTab).toHaveURL(new RegExp(`${ROUTE_LAWS.url}/.+`));
+      await expect(newTab).toHaveURL(new RegExp(`${ROUTE_REGELUNGEN.url}/.+`));
 
       const mainContent = newTab.getByRole("main");
       await expect(mainContent).toBeVisible();
@@ -131,14 +131,14 @@ test.describe("Visualizations Overview Page", () => {
     expect(newTab.url()).toContain("visualisierung");
   });
 
-  test("navigation to regulation detail works", async ({ page }) => {
+  test("navigation to regelung detail works", async ({ page }) => {
     await page.goto(ROUTE_VISUALISATIONS.url);
 
-    const firstRegulationLink = page
-      .locator(`a[href^="${ROUTE_LAWS.url}"]`)
+    const firstRegelungLink = page
+      .locator(`a[href^="${ROUTE_REGELUNGEN.url}"]`)
       .first();
-    await firstRegulationLink.click();
+    await firstRegelungLink.click();
 
-    await expect(page).toHaveURL(new RegExp(`${ROUTE_LAWS.url}/.+`));
+    await expect(page).toHaveURL(new RegExp(`${ROUTE_REGELUNGEN.url}/.+`));
   });
 });

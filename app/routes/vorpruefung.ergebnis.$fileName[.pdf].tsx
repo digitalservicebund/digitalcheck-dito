@@ -7,7 +7,7 @@ import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/vorpruefung.ergebnis.$fileName[.pdf]";
 import { PreCheckAnswers } from "./vorpruefung.$questionId/route";
 
-export const FIELD_NAME_POLICY_TITLE = "Titel des Regelungsvorhabens";
+export const FIELD_NAME_VORHABEN_TITLE = "Titel des Regelungsvorhabens";
 export const FIELD_NAME_PRE_CHECK_POSITIVE_1 = "Vorprüfung positiv - 1";
 export const FIELD_NAME_PRE_CHECK_POSITIVE_2 = "Vorprüfung positiv - 2";
 export const FIELD_NAME_PRE_CHECK_POSITIVE_3 = "Vorprüfung positiv - 3";
@@ -65,7 +65,7 @@ const createPreCheckPDF = async function (
 
     const { title, answers, negativeReasoning } = userInput;
 
-    const titleField = form.getTextField(FIELD_NAME_POLICY_TITLE);
+    const titleField = form.getTextField(FIELD_NAME_VORHABEN_TITLE);
     titleField.setText(title);
     titleField.setFontSize(12);
 
@@ -125,7 +125,7 @@ export async function action({ params, request }: Route.ActionArgs) {
 
   if (typeof title !== "string" || title === "") {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(preCheckResult.form.policyTitleRequired, {
+    throw new Response(preCheckResult.form.vorhabenTitleRequired, {
       status: 400,
     });
   }
@@ -146,7 +146,7 @@ export async function action({ params, request }: Route.ActionArgs) {
   // reject requests with long titles or negativeReasonings to prevent DOS and maybe memory overflow attacks
   if (title && title.length > 500) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(preCheckResult.form.policyTitleTooLong, {
+    throw new Response(preCheckResult.form.vorhabenTitleTooLong, {
       status: 413,
     });
   }

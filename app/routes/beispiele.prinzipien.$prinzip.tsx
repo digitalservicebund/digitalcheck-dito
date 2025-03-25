@@ -15,7 +15,7 @@ import Heading from "~/components/Heading";
 import InlineInfoList from "~/components/InlineInfoList";
 import ParagraphList from "~/components/ParagraphList";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
-import { ROUTE_LAWS, ROUTE_PRINCIPLES } from "~/resources/staticRoutes";
+import { ROUTE_PRINCIPLES, ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,
@@ -126,7 +126,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
                 >
                   <Link
                     target="_blank"
-                    to={`${ROUTE_LAWS.url}/${digitalcheck.Regelungsvorhaben.URLBezeichnung}`}
+                    to={`${ROUTE_REGELUNGEN.url}/${digitalcheck.Regelungsvorhaben.URLBezeichnung}`}
                     rel="noreferrer"
                     prefetch="viewport"
                   >
@@ -190,10 +190,10 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
         <Container backgroundColor="blue" overhangingBackground>
           <Box
             heading={{
-              text: examplesRegelungen.yourRegulation.title,
+              text: examplesRegelungen.yourExample.title,
               tagName: "h2",
             }}
-            content={{ markdown: examplesRegelungen.yourRegulation.text }}
+            content={{ markdown: examplesRegelungen.yourExample.text }}
           />
         </Container>
       </div>

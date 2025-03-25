@@ -17,7 +17,7 @@ import InlineNotice from "~/components/InlineNotice";
 import ParagraphList from "~/components/ParagraphList";
 import VisualisationItem from "~/components/VisualisationItem";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
-import { ROUTE_LAWS } from "~/resources/staticRoutes";
+import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,
@@ -31,7 +31,7 @@ import { formatDate, gesetzStatusMap, slugify } from "~/utils/utilFunctions";
 import type { Route } from "./+types/beispiele.regelungen.$regelung";
 
 export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_LAWS.title, matches);
+  return prependMetaTitle(ROUTE_REGELUNGEN.title, matches);
 };
 
 // prinzipCoreFields are being used in paragraphFields and so need to be included

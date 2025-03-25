@@ -91,9 +91,9 @@ export const preCheckResult = {
       - Je früher und tiefer Sie sich mit dem NKR über den Digitalbezug Ihres Regelungsvorhabens austauschen, desto schneller wird die Prüfung abgeschlossen.
     `,
     emailLabel: "Ihre E-Mail Adresse (optional)",
-    policyTitleLabel: "Vorläufiger Arbeitstitel des Vorhabens",
-    policyTitleRequired: "Bitte geben Sie einen Titel für Ihr Vorhaben an.",
-    policyTitleTooLong:
+    vorhabenTitleLabel: "Vorläufiger Arbeitstitel des Vorhabens",
+    vorhabenTitleRequired: "Bitte geben Sie einen Titel für Ihr Vorhaben an.",
+    vorhabenTitleTooLong:
       "Bitte wählen Sie einen kürzeren Titel (100 Zeichen) und ergänzen Sie diesen gegebenenfalls direkt in der resultierenden E-Mail.",
     precheckAnswersRequired: "Bitte geben Sie die Vorprüfung-Antworten an",
     reasonLabel: "Begründung",

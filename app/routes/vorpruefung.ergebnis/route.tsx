@@ -151,7 +151,7 @@ function getReasonListItem(reason: Reason) {
 
 export default function Result() {
   const { result, answers } = useLoaderData<typeof loader>();
-  const [policyTitle, setPolicyTitle] = useState("");
+  const [vorhabenTitle, setVorhabenTitle] = useState("");
 
   const resultContent = getContentForResult(answers, result);
 
@@ -179,12 +179,12 @@ export default function Result() {
               result.digital === ResultType.UNSURE ? "lightYellow" : "midBlue"
             }
           >
-            {policyTitle && (
+            {vorhabenTitle && (
               <Header
                 heading={{
                   tagName: "h2",
                   look: "ds-heading-03-reg",
-                  text: `${preCheckResult.print.titlePrefix}${policyTitle}`,
+                  text: `${preCheckResult.print.titlePrefix}${vorhabenTitle}`,
                   className: "hidden print:block pb-24 font-bold",
                 }}
               />
@@ -239,7 +239,7 @@ export default function Result() {
                 <ResultForm
                   result={result}
                   answers={answers}
-                  setPolicyTitle={setPolicyTitle}
+                  setVorhabenTitle={setVorhabenTitle}
                 />
               </div>
             )}

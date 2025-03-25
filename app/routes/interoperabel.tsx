@@ -56,8 +56,8 @@ export default function Interoperability() {
                 title: interoperability.andDigitalReadiness.headline,
               },
               {
-                id: interoperability.andPolicyMaking.id,
-                title: interoperability.andPolicyMaking.headline,
+                id: interoperability.andYourVorhaben.id,
+                title: interoperability.andYourVorhaben.headline,
               },
               {
                 id: interoperability.info.id,
@@ -118,28 +118,28 @@ export default function Interoperability() {
           </div>
         </Background>
       </div>
-      <div id={interoperability.andPolicyMaking.id}>
+      <div id={interoperability.andYourVorhaben.id}>
         <Container>
           <Heading
             tagName="h2"
-            text={interoperability.andPolicyMaking.headline}
+            text={interoperability.andYourVorhaben.headline}
             className="mb-8"
           />
           <RichText
-            markdown={interoperability.andPolicyMaking.content}
+            markdown={interoperability.andYourVorhaben.content}
             className="mb-40"
           />
           <Link
-            to={interoperability.andPolicyMaking.image.url}
+            to={interoperability.andYourVorhaben.image.url}
             reloadDocument
             target="_blank"
             rel="noreferrer"
             className="relative block cursor-zoom-in"
           >
             <Image
-              url={interoperability.andPolicyMaking.image.url}
+              url={interoperability.andYourVorhaben.image.url}
               alternativeText={
-                interoperability.andPolicyMaking.image.alternativeText
+                interoperability.andYourVorhaben.image.alternativeText
               }
               className="h-auto w-full"
             />
@@ -150,10 +150,10 @@ export default function Interoperability() {
           </Link>
           <Heading
             tagName="h3"
-            text={interoperability.andPolicyMaking.law.headline}
+            text={interoperability.andYourVorhaben.law.headline}
             className="mb-8 mt-40"
           />
-          <RichText markdown={interoperability.andPolicyMaking.law.content} />
+          <RichText markdown={interoperability.andYourVorhaben.law.content} />
         </Container>
       </div>
       <div id={interoperability.info.id}>

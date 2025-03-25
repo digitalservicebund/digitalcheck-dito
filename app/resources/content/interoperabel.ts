@@ -184,7 +184,7 @@ export const interoperability = {
       },
     ],
   },
-  andPolicyMaking: {
+  andYourVorhaben: {
     id: "prozess",
     headline: "Wie beeinflusst Interoperabilität Ihr Vorhaben?",
     content: dedent`
