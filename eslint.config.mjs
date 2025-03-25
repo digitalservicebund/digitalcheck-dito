@@ -122,10 +122,7 @@ export default tseslint.config(
   },
   // Additional Rules for test files
   {
-    files: [
-      "**/a11y/*.{spec,test}.{js,ts,jsx,tsx}",
-      "**/e2e/*.{spec,test}.{js,ts,jsx,tsx}",
-    ],
+    files: ["**/a11y/*.{spec,test}.{ts,tsx}", "**/e2e/*.{spec,test}.{ts,tsx}"],
     extends: [playwright.configs["flat/recommended"]],
     plugins: { "testing-library": testingLibrary },
 
