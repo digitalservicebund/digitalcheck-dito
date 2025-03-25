@@ -51,12 +51,9 @@ export default tseslint.config(
       importPlugin.flatConfigs.recommended,
       importPlugin.flatConfigs.typescript,
       tailwind.configs["flat/recommended"],
+      reactRefresh.configs.recommended,
       prettierPlugin, // should be the last one in the list
     ],
-    plugins: {
-      "testing-library": testingLibrary, // TODO: needed?
-      "react-refresh": reactRefresh, // TODO: use reactRefresh.configs.recommended,
-    },
 
     settings: {
       react: { version: "detect" },
@@ -82,12 +79,6 @@ export default tseslint.config(
     },
 
     rules: {
-      // Testing library rules
-      "testing-library/await-async-queries": "error",
-      "testing-library/no-await-sync-queries": "error",
-      "testing-library/no-debugging-utils": "warn",
-      "testing-library/no-dom-import": "off",
-
       // React rules
       "react-refresh/only-export-components": [
         "warn",
@@ -136,7 +127,18 @@ export default tseslint.config(
       "**/e2e/*.{spec,test}.{js,ts,jsx,tsx}",
     ],
     extends: [playwright.configs["flat/recommended"]],
+    plugins: { "testing-library": testingLibrary },
+
     rules: {
+      // Testing library rules
+      "testing-library/await-async-queries": "error",
+      "testing-library/no-await-sync-queries": "error",
+      "testing-library/no-debugging-utils": "warn",
+      "testing-library/no-dom-import": "off",
+
+      // Playwright rules
+      "playwright/no-conditional-expect": "off",
+      "playwright/no-conditional-in-test": "off",
       "playwright/no-skipped-test": [
         "error",
         {
