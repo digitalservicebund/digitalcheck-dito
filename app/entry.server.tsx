@@ -97,8 +97,7 @@ function handleBotRequest(
           pipe(body);
         },
         onShellError(error: unknown) {
-          // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
-          reject(error);
+          reject(error instanceof Error ? error : new Error(String(error)));
         },
         onError() {
           responseStatusCode = 500;
@@ -168,8 +167,7 @@ function handleBrowserRequest(
           pipe(body);
         },
         onShellError(error: unknown) {
-          // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
-          reject(error);
+          reject(error instanceof Error ? error : new Error(String(error)));
         },
         onError(error: unknown) {
           responseStatusCode = 500;

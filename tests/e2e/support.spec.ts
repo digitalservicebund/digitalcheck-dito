@@ -28,12 +28,10 @@ test.describe("test support page", () => {
     ).toBeVisible();
     await expect(
       page.getByRole("heading", { name: "Digitale Umsetzung erarbeiten" }),
-    ).not.toBeVisible();
+    ).toBeHidden();
 
     await page.getByRole("tab", { name: "Umfangreiche Beratung" }).click();
-    await expect(
-      page.getByRole("heading", { name: "IT-Wissen" }),
-    ).not.toBeVisible();
+    await expect(page.getByRole("heading", { name: "IT-Wissen" })).toBeHidden();
     await expect(
       page.getByRole("heading", { name: "Digitale Umsetzung erarbeiten" }),
     ).toBeVisible();

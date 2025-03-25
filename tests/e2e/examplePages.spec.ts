@@ -79,7 +79,7 @@ test.describe("Prinzipien Detail", () => {
         lawLinks.first().click(),
       ]);
 
-      await newTab.waitForLoadState("networkidle");
+      await newTab.waitForLoadState("domcontentloaded");
       await expect(newTab).toHaveURL(new RegExp(`${ROUTE_REGELUNGEN.url}/.+`));
 
       const mainContent = newTab.getByRole("main");

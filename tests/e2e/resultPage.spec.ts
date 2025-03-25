@@ -306,7 +306,7 @@ for (const scenario of scenarios) {
         );
         await expect(
           page.getByRole("link", { name: "Mehr zu Interoperabilität" }),
-        ).not.toBeVisible();
+        ).toBeHidden();
       });
     }
 
@@ -340,7 +340,7 @@ for (const scenario of scenarios) {
         });
       } else {
         test("negative reasoning input is not visible", async () => {
-          await expect(page.getByLabel("Begründung")).not.toBeVisible();
+          await expect(page.getByLabel("Begründung")).toBeHidden();
         });
 
         test("email body does not contain negative reasoning", async () => {
@@ -363,8 +363,8 @@ for (const scenario of scenarios) {
             .fill("Darum brauchen wir das nicht.");
         }
         await interceptMail(page);
-        await expect(page.getByTestId(EMAIL_INPUT_ERROR)).not.toBeVisible();
-        await expect(page.getByTestId(TITLE_INPUT_ERROR)).not.toBeVisible();
+        await expect(page.getByTestId(EMAIL_INPUT_ERROR)).toBeHidden();
+        await expect(page.getByTestId(TITLE_INPUT_ERROR)).toBeHidden();
       });
 
       test("error is shown if title is empty", async () => {
@@ -485,7 +485,7 @@ for (const scenario of scenarios) {
       }
     } else {
       test("form is not shown", async () => {
-        await expect(page.getByTestId("result-form")).not.toBeVisible();
+        await expect(page.getByTestId("result-form")).toBeHidden();
       });
     }
 

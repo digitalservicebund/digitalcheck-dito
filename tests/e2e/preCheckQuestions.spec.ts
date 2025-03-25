@@ -255,7 +255,7 @@ test.describe("test question navigation", () => {
       page
         .getByRole("link", { name: questions[1].title })
         .getByTestId("CheckIcon"),
-    ).not.toBeVisible();
+    ).toBeHidden();
 
     // Answer the second question
     await page.getByLabel("Ja").click();
