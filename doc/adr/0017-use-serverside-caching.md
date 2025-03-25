@@ -1,10 +1,8 @@
 # 17. Use Server-Side Caching with NodeCache for Strapi Data Fetching
 
-Date: 2024-12-05
-
 ## Status
 
-Accepted
+- 2024-12-05: Accepted
 
 ## Context
 

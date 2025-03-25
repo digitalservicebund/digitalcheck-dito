@@ -7,7 +7,7 @@ import InfoBox from "~/components/InfoBox";
 import InlineNotice from "~/components/InlineNotice";
 import { NumberedList } from "~/components/List";
 import SupportBanner from "~/components/SupportBanner";
-import { documentation } from "~/resources/content";
+import { documentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 

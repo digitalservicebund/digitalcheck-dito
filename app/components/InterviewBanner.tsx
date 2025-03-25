@@ -1,6 +1,6 @@
 import Box from "~/components/Box";
 import Container from "~/components/Container";
-import { interviewBanner } from "~/resources/content";
+import { interviewBanner } from "~/resources/content/components/interview-banner";
 
 export default function InterviewBanner() {
   return (

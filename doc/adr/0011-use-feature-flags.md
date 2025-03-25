@@ -1,10 +1,8 @@
 # 11. Use Feature Flags
 
-Date: 2024-06-22
-
 ## Status
 
-Accepted
+- 2024-06-22: Accepted
 
 ## Context
 

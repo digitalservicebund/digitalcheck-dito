@@ -3,7 +3,7 @@ import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { Link } from "react-router";
 import Heading from "~/components/Heading";
 import Image from "~/components/Image";
-import { regulations } from "~/resources/content";
+import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import { ROUTE_VISUALISATION } from "~/resources/staticRoutes";
 import { Visualisierung } from "~/utils/strapiData.server";
 import { formatDate } from "~/utils/utilFunctions";
@@ -47,26 +47,26 @@ export default function VisualisationItem({
 
         <div className="bg-gray-100 p-12">
           <LabelValuePair
-            label={regulations.visualisations.imageInfo.legalArea}
+            label={examplesRegelungen.visualisations.imageInfo.legalArea}
             value={visualisierung.Digitalcheck?.Regelungsvorhaben?.Rechtsgebiet}
           />
           <LabelValuePair
-            label={regulations.visualisations.imageInfo.publishedOn}
+            label={examplesRegelungen.visualisations.imageInfo.publishedOn}
             value={formatDate(
               visualisierung.Digitalcheck?.Regelungsvorhaben
                 ?.VeroeffentlichungsDatum,
             )}
           />
           <LabelValuePair
-            label={regulations.visualisations.imageInfo.type}
+            label={examplesRegelungen.visualisations.imageInfo.type}
             value={visualisierung.Visualisierungsart}
           />
           <LabelValuePair
-            label={regulations.visualisations.imageInfo.tool}
+            label={examplesRegelungen.visualisations.imageInfo.tool}
             value={visualisierung.Visualisierungstool}
           />
           <LabelValuePair
-            label={regulations.visualisations.imageInfo.department}
+            label={examplesRegelungen.visualisations.imageInfo.department}
             value={visualisierung.Digitalcheck?.Regelungsvorhaben?.Ressort}
           />
         </div>

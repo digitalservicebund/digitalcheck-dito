@@ -1,10 +1,8 @@
 # 14. Use of encryption
 
-Date: 2024-09-06
-
 ## Status
 
-Accepted
+- 2024-09-06: Accepted
 
 ## Context
 

@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
-import { digitalSuitability } from "~/resources/content";
+import { examples } from "~/resources/content/beispiele";
 import {
   AbsatzWithNumber,
   isStandaloneAbsatz,
@@ -184,7 +184,7 @@ const AbsatzContent = ({
         {absatzGroup.PrinzipErfuellungen.length > 0 && (
           <div className="mt-8 ds-stack-8">
             <span className="ds-subhead font-bold" id={baseLabelID}>
-              {digitalSuitability.paragraphs.explanation}
+              {examples.paragraphs.explanation}
             </span>
             {absatzGroup.PrinzipErfuellungen.toSorted(
               (a, b) => (a.Prinzip?.Nummer ?? 0) - (b.Prinzip?.Nummer ?? 0),

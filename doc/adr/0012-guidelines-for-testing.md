@@ -1,10 +1,8 @@
 # 12. Guidelines for testing
 
-Date: 2024-06-22
-
 ## Status
 
-Accepted
+- 2024-06-22: Accepted
 
 ## Context
 

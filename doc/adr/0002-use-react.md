@@ -1,10 +1,8 @@
 # 2. Use React as the frontend framework
 
-Date: 2024-05-16
-
 ## Status
 
-Accepted
+- 2024-05-16: Accepted
 
 ## Context
 

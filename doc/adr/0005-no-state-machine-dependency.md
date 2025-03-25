@@ -1,10 +1,8 @@
 # 5. Do not use an external dependency as state machine
 
-Date: 2024-05-21
-
 ## Status
 
-Accepted
+- 2024-05-21: Accepted
 
 ## Context
 

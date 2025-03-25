@@ -1,10 +1,8 @@
 # 18. Switch back from monorepo to polyrepo
 
-Date: 2025-02-27
-
 ## Status
 
-Accepted
+- 2025-02-27: Accepted
 
 ## Context
 

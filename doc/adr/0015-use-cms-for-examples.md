@@ -1,10 +1,8 @@
 # 15. Use a CMS for the new example pages content
 
-Date: 2024-11-20
-
 ## Status
 
-Accepted
+- 2024-11-20: Accepted
 
 ## Context
 

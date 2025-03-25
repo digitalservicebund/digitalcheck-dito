@@ -7,9 +7,10 @@ updates:
     schedule:
       interval: "daily"
     groups:
-      remix:
+      react-router:
         patterns:
-          - "@remix-run/*"
+          - "react-router"
+          - "@react-router/*"
       typescript-eslint:
         patterns:
           - "@typescript-eslint/*"

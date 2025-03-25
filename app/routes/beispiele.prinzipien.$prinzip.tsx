@@ -14,8 +14,8 @@ import CustomLink from "~/components/CustomLink";
 import Heading from "~/components/Heading";
 import InlineInfoList from "~/components/InlineInfoList";
 import ParagraphList from "~/components/ParagraphList";
-import { regulations } from "~/resources/content";
-import { ROUTE_LAWS, ROUTE_PRINCIPLES } from "~/resources/staticRoutes";
+import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
+import { ROUTE_PRINCIPLES, ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,
@@ -126,7 +126,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
                 >
                   <Link
                     target="_blank"
-                    to={`${ROUTE_LAWS.url}/${digitalcheck.Regelungsvorhaben.URLBezeichnung}`}
+                    to={`${ROUTE_REGELUNGEN.url}/${digitalcheck.Regelungsvorhaben.URLBezeichnung}`}
                     rel="noreferrer"
                     prefetch="viewport"
                   >
@@ -142,7 +142,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
                     className="my-32 pl-16"
                     items={[
                       {
-                        label: regulations.infoLabels[0],
+                        label: examplesRegelungen.infoLabels[0],
                         value: digitalcheck.Regelungsvorhaben
                           .VeroeffentlichungsDatum
                           ? formatDate(
@@ -152,7 +152,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
                           : "",
                       },
                       {
-                        key: regulations.infoLabels[1],
+                        key: examplesRegelungen.infoLabels[1],
                         value: digitalcheck.Regelungsvorhaben
                           .LinkRegelungstext ? (
                           <CustomLink
@@ -167,12 +167,12 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
                               ? gesetzStatusMap[
                                   digitalcheck.Regelungsvorhaben.GesetzStatus
                                 ]
-                              : regulations.infoLabels[1]}
+                              : examplesRegelungen.infoLabels[1]}
                           </CustomLink>
                         ) : null,
                       },
                       {
-                        label: regulations.infoLabels[2],
+                        label: examplesRegelungen.infoLabels[2],
                         value: digitalcheck.Regelungsvorhaben.Ressort,
                       },
                     ]}
@@ -190,10 +190,10 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
         <Container backgroundColor="blue" overhangingBackground>
           <Box
             heading={{
-              text: regulations.yourRegulation.title,
+              text: examplesRegelungen.yourExample.title,
               tagName: "h2",
             }}
-            content={{ markdown: regulations.yourRegulation.text }}
+            content={{ markdown: examplesRegelungen.yourExample.text }}
           />
         </Container>
       </div>

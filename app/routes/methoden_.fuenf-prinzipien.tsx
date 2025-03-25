@@ -6,7 +6,7 @@ import Header from "~/components/Header";
 import InfoBox from "~/components/InfoBox";
 import LinkListBox from "~/components/LinkListBox";
 import SupportBanner from "~/components/SupportBanner";
-import { fivePrinciples } from "~/resources/content";
+import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import {
   ROUTE_EXAMPLES,
   ROUTE_METHODS,
@@ -53,8 +53,8 @@ export default function FivePrinciples() {
   const { referrer, prinzips } = useLoaderData<typeof loader>();
 
   const nextStep = referrer.startsWith(ROUTE_METHODS.url)
-    ? fivePrinciples.nextStepMethods
-    : fivePrinciples.nextStep;
+    ? methodsFivePrinciples.nextStepMethods
+    : methodsFivePrinciples.nextStep;
 
   return (
     <>
@@ -64,12 +64,12 @@ export default function FivePrinciples() {
             heading={{
               tagName: "h1",
               text: referrer.startsWith(ROUTE_METHODS.url)
-                ? `2.4. ${fivePrinciples.title}`
-                : fivePrinciples.title,
+                ? `2.4. ${methodsFivePrinciples.title}`
+                : methodsFivePrinciples.title,
             }}
           />
           <LinkListBox
-            links={fivePrinciples.principles.map((principle) => {
+            links={methodsFivePrinciples.principles.map((principle) => {
               return {
                 id: slugify(principle.label),
                 title: `${principle.label}: ${principle.title}`,
@@ -78,7 +78,7 @@ export default function FivePrinciples() {
           />
         </Container>
       </Background>
-      {fivePrinciples.principles.map((principle, index) => {
+      {methodsFivePrinciples.principles.map((principle, index) => {
         const prinzip = prinzips.find(
           (principle) => principle.Nummer === index,
         );
@@ -108,7 +108,7 @@ export default function FivePrinciples() {
                     content: principle.content,
                     buttons: [
                       {
-                        text: fivePrinciples.buttonText,
+                        text: methodsFivePrinciples.buttonText,
                         href: buttonLink,
                         prefetch: "viewport",
                         look: "tertiary" as const,
