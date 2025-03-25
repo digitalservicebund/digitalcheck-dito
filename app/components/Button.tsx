@@ -1,4 +1,4 @@
-import { cloneElement, type ReactElement } from "react";
+import { cloneElement, type ReactElement, type SVGProps } from "react";
 import { Link } from "react-router";
 import twMerge from "~/utils/tailwindMerge";
 
@@ -21,9 +21,8 @@ export interface ButtonLinkProps
   extends React.ComponentPropsWithoutRef<"a">,
     Props {}
 
-function formatIcon(icon: ReactElement | undefined) {
+function formatIcon(icon: ReactElement<SVGProps<SVGElement>> | undefined) {
   if (!icon) return undefined;
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   const className = `ds-button-icon ${icon.props.className ?? ""}`;
   return cloneElement(icon, { className });
 }
