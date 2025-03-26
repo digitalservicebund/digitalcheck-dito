@@ -11,7 +11,11 @@ leading to longer execution times in our pipeline. This slows down development f
 We want to optimize test execution.
 
 Running tests sequentially is inefficient. Some tests are independent and can run in parallel,
-while others require sequential execution due to shared state.
+while others benefit from sequential execution due to shared state (i.e. preparing the page in `beforeAll()`).
+
+Using GitHub actions as our pipeline architecture results in rather weak machines running the tests. Hence,
+using multiple workers to run tests in parallel does not speed up our tests execution but increases
+the likelihood of flaky tests due to resource limits.
 
 We aim to:
 
@@ -24,7 +28,7 @@ We aim to:
 We will implement the following:
 
 - Enable playwright option `fullyParallel` to run all independent tests concurrently.
-- Manually configure tests sharing a state to be executed sequentially.
+- Explicitly configure tests sharing a state to be executed sequentially.
 - Implement GitHub Actions sharding to distribute parallel tests evenly across multiple machines.
 
 ## Consequences
