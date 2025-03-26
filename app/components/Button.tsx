@@ -22,7 +22,7 @@ export interface ButtonLinkProps
     Props {}
 type ReactElementWithClassname = ReactElement<{ className: string }>;
 
-function formatIcon(icon?: ReactElementWithClassname | undefined) {
+function formatIcon(icon?: ReactElementWithClassname) {
   if (!icon) return undefined;
   const className = `ds-button-icon ${icon.props.className ?? ""}`;
   return cloneElement(icon, { className });
