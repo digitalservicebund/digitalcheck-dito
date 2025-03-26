@@ -272,17 +272,18 @@ export const interoperability = {
           Eine verbindliche Anforderung im Sinne der Verordnung ist eine verpflichtende Regel. Das kann z.B. eine Definition, ein Standard, eine Richtlinie, ein Verbot oder eine Beschränkung sein. Eine exakte Definition finden Sie in der [Verordnung in der Präambel, Erwägungsgrund 18](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903).`,
         detailsSummary: {
           title: "Welche Kriterien müssen dafür erfüllt sein?",
-          content: `Die Interoperabilitätsbewertung ist für diese verbindliche Anforderung verpflichtend, wenn die folgenden Kriterien aus den [Guidelines for interoperability assessments](https://interoperable-europe.ec.europa.eu/collection/assessments/assessment-guidelines) erfüllt sind:
-          1. Die Regelung sieht eine digitale Umsetzung vor.
-          2. Die Regelung sieht den Austausch von Daten und Informationen zwischen Verwaltungen der EU-Mitgliedstaaten vor.
-          3. Es wurde für die verbindliche Anforderung noch keine Interoperabilitätsbewertung durchgeführt. Dies können Sie im [EU-Portal](https://interoperable-europe.ec.europa.eu/collection/assessments) prüfen.
-          
-          Falls sich eine Berichtspflicht an die Europäische Kommission ergibt, dann unterstützt Sie das Digitalcheck Team dabei, die Interoperabilitätsbewertung durchzuführen, sie zu dokumentieren und den Bericht einzureichen. 
-          <br/><br/>
-          Weitere Quellen:
-          <br/>[European Commission - European Interoperability Framework](https://ec.europa.eu/isa2/eif_en/)
-          <br/>[Interoperable Europe Portal - FAQs](https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs)
-        `,
+          content: dedent`
+            Die Interoperabilitätsbewertung ist für diese verbindliche Anforderung verpflichtend, wenn die folgenden Kriterien aus den [Guidelines for interoperability assessments](https://interoperable-europe.ec.europa.eu/collection/assessments/assessment-guidelines) erfüllt sind:
+            1. Die Regelung sieht eine digitale Umsetzung vor.
+            2. Die Regelung sieht den Austausch von Daten und Informationen zwischen Verwaltungen der EU-Mitgliedstaaten vor.
+            3. Es wurde für die verbindliche Anforderung noch keine Interoperabilitätsbewertung durchgeführt. Dies können Sie im [EU-Portal](https://interoperable-europe.ec.europa.eu/collection/assessments) prüfen.
+            
+            Falls sich eine Berichtspflicht an die Europäische Kommission ergibt, dann unterstützt Sie das Digitalcheck Team dabei, die Interoperabilitätsbewertung durchzuführen, sie zu dokumentieren und den Bericht einzureichen. 
+            <br/><br/>
+            Weitere Quellen:
+            <br/>[European Commission - European Interoperability Framework](https://ec.europa.eu/isa2/eif_en/)
+            <br/>[Interoperable Europe Portal - FAQs](https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs)
+          `,
         },
       },
     ],
