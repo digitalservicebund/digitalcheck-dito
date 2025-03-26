@@ -1,4 +1,4 @@
-import { preCheck } from "~/resources/content";
+import { preCheck } from "~/resources/content/vorpruefung";
 import type { PreCheckAnswers } from "~/routes/vorpruefung.$questionId/route";
 import { PreCheckResult, ResultType } from "./PreCheckResult";
 

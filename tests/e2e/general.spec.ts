@@ -1,12 +1,12 @@
 import { expect, test } from "@playwright/test";
 import allRoutes from "~/resources/allRoutes";
-import { preCheck } from "~/resources/content";
+import { preCheck } from "~/resources/content/vorpruefung";
 import * as staticRoutes from "~/resources/staticRoutes";
 
 test.describe("test breadcrumbs and titles", () => {
   test("landing page to not have breadcrumbs", async ({ page }) => {
     await page.goto(allRoutes[0].url);
-    await expect(page.getByTestId("breadcrumbs-menu")).not.toBeVisible();
+    await expect(page.getByTestId("breadcrumbs-menu")).toBeHidden();
   });
 
   // Remove landing page

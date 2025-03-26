@@ -20,7 +20,8 @@ import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import { NumberedList } from "~/components/List";
 import RichText from "~/components/RichText";
-import { preCheck } from "~/resources/content";
+import { preCheck } from "~/resources/content/vorpruefung";
+import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
 import { ROUTE_PRECHECK, ROUTE_RESULT } from "~/resources/staticRoutes";
 import type { PreCheckAnswers } from "~/routes/vorpruefung.$questionId/route";
 import buildMailtoRedirectUri from "~/routes/vorpruefung.ergebnis/buildMailtoRedirectUri";
@@ -45,8 +46,8 @@ import getResultValidatorForAnswers from "./resultValidation";
 const { questions } = preCheck;
 
 const nextSteps = {
-  [ResultType.POSITIVE]: preCheck.result.positive.nextSteps,
-  [ResultType.NEGATIVE]: preCheck.result.negative.nextSteps,
+  [ResultType.POSITIVE]: preCheckResult.positive.nextSteps,
+  [ResultType.NEGATIVE]: preCheckResult.negative.nextSteps,
 };
 
 export const meta = ({ matches }: MetaArgs) => {
@@ -150,7 +151,7 @@ function getReasonListItem(reason: Reason) {
 
 export default function Result() {
   const { result, answers } = useLoaderData<typeof loader>();
-  const [policyTitle, setPolicyTitle] = useState("");
+  const [vorhabenTitle, setVorhabenTitle] = useState("");
 
   const resultContent = getContentForResult(answers, result);
 
@@ -167,7 +168,7 @@ export default function Result() {
   }
 
   const resultHint =
-    result.digital === ResultType.UNSURE ? preCheck.result.unsure.hint : "";
+    result.digital === ResultType.UNSURE ? preCheckResult.unsure.hint : "";
   return (
     <>
       <Background backgroundColor="blue" className="py-40 print:pb-0">
@@ -178,12 +179,12 @@ export default function Result() {
               result.digital === ResultType.UNSURE ? "lightYellow" : "midBlue"
             }
           >
-            {policyTitle && (
+            {vorhabenTitle && (
               <Header
                 heading={{
                   tagName: "h2",
                   look: "ds-heading-03-reg",
-                  text: `${preCheck.result.print.titlePrefix}${policyTitle}`,
+                  text: `${preCheckResult.print.titlePrefix}${vorhabenTitle}`,
                   className: "hidden print:block pb-24 font-bold",
                 }}
               />
@@ -225,11 +226,11 @@ export default function Result() {
               {getResultForRelevantAnswers(answers, true) !==
                 ResultType.NEGATIVE && (
                 <div className="mt-40">
-                  <b>{preCheck.result.interoperability.info.title}</b>
+                  <b>{preCheckResult.interoperability.info.title}</b>
                   <p className="mt-8 mb-20">
-                    {preCheck.result.interoperability.info.content}
+                    {preCheckResult.interoperability.info.content}
                   </p>
-                  <Button {...preCheck.result.interoperability.info.button} />
+                  <Button {...preCheckResult.interoperability.info.button} />
                 </div>
               )}
             </div>
@@ -238,7 +239,7 @@ export default function Result() {
                 <ResultForm
                   result={result}
                   answers={answers}
-                  setPolicyTitle={setPolicyTitle}
+                  setVorhabenTitle={setVorhabenTitle}
                 />
               </div>
             )}
@@ -249,16 +250,16 @@ export default function Result() {
         {result.digital === ResultType.UNSURE && (
           <Box
             heading={{
-              text: preCheck.result.unsure.nextStep.title,
+              text: preCheckResult.unsure.nextStep.title,
             }}
             content={{
-              markdown: preCheck.result.unsure.nextStep.text,
+              markdown: preCheckResult.unsure.nextStep.text,
             }}
             buttons={[
               {
                 id: "result-method-button",
-                text: preCheck.result.unsure.nextStep.link.text,
-                href: preCheck.result.unsure.nextStep.link.href,
+                text: preCheckResult.unsure.nextStep.link.text,
+                href: preCheckResult.unsure.nextStep.link.href,
                 look: "link",
               },
             ]}

@@ -3,7 +3,7 @@ import Background from "~/components/Background";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
 import RichText from "~/components/RichText";
-import { imprint } from "~/resources/content";
+import { imprint } from "~/resources/content/impressum";
 import { ROUTE_IMPRINT } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 

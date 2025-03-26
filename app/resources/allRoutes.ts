@@ -1,4 +1,4 @@
-import { preCheck } from "./content";
+import { preCheck } from "~/resources/content/vorpruefung";
 import routes, {
   ROUTE_PRECHECK,
   ROUTE_PRINCIPLES,

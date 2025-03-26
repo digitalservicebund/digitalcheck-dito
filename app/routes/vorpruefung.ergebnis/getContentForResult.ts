@@ -1,4 +1,5 @@
-import { preCheck } from "~/resources/content";
+import { preCheck } from "~/resources/content/vorpruefung";
+import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
 import type {
   PreCheckAnswerOption,
   PreCheckAnswers,
@@ -25,14 +26,14 @@ export type Reason = {
 
 const title = {
   interoperability: {
-    [ResultType.POSITIVE]: preCheck.result.interoperability.positive.title,
-    [ResultType.NEGATIVE]: preCheck.result.interoperability.negative.title,
-    [ResultType.UNSURE]: preCheck.result.interoperability.unsure.title,
+    [ResultType.POSITIVE]: preCheckResult.interoperability.positive.title,
+    [ResultType.NEGATIVE]: preCheckResult.interoperability.negative.title,
+    [ResultType.UNSURE]: preCheckResult.interoperability.unsure.title,
   },
   digital: {
-    [ResultType.POSITIVE]: preCheck.result.positive.title,
-    [ResultType.NEGATIVE]: preCheck.result.negative.title,
-    [ResultType.UNSURE]: preCheck.result.unsure.title,
+    [ResultType.POSITIVE]: preCheckResult.positive.title,
+    [ResultType.NEGATIVE]: preCheckResult.negative.title,
+    [ResultType.UNSURE]: preCheckResult.unsure.title,
   },
 };
 
@@ -99,19 +100,19 @@ export default function getContentForResult(
     title: getResultTitle(result),
     reasoningList: [
       {
-        intro: preCheck.result.reasoningIntro.digital.sure,
+        intro: preCheckResult.reasoningIntro.digital.sure,
         reasons: getRelevantReasons(answers, result, false, true),
       },
       {
-        intro: preCheck.result.reasoningIntro.digital.unsure,
+        intro: preCheckResult.reasoningIntro.digital.unsure,
         reasons: getRelevantReasons(answers, result, false, false),
       },
       {
-        intro: preCheck.result.reasoningIntro.interoperability.sure,
+        intro: preCheckResult.reasoningIntro.interoperability.sure,
         reasons: getRelevantReasons(answers, result, true, true),
       },
       {
-        intro: preCheck.result.reasoningIntro.interoperability.unsure,
+        intro: preCheckResult.reasoningIntro.interoperability.unsure,
         reasons: getRelevantReasons(answers, result, true, false),
       },
     ],

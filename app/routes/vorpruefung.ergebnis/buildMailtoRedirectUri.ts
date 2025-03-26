@@ -1,8 +1,8 @@
-import { preCheck } from "~/resources/content";
+import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
 import { type ResultContent } from "~/routes/vorpruefung.ergebnis/getContentForResult";
 import { PreCheckResult, ResultType } from "./PreCheckResult";
 
-const { emailTemplate } = preCheck.result.form;
+const { emailTemplate } = preCheckResult.form;
 
 function resolveRecipients(result: PreCheckResult) {
   const additionalRecipient =
@@ -36,7 +36,7 @@ function buildEmailBody(
 
   resultText = resultText.replaceAll("**", "");
   resultText += negativeReasoning
-    ? `${preCheck.result.form.reasonLabel}:\n\n${negativeReasoning}\n\n`
+    ? `${preCheckResult.form.reasonLabel}:\n\n${negativeReasoning}\n\n`
     : "";
 
   return `${emailTemplate.bodyBefore}\n${resultText}\n\n${emailTemplate.bodyAfter}`;
@@ -45,11 +45,11 @@ function buildEmailBody(
 export default function buildMailtoRedirectUri(
   result: PreCheckResult,
   resultContent: ResultContent,
-  policyTitle: string,
+  vorhabenTitle: string,
   userEmail?: string,
   negativeReasoning?: string,
 ) {
-  const subject = `${emailTemplate.subject}: „${policyTitle}“`;
+  const subject = `${emailTemplate.subject}: „${vorhabenTitle}“`;
   const cc = userEmail ? `&cc=${userEmail}` : "";
   const recipients = encodeURIComponent(resolveRecipients(result));
   const body = buildEmailBody(resultContent, negativeReasoning);

@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
-import { digitalSuitability } from "~/resources/content";
+import { examples } from "~/resources/content/beispiele";
 import {
   AbsatzWithNumber,
   isStandaloneAbsatz,
@@ -35,6 +35,7 @@ const extractTextParts = (children: ReactNode) => {
   if (!children || typeof children !== "object" || !("props" in children)) {
     return null;
   }
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   const text = children.props.children as string;
   return text.split(/(\[\d])/g);
 };
@@ -183,7 +184,7 @@ const AbsatzContent = ({
         {absatzGroup.PrinzipErfuellungen.length > 0 && (
           <div className="ds-stack ds-stack-8 mt-8">
             <span className="ds-subhead font-bold" id={baseLabelID}>
-              {digitalSuitability.paragraphs.explanation}
+              {examples.paragraphs.explanation}
             </span>
             {absatzGroup.PrinzipErfuellungen.toSorted(
               (a, b) => (a.Prinzip?.Nummer ?? 0) - (b.Prinzip?.Nummer ?? 0),

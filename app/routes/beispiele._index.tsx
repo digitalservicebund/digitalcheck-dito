@@ -4,7 +4,7 @@ import Background from "~/components/Background";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
-import { digitalSuitability } from "~/resources/content";
+import { examples } from "~/resources/content/beispiele";
 import { ROUTE_EXAMPLES, ROUTE_PRINCIPLES } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 import { Prinzip } from "~/utils/strapiData.server";
@@ -24,17 +24,17 @@ export default function Digitaltauglichkeit_index() {
           <Header
             heading={{
               tagName: "h1",
-              text: digitalSuitability.title,
+              text: examples.title,
             }}
             content={{
-              markdown: digitalSuitability.subtitle,
+              markdown: examples.subtitle,
               className: "md:text-2xl",
             }}
           ></Header>
         </Container>
       </Background>
       <Container>
-        {digitalSuitability.boxItems.map((item) => (
+        {examples.boxItems.map((item) => (
           <Box
             className="pb-64"
             key={item.title}

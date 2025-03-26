@@ -7,7 +7,7 @@ import Heading from "~/components/Heading";
 import Input from "~/components/Input";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
-import { preCheck } from "~/resources/content";
+import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
 import { features } from "~/resources/features";
 import { PreCheckAnswers } from "~/routes/vorpruefung.$questionId/route";
 import getResultValidatorForAnswers from "~/routes/vorpruefung.ergebnis/resultValidation";
@@ -17,11 +17,11 @@ import { PreCheckResult, ResultType } from "./PreCheckResult";
 export default function ResultForm({
   result,
   answers,
-  setPolicyTitle,
+  setVorhabenTitle,
 }: Readonly<{
   result: PreCheckResult;
   answers: PreCheckAnswers;
-  setPolicyTitle: Dispatch<SetStateAction<string>>;
+  setVorhabenTitle: Dispatch<SetStateAction<string>>;
 }>) {
   const showSaveToPdf = useFeatureFlag(features.showSaveToPdfOption);
 
@@ -34,10 +34,10 @@ export default function ResultForm({
     },
   });
 
-  const handlePolicyTitleChange = (
+  const handleVorhabenTitleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    setPolicyTitle(event.target.value);
+    setVorhabenTitle(event.target.value);
   };
 
   const [warning, setWarning] = useState<string | null>(null);
@@ -46,7 +46,7 @@ export default function ResultForm({
   ) => {
     const value = event.target.value;
     if (value.length > 2000) {
-      setWarning(preCheck.result.form.reasonLong);
+      setWarning(preCheckResult.form.reasonLong);
     } else {
       setWarning(null);
     }
@@ -57,9 +57,9 @@ export default function ResultForm({
       <form {...form.getFormProps()} data-testid="result-form">
         <fieldset className="ds-stack ds-stack-32">
           <legend>
-            <Heading tagName="h2" text={preCheck.result.form.formLegend} />
+            <Heading tagName="h2" text={preCheckResult.form.formLegend} />
           </legend>
-          <RichText markdown={preCheck.result.form.instructions} />
+          <RichText markdown={preCheckResult.form.instructions} />
           {Object.keys(answers).map((answer) => (
             <input
               key={answer}
@@ -71,19 +71,19 @@ export default function ResultForm({
           <Input
             name="email"
             type={"email"}
-            label={preCheck.result.form.emailLabel}
+            label={preCheckResult.form.emailLabel}
             error={form.error("email")}
           />
           <Input
             name="title"
-            label={preCheck.result.form.policyTitleLabel}
+            label={preCheckResult.form.vorhabenTitleLabel}
             error={form.error("title")}
-            onChange={handlePolicyTitleChange}
+            onChange={handleVorhabenTitleChange}
           />
           {result.digital === ResultType.NEGATIVE && (
             <Textarea
               name="negativeReasoning"
-              label={preCheck.result.form.reasonLabel}
+              label={preCheckResult.form.reasonLabel}
               error={form.error("negativeReasoning")}
               warning={warning}
               onChange={handleNegativeReasoningChange}
@@ -95,13 +95,13 @@ export default function ResultForm({
                 ? [
                     {
                       id: "result-email-button",
-                      text: preCheck.result.form.sendEmailButton.text,
+                      text: preCheckResult.form.sendEmailButton.text,
                       look: "primary",
                       className: "plausible-event-name=Quicksend+Click",
                     },
                     {
                       id: "result-print-button",
-                      text: preCheck.result.form.downloadPdfButton.text,
+                      text: preCheckResult.form.downloadPdfButton.text,
                       look: "ghost",
                       type: "button",
                       className: "plausible-event-name=Quicksend+Click",
@@ -113,7 +113,7 @@ export default function ResultForm({
                 : [
                     {
                       id: "result-email-button",
-                      text: preCheck.result.form.sendEmailButton.text,
+                      text: preCheckResult.form.sendEmailButton.text,
                       look: "primary",
                       className: "plausible-event-name=Quicksend+Click",
                     },
@@ -125,8 +125,8 @@ export default function ResultForm({
       {showEmailAlert && (
         <div className="mt-16">
           <Alert
-            title={preCheck.result.form.emailClientHint.title}
-            content={preCheck.result.form.emailClientHint.text}
+            title={preCheckResult.form.emailClientHint.title}
+            content={preCheckResult.form.emailClientHint.text}
             tagName="h3"
             look="info"
             setShowAlert={setShowEmailAlert}
@@ -137,9 +137,9 @@ export default function ResultForm({
         <Heading
           tagName="h3"
           className="ds-label-section"
-          text={preCheck.result.form.faqs.title}
+          text={preCheckResult.form.faqs.title}
         />
-        {preCheck.result.form.faqs.details.map((detail) => (
+        {preCheckResult.form.faqs.details.map((detail) => (
           <DetailsSummary
             key={detail.label}
             title={detail.label}

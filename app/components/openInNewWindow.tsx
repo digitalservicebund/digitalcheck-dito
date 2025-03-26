@@ -1,5 +1,5 @@
 import OpenInNewIcon from "@digitalservicebund/icons/OpenInNew";
-import ReactDOMServer from "react-dom/server";
+import { renderToString } from "react-dom/server";
 
 export const openInNewIconElement = (
   <OpenInNewIcon
@@ -9,5 +9,4 @@ export const openInNewIconElement = (
   />
 );
 
-export const openInNewIconString =
-  ReactDOMServer.renderToString(openInNewIconElement);
+export const openInNewIconString = renderToString(openInNewIconElement);

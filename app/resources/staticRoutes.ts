@@ -118,7 +118,7 @@ export const ROUTE_PRINCIPLES: Route = {
   parent: ROUTE_EXAMPLES.url,
 };
 
-export const ROUTE_LAWS: Route = {
+export const ROUTE_REGELUNGEN: Route = {
   url: `${ROUTE_EXAMPLES.url}/regelungen`,
   title: "Gesetze",
   parent: ROUTE_EXAMPLES.url,

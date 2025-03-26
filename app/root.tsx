@@ -25,7 +25,8 @@ import Footer from "~/components/Footer";
 import Heading from "~/components/Heading";
 import RichText from "~/components/RichText";
 import routes from "~/resources/allRoutes";
-import { header, siteMeta } from "~/resources/content";
+import { header } from "~/resources/content/components/header";
+import { siteMeta } from "~/resources/content/shared/meta";
 import {
   ROUTE_A11Y,
   ROUTE_IMPRINT,
