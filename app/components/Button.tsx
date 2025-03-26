@@ -1,4 +1,4 @@
-import { cloneElement, type ReactElement, type SVGProps } from "react";
+import { cloneElement, type ReactElement } from "react";
 import { Link } from "react-router";
 import twMerge from "~/utils/tailwindMerge";
 
@@ -7,8 +7,8 @@ type Props = {
   look?: "primary" | "secondary" | "tertiary" | "ghost" | "link";
   size?: "large" | "medium" | "small";
   href?: string;
-  iconLeft?: ReactElement;
-  iconRight?: ReactElement;
+  iconLeft?: ReactElementWithClassname;
+  iconRight?: ReactElementWithClassname;
   fullWidth?: boolean;
   prefetch?: "intent" | "viewport" | "render";
   onClickCallback?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
@@ -20,8 +20,9 @@ export interface ButtonProps
 export interface ButtonLinkProps
   extends React.ComponentPropsWithoutRef<"a">,
     Props {}
+type ReactElementWithClassname = ReactElement<{ className: string }>;
 
-function formatIcon(icon: ReactElement<SVGProps<SVGElement>> | undefined) {
+function formatIcon(icon?: ReactElementWithClassname) {
   if (!icon) return undefined;
   const className = `ds-button-icon ${icon.props.className ?? ""}`;
   return cloneElement(icon, { className });

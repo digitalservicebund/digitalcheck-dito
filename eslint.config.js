@@ -1,6 +1,5 @@
 import { includeIgnoreFile } from "@eslint/compat";
 import eslint from "@eslint/js";
-import tsParser from "@typescript-eslint/parser";
 import importPlugin from "eslint-plugin-import";
 import jsxA11y from "eslint-plugin-jsx-a11y";
 import playwright from "eslint-plugin-playwright";
@@ -23,7 +22,6 @@ export default tseslint.config(
   // Global settings
   {
     languageOptions: {
-      parser: tsParser,
       ecmaVersion: "latest",
       sourceType: "module",
       globals: {
@@ -31,9 +29,7 @@ export default tseslint.config(
         ...globals.node,
       },
       parserOptions: {
-        ecmaFeatures: { jsx: true },
-        tsconfigRootDir: __dirname,
-        project: [path.join(__dirname, "tsconfig.json")],
+        project: true,
       },
     },
   },
