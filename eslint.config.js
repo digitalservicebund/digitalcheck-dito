@@ -34,7 +34,7 @@ export default tseslint.config(
       parserOptions: {
         ecmaFeatures: { jsx: true },
         tsconfigRootDir: __dirname,
-        project: [path.join(__dirname, "tsconfig.json")],
+        project: "./tsconfig.json",
       },
     },
   },
