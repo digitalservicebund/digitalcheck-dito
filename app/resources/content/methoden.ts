@@ -16,7 +16,7 @@ export const methods = {
   title: "2. Erarbeiten eines digitaltauglichen Regelungsvorhabens",
   subtitle: dedent`
     Hier finden Sie passende Methoden und Werkzeuge, um Digitaltauglichkeit in Ihrer Regelung sicherzustellen. 
-    <br class="block content-[''] !mb-24" />
+    <br class="block content-[''] mb-24!" />
     Gehen Sie am besten in der vorgeschlagenen Reihenfolge vor.
   `,
   steps: {

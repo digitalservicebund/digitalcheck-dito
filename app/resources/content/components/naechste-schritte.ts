@@ -76,10 +76,10 @@ export const steps = {
     content:
       stepNKR.content +
       dedent`
-        <br class="block content-[''] !mb-24" />
+        <br class="block content-[''] mb-24!" />
         Senden Sie die von Ihnen erstellte Dokumentation per E-Mail an folgende Adresse: 
         [nkr@bmj.bund.de](mailto:nkr@bmj.bund.de)
-        <br class="block content-[''] !mb-24" />
+        <br class="block content-[''] mb-24!" />
         Damit ist der Digitalcheck für Sie beendet.
       `,
   },
