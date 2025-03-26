@@ -35,8 +35,7 @@ const extractTextParts = (children: ReactNode) => {
   if (!children || typeof children !== "object" || !("props" in children)) {
     return null;
   }
-
-  // @ts-expect-error children.props
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   const text = children.props.children as string;
   return text.split(/(\[\d])/g);
 };
