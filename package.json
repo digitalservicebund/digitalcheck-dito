@@ -68,7 +68,7 @@
     "autoprefixer": "^10.4.16",
     "dotenv": "^16.4.5",
     "eslint": "^9.23.0",
-    "eslint-import-resolver-typescript": "^3.8.1",
+    "eslint-import-resolver-typescript": "^4.2.4",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-playwright": "^2.2.0",
