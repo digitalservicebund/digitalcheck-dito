@@ -18,6 +18,8 @@ export type ListItemProps = {
   background?: string;
   parentHasHeading?: boolean;
   isDisabled?: boolean;
+  readonly numeric?: number;
+  hasBullet?: boolean;
 };
 
 const ListItem = ({
@@ -29,10 +31,11 @@ const ListItem = ({
   content,
   buttons,
   numeric,
+  hasBullet,
   background,
   parentHasHeading,
   isDisabled,
-}: ListItemProps & { readonly numeric?: number }) => {
+}: ListItemProps) => {
   const backgroundColor =
     background && isBackgroundColor(background) ? background : undefined;
   const textColor = isDisabled ? "text-gray-800" : "";
@@ -90,7 +93,7 @@ const ListItem = ({
                 {numeric}
               </div>
             )}
-            {backgroundColor && (
+            {hasBullet && (
               <div
                 className="flex size-[20px] items-center justify-center rounded-full bg-blue-900"
                 role="none"

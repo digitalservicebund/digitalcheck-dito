@@ -32,6 +32,7 @@ export default function Methoden() {
   const methodStepsItems: ListItemProps[] = methods.steps.items.map((item) => ({
     ...item,
     background: item.isSubstep ? "blue" : undefined,
+    hasBullet: item.isSubstep,
     content: renderToString(
       <>
         {item.info?.map((info) => renderInfoItem(info))}

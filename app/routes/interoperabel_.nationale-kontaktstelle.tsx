@@ -31,6 +31,7 @@ export default function SPOC() {
 
   const timelineItems: ListItemProps[] = spoc.timeline.items.map((item) => ({
     ...item,
+    hasBullet: true,
     headline: {
       ...item.headline,
       tagName: "h3",
