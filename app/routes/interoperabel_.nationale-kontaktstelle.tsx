@@ -120,6 +120,7 @@ export default function SPOC() {
         </Container>
       </Background>
       <Container>
+        <Heading tagName="h2" text={spoc.timeline.headline} className="mb-8" />
         <BulletList items={timelineItems} />
       </Container>
       <Background backgroundColor="blue">
