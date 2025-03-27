@@ -8,14 +8,8 @@ import InfoBox from "~/components/InfoBox";
 import { NumberedList } from "~/components/List";
 import SupportBanner from "~/components/SupportBanner";
 import { index } from "~/resources/content/startseite";
-import { features } from "~/resources/features";
-import { useFeatureFlag } from "~/utils/featureFlags";
 
 export default function Index() {
-  const showInteroperabilitySection = useFeatureFlag(
-    features.showIOLandingPage,
-  );
-
   return (
     <>
       <Background backgroundColor="darkBlue" className="py-24">
@@ -41,30 +35,14 @@ export default function Index() {
           items={index.list.items}
         />
       </Container>
-      {/* <Container className="max-sm:p-0!">
-        <InlineNotice
-          look="warning"
-          title={landing.dataNotice.headline}
-          tagName="h2"
-          content={landing.dataNotice.content}
-        />
-      </Container> */}
       <div className="bg-[url('/images/trainings.jpeg')] bg-cover bg-[0%_35%]">
         <Container>
           <div className="max-w-[630px] rounded-lg bg-white px-16 py-28 md:px-80 md:py-40">
-            {showInteroperabilitySection ? (
-              <Box
-                heading={{ text: index.interoperability.title }}
-                content={{ markdown: index.interoperability.text }}
-                buttons={[index.interoperability.link]}
-              />
-            ) : (
-              <Box
-                heading={{ text: index.trainings.title }}
-                content={{ markdown: index.trainings.text }}
-                buttons={[index.trainings.link]}
-              />
-            )}
+            <Box
+              heading={{ text: index.interoperability.title }}
+              content={{ markdown: index.interoperability.text }}
+              buttons={[index.interoperability.link]}
+            />
           </div>
         </Container>
       </div>

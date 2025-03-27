@@ -13,12 +13,10 @@ import LinkListBox from "~/components/LinkListBox";
 import RichText from "~/components/RichText";
 import SupportBanner from "~/components/SupportBanner";
 import { interoperability } from "~/resources/content/interoperabel";
-import { features } from "~/resources/features";
 import {
   ROUTE_INTEROPERABILITY,
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
-import { useFeatureFlag } from "~/utils/featureFlags";
 import prependMetaTitle from "~/utils/metaTitle";
 
 export const meta = ({ matches }: MetaArgs) => {
@@ -26,15 +24,6 @@ export const meta = ({ matches }: MetaArgs) => {
 };
 
 export default function Interoperability() {
-  const showPage = useFeatureFlag(features.showIOLandingPage);
-
-  if (!showPage) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("Feature is not enabled for this environment", {
-      status: 404,
-    });
-  }
-
   return (
     <>
       <Background backgroundColor="blue">
