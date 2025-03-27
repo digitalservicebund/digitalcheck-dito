@@ -64,6 +64,10 @@ export default function SPOC() {
                 title: spoc.responsibilities.headline,
               },
               {
+                id: spoc.timeline.id,
+                title: spoc.timeline.headline,
+              },
+              {
                 id: spoc.states.id,
                 title: spoc.states.headline,
               },
@@ -127,14 +131,14 @@ export default function SPOC() {
         <Container>
           <Heading tagName="h2" text={spoc.states.headline} />
           {spoc.states.sections.map((section) => (
-            <>
+            <div key={section.headline}>
               <Heading
                 tagName="h3"
                 text={section.headline}
                 className="mt-32 mb-8"
               />
               <RichText markdown={section.content} />
-            </>
+            </div>
           ))}
         </Container>
       </Background>
