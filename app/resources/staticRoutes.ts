@@ -68,6 +68,11 @@ export const ROUTE_INTEROPERABILITY: Route = {
   title: "Interoperable Regelungen",
   parent: ROUTE_LANDING.url,
 };
+export const ROUTE_INTEROPERABILITY_SPOC: Route = {
+  url: `${ROUTE_INTEROPERABILITY.url}/nationale-kontaktstelle`,
+  title: "Nationale Kontaktstelle",
+  parent: ROUTE_INTEROPERABILITY.url,
+};
 
 export const ROUTE_DOCUMENTATION: Route = {
   url: "/dokumentation",
@@ -148,6 +153,7 @@ const routes: Route[] = [
   ROUTE_METHODS_FIVE_PRINCIPLES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
   ROUTE_INTEROPERABILITY,
+  ROUTE_INTEROPERABILITY_SPOC,
   ROUTE_SUPPORT,
   ROUTE_DOCUMENTATION,
   ROUTE_IMPRINT,
