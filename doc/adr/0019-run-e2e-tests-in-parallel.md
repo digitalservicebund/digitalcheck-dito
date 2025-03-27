@@ -2,7 +2,7 @@
 
 ## Status
 
-- 2025-03-25: Drafted
+- 2025-03-25: Accepted
 
 ## Context
 
