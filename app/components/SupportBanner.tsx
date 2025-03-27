@@ -8,7 +8,7 @@ export default function SupportBanner({
 }: Readonly<{ withFeedbackBanner?: boolean }>) {
   return (
     <Background backgroundColor="midBlue">
-      <Container className="ds-stack-16">
+      <Container className="ds-stack ds-stack-16">
         {withFeedbackBanner && (
           <Box
             heading={{

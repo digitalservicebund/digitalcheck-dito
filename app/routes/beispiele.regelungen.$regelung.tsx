@@ -196,7 +196,10 @@ export default function Gesetz() {
           </Container>
         )}
       {regelung.Digitalchecks.map((digitalcheck, index) => (
-        <Container key={digitalcheck.documentId} className="pb-80 ds-stack-64">
+        <Container
+          key={digitalcheck.documentId}
+          className="ds-stack ds-stack-64 pb-80"
+        >
           {/* ----- Formulierungen / Prinziperfüllungen ----- */}
           {digitalcheck.Paragraphen.length > 0 && (
             <>
@@ -217,7 +220,7 @@ export default function Gesetz() {
 
           {/* ----- Visualisierungen ----- */}
           {digitalcheck.Visualisierungen.length > 0 && (
-            <div className="ds-stack-32">
+            <div className="ds-stack ds-stack-32">
               <Header
                 heading={{
                   id: `${slugify(examplesRegelungen.visualisations.title)}-${index}`,
@@ -252,7 +255,7 @@ export default function Gesetz() {
                   markdown: examplesRegelungen.nkr.subtitle,
                 }}
               />
-              <div className="my-32 border-l-4 border-gray-300 pl-8">
+              <div className="my-32 border-l-4 border-gray-400 pl-8">
                 <BlocksRenderer content={digitalcheck.NKRStellungnahmeDCText} />
               </div>
               {regelung.NKRStellungnahmeLink && (

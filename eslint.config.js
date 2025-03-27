@@ -7,7 +7,6 @@ import prettierPlugin from "eslint-plugin-prettier/recommended";
 import reactPlugin from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
-import tailwind from "eslint-plugin-tailwindcss";
 import testingLibrary from "eslint-plugin-testing-library";
 import globals from "globals";
 import path from "node:path";
@@ -46,7 +45,6 @@ export default tseslint.config(
       jsxA11y.flatConfigs.recommended,
       importPlugin.flatConfigs.recommended,
       importPlugin.flatConfigs.typescript,
-      tailwind.configs["flat/recommended"],
       reactRefresh.configs.recommended,
       prettierPlugin, // should be the last one in the list
     ],
@@ -67,10 +65,6 @@ export default tseslint.config(
           tsconfigRootDir: __dirname,
           project: ["**/tsconfig.json"],
         },
-      },
-
-      tailwindcss: {
-        whitelist: ["ds\\-(.*)", "plausible\\-(.*)", "parent-bg-blue"],
       },
     },
 

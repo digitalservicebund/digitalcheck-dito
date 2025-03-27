@@ -98,7 +98,7 @@ export default function Interoperability() {
               />
             </div>
             <div className="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">
-              <div className="w-[630px] bg-[#cce5ef] lg:w-[50vw] [&>img]:object-contain [&>img]:lg:h-[626px]">
+              <div className="w-[630px] bg-[#cce5ef] lg:w-[50vw] [&>img]:object-contain lg:[&>img]:h-[626px]">
                 <Image
                   url={interoperability.andDigitalReadiness.image.url}
                   alternativeText={
@@ -144,14 +144,14 @@ export default function Interoperability() {
               className="h-auto w-full"
             />
             <ZoomInOutlined
-              className="absolute bottom-16 left-16 size-48 bg-blue-800 p-1 shadow"
+              className="absolute bottom-16 left-16 size-48 bg-blue-800 p-1 shadow-sm"
               fill="white"
             />
           </Link>
           <Heading
             tagName="h3"
             text={interoperability.andYourVorhaben.law.headline}
-            className="mb-8 mt-40"
+            className="mt-40 mb-8"
           />
           <RichText markdown={interoperability.andYourVorhaben.law.content} />
         </Container>
@@ -178,7 +178,7 @@ export default function Interoperability() {
               className="h-auto w-full"
             />
             <ZoomInOutlined
-              className="absolute bottom-16 left-16 size-48 bg-blue-800 p-1 shadow"
+              className="absolute bottom-16 left-16 size-48 bg-blue-800 p-1 shadow-sm"
               fill="white"
             />
           </Link>

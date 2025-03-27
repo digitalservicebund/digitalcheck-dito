@@ -84,14 +84,14 @@ export default function Index() {
           <div className="py-32 sm:py-48 lg:w-1/2 lg:self-center">
             <RichText
               markdown={socialProof.text}
-              className="w-[370px] text-2xl leading-10 sm:text-3xl sm:max-lg:w-[480px]"
+              className="w-[370px] text-2xl leading-40 sm:text-3xl sm:max-lg:w-[480px]"
             />
           </div>
           <div className="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">
-            <div className="w-[630px] lg:w-[50vw] [&>img]:lg:h-[420px] [&>img]:lg:w-full [&>img]:lg:object-none [&>img]:lg:object-[10%_75%]">
+            <div className="w-[630px] lg:w-[50vw] lg:[&>img]:h-[420px] lg:[&>img]:w-full lg:[&>img]:object-none lg:[&>img]:object-[10%_75%]">
               <SocialProofImage />
             </div>
-            <div className="absolute bottom-40 left-40 max-w-[400px] rounded-lg bg-white/70 p-16 backdrop-blur max-lg:hidden">
+            <div className="absolute bottom-40 left-40 max-w-[400px] rounded-lg bg-white/70 p-16 backdrop-blur-sm max-lg:hidden">
               <Testimonial />
             </div>
           </div>
@@ -139,7 +139,10 @@ export default function Index() {
           <Heading tagName="h2" text={supportHow.title} />
           {supportHow.supportTypes.length > 0 &&
             supportHow.supportTypes.map((supportType) => (
-              <div key={supportType.title} className="pb-40 pt-32 ds-stack-16">
+              <div
+                key={supportType.title}
+                className="ds-stack ds-stack-16 pt-32 pb-40"
+              >
                 <Box
                   heading={{
                     tagName: "h3",

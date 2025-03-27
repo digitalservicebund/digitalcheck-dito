@@ -24,12 +24,12 @@ export const privacy = {
     10557 Berlin<br />
     Tel.: [030 / 18 681-0](tel:+4930186810)<br />
     E-Mail: [bds@bmi.bund.de](mailto:bds@bmi.bund.de)<br />
-    <br class="block content-[''] !mb-24" />
+    <br class="block content-[''] mb-24!" />
     
     ### 1.2 Personenbezogene Daten
     
     Personenbezogene Daten sind alle Informationen, die sich auf eine identifizierte oder identifizierbare natürliche Person beziehen. Als identifizierbar wird eine natürliche Person angesehen, die direkt oder indirekt — insbesondere mittels Zuordnung zu einer Kennung wie einem Namen, zu einer Kennnummer, zu Standortdaten und/oder zu einer Online-Kennung — identifiziert werden kann.
-    <br class="block content-[''] !mb-24" />
+    <br class="block content-[''] mb-24!" />
     
     ### 1.3 Auftragsverarbeiter
     
@@ -44,7 +44,7 @@ export const privacy = {
     Des Weiteren können Sie datenschutzrechtliche Fragen auch an den Datenschutzbeauftragten des DigitalService richten. Diesen erreichen Sie unter folgender Adresse:
     
     E-Mail: [datenschutz@digitalservice.bund.de](mailto:datenschutz@digitalservice.bund.de)
-    <br class="block content-[''] !mb-48" />
+    <br class="block content-[''] mb-48!" />
     
     ## 2. Verarbeitung personenbezogener Daten im Zusammenhang mit der Nutzung der Website und Rechtsgrundlagen
     <br />
@@ -78,7 +78,7 @@ export const privacy = {
     Der Datenverkehr zwischen Ihrem Webbrowser und den Servern des Dienstes erfolgt über eine verschlüsselte HTTPS-Verbindung. HTTPS ist eine gesicherte Variante des Verbindungsprotokolls (HTTP), mit dem Webbrowser und Server Daten (bspw.: Ihre Eingaben) über das Internet austauschen, um zu verhindern, dass unbefugte Dritte von diesen Kenntnis erhalten. 
     
     Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. e) DSGVO i.V.m. § 3 BDSG. Die Datenverarbeitung dient der zielgerichteten und ausgewogenen Öffentlichkeitsarbeit sowie dem Schutz der IT-Infrastruktur des Bundes. Die damit verbundene Verarbeitung Ihrer Daten beim Besuch der Seite geschieht zu diesem Zweck. Für die Erfüllung dieser Verarbeitungszwecke ist die Verarbeitung der genannten personenbezogenen Daten erforderlich. 
-    <br class="block content-[''] !mb-24" />
+    <br class="block content-[''] mb-24!" />
     
     ### 2.2 Kontaktaufnahme
     Die Verarbeitung personenbezogener Daten erfolgt in Abhängigkeit des Kontaktweges. Hierbei kann zwischen Kontaktaufnahme per E-Mail, per Kontaktformular oder Telefon unterschieden werden.  Die Verarbeitung der Daten ist zur Wahrnehmung unserer Aufgaben erforderlich (Art. 6 Abs. 1 UAbs. 1 lit. e) DSGVO in Verbindung mit § 3 BDSG). Nähere Details zur Verarbeitung Ihrer Daten im Falle der Kontaktaufnahme mit dem BMI entnehmen Sie bitte der allgemeinen [Datenschutzerklärung](https://www.bmi.bund.de/DE/service/datenschutz/datenschutz_node.htm) des BMI.
@@ -106,19 +106,19 @@ export const privacy = {
     - beinhaltet keine personenbezogenen Daten,
     - basiert nicht auf IP oder anderen auf tatsächlichen Nutzer zurückverfolgbaren Informationen,
     - Gültigkeit endet mit Ablauf der Sitzung, spätestens nach 7 Tagen.
-    <br class="block content-[''] !mb-48" />
+    <br class="block content-[''] mb-48!" />
     
     ## 3. Datenempfänger
     
     Das BMI setzt im Rahmen einer Auftragsverarbeitung die DigitalService GmbH des Bundes als Dienstleister ein. Mit diesem Dienstleister wurde ein Vertrag gemäß Artikel 28 Abs. 3 DSGVO geschlossen; datenschutzrechtlich verantwortlich ist das BMI. 
     
     Darüber hinaus kann es im Einzelfall zur Weitergabe von Daten an Dritte kommen, soweit wir hierzu rechtlich verpflichtet sind oder dies zur Abwehr einer Gefahr für die öffentliche Sicherheit, zur Verfolgung von Straftaten oder zur Abwehr von Angriffen auf unsere IT-Infrastrukturen erforderlich ist. Eine Weitergabe in anderen Fällen erfolgt nicht. Eine Zusammenführung dieser Daten mit anderen Datenquellen zum Beispiel zum Anlegen von Nutzerprofilen erfolgt durch das BMI nicht.
-    <br class="block content-[''] !mb-48" />
+    <br class="block content-[''] mb-48!" />
     
     ## 4. Werden personenbezogene Daten an Dritte weitergegeben?
     
     Personenbezogene Daten werden ausschließlich in Deutschland verarbeitet und nicht an Dritte weitergeleitet. 
-    <br class="block content-[''] !mb-48" />
+    <br class="block content-[''] mb-48!" />
     
     ## 5. Maßnahmen zur Einhaltung der Datensicherheit
     
@@ -138,7 +138,7 @@ export const privacy = {
     - Beschränkte Zugriffsrechte auf die Daten
     - Anonymisierung von IP-Adressen
     - Wir sammeln nur Datenpunkte, die relevant sind für die weitere Produktentwicklung im Sinne der Nutzerfreundlichkeit und Erweiterung von Funktionen
-    <br class="block content-[''] !mb-48" />
+    <br class="block content-[''] mb-48!" />
     
     ## 6. Ihre Rechte
     

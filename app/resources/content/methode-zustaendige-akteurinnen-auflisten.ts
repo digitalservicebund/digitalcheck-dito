@@ -20,11 +20,11 @@ export const methodsResponsibleActors = {
     title: "Finden Sie konstruktive Gesprächspartnerinnen und -&shy;partner",
     text: dedent`
       Beginnen Sie mit der Kontaktaufnahme oben in der Hierarchie, lassen Sie ggf. über Ihre Referats- und (Unter-)abteilungsleitung den Kontakt herstellen. Fragen Sie nach den Fachexpertinnen und -experten auf Arbeitsebene, hier steckt in der Regel das tiefste Praxiswissen.
-      <br class="block content-[''] !mb-24" />
+      <br class="block content-[''] mb-24!" />
       - **Kommunen:** Bitten Sie Ansprechpersonen auf Landesebene um Kontakte und nutzen Sie  das gesammelte Wissen in den Kommunalen Spitzenverbänden. 
       - **Behörden und Träger:** Nutzen Sie die offiziellen Wege der Häuser.
       - **Unternehmen, Sozialpartner, weitere Organisationen:** Fragen Sie in Spitzenverbänden nach Ansprechpersonen für Ihren konkreten Anwendungsfall. 
-      <br class="block content-[''] !mb-24" />
+      <br class="block content-[''] mb-24!" />
       
       Wenn Sie keine persönlichen Kontakte nutzen können, greifen sie auf Organigramme oder interne Datenbanken zu, z. B. das X500-Verzeichnis.
     `,

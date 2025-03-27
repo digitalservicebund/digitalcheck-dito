@@ -29,7 +29,7 @@ export const methodsITSystems = {
     title: "So erfassen Sie die IT-Systeme",
     text: dedent`
       Dokumentieren Sie die verwendeten IT-Systeme mit ihren Funktionalitäten, Schnittstellen und Anforderungen. 
-      <br class="block content-[''] !mb-24" />
+      <br class="block content-[''] mb-24!" />
       Ein Überblick über die IT-Landschaft hilft Ihnen dabei, 
       - alle relevanten Aspekte aufzuschlüsseln und potenziell blinde Flecken zu identifizieren,
       - auf bestehende Standards und Prozesse aufzusetzen,

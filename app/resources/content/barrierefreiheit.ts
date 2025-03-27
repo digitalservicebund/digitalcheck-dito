@@ -4,14 +4,14 @@ export const accessibility = {
   title: "Erklärung zur Barrierefreiheit",
   content: dedent`
     *Informationen über die Zugänglichkeit dieser Webseiten gemäß § 12 Behindertengleichstellungsgesetz (BGG) sowie über diesbezügliche Kontaktmöglichkeiten.*
-    <br class="block content-[''] !mb-24" />
+    <br class="block content-[''] mb-24!" />
     
     Das Bundesministerium des Innern, für Bau und Heimat (BMI) ist bemüht, seine Webseite [erarbeiten.digitalcheck.bund.de](https://erarbeiten.digitalcheck.bund.de) so weit wie möglich barrierefrei zu gestalten. Rechtsgrundlage sind das Behindertengleichstellungsgesetz (BGG), die Barrierefreie-Informationstechnik-Verordnung (BITV 2.0) und die harmonisierte europäische Norm EN 301 549 in ihrer jeweils gültigen Fassung.
     
     Im Rahmen eines internen Tests wurde jedoch festgestellt, dass der Webauftritt noch keine vollständige Barrierefreiheit gewährleistet. Das BMI arbeitet dementsprechend mit Nachdruck daran, die barrierefreie Gestaltung seiner Webseite weiter zu verbessern.
     
     Diese Erklärung wurde am 11. Juli 2024 erstellt.
-    <br class="block content-[''] !mb-48" />
+    <br class="block content-[''] mb-48!" />
     
     ## Welche Bereiche sind nicht barrierefrei?
     
@@ -20,7 +20,7 @@ export const accessibility = {
     - Externe Links können nicht immer barrierefrei angeboten werden, da sie auf Inhalte oder Ressourcen außerhalb des aktuellen Angebots verweisen, auf die wir keinen direkten Einfluss haben.
     - Anderssprachige Abschnitte und Wörter sind nicht immer technisch als solche gekennzeichnet, was zu unverständlicher Aussprache in Vorlese-Software führen kann.
     - An einzelnen Stellen wird ein \`<br/>\` benutzt diese werden noch entfernt.
-    <br class="block content-[''] !mb-48" />
+    <br class="block content-[''] mb-48!" />
     
     ## Barriere melden! Hinweise zur Barrierefreiheit
     
@@ -32,7 +32,7 @@ export const accessibility = {
     Telefon: [03018 681-0](tel:+4930186810)<br />
     Telefax: [03018 681 - 12926](tel:+49301868112926)<br />
     E-Mail: [DVI3@bmi.bund.de](mailto:DVI3@bmi.bund.de)
-    <br class="block content-[''] !mb-48" />
+    <br class="block content-[''] mb-48!" />
     
     ## Schlichtungsverfahren
     

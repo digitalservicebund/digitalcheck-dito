@@ -31,9 +31,9 @@ const InfoBoxItem = ({
     <li
       id={identifier}
       className={twJoin(
-        "flex flex-row items-center justify-center max-w-none max-[499px]:flex-col scroll-my-40",
+        "flex max-w-none scroll-my-40 flex-row items-center justify-center max-[499px]:flex-col",
         separator &&
-          "pb-40 border-solid border-0 border-b-2 border-gray-400 last:border-none",
+          "border-0 border-b-2 border-solid border-gray-400 pb-40 last:border-none",
       )}
     >
       {image && (
@@ -48,7 +48,7 @@ const InfoBoxItem = ({
       )}
       <div
         className={twJoin(
-          "ds-stack-16 w-full break-words",
+          "ds-stack ds-stack-16 w-full break-words",
           image && "min-[500px]:ml-16",
         )}
       >

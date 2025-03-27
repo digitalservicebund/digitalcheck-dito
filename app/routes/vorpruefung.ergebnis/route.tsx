@@ -211,7 +211,7 @@ export default function Result() {
                 .map(({ intro, reasons }) => (
                   <React.Fragment key={intro}>
                     <RichText markdown={intro} className="mt-40 first:mt-0" />
-                    <ul className="mt-16 pl-0 ds-stack-16">
+                    <ul className="ds-stack ds-stack-16 mt-16 pl-0">
                       {reasons
                         .toSorted((a, b) => {
                           if (a.answer === b.answer) {
@@ -227,7 +227,7 @@ export default function Result() {
                 ResultType.NEGATIVE && (
                 <div className="mt-40">
                   <b>{preCheckResult.interoperability.info.title}</b>
-                  <p className="mb-20 mt-8">
+                  <p className="mt-8 mb-20">
                     {preCheckResult.interoperability.info.content}
                   </p>
                   <Button {...preCheckResult.interoperability.info.button} />

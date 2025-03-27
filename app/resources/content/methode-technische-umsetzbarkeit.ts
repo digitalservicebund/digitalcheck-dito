@@ -30,7 +30,7 @@ export const methodsTechnicalFeasibility = {
         So erfahren Sie
         - welche IT-Systeme für Ihr Vorhaben verwendet werden können
         - und an welchen Stellen Änderungen nötig sind.
-        <br class="block content-[''] !mb-24" />
+        <br class="block content-[''] mb-24!" />
         
         <h3 class="ds-subhead font-bold">Sie müssen nicht alles allein bewältigen</h3>
         
@@ -86,7 +86,7 @@ export const methodsTechnicalFeasibility = {
       - als **neutrale Moderation** in Gesprächen mit zuständigen Akteurinnen und Akteuren, um potenzielle Interessenkonflikte durch Fachlichkeit zu entschärfen,
       - **Erkenntnisse visuell aufzubereiten** – das ist die beste Grundlage für interne und externe Beteiligungsprozesse – und
       - die **Aussagen externer Dienstleister** zu reflektieren: Wirtschaftlichkeit kann eine Motivation für aufwändige Lösungen sein.
-      <br class="block content-[''] !mb-24" />
+      <br class="block content-[''] mb-24!" />
       
       Für ein einstündiges Videotelefonat schreiben Sie eine E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de) oder buchen Sie direkt einen Termin.
     `,

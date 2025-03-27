@@ -67,7 +67,7 @@ function PrincipleHighlight(
       to={`#${explanationID(baseLabelID, number)}`}
       onClick={() => onClick(highlightID, number)}
       aria-label={`Erfüllt Prinzip ${number}: ${parts[0]}`}
-      className="!no-underline"
+      className="no-underline!"
     >
       <mark
         className={twJoin(
@@ -182,7 +182,7 @@ const AbsatzContent = ({
           }}
         />
         {absatzGroup.PrinzipErfuellungen.length > 0 && (
-          <div className="mt-8 ds-stack-8">
+          <div className="ds-stack ds-stack-8 mt-8">
             <span className="ds-subhead font-bold" id={baseLabelID}>
               {examples.paragraphs.explanation}
             </span>
@@ -220,7 +220,7 @@ const AbsatzContent = ({
       title={title}
       bold={false}
       content={
-        <div className="ds-stack-8">
+        <div className="ds-stack ds-stack-8">
           {absatzGroup.map((absatz) => (
             <BlocksRenderer
               key={absatz.id}
@@ -292,7 +292,7 @@ function Paragraph({
 
   return (
     <div key={paragraph.Nummer}>
-      <div className="ds-stack-8">
+      <div className="ds-stack ds-stack-8">
         <Heading
           tagName="h3"
           text={`§ ${paragraph.Nummer} ${paragraph.Gesetz}`}
@@ -300,7 +300,7 @@ function Paragraph({
           className="font-bold"
         />
         <p className="ds-subhead font-bold">{paragraph.Titel}</p>
-        <div className="border-l-4 border-gray-300 pl-8 ds-stack-16">
+        <div className="ds-stack ds-stack-16 border-l-4 border-gray-400 pl-8">
           {groupedAbsaetze.map((absatzGroup) => (
             <AbsatzContent
               key={"id" in absatzGroup ? absatzGroup.id : absatzGroup[0].number}
@@ -322,7 +322,7 @@ export default function ParagraphList({
   principlesToShow: Prinzip[];
 }>) {
   return (
-    <div className="ds-stack-32">
+    <div className="ds-stack ds-stack-32">
       {paragraphs
         .toSorted((a, b) =>
           a.Nummer.localeCompare(b.Nummer, "de-DE", { numeric: true }),

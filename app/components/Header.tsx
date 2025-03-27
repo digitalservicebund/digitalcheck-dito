@@ -8,7 +8,7 @@ type HeaderProps = {
 
 export default function Header({ heading, content }: Readonly<HeaderProps>) {
   return (
-    <div className="ds-stack-16">
+    <div className="ds-stack ds-stack-16">
       <Heading {...heading} />
       {content && (
         <div className="ds-subhead">

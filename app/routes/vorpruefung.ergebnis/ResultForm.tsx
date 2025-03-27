@@ -55,7 +55,7 @@ export default function ResultForm({
   return (
     <>
       <form {...form.getFormProps()} data-testid="result-form">
-        <fieldset className="ds-stack-32">
+        <fieldset className="ds-stack ds-stack-32">
           <legend>
             <Heading tagName="h2" text={preCheckResult.form.formLegend} />
           </legend>
@@ -133,7 +133,7 @@ export default function ResultForm({
           />
         </div>
       )}
-      <div className="mt-40 ds-stack-16">
+      <div className="ds-stack ds-stack-16 mt-40">
         <Heading
           tagName="h3"
           className="ds-label-section"

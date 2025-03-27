@@ -41,7 +41,7 @@ export default function Index() {
           items={index.list.items}
         />
       </Container>
-      {/* <Container className="max-sm:!p-0">
+      {/* <Container className="max-sm:p-0!">
         <InlineNotice
           look="warning"
           title={landing.dataNotice.headline}
@@ -80,7 +80,7 @@ export default function Index() {
       <SupportBanner />
       <Background backgroundColor="darkBlue" className="py-24">
         <Container>
-          <div className="scroll-my-40 ds-stack-32">
+          <div className="ds-stack ds-stack-32 scroll-my-40">
             <Heading tagName="h2" text={index.principles.title} />
             <ol className="list-unstyled space-y-8">
               {index.principles.content.map((principle) => (

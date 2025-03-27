@@ -40,7 +40,7 @@ export default function VisualisationItem({
             className="size-full object-cover"
           />
           <ZoomInOutlined
-            className="absolute bottom-16 left-16 bg-blue-800 p-1 shadow"
+            className="absolute bottom-16 left-16 bg-blue-800 p-1 shadow-sm"
             fill="white"
           />
         </Link>
