@@ -110,42 +110,54 @@ export default function SPOC() {
           />
         </Container>
       </div>
-      <Background backgroundColor="blue">
+      <div id={spoc.responsibilities.id}>
+        <Background backgroundColor="blue">
+          <Container>
+            <Heading
+              tagName="h2"
+              text={spoc.responsibilities.headline}
+              className="mb-8"
+            />
+            <RichText
+              markdown={spoc.responsibilities.content}
+              className="mb-40"
+            />
+          </Container>
+        </Background>
+      </div>
+      <div id={spoc.timeline.id}>
         <Container>
           <Heading
             tagName="h2"
-            text={spoc.responsibilities.headline}
+            text={spoc.timeline.headline}
             className="mb-8"
           />
-          <RichText
-            markdown={spoc.responsibilities.content}
-            className="mb-40"
-          />
+          <BulletList items={timelineItems} />
         </Container>
-      </Background>
-      <Container>
-        <Heading tagName="h2" text={spoc.timeline.headline} className="mb-8" />
-        <BulletList items={timelineItems} />
-      </Container>
-      <Background backgroundColor="blue">
+      </div>
+      <div id={spoc.states.id}>
+        <Background backgroundColor="blue">
+          <Container>
+            <Heading tagName="h2" text={spoc.states.headline} />
+            {spoc.states.sections.map((section) => (
+              <div key={section.headline}>
+                <Heading
+                  tagName="h3"
+                  text={section.headline}
+                  className="mt-32 mb-8"
+                />
+                <RichText markdown={section.content} />
+              </div>
+            ))}
+          </Container>
+        </Background>
+      </div>
+      <div id={spoc.contact.id}>
         <Container>
-          <Heading tagName="h2" text={spoc.states.headline} />
-          {spoc.states.sections.map((section) => (
-            <div key={section.headline}>
-              <Heading
-                tagName="h3"
-                text={section.headline}
-                className="mt-32 mb-8"
-              />
-              <RichText markdown={section.content} />
-            </div>
-          ))}
+          <Heading tagName="h2" text={spoc.contact.headline} className="mb-8" />
+          <RichText markdown={spoc.contact.content} className="mb-40" />
         </Container>
-      </Background>
-      <Container>
-        <Heading tagName="h2" text={spoc.contact.headline} className="mb-8" />
-        <RichText markdown={spoc.contact.content} className="mb-40" />
-      </Container>
+      </div>
     </>
   );
 }
