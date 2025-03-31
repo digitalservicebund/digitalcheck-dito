@@ -12,7 +12,7 @@ export const spoc = {
     Interoperabilitätsakt für die deutsche Verwaltung um, für vernetzte, bürgernahe, 
     digitale und effiziente Verwaltungsleistungen. 
     <br/><br/>
-    Sie haben inhaltliche Fragen, dann besuchen Sie uns [hier](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903).
+    Sie haben inhaltliche Fragen, dann besuchen Sie uns [hier](${ROUTE_INTEROPERABILITY.url}).
   `,
   landscape: {
     id: "landschaft",
@@ -97,7 +97,7 @@ export const spoc = {
           **Entwicklung neuer Prinzipien und Methoden**
           - Derzeit entwickeln wir neue Vorschläge für Prinzipien und Methoden, die eine Integration von Prinzipien der Digitaltauglichkeit und Ebenen der Interoperabilität ermöglichen. Ziel ist es, den gesamten Entwicklungsprozess effizienter und zielgerichteter für Regelungsvorhaben zu gestalten.
           
-          ![TODO](/images/synthese-prozess-digitalcheck-und-interoperabilitaet.png)
+          ![Die Abbildung zeigt ein strukturiertes Vorgehensmodell für den Digitalcheck und die Interoperabilitätsbewertung. Das Vorgehen des Digitalchecks und der Interoperabilitätsbewertung wird in einem neuen Prozess zusammengefasst. Er umfasst drei Hauptbereiche: Zunächst werden Akteure identifiziert, bestehende Prozesse visualisiert und neue Prozesse entwickelt. Danach werden rechtliche Rahmenbedingungen untersucht, digitale Chancen analysiert und Anforderungen definiert. Schließlich erfolgt die Umsetzung, die Nutzung bestehender oder die Entwicklung neuer Lösungen, bevor alles dokumentiert wird. Durch die visuelle Darstellung wird der neue, gebündelte Ansatz im Prozess verdeutlicht.](/images/synthese-prozess-digitalcheck-und-interoperabilitaet.png)
         `,
       },
     ],
