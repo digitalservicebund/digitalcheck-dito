@@ -4,7 +4,6 @@ import Background from "./Background";
 import { type ButtonProps } from "./Button";
 import ButtonContainer from "./ButtonContainer";
 import Heading, { type HeadingProps } from "./Heading";
-import Image, { type ImageProps } from "./Image";
 import RichText from "./RichText";
 
 export type ListItemProps = {
@@ -12,7 +11,6 @@ export type ListItemProps = {
   label?: HeadingProps;
   headline?: HeadingProps;
   spacer?: boolean | HeadingProps;
-  image?: ImageProps;
   content?: string;
   buttons?: ButtonProps[];
   background?: string;
@@ -27,7 +25,6 @@ const ListItem = ({
   label,
   headline,
   spacer,
-  image,
   content,
   buttons,
   numeric,
@@ -43,22 +40,7 @@ const ListItem = ({
 
   return (
     <div id={identifier} className="flex flex-row items-center justify-center">
-      {image && (
-        <Image
-          {...image}
-          {...{
-            className:
-              "max-[499px]:mb-16 max-[499px]:w-[144px] max-[499px]:h-[144px] h-[168px] w-[168px]" +
-              " self-baseline",
-          }}
-        />
-      )}
-      <div
-        className={twJoin(
-          "ds-stack ds-stack-16 w-full break-words",
-          image && "min-[500px]:ml-16",
-        )}
-      >
+      <div className={twJoin("ds-stack ds-stack-16 w-full break-words")}>
         {spacer && (
           <div
             className={twJoin(
