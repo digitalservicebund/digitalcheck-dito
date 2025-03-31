@@ -132,7 +132,10 @@ export default function SPOC() {
             text={spoc.timeline.headline}
             className="mb-8"
           />
-          <BulletList items={timelineItems} className="mb-40" />
+          <BulletList
+            items={timelineItems}
+            className="rotate-arrow-bottom mb-40"
+          />
         </Container>
       </div>
       <div id={spoc.states.id}>

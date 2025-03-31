@@ -72,7 +72,7 @@ const BulletList = ({
   return (
     <div
       className={twMerge(
-        "ds-stack ds-stack-8 relative scroll-my-40",
+        "ds-stack ds-stack-8 group relative scroll-my-40",
         className,
       )}
       id={identifier}
@@ -82,7 +82,7 @@ const BulletList = ({
         <div className="absolute -left-8 w-20 rotate-180 bg-white text-center text-xl leading-none text-blue-300">
           ▲
         </div>
-        <div className="absolute bottom-0 -left-8 w-20 bg-white text-center text-xl leading-none text-blue-300">
+        <div className="absolute bottom-0 -left-8 w-20 bg-white text-center text-xl leading-none text-blue-300 group-[.rotate-arrow-bottom]:rotate-180">
           ▲
         </div>
       </div>
