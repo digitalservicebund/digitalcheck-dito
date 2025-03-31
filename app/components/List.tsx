@@ -10,6 +10,19 @@ type BaseListProps = {
   className?: string;
 };
 
+function getKey(item: ListItemProps, index: number) {
+  return (
+    item.identifier ??
+    (typeof item.label?.text === "string"
+      ? item.label.text
+      : index.toString()) ??
+    (typeof item.headline?.text === "string"
+      ? item.headline.text
+      : index.toString()) ??
+    (typeof item.content === "string" ? item.content : index.toString())
+  );
+}
+
 const NumberedList = ({
   identifier,
   items,
@@ -32,18 +45,7 @@ const NumberedList = ({
       >
         {items.map((item, index) => (
           <li
-            key={
-              item.identifier ??
-              (typeof item.label?.text === "string"
-                ? item.label.text
-                : index.toString()) ??
-              (typeof item.headline?.text === "string"
-                ? item.headline.text
-                : index.toString()) ??
-              (typeof item.content === "string"
-                ? item.content
-                : index.toString())
-            }
+            key={getKey(item, index)}
             className="scroll-my-40 first:pt-0"
             aria-describedby={
               item.identifier ? `${item.identifier}-desc` : undefined
@@ -93,18 +95,7 @@ const BulletList = ({
       >
         {items.map((item, index) => (
           <li
-            key={
-              item.identifier ??
-              (typeof item.label?.text === "string"
-                ? item.label.text
-                : index.toString()) ??
-              (typeof item.headline?.text === "string"
-                ? item.headline.text
-                : index.toString()) ??
-              (typeof item.content === "string"
-                ? item.content
-                : index.toString())
-            }
+            key={getKey(item, index)}
             className="scroll-my-40 first:pt-0"
             aria-describedby={
               item.identifier ? `${item.identifier}-desc` : undefined
