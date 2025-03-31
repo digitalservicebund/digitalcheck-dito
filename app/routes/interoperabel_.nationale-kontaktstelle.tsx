@@ -132,7 +132,7 @@ export default function SPOC() {
             text={spoc.timeline.headline}
             className="mb-8"
           />
-          <BulletList items={timelineItems} />
+          <BulletList items={timelineItems} className="mb-40" />
         </Container>
       </div>
       <div id={spoc.states.id}>
@@ -140,7 +140,7 @@ export default function SPOC() {
           <Container>
             <Heading tagName="h2" text={spoc.states.headline} />
             {spoc.states.sections.map((section) => (
-              <div key={section.headline}>
+              <div key={section.headline} className="last:mb-40">
                 <Heading
                   tagName="h3"
                   text={section.headline}

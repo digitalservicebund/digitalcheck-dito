@@ -102,7 +102,7 @@ export default tseslint.config(
               name: "tailwind-merge",
               importNames: ["twMerge"],
               message:
-                "Please import { twMerge } from '@digitalcheck/shared/utils/tailwind-merge'.",
+                "Please import { twMerge } from '~/utils/tailwindMerge'.",
             },
           ],
         },

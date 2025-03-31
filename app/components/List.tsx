@@ -1,3 +1,4 @@
+import twMerge from "~/utils/tailwindMerge";
 import Heading, { type HeadingProps } from "./Heading";
 import ListItem, { type ListItemProps } from "./ListItem";
 
@@ -6,11 +7,23 @@ type BaseListProps = {
   identifier?: string;
   heading?: HeadingProps;
   items: ListItemProps[];
+  className?: string;
 };
 
-const NumberedList = ({ identifier, items, heading }: BaseListProps) => {
+const NumberedList = ({
+  identifier,
+  items,
+  heading,
+  className,
+}: BaseListProps) => {
   return (
-    <div className="ds-stack ds-stack-8 relative scroll-my-40" id={identifier}>
+    <div
+      className={twMerge(
+        "ds-stack ds-stack-8 relative scroll-my-40",
+        className,
+      )}
+      id={identifier}
+    >
       {heading && <Heading className="max-sm:ds-heading-02-reg" {...heading} />}
       <ol
         className="list-unstyled ds-stack ds-stack-32 relative"
@@ -50,9 +63,20 @@ const NumberedList = ({ identifier, items, heading }: BaseListProps) => {
   );
 };
 
-const BulletList = ({ identifier, items, heading }: BaseListProps) => {
+const BulletList = ({
+  identifier,
+  items,
+  heading,
+  className,
+}: BaseListProps) => {
   return (
-    <div className="ds-stack ds-stack-8 relative scroll-my-40" id={identifier}>
+    <div
+      className={twMerge(
+        "ds-stack ds-stack-8 relative scroll-my-40",
+        className,
+      )}
+      id={identifier}
+    >
       {heading && <Heading className="max-sm:ds-heading-02-reg" {...heading} />}
       <div className="absolute top-32 bottom-0 left-[8px] w-[4px] bg-blue-300">
         <div className="absolute -left-8 w-20 rotate-180 bg-white text-center text-xl leading-none text-blue-300">
