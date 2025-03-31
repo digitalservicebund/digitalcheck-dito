@@ -1,5 +1,4 @@
-import ZoomInOutlined from "@digitalservicebund/icons/ZoomInOutlined";
-import { Link, type MetaArgs } from "react-router";
+import { type MetaArgs } from "react-router";
 import Accordion from "~/components/Accordion";
 import Background from "~/components/Background";
 import ButtonContainer from "~/components/ButtonContainer";
@@ -8,6 +7,7 @@ import FeedbackForm from "~/components/FeedbackForm";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import Image from "~/components/Image";
+import ImageZoomable from "~/components/ImageZoomable";
 import InfoBox from "~/components/InfoBox";
 import LinkListBox from "~/components/LinkListBox";
 import RichText from "~/components/RichText";
@@ -118,25 +118,13 @@ export default function Interoperability() {
             markdown={interoperability.andYourVorhaben.content}
             className="mb-40"
           />
-          <Link
-            to={interoperability.andYourVorhaben.image.url}
-            reloadDocument
-            target="_blank"
-            rel="noreferrer"
-            className="relative block cursor-zoom-in"
-          >
-            <Image
-              url={interoperability.andYourVorhaben.image.url}
-              alternativeText={
-                interoperability.andYourVorhaben.image.alternativeText
-              }
-              className="h-auto w-full"
-            />
-            <ZoomInOutlined
-              className="absolute bottom-16 left-16 size-48 bg-blue-800 p-1 shadow-sm"
-              fill="white"
-            />
-          </Link>
+          <ImageZoomable
+            url={interoperability.andYourVorhaben.image.url}
+            alternativeText={
+              interoperability.andYourVorhaben.image.alternativeText
+            }
+            className="h-auto w-full"
+          />
           <Heading
             tagName="h3"
             text={interoperability.andYourVorhaben.law.headline}
@@ -154,23 +142,11 @@ export default function Interoperability() {
             }}
             items={interoperability.info.items}
           />
-          <Link
-            to={interoperability.info.image.url}
-            reloadDocument
-            target="_blank"
-            rel="noreferrer"
-            className="relative block cursor-zoom-in"
-          >
-            <Image
-              url={interoperability.info.image.url}
-              alternativeText={interoperability.info.image.alternativeText}
-              className="h-auto w-full"
-            />
-            <ZoomInOutlined
-              className="absolute bottom-16 left-16 size-48 bg-blue-800 p-1 shadow-sm"
-              fill="white"
-            />
-          </Link>
+          <ImageZoomable
+            url={interoperability.info.image.url}
+            alternativeText={interoperability.info.image.alternativeText}
+            className="h-auto w-full"
+          />
         </Container>
       </div>
       <div id={interoperability.resources.id}>
