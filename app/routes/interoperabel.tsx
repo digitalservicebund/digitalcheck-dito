@@ -123,7 +123,6 @@ export default function Interoperability() {
             alternativeText={
               interoperability.andYourVorhaben.image.alternativeText
             }
-            className="h-auto w-full"
           />
           <Heading
             tagName="h3"
@@ -145,7 +144,6 @@ export default function Interoperability() {
           <ImageZoomable
             url={interoperability.info.image.url}
             alternativeText={interoperability.info.image.alternativeText}
-            className="h-auto w-full"
           />
         </Container>
       </div>

@@ -1,10 +1,9 @@
-import ZoomInOutlined from "@digitalservicebund/icons/ZoomInOutlined";
-import { Link, type MetaArgs } from "react-router";
+import { type MetaArgs } from "react-router";
 import Background from "~/components/Background";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
-import Image from "~/components/Image";
+import ImageZoomable from "~/components/ImageZoomable";
 import LinkListBox from "~/components/LinkListBox";
 import { BulletList } from "~/components/List";
 import { ListItemProps } from "~/components/ListItem";
@@ -87,23 +86,10 @@ export default function SPOC() {
             className="mb-8"
           />
           <RichText markdown={spoc.landscape.content} className="mb-40" />
-          <Link
-            to={spoc.landscape.image.url}
-            reloadDocument
-            target="_blank"
-            rel="noreferrer"
-            className="relative block cursor-zoom-in"
-          >
-            <Image
-              url={spoc.landscape.image.url}
-              alternativeText={spoc.landscape.image.alternativeText}
-              className="h-auto w-full"
-            />
-            <ZoomInOutlined
-              className="absolute bottom-16 left-16 size-48 bg-blue-800 p-1 shadow-sm"
-              fill="white"
-            />
-          </Link>
+          <ImageZoomable
+            url={spoc.landscape.image.url}
+            alternativeText={spoc.landscape.image.alternativeText}
+          />
           <RichText
             className="mt-32"
             markdown={spoc.landscape.contentAfter.content}
