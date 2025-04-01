@@ -1,4 +1,6 @@
 import { twJoin } from "tailwind-merge";
+import type { ImageProps } from "~/components/Image";
+import ImageZoomable from "~/components/ImageZoomable";
 import { type BackgroundColor, isBackgroundColor } from ".";
 import Background from "./Background";
 import { type ButtonProps } from "./Button";
@@ -18,6 +20,7 @@ export type ListItemProps = {
   isDisabled?: boolean;
   readonly numeric?: number;
   hasBullet?: boolean;
+  image?: ImageProps;
 };
 
 const ListItem = ({
@@ -32,6 +35,7 @@ const ListItem = ({
   background,
   parentHasHeading,
   isDisabled,
+  image,
 }: ListItemProps) => {
   const backgroundColor =
     background && isBackgroundColor(background) ? background : undefined;
@@ -82,10 +86,6 @@ const ListItem = ({
               ></div>
             )}
           </div>
-          {/* 
-          // TODO: This is very similar to the markup used in dito/methoden/$subPage.
-          // We should probably create a component for this to keep it consistent.
-           */}
           <div className={twJoin(backgroundColor && "rounded-lg")}>
             <Background
               backgroundColor={(backgroundColor as BackgroundColor) || "white"}
@@ -108,6 +108,13 @@ const ListItem = ({
                   )}
                 </div>
                 {content && <RichText markdown={content} />}
+                {image && (
+                  <ImageZoomable
+                    url={image.url}
+                    alternativeText={image.alternativeText}
+                    className="max-w-a11y"
+                  />
+                )}
                 {buttons && buttons.length > 0 && (
                   <ButtonContainer buttons={buttons} />
                 )}

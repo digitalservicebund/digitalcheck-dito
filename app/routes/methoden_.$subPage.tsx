@@ -102,8 +102,6 @@ export default function Index() {
           buttons={"buttons" in content.content ? content.content.buttons : []}
         />
         {content.boxes.map((box) => (
-          // TODO: This is very similar to the markup used in <ListItem /> when a background color is provided.
-          // We should probably create a component for this to keep it consistent.
           <div key={box.title} className="overflow-hidden rounded-lg">
             <Background backgroundColor="midBlue">
               <div className="px-96 pt-64 max-sm:px-16 max-sm:pt-32">

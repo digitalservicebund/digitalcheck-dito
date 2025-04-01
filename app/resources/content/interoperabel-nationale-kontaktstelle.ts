@@ -96,10 +96,12 @@ export const spoc = {
         content: dedent`
           **Entwicklung neuer Prinzipien und Methoden**
           - Derzeit entwickeln wir neue Vorschläge für Prinzipien und Methoden, die eine Integration von Prinzipien der Digitaltauglichkeit und Ebenen der Interoperabilität ermöglichen. Ziel ist es, den gesamten Entwicklungsprozess effizienter und zielgerichteter für Regelungsvorhaben zu gestalten.
-          
-          ![Die Abbildung zeigt ein strukturiertes Vorgehensmodell für den Digitalcheck und die Interoperabilitätsbewertung. Das Vorgehen des Digitalchecks und der Interoperabilitätsbewertung wird in einem neuen Prozess zusammengefasst. Er umfasst drei Hauptbereiche: Zunächst werden Akteure identifiziert, bestehende Prozesse visualisiert und neue Prozesse entwickelt. Danach werden rechtliche Rahmenbedingungen untersucht, digitale Chancen analysiert und Anforderungen definiert. Schließlich erfolgt die Umsetzung, die Nutzung bestehender oder die Entwicklung neuer Lösungen, bevor alles dokumentiert wird. Durch die visuelle Darstellung wird der neue, gebündelte Ansatz im Prozess verdeutlicht.](/images/synthese-prozess-digitalcheck-und-interoperabilitaet.png)
-          <br/>
         `,
+        image: {
+          url: "/images/synthese-prozess-digitalcheck-und-interoperabilitaet.png",
+          alternativeText:
+            "Die Abbildung zeigt ein strukturiertes Vorgehensmodell für den Digitalcheck und die Interoperabilitätsbewertung. Das Vorgehen des Digitalchecks und der Interoperabilitätsbewertung wird in einem neuen Prozess zusammengefasst. Er umfasst drei Hauptbereiche: Zunächst werden Akteure identifiziert, bestehende Prozesse visualisiert und neue Prozesse entwickelt. Danach werden rechtliche Rahmenbedingungen untersucht, digitale Chancen analysiert und Anforderungen definiert. Schließlich erfolgt die Umsetzung, die Nutzung bestehender oder die Entwicklung neuer Lösungen, bevor alles dokumentiert wird. Durch die visuelle Darstellung wird der neue, gebündelte Ansatz im Prozess verdeutlicht.",
+        },
       },
     ],
   },
