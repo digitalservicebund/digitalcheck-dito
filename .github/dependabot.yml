@@ -11,6 +11,10 @@ updates:
         patterns:
           - "react-router"
           - "@react-router/*"
+      tailwindcss:
+        patterns:
+          - "tailwindcss"
+          - "@tailwindcss/*"
       typescript-eslint:
         patterns:
           - "@typescript-eslint/*"
