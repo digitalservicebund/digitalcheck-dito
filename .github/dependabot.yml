@@ -7,6 +7,12 @@ updates:
     schedule:
       interval: "daily"
     groups:
+      react:
+        patterns:
+          - "react"
+          - "@types/react"
+          - "react-dom"
+          - "@types/react-dom"
       react-router:
         patterns:
           - "react-router"
