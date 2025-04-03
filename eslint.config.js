@@ -74,7 +74,19 @@ export default tseslint.config(
         "warn",
         {
           allowConstantExport: true,
-          allowExportNames: ["meta", "links", "headers", "loader", "action"],
+          allowExportNames: [
+            "loader",
+            "clientLoader",
+            "action",
+            "clientAction",
+            "ErrorBoundary",
+            "HydrateFallback",
+            "headers",
+            "handle",
+            "links",
+            "meta",
+            "shouldRevalidate",
+          ],
         },
       ],
 
