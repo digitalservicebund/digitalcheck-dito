@@ -61,7 +61,7 @@
     "@react-router/dev": "^7.4.0",
     "@react-router/fs-routes": "^7.4.0",
     "@testing-library/jest-dom": "^6.6.1",
-    "@testing-library/react": "^16.2.0",
+    "@testing-library/react": "^16.3.0",
     "@types/mime-types": "^2.1.4",
     "@types/node": "^22.14.0",
     "@types/react": "^18.3.20",
