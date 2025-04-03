@@ -7,7 +7,7 @@ import {
   ROUTE_METHODS,
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
   ROUTE_SUPPORT,
-} from "~/resources/staticRoutes";
+} from "~/resources/routeDefinitions";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsTechnicalFeasibility = {

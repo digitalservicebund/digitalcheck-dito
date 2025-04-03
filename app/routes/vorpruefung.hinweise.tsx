@@ -7,7 +7,10 @@ import InlineNotice from "~/components/InlineNotice";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { ROUTE_GENERAL_INFO, ROUTE_PRECHECK } from "~/resources/staticRoutes";
+import {
+  ROUTE_GENERAL_INFO,
+  ROUTE_PRECHECK,
+} from "~/resources/routeDefinitions";
 import { getAnswersFromCookie } from "~/utils/cookies.server";
 import prependMetaTitle from "~/utils/metaTitle";
 import type { Route } from "./+types/vorpruefung.hinweise";

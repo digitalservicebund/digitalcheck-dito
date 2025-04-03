@@ -10,7 +10,7 @@ import {
   ROUTE_METHODS_TASKS_PROCESSES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
   ROUTE_PRINCIPLES,
-} from "~/resources/staticRoutes";
+} from "~/resources/routeDefinitions";
 
 test.describe("test method page link flow", () => {
   test("happy path method pages", async ({ page }, testInfo) => {

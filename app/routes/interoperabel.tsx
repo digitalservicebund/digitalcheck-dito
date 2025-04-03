@@ -16,7 +16,7 @@ import { interoperability } from "~/resources/content/interoperabel";
 import {
   ROUTE_INTEROPERABILITY,
   ROUTE_PRECHECK,
-} from "~/resources/staticRoutes";
+} from "~/resources/routeDefinitions";
 import prependMetaTitle from "~/utils/metaTitle";
 
 export const meta = ({ matches }: MetaArgs) => {

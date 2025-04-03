@@ -12,7 +12,7 @@ import {
   ROUTE_METHODS,
   ROUTE_METHODS_FIVE_PRINCIPLES,
   ROUTE_PRINCIPLES,
-} from "~/resources/staticRoutes";
+} from "~/resources/routeDefinitions";
 import prependMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,

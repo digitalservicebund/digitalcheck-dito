@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import Heading from "~/components/Heading";
 import Image from "~/components/Image";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
-import { ROUTE_VISUALISATION } from "~/resources/staticRoutes";
+import { ROUTE_VISUALISATION } from "~/resources/routeDefinitions";
 import { Visualisierung } from "~/utils/strapiData.server";
 import { formatDate } from "~/utils/utilFunctions";
 

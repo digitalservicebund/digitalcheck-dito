@@ -11,7 +11,7 @@ import Heading from "~/components/Heading";
 import Image from "~/components/Image";
 import RichText from "~/components/RichText";
 import { support } from "~/resources/content/unterstuetzung";
-import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
+import { ROUTE_SUPPORT } from "~/resources/routeDefinitions";
 import prependMetaTitle from "~/utils/metaTitle";
 import SupportTabs from "./SupportTabList";
 

@@ -6,8 +6,8 @@ import {
   ROUTE_METHODS,
   ROUTE_PRECHECK,
   ROUTE_RESULT,
-} from "~/resources/staticRoutes";
-import type { TQuestion } from "~/routes/vorpruefung.$questionId/route.tsx";
+} from "~/resources/routeDefinitions";
+import type { TQuestion } from "~/routes/vorpruefung.$questionId/route";
 
 const { questions } = preCheck;
 

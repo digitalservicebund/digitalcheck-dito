@@ -22,7 +22,7 @@ import { NumberedList } from "~/components/List";
 import RichText from "~/components/RichText";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
-import { ROUTE_PRECHECK, ROUTE_RESULT } from "~/resources/staticRoutes";
+import { ROUTE_PRECHECK, ROUTE_RESULT } from "~/resources/routeDefinitions";
 import type { PreCheckAnswers } from "~/routes/vorpruefung.$questionId/route";
 import buildMailtoRedirectUri from "~/routes/vorpruefung.ergebnis/buildMailtoRedirectUri";
 import getContentForResult, {

@@ -4,10 +4,8 @@ import { type MetaArgs, useLoaderData } from "react-router";
 import Background from "~/components/Background";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
-import allRoutes from "~/resources/allRoutes";
-import { ROUTE_SITEMAP } from "~/resources/staticRoutes";
+import { ROUTE_SITEMAP, ROUTES } from "~/resources/routeDefinitions";
 import prependMetaTitle from "~/utils/metaTitle";
-import type { Route } from "./+types/sitemap";
 
 interface Route {
   url: string;
@@ -40,11 +38,11 @@ export const meta = ({ matches }: MetaArgs) => {
 };
 
 export const loader = () => {
-  return groupRoutesByParent(allRoutes as Route[]);
+  return groupRoutesByParent(ROUTES);
 };
 
 export default function Sitemap(): ReactNode {
-  const urls = useLoaderData<Route[]>();
+  const urls = useLoaderData<typeof loader>();
 
   const renderRoutes = (routes: Route[]): ReactNode => (
     // [&_li>ul] styles the nested ul elements

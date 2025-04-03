@@ -15,7 +15,10 @@ import Heading from "~/components/Heading";
 import InlineInfoList from "~/components/InlineInfoList";
 import ParagraphList from "~/components/ParagraphList";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
-import { ROUTE_PRINCIPLES, ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
+import {
+  ROUTE_PRINCIPLES,
+  ROUTE_REGELUNGEN,
+} from "~/resources/routeDefinitions";
 import prependMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,

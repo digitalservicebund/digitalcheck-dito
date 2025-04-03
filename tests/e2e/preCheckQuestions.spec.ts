@@ -5,7 +5,7 @@ import {
   ROUTE_GENERAL_INFO,
   ROUTE_PRECHECK,
   ROUTE_RESULT,
-} from "~/resources/staticRoutes";
+} from "~/resources/routeDefinitions";
 
 const { questions } = preCheck;
 

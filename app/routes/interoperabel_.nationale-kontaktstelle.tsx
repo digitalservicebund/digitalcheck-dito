@@ -10,7 +10,7 @@ import { ListItemProps } from "~/components/ListItem";
 import RichText from "~/components/RichText";
 import { spoc } from "~/resources/content/interoperabel-nationale-kontaktstelle";
 import { features } from "~/resources/features";
-import { ROUTE_INTEROPERABILITY_SPOC } from "~/resources/staticRoutes";
+import { ROUTE_INTEROPERABILITY_SPOC } from "~/resources/routeDefinitions";
 import { useFeatureFlag } from "~/utils/featureFlags";
 import prependMetaTitle from "~/utils/metaTitle";
 

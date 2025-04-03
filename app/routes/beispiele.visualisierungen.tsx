@@ -9,7 +9,7 @@ import { examplesVisualisations } from "~/resources/content/beispiele-visualisie
 import {
   ROUTE_REGELUNGEN,
   ROUTE_VISUALISATIONS,
-} from "~/resources/staticRoutes";
+} from "~/resources/routeDefinitions";
 import prependMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,

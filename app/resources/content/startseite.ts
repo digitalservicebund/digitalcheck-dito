@@ -8,7 +8,7 @@ import {
   ROUTE_INTEROPERABILITY,
   ROUTE_METHODS_FIVE_PRINCIPLES,
   TOOLFINDER,
-} from "~/resources/staticRoutes";
+} from "~/resources/routeDefinitions";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const index = {

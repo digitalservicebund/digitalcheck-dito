@@ -1,4 +1,4 @@
-import { ROUTE_INTEROPERABILITY } from "~/resources/staticRoutes";
+import { ROUTE_INTEROPERABILITY } from "~/resources/routeDefinitions";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const spoc = {

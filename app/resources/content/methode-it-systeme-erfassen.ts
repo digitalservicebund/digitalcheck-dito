@@ -5,7 +5,7 @@ import SupportOutlined from "@digitalservicebund/icons/SupportOutlined";
 import {
   ROUTE_METHODS_FIVE_PRINCIPLES,
   ROUTE_SUPPORT,
-} from "~/resources/staticRoutes";
+} from "~/resources/routeDefinitions";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsITSystems = {

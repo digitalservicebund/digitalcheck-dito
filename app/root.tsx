@@ -24,7 +24,6 @@ import Container from "~/components/Container";
 import Footer from "~/components/Footer";
 import Heading from "~/components/Heading";
 import RichText from "~/components/RichText";
-import routes from "~/resources/allRoutes";
 import { header } from "~/resources/content/components/header";
 import { siteMeta } from "~/resources/content/shared/meta";
 import {
@@ -33,7 +32,8 @@ import {
   ROUTE_LANDING,
   ROUTE_PRIVACY,
   ROUTE_SITEMAP,
-} from "~/resources/staticRoutes";
+  ROUTES,
+} from "~/resources/routeDefinitions";
 import sharedStyles from "~/styles.css?url";
 import {
   PLAUSIBLE_DOMAIN as CLIENT_PLAUSIBLE_DOMAIN,
@@ -267,7 +267,7 @@ const PageHeader = ({
     </div>
     {includeBreadcrumbs && (
       <Background backgroundColor="blue">
-        <Breadcrumbs breadcrumbs={routes} useIconForHome />
+        <Breadcrumbs breadcrumbs={ROUTES} useIconForHome />
       </Background>
     )}
   </header>

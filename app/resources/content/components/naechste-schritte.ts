@@ -2,7 +2,7 @@ import {
   ROUTE_DOCUMENTATION,
   ROUTE_METHODS,
   ROUTE_PRECHECK,
-} from "~/resources/staticRoutes";
+} from "~/resources/routeDefinitions";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 const stepNKR = {

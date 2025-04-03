@@ -1,6 +1,6 @@
 import { createCipheriv, createDecipheriv, randomBytes } from "node:crypto";
 import { gunzipSync, gzipSync } from "node:zlib";
-import { ROUTE_RESULT_PDF } from "~/resources/staticRoutes";
+import { ROUTE_RESULT_PDF } from "~/resources/routeDefinitions";
 import { ENCRYPTION_ALGORITHM, ENCRYPTION_KEY } from "~/utils/constants.server";
 import getBaseURL from "~/utils/getBaseURL";
 import type { Route } from "./+types/uniq.($encrypted).($iv)";

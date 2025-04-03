@@ -3,7 +3,7 @@ import {
   ROUTE_INTEROPERABILITY,
   ROUTE_PRECHECK,
   ROUTE_RESULT,
-} from "~/resources/staticRoutes";
+} from "~/resources/routeDefinitions";
 import type { TQuestion } from "~/routes/vorpruefung.$questionId/route";
 import { dedent } from "~/utils/dedentMultilineStrings";
 

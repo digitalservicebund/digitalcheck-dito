@@ -2,7 +2,7 @@ import { steps } from "~/resources/content/components/naechste-schritte";
 import {
   ROUTE_DOCUMENTATION_STATIC_PDF,
   ROUTE_LANDING,
-} from "~/resources/staticRoutes";
+} from "~/resources/routeDefinitions";
 
 export const documentation = {
   title: "3. Dokumentieren der Digitaltauglichkeit",

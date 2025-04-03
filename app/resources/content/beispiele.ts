@@ -1,7 +1,7 @@
 import {
   ROUTE_PRINCIPLES,
   ROUTE_VISUALISATIONS,
-} from "~/resources/staticRoutes";
+} from "~/resources/routeDefinitions";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const examples = {

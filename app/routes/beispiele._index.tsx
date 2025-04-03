@@ -5,7 +5,7 @@ import Box from "~/components/Box";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
 import { examples } from "~/resources/content/beispiele";
-import { ROUTE_EXAMPLES, ROUTE_PRINCIPLES } from "~/resources/staticRoutes";
+import { ROUTE_EXAMPLES, ROUTE_PRINCIPLES } from "~/resources/routeDefinitions";
 import prependMetaTitle from "~/utils/metaTitle";
 import { Prinzip } from "~/utils/strapiData.server";
 
