@@ -9,7 +9,7 @@ import { BulletList } from "~/components/List";
 import { ListItemProps } from "~/components/ListItem";
 import RichText from "~/components/RichText";
 import { spoc } from "~/resources/content/interoperabel-nationale-kontaktstelle";
-import { features } from "~/resources/features";
+import { features } from "~/resources/features.ts";
 import { ROUTE_INTEROPERABILITY_SPOC } from "~/resources/staticRoutes";
 import { useFeatureFlag } from "~/utils/featureFlags";
 import prependMetaTitle from "~/utils/metaTitle";
@@ -143,8 +143,17 @@ export default function SPOC() {
       </div>
       <div id={spoc.contact.id}>
         <Container>
-          <Heading tagName="h2" text={spoc.contact.headline} className="mb-8" />
-          <RichText markdown={spoc.contact.content} className="mb-40" />
+          <Heading tagName="h2" text={spoc.contact.headline} />
+          {spoc.contact.sections.map((section) => (
+            <div key={section.headline} className="last:mb-40">
+              <Heading
+                tagName="h3"
+                text={section.headline}
+                className="mt-32 mb-8"
+              />
+              <RichText markdown={section.content} />
+            </div>
+          ))}
         </Container>
       </div>
     </>

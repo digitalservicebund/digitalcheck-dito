@@ -1,5 +1,6 @@
 import { Apps, Layers } from "@digitalservicebund/icons/index";
 import { feedbackFormular } from "~/resources/content/components/feedback-formular";
+import { ROUTE_INTEROPERABILITY_SPOC } from "~/resources/staticRoutes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const interoperability = {
@@ -292,6 +293,19 @@ export const interoperability = {
       alternativeText:
         "Ein Entscheidungsdiagramm zur Bestimmung der Verpflichtung zur Interoperabilitätsbewertung. Es beginnt mit der Frage, ob es sich um eine verbindliche Anforderung handelt. Je nach Antwort folgen verschiedene Entscheidungsstufen: Offenheit für Änderungen, Verpflichtung, digitale öffentliche Dienstleistungen, betroffene Akteure und Notwendigkeit des Austauschs in Netzwerken oder Informationssystemen. Wenn alle Bedingungen erfüllt sind, führt der Prozess zur verpflichtenden Interoperabilitätsbewertung. Andernfalls ist sie nicht verpflichtend.",
     },
+  },
+  kontaktstelle: {
+    id: "kontaktstelle",
+    title:
+      "Informieren Sie sich weiter zu den EU-Anforderungen an Interoperabilität ",
+    text: "Mehr zum Thema Governance, Kooperation und Nutzung unserer Inhalte finden Sie unter der Nationalen Kontakstelle für ein interoperables Europa.",
+    buttons: [
+      {
+        text: "Zur Nationalen Kontaktstelle",
+        href: ROUTE_INTEROPERABILITY_SPOC.url,
+        look: "tertiary" as const,
+      },
+    ],
   },
   feedbackForm: {
     heading: feedbackFormular.heading,

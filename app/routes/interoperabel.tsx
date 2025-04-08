@@ -1,6 +1,7 @@
 import { type MetaArgs } from "react-router";
 import Accordion from "~/components/Accordion";
 import Background from "~/components/Background";
+import Box from "~/components/Box.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import FeedbackForm from "~/components/FeedbackForm";
@@ -13,10 +14,12 @@ import LinkListBox from "~/components/LinkListBox";
 import RichText from "~/components/RichText";
 import SupportBanner from "~/components/SupportBanner";
 import { interoperability } from "~/resources/content/interoperabel";
+import { features } from "~/resources/features.ts";
 import {
   ROUTE_INTEROPERABILITY,
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
+import { useFeatureFlag } from "~/utils/featureFlags";
 import prependMetaTitle from "~/utils/metaTitle";
 
 export const meta = ({ matches }: MetaArgs) => {
@@ -182,6 +185,17 @@ export default function Interoperability() {
           />
           <RichText markdown={interoperability.faq.content} className="mb-40" />
           <Accordion items={interoperability.faq.items} />
+          {useFeatureFlag(features.showPageSPOC) && (
+            <Box
+              className="pt-64"
+              heading={{
+                tagName: "h2",
+                text: interoperability.kontaktstelle.title,
+              }}
+              content={{ markdown: interoperability.kontaktstelle.text }}
+              buttons={interoperability.kontaktstelle.buttons}
+            />
+          )}
         </Container>
       </div>
       <FeedbackForm {...interoperability.feedbackForm} />
