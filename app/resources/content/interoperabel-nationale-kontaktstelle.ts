@@ -27,13 +27,25 @@ export const spoc = {
       In Deutschland bettet sich diese Anforderung in die föderale Zusammenarbeit wie folgt ein:
     `,
     image: {
-      url: "/images/prozess-nationale.kontaktstelle.png",
-      alternativeText: `Der Prozess beginnt mit einer geführten Vorprüfung auf Digitalbezug und Anforderungen an Interoperabilität. Daraus ergeben sich drei mögliche Ergebnisse mit unterschiedlichen Prozessschritten: Bei dem Ergebnis "kein Digitalbezug" ist der Erarbeitungsprozess abgeschlossen und wird dem Normenkontrollrat zur Prüfung übermittelt. Bei dem Ergebnis "Digitalbezug" wird das Ergebnis per E-Mail an den Normenkontrollrat gesendet, gefolgt von einer Schritt-für-Schritt-Anleitung und der Dokumentation der Erstellung des Digitalbezugs, die abschließend vom Normenkontrollrat geprüft wird. Für das Ergebnis " Digitalbezug & Anforderungen an die Interoperabilität" wird das Ergebnis per E-Mail an den Normenkontrollrat und das Digitalcheck-Team gesendet, gefolgt von einer Schritt-für-Schritt-Anleitung mit Unterstützung durch das Digitalcheck-Team, der Dokumentation der Erstellung des Digitalbezugs und der Bewertung der Interoperabilität. Die Dokumentation wird anschließend auf dem Interoperable Europe Portal zur Verfügung gestellt.`,
+      url: "/images/prozess-nationale-kontaktstelle.png",
+      alternativeText: `Netzwerkdiagramm, das die Interaktionen verschiedener deutscher und EU-Behörden im Kontext der EU-Interoperabilitätsverordnung zeigt. Es verdeutlicht, wie Akteure wie der IT-Planungsrat, die Nationale Kontaktstelle, das BMI und die EU-Kommission bei der Umsetzung, Koordination und dem Reporting zusammenarbeiten.`,
     },
     contentAfter: {
       headline: "Rechtliche Grundlage",
-      content:
-        "Deutschland integriert die Anforderungen des IEA in den Digitalcheck und folgt damit den Empfehlungen der EU. Somit werden Ressourcen effizient genutzt und Doppelstrukturen verhindert. Die nationale Kontaktstelle ist beim Digitalcheck-Team angesiedelt.",
+      content: dedent`
+      Das Organigramm zeigt die Interaktionen der Organisationen und Behörden in Deutschland und der EU im Kontext der Verordnung (EU) 2024/903.
+      
+      Es umfasst:
+      - **Bundesländer & Kommunen:** Ausgangspunkt, mit dem Hinweis auf die dezentrale Umsetzung durch das Bundesangebot.
+      - **IT-Planungsrat:** Koordiniert und empfiehlt die Integration von IT-Strategien.
+      - **Nationale Kontaktstelle:** Zentraler Ansprechpartner für Informationsaustausch und Koordination.
+      - **Bundesministerium für Inneres und Heimat:** Verantwortlich für die Integration in den Digitalcheck.
+      - **EU-Kommission:** Beteiligte an der Weiterentwicklung und Reportings. 
+      - **EU-Interoperabilitätsbeirat:** EU-weite Zusammenarbeit, vertreten durch Markus Richter (Bundes-CIO).
+      - **27 EU-Staaten mit Kontaktstellen:** Nationale Kontaktstellen für Informationsaustausch.
+      <br/><br/>
+      Deutschland integriert die Anforderungen der Verordnung (EU) 2024/903 in den Digitalcheck und folgt damit den Empfehlungen der EU. Somit werden Ressourcen effizient genutzt und Doppelstrukturen verhindert. Die nationale Kontaktstelle ist beim Digitalcheck-Team angesiedelt.
+      `,
     },
   },
   responsibilities: {
