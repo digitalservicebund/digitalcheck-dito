@@ -4,6 +4,7 @@ import Container from "~/components/Container";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import ImageZoomable from "~/components/ImageZoomable";
+import InfoBox from "~/components/InfoBox.tsx";
 import LinkListBox from "~/components/LinkListBox";
 import { BulletList } from "~/components/List";
 import { ListItemProps } from "~/components/ListItem";
@@ -91,8 +92,13 @@ export default function SPOC() {
             alternativeText={spoc.landscape.image.alternativeText}
           />
           <RichText
-            className="mt-32"
+            className="mt-16 mb-32"
             markdown={spoc.landscape.contentAfter.content}
+          />
+          <InfoBox items={spoc.landscape.contentAfter.infobox} />
+          <RichText
+            className="mb-48"
+            markdown={spoc.landscape.contentAfter.outro}
           />
         </Container>
       </div>
@@ -106,7 +112,7 @@ export default function SPOC() {
             />
             <RichText
               markdown={spoc.responsibilities.content}
-              className="mb-40"
+              className="mb-48"
             />
           </Container>
         </Background>
@@ -120,7 +126,7 @@ export default function SPOC() {
           />
           <BulletList
             items={timelineItems}
-            className="rotate-arrow-bottom mb-40"
+            className="rotate-arrow-bottom mb-48"
           />
         </Container>
       </div>
@@ -145,7 +151,7 @@ export default function SPOC() {
         <Container>
           <Heading tagName="h2" text={spoc.contact.headline} />
           {spoc.contact.sections.map((section) => (
-            <div key={section.headline} className="last:mb-40">
+            <div key={section.headline} className="last:mb-48">
               <Heading
                 tagName="h3"
                 text={section.headline}

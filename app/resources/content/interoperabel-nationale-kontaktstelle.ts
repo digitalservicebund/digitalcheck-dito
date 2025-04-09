@@ -12,7 +12,7 @@ export const spoc = {
     und der Digitalcheck sind die Grundlage. 
     <br/><br/>
     Sie befinden sich auf der Informationsseite der 
-    Deutschen nationalen Kontaktstelle(2024/903 Art. 17). Gemeinsam mit der deutschen Verwaltung setzen wir 
+    Deutschen nationalen Kontaktstelle (2024/903 Art. 17). Gemeinsam mit der deutschen Verwaltung setzen wir 
     die EU-Verordnung 2024/903 um – für vernetzte, bürgernahe, digitale und effiziente Verwaltungsleistungen.
   `,
   landscape: {
@@ -33,19 +33,24 @@ export const spoc = {
     contentAfter: {
       headline: "Rechtliche Grundlage",
       content: dedent`
-      Das Organigramm zeigt die Interaktionen der Organisationen und Behörden in Deutschland und der EU im Kontext der Verordnung (EU) 2024/903.
-      
-      Es umfasst:
-      - **Bundesländer & Kommunen:** Ausgangspunkt, mit dem Hinweis auf die dezentrale Umsetzung durch das Bundesangebot.
+      Das Organigramm zeigt die Interaktionen der Organisationen und Behörden in Deutschland und der EU im Kontext der Verordnung (EU) 2024/903.`,
+      infobox: [
+        {
+          detailsSummary: {
+            title: "Beteiligte Organisationen und Behörden",
+            content: dedent`
+            - **Bundesländer & Kommunen:** Ausgangspunkt, mit dem Hinweis auf die dezentrale Umsetzung durch das Bundesangebot.
       - **IT-Planungsrat:** Koordiniert und empfiehlt die Integration von IT-Strategien.
       - **Nationale Kontaktstelle:** Zentraler Ansprechpartner für Informationsaustausch und Koordination.
       - **Bundesministerium für Inneres und Heimat:** Verantwortlich für die Integration in den Digitalcheck.
       - **EU-Kommission:** Beteiligte an der Weiterentwicklung und Reportings. 
       - **EU-Interoperabilitätsbeirat:** EU-weite Zusammenarbeit, vertreten durch Markus Richter (Bundes-CIO).
-      - **27 EU-Staaten mit Kontaktstellen:** Nationale Kontaktstellen für Informationsaustausch.
-      <br/>
-      Deutschland integriert die Anforderungen der Verordnung (EU) 2024/903 in den Digitalcheck und folgt damit den Empfehlungen der EU. Somit werden Ressourcen effizient genutzt und Doppelstrukturen verhindert. Die nationale Kontaktstelle ist beim Digitalcheck-Team angesiedelt.
-      `,
+      - **27 EU-Staaten mit Kontaktstellen:** Nationale Kontaktstellen für Informationsaustausch.`,
+          },
+        },
+      ],
+      outro:
+        "Deutschland integriert die Anforderungen der Verordnung (EU) 2024/903 in den Digitalcheck und folgt damit den Empfehlungen der EU. Somit werden Ressourcen effizient genutzt und Doppelstrukturen verhindert. Die nationale Kontaktstelle ist beim Digitalcheck-Team angesiedelt.",
     },
   },
   responsibilities: {
@@ -76,7 +81,7 @@ export const spoc = {
   },
   timeline: {
     id: "verlauf",
-    headline: "Was ist der aktuelle Stand der Integration in den Digitalcheck?",
+    headline: "Aktueller Stand der Integration in den Digitalcheck",
     items: [
       {
         headline: {
@@ -92,7 +97,7 @@ export const spoc = {
           - Das Ergebnis der Vorprüfung wird automatisch per E-Mail versendet:
             - Bei Digitalbezug an den NKR.
             - Bei zusätzlichem Interoperabilitäts-Bezug auch an die nationale Kontaktstelle beim Digitalcheck-Team.
-          - Bereitstellung einer [Informationsseite](${ROUTE_INTEROPERABILITY.url}) zum Thema Interoperabilität für Legistinnen und Legisten
+          - Bereitstellung einer [Informationsseite](${ROUTE_INTEROPERABILITY.url}) zum Thema Interoperabilität für Legistinnen und Legisten.
         `,
       },
       {
