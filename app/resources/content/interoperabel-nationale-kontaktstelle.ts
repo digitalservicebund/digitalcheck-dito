@@ -12,8 +12,8 @@ export const spoc = {
     und der Digitalcheck sind die Grundlage. 
     <br/><br/>
     Sie befinden sich auf der Informationsseite der 
-    Deutschen nationalen Kontaktstelle (2024/903 Art. 17). Gemeinsam mit der deutschen Verwaltung setzen wir 
-    die EU-Verordnung 2024/903 um – für vernetzte, bürgernahe, digitale und effiziente Verwaltungsleistungen.
+    deutschen nationalen Kontaktstelle (2024/903 Art. 17). Gemeinsam mit der deutschen Verwaltung setzen wir 
+    die europäische Interoperabilitätsverordnung 2024/903 um, für vernetzte, bürgernahe, digitale und effiziente Verwaltungsleistungen.
   `,
   landscape: {
     id: "landschaft",
@@ -61,22 +61,26 @@ export const spoc = {
       für ein interoperables Europa vorgesehen ist und dient als zentraler Ansprechpartner 
       für die Koordination und Umsetzung von Interoperabilitätsmaßnahmen in Deutschland.
       
-      - **Unterstützung bei Interoperabilitätsbewertungen:** 
-      
-        Bereitstellung einer praxistauglichen Methodik und Beratung für öffentliche Stellen bei der Durchführung von Interoperabilitätsbewertungen
-      - **Prozessintegration:** 
-
-        Verknüpfung von Digitalcheck und Interoperabilitätsbewertung zu einem konsistenten, gemeinsamen Verfahren
       - **Zentrale Anlaufstelle für:** 
         - Behörden auf Bundes-, Landes- und kommunaler Ebene
         - Interessierte Akteurinnen und Akteure
         - Nationale Kontaktstellen anderer EU-Mitgliedstaaten
-      - **Förderung von Nachnutzung, Kooperation und Zusammenarbeit:**
-        - Bereitstellung von guten Beispielen
-        - Unterstützung bei der Umsetzung von Interoperabilitätsanforderungen
+      
+      - **Unterstützung bei Interoperabilitätsbewertungen:** 
+      
+        Bereitstellung einer praxistauglichen Methodik und Beratung für öffentliche Stellen bei der Durchführung von Interoperabilitätsbewertungen
       - **Bereitstellung von Informationen und Austauschformaten:**
       
         Aufbau von Wissen, Vernetzung und Unterstützung auf nationaler Ebene
+      - **Prozessintegration:** 
+
+        Verknüpfung von Digitalcheck und Interoperabilitätsbewertung zu einem konsistenten, gemeinsamen Verfahren
+
+      - **Förderung von Nachnutzung, Kooperation und Zusammenarbeit:**
+        - Bereitstellung von guten Beispielen
+        - Unterstützung bei der Umsetzung von Interoperabilitätsanforderungen
+        
+      Falls Sie mit Ihrem Land kooperieren wollen, melden Sie sich bei uns. Unsere Kontaktdaten finden Sie unten.
     `,
   },
   timeline: {
@@ -141,7 +145,7 @@ export const spoc = {
       {
         headline: "Kontinuierliche Weiterentwicklung",
         content:
-          "Der Digitalcheck wird laufend iterativ an Bedürfnisse von Legistinnen und Legisten ausgerichtet und an Anforderungen aus der Verordnung für eine interoperables Europa angepasst. Im Rahmen einer Kooperation informieren wir Sie laufend über neue Erkenntnisse, Rahmenbedingungen und geplante Änderungen.",
+          "Der Digitalcheck wird laufend iterativ an Bedürfnisse von Legistinnen und Legisten ausgerichtet und an Anforderungen aus der Verordnung für ein interoperables Europa angepasst. Im Rahmen einer Kooperation informieren wir Sie laufend über neue Erkenntnisse, Rahmenbedingungen und geplante Änderungen.",
       },
     ],
   },
