@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { type MetaArgs } from "react-router";
 import { twJoin } from "tailwind-merge";
 
@@ -56,6 +56,27 @@ function SocialProofImage() {
 
 export default function Index() {
   const [isAppointmentsVisible, setIsAppointmentsVisible] = useState(false);
+  const angeboteRef = useRef<HTMLDivElement>(null);
+  const hilfeRef = useRef<HTMLDivElement>(null);
+
+  // ensure page scrolls to the correct section when navigating to the page
+  useEffect(() => {
+    if (location.hash === "#angebote" && angeboteRef.current) {
+      const timerId = setTimeout(() => {
+        if (angeboteRef.current) {
+          angeboteRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 0);
+      return () => clearTimeout(timerId);
+    } else if (location.hash === "#hilfe" && hilfeRef.current) {
+      const timerId = setTimeout(() => {
+        if (hilfeRef.current) {
+          hilfeRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 0);
+      return () => clearTimeout(timerId);
+    }
+  }, []);
 
   const iframeButtons = [
     {
@@ -137,7 +158,18 @@ export default function Index() {
       </Container>
       <Background backgroundColor="blue">
         <Container>
-          <Heading tagName="h2" text={supportHow.title} />
+          <div
+            id="hilfe"
+            ref={hilfeRef}
+            style={{
+              display: "block",
+              height: 0,
+              overflow: "hidden",
+              visibility: "hidden",
+            }}
+            aria-hidden="true"
+          />
+          <Heading id="hilfe" tagName="h2" text={supportHow.title} />
           {supportHow.supportTypes.length > 0 &&
             supportHow.supportTypes.map((supportType) => (
               <div
@@ -176,7 +208,7 @@ export default function Index() {
             ))}
         </Container>
       </Background>
-      <div id="angebote">
+      <div id="angebote" ref={angeboteRef}>
         <Background backgroundColor="white">
           <Container>
             <Box

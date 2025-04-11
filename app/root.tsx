@@ -1,6 +1,5 @@
-import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
 import { marked, type Tokens } from "marked";
-import React, { type ReactNode, useEffect, useRef } from "react";
+import React, { type ReactNode, useEffect, useRef, useState } from "react";
 import {
   type HeadersFunction,
   isRouteErrorResponse,
@@ -13,14 +12,18 @@ import {
   ScrollRestoration,
   useLoaderData,
   useLocation,
+  useNavigate,
   useRouteError,
   useRouteLoaderData,
 } from "react-router";
 
+import { MenuOutlined } from "@digitalservicebund/icons";
+import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
 import Background from "~/components/Background";
 import Breadcrumbs from "~/components/Breadcrumbs";
 import Button from "~/components/Button";
 import Container from "~/components/Container";
+import Dropdown from "~/components/Dropdown.tsx";
 import Footer from "~/components/Footer";
 import Heading from "~/components/Heading";
 import RichText from "~/components/RichText";
@@ -235,43 +238,86 @@ const PageHeader = ({
   includeBreadcrumbs = true,
 }: {
   includeBreadcrumbs?: boolean;
-}) => (
-  <header>
-    <div className="flex min-h-64 items-center justify-between p-16">
-      <Link to={ROUTE_LANDING.url}>
-        <img src="/logo/bund-logo.png" alt="Logo des Bundes" width={54} />
-      </Link>
-      <div className="flex items-center max-lg:hidden">
-        <div className="text-lg">
-          <span className="font-bold">{header.title}</span>
-          <span className="mx-8">|</span>
-          <Button href="/unterstuetzung" look="link">
-            Unterstützungsangebote
-          </Button>
-          <span className="mx-8">|</span>
-          {header.contact.msg}
+}) => {
+  const navigate = useNavigate();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  return (
+    <>
+      {dropdownOpen && (
+        <div
+          className="fixed inset-0 z-20 bg-[#282828] opacity-63"
+          onClick={() => setDropdownOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+      <header>
+        <div className="relative z-30 flex min-h-[72px] items-stretch justify-between bg-white px-16">
+          <div className="flex items-center space-x-8">
+            <Link to={ROUTE_LANDING.url}>
+              <img src="/logo/bund-logo.png" alt="Logo des Bundes" width={54} />
+            </Link>
+            <RichText
+              className="ds-stack-0 ml-24 max-lg:hidden"
+              markdown={header.title}
+            />
+          </div>
+          <nav className="flex items-center max-lg:hidden">
+            {header.items.map((item) => (
+              <Dropdown
+                key={item.text}
+                label={item.text}
+                hasSupport={item.hasSupport}
+                data={item.overlayContent}
+                onSelect={(href) => {
+                  navigate(href);
+                }}
+                isList={item.isList}
+                onOpenChange={(isOpen) => {
+                  setDropdownOpen(isOpen);
+                }}
+              />
+            ))}
+          </nav>
+          <div className="flex items-center space-x-16 lg:hidden">
+            <PhoneOutlined />
+            <button onClick={() => setMobileMenuOpen(true)}>
+              <MenuOutlined />
+            </button>
+            {mobileMenuOpen &&
+              header.items.map((item) => (
+                <Dropdown
+                  key={item.text}
+                  label={item.text}
+                  hasSupport={item.hasSupport}
+                  data={item.overlayContent}
+                  onSelect={(href) => {
+                    navigate(href);
+                  }}
+                  isList={item.isList}
+                  onOpenChange={(isOpen) => {
+                    setDropdownOpen(isOpen);
+                  }}
+                />
+              ))}
+            {/*
+            //TODO: responsive
+*/}
+            {/*            <a href="/unterstuetzung" className="ds-link-01-bold">
+              Kontakt & Unterstützung
+            </a>*/}
+          </div>
         </div>
-        <PhoneOutlined className="mx-8" />
-        <a
-          href={`tel:${header.contact.number}`}
-          className="plausible-event-name=Phone+Click plausible-event-position=header ds-link-01-bold"
-        >
-          {header.contact.number}
-        </a>
-      </div>
-      <div className="lg:hidden">
-        <a href="/unterstuetzung" className="ds-link-01-bold">
-          Kontakt & Unterstützung
-        </a>
-      </div>
-    </div>
-    {includeBreadcrumbs && (
-      <Background backgroundColor="blue">
-        <Breadcrumbs breadcrumbs={routes} useIconForHome />
-      </Background>
-    )}
-  </header>
-);
+        {includeBreadcrumbs && (
+          <Background backgroundColor="blue">
+            <Breadcrumbs breadcrumbs={routes} useIconForHome />
+          </Background>
+        )}
+      </header>
+    </>
+  );
+};
 
 function Document({
   children,
