@@ -200,7 +200,7 @@ export const interoperability = {
           - Bei Digitalbezug: Eine Schritt-für-Schritt-Anleitung mit Vorlagen und Praxisbeispielen unterstützt die Erarbeitung der Regelung. 
           - Bei Digitalbezug und Interoperabilität: Das Digitalcheck-Team begleitet Sie im Prozess und unterstützt Sie bei der Interoperabilitätsbewertung.
       4. **Dokumentation & Veröffentlichung**
-          - Die Dokumentation der Ergebnisse werden an den Normenkontrollrat gesendet und zusätzlich auf dem Interoperable Europe Portal veröffentlicht.
+          - Die Dokumentation der Ergebnisse wird an den Normenkontrollrat gesendet und zusätzlich auf dem Interoperable Europe Portal veröffentlicht.
     `,
     image: {
       url: "/images/prozess-vorpruefung-mit-interoperabilitaet.jpg",
@@ -298,7 +298,7 @@ export const interoperability = {
     id: "kontaktstelle",
     title:
       "Informieren Sie sich weiter zu den EU-Anforderungen an Interoperabilität ",
-    text: "Mehr zum Thema Governance, Kooperation und Nutzung unserer Inhalte finden Sie unter der Nationalen Kontakstelle für ein interoperables Europa.",
+    text: "Mehr zum Thema Governance, Kooperation und Nutzung unserer Inhalte finden Sie unter der Nationalen Kontaktstelle für ein interoperables Europa.",
     buttons: [
       {
         text: "Zur Nationalen Kontaktstelle",
@@ -319,7 +319,7 @@ export const interoperability = {
       },
     ],
     contact:
-      "Schreiben Sie uns eine Email an [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Feedback:%20erarbeiten.digitalcheck.bund.de), wenn wir Sie für Feedback zu unserem Service kontaktieren dürfen.",
+      "Schreiben Sie uns eine E-Mail an [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Feedback:%20erarbeiten.digitalcheck.bund.de), wenn wir Sie für Feedback zu unserem Service kontaktieren dürfen.",
     button: feedbackFormular.button,
     success: feedbackFormular.success,
   },
