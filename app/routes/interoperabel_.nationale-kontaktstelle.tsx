@@ -10,9 +10,7 @@ import { BulletList } from "~/components/List";
 import { ListItemProps } from "~/components/ListItem";
 import RichText from "~/components/RichText";
 import { spoc } from "~/resources/content/interoperabel-nationale-kontaktstelle";
-import { features } from "~/resources/features.ts";
 import { ROUTE_INTEROPERABILITY_SPOC } from "~/resources/staticRoutes";
-import { useFeatureFlag } from "~/utils/featureFlags";
 import prependMetaTitle from "~/utils/metaTitle";
 
 export const meta = ({ matches }: MetaArgs) => {
@@ -20,15 +18,6 @@ export const meta = ({ matches }: MetaArgs) => {
 };
 
 export default function SPOC() {
-  const showPage = useFeatureFlag(features.showPageSPOC);
-
-  if (!showPage) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("Feature is not enabled for this environment", {
-      status: 404,
-    });
-  }
-
   const timelineItems: ListItemProps[] = spoc.timeline.items.map((item) => ({
     ...item,
     hasBullet: true,

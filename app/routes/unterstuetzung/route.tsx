@@ -11,9 +11,7 @@ import Heading from "~/components/Heading";
 import Image from "~/components/Image";
 import RichText from "~/components/RichText";
 import { support } from "~/resources/content/unterstuetzung";
-import { features } from "~/resources/features.ts";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
-import { useFeatureFlag } from "~/utils/featureFlags";
 import prependMetaTitle from "~/utils/metaTitle";
 import SupportTabs from "./SupportTabList";
 
@@ -194,21 +192,19 @@ export default function Index() {
           </Container>
         </Background>
       </div>
-      {useFeatureFlag(features.showPageSPOC) && (
-        <Background backgroundColor="midBlue">
-          <Container>
-            <Box
-              heading={{
-                tagName: "h2",
-                text: kontaktstelle.title,
-              }}
-              content={{
-                markdown: kontaktstelle.text,
-              }}
-            />
-          </Container>
-        </Background>
-      )}
+      <Background backgroundColor="midBlue">
+        <Container>
+          <Box
+            heading={{
+              tagName: "h2",
+              text: kontaktstelle.title,
+            }}
+            content={{
+              markdown: kontaktstelle.text,
+            }}
+          />
+        </Container>
+      </Background>
     </>
   );
 }
