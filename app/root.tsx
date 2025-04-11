@@ -12,7 +12,6 @@ import {
   ScrollRestoration,
   useLoaderData,
   useLocation,
-  useNavigate,
   useRouteError,
   useRouteLoaderData,
 } from "react-router";
@@ -239,7 +238,6 @@ const PageHeader = ({
 }: {
   includeBreadcrumbs?: boolean;
 }) => {
-  const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -270,9 +268,6 @@ const PageHeader = ({
                 label={item.text}
                 hasSupport={item.hasSupport}
                 data={item.overlayContent}
-                onSelect={(href) => {
-                  navigate(href);
-                }}
                 isList={item.isList}
                 onOpenChange={(isOpen) => {
                   setDropdownOpen(isOpen);
@@ -285,22 +280,19 @@ const PageHeader = ({
             <button onClick={() => setMobileMenuOpen(true)}>
               <MenuOutlined />
             </button>
-            {mobileMenuOpen &&
+            {/*            {mobileMenuOpen &&
               header.items.map((item) => (
                 <Dropdown
                   key={item.text}
                   label={item.text}
                   hasSupport={item.hasSupport}
                   data={item.overlayContent}
-                  onSelect={(href) => {
-                    navigate(href);
-                  }}
                   isList={item.isList}
                   onOpenChange={(isOpen) => {
                     setDropdownOpen(isOpen);
                   }}
                 />
-              ))}
+              ))}*/}
             {/*
             //TODO: responsive
 */}

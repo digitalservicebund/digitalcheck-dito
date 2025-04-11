@@ -3,6 +3,7 @@ import {
   ExpandMoreOutlined,
 } from "@digitalservicebund/icons";
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router";
 import DropdownItem, {
   type DropdownItemProps,
 } from "~/components/DrodownItem.tsx";
@@ -10,7 +11,6 @@ import { header } from "~/resources/content/components/header.ts";
 import twMerge from "~/utils/tailwindMerge";
 
 export type DropdownProps = {
-  onSelect: (href: string) => void;
   label?: string;
   className?: string;
   data: DropdownItemProps[];
@@ -21,7 +21,6 @@ export type DropdownProps = {
 
 // TODO: check a11y
 export default function Dropdown({
-  onSelect,
   className,
   label,
   data,
@@ -32,13 +31,11 @@ export default function Dropdown({
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const toggleDropdown = () => {
-    const newIsOpen = !isOpen;
-    setIsOpen(newIsOpen);
-    if (onOpenChange) onOpenChange(newIsOpen);
+    setIsOpen(!isOpen);
+    if (onOpenChange) onOpenChange(!isOpen);
   };
 
-  const handleSelectOption = (href: string) => {
-    onSelect(href);
+  const handleSelectOption = () => {
     setIsOpen(false);
     if (onOpenChange) onOpenChange(false);
   };
@@ -107,10 +104,11 @@ export default function Dropdown({
                 </div>
               )}
               {data.map((option, index) => (
-                <button
+                <Link
                   key={option.title}
-                  onClick={() => handleSelectOption(option.href!)}
+                  to={option.href!}
                   role="option"
+                  onClick={handleSelectOption}
                   aria-selected={false}
                   aria-label={option.title}
                 >
@@ -122,7 +120,7 @@ export default function Dropdown({
                     content={option.content}
                     isNewTitle={option.isNewTitle}
                   />
-                </button>
+                </Link>
               ))}
             </div>
           </>
