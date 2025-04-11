@@ -19,8 +19,8 @@ export const spoc = {
     id: "landschaft",
     headline: "Nationale Umsetzung der EU Interoperabilitätsverordnung",
     content: dedent`
-      Seit Anfang 2025 muss die Verordnung für ein interoperables Europa ([2024/903](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903)) in den EU Mitgliedsstaaten verpflichtend umgesetzt werden.
-      Damit sind alle öffentlichen Einrichtungen in Europa, also EU-Institutionen, ihre Mitgliedsstaaten und auch deren Bundesländer und Kommunen, verpflichtet Interoperabilitätsbewertungen durchzuführen. 
+      Seit Anfang 2025 muss die Verordnung für ein interoperables Europa ([2024/903](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903)) in den EU Mitgliedstaaten verpflichtend umgesetzt werden.
+      Damit sind alle öffentlichen Einrichtungen in Europa, also EU-Institutionen, ihre Mitgliedstaaten und auch deren Bundesländer und Kommunen, verpflichtet Interoperabilitätsbewertungen durchzuführen. 
       <br/><br/>
       Diese Bewertungen sind erforderlich, bevor neue oder geänderte verbindliche Anforderungen beschlossen werden, um einen nahtlosen Datenaustausch zwischen Behörden sicherzustellen und den grenzüberschreitenden Zugang zu digitalen Verwaltungsleistungen in der EU zu ermöglichen.
       <br/><br/>
@@ -57,7 +57,7 @@ export const spoc = {
     id: "aufgaben",
     headline: "Aufgaben der nationalen Kontaktstelle (2024/903 Art. 17)",
     content: dedent`
-      Das Digitalcheck-Team übernimmt die Rolle der Nationale Kontaktstelle, wie sie in der Verordnung 
+      Das Digitalcheck-Team übernimmt die Rolle der Nationalen Kontaktstelle, wie sie in der Verordnung 
       für ein interoperables Europa vorgesehen ist und dient als zentraler Ansprechpartner 
       für die Koordination und Umsetzung von Interoperabilitätsmaßnahmen in Deutschland.
       
@@ -122,7 +122,7 @@ export const spoc = {
         },
         content: dedent`
           **Entwicklung angepasster Prinzipien und Methoden**
-          - Derzeit entwickeln wir die [5 Prinzipien für Digitaltaugliche Gesetzgebung](${ROUTE_METHODS_FIVE_PRINCIPLES.url}) weiter. Zunkünftig werden diese die vier Interoperabilitätsebenen noch konkreter Herausstellen. Darauf aufbauend werden wir die Erarbeitungsmethoden anpassen. Ziel ist es, den gesamten Entwicklungsprozess effizienter und zielgerichteter zu gestalten.
+          - Derzeit entwickeln wir die [5 Prinzipien für Digitaltaugliche Gesetzgebung](${ROUTE_METHODS_FIVE_PRINCIPLES.url}) weiter. Zukünftig werden diese die vier Interoperabilitätsebenen noch konkreter herausstellen. Darauf aufbauend werden wir die Erarbeitungsmethoden anpassen. Ziel ist es, den gesamten Entwicklungsprozess effizienter und zielgerichteter zu gestalten.
         `,
         image: {
           url: "/images/synthese-prozess-digitalcheck-und-interoperabilitaet.png",

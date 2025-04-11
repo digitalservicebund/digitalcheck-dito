@@ -8,7 +8,7 @@ export type HeadingProps = {
   markdown?: string;
   className?: string;
   look?: string;
-  id?: string; // Add the id prop
+  id?: string;
   children?: ReactNode;
 };
 

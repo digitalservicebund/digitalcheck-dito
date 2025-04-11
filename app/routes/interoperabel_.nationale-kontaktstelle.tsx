@@ -124,7 +124,7 @@ export default function SPOC() {
           <Container>
             <Heading tagName="h2" text={spoc.states.headline} />
             {spoc.states.sections.map((section) => (
-              <div key={section.headline} className="last:mb-40">
+              <div key={section.headline} className="last:mb-48">
                 <Heading
                   tagName="h3"
                   text={section.headline}
