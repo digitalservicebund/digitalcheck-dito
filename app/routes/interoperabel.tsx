@@ -184,7 +184,7 @@ export default function Interoperability() {
           <RichText markdown={interoperability.faq.content} className="mb-40" />
           <Accordion items={interoperability.faq.items} />
           <Box
-            className="pt-64"
+            className="pt-64 pb-48"
             heading={{
               tagName: "h2",
               text: interoperability.kontaktstelle.title,
