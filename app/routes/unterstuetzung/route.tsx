@@ -28,6 +28,10 @@ export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_SUPPORT.title, matches);
 };
 
+export const handle = {
+  breadcrumb: () => ROUTE_SUPPORT,
+};
+
 function Testimonial() {
   return (
     <>

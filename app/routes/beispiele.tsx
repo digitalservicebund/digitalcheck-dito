@@ -1,11 +1,16 @@
 import { Outlet, useLoaderData } from "react-router";
 import SupportBanner from "~/components/SupportBanner";
+import { ROUTE_EXAMPLES } from "~/resources/routeDefinitions";
 
 import {
   fetchStrapiData,
   GET_PRINZIPS_QUERY,
   Prinzip,
 } from "~/utils/strapiData.server";
+
+export const handle = {
+  breadcrumb: () => ROUTE_EXAMPLES,
+};
 
 export async function loader() {
   const prinzipData = await fetchStrapiData<{ prinzips: Prinzip[] }>(

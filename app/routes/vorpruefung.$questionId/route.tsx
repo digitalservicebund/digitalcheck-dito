@@ -1,7 +1,12 @@
 import { useForm, validationError } from "@rvf/react-router";
 import { withZod } from "@rvf/zod";
 import { useEffect, useState } from "react";
-import { redirect, useLoaderData, type MetaArgs } from "react-router";
+import {
+  redirect,
+  useLoaderData,
+  type MetaArgs,
+  type UIMatch,
+} from "react-router";
 
 import { z } from "zod";
 import ButtonContainer from "~/components/ButtonContainer";
@@ -24,6 +29,11 @@ const { questions, answerOptions, nextButton } = preCheck;
 
 export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_PRECHECK.title, matches);
+};
+
+export const handle = {
+  breadcrumb: (match: UIMatch) =>
+    preCheck.questions.find((q) => q.id === match.params.questionId),
 };
 
 export async function loader({ request, params }: Route.LoaderArgs) {

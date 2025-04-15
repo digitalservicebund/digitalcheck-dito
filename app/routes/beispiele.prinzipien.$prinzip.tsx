@@ -3,6 +3,7 @@ import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import {
   Link,
   type MetaArgs,
+  UIMatch,
   useLoaderData,
   useOutletContext,
 } from "react-router";
@@ -18,6 +19,7 @@ import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import {
   ROUTE_PRINCIPLES,
   ROUTE_REGELUNGEN,
+  ROUTES,
 } from "~/resources/routeDefinitions";
 import prependMetaTitle from "~/utils/metaTitle";
 import {
@@ -31,6 +33,10 @@ import type { Route } from "./+types/beispiele.prinzipien.$prinzip";
 
 export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_PRINCIPLES.title, matches);
+};
+
+export const handle = {
+  breadcrumb: (match: UIMatch) => ROUTES.find((r) => r.url === match.pathname),
 };
 
 const GET_PRINZIPS_QUERY = `

@@ -23,6 +23,10 @@ export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_GENERAL_INFO.title, matches);
 };
 
+export const handle = {
+  breadcrumb: () => ROUTE_GENERAL_INFO,
+};
+
 export async function loader({ request }: Route.LoaderArgs) {
   const { answers } = await getAnswersFromCookie(request);
   return { answers };

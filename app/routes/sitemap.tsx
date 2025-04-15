@@ -7,6 +7,14 @@ import Header from "~/components/Header";
 import { ROUTE_SITEMAP, ROUTES } from "~/resources/routeDefinitions";
 import prependMetaTitle from "~/utils/metaTitle";
 
+export const meta = ({ matches }: MetaArgs) => {
+  return prependMetaTitle(ROUTE_SITEMAP.title, matches);
+};
+
+export const handle = {
+  breadcrumb: () => ROUTE_SITEMAP,
+};
+
 interface Route {
   url: string;
   title: string;
@@ -31,10 +39,6 @@ const groupRoutesByParent = (routes: Route[]): Route[] => {
   });
 
   return Array.from(routeMap.values()).filter((route) => !route.parent);
-};
-
-export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_SITEMAP.title, matches);
 };
 
 export const loader = () => {
