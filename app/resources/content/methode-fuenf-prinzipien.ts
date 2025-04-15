@@ -1,5 +1,4 @@
 import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
-import DrawOutlined from "@digitalservicebund/icons/DrawOutlined";
 import {
   ROUTE_LANDING,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
@@ -11,102 +10,182 @@ export const methodsFivePrinciples = {
   buttonText: "Beispiele betrachten",
   principles: [
     {
-      label: "Anleitung",
-      icon: DrawOutlined,
-      title: "So nutzen Sie die fünf Prinzipien für Ihr Regelungsvorhaben",
-      content: dedent`
-        ### Als konkrete Umsetzungstipps
-        
-        Nutzen Sie die Tipps als Inspiration, um in Ihrem Regelungsvorhaben die Möglichkeiten des Digitalen auszuschöpfen und Hindernisse zu erkennen.
-        <br class="block content-[''] mb-48!" />
-        ### Als Checkliste für den Gesamtprozess
-        
-        Besonders erkenntnisreich sind die fünf Prinzipien, wenn Sie diese auf eine Skizze des geplanten Umsetzungsprozesses anwenden. Skizzieren Sie Schritt für Schritt die Umsetzung und markieren Sie die Stellen, an denen eines oder mehrere Prinzipien wichtig sind. Mehr Infos zu Visualisierungen finden Sie auf [visualisieren.digitalcheck.bund.de](https://visualisieren.digitalcheck.bund.de).
-        <br class="block content-[''] mb-48!" />
-        ### Als Startpunkt für ihren Regelungstext
-        
-        Nutzen Sie die gesammelten Beispiele als Startpunkt für Ihre Formulierungen. Bauen Sie auf Formulierungen auf, oder lassen Sie sich durch die Wirklogiken Ihrer Kolleginnen und Kollegen inspirieren. Sie finden gute Formulierungen, Einordnungen und deren Kontext im Regelungstext auf:
-      `,
+      label: "Prinzip",
+      title: "Digitale Angebote für alle",
+      description:
+        "Bürgerinnen und Bürger, Mitarbeitende in Unternehmen und der Verwaltung sind an digitale Kommunikation gewöhnt und bevorzugen sie – sofern Sie gut umgesetzt ist und ihren Bedürfnissen entspricht. Normadressaten können sie schnell und einfach  nutzen, und auch die Verwaltung kann die Daten schneller bearbeiten, prüfen und dokumentieren. Digitale Kommunikation sollte dabei immer inklusiv sein und ggf. analoge Alternativen bereitstellen.",
+      implementation: [
+        {
+          action: "Ermöglichen Sie digitale Kommunikation",
+          description:
+            "Bürger:innen sind digitale Angebote gewohnt. Nutzerfreundliche, niedrigschwellige Dienste erfüllen ihre Erwartungen und machen ihnen das Leben leichter.",
+          questions: [
+            "Enthält die Regelung Schriftformerfordernisse oder erfordert persönliches Erscheinen?",
+            "Können Vorlage- durch Vorhaltepflichten ersetzt werden?",
+          ],
+        },
+        {
+          action: "Formulieren Sie die Regelung technologieoffen",
+          description:
+            "Bestimmte Technologien können schnell nicht mehr dem Stand der Technik entsprechen und so nicht weiter genutzt werden. Andererseits kann es die Umsetzung erleichtern und zur einfacheren Nutzung führen, auf etablierte Basisdienste zurückzugreifen.",
+          questions: [
+            "Haben Sie spezifische Technologien festgeschrieben?",
+            "Können Sie auf etablierte Infrastruktur zurückgreifen, sogenannte Basisdienste?",
+          ],
+          wording:
+            "„Der Antrag ist elektronisch oder schriftlich zu stellen“, oder „Der Antrag ist zu stellen“.",
+        },
+        {
+          action: "Denken Sie über die digitale Antragstellung hinaus",
+          description:
+            "Digitale Kommunikation führt zu Daten, die direkt digital weiterverarbeitet werden können. Das spart Zeit, weil Informationen nicht eingescannt oder abgetippt werden müssen. Digitale Oberflächen, die zusätzliche Hilfestellungen und Fehlerkontrollen enthalten, erhöhen die Qualität der Daten.",
+          questions: [
+            "Wer übermittelt im Zuge der Regelung Informationen wie an wen? Beachtet die Regelung auch Kommunikation zwischen Behörden oder Unternehmen?",
+            "Können verwaltungsinterne Medienbrüche ausgeräumt werden? Welche Technologien und Verfahren nutzt die umsetzende Behörde?",
+            "Kann die Datenqualität durch automatische Kontrollen erhöht werden?",
+          ],
+        },
+        {
+          action:
+            "Denken Sie Barrierefreiheit und Nutzerfreundlichkeit von Anfang an mit",
+          description:
+            "Digitale Angebote lassen sich durch einfache Sprache, Mehrsprachigkeit oder andere Maßnahmen für Barrierefreiheit stärker auf die Bedürfnisse der Menschen zuschneiden. Denken Sie auch an die Bürger:innen, die keine digitalen Angebote nutzen können oder wollen. Richten Sie Alternativen ein. Für Unternehmen kann digitale Kommunikation vorgeschrieben werden.",
+          questions: [
+            "Kann weiterhin anderweitig (schriftlich, telefonisch, persönlich) kommuniziert werden?",
+          ],
+          wording:
+            "„Die Beratung erfolgt in einer für den Leistungsberechtigten wahrnehmbaren Form“ (§106 Abs. 1 SGB IX)",
+        },
+      ],
     },
     {
-      label: "Prinzip 1",
-      title: "Digitale Kommunikation sicherstellen",
-      content: dedent`
-        ### Darum ist das wichtig
-        
-        Bürgerinnen und Bürger, Mitarbeitende in Unternehmen, weiteren Organisationen und der Verwaltung sind meist an digitale Kommunikation gewöhnt. In der Verwaltung und den Behörden erlaubt eine durchgehend digitale Dokumentation, Bearbeitung und ggf. Prüfung eine effizientere Bearbeitung.
-        <br class="block content-[''] mb-24!" />
-        Digitale Kommunikation sollte immer bedarfsorientiert und inklusiv sein — in bestimmten Fällen kann z. B. ergänzend auch die Schriftform sinnvoll sein, sofern eine digitale Weiterverarbeitung sichergestellt ist.
-        <br class="block content-[''] mb-48!" />
-        ### Tipps für Ihr Regelungsvorhaben
-        
-        - Wählen Sie Formulierungen, die den Einsatz von unterschiedlichen Medien, Technologien und Verfahren ermöglichen.
-        - Sollten Sie technologische Lösungen festschreiben, ermöglichen Sie den Einsatz von offenen Technologien, so sorgen Sie für Transparenz und Wiederverwendbarkeit.
-        - Ersetzen oder ergänzen Sie Schriftformerfordernisse und analoge Nachweispflichten. Prüfen Sie etwa, ob die Textform ausreichend ist und ermöglichen Sie die digitale Bearbeitung.
-        - Vermeiden Sie Medienbrüche. Diese können z. B. durch visuelle Darstellung des Vollzugs, wie Flussdiagramme, erkennbar werden.
-        - Erfüllen Sie Anforderungen der Barrierefreiheit und beachten Sie die Bedarfe unterschiedlicher Personengruppen.
-      `,
+      label: "Prinzip",
+      title: "Daten wiederverwenden mit Hilfe rechtlicher Konsistenz",
+      description:
+        "Daten wiederzuverwenden vermeidet Fehler und spart Zeit und Kosten auf Seiten der Normadressanten und umsetzenden Behörden. Die Grundlage dafür sind harmonisierte Rechtsbegriffe, ein datenschutz-konformer Austausch, sowie technische Standards.",
+      implementation: [
+        {
+          action: "Nutzen Sie harmonisierte Rechtsbegriffe",
+          description:
+            "Damit Daten wiederverwendet werden können, müssen sie die gleiche, inhaltliche Bedeutung haben, d.h. semantisch interoperabel sein. Dafür müssen die verwendeten Rechtsbegriffe harmonisch, d.h. einheitlich, verwendet werden. Möglicherweise müssen Sie die Begriffe sogar über einen Rechtsbereich hinaus harmonisieren. Hilfreich sind Taxonomien, kontrollierten Vokabularien, oder Thesauri.",
+          questions: [
+            "Gibt es für Ihren Rechtsbegriffe definierte Begriffe, auf die Sie zurückgegriffen haben, wie z.B. „Einkommen“ oder „Kind“?",
+            "Haben Sie verwendete Begriffe innerhalb ihres Vorhabens definiert?",
+            "Werden diese Begriffe außerhalb Ihres Rechtsbereich anders genutzt? Ist eine übergreifende Harmonisierung möglich?",
+            "Haben Sie ggf. auch die Konsistenz zu anderen EU-Regelwerken betrachtet?",
+          ],
+        },
+        {
+          action: "Nutzen Sie bestehende Daten",
+          description:
+            "Bevor gesetzliche Regelungen das Erheben neuer Daten erfordern, sollten Sie überprüfen, ob diese schon an anderer Stelle zur Verfügung stehen und genutzt werden können.",
+          questions: [
+            "Welche Daten existieren schon in der Verwaltung und können wiederverwendet werden? Können öffentliche Daten verwendet werden? Recherchieren Sie auf verwaltungsdaten-informationsplattform.de oder GovData.de.",
+            "Genügen die Daten Anforderungen an Qualität und Aktualität oder sollten Kontrolldaten erhoben werden?",
+          ],
+        },
+        {
+          action: "Nutzen Sie bestehende technische Standards",
+          description:
+            "Nutzen Sie geeignete technische Standards, wie z.B. Datenaustauschformate. Möglicherweise ist es sinnvoll, diese in der Regelung vorzuschreiben.",
+          questions: [
+            "Welche Standards für die Daten existieren bereits oder muss ggf. ein neuer entwickelt werden?",
+            "Wurde beachtet, wie die Daten übertragen werden sollen?",
+          ],
+        },
+      ],
     },
     {
-      label: "Prinzip 2",
-      title: "Wiederverwendung von Daten und Standards ermöglichen",
-      content: dedent`
-        ### Darum ist das wichtig
-        
-        Häufig sind Daten von Personen oder Organisationen in verschiedenen Prozessen relevant. Das heißt, dass die Daten, die für Ihr Regelungsvorhaben benötigt werden, an anderer Stelle bereits vorliegen könnten. Sie sollten wiederverwendet werden, damit Bürgerinnen und Bürger oder Unternehmen Daten kein weiteres Mal angeben müssen und Verfahren vereinfacht werden. Auch die Wiederverwendung von Open-Source-Software, Standards oder sogar einzelner Design- oder Software-Komponenten vereinfacht Verfahren und spart Ressourcen.
-        <br class="block content-[''] mb-48!" />
-        ### Tipps für Ihr Regelungsvorhaben
-        
-        Recherchieren Sie für Ihr Regelungsvorhaben relevante bestehende Standards, Komponenten, Richtlinien, Verfahren zur Datenerfassung, Datenaustauschverfahren (Once-Only-Prinzip) sowie Register und weitere Quellen. Erste Anhaltspunkte finden Sie zum Beispiel auf:
-        - der Verwaltungsdaten-Informationsplattform: [verwaltungsdaten-informationsplattform.de](https://verwaltungsdaten-informationsplattform.de)
-        - der Registerlandkarte: [registerlandkarte.de](https://registerlandkarte.de)
-        - der Open-Source-Plattform der Verwaltung: [opencode.de](https://opencode.de)
-      `,
+      label: "Prinzip",
+      title: "Effiziente Umsetzung mit etablierten Technologien",
+      description:
+        "Digitale Angebote können schneller bereitgestellt und günstiger entwickelt und betrieben werden, wenn auf Bestehendes aufgebaut wird. Offene, standardisierte Schnittstellen und Open-Source erhöhen die Sicherheit der Angebote und fördern die Interoperabilität.",
+      implementation: [
+        {
+          action:
+            "Schreiben Sie die Nutzung etablierter, öffentlicher Technologien vor.",
+          description:
+            "Diese Technologien sind z.B. öffentliche Basisdienste, Softwarearchitekturen oder Komponentenbibliotheken umfassen. Ihre Wiederverwendung spart Zeit und verringert den Erfüllungsaufwand für Entwicklung und Betrieb. Darüberhinaus verbessert die Nutzung einheitlicher Systeme die Zusammenarbeit zwischen Behörden und vertraute Benutzeroberflächen vereinfachen die Bedienung.",
+          questions: [
+            "Existieren für die beschriebenen digitalen Prozesse bereits etablierte, technische Lösungen und werden diese genutzt bzw. ermöglicht das Gesetz den einfachen Anschluss an bereits vorhandene digitale Systeme?",
+            "Können Vorlage- durch Vorhaltepflichten ersetzt werden?",
+          ],
+        },
+        {
+          action:
+            "Bevorzugen Sie Open-Source-Software und offene Spezifikationen",
+          description:
+            "Wo möglich, sollten Open-Source-Software und offenen Spezifikationen bevorzugt werden oder neue Technologien quelloffen entwickelt werden, um Transparenz und Wiederverwendbarkeit zu stärken.",
+          questions: [
+            "Wird der Einsatz von Open-Source ermöglicht und gefördert?",
+          ],
+        },
+      ],
     },
     {
-      label: "Prinzip 3",
-      title: "Datenschutz und Informationssicherheit gewährleisten",
-      content: dedent`
-        ### Darum ist das wichtig
-        
-        Datenschutz und Informationssicherheit sind zentrale Voraussetzungen für praxistaugliche Digitalisierung — frühzeitig mitgedacht können Bedürfnisse von Betroffenen auf einfache Weise mit Daten- und Informationssicherheit vereinbart werden. Das Regelungsvorhaben soll eine datenschutzkonforme Umsetzung ermöglichen: Vor der Erhebung von Daten muss definiert werden, welche Daten zu welchem Zweck benötigt und wie sie geschützt werden.
-        <br class="block content-[''] mb-48!" />
-        ### Tipps für Ihr Regelungsvorhaben
-        
-        - Beteiligen Sie frühzeitig Expertinnen und Experten für Datenschutz und Informationssicherheit, um datenschutzkonforme Regelungen zu schreiben. Anhaltspunkte dafür geben auch geltende Richtlinien und Ausführungsbestimmungen z.B. vom BSI.
-        - Schaffen Sie die Rechtsgrundlage, um alle benötigten Daten zu erfassen und zu verarbeiten.
-        - Berücksichtigen Sie die finanziellen und personellen Ressourcen, die für die Umsetzung der Vorgaben der Informationssicherheit nötig sind.
-      `,
+      label: "Prinzip",
+      title: "Automatisierung mit eindeutigen Regelungen ermöglichen",
+      description:
+        "Die Vorteile von automatisierten Prozessen liegen auf der Hand: Einmal aufgesetzt, sparen sie Zeit und Geld auf Seiten der Normadressat:innen und der Verwaltung. Diese Ressourcen können genutzt werden, um Einzelfälle zu bearbeiten. Logische und verständliche Regelungen und transparente Verfahren erleichtern außerdem den Zugang zum Recht und stärken das Vertrauen in den Staat.",
+      implementation: [
+        {
+          action: "Schreiben Sie einfach, eindeutig und konsistent",
+          description:
+            "Dass eine Regelung eindeutig ist, kann auch einen längeren Regelungstext bedeuten.",
+          questions: [
+            "Falls ein Verwaltungsprozess betroffen ist: Lassen sich die Teilschritte in einer chronologische Reihenfolge abbilden?",
+            "Basieren Entscheidungslogiken auf objektiven Kriterien basieren? Sind sie widerspruchsfrei?",
+          ],
+        },
+        {
+          action:
+            "Verzichten Sie möglichst auf Ausnahmen und Ermessensspielraum",
+          description:
+            "Geeignete Anwendungsfälle, bei denen Automatisierung vor allem möglich gemacht werden sollte, sind gebundene Entscheidungen und Prozesse mit großen Bearbeitungsfallzahlen. Es sollte möglichst auf Ausnahmen verzichtet werden, außer diese führen zu einer gerechteren Regelung. ",
+          questions: [
+            "Ist es möglich, Pauschalen zu nutzen?",
+            "Wird in der Regelung klar zwischen grundlegender Regel und Ausnahmen unterschieden?",
+            "Ist trotz Ermessensspielräumen noch eine Teilautomatisierung möglich? Welche Prozess-Schritte lassen sich trotzdem automatisieren?",
+            "Sind in den umsetzenden Behörden genug Ressourcen vorhanden, um z.B. Anträge fristgerecht zu bearbeiten?",
+          ],
+        },
+        {
+          action: "Beachten Sie bestehende Prozesse und Verantwortlichkeiten",
+          description: "Einleitung",
+          questions: [
+            "Führt die verbindliche Anforderung zur Angleichung von Verwaltungsprozessen oder Verantwortlichkeiten?",
+            "Bekommt eine Behörde mehr/weniger Kompetenzen und wie wirkt sich das aus?",
+          ],
+        },
+      ],
     },
     {
-      label: "Prinzip 4",
-      title: "Klare Regelungen für eine digitale Ausführung finden",
-      content: dedent`
-        ### Darum ist das wichtig
-        
-        Durch eindeutige und klare Formulierungen können die Regelungen verständlich dargestellt und die digitale Umsetzung erleichtert werden. Komplizierte, schwer verständliche Regelungskonstrukte erschweren eine digitale Ausführung.
-        <br class="block content-[''] mb-48!" />
-        ### Tipps für Ihr Regelungsvorhaben
-        
-        - Formulieren Sie die Texte Ihres Regelungsvorhaben so, dass es in der Umsetzung in Aufgaben und chronologische Schritte übersetzt werden kann.
-        - Formulieren Sie klare Entscheidungsstrukturen. Nutzen Sie dafür eindeutige Kriterien und eine kohärente und logische Systematik. Ausnahmen sind klar gekennzeichnet. Testen Sie die Verständlichkeit mit den Personen, die an der Umsetzung beteiligt sind.
-        - Versuchen Sie, Rechtsbegriffe zu harmonisieren. Verwenden Sie definierte Rechtsbegriffe aus Ihrem Rechtsbereich. Auslegungen verhindern eine einheitliche Umsetzung.
-      `,
-    },
-    {
-      label: "Prinzip 5",
-      title: "Automatisierung ermöglichen",
-      content: dedent`
-        ### Darum ist das wichtig
-        
-        Digitale Lösungen zu erstellen, ist zunächst aufwändig. Die „Duplikation“ oder Skalierung kostet jedoch (fast) nichts. Daher ist es personell und wirtschaftlich sinnvoll, sich wiederholende Schritte, Prozesse oder Vorgehen zu automatisieren. Ein Regelungsvorhaben, das Ermessensspielraum lässt, kann nicht vollständig automatisiert werden: Soweit es dem Regelungsziel dient, sollte darauf verzichtet werden. Dadurch entstehen zeitliche und finanzielle Freiräume für Fälle, die eine gesonderte Auseinandersetzung benötigen.
-        <br class="block content-[''] mb-48!" />
-        ### Tipps für Ihr Regelungsvorhaben
-        
-        - Schaffen Sie die rechtlichen Möglichkeiten für automatisierte und/oder antragslose Verfahren. Prüfen Sie z. B. die Möglichkeit von Pauschalen.
-        - Formulieren Sie klare Entscheidungsstrukturen. Nutzen Sie dafür eindeutige Kriterien und eine kohärente und logische Systematik. Beziehen Sie IT-Expertise mit ein.
-        - Versuchen Sie, Rechtsbegriffe zu harmonisieren. Verwenden Sie definierte Rechtsbegriffe aus Ihrem Rechtsbereich. Auslegungen verhindern die vollständige Automatisierung von Umsetzungsprozessen.
-      `,
+      label: "Prinzip",
+      title: "Vertrauen schaffen durch Datenschutz & Informationssicherheit",
+      description:
+        "Wenn personenbezogene Daten und andere Informationen den ihnen gebührenden Schutz erhalten, schafft das Vertrauen in den Staat. Außerdem wird so die Gefahr von Missbrauch und negativen wirtschaftlichen oder sicherheitsrelevaten Konsequenzen verringert.",
+      implementation: [
+        {
+          action: "Gewährleisten Sie den Datenschutz",
+          description: dedent`
+            Für den Datenschutz sind nur personenbezogene Daten relevant. Für deren Erhebung und Verarbeitung muss eine geeignete Rechtsgrundlage existieren. Ein besonderes Augenmerk sollte hier auf die Verarbeitung sensibler Daten wie ethnischer Herkunft oder Gesundheitsdaten gelegt werden.
+            
+            Durch Datensparsamkeit wird die Regelung nicht nur den Anforderungen des Datenschutzes gerecht, sondern auch der Erfüllungsaufwand auf Seiten der Normadressaten als auch für die umsetzenden Akteure verringert.`,
+          questions: [
+            "Werden personenbezogene Daten erhoben bzw. ausgetauscht? Sind diese besonders schützenswert?",
+            "Werden nur die absolut notwendigen Daten erhoben bzw. ausgetauscht?",
+            "Gibt es für die Erhebung/den Austausch/die Verarbeitung die notwendige rechtliche Basis? Legt diese den Zweck der Datenerhebung dar?",
+          ],
+        },
+        {
+          action: "Stellen Sie die Informationssicherheit sicher",
+          description:
+            "Informationssicherheit betrifft alle Daten, vor allem aber solche mit Wirtschafts- oder Sicherheitsrelevanz. Alle Daten müssen sicher gespeichert und übertragen werden, hier sollten unter anderem Empfehlungen des BSI befolgt werden. Die Umsetzung geeigneter Informationsarchitekturen erschwert den mißbräuchlichen Zugriff und z.B. das betrügerische Erschleichen von Leistungen.",
+          questions: [
+            "Wurden Mittel vorgeschrieben, um Betrugsversuche zu erschweren?",
+          ],
+        },
+      ],
     },
   ],
   nextStepMethods: {

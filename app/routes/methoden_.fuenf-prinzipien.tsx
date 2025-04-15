@@ -2,10 +2,10 @@ import { type MetaArgs, useLoaderData } from "react-router";
 import Background from "~/components/Background";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
+import DetailsSummary from "~/components/DetailsSummary";
 import Header from "~/components/Header";
-import InfoBox from "~/components/InfoBox";
+import Heading from "~/components/Heading";
 import LinkListBox from "~/components/LinkListBox";
-import SupportBanner from "~/components/SupportBanner";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import {
   ROUTE_EXAMPLES,
@@ -21,7 +21,6 @@ import {
 } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 import type { Route } from "./+types/methoden_.fuenf-prinzipien";
-
 export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_METHODS_FIVE_PRINCIPLES.title, matches);
 };
@@ -51,10 +50,6 @@ export async function loader({ request }: Route.LoaderArgs) {
 
 export default function FivePrinciples() {
   const { referrer, prinzips } = useLoaderData<typeof loader>();
-
-  const nextStep = referrer.startsWith(ROUTE_METHODS.url)
-    ? methodsFivePrinciples.nextStepMethods
-    : methodsFivePrinciples.nextStep;
 
   return (
     <>
@@ -88,12 +83,13 @@ export default function FivePrinciples() {
         const label = slugify(principle.label);
         return (
           <Background
-            key={label}
+            key={principle.title}
             backgroundColor={index % 2 === 0 ? "white" : "blue"}
+            className="pb-48"
           >
             <div id={label} />
             <Container>
-              <InfoBox
+              <Box
                 heading={{
                   tagName: "h2",
                   text: principle.title,
@@ -103,37 +99,50 @@ export default function FivePrinciples() {
                   text: principle.label,
                   className: "ds-label-section text-gray-900",
                 }}
-                items={[
+                content={{
+                  markdown: principle.description,
+                }}
+                buttons={[
                   {
-                    content: principle.content,
-                    buttons: [
-                      {
-                        text: methodsFivePrinciples.buttonText,
-                        href: buttonLink,
-                        prefetch: "viewport",
-                        look: "tertiary" as const,
-                        "aria-label":
-                          index > 0
-                            ? `Beispiele für "${principle.label}: ${principle.title}" betrachten`
-                            : "Alle Beispiele betrachten",
-                      },
-                    ],
+                    text: methodsFivePrinciples.buttonText,
+                    href: buttonLink,
+                    prefetch: "viewport",
+                    look: "tertiary" as const,
+                    "aria-label":
+                      index > 0
+                        ? `Beispiele für "${principle.label}: ${principle.title}" betrachten`
+                        : "Alle Beispiele betrachten",
                   },
                 ]}
               />
             </Container>
+            <Container
+              overhangingBackground
+              backgroundColor={index % 2 === 0 ? "blue" : "white"}
+            >
+              <div className="ds-stack ds-stack-32">
+                <Heading tagName="h3" text="So setzen Sie das Prinzip um" />
+                {principle.implementation.map((implementation) => {
+                  const questions = implementation.questions
+                    .map((question) => `- ${question}`)
+                    .join("\n");
+                  const wording = implementation.wording
+                    ? `\n\n**Formulierungsbeispiel:**\n${implementation.wording}`
+                    : "";
+                  const content = `${implementation.description}\n\n**Fragen Sie sich:**\n${questions}${wording}`;
+                  return (
+                    <DetailsSummary
+                      key={implementation.action}
+                      title={implementation.action}
+                      content={content}
+                    />
+                  );
+                })}
+              </div>
+            </Container>
           </Background>
         );
       })}
-      <Container>
-        <Box
-          heading={{ text: nextStep.title }}
-          label={{ text: nextStep.label }}
-          content={{ markdown: nextStep.text }}
-          buttons={nextStep.buttons}
-        />
-      </Container>
-      <SupportBanner />
     </>
   );
 }
