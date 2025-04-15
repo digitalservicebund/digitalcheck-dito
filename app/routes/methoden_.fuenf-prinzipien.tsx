@@ -73,10 +73,11 @@ export default function FivePrinciples() {
             }}
           />
           <LinkListBox
+            heading={"Prinzipien"}
             links={methodsFivePrinciples.principles.map((principle) => {
               return {
                 id: slugify(principle.title),
-                title: `${principle.label}: ${principle.title}`,
+                title: `${principle.title}`,
               };
             })}
           />
