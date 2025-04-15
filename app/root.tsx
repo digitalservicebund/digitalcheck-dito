@@ -16,7 +16,11 @@ import {
   useRouteLoaderData,
 } from "react-router";
 
-import { MenuOutlined } from "@digitalservicebund/icons";
+import {
+  ExpandLessOutlined,
+  ExpandMoreOutlined,
+  MenuOutlined,
+} from "@digitalservicebund/icons";
 import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
 import Background from "~/components/Background";
 import Breadcrumbs from "~/components/Breadcrumbs";
@@ -45,6 +49,7 @@ import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants.server";
 import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
 import type { Route } from "./+types/root";
+import DropdownItem from "./components/DrodownItem";
 
 export function loader({ request }: Route.LoaderArgs) {
   const featureFlags = getFeatureFlags();
@@ -240,13 +245,27 @@ const PageHeader = ({
 }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(
+    null,
+  );
+
+  const toggleMobileSubitems = (itemText: string) => {
+    if (expandedMobileItem === itemText) {
+      setExpandedMobileItem(null);
+    } else {
+      setExpandedMobileItem(itemText);
+    }
+  };
 
   return (
     <>
-      {dropdownOpen && (
+      {(dropdownOpen || mobileMenuOpen) && (
         <div
           className="fixed inset-0 z-20 bg-[#282828] opacity-63"
-          onClick={() => setDropdownOpen(false)}
+          onClick={() => {
+            setDropdownOpen(false);
+            setMobileMenuOpen(false);
+          }}
           aria-hidden="true"
         />
       )}
@@ -277,29 +296,76 @@ const PageHeader = ({
           </nav>
           <div className="flex items-center space-x-16 lg:hidden">
             <PhoneOutlined />
-            <button onClick={() => setMobileMenuOpen(true)}>
-              <MenuOutlined />
+            <button
+              className="cursor-pointer p-8"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              tabIndex={0}
+            >
+              <MenuOutlined className="text-2xl" />
             </button>
-            {/*            {mobileMenuOpen &&
-              header.items.map((item) => (
-                <Dropdown
-                  key={item.text}
-                  label={item.text}
-                  hasSupport={item.hasSupport}
-                  data={item.overlayContent}
-                  isList={item.isList}
-                  onOpenChange={(isOpen) => {
-                    setDropdownOpen(isOpen);
-                  }}
-                />
-              ))}*/}
-            {/*
-            //TODO: responsive
-*/}
-            {/*            <a href="/unterstuetzung" className="ds-link-01-bold">
-              Kontakt & Unterstützung
-            </a>*/}
           </div>
+        </div>
+        <div
+          id="mobile-menu"
+          className={`relative z-30 border-t-1 border-gray-200 bg-white transition-all duration-300 lg:hidden ${
+            mobileMenuOpen
+              ? "max-h-screen opacity-100"
+              : "max-h-0 overflow-hidden opacity-0"
+          }`}
+        >
+          {header.items.map((item) => (
+            <div key={item.text} className="border-b-1 border-gray-200">
+              <button
+                className="ds-label-01-bold flex w-full cursor-pointer items-center justify-between p-16"
+                onClick={() => toggleMobileSubitems(item.text)}
+                aria-expanded={expandedMobileItem === item.text}
+                aria-controls={`mobile-subitems-${item.text}`}
+              >
+                {item.text}
+                {expandedMobileItem === item.text ? (
+                  <ExpandLessOutlined />
+                ) : (
+                  <ExpandMoreOutlined />
+                )}
+              </button>
+
+              {expandedMobileItem === item.text && (
+                <div id={`mobile-subitems-${item.text}`} className="bg-gray-50">
+                  {item.hasSupport && (
+                    <div className="border-b-1 border-gray-200 px-16 py-12">
+                      <div className="ds-label-02-reg text-gray-900">
+                        {header.contact.msg}
+                        <a
+                          href={`tel:${header.contact.number}`}
+                          className="plausible-event-name=Phone+Click plausible-event-position=header ds-link-02-reg ml-8"
+                        >
+                          {header.contact.number}
+                        </a>
+                      </div>
+                    </div>
+                  )}
+
+                  {item.overlayContent.map((option, index) => (
+                    <Link
+                      key={option.title}
+                      to={option.href}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        setExpandedMobileItem(null);
+                      }}
+                    >
+                      <DropdownItem
+                        number={item.isList ? index + 1 : 0}
+                        title={option.title}
+                        isNewTitle={option.isNewTitle}
+                        className="border-b-1 border-gray-100 pl-24"
+                      />
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
         {includeBreadcrumbs && (
           <Background backgroundColor="blue">
