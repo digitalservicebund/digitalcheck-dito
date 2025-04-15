@@ -5,6 +5,7 @@ import {
   useLoaderData,
   useOutletContext,
   type MetaArgs,
+  type UIMatch,
 } from "react-router";
 
 import Background from "~/components/Background";
@@ -32,6 +33,13 @@ import type { Route } from "./+types/beispiele.regelungen.$regelung";
 
 export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_REGELUNGEN.title, matches);
+};
+
+export const handle = {
+  breadcrumb: (match: UIMatch) => ({
+    title: "Regelung",
+    url: match.pathname,
+  }),
 };
 
 // prinzipCoreFields are being used in paragraphFields and so need to be included
