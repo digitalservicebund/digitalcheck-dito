@@ -18,6 +18,10 @@ export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_INTEROPERABILITY_SPOC.title, matches);
 };
 
+export const handle = {
+  breadcrumb: () => ROUTE_INTEROPERABILITY_SPOC,
+};
+
 export default function SPOC() {
   const showPage = useFeatureFlag(features.showPageSPOC);
 
