@@ -1,4 +1,8 @@
-import { ROUTE_INTEROPERABILITY } from "~/resources/routeDefinitions";
+import {
+  ROUTE_INTEROPERABILITY,
+  ROUTE_LANDING,
+  ROUTE_METHODS_FIVE_PRINCIPLES,
+} from "~/resources/routeDefinitions";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const spoc = {
@@ -8,82 +12,105 @@ export const spoc = {
     und der Digitalcheck sind die Grundlage. 
     <br/><br/>
     Sie befinden sich auf der Informationsseite der 
-    Deutschen nationalen Kontaktstelle(2024/903 Art. 17) - gemeinsam setzen wir den 
-    Interoperabilitätsakt für die deutsche Verwaltung um, für vernetzte, bürgernahe, 
-    digitale und effiziente Verwaltungsleistungen. 
-    <br/><br/>
-    Sie haben inhaltliche Fragen, dann besuchen Sie uns [hier](${ROUTE_INTEROPERABILITY.url}).
+    deutschen nationalen Kontaktstelle (2024/903 Art. 17). Gemeinsam mit der deutschen Verwaltung setzen wir 
+    die europäische Interoperabilitätsverordnung 2024/903 um, für vernetzte, bürgernahe, digitale und effiziente Verwaltungsleistungen.
   `,
   landscape: {
     id: "landschaft",
-    headline: "Übersicht über die europäische Interoperabilitäts-Landschaft",
+    headline: "Nationale Umsetzung der EU Interoperabilitätsverordnung",
     content: dedent`
-      Seit Anfang 2025 ist die Verordnung für ein interoperables Europa bindend.
-      Damit sind alle öffentlichen Einrichtungen in Europa, also die EU, ihre Mitgliedsländer und auch deren Bundesländer, verpflichtet diese umzusetzen.
+      Seit Anfang 2025 muss die Verordnung für ein interoperables Europa ([2024/903](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903)) in den EU Mitgliedstaaten verpflichtend umgesetzt werden.
+      Damit sind alle öffentlichen Einrichtungen in Europa, also EU-Institutionen, ihre Mitgliedstaaten und auch deren Bundesländer und Kommunen, verpflichtet Interoperabilitätsbewertungen durchzuführen. 
+      <br/><br/>
+      Diese Bewertungen sind erforderlich, bevor neue oder geänderte verbindliche Anforderungen beschlossen werden, um einen nahtlosen Datenaustausch zwischen Behörden sicherzustellen und den grenzüberschreitenden Zugang zu digitalen Verwaltungsleistungen in der EU zu ermöglichen.
       <br/><br/>
       In Deutschland bettet sich diese Anforderung in die föderale Zusammenarbeit wie folgt ein:
     `,
     image: {
-      url: "/images/prozess-vorpruefung-mit-interoperabilitaet.jpg",
-      alternativeText: `Der Prozess beginnt mit einer geführten Vorprüfung auf Digitalbezug und Anforderungen an Interoperabilität. Daraus ergeben sich drei mögliche Ergebnisse mit unterschiedlichen Prozessschritten: Bei dem Ergebnis "kein Digitalbezug" ist der Erarbeitungsprozess abgeschlossen und wird dem Normenkontrollrat zur Prüfung übermittelt. Bei dem Ergebnis "Digitalbezug" wird das Ergebnis per E-Mail an den Normenkontrollrat gesendet, gefolgt von einer Schritt-für-Schritt-Anleitung und der Dokumentation der Erstellung des Digitalbezugs, die abschließend vom Normenkontrollrat geprüft wird. Für das Ergebnis " Digitalbezug & Anforderungen an die Interoperabilität" wird das Ergebnis per E-Mail an den Normenkontrollrat und das Digitalcheck-Team gesendet, gefolgt von einer Schritt-für-Schritt-Anleitung mit Unterstützung durch das Digitalcheck-Team, der Dokumentation der Erstellung des Digitalbezugs und der Bewertung der Interoperabilität. Die Dokumentation wird anschließend auf dem Interoperable Europe Portal zur Verfügung gestellt.`,
+      url: "/images/prozess-nationale-kontaktstelle.png",
+      alternativeText: `Netzwerkdiagramm, das die Interaktionen verschiedener deutscher und EU-Behörden im Kontext der EU-Interoperabilitätsverordnung zeigt. Es verdeutlicht, wie Akteure wie der IT-Planungsrat, die Nationale Kontaktstelle, das BMI und die EU-Kommission bei der Umsetzung, Koordination und dem Reporting zusammenarbeiten.`,
     },
     contentAfter: {
       headline: "Rechtliche Grundlage",
-      content:
-        "Deutschland integriert die Anforderungen des IEA in den Digitalcheck und folgt damit den Empfehlungen der EU. Somit werden Ressourcen effizient genutzt und Doppelstrukturen verhindert. Somit ist die nationale Kontaktstelle im Digitalcheck-Team im BMI und DigitalService angesiedelt.",
+      content: dedent`
+      Das Organigramm zeigt die Interaktionen der Organisationen und Behörden in Deutschland und der EU im Kontext der Verordnung (EU) 2024/903.`,
+      infobox: [
+        {
+          detailsSummary: {
+            title: "Beteiligte Organisationen und Behörden",
+            content: dedent`
+            - **Bundesländer & Kommunen:** Ausgangspunkt, mit dem Hinweis auf die dezentrale Umsetzung durch das Bundesangebot.
+      - **IT-Planungsrat:** Koordiniert und empfiehlt die Integration von IT-Strategien.
+      - **Nationale Kontaktstelle:** Zentraler Ansprechpartner für Informationsaustausch und Koordination.
+      - **Bundesministerium für Inneres und Heimat:** Verantwortlich für die Integration in den Digitalcheck.
+      - **EU-Kommission:** Beteiligte an der Weiterentwicklung und Reportings. 
+      - **EU-Interoperabilitätsbeirat:** EU-weite Zusammenarbeit, vertreten durch Markus Richter (Bundes-CIO).
+      - **27 EU-Staaten mit Kontaktstellen:** Nationale Kontaktstellen für Informationsaustausch.`,
+          },
+        },
+      ],
+      outro:
+        "Deutschland integriert die Anforderungen der Verordnung (EU) 2024/903 in den Digitalcheck und folgt damit den Empfehlungen der EU. Somit werden Ressourcen effizient genutzt und Doppelstrukturen verhindert. Die nationale Kontaktstelle ist beim Digitalcheck-Team angesiedelt.",
     },
   },
   responsibilities: {
     id: "aufgaben",
-    headline: "Aufgaben der nationalen Kontaktstelle (2024/903 Art. 17):",
+    headline: "Aufgaben der nationalen Kontaktstelle (2024/903 Art. 17)",
     content: dedent`
-      Das Digitalcheck-Team übernimmt die Rolle der Nationale Kontaktstelle, wie sie in der Verordnung 
+      Das Digitalcheck-Team übernimmt die Rolle der Nationalen Kontaktstelle, wie sie in der Verordnung 
       für ein interoperables Europa vorgesehen ist und dient als zentraler Ansprechpartner 
       für die Koordination und Umsetzung von Interoperabilitätsmaßnahmen in Deutschland.
       
-      - Bereitstellung der Methodik und Unterstützung der Durchführung von Interoperabilitätsbewertungen
-      - Integration von Digitalcheck und Interoperabilitätsbewertung zu einem geeinten Prozess
-      - Ansprechperson für:
-        - andere nationale Kontaktstellen
-        - Bundesländer
-        - IT-Planungsrat (& FITKO)
-        - Interessierte
-        - Umsetzenden Akteure
-      - Teilnahme an Austauschen und Weiterentwicklung auf europäischer Ebene
-        - Informieren des Interoperable Europe Boards
-        - Teil der Interoperable Europe Arbeitsgruppe
-      - Anregung der Nachnutzung, Angebot zur Kooperation und Hilfestellung bei der Umsetzung von den Interoperabilitätsanforderungen
-      - Repräsentation des Themas in der Verwaltung
-      - Gute Beispiele teilen
+      - **Zentrale Anlaufstelle für:** 
+        - Behörden auf Bundes-, Landes- und kommunaler Ebene
+        - Interessierte Akteurinnen und Akteure
+        - Nationale Kontaktstellen anderer EU-Mitgliedstaaten
+      
+      - **Unterstützung bei Interoperabilitätsbewertungen:** 
+      
+        Bereitstellung einer praxistauglichen Methodik und Beratung für öffentliche Stellen bei der Durchführung von Interoperabilitätsbewertungen
+      - **Bereitstellung von Informationen und Austauschformaten:**
+      
+        Aufbau von Wissen, Vernetzung und Unterstützung auf nationaler Ebene
+      - **Prozessintegration:** 
+
+        Verknüpfung von Digitalcheck und Interoperabilitätsbewertung zu einem konsistenten, gemeinsamen Verfahren
+
+      - **Förderung von Nachnutzung, Kooperation und Zusammenarbeit:**
+        - Bereitstellung von guten Beispielen
+        - Unterstützung bei der Umsetzung von Interoperabilitätsanforderungen
+        
+      Falls Sie mit Ihrem Land kooperieren wollen, melden Sie sich bei uns. Unsere Kontaktdaten finden Sie unten.
     `,
   },
   timeline: {
     id: "verlauf",
-    headline: "Was ist der jetzige Stand des Digitalchecks?",
+    headline: "Aktueller Stand der Integration in den Digitalcheck",
     items: [
       {
         headline: {
-          text: "Verordnung für ein interoperables Europa tritt in Kraft",
+          text: "13.03.2024: Verordnung für ein interoperables Europa wird vom europäischen Parlament verabschiedet",
         },
       },
       {
         headline: {
-          text: "Verordnung tritt in Kraft und erste Änderungen im Digitalcheck umgesetzt:",
+          text: "10.01.2025: Verordnung tritt in Kraft und erste Änderungen sind im Digitalcheck umgesetzt:",
         },
         content: dedent`
-          - Der Digitalcheck berücksichtigt nun neben dem Digitalbezug auch die Interoperabilität.
+          - **Vorprüfung:** Berücksichtigt nun neben dem Digitalbezug auch die europäische Interoperabilität.
           - Das Ergebnis der Vorprüfung wird automatisch per E-Mail versendet:
             - Bei Digitalbezug an den NKR.
-            - Bei zusätzlichem Interoperabilitäts-Bezug an das Digitalcheck-Team und den NKR.
+            - Bei zusätzlichem Interoperabilitäts-Bezug auch an die nationale Kontaktstelle beim Digitalcheck-Team.
+          - Bereitstellung einer [Informationsseite](${ROUTE_INTEROPERABILITY.url}) zum Thema Interoperabilität für Legistinnen und Legisten.
         `,
       },
       {
         headline: {
-          text: "Konzeption: Zusammenführung vom Erarbeiten-Prozess und Interoperabilitätsbewertung",
+          text: "Aktuell: Konzeption der Zusammenführung vom Erarbeiten-Prozess und Interoperabilitätsbewertung",
         },
         content: dedent`
           **Verzahnung der Prozesse**
-          - Zunächst wurden die inhaltlichen Schnittmengen zwischen dem Erarbeitungsprozess für digitaltaugliche Regelungen und dem Interoperabilitäts-Assessment identifiziert und analysiert. Darauf aufbauend wird ein synthetisierter Prozess erstellt. Dieser wird jetzt in den Kontaktpunkten kontinuierlich umgesetzt.
+          - Zunächst wurden die inhaltlichen Schnittmengen zwischen dem Erarbeitungsprozess für digitaltaugliche Regelungen und dem Interoperabilitäts-Assessment identifiziert und analysiert. Darauf aufbauend wird ein synthetisierter Prozess erstellt. Dieser wird jetzt in den Digitalcheck Kontaktpunkten kontinuierlich umgesetzt.
           
           **Überarbeitung der Prinzipien für digitaltaugliche Regelungen**
           - Basierend auf den Erkenntnissen aus dem Vergleich wurden die bestehenden Prinzipien  der Digitaltauglichkeit überarbeitet. Ziel war es, diese Prinzipien so anzupassen, dass sie sowohl den Anforderungen der Digitaltauglichkeit als auch der Interoperabilität gerecht werden.
@@ -94,8 +121,8 @@ export const spoc = {
           text: "Nächste Schritte für die Erarbeitung",
         },
         content: dedent`
-          **Entwicklung neuer Prinzipien und Methoden**
-          - Derzeit entwickeln wir neue Vorschläge für Prinzipien und Methoden, die eine Integration von Prinzipien der Digitaltauglichkeit und Ebenen der Interoperabilität ermöglichen. Ziel ist es, den gesamten Entwicklungsprozess effizienter und zielgerichteter für Regelungsvorhaben zu gestalten.
+          **Entwicklung angepasster Prinzipien und Methoden**
+          - Derzeit entwickeln wir die [5 Prinzipien für Digitaltaugliche Gesetzgebung](${ROUTE_METHODS_FIVE_PRINCIPLES.url}) weiter. Zukünftig werden diese die vier Interoperabilitätsebenen noch konkreter herausstellen. Darauf aufbauend werden wir die Erarbeitungsmethoden anpassen. Ziel ist es, den gesamten Entwicklungsprozess effizienter und zielgerichteter zu gestalten.
         `,
         image: {
           url: "/images/synthese-prozess-digitalcheck-und-interoperabilitaet.png",
@@ -113,49 +140,45 @@ export const spoc = {
       {
         headline: "Aufwände minimieren durch Nachnutzung oder Kooperation",
         content:
-          "Durch die Nachnutzung können Sie initiale und laufende Aufwände für eine Umsetzung der Interoperabilitätsanforderungen minimieren, indem Sie Inhalte, Visualisierungen oder sogar Softwarecode übernehmen. Falls Sie mit Ihrem Land kooperieren wollen, melden Sie sich bei uns, Kontaktdaten finden Sie unten.",
+          "Durch die Nachnutzung können Sie initiale und laufende Aufwände für eine Umsetzung der Interoperabilitätsanforderungen minimieren, indem Sie Inhalte, Visualisierungen oder sogar Softwarecode übernehmen. Falls Sie mit Ihrem Land kooperieren wollen, melden Sie sich bei uns, unsere Kontaktdaten finden Sie unten.",
       },
       {
         headline: "Kontinuierliche Weiterentwicklung",
         content:
-          "Der Digitalcheck wird laufend iterativ an Bedürfnisse von Legist:innen ausgerichtet und an Anforderungen aus der Verordnung für eine interoperables Europa angepasst. Im Rahmen einer Kooperation informieren wir Sie laufend über neue Erkenntnisse, Rahmenbedingungen und geplante Änderungen.",
-      },
-      {
-        headline: "Unterstützung für die konkrete Umsetzung",
-        content: dedent`
-          Wie kann ein Nachnutzung in Ihrem Fall ausgestaltet werden? Wir vom Digitalcheck Team 
-          teilen unsere Erkenntnisse und Erfahrungen mit anderen Bundesländern gerne mit Ihnen:
-          <br/><br/>
-          Rufen Sie uns an: [0151/40 76 78 39](tel:+4915140767839)
-          
-          Schreiben Sie uns: [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20Nationale%20Kontaktstelle)
-        `,
+          "Der Digitalcheck wird laufend iterativ an Bedürfnisse von Legistinnen und Legisten ausgerichtet und an Anforderungen aus der Verordnung für ein interoperables Europa angepasst. Im Rahmen einer Kooperation informieren wir Sie laufend über neue Erkenntnisse, Rahmenbedingungen und geplante Änderungen.",
       },
     ],
   },
   contact: {
     id: "kontakt",
     headline: "Service und Kontakt",
-    content: dedent`
-      Als nationalen Kontaktstelle gemäß 2024/903 Art. 17 unterstützen wir:
-      
-      - Andere nationale Kontaktstellen
-      - Bundesländer
-      - IT-Planungsrat & FITKO
-      - Interessierte
-      - Umsetzenden Akteure
-      <br/>
-      
-      Rufen Sie uns an: [0151/40 76 78 39](tel:+4915140767839)
-      
-      Schreiben Sie uns - egal ob als Legist:innen oder Institution:<br/>
-      [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Anfrage:%20Nationale%20Kontaktstelle)
-      <br/><br/>
-      Weitere Online-Angebote des Digitalcheck für Legist:innen:<br/>
-      [https://erarbeiten.digitalcheck.bund.de/](/)
-      <br/><br/>
-      Für Interoperabilitätsthemen:<br/>
-      [https://erarbeiten.digitalcheck.bund.de/interoperabel](${ROUTE_INTEROPERABILITY.url})
-    `,
+    sections: [
+      {
+        headline: "Sie brauchen Unterstützung?",
+        content: dedent`
+          Als nationale Kontaktstelle gemäß Art. 17 der Verordnung (EU) 2024/903 unterstützen wir:
+          - Behörden auf Bundes-, Landes- und kommunaler Ebene
+          - Interessierte Akteurinnen und Akteure
+          - Nationale Kontaktstellen anderer EU-Mitgliedstaaten
+        `,
+      },
+      {
+        headline:
+          "Sie sind an der Nachnutzung, Zusammenarbeit oder Kooperation mit dem Digitalcheck interessiert?",
+        content: dedent`
+          Wir begleiten Sie gerne bei der konkreten Umsetzung – mit Wissen, Praxiserfahrung aus anderen Regelungsvorhaben und konkreten Ideen zur Gestaltung in Ihrem Anwendungsfall.
+          <br/><br/>
+          **Rufen Sie uns an:** 0151 4076 7839  
+          Schreiben Sie uns - egal ob Legist oder Institution:  
+          interoperabel@digitalservice.bund.de
+          <br/><br/>
+          Weitere Online-Angebote des Digitalcheck für Legist:innen:  
+          [https://erarbeiten.digitalcheck.bund.de/](${ROUTE_LANDING.url})
+          <br/><br/>
+          Für weitere Inhalte zur Interoperabilität:  
+          [https://erarbeiten.digitalcheck.bund.de/interoperabel/](${ROUTE_INTEROPERABILITY.url})
+        `,
+      },
+    ],
   },
 };

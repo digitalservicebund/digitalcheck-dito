@@ -1,5 +1,6 @@
 import { Apps, Layers } from "@digitalservicebund/icons/index";
 import { feedbackFormular } from "~/resources/content/components/feedback-formular";
+import { ROUTE_INTEROPERABILITY_SPOC } from "~/resources/routeDefinitions";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const interoperability = {
@@ -18,7 +19,7 @@ export const interoperability = {
     button: "Zur Vorprüfung",
     image: {
       url: "/images/zusammenhang-interoperabilitaet-und-digitaltauglichkeit.png",
-      alternativeText: `Interoperabilität wird als großer Kreis dargestellt, der einen kleineren Kreis mit Digitaltaugliche Regelungen umschließt. Dies zeigt, dass digitaltaugliche Regelungen ein Teil der Interoperabilität sind.`,
+      alternativeText: `Interoperabilität wird als großer Kreis dargestellt, der einen kleineren Kreis mit digitaltauglichen Regelungen umschließt. Dies zeigt, dass digitaltaugliche Regelungen ein Teil der Interoperabilität sind.`,
     },
   },
   faq: {
@@ -61,7 +62,7 @@ export const interoperability = {
         content: dedent`
           Interoperabilität und Digitaltauglichkeit sind eng miteinander verwoben. Wenn ein Vorhaben die EU-Anforderungen für Interoperabilität erfüllen muss, hat es automatisch auch einen Digitalbezug. Da sich viele Anforderungen der Interoperabilität mit denen der Digitaltauglichkeit überschneiden, wird in Deutschland der bestehenden Digitalcheck um Aspekte der Interoperabilität erweitert.
           
-          Bereits heute legen Sie beim Erarbeiten von digitaltauglichen Regelungen die Grundlage für Interoperabilität. Durch das Befolgen der Digitalcheck Prinzipien tun Sie dies auf technischer und semantischer Ebene, durch die Arbeit mit Visualisierungen auf prozessualer Ebene. Damit erfüllen Sie Anforderungen, die sich auch aus der EU-Verordnung ergeben.
+          Bereits heute legen Sie beim Erarbeiten von digitaltauglichen Regelungen die Grundlage für Interoperabilität. Durch das Befolgen der Digitalcheck-Prinzipien tun Sie dies auf technischer und semantischer Ebene, durch die Arbeit mit Visualisierungen auf prozessualer Ebene. Damit erfüllen Sie Anforderungen, die sich auch aus der EU-Verordnung ergeben.
           
           Ob sich für Ihre Regelung Anforderungen aus der EU-Verordnung ergeben, erfahren Sie durch die um Interoperabilität erweiterte [Digitalcheck Vorprüfung](/vorpruefung). Falls sich eine Berichtspflicht an die Europäische Kommission ergibt, unterstützt Sie das Digitalcheck Team dabei, eine Interoperabilitätsbewertung durchzuführen, zu dokumentieren und den Bericht einzureichen.
         `,
@@ -128,7 +129,7 @@ export const interoperability = {
           - Die Mindestanforderungen für die inhaltliche Ausgestaltung des Berichts der Interoperabilitätsbewertung finden Sie im [Anhang der Verordnung](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903)
           - Detaillierte Leitlinien für die Inhalte der von Interoperabilitätsbewertungen sind in den “[Guidelines for interoperability assessments](https://interoperable-europe.ec.europa.eu/collection/assessments/assessment-guidelines)” aufgeführt
           - [Das Interoperable Europe Framework EIF](https://ec.europa.eu/isa2/sites/default/files/eif_brochure_final.pdf) ist ein Leitfaden für die Umsetzung digitaler öffentlicher Dienste
-          - Eine Interoperabilitätsbewertung wird in einem maschinenlesbarem Bericht dokumentiert und veröffentlicht - hierfür stellt der Beirat für ein interoperables Europa ein [Online-Tool zur Verfügung](https://interoperable-europe.ec.europa.eu/collection/assessments) (Registrierung erforderlich)
+          - Eine Interoperabilitätsbewertung wird in einem maschinenlesbaren Bericht dokumentiert und veröffentlicht - hierfür stellt der Beirat für ein interoperables Europa ein [Online-Tool zur Verfügung](https://interoperable-europe.ec.europa.eu/collection/assessments) (Registrierung erforderlich)
         `,
       },
       {
@@ -199,7 +200,7 @@ export const interoperability = {
           - Bei Digitalbezug: Eine Schritt-für-Schritt-Anleitung mit Vorlagen und Praxisbeispielen unterstützt die Erarbeitung der Regelung. 
           - Bei Digitalbezug und Interoperabilität: Das Digitalcheck-Team begleitet Sie im Prozess und unterstützt Sie bei der Interoperabilitätsbewertung.
       4. **Dokumentation & Veröffentlichung**
-          - Die Dokumentation der Ergebnisse werden an den Normenkontrollrat gesendet und zusätzlich auf dem Interoperable Europe Portal veröffentlicht.
+          - Die Dokumentation der Ergebnisse wird an den Normenkontrollrat gesendet und zusätzlich auf dem Interoperable Europe Portal veröffentlicht.
     `,
     image: {
       url: "/images/prozess-vorpruefung-mit-interoperabilitaet.jpg",
@@ -220,7 +221,7 @@ export const interoperability = {
           text: "Was ist das Ziel der Verordnung für ein interoperables Europa?",
         },
         content:
-          "Das Ziel der [Verordnung für ein interoperables Europa (EU 2024/903)](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903) ist es, digitale öffentliche Dienste zu verbessern. Die Dienste einzelner Mitgliedsstaaten sollen miteinander kompatibel sein. Dafür braucht es gemeinsame Standards, um Daten zwischen den Mitgliedsstaaten auszutauschen. Um digitale Potentiale und Hindernisse zu berücksichtigen, müssen öffentliche Stellen die Interoperabilität neuer Dienste berücksichtigen.",
+          "Das Ziel der [Verordnung für ein interoperables Europa (EU 2024/903)](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903) ist es, digitale öffentliche Dienste zu verbessern. Die Dienste einzelner Mitgliedstaaten sollen miteinander kompatibel sein. Dafür braucht es gemeinsame Standards, um Daten zwischen den Mitgliedstaaten auszutauschen. Um digitale Potentiale und Hindernisse zu berücksichtigen, müssen öffentliche Stellen die Interoperabilität neuer Dienste berücksichtigen.",
         detailsSummary: {
           title: "Welche positiven Effekte sollen dadurch erreicht werden?",
           content: dedent`
@@ -267,7 +268,7 @@ export const interoperability = {
           text: "Verbindliche Anforderungen: In welchem Fall ist eine Interoperabilitätsbewertung verpflichtend?",
         },
         content: dedent`
-          Eine Interoperabilitätsbewertung wird für Regelungen durchgeführt, die sich mit verbindlichen Anforderung befassen.
+          Eine Interoperabilitätsbewertung wird für Regelungen durchgeführt, die sich mit verbindlichen Anforderungen befassen.
           <br/><br/>
           Eine verbindliche Anforderung im Sinne der Verordnung ist eine verpflichtende Regel. Das kann z.B. eine Definition, ein Standard, eine Richtlinie, ein Verbot oder eine Beschränkung sein. Eine exakte Definition finden Sie in der [Verordnung in der Präambel, Erwägungsgrund 18](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903).`,
         detailsSummary: {
@@ -293,6 +294,19 @@ export const interoperability = {
         "Ein Entscheidungsdiagramm zur Bestimmung der Verpflichtung zur Interoperabilitätsbewertung. Es beginnt mit der Frage, ob es sich um eine verbindliche Anforderung handelt. Je nach Antwort folgen verschiedene Entscheidungsstufen: Offenheit für Änderungen, Verpflichtung, digitale öffentliche Dienstleistungen, betroffene Akteure und Notwendigkeit des Austauschs in Netzwerken oder Informationssystemen. Wenn alle Bedingungen erfüllt sind, führt der Prozess zur verpflichtenden Interoperabilitätsbewertung. Andernfalls ist sie nicht verpflichtend.",
     },
   },
+  kontaktstelle: {
+    id: "kontaktstelle",
+    title:
+      "Informieren Sie sich weiter zu den EU-Anforderungen an Interoperabilität ",
+    text: "Mehr zum Thema Governance, Kooperation und Nutzung unserer Inhalte finden Sie unter der Nationalen Kontaktstelle für ein interoperables Europa.",
+    buttons: [
+      {
+        text: "Zur Nationalen Kontaktstelle",
+        href: ROUTE_INTEROPERABILITY_SPOC.url,
+        look: "tertiary" as const,
+      },
+    ],
+  },
   feedbackForm: {
     heading: feedbackFormular.heading,
     trackingEvent: "Feedback Interoperabel Landing Page",
@@ -305,7 +319,7 @@ export const interoperability = {
       },
     ],
     contact:
-      "Schreiben Sie uns eine Email an [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Feedback:%20erarbeiten.digitalcheck.bund.de), wenn wir Sie für Feedback zu unserem Service kontaktieren dürfen.",
+      "Schreiben Sie uns eine E-Mail an [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Feedback:%20erarbeiten.digitalcheck.bund.de), wenn wir Sie für Feedback zu unserem Service kontaktieren dürfen.",
     button: feedbackFormular.button,
     success: feedbackFormular.success,
   },

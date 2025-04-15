@@ -1,6 +1,7 @@
 import { type MetaArgs } from "react-router";
 import Accordion from "~/components/Accordion";
 import Background from "~/components/Background";
+import Box from "~/components/Box.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import FeedbackForm from "~/components/FeedbackForm";
@@ -182,6 +183,15 @@ export default function Interoperability() {
           />
           <RichText markdown={interoperability.faq.content} className="mb-40" />
           <Accordion items={interoperability.faq.items} />
+          <Box
+            className="pt-64 pb-48"
+            heading={{
+              tagName: "h2",
+              text: interoperability.kontaktstelle.title,
+            }}
+            content={{ markdown: interoperability.kontaktstelle.text }}
+            buttons={interoperability.kontaktstelle.buttons}
+          />
         </Container>
       </div>
       <FeedbackForm {...interoperability.feedbackForm} />

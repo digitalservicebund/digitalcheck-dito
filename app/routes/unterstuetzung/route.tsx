@@ -22,6 +22,7 @@ const {
   supportOfferings,
   title,
   subtitle,
+  kontaktstelle,
 } = support;
 
 export const meta = ({ matches }: MetaArgs) => {
@@ -195,6 +196,19 @@ export default function Index() {
           </Container>
         </Background>
       </div>
+      <Background backgroundColor="midBlue">
+        <Container>
+          <Box
+            heading={{
+              tagName: "h2",
+              text: kontaktstelle.title,
+            }}
+            content={{
+              markdown: kontaktstelle.text,
+            }}
+          />
+        </Container>
+      </Background>
     </>
   );
 }

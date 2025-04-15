@@ -4,14 +4,13 @@ import Container from "~/components/Container";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import ImageZoomable from "~/components/ImageZoomable";
+import InfoBox from "~/components/InfoBox.tsx";
 import LinkListBox from "~/components/LinkListBox";
 import { BulletList } from "~/components/List";
 import { ListItemProps } from "~/components/ListItem";
 import RichText from "~/components/RichText";
 import { spoc } from "~/resources/content/interoperabel-nationale-kontaktstelle";
-import { features } from "~/resources/features";
 import { ROUTE_INTEROPERABILITY_SPOC } from "~/resources/routeDefinitions";
-import { useFeatureFlag } from "~/utils/featureFlags";
 import prependMetaTitle from "~/utils/metaTitle";
 
 export const meta = ({ matches }: MetaArgs) => {
@@ -23,15 +22,6 @@ export const handle = {
 };
 
 export default function SPOC() {
-  const showPage = useFeatureFlag(features.showPageSPOC);
-
-  if (!showPage) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("Feature is not enabled for this environment", {
-      status: 404,
-    });
-  }
-
   const timelineItems: ListItemProps[] = spoc.timeline.items.map((item) => ({
     ...item,
     hasBullet: true,
@@ -95,8 +85,13 @@ export default function SPOC() {
             alternativeText={spoc.landscape.image.alternativeText}
           />
           <RichText
-            className="mt-32"
+            className="mt-16 mb-32"
             markdown={spoc.landscape.contentAfter.content}
+          />
+          <InfoBox items={spoc.landscape.contentAfter.infobox} />
+          <RichText
+            className="mb-48"
+            markdown={spoc.landscape.contentAfter.outro}
           />
         </Container>
       </div>
@@ -110,7 +105,7 @@ export default function SPOC() {
             />
             <RichText
               markdown={spoc.responsibilities.content}
-              className="mb-40"
+              className="mb-48"
             />
           </Container>
         </Background>
@@ -124,7 +119,7 @@ export default function SPOC() {
           />
           <BulletList
             items={timelineItems}
-            className="rotate-arrow-bottom mb-40"
+            className="rotate-arrow-bottom mb-48"
           />
         </Container>
       </div>
@@ -133,7 +128,7 @@ export default function SPOC() {
           <Container>
             <Heading tagName="h2" text={spoc.states.headline} />
             {spoc.states.sections.map((section) => (
-              <div key={section.headline} className="last:mb-40">
+              <div key={section.headline} className="last:mb-48">
                 <Heading
                   tagName="h3"
                   text={section.headline}
@@ -147,8 +142,17 @@ export default function SPOC() {
       </div>
       <div id={spoc.contact.id}>
         <Container>
-          <Heading tagName="h2" text={spoc.contact.headline} className="mb-8" />
-          <RichText markdown={spoc.contact.content} className="mb-40" />
+          <Heading tagName="h2" text={spoc.contact.headline} />
+          {spoc.contact.sections.map((section) => (
+            <div key={section.headline} className="last:mb-48">
+              <Heading
+                tagName="h3"
+                text={section.headline}
+                className="mt-32 mb-8"
+              />
+              <RichText markdown={section.content} />
+            </div>
+          ))}
         </Container>
       </div>
     </>
