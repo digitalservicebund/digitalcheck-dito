@@ -66,7 +66,7 @@ export default function FivePrinciples() {
           <LinkListBox
             links={methodsFivePrinciples.principles.map((principle) => {
               return {
-                id: slugify(principle.label),
+                id: slugify(principle.title),
                 title: `${principle.label}: ${principle.title}`,
               };
             })}
@@ -80,14 +80,13 @@ export default function FivePrinciples() {
         const buttonLink = prinzip
           ? `${ROUTE_PRINCIPLES.url}/${prinzip?.URLBezeichnung}`
           : ROUTE_EXAMPLES.url;
-        const label = slugify(principle.label);
         return (
           <Background
             key={principle.title}
             backgroundColor={index % 2 === 0 ? "white" : "blue"}
             className="pb-48"
           >
-            <div id={label} />
+            <div id={slugify(principle.title)} />
             <Container>
               <Box
                 heading={{
