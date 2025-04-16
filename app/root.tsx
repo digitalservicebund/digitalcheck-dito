@@ -266,6 +266,20 @@ const PageHeader = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
 
+  // Handle esc key
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeAll();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   // Reset states on navigation or viewport changes
   useEffect(() => {
     const handleResize = () => {
@@ -357,6 +371,8 @@ const PageHeader = ({
                     isExpanded={activeDropdownId === item.text}
                     onToggle={() => toggleDropdown(item.text)}
                     onItemClick={closeAll}
+                    onMouseEnter={() => setActiveDropdownId(item.text)}
+                    onMouseLeave={() => setActiveDropdownId(null)}
                   />
                 );
               })}
