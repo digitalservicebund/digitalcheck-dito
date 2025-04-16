@@ -63,7 +63,7 @@ export default function Dropdown({
   const listboxId = `dropdown-listbox-${label}`;
   const buttonId = `dropdown-button-${label}`;
 
-  const activeClasses = "border-b-3 bg-blue-100";
+  const activeClasses = "border-b-[4px] bg-blue-100 border-blue-800";
 
   return (
     <div
@@ -74,7 +74,7 @@ export default function Dropdown({
         type="button"
         onClick={toggleDropdown}
         className={twMerge(
-          "ds-label-01-reg z-20 inline-flex h-full cursor-pointer items-center border-blue-800 px-16 whitespace-nowrap hover:bg-blue-100 focus:border-b-3 focus:bg-blue-100",
+          "ds-label-01-reg z-20 inline-flex h-full cursor-pointer items-center border-b-[4px] border-transparent px-16 whitespace-nowrap hover:bg-blue-100 focus:border-blue-800 focus:bg-blue-100",
           isActiveParent && activeClasses,
         )}
         id={buttonId}

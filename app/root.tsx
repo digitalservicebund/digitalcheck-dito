@@ -51,6 +51,7 @@ import {
 import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants.server";
 import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
+import { normalizePathname } from "~/utils/utilFunctions.ts";
 import type { Route } from "./+types/root";
 
 export function loader({ request }: Route.LoaderArgs) {
@@ -249,8 +250,7 @@ const findActiveParentItemText = (
   for (const item of items) {
     if (item.overlayContent) {
       for (const subItem of item.overlayContent) {
-        // TODO: extract url normalize
-        const cleanHref = subItem.href?.replace(/\/$/, "").split("#")[0];
+        const cleanHref = normalizePathname(subItem.href);
         if (cleanHref && cleanHref === cleanPathname) {
           return item.text;
         }
@@ -267,8 +267,7 @@ const PageHeader = ({
 }) => {
   const location = useLocation();
   const currentPathname = location.pathname;
-  const cleanPathname = currentPathname.replace(/\/$/, "");
-
+  const cleanPathname = normalizePathname(currentPathname);
   const [isDesktopDropdownOpen, setIsDesktopDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(
@@ -284,6 +283,18 @@ const PageHeader = ({
     setMobileMenuOpen(false);
   }, [currentPathname]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktopDropdownOpen(false);
+      setExpandedMobileItem(null);
+      setMobileMenuOpen(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const toggleMobileSubitems = (itemText: string) => {
     setExpandedMobileItem((current) =>
       current === itemText ? null : itemText,
@@ -296,45 +307,10 @@ const PageHeader = ({
 
   const showOverlay = isDesktopDropdownOpen || mobileMenuOpen;
 
-  function getParentActive(
-    item:
-      | {
-          isList: boolean;
-          text: string;
-          overlayContent: (
-            | { title: string; content: string; href: string }
-            | {
-                title: string;
-                content: string;
-                newContent: string;
-                href: string;
-              }
-            | { title: string; href: string }
-          )[];
-        }
-      | {
-          text: string;
-          overlayContent: { title: string; content: string; href: string }[];
-        }
-      | {
-          text: string;
-          overlayContent: {
-            title: string;
-            isNewTitle: boolean;
-            content: string;
-            href: string;
-          }[];
-        }
-      | {
-          text: string;
-          hasSupport: boolean;
-          overlayContent: { title: string; content: string; href: string }[];
-        },
-  ) {
+  function getParentActive(item: { href: string }[]): boolean {
     return (
-      item.overlayContent?.some(
-        (subItem) =>
-          subItem.href?.replace(/\/$/, "").split("#")[0] === cleanPathname,
+      item.some(
+        (subItem) => normalizePathname(subItem.href) === cleanPathname,
       ) ?? false
     );
   }
@@ -365,7 +341,7 @@ const PageHeader = ({
           {/* Regular View */}
           <nav className="flex items-center max-lg:hidden">
             {header.items.map((item) => {
-              const isParentActive = getParentActive(item);
+              const isParentActive = getParentActive(item.overlayContent);
               return (
                 <Dropdown
                   key={item.text}
@@ -390,7 +366,7 @@ const PageHeader = ({
               <PhoneOutlined />
             </a>
             <button
-              className="h-full cursor-pointer border-blue-800 px-16 hover:bg-blue-100 focus:border-b-3 focus:bg-blue-100"
+              className="h-full cursor-pointer border-blue-800 px-16 hover:bg-blue-100 focus:border-b-[4px] focus:bg-blue-100"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Menü öffnen/schließen"
               aria-expanded={mobileMenuOpen}
@@ -418,8 +394,9 @@ const PageHeader = ({
             <div key={item.text} className="border-b-1 border-gray-200">
               <button
                 className={twMerge(
-                  "ds-label-01-bold flex w-full cursor-pointer items-center justify-between border-blue-800 p-16 text-left duration-150 hover:bg-blue-100 focus:border-l-3 focus:bg-blue-100",
-                  getParentActive(item) && "border-l-3 bg-blue-100",
+                  "ds-label-01-bold flex w-full cursor-pointer items-center justify-between border-blue-800 p-16 text-left duration-150 hover:bg-blue-100 focus:border-l-[4px] focus:bg-blue-100",
+                  getParentActive(item.overlayContent) &&
+                    "border-l-[4px] bg-blue-100",
                 )}
                 onClick={() => toggleMobileSubitems(item.text)}
                 aria-expanded={expandedMobileItem === item.text}
