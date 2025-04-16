@@ -239,7 +239,7 @@ const findActiveParentItemText = (
   pathname: string,
   items: typeof header.items,
 ): string | null => {
-  const cleanPathname = pathname.replace(/\/$/, "");
+  const cleanPathname = normalizePathname(pathname);
 
   for (const item of items) {
     if (item.overlayContent) {
