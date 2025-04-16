@@ -18,7 +18,6 @@ import {
 
 import { MenuOpen, MenuOutlined } from "@digitalservicebund/icons";
 import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
-import { twMerge } from "tailwind-merge";
 import Background from "~/components/Background";
 import Breadcrumbs from "~/components/Breadcrumbs";
 import Button from "~/components/Button";
@@ -45,6 +44,7 @@ import {
 import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants.server";
 import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
+import twMerge from "~/utils/tailwindMerge";
 import { normalizePathname } from "~/utils/utilFunctions.ts";
 import type { Route } from "./+types/root";
 
@@ -411,7 +411,7 @@ const PageHeader = ({
             id="mobile-menu"
             className={`absolute top-full right-0 left-0 z-40 rounded-b-md border-t-1 border-gray-200 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)] transition-all duration-300 ${
               mobileMenuOpen
-                ? "max-h-[80vh] overflow-y-auto"
+                ? "overflow-y-auto"
                 : "invisible max-h-0 overflow-hidden"
             }`}
             aria-hidden={!mobileMenuOpen}

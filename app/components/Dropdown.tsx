@@ -37,7 +37,7 @@ export default function Dropdown({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const isMobile = variant === "mobile";
 
-  const elementId = `dropdown-${label?.replace(/\s+/g, "-").toLowerCase() || "unnamed"}`;
+  const elementId = `dropdown-${label?.replace(/\s+/g, "-").toLowerCase()}`;
 
   return (
     <div
@@ -60,15 +60,9 @@ export default function Dropdown({
           !isMobile &&
             "ds-label-01-reg h-full border-b-[4px] border-transparent px-16 whitespace-nowrap",
           // Mobile-specific styles
-          isMobile && "ds-label-01-bold w-full justify-between p-16",
-          // Active styles for desktop
-          !isMobile &&
-            isActiveParent &&
-            "border-b-[4px] border-blue-800 bg-blue-100",
-          // Active styles for mobile
           isMobile &&
-            isActiveParent &&
-            "border-l-[4px] border-blue-800 bg-blue-100",
+            "ds-label-01-bold w-full justify-between border-l-[4px] border-transparent p-16",
+          isActiveParent && "border-blue-800 bg-blue-100",
           // Active selection
           isExpanded && "bg-blue-100",
         )}
