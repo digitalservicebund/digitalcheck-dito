@@ -24,7 +24,7 @@ export default function DropdownItem({
     <div
       className={twMerge(
         "ds-stack ds-stack-8 cursor-pointer border-l-3 border-l-transparent px-16 py-16 text-left hover:bg-blue-100 focus:border-3 lg:px-56 lg:py-24",
-        isActive && "border-blue-800",
+        isActive && "border-blue-800 bg-blue-100",
         className,
       )}
     >

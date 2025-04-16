@@ -23,6 +23,7 @@ import {
   MenuOutlined,
 } from "@digitalservicebund/icons";
 import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
+import { twMerge } from "tailwind-merge";
 import Background from "~/components/Background";
 import Breadcrumbs from "~/components/Breadcrumbs";
 import Button from "~/components/Button";
@@ -281,7 +282,6 @@ const PageHeader = ({
     );
     setExpandedMobileItem(activeParentText);
     setMobileMenuOpen(false);
-    console.log(activeParentText);
   }, [currentPathname]);
 
   const toggleMobileSubitems = (itemText: string) => {
@@ -295,6 +295,49 @@ const PageHeader = ({
   };
 
   const showOverlay = isDesktopDropdownOpen || mobileMenuOpen;
+
+  function getParentActive(
+    item:
+      | {
+          isList: boolean;
+          text: string;
+          overlayContent: (
+            | { title: string; content: string; href: string }
+            | {
+                title: string;
+                content: string;
+                newContent: string;
+                href: string;
+              }
+            | { title: string; href: string }
+          )[];
+        }
+      | {
+          text: string;
+          overlayContent: { title: string; content: string; href: string }[];
+        }
+      | {
+          text: string;
+          overlayContent: {
+            title: string;
+            isNewTitle: boolean;
+            content: string;
+            href: string;
+          }[];
+        }
+      | {
+          text: string;
+          hasSupport: boolean;
+          overlayContent: { title: string; content: string; href: string }[];
+        },
+  ) {
+    return (
+      item.overlayContent?.some(
+        (subItem) =>
+          subItem.href?.replace(/\/$/, "").split("#")[0] === cleanPathname,
+      ) ?? false
+    );
+  }
 
   return (
     <>
@@ -322,12 +365,7 @@ const PageHeader = ({
           {/* Regular View */}
           <nav className="flex items-center max-lg:hidden">
             {header.items.map((item) => {
-              const isParentActive =
-                item.overlayContent?.some(
-                  (subItem) =>
-                    subItem.href?.replace(/\/$/, "").split("#")[0] ===
-                    cleanPathname,
-                ) ?? false;
+              const isParentActive = getParentActive(item);
               return (
                 <Dropdown
                   key={item.text}
@@ -379,7 +417,10 @@ const PageHeader = ({
           {header.items.map((item) => (
             <div key={item.text} className="border-b-1 border-gray-200">
               <button
-                className="ds-label-01-bold flex w-full cursor-pointer items-center justify-between border-blue-800 p-16 text-left transition-colors duration-150 hover:bg-blue-100 focus:border-l-3 focus:bg-blue-100"
+                className={twMerge(
+                  "ds-label-01-bold flex w-full cursor-pointer items-center justify-between border-blue-800 p-16 text-left duration-150 hover:bg-blue-100 focus:border-l-3 focus:bg-blue-100",
+                  getParentActive(item) && "border-l-3 bg-blue-100",
+                )}
                 onClick={() => toggleMobileSubitems(item.text)}
                 aria-expanded={expandedMobileItem === item.text}
                 aria-controls={`mobile-subitems-${item.text}`}
