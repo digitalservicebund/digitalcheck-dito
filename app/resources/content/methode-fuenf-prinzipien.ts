@@ -12,7 +12,7 @@ export const methodsFivePrinciples = {
       label: "Prinzip",
       title: "Digitale Angebote für alle",
       description:
-        "Bürgerinnen und Bürger, Mitarbeitende in Unternehmen und der Verwaltung sind an digitale Kommunikation gewöhnt und bevorzugen diese – sofern sie gut umgesetzt ist und ihren Bedürfnissen entspricht. Normadressaten können sie schnell und einfach nutzen, und auch die Verwaltung kann die Daten schneller bearbeiten, prüfen und dokumentieren. Digitale Kommunikation sollte dabei immer inklusiv sein und ggf. benötigt es analoge Alternativen.",
+        "Bürgerinnen und Bürger, Mitarbeitende in Unternehmen und der Verwaltung sind an digitale Kommunikation gewöhnt und bevorzugen diese – sofern sie gut umgesetzt ist und ihren Bedürfnissen entspricht. Normadressat:innen können sie schnell und einfach nutzen, und auch die Verwaltung kann die Daten schneller bearbeiten, prüfen und dokumentieren. Digitale Kommunikation sollte dabei immer inklusiv sein und ggf. benötigt es analoge Alternativen.",
       implementation: [
         {
           action: "Ermöglichen Sie digitale Kommunikation",
@@ -41,7 +41,7 @@ export const methodsFivePrinciples = {
             "Digitale Kommunikation führt zu Daten, die direkt digital weiterverarbeitet werden können. Das spart Zeit, weil Informationen nicht eingescannt oder abgetippt werden müssen. Digitale Oberflächen, die zusätzliche Hilfestellungen und Fehlerkontrollen enthalten, erhöhen die Qualität der Daten.",
           questions: [
             "Wer übermittelt im Zuge der Regelung Informationen wie an wen? Beachtet die Regelung auch Kommunikation zwischen Behörden oder Unternehmen?",
-            "Können verwaltungsinterne Medienbrüche ausgeräumt werden? Welche Technologien und Verfahren nutzt die umsetzende Behörde?",
+            "Können verwaltungsinterne Medienbrüche ausgeräumt werden? Welche Technologien und Verfahren nutzt die umsetzenden Behörden?",
             "Kann die Datenqualität durch automatische Kontrollen erhöht werden?",
           ],
         },
@@ -63,7 +63,7 @@ export const methodsFivePrinciples = {
       label: "Prinzip",
       title: "Rechtliche Konsistenz ermöglicht Datenwiederverwendung",
       description:
-        "Daten wiederzuverwenden vermeidet Fehler und spart Zeit und Kosten auf Seiten der Normadressat:innen und umsetzenden Behörden. Die Grundlage dafür sind harmonisierte Rechtsbegriffe, ein datenschutz-konformer Austausch, sowie technische Standards.",
+        "Daten wiederzuverwenden vermeidet Fehler und spart Zeit und Kosten auf Seiten der Normadressat:innen und umsetzenden Behörden. Die Grundlage dafür sind harmonisierte Rechtsbegriffe, ein datenschutz-konformer Austausch sowie technische Standards.",
       implementation: [
         {
           action: "Nutzen Sie harmonisierte Rechtsbegriffe",
@@ -130,7 +130,7 @@ export const methodsFivePrinciples = {
       label: "Prinzip",
       title: "Eindeutige Regelungen und Automatisierung",
       description:
-        "Logische und verständliche Regelungen und transparente Verfahren erleichtern den Zugang zum Recht und stärken das Vertrauen in den Staat. Sie bilden die Grundlage für (teil-)automatisierte Prozesse. Einmal abgestimmt und aufgesetzt, sparen einheitliche Rechtsbegriffe, klare Entscheidungsstrukturen und die dadurch ermöglichte (Teil-)Automatisierung Zeit und Geld auf Seiten der Normadressaten und der Verwaltung. Diese Ressourcen können genutzt werden, um kritischere Einzelfälle zu bearbeiten, oder Normadressaten zu beraten.",
+        "Logische und verständliche Regelungen und transparente Verfahren erleichtern den Zugang zum Recht und stärken das Vertrauen in den Staat. Sie bilden die Grundlage für (teil-)automatisierte Prozesse. Einmal abgestimmt und aufgesetzt, sparen einheitliche Rechtsbegriffe, klare Entscheidungsstrukturen und die dadurch ermöglichte (Teil-)Automatisierung Zeit und Geld auf Seiten der Normadressaten und der Verwaltung. Diese Ressourcen können genutzt werden, um kritischere Einzelfälle zu bearbeiten oder Normadressat:innen zu beraten.",
       implementation: [
         {
           action: "Schreiben Sie einfach, eindeutig und konsistent",
@@ -187,8 +187,8 @@ export const methodsFivePrinciples = {
           description:
             "Für den Datenschutz sind nur personenbezogene Daten relevant. Um sie zu erheben und zu verarbeiten, muss eine geeignete Rechtsgrundlage existieren. Wenn Ihre Regelung datensparsam ist, also möglichst wenig Daten erhebt, wird sie den Anforderungen des Datenschutzes gerecht und der Erfüllungsaufwand verringert.",
           questions: [
-            "Werden personenbezogene Daten erhoben bzw. ausgetauscht? Sind diese besonders schützenswert, etwa. Daten zur ethnischen Herkunft oder Gesundheitsdaten?",
-            "Werden nur absolut notwendige Daten erhoben bzw. ausgetauscht?",
+            "Werden personenbezogene Daten erhoben bzw. ausgetauscht? Sind diese besonders schützenswert, etwa Daten zur ethnischen Herkunft oder Gesundheitsdaten?",
+            "Werden nur notwendige Daten erhoben bzw. ausgetauscht?",
             "Haben Sie die rechtliche Basis geschaffen, um Daten zu erheben, bzw. auszutauschen? Ist der Zweck der Datenerhebung dargelegt?",
             "Werden veraltete Datenschutzbedürfnisse identifiziert und abgeschafft?",
             "Genügt die Regelung den Anforderungen an den Datenschutz in allen beteiligten Ländern und Institutionen, ggf. auch auf EU-Ebene?",
