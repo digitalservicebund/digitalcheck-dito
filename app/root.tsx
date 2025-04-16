@@ -283,6 +283,7 @@ const PageHeader = ({
     setMobileMenuOpen(false);
   }, [currentPathname]);
 
+  // Close dropdown menus on viewport change
   useEffect(() => {
     const handleResize = () => {
       setIsDesktopDropdownOpen(false);
@@ -328,127 +329,133 @@ const PageHeader = ({
         />
       )}
       <header className="relative">
-        <div className="relative z-30 flex min-h-[72px] items-stretch justify-between bg-white px-16">
-          <div className="flex items-center space-x-8">
-            <Link to={ROUTE_LANDING.url}>
-              <img src="/logo/bund-logo.png" alt="Logo des Bundes" width={54} />
-            </Link>
-            <div className="ds-stack-0 ml-24 flex flex-col -space-y-4 max-lg:hidden">
-              <p className="ds-stack-0 ds-label-01-bold">{header.title}</p>
-              <p className="">{header.subTitle}</p>
+        <div className="relative">
+          <div className="relative z-30 flex min-h-[72px] items-stretch justify-between bg-white px-16">
+            <div className="flex items-center space-x-8">
+              <Link to={ROUTE_LANDING.url}>
+                <img
+                  src="/logo/bund-logo.png"
+                  alt="Logo des Bundes"
+                  width={54}
+                />
+              </Link>
+              <div className="ds-stack-0 ml-24 flex flex-col -space-y-4 max-lg:hidden">
+                <p className="ds-stack-0 ds-label-01-bold">{header.title}</p>
+                <p className="">{header.subTitle}</p>
+              </div>
+            </div>
+            {/* Regular View */}
+            <nav className="flex items-center max-lg:hidden">
+              {header.items.map((item) => {
+                const isParentActive = getParentActive(item.overlayContent);
+                return (
+                  <Dropdown
+                    key={item.text}
+                    label={item.text}
+                    hasSupport={item.hasSupport}
+                    data={item.overlayContent}
+                    isList={item.isList}
+                    onOpenChange={(isOpen) => {
+                      if (isOpen && !isDesktopDropdownOpen)
+                        setIsDesktopDropdownOpen(true);
+                      if (!isOpen && isDesktopDropdownOpen)
+                        setIsDesktopDropdownOpen(false);
+                    }}
+                    isActiveParent={isParentActive}
+                  />
+                );
+              })}
+            </nav>
+            {/* Mobile View Trigger Buttons */}
+            <div className="flex items-center space-x-16 lg:hidden">
+              <a href={`tel:${header.contact.number}`}>
+                <PhoneOutlined />
+              </a>
+              <button
+                className="h-full cursor-pointer border-blue-800 px-16 hover:bg-blue-100 focus:border-b-[4px] focus:bg-blue-100"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label="Menü öffnen/schließen"
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-menu"
+                tabIndex={0}
+              >
+                {mobileMenuOpen ? <MenuOpen /> : <MenuOutlined />}
+              </button>
             </div>
           </div>
-          {/* Regular View */}
-          <nav className="flex items-center max-lg:hidden">
-            {header.items.map((item) => {
-              const isParentActive = getParentActive(item.overlayContent);
-              return (
-                <Dropdown
-                  key={item.text}
-                  label={item.text}
-                  hasSupport={item.hasSupport}
-                  data={item.overlayContent}
-                  isList={item.isList}
-                  onOpenChange={(isOpen) => {
-                    if (isOpen && !isDesktopDropdownOpen)
-                      setIsDesktopDropdownOpen(true);
-                    if (!isOpen && isDesktopDropdownOpen)
-                      setIsDesktopDropdownOpen(false);
-                  }}
-                  isActiveParent={isParentActive}
-                />
-              );
-            })}
-          </nav>
-          {/* Mobile View Trigger Buttons */}
-          <div className="flex items-center space-x-16 lg:hidden">
-            <a href={`tel:${header.contact.number}`}>
-              <PhoneOutlined />
-            </a>
-            <button
-              className="h-full cursor-pointer border-blue-800 px-16 hover:bg-blue-100 focus:border-b-[4px] focus:bg-blue-100"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Menü öffnen/schließen"
-              aria-expanded={mobileMenuOpen}
-              aria-controls="mobile-menu"
-              tabIndex={0}
-            >
-              {mobileMenuOpen ? <MenuOpen /> : <MenuOutlined />}
-            </button>
-          </div>
-        </div>
-        {/* Mobile View */}
-        {/*
+          {/* Mobile View */}
+          {/*
         TODO: position above breadcrumbs
         */}
-        <div
-          id="mobile-menu"
-          className={`absolute top-full right-0 left-0 z-40 border-t-1 border-gray-200 bg-white transition-all duration-300 ${
-            mobileMenuOpen
-              ? "max-h-[80vh] overflow-y-auto"
-              : "invisible max-h-0 overflow-hidden"
-          }`}
-          aria-hidden={!mobileMenuOpen}
-        >
-          {header.items.map((item) => (
-            <div key={item.text} className="border-b-1 border-gray-200">
-              <button
-                className={twMerge(
-                  "ds-label-01-bold flex w-full cursor-pointer items-center justify-between border-blue-800 p-16 text-left duration-150 hover:bg-blue-100 focus:border-l-[4px] focus:bg-blue-100",
-                  getParentActive(item.overlayContent) &&
-                    "border-l-[4px] bg-blue-100",
-                )}
-                onClick={() => toggleMobileSubitems(item.text)}
-                aria-expanded={expandedMobileItem === item.text}
-                aria-controls={`mobile-subitems-${item.text}`}
-              >
-                {item.text}
-                {expandedMobileItem === item.text ? (
-                  <ExpandLessOutlined />
-                ) : (
-                  <ExpandMoreOutlined />
-                )}
-              </button>
-
-              {expandedMobileItem === item.text && (
-                <div
-                  id={`mobile-subitems-${item.text}`}
-                  role="region"
-                  aria-label={item.text}
+          <div
+            id="mobile-menu"
+            className={`absolute top-full right-0 left-0 z-40 border-t-1 border-gray-200 bg-white transition-all duration-300 ${
+              mobileMenuOpen
+                ? "max-h-[80vh] overflow-y-auto"
+                : "invisible max-h-0 overflow-hidden"
+            }`}
+            aria-hidden={!mobileMenuOpen}
+          >
+            {header.items.map((item) => (
+              <div key={item.text} className="border-b-1 border-gray-200">
+                <button
+                  className={twMerge(
+                    "ds-label-01-bold flex w-full cursor-pointer items-center justify-between border-blue-800 p-16 text-left duration-150 hover:bg-blue-100 focus:border-l-[4px] focus:bg-blue-100",
+                    getParentActive(item.overlayContent) &&
+                      "border-l-[4px] bg-blue-100",
+                  )}
+                  onClick={() => toggleMobileSubitems(item.text)}
+                  aria-expanded={expandedMobileItem === item.text}
+                  aria-controls={`mobile-subitems-${item.text}`}
                 >
-                  {/*
+                  {item.text}
+                  {expandedMobileItem === item.text ? (
+                    <ExpandLessOutlined />
+                  ) : (
+                    <ExpandMoreOutlined />
+                  )}
+                </button>
+
+                {expandedMobileItem === item.text && (
+                  <div
+                    id={`mobile-subitems-${item.text}`}
+                    role="region"
+                    aria-label={item.text}
+                  >
+                    {/*
                   TODO: consistent hasSupport
 */}
-                  {item.hasSupport && (
-                    <div className="px-16">
-                      <div className="ds-label-02-reg px-16 pt-16 pb-24 text-gray-900">
-                        {header.contact.msgMobile}
-                        <a
-                          href={`tel:${header.contact.number}`}
-                          className="plausible-event-name=Phone+Click plausible-event-position=header ds-link-02-reg ml-8"
-                        >
-                          {header.contact.number}
-                        </a>
+                    {item.hasSupport && (
+                      <div className="px-16">
+                        <div className="ds-label-02-reg px-16 pt-16 pb-24 text-gray-900">
+                          {header.contact.msgMobile}
+                          <a
+                            href={`tel:${header.contact.number}`}
+                            className="plausible-event-name=Phone+Click plausible-event-position=header ds-link-02-reg ml-8"
+                          >
+                            {header.contact.number}
+                          </a>
+                        </div>
+                        <div className="border-b-1 border-gray-900" />
                       </div>
-                      <div className="border-b-1 border-gray-900" />
-                    </div>
-                  )}
+                    )}
 
-                  <div
-                    className="px-16"
-                    role="menu"
-                    aria-label={`${item.text} Unterpunkte`}
-                  >
-                    <DropdownContentList
-                      data={item.overlayContent}
-                      isList={item.isList}
-                      onItemClick={handleMobileItemClick}
-                    />
+                    <div
+                      className="px-16"
+                      role="menu"
+                      aria-label={`${item.text} Unterpunkte`}
+                    >
+                      <DropdownContentList
+                        data={item.overlayContent}
+                        isList={item.isList}
+                        onItemClick={handleMobileItemClick}
+                      />
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
-          ))}
+                )}
+              </div>
+            ))}
+          </div>
         </div>
         {includeBreadcrumbs && (
           <Background backgroundColor="blue">
