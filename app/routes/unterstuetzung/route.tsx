@@ -64,14 +64,14 @@ export default function Index() {
     if (location.hash === "#angebote" && angeboteRef.current) {
       const timerId = setTimeout(() => {
         if (angeboteRef.current) {
-          angeboteRef.current.scrollIntoView({ behavior: "smooth" });
+          angeboteRef.current.scrollIntoView({ behavior: "auto" });
         }
       }, 0);
       return () => clearTimeout(timerId);
     } else if (location.hash === "#hilfe" && hilfeRef.current) {
       const timerId = setTimeout(() => {
         if (hilfeRef.current) {
-          hilfeRef.current.scrollIntoView({ behavior: "smooth" });
+          hilfeRef.current.scrollIntoView({ behavior: "auto" });
         }
       }, 0);
       return () => clearTimeout(timerId);

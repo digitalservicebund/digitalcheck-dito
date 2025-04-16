@@ -3,12 +3,10 @@ import {
   ExpandMoreOutlined,
 } from "@digitalservicebund/icons";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router";
-import DropdownItem, {
-  type DropdownItemProps,
-} from "~/components/DrodownItem.tsx";
+import { type DropdownItemProps } from "~/components/DrodownItem.tsx";
 import { header } from "~/resources/content/components/header.ts";
 import twMerge from "~/utils/tailwindMerge";
+import DropdownContentList from "./DropdownContentList";
 
 export type DropdownProps = {
   label?: string;
@@ -17,9 +15,9 @@ export type DropdownProps = {
   hasSupport?: boolean;
   isList?: boolean;
   onOpenChange?: (isOpen: boolean) => void;
+  isActiveParent?: boolean;
 };
 
-// TODO: check a11y
 export default function Dropdown({
   className,
   label,
@@ -27,6 +25,7 @@ export default function Dropdown({
   hasSupport = false,
   onOpenChange,
   isList = false,
+  isActiveParent = false,
 }: Readonly<DropdownProps>) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -34,8 +33,9 @@ export default function Dropdown({
     setIsOpen(!isOpen);
     if (onOpenChange) onOpenChange(!isOpen);
   };
-
-  const handleSelectOption = () => {
+  console.log(label);
+  console.log(isActiveParent);
+  const handleItemClick = () => {
     setIsOpen(false);
     if (onOpenChange) onOpenChange(false);
   };
@@ -63,70 +63,56 @@ export default function Dropdown({
   const listboxId = `dropdown-listbox-${label}`;
   const buttonId = `dropdown-button-${label}`;
 
-  return (
-    <>
-      <div
-        className={twMerge("relative h-full max-lg:hidden", className)}
-        ref={dropdownRef}
-      >
-        <button
-          type="button"
-          onClick={toggleDropdown}
-          className="ds-label-01-reg z-20 inline-flex h-full cursor-pointer items-center border-blue-800 px-16 whitespace-nowrap hover:bg-blue-100 focus:border-b-3 focus:bg-blue-100"
-          id={buttonId}
-          aria-haspopup="listbox"
-          aria-expanded={isOpen}
-          aria-controls={listboxId}
-        >
-          {label} {isOpen ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
-        </button>
+  const activeClasses = "border-b-3 bg-blue-100";
 
-        {isOpen && (
-          <>
-            <div
-              className="absolute right-0 z-30 w-[512px] rounded-b-md border-1 border-gray-600 bg-white pt-8 pb-16 drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]"
-              role="listbox"
-              id={listboxId}
-              aria-labelledby={buttonId}
-            >
-              {hasSupport && (
-                <div className="px-56">
-                  <div className="ds-label-02-reg pt-16 pb-24 text-left text-gray-900">
-                    {header.contact.msg}
-                    <a
-                      href={`tel:${header.contact.number}`}
-                      className="plausible-event-name=Phone+Click plausible-event-position=header ds-link-02-reg ml-8"
-                    >
-                      {header.contact.number}
-                    </a>
-                  </div>
-                  <div className="border-b-1 border-gray-900"></div>
-                </div>
-              )}
-              {data.map((option, index) => (
-                <Link
-                  key={option.title}
-                  to={option.href!}
-                  role="option"
-                  onClick={handleSelectOption}
-                  aria-selected={false}
-                  aria-label={option.title}
-                >
-                  <DropdownItem
-                    number={isList ? index + 1 : 0}
-                    newContent={option.newContent}
-                    key={option.title}
-                    title={option.title}
-                    content={option.content}
-                    isNewTitle={option.isNewTitle}
-                  />
-                </Link>
-              ))}
-            </div>
-          </>
+  return (
+    <div
+      className={twMerge("relative h-full max-lg:hidden", className)}
+      ref={dropdownRef}
+    >
+      <button
+        type="button"
+        onClick={toggleDropdown}
+        className={twMerge(
+          "ds-label-01-reg z-20 inline-flex h-full cursor-pointer items-center border-blue-800 px-16 whitespace-nowrap hover:bg-blue-100 focus:border-b-3 focus:bg-blue-100",
+          isActiveParent && activeClasses,
         )}
-      </div>
-      <div className="lg:hidden"></div>
-    </>
+        id={buttonId}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        aria-controls={listboxId}
+      >
+        {label} {isOpen ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
+      </button>
+
+      {isOpen && (
+        <div
+          className="absolute right-0 z-30 w-[512px] rounded-b-md border-1 border-gray-600 bg-white pt-8 pb-16 drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]"
+          role="listbox"
+          id={listboxId}
+          aria-labelledby={buttonId}
+        >
+          {hasSupport && (
+            <div className="px-56">
+              <div className="ds-label-02-reg pt-16 pb-24 text-left text-gray-900">
+                {header.contact.msg}
+                <a
+                  href={`tel:${header.contact.number}`}
+                  className="plausible-event-name=Phone+Click plausible-event-position=header ds-link-02-reg ml-8"
+                >
+                  {header.contact.number}
+                </a>
+              </div>
+              <div className="border-b-1 border-gray-900"></div>
+            </div>
+          )}
+          <DropdownContentList
+            data={data}
+            isList={isList}
+            onItemClick={handleItemClick}
+          />
+        </div>
+      )}
+    </div>
   );
 }

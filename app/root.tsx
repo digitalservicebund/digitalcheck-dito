@@ -19,6 +19,7 @@ import {
 import {
   ExpandLessOutlined,
   ExpandMoreOutlined,
+  MenuOpen,
   MenuOutlined,
 } from "@digitalservicebund/icons";
 import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
@@ -27,6 +28,7 @@ import Breadcrumbs from "~/components/Breadcrumbs";
 import Button from "~/components/Button";
 import Container from "~/components/Container";
 import Dropdown from "~/components/Dropdown.tsx";
+import DropdownContentList from "~/components/DropdownContentList.tsx";
 import Footer from "~/components/Footer";
 import Heading from "~/components/Heading";
 import RichText from "~/components/RichText";
@@ -49,7 +51,6 @@ import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants.server";
 import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
 import type { Route } from "./+types/root";
-import DropdownItem from "./components/DrodownItem";
 
 export function loader({ request }: Route.LoaderArgs) {
   const featureFlags = getFeatureFlags();
@@ -238,85 +239,147 @@ const footerLinks = [
   { url: ROUTE_SITEMAP.url, text: "Sitemap" },
 ];
 
+const findActiveParentItemText = (
+  pathname: string,
+  items: typeof header.items,
+): string | null => {
+  const cleanPathname = pathname.replace(/\/$/, "");
+
+  for (const item of items) {
+    if (item.overlayContent) {
+      for (const subItem of item.overlayContent) {
+        // TODO: extract url normalize
+        const cleanHref = subItem.href?.replace(/\/$/, "").split("#")[0];
+        if (cleanHref && cleanHref === cleanPathname) {
+          return item.text;
+        }
+      }
+    }
+  }
+  return null;
+};
+
 const PageHeader = ({
   includeBreadcrumbs = true,
 }: {
   includeBreadcrumbs?: boolean;
 }) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const location = useLocation();
+  const currentPathname = location.pathname;
+  const cleanPathname = currentPathname.replace(/\/$/, "");
+
+  const [isDesktopDropdownOpen, setIsDesktopDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(
-    null,
+    () => findActiveParentItemText(currentPathname, header.items),
   );
 
+  useEffect(() => {
+    const activeParentText = findActiveParentItemText(
+      currentPathname,
+      header.items,
+    );
+    setExpandedMobileItem(activeParentText);
+    setMobileMenuOpen(false);
+    console.log(activeParentText);
+  }, [currentPathname]);
+
   const toggleMobileSubitems = (itemText: string) => {
-    if (expandedMobileItem === itemText) {
-      setExpandedMobileItem(null);
-    } else {
-      setExpandedMobileItem(itemText);
-    }
+    setExpandedMobileItem((current) =>
+      current === itemText ? null : itemText,
+    );
   };
+
+  const handleMobileItemClick = () => {
+    setMobileMenuOpen(false);
+  };
+
+  const showOverlay = isDesktopDropdownOpen || mobileMenuOpen;
 
   return (
     <>
-      {(dropdownOpen || mobileMenuOpen) && (
+      {showOverlay && (
         <div
           className="fixed inset-0 z-20 bg-[#282828] opacity-63"
           onClick={() => {
-            setDropdownOpen(false);
+            setIsDesktopDropdownOpen(false);
             setMobileMenuOpen(false);
           }}
           aria-hidden="true"
         />
       )}
-      <header>
+      <header className="relative">
         <div className="relative z-30 flex min-h-[72px] items-stretch justify-between bg-white px-16">
           <div className="flex items-center space-x-8">
             <Link to={ROUTE_LANDING.url}>
               <img src="/logo/bund-logo.png" alt="Logo des Bundes" width={54} />
             </Link>
-            <RichText
-              className="ds-stack-0 ml-24 max-lg:hidden"
-              markdown={header.title}
-            />
+            <div className="ds-stack-0 ml-24 flex flex-col -space-y-4 max-lg:hidden">
+              <p className="ds-stack-0 ds-label-01-bold">{header.title}</p>
+              <p className="">{header.subTitle}</p>
+            </div>
           </div>
+          {/* Regular View */}
           <nav className="flex items-center max-lg:hidden">
-            {header.items.map((item) => (
-              <Dropdown
-                key={item.text}
-                label={item.text}
-                hasSupport={item.hasSupport}
-                data={item.overlayContent}
-                isList={item.isList}
-                onOpenChange={(isOpen) => {
-                  setDropdownOpen(isOpen);
-                }}
-              />
-            ))}
+            {header.items.map((item) => {
+              const isParentActive =
+                item.overlayContent?.some(
+                  (subItem) =>
+                    subItem.href?.replace(/\/$/, "").split("#")[0] ===
+                    cleanPathname,
+                ) ?? false;
+              return (
+                <Dropdown
+                  key={item.text}
+                  label={item.text}
+                  hasSupport={item.hasSupport}
+                  data={item.overlayContent}
+                  isList={item.isList}
+                  onOpenChange={(isOpen) => {
+                    if (isOpen && !isDesktopDropdownOpen)
+                      setIsDesktopDropdownOpen(true);
+                    if (!isOpen && isDesktopDropdownOpen)
+                      setIsDesktopDropdownOpen(false);
+                  }}
+                  isActiveParent={isParentActive}
+                />
+              );
+            })}
           </nav>
+          {/* Mobile View Trigger Buttons */}
           <div className="flex items-center space-x-16 lg:hidden">
-            <PhoneOutlined />
+            <a href={`tel:${header.contact.number}`}>
+              <PhoneOutlined />
+            </a>
             <button
-              className="cursor-pointer p-8"
+              className="h-full cursor-pointer border-blue-800 px-16 hover:bg-blue-100 focus:border-b-3 focus:bg-blue-100"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Menü öffnen/schließen"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
               tabIndex={0}
             >
-              <MenuOutlined className="text-2xl" />
+              {mobileMenuOpen ? <MenuOpen /> : <MenuOutlined />}
             </button>
           </div>
         </div>
+        {/* Mobile View */}
+        {/*
+        TODO: position above breadcrumbs
+        */}
         <div
           id="mobile-menu"
-          className={`relative z-30 border-t-1 border-gray-200 bg-white transition-all duration-300 lg:hidden ${
+          className={`absolute top-full right-0 left-0 z-40 border-t-1 border-gray-200 bg-white transition-all duration-300 ${
             mobileMenuOpen
-              ? "max-h-screen opacity-100"
-              : "max-h-0 overflow-hidden opacity-0"
+              ? "max-h-[80vh] overflow-y-auto"
+              : "invisible max-h-0 overflow-hidden"
           }`}
+          aria-hidden={!mobileMenuOpen}
         >
           {header.items.map((item) => (
             <div key={item.text} className="border-b-1 border-gray-200">
               <button
-                className="ds-label-01-bold flex w-full cursor-pointer items-center justify-between p-16"
+                className="ds-label-01-bold flex w-full cursor-pointer items-center justify-between border-blue-800 p-16 text-left transition-colors duration-150 hover:bg-blue-100 focus:border-l-3 focus:bg-blue-100"
                 onClick={() => toggleMobileSubitems(item.text)}
                 aria-expanded={expandedMobileItem === item.text}
                 aria-controls={`mobile-subitems-${item.text}`}
@@ -330,11 +393,18 @@ const PageHeader = ({
               </button>
 
               {expandedMobileItem === item.text && (
-                <div id={`mobile-subitems-${item.text}`} className="bg-gray-50">
+                <div
+                  id={`mobile-subitems-${item.text}`}
+                  role="region"
+                  aria-label={item.text}
+                >
+                  {/*
+                  TODO: consistent hasSupport
+*/}
                   {item.hasSupport && (
-                    <div className="border-b-1 border-gray-200 px-16 py-12">
-                      <div className="ds-label-02-reg text-gray-900">
-                        {header.contact.msg}
+                    <div className="px-16">
+                      <div className="ds-label-02-reg px-16 pt-16 pb-24 text-gray-900">
+                        {header.contact.msgMobile}
                         <a
                           href={`tel:${header.contact.number}`}
                           className="plausible-event-name=Phone+Click plausible-event-position=header ds-link-02-reg ml-8"
@@ -342,26 +412,21 @@ const PageHeader = ({
                           {header.contact.number}
                         </a>
                       </div>
+                      <div className="border-b-1 border-gray-900" />
                     </div>
                   )}
 
-                  {item.overlayContent.map((option, index) => (
-                    <Link
-                      key={option.title}
-                      to={option.href}
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        setExpandedMobileItem(null);
-                      }}
-                    >
-                      <DropdownItem
-                        number={item.isList ? index + 1 : 0}
-                        title={option.title}
-                        isNewTitle={option.isNewTitle}
-                        className="border-b-1 border-gray-100 pl-24"
-                      />
-                    </Link>
-                  ))}
+                  <div
+                    className="px-16"
+                    role="menu"
+                    aria-label={`${item.text} Unterpunkte`}
+                  >
+                    <DropdownContentList
+                      data={item.overlayContent}
+                      isList={item.isList}
+                      onItemClick={handleMobileItemClick}
+                    />
+                  </div>
                 </div>
               )}
             </div>

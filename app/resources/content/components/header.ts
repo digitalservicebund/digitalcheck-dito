@@ -3,19 +3,17 @@ import {
   ROUTE_FIRST_PRINCIPLE,
   ROUTE_INTEROPERABILITY,
   ROUTE_METHODS,
-  ROUTE_METHODS_FIVE_PRINCIPLES,
   ROUTE_PRECHECK,
   ROUTE_SUPPORT,
   ROUTE_VISUALISATIONS,
 } from "~/resources/staticRoutes.ts";
-import { dedent } from "~/utils/dedentMultilineStrings.ts";
 
 export const header = {
-  title: dedent`**Digitalcheck** 
-  
-  des Bundes`,
+  title: "Digitalcheck",
+  subTitle: "des Bundes",
   contact: {
     msg: "Kontaktieren Sie den Support:",
+    msgMobile: "Support:",
     number: "0151/40 76 78 39",
   },
   items: [
@@ -62,7 +60,7 @@ export const header = {
     {
       text: "Grundlagen",
       overlayContent: [
-        {
+        /*        {
           title: "Prinzipien für digitaltaugliche Gesetzgebung",
           content:
             "Auf diesen Prinzipien basieren die Instrumente des Digitalcheck.",
@@ -73,7 +71,7 @@ export const header = {
           content:
             "Lernen Sie die Methoden kennen, mit denen Sie Digitaltauglichkeit sicherstellen können.",
           href: ROUTE_METHODS.url,
-        },
+        },*/
         {
           title: "EU Interoperabilität",
           isNewTitle: true,

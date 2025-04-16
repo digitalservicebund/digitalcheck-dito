@@ -126,7 +126,7 @@ export const ROUTE_PRINCIPLES: Route = {
 // TODO: replace ROUTE_PRINCIPLES with this one
 export const ROUTE_FIRST_PRINCIPLE: Route = {
   url: `${ROUTE_EXAMPLES.url}/prinzipien/digitale-kommunikation-sicherstellen`,
-  title: "Ptinzip 1",
+  title: "Prinzip 1 in Regelungstexten",
   parent: ROUTE_EXAMPLES.url,
 };
 

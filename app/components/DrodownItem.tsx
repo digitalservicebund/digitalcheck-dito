@@ -8,6 +8,7 @@ export type DropdownItemProps = {
   className?: string;
   href?: string;
   isNewTitle?: boolean;
+  isActive?: boolean;
 };
 
 export default function DropdownItem({
@@ -17,11 +18,13 @@ export default function DropdownItem({
   newContent,
   isNewTitle,
   className,
+  isActive,
 }: DropdownItemProps) {
   return (
     <div
       className={twMerge(
-        "ds-stack ds-stack-8 cursor-pointer border-blue-800 px-56 py-24 text-left hover:bg-blue-100 focus:border-3",
+        "ds-stack ds-stack-8 cursor-pointer border-l-3 border-l-transparent px-16 py-16 text-left hover:bg-blue-100 focus:border-3 lg:px-56 lg:py-24",
+        isActive && "border-blue-800",
         className,
       )}
     >
@@ -31,12 +34,13 @@ export default function DropdownItem({
             NEU
           </span>
         )}
-        {number !== 0 && (
-          <span className="absolute left-[36px]">{number}.</span>
-        )}
+        {/*
+        // TODO: render list as html
+*/}
+        {number !== 0 && <span className="mr-4">{number}. </span>}
         {title}
       </div>
-      {content && <span>{content}</span>}
+      {content && <span className="hidden lg:inline">{content}</span>}
       {newContent && (
         <div>
           <span className="ds-label-02-reg mr-8 rounded-md bg-blue-300 px-8 py-4 text-[#004B76]">
