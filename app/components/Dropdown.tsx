@@ -55,13 +55,14 @@ export default function Dropdown({
         onClick={onToggle}
         className={twMerge(
           // Base styles for button
-          "z-20 flex cursor-pointer items-center border-blue-800 hover:bg-blue-100",
+          "flex cursor-pointer items-center hover:bg-blue-100",
           // Desktop-specific styles
           !isMobile &&
             "ds-label-01-reg h-full border-b-[4px] border-transparent px-16 whitespace-nowrap",
           // Mobile-specific styles
           isMobile &&
             "ds-label-01-bold w-full justify-between border-l-[4px] border-transparent p-16",
+          // Active navigation item
           isActiveParent && "border-blue-800 bg-blue-100",
           // Active selection
           isExpanded && "bg-blue-100",
