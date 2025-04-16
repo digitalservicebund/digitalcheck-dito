@@ -268,10 +268,6 @@ const PageHeader = ({
 
   // Reset states on navigation or viewport changes
   useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [currentPathname]);
-
-  useEffect(() => {
     const handleResize = () => {
       setActiveDropdownId(null);
       setMobileMenuOpen(false);
@@ -282,29 +278,12 @@ const PageHeader = ({
     };
   }, []);
 
-  useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        headerRef.current &&
-        !headerRef.current.contains(event.target as Node) &&
-        activeDropdownId !== null
-      ) {
-        setActiveDropdownId(null);
-      }
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    };
-  }, [activeDropdownId, mobileMenuOpen]);
-
   // Toggle dropdown state
   const toggleDropdown = (itemText: string) => {
     setActiveDropdownId((current) => (current === itemText ? null : itemText));
   };
 
-  // Close everything (for overlay click)
+  // Close all open dropdowns
   const closeAll = () => {
     setActiveDropdownId(null);
     setMobileMenuOpen(false);
@@ -329,13 +308,11 @@ const PageHeader = ({
 
   const showOverlay = activeDropdownId !== null || mobileMenuOpen;
 
-  function getParentActive(item: { href: string }[]): boolean {
-    return (
-      item.some(
-        (subItem) => normalizePathname(subItem.href) === cleanPathname,
-      ) ?? false
+  const getParentActive = (items: { href: string }[]) => {
+    return items.some(
+      (subItem) => normalizePathname(subItem.href) === cleanPathname,
     );
-  }
+  };
   // TODO: a11y
   return (
     <>
@@ -409,17 +386,13 @@ const PageHeader = ({
           {/* Mobile Navigation */}
           <div
             id="mobile-menu"
-            className={`absolute top-full right-0 left-0 z-40 rounded-b-md border-t-1 border-gray-600 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)] transition-all duration-300 ${
-              mobileMenuOpen
-                ? "overflow-y-auto"
-                : "invisible max-h-0 overflow-hidden"
+            className={`absolute right-0 left-0 z-40 rounded-b-md border-t-1 border-gray-600 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)] transition-all duration-300 ${
+              mobileMenuOpen ? "overflow-y-auto" : "invisible"
             }`}
             aria-hidden={!mobileMenuOpen}
           >
-            {header?.items?.map((item) => {
-              const isParentActive = getParentActive(
-                item?.overlayContent ?? [],
-              );
+            {header.items.map((item) => {
+              const isParentActive = getParentActive(item.overlayContent);
               return (
                 <Dropdown
                   key={item.text}
