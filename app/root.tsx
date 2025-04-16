@@ -23,7 +23,6 @@ import {
   MenuOutlined,
 } from "@digitalservicebund/icons";
 import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
-import { twMerge } from "tailwind-merge";
 import Background from "~/components/Background";
 import Breadcrumbs from "~/components/Breadcrumbs";
 import Button from "~/components/Button";
@@ -52,6 +51,7 @@ import {
 import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants.server";
 import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
+import twMerge from "~/utils/tailwindMerge";
 import { normalizePathname } from "~/utils/utilFunctions.ts";
 import type { Route } from "./+types/root";
 
