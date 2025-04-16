@@ -1,9 +1,10 @@
+import allRoutes from "~/resources/allRoutes.ts";
 import {
   ROUTE_DOCUMENTATION,
-  ROUTE_FIRST_PRINCIPLE,
   ROUTE_INTEROPERABILITY,
   ROUTE_METHODS,
   ROUTE_PRECHECK,
+  ROUTE_PRINCIPLES,
   ROUTE_SUPPORT,
   ROUTE_VISUALISATIONS,
 } from "~/resources/staticRoutes.ts";
@@ -47,7 +48,9 @@ export const header = {
           title: "Die 5 Prinzipien im Regelungstext",
           content:
             "Beispiele für digitaltaugliche Formulierungen aus anderen Regelungsvorhaben.",
-          href: ROUTE_FIRST_PRINCIPLE.url,
+          href: allRoutes.filter(
+            (route) => route.parent === ROUTE_PRINCIPLES.url,
+          )[0].url,
         },
         {
           title: "Visualisierungen",

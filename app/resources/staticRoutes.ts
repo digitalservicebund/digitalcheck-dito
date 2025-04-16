@@ -123,13 +123,6 @@ export const ROUTE_PRINCIPLES: Route = {
   parent: ROUTE_EXAMPLES.url,
 };
 
-// TODO: replace ROUTE_PRINCIPLES with this one
-export const ROUTE_FIRST_PRINCIPLE: Route = {
-  url: `${ROUTE_EXAMPLES.url}/prinzipien/digitale-kommunikation-sicherstellen`,
-  title: "Prinzip 1 in Regelungstexten",
-  parent: ROUTE_EXAMPLES.url,
-};
-
 export const ROUTE_REGELUNGEN: Route = {
   url: `${ROUTE_EXAMPLES.url}/regelungen`,
   title: "Gesetze",
@@ -169,7 +162,6 @@ const routes: Route[] = [
   ROUTE_SITEMAP,
   ROUTE_EXAMPLES,
   ROUTE_VISUALISATIONS,
-  ROUTE_FIRST_PRINCIPLE,
 ];
 
 export default routes;
