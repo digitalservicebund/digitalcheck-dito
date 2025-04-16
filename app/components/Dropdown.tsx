@@ -4,7 +4,7 @@ import {
 } from "@digitalservicebund/icons";
 import { useEffect, useRef, useState } from "react";
 import { type DropdownItemProps } from "~/components/DrodownItem.tsx";
-import { header } from "~/resources/content/components/header.ts";
+import DropdownSupportItem from "~/components/DropdownSupportItem.tsx";
 import twMerge from "~/utils/tailwindMerge";
 import DropdownContentList from "./DropdownContentList";
 
@@ -93,18 +93,7 @@ export default function Dropdown({
           aria-labelledby={buttonId}
         >
           {hasSupport && (
-            <div className="px-56">
-              <div className="ds-label-02-reg pt-16 pb-24 text-left text-gray-900">
-                {header.contact.msg}
-                <a
-                  href={`tel:${header.contact.number}`}
-                  className="plausible-event-name=Phone+Click plausible-event-position=header ds-link-02-reg ml-8"
-                >
-                  {header.contact.number}
-                </a>
-              </div>
-              <div className="border-b-1 border-gray-900"></div>
-            </div>
+            <DropdownSupportItem mobile={false}></DropdownSupportItem>
           )}
           <DropdownContentList
             data={data}

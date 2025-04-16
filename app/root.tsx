@@ -30,6 +30,7 @@ import Button from "~/components/Button";
 import Container from "~/components/Container";
 import Dropdown from "~/components/Dropdown.tsx";
 import DropdownContentList from "~/components/DropdownContentList.tsx";
+import DropdownSupportItem from "~/components/DropdownSupportItem.tsx";
 import Footer from "~/components/Footer";
 import Heading from "~/components/Heading";
 import RichText from "~/components/RichText";
@@ -341,7 +342,7 @@ const PageHeader = ({
               </Link>
               <div className="ds-stack-0 ml-24 flex flex-col -space-y-4 max-lg:hidden">
                 <p className="ds-stack-0 ds-label-01-bold">{header.title}</p>
-                <p className="">{header.subTitle}</p>
+                <p className="ds-label-01">{header.subTitle}</p>
               </div>
             </div>
             {/* Regular View */}
@@ -384,9 +385,6 @@ const PageHeader = ({
             </div>
           </div>
           {/* Mobile View */}
-          {/*
-        TODO: position above breadcrumbs
-        */}
           <div
             id="mobile-menu"
             className={`absolute top-full right-0 left-0 z-40 border-t-1 border-gray-200 bg-white transition-all duration-300 ${
@@ -422,22 +420,8 @@ const PageHeader = ({
                     role="region"
                     aria-label={item.text}
                   >
-                    {/*
-                  TODO: consistent hasSupport
-*/}
                     {item.hasSupport && (
-                      <div className="px-16">
-                        <div className="ds-label-02-reg px-16 pt-16 pb-24 text-gray-900">
-                          {header.contact.msgMobile}
-                          <a
-                            href={`tel:${header.contact.number}`}
-                            className="plausible-event-name=Phone+Click plausible-event-position=header ds-link-02-reg ml-8"
-                          >
-                            {header.contact.number}
-                          </a>
-                        </div>
-                        <div className="border-b-1 border-gray-900" />
-                      </div>
+                      <DropdownSupportItem mobile={true}></DropdownSupportItem>
                     )}
 
                     <div
