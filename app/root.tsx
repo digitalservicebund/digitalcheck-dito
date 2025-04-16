@@ -16,20 +16,14 @@ import {
   useRouteLoaderData,
 } from "react-router";
 
-import {
-  ExpandLessOutlined,
-  ExpandMoreOutlined,
-  MenuOpen,
-  MenuOutlined,
-} from "@digitalservicebund/icons";
+import { MenuOpen, MenuOutlined } from "@digitalservicebund/icons";
 import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
+import { twMerge } from "tailwind-merge";
 import Background from "~/components/Background";
 import Breadcrumbs from "~/components/Breadcrumbs";
 import Button from "~/components/Button";
 import Container from "~/components/Container";
 import Dropdown from "~/components/Dropdown.tsx";
-import DropdownContentList from "~/components/DropdownContentList.tsx";
-import DropdownSupportItem from "~/components/DropdownSupportItem.tsx";
 import Footer from "~/components/Footer";
 import Heading from "~/components/Heading";
 import RichText from "~/components/RichText";
@@ -51,7 +45,6 @@ import {
 import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants.server";
 import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
-import twMerge from "~/utils/tailwindMerge";
 import { normalizePathname } from "~/utils/utilFunctions.ts";
 import type { Route } from "./+types/root";
 
@@ -269,26 +262,18 @@ const PageHeader = ({
   const location = useLocation();
   const currentPathname = location.pathname;
   const cleanPathname = normalizePathname(currentPathname);
-  const [isDesktopDropdownOpen, setIsDesktopDropdownOpen] = useState(false);
+  const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(
-    () => findActiveParentItemText(currentPathname, header.items),
-  );
+  const headerRef = useRef<HTMLDivElement>(null);
 
+  // Reset states on navigation or viewport changes
   useEffect(() => {
-    const activeParentText = findActiveParentItemText(
-      currentPathname,
-      header.items,
-    );
-    setExpandedMobileItem(activeParentText);
     setMobileMenuOpen(false);
   }, [currentPathname]);
 
-  // Close dropdown menus on viewport change
   useEffect(() => {
     const handleResize = () => {
-      setIsDesktopDropdownOpen(false);
-      setExpandedMobileItem(null);
+      setActiveDropdownId(null);
       setMobileMenuOpen(false);
     };
     window.addEventListener("resize", handleResize);
@@ -297,17 +282,52 @@ const PageHeader = ({
     };
   }, []);
 
-  const toggleMobileSubitems = (itemText: string) => {
-    setExpandedMobileItem((current) =>
-      current === itemText ? null : itemText,
-    );
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        headerRef.current &&
+        !headerRef.current.contains(event.target as Node) &&
+        activeDropdownId !== null
+      ) {
+        setActiveDropdownId(null);
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    };
+  }, [activeDropdownId, mobileMenuOpen]);
+
+  // Toggle dropdown state
+  const toggleDropdown = (itemText: string) => {
+    setActiveDropdownId((current) => (current === itemText ? null : itemText));
   };
 
-  const handleMobileItemClick = () => {
+  // Close everything (for overlay click)
+  const closeAll = () => {
+    setActiveDropdownId(null);
     setMobileMenuOpen(false);
   };
 
-  const showOverlay = isDesktopDropdownOpen || mobileMenuOpen;
+  // Toggle visibility of mobile menu
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen((prevOpen) => {
+      const isOpening = !prevOpen;
+      if (isOpening) {
+        const parentItemText = findActiveParentItemText(
+          currentPathname,
+          header.items,
+        );
+        setActiveDropdownId(parentItemText);
+      } else {
+        setActiveDropdownId(null);
+      }
+      return isOpening;
+    });
+  };
+
+  const showOverlay = activeDropdownId !== null || mobileMenuOpen;
 
   function getParentActive(item: { href: string }[]): boolean {
     return (
@@ -316,22 +336,20 @@ const PageHeader = ({
       ) ?? false
     );
   }
-
+  // TODO: a11y
   return (
     <>
       {showOverlay && (
         <div
           className="fixed inset-0 z-20 bg-[#282828] opacity-63"
-          onClick={() => {
-            setIsDesktopDropdownOpen(false);
-            setMobileMenuOpen(false);
-          }}
+          onClick={closeAll}
           aria-hidden="true"
         />
       )}
-      <header className="relative">
+      <header className="relative" ref={headerRef}>
         <div className="relative">
           <div className="relative z-30 flex min-h-[72px] items-stretch justify-between bg-white px-16">
+            {/* Logo and title */}
             <div className="flex items-center space-x-8">
               <Link to={ROUTE_LANDING.url}>
                 <img
@@ -342,10 +360,11 @@ const PageHeader = ({
               </Link>
               <div className="ds-stack-0 ml-24 flex flex-col -space-y-4 max-lg:hidden">
                 <p className="ds-stack-0 ds-label-01-bold">{header.title}</p>
-                <p className="ds-label-01">{header.subTitle}</p>
+                <p className="ds-label-01 text-gray-900">{header.subTitle}</p>
               </div>
             </div>
-            {/* Regular View */}
+
+            {/* Desktop Navigation */}
             <nav className="flex items-center max-lg:hidden">
               {header.items.map((item) => {
                 const isParentActive = getParentActive(item.overlayContent);
@@ -356,25 +375,27 @@ const PageHeader = ({
                     hasSupport={item.hasSupport}
                     data={item.overlayContent}
                     isList={item.isList}
-                    onOpenChange={(isOpen) => {
-                      if (isOpen && !isDesktopDropdownOpen)
-                        setIsDesktopDropdownOpen(true);
-                      if (!isOpen && isDesktopDropdownOpen)
-                        setIsDesktopDropdownOpen(false);
-                    }}
                     isActiveParent={isParentActive}
+                    variant="desktop"
+                    isExpanded={activeDropdownId === item.text}
+                    onToggle={() => toggleDropdown(item.text)}
+                    onItemClick={closeAll}
                   />
                 );
               })}
             </nav>
-            {/* Mobile View Trigger Buttons */}
+
+            {/* Mobile View Controls */}
             <div className="flex items-center space-x-16 lg:hidden">
               <a href={`tel:${header.contact.number}`}>
                 <PhoneOutlined />
               </a>
               <button
-                className="h-full cursor-pointer border-blue-800 px-16 hover:bg-blue-100 focus:border-b-[4px] focus:bg-blue-100"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className={twMerge(
+                  "h-full cursor-pointer border-blue-800 px-16 hover:bg-blue-100 focus:border-b-[4px] focus:bg-blue-100",
+                  mobileMenuOpen && "border-b-[4px] bg-blue-100",
+                )}
+                onClick={toggleMobileMenu}
                 aria-label="Menü öffnen/schließen"
                 aria-expanded={mobileMenuOpen}
                 aria-controls="mobile-menu"
@@ -384,63 +405,39 @@ const PageHeader = ({
               </button>
             </div>
           </div>
-          {/* Mobile View */}
+
+          {/* Mobile Navigation */}
           <div
             id="mobile-menu"
-            className={`absolute top-full right-0 left-0 z-40 border-t-1 border-gray-200 bg-white transition-all duration-300 ${
+            className={`absolute top-full right-0 left-0 z-40 rounded-b-md border-t-1 border-gray-200 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)] transition-all duration-300 ${
               mobileMenuOpen
                 ? "max-h-[80vh] overflow-y-auto"
                 : "invisible max-h-0 overflow-hidden"
             }`}
             aria-hidden={!mobileMenuOpen}
           >
-            {header.items.map((item) => (
-              <div key={item.text} className="border-b-1 border-gray-200">
-                <button
-                  className={twMerge(
-                    "ds-label-01-bold flex w-full cursor-pointer items-center justify-between border-blue-800 p-16 text-left duration-150 hover:bg-blue-100 focus:border-l-[4px] focus:bg-blue-100",
-                    getParentActive(item.overlayContent) &&
-                      "border-l-[4px] bg-blue-100",
-                  )}
-                  onClick={() => toggleMobileSubitems(item.text)}
-                  aria-expanded={expandedMobileItem === item.text}
-                  aria-controls={`mobile-subitems-${item.text}`}
-                >
-                  {item.text}
-                  {expandedMobileItem === item.text ? (
-                    <ExpandLessOutlined />
-                  ) : (
-                    <ExpandMoreOutlined />
-                  )}
-                </button>
-
-                {expandedMobileItem === item.text && (
-                  <div
-                    id={`mobile-subitems-${item.text}`}
-                    role="region"
-                    aria-label={item.text}
-                  >
-                    {item.hasSupport && (
-                      <DropdownSupportItem mobile={true}></DropdownSupportItem>
-                    )}
-
-                    <div
-                      className="px-16"
-                      role="menu"
-                      aria-label={`${item.text} Unterpunkte`}
-                    >
-                      <DropdownContentList
-                        data={item.overlayContent}
-                        isList={item.isList}
-                        onItemClick={handleMobileItemClick}
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
+            {header?.items?.map((item) => {
+              const isParentActive = getParentActive(
+                item?.overlayContent ?? [],
+              );
+              return (
+                <Dropdown
+                  key={item.text}
+                  label={item.text}
+                  hasSupport={item.hasSupport}
+                  data={item.overlayContent ?? []}
+                  isList={item.isList}
+                  isActiveParent={isParentActive}
+                  variant="mobile"
+                  isExpanded={activeDropdownId === item.text}
+                  onToggle={() => toggleDropdown(item.text)}
+                  onItemClick={closeAll}
+                />
+              );
+            })}
           </div>
         </div>
+
         {includeBreadcrumbs && (
           <Background backgroundColor="blue">
             <Breadcrumbs breadcrumbs={routes} useIconForHome />

@@ -9,6 +9,7 @@ export type DropdownContentListProps = {
   onItemClick: () => void;
 };
 
+// TODO: add second row for more than 4 items
 export default function DropdownContentList({
   data,
   isList = false,

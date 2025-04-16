@@ -2,9 +2,9 @@ import {
   ExpandLessOutlined,
   ExpandMoreOutlined,
 } from "@digitalservicebund/icons";
-import { useEffect, useRef, useState } from "react";
-import { type DropdownItemProps } from "~/components/DrodownItem.tsx";
-import DropdownSupportItem from "~/components/DropdownSupportItem.tsx";
+import { useRef } from "react";
+import type { DropdownItemProps } from "~/components/DrodownItem.tsx";
+import DropdownSupportItem from "~/components/DropdownSupportItem";
 import twMerge from "~/utils/tailwindMerge";
 import DropdownContentList from "./DropdownContentList";
 
@@ -16,6 +16,10 @@ export type DropdownProps = {
   isList?: boolean;
   onOpenChange?: (isOpen: boolean) => void;
   isActiveParent?: boolean;
+  variant?: "desktop" | "mobile";
+  isExpanded: boolean;
+  onToggle: () => void;
+  onItemClick: () => void;
 };
 
 export default function Dropdown({
@@ -23,83 +27,79 @@ export default function Dropdown({
   label,
   data,
   hasSupport = false,
-  onOpenChange,
   isList = false,
   isActiveParent = false,
+  variant = "desktop",
+  isExpanded,
+  onToggle,
+  onItemClick,
 }: Readonly<DropdownProps>) {
-  const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-    if (onOpenChange) onOpenChange(!isOpen);
-  };
-  console.log(label);
-  console.log(isActiveParent);
-  const handleItemClick = () => {
-    setIsOpen(false);
-    if (onOpenChange) onOpenChange(false);
-  };
+  const isMobile = variant === "mobile";
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-        if (onOpenChange) onOpenChange(false);
-      }
-    };
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen, onOpenChange]);
-
-  const listboxId = `dropdown-listbox-${label}`;
-  const buttonId = `dropdown-button-${label}`;
-
-  const activeClasses = "border-b-[4px] bg-blue-100 border-blue-800";
+  const elementId = `dropdown-${label?.replace(/\s+/g, "-").toLowerCase() || "unnamed"}`;
 
   return (
     <div
-      className={twMerge("relative h-full max-lg:hidden", className)}
+      className={twMerge(
+        // Base styling
+        "relative",
+        // Variant-specific styling
+        isMobile ? "w-full" : "h-full max-lg:hidden",
+        className,
+      )}
       ref={dropdownRef}
     >
       <button
         type="button"
-        onClick={toggleDropdown}
+        onClick={onToggle}
         className={twMerge(
-          "ds-label-01-reg z-20 inline-flex h-full cursor-pointer items-center border-b-[4px] border-transparent px-16 whitespace-nowrap hover:bg-blue-100 focus:border-blue-800 focus:bg-blue-100",
-          isActiveParent && activeClasses,
+          // Base styles for button
+          "z-20 flex cursor-pointer items-center border-blue-800 hover:bg-blue-100",
+          // Desktop-specific styles
+          !isMobile &&
+            "ds-label-01-reg h-full border-b-[4px] border-transparent px-16 whitespace-nowrap",
+          // Mobile-specific styles
+          isMobile && "ds-label-01-bold w-full justify-between p-16",
+          // Active styles for desktop
+          !isMobile &&
+            isActiveParent &&
+            "border-b-[4px] border-blue-800 bg-blue-100",
+          // Active styles for mobile
+          isMobile &&
+            isActiveParent &&
+            "border-l-[4px] border-blue-800 bg-blue-100",
+          // Active selection
+          isExpanded && "bg-blue-100",
         )}
-        id={buttonId}
-        aria-haspopup="listbox"
-        aria-expanded={isOpen}
-        aria-controls={listboxId}
+        id={`${elementId}-button`}
+        aria-haspopup={!isMobile ? "listbox" : undefined}
+        aria-expanded={isExpanded}
+        aria-controls={`${elementId}-content`}
       >
-        {label} {isOpen ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
+        {label} {isExpanded ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
       </button>
 
-      {isOpen && (
+      {isExpanded && (
         <div
-          className="absolute right-0 z-30 w-[512px] rounded-b-md border-1 border-gray-600 bg-white pt-8 pb-16 drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]"
-          role="listbox"
-          id={listboxId}
-          aria-labelledby={buttonId}
-        >
-          {hasSupport && (
-            <DropdownSupportItem mobile={false}></DropdownSupportItem>
+          id={`${elementId}-content`}
+          className={twMerge(
+            // Desktop-specific content styles
+            !isMobile &&
+              "absolute right-0 z-30 w-[512px] rounded-b-md border-t-1 border-gray-600 bg-white pt-8 pb-16 drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]",
           )}
-          <DropdownContentList
-            data={data}
-            isList={isList}
-            onItemClick={handleItemClick}
-          />
+          role={!isMobile ? "listbox" : "region"}
+          aria-labelledby={`${elementId}-button`}
+        >
+          {hasSupport && <DropdownSupportItem mobile={isMobile} />}
+
+          <div className={isMobile ? "p-16" : ""}>
+            <DropdownContentList
+              data={data}
+              isList={isList}
+              onItemClick={onItemClick}
+            />
+          </div>
         </div>
       )}
     </div>

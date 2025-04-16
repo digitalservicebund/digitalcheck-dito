@@ -23,12 +23,12 @@ export default function DropdownItem({
   return (
     <div
       className={twMerge(
-        "ds-stack ds-stack-8 cursor-pointer border-l-[4px] border-l-transparent px-16 py-16 text-left hover:bg-blue-100 lg:border-l-[8px] lg:px-56 lg:py-24",
+        "ds-stack ds-stack-8 cursor-pointer border-l-[4px] border-l-transparent px-16 py-8 text-left hover:bg-blue-100 lg:border-l-[8px] lg:px-56 lg:py-24",
         isActive && "border-blue-800 bg-blue-100",
         className,
       )}
     >
-      <div className="ds-label-01-bold">
+      <div className="ds-label-02-reg lg:ds-label-01-bold">
         {isNewTitle && (
           <span className="ds-label-02-reg mr-8 rounded-md bg-blue-300 px-8 py-4 text-[#004B76]">
             NEU
@@ -42,7 +42,7 @@ export default function DropdownItem({
       </div>
       {content && <span className="hidden lg:inline">{content}</span>}
       {newContent && (
-        <div>
+        <div className="max-lg:hidden">
           <span className="ds-label-02-reg mr-8 rounded-md bg-blue-300 px-8 py-4 text-[#004B76]">
             NEU
           </span>
