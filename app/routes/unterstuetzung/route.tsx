@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { type MetaArgs } from "react-router";
 import { twJoin } from "tailwind-merge";
 
@@ -56,24 +56,15 @@ function SocialProofImage() {
 
 export default function Index() {
   const [isAppointmentsVisible, setIsAppointmentsVisible] = useState(false);
-  const angeboteRef = useRef<HTMLDivElement>(null);
-  const hilfeRef = useRef<HTMLDivElement>(null);
 
   // ensure page scrolls to the correct section when navigating to the page
   // Brief delay to allow elements to render which shift the content
   useEffect(() => {
-    if (location.hash === "#angebote" && angeboteRef.current) {
+    const scrollTargetId = location.hash.substring(1);
+    if (scrollTargetId === "angebote" || scrollTargetId === "hilfe") {
       const timerId = setTimeout(() => {
-        if (angeboteRef.current) {
-          angeboteRef.current.scrollIntoView({ behavior: "auto" });
-        }
-      }, 100);
-      return () => clearTimeout(timerId);
-    } else if (location.hash === "#hilfe" && hilfeRef.current) {
-      const timerId = setTimeout(() => {
-        if (hilfeRef.current) {
-          hilfeRef.current.scrollIntoView({ behavior: "auto" });
-        }
+        const element = document.getElementById(scrollTargetId);
+        element?.scrollIntoView({ behavior: "auto" });
       }, 100);
       return () => clearTimeout(timerId);
     }
@@ -159,17 +150,6 @@ export default function Index() {
       </Container>
       <Background backgroundColor="blue">
         <Container>
-          <div
-            id="hilfe"
-            ref={hilfeRef}
-            style={{
-              display: "block",
-              height: 0,
-              overflow: "hidden",
-              visibility: "hidden",
-            }}
-            aria-hidden="true"
-          />
           <Heading id="hilfe" tagName="h2" text={supportHow.title} />
           {supportHow.supportTypes.length > 0 &&
             supportHow.supportTypes.map((supportType) => (
@@ -209,7 +189,7 @@ export default function Index() {
             ))}
         </Container>
       </Background>
-      <div id="angebote" ref={angeboteRef}>
+      <div id="angebote">
         <Background backgroundColor="white">
           <Container>
             <Box
