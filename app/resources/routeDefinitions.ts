@@ -1,4 +1,4 @@
-// These routes can't be exported from ~/resources/routeDefinitions.ts as that file isn't part of the app environment: https://github.com/remix-run/react-router/issues/12392
+// These routes can't be exported from ~/routes.ts as that file isn't part of the app environment: https://github.com/remix-run/react-router/issues/12392
 
 const PRE_CHECK_PDF = "digitalcheck-vorpruefung.pdf";
 const DOCUMENTATION_PDF = "digitalcheck-begleitende-dokumentation.pdf";
