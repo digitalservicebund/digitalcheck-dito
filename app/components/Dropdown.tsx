@@ -51,7 +51,7 @@ export default function Dropdown({
   );
 
   const panelClasses = !isMobile
-    ? "absolute right-0 z-30 w-[512px] rounded-b-md border-t border-gray-600 bg-white pt-8 pb-16 drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]" // Assuming border-t (1px)
+    ? "absolute right-0 z-30 w-[512px] rounded-b-md border-t border-gray-600 bg-white pt-8 pb-16 drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]"
     : "";
 
   const innerPanelPadding = isMobile ? "p-16" : "";
@@ -114,7 +114,9 @@ export default function Dropdown({
           aria-labelledby={`${elementId}-button`}
         >
           {hasSupport && <DropdownSupportItem mobile={isMobile} />}
-
+          {/*
+          // TODO: add second row for more than 4 items
+*/}
           <div className={innerPanelPadding}>
             <DropdownContentList
               data={data}

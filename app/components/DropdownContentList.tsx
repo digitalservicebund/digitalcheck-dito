@@ -9,7 +9,6 @@ export type DropdownContentListProps = {
   onItemClick: () => void;
 };
 
-// TODO: add second row for more than 4 items
 export default function DropdownContentList({
   data,
   isList = false,
@@ -20,7 +19,9 @@ export default function DropdownContentList({
   return (
     <>
       {data.map((option, index) => {
-        const isActive = !!option.href && option.href === currentPathname;
+        const isActive =
+          option.href === currentPathname ||
+          (option.allHrefs && option.allHrefs.includes(currentPathname));
         return (
           <Link
             key={option.title}

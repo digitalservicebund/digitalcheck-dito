@@ -9,6 +9,7 @@ export type DropdownItemProps = {
   href?: string;
   isNewTitle?: boolean;
   isActive?: boolean;
+  allHrefs?: string[];
 };
 
 export default function DropdownItem({

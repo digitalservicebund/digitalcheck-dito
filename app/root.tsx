@@ -322,10 +322,14 @@ const PageHeader = ({
 
   const showOverlay = activeDropdownId !== null || mobileMenuOpen;
 
-  const getParentActive = (items: { href: string }[]) => {
-    return items.some(
-      (subItem) => normalizePathname(subItem.href) === cleanPathname,
-    );
+  const getParentActive = (items: { href: string; allHrefs?: string[] }[]) => {
+    return items.some((subItem) => {
+      const hrefs =
+        subItem.allHrefs && subItem.allHrefs.length > 0
+          ? subItem.allHrefs
+          : [subItem.href];
+      return hrefs.some((href) => normalizePathname(href) === cleanPathname);
+    });
   };
   // TODO: a11y
   return (

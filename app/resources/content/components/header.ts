@@ -51,6 +51,9 @@ export const header = {
           href: allRoutes.filter(
             (route) => route.parent === ROUTE_PRINCIPLES.url,
           )[0].url,
+          allHrefs: allRoutes
+            .filter((route) => route.parent === ROUTE_PRINCIPLES.url)
+            .map((item) => item.url),
         },
         {
           title: "Visualisierungen",
