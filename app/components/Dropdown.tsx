@@ -59,7 +59,7 @@ export default function Dropdown({
   const containerClasses = twMerge(
     "relative",
     isMobile ? "w-full" : "h-full max-lg:hidden",
-    className, // User override
+    className,
   );
 
   useEffect(() => {
@@ -116,7 +116,7 @@ export default function Dropdown({
           {hasSupport && <DropdownSupportItem mobile={isMobile} />}
           {/*
           // TODO: add second row for more than 4 items
-*/}
+          */}
           <div className={innerPanelPadding}>
             <DropdownContentList
               data={data}
