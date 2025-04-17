@@ -182,7 +182,7 @@ const PageHeader = ({
           {/* Mobile Navigation */}
           <div
             id="mobile-menu"
-            className={`absolute right-0 left-0 z-40 rounded-b-md border-t-1 border-gray-600 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)] transition-all duration-300 ${
+            className={`absolute right-0 left-0 z-40 rounded-b-md border-t-1 border-gray-600 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)] ${
               mobileMenuOpen ? "overflow-y-auto" : "invisible"
             }`}
             aria-hidden={!mobileMenuOpen}

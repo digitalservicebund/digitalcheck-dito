@@ -20,7 +20,7 @@ export default function DropdownItem({
   isNewTitle,
   className,
   isActive,
-}: DropdownItemProps) {
+}: Readonly<DropdownItemProps>) {
   return (
     <div
       className={twMerge(
