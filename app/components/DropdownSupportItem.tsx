@@ -12,7 +12,7 @@ const DropdownSupportItem = ({ mobile }: { mobile: boolean }) => {
           {header.contact.number}
         </a>
       </div>
-      <div className="border-b-1 border-gray-900" />
+      <div className="border-b-1 border-gray-600" />
     </div>
   );
 };
