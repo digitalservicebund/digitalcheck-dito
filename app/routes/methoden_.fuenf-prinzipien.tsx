@@ -2,10 +2,11 @@ import { type MetaArgs, useLoaderData } from "react-router";
 import Background from "~/components/Background";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
+import DetailsSummary from "~/components/DetailsSummary";
+import FeedbackForm from "~/components/FeedbackForm";
 import Header from "~/components/Header";
-import InfoBox from "~/components/InfoBox";
+import Heading from "~/components/Heading";
 import LinkListBox from "~/components/LinkListBox";
-import SupportBanner from "~/components/SupportBanner";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import {
   ROUTE_EXAMPLES,
@@ -21,7 +22,6 @@ import {
 } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 import type { Route } from "./+types/methoden_.fuenf-prinzipien";
-
 export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_METHODS_FIVE_PRINCIPLES.title, matches);
 };
@@ -52,9 +52,13 @@ export async function loader({ request }: Route.LoaderArgs) {
 export default function FivePrinciples() {
   const { referrer, prinzips } = useLoaderData<typeof loader>();
 
-  const nextStep = referrer.startsWith(ROUTE_METHODS.url)
-    ? methodsFivePrinciples.nextStepMethods
-    : methodsFivePrinciples.nextStep;
+  const feedbackOptions = [
+    { label: "Ich stimme gar nicht zu", value: 1 },
+    { label: "Ich stimme eher nicht zu", value: 2 },
+    { label: "Ich stimme teilweise zu", value: 3 },
+    { label: "Ich stimme eher zu", value: 4 },
+    { label: "Ich stimme voll und ganz zu", value: 5 },
+  ];
 
   return (
     <>
@@ -69,10 +73,11 @@ export default function FivePrinciples() {
             }}
           />
           <LinkListBox
+            heading={"Prinzipien"}
             links={methodsFivePrinciples.principles.map((principle) => {
               return {
-                id: slugify(principle.label),
-                title: `${principle.label}: ${principle.title}`,
+                id: slugify(principle.title),
+                title: `${principle.title}`,
               };
             })}
           />
@@ -85,15 +90,15 @@ export default function FivePrinciples() {
         const buttonLink = prinzip
           ? `${ROUTE_PRINCIPLES.url}/${prinzip?.URLBezeichnung}`
           : ROUTE_EXAMPLES.url;
-        const label = slugify(principle.label);
         return (
           <Background
-            key={label}
+            key={principle.title}
             backgroundColor={index % 2 === 0 ? "white" : "blue"}
+            className="pb-48"
           >
-            <div id={label} />
+            <div id={slugify(principle.title)} />
             <Container>
-              <InfoBox
+              <Box
                 heading={{
                   tagName: "h2",
                   text: principle.title,
@@ -103,37 +108,80 @@ export default function FivePrinciples() {
                   text: principle.label,
                   className: "ds-label-section text-gray-900",
                 }}
-                items={[
+                content={{
+                  markdown: principle.description,
+                }}
+                buttons={[
                   {
-                    content: principle.content,
-                    buttons: [
-                      {
-                        text: methodsFivePrinciples.buttonText,
-                        href: buttonLink,
-                        prefetch: "viewport",
-                        look: "tertiary" as const,
-                        "aria-label":
-                          index > 0
-                            ? `Beispiele für "${principle.label}: ${principle.title}" betrachten`
-                            : "Alle Beispiele betrachten",
-                      },
-                    ],
+                    text: methodsFivePrinciples.buttonText,
+                    href: buttonLink,
+                    prefetch: "viewport",
+                    look: "tertiary" as const,
+                    "aria-label":
+                      index > 0
+                        ? `Beispiele für "${principle.label}: ${principle.title}" betrachten`
+                        : "Alle Beispiele betrachten",
                   },
                 ]}
               />
             </Container>
+            <Container
+              overhangingBackground
+              backgroundColor={index % 2 === 0 ? "blue" : "white"}
+            >
+              <div className="ds-stack ds-stack-32">
+                <Heading tagName="h3" text="So setzen Sie das Prinzip um" />
+                {principle.implementation.map((implementation) => {
+                  const questions = implementation.questions
+                    .map((question) => `- ${question}`)
+                    .join("\n");
+                  const wording = implementation.wording
+                    ? `\n\n**Formulierungsbeispiel:**\n${implementation.wording}`
+                    : "";
+                  const content = `${implementation.description}\n\n**Fragen Sie sich:**\n${questions}${wording}`;
+                  return (
+                    <DetailsSummary
+                      key={implementation.action}
+                      title={implementation.action}
+                      content={content}
+                    />
+                  );
+                })}
+              </div>
+            </Container>
           </Background>
         );
       })}
-      <Container>
-        <Box
-          heading={{ text: nextStep.title }}
-          label={{ text: nextStep.label }}
-          content={{ markdown: nextStep.text }}
-          buttons={nextStep.buttons}
-        />
-      </Container>
-      <SupportBanner />
+      <FeedbackForm
+        heading="Ihr Feedback hilft uns weiter!"
+        trackingEvent="feedback"
+        questions={[
+          {
+            id: "principles-simple",
+            trackingEvent: "principles-simple",
+            text: "Die Prinzipien sind einfach zu nutzen.",
+            options: feedbackOptions,
+          },
+          {
+            id: "principles-useful-drafting",
+            trackingEvent: "principles-useful-drafting",
+            text: "Die Prinzipien sind hilfreich für das Erarbeiten meines Regelungsvorhabens.",
+            options: feedbackOptions,
+          },
+          {
+            id: "principles-useful-implementation",
+            trackingEvent: "principles-useful-implementation",
+            text: "Die Prinzipien sind hilfreich für die Umsetzung meines Regelungsvorhabens.",
+            options: feedbackOptions,
+          },
+        ]}
+        contact={"feedback@digitalservicebund.de"}
+        button={"Feedback senden"}
+        success={{
+          heading: "Feedback gesendet",
+          text: "Vielen Dank für Ihr Feedback!",
+        }}
+      />
     </>
   );
 }
