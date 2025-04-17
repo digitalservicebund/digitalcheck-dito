@@ -5,7 +5,10 @@ import Box from "~/components/Box";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
 import { examples } from "~/resources/content/beispiele";
-import { ROUTE_EXAMPLES, ROUTE_PRINCIPLES } from "~/resources/routeDefinitions";
+import {
+  ROUTE_EXAMPLES,
+  ROUTE_EXAMPLES_PRINCIPLES,
+} from "~/resources/routeDefinitions";
 import prependMetaTitle from "~/utils/metaTitle";
 import { Prinzip } from "~/utils/strapiData.server";
 
@@ -44,11 +47,11 @@ export default function Digitaltauglichkeit_index() {
             }}
             content={{ markdown: item.content }}
             buttons={
-              item.buttons[0].href == ROUTE_PRINCIPLES.url
+              item.buttons[0].href == ROUTE_EXAMPLES_PRINCIPLES.url
                 ? [
                     {
                       ...item.buttons[0],
-                      href: `${ROUTE_PRINCIPLES.url}/${principles[0].URLBezeichnung}`,
+                      href: `${ROUTE_EXAMPLES_PRINCIPLES.url}/${principles[0].URLBezeichnung}`,
                       prefetch: "viewport",
                     },
                   ]

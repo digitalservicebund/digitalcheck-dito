@@ -2,7 +2,7 @@ import { AxeBuilder } from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 import {
-  ROUTE_PRINCIPLES,
+  ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_SUPPORT,
   ROUTES,
 } from "~/resources/routeDefinitions";
@@ -31,7 +31,7 @@ test.describe("basic example a11y test", () => {
 
   test("check a11y of example pages", async ({ page }) => {
     await page.goto(
-      `${ROUTE_PRINCIPLES.url}/digitale-kommunikation-sicherstellen`,
+      `${ROUTE_EXAMPLES_PRINCIPLES.url}/digitale-kommunikation-sicherstellen`,
     );
 
     const principleScanResults = await new AxeBuilder({ page }).analyze();

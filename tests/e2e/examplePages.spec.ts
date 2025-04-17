@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import {
-  ROUTE_PRINCIPLES,
+  ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_REGELUNGEN,
   ROUTE_VISUALISATIONS,
 } from "~/resources/routeDefinitions";
@@ -18,7 +18,7 @@ test.describe("Prinzipienseiten", () => {
     test(`displays information for principle: ${principle}`, async ({
       page,
     }) => {
-      const url = `${ROUTE_PRINCIPLES.url}/${principle}`;
+      const url = `${ROUTE_EXAMPLES_PRINCIPLES.url}/${principle}`;
       await page.goto(url);
 
       const mainContent = page.locator("main");
@@ -31,7 +31,7 @@ test.describe("Prinzipienseiten", () => {
     test(`renders navigation links for principle: ${principle}`, async ({
       page,
     }) => {
-      const url = `${ROUTE_PRINCIPLES.url}/${principle}`;
+      const url = `${ROUTE_EXAMPLES_PRINCIPLES.url}/${principle}`;
       await page.goto(url);
 
       const nextPrincipleIndex = principles.indexOf(principle) + 1;
@@ -42,7 +42,7 @@ test.describe("Prinzipienseiten", () => {
         await nextPrincipleLink.waitFor();
         await nextPrincipleLink.click();
         await expect(page).toHaveURL(
-          `${ROUTE_PRINCIPLES.url}/${principles[nextPrincipleIndex]}`,
+          `${ROUTE_EXAMPLES_PRINCIPLES.url}/${principles[nextPrincipleIndex]}`,
         );
       }
     });
@@ -54,7 +54,7 @@ test.describe("Prinzipien Detail", () => {
     test(`displays paragraphs with relevant principles for: ${principle}`, async ({
       page,
     }) => {
-      const url = `${ROUTE_PRINCIPLES.url}/${principle}`;
+      const url = `${ROUTE_EXAMPLES_PRINCIPLES.url}/${principle}`;
       await page.goto(url);
 
       const highlights = page.locator("mark");
@@ -68,7 +68,7 @@ test.describe("Prinzipien Detail", () => {
       page,
       context,
     }) => {
-      const url = `${ROUTE_PRINCIPLES.url}/${principle}`;
+      const url = `${ROUTE_EXAMPLES_PRINCIPLES.url}/${principle}`;
       await page.goto(url);
 
       const lawLinks = page.locator(`a[href^="${ROUTE_REGELUNGEN.url}"]`);

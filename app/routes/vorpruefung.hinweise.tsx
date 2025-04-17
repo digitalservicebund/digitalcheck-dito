@@ -8,8 +8,8 @@ import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { preCheck } from "~/resources/content/vorpruefung";
 import {
-  ROUTE_GENERAL_INFO,
   ROUTE_PRECHECK,
+  ROUTE_PRECHECK_INFO,
 } from "~/resources/routeDefinitions";
 import { getAnswersFromCookie } from "~/utils/cookies.server";
 import prependMetaTitle from "~/utils/metaTitle";
@@ -20,11 +20,11 @@ const { questions, generalInfo } = preCheck;
 const { headline, text, nextButton, hint } = generalInfo;
 
 export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_GENERAL_INFO.title, matches);
+  return prependMetaTitle(ROUTE_PRECHECK_INFO.title, matches);
 };
 
 export const handle = {
-  breadcrumb: () => ROUTE_GENERAL_INFO,
+  breadcrumb: () => ROUTE_PRECHECK_INFO,
 };
 
 export async function loader({ request }: Route.LoaderArgs) {

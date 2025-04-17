@@ -1,7 +1,7 @@
 import {
-  ROUTE_GENERAL_INFO,
   ROUTE_INTEROPERABILITY,
   ROUTE_PRECHECK,
+  ROUTE_PRECHECK_INFO,
   ROUTE_RESULT,
 } from "~/resources/routeDefinitions";
 import type { TQuestion } from "~/routes/vorpruefung.$questionId/route";
@@ -242,7 +242,7 @@ export const preCheck = {
     url: `${ROUTE_PRECHECK.url}/${question.id}`,
     prevLink:
       index === 0
-        ? ROUTE_GENERAL_INFO.url
+        ? ROUTE_PRECHECK_INFO.url
         : `${ROUTE_PRECHECK.url}/${questions[index - 1].id}`,
     nextLink:
       index === questions.length - 1

@@ -9,9 +9,9 @@ import SupportBanner from "~/components/SupportBanner";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import {
   ROUTE_EXAMPLES,
+  ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_METHODS,
   ROUTE_METHODS_FIVE_PRINCIPLES,
-  ROUTE_PRINCIPLES,
 } from "~/resources/routeDefinitions";
 import prependMetaTitle from "~/utils/metaTitle";
 import {
@@ -87,7 +87,7 @@ export default function FivePrinciples() {
           (principle) => principle.Nummer === index,
         );
         const buttonLink = prinzip
-          ? `${ROUTE_PRINCIPLES.url}/${prinzip?.URLBezeichnung}`
+          ? `${ROUTE_EXAMPLES_PRINCIPLES.url}/${prinzip?.URLBezeichnung}`
           : ROUTE_EXAMPLES.url;
         const label = slugify(principle.label);
         return (

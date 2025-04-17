@@ -2,6 +2,11 @@ import { expect, test } from "@playwright/test";
 import {
   ROUTE_DOCUMENTATION,
   ROUTE_EXAMPLES,
+  ROUTE_EXAMPLES_AUTOMATION,
+  ROUTE_EXAMPLES_CLEAR_REGULATIONS,
+  ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY,
+  ROUTE_EXAMPLES_DIGITAL_COMMUNICATION,
+  ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS,
   ROUTE_LANDING,
   ROUTE_METHODS,
   ROUTE_METHODS_COLLECT_IT_SYSTEMS,
@@ -9,7 +14,6 @@ import {
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
   ROUTE_METHODS_TASKS_PROCESSES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
-  ROUTE_PRINCIPLES,
 } from "~/resources/routeDefinitions";
 
 test.describe("test method page link flow", () => {
@@ -128,11 +132,11 @@ test.describe("five principles page", () => {
 
   [
     ROUTE_EXAMPLES.url,
-    `${ROUTE_PRINCIPLES.url}/digitale-kommunikation-sicherstellen`,
-    `${ROUTE_PRINCIPLES.url}/wiederverwendung-von-daten-und-standards-ermoeglichen`,
-    `${ROUTE_PRINCIPLES.url}/datenschutz-und-informationssicherheit-gewaehrleisten`,
-    `${ROUTE_PRINCIPLES.url}/klare-regelungen-fuer-eine-digitale-ausfuehrung-finden`,
-    `${ROUTE_PRINCIPLES.url}/automatisierung-ermoeglichen`,
+    ROUTE_EXAMPLES_DIGITAL_COMMUNICATION.url,
+    ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS.url,
+    ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY.url,
+    ROUTE_EXAMPLES_CLEAR_REGULATIONS.url,
+    ROUTE_EXAMPLES_AUTOMATION.url,
   ].forEach((url, index) => {
     test(`five principles page ${url} links to examples`, async ({ page }) => {
       let attempt = 0;

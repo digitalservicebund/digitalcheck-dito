@@ -2,8 +2,8 @@ import { expect, test } from "@playwright/test";
 import { PRE_CHECK_START_BUTTON_ID } from "~/resources/constants";
 import { preCheck } from "~/resources/content/vorpruefung";
 import {
-  ROUTE_GENERAL_INFO,
   ROUTE_PRECHECK,
+  ROUTE_PRECHECK_INFO,
   ROUTE_RESULT,
 } from "~/resources/routeDefinitions";
 
@@ -26,7 +26,7 @@ test.describe("test questions form", () => {
   test("clicking through pre-check works", async ({ page }) => {
     await page.goto(ROUTE_PRECHECK.url);
     await page.getByTestId(PRE_CHECK_START_BUTTON_ID).click();
-    await page.waitForURL(ROUTE_GENERAL_INFO.url);
+    await page.waitForURL(ROUTE_PRECHECK_INFO.url);
     await page.getByRole("link", { name: "Okay & weiter" }).click();
     for (const element of questions) {
       await page.waitForURL(element.url);
@@ -58,7 +58,7 @@ test.describe("test questions form", () => {
   test("back button works", async ({ page }) => {
     await page.goto(questions[0].url);
     await page.getByRole("link", { name: "Zurück" }).click();
-    await expect(page).toHaveURL(ROUTE_GENERAL_INFO.url);
+    await expect(page).toHaveURL(ROUTE_PRECHECK_INFO.url);
     await page.getByRole("link", { name: "Zurück" }).click();
     await expect(page).toHaveURL(ROUTE_PRECHECK.url);
     await page.goto(questions[0].url);
