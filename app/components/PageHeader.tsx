@@ -120,7 +120,7 @@ const PageHeader = ({
       )}
       <header className="relative" ref={headerRef}>
         <div className="relative">
-          <div className="relative z-30 flex min-h-[72px] items-stretch justify-between bg-white px-16">
+          <div className="relative z-30 flex min-h-[72px] items-stretch justify-between bg-white pl-16 lg:px-16">
             {/* Logo and title */}
             <div className="flex items-center space-x-8">
               <Link to={ROUTE_LANDING.url}>
