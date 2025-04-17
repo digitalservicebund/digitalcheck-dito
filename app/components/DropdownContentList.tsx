@@ -66,18 +66,20 @@ export default function DropdownContentList({
     }
   };
 
+  const mobileElementStyle = "py-8 pr-8 pl-16 border-b-[1px] border-gray-600 ";
+
   return isList ? (
     // No styling because the numbers are rendered inside the DropdownItem
     <ol
       className={twMerge(
         "list-unstyled list-none",
-        isMobile ? "py-8 pr-8 pl-16" : "",
+        isMobile ? mobileElementStyle : "",
       )}
     >
       {data.map(mapDataToItems)}
     </ol>
   ) : (
-    <div className={isMobile ? "py-8 pr-8 pl-16" : ""}>
+    <div className={isMobile ? mobileElementStyle : ""}>
       {data.map(mapDataToItems)}
     </div>
   );
