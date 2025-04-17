@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { type MetaArgs } from "react-router";
 import { twJoin } from "tailwind-merge";
 
@@ -56,6 +56,19 @@ function SocialProofImage() {
 
 export default function Index() {
   const [isAppointmentsVisible, setIsAppointmentsVisible] = useState(false);
+
+  // ensure page scrolls to the correct section when navigating to the page
+  // Brief delay to allow elements to render which shift the content
+  useEffect(() => {
+    const scrollTargetId = location.hash.substring(1);
+    if (scrollTargetId === "angebote" || scrollTargetId === "hilfe") {
+      const timerId = setTimeout(() => {
+        const element = document.getElementById(scrollTargetId);
+        element?.scrollIntoView({ behavior: "auto" });
+      }, 100);
+      return () => clearTimeout(timerId);
+    }
+  }, []);
 
   const iframeButtons = [
     {
@@ -137,7 +150,7 @@ export default function Index() {
       </Container>
       <Background backgroundColor="blue">
         <Container>
-          <Heading tagName="h2" text={supportHow.title} />
+          <Heading id="hilfe" tagName="h2" text={supportHow.title} />
           {supportHow.supportTypes.length > 0 &&
             supportHow.supportTypes.map((supportType) => (
               <div
