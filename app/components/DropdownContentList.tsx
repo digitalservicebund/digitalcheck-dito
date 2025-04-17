@@ -2,17 +2,20 @@ import { Link, useLocation } from "react-router";
 import DropdownItem, {
   type DropdownItemProps,
 } from "~/components/DrodownItem.tsx";
+import twMerge from "~/utils/tailwindMerge";
 
 export type DropdownContentListProps = {
   data: DropdownItemProps[];
   isList?: boolean;
   onItemClick: () => void;
+  isMobile?: boolean;
 };
 
 export default function DropdownContentList({
   data,
   isList = false,
   onItemClick,
+  isMobile = false,
 }: Readonly<DropdownContentListProps>) {
   const location = useLocation();
   const currentPathname = location.pathname;
@@ -65,8 +68,17 @@ export default function DropdownContentList({
 
   return isList ? (
     // No styling because the numbers are rendered inside the DropdownItem
-    <ol className="list-unstyled list-none">{data.map(mapDataToItems)}</ol>
+    <ol
+      className={twMerge(
+        "list-unstyled list-none",
+        isMobile ? "py-8 pr-8 pl-16" : "",
+      )}
+    >
+      {data.map(mapDataToItems)}
+    </ol>
   ) : (
-    <>{data.map(mapDataToItems)}</>
+    <div className={isMobile ? "py-8 pr-8 pl-16" : ""}>
+      {data.map(mapDataToItems)}
+    </div>
   );
 }
