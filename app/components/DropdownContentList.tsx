@@ -43,7 +43,6 @@ export default function DropdownContentList({
             onClick={onItemClick}
             aria-selected={isActive}
             aria-label={option.title}
-            className="min-w-0 flex-1"
           >
             {itemContent}
           </Link>
