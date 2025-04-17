@@ -6,44 +6,35 @@ const DOCUMENTATION_PDF = "digitalcheck-begleitende-dokumentation.pdf";
 export type Route = {
   url: string;
   title: string;
-  parent: Route | null;
+  parent?: Route;
+};
+
+// LANDING ROUTE AS ROOT
+export const ROUTE_LANDING = {
+  url: "/",
+  title: "Startseite",
 };
 
 const createRoute = (path: string, title: string, parent?: Route): Route => ({
   url: `${parent?.url ?? ""}/${path}`,
   title,
-  parent: parent ?? null,
+  parent: parent ?? ROUTE_LANDING,
 });
 
 // BASIC ROUTES
-export const ROUTE_LANDING = createRoute("", "Startseite");
 export const ROUTE_SUPPORT = createRoute(
   "unterstuetzung",
   "Unterstützungsangebote",
-  ROUTE_LANDING,
 );
-export const ROUTE_IMPRINT = createRoute(
-  "impressum",
-  "Impressum",
-  ROUTE_LANDING,
-);
-export const ROUTE_PRIVACY = createRoute(
-  "datenschutz",
-  "Datenschutzerklärung",
-  ROUTE_LANDING,
-);
-export const ROUTE_A11Y = createRoute(
-  "barrierefreiheit",
-  "Barrierefreiheit",
-  ROUTE_LANDING,
-);
-export const ROUTE_SITEMAP = createRoute("sitemap", "Sitemap", ROUTE_LANDING);
+export const ROUTE_IMPRINT = createRoute("impressum", "Impressum");
+export const ROUTE_PRIVACY = createRoute("datenschutz", "Datenschutzerklärung");
+export const ROUTE_A11Y = createRoute("barrierefreiheit", "Barrierefreiheit");
+export const ROUTE_SITEMAP = createRoute("sitemap", "Sitemap");
 
 // PRECHECK ROUTES
 export const ROUTE_PRECHECK = createRoute(
   "vorpruefung",
   "Vorprüfung: Digitalbezug einschätzen",
-  ROUTE_LANDING,
 );
 export const ROUTE_PRECHECK_INFO = createRoute(
   "hinweise",
@@ -58,11 +49,7 @@ export const ROUTE_RESULT_PDF = createRoute(
 );
 
 // METHODS ROUTES
-export const ROUTE_METHODS = createRoute(
-  "methoden",
-  "Regelung erarbeiten",
-  ROUTE_LANDING,
-);
+export const ROUTE_METHODS = createRoute("methoden", "Regelung erarbeiten");
 export const ROUTE_METHODS_RESPONSIBLE_ACTORS = createRoute(
   "zustaendige-akteurinnen-auflisten",
   "Akteure auflisten",
@@ -93,7 +80,6 @@ export const ROUTE_METHODS_TECHNICAL_FEASIBILITY = createRoute(
 export const ROUTE_DOCUMENTATION = createRoute(
   "dokumentation",
   "Dokumentation",
-  ROUTE_LANDING,
 );
 export const ROUTE_DOCUMENTATION_STATIC_PDF = createRoute(
   `download/${DOCUMENTATION_PDF}`,
@@ -104,7 +90,6 @@ export const ROUTE_DOCUMENTATION_STATIC_PDF = createRoute(
 export const ROUTE_INTEROPERABILITY = createRoute(
   "interoperabel",
   "Interoperable Regelungen",
-  ROUTE_LANDING,
 );
 export const ROUTE_INTEROPERABILITY_SPOC = createRoute(
   "nationale-kontaktstelle",
@@ -116,7 +101,6 @@ export const ROUTE_INTEROPERABILITY_SPOC = createRoute(
 export const ROUTE_EXAMPLES = createRoute(
   "beispiele",
   "Beispiele für Digitaltauglichkeit",
-  ROUTE_LANDING,
 );
 export const ROUTE_EXAMPLES_PRINCIPLES = createRoute(
   "prinzipien",
@@ -167,6 +151,11 @@ export const ROUTE_VISUALISATION = createRoute(
 
 export const ROUTES: Route[] = [
   ROUTE_LANDING,
+  ROUTE_SUPPORT,
+  ROUTE_IMPRINT,
+  ROUTE_PRIVACY,
+  ROUTE_A11Y,
+  ROUTE_SITEMAP,
   ROUTE_PRECHECK,
   ROUTE_PRECHECK_INFO,
   ROUTE_RESULT,
@@ -176,14 +165,9 @@ export const ROUTES: Route[] = [
   ROUTE_METHODS_COLLECT_IT_SYSTEMS,
   ROUTE_METHODS_FIVE_PRINCIPLES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
+  ROUTE_DOCUMENTATION,
   ROUTE_INTEROPERABILITY,
   ROUTE_INTEROPERABILITY_SPOC,
-  ROUTE_SUPPORT,
-  ROUTE_DOCUMENTATION,
-  ROUTE_IMPRINT,
-  ROUTE_PRIVACY,
-  ROUTE_A11Y,
-  ROUTE_SITEMAP,
   ROUTE_EXAMPLES,
   ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_EXAMPLES_DIGITAL_COMMUNICATION,
@@ -193,3 +177,5 @@ export const ROUTES: Route[] = [
   ROUTE_EXAMPLES_AUTOMATION,
   ROUTE_EXAMPLES_VISUALISATIONS,
 ];
+
+console.log(ROUTES);
