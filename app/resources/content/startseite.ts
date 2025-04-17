@@ -1,13 +1,8 @@
-import {
-  DriveFileRenameOutline,
-  Source,
-} from "@digitalservicebund/icons/index";
 import { steps } from "~/resources/content/components/naechste-schritte";
 import {
   ROUTE_EXAMPLES,
   ROUTE_INTEROPERABILITY,
   ROUTE_METHODS_FIVE_PRINCIPLES,
-  TOOLFINDER,
 } from "~/resources/routeDefinitions";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -88,43 +83,6 @@ export const index = {
           text: "Alle Regelungsvorhaben sind betroffen",
         },
         content: `Der Digitalcheck gilt für alle Regelungsvorhaben (Gesetze, Verordnungen und Verwaltungsvorschriften), sowohl für neue Vorhaben als auch für Änderungen an bestehenden Regelungen.`,
-      },
-    ],
-  },
-  links: {
-    title: "Weitere Unterstützungsangebote für Ihr Vorhaben",
-    subtitle:
-      "Nutzen Sie unsere Services die Ihnen dabei helfen digitaltaugliche Regelungen zu schreiben.",
-    items: [
-      {
-        headline: {
-          text: "Werkzeuge für Visualisierung",
-        },
-        label: "Werkzeugfinder",
-        icon: DriveFileRenameOutline,
-        content: `Finden Sie mit dem Werkzeugfinder die passenden Werkzeuge und Methoden, um Prozesse zu visualisieren.`,
-        buttons: [
-          {
-            text: "Werkzeugfinder nutzen",
-            href: TOOLFINDER,
-            look: "tertiary" as const,
-          },
-        ],
-      },
-      {
-        headline: {
-          text: "Digitaltaugliche Beispiele",
-        },
-        label: "Beispielsammlung",
-        icon: Source,
-        content: `Sehen Sie Beispiele von Regelungen an, die digitaltaugliche Aspekte berücksichtigen und die Prinzipien für Digitaltauglichkeit bedacht haben.`,
-        buttons: [
-          {
-            text: "Beispiele ansehen",
-            href: ROUTE_EXAMPLES.url,
-            look: "tertiary" as const,
-          },
-        ],
       },
     ],
   },
