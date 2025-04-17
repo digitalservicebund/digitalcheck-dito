@@ -6,166 +6,164 @@ const DOCUMENTATION_PDF = "digitalcheck-begleitende-dokumentation.pdf";
 export type Route = {
   url: string;
   title: string;
-  parent?: string;
+  parent: Route | null;
 };
 
-export const ROUTE_LANDING: Route = {
-  url: "/",
-  title: "Startseite",
-};
-export const ROUTE_PRECHECK: Route = {
-  url: "/vorpruefung",
-  title: "Vorprüfung: Digitalbezug einschätzen",
-  parent: ROUTE_LANDING.url,
-};
-export const ROUTE_PRECHECK_INFO: Route = {
-  url: `${ROUTE_PRECHECK.url}/hinweise`,
-  title: "Allgemeine Hinweise",
-  parent: ROUTE_PRECHECK.url,
-};
-export const ROUTE_RESULT: Route = {
-  url: `${ROUTE_PRECHECK.url}/ergebnis`,
-  title: "Ergebnis",
-  parent: ROUTE_PRECHECK.url,
-};
-export const ROUTE_RESULT_PDF: Route = {
-  url: `${ROUTE_RESULT.url}/${PRE_CHECK_PDF}`,
-  title: "Vorprüfung als PDF",
-  parent: ROUTE_RESULT.url,
-};
-export const ROUTE_METHODS: Route = {
-  url: "/methoden",
-  title: "Regelung erarbeiten",
-  parent: ROUTE_LANDING.url,
-};
-export const ROUTE_METHODS_RESPONSIBLE_ACTORS: Route = {
-  url: `${ROUTE_METHODS.url}/zustaendige-akteurinnen-auflisten`,
-  title: "Akteure auflisten",
-  parent: ROUTE_METHODS.url,
-};
-export const ROUTE_METHODS_TASKS_PROCESSES: Route = {
-  url: `${ROUTE_METHODS.url}/ablaeufe-aufgaben-erfassen`,
-  title: "Abläufe erfassen",
-  parent: ROUTE_METHODS.url,
-};
-export const ROUTE_METHODS_COLLECT_IT_SYSTEMS: Route = {
-  url: `${ROUTE_METHODS.url}/it-systeme-erfassen`,
-  title: "IT-Systeme erfassen",
-  parent: ROUTE_METHODS.url,
-};
-export const ROUTE_METHODS_FIVE_PRINCIPLES: Route = {
-  url: `${ROUTE_METHODS.url}/fuenf-prinzipien`,
-  title: "Fünf Prinzipien",
-  parent: ROUTE_METHODS.url,
-};
-export const ROUTE_METHODS_TECHNICAL_FEASIBILITY: Route = {
-  url: `${ROUTE_METHODS.url}/technische-umsetzbarkeit`,
-  title: "Technische Umsetzbarkeit sicherstellen",
-  parent: ROUTE_METHODS.url,
-};
+const createRoute = (path: string, title: string, parent?: Route): Route => ({
+  url: `${parent?.url ?? ""}/${path}`,
+  title,
+  parent: parent ?? null,
+});
 
-export const ROUTE_INTEROPERABILITY: Route = {
-  url: "/interoperabel",
-  title: "Interoperable Regelungen",
-  parent: ROUTE_LANDING.url,
-};
-export const ROUTE_INTEROPERABILITY_SPOC: Route = {
-  url: `${ROUTE_INTEROPERABILITY.url}/nationale-kontaktstelle`,
-  title: "Nationale Kontaktstelle",
-  parent: ROUTE_INTEROPERABILITY.url,
-};
+// BASIC ROUTES
+export const ROUTE_LANDING = createRoute("", "Startseite");
+export const ROUTE_SUPPORT = createRoute(
+  "unterstuetzung",
+  "Unterstützungsangebote",
+  ROUTE_LANDING,
+);
+export const ROUTE_IMPRINT = createRoute(
+  "impressum",
+  "Impressum",
+  ROUTE_LANDING,
+);
+export const ROUTE_PRIVACY = createRoute(
+  "datenschutz",
+  "Datenschutzerklärung",
+  ROUTE_LANDING,
+);
+export const ROUTE_A11Y = createRoute(
+  "barrierefreiheit",
+  "Barrierefreiheit",
+  ROUTE_LANDING,
+);
+export const ROUTE_SITEMAP = createRoute("sitemap", "Sitemap", ROUTE_LANDING);
 
-export const ROUTE_DOCUMENTATION: Route = {
-  url: "/dokumentation",
-  title: "Dokumentation",
-  parent: ROUTE_LANDING.url,
-};
+// PRECHECK ROUTES
+export const ROUTE_PRECHECK = createRoute(
+  "vorpruefung",
+  "Vorprüfung: Digitalbezug einschätzen",
+  ROUTE_LANDING,
+);
+export const ROUTE_PRECHECK_INFO = createRoute(
+  "hinweise",
+  "Allgemeine Hinweise",
+  ROUTE_PRECHECK,
+);
+export const ROUTE_RESULT = createRoute("ergebnis", "Ergebnis", ROUTE_PRECHECK);
+export const ROUTE_RESULT_PDF = createRoute(
+  PRE_CHECK_PDF,
+  "Vorprüfung als PDF",
+  ROUTE_RESULT,
+);
 
-export const ROUTE_DOCUMENTATION_STATIC_PDF: Route = {
-  url: `/download/${DOCUMENTATION_PDF}`,
-  title: "Begleitende Dokumentation als PDF",
-};
+// METHODS ROUTES
+export const ROUTE_METHODS = createRoute(
+  "methoden",
+  "Regelung erarbeiten",
+  ROUTE_LANDING,
+);
+export const ROUTE_METHODS_RESPONSIBLE_ACTORS = createRoute(
+  "zustaendige-akteurinnen-auflisten",
+  "Akteure auflisten",
+  ROUTE_METHODS,
+);
+export const ROUTE_METHODS_TASKS_PROCESSES = createRoute(
+  "ablaeufe-aufgaben-erfassen",
+  "Abläufe erfassen",
+  ROUTE_METHODS,
+);
+export const ROUTE_METHODS_COLLECT_IT_SYSTEMS = createRoute(
+  "it-systeme-erfassen",
+  "IT-Systeme erfassen",
+  ROUTE_METHODS,
+);
+export const ROUTE_METHODS_FIVE_PRINCIPLES = createRoute(
+  "fuenf-prinzipien",
+  "Fünf Prinzipien",
+  ROUTE_METHODS,
+);
+export const ROUTE_METHODS_TECHNICAL_FEASIBILITY = createRoute(
+  "technische-umsetzbarkeit",
+  "Technische Umsetzbarkeit sicherstellen",
+  ROUTE_METHODS,
+);
 
-export const ROUTE_SUPPORT: Route = {
-  url: "/unterstuetzung",
-  title: "Unterstützungsangebote",
-  parent: ROUTE_LANDING.url,
-};
+// DOCUMENTATION ROUTES
+export const ROUTE_DOCUMENTATION = createRoute(
+  "dokumentation",
+  "Dokumentation",
+  ROUTE_LANDING,
+);
+export const ROUTE_DOCUMENTATION_STATIC_PDF = createRoute(
+  `download/${DOCUMENTATION_PDF}`,
+  "Begleitende Dokumentation als PDF",
+);
 
-export const ROUTE_IMPRINT: Route = {
-  url: "/impressum",
-  title: "Impressum",
-  parent: ROUTE_LANDING.url,
-};
-export const ROUTE_PRIVACY: Route = {
-  url: "/datenschutz",
-  title: "Datenschutzerklärung",
-  parent: ROUTE_LANDING.url,
-};
-export const ROUTE_A11Y: Route = {
-  url: "/barrierefreiheit",
-  title: "Barrierefreiheit",
-  parent: ROUTE_LANDING.url,
-};
-export const ROUTE_SITEMAP: Route = {
-  url: "/sitemap",
-  title: "Sitemap",
-  parent: ROUTE_LANDING.url,
-};
+// INTEROPERABILITY ROUTES
+export const ROUTE_INTEROPERABILITY = createRoute(
+  "interoperabel",
+  "Interoperable Regelungen",
+  ROUTE_LANDING,
+);
+export const ROUTE_INTEROPERABILITY_SPOC = createRoute(
+  "nationale-kontaktstelle",
+  "Nationale Kontaktstelle",
+  ROUTE_INTEROPERABILITY,
+);
 
-export const ROUTE_EXAMPLES: Route = {
-  url: "/beispiele",
-  title: "Beispiele für Digitaltauglichkeit",
-  parent: ROUTE_LANDING.url,
-};
-export const ROUTE_EXAMPLES_PRINCIPLES: Route = {
-  url: `${ROUTE_EXAMPLES.url}/prinzipien`,
-  title: "Prinzipien",
-  parent: ROUTE_EXAMPLES.url,
-};
-export const ROUTE_EXAMPLES_DIGITAL_COMMUNICATION: Route = {
-  url: `${ROUTE_EXAMPLES_PRINCIPLES.url}/digitale-kommunikation-sicherstellen`,
-  title: "Prinzip 1 in Regelungstexten",
-  parent: ROUTE_PRINCIPLES.url,
-};
-export const ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS: Route = {
-  url: `${ROUTE_EXAMPLES_PRINCIPLES.url}/wiederverwendung-von-daten-und-standards-ermoeglichen`,
-  title: "Prinzip 2 in Regelungstexten",
-  parent: ROUTE_PRINCIPLES.url,
-};
-export const ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY: Route = {
-  url: `${ROUTE_EXAMPLES_PRINCIPLES.url}/datenschutz-und-informationssicherheit-gewaehrleisten`,
-  title: "Prinzip 3 in Regelungstexten",
-  parent: ROUTE_PRINCIPLES.url,
-};
-export const ROUTE_EXAMPLES_CLEAR_REGULATIONS: Route = {
-  url: `${ROUTE_EXAMPLES_PRINCIPLES.url}/klare-regelungen-fuer-eine-digitale-ausfuehrung-finden`,
-  title: "Prinzip 4 in Regelungstexten",
-  parent: ROUTE_PRINCIPLES.url,
-};
-export const ROUTE_EXAMPLES_AUTOMATION: Route = {
-  url: `${ROUTE_EXAMPLES_PRINCIPLES.url}/automatisierung-ermoeglichen`,
-  title: "Prinzip 5 in Regelungstexten",
-  parent: ROUTE_PRINCIPLES.url,
-};
-
-export const ROUTE_REGELUNGEN: Route = {
-  url: `${ROUTE_EXAMPLES.url}/regelungen`,
-  title: "Gesetze",
-  parent: ROUTE_EXAMPLES.url,
-};
-
-export const ROUTE_VISUALISATION: Route = {
-  url: `${ROUTE_EXAMPLES.url}/visualisierung`,
-  title: "Visualisierung",
-  parent: ROUTE_EXAMPLES.url,
-};
-
-export const ROUTE_VISUALISATIONS: Route = {
-  url: `${ROUTE_EXAMPLES.url}/visualisierungen`,
-  title: "Visualisierungen",
-  parent: ROUTE_EXAMPLES.url,
-};
+// EXAMPLES ROUTES
+export const ROUTE_EXAMPLES = createRoute(
+  "beispiele",
+  "Beispiele für Digitaltauglichkeit",
+  ROUTE_LANDING,
+);
+export const ROUTE_EXAMPLES_PRINCIPLES = createRoute(
+  "prinzipien",
+  "Prinzipien",
+  ROUTE_EXAMPLES,
+);
+export const ROUTE_EXAMPLES_DIGITAL_COMMUNICATION = createRoute(
+  "digitale-kommunikation-sicherstellen",
+  "Prinzip 1 in Regelungstexten",
+  ROUTE_EXAMPLES_PRINCIPLES,
+);
+export const ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS = createRoute(
+  "wiederverwendung-von-daten-und-standards-ermoeglichen",
+  "Prinzip 2 in Regelungstexten",
+  ROUTE_EXAMPLES_PRINCIPLES,
+);
+export const ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY =
+  createRoute(
+    "datenschutz-und-informationssicherheit-gewaehrleisten",
+    "Prinzip 3 in Regelungstexten",
+    ROUTE_EXAMPLES_PRINCIPLES,
+  );
+export const ROUTE_EXAMPLES_CLEAR_REGULATIONS = createRoute(
+  "klare-regelungen-fuer-eine-digitale-ausfuehrung-finden",
+  "Prinzip 4 in Regelungstexten",
+  ROUTE_EXAMPLES_PRINCIPLES,
+);
+export const ROUTE_EXAMPLES_AUTOMATION = createRoute(
+  "automatisierung-ermoeglichen",
+  "Prinzip 5 in Regelungstexten",
+  ROUTE_EXAMPLES_PRINCIPLES,
+);
+export const ROUTE_REGELUNGEN = createRoute(
+  "regelungen",
+  "Gesetze",
+  ROUTE_EXAMPLES,
+);
+export const ROUTE_EXAMPLES_VISUALISATIONS = createRoute(
+  "visualisierungen",
+  "Visualisierungen",
+  ROUTE_EXAMPLES,
+);
+export const ROUTE_VISUALISATION = createRoute(
+  "visualisierung",
+  "Visualisierung",
+  ROUTE_EXAMPLES,
+);
 
 export const ROUTES: Route[] = [
   ROUTE_LANDING,
@@ -193,5 +191,5 @@ export const ROUTES: Route[] = [
   ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY,
   ROUTE_EXAMPLES_CLEAR_REGULATIONS,
   ROUTE_EXAMPLES_AUTOMATION,
-  ROUTE_VISUALISATIONS,
+  ROUTE_EXAMPLES_VISUALISATIONS,
 ];

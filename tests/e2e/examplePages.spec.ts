@@ -1,8 +1,8 @@
 import { expect, test } from "@playwright/test";
 import {
   ROUTE_EXAMPLES_PRINCIPLES,
+  ROUTE_EXAMPLES_VISUALISATIONS,
   ROUTE_REGELUNGEN,
-  ROUTE_VISUALISATIONS,
 } from "~/resources/routeDefinitions";
 
 const principles = [
@@ -90,7 +90,7 @@ test.describe("Prinzipien Detail", () => {
 
 test.describe("Visualizations Overview Page", () => {
   test("displays main heading and subtitle", async ({ page }) => {
-    await page.goto(ROUTE_VISUALISATIONS.url);
+    await page.goto(ROUTE_EXAMPLES_VISUALISATIONS.url);
 
     const pageTitle = page.getByRole("heading").first();
     await expect(pageTitle).toContainText("Beispiele für Visualisierungen");
@@ -102,7 +102,7 @@ test.describe("Visualizations Overview Page", () => {
   });
 
   test("displays visualization details correctly", async ({ page }) => {
-    await page.goto(ROUTE_VISUALISATIONS.url);
+    await page.goto(ROUTE_EXAMPLES_VISUALISATIONS.url);
 
     const firstVisualization = page.locator(".flex.max-sm\\:flex-col").first();
 
@@ -116,7 +116,7 @@ test.describe("Visualizations Overview Page", () => {
   });
 
   test("opens images in new tab", async ({ page, context }) => {
-    await page.goto(ROUTE_VISUALISATIONS.url);
+    await page.goto(ROUTE_EXAMPLES_VISUALISATIONS.url);
 
     const firstImage = page.locator('a[target="_blank"]').first();
     await expect(firstImage).toBeVisible();
@@ -132,7 +132,7 @@ test.describe("Visualizations Overview Page", () => {
   });
 
   test("navigation to regelung detail works", async ({ page }) => {
-    await page.goto(ROUTE_VISUALISATIONS.url);
+    await page.goto(ROUTE_EXAMPLES_VISUALISATIONS.url);
 
     const firstRegelungLink = page
       .locator(`a[href^="${ROUTE_REGELUNGEN.url}"]`)

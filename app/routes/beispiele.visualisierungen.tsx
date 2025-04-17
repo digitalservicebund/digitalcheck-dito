@@ -7,8 +7,8 @@ import Heading from "~/components/Heading";
 import VisualisationItem from "~/components/VisualisationItem";
 import { examplesVisualisations } from "~/resources/content/beispiele-visualisierungen";
 import {
+  ROUTE_EXAMPLES_VISUALISATIONS,
   ROUTE_REGELUNGEN,
-  ROUTE_VISUALISATIONS,
 } from "~/resources/routeDefinitions";
 import prependMetaTitle from "~/utils/metaTitle";
 import {
@@ -18,11 +18,11 @@ import {
 } from "~/utils/strapiData.server";
 
 export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_VISUALISATIONS.title, matches);
+  return prependMetaTitle(ROUTE_EXAMPLES_VISUALISATIONS.title, matches);
 };
 
 export const handle = {
-  breadcrumb: () => ROUTE_VISUALISATIONS,
+  breadcrumb: () => ROUTE_EXAMPLES_VISUALISATIONS,
 };
 
 const GET_VISUALISATIONS_QUERY = `
