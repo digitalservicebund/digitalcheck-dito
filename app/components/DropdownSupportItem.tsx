@@ -3,7 +3,7 @@ import { header } from "~/resources/content/components/header.ts";
 const DropdownSupportItem = ({ mobile }: { mobile: boolean }) => {
   return (
     <div className="px-16 lg:px-56">
-      <div className="ds-label-02-reg px-16 pt-16 pb-24 text-gray-900">
+      <div className="ds-label-02-reg px-16 pt-8 pb-16 text-gray-900 lg:pt-16 lg:pb-24">
         {mobile ? header.contact.msgMobile : header.contact.msg}
         <a
           href={`tel:${header.contact.number}`}

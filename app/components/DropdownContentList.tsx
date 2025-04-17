@@ -65,7 +65,7 @@ export default function DropdownContentList({
 
   return isList ? (
     // No styling because the numbers are rendered inside the DropdownItem
-    <ol className="list-none">{data.map(mapDataToItems)}</ol>
+    <ol className="list-unstyled list-none">{data.map(mapDataToItems)}</ol>
   ) : (
     <>{data.map(mapDataToItems)}</>
   );
