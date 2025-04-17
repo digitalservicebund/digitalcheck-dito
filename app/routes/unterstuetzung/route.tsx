@@ -60,20 +60,21 @@ export default function Index() {
   const hilfeRef = useRef<HTMLDivElement>(null);
 
   // ensure page scrolls to the correct section when navigating to the page
+  // Brief delay to allow elements to render which shift the content
   useEffect(() => {
     if (location.hash === "#angebote" && angeboteRef.current) {
       const timerId = setTimeout(() => {
         if (angeboteRef.current) {
           angeboteRef.current.scrollIntoView({ behavior: "auto" });
         }
-      }, 0);
+      }, 100);
       return () => clearTimeout(timerId);
     } else if (location.hash === "#hilfe" && hilfeRef.current) {
       const timerId = setTimeout(() => {
         if (hilfeRef.current) {
           hilfeRef.current.scrollIntoView({ behavior: "auto" });
         }
-      }, 0);
+      }, 100);
       return () => clearTimeout(timerId);
     }
   }, []);

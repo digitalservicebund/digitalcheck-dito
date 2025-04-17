@@ -106,7 +106,6 @@ export default function Dropdown({
       >
         {label} {isExpanded ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
       </button>
-
       {isExpanded && (
         <div
           className={panelClasses}

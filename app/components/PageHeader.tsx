@@ -98,6 +98,7 @@ const PageHeader = ({
 
   const showOverlay = activeDropdownId !== null || mobileMenuOpen;
 
+  // Determines if the main dropdown item is set active - if any of the subitems is the current path
   const getParentActive = (items: { href: string; allHrefs?: string[] }[]) => {
     return items.some((subItem) => {
       const hrefs =
