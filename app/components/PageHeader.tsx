@@ -11,18 +11,36 @@ import { ROUTE_LANDING } from "~/resources/staticRoutes.ts";
 import twMerge from "~/utils/tailwindMerge.ts";
 import { normalizePathname } from "~/utils/utilFunctions.ts";
 
+interface SubItem {
+  title: string;
+  content?: string;
+  href: string;
+  allHrefs?: string[];
+}
+
+interface HeaderItem {
+  text: string;
+  overlayContent: SubItem[];
+  hasSupport?: boolean;
+  isList?: boolean;
+}
+
 const findActiveParentItemText = (
   pathname: string,
-  items: typeof header.items,
+  items: ReadonlyArray<HeaderItem>,
 ): string | null => {
   const cleanPathname = normalizePathname(pathname);
 
   for (const item of items) {
     if (item.overlayContent) {
       for (const subItem of item.overlayContent) {
-        const cleanHref = normalizePathname(subItem.href);
-        if (cleanHref && cleanHref === cleanPathname) {
-          return item.text;
+        const hrefsToCheck = [subItem.href].concat(subItem.allHrefs || []);
+
+        for (const href of hrefsToCheck) {
+          const cleanHref = normalizePathname(href);
+          if (cleanHref && cleanHref === cleanPathname) {
+            return item.text;
+          }
         }
       }
     }
@@ -49,7 +67,6 @@ const PageHeader = ({
         closeAll();
       }
     };
-
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
