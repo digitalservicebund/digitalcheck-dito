@@ -35,10 +35,7 @@ export default function DropdownItem({
             NEU
           </span>
         )}
-        {/*
-        // TODO: render list as html
-*/}
-        {number !== 0 && <span className="mr-4">{number}. </span>}
+        {number && <span className="mr-4">{number}. </span>}
         {title}
       </div>
       {content && <span className="hidden lg:inline">{content}</span>}

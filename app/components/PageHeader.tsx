@@ -178,7 +178,6 @@ const PageHeader = ({
               </button>
             </div>
           </div>
-
           {/* Mobile Navigation */}
           <div
             id="mobile-menu"

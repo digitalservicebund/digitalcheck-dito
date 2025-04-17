@@ -40,6 +40,7 @@ export default function Dropdown({
   const isMobile = variant === "mobile";
   const elementId = `dropdown-${label?.replace(/\s+/g, "-").toLowerCase()}`;
 
+  // Transparent borders to avoid layout shifts
   const buttonClasses = twMerge(
     "flex cursor-pointer items-center hover:bg-blue-100",
     !isMobile &&
