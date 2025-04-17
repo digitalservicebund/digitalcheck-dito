@@ -177,5 +177,3 @@ export const ROUTES: Route[] = [
   ROUTE_EXAMPLES_AUTOMATION,
   ROUTE_EXAMPLES_VISUALISATIONS,
 ];
-
-console.log(ROUTES);
