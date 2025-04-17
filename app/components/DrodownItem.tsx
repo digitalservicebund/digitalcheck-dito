@@ -21,6 +21,8 @@ export default function DropdownItem({
   className,
   isActive,
 }: Readonly<DropdownItemProps>) {
+  const newLabelStyle =
+    "ds-label-02-reg mr-8 rounded-md bg-blue-300 px-[4px] py-[2px] text-[#004B76]";
   return (
     <div
       className={twMerge(
@@ -30,20 +32,14 @@ export default function DropdownItem({
       )}
     >
       <div className="ds-label-02-reg lg:ds-label-01-bold">
-        {isNewTitle && (
-          <span className="ds-label-02-reg mr-8 rounded-md bg-blue-300 px-[4px] py-[2px] text-[#004B76]">
-            NEU
-          </span>
-        )}
+        {isNewTitle && <span className={newLabelStyle}>NEU</span>}
         {number && <span className="mr-4">{number}. </span>}
         {title}
       </div>
       {content && <span className="hidden lg:inline">{content}</span>}
       {newContent && (
         <div className="max-lg:hidden">
-          <span className="ds-label-02-reg mr-8 rounded-md bg-blue-300 px-[4px] py-[2px] text-[#004B76]">
-            NEU
-          </span>
+          <span className={newLabelStyle}>NEU</span>
           <span>{newContent}</span>
         </div>
       )}
