@@ -35,10 +35,9 @@ export default function DropdownContentList({
 
     if (isList) {
       return (
-        <li>
+        <li key={index}>
           <Link
             to={option.href!}
-            key={index}
             role="option"
             onClick={onItemClick}
             aria-selected={isActive}
