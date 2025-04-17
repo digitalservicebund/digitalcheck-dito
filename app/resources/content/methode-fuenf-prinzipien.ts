@@ -107,7 +107,7 @@ export const methodsFivePrinciples = {
           action:
             "Schreiben Sie die Nutzung etablierter, öffentlicher Technologien vor",
           description:
-            "Diese Technologien sind z.B. öffentliche Basisdienste, Softwarearchitekturen oder Komponentenbibliotheken umfassen. Ihre Wiederverwendung spart Zeit und verringert den Erfüllungsaufwand für Entwicklung und Betrieb. Darüberhinaus verbessert die Nutzung einheitlicher Systeme die Zusammenarbeit zwischen Behörden und vertraute Benutzeroberflächen vereinfachen die Bedienung.",
+            "Diese technischen Lösungen sind z.B. öffentliche Basisdienste, Softwarearchitekturen oder Komponentenbibliotheken. Ihre Wiederverwendung spart Zeit und verringert den Erfüllungsaufwand für Entwicklung und Betrieb. Darüberhinaus verbessert die Nutzung einheitlicher Systeme die Zusammenarbeit zwischen Behörden und vertraute Benutzeroberflächen vereinfachen die Bedienung.",
           questions: [
             "Existieren für die beschriebenen digitalen Prozesse bereits etablierte, technische Lösungen? Werden diese genutzt bzw. ermöglicht das Gesetz den einfachen Anschluss an bereits vorhandene digitale Systeme?",
             "Werden europäische Standards wie eIDAS beachtet?",
