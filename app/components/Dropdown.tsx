@@ -2,7 +2,7 @@ import {
   ExpandLessOutlined,
   ExpandMoreOutlined,
 } from "@digitalservicebund/icons";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import type { DropdownItemProps } from "~/components/DrodownItem.tsx";
 import DropdownContentList from "~/components/DropdownContentList";
 import DropdownSupportItem from "~/components/DropdownSupportItem";
@@ -36,9 +36,8 @@ export default function Dropdown({
   onToggle,
   onItemClick,
 }: Readonly<DropdownProps>) {
-  const dropdownRef = useRef<HTMLDivElement>(null);
   const isMobile = variant === "mobile";
-  const elementId = `dropdown-${label?.replace(/\s+/g, "-").toLowerCase()}`;
+  const elementId = `dropdown-${label}`;
 
   // Transparent borders to avoid layout shifts
   const buttonClasses = twMerge(
@@ -91,7 +90,6 @@ export default function Dropdown({
   return (
     <div
       className={containerClasses}
-      ref={dropdownRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

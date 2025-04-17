@@ -19,6 +19,7 @@ import Button from "~/components/Button";
 import Container from "~/components/Container";
 import Footer from "~/components/Footer";
 import Heading from "~/components/Heading";
+import PageHeader from "~/components/PageHeader";
 import RichText from "~/components/RichText";
 import { siteMeta } from "~/resources/content/shared/meta";
 import {
@@ -37,7 +38,6 @@ import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants.server";
 import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
 import type { Route } from "./+types/root";
-import PageHeader from "./components/PageHeader";
 
 export function loader({ request }: Route.LoaderArgs) {
   const featureFlags = getFeatureFlags();
