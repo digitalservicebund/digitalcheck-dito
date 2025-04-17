@@ -31,7 +31,7 @@ export default function DropdownItem({
     >
       <div className="ds-label-02-reg lg:ds-label-01-bold">
         {isNewTitle && (
-          <span className="ds-label-02-reg mr-8 rounded-md bg-blue-300 px-8 py-4 text-[#004B76]">
+          <span className="ds-label-02-reg mr-8 rounded-md bg-blue-300 px-[4px] py-[2px] text-[#004B76]">
             NEU
           </span>
         )}
@@ -41,7 +41,7 @@ export default function DropdownItem({
       {content && <span className="hidden lg:inline">{content}</span>}
       {newContent && (
         <div className="max-lg:hidden">
-          <span className="ds-label-02-reg mr-8 rounded-md bg-blue-300 px-8 py-4 text-[#004B76]">
+          <span className="ds-label-02-reg mr-8 rounded-md bg-blue-300 px-[4px] py-[2px] text-[#004B76]">
             NEU
           </span>
           <span>{newContent}</span>
