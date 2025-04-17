@@ -19,6 +19,7 @@ export default function DropdownContentList({
   return (
     <>
       {data.map((option, index) => {
+        // Special case principles. Check if any of the principle urls match the current location
         const isActive =
           option.href === currentPathname ||
           (option.allHrefs && option.allHrefs.includes(currentPathname));
