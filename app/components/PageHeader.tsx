@@ -178,13 +178,17 @@ const PageHeader = ({
 
             {/* Mobile View Controls */}
             <div className="flex items-center space-x-16 lg:hidden">
-              <a href={`tel:${header.contact.number}`}>
+              <a
+                className="border-b-[4px] border-transparent"
+                href={`tel:${header.contact.number}`}
+              >
                 <PhoneOutlined />
               </a>
               <button
                 className={twMerge(
-                  "h-full cursor-pointer border-blue-800 px-16 hover:bg-blue-100 focus:border-b-[4px] focus:bg-blue-100",
-                  mobileMenuOpen && "border-b-[4px] bg-blue-100",
+                  "h-full cursor-pointer border-b-[4px] border-transparent px-16 hover:bg-blue-100 focus:border-b-[4px] focus:bg-blue-100",
+                  mobileMenuOpen &&
+                    "border-b-[4px] border-blue-800 bg-blue-100",
                 )}
                 onClick={toggleMobileMenu}
                 aria-label="Menü öffnen/schließen"

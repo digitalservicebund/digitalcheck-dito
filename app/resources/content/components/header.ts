@@ -23,20 +23,23 @@ export const header = {
       text: "Schritt für Schritt",
       overlayContent: [
         {
-          title: "Vorprüfung: Digitalbezug identifizieren",
+          title: "Vorprüfung: Digitalbezug einschätzen",
           content:
             "Anhand von 6 Fragen lernen Sie, in welchem Umfang Sie Digitaltauglichkeit beachten müssen.",
+          newContent: "Mit europäischem Interoperabilitätsbezug",
+
           href: ROUTE_PRECHECK.url,
         },
         {
           title: "Digitaltauglichkeit der Regelung sicherstellen",
           content:
             "Wir zeigen Ihnen Schritt für Schritt, wie Sie Ihr Vorhaben digitaltauglich gestalten.",
-          newContent: "Mit EU Interoperabilitätsstandards",
           href: ROUTE_METHODS.url,
         },
         {
           title: "Dokumentieren der Digitaltauglichkeit",
+          content:
+            "Dokumentieren Sie, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben.",
           href: ROUTE_DOCUMENTATION.url,
         },
       ],
@@ -45,9 +48,9 @@ export const header = {
       text: "Beispiele",
       overlayContent: [
         {
-          title: "Die 5 Prinzipien im Regelungstext",
+          title: "Digitaltauglichkeit im Regelungstext",
           content:
-            "Beispiele für digitaltaugliche Formulierungen aus anderen Regelungsvorhaben.",
+            "So wurden die 5 Prinzipien von Ihren Kolleginnen und Kollegen in Regelungen ausformuliert.",
           href: allRoutes.filter(
             (route) => route.parent === ROUTE_PRINCIPLES.url,
           )[0].url,
