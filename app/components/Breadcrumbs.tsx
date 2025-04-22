@@ -24,7 +24,7 @@ export default function Breadcrumbs() {
   const uniqueBreadcrumbs = breadcrumbs
     .filter((route) => route !== undefined)
     .filter(
-      // Remove duplicate URLs that come from parent + _index routes
+      // Remove duplicate URLs that come from parent + parent._index routes
       (breadcrumb, index, self) =>
         index === self.findIndex((t) => t?.url === breadcrumb?.url),
     );
