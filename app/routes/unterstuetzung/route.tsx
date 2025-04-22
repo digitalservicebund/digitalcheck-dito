@@ -57,7 +57,7 @@ function SocialProofImage() {
 export default function Index() {
   const [isAppointmentsVisible, setIsAppointmentsVisible] = useState(false);
 
-  // ensure page scrolls to the correct section when navigating to the page
+  // Ensure page scrolls to the correct section when navigating to the page
   // Brief delay to allow elements to render which shift the content
   useEffect(() => {
     const scrollTargetId = location.hash.substring(1);
