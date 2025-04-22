@@ -11,10 +11,6 @@ export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_SITEMAP.title, matches);
 };
 
-export const handle = {
-  breadcrumb: () => ROUTE_SITEMAP,
-};
-
 type RouteWithChildren = Route & {
   children: RouteWithChildren[];
 };

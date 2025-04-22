@@ -11,10 +11,8 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  UIMatch,
   useLoaderData,
   useLocation,
-  useMatches,
   useRouteError,
   useRouteLoaderData,
 } from "react-router";
@@ -34,7 +32,6 @@ import {
   ROUTE_LANDING,
   ROUTE_PRIVACY,
   ROUTE_SITEMAP,
-  type Route as TRoute,
 } from "~/resources/routeDefinitions";
 import sharedStyles from "~/styles.css?url";
 import {
@@ -233,63 +230,47 @@ const footerLinks = [
   { url: ROUTE_SITEMAP.url, text: "Sitemap" },
 ];
 
-type BreadcrumbMatch = UIMatch<
-  unknown,
-  { breadcrumb: (match: UIMatch<unknown>) => TRoute }
->;
-
 const PageHeader = ({
   includeBreadcrumbs = true,
 }: {
   includeBreadcrumbs?: boolean;
-}) => {
-  const matches = useMatches();
-  const breadcrumbs = matches
-    .filter(
-      (match): match is BreadcrumbMatch =>
-        typeof match.handle === "object" &&
-        match.handle !== null &&
-        "breadcrumb" in match.handle,
-    )
-    .map((match) => match.handle.breadcrumb(match));
-  return (
-    <header>
-      <div className="flex min-h-64 items-center justify-between p-16">
-        <Link to={ROUTE_LANDING.url}>
-          <img src="/logo/bund-logo.png" alt="Logo des Bundes" width={54} />
-        </Link>
-        <div className="flex items-center max-lg:hidden">
-          <div className="text-lg">
-            <span className="font-bold">{header.title}</span>
-            <span className="mx-8">|</span>
-            <Button href="/unterstuetzung" look="link">
-              Unterstützungsangebote
-            </Button>
-            <span className="mx-8">|</span>
-            {header.contact.msg}
-          </div>
-          <PhoneOutlined className="mx-8" />
-          <a
-            href={`tel:${header.contact.number}`}
-            className="plausible-event-name=Phone+Click plausible-event-position=header ds-link-01-bold"
-          >
-            {header.contact.number}
-          </a>
+}) => (
+  <header>
+    <div className="flex min-h-64 items-center justify-between p-16">
+      <Link to={ROUTE_LANDING.url}>
+        <img src="/logo/bund-logo.png" alt="Logo des Bundes" width={54} />
+      </Link>
+      <div className="flex items-center max-lg:hidden">
+        <div className="text-lg">
+          <span className="font-bold">{header.title}</span>
+          <span className="mx-8">|</span>
+          <Button href="/unterstuetzung" look="link">
+            Unterstützungsangebote
+          </Button>
+          <span className="mx-8">|</span>
+          {header.contact.msg}
         </div>
-        <div className="lg:hidden">
-          <a href="/unterstuetzung" className="ds-link-01-bold">
-            Kontakt & Unterstützung
-          </a>
-        </div>
+        <PhoneOutlined className="mx-8" />
+        <a
+          href={`tel:${header.contact.number}`}
+          className="plausible-event-name=Phone+Click plausible-event-position=header ds-link-01-bold"
+        >
+          {header.contact.number}
+        </a>
       </div>
-      {includeBreadcrumbs && (
-        <Background backgroundColor="blue">
-          <Breadcrumbs breadcrumbs={breadcrumbs} />
-        </Background>
-      )}
-    </header>
-  );
-};
+      <div className="lg:hidden">
+        <a href="/unterstuetzung" className="ds-link-01-bold">
+          Kontakt & Unterstützung
+        </a>
+      </div>
+    </div>
+    {includeBreadcrumbs && (
+      <Background backgroundColor="blue">
+        <Breadcrumbs />
+      </Background>
+    )}
+  </header>
+);
 
 function Document({
   children,

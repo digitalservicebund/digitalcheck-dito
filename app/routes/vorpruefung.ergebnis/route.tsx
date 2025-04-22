@@ -54,10 +54,6 @@ export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_RESULT.title, matches);
 };
 
-export const handle = {
-  breadcrumb: () => ROUTE_RESULT,
-};
-
 export async function loader({ request }: Route.LoaderArgs) {
   const cookie = await getAnswersFromCookie(request);
   const { answers } = cookie;

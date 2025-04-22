@@ -1,4 +1,4 @@
-import { type MetaArgs, type UIMatch, useLoaderData } from "react-router";
+import { type MetaArgs, useLoaderData } from "react-router";
 
 import Background from "~/components/Background";
 import Box from "~/components/Box";
@@ -29,10 +29,6 @@ const contentMap = {
   [ROUTE_METHODS_TASKS_PROCESSES.title]: methodsTasksProcesses,
   [ROUTE_METHODS_COLLECT_IT_SYSTEMS.title]: methodsITSystems,
   [ROUTE_METHODS_TECHNICAL_FEASIBILITY.title]: methodsTechnicalFeasibility,
-};
-
-export const handle = {
-  breadcrumb: (match: UIMatch) => ROUTES.find((r) => r.url === match.pathname),
 };
 
 const notFound = new Response("Method page not found", {

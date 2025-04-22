@@ -15,10 +15,6 @@ export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_DOCUMENTATION.title, matches);
 };
 
-export const handle = {
-  breadcrumb: () => ROUTE_DOCUMENTATION,
-};
-
 export default function Index() {
   return (
     <>

@@ -21,10 +21,6 @@ export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_EXAMPLES_VISUALISATIONS.title, matches);
 };
 
-export const handle = {
-  breadcrumb: () => ROUTE_EXAMPLES_VISUALISATIONS,
-};
-
 const GET_VISUALISATIONS_QUERY = `
 ${visualisationFields}
 query GetVisualisierungen {

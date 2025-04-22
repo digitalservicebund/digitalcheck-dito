@@ -11,10 +11,6 @@ export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_A11Y.title, matches);
 };
 
-export const handle = {
-  breadcrumb: () => ROUTE_A11Y,
-};
-
 export default function Accessibility() {
   return (
     <>

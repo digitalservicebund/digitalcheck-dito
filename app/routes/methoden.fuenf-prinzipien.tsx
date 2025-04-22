@@ -26,10 +26,6 @@ export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_METHODS_FIVE_PRINCIPLES.title, matches);
 };
 
-export const handle = {
-  breadcrumb: () => ROUTE_METHODS_FIVE_PRINCIPLES,
-};
-
 export async function loader({ request }: Route.LoaderArgs) {
   const referer = request.headers.get("referer");
   let pathname = "/";
