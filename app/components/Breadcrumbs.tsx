@@ -6,7 +6,6 @@ type Breadcrumb = (match: UIMatch) => Route;
 
 export default function Breadcrumbs() {
   const matchesWithoutLanding = useMatches().slice(1);
-  console.log(matchesWithoutLanding);
   const breadcrumbs = matchesWithoutLanding.map((match) => {
     // Use a handle if it exists in the route
     if (
