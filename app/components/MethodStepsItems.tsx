@@ -31,11 +31,11 @@ const MethodStepsItems = (showContent: boolean): ListItemProps[] =>
           )
         : undefined,
       headline: {
-        ...headline, // Keep original headline text
-        tagName: isSubstep ? "h3" : "h2", // Override tagName
-        look: isSubstep ? "ds-heading-03-reg" : "ds-heading-02-bold", // Override look
+        ...headline,
+        tagName: isSubstep ? "h3" : "h2",
+        look: isSubstep ? "ds-heading-03-reg" : "ds-heading-02-bold",
       },
-      ...(showContent && { buttons: buttons }),
+      ...(showContent && { buttons: buttons }), // only show buttons for variant with content
     };
   });
 
