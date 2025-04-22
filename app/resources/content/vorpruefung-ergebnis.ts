@@ -3,7 +3,7 @@ import {
   ROUTE_INTEROPERABILITY,
   ROUTE_METHODS,
   ROUTE_PRECHECK,
-} from "~/resources/routeDefinitions";
+} from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const preCheckResult = {

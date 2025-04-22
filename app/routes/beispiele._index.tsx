@@ -8,7 +8,7 @@ import { examples } from "~/resources/content/beispiele";
 import {
   ROUTE_EXAMPLES,
   ROUTE_EXAMPLES_PRINCIPLES,
-} from "~/resources/routeDefinitions";
+} from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 import { Prinzip } from "~/utils/strapiData.server";
 

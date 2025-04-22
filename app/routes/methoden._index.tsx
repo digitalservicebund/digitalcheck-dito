@@ -9,7 +9,7 @@ import { BulletList, NumberedList } from "~/components/List";
 import { ListItemProps } from "~/components/ListItem";
 import SupportBanner from "~/components/SupportBanner";
 import { methods } from "~/resources/content/methoden";
-import { ROUTE_METHODS } from "~/resources/routeDefinitions";
+import { ROUTE_METHODS } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 
 export const meta = ({ matches }: MetaArgs) => {

@@ -10,7 +10,7 @@ import { BulletList } from "~/components/List";
 import { ListItemProps } from "~/components/ListItem";
 import RichText from "~/components/RichText";
 import { spoc } from "~/resources/content/interoperabel-nationale-kontaktstelle";
-import { ROUTE_INTEROPERABILITY_SPOC } from "~/resources/routeDefinitions";
+import { ROUTE_INTEROPERABILITY_SPOC } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 
 export const meta = ({ matches }: MetaArgs) => {

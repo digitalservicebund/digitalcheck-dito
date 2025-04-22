@@ -17,7 +17,7 @@ import {
   ROUTE_LANDING,
   ROUTE_PRECHECK,
   ROUTE_PRECHECK_INFO,
-} from "~/resources/routeDefinitions";
+} from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 
 export const meta = ({ matches }: MetaArgs) => {

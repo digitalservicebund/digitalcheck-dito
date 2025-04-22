@@ -1,10 +1,6 @@
 import HomeOutlined from "@digitalservicebund/icons/HomeOutlined";
 import { Link, useMatches, type UIMatch } from "react-router";
-import {
-  ROUTE_LANDING,
-  ROUTES,
-  type Route,
-} from "~/resources/routeDefinitions";
+import { ROUTE_LANDING, ROUTES, type Route } from "~/resources/staticRoutes";
 
 type Breadcrumb = (match: UIMatch) => Route;
 

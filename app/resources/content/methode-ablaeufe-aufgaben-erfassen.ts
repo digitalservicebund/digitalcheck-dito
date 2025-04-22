@@ -8,7 +8,7 @@ import {
   ROUTE_METHODS_COLLECT_IT_SYSTEMS,
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
   ROUTE_SUPPORT,
-} from "~/resources/routeDefinitions";
+} from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsTasksProcesses = {

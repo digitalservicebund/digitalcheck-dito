@@ -4,7 +4,7 @@ import Container from "~/components/Container";
 import Header from "~/components/Header";
 import RichText from "~/components/RichText";
 import { accessibility } from "~/resources/content/barrierefreiheit";
-import { ROUTE_A11Y } from "~/resources/routeDefinitions";
+import { ROUTE_A11Y } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 
 export const meta = ({ matches }: MetaArgs) => {

@@ -3,7 +3,7 @@ import DrawOutlined from "@digitalservicebund/icons/DrawOutlined";
 import {
   ROUTE_LANDING,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
-} from "~/resources/routeDefinitions";
+} from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsFivePrinciples = {

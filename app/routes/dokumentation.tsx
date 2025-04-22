@@ -8,7 +8,7 @@ import InlineNotice from "~/components/InlineNotice";
 import { NumberedList } from "~/components/List";
 import SupportBanner from "~/components/SupportBanner";
 import { documentation } from "~/resources/content/dokumentation";
-import { ROUTE_DOCUMENTATION } from "~/resources/routeDefinitions";
+import { ROUTE_DOCUMENTATION } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 
 export const meta = ({ matches }: MetaArgs) => {

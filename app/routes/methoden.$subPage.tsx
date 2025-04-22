@@ -20,7 +20,7 @@ import {
   ROUTE_METHODS_TASKS_PROCESSES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
   ROUTES,
-} from "~/resources/routeDefinitions";
+} from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 import type { Route } from "./+types/methoden.$subPage";
 

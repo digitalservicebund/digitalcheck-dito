@@ -2,7 +2,7 @@ import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRight
 import DrawOutlined from "@digitalservicebund/icons/DrawOutlined";
 import LightbulbOutlined from "@digitalservicebund/icons/LightbulbOutlined";
 import StickyNote2Outlined from "@digitalservicebund/icons/StickyNote2Outlined";
-import { ROUTE_METHODS_TASKS_PROCESSES } from "~/resources/routeDefinitions";
+import { ROUTE_METHODS_TASKS_PROCESSES } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsResponsibleActors = {

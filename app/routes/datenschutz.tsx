@@ -4,7 +4,7 @@ import Container from "~/components/Container";
 import Header from "~/components/Header";
 import RichText from "~/components/RichText";
 import { privacy } from "~/resources/content/datenschutz";
-import { ROUTE_PRIVACY } from "~/resources/routeDefinitions";
+import { ROUTE_PRIVACY } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 
 export const meta = ({ matches }: MetaArgs) => {

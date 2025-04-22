@@ -18,7 +18,7 @@ import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import {
   ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_REGELUNGEN,
-} from "~/resources/routeDefinitions";
+} from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,

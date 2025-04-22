@@ -4,7 +4,7 @@ import { type MetaArgs, useLoaderData } from "react-router";
 import Background from "~/components/Background";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
-import { Route, ROUTE_SITEMAP, ROUTES } from "~/resources/routeDefinitions";
+import { Route, ROUTE_SITEMAP, ROUTES } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 
 export const meta = ({ matches }: MetaArgs) => {

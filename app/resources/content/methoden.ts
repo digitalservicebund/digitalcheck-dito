@@ -9,7 +9,7 @@ import {
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
   ROUTE_METHODS_TASKS_PROCESSES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
-} from "~/resources/routeDefinitions";
+} from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methods = {

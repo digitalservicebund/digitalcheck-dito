@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import * as routeDefinitions from "~/resources/routeDefinitions";
+import * as routeDefinitions from "~/resources/staticRoutes";
 
 test.describe("test support page", () => {
   test.beforeEach("Go to support page", async ({ page }) => {

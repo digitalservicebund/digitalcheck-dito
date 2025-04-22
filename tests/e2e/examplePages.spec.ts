@@ -3,7 +3,7 @@ import {
   ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_EXAMPLES_VISUALISATIONS,
   ROUTE_REGELUNGEN,
-} from "~/resources/routeDefinitions";
+} from "~/resources/staticRoutes";
 
 const principles = [
   "digitale-kommunikation-sicherstellen",

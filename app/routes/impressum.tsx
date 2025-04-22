@@ -4,7 +4,7 @@ import Container from "~/components/Container";
 import Header from "~/components/Header";
 import RichText from "~/components/RichText";
 import { imprint } from "~/resources/content/impressum";
-import { ROUTE_IMPRINT } from "~/resources/routeDefinitions";
+import { ROUTE_IMPRINT } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 
 export const meta = ({ matches }: MetaArgs) => {

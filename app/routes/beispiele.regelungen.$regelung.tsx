@@ -18,7 +18,7 @@ import InlineNotice from "~/components/InlineNotice";
 import ParagraphList from "~/components/ParagraphList";
 import VisualisationItem from "~/components/VisualisationItem";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
-import { ROUTE_REGELUNGEN } from "~/resources/routeDefinitions";
+import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,

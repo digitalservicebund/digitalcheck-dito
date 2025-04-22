@@ -8,7 +8,7 @@ import {
   ROUTE_PRECHECK,
   ROUTE_PRIVACY,
   ROUTES,
-} from "~/resources/routeDefinitions";
+} from "~/resources/staticRoutes";
 
 test.describe("test breadcrumbs and titles", () => {
   test("landing page to not have breadcrumbs", async ({ page }) => {

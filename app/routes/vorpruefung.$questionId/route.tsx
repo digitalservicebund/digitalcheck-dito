@@ -15,7 +15,7 @@ import LinkBar from "~/components/LinkBar";
 import Question from "~/components/Question";
 import { general } from "~/resources/content/shared/general";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { ROUTE_PRECHECK } from "~/resources/routeDefinitions";
+import { ROUTE_PRECHECK } from "~/resources/staticRoutes";
 import {
   getAnswersFromCookie,
   getHeaderFromCookie,

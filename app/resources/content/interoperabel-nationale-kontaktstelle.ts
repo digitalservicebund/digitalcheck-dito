@@ -2,7 +2,7 @@ import {
   ROUTE_INTEROPERABILITY,
   ROUTE_LANDING,
   ROUTE_METHODS_FIVE_PRINCIPLES,
-} from "~/resources/routeDefinitions";
+} from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const spoc = {

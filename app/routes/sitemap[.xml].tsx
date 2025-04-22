@@ -1,4 +1,4 @@
-import { ROUTES } from "~/resources/routeDefinitions";
+import { ROUTES } from "~/resources/staticRoutes";
 import type { Route } from "./+types/sitemap[.xml]";
 export const loader = ({ request }: Route.LoaderArgs) => {
   const origin = new URL(request.url).origin;

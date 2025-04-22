@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import {
   ROUTE_INTEROPERABILITY,
   ROUTE_PRECHECK,
-} from "~/resources/routeDefinitions";
+} from "~/resources/staticRoutes";
 
 test("clicking on link to interoperability landing page leads to correct page", async ({
   page,

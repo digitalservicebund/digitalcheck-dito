@@ -1,4 +1,4 @@
-import { ROUTE_A11Y, ROUTE_PRIVACY } from "~/resources/routeDefinitions";
+import { ROUTE_A11Y, ROUTE_PRIVACY } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const imprint = {

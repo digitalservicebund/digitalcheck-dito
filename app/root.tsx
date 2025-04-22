@@ -32,7 +32,7 @@ import {
   ROUTE_LANDING,
   ROUTE_PRIVACY,
   ROUTE_SITEMAP,
-} from "~/resources/routeDefinitions";
+} from "~/resources/staticRoutes";
 import sharedStyles from "~/styles.css?url";
 import {
   PLAUSIBLE_DOMAIN as CLIENT_PLAUSIBLE_DOMAIN,

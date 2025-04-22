@@ -5,7 +5,7 @@ import {
   ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_SUPPORT,
   ROUTES,
-} from "~/resources/routeDefinitions";
+} from "~/resources/staticRoutes";
 
 test.describe("basic example a11y test", () => {
   ROUTES.filter(

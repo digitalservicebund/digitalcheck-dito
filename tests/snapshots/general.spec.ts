@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import { ROUTES } from "~/resources/routeDefinitions";
+import { ROUTES } from "~/resources/staticRoutes";
 
 async function wait(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
