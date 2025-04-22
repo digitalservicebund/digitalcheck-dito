@@ -1,6 +1,8 @@
 import allRoutes from "~/resources/allRoutes.ts";
 import {
   ROUTE_DOCUMENTATION,
+  ROUTE_FUNDAMENTALS_METHODS,
+  ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_INTEROPERABILITY,
   ROUTE_METHODS,
   ROUTE_PRECHECK,
@@ -69,18 +71,18 @@ export const header = {
     {
       text: "Grundlagen",
       overlayContent: [
-        /*        {
+        {
           title: "Prinzipien für digitaltaugliche Gesetzgebung",
           content:
             "Auf diesen Prinzipien basieren die Instrumente des Digitalcheck.",
-          href: ROUTE_METHODS_FIVE_PRINCIPLES.url,
+          href: ROUTE_FUNDAMENTALS_PRINCIPLES.url,
         },
         {
           title: "Werkzeuge und Methoden",
           content:
             "Lernen Sie die Methoden kennen, mit denen Sie Digitaltauglichkeit sicherstellen können.",
-          href: ROUTE_METHODS.url,
-        },*/
+          href: ROUTE_FUNDAMENTALS_METHODS.url,
+        },
         {
           title: "EU Interoperabilität",
           isNewTitle: true,

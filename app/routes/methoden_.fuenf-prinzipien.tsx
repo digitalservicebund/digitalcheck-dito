@@ -3,15 +3,13 @@ import Background from "~/components/Background";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
-import InfoBox from "~/components/InfoBox";
 import LinkListBox from "~/components/LinkListBox";
+import PrinciplesDisplay from "~/components/PrinciplesDisplay";
 import SupportBanner from "~/components/SupportBanner";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import {
-  ROUTE_EXAMPLES,
   ROUTE_METHODS,
   ROUTE_METHODS_FIVE_PRINCIPLES,
-  ROUTE_PRINCIPLES,
 } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 import {
@@ -78,53 +76,12 @@ export default function FivePrinciples() {
           />
         </Container>
       </Background>
-      {methodsFivePrinciples.principles.map((principle, index) => {
-        const prinzip = prinzips.find(
-          (principle) => principle.Nummer === index,
-        );
-        const buttonLink = prinzip
-          ? `${ROUTE_PRINCIPLES.url}/${prinzip?.URLBezeichnung}`
-          : ROUTE_EXAMPLES.url;
-        const label = slugify(principle.label);
-        return (
-          <Background
-            key={label}
-            backgroundColor={index % 2 === 0 ? "white" : "blue"}
-          >
-            <div id={label} />
-            <Container>
-              <InfoBox
-                heading={{
-                  tagName: "h2",
-                  text: principle.title,
-                }}
-                label={{
-                  tagName: "div",
-                  text: principle.label,
-                  className: "ds-label-section text-gray-900",
-                }}
-                items={[
-                  {
-                    content: principle.content,
-                    buttons: [
-                      {
-                        text: methodsFivePrinciples.buttonText,
-                        href: buttonLink,
-                        prefetch: "viewport",
-                        look: "tertiary" as const,
-                        "aria-label":
-                          index > 0
-                            ? `Beispiele für "${principle.label}: ${principle.title}" betrachten`
-                            : "Alle Beispiele betrachten",
-                      },
-                    ],
-                  },
-                ]}
-              />
-            </Container>
-          </Background>
-        );
-      })}
+      <PrinciplesDisplay
+        principles={methodsFivePrinciples.principles}
+        showInfoBoxButtons={true}
+        prinzips={prinzips}
+        buttonText={methodsFivePrinciples.buttonText}
+      />
       <Container>
         <Box
           heading={{ text: nextStep.title }}
