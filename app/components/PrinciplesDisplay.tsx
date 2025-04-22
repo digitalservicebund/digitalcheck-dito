@@ -28,7 +28,6 @@ export default function PrinciplesDisplay({
     <>
       {principles.map((principle, index) => {
         const label = slugify(principle.label);
-        console.log(buttonText);
         let buttonsArray = undefined;
 
         if (showInfoBoxButtons && prinzips) {
@@ -50,8 +49,6 @@ export default function PrinciplesDisplay({
             },
           ];
         }
-
-        console.log(buttonsArray);
 
         return (
           <Background
