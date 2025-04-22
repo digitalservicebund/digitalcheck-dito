@@ -28,6 +28,7 @@ import {
 } from "~/utils/strapiData.server";
 import { formatDate, gesetzStatusMap } from "~/utils/utilFunctions";
 import type { Route } from "./+types/beispiele.prinzipien.$prinzip";
+
 export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_EXAMPLES_PRINCIPLES.title, matches);
 };
