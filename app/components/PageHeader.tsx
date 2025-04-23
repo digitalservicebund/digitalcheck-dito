@@ -79,8 +79,6 @@ const PageHeader = ({
     };
   }, []);
 
-  // Reset active dropdown when route changes but mobile menu remains open
-
   // Toggle dropdown state
   const toggleDropdown = (itemText: string) => {
     setActiveDropdownId((current) => (current === itemText ? null : itemText));
