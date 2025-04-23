@@ -79,8 +79,13 @@ export default function DropdownContentList({
       {data.map(mapDataToItems)}
     </ol>
   ) : (
-    <div className={isMobile ? mobileElementStyle : ""}>
+    <ul
+      className={twMerge(
+        "list-unstyled list-none",
+        isMobile ? mobileElementStyle : "",
+      )}
+    >
       {data.map(mapDataToItems)}
-    </div>
+    </ul>
   );
 }
