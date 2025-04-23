@@ -80,12 +80,6 @@ const PageHeader = ({
   }, []);
 
   // Reset active dropdown when route changes but mobile menu remains open
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      const parentItemText = findActiveParentItemText(matches, header.items);
-      setActiveDropdownId(parentItemText);
-    }
-  }, [mobileMenuOpen, matches]);
 
   // Toggle dropdown state
   const toggleDropdown = (itemText: string) => {
