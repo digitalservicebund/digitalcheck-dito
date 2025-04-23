@@ -17,7 +17,6 @@ import {
   useRouteLoaderData,
 } from "react-router";
 
-import Background from "~/components/Background";
 import Breadcrumbs from "~/components/Breadcrumbs";
 import Button from "~/components/Button";
 import Container from "~/components/Container";
@@ -264,11 +263,7 @@ const PageHeader = ({
         </a>
       </div>
     </div>
-    {includeBreadcrumbs && (
-      <Background backgroundColor="blue">
-        <Breadcrumbs />
-      </Background>
-    )}
+    {includeBreadcrumbs && <Breadcrumbs />}
   </header>
 );
 
