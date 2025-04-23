@@ -18,7 +18,7 @@ import {
   Prinzip,
 } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
-import type { Route } from "./+types/methoden.fuenf-prinzipien";
+import type { Route } from "./+types/_progress.methoden.fuenf-prinzipien";
 
 export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_METHODS_PRINCIPLES.title, matches);

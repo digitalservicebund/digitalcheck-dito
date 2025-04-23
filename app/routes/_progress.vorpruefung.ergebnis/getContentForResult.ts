@@ -3,7 +3,7 @@ import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
 import type {
   PreCheckAnswerOption,
   PreCheckAnswers,
-} from "~/routes/vorpruefung.$questionId/route";
+} from "~/routes/_progress.vorpruefung.$questionId/route";
 import { PreCheckResult, ResultType } from "./PreCheckResult";
 
 const { questions } = preCheck;

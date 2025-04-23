@@ -6,7 +6,7 @@ import { preCheck } from "~/resources/content/vorpruefung";
 import type {
   PreCheckAnswers,
   TQuestion,
-} from "~/routes/vorpruefung.$questionId/route";
+} from "~/routes/_progress.vorpruefung.$questionId/route";
 import customTwMerge from "~/utils/tailwindMerge";
 
 type PreCheckNavigationProps = Readonly<{

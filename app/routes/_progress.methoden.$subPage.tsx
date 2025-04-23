@@ -22,7 +22,7 @@ import {
   ROUTES,
 } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
-import type { Route } from "./+types/methoden.$subPage";
+import type { Route } from "./+types/_progress.methoden.$subPage";
 
 const contentMap = {
   [ROUTE_METHODS_RESPONSIBLE_ACTORS.title]: methodsResponsibleActors,
