@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router";
 import DropdownItem, {
   type DropdownItemProps,
 } from "~/components/DrodownMenuItem.tsx";
@@ -17,18 +17,26 @@ export default function DropdownContentList({
   onItemClick,
   isMobile = false,
 }: Readonly<DropdownContentListProps>) {
+  const location = useLocation();
+
   const mapDataToItems = (option: DropdownItemProps, index: number) => {
-    const renderContent = ({ isActive }: { isActive: boolean }) => (
-      <DropdownItem
-        number={isList ? index + 1 : undefined}
-        newContent={option.newContent}
-        title={option.title}
-        content={option.content}
-        isNewTitle={option.isNewTitle}
-        isActive={isActive}
-        className={option.className}
-      />
-    );
+    const renderContent = ({ isActive }: { isActive: boolean }) => {
+      const browserHasHash = location.hash !== "";
+      // Don't mark support subsection as active items
+      const finalIsActive = isActive && !browserHasHash;
+
+      return (
+        <DropdownItem
+          number={isList ? index + 1 : undefined}
+          newContent={option.newContent}
+          title={option.title}
+          content={option.content}
+          isNewTitle={option.isNewTitle}
+          isActive={finalIsActive}
+          className={option.className}
+        />
+      );
+    };
 
     if (isList) {
       return (
@@ -59,25 +67,14 @@ export default function DropdownContentList({
   };
 
   const mobileElementStyle = "py-8 pr-8 pl-16 border-b-[1px] border-gray-600 ";
+  const listClasses = twMerge(
+    "list-unstyled list-none",
+    isMobile ? mobileElementStyle : "",
+  );
 
   return isList ? (
-    // No styling because the numbers are rendered inside the DropdownItem
-    <ol
-      className={twMerge(
-        "list-unstyled list-none",
-        isMobile ? mobileElementStyle : "",
-      )}
-    >
-      {data.map(mapDataToItems)}
-    </ol>
+    <ol className={listClasses}>{data.map(mapDataToItems)}</ol>
   ) : (
-    <ul
-      className={twMerge(
-        "list-unstyled list-none",
-        isMobile ? mobileElementStyle : "",
-      )}
-    >
-      {data.map(mapDataToItems)}
-    </ul>
+    <ul className={listClasses}>{data.map(mapDataToItems)}</ul>
   );
 }

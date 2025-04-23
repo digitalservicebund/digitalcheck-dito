@@ -28,18 +28,19 @@ const findActiveParentItemText = (
   matches: ReturnType<typeof useMatches>,
   items: ReadonlyArray<HeaderItem>,
 ): string | null => {
+  const normalizedCurrentPaths = matches.map((match) =>
+    normalizePathname(match.pathname),
+  );
   for (const item of items) {
-    const isActive = item.overlayContent.some((subItem) =>
-      matches.some((match) =>
-        normalizePathname(match.pathname).includes(
-          normalizePathname(subItem.href),
-        ),
-      ),
-    );
+    const isActive = item.overlayContent.some((subItem) => {
+      return normalizedCurrentPaths.includes(normalizePathname(subItem.href));
+    });
+
     if (isActive) {
       return item.text;
     }
   }
+
   return null;
 };
 

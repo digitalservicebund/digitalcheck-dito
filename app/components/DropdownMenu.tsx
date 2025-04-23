@@ -8,6 +8,7 @@ import type { DropdownItemProps } from "~/components/DrodownMenuItem.tsx";
 import DropdownContentList from "~/components/DropdownContentList";
 import DropdownMenuSupportItem from "~/components/DropdownMenuSupportItem.tsx";
 import twMerge from "~/utils/tailwindMerge";
+import { normalizePathname } from "~/utils/utilFunctions.ts";
 
 export type DropdownProps = {
   label?: string;
@@ -22,6 +23,7 @@ export type DropdownProps = {
   onItemClick: () => void;
   onMouseEnter?: (event: React.MouseEvent<HTMLElement>) => void;
   onMouseLeave?: (event: React.MouseEvent<HTMLElement>) => void;
+  isActiveParent?: boolean;
 };
 
 export default function DropdownMenu({
@@ -39,9 +41,22 @@ export default function DropdownMenu({
   const elementId = `dropdown-${label}`;
 
   const matches = useMatches();
-  const isActiveParent = data.some((item) =>
-    matches.some((match) => match.pathname.includes(item.href!)),
+  const normalizedMatchPaths = matches.map((match) =>
+    normalizePathname(match.pathname),
   );
+
+  const isActiveParent = data.some((item) => {
+    const normalizedItemHref = normalizePathname(item.href!);
+
+    return normalizedMatchPaths.some((normalizedMatchPath) => {
+      // if there is an exact match, activate
+      if (normalizedMatchPath === normalizedItemHref) {
+        return true;
+      }
+      // Check if the current path starts with the item's href followed by a '/'
+      return normalizedMatchPath.startsWith(normalizedItemHref + "/");
+    });
+  });
 
   // Transparent borders to avoid layout shifts
   const buttonClasses = twMerge(
