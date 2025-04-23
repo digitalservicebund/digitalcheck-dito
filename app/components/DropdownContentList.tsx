@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router";
+import { NavLink } from "react-router";
 import DropdownItem, {
   type DropdownItemProps,
 } from "~/components/DrodownMenuItem.tsx";
@@ -17,15 +17,8 @@ export default function DropdownContentList({
   onItemClick,
   isMobile = false,
 }: Readonly<DropdownContentListProps>) {
-  const location = useLocation();
-  const currentPathname = location.pathname;
-
   const mapDataToItems = (option: DropdownItemProps, index: number) => {
-    const isActive =
-      option.href === currentPathname ||
-      (option.allHrefs && option.allHrefs.includes(currentPathname));
-
-    const itemContent = (
+    const renderContent = ({ isActive }: { isActive: boolean }) => (
       <DropdownItem
         number={isList ? index + 1 : undefined}
         newContent={option.newContent}
@@ -33,36 +26,34 @@ export default function DropdownContentList({
         content={option.content}
         isNewTitle={option.isNewTitle}
         isActive={isActive}
+        className={option.className}
       />
     );
 
-    // TODO: change to NavLink
     if (isList) {
       return (
         <li key={index}>
-          <Link
+          <NavLink
             to={option.href!}
             role="option"
             onClick={onItemClick}
-            aria-selected={isActive}
             aria-label={option.title}
           >
-            {itemContent}
-          </Link>
+            {renderContent}
+          </NavLink>
         </li>
       );
     } else {
       return (
-        <Link
+        <NavLink
           key={option.title}
           to={option.href!}
           role="option"
           onClick={onItemClick}
-          aria-selected={isActive}
           aria-label={option.title}
         >
-          {itemContent}
-        </Link>
+          {renderContent}
+        </NavLink>
       );
     }
   };

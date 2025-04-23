@@ -1,4 +1,3 @@
-import allRoutes from "~/resources/allRoutes.ts";
 import {
   ROUTE_DOCUMENTATION,
   ROUTE_FUNDAMENTALS_METHODS,
@@ -53,12 +52,7 @@ export const header = {
           title: "Digitaltauglichkeit im Regelungstext",
           content:
             "So wurden die 5 Prinzipien von Ihren Kolleginnen und Kollegen in Regelungen ausformuliert.",
-          href: allRoutes.filter(
-            (route) => route.parent === ROUTE_PRINCIPLES.url,
-          )[0].url,
-          allHrefs: allRoutes
-            .filter((route) => route.parent === ROUTE_PRINCIPLES.url)
-            .map((item) => item.url),
+          href: ROUTE_PRINCIPLES.url,
         },
         {
           title: "Visualisierungen",

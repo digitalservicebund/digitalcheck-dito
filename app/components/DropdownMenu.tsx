@@ -3,6 +3,7 @@ import {
   ExpandMoreOutlined,
 } from "@digitalservicebund/icons";
 import React, { useEffect } from "react";
+import { useMatches } from "react-router";
 import type { DropdownItemProps } from "~/components/DrodownMenuItem.tsx";
 import DropdownContentList from "~/components/DropdownContentList";
 import DropdownMenuSupportItem from "~/components/DropdownMenuSupportItem.tsx";
@@ -15,7 +16,6 @@ export type DropdownProps = {
   hasSupport?: boolean;
   isList?: boolean;
   onOpenChange?: (isOpen: boolean) => void;
-  isActiveParent?: boolean;
   variant?: "desktop" | "mobile";
   isExpanded: boolean;
   onToggle: () => void;
@@ -30,7 +30,6 @@ export default function DropdownMenu({
   data,
   hasSupport = false,
   isList = false,
-  isActiveParent = false,
   variant = "desktop",
   isExpanded,
   onToggle,
@@ -38,6 +37,11 @@ export default function DropdownMenu({
 }: Readonly<DropdownProps>) {
   const isMobile = variant === "mobile";
   const elementId = `dropdown-${label}`;
+
+  const matches = useMatches();
+  const isActiveParent = data.some((item) =>
+    matches.some((match) => match.pathname.includes(item.href!)),
+  );
 
   // Transparent borders to avoid layout shifts
   const buttonClasses = twMerge(
@@ -110,9 +114,6 @@ export default function DropdownMenu({
           aria-labelledby={`${elementId}-button`}
         >
           {hasSupport && <DropdownMenuSupportItem mobile={isMobile} />}
-          {/*
-          // TODO: add second column for more than 4 items
-          */}
           <DropdownContentList
             data={data}
             isList={isList}

@@ -1,7 +1,7 @@
 import { MenuOpen, MenuOutlined } from "@digitalservicebund/icons/index";
 import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
 import { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router";
+import { Link, useMatches } from "react-router";
 import Background from "~/components/Background.tsx";
 import Breadcrumbs from "~/components/Breadcrumbs.tsx";
 import DropdownMenu from "~/components/DropdownMenu.tsx";
@@ -15,7 +15,6 @@ interface SubItem {
   title: string;
   content?: string;
   href: string;
-  allHrefs?: string[];
 }
 
 interface HeaderItem {
@@ -26,23 +25,19 @@ interface HeaderItem {
 }
 
 const findActiveParentItemText = (
-  pathname: string,
+  matches: ReturnType<typeof useMatches>,
   items: ReadonlyArray<HeaderItem>,
 ): string | null => {
-  const cleanPathname = normalizePathname(pathname);
-
   for (const item of items) {
-    if (item.overlayContent) {
-      for (const subItem of item.overlayContent) {
-        const hrefsToCheck = [subItem.href].concat(subItem.allHrefs || []);
-
-        for (const href of hrefsToCheck) {
-          const cleanHref = normalizePathname(href);
-          if (cleanHref && cleanHref === cleanPathname) {
-            return item.text;
-          }
-        }
-      }
+    const isActive = item.overlayContent.some((subItem) =>
+      matches.some((match) =>
+        normalizePathname(match.pathname).includes(
+          normalizePathname(subItem.href),
+        ),
+      ),
+    );
+    if (isActive) {
+      return item.text;
     }
   }
   return null;
@@ -53,9 +48,7 @@ const PageHeader = ({
 }: {
   includeBreadcrumbs?: boolean;
 }) => {
-  const location = useLocation();
-  const currentPathname = location.pathname;
-  const cleanPathname = normalizePathname(currentPathname);
+  const matches = useMatches();
   const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -85,6 +78,14 @@ const PageHeader = ({
     };
   }, []);
 
+  // Reset active dropdown when route changes but mobile menu remains open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      const parentItemText = findActiveParentItemText(matches, header.items);
+      setActiveDropdownId(parentItemText);
+    }
+  }, [mobileMenuOpen, matches]);
+
   // Toggle dropdown state
   const toggleDropdown = (itemText: string) => {
     setActiveDropdownId((current) => (current === itemText ? null : itemText));
@@ -96,35 +97,18 @@ const PageHeader = ({
     setMobileMenuOpen(false);
   };
 
-  // Toggle visibility of mobile menu
   const toggleMobileMenu = () => {
-    setMobileMenuOpen((prevOpen) => {
-      const isOpening = !prevOpen;
-      if (isOpening) {
-        const parentItemText = findActiveParentItemText(
-          currentPathname,
-          header.items,
-        );
-        setActiveDropdownId(parentItemText);
-      } else {
-        setActiveDropdownId(null);
-      }
-      return isOpening;
-    });
+    const isOpening = !mobileMenuOpen;
+    setMobileMenuOpen(isOpening);
+    if (isOpening) {
+      const parentItemText = findActiveParentItemText(matches, header.items);
+      setActiveDropdownId(parentItemText);
+    } else {
+      setActiveDropdownId(null);
+    }
   };
 
   const showOverlay = activeDropdownId !== null || mobileMenuOpen;
-
-  // Determines if the main dropdown item is set active - if any of the subitems is the current path
-  const getParentActive = (items: { href: string; allHrefs?: string[] }[]) => {
-    return items.some((subItem) => {
-      const hrefs =
-        subItem.allHrefs && subItem.allHrefs.length > 0
-          ? subItem.allHrefs
-          : [subItem.href];
-      return hrefs.some((href) => normalizePathname(href) === cleanPathname);
-    });
-  };
 
   return (
     <>
@@ -156,7 +140,6 @@ const PageHeader = ({
             {/* Desktop Navigation */}
             <nav className="flex items-center max-lg:hidden">
               {header.items.map((item) => {
-                const isParentActive = getParentActive(item.overlayContent);
                 return (
                   <DropdownMenu
                     key={item.text}
@@ -164,7 +147,6 @@ const PageHeader = ({
                     hasSupport={item.hasSupport}
                     data={item.overlayContent}
                     isList={item.isList}
-                    isActiveParent={isParentActive}
                     variant="desktop"
                     isExpanded={activeDropdownId === item.text}
                     onToggle={() => toggleDropdown(item.text)}
@@ -209,7 +191,6 @@ const PageHeader = ({
             aria-hidden={!mobileMenuOpen}
           >
             {header.items.map((item) => {
-              const isParentActive = getParentActive(item.overlayContent);
               return (
                 <DropdownMenu
                   key={item.text}
@@ -217,7 +198,6 @@ const PageHeader = ({
                   hasSupport={item.hasSupport}
                   data={item.overlayContent}
                   isList={item.isList}
-                  isActiveParent={isParentActive}
                   variant="mobile"
                   isExpanded={activeDropdownId === item.text}
                   onToggle={() => toggleDropdown(item.text)}
