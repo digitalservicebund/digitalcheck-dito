@@ -1,6 +1,6 @@
 // These routes can't be exported from ~/routes.ts as that file isn't part of the app environment: https://github.com/remix-run/react-router/issues/12392
 
-const PRE_CHECK_PDF = "digitalcheck-vorpruefung.pdf";
+const PRECHECK_PDF = "digitalcheck-vorpruefung.pdf";
 const DOCUMENTATION_PDF = "digitalcheck-begleitende-dokumentation.pdf";
 
 export type Route = {
@@ -41,11 +41,15 @@ export const ROUTE_PRECHECK_INFO = createRoute(
   "Allgemeine Hinweise",
   ROUTE_PRECHECK,
 );
-export const ROUTE_RESULT = createRoute("ergebnis", "Ergebnis", ROUTE_PRECHECK);
+export const ROUTE_PRECHECK_RESULT = createRoute(
+  "ergebnis",
+  "Ergebnis",
+  ROUTE_PRECHECK,
+);
 export const ROUTE_RESULT_PDF = createRoute(
-  PRE_CHECK_PDF,
+  PRECHECK_PDF,
   "Vorprüfung als PDF",
-  ROUTE_RESULT,
+  ROUTE_PRECHECK_RESULT,
 );
 
 // METHODS ROUTES
@@ -158,7 +162,7 @@ export const ROUTES: Route[] = [
   ROUTE_SITEMAP,
   ROUTE_PRECHECK,
   ROUTE_PRECHECK_INFO,
-  ROUTE_RESULT,
+  ROUTE_PRECHECK_RESULT,
   ROUTE_METHODS,
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
   ROUTE_METHODS_TASKS_PROCESSES,

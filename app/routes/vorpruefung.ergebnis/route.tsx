@@ -22,7 +22,10 @@ import { NumberedList } from "~/components/List";
 import RichText from "~/components/RichText";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
-import { ROUTE_PRECHECK, ROUTE_RESULT } from "~/resources/staticRoutes";
+import {
+  ROUTE_PRECHECK,
+  ROUTE_PRECHECK_RESULT,
+} from "~/resources/staticRoutes";
 import type { PreCheckAnswers } from "~/routes/vorpruefung.$questionId/route";
 import buildMailtoRedirectUri from "~/routes/vorpruefung.ergebnis/buildMailtoRedirectUri";
 import getContentForResult, {
@@ -51,7 +54,7 @@ const nextSteps = {
 };
 
 export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_RESULT.title, matches);
+  return prependMetaTitle(ROUTE_PRECHECK_RESULT.title, matches);
 };
 
 export async function loader({ request }: Route.LoaderArgs) {

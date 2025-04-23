@@ -2,7 +2,7 @@ import {
   ROUTE_INTEROPERABILITY,
   ROUTE_PRECHECK,
   ROUTE_PRECHECK_INFO,
-  ROUTE_RESULT,
+  ROUTE_PRECHECK_RESULT,
 } from "~/resources/staticRoutes";
 import type { TQuestion } from "~/routes/vorpruefung.$questionId/route";
 import { dedent } from "~/utils/dedentMultilineStrings";
@@ -246,7 +246,7 @@ export const preCheck = {
         : `${ROUTE_PRECHECK.url}/${questions[index - 1].id}`,
     nextLink:
       index === questions.length - 1
-        ? ROUTE_RESULT.url
+        ? ROUTE_PRECHECK_RESULT.url
         : `${ROUTE_PRECHECK.url}/${questions[index + 1].id}`,
   })) as TQuestion[],
 };

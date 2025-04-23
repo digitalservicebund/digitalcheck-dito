@@ -5,7 +5,7 @@ import {
   ROUTE_INTEROPERABILITY,
   ROUTE_METHODS,
   ROUTE_PRECHECK,
-  ROUTE_RESULT,
+  ROUTE_PRECHECK_RESULT,
 } from "~/resources/staticRoutes";
 import type { TQuestion } from "~/routes/vorpruefung.$questionId/route";
 
@@ -265,10 +265,10 @@ for (const scenario of scenarios) {
     );
 
     test.beforeEach("go to result page", async () => {
-      if (page.url() !== ROUTE_RESULT.url) {
-        await page.goto(ROUTE_RESULT.url);
+      if (page.url() !== ROUTE_PRECHECK_RESULT.url) {
+        await page.goto(ROUTE_PRECHECK_RESULT.url);
       }
-      await page.waitForURL(ROUTE_RESULT.url);
+      await page.waitForURL(ROUTE_PRECHECK_RESULT.url);
     });
 
     test.afterAll("close shared page for test iteration", async () => {
@@ -636,7 +636,7 @@ test.describe("test redirect to pre-check in case of missing answers", () => {
   test("result page redirects to pre-check landing page if no question was answered", async ({
     page,
   }) => {
-    await page.goto(ROUTE_RESULT.url);
+    await page.goto(ROUTE_PRECHECK_RESULT.url);
     await expect(page).toHaveURL(ROUTE_PRECHECK.url);
   });
 
@@ -646,7 +646,7 @@ test.describe("test redirect to pre-check in case of missing answers", () => {
     await page.goto(preCheck.questions[0].url);
     await page.getByLabel("Nein").click();
     await page.getByRole("button", { name: "Übernehmen" }).click();
-    await page.goto(ROUTE_RESULT.url);
+    await page.goto(ROUTE_PRECHECK_RESULT.url);
     await expect(page).toHaveURL(ROUTE_PRECHECK.url);
   });
 });
