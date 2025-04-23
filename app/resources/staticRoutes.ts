@@ -1,5 +1,7 @@
 // These routes can't be exported from ~/routes.ts as that file isn't part of the app environment: https://github.com/remix-run/react-router/issues/12392
 
+import { preCheckQuestions } from "./content/shared/preCheckQuestions";
+
 const PRECHECK_PDF = "digitalcheck-vorpruefung.pdf";
 const DOCUMENTATION_PDF = "digitalcheck-begleitende-dokumentation.pdf";
 
@@ -162,6 +164,9 @@ export const ROUTES: Route[] = [
   ROUTE_SITEMAP,
   ROUTE_PRECHECK,
   ROUTE_PRECHECK_INFO,
+  ...Object.values(preCheckQuestions).map((question) =>
+    createRoute(question.id, question.title, ROUTE_PRECHECK),
+  ),
   ROUTE_PRECHECK_RESULT,
   ROUTE_METHODS,
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
