@@ -52,7 +52,9 @@ export function loader({ request }: Route.LoaderArgs) {
     BASE_URL,
     PLAUSIBLE_DOMAIN,
     PLAUSIBLE_SCRIPT,
-    trackingDisabled: process.env.TRACKING_DISABLED === "true",
+    trackingDisabled:
+      process.env.TRACKING_DISABLED === "true" ||
+      process.env.NODE_ENV === "development",
     featureFlags,
   };
 }
