@@ -1,6 +1,6 @@
 import { header } from "~/resources/content/components/header.ts";
 
-const DropdownSupportItem = ({ mobile }: { mobile: boolean }) => {
+const DropdownMenuSupportItem = ({ mobile }: { mobile: boolean }) => {
   return (
     <div className="px-16 lg:px-56">
       <div className="ds-label-02-reg px-16 pt-8 pb-16 text-gray-900 lg:px-8 lg:pt-16 lg:pb-24">
@@ -17,4 +17,4 @@ const DropdownSupportItem = ({ mobile }: { mobile: boolean }) => {
   );
 };
 
-export default DropdownSupportItem;
+export default DropdownMenuSupportItem;

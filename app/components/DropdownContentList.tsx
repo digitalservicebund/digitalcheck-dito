@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router";
 import DropdownItem, {
   type DropdownItemProps,
-} from "~/components/DrodownItem.tsx";
+} from "~/components/DrodownMenuItem.tsx";
 import twMerge from "~/utils/tailwindMerge";
 
 export type DropdownContentListProps = {
@@ -36,6 +36,7 @@ export default function DropdownContentList({
       />
     );
 
+    // TODO: change to NavLink
     if (isList) {
       return (
         <li key={index}>

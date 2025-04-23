@@ -3,9 +3,9 @@ import {
   ExpandMoreOutlined,
 } from "@digitalservicebund/icons";
 import React, { useEffect } from "react";
-import type { DropdownItemProps } from "~/components/DrodownItem.tsx";
+import type { DropdownItemProps } from "~/components/DrodownMenuItem.tsx";
 import DropdownContentList from "~/components/DropdownContentList";
-import DropdownSupportItem from "~/components/DropdownSupportItem";
+import DropdownMenuSupportItem from "~/components/DropdownMenuSupportItem.tsx";
 import twMerge from "~/utils/tailwindMerge";
 
 export type DropdownProps = {
@@ -24,7 +24,7 @@ export type DropdownProps = {
   onMouseLeave?: (event: React.MouseEvent<HTMLElement>) => void;
 };
 
-export default function Dropdown({
+export default function DropdownMenu({
   className,
   label,
   data,
@@ -109,7 +109,7 @@ export default function Dropdown({
           role={!isMobile ? "listbox" : "region"}
           aria-labelledby={`${elementId}-button`}
         >
-          {hasSupport && <DropdownSupportItem mobile={isMobile} />}
+          {hasSupport && <DropdownMenuSupportItem mobile={isMobile} />}
           {/*
           // TODO: add second column for more than 4 items
           */}

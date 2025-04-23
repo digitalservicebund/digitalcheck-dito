@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router";
 import Background from "~/components/Background.tsx";
 import Breadcrumbs from "~/components/Breadcrumbs.tsx";
-import Dropdown from "~/components/Dropdown.tsx";
+import DropdownMenu from "~/components/DropdownMenu.tsx";
 import routes from "~/resources/allRoutes.ts";
 import { header } from "~/resources/content/components/header.ts";
 import { ROUTE_LANDING } from "~/resources/staticRoutes.ts";
@@ -158,7 +158,7 @@ const PageHeader = ({
               {header.items.map((item) => {
                 const isParentActive = getParentActive(item.overlayContent);
                 return (
-                  <Dropdown
+                  <DropdownMenu
                     key={item.text}
                     label={item.text}
                     hasSupport={item.hasSupport}
@@ -211,7 +211,7 @@ const PageHeader = ({
             {header.items.map((item) => {
               const isParentActive = getParentActive(item.overlayContent);
               return (
-                <Dropdown
+                <DropdownMenu
                   key={item.text}
                   label={item.text}
                   hasSupport={item.hasSupport}

@@ -174,10 +174,14 @@ export function ScrollAndFocus() {
   const mainRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
-    requestAnimationFrame(() => {
-      mainRef.current?.focus();
-    });
+    if (window.location.hash && !window.location.hash.includes("#")) {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
+    if (!window.location.hash.includes("#")) {
+      requestAnimationFrame(() => {
+        mainRef.current?.focus();
+      });
+    }
   }, [pathname]);
 
   return (
