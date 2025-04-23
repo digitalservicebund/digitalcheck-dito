@@ -37,7 +37,7 @@ export const meta = ({ matches }: MetaArgs) => {
 
 export const handle = {
   breadcrumb: (match: UIMatch) => ({
-    title: "Regelung",
+    title: examplesRegelungen.breadcrumb,
     url: match.pathname,
   }),
 };
