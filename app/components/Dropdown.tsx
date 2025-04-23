@@ -111,7 +111,7 @@ export default function Dropdown({
         >
           {hasSupport && <DropdownSupportItem mobile={isMobile} />}
           {/*
-          // TODO: add second row for more than 4 items
+          // TODO: add second column for more than 4 items
           */}
           <DropdownContentList
             data={data}
