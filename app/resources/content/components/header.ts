@@ -105,7 +105,7 @@ export const header = {
         {
           title: "Termin buchen",
           content:
-            "Buchen Sie einen Termin mit uns, damit wir Sie bei der Erarbeitung beraten können",
+            "Buchen Sie einen Termin mit uns, damit wir Sie bei der Erarbeitung beraten können.",
           href: ROUTE_SUPPORT.url + "#hilfe",
         },
       ],
