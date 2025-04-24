@@ -176,8 +176,6 @@ export function ScrollAndFocus() {
   useEffect(() => {
     if (window.location.hash && !window.location.hash.includes("#")) {
       window.scrollTo({ top: 0, behavior: "instant" });
-    }
-    if (!window.location.hash.includes("#")) {
       requestAnimationFrame(() => {
         mainRef.current?.focus();
       });
