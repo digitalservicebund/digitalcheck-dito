@@ -11,23 +11,27 @@ import {
 } from "~/resources/staticRoutes";
 
 test.describe("test breadcrumbs and titles", () => {
-  test("landing page to not have breadcrumbs", async ({ page }) => {
-    await page.goto(ROUTE_LANDING.url);
-    await expect(page.getByTestId("breadcrumbs-menu")).toBeHidden();
-  });
-
   ROUTES.forEach((route) => {
-    // Remove landing page and download routes
-    if (route.url.endsWith(".pdf") || route.url === "/") {
+    if (route.url.endsWith(".pdf")) {
       return;
     }
-    test(`${route.url} has breadcrumbs and title`, async ({ page }) => {
-      await page.goto(route.url);
-      await expect(page.getByTestId("breadcrumbs-menu")).toBeVisible();
-      await expect(page).toHaveTitle(
-        /Digitalcheck: Digitaltaugliche Regelungen erarbeiten$/,
-      );
-    });
+    if (
+      route.url === ROUTE_LANDING.url ||
+      route.url.startsWith(ROUTE_PRECHECK.url)
+    ) {
+      test(`${route.title} to not have breadcrumbs`, async ({ page }) => {
+        await page.goto(route.url);
+        await expect(page.getByTestId("breadcrumbs-menu")).toBeHidden();
+      });
+    } else {
+      test(`${route.title} has breadcrumbs and title`, async ({ page }) => {
+        await page.goto(route.url);
+        await expect(page.getByTestId("breadcrumbs-menu")).toBeVisible();
+        await expect(page).toHaveTitle(
+          /Digitalcheck: Digitaltaugliche Regelungen erarbeiten$/,
+        );
+      });
+    }
   });
 });
 
