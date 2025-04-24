@@ -18,6 +18,11 @@ export default function DropdownContentList({
   isMobile = false,
 }: Readonly<DropdownContentListProps>) {
   const location = useLocation();
+  const mobileElementStyle = "py-8 pr-8 pl-16 border-b-[1px] border-gray-600 ";
+  const listClasses = twMerge(
+    "list-unstyled list-none",
+    isMobile ? mobileElementStyle : "",
+  );
 
   const mapDataToItems = (option: DropdownItemProps, index: number) => {
     const renderContent = ({ isActive }: { isActive: boolean }) => {
@@ -51,12 +56,6 @@ export default function DropdownContentList({
       </li>
     );
   };
-
-  const mobileElementStyle = "py-8 pr-8 pl-16 border-b-[1px] border-gray-600 ";
-  const listClasses = twMerge(
-    "list-unstyled list-none",
-    isMobile ? mobileElementStyle : "",
-  );
 
   return isList ? (
     <ol className={listClasses}>{data.map(mapDataToItems)}</ol>
