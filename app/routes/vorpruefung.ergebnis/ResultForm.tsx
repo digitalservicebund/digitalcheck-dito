@@ -9,8 +9,8 @@ import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
 import { features } from "~/resources/features";
-import { PreCheckAnswers } from "~/routes/_progress.vorpruefung.$questionId/route";
-import getResultValidatorForAnswers from "~/routes/_progress.vorpruefung.ergebnis/resultValidation";
+import { PreCheckAnswers } from "~/routes/vorpruefung.$questionId/route";
+import getResultValidatorForAnswers from "~/routes/vorpruefung.ergebnis/resultValidation";
 import { useFeatureFlag } from "~/utils/featureFlags";
 import { PreCheckResult, ResultType } from "./PreCheckResult";
 

@@ -26,16 +26,16 @@ import {
   ROUTE_PRECHECK,
   ROUTE_PRECHECK_RESULT,
 } from "~/resources/staticRoutes";
+import type { PreCheckAnswers } from "~/routes/vorpruefung.$questionId/route";
+import buildMailtoRedirectUri from "~/routes/vorpruefung.ergebnis/buildMailtoRedirectUri";
 import getContentForResult, {
   type Reason,
-} from "~/routes/_progress.vorpruefung.ergebnis/getContentForResult";
+} from "~/routes/vorpruefung.ergebnis/getContentForResult";
 import {
   getResultForAnswers,
   getResultForRelevantAnswers,
-} from "~/routes/_progress.vorpruefung.ergebnis/getResultForAnswers";
-import ResultForm from "~/routes/_progress.vorpruefung.ergebnis/ResultForm";
-import type { PreCheckAnswers } from "~/routes/vorpruefung.$questionId/route";
-import buildMailtoRedirectUri from "~/routes/vorpruefung.ergebnis/buildMailtoRedirectUri";
+} from "~/routes/vorpruefung.ergebnis/getResultForAnswers";
+import ResultForm from "~/routes/vorpruefung.ergebnis/ResultForm";
 import {
   getAnswersFromCookie,
   getHeaderFromCookie,

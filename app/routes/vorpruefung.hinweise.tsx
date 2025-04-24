@@ -10,8 +10,8 @@ import { preCheck } from "~/resources/content/vorpruefung";
 import { ROUTE_PRECHECK, ROUTE_PRECHECK_INFO } from "~/resources/staticRoutes";
 import { getAnswersFromCookie } from "~/utils/cookies.server";
 import prependMetaTitle from "~/utils/metaTitle";
-import type { Route } from "./+types/_progress.vorpruefung.hinweise";
-import PreCheckNavigation from "./_progress.vorpruefung.$questionId/PreCheckNavigation";
+import type { Route } from "./+types/vorpruefung.hinweise";
+import PreCheckNavigation from "./vorpruefung.$questionId/PreCheckNavigation";
 
 const { questions, generalInfo } = preCheck;
 const { headline, text, nextButton, hint } = generalInfo;

@@ -5,7 +5,7 @@ import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
 import { userAnswers } from "~/utils/cookies.server";
 import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/vorpruefung.ergebnis.$fileName[.pdf]";
-import { PreCheckAnswers } from "./_progress.vorpruefung.$questionId/route";
+import { PreCheckAnswers } from "./vorpruefung.$questionId/route";
 
 export const FIELD_NAME_VORHABEN_TITLE = "Titel des Regelungsvorhabens";
 export const FIELD_NAME_PRE_CHECK_POSITIVE_1 = "Vorprüfung positiv - 1";

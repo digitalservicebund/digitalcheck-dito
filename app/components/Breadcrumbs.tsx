@@ -1,21 +1,17 @@
 import HomeOutlined from "@digitalservicebund/icons/HomeOutlined";
-import { Link, useMatches, type UIMatch } from "react-router";
-import { ROUTE_LANDING, ROUTES, type Route } from "~/resources/staticRoutes";
-
-type Breadcrumb = (match: UIMatch) => Route;
+import { Link, useMatches } from "react-router";
+import { ROUTE_LANDING, ROUTES } from "~/resources/staticRoutes";
+import { matchHasHandle } from "~/utils/handles";
 
 export default function Breadcrumbs() {
   const matchesWithoutLanding = useMatches().slice(1);
+
   const breadcrumbs = matchesWithoutLanding.map((match) => {
     // Use a handle if it exists in the route
-    if (
-      match.handle &&
-      typeof match.handle === "object" &&
-      "breadcrumb" in match.handle &&
-      typeof match.handle.breadcrumb === "function"
-    ) {
-      return (match.handle.breadcrumb as Breadcrumb)(match);
+    if (matchHasHandle(match) && match.handle.breadcrumb) {
+      return match.handle.breadcrumb(match);
     }
+
     // Otherwise find the route that match the current path, removing trailing slashes
     return ROUTES.find((r) => r.url === match.pathname.replace(/\/$/, ""));
   });

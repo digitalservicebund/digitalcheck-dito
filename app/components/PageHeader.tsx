@@ -1,14 +1,16 @@
 import { MenuOpen, MenuOutlined } from "@digitalservicebund/icons/index";
 import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
 import { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router";
+import { Link, UIMatch, useLocation, useMatches } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Breadcrumbs from "~/components/Breadcrumbs.tsx";
 import DropdownMenu from "~/components/DropdownMenu.tsx";
 import { header } from "~/resources/content/components/header.ts";
 import { ROUTE_LANDING } from "~/resources/staticRoutes.ts";
+import { matchHasHandle, MatchWithHandle } from "~/utils/handles";
 import twMerge from "~/utils/tailwindMerge.ts";
 import { normalizePathname } from "~/utils/utilFunctions.ts";
+import ProgressBar from "./ProgressBar";
 
 interface SubItem {
   title: string;
@@ -32,6 +34,16 @@ const isParentItemActive = (item: HeaderItem, path: string): boolean => {
     return normalizedCurrentPath.startsWith(normalizedItemPath);
   });
 };
+
+// Check if a featureon a handle is enabled for a match
+const getFeatureForMatches = (
+  matches: UIMatch[],
+  feature: keyof MatchWithHandle["handle"],
+) =>
+  matches.some(
+    (match) =>
+      matchHasHandle(match) && feature in match.handle && match.handle[feature],
+  );
 
 const PageHeader = ({
   includeBreadcrumbs = true,
@@ -113,6 +125,10 @@ const PageHeader = ({
 
   const showOverlay = activeDropdownId !== null || mobileMenuOpen;
 
+  const matches = useMatches();
+  const showProgressBar = getFeatureForMatches(matches, "hasProgressBar");
+  const hideBreadcrumbs = getFeatureForMatches(matches, "hideBreadcrumbs");
+
   return (
     <>
       {showOverlay && (
@@ -173,7 +189,8 @@ const PageHeader = ({
         >
           {header.items.map((item) => renderDropdownItem(item, "mobile"))}
         </nav>
-        {includeBreadcrumbs && <Breadcrumbs />}
+        {showProgressBar && <ProgressBar />}
+        {includeBreadcrumbs && !hideBreadcrumbs && <Breadcrumbs />}
       </header>
     </>
   );
