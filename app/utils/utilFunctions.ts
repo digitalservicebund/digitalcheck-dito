@@ -41,15 +41,15 @@ export const normalizePathname = (path: string) => {
 
 // Check if an item href matches any of the current paths
 export const isPathActive = (
-  normalizedItemHref: string,
-  normalizedCurrentPaths: ReadonlyArray<string>,
+  itemPath: string,
+  currentPath: string,
 ): boolean => {
-  return normalizedCurrentPaths.some((normalizedMatchPath) => {
-    // Exact match
-    if (normalizedMatchPath === normalizedItemHref) {
-      return true;
-    }
-    // Prefix match (current path starts with item href + '/')
-    return normalizedMatchPath.startsWith(normalizedItemHref + "/");
-  });
+  const normalizedItemPath = normalizePathname(itemPath);
+  const normalizedCurrentPath = normalizePathname(currentPath);
+  // Exact match
+  if (normalizedCurrentPath === normalizedItemPath) {
+    return true;
+  }
+  // Prefix match (current path starts with item href + '/')
+  return normalizedCurrentPath.startsWith(normalizedItemPath + "/");
 };
