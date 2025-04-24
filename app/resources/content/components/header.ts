@@ -12,7 +12,6 @@ import {
 
 export const header = {
   title: "Digitalcheck",
-  subTitle: "des Bundes",
   contact: {
     msg: "Kontaktieren Sie den Support:",
     msgMobile: "Support:",
