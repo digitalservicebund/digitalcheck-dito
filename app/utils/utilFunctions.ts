@@ -39,7 +39,7 @@ export const normalizePathname = (path: string) => {
   return path.replace(/\/$/, "").split("#")[0];
 };
 
-// Check if an item href matches any of the current paths
+// Check if an item href matches the current path
 export const isPathActive = (
   itemPath: string,
   currentPath: string,
