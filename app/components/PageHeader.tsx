@@ -9,7 +9,7 @@ import routes from "~/resources/allRoutes.ts";
 import { header } from "~/resources/content/components/header.ts";
 import { ROUTE_LANDING } from "~/resources/staticRoutes.ts";
 import twMerge from "~/utils/tailwindMerge.ts";
-import { normalizePathname } from "~/utils/utilFunctions.ts";
+import { isPathActive, normalizePathname } from "~/utils/utilFunctions.ts";
 
 interface SubItem {
   title: string;
@@ -33,7 +33,8 @@ const findActiveParentItemText = (
   );
   for (const item of items) {
     const isActive = item.overlayContent.some((subItem) => {
-      return normalizedCurrentPaths.includes(normalizePathname(subItem.href));
+      const normalizedSubItemHref = normalizePathname(subItem.href);
+      return isPathActive(normalizedSubItemHref, normalizedCurrentPaths);
     });
 
     if (isActive) {

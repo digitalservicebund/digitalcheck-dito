@@ -8,7 +8,7 @@ import type { DropdownItemProps } from "~/components/DrodownMenuItem.tsx";
 import DropdownContentList from "~/components/DropdownContentList";
 import DropdownMenuSupportItem from "~/components/DropdownMenuSupportItem.tsx";
 import twMerge from "~/utils/tailwindMerge";
-import { normalizePathname } from "~/utils/utilFunctions.ts";
+import { isPathActive, normalizePathname } from "~/utils/utilFunctions.ts";
 
 export type DropdownProps = {
   label?: string;
@@ -47,15 +47,7 @@ export default function DropdownMenu({
 
   const isActiveParent = data.some((item) => {
     const normalizedItemHref = normalizePathname(item.href!);
-
-    return normalizedMatchPaths.some((normalizedMatchPath) => {
-      // if there is an exact match, activate
-      if (normalizedMatchPath === normalizedItemHref) {
-        return true;
-      }
-      // Check if the current path starts with the item's href followed by a '/'
-      return normalizedMatchPath.startsWith(normalizedItemHref + "/");
-    });
+    return isPathActive(normalizedItemHref, normalizedMatchPaths);
   });
 
   // Transparent borders to avoid layout shifts
