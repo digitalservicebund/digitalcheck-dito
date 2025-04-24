@@ -96,16 +96,16 @@ export default function DropdownMenu({
         id={`${elementId}-button`}
         aria-haspopup="true"
         aria-expanded={isExpanded}
-        aria-controls={`${elementId}-content`}
+        aria-controls={`${elementId}-inhalt`}
       >
         {label} {isExpanded ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
       </button>
       {isExpanded && (
         <div
           className={panelClasses}
-          id={`${elementId}-content`}
+          id={`${elementId}-inhalt`}
           role={!isMobile ? "listbox" : "region"}
-          aria-labelledby={`${elementId}-button`}
+          aria-labelledby={`${elementId}-schaltfläche`}
         >
           {hasSupport && <DropdownMenuSupportItem mobile={isMobile} />}
           <DropdownContentList

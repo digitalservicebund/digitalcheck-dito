@@ -23,7 +23,7 @@ export default function PrinciplesDisplay({
   showInfoBoxButtons,
   prinzips,
   buttonText,
-}: PrinciplesDisplayProps) {
+}: Readonly<PrinciplesDisplayProps>) {
   return (
     <>
       {principles.map((principle, index) => {
