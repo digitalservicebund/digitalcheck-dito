@@ -39,10 +39,8 @@ export default function SupportTabs() {
   const tabRef = useRef<Map<number, HTMLButtonElement> | null>(null);
 
   function getMap() {
-    if (!tabRef.current) {
-      // Initialize the Map on first usage
-      tabRef.current = new Map();
-    }
+    // Initialize the Map on first usage
+    tabRef.current ??= new Map();
     return tabRef.current;
   }
 
