@@ -11,11 +11,7 @@ test.describe("test breadcrumbs and titles", () => {
 
   allRoutes.forEach((route) => {
     // Remove landing page and grundlagen page
-    if (
-      route.url.endsWith(".pdf") ||
-      route.url === "grundlagen" ||
-      route.url === "/"
-    ) {
+    if (route.url.endsWith(".pdf") || route.url === "/") {
       return;
     }
     test(`${route.url} has breadcrumbs and title`, async ({ page }) => {

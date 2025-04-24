@@ -24,18 +24,6 @@ interface HeaderItem {
   isList?: boolean;
 }
 
-const findActiveParentItemText = (
-  path: string,
-  items: ReadonlyArray<HeaderItem>,
-): string | null => {
-  for (const item of items) {
-    if (isParentItemActive(item, path)) {
-      return item.text;
-    }
-  }
-  return null;
-};
-
 // Check if an item href matches the current path
 const isParentItemActive = (item: HeaderItem, path: string): boolean => {
   return item.overlayContent.some((subItem) => {
@@ -65,7 +53,7 @@ const PageHeader = ({
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        closeAll();
+        closeOpenDropdown();
       }
     };
     document.addEventListener("keydown", handleKeyDown);
@@ -91,8 +79,8 @@ const PageHeader = ({
     setActiveDropdownId((current) => (current === itemText ? null : itemText));
   };
 
-  // Close all open dropdowns
-  const closeAll = () => {
+  // Close any open dropdown
+  const closeOpenDropdown = () => {
     setActiveDropdownId(null);
     setMobileMenuOpen(false);
   };
@@ -102,11 +90,10 @@ const PageHeader = ({
     const isOpen = !mobileMenuOpen;
     setMobileMenuOpen(isOpen);
     if (isOpen) {
-      const parentItemText = findActiveParentItemText(
-        location.pathname,
-        header.items,
-      );
-      setActiveDropdownId(parentItemText);
+      const parentItemText = header.items.find((item) =>
+        isParentItemActive(item, location.pathname),
+      )?.text;
+      setActiveDropdownId(parentItemText ?? null);
     } else {
       setActiveDropdownId(null);
     }
@@ -119,81 +106,24 @@ const PageHeader = ({
       {showOverlay && (
         <div
           className="fixed inset-0 z-20 bg-[#282828] opacity-63"
-          onClick={closeAll}
+          onClick={closeOpenDropdown}
           aria-hidden="true"
         />
       )}
       <header className="relative" ref={headerRef}>
-        <div className="relative">
-          <div className="relative z-30 flex min-h-[72px] items-stretch justify-between bg-white pl-16 lg:px-16">
-            {/* Logo and title */}
-            <div className="flex items-center space-x-8">
-              <Link to={ROUTE_LANDING.url}>
-                <img
-                  src="/logo/bund-logo.png"
-                  alt="Logo des Bundes"
-                  width={54}
-                />
-              </Link>
-              <div className="ds-stack-0 ml-16 flex flex-col -space-y-4 max-lg:hidden">
-                <p className="ds-stack-0 ds-label-01-bold text-xl">
-                  {header.title}
-                </p>
-              </div>
-            </div>
-
-            {/* Desktop Navigation */}
-            <nav className="flex items-center max-lg:hidden">
-              {header.items.map((item) => {
-                return (
-                  <DropdownMenu
-                    key={item.text}
-                    label={item.text}
-                    hasSupport={item.hasSupport}
-                    data={item.overlayContent}
-                    isList={item.isList}
-                    variant="desktop"
-                    isActiveParent={isParentItemActive(item, currentPath)}
-                    isExpanded={activeDropdownId === item.text}
-                    onToggle={() => toggleDropdown(item.text)}
-                    onItemClick={closeAll}
-                  />
-                );
-              })}
-            </nav>
-
-            {/* Mobile View Controls */}
-            <div className="flex items-center space-x-16 lg:hidden">
-              <a
-                className="border-b-[4px] border-transparent"
-                href={`tel:${header.contact.number}`}
-              >
-                <PhoneOutlined />
-              </a>
-              <button
-                className={twMerge(
-                  "h-full cursor-pointer border-b-[4px] border-transparent px-16 hover:bg-blue-100 focus:border-b-[4px] focus:bg-blue-100",
-                  mobileMenuOpen &&
-                    "border-b-[4px] border-blue-800 bg-blue-100",
-                )}
-                onClick={toggleMobileMenu}
-                aria-label="Menü öffnen/schließen"
-                aria-expanded={mobileMenuOpen}
-                aria-controls="mobile-menu"
-                tabIndex={0}
-              >
-                {mobileMenuOpen ? <MenuOpen /> : <MenuOutlined />}
-              </button>
-            </div>
+        <div className="relative z-30 flex h-[72px] justify-between bg-white pl-16 lg:px-16">
+          {/* Logo and title */}
+          <div className="flex items-center space-x-8">
+            <Link to={ROUTE_LANDING.url}>
+              <img src="/logo/bund-logo.png" alt="Logo des Bundes" width={54} />
+            </Link>
+            <p className="ds-label-01-bold ml-16 flex flex-col text-xl max-lg:hidden">
+              {header.title}
+            </p>
           </div>
-          {/* Mobile Navigation */}
-          <div
-            id="mobile-menu"
-            className={`absolute right-0 left-0 z-40 rounded-b-md border-t-1 border-gray-600 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)] ${
-              mobileMenuOpen ? "overflow-y-auto" : "invisible"
-            }`}
-            aria-hidden={!mobileMenuOpen}
-          >
+
+          {/* Desktop Navigation */}
+          <nav className="flex items-center max-lg:hidden">
             {header.items.map((item) => {
               return (
                 <DropdownMenu
@@ -202,17 +132,64 @@ const PageHeader = ({
                   hasSupport={item.hasSupport}
                   data={item.overlayContent}
                   isList={item.isList}
-                  variant="mobile"
+                  variant="desktop"
                   isActiveParent={isParentItemActive(item, currentPath)}
                   isExpanded={activeDropdownId === item.text}
                   onToggle={() => toggleDropdown(item.text)}
-                  onItemClick={closeAll}
+                  onItemClick={closeOpenDropdown}
                 />
               );
             })}
+          </nav>
+
+          {/* Mobile View Controls */}
+          <div className="flex items-center space-x-16 lg:hidden">
+            <a
+              className="border-b-[4px] border-transparent"
+              href={`tel:${header.contact.number}`}
+            >
+              <PhoneOutlined />
+            </a>
+            <button
+              className={twMerge(
+                "h-full cursor-pointer border-b-[4px] border-transparent px-16 hover:bg-blue-100 focus:border-b-[4px] focus:bg-blue-100",
+                mobileMenuOpen && "border-b-[4px] border-blue-800 bg-blue-100",
+              )}
+              onClick={toggleMobileMenu}
+              aria-label="Menü öffnen/schließen"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
+              tabIndex={0}
+            >
+              {mobileMenuOpen ? <MenuOpen /> : <MenuOutlined />}
+            </button>
           </div>
         </div>
-
+        {/* Mobile Navigation */}
+        <nav
+          id="mobile-menu"
+          className={`absolute right-0 left-0 z-40 rounded-b-md border-t-1 border-gray-600 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)] ${
+            mobileMenuOpen ? "overflow-y-auto" : "invisible"
+          }`}
+          aria-hidden={!mobileMenuOpen}
+        >
+          {header.items.map((item) => {
+            return (
+              <DropdownMenu
+                key={item.text}
+                label={item.text}
+                hasSupport={item.hasSupport}
+                data={item.overlayContent}
+                isList={item.isList}
+                variant="mobile"
+                isActiveParent={isParentItemActive(item, currentPath)}
+                isExpanded={activeDropdownId === item.text}
+                onToggle={() => toggleDropdown(item.text)}
+                onItemClick={closeOpenDropdown}
+              />
+            );
+          })}
+        </nav>
         {includeBreadcrumbs && (
           <Background backgroundColor="blue">
             <Breadcrumbs breadcrumbs={routes} useIconForHome />
