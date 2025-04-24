@@ -3,12 +3,12 @@ import {
   ExpandMoreOutlined,
 } from "@digitalservicebund/icons";
 import React, { useEffect } from "react";
-import { useMatches } from "react-router";
+import { useLocation } from "react-router";
 import type { DropdownItemProps } from "~/components/DrodownMenuItem.tsx";
 import DropdownContentList from "~/components/DropdownContentList";
 import DropdownMenuSupportItem from "~/components/DropdownMenuSupportItem.tsx";
 import twMerge from "~/utils/tailwindMerge";
-import { isPathActive, normalizePathname } from "~/utils/utilFunctions.ts";
+import { isPathActive } from "~/utils/utilFunctions.ts";
 
 export type DropdownProps = {
   label?: string;
@@ -39,15 +39,10 @@ export default function DropdownMenu({
 }: Readonly<DropdownProps>) {
   const isMobile = variant === "mobile";
   const elementId = `dropdown-${label}`;
-
-  const matches = useMatches();
-  const normalizedMatchPaths = matches.map((match) =>
-    normalizePathname(match.pathname),
-  );
+  const location = useLocation();
 
   const isActiveParent = data.some((item) => {
-    const normalizedItemHref = normalizePathname(item.href!);
-    return isPathActive(normalizedItemHref, normalizedMatchPaths);
+    return isPathActive(item.href!, location.pathname);
   });
 
   // Transparent borders to avoid layout shifts

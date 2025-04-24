@@ -38,23 +38,9 @@ export default function DropdownContentList({
       );
     };
 
-    if (isList) {
-      return (
-        <li key={index}>
-          <NavLink
-            to={option.href!}
-            role="option"
-            onClick={onItemClick}
-            aria-label={option.title}
-          >
-            {renderContent}
-          </NavLink>
-        </li>
-      );
-    } else {
-      return (
+    return (
+      <li key={index}>
         <NavLink
-          key={option.title}
           to={option.href!}
           role="option"
           onClick={onItemClick}
@@ -62,8 +48,8 @@ export default function DropdownContentList({
         >
           {renderContent}
         </NavLink>
-      );
-    }
+      </li>
+    );
   };
 
   const mobileElementStyle = "py-8 pr-8 pl-16 border-b-[1px] border-gray-600 ";

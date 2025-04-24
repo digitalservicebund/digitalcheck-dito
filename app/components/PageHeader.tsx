@@ -1,7 +1,7 @@
 import { MenuOpen, MenuOutlined } from "@digitalservicebund/icons/index";
 import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
 import { useEffect, useRef, useState } from "react";
-import { Link, useMatches } from "react-router";
+import { Link, useLocation } from "react-router";
 import Background from "~/components/Background.tsx";
 import Breadcrumbs from "~/components/Breadcrumbs.tsx";
 import DropdownMenu from "~/components/DropdownMenu.tsx";
@@ -9,7 +9,7 @@ import routes from "~/resources/allRoutes.ts";
 import { header } from "~/resources/content/components/header.ts";
 import { ROUTE_LANDING } from "~/resources/staticRoutes.ts";
 import twMerge from "~/utils/tailwindMerge.ts";
-import { isPathActive, normalizePathname } from "~/utils/utilFunctions.ts";
+import { isPathActive } from "~/utils/utilFunctions.ts";
 
 interface SubItem {
   title: string;
@@ -25,16 +25,12 @@ interface HeaderItem {
 }
 
 const findActiveParentItemText = (
-  matches: ReturnType<typeof useMatches>,
+  currentPath: string,
   items: ReadonlyArray<HeaderItem>,
 ): string | null => {
-  const normalizedCurrentPaths = matches.map((match) =>
-    normalizePathname(match.pathname),
-  );
   for (const item of items) {
     const isActive = item.overlayContent.some((subItem) => {
-      const normalizedSubItemHref = normalizePathname(subItem.href);
-      return isPathActive(normalizedSubItemHref, normalizedCurrentPaths);
+      return isPathActive(subItem.href, currentPath);
     });
 
     if (isActive) {
@@ -50,7 +46,7 @@ const PageHeader = ({
 }: {
   includeBreadcrumbs?: boolean;
 }) => {
-  const matches = useMatches();
+  const location = useLocation();
   const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -95,7 +91,10 @@ const PageHeader = ({
     const isOpening = !mobileMenuOpen;
     setMobileMenuOpen(isOpening);
     if (isOpening) {
-      const parentItemText = findActiveParentItemText(matches, header.items);
+      const parentItemText = findActiveParentItemText(
+        location.pathname,
+        header.items,
+      );
       setActiveDropdownId(parentItemText);
     } else {
       setActiveDropdownId(null);
@@ -125,9 +124,10 @@ const PageHeader = ({
                   width={54}
                 />
               </Link>
-              <div className="ds-stack-0 ml-24 flex flex-col -space-y-4 max-lg:hidden">
-                <p className="ds-stack-0 ds-label-01-bold">{header.title}</p>
-                <p className="ds-label-01 text-gray-900">{header.subTitle}</p>
+              <div className="ds-stack-0 ml-16 flex flex-col -space-y-4 max-lg:hidden">
+                <p className="ds-stack-0 ds-label-01-bold text-xl">
+                  {header.title}
+                </p>
               </div>
             </div>
 
