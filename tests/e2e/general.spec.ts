@@ -1,10 +1,11 @@
 import { expect, test } from "@playwright/test";
-import { preCheck } from "~/resources/content/vorpruefung";
 import {
   ROUTE_A11Y,
+  ROUTE_DOCUMENTATION,
   ROUTE_IMPRINT,
   ROUTE_LANDING,
   ROUTE_METHODS,
+  ROUTE_METHODS_COLLECT_IT_SYSTEMS,
   ROUTE_PRECHECK,
   ROUTE_PRIVACY,
   ROUTES,
@@ -78,13 +79,13 @@ test.describe("test links", () => {
   });
 
   test("breadcrumb landing link works", async ({ page }) => {
-    await page.goto(ROUTE_PRECHECK.url);
+    await page.goto(ROUTE_PRIVACY.url);
     await page
       .getByLabel("navigation")
       .getByRole("link", { name: "Startseite" })
       .click();
     await expect(page).toHaveURL(ROUTE_LANDING.url);
-    await page.goto(preCheck.questions[0].url);
+    await page.goto(ROUTE_METHODS_COLLECT_IT_SYSTEMS.url);
     // using label here as there is a sidebar with the same role
     await page
       .getByLabel("navigation")
@@ -95,12 +96,12 @@ test.describe("test links", () => {
 
   test("breadcrumb parent link works", async ({ page }) => {
     // using label here as there is a sidebar with the same role
-    await page.goto(preCheck.questions[0].url);
+    await page.goto(ROUTE_METHODS_COLLECT_IT_SYSTEMS.url);
     await expect(
       page.getByTestId("breadcrumbs-menu").getByRole("link"),
     ).toHaveCount(2);
     await page.getByTestId("breadcrumbs-menu").getByRole("link").last().click();
-    await expect(page).toHaveURL(ROUTE_PRECHECK.url);
+    await expect(page).toHaveURL(ROUTE_METHODS.url);
   });
 
   test("links in landing page work", async ({ page }) => {
@@ -119,6 +120,55 @@ test.describe("test links", () => {
     await expect(page).toHaveURL(ROUTE_LANDING.url, {
       timeout: 5000,
     });
+  });
+});
+
+test.describe("test progress bar", () => {
+  const routesWithProgressBar = ROUTES.filter(
+    (route) =>
+      route.url.startsWith(ROUTE_PRECHECK.url) ||
+      route.url.startsWith(ROUTE_METHODS.url) ||
+      route.url.startsWith(ROUTE_DOCUMENTATION.url),
+  );
+  routesWithProgressBar.forEach((route) => {
+    test(`${route.title} has progress bar`, async ({ page }) => {
+      await page.goto(route.url);
+      await expect(page.getByLabel("Digitalcheck-Fortschritt")).toBeVisible();
+    });
+  });
+
+  test("progress bar is not visible on other pages", async ({ page }) => {
+    for (const route of ROUTES) {
+      if (routesWithProgressBar.includes(route)) {
+        continue;
+      }
+      await page.goto(route.url);
+      await expect(page.getByLabel("Digitalcheck-Fortschritt")).toBeHidden();
+    }
+  });
+
+  test("Correct step is highlighted in progress bar", async ({ page }) => {
+    await page.goto(ROUTE_PRECHECK.url);
+    await expect(page.getByText("1Vorprüfung")).toContainClass(
+      "border-blue-800",
+    );
+    await expect(page.getByText("2Digitaltauglichkeit")).toContainClass(
+      "border-transparent",
+    );
+    await page.goto(ROUTE_METHODS.url);
+    await expect(page.getByText("2Digitaltauglichkeit")).toContainClass(
+      "border-blue-800",
+    );
+    await expect(page.getByText("1Vorprüfung")).toContainClass(
+      "border-transparent",
+    );
+    await page.goto(ROUTE_DOCUMENTATION.url);
+    await expect(page.getByText("3Dokumentation")).toContainClass(
+      "border-blue-800",
+    );
+    await expect(page.getByText("2Digitaltauglichkeit")).toContainClass(
+      "border-transparent",
+    );
   });
 });
 
