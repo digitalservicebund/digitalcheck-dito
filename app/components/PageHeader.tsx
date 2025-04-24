@@ -9,7 +9,7 @@ import routes from "~/resources/allRoutes.ts";
 import { header } from "~/resources/content/components/header.ts";
 import { ROUTE_LANDING } from "~/resources/staticRoutes.ts";
 import twMerge from "~/utils/tailwindMerge.ts";
-import { isPathActive } from "~/utils/utilFunctions.ts";
+import { normalizePathname } from "~/utils/utilFunctions.ts";
 
 interface SubItem {
   title: string;
@@ -25,20 +25,29 @@ interface HeaderItem {
 }
 
 const findActiveParentItemText = (
-  currentPath: string,
+  path: string,
   items: ReadonlyArray<HeaderItem>,
 ): string | null => {
   for (const item of items) {
-    const isActive = item.overlayContent.some((subItem) => {
-      return isPathActive(subItem.href, currentPath);
-    });
-
-    if (isActive) {
+    if (isParentItemActive(item, path)) {
       return item.text;
     }
   }
-
   return null;
+};
+
+// Check if an item href matches the current path
+const isParentItemActive = (item: HeaderItem, path: string): boolean => {
+  return item.overlayContent.some((subItem) => {
+    const normalizedItemPath = normalizePathname(subItem.href);
+    const normalizedCurrentPath = normalizePathname(path);
+    // Exact match
+    if (normalizedCurrentPath === normalizedItemPath) {
+      return true;
+    }
+    // Prefix match (current path starts with item href + '/')
+    return normalizedCurrentPath.startsWith(normalizedItemPath + "/");
+  });
 };
 
 const PageHeader = ({
@@ -47,6 +56,7 @@ const PageHeader = ({
   includeBreadcrumbs?: boolean;
 }) => {
   const location = useLocation();
+  const currentPath = location.pathname;
   const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -87,10 +97,11 @@ const PageHeader = ({
     setMobileMenuOpen(false);
   };
 
+  // Opens and closes mobile menu
   const toggleMobileMenu = () => {
-    const isOpening = !mobileMenuOpen;
-    setMobileMenuOpen(isOpening);
-    if (isOpening) {
+    const isOpen = !mobileMenuOpen;
+    setMobileMenuOpen(isOpen);
+    if (isOpen) {
       const parentItemText = findActiveParentItemText(
         location.pathname,
         header.items,
@@ -142,11 +153,10 @@ const PageHeader = ({
                     data={item.overlayContent}
                     isList={item.isList}
                     variant="desktop"
+                    isActiveParent={isParentItemActive(item, currentPath)}
                     isExpanded={activeDropdownId === item.text}
                     onToggle={() => toggleDropdown(item.text)}
                     onItemClick={closeAll}
-                    onMouseEnter={() => setActiveDropdownId(item.text)}
-                    onMouseLeave={() => setActiveDropdownId(null)}
                   />
                 );
               })}
@@ -193,6 +203,7 @@ const PageHeader = ({
                   data={item.overlayContent}
                   isList={item.isList}
                   variant="mobile"
+                  isActiveParent={isParentItemActive(item, currentPath)}
                   isExpanded={activeDropdownId === item.text}
                   onToggle={() => toggleDropdown(item.text)}
                   onItemClick={closeAll}

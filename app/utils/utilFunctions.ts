@@ -38,18 +38,3 @@ export const cyrb53 = (str: string, seed = 0) => {
 export const normalizePathname = (path: string) => {
   return path.replace(/\/$/, "").split("#")[0];
 };
-
-// Check if an item href matches the current path
-export const isPathActive = (
-  itemPath: string,
-  currentPath: string,
-): boolean => {
-  const normalizedItemPath = normalizePathname(itemPath);
-  const normalizedCurrentPath = normalizePathname(currentPath);
-  // Exact match
-  if (normalizedCurrentPath === normalizedItemPath) {
-    return true;
-  }
-  // Prefix match (current path starts with item href + '/')
-  return normalizedCurrentPath.startsWith(normalizedItemPath + "/");
-};

@@ -2,13 +2,11 @@ import {
   ExpandLessOutlined,
   ExpandMoreOutlined,
 } from "@digitalservicebund/icons";
-import React, { useEffect } from "react";
-import { useLocation } from "react-router";
+import { useEffect } from "react";
 import type { DropdownItemProps } from "~/components/DrodownMenuItem.tsx";
 import DropdownContentList from "~/components/DropdownContentList";
 import DropdownMenuSupportItem from "~/components/DropdownMenuSupportItem.tsx";
 import twMerge from "~/utils/tailwindMerge";
-import { isPathActive } from "~/utils/utilFunctions.ts";
 
 export type DropdownProps = {
   label?: string;
@@ -21,9 +19,7 @@ export type DropdownProps = {
   isExpanded: boolean;
   onToggle: () => void;
   onItemClick: () => void;
-  onMouseEnter?: (event: React.MouseEvent<HTMLElement>) => void;
-  onMouseLeave?: (event: React.MouseEvent<HTMLElement>) => void;
-  isActiveParent?: boolean;
+  isActiveParent: boolean;
 };
 
 export default function DropdownMenu({
@@ -36,14 +32,10 @@ export default function DropdownMenu({
   isExpanded,
   onToggle,
   onItemClick,
+  isActiveParent,
 }: Readonly<DropdownProps>) {
   const isMobile = variant === "mobile";
   const elementId = `dropdown-${label}`;
-  const location = useLocation();
-
-  const isActiveParent = data.some((item) => {
-    return isPathActive(item.href!, location.pathname);
-  });
 
   // Transparent borders to avoid layout shifts
   const buttonClasses = twMerge(
