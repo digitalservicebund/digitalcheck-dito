@@ -30,12 +30,8 @@ const isParentItemActive = (item: HeaderItem, path: string): boolean => {
   return item.overlayContent.some((subItem) => {
     const normalizedItemPath = normalizePathname(subItem.href);
     const normalizedCurrentPath = normalizePathname(path);
-    // Exact match
-    if (normalizedCurrentPath === normalizedItemPath) {
-      return true;
-    }
-    // Prefix match (current path starts with item href + '/')
-    return normalizedCurrentPath.startsWith(normalizedItemPath + "/");
+    // Prefix match (current path starts with item href)
+    return normalizedCurrentPath.startsWith(normalizedItemPath);
   });
 };
 
@@ -88,15 +84,14 @@ const PageHeader = ({
 
   // Opens and closes mobile menu
   const toggleMobileMenu = () => {
-    const isOpen = !mobileMenuOpen;
-    setMobileMenuOpen(isOpen);
-    if (isOpen) {
+    if (!mobileMenuOpen) {
+      setMobileMenuOpen(true);
       const parentItemText = header.items.find((item) =>
         isParentItemActive(item, location.pathname),
       )?.text;
       setActiveDropdownId(parentItemText ?? null);
     } else {
-      setActiveDropdownId(null);
+      closeOpenDropdowns();
     }
   };
 
