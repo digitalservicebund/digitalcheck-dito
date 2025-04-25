@@ -20,13 +20,10 @@ export default function Breadcrumbs() {
     return ROUTES.find((r) => r.url === match.pathname.replace(/\/$/, ""));
   });
 
-  const uniqueBreadcrumbs = breadcrumbs
-    .filter((route) => route !== undefined)
-    .filter(
-      // Remove duplicate URLs that come from parent + parent._index routes
-      (breadcrumb, index, self) =>
-        index === self.findIndex((t) => t?.url === breadcrumb?.url),
-    );
+  // Remove duplicate URLs that come from parent + parent._index routes and filter undefined
+  const uniqueBreadcrumbs = Array.from(new Set(breadcrumbs)).filter(
+    (route) => route !== undefined,
+  );
 
   return uniqueBreadcrumbs.length ? (
     <nav
