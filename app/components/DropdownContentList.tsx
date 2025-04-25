@@ -32,7 +32,7 @@ export default function DropdownContentList({
           aria-label={option.title}
           role="menuitem"
         >
-          {({ isActive }: { isActive: boolean }) => {
+          {({ isActive }) => {
             const browserHasHash = location.hash !== "";
             // Don't mark support subsection as active items
             const finalIsActive = isActive && !browserHasHash;
