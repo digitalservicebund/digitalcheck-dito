@@ -2,9 +2,6 @@
 
 import { preCheckQuestions } from "./content/shared/preCheckQuestions";
 
-const PRECHECK_PDF = "digitalcheck-vorpruefung.pdf";
-const DOCUMENTATION_PDF = "digitalcheck-begleitende-dokumentation.pdf";
-
 export type Route = {
   url: string;
   title: string;
@@ -49,7 +46,7 @@ export const ROUTE_PRECHECK_RESULT = createRoute(
   ROUTE_PRECHECK,
 );
 export const ROUTE_RESULT_PDF = createRoute(
-  PRECHECK_PDF,
+  "digitalcheck-vorpruefung.pdf",
   "Vorprüfung als PDF",
   ROUTE_PRECHECK_RESULT,
 );
@@ -88,7 +85,7 @@ export const ROUTE_DOCUMENTATION = createRoute(
   "Dokumentation",
 );
 export const ROUTE_DOCUMENTATION_STATIC_PDF = createRoute(
-  `download/${DOCUMENTATION_PDF}`,
+  "download/digitalcheck-begleitende-dokumentation.pdf",
   "Begleitende Dokumentation als PDF",
 );
 
