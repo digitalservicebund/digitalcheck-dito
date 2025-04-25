@@ -174,7 +174,8 @@ export function ScrollAndFocus() {
   const mainRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (window.location.hash && !window.location.hash.includes("#")) {
+    if (!window.location.hash) {
+      // If we are not scrolling to a hash section, scroll to top and focus main element
       window.scrollTo({ top: 0, behavior: "instant" });
       requestAnimationFrame(() => {
         mainRef.current?.focus();
