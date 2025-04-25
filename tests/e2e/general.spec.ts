@@ -16,9 +16,9 @@ test.describe("test breadcrumbs and titles", () => {
     await expect(page.getByTestId("breadcrumbs-menu")).toBeHidden();
   });
 
-  // Remove landing page
-  ROUTES.slice(1).forEach((route) => {
-    if (route.url.endsWith(".pdf")) {
+  ROUTES.forEach((route) => {
+    // Remove landing page and download routes
+    if (route.url.endsWith(".pdf") || route.url === "/") {
       return;
     }
     test(`${route.url} has breadcrumbs and title`, async ({ page }) => {

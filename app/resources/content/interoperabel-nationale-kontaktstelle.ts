@@ -1,7 +1,7 @@
 import {
   ROUTE_INTEROPERABILITY,
   ROUTE_LANDING,
-  ROUTE_METHODS_FIVE_PRINCIPLES,
+  ROUTE_METHODS_PRINCIPLES,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -122,7 +122,7 @@ export const spoc = {
         },
         content: dedent`
           **Entwicklung angepasster Prinzipien und Methoden**
-          - Derzeit entwickeln wir die [5 Prinzipien für Digitaltaugliche Gesetzgebung](${ROUTE_METHODS_FIVE_PRINCIPLES.url}) weiter. Zukünftig werden diese die vier Interoperabilitätsebenen noch konkreter herausstellen. Darauf aufbauend werden wir die Erarbeitungsmethoden anpassen. Ziel ist es, den gesamten Entwicklungsprozess effizienter und zielgerichteter zu gestalten.
+          - Derzeit entwickeln wir die [5 Prinzipien für Digitaltaugliche Gesetzgebung](${ROUTE_METHODS_PRINCIPLES.url}) weiter. Zukünftig werden diese die vier Interoperabilitätsebenen noch konkreter herausstellen. Darauf aufbauend werden wir die Erarbeitungsmethoden anpassen. Ziel ist es, den gesamten Entwicklungsprozess effizienter und zielgerichteter zu gestalten.
         `,
         image: {
           url: "/images/synthese-prozess-digitalcheck-und-interoperabilitaet.png",

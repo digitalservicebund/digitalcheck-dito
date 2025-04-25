@@ -2,7 +2,7 @@ import { steps } from "~/resources/content/components/naechste-schritte";
 import {
   ROUTE_EXAMPLES,
   ROUTE_INTEROPERABILITY,
-  ROUTE_METHODS_FIVE_PRINCIPLES,
+  ROUTE_METHODS_PRINCIPLES,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -97,7 +97,7 @@ export const index = {
     ],
     link: {
       text: "Details und Beispiele",
-      href: ROUTE_METHODS_FIVE_PRINCIPLES.url,
+      href: ROUTE_METHODS_PRINCIPLES.url,
     },
   },
 };

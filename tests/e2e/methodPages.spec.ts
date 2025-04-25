@@ -10,7 +10,7 @@ import {
   ROUTE_LANDING,
   ROUTE_METHODS,
   ROUTE_METHODS_COLLECT_IT_SYSTEMS,
-  ROUTE_METHODS_FIVE_PRINCIPLES,
+  ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
   ROUTE_METHODS_TASKS_PROCESSES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
@@ -38,7 +38,7 @@ test.describe("test method page link flow", () => {
     await expect(page).toHaveURL(ROUTE_METHODS_COLLECT_IT_SYSTEMS.url);
 
     await page.getByRole("link", { name: "Fünf Prinzipien nutzen" }).click();
-    await expect(page).toHaveURL(ROUTE_METHODS_FIVE_PRINCIPLES.url);
+    await expect(page).toHaveURL(ROUTE_METHODS_PRINCIPLES.url);
 
     await page.getByRole("link", { name: "IT-Auswirkungen prüfen" }).click();
     await expect(page).toHaveURL(ROUTE_METHODS_TECHNICAL_FEASIBILITY.url);
@@ -82,7 +82,7 @@ test.describe("test method sub pages", () => {
 
   test("links to five principles", async ({ page }) => {
     await page.getByRole("link", { name: "Fünf Prinzipien nutzen" }).click();
-    await expect(page).toHaveURL(ROUTE_METHODS_FIVE_PRINCIPLES.url);
+    await expect(page).toHaveURL(ROUTE_METHODS_PRINCIPLES.url);
     await expect(page.getByRole("main")).toContainText(
       "Fünf Prinzipien für digitaltaugliche Gesetzgebung",
     );
@@ -109,7 +109,7 @@ test.describe("five principles page", () => {
     await page.goto(ROUTE_LANDING.url);
 
     await page.getByRole("link", { name: "Details und Beispiele" }).click();
-    await expect(page).toHaveURL(ROUTE_METHODS_FIVE_PRINCIPLES.url);
+    await expect(page).toHaveURL(ROUTE_METHODS_PRINCIPLES.url);
 
     await expect(page.getByRole("main")).toContainText(
       "Vorprüfung: Digitalbezug einschätzen",
@@ -121,7 +121,7 @@ test.describe("five principles page", () => {
     await expect(page).toHaveURL(ROUTE_METHODS.url);
 
     await page.getByRole("link", { name: "Fünf Prinzipien nutzen" }).click();
-    await expect(page).toHaveURL(ROUTE_METHODS_FIVE_PRINCIPLES.url);
+    await expect(page).toHaveURL(ROUTE_METHODS_PRINCIPLES.url);
 
     await expect(page.getByRole("main")).toContainText(
       "Technische Umsetzbarkeit sicherstellen",
@@ -144,7 +144,7 @@ test.describe("five principles page", () => {
       // retries to prevent flakiness for firefox
       while (attempt < 3) {
         try {
-          await page.goto(ROUTE_METHODS_FIVE_PRINCIPLES.url, {
+          await page.goto(ROUTE_METHODS_PRINCIPLES.url, {
             waitUntil: "domcontentloaded",
           });
 

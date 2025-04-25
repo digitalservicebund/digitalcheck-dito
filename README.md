@@ -64,6 +64,8 @@ npm run dev
 ```
 
 This starts your app in development mode, rebuilding assets on file changes.
+Note that when running in development mode and using an adblocker, you should whitelist localhost on the adblocker,
+as it blocks local assets by name which can cause runtime errors and break UI.
 
 ### Testing
 

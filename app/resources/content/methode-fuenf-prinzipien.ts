@@ -8,6 +8,8 @@ import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsFivePrinciples = {
   title: "Fünf Prinzipien für digitaltaugliche Gesetzgebung",
+  subTitle:
+    "Die fünf Prinzipien für digitaltaugliche Gesetzgebung decken unterschiedliche Aspekte der digitalen Umsetzung ab. Nutzen Sie die Tipps als Inspiration, um in Ihrem Regelungsvorhaben die Möglichkeiten des Digitalen auszuschöpfen und Hindernisse zu erkennen.",
   buttonText: "Beispiele betrachten",
   principles: [
     {

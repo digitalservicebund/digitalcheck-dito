@@ -15,7 +15,7 @@ export const meta = ({ matches }: MetaArgs) => {
 export default function Digitaltauglichkeit_index() {
   return (
     <>
-      <Background backgroundColor="darkBlue" className="py-24">
+      <Background backgroundColor="blue" className="py-24">
         <Container>
           <Header
             heading={{
