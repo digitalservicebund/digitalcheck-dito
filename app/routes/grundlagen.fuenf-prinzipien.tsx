@@ -40,10 +40,14 @@ export default function FundamentalsFivePrinciples() {
           />
         </Container>
       </Background>
-      <PrinciplesDisplay
-        principles={principlesToDisplay}
-        showInfoBoxButtons={false}
-      />
+      {principlesToDisplay.map((principle, index) => (
+        <PrinciplesDisplay
+          key={slugify(principle.label)}
+          principle={principle}
+          index={index}
+          showInfoBoxButtons={false}
+        />
+      ))}
       <SupportBanner />
     </>
   );

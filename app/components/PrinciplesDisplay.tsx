@@ -12,72 +12,68 @@ interface PrincipleData {
 }
 
 interface PrinciplesDisplayProps {
-  principles: PrincipleData[];
+  principle: PrincipleData;
+  index: number;
   showInfoBoxButtons: boolean;
-  prinzips?: Prinzip[];
+  prinzip?: Prinzip;
   buttonText?: string;
 }
 
 export default function PrinciplesDisplay({
-  principles,
+  principle,
+  index,
   showInfoBoxButtons,
-  prinzips,
+  prinzip,
   buttonText,
 }: Readonly<PrinciplesDisplayProps>) {
+  const label = slugify(principle.label);
+  let buttonsArray = undefined;
+
+  if (showInfoBoxButtons && prinzip) {
+    const buttonLink = `${ROUTE_PRINCIPLES.url}/${prinzip.URLBezeichnung}`;
+    buttonsArray = [
+      {
+        text: buttonText,
+        href: buttonLink,
+        prefetch: "viewport" as const,
+        look: "tertiary" as const,
+        "aria-label": `Beispiele für "${principle.label}: ${principle.title}" betrachten`,
+      },
+    ];
+  } else if (showInfoBoxButtons && !prinzip) {
+    buttonsArray = [
+      {
+        text: buttonText,
+        href: ROUTE_EXAMPLES.url,
+        prefetch: "viewport" as const,
+        look: "tertiary" as const,
+        "aria-label": "Alle Beispiele betrachten",
+      },
+    ];
+  }
+
   return (
-    <>
-      {principles.map((principle, index) => {
-        const label = slugify(principle.label);
-        let buttonsArray = undefined;
-
-        if (showInfoBoxButtons && prinzips) {
-          const prinzip = prinzips.find((p) => p.Nummer === index);
-          const buttonLink = prinzip
-            ? `${ROUTE_PRINCIPLES.url}/${prinzip.URLBezeichnung}`
-            : ROUTE_EXAMPLES.url;
-
-          buttonsArray = [
+    <Background backgroundColor={index % 2 === 0 ? "white" : "blue"}>
+      <div id={label} />
+      <Container>
+        <InfoBox
+          heading={{
+            tagName: "h2",
+            text: principle.title,
+          }}
+          label={{
+            tagName: "div",
+            text: principle.label,
+            className: "ds-label-section text-gray-900",
+          }}
+          items={[
             {
-              text: buttonText,
-              href: buttonLink,
-              prefetch: "viewport" as const,
-              look: "tertiary" as const,
-              "aria-label":
-                index > 0
-                  ? `Beispiele für "${principle.label}: ${principle.title}" betrachten`
-                  : "Alle Beispiele betrachten",
+              content: principle.content,
+              buttons: buttonsArray,
             },
-          ];
-        }
-
-        return (
-          <Background
-            key={label}
-            backgroundColor={index % 2 === 0 ? "white" : "blue"}
-          >
-            <div id={label} />
-            <Container>
-              <InfoBox
-                heading={{
-                  tagName: "h2",
-                  text: principle.title,
-                }}
-                label={{
-                  tagName: "div",
-                  text: principle.label,
-                  className: "ds-label-section text-gray-900",
-                }}
-                items={[
-                  {
-                    content: principle.content,
-                    buttons: buttonsArray,
-                  },
-                ]}
-              />
-            </Container>
-          </Background>
-        );
-      })}
-    </>
+          ]}
+        />
+      </Container>
+    </Background>
   );
 }

@@ -76,12 +76,19 @@ export default function FivePrinciples() {
           />
         </Container>
       </Background>
-      <PrinciplesDisplay
-        principles={methodsFivePrinciples.principles}
-        showInfoBoxButtons={true}
-        prinzips={prinzips}
-        buttonText={methodsFivePrinciples.buttonText}
-      />
+      {methodsFivePrinciples.principles.map((principle, index) => {
+        const correspondingPrinzip = prinzips.find((p) => p.Nummer === index);
+        return (
+          <PrinciplesDisplay
+            key={slugify(principle.label)}
+            principle={principle}
+            index={index}
+            showInfoBoxButtons={true}
+            prinzip={correspondingPrinzip}
+            buttonText={methodsFivePrinciples.buttonText}
+          />
+        );
+      })}
       <Container>
         <Box
           heading={{ text: nextStep.title }}
