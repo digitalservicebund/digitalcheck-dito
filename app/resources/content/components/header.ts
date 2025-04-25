@@ -19,7 +19,7 @@ export const header = {
   },
   items: [
     {
-      isList: true,
+      isOrderedList: true,
       text: "Schritt für Schritt",
       overlayContent: [
         {

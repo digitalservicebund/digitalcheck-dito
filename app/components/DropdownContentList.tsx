@@ -6,22 +6,21 @@ import twMerge from "~/utils/tailwindMerge";
 
 export type DropdownContentListProps = {
   data: DropdownItemProps[];
-  isList?: boolean;
+  isOrderedList?: boolean;
   onItemClick: () => void;
   isMobile?: boolean;
 };
 
 export default function DropdownContentList({
   data,
-  isList = false,
+  isOrderedList = false,
   onItemClick,
   isMobile = false,
 }: Readonly<DropdownContentListProps>) {
   const location = useLocation();
-  const mobileElementStyle = "py-8 pr-8 pl-16 border-b-[1px] border-gray-600 ";
   const listClasses = twMerge(
-    "list-unstyled list-none",
-    isMobile ? mobileElementStyle : "",
+    "list-unstyled",
+    isMobile && "py-8 pr-8 pl-16 border-b-[1px] border-gray-600",
   );
 
   const mapDataToItems = (option: DropdownItemProps, index: number) => {
@@ -32,7 +31,7 @@ export default function DropdownContentList({
 
       return (
         <DropdownItem
-          number={isList ? index + 1 : undefined}
+          number={isOrderedList ? index + 1 : undefined}
           newContent={option.newContent}
           title={option.title}
           content={option.content}
@@ -57,7 +56,7 @@ export default function DropdownContentList({
     );
   };
 
-  return isList ? (
+  return isOrderedList ? (
     <ol className={listClasses}>{data.map(mapDataToItems)}</ol>
   ) : (
     <ul className={listClasses}>{data.map(mapDataToItems)}</ul>

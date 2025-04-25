@@ -10,7 +10,7 @@ test.describe("test breadcrumbs and titles", () => {
   });
 
   allRoutes.forEach((route) => {
-    // Remove landing page and grundlagen page
+    // Remove landing page and download routes
     if (route.url.endsWith(".pdf") || route.url === "/") {
       return;
     }

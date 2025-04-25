@@ -2,6 +2,7 @@ import { MenuOpen, MenuOutlined } from "@digitalservicebund/icons/index";
 import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router";
+import { twJoin } from "tailwind-merge";
 import Background from "~/components/Background.tsx";
 import Breadcrumbs from "~/components/Breadcrumbs.tsx";
 import DropdownMenu from "~/components/DropdownMenu.tsx";
@@ -21,7 +22,7 @@ interface HeaderItem {
   text: string;
   overlayContent: SubItem[];
   hasSupport?: boolean;
-  isList?: boolean;
+  isOrderedList?: boolean;
 }
 
 // Check if an item href matches the current path
@@ -53,7 +54,7 @@ const PageHeader = ({
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        closeOpenDropdown();
+        closeOpenDropdowns();
       }
     };
     document.addEventListener("keydown", handleKeyDown);
@@ -79,8 +80,8 @@ const PageHeader = ({
     setActiveDropdownId((current) => (current === itemText ? null : itemText));
   };
 
-  // Close any open dropdown
-  const closeOpenDropdown = () => {
+  // Close any open dropdown and menu
+  const closeOpenDropdowns = () => {
     setActiveDropdownId(null);
     setMobileMenuOpen(false);
   };
@@ -106,7 +107,7 @@ const PageHeader = ({
       {showOverlay && (
         <div
           className="fixed inset-0 z-20 bg-[#282828] opacity-63"
-          onClick={closeOpenDropdown}
+          onClick={closeOpenDropdowns}
           aria-hidden="true"
         />
       )}
@@ -124,22 +125,20 @@ const PageHeader = ({
 
           {/* Desktop Navigation */}
           <nav className="flex items-center max-lg:hidden">
-            {header.items.map((item) => {
-              return (
-                <DropdownMenu
-                  key={item.text}
-                  label={item.text}
-                  hasSupport={item.hasSupport}
-                  data={item.overlayContent}
-                  isList={item.isList}
-                  variant="desktop"
-                  isActiveParent={isParentItemActive(item, currentPath)}
-                  isExpanded={activeDropdownId === item.text}
-                  onToggle={() => toggleDropdown(item.text)}
-                  onItemClick={closeOpenDropdown}
-                />
-              );
-            })}
+            {header.items.map((item) => (
+              <DropdownMenu
+                key={item.text}
+                label={item.text}
+                hasSupport={item.hasSupport}
+                data={item.overlayContent}
+                isOrderedList={item.isOrderedList}
+                variant="desktop"
+                isActiveParent={isParentItemActive(item, currentPath)}
+                isExpanded={activeDropdownId === item.text}
+                onToggle={() => toggleDropdown(item.text)}
+                onItemClick={closeOpenDropdowns}
+              />
+            ))}
           </nav>
 
           {/* Mobile View Controls */}
@@ -152,8 +151,8 @@ const PageHeader = ({
             </a>
             <button
               className={twMerge(
-                "h-full cursor-pointer border-b-[4px] border-transparent px-16 hover:bg-blue-100 focus:border-b-[4px] focus:bg-blue-100",
-                mobileMenuOpen && "border-b-[4px] border-blue-800 bg-blue-100",
+                "h-full cursor-pointer border-b-[4px] border-transparent px-16 hover:bg-blue-100",
+                mobileMenuOpen && "border-blue-800 bg-blue-100",
               )}
               onClick={toggleMobileMenu}
               aria-label="Menü öffnen/schließen"
@@ -168,27 +167,26 @@ const PageHeader = ({
         {/* Mobile Navigation */}
         <nav
           id="mobile-menu"
-          className={`absolute right-0 left-0 z-40 rounded-b-md border-t-1 border-gray-600 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)] ${
-            mobileMenuOpen ? "overflow-y-auto" : "invisible"
-          }`}
+          className={twJoin(
+            "absolute right-0 left-0 z-40 rounded-b-md border-t-1 border-gray-600 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]",
+            mobileMenuOpen ? "overflow-y-auto" : "invisible",
+          )}
           aria-hidden={!mobileMenuOpen}
         >
-          {header.items.map((item) => {
-            return (
-              <DropdownMenu
-                key={item.text}
-                label={item.text}
-                hasSupport={item.hasSupport}
-                data={item.overlayContent}
-                isList={item.isList}
-                variant="mobile"
-                isActiveParent={isParentItemActive(item, currentPath)}
-                isExpanded={activeDropdownId === item.text}
-                onToggle={() => toggleDropdown(item.text)}
-                onItemClick={closeOpenDropdown}
-              />
-            );
-          })}
+          {header.items.map((item) => (
+            <DropdownMenu
+              key={item.text}
+              label={item.text}
+              hasSupport={item.hasSupport}
+              data={item.overlayContent}
+              isOrderedList={item.isOrderedList}
+              variant="mobile"
+              isActiveParent={isParentItemActive(item, currentPath)}
+              isExpanded={activeDropdownId === item.text}
+              onToggle={() => toggleDropdown(item.text)}
+              onItemClick={closeOpenDropdowns}
+            />
+          ))}
         </nav>
         {includeBreadcrumbs && (
           <Background backgroundColor="blue">

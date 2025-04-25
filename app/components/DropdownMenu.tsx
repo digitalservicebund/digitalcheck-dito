@@ -2,7 +2,6 @@ import {
   ExpandLessOutlined,
   ExpandMoreOutlined,
 } from "@digitalservicebund/icons";
-import { useEffect } from "react";
 import type { DropdownItemProps } from "~/components/DrodownMenuItem.tsx";
 import DropdownContentList from "~/components/DropdownContentList";
 import { header } from "~/resources/content/components/header.ts";
@@ -13,7 +12,7 @@ export type DropdownProps = {
   className?: string;
   data: DropdownItemProps[];
   hasSupport?: boolean;
-  isList?: boolean;
+  isOrderedList?: boolean;
   onOpenChange?: (isOpen: boolean) => void;
   variant?: "desktop" | "mobile";
   isExpanded: boolean;
@@ -27,7 +26,7 @@ export default function DropdownMenu({
   label,
   data,
   hasSupport = false,
-  isList = false,
+  isOrderedList = false,
   variant = "desktop",
   isExpanded,
   onToggle,
@@ -40,10 +39,9 @@ export default function DropdownMenu({
   // Transparent borders to avoid layout shifts
   const buttonClasses = twMerge(
     "flex cursor-pointer items-center hover:bg-blue-100",
-    !isMobile &&
-      "ds-label-01-reg h-full border-b-[4px] border-transparent pr-8 pl-16 whitespace-nowrap",
-    isMobile &&
-      "ds-label-01-bold w-full justify-between border-l-[4px] border-transparent p-16",
+    !isMobile
+      ? "ds-label-01-reg h-full border-b-[4px] border-transparent pr-8 pl-16 whitespace-nowrap"
+      : "ds-label-01-bold w-full justify-between border-l-[4px] border-transparent p-16",
     isActiveParent && "border-blue-800 bg-blue-100",
     isExpanded && "bg-blue-100",
   );
@@ -57,19 +55,6 @@ export default function DropdownMenu({
     isMobile ? "w-full" : "h-full max-lg:hidden",
     className,
   );
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && isExpanded) {
-        onToggle();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isExpanded, onToggle]);
 
   const handleMouseEnter = () => {
     if (!isMobile && !isExpanded) {
@@ -123,7 +108,7 @@ export default function DropdownMenu({
           )}
           <DropdownContentList
             data={data}
-            isList={isList}
+            isOrderedList={isOrderedList}
             onItemClick={onItemClick}
             isMobile={isMobile}
           />
