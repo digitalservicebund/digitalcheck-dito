@@ -24,24 +24,6 @@ export default function DropdownContentList({
   );
 
   const mapDataToItems = (option: DropdownItemProps, index: number) => {
-    const renderContent = ({ isActive }: { isActive: boolean }) => {
-      const browserHasHash = location.hash !== "";
-      // Don't mark support subsection as active items
-      const finalIsActive = isActive && !browserHasHash;
-
-      return (
-        <DropdownItem
-          number={isOrderedList ? index + 1 : undefined}
-          newContent={option.newContent}
-          title={option.title}
-          content={option.content}
-          isNewTitle={option.isNewTitle}
-          isActive={finalIsActive}
-          className={option.className}
-        />
-      );
-    };
-
     return (
       <li key={index}>
         <NavLink
@@ -50,7 +32,23 @@ export default function DropdownContentList({
           onClick={onItemClick}
           aria-label={option.title}
         >
-          {renderContent}
+          {({ isActive }: { isActive: boolean }) => {
+            const browserHasHash = location.hash !== "";
+            // Don't mark support subsection as active items
+            const finalIsActive = isActive && !browserHasHash;
+
+            return (
+              <DropdownItem
+                number={isOrderedList ? index + 1 : undefined}
+                newContent={option.newContent}
+                title={option.title}
+                content={option.content}
+                isNewTitle={option.isNewTitle}
+                isActive={finalIsActive}
+                className={option.className}
+              />
+            );
+          }}
         </NavLink>
       </li>
     );
