@@ -5,7 +5,7 @@ import {
 import { useEffect } from "react";
 import type { DropdownItemProps } from "~/components/DrodownMenuItem.tsx";
 import DropdownContentList from "~/components/DropdownContentList";
-import DropdownMenuSupportItem from "~/components/DropdownMenuSupportItem.tsx";
+import { header } from "~/resources/content/components/header.ts";
 import twMerge from "~/utils/tailwindMerge";
 
 export type DropdownProps = {
@@ -107,7 +107,20 @@ export default function DropdownMenu({
           role={!isMobile ? "listbox" : "region"}
           aria-labelledby={`${elementId}-schaltfläche`}
         >
-          {hasSupport && <DropdownMenuSupportItem mobile={isMobile} />}
+          {hasSupport && (
+            <div className="px-16 lg:px-56">
+              <div className="ds-label-02-reg px-16 pt-8 pb-16 text-gray-900 lg:px-8 lg:pt-16 lg:pb-24">
+                {isMobile ? header.contact.msgMobile : header.contact.msg}
+                <a
+                  href={`tel:${header.contact.number}`}
+                  className="plausible-event-name=Phone+Click plausible-event-position=header ds-link-02-reg ml-8"
+                >
+                  {header.contact.number}
+                </a>
+              </div>
+              <div className="border-b-1 border-gray-600" />
+            </div>
+          )}
           <DropdownContentList
             data={data}
             isList={isList}
