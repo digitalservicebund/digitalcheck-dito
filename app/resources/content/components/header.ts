@@ -1,11 +1,11 @@
 import {
   ROUTE_DOCUMENTATION,
+  ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_EXAMPLES_VISUALISATIONS,
   ROUTE_FUNDAMENTALS_METHODS,
   ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_INTEROPERABILITY,
   ROUTE_METHODS,
-  ROUTE_METHODS_PRINCIPLES,
   ROUTE_PRECHECK,
   ROUTE_SUPPORT,
 } from "~/resources/staticRoutes.ts";
@@ -51,7 +51,7 @@ export const header = {
           title: "Digitaltauglichkeit im Regelungstext",
           content:
             "So wurden die 5 Prinzipien von Ihren Kolleginnen und Kollegen in Regelungen ausformuliert.",
-          href: ROUTE_METHODS_PRINCIPLES.url,
+          href: ROUTE_EXAMPLES_PRINCIPLES.url,
         },
         {
           title: "Visualisierungen",
