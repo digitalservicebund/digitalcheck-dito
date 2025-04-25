@@ -11,7 +11,6 @@ import {
   ScrollRestoration,
   useLoaderData,
   useLocation,
-  useMatches,
   useRouteError,
   useRouteLoaderData,
 } from "react-router";
@@ -39,8 +38,6 @@ import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants.server";
 import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
 import type { Route } from "./+types/root";
-import ProgressBar from "./components/ProgressBar";
-import { matchHasHandle } from "./utils/handles";
 
 export function loader({ request }: Route.LoaderArgs) {
   const featureFlags = getFeatureFlags();

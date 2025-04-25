@@ -2,6 +2,7 @@ import HomeOutlined from "@digitalservicebund/icons/HomeOutlined";
 import { Link, useMatches } from "react-router";
 import { ROUTE_LANDING, ROUTES } from "~/resources/staticRoutes";
 import { matchHasHandle } from "~/utils/handles";
+import { removeTrailingSlash } from "~/utils/utilFunctions";
 
 export default function Breadcrumbs() {
   const matchesWithoutLanding = useMatches().slice(1);
@@ -13,7 +14,7 @@ export default function Breadcrumbs() {
     }
 
     // Otherwise find the route that match the current path, removing trailing slashes
-    return ROUTES.find((r) => r.url === match.pathname.replace(/\/$/, ""));
+    return ROUTES.find((r) => r.url === removeTrailingSlash(match.pathname));
   });
 
   // Remove duplicate URLs that come from parent + parent._index routes and filter undefined
