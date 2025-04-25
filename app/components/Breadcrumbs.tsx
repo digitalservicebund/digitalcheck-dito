@@ -31,10 +31,7 @@ export default function Breadcrumbs() {
       data-testid="breadcrumbs-menu"
       aria-label="breadcrumb navigation"
     >
-      <Link
-        to={ROUTE_LANDING.url}
-        className="ds-link-01-bold fill-blue-800 outline-blue-800"
-      >
+      <Link to={ROUTE_LANDING.url} className="fill-blue-800 outline-blue-800">
         <HomeOutlined />
         <span className="sr-only">{ROUTE_LANDING.title}</span>
       </Link>
