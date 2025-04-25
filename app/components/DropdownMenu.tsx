@@ -79,7 +79,7 @@ export default function DropdownMenu({
         onClick={onToggle}
         className={buttonClasses}
         id={`${elementId}-button`}
-        aria-haspopup="true"
+        aria-haspopup="menu"
         aria-expanded={isExpanded}
         aria-controls={`${elementId}-inhalt`}
       >

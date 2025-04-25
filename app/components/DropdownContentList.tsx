@@ -30,6 +30,7 @@ export default function DropdownContentList({
           to={option.href!}
           onClick={onItemClick}
           aria-label={option.title}
+          role="menuitem"
         >
           {({ isActive }: { isActive: boolean }) => {
             const browserHasHash = location.hash !== "";
