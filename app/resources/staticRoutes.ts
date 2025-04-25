@@ -140,6 +140,24 @@ export const ROUTE_VISUALISATIONS: Route = {
   parent: ROUTE_EXAMPLES.url,
 };
 
+export const ROUTE_FUNDAMENTALS: Route = {
+  url: "/grundlagen",
+  title: "Grundlagen",
+  parent: ROUTE_LANDING.url,
+};
+
+export const ROUTE_FUNDAMENTALS_PRINCIPLES: Route = {
+  url: `${ROUTE_FUNDAMENTALS.url}/fuenf-prinzipien`,
+  title: "Prinzipien",
+  parent: ROUTE_FUNDAMENTALS.url,
+};
+
+export const ROUTE_FUNDAMENTALS_METHODS: Route = {
+  url: `${ROUTE_FUNDAMENTALS.url}/methoden`,
+  title: "Methoden",
+  parent: ROUTE_FUNDAMENTALS.url,
+};
+
 const routes: Route[] = [
   ROUTE_LANDING,
   ROUTE_PRECHECK,
@@ -161,6 +179,9 @@ const routes: Route[] = [
   ROUTE_SITEMAP,
   ROUTE_EXAMPLES,
   ROUTE_VISUALISATIONS,
+  ROUTE_FUNDAMENTALS,
+  ROUTE_FUNDAMENTALS_PRINCIPLES,
+  ROUTE_FUNDAMENTALS_METHODS,
 ];
 
 export default routes;

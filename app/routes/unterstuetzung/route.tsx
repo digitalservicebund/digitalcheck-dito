@@ -137,7 +137,7 @@ export default function Index() {
       </Container>
       <Background backgroundColor="blue">
         <Container>
-          <Heading tagName="h2" text={supportHow.title} />
+          <Heading id="hilfe" tagName="h2" text={supportHow.title} />
           {supportHow.supportTypes.length > 0 &&
             supportHow.supportTypes.map((supportType) => (
               <div

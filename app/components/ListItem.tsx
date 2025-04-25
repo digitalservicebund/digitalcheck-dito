@@ -86,7 +86,7 @@ const ListItem = ({
               ></div>
             )}
           </div>
-          <div className={twJoin(backgroundColor && "rounded-lg")}>
+          <div className={twJoin(backgroundColor && "w-full rounded-lg")}>
             <Background
               backgroundColor={(backgroundColor as BackgroundColor) || "white"}
             >
