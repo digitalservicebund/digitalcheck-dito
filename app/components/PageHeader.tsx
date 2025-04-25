@@ -95,6 +95,24 @@ const PageHeader = ({
     }
   };
 
+  const renderDropdownItem = (
+    item: HeaderItem,
+    variant: "desktop" | "mobile",
+  ) => (
+    <DropdownMenu
+      key={`${item.text}-${variant}`}
+      label={item.text}
+      hasSupport={item.hasSupport}
+      data={item.overlayContent}
+      isOrderedList={item.isOrderedList}
+      variant={variant}
+      isActiveParent={isParentItemActive(item, currentPath)}
+      isExpanded={activeDropdownId === item.text}
+      onToggle={() => toggleDropdown(item.text)}
+      onItemClick={closeOpenDropdowns}
+    />
+  );
+
   const showOverlay = activeDropdownId !== null || mobileMenuOpen;
 
   return (
@@ -120,20 +138,7 @@ const PageHeader = ({
 
           {/* Desktop Navigation */}
           <nav className="flex items-center max-lg:hidden">
-            {header.items.map((item) => (
-              <DropdownMenu
-                key={item.text}
-                label={item.text}
-                hasSupport={item.hasSupport}
-                data={item.overlayContent}
-                isOrderedList={item.isOrderedList}
-                variant="desktop"
-                isActiveParent={isParentItemActive(item, currentPath)}
-                isExpanded={activeDropdownId === item.text}
-                onToggle={() => toggleDropdown(item.text)}
-                onItemClick={closeOpenDropdowns}
-              />
-            ))}
+            {header.items.map((item) => renderDropdownItem(item, "desktop"))}
           </nav>
 
           {/* Mobile View Controls */}
@@ -168,20 +173,7 @@ const PageHeader = ({
           )}
           aria-hidden={!mobileMenuOpen}
         >
-          {header.items.map((item) => (
-            <DropdownMenu
-              key={item.text}
-              label={item.text}
-              hasSupport={item.hasSupport}
-              data={item.overlayContent}
-              isOrderedList={item.isOrderedList}
-              variant="mobile"
-              isActiveParent={isParentItemActive(item, currentPath)}
-              isExpanded={activeDropdownId === item.text}
-              onToggle={() => toggleDropdown(item.text)}
-              onItemClick={closeOpenDropdowns}
-            />
-          ))}
+          {header.items.map((item) => renderDropdownItem(item, "mobile"))}
         </nav>
         {includeBreadcrumbs && (
           <Background backgroundColor="blue">
