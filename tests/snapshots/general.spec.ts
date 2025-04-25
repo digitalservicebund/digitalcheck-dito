@@ -12,10 +12,7 @@ test.describe("compare snapshots", () => {
       // Listen for redirects and update URL if needed
       const response = await page.goto(route.url);
 
-      if (
-        (response !== null && response.status() === 302) ||
-        (response !== null && response.status() === 301)
-      ) {
+      if (response !== null && [301, 302].includes(response.status())) {
         const redirectedUrl = response.headers()["location"];
         await page.goto(redirectedUrl);
       }
