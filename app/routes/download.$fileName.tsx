@@ -15,7 +15,7 @@ export async function loader({ params, request }: Route.LoaderArgs) {
   try {
     const filePath = path.join("public", "documents", fileName);
     const fileData = await fs.readFile(filePath);
-    const mimeType = contentType(fileName) ?? "";
+    const mimeType = contentType(fileName) || "";
 
     void trackCustomEvent(request, { name: `Download`, props: { fileName } });
     return new Response(fileData, {

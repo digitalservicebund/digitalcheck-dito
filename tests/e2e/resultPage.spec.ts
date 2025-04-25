@@ -616,7 +616,7 @@ for (const scenario of scenarios) {
 
     if (scenario.expected.negativeReasoningText) {
       test("email body contains negative reasoning", async () => {
-        const reasoningText = scenario.expected.negativeReasoningText ?? "";
+        const reasoningText = scenario.expected.negativeReasoningText || "";
         await page
           .getByLabel("Arbeitstitel des Vorhabens")
           .fill("Vorhaben ABC");
