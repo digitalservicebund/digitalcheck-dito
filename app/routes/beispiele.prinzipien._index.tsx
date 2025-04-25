@@ -1,6 +1,9 @@
 import { redirect } from "react-router";
-import { ROUTE_PRINCIPLES_FIRST_PRINCIPLE } from "~/resources/staticRoutes.ts";
+import allRoutes from "~/resources/allRoutes.ts";
+import { ROUTE_PRINCIPLES } from "~/resources/staticRoutes.ts";
 
 export function loader() {
-  return redirect(ROUTE_PRINCIPLES_FIRST_PRINCIPLE.url);
+  return redirect(
+    allRoutes.filter((route) => route.parent === ROUTE_PRINCIPLES.url)[0].url,
+  );
 }
