@@ -1,5 +1,6 @@
 // These routes can't be exported from ~/routes.ts as that file isn't part of the app environment: https://github.com/remix-run/react-router/issues/12392
 
+import { removeTrailingSlash } from "~/utils/utilFunctions";
 import { preCheckQuestions } from "./content/shared/preCheckQuestions";
 
 export type Route = {
@@ -15,7 +16,7 @@ export const ROUTE_LANDING = {
 };
 
 const createRoute = (path: string, title: string, parent?: Route): Route => ({
-  url: `${parent?.url ?? ""}/${path}`,
+  url: `${removeTrailingSlash(parent?.url ?? "")}/${path}`,
   title,
   parent: parent ?? ROUTE_LANDING,
 });
@@ -153,11 +154,7 @@ export const ROUTE_VISUALISATION = createRoute(
 );
 
 // FUNDAMENTALS ROUTES
-export const ROUTE_FUNDAMENTALS = createRoute(
-  "grundlagen",
-  "Grundlagen",
-  ROUTE_LANDING,
-);
+export const ROUTE_FUNDAMENTALS = createRoute("grundlagen", "Grundlagen");
 
 export const ROUTE_FUNDAMENTALS_PRINCIPLES = createRoute(
   "fuenf-prinzipien",

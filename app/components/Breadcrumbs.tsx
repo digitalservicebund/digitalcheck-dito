@@ -1,6 +1,7 @@
 import HomeOutlined from "@digitalservicebund/icons/HomeOutlined";
 import { Link, useMatches, type UIMatch } from "react-router";
 import { ROUTE_LANDING, ROUTES, type Route } from "~/resources/staticRoutes";
+import { removeTrailingSlash } from "~/utils/utilFunctions";
 
 type Breadcrumb = (match: UIMatch) => Route;
 
@@ -17,7 +18,7 @@ export default function Breadcrumbs() {
       return (match.handle.breadcrumb as Breadcrumb)(match);
     }
     // Otherwise find the route that match the current path, removing trailing slashes
-    return ROUTES.find((r) => r.url === match.pathname.replace(/\/$/, ""));
+    return ROUTES.find((r) => r.url === removeTrailingSlash(match.pathname));
   });
 
   // Remove duplicate URLs that come from parent + parent._index routes and filter undefined
