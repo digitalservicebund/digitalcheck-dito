@@ -89,8 +89,7 @@ export default function DropdownMenu({
         <div
           className={panelClasses}
           id={`${elementId}-inhalt`}
-          role={!isMobile ? "listbox" : "region"}
-          aria-labelledby={`${elementId}-schaltfläche`}
+          aria-labelledby={`${elementId}-button`}
         >
           {hasSupport && (
             <div className="px-16 lg:px-56">

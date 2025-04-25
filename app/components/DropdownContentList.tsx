@@ -28,7 +28,6 @@ export default function DropdownContentList({
       <li key={index}>
         <NavLink
           to={option.href!}
-          role="option"
           onClick={onItemClick}
           aria-label={option.title}
         >
