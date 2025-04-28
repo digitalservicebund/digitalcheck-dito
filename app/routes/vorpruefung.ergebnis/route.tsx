@@ -26,7 +26,7 @@ import {
   ROUTE_PRECHECK,
   ROUTE_PRECHECK_RESULT,
 } from "~/resources/staticRoutes";
-import type { PreCheckAnswers } from "~/routes/vorpruefung.$questionId/route";
+import type { PreCheckAnswers } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import buildMailtoRedirectUri from "~/routes/vorpruefung.ergebnis/buildMailtoRedirectUri";
 import getContentForResult, {
   type Reason,

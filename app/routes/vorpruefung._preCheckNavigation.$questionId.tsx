@@ -6,7 +6,6 @@ import { redirect, useLoaderData, type MetaArgs } from "react-router";
 import { z } from "zod";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
-import LinkBar from "~/components/LinkBar";
 import Question from "~/components/Question";
 import { general } from "~/resources/content/shared/general";
 import { preCheck } from "~/resources/content/vorpruefung";
@@ -17,8 +16,7 @@ import {
 } from "~/utils/cookies.server";
 import prependMetaTitle from "~/utils/metaTitle";
 import trackCustomEvent from "~/utils/trackCustomEvent.server";
-import type { Route } from "./+types/route";
-import PreCheckNavigation from "./PreCheckNavigation";
+import type { Route } from "./+types/vorpruefung._preCheckNavigation.$questionId";
 
 const { questions, answerOptions, nextButton } = preCheck;
 
@@ -152,61 +150,49 @@ export default function Index() {
   );
 
   return (
-    <div className="parent-bg-blue flex bg-blue-100 sm:pt-32">
-      <div className="hidden flex-none pl-32 lg:block">
-        <PreCheckNavigation question={question} answers={answers ?? {}} />
-      </div>
-      <section>
-        <Container className="pt-0 lg:hidden">
-          <LinkBar currentElement={question} elements={questions} />
-        </Container>
-        <form {...form.getFormProps()}>
-          <input type="hidden" name="questionId" value={question.id} />
-          <Question
-            className="pb-40"
-            stack={32}
-            heading={{
-              text: question.question,
-              tagName: "h1",
-              look: "ds-heading-02-reg",
-            }}
-            content={question.text ? { markdown: question.text } : undefined}
-            hint={question.hint}
-            radio={{
-              name: "answer",
-              options: options,
-              selectedValue: selectedOption,
-              onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-                setSelectedOption(
-                  e.target.value as PreCheckAnswerOption["value"],
-                ),
-              error:
-                form.formState.submitStatus == "error"
-                  ? form.error("answer")
-                  : undefined,
-            }}
-            ariaLabel={`Frage ${questionIdx + 1} von ${questions.length}`}
-          />
-          <Container className="pt-0 pb-40">
-            <ButtonContainer
-              buttons={[
-                {
-                  id: "preCheck-next-button",
-                  text: nextButton,
-                  type: "submit",
-                  disabled: form.formState.isSubmitting,
-                },
-                {
-                  id: "preCheck-back-button",
-                  text: general.buttonBack.text,
-                  href: question.prevLink,
-                  look: "tertiary",
-                },
-              ]}
-            />
-          </Container>
-        </form>
-      </section>
-    </div>
+    <form {...form.getFormProps()}>
+      <input type="hidden" name="questionId" value={question.id} />
+      <Question
+        className="pb-40"
+        stack={32}
+        heading={{
+          text: question.question,
+          tagName: "h1",
+          look: "ds-heading-02-reg",
+        }}
+        content={question.text ? { markdown: question.text } : undefined}
+        hint={question.hint}
+        radio={{
+          name: "answer",
+          options: options,
+          selectedValue: selectedOption,
+          onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+            setSelectedOption(e.target.value as PreCheckAnswerOption["value"]),
+          error:
+            form.formState.submitStatus == "error"
+              ? form.error("answer")
+              : undefined,
+        }}
+        ariaLabel={`Frage ${questionIdx + 1} von ${questions.length}`}
+      />
+      <Container className="pt-0 pb-40">
+        <ButtonContainer
+          buttons={[
+            {
+              id: "preCheck-next-button",
+              text: nextButton,
+              type: "submit",
+              disabled: form.formState.isSubmitting,
+            },
+            {
+              id: "preCheck-back-button",
+              text: general.buttonBack.text,
+              href: question.prevLink,
+              look: "tertiary",
+            },
+          ]}
+        />
+      </Container>
+    </form>
   );
 }

@@ -1,7 +1,7 @@
 import { withZod } from "@rvf/zod";
 import { z } from "zod";
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
-import type { PreCheckAnswers } from "~/routes/vorpruefung.$questionId/route";
+import type { PreCheckAnswers } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 
 const positiveValidation = z.object({
   title: z

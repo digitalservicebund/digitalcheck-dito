@@ -7,7 +7,7 @@ import {
   ROUTE_PRECHECK,
   ROUTE_PRECHECK_RESULT,
 } from "~/resources/staticRoutes";
-import type { TQuestion } from "~/routes/vorpruefung.$questionId/route";
+import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 
 const { questions } = preCheck;
 
@@ -616,7 +616,7 @@ for (const scenario of scenarios) {
 
     if (scenario.expected.negativeReasoningText) {
       test("email body contains negative reasoning", async () => {
-        const reasoningText = scenario.expected.negativeReasoningText || "";
+        const reasoningText = scenario.expected.negativeReasoningText ?? "";
         await page
           .getByLabel("Arbeitstitel des Vorhabens")
           .fill("Vorhaben ABC");

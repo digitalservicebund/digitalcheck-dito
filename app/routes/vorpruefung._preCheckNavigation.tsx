@@ -1,23 +1,56 @@
 import Check from "@digitalservicebund/icons/Check";
 import { useId } from "react";
-import { Link } from "react-router";
+import { Link, Outlet, useLoaderData, useRouteLoaderData } from "react-router";
 import { twJoin } from "tailwind-merge";
+import Container from "~/components/Container";
+import LinkBar from "~/components/LinkBar";
 import { preCheck } from "~/resources/content/vorpruefung";
-import type {
-  PreCheckAnswers,
-  TQuestion,
-} from "~/routes/vorpruefung.$questionId/route";
+import { getAnswersFromCookie } from "~/utils/cookies.server";
 import customTwMerge from "~/utils/tailwindMerge";
+import type { Route } from "./+types/vorpruefung._preCheckNavigation";
+import {
+  loader as preCheckQuestionLoader,
+  type PreCheckAnswers,
+  type TQuestion,
+} from "./vorpruefung._preCheckNavigation.$questionId";
+
+const { questions } = preCheck;
+
+export async function loader({ request }: Route.LoaderArgs) {
+  const { answers } = await getAnswersFromCookie(request);
+  return { answers };
+}
+
+export default function LayoutWithPreCheckNavigation() {
+  const { answers } = useLoaderData<typeof loader>();
+  const question = useRouteLoaderData<typeof preCheckQuestionLoader>(
+    "routes/vorpruefung._preCheckNavigation.$questionId",
+  )?.question;
+  const showLinkBar = !!question;
+
+  return (
+    <div className="parent-bg-blue flex justify-center bg-blue-100 sm:pt-32">
+      <div className="hidden flex-none pl-32 lg:block">
+        <PreCheckNavigation question={question} answers={answers ?? {}} />
+      </div>
+      <section className="w-[51rem]">
+        {showLinkBar && (
+          <Container className="pt-0 lg:hidden">
+            <LinkBar currentElement={question} elements={questions} />
+          </Container>
+        )}
+        <Outlet />
+      </section>
+    </div>
+  );
+}
 
 type PreCheckNavigationProps = Readonly<{
   question?: TQuestion;
   answers?: PreCheckAnswers;
 }>;
 
-export default function PreCheckNavigation({
-  question,
-  answers,
-}: PreCheckNavigationProps) {
+function PreCheckNavigation({ question, answers }: PreCheckNavigationProps) {
   const firstUnansweredQuestionIdx = answers ? Object.keys(answers).length : -1;
   const questions = preCheck.questions;
 

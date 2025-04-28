@@ -4,7 +4,7 @@ import {
   ROUTE_PRECHECK_INFO,
   ROUTE_PRECHECK_RESULT,
 } from "~/resources/staticRoutes";
-import type { TQuestion } from "~/routes/vorpruefung.$questionId/route";
+import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { preCheckQuestions } from "./shared/preCheckQuestions";
 
