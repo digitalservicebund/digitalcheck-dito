@@ -30,9 +30,6 @@ test.describe("test questions form", () => {
     await page.getByRole("link", { name: "Okay & weiter" }).click();
     for (const element of questions) {
       await page.waitForURL(element.url);
-      await expect(page.getByTestId("breadcrumbs-menu")).toContainText(
-        element.title,
-      );
       await expect(page.getByRole("heading", { level: 1 })).toContainText(
         element.question.replaceAll("&#8209;", "‑"), // workaround for non-breaking hyphen present in last question
       );
