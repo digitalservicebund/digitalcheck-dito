@@ -35,7 +35,7 @@ const isParentItemActive = (item: HeaderItem, path: string): boolean => {
   });
 };
 
-// Check if a featureon a handle is enabled for a match
+// Check if a feature on a handle is enabled for a match
 const getFeatureForMatches = (
   matches: UIMatch[],
   feature: keyof MatchWithHandle["handle"],
