@@ -17,7 +17,7 @@ export default function Progress() {
               key={item.label}
               aria-current={isActive ? "step" : undefined}
               className={twMerge(
-                "mb-0 flex px-12 pt-8 pb-4 text-blue-800 max-md:flex-col md:border-b-4",
+                "mb-0 flex items-center px-12 pt-8 pb-4 text-blue-800 max-md:flex-col md:border-b-4",
                 isActive ? "border-blue-800 font-bold" : "border-transparent",
               )}
             >
