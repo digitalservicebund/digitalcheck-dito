@@ -2,7 +2,7 @@
 import { Outlet, useOutletContext } from "react-router";
 
 export const handle = {
-  hideBreadcrumbs: false, // disable breadcrumbs for all child routes
+  hideBreadcrumbs: true, // disable breadcrumbs for all child routes
   hasProgressBar: true, // enable progress bar for all child routes
 };
 
