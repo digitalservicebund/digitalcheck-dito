@@ -46,14 +46,6 @@ export default function TabContainer({
     }
   };
 
-  const handleButtonClick = (index: number) => {
-    const map = getMap();
-    map.forEach((button, i) => {
-      button.setAttribute("tabindex", i === index ? "0" : "-1");
-    });
-    setActiveTab(index);
-  };
-
   return (
     <div>
       <div
@@ -75,7 +67,7 @@ export default function TabContainer({
             aria-controls={`panel-${index + 1}`}
             id={`tab-${index + 1}`}
             tabIndex={activeTab === index ? 0 : -1}
-            onClick={() => handleButtonClick(index)}
+            onClick={() => setActiveTab(index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
             className={twJoin(
               "my-8 mr-48 cursor-pointer p-8 text-blue-800",
