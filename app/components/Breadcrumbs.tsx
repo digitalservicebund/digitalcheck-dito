@@ -12,7 +12,6 @@ export default function Breadcrumbs() {
     if (matchHasHandle(match) && match.handle.breadcrumb) {
       return match.handle.breadcrumb(match);
     }
-
     // Otherwise find the route that match the current path, removing trailing slashes
     return ROUTES.find((r) => r.url === removeTrailingSlash(match.pathname));
   });

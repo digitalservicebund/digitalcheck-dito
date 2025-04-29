@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+
 import {
   ROUTE_A11Y,
   ROUTE_DOCUMENTATION,
@@ -86,7 +87,6 @@ test.describe("test links", () => {
       .click();
     await expect(page).toHaveURL(ROUTE_LANDING.url);
     await page.goto(ROUTE_METHODS_COLLECT_IT_SYSTEMS.url);
-    // using label here as there is a sidebar with the same role
     await page
       .getByLabel("navigation")
       .getByRole("link", { name: "Startseite" })
