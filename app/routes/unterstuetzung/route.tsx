@@ -1,19 +1,39 @@
-import { useState } from "react";
-import { type MetaArgs } from "react-router";
+import React, { useEffect, useState } from "react";
+import { type MetaArgs, useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
 
 import Background from "~/components/Background";
 import Box from "~/components/Box";
+import type { ButtonProps } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import Image from "~/components/Image";
 import RichText from "~/components/RichText";
+import TabContainer, { type TabItem } from "~/components/TabContainer.tsx";
 import { support } from "~/resources/content/unterstuetzung";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
-import SupportTabs from "./SupportTabList";
+
+type Offering = {
+  title: string;
+  text: string;
+  sellingPoints: string;
+  button?: ButtonProps;
+  details: {
+    icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+    title: string;
+    text: string;
+  }[];
+  examples?: {
+    image?: {
+      src: string;
+      alt: string;
+    };
+    text: string;
+  }[];
+};
 
 const {
   socialProof,
@@ -56,6 +76,13 @@ function SocialProofImage() {
 
 export default function Index() {
   const [isAppointmentsVisible, setIsAppointmentsVisible] = useState(false);
+  const location = useLocation();
+
+  const [initialTabIndex, setInitialTabIndex] = useState(0);
+  useEffect(() => {
+    const targetIndex = location.hash === "#angebote" ? 2 : 0;
+    setInitialTabIndex(targetIndex);
+  }, [location.hash]);
 
   const iframeButtons = [
     {
@@ -63,6 +90,84 @@ export default function Index() {
       onClick: () => setIsAppointmentsVisible(true),
     },
   ];
+
+  const tabsData: TabItem[] = supportOfferings.tabs.map((tab) => ({
+    title: tab.title,
+    content: (
+      <>
+        {tab.offerings.map((offering: Offering) => (
+          <Container
+            key={offering.title}
+            className="mb-32 flex gap-32 rounded-xl px-40 max-md:flex-col"
+            backgroundColor="blue"
+          >
+            <Box
+              heading={{
+                tagName: "h2",
+                text: offering.title,
+              }}
+              content={{
+                markdown: offering.text,
+              }}
+              buttons={offering.button ? [offering.button] : []}
+            />
+            <div className="flex-none space-y-20 md:w-[310px]">
+              <Background backgroundColor="white">
+                <div className="p-28">
+                  <Header
+                    heading={{
+                      tagName: "h4",
+                      text: offering.sellingPoints,
+                    }}
+                  />
+                  <div className="divide-y divide-gray-700">
+                    {offering.details.map((detail) => (
+                      <div key={detail.title} className="py-16">
+                        <div className="flex items-center gap-8 pb-8">
+                          {detail.icon && (
+                            <detail.icon className="size-24 fill-gray-800" />
+                          )}
+                          <Heading
+                            tagName="p"
+                            look="ds-label-01-bold"
+                            text={detail.title}
+                          />
+                        </div>
+                        <RichText
+                          markdown={detail.text}
+                          className="text-base"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Background>
+              {offering.examples && (
+                <Background backgroundColor="white">
+                  <div className="divide-y divide-gray-700">
+                    {offering.examples.map((example, idx) => (
+                      <div key={`${offering.title}-example-${idx}`}>
+                        {example.image && (
+                          <Image
+                            url={example.image.src}
+                            alternativeText={example.image.alt}
+                          />
+                        )}
+                        <RichText
+                          markdown={example.text}
+                          className="p-20 text-base"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </Background>
+              )}
+            </div>
+          </Container>
+        ))}
+      </>
+    ),
+  }));
 
   return (
     <>
@@ -188,7 +293,11 @@ export default function Index() {
                 markdown: supportOfferings.text,
               }}
             />
-            <SupportTabs />
+            <TabContainer
+              tabs={tabsData}
+              initialActiveIndex={initialTabIndex}
+              ariaLabel="Support TabContainer"
+            />
           </Container>
         </Background>
       </div>
