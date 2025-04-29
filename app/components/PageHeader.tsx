@@ -1,7 +1,7 @@
 import { MenuOpen, MenuOutlined } from "@digitalservicebund/icons/index";
 import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
 import { useEffect, useRef, useState } from "react";
-import { Link, UIMatch, useLocation, useMatches } from "react-router";
+import { Link, type UIMatch, useLocation, useMatches } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Breadcrumbs from "~/components/Breadcrumbs.tsx";
 import DropdownMenu from "~/components/DropdownMenu.tsx";
