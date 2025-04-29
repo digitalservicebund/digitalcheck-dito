@@ -137,15 +137,15 @@ test.describe("test progress bar", () => {
     });
   });
 
-  test("progress bar is not visible on other pages", async ({ page }) => {
-    for (const route of ROUTES) {
-      if (routesWithProgressBar.includes(route)) {
-        continue;
-      }
+  for (const route of ROUTES) {
+    if (routesWithProgressBar.includes(route)) {
+      continue;
+    }
+    test(`${route.title} has no progress bar`, async ({ page }) => {
       await page.goto(route.url);
       await expect(page.getByLabel("Digitalcheck-Fortschritt")).toBeHidden();
-    }
-  });
+    });
+  }
 
   test("Correct step is highlighted in progress bar", async ({ page }) => {
     await page.goto(ROUTE_PRECHECK.url);
