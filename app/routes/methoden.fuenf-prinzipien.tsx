@@ -9,7 +9,7 @@ import SupportBanner from "~/components/SupportBanner";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import {
   ROUTE_METHODS,
-  ROUTE_METHODS_FIVE_PRINCIPLES,
+  ROUTE_METHODS_PRINCIPLES,
 } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 import {
@@ -18,10 +18,10 @@ import {
   Prinzip,
 } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
-import type { Route } from "./+types/methoden_.fuenf-prinzipien";
+import type { Route } from "./+types/methoden.fuenf-prinzipien";
 
 export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_METHODS_FIVE_PRINCIPLES.title, matches);
+  return prependMetaTitle(ROUTE_METHODS_PRINCIPLES.title, matches);
 };
 
 export async function loader({ request }: Route.LoaderArgs) {

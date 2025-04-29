@@ -15,7 +15,10 @@ import Heading from "~/components/Heading";
 import InlineInfoList from "~/components/InlineInfoList";
 import ParagraphList from "~/components/ParagraphList";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
-import { ROUTE_PRINCIPLES, ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
+import {
+  ROUTE_EXAMPLES_PRINCIPLES,
+  ROUTE_REGELUNGEN,
+} from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,
@@ -27,7 +30,7 @@ import { formatDate, gesetzStatusMap } from "~/utils/utilFunctions";
 import type { Route } from "./+types/beispiele.prinzipien.$prinzip";
 
 export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_PRINCIPLES.title, matches);
+  return prependMetaTitle(ROUTE_EXAMPLES_PRINCIPLES.title, matches);
 };
 
 const GET_PRINZIPS_QUERY = `
@@ -104,7 +107,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
               </div>
             ) : (
               <Link
-                to={`${ROUTE_PRINCIPLES.url}/${p.URLBezeichnung}`}
+                to={`${ROUTE_EXAMPLES_PRINCIPLES.url}/${p.URLBezeichnung}`}
                 key={p.Nummer}
                 className="ds-link-01-bold"
                 prefetch="viewport"

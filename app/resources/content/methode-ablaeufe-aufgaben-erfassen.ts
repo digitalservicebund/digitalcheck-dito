@@ -4,10 +4,10 @@ import LightbulbOutlined from "@digitalservicebund/icons/LightbulbOutlined";
 import StickyNote2Outlined from "@digitalservicebund/icons/StickyNote2Outlined";
 import SupportOutlined from "@digitalservicebund/icons/SupportOutlined";
 import {
+  ROUTE_EXAMPLES_VISUALISATIONS,
   ROUTE_METHODS_COLLECT_IT_SYSTEMS,
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
   ROUTE_SUPPORT,
-  ROUTE_VISUALISATIONS,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -86,7 +86,7 @@ export const methodsTasksProcesses = {
       buttons: [
         {
           text: "Beispiele ansehen",
-          href: ROUTE_VISUALISATIONS.url,
+          href: ROUTE_EXAMPLES_VISUALISATIONS.url,
         },
       ],
     },

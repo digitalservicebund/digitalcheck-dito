@@ -3,7 +3,7 @@ import DrawOutlined from "@digitalservicebund/icons/DrawOutlined";
 import StickyNote2Outlined from "@digitalservicebund/icons/StickyNote2Outlined";
 import SupportOutlined from "@digitalservicebund/icons/SupportOutlined";
 import {
-  ROUTE_METHODS_FIVE_PRINCIPLES,
+  ROUTE_METHODS_PRINCIPLES,
   ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
@@ -81,7 +81,7 @@ export const methodsITSystems = {
       {
         text: "Fünf Prinzipien nutzen",
         look: "tertiary" as const,
-        href: ROUTE_METHODS_FIVE_PRINCIPLES.url,
+        href: ROUTE_METHODS_PRINCIPLES.url,
       },
     ],
   },

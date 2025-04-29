@@ -1,9 +1,9 @@
 import { expect, test } from "@playwright/test";
-import * as staticRoutes from "~/resources/staticRoutes";
+import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
 
 test.describe("test support page", () => {
   test.beforeEach("Go to support page", async ({ page }) => {
-    await page.goto(staticRoutes.ROUTE_SUPPORT.url);
+    await page.goto(ROUTE_SUPPORT.url);
   });
 
   test("clicking on appointment button shows google and hides button", async ({

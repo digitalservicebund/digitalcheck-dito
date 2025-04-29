@@ -1,88 +1,55 @@
 import HomeOutlined from "@digitalservicebund/icons/HomeOutlined";
-import { Link, useLocation } from "react-router";
+import { Link, useMatches, type UIMatch } from "react-router";
+import { ROUTE_LANDING, ROUTES, type Route } from "~/resources/staticRoutes";
+import { removeTrailingSlash } from "~/utils/utilFunctions";
 
-export type Breadcrumb = {
-  url: string;
-  title: string;
-  parent?: string;
-};
+type Breadcrumb = (match: UIMatch) => Route;
 
-function filterBreadcrumbs(
-  list: Breadcrumb[],
-  currentPath: string,
-): Breadcrumb[] {
-  const filteredList: Breadcrumb[] = [];
-
-  let currentElement = list.find((item) => item.url === currentPath);
-
-  while (currentElement) {
-    filteredList.unshift(currentElement);
-
-    // Loop through parents and find next existing parent
-    let parentUrl = currentElement?.parent;
-    while (parentUrl && !list.find((item) => item.url === parentUrl)) {
-      const segments = parentUrl.split("/").filter(Boolean);
-      segments.pop();
-      parentUrl = segments.length > 0 ? `/${segments.join("/")}` : undefined;
+export default function Breadcrumbs() {
+  const matchesWithoutLanding = useMatches().slice(1);
+  const breadcrumbs = matchesWithoutLanding.map((match) => {
+    // Use a handle if it exists in the route
+    if (
+      match.handle &&
+      typeof match.handle === "object" &&
+      "breadcrumb" in match.handle &&
+      typeof match.handle.breadcrumb === "function"
+    ) {
+      return (match.handle.breadcrumb as Breadcrumb)(match);
     }
+    // Otherwise find the route that match the current path, removing trailing slashes
+    return ROUTES.find((r) => r.url === removeTrailingSlash(match.pathname));
+  });
 
-    currentElement = parentUrl
-      ? list.find((item) => item.url === parentUrl)
-      : undefined;
-  }
+  // Remove duplicate URLs that come from parent + parent._index routes and filter undefined
+  const uniqueBreadcrumbs = Array.from(new Set(breadcrumbs)).filter(
+    (route) => route !== undefined,
+  );
 
-  return filteredList;
-}
-
-export default function Breadcrumbs({
-  breadcrumbs,
-  useIconForHome = false,
-}: {
-  breadcrumbs: Breadcrumb[];
-  useIconForHome?: boolean;
-}) {
-  const location = useLocation();
-
-  const filteredBreadcrumbs = filterBreadcrumbs(breadcrumbs, location.pathname);
-
-  return filteredBreadcrumbs.length > 1 ? (
+  return uniqueBreadcrumbs.length ? (
     <nav
       className="flex flex-wrap items-center bg-blue-100 px-16 py-8 text-base print:hidden"
       data-testid="breadcrumbs-menu"
       aria-label="breadcrumb navigation"
     >
-      {filteredBreadcrumbs.map((breadcrumb, idx, arr) => {
-        let displayElement = <span>{breadcrumb.title}</span>;
-        if (idx === 0 && useIconForHome) {
-          displayElement = (
-            <>
-              <HomeOutlined />
-              <span className="sr-only">{breadcrumb.title}</span>
-            </>
-          );
-        }
-        return (
-          <div key={breadcrumb.url}>
-            {idx !== 0 ? <span className="mx-8">/</span> : ""}
-            <span>
-              {idx === arr.length - 1 ? (
-                <span>{displayElement}</span>
-              ) : (
-                <Link
-                  to={breadcrumb.url}
-                  className={
-                    idx === 0
-                      ? "ds-link-01-bold fill-blue-800 outline-blue-800"
-                      : "text-link increase-tap-area"
-                  }
-                >
-                  {displayElement}
-                </Link>
-              )}
-            </span>
-          </div>
-        );
-      })}
+      <Link to={ROUTE_LANDING.url} className="fill-blue-800 outline-blue-800">
+        <HomeOutlined />
+        <span className="sr-only">{ROUTE_LANDING.title}</span>
+      </Link>
+      {uniqueBreadcrumbs.map((breadcrumb, idx, arr) => (
+        <div key={breadcrumb.url}>
+          <span className="mx-8">/</span>
+          <span>
+            {idx === arr.length - 1 ? (
+              <span>{breadcrumb.title}</span>
+            ) : (
+              <Link to={breadcrumb.url} className="text-link increase-tap-area">
+                {breadcrumb.title}
+              </Link>
+            )}
+          </span>
+        </div>
+      ))}
     </nav>
   ) : null;
 }

@@ -7,7 +7,7 @@ import InlineNotice from "~/components/InlineNotice";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { ROUTE_GENERAL_INFO, ROUTE_PRECHECK } from "~/resources/staticRoutes";
+import { ROUTE_PRECHECK, ROUTE_PRECHECK_INFO } from "~/resources/staticRoutes";
 import { getAnswersFromCookie } from "~/utils/cookies.server";
 import prependMetaTitle from "~/utils/metaTitle";
 import type { Route } from "./+types/vorpruefung.hinweise";
@@ -17,7 +17,7 @@ const { questions, generalInfo } = preCheck;
 const { headline, text, nextButton, hint } = generalInfo;
 
 export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_GENERAL_INFO.title, matches);
+  return prependMetaTitle(ROUTE_PRECHECK_INFO.title, matches);
 };
 
 export async function loader({ request }: Route.LoaderArgs) {

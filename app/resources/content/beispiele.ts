@@ -1,6 +1,6 @@
 import {
-  ROUTE_PRINCIPLES,
-  ROUTE_VISUALISATIONS,
+  ROUTE_EXAMPLES_DIGITAL_COMMUNICATION,
+  ROUTE_EXAMPLES_VISUALISATIONS,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -23,7 +23,7 @@ export const examples = {
       buttons: [
         {
           text: "Zu den Prinzipien",
-          href: ROUTE_PRINCIPLES.url,
+          href: ROUTE_EXAMPLES_DIGITAL_COMMUNICATION.url,
         },
       ],
     },
@@ -37,7 +37,7 @@ export const examples = {
       buttons: [
         {
           text: "Zu den Visualisierungen",
-          href: ROUTE_VISUALISATIONS.url,
+          href: ROUTE_EXAMPLES_VISUALISATIONS.url,
         },
       ],
     },

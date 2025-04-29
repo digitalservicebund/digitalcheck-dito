@@ -1,7 +1,10 @@
 import Background from "~/components/Background";
 import Container from "~/components/Container";
 import InfoBox from "~/components/InfoBox";
-import { ROUTE_EXAMPLES, ROUTE_PRINCIPLES } from "~/resources/staticRoutes.ts";
+import {
+  ROUTE_EXAMPLES,
+  ROUTE_EXAMPLES_PRINCIPLES,
+} from "~/resources/staticRoutes.ts";
 import type { Prinzip } from "~/utils/strapiData.server.ts";
 import { slugify } from "~/utils/utilFunctions";
 
@@ -30,7 +33,7 @@ export default function PrinciplesDisplay({
   let buttonsArray = undefined;
 
   if (showInfoBoxButtons && prinzip) {
-    const buttonLink = `${ROUTE_PRINCIPLES.url}/${prinzip.URLBezeichnung}`;
+    const buttonLink = `${ROUTE_EXAMPLES_PRINCIPLES.url}/${prinzip.URLBezeichnung}`;
     buttonsArray = [
       {
         text: buttonText,

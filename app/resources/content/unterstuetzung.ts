@@ -7,7 +7,7 @@ import TimerOutlined from "@digitalservicebund/icons/TimerOutlined";
 import {
   ROUTE_INTEROPERABILITY,
   ROUTE_INTEROPERABILITY_SPOC,
-} from "~/resources/staticRoutes.ts";
+} from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const support = {

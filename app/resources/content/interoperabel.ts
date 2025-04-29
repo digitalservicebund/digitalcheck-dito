@@ -1,6 +1,6 @@
 import { Apps, Layers } from "@digitalservicebund/icons/index";
 import { feedbackFormular } from "~/resources/content/components/feedback-formular";
-import { ROUTE_INTEROPERABILITY_SPOC } from "~/resources/staticRoutes.ts";
+import { ROUTE_INTEROPERABILITY_SPOC } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const interoperability = {

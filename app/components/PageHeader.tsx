@@ -3,10 +3,8 @@ import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
-import Background from "~/components/Background.tsx";
 import Breadcrumbs from "~/components/Breadcrumbs.tsx";
 import DropdownMenu from "~/components/DropdownMenu.tsx";
-import routes from "~/resources/allRoutes.ts";
 import { header } from "~/resources/content/components/header.ts";
 import { ROUTE_LANDING } from "~/resources/staticRoutes.ts";
 import twMerge from "~/utils/tailwindMerge.ts";
@@ -175,11 +173,7 @@ const PageHeader = ({
         >
           {header.items.map((item) => renderDropdownItem(item, "mobile"))}
         </nav>
-        {includeBreadcrumbs && (
-          <Background backgroundColor="blue">
-            <Breadcrumbs breadcrumbs={routes} useIconForHome />
-          </Background>
-        )}
+        {includeBreadcrumbs && <Breadcrumbs />}
       </header>
     </>
   );

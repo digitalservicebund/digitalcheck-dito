@@ -2,9 +2,9 @@ import { expect, test } from "@playwright/test";
 import { PRE_CHECK_START_BUTTON_ID } from "~/resources/constants";
 import { preCheck } from "~/resources/content/vorpruefung";
 import {
-  ROUTE_GENERAL_INFO,
   ROUTE_PRECHECK,
-  ROUTE_RESULT,
+  ROUTE_PRECHECK_INFO,
+  ROUTE_PRECHECK_RESULT,
 } from "~/resources/staticRoutes";
 
 const { questions } = preCheck;
@@ -20,13 +20,13 @@ test.describe("test questions form", () => {
       await page.getByLabel(answerOptions[i % answerOptions.length]).click();
       await page.getByRole("button", { name: "Übernehmen" }).click();
     }
-    await expect(page).toHaveURL(ROUTE_RESULT.url);
+    await expect(page).toHaveURL(ROUTE_PRECHECK_RESULT.url);
   });
 
   test("clicking through pre-check works", async ({ page }) => {
     await page.goto(ROUTE_PRECHECK.url);
     await page.getByTestId(PRE_CHECK_START_BUTTON_ID).click();
-    await page.waitForURL(ROUTE_GENERAL_INFO.url);
+    await page.waitForURL(ROUTE_PRECHECK_INFO.url);
     await page.getByRole("link", { name: "Okay & weiter" }).click();
     for (const element of questions) {
       await page.waitForURL(element.url);
@@ -43,7 +43,7 @@ test.describe("test questions form", () => {
       await page.getByLabel("Ja").click();
       await page.getByRole("button", { name: "Übernehmen" }).click();
     }
-    await expect(page).toHaveURL(ROUTE_RESULT.url);
+    await expect(page).toHaveURL(ROUTE_PRECHECK_RESULT.url);
   });
 
   test("cant submit form without answers", async ({ page }) => {
@@ -58,7 +58,7 @@ test.describe("test questions form", () => {
   test("back button works", async ({ page }) => {
     await page.goto(questions[0].url);
     await page.getByRole("link", { name: "Zurück" }).click();
-    await expect(page).toHaveURL(ROUTE_GENERAL_INFO.url);
+    await expect(page).toHaveURL(ROUTE_PRECHECK_INFO.url);
     await page.getByRole("link", { name: "Zurück" }).click();
     await expect(page).toHaveURL(ROUTE_PRECHECK.url);
     await page.goto(questions[0].url);

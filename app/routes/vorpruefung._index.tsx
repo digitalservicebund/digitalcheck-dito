@@ -14,9 +14,9 @@ import { PRE_CHECK_START_BUTTON_ID } from "~/resources/constants";
 import { general } from "~/resources/content/shared/general";
 import { preCheck } from "~/resources/content/vorpruefung";
 import {
-  ROUTE_GENERAL_INFO,
   ROUTE_LANDING,
   ROUTE_PRECHECK,
+  ROUTE_PRECHECK_INFO,
 } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 
@@ -55,7 +55,7 @@ export default function Index() {
               {
                 id: PRE_CHECK_START_BUTTON_ID,
                 text: preCheck.start.buttonText,
-                href: ROUTE_GENERAL_INFO.url,
+                href: ROUTE_PRECHECK_INFO.url,
                 type: "submit",
               },
               {
