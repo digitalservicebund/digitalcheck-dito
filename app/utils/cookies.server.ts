@@ -1,5 +1,5 @@
 import { createCookie } from "react-router";
-import type { PreCheckAnswers } from "~/routes/vorpruefung.$questionId/route";
+import type { PreCheckAnswers } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 
 export const userAnswers = createCookie("user-answers", {
   maxAge: 604_800, // one week
