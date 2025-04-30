@@ -6,10 +6,10 @@ export default function Progress() {
   const { pathname } = useLocation();
   return (
     <nav
-      className="flex justify-center bg-blue-300 sm:gap-24"
+      className="flex justify-center bg-blue-300"
       aria-label="Digitalcheck-Fortschritt"
     >
-      <ol className="flex list-none">
+      <ol className="list-unstyled flex list-none gap-20 sm:gap-40">
         {progress.map((item, index) => {
           const isActive = pathname.startsWith(item.prefix);
           return (
@@ -17,20 +17,20 @@ export default function Progress() {
               key={item.label}
               aria-current={isActive ? "step" : undefined}
               className={twMerge(
-                "mb-0 flex items-center px-12 pt-8 pb-4 text-blue-800 max-md:flex-col md:border-b-4",
-                isActive ? "border-blue-800 font-bold" : "border-transparent",
+                "mb-0 flex items-center py-14 text-blue-800 max-md:flex-col",
+                isActive && "font-bold",
               )}
             >
-              <div
+              <span
                 className={twMerge(
-                  "mr-8 flex h-24 w-24 items-center justify-center rounded-full border-2",
+                  "ds-label-02-reg mr-8 flex h-24 w-24 items-center justify-center rounded-full border-2",
                   isActive
-                    ? "border-blue-800 bg-blue-800 text-white"
+                    ? "border-blue-800 bg-blue-800 font-bold text-white"
                     : "border-white",
                 )}
               >
                 {index + 1}
-              </div>
+              </span>
               <span className="hidden md:block">{item.label}</span>
               <span className="md:hidden">{item.labelShort}</span>
             </li>
