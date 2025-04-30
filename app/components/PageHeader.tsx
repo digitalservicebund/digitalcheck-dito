@@ -128,6 +128,7 @@ const PageHeader = ({
   const matches = useMatches();
   const showProgressBar = getFeatureForMatches(matches, "hasProgressBar");
   const hideBreadcrumbs = getFeatureForMatches(matches, "hideBreadcrumbs");
+  const showBreadcrumbs = includeBreadcrumbs && !hideBreadcrumbs;
 
   return (
     <>
@@ -190,7 +191,7 @@ const PageHeader = ({
           {header.items.map((item) => renderDropdownItem(item, "mobile"))}
         </nav>
         {showProgressBar && <ProgressBar />}
-        {includeBreadcrumbs && !hideBreadcrumbs && <Breadcrumbs />}
+        {showBreadcrumbs && <Breadcrumbs />}
       </header>
     </>
   );
