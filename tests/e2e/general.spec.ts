@@ -149,25 +149,25 @@ test.describe("test progress bar", () => {
 
   test("Correct step is highlighted in progress bar", async ({ page }) => {
     await page.goto(ROUTE_PRECHECK.url);
-    await expect(page.getByText("1Vorprüfung")).toContainClass(
-      "border-blue-800",
+    await expect(page.getByRole("navigation").getByText("1")).toContainClass(
+      "bg-blue-800",
     );
-    await expect(page.getByText("2Digitaltauglichkeit")).toContainClass(
-      "border-transparent",
+    await expect(page.getByRole("navigation").getByText("2")).toContainClass(
+      "border-white",
     );
     await page.goto(ROUTE_METHODS.url);
-    await expect(page.getByText("2Digitaltauglichkeit")).toContainClass(
-      "border-blue-800",
+    await expect(page.getByRole("navigation").getByText("2")).toContainClass(
+      "bg-blue-800",
     );
-    await expect(page.getByText("1Vorprüfung")).toContainClass(
-      "border-transparent",
+    await expect(page.getByRole("navigation").getByText("1")).toContainClass(
+      "border-white",
     );
     await page.goto(ROUTE_DOCUMENTATION.url);
-    await expect(page.getByText("3Dokumentation")).toContainClass(
-      "border-blue-800",
+    await expect(page.getByRole("navigation").getByText("3")).toContainClass(
+      "bg-blue-800",
     );
-    await expect(page.getByText("2Digitaltauglichkeit")).toContainClass(
-      "border-transparent",
+    await expect(page.getByRole("navigation").getByText("2")).toContainClass(
+      "border-white",
     );
   });
 });
