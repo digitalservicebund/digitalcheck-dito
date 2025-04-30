@@ -11,7 +11,7 @@ import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import Image from "~/components/Image";
 import RichText from "~/components/RichText";
-import TabContainer, { type TabItem } from "~/components/TabContainer.tsx";
+import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { support } from "~/resources/content/unterstuetzung";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
@@ -293,10 +293,10 @@ export default function Index() {
                 markdown: supportOfferings.text,
               }}
             />
-            <TabContainer
+            <Tabs
               tabs={tabsData}
               initialActiveIndex={initialTabIndex}
-              ariaLabel="Support TabContainer"
+              ariaLabel="Support Tabs"
             />
           </Container>
         </Background>
