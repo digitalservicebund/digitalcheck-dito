@@ -29,7 +29,7 @@ export default function LayoutWithPreCheckNavigation() {
   const showLinkBar = !!question;
 
   return (
-    <div className="parent-bg-blue flex justify-center bg-blue-100 sm:pt-32">
+    <div className="parent-bg-blue flex justify-center bg-blue-100 pt-32">
       <div className="hidden flex-none pl-32 lg:block">
         <PreCheckNavigation question={question} answers={answers ?? {}} />
       </div>
