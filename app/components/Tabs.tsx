@@ -14,14 +14,20 @@ import { twJoin } from "tailwind-merge";
 export interface TabItem {
   title: string;
   content: React.ReactNode;
+  path?: string;
 }
 
 interface TabsProps {
   tabs: TabItem[];
   initialActiveIndex?: number;
+  onNavigateRequest?: (tab: TabItem, index: number) => void;
 }
 
-export default function Tabs({ tabs, initialActiveIndex = 0 }: TabsProps) {
+export default function Tabs({
+  tabs,
+  initialActiveIndex = 0,
+  onNavigateRequest,
+}: TabsProps) {
   const [activeTab, setActiveTab] = useState(initialActiveIndex);
   const tabRef = useRef<Map<number, HTMLButtonElement> | null>(null);
 
@@ -51,6 +57,13 @@ export default function Tabs({ tabs, initialActiveIndex = 0 }: TabsProps) {
     }
   };
 
+  const handleTabInteraction = (index: number) => {
+    setActiveTab(index);
+    if (onNavigateRequest) {
+      onNavigateRequest(tabs[index], index);
+    }
+  };
+
   return (
     <>
       <div
@@ -72,7 +85,7 @@ export default function Tabs({ tabs, initialActiveIndex = 0 }: TabsProps) {
             aria-controls={`panel-${index + 1}`}
             id={`tab-${index + 1}`}
             tabIndex={activeTab === index ? 0 : -1}
-            onClick={() => setActiveTab(index)}
+            onClick={() => handleTabInteraction(index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
             className={twJoin(
               "relative mr-[8px] -mb-[3px] h-[70px] cursor-pointer px-[24px] py-[10px] text-blue-800 hover:border-transparent hover:bg-blue-100",
@@ -87,7 +100,12 @@ export default function Tabs({ tabs, initialActiveIndex = 0 }: TabsProps) {
       {/* Mobile Dropdown */}
       <div className="my-[40px] lg:hidden">
         {/* Wrapper is needed for the styles here, Listbox provides context & state management */}
-        <Listbox value={activeTab} onChange={setActiveTab}>
+        <Listbox
+          value={activeTab}
+          onChange={(newIndex) => {
+            handleTabInteraction(newIndex);
+          }}
+        >
           {/* Container for positioning */}
           <ListboxButton className="ds-label-02-bold relative h-[70px] w-full cursor-pointer border-[4px] border-transparent bg-blue-100 pl-[16px] text-left text-blue-800 hover:bg-blue-300 focus:border-blue-800">
             {({ open }) => (
@@ -120,19 +138,20 @@ export default function Tabs({ tabs, initialActiveIndex = 0 }: TabsProps) {
         </Listbox>
       </div>
 
-      {/* Content of each tab */}
-      {tabs.map((tab, index) => (
-        <div
-          key={`panel-${index + 1}`}
-          id={`panel-${index + 1}`}
-          role="tabpanel"
-          tabIndex={0}
-          aria-labelledby={`tab-${index + 1}`}
-          hidden={activeTab !== index}
-        >
-          {tab.content}
-        </div>
-      ))}
+      {/* Content of each tab. Render only if not navigating */}
+      {!onNavigateRequest &&
+        tabs.map((tab, index) => (
+          <div
+            key={`panel-${index + 1}`}
+            id={`panel-${index + 1}`}
+            role="tabpanel"
+            tabIndex={0}
+            aria-labelledby={`tab-${index + 1}`}
+            hidden={activeTab !== index}
+          >
+            {tab.content}
+          </div>
+        ))}
     </>
   );
 }

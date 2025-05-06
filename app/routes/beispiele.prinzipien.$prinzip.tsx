@@ -4,6 +4,7 @@ import {
   Link,
   type MetaArgs,
   useLoaderData,
+  useNavigate,
   useOutletContext,
 } from "react-router";
 
@@ -14,6 +15,7 @@ import CustomLink from "~/components/CustomLink";
 import Heading from "~/components/Heading";
 import InlineInfoList from "~/components/InlineInfoList";
 import ParagraphList from "~/components/ParagraphList";
+import Tabs, { TabItem } from "~/components/Tabs";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import {
   ROUTE_EXAMPLES_PRINCIPLES,
@@ -80,13 +82,26 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
 export default function DigitaltauglichkeitPrinzipienDetail() {
   const { prinzip } = useLoaderData<typeof loader>();
   const prinzips = useOutletContext<Prinzip[]>();
+  const navigate = useNavigate();
 
   const { GuteUmsetzungen } = prinzip;
+
+  const tabsForNavigation: TabItem[] = prinzips.map((p) => ({
+    title: `Prinzip ${p.Nummer}`,
+    path: `${ROUTE_EXAMPLES_PRINCIPLES.url}/${p.URLBezeichnung}`,
+    content: null, // Content is handled by the page reload, not by Tabs component
+  }));
+
+  const handleNavigationRequest = async (tab: TabItem) => {
+    if (tab.path) {
+      await navigate(tab.path);
+    }
+  };
 
   return (
     <>
       <Background backgroundColor="blue">
-        <Container className="pb-0">
+        <Container>
           <Box
             label={{
               text: `Prinzip ${prinzip.Nummer} – ${prinzip.Name}`,
@@ -99,25 +114,13 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
           />
           <BlocksRenderer content={prinzip.Beschreibung}></BlocksRenderer>
         </Container>
-        <Container className="flex items-center space-x-20">
-          {prinzips.map((p) =>
-            prinzip.Nummer === p.Nummer ? (
-              <div key={p.Nummer} className="ds-label-01-bold">
-                Prinzip {p.Nummer}
-              </div>
-            ) : (
-              <Link
-                to={`${ROUTE_EXAMPLES_PRINCIPLES.url}/${p.URLBezeichnung}`}
-                key={p.Nummer}
-                className="ds-link-01-bold"
-                prefetch="viewport"
-              >
-                Prinzip {p.Nummer}
-              </Link>
-            ),
-          )}
-        </Container>
       </Background>
+      <Container className="py-0">
+        <Tabs
+          tabs={tabsForNavigation}
+          onNavigateRequest={handleNavigationRequest}
+        />
+      </Container>
       {GuteUmsetzungen.length > 0 && (
         <Container className="ds-stack ds-stack-64">
           {GuteUmsetzungen.map(

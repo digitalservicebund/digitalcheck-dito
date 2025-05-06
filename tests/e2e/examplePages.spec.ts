@@ -36,7 +36,7 @@ test.describe("Prinzipienseiten", () => {
 
       const nextPrincipleIndex = principles.indexOf(principle) + 1;
       if (nextPrincipleIndex < principles.length) {
-        const nextPrincipleLink = page.getByRole("link", {
+        const nextPrincipleLink = page.getByRole("tab", {
           name: `Prinzip ${nextPrincipleIndex + 1}`,
         });
         await nextPrincipleLink.waitFor();
