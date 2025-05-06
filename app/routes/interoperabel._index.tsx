@@ -145,50 +145,46 @@ export default function Interoperability() {
           ></Header>
         </Container>
       </Background>
-      <div id={interoperability.andDigitalReadiness.id}>
-        <Background backgroundColor="midBlue">
-          <Container className="flex flex-col py-0 lg:h-[626px] lg:flex-row">
-            <div className="py-32 sm:py-48 lg:w-1/2 lg:self-center lg:pr-48">
-              <Heading
-                tagName="h2"
-                text={interoperability.andDigitalReadiness.headline}
-                className="mb-8"
-              />
-              <RichText
-                markdown={interoperability.andDigitalReadiness.content}
-              />
-              <ButtonContainer
-                className="mt-20"
-                buttons={[
-                  {
-                    text: interoperability.andDigitalReadiness.button,
-                    href: ROUTE_PRECHECK.url,
-                  },
-                ]}
-              />
-            </div>
-            <div className="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">
-              <div className="w-[630px] bg-[#cce5ef] lg:w-[50vw] [&>img]:object-contain lg:[&>img]:h-[626px]">
-                <Image
-                  url={interoperability.andDigitalReadiness.image.url}
-                  alternativeText={
-                    interoperability.andDigitalReadiness.image.alternativeText
-                  }
-                />
-              </div>
-            </div>
-          </Container>
-          <div className="sm:hidden">
-            <Image
-              url={interoperability.andDigitalReadiness.image.url}
-              alternativeText={
-                interoperability.andDigitalReadiness.image.alternativeText
-              }
+      <Background backgroundColor="midBlue">
+        <Container className="flex flex-col py-0 lg:h-[626px] lg:flex-row">
+          <div className="py-32 sm:py-48 lg:w-1/2 lg:self-center lg:pr-48">
+            <Heading
+              tagName="h2"
+              text={interoperability.andDigitalReadiness.headline}
+              className="mb-8"
+            />
+            <RichText markdown={interoperability.andDigitalReadiness.content} />
+            <ButtonContainer
+              className="mt-20"
+              buttons={[
+                {
+                  text: interoperability.andDigitalReadiness.button,
+                  href: ROUTE_PRECHECK.url,
+                },
+              ]}
             />
           </div>
-        </Background>
-      </div>
-      <Container className="px-0 pt-0">
+          <div className="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">
+            <div className="w-[630px] bg-[#cce5ef] lg:w-[50vw] [&>img]:object-contain lg:[&>img]:h-[626px]">
+              <Image
+                url={interoperability.andDigitalReadiness.image.url}
+                alternativeText={
+                  interoperability.andDigitalReadiness.image.alternativeText
+                }
+              />
+            </div>
+          </div>
+        </Container>
+        <div className="sm:hidden">
+          <Image
+            url={interoperability.andDigitalReadiness.image.url}
+            alternativeText={
+              interoperability.andDigitalReadiness.image.alternativeText
+            }
+          />
+        </div>
+      </Background>
+      <Container className="pt-0">
         <Tabs tabs={tabsData} />
       </Container>
     </>

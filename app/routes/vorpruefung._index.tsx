@@ -129,7 +129,7 @@ export default function Index() {
           />
         </Container>
       </Background>
-      <Container className="px-0 pt-0">
+      <Container className="pt-0">
         <Tabs tabs={tabsData} />
       </Container>
       <SupportBanner />
