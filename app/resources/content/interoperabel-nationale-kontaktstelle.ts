@@ -17,6 +17,7 @@ export const spoc = {
   `,
   landscape: {
     id: "landschaft",
+    tabName: "Überblick",
     headline: "Nationale Umsetzung der EU Interoperabilitätsverordnung",
     content: dedent`
       Seit Anfang 2025 muss die Verordnung für ein interoperables Europa ([2024/903](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903)) in den EU Mitgliedstaaten verpflichtend umgesetzt werden.
@@ -134,6 +135,7 @@ export const spoc = {
   },
   states: {
     id: "landesebene",
+    tabName: "Digitalcheck nachnutzen",
     headline:
       "Den Digitalcheck mit Interoperabilitätsanforderungen auf Landesebene nutzen",
     sections: [
@@ -151,6 +153,7 @@ export const spoc = {
   },
   contact: {
     id: "kontakt",
+    tabName: "Service & Kontakt",
     headline: "Service und Kontakt",
     sections: [
       {
