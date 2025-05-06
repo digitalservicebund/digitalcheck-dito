@@ -24,6 +24,7 @@ export const interoperability = {
   },
   faq: {
     id: "faq",
+    tabName: "Häufige Fragen",
     headline: "Häufig gestellte Fragen",
     content:
       "In diesem Bereich erhalten Sie umfassende Informationen zur Einführung der EU-Vorgaben zur Interoperabilität sowie zum Prozess der Erarbeitung von Interoperabilität in Regelungen. Wenn Sie weitere Fragen haben, dann kontaktieren Sie uns unter: [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de) oder unter [0151/40 76 78 39](tel:+4915140767839).",
@@ -187,6 +188,7 @@ export const interoperability = {
   },
   andYourVorhaben: {
     id: "prozess",
+    tabName: "Zusammengefasst",
     headline: "Wie beeinflusst Interoperabilität Ihr Vorhaben?",
     content: dedent`
       Die Erarbeitung der Interoperabilität folgt einem ähnlichen Ablauf wie die Erarbeitung der Digitaltauglichkeit. In wenigen Schritten wird sichergestellt, dass Ihr Regelungsvorhaben die erforderlichen Anforderungen erfüllen:
@@ -214,6 +216,7 @@ export const interoperability = {
   },
   info: {
     id: "info",
+    tabName: "Informationen zum Einstieg",
     headline: "Informationen zum Einstieg",
     items: [
       {

@@ -12,7 +12,7 @@ import ImageZoomable from "~/components/ImageZoomable";
 import InfoBox from "~/components/InfoBox";
 import LinkListBox from "~/components/LinkListBox";
 import RichText from "~/components/RichText";
-import SupportBanner from "~/components/SupportBanner";
+import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { interoperability } from "~/resources/content/interoperabel";
 import {
   ROUTE_INTEROPERABILITY,
@@ -25,6 +25,111 @@ export const meta = ({ matches }: MetaArgs) => {
 };
 
 export default function Interoperability() {
+  const tabsData: TabItem[] = [
+    {
+      title: interoperability.andYourVorhaben.tabName,
+      content: (
+        <>
+          <Heading
+            tagName="h2"
+            text={interoperability.andYourVorhaben.headline}
+            className="mb-8"
+          />
+          <RichText
+            markdown={interoperability.andYourVorhaben.content}
+            className="mb-40"
+          />
+          <ImageZoomable
+            url={interoperability.andYourVorhaben.image.url}
+            alternativeText={
+              interoperability.andYourVorhaben.image.alternativeText
+            }
+          />
+          <Heading
+            tagName="h3"
+            text={interoperability.andYourVorhaben.law.headline}
+            className="mt-40 mb-8"
+          />
+          <RichText markdown={interoperability.andYourVorhaben.law.content} />
+          <Box
+            className="pt-64 pb-48"
+            heading={{
+              tagName: "h2",
+              text: interoperability.kontaktstelle.title,
+            }}
+            content={{ markdown: interoperability.kontaktstelle.text }}
+            buttons={interoperability.kontaktstelle.buttons}
+          />
+          <FeedbackForm
+            className="relative left-1/2 w-screen -translate-x-1/2"
+            {...interoperability.feedbackForm}
+          />
+        </>
+      ),
+    },
+    {
+      title: interoperability.info.headline,
+      content: (
+        <>
+          <Container className="px-0 pt-0">
+            <InfoBox
+              heading={{
+                tagName: "h2",
+                text: interoperability.info.headline,
+              }}
+              items={interoperability.info.items}
+            />
+            <ImageZoomable
+              url={interoperability.info.image.url}
+              alternativeText={interoperability.info.image.alternativeText}
+            />
+          </Container>
+
+          <Background
+            backgroundColor="blue"
+            className="relative left-1/2 w-screen -translate-x-1/2 py-48"
+          >
+            <Container backgroundColor="white" overhangingBackground>
+              <Heading
+                tagName="h2"
+                text={interoperability.resources.headline}
+                className="mb-8"
+              />
+              <p>{interoperability.resources.subtitle}</p>
+              {interoperability.resources.groups.map((group) => (
+                <div key={group.title} className="mt-10 p-24 pl-0">
+                  <div className="mb-10 flex items-center">
+                    <group.icon className="mr-10 size-32" />
+                    <Heading
+                      tagName="h3"
+                      look="ds-label-01-bold"
+                      text={group.title}
+                    />
+                  </div>
+                  <p className="mb-20">{group.subtitle}</p>
+                  <RichText markdown={group.content} />
+                </div>
+              ))}
+            </Container>
+          </Background>
+        </>
+      ),
+    },
+    {
+      title: interoperability.faq.tabName,
+      content: (
+        <>
+          <Heading
+            tagName="h2"
+            text={interoperability.faq.headline}
+            className="mb-8"
+          />
+          <RichText markdown={interoperability.faq.content} className="mb-40" />
+          <Accordion items={interoperability.faq.items} />
+        </>
+      ),
+    },
+  ];
   return (
     <>
       <Background backgroundColor="blue">
@@ -108,94 +213,9 @@ export default function Interoperability() {
           </div>
         </Background>
       </div>
-      <div id={interoperability.andYourVorhaben.id}>
-        <Container>
-          <Heading
-            tagName="h2"
-            text={interoperability.andYourVorhaben.headline}
-            className="mb-8"
-          />
-          <RichText
-            markdown={interoperability.andYourVorhaben.content}
-            className="mb-40"
-          />
-          <ImageZoomable
-            url={interoperability.andYourVorhaben.image.url}
-            alternativeText={
-              interoperability.andYourVorhaben.image.alternativeText
-            }
-          />
-          <Heading
-            tagName="h3"
-            text={interoperability.andYourVorhaben.law.headline}
-            className="mt-40 mb-8"
-          />
-          <RichText markdown={interoperability.andYourVorhaben.law.content} />
-        </Container>
-      </div>
-      <div id={interoperability.info.id}>
-        <Container>
-          <InfoBox
-            heading={{
-              tagName: "h2",
-              text: interoperability.info.headline,
-            }}
-            items={interoperability.info.items}
-          />
-          <ImageZoomable
-            url={interoperability.info.image.url}
-            alternativeText={interoperability.info.image.alternativeText}
-          />
-        </Container>
-      </div>
-      <div id={interoperability.resources.id}>
-        <Background backgroundColor="blue" className="py-48">
-          <Container backgroundColor="white" overhangingBackground>
-            <Heading
-              tagName="h2"
-              text={interoperability.resources.headline}
-              className="mb-8"
-            />
-            <p>{interoperability.resources.subtitle}</p>
-            {interoperability.resources.groups.map((group) => (
-              <div key={group.title} className="mt-10 p-24 pl-0">
-                <div className="mb-10 flex items-center">
-                  <group.icon className="mr-10 size-32" />
-                  <Heading
-                    tagName="h3"
-                    look="ds-label-01-bold"
-                    text={group.title}
-                  />
-                </div>
-                <p className="mb-20">{group.subtitle}</p>
-                <RichText markdown={group.content} />
-              </div>
-            ))}
-          </Container>
-        </Background>
-      </div>
-      <div id={interoperability.faq.id}>
-        <Container>
-          <Heading
-            tagName="h2"
-            text={interoperability.faq.headline}
-            className="mb-8"
-          />
-          <RichText markdown={interoperability.faq.content} className="mb-40" />
-          <Accordion items={interoperability.faq.items} />
-          <Box
-            className="pt-64 pb-48"
-            heading={{
-              tagName: "h2",
-              text: interoperability.kontaktstelle.title,
-            }}
-            content={{ markdown: interoperability.kontaktstelle.text }}
-            buttons={interoperability.kontaktstelle.buttons}
-          />
-        </Container>
-      </div>
-      <FeedbackForm {...interoperability.feedbackForm} />
-      <SupportBanner withFeedbackBanner={false} />
+      <Container className="px-0 pt-0">
+        <Tabs tabs={tabsData} />
+      </Container>
     </>
   );
 }

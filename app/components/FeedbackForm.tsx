@@ -18,6 +18,7 @@ type FeedbackQuestionProps = {
 };
 
 type FeedbackFormProps = {
+  className?: string;
   heading: string;
   trackingEvent: string;
   questions: FeedbackQuestionProps[];
@@ -168,7 +169,10 @@ export default function FeedbackForm(props: Readonly<FeedbackFormProps>) {
   }
 
   return (
-    <Background backgroundColor="blue" className="pt-40 pb-48">
+    <Background
+      backgroundColor="blue"
+      className={twJoin("pt-40 pb-48", props.className)}
+    >
       <Container backgroundColor="white" overhangingBackground>
         <h2>{props.heading}</h2>
         <form onSubmit={handleSubmit} className="mb-48">

@@ -28,7 +28,7 @@ export const meta = ({ matches }: MetaArgs) => {
 export default function Index() {
   const tabsData: TabItem[] = [
     {
-      title: preCheck.start.summary.title,
+      title: preCheck.start.summary.tabName,
       content: (
         <InfoBox
           heading={{
@@ -40,7 +40,7 @@ export default function Index() {
       ),
     },
     {
-      title: preCheck.start.info.title,
+      title: preCheck.start.info.tabName,
       content: (
         <Background backgroundColor="blue">
           <div className="flex flex-col-reverse items-center gap-48 px-16 py-40 md:flex-row md:gap-64 md:px-64">
@@ -72,7 +72,7 @@ export default function Index() {
       ),
     },
     {
-      title: preCheck.faq.title,
+      title: preCheck.faq.tabName,
       content: (
         <>
           <Heading
@@ -129,7 +129,7 @@ export default function Index() {
           />
         </Container>
       </Background>
-      <Container className="pt-0">
+      <Container className="px-0 pt-0">
         <Tabs tabs={tabsData} />
       </Container>
       <SupportBanner />

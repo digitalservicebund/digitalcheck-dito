@@ -30,6 +30,7 @@ export const preCheck = {
     ],
     buttonText: "Vorprüfung starten",
     summary: {
+      tabName: "Zusammengefasst",
       title: "Zusammengefasst",
       items: [
         {
@@ -52,6 +53,7 @@ export const preCheck = {
       ],
     },
     info: {
+      tabName: "Digitalbezug und Interoperabilität",
       title: "Digitalbezug und Interoperabilität",
       text: dedent`
         Digitalbezug und Interoperabilität sind eng miteinander verknüpft. Wenn ein Gesetz oder eine Regelung digitale Prozesse vorsieht, müssen oft technische und organisatorische Standards eingehalten werden. 
@@ -70,6 +72,7 @@ export const preCheck = {
     },
   },
   faq: {
+    tabName: "Häufige Fragen",
     title: "Häufige Fragen",
     items: [
       {
