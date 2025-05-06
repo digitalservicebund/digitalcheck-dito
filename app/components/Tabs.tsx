@@ -61,7 +61,7 @@ export default function Tabs({
       <div
         role="tablist"
         aria-label={ariaLabel}
-        className="my-[40px] flex items-start border-b-[3px] border-blue-500 max-lg:hidden max-sm:flex-col"
+        className="my-[40px] flex items-start border-b-[3px] border-blue-500 max-lg:hidden"
       >
         {/* Tab buttons regular view */}
         {tabs.map((tab, index) => (
