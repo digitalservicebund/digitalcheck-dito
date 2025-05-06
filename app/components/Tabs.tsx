@@ -82,7 +82,9 @@ export default function Tabs({
               else map.delete(index);
             }}
             aria-selected={activeTab === index}
-            aria-controls={`panel-${index + 1}`}
+            aria-controls={
+              !onNavigateRequest ? `panel-${index + 1}` : undefined
+            }
             id={`tab-${index + 1}`}
             tabIndex={activeTab === index ? 0 : -1}
             onClick={() => handleTabInteraction(index)}
