@@ -10,7 +10,6 @@ import Heading from "~/components/Heading";
 import Image from "~/components/Image";
 import ImageZoomable from "~/components/ImageZoomable";
 import InfoBox from "~/components/InfoBox";
-import LinkListBox from "~/components/LinkListBox";
 import RichText from "~/components/RichText";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { interoperability } from "~/resources/content/interoperabel";
@@ -144,30 +143,6 @@ export default function Interoperability() {
               className: "md:text-2xl",
             }}
           ></Header>
-          <LinkListBox
-            links={[
-              {
-                id: interoperability.andDigitalReadiness.id,
-                title: interoperability.andDigitalReadiness.headline,
-              },
-              {
-                id: interoperability.andYourVorhaben.id,
-                title: interoperability.andYourVorhaben.headline,
-              },
-              {
-                id: interoperability.info.id,
-                title: interoperability.info.headline,
-              },
-              {
-                id: interoperability.resources.id,
-                title: interoperability.resources.headline,
-              },
-              {
-                id: interoperability.faq.id,
-                title: interoperability.faq.headline,
-              },
-            ]}
-          />
         </Container>
       </Background>
       <div id={interoperability.andDigitalReadiness.id}>
