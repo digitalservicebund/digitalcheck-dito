@@ -10,6 +10,7 @@ import Heading from "~/components/Heading";
 import Image from "~/components/Image";
 import InfoBox from "~/components/InfoBox";
 import SupportBanner from "~/components/SupportBanner";
+import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { PRE_CHECK_START_BUTTON_ID } from "~/resources/constants";
 import { general } from "~/resources/content/shared/general";
 import { preCheck } from "~/resources/content/vorpruefung";
@@ -25,6 +26,66 @@ export const meta = ({ matches }: MetaArgs) => {
 };
 
 export default function Index() {
+  const tabsData: TabItem[] = [
+    {
+      title: preCheck.start.summary.title,
+      content: (
+        <InfoBox
+          heading={{
+            text: preCheck.start.summary.title,
+            tagName: "h2",
+          }}
+          items={preCheck.start.summary.items}
+        ></InfoBox>
+      ),
+    },
+    {
+      title: preCheck.start.info.title,
+      content: (
+        <Background backgroundColor="blue">
+          <div className="flex flex-col-reverse items-center gap-48 px-16 py-40 md:flex-row md:gap-64 md:px-64">
+            <Image
+              url={preCheck.start.info.image.src}
+              alternativeText={preCheck.start.info.image.alt}
+              className="md:w-1/3 md:pl-32"
+            />
+            <Box
+              heading={{
+                tagName: "h3",
+                look: "ds-heading-03-reg",
+                text: preCheck.start.info.title,
+              }}
+              content={{
+                markdown: preCheck.start.info.text,
+              }}
+              buttons={[
+                {
+                  text: preCheck.start.info.button.text,
+                  href: preCheck.start.info.button.href,
+                  look: "tertiary",
+                  className: "mt-20",
+                },
+              ]}
+            />
+          </div>
+        </Background>
+      ),
+    },
+    {
+      title: preCheck.faq.title,
+      content: (
+        <>
+          <Heading
+            tagName="h2"
+            look="ds-heading-02-reg mb-64 max-sm:mb-56"
+            text={preCheck.faq.title}
+          />
+          <Accordion items={preCheck.faq.items} />
+        </>
+      ),
+    },
+  ];
+
   return (
     <>
       <Background backgroundColor="blue">
@@ -68,51 +129,8 @@ export default function Index() {
           />
         </Container>
       </Background>
-      <Container>
-        <InfoBox
-          heading={{
-            text: preCheck.start.summary.title,
-            tagName: "h2",
-          }}
-          items={preCheck.start.summary.items}
-        ></InfoBox>
-      </Container>
       <Container className="pt-0">
-        <Background backgroundColor="blue">
-          <div className="flex flex-col-reverse items-center gap-48 px-16 py-40 md:flex-row md:gap-64 md:px-64">
-            <Image
-              url={preCheck.start.info.image.src}
-              alternativeText={preCheck.start.info.image.alt}
-              className="md:w-1/3 md:pl-32"
-            />
-            <Box
-              heading={{
-                tagName: "h3",
-                look: "ds-heading-03-reg",
-                text: preCheck.start.info.title,
-              }}
-              content={{
-                markdown: preCheck.start.info.text,
-              }}
-              buttons={[
-                {
-                  text: preCheck.start.info.button.text,
-                  href: preCheck.start.info.button.href,
-                  look: "tertiary",
-                  className: "mt-20",
-                },
-              ]}
-            />
-          </div>
-        </Background>
-      </Container>
-      <Container>
-        <Heading
-          tagName="h2"
-          look="ds-heading-02-reg text-center mb-64 max-sm:mb-56"
-          text={preCheck.faq.title}
-        />
-        <Accordion items={preCheck.faq.items} />
+        <Tabs tabs={tabsData} />
       </Container>
       <SupportBanner />
     </>
