@@ -4,6 +4,7 @@ import Background from "~/components/Background";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
+import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { examples } from "~/resources/content/beispiele";
 import { ROUTE_EXAMPLES } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
@@ -13,6 +14,22 @@ export const meta = ({ matches }: MetaArgs) => {
 };
 
 export default function Digitaltauglichkeit_index() {
+  const tabsData: TabItem[] = examples.boxItems.map((item) => ({
+    title: item.tabName,
+    content: (
+      <Box
+        className="pb-64"
+        key={item.title}
+        heading={{
+          tagName: "h2",
+          text: item.title,
+        }}
+        content={{ markdown: item.content }}
+        buttons={item.buttons}
+      />
+    ),
+  }));
+
   return (
     <>
       <Background backgroundColor="blue" className="py-24">
@@ -29,19 +46,8 @@ export default function Digitaltauglichkeit_index() {
           ></Header>
         </Container>
       </Background>
-      <Container>
-        {examples.boxItems.map((item) => (
-          <Box
-            className="pb-64"
-            key={item.title}
-            heading={{
-              tagName: "h2",
-              text: item.title,
-            }}
-            content={{ markdown: item.content }}
-            buttons={item.buttons}
-          />
-        ))}
+      <Container className="py-0">
+        <Tabs tabs={tabsData} />
       </Container>
     </>
   );
