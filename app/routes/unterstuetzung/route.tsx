@@ -293,11 +293,7 @@ export default function Index() {
                 markdown: supportOfferings.text,
               }}
             />
-            <Tabs
-              tabs={tabsData}
-              initialActiveIndex={initialTabIndex}
-              ariaLabel="Support Tabs"
-            />
+            <Tabs tabs={tabsData} initialActiveIndex={initialTabIndex} />
           </Container>
         </Background>
       </div>

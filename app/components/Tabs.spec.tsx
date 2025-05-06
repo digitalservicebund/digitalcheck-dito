@@ -35,17 +35,11 @@ const mockTabs: TabItem[] = [
   { title: "Example 3", content: <span>Content Tab 3</span> },
 ];
 
-const ariaLabel = "label";
-
 describe("Tabs component", () => {
   it("Renders correctly with default index", () => {
-    const { container } = render(
-      <Tabs tabs={mockTabs} ariaLabel={ariaLabel} />,
-    );
+    const { container } = render(<Tabs tabs={mockTabs} />);
 
-    expect(
-      screen.getByRole("tablist", { name: ariaLabel }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole("tablist")).toBeInTheDocument();
 
     const tabButtons = screen.getAllByRole("tab");
     expect(tabButtons).toHaveLength(mockTabs.length);
@@ -86,11 +80,7 @@ describe("Tabs component", () => {
   it("Renders correctly with a specific index", () => {
     const initialIndex = 1;
     const { container } = render(
-      <Tabs
-        tabs={mockTabs}
-        initialActiveIndex={initialIndex}
-        ariaLabel={ariaLabel}
-      />,
+      <Tabs tabs={mockTabs} initialActiveIndex={initialIndex} />,
     );
 
     const tabButtons = screen.getAllByRole("tab");
@@ -119,9 +109,7 @@ describe("Tabs component", () => {
 
   it("Switches tabs and content on tab button click", async () => {
     const user = userEvent.setup();
-    const { container } = render(
-      <Tabs tabs={mockTabs} ariaLabel={ariaLabel} />,
-    );
+    const { container } = render(<Tabs tabs={mockTabs} />);
     const targetIndex = 2;
 
     const tabButtons = screen.getAllByRole("tab");
@@ -152,9 +140,7 @@ describe("Tabs component", () => {
   describe("Keyboard navigation regular view", () => {
     it("Activates the focused tab on enter", async () => {
       const user = userEvent.setup();
-      const { container } = render(
-        <Tabs tabs={mockTabs} ariaLabel={ariaLabel} />,
-      );
+      const { container } = render(<Tabs tabs={mockTabs} />);
       const tabButtons = screen.getAllByRole("tab");
 
       tabButtons[0].focus();
@@ -175,9 +161,7 @@ describe("Tabs component", () => {
 
     it("Activates the focused tab on space key press", async () => {
       const user = userEvent.setup();
-      const { container } = render(
-        <Tabs tabs={mockTabs} ariaLabel={ariaLabel} />,
-      );
+      const { container } = render(<Tabs tabs={mockTabs} />);
       const tabButtons = screen.getAllByRole("tab");
 
       tabButtons[0].focus();
@@ -201,7 +185,7 @@ describe("Tabs component", () => {
   describe("Mobile dropdown interaction", () => {
     it("Opens the dropdown options on button click", async () => {
       const user = userEvent.setup();
-      render(<Tabs tabs={mockTabs} ariaLabel={ariaLabel} />);
+      render(<Tabs tabs={mockTabs} />);
       const listboxButton = screen.getByRole("button", {
         name: mockTabs[0].title,
       });
@@ -229,9 +213,7 @@ describe("Tabs component", () => {
 
     it("Switches tabs when an option is clicked", async () => {
       const user = userEvent.setup();
-      const { container } = render(
-        <Tabs tabs={mockTabs} ariaLabel={ariaLabel} />,
-      );
+      const { container } = render(<Tabs tabs={mockTabs} />);
       const targetIndex = 1;
 
       let listboxButton = screen.getByRole("button", {
@@ -266,9 +248,7 @@ describe("Tabs component", () => {
   });
 
   it("Updates the active tab when index changes", () => {
-    const { rerender, container } = render(
-      <Tabs tabs={mockTabs} ariaLabel={ariaLabel} />,
-    );
+    const { rerender, container } = render(<Tabs tabs={mockTabs} />);
 
     expect(screen.getAllByRole("tab")[0]).toHaveAttribute(
       "aria-selected",
@@ -280,13 +260,7 @@ describe("Tabs component", () => {
     ).toBeInTheDocument();
 
     const newIndex = 2;
-    rerender(
-      <Tabs
-        tabs={mockTabs}
-        initialActiveIndex={newIndex}
-        ariaLabel={ariaLabel}
-      />,
-    );
+    rerender(<Tabs tabs={mockTabs} initialActiveIndex={newIndex} />);
 
     const tabButtons = screen.getAllByRole("tab");
     expect(tabButtons[newIndex]).toHaveAttribute("aria-selected", "true");

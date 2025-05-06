@@ -19,14 +19,9 @@ export interface TabItem {
 interface TabsProps {
   tabs: TabItem[];
   initialActiveIndex?: number;
-  ariaLabel: string;
 }
 
-export default function Tabs({
-  tabs,
-  initialActiveIndex = 0,
-  ariaLabel,
-}: TabsProps) {
+export default function Tabs({ tabs, initialActiveIndex = 0 }: TabsProps) {
   const [activeTab, setActiveTab] = useState(initialActiveIndex);
   const tabRef = useRef<Map<number, HTMLButtonElement> | null>(null);
 
@@ -60,7 +55,7 @@ export default function Tabs({
     <>
       <div
         role="tablist"
-        aria-label={ariaLabel}
+        aria-label="Menü Navigation"
         className="my-[40px] flex items-start border-b-[3px] border-blue-500 max-lg:hidden"
       >
         {/* Tab buttons regular view */}
