@@ -90,9 +90,9 @@ export default function Tabs({
             onClick={() => handleTabInteraction(index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
             className={twJoin(
-              "relative mr-[8px] -mb-[3px] h-[70px] cursor-pointer px-[24px] py-[10px] text-blue-800 hover:border-transparent hover:bg-blue-100",
+              "relative mr-[8px] -mb-[3px] h-[70px] cursor-pointer px-[24px] py-[10px] text-blue-800 hover:border-b-[3px] hover:border-blue-500 hover:bg-blue-100",
               activeTab === index &&
-                "border-b-[4px] border-blue-800 bg-blue-100 font-bold",
+                "border-b-[4px] border-blue-800 bg-blue-100 font-bold hover:border-b-[4px] hover:border-blue-800",
             )}
           >
             {tab.title}
