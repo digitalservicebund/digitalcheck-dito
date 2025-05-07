@@ -29,7 +29,7 @@ function ImageBox({
       )}
       <ImageZoomable {...image} className="border-[2px] border-[#004B760D]" />
       <figcaption className="label-03-reg pt-[24px]">{caption}</figcaption>
-      <hr className="my-8 w-[120px] border-t-[2px] border-blue-300" />
+      <hr className="my-[16px] w-[120px] border-t-[2px] border-blue-300" />
     </figure>
   );
 }
