@@ -4,6 +4,7 @@ import {
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
 
+// Skipped because we currently don't link to IO on landing page
 test.skip("clicking on link to interoperability landing page leads to correct page", async ({
   page,
 }) => {
