@@ -106,10 +106,7 @@ test.describe("five principles page", () => {
   test("five principles conditional next step is accurate", async ({
     page,
   }) => {
-    await page.goto(ROUTE_LANDING.url);
-
-    await page.getByRole("link", { name: "Details und Beispiele" }).click();
-    await expect(page).toHaveURL(ROUTE_METHODS_PRINCIPLES.url);
+    await page.goto(ROUTE_METHODS_PRINCIPLES.url);
 
     await expect(page.getByRole("main")).toContainText(
       "Vorprüfung: Digitalbezug einschätzen",

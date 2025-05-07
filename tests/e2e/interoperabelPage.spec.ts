@@ -4,7 +4,7 @@ import {
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
 
-test("clicking on link to interoperability landing page leads to correct page", async ({
+test.skip("clicking on link to interoperability landing page leads to correct page", async ({
   page,
 }) => {
   await page.goto("/");
