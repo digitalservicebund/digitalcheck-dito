@@ -184,7 +184,7 @@ export default function Interoperability() {
           />
         </div>
       </Background>
-      <Container className="py-0">
+      <Container className="pt-0">
         <Tabs tabs={tabsData} />
       </Container>
     </>
