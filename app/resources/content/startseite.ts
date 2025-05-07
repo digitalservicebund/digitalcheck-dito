@@ -15,8 +15,7 @@ export const index = {
     - wie Sie eine reibungslose Umsetzung des Vorhabens ermöglichen,
     - welche Unterlagen Sie benötigen.
   `,
-  stepByStep: {
-    tabName: "Schritt für Schritt",
+  list: {
     title: "So gehen Sie vor",
     items: [
       steps.preCheck,
@@ -29,14 +28,7 @@ export const index = {
       steps.documentation,
       steps.nkr,
     ],
-    processImage: {
-      url: "/images/prozessgrafik.jpg",
-      alt: "Flussdiagramm, das drei Pfade nach einer Vorprüfung zum Digitalbezug zeigt: 1. Kein Digitalbezug: Ergebnis-E-Mail. 2. Digitalbezug: E-Mail, Anleitung, Dokumentation, Prüfung. 3. Digitalbezug & Interoperabilität: E-Mail an zwei Stellen, Anleitung mit Support, Dokumentation, Bereitstellung auf EU-Portal.",
-      caption:
-        "Der Prozess beginnt mit der geführten Vorprüfung auf Digitalbezug und Anforderungen an Interoperabilität. Daraus ergeben sich unterschiedliche folgende Prozessschritte.",
-    },
   },
-
   dataNotice: {
     headline: "Ihre Arbeitsstände werden eine Woche lang gespeichert.",
     content:
@@ -64,7 +56,6 @@ export const index = {
     },
   },
   summary: {
-    tabName: "Was ist Digitaltauglichkeit?",
     title: "Zusammengefasst",
     items: [
       {

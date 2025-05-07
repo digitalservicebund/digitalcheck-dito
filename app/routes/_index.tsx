@@ -4,89 +4,12 @@ import Box from "~/components/Box";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
-import ImageBox from "~/components/ImageBox.tsx";
 import InfoBox from "~/components/InfoBox";
 import { NumberedList } from "~/components/List";
-import Tabs, { type TabItem } from "~/components/Tabs.tsx";
+import SupportBanner from "~/components/SupportBanner";
 import { index } from "~/resources/content/startseite";
 
 export default function Index() {
-  const tabsData: TabItem[] = [
-    {
-      title: index.stepByStep.tabName,
-      content: (
-        <>
-          <NumberedList
-            className="pb-40"
-            heading={{
-              tagName: "h2",
-              text: index.stepByStep.title,
-            }}
-            items={index.stepByStep.items}
-          />
-          <ImageBox
-            image={index.stepByStep.processImage}
-            caption={index.stepByStep.processImage.caption}
-          />
-          {/* currently not used and hidden */}
-          <div className="relative left-1/2 hidden w-screen -translate-x-1/2 bg-[url('/images/trainings.jpeg')] bg-cover bg-[0%_35%]">
-            <Container>
-              <div className="max-w-[630px] rounded-lg bg-white px-16 py-28 md:px-80 md:py-40">
-                <Box
-                  heading={{ text: index.interoperability.title }}
-                  content={{ markdown: index.interoperability.text }}
-                  buttons={[index.interoperability.link]}
-                />
-              </div>
-            </Container>
-          </div>
-
-          {/* currently not used and hidden */}
-          <Background
-            backgroundColor="darkBlue"
-            className="relative left-1/2 hidden w-screen -translate-x-1/2 py-24"
-          >
-            <Container>
-              <div className="ds-stack ds-stack-32 scroll-my-40">
-                <Heading tagName="h2" text={index.principles.title} />
-                <ol className="list-unstyled space-y-8">
-                  {index.principles.content.map((principle) => (
-                    <li
-                      key={principle}
-                      className="before:mb-8 before:block before:w-1/2 before:border-t before:border-blue-700 before:content-[''] first:before:content-none"
-                    >
-                      {principle}
-                    </li>
-                  ))}
-                </ol>
-                <Link
-                  to={index.principles.link.href}
-                  className="text-link font-bold"
-                >
-                  {index.principles.link.text}
-                </Link>
-              </div>
-            </Container>
-          </Background>
-        </>
-      ),
-    },
-    {
-      title: index.summary.tabName,
-      content: (
-        <>
-          <InfoBox
-            heading={{
-              tagName: "h2",
-              text: index.summary.title,
-            }}
-            items={index.summary.items}
-          />
-        </>
-      ),
-    },
-  ];
-
   return (
     <>
       <Background backgroundColor="darkBlue" className="py-24">
@@ -103,9 +26,59 @@ export default function Index() {
           ></Header>
         </Container>
       </Background>
-      <Container className="pt-0">
-        <Tabs tabs={tabsData} />
+      <Container>
+        <NumberedList
+          heading={{
+            tagName: "h2",
+            text: index.list.title,
+          }}
+          items={index.list.items}
+        />
       </Container>
+      <div className="bg-[url('/images/trainings.jpeg')] bg-cover bg-[0%_35%]">
+        <Container>
+          <div className="max-w-[630px] rounded-lg bg-white px-16 py-28 md:px-80 md:py-40">
+            <Box
+              heading={{ text: index.interoperability.title }}
+              content={{ markdown: index.interoperability.text }}
+              buttons={[index.interoperability.link]}
+            />
+          </div>
+        </Container>
+      </div>
+      <Container>
+        <InfoBox
+          heading={{
+            tagName: "h2",
+            text: index.summary.title,
+          }}
+          items={index.summary.items}
+        />
+      </Container>
+      <SupportBanner />
+      <Background backgroundColor="darkBlue" className="py-24">
+        <Container>
+          <div className="ds-stack ds-stack-32 scroll-my-40">
+            <Heading tagName="h2" text={index.principles.title} />
+            <ol className="list-unstyled space-y-8">
+              {index.principles.content.map((principle) => (
+                <li
+                  key={principle}
+                  className="before:mb-8 before:block before:w-1/2 before:border-t before:border-blue-700 before:content-[''] first:before:content-none"
+                >
+                  {principle}
+                </li>
+              ))}
+            </ol>
+            <Link
+              to={index.principles.link.href}
+              className="text-link font-bold"
+            >
+              {index.principles.link.text}
+            </Link>
+          </div>
+        </Container>
+      </Background>
     </>
   );
 }
