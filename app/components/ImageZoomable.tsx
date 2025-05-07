@@ -12,6 +12,7 @@ function ImageZoomable(image: Readonly<ImageProps>) {
       reloadDocument
       target="_blank"
       rel="noreferrer"
+      aria-label={image.alternativeText}
       className="relative block cursor-zoom-in"
     >
       <Image {...image} className={twMerge("h-auto w-full", image.className)} />
