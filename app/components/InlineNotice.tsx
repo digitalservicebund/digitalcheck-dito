@@ -14,6 +14,7 @@ type InlineNoticeProps = {
   look: "success" | "info" | "warning" | "support" | "tips";
   content?: string;
   showIcon?: boolean;
+  className?: string;
 };
 
 // We can't set border-[${borderColor}] in the template because it causes inconsistent behavior in Storybook.
@@ -52,6 +53,7 @@ const InlineNotice = ({
   tagName,
   look,
   content,
+  className,
   showIcon = true,
 }: InlineNoticeProps) => {
   const { backgroundColor, borderColor, IconComponent } = lookConfig[look];
@@ -63,6 +65,7 @@ const InlineNotice = ({
         backgroundColor,
         "border-2 border-l-8",
         borderColor,
+        className,
       )}
       id={identifier}
     >

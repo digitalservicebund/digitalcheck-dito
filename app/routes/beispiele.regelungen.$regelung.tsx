@@ -1,7 +1,5 @@
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
-import React from "react";
 import {
-  Link,
   useLoaderData,
   useOutletContext,
   type MetaArgs,
@@ -16,6 +14,7 @@ import Heading from "~/components/Heading";
 import InlineInfoList from "~/components/InlineInfoList";
 import InlineNotice from "~/components/InlineNotice";
 import ParagraphList from "~/components/ParagraphList";
+import Tabs, { TabItem } from "~/components/Tabs";
 import VisualisationItem from "~/components/VisualisationItem";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
@@ -113,48 +112,6 @@ export default function Gesetz() {
               markdown: examplesRegelungen.subtitle[0],
             }}
           />
-          <p className="ds-subhead mt-24 font-bold">
-            <b>{examplesRegelungen.subtitle[1]}</b>
-          </p>
-          <ol className="list-unstyled mt-16">
-            {regelung.Digitalchecks.map((digitalcheck, index) => (
-              <React.Fragment key={digitalcheck.documentId}>
-                {digitalcheck.Paragraphen.length > 0 && (
-                  <li>
-                    ↓
-                    <Link
-                      to={`#${slugify(examplesRegelungen.principles.title)}-${index}`}
-                      className="ml-4 underline decoration-1 underline-offset-4"
-                    >
-                      {examplesRegelungen.principles.title}
-                    </Link>
-                  </li>
-                )}
-                {digitalcheck.Visualisierungen.length > 0 && (
-                  <li>
-                    ↓
-                    <Link
-                      to={`#${slugify(examplesRegelungen.visualisations.title)}-${index}`}
-                      className="ml-4 underline decoration-1 underline-offset-4"
-                    >
-                      {examplesRegelungen.visualisations.title}
-                    </Link>
-                  </li>
-                )}
-                {digitalcheck.NKRStellungnahmeDCText && (
-                  <li>
-                    ↓
-                    <Link
-                      to={`#${slugify(examplesRegelungen.nkr.title)}-${index}`}
-                      className="ml-4 underline decoration-1 underline-offset-4"
-                    >
-                      {examplesRegelungen.nkr.title}
-                    </Link>
-                  </li>
-                )}
-              </React.Fragment>
-            ))}
-          </ol>
         </Container>
       </Background>
       <Background backgroundColor="midLightBlue">
@@ -190,98 +147,121 @@ export default function Gesetz() {
           />
         </Container>
       </Background>
-      {regelung.Digitalchecks.some(
-        (digitalcheck) => digitalcheck.Paragraphen.length > 0,
-      ) &&
-        regelung.GesetzStatus !== "Verkuendetes_Gesetz_aktuelle_Fassung" && (
-          <Container className="pb-0">
-            <InlineNotice
-              title={examplesRegelungen.infoTitle}
-              look="tips"
-              tagName="h2"
-              content={examplesRegelungen.infoText}
-            />
-          </Container>
-        )}
-      {regelung.Digitalchecks.map((digitalcheck, index) => (
-        <Container
-          key={digitalcheck.documentId}
-          className="ds-stack ds-stack-64 pb-80"
-        >
-          {/* ----- Formulierungen / Prinziperfüllungen ----- */}
-          {digitalcheck.Paragraphen.length > 0 && (
-            <>
-              <Heading
-                id={`${slugify(examplesRegelungen.principles.title)}-${index}`}
-                tagName="h2"
-                look="ds-heading-02-bold"
-              >
-                {examplesRegelungen.principles.title}
-              </Heading>
+      {regelung.Digitalchecks.map((digitalcheck, index) => {
+        const tabsData: TabItem[] = [];
 
-              <ParagraphList
-                paragraphs={digitalcheck.Paragraphen}
-                principlesToShow={principles}
-              />
-            </>
-          )}
-
-          {/* ----- Visualisierungen ----- */}
-          {digitalcheck.Visualisierungen.length > 0 && (
-            <div className="ds-stack ds-stack-32">
-              <Header
-                heading={{
-                  id: `${slugify(examplesRegelungen.visualisations.title)}-${index}`,
-                  text: examplesRegelungen.visualisations.title,
-                  tagName: "h2",
-                  look: "ds-heading-02-bold",
-                }}
-                content={{
-                  markdown: examplesRegelungen.visualisations.subtitle,
-                }}
-              />
-              {digitalcheck.Visualisierungen.map((visualisierung) => (
-                <VisualisationItem
-                  key={visualisierung.Bild.documentId}
-                  visualisierung={visualisierung}
+        // ----- Formulierungen / Prinziperfüllungen -----
+        if (digitalcheck.Paragraphen.length > 0) {
+          tabsData.push({
+            title: examplesRegelungen.principles.tabName,
+            content: (
+              <>
+                {regelung.GesetzStatus !==
+                  "Verkuendetes_Gesetz_aktuelle_Fassung" && (
+                  <InlineNotice
+                    className="mb-40"
+                    title={examplesRegelungen.infoTitle}
+                    look="tips"
+                    tagName="h2"
+                    content={examplesRegelungen.infoText}
+                  />
+                )}
+                <Heading
+                  id={`${slugify(examplesRegelungen.principles.title)}-${index}`}
+                  tagName="h2"
+                  look="ds-heading-02-bold"
+                  className="pb-40"
+                >
+                  {examplesRegelungen.principles.title}
+                </Heading>
+                <ParagraphList
+                  paragraphs={digitalcheck.Paragraphen}
+                  principlesToShow={principles}
                 />
-              ))}
-            </div>
-          )}
+              </>
+            ),
+          });
+        }
 
-          {/* ----- NKR Stellungnahme ----- */}
-          {digitalcheck.NKRStellungnahmeDCText && (
-            <div>
-              <Header
-                heading={{
-                  id: `${slugify(examplesRegelungen.nkr.title)}-${index}`,
-                  text: examplesRegelungen.nkr.title,
-                  tagName: "h2",
-                  look: "ds-heading-02-bold",
-                }}
-                content={{
-                  markdown: examplesRegelungen.nkr.subtitle,
-                }}
-              />
-              <div className="my-32 border-l-4 border-gray-400 pl-8">
-                <BlocksRenderer content={digitalcheck.NKRStellungnahmeDCText} />
+        // ----- Visualisierungen -----
+        if (digitalcheck.Visualisierungen.length > 0) {
+          tabsData.push({
+            title: examplesRegelungen.visualisations.tabName,
+            content: (
+              <div className="ds-stack ds-stack-32">
+                <Header
+                  heading={{
+                    id: `${slugify(examplesRegelungen.visualisations.title)}-${index}`,
+                    text: examplesRegelungen.visualisations.title,
+                    tagName: "h2",
+                    look: "ds-heading-02-bold",
+                    className: "pb-40",
+                  }}
+                  content={{
+                    markdown: examplesRegelungen.visualisations.subtitle,
+                  }}
+                />
+                {digitalcheck.Visualisierungen.map((visualisierung) => (
+                  <VisualisationItem
+                    key={visualisierung.Bild.documentId}
+                    visualisierung={visualisierung}
+                  />
+                ))}
               </div>
-              {regelung.NKRStellungnahmeLink && (
-                <div>
-                  {examplesRegelungen.nkr.linkText}
-                  <CustomLink
-                    target="_blank"
-                    to={regelung.NKRStellungnahmeLink}
-                    rel="noreferrer"
-                  >
-                    NKR Stellungnahme
-                  </CustomLink>
+            ),
+          });
+        }
+
+        // ----- NKR Stellungnahme -----
+        if (digitalcheck.NKRStellungnahmeDCText) {
+          tabsData.push({
+            title: examplesRegelungen.nkr.tabName,
+            content: (
+              <>
+                <Header
+                  heading={{
+                    id: `${slugify(examplesRegelungen.nkr.title)}-${index}`,
+                    text: examplesRegelungen.nkr.title,
+                    tagName: "h2",
+                    look: "ds-heading-02-bold",
+                    className: "pb-40",
+                  }}
+                  content={{
+                    markdown: examplesRegelungen.nkr.subtitle,
+                  }}
+                />
+                <div className="my-32 border-l-4 border-gray-400 pl-8">
+                  <BlocksRenderer
+                    content={digitalcheck.NKRStellungnahmeDCText}
+                  />
                 </div>
-              )}
-            </div>
-          )}
-        </Container>
-      ))}
+                {regelung.NKRStellungnahmeLink && (
+                  <div>
+                    {examplesRegelungen.nkr.linkText}
+                    <CustomLink
+                      target="_blank"
+                      to={regelung.NKRStellungnahmeLink}
+                      rel="noreferrer"
+                    >
+                      NKR Stellungnahme
+                    </CustomLink>
+                  </div>
+                )}
+              </>
+            ),
+          });
+        }
+        return (
+          <Container key={digitalcheck.documentId} className="pb-80">
+            {regelung.Digitalchecks.length > 1 && digitalcheck.Titel && (
+              <Heading tagName="h2" look="ds-heading-03-bold" className="mb-24">
+                {digitalcheck.Titel}
+              </Heading>
+            )}
+            <Tabs tabs={tabsData} />
+          </Container>
+        );
+      })}
     </>
   );
 }
