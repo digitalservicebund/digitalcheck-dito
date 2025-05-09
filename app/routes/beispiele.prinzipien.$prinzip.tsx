@@ -86,6 +86,12 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
 
   const { GuteUmsetzungen } = prinzip;
 
+  const activeTabIndex = prinzips.findIndex(
+    (p) => p.URLBezeichnung === prinzip.URLBezeichnung,
+  );
+
+  const initialActiveIndexForTabs = activeTabIndex !== -1 ? activeTabIndex : 0;
+
   const tabsForNavigation: TabItem[] = prinzips.map((p) => ({
     title: `Prinzip ${p.Nummer}`,
     path: `${ROUTE_EXAMPLES_PRINCIPLES.url}/${p.URLBezeichnung}`,
@@ -118,6 +124,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
       <Container className="py-0">
         <Tabs
           tabs={tabsForNavigation}
+          initialActiveIndex={initialActiveIndexForTabs}
           onNavigateRequest={handleNavigationRequest}
         />
       </Container>
