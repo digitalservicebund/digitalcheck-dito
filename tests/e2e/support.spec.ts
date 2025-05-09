@@ -21,13 +21,7 @@ test.describe("test support page", () => {
     ).toBeVisible();
   });
 
-  test("suppport tabs switch between offerings", async ({
-    page,
-    browserName,
-    isMobile,
-  }) => {
-    test.skip(browserName === "webkit" && isMobile);
-
+  test("suppport tabs switch between offerings", async ({ page }) => {
     await page.getByRole("tab", { name: "Schnelle Hilfe" }).click();
     await expect(
       page.getByRole("heading", { name: "IT-Wissen" }),

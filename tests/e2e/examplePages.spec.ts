@@ -30,11 +30,7 @@ test.describe("Prinzipienseiten", () => {
 
     test(`renders navigation links for principle: ${principle}`, async ({
       page,
-      browserName,
-      isMobile,
     }) => {
-      test.skip(browserName === "webkit" && isMobile);
-
       const url = `${ROUTE_EXAMPLES_PRINCIPLES.url}/${principle}`;
       await page.goto(url);
 
