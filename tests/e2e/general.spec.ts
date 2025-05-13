@@ -47,7 +47,10 @@ test.describe("test landing page", () => {
 
   test("CTA on landing works", async ({ page }) => {
     await page.goto(ROUTE_LANDING.url);
-    await page.getByRole("link", { name: "Digitalbezug einschätzen" }).click();
+    await page
+      .getByRole("link", { name: "Digitalbezug einschätzen" })
+      .first()
+      .click();
     await expect(page).toHaveURL(ROUTE_PRECHECK.url);
   });
 
