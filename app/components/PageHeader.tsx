@@ -161,6 +161,7 @@ const PageHeader = ({
             <a
               className="border-b-[4px] border-transparent"
               href={`tel:${header.contact.number}`}
+              aria-label={header.contact.msg}
             >
               <PhoneOutlined />
             </a>
