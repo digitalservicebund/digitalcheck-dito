@@ -9,7 +9,6 @@ import Image from "~/components/Image";
 import InterviewBanner from "~/components/InterviewBanner";
 import LabelWithIcon from "~/components/LabelWithIcon";
 import RichText from "~/components/RichText";
-import allRoutes from "~/resources/allRoutes";
 import { methodsTasksProcesses } from "~/resources/content/methode-ablaeufe-aufgaben-erfassen";
 import { methodsITSystems } from "~/resources/content/methode-it-systeme-erfassen";
 import { methodsTechnicalFeasibility } from "~/resources/content/methode-technische-umsetzbarkeit";
@@ -20,9 +19,10 @@ import {
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
   ROUTE_METHODS_TASKS_PROCESSES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
+  ROUTES,
 } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
-import type { Route } from "./+types/methoden_.$subPage";
+import type { Route } from "./+types/methoden.$subPage";
 
 const contentMap = {
   [ROUTE_METHODS_RESPONSIBLE_ACTORS.title]: methodsResponsibleActors,
@@ -43,7 +43,7 @@ export function loader({ params }: Route.LoaderArgs) {
     throw notFound;
   }
 
-  const route = allRoutes.find((route) => route.url.endsWith(subPage));
+  const route = ROUTES.find((route) => route.url.endsWith(subPage));
   if (!route || !contentMap[route.title]) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw notFound;

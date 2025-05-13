@@ -15,6 +15,10 @@ export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_DOCUMENTATION.title, matches);
 };
 
+export const handle = {
+  hasProgressBar: true,
+};
+
 export default function Index() {
   return (
     <>

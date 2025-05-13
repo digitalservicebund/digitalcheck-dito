@@ -33,3 +33,10 @@ export const cyrb53 = (str: string, seed = 0) => {
 
   return 4294967296 * (2097151 & h2) + (h1 >>> 0);
 };
+
+export const removeTrailingSlash = (url: string) => url.replace(/\/$/, "");
+
+// Ignore / and # for path comparison
+export const normalizePathname = (path: string) => {
+  return removeTrailingSlash(path).split("#")[0];
+};

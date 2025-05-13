@@ -7,7 +7,7 @@ import TimerOutlined from "@digitalservicebund/icons/TimerOutlined";
 import {
   ROUTE_INTEROPERABILITY,
   ROUTE_INTEROPERABILITY_SPOC,
-} from "~/resources/staticRoutes.ts";
+} from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const support = {
@@ -70,7 +70,7 @@ export const support = {
         title: "Beratung erhalten Sie in einem 45-minütigem Gespräch",
         text: "In einem (Video)-Telefonat können wir gemeinsam herausfinden, welche Unterstützungsangebote für Sie hilfreich sind.",
         iframe:
-          "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2HGvpOvw8vZemiLWGWvL65j3FdQUTeyxGvh1QX-6JlwNwFdZo6wTI5isd6TJsv0duH3-9nD1QX?gv=true",
+          "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2LoqPwo-E2vI3Zjb2K5ic-rXqDCxsZ6N8KwbVkSnQMRIAdbFLCN0wTWymqn3f_Q44ZJdd4-JMZ?gv=true",
         buttons: [
           {
             text: "Termin buchen",

@@ -1,4 +1,5 @@
 export const examplesRegelungen = {
+  breadcrumb: "Regelungsbeispiel",
   subtitle: [
     "Hier finden Sie alles zur Digitaltauglichkeit dieser Regelung.",
     "Inhalt",
@@ -8,6 +9,7 @@ export const examplesRegelungen = {
   infoText:
     "Markierte Formulierungen sind gute Beispiele für die Ermöglichung digitaler Umsetzung, trotz ausstehender Verabschiedung.",
   visualisations: {
+    tabName: "Visualisierung",
     title: "Visualisierungen",
     subtitle:
       "Diese Visualisierungen haben dem Referat geholfen Digitaltauglichkeit zu erstellen und den Sachverhalt zu kommunizieren.",
@@ -23,11 +25,13 @@ export const examplesRegelungen = {
     },
   },
   principles: {
+    tabName: "Formulierungen",
     title: "Formulierungen aus der Regelung",
     subtitle:
       "So hat das Referat in der Dokumentation die Digitaltauglichkeit in die Regelung geschrieben",
   },
   nkr: {
+    tabName: "NKR Stellungnahme",
     title: "NKR Stellungnahme",
     subtitle: "Diese Ausführungen sind der Stellungnahme des NKR entnommen.",
     linkText: "Die ganze Stellungnahme können Sie hier finden: ",

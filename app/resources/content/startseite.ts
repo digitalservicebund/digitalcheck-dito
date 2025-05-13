@@ -1,13 +1,8 @@
-import {
-  DriveFileRenameOutline,
-  Source,
-} from "@digitalservicebund/icons/index";
 import { steps } from "~/resources/content/components/naechste-schritte";
 import {
   ROUTE_EXAMPLES,
   ROUTE_INTEROPERABILITY,
-  ROUTE_METHODS_FIVE_PRINCIPLES,
-  TOOLFINDER,
+  ROUTE_METHODS_PRINCIPLES,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -20,7 +15,8 @@ export const index = {
     - wie Sie eine reibungslose Umsetzung des Vorhabens ermöglichen,
     - welche Unterlagen Sie benötigen.
   `,
-  list: {
+  stepByStep: {
+    tabName: "Schritt für Schritt",
     title: "So gehen Sie vor",
     items: [
       steps.preCheck,
@@ -33,7 +29,15 @@ export const index = {
       steps.documentation,
       steps.nkr,
     ],
+    processImage: {
+      url: "/images/prozessgrafik.jpg",
+      alternativeText:
+        "Flussdiagramm, das drei Pfade nach einer Vorprüfung zum Digitalbezug zeigt: 1. Kein Digitalbezug: Ergebnis-E-Mail. 2. Digitalbezug: E-Mail, Anleitung, Dokumentation, Prüfung. 3. Digitalbezug & Interoperabilität: E-Mail an zwei Stellen, Anleitung mit Support, Dokumentation, Bereitstellung auf EU-Portal.",
+      caption:
+        "Der Prozess beginnt mit der geführten Vorprüfung auf Digitalbezug und Anforderungen an Interoperabilität. Daraus ergeben sich unterschiedliche folgende Prozessschritte.",
+    },
   },
+
   dataNotice: {
     headline: "Ihre Arbeitsstände werden eine Woche lang gespeichert.",
     content:
@@ -61,6 +65,7 @@ export const index = {
     },
   },
   summary: {
+    tabName: "Was ist Digitaltauglichkeit?",
     title: "Zusammengefasst",
     items: [
       {
@@ -91,43 +96,6 @@ export const index = {
       },
     ],
   },
-  links: {
-    title: "Weitere Unterstützungsangebote für Ihr Vorhaben",
-    subtitle:
-      "Nutzen Sie unsere Services die Ihnen dabei helfen digitaltaugliche Regelungen zu schreiben.",
-    items: [
-      {
-        headline: {
-          text: "Werkzeuge für Visualisierung",
-        },
-        label: "Werkzeugfinder",
-        icon: DriveFileRenameOutline,
-        content: `Finden Sie mit dem Werkzeugfinder die passenden Werkzeuge und Methoden, um Prozesse zu visualisieren.`,
-        buttons: [
-          {
-            text: "Werkzeugfinder nutzen",
-            href: TOOLFINDER,
-            look: "tertiary" as const,
-          },
-        ],
-      },
-      {
-        headline: {
-          text: "Digitaltaugliche Beispiele",
-        },
-        label: "Beispielsammlung",
-        icon: Source,
-        content: `Sehen Sie Beispiele von Regelungen an, die digitaltaugliche Aspekte berücksichtigen und die Prinzipien für Digitaltauglichkeit bedacht haben.`,
-        buttons: [
-          {
-            text: "Beispiele ansehen",
-            href: ROUTE_EXAMPLES.url,
-            look: "tertiary" as const,
-          },
-        ],
-      },
-    ],
-  },
   principles: {
     title: "5 Prinzipien für digitaltaugliche Gesetzgebung",
     content: [
@@ -139,7 +107,7 @@ export const index = {
     ],
     link: {
       text: "Details und Beispiele",
-      href: ROUTE_METHODS_FIVE_PRINCIPLES.url,
+      href: ROUTE_METHODS_PRINCIPLES.url,
     },
   },
 };

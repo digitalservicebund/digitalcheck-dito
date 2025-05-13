@@ -1,25 +1,38 @@
-import { useOutletContext, type MetaArgs } from "react-router";
+import { type MetaArgs } from "react-router";
 
 import Background from "~/components/Background";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
+import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { examples } from "~/resources/content/beispiele";
-import { ROUTE_EXAMPLES, ROUTE_PRINCIPLES } from "~/resources/staticRoutes";
+import { ROUTE_EXAMPLES } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
-import { Prinzip } from "~/utils/strapiData.server";
 
 export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_EXAMPLES.title, matches);
 };
 
 export default function Digitaltauglichkeit_index() {
-  const principles = useOutletContext<Prinzip[]>().toSorted(
-    (a, b) => a.Nummer - b.Nummer,
-  );
+  const tabsData: TabItem[] = examples.boxItems.map((item) => ({
+    title: item.tabName,
+    content: (
+      <Box
+        className="pb-64"
+        key={item.title}
+        heading={{
+          tagName: "h2",
+          text: item.title,
+        }}
+        content={{ markdown: item.content }}
+        buttons={item.buttons}
+      />
+    ),
+  }));
+
   return (
     <>
-      <Background backgroundColor="darkBlue" className="py-24">
+      <Background backgroundColor="blue" className="py-24">
         <Container>
           <Header
             heading={{
@@ -33,29 +46,8 @@ export default function Digitaltauglichkeit_index() {
           ></Header>
         </Container>
       </Background>
-      <Container>
-        {examples.boxItems.map((item) => (
-          <Box
-            className="pb-64"
-            key={item.title}
-            heading={{
-              tagName: "h2",
-              text: item.title,
-            }}
-            content={{ markdown: item.content }}
-            buttons={
-              item.buttons[0].href == ROUTE_PRINCIPLES.url
-                ? [
-                    {
-                      ...item.buttons[0],
-                      href: `${ROUTE_PRINCIPLES.url}/${principles[0].URLBezeichnung}`,
-                      prefetch: "viewport",
-                    },
-                  ]
-                : item.buttons
-            }
-          />
-        ))}
+      <Container className="py-0">
+        <Tabs tabs={tabsData} />
       </Container>
     </>
   );

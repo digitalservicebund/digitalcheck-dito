@@ -1,6 +1,6 @@
 import {
-  ROUTE_PRINCIPLES,
-  ROUTE_VISUALISATIONS,
+  ROUTE_EXAMPLES_DIGITAL_COMMUNICATION,
+  ROUTE_EXAMPLES_VISUALISATIONS,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -14,6 +14,7 @@ export const examples = {
   },
   boxItems: [
     {
+      tabName: "5 Prinzipien",
       title: "Die 5 Prinzipien im Regelungstext",
       content: dedent`
         Die 5 Prinzipien für Digitaltaugliche Gesetzgebung dienen Ihnen als Inspiration und gemeinsame Sprache für die Erarbeitung und Begleitung der Regelungsarbeit. Sie geben Anhaltspunkte wie Ihnen Digitalisierung beim Design der Wirklogik Ihrer Regelung helfen kann.
@@ -23,11 +24,12 @@ export const examples = {
       buttons: [
         {
           text: "Zu den Prinzipien",
-          href: ROUTE_PRINCIPLES.url,
+          href: ROUTE_EXAMPLES_DIGITAL_COMMUNICATION.url,
         },
       ],
     },
     {
+      tabName: "Visualisierungen",
       title: "Visualisierungen",
       content: dedent`
         Visualisierungen helfen, komplexe Sachverhalte zu strukturieren und dadurch schneller und intuitiver erfassbar zu machen – Zusammenhänge werden sichtbar und Möglichkeiten der Digitalisierung können einfach identifiziert werden.
@@ -37,7 +39,7 @@ export const examples = {
       buttons: [
         {
           text: "Zu den Visualisierungen",
-          href: ROUTE_VISUALISATIONS.url,
+          href: ROUTE_EXAMPLES_VISUALISATIONS.url,
         },
       ],
     },

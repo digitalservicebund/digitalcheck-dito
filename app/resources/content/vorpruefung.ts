@@ -1,11 +1,12 @@
 import {
-  ROUTE_GENERAL_INFO,
   ROUTE_INTEROPERABILITY,
   ROUTE_PRECHECK,
-  ROUTE_RESULT,
+  ROUTE_PRECHECK_INFO,
+  ROUTE_PRECHECK_RESULT,
 } from "~/resources/staticRoutes";
-import type { TQuestion } from "~/routes/vorpruefung.$questionId/route";
+import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { dedent } from "~/utils/dedentMultilineStrings";
+import { preCheckQuestions } from "./shared/preCheckQuestions";
 
 export const preCheck = {
   start: {
@@ -29,6 +30,7 @@ export const preCheck = {
     ],
     buttonText: "Vorprüfung starten",
     summary: {
+      tabName: "Zusammengefasst",
       title: "Zusammengefasst",
       items: [
         {
@@ -51,6 +53,7 @@ export const preCheck = {
       ],
     },
     info: {
+      tabName: "Digitalbezug und Interoperabilität",
       title: "Digitalbezug und Interoperabilität",
       text: dedent`
         Digitalbezug und Interoperabilität sind eng miteinander verknüpft. Wenn ein Gesetz oder eine Regelung digitale Prozesse vorsieht, müssen oft technische und organisatorische Standards eingehalten werden. 
@@ -69,6 +72,7 @@ export const preCheck = {
     },
   },
   faq: {
+    tabName: "Häufige Fragen",
     title: "Häufige Fragen",
     items: [
       {
@@ -136,8 +140,7 @@ export const preCheck = {
   },
   questions: [
     {
-      id: "it-system",
-      title: "IT-System",
+      ...preCheckQuestions.itSystem,
       question:
         "Muss durch die Regelung ein IT-System angepasst oder neu entwickelt werden?",
       positiveResult: "einer Anpassung oder Neuentwicklung einer IT-Lösung.",
@@ -153,8 +156,7 @@ export const preCheck = {
       },
     },
     {
-      id: "verpflichtungen-fuer-beteiligte",
-      title: "Verpflichtungen für Beteiligte",
+      ...preCheckQuestions.verpflichtungenFuerBeteiligte,
       question:
         "Entstehen durch die Regelung Mitwirkungspflichten für Akteur:innen?",
       positiveResult: "einer Festlegung von Mitwirkungspflichten für Akteure.",
@@ -176,8 +178,7 @@ export const preCheck = {
       },
     },
     {
-      id: "datenaustausch",
-      title: "Datenaustausch",
+      ...preCheckQuestions.datenaustausch,
       question:
         "Werden durch die Regelung Daten erhoben, die der Verwaltung möglicherweise bereits vorliegen?",
       positiveResult: "einem Austausch von Daten.",
@@ -189,8 +190,7 @@ export const preCheck = {
       },
     },
     {
-      id: "kommunikation",
-      title: "Digitale Kommunikation",
+      ...preCheckQuestions.kommunikation,
       question:
         "Führt die Regelung zu einer Interaktion zwischen Behörden und Bürger:innen / Unternehmen?",
       positiveResult:
@@ -200,8 +200,7 @@ export const preCheck = {
       text: "**Praxisbeispiel**: Ein Antrag für Steuerentlastung muss gestellt und abgeschickt werden — dies kann digital, ohne händische Unterschrift oder analoge Nachweise geschehen. Es können z.B. Unternehmen, Bürger:innen oder Organisationen den Antrag einreichen.",
     },
     {
-      id: "automatisierung",
-      title: "Automatisierung",
+      ...preCheckQuestions.automatisierung,
       question:
         "Kann die Umsetzung der Regelung verbessert werden, indem man Schritte automatisiert?",
       positiveResult:
@@ -211,8 +210,7 @@ export const preCheck = {
       text: "**Praxisbeispiel**: Durch die automatisierte Auszahlung der Energiepreispauschale entfällt sowohl das Errechnen eines Leistungsanspruchs als auch die manuelle Antragstellung durch Leistungsberechtigte.",
     },
     {
-      id: "eu-bezug",
-      title: "EU-Bezug",
+      ...preCheckQuestions.euBezug,
       question:
         "Ist durch die Regelung vorgesehen, dass Daten und Informationen zwischen Verwaltungen von EU-Mitgliedsstaaten ausgetauscht werden?",
       positiveResult:
@@ -242,11 +240,11 @@ export const preCheck = {
     url: `${ROUTE_PRECHECK.url}/${question.id}`,
     prevLink:
       index === 0
-        ? ROUTE_GENERAL_INFO.url
+        ? ROUTE_PRECHECK_INFO.url
         : `${ROUTE_PRECHECK.url}/${questions[index - 1].id}`,
     nextLink:
       index === questions.length - 1
-        ? ROUTE_RESULT.url
+        ? ROUTE_PRECHECK_RESULT.url
         : `${ROUTE_PRECHECK.url}/${questions[index + 1].id}`,
   })) as TQuestion[],
 };

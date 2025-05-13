@@ -11,8 +11,7 @@ import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzip
 import {
   ROUTE_EXAMPLES,
   ROUTE_METHODS,
-  ROUTE_METHODS_FIVE_PRINCIPLES,
-  ROUTE_PRINCIPLES,
+  ROUTE_METHODS_PRINCIPLES,
 } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 import {
@@ -21,9 +20,10 @@ import {
   Prinzip,
 } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
-import type { Route } from "./+types/methoden_.fuenf-prinzipien";
+import type { Route } from "./+types/methoden.fuenf-prinzipien";
+
 export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_METHODS_FIVE_PRINCIPLES.title, matches);
+  return prependMetaTitle(ROUTE_METHODS_PRINCIPLES.title, matches);
 };
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -88,7 +88,7 @@ export default function FivePrinciples() {
           (principle) => principle.Nummer === index,
         );
         const buttonLink = prinzip
-          ? `${ROUTE_PRINCIPLES.url}/${prinzip?.URLBezeichnung}`
+          ? `${ROUTE_EXAMPLES.url}/${prinzip?.URLBezeichnung}`
           : ROUTE_EXAMPLES.url;
         return (
           <Background

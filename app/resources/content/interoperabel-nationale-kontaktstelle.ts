@@ -1,7 +1,7 @@
 import {
   ROUTE_INTEROPERABILITY,
   ROUTE_LANDING,
-  ROUTE_METHODS_FIVE_PRINCIPLES,
+  ROUTE_METHODS_PRINCIPLES,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -17,6 +17,7 @@ export const spoc = {
   `,
   landscape: {
     id: "landschaft",
+    tabName: "Überblick",
     headline: "Nationale Umsetzung der EU Interoperabilitätsverordnung",
     content: dedent`
       Seit Anfang 2025 muss die Verordnung für ein interoperables Europa ([2024/903](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903)) in den EU Mitgliedstaaten verpflichtend umgesetzt werden.
@@ -122,7 +123,7 @@ export const spoc = {
         },
         content: dedent`
           **Entwicklung angepasster Prinzipien und Methoden**
-          - Derzeit entwickeln wir die [5 Prinzipien für Digitaltaugliche Gesetzgebung](${ROUTE_METHODS_FIVE_PRINCIPLES.url}) weiter. Zukünftig werden diese die vier Interoperabilitätsebenen noch konkreter herausstellen. Darauf aufbauend werden wir die Erarbeitungsmethoden anpassen. Ziel ist es, den gesamten Entwicklungsprozess effizienter und zielgerichteter zu gestalten.
+          - Derzeit entwickeln wir die [5 Prinzipien für Digitaltaugliche Gesetzgebung](${ROUTE_METHODS_PRINCIPLES.url}) weiter. Zukünftig werden diese die vier Interoperabilitätsebenen noch konkreter herausstellen. Darauf aufbauend werden wir die Erarbeitungsmethoden anpassen. Ziel ist es, den gesamten Entwicklungsprozess effizienter und zielgerichteter zu gestalten.
         `,
         image: {
           url: "/images/synthese-prozess-digitalcheck-und-interoperabilitaet.png",
@@ -134,6 +135,7 @@ export const spoc = {
   },
   states: {
     id: "landesebene",
+    tabName: "Digitalcheck nachnutzen",
     headline:
       "Den Digitalcheck mit Interoperabilitätsanforderungen auf Landesebene nutzen",
     sections: [
@@ -151,6 +153,7 @@ export const spoc = {
   },
   contact: {
     id: "kontakt",
+    tabName: "Service & Kontakt",
     headline: "Service und Kontakt",
     sections: [
       {

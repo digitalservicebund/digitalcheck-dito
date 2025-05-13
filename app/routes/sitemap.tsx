@@ -4,49 +4,40 @@ import { type MetaArgs, useLoaderData } from "react-router";
 import Background from "~/components/Background";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
-import allRoutes from "~/resources/allRoutes";
-import { ROUTE_SITEMAP } from "~/resources/staticRoutes";
+import { Route, ROUTE_SITEMAP, ROUTES } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
-import type { Route } from "./+types/sitemap";
 
-interface Route {
-  url: string;
-  title: string;
-  parent?: string;
-  children?: Route[];
-}
+export const meta = ({ matches }: MetaArgs) => {
+  return prependMetaTitle(ROUTE_SITEMAP.title, matches);
+};
 
-const groupRoutesByParent = (routes: Route[]): Route[] => {
-  const routeMap = new Map<string, Route>();
+type RouteWithChildren = Route & {
+  children: RouteWithChildren[];
+};
 
-  routes.forEach((route) => {
-    routeMap.set(route.url, { ...route, children: [] });
-  });
+const groupRoutesByParent = (routes: Route[]): RouteWithChildren[] => {
+  const routeMap = new Map<string, RouteWithChildren>(
+    routes.map((route) => [route.url, { ...route, children: [] }]),
+  );
 
   routes.forEach((route) => {
-    if (route.parent) {
-      const parentRoute = routeMap.get(route.parent);
-      if (parentRoute) {
-        parentRoute.children?.push(routeMap.get(route.url)!);
-      }
+    const parentRoute = routeMap.get(route.parent?.url ?? "");
+    if (parentRoute) {
+      parentRoute.children.push(routeMap.get(route.url)!);
     }
   });
 
   return Array.from(routeMap.values()).filter((route) => !route.parent);
 };
 
-export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_SITEMAP.title, matches);
-};
-
 export const loader = () => {
-  return groupRoutesByParent(allRoutes as Route[]);
+  return groupRoutesByParent(ROUTES);
 };
 
 export default function Sitemap(): ReactNode {
-  const urls = useLoaderData<Route[]>();
+  const routes = useLoaderData<typeof loader>();
 
-  const renderRoutes = (routes: Route[]): ReactNode => (
+  const renderRoutes = (routes: RouteWithChildren[]): ReactNode => (
     // [&_li>ul] styles the nested ul elements
     <ul className="list-unstyled [&_li>ul]:ml-8 [&_li>ul]:border-l [&_li>ul]:border-gray-400 [&_li>ul]:pl-8">
       {routes.map((route) => (
@@ -74,7 +65,7 @@ export default function Sitemap(): ReactNode {
           />
         </Container>
       </Background>
-      <Container>{renderRoutes(urls)}</Container>
+      <Container>{renderRoutes(routes)}</Container>
     </>
   );
 }

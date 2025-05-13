@@ -5,7 +5,7 @@ import { feedbackFormular } from "~/resources/content/components/feedback-formul
 import { steps } from "~/resources/content/components/naechste-schritte";
 import {
   ROUTE_METHODS_COLLECT_IT_SYSTEMS,
-  ROUTE_METHODS_FIVE_PRINCIPLES,
+  ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
   ROUTE_METHODS_TASKS_PROCESSES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
@@ -127,7 +127,7 @@ export const methods = {
         buttons: [
           {
             text: "Fünf Prinzipien nutzen",
-            href: ROUTE_METHODS_FIVE_PRINCIPLES.url,
+            href: ROUTE_METHODS_PRINCIPLES.url,
           },
         ],
       },

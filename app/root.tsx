@@ -1,10 +1,8 @@
-import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
 import { marked, type Tokens } from "marked";
 import React, { type ReactNode, useEffect, useRef } from "react";
 import {
   type HeadersFunction,
   isRouteErrorResponse,
-  Link,
   Links,
   type LinksFunction,
   Meta,
@@ -17,15 +15,12 @@ import {
   useRouteLoaderData,
 } from "react-router";
 
-import Background from "~/components/Background";
-import Breadcrumbs from "~/components/Breadcrumbs";
 import Button from "~/components/Button";
 import Container from "~/components/Container";
 import Footer from "~/components/Footer";
 import Heading from "~/components/Heading";
+import PageHeader from "~/components/PageHeader";
 import RichText from "~/components/RichText";
-import routes from "~/resources/allRoutes";
-import { header } from "~/resources/content/components/header";
 import { siteMeta } from "~/resources/content/shared/meta";
 import {
   ROUTE_A11Y,
@@ -57,7 +52,9 @@ export function loader({ request }: Route.LoaderArgs) {
     BASE_URL,
     PLAUSIBLE_DOMAIN,
     PLAUSIBLE_SCRIPT,
-    trackingDisabled: process.env.TRACKING_DISABLED === "true",
+    trackingDisabled:
+      process.env.TRACKING_DISABLED === "true" ||
+      process.env.NODE_ENV === "development",
     featureFlags,
   };
 }
@@ -177,10 +174,13 @@ export function ScrollAndFocus() {
   const mainRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
-    requestAnimationFrame(() => {
-      mainRef.current?.focus();
-    });
+    if (!window.location.hash) {
+      // If we are not scrolling to a hash section, scroll to top and focus main element
+      window.scrollTo({ top: 0, behavior: "instant" });
+      requestAnimationFrame(() => {
+        mainRef.current?.focus();
+      });
+    }
   }, [pathname]);
 
   return (
@@ -230,48 +230,6 @@ const footerLinks = [
   },
   { url: ROUTE_SITEMAP.url, text: "Sitemap" },
 ];
-
-const PageHeader = ({
-  includeBreadcrumbs = true,
-}: {
-  includeBreadcrumbs?: boolean;
-}) => (
-  <header>
-    <div className="flex min-h-64 items-center justify-between p-16">
-      <Link to={ROUTE_LANDING.url}>
-        <img src="/logo/bund-logo.png" alt="Logo des Bundes" width={54} />
-      </Link>
-      <div className="flex items-center max-lg:hidden">
-        <div className="text-lg">
-          <span className="font-bold">{header.title}</span>
-          <span className="mx-8">|</span>
-          <Button href="/unterstuetzung" look="link">
-            Unterstützungsangebote
-          </Button>
-          <span className="mx-8">|</span>
-          {header.contact.msg}
-        </div>
-        <PhoneOutlined className="mx-8" />
-        <a
-          href={`tel:${header.contact.number}`}
-          className="plausible-event-name=Phone+Click plausible-event-position=header ds-link-01-bold"
-        >
-          {header.contact.number}
-        </a>
-      </div>
-      <div className="lg:hidden">
-        <a href="/unterstuetzung" className="ds-link-01-bold">
-          Kontakt & Unterstützung
-        </a>
-      </div>
-    </div>
-    {includeBreadcrumbs && (
-      <Background backgroundColor="blue">
-        <Breadcrumbs breadcrumbs={routes} useIconForHome />
-      </Background>
-    )}
-  </header>
-);
 
 function Document({
   children,

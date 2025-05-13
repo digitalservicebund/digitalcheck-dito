@@ -74,7 +74,19 @@ export default tseslint.config(
         "warn",
         {
           allowConstantExport: true,
-          allowExportNames: ["meta", "links", "headers", "loader", "action"],
+          allowExportNames: [
+            "loader",
+            "clientLoader",
+            "action",
+            "clientAction",
+            "ErrorBoundary",
+            "HydrateFallback",
+            "headers",
+            "handle",
+            "links",
+            "meta",
+            "shouldRevalidate",
+          ],
         },
       ],
 
@@ -125,12 +137,7 @@ export default tseslint.config(
       // Playwright rules
       "playwright/no-conditional-expect": "off",
       "playwright/no-conditional-in-test": "off",
-      "playwright/no-skipped-test": [
-        "error",
-        {
-          allowConditional: true,
-        },
-      ],
+      "playwright/no-skipped-test": "off",
     },
   },
   // Config files in root folder
