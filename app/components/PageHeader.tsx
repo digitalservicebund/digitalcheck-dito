@@ -139,7 +139,7 @@ const PageHeader = ({
           aria-hidden="true"
         />
       )}
-      <header className="relative" ref={headerRef}>
+      <header className="relative" ref={headerRef} id="page-header">
         <div className="relative z-30 flex h-[72px] justify-between bg-white pl-16 lg:px-16">
           {/* Logo and title */}
           <div className="flex items-center space-x-8">
