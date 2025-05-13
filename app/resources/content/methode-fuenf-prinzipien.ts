@@ -12,86 +12,103 @@ export const methodsFivePrinciples = {
       label: "Prinzip",
       title: "Digitale Angebote für alle",
       description:
-        "Bürgerinnen und Bürger, Mitarbeitende in Unternehmen und der Verwaltung sind an digitale Kommunikation gewöhnt und bevorzugen diese – sofern sie gut umgesetzt ist und ihren Bedürfnissen entspricht. Normadressat:innen können sie schnell und einfach nutzen, und auch die Verwaltung kann die Daten schneller bearbeiten, prüfen und dokumentieren. Digitale Kommunikation sollte dabei immer inklusiv sein und ggf. benötigt es analoge Alternativen.",
+        "Viele Bürgerinnen, Bürger und Unternehmen sind an digitale Kommunikation gewöhnt und bevorzugen diese – sofern sie gut umgesetzt ist und ihren Bedürfnissen entspricht. Auch die Verwaltung kann digitale Daten schneller prüfen, bearbeiten und dokumentieren. Digitale Kommunikation sollte dabei immer inklusiv sein und braucht ggf. analoge Alternativen.",
       implementation: [
         {
           action: "Ermöglichen Sie digitale Kommunikation",
           description:
-            "Bürgerinnen und Bürger sind digitale Angebote gewohnt. Nutzerfreundliche, niedrigschwellige Dienste erfüllen ihre Erwartungen und machen ihnen das Leben leichter.",
+            "Bürgerinnen und Bürger sind digitale Angebote gewohnt. Nutzerfreundliche, niedrigschwellige Dienste erfüllen ihre Erwartungen und machen ihnen das Leben leichter. Denken Sie auch an Bürgerinnen und Bürger, die keine digitalen Angebote nutzen können oder wollen. Richten Sie Alternativen ein. Für Unternehmen kann digitale Kommunikation vorgeschrieben werden.",
           questions: [
             "Enthält die Regelung Schriftformerfordernisse oder erfordert persönliches Erscheinen?",
-            "Können Vorlage- durch Vorhaltepflichten ersetzt werden?",
-            "Wie werden die Informationen weiterverarbeitet?",
+            "Kann auf das Einreichen von Dokumenten verzichtet werden? Kann eine Vorlagepflicht durch eine Vorhaltepflicht ersetzt werden?",
+            "Kann weiterhin anderweitig (schriftlich, telefonisch, persönlich) kommuniziert werden?",
           ],
         },
         {
           action: "Formulieren Sie die Regelung technologieoffen",
           description:
-            "Bestimmte Technologien können schnell nicht mehr dem Stand der Technik entsprechen und so nicht weiter genutzt werden. Andererseits kann es die Umsetzung erleichtern und zur einfacheren Nutzung führen, auf etablierte Basisdienste zurückzugreifen.",
+            "Wenn Sie Übertragungswege – wie DE-Mail oder PDF – festlegen, riskieren Sie, dass Ihre Regelung bald nicht mehr dem Stand der Technik entspricht. Andererseits kann es die Umsetzung erleichtern und zur einfacheren Nutzung führen, auf etablierte Basisdienste zurückzugreifen (Prinzip Effiziente Umsetzung mit etablierten Technologien). Hier kommt es auf den Einzelfall an.",
           questions: [
-            "Haben Sie spezifische Technologien festgeschrieben?",
-            "Können Sie auf etablierte Lösungen zurückgreifen, sogenannte Basisdienste (s. Prinzip „Effiziente Umsetzung mit etablierten Technologien“)?",
+            "Können Sie auf die Nennung spezifischer Technologien verzichten?",
+            "Können Sie auf etablierte Lösungen zurückgreifen, sogenannte Basisdienste?",
           ],
           wording:
-            "„Der Antrag ist elektronisch oder schriftlich zu stellen“, oder „Der Antrag ist zu stellen“.",
+            '"Der Antrag ist elektronisch oder schriftlich zu stellen", oder "Der Antrag ist zu stellen".',
         },
         {
-          action: "Denken Sie über die digitale Antragstellung hinaus",
+          action: "Denken Sie an Antragsstellung, Bearbeitung und Bescheid",
           description:
-            "Digitale Kommunikation führt zu Daten, die direkt digital weiterverarbeitet werden können. Das spart Zeit, weil Informationen nicht eingescannt oder abgetippt werden müssen. Digitale Oberflächen, die zusätzliche Hilfestellungen und Fehlerkontrollen enthalten, erhöhen die Qualität der Daten.",
+            "Digitale Angebote führen zu Daten, die direkt digital weiterverarbeitet werden können. Das spart Zeit, weil Informationen nicht eingescannt oder abgetippt werden müssen. Digitale Oberflächen, die für Nutzende zusätzliche Hilfestellungen und Fehlerkontrollen enthalten, erhöhen die Qualität der Daten. Sogenannte Plausibilitätsprüfungen kontrollieren zum Beispiel, ob Ort und Postleitzahl zusammenpassen oder ob ein angegebener Zeitraum antragsberechtigt ist.",
           questions: [
-            "Wer übermittelt im Zuge der Regelung Informationen wie an wen? Beachtet die Regelung auch Kommunikation zwischen Behörden oder Unternehmen?",
-            "Können verwaltungsinterne Medienbrüche ausgeräumt werden? Welche Technologien und Verfahren nutzt die umsetzenden Behörden?",
+            "Wer übermittelt Informationen wie an wen? Beachtet die Regelung auch verwaltungsinterne Kommunikation oder Austausch zwischen Behörden und Unternehmen?",
+            "Wie können verwaltungsinterne Medienbrüche ausgeräumt oder Prozesse vereinfacht werden? Welche Technologien und Verfahren nutzt die umsetzende Behörde bei der Bearbeitung?",
             "Kann die Datenqualität durch automatische Kontrollen erhöht werden?",
+            "Können Daten digital statt analog aufbewahrt werden?",
           ],
         },
         {
-          action:
-            "Denken Sie Barrierefreiheit und Nutzerfreundlichkeit von Anfang an mit",
+          action: "Denken Sie Barrierefreiheit von Anfang an mit",
           description:
-            "Digitale Angebote lassen sich durch einfache Sprache, Mehrsprachigkeit oder andere Maßnahmen für Barrierefreiheit stärker auf die Bedürfnisse der Menschen zuschneiden. Denken Sie auch an die Bürgerinnen und Bürger, die keine digitalen Angebote nutzen können oder wollen. Richten Sie Alternativen ein. Für Unternehmen kann digitale Kommunikation vorgeschrieben werden.",
+            "Digitale Angebote müssen nach § 12 a Behindertengleichstellungsgesetz barrierefrei sein. Barrierefrei bedeutet, dass Menschen mit und ohne Behinderung das Angebot in gleicher Weise nutzen können. Da es viele unterschiedliche Arten von Behinderungen gibt, müssen viele Aspekte beachtet werden. Etwa die Aufbereitung für blinde und sehbehinderte Menschen oder Angebote in Deutscher Gebärdensprache oder Leichter Sprache.",
           questions: [
-            "Kann weiterhin anderweitig (schriftlich, telefonisch, persönlich) kommuniziert werden?",
+            "Welche Regelwerke für die Umsetzung digitaler Barrierefreiheit sind für Ihr Vorhaben relevant? Nutzen Sie dafür beispielsweise den Standardanforderungskatalog.",
+            "Haben Sie die Bedürfnisse von Menschen mit unterschiedlichen Arten von Behinderungen berücksichtigt?",
+          ],
+          wording:
+            '"Die Beratung erfolgt in einer für den Leistungsberechtigten wahrnehmbaren Form" (§ 106 Abs. 1 SGB IX). So eine Formulierung muss in einer Verordnung ausdefiniert werden.',
+        },
+        {
+          action: "Stellen Sie eine nutzerfreundliche Umsetzung sicher",
+          description:
+            "Barrierearme Angebote sind oft auch nutzerfreundlicher. Darüberhinaus macht eine nutzerzentrierte Entwicklung, die z. B. in kleinen Schritten agiert und Texte in einfacher Sprache oder mehrsprachig gestaltet, ihr Angebot zugänglicher.",
+          questions: [
+            "Was ist die wichtigste Aufgabe aus Sicht der Nutzenden?",
             "Wenden die umsetzenden Akteure den Servicestandard an? Dieser stellt eine nutzerzentrierte Entwicklung sicher.",
           ],
-          wording:
-            "„Die Beratung erfolgt in einer für den Leistungsberechtigten wahrnehmbaren Form“ (§106 Abs. 1 SGB IX)",
         },
       ],
     },
     {
       label: "Prinzip",
-      title: "Rechtliche Konsistenz ermöglicht Datenwiederverwendung",
+      title: "Datenwiederverwendung durch einheitliches Recht",
       description:
-        "Daten wiederzuverwenden vermeidet Fehler und spart Zeit und Kosten auf Seiten der Normadressat:innen und umsetzenden Behörden. Die Grundlage dafür sind harmonisierte Rechtsbegriffe, ein datenschutz-konformer Austausch sowie technische Standards.",
+        "Normadressatinnen und -adressaten sowie umsetzende Behörden sparen Kosten und Zeit, wenn das Once-Only-Prinzip konsequent angewendet wird – also wenn Daten nur einmal angeben und dann wiederverwendet werden. Die Grundlage dafür sind harmonisierte Rechtsbegriffe, ein datenschutzkonformer Austausch und die Berücksichtigung etablierter technischer Standards.",
       implementation: [
         {
           action: "Nutzen Sie harmonisierte Rechtsbegriffe",
           description:
-            "Damit Daten wiederverwendet werden können, müssen sie die gleiche, inhaltliche Bedeutung haben, d.h. semantisch interoperabel sein. Dafür müssen die verwendeten Rechtsbegriffe harmonisch, d.h. einheitlich, verwendet werden. Möglicherweise müssen Sie die Begriffe sogar über einen Rechtsbereich hinaus harmonisieren. Hilfreich für die Umsetzung sind Taxonomien, kontrollierten Vokabularien, oder Thesauri.",
+            "Um wiederverwendet zu werden, müssen Daten die gleiche inhaltliche Bedeutung haben, d. h. semantisch interoperabel sein. Dafür müssen die Rechtsbegriffe einheitlich definiert und verwendet werden. Hilfreich für die Umsetzung sind Taxonomien, kontrollierte Vokabulare oder Thesauri.",
           questions: [
-            "Benutzen Sie innerhalb ihres Vorhabens Begriffe die einer Definition benötigen, wie z.B. „Einkommen“ oder „Kind“? Definieren Sie diese selbst oder nutzen sie ein bereits existierende Definition?",
-            "Haben diese Begriffe innerhalb und außerhalb ihres Rechtsbereichs die gleiche Bedeutung? Ist eine übergreifende Harmonisierung nötig?",
-            "Haben Sie ggf. auch die Konsistenz zu anderen EU-Regelwerken betrachtet?",
+            'Definieren Sie Begriffe, die in mehreren Regelungen vorkommen – wie z. B. "Einkommen" oder "Kind" –, selbst oder nutzen Sie eine bestehende Definition? Nutzen Sie Codelists, Vokabulare oder ähnliches, um eine einheitliche Verwendung sicherzustellen.',
+            "Haben diese Begriffe innerhalb und außerhalb Ihres Rechtsbereichs die gleiche Bedeutung? Ist eine übergreifende Harmonisierung nötig?",
+            "Haben Sie die Konsistenz zu Regelwerken der EU und von anderen EU-Staaten betrachtet?",
           ],
         },
         {
-          action: "Stellen Sie die Wiederverwendung von Daten sicher",
+          action: "Nutzen Sie existierende Daten",
           description:
-            "Bevor Daten neu erhoben werden, sollten Sie überprüfen, ob diese schon an anderer Stelle zur Verfügung stehen und genutzt werden können. Für einen möglichen Datenaustausch zwischen Behörden muss dann eine geeignete Rechtsgrundlage geschaffen werden. Müssen neue Daten erhoben werden, sollten Überlegungen angestellt werden, wie man Hürden für eine spätere Wiederverwendung der Daten abbaut.",
+            "Überprüfen Sie, ob Daten schon an anderer Stelle zur Verfügung stehen und genutzt werden können. Optimalerweise wird auf die Originaldaten zugegriffen, statt diese zu kopieren. Für einen Datenaustausch zwischen Behörden müssen Sie dann eine geeignete Rechtsgrundlage schaffen.",
           questions: [
-            "Welche Daten existieren schon in der Verwaltung und können wiederverwendet werden? Können öffentliche Daten verwendet werden? Recherchieren Sie auf verwaltungsdaten-informationsplattform.de oder GovData.de.",
-            "Genügen die Daten Anforderungen an Qualität und Aktualität oder sollten Kontrolldaten erhoben werden?",
-            "Sind die Voraussetzungen des Datenschutzes beachtet? Nutzen Sie frühzeitig Kontakt zu entsprechenden Behörde oder Ansprechpersonen im Haus.",
-            "Stehen der transeuropäischen (Nach-)nutzung der Daten rechtliche Beschränkungen im Weg? Gibt es klare, passende Lizenzmodelle?",
+            "Können existierende verwaltungsinterne oder öffentliche Daten wiederverwendet werden? Recherchieren Sie u. a. auf verwaltungsdaten-informationsplattform.de oder GovData.de.",
+            "Genügen die Daten den Anforderungen an Qualität und Aktualität oder sollten Kontrolldaten erhoben werden? Stehen Löschfristen einer Nachnutzung im Wege?",
+          ],
+        },
+        {
+          action: "Machen Sie erhobene Daten für andere nutzbar",
+          description:
+            "Müssen neue Daten erhoben werden, sollten Sie eine Nachnutzung dieser Daten ermöglichen.",
+          questions: [
+            "Stehen der Nachnutzung der Daten rechtliche Beschränkungen im Weg? Können erhobene Daten sogar öffentlich geteilt werden?",
+            "Wie werden die Daten verwaltet? Sind Verantwortlichkeiten klar?",
+            "Ist ein transeuropäischer Datenaustausch möglich? Gibt es passende Lizenzmodelle?",
           ],
         },
         {
           action: "Nutzen Sie bestehende technische Standards",
           description:
-            "Nutzen Sie geeignete technische Standards, wie z.B. Datenaustauschformate, um den Austausch zwischen IT-Systemen zu begünstigen. Möglicherweise ist es sinnvoll, diese in der Regelung vorzuschreiben.",
+            "Nutzen Sie geeignete technische Standards, wie z. B. Datenaustauschformate, um den Austausch zwischen IT-Systemen zu begünstigen. Möglicherweise ist es sinnvoll, diese in der Regelung vorzuschreiben.",
           questions: [
-            "Welche Standards für die Daten existieren bereits oder muss ggf. ein neuer entwickelt werden?",
+            "Welche Datenformate existieren bereits? Muss ggf. ein neuer Standard entwickelt werden?",
             "Wurde beachtet, wie die Daten übertragen werden sollen?",
           ],
         },
@@ -99,79 +116,83 @@ export const methodsFivePrinciples = {
     },
     {
       label: "Prinzip",
-      title: "Effiziente Umsetzung mit etablierten Technologien",
+      title: "Etablierte Technologien ermöglichen effiziente Umsetzung",
       description:
-        "Digitale Angebote können schneller bereitgestellt und günstiger entwickelt und betrieben werden, wenn auf Bestehendes aufgebaut wird. Offene, standardisierte Schnittstellen und Open-Source erhöhen die Sicherheit der Angebote und fördern die Interoperabilität.",
+        "Digitale Angebote können schneller bereitgestellt und günstiger entwickelt und betrieben werden, wenn sie auf bestehenden Technologien aufbauen. Offene, standardisierte Schnittstellen und Open-Source erhöhen die Sicherheit der Angebote und fördern die Interoperabilität.",
       implementation: [
         {
           action:
-            "Schreiben Sie die Nutzung etablierter, öffentlicher Technologien vor",
+            "Ermöglichen Sie die Nutzung etablierter, öffentlicher Lösungen",
           description:
-            "Diese technischen Lösungen sind z.B. öffentliche Basisdienste, Softwarearchitekturen oder Komponentenbibliotheken. Ihre Wiederverwendung spart Zeit und verringert den Erfüllungsaufwand für Entwicklung und Betrieb. Darüberhinaus verbessert die Nutzung einheitlicher Systeme die Zusammenarbeit zwischen Behörden und vertraute Benutzeroberflächen vereinfachen die Bedienung.",
+            "Lösungen sind u. a. öffentliche Basisdienste, Softwarearchitekturen oder Komponentenbibliotheken. Eine Übersicht finden Sie im Rahmen des OZG. Die Wiederverwendung existierender Lösungen spart Zeit und verringert den Erfüllungsaufwand für Entwicklung und Betrieb. Einheitliche Systeme, wie z. B. ein nationales Postfach, sind für Nutzende oft einfacher zu bedienen und erleichtern die Zusammenarbeit zwischen Behörden.",
           questions: [
-            "Existieren für die beschriebenen digitalen Prozesse bereits etablierte, technische Lösungen? Werden diese genutzt bzw. ermöglicht das Gesetz den einfachen Anschluss an bereits vorhandene digitale Systeme?",
-            "Werden europäische Standards wie eIDAS beachtet?",
-            "Wurde untersucht, ob bereits existierende europäische Interoperabilitätslösungen wiederverwendet werden könnten?",
+            "Wie viel Vorlauf brauchen beteiligte Unternehmen, um IT-Systeme anzupassen oder umzustellen?",
+            "Wie ist die Erfahrung mit existierenden Systemen? Bietet es sich an, im selben Zug IT-Verfahren zu modernisieren? Wie können alle Beteiligten davon profitieren?",
           ],
         },
         {
           action:
             "Bevorzugen Sie Open-Source-Software und offene Spezifikationen",
           description:
-            "Wo möglich, sollten Open-Source-Software und offenen Spezifikationen bevorzugt werden oder neue Technologien quelloffen entwickelt werden, um Transparenz und Wiederverwendbarkeit zu stärken. Dies ermöglicht die Nachvollziehbarkeit einer Lösung und verhindert “Lock-in” Effekte.",
+            "Open-Source bedeutet, dass der Quellcode eines IT-Systems veröffentlicht ist. Offene Spezifikationen beschreiben öffentlich, was ein IT-System genau leistet. Beide stärken Transparenz und Wiederverwendbarkeit (vgl. Koalitionsvertrag 18. Legislaturperiode oder Servicestandard). Dies ermöglicht die Nachvollziehbarkeit der technischen Lösung und verhindert die Abhängigkeit zu einzelnen Software-Anbietern. Weitere Informationen erhalten Sie beim Zentrum für digitale Souveränität.",
           questions: [
-            "Wird der Einsatz von Open-Source ermöglicht und gefördert?",
-            "Wird ggf. bei Neuentwicklung quelloffenheit vorgeschrieben?",
+            "Wird der Einsatz von Open-Source-Software ermöglicht und gefördert?",
+            "Werden ggf. bei Neuentwicklung Quelloffenheit und offene Spezifikationen vorgeschrieben?",
           ],
         },
       ],
     },
     {
       label: "Prinzip",
-      title: "Eindeutige Regelungen und Automatisierung",
+      title: "Automatisierung braucht eindeutige Regelungen",
       description:
-        "Logische und verständliche Regelungen und transparente Verfahren erleichtern den Zugang zum Recht und stärken das Vertrauen in den Staat. Sie bilden die Grundlage für (teil-)automatisierte Prozesse. Einmal abgestimmt und aufgesetzt, sparen einheitliche Rechtsbegriffe, klare Entscheidungsstrukturen und die dadurch ermöglichte (Teil-)Automatisierung Zeit und Geld auf Seiten der Normadressaten und der Verwaltung. Diese Ressourcen können genutzt werden, um kritischere Einzelfälle zu bearbeiten oder Normadressat:innen zu beraten.",
+        "Logische und verständliche Regelungen und transparente Verfahren erleichtern den Zugang zum Recht und stärken das Vertrauen in den Staat. Einfachheit und verständliche Sprache sind durch die GGO und das Handbuch der Rechtsförmlichkeit vorgeschrieben. Klarheit und Logik bilden die Grundlage für automatisierte Prozesse. Wenn Begriffe eindeutig definiert sowie Entscheidungsstrukturen bestimmt sind, können Regeln und klare Ausnahmen automatisiert werden. Das spart Zeit auf Seiten der Nutzenden und der Verwaltung. Mit diesen Ressourcen können kritischere Einzelfälle bearbeitet oder Normadressatinnen und -adressaten beraten werden.",
       implementation: [
         {
-          action: "Schreiben Sie einfach, eindeutig und konsistent",
+          action: "Beachten Sie bestehende Prozesse und Verantwortlichkeiten",
           description:
-            "Logische Konsistenz und präzise Sprache ist eine notwendige Bedingung für die Automatisierung. Dass eine Regelung eindeutig ist, kann auch einen längeren Regelungstext bedeuten.",
+            "Um eine effektive Umsetzung zu gewährleisten, sollten existierende Prozesse und Verantwortlichkeiten beachtet und, wenn möglich, angeglichen werden. Dabei helfen Ihnen Visualisierungen.",
           questions: [
-            "Falls ein Verwaltungsprozess betroffen ist: Lassen sich die Teilschritte in einer chronologische Reihenfolge abbilden?",
-            "Basieren Entscheidungslogiken auf objektiven Kriterien basieren? Sind sie widerspruchsfrei?",
+            "Gibt es bereits Prozess-Visualisierungen im FIM-Portal, auf denen Sie aufsetzen können?",
+            "Haben Sie bestehende Prozesse in Deutschland und anderen EU-Mitgliedsstaaten berücksichtigt?",
+            "Bekommt oder verliert eine Behörde Kompentenzen? Wie wirkt sich das aus?",
+            "Können bestehende Prozesse vereinfacht werden?",
+            "Falls ein Verwaltungsprozess betroffen ist: Lassen sich die Teilschritte in einer chronologischen Reihenfolge abbilden?",
+          ],
+        },
+        {
+          action: "Nutzen Sie das Potenzial von Automatisierung",
+          description:
+            "Automatisierung wirkt sich besonders effizienzsteigernd auf Prozesse mit großen Bearbeitungsfallzahlen aus, die als gebundene Entscheidungen geregelt werden können.",
+          questions: [
+            "Wie groß ist die erwartete Fallzahl pro Jahr? Sind in den umsetzenden Behörden genug Ressourcen vorhanden, um z. B. Anträge fristgerecht zu bearbeiten?",
+            "Gibt es bereits Vorschläge für Automatisierungspotenziale aus der Umsetzung?",
+            "Handelt es sich um eine gebundene Entscheidung?",
+            "Erlaubt die Regelung eine automatisierte Fallbearbeitung?",
+            "Ist ein komplett antragsloses Verfahren möglich? Beachten Sie hierfür auch das Prinzip Datenwiederverwendung durch einheitliches Recht.",
           ],
         },
         {
           action:
-            "Verzichten Sie möglichst auf Ausnahmen und Ermessensspielraum",
+            "Unterscheiden Sie zwischen genereller Regel, Ausnahmen und Ermessensspielräumen",
           description:
-            "Es sollte möglichst auf Ausnahmen und Ermessensspielräume verzichtet werden, außer diese führen zu einer gerechteren Regelung. ",
+            "Sachverhalte sollten durch das Zusammenspiel von Gesetzen und Verordnungen möglichst abschließend geregelt werden. Finden Sie die Balance zwischen notwendigen Ausnahmen für eine gerechte Regelung, Spielraum in der Umsetzung und klar geregelten Prozessen, die sich gut digitalisieren lassen.",
           questions: [
-            "Wird in der Regelung klar zwischen grundlegender Regel und Ausnahmen unterschieden?",
-            "Sind verbleibende Ermessensspielräume unabdingbar?",
-            "Ist trotz Ermessensspielräumen noch eine Teilautomatisierung einiger Prozessschritte möglich?",
+            "Basieren Entscheidungslogiken auf objektiven Kriterien?",
             "Können Pauschalen die Regelung und Umsetzung vereinfachen?",
-            "Sind in den umsetzenden Behörden genug Ressourcen vorhanden, um z.B. Anträge fristgerecht zu bearbeiten?",
+            "Wird in der Regelung klar zwischen grundlegender Regel und Ausnahmen unterschieden? Sind die Ausnahmen klar definiert?",
+            "Sind Ermessensspielräume nötig? Ist trotz Ermessensspielräumen eine Automatisierung anderer Prozessschritte möglich?",
+            "Ist es möglich für Ermessensspielräume Fallgruppen in Richtlinien o. ä. zu definieren?",
           ],
         },
         {
-          action: "Beachten Sie bestehende Prozesse und Verantwortlichkeiten",
+          action: "Schreiben Sie einfach, eindeutig und widerspruchsfrei",
           description:
-            "Um eine effektive Umsetzung zu gewährleisten, sollten existierende Prozesse und Verantwortlichkeiten beachtet werden.",
+            "Logische Konsistenz und präzise Sprache sind notwendige Bedingungen für die Automatisierung der Umsetzung. Dass eine Regelung eindeutig formuliert ist, kann auch einen längeren Regelungstext zur Folge haben.",
           questions: [
-            "Führt die verbindliche Anforderung zur Angleichung von Verwaltungsprozessen oder Verantwortlichkeiten?",
-            "Bekommt eine Behörde mehr/weniger Kompetenzen und wie wirkt sich das aus?",
-          ],
-        },
-        {
-          action: "Ermöglichen Sie Automatisierung",
-          description:
-            "Für eine automatische Bearbeitung muss eine geeignete Rechtsgrundlage geschaffen werden. Geeignete Anwendungsfälle, bei denen Automatisierung vor allem möglich gemacht werden sollte, sind gebundene Entscheidungen und Prozesse mit großen Bearbeitungsfallzahlen.",
-          questions: [
-            "Handelt es sich um eine gebundene Entscheidung?",
-            "Wie groß ist die erwartete Fallzahl pro Jahr?",
-            "Erlaubt die Regelung eine automatisierte Fallbearbeitung? Ist ein komplett antragloses Verfahren möglich?",
-            "Sind Anforderungen an den Datenschutz eingehalten?",
+            "Sind Begriffe und Abläufe eindeutig definiert?",
+            "Ist die Regelung möglichst einfach formuliert?",
+            "Sind Enscheidungslogiken widerspruchsfrei?",
           ],
         },
       ],
@@ -180,28 +201,29 @@ export const methodsFivePrinciples = {
       label: "Prinzip",
       title: "Datenschutz und Informationssicherheit schaffen Vertrauen",
       description:
-        "Wenn personenbezogene Daten und andere Informationen den ihnen gebührenden Schutz erhalten, schafft das Vertrauen in den Staat. Außerdem wird so die Gefahr von Missbrauch und negativen wirtschaftlichen oder sicherheitsrelevaten Konsequenzen verringert.",
+        "Alle Menschen haben ein Recht auf den Schutz ihrer Daten vor unbefugten Zugriffen. Der Schutz personenbezogener Daten ist in der DSGVO geregelt. Informationssicherheit umfasst alle Daten und wird je nach Bereich spezifiziert. Eine datenschutzkonforme Regelung erhebt nur das Minimum an Daten. Datensparksamkeit ist einfach umzusetzen und verringert den Erfüllungsaufwand. Wenn weniger Daten vorliegen, müssen auch weniger Informationen geschützt werden. Wenn Informationen den ihnen gebührenden Schutz erhalten, schafft das Vertrauen in den Staat. Die Gefahr von Missbrauch und negativen wirtschaftlichen oder sicherheitsrelevaten Konsequenzen wird verringert.",
       implementation: [
         {
           action: "Gewährleisten Sie den Datenschutz",
           description:
-            "Für den Datenschutz sind nur personenbezogene Daten relevant. Um sie zu erheben und zu verarbeiten, muss eine geeignete Rechtsgrundlage existieren. Wenn Ihre Regelung datensparsam ist, also möglichst wenig Daten erhebt, wird sie den Anforderungen des Datenschutzes gerecht und der Erfüllungsaufwand verringert.",
+            'Für den Datenschutz sind nur personenbezogene Daten relevant. Um diese zu verarbeiten, muss eine geeignete Rechtsgrundlage existieren. "Datenverarbeitung" umfasst u. a. das Erheben, Speichern, Abfragen, Übermitteln, Verknüpfen oder Löschen von Daten (s. Art. 4 Abs. 2 DSGVO). Tauschen Sie sich mit Ihren Datenschutzbeauftragten aus.',
           questions: [
-            "Werden personenbezogene Daten erhoben bzw. ausgetauscht? Sind diese besonders schützenswert, etwa Daten zur ethnischen Herkunft oder Gesundheitsdaten?",
-            "Werden nur notwendige Daten erhoben bzw. ausgetauscht?",
-            "Haben Sie die rechtliche Basis geschaffen, um Daten zu erheben, bzw. auszutauschen? Ist der Zweck der Datenerhebung dargelegt?",
-            "Werden veraltete Datenschutzbedürfnisse identifiziert und abgeschafft?",
-            "Genügt die Regelung den Anforderungen an den Datenschutz in allen beteiligten Ländern und Institutionen, ggf. auch auf EU-Ebene?",
+            "Werden personenbezogene Daten verarbeitet? Sind diese besonders schützenswert, etwa Daten zur ethnischen Herkunft oder Gesundheitsdaten?",
+            "Werden nur notwendige Daten verarbeitet?",
+            "Haben Sie die rechtliche Basis geschaffen, um Daten zu verarbeiten? Ist der Zweck der Datenverarbeitung dargelegt?",
+            "Können überholte Datenschutzbedürfnisse abgeschafft werden?",
+            "Genügt die Regelung den Anforderungen an den Datenschutz in allen beteiligten Ländern und Institutionen, ggf. auch in anderen EU-Staaten?",
           ],
         },
         {
           action: "Stellen Sie die Informationssicherheit sicher",
           description:
-            "Informationssicherheit betrifft alle Daten, vor allem wirtschafts- oder sicherheitsrelevante. Alle Daten müssen sicher gespeichert und übertragen werden. Hier sollten Empfehlungen des BSI befolgt werden. Dies erschwert den missbräuchlichen Zugriff, etwa zum Erschleichen von Leistungen.",
+            "Informationssicherheit betrifft alle Arten von Daten, vor allem wirtschafts- oder sicherheitsrelevante. Alle Daten müssen sicher gespeichert und übertragen werden. Dies erschwert den missbräuchlichen Zugriff, etwa zum Erschleichen von Leistungen. Folgen Sie den Empfehlungen des BSI.",
           questions: [
             "Werden eine geeignete, sichere Datenhaltung und sichere Übertragungswege vorgeschrieben?",
-            "Wurden Mittel vorgeschrieben, um Betrugsversuche zu erschweren?",
+            "Wurden Maßnahmen vorgeschrieben, um Betrugsversuche zu erschweren?",
             "Wurden veraltete Informationssicherheitsbedürfnisse identifiziert und abgeschafft?",
+            "Gibt es passende, anerkannte Nachweise oder Zertifizierungen, z. B. ISO 27001?",
           ],
         },
       ],
