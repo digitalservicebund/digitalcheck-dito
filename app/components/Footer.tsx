@@ -14,10 +14,6 @@ type LinkProps = {
 };
 
 export default function Footer() {
-  // const linksMiddleIndex = Math.ceil(links.length / 2);
-  // const linksFirstColumn: typeof links = links.slice(0, linksMiddleIndex);
-  // const linksSecondColumn: typeof links = links.slice(linksMiddleIndex);
-
   const renderLink = (link: LinkProps) => (
     <li key={link.url}>
       {link?.preText}{" "}
