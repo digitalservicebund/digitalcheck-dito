@@ -3,7 +3,6 @@ import Background from "~/components/Background";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
 import LinkListBox from "~/components/LinkListBox";
-import PrinciplesDisplay from "~/components/PrinciplesDisplay.tsx";
 import SupportBanner from "~/components/SupportBanner";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import { ROUTE_FUNDAMENTALS_PRINCIPLES } from "~/resources/staticRoutes";
@@ -40,14 +39,6 @@ export default function FundamentalsFivePrinciples() {
           />
         </Container>
       </Background>
-      {principlesToDisplay.map((principle, index) => (
-        <PrinciplesDisplay
-          key={slugify(principle.label)}
-          principle={principle}
-          index={index}
-          showInfoBoxButtons={false}
-        />
-      ))}
       <SupportBanner />
     </>
   );
