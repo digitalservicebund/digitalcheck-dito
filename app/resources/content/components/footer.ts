@@ -16,28 +16,19 @@ import {
 } from "~/resources/staticRoutes";
 
 export const footer = {
-  navLabel: "Seitenfußbereich",
   top: {
-    navLabel: "Schnellübersicht",
     supportOffer: {
       title: "Unterstützungsangebote Für bund, Länder, Kommunen und EU-Staaten",
       links: [
-        [
-          {
-            preText: "Support:",
-            text: "0151/40 76 78 39",
-            url: "tel:015140767839",
-          },
-
-          {
-            preText: " oder",
-            text: "digitalcheck@digitalservice.bund.de",
-            url: "mailto:digitalcheck@digitalservice.bund.de",
-          },
-        ],
+        {
+          preText: "Support:",
+          text: "0151/40 76 78 39",
+          url: "tel:015140767839",
+        },
         {
           text: "Alle Unterstützungsangebote",
           url: ROUTE_SUPPORT.url,
+          wrap: true,
         },
         {
           text: "Schulungen",
@@ -46,6 +37,7 @@ export const footer = {
         {
           text: "Nationale Kontaktstelle für ein interoperables Europa (2024/903 Art. 17)",
           url: ROUTE_INTEROPERABILITY_SPOC.url,
+          wrap: true,
         },
       ],
     },
@@ -56,14 +48,17 @@ export const footer = {
         {
           text: "1. Vorprüfung: Digitalbezug einschätzen",
           url: ROUTE_PRECHECK.url,
+          wrap: true,
         },
         {
           text: "2. Digitaltauglichkeit der Regelung sicherstellen",
           url: ROUTE_METHODS.url,
+          wrap: true,
         },
         {
           text: "3. Dokumentieren der Digitaltauglichkeit",
           url: ROUTE_DOCUMENTATION.url,
+          wrap: true,
         },
       ],
     },
@@ -74,10 +69,12 @@ export const footer = {
         {
           text: "Prinzipien der Digitaltauglichkeit",
           url: ROUTE_FUNDAMENTALS_PRINCIPLES.url,
+          wrap: true,
         },
         {
           text: "Übersicht der Werkzeuge und Methoden",
           url: ROUTE_FUNDAMENTALS_METHODS.url,
+          wrap: true,
         },
         {
           text: "EU-Interoperabilität",
@@ -101,7 +98,6 @@ export const footer = {
     },
   },
   middle: {
-    navLabel: "Sitemap",
     links: [
       { url: ROUTE_IMPRINT.url, text: "Impressum" },
       { url: ROUTE_PRIVACY.url, text: "Datenschutzerklärung" },
@@ -115,7 +111,6 @@ export const footer = {
     ],
   },
   bottom: {
-    navLabel: "Externe Verlinkungen",
     links: [
       {
         preText: "Ein Onlinedienst der",
