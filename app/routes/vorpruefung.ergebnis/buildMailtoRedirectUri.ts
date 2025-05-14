@@ -12,11 +12,16 @@ function resolveRecipients(result: PreCheckResult) {
   return `${emailTemplate.toNkr}${additionalRecipient}`;
 }
 
-function buildEmailBody(
+export function buildEmailBody(
   resultContent: ResultContent,
   negativeReasoning?: string,
+  vorhabenTitle?: string,
 ) {
-  let resultText: string = `${resultContent.title}\n\n\n`;
+  let resultText: string = vorhabenTitle
+    ? `Betreff des Vorhabens: ${vorhabenTitle}\n\n---\n\n`
+    : "";
+
+  resultText += `${resultContent.title}\n\n\n`;
 
   resultContent.reasoningList
     .filter((reasoning) => reasoning.reasons.length !== 0)

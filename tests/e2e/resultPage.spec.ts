@@ -1,5 +1,6 @@
 import { expect, type Page, test } from "@playwright/test";
 import { preCheck } from "~/resources/content/vorpruefung";
+import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis.ts";
 import {
   ROUTE_DOCUMENTATION,
   ROUTE_INTEROPERABILITY,
@@ -243,6 +244,16 @@ async function interceptMail(page: Page): Promise<Mail> {
 
   await page.getByRole("button", { name: "E-Mail erstellen" }).click();
   return interceptionPromise;
+}
+
+async function getEmailPreviewBodyFromPage(page: Page): Promise<string> {
+  const summaryElement = page.getByText(preCheckResult.form.previewLabel);
+  await expect(summaryElement).toBeVisible();
+  await summaryElement.click();
+  const emailPreviewContent = page.getByTestId("emailPreview");
+  await expect(emailPreviewContent).toBeVisible();
+  const textContent = await emailPreviewContent.textContent();
+  return textContent?.trim() ?? "";
 }
 
 // Generate tests for each scenario
@@ -611,6 +622,58 @@ for (const scenario of scenarios) {
         scenario.expected.emailBodyContains?.forEach((containedString) => {
           expect(body).toContain(containedString);
         });
+      });
+
+      test("can copy email address to clipboard", async () => {
+        const copyAddressButton = page.getByRole("button", {
+          name: preCheckResult.form.copyAddressButton.text,
+        });
+        await expect(copyAddressButton).toBeVisible();
+        await copyAddressButton.click();
+
+        await expect(
+          page.getByRole("button", {
+            name: preCheckResult.form.copyAddressButton.textCopied,
+          }),
+        ).toBeVisible();
+
+        const clipboardText = await page.evaluate(() =>
+          navigator.clipboard.readText(),
+        );
+        expect(clipboardText).toBe(preCheckResult.form.emailTemplate.toNkr);
+      });
+
+      test("can copy email content to clipboard", async () => {
+        const titleInputLocator = page.getByLabel("Arbeitstitel des Vorhabens");
+        const reasoningInputLocator = page.getByLabel("Begründung");
+
+        if (await titleInputLocator.isVisible()) {
+          await titleInputLocator.fill("Test title");
+        }
+        if (
+          scenario.expected.showsNegativeReasoning &&
+          (await reasoningInputLocator.isVisible())
+        ) {
+          await reasoningInputLocator.fill("Test Begründung");
+        }
+
+        const expectedEmailBodyFromUI = await getEmailPreviewBodyFromPage(page);
+
+        const copyContentButton = page.getByRole("button", {
+          name: preCheckResult.form.copyMailButton.text,
+        });
+        await expect(copyContentButton).toBeVisible();
+        await copyContentButton.click();
+
+        await expect(
+          page.getByRole("button", {
+            name: preCheckResult.form.copyMailButton.textCopied,
+          }),
+        ).toBeVisible();
+        const clipboardText = await page.evaluate(() =>
+          navigator.clipboard.readText(),
+        );
+        expect(clipboardText).toBe(expectedEmailBodyFromUI);
       });
     }
 

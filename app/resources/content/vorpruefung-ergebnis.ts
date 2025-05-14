@@ -90,6 +90,8 @@ export const preCheckResult = {
       - Falls Ihr Vorhaben Interoperabilitäts-Anforderungen erfüllt, lassen Sie das Digitalcheck-Team bitte im Kopie-Feld der E-Mail. Wir erhalten somit das Vorprüfungsergebnisses in Kopie und kontaktieren Sie für die nächsten Schritte. Bei Fragen können Sie uns auch direkt unter [0151/40 76 78 39](tel:+4915140767839) erreichen.<br/><br/> 
       - Je früher und tiefer Sie sich mit dem NKR über den Digitalbezug Ihres Regelungsvorhabens austauschen, desto schneller wird die Prüfung abgeschlossen.
     `,
+    previewLabel: "Vorschau der E-Mail Vorlage",
+    copyIntroText: dedent`**Alternativ** können Sie das Ergebnis der Vorprüfung einfach als Text kopieren und manuell an den NKR schicken oder bei Ihren Dokumenten speichern.`,
     emailLabel: "Ihre E-Mail Adresse (optional)",
     vorhabenTitleLabel: "Vorläufiger Arbeitstitel des Vorhabens",
     vorhabenTitleRequired: "Bitte geben Sie einen Titel für Ihr Vorhaben an.",
@@ -136,6 +138,14 @@ export const preCheckResult = {
     },
     downloadPdfButton: {
       text: "Als PDF-Datei herunterladen",
+    },
+    copyMailButton: {
+      text: "E-Mail Text kopieren",
+      textCopied: "Text Kopiert!",
+    },
+    copyAddressButton: {
+      text: "Empfänger Adresse kopieren",
+      textCopied: "Adresse kopiert!",
     },
     sendEmailButton: {
       text: "E-Mail erstellen",

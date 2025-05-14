@@ -1,5 +1,5 @@
 import { useForm } from "@rvf/react-router";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Alert from "~/components/Alert";
 import ButtonContainer from "~/components/ButtonContainer";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -10,9 +10,11 @@ import Textarea from "~/components/Textarea";
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
 import { features } from "~/resources/features";
 import type { PreCheckAnswers } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
+import { buildEmailBody } from "~/routes/vorpruefung.ergebnis/buildMailtoRedirectUri.ts";
 import getResultValidatorForAnswers from "~/routes/vorpruefung.ergebnis/resultValidation";
 import { useFeatureFlag } from "~/utils/featureFlags";
 import { PreCheckResult, ResultType } from "./PreCheckResult";
+import getContentForResult, { ResultContent } from "./getContentForResult";
 
 export default function ResultForm({
   result,
@@ -26,6 +28,11 @@ export default function ResultForm({
   const showSaveToPdf = useFeatureFlag(features.showSaveToPdfOption);
 
   const [showEmailAlert, setShowEmailAlert] = useState<boolean>(false);
+  const [warning, setWarning] = useState<string | null>(null);
+  const [emailPreviewBody, setEmailPreviewBody] = useState<string>("");
+  const [isMailBodyCopied, setIsMailBodyCopied] = useState<boolean>(false);
+  const [isMailAddressCopied, setIsMailAddressCopied] = useState(false);
+
   const form = useForm({
     validator: getResultValidatorForAnswers(answers),
     method: "post",
@@ -40,7 +47,6 @@ export default function ResultForm({
     setVorhabenTitle(event.target.value);
   };
 
-  const [warning, setWarning] = useState<string | null>(null);
   const handleNegativeReasoningChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
@@ -52,10 +58,42 @@ export default function ResultForm({
     }
   };
 
+  useEffect(() => {
+    const resultContent: ResultContent = getContentForResult(answers, result);
+    const currentVorhabenTitle = (form.value("title") as string) || "";
+    const currentNegativeReasoning =
+      (form.value("negativeReasoning") as string) || "";
+
+    const body = buildEmailBody(
+      resultContent,
+      currentNegativeReasoning,
+      currentVorhabenTitle,
+    );
+    setEmailPreviewBody(body);
+  }, [answers, result, form]);
+
+  const handleCopyEmailBody = async () => {
+    if (navigator.clipboard && emailPreviewBody) {
+      await navigator.clipboard.writeText(emailPreviewBody);
+      setIsMailBodyCopied(true);
+      setTimeout(() => {
+        setIsMailBodyCopied(false);
+      }, 2000); // Hide Kopiert message after 2 seconds
+    }
+  };
+
+  const handleCopyMailAddress = async () => {
+    await navigator.clipboard.writeText(
+      preCheckResult.form.emailTemplate.toNkr,
+    );
+    setIsMailAddressCopied(true);
+    setTimeout(() => setIsMailAddressCopied(false), 2000); // Hide Kopiert message after 2 seconds
+  };
+
   return (
     <>
       <form {...form.getFormProps()} data-testid="result-form">
-        <fieldset className="ds-stack ds-stack-32">
+        <fieldset className="ds-stack ds-stack-24">
           <legend>
             <Heading tagName="h2" text={preCheckResult.form.formLegend} />
           </legend>
@@ -122,6 +160,47 @@ export default function ResultForm({
           />
         </fieldset>
       </form>
+      <RichText
+        className="pt-[40px]"
+        markdown={preCheckResult.form.copyIntroText}
+      ></RichText>
+      <div className="py-[24px]">
+        <DetailsSummary
+          title={preCheckResult.form.previewLabel}
+          content={
+            <div
+              data-testid="emailPreview"
+              className="text-sm whitespace-pre-wrap"
+            >
+              {emailPreviewBody}
+            </div>
+          }
+        />
+      </div>
+      <ButtonContainer
+        className="mb-[40px]"
+        buttons={[
+          {
+            look: "tertiary",
+            text: isMailBodyCopied
+              ? preCheckResult.form.copyMailButton.textCopied
+              : preCheckResult.form.copyMailButton.text,
+            onClick: () => {
+              void handleCopyEmailBody();
+            },
+          },
+          {
+            look: "ghost",
+            text: isMailAddressCopied
+              ? preCheckResult.form.copyAddressButton.textCopied
+              : preCheckResult.form.copyAddressButton.text,
+            onClick: () => {
+              void handleCopyMailAddress();
+            },
+          },
+        ]}
+      />
+      <hr className="border-t-[2px] border-gray-400" />
       {showEmailAlert && (
         <div className="mt-16">
           <Alert
