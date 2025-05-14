@@ -5,9 +5,9 @@ import {
 } from "~/resources/staticRoutes";
 
 export const methodsFivePrinciples = {
-  title: "Fünf Prinzipien für digitaltaugliche Gesetzgebung",
+  title: "Chancen und Hindernisse der digitalen Umsetzung identifizieren",
   subTitle:
-    "Die fünf Prinzipien für digitaltaugliche Gesetzgebung decken unterschiedliche Aspekte der digitalen Umsetzung ab. Nutzen Sie die Tipps als Inspiration, um in Ihrem Regelungsvorhaben die Möglichkeiten des Digitalen auszuschöpfen und Hindernisse zu erkennen.",
+    "Die folgenden Prinzipien helfen Ihnen dabei, Chancen der digitalen Umsetzung auszuschöpfen und Hindernisse zu erkennen. Nutzen Sie die Prinzipien auch, um mit beteiligten Akteurinnen und Akteuren über die Umsetzung zu sprechen.\n\nWelche Prinzipien besonders wichtig sind und wie Sie diese anwenden, hängt vom Inhalt Ihres Vorhabens ab und davon, ob es sich um ein Gesetz oder eine Verordnung handelt.",
   buttonText: "Beispiele betrachten",
   principles: [
     {
@@ -35,14 +35,14 @@ export const methodsFivePrinciples = {
             "Können Sie auf etablierte Lösungen zurückgreifen, sogenannte Basisdienste?",
           ],
           wording:
-            '"Der Antrag ist elektronisch oder schriftlich zu stellen", oder "Der Antrag ist zu stellen".',
+            '"Der Antrag ist elektronisch oder schriftlich zu stellen." oder "Der Antrag ist zu stellen".',
         },
         {
           action: "Denken Sie an Antragsstellung, Bearbeitung und Bescheid",
           description:
-            "Digitale Angebote führen zu Daten, die direkt digital weiterverarbeitet werden können. Das spart Zeit, weil Informationen nicht eingescannt oder abgetippt werden müssen. Digitale Oberflächen, die für Nutzende zusätzliche Hilfestellungen und Fehlerkontrollen enthalten, erhöhen die Qualität der Daten. Sogenannte Plausibilitätsprüfungen kontrollieren zum Beispiel, ob Ort und Postleitzahl zusammenpassen oder ob ein angegebener Zeitraum antragsberechtigt ist.",
+            "Digitale Angebote erzeugen Daten, die direkt digital weiterverarbeitet werden können. Das spart Zeit, weil Informationen nicht eingescannt oder abgetippt werden müssen. Digitale Oberflächen, die für Nutzende zusätzliche Hilfestellungen und Fehlerkontrollen enthalten, erhöhen die Qualität der Daten. Sogenannte Plausibilitätsprüfungen kontrollieren zum Beispiel, ob Ort und Postleitzahl zusammenpassen oder ob ein angegebener Zeitraum antragsberechtigt ist.",
           questions: [
-            "Wer übermittelt Informationen wie an wen? Beachtet die Regelung auch verwaltungsinterne Kommunikation oder Austausch zwischen Behörden und Unternehmen?",
+            "Wer übermittelt Informationen wie an wen? Beachtet die Regelung auch verwaltungsinterne Kommunikation oder den Austausch zwischen Behörden und Unternehmen?",
             "Wie können verwaltungsinterne Medienbrüche ausgeräumt oder Prozesse vereinfacht werden? Welche Technologien und Verfahren nutzt die umsetzende Behörde bei der Bearbeitung?",
             "Kann die Datenqualität durch automatische Kontrollen erhöht werden?",
             "Können Daten digital statt analog aufbewahrt werden?",
@@ -62,7 +62,7 @@ export const methodsFivePrinciples = {
         {
           action: "Stellen Sie eine nutzerfreundliche Umsetzung sicher",
           description:
-            "Barrierearme Angebote sind oft auch nutzerfreundlicher. Darüberhinaus macht eine nutzerzentrierte Entwicklung, die z. B. in kleinen Schritten agiert und Texte in einfacher Sprache oder mehrsprachig gestaltet, ihr Angebot zugänglicher.",
+            "Barrierearme Angebote sind oft auch nutzerfreundlicher. Darüber hinaus macht eine nutzerzentrierte Entwicklung, die z. B. in kleinen Schritten agiert und Texte in einfacher Sprache oder mehrsprachig gestaltet, ihr Angebot zugänglicher.",
           questions: [
             "Was ist die wichtigste Aufgabe aus Sicht der Nutzenden?",
             "Wenden die umsetzenden Akteure den Servicestandard an? Dieser stellt eine nutzerzentrierte Entwicklung sicher.",
@@ -74,7 +74,7 @@ export const methodsFivePrinciples = {
       label: "Prinzip",
       title: "Datenwiederverwendung durch einheitliches Recht",
       description:
-        "Normadressatinnen und -adressaten sowie umsetzende Behörden sparen Kosten und Zeit, wenn das Once-Only-Prinzip konsequent angewendet wird – also wenn Daten nur einmal angeben und dann wiederverwendet werden. Die Grundlage dafür sind harmonisierte Rechtsbegriffe, ein datenschutzkonformer Austausch und die Berücksichtigung etablierter technischer Standards.",
+        "Normadressatinnen und -adressaten sowie umsetzende Behörden sparen Kosten und Zeit, wenn das Once-Only-Prinzip konsequent angewendet wird – also wenn Daten nur einmal angegeben und dann wiederverwendet werden. Die Grundlage dafür sind harmonisierte Rechtsbegriffe, ein datenschutzkonformer Austausch und die Berücksichtigung etablierter technischer Standards.",
       implementation: [
         {
           action: "Nutzen Sie harmonisierte Rechtsbegriffe",
@@ -101,7 +101,7 @@ export const methodsFivePrinciples = {
             "Müssen neue Daten erhoben werden, sollten Sie eine Nachnutzung dieser Daten ermöglichen.",
           questions: [
             "Stehen der Nachnutzung der Daten rechtliche Beschränkungen im Weg? Können erhobene Daten sogar öffentlich geteilt werden?",
-            "Wie werden die Daten verwaltet? Sind Verantwortlichkeiten klar?",
+            "Wie werden die Daten verwaltet? Sind die Verantwortlichkeiten klar?",
             "Ist ein transeuropäischer Datenaustausch möglich? Gibt es passende Lizenzmodelle?",
           ],
         },
@@ -110,7 +110,7 @@ export const methodsFivePrinciples = {
           description:
             "Nutzen Sie geeignete technische Standards, wie z. B. Datenaustauschformate, um den Austausch zwischen IT-Systemen zu begünstigen. Möglicherweise ist es sinnvoll, diese in der Regelung vorzuschreiben.",
           questions: [
-            "Welche Datenformate existieren bereits? Muss ggf. ein neuer Standard entwickelt werden?",
+            "Welche Datenformate existieren bereits? Muss ein neuer Standard entwickelt werden?",
             "Wurde beachtet, wie die Daten übertragen werden sollen?",
           ],
         },
@@ -136,7 +136,7 @@ export const methodsFivePrinciples = {
           action:
             "Bevorzugen Sie Open-Source-Software und offene Spezifikationen",
           description:
-            "Open-Source bedeutet, dass der Quellcode eines IT-Systems veröffentlicht ist. Offene Spezifikationen beschreiben öffentlich, was ein IT-System genau leistet. Beide stärken Transparenz und Wiederverwendbarkeit (vgl. Koalitionsvertrag 18. Legislaturperiode oder Servicestandard). Dies ermöglicht die Nachvollziehbarkeit der technischen Lösung und verhindert die Abhängigkeit zu einzelnen Software-Anbietern. Weitere Informationen erhalten Sie beim Zentrum für digitale Souveränität.",
+            "Open-Source bedeutet, dass der Quellcode eines IT-Systems veröffentlicht ist. Offene Spezifikationen beschreiben öffentlich, was ein IT-System genau leistet. Beide stärken Transparenz und Wiederverwendbarkeit (vgl. Koalitionsvertrag 18. Legislaturperiode oder Servicestandard). Dies ermöglicht die Nachvollziehbarkeit der technischen Lösung und verhindert die Abhängigkeit von einzelnen Software-Anbietern. Weitere Informationen erhalten Sie beim Zentrum für digitale Souveränität.",
           questions: [
             "Wird der Einsatz von Open-Source-Software ermöglicht und gefördert?",
             "Werden ggf. bei Neuentwicklung Quelloffenheit und offene Spezifikationen vorgeschrieben?",
@@ -148,7 +148,7 @@ export const methodsFivePrinciples = {
       label: "Prinzip",
       title: "Automatisierung braucht eindeutige Regelungen",
       description:
-        "Logische und verständliche Regelungen und transparente Verfahren erleichtern den Zugang zum Recht und stärken das Vertrauen in den Staat. Einfachheit und verständliche Sprache sind durch die GGO und das Handbuch der Rechtsförmlichkeit vorgeschrieben. Klarheit und Logik bilden die Grundlage für automatisierte Prozesse. Wenn Begriffe eindeutig definiert sowie Entscheidungsstrukturen bestimmt sind, können Regeln und klare Ausnahmen automatisiert werden. Das spart Zeit auf Seiten der Nutzenden und der Verwaltung. Mit diesen Ressourcen können kritischere Einzelfälle bearbeitet oder Normadressatinnen und -adressaten beraten werden.",
+        "Logische und verständliche Regelungen und transparente Verfahren erleichtern den Zugang zum Recht und stärken das Vertrauen in den Staat. Einfachheit und verständliche Sprache sind durch die GGO und das Handbuch der Rechtsförmlichkeit vorgeschrieben.\n\nKlarheit und Logik bilden die Grundlage für automatisierte Prozesse. Wenn Begriffe eindeutig definiert sowie Entscheidungsstrukturen bestimmt sind, können Regeln und klare Ausnahmen automatisiert werden. Das spart Zeit auf Seiten der Nutzenden und der Verwaltung. Mit diesen Ressourcen können kritischere Einzelfälle bearbeitet oder Normadressatinnen und -adressaten beraten werden.",
       implementation: [
         {
           action: "Beachten Sie bestehende Prozesse und Verantwortlichkeiten",
@@ -157,7 +157,7 @@ export const methodsFivePrinciples = {
           questions: [
             "Gibt es bereits Prozess-Visualisierungen im FIM-Portal, auf denen Sie aufsetzen können?",
             "Haben Sie bestehende Prozesse in Deutschland und anderen EU-Mitgliedsstaaten berücksichtigt?",
-            "Bekommt oder verliert eine Behörde Kompentenzen? Wie wirkt sich das aus?",
+            "Bekommt oder verliert eine Behörde Kompetenzen? Wie wirkt sich das aus?",
             "Können bestehende Prozesse vereinfacht werden?",
             "Falls ein Verwaltungsprozess betroffen ist: Lassen sich die Teilschritte in einer chronologischen Reihenfolge abbilden?",
           ],
@@ -167,7 +167,7 @@ export const methodsFivePrinciples = {
           description:
             "Automatisierung wirkt sich besonders effizienzsteigernd auf Prozesse mit großen Bearbeitungsfallzahlen aus, die als gebundene Entscheidungen geregelt werden können.",
           questions: [
-            "Wie groß ist die erwartete Fallzahl pro Jahr? Sind in den umsetzenden Behörden genug Ressourcen vorhanden, um z. B. Anträge fristgerecht zu bearbeiten?",
+            "Wie groß ist die erwartete Fallzahl pro Jahr? Sind in den Behörden genug Ressourcen vorhanden, um z. B. Anträge fristgerecht zu bearbeiten?",
             "Gibt es bereits Vorschläge für Automatisierungspotenziale aus der Umsetzung?",
             "Handelt es sich um eine gebundene Entscheidung?",
             "Erlaubt die Regelung eine automatisierte Fallbearbeitung?",
@@ -194,7 +194,7 @@ export const methodsFivePrinciples = {
           questions: [
             "Sind Begriffe und Abläufe eindeutig definiert?",
             "Ist die Regelung möglichst einfach formuliert?",
-            "Sind Enscheidungslogiken widerspruchsfrei?",
+            "Sind Entscheidungslogiken widerspruchsfrei?",
           ],
         },
       ],
@@ -203,7 +203,7 @@ export const methodsFivePrinciples = {
       label: "Prinzip",
       title: "Datenschutz und Informationssicherheit schaffen Vertrauen",
       description:
-        "Alle Menschen haben ein Recht auf den Schutz ihrer Daten vor unbefugten Zugriffen. Der Schutz personenbezogener Daten ist in der DSGVO geregelt. Informationssicherheit umfasst alle Daten und wird je nach Bereich spezifiziert. Eine datenschutzkonforme Regelung erhebt nur das Minimum an Daten. Datensparksamkeit ist einfach umzusetzen und verringert den Erfüllungsaufwand. Wenn weniger Daten vorliegen, müssen auch weniger Informationen geschützt werden. Wenn Informationen den ihnen gebührenden Schutz erhalten, schafft das Vertrauen in den Staat. Die Gefahr von Missbrauch und negativen wirtschaftlichen oder sicherheitsrelevaten Konsequenzen wird verringert.",
+        "Alle Menschen haben ein Recht darauf, dass ihre Daten vor unbefugten Zugriffen geschützt werden. Der Schutz personenbezogener Daten ist in der DSGVO geregelt. Informationssicherheit umfasst alle Daten und wird je nach Bereich spezifiziert.\n\nEine datenschutzkonforme Regelung erhebt nur das Minimum an Daten. Datensparsamkeit ist einfach umzusetzen und verringert den Erfüllungsaufwand. Wenn weniger Daten vorliegen, müssen auch weniger Informationen geschützt werden.\n\nWenn Informationen den ihnen gebührenden Schutz erhalten, schafft das Vertrauen in den Staat. Die Gefahr von Missbrauch und negativen wirtschaftlichen oder sicherheitsrelevanten Konsequenzen wird verringert.",
       implementation: [
         {
           action: "Gewährleisten Sie den Datenschutz",

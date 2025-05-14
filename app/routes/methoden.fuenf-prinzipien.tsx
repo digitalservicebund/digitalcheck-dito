@@ -71,6 +71,9 @@ export default function FivePrinciples() {
                 ? `2.4. ${methodsFivePrinciples.title}`
                 : methodsFivePrinciples.title,
             }}
+            content={{
+              markdown: methodsFivePrinciples.subTitle,
+            }}
           />
           <LinkListBox
             heading={"Prinzipien"}
