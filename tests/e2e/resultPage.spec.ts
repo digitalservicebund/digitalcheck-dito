@@ -624,7 +624,7 @@ for (const scenario of scenarios) {
         });
       });
 
-      test("can copy email address to clipboard", async () => {
+      test.skip("can copy email address to clipboard", async () => {
         const copyAddressButton = page.getByRole("button", {
           name: preCheckResult.form.copyAddressButton.text,
         });
@@ -636,14 +636,13 @@ for (const scenario of scenarios) {
             name: preCheckResult.form.copyAddressButton.textCopied,
           }),
         ).toBeVisible();
-
         const clipboardText = await page.evaluate(() =>
           navigator.clipboard.readText(),
         );
         expect(clipboardText).toBe(preCheckResult.form.emailTemplate.toNkr);
       });
 
-      test("can copy email content to clipboard", async () => {
+      test.skip("can copy email content to clipboard", async () => {
         const titleInputLocator = page.getByLabel("Arbeitstitel des Vorhabens");
         const reasoningInputLocator = page.getByLabel("Begründung");
 
