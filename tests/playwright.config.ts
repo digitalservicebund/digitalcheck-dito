@@ -57,6 +57,7 @@ const config: PlaywrightTestConfig = {
   workers: process.env.CI ? 1 : undefined, // Limit the number of workers on CI, use default locally
   timeout: 5000,
   use: {
+    permissions: ["clipboard-read", "clipboard-write"],
     viewport: { width: 1280, height: 720 },
     acceptDownloads: true,
     screenshot: "only-on-failure",
