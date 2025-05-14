@@ -195,7 +195,7 @@ export const support = {
                 icon: CheckCircleOutlined,
                 title: "Was sie bekommen",
                 text: dedent`
-                  - tieferes Verständnis der digitaler Aspekte der Regelung
+                  - tieferes Verständnis der digitalen Aspekte der Regelung
                   - eine Visualisierung, die die Prüfung durch den NKR informiert
                 `,
               },
