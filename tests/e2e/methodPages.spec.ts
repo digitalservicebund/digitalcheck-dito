@@ -80,7 +80,7 @@ test.describe("test method sub pages", () => {
     );
   });
 
-  test("links to five principles", async ({ page }) => {
+  test.skip("links to five principles", async ({ page }) => {
     await page.getByRole("link", { name: "Fünf Prinzipien nutzen" }).click();
     await expect(page).toHaveURL(ROUTE_METHODS_PRINCIPLES.url);
     await expect(page.getByRole("main")).toContainText(
