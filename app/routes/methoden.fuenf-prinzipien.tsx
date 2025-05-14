@@ -130,7 +130,7 @@ export default function FivePrinciples() {
               backgroundColor={index % 2 === 0 ? "blue" : "white"}
             >
               <div className="ds-stack ds-stack-32">
-                <Heading tagName="h3" text="So setzen Sie das Prinzip um" />
+                <Heading tagName="h3" text="So wenden Sie das Prinzip an" />
                 {principle.implementation.map((implementation) => {
                   const questions = implementation.questions
                     .map((question) => `- ${question}`)
