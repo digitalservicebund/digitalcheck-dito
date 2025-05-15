@@ -20,15 +20,22 @@ export const footer = {
     supportOffer: {
       title: "Unterstützungsangebote Für bund, Länder, Kommunen und EU-Staaten",
       links: [
-        {
-          preText: "Support:",
-          text: "0151/40 76 78 39",
-          url: "tel:015140767839",
-        },
+        [
+          {
+            preText: "Support:",
+            text: "0151/40 76 78 39",
+            url: "tel:015140767839",
+          },
+
+          {
+            preText: "oder",
+            text: "digitalcheck@digitalservice.bund.de",
+            url: "mailto:digitalcheck@digitalservice.bund.de",
+          },
+        ],
         {
           text: "Alle Unterstützungsangebote",
           url: ROUTE_SUPPORT.url,
-          wrap: true,
         },
         {
           text: "Schulungen",
@@ -37,7 +44,6 @@ export const footer = {
         {
           text: "Nationale Kontaktstelle für ein interoperables Europa (2024/903 Art. 17)",
           url: ROUTE_INTEROPERABILITY_SPOC.url,
-          wrap: true,
         },
       ],
     },
@@ -48,17 +54,14 @@ export const footer = {
         {
           text: "1. Vorprüfung: Digitalbezug einschätzen",
           url: ROUTE_PRECHECK.url,
-          wrap: true,
         },
         {
           text: "2. Digitaltauglichkeit der Regelung sicherstellen",
           url: ROUTE_METHODS.url,
-          wrap: true,
         },
         {
           text: "3. Dokumentieren der Digitaltauglichkeit",
           url: ROUTE_DOCUMENTATION.url,
-          wrap: true,
         },
       ],
     },
@@ -69,12 +72,10 @@ export const footer = {
         {
           text: "Prinzipien der Digitaltauglichkeit",
           url: ROUTE_FUNDAMENTALS_PRINCIPLES.url,
-          wrap: true,
         },
         {
           text: "Übersicht der Werkzeuge und Methoden",
           url: ROUTE_FUNDAMENTALS_METHODS.url,
-          wrap: true,
         },
         {
           text: "EU-Interoperabilität",
