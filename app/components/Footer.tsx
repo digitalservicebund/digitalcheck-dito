@@ -3,7 +3,6 @@ import { openInNewIconElement } from "~/components/openInNewWindow";
 import { footer } from "~/resources/content/components/footer";
 import tailwindMerge from "~/utils/tailwindMerge";
 import { A11Y_MESSAGE_NEW_WINDOW } from "./Aria";
-import Container from "./Container";
 import Image from "./Image";
 
 type LinkProps = {
@@ -18,37 +17,53 @@ const LinkList = ({
   links,
   className,
   listClassName,
+  seperator,
 }: {
   header?: string;
-  links: LinkProps[];
+  links: (LinkProps | LinkProps[])[];
   className?: string;
   listClassName?: string;
+  seperator?: boolean;
 }) => (
   <section className={tailwindMerge("ds-stack ds-stack-8", className)}>
-    {header && <h2 className="ds-label-03-reg uppercase">{header}</h2>}
+    {header && <h2 className="ds-label-section">{header}</h2>}
     <ul
       className={tailwindMerge(
         "list-unstyled flex flex-col gap-8",
         listClassName,
       )}
     >
-      {links.map((link) => (
-        <li key={link.url}>
-          {link?.preText}{" "}
-          <Link
-            to={link.url}
-            // alle bekommen wrap
-            className="text-link increase-tap-area"
-            target={link.openInNewTab ? "_blank" : undefined}
-            rel={link.openInNewTab ? "noreferrer" : undefined}
-            aria-describedby={
-              link.openInNewTab ? A11Y_MESSAGE_NEW_WINDOW : undefined
-            }
+      {links.map((linkOrLinks) => {
+        const subLinks = Array.isArray(linkOrLinks)
+          ? linkOrLinks
+          : [linkOrLinks];
+        const link = subLinks[0];
+
+        return (
+          <li
+            key={link.url}
+            className={`${seperator ? "after:ml-8 after:inline-block after:content-['•'] last:after:content-['']" : ""}`}
           >
-            {link.text} {link.openInNewTab && openInNewIconElement}
-          </Link>
-        </li>
-      ))}
+            {subLinks.map((subLink, i) => (
+              <>
+                {i !== 0 && " "}
+                {subLink?.preText}{" "}
+                <Link
+                  to={subLink.url}
+                  className="text-link increase-tap-area"
+                  target={subLink.openInNewTab ? "_blank" : undefined}
+                  rel={subLink.openInNewTab ? "noreferrer" : undefined}
+                  aria-describedby={
+                    subLink.openInNewTab ? A11Y_MESSAGE_NEW_WINDOW : undefined
+                  }
+                >
+                  {subLink.text} {subLink.openInNewTab && openInNewIconElement}
+                </Link>
+              </>
+            ))}
+          </li>
+        );
+      })}
     </ul>
   </section>
 );
@@ -56,12 +71,12 @@ const LinkList = ({
 export default function Footer() {
   return (
     <footer
-      className="ds-body-02-reg w-full leading-snug print:hidden"
+      className="ds-label-03-reg flex w-full flex-row justify-center px-16 leading-snug text-gray-900 print:hidden"
       aria-label="Seitenfußbereich"
     >
-      <Container className="ds-stack ds-stack-32 sm:ds-stack-40 sm:px-16">
+      <div className="ds-stack ds-stack-32 sm:ds-stack-40 w-full max-w-[1120px] border-t-2 border-blue-300 py-40">
         <nav
-          className="grid grid-cols-1 gap-32 sm:grid-cols-3 sm:grid-rows-2"
+          className="grid grid-cols-1 justify-between gap-y-32 sm:grid-cols-[repeat(3,_minmax(0,_18rem))] sm:grid-rows-2"
           aria-labelledby="footer-links"
         >
           <LinkList
@@ -87,11 +102,12 @@ export default function Footer() {
         <nav aria-labelledby="footer-sitemap">
           <LinkList
             links={footer.middle.links}
-            listClassName="ds-footer-ul-w-seperator flex-row flex-wrap"
+            listClassName="flex-row flex-wrap"
+            seperator
           />
         </nav>
 
-        <hr className="mt-16 w-full border-t-[2px] border-blue-300" />
+        <hr className="mt-16 w-full border-t-2 border-blue-300" />
 
         <div className="space-y-16 sm:flex sm:gap-48">
           <Image
@@ -103,7 +119,7 @@ export default function Footer() {
             <LinkList links={footer.bottom.links} />
           </nav>
         </div>
-      </Container>
+      </div>
     </footer>
   );
 }

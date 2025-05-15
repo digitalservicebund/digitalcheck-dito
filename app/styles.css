@@ -139,12 +139,4 @@
       @apply underline! decoration-2 underline-offset-2;
     }
   }
-
-  .ds-footer-ul-w-seperator {
-    > li:not(:last-child)::after {
-      content: "•";
-      display: inline-block;
-      margin-left: 0.5rem;
-    }
-  }
 }
