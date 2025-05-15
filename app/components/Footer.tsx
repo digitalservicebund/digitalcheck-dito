@@ -11,7 +11,6 @@ type LinkProps = {
   url: string;
   text: string;
   openInNewTab?: boolean;
-  wrap?: boolean;
 };
 
 const LinkList = ({
@@ -39,7 +38,7 @@ const LinkList = ({
           <Link
             to={link.url}
             // alle bekommen wrap
-            className={`text-link increase-tap-area ${link.wrap ? "" : "whitespace-nowrap"}`}
+            className="text-link increase-tap-area"
             target={link.openInNewTab ? "_blank" : undefined}
             rel={link.openInNewTab ? "noreferrer" : undefined}
             aria-describedby={
@@ -61,7 +60,10 @@ export default function Footer() {
       aria-label="Seitenfußbereich"
     >
       <Container className="ds-stack ds-stack-32 sm:ds-stack-40 sm:px-16">
-        <div className="grid grid-cols-1 gap-32 sm:grid-cols-3 sm:grid-rows-2">
+        <nav
+          className="grid grid-cols-1 gap-32 sm:grid-cols-3 sm:grid-rows-2"
+          aria-labelledby="footer-links"
+        >
           <LinkList
             header={footer.top.supportOffer.title}
             links={footer.top.supportOffer.links}
@@ -80,12 +82,14 @@ export default function Footer() {
             header={footer.top.examples.title}
             links={footer.top.examples.links}
           />
-        </div>
+        </nav>
 
-        <LinkList
-          links={footer.middle.links}
-          listClassName="ds-footer-ul-w-seperator flex-row flex-wrap"
-        />
+        <nav aria-labelledby="footer-sitemap">
+          <LinkList
+            links={footer.middle.links}
+            listClassName="ds-footer-ul-w-seperator flex-row flex-wrap"
+          />
+        </nav>
 
         <hr className="mt-16 w-full border-t-[2px] border-blue-300" />
 
@@ -95,7 +99,9 @@ export default function Footer() {
             width={120}
             alternativeText="Logo des Bundesministerium des Innern und für Heimat"
           />
-          <LinkList links={footer.bottom.links} />
+          <nav aria-labelledby="footer-copyright">
+            <LinkList links={footer.bottom.links} />
+          </nav>
         </div>
       </Container>
     </footer>
