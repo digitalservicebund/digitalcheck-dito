@@ -21,6 +21,7 @@ type ExpectedResult = {
   showsInteropLink: boolean;
   showsNegativeReasoning: boolean;
   includesInterop: boolean;
+  interopIsPositive?: boolean;
   warningInteropWithoutDigital?: boolean;
   showsUnsureHint?: boolean;
   formIsVisible?: boolean;
@@ -53,6 +54,7 @@ const scenarios: TestScenario[] = [
       showsInteropLink: true,
       showsNegativeReasoning: false,
       includesInterop: true,
+      interopIsPositive: true,
       formIsVisible: true,
       linksAreVisible: true,
       emailBodyContains: [
@@ -71,6 +73,7 @@ const scenarios: TestScenario[] = [
       showsInteropLink: false,
       showsNegativeReasoning: false,
       includesInterop: false,
+      interopIsPositive: false,
       formIsVisible: true,
       linksAreVisible: true,
     },
@@ -85,6 +88,7 @@ const scenarios: TestScenario[] = [
       showsInteropLink: true,
       showsNegativeReasoning: false,
       includesInterop: true,
+      interopIsPositive: false,
       showsUnsureHint: true,
       formIsVisible: true,
       linksAreVisible: true,
@@ -103,6 +107,7 @@ const scenarios: TestScenario[] = [
       showsInteropLink: false,
       showsNegativeReasoning: true,
       includesInterop: false,
+      interopIsPositive: false,
       formIsVisible: true,
       linksAreVisible: false,
       emailBodyContains: [
@@ -123,6 +128,7 @@ const scenarios: TestScenario[] = [
       showsInteropLink: true,
       showsNegativeReasoning: true,
       includesInterop: false,
+      interopIsPositive: true,
       warningInteropWithoutDigital: true,
       formIsVisible: true,
       linksAreVisible: false,
@@ -636,10 +642,18 @@ for (const scenario of scenarios) {
             name: preCheckResult.form.copyAddressButton.textCopied,
           }),
         ).toBeVisible();
+
+        let expectedClipboardText = preCheckResult.form.emailTemplate.toNkr;
+        if (scenario.expected.interopIsPositive) {
+          const interopEmail = preCheckResult.form.emailTemplate.toDC;
+
+          expectedClipboardText += `, ${interopEmail}`;
+        }
+
         const clipboardText = await page.evaluate(() =>
           navigator.clipboard.readText(),
         );
-        expect(clipboardText).toBe(preCheckResult.form.emailTemplate.toNkr);
+        expect(clipboardText).toBe(expectedClipboardText);
       });
 
       test("can copy email content to clipboard", async () => {
