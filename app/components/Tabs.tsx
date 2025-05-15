@@ -27,7 +27,7 @@ export default function Tabs({
   tabs,
   initialActiveIndex = 0,
   onNavigateRequest,
-}: TabsProps) {
+}: Readonly<TabsProps>) {
   const [activeTab, setActiveTab] = useState(initialActiveIndex);
   const tabRef = useRef<Map<number, HTMLButtonElement> | null>(null);
 
@@ -36,9 +36,7 @@ export default function Tabs({
   }, [initialActiveIndex]);
 
   function getMap() {
-    if (!tabRef.current) {
-      tabRef.current = new Map();
-    }
+    tabRef.current ??= new Map();
     return tabRef.current;
   }
 
