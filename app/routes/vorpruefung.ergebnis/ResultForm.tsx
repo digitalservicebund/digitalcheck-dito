@@ -83,9 +83,11 @@ export default function ResultForm({
   };
 
   const handleCopyMailAddress = async () => {
-    await navigator.clipboard.writeText(
-      preCheckResult.form.emailTemplate.toNkr,
-    );
+    let addressesToCopy = preCheckResult.form.emailTemplate.toNkr;
+    if (result.interoperability === ResultType.POSITIVE) {
+      addressesToCopy += `, ${preCheckResult.form.emailTemplate.toDC}`;
+    }
+    await navigator.clipboard.writeText(addressesToCopy);
     setIsMailAddressCopied(true);
     setTimeout(() => setIsMailAddressCopied(false), 2000); // Hide Kopiert message after 2 seconds
   };
