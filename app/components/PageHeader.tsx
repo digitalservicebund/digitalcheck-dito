@@ -142,7 +142,7 @@ const PageHeader = ({
           aria-hidden="true"
         />
       )}
-      <header className="relative" ref={headerRef} id="page-header">
+      <header className="relative" ref={headerRef}>
         <div className="relative z-30 flex h-[72px] justify-between bg-white pl-16 lg:px-16">
           {/* Logo and title */}
           <div className="plausible-event-name=Nav+Bar.Home flex items-center space-x-8">
