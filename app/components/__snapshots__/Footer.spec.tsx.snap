@@ -4,20 +4,19 @@ exports[`Footer Component > Renders correctly 1`] = `
 <div>
   <footer
     aria-label="Seitenfußbereich"
-    class="ds-label-03-reg flex w-full flex-row justify-center border-t-2 border-blue-300 leading-snug text-gray-900 print:hidden"
+    class="ds-body-02-reg w-full leading-snug print:hidden"
   >
     <div
-      class="ds-stack ds-stack-32 sm:ds-stack-40 w-full max-w-6xl px-16 py-40"
+      class="container pt-40 pb-48 ds-stack ds-stack-32 sm:ds-stack-40 sm:px-16"
     >
       <nav
-        aria-label="Schnellübersicht"
-        class="grid grid-cols-1 justify-between gap-32 sm:grid-cols-[repeat(3,_minmax(0,_18rem))] sm:grid-rows-2"
+        class="grid grid-cols-1 gap-32 sm:grid-cols-3 sm:grid-rows-2"
       >
-        <div
+        <section
           class="ds-stack ds-stack-8 row-span-2"
         >
           <h2
-            class="ds-label-section"
+            class="ds-label-03-reg uppercase"
           >
             Unterstützungsangebote Für bund, Länder, Kommunen und EU-Staaten
           </h2>
@@ -28,26 +27,17 @@ exports[`Footer Component > Renders correctly 1`] = `
               Support:
                
               <a
-                class="text-link increase-tap-area"
+                class="text-link increase-tap-area whitespace-nowrap"
                 href="tel:015140767839"
               >
                 0151/40 76 78 39
-                 
-              </a>
-               oder
-               
-              <a
-                class="text-link increase-tap-area"
-                href="mailto:digitalcheck@digitalservice.bund.de"
-              >
-                digitalcheck@digitalservice.bund.de
                  
               </a>
             </li>
             <li>
                
               <a
-                class="text-link increase-tap-area"
+                class="text-link increase-tap-area "
                 data-discover="true"
                 href="/unterstuetzung"
               >
@@ -58,7 +48,7 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="text-link increase-tap-area"
+                class="text-link increase-tap-area whitespace-nowrap"
                 data-discover="true"
                 href="/unterstuetzung#angebote"
               >
@@ -69,7 +59,7 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="text-link increase-tap-area"
+                class="text-link increase-tap-area "
                 data-discover="true"
                 href="/interoperabel/nationale-kontaktstelle"
               >
@@ -78,12 +68,12 @@ exports[`Footer Component > Renders correctly 1`] = `
               </a>
             </li>
           </ul>
-        </div>
-        <div
+        </section>
+        <section
           class="ds-stack ds-stack-8 row-span-2"
         >
           <h2
-            class="ds-label-section"
+            class="ds-label-03-reg uppercase"
           >
             Schritt für Schritt
           </h2>
@@ -93,7 +83,7 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="text-link increase-tap-area"
+                class="text-link increase-tap-area "
                 data-discover="true"
                 href="/vorpruefung"
               >
@@ -104,7 +94,7 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="text-link increase-tap-area"
+                class="text-link increase-tap-area "
                 data-discover="true"
                 href="/methoden"
               >
@@ -115,7 +105,7 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="text-link increase-tap-area"
+                class="text-link increase-tap-area "
                 data-discover="true"
                 href="/dokumentation"
               >
@@ -124,12 +114,12 @@ exports[`Footer Component > Renders correctly 1`] = `
               </a>
             </li>
           </ul>
-        </div>
-        <div
+        </section>
+        <section
           class="ds-stack ds-stack-8"
         >
           <h2
-            class="ds-label-section"
+            class="ds-label-03-reg uppercase"
           >
             Grundlagen
           </h2>
@@ -139,7 +129,7 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="text-link increase-tap-area"
+                class="text-link increase-tap-area "
                 data-discover="true"
                 href="/grundlagen/fuenf-prinzipien"
               >
@@ -150,7 +140,7 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="text-link increase-tap-area"
+                class="text-link increase-tap-area "
                 data-discover="true"
                 href="/grundlagen/methoden"
               >
@@ -161,7 +151,7 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="text-link increase-tap-area"
+                class="text-link increase-tap-area whitespace-nowrap"
                 data-discover="true"
                 href="/interoperabel"
               >
@@ -170,12 +160,12 @@ exports[`Footer Component > Renders correctly 1`] = `
               </a>
             </li>
           </ul>
-        </div>
-        <div
+        </section>
+        <section
           class="ds-stack ds-stack-8"
         >
           <h2
-            class="ds-label-section"
+            class="ds-label-03-reg uppercase"
           >
             Beispiele
           </h2>
@@ -185,7 +175,7 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="text-link increase-tap-area"
+                class="text-link increase-tap-area whitespace-nowrap"
                 data-discover="true"
                 href="/beispiele/prinzipien"
               >
@@ -196,7 +186,7 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="text-link increase-tap-area"
+                class="text-link increase-tap-area whitespace-nowrap"
                 data-discover="true"
                 href="/beispiele/visualisierungen"
               >
@@ -205,103 +195,95 @@ exports[`Footer Component > Renders correctly 1`] = `
               </a>
             </li>
           </ul>
-        </div>
+        </section>
       </nav>
-      <nav
-        aria-label="Sitemap"
-      >
-        <ul
-          class="list-unstyled flex flex-row flex-wrap gap-8"
+      <nav>
+        <section
+          class="ds-stack ds-stack-8"
         >
-          <li
-            class="after:ml-8 after:inline-block after:content-['•'] last:after:content-['']"
+          <ul
+            class="list-unstyled flex gap-8 ds-footer-ul-w-seperator flex-row flex-wrap"
           >
-             
-            <a
-              class="text-link increase-tap-area"
-              data-discover="true"
-              href="/impressum"
-            >
-              Impressum
+            <li>
                
-            </a>
-          </li>
-          <li
-            class="after:ml-8 after:inline-block after:content-['•'] last:after:content-['']"
-          >
-             
-            <a
-              class="text-link increase-tap-area"
-              data-discover="true"
-              href="/datenschutz"
-            >
-              Datenschutzerklärung
-               
-            </a>
-          </li>
-          <li
-            class="after:ml-8 after:inline-block after:content-['•'] last:after:content-['']"
-          >
-             
-            <a
-              class="text-link increase-tap-area"
-              data-discover="true"
-              href="/barrierefreiheit"
-            >
-              Barrierefreiheit
-               
-            </a>
-          </li>
-          <li
-            class="after:ml-8 after:inline-block after:content-['•'] last:after:content-['']"
-          >
-             
-            <a
-              class="text-link increase-tap-area"
-              data-discover="true"
-              href="/sitemap"
-            >
-              Sitemap
-               
-            </a>
-          </li>
-          <li
-            class="after:ml-8 after:inline-block after:content-['•'] last:after:content-['']"
-          >
-             
-            <a
-              aria-describedby="a11y-message--new-window"
-              class="text-link increase-tap-area"
-              href="https://github.com/digitalservicebund/digitalcheck-dito"
-              rel="noreferrer"
-              target="_blank"
-            >
-              Open Source Code
-               
-              <svg
-                aria-hidden="true"
-                class="mb-4 ml-[0.2em] inline-block! fill-current"
-                data-testid="OpenInNewIcon"
-                focusable="false"
-                height="1.2em"
-                viewBox="0 0 24 24"
-                width="1.2em"
-                xmlns="http://www.w3.org/2000/svg"
+              <a
+                class="text-link increase-tap-area whitespace-nowrap"
+                data-discover="true"
+                href="/impressum"
               >
-                <path
-                  d="M0 0h24v24H0z"
-                  fill="none"
-                />
-                <path
-                  d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
-                />
-              </svg>
-            </a>
-          </li>
-        </ul>
+                Impressum
+                 
+              </a>
+            </li>
+            <li>
+               
+              <a
+                class="text-link increase-tap-area whitespace-nowrap"
+                data-discover="true"
+                href="/datenschutz"
+              >
+                Datenschutzerklärung
+                 
+              </a>
+            </li>
+            <li>
+               
+              <a
+                class="text-link increase-tap-area whitespace-nowrap"
+                data-discover="true"
+                href="/barrierefreiheit"
+              >
+                Barrierefreiheit
+                 
+              </a>
+            </li>
+            <li>
+               
+              <a
+                class="text-link increase-tap-area whitespace-nowrap"
+                data-discover="true"
+                href="/sitemap"
+              >
+                Sitemap
+                 
+              </a>
+            </li>
+            <li>
+               
+              <a
+                aria-describedby="a11y-message--new-window"
+                class="text-link increase-tap-area whitespace-nowrap"
+                href="https://github.com/digitalservicebund/digitalcheck-dito"
+                rel="noreferrer"
+                target="_blank"
+              >
+                Open Source Code
+                 
+                <svg
+                  aria-hidden="true"
+                  class="mb-4 ml-[0.2em] inline-block! fill-current"
+                  data-testid="OpenInNewIcon"
+                  focusable="false"
+                  height="1.2em"
+                  viewBox="0 0 24 24"
+                  width="1.2em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0 0h24v24H0z"
+                    fill="none"
+                  />
+                  <path
+                    d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+                  />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </section>
       </nav>
       <hr
-        class="mt-16 w-full border-t-2 border-blue-300"
+        class="mt-16 w-full border-t-[2px] border-blue-300"
       />
       <div
         class="space-y-16 sm:flex sm:gap-48"
@@ -311,10 +293,8 @@ exports[`Footer Component > Renders correctly 1`] = `
           src="/logo/bmi-logo.png"
           width="120"
         />
-        <nav
-          aria-label="Externe Verlinkungen"
-        >
-          <div
+        <nav>
+          <section
             class="ds-stack ds-stack-8"
           >
             <ul
@@ -325,7 +305,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                  
                 <a
                   aria-describedby="a11y-message--new-window"
-                  class="text-link increase-tap-area"
+                  class="text-link increase-tap-area whitespace-nowrap"
                   href="https://digitalservice.bund.de/"
                   rel="noreferrer"
                   target="_blank"
@@ -357,7 +337,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                  
                 <a
                   aria-describedby="a11y-message--new-window"
-                  class="text-link increase-tap-area"
+                  class="text-link increase-tap-area whitespace-nowrap"
                   href="https://www.bmi.bund.de/"
                   rel="noreferrer"
                   target="_blank"
@@ -385,7 +365,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                 </a>
               </li>
             </ul>
-          </div>
+          </section>
         </nav>
       </div>
     </div>
