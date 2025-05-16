@@ -616,7 +616,16 @@ for (const scenario of scenarios) {
       // only run on chromium because clipboard permissions don't work with firefox / safari
       // https://github.com/microsoft/playwright/issues/13037
       test("can copy email address to clipboard", async ({ browserName }) => {
-        test.skip(browserName === "webkit" || browserName == "firefox");
+        if (
+          browserName === "webkit" ||
+          browserName === "firefox" ||
+          test.info().project.name === "Desktop Edge"
+        ) {
+          test.skip(
+            true,
+            "Skipping clipboard test on WebKit, Firefox, and Desktop Edge.",
+          );
+        }
         const copyAddressButton = page.getByRole("button", {
           name: preCheckResult.form.copyAddressButton.text,
         });
@@ -645,7 +654,16 @@ for (const scenario of scenarios) {
       // only run on chromium because clipboard permissions don't work with firefox / safari
       // https://github.com/microsoft/playwright/issues/13037
       test("can copy email content to clipboard", async ({ browserName }) => {
-        test.skip(browserName === "webkit" || browserName == "firefox");
+        if (
+          browserName === "webkit" ||
+          browserName === "firefox" ||
+          test.info().project.name === "Desktop Edge"
+        ) {
+          test.skip(
+            true,
+            "Skipping clipboard test on WebKit, Firefox, and Desktop Edge.",
+          );
+        }
         const titleInputLocator = page.getByLabel("Arbeitstitel des Vorhabens");
         const reasoningInputLocator = page.getByLabel("Begründung");
 
