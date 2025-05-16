@@ -12,24 +12,20 @@ type LinkProps = {
   openInNewTab?: boolean;
 };
 
-const FooterLink = ({ link }: { link: LinkProps }) => {
-  return (
-    <>
-      {link?.preText}{" "}
-      <Link
-        to={link.url}
-        className="text-link increase-tap-area"
-        target={link.openInNewTab ? "_blank" : undefined}
-        rel={link.openInNewTab ? "noreferrer" : undefined}
-        aria-describedby={
-          link.openInNewTab ? A11Y_MESSAGE_NEW_WINDOW : undefined
-        }
-      >
-        {link.text} {link.openInNewTab && openInNewIconElement}
-      </Link>
-    </>
-  );
-};
+const FooterLink = ({ link }: { link: LinkProps }) => (
+  <>
+    {link?.preText}{" "}
+    <Link
+      to={link.url}
+      className="text-link increase-tap-area"
+      target={link.openInNewTab ? "_blank" : undefined}
+      rel={link.openInNewTab ? "noreferrer" : undefined}
+      aria-describedby={link.openInNewTab ? A11Y_MESSAGE_NEW_WINDOW : undefined}
+    >
+      {link.text} {link.openInNewTab && openInNewIconElement}
+    </Link>
+  </>
+);
 
 const LinkList = ({
   header,
