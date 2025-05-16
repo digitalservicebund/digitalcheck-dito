@@ -243,8 +243,9 @@ export default function ResultForm({
           className="ds-label-section"
           text={preCheckResult.form.faqs.title}
         />
-        {preCheckResult.form.faqs.details.map((detail) => (
+        {preCheckResult.form.faqs.details.map((detail, index) => (
           <DetailsSummary
+            className={`plausible-event-name=Content.Content+Info.Accordion+FAQ${index}`}
             key={detail.label}
             title={detail.label}
             content={detail.text}

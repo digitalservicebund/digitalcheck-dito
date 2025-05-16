@@ -220,6 +220,7 @@ export default function Result() {
             <div className="border-b-2 border-solid border-gray-400 pt-16 pb-40 last:border-0 last:pb-0 print:border-0 print:pb-0">
               <DetailsSummary
                 title={preCheckResult.detailsTitle}
+                className="plausible-event-name=Content.Result.Accordion+Result+Detail"
                 content={
                   <>
                     {resultContent.reasoningList
