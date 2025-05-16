@@ -2,8 +2,8 @@ import {
   ExpandLessOutlined,
   ExpandMoreOutlined,
 } from "@digitalservicebund/icons";
-import type { DropdownItemProps } from "~/components/DrodownMenuItem.tsx";
 import DropdownContentList from "~/components/DropdownContentList";
+import type { DropdownItemProps } from "~/components/DropdownContentList.tsx";
 import { header } from "~/resources/content/components/header.ts";
 import twMerge from "~/utils/tailwindMerge";
 
