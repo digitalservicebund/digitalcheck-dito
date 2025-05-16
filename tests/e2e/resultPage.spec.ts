@@ -613,7 +613,10 @@ for (const scenario of scenarios) {
         });
       });
 
-      test("can copy email address to clipboard", async () => {
+      // only run on chromium because clipboard permissions don't work with firefox / safari
+      // https://github.com/microsoft/playwright/issues/13037
+      test("can copy email address to clipboard", async ({ browserName }) => {
+        test.skip(browserName === "webkit" || browserName == "firefox");
         const copyAddressButton = page.getByRole("button", {
           name: preCheckResult.form.copyAddressButton.text,
         });
@@ -639,7 +642,10 @@ for (const scenario of scenarios) {
         expect(clipboardText).toBe(expectedClipboardText);
       });
 
-      test("can copy email content to clipboard", async () => {
+      // only run on chromium because clipboard permissions don't work with firefox / safari
+      // https://github.com/microsoft/playwright/issues/13037
+      test("can copy email content to clipboard", async ({ browserName }) => {
+        test.skip(browserName === "webkit" || browserName == "firefox");
         const titleInputLocator = page.getByLabel("Arbeitstitel des Vorhabens");
         const reasoningInputLocator = page.getByLabel("Begründung");
 
