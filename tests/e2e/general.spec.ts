@@ -1,5 +1,4 @@
 import { expect, test } from "@playwright/test";
-import { footer } from "~/resources/content/components/footer";
 
 import {
   ROUTE_A11Y,
@@ -72,17 +71,11 @@ test.describe("test landing page", () => {
 
 test("footer is displayed", async ({ page }) => {
   await page.goto(ROUTE_LANDING.url);
-  const footerEl = page.getByRole("contentinfo", { name: footer.navLabel });
+  const footerEl = page.locator("id=page-footer");
   await expect(footerEl).toBeVisible();
-  await expect(
-    footerEl.getByRole("navigation", { name: footer.top.navLabel }),
-  ).toBeVisible();
-  await expect(
-    footerEl.getByRole("navigation", { name: footer.middle.navLabel }),
-  ).toBeVisible();
-  await expect(
-    footerEl.getByRole("navigation", { name: footer.bottom.navLabel }),
-  ).toBeVisible();
+  await expect(footerEl.locator("id=quick-overfiew-nav")).toBeVisible();
+  await expect(footerEl.locator("id=sitemap-nav")).toBeVisible();
+  await expect(footerEl.locator("id=external-links-nav")).toBeVisible();
 });
 
 test.describe("test links", () => {

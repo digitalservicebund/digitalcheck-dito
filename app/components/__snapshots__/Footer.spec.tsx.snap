@@ -5,6 +5,7 @@ exports[`Footer Component > Renders correctly 1`] = `
   <footer
     aria-label="Seitenfußbereich"
     class="ds-label-03-reg flex w-full flex-row justify-center px-16 leading-snug text-gray-900 print:hidden"
+    id="page-footer"
   >
     <div
       class="ds-stack ds-stack-32 sm:ds-stack-40 w-full max-w-[1120px] border-t-2 border-blue-300 py-40"
@@ -12,6 +13,7 @@ exports[`Footer Component > Renders correctly 1`] = `
       <nav
         aria-label="Schnellübersicht"
         class="grid grid-cols-1 justify-between gap-y-32 sm:grid-cols-[repeat(3,_minmax(0,_18rem))] sm:grid-rows-2"
+        id="quick-overfiew-nav"
       >
         <div
           class="ds-stack ds-stack-8 row-span-2"
@@ -209,9 +211,10 @@ exports[`Footer Component > Renders correctly 1`] = `
       </nav>
       <nav
         aria-label="Sitemap"
+        id="sitemap-nav"
       >
         <ul
-          class="list-unstyled flex flex-row gap-8"
+          class="list-unstyled flex flex-row flex-wrap gap-8"
         >
           <li
             class="after:ml-8 after:inline-block after:content-['•'] last:after:content-['']"
@@ -313,6 +316,7 @@ exports[`Footer Component > Renders correctly 1`] = `
         />
         <nav
           aria-label="Externe Verlinkungen"
+          id="external-links-nav"
         >
           <div
             class="ds-stack ds-stack-8"
