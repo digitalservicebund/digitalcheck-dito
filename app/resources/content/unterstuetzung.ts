@@ -53,30 +53,13 @@ export const support = {
     ],
   },
   supportHow: {
-    title: "So erhalten Sie Hilfe",
-    supportTypes: [
+    title: "Schnelle Hilfe und individuelle Beratung",
+    text: "Sie können uns für dringende Anliegen unter [0151/40 76 78 39](tel:+4915140767839) anrufen oder uns eine **E-Mail** senden. Wir beantworten Ihnen alle wichtigen Fragen zum Vorgehen und Anwenden des Digitalchecks sowie allgemeine Fragen rund um das Erarbeiten digitaltauglicher Regelungen.<br /><br /> Darüber hinaus bieten wir individuelle Beratungsgespräche an. Gemeinsam klären wir, welche Unterstützungsangebote am besten zu Ihrem Bedürfnissen passen.",
+    buttons: [
       {
-        title: "Schnelle Hilfe erhalten Sie per Telefon oder E-Mail",
-        text: "Sie können uns für dringende Anliegen unter [0151/40 76 78 39](tel:+4915140767839) anrufen oder uns eine E-Mail senden. Wir beantworten Ihnen alle wichtigen Fragen zum Vorgehen und Anwenden des Digitalchecks sowie allgemeine Fragen rund um das Erarbeiten digitaltauglicher Regelungen.",
-        buttons: [
-          {
-            text: "E-Mail senden",
-            look: "tertiary" as const,
-            href: "mailto:digitalcheck@digitalservice.bund.de?subject=Unterstützungsangebote:%20erarbeiten.digitalcheck.bund.de",
-          },
-        ],
-      },
-      {
-        title: "Beratung erhalten Sie in einem 45-minütigem Gespräch",
-        text: "In einem (Video)-Telefonat können wir gemeinsam herausfinden, welche Unterstützungsangebote für Sie hilfreich sind.",
-        iframe:
-          "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2LoqPwo-E2vI3Zjb2K5ic-rXqDCxsZ6N8KwbVkSnQMRIAdbFLCN0wTWymqn3f_Q44ZJdd4-JMZ?gv=true",
-        buttons: [
-          {
-            text: "Termin buchen",
-            look: "tertiary" as const,
-          },
-        ],
+        text: "E-Mail senden",
+        look: "tertiary" as const,
+        href: "mailto:digitalcheck@digitalservice.bund.de?subject=Unterstützungsangebote:%20erarbeiten.digitalcheck.bund.de",
       },
     ],
   },

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { type MetaArgs, useLocation } from "react-router";
-import { twJoin } from "tailwind-merge";
 
 import Background from "~/components/Background";
 import Box from "~/components/Box";
@@ -75,7 +74,6 @@ function SocialProofImage() {
 }
 
 export default function Index() {
-  const [isAppointmentsVisible, setIsAppointmentsVisible] = useState(false);
   const location = useLocation();
 
   const [initialTabIndex, setInitialTabIndex] = useState(0);
@@ -83,13 +81,6 @@ export default function Index() {
     const targetIndex = location.hash === "#angebote" ? 2 : 0;
     setInitialTabIndex(targetIndex);
   }, [location.hash]);
-
-  const iframeButtons = [
-    {
-      ...supportHow.supportTypes[1].buttons[0],
-      onClick: () => setIsAppointmentsVisible(true),
-    },
-  ];
 
   const tabsData: TabItem[] = supportOfferings.tabs.map((tab) => ({
     title: tab.title,
@@ -243,42 +234,14 @@ export default function Index() {
       <Background backgroundColor="blue">
         <Container>
           <Heading id="hilfe" tagName="h2" text={supportHow.title} />
-          {supportHow.supportTypes.length > 0 &&
-            supportHow.supportTypes.map((supportType) => (
-              <div
-                key={supportType.title}
-                className="ds-stack ds-stack-16 pt-32 pb-40"
-              >
-                <Box
-                  heading={{
-                    tagName: "h3",
-                    text: supportType.title,
-                  }}
-                  content={{
-                    markdown: supportType.text,
-                  }}
-                />
-                {supportType.iframe ? (
-                  <>
-                    <ButtonContainer
-                      buttons={iframeButtons}
-                      className={isAppointmentsVisible ? "hidden" : ""}
-                    />
-                    <iframe
-                      src={supportType.iframe}
-                      title={supportType.title}
-                      aria-label={supportType.title}
-                      className={twJoin(
-                        "mt-32 w-full transition-all duration-700",
-                        isAppointmentsVisible ? "h-[600px]" : "hidden h-0",
-                      )}
-                    ></iframe>
-                  </>
-                ) : (
-                  <ButtonContainer buttons={supportType.buttons} />
-                )}
-              </div>
-            ))}
+          <div className="ds-stack ds-stack-16 pt-32 pb-40">
+            <Box
+              content={{
+                markdown: supportHow.text,
+              }}
+            />
+            <ButtonContainer buttons={supportHow.buttons} />
+          </div>
         </Container>
       </Background>
       <div id="angebote">
