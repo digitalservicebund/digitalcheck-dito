@@ -23,6 +23,16 @@ interface TabsProps {
   onNavigateRequest?: (tab: TabItem, index: number) => void;
 }
 
+/**
+ * Renders a tabbed interface.
+ *
+ * This component can display content directly within tab panels or,
+ * when the `onNavigateRequest` prop is provided, it can delegate navigation
+ * to an external source. In this mode, clicking a tab
+ * will invoke `onNavigateRequest` with the tab's details, allowing the parent
+ * component to handle the route change. The content for each tab is then
+ * expected to be rendered by the router, not by this component.
+ */
 export default function Tabs({
   tabs,
   initialActiveIndex = 0,
