@@ -150,7 +150,8 @@ export default function ResultForm({
                           text: preCheckResult.form.downloadPdfButton.text,
                           look: "ghost",
                           type: "button",
-                          className: "plausible-event-name=Quicksend+Click",
+                          className:
+                            "plausible-event-name=Content.Send+Result.Button+Create+Email",
                           onClick: () => {
                             if (window) window.print();
                           },
@@ -191,6 +192,7 @@ export default function ResultForm({
           <DetailsSummary
             showVerticalLine
             title={preCheckResult.form.previewLabel}
+            className="plausible-event-name=Content.Send+Result.Accordion+Preview+Email+Text"
             content={
               <div data-testid="emailPreview" className="whitespace-pre-wrap">
                 {emailPreviewBody}

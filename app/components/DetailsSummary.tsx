@@ -9,6 +9,7 @@ export type DetailsSummaryProps = {
   bold?: boolean;
   open?: boolean;
   showVerticalLine?: boolean;
+  className?: string;
 };
 
 export default function DetailsSummary({
@@ -17,6 +18,7 @@ export default function DetailsSummary({
   bold = true,
   open = false,
   showVerticalLine = true,
+  className,
 }: Readonly<DetailsSummaryProps>) {
   const summaryClasses = twJoin(
     "summary-content inline-flex focus:outline-hidden cursor-pointer bg-no-repeat pl-[24px] [&::-webkit-details-marker]:hidden",
@@ -31,7 +33,10 @@ export default function DetailsSummary({
   return (
     <details
       open={open}
-      className="details text-blue-800 has-focus-visible:outline has-focus-visible:outline-4 has-focus-visible:outline-offset-4 has-focus-visible:outline-blue-800"
+      className={twJoin(
+        "details text-blue-800 has-focus-visible:outline has-focus-visible:outline-4 has-focus-visible:outline-offset-4 has-focus-visible:outline-blue-800",
+        className,
+      )}
     >
       <summary className={summaryClasses}>{title}</summary>
       <span className={contentWrapperClasses}>
