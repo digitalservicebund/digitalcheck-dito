@@ -10,6 +10,10 @@ const { questions } = preCheck;
 
 export type ResultContent = {
   title: string;
+  infoboxContent?: {
+    title: string;
+    text: string;
+  };
   reasoningList: Reasoning[];
 };
 
@@ -92,6 +96,35 @@ function getRelevantReasons(
     });
 }
 
+function getInfoboxContentForResult(
+  result: PreCheckResult,
+): { title: string; text: string } | null {
+  const infoboxTitle = preCheckResult.infoBox.title;
+  let markdownText: string | null = null;
+
+  const isDigitalPositive = result.digital === ResultType.POSITIVE;
+  const isInteroperabilityPositive =
+    result.interoperability === ResultType.POSITIVE;
+
+  if (isDigitalPositive && isInteroperabilityPositive) {
+    markdownText =
+      preCheckResult.infoBox.contentDigitalBezugAndInteroperability;
+  } else if (isDigitalPositive) {
+    markdownText = preCheckResult.infoBox.contentDigitalBezug;
+  } else if (isInteroperabilityPositive) {
+    markdownText = preCheckResult.infoBox.contentInteroperability;
+  }
+
+  if (markdownText) {
+    return {
+      title: infoboxTitle,
+      text: markdownText,
+    };
+  } else {
+    return null;
+  }
+}
+
 export default function getContentForResult(
   answers: PreCheckAnswers,
   result: PreCheckResult,
@@ -116,5 +149,6 @@ export default function getContentForResult(
         reasons: getRelevantReasons(answers, result, true, false),
       },
     ],
+    infoboxContent: getInfoboxContentForResult(result) || undefined,
   };
 }

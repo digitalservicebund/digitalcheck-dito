@@ -1,6 +1,12 @@
+import {
+  CopyAll,
+  DriveFileRenameOutline,
+  EmailOutlined,
+} from "@digitalservicebund/icons";
 import { useForm } from "@rvf/react-router";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Alert from "~/components/Alert";
+import Box from "~/components/Box.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
@@ -97,123 +103,134 @@ export default function ResultForm({
       <form {...form.getFormProps()} data-testid="result-form">
         <fieldset className="ds-stack ds-stack-24">
           <legend>
-            <Heading tagName="h2" text={preCheckResult.form.formLegend} />
+            <Heading tagName="h3" text={preCheckResult.form.formLegend} />
           </legend>
-          <RichText markdown={preCheckResult.form.instructions} />
-          {Object.keys(answers).map((answer) => (
-            <input
-              key={answer}
-              name={answer}
-              value={answers[answer]}
-              type="hidden"
-            />
-          ))}
-          <Input
-            name="email"
-            type={"email"}
-            label={preCheckResult.form.emailLabel}
-            error={form.error("email")}
-          />
-          <Input
-            name="title"
-            label={preCheckResult.form.vorhabenTitleLabel}
-            error={form.error("title")}
-            onChange={handleVorhabenTitleChange}
-          />
-          {result.digital === ResultType.NEGATIVE && (
-            <Textarea
-              name="negativeReasoning"
-              label={preCheckResult.form.reasonLabel}
-              error={form.error("negativeReasoning")}
-              warning={warning}
-              onChange={handleNegativeReasoningChange}
-            />
-          )}
-          <ButtonContainer
-            buttons={
-              showSaveToPdf
-                ? [
-                    {
-                      id: "result-email-button",
-                      text: preCheckResult.form.sendEmailButton.text,
-                      look: "primary",
-                      className: "plausible-event-name=Quicksend+Click",
-                    },
-                    {
-                      id: "result-print-button",
-                      text: preCheckResult.form.downloadPdfButton.text,
-                      look: "ghost",
-                      type: "button",
-                      className: "plausible-event-name=Quicksend+Click",
-                      onClick: () => {
-                        if (window) window.print();
-                      },
-                    },
-                  ]
-                : [
-                    {
-                      id: "result-email-button",
-                      text: preCheckResult.form.sendEmailButton.text,
-                      look: "primary",
-                      className: "plausible-event-name=Quicksend+Click",
-                    },
-                  ]
-            }
-          />
+          <div className="flex items-start pb-[40px]">
+            <div className="mr-[16px] flex-shrink-0">
+              <EmailOutlined className="h-40 w-40 fill-blue-800" />
+            </div>
+            <div className="ds-stack ds-stack-16 flex-grow">
+              <RichText markdown={preCheckResult.form.instructions} />
+              {Object.keys(answers).map((answer) => (
+                <input
+                  key={answer}
+                  name={answer}
+                  value={answers[answer]}
+                  type="hidden"
+                />
+              ))}
+              <Input
+                className="pb-4"
+                name="title"
+                label={preCheckResult.form.vorhabenTitleLabel}
+                error={form.error("title")}
+                onChange={handleVorhabenTitleChange}
+              />
+              {result.digital === ResultType.NEGATIVE && (
+                <Textarea
+                  name="negativeReasoning"
+                  label={preCheckResult.form.reasonLabel}
+                  error={form.error("negativeReasoning")}
+                  warning={warning}
+                  onChange={handleNegativeReasoningChange}
+                />
+              )}
+              <ButtonContainer
+                buttons={
+                  showSaveToPdf
+                    ? [
+                        {
+                          id: "result-email-button",
+                          text: preCheckResult.form.sendEmailButton.text,
+                          look: "primary",
+                          className: "plausible-event-name=Quicksend+Click",
+                        },
+                        {
+                          id: "result-print-button",
+                          text: preCheckResult.form.downloadPdfButton.text,
+                          look: "ghost",
+                          type: "button",
+                          className: "plausible-event-name=Quicksend+Click",
+                          onClick: () => {
+                            if (window) window.print();
+                          },
+                        },
+                      ]
+                    : [
+                        {
+                          id: "result-email-button",
+                          text: preCheckResult.form.sendEmailButton.text,
+                          look: "primary",
+                          className: "plausible-event-name=Quicksend+Click",
+                        },
+                      ]
+                }
+              />
+              {showEmailAlert && (
+                <div className="mt-16">
+                  <Alert
+                    title={preCheckResult.form.emailClientHint.title}
+                    content={preCheckResult.form.emailClientHint.text}
+                    tagName="h3"
+                    look="info"
+                    setShowAlert={setShowEmailAlert}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
         </fieldset>
       </form>
-      <RichText
-        className="pt-[40px]"
-        markdown={preCheckResult.form.copyIntroText}
-      ></RichText>
-      <div className="py-[24px]">
-        <DetailsSummary
-          title={preCheckResult.form.previewLabel}
-          content={
-            <div
-              data-testid="emailPreview"
-              className="text-sm whitespace-pre-wrap"
-            >
-              {emailPreviewBody}
-            </div>
-          }
-        />
-      </div>
-      <ButtonContainer
-        className="mb-[40px]"
-        buttons={[
-          {
-            look: "tertiary",
-            text: isMailBodyCopied
-              ? preCheckResult.form.copyMailButton.textCopied
-              : preCheckResult.form.copyMailButton.text,
-            onClick: () => {
-              void handleCopyEmailBody();
-            },
-          },
-          {
-            look: "ghost",
-            text: isMailAddressCopied
-              ? preCheckResult.form.copyAddressButton.textCopied
-              : preCheckResult.form.copyAddressButton.text,
-            onClick: () => {
-              void handleCopyMailAddress();
-            },
-          },
-        ]}
-      />
-      <hr className="border-t-[2px] border-gray-400" />
-      {showEmailAlert && (
-        <div className="mt-16">
-          <Alert
-            title={preCheckResult.form.emailClientHint.title}
-            content={preCheckResult.form.emailClientHint.text}
-            tagName="h3"
-            look="info"
-            setShowAlert={setShowEmailAlert}
+
+      <div className="flex items-start">
+        <div className="mr-[16px] flex-shrink-0">
+          <DriveFileRenameOutline className="h-40 w-40 fill-blue-800" />
+        </div>
+        <div className="ds-stack ds-stack-24 flex-grow">
+          <RichText markdown={preCheckResult.form.copyIntroText}></RichText>
+          <DetailsSummary
+            showVerticalLine
+            title={preCheckResult.form.previewLabel}
+            content={
+              <div data-testid="emailPreview" className="whitespace-pre-wrap">
+                {emailPreviewBody}
+              </div>
+            }
+          />
+          <ButtonContainer
+            buttons={[
+              {
+                look: "tertiary",
+                text: isMailBodyCopied
+                  ? preCheckResult.form.copyMailButton.textCopied
+                  : preCheckResult.form.copyMailButton.text,
+                onClick: () => {
+                  void handleCopyEmailBody();
+                },
+              },
+              {
+                look: "ghost",
+                text: isMailAddressCopied
+                  ? preCheckResult.form.copyAddressButton.textCopied
+                  : preCheckResult.form.copyAddressButton.text,
+                iconRight: <CopyAll className="h-40 w-40 text-blue-800" />,
+                onClick: () => {
+                  void handleCopyMailAddress();
+                },
+              },
+            ]}
           />
         </div>
-      )}
+      </div>
+      <hr className="mt-40 mb-32 border-t-[2px] border-gray-400" />
+
+      <Box
+        heading={{
+          text: preCheckResult.form.outro.title,
+          tagName: "h3",
+        }}
+        content={{ markdown: preCheckResult.form.outro.text }}
+      />
       <div className="ds-stack ds-stack-16 mt-40">
         <Heading
           tagName="h3"

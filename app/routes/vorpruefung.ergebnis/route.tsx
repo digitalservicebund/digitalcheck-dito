@@ -14,8 +14,8 @@ import { twJoin } from "tailwind-merge";
 import Accordion from "~/components/Accordion";
 import Background from "~/components/Background";
 import Box from "~/components/Box";
-import Button from "~/components/Button";
 import Container from "~/components/Container";
+import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import { NumberedList } from "~/components/List";
@@ -199,7 +199,7 @@ export default function Result() {
               <Header
                 heading={{
                   tagName: "h1",
-                  look: "ds-heading-03-reg",
+                  look: "ds-heading-02-reg",
                   markdown: resultContent.title,
                   className: "mb-0",
                 }}
@@ -208,34 +208,53 @@ export default function Result() {
             </div>
           </Container>
           <Container className="rounded-b-lg" backgroundColor="white">
-            <div className="border-b-2 border-solid border-gray-400 pb-40 last:border-0 last:pb-0 print:border-0 print:pb-0">
-              {resultContent.reasoningList
-                .filter(({ reasons }) => reasons.length > 0)
-                .map(({ intro, reasons }) => (
-                  <React.Fragment key={intro}>
-                    <RichText markdown={intro} className="mt-40 first:mt-0" />
-                    <ul className="ds-stack ds-stack-16 mt-16 pl-0">
-                      {reasons
-                        .toSorted((a, b) => {
-                          if (a.answer === b.answer) {
-                            return 0; // Keep the original order
+            {resultContent.infoboxContent && (
+              <Box
+                heading={{
+                  text: resultContent.infoboxContent.title,
+                  tagName: "h3",
+                }}
+                content={{ markdown: resultContent.infoboxContent.text }}
+              />
+            )}
+            <div className="border-b-2 border-solid border-gray-400 pt-16 pb-40 last:border-0 last:pb-0 print:border-0 print:pb-0">
+              <DetailsSummary
+                title={preCheckResult.detailsTitle}
+                content={
+                  <>
+                    {resultContent.reasoningList
+                      .filter(({ reasons }) => reasons.length > 0)
+                      .map(({ intro, reasons }) => (
+                        <React.Fragment key={intro}>
+                          <RichText markdown={intro} className="first:mt-16" />
+                          <ul className="ds-stack ds-stack-16 mt-16 pl-0">
+                            {reasons
+                              .toSorted((a, b) => {
+                                if (a.answer === b.answer) {
+                                  return 0; // Keep the original order
+                                }
+                                return a.answer === "yes" ? -1 : 1; // "yes" comes before "no"
+                              })
+                              .map((reason) => getReasonListItem(reason))}
+                          </ul>
+                        </React.Fragment>
+                      ))}
+
+                    {getResultForRelevantAnswers(answers, true) !==
+                      ResultType.NEGATIVE && (
+                      <div className="mt-40">
+                        <b>{preCheckResult.interoperability.info.title}</b>
+                        <RichText
+                          className="mt-8 mb-20"
+                          markdown={
+                            preCheckResult.interoperability.info.content
                           }
-                          return a.answer === "yes" ? -1 : 1; // "yes" comes before "no"
-                        })
-                        .map((reason) => getReasonListItem(reason))}
-                    </ul>
-                  </React.Fragment>
-                ))}
-              {getResultForRelevantAnswers(answers, true) !==
-                ResultType.NEGATIVE && (
-                <div className="mt-40">
-                  <b>{preCheckResult.interoperability.info.title}</b>
-                  <p className="mt-8 mb-20">
-                    {preCheckResult.interoperability.info.content}
-                  </p>
-                  <Button {...preCheckResult.interoperability.info.button} />
-                </div>
-              )}
+                        />
+                      </div>
+                    )}
+                  </>
+                }
+              />
             </div>
             {result.digital !== ResultType.UNSURE && (
               <div className="mt-32 print:hidden">

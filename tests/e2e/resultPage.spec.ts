@@ -301,19 +301,21 @@ for (const scenario of scenarios) {
     });
 
     if (scenario.expected.showsInteropLink) {
-      test("page contains link to interoperability landing page", async () => {
-        await expect(page.getByRole("main")).toContainText(
-          "Erfahren Sie mehr über Interoperabilität",
-        );
-        await expect(
-          page.getByRole("link", { name: "Mehr zu Interoperabilität" }),
-        ).toBeVisible();
-      });
+      test("details contain link to interoperability landing page and leads to interoperability landing page", async () => {
+        const summaryText = preCheckResult.detailsTitle;
+        const summaryElement = page.getByText(summaryText, { exact: true });
 
-      test("link to interoperability landing page leads to interoperability landing page", async () => {
-        await page
-          .getByRole("link", { name: "Mehr zu Interoperabilität" })
-          .click();
+        // Ensure the summary element itself is visible (it always should be)
+        await expect(summaryElement).toBeVisible();
+        await summaryElement.click();
+        const detailsElement = page.locator("details", {
+          hasText: summaryText,
+        });
+        await expect(detailsElement).toHaveAttribute("open", "");
+        await expect(
+          page.getByRole("link", { name: "Übersichtsseite" }),
+        ).toBeVisible();
+        await page.getByRole("link", { name: "Übersichtsseite" }).click();
         await expect(page).toHaveURL(ROUTE_INTEROPERABILITY.url);
       });
     } else {
@@ -328,10 +330,6 @@ for (const scenario of scenarios) {
     }
 
     if (scenario.expected.formIsVisible) {
-      test("email input is visible", async () => {
-        await expect(page.getByLabel("Ihre E-Mail Adresse")).toBeVisible();
-      });
-
       test("title input is visible", async () => {
         await expect(
           page.getByLabel("Arbeitstitel des Vorhabens"),
@@ -370,7 +368,6 @@ for (const scenario of scenarios) {
       }
 
       test("no error shown when email and title are filled", async () => {
-        await page.getByLabel("Ihre E-Mail Adresse").fill("foo@bar.de");
         await page
           .getByLabel("Arbeitstitel des Vorhabens")
           .fill("Vorhaben ABC");
@@ -425,20 +422,6 @@ for (const scenario of scenarios) {
         }
         const { recipients } = await interceptMail(page);
         expect(recipients).toContain("nkr@bmj.bund.de");
-      });
-
-      test("email cc includes email from email input", async () => {
-        await page
-          .getByLabel("Arbeitstitel des Vorhabens")
-          .fill("Vorhaben ABC");
-        await page.getByLabel("Ihre E-Mail Adresse").fill("foo@bar.de");
-        if (scenario.expected.showsNegativeReasoning) {
-          await page
-            .getByLabel("Begründung")
-            .fill("Darum brauchen wir das nicht.");
-        }
-        const { cc } = await interceptMail(page);
-        expect(cc).toContain("foo@bar.de");
       });
 
       if (scenario.expected.includesInterop) {
@@ -639,7 +622,7 @@ for (const scenario of scenarios) {
 
         await expect(
           page.getByRole("button", {
-            name: preCheckResult.form.copyAddressButton.textCopied,
+            name: preCheckResult.form.copyAddressButton.text,
           }),
         ).toBeVisible();
 

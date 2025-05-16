@@ -10,6 +10,7 @@ export type InputProps = Readonly<{
   prefix?: string;
   suffix?: string;
   helperText?: string;
+  className?: string;
   width?: "3" | "5" | "7" | "10" | "16" | "24" | "36" | "54";
   error?: string | null;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -38,12 +39,13 @@ export default function Input({
   width,
   error,
   onChange,
+  className,
 }: InputProps) {
   const errorId = `${name}-error`;
   const helperId = `${name}-helper`;
 
   return (
-    <div>
+    <div className={className}>
       {label && (
         <InputLabel classname="text-gray-900" id={name}>
           {label}

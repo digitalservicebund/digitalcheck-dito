@@ -20,6 +20,7 @@ export const preCheckResult = {
         "In Bezug auf **Interoperabilität** ist nicht sicher, ob Ihr Regelungsvorhaben zu Folgendem führt...",
     },
   },
+  detailsTitle: "Aufschlüsselung Ihres Ergebnisses",
   positive: {
     title: "Das Regelungsvorhaben hat einen **Digitalbezug** und ",
     actionButton: {
@@ -61,11 +62,19 @@ export const preCheckResult = {
       steps: [steps.preCheck.finished, steps.nkrFinal],
     },
   },
+  infoBox: {
+    title: "Was bedeutet das für mein Vorhaben?",
+    contentDigitalBezugAndInteroperability:
+      "Das bedeutet, dass Sie weitere Schritte unternehmen müssen, um Digitalbezug und EU-Anforderungen an Interoperabilität in Ihrem Regelungsvorhaben sicherzustellen.",
+    contentDigitalBezug:
+      "Das bedeutet, dass Sie weitere Schritte unternehmen müssen, um Digitalbezug in Ihrem Regelungsvorhaben sicherzustellen.",
+    contentInteroperability:
+      "Das bedeutet, dass Sie weitere Schritte unternehmen müssen, um Digitalbezug und EU-Anforderungen an Interoperabilität in Ihrem Regelungsvorhaben sicherzustellen.",
+  },
   interoperability: {
     info: {
       title: "Erfahren Sie mehr über Interoperabilität",
-      content:
-        "Was bedeutet Interoperabilität für Regelungen, und wie beeinflusst sie deren Erarbeitung? Auf unserer Übersichtsseite finden Sie alle wichtigen Informationen dazu.",
+      content: dedent`Was bedeutet Interoperabilität für Regelungen, und wie beeinflusst sie deren Erarbeitung? Auf unserer [Übersichtsseite](${ROUTE_INTEROPERABILITY.url}) finden Sie alle wichtigen Informationen dazu.`,
       button: {
         text: "Mehr zu Interoperabilität",
         href: ROUTE_INTEROPERABILITY.url,
@@ -83,16 +92,15 @@ export const preCheckResult = {
     },
   },
   form: {
-    formLegend: "Vorprüfung senden",
+    formLegend: "Ergebnis senden und NKR frühzeitig einbinden",
     instructions: dedent`
-      Wir erstellen für Sie eine E-Mail mit dem Ergebnis der Vorprüfung, die sich in Ihrem E-Mail-Programm öffnet. Diese können Sie anschließend an den Nationalen Normenkontrollrat (NKR), das Digitalcheck-Team und an Ihre eigene E-Mail-Adresse senden. Geben Sie Ihre eigene E-Mail-Adresse an, um sich diese als **Teil der Dokumentation** zu schicken.
-      <br/><br/>
-      - Falls Ihr Vorhaben Interoperabilitäts-Anforderungen erfüllt, lassen Sie das Digitalcheck-Team bitte im Kopie-Feld der E-Mail. Wir erhalten somit das Vorprüfungsergebnisses in Kopie und kontaktieren Sie für die nächsten Schritte. Bei Fragen können Sie uns auch direkt unter [0151/40 76 78 39](tel:+4915140767839) erreichen.<br/><br/> 
-      - Je früher und tiefer Sie sich mit dem NKR über den Digitalbezug Ihres Regelungsvorhabens austauschen, desto schneller wird die Prüfung abgeschlossen.
+      Wir erstellen für Sie eine E-Mail mit dem Ergebnis der Vorprüfung, die sich in Ihrem E-Mail-Programm öffnet.
+      <br/>
+      - Schicken Sie das Ergebnis an den Nationalen Normenkontrollrat (NKR).
+      - **Bei Anforderungen an Interoperabilität** erhält Digitalcheck-Team  automatisch eine Kopie und meldet sich bei Ihnen.
     `,
     previewLabel: "Vorschau der E-Mail Vorlage",
     copyIntroText: dedent`**Alternativ** können Sie das Ergebnis der Vorprüfung einfach als Text kopieren und manuell an den NKR schicken oder bei Ihren Dokumenten speichern.`,
-    emailLabel: "Ihre E-Mail Adresse (optional)",
     vorhabenTitleLabel: "Vorläufiger Arbeitstitel des Vorhabens",
     vorhabenTitleRequired: "Bitte geben Sie einen Titel für Ihr Vorhaben an.",
     vorhabenTitleTooLong:
@@ -166,6 +174,13 @@ export const preCheckResult = {
       `,
     },
     downloadStarted: "Vorprüfung wird heruntergeladen",
+    outro: {
+      title: "Darum ist es wichtig",
+      text: dedent`
+      - Je **früher** Sie sich mit dem NKR zu Digitalbezug austauschen desto schneller ist die Prüfung abgeschlossen.
+      - Bei Interoperabilitätsbezug unterstützt Sie das Digitalcheck-Team gezielt bei der Umsetzung der EU-Anforderungen.
+    `,
+    },
   },
   print: {
     titlePrefix: "Ihr Vorhaben: ",
