@@ -39,7 +39,7 @@ export default function DetailsSummary({
           <div
             aria-hidden="true"
             className={twJoin(
-              "absolute top-0 bottom-0 w-[2px] bg-blue-500",
+              "absolute top-0 bottom-0 w-[1px] bg-blue-500",
               "left-[11px]",
             )}
           ></div>
