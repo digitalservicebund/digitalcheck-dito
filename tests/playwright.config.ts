@@ -41,9 +41,11 @@ export const allProjects = [
   },
   {
     name: "Tablet Chrome",
-    use: { ...devices["Galaxy Tab S4 landscape"] },
-    contextOptions: {
-      permissions: ["clipboard-read", "clipboard-write"],
+    use: {
+      ...devices["Galaxy Tab S4 landscape"],
+      contextOptions: {
+        permissions: ["clipboard-read", "clipboard-write"],
+      },
     },
   },
   {
