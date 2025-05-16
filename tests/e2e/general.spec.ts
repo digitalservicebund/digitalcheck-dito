@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { footer } from "~/resources/content/components/footer";
 
 import {
   ROUTE_A11Y,
@@ -67,6 +68,21 @@ test.describe("test landing page", () => {
     );
     await expect(page.getByRole("main")).toContainText("4Prüfen durch den NKR");
   });
+});
+
+test("footer is displayed", async ({ page }) => {
+  await page.goto(ROUTE_LANDING.url);
+  const footerEl = page.getByRole("contentinfo", { name: footer.navLabel });
+  await expect(footerEl).toBeVisible();
+  await expect(
+    footerEl.getByRole("navigation", { name: footer.top.navLabel }),
+  ).toBeVisible();
+  await expect(
+    footerEl.getByRole("navigation", { name: footer.middle.navLabel }),
+  ).toBeVisible();
+  await expect(
+    footerEl.getByRole("navigation", { name: footer.bottom.navLabel }),
+  ).toBeVisible();
 });
 
 test.describe("test links", () => {
@@ -152,26 +168,19 @@ test.describe("test progress bar", () => {
 
   test("Correct step is highlighted in progress bar", async ({ page }) => {
     await page.goto(ROUTE_PRECHECK.url);
-    await expect(page.getByRole("navigation").getByText("1")).toContainClass(
-      "bg-blue-800",
-    );
-    await expect(page.getByRole("navigation").getByText("2")).toContainClass(
-      "border-white",
-    );
+    const navigation = page.getByRole("navigation", {
+      name: "Digitalcheck-Fortschritt",
+    });
+    await expect(navigation).toBeVisible();
+
+    await expect(navigation.getByText("1")).toContainClass("bg-blue-800");
+    await expect(navigation.getByText("2")).toContainClass("border-white");
     await page.goto(ROUTE_METHODS.url);
-    await expect(page.getByRole("navigation").getByText("2")).toContainClass(
-      "bg-blue-800",
-    );
-    await expect(page.getByRole("navigation").getByText("1")).toContainClass(
-      "border-white",
-    );
+    await expect(navigation.getByText("2")).toContainClass("bg-blue-800");
+    await expect(navigation.getByText("1")).toContainClass("border-white");
     await page.goto(ROUTE_DOCUMENTATION.url);
-    await expect(page.getByRole("navigation").getByText("3")).toContainClass(
-      "bg-blue-800",
-    );
-    await expect(page.getByRole("navigation").getByText("2")).toContainClass(
-      "border-white",
-    );
+    await expect(navigation.getByText("3")).toContainClass("bg-blue-800");
+    await expect(navigation.getByText("2")).toContainClass("border-white");
   });
 });
 
