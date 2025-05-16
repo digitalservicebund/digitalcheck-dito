@@ -53,30 +53,13 @@ export const support = {
     ],
   },
   supportHow: {
-    title: "So erhalten Sie Hilfe",
-    supportTypes: [
+    title: "Schnelle Hilfe und individuelle Beratung",
+    text: "Sie können uns für dringende Anliegen unter [0151/40 76 78 39](tel:+4915140767839) anrufen oder uns eine **E-Mail** senden. Wir beantworten Ihnen alle wichtigen Fragen zum Vorgehen und Anwenden des Digitalchecks sowie allgemeine Fragen rund um das Erarbeiten digitaltauglicher Regelungen.<br /><br /> Darüber hinaus bieten wir individuelle Beratungsgespräche an. Gemeinsam klären wir, welche Unterstützungsangebote am besten zu Ihrem Bedürfnissen passen.",
+    buttons: [
       {
-        title: "Schnelle Hilfe erhalten Sie per Telefon oder E-Mail",
-        text: "Sie können uns für dringende Anliegen unter [0151/40 76 78 39](tel:+4915140767839) anrufen oder uns eine E-Mail senden. Wir beantworten Ihnen alle wichtigen Fragen zum Vorgehen und Anwenden des Digitalchecks sowie allgemeine Fragen rund um das Erarbeiten digitaltauglicher Regelungen.",
-        buttons: [
-          {
-            text: "E-Mail senden",
-            look: "tertiary" as const,
-            href: "mailto:digitalcheck@digitalservice.bund.de?subject=Unterstützungsangebote:%20erarbeiten.digitalcheck.bund.de",
-          },
-        ],
-      },
-      {
-        title: "Beratung erhalten Sie in einem 45-minütigem Gespräch",
-        text: "In einem (Video)-Telefonat können wir gemeinsam herausfinden, welche Unterstützungsangebote für Sie hilfreich sind.",
-        iframe:
-          "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2LoqPwo-E2vI3Zjb2K5ic-rXqDCxsZ6N8KwbVkSnQMRIAdbFLCN0wTWymqn3f_Q44ZJdd4-JMZ?gv=true",
-        buttons: [
-          {
-            text: "Termin buchen",
-            look: "tertiary" as const,
-          },
-        ],
+        text: "E-Mail senden",
+        look: "tertiary" as const,
+        href: "mailto:digitalcheck@digitalservice.bund.de?subject=Unterstützungsangebote:%20erarbeiten.digitalcheck.bund.de",
       },
     ],
   },
@@ -90,22 +73,22 @@ export const support = {
           {
             title: "Digitalbezug einschätzen lassen",
             text: dedent`
-              Wir unterstützen Sie, den Digitalbezug Ihres Verfahrens einzuschätzen, indem wir die Vorprüfung gemeinsam durchgehen. 
+              Wir unterstützen Sie, den Digitalbezug Ihres Verfahrens einzuschätzen, indem wir die Vorprüfung gemeinsam durchgehen.
               <br class="block content-[''] mb-32!" />
-              Je nach Ziel Ihres Vorhabens und Grad des Digitalbezugs, variiert der Zeitaufwand, den Sie für die Erarbeitung digitaler Aspekte einplanen sollten. 
+              Je nach Ziel Ihres Vorhabens und Grad des Digitalbezugs, variiert der Zeitaufwand, den Sie für die Erarbeitung digitaler Aspekte einplanen sollten.
               <br class="block content-[''] mb-32!" />
               **Beispiele für einen starken Digitalbezug: Prozess/Dienstleistung/Interaktion neu aufsetzen**
-              
+
               z. B. bei folgenden Zielen einer Regelung:
-              
+
               - Voraussetzungen für eine Digitalisierung schaffen
               - bestehenden Umsetzungsprozesse verbessern oder neu aufsetzen
               <br class="block content-[''] mb-24!" />
-              
+
               **Beispiele für einen leichten bis mittleren Digitalbezug: bestehenden Prozess anpassen**
-              
+
               z. B. bei folgenden Zielen einer Regelung:
-              
+
               - Anpassungen von Nachweispflichten
               - Anpassungen von Pauschalen
             `,
@@ -132,12 +115,12 @@ export const support = {
           {
             title: "IT-Wissen einfach erklärt",
             text: dedent`
-              Im geschützten Rahmen eines Gesprächs beantworten unsere Expert:innen Ihnen alle **Fragen zur IT**. 
+              Im geschützten Rahmen eines Gesprächs beantworten unsere Expert:innen Ihnen alle **Fragen zur IT**.
               <br class="block content-[''] mb-32!" />
-              Jede Frage ist berechtigt — jede verstandene Antwort wird die Regelung digitaltauglicher machen.  
+              Jede Frage ist berechtigt — jede verstandene Antwort wird die Regelung digitaltauglicher machen.
               <br class="block content-[''] mb-32!" />
               Beispiele für Fragen:
-              
+
               - Was ist eine Schnittstelle?
               - Wie unterscheiden sich Vertrauensniveaus?
               - Welchen Datenstandard sollte das Antragsformular berücksichtigen?
@@ -175,7 +158,7 @@ export const support = {
               Ein Bild sagt mehr als tausend Worte — genauso helfen Visualisierungen bei Abstimmungen im Haus, zwischen Ressorts oder mit dem NKR.
               <br class="block content-[''] mb-32!" />
               Die Art der Visualisierung richtet sich nach Ihren Anforderungen:
-              
+
               - **Antragsstrecke oder ein Datenfluss im Detail verstehen**, visualisiert als Flussdiagramm
               - **beteiligte Akteure identifizieren**, visualisiert als Flussdiagramm
               - **Logik und Struktur des Regelungstextes prüfen**, visualisiert als Entscheidungsbaum
@@ -213,10 +196,10 @@ export const support = {
           {
             title: "Digitale Umsetzung erarbeiten",
             text: dedent`
-              Wenn die technischen Anforderungen komplex werden, helfen wir als neutraler Akteur dabei, die **technische Umsetzung** im Detail zu durchdenken und Nutzerfreundlichkeit, Datenverwendung und IT-Sicherheit zu beachten. 
+              Wenn die technischen Anforderungen komplex werden, helfen wir als neutraler Akteur dabei, die **technische Umsetzung** im Detail zu durchdenken und Nutzerfreundlichkeit, Datenverwendung und IT-Sicherheit zu beachten.
               <br class="block content-[''] mb-32!" />
               Maßnahmen, die wir z. B. für Sie erledigen:
-              
+
               - Durchführung von **Beteiligungsformaten mit umsetzenden Akteuren und Normadressaten**, z. B. moderierte Gespräche mit nachgelagerten Behörden
               - Erstellung von **Visualisierungen** und Stakeholder Maps
               - Klärung von **Fragen zur technischen Umsetzung**
@@ -275,15 +258,15 @@ export const support = {
               href: encodeURI(
                 dedent`mailto:digitalcheck@digitalservice.bund.de?subject=[Digitalcheck Schulung] Anmeldung digitaltaugliche Regelungen&body=
                   Guten Tag,
-                  
+
                   ich möchte mich gerne für die Online-Schulung anmelden:
-                  
+
                   Regelungen digitaltauglich gestalten – praktische Tipps für den Digitalcheck
-                  
+
                   am
-                  
+
                   [Wunsch-Datum einfügen]
-                  
+
                   Mit freundlichen Grüßen
                 `,
               ),
@@ -314,15 +297,15 @@ export const support = {
               href: encodeURI(
                 dedent`mailto:digitalcheck@digitalservice.bund.de?subject=[Digitalcheck Schulung] Anmeldung Visualisierungen&body=
                   Guten Tag,
-                  
+
                   ich möchte mich gerne für die Online-Schulung anmelden:
-                  
+
                   Visualisierungen – Komplexes einfach darstellen
-                  
+
                   am
-                  
+
                   [Wunsch-Datum einfügen]
-                  
+
                   Mit freundlichen Grüßen
                 `,
               ),
