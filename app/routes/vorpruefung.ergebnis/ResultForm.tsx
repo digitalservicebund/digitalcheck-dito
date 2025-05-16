@@ -212,6 +212,8 @@ export default function ResultForm({
               },
               {
                 look: "ghost",
+                className:
+                  "plausible-event-name=Content.Send+Result.Button+Copy+Email+Addresses",
                 text: isMailAddressCopied
                   ? preCheckResult.form.copyAddressButton.textCopied
                   : preCheckResult.form.copyAddressButton.text,
