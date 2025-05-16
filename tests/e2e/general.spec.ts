@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { footer } from "~/resources/content/components/footer";
 
 import {
   ROUTE_A11Y,
@@ -71,16 +72,16 @@ test.describe("test landing page", () => {
 
 test("footer is displayed", async ({ page }) => {
   await page.goto(ROUTE_LANDING.url);
-  const footerEl = page.getByRole("contentinfo", { name: "Seitenfußbereich" });
+  const footerEl = page.getByRole("contentinfo", { name: footer.navLabel });
   await expect(footerEl).toBeVisible();
   await expect(
-    footerEl.getByRole("navigation", { name: "Schnellübersicht" }),
+    footerEl.getByRole("navigation", { name: footer.top.navLabel }),
   ).toBeVisible();
   await expect(
-    footerEl.getByRole("navigation", { name: "Sitemap" }),
+    footerEl.getByRole("navigation", { name: footer.middle.navLabel }),
   ).toBeVisible();
   await expect(
-    footerEl.getByRole("navigation", { name: "Externe Verlinkungen" }),
+    footerEl.getByRole("navigation", { name: footer.bottom.navLabel }),
   ).toBeVisible();
 });
 

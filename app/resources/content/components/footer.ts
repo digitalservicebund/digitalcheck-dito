@@ -16,7 +16,9 @@ import {
 } from "~/resources/staticRoutes";
 
 export const footer = {
+  navLabel: "Seitenfußbereich",
   top: {
+    navLabel: "Schnellübersicht",
     supportOffer: {
       title: "Unterstützungsangebote Für bund, Länder, Kommunen und EU-Staaten",
       links: [
@@ -99,6 +101,7 @@ export const footer = {
     },
   },
   middle: {
+    navLabel: "Sitemap",
     links: [
       { url: ROUTE_IMPRINT.url, text: "Impressum" },
       { url: ROUTE_PRIVACY.url, text: "Datenschutzerklärung" },
@@ -112,6 +115,7 @@ export const footer = {
     ],
   },
   bottom: {
+    navLabel: "Externe Verlinkungen",
     links: [
       {
         preText: "Ein Onlinedienst der",

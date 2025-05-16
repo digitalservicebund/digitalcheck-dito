@@ -12,72 +12,61 @@ type LinkProps = {
   openInNewTab?: boolean;
 };
 
+const FooterLink = ({ link }: { link: LinkProps }) => {
+  return (
+    <>
+      {link?.preText}{" "}
+      <Link
+        to={link.url}
+        className="text-link increase-tap-area"
+        target={link.openInNewTab ? "_blank" : undefined}
+        rel={link.openInNewTab ? "noreferrer" : undefined}
+        aria-describedby={
+          link.openInNewTab ? A11Y_MESSAGE_NEW_WINDOW : undefined
+        }
+      >
+        {link.text} {link.openInNewTab && openInNewIconElement}
+      </Link>
+    </>
+  );
+};
+
 const LinkList = ({
   header,
   links,
   className,
-  listClassName,
-  seperator,
 }: {
   header?: string;
   links: (LinkProps | LinkProps[])[];
   className?: string;
-  listClassName?: string;
-  seperator?: boolean;
 }) => (
-  <section className={tailwindMerge("ds-stack ds-stack-8", className)}>
+  <div className={tailwindMerge("ds-stack ds-stack-8", className)}>
     {header && <h2 className="ds-label-section">{header}</h2>}
-    <ul
-      className={tailwindMerge(
-        "list-unstyled flex flex-col gap-8",
-        listClassName,
-      )}
-    >
-      {links.map((linkOrLinks) => {
-        const subLinks = Array.isArray(linkOrLinks)
-          ? linkOrLinks
-          : [linkOrLinks];
-        const link = subLinks[0];
-
+    <ul className="list-unstyled flex flex-col gap-8">
+      {links.map((link) => {
+        const links = Array.isArray(link) ? link : [link];
         return (
-          <li
-            key={link.url}
-            className={`${seperator ? "after:ml-8 after:inline-block after:content-['•'] last:after:content-['']" : ""}`}
-          >
-            {subLinks.map((subLink, i) => (
-              <>
-                {i !== 0 && " "}
-                {subLink?.preText}{" "}
-                <Link
-                  to={subLink.url}
-                  className="text-link increase-tap-area"
-                  target={subLink.openInNewTab ? "_blank" : undefined}
-                  rel={subLink.openInNewTab ? "noreferrer" : undefined}
-                  aria-describedby={
-                    subLink.openInNewTab ? A11Y_MESSAGE_NEW_WINDOW : undefined
-                  }
-                >
-                  {subLink.text} {subLink.openInNewTab && openInNewIconElement}
-                </Link>
-              </>
+          <li key={links[0].url}>
+            {links.map((subLink) => (
+              <FooterLink key={subLink.url} link={subLink} />
             ))}
           </li>
         );
       })}
     </ul>
-  </section>
+  </div>
 );
 
 export default function Footer() {
   return (
     <footer
       className="ds-label-03-reg flex w-full flex-row justify-center px-16 leading-snug text-gray-900 print:hidden"
-      aria-label="Seitenfußbereich"
+      aria-label={footer.navLabel}
     >
       <div className="ds-stack ds-stack-32 sm:ds-stack-40 w-full max-w-[1120px] border-t-2 border-blue-300 py-40">
         <nav
           className="grid grid-cols-1 justify-between gap-y-32 sm:grid-cols-[repeat(3,_minmax(0,_18rem))] sm:grid-rows-2"
-          aria-labelledby="footer-links"
+          aria-label={footer.top.navLabel}
         >
           <LinkList
             header={footer.top.supportOffer.title}
@@ -99,12 +88,17 @@ export default function Footer() {
           />
         </nav>
 
-        <nav aria-labelledby="footer-sitemap">
-          <LinkList
-            links={footer.middle.links}
-            listClassName="flex-row flex-wrap"
-            seperator
-          />
+        <nav aria-label={footer.middle.navLabel}>
+          <ul className="list-unstyled flex flex-row gap-8">
+            {footer.middle.links.map((link) => (
+              <li
+                key={link.url}
+                className="after:ml-8 after:inline-block after:content-['•'] last:after:content-['']"
+              >
+                <FooterLink link={link} />
+              </li>
+            ))}
+          </ul>
         </nav>
 
         <hr className="mt-16 w-full border-t-2 border-blue-300" />
@@ -115,7 +109,7 @@ export default function Footer() {
             width={120}
             alternativeText="Logo des Bundesministerium des Innern und für Heimat"
           />
-          <nav aria-labelledby="footer-copyright">
+          <nav aria-label={footer.bottom.navLabel}>
             <LinkList links={footer.bottom.links} />
           </nav>
         </div>
