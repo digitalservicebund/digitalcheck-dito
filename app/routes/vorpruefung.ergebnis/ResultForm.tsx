@@ -201,6 +201,8 @@ export default function ResultForm({
             buttons={[
               {
                 look: "tertiary",
+                className:
+                  "plausible-event-name=Conten.Send+Result.Button+Copy+Email",
                 text: isMailBodyCopied
                   ? preCheckResult.form.copyMailButton.textCopied
                   : preCheckResult.form.copyMailButton.text,
