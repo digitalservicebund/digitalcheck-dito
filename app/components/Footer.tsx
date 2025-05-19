@@ -64,7 +64,7 @@ export default function Footer() {
         <nav
           className="grid grid-cols-1 justify-between gap-y-32 sm:grid-cols-[repeat(3,_minmax(0,_18rem))] sm:grid-rows-2"
           aria-label={footer.top.navLabel}
-          id="quick-overfiew-nav"
+          id="quick-overview-nav"
         >
           <LinkList
             header={footer.top.supportOffer.title}
