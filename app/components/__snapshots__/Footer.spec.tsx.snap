@@ -13,7 +13,7 @@ exports[`Footer Component > Renders correctly 1`] = `
       <nav
         aria-label="Schnellübersicht"
         class="grid grid-cols-1 justify-between gap-y-32 sm:grid-cols-[repeat(3,_minmax(0,_18rem))] sm:grid-rows-2"
-        id="quick-overfiew-nav"
+        id="quick-overview-nav"
       >
         <div
           class="ds-stack ds-stack-8 row-span-2"

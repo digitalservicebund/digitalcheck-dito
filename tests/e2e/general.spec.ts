@@ -73,7 +73,7 @@ test("footer is displayed", async ({ page }) => {
   await page.goto(ROUTE_LANDING.url);
   const footerEl = page.locator("id=page-footer");
   await expect(footerEl).toBeVisible();
-  await expect(footerEl.locator("id=quick-overfiew-nav")).toBeVisible();
+  await expect(footerEl.locator("id=quick-overview-nav")).toBeVisible();
   await expect(footerEl.locator("id=sitemap-nav")).toBeVisible();
   await expect(footerEl.locator("id=external-links-nav")).toBeVisible();
 });
