@@ -78,7 +78,9 @@ There are
 
 #### Snapshot Testing
 
-This package supports snapshot testing via [Playwright](https://playwright.dev/docs/test-snapshots).
+This package supports snapshot testing via [Playwright](https://playwright.dev/docs/test-snapshots) and [Vitest](https://vitest.dev/guide/snapshot.html).
+
+##### Snapshot Testing with Playwright
 
 On the first run, `npm run test:snapshots` will create the snapshots for multiple different devices.
 [playwright-snapshot.config.ts](./tests/playwright-snapshot.config.ts) contains the configuration for the snapshot tests.
@@ -94,11 +96,30 @@ An examplory usecase would be to check that everything still looks the same afte
 
 To update existing snapshots, execute `npm run test:update-snapshots`.
 
-##### Considerations
+###### Considerations
 
 - The snapshots currently only capture the static routes, not the dynamic routes like the PreCheck and result page. This could be improved in the future by adding a `afterEach` hook that takes a screenshot of the page after each e2e-test.
 - The snapshots can be flaky, especially for Webkit/Safari. We are waiting for the `h1` element on each page to render and afterwards wait for 100ms additionally before taking the screenshot to account for layout shifts, but this might not be enough and images sometimes still render differently.
 - Tablet-sized viewports are not part of the configuration at the moment, so be careful when making changes to the responsive layouts.
+
+##### Snapshot Testing with Vitest
+
+To create a snapshot you can take a look at the `app/components/Footer.spec.tsx`.
+In this test we create a snapshot for the footer component:
+
+```ts
+const { container } = render(<RouterStubFooter />);
+
+expect(container).toMatchSnapshot();
+```
+
+To update existing snapshots either run all tests and press `u` on failing snapshots, or run:
+
+```sh
+npm test -- -u
+```
+
+More information on updating snapshots can be found [here](https://vitest.dev/guide/snapshot.html#updating-snapshots)
 
 ### Code quality checks (linting & formatting)
 
