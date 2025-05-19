@@ -145,14 +145,12 @@ const PageHeader = ({
       <header className="relative" ref={headerRef}>
         <div className="relative z-30 flex h-[72px] justify-between bg-white pl-16 lg:px-16">
           {/* Logo and title */}
-          <div className="plausible-event-name=Nav+Bar.Home flex items-center space-x-8">
-            <Link to={ROUTE_LANDING.url}>
-              <img src="/logo/bund-logo.png" alt="Logo des Bundes" width={54} />
-            </Link>
+          <Link to={ROUTE_LANDING.url} className="flex items-center space-x-8">
+            <img src="/logo/bund-logo.png" alt="Logo des Bundes" width={54} />
             <p className="ds-label-01-bold ml-16 flex flex-col text-xl max-lg:hidden">
               {header.title}
             </p>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="flex items-center max-lg:hidden">
@@ -162,9 +160,9 @@ const PageHeader = ({
           {/* Mobile View Controls */}
           <div className="flex items-center space-x-16 lg:hidden">
             <a
-              className="plausible-event-name=Nav+Bar.Mobile+Phone+Icon border-b-[4px] border-transparent"
-              href={`tel:${header.contact.number}`}
-              aria-label={header.contact.msg}
+              className="border-b-[4px] border-transparent"
+              href={`tel:${header.contactTel.number}`}
+              aria-label={header.contactTel.msg}
             >
               <PhoneOutlined />
             </a>

@@ -5,6 +5,7 @@ import {
   ROUTE_FUNDAMENTALS_METHODS,
   ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_INTEROPERABILITY,
+  ROUTE_INTEROPERABILITY_SPOC,
   ROUTE_METHODS,
   ROUTE_PRECHECK,
   ROUTE_SUPPORT,
@@ -12,10 +13,15 @@ import {
 
 export const header = {
   title: "Digitalcheck",
-  contact: {
+  contactTel: {
     msg: "Kontaktieren Sie den Support:",
     msgMobile: "Support:",
     number: "0151/40 76 78 39",
+  },
+  contactMail: {
+    msg: "oder",
+    text: "digitalcheck@digitalservice.bund.de",
+    url: "mailto:digitalcheck@digitalservice.bund.de",
   },
   items: [
     {
@@ -102,11 +108,25 @@ export const header = {
       hasSupport: true,
       overlayContent: [
         {
-          plausibleEventName: "Link+Schulungen",
+          plausibleEvent: "Link+Alle+Hilfestellungen",
+          title: "Alle Hilfestellungen",
+          content: "Wir unterstützen Sie mit einer Bandbreite von Angeboten.",
+          href: ROUTE_SUPPORT.url,
+        },
+        {
+          plausibleEvent: "Link+Schulungen",
           title: "Schulungen",
           content:
             "In dieser Online-Schulung bekommen Sie praktische Tipps für den Digitalcheck.",
           href: ROUTE_SUPPORT.url + "#angebote",
+        },
+        {
+          plausibleEvent: "Link+Nationale+Kontaktstelle",
+          title: "Nationale Kontaktstelle",
+          isNewTitle: true,
+          content:
+            "Nationale Kontaktstelle für ein interoperables Europa (2024/903 Art. 17).",
+          href: ROUTE_INTEROPERABILITY_SPOC.url,
         },
       ],
     },
