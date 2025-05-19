@@ -6,21 +6,6 @@ test.describe("test support page", () => {
     await page.goto(ROUTE_SUPPORT.url);
   });
 
-  test("clicking on appointment button shows google and hides button", async ({
-    page,
-  }) => {
-    await page.getByRole("button", { name: "Termin" }).click();
-    await expect(page.getByRole("button", { name: "Termin" })).toBeHidden();
-    await expect(
-      page
-        .frameLocator(
-          'iframe[title="Beratung erhalten Sie in einem 45-minütigem Gespräch"]',
-        )
-        .getByText("Appointments")
-        .first(),
-    ).toBeVisible();
-  });
-
   test("suppport tabs switch between offerings", async ({
     page,
     browserName,

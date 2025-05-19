@@ -95,12 +95,6 @@ export const header = {
             "In dieser Online-Schulung bekommen Sie praktische Tipps für den Digitalcheck.",
           href: ROUTE_SUPPORT.url + "#angebote",
         },
-        {
-          title: "Termin buchen",
-          content:
-            "Buchen Sie einen Termin mit uns, damit wir Sie bei der Erarbeitung beraten können.",
-          href: ROUTE_SUPPORT.url + "#hilfe",
-        },
       ],
     },
   ],
