@@ -143,15 +143,14 @@ export default function ResultForm({
                           id: "result-email-button",
                           text: preCheckResult.form.sendEmailButton.text,
                           look: "primary",
-                          className: "plausible-event-name=Quicksend+Click",
+                          className:
+                            "plausible-event-name=Content.Send+Result.Button+Create+Email",
                         },
                         {
                           id: "result-print-button",
                           text: preCheckResult.form.downloadPdfButton.text,
                           look: "ghost",
                           type: "button",
-                          className:
-                            "plausible-event-name=Content.Send+Result.Button+Create+Email",
                           onClick: () => {
                             if (window) window.print();
                           },
@@ -162,7 +161,8 @@ export default function ResultForm({
                           id: "result-email-button",
                           text: preCheckResult.form.sendEmailButton.text,
                           look: "primary",
-                          className: "plausible-event-name=Quicksend+Click",
+                          className:
+                            "plausible-event-name=Content.Send+Result.Button+Create+Email",
                         },
                       ]
                 }
@@ -245,7 +245,7 @@ export default function ResultForm({
         />
         {preCheckResult.form.faqs.details.map((detail, index) => (
           <DetailsSummary
-            className={`plausible-event-name=Content.Content+Info.Accordion+FAQ${index}`}
+            className={`plausible-event-name=Content.Content+Info.Accordion+FAQ${index + 1}`}
             key={detail.label}
             title={detail.label}
             content={detail.text}
