@@ -42,6 +42,7 @@ export const steps = {
         text: "Zu „Erarbeiten“",
         href: ROUTE_METHODS.url,
         look: "link" as const,
+        plausibleTrackingName: "Content.Steps.Link+Erarbeiten",
       },
     ],
     finished: {
@@ -61,6 +62,7 @@ export const steps = {
         text: "Zu „Dokumentieren“",
         href: ROUTE_DOCUMENTATION.url,
         look: "link" as const,
+        plausibleTrackingName: "Content.Steps.Link+Dokumentieren",
       },
     ],
     finished: {
@@ -78,7 +80,8 @@ export const steps = {
       dedent`
         <br class="block content-[''] mb-24!" />
         Senden Sie die von Ihnen erstellte Dokumentation per E-Mail an folgende Adresse: 
-        [nkr@bmj.bund.de](mailto:nkr@bmj.bund.de)
+        <a href="mailto:nkr@bmj.bund.de" 
+           class="plausible-event-name=Content.Steps.Link+BMJ+Email underline hover:no-underline text-blue-700 font-bold">nkr@bmj.bund.de</a>
         <br class="block content-[''] mb-24!" />
         Damit ist der Digitalcheck für Sie beendet.
       `,

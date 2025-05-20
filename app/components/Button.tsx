@@ -1,5 +1,6 @@
 import { cloneElement, type ReactElement } from "react";
 import { Link } from "react-router";
+import { twJoin } from "tailwind-merge";
 import twMerge from "~/utils/tailwindMerge";
 
 type Props = {
@@ -12,6 +13,7 @@ type Props = {
   fullWidth?: boolean;
   prefetch?: "intent" | "viewport" | "render";
   onClickCallback?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+  plausibleTrackingName?: string;
 };
 
 export interface ButtonProps
@@ -40,6 +42,7 @@ function Button({
   href,
   prefetch,
   onClickCallback,
+  plausibleTrackingName,
   ...props
 }: ButtonProps | ButtonLinkProps) {
   let buttonClasses = twMerge(
@@ -64,6 +67,8 @@ function Button({
   const childrenSpan = <span className="ds-button-label">{children}</span>;
   iconLeft = formatIcon(iconLeft);
   iconRight = formatIcon(iconRight);
+
+  const plausibleEventName = `plausible-event-name=${plausibleTrackingName}`;
 
   // for links that have role="button" we need to add an event handler so that it can
   // be activated with the space bar
@@ -90,7 +95,7 @@ function Button({
       <Link
         {...(props as ButtonLinkProps)}
         to={href}
-        className={buttonClasses}
+        className={twJoin(buttonClasses, plausibleEventName)}
         onKeyDown={onKeyDown}
         onClick={onClick}
         id={id}
