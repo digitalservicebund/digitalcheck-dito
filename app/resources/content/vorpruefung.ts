@@ -85,12 +85,12 @@ export const preCheck = {
         `,
       },
       {
-        plausibleTrackingName: "Content.FAQs.FAQ1",
+        plausibleTrackingName: "Content.FAQs.FAQ2",
         headline: "Was bedeutet Interoperabilität in meinem Vorhaben?",
         content: `Wenn Gesetze und Regelungen die Interoperabilität berücksichtigen, fördern sie die Zusammenarbeit zwischen den EU-Mitgliedsstaaten und ihren Verwaltungen. Einheitliche Standards sorgen dafür, dass digitale Dienste bürgerfreundlich, effizient und sicher sind. Gleichzeitig werden einheitliche Regeln geschaffen, die die grenzüberschreitende Zusammenarbeit in der EU erleichtern und eine harmonische Entwicklung der Rechtsvorschriften fördern.`,
       },
       {
-        plausibleTrackingName: "Content.FAQs.FAQ2",
+        plausibleTrackingName: "Content.FAQs.FAQ3",
         headline:
           "Welche Rolle spielt der Digitalcheck bei interoperablen Regelungsvorhaben?",
         content: dedent`
@@ -100,7 +100,7 @@ export const preCheck = {
         `,
       },
       {
-        plausibleTrackingName: "Content.FAQs.FAQ3",
+        plausibleTrackingName: "Content.FAQs.FAQ4",
         headline: "Was ist Digitalbezug?",
         content: `Digitalbezug im Kontext der Umsetzung bedeutet, dass ein Prozess zumindest teilweise durch ein IT-System abgebildet wird. Beispiele sind:
 - eine Reihe von Aufgaben mit einem bestimmten Ziel, zum Beispiel das Ausfüllen eines Formulars in ELSTER, um die Steuererklärung einzureichen,
@@ -108,7 +108,7 @@ export const preCheck = {
 - das Bereitstellen von Informationen auf einer Website.`,
       },
       {
-        plausibleTrackingName: "Content.FAQs.FAQ4",
+        plausibleTrackingName: "Content.FAQs.FAQ5",
         headline: "Warum digitaltaugliche Regelungen schreiben?",
         content: dedent`
           **Digitaltaugliche Regelungen sparen Ressourcen**<br/>
@@ -119,12 +119,12 @@ export const preCheck = {
         `,
       },
       {
-        plausibleTrackingName: "Content.FAQs.FAQ5",
+        plausibleTrackingName: "Content.FAQs.FAQ6",
         headline: "Was ist, wenn ich mehrere Regelungen habe?",
         content: `Füllen Sie eine gemeinsame Vorprüfung für alle inhaltlich zusammenhängenden Regelungen eines Vorhabens aus. So viele wie nötig, so wenige wie möglich.`,
       },
       {
-        plausibleTrackingName: "Content.FAQs.FAQ6",
+        plausibleTrackingName: "Content.FAQs.FAQ7",
         headline: "Kann ich das PDF für die Vorprüfung weiterhin verwenden?",
         content: `Sie können weiterhin das PDF-Dokument zur Vorprüfung verwenden, um den digitalen Aspekt Ihres Vorhabens zu bewerten. Bitte beachten Sie jedoch, dass die PDF-Version nicht geeignet ist, um Anforderungen zur Interoperabilität zu identifizieren.`,
       },
