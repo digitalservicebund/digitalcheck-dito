@@ -149,6 +149,7 @@ export default function Tabs({
       </div>
 
       {/* Content of each tab. Render only if not navigating */}
+      {/* TODO: Potentially remove guard and see whether rendering current tab is enough */}
       {!onNavigateRequest &&
         tabs.map((tab, index) => (
           <div
