@@ -4,14 +4,14 @@ exports[`Footer Component > Renders correctly 1`] = `
 <div>
   <footer
     aria-label="Seitenfußbereich"
-    class="ds-label-03-reg flex w-full flex-row justify-center px-16 leading-snug text-gray-900 print:hidden"
+    class="ds-label-03-reg flex w-full flex-row justify-center border-t-2 border-blue-300 leading-snug text-gray-900 print:hidden"
   >
     <div
-      class="ds-stack ds-stack-32 sm:ds-stack-40 w-full max-w-[1120px] border-t-2 border-blue-300 py-40"
+      class="ds-stack ds-stack-32 sm:ds-stack-40 w-full max-w-6xl px-16 py-40"
     >
       <nav
         aria-label="Schnellübersicht"
-        class="grid grid-cols-1 justify-between gap-y-32 sm:grid-cols-[repeat(3,_minmax(0,_18rem))] sm:grid-rows-2"
+        class="grid grid-cols-1 justify-between gap-32 sm:grid-cols-[repeat(3,_minmax(0,_18rem))] sm:grid-rows-2"
       >
         <div
           class="ds-stack ds-stack-8 row-span-2"
@@ -34,7 +34,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                 0151/40 76 78 39
                  
               </a>
-              oder
+               oder
                
               <a
                 class="text-link increase-tap-area"
