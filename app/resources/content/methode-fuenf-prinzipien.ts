@@ -12,7 +12,7 @@ export const methodsFivePrinciples = {
   principles: [
     {
       label: "Prinzip",
-      title: "Digitale Angebote für alle gestalten",
+      title: "Digitale Angebote für alle nutzbar gestalten",
       description:
         "Viele Bürgerinnen, Bürger und Unternehmen sind an digitale Angebote gewöhnt und bevorzugen diese – sofern die digitale Kommunikation gut umgesetzt ist und ihren Bedürfnissen entspricht. Die Verwaltung kann digitale Daten schneller prüfen, bearbeiten und dokumentieren. Das Angebot sollte dabei immer inklusiv sein und es benötigt ggf. analoge Alternativen.",
       implementation: [
