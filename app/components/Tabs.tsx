@@ -31,7 +31,7 @@ interface TabsProps {
  * to an external source. In this mode, clicking a tab
  * will invoke `onNavigateRequest` with the tab's details, allowing the parent
  * component to handle the route change. The content for each tab is then
- * expected to be rendered by the router, not by this component.
+ * expected to be rendered by the parent, not by this component.
  */
 export default function Tabs({
   tabs,
