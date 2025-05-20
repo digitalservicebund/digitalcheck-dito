@@ -56,12 +56,12 @@ const LinkList = ({
 export default function Footer() {
   return (
     <footer
-      className="ds-label-03-reg flex w-full flex-row justify-center px-16 leading-snug text-gray-900 print:hidden"
+      className="ds-label-03-reg flex w-full flex-row justify-center border-t-2 border-blue-300 leading-snug text-gray-900 print:hidden"
       aria-label={footer.navLabel}
     >
-      <div className="ds-stack ds-stack-32 sm:ds-stack-40 w-full max-w-[1120px] border-t-2 border-blue-300 py-40">
+      <div className="ds-stack ds-stack-32 sm:ds-stack-40 w-full max-w-6xl px-16 py-40">
         <nav
-          className="grid grid-cols-1 justify-between gap-y-32 sm:grid-cols-[repeat(3,_minmax(0,_18rem))] sm:grid-rows-2"
+          className="grid grid-cols-1 justify-between gap-32 sm:grid-cols-[repeat(3,_minmax(0,_18rem))] sm:grid-rows-2"
           aria-label={footer.top.navLabel}
         >
           <LinkList

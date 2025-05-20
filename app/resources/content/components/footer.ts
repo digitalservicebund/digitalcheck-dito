@@ -30,7 +30,7 @@ export const footer = {
           },
 
           {
-            preText: "oder",
+            preText: " oder",
             text: "digitalcheck@digitalservice.bund.de",
             url: "mailto:digitalcheck@digitalservice.bund.de",
           },
