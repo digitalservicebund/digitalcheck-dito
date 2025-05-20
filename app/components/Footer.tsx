@@ -58,13 +58,11 @@ export default function Footer() {
     <footer
       className="ds-label-03-reg flex w-full flex-row justify-center px-16 leading-snug text-gray-900 print:hidden"
       aria-label={footer.navLabel}
-      id="page-footer"
     >
       <div className="ds-stack ds-stack-32 sm:ds-stack-40 w-full max-w-[1120px] border-t-2 border-blue-300 py-40">
         <nav
           className="grid grid-cols-1 justify-between gap-y-32 sm:grid-cols-[repeat(3,_minmax(0,_18rem))] sm:grid-rows-2"
           aria-label={footer.top.navLabel}
-          id="quick-overview-nav"
         >
           <LinkList
             header={footer.top.supportOffer.title}
@@ -86,7 +84,7 @@ export default function Footer() {
           />
         </nav>
 
-        <nav aria-label={footer.middle.navLabel} id="sitemap-nav">
+        <nav aria-label={footer.middle.navLabel}>
           <ul className="list-unstyled flex flex-row flex-wrap gap-8">
             {footer.middle.links.map((link) => (
               <li
@@ -107,7 +105,7 @@ export default function Footer() {
             width={120}
             alternativeText="Logo des Bundesministerium des Innern und für Heimat"
           />
-          <nav aria-label={footer.bottom.navLabel} id="external-links-nav">
+          <nav aria-label={footer.bottom.navLabel}>
             <LinkList links={footer.bottom.links} />
           </nav>
         </div>

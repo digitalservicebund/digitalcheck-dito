@@ -71,11 +71,17 @@ test.describe("test landing page", () => {
 
 test("footer is displayed", async ({ page }) => {
   await page.goto(ROUTE_LANDING.url);
-  const footerEl = page.locator("id=page-footer");
+  const footerEl = page.getByRole("contentinfo", { name: "Seitenfußbereich" });
   await expect(footerEl).toBeVisible();
-  await expect(footerEl.locator("id=quick-overview-nav")).toBeVisible();
-  await expect(footerEl.locator("id=sitemap-nav")).toBeVisible();
-  await expect(footerEl.locator("id=external-links-nav")).toBeVisible();
+  await expect(
+    footerEl.getByRole("navigation", { name: "Schnellübersicht" }),
+  ).toBeVisible();
+  await expect(
+    footerEl.getByRole("navigation", { name: "Sitemap" }),
+  ).toBeVisible();
+  await expect(
+    footerEl.getByRole("navigation", { name: "Externe Verlinkungen" }),
+  ).toBeVisible();
 });
 
 test.describe("test links", () => {
