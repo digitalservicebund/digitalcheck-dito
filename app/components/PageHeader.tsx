@@ -16,10 +16,12 @@ interface SubItem {
   title: string;
   content?: string;
   href: string;
+  plausibleEvent: string;
 }
 
 interface HeaderItem {
   text: string;
+  plausibleEvent: string;
   overlayContent: SubItem[];
   hasSupport?: boolean;
   isOrderedList?: boolean;
@@ -112,6 +114,7 @@ const PageHeader = ({
     <DropdownMenu
       key={`${item.text}-${variant}`}
       label={item.text}
+      plausibleEvent={item.plausibleEvent}
       hasSupport={item.hasSupport}
       data={item.overlayContent}
       isOrderedList={item.isOrderedList}
@@ -142,7 +145,7 @@ const PageHeader = ({
       <header className="relative" ref={headerRef}>
         <div className="relative z-30 flex h-[72px] justify-between bg-white pl-16 lg:px-16">
           {/* Logo and title */}
-          <div className="flex items-center space-x-8">
+          <div className="plausible-event-name=Nav+Bar.Home flex items-center space-x-8">
             <Link to={ROUTE_LANDING.url}>
               <img src="/logo/bund-logo.png" alt="Logo des Bundes" width={54} />
             </Link>
@@ -159,7 +162,7 @@ const PageHeader = ({
           {/* Mobile View Controls */}
           <div className="flex items-center space-x-16 lg:hidden">
             <a
-              className="border-b-[4px] border-transparent"
+              className="plausible-event-name=Nav+Bar.Mobile+Phone+Icon border-b-[4px] border-transparent"
               href={`tel:${header.contact.number}`}
               aria-label={header.contact.msg}
             >
@@ -184,7 +187,7 @@ const PageHeader = ({
         <nav
           id="mobile-menu"
           className={twJoin(
-            "absolute right-0 left-0 z-40 rounded-b-md border-t-1 border-gray-600 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]",
+            "plausible-event-name=Nav+Bar.Burger+Menu+Icon+Mobile.Open+Close absolute right-0 left-0 z-40 rounded-b-md border-t-1 border-gray-600 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]",
             mobileMenuOpen ? "overflow-y-auto" : "invisible",
           )}
           aria-hidden={!mobileMenuOpen}

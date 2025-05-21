@@ -19,6 +19,7 @@ export type DropdownProps = {
   onToggle: () => void;
   onItemClick: () => void;
   isActiveParent: boolean;
+  plausibleEvent: string;
 };
 
 export default function DropdownMenu({
@@ -32,9 +33,11 @@ export default function DropdownMenu({
   onToggle,
   onItemClick,
   isActiveParent,
+  plausibleEvent,
 }: Readonly<DropdownProps>) {
   const isMobile = variant === "mobile";
   const elementId = `dropdown-${label}`;
+  const plausibleTrackingClass = `plausible-event-name=Nav+Bar.${plausibleEvent}.Open+Close`;
 
   // Transparent borders to avoid layout shifts
   const buttonClasses = twMerge(
@@ -44,6 +47,7 @@ export default function DropdownMenu({
       : "ds-label-01-bold w-full justify-between border-l-[4px] border-transparent p-16",
     isActiveParent && "border-blue-800 bg-blue-100",
     isExpanded && "bg-blue-100",
+    plausibleTrackingClass,
   );
 
   const panelClasses = !isMobile
@@ -97,7 +101,7 @@ export default function DropdownMenu({
                 {isMobile ? header.contact.msgMobile : header.contact.msg}
                 <a
                   href={`tel:${header.contact.number}`}
-                  className="plausible-event-name=Phone+Click plausible-event-position=header ds-link-02-reg ml-8"
+                  className="plausible-event-name=Nav+Bar.Kontakt+Support+Layer.Link+Telefon ds-link-02-reg ml-8"
                 >
                   {header.contact.number}
                 </a>
@@ -106,6 +110,7 @@ export default function DropdownMenu({
             </div>
           )}
           <DropdownContentList
+            parentPlausibleEvent={plausibleEvent}
             data={data}
             isOrderedList={isOrderedList}
             onItemClick={onItemClick}

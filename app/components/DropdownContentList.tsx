@@ -9,6 +9,7 @@ export type DropdownItemProps = {
   className?: string;
   href?: string;
   isNewTitle?: boolean;
+  plausibleEvent: string;
 };
 
 export type DropdownContentListProps = {
@@ -16,6 +17,7 @@ export type DropdownContentListProps = {
   isOrderedList?: boolean;
   onItemClick: () => void;
   isMobile?: boolean;
+  parentPlausibleEvent: string;
 };
 
 export default function DropdownContentList({
@@ -23,6 +25,7 @@ export default function DropdownContentList({
   isOrderedList = false,
   onItemClick,
   isMobile = false,
+  parentPlausibleEvent,
 }: Readonly<DropdownContentListProps>) {
   const location = useLocation();
   const listClasses = twMerge(
@@ -41,6 +44,7 @@ export default function DropdownContentList({
           onClick={onItemClick}
           aria-label={option.title}
           role="menuitem"
+          className={`plausible-event-name=Nav+Bar.${parentPlausibleEvent}+Layer.${option.plausibleEvent}`}
         >
           {({ isActive }) => {
             const browserHasHash = location.hash !== "";
