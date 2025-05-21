@@ -49,7 +49,7 @@ export const header = {
       ],
     },
     {
-      plausibleEvent: "Schritt+für+Schritt",
+      plausibleEvent: "Beispiele",
       text: "Beispiele",
       overlayContent: [
         {
