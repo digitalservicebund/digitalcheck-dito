@@ -99,7 +99,7 @@ export const preCheckResult = {
       - Schicken Sie das Ergebnis an den Nationalen Normenkontrollrat (NKR).
       - **Bei Anforderungen an Interoperabilität** erhält Digitalcheck-Team  automatisch eine Kopie und meldet sich bei Ihnen.
     `,
-    previewLabel: "Vorschau der E-Mail Vorlage",
+    previewLabel: "Vorschau der E-Mail-Vorlage",
     copyIntroText: dedent`**Alternativ** können Sie das Ergebnis der Vorprüfung einfach als Text kopieren und manuell an den NKR schicken oder bei Ihren Dokumenten speichern.`,
     vorhabenTitleLabel: "Vorläufiger Arbeitstitel des Vorhabens",
     vorhabenTitleRequired: "Bitte geben Sie einen Titel für Ihr Vorhaben an.",
@@ -148,11 +148,11 @@ export const preCheckResult = {
       text: "Als PDF-Datei herunterladen",
     },
     copyMailButton: {
-      text: "E-Mail Text kopieren",
+      text: "E-Mail-Text kopieren",
       textCopied: "Text Kopiert!",
     },
     copyAddressButton: {
-      text: "Empfänger Adresse kopieren",
+      text: "Empfängeradresse kopieren",
       textCopied: "Adresse kopiert!",
     },
     sendEmailButton: {
