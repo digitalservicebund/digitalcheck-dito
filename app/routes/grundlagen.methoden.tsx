@@ -4,10 +4,10 @@ import Container from "~/components/Container";
 import Header from "~/components/Header";
 import InfoBox from "~/components/InfoBox.tsx";
 import { BulletList } from "~/components/List.tsx";
-import MethodStepsItems from "~/components/MethodStepsItems.tsx";
 import SupportBanner from "~/components/SupportBanner";
 import { fundamentalsMethods } from "~/resources/content/grundlage-methoden.ts";
 import { ROUTE_FUNDAMENTALS_METHODS } from "~/resources/staticRoutes";
+import { methodStepsItems } from "~/utils/listProcessing.ts";
 import prependMetaTitle from "~/utils/metaTitle";
 
 export const meta = ({ matches }: MetaArgs) => {
@@ -40,7 +40,7 @@ export default function FundamentalsMethods() {
         />
       </Container>
       <Container>
-        <BulletList className="mb-40" items={MethodStepsItems(false)} />
+        <BulletList className="mb-40" items={methodStepsItems(false)} />
       </Container>
       <SupportBanner />
     </>
