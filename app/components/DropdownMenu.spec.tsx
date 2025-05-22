@@ -192,13 +192,13 @@ describe("DropdownMenu Component", () => {
 
     it("does not display support section when hasSupport is false,", () => {
       renderDropdown({ hasSupport: false, isExpanded: true });
-      expect(screen.queryByText(/mobile msg/)).not.toBeInTheDocument();
+      expect(screen.queryByText(/desktop msg/)).not.toBeInTheDocument();
       expect(screen.queryByText(/mobile msg/)).not.toBeInTheDocument();
     });
 
     it("does not display support section when not expanded", () => {
       renderDropdown({ hasSupport: true, isExpanded: false });
-      expect(screen.queryByText(/mobile msg/)).not.toBeInTheDocument();
+      expect(screen.queryByText(/desktop msg/)).not.toBeInTheDocument();
     });
 
     it("calls onItemClick when a dropdown item is clicked", async () => {
