@@ -111,8 +111,8 @@ function FeedbackQuestion({
             })}
           </div>
           <div className="mt-20 flex justify-between text-gray-900">
-            <span className="">{question.options[0].label}</span>
-            <span className="">
+            <span className="max-w-[30%]">{question.options[0].label}</span>
+            <span className="max-w-[30%] text-right">
               {question.options[question.options.length - 1].label}
             </span>
           </div>
