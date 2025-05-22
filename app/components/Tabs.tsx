@@ -13,7 +13,6 @@ import { twJoin } from "tailwind-merge";
 
 export interface TabItem {
   title: string;
-  plausibleEventName?: string;
   content: React.ReactNode;
   path?: string;
 }
@@ -102,8 +101,6 @@ export default function Tabs({
               "relative mr-[8px] -mb-[3px] h-[70px] cursor-pointer px-[24px] py-[10px] text-blue-800 hover:border-b-[3px] hover:border-blue-500 hover:bg-blue-100",
               activeTab === index &&
                 "border-b-[4px] border-blue-800 bg-blue-100 font-bold hover:border-b-[4px] hover:border-blue-800",
-              tab.plausibleEventName &&
-                `plausible-event-name=Tab+Bar.${tab.plausibleEventName}`,
             )}
           >
             {tab.title}
@@ -140,8 +137,6 @@ export default function Tabs({
                     focus ? "bg-blue-300" : "bg-blue-100",
                     // Selected item should be just visible in ListboxButton
                     selected && "hidden",
-                    tab.plausibleEventName &&
-                      `plausible-event-name=Tab+Bar.${tab.plausibleEventName}`,
                   )
                 }
                 value={index}

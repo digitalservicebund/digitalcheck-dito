@@ -20,11 +20,11 @@ export const header = {
   items: [
     {
       isOrderedList: true,
-      plausibleEventName: "Schritt+für+Schritt",
+      plausibleEvent: "Schritt+für+Schritt",
       text: "Schritt für Schritt",
       overlayContent: [
         {
-          plausibleEventName: "Link+Vorprüfung",
+          plausibleEvent: "Link+Vorprüfung",
           title: "Vorprüfung: Digitalbezug einschätzen",
           content:
             "Anhand von 6 Fragen lernen Sie, in welchem Umfang Sie Digitaltauglichkeit beachten müssen.",
@@ -33,14 +33,14 @@ export const header = {
           href: ROUTE_PRECHECK.url,
         },
         {
-          plausibleEventName: "Link+Erarbeiten",
+          plausibleEvent: "Link+Erarbeiten",
           title: "Digitaltauglichkeit der Regelung sicherstellen",
           content:
             "Wir zeigen Ihnen Schritt für Schritt, wie Sie Ihr Vorhaben digitaltauglich gestalten.",
           href: ROUTE_METHODS.url,
         },
         {
-          plausibleEventName: "Link+Dokumentieren",
+          plausibleEvent: "Link+Dokumentieren",
           title: "Dokumentieren der Digitaltauglichkeit",
           content:
             "Dokumentieren Sie, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben.",
@@ -49,18 +49,18 @@ export const header = {
       ],
     },
     {
-      plausibleEventName: "Beispiele",
+      plausibleEvent: "Beispiele",
       text: "Beispiele",
       overlayContent: [
         {
-          plausibleEventName: "Link+Prinzipien+Beispiele",
+          plausibleEvent: "Link+Prinzipien+Beispiele",
           title: "Digitaltauglichkeit im Regelungstext",
           content:
             "So wurden die 5 Prinzipien von Ihren Kolleginnen und Kollegen in Regelungen ausformuliert.",
           href: ROUTE_EXAMPLES_PRINCIPLES.url,
         },
         {
-          plausibleEventName: "Link+Visualisierungen",
+          plausibleEvent: "Link+Visualisierungen",
           title: "Visualisierungen",
           content:
             "Veröffentliche Visualisierungen, welche Referaten beim Erarbeiten der Digitaltauglichkeit geholfen haben.",
@@ -69,25 +69,25 @@ export const header = {
       ],
     },
     {
-      plausibleEventName: "Grundlagen",
+      plausibleEvent: "Grundlagen",
       text: "Grundlagen",
       overlayContent: [
         {
-          plausibleEventName: "Link+Prinzipien",
+          plausibleEvent: "Link+Prinzipien",
           title: "Prinzipien für digitaltaugliche Gesetzgebung",
           content:
             "Auf diesen Prinzipien basieren die Instrumente des Digitalcheck.",
           href: ROUTE_FUNDAMENTALS_PRINCIPLES.url,
         },
         {
-          plausibleEventName: "Link+Werkzeuge+Methoden",
+          plausibleEvent: "Link+Werkzeuge+Methoden",
           title: "Werkzeuge und Methoden",
           content:
             "Lernen Sie die Methoden kennen, mit denen Sie Digitaltauglichkeit sicherstellen können.",
           href: ROUTE_FUNDAMENTALS_METHODS.url,
         },
         {
-          plausibleEventName: "Link+Interoperabilität",
+          plausibleEvent: "Link+Interoperabilität",
           title: "EU Interoperabilität",
           isNewTitle: true,
           content:
@@ -97,12 +97,12 @@ export const header = {
       ],
     },
     {
-      plausibleEventName: "Kontakt+Support ",
+      plausibleEvent: "Kontakt+Support ",
       text: "Kontakt und Support",
       hasSupport: true,
       overlayContent: [
         {
-          plausibleEventName: "Link+Telefon",
+          plausibleEvent: "Link+Telefon",
           title: "Schulungen",
           content:
             "In dieser Online-Schulung bekommen Sie praktische Tipps für den Digitalcheck.",

@@ -11,7 +11,7 @@ export default function Accordion({
           headline={item.headline}
           content={item.content}
           id={item.id}
-          plausibleEventName={item.plausibleEventName}
+          plausibleTrackingName={item.plausibleTrackingName}
         />
       ))}
     </div>

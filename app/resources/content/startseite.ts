@@ -17,7 +17,6 @@ export const index = {
   `,
   stepByStep: {
     tabName: "Schritt für Schritt",
-    plausibleEventName: "Tab+Bar+Schritte",
     title: "So gehen Sie vor",
     items: [
       steps.preCheck,
@@ -31,14 +30,11 @@ export const index = {
       steps.nkr,
     ],
     processImage: {
-      img: {
-        url: "/images/prozessgrafik.jpg",
-        alternativeText:
-          "Flussdiagramm, das drei Pfade nach einer Vorprüfung zum Digitalbezug zeigt: 1. Kein Digitalbezug: Ergebnis-E-Mail. 2. Digitalbezug: E-Mail, Anleitung, Dokumentation, Prüfung. 3. Digitalbezug & Interoperabilität: E-Mail an zwei Stellen, Anleitung mit Support, Dokumentation, Bereitstellung auf EU-Portal.",
-        caption:
-          "Der Prozess beginnt mit der geführten Vorprüfung auf Digitalbezug und Anforderungen an Interoperabilität. Daraus ergeben sich unterschiedliche folgende Prozessschritte.",
-      },
-      plausibleEventName: "Content.Process+Vis",
+      url: "/images/prozessgrafik.jpg",
+      alternativeText:
+        "Flussdiagramm, das drei Pfade nach einer Vorprüfung zum Digitalbezug zeigt: 1. Kein Digitalbezug: Ergebnis-E-Mail. 2. Digitalbezug: E-Mail, Anleitung, Dokumentation, Prüfung. 3. Digitalbezug & Interoperabilität: E-Mail an zwei Stellen, Anleitung mit Support, Dokumentation, Bereitstellung auf EU-Portal.",
+      caption:
+        "Der Prozess beginnt mit der geführten Vorprüfung auf Digitalbezug und Anforderungen an Interoperabilität. Daraus ergeben sich unterschiedliche folgende Prozessschritte.",
     },
   },
 
@@ -70,7 +66,6 @@ export const index = {
   },
   summary: {
     tabName: "Was ist Digitaltauglichkeit?",
-    plausibleEventName: "Tab+Bar+Digitaltauglichkeit",
     title: "Zusammengefasst",
     items: [
       {
