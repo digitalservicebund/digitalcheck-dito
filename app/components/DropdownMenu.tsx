@@ -101,12 +101,15 @@ export default function DropdownMenu({
                 {isMobile ? header.contactTel.msgMobile : header.contactTel.msg}
                 <a
                   href={`tel:${header.contactTel.number}`}
-                  className="plausible-event-name=Phone+Click plausible-event-position=header ds-link-02-reg ml-8"
+                  className="plausible-event-name=Nav+Bar.Kontakt+Support+Layer.Link+Telefon ds-link-02-reg ml-8"
                 >
                   {header.contactTel.number}
                 </a>{" "}
                 {header.contactMail.msg}{" "}
-                <a className="ds-link-02-reg" href={header.contactMail.url}>
+                <a
+                  className="plausible-event-name=Nav+Bar.Kontakt+Support+Layer.Link+Email ds-link-02-reg"
+                  href={header.contactMail.url}
+                >
                   {header.contactMail.text}
                 </a>
               </div>
