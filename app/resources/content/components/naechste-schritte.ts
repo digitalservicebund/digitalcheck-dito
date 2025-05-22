@@ -20,6 +20,7 @@ export const steps = {
       "Finden Sie heraus, ob Sie in Ihrem Regelungsvorhaben Aspekte der digitalen Umsetzung und EU-Anforderungen an Interoperabilität beachten müssen. Danach entscheidet sich, ob die weiteren Schritte für Sie relevant sind.",
     buttons: [
       {
+        plausibleEventName: "Content.Steps.Button+Digitalbezug",
         text: "Digitalbezug einschätzen",
         href: ROUTE_PRECHECK.url,
       },
@@ -42,7 +43,7 @@ export const steps = {
         text: "Zu „Erarbeiten“",
         href: ROUTE_METHODS.url,
         look: "link" as const,
-        plausibleTrackingName: "Content.Steps.Link+Erarbeiten",
+        plausibleEventName: "Content.Steps.Link+Erarbeiten",
       },
     ],
     finished: {
@@ -62,7 +63,7 @@ export const steps = {
         text: "Zu „Dokumentieren“",
         href: ROUTE_DOCUMENTATION.url,
         look: "link" as const,
-        plausibleTrackingName: "Content.Steps.Link+Dokumentieren",
+        plausibleEventName: "Content.Steps.Link+Dokumentieren",
       },
     ],
     finished: {
