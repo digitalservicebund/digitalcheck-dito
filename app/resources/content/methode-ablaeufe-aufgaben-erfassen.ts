@@ -107,11 +107,11 @@ export const methodsTasksProcesses = {
     text: dedent`
       Der Digitalcheck-Support unterstützt Sie bei der Visualsierung von Abläufen. Wir helfen Ihnen gerne, insbesondere bei komplexen Abläufen. 
       
-      Für ein einstündiges Videotelefonat, schreiben Sie eine E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de) oder buchen Sie direkt einen Termin.
+      Schreiben Sie uns über [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de) oder rufen Sie uns an unter [0151/40 76 78 39](tel:+4915140767839).
     `,
     buttons: [
       {
-        text: "Termin buchen",
+        text: "Unterstützungsangebote nutzen",
         look: "tertiary" as const,
         href: ROUTE_SUPPORT.url,
       },
