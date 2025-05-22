@@ -102,7 +102,7 @@ export const header = {
       hasSupport: true,
       overlayContent: [
         {
-          plausibleEventName: "Link+Schulungen",
+          plausibleEventName: "Link+Telefon",
           title: "Schulungen",
           content:
             "In dieser Online-Schulung bekommen Sie praktische Tipps für den Digitalcheck.",
