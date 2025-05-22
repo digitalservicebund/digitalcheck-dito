@@ -7,22 +7,22 @@ export type AccordionItemProps = {
   headline: string;
   content?: string | ReactNode;
   id?: string;
-  plausibleTrackingName?: string;
+  plausibleEventName?: string;
 };
 
 export default function AccordionItem({
   headline,
   content,
   id,
-  plausibleTrackingName,
+  plausibleEventName,
 }: Readonly<AccordionItemProps>) {
-  const plausibleEventName = `plausible-event-name=${plausibleTrackingName}`;
+  const plausibleEvent = `plausible-event-name=${plausibleEventName}`;
 
   return (
     <details className="group border-t-2 border-t-blue-800" id={id}>
       <summary
         className={twJoin(
-          plausibleEventName,
+          plausibleEvent,
           "flex w-full cursor-pointer items-center justify-between p-24 group-open:bg-blue-200 hover:bg-blue-200 focus-visible:bg-blue-200 focus-visible:outline focus-visible:outline-4 focus-visible:outline-blue-800 [&::-webkit-details-marker]:hidden",
         )}
       >

@@ -4,6 +4,7 @@ export type ImageProps = {
   height?: number;
   alternativeText?: string;
   className?: string;
+  caption?: string;
 };
 
 function Image({

@@ -1,9 +1,18 @@
 import ZoomInOutlined from "@digitalservicebund/icons/ZoomInOutlined";
 import { Link } from "react-router";
+import { twJoin } from "tailwind-merge";
 import Image, { type ImageProps } from "~/components/Image";
 import twMerge from "~/utils/tailwindMerge";
 
-function ImageZoomable(image: Readonly<ImageProps>) {
+type ImageZoomableComponentProps = {
+  image: Readonly<ImageProps>;
+  plausibleEventName?: string;
+};
+
+function ImageZoomable({
+  image,
+  plausibleEventName,
+}: Readonly<ImageZoomableComponentProps>) {
   if (!image.url) return null;
 
   return (
@@ -12,7 +21,10 @@ function ImageZoomable(image: Readonly<ImageProps>) {
       reloadDocument
       target="_blank"
       rel="noreferrer"
-      className="relative block cursor-zoom-in"
+      className={twJoin(
+        "relative block cursor-zoom-in",
+        plausibleEventName && `plausible-event-name=${plausibleEventName}`,
+      )}
     >
       <Image {...image} className={twMerge("h-auto w-full", image.className)} />
       <ZoomInOutlined

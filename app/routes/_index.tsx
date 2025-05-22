@@ -14,6 +14,7 @@ export default function Index() {
   const tabsData: TabItem[] = [
     {
       title: index.stepByStep.tabName,
+      plausibleEventName: index.stepByStep.plausibleEventName,
       content: (
         <>
           <NumberedList
@@ -25,8 +26,10 @@ export default function Index() {
             items={index.stepByStep.items}
           />
           <ImageBox
-            image={index.stepByStep.processImage}
-            caption={index.stepByStep.processImage.caption}
+            image={index.stepByStep.processImage.img}
+            plausibleEventName={
+              index.stepByStep.processImage.plausibleEventName
+            }
           />
           {/* currently not used and hidden */}
           <div className="relative left-1/2 hidden w-screen -translate-x-1/2 bg-[url('/images/trainings.jpeg')] bg-cover bg-[0%_35%]">
@@ -73,6 +76,7 @@ export default function Index() {
     },
     {
       title: index.summary.tabName,
+      plausibleEventName: index.summary.plausibleEventName,
       content: (
         <>
           <InfoBox

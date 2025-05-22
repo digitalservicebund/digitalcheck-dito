@@ -13,7 +13,7 @@ type Props = {
   fullWidth?: boolean;
   prefetch?: "intent" | "viewport" | "render";
   onClickCallback?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
-  plausibleTrackingName?: string;
+  plausibleEventName?: string;
 };
 
 export interface ButtonProps
@@ -42,7 +42,7 @@ function Button({
   href,
   prefetch,
   onClickCallback,
-  plausibleTrackingName,
+  plausibleEventName,
   ...props
 }: ButtonProps | ButtonLinkProps) {
   let buttonClasses = twMerge(
@@ -68,7 +68,7 @@ function Button({
   iconLeft = formatIcon(iconLeft);
   iconRight = formatIcon(iconRight);
 
-  const plausibleEventName = `plausible-event-name=${plausibleTrackingName}`;
+  const plausibleEvent = `plausible-event-name=${plausibleEventName}`;
 
   // for links that have role="button" we need to add an event handler so that it can
   // be activated with the space bar
@@ -95,7 +95,7 @@ function Button({
       <Link
         {...(props as ButtonLinkProps)}
         to={href}
-        className={twJoin(buttonClasses, plausibleEventName)}
+        className={twJoin(buttonClasses, plausibleEvent)}
         onKeyDown={onKeyDown}
         onClick={onClick}
         id={id}
