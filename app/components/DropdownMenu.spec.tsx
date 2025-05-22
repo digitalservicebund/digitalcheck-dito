@@ -20,19 +20,19 @@ vi.mock("~/resources/content/components/header.ts", () => ({
 }));
 
 const mockDropdownData: DropdownItemProps[] = [
-  { title: "Link1", href: "/link1", plausibleEvent: "event1" },
+  { title: "Link1", href: "/link1", plausibleEventName: "event1" },
   {
     title: "Link2",
     href: "/link2",
     content: "Description for Link2",
-    plausibleEvent: "event2",
+    plausibleEventName: "event2",
   },
   {
     title: "Link3",
     href: "/link3",
     isNewTitle: true,
     newContent: "New content",
-    plausibleEvent: "event3",
+    plausibleEventName: "event3",
   },
 ];
 
@@ -49,7 +49,7 @@ const defaultTestProps: DropdownProps = {
   onOpenChange: mockOnOpenChange,
   isActiveParent: false,
   variant: "desktop",
-  plausibleEvent: "",
+  plausibleEventName: "",
 };
 
 const RouterWrapper = ({ children }: { children: ReactNode }) => (

@@ -9,7 +9,7 @@ export type DropdownItemProps = {
   className?: string;
   href?: string;
   isNewTitle?: boolean;
-  plausibleEvent: string;
+  plausibleEventName: string;
 };
 
 export type DropdownContentListProps = {
@@ -44,7 +44,7 @@ export default function DropdownContentList({
           onClick={onItemClick}
           aria-label={option.title}
           role="menuitem"
-          className={`plausible-event-name=Nav+Bar.${parentPlausibleEvent}+Layer.${option.plausibleEvent}`}
+          className={`plausible-event-name=Nav+Bar.${parentPlausibleEvent}+Layer.${option.plausibleEventName}`}
         >
           {({ isActive }) => {
             const browserHasHash = location.hash !== "";

@@ -19,7 +19,7 @@ export type DropdownProps = {
   onToggle: () => void;
   onItemClick: () => void;
   isActiveParent: boolean;
-  plausibleEvent: string;
+  plausibleEventName: string;
 };
 
 export default function DropdownMenu({
@@ -33,11 +33,11 @@ export default function DropdownMenu({
   onToggle,
   onItemClick,
   isActiveParent,
-  plausibleEvent,
+  plausibleEventName,
 }: Readonly<DropdownProps>) {
   const isMobile = variant === "mobile";
   const elementId = `dropdown-${label}`;
-  const plausibleTrackingClass = `plausible-event-name=Nav+Bar.${plausibleEvent}.Open+Close`;
+  const plausibleTrackingClass = `plausible-event-name=Nav+Bar.${plausibleEventName}.Open+Close`;
 
   // Transparent borders to avoid layout shifts
   const buttonClasses = twMerge(
@@ -110,7 +110,7 @@ export default function DropdownMenu({
             </div>
           )}
           <DropdownContentList
-            parentPlausibleEvent={plausibleEvent}
+            parentPlausibleEvent={plausibleEventName}
             data={data}
             isOrderedList={isOrderedList}
             onItemClick={onItemClick}

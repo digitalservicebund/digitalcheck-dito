@@ -16,12 +16,12 @@ interface SubItem {
   title: string;
   content?: string;
   href: string;
-  plausibleEvent: string;
+  plausibleEventName: string;
 }
 
 interface HeaderItem {
   text: string;
-  plausibleEvent: string;
+  plausibleEventName: string;
   overlayContent: SubItem[];
   hasSupport?: boolean;
   isOrderedList?: boolean;
@@ -114,7 +114,7 @@ const PageHeader = ({
     <DropdownMenu
       key={`${item.text}-${variant}`}
       label={item.text}
-      plausibleEvent={item.plausibleEvent}
+      plausibleEventName={item.plausibleEventName}
       hasSupport={item.hasSupport}
       data={item.overlayContent}
       isOrderedList={item.isOrderedList}
