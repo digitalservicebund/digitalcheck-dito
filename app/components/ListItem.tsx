@@ -109,11 +109,7 @@ const ListItem = ({
                 </div>
                 {content && <RichText markdown={content} />}
                 {image && (
-                  <ImageZoomable
-                    url={image.url}
-                    alternativeText={image.alternativeText}
-                    className="max-w-a11y"
-                  />
+                  <ImageZoomable image={image} className="max-w-a11y" />
                 )}
                 {buttons && buttons.length > 0 && (
                   <ButtonContainer buttons={buttons} />

@@ -38,12 +38,7 @@ export default function Interoperability() {
             markdown={interoperability.andYourVorhaben.content}
             className="mb-40"
           />
-          <ImageZoomable
-            url={interoperability.andYourVorhaben.image.url}
-            alternativeText={
-              interoperability.andYourVorhaben.image.alternativeText
-            }
-          />
+          <ImageZoomable image={interoperability.andYourVorhaben.image} />
           <Heading
             tagName="h3"
             text={interoperability.andYourVorhaben.law.headline}
@@ -78,10 +73,7 @@ export default function Interoperability() {
               }}
               items={interoperability.info.items}
             />
-            <ImageZoomable
-              url={interoperability.info.image.url}
-              alternativeText={interoperability.info.image.alternativeText}
-            />
+            <ImageZoomable image={interoperability.info.image} />
           </Container>
 
           <Background

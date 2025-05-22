@@ -7,11 +7,13 @@ import twMerge from "~/utils/tailwindMerge";
 type ImageZoomableComponentProps = {
   image: Readonly<ImageProps>;
   plausibleEventName?: string;
+  className?: string;
 };
 
 function ImageZoomable({
   image,
   plausibleEventName,
+  className,
 }: Readonly<ImageZoomableComponentProps>) {
   if (!image.url) return null;
 
@@ -26,7 +28,10 @@ function ImageZoomable({
         plausibleEventName && `plausible-event-name=${plausibleEventName}`,
       )}
     >
-      <Image {...image} className={twMerge("h-auto w-full", image.className)} />
+      <Image
+        {...image}
+        className={twMerge("h-auto w-full", image.className, className)}
+      />
       <ZoomInOutlined
         className="absolute bottom-16 left-16 size-48 bg-blue-800 p-1 shadow-sm"
         fill="white"

@@ -38,10 +38,7 @@ export default function SPOC() {
             className="mb-8"
           />
           <RichText markdown={spoc.landscape.content} className="mb-40" />
-          <ImageZoomable
-            url={spoc.landscape.image.url}
-            alternativeText={spoc.landscape.image.alternativeText}
-          />
+          <ImageZoomable image={spoc.landscape.image} />
           <RichText
             className="mt-16 mb-32"
             markdown={spoc.landscape.contentAfter.content}
