@@ -47,7 +47,10 @@ test.describe("test landing page", () => {
 
   test("CTA on landing works", async ({ page }) => {
     await page.goto(ROUTE_LANDING.url);
-    await page.getByRole("link", { name: "Digitalbezug einschätzen" }).click();
+    await page
+      .getByRole("link", { name: "Digitalbezug einschätzen" })
+      .first()
+      .click();
     await expect(page).toHaveURL(ROUTE_PRECHECK.url);
   });
 
@@ -64,6 +67,21 @@ test.describe("test landing page", () => {
     );
     await expect(page.getByRole("main")).toContainText("4Prüfen durch den NKR");
   });
+});
+
+test("footer is displayed", async ({ page }) => {
+  await page.goto(ROUTE_LANDING.url);
+  const footerEl = page.getByRole("contentinfo", { name: "Seitenfußbereich" });
+  await expect(footerEl).toBeVisible();
+  await expect(
+    footerEl.getByRole("navigation", { name: "Schnellübersicht" }),
+  ).toBeVisible();
+  await expect(
+    footerEl.getByRole("navigation", { name: "Sitemap" }),
+  ).toBeVisible();
+  await expect(
+    footerEl.getByRole("navigation", { name: "Externe Verlinkungen" }),
+  ).toBeVisible();
 });
 
 test.describe("test links", () => {
@@ -149,26 +167,19 @@ test.describe("test progress bar", () => {
 
   test("Correct step is highlighted in progress bar", async ({ page }) => {
     await page.goto(ROUTE_PRECHECK.url);
-    await expect(page.getByRole("navigation").getByText("1")).toContainClass(
-      "bg-blue-800",
-    );
-    await expect(page.getByRole("navigation").getByText("2")).toContainClass(
-      "border-white",
-    );
+    const navigation = page.getByRole("navigation", {
+      name: "Digitalcheck-Fortschritt",
+    });
+    await expect(navigation).toBeVisible();
+
+    await expect(navigation.getByText("1")).toContainClass("bg-blue-800");
+    await expect(navigation.getByText("2")).toContainClass("border-white");
     await page.goto(ROUTE_METHODS.url);
-    await expect(page.getByRole("navigation").getByText("2")).toContainClass(
-      "bg-blue-800",
-    );
-    await expect(page.getByRole("navigation").getByText("1")).toContainClass(
-      "border-white",
-    );
+    await expect(navigation.getByText("2")).toContainClass("bg-blue-800");
+    await expect(navigation.getByText("1")).toContainClass("border-white");
     await page.goto(ROUTE_DOCUMENTATION.url);
-    await expect(page.getByRole("navigation").getByText("3")).toContainClass(
-      "bg-blue-800",
-    );
-    await expect(page.getByRole("navigation").getByText("2")).toContainClass(
-      "border-white",
-    );
+    await expect(navigation.getByText("3")).toContainClass("bg-blue-800");
+    await expect(navigation.getByText("2")).toContainClass("border-white");
   });
 });
 

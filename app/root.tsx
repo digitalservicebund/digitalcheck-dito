@@ -22,13 +22,7 @@ import Heading from "~/components/Heading";
 import PageHeader from "~/components/PageHeader";
 import RichText from "~/components/RichText";
 import { siteMeta } from "~/resources/content/shared/meta";
-import {
-  ROUTE_A11Y,
-  ROUTE_IMPRINT,
-  ROUTE_LANDING,
-  ROUTE_PRIVACY,
-  ROUTE_SITEMAP,
-} from "~/resources/staticRoutes";
+import { ROUTE_LANDING } from "~/resources/staticRoutes";
 import sharedStyles from "~/styles.css?url";
 import {
   PLAUSIBLE_DOMAIN as CLIENT_PLAUSIBLE_DOMAIN,
@@ -219,18 +213,6 @@ marked.use({
   },
 });
 
-const footerLinks = [
-  { url: ROUTE_IMPRINT.url, text: "Impressum" },
-  { url: ROUTE_PRIVACY.url, text: "Datenschutzerklärung" },
-  { url: ROUTE_A11Y.url, text: "Barrierefreiheit" },
-  {
-    url: "https://github.com/digitalservicebund/digitalcheck-dito",
-    text: "Open Source Code",
-    openInNewTab: true,
-  },
-  { url: ROUTE_SITEMAP.url, text: "Sitemap" },
-];
-
 function Document({
   children,
   error,
@@ -255,7 +237,7 @@ function Document({
         <ScrollAndFocus />
         <PageHeader includeBreadcrumbs={!error} />
         {children}
-        <Footer links={footerLinks} />
+        <Footer />
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
       </body>

@@ -25,3 +25,7 @@ We could do everything between requiring draconian testing standards, to having 
 ## Consequences
 
 - Some clean-up & refactoring of existing tests
+
+## Update (2025-05-20)
+
+In we updated our testing guidelines [here](./0020-use-test-ids-instead-of-name-selectors.md)

@@ -1,0 +1,394 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Footer Component > Renders correctly 1`] = `
+<div>
+  <footer
+    aria-label="Seitenfußbereich"
+    class="ds-label-03-reg flex w-full flex-row justify-center border-t-2 border-blue-300 leading-snug text-gray-900 print:hidden"
+  >
+    <div
+      class="ds-stack ds-stack-32 sm:ds-stack-40 w-full max-w-6xl px-16 py-40"
+    >
+      <nav
+        aria-label="Schnellübersicht"
+        class="grid grid-cols-1 justify-between gap-32 sm:grid-cols-[repeat(3,_minmax(0,_18rem))] sm:grid-rows-2"
+      >
+        <div
+          class="ds-stack ds-stack-8 row-span-2"
+        >
+          <h2
+            class="ds-label-section"
+          >
+            Unterstützungsangebote Für bund, Länder, Kommunen und EU-Staaten
+          </h2>
+          <ul
+            class="list-unstyled flex flex-col gap-8"
+          >
+            <li>
+              Support:
+               
+              <a
+                class="text-link increase-tap-area"
+                href="tel:015140767839"
+              >
+                0151/40 76 78 39
+                 
+              </a>
+               oder
+               
+              <a
+                class="text-link increase-tap-area"
+                href="mailto:digitalcheck@digitalservice.bund.de"
+              >
+                digitalcheck@digitalservice.bund.de
+                 
+              </a>
+            </li>
+            <li>
+               
+              <a
+                class="text-link increase-tap-area"
+                data-discover="true"
+                href="/unterstuetzung"
+              >
+                Alle Unterstützungsangebote
+                 
+              </a>
+            </li>
+            <li>
+               
+              <a
+                class="text-link increase-tap-area"
+                data-discover="true"
+                href="/unterstuetzung#angebote"
+              >
+                Schulungen
+                 
+              </a>
+            </li>
+            <li>
+               
+              <a
+                class="text-link increase-tap-area"
+                data-discover="true"
+                href="/interoperabel/nationale-kontaktstelle"
+              >
+                Nationale Kontaktstelle für ein interoperables Europa (2024/903 Art. 17)
+                 
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="ds-stack ds-stack-8 row-span-2"
+        >
+          <h2
+            class="ds-label-section"
+          >
+            Schritt für Schritt
+          </h2>
+          <ul
+            class="list-unstyled flex flex-col gap-8"
+          >
+            <li>
+               
+              <a
+                class="text-link increase-tap-area"
+                data-discover="true"
+                href="/vorpruefung"
+              >
+                1. Vorprüfung: Digitalbezug einschätzen
+                 
+              </a>
+            </li>
+            <li>
+               
+              <a
+                class="text-link increase-tap-area"
+                data-discover="true"
+                href="/methoden"
+              >
+                2. Digitaltauglichkeit der Regelung sicherstellen
+                 
+              </a>
+            </li>
+            <li>
+               
+              <a
+                class="text-link increase-tap-area"
+                data-discover="true"
+                href="/dokumentation"
+              >
+                3. Dokumentieren der Digitaltauglichkeit
+                 
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="ds-stack ds-stack-8"
+        >
+          <h2
+            class="ds-label-section"
+          >
+            Grundlagen
+          </h2>
+          <ul
+            class="list-unstyled flex flex-col gap-8"
+          >
+            <li>
+               
+              <a
+                class="text-link increase-tap-area"
+                data-discover="true"
+                href="/grundlagen/fuenf-prinzipien"
+              >
+                Prinzipien der Digitaltauglichkeit
+                 
+              </a>
+            </li>
+            <li>
+               
+              <a
+                class="text-link increase-tap-area"
+                data-discover="true"
+                href="/grundlagen/methoden"
+              >
+                Übersicht der Werkzeuge und Methoden
+                 
+              </a>
+            </li>
+            <li>
+               
+              <a
+                class="text-link increase-tap-area"
+                data-discover="true"
+                href="/interoperabel"
+              >
+                EU-Interoperabilität
+                 
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="ds-stack ds-stack-8"
+        >
+          <h2
+            class="ds-label-section"
+          >
+            Beispiele
+          </h2>
+          <ul
+            class="list-unstyled flex flex-col gap-8"
+          >
+            <li>
+               
+              <a
+                class="text-link increase-tap-area"
+                data-discover="true"
+                href="/beispiele/prinzipien"
+              >
+                Digitaltauglichkeit im Regelungstext
+                 
+              </a>
+            </li>
+            <li>
+               
+              <a
+                class="text-link increase-tap-area"
+                data-discover="true"
+                href="/beispiele/visualisierungen"
+              >
+                Visualisierungen
+                 
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <nav
+        aria-label="Sitemap"
+      >
+        <ul
+          class="list-unstyled flex flex-row flex-wrap gap-8"
+        >
+          <li
+            class="after:ml-8 after:inline-block after:content-['•'] last:after:content-['']"
+          >
+             
+            <a
+              class="text-link increase-tap-area"
+              data-discover="true"
+              href="/impressum"
+            >
+              Impressum
+               
+            </a>
+          </li>
+          <li
+            class="after:ml-8 after:inline-block after:content-['•'] last:after:content-['']"
+          >
+             
+            <a
+              class="text-link increase-tap-area"
+              data-discover="true"
+              href="/datenschutz"
+            >
+              Datenschutzerklärung
+               
+            </a>
+          </li>
+          <li
+            class="after:ml-8 after:inline-block after:content-['•'] last:after:content-['']"
+          >
+             
+            <a
+              class="text-link increase-tap-area"
+              data-discover="true"
+              href="/barrierefreiheit"
+            >
+              Barrierefreiheit
+               
+            </a>
+          </li>
+          <li
+            class="after:ml-8 after:inline-block after:content-['•'] last:after:content-['']"
+          >
+             
+            <a
+              class="text-link increase-tap-area"
+              data-discover="true"
+              href="/sitemap"
+            >
+              Sitemap
+               
+            </a>
+          </li>
+          <li
+            class="after:ml-8 after:inline-block after:content-['•'] last:after:content-['']"
+          >
+             
+            <a
+              aria-describedby="a11y-message--new-window"
+              class="text-link increase-tap-area"
+              href="https://github.com/digitalservicebund/digitalcheck-dito"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Open Source Code
+               
+              <svg
+                aria-hidden="true"
+                class="mb-4 ml-[0.2em] inline-block! fill-current"
+                data-testid="OpenInNewIcon"
+                focusable="false"
+                height="1.2em"
+                viewBox="0 0 24 24"
+                width="1.2em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 0h24v24H0z"
+                  fill="none"
+                />
+                <path
+                  d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+                />
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <hr
+        class="mt-16 w-full border-t-2 border-blue-300"
+      />
+      <div
+        class="space-y-16 sm:flex sm:gap-48"
+      >
+        <img
+          alt="Logo des Bundesministerium des Innern und für Heimat"
+          src="/logo/bmi-logo.png"
+          width="120"
+        />
+        <nav
+          aria-label="Externe Verlinkungen"
+        >
+          <div
+            class="ds-stack ds-stack-8"
+          >
+            <ul
+              class="list-unstyled flex flex-col gap-8"
+            >
+              <li>
+                Ein Onlinedienst der
+                 
+                <a
+                  aria-describedby="a11y-message--new-window"
+                  class="text-link increase-tap-area"
+                  href="https://digitalservice.bund.de/"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  DigitalService GmbH des Bundes
+                   
+                  <svg
+                    aria-hidden="true"
+                    class="mb-4 ml-[0.2em] inline-block! fill-current"
+                    data-testid="OpenInNewIcon"
+                    focusable="false"
+                    height="1.2em"
+                    viewBox="0 0 24 24"
+                    width="1.2em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0 0h24v24H0z"
+                      fill="none"
+                    />
+                    <path
+                      d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+                    />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                Im Auftrag des
+                 
+                <a
+                  aria-describedby="a11y-message--new-window"
+                  class="text-link increase-tap-area"
+                  href="https://www.bmi.bund.de/"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Bundesministerium des Innern und für Heimat
+                   
+                  <svg
+                    aria-hidden="true"
+                    class="mb-4 ml-[0.2em] inline-block! fill-current"
+                    data-testid="OpenInNewIcon"
+                    focusable="false"
+                    height="1.2em"
+                    viewBox="0 0 24 24"
+                    width="1.2em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0 0h24v24H0z"
+                      fill="none"
+                    />
+                    <path
+                      d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+                    />
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </footer>
+</div>
+`;
