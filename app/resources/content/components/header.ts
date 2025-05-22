@@ -103,7 +103,7 @@ export const header = {
       ],
     },
     {
-      plausibleEventName: "Kontakt+Support ",
+      plausibleEvent: "Kontakt+Support",
       text: "Kontakt und Support",
       hasSupport: true,
       overlayContent: [

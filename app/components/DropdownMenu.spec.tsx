@@ -11,10 +11,14 @@ import DropdownMenu from "./DropdownMenu";
 
 vi.mock("~/resources/content/components/header.ts", () => ({
   header: {
-    contact: {
+    contactTel: {
       msgMobile: "mobile msg",
       msg: "desktop msg",
       number: "0123456",
+    },
+    contactMail: {
+      msg: "desktop mail msg",
+      url: "mail@example.com",
     },
   },
 }));
@@ -172,7 +176,7 @@ describe("DropdownMenu Component", () => {
         isExpanded: true,
         variant: "desktop",
       });
-      expect(screen.getByText("desktop msg")).toBeInTheDocument();
+      expect(screen.getByText(/desktop msg/)).toBeInTheDocument();
       expect(screen.getByText("0123456")).toBeInTheDocument();
       expect(screen.getByRole("link", { name: "0123456" })).toHaveAttribute(
         "href",
@@ -182,19 +186,19 @@ describe("DropdownMenu Component", () => {
 
     it("displays support section mobile message when hasSupport, isMobile and expanded", () => {
       renderDropdown({ hasSupport: true, isExpanded: true, variant: "mobile" });
-      expect(screen.getByText("mobile msg")).toBeInTheDocument();
+      expect(screen.getByText(/mobile msg/)).toBeInTheDocument();
       expect(screen.getByText("0123456")).toBeInTheDocument();
     });
 
     it("does not display support section when hasSupport is false,", () => {
       renderDropdown({ hasSupport: false, isExpanded: true });
-      expect(screen.queryByText("desktop msg")).not.toBeInTheDocument();
-      expect(screen.queryByText("mobile msg")).not.toBeInTheDocument();
+      expect(screen.queryByText(/mobile msg/)).not.toBeInTheDocument();
+      expect(screen.queryByText(/mobile msg/)).not.toBeInTheDocument();
     });
 
     it("does not display support section when not expanded", () => {
       renderDropdown({ hasSupport: true, isExpanded: false });
-      expect(screen.queryByText("desktop msg")).not.toBeInTheDocument();
+      expect(screen.queryByText(/mobile msg/)).not.toBeInTheDocument();
     });
 
     it("calls onItemClick when a dropdown item is clicked", async () => {
