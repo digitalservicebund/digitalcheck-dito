@@ -1,5 +1,5 @@
 import { marked, type Tokens } from "marked";
-import React, { type ReactNode, useEffect, useRef } from "react";
+import { type ReactNode, useEffect, useRef } from "react";
 import {
   type HeadersFunction,
   isRouteErrorResponse,
@@ -24,11 +24,7 @@ import RichText from "~/components/RichText";
 import { siteMeta } from "~/resources/content/shared/meta";
 import { ROUTE_LANDING } from "~/resources/staticRoutes";
 import sharedStyles from "~/styles.css?url";
-import {
-  PLAUSIBLE_DOMAIN as CLIENT_PLAUSIBLE_DOMAIN,
-  PLAUSIBLE_SCRIPT as CLIENT_PLAUSIBLE_SCRIPT,
-} from "~/utils/constants";
-import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants.server";
+import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants";
 import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
 import type { Route } from "./+types/root";
@@ -44,8 +40,6 @@ export function loader({ request }: Route.LoaderArgs) {
 
   return {
     BASE_URL,
-    PLAUSIBLE_DOMAIN,
-    PLAUSIBLE_SCRIPT,
     trackingDisabled:
       process.env.TRACKING_DISABLED === "true" ||
       process.env.NODE_ENV === "development",
@@ -213,24 +207,26 @@ marked.use({
   },
 });
 
-function Document({
-  children,
-  error,
-  trackingScript,
-}: Readonly<{
-  children: ReactNode;
-  error?: boolean;
-  trackingScript?: React.ReactNode;
-}>) {
+export function Layout({ children }: Readonly<{ children: ReactNode }>) {
   const nonce = useNonce();
+  const error = useRouteError();
+  const rootLoaderData = useRouteLoaderData<typeof loader>("root");
+  const { trackingDisabled } = rootLoaderData ?? {};
 
   return (
     <html lang="de">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {trackingScript}
         <Meta />
+        {!trackingDisabled && (
+          <script
+            key={error ? "error-tracking" : "app-tracking"}
+            defer
+            data-domain={PLAUSIBLE_DOMAIN}
+            src={PLAUSIBLE_SCRIPT}
+          />
+        )}
         <Links />
       </head>
       <body className="flex min-h-screen flex-col">
@@ -246,27 +242,12 @@ function Document({
 }
 
 export default function App() {
-  const { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT, trackingDisabled, featureFlags } =
-    useLoaderData<typeof loader>();
-
+  const { featureFlags } = useLoaderData<typeof loader>();
   return (
-    <Document
-      trackingScript={
-        !trackingDisabled && (
-          <script
-            key={"app-tracking"}
-            defer
-            data-domain={PLAUSIBLE_DOMAIN}
-            src={PLAUSIBLE_SCRIPT}
-          />
-        )
-      }
-    >
+    <main className="grow [&:has(.parent-bg-blue)]:bg-blue-100">
       {/* .parent-bg-blue can be set by child components to set the background of main to blue (e.g. used for question pages) */}
-      <main className="grow [&:has(.parent-bg-blue)]:bg-blue-100">
-        <Outlet context={{ featureFlags }} />
-      </main>
-    </Document>
+      <Outlet context={{ featureFlags }} />
+    </main>
   );
 }
 
@@ -294,36 +275,22 @@ Vielen Dank für Ihr Verständnis.`;
   }
 
   return (
-    <Document
-      error={true}
-      trackingScript={
-        loaderData?.trackingDisabled && (
-          <script
-            key={"error-tracking"}
-            defer
-            data-domain={CLIENT_PLAUSIBLE_DOMAIN}
-            src={CLIENT_PLAUSIBLE_SCRIPT}
-          />
-        )
-      }
-    >
-      <main id="error" className="grow">
-        <div className="border-t-2 border-t-gray-400">
-          <Container>
-            <div className="ds-stack ds-stack-8 mb-32">
-              <span className="ds-label-01-bold">{errorStatus}</span>
-              <Heading text={errorTitle} className="ds-heading-02-reg" />
-              <RichText markdown={errorMessage} className="ds-subhead" />
-            </div>
-            <Button
-              id="error-back-button"
-              text="Zurück zur Startseite"
-              href={ROUTE_LANDING.url}
-              look="primary"
-            ></Button>
-          </Container>
-        </div>
-      </main>
-    </Document>
+    <main id="error" className="grow">
+      <div className="border-t-2 border-t-gray-400">
+        <Container>
+          <div className="ds-stack ds-stack-8 mb-32">
+            <span className="ds-label-01-bold">{errorStatus}</span>
+            <Heading text={errorTitle} className="ds-heading-02-reg" />
+            <RichText markdown={errorMessage} className="ds-subhead" />
+          </div>
+          <Button
+            id="error-back-button"
+            text="Zurück zur Startseite"
+            href={ROUTE_LANDING.url}
+            look="primary"
+          ></Button>
+        </Container>
+      </div>
+    </main>
   );
 }
