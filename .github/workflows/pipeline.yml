@@ -2,7 +2,9 @@ name: Pipeline
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - "staging/**"
   pull_request:
     branches: [main]
   # Allow to run this workflow manually
@@ -11,7 +13,7 @@ on:
 env:
   PACKAGE_NAME: digitalcheck-dito
   IMAGE_NAME: digitalservicebund/digitalcheck-dito
-  ENVIRONMENT: production
+  ENVIRONMENT: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
 
 jobs:
   vulnerability-scan:
@@ -98,17 +100,16 @@ jobs:
 
   deploy:
     needs: [build-and-push-image]
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/staging/')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
       packages: read
-    environment: production
     steps:
-      - name: Deploy latest container image
+      - name: Deploy container image
         uses: digitalservicebund/argocd-deploy@4fac1bb67c92ed168f6d9b22f8779ce241a9e412 # v1.0.0
         with:
-          environment: "${{ env.ENVIRONMENT }}"
+          environment: ${{ env.ENVIRONMENT }}
           version: ${{ github.sha }}
           deploying_repo: ${{ env.PACKAGE_NAME }}
           infra_repo: ${{ github.event.repository.name }}-infra
