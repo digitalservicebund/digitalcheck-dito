@@ -1,5 +1,3 @@
-import { type MetaArgs } from "react-router";
-
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
@@ -8,14 +6,14 @@ import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { ROUTE_PRECHECK, ROUTE_PRECHECK_INFO } from "~/resources/staticRoutes";
-import prependMetaTitle from "~/utils/metaTitle";
+import constructMetaTitle from "~/utils/metaTitle";
 
 const { questions, generalInfo } = preCheck;
 const { headline, text, nextButton, hint } = generalInfo;
 
-export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_PRECHECK_INFO.title, matches);
-};
+export function meta() {
+  return constructMetaTitle(ROUTE_PRECHECK_INFO.title);
+}
 
 export default function GeneralInfo() {
   return (

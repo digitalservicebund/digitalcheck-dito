@@ -1,10 +1,5 @@
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
-import {
-  useLoaderData,
-  useOutletContext,
-  type MetaArgs,
-  type UIMatch,
-} from "react-router";
+import { useLoaderData, useOutletContext, type UIMatch } from "react-router";
 
 import Background from "~/components/Background";
 import Container from "~/components/Container";
@@ -18,7 +13,7 @@ import Tabs, { TabItem } from "~/components/Tabs";
 import VisualisationItem from "~/components/VisualisationItem";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
-import prependMetaTitle from "~/utils/metaTitle";
+import constructMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,
   paragraphFields,
@@ -30,9 +25,9 @@ import {
 import { formatDate, gesetzStatusMap, slugify } from "~/utils/utilFunctions";
 import type { Route } from "./+types/beispiele.regelungen.$regelung";
 
-export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_REGELUNGEN.title, matches);
-};
+export function meta() {
+  return constructMetaTitle(ROUTE_REGELUNGEN.title);
+}
 
 export const handle = {
   breadcrumb: (match: UIMatch) => ({

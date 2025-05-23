@@ -1,4 +1,3 @@
-import { type MetaArgs } from "react-router";
 import Accordion from "~/components/Accordion";
 import Background from "~/components/Background";
 import Box from "~/components/Box";
@@ -19,11 +18,11 @@ import {
   ROUTE_PRECHECK,
   ROUTE_PRECHECK_INFO,
 } from "~/resources/staticRoutes";
-import prependMetaTitle from "~/utils/metaTitle";
+import constructMetaTitle from "~/utils/metaTitle";
 
-export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_PRECHECK.title, matches);
-};
+export function meta() {
+  return constructMetaTitle(ROUTE_PRECHECK.title);
+}
 
 export default function Index() {
   const tabsData: TabItem[] = [

@@ -1,4 +1,3 @@
-import { type MetaArgs } from "react-router";
 import Background from "~/components/Background";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
@@ -8,11 +7,11 @@ import SupportBanner from "~/components/SupportBanner";
 import { fundamentalsMethods } from "~/resources/content/grundlage-methoden.ts";
 import { ROUTE_FUNDAMENTALS_METHODS } from "~/resources/staticRoutes";
 import { methodStepsItems } from "~/utils/listProcessing.ts";
-import prependMetaTitle from "~/utils/metaTitle";
+import constructMetaTitle from "~/utils/metaTitle";
 
-export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_FUNDAMENTALS_METHODS.title, matches);
-};
+export function meta() {
+  return constructMetaTitle(ROUTE_FUNDAMENTALS_METHODS.title);
+}
 
 export default function FundamentalsMethods() {
   return (

@@ -29,6 +29,7 @@ import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
 import type { Route } from "./+types/root";
 import { notFound, serverError } from "./resources/content/error";
+import constructMetaTitle from "./utils/metaTitle";
 
 export function loader({ request }: Route.LoaderArgs) {
   const featureFlags = getFeatureFlags();
@@ -48,85 +49,13 @@ export function loader({ request }: Route.LoaderArgs) {
   };
 }
 
-export const meta: Route.MetaFunction = ({ data, location, error }) => {
-  const title = error ? `Fehler — ${siteMeta.title}` : siteMeta.title;
-
-  const baseMeta = [
-    { title },
-    {
-      name: "title",
-      property: "title",
-      content: title,
-    },
-    {
-      name: "og:title",
-      property: "og:title",
-      content: title,
-    },
-    {
-      name: "twitter:title",
-      property: "twitter:title",
-      content: title,
-    },
-  ];
-
-  if (error || !data) {
-    return baseMeta;
-  }
-
-  const { BASE_URL } = data;
-  const url = `${BASE_URL}${location.pathname}`;
-  const ogImage = `${BASE_URL}/images/og-image.png`;
-
-  return [
-    ...baseMeta,
-    {
-      name: "description",
-      property: "description",
-      content: siteMeta.description,
-    },
-    {
-      name: "og:description",
-      property: "og:description",
-      content: siteMeta.description,
-    },
-    {
-      name: "twitter:description",
-      property: "twitter:description",
-      content: siteMeta.description,
-    },
-    {
-      name: "og:url",
-      property: "og:url",
-      content: url,
-    },
-    {
-      name: "twitter:url",
-      property: "twitter:url",
-      content: url,
-    },
-    {
-      name: "og:image",
-      property: "og:image",
-      content: ogImage,
-    },
-    {
-      name: "twitter:image",
-      property: "twitter:image",
-      content: ogImage,
-    },
-    {
-      name: "og:type",
-      property: "og:type",
-      content: "website",
-    },
-    {
-      name: "twitter:card",
-      property: "twitter:card",
-      content: "summary_large_image",
-    },
-  ];
-};
+export function meta({ error }: Route.MetaArgs) {
+  // We're only returning the title here, so that all other routes can safely override it
+  // All other meta tags are set in the Layout component
+  // TODO: When updating to React 19, dropping the meta export entirely and moving to <meta> tags everywhere
+  // might be the recommended approach: https://github.com/remix-run/react-router/issues/13507#issuecomment-2856332055
+  return constructMetaTitle(error ? "Fehler" : undefined);
+}
 
 export const headers: HeadersFunction = () => ({
   // "X-Frame-Options": "SAMEORIGIN",
@@ -213,12 +142,33 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
   const error = useRouteError();
   const rootLoaderData = useRouteLoaderData<typeof loader>("root");
   const { trackingDisabled } = rootLoaderData ?? {};
+  const location = useLocation();
+
+  let metaTitles = <></>;
+  if (!error && rootLoaderData) {
+    const url = `${rootLoaderData.BASE_URL}${location.pathname}`;
+    const ogImage = `${rootLoaderData.BASE_URL}/images/og-image.png`;
+    metaTitles = (
+      <>
+        <meta property="og:description" content={siteMeta.description} />
+        <meta property="twitter:description" content={siteMeta.description} />
+        <meta property="og:url" content={url} />
+        <meta property="twitter:url" content={url} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="twitter:image" content={ogImage} />
+        <meta property="og:type" content="website" />
+        <meta property="twitter:card" content="summary_large_image" />
+      </>
+    );
+  }
 
   return (
     <html lang="de">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content={siteMeta.description} />
+        {metaTitles}
         <Meta />
         {!trackingDisabled && (
           <script
