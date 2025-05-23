@@ -8,13 +8,14 @@ export type LinkItem = {
 };
 
 export default function LinkListBox({
+  heading,
   links,
-}: Readonly<{ links: LinkItem[] }>) {
+}: Readonly<{ heading?: string; links: LinkItem[] }>) {
   return (
     <div className="mt-64">
       <Heading
         tagName="div"
-        text={general.tableOfContents.headline}
+        text={heading ?? general.tableOfContents.headline}
         className="font-bold"
       />
       <ol className="list-unstyled ds-stack ds-stack-8 mt-16">

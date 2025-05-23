@@ -1,11 +1,10 @@
 import { type MetaArgs, useLoaderData } from "react-router";
 import Background from "~/components/Background";
-import Box from "~/components/Box";
 import Container from "~/components/Container";
+import FeedbackForm from "~/components/FeedbackForm";
 import Header from "~/components/Header";
 import LinkListBox from "~/components/LinkListBox";
 import PrinciplesDisplay from "~/components/PrinciplesDisplay";
-import SupportBanner from "~/components/SupportBanner";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import {
   ROUTE_METHODS,
@@ -50,9 +49,13 @@ export async function loader({ request }: Route.LoaderArgs) {
 export default function FivePrinciples() {
   const { referrer, prinzips } = useLoaderData<typeof loader>();
 
-  const nextStep = referrer.startsWith(ROUTE_METHODS.url)
-    ? methodsFivePrinciples.nextStepMethods
-    : methodsFivePrinciples.nextStep;
+  const feedbackOptions = [
+    { label: "Ich stimme gar nicht zu", value: 1 },
+    { label: "Ich stimme eher nicht zu", value: 2 },
+    { label: "Ich stimme teilweise zu", value: 3 },
+    { label: "Ich stimme eher zu", value: 4 },
+    { label: "Ich stimme voll und ganz zu", value: 5 },
+  ];
 
   return (
     <>
@@ -65,22 +68,28 @@ export default function FivePrinciples() {
                 ? `2.4. ${methodsFivePrinciples.title}`
                 : methodsFivePrinciples.title,
             }}
+            content={{
+              markdown: methodsFivePrinciples.subTitle,
+            }}
           />
           <LinkListBox
+            heading={"Prinzipien"}
             links={methodsFivePrinciples.principles.map((principle) => {
               return {
-                id: slugify(principle.label),
+                id: slugify(principle.title),
                 title: `${principle.label}: ${principle.title}`,
               };
             })}
           />
         </Container>
       </Background>
+
       {methodsFivePrinciples.principles.map((principle, index) => {
         const correspondingPrinzip = prinzips.find((p) => p.Nummer === index);
+
         return (
           <PrinciplesDisplay
-            key={slugify(principle.label)}
+            key={slugify(principle.title)}
             principle={principle}
             index={index}
             showInfoBoxButtons={true}
@@ -89,15 +98,37 @@ export default function FivePrinciples() {
           />
         );
       })}
-      <Container>
-        <Box
-          heading={{ text: nextStep.title }}
-          label={{ text: nextStep.label }}
-          content={{ markdown: nextStep.text }}
-          buttons={nextStep.buttons}
-        />
-      </Container>
-      <SupportBanner />
+
+      <FeedbackForm
+        heading="Ihr Feedback hilft uns weiter!"
+        trackingEvent="feedback"
+        questions={[
+          {
+            id: "principles-simple",
+            trackingEvent: "principles-simple",
+            text: "Die Prinzipien sind einfach zu nutzen.",
+            options: feedbackOptions,
+          },
+          {
+            id: "principles-useful-drafting",
+            trackingEvent: "principles-useful-drafting",
+            text: "Die Prinzipien sind hilfreich für das Erarbeiten meines Regelungsvorhabens.",
+            options: feedbackOptions,
+          },
+          {
+            id: "principles-useful-implementation",
+            trackingEvent: "principles-useful-implementation",
+            text: "Die Prinzipien sind hilfreich für die Umsetzung meines Regelungsvorhabens.",
+            options: feedbackOptions,
+          },
+        ]}
+        contact={"feedback@digitalservicebund.de"}
+        button={"Feedback senden"}
+        success={{
+          heading: "Feedback gesendet",
+          text: "Vielen Dank für Ihr Feedback!",
+        }}
+      />
     </>
   );
 }

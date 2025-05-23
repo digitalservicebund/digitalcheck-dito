@@ -1,5 +1,6 @@
 import { NavLink, useLocation } from "react-router";
 import twMerge from "~/utils/tailwindMerge";
+import Label from "./Label";
 
 export type DropdownItemProps = {
   number?: number;
@@ -33,9 +34,6 @@ export default function DropdownContentList({
     isMobile && "py-8 pr-8 pl-16 border-b-[1px] border-gray-600",
   );
 
-  const newLabelStyle =
-    "ds-label-02-reg mr-8 rounded-md bg-blue-300 px-[4px] py-[2px] text-[#004B76]";
-
   const mapDataToItems = (option: DropdownItemProps, index: number) => {
     return (
       <li key={option.href || option.title || index}>
@@ -61,9 +59,7 @@ export default function DropdownContentList({
                 )}
               >
                 <div className="ds-label-02-reg lg:ds-label-01-bold">
-                  {option.isNewTitle && (
-                    <span className={newLabelStyle}>NEU</span>
-                  )}
+                  {option.isNewTitle && <Label className="mr-8">NEU</Label>}
                   {itemNumber && <span className="mr-4">{itemNumber}. </span>}
                   {option.title}
                 </div>
@@ -72,7 +68,7 @@ export default function DropdownContentList({
                 )}
                 {option.newContent && (
                   <div className="max-lg:hidden">
-                    <span className={newLabelStyle}>NEU</span>
+                    <Label className="mr-8">NEU</Label>
                     <span>{option.newContent}</span>
                   </div>
                 )}
