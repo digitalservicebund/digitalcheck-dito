@@ -105,6 +105,7 @@ jobs:
     timeout-minutes: 10
     permissions:
       packages: read
+    environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
     steps:
       - name: Deploy container image
         uses: digitalservicebund/argocd-deploy@4fac1bb67c92ed168f6d9b22f8779ce241a9e412 # v1.0.0
