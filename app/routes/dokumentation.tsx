@@ -1,4 +1,3 @@
-import { type MetaArgs } from "react-router";
 import Background from "~/components/Background";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
@@ -9,11 +8,11 @@ import { NumberedList } from "~/components/List";
 import SupportBanner from "~/components/SupportBanner";
 import { documentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION } from "~/resources/staticRoutes";
-import prependMetaTitle from "~/utils/metaTitle";
+import constructMetaTitle from "~/utils/metaTitle";
 
-export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_DOCUMENTATION.title, matches);
-};
+export function meta() {
+  return constructMetaTitle(ROUTE_DOCUMENTATION.title);
+}
 
 export const handle = {
   hasProgressBar: true,

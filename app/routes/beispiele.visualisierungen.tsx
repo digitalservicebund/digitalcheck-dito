@@ -1,4 +1,4 @@
-import { Link, useLoaderData, type MetaArgs } from "react-router";
+import { Link, useLoaderData } from "react-router";
 
 import Background from "~/components/Background";
 import Container from "~/components/Container";
@@ -10,16 +10,16 @@ import {
   ROUTE_EXAMPLES_VISUALISATIONS,
   ROUTE_REGELUNGEN,
 } from "~/resources/staticRoutes";
-import prependMetaTitle from "~/utils/metaTitle";
+import constructMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,
   visualisationFields,
   Visualisierung,
 } from "~/utils/strapiData.server";
 
-export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_EXAMPLES_VISUALISATIONS.title, matches);
-};
+export function meta() {
+  return constructMetaTitle(ROUTE_EXAMPLES_VISUALISATIONS.title);
+}
 
 const GET_VISUALISATIONS_QUERY = `
 ${visualisationFields}

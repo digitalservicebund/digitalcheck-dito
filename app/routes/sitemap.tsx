@@ -1,15 +1,15 @@
 import { ReactNode } from "react";
-import { type MetaArgs, useLoaderData } from "react-router";
+import { useLoaderData } from "react-router";
 
 import Background from "~/components/Background";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
 import { Route, ROUTE_SITEMAP, ROUTES } from "~/resources/staticRoutes";
-import prependMetaTitle from "~/utils/metaTitle";
+import constructMetaTitle from "~/utils/metaTitle";
 
-export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_SITEMAP.title, matches);
-};
+export function meta() {
+  return constructMetaTitle(ROUTE_SITEMAP.title);
+}
 
 type RouteWithChildren = Route & {
   children: RouteWithChildren[];

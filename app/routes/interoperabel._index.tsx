@@ -1,4 +1,3 @@
-import { type MetaArgs } from "react-router";
 import Accordion from "~/components/Accordion";
 import Background from "~/components/Background";
 import Box from "~/components/Box.tsx";
@@ -17,11 +16,11 @@ import {
   ROUTE_INTEROPERABILITY,
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
-import prependMetaTitle from "~/utils/metaTitle";
+import constructMetaTitle from "~/utils/metaTitle";
 
-export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_INTEROPERABILITY.title, matches);
-};
+export function meta() {
+  return constructMetaTitle(ROUTE_INTEROPERABILITY.title);
+}
 
 export default function Interoperability() {
   const tabsData: TabItem[] = [

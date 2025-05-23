@@ -1,7 +1,7 @@
 import { useForm, validationError } from "@rvf/react-router";
 import { withZod } from "@rvf/zod";
 import { useEffect, useState } from "react";
-import { redirect, useLoaderData, type MetaArgs } from "react-router";
+import { redirect, useLoaderData } from "react-router";
 
 import { z } from "zod";
 import ButtonContainer from "~/components/ButtonContainer";
@@ -14,15 +14,15 @@ import {
   getAnswersFromCookie,
   getHeaderFromCookie,
 } from "~/utils/cookies.server";
-import prependMetaTitle from "~/utils/metaTitle";
+import constructMetaTitle from "~/utils/metaTitle";
 import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/vorpruefung._preCheckNavigation.$questionId";
 
 const { questions, answerOptions, nextButton } = preCheck;
 
-export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_PRECHECK.title, matches);
-};
+export function meta() {
+  return constructMetaTitle(ROUTE_PRECHECK.title);
+}
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const { answers } = await getAnswersFromCookie(request);

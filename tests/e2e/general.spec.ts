@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test";
 import {
   ROUTE_A11Y,
   ROUTE_DOCUMENTATION,
+  ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_IMPRINT,
   ROUTE_LANDING,
   ROUTE_METHODS,
@@ -34,6 +35,29 @@ test.describe("test breadcrumbs and titles", () => {
         );
       });
     }
+  });
+});
+
+test.describe("test meta titles", () => {
+  test("landing title is correct", async ({ page }) => {
+    await page.goto(ROUTE_LANDING.url);
+    await expect(page).toHaveTitle(
+      "Digitalcheck: Digitaltaugliche Regelungen erarbeiten",
+    );
+  });
+
+  test("principles title is correct", async ({ page }) => {
+    await page.goto(ROUTE_FUNDAMENTALS_PRINCIPLES.url);
+    await expect(page).toHaveTitle(
+      "Prinzipien — Digitalcheck: Digitaltaugliche Regelungen erarbeiten",
+    );
+  });
+
+  test("error page title is correct", async ({ page }) => {
+    await page.goto("/does-not-exist");
+    await expect(page).toHaveTitle(
+      "Fehler — Digitalcheck: Digitaltaugliche Regelungen erarbeiten",
+    );
   });
 });
 

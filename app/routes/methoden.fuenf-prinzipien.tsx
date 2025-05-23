@@ -1,4 +1,4 @@
-import { type MetaArgs, useLoaderData } from "react-router";
+import { useLoaderData } from "react-router";
 import Background from "~/components/Background";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
@@ -11,7 +11,7 @@ import {
   ROUTE_METHODS,
   ROUTE_METHODS_PRINCIPLES,
 } from "~/resources/staticRoutes";
-import prependMetaTitle from "~/utils/metaTitle";
+import constructMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,
   GET_PRINZIPS_QUERY,
@@ -20,9 +20,9 @@ import {
 import { slugify } from "~/utils/utilFunctions";
 import type { Route } from "./+types/methoden.fuenf-prinzipien";
 
-export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_METHODS_PRINCIPLES.title, matches);
-};
+export function meta() {
+  return constructMetaTitle(ROUTE_METHODS_PRINCIPLES.title);
+}
 
 export async function loader({ request }: Route.LoaderArgs) {
   const referer = request.headers.get("referer");

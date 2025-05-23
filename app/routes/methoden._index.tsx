@@ -1,5 +1,3 @@
-import { type MetaArgs } from "react-router";
-
 import React from "react";
 import Background from "~/components/Background";
 import Container from "~/components/Container";
@@ -10,11 +8,11 @@ import SupportBanner from "~/components/SupportBanner";
 import { methods } from "~/resources/content/methoden";
 import { ROUTE_METHODS } from "~/resources/staticRoutes";
 import { methodStepsItems } from "~/utils/listProcessing.ts";
-import prependMetaTitle from "~/utils/metaTitle";
+import constructMetaTitle from "~/utils/metaTitle";
 
-export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_METHODS.title, matches);
-};
+export function meta() {
+  return constructMetaTitle(ROUTE_METHODS.title);
+}
 
 interface InfoItem {
   icon: React.FC<React.SVGProps<SVGSVGElement>>;

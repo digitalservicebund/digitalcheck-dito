@@ -8,7 +8,7 @@ import {
 } from "@digitalservicebund/icons";
 import { validationError } from "@rvf/react-router";
 import React, { useState } from "react";
-import { data, redirect, useLoaderData, type MetaArgs } from "react-router";
+import { data, redirect, useLoaderData } from "react-router";
 import { twJoin } from "tailwind-merge";
 
 import Accordion from "~/components/Accordion";
@@ -40,7 +40,7 @@ import {
   getAnswersFromCookie,
   getHeaderFromCookie,
 } from "~/utils/cookies.server";
-import prependMetaTitle from "~/utils/metaTitle";
+import constructMetaTitle from "~/utils/metaTitle";
 import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/route";
 import { PreCheckResult, ResultType } from "./PreCheckResult";
@@ -53,9 +53,9 @@ const nextSteps = {
   [ResultType.NEGATIVE]: preCheckResult.negative.nextSteps,
 };
 
-export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_PRECHECK_RESULT.title, matches);
-};
+export function meta() {
+  return constructMetaTitle(ROUTE_PRECHECK_RESULT.title);
+}
 
 export async function loader({ request }: Route.LoaderArgs) {
   const cookie = await getAnswersFromCookie(request);

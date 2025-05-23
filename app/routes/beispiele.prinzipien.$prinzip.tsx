@@ -2,7 +2,6 @@ import OpenInNewIcon from "@digitalservicebund/icons/OpenInNew";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import {
   Link,
-  type MetaArgs,
   useLoaderData,
   useNavigate,
   useOutletContext,
@@ -21,7 +20,7 @@ import {
   ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_REGELUNGEN,
 } from "~/resources/staticRoutes";
-import prependMetaTitle from "~/utils/metaTitle";
+import constructMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,
   paragraphFields,
@@ -31,9 +30,9 @@ import {
 import { formatDate, gesetzStatusMap } from "~/utils/utilFunctions";
 import type { Route } from "./+types/beispiele.prinzipien.$prinzip";
 
-export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_EXAMPLES_PRINCIPLES.title, matches);
-};
+export function meta() {
+  return constructMetaTitle(ROUTE_EXAMPLES_PRINCIPLES.title);
+}
 
 const GET_PRINZIPS_QUERY = `
 ${paragraphFields}
