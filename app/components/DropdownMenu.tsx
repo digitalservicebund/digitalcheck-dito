@@ -98,12 +98,19 @@ export default function DropdownMenu({
           {hasSupport && (
             <div className="px-16 lg:px-56">
               <div className="ds-label-02-reg px-16 pt-8 pb-16 text-gray-900 lg:px-8 lg:pt-16 lg:pb-24">
-                {isMobile ? header.contact.msgMobile : header.contact.msg}
+                {isMobile ? header.contactTel.msgMobile : header.contactTel.msg}
                 <a
-                  href={`tel:${header.contact.number}`}
+                  href={`tel:${header.contactTel.number}`}
                   className="plausible-event-name=Nav+Bar.Kontakt+Support+Layer.Link+Telefon ds-link-02-reg ml-8"
                 >
-                  {header.contact.number}
+                  {header.contactTel.number}
+                </a>{" "}
+                {header.contactMail.msg}{" "}
+                <a
+                  className="plausible-event-name=Nav+Bar.Kontakt+Support+Layer.Link+Email ds-link-02-reg"
+                  href={header.contactMail.url}
+                >
+                  {header.contactMail.text}
                 </a>
               </div>
               <div className="border-b-1 border-gray-600" />
