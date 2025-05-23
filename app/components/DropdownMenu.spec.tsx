@@ -24,7 +24,7 @@ vi.mock("~/resources/content/components/header.ts", () => ({
 }));
 
 const mockDropdownData: DropdownItemProps[] = [
-  { title: "Link1", href: "/link1", plausibleEventName: "event1" },
+  { title: "Link1", href: "/", plausibleEventName: "event1" },
   {
     title: "Link2",
     href: "/link2",
@@ -56,8 +56,14 @@ const defaultTestProps: DropdownProps = {
   plausibleEventName: "",
 };
 
-const RouterWrapper = ({ children }: { children: ReactNode }) => (
-  <MemoryRouter initialEntries={["/"]}>
+const RouterWrapper = ({
+  children,
+  initialEntries,
+}: {
+  children: ReactNode;
+  initialEntries: string[];
+}) => (
+  <MemoryRouter initialEntries={initialEntries}>
     <Routes>
       <Route path="*" element={children} />
     </Routes>
@@ -69,10 +75,14 @@ describe("DropdownMenu Component", () => {
     vi.clearAllMocks();
   });
 
-  const renderDropdown = (props: Partial<DropdownProps> = {}) => {
+  const renderDropdown = (
+    props: Partial<DropdownProps> = {},
+    initialEntries: string[] = ["/"],
+  ) => {
     const mergedProps = { ...defaultTestProps, ...props };
+
     return render(
-      <RouterWrapper>
+      <RouterWrapper initialEntries={initialEntries}>
         <DropdownMenu {...mergedProps} />
       </RouterWrapper>,
     );
@@ -232,6 +242,83 @@ describe("DropdownMenu Component", () => {
       expect(list.tagName).toBe("UL");
       expect(screen.queryByText(/1\. Link1/)).not.toBeInTheDocument();
       expect(screen.getByText("Link1")).toBeInTheDocument();
+    });
+  });
+
+  describe("Active Item highlighting", () => {
+    it("highlights an item when the url matches the page", () => {
+      renderDropdown({ isExpanded: true, isOrderedList: false });
+      const activeLink = screen.getByText("Link1").parentElement!;
+
+      expect(activeLink.classList).toContain("border-blue-800");
+      expect(activeLink.classList).toContain("bg-blue-100");
+
+      const inActiveLink = screen.getByText("Link2").parentElement!;
+
+      expect(inActiveLink.classList).not.toContain("border-blue-800");
+      expect(inActiveLink.classList).not.toContain("bg-blue-100");
+    });
+
+    it("does not highlight when the noHighlight option is set", () => {
+      const newMockDropdownData: DropdownItemProps[] = [
+        {
+          title: "Link1",
+          href: "/",
+          plausibleEventName: "event1",
+          activeBehavior: "noHighlight",
+        },
+        {
+          title: "Link2",
+          href: "/Link2",
+          plausibleEventName: "event2",
+        },
+      ];
+
+      renderDropdown({
+        isExpanded: true,
+        isOrderedList: false,
+        data: newMockDropdownData,
+      });
+
+      const activeLink = screen.getByText("Link1").parentElement!;
+
+      expect(activeLink.classList).not.toContain("border-blue-800");
+      expect(activeLink.classList).not.toContain("bg-blue-100");
+    });
+
+    it("does only highlight exact path matches when the exactMatch option is set", () => {
+      const newMockDropdownData: DropdownItemProps[] = [
+        {
+          title: "Link1",
+          href: "/Link1",
+          plausibleEventName: "event1",
+          activeBehavior: "exactMatch",
+        },
+        {
+          title: "Link2",
+          href: "/Link1/Link2",
+          plausibleEventName: "event2",
+        },
+      ];
+
+      renderDropdown(
+        {
+          isExpanded: true,
+          isOrderedList: false,
+          data: newMockDropdownData,
+        },
+        ["/Link1/Link2"],
+      );
+
+      const inActiveLink = screen.getByText("Link1").parentElement!;
+
+      expect(inActiveLink.classList).not.toContain("border-blue-800");
+      expect(inActiveLink.classList).not.toContain("bg-blue-100");
+
+      const activeLink = screen.getByText("Link2").parentElement!;
+
+      expect(activeLink.classList).toContain("border-blue-800");
+      expect(activeLink.classList).toContain("bg-blue-100");
     });
   });
 });

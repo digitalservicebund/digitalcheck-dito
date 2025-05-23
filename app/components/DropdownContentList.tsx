@@ -1,5 +1,8 @@
 import { NavLink, useLocation } from "react-router";
 import twMerge from "~/utils/tailwindMerge";
+import { normalizePathname } from "~/utils/utilFunctions";
+
+export type ActiveBehavior = "default" | "noHighlight" | "exactMatch";
 
 export type DropdownItemProps = {
   number?: number;
@@ -10,6 +13,7 @@ export type DropdownItemProps = {
   href?: string;
   isNewTitle?: boolean;
   plausibleEventName: string;
+  activeBehavior?: ActiveBehavior;
 };
 
 export type DropdownContentListProps = {
@@ -47,9 +51,16 @@ export default function DropdownContentList({
           className={`plausible-event-name=Nav+Bar.${parentPlausibleEvent}+Layer.${option.plausibleEventName}`}
         >
           {({ isActive }) => {
-            const browserHasHash = location.hash !== "";
-            // Don't mark support subsection as active items
-            const finalIsActive = isActive && !browserHasHash;
+            const checkExactMatchCriteria =
+              option.activeBehavior === "exactMatch"
+                ? normalizePathname(location.pathname) ===
+                  normalizePathname(option.href || "")
+                : true;
+
+            const finalIsActive =
+              isActive &&
+              option.activeBehavior !== "noHighlight" &&
+              checkExactMatchCriteria;
             const itemNumber = isOrderedList ? index + 1 : undefined;
 
             return (

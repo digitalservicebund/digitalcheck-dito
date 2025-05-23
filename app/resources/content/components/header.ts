@@ -1,3 +1,4 @@
+import { ActiveBehavior } from "~/components/DropdownContentList";
 import {
   ROUTE_DOCUMENTATION,
   ROUTE_EXAMPLES_PRINCIPLES,
@@ -99,6 +100,7 @@ export const header = {
           content:
             "Verstehen Sie, was es mit EU Interoperabilität auf sich hat.",
           href: ROUTE_INTEROPERABILITY.url,
+          activeBehavior: "exactMatch" as ActiveBehavior,
         },
       ],
     },
@@ -112,6 +114,7 @@ export const header = {
           title: "Alle Hilfestellungen",
           content: "Wir unterstützen Sie mit einer Bandbreite von Angeboten.",
           href: ROUTE_SUPPORT.url,
+          activeBehavior: "noHighlight" as ActiveBehavior,
         },
         {
           plausibleEvent: "Link+Schulungen",
@@ -119,6 +122,7 @@ export const header = {
           content:
             "In dieser Online-Schulung bekommen Sie praktische Tipps für den Digitalcheck.",
           href: ROUTE_SUPPORT.url + "#angebote",
+          activeBehavior: "noHighlight" as ActiveBehavior,
         },
         {
           plausibleEvent: "Link+Nationale+Kontaktstelle",

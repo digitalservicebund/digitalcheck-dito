@@ -10,6 +10,7 @@ import { ROUTE_LANDING } from "~/resources/staticRoutes.ts";
 import { matchHasHandle, MatchWithHandle } from "~/utils/handles";
 import twMerge from "~/utils/tailwindMerge.ts";
 import { normalizePathname } from "~/utils/utilFunctions.ts";
+import { ActiveBehavior } from "./DropdownContentList";
 import ProgressBar from "./ProgressBar";
 
 interface SubItem {
@@ -32,12 +33,19 @@ const isParentItemActive = (item: HeaderItem, path: string): boolean => {
   return item.overlayContent.some((subItem) => {
     const normalizedItemPath = normalizePathname(subItem.href);
     const normalizedCurrentPath = normalizePathname(path);
-    // Prefix match (current path starts with item href)
-    // console.log(normalizedCurrentPath, normalizedItemPath);
-    // if (normalizedCurrentPath.startsWith(normalizedItemPath))
-    //   console.log(normalizedCurrentPath, normalizedItemPath);
 
-    // return normalizedCurrentPath === normalizedItemPath;
+    if ("activeBehavior" in subItem) {
+      switch (subItem.activeBehavior as ActiveBehavior) {
+        case "exactMatch":
+          return normalizedCurrentPath === normalizedItemPath;
+
+        case "noHighlight":
+          break;
+
+        default:
+          break;
+      }
+    }
 
     return normalizedCurrentPath.startsWith(normalizedItemPath);
   });
