@@ -28,6 +28,7 @@ import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants";
 import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
 import type { Route } from "./+types/root";
+import { notFound, serverError } from "./resources/content/error";
 
 export function loader({ request }: Route.LoaderArgs) {
   const featureFlags = getFeatureFlags();
@@ -252,26 +253,16 @@ export default function App() {
 }
 
 export function ErrorBoundary() {
-  const loaderData = useRouteLoaderData<typeof loader>("root");
   const error = useRouteError();
 
-  let errorStatus = `${500}`;
-  let errorTitle = "Interner Serverfehler";
-  let errorMessage = `Es tut uns leid, aber etwas ist schief gelaufen.
-Bitte versuchen Sie es später erneut. Wenn das Problem weiterhin besteht, kontaktieren Sie uns unter [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de) oder [0151/40 76 78 39](tel:+4915140767839).
+  let errorStatus = "500";
+  let errorTitle = serverError.title;
+  let errorMessage = serverError.message;
 
-Vielen Dank für Ihr Verständnis.`;
-
-  if (isRouteErrorResponse(error) && error.status === 404) {
+  if (isRouteErrorResponse(error)) {
     errorStatus = `${error.status}`;
-    errorTitle = "Seite konnte nicht gefunden werden";
-    errorMessage = `Es tut uns leid. Diese Seite gibt es nicht mehr oder ihr Name wurde geändert.
-
-- Wenn Sie die URL direkt eingegeben haben, überprüfen Sie die Schreibweise.
-- Versuchen Sie, die Seite von der Startseite aus erneut zu finden.`;
-  } else if (isRouteErrorResponse(error)) {
-    errorStatus = `${error.status}`;
-    errorTitle = `${error.data}`;
+    errorTitle = error.status === 404 ? notFound.title : `${error.data}`;
+    errorMessage = error.status === 404 ? notFound.message : errorMessage;
   }
 
   return (
