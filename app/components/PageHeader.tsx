@@ -33,7 +33,11 @@ const isParentItemActive = (item: HeaderItem, path: string): boolean => {
     const normalizedItemPath = normalizePathname(subItem.href);
     const normalizedCurrentPath = normalizePathname(path);
     // Prefix match (current path starts with item href)
-    return normalizedCurrentPath.startsWith(normalizedItemPath);
+    console.log(normalizedCurrentPath, normalizedItemPath);
+    if (normalizedCurrentPath.startsWith(normalizedItemPath))
+      console.log(normalizedCurrentPath, normalizedItemPath);
+
+    return normalizedCurrentPath === normalizedItemPath;
   });
 };
 
