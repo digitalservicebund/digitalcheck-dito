@@ -105,19 +105,19 @@ export const header = {
       ],
     },
     {
-      plausibleEvent: "Kontakt+Support",
+      plausibleEventName: "Kontakt+Support",
       text: "Kontakt und Support",
       hasSupport: true,
       overlayContent: [
         {
-          plausibleEvent: "Link+Alle+Hilfestellungen",
+          plausibleEventName: "Link+Alle+Hilfestellungen",
           title: "Alle Hilfestellungen",
           content: "Wir unterstützen Sie mit einer Bandbreite von Angeboten.",
           href: ROUTE_SUPPORT.url,
           activeBehavior: "noHighlight" as ActiveBehavior,
         },
         {
-          plausibleEvent: "Link+Schulungen",
+          plausibleEventName: "Link+Schulungen",
           title: "Schulungen",
           content:
             "In dieser Online-Schulung bekommen Sie praktische Tipps für den Digitalcheck.",
@@ -125,7 +125,7 @@ export const header = {
           activeBehavior: "noHighlight" as ActiveBehavior,
         },
         {
-          plausibleEvent: "Link+Nationale+Kontaktstelle",
+          plausibleEventName: "Link+Nationale+Kontaktstelle",
           title: "Nationale Kontaktstelle",
           isNewTitle: true,
           content:
