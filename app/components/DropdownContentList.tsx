@@ -2,7 +2,7 @@ import { NavLink, useLocation } from "react-router";
 import twMerge from "~/utils/tailwindMerge";
 import { normalizePathname } from "~/utils/utilFunctions";
 
-export type ActiveBehavior = "default" | "noHighlight" | "exactMatch";
+export type ActiveBehavior = "noHighlight" | "exactMatch";
 
 export type DropdownItemProps = {
   number?: number;
