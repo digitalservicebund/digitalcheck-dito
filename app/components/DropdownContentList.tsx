@@ -54,7 +54,7 @@ export default function DropdownContentList({
             const checkExactMatchCriteria =
               option.activeBehavior === "exactMatch"
                 ? normalizePathname(location.pathname) ===
-                  normalizePathname(option.href || "")
+                  normalizePathname(option.href!)
                 : true;
 
             const finalIsActive =
