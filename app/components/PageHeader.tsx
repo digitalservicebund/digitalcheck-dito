@@ -10,6 +10,7 @@ import { ROUTE_LANDING } from "~/resources/staticRoutes.ts";
 import { matchHasHandle, MatchWithHandle } from "~/utils/handles";
 import twMerge from "~/utils/tailwindMerge.ts";
 import { normalizePathname } from "~/utils/utilFunctions.ts";
+import Banner from "./Banner";
 import ProgressBar from "./ProgressBar";
 
 interface SubItem {
@@ -202,8 +203,9 @@ const PageHeader = ({
         >
           {header.items.map((item) => renderDropdownItem(item, "mobile"))}
         </nav>
-        {showProgressBar && <ProgressBar />}
         {showBreadcrumbs && <Breadcrumbs />}
+        <Banner />
+        {showProgressBar && <ProgressBar />}
       </header>
     </>
   );
