@@ -1,3 +1,4 @@
+import { ActiveBehavior } from "~/components/DropdownContentList";
 import {
   ROUTE_DOCUMENTATION,
   ROUTE_EXAMPLES_PRINCIPLES,
@@ -5,6 +6,7 @@ import {
   ROUTE_FUNDAMENTALS_METHODS,
   ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_INTEROPERABILITY,
+  ROUTE_INTEROPERABILITY_SPOC,
   ROUTE_METHODS,
   ROUTE_PRECHECK,
   ROUTE_SUPPORT,
@@ -12,10 +14,15 @@ import {
 
 export const header = {
   title: "Digitalcheck",
-  contact: {
+  contactTel: {
     msg: "Kontaktieren Sie den Support:",
     msgMobile: "Support:",
     number: "0151/40 76 78 39",
+  },
+  contactMail: {
+    msg: "oder",
+    text: "digitalcheck@digitalservice.bund.de",
+    url: "mailto:digitalcheck@digitalservice.bund.de",
   },
   items: [
     {
@@ -93,20 +100,37 @@ export const header = {
           content:
             "Verstehen Sie, was es mit EU Interoperabilität auf sich hat.",
           href: ROUTE_INTEROPERABILITY.url,
+          activeBehavior: "exactMatch" as ActiveBehavior,
         },
       ],
     },
     {
-      plausibleEventName: "Kontakt+Support ",
+      plausibleEventName: "Kontakt+Support",
       text: "Kontakt und Support",
       hasSupport: true,
       overlayContent: [
+        {
+          plausibleEventName: "Link+Alle+Hilfestellungen",
+          title: "Alle Hilfestellungen",
+          content: "Wir unterstützen Sie mit einer Bandbreite von Angeboten.",
+          href: ROUTE_SUPPORT.url,
+          activeBehavior: "noHighlight" as ActiveBehavior,
+        },
         {
           plausibleEventName: "Link+Schulungen",
           title: "Schulungen",
           content:
             "In dieser Online-Schulung bekommen Sie praktische Tipps für den Digitalcheck.",
           href: ROUTE_SUPPORT.url + "#angebote",
+          activeBehavior: "noHighlight" as ActiveBehavior,
+        },
+        {
+          plausibleEventName: "Link+Nationale+Kontaktstelle",
+          title: "Nationale Kontaktstelle",
+          isNewTitle: true,
+          content:
+            "Nationale Kontaktstelle für ein interoperables Europa (2024/903 Art. 17).",
+          href: ROUTE_INTEROPERABILITY_SPOC.url,
         },
       ],
     },
