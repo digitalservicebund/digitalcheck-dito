@@ -33,7 +33,7 @@ const InfoBoxItem = ({
       className={twJoin(
         "flex max-w-none scroll-my-40 flex-row items-center justify-center max-[499px]:flex-col",
         separator &&
-          "border-0 border-b-2 border-solid border-gray-400 pb-40 last:border-none",
+          "border-0 border-b-2 border-solid border-gray-400 pb-40 last:border-none last:pb-0",
       )}
     >
       {image && (

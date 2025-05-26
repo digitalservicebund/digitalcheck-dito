@@ -1,20 +1,35 @@
 import { type MetaArgs } from "react-router";
 import Background from "~/components/Background";
+import { PrincipleNumber } from "~/components/Badge";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
+import InfoBox from "~/components/InfoBox";
 import LinkListBox from "~/components/LinkListBox";
 import SupportBanner from "~/components/SupportBanner";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import { ROUTE_FUNDAMENTALS_PRINCIPLES } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 import { slugify } from "~/utils/utilFunctions";
+import { DetailsSummaryItem } from "./methoden.fuenf-prinzipien";
 
 export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_FUNDAMENTALS_PRINCIPLES.title, matches);
 };
 
 export default function FundamentalsFivePrinciples() {
-  const principlesToDisplay = methodsFivePrinciples.principles.slice(1);
+  const getDetailsSummaryItem = (detailsSummaryItem: DetailsSummaryItem) => {
+    const questions = detailsSummaryItem.questions
+      .map((question) => `- ${question}`)
+      .join("\n");
+
+    const wordingExample = detailsSummaryItem.wordingExample
+      ? `\n\n${methodsFivePrinciples.wordingExampleTitle}\n${detailsSummaryItem.wordingExample}`
+      : "";
+
+    const content = `${detailsSummaryItem.text}\n\n${methodsFivePrinciples.questionsTitle}\n${questions}${wordingExample}`;
+
+    return { title: detailsSummaryItem.title, content };
+  };
 
   return (
     <>
@@ -30,15 +45,46 @@ export default function FundamentalsFivePrinciples() {
             }}
           />
           <LinkListBox
-            links={principlesToDisplay.map((principle) => {
+            heading={methodsFivePrinciples.contentOverviewTitle}
+            links={methodsFivePrinciples.principles.map((principle) => {
               return {
-                id: slugify(principle.label),
+                id: slugify(principle.title),
                 title: `${principle.label}: ${principle.title}`,
               };
             })}
           />
         </Container>
       </Background>
+
+      {methodsFivePrinciples.principles.map((principle) => {
+        return (
+          <Container className="pb-64" key={slugify(principle.title)}>
+            <InfoBox
+              identifier={slugify(principle.title)}
+              separator={false}
+              key={slugify(principle.title)}
+              Icon={principle.icon}
+              heading={{
+                tagName: "h2",
+                text: principle.title,
+              }}
+              label={{
+                children: principle.label,
+                principleNumber: principle.principleNumber as PrincipleNumber,
+              }}
+              items={[
+                {
+                  content: principle.content,
+                  detailsSummary: principle.detailsSummary.map(
+                    getDetailsSummaryItem,
+                  ),
+                },
+              ]}
+            />
+          </Container>
+        );
+      })}
+
       <SupportBanner />
     </>
   );

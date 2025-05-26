@@ -11,6 +11,7 @@ export const methodsFivePrinciples = {
   buttonText: "Beispiele betrachten",
   wordingExampleTitle: "**Formulierungsbeispiel:**",
   questionsTitle: "**Fragen Sie sich:**",
+  contentOverviewTitle: "Prinzipien",
   principles: [
     {
       label: "Prinzip",

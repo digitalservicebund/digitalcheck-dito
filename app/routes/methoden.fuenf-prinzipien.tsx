@@ -17,10 +17,12 @@ import prependMetaTitle from "~/utils/metaTitle";
 //   Prinzip,
 // } from "~/utils/strapiData.server";
 import { PrincipleNumber } from "~/components/Badge";
+import Box from "~/components/Box";
+import LabelWithIcon from "~/components/LabelWithIcon";
 import { slugify } from "~/utils/utilFunctions";
 import type { Route } from "./+types/methoden.fuenf-prinzipien";
 
-type DetailsSummaryItem = {
+export type DetailsSummaryItem = {
   title: string;
   text: string;
   questions: string[];
@@ -96,7 +98,7 @@ export default function FivePrinciples() {
             }}
           />
           <LinkListBox
-            heading={"Prinzipien"}
+            heading={methodsFivePrinciples.contentOverviewTitle}
             links={methodsFivePrinciples.principles.map((principle) => {
               return {
                 id: slugify(principle.title),
@@ -107,12 +109,12 @@ export default function FivePrinciples() {
         </Container>
       </Background>
 
-      <Container>
-        {methodsFivePrinciples.principles.map((principle) => {
-          return (
+      {methodsFivePrinciples.principles.map((principle) => {
+        return (
+          <Container className="pb-64" key={slugify(principle.title)}>
             <InfoBox
               identifier={slugify(principle.title)}
-              key={slugify(principle.title)}
+              separator={false}
               Icon={principle.icon}
               heading={{
                 tagName: "h2",
@@ -131,9 +133,23 @@ export default function FivePrinciples() {
                 },
               ]}
             />
-          );
-        })}
-      </Container>
+          </Container>
+        );
+      })}
+
+      {methodsFivePrinciples.nextStep && (
+        <Container>
+          <Box
+            heading={{
+              text: methodsFivePrinciples.nextStep.title,
+              look: "ds-heading-03-reg",
+            }}
+            label={{ text: LabelWithIcon(methodsFivePrinciples.nextStep) }}
+            content={{ markdown: methodsFivePrinciples.nextStep.text }}
+            buttons={methodsFivePrinciples.nextStep.buttons}
+          />
+        </Container>
+      )}
 
       <FeedbackForm
         heading="Ihr Feedback hilft uns weiter!"
