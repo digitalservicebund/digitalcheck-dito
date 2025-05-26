@@ -1,7 +1,7 @@
 import { twJoin } from "tailwind-merge";
+import Badge, { LabelProps } from "./Badge";
 import Heading, { type HeadingProps } from "./Heading";
 import InfoBoxItem, { type InfoBoxItemProps } from "./InfoBoxItem";
-import Label, { LabelProps } from "./Label";
 
 type InfoBoxProps = {
   identifier?: string;
@@ -25,9 +25,9 @@ const InfoBox = ({
       {Icon && <Icon className="size-80 fill-blue-300" />}
       <div className="ds-stack ds-stack-8 scroll-my-40" id={identifier}>
         {label && (
-          <Label className="self-start" color={label.color}>
+          <Badge className="self-start" color={label.color}>
             {label.children}
-          </Label>
+          </Badge>
         )}
         {heading && (
           <Heading className="max-sm:ds-heading-02-reg" {...heading} />

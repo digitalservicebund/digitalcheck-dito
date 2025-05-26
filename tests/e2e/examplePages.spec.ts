@@ -96,7 +96,7 @@ test.describe("Visualizations Overview Page", () => {
   test("displays main heading and subtitle", async ({ page }) => {
     await page.goto(ROUTE_EXAMPLES_VISUALISATIONS.url);
 
-    const pageTitle = page.getByRole("heading").first();
+    const pageTitle = page.getByRole("heading", { level: 1 });
     await expect(pageTitle).toContainText("Beispiele für Visualisierungen");
 
     const subtitle = page.getByText(

@@ -1,7 +1,7 @@
 import { NavLink, useLocation } from "react-router";
 import twMerge from "~/utils/tailwindMerge";
 import { normalizePathname } from "~/utils/utilFunctions";
-import Label from "./Label";
+import Badge from "./Badge";
 
 export type ActiveBehavior = "noHighlight" | "exactMatch";
 
@@ -70,7 +70,11 @@ export default function DropdownContentList({
                 )}
               >
                 <div className="ds-label-02-reg lg:ds-label-01-bold">
-                  {option.isNewTitle && <Label className="mr-8">NEU</Label>}
+                  {option.isNewTitle && (
+                    <Badge color="blue" textColor="blue" className="mr-8">
+                      NEU
+                    </Badge>
+                  )}
                   {itemNumber && <span className="mr-4">{itemNumber}. </span>}
                   {option.title}
                 </div>
@@ -79,7 +83,9 @@ export default function DropdownContentList({
                 )}
                 {option.newContent && (
                   <div className="max-lg:hidden">
-                    <Label className="mr-8">NEU</Label>
+                    <Badge color="blue" textColor="blue" className="mr-8">
+                      NEU
+                    </Badge>
                     <span>{option.newContent}</span>
                   </div>
                 )}
