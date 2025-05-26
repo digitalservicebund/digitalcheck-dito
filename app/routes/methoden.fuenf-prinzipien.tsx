@@ -3,27 +3,34 @@ import Background from "~/components/Background";
 import Container from "~/components/Container";
 import FeedbackForm from "~/components/FeedbackForm";
 import Header from "~/components/Header";
+import InfoBox from "~/components/InfoBox";
 import LinkListBox from "~/components/LinkListBox";
-import PrinciplesDisplay from "~/components/PrinciplesDisplay";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import {
   ROUTE_METHODS,
   ROUTE_METHODS_PRINCIPLES,
 } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
-import {
-  fetchStrapiData,
-  GET_PRINZIPS_QUERY,
-  Prinzip,
-} from "~/utils/strapiData.server";
+// import {
+//   fetchStrapiData,
+//   GET_PRINZIPS_QUERY,
+//   Prinzip,
+// } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 import type { Route } from "./+types/methoden.fuenf-prinzipien";
+
+type DetailsSummaryItem = {
+  title: string;
+  text: string;
+  questions: string[];
+  wordingExample?: string;
+};
 
 export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_METHODS_PRINCIPLES.title, matches);
 };
 
-export async function loader({ request }: Route.LoaderArgs) {
+export function loader({ request }: Route.LoaderArgs) {
   const referer = request.headers.get("referer");
   let pathname = "/";
 
@@ -31,23 +38,24 @@ export async function loader({ request }: Route.LoaderArgs) {
     pathname = new URL(referer).pathname;
   }
 
-  const prinzipData = await fetchStrapiData<{ prinzips: Prinzip[] }>(
-    GET_PRINZIPS_QUERY,
-  );
+  // NOTE: disabled for the 70 day quick implementation, will be enabled as soon as we have new examples for principles
+  // const prinzipData = await fetchStrapiData<{ prinzips: Prinzip[] }>(
+  //   GET_PRINZIPS_QUERY,
+  // );
 
-  if ("error" in prinzipData) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(prinzipData.error, { status: 400 });
-  }
+  // if ("error" in prinzipData) {
+  //   // eslint-disable-next-line @typescript-eslint/only-throw-error
+  //   throw new Response(prinzipData.error, { status: 400 });
+  // }
 
   return {
     referrer: pathname,
-    prinzips: prinzipData.prinzips,
+    // prinzips: prinzipData.prinzips,
   };
 }
 
 export default function FivePrinciples() {
-  const { referrer, prinzips } = useLoaderData<typeof loader>();
+  const { referrer } = useLoaderData<typeof loader>();
 
   const feedbackOptions = [
     { label: "Ich stimme gar nicht zu", value: 1 },
@@ -56,6 +64,20 @@ export default function FivePrinciples() {
     { label: "Ich stimme eher zu", value: 4 },
     { label: "Ich stimme voll und ganz zu", value: 5 },
   ];
+
+  const getDetailsSummaryItem = (detailsSummaryItem: DetailsSummaryItem) => {
+    const questions = detailsSummaryItem.questions
+      .map((question) => `- ${question}`)
+      .join("\n");
+
+    const wordingExample = detailsSummaryItem.wordingExample
+      ? `\n\n${methodsFivePrinciples.wordingExampleTitle}\n${detailsSummaryItem.wordingExample}`
+      : "";
+
+    const content = `${detailsSummaryItem.text}\n\n${methodsFivePrinciples.questionsTitle}\n${questions}${wordingExample}`;
+
+    return { title: detailsSummaryItem.title, content };
+  };
 
   return (
     <>
@@ -84,20 +106,32 @@ export default function FivePrinciples() {
         </Container>
       </Background>
 
-      {methodsFivePrinciples.principles.map((principle, index) => {
-        const correspondingPrinzip = prinzips.find((p) => p.Nummer === index);
-
-        return (
-          <PrinciplesDisplay
-            key={slugify(principle.title)}
-            principle={principle}
-            index={index}
-            showInfoBoxButtons={true}
-            prinzip={correspondingPrinzip}
-            buttonText={methodsFivePrinciples.buttonText}
-          />
-        );
-      })}
+      <Container>
+        {methodsFivePrinciples.principles.map((principle) => {
+          return (
+            <InfoBox
+              key={slugify(principle.title)}
+              Icon={principle.icon}
+              heading={{
+                tagName: "h2",
+                text: principle.title,
+              }}
+              label={{
+                children: principle.label,
+                color: principle.color,
+              }}
+              items={[
+                {
+                  content: principle.content,
+                  detailsSummary: principle.detailsSummary.map(
+                    getDetailsSummaryItem,
+                  ),
+                },
+              ]}
+            />
+          );
+        })}
+      </Container>
 
       <FeedbackForm
         heading="Ihr Feedback hilft uns weiter!"
