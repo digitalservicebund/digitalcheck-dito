@@ -34,7 +34,7 @@ export default function DetailsSummary({
     <details
       open={open}
       className={twJoin(
-        "details text-blue-800 has-focus-visible:outline has-focus-visible:outline-4 has-focus-visible:outline-offset-4 has-focus-visible:outline-blue-800",
+        "details text-blue-800 has-focus-visible:outline-4 has-focus-visible:outline-offset-4 has-focus-visible:outline-blue-800",
         className,
       )}
     >

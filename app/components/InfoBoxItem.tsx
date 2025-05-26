@@ -55,13 +55,15 @@ const InfoBoxItem = ({
         {label && <Heading {...label} />}
         {headline && <Heading tagName="h3" {...headline} />}
         {content && <RichText markdown={content} />}
-        {detailsSummary && !Array.isArray(detailsSummary) && (
-          <DetailsSummary {...detailsSummary} />
-        )}
-        {Array.isArray(detailsSummary) &&
-          detailsSummary.map((details) => (
+
+        {detailsSummary &&
+          (Array.isArray(detailsSummary)
+            ? detailsSummary
+            : [detailsSummary]
+          ).map((details) => (
             <DetailsSummary key={details.title} {...details} />
           ))}
+
         {buttons && buttons.length > 0 && <ButtonContainer buttons={buttons} />}
       </div>
     </li>
