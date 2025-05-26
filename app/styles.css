@@ -7,6 +7,12 @@
 
 @theme {
   --font-sans: BundesSansWeb;
+
+  --color-principle-1: #f9ec9e;
+  --color-principle-2: #f5dcd7;
+  --color-principle-3: #dfd6e2;
+  --color-principle-4: #cce7db;
+  --color-principle-5: #cce4f0;
 }
 
 @layer base {

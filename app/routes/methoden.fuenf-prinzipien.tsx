@@ -16,6 +16,7 @@ import prependMetaTitle from "~/utils/metaTitle";
 //   GET_PRINZIPS_QUERY,
 //   Prinzip,
 // } from "~/utils/strapiData.server";
+import { PrincipleNumber } from "~/components/Badge";
 import { slugify } from "~/utils/utilFunctions";
 import type { Route } from "./+types/methoden.fuenf-prinzipien";
 
@@ -118,7 +119,7 @@ export default function FivePrinciples() {
               }}
               label={{
                 children: principle.label,
-                color: principle.color,
+                principleNumber: principle.principleNumber as PrincipleNumber,
               }}
               items={[
                 {

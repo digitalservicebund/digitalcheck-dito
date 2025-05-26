@@ -1,5 +1,4 @@
 import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
-import { ConnectWithoutContact } from "@digitalservicebund/icons/index";
 import {
   ROUTE_LANDING,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
@@ -16,8 +15,8 @@ export const methodsFivePrinciples = {
     {
       label: "Prinzip",
       title: "Digitale Angebote für alle nutzbar gestalten",
-      icon: ConnectWithoutContact,
-      color: "yellow",
+      icon: ArrowCircleRightOutlined,
+      principleNumber: 1,
       content:
         "Viele Bürgerinnen, Bürger und Unternehmen sind an digitale Angebote gewöhnt und bevorzugen diese – sofern die digitale Kommunikation gut umgesetzt ist und ihren Bedürfnissen entspricht. Die Verwaltung kann digitale Daten schneller prüfen, bearbeiten und dokumentieren. Das Angebot sollte dabei immer inklusiv sein und es benötigt ggf. analoge Alternativen.",
       detailsSummary: [
@@ -73,8 +72,8 @@ export const methodsFivePrinciples = {
     {
       label: "Prinzip",
       title: "Datenwiederverwendung benötigt einheitliches Recht",
-      icon: ConnectWithoutContact,
-      color: "yellow",
+      icon: ArrowCircleRightOutlined,
+      principleNumber: 2,
       content:
         "Normadressatinnen und -adressaten sowie umsetzende Behörden sparen Kosten und Zeit, wenn das Once-Only-Prinzip konsequent angewendet wird – also wenn Daten nur einmal angegeben und dann wiederverwendet werden. Die Grundlage dafür sind harmonisierte Rechtsbegriffe, ein datenschutzkonformer Austausch und die Berücksichtigung etablierter technischer Standards.",
       detailsSummary: [
@@ -126,8 +125,8 @@ export const methodsFivePrinciples = {
     {
       label: "Prinzip",
       title: "Etablierte Technologien ermöglichen effiziente Umsetzung",
-      icon: ConnectWithoutContact,
-      color: "yellow",
+      icon: ArrowCircleRightOutlined,
+      principleNumber: 3,
       content:
         "Digitale Angebote können schneller bereitgestellt sowie günstiger entwickelt und betrieben werden, wenn sie auf bestehenden Technologien aufbauen. Offene, standardisierte Schnittstellen und Open-Source erhöhen die Sicherheit der Angebote und fördern die Interoperabilität.",
       detailsSummary: [
@@ -157,8 +156,8 @@ export const methodsFivePrinciples = {
     },
     {
       label: "Prinzip",
-      icon: ConnectWithoutContact,
-      color: "yellow",
+      icon: ArrowCircleRightOutlined,
+      principleNumber: 4,
       title: "Automatisierung basiert auf eindeutigen Regelungen",
       content:
         "Logische und verständliche Regelungen und transparente Verfahren erleichtern den Zugang zum Recht und stärken das Vertrauen in den Staat. Einfachheit und verständliche Sprache sind durch die GGO und das Handbuch der Rechtsförmlichkeit vorgeschrieben.\n\nKlarheit und Logik bilden die Grundlage für automatisierte Prozesse. Wenn Begriffe eindeutig definiert sowie Entscheidungsstrukturen bestimmt sind, können Regeln und klare Ausnahmen automatisiert werden. Das spart Zeit auf Seiten der Nutzenden und der Verwaltung. Mit diesen Ressourcen können kritischere Einzelfälle bearbeitet oder Normadressatinnen und -adressaten beraten werden.",
@@ -211,8 +210,8 @@ export const methodsFivePrinciples = {
     {
       label: "Prinzip",
       title: "Datenschutz und Informationssicherheit schaffen Vertrauen",
-      icon: ConnectWithoutContact,
-      color: "yellow",
+      icon: ArrowCircleRightOutlined,
+      principleNumber: 5,
       content:
         "Alle Menschen haben ein Recht darauf, dass ihre Daten vor unbefugten Zugriffen geschützt werden. Der Schutz personenbezogener Daten ist in der DSGVO geregelt. Informationssicherheit umfasst alle Daten und wird je nach Bereich spezifiziert.\n\nEine datenschutzkonforme Regelung erhebt nur das Minimum an Daten. Datensparsamkeit ist einfach umzusetzen und verringert den Erfüllungsaufwand. Wenn weniger Daten vorliegen, müssen auch weniger Informationen geschützt werden.\n\nWenn Informationen den ihnen gebührenden Schutz erhalten, schafft das Vertrauen in den Staat. Die Gefahr von Missbrauch und negativen wirtschaftlichen oder sicherheitsrelevanten Konsequenzen wird verringert.",
       detailsSummary: [

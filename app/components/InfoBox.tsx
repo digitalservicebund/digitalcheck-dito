@@ -22,10 +22,10 @@ const InfoBox = ({
 }: InfoBoxProps) => {
   return (
     <div className="flex flex-row gap-32">
-      {Icon && <Icon className="size-80 fill-blue-300" />}
+      {Icon && <Icon className="size-80 fill-blue-500" />}
       <div className="ds-stack ds-stack-8 scroll-my-40" id={identifier}>
         {label && (
-          <Badge className="self-start" color={label.color}>
+          <Badge className="self-start" principleNumber={label.principleNumber}>
             {label.children}
           </Badge>
         )}
