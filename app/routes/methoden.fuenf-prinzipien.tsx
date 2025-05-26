@@ -111,6 +111,7 @@ export default function FivePrinciples() {
         {methodsFivePrinciples.principles.map((principle) => {
           return (
             <InfoBox
+              identifier={slugify(principle.title)}
               key={slugify(principle.title)}
               Icon={principle.icon}
               heading={{
