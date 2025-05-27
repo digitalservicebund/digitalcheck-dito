@@ -90,8 +90,8 @@ export const ROUTE_DOCUMENTATION = createRoute(
 );
 // NOTE: 70-tage replace pdf with word document
 export const ROUTE_DOCUMENTATION_STATIC_PDF = createRoute(
-  "download/digitalcheck-begleitende-dokumentation.xlsx",
-  "Begleitende Dokumentation als PDF",
+  "download/Dokumentieren-der-Digitaltauglichkeit_V1-5.docx",
+  "Begleitende Dokumentation als Word-Dokument",
 );
 
 // INTEROPERABILITY ROUTES

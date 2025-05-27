@@ -40,6 +40,7 @@ const RichText = ({
 
         const ext =
           (href.endsWith(".pdf") && "PDF") ||
+          (href.endsWith(".docx") && "DOCX") ||
           (href.endsWith(".xlsx") && "XLSX");
 
         // Force the browser to download links to PDF/Excel files

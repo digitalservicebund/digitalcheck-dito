@@ -14,7 +14,7 @@ export async function loader({ params, request }: Route.LoaderArgs) {
 
   // NOTE: 70-tage replace pdf with word document
   if (fileName === "digitalcheck-begleitende-dokumentation.pdf") {
-    fileName = "digitalcheck-begleitende-dokumentation.xlsx";
+    fileName = "Dokumentieren-der-Digitaltauglichkeit_V1-5.docx";
   }
 
   try {
