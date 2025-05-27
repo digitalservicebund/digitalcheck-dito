@@ -203,8 +203,8 @@ const PageHeader = ({
         >
           {header.items.map((item) => renderDropdownItem(item, "mobile"))}
         </nav>
-        {showBreadcrumbs && <Breadcrumbs />}
         <Banner />
+        {showBreadcrumbs && <Breadcrumbs />}
         {showProgressBar && <ProgressBar />}
       </header>
     </>

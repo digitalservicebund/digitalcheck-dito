@@ -1,8 +1,6 @@
 import { ActiveBehavior } from "~/components/DropdownContentList";
 import {
   ROUTE_DOCUMENTATION,
-  ROUTE_EXAMPLES_PRINCIPLES,
-  ROUTE_EXAMPLES_VISUALISATIONS,
   ROUTE_FUNDAMENTALS_METHODS,
   ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_INTEROPERABILITY,
@@ -55,26 +53,26 @@ export const header = {
         },
       ],
     },
-    {
-      plausibleEventName: "Beispiele",
-      text: "Beispiele",
-      overlayContent: [
-        {
-          plausibleEventName: "Link+Prinzipien+Beispiele",
-          title: "Digitaltauglichkeit im Regelungstext",
-          content:
-            "So wurden die 5 Prinzipien von Ihren Kolleginnen und Kollegen in Regelungen ausformuliert.",
-          href: ROUTE_EXAMPLES_PRINCIPLES.url,
-        },
-        {
-          plausibleEventName: "Link+Visualisierungen",
-          title: "Visualisierungen",
-          content:
-            "Veröffentliche Visualisierungen, welche Referaten beim Erarbeiten der Digitaltauglichkeit geholfen haben.",
-          href: ROUTE_EXAMPLES_VISUALISATIONS.url,
-        },
-      ],
-    },
+    // {
+    //   plausibleEventName: "Beispiele",
+    //   text: "Beispiele",
+    //   overlayContent: [
+    //     {
+    //       plausibleEventName: "Link+Prinzipien+Beispiele",
+    //       title: "Digitaltauglichkeit im Regelungstext",
+    //       content:
+    //         "So wurden die 5 Prinzipien von Ihren Kolleginnen und Kollegen in Regelungen ausformuliert.",
+    //       href: ROUTE_EXAMPLES_PRINCIPLES.url,
+    //     },
+    //     {
+    //       plausibleEventName: "Link+Visualisierungen",
+    //       title: "Visualisierungen",
+    //       content:
+    //         "Veröffentliche Visualisierungen, welche Referaten beim Erarbeiten der Digitaltauglichkeit geholfen haben.",
+    //       href: ROUTE_EXAMPLES_VISUALISATIONS.url,
+    //     },
+    //   ],
+    // },
     {
       plausibleEventName: "Grundlagen",
       text: "Grundlagen",
