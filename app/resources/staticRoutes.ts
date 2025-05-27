@@ -88,8 +88,9 @@ export const ROUTE_DOCUMENTATION = createRoute(
   "dokumentation",
   "Dokumentation",
 );
+// NOTE: 70-tage replace pdf with word document
 export const ROUTE_DOCUMENTATION_STATIC_PDF = createRoute(
-  "download/digitalcheck-begleitende-dokumentation.pdf",
+  "download/digitalcheck-begleitende-dokumentation.xlsx",
   "Begleitende Dokumentation als PDF",
 );
 

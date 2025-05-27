@@ -10,7 +10,9 @@ import {
 test.describe("basic example a11y test", () => {
   ROUTES.filter(
     (route) =>
-      !route.url.endsWith(".pdf") && !route.url.endsWith(ROUTE_SUPPORT.url),
+      !route.url.endsWith(".pdf") &&
+      !route.url.endsWith(".xlsx") &&
+      !route.url.endsWith(ROUTE_SUPPORT.url),
   ).forEach((route) => {
     test(`check a11y of ${route.title}`, async ({ page }) => {
       // Listen for redirects and update URL if needed

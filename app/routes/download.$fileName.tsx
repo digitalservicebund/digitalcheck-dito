@@ -5,11 +5,16 @@ import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/download.$fileName";
 
 export async function loader({ params, request }: Route.LoaderArgs) {
-  const { fileName } = params;
+  let { fileName } = params;
 
   if (!fileName) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw new Response("Please provide a file name", { status: 400 });
+  }
+
+  // NOTE: 70-tage replace pdf with word document
+  if (fileName === "digitalcheck-begleitende-dokumentation.pdf") {
+    fileName = "digitalcheck-begleitende-dokumentation.xlsx";
   }
 
   try {
