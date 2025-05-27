@@ -1,6 +1,3 @@
-import ContactSupportOutlined from "@digitalservicebund/icons/ContactSupportOutlined";
-import GroupOutlined from "@digitalservicebund/icons/GroupOutlined";
-import TimerOutlined from "@digitalservicebund/icons/TimerOutlined";
 import { feedbackFormular } from "~/resources/content/components/feedback-formular";
 import { steps } from "~/resources/content/components/naechste-schritte";
 import {
@@ -10,7 +7,7 @@ import {
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methods = {
-  title: "2. Erarbeiten eines digitaltauglichen Regelungsvorhabens",
+  title: "Erarbeiten eines digitaltauglichen Regelungsvorhabens",
   subtitle: dedent`
     Hier finden Sie passende Methoden und Werkzeuge, um Digitaltauglichkeit in Ihrer Regelung sicherzustellen. 
     <br class="block content-[''] mb-24!" />
@@ -19,18 +16,12 @@ export const methods = {
   steps: {
     items: [
       {
-        spacer: { text: "Der sichere Einstieg in jede Regelung" },
-        headline: { text: "Erfassen Sie den Ist-Zustand" },
+        headline: { text: "Erfassen des Status Quo" },
         text: dedent`
           Ein solides Verständnis über den Ist-Zustand ist ein sinnvoller und sicherer Einstieg. Tauschen Sie sich mit den umsetzenden Akteurinnen und Akteuren aus. Bei dieser Gelegenheit können Sie auch nach Problemen in der aktuellen Praxis fragen.
           Wenn Sie in den Gesprächen nichts Neues mehr erfahren, haben Sie den Status Quo erfasst.
           
           **Ein Austausch über die aktuelle Praxis darf auch während des Entwurfsprozesses stattfinden.**
-          
-          Mit diesen Informationen sind Sie gut vorbereitet, um  
-          - **Anforderungen** für die neue Regelung zu erarbeiten,  
-          - **Abstimmungsprozesse** zwischen Bund, Ländern, umsetzenden Behörden und Dienstleistern zu navigieren, 
-          - in der **formellen Beteiligung** eine wirkungsvolle Umsetzung zu besprechen.
         `,
       },
       // NOTE: 70-tage tmp removed
@@ -53,27 +44,15 @@ export const methods = {
       // },
       {
         isSubstep: true,
+        label: { text: "Visualisierung" },
         headline: {
-          text: "2.1. Aufgaben und Abläufe gemeinsam erfassen",
+          text: "Visualisieren Sie die aktuellen Abläufe",
         },
-        info: [
-          {
-            icon: TimerOutlined,
-            text: "**Zeit:** ca. sechs Stunden",
-          },
-          {
-            icon: GroupOutlined,
-            text: "**Kollaborativ:** Arbeiten Sie mit umsetzenden Akteurinnen und Akteuren",
-          },
-          {
-            icon: ContactSupportOutlined,
-            text: "**Support:** Komplexe Abläufen können Sie mit dem Digitalcheck-Support erfassen",
-          },
-        ],
-        text: "Damit Ihre Regelung wirkungsvoll in die Praxis kommt, müssen Sie die **aktuellen Abläufe** verstehen. Holen Sie sich dazu Unterstützung von den Akteurinnen und Akteuren, die Sie im vorigen Schritt identifiziert haben. In diesem Schritt müssen Sie noch nicht auf geplante Neuerungen eingehen. Konzentrieren Sie sich auf den **Status Quo**.",
+        info: [],
+        text: "Damit Ihre Regelung wirkungsvoll in die Praxis kommt, müssen Sie die aktuellen Abläufe verstehen. In diesem Schritt müssen Sie noch nicht auf geplante Neuerungen eingehen. Konzentrieren Sie sich auf den Status Quo.",
         buttons: [
           {
-            text: "Aufgaben und Abläufe klären",
+            text: "Anleitung zur Visualisierung",
             href: ROUTE_METHODS_TASKS_PROCESSES.url,
           },
         ],
@@ -107,25 +86,19 @@ export const methods = {
       //   ],
       // },
       {
-        spacer: { text: "Praxiswissen einsetzen und Auswirkungen verstehen" },
-        headline: { text: "Entwickeln Sie eine digitaltaugliche Regelung" },
-        text: "Mit einem guten Verständnis des Ist-Zustandes erarbeiten Sie nun Ihre Regelung. Jetzt geht es darum, Möglichkeiten zur Digitalisierung zu finden und Hindernisse aus dem Weg zu räumen — eine gute digitale Umsetzung spart langfristig Zeit und Geld und erfüllt die heutigen Erwartungen der Betroffenen an den Staat.",
+        headline: { text: "Entwickeln von Digitaltauglichkeit" },
+        text: "Mit einem guten Verständnis des Ist-Zustandes erarbeiten Sie nun Ihre Regelung. Jetzt geht es darum, Möglichkeiten zur Digitalisierung zu finden und Hindernisse aus dem Weg zu räumen –  eine gute digitale Umsetzung spart langfristig Zeit und Geld und erfüllt die heutigen Erwartungen der Betroffenen an den Staat.",
       },
       {
         isSubstep: true,
+        label: { text: "5 Prinzipien" },
         headline: {
-          text: "2.2. Möglichkeiten und Hindernisse der digitalen Umsetzung identifizieren",
+          text: "Finden Sie konkrete Möglichkeiten der Digitalisierung",
         },
-        info: [
-          {
-            icon: TimerOutlined,
-            text: "**Zeit:** Richtet sich nach der Komplexität des Vorhabens",
-          },
-        ],
-        text: "Die fünf Prinzipien für digitaltaugliche Gesetzgebung decken unterschiedliche Aspekte der digitalen Umsetzung ab: Nutzen Sie die Erkenntnisse über den Ist-Zustand aus den vorigen Schritten, um mithilfe der Prinzipien die **Möglichkeiten der digitalen Umsetzung auszuschöpfen und Hindernisse zu erkennen**.",
+        text: "Mit den fünf Prinzipien für Digitaltaugliche Gesetzgebung bekommen Sie auch konkrete Hinweise darauf, worauf Sie achten müssen.",
         buttons: [
           {
-            text: "Fünf Prinzipien nutzen",
+            text: "Prinzipien nutzen",
             href: ROUTE_METHODS_PRINCIPLES.url,
           },
         ],
@@ -159,8 +132,7 @@ export const methods = {
       //   ],
       // },
       {
-        spacer: { text: "Eine digitale, verwaltungsarme Regelung Schreiben" },
-        headline: { text: "Verfassen Sie den Regelungsentwurf" },
+        headline: { text: "Verfassen des Regelungsentwurfes" },
         text: dedent`
           Nun folgt der gewohnte Schreibprozess sowie die formelle Beteiligung, Abstimmungen im Haus und zwischen den Ressorts. 
           
@@ -172,8 +144,11 @@ export const methods = {
       },
       {
         isSubstep: true,
+        label: { text: "Textarbeit" },
         headline: { text: "Schreiben Sie die Regelung" },
-        text: "Nutzen Sie Ihre gewohnten Programme und Arbeitshilfen, um die Regelung zu schreiben — z. B. eNorm und das Handbuch der Rechtsförmigkeit.",
+        text: dedent`
+          Nutzen Sie die gewonnen Ideen, um die Regelung zu schreiben. Dafür nehmen Sie ganz einfach Ihre gewohnten Programme und Arbeitshilfen – z. B. eNorm und das Handbuch der Rechtsförmigkeit.
+        `,
       },
     ],
   },

@@ -3,6 +3,7 @@ import type { ImageProps } from "~/components/Image";
 import ImageZoomable from "~/components/ImageZoomable";
 import { type BackgroundColor, isBackgroundColor } from ".";
 import Background from "./Background";
+import Badge from "./Badge";
 import { type ButtonProps } from "./Button";
 import ButtonContainer from "./ButtonContainer";
 import Heading, { type HeadingProps } from "./Heading";
@@ -98,15 +99,17 @@ const ListItem = ({
                     : "mt-4",
                 )}
               >
-                <div className="flex flex-row items-center gap-16">
-                  {label && <Heading {...label} />}
-                  {headline && (
-                    <Heading
-                      tagName={parentHasHeading ? "h3" : "h2"}
-                      {...headline}
-                    />
-                  )}
-                </div>
+                {label && (
+                  <Badge className="self-start" hint>
+                    {label.children || label.text}
+                  </Badge>
+                )}
+                {headline && (
+                  <Heading
+                    tagName={parentHasHeading ? "h3" : "h2"}
+                    {...headline}
+                  />
+                )}
                 {content && <RichText markdown={content} />}
                 {image && (
                   <ImageZoomable image={image} className="max-w-a11y" />

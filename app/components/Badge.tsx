@@ -20,7 +20,7 @@ function Badge({
   const principleStyle = principleNumber
     ? `bg-principle-${principleNumber}`
     : "";
-  const hintStyle = hint ? "bg-blue-200 text-blue-800" : "";
+  const hintStyle = hint ? "bg-blue-300 text-blue-800" : "";
 
   return (
     <span className={twJoin(labelStyle, principleStyle, hintStyle, className)}>
