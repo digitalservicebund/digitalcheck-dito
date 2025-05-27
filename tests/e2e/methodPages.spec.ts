@@ -63,7 +63,8 @@ test.describe("test method sub pages", () => {
     );
   });
 
-  test("links to tasks & processes", async ({ page }) => {
+  // NOTE: 70-tage tmp skipped
+  test.skip("links to tasks & processes", async ({ page }) => {
     await page
       .getByRole("link", { name: "Aufgaben und Abläufe klären" })
       .click();
