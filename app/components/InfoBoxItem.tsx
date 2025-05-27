@@ -4,6 +4,7 @@ import ButtonContainer from "./ButtonContainer";
 import DetailsSummary, { type DetailsSummaryProps } from "./DetailsSummary";
 import Heading, { type HeadingProps } from "./Heading";
 import Image, { type ImageProps } from "./Image";
+import LinkList, { LinkListProps } from "./LinkList";
 import RichText from "./RichText";
 
 export type InfoBoxItemProps = {
@@ -13,6 +14,7 @@ export type InfoBoxItemProps = {
   image?: ImageProps;
   content?: string;
   detailsSummary?: DetailsSummaryProps | DetailsSummaryProps[];
+  linkList?: LinkListProps;
   buttons?: ButtonProps[];
   separator?: boolean;
 };
@@ -24,6 +26,7 @@ const InfoBoxItem = ({
   image,
   content,
   detailsSummary,
+  linkList,
   buttons,
   separator,
 }: InfoBoxItemProps) => {
@@ -63,6 +66,8 @@ const InfoBoxItem = ({
           ).map((details) => (
             <DetailsSummary key={details.title} {...details} />
           ))}
+
+        {linkList && <LinkList {...linkList} />}
 
         {buttons && buttons.length > 0 && <ButtonContainer buttons={buttons} />}
       </div>

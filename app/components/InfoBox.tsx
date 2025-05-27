@@ -29,9 +29,7 @@ const InfoBox = ({
             {label.children}
           </Badge>
         )}
-        {heading && (
-          <Heading className="max-sm:ds-heading-02-reg" {...heading} />
-        )}
+        {heading && <Heading className="ds-heading-02-reg" {...heading} />}
         <ul
           className={twJoin(
             "list-unstyled info-box ds-stack mt-8",
