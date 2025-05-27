@@ -1,6 +1,6 @@
 import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
 import {
-  ROUTE_LANDING,
+  ROUTE_METHODS,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
 } from "~/resources/staticRoutes";
 
@@ -256,13 +256,14 @@ export const methodsFivePrinciples = {
   nextStep: {
     label: "So geht es weiter:",
     icon: ArrowCircleRightOutlined,
-    title: "Vorprüfung: Digitalbezug einschätzen",
-    text: `Finden Sie heraus, ob Sie in Ihrem Regelungsvorhaben auf Aspekte der digitalen Umsetzung achten müssen. Danach entscheidet sich, ob die weiteren Schritte für Sie relevant sind.`,
+    title:
+      "Verfassen Sie den Regelungsentwurf und dokumentieren Sie Ihre Entscheidungen",
+    text: `Die gesammelten Erkenntnisse und Ergebnisse helfen Ihnen dabei, Aspekte der Digitaltauglichkeit in Ihrem Regelungsentwurf zu berücksichtigen. Diese Entscheidungen dokumentieren Sie in einem Fragebogen.`,
     buttons: [
       {
-        text: "Digitalbezug einschätzen",
-        href: ROUTE_LANDING.url,
+        text: "Zu „Erarbeiten“",
         look: "tertiary" as const,
+        href: ROUTE_METHODS.url,
       },
     ],
   },

@@ -54,7 +54,8 @@ test.describe("test method sub pages", () => {
     await page.waitForURL(ROUTE_METHODS.url);
   });
 
-  test("links to responsible actors", async ({ page }) => {
+  // NOTE: 70-tage tmp skipped
+  test.skip("links to responsible actors", async ({ page }) => {
     await page.getByRole("link", { name: "Ansprechpersonen finden" }).click();
     await expect(page).toHaveURL(ROUTE_METHODS_RESPONSIBLE_ACTORS.url);
     await expect(page.getByRole("main")).toContainText(
@@ -72,7 +73,8 @@ test.describe("test method sub pages", () => {
     );
   });
 
-  test("links to collect it-systems", async ({ page }) => {
+  // NOTE: 70-tage tmp skipped
+  test.skip("links to collect it-systems", async ({ page }) => {
     await page.getByRole("link", { name: "IT-Landschaft verstehen" }).click();
     await expect(page).toHaveURL(ROUTE_METHODS_COLLECT_IT_SYSTEMS.url);
     await expect(page.getByRole("main")).toContainText(
@@ -88,7 +90,8 @@ test.describe("test method sub pages", () => {
     );
   });
 
-  test("links to technical feasibility", async ({ page }) => {
+  // NOTE: 70-tage tmp skipped
+  test.skip("links to technical feasibility", async ({ page }) => {
     await page.getByRole("link", { name: "IT-Auswirkungen prüfen" }).click();
     await expect(page).toHaveURL(ROUTE_METHODS_TECHNICAL_FEASIBILITY.url);
     await expect(page.getByRole("main")).toContainText(

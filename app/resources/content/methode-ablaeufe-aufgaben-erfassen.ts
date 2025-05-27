@@ -5,7 +5,7 @@ import StickyNote2Outlined from "@digitalservicebund/icons/StickyNote2Outlined";
 import SupportOutlined from "@digitalservicebund/icons/SupportOutlined";
 import {
   ROUTE_EXAMPLES_VISUALISATIONS,
-  ROUTE_METHODS_COLLECT_IT_SYSTEMS,
+  ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
   ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
@@ -117,16 +117,30 @@ export const methodsTasksProcesses = {
       },
     ],
   },
+  // NOTE: 70-tage tmp changes
+  // nextStep: {
+  //   label: "So geht es weiter:",
+  //   icon: ArrowCircleRightOutlined,
+  //   title: "2.3. IT-Systeme erfassen",
+  //   text: `Nutzen Sie das Fachwissen der Akteurinnen und Akteure, um die verwendete IT-Infrastruktur für die identifizierten Abläufe zu erfassen und zu verstehen.`,
+  //   buttons: [
+  //     {
+  //       text: "IT-Landschaft verstehen",
+  //       look: "tertiary" as const,
+  //       href: ROUTE_METHODS_COLLECT_IT_SYSTEMS.url,
+  //     },
+  //   ],
+  // },
   nextStep: {
     label: "So geht es weiter:",
     icon: ArrowCircleRightOutlined,
-    title: "2.3. IT-Systeme erfassen",
-    text: `Nutzen Sie das Fachwissen der Akteurinnen und Akteure, um die verwendete IT-Infrastruktur für die identifizierten Abläufe zu erfassen und zu verstehen.`,
+    title: "Finden Sie konkrete Möglichkeiten der Digitalisierung",
+    text: `Mit den fünf Prinzipien für Digitaltaugliche Gesetzgebung bekommen Sie auch konkrete Hinweise darauf, worauf Sie achten müssen.`,
     buttons: [
       {
-        text: "IT-Landschaft verstehen",
+        text: "Prinzipien nutzen",
         look: "tertiary" as const,
-        href: ROUTE_METHODS_COLLECT_IT_SYSTEMS.url,
+        href: ROUTE_METHODS_PRINCIPLES.url,
       },
     ],
   },

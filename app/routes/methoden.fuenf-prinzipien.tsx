@@ -90,7 +90,8 @@ export default function FivePrinciples() {
             heading={{
               tagName: "h1",
               text: referrer.startsWith(ROUTE_METHODS.url)
-                ? `2.4. ${methodsFivePrinciples.title}`
+                ? // NOTE: 70-tage tmp changed (2.4 -> 2.2)
+                  `2.2. ${methodsFivePrinciples.title}`
                 : methodsFivePrinciples.title,
             }}
             content={{

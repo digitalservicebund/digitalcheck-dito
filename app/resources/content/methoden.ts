@@ -4,11 +4,8 @@ import TimerOutlined from "@digitalservicebund/icons/TimerOutlined";
 import { feedbackFormular } from "~/resources/content/components/feedback-formular";
 import { steps } from "~/resources/content/components/naechste-schritte";
 import {
-  ROUTE_METHODS_COLLECT_IT_SYSTEMS,
   ROUTE_METHODS_PRINCIPLES,
-  ROUTE_METHODS_RESPONSIBLE_ACTORS,
   ROUTE_METHODS_TASKS_PROCESSES,
-  ROUTE_METHODS_TECHNICAL_FEASIBILITY,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -36,27 +33,28 @@ export const methods = {
           - in der **formellen Beteiligung** eine wirkungsvolle Umsetzung zu besprechen.
         `,
       },
-      {
-        isSubstep: true,
-        headline: { text: "2.1. Zuständige Akteurinnen und Akteure auflisten" },
-        info: [
-          {
-            icon: TimerOutlined,
-            text: "**Zeit:** ca. vier Stunden",
-          },
-        ],
-        text: "Wenn Sie ein Regelungsvorhaben erarbeiten, ist es entscheidend, die **Zuständigkeiten der umsetzenden Akteurinnen und Akteure** zu kennen: Sie sind die Expertinnen und Experten für die digitale, praktische Umsetzung in der Praxis und damit wertvolle Gesprächspartnerinnen und -partner.",
-        buttons: [
-          {
-            text: "Ansprechpersonen finden",
-            href: ROUTE_METHODS_RESPONSIBLE_ACTORS.url,
-          },
-        ],
-      },
+      // NOTE: 70-tage tmp removed
+      // {
+      //   isSubstep: true,
+      //   headline: { text: "2.1. Zuständige Akteurinnen und Akteure auflisten" },
+      //   info: [
+      //     {
+      //       icon: TimerOutlined,
+      //       text: "**Zeit:** ca. vier Stunden",
+      //     },
+      //   ],
+      //   text: "Wenn Sie ein Regelungsvorhaben erarbeiten, ist es entscheidend, die **Zuständigkeiten der umsetzenden Akteurinnen und Akteure** zu kennen: Sie sind die Expertinnen und Experten für die digitale, praktische Umsetzung in der Praxis und damit wertvolle Gesprächspartnerinnen und -partner.",
+      //   buttons: [
+      //     {
+      //       text: "Ansprechpersonen finden",
+      //       href: ROUTE_METHODS_RESPONSIBLE_ACTORS.url,
+      //     },
+      //   ],
+      // },
       {
         isSubstep: true,
         headline: {
-          text: "2.2. Aufgaben und Abläufe gemeinsam erfassen",
+          text: "2.1. Aufgaben und Abläufe gemeinsam erfassen",
         },
         info: [
           {
@@ -80,33 +78,34 @@ export const methods = {
           },
         ],
       },
-      {
-        isSubstep: true,
-        headline: {
-          text: "2.3. IT-Systeme gemeinsam erfassen",
-        },
-        info: [
-          {
-            icon: TimerOutlined,
-            text: "**Zeit:** ca. sechs Stunden",
-          },
-          {
-            icon: GroupOutlined,
-            text: "**Kollaborativ:** Arbeiten Sie mit umsetzenden Akteurinnen und Akteuren",
-          },
-          {
-            icon: ContactSupportOutlined,
-            text: "**Support:** Eine neutrale Drittmeinung erhalten Sie vom Digitalcheck-Support",
-          },
-        ],
-        text: "Nutzen Sie das Fachwissen der Akteurinnen und Akteure, um die verwendeten IT-Systeme für die im vorigen Schritt identifizierten Abläufe zu erfassen und zu verstehen.",
-        buttons: [
-          {
-            text: "IT-Landschaft verstehen",
-            href: ROUTE_METHODS_COLLECT_IT_SYSTEMS.url,
-          },
-        ],
-      },
+      // NOTE: 70-tage tmp removed
+      // {
+      //   isSubstep: true,
+      //   headline: {
+      //     text: "2.3. IT-Systeme gemeinsam erfassen",
+      //   },
+      //   info: [
+      //     {
+      //       icon: TimerOutlined,
+      //       text: "**Zeit:** ca. sechs Stunden",
+      //     },
+      //     {
+      //       icon: GroupOutlined,
+      //       text: "**Kollaborativ:** Arbeiten Sie mit umsetzenden Akteurinnen und Akteuren",
+      //     },
+      //     {
+      //       icon: ContactSupportOutlined,
+      //       text: "**Support:** Eine neutrale Drittmeinung erhalten Sie vom Digitalcheck-Support",
+      //     },
+      //   ],
+      //   text: "Nutzen Sie das Fachwissen der Akteurinnen und Akteure, um die verwendeten IT-Systeme für die im vorigen Schritt identifizierten Abläufe zu erfassen und zu verstehen.",
+      //   buttons: [
+      //     {
+      //       text: "IT-Landschaft verstehen",
+      //       href: ROUTE_METHODS_COLLECT_IT_SYSTEMS.url,
+      //     },
+      //   ],
+      // },
       {
         spacer: { text: "Praxiswissen einsetzen und Auswirkungen verstehen" },
         headline: { text: "Entwickeln Sie eine digitaltaugliche Regelung" },
@@ -115,7 +114,7 @@ export const methods = {
       {
         isSubstep: true,
         headline: {
-          text: "2.4. Möglichkeiten und Hindernisse der digitalen Umsetzung identifizieren",
+          text: "2.2. Möglichkeiten und Hindernisse der digitalen Umsetzung identifizieren",
         },
         info: [
           {
@@ -131,33 +130,34 @@ export const methods = {
           },
         ],
       },
-      {
-        isSubstep: true,
-        headline: {
-          text: "2.5. Technische Umsetzbarkeit sicherstellen",
-        },
-        info: [
-          {
-            icon: TimerOutlined,
-            text: "**Zeit:** Richtet sich nach der Komplexität des Vorhabens",
-          },
-          {
-            icon: GroupOutlined,
-            text: "**Kollaborativ:** Arbeiten Sie mit umsetzenden Akteurinnen und Akteuren",
-          },
-          {
-            icon: ContactSupportOutlined,
-            text: "**Support:** Eine neutrale Drittmeinung erhalten Sie vom Digitalcheck-Support",
-          },
-        ],
-        text: "In diesem Schritt können Sie die Auswirkungen Ihres Regelungsvorhabens auf bestehende sowie neue Abläufe und IT-Systeme analysieren. Damit stellen Sie die technische Machbarkeit sicher. Greifen Sie dafür auf das Fachwissen der umsetzenden Akteurinnen und Akteure zurück.",
-        buttons: [
-          {
-            text: "IT-Auswirkungen prüfen",
-            href: ROUTE_METHODS_TECHNICAL_FEASIBILITY.url,
-          },
-        ],
-      },
+      // NOTE: 70-tage tmp removed
+      // {
+      //   isSubstep: true,
+      //   headline: {
+      //     text: "2.5. Technische Umsetzbarkeit sicherstellen",
+      //   },
+      //   info: [
+      //     {
+      //       icon: TimerOutlined,
+      //       text: "**Zeit:** Richtet sich nach der Komplexität des Vorhabens",
+      //     },
+      //     {
+      //       icon: GroupOutlined,
+      //       text: "**Kollaborativ:** Arbeiten Sie mit umsetzenden Akteurinnen und Akteuren",
+      //     },
+      //     {
+      //       icon: ContactSupportOutlined,
+      //       text: "**Support:** Eine neutrale Drittmeinung erhalten Sie vom Digitalcheck-Support",
+      //     },
+      //   ],
+      //   text: "In diesem Schritt können Sie die Auswirkungen Ihres Regelungsvorhabens auf bestehende sowie neue Abläufe und IT-Systeme analysieren. Damit stellen Sie die technische Machbarkeit sicher. Greifen Sie dafür auf das Fachwissen der umsetzenden Akteurinnen und Akteure zurück.",
+      //   buttons: [
+      //     {
+      //       text: "IT-Auswirkungen prüfen",
+      //       href: ROUTE_METHODS_TECHNICAL_FEASIBILITY.url,
+      //     },
+      //   ],
+      // },
       {
         spacer: { text: "Eine digitale, verwaltungsarme Regelung Schreiben" },
         headline: { text: "Verfassen Sie den Regelungsentwurf" },
