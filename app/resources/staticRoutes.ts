@@ -21,6 +21,9 @@ const createRoute = (path: string, title: string, parent?: Route): Route => ({
   parent: parent ?? ROUTE_LANDING,
 });
 
+// TMP ROUTES
+export const ROUTE_HINWEIS = createRoute("hinweis", "Hinweis");
+
 // BASIC ROUTES
 export const ROUTE_SUPPORT = createRoute(
   "unterstuetzung",
