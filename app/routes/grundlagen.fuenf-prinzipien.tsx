@@ -6,31 +6,19 @@ import Header from "~/components/Header";
 import InfoBox from "~/components/InfoBox";
 import LinkListBox from "~/components/LinkListBox";
 import SupportBanner from "~/components/SupportBanner";
-import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
+import {
+  getDetailsSummary,
+  methodsFivePrinciples,
+} from "~/resources/content/methode-fuenf-prinzipien";
 import { ROUTE_FUNDAMENTALS_PRINCIPLES } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 import { slugify } from "~/utils/utilFunctions";
-import { DetailsSummaryItem } from "./methoden.fuenf-prinzipien";
 
 export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_FUNDAMENTALS_PRINCIPLES.title, matches);
 };
 
 export default function FundamentalsFivePrinciples() {
-  const getDetailsSummaryItem = (detailsSummaryItem: DetailsSummaryItem) => {
-    const questions = detailsSummaryItem.questions
-      .map((question) => `- ${question}`)
-      .join("\n");
-
-    const wordingExample = detailsSummaryItem.wordingExample
-      ? `\n\n${methodsFivePrinciples.wordingExampleTitle}\n${detailsSummaryItem.wordingExample}`
-      : "";
-
-    const content = `${detailsSummaryItem.text}\n\n${methodsFivePrinciples.questionsTitle}\n${questions}${wordingExample}`;
-
-    return { title: detailsSummaryItem.title, content };
-  };
-
   return (
     <>
       <Background backgroundColor="blue">
@@ -75,9 +63,7 @@ export default function FundamentalsFivePrinciples() {
               items={[
                 {
                   content: principle.content,
-                  detailsSummary: principle.detailsSummary.map(
-                    getDetailsSummaryItem,
-                  ),
+                  detailsSummary: getDetailsSummary(principle.detailsSummary),
                 },
               ]}
             />

@@ -15,7 +15,7 @@ export default function Banner() {
           </div>
           <RichText markdown={banner.content} />
         </div>
-        <SettingsSuggestOutlined className="mt-0 size-128 fill-yellow-500" />
+        <SettingsSuggestOutlined className="mt-0 hidden size-128 fill-yellow-500 sm:block" />
       </Container>
     </div>
   );

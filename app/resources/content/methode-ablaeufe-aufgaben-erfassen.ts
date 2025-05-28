@@ -12,7 +12,7 @@ import {
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsTasksProcesses = {
-  title: "2.2. Aufgaben und Abläufe gemeinsam erfassen",
+  title: "Aufgaben und Abläufe gemeinsam erfassen",
   subtitle: `Damit Ihre Regelung wirkungsvoll in die Praxis kommt, müssen Sie die **aktuellen Abläufe** verstehen. Holen Sie sich dazu Unterstützung von den Akteurinnen und Akteuren, die Sie im vorigen Schritt identifiziert haben. In diesem Schritt müssen Sie noch nicht auf geplante Neuerungen eingehen. Konzentrieren Sie sich auf den **Status Quo**.`,
   guidance: dedent`
     **Zeit:** ca. sechs Stunden

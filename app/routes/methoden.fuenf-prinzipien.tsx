@@ -1,15 +1,15 @@
-import { type MetaArgs, useLoaderData } from "react-router";
+import { type MetaArgs } from "react-router";
 import Background from "~/components/Background";
 import Container from "~/components/Container";
 import FeedbackForm from "~/components/FeedbackForm";
 import Header from "~/components/Header";
 import InfoBox from "~/components/InfoBox";
 import LinkListBox from "~/components/LinkListBox";
-import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import {
-  ROUTE_METHODS,
-  ROUTE_METHODS_PRINCIPLES,
-} from "~/resources/staticRoutes";
+  getDetailsSummary,
+  methodsFivePrinciples,
+} from "~/resources/content/methode-fuenf-prinzipien";
+import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
 import prependMetaTitle from "~/utils/metaTitle";
 // import {
 //   fetchStrapiData,
@@ -20,46 +20,36 @@ import { PrincipleNumber } from "~/components/Badge";
 import Box from "~/components/Box";
 import LabelWithIcon from "~/components/LabelWithIcon";
 import { slugify } from "~/utils/utilFunctions";
-import type { Route } from "./+types/methoden.fuenf-prinzipien";
-
-export type DetailsSummaryItem = {
-  title: string;
-  text: string;
-  questions: string[];
-  wordingExample?: string;
-};
 
 export const meta = ({ matches }: MetaArgs) => {
   return prependMetaTitle(ROUTE_METHODS_PRINCIPLES.title, matches);
 };
 
-export function loader({ request }: Route.LoaderArgs) {
-  const referer = request.headers.get("referer");
-  let pathname = "/";
+// NOTE: disabled for the 70 day quick implementation, will be enabled as soon as we have new examples for principles
+// export function loader({ request }: Route.LoaderArgs) {
+//   const referer = request.headers.get("referer");
+//   let pathname = "/";
 
-  if (referer) {
-    pathname = new URL(referer).pathname;
-  }
+//   if (referer) {
+//     pathname = new URL(referer).pathname;
+//   }
 
-  // NOTE: disabled for the 70 day quick implementation, will be enabled as soon as we have new examples for principles
-  // const prinzipData = await fetchStrapiData<{ prinzips: Prinzip[] }>(
-  //   GET_PRINZIPS_QUERY,
-  // );
+//   // const prinzipData = await fetchStrapiData<{ prinzips: Prinzip[] }>(
+//   //   GET_PRINZIPS_QUERY,
+//   // );
 
-  // if ("error" in prinzipData) {
-  //   // eslint-disable-next-line @typescript-eslint/only-throw-error
-  //   throw new Response(prinzipData.error, { status: 400 });
-  // }
+//   // if ("error" in prinzipData) {
+//   //   // eslint-disable-next-line @typescript-eslint/only-throw-error
+//   //   throw new Response(prinzipData.error, { status: 400 });
+//   // }
 
-  return {
-    referrer: pathname,
-    // prinzips: prinzipData.prinzips,
-  };
-}
+//   return {
+//     referrer: pathname,
+//     // prinzips: prinzipData.prinzips,
+//   };
+// }
 
 export default function FivePrinciples() {
-  const { referrer } = useLoaderData<typeof loader>();
-
   const feedbackOptions = [
     { label: "Ich stimme gar nicht zu", value: 1 },
     { label: "Ich stimme eher nicht zu", value: 2 },
@@ -68,20 +58,6 @@ export default function FivePrinciples() {
     { label: "Ich stimme voll und ganz zu", value: 5 },
   ];
 
-  const getDetailsSummaryItem = (detailsSummaryItem: DetailsSummaryItem) => {
-    const questions = detailsSummaryItem.questions
-      .map((question) => `- ${question}`)
-      .join("\n");
-
-    const wordingExample = detailsSummaryItem.wordingExample
-      ? `\n\n${methodsFivePrinciples.wordingExampleTitle}\n${detailsSummaryItem.wordingExample}`
-      : "";
-
-    const content = `${detailsSummaryItem.text}\n\n${methodsFivePrinciples.questionsTitle}\n${questions}${wordingExample}`;
-
-    return { title: detailsSummaryItem.title, content };
-  };
-
   return (
     <>
       <Background backgroundColor="blue">
@@ -89,10 +65,7 @@ export default function FivePrinciples() {
           <Header
             heading={{
               tagName: "h1",
-              text: referrer.startsWith(ROUTE_METHODS.url)
-                ? // NOTE: 70-tage tmp changed (2.4 -> 2.2)
-                  `2.2. ${methodsFivePrinciples.title}`
-                : methodsFivePrinciples.title,
+              text: methodsFivePrinciples.title,
             }}
             content={{
               markdown: methodsFivePrinciples.subTitle,
@@ -128,9 +101,7 @@ export default function FivePrinciples() {
               items={[
                 {
                   content: principle.content,
-                  detailsSummary: principle.detailsSummary.map(
-                    getDetailsSummaryItem,
-                  ),
+                  detailsSummary: getDetailsSummary(principle.detailsSummary),
                 },
               ]}
             />

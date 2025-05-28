@@ -38,10 +38,12 @@ describe("InfoBoxItem", () => {
     });
 
     it("shows the detailSummary", () => {
-      const testDetailSummary = [
-        { title: "Test Detail 1", content: "Test Content 1" },
-        { title: "Test Detail 2", content: "Test Content 2" },
-      ];
+      const testDetailSummary = {
+        items: [
+          { title: "Test Detail 1", content: "Test Content 1" },
+          { title: "Test Detail 2", content: "Test Content 2" },
+        ],
+      };
       render(<InfoBoxItem detailsSummary={testDetailSummary} />);
 
       expect(screen.getAllByRole("group").length).toBe(2);

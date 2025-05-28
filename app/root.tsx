@@ -32,6 +32,7 @@ import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants.server";
 import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
 import type { Route } from "./+types/root";
+import Background from "./components/Background";
 
 export function loader({ request }: Route.LoaderArgs) {
   const featureFlags = getFeatureFlags();
@@ -308,7 +309,7 @@ Vielen Dank für Ihr Verständnis.`;
       }
     >
       <main id="error" className="grow">
-        <div className="border-t-2 border-t-gray-400">
+        <Background backgroundColor="blue">
           <Container>
             <div className="ds-stack ds-stack-8 mb-32">
               <span className="ds-label-01-bold">{errorStatus}</span>
@@ -322,7 +323,7 @@ Vielen Dank für Ihr Verständnis.`;
               look="primary"
             ></Button>
           </Container>
-        </div>
+        </Background>
       </main>
     </Document>
   );

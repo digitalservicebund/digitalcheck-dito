@@ -226,17 +226,21 @@ export const interoperability = {
         content:
           "Das Ziel der [Verordnung für ein interoperables Europa (EU 2024/903)](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903) ist es, digitale öffentliche Dienste zu verbessern. Die Dienste einzelner Mitgliedstaaten sollen miteinander kompatibel sein. Dafür braucht es gemeinsame Standards, um Daten zwischen den Mitgliedstaaten auszutauschen. Um digitale Potentiale und Hindernisse zu berücksichtigen, müssen öffentliche Stellen die Interoperabilität neuer Dienste berücksichtigen.",
         detailsSummary: {
-          title: "Welche positiven Effekte sollen dadurch erreicht werden?",
-          content: dedent`
-            Die Vorschriften erleichtern den Datenaustausch und die Wiederverwendung von Lösungen, indem sie bürokratische Hürden abbauen. Dies spart Kosten und Zeit für Bürgerinnen und Bürger, Unternehmen und Verwaltungen.
-            <br/><br/>
-            Bis 2030 soll eine verbesserte Interoperabilität öffentliche Verwaltungen enger vernetzen und transeuropäische digitale Dienste fördern.
-            Wenn für Ihr Vorhaben eine Verpflichtung dazu besteht, Interoperabilität sicherzustellen, begleiten wir Sie durch den Prozess der Bewertung, Dokumentation und der Berichterstellung.
-            <br/><br/>
-            Quellen:
-            <br/>[EUR Lex - Verordnung für ein interoperables Europa (EU 2024/903)](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903)
-            <br/>[Interoperable Europe Portal - FAQs](https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs)
+          items: [
+            {
+              title: "Welche positiven Effekte sollen dadurch erreicht werden?",
+              content: dedent`
+                Die Vorschriften erleichtern den Datenaustausch und die Wiederverwendung von Lösungen, indem sie bürokratische Hürden abbauen. Dies spart Kosten und Zeit für Bürgerinnen und Bürger, Unternehmen und Verwaltungen.
+                <br/><br/>
+                Bis 2030 soll eine verbesserte Interoperabilität öffentliche Verwaltungen enger vernetzen und transeuropäische digitale Dienste fördern.
+                Wenn für Ihr Vorhaben eine Verpflichtung dazu besteht, Interoperabilität sicherzustellen, begleiten wir Sie durch den Prozess der Bewertung, Dokumentation und der Berichterstellung.
+                <br/><br/>
+                Quellen:
+                <br/>[EUR Lex - Verordnung für ein interoperables Europa (EU 2024/903)](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903)
+                <br/>[Interoperable Europe Portal - FAQs](https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs)
           `,
+            },
+          ],
         },
       },
       {

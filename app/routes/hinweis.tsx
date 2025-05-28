@@ -1,10 +1,11 @@
+import Background from "~/components/Background";
 import Container from "~/components/Container";
 import InfoBox from "~/components/InfoBox";
 import { hinweis } from "~/resources/content/hinweis";
 
 export default function Index() {
   return (
-    <>
+    <Background backgroundColor="blue">
       <Container>
         <InfoBox
           heading={{
@@ -15,6 +16,6 @@ export default function Index() {
           separator={false}
         />
       </Container>
-    </>
+    </Background>
   );
 }

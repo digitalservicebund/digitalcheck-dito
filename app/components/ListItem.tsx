@@ -95,7 +95,7 @@ const ListItem = ({
                 className={twJoin(
                   "flex flex-col gap-16",
                   backgroundColor
-                    ? "px-96 py-64 max-sm:px-16 max-sm:py-32"
+                    ? "px-80 pt-40 pb-48 max-sm:px-16 max-sm:py-32"
                     : "mt-4",
                 )}
               >

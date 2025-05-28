@@ -13,7 +13,10 @@ export type InfoBoxItemProps = {
   headline?: HeadingProps;
   image?: ImageProps;
   content?: string;
-  detailsSummary?: DetailsSummaryProps | DetailsSummaryProps[];
+  detailsSummary?: {
+    title?: HeadingProps;
+    items: DetailsSummaryProps[];
+  };
   linkList?: LinkListProps;
   buttons?: ButtonProps[];
   separator?: boolean;
@@ -59,14 +62,17 @@ const InfoBoxItem = ({
         {headline && <Heading tagName="h3" {...headline} />}
         {content && <RichText markdown={content} />}
 
-        {detailsSummary &&
-          (Array.isArray(detailsSummary)
-            ? detailsSummary
-            : [detailsSummary]
-          ).map((details) => (
-            <DetailsSummary key={details.title} {...details} />
-          ))}
-
+        {detailsSummary && (
+          <div className="ds-stack ds-stack-8 mt-16">
+            {detailsSummary.title && (
+              <Heading {...detailsSummary.title} className="ds-label-02-bold" />
+            )}
+            {detailsSummary.items &&
+              detailsSummary.items.map((details) => (
+                <DetailsSummary key={details.title} {...details} />
+              ))}
+          </div>
+        )}
         {linkList && <LinkList {...linkList} />}
 
         {buttons && buttons.length > 0 && <ButtonContainer buttons={buttons} />}
