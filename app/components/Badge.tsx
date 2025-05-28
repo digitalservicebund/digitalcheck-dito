@@ -23,7 +23,10 @@ function Badge({
   const hintStyle = hint ? "bg-blue-300 text-blue-800" : "";
 
   return (
-    <span className={twJoin(labelStyle, principleStyle, hintStyle, className)}>
+    <span
+      role="mark"
+      className={twJoin(labelStyle, principleStyle, hintStyle, className)}
+    >
       {children}
     </span>
   );
