@@ -12,7 +12,7 @@ export const interoperability = {
     id: "digitaltauglich",
     headline: "Interoperabilität und Digitaltauglichkeit",
     content: dedent`
-        Die EU-Anforderungen an Interoperabilität fördern die Zusammenarbeit und den sicheren Datenaustausch zwischen Verwaltungen und öffentlichen Einrichtungen in Europa. Da sich viele Anforderungen der Interoperabilität mit denen der Digitaltauglichkeit überschneiden, wird in Deutschland der bestehenden Digitalcheck um Aspekte der Interoperabilität erweitert.
+        Die EU-Anforderungen an Interoperabilität fördern die Zusammenarbeit und den sicheren Datenaustausch zwischen Verwaltungen und öffentlichen Einrichtungen in Europa. **Jedes Vorhaben, das diese Anforderungen erfüllen muss, hat automatisch Digitalbezug.** Da sich viele Anforderungen der Interoperabilität mit denen der Digitaltauglichkeit überschneiden, wird in Deutschland der bestehenden Digitalcheck um Aspekte der Interoperabilität erweitert.
         <br/><br/>
         Mit Hilfe der **Vorprüfung** können Sie feststellen, ob Ihre Regelung die Anforderungen an Interoperabilität erfüllt.
     `,
@@ -254,21 +254,23 @@ export const interoperability = {
           
           Durch den Prozess der Interoperabilitätsbewertung ermitteln Sie Potenziale und Hindernisse für grenzüberschreitende Zusammenarbeit. Damit legen Sie die Grundlage für Regelungen, die Interoperabilität ermöglichen. Eine Vorgehensweise ganz ähnlich, wie sie es von der Arbeit an digitaltauglichen Regelungen kennen.
         `,
-        detailsSummary: {
-          title: "Wie läuft eine Interoperabilitätsbewertung ab?",
-          content: dedent`
-            Als Bestandteil der Bewertung identifizieren Sie bestehende Lösungen. Lassen sich diese wiederverwenden, werden Kosten und Aufwand in der Umsetzung reduziert.
-            Die [Verordnung für ein interoperables Europa]((https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903)) definiert im Anhang Mindestanforderungen für die Durchführung einer Interoperabilitätsbewertung, die Details sind in den [Leitlinien für Interoperabilitätsbewertungen](https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/2025-05/DIGIT-2024-00047-00-00-DE-TRA-00.pdf) beschrieben.
-            <br/><br/>
-            Durch die [Digitalcheck Vorprüfung](/vorpruefung) identifizieren Sie bereits heute, ob Interoperabilität bei der Erarbeitung Ihrer Regelung eine Rolle spielt. Falls sich daraus eine Berichtspflicht an die Europäische Kommission ergibt, unterstützt Sie das Digitalcheck Team dabei, eine Interoperabilitätsbewertung durchzuführen, zu dokumentieren und den Bericht einzureichen.
-            <br/><br/>
-            Wenn Sie weitere Fragen haben, dann kontaktieren Sie uns unter: [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de) oder unter  0151 / 40 76 78 39. 
-            <br/><br/>
-            Weitere Quellen:
-            <br/>[European Commission - European Interoperability Framework](https://ec.europa.eu/isa2/eif_en/)
-            <br/>[Interoperable Europe Portal - FAQs](https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs)
+        items: [
+          {
+            title: "Wie läuft eine Interoperabilitätsbewertung ab?",
+            content: dedent`
+              Als Bestandteil der Bewertung identifizieren Sie bestehende Lösungen. Lassen sich diese wiederverwenden, werden Kosten und Aufwand in der Umsetzung reduziert.
+              Die [Verordnung für ein interoperables Europa]((https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903)) definiert im Anhang Mindestanforderungen für die Durchführung einer Interoperabilitätsbewertung, die Details sind in den [Leitlinien für Interoperabilitätsbewertungen](https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/2025-05/DIGIT-2024-00047-00-00-DE-TRA-00.pdf) beschrieben.
+              <br/><br/>
+              Durch die [Digitalcheck Vorprüfung](/vorpruefung) identifizieren Sie bereits heute, ob Interoperabilität bei der Erarbeitung Ihrer Regelung eine Rolle spielt. Falls sich daraus eine Berichtspflicht an die Europäische Kommission ergibt, unterstützt Sie das Digitalcheck Team dabei, eine Interoperabilitätsbewertung durchzuführen, zu dokumentieren und den Bericht einzureichen.
+              <br/><br/>
+              Wenn Sie weitere Fragen haben, dann kontaktieren Sie uns unter: [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de) oder unter  0151 / 40 76 78 39. 
+              <br/><br/>
+              Weitere Quellen:
+              <br/>[European Commission - European Interoperability Framework](https://ec.europa.eu/isa2/eif_en/)
+              <br/>[Interoperable Europe Portal - FAQs](https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs)
           `,
-        },
+          },
+        ],
       },
       {
         headline: {
@@ -278,21 +280,23 @@ export const interoperability = {
           Eine Interoperabilitätsbewertung wird für Regelungen durchgeführt, die sich mit verbindlichen Anforderungen befassen.
           <br/><br/>
           Eine verbindliche Anforderung im Sinne der Verordnung ist eine verpflichtende Regel. Das kann z.B. eine Definition, ein Standard, eine Richtlinie, ein Verbot oder eine Beschränkung sein. Eine exakte Definition finden Sie in der [Verordnung in der Präambel, Erwägungsgrund 18](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903).`,
-        detailsSummary: {
-          title: "Welche Kriterien müssen dafür erfüllt sein?",
-          content: dedent`
-            Die Interoperabilitätsbewertung ist für diese verbindliche Anforderung verpflichtend, wenn die folgenden Kriterien aus den [Leitlinien für Interoperabilitätsbewertungen](https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/2025-05/DIGIT-2024-00047-00-00-DE-TRA-00.pdf) erfüllt sind:
-            1. Die Regelung sieht eine digitale Umsetzung vor.
-            2. Die Regelung sieht den Austausch von Daten und Informationen zwischen Verwaltungen der EU-Mitgliedstaaten vor.
-            3. Es wurde für die verbindliche Anforderung noch keine Interoperabilitätsbewertung durchgeführt. Dies können Sie im [EU-Portal](https://interoperable-europe.ec.europa.eu/collection/assessments) prüfen.
-            
-            Falls sich eine Berichtspflicht an die Europäische Kommission ergibt, dann unterstützt Sie das Digitalcheck Team dabei, die Interoperabilitätsbewertung durchzuführen, sie zu dokumentieren und den Bericht einzureichen. 
-            <br/><br/>
-            Weitere Quellen:
-            <br/>[European Commission - European Interoperability Framework](https://ec.europa.eu/isa2/eif_en/)
-            <br/>[Interoperable Europe Portal - FAQs](https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs)
+        items: [
+          {
+            title: "Welche Kriterien müssen dafür erfüllt sein?",
+            content: dedent`
+              Die Interoperabilitätsbewertung ist für diese verbindliche Anforderung verpflichtend, wenn die folgenden Kriterien aus den [Leitlinien für Interoperabilitätsbewertungen](https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/2025-05/DIGIT-2024-00047-00-00-DE-TRA-00.pdf) erfüllt sind:
+              1. Die Regelung sieht eine digitale Umsetzung vor.
+              2. Die Regelung sieht den Austausch von Daten und Informationen zwischen Verwaltungen der EU-Mitgliedstaaten vor.
+              3. Es wurde für die verbindliche Anforderung noch keine Interoperabilitätsbewertung durchgeführt. Dies können Sie im [EU-Portal](https://interoperable-europe.ec.europa.eu/collection/assessments) prüfen.
+              
+              Falls sich eine Berichtspflicht an die Europäische Kommission ergibt, dann unterstützt Sie das Digitalcheck Team dabei, die Interoperabilitätsbewertung durchzuführen, sie zu dokumentieren und den Bericht einzureichen. 
+              <br/><br/>
+              Weitere Quellen:
+              <br/>[European Commission - European Interoperability Framework](https://ec.europa.eu/isa2/eif_en/)
+              <br/>[Interoperable Europe Portal - FAQs](https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs)
           `,
-        },
+          },
+        ],
       },
     ],
     image: {
