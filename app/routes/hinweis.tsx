@@ -5,7 +5,7 @@ import { hinweis } from "~/resources/content/hinweis";
 
 export default function Index() {
   return (
-    <Background backgroundColor="blue">
+    <Background backgroundColor="blue" className="parent-bg-blue">
       <Container>
         <InfoBox
           heading={{

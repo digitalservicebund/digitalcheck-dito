@@ -1,7 +1,7 @@
 import { dedent } from "~/utils/dedentMultilineStrings";
 import {
   ROUTE_FUNDAMENTALS_METHODS,
-  ROUTE_METHODS_PRINCIPLES,
+  ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_PRECHECK,
 } from "../staticRoutes";
 
@@ -27,7 +27,7 @@ export const hinweis = {
           },
           {
             title: "Prinzipien für digitaltauglliche Regelungen",
-            url: ROUTE_METHODS_PRINCIPLES.url,
+            url: ROUTE_FUNDAMENTALS_PRINCIPLES.url,
           },
           {
             title: "Vorprüfung: Digitalbezug einschätzen",

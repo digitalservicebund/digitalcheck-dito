@@ -32,7 +32,6 @@ import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants.server";
 import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
 import type { Route } from "./+types/root";
-import Background from "./components/Background";
 
 export function loader({ request }: Route.LoaderArgs) {
   const featureFlags = getFeatureFlags();
@@ -308,22 +307,20 @@ Vielen Dank für Ihr Verständnis.`;
         )
       }
     >
-      <main id="error" className="grow">
-        <Background backgroundColor="blue">
-          <Container>
-            <div className="ds-stack ds-stack-8 mb-32">
-              <span className="ds-label-01-bold">{errorStatus}</span>
-              <Heading text={errorTitle} className="ds-heading-02-reg" />
-              <RichText markdown={errorMessage} className="ds-subhead" />
-            </div>
-            <Button
-              id="error-back-button"
-              text="Zurück zur Startseite"
-              href={ROUTE_LANDING.url}
-              look="primary"
-            ></Button>
-          </Container>
-        </Background>
+      <main id="error" className="grow bg-blue-100">
+        <Container>
+          <div className="ds-stack ds-stack-8 mb-32">
+            <span className="ds-label-01-bold">{errorStatus}</span>
+            <Heading text={errorTitle} className="ds-heading-02-reg" />
+            <RichText markdown={errorMessage} className="ds-subhead" />
+          </div>
+          <Button
+            id="error-back-button"
+            text="Zurück zur Startseite"
+            href={ROUTE_LANDING.url}
+            look="primary"
+          ></Button>
+        </Container>
       </main>
     </Document>
   );
