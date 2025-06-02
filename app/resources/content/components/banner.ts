@@ -1,7 +1,7 @@
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const banner = {
-  title: "Der Digitalcheck bis zur Sommerpause ",
+  title: "Der Digitalcheck bis zur Sommerpause",
   titleLabel: "AKTUELL",
   ariaLabel: "Hinweis Aktuell",
   content: dedent`

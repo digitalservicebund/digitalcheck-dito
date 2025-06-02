@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { twJoin } from "tailwind-merge";
+import twMerge from "~/utils/tailwindMerge";
 
 export type PrincipleNumber = 1 | 2 | 3 | 4 | 5;
 
@@ -25,7 +25,7 @@ function Badge({
   return (
     <span
       role="mark"
-      className={twJoin(labelStyle, principleStyle, hintStyle, className)}
+      className={twMerge(labelStyle, principleStyle, hintStyle, className)}
     >
       {children}
     </span>
