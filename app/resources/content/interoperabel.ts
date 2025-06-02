@@ -12,7 +12,7 @@ export const interoperability = {
     id: "digitaltauglich",
     headline: "Interoperabilität und Digitaltauglichkeit",
     content: dedent`
-        Die EU-Anforderungen an Interoperabilität fördern die Zusammenarbeit und den sicheren Datenaustausch zwischen Verwaltungen und öffentlichen Einrichtungen in Europa. **Jedes Vorhaben, das diese Anforderungen erfüllen muss, hat automatisch Digitalbezug.** Da sich viele Anforderungen der Interoperabilität mit denen der Digitaltauglichkeit überschneiden, wird in Deutschland der bestehenden Digitalcheck um Aspekte der Interoperabilität erweitert.
+        Die EU-Anforderungen an Interoperabilität fördern die Zusammenarbeit und den sicheren Datenaustausch zwischen Verwaltungen und öffentlichen Einrichtungen in Europa. Da sich viele Anforderungen der Interoperabilität mit denen der Digitaltauglichkeit überschneiden, wird in Deutschland der bestehenden Digitalcheck um Aspekte der Interoperabilität erweitert.
         <br/><br/>
         Mit Hilfe der **Vorprüfung** können Sie feststellen, ob Ihre Regelung die Anforderungen an Interoperabilität erfüllt.
     `,
