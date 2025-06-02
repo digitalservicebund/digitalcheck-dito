@@ -44,32 +44,30 @@ export default function FundamentalsFivePrinciples() {
         </Container>
       </Background>
 
-      {methodsFivePrinciples.principles.map((principle) => {
-        return (
-          <Container className="pb-64" key={slugify(principle.title)}>
-            <InfoBox
-              identifier={slugify(principle.title)}
-              separator={false}
-              key={slugify(principle.title)}
-              Icon={principle.icon}
-              heading={{
-                tagName: "h2",
-                text: principle.title,
-              }}
-              label={{
-                children: principle.label,
-                principleNumber: principle.principleNumber as PrincipleNumber,
-              }}
-              items={[
-                {
-                  content: principle.content,
-                  detailsSummary: getDetailsSummary(principle.detailsSummary),
-                },
-              ]}
-            />
-          </Container>
-        );
-      })}
+      {methodsFivePrinciples.principles.map((principle) => (
+        <Container className="pb-64" key={slugify(principle.title)}>
+          <InfoBox
+            identifier={slugify(principle.title)}
+            separator={false}
+            key={slugify(principle.title)}
+            Icon={principle.icon}
+            heading={{
+              tagName: "h2",
+              text: principle.title,
+            }}
+            label={{
+              children: principle.label,
+              principleNumber: principle.principleNumber as PrincipleNumber,
+            }}
+            items={[
+              {
+                content: principle.content,
+                detailsSummary: getDetailsSummary(principle.detailsSummary),
+              },
+            ]}
+          />
+        </Container>
+      ))}
 
       <SupportBanner />
     </>
