@@ -278,7 +278,10 @@ export const support = {
                 icon: TimerOutlined,
                 title: "Nächste Termine",
                 text:
-                  "Mo, 16.06. | 10:00–11:30 Uhr\n Mi, 18.06. | 10:00–11:30 Uhr\n Mo, 23.06. | 15:00–16:30 Uhr\n Mo, 30.06. | 10:00–11:30 Uhr\n" +
+                  "Mo, 16.06. | 10:00–11:30 Uhr\n" + 
+                  "Mi, 18.06. | 10:00–11:30 Uhr\n" +
+                  "Mo, 23.06. | 15:00–16:30 Uhr\n" +
+                  "Mo, 30.06. | 10:00–11:30 Uhr\n" +
                   "Sie können sich bis dahin das [Schulungsmaterial ansehen](https://github.com/digitalservicebund/digitalcheck-content/tree/main/src/online-schulungen).",
               },
             ],
