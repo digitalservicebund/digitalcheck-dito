@@ -21,7 +21,7 @@ const InfoBox = ({
   separator = true,
 }: InfoBoxProps) => {
   return (
-    <section className="flex flex-col gap-16">
+    <section className="flex flex-row gap-16">
       {Icon && <Icon className="hidden size-80 fill-blue-500 sm:block" />}
       <div className="ds-stack ds-stack-8 scroll-my-40" id={identifier}>
         {label && (
