@@ -38,15 +38,19 @@ export const spoc = {
       infobox: [
         {
           detailsSummary: {
-            title: "Beteiligte Organisationen und Behörden",
-            content: dedent`
-            - **Bundesländer & Kommunen:** Ausgangspunkt, mit dem Hinweis auf die dezentrale Umsetzung durch das Bundesangebot.
-      - **IT-Planungsrat:** Koordiniert und empfiehlt die Integration von IT-Strategien.
-      - **Nationale Kontaktstelle:** Zentraler Ansprechpartner für Informationsaustausch und Koordination.
-      - **Bundesministerium für Inneres und Heimat:** Verantwortlich für die Integration in den Digitalcheck.
-      - **EU-Kommission:** Beteiligte an der Weiterentwicklung und Reportings. 
-      - **EU-Interoperabilitätsbeirat:** EU-weite Zusammenarbeit, vertreten durch Markus Richter (Bundes-CIO).
-      - **27 EU-Staaten mit Kontaktstellen:** Nationale Kontaktstellen für Informationsaustausch.`,
+            items: [
+              {
+                title: "Beteiligte Organisationen und Behörden",
+                content: dedent`
+                  - **Bundesländer & Kommunen:** Ausgangspunkt, mit dem Hinweis auf die dezentrale Umsetzung durch das Bundesangebot.
+                  - **IT-Planungsrat:** Koordiniert und empfiehlt die Integration von IT-Strategien.
+                  - **Nationale Kontaktstelle:** Zentraler Ansprechpartner für Informationsaustausch und Koordination.
+                  - **Bundesministerium für Inneres und Heimat:** Verantwortlich für die Integration in den Digitalcheck.
+                  - **EU-Kommission:** Beteiligte an der Weiterentwicklung und Reportings. 
+                  - **EU-Interoperabilitätsbeirat:** EU-weite Zusammenarbeit, vertreten durch Markus Richter (Bundes-CIO).
+                  - **27 EU-Staaten mit Kontaktstellen:** Nationale Kontaktstellen für Informationsaustausch.`,
+              },
+            ],
           },
         },
       ],

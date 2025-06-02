@@ -4,6 +4,7 @@ import ButtonContainer from "./ButtonContainer";
 import DetailsSummary, { type DetailsSummaryProps } from "./DetailsSummary";
 import Heading, { type HeadingProps } from "./Heading";
 import Image, { type ImageProps } from "./Image";
+import LinkList, { LinkListProps } from "./LinkList";
 import RichText from "./RichText";
 
 export type InfoBoxItemProps = {
@@ -12,7 +13,11 @@ export type InfoBoxItemProps = {
   headline?: HeadingProps;
   image?: ImageProps;
   content?: string;
-  detailsSummary?: DetailsSummaryProps | DetailsSummaryProps[];
+  detailsSummary?: {
+    title?: HeadingProps;
+    items: DetailsSummaryProps[];
+  };
+  linkList?: LinkListProps;
   buttons?: ButtonProps[];
   separator?: boolean;
 };
@@ -24,6 +29,7 @@ const InfoBoxItem = ({
   image,
   content,
   detailsSummary,
+  linkList,
   buttons,
   separator,
 }: InfoBoxItemProps) => {
@@ -33,7 +39,7 @@ const InfoBoxItem = ({
       className={twJoin(
         "flex max-w-none scroll-my-40 flex-row items-center justify-center max-[499px]:flex-col",
         separator &&
-          "border-0 border-b-2 border-solid border-gray-400 pb-40 last:border-none",
+          "border-0 border-b-2 border-solid border-gray-400 pb-40 last:border-none last:pb-0",
       )}
     >
       {image && (
@@ -55,13 +61,20 @@ const InfoBoxItem = ({
         {label && <Heading {...label} />}
         {headline && <Heading tagName="h3" {...headline} />}
         {content && <RichText markdown={content} />}
-        {detailsSummary && !Array.isArray(detailsSummary) && (
-          <DetailsSummary {...detailsSummary} />
+
+        {detailsSummary && (
+          <div className="ds-stack ds-stack-8 mt-16">
+            {detailsSummary.title && (
+              <Heading {...detailsSummary.title} className="ds-label-02-bold" />
+            )}
+            {detailsSummary.items &&
+              detailsSummary.items.map((details) => (
+                <DetailsSummary key={details.title} {...details} />
+              ))}
+          </div>
         )}
-        {Array.isArray(detailsSummary) &&
-          detailsSummary.map((details) => (
-            <DetailsSummary key={details.title} {...details} />
-          ))}
+        {linkList && <LinkList {...linkList} />}
+
         {buttons && buttons.length > 0 && <ButtonContainer buttons={buttons} />}
       </div>
     </li>

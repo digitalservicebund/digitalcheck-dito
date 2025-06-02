@@ -88,7 +88,7 @@ const BulletList = ({
           ▲
         </div>
       </div>
-      <ol
+      <ul
         className="list-unstyled ds-stack ds-stack-32 relative"
         aria-live="polite"
         aria-labelledby={identifier ? `${identifier}-heading` : undefined}
@@ -96,7 +96,7 @@ const BulletList = ({
         {items.map((item, index) => (
           <li
             key={getKey(item, index)}
-            className="scroll-my-40 first:pt-0"
+            className="scroll-my-40 first:mt-16"
             aria-describedby={
               item.identifier ? `${item.identifier}-desc` : undefined
             }
@@ -108,7 +108,7 @@ const BulletList = ({
             />
           </li>
         ))}
-      </ol>
+      </ul>
     </div>
   );
 };

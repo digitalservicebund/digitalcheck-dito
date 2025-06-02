@@ -307,22 +307,20 @@ Vielen Dank für Ihr Verständnis.`;
         )
       }
     >
-      <main id="error" className="grow">
-        <div className="border-t-2 border-t-gray-400">
-          <Container>
-            <div className="ds-stack ds-stack-8 mb-32">
-              <span className="ds-label-01-bold">{errorStatus}</span>
-              <Heading text={errorTitle} className="ds-heading-02-reg" />
-              <RichText markdown={errorMessage} className="ds-subhead" />
-            </div>
-            <Button
-              id="error-back-button"
-              text="Zurück zur Startseite"
-              href={ROUTE_LANDING.url}
-              look="primary"
-            ></Button>
-          </Container>
-        </div>
+      <main id="error" className="grow bg-blue-100">
+        <Container>
+          <div className="ds-stack ds-stack-8 mb-32">
+            <span className="ds-label-01-bold">{errorStatus}</span>
+            <Heading text={errorTitle} className="ds-heading-02-reg" />
+            <RichText markdown={errorMessage} className="ds-subhead" />
+          </div>
+          <Button
+            id="error-back-button"
+            text="Zurück zur Startseite"
+            href={ROUTE_LANDING.url}
+            look="primary"
+          ></Button>
+        </Container>
       </main>
     </Document>
   );
