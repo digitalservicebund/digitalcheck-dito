@@ -327,9 +327,9 @@ export const support = {
                 text: dedent`
                   Di, 24.06. | 15:00–16:30 Uhr (online)
                   <br class="block content-[''] mb-32!" />
-                  Mi, 25.06. | 09:00–10:30 Uhr ([vor Ort](https://digitalservice.bund.de/anfahrt-und-zugaenglichkeit))
+                  Mi, 25.06. | 09:00–10:30 Uhr ([Berlin](https://digitalservice.bund.de/anfahrt-und-zugaenglichkeit))
                   <br class="block content-[''] mb-32!" />
-                  Mo, 01.07. | 13:00–14:30 Uhr ([vor Ort](https://digitalservice.bund.de/anfahrt-und-zugaenglichkeit))
+                  Mo, 01.07. | 13:00–14:30 Uhr ([Berlin](https://digitalservice.bund.de/anfahrt-und-zugaenglichkeit))
                   <br class="block content-[''] mb-32!" />
                   Mo, 02.07. | 10:00–11:30 Uhr (online) 
                   <br class="block content-[''] mb-32!" />                  
