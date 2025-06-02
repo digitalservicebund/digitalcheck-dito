@@ -37,7 +37,7 @@ export default function FundamentalsFivePrinciples() {
             links={methodsFivePrinciples.principles.map((principle) => {
               return {
                 id: slugify(principle.title),
-                title: `${principle.label}: ${principle.title}`,
+                title: principle.title,
               };
             })}
           />
