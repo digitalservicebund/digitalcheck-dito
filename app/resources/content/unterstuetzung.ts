@@ -324,7 +324,7 @@ export const support = {
               {
                 icon: TimerOutlined,
                 title: "Nächste Termine (online und vor Ort)",
-                text:dedent`
+                text: dedent`
                   Di, 24.06. | 15:00–16:30 Uhr (online)
                   <br class="block content-[''] mb-32!" />
                   Mi, 25.06. | 09:00–10:30 Uhr ([vor Ort](https://digitalservice.bund.de/anfahrt-und-zugaenglichkeit))
