@@ -147,7 +147,7 @@ export const methods = {
         label: { text: "Textarbeit" },
         headline: { text: "Schreiben Sie die Regelung" },
         text: dedent`
-          Nutzen Sie die gewonnen Ideen, um die Regelung zu schreiben. Dafür nehmen Sie ganz einfach Ihre gewohnten Programme und Arbeitshilfen – z. B. eNorm und das Handbuch der Rechtsförmigkeit.
+          Nutzen Sie die gewonnen Ideen, um die Regelung zu schreiben. Dafür nehmen Sie ganz einfach Ihre gewohnten Programme und Arbeitshilfen – z. B. eNorm und das Handbuch der Rechtsförmlichkeit.
         `,
       },
     ],
