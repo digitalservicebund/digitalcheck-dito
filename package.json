@@ -93,7 +93,7 @@
     "typescript-eslint": "^8.33.1",
     "vite": "^6.2.2",
     "vite-tsconfig-paths": "^5.1.0",
-    "vitest": "^3.1.1"
+    "vitest": "^3.2.1"
   },
   "engines": {
     "node": ">=20.0.0"
