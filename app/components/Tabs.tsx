@@ -78,7 +78,7 @@ export default function Tabs({
       <div
         role="tablist"
         aria-label="Menü Navigation"
-        className="my-[40px] flex items-start border-b-[3px] border-blue-500 max-lg:hidden"
+        className="mb-40 flex items-start border-b-[3px] border-blue-500 max-lg:hidden"
       >
         {/* Tab buttons regular view */}
         {tabs.map((tab, index) => (
@@ -111,7 +111,7 @@ export default function Tabs({
         ))}
       </div>
       {/* Mobile Dropdown */}
-      <div className="my-[40px] lg:hidden">
+      <div className="mb-40 lg:hidden">
         {/* Wrapper is needed for the styles here, Listbox provides context & state management */}
         <Listbox
           value={activeTab}

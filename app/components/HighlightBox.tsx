@@ -5,7 +5,10 @@ export type HighlightBoxProps = BoxProps;
 
 export default function HighlightBox(props: HighlightBoxProps) {
   return (
-    <Background backgroundColor="blue" className="rounded-lg px-80 pt-32 pb-40">
+    <Background
+      backgroundColor="blue"
+      className="rounded-lg px-16 pt-32 pb-48 sm:px-80 sm:pb-40"
+    >
       <Box {...props} />
     </Background>
   );

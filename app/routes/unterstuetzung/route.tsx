@@ -246,7 +246,7 @@ export default function Index() {
       </Background>
       <div id="angebote">
         <Background backgroundColor="white">
-          <Container>
+          <Container className="ds-stack ds-stack-40">
             <Box
               heading={{
                 tagName: "h2",
