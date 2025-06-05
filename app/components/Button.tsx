@@ -87,7 +87,8 @@ function Button({
     const ext =
       (href.endsWith(".pdf") && "PDF") ||
       (href.endsWith(".xlsx") && "XSLX") ||
-      (href.endsWith(".docx") && "DOCX");
+      (href.endsWith(".docx") && "DOCX") ||
+      (href.endsWith(".pptx") && "PPTX");
     const isDownload = !!ext;
 
     return (
