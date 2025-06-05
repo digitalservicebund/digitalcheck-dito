@@ -8,6 +8,10 @@ import { ROUTE_VISUALISATION } from "~/resources/staticRoutes";
 import { Visualisierung } from "~/utils/strapiData.server";
 import { formatDate } from "~/utils/utilFunctions";
 
+export type VisualisationItemProps = {
+  visualisierung: Visualisierung;
+};
+
 const LabelValuePair = ({ label, value }: { label: string; value?: string }) =>
   value ? (
     <div className="space-x-8">
@@ -18,9 +22,7 @@ const LabelValuePair = ({ label, value }: { label: string; value?: string }) =>
 
 export default function VisualisationItem({
   visualisierung,
-}: Readonly<{
-  visualisierung: Visualisierung;
-}>) {
+}: Readonly<VisualisationItemProps>) {
   const visualisationUrl = visualisierung.Bild.url.split("/").pop();
 
   return (

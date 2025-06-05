@@ -26,10 +26,12 @@ export default function Index() {
             items={index.stepByStep.items}
           />
           <ImageBox
+            className="pb-40"
             image={index.stepByStep.processImage.img}
             plausibleEventName={
               index.stepByStep.processImage.plausibleEventName
             }
+            border
           />
           {/* currently not used and hidden */}
           <div className="relative left-1/2 hidden w-screen -translate-x-1/2 bg-[url('/images/trainings.jpeg')] bg-cover bg-[0%_35%]">

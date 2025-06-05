@@ -3,7 +3,7 @@ import Badge, { BadgeProps } from "./Badge";
 import Heading, { type HeadingProps } from "./Heading";
 import InfoBoxItem, { type InfoBoxItemProps } from "./InfoBoxItem";
 
-type InfoBoxProps = {
+export type InfoBoxProps = {
   identifier?: string;
   badge?: BadgeProps;
   heading?: HeadingProps;
@@ -23,12 +23,8 @@ const InfoBox = ({
   return (
     <section className="flex flex-row gap-16">
       {Icon && <Icon className="hidden size-80 fill-blue-500 sm:block" />}
-      <div className="ds-stack ds-stack-8 scroll-my-40" id={identifier}>
-        {badge && (
-          <Badge principleNumber={badge.principleNumber}>
-            {badge.children}
-          </Badge>
-        )}
+      <div className="ds-stack ds-stack-8 w-full scroll-my-40" id={identifier}>
+        {badge && <Badge {...badge} />}
         {heading && <Heading className="ds-heading-02-reg" {...heading} />}
         <ul
           className={twJoin(

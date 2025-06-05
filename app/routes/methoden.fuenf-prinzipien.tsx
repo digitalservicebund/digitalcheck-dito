@@ -7,7 +7,6 @@ import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxItem from "~/components/InfoBoxItem";
-import LabelWithIcon from "~/components/LabelWithIcon";
 import LinkListBox from "~/components/LinkListBox";
 import Separator from "~/components/Separator";
 import {
@@ -16,6 +15,7 @@ import {
 } from "~/resources/content/methode-fuenf-prinzipien";
 import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
+
 import { slugify } from "~/utils/utilFunctions";
 
 export function meta() {
@@ -115,7 +115,10 @@ export default function FivePrinciples() {
               text: methodsFivePrinciples.nextStep.title,
               look: "ds-heading-03-reg",
             }}
-            label={{ text: LabelWithIcon(methodsFivePrinciples.nextStep) }}
+            badge={{
+              text: methodsFivePrinciples.nextStep.label,
+              Icon: methodsFivePrinciples.nextStep.icon,
+            }}
             content={{ markdown: methodsFivePrinciples.nextStep.text }}
             buttons={methodsFivePrinciples.nextStep.buttons}
           />

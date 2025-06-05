@@ -7,9 +7,7 @@ import DetailsSummary from "~/components/DetailsSummary";
 import Header from "~/components/Header";
 import Image from "~/components/Image";
 import InterviewBanner from "~/components/InterviewBanner";
-import LabelWithIcon from "~/components/LabelWithIcon";
 import RichText from "~/components/RichText";
-import { methodsTasksProcesses } from "~/resources/content/methode-ablaeufe-aufgaben-erfassen";
 import { methodsITSystems } from "~/resources/content/methode-it-systeme-erfassen";
 import { methodsTechnicalFeasibility } from "~/resources/content/methode-technische-umsetzbarkeit";
 import { methodsResponsibleActors } from "~/resources/content/methode-zustaendige-akteurinnen-auflisten";
@@ -17,7 +15,6 @@ import {
   ROUTE_METHODS,
   ROUTE_METHODS_COLLECT_IT_SYSTEMS,
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
-  ROUTE_METHODS_TASKS_PROCESSES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
   ROUTES,
 } from "~/resources/staticRoutes";
@@ -26,7 +23,6 @@ import type { Route } from "./+types/methoden.$subPage";
 
 const contentMap = {
   [ROUTE_METHODS_RESPONSIBLE_ACTORS.title]: methodsResponsibleActors,
-  [ROUTE_METHODS_TASKS_PROCESSES.title]: methodsTasksProcesses,
   [ROUTE_METHODS_COLLECT_IT_SYSTEMS.title]: methodsITSystems,
   [ROUTE_METHODS_TECHNICAL_FEASIBILITY.title]: methodsTechnicalFeasibility,
 };
@@ -94,7 +90,7 @@ export default function Index() {
       <Container className="ds-stack ds-stack-32">
         <Box
           heading={{ text: content.content.title, look: "ds-heading-03-reg" }}
-          label={{ text: LabelWithIcon(content.content) }}
+          badge={{ text: content.content.label, Icon: content.content.icon }}
           content={{ markdown: content.content.text }}
           buttons={"buttons" in content.content ? content.content.buttons : []}
         />
@@ -110,7 +106,7 @@ export default function Index() {
             <Background backgroundColor="blue">
               <Box
                 heading={{ text: box.title, look: "ds-heading-03-reg" }}
-                label={{ text: LabelWithIcon(box) }}
+                badge={{ text: box.label, Icon: box.icon }}
                 content={{ markdown: box.text }}
                 buttons={"buttons" in box ? box.buttons : []}
                 className="px-96 py-64 max-sm:px-16 max-sm:py-32"
@@ -124,7 +120,7 @@ export default function Index() {
           <Container>
             <Box
               heading={{ text: content.tip.title, look: "ds-heading-03-reg" }}
-              label={{ text: LabelWithIcon(content.tip) }}
+              badge={{ text: content.tip.label, Icon: content.tip.icon }}
               content={{ markdown: content.tip.text }}
             />
           </Container>
@@ -138,7 +134,10 @@ export default function Index() {
                 text: content.support.title,
                 look: "ds-heading-03-reg",
               }}
-              label={{ text: LabelWithIcon(content.support) }}
+              badge={{
+                text: content.support.label,
+                Icon: content.support.icon,
+              }}
               content={{ markdown: content.support.text }}
               buttons={content.support.buttons}
             />
@@ -152,12 +151,16 @@ export default function Index() {
               text: content.nextStep.title,
               look: "ds-heading-03-reg",
             }}
-            label={{ text: LabelWithIcon(content.nextStep) }}
+            badge={{
+              text: content.nextStep.label,
+              Icon: content.nextStep.icon,
+            }}
             content={{ markdown: content.nextStep.text }}
             buttons={content.nextStep.buttons}
           />
         </Container>
       )}
+      {/* TODO: fix margin: mt-40 mb-48 */}
       <InterviewBanner />
     </>
   );
