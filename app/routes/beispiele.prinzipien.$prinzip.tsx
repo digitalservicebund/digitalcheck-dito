@@ -108,7 +108,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
       <Background backgroundColor="blue">
         <Container>
           <Box
-            label={{
+            badge={{
               text: `Prinzip ${prinzip.Nummer} – ${prinzip.Name}`,
             }}
             heading={{

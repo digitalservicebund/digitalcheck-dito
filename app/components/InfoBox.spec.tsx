@@ -49,7 +49,7 @@ describe("InfoBox", () => {
 
     it("shows the label", () => {
       render(
-        <InfoBox items={mockInfoBoxItems} label={{ children: "TestLabel" }} />,
+        <InfoBox items={mockInfoBoxItems} badge={{ children: "TestLabel" }} />,
       );
       expect(screen.getByRole("mark")).toHaveTextContent("TestLabel");
     });

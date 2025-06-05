@@ -3,32 +3,43 @@ import twMerge from "~/utils/tailwindMerge";
 
 export type PrincipleNumber = 1 | 2 | 3 | 4 | 5;
 
-export type LabelProps = {
+export type BadgeProps = {
+  text?: string;
+  children?: ReactNode;
   className?: string;
-  children: ReactNode;
   principleNumber?: PrincipleNumber;
-  hint?: boolean;
+  look?: "hint" | "default";
+  Icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 };
 
 function Badge({
   className,
   children,
+  text,
+  Icon,
   principleNumber,
-  hint,
-}: Readonly<LabelProps>) {
-  const labelStyle = "ds-label-02-reg rounded-md p-4";
+  look = "default",
+}: Readonly<BadgeProps>) {
+  const badgeStyle =
+    "bg-transparent ds-label-02-reg rounded-md p-4 inline-flex flex-row gap-4";
   const principleStyle = principleNumber
     ? `bg-principle-${principleNumber}`
     : "";
-  const hintStyle = hint ? "bg-blue-300 text-blue-800" : "";
+  const hintStyle = look === "hint" ? "bg-blue-300 text-blue-800" : "";
 
   return (
-    <span
-      role="mark"
-      className={twMerge(labelStyle, principleStyle, hintStyle, className)}
+    <mark
+      className={twMerge(
+        "items-center",
+        badgeStyle,
+        principleStyle,
+        hintStyle,
+        className,
+      )}
     >
-      {children}
-    </span>
+      {Icon && <Icon className="size-16" />}
+      {children || text}
+    </mark>
   );
 }
 
