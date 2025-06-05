@@ -1,6 +1,5 @@
 // import { Outlet, useLoaderData } from "react-router";
 // import SupportBanner from "~/components/SupportBanner";
-
 import { redirect } from "react-router";
 import { ROUTE_HINWEIS } from "~/resources/staticRoutes";
 

@@ -44,8 +44,6 @@ export const loader = async () => {
     throw new Response("No Visualisation found", { status: 404 });
   }
 
-  console.log(visualisationsData.visualisierungen[0].documentId);
-
   return visualisationsData.visualisierungen;
 };
 

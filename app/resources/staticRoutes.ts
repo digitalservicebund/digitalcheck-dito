@@ -116,28 +116,28 @@ export const ROUTE_EXAMPLES_PRINCIPLES = createRoute(
   ROUTE_EXAMPLES,
 );
 export const ROUTE_EXAMPLES_DIGITAL_COMMUNICATION = createRoute(
-  "digitale-angebote-fuer-alle-nutzbar-gestalten",
+  "digitale-kommunikation-sicherstellen",
   "Prinzip 1 in Regelungstexten",
   ROUTE_EXAMPLES_PRINCIPLES,
 );
 export const ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS = createRoute(
-  "datenwiederverwendung-benoetigt-einheitliches-recht",
+  "wiederverwendung-von-daten-und-standards-ermoeglichen",
   "Prinzip 2 in Regelungstexten",
   ROUTE_EXAMPLES_PRINCIPLES,
 );
 export const ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY =
   createRoute(
-    "datenschutz-und-informationssicherheit-schaffen-vertrauen",
+    "datenschutz-und-informationssicherheit-gewaehrleisten",
     "Prinzip 3 in Regelungstexten",
     ROUTE_EXAMPLES_PRINCIPLES,
   );
 export const ROUTE_EXAMPLES_CLEAR_REGULATIONS = createRoute(
-  "etablierte-technologien-ermoeglichen-effiziente-umsetzung",
-  "Prinzip 6 in Regelungstexten",
+  "klare-regelungen-fuer-eine-digitale-ausfuehrung-finden",
+  "Prinzip 4 in Regelungstexten",
   ROUTE_EXAMPLES_PRINCIPLES,
 );
 export const ROUTE_EXAMPLES_AUTOMATION = createRoute(
-  "automatisierung-basiert-auf-eindeutigen-regelungen",
+  "automatisierung-ermoeglichen",
   "Prinzip 5 in Regelungstexten",
   ROUTE_EXAMPLES_PRINCIPLES,
 );
