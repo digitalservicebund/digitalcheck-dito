@@ -8,6 +8,10 @@ import { CardProps } from "~/components/Card";
 import { HighlightBoxProps } from "~/components/HighlightBox";
 import { InfoBoxProps } from "~/components/InfoBox";
 import { dedent } from "~/utils/dedentMultilineStrings";
+import {
+  ROUTE_METHODS_PRINCIPLES,
+  ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX,
+} from "../staticRoutes";
 
 export type ContentVisualisation = {
   element: "visualisation";
@@ -150,7 +154,7 @@ export const methodsTasksProcesses: MethodsTasksProcesses = {
             },
             buttons: [
               {
-                href: "/documents/Anleitung_Flussdiagramm_erstellen.pptx",
+                href: ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX.url,
                 text: "PPT-Vorlage runterladen",
               },
               {
@@ -182,7 +186,7 @@ export const methodsTasksProcesses: MethodsTasksProcesses = {
           "Mit den Prinzipien für Digitaltaugliche Gesetzgebung bekommen Sie auch konkrete Hinweise darauf, worauf Sie achten müssen.",
         buttons: [
           {
-            href: "",
+            href: ROUTE_METHODS_PRINCIPLES.url,
             text: "Prinzipien nutzen",
             look: "tertiary",
           },
