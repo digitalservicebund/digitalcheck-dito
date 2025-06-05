@@ -37,8 +37,8 @@ export type ContentItem =
 
 type TabItem = {
   title: string;
-  bottomSpace?: boolean;
   content: ContentItem[];
+  plausibleEventName: string;
 };
 
 type MethodsTasksProcesses = {
@@ -58,7 +58,7 @@ export const methodsTasksProcesses: MethodsTasksProcesses = {
   tabs: [
     {
       title: "Intro",
-      bottomSpace: true,
+      plausibleEventName: "Tab+Bar+Intro",
       content: [
         {
           element: "infoBox",
@@ -87,10 +87,12 @@ export const methodsTasksProcesses: MethodsTasksProcesses = {
     },
     {
       title: "Anleitung",
+      plausibleEventName: "Tab+Bar+Anleitung",
       content: [
         {
           element: "infoBox",
           props: {
+            separator: false,
             items: [
               {
                 headline: {
@@ -138,7 +140,10 @@ export const methodsTasksProcesses: MethodsTasksProcesses = {
           element: "card",
           props: {
             badge: { text: "Vorlage", Icon: StickyNote2Outlined },
-            heading: { text: "Anleitung Abläufe und Aufgaben erfassen" },
+            heading: {
+              text: "Anleitung Abläufe und Aufgaben erfassen",
+              tagName: "h3",
+            },
             content: {
               markdown:
                 "Eine Powerpoint-Vorlage (PPT) mit einer Schritt für Schritt Anleitung zum Download finden Sie hier. Sie können diese ausdrucken oder an Ihrem Computer bearbeiten. Sofern in Ihrem Ressort Conceptboard genutzt werden kann, können Sie sich auch eine Kopie dieser Conceptboard-Vorlage erstellen. Für letzteres können Sie einen Gast-Zugang anlegen.",
@@ -171,6 +176,7 @@ export const methodsTasksProcesses: MethodsTasksProcesses = {
         },
         headline: {
           text: "Finden Sie konkrete Möglichkeiten der Digitalisierung",
+          tagName: "h3",
         },
         content:
           "Mit den Prinzipien für Digitaltaugliche Gesetzgebung bekommen Sie auch konkrete Hinweise darauf, worauf Sie achten müssen.",
@@ -190,12 +196,13 @@ export const methodsTasksProcesses: MethodsTasksProcesses = {
         badge: { text: "Unterstützungsangebot", Icon: SupportOutlined },
         headline: {
           text: "Visualisierungen gemeinsam erstellen",
+          tagName: "h2",
         },
         content: dedent`
-                  Der Digitalcheck-Support unterstützt Sie bei der Visualsierung von Abläufen. Wir helfen Ihnen gerne, insbesondere bei komplexen Abläufen.
-                  
-                  Schreiben Sie uns über [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de) oder rufen Sie uns an unter [0151/40 76 78 39](tel:015140767839).
-                `,
+          Der Digitalcheck-Support unterstützt Sie bei der Visualsierung von Abläufen. Wir helfen Ihnen gerne, insbesondere bei komplexen Abläufen.
+          
+          Schreiben Sie uns über [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de) oder rufen Sie uns an unter [0151/40 76 78 39](tel:015140767839).
+        `,
       },
     ],
   },

@@ -175,7 +175,7 @@ export default function Interoperability() {
           />
         </div>
       </Background>
-      <Container className="pt-0">
+      <Container>
         <Tabs tabs={tabsData} />
       </Container>
     </>

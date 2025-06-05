@@ -107,7 +107,7 @@ export default function Index() {
           ></Header>
         </Container>
       </Background>
-      <Container className="pt-0">
+      <Container>
         <Tabs tabs={tabsData} />
       </Container>
     </>

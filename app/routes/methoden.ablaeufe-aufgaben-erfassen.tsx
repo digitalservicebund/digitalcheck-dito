@@ -11,7 +11,6 @@ import Tabs, { TabItem } from "~/components/Tabs";
 import VisualisationItem from "~/components/VisualisationItem";
 import {
   type ContentItem,
-  ContentVisualisation,
   methodsTasksProcesses,
 } from "~/resources/content/methode-ablaeufe-aufgaben-erfassen";
 import {
@@ -22,20 +21,26 @@ import {
 
 const GET_VISUALISATIONS_QUERY = `
 ${visualisationFields}
-query GetVisualisierung($documentId: ID!) {
-  visualisierung(documentId: $documentId) {
+query GetVisualisierungen($filters: VisualisierungFiltersInput) {
+  visualisierungen(filters: $filters) {
     ...VisualisationFields
   }
-}`;
+}
+`;
 
 export const loader = async () => {
   const visualisationsData = await fetchStrapiData<{
-    visualisierung: Visualisierung;
+    visualisierungen: Visualisierung[];
   }>(GET_VISUALISATIONS_QUERY, {
-    // TODO: loop over all and then query
-    documentId: (
-      methodsTasksProcesses.tabs[0].content[1] as ContentVisualisation
-    ).documentId,
+    filters: {
+      documentId: {
+        in: methodsTasksProcesses.tabs
+          .flatMap(({ content }) =>
+            content.filter((item) => item.element === "visualisation"),
+          )
+          .map(({ documentId }) => documentId),
+      },
+    },
   });
 
   if ("error" in visualisationsData) {
@@ -43,14 +48,14 @@ export const loader = async () => {
     throw new Response(visualisationsData.error, { status: 400 });
   }
 
-  return visualisationsData.visualisierung;
+  return visualisationsData.visualisierungen;
 };
 
 export default function Visualization() {
   const visualisationsData = useLoaderData<typeof loader>();
 
   const createContent = (items: ContentItem[]) => (
-    <div className={twJoin("ds-stack ds-stack-80")}>
+    <div className={twJoin("ds-stack ds-stack-40")}>
       {items.map((contentItem, i) => {
         if (contentItem.element === "infoBox") {
           return (
@@ -74,10 +79,15 @@ export default function Visualization() {
             />
           );
         } else if (contentItem.element === "visualisation") {
+          const visualisationsItem = visualisationsData.find(
+            ({ documentId }) => documentId === contentItem.documentId,
+          );
+          if (!visualisationsItem) return <></>;
+
           return (
             <VisualisationItem
-              key={visualisationsData.Bild.documentId}
-              visualisierung={visualisationsData}
+              key={visualisationsItem.Bild.documentId}
+              visualisierung={visualisationsItem}
             />
           );
         }
@@ -87,7 +97,7 @@ export default function Visualization() {
 
   const tabsData: TabItem[] = methodsTasksProcesses.tabs.map((tabData) => ({
     title: tabData.title,
-    plausibleEventName: "TODO",
+    plausibleEventName: tabData.plausibleEventName,
     content: createContent(tabData.content),
   }));
 
