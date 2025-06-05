@@ -1,7 +1,7 @@
 export const banner = {
-  title: "Der Digitalcheck bis zur Sommerpause",
+  title: "Nutzen Sie jetzt den aktualisierten Digitalcheck",
   titleLabel: "AKTUELL",
   ariaLabel: "Hinweis Aktuell",
   content:
-    "Wir überarbeiten derzeit unsere Angebote. Bis zur Sommerpause gilt daher eine Übergangsregelung: Nutzen Sie nach der Vorprüfung den **vereinfachten Methodenablauf** und die neue **Word-Vorlage** für die Dokumentation.",
+    "Das ist neu, um Sie noch besser in Ihren Regelungsvorhaben zu unterstützen: **Einfach nutzbare Prinzipien**, **vereinfachter Methodenablauf** und die neue **Word-Vorlage** für die Dokumentation.",
 };
