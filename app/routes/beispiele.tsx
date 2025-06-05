@@ -1,6 +1,5 @@
 import { Outlet, useLoaderData } from "react-router";
 import SupportBanner from "~/components/SupportBanner";
-
 import {
   fetchStrapiData,
   GET_PRINZIPS_QUERY,

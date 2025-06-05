@@ -48,17 +48,7 @@ const InfoBoxItem = ({
         imageBox && isBigImage && "flex-col-reverse",
       )}
     >
-      {imageBox && (
-        <ImageBox
-          {...imageBox}
-          background
-          // {...{
-          //   className:
-          //     "max-[499px]:mb-16 max-[499px]:w-[144px] max-[499px]:h-[144px] h-[168px] w-[168px]" +
-          //     " self-baseline",
-          // }}
-        />
-      )}
+      {imageBox && <ImageBox {...imageBox} background />}
 
       <div className={twJoin("ds-stack ds-stack-16 break-words")}>
         {badge && <Badge className="self-start" {...badge} />}
