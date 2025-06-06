@@ -28,4 +28,4 @@ We could do everything between requiring draconian testing standards, to having 
 
 ## Update (2025-05-20)
 
-In we updated our testing guidelines [here](./0020-use-test-ids-instead-of-name-selectors.md)
+We updated our testing guidelines [here](./0020-use-more-unit-and-snapshot-tests-instead-of-e2e.md)

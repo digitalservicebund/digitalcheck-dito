@@ -21,6 +21,9 @@ const createRoute = (path: string, title: string, parent?: Route): Route => ({
   parent: parent ?? ROUTE_LANDING,
 });
 
+// TMP ROUTES
+export const ROUTE_HINWEIS = createRoute("hinweis", "Hinweis");
+
 // BASIC ROUTES
 export const ROUTE_SUPPORT = createRoute(
   "unterstuetzung",
@@ -85,9 +88,10 @@ export const ROUTE_DOCUMENTATION = createRoute(
   "dokumentation",
   "Dokumentation",
 );
+// NOTE: 70-tage replace pdf with word document
 export const ROUTE_DOCUMENTATION_STATIC_PDF = createRoute(
-  "download/digitalcheck-begleitende-dokumentation.pdf",
-  "Begleitende Dokumentation als PDF",
+  "download/Dokumentieren-der-Digitaltauglichkeit_V1-5.docx",
+  "Begleitende Dokumentation als Word-Dokument",
 );
 
 // INTEROPERABILITY ROUTES
@@ -190,13 +194,13 @@ export const ROUTES: Route[] = [
   ROUTE_DOCUMENTATION,
   ROUTE_INTEROPERABILITY,
   ROUTE_INTEROPERABILITY_SPOC,
-  ROUTE_EXAMPLES,
-  ROUTE_EXAMPLES_DIGITAL_COMMUNICATION,
-  ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS,
-  ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY,
-  ROUTE_EXAMPLES_CLEAR_REGULATIONS,
-  ROUTE_EXAMPLES_AUTOMATION,
-  ROUTE_EXAMPLES_VISUALISATIONS,
+  // ROUTE_EXAMPLES,
+  // ROUTE_EXAMPLES_DIGITAL_COMMUNICATION,
+  // ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS,
+  // ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY,
+  // ROUTE_EXAMPLES_CLEAR_REGULATIONS,
+  // ROUTE_EXAMPLES_AUTOMATION,
+  // ROUTE_EXAMPLES_VISUALISATIONS,
   ROUTE_FUNDAMENTALS,
   ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_FUNDAMENTALS_METHODS,

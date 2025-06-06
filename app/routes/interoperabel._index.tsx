@@ -156,7 +156,7 @@ export default function Interoperability() {
             />
           </div>
           <div className="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">
-            <div className="w-[630px] bg-[#cce5ef] lg:w-[50vw] [&>img]:object-contain lg:[&>img]:h-[626px]">
+            <div className="flex h-full w-[630px] flex-col justify-center bg-[#B3C9D6] align-middle lg:w-[50vw] [&>img]:object-contain lg:[&>img]:h-[550px]">
               <Image
                 url={interoperability.andDigitalReadiness.image.url}
                 alternativeText={

@@ -78,15 +78,13 @@ export default function Index() {
       title: index.summary.tabName,
       plausibleEventName: index.summary.plausibleEventName,
       content: (
-        <>
-          <InfoBox
-            heading={{
-              tagName: "h2",
-              text: index.summary.title,
-            }}
-            items={index.summary.items}
-          />
-        </>
+        <InfoBox
+          heading={{
+            tagName: "h2",
+            text: index.summary.title,
+          }}
+          items={index.summary.items}
+        />
       ),
     },
   ];

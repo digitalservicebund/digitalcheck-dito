@@ -30,7 +30,7 @@ export const methodStepsItems = (
       headline: {
         ...headline,
         tagName: isSubstep ? "h3" : "h2",
-        look: isSubstep ? "ds-heading-03-reg" : "ds-heading-02-bold",
+        look: isSubstep ? "ds-heading-03-bold" : "ds-heading-02-reg",
       },
       ...(showContent && { buttons: buttons }),
     };

@@ -1,4 +1,3 @@
-import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import { createRoutesStub } from "react-router";
 import Footer from "./Footer";

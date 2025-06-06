@@ -1,8 +1,8 @@
-# 20. Updated guidelines for testing
+# 20. Use more unit and snapshot tests instead of e2e-tests.
 
 ## Status
 
-- 2025-05-20: Proposed
+- 2025-05-20: Accepted
 
 ## Context
 
@@ -23,9 +23,9 @@ Unit tests are typically fast, provide precise feedback, are less prone to flaki
 - Test IDs should be considered a fallback, used only when semantic roles are not applicable or sufficient.
 - Encourages the development of more accessible applications by aligning tests with how users (and assistive technologies) perceive and interact with the UI.
 
-### Employ Snapshot Testing where it makes sense
+### Employ Vitest Snapshot Testing where it makes sense
 
-- Snapshot testing will be utilized for verifying the output of UI components or complex data structures when appropriate.
+- Snapshot testing will be utilized for verifying the output of UI components or complex data structures when appropriate with vitest.
 - Snapshot tests are effective for catching unintended changes in large or complex outputs where manually writing assertions for every detail would be impractical.
 - They are particularly useful for UI component rendering (to detect unexpected visual/structural changes) and large data structures (like API responses or generated configurations).
 
@@ -34,10 +34,12 @@ Unit tests are typically fast, provide precise feedback, are less prone to flaki
 ### Benefits
 
 - Emphasis on unit tests provides quicker feedback to developers.
-- Using role-based selectors can reduce test fluctuation.
 - Prioritizing ARIA roles promotes building accessible products.
+- Faster running tests/pipelines.
 
 ### Drawbacks/Considerations
 
 - Snapshots can become a maintenance overhead if not managed carefully, especially for frequently changing UI or data.
 - When non developers update texts, snapshots or role-based selectors may be updated to fix failing tests.
+- Snapshots produce extra files, that need to be checked in.
+- We might need to overhaul some existing e2e-tests in the future.

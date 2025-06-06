@@ -5,11 +5,19 @@ import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/download.$fileName";
 
 export async function loader({ params, request }: Route.LoaderArgs) {
-  const { fileName } = params;
+  let { fileName } = params;
 
   if (!fileName) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw new Response("Please provide a file name", { status: 400 });
+  }
+
+  // NOTE: 70-tage replace pdf with word document
+  /**
+   * Used for external links to the old pdf document
+   */
+  if (fileName === "digitalcheck-begleitende-dokumentation.pdf") {
+    fileName = "Dokumentieren-der-Digitaltauglichkeit_V1-5.docx";
   }
 
   try {

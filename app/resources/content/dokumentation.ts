@@ -9,7 +9,8 @@ export const documentation = {
   subtitle: `Sie dokumentieren in einem Fragebogen, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben. Und wie Sie diese in Ihr Regelungsvorhaben einfließen lassen.`,
   buttons: [
     {
-      text: "Dokumentation herunterladen (PDF-Datei)",
+      // NOTE: 70-tage replace pdf with word document
+      text: "Dokumentation herunterladen (Word-Datei)",
       href: ROUTE_DOCUMENTATION_STATIC_PDF.url,
     },
     {

@@ -13,7 +13,8 @@ const principles = [
   "automatisierung-ermoeglichen",
 ];
 
-test.describe("Prinzipienseiten", () => {
+// NOTE: 70-tage tmp skipped
+test.skip("Prinzipienseiten", () => {
   for (const principle of principles) {
     test(`displays information for principle: ${principle}`, async ({
       page,
@@ -53,7 +54,8 @@ test.describe("Prinzipienseiten", () => {
   }
 });
 
-test.describe("Prinzipien Detail", () => {
+// NOTE: 70-tage tmp skipped
+test.skip("Prinzipien Detail", () => {
   for (const principle of principles) {
     test(`displays paragraphs with relevant principles for: ${principle}`, async ({
       page,
@@ -92,11 +94,12 @@ test.describe("Prinzipien Detail", () => {
   }
 });
 
-test.describe("Visualizations Overview Page", () => {
+// NOTE: 70-tage tmp skipped
+test.skip("Visualizations Overview Page", () => {
   test("displays main heading and subtitle", async ({ page }) => {
     await page.goto(ROUTE_EXAMPLES_VISUALISATIONS.url);
 
-    const pageTitle = page.getByRole("heading").first();
+    const pageTitle = page.getByRole("heading", { level: 1 });
     await expect(pageTitle).toContainText("Beispiele für Visualisierungen");
 
     const subtitle = page.getByText(

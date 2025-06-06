@@ -276,10 +276,18 @@ export const support = {
             details: [
               {
                 icon: TimerOutlined,
-                title: "Nächste Termine",
-                text:
-                  "Wir planen bald neue Termine für Schulungen in 2025. Schreiben Sie uns eine E-Mail und wir setzen Sie auf die Warteliste.\n" +
-                  "Sie können sich bis dahin das [Schulungsmaterial ansehen](https://github.com/digitalservicebund/digitalcheck-content/tree/main/src/online-schulungen).",
+                title: "Nächste Termine (online)",
+                text: dedent`
+                  Mo, 16.06. | 10:00–11:30 Uhr
+                  <br class="block content-[''] mb-32!" />
+                  Mi, 18.06. | 10:00–11:30 Uhr
+                  <br class="block content-[''] mb-32!" />
+                  Mo, 23.06. | 15:00–16:30 Uhr
+                  <br class="block content-[''] mb-32!" />
+                  Mo, 30.06. | 10:00–11:30 Uhr
+                  <br class="block content-[''] mb-32!" />                  
+                  Sie können sich bis dahin das [Schulungsmaterial ansehen](https://github.com/digitalservicebund/digitalcheck-content/tree/main/src/online-schulungen).
+                `,
               },
             ],
           },
@@ -315,10 +323,18 @@ export const support = {
             details: [
               {
                 icon: TimerOutlined,
-                title: "Nächste Termine",
-                text:
-                  "Wir planen bald neue Termine für Schulungen in 2025. Schreiben Sie uns eine E-Mail und wir setzen Sie auf die Warteliste.\n" +
-                  "Sie können sich bis dahin das [Schulungsmaterial ansehen](https://github.com/digitalservicebund/digitalcheck-content/tree/main/src/online-schulungen).",
+                title: "Nächste Termine (online und vor Ort)",
+                text: dedent`
+                  Di, 24.06. | 15:00–16:30 Uhr (online)
+                  <br class="block content-[''] mb-32!" />
+                  Mi, 25.06. | 09:00–10:30 Uhr ([Berlin](https://digitalservice.bund.de/anfahrt-und-zugaenglichkeit))
+                  <br class="block content-[''] mb-32!" />
+                  Di, 01.07. | 13:00–14:30 Uhr ([Berlin](https://digitalservice.bund.de/anfahrt-und-zugaenglichkeit))
+                  <br class="block content-[''] mb-32!" />
+                  Mi, 02.07. | 10:00–11:30 Uhr (online) 
+                  <br class="block content-[''] mb-32!" />                  
+                  Sie können sich bis dahin das [Schulungsmaterial ansehen](https://github.com/digitalservicebund/digitalcheck-content/tree/main/src/online-schulungen).
+                `,
               },
             ],
           },

@@ -61,6 +61,7 @@ export default function Methoden() {
       <Container>
         <BulletList items={methodStepsItems(true, renderStepContent)} />
       </Container>
+      <SupportBanner withFeedbackBanner={false} />
       <div id={"weiter"} />
       <Container>
         <NumberedList
@@ -72,7 +73,6 @@ export default function Methoden() {
         />
       </Container>
       <FeedbackForm {...methods.feedbackForm} />
-      <SupportBanner withFeedbackBanner={false} />
     </>
   );
 }
