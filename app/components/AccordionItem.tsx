@@ -2,6 +2,7 @@ import { Add, Remove } from "@digitalservicebund/icons";
 import { ReactNode } from "react";
 import { twJoin } from "tailwind-merge";
 import RichText from "~/components/RichText";
+import { getPlausibleEvent } from "~/utils/plausibleUtils";
 
 export type AccordionItemProps = {
   headline: string;
@@ -16,7 +17,7 @@ export default function AccordionItem({
   id,
   plausibleEventName,
 }: Readonly<AccordionItemProps>) {
-  const plausibleEvent = `plausible-event-name=${plausibleEventName}`;
+  const plausibleEvent = getPlausibleEvent(plausibleEventName);
 
   return (
     <details className="group border-t-2 border-t-blue-800" id={id}>

@@ -88,6 +88,7 @@ export default function Visualization() {
             <VisualisationItem
               key={visualisationsItem.Bild.documentId}
               visualisierung={visualisationsItem}
+              plausibleEventName={contentItem.plausibleEventName}
             />
           );
         }

@@ -16,6 +16,7 @@ import {
 export type ContentVisualisation = {
   element: "visualisation";
   documentId: string;
+  plausibleEventName: string;
 };
 
 type ContentItemHighlightBox = {
@@ -62,7 +63,7 @@ export const methodsTasksProcesses: MethodsTasksProcesses = {
   tabs: [
     {
       title: "Intro",
-      plausibleEventName: "Tab+Bar+Intro",
+      plausibleEventName: "Tab+Bar.Intro",
       content: [
         {
           element: "infoBox",
@@ -86,12 +87,13 @@ export const methodsTasksProcesses: MethodsTasksProcesses = {
         {
           element: "visualisation",
           documentId: "m56ezco1mlzcci3sa6n53rzj",
+          plausibleEventName: "Content.Intro.Beispiel+Entscheidungsbaum",
         },
       ],
     },
     {
       title: "Anleitung",
-      plausibleEventName: "Tab+Bar+Anleitung",
+      plausibleEventName: "Tab+Bar.Anleitung",
       content: [
         {
           element: "infoBox",
@@ -156,11 +158,14 @@ export const methodsTasksProcesses: MethodsTasksProcesses = {
               {
                 href: ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX.url,
                 text: "PPT-Vorlage runterladen",
+                plausibleEventName: "Content.Anleitung.Link+Powerpoint+Vorlage",
               },
               {
                 href: "https://bmas.de.conceptboard.com/board/qh33-xcny-usde-7nc6-82cy",
                 text: "Conceptboard-Vorlage",
                 look: "tertiary",
+                plausibleEventName:
+                  "Content.Anleitung.Link+Conceptboard+Vorlage",
               },
             ],
             image: {
