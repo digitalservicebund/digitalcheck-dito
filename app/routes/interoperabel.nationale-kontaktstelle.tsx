@@ -1,4 +1,3 @@
-import { type MetaArgs } from "react-router";
 import Background from "~/components/Background";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
@@ -11,11 +10,11 @@ import RichText from "~/components/RichText";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { spoc } from "~/resources/content/interoperabel-nationale-kontaktstelle";
 import { ROUTE_INTEROPERABILITY_SPOC } from "~/resources/staticRoutes";
-import prependMetaTitle from "~/utils/metaTitle";
+import constructMetaTitle from "~/utils/metaTitle";
 
-export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_INTEROPERABILITY_SPOC.title, matches);
-};
+export function meta() {
+  return constructMetaTitle(ROUTE_INTEROPERABILITY_SPOC.title);
+}
 
 export default function SPOC() {
   const timelineItems: ListItemProps[] = spoc.timeline.items.map((item) => ({

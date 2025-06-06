@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { type MetaArgs, useLocation } from "react-router";
+import { useLocation } from "react-router";
 
 import Background from "~/components/Background";
 import Box from "~/components/Box";
@@ -13,7 +13,7 @@ import RichText from "~/components/RichText";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { support } from "~/resources/content/unterstuetzung";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
-import prependMetaTitle from "~/utils/metaTitle";
+import constructMetaTitle from "~/utils/metaTitle";
 
 type Offering = {
   title: string;
@@ -44,9 +44,9 @@ const {
   kontaktstelle,
 } = support;
 
-export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_SUPPORT.title, matches);
-};
+export function meta() {
+  return constructMetaTitle(ROUTE_SUPPORT.title);
+}
 
 function Testimonial() {
   return (

@@ -1,4 +1,3 @@
-import { type MetaArgs } from "react-router";
 import Background from "~/components/Background";
 import Container from "~/components/Container";
 import FeedbackForm from "~/components/FeedbackForm";
@@ -10,7 +9,7 @@ import {
   methodsFivePrinciples,
 } from "~/resources/content/methode-fuenf-prinzipien";
 import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
-import prependMetaTitle from "~/utils/metaTitle";
+import constructMetaTitle from "~/utils/metaTitle";
 // import {
 //   fetchStrapiData,
 //   GET_PRINZIPS_QUERY,
@@ -21,9 +20,9 @@ import Box from "~/components/Box";
 import LabelWithIcon from "~/components/LabelWithIcon";
 import { slugify } from "~/utils/utilFunctions";
 
-export const meta = ({ matches }: MetaArgs) => {
-  return prependMetaTitle(ROUTE_METHODS_PRINCIPLES.title, matches);
-};
+export function meta() {
+  return constructMetaTitle(ROUTE_METHODS_PRINCIPLES.title);
+}
 
 // NOTE: disabled for the 70 day quick implementation, will be enabled as soon as we have new examples for principles
 // export function loader({ request }: Route.LoaderArgs) {

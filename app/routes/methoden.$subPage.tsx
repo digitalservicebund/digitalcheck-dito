@@ -1,4 +1,4 @@
-import { type MetaArgs, useLoaderData } from "react-router";
+import { useLoaderData } from "react-router";
 
 import Background from "~/components/Background";
 import Box from "~/components/Box";
@@ -21,7 +21,7 @@ import {
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
   ROUTES,
 } from "~/resources/staticRoutes";
-import prependMetaTitle from "~/utils/metaTitle";
+import constructMetaTitle from "~/utils/metaTitle";
 import type { Route } from "./+types/methoden.$subPage";
 
 const contentMap = {
@@ -52,12 +52,9 @@ export function loader({ params }: Route.LoaderArgs) {
   return { route };
 }
 
-export const meta: Route.MetaFunction = ({ data, matches }) => {
-  return prependMetaTitle(
-    data ? data.route.title : ROUTE_METHODS.title,
-    matches as MetaArgs["matches"],
-  );
-};
+export function meta({ data }: Route.MetaArgs) {
+  return constructMetaTitle(data ? data.route.title : ROUTE_METHODS.title);
+}
 
 export default function Index() {
   const { route } = useLoaderData<typeof loader>();
