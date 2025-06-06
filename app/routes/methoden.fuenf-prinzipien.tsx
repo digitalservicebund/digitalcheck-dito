@@ -17,7 +17,6 @@ import constructMetaTitle from "~/utils/metaTitle";
 // } from "~/utils/strapiData.server";
 import { PrincipleNumber } from "~/components/Badge";
 import Box from "~/components/Box";
-import LabelWithIcon from "~/components/LabelWithIcon";
 import { slugify } from "~/utils/utilFunctions";
 
 export function meta() {
@@ -92,7 +91,7 @@ export default function FivePrinciples() {
               tagName: "h2",
               text: principle.title,
             }}
-            label={{
+            badge={{
               children: principle.label,
               principleNumber: principle.principleNumber as PrincipleNumber,
             }}
@@ -113,7 +112,10 @@ export default function FivePrinciples() {
               text: methodsFivePrinciples.nextStep.title,
               look: "ds-heading-03-reg",
             }}
-            label={{ text: LabelWithIcon(methodsFivePrinciples.nextStep) }}
+            badge={{
+              text: methodsFivePrinciples.nextStep.label,
+              Icon: methodsFivePrinciples.nextStep.icon,
+            }}
             content={{ markdown: methodsFivePrinciples.nextStep.text }}
             buttons={methodsFivePrinciples.nextStep.buttons}
           />

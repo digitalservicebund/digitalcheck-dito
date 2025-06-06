@@ -108,7 +108,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
       <Background backgroundColor="blue">
         <Container>
           <Box
-            label={{
+            badge={{
               text: `Prinzip ${prinzip.Nummer} – ${prinzip.Name}`,
             }}
             heading={{
@@ -120,7 +120,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
           <BlocksRenderer content={prinzip.Beschreibung}></BlocksRenderer>
         </Container>
       </Background>
-      <Container className="py-0">
+      <Container className="pb-0">
         <Tabs
           tabs={tabsForNavigation}
           initialActiveIndex={initialActiveIndexForTabs}

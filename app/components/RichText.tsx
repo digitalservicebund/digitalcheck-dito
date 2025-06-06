@@ -1,4 +1,5 @@
 import { marked, Marked, type Renderer, type Tokens } from "marked";
+import { getDownloadableExtensionName } from "~/utils/fileExtensionUtils";
 import twMerge from "~/utils/tailwindMerge";
 import { A11Y_MESSAGE_NEW_WINDOW } from "./Aria";
 import { openInNewIconString } from "./openInNewWindow";
@@ -38,13 +39,10 @@ const RichText = ({
           return newLinkHtml;
         }
 
-        const ext =
-          (href.endsWith(".pdf") && "PDF") ||
-          (href.endsWith(".docx") && "DOCX") ||
-          (href.endsWith(".xlsx") && "XLSX");
+        const ext = getDownloadableExtensionName(href);
 
         // Force the browser to download links to PDF/Excel files
-        if (ext === "PDF" || ext === "XLSX") {
+        if (ext) {
           return linkHtml.replace(
             /^<a /,
             `<a download title="${token.text} (${ext}-Datei)" `,

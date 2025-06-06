@@ -131,7 +131,7 @@ export default function SPOC() {
           ></Header>
         </Container>
       </Background>
-      <Container className="pt-0">
+      <Container>
         <Tabs tabs={tabsData} />
       </Container>
     </>

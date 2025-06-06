@@ -1,5 +1,6 @@
 import { useId } from "react";
 import twMerge from "~/utils/tailwindMerge";
+import Badge, { BadgeProps } from "./Badge";
 import { ButtonLinkProps, ButtonProps } from "./Button";
 import ButtonContainer from "./ButtonContainer";
 import Heading, { type HeadingProps } from "./Heading";
@@ -7,7 +8,7 @@ import RichText, { type RichTextProps } from "./RichText";
 
 export type BoxProps = {
   identifier?: string;
-  label?: HeadingProps;
+  badge?: BadgeProps;
   heading?: HeadingProps;
   content?: RichTextProps;
   className?: string;
@@ -16,7 +17,7 @@ export type BoxProps = {
 
 const Box = ({
   identifier,
-  label,
+  badge,
   heading,
   content,
   buttons,
@@ -31,15 +32,7 @@ const Box = ({
       id={identifier}
     >
       <div className="ds-stack ds-stack-8">
-        {label && (
-          <Heading
-            tagName="div"
-            look="ds-label-section text-gray-900"
-            id={labelId}
-          >
-            <span>{label.text || label.children}</span>
-          </Heading>
-        )}
+        {badge && <Badge {...badge} />}
         {heading && (
           <Heading
             tagName="h2"

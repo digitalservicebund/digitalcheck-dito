@@ -100,7 +100,7 @@ const ListItem = ({
                 )}
               >
                 {label && (
-                  <Badge className="self-start" hint>
+                  <Badge className="self-start" look="hint">
                     {label.children || label.text}
                   </Badge>
                 )}

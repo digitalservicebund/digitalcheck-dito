@@ -19,7 +19,7 @@ describe("InfoBoxItem", () => {
 
   describe("Top level elements", () => {
     it("shows the label", () => {
-      render(<InfoBoxItem label={{ text: "TestLabel" }} />);
+      render(<InfoBoxItem badge={{ text: "TestLabel" }} />);
       expect(screen.getByText("TestLabel")).toBeInTheDocument();
     });
 

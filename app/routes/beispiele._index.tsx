@@ -44,7 +44,7 @@ export default function Digitaltauglichkeit_index() {
           ></Header>
         </Container>
       </Background>
-      <Container className="py-0">
+      <Container className="pb-0">
         <Tabs tabs={tabsData} />
       </Container>
     </>
