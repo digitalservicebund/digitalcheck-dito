@@ -32,7 +32,7 @@ export const methodsFivePrinciples = {
       icon: ArrowCircleRightOutlined,
       principleNumber: 1,
       content:
-        "Viele Bürgerinnen, Bürger und Unternehmen sind an digitale Angebote gewöhnt und bevorzugen diese – sofern die digitale Kommunikation gut umgesetzt ist und ihren Bedürfnissen entspricht. Die Verwaltung kann digitale Daten schneller prüfen, bearbeiten und dokumentieren. Das Angebot sollte dabei immer inklusiv sein und es benötigt ggf. analoge Alternativen.",
+        "Viele Bürgerinnen, Bürger und Unternehmen sind an digitale Angebote gewöhnt und bevorzugen diese – sofern die digitale Kommunikation gut umgesetzt ist und ihren Bedürfnissen entspricht. Die Verwaltung kann digitale Daten schneller prüfen, bearbeiten und dokumentieren. Das Angebot sollte dabei immer inklusiv sein und es benötigt gegebenenfalls analoge Alternativen.",
       detailsSummary: {
         title: "So wenden Sie das Prinzip an",
         items: [
@@ -126,7 +126,7 @@ export const methodsFivePrinciples = {
             title: "Nutzen Sie bestehende technische Standards",
             text: "Nutzen Sie geeignete technische Standards, wie z. B. Datenaustauschformate, um den Austausch zwischen IT-Systemen zu begünstigen. Möglicherweise ist es sinnvoll, diese in der Regelung vorzuschreiben.\n\nInformationen zu Standards der öffentlichen Verwaltung erhalten Sie bei der FITKO, auf den Seiten des XÖV mit zugehörigem XRepository und auf der Verwaltungsdaten-Informationsplattform.",
             questions: [
-              "Welche Datenformate existieren bereits? Muss ggf. ein neuer Standard entwickelt oder ein bestehender Standard erweitert werden?",
+              "Welche Datenformate existieren bereits? Muss gegebenenfalls ein neuer Standard entwickelt oder ein bestehender Standard erweitert werden?",
               "Wurde beachtet, wie die Daten übertragen werden sollen?",
             ],
           },
@@ -171,7 +171,7 @@ export const methodsFivePrinciples = {
             text: "Open-Source bedeutet, dass der Quellcode eines IT-Systems veröffentlicht ist. Offene Spezifikationen beschreiben öffentlich, was ein IT-System genau leistet. Beide stärken Transparenz und Wiederverwendbarkeit (vgl. Koalitionsvertrag 18. Legislaturperiode oder Servicestandard). Dies ermöglicht die Nachvollziehbarkeit der technischen Lösung und verhindert die Abhängigkeit von einzelnen Software-Anbietern. Weitere Informationen erhalten Sie beim Zentrum für digitale Souveränität.",
             questions: [
               "Wird der Einsatz von Open-Source-Software ermöglicht und gefördert?",
-              "Werden ggf. bei Neuentwicklung Quelloffenheit und offene Spezifikationen vorgeschrieben?",
+              "Werden gegebenenfalls bei Neuentwicklung Quelloffenheit und offene Spezifikationen vorgeschrieben?",
             ],
           },
         ],
@@ -251,7 +251,7 @@ export const methodsFivePrinciples = {
               "Werden nur notwendige Daten verarbeitet?",
               "Haben Sie die rechtliche Basis geschaffen, um Daten zu verarbeiten? Ist der Zweck der Datenverarbeitung dargelegt?",
               "Können überholte Datenschutzbedürfnisse abgeschafft werden?",
-              "Genügt die Regelung den Anforderungen an den Datenschutz in allen beteiligten Ländern und Institutionen, ggf. auch in anderen EU-Staaten?",
+              "Genügt die Regelung den Anforderungen an den Datenschutz in allen beteiligten Ländern und Institutionen, gegebenenfalls auch in anderen EU-Staaten?",
             ],
           },
           {
