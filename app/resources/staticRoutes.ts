@@ -116,29 +116,29 @@ export const ROUTE_EXAMPLES_PRINCIPLES = createRoute(
   ROUTE_EXAMPLES,
 );
 export const ROUTE_EXAMPLES_DIGITAL_COMMUNICATION = createRoute(
-  "digitale-kommunikation-sicherstellen",
-  "Prinzip 1 in Regelungstexten",
+  "digitale-angebote-fuer-alle-nutzbar-gestalten",
+  "Die Prinzipien im Regelungstext",
   ROUTE_EXAMPLES_PRINCIPLES,
 );
 export const ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS = createRoute(
-  "wiederverwendung-von-daten-und-standards-ermoeglichen",
-  "Prinzip 2 in Regelungstexten",
+  "datenwiederverwendung-benoetigt-einheitliches-recht",
+  "Die Prinzipien im Regelungstext",
   ROUTE_EXAMPLES_PRINCIPLES,
 );
 export const ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY =
   createRoute(
-    "datenschutz-und-informationssicherheit-gewaehrleisten",
-    "Prinzip 3 in Regelungstexten",
+    "datenschutz-und-informationssicherheit-schaffen-vertrauen",
+    "Die Prinzipien im Regelungstext",
     ROUTE_EXAMPLES_PRINCIPLES,
   );
-export const ROUTE_EXAMPLES_CLEAR_REGULATIONS = createRoute(
-  "klare-regelungen-fuer-eine-digitale-ausfuehrung-finden",
-  "Prinzip 4 in Regelungstexten",
+export const ROUTE_EXAMPLES_AUTOMATION = createRoute(
+  "automatisierung-basiert-auf-eindeutigen-regelungen",
+  "Die Prinzipien im Regelungstext",
   ROUTE_EXAMPLES_PRINCIPLES,
 );
-export const ROUTE_EXAMPLES_AUTOMATION = createRoute(
-  "automatisierung-ermoeglichen",
-  "Prinzip 5 in Regelungstexten",
+export const ROUTE_EXAMPLES_ESTABLISHED_TECHNOLOGIES = createRoute(
+  "etablierte-technologien-ermoeglichen-effiziente-umsetzung",
+  "Die Prinzipien im Regelungstext",
   ROUTE_EXAMPLES_PRINCIPLES,
 );
 export const ROUTE_REGELUNGEN = createRoute(
@@ -194,13 +194,12 @@ export const ROUTES: Route[] = [
   ROUTE_DOCUMENTATION,
   ROUTE_INTEROPERABILITY,
   ROUTE_INTEROPERABILITY_SPOC,
-  // ROUTE_EXAMPLES,
-  // ROUTE_EXAMPLES_DIGITAL_COMMUNICATION,
-  // ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS,
-  // ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY,
-  // ROUTE_EXAMPLES_CLEAR_REGULATIONS,
-  // ROUTE_EXAMPLES_AUTOMATION,
-  // ROUTE_EXAMPLES_VISUALISATIONS,
+  ROUTE_EXAMPLES,
+  ROUTE_EXAMPLES_DIGITAL_COMMUNICATION,
+  ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS,
+  ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY,
+  ROUTE_EXAMPLES_AUTOMATION,
+  ROUTE_EXAMPLES_VISUALISATIONS,
   ROUTE_FUNDAMENTALS,
   ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_FUNDAMENTALS_METHODS,

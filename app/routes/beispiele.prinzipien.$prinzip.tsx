@@ -1,5 +1,3 @@
-import OpenInNewIcon from "@digitalservicebund/icons/OpenInNew";
-import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import {
   Link,
   useLoaderData,
@@ -7,13 +5,16 @@ import {
   useOutletContext,
 } from "react-router";
 
-import Background from "~/components/Background";
+import { ArrowCircleRightOutlined } from "@digitalservicebund/icons/index";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
 import CustomLink from "~/components/CustomLink";
 import Heading from "~/components/Heading";
+import Hero from "~/components/Hero";
+import InfoBox from "~/components/InfoBox";
 import InlineInfoList from "~/components/InlineInfoList";
 import ParagraphList from "~/components/ParagraphList";
+import Separator from "~/components/Separator";
 import Tabs, { TabItem } from "~/components/Tabs";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import {
@@ -92,7 +93,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
   const initialActiveIndexForTabs = activeTabIndex !== -1 ? activeTabIndex : 0;
 
   const tabsForNavigation: TabItem[] = prinzips.map((p) => ({
-    title: `Prinzip ${p.Nummer}`,
+    title: p.Kurzbezeichnung,
     path: `${ROUTE_EXAMPLES_PRINCIPLES.url}/${p.URLBezeichnung}`,
     content: null, // Content is handled by the page reload, not by Tabs component
   }));
@@ -105,21 +106,11 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
 
   return (
     <>
-      <Background backgroundColor="blue">
-        <Container>
-          <Box
-            label={{
-              text: `Prinzip ${prinzip.Nummer} – ${prinzip.Name}`,
-            }}
-            heading={{
-              text: `Prinzip ${prinzip.Nummer} in Regelungstexten`,
-              tagName: "h1",
-            }}
-            className="mb-16"
-          />
-          <BlocksRenderer content={prinzip.Beschreibung}></BlocksRenderer>
-        </Container>
-      </Background>
+      <Hero
+        badge={examplesRegelungen.badge}
+        heading={examplesRegelungen.title}
+      />
+
       <Container className="py-0">
         <Tabs
           tabs={tabsForNavigation}
@@ -127,6 +118,24 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
           onNavigateRequest={handleNavigationRequest}
         />
       </Container>
+
+      <Container className="ds-stack ds-stack-40 py-0">
+        <InfoBox
+          Icon={ArrowCircleRightOutlined}
+          items={[
+            {
+              content: prinzip.Beschreibung,
+              headline: { text: prinzip.Name, tagName: "h2" },
+              badge: {
+                children: examplesRegelungen.prinzipBadge,
+                principleNumber: prinzip.Nummer,
+              },
+            },
+          ]}
+        />
+        <Separator />
+      </Container>
+
       {GuteUmsetzungen.length > 0 && (
         <Container className="ds-stack ds-stack-64">
           {GuteUmsetzungen.map(
@@ -143,12 +152,11 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
                     prefetch="viewport"
                   >
                     <Heading
-                      tagName="h2"
+                      tagName="h3"
                       text={digitalcheck.Regelungsvorhaben.Titel}
                       look="ds-heading-03-bold"
                       className="text-link inline max-w-full"
                     />
-                    <OpenInNewIcon className="mb-6 ml-4 inline! scale-90 fill-blue-800" />
                   </Link>
                   <InlineInfoList
                     className="my-32 pl-16"

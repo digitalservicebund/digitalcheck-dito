@@ -21,11 +21,12 @@ import { cyrb53 } from "~/utils/utilFunctions";
 
 // Color mapping for different principles
 const HIGHLIGHT_COLORS = {
-  1: { background: "bg-yellow-300", border: "border-yellow-500" },
-  2: { background: "bg-blue-400", border: "border-blue-500" },
-  3: { background: "bg-red-300", border: "border-red-500" },
-  4: { background: "bg-orange-200", border: "border-orange-500" },
-  5: { background: "bg-green-300", border: "border-green-500" },
+  1: { background: "bg-principle-1", border: "border-principle-1" },
+  2: { background: "bg-principle-2", border: "border-principle-2" },
+  3: { background: "bg-principle-3", border: "border-principle-3" },
+  4: { background: "bg-principle-4", border: "border-principle-4" },
+  5: { background: "bg-principle-5", border: "border-principle-5" },
+  6: { background: "bg-principle-6", border: "border-principle-6" },
 } as const;
 
 const explanationID = (baseLabelID: string, number: number) =>
@@ -48,7 +49,7 @@ const RemoveHighlight = ({ children }: { children: ReactNode }) => {
 
 function PrincipleHighlight(
   { children }: { children: ReactNode },
-  principlesToShow: number[],
+  principlesToShow: Prinzip[],
   baseLabelID: string,
   onClick: (id: string, number: number) => void,
 ) {
@@ -56,17 +57,20 @@ function PrincipleHighlight(
   if (!parts) return null;
   if (!parts[1]) return parts[0];
 
+  const getPrinzipNameFromNumber = (num: number) =>
+    principlesToShow.find(({ Nummer }) => Nummer === num)?.Name;
+
   const number = Number(parts[1][1]) as keyof typeof HIGHLIGHT_COLORS;
   // Create a unique ID for the highlight based on the text content
   const highlightID = `markierung-${cyrb53(parts[0])}`;
 
-  return principlesToShow.includes(number) ? (
+  return principlesToShow.some(({ Nummer }) => Nummer === number) ? (
     <Link
       id={highlightID}
       replace
       to={`#${explanationID(baseLabelID, number)}`}
       onClick={() => onClick(highlightID, number)}
-      aria-label={`Erfüllt Prinzip ${number}: ${parts[0]}`}
+      aria-label={`Erfüllt Prinzip ${getPrinzipNameFromNumber(number)}: ${parts[0]}`}
       className="no-underline!"
     >
       <mark
@@ -76,7 +80,6 @@ function PrincipleHighlight(
         )}
       >
         {parts[0]}
-        <sup>{`P${number}`}</sup>
       </mark>
     </Link>
   ) : (
@@ -116,7 +119,7 @@ const PrincipleExplanation = ({
       <div className="flex content-center gap-4">
         <Heading
           tagName="h4"
-          text={`Prinzip ${erfuellung.Prinzip.Nummer} – ${erfuellung.Prinzip.Name}`}
+          text={`Prinzip: ${erfuellung.Prinzip.Name}`}
           look="ds-label-01-bold pb-8"
         />
         {highlightID && (
@@ -141,7 +144,7 @@ const AbsatzContent = ({
   principlesToShow,
 }: {
   absatzGroup: AbsatzWithNumber | AbsatzWithNumber[];
-  principlesToShow: number[];
+  principlesToShow: Prinzip[];
 }) => {
   // This ID is used to track which highlight was clicked on to provide a back link
   const [clickedHighlightID, setClickedHighlightID] = useState<string | null>(
@@ -247,6 +250,7 @@ function Paragraph({
   const principleNumbers = principlesToShow.map(
     (principle) => principle.Nummer,
   );
+
   const filteredAbsaetzeWithNumber = paragraph.Absaetze.map(
     (absatz, index) => ({
       ...absatz,
@@ -305,7 +309,7 @@ function Paragraph({
             <AbsatzContent
               key={"id" in absatzGroup ? absatzGroup.id : absatzGroup[0].number}
               absatzGroup={absatzGroup}
-              principlesToShow={principleNumbers}
+              principlesToShow={principlesToShow}
             />
           ))}
         </div>

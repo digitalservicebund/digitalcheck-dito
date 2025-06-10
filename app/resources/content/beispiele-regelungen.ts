@@ -1,4 +1,8 @@
 export const examplesRegelungen = {
+  badge: "Beispiele für Digitaltauglichkeit",
+  title: "Die Prinzipien im Regelungstext",
+  prinzipBadge: "Prinzip",
+
   breadcrumb: "Regelungsbeispiel",
   subtitle: [
     "Hier finden Sie alles zur Digitaltauglichkeit dieser Regelung.",

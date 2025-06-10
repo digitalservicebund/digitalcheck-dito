@@ -13,8 +13,8 @@ test.describe("basic example a11y test", () => {
       ![".pdf", ".xlsx", ".docx", ROUTE_SUPPORT.url].some((r) =>
         route.url.endsWith(r),
       ),
-  ).forEach((route) => {
-    test(`check a11y of ${route.title}`, async ({ page }) => {
+  ).forEach((route, i) => {
+    test(`check a11y of ${route.title} (${i})`, async ({ page }) => {
       // Listen for redirects and update URL if needed
       const response = await page.goto(route.url);
 

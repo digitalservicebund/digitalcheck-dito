@@ -10,6 +10,7 @@ import {
 } from "@headlessui/react";
 import React, { useEffect, useRef, useState } from "react";
 import { twJoin } from "tailwind-merge";
+import twMerge from "~/utils/tailwindMerge";
 
 export interface TabItem {
   title: string;
@@ -78,7 +79,7 @@ export default function Tabs({
       <div
         role="tablist"
         aria-label="Menü Navigation"
-        className="my-[40px] flex items-start border-b-[3px] border-blue-500 max-lg:hidden"
+        className="my-[40px] box-border flex items-stretch border-b-[3px] border-blue-500 max-lg:hidden"
       >
         {/* Tab buttons regular view */}
         {tabs.map((tab, index) => (
@@ -98,10 +99,10 @@ export default function Tabs({
             tabIndex={activeTab === index ? 0 : -1}
             onClick={() => handleTabInteraction(index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
-            className={twJoin(
-              "relative mr-[8px] -mb-[3px] h-[70px] cursor-pointer px-[24px] py-[10px] text-blue-800 hover:border-b-[3px] hover:border-blue-500 hover:bg-blue-100",
+            className={twMerge(
+              "relative -mb-[3px] box-border min-h-[70px] cursor-pointer border-b-[3px] border-blue-500 px-24 py-12 text-left hyphens-auto text-blue-800 hover:bg-blue-100",
               activeTab === index &&
-                "border-b-[4px] border-blue-800 bg-blue-100 font-bold hover:border-b-[4px] hover:border-blue-800",
+                "border-b-4 border-blue-800 bg-blue-100 font-bold",
               tab.plausibleEventName &&
                 `plausible-event-name=Tab+Bar.${tab.plausibleEventName}`,
             )}
