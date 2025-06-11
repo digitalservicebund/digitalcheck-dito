@@ -69,7 +69,7 @@ export const methodsFivePrinciples = {
             title: "Denken Sie Barrierefreiheit von Anfang an mit",
             text: "Digitale Angebote müssen nach [§ 12 a Behindertengleichstellungsgesetz](https://www.gesetze-im-internet.de/bgg/__12a.html) barrierefrei sein. Barrierefrei bedeutet, dass Menschen mit und ohne Behinderung das Angebot in gleicher Weise nutzen können. Da es viele unterschiedliche Arten von Behinderungen gibt, müssen viele Aspekte beachtet werden. Etwa die Aufbereitung für blinde und sehbehinderte Menschen oder Angebote in deutscher Gebärdensprache oder leichter Sprache.",
             questions: [
-              "Welche Regelwerke für die Umsetzung digitaler Barrierefreiheit sind für Ihr Vorhaben relevant? Nutzen Sie dafür beispielsweise den [Standardanforderungskatalog]().",
+              "Welche Regelwerke für die Umsetzung digitaler Barrierefreiheit sind für Ihr Vorhaben relevant? Nutzen Sie dafür beispielsweise den [Standardanforderungskatalog](https://www.barrierefreiheit-dienstekonsolidierung.bund.de/Webs/PB/DE/standardanforderungskatalog/standardanforderungskatalog-node.html).",
               "Haben Sie die Bedürfnisse von Menschen mit unterschiedlichen Arten von Behinderungen berücksichtigt?",
             ],
             wordingExample: `- "Die Beratung erfolgt in einer für den Leistungsberechtigten wahrnehmbaren Form" ([§ 106 Abs. 1 SGB IX](https://www.gesetze-im-internet.de/sgb_9_2018/__106.html)). So eine Formulierung muss in einer Verordnung ausgestaltet werden.
@@ -92,7 +92,7 @@ export const methodsFivePrinciples = {
       icon: ArrowCircleRightOutlined,
       principleNumber: 2,
       content:
-        "Normadressatinnen und -adressaten sowie umsetzende Behörden sparen Kosten und Zeit, wenn das [Once-Only-Prinzip]() konsequent angewendet wird – also wenn Daten nur einmal angegeben und dann wiederverwendet werden. Die Grundlage dafür sind harmonisierte Rechtsbegriffe, ein datenschutzkonformer Austausch und die Berücksichtigung etablierter technischer Standards.",
+        "Normadressatinnen und -adressaten sowie umsetzende Behörden sparen Kosten und Zeit, wenn das [Once-Only-Prinzip](https://www.cio.bund.de/Webs/CIO/DE/digitale-loesungen/digitale-verwaltung/registermodernisierung/registermodernisierung-node.html) konsequent angewendet wird – also wenn Daten nur einmal angegeben und dann wiederverwendet werden. Die Grundlage dafür sind harmonisierte Rechtsbegriffe, ein datenschutzkonformer Austausch und die Berücksichtigung etablierter technischer Standards.",
       detailsSummary: {
         title: "So wenden Sie das Prinzip an",
         items: [
