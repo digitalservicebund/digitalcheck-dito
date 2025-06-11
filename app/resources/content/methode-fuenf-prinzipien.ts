@@ -1,7 +1,6 @@
 import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
 import { HeadingProps } from "~/components/Heading";
 import {
-  ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_METHODS,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
   ROUTE_SUPPORT,
@@ -50,13 +49,13 @@ Welche Prinzipien besonders wichtig sind und wie Sie diese anwenden, hängt davo
           },
           {
             title: "Formulieren Sie die Regelung technologieoffen",
-            text: `Wenn Sie Übertragungswege – wie DE-Mail oder PDF – festlegen, riskieren Sie, dass Ihre Regelung bald nicht mehr dem Stand der Technik entspricht. Andererseits kann die Nutzung etablierter Basisdienste die Umsetzung erleichtern und die Anwendung für Nutzende vereinfachen – im Sinne des Prinzips „[Etablierte Technologien ermöglichen effiziente Umsetzung](${ROUTE_FUNDAMENTALS_PRINCIPLES.url}#etablierte-technologien-erm-glichen-effiziente-umsetzung)“. Ob das sinnvoll ist, hängt vom konkreten Einzelfall ab.`,
+            text: "Wenn Sie Übertragungswege – wie DE-Mail oder PDF – festlegen, riskieren Sie, dass Ihre Regelung bald nicht mehr dem Stand der Technik entspricht. Andererseits kann die Nutzung etablierter Basisdienste die Umsetzung erleichtern und die Anwendung für Nutzende vereinfachen – im Sinne des Prinzips „[Etablierte Technologien ermöglichen effiziente Umsetzung](#etablierte-technologien-erm-glichen-effiziente-umsetzung)“. Ob das sinnvoll ist, hängt vom konkreten Einzelfall ab.",
             questions: [
               "Können Sie auf die Nennung spezifischer Technologien verzichten?",
               "Können Sie auf etablierte Lösungen – sogenannte Basisdienste – zurückgreifen?",
             ],
             wordingExample:
-              '"Der Antrag ist elektronisch oder schriftlich zu stellen." oder "Der Antrag ist zu stellen".',
+              "„Der Antrag ist elektronisch oder schriftlich zu stellen.“ oder „Der Antrag ist zu stellen.“",
           },
           {
             title: "Denken Sie an Antragsstellung, Bearbeitung und Bescheid",
@@ -150,7 +149,8 @@ Welche Prinzipien besonders wichtig sind und wie Sie diese anwenden, hängt davo
       title: "Etablierte Technologien ermöglichen effiziente Umsetzung",
       icon: ArrowCircleRightOutlined,
       principleNumber: 3,
-      content: `Digitale Angebote können schneller bereitgestellt sowie günstiger entwickelt und betrieben werden, wenn sie auf bestehenden Technologien aufbauen. Offene, standardisierte Schnittstellen und Open-Source erhöhen die [Sicherheit der Angebote](${ROUTE_FUNDAMENTALS_PRINCIPLES.url}#datenschutz-und-informationssicherheit-schaffen-vertrauen) und fördern die Interoperabilität.`,
+      content:
+        "Digitale Angebote können schneller bereitgestellt sowie günstiger entwickelt und betrieben werden, wenn sie auf bestehenden Technologien aufbauen. Offene, standardisierte Schnittstellen und Open-Source erhöhen die [Sicherheit der Angebote](#datenschutz-und-informationssicherheit-schaffen-vertrauen) und fördern die Interoperabilität.",
       detailsSummary: {
         title: "So wenden Sie das Prinzip an",
         items: [
@@ -208,7 +208,7 @@ Welche Prinzipien besonders wichtig sind und wie Sie diese anwenden, hängt davo
               "Gibt es bereits Vorschläge für Automatisierungspotenziale aus der Umsetzung?",
               "Handelt es sich um eine gebundene Entscheidung?",
               "Erlaubt die Regelung eine automatisierte Fallbearbeitung?",
-              `Ist ein komplett antragsloses Verfahren möglich? Beachten Sie hierfür auch das Prinzip [Datenwiederverwendung benötigt einheitliches Recht](${ROUTE_FUNDAMENTALS_PRINCIPLES.url}#datenwiederverwendung-ben-tigt-einheitliches-recht).`,
+              "Ist ein komplett antragsloses Verfahren möglich? Beachten Sie hierfür auch das Prinzip „[Datenwiederverwendung benötigt einheitliches Recht](#datenwiederverwendung-ben-tigt-einheitliches-recht)“.",
             ],
           },
           {
@@ -274,7 +274,7 @@ Welche Prinzipien besonders wichtig sind und wie Sie diese anwenden, hängt davo
     label: "So geht es weiter:",
     icon: ArrowCircleRightOutlined,
     title: "2.5. Technische Umsetzbarkeit sicherstellen",
-    text: `Analysieren Sie die Auswirkungen Ihres Regelungsvorhabens auf bestehende und neue Abläufe und IT-Systeme. Damit stellen Sie die technische Machbarkeit sicher. Greifen Sie dafür auf das Fachwissen der umsetzenden Akteurinnen und Akteure zurück.`,
+    text: "Analysieren Sie die Auswirkungen Ihres Regelungsvorhabens auf bestehende und neue Abläufe und IT-Systeme. Damit stellen Sie die technische Machbarkeit sicher. Greifen Sie dafür auf das Fachwissen der umsetzenden Akteurinnen und Akteure zurück.",
     buttons: [
       {
         look: "tertiary" as const,
@@ -288,7 +288,7 @@ Welche Prinzipien besonders wichtig sind und wie Sie diese anwenden, hängt davo
     icon: ArrowCircleRightOutlined,
     title:
       "Verfassen Sie den Regelungsentwurf und dokumentieren Sie Ihre Entscheidungen",
-    text: `Die gesammelten Erkenntnisse und Ergebnisse helfen Ihnen dabei, Aspekte der Digitaltauglichkeit in Ihrem Regelungsentwurf zu berücksichtigen. Diese Entscheidungen dokumentieren Sie in einem Fragebogen.`,
+    text: "Die gesammelten Erkenntnisse und Ergebnisse helfen Ihnen dabei, Aspekte der Digitaltauglichkeit in Ihrem Regelungsentwurf zu berücksichtigen. Diese Entscheidungen dokumentieren Sie in einem Fragebogen.",
     buttons: [
       {
         text: "Zu „Erarbeiten“",
