@@ -1,8 +1,10 @@
 import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
 import { HeadingProps } from "~/components/Heading";
 import {
+  ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_METHODS,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
+  ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
 
 export type DetailsSummary = {
@@ -19,8 +21,9 @@ export type DetailsSummaryItem = {
 
 export const methodsFivePrinciples = {
   title: "Chancen und Hindernisse der digitalen Umsetzung identifizieren",
-  subTitle:
-    "Die folgenden Prinzipien helfen Ihnen dabei, Chancen der digitalen Umsetzung auszuschöpfen und Hindernisse zu erkennen. Nutzen Sie die Prinzipien auch, um mit beteiligten Akteurinnen und Akteuren über die Umsetzung zu sprechen.\n\nWelche Prinzipien besonders wichtig sind und wie Sie diese anwenden, hängt davon ab, worum es in Ihrem Vorhaben geht – und ob Sie ein Gesetz oder eine Verordnung entwerfen. Sie sind sich unsicher oder wollen über Ihre Einordnung reflektieren, dann nutzen Sie gern unsere [vertraulichen Unterstützungs- und Supportangebote](https://erarbeiten.digitalcheck.bund.de/unterstuetzung).",
+  subTitle: `Die folgenden Prinzipien helfen Ihnen dabei, Chancen der digitalen Umsetzung auszuschöpfen und Hindernisse zu erkennen. Nutzen Sie die Prinzipien auch, um mit beteiligten Akteurinnen und Akteuren über die Umsetzung zu sprechen.
+
+Welche Prinzipien besonders wichtig sind und wie Sie diese anwenden, hängt davon ab, worum es in Ihrem Vorhaben geht – und ob Sie ein Gesetz oder eine Verordnung entwerfen. Sie sind sich unsicher oder wollen über Ihre Einordnung reflektieren, dann nutzen Sie gern unsere [vertraulichen Unterstützungs- und Supportangebote](${ROUTE_SUPPORT.url}).`,
   buttonText: "Beispiele betrachten",
   wordingExampleTitle: "**Formulierungsbeispiel:**",
   questionsTitle: "**Fragen Sie sich:**",
@@ -47,7 +50,7 @@ export const methodsFivePrinciples = {
           },
           {
             title: "Formulieren Sie die Regelung technologieoffen",
-            text: "Wenn Sie Übertragungswege – wie DE-Mail oder PDF – festlegen, riskieren Sie, dass Ihre Regelung bald nicht mehr dem Stand der Technik entspricht. Andererseits kann die Nutzung etablierter Basisdienste die Umsetzung erleichtern und die Anwendung für Nutzende vereinfachen – im Sinne des Prinzips „[Etablierte Technologien ermöglichen effiziente Umsetzung](https://erarbeiten.digitalcheck.bund.de/grundlagen/fuenf-prinzipien#etablierte-technologien-erm-glichen-effiziente-umsetzung)“. Ob das sinnvoll ist, hängt vom konkreten Einzelfall ab.",
+            text: `Wenn Sie Übertragungswege – wie DE-Mail oder PDF – festlegen, riskieren Sie, dass Ihre Regelung bald nicht mehr dem Stand der Technik entspricht. Andererseits kann die Nutzung etablierter Basisdienste die Umsetzung erleichtern und die Anwendung für Nutzende vereinfachen – im Sinne des Prinzips „[Etablierte Technologien ermöglichen effiziente Umsetzung](${ROUTE_FUNDAMENTALS_PRINCIPLES.url}#etablierte-technologien-erm-glichen-effiziente-umsetzung)“. Ob das sinnvoll ist, hängt vom konkreten Einzelfall ab.`,
             questions: [
               "Können Sie auf die Nennung spezifischer Technologien verzichten?",
               "Können Sie auf etablierte Lösungen – sogenannte Basisdienste – zurückgreifen?",
@@ -147,8 +150,7 @@ export const methodsFivePrinciples = {
       title: "Etablierte Technologien ermöglichen effiziente Umsetzung",
       icon: ArrowCircleRightOutlined,
       principleNumber: 3,
-      content:
-        "Digitale Angebote können schneller bereitgestellt sowie günstiger entwickelt und betrieben werden, wenn sie auf bestehenden Technologien aufbauen. Offene, standardisierte Schnittstellen und Open-Source erhöhen die [Sicherheit der Angebote](https://erarbeiten.digitalcheck.bund.de/grundlagen/fuenf-prinzipien#datenschutz-und-informationssicherheit-schaffen-vertrauen) und fördern die Interoperabilität.",
+      content: `Digitale Angebote können schneller bereitgestellt sowie günstiger entwickelt und betrieben werden, wenn sie auf bestehenden Technologien aufbauen. Offene, standardisierte Schnittstellen und Open-Source erhöhen die [Sicherheit der Angebote](${ROUTE_FUNDAMENTALS_PRINCIPLES.url}#datenschutz-und-informationssicherheit-schaffen-vertrauen) und fördern die Interoperabilität.`,
       detailsSummary: {
         title: "So wenden Sie das Prinzip an",
         items: [
@@ -206,7 +208,7 @@ export const methodsFivePrinciples = {
               "Gibt es bereits Vorschläge für Automatisierungspotenziale aus der Umsetzung?",
               "Handelt es sich um eine gebundene Entscheidung?",
               "Erlaubt die Regelung eine automatisierte Fallbearbeitung?",
-              "Ist ein komplett antragsloses Verfahren möglich? Beachten Sie hierfür auch das Prinzip [Datenwiederverwendung benötigt einheitliches Recht](https://erarbeiten.digitalcheck.bund.de/grundlagen/fuenf-prinzipien#datenwiederverwendung-ben-tigt-einheitliches-recht).",
+              `Ist ein komplett antragsloses Verfahren möglich? Beachten Sie hierfür auch das Prinzip [Datenwiederverwendung benötigt einheitliches Recht](${ROUTE_FUNDAMENTALS_PRINCIPLES.url}#datenwiederverwendung-ben-tigt-einheitliches-recht).`,
             ],
           },
           {
