@@ -94,6 +94,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
 
   const tabsForNavigation: TabItem[] = prinzips.map((p) => ({
     title: p.Kurzbezeichnung,
+    plausibleEventName: `Tab+Bar+${p.Kurzbezeichnung.replaceAll(" ", "+")}`,
     path: `${ROUTE_EXAMPLES_PRINCIPLES.url}/${p.URLBezeichnung}`,
     content: null, // Content is handled by the page reload, not by Tabs component
   }));
