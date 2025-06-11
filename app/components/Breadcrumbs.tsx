@@ -36,7 +36,7 @@ export default function Breadcrumbs() {
           <span className="mx-8">/</span>
           <span>
             {idx === arr.length - 1 ? (
-              <span>{breadcrumb.title}</span>
+              <span>{breadcrumb.extraBreadcrumbTitle || breadcrumb.title}</span>
             ) : (
               <Link to={breadcrumb.url} className="text-link increase-tap-area">
                 {breadcrumb.title}

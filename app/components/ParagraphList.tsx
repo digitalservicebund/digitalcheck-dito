@@ -71,7 +71,8 @@ function PrincipleHighlight(
       to={`#${explanationID(baseLabelID, number)}`}
       onClick={() => onClick(highlightID, number)}
       aria-label={`Erfüllt Prinzip ${getPrinzipNameFromNumber(number)}: ${parts[0]}`}
-      className="no-underline!"
+      title={`Erfüllt Prinzip ${getPrinzipNameFromNumber(number)}`}
+      className="cursor-help no-underline hover:underline"
     >
       <mark
         className={twJoin(

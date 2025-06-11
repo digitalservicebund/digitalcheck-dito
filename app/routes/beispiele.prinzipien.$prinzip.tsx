@@ -133,7 +133,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
             },
           ]}
         />
-        <Separator />
+        {GuteUmsetzungen.length > 0 && <Separator />}
       </Container>
 
       {GuteUmsetzungen.length > 0 && (

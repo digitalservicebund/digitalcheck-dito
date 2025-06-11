@@ -21,6 +21,7 @@ const groupRoutesByParent = (routes: Route[]): RouteWithChildren[] => {
   );
 
   routes.forEach((route) => {
+    if (route.hideInSitemap) return;
     const parentRoute = routeMap.get(route.parent?.url ?? "");
     if (parentRoute) {
       parentRoute.children.push(routeMap.get(route.url)!);

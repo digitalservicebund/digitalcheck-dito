@@ -7,6 +7,8 @@ export type Route = {
   url: string;
   title: string;
   parent?: Route;
+  hideInSitemap?: boolean;
+  extraBreadcrumbTitle?: string;
 };
 
 // LANDING ROUTE AS ROOT
@@ -15,10 +17,18 @@ export const ROUTE_LANDING = {
   title: "Startseite",
 };
 
-const createRoute = (path: string, title: string, parent?: Route): Route => ({
+const createRoute = (
+  path: string,
+  title: string,
+  parent?: Route,
+  hideInSitemap?: boolean,
+  extraBreadcrumbTitle?: string,
+): Route => ({
   url: `${removeTrailingSlash(parent?.url ?? "")}/${path}`,
   title,
   parent: parent ?? ROUTE_LANDING,
+  hideInSitemap,
+  extraBreadcrumbTitle,
 });
 
 // TMP ROUTES
@@ -117,30 +127,40 @@ export const ROUTE_EXAMPLES_PRINCIPLES = createRoute(
 );
 export const ROUTE_EXAMPLES_DIGITAL_COMMUNICATION = createRoute(
   "digitale-angebote-fuer-alle-nutzbar-gestalten",
-  "Die Prinzipien im Regelungstext",
+  "Digitale Angebote",
   ROUTE_EXAMPLES_PRINCIPLES,
+  true,
+  "Die Prinzipien im Regelungstext",
 );
 export const ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS = createRoute(
   "datenwiederverwendung-benoetigt-einheitliches-recht",
-  "Die Prinzipien im Regelungstext",
+  "Datenwiederverwendung",
   ROUTE_EXAMPLES_PRINCIPLES,
+  true,
+  "Die Prinzipien im Regelungstext",
+);
+export const ROUTE_EXAMPLES_ESTABLISHED_TECHNOLOGIES = createRoute(
+  "etablierte-technologien-ermoeglichen-effiziente-umsetzung",
+  "Etablierte Technologien",
+  ROUTE_EXAMPLES_PRINCIPLES,
+  true,
+  "Die Prinzipien im Regelungstext",
+);
+export const ROUTE_EXAMPLES_AUTOMATION = createRoute(
+  "automatisierung-basiert-auf-eindeutigen-regelungen",
+  "Automatisierung",
+  ROUTE_EXAMPLES_PRINCIPLES,
+  true,
+  "Die Prinzipien im Regelungstext",
 );
 export const ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY =
   createRoute(
     "datenschutz-und-informationssicherheit-schaffen-vertrauen",
-    "Die Prinzipien im Regelungstext",
+    "Datenschutz und Informationssicherheit",
     ROUTE_EXAMPLES_PRINCIPLES,
+    true,
+    "Die Prinzipien im Regelungstext",
   );
-export const ROUTE_EXAMPLES_AUTOMATION = createRoute(
-  "automatisierung-basiert-auf-eindeutigen-regelungen",
-  "Die Prinzipien im Regelungstext",
-  ROUTE_EXAMPLES_PRINCIPLES,
-);
-export const ROUTE_EXAMPLES_ESTABLISHED_TECHNOLOGIES = createRoute(
-  "etablierte-technologien-ermoeglichen-effiziente-umsetzung",
-  "Die Prinzipien im Regelungstext",
-  ROUTE_EXAMPLES_PRINCIPLES,
-);
 export const ROUTE_REGELUNGEN = createRoute(
   "regelungen",
   "Gesetze",
@@ -197,8 +217,10 @@ export const ROUTES: Route[] = [
   ROUTE_EXAMPLES,
   ROUTE_EXAMPLES_DIGITAL_COMMUNICATION,
   ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS,
-  ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY,
+  ROUTE_EXAMPLES_ESTABLISHED_TECHNOLOGIES,
   ROUTE_EXAMPLES_AUTOMATION,
+  ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY,
+  ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_EXAMPLES_VISUALISATIONS,
   ROUTE_FUNDAMENTALS,
   ROUTE_FUNDAMENTALS_PRINCIPLES,

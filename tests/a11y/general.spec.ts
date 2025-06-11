@@ -28,11 +28,8 @@ test.describe("basic example a11y test", () => {
     });
   });
 
-  // NOTE: 70-tage tmp skipped
-  test.skip("check a11y of example pages", async ({ page }) => {
-    await page.goto(
-      `${ROUTE_EXAMPLES_PRINCIPLES.url}/digitale-kommunikation-sicherstellen`,
-    );
+  test("check a11y of example pages", async ({ page }) => {
+    await page.goto(ROUTE_EXAMPLES_PRINCIPLES.url);
 
     const principleScanResults = await new AxeBuilder({ page }).analyze();
     expect(principleScanResults.violations).toEqual([]);
