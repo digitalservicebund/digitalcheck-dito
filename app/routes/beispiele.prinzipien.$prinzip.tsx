@@ -107,10 +107,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
 
   return (
     <>
-      <Hero
-        badge={examplesRegelungen.badge}
-        heading={examplesRegelungen.title}
-      />
+      <Hero badge={examplesRegelungen.badge}>{examplesRegelungen.title}</Hero>
 
       <Container className="py-0">
         <Tabs
