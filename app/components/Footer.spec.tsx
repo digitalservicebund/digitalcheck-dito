@@ -11,7 +11,6 @@ const RouterStubFooter = createRoutesStub([
 
 describe("Footer Component", () => {
   it("Renders correctly", () => {
-    window.history.pushState({}, "Footer", "/");
     const { container } = render(<RouterStubFooter />);
 
     expect(container).toMatchSnapshot();
