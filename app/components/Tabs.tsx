@@ -100,7 +100,7 @@ export default function Tabs({
             onClick={() => handleTabInteraction(index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
             className={twMerge(
-              "relative -mb-[3px] box-border min-h-[70px] cursor-pointer border-b-[3px] border-blue-500 px-24 py-12 text-left hyphens-auto text-blue-800 hover:bg-blue-100",
+              "relative -mb-[3px] box-border min-h-[70px] cursor-pointer border-b-[3px] border-blue-500 px-24 py-12 text-left leading-tight hyphens-auto text-blue-800 hover:bg-blue-100",
               activeTab === index &&
                 "border-b-4 border-blue-800 bg-blue-100 font-bold",
               tab.plausibleEventName &&
