@@ -1,10 +1,14 @@
+import { DrawOutlined } from "@digitalservicebund/icons";
 import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
 import { HeadingProps } from "~/components/Heading";
 import {
+  ROUTE_EXAMPLES,
   ROUTE_METHODS,
+  ROUTE_METHODS_TASKS_PROCESSES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
   ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
+import { dedent } from "~/utils/dedentMultilineStrings";
 
 export type DetailsSummary = {
   title: string;
@@ -20,13 +24,39 @@ export type DetailsSummaryItem = {
 
 export const methodsFivePrinciples = {
   title: "Chancen und Hindernisse der digitalen Umsetzung identifizieren",
-  subTitle: `Die folgenden Prinzipien helfen Ihnen dabei, Chancen der digitalen Umsetzung auszuschöpfen und Hindernisse zu erkennen. Nutzen Sie die Prinzipien auch, um mit beteiligten Akteurinnen und Akteuren über die Umsetzung zu sprechen.
+  subTitle: dedent`
+    Die folgenden Prinzipien helfen Ihnen dabei, Chancen der digitalen Umsetzung auszuschöpfen und Hindernisse zu erkennen. Nutzen Sie die Prinzipien auch, um mit beteiligten Akteurinnen und Akteuren über die Umsetzung zu sprechen.
 
-Welche Prinzipien besonders wichtig sind und wie Sie diese anwenden, hängt davon ab, worum es in Ihrem Vorhaben geht – und ob Sie ein Gesetz oder eine Verordnung entwerfen. Sie sind sich unsicher oder wollen über Ihre Einordnung reflektieren, dann nutzen Sie gern unsere [vertraulichen Unterstützungs- und Supportangebote](${ROUTE_SUPPORT.url}).`,
+    Welche Prinzipien besonders wichtig sind und wie Sie diese anwenden, hängt davon ab, worum es in Ihrem Vorhaben geht – und ob Sie ein Gesetz oder eine Verordnung entwerfen. Sie sind sich unsicher oder wollen über Ihre Einordnung reflektieren, dann nutzen Sie gern unsere [vertraulichen Unterstützungs- und Supportangebote](${ROUTE_SUPPORT.url}).
+  `,
   buttonText: "Beispiele betrachten",
   wordingExampleTitle: "**Formulierungsbeispiel:**",
   questionsTitle: "**Fragen Sie sich:**",
   contentOverviewTitle: "Prinzipien",
+  instruction: {
+    badge: {
+      Icon: DrawOutlined,
+      text: "Anleitung",
+    },
+    title: "So nutzen Sie die fünf Prinzipien für Ihr Regelungsvorhaben",
+    items: [
+      {
+        headline: "Als konkrete Umsetzungstipps",
+        content:
+          "Nutzen Sie die Tipps als Inspiration, um in Ihrem Regelungsvorhaben die Möglichkeiten des Digitalen auszuschöpfen und Hindernisse zu erkennen.",
+      },
+      {
+        headline: "Als Überprüfung für den Gesamtprozess",
+        content: `Besonders erkenntnisreich sind die fünf Prinzipien, wenn Sie diese auf eine Skizze des geplanten Umsetzungsprozesses anwenden. Skizzieren Sie Schritt für Schritt die Umsetzung und markieren Sie die Stellen, an denen eines oder mehrere Prinzipien wichtig sind. Mehr Informationen und Anleitung zur Visualisierungen finden Sie auf [visualisieren.digitalcheck.bund.de](${ROUTE_METHODS_TASKS_PROCESSES.url}).`,
+      },
+      {
+        headline: "Als Startpunkt für ihren Regelungstext",
+        content:
+          "Nutzen Sie die gesammelten Beispiele als Startpunkt für Ihre Formulierungen. Bauen Sie auf Formulierungen auf, oder lassen Sie sich durch die Wirklogiken Ihrer Kolleginnen und Kollegen inspirieren. Sie finden gute Formulierungen, Einordnungen und deren Kontext im Regelungstext in den Beispielen.",
+        link: { url: ROUTE_EXAMPLES.url, text: "Beispiele betrachten" },
+      },
+    ],
+  },
   principles: [
     {
       label: "Prinzip",
@@ -164,8 +194,9 @@ Welche Prinzipien besonders wichtig sind und wie Sie diese anwenden, hängt davo
               "Sind EU-Vorgaben – wie [eIDAS](https://www.personalausweisportal.de/Webs/PA/DE/verwaltung/eIDAS-verordnung-der-EU/eidas-verordnung-der-eu-node.html) oder [NIS2](https://www.bsi.bund.de/DE/Themen/Regulierte-Wirtschaft/NIS-2-regulierte-Unternehmen/NIS-2-FAQ/FAQ-zu-NIS-2_node.html) – oder [technische Richtlinien des BSI](https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/Technische-Richtlinien/technische-richtlinien_node.html) relevant?",
               "Wurde untersucht, ob bereits [existierende europäische Interoperabilitätslösungen](https://interoperable-europe.ec.europa.eu/solutions) wiederverwendet werden könnten?",
             ],
-            wordingExample: `- Sie können die Technologie bereits im Gesetz festschreiben und in der Verordnung ausdefinieren. Tauschen Sie sich dafür mit den umsetzenden Akteurinnen und Akteuren aus und nutzen Sie unseren Support.
-- Beispiele für technologieoffene Formulierungen finden Sie z. B. im Handbuch der Rechtsförmlichkeit ([4. Auflage, Teil B, 3.4. Verweisungen auf technische Regeln](https://www.bmj.de/SharedDocs/Publikationen/DE/Fachpublikationen/Handbuch_der_Rechtsfoermlichkeit_4.pdf?__blob=publicationFile&v=1#page=95))`,
+            wordingExample: dedent`
+              - Sie können die Technologie bereits im Gesetz festschreiben und in der Verordnung ausdefinieren. Tauschen Sie sich dafür mit den umsetzenden Akteurinnen und Akteuren aus und nutzen Sie unseren Support.
+              - Beispiele für technologieoffene Formulierungen finden Sie z. B. im Handbuch der Rechtsförmlichkeit ([4. Auflage, Teil B, 3.4. Verweisungen auf technische Regeln](https://www.bmj.de/SharedDocs/Publikationen/DE/Fachpublikationen/Handbuch_der_Rechtsfoermlichkeit_4.pdf?__blob=publicationFile&v=1#page=95))`,
           },
           {
             title:

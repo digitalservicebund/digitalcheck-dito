@@ -71,7 +71,7 @@ export default function DropdownContentList({
               >
                 <div className="ds-label-02-reg lg:ds-label-01-bold">
                   {option.isNewTitle && (
-                    <Badge className="mr-8" hint>
+                    <Badge className="mr-8" look="hint">
                       NEU
                     </Badge>
                   )}
@@ -83,7 +83,7 @@ export default function DropdownContentList({
                 )}
                 {option.newContent && (
                   <div className="max-lg:hidden">
-                    <Badge className="mr-8" hint>
+                    <Badge className="mr-8" look="hint">
                       NEU
                     </Badge>
                     <span>{option.newContent}</span>

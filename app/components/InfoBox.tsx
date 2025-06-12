@@ -25,7 +25,7 @@ const InfoBox = ({
       {Icon && <Icon className="hidden size-80 fill-blue-500 sm:block" />}
       <div className="ds-stack ds-stack-8 scroll-my-40" id={identifier}>
         {badge && (
-          <Badge className="self-start" principleNumber={badge.principleNumber}>
+          <Badge principleNumber={badge.principleNumber}>
             {badge.children}
           </Badge>
         )}

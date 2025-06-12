@@ -1,52 +1,26 @@
 import Background from "~/components/Background";
+import Badge, { PrincipleNumber } from "~/components/Badge";
+import Box from "~/components/Box";
 import Container from "~/components/Container";
 import FeedbackForm from "~/components/FeedbackForm";
 import Header from "~/components/Header";
+import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
+import InfoBoxItem from "~/components/InfoBoxItem";
+import LabelWithIcon from "~/components/LabelWithIcon";
 import LinkListBox from "~/components/LinkListBox";
+import Separator from "~/components/Separator";
 import {
   getDetailsSummary,
   methodsFivePrinciples,
 } from "~/resources/content/methode-fuenf-prinzipien";
 import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
-// import {
-//   fetchStrapiData,
-//   GET_PRINZIPS_QUERY,
-//   Prinzip,
-// } from "~/utils/strapiData.server";
-import { PrincipleNumber } from "~/components/Badge";
-import Box from "~/components/Box";
-import LabelWithIcon from "~/components/LabelWithIcon";
 import { slugify } from "~/utils/utilFunctions";
 
 export function meta() {
   return constructMetaTitle(ROUTE_METHODS_PRINCIPLES.title);
 }
-
-// NOTE: disabled for the 70 day quick implementation, will be enabled as soon as we have new examples for principles
-// export function loader({ request }: Route.LoaderArgs) {
-//   const referer = request.headers.get("referer");
-//   let pathname = "/";
-
-//   if (referer) {
-//     pathname = new URL(referer).pathname;
-//   }
-
-//   // const prinzipData = await fetchStrapiData<{ prinzips: Prinzip[] }>(
-//   //   GET_PRINZIPS_QUERY,
-//   // );
-
-//   // if ("error" in prinzipData) {
-//   //   // eslint-disable-next-line @typescript-eslint/only-throw-error
-//   //   throw new Response(prinzipData.error, { status: 400 });
-//   // }
-
-//   return {
-//     referrer: pathname,
-//     // prinzips: prinzipData.prinzips,
-//   };
-// }
 
 export default function FivePrinciples() {
   const feedbackOptions = [
@@ -81,6 +55,34 @@ export default function FivePrinciples() {
           />
         </Container>
       </Background>
+
+      <Container className="ds-stack ds-stack-40">
+        <div>
+          <Badge Icon={methodsFivePrinciples.instruction.badge.Icon}>
+            {methodsFivePrinciples.instruction.badge.text}
+          </Badge>
+          <Heading tagName="h2">
+            {methodsFivePrinciples.instruction.title}
+          </Heading>
+        </div>
+
+        <ul className="list-unstyled ds-stack ds-stack-40">
+          {methodsFivePrinciples.instruction.items.map((item) => (
+            <InfoBoxItem
+              key={item.headline}
+              headline={{ text: item.headline }}
+              content={item.content}
+              linkList={
+                item.link && {
+                  links: [{ title: item.link.text, url: item.link.url }],
+                }
+              }
+            ></InfoBoxItem>
+          ))}
+        </ul>
+
+        <Separator />
+      </Container>
 
       {methodsFivePrinciples.principles.map((principle) => (
         <Container className="pb-64" key={slugify(principle.title)}>
