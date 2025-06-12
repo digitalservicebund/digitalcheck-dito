@@ -4,8 +4,12 @@ import HighlightBox from "./HighlightBox";
 export default function InterviewBanner() {
   return (
     <HighlightBox
-      heading={{ tagName: "h2", text: interviewBanner.title }}
-      content={{ markdown: interviewBanner.text }}
+      items={[
+        {
+          headline: { tagName: "h2", text: interviewBanner.title },
+          content: interviewBanner.text,
+        },
+      ]}
     />
   );
 }

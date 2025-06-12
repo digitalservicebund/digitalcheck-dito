@@ -36,7 +36,7 @@ const InfoBox = ({
             <InfoBoxItem
               separator={separator}
               {...item}
-              key={item.identifier ?? index}
+              key={`${item.identifier}-${index}`}
             />
           ))}
         </ul>

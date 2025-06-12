@@ -86,7 +86,7 @@ export const methodsTasksProcesses: MethodsTasksProcesses = {
         },
         {
           element: "visualisation",
-          documentId: "m56ezco1mlzcci3sa6n53rzj",
+          documentId: "qyh09ifld7r3a8z8h2pyhgom",
           plausibleEventName: "Content.Intro.Beispiel+Entscheidungsbaum",
         },
       ],
@@ -132,14 +132,16 @@ export const methodsTasksProcesses: MethodsTasksProcesses = {
         {
           element: "highlightBox",
           props: {
-            badge: { text: "Tipp", Icon: LayersOutlined },
-            content: {
-              markdown: dedent`
+            items: [
+              {
+                badge: { text: "Tipp", Icon: LayersOutlined },
+                content: dedent`
                   Am schnellsten sind Sie, wenn Sie eine Papierskizze machen, bevor Sie am Computer arbeiten. Starten Sie mit reduzierten Informationen und ergänzen Sie nach und nach Details in Ihrem Flussdiagramm. **Wichtig ist das Verständnis, nicht die Ästhetik**.
                       
                   Für die digitale Ausarbeitung eigenen sich **Conceptboard**, **draw.io** oder **Microsoft PowerPoint**. Fragen Sie nach geeigneten Programmen und Ansprechpersonen, zum Beispiel Kolleginnen und Kollegen oder in der Z-Abteilung.
                 `,
-            },
+              },
+            ],
           },
         },
         {

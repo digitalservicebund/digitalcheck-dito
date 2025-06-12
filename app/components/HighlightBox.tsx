@@ -1,15 +1,15 @@
 import Background from "./Background";
-import Box, { BoxProps } from "./Box";
+import InfoBox, { InfoBoxProps } from "./InfoBox";
 
-export type HighlightBoxProps = BoxProps;
+export type HighlightBoxProps = InfoBoxProps;
 
 export default function HighlightBox(props: HighlightBoxProps) {
   return (
     <Background
       backgroundColor="blue"
-      className="rounded-lg px-16 pt-32 pb-48 sm:px-80 sm:pb-40"
+      className="rounded-lg px-16 py-40 sm:px-80"
     >
-      <Box {...props} />
+      <InfoBox {...props} />
     </Background>
   );
 }
