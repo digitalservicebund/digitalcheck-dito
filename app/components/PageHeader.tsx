@@ -93,6 +93,8 @@ const PageHeader = ({
 
   // Toggle dropdown state
   const toggleDropdown = (itemText: string) => {
+    console.log("toggle");
+
     setActiveDropdownId((current) => (current === itemText ? null : itemText));
   };
 

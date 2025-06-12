@@ -2,6 +2,7 @@ import {
   ExpandLessOutlined,
   ExpandMoreOutlined,
 } from "@digitalservicebund/icons";
+import { PointerEvent } from "react";
 import DropdownContentList from "~/components/DropdownContentList";
 import type { DropdownItemProps } from "~/components/DropdownContentList.tsx";
 import { header } from "~/resources/content/components/header.ts";
@@ -60,13 +61,17 @@ export default function DropdownMenu({
     className,
   );
 
-  const handleMouseEnter = () => {
+  const handlePointerEnter = (e: PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === "touch") return;
+
     if (!isMobile && !isExpanded) {
       onToggle();
     }
   };
 
-  const handleMouseLeave = () => {
+  const handlePointerLeave = (e: PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === "touch") return;
+
     if (!isMobile && isExpanded) {
       onToggle();
     }
@@ -75,8 +80,8 @@ export default function DropdownMenu({
   return (
     <div
       className={containerClasses}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onPointerEnter={handlePointerEnter}
+      onPointerLeave={handlePointerLeave}
     >
       <button
         type="button"

@@ -127,21 +127,21 @@ describe("DropdownMenu Component", () => {
   });
 
   describe("Desktop Variant Interactions", () => {
-    it("calls onToggle on mouseEnter if not expanded", () => {
+    it("calls onToggle on pointerEnter if not expanded", () => {
       const { container } = renderDropdown({
         variant: "desktop",
         isExpanded: false,
       });
-      fireEvent.mouseEnter(container.firstChild!);
+      fireEvent.pointerEnter(container.firstChild!);
       expect(mockOnToggle).toHaveBeenCalledTimes(1);
     });
 
-    it("calls onToggle on mouseLeave if expanded", () => {
+    it("calls onToggle on pointerLeave if expanded", () => {
       const { container } = renderDropdown({
         variant: "desktop",
         isExpanded: true,
       });
-      fireEvent.mouseLeave(container.firstChild!);
+      fireEvent.pointerLeave(container.firstChild!);
       expect(mockOnToggle).toHaveBeenCalledTimes(1);
     });
 
