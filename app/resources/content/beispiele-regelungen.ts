@@ -27,7 +27,8 @@ export const examplesRegelungen = {
   principles: {
     hero: {
       title: "Die Prinzipien im Regelungstext",
-      subtitle: "Hier finden Sie Regelungsbeispiele zur Anwendung der Prinzipien.",
+      subtitle:
+        "Hier finden Sie Regelungsbeispiele zur Anwendung der Prinzipien.",
       badge: "Beispiele für Digitaltauglichkeit",
     },
     prinzipBadge: "Prinzip",
