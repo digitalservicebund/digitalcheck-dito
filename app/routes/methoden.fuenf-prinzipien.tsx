@@ -92,7 +92,7 @@ export default function FivePrinciples() {
               tagName: "h2",
               text: principle.title,
             }}
-            label={{
+            badge={{
               children: principle.label,
               principleNumber: principle.principleNumber as PrincipleNumber,
             }}

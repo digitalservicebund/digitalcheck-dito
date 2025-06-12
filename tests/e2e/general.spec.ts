@@ -14,7 +14,7 @@ import {
 } from "~/resources/staticRoutes";
 
 test.describe("test breadcrumbs and titles", () => {
-  ROUTES.forEach((route) => {
+  ROUTES.forEach((route, i) => {
     if (route.url.endsWith(".pdf")) {
       return;
     }
@@ -27,7 +27,9 @@ test.describe("test breadcrumbs and titles", () => {
         await expect(page.getByTestId("breadcrumbs-menu")).toBeHidden();
       });
     } else {
-      test(`${route.title} has breadcrumbs and title`, async ({ page }) => {
+      test(`${route.title} (${i}) has breadcrumbs and title`, async ({
+        page,
+      }) => {
         await page.goto(route.url);
         await expect(page.getByTestId("breadcrumbs-menu")).toBeVisible();
         await expect(page).toHaveTitle(
@@ -179,15 +181,15 @@ test.describe("test progress bar", () => {
     });
   });
 
-  for (const route of ROUTES) {
+  ROUTES.forEach((route, i) => {
     if (routesWithProgressBar.includes(route)) {
-      continue;
+      return;
     }
-    test(`${route.title} has no progress bar`, async ({ page }) => {
+    test(`${route.title} (${i}) has no progress bar`, async ({ page }) => {
       await page.goto(route.url);
       await expect(page.getByLabel("Digitalcheck-Fortschritt")).toBeHidden();
     });
-  }
+  });
 
   test("Correct step is highlighted in progress bar", async ({ page }) => {
     await page.goto(ROUTE_PRECHECK.url);

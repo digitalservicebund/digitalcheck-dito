@@ -1,5 +1,6 @@
 import { ArrowCircleRightOutlined } from "@digitalservicebund/icons";
 import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 import InfoBox from "./InfoBox";
 
 const mockInfoBoxItems = [
@@ -49,7 +50,7 @@ describe("InfoBox", () => {
 
     it("shows the label", () => {
       render(
-        <InfoBox items={mockInfoBoxItems} label={{ children: "TestLabel" }} />,
+        <InfoBox items={mockInfoBoxItems} badge={{ children: "TestLabel" }} />,
       );
       expect(screen.getByRole("mark")).toHaveTextContent("TestLabel");
     });

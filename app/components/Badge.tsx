@@ -3,7 +3,7 @@ import twMerge from "~/utils/tailwindMerge";
 
 export type PrincipleNumber = 1 | 2 | 3 | 4 | 5;
 
-export type LabelProps = {
+export type BadgeProps = {
   className?: string;
   children: ReactNode;
   principleNumber?: PrincipleNumber;
@@ -15,8 +15,8 @@ function Badge({
   children,
   principleNumber,
   hint,
-}: Readonly<LabelProps>) {
-  const labelStyle = "ds-label-02-reg rounded-md p-4";
+}: Readonly<BadgeProps>) {
+  const labelStyle = "ds-label-02-reg rounded-md p-4 self-start";
   const principleStyle = principleNumber
     ? `bg-principle-${principleNumber}`
     : "";

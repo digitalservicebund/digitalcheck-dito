@@ -1,4 +1,6 @@
+import { BlocksContent, BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { twJoin } from "tailwind-merge";
+import Badge, { BadgeProps } from "./Badge";
 import { type ButtonProps } from "./Button";
 import ButtonContainer from "./ButtonContainer";
 import DetailsSummary, { type DetailsSummaryProps } from "./DetailsSummary";
@@ -9,10 +11,10 @@ import RichText from "./RichText";
 
 export type InfoBoxItemProps = {
   identifier?: string;
-  label?: HeadingProps;
+  badge?: BadgeProps;
   headline?: HeadingProps;
   image?: ImageProps;
-  content?: string;
+  content?: string | BlocksContent;
   detailsSummary?: {
     title?: HeadingProps;
     items: DetailsSummaryProps[];
@@ -24,7 +26,7 @@ export type InfoBoxItemProps = {
 
 const InfoBoxItem = ({
   identifier,
-  label,
+  badge,
   headline,
   image,
   content,
@@ -58,9 +60,14 @@ const InfoBoxItem = ({
           image && "min-[500px]:ml-16",
         )}
       >
-        {label && <Heading {...label} />}
+        {badge && <Badge {...badge} />}
         {headline && <Heading tagName="h3" {...headline} />}
-        {content && <RichText markdown={content} />}
+        {content &&
+          (typeof content === "string" ? (
+            <RichText markdown={content} />
+          ) : (
+            <BlocksRenderer content={content} />
+          ))}
 
         {detailsSummary && (
           <div className="ds-stack ds-stack-8 mt-16">

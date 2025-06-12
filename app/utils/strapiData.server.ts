@@ -65,6 +65,8 @@ export type Prinzip = {
   Nummer: 1 | 2 | 3 | 4 | 5;
   GuteUmsetzungen: Digitalcheck[];
   URLBezeichnung: string;
+  Kurzbezeichnung: string;
+  order: number;
 };
 
 export type Visualisierung = {
@@ -117,6 +119,8 @@ fragment PrinzipCoreFields on Prinzip {
   Name
   Beschreibung
   URLBezeichnung
+  Kurzbezeichnung
+  order
 }`;
 
 export const paragraphFields = `

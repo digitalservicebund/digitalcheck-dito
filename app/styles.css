@@ -8,14 +8,18 @@
 @theme {
   --font-sans: BundesSansWeb;
 
-  --color-principle-1: #f9ec9e;
-  --color-principle-2: #f5dcd7;
-  --color-principle-3: #dfd6e2;
-  --color-principle-4: #cce7db;
-  --color-principle-5: #cce4f0;
+  --color-principle-1: #f9ec9e; /* order 1 */
+  --color-principle-2: #f5dcd7; /* order 2 */
+  --color-principle-6: #dfd6e2; /* order 3 */
+  --color-principle-5: #cce7db; /* order 4 */
+  --color-principle-3: #cce4f0; /* order 5 */
+
+  --color-principle-4: var(
+    --color-orange-500
+  ); /* order 6 -> not used anymore */
 }
 
-@source inline("bg-principle-{1..5}");
+@source inline("bg-principle-{1..6}");
 
 @layer base {
   html {

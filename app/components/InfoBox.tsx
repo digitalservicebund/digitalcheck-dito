@@ -1,11 +1,11 @@
 import { twJoin } from "tailwind-merge";
-import Badge, { LabelProps } from "./Badge";
+import Badge, { BadgeProps } from "./Badge";
 import Heading, { type HeadingProps } from "./Heading";
 import InfoBoxItem, { type InfoBoxItemProps } from "./InfoBoxItem";
 
 type InfoBoxProps = {
   identifier?: string;
-  label?: LabelProps;
+  badge?: BadgeProps;
   heading?: HeadingProps;
   separator?: boolean;
   items: InfoBoxItemProps[];
@@ -15,7 +15,7 @@ type InfoBoxProps = {
 const InfoBox = ({
   identifier,
   items,
-  label,
+  badge,
   heading,
   Icon,
   separator = true,
@@ -24,15 +24,15 @@ const InfoBox = ({
     <section className="flex flex-row gap-16">
       {Icon && <Icon className="hidden size-80 fill-blue-500 sm:block" />}
       <div className="ds-stack ds-stack-8 scroll-my-40" id={identifier}>
-        {label && (
-          <Badge className="self-start" principleNumber={label.principleNumber}>
-            {label.children}
+        {badge && (
+          <Badge className="self-start" principleNumber={badge.principleNumber}>
+            {badge.children}
           </Badge>
         )}
         {heading && <Heading className="ds-heading-02-reg" {...heading} />}
         <ul
           className={twJoin(
-            "list-unstyled info-box ds-stack mt-32",
+            "list-unstyled info-box ds-stack",
             separator ? "ds-stack-32" : "ds-stack-48",
           )}
         >

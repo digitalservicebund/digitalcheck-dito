@@ -1,5 +1,6 @@
 import { render, screen, within } from "@testing-library/react";
 import { createRoutesStub } from "react-router";
+import { describe, expect, it } from "vitest";
 import InfoBoxItem from "./InfoBoxItem";
 
 const separatorStyleClass =
@@ -19,7 +20,7 @@ describe("InfoBoxItem", () => {
 
   describe("Top level elements", () => {
     it("shows the label", () => {
-      render(<InfoBoxItem label={{ text: "TestLabel" }} />);
+      render(<InfoBoxItem badge={{ children: "TestLabel" }} />);
       expect(screen.getByText("TestLabel")).toBeInTheDocument();
     });
 

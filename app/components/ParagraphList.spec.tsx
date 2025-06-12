@@ -12,6 +12,8 @@ const PRINZIPS: Prinzip[] = [
     Nummer: 1,
     GuteUmsetzungen: [],
     URLBezeichnung: "url",
+    Kurzbezeichnung: "Digitale Angebote",
+    order: 1,
   },
   {
     documentId: "abc",
@@ -20,6 +22,8 @@ const PRINZIPS: Prinzip[] = [
     Nummer: 2,
     GuteUmsetzungen: [],
     URLBezeichnung: "url",
+    Kurzbezeichnung: "Standards",
+    order: 2,
   },
   {
     documentId: "abc",
@@ -28,6 +32,8 @@ const PRINZIPS: Prinzip[] = [
     Nummer: 3,
     GuteUmsetzungen: [],
     URLBezeichnung: "url",
+    Kurzbezeichnung: "Datenschutz",
+    order: 3,
   },
 ];
 
@@ -180,9 +186,6 @@ test("Mark of Prinzip is shown", () => {
   ).not.toBeInTheDocument();
   expect(screen.queryByText(/mitmit\[2\]/)).not.toBeInTheDocument();
   expect(screen.queryByText(/2Markierungen\[2\]/)).not.toBeInTheDocument();
-  expect(screen.getByText("P1")).toBeVisible();
-  expect(screen.getAllByText("P2")).toHaveLength(3);
-  expect(screen.getByText("P3")).toBeVisible();
   expect(screen.getByText("Text mit 1Markierung")).toBeVisible();
   expect(screen.getByText("Text mit 2Markierung")).toBeVisible();
   expect(screen.getByText("(3) Text mit 3Markierung")).toBeVisible();
@@ -202,9 +205,6 @@ test("Text without underline is not marked", () => {
 
 test("Marks not shown when no relevant Prinzip", () => {
   render(<RouterStubFirstPrinciple />);
-  // not footnotes
-  expect(screen.queryByText("P2")).not.toBeInTheDocument();
-  expect(screen.queryByText("P3")).not.toBeInTheDocument();
   // custom mark still removed
   expect(screen.queryByText(/\[2\]/)).not.toBeInTheDocument();
   expect(screen.queryByText(/\[3\]/)).not.toBeInTheDocument();
@@ -214,7 +214,6 @@ test("Marks not shown when no relevant Prinzip", () => {
   expect(screen.getByText(/mitmit/)).not.toHaveRole("mark");
   expect(screen.getByText(/2Markierungen/)).not.toHaveRole("mark");
   // only relevant mark is shown
-  expect(screen.getByText("P1")).toBeVisible();
   expect(screen.getByRole("mark")).toHaveTextContent("Text mit 1Markierung");
 });
 
@@ -224,7 +223,6 @@ test("Multiple Marks in one Absatz", () => {
   expect(screen.getByText(/2Markierungen/)).toBeVisible();
   expect(screen.getByText(/mitmit/)).toHaveRole("mark");
   expect(screen.getByText(/2Markierungen/)).toHaveRole("mark");
-  expect(screen.getAllByText("P2")).toHaveLength(3);
 });
 
 // TEST COLLAPSED ABSAETZE
@@ -252,22 +250,30 @@ test("Absatz 2 through 4 without relevant Prinzip are collapsed", () => {
 test("Reasoning is shown for Absaetze with PrinzipErfuellungen", () => {
   render(<RouterStubAllPrinciples />);
   expect(screen.getAllByText("Warum ist das gut?")).toHaveLength(3);
-  expect(screen.getByText(/Prinzip 1 –/)).toBeVisible();
-  expect(screen.getByText(/Prinzip 1 –/)).toHaveRole("heading");
+  expect(screen.getByText(`Prinzip: ${PRINZIPS[0].Name}`)).toBeVisible();
+  expect(screen.getByText(`Prinzip: ${PRINZIPS[0].Name}`)).toHaveRole(
+    "heading",
+  );
   expect(screen.getByText("Darum gut 1")).toBeVisible();
-  expect(screen.getAllByText(/Prinzip 2 –/)).toHaveLength(2);
+  expect(screen.getAllByText(`Prinzip: ${PRINZIPS[1].Name}`)).toHaveLength(2);
   expect(screen.getAllByText("Darum gut 2")).toHaveLength(2);
-  expect(screen.getByText(/Prinzip 3 –/)).toBeVisible();
-  expect(screen.getByText(/Prinzip 3 –/)).toHaveRole("heading");
+  expect(screen.getByText(`Prinzip: ${PRINZIPS[2].Name}`)).toBeVisible();
+  expect(screen.getByText(`Prinzip: ${PRINZIPS[2].Name}`)).toHaveRole(
+    "heading",
+  );
   expect(screen.getByText("Darum gut 3")).toBeVisible();
 });
 
 test("Reasoning is only shown for relevant Prinzip", () => {
   render(<RouterStubFirstPrinciple />);
   expect(screen.getAllByText("Warum ist das gut?")).toHaveLength(1);
-  expect(screen.getByText(/Prinzip 1 –/)).toBeVisible();
-  expect(screen.queryByText(/Prinzip 2 –/)).not.toBeInTheDocument();
-  expect(screen.queryByText(/Prinzip 3 –/)).not.toBeInTheDocument();
+  expect(screen.getByText(`Prinzip: ${PRINZIPS[0].Name}`)).toBeVisible();
+  expect(
+    screen.queryByText(`Prinzip: ${PRINZIPS[1].Name}`),
+  ).not.toBeInTheDocument();
+  expect(
+    screen.queryByText(`Prinzip: ${PRINZIPS[2].Name}`),
+  ).not.toBeInTheDocument();
 });
 
 // TEST LINKS BETWEEN HIGHLIGHTS AND REASONING

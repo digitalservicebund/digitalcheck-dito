@@ -25,10 +25,14 @@ export const examplesRegelungen = {
     },
   },
   principles: {
+    hero: {
+      title: "Die Prinzipien im Regelungstext",
+      subtitle: "Hier finden Sie Textbeispiele zur Anwendung der Prinzipien.",
+      badge: "Beispiele für Digitaltauglichkeit",
+    },
+    prinzipBadge: "Prinzip",
     tabName: "Formulierungen",
     title: "Formulierungen aus der Regelung",
-    subtitle:
-      "So hat das Referat in der Dokumentation die Digitaltauglichkeit in die Regelung geschrieben",
   },
   nkr: {
     tabName: "NKR Stellungnahme",

@@ -1,67 +1,46 @@
 import { expect, test } from "@playwright/test";
 import {
-  ROUTE_EXAMPLES_PRINCIPLES,
+  ROUTE_EXAMPLES_AUTOMATION,
+  ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY,
+  ROUTE_EXAMPLES_DIGITAL_COMMUNICATION,
+  ROUTE_EXAMPLES_ESTABLISHED_TECHNOLOGIES,
+  ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS,
   ROUTE_EXAMPLES_VISUALISATIONS,
   ROUTE_REGELUNGEN,
 } from "~/resources/staticRoutes";
 
 const principles = [
-  "digitale-kommunikation-sicherstellen",
-  "wiederverwendung-von-daten-und-standards-ermoeglichen",
-  "datenschutz-und-informationssicherheit-gewaehrleisten",
-  "klare-regelungen-fuer-eine-digitale-ausfuehrung-finden",
-  "automatisierung-ermoeglichen",
+  ROUTE_EXAMPLES_DIGITAL_COMMUNICATION,
+  ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS,
+  ROUTE_EXAMPLES_ESTABLISHED_TECHNOLOGIES,
+  ROUTE_EXAMPLES_AUTOMATION,
+  ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY,
 ];
 
-// NOTE: 70-tage tmp skipped
-test.skip("Prinzipienseiten", () => {
+test.describe("Prinzipienseiten", () => {
   for (const principle of principles) {
-    test(`displays information for principle: ${principle}`, async ({
+    test(`displays information for principle: ${principle.url}`, async ({
       page,
     }) => {
-      const url = `${ROUTE_EXAMPLES_PRINCIPLES.url}/${principle}`;
-      await page.goto(url);
+      await page.goto(principle.url);
 
       const mainContent = page.locator("main");
       await mainContent.waitFor();
       await expect(mainContent).toContainText(
-        `Prinzip ${principles.indexOf(principle) + 1} in Regelungstexten`,
+        "Die Prinzipien im Regelungstext",
       );
-    });
-
-    test(`renders navigation links for principle: ${principle}`, async ({
-      page,
-      browserName,
-      isMobile,
-    }) => {
-      test.skip(browserName === "webkit" && isMobile);
-
-      const url = `${ROUTE_EXAMPLES_PRINCIPLES.url}/${principle}`;
-      await page.goto(url);
-
-      const nextPrincipleIndex = principles.indexOf(principle) + 1;
-      if (nextPrincipleIndex < principles.length) {
-        const nextPrincipleLink = page.getByRole("tab", {
-          name: `Prinzip ${nextPrincipleIndex + 1}`,
-        });
-        await nextPrincipleLink.waitFor();
-        await nextPrincipleLink.click();
-        await expect(page).toHaveURL(
-          `${ROUTE_EXAMPLES_PRINCIPLES.url}/${principles[nextPrincipleIndex]}`,
-        );
-      }
     });
   }
 });
 
-// NOTE: 70-tage tmp skipped
-test.skip("Prinzipien Detail", () => {
+test.describe("Prinzipien Detail", () => {
   for (const principle of principles) {
-    test(`displays paragraphs with relevant principles for: ${principle}`, async ({
+    test(`displays paragraphs with relevant principles for: ${principle.url}`, async ({
       page,
     }) => {
-      const url = `${ROUTE_EXAMPLES_PRINCIPLES.url}/${principle}`;
-      await page.goto(url);
+      test.skip(principle === ROUTE_EXAMPLES_ESTABLISHED_TECHNOLOGIES); // skipped because we do not have examples for this atm
+
+      await page.goto(principle.url);
 
       const highlights = page.locator("mark");
       await expect(highlights.first()).toBeVisible();
@@ -70,12 +49,13 @@ test.skip("Prinzipien Detail", () => {
       expect(highlightCount).toBeGreaterThan(0);
     });
 
-    test(`navigates to laws associated with principle: ${principle}`, async ({
+    test(`navigates to laws associated with principle: ${principle.url}`, async ({
       page,
       context,
     }) => {
-      const url = `${ROUTE_EXAMPLES_PRINCIPLES.url}/${principle}`;
-      await page.goto(url);
+      test.skip(principle === ROUTE_EXAMPLES_ESTABLISHED_TECHNOLOGIES); // skipped because we do not have examples for this atm
+
+      await page.goto(principle.url);
 
       const lawLinks = page.locator(`a[href^="${ROUTE_REGELUNGEN.url}"]`);
       await expect(lawLinks.first()).toBeVisible();
@@ -94,8 +74,7 @@ test.skip("Prinzipien Detail", () => {
   }
 });
 
-// NOTE: 70-tage tmp skipped
-test.skip("Visualizations Overview Page", () => {
+test.describe("Visualizations Overview Page", () => {
   test("displays main heading and subtitle", async ({ page }) => {
     await page.goto(ROUTE_EXAMPLES_VISUALISATIONS.url);
 

@@ -13,8 +13,8 @@ test.describe("basic example a11y test", () => {
       ![".pdf", ".xlsx", ".docx", ROUTE_SUPPORT.url].some((r) =>
         route.url.endsWith(r),
       ),
-  ).forEach((route) => {
-    test(`check a11y of ${route.title}`, async ({ page }) => {
+  ).forEach((route, i) => {
+    test(`check a11y of ${route.title} (${i})`, async ({ page }) => {
       // Listen for redirects and update URL if needed
       const response = await page.goto(route.url);
 
@@ -28,11 +28,8 @@ test.describe("basic example a11y test", () => {
     });
   });
 
-  // NOTE: 70-tage tmp skipped
-  test.skip("check a11y of example pages", async ({ page }) => {
-    await page.goto(
-      `${ROUTE_EXAMPLES_PRINCIPLES.url}/digitale-kommunikation-sicherstellen`,
-    );
+  test("check a11y of example pages", async ({ page }) => {
+    await page.goto(ROUTE_EXAMPLES_PRINCIPLES.url);
 
     const principleScanResults = await new AxeBuilder({ page }).analyze();
     expect(principleScanResults.violations).toEqual([]);
