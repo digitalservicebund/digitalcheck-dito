@@ -1,5 +1,6 @@
 import { render, screen, within } from "@testing-library/react";
 import { createRoutesStub } from "react-router";
+import { describe, expect, it } from "vitest";
 import InfoBoxItem from "./InfoBoxItem";
 
 const separatorStyleClass =

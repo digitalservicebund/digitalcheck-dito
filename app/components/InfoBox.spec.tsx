@@ -1,5 +1,6 @@
 import { ArrowCircleRightOutlined } from "@digitalservicebund/icons";
 import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 import InfoBox from "./InfoBox";
 
 const mockInfoBoxItems = [
