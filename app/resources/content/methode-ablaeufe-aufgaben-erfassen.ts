@@ -3,7 +3,7 @@ import {
   LayersOutlined,
   StickyNote2Outlined,
   SupportOutlined,
-} from "@digitalservicebund/icons/index";
+} from "@digitalservicebund/icons";
 import { CardProps } from "~/components/Card";
 import { HighlightBoxProps } from "~/components/HighlightBox";
 import { InfoBoxProps } from "~/components/InfoBox";
