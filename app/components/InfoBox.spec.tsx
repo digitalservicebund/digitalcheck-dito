@@ -1,4 +1,4 @@
-import { ArrowCircleRightOutlined } from "@digitalservicebund/icons/index";
+import { ArrowCircleRightOutlined } from "@digitalservicebund/icons";
 import { render, screen } from "@testing-library/react";
 import InfoBox from "./InfoBox";
 

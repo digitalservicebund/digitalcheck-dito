@@ -1,4 +1,4 @@
-import { SettingsSuggestOutlined } from "@digitalservicebund/icons/index";
+import { SettingsSuggestOutlined } from "@digitalservicebund/icons";
 import { banner } from "~/resources/content/components/banner";
 import Container from "./Container";
 import RichText from "./RichText";

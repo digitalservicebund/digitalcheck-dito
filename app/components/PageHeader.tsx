@@ -1,4 +1,4 @@
-import { MenuOpen, MenuOutlined } from "@digitalservicebund/icons/index";
+import { MenuOpen, MenuOutlined } from "@digitalservicebund/icons";
 import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
 import { useEffect, useRef, useState } from "react";
 import { Link, type UIMatch, useLocation, useMatches } from "react-router";
