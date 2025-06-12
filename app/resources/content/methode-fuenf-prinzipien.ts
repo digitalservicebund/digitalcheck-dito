@@ -178,7 +178,7 @@ export const methodsFivePrinciples = {
       label: "Prinzip",
       title: "Etablierte Technologien ermöglichen effiziente Umsetzung",
       icon: ArrowCircleRightOutlined,
-      principleNumber: 3,
+      principleNumber: 6,
       content:
         "Digitale Angebote können schneller bereitgestellt sowie günstiger entwickelt und betrieben werden, wenn sie auf bestehenden Technologien aufbauen. Offene, standardisierte Schnittstellen und Open-Source erhöhen die [Sicherheit der Angebote](#datenschutz-und-informationssicherheit-schaffen-vertrauen) und fördern die Interoperabilität.",
       detailsSummary: {
@@ -213,7 +213,7 @@ export const methodsFivePrinciples = {
     {
       label: "Prinzip",
       icon: ArrowCircleRightOutlined,
-      principleNumber: 4,
+      principleNumber: 5,
       title: "Automatisierung basiert auf eindeutigen Regelungen",
       content:
         "Logische und verständliche Regelungen und transparente Verfahren erleichtern den Zugang zum Recht und stärken das Vertrauen in den Staat. Einfachheit und verständliche Sprache sind durch die [GGO](https://www.verwaltungsvorschriften-im-internet.de/bsvwvbund_21072009_O11313012.htm#paragraph42:~:text=Gesetzentw%C3%BCrfe%20m%C3%BCssen%20sprachlich,hat%20empfehlenden%20Charakter.) und das [Handbuch der Rechtsförmlichkeit](https://www.bmj.de/SharedDocs/Publikationen/DE/Fachpublikationen/Handbuch_der_Rechtsfoermlichkeit_4.pdf?__blob=publicationFile&v=1#page=147) vorgeschrieben.\n\nKlarheit und Logik bilden die Grundlage für automatisierte Prozesse. Wenn Begriffe eindeutig definiert sowie Entscheidungsstrukturen bestimmt sind, können Regeln und klare Ausnahmen automatisiert werden. Das spart Zeit auf Seiten der Nutzenden und der Verwaltung. Mit diesen Ressourcen können kritischere Einzelfälle bearbeitet oder Normadressatinnen und -adressaten beraten werden.",
@@ -270,7 +270,7 @@ export const methodsFivePrinciples = {
       label: "Prinzip",
       title: "Datenschutz und Informationssicherheit schaffen Vertrauen",
       icon: ArrowCircleRightOutlined,
-      principleNumber: 5,
+      principleNumber: 3,
       content:
         "Alle Menschen haben ein Recht darauf, dass ihre Daten vor unbefugten Zugriffen geschützt werden. Der Schutz personenbezogener Daten ist in der [DSGVO](https://eur-lex.europa.eu/eli/reg/2016/679/oj?locale=de) geregelt. Informationssicherheit umfasst alle Daten und wird je nach Bereich spezifiziert.\n\nEine datenschutzkonforme Regelung erhebt nur das Minimum an Daten. Datensparsamkeit ist einfach umzusetzen und verringert den Erfüllungsaufwand. Wenn weniger Daten vorliegen, müssen auch weniger Informationen geschützt werden.\n\nWenn Informationen den ihnen gebührenden Schutz erhalten, schafft das Vertrauen in den Staat. Die Gefahr von Missbrauch und negativen wirtschaftlichen oder sicherheitsrelevanten Konsequenzen wird verringert.",
       detailsSummary: {
