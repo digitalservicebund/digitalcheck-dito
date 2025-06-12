@@ -196,6 +196,7 @@ export const methodsTasksProcesses: MethodsTasksProcesses = {
             href: ROUTE_METHODS_PRINCIPLES.url,
             text: "Prinzipien nutzen",
             look: "tertiary",
+            plausibleEventName: "Content.Link+Prinzipien+Nutzen",
           },
         ],
       },
