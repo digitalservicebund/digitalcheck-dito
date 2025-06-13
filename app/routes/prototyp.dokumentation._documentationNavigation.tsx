@@ -61,7 +61,7 @@ function DocumentationNavigation() {
             <NavItem
               key={route.url}
               url={route.url}
-              label={route.title}
+              label={route.title.replace(" - Prototyp", "")}
               isCurrent={isCurrent}
               isDone={false}
               isDisabled={false}

@@ -197,57 +197,57 @@ export const ROUTE_PROTOTYPE = createRoute("prototyp", "Prototyp");
 
 export const ROUTE_PROTOTYPE_DOCUMENTATION = createRoute(
   "dokumentation",
-  "Prototyp: Dokumentation",
+  "Dokumentation - Prototyp",
   ROUTE_PROTOTYPE,
 );
 export const ROUTE_PROTOTYPE_DOCUMENTATION_OVERVIEW = createRoute(
   "overview",
-  "Allgemeine Hinweise",
+  "Allgemeine Hinweise - Prototyp",
   ROUTE_PROTOTYPE_DOCUMENTATION,
 );
 export const ROUTE_PROTOTYPE_DOCUMENTATION_META = createRoute(
   "meta",
-  "Informationen zum Regelungsvorhaben",
+  "Informationen zum Regelungsvorhaben - Prototyp",
   ROUTE_PROTOTYPE_DOCUMENTATION,
 );
 export const ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION_1 = createRoute(
   "beteiligung-1",
-  "Bedürfnisse der Betroffenen prüfen",
+  "Bedürfnisse der Betroffenen prüfen - Prototyp",
   ROUTE_PROTOTYPE_DOCUMENTATION,
 );
 export const ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION_2 = createRoute(
   "beteiligung-2",
-  "Bedürfnisse der Betroffenen umsetzen",
+  "Bedürfnisse der Betroffenen umsetzen - Prototyp",
   ROUTE_PROTOTYPE_DOCUMENTATION,
 );
 export const ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_1 = createRoute(
   "prinzip-1",
-  "Prinzip: Digitale Angebote",
+  "Prinzip: Digitale Angebote - Prototyp",
   ROUTE_PROTOTYPE_DOCUMENTATION,
 );
 export const ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_2 = createRoute(
   "prinzip-2",
-  "Prinzip: Datenwiederverwendung",
+  "Prinzip: Datenwiederverwendung - Prototyp",
   ROUTE_PROTOTYPE_DOCUMENTATION,
 );
 export const ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_3 = createRoute(
   "prinzip-3",
-  "Prinzip: Etablierte Technologien",
+  "Prinzip: Etablierte Technologien - Prototyp",
   ROUTE_PROTOTYPE_DOCUMENTATION,
 );
 export const ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_4 = createRoute(
   "prinzip-4",
-  "Prinzip: Automatisierung",
+  "Prinzip: Automatisierung - Prototyp",
   ROUTE_PROTOTYPE_DOCUMENTATION,
 );
 export const ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_5 = createRoute(
   "prinzip-5",
-  "Prinzip: Informationssicherheit und Datenschutz",
+  "Prinzip: Informationssicherheit und Datenschutz - Prototyp",
   ROUTE_PROTOTYPE_DOCUMENTATION,
 );
 export const ROUTE_PROTOTYPE_DOCUMENTATION_RESULT = createRoute(
   "ergebnis",
-  "Dokumentation abschließen",
+  "Dokumentation abschließen - Prototyp",
   ROUTE_PROTOTYPE_DOCUMENTATION,
 );
 
