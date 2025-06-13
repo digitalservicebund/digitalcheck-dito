@@ -5,7 +5,7 @@ import { type ButtonProps } from "./Button";
 import ButtonContainer from "./ButtonContainer";
 import DetailsSummary, { type DetailsSummaryProps } from "./DetailsSummary";
 import Heading, { type HeadingProps } from "./Heading";
-import Image, { type ImageProps } from "./Image";
+import ImageBox, { ImageBoxProps } from "./ImageBox";
 import LinkList, { LinkListProps } from "./LinkList";
 import RichText from "./RichText";
 
@@ -13,7 +13,7 @@ export type InfoBoxItemProps = {
   identifier?: string;
   badge?: BadgeProps;
   headline?: HeadingProps;
-  image?: ImageProps;
+  imageBox?: ImageBoxProps;
   content?: string | BlocksContent;
   detailsSummary?: {
     title?: HeadingProps;
@@ -28,39 +28,30 @@ const InfoBoxItem = ({
   identifier,
   badge,
   headline,
-  image,
+  imageBox,
   content,
   detailsSummary,
   linkList,
   buttons,
   separator,
 }: InfoBoxItemProps) => {
+  const isBigImage = imageBox?.size === "MEDIUM" || imageBox?.size === "LARGE";
+
   return (
     <li
       id={identifier}
       className={twJoin(
-        "flex max-w-none scroll-my-40 flex-row items-center justify-center max-[499px]:flex-col",
+        "scroll-my-40",
         separator &&
           "border-0 border-b-2 border-solid border-gray-400 pb-40 last:border-none last:pb-0",
+        imageBox && "flex flex-col gap-32 sm:flex-row",
+        imageBox && isBigImage && "flex-col-reverse",
       )}
     >
-      {image && (
-        <Image
-          {...image}
-          {...{
-            className:
-              "max-[499px]:mb-16 max-[499px]:w-[144px] max-[499px]:h-[144px] h-[168px] w-[168px]" +
-              " self-baseline",
-          }}
-        />
-      )}
-      <div
-        className={twJoin(
-          "ds-stack ds-stack-16 w-full break-words",
-          image && "min-[500px]:ml-16",
-        )}
-      >
-        {badge && <Badge {...badge} />}
+      {imageBox && <ImageBox {...imageBox} background />}
+
+      <div className={twJoin("ds-stack ds-stack-16 break-words")}>
+        {badge && <Badge className="self-start" {...badge} />}
         {headline && <Heading tagName="h3" {...headline} />}
         {content &&
           (typeof content === "string" ? (

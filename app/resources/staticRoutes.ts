@@ -77,6 +77,10 @@ export const ROUTE_METHODS_TASKS_PROCESSES = createRoute(
   "Abläufe erfassen",
   ROUTE_METHODS,
 );
+export const ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX = createRoute(
+  "download/Anleitung_Flussdiagramm_erstellen.pptx",
+  "Anleitung Flussdiagramm erstellen",
+);
 export const ROUTE_METHODS_COLLECT_IT_SYSTEMS = createRoute(
   "it-systeme-erfassen",
   "IT-Systeme erfassen",

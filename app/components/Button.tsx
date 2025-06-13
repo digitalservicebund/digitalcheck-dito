@@ -1,6 +1,8 @@
 import { cloneElement, type ReactElement } from "react";
 import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
+import { getDownloadableExtensionName } from "~/utils/fileExtensionUtils";
+import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import twMerge from "~/utils/tailwindMerge";
 
 type Props = {
@@ -65,7 +67,7 @@ function Button({
   iconLeft = formatIcon(iconLeft);
   iconRight = formatIcon(iconRight);
 
-  const plausibleEvent = `plausible-event-name=${plausibleEventName}`;
+  const plausibleEvent = getPlausibleEventClassName(plausibleEventName);
 
   // for links that have role="button" we need to add an event handler so that it can
   // be activated with the space bar
@@ -84,10 +86,7 @@ function Button({
   };
 
   if (href) {
-    const ext =
-      (href.endsWith(".pdf") && "PDF") ||
-      (href.endsWith(".xlsx") && "XSLX") ||
-      (href.endsWith(".docx") && "DOCX");
+    const ext = getDownloadableExtensionName(href);
     const isDownload = !!ext;
 
     return (

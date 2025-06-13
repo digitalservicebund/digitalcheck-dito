@@ -10,6 +10,7 @@ import {
 } from "@headlessui/react";
 import React, { useEffect, useRef, useState } from "react";
 import { twJoin } from "tailwind-merge";
+import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import twMerge from "~/utils/tailwindMerge";
 
 export interface TabItem {
@@ -82,7 +83,7 @@ export default function Tabs({
         role="tablist"
         aria-label="Menü Navigation"
         className={twMerge(
-          "my-[40px] box-border flex items-stretch border-b-[3px] border-blue-500 max-lg:hidden",
+          "mb-40 box-border flex items-stretch border-b-[3px] border-blue-500 max-lg:hidden",
           className,
         )}
       >
@@ -108,8 +109,7 @@ export default function Tabs({
               "relative -mb-[3px] box-border min-h-[70px] cursor-pointer border-b-[3px] border-blue-500 px-24 py-12 text-left leading-tight hyphens-auto text-blue-800 hover:bg-blue-100",
               activeTab === index &&
                 "border-b-4 border-blue-800 bg-blue-100 font-bold",
-              tab.plausibleEventName &&
-                `plausible-event-name=Tab+Bar.${tab.plausibleEventName}`,
+              getPlausibleEventClassName(`Tab+Bar.${tab.plausibleEventName}`),
             )}
           >
             {tab.title}
@@ -117,7 +117,7 @@ export default function Tabs({
         ))}
       </div>
       {/* Mobile Dropdown */}
-      <div className={twMerge("my-[40px] lg:hidden", className)}>
+      <div className={twMerge("mb-40 lg:hidden", className)}>
         {/* Wrapper is needed for the styles here, Listbox provides context & state management */}
         <Listbox
           value={activeTab}

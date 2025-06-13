@@ -6,6 +6,7 @@ import { PointerEvent } from "react";
 import DropdownContentList from "~/components/DropdownContentList";
 import type { DropdownItemProps } from "~/components/DropdownContentList.tsx";
 import { header } from "~/resources/content/components/header.ts";
+import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import twMerge from "~/utils/tailwindMerge";
 
 export type DropdownProps = {
@@ -38,7 +39,9 @@ export default function DropdownMenu({
 }: Readonly<DropdownProps>) {
   const isMobile = variant === "mobile";
   const elementId = `dropdown-${label}`;
-  const plausibleTrackingClass = `plausible-event-name=Nav+Bar.${plausibleEventName}.Open+Close`;
+  const plausibleTrackingClass = getPlausibleEventClassName(
+    `Nav+Bar.${plausibleEventName}.Open+Close`,
+  );
 
   // Transparent borders to avoid layout shifts
   const buttonClasses = twMerge(

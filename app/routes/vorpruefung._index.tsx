@@ -128,7 +128,7 @@ export default function Index() {
           />
         </Container>
       </Background>
-      <Container className="pt-0">
+      <Container>
         <Tabs tabs={tabsData} />
       </Container>
       <SupportBanner />

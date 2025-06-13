@@ -191,13 +191,14 @@ test.describe("method sub page downloads", () => {
     expect(download.suggestedFilename()).toContain(".xlsx");
   });
 
-  test("tasks & processes excel spreadsheet", async ({ page }) => {
+  test("tasks & processes powerpoint", async ({ page }) => {
     await page.goto(ROUTE_METHODS_TASKS_PROCESSES.url);
 
     const downloadPromise = page.waitForEvent("download");
-    await page.getByRole("link", { name: "Vorlage herunterladen" }).click();
+    await page.getByRole("tab", { name: "Anleitung" }).click();
+    await page.getByRole("link", { name: "PPT-Vorlage runterladen" }).click();
     const download = await downloadPromise;
-    expect(download.suggestedFilename()).toContain(".xlsx");
+    expect(download.suggestedFilename()).toContain(".pptx");
   });
 
   test("it-systems excel spreadsheet", async ({ page }) => {

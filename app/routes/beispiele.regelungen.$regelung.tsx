@@ -247,7 +247,10 @@ export default function Gesetz() {
           });
         }
         return (
-          <Container key={digitalcheck.documentId} className="pb-80">
+          <Container
+            key={digitalcheck.documentId}
+            className="ds-stack ds-stack-40 pb-80"
+          >
             {regelung.Digitalchecks.length > 1 && digitalcheck.Titel && (
               <Heading tagName="h2" look="ds-heading-03-bold" className="mb-24">
                 {digitalcheck.Titel}

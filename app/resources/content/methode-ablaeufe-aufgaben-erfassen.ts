@@ -1,147 +1,123 @@
-import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
-import DrawOutlined from "@digitalservicebund/icons/DrawOutlined";
-import LightbulbOutlined from "@digitalservicebund/icons/LightbulbOutlined";
-import StickyNote2Outlined from "@digitalservicebund/icons/StickyNote2Outlined";
-import SupportOutlined from "@digitalservicebund/icons/SupportOutlined";
 import {
-  ROUTE_EXAMPLES_VISUALISATIONS,
-  ROUTE_METHODS_PRINCIPLES,
-  ROUTE_METHODS_RESPONSIBLE_ACTORS,
-  ROUTE_SUPPORT,
-} from "~/resources/staticRoutes";
+  ArrowCircleRightOutlined,
+  LayersOutlined,
+  StickyNote2Outlined,
+  SupportOutlined,
+} from "@digitalservicebund/icons";
+import { ButtonProps } from "~/components/Button";
 import { dedent } from "~/utils/dedentMultilineStrings";
+import {
+  ROUTE_METHODS_PRINCIPLES,
+  ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX,
+} from "../staticRoutes";
 
 export const methodsTasksProcesses = {
-  title: "Aufgaben und Abläufe gemeinsam erfassen",
-  subtitle: `Damit Ihre Regelung wirkungsvoll in die Praxis kommt, müssen Sie die **aktuellen Abläufe** verstehen. Holen Sie sich dazu Unterstützung von den Akteurinnen und Akteuren, die Sie im vorigen Schritt identifiziert haben. In diesem Schritt müssen Sie noch nicht auf geplante Neuerungen eingehen. Konzentrieren Sie sich auf den **Status Quo**.`,
-  guidance: dedent`
-    **Zeit:** ca. sechs Stunden
-    
-    **Kollaborativ:** Arbeiten Sie mit umsetzenden Akteurinnen und Akteuren zusammen
-    
-    **Support:** Komplexe Abläufe können Sie mit dem Digitalcheck-Support erfassen
+  title: "Aufgaben und Abläufe visualisieren",
+  subtitle: dedent`
+    Um Ihre Regelung wirkungsvoll umzusetzen, braucht es ein klares Bild der bestehenden **Abläufe**.
+    Holen Sie sich dazu Unterstützung von den umsetzenden **Akteurinnen und Akteuren**. Ein Flussdiagramm hilft, Prozesse sichtbar zu machen und die Digitaltauglichkeit einzuschätzen.
   `,
-  accordion: {
-    title:
-      "Was ist zu tun, wenn Länder oder Kommunen für die Umsetzung zuständig sind?",
-    text: "Wenn Länder und Kommunen für die Umsetzung zuständig ist, legen die Gesetze auf Bundesebene die Grundlage für eine reibungslose Umsetzung. Sicherlich stehen Sie bereits inhaltlich mit den entsprechenden Vertreterinnen und Vertretern im Austausch, z. B. mit den Landesministerien. Für die digitale Umsetzung sollten Sie zusätzlich das Gespräch mit denen suchen, die die aktuellen Arbeitsabläufe, Prozesse und Systeme kennen. Das funktioniert am besten in bilateralen Gesprächen, die die formellen Beteiligungsformate ergänzen.",
-  },
-  content: {
-    label: "Anleitung",
-    icon: DrawOutlined,
-    title: "Erfassen Sie die aktuellen Abläufe",
-    text: dedent`
-      Listen Sie auf, welche Schritte und Aufgaben aktuell erfüllt werden, damit das Ziel des Vorhabens erreicht wird, und wie diese im Zusammenhang stehen. Tun Sie dies im Team: Die Diskussion ist ebenso wertvoll wie das Ergebnis.
-      
-      Der Überblick lohnt sich auch bei scheinbar einfachen Abläufen: 
-      - Fehlende Verbindungen oder unerwartete Abhängigkeiten werden sichtbar.
-      - Sie erfahren, auf welchen bestehenden Abläufen Sie aufbauen können.
-      
-      Die Frage, die Sie sich und Ihren Ansprechpersonen stellen können, lautet: „Wer will was wann von wem?“
-    `,
-  },
-  boxes: [
-    {
-      image: {
-        src: "/images/einfache-ablaeufe-und-aufgaben-erfassen.png",
-        alt: `Ein Flussdiagramm mit dem Titel „Beispielprozess-Ablauf ‚Einkommensteuer-Erklärung durchführen‘“. Auf der linken Seite ist ein gezeichnetes Gebäude und daneben ein Figur, sie sind als „Akteurin oder Akteur“ beschriftet. Als Beispiel steht darunter „Finanzämter“. Diese senden Daten zur zentralen Speicherung und Auswertung, dargestellt durch einen Pfeil, der mit „Arbeitsprozess“ beschriftet ist. Rechts steht noch einmal das Gebäude mit der Person daneben, beschriftet als „Adressatin oder Adressat“. Als Beispiel ist „Bundeszentralamt für Steuern“ eingetragen.`,
-      },
-      label: "Vorlage",
-      icon: StickyNote2Outlined,
-      title: "Einfache Abläufe und Aufgaben erfassen",
-      text: dedent`
-        1. Sammeln Sie [Akteurinnen und Akteure](${ROUTE_METHODS_RESPONSIBLE_ACTORS.url}), die an der Umsetzung beteiligt sind, und tragen Sie diese auf der linken Seite ein. („Wer“)
-        2. Rechts tragen Sie die Adressatinnen und Adressaten ein. („von wem“)
-        3. In die Mitte schreiben Sie die verbindenden Aufgaben. („will wann was“)
-        
-        Die Vorlage dient der Orientierung und kann angepasst werden. Ein Beispiel: Adressatinnen und Adressaten, die einen Antrag stellen, können auf der linken Seite stehen, die entsprechende Behörde steht dann rechts.
+  errorMessage: "Hier hat leider etwas nicht funktioniert, das tut uns Leid.",
+  intro: {
+    title: "Intro",
+    plausibleEventName: "Tab+Bar.Intro",
+    visibility: {
+      headline: "Prozesse sichtbar machen",
+      content: dedent`
+        Abläufe lassen sich auf verschiedene Weise visualisieren – etwa durch Nutzerreisen, Entscheidungsbäume, Datenflüsse oder Prozessdiagramme.
+        Ein guter Einstieg in Prozessdiagramme ist das **Flussdiagramm**:
+        Sie bilden Prozesse als aufeinanderfolgende Schritte ab. Man sieht, wer welchen Teil des Prozesses übernimmt und Verantwortlichkeiten wechseln.
       `,
+    },
+    example: {
+      documentId: "qyh09ifld7r3a8z8h2pyhgom",
+      plausibleEventName: "Content.Intro.Beispiel+Entscheidungsbaum",
+    },
+  },
+
+  anleitung: {
+    title: "Anleitung",
+    plausibleEventName: "Tab+Bar.Anleitung",
+
+    ablaufe: {
+      headline: "Abläufe mit dem Flussdiagramm erfassen",
+      content: dedent`
+        Für Ihr Regelungsvorhaben können Sie ein Flussdiagramm erstellen, um dem gesamten Umsetzungsprozess oder einen spezifischen Arbeitsablauf visuell darzustellen.
+
+        Der Überblick lohnt sich auch bei scheinbar einfachen Abläufen:
+        - **Fehlende** Verbindungen oder **unerwartete** Abhängigkeiten werden **sichtbar**.
+        - Sie erfahren, auf welchen **bestehenden Abläufen Sie aufbauen** können.
+      `,
+    },
+
+    visualisierung: {
+      headline: "So visualisieren Sie den Umsetzungsprozess in drei Schritten",
+      content: dedent`
+        Eine ausführliche Anleitung finden Sie in unserer PowerPoint-Vorlage “**Anleitung Abläufe und Aufgaben erfassen**”.
+        
+        1. **Akteure identifizieren:** Bestimmen Sie alle beteiligten Personen, Organisationen und IT-Systeme.
+        2. **Start/Ende festlegen:**  Legen Sie den Beginn und das Ende des Prozesses aus der Sicht der Bürgerinnen und Bürger oder der umsetzenden Behörden fest.
+        3. **Prozess visualisieren:** Ordnen Sie Schritte logisch an und verbinden Sie Symbole mit Pfeilen.
+      `,
+    },
+
+    tipp: {
+      badge: { text: "Tipp", Icon: LayersOutlined },
+      content: dedent`
+        Am schnellsten sind Sie, wenn Sie eine Papierskizze machen, bevor Sie am Computer arbeiten. Starten Sie mit reduzierten Informationen und ergänzen Sie nach und nach Details in Ihrem Flussdiagramm. **Wichtig ist das Verständnis, nicht die Ästhetik**.
+            
+        Für die digitale Ausarbeitung eigenen sich **Conceptboard**, **draw.io** oder **Microsoft PowerPoint**. Fragen Sie nach geeigneten Programmen und Ansprechpersonen, zum Beispiel Kolleginnen und Kollegen oder in der Z-Abteilung.
+      `,
+    },
+
+    vorlage: {
+      badge: { text: "Vorlage", Icon: StickyNote2Outlined },
+      heading: "Anleitung Abläufe und Aufgaben erfassen",
+      content:
+        "Eine Powerpoint-Vorlage (PPT) mit einer Schritt für Schritt Anleitung zum Download finden Sie hier. Sie können diese ausdrucken oder an Ihrem Computer bearbeiten. Sofern in Ihrem Ressort Conceptboard genutzt werden kann, können Sie sich auch eine Kopie dieser Conceptboard-Vorlage erstellen. Für letzteres können Sie einen Gast-Zugang anlegen.",
       buttons: [
         {
-          text: "Vorlage herunterladen (xlsx-Datei)",
-          href: "/download/Vorlage - Einfache Abläufe und Aufgaben erfassen.xlsx",
+          href: ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX.url,
+          text: "PPT-Vorlage runterladen",
+          plausibleEventName: "Content.Anleitung.Link+Powerpoint+Vorlage",
         },
-      ],
-    },
-    {
-      image: {
-        src: "/images/rulemap.jpg",
-        alt: `Ein Flussdiagramm mit der Überschrift „Rulemap § 9b 2023“. Es zeigt die verschiedenen Bedingungen, unter denen eine Steuerentlastung gewährt wird, und ihre Abhängigkeiten.`,
-      },
-      label: "Vorlage",
-      icon: StickyNote2Outlined,
-      title: "Komplexe Abläufe visualisieren",
-      text: dedent`
-        Jedes Verwaltungshandeln hat einen Anfang und ein Ende. **Flussdiagramme** sind deshalb besonders geeignet, denn sie bilden Prozesse als aufeinanderfolgende Schritte ab. Man sieht, wer welchen Teil des Prozesses übernimmt und Verantwortlichkeiten wechseln.
-        
-        Am schnellsten sind Sie, wenn Sie eine **Papierskizze** machen, bevor Sie am Computer arbeiten. Sie werden einige Anläufe verwerfen, das ist normal und hilfreich. **Wichtig ist das Verständnis, nicht die Ästhetik.**
-        
-        Für die **digitale Ausarbeitung** eigenen sich Conceptboard, draw.io oder Microsoft PowerPoint. Fragen Sie nach geeigneten Programmen und Ansprechpersonen, zum Beispiel Kolleginnen und Kollegen oder in der Z-Abteilung.
-        
-        **Vorlagen**
-        
-        → [Download PowerPoint-Vorlage mit Schritt-für-Schritt-Anleitung](/documents/Anleitung_Flussdiagramm_erstellen.pptx)  
-        → [Conceptboard-Vorlage](https://bmas.de.conceptboard.com/board/qh33-xcny-usde-7nc6-82cy) zum Kopieren, Sie können einen Gast-Zugang anlegen.
-      `,
-      buttons: [
         {
-          text: "Beispiele ansehen",
-          href: ROUTE_EXAMPLES_VISUALISATIONS.url,
+          href: "https://bmas.de.conceptboard.com/board/qh33-xcny-usde-7nc6-82cy",
+          text: "Conceptboard-Vorlage",
+          look: "tertiary",
+          plausibleEventName: "Content.Anleitung.Link+Conceptboard+Vorlage",
         },
-      ],
+      ] as ButtonProps[],
+      image: {
+        url: "/images/beispielflussdiagram.png",
+      },
     },
-  ],
-  tip: {
-    label: "Tipps",
-    icon: LightbulbOutlined,
-    title: "Wertschätzende und zielorientierte Kommunikation",
-    text: dedent`
-      - **Hürden und Anforderungen wertschätzen:** Sicherlich werden bei den Gesprächen auch Wünsche und Anforderungen an neue Abläufe auftauchen. Wahrscheinlich werden Sie nicht alle umsetzen können. Bedanken Sie sich für den Input, kommunizieren Sie, was nicht eingearbeitet wird und erläutern Sie die Gründe.
-      - **Regelungsziel im Fokus:** Interessenkonflikte treten in den Hintergrund, wenn das Regelungsziel im Sinne der Normadressaten im Mittelpunkt steht — dahinter kann sich meistens vereint werden.
-    `,
+  },
+
+  furtherSteps: {
+    badge: {
+      text: "So geht es weiter",
+      Icon: ArrowCircleRightOutlined,
+    },
+    headline: "Finden Sie konkrete Möglichkeiten der Digitalisierung",
+    content:
+      "Mit den Prinzipien für Digitaltaugliche Gesetzgebung bekommen Sie auch konkrete Hinweise darauf, worauf Sie achten müssen.",
+    buttons: [
+      {
+        href: ROUTE_METHODS_PRINCIPLES.url,
+        text: "Prinzipien nutzen",
+        look: "tertiary",
+        plausibleEventName: "Content.Link+Prinzipien+Nutzen",
+      },
+    ] as ButtonProps[],
   },
   support: {
-    label: "Unterstützungsangebot",
-    icon: SupportOutlined,
-    title: "Visualisierungen gemeinsam erstellen",
-    text: dedent`
-      Der Digitalcheck-Support unterstützt Sie bei der Visualsierung von Abläufen. Wir helfen Ihnen gerne, insbesondere bei komplexen Abläufen. 
+    badge: { text: "Unterstützungsangebot", Icon: SupportOutlined },
+    headline: "Visualisierungen gemeinsam erstellen",
+    content: dedent`
+      Der Digitalcheck-Support unterstützt Sie bei der Visualsierung von Abläufen. Wir helfen Ihnen gerne, insbesondere bei komplexen Abläufen.
       
-      Schreiben Sie uns über [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de) oder rufen Sie uns an unter [0151/40 76 78 39](tel:+4915140767839).
+      Schreiben Sie uns über [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de) oder rufen Sie uns an unter [0151/40 76 78 39](tel:015140767839).
     `,
-    buttons: [
-      {
-        text: "Unterstützungsangebote nutzen",
-        look: "tertiary" as const,
-        href: ROUTE_SUPPORT.url,
-      },
-    ],
-  },
-  // NOTE: 70-tage tmp changes
-  // nextStep: {
-  //   label: "So geht es weiter:",
-  //   icon: ArrowCircleRightOutlined,
-  //   title: "2.3. IT-Systeme erfassen",
-  //   text: `Nutzen Sie das Fachwissen der Akteurinnen und Akteure, um die verwendete IT-Infrastruktur für die identifizierten Abläufe zu erfassen und zu verstehen.`,
-  //   buttons: [
-  //     {
-  //       text: "IT-Landschaft verstehen",
-  //       look: "tertiary" as const,
-  //       href: ROUTE_METHODS_COLLECT_IT_SYSTEMS.url,
-  //     },
-  //   ],
-  // },
-  nextStep: {
-    label: "So geht es weiter:",
-    icon: ArrowCircleRightOutlined,
-    title: "Finden Sie konkrete Möglichkeiten der Digitalisierung",
-    text: `Mit den fünf Prinzipien für Digitaltaugliche Gesetzgebung bekommen Sie auch konkrete Hinweise darauf, worauf Sie achten müssen.`,
-    buttons: [
-      {
-        text: "Prinzipien nutzen",
-        look: "tertiary" as const,
-        href: ROUTE_METHODS_PRINCIPLES.url,
-      },
-    ],
   },
 };

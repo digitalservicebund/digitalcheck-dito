@@ -1,12 +1,19 @@
 import ZoomInOutlined from "@digitalservicebund/icons/ZoomInOutlined";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { Link } from "react-router";
+import { twJoin } from "tailwind-merge";
 import Heading from "~/components/Heading";
 import Image from "~/components/Image";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import { ROUTE_VISUALISATION } from "~/resources/staticRoutes";
+import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import { Visualisierung } from "~/utils/strapiData.server";
 import { formatDate } from "~/utils/utilFunctions";
+
+export type VisualisationItemProps = {
+  visualisierung: Visualisierung;
+  plausibleEventName?: string;
+};
 
 const LabelValuePair = ({ label, value }: { label: string; value?: string }) =>
   value ? (
@@ -18,10 +25,10 @@ const LabelValuePair = ({ label, value }: { label: string; value?: string }) =>
 
 export default function VisualisationItem({
   visualisierung,
-}: Readonly<{
-  visualisierung: Visualisierung;
-}>) {
+  plausibleEventName,
+}: Readonly<VisualisationItemProps>) {
   const visualisationUrl = visualisierung.Bild.url.split("/").pop();
+  const plausibleEvent = getPlausibleEventClassName(plausibleEventName);
 
   return (
     <div className="flex gap-16 max-sm:flex-col sm:gap-24">
@@ -32,7 +39,10 @@ export default function VisualisationItem({
           target="_blank"
           rel="noreferrer"
           state={{ image: visualisierung.Bild }}
-          className="relative block aspect-square cursor-zoom-in overflow-hidden border border-blue-500"
+          className={twJoin(
+            "relative block aspect-square cursor-zoom-in overflow-hidden border border-blue-500",
+            plausibleEvent,
+          )}
         >
           <Image
             url={visualisierung.Bild.url}
