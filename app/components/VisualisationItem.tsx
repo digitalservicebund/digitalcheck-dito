@@ -6,7 +6,7 @@ import Heading from "~/components/Heading";
 import Image from "~/components/Image";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import { ROUTE_VISUALISATION } from "~/resources/staticRoutes";
-import { getPlausibleEvent } from "~/utils/plausibleUtils";
+import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import { Visualisierung } from "~/utils/strapiData.server";
 import { formatDate } from "~/utils/utilFunctions";
 
@@ -28,7 +28,7 @@ export default function VisualisationItem({
   plausibleEventName,
 }: Readonly<VisualisationItemProps>) {
   const visualisationUrl = visualisierung.Bild.url.split("/").pop();
-  const plausibleEvent = getPlausibleEvent(plausibleEventName);
+  const plausibleEvent = getPlausibleEventClassName(plausibleEventName);
 
   return (
     <div className="flex gap-16 max-sm:flex-col sm:gap-24">

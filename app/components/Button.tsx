@@ -2,7 +2,7 @@ import { cloneElement, type ReactElement } from "react";
 import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import { getDownloadableExtensionName } from "~/utils/fileExtensionUtils";
-import { getPlausibleEvent } from "~/utils/plausibleUtils";
+import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import twMerge from "~/utils/tailwindMerge";
 
 type Props = {
@@ -67,7 +67,7 @@ function Button({
   iconLeft = formatIcon(iconLeft);
   iconRight = formatIcon(iconRight);
 
-  const plausibleEvent = getPlausibleEvent(plausibleEventName);
+  const plausibleEvent = getPlausibleEventClassName(plausibleEventName);
 
   // for links that have role="button" we need to add an event handler so that it can
   // be activated with the space bar

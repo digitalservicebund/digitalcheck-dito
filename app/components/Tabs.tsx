@@ -10,7 +10,7 @@ import {
 } from "@headlessui/react";
 import React, { useEffect, useRef, useState } from "react";
 import { twJoin } from "tailwind-merge";
-import { getPlausibleEvent } from "~/utils/plausibleUtils";
+import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import twMerge from "~/utils/tailwindMerge";
 
 export interface TabItem {
@@ -109,7 +109,7 @@ export default function Tabs({
               "relative -mb-[3px] box-border min-h-[70px] cursor-pointer border-b-[3px] border-blue-500 px-24 py-12 text-left leading-tight hyphens-auto text-blue-800 hover:bg-blue-100",
               activeTab === index &&
                 "border-b-4 border-blue-800 bg-blue-100 font-bold",
-              getPlausibleEvent(`Tab+Bar.${tab.plausibleEventName}`),
+              getPlausibleEventClassName(`Tab+Bar.${tab.plausibleEventName}`),
             )}
           >
             {tab.title}

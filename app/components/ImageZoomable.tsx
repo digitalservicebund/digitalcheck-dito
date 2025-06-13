@@ -2,7 +2,7 @@ import ZoomInOutlined from "@digitalservicebund/icons/ZoomInOutlined";
 import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Image, { type ImageProps } from "~/components/Image";
-import { getPlausibleEvent } from "~/utils/plausibleUtils";
+import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import twMerge from "~/utils/tailwindMerge";
 
 type ImageZoomableComponentProps = {
@@ -20,7 +20,7 @@ function ImageZoomable({
 }: Readonly<ImageZoomableComponentProps>) {
   if (!image.url) return null;
 
-  const plausibleEvent = getPlausibleEvent(plausibleEventName);
+  const plausibleEvent = getPlausibleEventClassName(plausibleEventName);
 
   return (
     <Link
