@@ -32,7 +32,12 @@ export const methodsFivePrinciples = {
   buttonText: "Beispiele betrachten",
   wordingExampleTitle: "**Formulierungsbeispiel:**",
   questionsTitle: "**Fragen Sie sich:**",
-  contentOverviewTitle: "Prinzipien",
+  contentOverviewTitle: "Inhalt",
+  anchor: {
+    principle: "Prinzip:",
+    instruction:
+      "Anleitung: So nutzen Sie die fünf Prinzipien für Ihr Regelungsvorhaben",
+  },
   instruction: {
     badge: {
       Icon: DrawOutlined,

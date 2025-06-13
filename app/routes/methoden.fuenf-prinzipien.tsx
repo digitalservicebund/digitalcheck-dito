@@ -46,18 +46,24 @@ export default function FivePrinciples() {
           />
           <LinkListBox
             heading={methodsFivePrinciples.contentOverviewTitle}
-            links={methodsFivePrinciples.principles.map((principle) => {
-              return {
-                id: slugify(principle.title),
-                title: principle.title,
-              };
-            })}
+            links={[
+              {
+                id: "instruction",
+                title: methodsFivePrinciples.anchor.instruction,
+              },
+              ...methodsFivePrinciples.principles.map((principle) => {
+                return {
+                  id: slugify(principle.title),
+                  title: `${methodsFivePrinciples.anchor.principle} ${principle.title}`,
+                };
+              }),
+            ]}
           />
         </Container>
       </Background>
 
       <Container className="ds-stack ds-stack-40">
-        <div>
+        <div id="instruction">
           <Badge Icon={methodsFivePrinciples.instruction.badge.Icon}>
             {methodsFivePrinciples.instruction.badge.text}
           </Badge>
