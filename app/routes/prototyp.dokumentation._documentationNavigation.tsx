@@ -40,10 +40,7 @@ export default function LayoutWithDocumentationNavigation() {
       </div>
       <section className="w-[51rem]">
         <Container className="pt-0 lg:hidden">
-          <LinkBar
-            currentElement={{ url: location.pathname, title: "foobar" }}
-            elements={routes}
-          />
+          <LinkBar currentElementUrl={location.pathname} elements={routes} />
         </Container>
         <Outlet />
       </section>

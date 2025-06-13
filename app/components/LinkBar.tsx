@@ -3,13 +3,13 @@ import { twJoin } from "tailwind-merge";
 
 const LinkBar = <T extends { url: string; title: string }>({
   elements,
-  currentElement,
+  currentElementUrl,
 }: {
   elements: T[];
-  currentElement: T;
+  currentElementUrl: string;
 }) => {
   const currentIndex = elements.findIndex(
-    (element) => element.url === currentElement.url,
+    (element) => element.url === currentElementUrl,
   );
 
   return (

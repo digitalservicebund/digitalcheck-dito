@@ -36,7 +36,7 @@ export default function LayoutWithPreCheckNavigation() {
       <section className="w-[51rem]">
         {showLinkBar && (
           <Container className="pt-0 lg:hidden">
-            <LinkBar currentElement={question} elements={questions} />
+            <LinkBar currentElementUrl={question.url} elements={questions} />
           </Container>
         )}
         <Outlet />
