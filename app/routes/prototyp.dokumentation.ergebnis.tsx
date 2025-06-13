@@ -42,7 +42,7 @@ export default function DocumentationResult() {
             <Box
               heading={{
                 text: result.data.title,
-                tagName: "h3",
+                tagName: "h2",
               }}
               content={{ markdown: result.data.text }}
             />
