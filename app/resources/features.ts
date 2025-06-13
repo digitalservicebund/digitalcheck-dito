@@ -1,1 +1,1 @@
-export const features = {};
+export const features: Record<string, string> = {};
