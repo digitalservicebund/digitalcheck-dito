@@ -145,6 +145,9 @@ export const preCheck = {
     },
     nextButton: "Okay & weiter",
   },
+  nav: {
+    ariaLabel: "Alle Fragen",
+  },
   questions: [
     {
       ...preCheckQuestions.itSystem,

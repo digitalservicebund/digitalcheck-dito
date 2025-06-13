@@ -55,7 +55,7 @@ function PreCheckNavigation({ question, answers }: PreCheckNavigationProps) {
   const questions = preCheck.questions;
 
   return (
-    <nav aria-label="Alle Fragen">
+    <nav aria-label={preCheck.nav.ariaLabel}>
       <ul className="list-unstyled">
         {questions.map((q: TQuestion, idx) => {
           const isDone = !!answers && q.id in answers;
