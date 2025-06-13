@@ -8,6 +8,16 @@ export const prototypeDocumentation = {
     subtitle:
       "Sie dokumentieren in einem Fragebogen, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben. Und wie Sie diese in Ihr Regelungsvorhaben einfließen lassen.",
     buttonText: "Dokumentation starten",
+    interopNotice: {
+      title: "Hinweis zu EU-Vorgaben zur Interoperabilität",
+      text: dedent`
+        Die nachfolgende Dokumentation **behandelt keine Aspekte der EU-Vorgaben zur Interoperabilität**.
+        Enthält Ihr Vorhaben Anforderungen der Interoperabilität, müssen Sie zusätzlich 
+        eine Interoperabilitätsbewertung durchführen und diese gesondert Dokumentieren. 
+        Kontaktieren Sie uns in diesem Falle unter: [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de) oder unter [0151/40 76 78 39](tel:+4915140767839).
+        Mehr Informationen zu Interoperabilität finden Sie auf der [Übersichtsseite](/interoperabel). 
+      `,
+    },
     timeInvest: "**Zeitaufwand:** 2-3 Stunden",
     summary: {
       title: "Zusammengefasst",

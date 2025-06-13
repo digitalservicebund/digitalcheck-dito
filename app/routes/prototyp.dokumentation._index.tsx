@@ -4,6 +4,7 @@ import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
 import InfoBox from "~/components/InfoBox";
+import InlineNotice from "~/components/InlineNotice";
 import { NumberedList } from "~/components/List";
 import RichText from "~/components/RichText";
 import SupportBanner from "~/components/SupportBanner";
@@ -21,6 +22,8 @@ export function meta() {
   return constructMetaTitle(ROUTE_PROTOTYPE_DOCUMENTATION.title);
 }
 
+const { start } = prototypeDocumentation;
+
 export default function Index() {
   return (
     <>
@@ -29,20 +32,27 @@ export default function Index() {
           <Header
             heading={{
               tagName: "h1",
-              text: prototypeDocumentation.start.title,
+              text: start.title,
             }}
             content={{
-              markdown: prototypeDocumentation.start.subtitle,
+              markdown: start.subtitle,
               className: "md:text-2xl",
             }}
           ></Header>
+          <InlineNotice
+            look="info"
+            title={start.interopNotice.title}
+            tagName="h2"
+            content={start.interopNotice.text}
+            className="mt-40"
+          />
         </Container>
         <Container className="pt-0">
           <ButtonContainer
             buttons={[
               {
                 id: "documentation-start-button",
-                text: prototypeDocumentation.start.buttonText,
+                text: start.buttonText,
                 href: ROUTE_PROTOTYPE_DOCUMENTATION_OVERVIEW.url,
                 type: "submit",
               },
@@ -56,10 +66,7 @@ export default function Index() {
           />
           <div className="mt-12 flex items-center gap-8">
             <TimerOutlined className="size-24 fill-gray-800" />
-            <RichText
-              markdown={prototypeDocumentation.start.timeInvest}
-              className="text-base"
-            />
+            <RichText markdown={start.timeInvest} className="text-base" />
           </div>
         </Container>
       </Background>
