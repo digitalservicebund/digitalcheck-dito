@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -23,6 +24,8 @@ export function meta() {
 }
 
 export default function PrototypeDocumentationPrinciple2() {
+  const [selectedOption, setSelectedOption] = useState<string>();
+
   return (
     <Container className="pt-0">
       <Heading
@@ -46,6 +49,10 @@ export default function PrototypeDocumentationPrinciple2() {
             options={radioOptions.map((option) => {
               return { value: option, text: option };
             })}
+            selectedValue={selectedOption}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setSelectedOption(e.target.value)
+            }
           />
           <RichText markdown={hint} className="mt-40" />
           <Textarea name="explanation" label={textfieldExplanationLabel} />
