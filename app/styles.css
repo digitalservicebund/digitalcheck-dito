@@ -19,8 +19,6 @@
   ); /* order 6 -> not used anymore */
 }
 
-@source inline("bg-principle-{1..6}");
-
 @layer base {
   html {
     /* Keep 16px, don't change! (e.g. angie library depends on it) */

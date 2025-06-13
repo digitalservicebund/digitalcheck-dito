@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { HIGHLIGHT_COLORS } from "~/resources/constants";
 import twMerge from "~/utils/tailwindMerge";
 
 export type PrincipleNumber = 1 | 2 | 3 | 4 | 5;
@@ -23,7 +24,7 @@ function Badge({
   const badgeStyle =
     "ds-label-02-reg inline-flex flex-row items-center gap-4 self-start rounded-md bg-transparent p-4";
   const principleStyle = principleNumber
-    ? `bg-principle-${principleNumber}`
+    ? HIGHLIGHT_COLORS[principleNumber].background
     : "";
   const hintStyle = look === "hint" ? "bg-blue-300 text-blue-800" : "";
 

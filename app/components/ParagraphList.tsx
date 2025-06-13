@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
+import { HIGHLIGHT_COLORS } from "~/resources/constants";
 import { examples } from "~/resources/content/beispiele";
 import {
   AbsatzWithNumber,
@@ -18,16 +19,6 @@ import type {
   PrinzipErfuellung,
 } from "~/utils/strapiData.server";
 import { cyrb53 } from "~/utils/utilFunctions";
-
-// Color mapping for different principles
-const HIGHLIGHT_COLORS = {
-  1: { background: "bg-principle-1", border: "border-principle-1" },
-  2: { background: "bg-principle-2", border: "border-principle-2" },
-  3: { background: "bg-principle-3", border: "border-principle-3" },
-  4: { background: "bg-principle-4", border: "border-principle-4" },
-  5: { background: "bg-principle-5", border: "border-principle-5" },
-  6: { background: "bg-principle-6", border: "border-principle-6" },
-} as const;
 
 const explanationID = (baseLabelID: string, number: number) =>
   `${baseLabelID}-${number}`;
