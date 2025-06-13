@@ -2,7 +2,6 @@ import Background from "~/components/Background";
 import Badge, { PrincipleNumber } from "~/components/Badge";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
-import FeedbackForm from "~/components/FeedbackForm";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
@@ -23,14 +22,6 @@ export function meta() {
 }
 
 export default function FivePrinciples() {
-  const feedbackOptions = [
-    { label: "Ich stimme gar nicht zu", value: 1 },
-    { label: "Ich stimme eher nicht zu", value: 2 },
-    { label: "Ich stimme teilweise zu", value: 3 },
-    { label: "Ich stimme eher zu", value: 4 },
-    { label: "Ich stimme voll und ganz zu", value: 5 },
-  ];
-
   return (
     <>
       <Background backgroundColor="blue">
@@ -130,37 +121,6 @@ export default function FivePrinciples() {
           />
         </Container>
       )}
-
-      <FeedbackForm
-        heading="Ihr Feedback hilft uns weiter!"
-        trackingEvent="feedback"
-        questions={[
-          {
-            id: "principles-simple",
-            trackingEvent: "principles-simple",
-            text: "Die Prinzipien sind einfach zu nutzen.",
-            options: feedbackOptions,
-          },
-          {
-            id: "principles-useful-drafting",
-            trackingEvent: "principles-useful-drafting",
-            text: "Die Prinzipien sind hilfreich für das Erarbeiten meines Regelungsvorhabens.",
-            options: feedbackOptions,
-          },
-          {
-            id: "principles-useful-implementation",
-            trackingEvent: "principles-useful-implementation",
-            text: "Die Prinzipien sind hilfreich für die Umsetzung meines Regelungsvorhabens.",
-            options: feedbackOptions,
-          },
-        ]}
-        contact={"feedback@digitalservicebund.de"}
-        button={"Feedback senden"}
-        success={{
-          heading: "Feedback gesendet",
-          text: "Vielen Dank für Ihr Feedback!",
-        }}
-      />
     </>
   );
 }

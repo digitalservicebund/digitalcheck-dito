@@ -1,4 +1,3 @@
-import { feedbackFormular } from "~/resources/content/components/feedback-formular";
 import { steps } from "~/resources/content/components/naechste-schritte";
 import {
   ROUTE_METHODS_PRINCIPLES,
@@ -160,26 +159,5 @@ export const methods = {
       steps.documentation,
       steps.nkr,
     ],
-  },
-  feedbackForm: {
-    heading: feedbackFormular.heading,
-    trackingEvent: "Feedback Methoden",
-    questions: [
-      {
-        id: "simple-feedback",
-        trackingEvent: "wie-einfach", // muss mit dem custom property in Plausible übereinstimmen
-        text: "Wie einfach war es für Sie, unseren Dienst „Digitaltaugliche Regelungen erarbeiten“ zu nutzen?",
-        options: feedbackFormular.optionsSimple,
-      },
-      {
-        id: "useful-feedback",
-        trackingEvent: "wie-hilfreich", // muss mit dem custom property in Plausible übereinstimmen
-        text: "Wie hilfreich fanden Sie die angebotenen Methoden und Werkzeuge für das Erarbeiten ihres Regelungsvorhaben?",
-        options: feedbackFormular.optionsUseful,
-      },
-    ],
-    contact: feedbackFormular.contact,
-    button: feedbackFormular.button,
-    success: feedbackFormular.success,
   },
 };

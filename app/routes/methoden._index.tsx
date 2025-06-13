@@ -1,7 +1,6 @@
 import React from "react";
 import Background from "~/components/Background";
 import Container from "~/components/Container";
-import FeedbackForm from "~/components/FeedbackForm";
 import Header from "~/components/Header";
 import { BulletList, NumberedList } from "~/components/List";
 import SupportBanner from "~/components/SupportBanner";
@@ -72,7 +71,6 @@ export default function Methoden() {
           items={methods.nextSteps.items}
         />
       </Container>
-      <FeedbackForm {...methods.feedbackForm} />
     </>
   );
 }
