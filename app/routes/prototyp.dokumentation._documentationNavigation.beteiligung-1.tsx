@@ -6,7 +6,7 @@ import Textarea from "~/components/Textarea";
 import { general } from "~/resources/content/shared/general";
 import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
 import {
-  ROUTE_PROTOTYPE_DOCUMENTATION_META,
+  ROUTE_PROTOTYPE_DOCUMENTATION_OVERVIEW,
   ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION_1,
   ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION_2,
 } from "~/resources/staticRoutes";
@@ -46,7 +46,7 @@ export default function PrototypeDocumentationParticipation1() {
           {
             id: "generalInfo-back-button",
             text: general.buttonBack.text,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION_META.url,
+            href: ROUTE_PROTOTYPE_DOCUMENTATION_OVERVIEW.url,
             look: "tertiary",
           },
         ]}

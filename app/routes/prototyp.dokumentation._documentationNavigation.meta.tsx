@@ -7,8 +7,8 @@ import { general } from "~/resources/content/shared/general";
 import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
 import {
   ROUTE_PROTOTYPE_DOCUMENTATION_META,
-  ROUTE_PROTOTYPE_DOCUMENTATION_OVERVIEW,
-  ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION_1,
+  ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_5,
+  ROUTE_PROTOTYPE_DOCUMENTATION_RESULT,
 } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
 
@@ -53,12 +53,12 @@ export default function PrototypeDocumentationMeta() {
           {
             id: "generalInfo-next-button",
             text: nextButton,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION_1.url,
+            href: ROUTE_PROTOTYPE_DOCUMENTATION_RESULT.url,
           },
           {
             id: "generalInfo-back-button",
             text: general.buttonBack.text,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION_OVERVIEW.url,
+            href: ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_5.url,
             look: "tertiary",
           },
         ]}

@@ -8,9 +8,9 @@ import Textarea from "~/components/Textarea";
 import { general } from "~/resources/content/shared/general";
 import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
 import {
+  ROUTE_PROTOTYPE_DOCUMENTATION_META,
   ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_4,
   ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_5,
-  ROUTE_PROTOTYPE_DOCUMENTATION_RESULT,
 } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
 
@@ -56,7 +56,7 @@ export default function PrototypeDocumentationPrinciple5() {
           {
             id: "generalInfo-next-button",
             text: nextButton,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION_RESULT.url,
+            href: ROUTE_PROTOTYPE_DOCUMENTATION_META.url,
           },
           {
             id: "generalInfo-back-button",
