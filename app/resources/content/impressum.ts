@@ -7,6 +7,7 @@ export const imprint = {
     ## Das Internetangebot wird herausgegeben vom
     
     Bundesministerium des Innern und für Heimat (BMI)<br />
+    vorübergehend für das Bundesministerium für Digitales und Staatsmodernisierung (BMDS)<br />
     Alt-Moabit 140<br />
     10557 Berlin<br />
     Telefon: [+49 30 18681-0](tel:+4930186810)<br />
