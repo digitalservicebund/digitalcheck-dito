@@ -1,9 +1,11 @@
+import TimerOutlined from "@digitalservicebund/icons/TimerOutlined";
 import Background from "~/components/Background";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
 import InfoBox from "~/components/InfoBox";
 import { NumberedList } from "~/components/List";
+import RichText from "~/components/RichText";
 import SupportBanner from "~/components/SupportBanner";
 import { documentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general";
@@ -52,6 +54,13 @@ export default function Index() {
               },
             ]}
           />
+          <div className="mt-12 flex items-center gap-8">
+            <TimerOutlined className="size-24 fill-gray-800" />
+            <RichText
+              markdown={prototypeDocumentation.start.timeInvest}
+              className="text-base"
+            />
+          </div>
         </Container>
       </Background>
       <Container>

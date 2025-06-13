@@ -8,6 +8,7 @@ export const prototypeDocumentation = {
     subtitle:
       "Sie dokumentieren in einem Fragebogen, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben. Und wie Sie diese in Ihr Regelungsvorhaben einfließen lassen.",
     buttonText: "Dokumentation starten",
+    timeInvest: "**Zeitaufwand:** 2-3 Stunden",
     summary: {
       title: "Zusammengefasst",
       items: [
