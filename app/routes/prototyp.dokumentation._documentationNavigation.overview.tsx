@@ -1,6 +1,7 @@
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
+import InlineNotice from "~/components/InlineNotice";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
@@ -11,8 +12,8 @@ import {
 } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
 
-const { overview, nextButton } = prototypeDocumentation;
-const { headline, text } = overview;
+const { overview } = prototypeDocumentation;
+const { headline, text, warning, nextButton } = overview;
 
 export function meta() {
   return constructMetaTitle(ROUTE_PROTOTYPE_DOCUMENTATION_OVERVIEW.title);
@@ -27,7 +28,14 @@ export default function PrototypeDocumentationIntro() {
         look="ds-heading-02-reg"
         className="mb-16"
       />
-      <RichText markdown={text} className="mb-40" />
+      <RichText markdown={text} className="mt-20" />
+      <InlineNotice
+        look="info"
+        title={warning.title}
+        tagName="h2"
+        content={warning.text}
+        className="mt-40"
+      />
       <ButtonContainer
         buttons={[
           {

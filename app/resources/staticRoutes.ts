@@ -202,7 +202,7 @@ export const ROUTE_PROTOTYPE_DOCUMENTATION = createRoute(
 );
 export const ROUTE_PROTOTYPE_DOCUMENTATION_OVERVIEW = createRoute(
   "overview",
-  "Übersicht",
+  "Allgemeine Hinweise",
   ROUTE_PROTOTYPE_DOCUMENTATION,
 );
 export const ROUTE_PROTOTYPE_DOCUMENTATION_META = createRoute(
