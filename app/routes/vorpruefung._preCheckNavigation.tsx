@@ -33,14 +33,16 @@ export default function LayoutWithPreCheckNavigation() {
       <div className="hidden flex-none pl-32 lg:block">
         <PreCheckNavigation question={question} answers={answers ?? {}} />
       </div>
-      <section className="w-[51rem]">
+      <div className="w-[51rem]">
         {showLinkBar && (
           <Container className="pt-0 lg:hidden">
             <LinkBar currentElementUrl={question.url} elements={questions} />
           </Container>
         )}
-        <Outlet />
-      </section>
+        <section>
+          <Outlet />
+        </section>
+      </div>
     </div>
   );
 }
