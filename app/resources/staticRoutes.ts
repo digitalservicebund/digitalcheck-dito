@@ -192,6 +192,65 @@ export const ROUTE_FUNDAMENTALS_METHODS = createRoute(
   ROUTE_FUNDAMENTALS,
 );
 
+// PROTOTYPE DOCUMENTATION ROUTES
+export const ROUTE_PROTOTYPE = createRoute("prototyp", "Prototyp");
+
+export const ROUTE_PROTOTYPE_DOCUMENTATION = createRoute(
+  "dokumentation",
+  "Prototyp: Dokumentation",
+  ROUTE_PROTOTYPE,
+);
+export const ROUTE_PROTOTYPE_DOCUMENTATION_OVERVIEW = createRoute(
+  "overview",
+  "Übersicht",
+  ROUTE_PROTOTYPE_DOCUMENTATION,
+);
+export const ROUTE_PROTOTYPE_DOCUMENTATION_META = createRoute(
+  "meta",
+  "Informationen zum Regelungsvorhaben",
+  ROUTE_PROTOTYPE_DOCUMENTATION,
+);
+export const ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION_1 = createRoute(
+  "beteiligung-1",
+  "Bedürfnisse der Betroffenen prüfen",
+  ROUTE_PROTOTYPE_DOCUMENTATION,
+);
+export const ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION_2 = createRoute(
+  "beteiligung-2",
+  "Bedürfnisse der Betroffenen umsetzen",
+  ROUTE_PROTOTYPE_DOCUMENTATION,
+);
+export const ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_1 = createRoute(
+  "prinzip-1",
+  "Prinzip: Digitale Angebote",
+  ROUTE_PROTOTYPE_DOCUMENTATION,
+);
+export const ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_2 = createRoute(
+  "prinzip-2",
+  "Prinzip: Datenwiederverwendung",
+  ROUTE_PROTOTYPE_DOCUMENTATION,
+);
+export const ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_3 = createRoute(
+  "prinzip-3",
+  "Prinzip: Etablierte Technologien",
+  ROUTE_PROTOTYPE_DOCUMENTATION,
+);
+export const ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_4 = createRoute(
+  "prinzip-4",
+  "Prinzip: Automatisierung",
+  ROUTE_PROTOTYPE_DOCUMENTATION,
+);
+export const ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_5 = createRoute(
+  "prinzip-5",
+  "Prinzip: Informationssicherheit und Datenschutz",
+  ROUTE_PROTOTYPE_DOCUMENTATION,
+);
+export const ROUTE_PROTOTYPE_DOCUMENTATION_RESULT = createRoute(
+  "ergebnis",
+  "Dokumentation abschließen",
+  ROUTE_PROTOTYPE_DOCUMENTATION,
+);
+
 export const ROUTES: Route[] = [
   ROUTE_LANDING,
   ROUTE_SUPPORT,
@@ -225,4 +284,14 @@ export const ROUTES: Route[] = [
   ROUTE_FUNDAMENTALS,
   ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_FUNDAMENTALS_METHODS,
+  ROUTE_PROTOTYPE_DOCUMENTATION,
+  ROUTE_PROTOTYPE_DOCUMENTATION_OVERVIEW,
+  ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION_1,
+  ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION_2,
+  ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_1,
+  ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_2,
+  ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_3,
+  ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_4,
+  ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_5,
+  ROUTE_PROTOTYPE_DOCUMENTATION_RESULT,
 ];

@@ -10,6 +10,7 @@ import {
   ROUTE_METHODS_COLLECT_IT_SYSTEMS,
   ROUTE_PRECHECK,
   ROUTE_PRIVACY,
+  ROUTE_PROTOTYPE_DOCUMENTATION,
   ROUTES,
 } from "~/resources/staticRoutes";
 
@@ -20,7 +21,8 @@ test.describe("test breadcrumbs and titles", () => {
     }
     if (
       route.url === ROUTE_LANDING.url ||
-      route.url.startsWith(ROUTE_PRECHECK.url)
+      route.url.startsWith(ROUTE_PRECHECK.url) ||
+      route.url.startsWith(ROUTE_PROTOTYPE_DOCUMENTATION.url)
     ) {
       test(`${route.title} to not have breadcrumbs`, async ({ page }) => {
         await page.goto(route.url);
@@ -172,7 +174,8 @@ test.describe("test progress bar", () => {
     (route) =>
       route.url.startsWith(ROUTE_PRECHECK.url) ||
       route.url.startsWith(ROUTE_METHODS.url) ||
-      route.url.startsWith(ROUTE_DOCUMENTATION.url),
+      route.url.startsWith(ROUTE_DOCUMENTATION.url) ||
+      route.url.startsWith(ROUTE_PROTOTYPE_DOCUMENTATION.url),
   );
   routesWithProgressBar.forEach((route) => {
     test(`${route.title} has progress bar`, async ({ page }) => {
