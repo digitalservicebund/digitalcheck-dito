@@ -34,9 +34,9 @@ export default function PrototypeDocumentationPrinciple5() {
       <DetailsSummary
         title={details.title}
         content={details.text}
-        className="mb-10"
+        className="mb-40"
       />
-      <form className="mt-40">
+      <form>
         <fieldset className="ds-stack ds-stack-24">
           <legend className="ds-stack ds-stack-16">
             <Heading text={question} tagName="h2" look="ds-heading-03-reg" />

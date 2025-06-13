@@ -1,5 +1,6 @@
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
+import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
@@ -15,7 +16,7 @@ import constructMetaTitle from "~/utils/metaTitle";
 
 const { principles, nextButton } = prototypeDocumentation;
 const { principle1, textfieldExplanationLabel, radioOptions } = principles;
-const { headline, text, question, hint } = principle1;
+const { headline, details, question, hint } = principle1;
 
 export function meta() {
   return constructMetaTitle(ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_1.title);
@@ -30,11 +31,15 @@ export default function PrototypeDocumentationPrinciple1() {
         look="ds-heading-02-reg"
         className="mb-16"
       />
-      <RichText markdown={text} className="mb-40" />
+      <DetailsSummary
+        title={details.title}
+        content={details.text}
+        className="mb-40"
+      />
       <form>
         <fieldset className="ds-stack ds-stack-24">
           <legend className="ds-stack ds-stack-16">
-            <Heading text={question} tagName="h2" />
+            <Heading text={question} tagName="h2" look="ds-heading-03-reg" />
           </legend>
           <RadioGroup
             name="principle-1-radio"

@@ -82,9 +82,9 @@ export const prototypeDocumentation = {
     textfieldExplanationLabel: "Erklärung:",
     principle1: {
       headline: "Digitale Angebote für alle nutzbar gestalten",
-      text: dedent`
-        [Prinzip: Digitale Angebote für alle nutzbar gestalten](${ROUTE_FUNDAMENTALS_PRINCIPLES.url})
-        
+      details: {
+        title: "Was steckt in dem Prinzip?",
+        text: dedent`
         Viele Bürgerinnen, Bürger und Unternehmen sind an digitale Angebote gewöhnt und bevorzugen diese – sofern die digitale Kommunikation gut umgesetzt ist und ihren Bedürfnissen entspricht. Die Verwaltung kann digitale Daten schneller prüfen, bearbeiten und dokumentieren. Das Angebot sollte dabei immer inklusiv sein und es benötigt ggf. analoge Alternativen.
         
         **So wenden Sie das Prinzip an:** 
@@ -94,7 +94,10 @@ export const prototypeDocumentation = {
         - Denken Sie an Antragsstellung, Bearbeitung und Bescheid 
         - Denken Sie Barrierefreiheit von Anfang an mit 
         - Stellen Sie eine nutzerfreundliche Umsetzung sicher   
+        
+        [Mehr Informationen](${ROUTE_FUNDAMENTALS_PRINCIPLES.url}#digitale-angebote-f-r-alle-nutzbar-gestalten)
       `,
+      },
       question: "Ermöglicht das Regelungsvorhaben digitale Angebote für alle?",
       hint: dedent`
         Tragen Sie zwei bis drei Stichpunkte ein. Verweisen Sie auf die jeweiligen Paragrafen und ggf. auch auf andere anwendbare Regelungen.  
@@ -104,9 +107,9 @@ export const prototypeDocumentation = {
     },
     principle2: {
       headline: "Datenwiederverwendung benötigt einheitliches Recht",
-      text: dedent`
-        [Prinzip: Datenwiederverwendung benötigt einheitliches Recht](${ROUTE_FUNDAMENTALS_PRINCIPLES.url})
-        
+      details: {
+        title: "Was steckt in dem Prinzip?",
+        text: dedent`
         Normadressatinnen und -adressaten sowie umsetzende Behörden sparen Kosten und Zeit, wenn das Once-Only-Prinzip konsequent angewendet wird – also wenn Daten nur einmal angegeben und dann wiederverwendet werden. Die Grundlage dafür sind harmonisierte Rechtsbegriffe, ein datenschutzkonformer Austausch und die Berücksichtigung etablierter technischer Standards. 
   
         **So wenden Sie das Prinzip an:** 
@@ -115,8 +118,11 @@ export const prototypeDocumentation = {
         - Nutzen Sie existierende Daten 
         - Machen Sie erhobene Daten für andere nutzbar 
         - Nutzen Sie bestehende technische Standards 
-        - Suchen Sie frühzeitig den Austausch mit allen Beteiligten    
+        - Suchen Sie frühzeitig den Austausch mit allen Beteiligten
+        
+        [Mehr Informationen](${ROUTE_FUNDAMENTALS_PRINCIPLES.url}#datenwiederverwendung-ben-tigt-einheitliches-recht)    
       `,
+      },
       question: "Ermöglicht das Regelungsvorhaben Datenwiederverwendung?",
       hint: dedent`
         Tragen Sie zwei bis drei Stichpunkte ein. Verweisen Sie auf die jeweiligen Paragrafen und ggf. auch auf andere anwendbare Regelungen.  
@@ -126,16 +132,19 @@ export const prototypeDocumentation = {
     },
     principle3: {
       headline: "Etablierte Technologien ermöglichen effiziente Umsetzung",
-      text: dedent`
-        [Prinzip: Etablierte Technologien ermöglichen effiziente Umsetzung](${ROUTE_FUNDAMENTALS_PRINCIPLES.url})
-        
+      details: {
+        title: "Was steckt in dem Prinzip?",
+        text: dedent`
         Digitale Angebote können schneller bereitgestellt sowie günstiger entwickelt und betrieben werden, wenn sie auf bestehenden Technologien aufbauen. Offene, standardisierte Schnittstellen und Open-Source erhöhen die Sicherheit der Angebote und fördern die Interoperabilität. 
 
         **So wenden Sie das Prinzip an:** 
         
         - Ermöglichen Sie die Nutzung etablierter, öffentlicher Lösungen 
-        - Bevorzugen Sie Open-Source-Software und offene Spezifikationen  
+        - Bevorzugen Sie Open-Source-Software und offene Spezifikationen
+        
+        [Mehr Informationen](${ROUTE_FUNDAMENTALS_PRINCIPLES.url}#etablierte-technologien-erm-glichen-effiziente-umsetzung)  
       `,
+      },
       question:
         "Ermöglicht die Regelung die Nutzung von etablierten Technologien, Schnittstellen oder Open Source?",
       hint: dedent`
@@ -146,20 +155,23 @@ export const prototypeDocumentation = {
     },
     principle4: {
       headline: "Automatisierung basiert auf eindeutigen Regelungen",
-      text: dedent`
-        [Prinzip: Automatisierung basiert auf eindeutigen Regelungen](${ROUTE_FUNDAMENTALS_PRINCIPLES.url})
-        
-        Logische und verständliche Regelungen und transparente Verfahren erleichtern den Zugang zum Recht und stärken das Vertrauen in den Staat. Einfachheit und verständliche Sprache sind durch die GGO und das Handbuch der Rechtsförmlichkeit vorgeschrieben. 
-
-        Klarheit und Logik bilden die Grundlage für automatisierte Prozesse. Wenn Begriffe eindeutig definiert sowie Entscheidungsstrukturen bestimmt sind, können Regeln und klare Ausnahmen automatisiert werden. Das spart Zeit auf Seiten der Nutzenden und der Verwaltung. Mit diesen Ressourcen können kritischere Einzelfälle bearbeitet oder Normadressatinnen und -adressaten beraten werden. 
-
-        **So wenden Sie das Prinzip an:** 
-
-        - Beachten Sie bestehende Prozesse und Verantwortlichkeiten 
-        - Nutzen Sie das Potenzial von Automatisierung 
-        - Unterscheiden Sie zwischen genereller Regel, Ausnahmen und Ermessensspielräumen 
-        - Schreiben Sie einfach, eindeutig und widerspruchsfrei    
+      details: {
+        title: "Was steckt in dem Prinzip?",
+        text: dedent`
+          Logische und verständliche Regelungen und transparente Verfahren erleichtern den Zugang zum Recht und stärken das Vertrauen in den Staat. Einfachheit und verständliche Sprache sind durch die GGO und das Handbuch der Rechtsförmlichkeit vorgeschrieben. 
+  
+          Klarheit und Logik bilden die Grundlage für automatisierte Prozesse. Wenn Begriffe eindeutig definiert sowie Entscheidungsstrukturen bestimmt sind, können Regeln und klare Ausnahmen automatisiert werden. Das spart Zeit auf Seiten der Nutzenden und der Verwaltung. Mit diesen Ressourcen können kritischere Einzelfälle bearbeitet oder Normadressatinnen und -adressaten beraten werden. 
+  
+          **So wenden Sie das Prinzip an:** 
+  
+          - Beachten Sie bestehende Prozesse und Verantwortlichkeiten 
+          - Nutzen Sie das Potenzial von Automatisierung 
+          - Unterscheiden Sie zwischen genereller Regel, Ausnahmen und Ermessensspielräumen 
+          - Schreiben Sie einfach, eindeutig und widerspruchsfrei
+          
+          [Mehr Informationen](${ROUTE_FUNDAMENTALS_PRINCIPLES.url}#automatisierung-basiert-auf-eindeutigen-regelungen)    
       `,
+      },
       question:
         "Ist die Regelung so eindeutig formuliert, dass Automatisierung möglich ist?",
       hint: dedent`
@@ -183,7 +195,7 @@ export const prototypeDocumentation = {
             - Stellen Sie den Datenschutz sicher 
             - Gewährleisten Sie die Informationssicherheit
             
-            [Mehr Informationen](${ROUTE_FUNDAMENTALS_PRINCIPLES.url})
+            [Mehr Informationen](${ROUTE_FUNDAMENTALS_PRINCIPLES.url}#datenschutz-und-informationssicherheit-schaffen-vertrauen)
           `,
       },
       question:
