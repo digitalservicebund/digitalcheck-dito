@@ -160,7 +160,6 @@ export default function Index() {
           />
         </Container>
       )}
-      {/* TODO: fix margin: mt-40 mb-48 */}
       <InterviewBanner />
     </>
   );
