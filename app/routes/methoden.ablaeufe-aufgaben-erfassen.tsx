@@ -35,10 +35,7 @@ export const loader = async () => {
     console.error(visualisationsData.error);
 
     // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(
-      "Hier hat leider etwas nicht funktioniert, das tut uns Leid.",
-      { status: 500 },
-    );
+    throw new Response(methodsTasksProcesses.errorMessage, { status: 500 });
   }
 
   return visualisationsData.visualisierung;

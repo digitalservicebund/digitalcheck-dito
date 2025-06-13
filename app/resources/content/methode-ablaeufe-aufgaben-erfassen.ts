@@ -17,6 +17,7 @@ export const methodsTasksProcesses = {
     Um Ihre Regelung wirkungsvoll umzusetzen, braucht es ein klares Bild der bestehenden **Abläufe**.
     Holen Sie sich dazu Unterstützung von den umsetzenden **Akteurinnen und Akteuren**. Ein Flussdiagramm hilft, Prozesse sichtbar zu machen und die Digitaltauglichkeit einzuschätzen.
   `,
+  errorMessage: "Hier hat leider etwas nicht funktioniert, das tut uns Leid.",
   intro: {
     title: "Intro",
     plausibleEventName: "Tab+Bar.Intro",
