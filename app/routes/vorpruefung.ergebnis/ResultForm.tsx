@@ -14,11 +14,9 @@ import Input from "~/components/Input";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
-import { features } from "~/resources/features";
 import type { PreCheckAnswers } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { buildEmailBody } from "~/routes/vorpruefung.ergebnis/buildMailtoRedirectUri.ts";
 import getResultValidatorForAnswers from "~/routes/vorpruefung.ergebnis/resultValidation";
-import { useFeatureFlag } from "~/utils/featureFlags";
 import { PreCheckResult, ResultType } from "./PreCheckResult";
 import getContentForResult, { ResultContent } from "./getContentForResult";
 
@@ -31,8 +29,6 @@ export default function ResultForm({
   answers: PreCheckAnswers;
   setVorhabenTitle: Dispatch<SetStateAction<string>>;
 }>) {
-  const showSaveToPdf = useFeatureFlag(features.showSaveToPdfOption);
-
   const [showEmailAlert, setShowEmailAlert] = useState<boolean>(false);
   const [warning, setWarning] = useState<string | null>(null);
   const [emailPreviewBody, setEmailPreviewBody] = useState<string>("");
@@ -136,36 +132,15 @@ export default function ResultForm({
                 />
               )}
               <ButtonContainer
-                buttons={
-                  showSaveToPdf
-                    ? [
-                        {
-                          id: "result-email-button",
-                          text: preCheckResult.form.sendEmailButton.text,
-                          look: "primary",
-                          className:
-                            "plausible-event-name=Content.Send+Result.Button+Create+Email",
-                        },
-                        {
-                          id: "result-print-button",
-                          text: preCheckResult.form.downloadPdfButton.text,
-                          look: "ghost",
-                          type: "button",
-                          onClick: () => {
-                            if (window) window.print();
-                          },
-                        },
-                      ]
-                    : [
-                        {
-                          id: "result-email-button",
-                          text: preCheckResult.form.sendEmailButton.text,
-                          look: "primary",
-                          className:
-                            "plausible-event-name=Content.Send+Result.Button+Create+Email",
-                        },
-                      ]
-                }
+                buttons={[
+                  {
+                    id: "result-email-button",
+                    text: preCheckResult.form.sendEmailButton.text,
+                    look: "primary",
+                    className:
+                      "plausible-event-name=Content.Send+Result.Button+Create+Email",
+                  },
+                ]}
               />
               {showEmailAlert && (
                 <div className="mt-16">
