@@ -1,6 +1,3 @@
-// getFileExtension ("https://example.com/path/to/file.txt"); getFileExtension ("'https://example.com/path/to/archive.tar.gz"); // "gz" getFileExtension ("https://example.com/path/to/file");
-// getFileExtension("https://example.com/path.with.dots/");
-
 import { describe, expect, it } from "vitest";
 import {
   getDownloadableExtensionName,
