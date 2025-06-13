@@ -93,7 +93,7 @@ function NavItem({
   isDone,
 }: Readonly<NavItem>) {
   const liClassNames = twJoin(
-    "border-b-[1px] border-b-white border-l-[4px]",
+    "border-b-1 border-b-white border-l-4",
     isCurrent ? "border-l-blue-800 pointer-events-none" : "border-l-blue-100",
     isDisabled && "text-gray-800 pointer-events-none",
   );
