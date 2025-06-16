@@ -8,7 +8,7 @@ export const getDownloadableExtensionName = (href: string) => {
   const fileEnding = getFileExtension(href);
   const ext = fileEnding && downloadableExtensions.get(fileEnding);
 
-  return ext || undefined;
+  return ext ?? undefined;
 };
 
 export const getFileExtension = (href: string) => {

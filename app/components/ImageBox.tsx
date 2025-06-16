@@ -38,8 +38,8 @@ function ImageBox({
   zoomable = true,
   background = false,
 }: Readonly<ImageBoxProps>) {
-  if (!image || !image.url) return null;
-  const headingTag = tagName ? tagName : "h3";
+  if (!image.url) return null;
+  const headingTag = tagName ?? "h3";
   const imageForZoomable: ImageProps = {
     ...image,
     className: twJoin(image.className, "border-[2px] border-[#004B760D]"),

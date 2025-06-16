@@ -16,7 +16,7 @@ export type LinkProps = Route & {
   openInNewTab?: boolean;
 };
 
-const LinkItem = ({ link }: { link: LinkProps }) => (
+const LinkItem = ({ link }: { link: Readonly<LinkProps> }) => (
   <>
     {link?.preText}{" "}
     <Link

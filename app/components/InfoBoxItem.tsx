@@ -65,10 +65,9 @@ const InfoBoxItem = ({
             {detailsSummary.title && (
               <Heading {...detailsSummary.title} className="ds-label-02-bold" />
             )}
-            {detailsSummary.items &&
-              detailsSummary.items.map((details) => (
-                <DetailsSummary key={details.title} {...details} />
-              ))}
+            {detailsSummary.items.map((details) => (
+              <DetailsSummary key={details.title} {...details} />
+            ))}
           </div>
         )}
         {linkList && <LinkList {...linkList} />}

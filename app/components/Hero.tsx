@@ -10,7 +10,7 @@ type HeroProps = {
   text?: string;
 };
 
-export default function Hero({ children, badge, text }: HeroProps) {
+export default function Hero({ children, badge, text }: Readonly<HeroProps>) {
   return (
     <Background backgroundColor="blue">
       <Container className="ds-stack ds-stack-16">

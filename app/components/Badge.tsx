@@ -31,7 +31,7 @@ function Badge({
   return (
     <mark className={twMerge(badgeStyle, principleStyle, hintStyle, className)}>
       {Icon && <Icon className="size-16 fill-gray-800" />}
-      {children || text}
+      {children ?? text}
     </mark>
   );
 }

@@ -3,7 +3,7 @@ import InfoBox, { InfoBoxProps } from "./InfoBox";
 
 export type HighlightBoxProps = InfoBoxProps;
 
-export default function HighlightBox(props: HighlightBoxProps) {
+export default function HighlightBox(props: Readonly<HighlightBoxProps>) {
   return (
     <Background
       backgroundColor="blue"
