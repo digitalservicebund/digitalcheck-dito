@@ -1,6 +1,6 @@
 import { useOutletContext } from "react-router";
 
-export const useFeatureFlag = (name: string) => {
+const useFeatureFlag = (name: string) => {
   const { featureFlags } = useOutletContext<{
     featureFlags: Record<string, boolean>;
   }>();
