@@ -1,27 +1,30 @@
 import { feedbackFormular } from "~/resources/content/components/feedback-formular";
-import { steps } from "~/resources/content/components/naechste-schritte";
 import { ROUTE_FUNDAMENTALS_PRINCIPLES } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const prototypeDocumentation = {
   start: {
-    title: "3. Dokumentieren der Digitaltauglichkeit",
+    title: "3. Digitaltauglichkeit dokumentieren",
     subtitle:
-      "Sie dokumentieren in einem Fragebogen, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben. Und wie Sie diese in Ihr Regelungsvorhaben einfließen lassen.",
+      "Die Dokumentation der Digitaltauglichkeit ist ein formeller, letzter Schritt. Sie dokumentieren, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben, und wie sie ins Regelungsvorhaben eingeflossen sind.",
+    hints: [
+      {
+        title: "Die Dokumentation können Sie als PDF-Datei herunterladen",
+        text: "Sie können die Dokumentation am Ende als **PDF-Datei herunterladen** und per Mail an den Nationalen Normenkontrollrat (NKR) senden.",
+      },
+      {
+        title: "Vertraulich und nur für Sie zugänglich",
+        text: "Was sie eintragen, bleibt vertraulich. Ihre Eingaben werden nur genutzt, um die PDF-Datei zu erstellen. Ihre Daten werden **nicht gespeichert** oder weitergegeben. Niemand sonst kann darauf zugreifen.",
+      },
+      {
+        title: "Nur ein Vorgang zur selben Zeit",
+        text: "Sie können nur an einer Dokumentation zur selben Zeit arbeiten. Parallele Vorgänge sind momentan nicht möglich. Schließen Sie eine Dokumentation bitte vollständig ab, bevor Sie die nächste beginnen.",
+      },
+    ],
     buttonText: "Dokumentation starten",
-    interopNotice: {
-      title: "Hinweis zu EU-Vorgaben zur Interoperabilität",
-      text: dedent`
-        Die nachfolgende Dokumentation **behandelt keine Aspekte der EU-Vorgaben zur Interoperabilität**.
-        Enthält Ihr Vorhaben Anforderungen der Interoperabilität, müssen Sie zusätzlich 
-        eine Interoperabilitätsbewertung durchführen und diese gesondert Dokumentieren. 
-        Kontaktieren Sie uns in diesem Falle unter: [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de) oder unter [0151/40 76 78 39](tel:+4915140767839).
-        Mehr Informationen zu Interoperabilität finden Sie auf der [Übersichtsseite](/interoperabel). 
-      `,
-    },
-    timeInvest: "**Zeitaufwand:** 2-3 Stunden",
+    timeInvest: "**Zeitaufwand:** Was denkst du?",
     summary: {
-      title: "Zusammengefasst",
+      title: "Hinweise",
       items: [
         {
           headline: { text: "Beginnen Sie so früh wie möglich" },
@@ -29,17 +32,8 @@ export const prototypeDocumentation = {
         },
         {
           headline: { text: "Das prüft der Nationale Normenkontrollrat" },
-          content: `Der NKR prüft das Regelungsvorhaben auf Möglichkeiten der digitalen Umsetzung auf Basis des von Ihnen durchgeführten Digitalcheck. Das wesentliche Prüfkriterium ist die methodische und inhaltliche Nachvollziehbarkeit. Sein Prüfergebnis veröffentlicht er gegebenenfalls in seinen Stellungnahmen. Wenn Sie eine Visualisierung angefertigt haben und Sie der Veröffentlichung zustimmen, kann diese an die Stellungnahme angehängt werden. Bei Fragen oder Anregungen kommt Ihre Ansprechperson im NKR-Sekretariat auf Sie zu.`,
+          content: `Der NKR prüft die methodische und inhaltliche Nachvollziehbarkeit. Bei Fragen wird der NKR auf Sie zukommen. Das Ziel ist eine **digital- und praxistaugliche Umsetzung** der Regelung. Sein Prüfergebnis veröffentlicht er gegebenenfalls in seinen Stellungnahmen. Wenn Sie eine Visualisierung angefertigt haben und Sie der Veröffentlichung zustimmen, kann diese an die Stellungnahme angehängt werden. Bei Fragen oder Anregungen kommt Ihre Ansprechperson im NKR-Sekretariat auf Sie zu.`,
         },
-      ],
-    },
-    nextSteps: {
-      title: "So machen Sie weiter",
-      items: [
-        steps.preCheck.finished,
-        steps.methods.finished,
-        steps.documentation.finished,
-        steps.nkrFinal,
       ],
     },
   },

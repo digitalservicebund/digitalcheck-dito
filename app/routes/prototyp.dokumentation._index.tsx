@@ -1,13 +1,11 @@
 import TimerOutlined from "@digitalservicebund/icons/TimerOutlined";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
+import DetailsSummary from "~/components/DetailsSummary";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
-import InlineNotice from "~/components/InlineNotice";
-import { NumberedList } from "~/components/List";
 import RichText from "~/components/RichText";
 import SupportBanner from "~/components/SupportBanner";
-import { documentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general";
 import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
 import {
@@ -27,13 +25,15 @@ export default function Index() {
   return (
     <>
       <Hero title={start.title} subtitle={start.subtitle}>
-        <InlineNotice
-          look="info"
-          title={start.interopNotice.title}
-          tagName="h2"
-          content={start.interopNotice.text}
-          className="mt-40"
-        />
+        <div className="ds-stack ds-stack-16 mt-40">
+          {start.hints.map((hint) => (
+            <DetailsSummary
+              key={hint.title}
+              title={hint.title}
+              content={hint.text}
+            />
+          ))}
+        </div>
 
         <ButtonContainer
           className="mt-40"
@@ -62,18 +62,9 @@ export default function Index() {
         <InfoBox
           heading={{
             tagName: "h2",
-            text: documentation.summary.title,
+            text: start.summary.title,
           }}
-          items={documentation.summary.items}
-        />
-      </Container>
-      <Container>
-        <NumberedList
-          heading={{
-            tagName: "h2",
-            text: documentation.nextSteps.title,
-          }}
-          items={documentation.nextSteps.items}
+          items={start.summary.items}
         />
       </Container>
       <SupportBanner />
