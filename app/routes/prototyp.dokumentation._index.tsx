@@ -11,7 +11,7 @@ import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
 import {
   ROUTE_LANDING,
   ROUTE_PROTOTYPE_DOCUMENTATION,
-  ROUTE_PROTOTYPE_DOCUMENTATION_OVERVIEW,
+  ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION_1,
 } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
 
@@ -41,7 +41,7 @@ export default function Index() {
             {
               id: "documentation-start-button",
               text: start.buttonText,
-              href: ROUTE_PROTOTYPE_DOCUMENTATION_OVERVIEW.url,
+              href: ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION_1.url,
               type: "submit",
             },
             {
