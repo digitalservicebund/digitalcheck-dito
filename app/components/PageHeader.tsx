@@ -6,6 +6,7 @@ import { twJoin } from "tailwind-merge";
 import Breadcrumbs from "~/components/Breadcrumbs.tsx";
 import DropdownMenu from "~/components/DropdownMenu.tsx";
 import { header } from "~/resources/content/components/header.ts";
+import { features } from "~/resources/features";
 import { ROUTE_LANDING } from "~/resources/staticRoutes.ts";
 import { matchHasHandle, MatchWithHandle } from "~/utils/handles";
 import twMerge from "~/utils/tailwindMerge.ts";
@@ -57,14 +58,19 @@ const getFeatureForMatches = (
 
 const PageHeader = ({
   includeBreadcrumbs = true,
+  featureFlags,
 }: {
   includeBreadcrumbs?: boolean;
+  featureFlags: Record<keyof typeof features, boolean> | undefined;
 }) => {
   const location = useLocation();
   const currentPath = location.pathname;
   const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
+
+  const enableDocumentationPrototype =
+    featureFlags?.[features.enableDocumentationPrototype];
 
   // Handle esc key
   useEffect(() => {
@@ -203,7 +209,7 @@ const PageHeader = ({
         >
           {header.items.map((item) => renderDropdownItem(item, "mobile"))}
         </nav>
-        <Banner />
+        {!enableDocumentationPrototype && <Banner />}
         {showProgressBar && <ProgressBar />}
         {showBreadcrumbs && <Breadcrumbs />}
       </header>

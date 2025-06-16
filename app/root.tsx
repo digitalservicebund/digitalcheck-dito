@@ -141,7 +141,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
   const nonce = useNonce();
   const error = useRouteError();
   const rootLoaderData = useRouteLoaderData<typeof loader>("root");
-  const { trackingDisabled } = rootLoaderData ?? {};
+  const { trackingDisabled, featureFlags } = rootLoaderData ?? {};
   const location = useLocation();
 
   let metaTitles = <></>;
@@ -182,7 +182,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
       </head>
       <body className="flex min-h-screen flex-col">
         <ScrollAndFocus />
-        <PageHeader includeBreadcrumbs={!error} />
+        <PageHeader includeBreadcrumbs={!error} featureFlags={featureFlags} />
         {children}
         <Footer />
         <ScrollRestoration nonce={nonce} />
