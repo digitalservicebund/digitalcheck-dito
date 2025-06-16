@@ -1,3 +1,4 @@
+import { feedbackFormular } from "~/resources/content/components/feedback-formular";
 import { steps } from "~/resources/content/components/naechste-schritte";
 import { ROUTE_FUNDAMENTALS_PRINCIPLES } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
@@ -236,10 +237,77 @@ export const prototypeDocumentation = {
     },
   },
   result: {
-    title: "Dokumentation abschließen",
+    title: "Dokumentation prüfen und senden",
     data: {
       title: "Eingaben überprüfen",
-      text: `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.`,
+      text: `Bitte überprüfen Sie nachfolgend alle Eingaben auf ihre Richtigkeit und Vollständigkeit.`,
+      buttonDownload: "Dokumentation herunterladen (PDF-Datei)",
+      buttonBack: "Zurück zum Bearbeiten",
+    },
+    form: {
+      formLegend: "Dokumentation an den NKR senden",
+      instructions: dedent`
+        - Laden Sie die Dokumentation als PDF-Datei herunter.
+        - Senden Sie die **PDF-Datei per E-Mail** an folgende Adresse: nkr@bmj.bund.de. Der NKR prüft die methodische und inhaltliche Nachvollziehbarkeit. Bei Fragen wird der NKR auf Sie zukommen. Das Ziel ist eine **digital- und praxistaugliche Umsetzung**.
+        - Bei Interoperabilitätsbezug senden Sie eine Kopie der E-Mail mit der PDF-Datei an interoperabel@digitalservice.bund.de 
+        - Visuelle Darstellungen und Skizzen sind vom NKR gern gesehen. Hängen Sie diese formlos als PDF oder als Screenshot an.
+        - Damit ist der Digitalcheck für Sie beendet.
+      `,
+      emailClientHint: {
+        title: "Ihr Email-Programm wird geöffnet...",
+        text: "Dies kann je nach Anwendung einen Moment dauern. Sie können diesen Hinweis jederzeit schließen, sobald sich Ihr E-Mail-Programm geöffnet hat. Sollte sich Ihr E-Mail Programm nicht öffnen, kontaktieren Sie uns unter [0151/40 76 78 39](tel:+4915140767839) oder per E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de).",
+      },
+      faqs: {
+        title: "Häufige Fragen",
+        details: [
+          {
+            label: "Was passiert, wenn ich auf „E-Mail erstellen“ klicke?",
+            text: "In Ihrem E-Mail-Programm öffnet sich eine neue E-Mail, die automatisch an den NKR adressiert ist. Sie haben die Möglichkeit, den Text und Empfänger individuell anzupassen. Bitte hängen sie selbst die Dokumentation und ggf. Visualisierungen als PDF-Dateien an. Den Zeitpunkt des Versands wählen Sie selbst.",
+          },
+          {
+            label: "Werden meine Eingaben vertraulich behandelt?",
+            text: "Was sie eingetragen haben, bleibt vertraulich. Ihre Eingaben werden nur genutzt, um die PDF-Datei zu erstellen. Ihre Daten werden nicht gespeichert oder weitergegeben. Niemand sonst kann darauf zugreifen.",
+          },
+        ],
+      },
+      copyAddressButton: {
+        text: "Empfängeradresse kopieren",
+        textCopied: "Adresse kopiert!",
+      },
+      sendEmailButton: {
+        text: "E-Mail erstellen",
+      },
+      emailTemplate: {
+        toNkr: "nkr@bmj.bund.de",
+        toDC: "inter operabel@digitalservice.bund.de",
+        subject: "Digitalcheck Dokumentation",
+        body: dedent`
+          Guten Tag,
+          
+          anbei erhalten Sie die Digitalcheck Dokumentation zu meinem Regelungsvorhaben.
+          
+          Mit freundlichen Grüßen
+          
+          *Diese E-Mail wurde automatisch erstellt.*
+        `,
+      },
+      downloadStarted: "Dokumentation wird heruntergeladen",
+    },
+    feedbackForm: {
+      heading: feedbackFormular.heading,
+      trackingEvent: "Feedback Dokumentation Abschluss",
+      questions: [
+        {
+          id: "simple-feedback",
+          trackingEvent: "wie-einfach",
+          text: "Wie einfach oder schwierig war der Prozess der Dokumentation für Sie?",
+          options: feedbackFormular.optionsSimple,
+        },
+      ],
+      contact:
+        "Schreiben Sie uns eine E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Feedback:%20erarbeiten.digitalcheck.bund.de), wenn wir Sie für Feedback zu unserem Service kontaktieren dürfen.",
+      button: feedbackFormular.button,
+      success: feedbackFormular.success,
     },
   },
 };

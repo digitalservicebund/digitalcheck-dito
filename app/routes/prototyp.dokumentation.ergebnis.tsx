@@ -1,14 +1,24 @@
-import { CheckCircleOutlined } from "@digitalservicebund/icons";
+import { CheckCircleOutlined, CopyAll } from "@digitalservicebund/icons";
 
+import { useState } from "react";
+import { redirect } from "react-router";
 import Background from "~/components/Background";
 import Box from "~/components/Box";
+import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
+import DetailsSummary from "~/components/DetailsSummary";
+import FeedbackForm from "~/components/FeedbackForm";
 import Header from "~/components/Header";
+import Heading from "~/components/Heading";
 import { NumberedList } from "~/components/List";
-import SupportBanner from "~/components/SupportBanner";
+import RichText from "~/components/RichText";
 import { documentation } from "~/resources/content/dokumentation";
 import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
-import { ROUTE_PROTOTYPE_DOCUMENTATION_RESULT } from "~/resources/staticRoutes";
+import {
+  ROUTE_DOCUMENTATION_STATIC_PDF,
+  ROUTE_PROTOTYPE_DOCUMENTATION_META,
+  ROUTE_PROTOTYPE_DOCUMENTATION_RESULT,
+} from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
 
 const { result } = prototypeDocumentation;
@@ -18,7 +28,21 @@ export function meta() {
   return constructMetaTitle(ROUTE_PROTOTYPE_DOCUMENTATION_RESULT.title);
 }
 
+export function action() {
+  return redirect(
+    `mailto:${encodeURIComponent(result.form.emailTemplate.toNkr)}?subject=${encodeURIComponent(result.form.emailTemplate.subject)}&body=${encodeURIComponent(result.form.emailTemplate.body)}`,
+  );
+}
+
 export default function DocumentationResult() {
+  const [isMailAddressCopied, setIsMailAddressCopied] = useState(false);
+
+  const handleCopyMailAddress = async () => {
+    await navigator.clipboard.writeText(result.form.emailTemplate.toNkr);
+    setIsMailAddressCopied(true);
+    setTimeout(() => setIsMailAddressCopied(false), 2000); // Hide Kopiert message after 2 seconds
+  };
+
   return (
     <>
       <Background backgroundColor="blue" className="py-40 print:pb-0">
@@ -46,13 +70,77 @@ export default function DocumentationResult() {
               }}
               content={{ markdown: result.data.text }}
             />
-            {/*<div className="mt-32 print:hidden">*/}
-            {/*  <ResultForm*/}
-            {/*    result={result}*/}
-            {/*    answers={answers}*/}
-            {/*    setVorhabenTitle={setVorhabenTitle}*/}
-            {/*  />*/}
-            {/*</div>*/}
+            <DetailsSummary
+              title="Alle Eingaben"
+              content={<>Foobar</>}
+              className="mt-12"
+            />
+            <ButtonContainer
+              buttons={[
+                {
+                  text: result.data.buttonDownload,
+                  href: ROUTE_DOCUMENTATION_STATIC_PDF.url,
+                },
+                {
+                  text: result.data.buttonBack,
+                  href: ROUTE_PROTOTYPE_DOCUMENTATION_META.url,
+                  look: "tertiary",
+                },
+              ]}
+              className="mt-40"
+            />
+            <hr className="mt-40 mb-32 border-t-[2px] border-gray-400" />
+            <form method="post">
+              <fieldset className="ds-stack ds-stack-24">
+                <legend>
+                  <Heading tagName="h3" text={result.form.formLegend} />
+                </legend>
+                <div className="flex items-start pb-[40px]">
+                  <div className="ds-stack ds-stack-16 flex-grow">
+                    <RichText markdown={result.form.instructions} />
+                    <ButtonContainer
+                      className="mt-40"
+                      buttons={[
+                        {
+                          id: "result-email-button",
+                          text: result.form.sendEmailButton.text,
+                          look: "primary",
+                          className:
+                            "plausible-event-name=Content.Send+Documentation.Button+Create+Email",
+                        },
+                        {
+                          look: "ghost",
+                          type: "button",
+                          className:
+                            "plausible-event-name=Content.Send+Documentation.Button+Copy+Email+Addresses",
+                          text: isMailAddressCopied
+                            ? result.form.copyAddressButton.textCopied
+                            : result.form.copyAddressButton.text,
+                          iconRight: (
+                            <CopyAll className="h-40 w-40 text-blue-800" />
+                          ),
+                          onClick: () => {
+                            void handleCopyMailAddress();
+                          },
+                        },
+                      ]}
+                    />
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+            <hr className="mb-32 border-t-[2px] border-gray-400" />
+            <div className="ds-stack ds-stack-16 mt-40">
+              <Heading tagName="h3" text={result.form.faqs.title} />
+              {result.form.faqs.details.map((detail, index) => (
+                <DetailsSummary
+                  className={`plausible-event-name=Content.Content+Info.Accordion+FAQ${index + 1}`}
+                  key={detail.label}
+                  title={detail.label}
+                  content={detail.text}
+                />
+              ))}
+            </div>
           </Container>
         </div>
       </Background>
@@ -65,7 +153,10 @@ export default function DocumentationResult() {
           items={documentation.nextSteps.items}
         />
       </Container>
-      <SupportBanner />
+      <FeedbackForm
+        className="relative left-1/2 w-screen -translate-x-1/2"
+        {...result.feedbackForm}
+      />
     </>
   );
 }
