@@ -31,7 +31,7 @@ const LinkItem = ({ link }: { link: Readonly<LinkProps> }) => (
   </>
 );
 
-function LinkList({ header, links, className }: LinkListProps) {
+function LinkList({ header, links, className }: Readonly<LinkListProps>) {
   return (
     <div className={tailwindMerge("ds-stack ds-stack-8", className)}>
       {header && (
