@@ -6,14 +6,7 @@ test.describe("test support page", () => {
     await page.goto(ROUTE_SUPPORT.url);
   });
 
-  test("suppport tabs switch between offerings", async ({
-    page,
-    browserName,
-    isMobile,
-  }) => {
-    test.skip(browserName === "webkit" && isMobile);
-
-    await page.getByRole("tab", { name: "Schnelle Hilfe" }).click();
+  test("suppport tabs switch between offerings", async ({ page, isMobile }) => {
     await expect(
       page.getByRole("heading", { name: "IT-Wissen" }),
     ).toBeVisible();
@@ -21,7 +14,13 @@ test.describe("test support page", () => {
       page.getByRole("heading", { name: "Digitale Umsetzung erarbeiten" }),
     ).toBeHidden();
 
-    await page.getByRole("tab", { name: "Umfangreiche Beratung" }).click();
+    if (isMobile) {
+      await page.getByRole("button", { name: "Schnelle Hilfe" }).click();
+      await page.getByRole("option", { name: "Umfangreiche Beratung" }).click();
+    } else {
+      await page.getByRole("tab", { name: "Umfangreiche Beratung" }).click();
+    }
+
     await expect(page.getByRole("heading", { name: "IT-Wissen" })).toBeHidden();
     await expect(
       page.getByRole("heading", { name: "Digitale Umsetzung erarbeiten" }),

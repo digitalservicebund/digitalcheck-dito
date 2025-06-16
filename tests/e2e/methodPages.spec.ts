@@ -191,11 +191,17 @@ test.describe("method sub page downloads", () => {
     expect(download.suggestedFilename()).toContain(".xlsx");
   });
 
-  test("tasks & processes powerpoint", async ({ page }) => {
+  test("tasks & processes powerpoint", async ({ page, isMobile }) => {
     await page.goto(ROUTE_METHODS_TASKS_PROCESSES.url);
 
     const downloadPromise = page.waitForEvent("download");
-    await page.getByRole("tab", { name: "Anleitung" }).click();
+    if (isMobile) {
+      await page.getByRole("button", { name: "Intro" }).click();
+      await page.getByRole("option", { name: "Anleitung" }).click();
+    } else {
+      await page.getByRole("tab", { name: "Anleitung" }).click();
+    }
+
     await page.getByRole("link", { name: "PPT-Vorlage runterladen" }).click();
     const download = await downloadPromise;
     expect(download.suggestedFilename()).toContain(".pptx");
