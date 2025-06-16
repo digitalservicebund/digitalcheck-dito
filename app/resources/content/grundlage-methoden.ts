@@ -1,6 +1,6 @@
 export const fundamentalsMethods = {
   title: "Methoden und Werkzeuge",
-  subTitle:
+  subtitle:
     "Manche Themen brauchen mehr als nur ein Schriftprogramm, um den besten Inhalt zu erarbeiten.",
   roadmap: {
     title: "Der Fahrplan",

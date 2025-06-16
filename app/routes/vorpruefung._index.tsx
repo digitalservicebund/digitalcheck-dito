@@ -4,8 +4,8 @@ import Box from "~/components/Box";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
-import Header from "~/components/Header";
 import Heading from "~/components/Heading";
+import Hero from "~/components/Hero";
 import Image from "~/components/Image";
 import InfoBox from "~/components/InfoBox";
 import SupportBanner from "~/components/SupportBanner";
@@ -87,47 +87,34 @@ export default function Index() {
 
   return (
     <>
-      <Background backgroundColor="blue">
-        <Container>
-          <Header
-            heading={{
-              tagName: "h1",
-              text: preCheck.start.title,
-            }}
-            content={{
-              markdown: preCheck.start.subtitle,
-              className: "md:text-2xl",
-            }}
-          ></Header>
-        </Container>
-        <Container className="pt-0">
-          <div className="ds-stack ds-stack-16 mb-40">
-            {preCheck.start.hints.map((hint) => (
-              <DetailsSummary
-                key={hint.title}
-                title={hint.title}
-                content={hint.text}
-              />
-            ))}
-          </div>
-          <ButtonContainer
-            buttons={[
-              {
-                id: PRE_CHECK_START_BUTTON_ID,
-                text: preCheck.start.buttonText,
-                href: ROUTE_PRECHECK_INFO.url,
-                type: "submit",
-              },
-              {
-                id: "preCheck-back-button",
-                text: general.buttonBack.text,
-                href: ROUTE_LANDING.url,
-                look: "tertiary",
-              },
-            ]}
-          />
-        </Container>
-      </Background>
+      <Hero title={preCheck.start.title} subtitle={preCheck.start.subtitle}>
+        <div className="ds-stack ds-stack-16 mb-40">
+          {preCheck.start.hints.map((hint) => (
+            <DetailsSummary
+              key={hint.title}
+              title={hint.title}
+              content={hint.text}
+            />
+          ))}
+        </div>
+        <ButtonContainer
+          buttons={[
+            {
+              id: PRE_CHECK_START_BUTTON_ID,
+              text: preCheck.start.buttonText,
+              href: ROUTE_PRECHECK_INFO.url,
+              type: "submit",
+            },
+            {
+              id: "preCheck-back-button",
+              text: general.buttonBack.text,
+              href: ROUTE_LANDING.url,
+              look: "tertiary",
+            },
+          ]}
+        />
+      </Hero>
+
       <Container>
         <Tabs tabs={tabsData} />
       </Container>

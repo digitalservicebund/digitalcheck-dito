@@ -1,9 +1,8 @@
-import Background from "~/components/Background";
 import Badge, { PrincipleNumber } from "~/components/Badge";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
-import Header from "~/components/Header";
 import Heading from "~/components/Heading";
+import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxItem from "~/components/InfoBoxItem";
 import LinkListBox from "~/components/LinkListBox";
@@ -24,34 +23,26 @@ export function meta() {
 export default function FivePrinciples() {
   return (
     <>
-      <Background backgroundColor="blue">
-        <Container>
-          <Header
-            heading={{
-              tagName: "h1",
-              text: methodsFivePrinciples.title,
-            }}
-            content={{
-              markdown: methodsFivePrinciples.subTitle,
-            }}
-          />
-          <LinkListBox
-            heading={methodsFivePrinciples.contentOverviewTitle}
-            links={[
-              {
-                id: "instruction",
-                title: methodsFivePrinciples.anchor.instruction,
-              },
-              ...methodsFivePrinciples.principles.map((principle) => {
-                return {
-                  id: slugify(principle.title),
-                  title: `${methodsFivePrinciples.anchor.principle} ${principle.title}`,
-                };
-              }),
-            ]}
-          />
-        </Container>
-      </Background>
+      <Hero
+        title={methodsFivePrinciples.title}
+        subtitle={methodsFivePrinciples.subtitle}
+      >
+        <LinkListBox
+          heading={methodsFivePrinciples.contentOverviewTitle}
+          links={[
+            {
+              id: "instruction",
+              title: methodsFivePrinciples.anchor.instruction,
+            },
+            ...methodsFivePrinciples.principles.map((principle) => {
+              return {
+                id: slugify(principle.title),
+                title: `${methodsFivePrinciples.anchor.principle} ${principle.title}`,
+              };
+            }),
+          ]}
+        />
+      </Hero>
 
       <Container className="ds-stack ds-stack-40">
         <div id="instruction">

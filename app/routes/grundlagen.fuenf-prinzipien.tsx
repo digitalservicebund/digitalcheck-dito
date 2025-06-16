@@ -1,7 +1,6 @@
-import Background from "~/components/Background";
 import { PrincipleNumber } from "~/components/Badge";
 import Container from "~/components/Container";
-import Header from "~/components/Header";
+import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import LinkListBox from "~/components/LinkListBox";
 import SupportBanner from "~/components/SupportBanner";
@@ -20,28 +19,20 @@ export function meta() {
 export default function FundamentalsFivePrinciples() {
   return (
     <>
-      <Background backgroundColor="blue">
-        <Container>
-          <Header
-            heading={{
-              tagName: "h1",
-              text: methodsFivePrinciples.title,
-            }}
-            content={{
-              markdown: methodsFivePrinciples.subTitle,
-            }}
-          />
-          <LinkListBox
-            heading={methodsFivePrinciples.contentOverviewTitle}
-            links={methodsFivePrinciples.principles.map((principle) => {
-              return {
-                id: slugify(principle.title),
-                title: principle.title,
-              };
-            })}
-          />
-        </Container>
-      </Background>
+      <Hero
+        title={methodsFivePrinciples.title}
+        subtitle={methodsFivePrinciples.subtitle}
+      >
+        <LinkListBox
+          heading={methodsFivePrinciples.contentOverviewTitle}
+          links={methodsFivePrinciples.principles.map((principle) => {
+            return {
+              id: slugify(principle.title),
+              title: principle.title,
+            };
+          })}
+        />
+      </Hero>
 
       {methodsFivePrinciples.principles.map((principle) => (
         <Container className="pb-64" key={slugify(principle.title)}>

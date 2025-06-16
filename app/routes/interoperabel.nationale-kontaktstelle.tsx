@@ -1,7 +1,7 @@
 import Background from "~/components/Background";
 import Container from "~/components/Container";
-import Header from "~/components/Header";
 import Heading from "~/components/Heading";
+import Hero from "~/components/Hero";
 import ImageZoomable from "~/components/ImageZoomable";
 import InfoBox from "~/components/InfoBox.tsx";
 import { BulletList } from "~/components/List";
@@ -117,20 +117,8 @@ export default function SPOC() {
 
   return (
     <>
-      <Background backgroundColor="blue">
-        <Container>
-          <Header
-            heading={{
-              tagName: "h1",
-              text: spoc.headline,
-            }}
-            content={{
-              markdown: spoc.content,
-              className: "md:text-2xl",
-            }}
-          ></Header>
-        </Container>
-      </Background>
+      <Hero title={spoc.headline} subtitle={spoc.content} />
+
       <Container>
         <Tabs tabs={tabsData} />
       </Container>

@@ -1,6 +1,5 @@
-import Background from "~/components/Background";
 import Container from "~/components/Container";
-import Header from "~/components/Header";
+import Hero from "~/components/Hero";
 import RichText from "~/components/RichText";
 import { privacy } from "~/resources/content/datenschutz";
 import { ROUTE_PRIVACY } from "~/resources/staticRoutes";
@@ -13,16 +12,8 @@ export function meta() {
 export default function Index() {
   return (
     <>
-      <Background backgroundColor="blue">
-        <Container>
-          <Header
-            heading={{
-              tagName: "h1",
-              text: privacy.title,
-            }}
-          ></Header>
-        </Container>
-      </Background>
+      <Hero title={privacy.title} />
+
       <Container>
         <RichText markdown={privacy.content} />
       </Container>

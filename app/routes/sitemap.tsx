@@ -1,9 +1,8 @@
 import { ReactNode } from "react";
 import { useLoaderData } from "react-router";
 
-import Background from "~/components/Background";
 import Container from "~/components/Container";
-import Header from "~/components/Header";
+import Hero from "~/components/Hero";
 import { Route, ROUTE_SITEMAP, ROUTES } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
 
@@ -56,16 +55,8 @@ export default function Sitemap(): ReactNode {
 
   return (
     <>
-      <Background backgroundColor="blue">
-        <Container>
-          <Header
-            heading={{
-              tagName: "h1",
-              text: "Sitemap",
-            }}
-          />
-        </Container>
-      </Background>
+      <Hero title="Sitemap" />
+
       <Container>{renderRoutes(routes)}</Container>
     </>
   );

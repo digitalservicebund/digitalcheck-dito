@@ -8,6 +8,7 @@ import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
+import Hero from "~/components/Hero";
 import Image from "~/components/Image";
 import RichText from "~/components/RichText";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
@@ -162,20 +163,8 @@ export default function Index() {
 
   return (
     <>
-      <Background backgroundColor="blue">
-        <Container>
-          <Header
-            heading={{
-              tagName: "h1",
-              text: title,
-            }}
-            content={{
-              markdown: subtitle,
-              className: "md:text-2xl",
-            }}
-          />
-        </Container>
-      </Background>
+      <Hero title={title} subtitle={subtitle} />
+
       <Background backgroundColor="midBlue">
         <Container className="flex flex-col py-0 lg:h-[420px] lg:flex-row">
           <div className="py-32 sm:py-48 lg:w-1/2 lg:self-center">

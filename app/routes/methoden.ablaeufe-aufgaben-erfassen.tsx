@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router";
 import Background from "~/components/Background";
 import Card from "~/components/Card";
 import Container from "~/components/Container";
-import Header from "~/components/Header";
+import Hero from "~/components/Hero";
 import HighlightBox from "~/components/HighlightBox";
 import InfoBox from "~/components/InfoBox";
 import InterviewBanner from "~/components/InterviewBanner";
@@ -125,20 +125,10 @@ export default function Visualization() {
 
   return (
     <>
-      <Background backgroundColor="blue">
-        <Container>
-          <Header
-            heading={{
-              tagName: "h1",
-              text: methodsTasksProcesses.title,
-            }}
-            content={{
-              markdown: methodsTasksProcesses.subtitle,
-              className: "md:text-2xl",
-            }}
-          ></Header>
-        </Container>
-      </Background>
+      <Hero
+        subtitle={methodsTasksProcesses.subtitle}
+        title={methodsTasksProcesses.title}
+      />
 
       <Container>
         <Tabs tabs={tabsData} />

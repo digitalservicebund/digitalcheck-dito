@@ -4,10 +4,9 @@ import Background from "~/components/Background";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
-import Header from "~/components/Header";
+import Hero from "~/components/Hero";
 import Image from "~/components/Image";
 import InterviewBanner from "~/components/InterviewBanner";
-import RichText from "~/components/RichText";
 import { methodsITSystems } from "~/resources/content/methode-it-systeme-erfassen";
 import { methodsTechnicalFeasibility } from "~/resources/content/methode-technische-umsetzbarkeit";
 import { methodsResponsibleActors } from "~/resources/content/methode-zustaendige-akteurinnen-auflisten";
@@ -59,26 +58,8 @@ export default function Index() {
 
   return (
     <>
-      <Background backgroundColor="blue">
-        <Container>
-          <Header
-            heading={{
-              tagName: "h1",
-              text: content.title,
-            }}
-            content={{
-              markdown: content.subtitle,
-              className: "md:text-2xl",
-            }}
-          ></Header>
-          {content.guidance && (
-            <RichText
-              markdown={content.guidance}
-              className="ds-stack ds-stack-0 mt-24"
-            />
-          )}
-        </Container>
-      </Background>
+      <Hero subtitle={content.subtitle} title={content.title} />
+
       {"accordion" in content && (
         <Container className="pb-0">
           <DetailsSummary

@@ -2,8 +2,8 @@ import { Link } from "react-router";
 import Background from "~/components/Background";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
-import Header from "~/components/Header";
 import Heading from "~/components/Heading";
+import Hero from "~/components/Hero";
 import ImageBox from "~/components/ImageBox.tsx";
 import InfoBox from "~/components/InfoBox";
 import { NumberedList } from "~/components/List";
@@ -93,20 +93,12 @@ export default function Index() {
 
   return (
     <>
-      <Background backgroundColor="darkBlue" className="py-24">
-        <Container>
-          <Header
-            heading={{
-              tagName: "h1",
-              text: index.title,
-            }}
-            content={{
-              markdown: index.subtitle,
-              className: "md:text-2xl",
-            }}
-          ></Header>
-        </Container>
-      </Background>
+      <Hero
+        title={index.title}
+        subtitle={index.subtitle}
+        backgroundColor="darkBlue"
+      />
+
       <Container>
         <Tabs tabs={tabsData} />
       </Container>

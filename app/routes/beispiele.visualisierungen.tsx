@@ -1,9 +1,8 @@
 import { Link, useLoaderData } from "react-router";
 
-import Background from "~/components/Background";
 import Container from "~/components/Container";
-import Header from "~/components/Header";
 import Heading from "~/components/Heading";
+import Hero from "~/components/Hero";
 import VisualisationItem from "~/components/VisualisationItem";
 import { examplesVisualisations } from "~/resources/content/beispiele-visualisierungen";
 import {
@@ -63,20 +62,11 @@ export default function BeispieleVisualisierungen() {
   );
   return (
     <>
-      <Background backgroundColor="blue">
-        <Container>
-          <Header
-            heading={{
-              text: examplesVisualisations.title,
-              tagName: "h1",
-              className: "max-w-full",
-            }}
-            content={{
-              markdown: examplesVisualisations.subtitle,
-            }}
-          />
-        </Container>
-      </Background>
+      <Hero
+        title={examplesVisualisations.title}
+        subtitle={examplesVisualisations.subtitle}
+      />
+
       <Container className="ds-stack ds-stack-48">
         {Object.entries(groupedVisualisations).map(
           ([regelungTitle, visualisations]) => (

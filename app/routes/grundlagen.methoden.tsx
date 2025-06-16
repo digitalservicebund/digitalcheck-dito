@@ -1,6 +1,5 @@
-import Background from "~/components/Background";
 import Container from "~/components/Container";
-import Header from "~/components/Header";
+import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox.tsx";
 import { BulletList } from "~/components/List.tsx";
 import SupportBanner from "~/components/SupportBanner";
@@ -16,19 +15,11 @@ export function meta() {
 export default function FundamentalsMethods() {
   return (
     <>
-      <Background backgroundColor="blue">
-        <Container>
-          <Header
-            heading={{
-              tagName: "h1",
-              text: fundamentalsMethods.title,
-            }}
-            content={{
-              markdown: fundamentalsMethods.subTitle,
-            }}
-          />
-        </Container>
-      </Background>
+      <Hero
+        title={fundamentalsMethods.title}
+        subtitle={fundamentalsMethods.subtitle}
+      />
+
       <Container>
         <InfoBox
           heading={{

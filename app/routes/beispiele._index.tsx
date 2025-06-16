@@ -1,7 +1,6 @@
-import Background from "~/components/Background";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
-import Header from "~/components/Header";
+import Hero from "~/components/Hero";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { examples } from "~/resources/content/beispiele";
 import { ROUTE_EXAMPLES } from "~/resources/staticRoutes";
@@ -30,20 +29,8 @@ export default function Digitaltauglichkeit_index() {
 
   return (
     <>
-      <Background backgroundColor="blue" className="py-24">
-        <Container>
-          <Header
-            heading={{
-              tagName: "h1",
-              text: examples.title,
-            }}
-            content={{
-              markdown: examples.subtitle,
-              className: "md:text-2xl",
-            }}
-          ></Header>
-        </Container>
-      </Background>
+      <Hero title={examples.title} subtitle={examples.subtitle} />
+
       <Container className="pb-0">
         <Tabs tabs={tabsData} />
       </Container>

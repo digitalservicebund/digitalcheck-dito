@@ -107,9 +107,10 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
 
   return (
     <>
-      <Hero subtitle={examplesRegelungen.principles.hero.subtitle}>
-        {examplesRegelungen.principles.hero.title}
-      </Hero>
+      <Hero
+        title={examplesRegelungen.principles.hero.title}
+        subtitle={examplesRegelungen.principles.hero.subtitle}
+      />
 
       <Container className="ds-stack ds-stack-40">
         <Tabs

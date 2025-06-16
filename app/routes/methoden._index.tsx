@@ -1,7 +1,6 @@
 import React from "react";
-import Background from "~/components/Background";
 import Container from "~/components/Container";
-import Header from "~/components/Header";
+import Hero from "~/components/Hero";
 import { BulletList, NumberedList } from "~/components/List";
 import SupportBanner from "~/components/SupportBanner";
 import { methods } from "~/resources/content/methoden";
@@ -43,20 +42,8 @@ const renderStepContent = (
 export default function Methoden() {
   return (
     <>
-      <Background backgroundColor="blue">
-        <Container>
-          <Header
-            heading={{
-              tagName: "h1",
-              text: methods.title,
-            }}
-            content={{
-              markdown: methods.subtitle,
-              className: "md:text-2xl",
-            }}
-          ></Header>
-        </Container>
-      </Background>
+      <Hero subtitle={methods.subtitle} title={methods.title} />
+
       <Container>
         <BulletList items={methodStepsItems(true, renderStepContent)} />
       </Container>

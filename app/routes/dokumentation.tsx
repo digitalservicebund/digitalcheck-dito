@@ -1,7 +1,6 @@
-import Background from "~/components/Background";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
-import Header from "~/components/Header";
+import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InlineNotice from "~/components/InlineNotice";
 import { NumberedList } from "~/components/List";
@@ -21,21 +20,10 @@ export const handle = {
 export default function Index() {
   return (
     <>
-      <Background backgroundColor="blue">
-        <Container>
-          <Header
-            heading={{
-              tagName: "h1",
-              text: documentation.title,
-            }}
-            content={{
-              markdown: documentation.subtitle,
-              className: "md:text-2xl",
-            }}
-          />
-          <ButtonContainer className="mt-48" buttons={documentation.buttons} />
-        </Container>
-      </Background>
+      <Hero title={documentation.title} subtitle={documentation.subtitle}>
+        <ButtonContainer className="mt-48" buttons={documentation.buttons} />
+      </Hero>
+
       <Container className="max-sm:p-0!">
         <InlineNotice
           look="warning"

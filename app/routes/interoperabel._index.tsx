@@ -4,8 +4,8 @@ import Box from "~/components/Box.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import FeedbackForm from "~/components/FeedbackForm";
-import Header from "~/components/Header";
 import Heading from "~/components/Heading";
+import Hero from "~/components/Hero";
 import Image from "~/components/Image";
 import ImageZoomable from "~/components/ImageZoomable";
 import InfoBox from "~/components/InfoBox";
@@ -122,20 +122,11 @@ export default function Interoperability() {
   ];
   return (
     <>
-      <Background backgroundColor="blue">
-        <Container>
-          <Header
-            heading={{
-              tagName: "h1",
-              text: interoperability.headline,
-            }}
-            content={{
-              markdown: interoperability.content,
-              className: "md:text-2xl",
-            }}
-          ></Header>
-        </Container>
-      </Background>
+      <Hero
+        title={interoperability.headline}
+        subtitle={interoperability.content}
+      />
+
       <Background backgroundColor="midBlue">
         <Container className="flex flex-col py-0 lg:h-[626px] lg:flex-row">
           <div className="py-32 sm:py-48 lg:w-1/2 lg:self-center lg:pr-48">

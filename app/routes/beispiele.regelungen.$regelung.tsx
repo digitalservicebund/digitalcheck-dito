@@ -6,6 +6,7 @@ import Container from "~/components/Container";
 import CustomLink from "~/components/CustomLink";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
+import Hero from "~/components/Hero";
 import InlineInfoList from "~/components/InlineInfoList";
 import InlineNotice from "~/components/InlineNotice";
 import ParagraphList from "~/components/ParagraphList";
@@ -95,20 +96,8 @@ export default function Gesetz() {
   const principles = useOutletContext<Prinzip[]>();
   return (
     <>
-      <Background backgroundColor="blue">
-        <Container>
-          <Header
-            heading={{
-              text: regelung.Titel,
-              tagName: "h1",
-              className: "max-w-full",
-            }}
-            content={{
-              markdown: examplesRegelungen.subtitle[0],
-            }}
-          />
-        </Container>
-      </Background>
+      <Hero title={regelung.Titel} subtitle={examplesRegelungen.subtitle[0]} />
+
       <Background backgroundColor="midLightBlue">
         <Container className="py-0">
           <InlineInfoList

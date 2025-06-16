@@ -1,6 +1,13 @@
 import { Link } from "react-router";
 import Heading from "~/components/Heading";
 import { general } from "~/resources/content/shared/general";
+import twMerge from "~/utils/tailwindMerge";
+
+export type LinkListBoxProps = {
+  links: LinkItem[];
+  heading?: string;
+  className?: string;
+};
 
 export type LinkItem = {
   id: string;
@@ -10,9 +17,10 @@ export type LinkItem = {
 export default function LinkListBox({
   heading,
   links,
-}: Readonly<{ heading?: string; links: LinkItem[] }>) {
+  className,
+}: Readonly<LinkListBoxProps>) {
   return (
-    <div className="mt-64">
+    <div className={twMerge("mt-64", className)}>
       <Heading
         tagName="div"
         text={heading ?? general.tableOfContents.headline}
