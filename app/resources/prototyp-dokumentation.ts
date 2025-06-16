@@ -49,23 +49,19 @@ export const prototypeDocumentation = {
       label: "Vorläufiger Arbeitstitel des Vorhabens",
     },
   },
-  participation1: {
-    headline:
-      "Wie haben Sie geprüft, ob die Umsetzung des Regelungsvorhabens den Bedürfnissen der Betroffenen und den Anforderungen in der Umsetzung entsprechen wird?",
-    text: dedent`
+  participation: {
+    headline: "Praxistaugliche Umsetzung",
+    textIntro: dedent`
+      Ihr Regelungsvorhaben soll den Bedürfnissen der Betroffenen entsprechen. Die Anforderungen der umsetzenden Akteurinnen und Akteure sollen Sie ebenfalls berücksichtigen. Dafür müssen Sie sich mit den Beteiligten austauschen.
+      
       Bitte listen Sie stichpunktartig auf, ob bzw. welche Schritte Sie unternommen haben.  
 
       **Zum Beispiel:** frühzeitige Befragung von Bürgerinnen und Bürgern, Gespräche mit Vollzugsakteurinnen und -akteuren oder Expertinnen und Experten, formelle Beteiligungsverfahren. 
       `,
-    textfieldExplanationLabel: "Dokumentieren Sie:",
-  },
-  participation2: {
-    headline:
-      "Wie spiegeln sich die Erkenntnisse, die durch die oben genannten Schritte gewonnen wurden, im Regelungsvorhaben wider?",
-    text: dedent`
-      Bitte listen Sie stichpunktartig auf, welche Erkenntnisse eingearbeitet wurden und geben Sie Hinweise auf Paragrafen, die besonders umsetzungsrelevant sind.  
-      `,
-    textfieldExplanationLabel: "Dokumentieren Sie:",
+    textfieldParticipationLabel: "Austauschformate:",
+    textResults:
+      "Was haben Sie aus dem Austausch mit den Beteiligten mitgenommen? Bitte listen Sie stichpunktartig auf, welche Erkenntnisse eingearbeitet wurden und geben Sie Hinweise auf Paragrafen, die besonders umsetzungsrelevant sind.",
+    textfieldResultsLabel: "Eingearbeitete Erkenntnisse:",
   },
   principles: {
     radioOptions: ["Ja", "Nein", "Teilweise", "Nicht relevant"],

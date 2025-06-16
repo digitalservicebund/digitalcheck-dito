@@ -6,22 +6,26 @@ import Textarea from "~/components/Textarea";
 import { general } from "~/resources/content/shared/general";
 import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
 import {
-  ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION_1,
-  ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION_2,
+  ROUTE_PROTOTYPE_DOCUMENTATION_META,
+  ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION,
   ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_1,
 } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
 
-const { participation2, nextButton } = prototypeDocumentation;
-const { headline, text, textfieldExplanationLabel } = participation2;
+const { participation, nextButton } = prototypeDocumentation;
+const {
+  headline,
+  textIntro,
+  textResults,
+  textfieldParticipationLabel,
+  textfieldResultsLabel,
+} = participation;
 
 export function meta() {
-  return constructMetaTitle(
-    ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION_2.title,
-  );
+  return constructMetaTitle(ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION.title);
 }
 
-export default function PrototypeDocumentationParticipation2() {
+export default function PrototypeDocumentationParticipation1() {
   return (
     <Container className="pt-0">
       <Heading
@@ -30,10 +34,16 @@ export default function PrototypeDocumentationParticipation2() {
         look="ds-heading-02-reg"
         className="mb-16"
       />
-      <RichText markdown={text} className="mb-40" />
+      <RichText markdown={textIntro} className="mb-40" />
       <form>
         <fieldset className="ds-stack ds-stack-24">
-          <Textarea name="explanation" label={textfieldExplanationLabel} />
+          <Textarea name="explanation" label={textfieldParticipationLabel} />
+        </fieldset>
+      </form>
+      <RichText markdown={textResults} className="mt-40 mb-20" />
+      <form>
+        <fieldset className="ds-stack ds-stack-24">
+          <Textarea name="explanation" label={textfieldResultsLabel} />
         </fieldset>
       </form>
       <ButtonContainer
@@ -46,7 +56,7 @@ export default function PrototypeDocumentationParticipation2() {
           {
             id: "generalInfo-back-button",
             text: general.buttonBack.text,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION_1.url,
+            href: ROUTE_PROTOTYPE_DOCUMENTATION_META.url,
             look: "tertiary",
           },
         ]}
