@@ -7,7 +7,7 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.resolve(__dirname, "../", ".env.test") });
 
-export const allProjects = [
+export const allProjects: PlaywrightTestConfig["projects"] = [
   {
     name: "Desktop Chrome",
     use: {
@@ -46,11 +46,12 @@ export const allProjects = [
       contextOptions: {
         permissions: ["clipboard-read", "clipboard-write"],
       },
+      isMobile: false,
     },
   },
   {
     name: "Tablet Safari",
-    use: { ...devices["iPad Pro 11 landscape"] },
+    use: { ...devices["iPad Pro 11 landscape"], isMobile: false },
   },
 ];
 
