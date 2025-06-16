@@ -107,14 +107,11 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
 
   return (
     <>
-      <Hero
-        badge={examplesRegelungen.principles.hero.badge}
-        text={examplesRegelungen.principles.hero.subtitle}
-      >
+      <Hero subtitle={examplesRegelungen.principles.hero.subtitle}>
         {examplesRegelungen.principles.hero.title}
       </Hero>
 
-      <Container className="ds-stack ds-stack-40 pt-0">
+      <Container className="ds-stack ds-stack-40">
         <Tabs
           className="mb-0"
           tabs={tabsForNavigation}
