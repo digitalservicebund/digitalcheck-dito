@@ -6,9 +6,9 @@ import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
 import {
+  ROUTE_PROTOTYPE_DOCUMENTATION,
   ROUTE_PROTOTYPE_DOCUMENTATION_META,
-  ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_5,
-  ROUTE_PROTOTYPE_DOCUMENTATION_RESULT,
+  ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION_1,
 } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
 
@@ -36,16 +36,6 @@ export default function PrototypeDocumentationMeta() {
             name="title"
             label={metaInfo.inputTitle.label}
           />
-          <Input
-            className="pb-4"
-            name="title"
-            label={metaInfo.inputRessort.label}
-          />
-          <Input
-            className="pb-4"
-            name="title"
-            label={metaInfo.inputContact.label}
-          />
         </fieldset>
       </form>
       <ButtonContainer
@@ -53,12 +43,12 @@ export default function PrototypeDocumentationMeta() {
           {
             id: "generalInfo-next-button",
             text: nextButton,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION_RESULT.url,
+            href: ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION_1.url,
           },
           {
             id: "generalInfo-back-button",
             text: general.buttonBack.text,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_5.url,
+            href: ROUTE_PROTOTYPE_DOCUMENTATION.url,
             look: "tertiary",
           },
         ]}

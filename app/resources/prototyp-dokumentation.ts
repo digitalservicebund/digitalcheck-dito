@@ -38,48 +38,15 @@ export const prototypeDocumentation = {
     },
   },
   nextButton: "Übernehmen & weiter",
-  overview: {
-    headline: "Allgemeine Hinweise",
-    text: dedent`
-      Die Dokumentation der Digitaltauglichkeit ist ein formeller, letzter Schritt. 
-      Die Dokumentation hilft Ihren Kolleginnen und Kollegen, die an der Ressortabstimmung beteiligt sind, 
-      die Praxis- und Digitaltauglichkeit des Regelungsvorhabens nachzuvollziehen. 
-      <br/><br/>
-      **Diese Schritte erwarten Sie:**
-       
-      - Dokumentieren Sie im folgenden Fragebogen, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben. Beschreiben Sie, wie Sie diese in das Regelungsvorhaben einfließen lassen. Zum Beispiel: „Online-Beratung wird ermöglicht, siehe § 1a (2)“.
-      - Liefern Sie allgemeine Informationen zu Ihrem Regelungsvorhaben, wie den vorläufigen Titel, das Ressort und eine verantwortliche Person, damit der Kontext klar wird.
-      - **Wichtig:** Ihre Eingaben, werden vertraulich behandelt. 
-      Es werden keine Eingaben gespeichert oder weitergegeben. 
-      Die Eingaben dienen ausschließlich dazu, das resultierende Dokument zu erstellen.
-      - Ihre Dokumentation steht Ihnen abschließend als PDF zum Download bereit.  
-      - Senden Sie die von Ihnen erstellte Dokumentation als PDF per E-Mail an den Nationalen Normenkontrollrat (NKR). Der NKR prüft Ihr Vorhaben hinsichtlich der Berücksichtigung der Prinzipien digitaltauglicher Gesetzgebung. Bei Fragen wird der NKR auf Sie zukommen.  
-      - Hängen Sie visuelle Darstellungen und Skizzen an die E-Mail an den NKR.  
-      - Damit ist der Digitalcheck für Sie beendet.
-    `,
-    warning: {
-      title: "Hinweis",
-      text: dedent`
-         Bitte beachten Sie, dass immer **nur ein Vorgang zur gleichen Zeit** möglich ist. 
-         Schließen Sie daher bitte eine begonnene Dokumentation vollständig ab, bevor Sie eine neue beginnen. 
-         Mehrere parallele Vorgänge sind momentan nicht möglich.
-      `,
-    },
-    nextButton: "Okay & weiter",
-  },
   metaInfo: {
     headline: "Informationen zum Regelungsvorhaben",
     text: dedent`
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptu.
-      `,
+      Tragen Sie den vorläufigen Arbeitstitel des Vorhabens ein. 
+
+      Sie können nur an einer Dokumentation zur selben Zeit arbeiten. Parallele Vorgänge sind momentan nicht möglich. Schließen Sie eine Dokumentation bitte vollständig ab, bevor Sie die nächste beginnen.
+    `,
     inputTitle: {
       label: "Vorläufiger Arbeitstitel des Vorhabens",
-    },
-    inputRessort: {
-      label: "Ressort",
-    },
-    inputContact: {
-      label: "Ansprechperson im Ressort",
     },
   },
   participation1: {
