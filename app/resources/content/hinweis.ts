@@ -16,7 +16,7 @@ export const hinweis = {
     `,
     },
     {
-      headline: {
+      heading: {
         text: "Das könnte Sie auch interessieren",
       },
       linkList: {

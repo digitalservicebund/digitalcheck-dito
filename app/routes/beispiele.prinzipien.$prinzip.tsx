@@ -122,16 +122,12 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
 
         <InfoBox
           Icon={ArrowCircleRightOutlined}
-          items={[
-            {
-              content: prinzip.Beschreibung,
-              headline: { text: prinzip.Name, tagName: "h2" },
-              badge: {
-                children: examplesRegelungen.principles.prinzipBadge,
-                principleNumber: prinzip.Nummer,
-              },
-            },
-          ]}
+          content={prinzip.Beschreibung}
+          heading={{ text: prinzip.Name, tagName: "h2" }}
+          badge={{
+            children: examplesRegelungen.principles.prinzipBadge,
+            principleNumber: prinzip.Nummer,
+          }}
         />
         {GuteUmsetzungen.length > 0 && <Separator />}
 

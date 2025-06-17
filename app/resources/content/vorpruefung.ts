@@ -34,14 +34,14 @@ export const preCheck = {
       title: "Zusammengefasst",
       items: [
         {
-          headline: {
+          heading: {
             text: "Beginnen Sie so früh wie möglich",
           },
           content:
             "Führen Sie die Vorprüfung zu Beginn Ihrer Arbeit an einem Regelungsvorhaben durch. Das heißt bevor Sie den Regelungstext formulieren.",
         },
         {
-          headline: {
+          heading: {
             text: "Warum ist die Vorprüfung relevant für mein Vorhaben?",
           },
           content: dedent`
