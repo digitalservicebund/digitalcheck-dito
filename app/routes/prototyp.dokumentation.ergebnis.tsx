@@ -15,9 +15,9 @@ import RichText from "~/components/RichText";
 import { documentation } from "~/resources/content/dokumentation";
 import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
 import {
-  ROUTE_DOCUMENTATION_STATIC_PDF,
   ROUTE_PROTOTYPE_DOCUMENTATION_META,
   ROUTE_PROTOTYPE_DOCUMENTATION_RESULT,
+  ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_PDF,
 } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
 
@@ -79,7 +79,7 @@ export default function DocumentationResult() {
               buttons={[
                 {
                   text: result.data.buttonDownload,
-                  href: ROUTE_DOCUMENTATION_STATIC_PDF.url,
+                  href: ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_PDF.url,
                 },
                 {
                   text: result.data.buttonBack,
