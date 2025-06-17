@@ -220,7 +220,7 @@ export const interoperability = {
     headline: "Informationen zum Einstieg",
     items: [
       {
-        headline: {
+        heading: {
           text: "Was ist das Ziel der Verordnung für ein interoperables Europa?",
         },
         content:
@@ -244,7 +244,7 @@ export const interoperability = {
         },
       },
       {
-        headline: {
+        heading: {
           text: "Was sind Interoperabilitätsbewertungen und warum sind sie notwendig?",
         },
         content: dedent`
@@ -275,7 +275,7 @@ export const interoperability = {
         },
       },
       {
-        headline: {
+        heading: {
           text: "Verbindliche Anforderungen: In welchem Fall ist eine Interoperabilitätsbewertung verpflichtend?",
         },
         content: dedent`

@@ -50,12 +50,8 @@ export default function FundamentalsFivePrinciples() {
               children: principle.label,
               principleNumber: principle.principleNumber as PrincipleNumber,
             }}
-            items={[
-              {
-                content: principle.content,
-                detailsSummary: getDetailsSummary(principle.detailsSummary),
-              },
-            ]}
+            content={principle.content}
+            detailsSummary={getDetailsSummary(principle.detailsSummary)}
           />
         </Container>
       ))}

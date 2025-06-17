@@ -4,7 +4,7 @@ import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
-import InfoBoxItem from "~/components/InfoBoxItem";
+import InfoBoxList from "~/components/InfoBoxList";
 import LinkListBox from "~/components/LinkListBox";
 import Separator from "~/components/Separator";
 import {
@@ -45,30 +45,31 @@ export default function FivePrinciples() {
       </Hero>
 
       <Container className="ds-stack ds-stack-40">
-        <div id="instruction">
-          <Badge Icon={methodsFivePrinciples.instruction.badge.Icon}>
-            {methodsFivePrinciples.instruction.badge.text}
-          </Badge>
-          <Heading tagName="h2">
-            {methodsFivePrinciples.instruction.title}
-          </Heading>
-        </div>
+        <InfoBoxList>
+          <div id="instruction">
+            <Badge Icon={methodsFivePrinciples.instruction.badge.Icon}>
+              {methodsFivePrinciples.instruction.badge.text}
+            </Badge>
+            <Heading tagName="h2">
+              {methodsFivePrinciples.instruction.title}
+            </Heading>
+          </div>
 
-        <ul className="list-unstyled ds-stack ds-stack-40">
-          {methodsFivePrinciples.instruction.items.map((item) => (
-            <InfoBoxItem
-              key={item.headline}
-              headline={{ text: item.headline }}
-              content={item.content}
-              linkList={
-                item.link && {
-                  links: [{ title: item.link.text, url: item.link.url }],
+          <InfoBoxList.List>
+            {methodsFivePrinciples.instruction.items.map((item) => (
+              <InfoBoxList.Item
+                key={item.headline}
+                heading={{ text: item.headline }}
+                content={item.content}
+                linkList={
+                  item.link && {
+                    links: [{ title: item.link.text, url: item.link.url }],
+                  }
                 }
-              }
-            ></InfoBoxItem>
-          ))}
-        </ul>
-
+              ></InfoBoxList.Item>
+            ))}
+          </InfoBoxList.List>
+        </InfoBoxList>
         <Separator />
       </Container>
 
@@ -86,12 +87,8 @@ export default function FivePrinciples() {
               children: principle.label,
               principleNumber: principle.principleNumber as PrincipleNumber,
             }}
-            items={[
-              {
-                content: principle.content,
-                detailsSummary: getDetailsSummary(principle.detailsSummary),
-              },
-            ]}
+            content={principle.content}
+            detailsSummary={getDetailsSummary(principle.detailsSummary)}
           />
         </Container>
       ))}
