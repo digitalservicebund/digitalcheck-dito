@@ -1,50 +1,73 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
+import { createRoutesStub } from "react-router";
 import { describe, expect, it } from "vitest";
-import InfoBoxList from "./InfoBoxList";
+import InfoBox from "./InfoBox";
 
-const mockInfoBoxItems = [
-  {
-    label: undefined,
-    heading: { text: "Heading 1" },
-    image: undefined,
-    content: "Lorem1",
-    buttons: [],
-  },
-  {
-    label: undefined,
-    heading: { text: "Heading 2" },
-    image: undefined,
-    content: "Lorem2",
-    buttons: [],
-  },
-];
-
-describe("InfoBoxList", () => {
-  describe("Separator", () => {
-    it("has expected padding when the separator is enabled", () => {
-      render(
-        <InfoBoxList separator>
-          <InfoBoxList.List>
-            {mockInfoBoxItems.map((item) => (
-              <InfoBoxList.Item key={item.heading.text} {...item} />
-            ))}
-          </InfoBoxList.List>
-        </InfoBoxList>,
-      );
-      expect(screen.getByRole("list")).toHaveClass("ds-stack-32");
+describe("InfoBox", () => {
+  describe("Top level elements", () => {
+    it("shows the label", () => {
+      render(<InfoBox badge={{ text: "TestLabel" }} />);
+      expect(screen.getByText("TestLabel")).toBeInTheDocument();
     });
 
-    it("has expected padding when the separator is disabled", () => {
-      render(
-        <InfoBoxList>
-          <InfoBoxList.List>
-            {mockInfoBoxItems.map((item) => (
-              <InfoBoxList.Item key={item.heading.text} {...item} />
-            ))}
-          </InfoBoxList.List>
-        </InfoBoxList>,
+    it("shows the heading", () => {
+      render(<InfoBox heading={{ text: "TestHeading" }} />);
+
+      expect(screen.getByRole("heading", { level: 3 })).toHaveTextContent(
+        "TestHeading",
       );
-      expect(screen.getByRole("list")).toHaveClass("ds-stack-48");
+    });
+
+    it("shows the content", () => {
+      render(<InfoBox content="Test **Content**" />);
+
+      expect(screen.getByRole("paragraph")).toHaveTextContent("Test Content");
+    });
+
+    it("shows the detailSummary", () => {
+      const testDetailSummary = {
+        items: [
+          { title: "Test Detail 1", content: "Test Content 1" },
+          { title: "Test Detail 2", content: "Test Content 2" },
+        ],
+      };
+      render(<InfoBox detailsSummary={testDetailSummary} />);
+
+      expect(screen.getAllByRole("group").length).toBe(2);
+      expect(screen.getAllByRole("group").at(0)).toHaveTextContent(
+        "Test Detail 1Test Content 1",
+      );
+    });
+
+    it("shows the link list", () => {
+      const testLinks = {
+        header: "Test link list",
+        links: [
+          {
+            title: "Link 1",
+            url: "example.com",
+          },
+          {
+            title: "Link 2",
+            url: "example2.com",
+          },
+        ],
+      };
+
+      const RouterStubInfoBox = createRoutesStub([
+        {
+          path: "/",
+          Component: () => <InfoBox linkList={testLinks} />,
+        },
+      ]);
+      render(<RouterStubInfoBox />);
+
+      expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
+        "Test link list",
+      );
+
+      const linkListEl = screen.getByRole("list");
+      expect(within(linkListEl).getAllByRole("listitem").length).toBe(2);
     });
   });
 });
