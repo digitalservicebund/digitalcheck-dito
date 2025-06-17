@@ -61,12 +61,10 @@ export default function PrototypeDocumentationPrinciple2() {
       <ButtonContainer
         buttons={[
           {
-            id: "generalInfo-next-button",
             text: nextButton,
             href: ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_3.url,
           },
           {
-            id: "generalInfo-back-button",
             text: general.buttonBack.text,
             href: ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_1.url,
             look: "tertiary",

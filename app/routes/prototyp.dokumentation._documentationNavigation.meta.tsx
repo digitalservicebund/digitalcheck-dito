@@ -41,12 +41,10 @@ export default function PrototypeDocumentationMeta() {
       <ButtonContainer
         buttons={[
           {
-            id: "generalInfo-next-button",
             text: nextButton,
             href: ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION.url,
           },
           {
-            id: "generalInfo-back-button",
             text: general.buttonBack.text,
             href: ROUTE_PROTOTYPE_DOCUMENTATION.url,
             look: "tertiary",
