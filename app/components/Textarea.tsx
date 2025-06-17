@@ -14,6 +14,7 @@ type TextareaProps = Readonly<{
   error?: string | null;
   warning?: string | null;
   onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  className?: string;
 }>;
 
 const Textarea = ({
@@ -23,13 +24,14 @@ const Textarea = ({
   error,
   warning,
   onChange,
+  className,
   ...props
 }: TextareaProps) => {
   const errorId = `${name}-error`;
   const warningId = `${name}-warning`;
 
   return (
-    <div>
+    <div className={className}>
       {label && (
         <InputLabel
           classname={description ? "ds-heading-03-reg" : "text-gray-900"}
