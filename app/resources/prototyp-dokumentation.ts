@@ -66,6 +66,17 @@ export const prototypeDocumentation = {
   principles: {
     radioOptions: ["Ja", "Nein", "Teilweise", "Nicht relevant"],
     textfieldExplanationLabel: "Erklärung:",
+    inputs: {
+      paragraph: {
+        label: "Paragraph zur Referenz:",
+      },
+      text: {
+        label: "Entsprechender Absatz des Regelungstextes:",
+      },
+      explanation: {
+        label: "Erklärung:",
+      },
+    },
     principle1: {
       headline: "Digitale Angebote für alle nutzbar gestalten",
       details: {
@@ -85,11 +96,16 @@ export const prototypeDocumentation = {
       `,
       },
       question: "Ermöglicht das Regelungsvorhaben digitale Angebote für alle?",
-      hint: dedent`
-        Tragen Sie zwei bis drei Stichpunkte ein. Verweisen Sie auf die jeweiligen Paragrafen und ggf. auch auf andere anwendbare Regelungen.  
-  
-        **Zum Beispiel:** „Online-Beratung wird ermöglicht, siehe § 1a (2)“.  
-      `,
+      hint: "Listen Sie alle Paragraphen auf, in denen das Prinzip wichtig ist.",
+      example: {
+        title: "Beispiel: BVerfGG, § 23a (1)",
+        text: dedent`
+          Schriftlich einzureichende Anträge und Erklärungen sowie sonstige Schriftsätze und deren Anlagen können nach Maßgabe der folgenden Absätze als elektronische Dokumente beim Bundesverfassungsgericht eingereicht werden.
+
+          **Erklärung:**
+          Ermöglicht elektronisches Einreichen der Dokumente.
+        `,
+      },
     },
     principle2: {
       headline: "Datenwiederverwendung benötigt einheitliches Recht",
