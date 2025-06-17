@@ -72,7 +72,7 @@ export default function DocumentationResult() {
             />
             <DetailsSummary
               title="Alle Eingaben"
-              content={<>Foobar</>}
+              content={result.data.dummyOverview}
               className="mt-12"
             />
             <ButtonContainer

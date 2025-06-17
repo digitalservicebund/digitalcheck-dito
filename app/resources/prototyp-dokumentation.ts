@@ -194,10 +194,110 @@ export const prototypeDocumentation = {
     },
   },
   result: {
-    title: "Dokumentation prüfen und senden",
+    title: "Dokumentation abschließen",
     data: {
       title: "Eingaben überprüfen",
       text: `Bitte überprüfen Sie nachfolgend alle Eingaben auf ihre Richtigkeit und Vollständigkeit.`,
+      dummyOverview: dedent`
+        **Informationen zum Regelungsvorhaben**
+         
+        Vorläufiger Arbeitstitel des Vorhabens: Elektronischer Rechtsverkehr mit dem Bundesverfassungsgericht – BVerfGG
+        <br/><br/>
+        [Bearbeiten](/prototyp/dokumentation/meta)
+        <br/><br/>
+        **Praxistaugliche Umsetzung**
+        
+        Austauschformate: Umfragen und Einzelgespräche mit Akteurinnen und Akteuren, formelles Beteiligungsverfahren
+        <br/><br/>
+        Eingearbeitete Erkenntnisse: Durch die Gespräche wurde herausgefunden, dass eine ausschließlich digitale 
+        Übertragung vorgeschrieben werden kann.
+        <br/><br/>
+        [Bearbeiten](/prototyp/dokumentation/beteiligung)
+        <br/><br/>
+        **Prinzip: Digitale Angebote für alle nutzbar gestalten**
+        
+        Erfüllt: Ja
+        <br/><br/>
+        § 23a BVerfGG (1) 
+        
+        Schriftlich einzureichende Anträge und Erklärungen sowie sonstige Schriftsätze und deren 
+        Anlagen können nach Maßgabe der folgenden Absätze als elektronische Dokumente beim Bundesverfassungsgericht 
+        eingereicht werden.
+        <br/><br/>
+        Erklärung: Ermöglicht elektronisches Einreichen der Dokumente.
+        <br/><br/>
+        § 23b BVerfGG (1)
+        
+        Soweit die handschriftliche Unterzeichnung durch den Richter, den Rechtspfleger oder den Urkundsbeamten der 
+        Geschäftsstelle vorgeschrieben ist, genügt dieser Form die Aufzeichnung als elektronisches Dokument, wenn 
+        die verantwortenden Personen am Ende des Dokuments ihren Namen hinzufügen und das Dokument mit einer 
+        qualifizierten elektronischen Signatur versehen. Der in Satz 1 genannten Form genügt auch ein elektronisches 
+        Dokument, in welches das handschriftlich unterzeichnete Schriftstück gemäß § 23e Absatz 2 Satz 4 übertragen 
+        worden ist.
+        <br/><br/>
+        Erklärung: Verhindert einen Medienbruch und erhöht die Nutzerfreundlichkeit durch das Ermöglichen von 
+        Alternativen zur handschriftlichen Unterzeichnung.
+        <br/><br/>
+        [Bearbeiten](/prototyp/dokumentation/prinzip-1)
+        <br/><br/>
+        **Prinzip: Datenwiederverwendung benötigt einheitliches Recht**
+        
+        Erfüllt: Ja
+        <br/><br/>
+        § 23a BVerfGG (2)
+        
+        Das elektronische Dokument muss für die Bearbeitung durch das Bundesverfassungsgericht geeignet sein. 
+        Für die Übermittlung und die Eignung zur Bearbeitung durch das Bundesverfassungsgericht gelten die in 
+        der Elektronischer-Rechtsverkehr-Verordnung geregelten technischen Rahmenbedingungen des elektronischen 
+        Rechtsverkehrs entsprechend.
+        <br/><br/>
+        Erklärung: Begünstigt eine effiziente technische Umsetzung, indem es die Nutzung oder Wiederverwendung 
+        eines geeigneten Datenstandards vorschreibt.
+        <br/><br/>
+        Verweist mit der Elektronischer-Rechtsverkehr-Verordnung auf eine Regelung, die technische und rechtliche 
+        Aspekte zentral steuert.
+        <br/><br/>
+        [Bearbeiten](/prototyp/dokumentation/prinzip-2)
+        <br/><br/>
+        **Prinzip: Etablierte Technologien ermöglichen effiziente Umsetzung**
+        
+        Erfüllt: Nicht relevant
+        <br/><br/>
+        [Bearbeiten](/prototyp/dokumentation/prinzip-3)
+        <br/><br/>
+        **Prinzip: Automatisierung basiert auf eindeutigen Regelungen**
+        
+        Erfüllt: Ja
+        <br/><br/>
+        § 23a BVerfGG (5)
+        
+        Ein elektronisches Dokument ist eingegangen, sobald es auf der für den Empfang bestimmten Einrichtung 
+        des Bundesverfassungsgerichts gespeichert ist. Dem Absender ist eine automatisierte Bestätigung über den 
+        Zeitpunkt des Eingangs zu erteilen.
+        <br/><br/>
+        Erklärung: Entlastet die Verwaltung durch automatische Bestätigungen; eine Funktionalität, die von 
+        Nutzenden erwartet wird.
+        <br/><br/>
+        [Bearbeiten](/prototyp/dokumentation/prinzip-4)
+        <br/><br/>
+        **Prinzip: Datenschutz und Informationssicherheit schaffen Vertrauen**
+        
+        Erfüllt: Ja
+        <br/><br/>
+        § 23a BVerfGG(3)
+        
+        Das elektronische Dokument muss mit einer qualifizierten elektronischen Signatur der verantwortenden 
+        Person versehen sein oder von der verantwortenden Person signiert und auf einem sicheren 
+        Übermittlungsweg eingereicht werden.
+        <br/><br/>
+        Erklärung: Steigert den Schutz vor Fälschungen durch Verwendung eines geeigneten kryptografischen 
+        Verfahrens (qualifizierte elektronische Signatur).
+        <br/><br/>
+        Führt zu erhöhter Informationssicherheit durch die Nutzung eines sicheren Übermittlungsweges (siehe Absatz 3). 
+        Dies schützt die Daten vor Veränderung und unerlaubter Einsicht während der Übertragung.
+        <br/><br/>
+        [Bearbeiten](/prototyp/dokumentation/prinzip-5)
+      `,
       buttonDownload: "Dokumentation herunterladen (PDF-Datei)",
       buttonBack: "Zurück zum Bearbeiten",
     },
