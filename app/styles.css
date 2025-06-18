@@ -46,6 +46,11 @@
     @apply whitespace-nowrap;
   }
 
+  a,
+  button {
+    @apply cursor-pointer;
+  }
+
   ul:not(.list-unstyled),
   ol:not(.list-unstyled) {
     @apply space-y-8 pl-24;
