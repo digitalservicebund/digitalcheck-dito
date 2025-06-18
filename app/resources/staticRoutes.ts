@@ -236,7 +236,7 @@ export const ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_4 = createRoute(
 );
 export const ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_5 = createRoute(
   "prinzip-5",
-  "Prinzip: Informationssicherheit und Datenschutz - Prototyp",
+  "Prinzip: Datenschutz und Informationssicherheit - Prototyp",
   ROUTE_PROTOTYPE_DOCUMENTATION,
 );
 export const ROUTE_PROTOTYPE_DOCUMENTATION_RESULT = createRoute(
