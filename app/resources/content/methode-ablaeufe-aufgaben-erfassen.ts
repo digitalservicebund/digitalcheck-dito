@@ -83,9 +83,10 @@ export const methodsTasksProcesses = {
         },
         {
           href: "https://bmas.de.conceptboard.com/board/qh33-xcny-usde-7nc6-82cy",
-          text: "Conceptboard-Vorlage",
-          look: "tertiary",
+          text: "Zur Conceptboard-Vorlage",
+          look: "ghost",
           plausibleEventName: "Content.Anleitung.Link+Conceptboard+Vorlage",
+          target: "_blank",
         },
       ] as ButtonProps[],
       image: {
