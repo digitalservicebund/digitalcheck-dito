@@ -41,12 +41,12 @@ export const prototypeDocumentation = {
   metaInfo: {
     headline: "Informationen zum Regelungsvorhaben",
     text: dedent`
-      Tragen Sie den vorläufigen Arbeitstitel des Vorhabens ein. 
+      Tragen Sie den Titel des Regelungsvorhaben bzw. den Namen der Regelung ein. 
 
       Sie können nur an einer Dokumentation zur selben Zeit arbeiten. Parallele Vorgänge sind momentan nicht möglich. Schließen Sie eine Dokumentation bitte vollständig ab, bevor Sie die nächste beginnen.
     `,
     inputTitle: {
-      label: "Vorläufiger Arbeitstitel des Vorhabens",
+      label: "Titel des Regelungsvorhabens",
     },
   },
   participation: {
