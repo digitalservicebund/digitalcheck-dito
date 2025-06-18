@@ -18,7 +18,6 @@ import constructMetaTitle from "~/utils/metaTitle";
 
 const { principles, nextButton } = prototypeDocumentation;
 const { principle1, radioOptions } = principles;
-const { headline, details, question } = principle1;
 
 export function meta() {
   return constructMetaTitle(ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_1.title);
@@ -42,20 +41,24 @@ export default function PrototypeDocumentationPrinciple1() {
   return (
     <Container className="pt-0">
       <Heading
-        text={headline}
+        text={principle1.headline}
         tagName="h1"
         look="ds-heading-02-reg"
         className="mb-16"
       />
       <DetailsSummary
-        title={details.title}
-        content={details.text}
+        title={principle1.details.title}
+        content={principle1.details.text}
         className="mb-40"
       />
       <form>
         <fieldset className="ds-stack ds-stack-24">
           <legend className="ds-stack ds-stack-16">
-            <Heading text={question} tagName="h2" look="ds-heading-03-reg" />
+            <Heading
+              text={principle1.question}
+              tagName="h2"
+              look="ds-heading-03-reg"
+            />
           </legend>
 
           <RadioGroup

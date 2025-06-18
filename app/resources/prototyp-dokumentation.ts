@@ -78,6 +78,7 @@ export const prototypeDocumentation = {
       },
     },
     principle1: {
+      id: "prinzip-1",
       headline: "Digitale Angebote für alle nutzbar gestalten",
       details: {
         title: "Was steckt in dem Prinzip?",
@@ -108,6 +109,7 @@ export const prototypeDocumentation = {
       },
     },
     principle2: {
+      id: "prinzip-2",
       headline: "Datenwiederverwendung benötigt einheitliches Recht",
       details: {
         title: "Was steckt in dem Prinzip?",
@@ -126,13 +128,20 @@ export const prototypeDocumentation = {
       `,
       },
       question: "Ermöglicht das Regelungsvorhaben Datenwiederverwendung?",
-      hint: dedent`
-        Tragen Sie zwei bis drei Stichpunkte ein. Verweisen Sie auf die jeweiligen Paragrafen und ggf. auch auf andere anwendbare Regelungen.  
-  
-        **Zum Beispiel:** „Datenstandard festgeschrieben, siehe § 3a, rechtliche Voraussetzung zum Datenaustausch geschaffen, siehe § 3b“   
-      `,
+      hint: "Listen Sie alle Paragraphen auf, in denen das Prinzip wichtig ist.",
+      example: {
+        title: "Beispiel: § 23a BVerfG (2)",
+        text: dedent`
+          Das elektronische Dokument muss für die Bearbeitung durch das Bundesverfassungsgericht geeignet sein. Für die Übermittlung und die Eignung zur Bearbeitung durch das Bundesverfassungsgericht gelten die in der Elektronischer-Rechtsverkehr-Verordnung geregelten technischen Rahmenbedingungen des elektronischen Rechtsverkehrs entsprechend.
+
+          **Erklärung:**
+          - Begünstigt eine effiziente technische Umsetzung, indem es die Nutzung oder Wiederverwendung eines geeigneten Datenstandards vorschreibt.
+          - Verweist mit der Elektronischer-Rechtsverkehr-Verordnung auf eine Regelung, die technische und rechtliche Aspekte zentral steuert.
+        `,
+      },
     },
     principle3: {
+      id: "prinzip-3",
       headline: "Etablierte Technologien ermöglichen effiziente Umsetzung",
       details: {
         title: "Was steckt in dem Prinzip?",
@@ -149,13 +158,16 @@ export const prototypeDocumentation = {
       },
       question:
         "Ermöglicht die Regelung die Nutzung von etablierten Technologien, Schnittstellen oder Open Source?",
-      hint: dedent`
-        Tragen Sie zwei bis drei Stichpunkte ein. Verweisen Sie auf die jeweiligen Paragrafen und ggf. auch auf andere anwendbare Regelungen.  
-  
-        **Zum Beispiel:** „Open Source und Basisdienste in § 8 festgeschrieben, werden in der Verordnung definiert“.  
-    `,
+      hint: "Listen Sie alle Paragraphen auf, in denen das Prinzip wichtig ist.",
+      example: {
+        title: "Beispiel",
+        text: dedent`
+          Kein Beispiel vorhanden. Kennen Sie ein gutes Beispiel?
+        `,
+      },
     },
     principle4: {
+      id: "prinzip-4",
       headline: "Automatisierung basiert auf eindeutigen Regelungen",
       details: {
         title: "Was steckt in dem Prinzip?",
@@ -172,17 +184,27 @@ export const prototypeDocumentation = {
           - Schreiben Sie einfach, eindeutig und widerspruchsfrei
           
           [Mehr Informationen](${ROUTE_FUNDAMENTALS_PRINCIPLES.url}#automatisierung-basiert-auf-eindeutigen-regelungen)    
-      `,
+        `,
       },
       question:
         "Ist die Regelung so eindeutig formuliert, dass Automatisierung möglich ist?",
-      hint: dedent`
-        Tragen Sie zwei bis drei Stichpunkte ein. Verweisen Sie auf die jeweiligen Paragrafen und ggf. auch auf andere anwendbare Regelungen.  
-  
-        **Zum Beispiel:** Zum Beispiel: „Ausnahmen klar definiert, siehe § 4; auf bestehenden Prozessen aufgesetzt, siehe Visualisierung im Anhang“.   
-    `,
+      hint: "Listen Sie alle Paragraphen auf, in denen das Prinzip wichtig ist.",
+      example: {
+        title: "Beispiel: § 66a LuftVG (7)",
+        text: dedent`
+          Die Übermittlung nach Absatz 6 Satz 1 aus dem Register darf durch Abruf im automatisierten Verfahren an die Polizeien des Bundes und der Länder erfolgen
+          1. zur Verfolgung von Straftaten oder
+          2. zur Abwehr von Gefahren für die öffentliche Sicherheit,
+          
+          wenn diese Daten auf andere Weise nicht oder nicht rechtzeitig oder nur mit unverhältnismäßigem Aufwand zu erlangen sind. Die Verantwortung für die Zulässigkeit des einzelnen automatisierten Abrufs trägt die abrufende Stelle. Das Luftfahrt-Bundesamt überprüft die Zulässigkeit des Abrufs nur, wenn dazu Anlass besteht.
+
+          **Erklärung:**
+          Führt zur Bereitstellung einer Schnittstelle zum automatisierten Abruf durch eine andere Behörde.
+        `,
+      },
     },
     principle5: {
+      id: "prinzip-5",
       headline: "Datenschutz und Informationssicherheit schaffen Vertrauen",
       details: {
         title: "Was steckt in dem Prinzip?",
@@ -202,11 +224,19 @@ export const prototypeDocumentation = {
       },
       question:
         "Gewährleistet die Regelung Datenschutz und Informationssicherheit?",
-      hint: dedent`
-        Tragen Sie zwei bis drei Stichpunkte ein. Verweisen Sie auf die jeweiligen Paragrafen und ggf. auch auf andere anwendbare Regelungen.  
-  
-        **Zum Beispiel:** „Bedingungen für die Verwendung von Kontaktdaten, siehe § 1a (2)”.  
-    `,
+      hint: "Listen Sie alle Paragraphen auf, in denen das Prinzip wichtig ist.",
+      example: {
+        title: "§ 2 BIPAM–ErrichtungsG (2)",
+        text: dedent`
+          Das Bundesinstitut nimmt Aufgaben nach Absatz 1, einschließlich der damit verbundenen Verarbeitung 
+          personenbezogener Gesundheitsdaten im Umfang der jeweils einschlägigen fachrechtlichen 
+          Bestimmungen, insbesondere auf folgenden Gebieten wahr: (...)
+
+          **Erklärung:**
+          - Nennt explizit die Verarbeitung personenbezogener Daten als Spezifizierung der Aufgaben von Absatz 1.
+          - Konkretisiert die Art der personenbezogenen Daten (Gesundheitsdaten) und verweist darüber hinaus auf die dafür geltenden fachrechtlichen Bestimmungen.
+        `,
+      },
     },
   },
   result: {
