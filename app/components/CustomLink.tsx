@@ -18,7 +18,7 @@ export default function CustomLink({
   to,
   className,
 }: Readonly<CustomLinkProps>) {
-  const isExternal = to.startsWith("http://") || to.startsWith("https://");
+  const isExternal = target === "_blank";
 
   return (
     <Link

@@ -1,3 +1,4 @@
+import OpenInNewIcon from "@digitalservicebund/icons/OpenInNew";
 import { cloneElement, type ReactElement } from "react";
 import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
@@ -88,6 +89,12 @@ function Button({
   if (href) {
     const ext = getDownloadableExtensionName(href);
     const isDownload = !!ext;
+    const isExternal = "target" in props && props.target === "_blank";
+    iconRight = isExternal ? (
+      <OpenInNewIcon className="scale-75 fill-blue-800" />
+    ) : (
+      iconRight
+    );
 
     return (
       <Link
