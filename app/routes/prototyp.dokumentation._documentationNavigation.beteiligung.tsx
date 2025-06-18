@@ -34,7 +34,7 @@ export default function PrototypeDocumentationParticipation1() {
         look="ds-heading-02-reg"
         className="mb-16"
       />
-      <RichText markdown={textIntro} className="mb-40" />
+      <RichText markdown={textIntro} className="mb-20" />
       <form>
         <fieldset className="ds-stack ds-stack-24">
           <Textarea name="explanation" label={textfieldParticipationLabel} />

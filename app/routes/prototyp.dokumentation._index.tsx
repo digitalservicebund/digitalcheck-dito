@@ -4,11 +4,13 @@ import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
+import InlineNotice from "~/components/InlineNotice";
 import RichText from "~/components/RichText";
 import SupportBanner from "~/components/SupportBanner";
 import { general } from "~/resources/content/shared/general";
 import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
 import {
+  ROUTE_DOCUMENTATION_STATIC_PDF,
   ROUTE_LANDING,
   ROUTE_PROTOTYPE_DOCUMENTATION,
   ROUTE_PROTOTYPE_DOCUMENTATION_META,
@@ -56,9 +58,32 @@ export default function Index() {
           <TimerOutlined className="size-24 fill-gray-800" />
           <RichText markdown={start.timeInvest} className="text-base" />
         </div>
+        <RichText
+          markdown={
+            "**Alternativ** können Sie die Dokumentation auch als Word-Datei herunterladen und ausfüllen. "
+          }
+          className="mt-40"
+        />
+        <ButtonContainer
+          className="mt-20"
+          buttons={[
+            {
+              text: "Word-Datei herunterladen",
+              href: ROUTE_DOCUMENTATION_STATIC_PDF.url,
+              look: "tertiary",
+            },
+          ]}
+        />
       </Hero>
 
       <Container>
+        <InlineNotice
+          look="warning"
+          title={start.multipleNotice.headline}
+          tagName="h2"
+          content={start.multipleNotice.content}
+          className="mb-40"
+        />
         <InfoBox
           heading={{
             tagName: "h2",

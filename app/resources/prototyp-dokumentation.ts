@@ -18,9 +18,14 @@ export const prototypeDocumentation = {
       },
       {
         title: "Nur ein Vorgang zur selben Zeit",
-        text: "Sie können nur an einer Dokumentation zur selben Zeit arbeiten. Parallele Vorgänge sind momentan nicht möglich. Schließen Sie eine Dokumentation bitte vollständig ab, bevor Sie die nächste beginnen.",
+        text: "Sie können nur an einer Dokumentation zur selben Zeit arbeiten. Parallele Vorgänge sind momentan nicht möglich. Schließen Sie eine Dokumentation bitte vollständig ab, bevor Sie die nächste beginnen. Ihre Daten werden nicht dauerhaft gespeichert.",
       },
     ],
+    multipleNotice: {
+      headline: "Eine oder mehrere Dokumentationen?",
+      content:
+        "Füllen Sie eine gemeinsame Dokumentation für alle inhaltlich zusammenhängenden Regelungen eines Vorhabens aus. So viele wie nötig, so wenige wie möglich. Bitte beachten Sie, dass parallele Vorgänge momentan nicht möglich sind.",
+    },
     buttonText: "Dokumentation starten",
     timeInvest: "**Zeitaufwand:** Was denkst du?",
     summary: {
@@ -43,7 +48,7 @@ export const prototypeDocumentation = {
     text: dedent`
       Tragen Sie den Titel des Regelungsvorhaben bzw. den Namen der Regelung ein. 
 
-      Sie können nur an einer Dokumentation zur selben Zeit arbeiten. Parallele Vorgänge sind momentan nicht möglich. Schließen Sie eine Dokumentation bitte vollständig ab, bevor Sie die nächste beginnen.
+      Sie können nur an einer Dokumentation zur selben Zeit arbeiten. Parallele Vorgänge sind momentan nicht möglich. Schließen Sie eine Dokumentation bitte vollständig ab, bevor Sie die nächste beginnen. Ihre Daten werden nicht dauerhaft gespeichert.
     `,
     inputTitle: {
       label: "Titel des Regelungsvorhabens",
@@ -59,8 +64,16 @@ export const prototypeDocumentation = {
       **Zum Beispiel:** frühzeitige Befragung von Bürgerinnen und Bürgern, Gespräche mit Vollzugsakteurinnen und -akteuren oder Expertinnen und Experten, formelle Beteiligungsverfahren. 
       `,
     textfieldParticipationLabel: "Austauschformate:",
-    textResults:
-      "Was haben Sie aus dem Austausch mit den Beteiligten mitgenommen? Bitte listen Sie stichpunktartig auf, welche Erkenntnisse eingearbeitet wurden und geben Sie Hinweise auf Paragrafen, die besonders umsetzungsrelevant sind.",
+    textResults: dedent`
+      Was haben Sie aus dem Austausch mit den Beteiligten mitgenommen? 
+      Bitte listen Sie stichpunktartig auf, welche Erkenntnisse eingearbeitet wurden. 
+      Paragrafen, die besonders umsetzungsrelevant sind, können Sie kopieren und hier einfügen.
+      
+      **Zum Beispiel:**
+      Aus Gesprächen mit Mitarbeitenden der Hauptzollämter gelernt: Das aktuelle, papierbasierte Antragsverfahren wird unter großem Aufwand am Laufen gehalten. Angesichts einer erwarteten Vervielfachung der Antragszahlen würde dies zu einer drohenden Überlastung führen. 
+      Auf Basis dieser Erkenntnis wurde entschieden, eine Online-Antragspflicht zwei Jahre früher als geplant einzuführen, um die Bearbeitung zu digitalisieren, manuelle Schritte zu reduzieren und die Prüfenden zu entlasten. 
+      Für Details lesen Sie gerne den <a href="https://digitalservice.bund.de/blog/aktuelles-beispiel-fuer-digitaltaugliche-regelungen-das-stromsteuerrecht" target="_blank">Blog-Artikel</a>.
+    `,
     textfieldResultsLabel: "Eingearbeitete Erkenntnisse:",
   },
   principles: {
@@ -371,6 +384,14 @@ export const prototypeDocumentation = {
             label: "Werden meine Eingaben vertraulich behandelt?",
             text: "Was sie eingetragen haben, bleibt vertraulich. Ihre Eingaben werden nur genutzt, um die PDF-Datei zu erstellen. Ihre Daten werden nicht gespeichert oder weitergegeben. Niemand sonst kann darauf zugreifen.",
           },
+          {
+            label: "Kann ich die Dokumentation später überarbeiten?",
+            text: "Ihre Eingaben in diesem Formular werden nicht dauerhaft gespeichert. Wenn Sie die Inhalte überarbeiten wollen, können Sie den aktuellen Stand aus der PDF-Datei kopieren und ins Formular einfügen.",
+          },
+          {
+            label: "Welche Fragen hast du noch?",
+            text: "Welche Fragen sollen noch ins FAQ? Was würdest Kolleg:innen auf jeden Fall mitgeben?",
+          },
         ],
       },
       copyAddressButton: {
@@ -403,8 +424,38 @@ export const prototypeDocumentation = {
         {
           id: "simple-feedback",
           trackingEvent: "wie-einfach",
-          text: "Wie einfach oder schwierig war der Prozess der Dokumentation für Sie?",
-          options: feedbackFormular.optionsSimple,
+          text: "Die Dokumentation ist einfach zu nutzen.",
+          options: [
+            { label: "Ich stimme gar nicht zu", value: 1 },
+            { label: "Schwierig", value: 2 },
+            { label: "Moderat", value: 3 },
+            { label: "Einfach", value: 4 },
+            { label: "Ich stimme voll und ganz zu", value: 5 },
+          ],
+        },
+        {
+          id: "simple-feedback",
+          trackingEvent: "wie-einfach",
+          text: "Die Dokumentation ist hilfreich für das Erarbeiten meines Regelungsvorhabens.",
+          options: [
+            { label: "Ich stimme gar nicht zu", value: 1 },
+            { label: "Schwierig", value: 2 },
+            { label: "Moderat", value: 3 },
+            { label: "Einfach", value: 4 },
+            { label: "Ich stimme voll und ganz zu", value: 5 },
+          ],
+        },
+        {
+          id: "simple-feedback",
+          trackingEvent: "wie-einfach",
+          text: "Die Dokumentation ist hilfreich für die Umsetzung meines Regelungsvorhabens.",
+          options: [
+            { label: "Ich stimme gar nicht zu", value: 1 },
+            { label: "Schwierig", value: 2 },
+            { label: "Moderat", value: 3 },
+            { label: "Einfach", value: 4 },
+            { label: "Ich stimme voll und ganz zu", value: 5 },
+          ],
         },
       ],
       contact:

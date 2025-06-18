@@ -93,7 +93,7 @@ export default function DocumentationResult() {
             <form method="post">
               <fieldset className="ds-stack ds-stack-24">
                 <legend>
-                  <Heading tagName="h3" text={result.form.formLegend} />
+                  <Heading tagName="h2" text={result.form.formLegend} />
                 </legend>
                 <div className="flex items-start pb-[40px]">
                   <div className="ds-stack ds-stack-16 flex-grow">
@@ -131,7 +131,7 @@ export default function DocumentationResult() {
             </form>
             <hr className="mb-32 border-t-[2px] border-gray-400" />
             <div className="ds-stack ds-stack-16 mt-40">
-              <Heading tagName="h3" text={result.form.faqs.title} />
+              <Heading tagName="h2" text={result.form.faqs.title} />
               {result.form.faqs.details.map((detail, index) => (
                 <DetailsSummary
                   className={`plausible-event-name=Content.Content+Info.Accordion+FAQ${index + 1}`}
