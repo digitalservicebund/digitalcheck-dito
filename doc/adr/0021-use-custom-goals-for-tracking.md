@@ -18,9 +18,19 @@ To achieve a better tracking Plausible provides custom goals, that can track ind
 
 ## Decision
 
-We want to use custom goals for every page and user interaction in our application. When implementing a new page also tracking has to be thought of.
+We use custom goals for every page and user interaction in our application.
 
 We gradually increase the coverage while working on the page.
+
+### Benefits
+
+- More and better insights in how our page is being used
+- The possibility to focus on relevant functionality and remove unused ones
+
+### Drawbacks/Considerations
+
+- Custom event names add more work for implementation
+- Multiple custom events can be hard to keep track of in Plausible
 
 ### Goal documentation
 
@@ -52,17 +62,7 @@ This example would look like this:
 </div>
 ```
 
-More examples can be found in [Miro](https://plausible.io/docs/goal-conversions)
-
 ## Consequences
 
-### Benefits
-
-- More and better insights in how our page is being used
-- The possibility to focus on relevant functionality and remove unused ones
-
-### Drawbacks/Considerations
-
-- Tracking has to be thought of while developing (It can be easy forgotten)
-- Custom event names add more work for implementation
-- Multiple custom events can be hard to keep track of in Plausible
+- We need to manually add events to all interactive elements we want to track
+- Tracking has to be always thought of while developing (It can be easy forgotten)
