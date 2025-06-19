@@ -15,6 +15,7 @@ import {
   useRouteLoaderData,
 } from "react-router";
 
+import { Aria } from "~/components/Aria";
 import Button from "~/components/Button";
 import Container from "~/components/Container";
 import Footer from "~/components/Footer";
@@ -185,6 +186,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
         <PageHeader includeBreadcrumbs={!error} featureFlags={featureFlags} />
         {children}
         <Footer />
+        <Aria />
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
       </body>
