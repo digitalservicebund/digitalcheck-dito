@@ -1,3 +1,4 @@
+import { preCheckQuestions } from "~/resources/content/shared/pre-check-questions";
 import {
   ROUTE_INTEROPERABILITY,
   ROUTE_PRECHECK,
@@ -6,7 +7,6 @@ import {
 } from "~/resources/staticRoutes";
 import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { dedent } from "~/utils/dedentMultilineStrings";
-import { preCheckQuestions } from "./shared/preCheckQuestions";
 
 export const preCheck = {
   start: {

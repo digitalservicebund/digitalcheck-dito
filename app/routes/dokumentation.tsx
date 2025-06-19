@@ -6,6 +6,7 @@ import InlineNotice from "~/components/InlineNotice";
 import { NumberedList } from "~/components/List";
 import SupportBanner from "~/components/SupportBanner";
 import { documentation } from "~/resources/content/dokumentation";
+import { supportBanner } from "~/resources/content/shared/support-banner";
 import { ROUTE_DOCUMENTATION } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
 
@@ -50,7 +51,9 @@ export default function Index() {
           items={documentation.nextSteps.items}
         />
       </Container>
-      <SupportBanner />
+      <SupportBanner
+        sections={[supportBanner.feedback, supportBanner.support]}
+      />
     </>
   );
 }

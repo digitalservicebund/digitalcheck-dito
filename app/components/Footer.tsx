@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 import { openInNewIconElement } from "~/components/openInNewWindow";
-import { footer } from "~/resources/content/components/footer";
+import { A11Y_MESSAGE_NEW_WINDOW } from "~/resources/constants";
+import { footer } from "~/resources/content/shared/footer";
 import tailwindMerge from "~/utils/tailwindMerge";
-import { A11Y_MESSAGE_NEW_WINDOW } from "./Aria";
 import Image from "./Image";
 
 type LinkProps = {

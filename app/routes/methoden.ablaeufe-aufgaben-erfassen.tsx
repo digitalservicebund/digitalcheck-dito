@@ -5,10 +5,10 @@ import Container from "~/components/Container";
 import Hero from "~/components/Hero";
 import HighlightBox from "~/components/HighlightBox";
 import InfoBox from "~/components/InfoBox";
-import InterviewBanner from "~/components/InterviewBanner";
 import Tabs, { TabItem } from "~/components/Tabs";
 import VisualisationItem from "~/components/VisualisationItem";
 import { methodsTasksProcesses } from "~/resources/content/methode-ablaeufe-aufgaben-erfassen";
+import { interviewBanner } from "~/resources/content/shared/interview-banner";
 import {
   fetchStrapiData,
   visualisationFields,
@@ -135,7 +135,14 @@ export default function Visualization() {
       </Container>
 
       <Container className="ds-stack ds-stack-40">
-        <InterviewBanner />
+        <HighlightBox
+          items={[
+            {
+              headline: { tagName: "h2", text: interviewBanner.title },
+              content: interviewBanner.text,
+            },
+          ]}
+        />
         <InfoBox
           items={[
             {

@@ -1,7 +1,7 @@
 import { marked, Marked, type Renderer, type Tokens } from "marked";
+import { A11Y_MESSAGE_NEW_WINDOW } from "~/resources/constants";
 import { getDownloadableExtensionName } from "~/utils/fileExtensionUtils";
 import twMerge from "~/utils/tailwindMerge";
-import { A11Y_MESSAGE_NEW_WINDOW } from "./Aria";
 import { openInNewIconString } from "./openInNewWindow";
 
 export type RichTextProps = {

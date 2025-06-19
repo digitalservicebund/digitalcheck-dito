@@ -4,6 +4,7 @@ import Hero from "~/components/Hero";
 import { BulletList, NumberedList } from "~/components/List";
 import SupportBanner from "~/components/SupportBanner";
 import { methods } from "~/resources/content/methoden";
+import { supportBanner } from "~/resources/content/shared/support-banner";
 import { ROUTE_METHODS } from "~/resources/staticRoutes";
 import { methodStepsItems } from "~/utils/listProcessing.ts";
 import constructMetaTitle from "~/utils/metaTitle";
@@ -47,7 +48,7 @@ export default function Methoden() {
       <Container>
         <BulletList items={methodStepsItems(true, renderStepContent)} />
       </Container>
-      <SupportBanner withFeedbackBanner={false} />
+      <SupportBanner sections={[supportBanner.support]} />
       <div id={"weiter"} />
       <Container>
         <NumberedList

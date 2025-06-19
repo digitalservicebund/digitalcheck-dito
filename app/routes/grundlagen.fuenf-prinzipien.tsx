@@ -8,6 +8,7 @@ import {
   getDetailsSummary,
   methodsFivePrinciples,
 } from "~/resources/content/methode-fuenf-prinzipien";
+import { supportBanner } from "~/resources/content/shared/support-banner";
 import { ROUTE_FUNDAMENTALS_PRINCIPLES } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
 import { slugify } from "~/utils/utilFunctions";
@@ -59,7 +60,9 @@ export default function FundamentalsFivePrinciples() {
         </Container>
       ))}
 
-      <SupportBanner />
+      <SupportBanner
+        sections={[supportBanner.feedback, supportBanner.support]}
+      />
     </>
   );
 }

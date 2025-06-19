@@ -5,7 +5,7 @@ import {
 import { PointerEvent } from "react";
 import DropdownContentList from "~/components/DropdownContentList";
 import type { DropdownItemProps } from "~/components/DropdownContentList.tsx";
-import { header } from "~/resources/content/components/header.ts";
+import { header } from "~/resources/content/shared/header.ts";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import twMerge from "~/utils/tailwindMerge";
 

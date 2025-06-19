@@ -1,7 +1,7 @@
 // These routes can't be exported from ~/routes.ts as that file isn't part of the app environment: https://github.com/remix-run/react-router/issues/12392
 
+import { preCheckQuestions } from "~/resources/content/shared/pre-check-questions";
 import { removeTrailingSlash } from "~/utils/utilFunctions";
-import { preCheckQuestions } from "./content/shared/preCheckQuestions";
 
 export type Route = {
   url: string;

@@ -15,15 +15,16 @@ import {
   useRouteLoaderData,
 } from "react-router";
 
-import { Aria } from "~/components/Aria";
 import Button from "~/components/Button";
 import Container from "~/components/Container";
 import Footer from "~/components/Footer";
 import Heading from "~/components/Heading";
 import PageHeader from "~/components/PageHeader";
 import RichText from "~/components/RichText";
+import { A11Y_MESSAGE_NEW_WINDOW } from "~/resources/constants";
+import { general } from "~/resources/content/shared/general";
 import { siteMeta } from "~/resources/content/shared/meta";
-import { newsBanner } from "~/resources/content/shared/newsBanner";
+import { newsBanner } from "~/resources/content/shared/news-banner";
 import { features } from "~/resources/features";
 import { ROUTE_LANDING } from "~/resources/staticRoutes";
 import sharedStyles from "~/styles.css?url";
@@ -195,7 +196,13 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
         />
         {children}
         <Footer />
-        <Aria />
+        <span
+          aria-hidden="true"
+          className="hidden"
+          id={A11Y_MESSAGE_NEW_WINDOW}
+        >
+          {general.a11yMessageNewWindow}
+        </span>
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
       </body>

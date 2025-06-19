@@ -5,11 +5,12 @@ import Box from "~/components/Box";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Hero from "~/components/Hero";
+import HighlightBox from "~/components/HighlightBox";
 import Image from "~/components/Image";
-import InterviewBanner from "~/components/InterviewBanner";
 import { methodsITSystems } from "~/resources/content/methode-it-systeme-erfassen";
 import { methodsTechnicalFeasibility } from "~/resources/content/methode-technische-umsetzbarkeit";
 import { methodsResponsibleActors } from "~/resources/content/methode-zustaendige-akteurinnen-auflisten";
+import { interviewBanner } from "~/resources/content/shared/interview-banner";
 import {
   ROUTE_METHODS,
   ROUTE_METHODS_COLLECT_IT_SYSTEMS,
@@ -141,7 +142,14 @@ export default function Index() {
           />
         </Container>
       )}
-      <InterviewBanner />
+      <HighlightBox
+        items={[
+          {
+            headline: { tagName: "h2", text: interviewBanner.title },
+            content: interviewBanner.text,
+          },
+        ]}
+      />
     </>
   );
 }

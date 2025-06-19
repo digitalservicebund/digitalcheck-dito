@@ -4,6 +4,7 @@ import InfoBox from "~/components/InfoBox.tsx";
 import { BulletList } from "~/components/List.tsx";
 import SupportBanner from "~/components/SupportBanner";
 import { fundamentalsMethods } from "~/resources/content/grundlage-methoden.ts";
+import { supportBanner } from "~/resources/content/shared/support-banner";
 import { ROUTE_FUNDAMENTALS_METHODS } from "~/resources/staticRoutes";
 import { methodStepsItems } from "~/utils/listProcessing.ts";
 import constructMetaTitle from "~/utils/metaTitle";
@@ -32,7 +33,9 @@ export default function FundamentalsMethods() {
       <Container>
         <BulletList className="mb-40" items={methodStepsItems(false)} />
       </Container>
-      <SupportBanner />
+      <SupportBanner
+        sections={[supportBanner.feedback, supportBanner.support]}
+      />
     </>
   );
 }

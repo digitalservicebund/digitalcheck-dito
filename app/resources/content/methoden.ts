@@ -1,4 +1,4 @@
-import { steps } from "~/resources/content/components/naechste-schritte";
+import { steps } from "~/resources/content/shared/naechste-schritte";
 import {
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_TASKS_PROCESSES,

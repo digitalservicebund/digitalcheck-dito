@@ -1,5 +1,6 @@
 import { Outlet, useLoaderData } from "react-router";
 import SupportBanner from "~/components/SupportBanner";
+import { supportBanner } from "~/resources/content/shared/support-banner";
 import {
   fetchStrapiData,
   GET_PRINZIPS_QUERY,
@@ -23,7 +24,9 @@ export default function Digitaltauglichkeit() {
   return (
     <>
       <Outlet context={useLoaderData<typeof loader>()} />
-      <SupportBanner />
+      <SupportBanner
+        sections={[supportBanner.feedback, supportBanner.support]}
+      />
     </>
   );
 }

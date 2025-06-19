@@ -8,6 +8,7 @@ import InlineNotice from "~/components/InlineNotice";
 import RichText from "~/components/RichText";
 import SupportBanner from "~/components/SupportBanner";
 import { general } from "~/resources/content/shared/general";
+import { supportBanner } from "~/resources/content/shared/support-banner";
 import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
 import {
   ROUTE_DOCUMENTATION_STATIC_PDF,
@@ -92,7 +93,9 @@ export default function Index() {
           items={start.summary.items}
         />
       </Container>
-      <SupportBanner />
+      <SupportBanner
+        sections={[supportBanner.feedback, supportBanner.support]}
+      />
     </>
   );
 }

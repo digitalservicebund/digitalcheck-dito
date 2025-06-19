@@ -1,5 +1,5 @@
 import { Apps, Layers } from "@digitalservicebund/icons";
-import { feedbackFormular } from "~/resources/content/components/feedback-formular";
+import { feedbackFormular } from "~/resources/content/shared/feedback-formular";
 import { ROUTE_INTEROPERABILITY_SPOC } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 

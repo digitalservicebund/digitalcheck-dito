@@ -12,6 +12,7 @@ import SupportBanner from "~/components/SupportBanner";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { PRE_CHECK_START_BUTTON_ID } from "~/resources/constants";
 import { general } from "~/resources/content/shared/general";
+import { supportBanner } from "~/resources/content/shared/support-banner";
 import { preCheck } from "~/resources/content/vorpruefung";
 import {
   ROUTE_LANDING,
@@ -118,7 +119,9 @@ export default function Index() {
       <Container>
         <Tabs tabs={tabsData} />
       </Container>
-      <SupportBanner />
+      <SupportBanner
+        sections={[supportBanner.feedback, supportBanner.support]}
+      />
     </>
   );
 }

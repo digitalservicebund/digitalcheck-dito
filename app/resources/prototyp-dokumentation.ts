@@ -1,4 +1,4 @@
-import { feedbackFormular } from "~/resources/content/components/feedback-formular";
+import { feedbackFormular } from "~/resources/content/shared/feedback-formular";
 import { ROUTE_FUNDAMENTALS_PRINCIPLES } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
