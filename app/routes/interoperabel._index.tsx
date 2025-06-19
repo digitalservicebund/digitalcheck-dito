@@ -3,12 +3,14 @@ import Background from "~/components/Background";
 import Box from "~/components/Box.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
+import DetailsSummary from "~/components/DetailsSummary";
 import FeedbackForm from "~/components/FeedbackForm";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image";
 import ImageZoomable from "~/components/ImageZoomable";
 import InfoBox from "~/components/InfoBox";
+import InfoBoxList from "~/components/InfoBoxList";
 import RichText from "~/components/RichText";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { interoperability } from "~/resources/content/interoperabel";
@@ -65,13 +67,26 @@ export default function Interoperability() {
       content: (
         <>
           <Container className="px-0 pt-0">
-            <InfoBox
-              heading={{
-                tagName: "h2",
-                text: interoperability.info.headline,
-              }}
-              items={interoperability.info.items}
-            />
+            <InfoBoxList
+              heading={
+                <Heading tagName="h2">{interoperability.info.headline}</Heading>
+              }
+              separator
+            >
+              {interoperability.info.items.map((item) => (
+                <InfoBox key={item.heading.text}>
+                  <Heading tagName="h3" text={item.heading.text} />
+                  <RichText>{item.content}</RichText>
+                  {item.detailsSummary && (
+                    <DetailsSummary
+                      title={item.detailsSummary.title}
+                      content={item.detailsSummary.content}
+                    />
+                  )}
+                </InfoBox>
+              ))}
+            </InfoBoxList>
+
             <ImageZoomable image={interoperability.info.image} />
           </Container>
 

@@ -1,9 +1,4 @@
-import {
-  ArrowCircleRightOutlined,
-  LayersOutlined,
-  StickyNote2Outlined,
-  SupportOutlined,
-} from "@digitalservicebund/icons";
+import { StickyNote2Outlined } from "@digitalservicebund/icons";
 import { ButtonProps } from "~/components/Button";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import {
@@ -62,7 +57,7 @@ export const methodsTasksProcesses = {
     },
 
     tipp: {
-      badge: { text: "Tipp", Icon: LayersOutlined },
+      badge: "Tipp",
       content: dedent`
         Am schnellsten sind Sie, wenn Sie eine Papierskizze machen, bevor Sie am Computer arbeiten. Starten Sie mit reduzierten Informationen und ergänzen Sie nach und nach Details in Ihrem Flussdiagramm. **Wichtig ist das Verständnis, nicht die Ästhetik**.
             
@@ -96,10 +91,7 @@ export const methodsTasksProcesses = {
   },
 
   furtherSteps: {
-    badge: {
-      text: "So geht es weiter",
-      Icon: ArrowCircleRightOutlined,
-    },
+    badge: "So geht es weiter",
     headline: "Finden Sie konkrete Möglichkeiten der Digitalisierung",
     content:
       "Mit den Prinzipien für Digitaltaugliche Gesetzgebung bekommen Sie auch konkrete Hinweise darauf, worauf Sie achten müssen.",
@@ -113,7 +105,7 @@ export const methodsTasksProcesses = {
     ] as ButtonProps[],
   },
   support: {
-    badge: { text: "Unterstützungsangebot", Icon: SupportOutlined },
+    badge: "Unterstützungsangebot",
     headline: "Visualisierungen gemeinsam erstellen",
     content: dedent`
       Der Digitalcheck-Support unterstützt Sie bei der Visualsierung von Abläufen. Wir helfen Ihnen gerne, insbesondere bei komplexen Abläufen.

@@ -1,47 +1,52 @@
+import { ReactNode } from "react";
 import { twJoin } from "tailwind-merge";
-import Badge, { BadgeProps } from "./Badge";
-import Heading, { type HeadingProps } from "./Heading";
-import InfoBoxItem, { type InfoBoxItemProps } from "./InfoBoxItem";
+import twMerge from "~/utils/tailwindMerge";
+import { ImageBoxSize } from "./ImageBox";
+
+export type InfoBoxIconProps = {
+  className?: string;
+  size: ImageBoxSize;
+  content: ReactNode;
+};
+
+function InfoBoxIcon({ content, size, className }: InfoBoxIconProps) {
+  return (
+    <div
+      className={twMerge(
+        `hidden sm:block [&>svg]:size-80 [&>svg]:fill-blue-500 *:${size}`,
+        className,
+      )}
+    >
+      {content}
+    </div>
+  );
+}
 
 export type InfoBoxProps = {
   identifier?: string;
-  badge?: BadgeProps;
-  heading?: HeadingProps;
-  separator?: boolean;
-  items: InfoBoxItemProps[];
-  Icon?: React.FC<React.SVGProps<SVGSVGElement>>;
+  children: ReactNode;
+  className?: string;
+  icon?: InfoBoxIconProps;
 };
 
-const InfoBox = ({
-  identifier,
-  items,
-  badge,
-  heading,
-  Icon,
-  separator = true,
-}: InfoBoxProps) => {
+const InfoBox = ({ identifier, children, className, icon }: InfoBoxProps) => {
   return (
-    <section className="flex flex-row gap-16">
-      {Icon && <Icon className="hidden size-80 fill-blue-500 sm:block" />}
-      <div className="ds-stack ds-stack-8 w-full scroll-my-40" id={identifier}>
-        {badge && <Badge {...badge} />}
-        {heading && <Heading className="ds-heading-02-reg" {...heading} />}
-        <ul
-          className={twJoin(
-            "list-unstyled info-box ds-stack",
-            separator ? "ds-stack-32" : "ds-stack-48",
-          )}
-        >
-          {items.map((item, index) => (
-            <InfoBoxItem
-              separator={separator}
-              {...item}
-              key={`${item.identifier}-${index}`}
-            />
-          ))}
-        </ul>
+    <div
+      id={identifier}
+      data-testid="info-box-container"
+      className={twJoin(
+        "flex scroll-my-40 flex-col gap-32 sm:flex-row",
+        className,
+      )}
+    >
+      {icon && <InfoBoxIcon {...icon} />}
+      <div
+        data-testid="info-box-content"
+        className="ds-stack ds-stack-16 break-words"
+      >
+        {children}
       </div>
-    </section>
+    </div>
   );
 };
 

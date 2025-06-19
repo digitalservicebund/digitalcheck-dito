@@ -1,15 +1,18 @@
+import { ReactNode } from "react";
 import Background from "./Background";
-import InfoBox, { InfoBoxProps } from "./InfoBox";
 
-export type HighlightBoxProps = InfoBoxProps;
+export type HighlightBoxProps = { children: ReactNode };
 
-export default function HighlightBox(props: Readonly<HighlightBoxProps>) {
+// TODO: refactor to a background type
+export default function HighlightBox({
+  children,
+}: Readonly<HighlightBoxProps>) {
   return (
     <Background
       backgroundColor="blue"
       className="rounded-lg px-16 py-40 sm:px-80"
     >
-      <InfoBox {...props} />
+      {children}
     </Background>
   );
 }

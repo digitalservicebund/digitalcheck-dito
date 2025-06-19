@@ -6,7 +6,9 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import ImageBox from "~/components/ImageBox.tsx";
 import InfoBox from "~/components/InfoBox";
+import InfoBoxList from "~/components/InfoBoxList";
 import { NumberedList } from "~/components/List";
+import RichText from "~/components/RichText";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { index } from "~/resources/content/startseite";
 
@@ -80,13 +82,19 @@ export default function Index() {
       title: index.summary.tabName,
       plausibleEventName: index.summary.plausibleEventName,
       content: (
-        <InfoBox
-          heading={{
-            tagName: "h2",
-            text: index.summary.title,
-          }}
-          items={index.summary.items}
-        />
+        <>
+          <InfoBoxList
+            heading={<Heading tagName="h2">{index.summary.title}</Heading>}
+            separator
+          >
+            {index.summary.items.map((item) => (
+              <InfoBox key={item.heading}>
+                <Heading tagName="h3">{item.heading}</Heading>
+                <RichText>{item.content}</RichText>
+              </InfoBox>
+            ))}
+          </InfoBoxList>
+        </>
       ),
     },
   ];

@@ -1,79 +1,53 @@
-import { ArrowCircleRightOutlined } from "@digitalservicebund/icons";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import InfoBox from "./InfoBox";
-
-const mockInfoBoxItems = [
-  {
-    label: undefined,
-    headline: undefined,
-    image: undefined,
-    content: "Lorem1",
-    buttons: [],
-  },
-  {
-    label: undefined,
-    headline: undefined,
-    image: undefined,
-    content: "Lorem2",
-    buttons: [],
-  },
-];
+import InfoBox, { InfoBoxIconProps } from "./InfoBox"; // Import the component to test
 
 describe("InfoBox", () => {
-  describe("Separator", () => {
-    it("has expected padding when the separator is enabled", () => {
-      render(<InfoBox separator={true} items={mockInfoBoxItems} />);
-      expect(screen.getByRole("list")).toHaveClass("ds-stack-32");
-    });
-
-    it("has expected padding when the separator is disabled", () => {
-      render(<InfoBox separator={false} items={mockInfoBoxItems} />);
-      expect(screen.getByRole("list")).toHaveClass("ds-stack-48");
-    });
-
-    it("has expected padding when the separator is unset", () => {
-      render(<InfoBox items={mockInfoBoxItems} />);
-      expect(screen.getByRole("list")).toHaveClass("ds-stack-32");
-    });
+  it("renders without crashing and displays children", () => {
+    render(
+      <InfoBox>
+        <div>Test Children</div>
+      </InfoBox>,
+    );
+    expect(screen.getByText("Test Children")).toBeInTheDocument();
   });
 
-  describe("Top level elements", () => {
-    it("shows the icon", () => {
-      render(
-        <InfoBox items={mockInfoBoxItems} Icon={ArrowCircleRightOutlined} />,
-      );
-      expect(
-        screen.getByTestId("ArrowCircleRightOutlinedIcon"),
-      ).toBeInTheDocument();
-    });
-
-    it("shows the label", () => {
-      render(
-        <InfoBox items={mockInfoBoxItems} badge={{ children: "TestLabel" }} />,
-      );
-      expect(screen.getByRole("mark")).toHaveTextContent("TestLabel");
-    });
-
-    it("shows the heading", () => {
-      render(
-        <InfoBox
-          items={mockInfoBoxItems}
-          heading={{ text: "TestHeading", tagName: "h2" }}
-        />,
-      );
-
-      expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
-        "TestHeading",
-      );
-    });
+  it("renders with an identifier", () => {
+    render(
+      <InfoBox identifier="test-id">
+        <div>Children</div>
+      </InfoBox>,
+    );
+    const infoBoxElement = screen.getByTestId("info-box-container");
+    expect(infoBoxElement).toBeInTheDocument();
+    expect(infoBoxElement).toHaveAttribute("id", "test-id");
   });
 
-  describe("Items", () => {
-    it("renders the InfoBoxItems", () => {
-      render(<InfoBox items={mockInfoBoxItems} />);
+  it("renders with an icon when provided", () => {
+    const MockIconContent = () => <svg data-testid="mock-svg">Mock SVG</svg>;
+    const iconProps = {
+      size: "SMALL",
+      content: <MockIconContent />,
+    } as InfoBoxIconProps;
+    render(
+      <InfoBox icon={iconProps}>
+        <div data-testid="children">Children</div>
+      </InfoBox>,
+    );
 
-      expect(screen.getAllByRole("listitem").length).toBe(2);
-    });
+    expect(screen.getByTestId("mock-svg")).toBeInTheDocument();
+    const iconWrapper = screen.getByTestId("mock-svg").parentElement;
+    expect(iconWrapper).toHaveClass("hidden");
+    expect(iconWrapper).toHaveClass("sm:block");
+  });
+
+  it("applies className to the main container", () => {
+    render(
+      <InfoBox className="custom-class">
+        <div data-testid="children">Children</div>
+      </InfoBox>,
+    );
+    const infoBoxElement = screen.getByTestId("info-box-container");
+    expect(infoBoxElement).toHaveClass("custom-class");
   });
 });
