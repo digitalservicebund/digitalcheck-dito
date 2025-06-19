@@ -5,7 +5,9 @@ import {
   useOutletContext,
 } from "react-router";
 
-import { ArrowCircleRightOutlined } from "@digitalservicebund/icons";
+import { ArrowCircleRightOutlined } from "@digitalservicebund/icons/index";
+import { BlocksRenderer } from "@strapi/blocks-react-renderer";
+import Badge from "~/components/Badge";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
 import CustomLink from "~/components/CustomLink";
@@ -121,85 +123,89 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
         />
 
         <InfoBox
-          Icon={ArrowCircleRightOutlined}
-          content={prinzip.Beschreibung}
-          heading={{ text: prinzip.Name, tagName: "h2" }}
-          badge={{
-            children: examplesRegelungen.principles.prinzipBadge,
-            principleNumber: prinzip.Nummer,
-          }}
-        />
-        {GuteUmsetzungen.length > 0 && <Separator />}
+          icon={{ content: <ArrowCircleRightOutlined />, size: "XSMALL" }}
+        >
+          <Badge principleNumber={prinzip.Nummer}>
+            {examplesRegelungen.principles.prinzipBadge}
+          </Badge>
+          <Heading tagName="h2">{prinzip.Name}</Heading>
+          <BlocksRenderer content={prinzip.Beschreibung} />
+        </InfoBox>
 
         {GuteUmsetzungen.length > 0 && (
-          <div className="ds-stack ds-stack-64 mt-40">
-            {GuteUmsetzungen.map(
-              (digitalcheck) =>
-                digitalcheck.Regelungsvorhaben && (
-                  <div
-                    key={digitalcheck.documentId}
-                    data-testid="regelung-on-prinzip"
-                  >
-                    <Link
-                      target="_blank"
-                      to={`${ROUTE_REGELUNGEN.url}/${digitalcheck.Regelungsvorhaben.URLBezeichnung}`}
-                      rel="noreferrer"
-                      prefetch="viewport"
+          <>
+            <Separator />
+            <div className="ds-stack ds-stack-64 mt-40">
+              {GuteUmsetzungen.map(
+                (digitalcheck) =>
+                  digitalcheck.Regelungsvorhaben && (
+                    <div
+                      key={digitalcheck.documentId}
+                      data-testid="regelung-on-prinzip"
                     >
-                      <Heading
-                        tagName="h3"
-                        text={digitalcheck.Regelungsvorhaben.Titel}
-                        look="ds-heading-03-bold"
-                        className="text-link inline max-w-full"
+                      <Link
+                        target="_blank"
+                        to={`${ROUTE_REGELUNGEN.url}/${digitalcheck.Regelungsvorhaben.URLBezeichnung}`}
+                        rel="noreferrer"
+                        prefetch="viewport"
+                      >
+                        <Heading
+                          tagName="h3"
+                          text={digitalcheck.Regelungsvorhaben.Titel}
+                          look="ds-heading-03-bold"
+                          className="text-link inline max-w-full"
+                        />
+                      </Link>
+                      <InlineInfoList
+                        className="my-32 pl-16"
+                        items={[
+                          {
+                            label: examplesRegelungen.infoLabels[0],
+                            value: digitalcheck.Regelungsvorhaben
+                              .VeroeffentlichungsDatum
+                              ? formatDate(
+                                  digitalcheck.Regelungsvorhaben
+                                    .VeroeffentlichungsDatum,
+                                )
+                              : "",
+                          },
+                          {
+                            key: examplesRegelungen.infoLabels[1],
+                            value: digitalcheck.Regelungsvorhaben
+                              .LinkRegelungstext ? (
+                              <CustomLink
+                                to={
+                                  digitalcheck.Regelungsvorhaben
+                                    .LinkRegelungstext
+                                }
+                                target="_blank"
+                                rel="noreferrer"
+                                className="text-blue-800 underline"
+                              >
+                                {digitalcheck.Regelungsvorhaben?.GesetzStatus
+                                  ? gesetzStatusMap[
+                                      digitalcheck.Regelungsvorhaben
+                                        .GesetzStatus
+                                    ]
+                                  : examplesRegelungen.infoLabels[1]}
+                              </CustomLink>
+                            ) : null,
+                          },
+                          {
+                            label: examplesRegelungen.infoLabels[2],
+                            value: digitalcheck.Regelungsvorhaben.Ressort,
+                          },
+                        ]}
                       />
-                    </Link>
-                    <InlineInfoList
-                      className="my-32 pl-16"
-                      items={[
-                        {
-                          label: examplesRegelungen.infoLabels[0],
-                          value: digitalcheck.Regelungsvorhaben
-                            .VeroeffentlichungsDatum
-                            ? formatDate(
-                                digitalcheck.Regelungsvorhaben
-                                  .VeroeffentlichungsDatum,
-                              )
-                            : "",
-                        },
-                        {
-                          key: examplesRegelungen.infoLabels[1],
-                          value: digitalcheck.Regelungsvorhaben
-                            .LinkRegelungstext ? (
-                            <CustomLink
-                              to={
-                                digitalcheck.Regelungsvorhaben.LinkRegelungstext
-                              }
-                              target="_blank"
-                              rel="noreferrer"
-                              className="text-blue-800 underline"
-                            >
-                              {digitalcheck.Regelungsvorhaben?.GesetzStatus
-                                ? gesetzStatusMap[
-                                    digitalcheck.Regelungsvorhaben.GesetzStatus
-                                  ]
-                                : examplesRegelungen.infoLabels[1]}
-                            </CustomLink>
-                          ) : null,
-                        },
-                        {
-                          label: examplesRegelungen.infoLabels[2],
-                          value: digitalcheck.Regelungsvorhaben.Ressort,
-                        },
-                      ]}
-                    />
-                    <ParagraphList
-                      paragraphs={digitalcheck.Paragraphen}
-                      principlesToShow={[prinzip]}
-                    />
-                  </div>
-                ),
-            )}
-          </div>
+                      <ParagraphList
+                        paragraphs={digitalcheck.Paragraphen}
+                        principlesToShow={[prinzip]}
+                      />
+                    </div>
+                  ),
+              )}
+            </div>
+          </>
         )}
       </Container>
       <div className="my-40">

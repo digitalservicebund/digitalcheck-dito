@@ -4,6 +4,7 @@ import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
+import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
 import InlineNotice from "~/components/InlineNotice";
 import RichText from "~/components/RichText";
@@ -87,13 +88,15 @@ export default function Index() {
           className="mb-40"
         />
 
-        <InfoBoxList>
-          <Heading tagName="h2">{start.summary.title}</Heading>
-          <InfoBoxList.List>
-            {start.summary.items.map((item) => (
-              <InfoBoxList.Item key={item.heading.text} {...item} />
-            ))}
-          </InfoBoxList.List>
+        <InfoBoxList
+          heading={<Heading tagName="h2">{start.summary.title}</Heading>}
+        >
+          {start.summary.items.map((item) => (
+            <InfoBox key={item.heading}>
+              <Heading tagName="h2">{item.heading}</Heading>
+              <RichText>{item.content}</RichText>
+            </InfoBox>
+          ))}
         </InfoBoxList>
       </Container>
       <SupportBanner {...supportBanner} />

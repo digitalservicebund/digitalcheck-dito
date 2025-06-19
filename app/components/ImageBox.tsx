@@ -7,10 +7,10 @@ import twMerge from "~/utils/tailwindMerge";
 import RichText from "./RichText";
 
 const imageSizes = {
-  XSMALL: "max-w-80",
-  SMALL: "max-w-[120px]",
-  MEDIUM: "sm:max-w-[280px] max-w-full",
-  LARGE: "sm:max-w-[400px] max-w-full",
+  XSMALL: "w-80",
+  SMALL: "w-[120px]",
+  MEDIUM: "sm:w-[280px] w-full",
+  LARGE: "sm:w-[400px] w-full",
 };
 
 export type ImageBoxSize = keyof typeof imageSizes;

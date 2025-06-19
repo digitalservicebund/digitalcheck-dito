@@ -1,8 +1,13 @@
-import { PrincipleNumber } from "~/components/Badge";
+import { ArrowCircleRightOutlined } from "@digitalservicebund/icons";
+import Badge, { PrincipleNumber } from "~/components/Badge";
 import Container from "~/components/Container";
+import DetailsSummary from "~/components/DetailsSummary";
+import DetailsSummaryList from "~/components/DetailsSummaryList";
+import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import LinkListBox from "~/components/LinkListBox";
+import RichText from "~/components/RichText";
 import SupportBanner from "~/components/SupportBanner";
 import {
   getDetailsSummary,
@@ -39,20 +44,26 @@ export default function FundamentalsFivePrinciples() {
         <Container className="pb-64" key={slugify(principle.title)}>
           <InfoBox
             identifier={slugify(principle.title)}
-            separator={false}
             key={slugify(principle.title)}
-            Icon={principle.icon}
-            heading={{
-              tagName: "h2",
-              text: principle.title,
-            }}
-            badge={{
-              children: principle.label,
-              principleNumber: principle.principleNumber as PrincipleNumber,
-            }}
-            content={principle.content}
-            detailsSummary={getDetailsSummary(principle.detailsSummary)}
-          />
+            icon={{ content: <ArrowCircleRightOutlined />, size: "XSMALL" }}
+          >
+            <Badge
+              principleNumber={principle.principleNumber as PrincipleNumber}
+            >
+              {principle.label}
+            </Badge>
+            <Heading tagName="h2">{principle.title}</Heading>
+            <RichText>{principle.content}</RichText>
+
+            <Heading tagName="h3">{principle.detailsSummary.title}</Heading>
+            <DetailsSummaryList>
+              {getDetailsSummary(principle.detailsSummary).items.map(
+                (detail) => (
+                  <DetailsSummary key={detail.title} {...detail} />
+                ),
+              )}
+            </DetailsSummaryList>
+          </InfoBox>
         </Container>
       ))}
 

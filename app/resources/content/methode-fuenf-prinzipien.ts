@@ -1,5 +1,3 @@
-import { DrawOutlined } from "@digitalservicebund/icons";
-import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
 import { HeadingProps } from "~/components/Heading";
 import {
   ROUTE_EXAMPLES,
@@ -39,10 +37,7 @@ export const methodsFivePrinciples = {
       "Anleitung: So nutzen Sie die fünf Prinzipien für Ihr Regelungsvorhaben",
   },
   instruction: {
-    badge: {
-      Icon: DrawOutlined,
-      text: "Anleitung",
-    },
+    badge: "Anleitung",
     title: "So nutzen Sie die fünf Prinzipien für Ihr Regelungsvorhaben",
     items: [
       {
@@ -66,7 +61,6 @@ export const methodsFivePrinciples = {
     {
       label: "Prinzip",
       title: "Digitale Angebote für alle nutzbar gestalten",
-      icon: ArrowCircleRightOutlined,
       principleNumber: 1,
       content:
         "Viele Bürgerinnen, Bürger und Unternehmen sind an digitale Angebote gewöhnt und bevorzugen diese – sofern die digitale Kommunikation gut umgesetzt ist und ihren Bedürfnissen entspricht. Die Verwaltung kann digitale Daten schneller prüfen, bearbeiten und dokumentieren. Das Angebot sollte dabei immer inklusiv sein und es benötigt gegebenenfalls analoge Alternativen.",
@@ -126,7 +120,6 @@ export const methodsFivePrinciples = {
     {
       label: "Prinzip",
       title: "Datenwiederverwendung benötigt einheitliches Recht",
-      icon: ArrowCircleRightOutlined,
       principleNumber: 2,
       content:
         "Normadressatinnen und -adressaten sowie umsetzende Behörden sparen Kosten und Zeit, wenn das [Once-Only-Prinzip](https://www.cio.bund.de/Webs/CIO/DE/digitale-loesungen/digitale-verwaltung/registermodernisierung/registermodernisierung-node.html) konsequent angewendet wird – also wenn Daten nur einmal angegeben und dann wiederverwendet werden. Die Grundlage dafür sind harmonisierte Rechtsbegriffe, ein datenschutzkonformer Austausch und die Berücksichtigung etablierter technischer Standards.",
@@ -182,7 +175,6 @@ export const methodsFivePrinciples = {
     {
       label: "Prinzip",
       title: "Etablierte Technologien ermöglichen effiziente Umsetzung",
-      icon: ArrowCircleRightOutlined,
       principleNumber: 6,
       content:
         "Digitale Angebote können schneller bereitgestellt sowie günstiger entwickelt und betrieben werden, wenn sie auf bestehenden Technologien aufbauen. Offene, standardisierte Schnittstellen und Open-Source erhöhen die [Sicherheit der Angebote](#datenschutz-und-informationssicherheit-schaffen-vertrauen) und fördern die Interoperabilität.",
@@ -217,7 +209,6 @@ export const methodsFivePrinciples = {
     },
     {
       label: "Prinzip",
-      icon: ArrowCircleRightOutlined,
       principleNumber: 5,
       title: "Automatisierung basiert auf eindeutigen Regelungen",
       content:
@@ -274,7 +265,6 @@ export const methodsFivePrinciples = {
     {
       label: "Prinzip",
       title: "Datenschutz und Informationssicherheit schaffen Vertrauen",
-      icon: ArrowCircleRightOutlined,
       principleNumber: 3,
       content:
         "Alle Menschen haben ein Recht darauf, dass ihre Daten vor unbefugten Zugriffen geschützt werden. Der Schutz personenbezogener Daten ist in der [DSGVO](https://eur-lex.europa.eu/eli/reg/2016/679/oj?locale=de) geregelt. Informationssicherheit umfasst alle Daten und wird je nach Bereich spezifiziert.\n\nEine datenschutzkonforme Regelung erhebt nur das Minimum an Daten. Datensparsamkeit ist einfach umzusetzen und verringert den Erfüllungsaufwand. Wenn weniger Daten vorliegen, müssen auch weniger Informationen geschützt werden.\n\nWenn Informationen den ihnen gebührenden Schutz erhalten, schafft das Vertrauen in den Staat. Die Gefahr von Missbrauch und negativen wirtschaftlichen oder sicherheitsrelevanten Konsequenzen wird verringert.",
@@ -308,7 +298,6 @@ export const methodsFivePrinciples = {
   ],
   nextStepMethods: {
     label: "So geht es weiter:",
-    icon: ArrowCircleRightOutlined,
     title: "2.5. Technische Umsetzbarkeit sicherstellen",
     text: "Analysieren Sie die Auswirkungen Ihres Regelungsvorhabens auf bestehende und neue Abläufe und IT-Systeme. Damit stellen Sie die technische Machbarkeit sicher. Greifen Sie dafür auf das Fachwissen der umsetzenden Akteurinnen und Akteure zurück.",
     buttons: [
@@ -321,7 +310,6 @@ export const methodsFivePrinciples = {
   },
   nextStep: {
     label: "So geht es weiter:",
-    icon: ArrowCircleRightOutlined,
     title:
       "Verfassen Sie den Regelungsentwurf und dokumentieren Sie Ihre Entscheidungen",
     text: "Die gesammelten Erkenntnisse und Ergebnisse helfen Ihnen dabei, Aspekte der Digitaltauglichkeit in Ihrem Regelungsentwurf zu berücksichtigen. Diese Entscheidungen dokumentieren Sie in einem Fragebogen.",

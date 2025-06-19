@@ -34,16 +34,12 @@ export const preCheck = {
       title: "Zusammengefasst",
       items: [
         {
-          heading: {
-            text: "Beginnen Sie so früh wie möglich",
-          },
+          heading: "Beginnen Sie so früh wie möglich",
           content:
             "Führen Sie die Vorprüfung zu Beginn Ihrer Arbeit an einem Regelungsvorhaben durch. Das heißt bevor Sie den Regelungstext formulieren.",
         },
         {
-          heading: {
-            text: "Warum ist die Vorprüfung relevant für mein Vorhaben?",
-          },
+          heading: "Warum ist die Vorprüfung relevant für mein Vorhaben?",
           content: dedent`
             - **Digitalisierungsbezug frühzeitig erkennen:** Setzen Sie sich frühzeitig mit Chancen der Digitalisierung auseinander, um den Regelungstext so zu gestalten, dass er die praxisnahe Umsetzung ermöglicht.<br/><br/>
             - **EU-Anforderungen identifizieren:** Im Rahmen der Vorprüfung ermitteln Sie, ob grenzüberschreitende Interoperabilität für Ihr Vorhaben relevant ist. Regelungen die  Interoperabilität fördern, ermöglichen technische Standardisierung, rechtliche Harmonisierung und digitale bürgerzentrierte Dienste innerhalb der EU.<br/><br/>

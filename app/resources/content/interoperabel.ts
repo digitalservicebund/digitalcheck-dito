@@ -255,10 +255,8 @@ export const interoperability = {
           Durch den Prozess der Interoperabilitätsbewertung ermitteln Sie Potenziale und Hindernisse für grenzüberschreitende Zusammenarbeit. Damit legen Sie die Grundlage für Regelungen, die Interoperabilität ermöglichen. Eine Vorgehensweise ganz ähnlich, wie sie es von der Arbeit an digitaltauglichen Regelungen kennen.
         `,
         detailsSummary: {
-          items: [
-            {
-              title: "Wie läuft eine Interoperabilitätsbewertung ab?",
-              content: dedent`
+          title: "Wie läuft eine Interoperabilitätsbewertung ab?",
+          content: dedent`
               Als Bestandteil der Bewertung identifizieren Sie bestehende Lösungen. Lassen sich diese wiederverwenden, werden Kosten und Aufwand in der Umsetzung reduziert.
               Die [Verordnung für ein interoperables Europa]((https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903)) definiert im Anhang Mindestanforderungen für die Durchführung einer Interoperabilitätsbewertung, die Details sind in den [Leitlinien für Interoperabilitätsbewertungen](https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/2025-05/DIGIT-2024-00047-00-00-DE-TRA-00.pdf) beschrieben.
               <br/><br/>
@@ -270,8 +268,6 @@ export const interoperability = {
               <br/>[European Commission - European Interoperability Framework](https://ec.europa.eu/isa2/eif_en/)
               <br/>[Interoperable Europe Portal - FAQs](https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs)
           `,
-            },
-          ],
         },
       },
       {
@@ -283,10 +279,8 @@ export const interoperability = {
           <br/><br/>
           Eine verbindliche Anforderung im Sinne der Verordnung ist eine verpflichtende Regel. Das kann z.B. eine Definition, ein Standard, eine Richtlinie, ein Verbot oder eine Beschränkung sein. Eine exakte Definition finden Sie in der [Verordnung in der Präambel, Erwägungsgrund 18](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903).`,
         detailsSummary: {
-          items: [
-            {
-              title: "Welche Kriterien müssen dafür erfüllt sein?",
-              content: dedent`
+          title: "Welche Kriterien müssen dafür erfüllt sein?",
+          content: dedent`
               Die Interoperabilitätsbewertung ist für diese verbindliche Anforderung verpflichtend, wenn die folgenden Kriterien aus den [Leitlinien für Interoperabilitätsbewertungen](https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/2025-05/DIGIT-2024-00047-00-00-DE-TRA-00.pdf) erfüllt sind:
               1. Die Regelung sieht eine digitale Umsetzung vor.
               2. Die Regelung sieht den Austausch von Daten und Informationen zwischen Verwaltungen der EU-Mitgliedstaaten vor.
@@ -298,8 +292,6 @@ export const interoperability = {
               <br/>[European Commission - European Interoperability Framework](https://ec.europa.eu/isa2/eif_en/)
               <br/>[Interoperable Europe Portal - FAQs](https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs)
           `,
-            },
-          ],
         },
       },
     ],

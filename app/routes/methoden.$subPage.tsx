@@ -4,9 +4,12 @@ import Background from "~/components/Background";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
+import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import HighlightBox from "~/components/HighlightBox";
 import Image from "~/components/Image";
+import InfoBox from "~/components/InfoBox";
+import RichText from "~/components/RichText";
 import { methodsITSystems } from "~/resources/content/methode-it-systeme-erfassen";
 import { methodsTechnicalFeasibility } from "~/resources/content/methode-technische-umsetzbarkeit";
 import { methodsResponsibleActors } from "~/resources/content/methode-zustaendige-akteurinnen-auflisten";
@@ -142,14 +145,12 @@ export default function Index() {
           />
         </Container>
       )}
-      <HighlightBox
-        items={[
-          {
-            headline: { tagName: "h2", text: interviewBanner.title },
-            content: interviewBanner.text,
-          },
-        ]}
-      />
+      <HighlightBox>
+        <InfoBox>
+          <Heading tagName="h2">{interviewBanner.title}</Heading>
+          <RichText>{interviewBanner.text}</RichText>
+        </InfoBox>
+      </HighlightBox>
     </>
   );
 }

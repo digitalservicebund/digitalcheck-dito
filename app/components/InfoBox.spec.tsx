@@ -1,73 +1,53 @@
-import { render, screen, within } from "@testing-library/react";
-import { createRoutesStub } from "react-router";
+import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import InfoBox from "./InfoBox";
+import InfoBox, { InfoBoxIconProps } from "./InfoBox"; // Import the component to test
 
 describe("InfoBox", () => {
-  describe("Top level elements", () => {
-    it("shows the label", () => {
-      render(<InfoBox badge={{ text: "TestLabel" }} />);
-      expect(screen.getByText("TestLabel")).toBeInTheDocument();
-    });
+  it("renders without crashing and displays children", () => {
+    render(
+      <InfoBox>
+        <div>Test Children</div>
+      </InfoBox>,
+    );
+    expect(screen.getByText("Test Children")).toBeInTheDocument();
+  });
 
-    it("shows the heading", () => {
-      render(<InfoBox heading={{ text: "TestHeading" }} />);
+  it("renders with an identifier", () => {
+    render(
+      <InfoBox identifier="test-id">
+        <div>Children</div>
+      </InfoBox>,
+    );
+    const infoBoxElement = screen.getByTestId("info-box-container");
+    expect(infoBoxElement).toBeInTheDocument();
+    expect(infoBoxElement).toHaveAttribute("id", "test-id");
+  });
 
-      expect(screen.getByRole("heading", { level: 3 })).toHaveTextContent(
-        "TestHeading",
-      );
-    });
+  it("renders with an icon when provided", () => {
+    const MockIconContent = () => <svg data-testid="mock-svg">Mock SVG</svg>;
+    const iconProps = {
+      size: "SMALL",
+      content: <MockIconContent />,
+    } as InfoBoxIconProps;
+    render(
+      <InfoBox icon={iconProps}>
+        <div data-testid="children">Children</div>
+      </InfoBox>,
+    );
 
-    it("shows the content", () => {
-      render(<InfoBox content="Test **Content**" />);
+    expect(screen.getByTestId("mock-svg")).toBeInTheDocument();
+    const iconWrapper = screen.getByTestId("mock-svg").parentElement;
+    expect(iconWrapper).toHaveClass("hidden");
+    expect(iconWrapper).toHaveClass("sm:block");
+  });
 
-      expect(screen.getByRole("paragraph")).toHaveTextContent("Test Content");
-    });
-
-    it("shows the detailSummary", () => {
-      const testDetailSummary = {
-        items: [
-          { title: "Test Detail 1", content: "Test Content 1" },
-          { title: "Test Detail 2", content: "Test Content 2" },
-        ],
-      };
-      render(<InfoBox detailsSummary={testDetailSummary} />);
-
-      expect(screen.getAllByRole("group").length).toBe(2);
-      expect(screen.getAllByRole("group").at(0)).toHaveTextContent(
-        "Test Detail 1Test Content 1",
-      );
-    });
-
-    it("shows the link list", () => {
-      const testLinks = {
-        header: "Test link list",
-        links: [
-          {
-            title: "Link 1",
-            url: "example.com",
-          },
-          {
-            title: "Link 2",
-            url: "example2.com",
-          },
-        ],
-      };
-
-      const RouterStubInfoBox = createRoutesStub([
-        {
-          path: "/",
-          Component: () => <InfoBox linkList={testLinks} />,
-        },
-      ]);
-      render(<RouterStubInfoBox />);
-
-      expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
-        "Test link list",
-      );
-
-      const linkListEl = screen.getByRole("list");
-      expect(within(linkListEl).getAllByRole("listitem").length).toBe(2);
-    });
+  it("applies className to the main container", () => {
+    render(
+      <InfoBox className="custom-class">
+        <div data-testid="children">Children</div>
+      </InfoBox>,
+    );
+    const infoBoxElement = screen.getByTestId("info-box-container");
+    expect(infoBoxElement).toHaveClass("custom-class");
   });
 });
