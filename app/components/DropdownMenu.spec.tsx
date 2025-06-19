@@ -8,7 +8,7 @@ import type { DropdownItemProps } from "~/components/DropdownContentList";
 import type { DropdownProps } from "./DropdownMenu";
 import DropdownMenu from "./DropdownMenu";
 
-vi.mock("~/resources/content/components/header.ts", () => ({
+vi.mock("~/resources/content/shared/header.ts", () => ({
   header: {
     contactTel: {
       msgMobile: "mobile msg",
