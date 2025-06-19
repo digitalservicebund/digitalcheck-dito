@@ -1,17 +1,26 @@
 import { SettingsSuggestOutlined } from "@digitalservicebund/icons";
-import { banner } from "~/resources/content/components/banner";
 import Container from "./Container";
 import RichText from "./RichText";
 
-export default function Banner() {
+export type BannerProps = {
+  ariaLabel: string;
+  title: string;
+  content: string;
+};
+
+export default function Banner({
+  ariaLabel,
+  title,
+  content,
+}: Readonly<BannerProps>) {
   return (
-    <div aria-label={banner.ariaLabel} className="bg-yellow-300">
+    <div aria-label={ariaLabel} className="bg-yellow-300">
       <Container className="relative flex flex-col items-center gap-8 py-24 sm:flex-row sm:py-0">
         <div className="ds-stack ds-stack-8 sm:py-24">
           <div className="flex flex-col-reverse items-start gap-8 sm:flex-row">
-            <h2 className="ds-subhead font-bold">{banner.title}</h2>
+            <h2 className="ds-subhead font-bold">{title}</h2>
           </div>
-          <RichText markdown={banner.content} />
+          <RichText markdown={content} />
         </div>
         <SettingsSuggestOutlined className="mt-0 hidden size-128 fill-yellow-500 sm:block" />
       </Container>

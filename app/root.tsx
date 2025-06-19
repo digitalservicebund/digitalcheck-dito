@@ -23,6 +23,8 @@ import Heading from "~/components/Heading";
 import PageHeader from "~/components/PageHeader";
 import RichText from "~/components/RichText";
 import { siteMeta } from "~/resources/content/shared/meta";
+import { newsBanner } from "~/resources/content/shared/newsBanner";
+import { features } from "~/resources/features";
 import { ROUTE_LANDING } from "~/resources/staticRoutes";
 import sharedStyles from "~/styles.css?url";
 import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants";
@@ -183,7 +185,14 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
       </head>
       <body className="flex min-h-screen flex-col">
         <ScrollAndFocus />
-        <PageHeader includeBreadcrumbs={!error} featureFlags={featureFlags} />
+        <PageHeader
+          includeBreadcrumbs={!error}
+          banner={
+            featureFlags?.[features.enableDocumentationPrototype]
+              ? undefined
+              : newsBanner
+          }
+        />
         {children}
         <Footer />
         <Aria />

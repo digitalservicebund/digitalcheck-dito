@@ -6,12 +6,11 @@ import { twJoin } from "tailwind-merge";
 import Breadcrumbs from "~/components/Breadcrumbs.tsx";
 import DropdownMenu from "~/components/DropdownMenu.tsx";
 import { header } from "~/resources/content/components/header.ts";
-import { features } from "~/resources/features";
 import { ROUTE_LANDING } from "~/resources/staticRoutes.ts";
 import { matchHasHandle, MatchWithHandle } from "~/utils/handles";
 import twMerge from "~/utils/tailwindMerge.ts";
 import { normalizePathname } from "~/utils/utilFunctions.ts";
-import Banner from "./Banner";
+import Banner, { type BannerProps } from "./Banner";
 import ProgressBar from "./ProgressBar";
 
 interface SubItem {
@@ -58,19 +57,16 @@ const getFeatureForMatches = (
 
 const PageHeader = ({
   includeBreadcrumbs = true,
-  featureFlags,
+  banner,
 }: {
   includeBreadcrumbs?: boolean;
-  featureFlags: Record<keyof typeof features, boolean> | undefined;
+  banner?: BannerProps;
 }) => {
   const location = useLocation();
   const currentPath = location.pathname;
   const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
-
-  const enableDocumentationPrototype =
-    featureFlags?.[features.enableDocumentationPrototype];
 
   // Handle esc key
   useEffect(() => {
@@ -209,7 +205,7 @@ const PageHeader = ({
         >
           {header.items.map((item) => renderDropdownItem(item, "mobile"))}
         </nav>
-        {!enableDocumentationPrototype && <Banner />}
+        {banner && <Banner {...banner} />}
         {showProgressBar && <ProgressBar />}
         {showBreadcrumbs && <Breadcrumbs />}
       </header>
