@@ -1,11 +1,20 @@
+import {
+  ArrowCircleRightOutlined,
+  LayersOutlined,
+  SupportOutlined,
+} from "@digitalservicebund/icons";
 import { useLoaderData } from "react-router";
 import Background from "~/components/Background";
+import Badge from "~/components/Badge";
+import ButtonContainer from "~/components/ButtonContainer";
 import Card from "~/components/Card";
 import Container from "~/components/Container";
+import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import HighlightBox from "~/components/HighlightBox";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
+import RichText from "~/components/RichText";
 import Tabs, { TabItem } from "~/components/Tabs";
 import VisualisationItem from "~/components/VisualisationItem";
 import { methodsTasksProcesses } from "~/resources/content/methode-ablaeufe-aufgaben-erfassen";
@@ -51,13 +60,14 @@ export default function Visualization() {
       plausibleEventName: methodsTasksProcesses.intro.plausibleEventName,
       content: (
         <div className="ds-stack ds-stack-40">
-          <InfoBox
-            heading={{
-              text: methodsTasksProcesses.intro.visibility.headline,
-              tagName: "h2",
-            }}
-            content={methodsTasksProcesses.intro.visibility.content}
-          />
+          <InfoBox>
+            <Heading tagName="h2">
+              {methodsTasksProcesses.intro.visibility.headline}
+            </Heading>
+            <RichText>
+              {methodsTasksProcesses.intro.visibility.content}
+            </RichText>
+          </InfoBox>
           {visualisationsData && (
             <VisualisationItem
               plausibleEventName={
@@ -76,29 +86,33 @@ export default function Visualization() {
       content: (
         <div className="ds-stack ds-stack-40">
           <InfoBoxList>
-            <InfoBoxList.List>
-              <InfoBoxList.Item
-                heading={{
-                  text: methodsTasksProcesses.anleitung.ablaufe.headline,
-                  tagName: "h2",
-                }}
-                content={methodsTasksProcesses.anleitung.ablaufe.content}
-              />
-              <InfoBoxList.Item
-                heading={{
-                  text: methodsTasksProcesses.anleitung.visualisierung.headline,
-                  tagName: "h3",
-                }}
-                content={methodsTasksProcesses.anleitung.visualisierung.content}
-              />
-            </InfoBoxList.List>
+            <InfoBox>
+              <Heading tagName="h2">
+                {methodsTasksProcesses.anleitung.ablaufe.headline}
+              </Heading>
+              <RichText>
+                {methodsTasksProcesses.anleitung.ablaufe.content}
+              </RichText>
+            </InfoBox>
+            <InfoBox>
+              <Heading tagName="h3">
+                {methodsTasksProcesses.anleitung.visualisierung.headline}
+              </Heading>
+              <RichText>
+                {methodsTasksProcesses.anleitung.visualisierung.content}
+              </RichText>
+            </InfoBox>
           </InfoBoxList>
 
           <HighlightBox>
-            <InfoBox
-              badge={methodsTasksProcesses.anleitung.tipp.badge}
-              content={methodsTasksProcesses.anleitung.tipp.content}
-            />
+            <InfoBox>
+              <Badge Icon={LayersOutlined}>
+                {methodsTasksProcesses.anleitung.tipp.badge}
+              </Badge>
+              <RichText>
+                {methodsTasksProcesses.anleitung.tipp.content}
+              </RichText>
+            </InfoBox>
           </HighlightBox>
 
           <Card
@@ -130,32 +144,36 @@ export default function Visualization() {
 
       <Container className="ds-stack ds-stack-40">
         <HighlightBox>
-          <InfoBox
-            heading={{ tagName: "h2", text: interviewBanner.title }}
-            content={interviewBanner.text}
-          />
+          <InfoBox>
+            <Heading tagName="h2">{interviewBanner.title}</Heading>
+            <RichText>{interviewBanner.text}</RichText>
+          </InfoBox>
         </HighlightBox>
-        <InfoBox
-          badge={methodsTasksProcesses.furtherSteps.badge}
-          heading={{
-            text: methodsTasksProcesses.furtherSteps.headline,
-            tagName: "h3",
-          }}
-          content={methodsTasksProcesses.furtherSteps.content}
-          buttons={methodsTasksProcesses.furtherSteps.buttons}
-        />
+        <InfoBox>
+          <Badge Icon={ArrowCircleRightOutlined}>
+            {methodsTasksProcesses.furtherSteps.badge}
+          </Badge>
+          <Heading tagName="h3">
+            {methodsTasksProcesses.furtherSteps.headline}
+          </Heading>
+          <RichText>{methodsTasksProcesses.furtherSteps.content}</RichText>
+          <ButtonContainer
+            buttons={methodsTasksProcesses.furtherSteps.buttons}
+          ></ButtonContainer>
+        </InfoBox>
       </Container>
 
       <Background backgroundColor="blue">
         <Container>
-          <InfoBox
-            badge={methodsTasksProcesses.support.badge}
-            heading={{
-              text: methodsTasksProcesses.support.headline,
-              tagName: "h2",
-            }}
-            content={methodsTasksProcesses.support.content}
-          />
+          <InfoBox>
+            <Badge Icon={SupportOutlined}>
+              {methodsTasksProcesses.support.badge}
+            </Badge>
+            <Heading tagName="h2">
+              {methodsTasksProcesses.support.headline}
+            </Heading>
+            <RichText>{methodsTasksProcesses.support.content}</RichText>
+          </InfoBox>
         </Container>
       </Background>
     </>

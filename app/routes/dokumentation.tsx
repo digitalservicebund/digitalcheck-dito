@@ -2,9 +2,11 @@ import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
+import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
 import InlineNotice from "~/components/InlineNotice";
 import { NumberedList } from "~/components/List";
+import RichText from "~/components/RichText";
 import SupportBanner from "~/components/SupportBanner";
 import { documentation } from "~/resources/content/dokumentation";
 import { supportBanner } from "~/resources/content/shared/support-banner";
@@ -36,13 +38,18 @@ export default function Index() {
       </Container>
 
       <Container>
-        <InfoBoxList separator>
-          <Heading tagName="h2">{documentation.summary.title}</Heading>
-          <InfoBoxList.List>
-            {documentation.summary.items.map((item) => (
-              <InfoBoxList.Item key={item.heading.text} {...item} />
-            ))}
-          </InfoBoxList.List>
+        <InfoBoxList
+          heading={
+            <Heading tagName="h2">{documentation.summary.title}</Heading>
+          }
+          separator
+        >
+          {documentation.summary.items.map((item) => (
+            <InfoBox key={item.heading}>
+              <Heading tagName="h3">{item.heading}</Heading>
+              <RichText>{item.content}</RichText>
+            </InfoBox>
+          ))}
         </InfoBoxList>
       </Container>
 

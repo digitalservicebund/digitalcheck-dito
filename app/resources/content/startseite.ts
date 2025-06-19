@@ -74,29 +74,23 @@ export const index = {
     title: "Zusammengefasst",
     items: [
       {
-        heading: {
-          text: "Was ist Digitaltauglichkeit?",
-        },
+        heading: "Was ist Digitaltauglichkeit?",
         content: dedent`
-          Regelungen werden vermehrt digital umgesetzt. Beispiele sind eine Gesetzesänderung, mit der ein Papierantrag 
-          durch einen Online-Antrag ersetzt wird oder eine Verordnung, die Änderungen in den IT-Verfahren nachgelagerter 
+          Regelungen werden vermehrt digital umgesetzt. Beispiele sind eine Gesetzesänderung, mit der ein Papierantrag
+          durch einen Online-Antrag ersetzt wird oder eine Verordnung, die Änderungen in den IT-Verfahren nachgelagerter
           Behörden erfordert.
           <br class="block content-[''] mb-24!" />
-          Damit die digitale Umsetzung reibungslos klappt, muss die Regelung digitaltauglich gestaltet sein. Das heißt 
-          erstens, dass der digitalen Umsetzung nichts im Wege steht, wie zum Beispiel das persönliche Einreichen von 
-          Dokumenten. Zweitens soll aktiv gefördert werden, dass möglichst viele Schritte von Computern durchgeführt 
+          Damit die digitale Umsetzung reibungslos klappt, muss die Regelung digitaltauglich gestaltet sein. Das heißt
+          erstens, dass der digitalen Umsetzung nichts im Wege steht, wie zum Beispiel das persönliche Einreichen von
+          Dokumenten. Zweitens soll aktiv gefördert werden, dass möglichst viele Schritte von Computern durchgeführt
           oder unterstützt werden.`,
       },
       {
-        heading: {
-          text: "Digitaltaugliche Regelungen sparen Ressourcen",
-        },
+        heading: "Digitaltaugliche Regelungen sparen Ressourcen",
         content: `Eine gute digitale Umsetzung spart langfristig Zeit und sorgt dafür, dass Ziel und Wirkung des Vorhabens erreicht werden: auf Seiten der Normadressaten und -adressatinnen und auf Seiten der Verwaltung.`,
       },
       {
-        heading: {
-          text: "Alle Regelungsvorhaben sind betroffen",
-        },
+        heading: "Alle Regelungsvorhaben sind betroffen",
         content: `Der Digitalcheck gilt für alle Regelungsvorhaben (Gesetze, Verordnungen und Verwaltungsvorschriften), sowohl für neue Vorhaben als auch für Änderungen an bestehenden Regelungen.`,
       },
     ],
