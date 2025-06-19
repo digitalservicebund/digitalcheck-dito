@@ -5,4 +5,5 @@ export const general = {
   tableOfContents: {
     headline: "Inhalt",
   },
+  a11yMessageNewWindow: "(öffnet in neuem Fenster)",
 };
