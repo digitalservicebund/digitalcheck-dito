@@ -5,7 +5,7 @@ import {
   useOutletContext,
 } from "react-router";
 
-import { ArrowCircleRightOutlined } from "@digitalservicebund/icons/index";
+import { ArrowCircleRightOutlined } from "@digitalservicebund/icons";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
 import CustomLink from "~/components/CustomLink";
