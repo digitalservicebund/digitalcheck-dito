@@ -17,10 +17,10 @@ import {
 
 import Button from "~/components/Button";
 import Container from "~/components/Container";
-import Footer from "~/components/Footer";
 import Heading from "~/components/Heading";
-import PageHeader from "~/components/PageHeader";
 import RichText from "~/components/RichText";
+import Footer from "~/layout/Footer";
+import PageHeader from "~/layout/PageHeader";
 import { A11Y_MESSAGE_NEW_WINDOW } from "~/resources/constants";
 import { general } from "~/resources/content/shared/general";
 import { siteMeta } from "~/resources/content/shared/meta";

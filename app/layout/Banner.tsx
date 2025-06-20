@@ -1,6 +1,6 @@
 import { SettingsSuggestOutlined } from "@digitalservicebund/icons";
-import Container from "./Container";
-import RichText from "./RichText";
+import Container from "app/components/Container";
+import RichText from "app/components/RichText";
 
 export type BannerProps = {
   ariaLabel: string;

@@ -1,9 +1,9 @@
+import Image from "app/components/Image";
 import { Link } from "react-router";
 import { openInNewIconElement } from "~/components/openInNewWindow";
 import { A11Y_MESSAGE_NEW_WINDOW } from "~/resources/constants";
 import { footer } from "~/resources/content/shared/footer";
 import tailwindMerge from "~/utils/tailwindMerge";
-import Image from "./Image";
 
 type LinkProps = {
   preText?: string;

@@ -3,15 +3,15 @@ import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
 import { useEffect, useRef, useState } from "react";
 import { Link, type UIMatch, useLocation, useMatches } from "react-router";
 import { twJoin } from "tailwind-merge";
-import Breadcrumbs from "~/components/Breadcrumbs.tsx";
 import DropdownMenu from "~/components/DropdownMenu.tsx";
+import Banner, { type BannerProps } from "~/layout/Banner";
+import Breadcrumbs from "~/layout/Breadcrumbs.tsx";
+import ProgressBar from "~/layout/ProgressBar";
 import { header } from "~/resources/content/shared/header.ts";
 import { ROUTE_LANDING } from "~/resources/staticRoutes.ts";
 import { matchHasHandle, MatchWithHandle } from "~/utils/handles";
 import twMerge from "~/utils/tailwindMerge.ts";
 import { normalizePathname } from "~/utils/utilFunctions.ts";
-import Banner, { type BannerProps } from "./Banner";
-import ProgressBar from "./ProgressBar";
 
 interface SubItem {
   title: string;

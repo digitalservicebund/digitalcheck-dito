@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { createRoutesStub } from "react-router";
 import { describe, expect, it, vi } from "vitest";
-import Breadcrumbs from "./Breadcrumbs";
+import Breadcrumbs from "~/layout/Breadcrumbs";
 
 vi.mock("~/resources/staticRoutes", () => {
   const ROUTE_LANDING = {
