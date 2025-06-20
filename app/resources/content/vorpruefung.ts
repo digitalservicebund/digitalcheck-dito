@@ -148,6 +148,10 @@ export const preCheck = {
   nav: {
     ariaLabel: "Alle Fragen",
   },
+  srHint: {
+    before: "Frage ",
+    between: " von ",
+  },
   questions: [
     {
       ...preCheckQuestions.itSystem,

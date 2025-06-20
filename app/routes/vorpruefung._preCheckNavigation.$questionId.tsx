@@ -6,7 +6,10 @@ import { redirect, useLoaderData } from "react-router";
 import { z } from "zod";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
-import Question from "~/components/Question";
+import DetailsSummary from "~/components/DetailsSummary";
+import Heading from "~/components/Heading";
+import RadioGroup from "~/components/RadioGroup";
+import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { ROUTE_PRECHECK } from "~/resources/staticRoutes";
@@ -104,7 +107,7 @@ export type TQuestion = {
     negativeResult?: string;
     unsureResult?: string;
   };
-  text?: string;
+  text: string;
   url: string;
   prevLink: string;
   nextLink: string;
@@ -152,29 +155,38 @@ export default function Index() {
   return (
     <form {...form.getFormProps()}>
       <input type="hidden" name="questionId" value={question.id} />
-      <Question
-        className="pb-40"
-        stack={32}
-        heading={{
-          text: question.question,
-          tagName: "h1",
-          look: "ds-heading-02-reg",
-        }}
-        content={question.text ? { markdown: question.text } : undefined}
-        hint={question.hint}
-        radio={{
-          name: "answer",
-          options: options,
-          selectedValue: selectedOption,
-          onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-            setSelectedOption(e.target.value as PreCheckAnswerOption["value"]),
-          error:
+      <fieldset className="ds-stack ds-stack-32 container pt-0 pb-40">
+        <span className="sr-only">{`${preCheck.srHint.before}${questionIdx + 1}${preCheck.srHint.between}${questions.length}`}</span>
+        <legend className="ds-stack ds-stack-16">
+          <Heading
+            text={question.question}
+            tagName="h1"
+            look="ds-heading-02-reg"
+          />
+          <div>
+            <RichText markdown={question.text} />
+          </div>
+          {question.hint && (
+            <DetailsSummary
+              title={question.hint.title}
+              content={question.hint.text}
+            />
+          )}
+        </legend>
+        <RadioGroup
+          name="answer"
+          options={options}
+          selectedValue={selectedOption}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setSelectedOption(e.target.value as PreCheckAnswerOption["value"])
+          }
+          error={
             form.formState.submitStatus == "error"
               ? form.error("answer")
-              : undefined,
-        }}
-        ariaLabel={`Frage ${questionIdx + 1} von ${questions.length}`}
-      />
+              : undefined
+          }
+        />
+      </fieldset>
       <Container className="pt-0 pb-40">
         <ButtonContainer
           buttons={[
