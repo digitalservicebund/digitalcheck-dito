@@ -3,10 +3,10 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+import type { DropdownProps } from "app/layout/DropdownMenu";
+import DropdownMenu from "app/layout/DropdownMenu";
 import type { ReactNode } from "react";
 import type { DropdownItemProps } from "~/components/DropdownContentList";
-import type { DropdownProps } from "./DropdownMenu";
-import DropdownMenu from "./DropdownMenu";
 
 vi.mock("~/resources/content/shared/header.ts", () => ({
   header: {
