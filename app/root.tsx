@@ -154,6 +154,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
     const ogImage = `${rootLoaderData.BASE_URL}/images/og-image.png`;
     metaTitles = (
       <>
+        <meta property="og:site_name" content={siteMeta.siteName} />
         <meta property="og:description" content={siteMeta.description} />
         <meta property="twitter:description" content={siteMeta.description} />
         <meta property="og:url" content={url} />
