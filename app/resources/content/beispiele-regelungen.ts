@@ -1,3 +1,5 @@
+import { dedent } from "~/utils/dedentMultilineStrings";
+
 export const examplesRegelungen = {
   breadcrumb: "Regelungsbeispiel",
   subtitle: [

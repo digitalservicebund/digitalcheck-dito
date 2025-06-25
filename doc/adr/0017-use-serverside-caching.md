@@ -24,25 +24,21 @@ implementing caching to reduce redundant calls and improve performance.
 ### Evaluated Options
 
 1. **Caching in Strapi Cloud with Apollo Server:**
-
    - Apollo's built-in caching features were explored for use within Strapi.
    - However, integration issues made it impractical for our needs, and it failed to provide the expected benefits.
    - Does not support easy cache invalidation.
 
 2. **Caching on the Client/Remix Server with Apollo Client**
-
    - Apollo Client supports caching out of the box and comes with additional quality-of-life features and a comprehensive documentation.
    - Features like a custom hook, Suspense support and normalized caching are a strong suite.
    - Better fit for Client-side caching, but also supports SSR.
 
 3. **External Caching Services (e.g. Redis):**
-
    - High scalability and flexibility.
    - Requires additional infrastructure setup and maintenance.
    - Overhead may not be justified for our current scale.
 
 4. **In-Memory Caching with NodeCache:**
-
    - Simple to integrate directly into the application code.
    - Minimal setup with built-in TTL (time-to-live) and periodic cleanup.
    - Well-suited for small-scale, server-side caching needs.

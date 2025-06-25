@@ -17,7 +17,6 @@ Strapi supports both REST and GraphQL, and while REST has long been the standard
 ### Evaluated Options
 
 1. **REST API**
-
    - **Pros:**
      - Simple and well-documented.
      - Familiar to most developers and integrates easily with a variety of tools.
@@ -28,7 +27,6 @@ Strapi supports both REST and GraphQL, and while REST has long been the standard
      - Limited flexibility in defining query shapes.
 
 2. **GraphQL API**
-
    - **Pros:**
      - Query only the data you need, reducing over-fetching and under-fetching.
      - Single endpoint for all requests, simplifying API management.
