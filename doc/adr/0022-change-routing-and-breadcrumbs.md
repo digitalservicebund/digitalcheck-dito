@@ -6,58 +6,64 @@
 
 ## Context
 
+For each route, we need to configure and connect several things: a file, a path/URL, a title, and a breadcrumb string.
+
+Currently "implicitly" defined through file-based routing (i.e. the route URL results from the file location and name):
+
+- The route file
+- The route path (URL)
+
+What we refer to as the "route information" is configured explicitly in the code:
+
+- The route title (exported in each routes `meta` and used e.g. for breadcrumbs, search engines and tabs)
+- The route parent (needed for sitemap and currently for breadcrumbs)
+
 ### Issues with the current route and breadcrumb setup
 
-- For each route, we need to configure and connect several things:
-  - Currently "implicitly" defined through file-based routing:
-    - The route file
-    - The route path (URL)
-  - What we refer to as the route definition is configured explicitly:
-    - The route title (used e.g. for search engines and tabs)
-    - The route breadcrumb (often shorter than the title)
-- The configuration of routes is divided across multiple files: `app/routes.ts`, `app/resources/staticRoutes.ts`, `app/resources/allRoutes.ts`, where allRoutes adds precheck question and example principle routes
-- Sometimes an `<route>._index.tsx` file is used to export a parent routes content routes, sometimes `<route>.tsx` is used
+- The configuration of routes is divided across too many files:
+  - `app/routes.ts` is required by React Router and manages the routing configuration
+  - `app/resources/staticRoutes.ts` contains the route URLs together with their information
+  - `app/resources/allRoutes.ts` extends the "static routes" and adds precheck question and example principle routes
+- `<route>.tsx` and `<route>._index.tsx` are used inconsistently for a parent routes content
 - Breadcrumbs do not work with trailing slashes at the end of the URL
-- Breadcrumb implementation does not follow the official documentation
-- It does not work with SSG out of the box
+- Breadcrumb implementation is unnecessarily complex
 
 ### General considerations
 
-- React Router 7 went back do config based routing as the default in contrast to Remix file based routing (which is also still supported)
-- `app/routes.ts` is required by React Router
-  - We can't however move all route definitions here if we export them, as we can't use exports from this file in route files
-- Route or file configuration, not both: einen tod muss man sterben: Even route config still has filename vs path in config issue
-- Route info entirely in files or in config: Not entirely possible due to filename, title, url, and variable availability not being completely colocatable
+- React Router 7 went back do config based routing as the default in contrast to Remix 2's file based routing (which is also still supported)
+- We can't just move all route information to `app/routes.ts`, as we can't use exports from this file in route files
+- We need some kind of collection of all routes to be used in tests and the sitemap
+- From the two previous points follows that the URL needs to be configured twice: Once for the router and once to be imported for the links/buttons/tests/sitemap
+- Using `useMatches()` to build the breadcrumbs requires the existence of `<route>.tsx` if there are `<route>.<children>.tsx`
 
 ### Success conditions fo the new implementation
 
 - Works with trailing slashes at the end of the URL
 - Reduce number of route files (optimally to one, two is acceptable)
-- Consistent approach to route files and route definitions
+- Consistent approach to route files and route information
 
 #### Nice-to-haves
 
-- No extraneous files just for breadcrumbs
+- No extraneous route files just for breadcrumbs
 - Works for current sitemap implementation
+- Simpler breadcrumbs implementation
+- Better setup for SSG
 
 ### Considered Approaches
 
-#### File based + info in routes
+#### File based routing with information in routes
 
-- Still needs routes file
-- Test whether flatRoutes works for sitemap and tests
-- Need to create extra files, which isn’t a big deal
-- How to do dynamic routes without central config?
-- Still needs double configuration of URL and fileName
+This approach would still require a central collection of routes that gathers all the information. It would make getting a list of fixed "dynamic" routes (questions, principles) more complicated.
 
-#### Config based + info in routes
+This also leads to some extra `<route>.tsx` files for the breadcrumbs.
 
-- Most react router like
-- Still needs routes url information configured in addition to routes config
-- More boilerplate, no central config (but also no place to forget to add routes)
+#### Config based routing with information in routes
+
+This approach follows the default from the documentation closely but leads to more configuration code. no central config (but also no place to forget to add routes)
+
 - Imports more complicated
 - Might need extra files, but could be more explicit / intuitive
-- Unclear Naming convention
+- Unclear naming convention
 - Parent in config
 
 #### Config based + info in config
@@ -70,22 +76,31 @@
 
 ## Decision
 
-We will keep using file-based routing as it works and doesn't create any issues at the moment.
-Config routing also needs extra files to make breadcrumbs work. (why?)
+We will keep using file-based routing as it works well enough at the moment.
 
-We will simplify the route definitions by removing `allRoutes` and simplify to `staticRoutes` only.
-Dynamic pages (precheck, methods, examples) => what happened?
+We will keep one extra file in addition to `app/routes.ts` to have a central collection of all routes to be used for tests and sitemap generation. Fixed "dynamic" routes (questions, principles) will be created in that same file.
 
-- Create a helper function for route creation that streamlines URL building and parent definitions and improve naming of some select routes
-- Unify route configuration: Always use `<route>.tsx` handling breadcrumbs etc. and `<route>._index.tsx` for the rendered content (necessary for correct breadcrumb handling too)
-- Introduce new breadcrumb handling: Use a handle where it exists (e.g. dynamic routes like questions or examples), use the statically defined routes otherwise. Also works with trailing slashes and SSG now.
+We unify route configuration by always using `<route>.tsx` (to handle title etc.) and `<route>._index.tsx` for the rendered content (necessary for correct breadcrumb handling of the parent too).
+
+We switch to `useMatches()` to create the breadcrumbs. When a route exports a handle with a title (e.g. routes like questions or principles) this is used for the breadcrumb, otherwise the statically defined routes are used to find the title.
 
 ## Consequences
 
-Sitemap
+We remove `app/resources/allRoutes.ts` and simplify to `app/resources/staticRoutes.ts` only.
 
-- Info in files => extra files necessary
-- Needs one static file next to routes definition
-- Three new files are necessary for breadcrumbs
-- Direct import of handle possible
-  - Leads to more boilerplate
+We create a helper function for route creation that streamlines URL building and parent definitions and improve the naming of some select routes.
+
+We will create the missing `<route>.tsx` and `<route>._index.tsx` files (three) and add the required exports.
+
+### Success conditions fo the new implementation
+
+- [x] Works with trailing slashes at the end of the URL
+- [x] Reduce number of route files (optimally to one, two is acceptable)
+- [x] Consistent approach to route files and route information
+
+#### Nice-to-haves
+
+- [ ] No extraneous route files just for breadcrumbs
+- [x] Works for current sitemap implementation
+- [x] Simpler breadcrumbs implementation
+- [x] Better setup for SSG
