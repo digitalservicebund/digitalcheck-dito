@@ -6,7 +6,7 @@
 
 ## Context
 
-For each route, we need to configure and connect several things: a file, a path/URL, a title, and if it has, it's parent.
+For each route, we need to configure and connect several things: a file, a path / URL, a title, and if it has, it's parent.
 
 Currently "implicitly" defined through file-based routing (i.e. the route URL results from the file location and name):
 
@@ -30,30 +30,32 @@ What we refer to as the "route information" is configured explicitly in the code
 
 ### General considerations
 
-- React Router 7 went back do config based routing as the default in contrast to Remix 2's file based routing (which is also still supported)
-- We can't just move all route information to `app/routes.ts`, as we can't use exports from this file in route files (leads to errors)
-- We need some kind of collection of all routes to be used in tests and the sitemap
-- From the two previous points follows that the URL needs to be configured twice: Once for the router and once to be imported for the links/buttons/tests/sitemap
+- React Router 7 went back do config based routing as the default in contrast to Remix 2's file based routing (which is also still supported).
+- We can't just move all route information to `app/routes.ts`, as we can't use exports from this file in route files (leads to errors).
+- We need some kind of collection of all routes to be used in tests and the sitemap.
+- From the two previous points follows that the URL needs to be configured twice: Once for the router and once to be imported for the links / buttons / tests / sitemap.
 - Using `useMatches()` to build the breadcrumbs requires the existence of `<route>.tsx` if there are `<route>.<children>.tsx`
 
-### Success conditions fo the new implementation
+### Success criteria for the new implementation
 
-- Works with trailing slashes at the end of the URL
-- Reduces number of route files (optimally to one, two is acceptable)
-- Consistent approach to route files and route information
+#### Must-haves
+
+1. Breadcrumbs work with trailing slashes at the end of the current URL
+2. Reduces number of route files (optimally to one, two is acceptable)
+3. Consistent approach to route files and route information
 
 #### Nice-to-haves
 
-- No extraneous route files just for breadcrumbs
-- Works for current sitemap implementation
-- Simpler breadcrumbs implementation
-- Better setup for SSG
+4. No extraneous route files just for breadcrumbs
+5. Works for current sitemap implementation
+6. Simpler breadcrumbs implementation
+7. Better setup for SSG
 
 ## Decision
 
 We keep using file-based routing as it works well enough at the moment. Config-based routing in contrast would follow the default from the documentation, be more flexible in the file structure and deliver a central collection of routes and their information (including parent-child relationships). It would however come with some drawbacks:
 
-- It leads to more explicit configuration code
+- It leads to more explicit configuration code.
 - We couldn't export this configuration straight from `app/routes.ts` (as mentioned in the context), so it still requires an extra route information file and a mapping between the two.
 - We would need to handle the file names (naming schema and updating the configuration when files change).
 
@@ -73,15 +75,4 @@ We create a helper function for route creation that streamlines URL building and
 
 We will create the missing `<route>.tsx` and `<route>._index.tsx` files and add the required exports.
 
-### Success conditions fo the new implementation
-
-- [x] Works with trailing slashes at the end of the URL
-- [x] Reduce number of route files (optimally to one, two is acceptable)
-- [x] Consistent approach to route files and route information
-
-#### Nice-to-haves
-
-- [ ] No extraneous route files just for breadcrumbs
-- [x] Works for current sitemap implementation
-- [x] Simpler breadcrumbs implementation
-- [x] Better setup for SSG
+Meets all success criteria except of 4.
