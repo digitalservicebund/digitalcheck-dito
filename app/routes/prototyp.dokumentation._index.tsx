@@ -93,9 +93,7 @@ export default function Index() {
           items={start.summary.items}
         />
       </Container>
-      <SupportBanner
-        sections={[supportBanner.feedback, supportBanner.support]}
-      />
+      <SupportBanner {...supportBanner} />
     </>
   );
 }

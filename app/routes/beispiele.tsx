@@ -24,9 +24,7 @@ export default function Digitaltauglichkeit() {
   return (
     <>
       <Outlet context={useLoaderData<typeof loader>()} />
-      <SupportBanner
-        sections={[supportBanner.feedback, supportBanner.support]}
-      />
+      <SupportBanner {...supportBanner} />
     </>
   );
 }

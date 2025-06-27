@@ -33,9 +33,7 @@ export default function FundamentalsMethods() {
       <Container>
         <BulletList className="mb-40" items={methodStepsItems(false)} />
       </Container>
-      <SupportBanner
-        sections={[supportBanner.feedback, supportBanner.support]}
-      />
+      <SupportBanner {...supportBanner} />
     </>
   );
 }

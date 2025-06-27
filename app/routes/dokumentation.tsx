@@ -51,9 +51,7 @@ export default function Index() {
           items={documentation.nextSteps.items}
         />
       </Container>
-      <SupportBanner
-        sections={[supportBanner.feedback, supportBanner.support]}
-      />
+      <SupportBanner {...supportBanner} />
     </>
   );
 }

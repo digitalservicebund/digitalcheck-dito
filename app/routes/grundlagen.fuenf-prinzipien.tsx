@@ -60,9 +60,7 @@ export default function FundamentalsFivePrinciples() {
         </Container>
       ))}
 
-      <SupportBanner
-        sections={[supportBanner.feedback, supportBanner.support]}
-      />
+      <SupportBanner {...supportBanner} />
     </>
   );
 }

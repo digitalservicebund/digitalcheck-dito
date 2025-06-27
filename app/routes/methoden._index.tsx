@@ -48,7 +48,7 @@ export default function Methoden() {
       <Container>
         <BulletList items={methodStepsItems(true, renderStepContent)} />
       </Container>
-      <SupportBanner sections={[supportBanner.support]} />
+      <SupportBanner {...supportBanner} />
       <div id={"weiter"} />
       <Container>
         <NumberedList

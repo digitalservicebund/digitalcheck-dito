@@ -119,9 +119,7 @@ export default function Index() {
       <Container>
         <Tabs tabs={tabsData} />
       </Container>
-      <SupportBanner
-        sections={[supportBanner.feedback, supportBanner.support]}
-      />
+      <SupportBanner {...supportBanner} />
     </>
   );
 }
