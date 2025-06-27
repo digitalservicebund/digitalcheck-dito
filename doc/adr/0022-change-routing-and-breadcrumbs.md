@@ -29,9 +29,7 @@ We continue using file-based routing for its simplicity and compatibility, but c
   we fall back to the static metadata.
 
 We evaluated collocating metadata in each route file but decided against it. It would complicate imports and make
-aggregating dynamic routes for the sitemap or tests more difficult. We also considered fully config-based routing,
-but it would require managing file names explicitly and still necessitate a separate metadata source due to
-module import limitations.
+aggregating dynamic routes for the sitemap or tests more difficult.
 
 ## Consequences
 
