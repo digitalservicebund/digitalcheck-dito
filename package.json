@@ -41,7 +41,7 @@
     "@strapi/blocks-react-renderer": "1.0.1",
     "@tailwindcss/vite": "^4.1.0",
     "isbot": "^5.1.4",
-    "marked": "^15.0.0",
+    "marked": "^16.0.0",
     "mime-types": "^3.0.1",
     "msw": "^2.10.2",
     "node-cache": "^5.1.2",
