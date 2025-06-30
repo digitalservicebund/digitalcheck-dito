@@ -8,7 +8,11 @@ import Breadcrumbs from "~/layout/Breadcrumbs.tsx";
 import DropdownMenu from "~/layout/DropdownMenu.tsx";
 import ProgressBar from "~/layout/ProgressBar";
 import { header } from "~/resources/content/shared/header.ts";
-import { ROUTE_LANDING } from "~/resources/staticRoutes.ts";
+import {
+  ROUTE_LANDING,
+  ROUTE_METHODS,
+  ROUTE_PROTOTYPE_HESSEN_METHODS,
+} from "~/resources/staticRoutes.ts";
 import { matchHasHandle, MatchWithHandle } from "~/utils/handles";
 import twMerge from "~/utils/tailwindMerge.ts";
 import { normalizePathname } from "~/utils/utilFunctions.ts";
@@ -143,6 +147,9 @@ const PageHeader = ({
   const hideBreadcrumbs = getFeatureForMatches(matches, "hideBreadcrumbs");
   const showBreadcrumbs = includeBreadcrumbs && !hideBreadcrumbs;
 
+  const { pathname } = useLocation();
+  const isHessen = pathname.startsWith("/prototyp/hessen/");
+
   return (
     <>
       {showOverlay && (
@@ -155,19 +162,56 @@ const PageHeader = ({
       <header className="relative" ref={headerRef}>
         <div className="relative z-30 flex h-[72px] justify-between bg-white pl-16 lg:px-16">
           {/* Logo and title */}
-          <Link
-            to={ROUTE_LANDING.url}
-            className="plausible-event-name=Nav+Bar.Home flex items-center space-x-8"
-          >
-            <img src="/logo/bund-logo.png" alt="Logo des Bundes" width={54} />
-            <p className="ds-label-01-bold ml-16 flex flex-col text-xl max-lg:hidden">
-              {header.title}
-            </p>
-          </Link>
+          {isHessen ? (
+            <Link
+              to={ROUTE_LANDING.url}
+              className="plausible-event-name=Nav+Bar.Home flex items-center space-x-8"
+            >
+              <img
+                src="/logo/hessen-logo.png"
+                alt="Logo des Bundes"
+                width={54}
+              />
+              <p className="ds-label-01-bold ml-16 flex flex-col text-xl max-lg:hidden">
+                Digitalcheck Hessen
+              </p>
+            </Link>
+          ) : (
+            <Link
+              to={ROUTE_LANDING.url}
+              className="plausible-event-name=Nav+Bar.Home flex items-center space-x-8"
+            >
+              <img src="/logo/bund-logo.png" alt="Logo des Bundes" width={54} />
+              <p className="ds-label-01-bold ml-16 flex flex-col text-xl max-lg:hidden">
+                {header.title}
+              </p>
+            </Link>
+          )}
 
           {/* Desktop Navigation */}
           <nav className="flex items-center max-lg:hidden">
             {header.items.map((item) => renderDropdownItem(item, "desktop"))}
+            {renderDropdownItem(
+              {
+                isOrderedList: false,
+                text: isHessen ? "Hessen" : "Bund",
+                overlayContent: [
+                  {
+                    plausibleEventName: "foo",
+                    title: "Bund",
+                    content: "",
+                    href: ROUTE_METHODS.url,
+                  },
+                  {
+                    plausibleEventName: "bar",
+                    title: "Hessen",
+                    content: "",
+                    href: ROUTE_PROTOTYPE_HESSEN_METHODS.url,
+                  },
+                ],
+              },
+              "desktop",
+            )}
           </nav>
 
           {/* Mobile View Controls */}

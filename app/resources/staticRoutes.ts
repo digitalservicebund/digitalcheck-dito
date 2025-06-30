@@ -248,6 +248,16 @@ export const ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_PDF = createRoute(
   "download/prototyp_documentation_dummy_result.pdf",
   "Ihre Digitalcheck Dokumentation als PDF-Datei",
 );
+export const ROUTE_PROTOTYPE_HESSEN = createRoute(
+  "hessen",
+  "Hessen - Prototyp",
+  ROUTE_PROTOTYPE,
+);
+export const ROUTE_PROTOTYPE_HESSEN_METHODS = createRoute(
+  "methoden",
+  "Regelung erarbeiten",
+  ROUTE_PROTOTYPE_HESSEN,
+);
 
 export const ROUTES: Route[] = [
   ROUTE_LANDING,
@@ -282,4 +292,6 @@ export const ROUTES: Route[] = [
   ROUTE_FUNDAMENTALS,
   ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_FUNDAMENTALS_METHODS,
+  ROUTE_PROTOTYPE_HESSEN,
+  ROUTE_PROTOTYPE_HESSEN_METHODS,
 ];
