@@ -28,6 +28,7 @@ export const imprint = {
     ### Realisierung, Design, Hosting
     
     DigitalService GmbH des Bundes<br />
+    Frau Christina Lang<br />
     Frau Anja Theurer<br />
     Prinzessinnenstraße 8-14<br />
     10969 Berlin<br />
