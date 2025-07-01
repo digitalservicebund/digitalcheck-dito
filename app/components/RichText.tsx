@@ -5,13 +5,15 @@ import twMerge from "~/utils/tailwindMerge";
 import { openInNewIconString } from "./openInNewWindow";
 
 export type RichTextProps = {
-  markdown: string;
+  markdown?: string;
+  children?: string;
   className?: string;
   rendererOptions?: Partial<Renderer>;
 };
 
 const RichText = ({
   markdown,
+  children,
   className,
   rendererOptions,
   ...props
@@ -56,7 +58,7 @@ const RichText = ({
   };
 
   const newMarked = new Marked(extension);
-  const html = newMarked.parse(markdown);
+  const html = newMarked.parse(markdown ?? children ?? "");
 
   return html ? (
     <div
