@@ -66,7 +66,7 @@ function ImageBox({
       ) : (
         <Image {...image} className="object-contain" />
       )}
-      {image.caption && isBigImage && (
+      {image.caption && (
         <figcaption
           className={twJoin(
             "label-03-reg w- pt-[24px] **:max-w-fit",
