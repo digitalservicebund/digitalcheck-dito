@@ -1,4 +1,3 @@
-import TimerOutlined from "@digitalservicebund/icons/TimerOutlined";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -55,10 +54,6 @@ export default function Index() {
             },
           ]}
         />
-        <div className="mt-12 flex items-center gap-8">
-          <TimerOutlined className="size-24 fill-gray-800" />
-          <RichText markdown={start.timeInvest} className="text-base" />
-        </div>
         <RichText
           markdown={
             "**Alternativ** können Sie die Dokumentation auch als Word-Datei herunterladen und ausfüllen. "

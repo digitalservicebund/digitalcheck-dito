@@ -27,8 +27,11 @@ export default function PrototypeDocumentationPrinciple3() {
   const [selectedOption, setSelectedOption] = useState<string>();
   const [examples, setExamples] = useState([{ id: Date.now() }]);
 
-  const showExtraFields =
+  const showPositiveFields =
     selectedOption === "Ja" || selectedOption === "Teilweise";
+
+  const showNegativeFields =
+    selectedOption === "Nein" || selectedOption === "Nicht relevant";
 
   const addExample = () => {
     setExamples((prev) => [...prev, { id: Date.now() }]);
@@ -73,7 +76,7 @@ export default function PrototypeDocumentationPrinciple3() {
             }
           />
 
-          {showExtraFields && (
+          {showPositiveFields && (
             <>
               <RichText markdown={principle3.hint} className="mt-40" />
               <DetailsSummary
@@ -114,7 +117,7 @@ export default function PrototypeDocumentationPrinciple3() {
                       <ButtonContainer
                         buttons={[
                           {
-                            text: "Weiteres Beispiel",
+                            text: "Weitere Referenz hinzufügen",
                             look: "tertiary",
                             onClick: addExample,
                             type: "button",
@@ -127,6 +130,9 @@ export default function PrototypeDocumentationPrinciple3() {
                 ))}
               </div>
             </>
+          )}
+          {showNegativeFields && (
+            <Textarea name="explanation" label="Begründung:" />
           )}
         </fieldset>
       </form>

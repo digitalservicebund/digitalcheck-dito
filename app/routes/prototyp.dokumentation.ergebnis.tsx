@@ -1,6 +1,5 @@
-import { CheckCircleOutlined, CopyAll } from "@digitalservicebund/icons";
+import { CheckCircleOutlined } from "@digitalservicebund/icons";
 
-import { useState } from "react";
 import { redirect } from "react-router";
 import Background from "~/components/Background";
 import Box from "~/components/Box";
@@ -35,14 +34,6 @@ export function action() {
 }
 
 export default function DocumentationResult() {
-  const [isMailAddressCopied, setIsMailAddressCopied] = useState(false);
-
-  const handleCopyMailAddress = async () => {
-    await navigator.clipboard.writeText(result.form.emailTemplate.toNkr);
-    setIsMailAddressCopied(true);
-    setTimeout(() => setIsMailAddressCopied(false), 2000); // Hide Kopiert message after 2 seconds
-  };
-
   return (
     <>
       <Background backgroundColor="blue" className="py-40 print:pb-0">
@@ -98,33 +89,6 @@ export default function DocumentationResult() {
                 <div className="flex items-start pb-[40px]">
                   <div className="ds-stack ds-stack-16 flex-grow">
                     <RichText markdown={result.form.instructions} />
-                    <ButtonContainer
-                      className="mt-40"
-                      buttons={[
-                        {
-                          id: "result-email-button",
-                          text: result.form.sendEmailButton.text,
-                          look: "primary",
-                          className:
-                            "plausible-event-name=Content.Send+Documentation.Button+Create+Email",
-                        },
-                        {
-                          look: "ghost",
-                          type: "button",
-                          className:
-                            "plausible-event-name=Content.Send+Documentation.Button+Copy+Email+Addresses",
-                          text: isMailAddressCopied
-                            ? result.form.copyAddressButton.textCopied
-                            : result.form.copyAddressButton.text,
-                          iconRight: (
-                            <CopyAll className="h-40 w-40 text-blue-800" />
-                          ),
-                          onClick: () => {
-                            void handleCopyMailAddress();
-                          },
-                        },
-                      ]}
-                    />
                   </div>
                 </div>
               </fieldset>

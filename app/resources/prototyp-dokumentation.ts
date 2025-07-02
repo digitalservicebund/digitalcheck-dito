@@ -9,8 +9,8 @@ export const prototypeDocumentation = {
       "Die Dokumentation der Digitaltauglichkeit ist ein formeller, letzter Schritt. Sie dokumentieren, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben, und wie sie ins Regelungsvorhaben eingeflossen sind.",
     hints: [
       {
-        title: "Die Dokumentation können Sie als PDF-Datei herunterladen",
-        text: "Sie können die Dokumentation am Ende als **PDF-Datei herunterladen** und per Mail an den Nationalen Normenkontrollrat (NKR) senden.",
+        title: "So funktioniert es",
+        text: "Dieses Online Formular führt Sie durch die fünf Prinzipien der Digitaltauglichkeit. Daraus wird die Dokumentation für den Nationalen Normenkontrollrat (NKR) generiert. Diese können Sie dann als PDF-Datei herunterladen, ablegen und schlussendlich beim NKR einreichen.",
       },
       {
         title: "Vertraulich und nur für Sie zugänglich",
@@ -77,14 +77,14 @@ export const prototypeDocumentation = {
     textfieldResultsLabel: "Eingearbeitete Erkenntnisse:",
   },
   principles: {
-    radioOptions: ["Ja", "Nein", "Teilweise", "Nicht relevant"],
+    radioOptions: ["Ja", "Teilweise", "Nein", "Nicht relevant"],
     textfieldExplanationLabel: "Erklärung:",
     inputs: {
       paragraph: {
-        label: "Paragraph zur Referenz:",
+        label: "Referenz (Paragraphen oder Artikel):",
       },
       text: {
-        label: "Entsprechender Absatz des Regelungstextes:",
+        label: "Entsprechender Regelungstext hier einfügen:",
       },
       explanation: {
         label: "Erklärung:",
@@ -387,10 +387,6 @@ export const prototypeDocumentation = {
           {
             label: "Kann ich die Dokumentation später überarbeiten?",
             text: "Ihre Eingaben in diesem Formular werden nicht dauerhaft gespeichert. Wenn Sie die Inhalte überarbeiten wollen, können Sie den aktuellen Stand aus der PDF-Datei kopieren und ins Formular einfügen.",
-          },
-          {
-            label: "Welche Fragen hast du noch?",
-            text: "Welche Fragen sollen noch ins FAQ? Was würdest Kolleg:innen auf jeden Fall mitgeben?",
           },
         ],
       },
