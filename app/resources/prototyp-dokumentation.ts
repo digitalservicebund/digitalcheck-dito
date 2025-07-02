@@ -104,7 +104,7 @@ export const prototypeDocumentation = {
         - Formulieren Sie die Regelung technologieoffen 
         - Denken Sie an Antragsstellung, Bearbeitung und Bescheid 
         - Denken Sie Barrierefreiheit von Anfang an mit 
-        - Stellen Sie eine nutzerfreundliche Umsetzung sicher   
+        - Stellen Sie eine nutzerfreundliche Umsetzung sicher 
         
         <a href="${ROUTE_FUNDAMENTALS_PRINCIPLES.url}#digitale-angebote-f-r-alle-nutzbar-gestalten" target="_blank">Mehr Informationen</a>
       `,
@@ -404,7 +404,7 @@ export const prototypeDocumentation = {
         body: dedent`
           Guten Tag,
           
-          anbei erhalten Sie die Digitalcheck Dokumentation zu meinem Regelungsvorhaben.
+          anbei erhalten Sie die Digitalcheck-Dokumentation zu meinem Regelungsvorhaben.
           
           Mit freundlichen Grüßen
           

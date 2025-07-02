@@ -90,7 +90,7 @@ export const privacy = {
     Bei Anfragen über ein Kontaktformular oder Terminbuchungsformular werden durch den Auftragsverarbeiter ausschließlich solche Daten verarbeitet, die notwendig sind, um mit Ihnen zu kommunizieren oder einen Termin zu vereinbaren. Hierzu gehören insbesondere jene personenbezogenen Informationen (z.B. Name, Vorname, E-Mail-Adresse usw.), die unmittelbar von Ihnen eingegeben und übersandt werden. Die Löschung der personenbezogenen Daten erfolgt sechs Monate nach dem Zugang der letzten E-Mail.
     
     #### 2.2.3 Kontaktaufnahme - Telefon
-    Bei Anrufen an die Telefonnummer des Digitalcheck Teams werden durch den Auftragsverarbeiter ausschließlich solche Daten verarbeitet, die notwendig sind, um mit Ihnen zu kommunizieren. Hierzu gehören insbesondere jene personenbezogenen Informationen (z. B. Name, Vorname, Anschrift, E-Mail-Adresse usw.), die unmittelbar von Ihnen genannt oder übersandt werden. 
+    Bei Anrufen an die Telefonnummer des Digitalcheck-Teams werden durch den Auftragsverarbeiter ausschließlich solche Daten verarbeitet, die notwendig sind, um mit Ihnen zu kommunizieren. Hierzu gehören insbesondere jene personenbezogenen Informationen (z. B. Name, Vorname, Anschrift, E-Mail-Adresse usw.), die unmittelbar von Ihnen genannt oder übersandt werden. 
     
     ### 2.3 Technischer Cookie (über die Session) zur Zwischenspeicherung der Antworten in der Vorprüfung
     

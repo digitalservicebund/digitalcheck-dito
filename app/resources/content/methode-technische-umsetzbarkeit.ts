@@ -34,7 +34,7 @@ export const methodsTechnicalFeasibility = {
         
         <h3 class="ds-subhead font-bold">Sie müssen nicht alles allein bewältigen</h3>
         
-        Bei kleinen Fragen rufen Sie den Digitalcheck-Support an unter  [0151/40 76 78 39](tel:+4915140767839).
+        Bei kleinen Fragen rufen Sie den Digitalcheck-Support an unter [0151/40 76 78 39](tel:+4915140767839).
         Für ein unterstützendes, einstündiges Videotelefonat schreiben Sie eine E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de) oder buchen Sie direkt einen Termin.
     `,
     buttons: [

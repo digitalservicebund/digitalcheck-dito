@@ -18,7 +18,7 @@ export const spoc = {
   landscape: {
     id: "landschaft",
     tabName: "Überblick",
-    headline: "Nationale Umsetzung der EU Interoperabilitätsverordnung",
+    headline: "Nationale Umsetzung der EU-Interoperabilitätsverordnung",
     content: dedent`
       Seit Anfang 2025 muss die Verordnung für ein interoperables Europa ([2024/903](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903)) in den EU Mitgliedstaaten verpflichtend umgesetzt werden.
       Damit sind alle öffentlichen Einrichtungen in Europa, also EU-Institutionen, ihre Mitgliedstaaten und auch deren Bundesländer und Kommunen, verpflichtet Interoperabilitätsbewertungen durchzuführen. 
@@ -115,7 +115,7 @@ export const spoc = {
         },
         content: dedent`
           **Verzahnung der Prozesse**
-          - Zunächst wurden die inhaltlichen Schnittmengen zwischen dem Erarbeitungsprozess für digitaltaugliche Regelungen und dem Interoperabilitäts-Assessment identifiziert und analysiert. Darauf aufbauend wird ein synthetisierter Prozess erstellt. Dieser wird jetzt in den Digitalcheck Kontaktpunkten kontinuierlich umgesetzt.
+          - Zunächst wurden die inhaltlichen Schnittmengen zwischen dem Erarbeitungsprozess für digitaltaugliche Regelungen und dem Interoperabilitäts-Assessment identifiziert und analysiert. Darauf aufbauend wird ein synthetisierter Prozess erstellt. Dieser wird jetzt in den Digitalcheck-Kontaktpunkten kontinuierlich umgesetzt.
           
           **Überarbeitung der Prinzipien für digitaltaugliche Regelungen**
           - Basierend auf den Erkenntnissen aus dem Vergleich wurden die bestehenden Prinzipien  der Digitaltauglichkeit überarbeitet. Ziel war es, diese Prinzipien so anzupassen, dass sie sowohl den Anforderungen der Digitaltauglichkeit als auch der Interoperabilität gerecht werden.

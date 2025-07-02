@@ -97,7 +97,7 @@ export const preCheckResult = {
       Wir erstellen für Sie eine E-Mail mit dem Ergebnis der Vorprüfung, die sich in Ihrem E-Mail-Programm öffnet.
       <br/>
       - Schicken Sie das Ergebnis an den Nationalen Normenkontrollrat (NKR).
-      - **Bei Anforderungen an Interoperabilität** erhält Digitalcheck-Team  automatisch eine Kopie und meldet sich bei Ihnen.
+      - **Bei Anforderungen an Interoperabilität** erhält das Digitalcheck-Team automatisch eine Kopie und meldet sich bei Ihnen.
     `,
     previewLabel: "Vorschau der E-Mail-Vorlage",
     copyIntroText: dedent`**Alternativ** können Sie das Ergebnis der Vorprüfung einfach als Text kopieren und manuell an den NKR schicken oder bei Ihren Dokumenten speichern.`,
@@ -177,7 +177,7 @@ export const preCheckResult = {
     outro: {
       title: "Darum ist es wichtig",
       text: dedent`
-      - Je **früher** Sie sich mit dem NKR zu Digitalbezug austauschen desto schneller ist die Prüfung abgeschlossen.
+      - Je **früher** Sie sich mit dem NKR zu Digitalbezug austauschen, desto schneller ist die Prüfung abgeschlossen.
       - Bei Interoperabilitätsbezug unterstützt Sie das Digitalcheck-Team gezielt bei der Umsetzung der EU-Anforderungen.
     `,
     },

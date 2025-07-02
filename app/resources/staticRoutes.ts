@@ -246,7 +246,7 @@ export const ROUTE_PROTOTYPE_DOCUMENTATION_RESULT = createRoute(
 );
 export const ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_PDF = createRoute(
   "download/prototyp_documentation_dummy_result.pdf",
-  "Ihre Digitalcheck Dokumentation als PDF-Datei",
+  "Ihre Digitalcheck-Dokumentation als PDF-Datei",
 );
 
 export const ROUTES: Route[] = [
