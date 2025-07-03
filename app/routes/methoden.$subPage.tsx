@@ -108,6 +108,18 @@ export default function Index() {
           </Container>
         </Background>
       )}
+
+      <Container>
+        <HighlightBox
+          items={[
+            {
+              headline: { tagName: "h2", text: interviewBanner.title },
+              content: interviewBanner.text,
+            },
+          ]}
+        />
+      </Container>
+
       {"support" in content && (
         <Background backgroundColor="blue">
           <Container>
@@ -126,30 +138,6 @@ export default function Index() {
           </Container>
         </Background>
       )}
-      {content.nextStep && (
-        <Container>
-          <Box
-            heading={{
-              text: content.nextStep.title,
-              look: "ds-heading-03-reg",
-            }}
-            badge={{
-              text: content.nextStep.label,
-              Icon: content.nextStep.icon,
-            }}
-            content={{ markdown: content.nextStep.text }}
-            buttons={content.nextStep.buttons}
-          />
-        </Container>
-      )}
-      <HighlightBox
-        items={[
-          {
-            headline: { tagName: "h2", text: interviewBanner.title },
-            content: interviewBanner.text,
-          },
-        ]}
-      />
     </>
   );
 }

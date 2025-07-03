@@ -9,7 +9,7 @@ import {
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsITSystems = {
-  title: "2.3. IT-Systeme gemeinsam erfassen",
+  title: "IT-Systeme gemeinsam erfassen",
   subtitle: `Nutzen Sie das Fachwissen der zuständigen Akteurinnen und Akteure, um die verwendete IT-Infrastruktur für die im vorigen Schritt identifizierten Abläufe zu erfassen und zu verstehen.`,
   guidance: dedent`
     **Zeit:** ca. sechs Stunden
