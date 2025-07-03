@@ -167,12 +167,24 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
     );
   }
 
+  // this suggests a site name to search engines
+  const websiteData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Digitalcheck",
+    url: "https://erarbeiten.digitalcheck.bund.de/",
+  };
+
   return (
     <html lang="de">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={siteMeta.description} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteData) }}
+        ></script>
         {metaTitles}
         <Meta />
         {!trackingDisabled && (
