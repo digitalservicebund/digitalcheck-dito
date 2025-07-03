@@ -78,16 +78,16 @@ export default function FivePrinciples() {
             identifier={slugify(principle.title)}
             separator={false}
             Icon={principle.icon}
-            heading={{
-              tagName: "h2",
-              text: principle.title,
-            }}
-            badge={{
-              children: principle.label,
-              principleNumber: principle.principleNumber as PrincipleNumber,
-            }}
             items={[
               {
+                headline: {
+                  tagName: "h2",
+                  text: principle.title,
+                },
+                badge: {
+                  children: principle.label,
+                  principleNumber: principle.principleNumber as PrincipleNumber,
+                },
                 content: principle.content,
                 detailsSummary: getDetailsSummary(principle.detailsSummary),
               },
