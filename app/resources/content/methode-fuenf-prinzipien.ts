@@ -354,7 +354,7 @@ export const methodsFivePrinciples = {
       {
         text: "Zu „Erarbeiten“",
         look: "tertiary" as const,
-        href: ROUTE_METHODS.url,
+        href: ROUTE_METHODS.url + "#verfassen-des-regelungsentwurfes",
       },
     ],
   },

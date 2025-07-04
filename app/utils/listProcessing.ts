@@ -2,6 +2,7 @@ import { renderToString } from "react-dom/server";
 import type { ListItemProps } from "~/components/ListItem.tsx";
 import { methods } from "~/resources/content/methoden.ts";
 import type { ContentRenderer } from "~/routes/methoden._index.tsx";
+import { slugify } from "./utilFunctions";
 
 /**
  * Maps method step data to ListItemProps, optionally rendering content.
@@ -30,6 +31,7 @@ export const methodStepsItems = (
           : undefined,
       headline: {
         ...headline,
+        id: slugify(headline.text),
         tagName: isSubstep ? "h3" : "h2",
         look: isSubstep ? "ds-heading-03-bold" : "ds-heading-02-reg",
       },
