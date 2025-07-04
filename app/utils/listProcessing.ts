@@ -23,6 +23,7 @@ export const methodStepsItems = (
       ...restOfItem,
       background: isSubstep ? "blue" : undefined,
       hasBullet: isSubstep,
+      className: isSubstep ? "mb-24" : undefined,
       content:
         showContent && renderContentFn
           ? renderToString(renderContentFn(info, text))

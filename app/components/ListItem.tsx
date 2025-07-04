@@ -1,6 +1,7 @@
 import { twJoin } from "tailwind-merge";
 import type { ImageProps } from "~/components/Image";
 import ImageZoomable from "~/components/ImageZoomable";
+import twMerge from "~/utils/tailwindMerge";
 import { type BackgroundColor, isBackgroundColor } from ".";
 import Background from "./Background";
 import Badge from "./Badge";
@@ -22,6 +23,7 @@ export type ListItemProps = {
   readonly numeric?: number;
   hasBullet?: boolean;
   image?: ImageProps;
+  className?: string;
 };
 
 const ListItem = ({
@@ -37,6 +39,7 @@ const ListItem = ({
   parentHasHeading,
   isDisabled,
   image,
+  className,
 }: ListItemProps) => {
   const backgroundColor =
     background && isBackgroundColor(background) ? background : undefined;
@@ -44,7 +47,13 @@ const ListItem = ({
   const responsiveWidth = numeric ? "w-[40px]" : "w-[40px] max-sm:w-[20px]";
 
   return (
-    <div id={identifier} className="flex flex-row items-center justify-center">
+    <div
+      id={identifier}
+      className={twMerge(
+        "flex flex-row items-center justify-center",
+        className,
+      )}
+    >
       <div className={twJoin("ds-stack ds-stack-16 w-full break-words")}>
         {spacer && (
           <div
