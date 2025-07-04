@@ -91,7 +91,10 @@ const ListItem = ({
             )}
             {hasBullet && (
               <div
-                className="flex size-[20px] items-center justify-center rounded-full bg-blue-900"
+                className={twJoin(
+                  "flex size-[20px] items-center justify-center rounded-full bg-blue-900",
+                  backgroundColor ? "mt-0" : "mt-10",
+                )}
                 role="none"
               ></div>
             )}
