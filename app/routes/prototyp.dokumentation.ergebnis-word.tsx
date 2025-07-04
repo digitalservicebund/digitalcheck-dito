@@ -12,7 +12,7 @@ import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
 import {
   ROUTE_PROTOTYPE_DOCUMENTATION_META,
   ROUTE_PROTOTYPE_DOCUMENTATION_RESULT,
-  ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_PDF,
+  ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_WORD,
 } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
 
@@ -66,7 +66,7 @@ export default function DocumentationResult() {
               buttons={[
                 {
                   text: "Dokumentation herunterladen (Word-Datei)",
-                  href: ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_PDF.url,
+                  href: ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_WORD.url,
                 },
               ]}
               className="mt-40"
