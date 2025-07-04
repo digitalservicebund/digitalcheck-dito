@@ -90,6 +90,13 @@ export default function FivePrinciples() {
                 },
                 content: principle.content,
                 detailsSummary: getDetailsSummary(principle.detailsSummary),
+                buttons: [
+                  {
+                    look: "link",
+                    text: principle.exampleLink.text,
+                    href: principle.exampleLink.url,
+                  },
+                ],
               },
             ]}
           />

@@ -3,6 +3,11 @@ import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRight
 import { HeadingProps } from "~/components/Heading";
 import {
   ROUTE_EXAMPLES,
+  ROUTE_EXAMPLES_AUTOMATION,
+  ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY,
+  ROUTE_EXAMPLES_DIGITAL_COMMUNICATION,
+  ROUTE_EXAMPLES_ESTABLISHED_TECHNOLOGIES,
+  ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS,
   ROUTE_METHODS,
   ROUTE_METHODS_TASKS_PROCESSES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
@@ -122,6 +127,10 @@ export const methodsFivePrinciples = {
           },
         ],
       },
+      exampleLink: {
+        url: ROUTE_EXAMPLES_DIGITAL_COMMUNICATION.url,
+        text: "Beispiele betrachten",
+      },
     },
     {
       label: "Prinzip",
@@ -178,6 +187,10 @@ export const methodsFivePrinciples = {
           },
         ],
       },
+      exampleLink: {
+        url: ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS.url,
+        text: "Beispiele betrachten",
+      },
     },
     {
       label: "Prinzip",
@@ -213,6 +226,10 @@ export const methodsFivePrinciples = {
             ],
           },
         ],
+      },
+      exampleLink: {
+        url: ROUTE_EXAMPLES_ESTABLISHED_TECHNOLOGIES.url,
+        text: "Beispiele betrachten",
       },
     },
     {
@@ -270,6 +287,10 @@ export const methodsFivePrinciples = {
           },
         ],
       },
+      exampleLink: {
+        url: ROUTE_EXAMPLES_AUTOMATION.url,
+        text: "Beispiele betrachten",
+      },
     },
     {
       label: "Prinzip",
@@ -303,6 +324,10 @@ export const methodsFivePrinciples = {
             ],
           },
         ],
+      },
+      exampleLink: {
+        url: ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY.url,
+        text: "Beispiele betrachten",
       },
     },
   ],
