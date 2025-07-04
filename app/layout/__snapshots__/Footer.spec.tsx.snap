@@ -273,7 +273,7 @@ exports[`Footer Component > Renders correctly 1`] = `
       >
         <img
           alt="Logo des Bundesministerium für Digitales und Staatsmodernisierung"
-          src="/logo/bmds-logo.svg"
+          src="/logo/bmds-logo.png"
           width="120"
         />
         <nav
