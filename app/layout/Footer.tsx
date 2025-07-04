@@ -101,9 +101,9 @@ export default function Footer() {
 
         <div className="space-y-16 sm:flex sm:gap-48">
           <Image
-            url="/logo/bmi-logo.png"
+            url="/logo/bmds-logo.png"
             width={120}
-            alternativeText="Logo des Bundesministerium des Innern und für Heimat"
+            alternativeText="Logo des Bundesministerium für Digitales und Staatsmodernisierung"
           />
           <nav aria-label={footer.bottom.navLabel}>
             <LinkList links={footer.bottom.links} />

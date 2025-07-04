@@ -272,8 +272,8 @@ exports[`Footer Component > Renders correctly 1`] = `
         class="space-y-16 sm:flex sm:gap-48"
       >
         <img
-          alt="Logo des Bundesministerium des Innern und für Heimat"
-          src="/logo/bmi-logo.png"
+          alt="Logo des Bundesministerium für Digitales und Staatsmodernisierung"
+          src="/logo/bmds-logo.png"
           width="120"
         />
         <nav
@@ -323,11 +323,11 @@ exports[`Footer Component > Renders correctly 1`] = `
                 <a
                   aria-describedby="a11y-message--new-window"
                   class="text-link increase-tap-area"
-                  href="https://www.bmi.bund.de/"
+                  href="https://bmds.bund.de/"
                   rel="noreferrer"
                   target="_blank"
                 >
-                  Bundesministerium des Innern und für Heimat
+                  Bundesministerium für Digitales und Staatsmodernisierung
                    
                   <svg
                     aria-hidden="true"

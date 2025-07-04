@@ -121,7 +121,7 @@ export const interoperability = {
         content: dedent`
           Wenn Sie eine Interoperabilitätsbewertung durchführen, stehen Ihnen Unterstützungsmaßnahmen zur Verfügung.
           
-          Die [Verordnung für ein interoperables Europa](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32024R0903) sieht in den Mitgliedstaaten nationale Kontaktstellen vor. Für Deutschland hat das Bundesministerium des Innern und für Heimat das Team vom Digitalcheck mit der Ausführung beauftragt. 
+          Die [Verordnung für ein interoperables Europa](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32024R0903) sieht in den Mitgliedstaaten nationale Kontaktstellen vor. Für Deutschland hat das Bundesministerium für Digitales und Staatsmodernisierung das Team vom Digitalcheck mit der Ausführung beauftragt. 
           
           Wir unterstützen Sie derzeit individuell bei der Durchführung einer Interoperabilitätsbewertung für eine interoperable Regelung und bei der Erstellung eines entsprechenden Berichts. Kontaktieren Sie uns jederzeit gerne mit Ihren Anliegen - je früher, desto besser.  Schreiben Sie uns über [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de) oder rufen Sie uns an unter [0151/40 76 78 39](tel:+4915140767839).
           
@@ -137,7 +137,7 @@ export const interoperability = {
         headline:
           "Wie ist der Prozess des Erarbeitens einer Interoperabilitätsbewertung?",
         content: dedent`
-          Die Verordnung für ein interoperables Europa empfiehlt, für Interoperabilitätsbewertungen auf bestehenden Verfahren in den Mitgliedstaaten aufzubauen. Für Deutschland hat das Bundesministerium des Innern und für Heimat das Team Digitalcheck mit der Koordinierung entsprechender Maßnahmen beauftragt.
+          Die Verordnung für ein interoperables Europa empfiehlt, für Interoperabilitätsbewertungen auf bestehenden Verfahren in den Mitgliedstaaten aufzubauen. Für Deutschland hat das Bundesministerium für Digitales und Staatsmodernisierung das Team Digitalcheck mit der Koordinierung entsprechender Maßnahmen beauftragt.
           
           Der Prozess der Ausarbeitung einer Interoperabilitätsbewertung und des Berichts hat Schnittmengen mit dem Prozess des Erarbeitens von digitaltauglichen Regelungen. Zum Beispiel greifen die fünf Prinzipien der Digitaltauglichkeit und die vier Ebenen der Interoperabilität ineinander und auch die Arbeit mit Visualisierungen wird in den Leitlinien empfohlen.
           

@@ -125,8 +125,8 @@ export const footer = {
       },
       {
         preText: "Im Auftrag des",
-        text: "Bundesministerium des Innern und für Heimat",
-        url: "https://www.bmi.bund.de/",
+        text: "Bundesministerium für Digitales und Staatsmodernisierung",
+        url: "https://bmds.bund.de/",
         openInNewTab: true,
       },
     ],
