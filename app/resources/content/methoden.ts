@@ -40,34 +40,6 @@ export const methods = {
           },
         ],
       },
-      // NOTE: 70-tage tmp removed
-      // {
-      //   isSubstep: true,
-      //   headline: {
-      //     text: "2.3. IT-Systeme gemeinsam erfassen",
-      //   },
-      //   info: [
-      //     {
-      //       icon: TimerOutlined,
-      //       text: "**Zeit:** ca. sechs Stunden",
-      //     },
-      //     {
-      //       icon: GroupOutlined,
-      //       text: "**Kollaborativ:** Arbeiten Sie mit umsetzenden Akteurinnen und Akteuren",
-      //     },
-      //     {
-      //       icon: ContactSupportOutlined,
-      //       text: "**Support:** Eine neutrale Drittmeinung erhalten Sie vom Digitalcheck-Support",
-      //     },
-      //   ],
-      //   text: "Nutzen Sie das Fachwissen der Akteurinnen und Akteure, um die verwendeten IT-Systeme für die im vorigen Schritt identifizierten Abläufe zu erfassen und zu verstehen.",
-      //   buttons: [
-      //     {
-      //       text: "IT-Landschaft verstehen",
-      //       href: ROUTE_METHODS_COLLECT_IT_SYSTEMS.url,
-      //     },
-      //   ],
-      // },
       {
         headline: { text: "Entwickeln von Digitaltauglichkeit" },
         text: "Mit einem guten Verständnis des Ist-Zustandes erarbeiten Sie nun Ihre Regelung. Jetzt geht es darum, Möglichkeiten zur Digitalisierung zu finden und Hindernisse aus dem Weg zu räumen –  eine gute digitale Umsetzung spart langfristig Zeit und Geld und erfüllt die heutigen Erwartungen der Betroffenen an den Staat.",
@@ -86,34 +58,6 @@ export const methods = {
           },
         ],
       },
-      // NOTE: 70-tage tmp removed
-      // {
-      //   isSubstep: true,
-      //   headline: {
-      //     text: "2.5. Technische Umsetzbarkeit sicherstellen",
-      //   },
-      //   info: [
-      //     {
-      //       icon: TimerOutlined,
-      //       text: "**Zeit:** Richtet sich nach der Komplexität des Vorhabens",
-      //     },
-      //     {
-      //       icon: GroupOutlined,
-      //       text: "**Kollaborativ:** Arbeiten Sie mit umsetzenden Akteurinnen und Akteuren",
-      //     },
-      //     {
-      //       icon: ContactSupportOutlined,
-      //       text: "**Support:** Eine neutrale Drittmeinung erhalten Sie vom Digitalcheck-Support",
-      //     },
-      //   ],
-      //   text: "In diesem Schritt können Sie die Auswirkungen Ihres Regelungsvorhabens auf bestehende sowie neue Abläufe und IT-Systeme analysieren. Damit stellen Sie die technische Machbarkeit sicher. Greifen Sie dafür auf das Fachwissen der umsetzenden Akteurinnen und Akteure zurück.",
-      //   buttons: [
-      //     {
-      //       text: "IT-Auswirkungen prüfen",
-      //       href: ROUTE_METHODS_TECHNICAL_FEASIBILITY.url,
-      //     },
-      //   ],
-      // },
       {
         headline: { text: "Verfassen des Regelungsentwurfes" },
         text: dedent`
