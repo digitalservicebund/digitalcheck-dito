@@ -1,12 +1,9 @@
-import { CheckCircleOutlined } from "@digitalservicebund/icons";
-
 import Background from "~/components/Background";
 import Box from "~/components/Box";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import FeedbackForm from "~/components/FeedbackForm";
-import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import { NumberedList } from "~/components/List";
 import RichText from "~/components/RichText";
@@ -31,21 +28,6 @@ export default function DocumentationResult() {
     <>
       <Background backgroundColor="blue" className="py-40 print:pb-0">
         <div className="px-16">
-          <Container className="rounded-t-lg py-32" backgroundColor="midBlue">
-            <div className="flex flex-col gap-16 sm:flex-row">
-              <div className="flex size-36 flex-none items-center justify-center">
-                <CheckCircleOutlined className="h-full w-full" />
-              </div>
-              <Header
-                heading={{
-                  tagName: "h1",
-                  look: "ds-heading-02-reg",
-                  markdown: title,
-                  className: "mb-0",
-                }}
-              />
-            </div>
-          </Container>
           <Container className="rounded-b-lg" backgroundColor="white">
             <Box
               heading={{
@@ -62,13 +44,29 @@ export default function DocumentationResult() {
             <ButtonContainer
               buttons={[
                 {
-                  text: result.data.buttonDownload,
-                  href: ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_PDF.url,
-                },
-                {
                   text: result.data.buttonBack,
                   href: ROUTE_PROTOTYPE_DOCUMENTATION_META.url,
                   look: "tertiary",
+                },
+              ]}
+              className="mt-40"
+            />
+            <hr className="mt-40 mb-32 border-t-[2px] border-gray-400" />
+            <Box
+              heading={{
+                text: "Feedback einholen",
+                tagName: "h2",
+              }}
+              content={{
+                markdown:
+                  "Wenn Sie möchten, können Sie die Dokumentation als Word-Datei herunterladen um sie mit Ihren Kolleg:innen abzustimmen.",
+              }}
+            />
+            <ButtonContainer
+              buttons={[
+                {
+                  text: "Dokumentation herunterladen (Word-Datei)",
+                  href: ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_PDF.url,
                 },
               ]}
               className="mt-40"
@@ -81,11 +79,29 @@ export default function DocumentationResult() {
                 </legend>
                 <div className="flex items-start pb-[40px]">
                   <div className="ds-stack ds-stack-16 flex-grow">
-                    <RichText markdown={result.form.instructions} />
+                    <RichText
+                      markdown={`
+- Speichern Sie die fertige Dokumentation als PDF ab oder laden Sie sie hier herunter. 
+- Senden Sie die **PDF-Datei per E-Mail** an folgende Adresse: nkr@bmj.bund.de. Der NKR prüft die methodische und inhaltliche Nachvollziehbarkeit. Bei Fragen wird der NKR auf Sie zukommen. Das Ziel ist eine **digital- und praxistaugliche Umsetzung**.
+- Bei Interoperabilitätsbezug senden Sie eine Kopie der E-Mail mit der PDF-Datei an interoperabel@digitalservice.bund.de 
+- Visuelle Darstellungen und Skizzen sind vom NKR gern gesehen. Hängen Sie diese formlos als PDF oder als Screenshot an.
+- Damit ist der Digitalcheck für Sie beendet.
+      `}
+                    />
                   </div>
                 </div>
               </fieldset>
             </form>
+            <ButtonContainer
+              buttons={[
+                {
+                  text: "Dokumentation herunterladen (PDF-Datei)",
+                  href: ROUTE_PROTOTYPE_DOCUMENTATION_META.url,
+                  look: "tertiary",
+                },
+              ]}
+              className="mb-40"
+            />
             <hr className="mb-32 border-t-[2px] border-gray-400" />
             <div className="ds-stack ds-stack-16 mt-40">
               <Heading tagName="h2" text={result.form.faqs.title} />
