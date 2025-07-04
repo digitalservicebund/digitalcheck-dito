@@ -29,7 +29,7 @@ export const spoc = {
     `,
     image: {
       url: "/images/prozess-nationale-kontaktstelle.png",
-      alternativeText: `Netzwerkdiagramm, das die Interaktionen verschiedener deutscher und EU-Behörden im Kontext der EU-Interoperabilitätsverordnung zeigt. Es verdeutlicht, wie Akteure wie der IT-Planungsrat, die Nationale Kontaktstelle, das BMI und die EU-Kommission bei der Umsetzung, Koordination und dem Reporting zusammenarbeiten.`,
+      alternativeText: `Netzwerkdiagramm, das die Interaktionen verschiedener deutscher und EU-Behörden im Kontext der EU-Interoperabilitätsverordnung zeigt. Es verdeutlicht, wie Akteure wie der IT-Planungsrat, die Nationale Kontaktstelle, das BMDS und die EU-Kommission bei der Umsetzung, Koordination und dem Reporting zusammenarbeiten.`,
     },
     contentAfter: {
       headline: "Rechtliche Grundlage",
@@ -45,7 +45,7 @@ export const spoc = {
                   - **Bundesländer & Kommunen:** Ausgangspunkt, mit dem Hinweis auf die dezentrale Umsetzung durch das Bundesangebot.
                   - **IT-Planungsrat:** Koordiniert und empfiehlt die Integration von IT-Strategien.
                   - **Nationale Kontaktstelle:** Zentraler Ansprechpartner für Informationsaustausch und Koordination.
-                  - **Bundesministerium für Inneres und Heimat:** Verantwortlich für die Integration in den Digitalcheck.
+                  - **Bundesministerium für Digitales und Staatsmodernisierung  :** Verantwortlich für die Integration in den Digitalcheck.
                   - **EU-Kommission:** Beteiligte an der Weiterentwicklung und Reportings. 
                   - **EU-Interoperabilitätsbeirat:** EU-weite Zusammenarbeit, vertreten durch Markus Richter (Bundes-CIO).
                   - **27 EU-Staaten mit Kontaktstellen:** Nationale Kontaktstellen für Informationsaustausch.`,
