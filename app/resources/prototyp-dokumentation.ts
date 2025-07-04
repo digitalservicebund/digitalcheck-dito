@@ -357,7 +357,7 @@ export const prototypeDocumentation = {
         <br/><br/>
         [Bearbeiten](/prototyp/dokumentation/prinzip-5)
       `,
-      buttonDownload: "Dokumentation herunterladen (PDF-Datei)",
+      buttonDownload: "Dokumentation herunterladen (Word-Datei)",
       buttonBack: "Zurück zum Bearbeiten",
     },
     form: {
@@ -418,7 +418,7 @@ export const prototypeDocumentation = {
       trackingEvent: "Feedback Dokumentation Abschluss",
       questions: [
         {
-          id: "simple-feedback",
+          id: "simple-feedback-1",
           trackingEvent: "wie-einfach",
           text: "Die Dokumentation ist einfach zu nutzen.",
           options: [
@@ -430,7 +430,7 @@ export const prototypeDocumentation = {
           ],
         },
         {
-          id: "simple-feedback",
+          id: "simple-feedback-2",
           trackingEvent: "wie-einfach",
           text: "Die Dokumentation ist hilfreich für das Erarbeiten meines Regelungsvorhabens.",
           options: [
@@ -442,7 +442,7 @@ export const prototypeDocumentation = {
           ],
         },
         {
-          id: "simple-feedback",
+          id: "simple-feedback-3",
           trackingEvent: "wie-einfach",
           text: "Die Dokumentation ist hilfreich für die Umsetzung meines Regelungsvorhabens.",
           options: [
