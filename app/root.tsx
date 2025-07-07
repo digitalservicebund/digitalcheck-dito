@@ -30,6 +30,7 @@ import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants";
 import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
 import type { Route } from "./+types/root";
+import { PHProvider } from "./providers/PosthogProvider";
 import { notFound, serverError } from "./resources/content/error";
 import constructMetaTitle from "./utils/metaTitle";
 
@@ -194,19 +195,21 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
         <Links />
       </head>
       <body className="flex min-h-screen flex-col">
-        <ScrollAndFocus />
-        <PageHeader includeBreadcrumbs={!error} />
-        {children}
-        <Footer />
-        <span
-          aria-hidden="true"
-          className="hidden"
-          id={A11Y_MESSAGE_NEW_WINDOW}
-        >
-          {general.a11yMessageNewWindow}
-        </span>
-        <ScrollRestoration nonce={nonce} />
-        <Scripts nonce={nonce} />
+        <PHProvider trackingDisabled={trackingDisabled}>
+          <ScrollAndFocus />
+          <PageHeader includeBreadcrumbs={!error} />
+          {children}
+          <Footer />
+          <span
+            aria-hidden="true"
+            className="hidden"
+            id={A11Y_MESSAGE_NEW_WINDOW}
+          >
+            {general.a11yMessageNewWindow}
+          </span>
+          <ScrollRestoration nonce={nonce} />
+          <Scripts nonce={nonce} />
+        </PHProvider>
       </body>
     </html>
   );
