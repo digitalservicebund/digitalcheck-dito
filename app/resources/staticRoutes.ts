@@ -59,11 +59,6 @@ export const ROUTE_PRECHECK_RESULT = createRoute(
   "Ergebnis",
   ROUTE_PRECHECK,
 );
-export const ROUTE_RESULT_PDF = createRoute(
-  "digitalcheck-vorpruefung.pdf",
-  "Vorprüfung als PDF",
-  ROUTE_PRECHECK_RESULT,
-);
 
 // METHODS ROUTES
 export const ROUTE_METHODS = createRoute("methoden", "Regelung erarbeiten");
