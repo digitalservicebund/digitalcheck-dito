@@ -171,8 +171,8 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
   const websiteData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Digitalcheck",
-    url: "https://erarbeiten.digitalcheck.bund.de/",
+    name: siteMeta.siteName,
+    url: siteMeta.siteURL,
   };
 
   return (
