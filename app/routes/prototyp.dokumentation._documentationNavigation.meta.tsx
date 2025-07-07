@@ -6,9 +6,9 @@ import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
 import {
-  ROUTE_PROTOTYPE_DOCUMENTATION,
   ROUTE_PROTOTYPE_DOCUMENTATION_META,
   ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION,
+  ROUTE_PROTOTYPE_DOCUMENTATION_START_RESUME,
 } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
 
@@ -46,7 +46,7 @@ export default function PrototypeDocumentationMeta() {
           },
           {
             text: general.buttonBack.text,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION.url,
+            href: ROUTE_PROTOTYPE_DOCUMENTATION_START_RESUME.url,
             look: "tertiary",
           },
         ]}

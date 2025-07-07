@@ -38,7 +38,7 @@ export default function PrototypeDocumentationMeta() {
       />
       <RichText markdown={subtitle} className="mb-40" />
 
-      <label className="ds-label-01-reg mb-40 block w-full border-2 border-dashed border-blue-800 bg-white p-40 text-blue-800 focus-within:border-solid focus-within:outline-3 focus-within:outline-blue-800">
+      <label className="ds-label-01-reg mb-40 block w-full cursor-pointer border-2 border-dashed border-blue-800 bg-white p-40 text-blue-800 focus-within:border-solid focus-within:outline-3 focus-within:outline-blue-800">
         <input
           type="file"
           accept="application/json"
