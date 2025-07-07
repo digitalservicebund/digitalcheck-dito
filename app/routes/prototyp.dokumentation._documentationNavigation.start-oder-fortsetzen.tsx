@@ -47,7 +47,7 @@ export default function PrototypeDocumentationMeta() {
           className="w-0 opacity-0"
           onChange={onFileChange}
         />
-        Klicken oder ziehen Sie eine Datei hierhin, um fortzufahren
+        Klicken Sie oder ziehen Sie eine Datei hierhin, um fortzufahren
       </label>
 
       <ButtonContainer
