@@ -46,6 +46,10 @@ describe("fileExtensionUtils", () => {
       ).toBe("PPTX");
 
       expect(
+        getDownloadableExtensionName("https://example.com/path/to/file.json"),
+      ).toBe("JSON");
+
+      expect(
         getDownloadableExtensionName("https://example.com/path/to/file/pptx"),
       ).toBe(undefined);
     });

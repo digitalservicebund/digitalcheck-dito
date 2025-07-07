@@ -13,10 +13,12 @@ import {
   ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_3,
   ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_4,
   ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_5,
+  ROUTE_PROTOTYPE_DOCUMENTATION_START_RESUME,
 } from "~/resources/staticRoutes";
 import customTwMerge from "~/utils/tailwindMerge";
 
 const routes = [
+  ROUTE_PROTOTYPE_DOCUMENTATION_START_RESUME,
   ROUTE_PROTOTYPE_DOCUMENTATION_META,
   ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION,
   ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_1,
@@ -47,7 +49,6 @@ export default function LayoutWithDocumentationNavigation() {
 function DocumentationNavigation() {
   const location = useLocation();
 
-  console.log(location.pathname);
   return (
     <nav aria-label="Alle Fragen">
       <ul className="list-unstyled">

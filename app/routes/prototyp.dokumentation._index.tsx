@@ -13,7 +13,7 @@ import {
   ROUTE_DOCUMENTATION_STATIC_PDF,
   ROUTE_LANDING,
   ROUTE_PROTOTYPE_DOCUMENTATION,
-  ROUTE_PROTOTYPE_DOCUMENTATION_META,
+  ROUTE_PROTOTYPE_DOCUMENTATION_START_RESUME,
 } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
 
@@ -21,14 +21,14 @@ export function meta() {
   return constructMetaTitle(ROUTE_PROTOTYPE_DOCUMENTATION.title);
 }
 
-const { start } = prototypeDocumentation;
+const { intro } = prototypeDocumentation;
 
 export default function Index() {
   return (
     <>
-      <Hero title={start.title} subtitle={start.subtitle}>
+      <Hero title={intro.title} subtitle={intro.subtitle}>
         <div className="ds-stack ds-stack-16 mt-40">
-          {start.hints.map((hint) => (
+          {intro.hints.map((hint) => (
             <DetailsSummary
               key={hint.title}
               title={hint.title}
@@ -42,8 +42,8 @@ export default function Index() {
           buttons={[
             {
               id: "documentation-start-button",
-              text: start.buttonText,
-              href: ROUTE_PROTOTYPE_DOCUMENTATION_META.url,
+              text: intro.buttonText,
+              href: ROUTE_PROTOTYPE_DOCUMENTATION_START_RESUME.url,
               type: "submit",
             },
             {
@@ -75,17 +75,17 @@ export default function Index() {
       <Container>
         <InlineNotice
           look="warning"
-          title={start.multipleNotice.headline}
+          title={intro.multipleNotice.headline}
           tagName="h2"
-          content={start.multipleNotice.content}
+          content={intro.multipleNotice.content}
           className="mb-40"
         />
         <InfoBox
           heading={{
             tagName: "h2",
-            text: start.summary.title,
+            text: intro.summary.title,
           }}
-          items={start.summary.items}
+          items={intro.summary.items}
         />
       </Container>
       <SupportBanner {...supportBanner} />

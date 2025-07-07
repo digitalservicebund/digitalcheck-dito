@@ -4,6 +4,7 @@ export const getDownloadableExtensionName = (href: string) => {
   downloadableExtensions.set("docx", "DOCX");
   downloadableExtensions.set("xlsx", "XLSX");
   downloadableExtensions.set("pptx", "PPTX");
+  downloadableExtensions.set("json", "JSON");
 
   const fileEnding = getFileExtension(href);
   const ext = fileEnding && downloadableExtensions.get(fileEnding);

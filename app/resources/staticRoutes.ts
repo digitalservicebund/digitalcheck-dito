@@ -199,6 +199,11 @@ export const ROUTE_PROTOTYPE_DOCUMENTATION = createRoute(
   "Dokumentation - Prototyp",
   ROUTE_PROTOTYPE,
 );
+export const ROUTE_PROTOTYPE_DOCUMENTATION_START_RESUME = createRoute(
+  "start-oder-fortsetzen",
+  "Dokumentation starten oder fortsetzen - Prototyp",
+  ROUTE_PROTOTYPE_DOCUMENTATION,
+);
 export const ROUTE_PROTOTYPE_DOCUMENTATION_META = createRoute(
   "meta",
   "Informationen zum Regelungsvorhaben - Prototyp",
@@ -239,6 +244,12 @@ export const ROUTE_PROTOTYPE_DOCUMENTATION_RESULT = createRoute(
   "Dokumentation abschließen - Prototyp",
   ROUTE_PROTOTYPE_DOCUMENTATION,
 );
+export const ROUTE_PROTOTYPE_DOCUMENTATION_INTERMEDIATE_SAVE = createRoute(
+  "zwischenstand-speichern",
+  "Später weiterarbeiten",
+  ROUTE_PROTOTYPE_DOCUMENTATION,
+);
+
 export const ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_PDF = createRoute(
   "download/prototyp_documentation_dummy_result.pdf",
   "Ihre Digitalcheck-Dokumentation als PDF-Datei",
@@ -246,6 +257,10 @@ export const ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_PDF = createRoute(
 export const ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_WORD = createRoute(
   "download/digitalcheck-dokumentation-04-07-2025-prototyp.docx",
   "Ihre Digitalcheck-Dokumentation als Word-Datei",
+);
+export const ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_JSON = createRoute(
+  "download/digitalcheck-vorpruefung-zwischenstand.json",
+  "Ihre Digitalcheck-Dokumentation als JSON-Datei",
 );
 
 export const ROUTES: Route[] = [

@@ -3,7 +3,7 @@ import { ROUTE_FUNDAMENTALS_PRINCIPLES } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const prototypeDocumentation = {
-  start: {
+  intro: {
     title: "3. Digitaltauglichkeit dokumentieren",
     subtitle:
       "Die Dokumentation der Digitaltauglichkeit ist ein formeller, letzter Schritt. Sie dokumentieren, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben, und wie sie ins Regelungsvorhaben eingeflossen sind.",
@@ -18,7 +18,7 @@ export const prototypeDocumentation = {
       },
       {
         title: "Nur ein Vorgang zur selben Zeit",
-        text: "Sie können nur an einer Dokumentation zur selben Zeit arbeiten. Parallele Vorgänge sind momentan nicht möglich. Schließen Sie eine Dokumentation bitte vollständig ab, bevor Sie die nächste beginnen. Ihre Daten werden nicht dauerhaft gespeichert.",
+        text: "Sie können nur an einer Dokumentation zur selben Zeit arbeiten. Parallele Vorgänge sind momentan nicht möglich. Sie können einen Zwischenstand als Json-Datei speichern und zur späteren Bearbeitung wieder hochladen. Ihre Daten werden nicht dauerhaft gespeichert.",
       },
     ],
     multipleNotice: {
@@ -26,7 +26,7 @@ export const prototypeDocumentation = {
       content:
         "Füllen Sie eine gemeinsame Dokumentation für alle inhaltlich zusammenhängenden Regelungen eines Vorhabens aus. So viele wie nötig, so wenige wie möglich. Bitte beachten Sie, dass parallele Vorgänge momentan nicht möglich sind.",
     },
-    buttonText: "Dokumentation starten",
+    buttonText: "Dokumentieren",
     timeInvest: "**Zeitaufwand:** Was denkst du?",
     summary: {
       title: "Hinweise",
@@ -41,6 +41,12 @@ export const prototypeDocumentation = {
         },
       ],
     },
+  },
+  startOrResume: {
+    title: "Dokumentation starten",
+    subtitle:
+      "Hier können Sie einen Zwischenstand als JSON-Datei hochladen oder eine neue Dokumentation starten.",
+    startNewButtonText: "Dokumentation starten",
   },
   nextButton: "Übernehmen & weiter",
   metaInfo: {
@@ -357,7 +363,7 @@ export const prototypeDocumentation = {
         <br/><br/>
         [Bearbeiten](/prototyp/dokumentation/prinzip-5)
       `,
-      buttonDownload: "Dokumentation herunterladen (PDF-Datei)",
+      buttonDownload: "PDF-Dokumentation herunterladen",
       buttonBack: "Zurück zum Bearbeiten",
     },
     form: {

@@ -1,7 +1,8 @@
-import { CheckCircleOutlined } from "@digitalservicebund/icons";
+import { CheckCircleOutlined, SaveAsOutlined } from "@digitalservicebund/icons";
 
 import Background from "~/components/Background";
 import Box from "~/components/Box";
+import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -13,10 +14,12 @@ import RichText from "~/components/RichText";
 import { documentation } from "~/resources/content/dokumentation";
 import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
 import {
+  ROUTE_PROTOTYPE_DOCUMENTATION_INTERMEDIATE_SAVE,
   ROUTE_PROTOTYPE_DOCUMENTATION_META,
   ROUTE_PROTOTYPE_DOCUMENTATION_RESULT,
   ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_PDF,
 } from "~/resources/staticRoutes";
+import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import constructMetaTitle from "~/utils/metaTitle";
 
 const { result } = prototypeDocumentation;
@@ -59,6 +62,25 @@ export default function DocumentationResult() {
               content={result.data.dummyOverview}
               className="mt-12"
             />
+            <Button
+              className="mt-40"
+              text={result.data.buttonBack}
+              look="tertiary"
+              href={ROUTE_PROTOTYPE_DOCUMENTATION_META.url}
+            />
+            <hr className="mt-40 mb-32 border-t-[2px] border-gray-400" />
+            <Box
+              heading={{
+                text: "Dokumentation speichern",
+                tagName: "h2",
+              }}
+              content={{
+                markdown: dedent`
+                Laden Sie die Dokumentation als PDF herunter, um sie intern abzustimmen oder direkt an den NKR zu senden.
+                
+                Sie können alternativ einen Zwischenstand speichern, um später weiterzuarbeiten.`,
+              }}
+            />
             <ButtonContainer
               buttons={[
                 {
@@ -66,9 +88,10 @@ export default function DocumentationResult() {
                   href: ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_PDF.url,
                 },
                 {
-                  text: result.data.buttonBack,
-                  href: ROUTE_PROTOTYPE_DOCUMENTATION_META.url,
-                  look: "tertiary",
+                  text: "Zwischenstand speichern",
+                  href: ROUTE_PROTOTYPE_DOCUMENTATION_INTERMEDIATE_SAVE.url,
+                  look: "ghost",
+                  iconLeft: <SaveAsOutlined />,
                 },
               ]}
               className="mt-40"
