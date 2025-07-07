@@ -257,13 +257,13 @@ export const support = {
               text: "Auf Warteliste setzen",
               href: encodeURI(
                 dedent`mailto:digitalcheck@digitalservice.bund.de?subject=[Digitalcheck Schulung] Anmeldung digitaltaugliche Regelungen&body=
-                  Guten Tag,
-                  
-                  ich möchte mich gerne auf die Warteliste setzen lassen für die Online-Schulung:
-                  
-                  Regelungen digitaltauglich gestalten – praktische Tipps für den Digitalcheck
-                  
-                  Mit freundlichen Grüßen
+Guten Tag,
+
+ich möchte mich gerne auf die Warteliste setzen lassen für die Online-Schulung:
+
+Regelungen digitaltauglich gestalten – praktische Tipps für den Digitalcheck
+
+Mit freundlichen Grüßen
                 `,
               ),
               look: "tertiary" as const,
@@ -275,6 +275,7 @@ export const support = {
                 title: "Nächste Termine",
                 text: dedent`
                   Wir planen bald neue Termine für Schulungen in 2025. Schreiben Sie uns eine E-Mail und wir setzen Sie auf die Warteliste.
+                  <br class="block content-[''] mb-32!" />
                   Sie können sich bis dahin das [Schulungsmaterial ansehen](https://github.com/digitalservicebund/digitalcheck-content/tree/main/src/online-schulungen).
                 `,
               },
@@ -293,13 +294,13 @@ export const support = {
               text: "Auf Warteliste setzen",
               href: encodeURI(
                 dedent`mailto:digitalcheck@digitalservice.bund.de?subject=[Digitalcheck Schulung] Anmeldung Visualisierungen&body=
-                  Guten Tag,
-                  
-                  ich möchte mich gerne auf die Warteliste setzen lassen für die Online-Schulung:
-                  
-                  Visualisierungen – Komplexes einfach darstellen
-                                    
-                  Mit freundlichen Grüßen
+Guten Tag,
+
+ich möchte mich gerne auf die Warteliste setzen lassen für die Online-Schulung:
+
+Visualisierungen – Komplexes einfach darstellen
+
+Mit freundlichen Grüßen
                 `,
               ),
               look: "tertiary" as const,
@@ -311,6 +312,7 @@ export const support = {
                 title: "Nächste Termine",
                 text: dedent`
                   Wir planen bald neue Termine für Schulungen in 2025. Schreiben Sie uns eine E-Mail und wir setzen Sie auf die Warteliste.
+                  <br class="block content-[''] mb-32!" />
                   Sie können sich bis dahin das [Schulungsmaterial ansehen](https://github.com/digitalservicebund/digitalcheck-content/tree/main/src/online-schulungen).
                 `,
               },
