@@ -40,6 +40,7 @@ WORKDIR /home/node/src
 COPY package.json package-lock.json ./
 COPY --from=production-dependencies /src/node_modules/ ./node_modules/
 COPY --from=build /src/build/ ./build/
+COPY --from=build /src/public/ ./public/
 
 # Ensure the node user owns all files in the working directory
 RUN chown -R node:node /home/node/src
