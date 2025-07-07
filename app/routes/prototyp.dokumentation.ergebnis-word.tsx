@@ -1,9 +1,11 @@
+import { CheckCircleOutlined } from "@digitalservicebund/icons/index";
 import Background from "~/components/Background";
 import Box from "~/components/Box";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import FeedbackForm from "~/components/FeedbackForm";
+import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import { NumberedList } from "~/components/List";
 import RichText from "~/components/RichText";
@@ -28,6 +30,21 @@ export default function DocumentationResult() {
     <>
       <Background backgroundColor="blue" className="py-40 print:pb-0">
         <div className="px-16">
+          <Container className="rounded-t-lg py-32" backgroundColor="midBlue">
+            <div className="flex flex-col gap-16 sm:flex-row">
+              <div className="flex size-36 flex-none items-center justify-center">
+                <CheckCircleOutlined className="h-full w-full" />
+              </div>
+              <Header
+                heading={{
+                  tagName: "h1",
+                  look: "ds-heading-02-reg",
+                  markdown: title,
+                  className: "mb-0",
+                }}
+              />
+            </div>
+          </Container>
           <Container className="rounded-b-lg" backgroundColor="white">
             <Box
               heading={{
