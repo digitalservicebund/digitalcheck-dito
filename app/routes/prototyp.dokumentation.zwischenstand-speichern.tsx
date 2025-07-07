@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import Background from "~/components/Background";
 import Box from "~/components/Box.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
@@ -15,6 +16,11 @@ export function meta() {
 }
 
 export default function DocumentationResult() {
+  const navigate = useNavigate();
+  const goBack = () => {
+    Promise.resolve(navigate(-1)).catch(console.error);
+  };
+
   return (
     <Background backgroundColor="blue" className="py-40 print:pb-0">
       <div className="px-16">
@@ -54,8 +60,8 @@ export default function DocumentationResult() {
               },
               {
                 text: "Zurück",
-                href: ROUTE_PROTOTYPE_DOCUMENTATION_RESULT.url,
                 look: "tertiary",
+                onClick: goBack,
               },
             ]}
             className="mt-40"

@@ -1,6 +1,7 @@
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
+import IntermediateSaveLink from "~/components/prototyp/IntermediateSaveLink.tsx";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
 import { general } from "~/resources/content/shared/general";
@@ -28,6 +29,7 @@ export function meta() {
 export default function PrototypeDocumentationParticipation1() {
   return (
     <Container className="pt-0">
+      <IntermediateSaveLink />
       <Heading
         text={headline}
         tagName="h1"

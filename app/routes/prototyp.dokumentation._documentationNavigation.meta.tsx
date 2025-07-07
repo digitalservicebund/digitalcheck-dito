@@ -3,6 +3,7 @@ import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import Input from "~/components/Input";
+import IntermediateSaveLink from "~/components/prototyp/IntermediateSaveLink.tsx";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
@@ -30,6 +31,7 @@ export default function PrototypeDocumentationMeta() {
 
   return (
     <Container className="pt-0">
+      <IntermediateSaveLink />
       <Heading
         text={headline}
         tagName="h1"
