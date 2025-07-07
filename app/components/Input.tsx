@@ -14,6 +14,8 @@ export type InputProps = Readonly<{
   width?: "3" | "5" | "7" | "10" | "16" | "24" | "36" | "54";
   error?: string | null;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  value?: string | number | readonly string[];
+  defaultValue?: string | number | readonly string[];
 }>;
 
 const widthClass = (width: string) => {
@@ -40,6 +42,8 @@ export default function Input({
   error,
   onChange,
   className,
+  value,
+  defaultValue,
 }: InputProps) {
   const errorId = `${name}-error`;
   const helperId = `${name}-helper`;
@@ -68,6 +72,8 @@ export default function Input({
           )}
           aria-errormessage={error ? errorId : undefined}
           onChange={onChange}
+          defaultValue={defaultValue}
+          value={value}
         />
         {suffix && (
           <div className="ds-input-suffix" aria-hidden="true">

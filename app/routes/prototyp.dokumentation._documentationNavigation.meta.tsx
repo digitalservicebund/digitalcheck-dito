@@ -1,3 +1,4 @@
+import { useLocation } from "react-router";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
@@ -20,6 +21,13 @@ export function meta() {
 }
 
 export default function PrototypeDocumentationMeta() {
+  const location = useLocation();
+  const defaultValue =
+    location.state === "fileUpload"
+      ? "Elektronischer Rechtsverkehr mit dem " +
+        "Bundesverfassungsgericht – BVerfGG"
+      : "";
+
   return (
     <Container className="pt-0">
       <Heading
@@ -35,6 +43,7 @@ export default function PrototypeDocumentationMeta() {
             className="pb-4"
             name="title"
             label={metaInfo.inputTitle.label}
+            defaultValue={defaultValue}
           />
         </fieldset>
       </form>

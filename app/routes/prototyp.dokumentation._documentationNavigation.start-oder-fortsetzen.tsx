@@ -25,7 +25,9 @@ export default function PrototypeDocumentationMeta() {
   const onFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
-      await navigate(ROUTE_PROTOTYPE_DOCUMENTATION_META.url);
+      await navigate(ROUTE_PROTOTYPE_DOCUMENTATION_META.url, {
+        state: "fileUpload",
+      });
     }
   };
   return (
