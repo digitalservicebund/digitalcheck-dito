@@ -278,7 +278,7 @@ export const support = {
                 icon: TimerOutlined,
                 title: "Nächste Termine",
                 text: dedent`
-                  "Wir planen bald neue Termine für Schulungen in 2025. Schreiben Sie uns eine [E-Mail](mailto:digitalcheck@digitalservice.bund.de?subject=[Warteliste Schulung: Digitaltaugliche Regelungen erarbeiten]) und wir setzen Sie auf die Warteliste.\n" +
+                  Wir planen bald neue Termine für Schulungen in 2025. Schreiben Sie uns eine [E-Mail](digitalcheck@digitalservice.bund.de?subject=[Warteliste Schulung: Digitaltaugliche Regelungen erarbeiten]) und wir setzen Sie auf die Warteliste.\n
                   <br class="block content-[''] mb-32!" />                  
                   Sie können sich bis dahin das [Schulungsmaterial ansehen](https://github.com/digitalservicebund/digitalcheck-content/tree/main/src/online-schulungen).
                 `,
@@ -319,7 +319,7 @@ export const support = {
                 icon: TimerOutlined,
                 title: "Nächste Termine",
                 text: dedent`
-                  "Wir planen bald neue Termine für Schulungen in 2025. Schreiben Sie uns eine [E-Mail](mailto:digitalcheck@digitalservice.bund.de?subject=[Warteliste Schulungen: Visualisierung]) und wir setzen Sie auf die Warteliste.\n" +
+                  Wir planen bald neue Termine für Schulungen in 2025. Schreiben Sie uns eine [E-Mail](digitalcheck@digitalservice.bund.de?subject=[Warteliste Schulungen: Visualisierung]) und wir setzen Sie auf die Warteliste.\n
                   <br class="block content-[''] mb-32!" />                
                   Sie können sich bis dahin das [Schulungsmaterial ansehen](https://github.com/digitalservicebund/digitalcheck-content/tree/main/src/online-schulungen).
                 `,
