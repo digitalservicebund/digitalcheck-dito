@@ -254,18 +254,14 @@ export const support = {
               Das Angebot richtet sich an alle, die in den Bundesministerien Regelungen erarbeiten. Vorkenntnisse sind nicht erforderlich.
             `,
             button: {
-              text: "Per E-Mail anmelden",
+              text: "Auf Warteliste setzen",
               href: encodeURI(
                 dedent`mailto:digitalcheck@digitalservice.bund.de?subject=[Digitalcheck Schulung] Anmeldung digitaltaugliche Regelungen&body=
                   Guten Tag,
                   
-                  ich möchte mich gerne für die Online-Schulung anmelden:
+                  ich möchte mich gerne auf die Warteliste setzen lassen für die Online-Schulung:
                   
                   Regelungen digitaltauglich gestalten – praktische Tipps für den Digitalcheck
-                  
-                  am
-                  
-                  [Wunsch-Datum einfügen]
                   
                   Mit freundlichen Grüßen
                 `,
@@ -278,8 +274,7 @@ export const support = {
                 icon: TimerOutlined,
                 title: "Nächste Termine",
                 text: dedent`
-                  Wir planen bald neue Termine für Schulungen in 2025. Schreiben Sie uns eine an digitalcheck@digitalservice.bund.de und wir setzen Sie auf die Warteliste.\n
-                  <br class="block content-[''] mb-32!" />                  
+                  Wir planen bald neue Termine für Schulungen in 2025. Schreiben Sie uns eine E-Mail und wir setzen Sie auf die Warteliste.
                   Sie können sich bis dahin das [Schulungsmaterial ansehen](https://github.com/digitalservicebund/digitalcheck-content/tree/main/src/online-schulungen).
                 `,
               },
@@ -295,19 +290,15 @@ export const support = {
               Das Angebot richtet sich an alle, die in den Bundesministerien Regelungen erarbeiten. Vorkenntnisse sind nicht erforderlich.
             `,
             button: {
-              text: "Per E-Mail anmelden",
+              text: "Auf Warteliste setzen",
               href: encodeURI(
                 dedent`mailto:digitalcheck@digitalservice.bund.de?subject=[Digitalcheck Schulung] Anmeldung Visualisierungen&body=
                   Guten Tag,
                   
-                  ich möchte mich gerne für die Online-Schulung anmelden:
+                  ich möchte mich gerne auf die Warteliste setzen lassen für die Online-Schulung:
                   
                   Visualisierungen – Komplexes einfach darstellen
-                  
-                  am
-                  
-                  [Wunsch-Datum einfügen]
-                  
+                                    
                   Mit freundlichen Grüßen
                 `,
               ),
@@ -319,8 +310,7 @@ export const support = {
                 icon: TimerOutlined,
                 title: "Nächste Termine",
                 text: dedent`
-                  Wir planen bald neue Termine für Schulungen in 2025. Schreiben Sie uns eine an digitalcheck@digitalservice.bund.de und wir setzen Sie auf die Warteliste.\n
-                  <br class="block content-[''] mb-32!" />                
+                  Wir planen bald neue Termine für Schulungen in 2025. Schreiben Sie uns eine E-Mail und wir setzen Sie auf die Warteliste.
                   Sie können sich bis dahin das [Schulungsmaterial ansehen](https://github.com/digitalservicebund/digitalcheck-content/tree/main/src/online-schulungen).
                 `,
               },
