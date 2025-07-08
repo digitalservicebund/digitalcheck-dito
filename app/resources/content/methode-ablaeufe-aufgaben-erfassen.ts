@@ -22,7 +22,7 @@ export const methodsTasksProcesses = {
     title: "Intro",
     plausibleEventName: "Tab+Bar.Intro",
     visibility: {
-      headline: "Prozesse sichtbar machen",
+      heading: "Prozesse sichtbar machen",
       content: dedent`
         Abläufe lassen sich auf verschiedene Weise visualisieren – etwa durch Nutzerreisen, Entscheidungsbäume, Datenflüsse oder Prozessdiagramme.
         Ein guter Einstieg in Prozessdiagramme ist das **Flussdiagramm**:
@@ -40,7 +40,7 @@ export const methodsTasksProcesses = {
     plausibleEventName: "Tab+Bar.Anleitung",
 
     ablaufe: {
-      headline: "Abläufe mit dem Flussdiagramm erfassen",
+      heading: "Abläufe mit dem Flussdiagramm erfassen",
       content: dedent`
         Für Ihr Regelungsvorhaben können Sie ein Flussdiagramm erstellen, um dem gesamten Umsetzungsprozess oder einen spezifischen Arbeitsablauf visuell darzustellen.
 
@@ -51,7 +51,7 @@ export const methodsTasksProcesses = {
     },
 
     visualisierung: {
-      headline: "So visualisieren Sie den Umsetzungsprozess in drei Schritten",
+      heading: "So visualisieren Sie den Umsetzungsprozess in drei Schritten",
       content: dedent`
         Eine ausführliche Anleitung finden Sie in unserer PowerPoint-Vorlage “**Anleitung Abläufe und Aufgaben erfassen**”.
         
@@ -100,7 +100,7 @@ export const methodsTasksProcesses = {
       text: "So geht es weiter",
       Icon: ArrowCircleRightOutlined,
     },
-    headline: "Finden Sie konkrete Möglichkeiten der Digitalisierung",
+    heading: "Finden Sie konkrete Möglichkeiten der Digitalisierung",
     content:
       "Mit den Prinzipien für Digitaltaugliche Gesetzgebung bekommen Sie auch konkrete Hinweise darauf, worauf Sie achten müssen.",
     buttons: [
@@ -114,7 +114,7 @@ export const methodsTasksProcesses = {
   },
   support: {
     badge: { text: "Unterstützungsangebot", Icon: SupportOutlined },
-    headline: "Visualisierungen gemeinsam erstellen",
+    heading: "Visualisierungen gemeinsam erstellen",
     content: dedent`
       Der Digitalcheck-Support unterstützt Sie bei der Visualsierung von Abläufen. Wir helfen Ihnen gerne, insbesondere bei komplexen Abläufen.
       

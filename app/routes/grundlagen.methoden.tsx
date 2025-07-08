@@ -1,6 +1,8 @@
 import Container from "~/components/Container";
+import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
-import InfoBox from "~/components/InfoBox.tsx";
+import InfoBox from "~/components/InfoBox";
+import InfoBoxList from "~/components/InfoBoxList.tsx";
 import { BulletList } from "~/components/List.tsx";
 import SupportBanner from "~/components/SupportBanner";
 import { fundamentalsMethods } from "~/resources/content/grundlage-methoden.ts";
@@ -22,13 +24,15 @@ export default function FundamentalsMethods() {
       />
 
       <Container>
-        <InfoBox
-          heading={{
-            tagName: "h2",
-            text: fundamentalsMethods.roadmap.title,
-          }}
-          items={fundamentalsMethods.roadmap.items}
-        />
+        <InfoBoxList
+          heading={
+            <Heading tagName="h2">{fundamentalsMethods.roadmap.title}</Heading>
+          }
+        >
+          {fundamentalsMethods.roadmap.items.map((item) => (
+            <InfoBox key={item.heading.text} {...item} />
+          ))}
+        </InfoBoxList>
       </Container>
       <Container>
         <BulletList className="mb-40" items={methodStepsItems(false)} />

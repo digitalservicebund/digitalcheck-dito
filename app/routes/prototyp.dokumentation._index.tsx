@@ -21,6 +21,7 @@ import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
+import InfoBoxList from "~/components/InfoBoxList";
 import InlineNotice from "~/components/InlineNotice";
 import RichText from "~/components/RichText";
 import SupportBanner from "~/components/SupportBanner";
@@ -241,13 +242,13 @@ export default function Index() {
           content={intro.multipleNotice.content}
           className="mb-40"
         />
-        <InfoBox
-          heading={{
-            tagName: "h2",
-            text: intro.summary.title,
-          }}
-          items={intro.summary.items}
-        />
+        <InfoBoxList
+          heading={<Heading tagName="h2">{intro.summary.title}</Heading>}
+        >
+          {intro.summary.items.map((item) => (
+            <InfoBox key={item.heading.text} {...item} />
+          ))}
+        </InfoBoxList>
       </Container>
       <SupportBanner {...supportBanner} />
     </>

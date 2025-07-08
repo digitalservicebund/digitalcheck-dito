@@ -3,7 +3,7 @@ import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import ImageZoomable from "~/components/ImageZoomable";
-import InfoBox from "~/components/InfoBox.tsx";
+import InfoBox from "~/components/InfoBox";
 import { BulletList } from "~/components/List";
 import { ListItemProps } from "~/components/ListItem";
 import RichText from "~/components/RichText";
@@ -42,7 +42,9 @@ export default function SPOC() {
             className="mt-16 mb-32"
             markdown={spoc.landscape.contentAfter.content}
           />
-          <InfoBox items={spoc.landscape.contentAfter.infobox} />
+          <InfoBox
+            detailsSummary={spoc.landscape.contentAfter.infobox.detailsSummary}
+          />
           <RichText
             className="mb-48"
             markdown={spoc.landscape.contentAfter.outro}

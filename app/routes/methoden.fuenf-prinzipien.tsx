@@ -4,7 +4,6 @@ import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
-import InfoBoxItem from "~/components/InfoBoxItem";
 import LinkListBox from "~/components/LinkListBox";
 import Separator from "~/components/Separator";
 import {
@@ -56,16 +55,16 @@ export default function FivePrinciples() {
 
         <ul className="list-unstyled ds-stack ds-stack-40">
           {methodsFivePrinciples.instruction.items.map((item) => (
-            <InfoBoxItem
-              key={item.headline}
-              headline={{ text: item.headline }}
+            <InfoBox
+              key={item.heading}
+              heading={{ text: item.heading }}
               content={item.content}
               linkList={
                 item.link && {
                   links: [{ title: item.link.text, url: item.link.url }],
                 }
               }
-            ></InfoBoxItem>
+            ></InfoBox>
           ))}
         </ul>
 
@@ -76,27 +75,22 @@ export default function FivePrinciples() {
         <Container className="pb-64" key={slugify(principle.title)}>
           <InfoBox
             identifier={slugify(principle.title)}
-            separator={false}
             Icon={principle.icon}
-            items={[
+            headline={{
+              tagName: "h2",
+              text: principle.title,
+            }}
+            badge={{
+              children: principle.label,
+              principleNumber: principle.principleNumber as PrincipleNumber,
+            }}
+            content={principle.content}
+            detailsSummary={getDetailsSummary(principle.detailsSummary)}
+            buttons={[
               {
-                headline: {
-                  tagName: "h2",
-                  text: principle.title,
-                },
-                badge: {
-                  children: principle.label,
-                  principleNumber: principle.principleNumber as PrincipleNumber,
-                },
-                content: principle.content,
-                detailsSummary: getDetailsSummary(principle.detailsSummary),
-                buttons: [
-                  {
-                    look: "link",
-                    text: principle.exampleLink.text,
-                    href: principle.exampleLink.url,
-                  },
-                ],
+                look: "link",
+                text: principle.exampleLink.text,
+                href: principle.exampleLink.url,
               },
             ]}
           />

@@ -51,16 +51,16 @@ export const methodsFivePrinciples = {
     title: "So nutzen Sie die fünf Prinzipien für Ihr Regelungsvorhaben",
     items: [
       {
-        headline: "Als konkrete Umsetzungstipps",
+        heading: "Als konkrete Umsetzungstipps",
         content:
           "Nutzen Sie die Tipps als Inspiration, um in Ihrem Regelungsvorhaben die Möglichkeiten des Digitalen auszuschöpfen und Hindernisse zu erkennen.",
       },
       {
-        headline: "Als Überprüfung für den Gesamtprozess",
+        heading: "Als Überprüfung für den Gesamtprozess",
         content: `Besonders erkenntnisreich sind die fünf Prinzipien, wenn Sie diese auf eine Skizze des geplanten Umsetzungsprozesses anwenden. Skizzieren Sie Schritt für Schritt die Umsetzung und markieren Sie die Stellen, an denen eines oder mehrere Prinzipien wichtig sind. Mehr Informationen und Anleitung zur Visualisierungen finden Sie auf [visualisieren.digitalcheck.bund.de](${ROUTE_METHODS_TASKS_PROCESSES.url}).`,
       },
       {
-        headline: "Als Startpunkt für ihren Regelungstext",
+        heading: "Als Startpunkt für ihren Regelungstext",
         content:
           "Nutzen Sie die gesammelten Beispiele als Startpunkt für Ihre Formulierungen. Bauen Sie auf Formulierungen auf, oder lassen Sie sich durch die Wirklogiken Ihrer Kolleginnen und Kollegen inspirieren. Sie finden gute Formulierungen, Einordnungen und deren Kontext im Regelungstext in den Beispielen.",
         link: { url: ROUTE_EXAMPLES.url, text: "Beispiele betrachten" },

@@ -1,31 +1,31 @@
 import { render, screen, within } from "@testing-library/react";
 import { createRoutesStub } from "react-router";
 import { describe, expect, it } from "vitest";
-import InfoBoxItem from "./InfoBoxItem";
+import InfoBox from "./InfoBox";
 
 const separatorStyleClass =
   "border-0 border-b-2 border-solid border-gray-400 pb-40";
 
-describe("InfoBoxItem", () => {
+describe("InfoBox", () => {
   describe("Separator", () => {
     it("has expected class properties when the separator is enabled", () => {
-      render(<InfoBoxItem separator={true} />);
+      render(<InfoBox separator={true} />);
       expect(screen.getByRole("listitem")).toHaveClass(separatorStyleClass);
     });
     it("has expected class properties when the separator is disabled", () => {
-      render(<InfoBoxItem separator={false} />);
+      render(<InfoBox separator={false} />);
       expect(screen.getByRole("listitem")).not.toHaveClass(separatorStyleClass);
     });
   });
 
   describe("Top level elements", () => {
     it("shows the label", () => {
-      render(<InfoBoxItem badge={{ text: "TestLabel" }} />);
+      render(<InfoBox badge={{ text: "TestLabel" }} />);
       expect(screen.getByText("TestLabel")).toBeInTheDocument();
     });
 
     it("shows the heading", () => {
-      render(<InfoBoxItem headline={{ text: "TestHeading" }} />);
+      render(<InfoBox headline={{ text: "TestHeading" }} />);
 
       expect(screen.getByRole("heading", { level: 3 })).toHaveTextContent(
         "TestHeading",
@@ -33,7 +33,7 @@ describe("InfoBoxItem", () => {
     });
 
     it("shows the content", () => {
-      render(<InfoBoxItem content="Test **Content**" />);
+      render(<InfoBox content="Test **Content**" />);
 
       expect(screen.getByRole("paragraph")).toHaveTextContent("Test Content");
     });
@@ -45,7 +45,7 @@ describe("InfoBoxItem", () => {
           { title: "Test Detail 2", content: "Test Content 2" },
         ],
       };
-      render(<InfoBoxItem detailsSummary={testDetailSummary} />);
+      render(<InfoBox detailsSummary={testDetailSummary} />);
 
       expect(screen.getAllByRole("group").length).toBe(2);
       expect(screen.getAllByRole("group").at(0)).toHaveTextContent(
@@ -71,7 +71,7 @@ describe("InfoBoxItem", () => {
       const RouterStubInfoBoxItem = createRoutesStub([
         {
           path: "/",
-          Component: () => <InfoBoxItem linkList={testLinks} />,
+          Component: () => <InfoBox linkList={testLinks} />,
         },
       ]);
       render(<RouterStubInfoBoxItem />);

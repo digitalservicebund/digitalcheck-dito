@@ -53,12 +53,8 @@ export default function Methoden() {
 
       <Container className="ds-stack ds-stack-40">
         <InfoBox
-          items={[
-            {
-              headline: { tagName: "h2", text: methods.furtherMethods.heading },
-              content: methods.furtherMethods.content,
-            },
-          ]}
+          heading={{ tagName: "h2", text: methods.furtherMethods.heading }}
+          content={methods.furtherMethods.content}
         />
 
         <div className="flex flex-col gap-24 sm:flex-row">
@@ -67,18 +63,14 @@ export default function Methoden() {
             className="px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
           >
             <InfoBox
-              items={[
-                {
-                  badge: { text: methods.itSystems.badge, look: "hint" },
-                  headline: {
-                    text: methods.itSystems.heading,
-                    tagName: "h3",
-                    className: "ds-heading-03-bold",
-                  },
-                  content: methods.itSystems.content,
-                  buttons: methods.itSystems.buttons,
-                },
-              ]}
+              badge={{ text: methods.itSystems.badge, look: "hint" }}
+              heading={{
+                text: methods.itSystems.heading,
+                tagName: "h3",
+                className: "ds-heading-03-bold",
+              }}
+              content={methods.itSystems.content}
+              buttons={methods.itSystems.buttons}
             />
           </Background>
 
@@ -87,21 +79,17 @@ export default function Methoden() {
             className="px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
           >
             <InfoBox
-              items={[
-                {
-                  badge: {
-                    text: methods.technicalFeasibility.badge,
-                    look: "hint",
-                  },
-                  headline: {
-                    text: methods.technicalFeasibility.heading,
-                    tagName: "h3",
-                    className: "ds-heading-03-bold",
-                  },
-                  content: methods.technicalFeasibility.content,
-                  buttons: methods.technicalFeasibility.buttons,
-                },
-              ]}
+              badge={{
+                text: methods.technicalFeasibility.badge,
+                look: "hint",
+              }}
+              heading={{
+                text: methods.technicalFeasibility.heading,
+                tagName: "h3",
+                className: "ds-heading-03-bold",
+              }}
+              content={methods.technicalFeasibility.content}
+              buttons={methods.technicalFeasibility.buttons}
             />
           </Background>
         </div>
