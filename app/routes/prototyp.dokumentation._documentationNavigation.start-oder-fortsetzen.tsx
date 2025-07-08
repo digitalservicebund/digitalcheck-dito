@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
+import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Heading from "~/components/Heading";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
@@ -39,6 +40,11 @@ export default function PrototypeDocumentationMeta() {
         className="mb-16"
       />
       <RichText markdown={subtitle} className="mb-40" />
+      <DetailsSummary
+        className="mb-40"
+        title="Welche Datei kann ich hochladen?"
+        content="Wenn Sie bereits zu einem früheren Zeitpunkt angefangen haben die Dokumentation auszufüllen, hatten Sie die Möglichkeit einen Zwischenstand als JSON-Datei herunterzuladen. Diese Datei können Sie hier wieder hochladen, um daran weiter zu arbeiten."
+      />
 
       <label className="ds-label-01-reg mb-40 block w-full cursor-pointer border-2 border-dashed border-blue-800 bg-white p-40 text-center text-blue-800 focus-within:border-solid focus-within:outline-3 focus-within:outline-blue-800">
         <input
