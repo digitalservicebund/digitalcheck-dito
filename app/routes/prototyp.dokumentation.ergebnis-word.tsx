@@ -62,8 +62,9 @@ export default function DocumentationResult() {
               buttons={[
                 {
                   text: result.data.buttonBack,
-                  href: ROUTE_PROTOTYPE_DOCUMENTATION_META.url,
                   look: "tertiary",
+                  onClick: () =>
+                    alert("Diese Funktion ist für den Test nicht verfügbar."),
                 },
               ]}
               className="mt-40"
