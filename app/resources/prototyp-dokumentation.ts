@@ -45,7 +45,7 @@ export const prototypeDocumentation = {
   startOrResume: {
     title: "Dokumentation starten",
     subtitle:
-      "Hier können Sie einen Zwischenstand als JSON-Datei hochladen oder eine neue Dokumentation starten.",
+      "Beginnen Sie eine neue Dokumentation oder arbeiten Sie an einem vorher gespeicherten Zwischenstand weiter.",
     startNewButtonText: "Dokumentation starten",
   },
   nextButton: "Übernehmen & weiter",

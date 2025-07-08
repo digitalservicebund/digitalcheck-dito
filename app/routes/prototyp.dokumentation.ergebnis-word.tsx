@@ -71,12 +71,12 @@ export default function DocumentationResult() {
             <hr className="mt-40 mb-32 border-t-[2px] border-gray-400" />
             <Box
               heading={{
-                text: "Feedback einholen",
+                text: "Dokumentation abstimmen",
                 tagName: "h2",
               }}
               content={{
                 markdown:
-                  "Wenn Sie möchten, können Sie die Dokumentation als Word-Datei herunterladen um sie mit Ihren Kolleg:innen abzustimmen.",
+                  "Laden Sie die Dokumentation als Word-Datei herunterladen, um sie abzustimmen oder an den NKR zu senden.",
               }}
             />
             <ButtonContainer
