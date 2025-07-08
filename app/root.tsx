@@ -24,8 +24,6 @@ import PageHeader from "~/layout/PageHeader";
 import { A11Y_MESSAGE_NEW_WINDOW } from "~/resources/constants";
 import { general } from "~/resources/content/shared/general";
 import { siteMeta } from "~/resources/content/shared/meta";
-import { newsBanner } from "~/resources/content/shared/news-banner";
-import { features } from "~/resources/features";
 import { ROUTE_LANDING } from "~/resources/staticRoutes";
 import sharedStyles from "~/styles.css?url";
 import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants";
@@ -199,14 +197,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
       </head>
       <body className="flex min-h-screen flex-col">
         <ScrollAndFocus />
-        <PageHeader
-          includeBreadcrumbs={!error}
-          banner={
-            featureFlags?.[features.enableDocumentationPrototype]
-              ? undefined
-              : newsBanner
-          }
-        />
+        <PageHeader includeBreadcrumbs={!error} />
         {children}
         <Footer />
         <span
