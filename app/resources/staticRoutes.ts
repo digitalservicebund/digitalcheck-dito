@@ -121,7 +121,7 @@ export const ROUTE_EXAMPLES = createRoute(
 );
 export const ROUTE_EXAMPLES_PRINCIPLES = createRoute(
   "prinzipien",
-  "Prinzipien",
+  "Die Prinzipien im Regelungstext",
   ROUTE_EXAMPLES,
 );
 export const ROUTE_EXAMPLES_DIGITAL_COMMUNICATION = createRoute(
@@ -167,8 +167,10 @@ export const ROUTE_REGELUNGEN = createRoute(
 );
 export const ROUTE_EXAMPLES_VISUALISATIONS = createRoute(
   "visualisierungen",
-  "Visualisierungen",
+  "Beispiele für Visualisierungen",
   ROUTE_EXAMPLES,
+  false,
+  "Visualisierungen",
 );
 export const ROUTE_VISUALISATION = createRoute(
   "visualisierung",
@@ -181,13 +183,13 @@ export const ROUTE_FUNDAMENTALS = createRoute("grundlagen", "Grundlagen");
 
 export const ROUTE_FUNDAMENTALS_PRINCIPLES = createRoute(
   "fuenf-prinzipien",
-  "Prinzipien",
+  "Fünf Prinzipien",
   ROUTE_FUNDAMENTALS,
 );
 
 export const ROUTE_FUNDAMENTALS_METHODS = createRoute(
   "methoden",
-  "Methoden",
+  "Methoden und Werkzeuge",
   ROUTE_FUNDAMENTALS,
 );
 

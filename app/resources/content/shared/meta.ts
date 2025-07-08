@@ -1,7 +1,7 @@
 export const siteMeta = {
   siteName: "DigitalService",
   siteURL: "https://erarbeiten.digitalcheck.bund.de/",
-  title: "Digitalcheck: Digitaltaugliche Regelungen erarbeiten",
+  title: "Digitalcheck",
   description:
     "Hier erfahren Sie als Legistin oder Legist, was Digitaltauglichkeit für Ihr Regelungsvorhaben bedeutet, wie Sie eine reibungslose Umsetzung des Vorhabens ermöglichen und welche Unterlagen Sie benötigen.",
 };
