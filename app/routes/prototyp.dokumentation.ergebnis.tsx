@@ -1,4 +1,7 @@
-import { CheckCircleOutlined, SaveAsOutlined } from "@digitalservicebund/icons";
+import {
+  CheckCircleOutlined,
+  FileDownloadOutlined,
+} from "@digitalservicebund/icons";
 
 import Background from "~/components/Background";
 import Box from "~/components/Box";
@@ -91,7 +94,7 @@ export default function DocumentationResult() {
                   text: "Zwischenstand speichern",
                   href: ROUTE_PROTOTYPE_DOCUMENTATION_INTERMEDIATE_SAVE.url,
                   look: "ghost",
-                  iconLeft: <SaveAsOutlined />,
+                  iconLeft: <FileDownloadOutlined />,
                 },
               ]}
               className="mt-40"

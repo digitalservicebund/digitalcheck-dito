@@ -1,3 +1,4 @@
+import { FileDownloadOutlined } from "@digitalservicebund/icons";
 import { useNavigate } from "react-router";
 import Background from "~/components/Background";
 import Box from "~/components/Box.tsx";
@@ -26,11 +27,12 @@ export default function DocumentationResult() {
       <div className="px-16">
         <Container className="rounded-t-lg py-32" backgroundColor="midBlue">
           <div className="flex flex-col gap-16 sm:flex-row">
+            <FileDownloadOutlined className="size-36" />
             <Header
               heading={{
                 tagName: "h1",
                 look: "ds-heading-02-reg",
-                markdown: "Später weiterarbeiten",
+                markdown: "Zwischenstand speichern",
                 className: "mb-0",
               }}
             />
@@ -38,18 +40,14 @@ export default function DocumentationResult() {
         </Container>
         <Container className="rounded-b-lg" backgroundColor="white">
           <Box
-            heading={{
-              text: "Zwischenstand speichern",
-              tagName: "h2",
-            }}
             content={{
               markdown:
-                "Sie können die Dokumentation als Digitalcheck-Datei speichern, um sie später wieder hochzuladen und weiterzubearbeiten.",
+                "Sie können die Dokumentation als JSON-Datei speichern, um sie später wieder hochzuladen und weiterzubearbeiten.",
             }}
           />
           <DetailsSummary
             className="mt-40"
-            title="Welches Format hat die Datei?"
+            title="Was ist eine JSON-Datei?"
             content="Eine JSON-Datei speichert Informationen als menschen- und maschinenlesbares Textformat. So können Sie die Informationen Ihrer Dokumentation jetzt sichern, später wieder laden und weiter bearbeiten."
           />
           <ButtonContainer
