@@ -46,7 +46,9 @@ test.describe("test meta titles", () => {
 
   test("principles title is correct", async ({ page }) => {
     await page.goto(ROUTE_FUNDAMENTALS_PRINCIPLES.url);
-    await expect(page).toHaveTitle("Fünf Prinzipien — Digitalcheck");
+    await expect(page).toHaveTitle(
+      "Fünf Prinzipien (Grundlagen) — Digitalcheck",
+    );
   });
 
   test("error page title is correct", async ({ page }) => {
