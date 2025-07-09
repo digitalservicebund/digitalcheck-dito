@@ -40,7 +40,7 @@ export default function LayoutWithDocumentationNavigation() {
         <Container className="pt-0 lg:hidden">
           <LinkBar currentElementUrl={location.pathname} elements={routes} />
         </Container>
-        <Outlet context={useOutletContext()} />;
+        <Outlet context={useOutletContext()} />
       </section>
     </div>
   );
