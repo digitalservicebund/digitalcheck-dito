@@ -43,7 +43,7 @@ export const prototypeDocumentation = {
     },
   },
   startOrResume: {
-    title: "Dokumentation starten",
+    title: "Dokumentation starten oder fortsetzen",
     subtitle:
       "Beginnen Sie eine neue Dokumentation oder arbeiten Sie an einem vorher gespeicherten Zwischenstand weiter.",
     startNewButtonText: "Dokumentation starten",

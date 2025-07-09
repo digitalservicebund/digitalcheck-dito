@@ -1,6 +1,6 @@
 import Check from "@digitalservicebund/icons/Check";
 import { useId } from "react";
-import { Link, Outlet, useLocation } from "react-router";
+import { Link, Outlet, useLocation, useOutletContext } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Container from "~/components/Container";
 import LinkBar from "~/components/LinkBar";
@@ -40,7 +40,7 @@ export default function LayoutWithDocumentationNavigation() {
         <Container className="pt-0 lg:hidden">
           <LinkBar currentElementUrl={location.pathname} elements={routes} />
         </Container>
-        <Outlet />
+        <Outlet context={useOutletContext()} />;
       </section>
     </div>
   );

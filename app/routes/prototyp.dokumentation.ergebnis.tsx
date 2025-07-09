@@ -3,6 +3,8 @@ import {
   FileDownloadOutlined,
 } from "@digitalservicebund/icons";
 
+import fileSaver from "file-saver";
+import { PDFDocument } from "pdf-lib";
 import Background from "~/components/Background";
 import Box from "~/components/Box";
 import Button from "~/components/Button.tsx";
@@ -12,9 +14,11 @@ import DetailsSummary from "~/components/DetailsSummary";
 import FeedbackForm from "~/components/FeedbackForm";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
+import InlineNotice from "~/components/InlineNotice";
 import { NumberedList } from "~/components/List";
 import RichText from "~/components/RichText";
 import { documentation } from "~/resources/content/dokumentation";
+import { features } from "~/resources/features";
 import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
 import {
   ROUTE_PROTOTYPE_DOCUMENTATION,
@@ -24,8 +28,10 @@ import {
   ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_PDF,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
+import useFeatureFlag from "~/utils/featureFlags";
 import constructMetaTitle from "~/utils/metaTitle";
 
+const { saveAs } = fileSaver;
 const { result } = prototypeDocumentation;
 const { title } = result;
 
@@ -34,6 +40,41 @@ export function meta() {
 }
 
 export default function DocumentationResult() {
+  const prototypeAlternativeEnabled = useFeatureFlag(
+    features.enableDocumentationPrototypeAlternative,
+  );
+
+  const downloadPDF = async () => {
+    // Replace with the correct relative path to your PDF in public/
+    const response = await fetch(ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_PDF.url);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch PDF: ${response.statusText}`);
+    }
+
+    const basePdfBytes = await response.arrayBuffer();
+    const pdfDoc = await PDFDocument.load(basePdfBytes);
+
+    const dummyData = {
+      formState: {},
+      version: 1,
+    };
+    const jsonString = JSON.stringify(dummyData, null, 2);
+    const jsonBytes = new TextEncoder().encode(jsonString);
+
+    await pdfDoc.attach(jsonBytes, "data.json", {
+      mimeType: "application/json",
+      description: "Attached dummy JSON data",
+      creationDate: new Date(),
+      modificationDate: new Date(),
+    });
+
+    const resultPdfBytes = await pdfDoc.save();
+
+    const blob = new Blob([resultPdfBytes], { type: "application/pdf" });
+    saveAs(blob, `digitalcheck-dokumentation-${new Date().toISOString()}.pdf`);
+  };
+
   return (
     <>
       <Background backgroundColor="blue" className="py-40 print:pb-0">
@@ -73,33 +114,70 @@ export default function DocumentationResult() {
               href={ROUTE_PROTOTYPE_DOCUMENTATION_META.url}
             />
             <hr className="mt-40 mb-32 border-t-[2px] border-gray-400" />
-            <Box
-              heading={{
-                text: "Dokumentation speichern",
-                tagName: "h2",
-              }}
-              content={{
-                markdown: dedent`
+            {prototypeAlternativeEnabled ? (
+              <>
+                <Box
+                  heading={{
+                    text: "Dokumentation speichern",
+                    tagName: "h2",
+                  }}
+                  content={{
+                    markdown:
+                      "Laden Sie die Dokumentation als PDF-Datei herunter, um sie intern abzustimmen oder direkt an den NKR zu senden.",
+                  }}
+                />
+                <InlineNotice
+                  title={"Später weiterarbeiten"}
+                  look={"tips"}
+                  tagName={"h3"}
+                  content={`Sie können diese PDF-Datei nutzen um zu einem späteren Zeitpunkt hier weiter zu arbeiten.
+                  Laden Sie die PDF-Datei dafür [am Anfang der Dokumentation](/prototyp/dokumentation/start-oder-fortsetzen)
+                  hoch. Ihre Eingaben werden automatisch ausgelesen und für die Weiterarbeit bereitgestellt.`}
+                  className="mt-20"
+                />
+                <ButtonContainer
+                  buttons={[
+                    {
+                      text: result.data.buttonDownload,
+                      onClick: () => {
+                        void downloadPDF();
+                      },
+                    },
+                  ]}
+                  className="mt-20"
+                />
+              </>
+            ) : (
+              <>
+                <Box
+                  heading={{
+                    text: "Dokumentation speichern",
+                    tagName: "h2",
+                  }}
+                  content={{
+                    markdown: dedent`
                 Laden Sie die Dokumentation als PDF herunter, um sie intern abzustimmen oder direkt an den NKR zu senden.
                 
                 Sie können alternativ einen Zwischenstand speichern, um später weiterzuarbeiten.`,
-              }}
-            />
-            <ButtonContainer
-              buttons={[
-                {
-                  text: result.data.buttonDownload,
-                  href: ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_PDF.url,
-                },
-                {
-                  text: "Zwischenstand speichern",
-                  href: ROUTE_PROTOTYPE_DOCUMENTATION_INTERMEDIATE_SAVE.url,
-                  look: "ghost",
-                  iconLeft: <FileDownloadOutlined />,
-                },
-              ]}
-              className="mt-40"
-            />
+                  }}
+                />
+                <ButtonContainer
+                  buttons={[
+                    {
+                      text: result.data.buttonDownload,
+                      href: ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_PDF.url,
+                    },
+                    {
+                      text: "Zwischenstand speichern",
+                      href: ROUTE_PROTOTYPE_DOCUMENTATION_INTERMEDIATE_SAVE.url,
+                      look: "ghost",
+                      iconLeft: <FileDownloadOutlined />,
+                    },
+                  ]}
+                  className="mt-40"
+                />
+              </>
+            )}
             <hr className="mt-40 mb-32 border-t-[2px] border-gray-400" />
             <form method="post">
               <fieldset className="ds-stack ds-stack-24">
