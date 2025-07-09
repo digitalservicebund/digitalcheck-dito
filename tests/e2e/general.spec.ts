@@ -41,7 +41,9 @@ test.describe("test breadcrumbs and titles", () => {
 test.describe("test meta titles", () => {
   test("landing title is correct", async ({ page }) => {
     await page.goto(ROUTE_LANDING.url);
-    await expect(page).toHaveTitle("Digitalcheck");
+    await expect(page).toHaveTitle(
+      "Digitalcheck: Digitaltaugliche Regelungen erarbeiten",
+    );
   });
 
   test("principles title is correct", async ({ page }) => {
