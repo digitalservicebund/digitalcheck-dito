@@ -17,6 +17,7 @@ import RichText from "~/components/RichText";
 import { documentation } from "~/resources/content/dokumentation";
 import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
 import {
+  ROUTE_PROTOTYPE_DOCUMENTATION,
   ROUTE_PROTOTYPE_DOCUMENTATION_INTERMEDIATE_SAVE,
   ROUTE_PROTOTYPE_DOCUMENTATION_META,
   ROUTE_PROTOTYPE_DOCUMENTATION_RESULT,
@@ -124,6 +125,16 @@ export default function DocumentationResult() {
                 />
               ))}
             </div>
+            <hr className="mt-40 mb-32 border-t-[2px] border-gray-400" />
+            <ButtonContainer
+              buttons={[
+                {
+                  text: "Dokumentation starten oder fortsetzen",
+                  href: ROUTE_PROTOTYPE_DOCUMENTATION.url,
+                  look: "tertiary",
+                },
+              ]}
+            />
           </Container>
         </div>
       </Background>
