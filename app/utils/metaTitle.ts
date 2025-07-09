@@ -4,7 +4,9 @@ import { siteMeta } from "~/resources/content/shared/meta";
 export default function constructMetaTitle(
   prefix: string | undefined,
 ): MetaDescriptor[] {
-  const title = prefix ? `${prefix} — ${siteMeta.title}` : siteMeta.title;
+  const title = prefix
+    ? `${prefix} — ${siteMeta.title}`
+    : siteMeta.titleWithTagline;
 
   return [
     { title },
