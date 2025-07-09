@@ -32,9 +32,7 @@ test.describe("test breadcrumbs and titles", () => {
       }) => {
         await page.goto(route.url);
         await expect(page.getByTestId("breadcrumbs-menu")).toBeVisible();
-        await expect(page).toHaveTitle(
-          /Digitalcheck: Digitaltaugliche Regelungen erarbeiten$/,
-        );
+        await expect(page).toHaveTitle(/Digitalcheck$/);
       });
     }
   });
@@ -43,23 +41,17 @@ test.describe("test breadcrumbs and titles", () => {
 test.describe("test meta titles", () => {
   test("landing title is correct", async ({ page }) => {
     await page.goto(ROUTE_LANDING.url);
-    await expect(page).toHaveTitle(
-      "Digitalcheck: Digitaltaugliche Regelungen erarbeiten",
-    );
+    await expect(page).toHaveTitle("Digitalcheck");
   });
 
   test("principles title is correct", async ({ page }) => {
     await page.goto(ROUTE_FUNDAMENTALS_PRINCIPLES.url);
-    await expect(page).toHaveTitle(
-      "Prinzipien — Digitalcheck: Digitaltaugliche Regelungen erarbeiten",
-    );
+    await expect(page).toHaveTitle("Fünf Prinzipien — Digitalcheck");
   });
 
   test("error page title is correct", async ({ page }) => {
     await page.goto("/does-not-exist");
-    await expect(page).toHaveTitle(
-      "Fehler — Digitalcheck: Digitaltaugliche Regelungen erarbeiten",
-    );
+    await expect(page).toHaveTitle("Fehler — Digitalcheck");
   });
 });
 
