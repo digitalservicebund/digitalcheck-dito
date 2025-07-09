@@ -162,7 +162,7 @@ export const ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY =
   );
 export const ROUTE_REGELUNGEN = createRoute(
   "regelungen",
-  "Gesetze",
+  "Regelungsbeispiel",
   ROUTE_EXAMPLES,
 );
 export const ROUTE_EXAMPLES_VISUALISATIONS = createRoute(
@@ -183,8 +183,10 @@ export const ROUTE_FUNDAMENTALS = createRoute("grundlagen", "Grundlagen");
 
 export const ROUTE_FUNDAMENTALS_PRINCIPLES = createRoute(
   "fuenf-prinzipien",
-  "Fünf Prinzipien",
+  "Fünf Prinzipien (Grundlagen)",
   ROUTE_FUNDAMENTALS,
+  false,
+  "Fünf Prinzipien",
 );
 
 export const ROUTE_FUNDAMENTALS_METHODS = createRoute(

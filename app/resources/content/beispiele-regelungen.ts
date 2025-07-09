@@ -1,7 +1,6 @@
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const examplesRegelungen = {
-  breadcrumb: "Regelungsbeispiel",
   subtitle: [
     "Hier finden Sie alles zur Digitaltauglichkeit dieser Regelung.",
     "Inhalt",
