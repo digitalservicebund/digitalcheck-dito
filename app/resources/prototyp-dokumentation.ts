@@ -18,7 +18,7 @@ export const prototypeDocumentation = {
       },
       {
         title: "Nur ein Vorgang zur selben Zeit",
-        text: "Sie können nur an einer Dokumentation zur selben Zeit arbeiten. Parallele Vorgänge sind momentan nicht möglich. Sie können einen Zwischenstand als Json-Datei speichern und zur späteren Bearbeitung wieder hochladen. Ihre Daten werden nicht dauerhaft gespeichert.",
+        text: "Sie können nur an einer Dokumentation zur selben Zeit arbeiten. Parallele Vorgänge sind momentan nicht möglich. Sie können einen Zwischenstand als JSON-Datei speichern und zur späteren Bearbeitung wieder hochladen. Ihre Daten werden nicht dauerhaft gespeichert.",
       },
     ],
     multipleNotice: {

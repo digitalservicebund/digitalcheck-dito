@@ -1,3 +1,4 @@
+import { FileUploadOutlined } from "@digitalservicebund/icons";
 import React from "react";
 import { useNavigate } from "react-router";
 import ButtonContainer from "~/components/ButtonContainer";
@@ -46,14 +47,19 @@ export default function PrototypeDocumentationMeta() {
         content="Wenn Sie bereits zu einem früheren Zeitpunkt angefangen haben die Dokumentation auszufüllen, hatten Sie die Möglichkeit einen Zwischenstand als JSON-Datei herunterzuladen. Diese Datei können Sie hier wieder hochladen, um daran weiter zu arbeiten."
       />
 
-      <label className="ds-label-01-reg mb-40 block w-full cursor-pointer border-2 border-dashed border-blue-800 bg-white p-40 text-center text-blue-800 focus-within:border-solid focus-within:outline-3 focus-within:outline-blue-800">
+      <label className="ds-label-01-reg mb-40 block flex w-full cursor-pointer justify-center border-2 border-dashed border-blue-800 bg-white p-40 text-center align-middle text-blue-800 focus-within:border-solid focus-within:outline-3 focus-within:outline-blue-800">
         <input
           type="file"
           accept="application/json"
           className="w-0 opacity-0"
           onChange={onFileChange}
         />
-        Klicken Sie oder ziehen Sie eine Datei hierhin, um fortzufahren
+        <FileUploadOutlined
+          fill={"currentColor"}
+          height={20}
+          className="mr-6 inline"
+        />
+        Klicken Sie oder ziehen Sie eine Datei hierhin, um fortzufahren.
       </label>
 
       <ButtonContainer
