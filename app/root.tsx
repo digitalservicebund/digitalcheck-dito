@@ -143,7 +143,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
   const nonce = useNonce();
   const error = useRouteError();
   const rootLoaderData = useRouteLoaderData<typeof loader>("root");
-  const { trackingDisabled, featureFlags } = rootLoaderData ?? {};
+  const { trackingDisabled } = rootLoaderData ?? {};
   const location = useLocation();
 
   let metaTitles = <></>;
@@ -166,7 +166,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
   }
 
   // this suggests a site name to search engines
-  const websiteData = {
+  const jsonLdMetadata = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: siteMeta.siteName,
@@ -181,7 +181,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
         <meta name="description" content={siteMeta.description} />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteData) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdMetadata) }}
         ></script>
         {metaTitles}
         <Meta />
