@@ -51,12 +51,12 @@ export const ROUTE_PRECHECK = createRoute(
 );
 export const ROUTE_PRECHECK_INFO = createRoute(
   "hinweise",
-  "Allgemeine Hinweise",
+  "Allgemeine Hinweise zur Vorprüfung",
   ROUTE_PRECHECK,
 );
 export const ROUTE_PRECHECK_RESULT = createRoute(
   "ergebnis",
-  "Ergebnis",
+  "Ergebnis der Vorprüfung",
   ROUTE_PRECHECK,
 );
 
@@ -250,7 +250,7 @@ export const ROUTE_PROTOTYPE_DOCUMENTATION_RESULT = createRoute(
 );
 export const ROUTE_PROTOTYPE_DOCUMENTATION_INTERMEDIATE_SAVE = createRoute(
   "zwischenstand-speichern",
-  "Später weiterarbeiten",
+  "Später weiterarbeiten - Prototyp",
   ROUTE_PROTOTYPE_DOCUMENTATION,
 );
 

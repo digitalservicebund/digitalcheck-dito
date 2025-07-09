@@ -9,6 +9,8 @@ import Tabs, { TabItem } from "~/components/Tabs";
 import VisualisationItem from "~/components/VisualisationItem";
 import { methodsTasksProcesses } from "~/resources/content/methode-ablaeufe-aufgaben-erfassen";
 import { interviewBanner } from "~/resources/content/shared/interview-banner";
+import { ROUTE_METHODS_TASKS_PROCESSES } from "~/resources/staticRoutes.ts";
+import constructMetaTitle from "~/utils/metaTitle.ts";
 import {
   fetchStrapiData,
   visualisationFields,
@@ -23,6 +25,10 @@ query GetVisualisierung($documentId: ID!) {
   }
 }
 `;
+
+export function meta() {
+  return constructMetaTitle(ROUTE_METHODS_TASKS_PROCESSES.title);
+}
 
 export const loader = async () => {
   const visualisationsData = await fetchStrapiData<{
