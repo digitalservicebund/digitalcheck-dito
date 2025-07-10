@@ -1,5 +1,5 @@
 import { steps } from "~/resources/content/shared/naechste-schritte";
-import { ROUTE_DOCUMENTATION_STATIC_PDF } from "~/resources/staticRoutes";
+import { ROUTE_DOCUMENTATION_STATIC_WORD } from "~/resources/staticRoutes";
 
 export const documentation = {
   title: "3. Dokumentieren der Digitaltauglichkeit",
@@ -8,7 +8,7 @@ export const documentation = {
     {
       // NOTE: 70-tage replace pdf with word document
       text: "Dokumentation herunterladen (Word-Datei)",
-      href: ROUTE_DOCUMENTATION_STATIC_PDF.url,
+      href: ROUTE_DOCUMENTATION_STATIC_WORD.url,
     },
   ],
   multipleNotice: {

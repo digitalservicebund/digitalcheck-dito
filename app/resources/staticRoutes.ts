@@ -99,6 +99,10 @@ export const ROUTE_DOCUMENTATION = createRoute(
 );
 // NOTE: 70-tage replace pdf with word document
 export const ROUTE_DOCUMENTATION_STATIC_PDF = createRoute(
+  "download/prototyp_documentation_dummy_result.pdf",
+  "Begleitende Dokumentation als Word-Dokument",
+);
+export const ROUTE_DOCUMENTATION_STATIC_WORD = createRoute(
   "download/Dokumentieren-der-Digitaltauglichkeit_V1-5.docx",
   "Begleitende Dokumentation als Word-Dokument",
 );

@@ -8,6 +8,7 @@ import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Header from "~/components/Header";
 import { features } from "~/resources/features";
 import {
+  ROUTE_DOCUMENTATION_STATIC_PDF,
   ROUTE_PROTOTYPE_DOCUMENTATION_RESULT,
   ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_JSON,
 } from "~/resources/staticRoutes";
@@ -69,9 +70,11 @@ export default function DocumentationResult() {
             buttons={[
               {
                 text: prototypeAlternativeEnabled
-                  ? "Generiertes PDF runterladen"
+                  ? "PDF-Dokumentation herunterladen"
                   : "Zwischenstand herunterladen",
-                href: ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_JSON.url,
+                href: prototypeAlternativeEnabled
+                  ? ROUTE_DOCUMENTATION_STATIC_PDF.url
+                  : ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_JSON.url,
               },
               {
                 text: "Zurück",

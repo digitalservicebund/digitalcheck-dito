@@ -137,8 +137,8 @@ export default function DocumentationResult() {
                     <>
                       Diese PDF-Datei beinhaltet die Informationen sowohl als
                       menschen- wie auch maschinenlesbares Textformat. So können
-                      Sie die Ihre Dokumentation jederzeit speichern, und später
-                      wieder laden und um weiter daran zu arbeiten.
+                      Sie Ihre Dokumentation jederzeit speichern, und später
+                      wieder hochladen, um weiter daran zu arbeiten.
                       <br />
                       Zur einfacheren internen Abstimmung können Sie die
                       Dokumentation auch als Word herunterladen.

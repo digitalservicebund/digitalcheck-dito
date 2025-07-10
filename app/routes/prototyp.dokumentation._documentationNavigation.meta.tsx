@@ -6,12 +6,15 @@ import Input from "~/components/Input";
 import IntermediateSaveLink from "~/components/prototyp/IntermediateSaveLink.tsx";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
+import { features } from "~/resources/features.ts";
 import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
 import {
+  ROUTE_PROTOTYPE_DOCUMENTATION,
   ROUTE_PROTOTYPE_DOCUMENTATION_META,
   ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION,
   ROUTE_PROTOTYPE_DOCUMENTATION_START_RESUME,
 } from "~/resources/staticRoutes";
+import useFeatureFlag from "~/utils/featureFlags.ts";
 import constructMetaTitle from "~/utils/metaTitle";
 
 const { metaInfo, nextButton } = prototypeDocumentation;
@@ -22,6 +25,9 @@ export function meta() {
 }
 
 export default function PrototypeDocumentationMeta() {
+  const prototypeAlternativeEnabled = useFeatureFlag(
+    features.enableDocumentationPrototypeAlternative,
+  );
   const location = useLocation();
   const defaultValue =
     location.state === "fileUpload"
@@ -57,7 +63,9 @@ export default function PrototypeDocumentationMeta() {
           },
           {
             text: general.buttonBack.text,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION_START_RESUME.url,
+            href: prototypeAlternativeEnabled
+              ? ROUTE_PROTOTYPE_DOCUMENTATION.url
+              : ROUTE_PROTOTYPE_DOCUMENTATION_START_RESUME.url,
             look: "tertiary",
           },
         ]}

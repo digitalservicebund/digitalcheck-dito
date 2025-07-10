@@ -28,7 +28,7 @@ import { supportBanner } from "~/resources/content/shared/support-banner";
 import { features } from "~/resources/features";
 import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
 import {
-  ROUTE_DOCUMENTATION_STATIC_PDF,
+  ROUTE_DOCUMENTATION_STATIC_WORD,
   ROUTE_PROTOTYPE_DOCUMENTATION,
   ROUTE_PROTOTYPE_DOCUMENTATION_META,
 } from "~/resources/staticRoutes";
@@ -186,7 +186,7 @@ export default function Index() {
                       />
                       <DetailsSummary
                         title="Welche Datei kann ich hochladen?"
-                        content="Wenn Sie bereits zu einem früheren Zeitpunkt angefangen haben die Dokumentation auszufüllen, hatten Sie die Möglichkeit einen Zwischenstand als **PDF-Datei** herunterzuladen. Diese Datei können Sie hier wieder hochladen, um daran weiter zu arbeiten."
+                        content="Wenn Sie bereits zu einem früheren Zeitpunkt angefangen haben, die Dokumentation auszufüllen, hatten Sie die Möglichkeit einen Zwischenstand als **PDF-Datei** herunterzuladen. Diese Datei können Sie hier wieder hochladen, um daran weiterzuarbeiten."
                       />
                       <label className="ds-label-01-reg block w-full cursor-pointer justify-center border-2 border-dashed border-blue-800 bg-white p-40 text-center align-middle text-blue-800 focus-within:border-solid focus-within:outline-3 focus-within:outline-blue-800">
                         <input
@@ -226,7 +226,7 @@ export default function Index() {
           buttons={[
             {
               text: "Word-Datei herunterladen",
-              href: ROUTE_DOCUMENTATION_STATIC_PDF.url,
+              href: ROUTE_DOCUMENTATION_STATIC_WORD.url,
               look: "tertiary",
             },
           ]}
