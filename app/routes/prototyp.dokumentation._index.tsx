@@ -120,7 +120,9 @@ export default function Index() {
     },
     {
       title: "Nur ein Vorgang zur selben Zeit",
-      text: "Sie können nur an einer Dokumentation zur selben Zeit arbeiten. Parallele Vorgänge sind momentan nicht möglich. Sie können jedoch einen Zwischenstand als JSON-Datei speichern und zur späteren Bearbeitung wieder hochladen. Ihre Daten werden nicht dauerhaft gespeichert.",
+      text:
+        "Sie können nur an einer Dokumentation zur selben Zeit arbeiten und Ihre Daten werden nicht dauerhaft gespeichert. " +
+        "Wenn Sie einen Zwischenstand speichern möchten, können Sie die Dokumentation jederzeit als auslesbare PDF-Datei herunterladen. Sie können diese somit zu einem späteren Zeitpunkt wieder hochladen, um an der Dokumentation weiterzuarbeiten.",
     },
   ];
 

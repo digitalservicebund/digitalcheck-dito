@@ -48,19 +48,29 @@ export default function DocumentationResult() {
           <Box
             content={{
               markdown: prototypeAlternativeEnabled
-                ? "Sie können die Dokumentation als PDF-Datei speichern, um sie später wieder hochzuladen und weiterzubearbeiten."
+                ? "Sie können die Dokumentation als auslesbare PDF-Datei speichern, um sie später wieder hochzuladen und weiter zu bearbeiten."
                 : "Sie können die Dokumentation als JSON-Datei speichern, um sie später wieder hochzuladen und weiterzubearbeiten.",
             }}
           />
           <DetailsSummary
             className="mt-40"
-            title="Was ist eine JSON-Datei?"
-            content="Eine JSON-Datei speichert Informationen als menschen- und maschinenlesbares Textformat. So können Sie die Informationen Ihrer Dokumentation jetzt sichern, später wieder laden und weiter bearbeiten."
+            title={
+              prototypeAlternativeEnabled
+                ? "Was ist eine auslesbare PDF-Datei?"
+                : "Was ist eine JSON-Datei?"
+            }
+            content={
+              prototypeAlternativeEnabled
+                ? "Diese PDF-Datei beinhaltet die Informationen sowohl als menschen- wie auch maschinenlesbares Textformat. So können Sie Ihre Dokumentation jederzeit speichern, und später wieder hochladen um weiter daran zu arbeiten."
+                : "Eine JSON-Datei speichert Informationen als menschen- und maschinenlesbares Textformat. So können Sie die Informationen Ihrer Dokumentation jetzt sichern, später wieder laden und weiter bearbeiten."
+            }
           />
           <ButtonContainer
             buttons={[
               {
-                text: "Zwischenstand herunterladen",
+                text: prototypeAlternativeEnabled
+                  ? "Generiertes PDF runterladen"
+                  : "Zwischenstand herunterladen",
                 href: ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_JSON.url,
               },
               {
