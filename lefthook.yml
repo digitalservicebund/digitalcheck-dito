@@ -7,10 +7,11 @@ pre-commit:
   commands:
     lint:
       tags: lint
-      run: npm run lint:check
+      run: npm run lint:check {staged_files}
+      glob: "*.{js,cjs,mjs,ts,jsx,tsx}"
     check-format:
       tags: style
-      run: npm run format:check
+      run: npm run format:check {staged_files}
 pre-push:
   parallel: true
   commands:
