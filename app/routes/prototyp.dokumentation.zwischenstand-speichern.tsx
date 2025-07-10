@@ -6,10 +6,12 @@ import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Header from "~/components/Header";
+import { features } from "~/resources/features";
 import {
   ROUTE_PROTOTYPE_DOCUMENTATION_RESULT,
   ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_JSON,
 } from "~/resources/staticRoutes";
+import useFeatureFlag from "~/utils/featureFlags";
 import constructMetaTitle from "~/utils/metaTitle";
 
 export function meta() {
@@ -21,6 +23,10 @@ export default function DocumentationResult() {
   const goBack = () => {
     Promise.resolve(navigate(-1)).catch(console.error);
   };
+
+  const prototypeAlternativeEnabled = useFeatureFlag(
+    features.enableDocumentationPrototypeAlternative,
+  );
 
   return (
     <Background backgroundColor="blue" className="py-40 print:pb-0">
@@ -41,8 +47,9 @@ export default function DocumentationResult() {
         <Container className="rounded-b-lg" backgroundColor="white">
           <Box
             content={{
-              markdown:
-                "Sie können die Dokumentation als JSON-Datei speichern, um sie später wieder hochzuladen und weiterzubearbeiten.",
+              markdown: prototypeAlternativeEnabled
+                ? "Sie können die Dokumentation als PDF-Datei speichern, um sie später wieder hochzuladen und weiterzubearbeiten."
+                : "Sie können die Dokumentation als JSON-Datei speichern, um sie später wieder hochzuladen und weiterzubearbeiten.",
             }}
           />
           <DetailsSummary

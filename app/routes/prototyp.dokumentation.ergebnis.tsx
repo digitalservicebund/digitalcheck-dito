@@ -14,7 +14,6 @@ import DetailsSummary from "~/components/DetailsSummary";
 import FeedbackForm from "~/components/FeedbackForm";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
-import InlineNotice from "~/components/InlineNotice";
 import { NumberedList } from "~/components/List";
 import RichText from "~/components/RichText";
 import { documentation } from "~/resources/content/dokumentation";
@@ -26,6 +25,7 @@ import {
   ROUTE_PROTOTYPE_DOCUMENTATION_META,
   ROUTE_PROTOTYPE_DOCUMENTATION_RESULT,
   ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_PDF,
+  ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_WORD,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import useFeatureFlag from "~/utils/featureFlags";
@@ -72,7 +72,10 @@ export default function DocumentationResult() {
     const resultPdfBytes = await pdfDoc.save();
 
     const blob = new Blob([resultPdfBytes], { type: "application/pdf" });
-    saveAs(blob, `digitalcheck-dokumentation-${new Date().toISOString()}.pdf`);
+    saveAs(
+      blob,
+      `digitalcheck-dokumentation-stand-${new Date().toISOString()}.pdf`,
+    );
   };
 
   return (
@@ -122,18 +125,10 @@ export default function DocumentationResult() {
                     tagName: "h2",
                   }}
                   content={{
-                    markdown:
-                      "Laden Sie die Dokumentation als PDF-Datei herunter, um sie intern abzustimmen oder direkt an den NKR zu senden.",
+                    markdown: dedent`
+                      Laden Sie die Dokumentation als PDF-Datei herunter, um sie intern abzustimmen oder direkt an den NKR zu senden.
+                      `,
                   }}
-                />
-                <InlineNotice
-                  title={"Später weiterarbeiten"}
-                  look={"tips"}
-                  tagName={"h3"}
-                  content={`Sie können diese PDF-Datei nutzen um zu einem späteren Zeitpunkt hier weiter zu arbeiten.
-                  Laden Sie die PDF-Datei dafür [am Anfang der Dokumentation](/prototyp/dokumentation/start-oder-fortsetzen)
-                  hoch. Ihre Eingaben werden automatisch ausgelesen und für die Weiterarbeit bereitgestellt.`}
-                  className="mt-20"
                 />
                 <ButtonContainer
                   buttons={[
@@ -142,6 +137,11 @@ export default function DocumentationResult() {
                       onClick: () => {
                         void downloadPDF();
                       },
+                    },
+                    {
+                      text: "Word-Dokumentation herunterladen",
+                      href: ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_WORD.url,
+                      look: "tertiary",
                     },
                   ]}
                   className="mt-20"
