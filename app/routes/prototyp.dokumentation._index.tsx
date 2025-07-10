@@ -14,6 +14,7 @@ import React from "react";
 import { useNavigate } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Background from "~/components/Background";
+import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -141,9 +142,10 @@ export default function Index() {
         <div className="flex flex-col gap-24 sm:flex-row">
           <Background
             backgroundColor="white"
-            className="w-full px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
+            className="flex w-full flex-col p-16 sm:p-32"
           >
             <InfoBox
+              separator={false}
               items={[
                 {
                   headline: {
@@ -152,21 +154,17 @@ export default function Index() {
                     className: "ds-heading-03-bold",
                   },
                   content: "Starten Sie mit einem leeren Formular.",
-                  buttons: [
-                    {
-                      text: "Dokumentation starten",
-                      href: ROUTE_PROTOTYPE_DOCUMENTATION_META.url,
-                    },
-                  ],
                 },
               ]}
             />
+            <div className="flex grow flex-col items-start justify-end">
+              <Button href={ROUTE_PROTOTYPE_DOCUMENTATION_META.url}>
+                Dokumentation starten
+              </Button>
+            </div>
           </Background>
 
-          <Background
-            backgroundColor="white"
-            className="w-full px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
-          >
+          <Background backgroundColor="white" className="w-full p-16 sm:p-32">
             <section className="flex flex-row gap-16">
               <div className="ds-stack ds-stack-8 w-full scroll-my-40">
                 <ul
@@ -204,8 +202,8 @@ export default function Index() {
                           height={20}
                           className="mr-6 inline"
                         />
-                        Klicken Sie hier, um die PDF-Datei ihrer Dokumentation
-                        hochzuladen.
+                        Klicken Sie hier, um die Dokumentation als auslesbare
+                        PDF-Datei hochzuladen.
                       </label>
                     </div>
                   </li>
