@@ -4,6 +4,7 @@ import { Link, Outlet, useLocation, useOutletContext } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Container from "~/components/Container";
 import LinkBar from "~/components/LinkBar";
+import { features } from "~/resources/features.ts";
 import {
   type Route,
   ROUTE_PROTOTYPE_DOCUMENTATION_META,
@@ -15,6 +16,7 @@ import {
   ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_5,
   ROUTE_PROTOTYPE_DOCUMENTATION_START_RESUME,
 } from "~/resources/staticRoutes";
+import useFeatureFlag from "~/utils/featureFlags.ts";
 import customTwMerge from "~/utils/tailwindMerge";
 
 const routes = [
@@ -30,6 +32,15 @@ const routes = [
 
 export default function LayoutWithDocumentationNavigation() {
   const location = useLocation();
+  const prototypeAlternativeEnabled = useFeatureFlag(
+    features.enableDocumentationPrototypeAlternative,
+  );
+  const filteredRoutes = prototypeAlternativeEnabled
+    ? routes.filter(
+        (route) =>
+          route.title !== ROUTE_PROTOTYPE_DOCUMENTATION_START_RESUME.title,
+      )
+    : routes;
 
   return (
     <div className="parent-bg-blue flex justify-center bg-blue-100 pt-32">
@@ -38,7 +49,10 @@ export default function LayoutWithDocumentationNavigation() {
       </div>
       <section className="w-[51rem]">
         <Container className="pt-0 lg:hidden">
-          <LinkBar currentElementUrl={location.pathname} elements={routes} />
+          <LinkBar
+            currentElementUrl={location.pathname}
+            elements={filteredRoutes}
+          />
         </Container>
         <Outlet context={useOutletContext()} />
       </section>
@@ -48,11 +62,19 @@ export default function LayoutWithDocumentationNavigation() {
 
 function DocumentationNavigation() {
   const location = useLocation();
-
+  const prototypeAlternativeEnabled = useFeatureFlag(
+    features.enableDocumentationPrototypeAlternative,
+  );
+  const filteredRoutes = prototypeAlternativeEnabled
+    ? routes.filter(
+        (route) =>
+          route.title !== ROUTE_PROTOTYPE_DOCUMENTATION_START_RESUME.title,
+      )
+    : routes;
   return (
     <nav aria-label="Alle Fragen">
       <ul className="list-unstyled">
-        {routes.map((route: Route) => {
+        {filteredRoutes.map((route: Route) => {
           const isCurrent = route.url === location.pathname;
           return (
             <NavItem
