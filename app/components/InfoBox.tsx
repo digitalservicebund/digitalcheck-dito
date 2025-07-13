@@ -1,4 +1,5 @@
 import { BlocksContent, BlocksRenderer } from "@strapi/blocks-react-renderer";
+import { ReactNode } from "react";
 import { twJoin } from "tailwind-merge";
 import twMerge from "~/utils/tailwindMerge";
 import Badge, { BadgeProps } from "./Badge";
@@ -13,10 +14,10 @@ import RichText from "./RichText";
 export type InfoBoxIconProps = {
   className?: string;
   size: ImageBoxSize;
-  Icon: React.SVGProps<SVGSVGElement>;
+  icon: ReactNode;
 };
 
-function InfoBoxIcon({ Icon, size, className }: InfoBoxIconProps) {
+function InfoBoxIcon({ icon, size, className }: InfoBoxIconProps) {
   return (
     <div
       className={twMerge(
@@ -24,7 +25,7 @@ function InfoBoxIcon({ Icon, size, className }: InfoBoxIconProps) {
         className,
       )}
     >
-      <Icon />
+      {icon}
     </div>
   );
 }
@@ -55,16 +56,21 @@ const InfoBox = ({
   buttons,
   icon,
 }: InfoBoxProps) => {
+  const isBigImage = icon?.size === "MEDIUM" || icon?.size === "LARGE";
+
   return (
     <div
       id={identifier}
       data-testid="info-box-container"
       className={twJoin(
         "flex scroll-my-40 flex-col gap-32 sm:flex-row",
+        icon && "flex flex-col gap-32 sm:flex-row",
+        icon && isBigImage && "flex-col-reverse",
         className,
       )}
     >
       {icon && <InfoBoxIcon {...icon} />}
+
       <div
         data-testid="info-box-content"
         className="ds-stack ds-stack-16 break-words"

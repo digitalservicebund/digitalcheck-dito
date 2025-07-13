@@ -121,9 +121,9 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
         />
 
         <InfoBox
-          icon={{ content: ArrowCircleRightOutlined, size: "XSMALL" }}
+          icon={{ icon: <ArrowCircleRightOutlined />, size: "XSMALL" }}
           content={prinzip.Beschreibung}
-          headline={{ text: prinzip.Name, tagName: "h2" }}
+          heading={{ text: prinzip.Name, tagName: "h2" }}
           badge={{
             children: examplesRegelungen.principles.prinzipBadge,
             principleNumber: prinzip.Nummer,

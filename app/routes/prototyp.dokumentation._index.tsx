@@ -148,17 +148,12 @@ export default function Index() {
             className="flex w-full flex-col p-16 sm:p-32"
           >
             <InfoBox
-              separator={false}
-              items={[
-                {
-                  headline: {
-                    text: "Neue Dokumentation starten",
-                    tagName: "h3",
-                    className: "ds-heading-03-bold",
-                  },
-                  content: "Starten Sie mit einem leeren Formular.",
-                },
-              ]}
+              heading={{
+                text: "Neue Dokumentation starten",
+                tagName: "h3",
+                className: "ds-heading-03-bold",
+              }}
+              content="Starten Sie mit einem leeren Formular."
             />
             <div className="flex grow flex-col items-start justify-end">
               <Button href={ROUTE_PROTOTYPE_DOCUMENTATION_META.url}>
