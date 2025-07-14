@@ -111,30 +111,46 @@ export const spoc = {
       },
       {
         headline: {
-          text: "Aktuell: Konzeption der Zusammenführung vom Erarbeiten-Prozess und Interoperabilitätsbewertung",
+          text: "15.05.2025: Die 5 Prinzipien für digitaltaugliche Regelungen sind überarbeitet",
         },
         content: dedent`
-          **Verzahnung der Prozesse**
-          - Zunächst wurden die inhaltlichen Schnittmengen zwischen dem Erarbeitungsprozess für digitaltaugliche Regelungen und dem Interoperabilitäts-Assessment identifiziert und analysiert. Darauf aufbauend wird ein synthetisierter Prozess erstellt. Dieser wird jetzt in den Digitalcheck-Kontaktpunkten kontinuierlich umgesetzt.
-          
-          **Überarbeitung der Prinzipien für digitaltaugliche Regelungen**
-          - Basierend auf den Erkenntnissen aus dem Vergleich wurden die bestehenden Prinzipien  der Digitaltauglichkeit überarbeitet. Ziel war es, diese Prinzipien so anzupassen, dass sie sowohl den Anforderungen der Digitaltauglichkeit als auch der Interoperabilität gerecht werden.
+          - Die [5 Prinzipien für digitaltaugliche Gesetzgebung](${ROUTE_METHODS_PRINCIPLES.url}) sind überarbeitet und entsprechen sowohl den Anforderungen der Digitaltauglichkeit als auch der Interoperabilität. 
         `,
       },
       {
         headline: {
-          text: "Nächste Schritte für die Erarbeitung",
+          text: "25.06.2025: Integration in die Abläufe des IT-Planungsrats",
         },
         content: dedent`
-          **Entwicklung angepasster Prinzipien und Methoden**
-          - Derzeit entwickeln wir die [5 Prinzipien für Digitaltaugliche Gesetzgebung](${ROUTE_METHODS_PRINCIPLES.url}) weiter. Zukünftig werden diese die vier Interoperabilitätsebenen noch konkreter herausstellen. Darauf aufbauend werden wir die Erarbeitungsmethoden anpassen. Ziel ist es, den gesamten Entwicklungsprozess effizienter und zielgerichteter zu gestalten.
+          - Die Bedeutung des IEA für das föderale IT-Architekturboard sowie Unterstützungsmöglichkeiten durch die Nationale Kontaktstelle wurden vorgestellt. 
+        `,
+        image: {
+          url: "/images/interoperabilitaet-it-planungsrat.png",
+          alternativeText:
+            "Die Abbildung zeigt ein strukturiertes Vorgehensmodell für die Interoperabilitätsbewertung. Alle Steckbriefe werden von der FITKO überprüft, die letztendliche Entscheidung trifft der IT-Planungsrat. Die Dokumentation bei Interoperabilitätsbezug muss bei der EU-Kommission eingereicht werden. Die Nationale Kontaktstelle steht während des gesamten Prozesses unterstützend zur Verfügung.",
+      },
+        },
+      {
+        headline: {
+          text: "03.07.2025: Über 100 Teilnehmende in acht online Workshops",
+        },
+        content: dedent`
+          - In den Schulungen „Visualisieren – komplexes einfach darstellen“ und “Regelungen digitaltauglich und interoperabel gestalten“ haben die Teilnehmenden erfahren, wie sie den Digitalcheck als frühzeitig Denkwerkzeug nutzen können, um Gesetze besser und umsetzbarer zu gestalten.  
+        `,
+      },
+      {
+        headline: {
+          text: "Aktuell: Methoden für Digitaltauglichkeit und Interoperabilität",
+        },
+        content: dedent`
+          - Die inhaltlichen Schnittmengen zwischen dem Erarbeitungsprozess für digitaltaugliche Regelungen und dem Interoperabilitäts-Assessment sind identifiziert und analysiert. Der daraus entstandene Prozess wird in den Digitalcheck-Kontaktpunkten umgesetzt. Darauf aufbauend passen wir die Erarbeitungsmethoden an. Ziel ist es, den gesamten Entwicklungsprozess effizienter und zielgerichteter zu gestalten.
         `,
         image: {
           url: "/images/synthese-prozess-digitalcheck-und-interoperabilitaet.png",
           alternativeText:
             "Die Abbildung zeigt ein strukturiertes Vorgehensmodell für den Digitalcheck und die Interoperabilitätsbewertung. Das Vorgehen des Digitalchecks und der Interoperabilitätsbewertung wird in einem neuen Prozess zusammengefasst. Er umfasst drei Hauptbereiche: Zunächst werden Akteure identifiziert, bestehende Prozesse visualisiert und neue Prozesse entwickelt. Danach werden rechtliche Rahmenbedingungen untersucht, digitale Chancen analysiert und Anforderungen definiert. Schließlich erfolgt die Umsetzung, die Nutzung bestehender oder die Entwicklung neuer Lösungen, bevor alles dokumentiert wird. Durch die visuelle Darstellung wird der neue, gebündelte Ansatz im Prozess verdeutlicht.",
-        },
       },
+        },
     ],
   },
   states: {
