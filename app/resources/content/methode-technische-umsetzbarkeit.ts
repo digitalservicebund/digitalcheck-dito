@@ -1,10 +1,8 @@
-import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
 import DrawOutlined from "@digitalservicebund/icons/DrawOutlined";
 import LightbulbOutlined from "@digitalservicebund/icons/LightbulbOutlined";
 import StickyNote2Outlined from "@digitalservicebund/icons/StickyNote2Outlined";
 import SupportOutlined from "@digitalservicebund/icons/SupportOutlined";
 import {
-  ROUTE_METHODS,
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
   ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
@@ -95,20 +93,6 @@ export const methodsTechnicalFeasibility = {
         text: "Unterstützungsangebote nutzen",
         look: "tertiary" as const,
         href: ROUTE_SUPPORT.url,
-      },
-    ],
-  },
-  nextStep: {
-    label: "So geht es weiter:",
-    icon: ArrowCircleRightOutlined,
-    title:
-      "Verfassen Sie den Regelungsentwurf und dokumentieren Sie Ihre Entscheidungen",
-    text: `Die gesammelten Erkenntnisse und Ergebnisse helfen Ihnen dabei, Aspekte der Digitaltauglichkeit in Ihrem Regelungsentwurf zu berücksichtigen. Diese Entscheidungen dokumentieren Sie in einem Fragebogen.`,
-    buttons: [
-      {
-        text: "Zu „Erarbeiten“",
-        look: "tertiary" as const,
-        href: ROUTE_METHODS.url,
       },
     ],
   },

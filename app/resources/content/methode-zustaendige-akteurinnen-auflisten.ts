@@ -1,12 +1,10 @@
-import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
 import DrawOutlined from "@digitalservicebund/icons/DrawOutlined";
 import LightbulbOutlined from "@digitalservicebund/icons/LightbulbOutlined";
 import StickyNote2Outlined from "@digitalservicebund/icons/StickyNote2Outlined";
-import { ROUTE_METHODS_TASKS_PROCESSES } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsResponsibleActors = {
-  title: "2.1. Zuständige Akteurinnen und Akteure auflisten",
+  title: "Zuständige Akteurinnen und Akteure auflisten",
   subtitle: `Wenn Sie ein Regelungsvorhaben erarbeiten, ist es entscheidend, die **Zuständigkeiten der umsetzenden Akteurinnen und Akteure** zu kennen: Sie sind die Expertinnen und Experten für die digitale, praktische Umsetzung in der Praxis und damit wertvolle Gesprächspartnerinnen und -partner.`,
   guidance: `**Zeit:** ca. vier Stunden`,
   accordion: {
@@ -56,18 +54,5 @@ export const methodsResponsibleActors = {
       - **Persönliche Gespräche statt Schriftverkehr:** Bitten Sie um persönliche Gespräche bei der Kontaktaufnahme. Schriftlicher Austausch lädt zu Missverständnissen ein.  
       - **Der Austausch über den Ist-Stand ist sicher:** Nur Mut bei der Ansprache, über die aktuelle Umsetzung dürfen Sie immer sprechen.
     `,
-  },
-  nextStep: {
-    label: "So geht es weiter:",
-    icon: ArrowCircleRightOutlined,
-    title: "2.2. Aufgaben und Abläufe gemeinsam erfassen",
-    text: `Damit Ihre Regelung wirkungsvoll in die Praxis kommt, müssen Sie die **aktuellen Rahmenbedingungen** verstehen. Holen Sie sich dazu Unterstützung von den Akteurinnen und Akteuren, die Sie identifiziert haben. Sie müssen noch nicht auf geplante Neuerungen eingehen. Konzentrieren Sie sich auf den **Status Quo**.`,
-    buttons: [
-      {
-        text: "Aufgaben und Abläufe klären",
-        look: "tertiary" as const,
-        href: ROUTE_METHODS_TASKS_PROCESSES.url,
-      },
-    ],
   },
 };
