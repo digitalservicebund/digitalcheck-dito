@@ -128,8 +128,8 @@ export const spoc = {
           url: "/images/interoperabilitaet-it-planungsrat.png",
           alternativeText:
             "Die Abbildung zeigt ein strukturiertes Vorgehensmodell für die Interoperabilitätsbewertung. Alle Steckbriefe werden von der FITKO überprüft, die letztendliche Entscheidung trifft der IT-Planungsrat. Die Dokumentation bei Interoperabilitätsbezug muss bei der EU-Kommission eingereicht werden. Die Nationale Kontaktstelle steht während des gesamten Prozesses unterstützend zur Verfügung.",
-      },
         },
+      },
       {
         headline: {
           text: "03.07.2025: Über 100 Teilnehmende in acht online Workshops",
@@ -149,8 +149,8 @@ export const spoc = {
           url: "/images/synthese-prozess-digitalcheck-und-interoperabilitaet.png",
           alternativeText:
             "Die Abbildung zeigt ein strukturiertes Vorgehensmodell für den Digitalcheck und die Interoperabilitätsbewertung. Das Vorgehen des Digitalchecks und der Interoperabilitätsbewertung wird in einem neuen Prozess zusammengefasst. Er umfasst drei Hauptbereiche: Zunächst werden Akteure identifiziert, bestehende Prozesse visualisiert und neue Prozesse entwickelt. Danach werden rechtliche Rahmenbedingungen untersucht, digitale Chancen analysiert und Anforderungen definiert. Schließlich erfolgt die Umsetzung, die Nutzung bestehender oder die Entwicklung neuer Lösungen, bevor alles dokumentiert wird. Durch die visuelle Darstellung wird der neue, gebündelte Ansatz im Prozess verdeutlicht.",
-      },
         },
+      },
     ],
   },
   states: {
