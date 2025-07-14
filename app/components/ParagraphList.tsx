@@ -142,7 +142,6 @@ const Absatz = ({ absatz }: { absatz: AbsatzWithNumber }) => {
   // and also serves as a basis for the link between the highlight and the specific explanation
   const baseID = `erklaerung-${absatz.id}`;
   const content = nestListInListItems(prependNumberToAbsatz(absatz));
-  let highlightIndex = 0;
 
   return (
     <div className="[&_ol]:list-decimal [&_ol_ol]:list-[lower-alpha]">
@@ -150,11 +149,7 @@ const Absatz = ({ absatz }: { absatz: AbsatzWithNumber }) => {
         content={content}
         modifiers={{
           underline: (node: Node) => (
-            <PrincipleHighlight
-              node={node}
-              baseID={baseID}
-              index={highlightIndex++}
-            />
+            <PrincipleHighlight node={node} baseID={baseID} />
           ),
         }}
       />
@@ -185,11 +180,9 @@ const explanationID = (baseLabelID: string, number: number) =>
 const PrincipleHighlight = ({
   node,
   baseID,
-  index,
 }: {
   node: Node;
   baseID?: string;
-  index?: number;
 }) => {
   const principlesToShow = useContext(PrinciplesContext);
   const { setActiveHighlight } = useContext(HighlightContext);
@@ -203,15 +196,19 @@ const PrincipleHighlight = ({
     ({ Nummer }) => Nummer === number,
   )?.Name;
 
-  const highlightID = `markierung-${baseID}-${number}-${index}`;
+  // Generate a deterministic ID based on the text content and position
+  const textHash = text.split("").reduce((hash, char) => {
+    return hash + char.charCodeAt(0);
+  }, 0);
+  const highlightID = `markierung-${textHash}`;
 
   return (
     <Link
       replace
       to={`#${explanationID(baseID, number)}`}
-      onClick={() =>
-        setActiveHighlight({ id: highlightID, principleNumber: number })
-      }
+      onClick={() => {
+        setActiveHighlight({ id: highlightID, principleNumber: number });
+      }}
       aria-label={`Erfüllt Prinzip ${principleName}: ${text}`}
       title={`Erfüllt Prinzip ${principleName}`}
       className="cursor-help no-underline hover:underline"
