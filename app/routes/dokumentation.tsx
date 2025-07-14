@@ -35,7 +35,7 @@ export default function Index() {
         />
       </Container>
       <Container>
-        <InfoBoxList heading={{ text: documentation.summary.title }}>
+        <InfoBoxList heading={{ text: documentation.summary.title }} separator>
           {documentation.summary.items.map((item) => (
             <InfoBox key={item.heading.text} {...item} />
           ))}

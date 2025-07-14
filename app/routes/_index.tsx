@@ -81,13 +81,11 @@ export default function Index() {
       title: index.summary.tabName,
       plausibleEventName: index.summary.plausibleEventName,
       content: (
-        <>
-          <InfoBoxList heading={{ text: index.summary.title }} separator>
-            {index.summary.items.map((item) => (
-              <InfoBox key={item.heading.text} {...item} />
-            ))}
-          </InfoBoxList>
-        </>
+        <InfoBoxList heading={{ text: index.summary.title }} separator>
+          {index.summary.items.map((item) => (
+            <InfoBox key={item.heading.text} {...item} />
+          ))}
+        </InfoBoxList>
       ),
     },
   ];

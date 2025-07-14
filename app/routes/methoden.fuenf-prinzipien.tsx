@@ -4,6 +4,7 @@ import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
+import InfoBoxList from "~/components/InfoBoxList";
 import LinkListBox from "~/components/LinkListBox";
 import Separator from "~/components/Separator";
 import {
@@ -53,7 +54,7 @@ export default function FivePrinciples() {
           </Heading>
         </div>
 
-        <ul className="list-unstyled ds-stack ds-stack-40">
+        <InfoBoxList className="list-unstyled ds-stack ds-stack-40">
           {methodsFivePrinciples.instruction.items.map((item) => (
             <InfoBox
               key={item.heading}
@@ -66,7 +67,7 @@ export default function FivePrinciples() {
               }
             ></InfoBox>
           ))}
-        </ul>
+        </InfoBoxList>
 
         <Separator />
       </Container>

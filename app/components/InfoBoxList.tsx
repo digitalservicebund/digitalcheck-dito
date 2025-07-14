@@ -6,12 +6,14 @@ type InfoBoxListProps = {
   children: ReactNode;
   heading?: HeadingProps;
   separator?: boolean;
+  className?: string;
 };
 
 function InfoBoxList({
   children,
   separator,
   heading,
+  className,
 }: Readonly<InfoBoxListProps>) {
   return (
     <section className="ds-stack ds-stack-8">
@@ -20,6 +22,7 @@ function InfoBoxList({
         className={twMerge(
           "list-unstyled info-box ds-stack mt-32",
           separator ? "ds-stack-32" : "ds-stack-48",
+          className,
         )}
       >
         {Children.map(children, (child) => (
