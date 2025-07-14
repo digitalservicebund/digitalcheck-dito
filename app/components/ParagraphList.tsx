@@ -9,7 +9,6 @@ import { examples } from "~/resources/content/beispiele";
 import {
   AbsatzWithNumber,
   groupAbsaetzeWithoutRelevantPrinciples,
-  nestListInListItems,
   type Node,
   prependNumberToAbsatz,
 } from "~/utils/paragraphUtils";
@@ -141,7 +140,7 @@ const Absatz = ({ absatz }: { absatz: AbsatzWithNumber }) => {
   // This ID is used to label the reference in the highlight with the general explanation header
   // and also serves as a basis for the link between the highlight and the specific explanation
   const baseID = `erklaerung-${absatz.id}`;
-  const content = nestListInListItems(prependNumberToAbsatz(absatz));
+  const content = prependNumberToAbsatz(absatz);
 
   return (
     <baseIDContext.Provider value={baseID}>

@@ -1,4 +1,4 @@
-import type { Node } from "~/utils/paragraphUtils";
+import { nestListInListItems, type Node } from "~/utils/paragraphUtils";
 
 const getElement = (node: Node): keyof JSX.IntrinsicElements => {
   switch (node.type) {
@@ -6,14 +6,14 @@ const getElement = (node: Node): keyof JSX.IntrinsicElements => {
       return "p";
     case "list":
       return node.format === "ordered" ? "ol" : "ul";
-    case "listItem":
+    case "list-item":
       return "li";
     default:
       return "div";
   }
 };
 
-export function BlocksContentRenderer({
+export function RecursiveRenderer({
   content,
   modifiers,
 }: {
@@ -39,4 +39,20 @@ export function BlocksContentRenderer({
     }
     return node.text;
   });
+}
+
+export function BlocksContentRenderer({
+  content,
+  modifiers,
+}: Readonly<{
+  content: Node[];
+  modifiers?: Partial<Record<keyof Node, React.ComponentType<{ node: Node }>>>;
+}>) {
+  const contentWithCorectlyNestedLists = nestListInListItems(content);
+  return (
+    <RecursiveRenderer
+      content={contentWithCorectlyNestedLists}
+      modifiers={modifiers}
+    />
+  );
 }
