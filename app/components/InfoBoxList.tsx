@@ -1,9 +1,10 @@
 import { Children, ReactNode } from "react";
 import twMerge from "~/utils/tailwindMerge";
+import Heading, { HeadingProps } from "./Heading";
 
 type InfoBoxListProps = {
   children: ReactNode;
-  heading?: ReactNode;
+  heading?: HeadingProps;
   separator?: boolean;
 };
 
@@ -14,7 +15,7 @@ function InfoBoxList({
 }: Readonly<InfoBoxListProps>) {
   return (
     <section className="ds-stack ds-stack-8">
-      {heading}
+      {heading && <Heading tagName="h2" {...heading} />}
       <ul
         className={twMerge(
           "list-unstyled info-box ds-stack mt-32",

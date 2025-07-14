@@ -82,10 +82,7 @@ export default function Index() {
       plausibleEventName: index.summary.plausibleEventName,
       content: (
         <>
-          <InfoBoxList
-            heading={<Heading tagName="h2">{index.summary.title}</Heading>}
-            separator
-          >
+          <InfoBoxList heading={{ text: index.summary.title }} separator>
             {index.summary.items.map((item) => (
               <InfoBox key={item.heading.text} {...item} />
             ))}

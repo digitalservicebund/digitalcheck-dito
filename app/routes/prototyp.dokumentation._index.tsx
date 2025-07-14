@@ -237,9 +237,7 @@ export default function Index() {
           content={intro.multipleNotice.content}
           className="mb-40"
         />
-        <InfoBoxList
-          heading={<Heading tagName="h2">{intro.summary.title}</Heading>}
-        >
+        <InfoBoxList heading={{ text: intro.summary.title }}>
           {intro.summary.items.map((item) => (
             <InfoBox key={item.heading.text} {...item} />
           ))}

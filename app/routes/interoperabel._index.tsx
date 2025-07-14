@@ -66,11 +66,7 @@ export default function Interoperability() {
       content: (
         <>
           <Container className="px-0 pt-0">
-            <InfoBoxList
-              heading={
-                <Heading tagName="h2">interoperability.info.heading</Heading>
-              }
-            >
+            <InfoBoxList heading={{ text: interoperability.info.heading }}>
               {interoperability.info.items.map((item) => (
                 <InfoBox key={item.heading.text} {...item} />
               ))}

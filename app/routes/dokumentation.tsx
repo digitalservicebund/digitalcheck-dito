@@ -1,6 +1,5 @@
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
-import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
@@ -36,9 +35,7 @@ export default function Index() {
         />
       </Container>
       <Container>
-        <InfoBoxList
-          heading={<Heading tagName="h2">documentation.summary.title</Heading>}
-        >
+        <InfoBoxList heading={{ text: documentation.summary.title }}>
           {documentation.summary.items.map((item) => (
             <InfoBox key={item.heading.text} {...item} />
           ))}

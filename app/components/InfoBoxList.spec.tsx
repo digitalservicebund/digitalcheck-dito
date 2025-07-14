@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import Heading from "./Heading";
 import InfoBox from "./InfoBox";
 import InfoBoxList from "./InfoBoxList";
 
@@ -60,7 +59,7 @@ describe("InfoBoxList", () => {
   describe("Top level elements", () => {
     it("shows the heading", () => {
       render(
-        <InfoBoxList heading={<Heading tagName="h2">TestHeading</Heading>}>
+        <InfoBoxList heading={{ text: "TestHeading" }}>
           {mockInfoBoxItems.map((item, i) => (
             <InfoBox key={i} {...item} />
           ))}

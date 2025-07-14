@@ -1,5 +1,4 @@
 import Container from "~/components/Container";
-import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList.tsx";
@@ -24,11 +23,7 @@ export default function FundamentalsMethods() {
       />
 
       <Container>
-        <InfoBoxList
-          heading={
-            <Heading tagName="h2">{fundamentalsMethods.roadmap.title}</Heading>
-          }
-        >
+        <InfoBoxList heading={{ text: fundamentalsMethods.roadmap.title }}>
           {fundamentalsMethods.roadmap.items.map((item) => (
             <InfoBox key={item.heading.text} {...item} />
           ))}

@@ -31,11 +31,7 @@ export default function Index() {
     {
       title: preCheck.start.summary.tabName,
       content: (
-        <InfoBoxList
-          heading={
-            <Heading tagName="h2">{preCheck.start.summary.title}</Heading>
-          }
-        >
+        <InfoBoxList heading={{ text: preCheck.start.summary.title }}>
           {preCheck.start.summary.items.map((item) => (
             <InfoBox key={item.heading.text} {...item} />
           ))}
