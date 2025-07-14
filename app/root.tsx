@@ -44,9 +44,7 @@ export function loader({ request }: Route.LoaderArgs) {
 
   return {
     BASE_URL,
-    trackingDisabled:
-      process.env.TRACKING_DISABLED === "true" ||
-      process.env.NODE_ENV === "development",
+    trackingDisabled: process.env.TRACKING_DISABLED === "true",
     featureFlags,
   };
 }
