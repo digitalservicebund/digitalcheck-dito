@@ -1,6 +1,5 @@
 import { BlocksContent, BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { ReactNode } from "react";
-import { twJoin } from "tailwind-merge";
 import twMerge from "~/utils/tailwindMerge";
 import Badge, { BadgeProps } from "./Badge";
 import { ButtonProps } from "./Button";
@@ -41,7 +40,7 @@ export type InfoBoxProps = {
   };
   linkList?: LinkListProps;
   buttons?: ButtonProps[];
-  icon?: InfoBoxIconProps;
+  Icon?: React.FC<React.SVGProps<SVGSVGElement>>;
   className?: string;
 };
 
@@ -54,22 +53,18 @@ const InfoBox = ({
   detailsSummary,
   linkList,
   buttons,
-  icon,
+  Icon,
 }: InfoBoxProps) => {
-  const isBigImage = icon?.size === "MEDIUM" || icon?.size === "LARGE";
-
   return (
     <div
       id={identifier}
       data-testid="info-box-container"
-      className={twJoin(
+      className={twMerge(
         "flex scroll-my-40 flex-col gap-32 sm:flex-row",
-        icon && "flex flex-col gap-32 sm:flex-row",
-        icon && isBigImage && "flex-col-reverse",
         className,
       )}
     >
-      {icon && <InfoBoxIcon {...icon} />}
+      {Icon && <Icon className="hidden size-80 fill-blue-500 sm:block" />}
 
       <div
         data-testid="info-box-content"
