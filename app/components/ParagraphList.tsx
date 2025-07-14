@@ -28,10 +28,10 @@ type Highlight = {
 const PrinciplesContext = createContext<Prinzip[]>([]);
 const HighlightContext = createContext<{
   activeHighlight: Highlight | null;
-  setHighlight: React.Dispatch<React.SetStateAction<Highlight | null>>;
+  setActiveHighlight: React.Dispatch<React.SetStateAction<Highlight | null>>;
 }>({
   activeHighlight: null,
-  setHighlight: () => {},
+  setActiveHighlight: () => {},
 });
 
 export default function ParagraphList({
@@ -42,11 +42,18 @@ export default function ParagraphList({
   principlesToShow: Prinzip[];
 }>) {
   // This ID is used to track which highlight was clicked on to provide a back link
-  const [activeHighlight, setHighlight] = useState<Highlight | null>(null);
+  const [activeHighlight, setActiveHighlight] = useState<Highlight | null>(
+    null,
+  );
+
+  const highlightContextValue = useMemo(
+    () => ({ activeHighlight, setActiveHighlight }),
+    [activeHighlight, setActiveHighlight],
+  );
 
   return (
     <PrinciplesContext.Provider value={principlesToShow}>
-      <HighlightContext.Provider value={{ activeHighlight, setHighlight }}>
+      <HighlightContext.Provider value={highlightContextValue}>
         <div className="ds-stack ds-stack-32">
           {paragraphs
             .toSorted((a, b) =>
@@ -185,7 +192,7 @@ const PrincipleHighlight = ({
   index?: number;
 }) => {
   const principlesToShow = useContext(PrinciplesContext);
-  const { setHighlight } = useContext(HighlightContext);
+  const { setActiveHighlight } = useContext(HighlightContext);
 
   const [text, numberGroup] = node.text ? node.text.split(/(\[\d])/g) : [];
   if (!numberGroup || !baseID) return text;
@@ -202,7 +209,9 @@ const PrincipleHighlight = ({
     <Link
       replace
       to={`#${explanationID(baseID, number)}`}
-      onClick={() => setHighlight({ id: highlightID, principleNumber: number })}
+      onClick={() =>
+        setActiveHighlight({ id: highlightID, principleNumber: number })
+      }
       aria-label={`Erfüllt Prinzip ${principleName}: ${text}`}
       title={`Erfüllt Prinzip ${principleName}`}
       className="cursor-help no-underline hover:underline"
@@ -228,7 +237,7 @@ const PrincipleExplanation = ({
   baseID: string;
 }) => {
   const location = useLocation();
-  const { activeHighlight, setHighlight } = useContext(HighlightContext);
+  const { activeHighlight, setActiveHighlight } = useContext(HighlightContext);
 
   if (!erfuellung.Prinzip) return null;
 
@@ -258,7 +267,7 @@ const PrincipleExplanation = ({
             to={`#${activeHighlight.id}`}
             className="ds-link-01-bold"
             aria-label="Zurück zum Text"
-            onClick={() => setHighlight(null)}
+            onClick={() => setActiveHighlight(null)}
           >
             <ArrowUpwardOutlined className="fill-blue-800" />
           </Link>
