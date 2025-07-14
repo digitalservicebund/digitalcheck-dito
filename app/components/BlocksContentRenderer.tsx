@@ -18,12 +18,12 @@ export function BlocksContentRenderer({
   modifiers,
 }: {
   content: Node[];
-  modifiers?: Partial<Record<keyof Node, (node: Node) => React.ReactNode>>;
+  modifiers?: Partial<Record<keyof Node, React.ComponentType<{ node: Node }>>>;
 }) {
   return content.map((node: Node, index) => {
-    for (const [condition, element] of Object.entries(modifiers || {})) {
+    for (const [condition, ModifiedNode] of Object.entries(modifiers || {})) {
       if (condition in node && node[condition as keyof Node]) {
-        return element(node);
+        return <ModifiedNode key={index} node={node} />;
       }
     }
     if (node.children) {

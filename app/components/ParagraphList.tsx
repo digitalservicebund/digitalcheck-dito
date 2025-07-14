@@ -120,9 +120,7 @@ const MemoedParagraph = memo(function Paragraph({
                         key={absatz.id}
                         content={prependNumberToAbsatz(absatz)}
                         modifiers={{
-                          underline: (node: Node) => (
-                            <PrincipleHighlight node={node} />
-                          ),
+                          underline: PrincipleHighlight,
                         }}
                       />
                     ))}
@@ -137,6 +135,8 @@ const MemoedParagraph = memo(function Paragraph({
   );
 });
 
+const baseIDContext = createContext<string | null>(null);
+
 const Absatz = ({ absatz }: { absatz: AbsatzWithNumber }) => {
   // This ID is used to label the reference in the highlight with the general explanation header
   // and also serves as a basis for the link between the highlight and the specific explanation
@@ -144,48 +144,42 @@ const Absatz = ({ absatz }: { absatz: AbsatzWithNumber }) => {
   const content = nestListInListItems(prependNumberToAbsatz(absatz));
 
   return (
-    <div className="[&_ol]:list-decimal [&_ol_ol]:list-[lower-alpha]">
-      <BlocksContentRenderer
-        content={content}
-        modifiers={{
-          underline: (node: Node) => (
-            <PrincipleHighlight node={node} baseID={baseID} />
-          ),
-        }}
-      />
-      <div className="ds-stack ds-stack-8 mt-8">
-        <span className="ds-subhead font-bold">
-          {examples.paragraphs.explanation}
-        </span>
-        {absatz.PrinzipErfuellungen.toSorted(
-          (a, b) => (a.Prinzip?.Nummer ?? 0) - (b.Prinzip?.Nummer ?? 0),
-        ).map(
-          (erfuellung) =>
-            erfuellung.Prinzip && (
-              <PrincipleExplanation
-                key={erfuellung.id}
-                baseID={baseID}
-                erfuellung={erfuellung}
-              />
-            ),
-        )}
+    <baseIDContext.Provider value={baseID}>
+      <div className="[&_ol]:list-decimal [&_ol_ol]:list-[lower-alpha]">
+        <BlocksContentRenderer
+          content={content}
+          modifiers={{
+            underline: PrincipleHighlight,
+          }}
+        />
+        <div className="ds-stack ds-stack-8 mt-8">
+          <span className="ds-subhead font-bold">
+            {examples.paragraphs.explanation}
+          </span>
+          {absatz.PrinzipErfuellungen.toSorted(
+            (a, b) => (a.Prinzip?.Nummer ?? 0) - (b.Prinzip?.Nummer ?? 0),
+          ).map(
+            (erfuellung) =>
+              erfuellung.Prinzip && (
+                <PrincipleExplanation
+                  key={erfuellung.id}
+                  erfuellung={erfuellung}
+                />
+              ),
+          )}
+        </div>
       </div>
-    </div>
+    </baseIDContext.Provider>
   );
 };
 
 const explanationID = (baseLabelID: string, number: number) =>
   `${baseLabelID}-${number}`;
 
-const PrincipleHighlight = ({
-  node,
-  baseID,
-}: {
-  node: Node;
-  baseID?: string;
-}) => {
+const PrincipleHighlight = ({ node }: { node: Node }) => {
   const principlesToShow = useContext(PrinciplesContext);
   const { setActiveHighlight } = useContext(HighlightContext);
+  const baseID = useContext(baseIDContext);
 
   const [text, numberGroup] = node.text ? node.text.split(/(\[\d])/g) : [];
   if (!numberGroup || !baseID) return text;
@@ -228,15 +222,14 @@ const PrincipleHighlight = ({
 
 const PrincipleExplanation = ({
   erfuellung,
-  baseID,
 }: {
   erfuellung: PrinzipErfuellung;
-  baseID: string;
 }) => {
   const location = useLocation();
   const { activeHighlight, setActiveHighlight } = useContext(HighlightContext);
+  const baseID = useContext(baseIDContext);
 
-  if (!erfuellung.Prinzip) return null;
+  if (!baseID || !erfuellung.Prinzip) return null;
 
   const id = explanationID(baseID, erfuellung.Prinzip.Nummer);
 
