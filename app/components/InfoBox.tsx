@@ -16,19 +16,6 @@ export type InfoBoxIconProps = {
   icon: ReactNode;
 };
 
-function InfoBoxIcon({ icon, size, className }: InfoBoxIconProps) {
-  return (
-    <div
-      className={twMerge(
-        `hidden sm:block [&>svg]:size-80 [&>svg]:fill-blue-500 *:${size}`,
-        className,
-      )}
-    >
-      {icon}
-    </div>
-  );
-}
-
 export type InfoBoxProps = {
   identifier?: string;
   badge?: BadgeProps;
