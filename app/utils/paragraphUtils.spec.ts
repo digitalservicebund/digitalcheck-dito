@@ -3,7 +3,7 @@ import {
   AbsatzWithNumber,
   nestListInListItems,
   prependNumberToAbsatz,
-} from "~/utils/blocksContentUtils";
+} from "~/utils/paragraphUtils";
 
 describe("prependNumberToAbsatz", () => {
   it("should prepend number to first text node in absatz", () => {

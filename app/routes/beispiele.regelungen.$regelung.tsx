@@ -1,7 +1,7 @@
-import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { useLoaderData, useOutletContext, type UIMatch } from "react-router";
 
 import Background from "~/components/Background";
+import { BlocksContentRenderer } from "~/components/BlocksContentRenderer";
 import Container from "~/components/Container";
 import CustomLink from "~/components/CustomLink";
 import Header from "~/components/Header";
@@ -215,7 +215,7 @@ export default function Gesetz() {
                   }}
                 />
                 <div className="my-32 border-l-4 border-gray-400 pl-8">
-                  <BlocksRenderer
+                  <BlocksContentRenderer
                     content={digitalcheck.NKRStellungnahmeDCText}
                   />
                 </div>
