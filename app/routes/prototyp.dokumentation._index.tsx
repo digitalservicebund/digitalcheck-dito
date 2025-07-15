@@ -237,11 +237,10 @@ export default function Index() {
           content={intro.multipleNotice.content}
           className="mb-40"
         />
-        <InfoBoxList heading={{ text: intro.summary.title }}>
-          {intro.summary.items.map((item) => (
-            <InfoBox key={item.heading.text} {...item} />
-          ))}
-        </InfoBoxList>
+        <InfoBoxList
+          heading={{ text: intro.summary.title }}
+          items={intro.summary.items}
+        />
       </Container>
       <SupportBanner {...supportBanner} />
     </>

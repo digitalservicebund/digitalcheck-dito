@@ -54,20 +54,10 @@ export default function FivePrinciples() {
           </Heading>
         </div>
 
-        <InfoBoxList className="list-unstyled ds-stack ds-stack-40">
-          {methodsFivePrinciples.instruction.items.map((item) => (
-            <InfoBox
-              key={item.heading}
-              heading={{ text: item.heading }}
-              content={item.content}
-              linkList={
-                item.link && {
-                  links: [{ title: item.link.text, url: item.link.url }],
-                }
-              }
-            ></InfoBox>
-          ))}
-        </InfoBoxList>
+        <InfoBoxList
+          className="list-unstyled ds-stack ds-stack-40"
+          items={methodsFivePrinciples.instruction.items}
+        />
 
         <Separator />
       </Container>

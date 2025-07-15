@@ -7,7 +7,6 @@ import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image";
-import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
 import SupportBanner from "~/components/SupportBanner";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
@@ -31,11 +30,10 @@ export default function Index() {
     {
       title: preCheck.start.summary.tabName,
       content: (
-        <InfoBoxList heading={{ text: preCheck.start.summary.title }}>
-          {preCheck.start.summary.items.map((item) => (
-            <InfoBox key={item.heading.text} {...item} />
-          ))}
-        </InfoBoxList>
+        <InfoBoxList
+          heading={{ text: preCheck.start.summary.title }}
+          items={preCheck.start.summary.items}
+        />
       ),
     },
     {

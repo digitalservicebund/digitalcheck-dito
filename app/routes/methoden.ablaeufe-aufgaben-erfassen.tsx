@@ -81,23 +81,24 @@ export default function Visualization() {
       plausibleEventName: methodsTasksProcesses.anleitung.plausibleEventName,
       content: (
         <div className="ds-stack ds-stack-40">
-          <InfoBoxList>
-            <InfoBox
-              heading={{
-                text: methodsTasksProcesses.anleitung.ablaufe.heading,
-                tagName: "h2",
-              }}
-              content={methodsTasksProcesses.anleitung.ablaufe.content}
-            />
-
-            <InfoBox
-              heading={{
-                text: methodsTasksProcesses.anleitung.visualisierung.heading,
-                tagName: "h3",
-              }}
-              content={methodsTasksProcesses.anleitung.visualisierung.content}
-            />
-          </InfoBoxList>
+          <InfoBoxList
+            items={[
+              {
+                heading: {
+                  text: methodsTasksProcesses.anleitung.ablaufe.heading,
+                  tagName: "h2",
+                },
+                content: methodsTasksProcesses.anleitung.ablaufe.content,
+              },
+              {
+                heading: {
+                  text: methodsTasksProcesses.anleitung.visualisierung.heading,
+                  tagName: "h3",
+                },
+                content: methodsTasksProcesses.anleitung.visualisierung.content,
+              },
+            ]}
+          />
 
           <HighlightBox
             badge={methodsTasksProcesses.anleitung.tipp.badge}

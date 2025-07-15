@@ -1,18 +1,18 @@
-import { Children, ReactNode } from "react";
 import twMerge from "~/utils/tailwindMerge";
 import Heading, { HeadingProps } from "./Heading";
+import InfoBox, { InfoBoxProps } from "./InfoBox";
 
 type InfoBoxListProps = {
-  children: ReactNode;
   heading?: HeadingProps;
+  items: InfoBoxProps[];
   separator?: boolean;
   className?: string;
 };
 
 function InfoBoxList({
-  children,
   separator,
   heading,
+  items,
   className,
 }: Readonly<InfoBoxListProps>) {
   return (
@@ -25,15 +25,16 @@ function InfoBoxList({
           className,
         )}
       >
-        {Children.map(children, (child) => (
+        {items.map((item, i) => (
           <li
+            key={i}
             className={
               separator
                 ? "border-0 border-b-2 border-solid border-gray-400 pb-40 last:border-none last:pb-0"
                 : ""
             }
           >
-            {child}
+            <InfoBox {...item} />
           </li>
         ))}
       </ul>

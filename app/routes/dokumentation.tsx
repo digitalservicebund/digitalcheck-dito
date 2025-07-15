@@ -1,7 +1,6 @@
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
-import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
 import InlineNotice from "~/components/InlineNotice";
 import { NumberedList } from "~/components/List";
@@ -35,11 +34,11 @@ export default function Index() {
         />
       </Container>
       <Container>
-        <InfoBoxList heading={{ text: documentation.summary.title }} separator>
-          {documentation.summary.items.map((item) => (
-            <InfoBox key={item.heading.text} {...item} />
-          ))}
-        </InfoBoxList>
+        <InfoBoxList
+          heading={{ text: documentation.summary.title }}
+          items={documentation.summary.items}
+          separator
+        />
       </Container>
       <Container>
         <NumberedList
