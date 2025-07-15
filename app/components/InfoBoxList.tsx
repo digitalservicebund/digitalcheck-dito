@@ -1,3 +1,4 @@
+import { twJoin } from "tailwind-merge";
 import twMerge from "~/utils/tailwindMerge";
 import Heading, { HeadingProps } from "./Heading";
 import InfoBox, { InfoBoxProps } from "./InfoBox";
@@ -9,7 +10,7 @@ type InfoBoxListProps = {
   className?: string;
 };
 
-function InfoBoxList({
+export default function InfoBoxList({
   separator,
   heading,
   items,
@@ -28,11 +29,10 @@ function InfoBoxList({
         {items.map((item, i) => (
           <li
             key={i}
-            className={
-              separator
-                ? "border-0 border-b-2 border-solid border-gray-400 pb-40 last:border-none last:pb-0"
-                : ""
-            }
+            className={twJoin(
+              separator &&
+                "border-0 border-b-2 border-solid border-gray-400 pb-40 last:border-none last:pb-0",
+            )}
           >
             <InfoBox {...item} />
           </li>
@@ -41,5 +41,3 @@ function InfoBoxList({
     </section>
   );
 }
-
-export default InfoBoxList;
