@@ -17,7 +17,7 @@ import type {
   Prinzip,
   PrinzipErfuellung,
 } from "~/utils/strapiData.server";
-import { BlocksContentRenderer } from "./BlocksContentRenderer";
+import { BlocksRenderer } from "./BlocksRenderer";
 
 type Highlight = {
   id: string;
@@ -115,7 +115,7 @@ const MemoedParagraph = memo(function Paragraph({
                 content={
                   <div className="ds-stack ds-stack-8">
                     {absatzGroup.map((absatz) => (
-                      <BlocksContentRenderer
+                      <BlocksRenderer
                         key={absatz.id}
                         content={prependNumberToAbsatz(absatz)}
                         modifiers={{
@@ -145,7 +145,7 @@ const Absatz = ({ absatz }: { absatz: AbsatzWithNumber }) => {
   return (
     <baseIDContext.Provider value={baseID}>
       <div className="[&_ol]:list-decimal [&_ol_ol]:list-[lower-alpha]">
-        <BlocksContentRenderer
+        <BlocksRenderer
           content={content}
           modifiers={{
             underline: PrincipleHighlight,
@@ -262,7 +262,7 @@ const PrincipleExplanation = ({
           </Link>
         )}
       </div>
-      <BlocksContentRenderer content={erfuellung.WarumGut} />
+      <BlocksRenderer content={erfuellung.WarumGut} />
     </div>
   );
 };

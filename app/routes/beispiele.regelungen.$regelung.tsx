@@ -1,7 +1,7 @@
 import { useLoaderData, useOutletContext, type UIMatch } from "react-router";
 
 import Background from "~/components/Background";
-import { BlocksContentRenderer } from "~/components/BlocksContentRenderer";
+import { BlocksRenderer } from "~/components/BlocksRenderer";
 import Container from "~/components/Container";
 import CustomLink from "~/components/CustomLink";
 import Header from "~/components/Header";
@@ -215,7 +215,7 @@ export default function Gesetz() {
                   }}
                 />
                 <div className="my-32 border-l-4 border-gray-400 pl-8">
-                  <BlocksContentRenderer
+                  <BlocksRenderer
                     content={digitalcheck.NKRStellungnahmeDCText}
                   />
                 </div>

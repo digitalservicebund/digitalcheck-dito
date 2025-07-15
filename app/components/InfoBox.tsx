@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import type { Node } from "~/utils/paragraphUtils";
 import twMerge from "~/utils/tailwindMerge";
 import Badge, { BadgeProps } from "./Badge";
-import { BlocksContentRenderer } from "./BlocksContentRenderer";
+import { BlocksRenderer } from "./BlocksRenderer";
 import { ButtonProps } from "./Button";
 import ButtonContainer from "./ButtonContainer";
 import DetailsSummary, { DetailsSummaryProps } from "./DetailsSummary";
@@ -64,7 +64,7 @@ const InfoBox = ({
           (typeof content === "string" ? (
             <RichText markdown={content} />
           ) : (
-            <BlocksContentRenderer content={content} />
+            <BlocksRenderer content={content} />
           ))}
 
         {detailsSummary && (

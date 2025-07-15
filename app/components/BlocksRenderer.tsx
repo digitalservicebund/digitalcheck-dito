@@ -31,10 +31,7 @@ export function RecursiveRenderer({
       const Element = getElement(node);
       return (
         <Element key={index}>
-          <BlocksContentRenderer
-            content={node.children}
-            modifiers={modifiers}
-          />
+          <BlocksRenderer content={node.children} modifiers={modifiers} />
         </Element>
       );
     }
@@ -42,7 +39,7 @@ export function RecursiveRenderer({
   });
 }
 
-export function BlocksContentRenderer({
+export function BlocksRenderer({
   content,
   modifiers,
 }: Readonly<{

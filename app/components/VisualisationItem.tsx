@@ -8,7 +8,7 @@ import { ROUTE_VISUALISATION } from "~/resources/staticRoutes";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import { Visualisierung } from "~/utils/strapiData.server";
 import { formatDate } from "~/utils/utilFunctions";
-import { BlocksContentRenderer } from "./BlocksContentRenderer";
+import { BlocksRenderer } from "./BlocksRenderer";
 
 export type VisualisationItemProps = {
   visualisierung: Visualisierung;
@@ -85,7 +85,7 @@ export default function VisualisationItem({
         <Heading tagName="h3" look="ds-heading-03-reg" className="mb-16">
           {visualisierung.Titel}
         </Heading>
-        <BlocksContentRenderer content={visualisierung.Beschreibung} />
+        <BlocksRenderer content={visualisierung.Beschreibung} />
       </div>
     </div>
   );
