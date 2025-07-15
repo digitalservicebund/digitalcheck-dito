@@ -5,6 +5,7 @@ import Container from "~/components/Container";
 import Hero from "~/components/Hero";
 import HighlightBox from "~/components/HighlightBox";
 import InfoBox from "~/components/InfoBox";
+import InfoBoxList from "~/components/InfoBoxList";
 import Tabs, { TabItem } from "~/components/Tabs";
 import VisualisationItem from "~/components/VisualisationItem";
 import { methodsTasksProcesses } from "~/resources/content/methode-ablaeufe-aufgaben-erfassen";
@@ -57,15 +58,11 @@ export default function Visualization() {
       content: (
         <div className="ds-stack ds-stack-40">
           <InfoBox
-            items={[
-              {
-                headline: {
-                  text: methodsTasksProcesses.intro.visibility.headline,
-                  tagName: "h2",
-                },
-                content: methodsTasksProcesses.intro.visibility.content,
-              },
-            ]}
+            heading={{
+              text: methodsTasksProcesses.intro.visibility.heading,
+              tagName: "h2",
+            }}
+            content={methodsTasksProcesses.intro.visibility.content}
           />
           {visualisationsData && (
             <VisualisationItem
@@ -84,19 +81,18 @@ export default function Visualization() {
       plausibleEventName: methodsTasksProcesses.anleitung.plausibleEventName,
       content: (
         <div className="ds-stack ds-stack-40">
-          <InfoBox
-            separator={false}
+          <InfoBoxList
             items={[
               {
-                headline: {
-                  text: methodsTasksProcesses.anleitung.ablaufe.headline,
+                heading: {
+                  text: methodsTasksProcesses.anleitung.ablaufe.heading,
                   tagName: "h2",
                 },
                 content: methodsTasksProcesses.anleitung.ablaufe.content,
               },
               {
-                headline: {
-                  text: methodsTasksProcesses.anleitung.visualisierung.headline,
+                heading: {
+                  text: methodsTasksProcesses.anleitung.visualisierung.heading,
                   tagName: "h3",
                 },
                 content: methodsTasksProcesses.anleitung.visualisierung.content,
@@ -105,12 +101,8 @@ export default function Visualization() {
           />
 
           <HighlightBox
-            items={[
-              {
-                badge: methodsTasksProcesses.anleitung.tipp.badge,
-                content: methodsTasksProcesses.anleitung.tipp.content,
-              },
-            ]}
+            badge={methodsTasksProcesses.anleitung.tipp.badge}
+            content={methodsTasksProcesses.anleitung.tipp.content}
           />
 
           <Card
@@ -142,41 +134,29 @@ export default function Visualization() {
 
       <Container className="ds-stack ds-stack-40">
         <HighlightBox
-          items={[
-            {
-              headline: { tagName: "h2", text: interviewBanner.title },
-              content: interviewBanner.text,
-            },
-          ]}
+          heading={{ tagName: "h2", text: interviewBanner.title }}
+          content={interviewBanner.text}
         />
         <InfoBox
-          items={[
-            {
-              badge: methodsTasksProcesses.furtherSteps.badge,
-              headline: {
-                text: methodsTasksProcesses.furtherSteps.headline,
-                tagName: "h3",
-              },
-              content: methodsTasksProcesses.furtherSteps.content,
-              buttons: methodsTasksProcesses.furtherSteps.buttons,
-            },
-          ]}
+          badge={methodsTasksProcesses.furtherSteps.badge}
+          heading={{
+            text: methodsTasksProcesses.furtherSteps.heading,
+            tagName: "h3",
+          }}
+          content={methodsTasksProcesses.furtherSteps.content}
+          buttons={methodsTasksProcesses.furtherSteps.buttons}
         />
       </Container>
 
       <Background backgroundColor="blue">
         <Container>
           <InfoBox
-            items={[
-              {
-                badge: methodsTasksProcesses.support.badge,
-                headline: {
-                  text: methodsTasksProcesses.support.headline,
-                  tagName: "h2",
-                },
-                content: methodsTasksProcesses.support.content,
-              },
-            ]}
+            badge={methodsTasksProcesses.support.badge}
+            heading={{
+              text: methodsTasksProcesses.support.heading,
+              tagName: "h2",
+            }}
+            content={methodsTasksProcesses.support.content}
           />
         </Container>
       </Background>

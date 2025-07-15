@@ -74,7 +74,7 @@ export const index = {
     title: "Zusammengefasst",
     items: [
       {
-        headline: {
+        heading: {
           text: "Was ist Digitaltauglichkeit?",
         },
         content: dedent`
@@ -88,13 +88,13 @@ export const index = {
           oder unterstützt werden.`,
       },
       {
-        headline: {
+        heading: {
           text: "Digitaltaugliche Regelungen sparen Ressourcen",
         },
         content: `Eine gute digitale Umsetzung spart langfristig Zeit und sorgt dafür, dass Ziel und Wirkung des Vorhabens erreicht werden: auf Seiten der Normadressaten und -adressatinnen und auf Seiten der Verwaltung.`,
       },
       {
-        headline: {
+        heading: {
           text: "Alle Regelungsvorhaben sind betroffen",
         },
         content: `Der Digitalcheck gilt für alle Regelungsvorhaben (Gesetze, Verordnungen und Verwaltungsvorschriften), sowohl für neue Vorhaben als auch für Änderungen an bestehenden Regelungen.`,

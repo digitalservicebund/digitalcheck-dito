@@ -111,12 +111,8 @@ export default function Index() {
 
       <Container>
         <HighlightBox
-          items={[
-            {
-              headline: { tagName: "h2", text: interviewBanner.title },
-              content: interviewBanner.text,
-            },
-          ]}
+          heading={{ tagName: "h2", text: interviewBanner.title }}
+          content={interviewBanner.text}
         />
       </Container>
 

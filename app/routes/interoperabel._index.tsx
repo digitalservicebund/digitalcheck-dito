@@ -8,7 +8,7 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image";
 import ImageZoomable from "~/components/ImageZoomable";
-import InfoBox from "~/components/InfoBox";
+import InfoBoxList from "~/components/InfoBoxList";
 import RichText from "~/components/RichText";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { interoperability } from "~/resources/content/interoperabel";
@@ -61,17 +61,15 @@ export default function Interoperability() {
       ),
     },
     {
-      title: interoperability.info.headline,
+      title: interoperability.info.heading,
       content: (
         <>
           <Container className="px-0 pt-0">
-            <InfoBox
-              heading={{
-                tagName: "h2",
-                text: interoperability.info.headline,
-              }}
+            <InfoBoxList
+              heading={{ text: interoperability.info.heading }}
               items={interoperability.info.items}
             />
+
             <ImageZoomable image={interoperability.info.image} />
           </Container>
 

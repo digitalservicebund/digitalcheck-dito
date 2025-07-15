@@ -21,6 +21,7 @@ import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
+import InfoBoxList from "~/components/InfoBoxList";
 import InlineNotice from "~/components/InlineNotice";
 import RichText from "~/components/RichText";
 import SupportBanner from "~/components/SupportBanner";
@@ -147,17 +148,12 @@ export default function Index() {
             className="flex w-full flex-col p-16 sm:p-32"
           >
             <InfoBox
-              separator={false}
-              items={[
-                {
-                  headline: {
-                    text: "Neue Dokumentation starten",
-                    tagName: "h3",
-                    className: "ds-heading-03-bold",
-                  },
-                  content: "Starten Sie mit einem leeren Formular.",
-                },
-              ]}
+              heading={{
+                text: "Neue Dokumentation starten",
+                tagName: "h3",
+                className: "ds-heading-03-bold",
+              }}
+              content="Starten Sie mit einem leeren Formular."
             />
             <div className="flex grow flex-col items-start justify-end">
               <Button href={ROUTE_PROTOTYPE_DOCUMENTATION_META.url}>
@@ -241,11 +237,8 @@ export default function Index() {
           content={intro.multipleNotice.content}
           className="mb-40"
         />
-        <InfoBox
-          heading={{
-            tagName: "h2",
-            text: intro.summary.title,
-          }}
+        <InfoBoxList
+          heading={{ text: intro.summary.title }}
           items={intro.summary.items}
         />
       </Container>

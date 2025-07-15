@@ -7,7 +7,7 @@ import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image";
-import InfoBox from "~/components/InfoBox";
+import InfoBoxList from "~/components/InfoBoxList";
 import SupportBanner from "~/components/SupportBanner";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { PRE_CHECK_START_BUTTON_ID } from "~/resources/constants";
@@ -30,13 +30,10 @@ export default function Index() {
     {
       title: preCheck.start.summary.tabName,
       content: (
-        <InfoBox
-          heading={{
-            text: preCheck.start.summary.title,
-            tagName: "h2",
-          }}
+        <InfoBoxList
+          heading={{ text: preCheck.start.summary.title }}
           items={preCheck.start.summary.items}
-        ></InfoBox>
+        />
       ),
     },
     {
