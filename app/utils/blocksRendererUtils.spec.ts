@@ -1,4 +1,4 @@
-import { nestListInListItems } from "./blockRendererUtils";
+import { nestListInListItems } from "./blocksRendererUtils";
 
 describe("nestListInListItems", () => {
   it("should nest lists within list items correctly", () => {

@@ -1,4 +1,4 @@
-import { nestListInListItems } from "~/utils/blockRendererUtils";
+import { nestListInListItems } from "~/utils/blocksRendererUtils";
 import { type Node } from "~/utils/paragraphUtils";
 
 const getElement = (node: Node): keyof JSX.IntrinsicElements => {
