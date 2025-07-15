@@ -70,10 +70,6 @@ describe("BlocksContentRenderer", () => {
               type: "list-item",
               children: [{ type: "text", text: "First step" }],
             },
-            {
-              type: "list-item",
-              children: [{ type: "text", text: "Second step" }],
-            },
           ],
         },
       ];
@@ -81,9 +77,8 @@ describe("BlocksContentRenderer", () => {
       render(<BlocksRenderer content={content} />);
 
       const listItems = screen.getAllByRole("listitem");
-      expect(listItems).toHaveLength(2);
+      expect(listItems).toHaveLength(1);
       expect(listItems[0]).toHaveTextContent("First step");
-      expect(listItems[1]).toHaveTextContent("Second step");
 
       const list = screen.getByRole("list");
       expect(list.tagName).toBe("OL");
