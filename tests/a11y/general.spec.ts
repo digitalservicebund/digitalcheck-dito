@@ -14,7 +14,7 @@ test.describe("basic example a11y test", () => {
         route.url.endsWith(r),
       ),
   ).forEach((route, i) => {
-    test(`check a11y of ${route.title} (${i})`, async ({ page }) => {
+    test(`check a11y of ${route.url} (${i})`, async ({ page }) => {
       // Listen for redirects and update URL if needed
       const response = await page.goto(route.url);
 

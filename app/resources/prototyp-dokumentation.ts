@@ -18,7 +18,7 @@ export const prototypeDocumentation = {
       },
       {
         title: "Nur ein Vorgang zur selben Zeit",
-        text: "Sie können nur an einer Dokumentation zur selben Zeit arbeiten. Parallele Vorgänge sind momentan nicht möglich. Sie können einen Zwischenstand als Json-Datei speichern und zur späteren Bearbeitung wieder hochladen. Ihre Daten werden nicht dauerhaft gespeichert.",
+        text: "Sie können nur an einer Dokumentation zur selben Zeit arbeiten. Parallele Vorgänge sind momentan nicht möglich. Sie können jedoch einen Zwischenstand als JSON-Datei speichern und zur späteren Bearbeitung wieder hochladen. Ihre Daten werden nicht dauerhaft gespeichert.",
       },
     ],
     multipleNotice: {
@@ -32,20 +32,20 @@ export const prototypeDocumentation = {
       title: "Hinweise",
       items: [
         {
-          headline: { text: "Beginnen Sie so früh wie möglich" },
+          heading: { text: "Beginnen Sie so früh wie möglich" },
           content: `Schicken Sie die begleitende Dokumentation so früh wie möglich an Ihre Ansprechperson im NKR-Sekretariat, **spätestens mit der Einleitung der Ressortabstimmung**. Fügen Sie die Dokumentation des Digitalcheck und Visualisierungen des Umsetzungsprozesses gerne auch der Ressortabstimmung bei, damit Ihre Kolleginnen und Kollegen Ihre Entscheidungen nachvollziehen können.`,
         },
         {
-          headline: { text: "Das prüft der Nationale Normenkontrollrat" },
+          heading: { text: "Das prüft der Nationale Normenkontrollrat" },
           content: `Der NKR prüft die methodische und inhaltliche Nachvollziehbarkeit. Bei Fragen wird der NKR auf Sie zukommen. Das Ziel ist eine **digital- und praxistaugliche Umsetzung** der Regelung. Sein Prüfergebnis veröffentlicht er gegebenenfalls in seinen Stellungnahmen. Wenn Sie eine Visualisierung angefertigt haben und Sie der Veröffentlichung zustimmen, kann diese an die Stellungnahme angehängt werden. Bei Fragen oder Anregungen kommt Ihre Ansprechperson im NKR-Sekretariat auf Sie zu.`,
         },
       ],
     },
   },
   startOrResume: {
-    title: "Dokumentation starten",
+    title: "Dokumentation starten oder fortsetzen",
     subtitle:
-      "Hier können Sie einen Zwischenstand als JSON-Datei hochladen oder eine neue Dokumentation starten.",
+      "Beginnen Sie eine neue Dokumentation oder arbeiten Sie an einem vorher gespeicherten Zwischenstand weiter.",
     startNewButtonText: "Dokumentation starten",
   },
   nextButton: "Übernehmen & weiter",
@@ -424,7 +424,7 @@ export const prototypeDocumentation = {
       trackingEvent: "Feedback Dokumentation Abschluss",
       questions: [
         {
-          id: "simple-feedback",
+          id: "simple-feedback-1",
           trackingEvent: "wie-einfach",
           text: "Die Dokumentation ist einfach zu nutzen.",
           options: [
@@ -436,7 +436,7 @@ export const prototypeDocumentation = {
           ],
         },
         {
-          id: "simple-feedback",
+          id: "simple-feedback-2",
           trackingEvent: "wie-einfach",
           text: "Die Dokumentation ist hilfreich für das Erarbeiten meines Regelungsvorhabens.",
           options: [
@@ -448,7 +448,7 @@ export const prototypeDocumentation = {
           ],
         },
         {
-          id: "simple-feedback",
+          id: "simple-feedback-3",
           trackingEvent: "wie-einfach",
           text: "Die Dokumentation ist hilfreich für die Umsetzung meines Regelungsvorhabens.",
           options: [

@@ -51,12 +51,12 @@ export const ROUTE_PRECHECK = createRoute(
 );
 export const ROUTE_PRECHECK_INFO = createRoute(
   "hinweise",
-  "Allgemeine Hinweise",
+  "Allgemeine Hinweise zur Vorprüfung",
   ROUTE_PRECHECK,
 );
 export const ROUTE_PRECHECK_RESULT = createRoute(
   "ergebnis",
-  "Ergebnis",
+  "Ergebnis der Vorprüfung",
   ROUTE_PRECHECK,
 );
 
@@ -99,6 +99,10 @@ export const ROUTE_DOCUMENTATION = createRoute(
 );
 // NOTE: 70-tage replace pdf with word document
 export const ROUTE_DOCUMENTATION_STATIC_PDF = createRoute(
+  "download/prototyp_documentation_dummy_result.pdf",
+  "Begleitende Dokumentation als Word-Dokument",
+);
+export const ROUTE_DOCUMENTATION_STATIC_WORD = createRoute(
   "download/Dokumentieren-der-Digitaltauglichkeit_V1-5.docx",
   "Begleitende Dokumentation als Word-Dokument",
 );
@@ -121,7 +125,7 @@ export const ROUTE_EXAMPLES = createRoute(
 );
 export const ROUTE_EXAMPLES_PRINCIPLES = createRoute(
   "prinzipien",
-  "Prinzipien",
+  "Die Prinzipien im Regelungstext",
   ROUTE_EXAMPLES,
 );
 export const ROUTE_EXAMPLES_DIGITAL_COMMUNICATION = createRoute(
@@ -162,13 +166,15 @@ export const ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY =
   );
 export const ROUTE_REGELUNGEN = createRoute(
   "regelungen",
-  "Gesetze",
+  "Regelungsbeispiel",
   ROUTE_EXAMPLES,
 );
 export const ROUTE_EXAMPLES_VISUALISATIONS = createRoute(
   "visualisierungen",
-  "Visualisierungen",
+  "Beispiele für Visualisierungen",
   ROUTE_EXAMPLES,
+  false,
+  "Visualisierungen",
 );
 export const ROUTE_VISUALISATION = createRoute(
   "visualisierung",
@@ -181,13 +187,15 @@ export const ROUTE_FUNDAMENTALS = createRoute("grundlagen", "Grundlagen");
 
 export const ROUTE_FUNDAMENTALS_PRINCIPLES = createRoute(
   "fuenf-prinzipien",
-  "Prinzipien",
+  "Fünf Prinzipien (Grundlagen)",
   ROUTE_FUNDAMENTALS,
+  false,
+  "Fünf Prinzipien",
 );
 
 export const ROUTE_FUNDAMENTALS_METHODS = createRoute(
   "methoden",
-  "Methoden",
+  "Methoden und Werkzeuge",
   ROUTE_FUNDAMENTALS,
 );
 
@@ -246,7 +254,7 @@ export const ROUTE_PROTOTYPE_DOCUMENTATION_RESULT = createRoute(
 );
 export const ROUTE_PROTOTYPE_DOCUMENTATION_INTERMEDIATE_SAVE = createRoute(
   "zwischenstand-speichern",
-  "Später weiterarbeiten",
+  "Später weiterarbeiten - Prototyp",
   ROUTE_PROTOTYPE_DOCUMENTATION,
 );
 

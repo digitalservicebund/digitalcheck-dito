@@ -1,7 +1,7 @@
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
-import InfoBox from "~/components/InfoBox";
+import InfoBoxList from "~/components/InfoBoxList";
 import InlineNotice from "~/components/InlineNotice";
 import { NumberedList } from "~/components/List";
 import SupportBanner from "~/components/SupportBanner";
@@ -34,12 +34,10 @@ export default function Index() {
         />
       </Container>
       <Container>
-        <InfoBox
-          heading={{
-            tagName: "h2",
-            text: documentation.summary.title,
-          }}
+        <InfoBoxList
+          heading={{ text: documentation.summary.title }}
           items={documentation.summary.items}
+          separator
         />
       </Container>
       <Container>

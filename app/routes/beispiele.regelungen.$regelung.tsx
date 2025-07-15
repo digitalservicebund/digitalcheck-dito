@@ -32,7 +32,7 @@ export function meta() {
 
 export const handle = {
   breadcrumb: (match: UIMatch) => ({
-    title: examplesRegelungen.breadcrumb,
+    title: ROUTE_REGELUNGEN.title,
     url: match.pathname,
   }),
 };

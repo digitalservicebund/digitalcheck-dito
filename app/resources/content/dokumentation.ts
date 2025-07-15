@@ -1,5 +1,5 @@
 import { steps } from "~/resources/content/shared/naechste-schritte";
-import { ROUTE_DOCUMENTATION_STATIC_PDF } from "~/resources/staticRoutes";
+import { ROUTE_DOCUMENTATION_STATIC_WORD } from "~/resources/staticRoutes";
 
 export const documentation = {
   title: "3. Dokumentieren der Digitaltauglichkeit",
@@ -8,7 +8,7 @@ export const documentation = {
     {
       // NOTE: 70-tage replace pdf with word document
       text: "Dokumentation herunterladen (Word-Datei)",
-      href: ROUTE_DOCUMENTATION_STATIC_PDF.url,
+      href: ROUTE_DOCUMENTATION_STATIC_WORD.url,
     },
   ],
   multipleNotice: {
@@ -20,11 +20,11 @@ export const documentation = {
     title: "Zusammengefasst",
     items: [
       {
-        headline: { text: "Beginnen Sie so früh wie möglich" },
+        heading: { text: "Beginnen Sie so früh wie möglich" },
         content: `Schicken Sie die begleitende Dokumentation so früh wie möglich an Ihre Ansprechperson im NKR-Sekretariat, **spätestens mit der Einleitung der Ressortabstimmung**. Fügen Sie die Dokumentation des Digitalcheck und Visualisierungen des Umsetzungsprozesses gerne auch der Ressortabstimmung bei, damit Ihre Kolleginnen und Kollegen Ihre Entscheidungen nachvollziehen können.`,
       },
       {
-        headline: { text: "Das prüft der Nationale Normenkontrollrat" },
+        heading: { text: "Das prüft der Nationale Normenkontrollrat" },
         content: `Der NKR prüft das Regelungsvorhaben auf Möglichkeiten der digitalen Umsetzung auf Basis des von Ihnen durchgeführten Digitalcheck. Das wesentliche Prüfkriterium ist die methodische und inhaltliche Nachvollziehbarkeit. Sein Prüfergebnis veröffentlicht er gegebenenfalls in seinen Stellungnahmen. Wenn Sie eine Visualisierung angefertigt haben und Sie der Veröffentlichung zustimmen, kann diese an die Stellungnahme angehängt werden. Bei Fragen oder Anregungen kommt Ihre Ansprechperson im NKR-Sekretariat auf Sie zu.`,
       },
     ],

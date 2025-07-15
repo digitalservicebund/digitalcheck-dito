@@ -39,7 +39,6 @@ export default function FundamentalsFivePrinciples() {
         <Container className="pb-64" key={slugify(principle.title)}>
           <InfoBox
             identifier={slugify(principle.title)}
-            separator={false}
             key={slugify(principle.title)}
             Icon={principle.icon}
             heading={{
@@ -50,12 +49,8 @@ export default function FundamentalsFivePrinciples() {
               children: principle.label,
               principleNumber: principle.principleNumber as PrincipleNumber,
             }}
-            items={[
-              {
-                content: principle.content,
-                detailsSummary: getDetailsSummary(principle.detailsSummary),
-              },
-            ]}
+            content={principle.content}
+            detailsSummary={getDetailsSummary(principle.detailsSummary)}
           />
         </Container>
       ))}

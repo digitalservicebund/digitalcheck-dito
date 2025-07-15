@@ -6,7 +6,7 @@ export const imprint = {
   content: dedent`
     ## Das Internetangebot wird herausgegeben vom
     
-    Bundesministerium des Innern und für Heimat (BMI)<br />
+    Bundesministerium des Innern (BMI)<br />
     vorübergehend für das Bundesministerium für Digitales und Staatsmodernisierung (BMDS)<br />
     Alt-Moabit 140<br />
     10557 Berlin<br />

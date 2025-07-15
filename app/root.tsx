@@ -24,8 +24,6 @@ import PageHeader from "~/layout/PageHeader";
 import { A11Y_MESSAGE_NEW_WINDOW } from "~/resources/constants";
 import { general } from "~/resources/content/shared/general";
 import { siteMeta } from "~/resources/content/shared/meta";
-import { newsBanner } from "~/resources/content/shared/news-banner";
-import { features } from "~/resources/features";
 import { ROUTE_LANDING } from "~/resources/staticRoutes";
 import sharedStyles from "~/styles.css?url";
 import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants";
@@ -46,9 +44,7 @@ export function loader({ request }: Route.LoaderArgs) {
 
   return {
     BASE_URL,
-    trackingDisabled:
-      process.env.TRACKING_DISABLED === "true" ||
-      process.env.NODE_ENV === "development",
+    trackingDisabled: process.env.TRACKING_DISABLED === "true",
     featureFlags,
   };
 }
@@ -145,7 +141,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
   const nonce = useNonce();
   const error = useRouteError();
   const rootLoaderData = useRouteLoaderData<typeof loader>("root");
-  const { trackingDisabled, featureFlags } = rootLoaderData ?? {};
+  const { trackingDisabled } = rootLoaderData ?? {};
   const location = useLocation();
 
   let metaTitles = <></>;
@@ -168,7 +164,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
   }
 
   // this suggests a site name to search engines
-  const websiteData = {
+  const jsonLdMetadata = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: siteMeta.siteName,
@@ -183,7 +179,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
         <meta name="description" content={siteMeta.description} />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteData) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdMetadata) }}
         ></script>
         {metaTitles}
         <Meta />
@@ -199,14 +195,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
       </head>
       <body className="flex min-h-screen flex-col">
         <ScrollAndFocus />
-        <PageHeader
-          includeBreadcrumbs={!error}
-          banner={
-            featureFlags?.[features.enableDocumentationPrototype]
-              ? undefined
-              : newsBanner
-          }
-        />
+        <PageHeader includeBreadcrumbs={!error} />
         {children}
         <Footer />
         <span

@@ -1,9 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import Input from "~/components/Input";
+import IntermediateSaveLink from "~/components/prototyp/IntermediateSaveLink.tsx";
 import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
@@ -43,6 +44,7 @@ export default function PrototypeDocumentationPrinciple4() {
 
   return (
     <Container className="pt-0">
+      <IntermediateSaveLink />
       <Heading
         text={principle4.headline}
         tagName="h1"

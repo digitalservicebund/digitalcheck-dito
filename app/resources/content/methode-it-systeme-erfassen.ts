@@ -1,11 +1,7 @@
-import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
 import DrawOutlined from "@digitalservicebund/icons/DrawOutlined";
 import StickyNote2Outlined from "@digitalservicebund/icons/StickyNote2Outlined";
 import SupportOutlined from "@digitalservicebund/icons/SupportOutlined";
-import {
-  ROUTE_METHODS_PRINCIPLES,
-  ROUTE_SUPPORT,
-} from "~/resources/staticRoutes";
+import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsITSystems = {
@@ -68,20 +64,6 @@ export const methodsITSystems = {
         text: "Unterstützungsangebote nutzen",
         look: "tertiary" as const,
         href: ROUTE_SUPPORT.url,
-      },
-    ],
-  },
-  nextStep: {
-    label: "So geht es weiter:",
-    icon: ArrowCircleRightOutlined,
-    title:
-      "2.4. Möglichkeiten und Hindernisse der digitalen Umsetzung identifizieren",
-    text: `Mit einem guten Verständnis des Ist-Zustandes erarbeiten Sie nun Ihre Regelung. Die fünf Prinzipien für digitaltaugliche Gesetzgebung decken unterschiedliche Aspekte der digitalen Umsetzung ab: Nutzen Sie die Erkenntnisse über den Ist-Zustand, um mithilfe der Prinzipien die **Möglichkeiten der digitalen Umsetzung auszuschöpfen und Hindernisse zu erkennen.**`,
-    buttons: [
-      {
-        text: "Fünf Prinzipien nutzen",
-        look: "tertiary" as const,
-        href: ROUTE_METHODS_PRINCIPLES.url,
       },
     ],
   },

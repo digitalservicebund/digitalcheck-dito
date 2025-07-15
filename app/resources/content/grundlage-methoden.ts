@@ -6,7 +6,7 @@ export const fundamentalsMethods = {
     title: "Der Fahrplan",
     items: [
       {
-        headline: {
+        heading: {
           text: "Was ist der Methoden-Fahrplan?",
         },
         content:
@@ -14,7 +14,7 @@ export const fundamentalsMethods = {
           "Einige der Methoden sind thematische Erweiterungen der Arbeitsschritte, die Sie bereits einsetzen. Ein Beispiel dafür ist das Einbeziehen von umsetzenden Akteuren.",
       },
       {
-        headline: {
+        heading: {
           text: "Ein Beispiel",
         },
         content:

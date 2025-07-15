@@ -8,8 +8,8 @@ export const privacy = {
     
     ### 1.1 Verantwortlicher und Datenschutzbeauftragte/r
     
-    Verantwortlich für die Verarbeitung von personenbezogenen Daten im Rahmen der Bereitstellung der Website [erarbeiten.digitalcheck.bund.de](https://erarbeiten.digitalcheck.bund.de) ist das Bundesministerium des Innern und für Heimat (BMI).
-    Bundesministerium des Innern und für Heimat (BMI)
+    Verantwortlich für die Verarbeitung von personenbezogenen Daten im Rahmen der Bereitstellung der Website [erarbeiten.digitalcheck.bund.de](https://erarbeiten.digitalcheck.bund.de) ist das Bundesministerium des Innern (BMI).
+    Bundesministerium des Innern (BMI)
     
     Alt-Moabit 140<br />
     10557 Berlin<br />
@@ -37,7 +37,7 @@ export const privacy = {
     Prinzessinnenstraße 8-14<br />
     10969 Berlin<br />
     
-    DigitalService ist eine Bundes GmbH. Die Bundesrepublik Deutschland — vertreten durch das Bundesministerium des Innern und für Heimat — hält 100 Prozent der Anteile der GmbH. Mit dem Auftragsverarbeiter wurde eine Vereinbarung gemäß Art. 28 DSGVO geschlossen.
+    DigitalService ist eine Bundes GmbH. Die Bundesrepublik Deutschland — vertreten durch das Bundesministerium des Innern — hält 100 Prozent der Anteile der GmbH. Mit dem Auftragsverarbeiter wurde eine Vereinbarung gemäß Art. 28 DSGVO geschlossen.
     
     **Datenschutzbeauftragter des Auftragsverarbeiters**
     
