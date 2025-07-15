@@ -5,6 +5,7 @@ import { ReactNode, useEffect, useState } from "react";
 
 const posthogOptions: Partial<PostHogConfig> = {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  ui_host: "https://eu.posthog.com",
   defaults: "2025-05-24",
   persistence: "memory",
 };
@@ -23,6 +24,8 @@ export function PHProvider({ children, trackingDisabled }: PHProviderProps) {
     posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, posthogOptions);
 
     setHydrated(true);
+
+    posthog.capture("my event", { property: "value" });
   }, [trackingDisabled]);
 
   if (!hydrated || trackingDisabled) return <>{children}</>;
