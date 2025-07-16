@@ -3,7 +3,7 @@ import { PostHogProvider } from "posthog-js/react";
 import { ReactNode, useEffect, useState } from "react";
 
 const posthogOptions: Partial<PostHogConfig> = {
-  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  api_host: "/ph-relay",
   ui_host: "https://eu.posthog.com",
   defaults: "2025-05-24",
   persistence: "memory",

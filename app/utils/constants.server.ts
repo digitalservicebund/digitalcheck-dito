@@ -14,3 +14,8 @@ export const UNLEASH_KEY =
   readSecretVolume("/etc/secrets/unleash-key") ??
   process?.env?.UNLEASH_KEY ??
   "";
+
+export const POSTHOG_KEY =
+  readSecretVolume("/etc/secrets/posthog-key") ??
+  process?.env?.POSTHOG_KEY ??
+  "";
