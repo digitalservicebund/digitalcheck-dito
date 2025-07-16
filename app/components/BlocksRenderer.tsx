@@ -31,7 +31,7 @@ export function RecursiveRenderer({
       const Element = getElement(node);
       return (
         <Element key={index}>
-          <BlocksRenderer content={node.children} modifiers={modifiers} />
+          <RecursiveRenderer content={node.children} modifiers={modifiers} />
         </Element>
       );
     }
