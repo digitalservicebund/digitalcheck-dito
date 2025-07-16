@@ -43,11 +43,23 @@ jobs:
       - name: Audit used licences
         run: npm run audit:licences
 
-      - name: Check format
-        run: npm run format:check
+      - name: Fix formatting issues
+        run: npm run format:fix
 
       - name: Lint
-        run: npm run lint:check
+        run: npm run lint:fix
+
+      - name: Check for changes
+        id: git-check
+        run: git diff --exit-code || echo "changes=true" >> $GITHUB_OUTPUT
+
+      - name: Commit fixes
+        if: steps.git-check.outputs.changes == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -am "Auto-fix format and lint issues"
+          git push
 
       - name: Check types
         run: npm run typecheck
