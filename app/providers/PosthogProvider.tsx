@@ -1,4 +1,4 @@
-import posthog, { PostHogConfig } from "posthog-js";
+import { posthog, PostHogConfig } from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 import { ReactNode, useEffect, useState } from "react";
 import { POSTHOG_PROXY, POSTHOG_UI_HOST } from "~/utils/constants";
@@ -31,7 +31,7 @@ export function PHProvider({
     setHydrated(true);
 
     posthog.capture("my event", { property: "value" });
-  }, [posthogEnabled]);
+  }, [posthogEnabled, posthogKey]);
 
   if (!hydrated || !posthogEnabled) return <>{children}</>;
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>;
