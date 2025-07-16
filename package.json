@@ -47,6 +47,7 @@
     "msw": "^2.10.2",
     "node-cache": "^5.1.2",
     "pdf-lib": "^1.17.1",
+    "posthog-js": "^1.256.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^7.6.0",

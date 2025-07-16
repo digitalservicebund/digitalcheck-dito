@@ -27,9 +27,11 @@ import { siteMeta } from "~/resources/content/shared/meta";
 import { ROUTE_LANDING } from "~/resources/staticRoutes";
 import sharedStyles from "~/styles.css?url";
 import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants";
+import { POSTHOG_KEY } from "~/utils/constants.server";
 import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
 import type { Route } from "./+types/root";
+import { PHProvider } from "./providers/PosthogProvider";
 import { notFound, serverError } from "./resources/content/error";
 import constructMetaTitle from "./utils/metaTitle";
 
@@ -45,7 +47,9 @@ export function loader({ request }: Route.LoaderArgs) {
   return {
     BASE_URL,
     trackingDisabled: process.env.TRACKING_DISABLED === "true",
+    posthogEnabled: process.env.POSTHOG_ENABLED === "true",
     featureFlags,
+    posthogKey: POSTHOG_KEY,
   };
 }
 
@@ -141,7 +145,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
   const nonce = useNonce();
   const error = useRouteError();
   const rootLoaderData = useRouteLoaderData<typeof loader>("root");
-  const { trackingDisabled } = rootLoaderData ?? {};
+  const { trackingDisabled, posthogEnabled, posthogKey } = rootLoaderData ?? {};
   const location = useLocation();
 
   let metaTitles = <></>;
@@ -194,19 +198,21 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
         <Links />
       </head>
       <body className="flex min-h-screen flex-col">
-        <ScrollAndFocus />
-        <PageHeader includeBreadcrumbs={!error} />
-        {children}
-        <Footer />
-        <span
-          aria-hidden="true"
-          className="hidden"
-          id={A11Y_MESSAGE_NEW_WINDOW}
-        >
-          {general.a11yMessageNewWindow}
-        </span>
-        <ScrollRestoration nonce={nonce} />
-        <Scripts nonce={nonce} />
+        <PHProvider posthogEnabled={posthogEnabled} posthogKey={posthogKey}>
+          <ScrollAndFocus />
+          <PageHeader includeBreadcrumbs={!error} />
+          {children}
+          <Footer />
+          <span
+            aria-hidden="true"
+            className="hidden"
+            id={A11Y_MESSAGE_NEW_WINDOW}
+          >
+            {general.a11yMessageNewWindow}
+          </span>
+          <ScrollRestoration nonce={nonce} />
+          <Scripts nonce={nonce} />
+        </PHProvider>
       </body>
     </html>
   );

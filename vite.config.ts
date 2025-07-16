@@ -20,4 +20,7 @@ export default defineConfig({
     setupFiles: ["vitest-setup.ts"],
     include: ["app/**/*.{test,spec}.ts?(x)"],
   },
+  ssr: {
+    noExternal: ["posthog-js", "posthog-js/react"],
+  },
 });
