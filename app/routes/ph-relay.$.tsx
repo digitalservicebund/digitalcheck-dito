@@ -1,15 +1,13 @@
 // Reverse proxy for Posthog
 
 import { ActionFunction, LoaderFunction } from "react-router";
-
-const API_HOST = "eu.i.posthog.com";
-const ASSET_HOST = "eu-assets.i.posthog.com";
+import { POSTHOG_API_HOST, POSTHOG_ASSET_HOST } from "~/utils/constants";
 
 const posthogProxy = async (request: Request) => {
   const url = new URL(request.url);
   const hostname = url.pathname.startsWith("/ph-relay/static/")
-    ? ASSET_HOST
-    : API_HOST;
+    ? POSTHOG_ASSET_HOST
+    : POSTHOG_API_HOST;
 
   const newUrl = new URL(url);
   newUrl.protocol = "https";

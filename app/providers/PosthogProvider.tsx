@@ -1,10 +1,11 @@
 import posthog, { PostHogConfig } from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 import { ReactNode, useEffect, useState } from "react";
+import { POSTHOG_PROXY, POSTHOG_UI_HOST } from "~/utils/constants";
 
 const posthogOptions: Partial<PostHogConfig> = {
-  api_host: "/ph-relay",
-  ui_host: "https://eu.posthog.com",
+  api_host: POSTHOG_PROXY,
+  ui_host: POSTHOG_UI_HOST,
   defaults: "2025-05-24",
   persistence: "memory",
 };
