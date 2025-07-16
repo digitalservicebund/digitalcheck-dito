@@ -10,17 +10,22 @@ const posthogOptions: Partial<PostHogConfig> = {
 };
 
 type PHProviderProps = {
-  posthogEnabled?: boolean;
   children: ReactNode;
+  posthogEnabled?: boolean;
+  posthogKey?: string;
 };
 
-export function PHProvider({ children, posthogEnabled }: PHProviderProps) {
+export function PHProvider({
+  children,
+  posthogEnabled,
+  posthogKey,
+}: PHProviderProps) {
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    if (!posthogEnabled) return;
+    if (!posthogEnabled || !posthogKey) return;
 
-    posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, posthogOptions);
+    posthog.init(posthogKey, posthogOptions);
 
     setHydrated(true);
 
