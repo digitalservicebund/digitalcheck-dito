@@ -49,19 +49,6 @@ jobs:
       - name: Lint
         run: npm run lint:fix
 
-      - name: Check for changes
-        id: git-check
-        run: git diff --exit-code || echo "changes=true" >> $GITHUB_OUTPUT
-
-      - name: Commit fixes
-        if: steps.git-check.outputs.changes == 'true'
-        uses: stefanzweifel/git-auto-commit-action@778341af668090896ca464160c2def5d1d1a3eb0
-        with:
-          commit_message: "Auto-fix format and lint issues [skip ci]"
-          commit_user_name: "github-actions[bot]"
-          commit_user_email: "github-actions[bot]@users.noreply.github.com"
-          commit_options: "--signoff"
-
       - name: Check types
         run: npm run typecheck
 
