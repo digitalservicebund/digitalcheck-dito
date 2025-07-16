@@ -20,8 +20,6 @@ const posthogProxy = async (request: Request) => {
   const headers = new Headers(request.headers);
   headers.set("host", hostname);
 
-  console.log(await request.json());
-
   const response = await fetch(newUrl, {
     method: request.method,
     headers,

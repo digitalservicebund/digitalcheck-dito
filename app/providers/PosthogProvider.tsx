@@ -1,4 +1,3 @@
-// app/provider.tsx
 import posthog, { PostHogConfig } from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 import { ReactNode, useEffect, useState } from "react";
@@ -11,23 +10,23 @@ const posthogOptions: Partial<PostHogConfig> = {
 };
 
 type PHProviderProps = {
-  trackingDisabled?: boolean;
+  posthogEnabled?: boolean;
   children: ReactNode;
 };
 
-export function PHProvider({ children, trackingDisabled }: PHProviderProps) {
+export function PHProvider({ children, posthogEnabled }: PHProviderProps) {
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    if (trackingDisabled) return;
+    if (!posthogEnabled) return;
 
     posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, posthogOptions);
 
     setHydrated(true);
 
     posthog.capture("my event", { property: "value" });
-  }, [trackingDisabled]);
+  }, [posthogEnabled]);
 
-  if (!hydrated || trackingDisabled) return <>{children}</>;
+  if (!hydrated || !posthogEnabled) return <>{children}</>;
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>;
 }

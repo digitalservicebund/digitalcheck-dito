@@ -46,6 +46,7 @@ export function loader({ request }: Route.LoaderArgs) {
   return {
     BASE_URL,
     trackingDisabled: process.env.TRACKING_DISABLED === "true",
+    posthogEnabled: process.env.POSTHOG_ENABLED === "true",
     featureFlags,
   };
 }
@@ -142,7 +143,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
   const nonce = useNonce();
   const error = useRouteError();
   const rootLoaderData = useRouteLoaderData<typeof loader>("root");
-  const { trackingDisabled } = rootLoaderData ?? {};
+  const { trackingDisabled, posthogEnabled } = rootLoaderData ?? {};
   const location = useLocation();
 
   let metaTitles = <></>;
@@ -195,7 +196,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
         <Links />
       </head>
       <body className="flex min-h-screen flex-col">
-        <PHProvider trackingDisabled={trackingDisabled}>
+        <PHProvider posthogEnabled={posthogEnabled}>
           <ScrollAndFocus />
           <PageHeader includeBreadcrumbs={!error} />
           {children}
