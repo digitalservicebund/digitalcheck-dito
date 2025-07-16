@@ -55,14 +55,12 @@ jobs:
 
       - name: Commit fixes
         if: steps.git-check.outputs.changes == 'true'
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git config --local commit.gpgsign true
-          # this is GitHubs default signing key for the web flow
-          git config --local user.signingkey 4AEE18F83AFDEB23
-          git commit -am "Auto-fix format and lint issues [skip ci]"
-          git push
+        uses: stefanzweifel/git-auto-commit-action@778341af668090896ca464160c2def5d1d1a3eb0
+        with:
+          commit_message: "Auto-fix format and lint issues [skip ci]"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+          commit_options: "--signoff"
 
       - name: Check types
         run: npm run typecheck
