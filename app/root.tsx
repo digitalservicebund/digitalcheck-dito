@@ -44,6 +44,11 @@ export function loader({ request }: Route.LoaderArgs) {
     process.env.NODE_ENV === "production" ? "https://" : "http://",
   );
 
+  console.log({
+    posthogKey: POSTHOG_KEY ? POSTHOG_KEY.slice(-4) : "empty",
+    posthogEnabled: process.env.POSTHOG_ENABLED,
+  });
+
   return {
     BASE_URL,
     trackingDisabled: process.env.TRACKING_DISABLED === "true",
