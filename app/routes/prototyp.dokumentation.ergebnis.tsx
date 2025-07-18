@@ -5,7 +5,8 @@ import {
 
 import fileSaver from "file-saver";
 import { PDFDocument } from "pdf-lib";
-import Background from "~/components/Background";
+import { twJoin } from "tailwind-merge";
+import { BACKGROUND_COLORS } from "~/components";
 import Box from "~/components/Box";
 import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
@@ -80,7 +81,7 @@ export default function DocumentationResult() {
 
   return (
     <>
-      <Background backgroundColor="blue" className="py-40 print:pb-0">
+      <div className={twJoin("py-40 print:pb-0", BACKGROUND_COLORS.blue)}>
         <div className="px-16">
           <Container className="rounded-t-lg py-32" backgroundColor="midBlue">
             <div className="flex flex-col gap-16 sm:flex-row">
@@ -230,7 +231,7 @@ export default function DocumentationResult() {
             />
           </Container>
         </div>
-      </Background>
+      </div>
       <Container>
         <NumberedList
           heading={{

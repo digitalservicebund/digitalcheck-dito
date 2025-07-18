@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { twJoin } from "tailwind-merge";
-import Background from "~/components/Background";
 import Button from "~/components/Button";
 import Container from "~/components/Container";
 import RichText from "~/components/RichText";
+import { BACKGROUND_COLORS } from ".";
 
 type FeedbackQuestionOptionProps = {
   label: string;
@@ -157,21 +157,20 @@ export default function FeedbackForm(props: Readonly<FeedbackFormProps>) {
   if (submitted) {
     return (
       <div ref={thankYouMessageRef} tabIndex={-1} aria-live="polite">
-        <Background backgroundColor="blue" className="pt-40 pb-48">
+        <div className={twJoin("pt-40 pb-48", BACKGROUND_COLORS.blue)}>
           <Container backgroundColor="white" overhangingBackground>
             <h2>{props.success.heading}</h2>
             <br />
             <p>{props.success.text}</p>
           </Container>
-        </Background>
+        </div>
       </div>
     );
   }
 
   return (
-    <Background
-      backgroundColor="blue"
-      className={twJoin("pt-40 pb-48", props.className)}
+    <div
+      className={twJoin("pt-40 pb-48", BACKGROUND_COLORS.blue, props.className)}
     >
       <Container backgroundColor="white" overhangingBackground>
         <h2>{props.heading}</h2>
@@ -186,6 +185,6 @@ export default function FeedbackForm(props: Readonly<FeedbackFormProps>) {
         </form>
         <RichText markdown={props.contact} className="font-bold" />
       </Container>
-    </Background>
+    </div>
   );
 }

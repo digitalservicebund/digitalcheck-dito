@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import type { Node } from "~/utils/paragraphUtils";
 import twMerge from "~/utils/tailwindMerge";
+import { BACKGROUND_COLORS } from ".";
 import Badge, { BadgeProps } from "./Badge";
 import { BlocksRenderer } from "./BlocksRenderer";
 import { ButtonProps } from "./Button";
@@ -30,6 +31,7 @@ export type InfoBoxProps = {
   buttons?: ButtonProps[];
   Icon?: React.FC<React.SVGProps<SVGSVGElement>>;
   className?: string;
+  look?: "default" | "highlight";
 };
 
 const InfoBox = ({
@@ -42,6 +44,7 @@ const InfoBox = ({
   linkList,
   buttons,
   Icon,
+  look,
 }: InfoBoxProps) => {
   return (
     <div
@@ -49,6 +52,8 @@ const InfoBox = ({
       data-testid="info-box-container"
       className={twMerge(
         "flex scroll-my-40 flex-col gap-32 sm:flex-row",
+        look === "highlight" &&
+          `rounded-lg px-16 py-40 sm:px-80 ${BACKGROUND_COLORS.blue}`,
         className,
       )}
     >
