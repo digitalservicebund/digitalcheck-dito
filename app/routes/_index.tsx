@@ -198,7 +198,6 @@ export default function Index() {
             </Container>
           </div>
 
-          {/* TODO: still relevant? */}
           {/* currently not used and hidden */}
           <div className="relative left-1/2 hidden w-screen -translate-x-1/2 bg-blue-800 py-24">
             <Container>
