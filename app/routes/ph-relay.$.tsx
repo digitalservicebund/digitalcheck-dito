@@ -28,6 +28,10 @@ const posthogProxy = async (request: Request) => {
   });
 
   const responseHeaders = new Headers(response.headers);
+  /**
+   * Fix loading error:
+   * @see https://posthog.com/questions/config-js-doesn-t-load-with-complete-configuration-options
+   */
   responseHeaders.delete("content-encoding");
   responseHeaders.delete("content-length");
 
