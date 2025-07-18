@@ -42,7 +42,7 @@ const ListItem = ({
 }: ListItemProps) => {
   const backgroundColor =
     background && isBackgroundColor(background) ? background : undefined;
-  const backgroundColorClass =
+  const backgroundColorClassNames =
     backgroundColor && backgroundColor !== "default"
       ? `px-80 pt-40 pb-48 max-sm:px-16 max-sm:py-32 ${BACKGROUND_COLORS[backgroundColor]}`
       : "mt-4";
@@ -104,7 +104,10 @@ const ListItem = ({
           </div>
           <div className={twJoin(backgroundColor && "w-full rounded-lg")}>
             <div
-              className={twJoin("flex flex-col gap-16", backgroundColorClass)}
+              className={twJoin(
+                "flex flex-col gap-16",
+                backgroundColorClassNames,
+              )}
             >
               {label && (
                 <Badge look="hint">{label.children ?? label.text}</Badge>
