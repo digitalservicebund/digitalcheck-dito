@@ -1,46 +1,4 @@
-import { BlocksContent } from "@strapi/blocks-react-renderer";
-import { Absatz } from "./strapiData.server";
-
-export type AbsatzWithNumber = Absatz & { number: number };
-type Node = { type: string; text?: string; children?: Node[] };
-
-export function isStandaloneAbsatz(
-  absatz: AbsatzWithNumber | AbsatzWithNumber[],
-): absatz is AbsatzWithNumber {
-  return "id" in absatz;
-}
-
-// Add Absatz number to text by traversing down the content tree to find the first text node and prepending the number
-function prependNumberRecursively(node: Node, number: number): Node {
-  if (node.type === "text" && node.text) {
-    return {
-      ...node,
-      text: `(${number}) ${node.text}`,
-    };
-  }
-
-  if (node.children && node.children.length > 0) {
-    return {
-      ...node,
-      children: [
-        prependNumberRecursively(node.children[0], number),
-        ...node.children.slice(1),
-      ],
-    };
-  }
-
-  return node;
-}
-
-export function prependNumberToAbsatz(absatz: AbsatzWithNumber) {
-  return [
-    prependNumberRecursively(
-      absatz.Text[0],
-      absatz.number,
-    ) as BlocksContent[number],
-    ...absatz.Text.slice(1),
-  ];
-}
+import type { Node } from "./paragraphUtils";
 
 /**
  * Ensures that sub-list nodes are nested under their preceding list-item nodes.
@@ -71,7 +29,7 @@ export function prependNumberToAbsatz(absatz: AbsatzWithNumber) {
  *   ...
  * ]
  */
-export function nestListInListItems(nodes: Node[]): BlocksContent {
+export function nestListInListItems(nodes: Node[]) {
   const result: Node[] = [];
   let currentListItem: Node | null = null;
 
@@ -96,5 +54,5 @@ export function nestListInListItems(nodes: Node[]): BlocksContent {
     }
   });
 
-  return result as BlocksContent;
+  return result;
 }

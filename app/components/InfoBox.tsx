@@ -1,7 +1,8 @@
-import { BlocksContent, BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { ReactNode } from "react";
+import type { Node } from "~/utils/paragraphUtils";
 import twMerge from "~/utils/tailwindMerge";
 import Badge, { BadgeProps } from "./Badge";
+import { BlocksRenderer } from "./BlocksRenderer";
 import { ButtonProps } from "./Button";
 import ButtonContainer from "./ButtonContainer";
 import DetailsSummary, { DetailsSummaryProps } from "./DetailsSummary";
@@ -20,7 +21,7 @@ export type InfoBoxProps = {
   identifier?: string;
   badge?: BadgeProps;
   heading?: HeadingProps;
-  content?: string | BlocksContent;
+  content?: string | Node[];
   detailsSummary?: {
     title?: HeadingProps;
     items: DetailsSummaryProps[];

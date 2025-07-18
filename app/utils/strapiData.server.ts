@@ -1,6 +1,6 @@
-import { BlocksContent } from "@strapi/blocks-react-renderer";
 import crypto from "crypto";
 import NodeCache from "node-cache";
+import { type Node } from "~/utils/paragraphUtils";
 
 const url =
   process.env.STRAPI_URL ??
@@ -39,12 +39,12 @@ export type GesetzStatus =
 export type PrinzipErfuellung = {
   id: number;
   Prinzip?: Prinzip;
-  WarumGut: BlocksContent;
+  WarumGut: Node[];
 };
 
 export type Absatz = {
   id: number;
-  Text: BlocksContent;
+  Text: Node[];
   PrinzipErfuellungen: PrinzipErfuellung[];
 };
 
@@ -61,7 +61,7 @@ export type Paragraph = {
 export type Prinzip = {
   documentId: string;
   Name: string;
-  Beschreibung: BlocksContent;
+  Beschreibung: Node[];
   Nummer: 1 | 2 | 3 | 4 | 5;
   GuteUmsetzungen: Digitalcheck[];
   URLBezeichnung: string;
@@ -74,7 +74,7 @@ export type Visualisierung = {
   Titel: string;
   Visualisierungsart?: string;
   Visualisierungstool?: string;
-  Beschreibung: BlocksContent;
+  Beschreibung: Node[];
   Bild: {
     documentId: string;
     url: string;
@@ -86,7 +86,7 @@ export type Visualisierung = {
 export type Digitalcheck = {
   documentId: string;
   Titel: string;
-  NKRStellungnahmeDCText?: BlocksContent;
+  NKRStellungnahmeDCText?: Node[];
   EinschaetzungKommunikation: EinschaetzungReferat;
   EinschaetzungWiederverwendung: EinschaetzungReferat;
   EinschaetzungDatenschutz: EinschaetzungReferat;

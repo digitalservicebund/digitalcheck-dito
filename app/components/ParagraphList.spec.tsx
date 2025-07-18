@@ -119,6 +119,32 @@ const ABSAETZE: Absatz[] = [
           { type: "text", text: "2Markierungen[2]", underline: true },
         ],
       },
+      {
+        type: "list",
+        format: "ordered",
+        children: [
+          {
+            type: "list-item",
+            children: [
+              {
+                type: "text",
+                text: "firstChildHighlight[2]",
+                underline: true,
+              },
+            ],
+          },
+          {
+            type: "list-item",
+            children: [
+              {
+                type: "text",
+                text: "firstChildHighlight2[2]",
+                underline: true,
+              },
+            ],
+          },
+        ],
+      },
     ],
     PrinzipErfuellungen: [
       {
@@ -176,7 +202,7 @@ test("Has heading with paragraph number and law", () => {
   expect(screen.getByText("§ 2 GG")).toBeVisible();
 });
 
-test("Mark of Prinzip is shown", () => {
+test("Highlight of Prinzip is shown", () => {
   render(<RouterStubAllPrinciples />);
   expect(screen.queryByText("Text mit 1Markierung[1]")).not.toBeInTheDocument();
   expect(screen.queryByText("Text mit 2Markierung[2]")).not.toBeInTheDocument();
@@ -198,12 +224,12 @@ test("Mark of Prinzip is shown", () => {
   expect(screen.getByText("2Markierungen")).toHaveRole("mark");
 });
 
-test("Text without underline is not marked", () => {
+test("Text without underline is not highlighted", () => {
   render(<RouterStubAllPrinciples />);
   expect(screen.getByText(/Textohne/)).not.toHaveRole("mark");
 });
 
-test("Marks not shown when no relevant Prinzip", () => {
+test("Highlights not shown when no relevant Prinzip", () => {
   render(<RouterStubFirstPrinciple />);
   // custom mark still removed
   expect(screen.queryByText(/\[2\]/)).not.toBeInTheDocument();
@@ -217,7 +243,7 @@ test("Marks not shown when no relevant Prinzip", () => {
   expect(screen.getByRole("mark")).toHaveTextContent("Text mit 1Markierung");
 });
 
-test("Multiple Marks in one Absatz", () => {
+test("Multiple highlights in one Absatz", () => {
   render(<RouterStubAllPrinciples />);
   expect(screen.getByText(/mitmit/)).toBeVisible();
   expect(screen.getByText(/2Markierungen/)).toBeVisible();
@@ -225,9 +251,18 @@ test("Multiple Marks in one Absatz", () => {
   expect(screen.getByText(/2Markierungen/)).toHaveRole("mark");
 });
 
+test("Highlights have unique IDs", () => {
+  render(<RouterStubAllPrinciples />);
+  const highlights = screen.getAllByRole("mark");
+  console.log(highlights);
+  const ids = highlights.map((highlight) => highlight.id);
+  console.log(ids);
+  expect(ids).toHaveLength(new Set(ids).size);
+});
+
 // TEST COLLAPSED ABSAETZE
 
-test("Absatz 2 without Mark is collapsed", () => {
+test("Absatz 2 without highlights is collapsed", () => {
   render(<RouterStubAllPrinciples />);
   expect(screen.getByText("(2)")).toBeVisible();
   expect(screen.getByText("(2) Text ohne Markierung")).toBeInTheDocument();
@@ -278,44 +313,44 @@ test("Reasoning is only shown for relevant Prinzip", () => {
 
 // TEST LINKS BETWEEN HIGHLIGHTS AND REASONING
 
-test("Clicking on Mark highlights Reasoning and adds backlink", () => {
+test("Clicking on highlight shows explanation and adds backlink", () => {
   render(<RouterStubAllPrinciples />);
-  const id = "warumGut-1-1";
-  const firstMark = screen.getByText("Text mit 1Markierung").closest("a");
-  expect(firstMark).toHaveAttribute("href", `/#${id}`);
+  const id = "erklaerung-1-1";
+  const firstHighlight = screen.getByText("Text mit 1Markierung");
+  expect(firstHighlight.closest("a")).toHaveAttribute("href", `/#${id}`);
 
-  // clicking on mark removes highlighting and backlink
+  // clicking on highlight removes highlighting and backlink
   act(() => {
-    firstMark?.click();
+    firstHighlight?.click();
   });
   expect(screen.getByTestId(id)).toHaveClass("border-4");
   const backlink = screen.getByLabelText("Zurück zum Text");
-  expect(backlink).toHaveAttribute("href", `/#${firstMark?.id}`);
+  expect(backlink).toHaveAttribute("href", `/#${firstHighlight?.id}`);
   expect(backlink).toBeVisible();
 
   // clicking on backlink removes highlighting and backlink
   act(() => {
     screen.getByLabelText("Zurück zum Text").click();
   });
-  expect(screen.getByTestId("warumGut-1-1")).toHaveClass("border-l-4");
-  expect(screen.getByTestId("warumGut-1-1")).not.toHaveClass("border-4");
+  expect(screen.getByTestId("erklaerung-1-1")).toHaveClass("border-l-4");
+  expect(screen.getByTestId("erklaerung-1-1")).not.toHaveClass("border-4");
   expect(screen.queryByLabelText("Zurück zum Text")).not.toBeInTheDocument();
 });
 
-test("Clicking on multiple Marks only highlights one Reasoning", () => {
+test("Clicking on multiple highlights only highlights one explanation", () => {
   render(<RouterStubAllPrinciples />);
   act(() => {
     screen.getByText("Text mit 1Markierung").click();
     screen.getByText("Text mit 2Markierung").click();
   });
-  expect(screen.getByTestId("warumGut-1-1")).not.toHaveClass("border-4");
-  expect(screen.getByTestId("warumGut-1-2")).toHaveClass("border-4");
+  expect(screen.getByTestId("erklaerung-1-1")).not.toHaveClass("border-4");
+  expect(screen.getByTestId("erklaerung-1-2")).toHaveClass("border-4");
   expect(screen.getAllByLabelText("Zurück zum Text")).toHaveLength(1);
   act(() => {
     screen.getByLabelText("Zurück zum Text").click();
   });
   // clicking on backlink removes highlighting and backlink
-  expect(screen.getByTestId("warumGut-1-2")).toHaveClass("border-l-4");
-  expect(screen.getByTestId("warumGut-1-2")).not.toHaveClass("border-4");
+  expect(screen.getByTestId("erklaerung-1-2")).toHaveClass("border-l-4");
+  expect(screen.getByTestId("erklaerung-1-2")).not.toHaveClass("border-4");
   expect(screen.queryByLabelText("Zurück zum Text")).not.toBeInTheDocument();
 });
