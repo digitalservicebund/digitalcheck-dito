@@ -1,7 +1,7 @@
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { useLoaderData, useOutletContext, type UIMatch } from "react-router";
 
-import Background from "~/components/Background";
+import { BACKGROUND_COLORS } from "~/components";
 import Container from "~/components/Container";
 import CustomLink from "~/components/CustomLink";
 import Header from "~/components/Header";
@@ -98,7 +98,7 @@ export default function Gesetz() {
     <>
       <Hero title={regelung.Titel} subtitle={examplesRegelungen.subtitle[0]} />
 
-      <Background backgroundColor="midLightBlue">
+      <div className={BACKGROUND_COLORS.midLightBlue}>
         <Container className="py-0">
           <InlineInfoList
             items={[
@@ -130,7 +130,7 @@ export default function Gesetz() {
             ]}
           />
         </Container>
-      </Background>
+      </div>
       {regelung.Digitalchecks.map((digitalcheck, index) => {
         const tabsData: TabItem[] = [];
 

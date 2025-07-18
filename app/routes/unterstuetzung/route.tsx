@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
+import { BACKGROUND_COLORS } from "~/components";
 
-import Background from "~/components/Background";
 import Box from "~/components/Box";
 import type { ButtonProps } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
@@ -104,7 +104,7 @@ export default function Index() {
               buttons={offering.button ? [offering.button] : []}
             />
             <div className="flex-none space-y-20 md:w-[310px]">
-              <Background backgroundColor="white">
+              <div className={BACKGROUND_COLORS.white}>
                 <div className="p-28">
                   <Header
                     heading={{
@@ -133,9 +133,9 @@ export default function Index() {
                     ))}
                   </div>
                 </div>
-              </Background>
+              </div>
               {offering.examples && (
-                <Background backgroundColor="white">
+                <div className={BACKGROUND_COLORS.white}>
                   <div className="divide-y divide-gray-700">
                     {offering.examples.map((example, idx) => (
                       <div key={`${offering.title}-example-${idx}`}>
@@ -152,7 +152,7 @@ export default function Index() {
                       </div>
                     ))}
                   </div>
-                </Background>
+                </div>
               )}
             </div>
           </Container>
@@ -165,7 +165,7 @@ export default function Index() {
     <>
       <Hero title={title} subtitle={subtitle} />
 
-      <Background backgroundColor="midBlue">
+      <div className={BACKGROUND_COLORS.midBlue}>
         <Container className="flex flex-col py-0 lg:h-[420px] lg:flex-row">
           <div className="py-32 sm:py-48 lg:w-1/2 lg:self-center">
             <RichText
@@ -182,7 +182,7 @@ export default function Index() {
             </div>
           </div>
         </Container>
-      </Background>
+      </div>
       <div className="sm:hidden">
         <SocialProofImage />
       </div>
@@ -220,7 +220,7 @@ export default function Index() {
             ))}
         </div>
       </Container>
-      <Background backgroundColor="blue">
+      <div className={BACKGROUND_COLORS.blue}>
         <Container>
           <Heading id="hilfe" tagName="h2" text={supportHow.title} />
           <div className="ds-stack ds-stack-16 pt-32 pb-40">
@@ -232,9 +232,9 @@ export default function Index() {
             <ButtonContainer buttons={supportHow.buttons} />
           </div>
         </Container>
-      </Background>
+      </div>
       <div id="angebote">
-        <Background backgroundColor="white">
+        <div className={BACKGROUND_COLORS.white}>
           <Container className="ds-stack ds-stack-40">
             <Box
               heading={{
@@ -247,9 +247,9 @@ export default function Index() {
             />
             <Tabs tabs={tabsData} initialActiveIndex={initialTabIndex} />
           </Container>
-        </Background>
+        </div>
       </div>
-      <Background backgroundColor="midBlue">
+      <div className={BACKGROUND_COLORS.midBlue}>
         <Container>
           <Box
             heading={{
@@ -261,7 +261,7 @@ export default function Index() {
             }}
           />
         </Container>
-      </Background>
+      </div>
     </>
   );
 }
