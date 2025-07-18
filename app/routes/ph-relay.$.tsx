@@ -17,6 +17,7 @@ const posthogProxy = async (request: Request) => {
 
   const headers = new Headers(request.headers);
   headers.set("host", hostname);
+  headers.delete("accept-encoding");
 
   const response = await fetch(newUrl, {
     method: request.method,
@@ -26,10 +27,16 @@ const posthogProxy = async (request: Request) => {
     duplex: "half",
   });
 
-  return new Response(response.body, {
+  const responseHeaders = new Headers(response.headers);
+  responseHeaders.delete("content-encoding");
+  responseHeaders.delete("content-length");
+
+  const data = await response.arrayBuffer();
+
+  return new Response(data, {
     status: response.status,
     statusText: response.statusText,
-    headers: response.headers,
+    headers: responseHeaders,
   });
 };
 

@@ -8,6 +8,8 @@ const posthogOptions: Partial<PostHogConfig> = {
   ui_host: POSTHOG_UI_HOST,
   defaults: "2025-05-24",
   persistence: "memory",
+  enable_heatmaps: true,
+  capture_dead_clicks: true,
 };
 
 type PHProviderProps = {
