@@ -1,7 +1,6 @@
 import { Link } from "react-router";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
-import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import ImageBox from "~/components/ImageBox.tsx";
 import InfoBoxList from "~/components/InfoBoxList";
@@ -45,6 +44,7 @@ export default function Index() {
             </Container>
           </div>
 
+          {/* TODO: still relevant? */}
           {/* currently not used and hidden */}
           <div className="relative left-1/2 hidden w-screen -translate-x-1/2 bg-blue-800 py-24">
             <Container>
