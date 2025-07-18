@@ -1,5 +1,6 @@
 import { Link } from "react-router";
-import Background from "~/components/Background";
+import { twJoin } from "tailwind-merge";
+import { BACKGROUND_COLORS } from "~/components";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
@@ -47,9 +48,11 @@ export default function Index() {
           </div>
 
           {/* currently not used and hidden */}
-          <Background
-            backgroundColor="darkBlue"
-            className="relative left-1/2 hidden w-screen -translate-x-1/2 py-24"
+          <div
+            className={twJoin(
+              "relative left-1/2 hidden w-screen -translate-x-1/2 py-24",
+              BACKGROUND_COLORS.darkBlue,
+            )}
           >
             <Container>
               <div className="ds-stack ds-stack-32 scroll-my-40">
@@ -72,7 +75,7 @@ export default function Index() {
                 </Link>
               </div>
             </Container>
-          </Background>
+          </div>
         </>
       ),
     },
