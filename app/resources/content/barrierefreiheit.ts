@@ -1,7 +1,5 @@
 import { dedent } from "~/utils/dedentMultilineStrings";
 
-
-
 export const accessibility = {
   title: "Erklärung zur Barrierefreiheit",
   content: dedent`
