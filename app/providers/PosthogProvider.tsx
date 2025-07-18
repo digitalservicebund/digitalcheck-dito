@@ -24,18 +24,11 @@ export function PHProvider({
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    console.log({
-      posthogKeySet: !!posthogKey,
-      posthogEnabled,
-    });
-
     if (!posthogEnabled || !posthogKey) return;
 
     posthog.init(posthogKey, posthogOptions);
 
     setHydrated(true);
-
-    posthog.capture("my event", { property: "value" });
   }, [posthogEnabled, posthogKey]);
 
   if (!hydrated || !posthogEnabled) return <>{children}</>;
