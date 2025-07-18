@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-
 import Box from "~/components/Box";
 import type { ButtonProps } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
