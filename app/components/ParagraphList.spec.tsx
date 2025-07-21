@@ -254,9 +254,7 @@ test("Multiple highlights in one Absatz", () => {
 test("Highlights have unique IDs", () => {
   render(<RouterStubAllPrinciples />);
   const highlights = screen.getAllByRole("mark");
-  console.log(highlights);
   const ids = highlights.map((highlight) => highlight.id);
-  console.log(ids);
   expect(ids).toHaveLength(new Set(ids).size);
 });
 
