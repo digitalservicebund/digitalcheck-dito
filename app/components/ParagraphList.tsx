@@ -9,6 +9,7 @@ import { examples } from "~/resources/content/beispiele";
 import {
   AbsatzWithNumber,
   groupAbsaetzeWithoutRelevantPrinciples,
+  isStandaloneAbsatz,
   type Node,
   prependNumberToAbsatz,
 } from "~/utils/paragraphUtils";
@@ -85,6 +86,7 @@ function Paragraph({ paragraph }: Readonly<{ paragraph: Paragraph }>) {
       ? `(${absatzGroup[0].number}) – (${absatzGroup[absatzGroup.length - 1].number})`
       : `(${absatzGroup[0].number})`;
 
+  // renders the interlaced Absaetze with relevant PrinzipErfuellungen and grouped Absaetze without relevant PrinzipErfuellungen
   return (
     <div key={paragraph.Nummer}>
       <div className="ds-stack ds-stack-8">
@@ -97,7 +99,7 @@ function Paragraph({ paragraph }: Readonly<{ paragraph: Paragraph }>) {
         <p className="ds-subhead font-bold">{paragraph.Titel}</p>
         <div className="ds-stack ds-stack-16 border-l-4 border-gray-400 pl-8">
           {groupedAbsaetze.map((absatzGroup) =>
-            "id" in absatzGroup ? (
+            isStandaloneAbsatz(absatzGroup) ? (
               <Absatz key={absatzGroup.id} absatz={absatzGroup} />
             ) : (
               <DetailsSummary

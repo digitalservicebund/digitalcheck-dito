@@ -9,12 +9,14 @@ export type Node = {
   underline?: boolean;
 };
 
-function isStandaloneAbsatz(
+export function isStandaloneAbsatz(
   absatz: AbsatzWithNumber | AbsatzWithNumber[],
 ): absatz is AbsatzWithNumber {
   return "id" in absatz;
 }
 
+// This function returns an ordered array of Absaetze which have a relevant PrinzipErfuellungen
+// interlaced with arrays of Absaetze which have no relevant PrinzipErfuellungen that are grouped together.
 export function groupAbsaetzeWithoutRelevantPrinciples(
   absaetze: Absatz[],
   principlesToShow: Prinzip[],
