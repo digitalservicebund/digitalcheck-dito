@@ -1,0 +1,65 @@
+name: Deploy
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+        description: "Environment to deploy to (production or staging)"
+      version:
+        required: true
+        type: string
+        description: "Version/SHA to deploy"
+      package_name:
+        required: true
+        type: string
+        description: "Package name"
+    secrets:
+      DEPLOY_KEY:
+        required: true
+      ARGOCD_PIPELINE_PASSWORD:
+        required: true
+      ARGOCD_SERVER:
+        required: true
+      METRICS_DEPLOYMENT_WEBHOOK_URL:
+        required: true
+      METRICS_WEBHOOK_TOKEN:
+        required: true
+      SLACK_WEBHOOK_URL:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      packages: read
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: Deploy container image
+        uses: digitalservicebund/argocd-deploy@4fac1bb67c92ed168f6d9b22f8779ce241a9e412 # v1.0.0
+        with:
+          environment: "${{ inputs.environment }}"
+          version: ${{ inputs.version }}
+          deploying_repo: ${{ inputs.package_name }}
+          infra_repo: ${{ github.event.repository.name }}-infra
+          deploy_key: ${{ secrets.DEPLOY_KEY }}
+          app: "${{ inputs.package_name }}-${{ inputs.environment }}"
+          argocd_pipeline_password: ${{ secrets.ARGOCD_PIPELINE_PASSWORD }}
+          argocd_server: ${{ secrets.ARGOCD_SERVER }}
+          argocd_sync_timeout: 420
+
+      - name: Report Deployment
+        uses: digitalservicebund/track-deployment@5a2815e150e1268983aac5ca04c8c046ed1b614a # v1.1.0
+        with:
+          project: ${{ inputs.package_name }}
+          environment: ${{ inputs.environment }}
+          metrics_deployment_webhook_url: ${{ secrets.METRICS_DEPLOYMENT_WEBHOOK_URL }}
+          metrics_webhook_token: ${{ secrets.METRICS_WEBHOOK_TOKEN }}
+
+      - name: Send failure to Slack
+        uses: digitalservicebund/notify-on-failure-gha@814d0c4b2ad6a3443e89c991f8657b10126510bf # v1.5.0
+        if: failure()
+        with:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
