@@ -226,8 +226,8 @@ const PrincipleExplanation = ({
 
   const id = explanationID(baseID, erfuellung.Prinzip.Nummer);
 
-  // Unfortunately, the straightforward target modifier doesn't work here due to the client side navigation: https://github.com/remix-run/remix/issues/6432
-  // Using the hash leads to a hydration mismatch due to the location hash only being available on the client
+  // NOTE: The CSS target pseudo-class doesn't work here due to the client side navigation: https://github.com/remix-run/remix/issues/6432.
+  // Using the hash also leads to a hydration mismatch due to the location hash only being available on the client.
   const shouldHighlight = location.hash === `#${id}`;
   const color = HIGHLIGHT_COLORS[erfuellung.Prinzip.Nummer];
   const explanationClasses = twJoin(
