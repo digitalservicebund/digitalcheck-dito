@@ -84,7 +84,7 @@ jobs:
           if-no-files-found: error
 
       - name: Install cosign
-        uses: sigstore/cosign-installer@398d4b0eeef1380460a10c8013a76f728fb906ac # v3.9.1
+        uses: sigstore/cosign-installer@d58896d6a1865668819e1d91763c7751a165e159 # v3.9.2
 
       - name: Sign the published Docker image
         run: cosign sign --yes ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
@@ -98,38 +98,22 @@ jobs:
         with:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-  deploy:
+  deploy-to-production:
+    needs: [build-and-push-image]
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/deploy.yml
+    with:
+      environment: production
+      version: ${{ github.sha }}
+      package_name: digitalcheck-dito
+    secrets: inherit
+
+  deploy-to-staging:
     needs: [build-and-push-image]
     if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/staging/')
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    permissions:
-      packages: read
-    environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
-    steps:
-      - name: Deploy container image
-        uses: digitalservicebund/argocd-deploy@4fac1bb67c92ed168f6d9b22f8779ce241a9e412 # v1.0.0
-        with:
-          environment: "${{ env.ENVIRONMENT }}"
-          version: ${{ github.sha }}
-          deploying_repo: ${{ env.PACKAGE_NAME }}
-          infra_repo: ${{ github.event.repository.name }}-infra
-          deploy_key: ${{ secrets.DEPLOY_KEY }}
-          app: "${{ env.PACKAGE_NAME }}-${{ env.ENVIRONMENT }}"
-          argocd_pipeline_password: ${{ secrets.ARGOCD_PIPELINE_PASSWORD }}
-          argocd_server: ${{ secrets.ARGOCD_SERVER }}
-          argocd_sync_timeout: 420
-
-      - name: Report Deployment
-        uses: digitalservicebund/track-deployment@5a2815e150e1268983aac5ca04c8c046ed1b614a # v1.1.0
-        with:
-          project: ${{ env.PACKAGE_NAME }}
-          environment: ${{ env.ENVIRONMENT }}
-          metrics_deployment_webhook_url: ${{ secrets.METRICS_DEPLOYMENT_WEBHOOK_URL }}
-          metrics_webhook_token: ${{ secrets.METRICS_WEBHOOK_TOKEN }}
-
-      - name: Send failure to Slack
-        uses: digitalservicebund/notify-on-failure-gha@814d0c4b2ad6a3443e89c991f8657b10126510bf # v1.5.0
-        if: failure()
-        with:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    uses: ./.github/workflows/deploy.yml
+    with:
+      environment: staging
+      version: ${{ github.sha }}
+      package_name: digitalcheck-dito
+    secrets: inherit
