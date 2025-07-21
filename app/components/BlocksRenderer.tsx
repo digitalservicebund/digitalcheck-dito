@@ -14,12 +14,18 @@ const getElement = (node: Node): keyof JSX.IntrinsicElements => {
   }
 };
 
+// Maps Node properties to React components that can render them. Each component receives the full node as a prop.
+// E.g. { underline: UnderlineComponent } will render UnderlineComponent for nodes that have the underline property.
+type Modifiers = {
+  [K in keyof Node]?: React.ComponentType<{ node: Node }>;
+};
+
 export function RecursiveRenderer({
   content,
   modifiers,
 }: {
   content: Node[];
-  modifiers?: Partial<Record<keyof Node, React.ComponentType<{ node: Node }>>>;
+  modifiers?: Modifiers;
 }) {
   return content.map((node: Node, index) => {
     for (const [condition, ModifiedNode] of Object.entries(modifiers || {})) {
@@ -44,7 +50,7 @@ export function BlocksRenderer({
   modifiers,
 }: Readonly<{
   content: Node[];
-  modifiers?: Partial<Record<keyof Node, React.ComponentType<{ node: Node }>>>;
+  modifiers?: Modifiers;
 }>) {
   const contentWithCorectlyNestedLists = nestListInListItems(content);
   return (
