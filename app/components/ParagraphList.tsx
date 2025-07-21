@@ -1,5 +1,5 @@
 import ArrowUpwardOutlined from "@digitalservicebund/icons/ArrowUpwardOutlined";
-import { createContext, memo, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -45,6 +45,7 @@ export default function ParagraphList({
     null,
   );
 
+  // Memoize the context value to prevent unnecessary re-renders of children
   const highlightContextValue = useMemo(
     () => ({ activeHighlight, setActiveHighlight }),
     [activeHighlight, setActiveHighlight],
@@ -59,10 +60,7 @@ export default function ParagraphList({
               a.Nummer.localeCompare(b.Nummer, "de-DE", { numeric: true }),
             )
             .map((paragraph) => (
-              <MemoedParagraph
-                key={paragraph.documentId}
-                paragraph={paragraph}
-              />
+              <Paragraph key={paragraph.documentId} paragraph={paragraph} />
             ))}
         </div>
       </HighlightContext.Provider>
@@ -70,18 +68,12 @@ export default function ParagraphList({
   );
 }
 
-const MemoedParagraph = memo(function Paragraph({
-  paragraph,
-}: Readonly<{ paragraph: Paragraph }>) {
+function Paragraph({ paragraph }: Readonly<{ paragraph: Paragraph }>) {
   const principlesToShow = useContext(PrinciplesContext);
 
-  const groupedAbsaetze = useMemo(
-    () =>
-      groupAbsaetzeWithoutRelevantPrinciples(
-        paragraph.Absaetze,
-        principlesToShow,
-      ),
-    [paragraph.Absaetze, principlesToShow],
+  const groupedAbsaetze = groupAbsaetzeWithoutRelevantPrinciples(
+    paragraph.Absaetze,
+    principlesToShow,
   );
 
   // If there are no Absätze with relevant principles, don't show the paragraph
@@ -132,7 +124,7 @@ const MemoedParagraph = memo(function Paragraph({
       </div>
     </div>
   );
-});
+}
 
 const baseIDContext = createContext<string | null>(null);
 
