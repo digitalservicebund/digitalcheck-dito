@@ -128,16 +128,14 @@ function Paragraph({ paragraph }: Readonly<{ paragraph: Paragraph }>) {
   );
 }
 
-const baseIDContext = createContext<string | null>(null);
+const explanationIdPrefixContext = createContext<string | null>(null);
 
 const Absatz = ({ absatz }: { absatz: AbsatzWithNumber }) => {
-  // This ID is used to label the reference in the highlight with the general explanation header
-  // and also serves as a basis for the link between the highlight and the specific explanation
-  const baseID = `erklaerung-${absatz.id}`;
+  const explanationIdPrefix = `erklaerung-${absatz.id}`;
   const content = prependNumberToAbsatz(absatz);
 
   return (
-    <baseIDContext.Provider value={baseID}>
+    <explanationIdPrefixContext.Provider value={explanationIdPrefix}>
       <div className="[&_ol]:list-decimal [&_ol_ol]:list-[lower-alpha]">
         <BlocksRenderer
           content={content}
@@ -162,7 +160,7 @@ const Absatz = ({ absatz }: { absatz: AbsatzWithNumber }) => {
           )}
         </div>
       </div>
-    </baseIDContext.Provider>
+    </explanationIdPrefixContext.Provider>
   );
 };
 
@@ -172,10 +170,10 @@ const explanationID = (baseLabelID: string, number: number) =>
 const PrincipleHighlight = ({ node }: { node: Node }) => {
   const principlesToShow = useContext(PrinciplesContext);
   const { setActiveHighlight } = useContext(HighlightContext);
-  const baseID = useContext(baseIDContext);
+  const explanationIdPrefix = useContext(explanationIdPrefixContext);
 
   const [text, numberGroup] = node.text ? node.text.split(/(\[\d])/g) : [];
-  if (!numberGroup || !baseID) return text;
+  if (!numberGroup || !explanationIdPrefix) return text;
 
   const number = Number(numberGroup[1]) as keyof typeof HIGHLIGHT_COLORS;
   if (!principlesToShow.some(({ Nummer }) => Nummer === number)) return text;
@@ -192,7 +190,7 @@ const PrincipleHighlight = ({ node }: { node: Node }) => {
   return (
     <Link
       replace
-      to={`#${explanationID(baseID, number)}`}
+      to={`#${explanationID(explanationIdPrefix, number)}`}
       onClick={() => {
         setActiveHighlight({ id: highlightID, principleNumber: number });
       }}
@@ -220,11 +218,11 @@ const PrincipleExplanation = ({
 }) => {
   const location = useLocation();
   const { activeHighlight, setActiveHighlight } = useContext(HighlightContext);
-  const baseID = useContext(baseIDContext);
+  const explanationIdPrefix = useContext(explanationIdPrefixContext);
 
-  if (!baseID || !erfuellung.Prinzip) return null;
+  if (!explanationIdPrefix || !erfuellung.Prinzip) return null;
 
-  const id = explanationID(baseID, erfuellung.Prinzip.Nummer);
+  const id = explanationID(explanationIdPrefix, erfuellung.Prinzip.Nummer);
 
   // NOTE: The CSS target pseudo-class doesn't work here due to the client side navigation: https://github.com/remix-run/remix/issues/6432.
   // Using the hash also leads to a hydration mismatch due to the location hash only being available on the client.
