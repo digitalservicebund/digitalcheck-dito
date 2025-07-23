@@ -9,12 +9,6 @@ export type Node = {
   underline?: boolean;
 };
 
-export function isStandaloneAbsatz(
-  absatz: AbsatzWithNumber | AbsatzWithNumber[],
-): absatz is AbsatzWithNumber {
-  return "id" in absatz;
-}
-
 // This function returns an ordered array of Absaetze which have a relevant PrinzipErfuellungen
 // interlaced with arrays of Absaetze which have no relevant PrinzipErfuellungen that are grouped together.
 export function groupAbsaetzeWithoutRelevantPrinciples(
@@ -47,8 +41,8 @@ export function groupAbsaetzeWithoutRelevantPrinciples(
       const lastGroup = groups[groups.length - 1];
       // Start a new group if:
       // 1. There are no previous groups, or
-      // 2. The last item had relevant PrinzipErfuellungen (thus is a standalone Absatz with an 'id')
-      if (!lastGroup || isStandaloneAbsatz(lastGroup)) {
+      // 2. The last item had relevant PrinzipErfuellungen (thus is not an array)
+      if (!lastGroup || !Array.isArray(lastGroup)) {
         groups.push([absatz]);
         return groups;
       }

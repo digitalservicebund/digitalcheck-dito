@@ -9,7 +9,6 @@ import { examples } from "~/resources/content/beispiele";
 import {
   AbsatzWithNumber,
   groupAbsaetzeWithoutRelevantPrinciples,
-  isStandaloneAbsatz,
   type Node,
   prependNumberToAbsatz,
 } from "~/utils/paragraphUtils";
@@ -184,9 +183,7 @@ function Paragraph({ paragraph }: Readonly<{ paragraph: Paragraph }>) {
         <p className="ds-subhead font-bold">{paragraph.Titel}</p>
         <div className="ds-stack ds-stack-16 border-l-4 border-gray-400 pl-8">
           {groupedAbsaetze.map((absatzGroup) =>
-            isStandaloneAbsatz(absatzGroup) ? (
-              <Absatz key={absatzGroup.id} absatz={absatzGroup} />
-            ) : (
+            Array.isArray(absatzGroup) ? (
               <DetailsSummary
                 key={absatzGroup[0].number}
                 title={getAbsatzGroupTitle(absatzGroup)}
@@ -205,6 +202,8 @@ function Paragraph({ paragraph }: Readonly<{ paragraph: Paragraph }>) {
                   </div>
                 }
               />
+            ) : (
+              <Absatz key={absatzGroup.id} absatz={absatzGroup} />
             ),
           )}
         </div>
