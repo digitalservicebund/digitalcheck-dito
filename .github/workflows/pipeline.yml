@@ -102,6 +102,7 @@ jobs:
     needs: [build-and-push-image]
     if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/deploy.yml
+    concurrency: deploy
     with:
       environment_name: production
       environment_url: https://erarbeiten.digitalcheck.bund.de
@@ -111,6 +112,7 @@ jobs:
     needs: [build-and-push-image]
     if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/staging/')
     uses: ./.github/workflows/deploy.yml
+    concurrency: deploy
     with:
       environment_name: staging
       environment_url: https://digitalcheck-dito.dev.ds4g.net/
