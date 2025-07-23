@@ -103,9 +103,8 @@ jobs:
     if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/deploy.yml
     with:
-      environment: production
-      version: ${{ github.sha }}
-      package_name: digitalcheck-dito
+      environment_name: production
+      environment_url: https://erarbeiten.digitalcheck.bund.de
     secrets: inherit
 
   deploy-to-staging:
@@ -113,7 +112,6 @@ jobs:
     if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/staging/')
     uses: ./.github/workflows/deploy.yml
     with:
-      environment: staging
-      version: ${{ github.sha }}
-      package_name: digitalcheck-dito
+      environment_name: staging
+      environment_url: https://digitalcheck-dito.dev.ds4g.net/
     secrets: inherit

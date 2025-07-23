@@ -3,18 +3,14 @@ name: Deploy
 on:
   workflow_call:
     inputs:
-      environment:
+      environment_name:
         required: true
         type: string
         description: "Environment to deploy to (production or staging)"
-      version:
+      environment_url:
         required: true
         type: string
-        description: "Version/SHA to deploy"
-      package_name:
-        required: true
-        type: string
-        description: "Package name"
+        description: "Environment URL"
     secrets:
       DEPLOY_KEY:
         required: true
@@ -29,23 +25,28 @@ on:
       SLACK_WEBHOOK_URL:
         required: true
 
+env:
+  PACKAGE_NAME: digitalcheck-dito
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
       packages: read
-    environment: ${{ inputs.environment }}
+    environment:
+      name: ${{ inputs.environment_name }}
+      url: ${{ inputs.environment_url }}
     steps:
       - name: Deploy container image
         uses: digitalservicebund/argocd-deploy@4fac1bb67c92ed168f6d9b22f8779ce241a9e412 # v1.0.0
         with:
-          environment: "${{ inputs.environment }}"
-          version: ${{ inputs.version }}
-          deploying_repo: ${{ inputs.package_name }}
+          environment: "${{ inputs.environment_name }}"
+          version: ${{ github.sha }}
+          deploying_repo: ${{ env.PACKAGE_NAME }}
           infra_repo: ${{ github.event.repository.name }}-infra
           deploy_key: ${{ secrets.DEPLOY_KEY }}
-          app: "${{ inputs.package_name }}-${{ inputs.environment }}"
+          app: "${{ env.PACKAGE_NAME }}-${{ inputs.environment_name }}"
           argocd_pipeline_password: ${{ secrets.ARGOCD_PIPELINE_PASSWORD }}
           argocd_server: ${{ secrets.ARGOCD_SERVER }}
           argocd_sync_timeout: 420
@@ -53,8 +54,8 @@ jobs:
       - name: Report Deployment
         uses: digitalservicebund/track-deployment@5a2815e150e1268983aac5ca04c8c046ed1b614a # v1.1.0
         with:
-          project: ${{ inputs.package_name }}
-          environment: ${{ inputs.environment }}
+          project: ${{ env.PACKAGE_NAME }}
+          environment: ${{ inputs.environment_name }}
           metrics_deployment_webhook_url: ${{ secrets.METRICS_DEPLOYMENT_WEBHOOK_URL }}
           metrics_webhook_token: ${{ secrets.METRICS_WEBHOOK_TOKEN }}
 
