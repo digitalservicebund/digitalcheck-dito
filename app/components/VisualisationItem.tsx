@@ -1,5 +1,4 @@
 import ZoomInOutlined from "@digitalservicebund/icons/ZoomInOutlined";
-import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Heading from "~/components/Heading";
@@ -9,6 +8,7 @@ import { ROUTE_VISUALISATION } from "~/resources/staticRoutes";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import { Visualisierung } from "~/utils/strapiData.server";
 import { formatDate } from "~/utils/utilFunctions";
+import { BlocksRenderer } from "./BlocksRenderer";
 
 export type VisualisationItemProps = {
   visualisierung: Visualisierung;
@@ -85,7 +85,7 @@ export default function VisualisationItem({
         <Heading tagName="h3" look="ds-heading-03-reg" className="mb-16">
           {visualisierung.Titel}
         </Heading>
-        <BlocksRenderer content={visualisierung.Beschreibung}></BlocksRenderer>
+        <BlocksRenderer content={visualisierung.Beschreibung} />
       </div>
     </div>
   );

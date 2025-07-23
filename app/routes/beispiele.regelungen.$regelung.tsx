@@ -1,7 +1,7 @@
-import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { useLoaderData, useOutletContext, type UIMatch } from "react-router";
 
 import Background from "~/components/Background";
+import { BlocksRenderer } from "~/components/BlocksRenderer";
 import Container from "~/components/Container";
 import CustomLink from "~/components/CustomLink";
 import Header from "~/components/Header";
