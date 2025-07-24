@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import type { Node } from "~/utils/paragraphUtils";
 import twMerge from "~/utils/tailwindMerge";
-import { BACKGROUND_COLORS } from ".";
 import Badge, { BadgeProps } from "./Badge";
 import { BlocksRenderer } from "./BlocksRenderer";
 import { ButtonProps } from "./Button";
@@ -52,8 +51,7 @@ const InfoBox = ({
       data-testid="info-box-container"
       className={twMerge(
         "flex scroll-my-40 flex-col gap-32 sm:flex-row",
-        look === "highlight" &&
-          `rounded-lg px-16 py-40 sm:px-80 ${BACKGROUND_COLORS.blue}`,
+        look === "highlight" && `bg-ds-blue rounded-lg px-16 py-40 sm:px-80`,
         className,
       )}
     >

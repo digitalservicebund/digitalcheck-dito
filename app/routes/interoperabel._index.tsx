@@ -1,5 +1,3 @@
-import { twJoin } from "tailwind-merge";
-import { BACKGROUND_COLORS } from "~/components";
 import Accordion from "~/components/Accordion";
 import Box from "~/components/Box.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
@@ -74,13 +72,8 @@ export default function Interoperability() {
             <ImageZoomable image={interoperability.info.image} />
           </Container>
 
-          <div
-            className={twJoin(
-              "relative left-1/2 w-screen -translate-x-1/2 py-48",
-              BACKGROUND_COLORS.blue,
-            )}
-          >
-            <Container backgroundColor="white" overhangingBackground>
+          <div className="bg-ds-blue relative left-1/2 w-screen -translate-x-1/2 py-48">
+            <Container className="bg-white" overhangingBackground>
               <Heading
                 tagName="h2"
                 text={interoperability.resources.headline}
@@ -128,7 +121,7 @@ export default function Interoperability() {
         subtitle={interoperability.content}
       />
 
-      <div className={BACKGROUND_COLORS.midBlue}>
+      <div className="bg-ds-mid-blue">
         <Container className="flex flex-col py-0 lg:h-[626px] lg:flex-row">
           <div className="py-32 sm:py-48 lg:w-1/2 lg:self-center lg:pr-48">
             <Heading

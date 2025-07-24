@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import { BACKGROUND_COLORS } from "~/components";
 
 import Box from "~/components/Box";
 import type { ButtonProps } from "~/components/Button.tsx";
@@ -90,8 +89,7 @@ export default function Index() {
         {tab.offerings.map((offering: Offering) => (
           <Container
             key={offering.title}
-            className="mb-32 flex gap-32 rounded-xl px-40 max-md:flex-col"
-            backgroundColor="blue"
+            className="bg-ds-blue mb-32 flex gap-32 rounded-xl px-40 max-md:flex-col"
           >
             <Box
               heading={{
@@ -104,7 +102,7 @@ export default function Index() {
               buttons={offering.button ? [offering.button] : []}
             />
             <div className="flex-none space-y-20 md:w-[310px]">
-              <div className={BACKGROUND_COLORS.white}>
+              <div className="bg-white">
                 <div className="p-28">
                   <Header
                     heading={{
@@ -135,7 +133,7 @@ export default function Index() {
                 </div>
               </div>
               {offering.examples && (
-                <div className={BACKGROUND_COLORS.white}>
+                <div className="bg-white">
                   <div className="divide-y divide-gray-700">
                     {offering.examples.map((example, idx) => (
                       <div key={`${offering.title}-example-${idx}`}>
@@ -165,7 +163,7 @@ export default function Index() {
     <>
       <Hero title={title} subtitle={subtitle} />
 
-      <div className={BACKGROUND_COLORS.midBlue}>
+      <div className="bg-ds-mid-blue">
         <Container className="flex flex-col py-0 lg:h-[420px] lg:flex-row">
           <div className="py-32 sm:py-48 lg:w-1/2 lg:self-center">
             <RichText
@@ -220,7 +218,7 @@ export default function Index() {
             ))}
         </div>
       </Container>
-      <div className={BACKGROUND_COLORS.blue}>
+      <div className="bg-ds-blue">
         <Container>
           <Heading id="hilfe" tagName="h2" text={supportHow.title} />
           <div className="ds-stack ds-stack-16 pt-32 pb-40">
@@ -234,7 +232,7 @@ export default function Index() {
         </Container>
       </div>
       <div id="angebote">
-        <div className={BACKGROUND_COLORS.white}>
+        <div className="bg-white">
           <Container className="ds-stack ds-stack-40">
             <Box
               heading={{
@@ -249,7 +247,7 @@ export default function Index() {
           </Container>
         </div>
       </div>
-      <div className={BACKGROUND_COLORS.midBlue}>
+      <div className="bg-ds-mid-blue">
         <Container>
           <Box
             heading={{

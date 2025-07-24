@@ -1,6 +1,4 @@
 import { useLoaderData, useOutletContext, type UIMatch } from "react-router";
-
-import { BACKGROUND_COLORS } from "~/components";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import Container from "~/components/Container";
 import CustomLink from "~/components/CustomLink";
@@ -98,7 +96,7 @@ export default function Gesetz() {
     <>
       <Hero title={regelung.Titel} subtitle={examplesRegelungen.subtitle[0]} />
 
-      <div className={BACKGROUND_COLORS.midLightBlue}>
+      <div className="bg-ds-mid-light-blue">
         <Container className="py-0">
           <InlineInfoList
             items={[

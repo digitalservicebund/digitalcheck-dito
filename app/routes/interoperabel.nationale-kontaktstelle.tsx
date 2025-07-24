@@ -1,5 +1,3 @@
-import { twJoin } from "tailwind-merge";
-import { BACKGROUND_COLORS } from "~/components";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
@@ -50,12 +48,7 @@ export default function SPOC() {
             className="mb-48"
             markdown={spoc.landscape.contentAfter.outro}
           />
-          <div
-            className={twJoin(
-              "relative left-1/2 w-screen -translate-x-1/2",
-              BACKGROUND_COLORS.blue,
-            )}
-          >
+          <div className="bg-ds-blue relative left-1/2 w-screen -translate-x-1/2">
             <Container>
               <Heading
                 tagName="h2"

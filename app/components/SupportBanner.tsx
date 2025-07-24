@@ -1,6 +1,5 @@
 import Box from "~/components/Box";
 import Container from "~/components/Container";
-import { BACKGROUND_COLORS } from ".";
 
 export type SupportBannerProps = {
   title: string;
@@ -12,7 +11,7 @@ export default function SupportBanner({
   text,
 }: Readonly<SupportBannerProps>) {
   return (
-    <div className={BACKGROUND_COLORS.midBlue}>
+    <div className="bg-ds-mid-blue">
       <Container className="ds-stack ds-stack-16">
         <Box
           heading={{

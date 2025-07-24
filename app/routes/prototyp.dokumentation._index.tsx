@@ -13,7 +13,6 @@ import {
 import React from "react";
 import { useNavigate } from "react-router";
 import { twJoin } from "tailwind-merge";
-import { BACKGROUND_COLORS } from "~/components";
 import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
@@ -143,12 +142,7 @@ export default function Index() {
         </div>
 
         <div className="flex flex-col gap-24 sm:flex-row">
-          <div
-            className={twJoin(
-              "flex w-full flex-col p-16 sm:p-32",
-              BACKGROUND_COLORS.white,
-            )}
-          >
+          <div className="flex w-full flex-col bg-white p-16 sm:p-32">
             <InfoBox
               heading={{
                 text: "Neue Dokumentation starten",
@@ -164,9 +158,7 @@ export default function Index() {
             </div>
           </div>
 
-          <div
-            className={twJoin("w-full p-16 sm:p-32", BACKGROUND_COLORS.white)}
-          >
+          <div className="w-full bg-white p-16 sm:p-32">
             <section className="flex flex-row gap-16">
               <div className="ds-stack ds-stack-8 w-full scroll-my-40">
                 <ul

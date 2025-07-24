@@ -1,6 +1,5 @@
 import { useLoaderData } from "react-router";
 
-import { BACKGROUND_COLORS } from "~/components";
 import Box from "~/components/Box";
 import Card from "~/components/Card";
 import Container from "~/components/Container";
@@ -89,7 +88,7 @@ export default function Index() {
         ))}
       </Container>
       {"tip" in content && (
-        <div className={BACKGROUND_COLORS.yellow}>
+        <div className="bg-ds-yellow">
           <Container>
             <InfoBox
               heading={{ text: content.tip.title, tagName: "h3" }}
@@ -109,7 +108,7 @@ export default function Index() {
       </Container>
 
       {"support" in content && (
-        <div className={BACKGROUND_COLORS.blue}>
+        <div className="bg-ds-blue">
           <Container>
             <Box
               heading={{

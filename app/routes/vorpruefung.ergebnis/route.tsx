@@ -11,7 +11,6 @@ import React, { useState } from "react";
 import { data, redirect, useLoaderData } from "react-router";
 import { twJoin } from "tailwind-merge";
 
-import { BACKGROUND_COLORS } from "~/components";
 import Accordion from "~/components/Accordion";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
@@ -174,13 +173,15 @@ export default function Result() {
     result.digital === ResultType.UNSURE ? preCheckResult.unsure.hint : "";
   return (
     <>
-      <div className={twJoin("py-40 print:pb-0", BACKGROUND_COLORS.blue)}>
+      <div className="bg-ds-blue py-40 print:pb-0">
         <div className="px-16">
           <Container
-            className="rounded-t-lg py-32"
-            backgroundColor={
-              result.digital === ResultType.UNSURE ? "lightYellow" : "midBlue"
-            }
+            className={twJoin(
+              "rounded-t-lg py-32",
+              result.digital === ResultType.UNSURE
+                ? "bg-ds-light-yellow"
+                : "bg-ds-mid-blue",
+            )}
           >
             {vorhabenTitle && (
               <Header
@@ -207,7 +208,7 @@ export default function Result() {
               />
             </div>
           </Container>
-          <Container className="rounded-b-lg" backgroundColor="white">
+          <Container className="rounded-b-lg bg-white">
             {resultContent.infoboxContent && (
               <Box
                 heading={{

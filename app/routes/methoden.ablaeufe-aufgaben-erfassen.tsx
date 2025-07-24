@@ -1,5 +1,4 @@
 import { useLoaderData } from "react-router";
-import { BACKGROUND_COLORS } from "~/components";
 import Card from "~/components/Card";
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
@@ -149,7 +148,7 @@ export default function Visualization() {
         />
       </Container>
 
-      <div className={BACKGROUND_COLORS.blue}>
+      <div className="bg-ds-blue">
         <Container>
           <InfoBox
             badge={methodsTasksProcesses.support.badge}

@@ -2,7 +2,6 @@ import { twJoin } from "tailwind-merge";
 import type { ImageProps } from "~/components/Image";
 import ImageZoomable from "~/components/ImageZoomable";
 import twMerge from "~/utils/tailwindMerge";
-import { BACKGROUND_COLORS, isBackgroundColor } from ".";
 import Badge from "./Badge";
 import { type ButtonProps } from "./Button";
 import ButtonContainer from "./ButtonContainer";
@@ -16,7 +15,7 @@ export type ListItemProps = {
   spacer?: boolean | HeadingProps;
   content?: string;
   buttons?: ButtonProps[];
-  background?: string;
+  backgroundColorClass?: string;
   parentHasHeading?: boolean;
   isDisabled?: boolean;
   readonly numeric?: number;
@@ -34,18 +33,15 @@ const ListItem = ({
   buttons,
   numeric,
   hasBullet,
-  background,
   parentHasHeading,
   isDisabled,
   image,
   className,
+  backgroundColorClass,
 }: ListItemProps) => {
-  const backgroundColor =
-    background && isBackgroundColor(background) ? background : undefined;
-  const backgroundColorClassNames =
-    backgroundColor && backgroundColor !== "default"
-      ? `px-80 pt-40 pb-48 max-sm:px-16 max-sm:py-32 ${BACKGROUND_COLORS[backgroundColor]}`
-      : "mt-4";
+  const backgroundColorClassNames = backgroundColorClass
+    ? `px-80 pt-40 pb-48 max-sm:px-16 max-sm:py-32 ${backgroundColorClass}`
+    : "mt-4";
   const textColor = isDisabled ? "text-gray-800" : "";
   const responsiveWidth = numeric ? "w-[40px]" : "w-[40px] max-sm:w-[20px]";
 
@@ -96,13 +92,13 @@ const ListItem = ({
               <div
                 className={twJoin(
                   "flex size-[20px] items-center justify-center rounded-full bg-blue-900",
-                  backgroundColor ? "mt-0" : "mt-10",
+                  backgroundColorClass ? "mt-0" : "mt-10",
                 )}
                 role="none"
               ></div>
             )}
           </div>
-          <div className={twJoin(backgroundColor && "w-full rounded-lg")}>
+          <div className={twJoin(backgroundColorClass && "w-full rounded-lg")}>
             <div
               className={twJoin(
                 "flex flex-col gap-16",

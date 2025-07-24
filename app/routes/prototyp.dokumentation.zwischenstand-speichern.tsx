@@ -1,7 +1,5 @@
 import { FileDownloadOutlined } from "@digitalservicebund/icons";
 import { useNavigate } from "react-router";
-import { twJoin } from "tailwind-merge";
-import { BACKGROUND_COLORS } from "~/components";
 import Box from "~/components/Box.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";
@@ -31,9 +29,9 @@ export default function DocumentationResult() {
   );
 
   return (
-    <div className={twJoin("py-40 print:pb-0", BACKGROUND_COLORS.blue)}>
+    <div className="bg-ds-blue py-40 print:pb-0">
       <div className="px-16">
-        <Container className="rounded-t-lg py-32" backgroundColor="midBlue">
+        <Container className="bg-ds-mid-blue rounded-t-lg py-32">
           <div className="flex flex-col gap-16 sm:flex-row">
             <FileDownloadOutlined className="size-36" />
             <Header
@@ -46,7 +44,7 @@ export default function DocumentationResult() {
             />
           </div>
         </Container>
-        <Container className="rounded-b-lg" backgroundColor="white">
+        <Container className="rounded-b-lg bg-white">
           <Box
             content={{
               markdown: prototypeAlternativeEnabled

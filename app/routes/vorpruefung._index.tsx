@@ -1,5 +1,3 @@
-import { twJoin } from "tailwind-merge";
-import { BACKGROUND_COLORS } from "~/components";
 import Accordion from "~/components/Accordion";
 import Box from "~/components/Box";
 import ButtonContainer from "~/components/ButtonContainer";
@@ -40,12 +38,7 @@ export default function Index() {
     {
       title: preCheck.start.info.tabName,
       content: (
-        <div
-          className={twJoin(
-            "flex flex-col-reverse items-center gap-48 px-16 py-40 md:flex-row md:gap-64 md:px-64",
-            BACKGROUND_COLORS.blue,
-          )}
-        >
+        <div className="bg-ds-blue flex flex-col-reverse items-center gap-48 px-16 py-40 md:flex-row md:gap-64 md:px-64">
           <Image
             url={preCheck.start.info.image.src}
             alternativeText={preCheck.start.info.image.alt}
