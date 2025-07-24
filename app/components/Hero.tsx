@@ -18,11 +18,6 @@ export default function Hero({
   subtitle,
   className,
 }: Readonly<HeroProps>) {
-  const cssClasses = twMerge(
-    BACKGROUND_COLORS[backgroundColor],
-    backgroundColor === "darkBlue" && "text-white",
-  );
-
   return (
     <div className={twMerge("bg-blue-100", className)}>
       <Container className="ds-stack ds-stack-16">

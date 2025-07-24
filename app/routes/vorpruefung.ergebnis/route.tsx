@@ -11,7 +11,6 @@ import React, { useState } from "react";
 import { data, redirect, useLoaderData } from "react-router";
 import { twJoin } from "tailwind-merge";
 
-import { BACKGROUND_COLORS } from "~/components";
 import Accordion from "~/components/Accordion";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
