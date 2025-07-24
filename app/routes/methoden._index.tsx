@@ -58,8 +58,7 @@ export default function Methoden() {
 
         <div className="flex flex-col gap-24 sm:flex-row">
           <InfoBox
-            look="highlight"
-            className="px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
+            look="method"
             badge={{ text: methods.itSystems.badge, look: "hint" }}
             heading={{
               text: methods.itSystems.heading,
@@ -71,8 +70,7 @@ export default function Methoden() {
           />
 
           <InfoBox
-            look="highlight"
-            className="px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
+            look="method"
             badge={{
               text: methods.technicalFeasibility.badge,
               look: "hint",
