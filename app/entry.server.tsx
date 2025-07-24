@@ -136,7 +136,7 @@ function handleBrowserRequest(
 
   responseHeaders.set(
     "Content-Security-Policy",
-    `default-src 'none'; script-src 'self' https: 'nonce-${nonce}'; style-src 'self'; font-src 'self'; img-src 'self' ${STRAPI_MEDIA_URL} data:; frame-ancestors 'self' https://calendar.google.com https://calendar.app.google; frame-src 'self' https://calendar.google.com; connect-src 'self' https://plausible.io`,
+    `default-src 'self'; script-src 'self' https://*.posthog.com https: 'nonce-${nonce}'; style-src 'self' https://*.posthog.com; font-src 'self' https://*.posthog.com; img-src 'self' ${STRAPI_MEDIA_URL} data: https://*.posthog.com; frame-ancestors 'self' https://calendar.google.com https://calendar.app.google https://*.posthog.com; frame-src 'self' https://calendar.google.com; connect-src 'self' https://plausible.io https://*.posthog.com; worker-src 'self' https://*.posthog.com;`,
   );
 
   return new Promise((resolve, reject) => {
