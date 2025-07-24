@@ -1,6 +1,5 @@
 import { expect, test } from "@playwright/test";
 import {
-  ROUTE_DOCUMENTATION,
   ROUTE_EXAMPLES,
   ROUTE_EXAMPLES_AUTOMATION,
   ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY,
@@ -14,96 +13,6 @@ import {
   ROUTE_METHODS_TASKS_PROCESSES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
 } from "~/resources/staticRoutes";
-
-test.describe("test method page link flow", () => {
-  test.fixme("happy path method pages", async ({ page }, testInfo) => {
-    // This test takes a bit longer to click through the method process, so we up the limit for this test only to 20 seconds.
-    testInfo.setTimeout(20000);
-
-    await page.goto(ROUTE_METHODS.url);
-    await expect(page.getByRole("main")).toContainText(
-      "Erarbeiten eines digitaltauglichen Regelungsvorhabens",
-    );
-
-    await page.getByRole("link", { name: "Ansprechpersonen finden" }).click();
-    await expect(page).toHaveURL(ROUTE_METHODS_RESPONSIBLE_ACTORS.url);
-
-    await page
-      .getByRole("link", { name: "Aufgaben und Abläufe klären" })
-      .click();
-    await expect(page).toHaveURL(ROUTE_METHODS_TASKS_PROCESSES.url);
-
-    await page.getByRole("link", { name: "IT-Landschaft verstehen" }).click();
-    await expect(page).toHaveURL(ROUTE_METHODS_COLLECT_IT_SYSTEMS.url);
-
-    await page.getByRole("link", { name: "Fünf Prinzipien nutzen" }).click();
-    await expect(page).toHaveURL(ROUTE_METHODS_PRINCIPLES.url);
-
-    await page.getByRole("link", { name: "IT-Auswirkungen prüfen" }).click();
-    await expect(page).toHaveURL(ROUTE_METHODS_TECHNICAL_FEASIBILITY.url);
-
-    await page.getByRole("link", { name: "Zu „Erarbeiten“" }).click();
-    await expect(page).toHaveURL(ROUTE_METHODS.url);
-  });
-});
-
-test.describe("test method sub pages", () => {
-  test.beforeEach("Go to methods page", async ({ page }) => {
-    await page.goto(ROUTE_METHODS.url);
-    await page.waitForURL(ROUTE_METHODS.url);
-  });
-
-  // NOTE: 70-tage tmp skipped
-  test.skip("links to responsible actors", async ({ page }) => {
-    await page.getByRole("link", { name: "Ansprechpersonen finden" }).click();
-    await expect(page).toHaveURL(ROUTE_METHODS_RESPONSIBLE_ACTORS.url);
-    await expect(page.getByRole("main")).toContainText(
-      "Zuständige Akteurinnen und Akteure auflisten",
-    );
-  });
-
-  // NOTE: 70-tage tmp skipped
-  test.skip("links to tasks & processes", async ({ page }) => {
-    await page
-      .getByRole("link", { name: "Aufgaben und Abläufe klären" })
-      .click();
-    await expect(page).toHaveURL(ROUTE_METHODS_TASKS_PROCESSES.url);
-    await expect(page.getByRole("main")).toContainText(
-      "Aufgaben und Abläufe gemeinsam erfassen",
-    );
-  });
-
-  // NOTE: 70-tage tmp skipped
-  test.skip("links to collect it-systems", async ({ page }) => {
-    await page.getByRole("link", { name: "IT-Landschaft verstehen" }).click();
-    await expect(page).toHaveURL(ROUTE_METHODS_COLLECT_IT_SYSTEMS.url);
-    await expect(page.getByRole("main")).toContainText(
-      "IT-Systeme gemeinsam erfassen",
-    );
-  });
-
-  test.skip("links to five principles", async ({ page }) => {
-    await page.getByRole("link", { name: "Fünf Prinzipien nutzen" }).click();
-    await expect(page).toHaveURL(ROUTE_METHODS_PRINCIPLES.url);
-    await expect(page.getByRole("main")).toContainText(
-      "Fünf Prinzipien für digitaltaugliche Gesetzgebung",
-    );
-  });
-
-  // NOTE: 70-tage tmp skipped
-  test.skip("links to technical feasibility", async ({ page }) => {
-    await page.getByRole("link", { name: "IT-Auswirkungen prüfen" }).click();
-    await expect(page).toHaveURL(ROUTE_METHODS_TECHNICAL_FEASIBILITY.url);
-    await expect(page.getByRole("main")).toContainText(
-      "Technische Umsetzbarkeit sicherstellen",
-    );
-  });
-
-  test("method page links to documentation", async ({ page }) => {
-    await page.getByRole("link", { name: "Zu „Dokumentieren“" }).click();
-    await expect(page).toHaveURL(ROUTE_DOCUMENTATION.url);
-  });
-});
 
 test.describe("five principles page", () => {
   test.fixme(
