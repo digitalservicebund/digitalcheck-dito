@@ -8,9 +8,11 @@ describe("Methoden Route - Integration Tests", () => {
     return render(<MemoryRouter>{component}</MemoryRouter>);
   };
 
-  it("renders the Hero section with the correct title", () => {
+  beforeEach(() => {
     renderWithRouter(<Methoden />);
+  });
 
+  it("renders the Hero section with the correct title", () => {
     expect(
       screen.getByRole("heading", {
         name: "Erarbeiten eines digitaltauglichen Regelungsvorhabens",
@@ -20,8 +22,6 @@ describe("Methoden Route - Integration Tests", () => {
   });
 
   it("renders the BulletList with all methods", () => {
-    renderWithRouter(<Methoden />);
-
     expect(
       screen.getByRole("heading", {
         name: "Erfassen des Status Quo",
@@ -71,8 +71,6 @@ describe("Methoden Route - Integration Tests", () => {
   });
 
   it('renders the "Further Methods" content', () => {
-    renderWithRouter(<Methoden />);
-
     expect(
       screen.getByRole("heading", {
         name: "Weitere Methoden, die Sie nutzen können",
@@ -100,7 +98,6 @@ describe("Methoden Route - Integration Tests", () => {
   });
 
   it("renders the SupportBanner with correct content", () => {
-    renderWithRouter(<Methoden />);
     expect(
       screen.getByRole("heading", {
         name: "Sie haben Gesprächsbedarf zu Ihrem Vorhaben?",
@@ -110,7 +107,6 @@ describe("Methoden Route - Integration Tests", () => {
   });
 
   it('renders the NumberedList for "Next Steps" with correct items', () => {
-    renderWithRouter(<Methoden />);
     expect(
       screen.getByRole("heading", { name: "So machen Sie weiter", level: 2 }),
     ).toBeInTheDocument();
