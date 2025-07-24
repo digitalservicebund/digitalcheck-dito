@@ -22,13 +22,13 @@ import { BlocksRenderer } from "./BlocksRenderer";
 /*
  Notes
  =====
- - In general, the architecture is deeply nested mirroring the way a law is structured and: law > Paragraphs > Absaetze (> saetze)
+ - In general, the architecture is deeply nested mirroring the way a law is structured and: law > Paragraphs > Absaetze (> Saetze)
    - The text content of the Absaetze comes from Strapi in a proprietary blocks content format with recursively nested nodes
    - These nodes represent text elements (paragraphs, lists, list items, text, ...)
    - We render these nodes using our own recursive BlocksRenderer instead of relying on the "official" one,
      because we use a hacky convention for highlighting good principles in the text (underlines followed by a number in brackets [1])
      and need to replace these nodes and their text with Highlights
-   - The architecture below sketches repeated components examplatory through multiple occurences.
+   - The architecture below sketches repeated components exemplary through multiple occurrences.
  - principlesToShow (relevant principles) are the ones that should be highlighted on a page.
    - This could be all of them for a single law page or just one of them for a principle page.
    - The architecture is designed to also support subsets for future filtering.
@@ -57,7 +57,7 @@ import { BlocksRenderer } from "./BlocksRenderer";
  │    │    │    │ Based on the modifier, renders underlined text as PrincipleHighlights.
  │    │    │    │
  │    │    │    ├─── PrincipleHighlight
- │    │    │    │     │ Highlights a passage of text and provides a link to the explanation if the hightlight is of a relevant principle.
+ │    │    │    │     │ Highlights a passage of text and provides a link to the explanation if the highlight is of a relevant principle.
  │    │    │    │     │ Otherwise, just return plain text.
  │    │    │    │     ├─ Context consumed: principlesToShow, setActiveHighlight, explanationIdPrefix
  │    │    │    │     └─ onClick: setActiveHighlight to this PrincipleHighlight
