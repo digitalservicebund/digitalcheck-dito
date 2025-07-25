@@ -22,7 +22,7 @@ export const methodStepsItems = (
 
     return {
       ...restOfItem,
-      background: isSubstep ? "blue" : undefined,
+      backgroundColorClass: isSubstep ? "bg-ds-blue" : undefined,
       hasBullet: isSubstep,
       className: isSubstep ? "mb-24" : undefined,
       content:

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { twJoin } from "tailwind-merge";
-import Background from "~/components/Background";
 import Button from "~/components/Button";
 import Container from "~/components/Container";
 import RichText from "~/components/RichText";
@@ -157,23 +156,20 @@ export default function FeedbackForm(props: Readonly<FeedbackFormProps>) {
   if (submitted) {
     return (
       <div ref={thankYouMessageRef} tabIndex={-1} aria-live="polite">
-        <Background backgroundColor="blue" className="pt-40 pb-48">
-          <Container backgroundColor="white" overhangingBackground>
+        <div className="bg-ds-blue pt-40 pb-48">
+          <Container className="bg-white" overhangingBackground>
             <h2>{props.success.heading}</h2>
             <br />
             <p>{props.success.text}</p>
           </Container>
-        </Background>
+        </div>
       </div>
     );
   }
 
   return (
-    <Background
-      backgroundColor="blue"
-      className={twJoin("pt-40 pb-48", props.className)}
-    >
-      <Container backgroundColor="white" overhangingBackground>
+    <div className={twJoin("bg-ds-blue pt-40 pb-48", props.className)}>
+      <Container className="bg-white" overhangingBackground>
         <h2>{props.heading}</h2>
         <form onSubmit={handleSubmit} className="mb-48">
           <span>
@@ -186,6 +182,6 @@ export default function FeedbackForm(props: Readonly<FeedbackFormProps>) {
         </form>
         <RichText markdown={props.contact} className="font-bold" />
       </Container>
-    </Background>
+    </div>
   );
 }

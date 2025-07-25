@@ -13,7 +13,6 @@ import {
 import React from "react";
 import { useNavigate } from "react-router";
 import { twJoin } from "tailwind-merge";
-import Background from "~/components/Background";
 import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
@@ -143,10 +142,7 @@ export default function Index() {
         </div>
 
         <div className="flex flex-col gap-24 sm:flex-row">
-          <Background
-            backgroundColor="white"
-            className="flex w-full flex-col p-16 sm:p-32"
-          >
+          <div className="flex w-full flex-col bg-white p-16 sm:p-32">
             <InfoBox
               heading={{
                 text: "Neue Dokumentation starten",
@@ -160,9 +156,9 @@ export default function Index() {
                 Dokumentation starten
               </Button>
             </div>
-          </Background>
+          </div>
 
-          <Background backgroundColor="white" className="w-full p-16 sm:p-32">
+          <div className="w-full bg-white p-16 sm:p-32">
             <section className="flex flex-row gap-16">
               <div className="ds-stack ds-stack-8 w-full scroll-my-40">
                 <ul
@@ -208,7 +204,7 @@ export default function Index() {
                 </ul>
               </div>
             </section>
-          </Background>
+          </div>
         </div>
 
         <RichText

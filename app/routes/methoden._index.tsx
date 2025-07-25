@@ -1,5 +1,4 @@
 import React from "react";
-import Background from "~/components/Background";
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
@@ -58,40 +57,32 @@ export default function Methoden() {
         />
 
         <div className="flex flex-col gap-24 sm:flex-row">
-          <Background
-            backgroundColor="blue"
-            className="px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
-          >
-            <InfoBox
-              badge={{ text: methods.itSystems.badge, look: "hint" }}
-              heading={{
-                text: methods.itSystems.heading,
-                tagName: "h3",
-                className: "ds-heading-03-bold",
-              }}
-              content={methods.itSystems.content}
-              buttons={methods.itSystems.buttons}
-            />
-          </Background>
+          <InfoBox
+            look="method"
+            badge={{ text: methods.itSystems.badge, look: "hint" }}
+            heading={{
+              text: methods.itSystems.heading,
+              tagName: "h3",
+              className: "ds-heading-03-bold",
+            }}
+            content={methods.itSystems.content}
+            buttons={methods.itSystems.buttons}
+          />
 
-          <Background
-            backgroundColor="blue"
-            className="px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
-          >
-            <InfoBox
-              badge={{
-                text: methods.technicalFeasibility.badge,
-                look: "hint",
-              }}
-              heading={{
-                text: methods.technicalFeasibility.heading,
-                tagName: "h3",
-                className: "ds-heading-03-bold",
-              }}
-              content={methods.technicalFeasibility.content}
-              buttons={methods.technicalFeasibility.buttons}
-            />
-          </Background>
+          <InfoBox
+            look="method"
+            badge={{
+              text: methods.technicalFeasibility.badge,
+              look: "hint",
+            }}
+            heading={{
+              text: methods.technicalFeasibility.heading,
+              tagName: "h3",
+              className: "ds-heading-03-bold",
+            }}
+            content={methods.technicalFeasibility.content}
+            buttons={methods.technicalFeasibility.buttons}
+          />
         </div>
       </Container>
 

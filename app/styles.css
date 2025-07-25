@@ -14,9 +14,14 @@
   --color-principle-5: #cce7db; /* order 4 */
   --color-principle-3: #cce4f0; /* order 5 */
 
-  --color-principle-4: var(
-    --color-orange-500
-  ); /* order 6 -> not used anymore */
+  /* Dito default colors: */
+  --color-ds-blue: #f2f6f8; /* blue-100 */
+  --color-ds-mid-light-blue: #ecf1f4; /* blue-200 */
+  --color-ds-mid-blue: #dce8ef; /* blue-300 */
+  --color-ds-dark-blue: #004b76; /* blue-800 */
+
+  --color-ds-yellow: #f9ec9e; /* yellow-300 */
+  --color-ds-light-yellow: #fff9d2; /* yellow-200 */
 }
 
 @layer base {
@@ -84,7 +89,7 @@
   }
 
   *:focus-visible {
-    @apply text-blue-800 no-underline outline outline-2 outline-offset-1 outline-blue-800;
+    @apply text-blue-800 no-underline outline-2 outline-offset-1 outline-blue-800;
   }
 }
 
@@ -97,6 +102,10 @@
 }
 
 @utility container-overhanging-background {
+  @apply mx-auto;
+  max-width: 63rem;
+  padding: 2.5rem 3rem 3rem;
+
   margin-left: clamp(1rem, 5vw, 3rem);
   margin-right: clamp(1rem, 5vw, 3rem);
 }
