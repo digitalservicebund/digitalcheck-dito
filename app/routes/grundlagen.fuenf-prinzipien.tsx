@@ -40,7 +40,10 @@ export default function FundamentalsFivePrinciples() {
           <InfoBox
             identifier={slugify(principle.title)}
             key={slugify(principle.title)}
-            Icon={principle.icon}
+            visual={{
+              type: "icon",
+              Icon: principle.icon,
+            }}
             heading={{
               tagName: "h2",
               text: principle.title,
