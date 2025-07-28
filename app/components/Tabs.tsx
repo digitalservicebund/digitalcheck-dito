@@ -106,9 +106,9 @@ export default function Tabs({
             onClick={() => handleTabInteraction(index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
             className={twMerge(
-              "relative -mb-[3px] box-border min-h-[70px] cursor-pointer border-b-[3px] border-blue-500 px-24 py-12 text-left leading-tight hyphens-auto text-blue-800 hover:bg-blue-100",
+              "hover:bg-ds-blue text-ds-dark-blue relative -mb-[3px] box-border min-h-[70px] cursor-pointer border-b-[3px] border-blue-500 px-24 py-12 text-left leading-tight hyphens-auto",
               activeTab === index &&
-                "border-b-4 border-blue-800 bg-blue-100 font-bold",
+                "bg-ds-blue border-ds-dark-blue border-b-4 font-bold",
               getPlausibleEventClassName(`Tab+Bar.${tab.plausibleEventName}`),
             )}
           >
@@ -126,7 +126,7 @@ export default function Tabs({
           }}
         >
           {/* Container for positioning */}
-          <ListboxButton className="ds-label-02-bold relative h-[70px] w-full cursor-pointer border-[4px] border-transparent bg-blue-100 pl-[16px] text-left text-blue-800 hover:bg-blue-300 focus:border-blue-800">
+          <ListboxButton className="ds-label-02-bold bg-ds-blue hover:bg-ds-mid-blue text-ds-dark-blue focus:border-ds-dark-blue relative h-[70px] w-full cursor-pointer border-[4px] border-transparent pl-[16px] text-left">
             {({ open }) => (
               <>
                 {tabs[activeTab].title}
@@ -142,8 +142,8 @@ export default function Tabs({
                 key={tab.title}
                 className={({ focus, selected }) =>
                   twJoin(
-                    "ds-label-02-regular relative cursor-pointer border-[4px] border-transparent py-[10px] pr-[10px] pl-[16px] text-blue-800 select-none first:pt-[16px] last:pb-[16px] focus:border-blue-800",
-                    focus ? "bg-blue-300" : "bg-blue-100",
+                    "ds-label-02-regular text-ds-dark-blue focus:border-ds-dark-blue relative cursor-pointer border-[4px] border-transparent py-[10px] pr-[10px] pl-[16px] select-none first:pt-[16px] last:pb-[16px]",
+                    focus ? "bg-ds-mid-blue" : "bg-ds-blue",
                     // Selected item should be just visible in ListboxButton
                     selected && "hidden",
                     tab.plausibleEventName &&

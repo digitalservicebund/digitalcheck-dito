@@ -21,7 +21,7 @@ const Stepper = <T extends { url: string; title: string }>({
           aria-label={element.title}
           className={twJoin(
             "h-6 flex-1 transition-all duration-300",
-            index <= currentIndex ? "bg-blue-800" : "bg-blue-300",
+            index <= currentIndex ? "bg-ds-dark-blue" : "bg-ds-mid-blue",
           )}
         />
       ))}

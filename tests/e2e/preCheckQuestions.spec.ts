@@ -286,10 +286,10 @@ test.describe("test question navigation on mobile screens", () => {
 
     // Check that the first and second question link has a dark color
     await expect(linkBar.locator(`a[href="${questions[0].url}"]`)).toHaveClass(
-      /bg-blue-800/,
+      /bg-ds-dark-blue/,
     );
     await expect(linkBar.locator(`a[href="${questions[1].url}"]`)).toHaveClass(
-      /bg-blue-800/,
+      /bg-ds-dark-blue/,
     );
 
     // Navigate to answered question
@@ -314,10 +314,10 @@ test.describe("test question navigation on mobile screens", () => {
 
     // Check that the second question link still has a dark color
     await expect(linkBar.locator(`a[href="${questions[1].url}"]`)).toHaveClass(
-      /bg-blue-800/,
+      /bg-ds-dark-blue/,
     );
     await expect(linkBar.locator(`a[href="${questions[2].url}"]`)).toHaveClass(
-      /bg-blue-800/,
+      /bg-ds-dark-blue/,
     );
 
     // Clicking on second question should now navigate

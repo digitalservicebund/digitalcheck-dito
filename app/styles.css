@@ -85,7 +85,7 @@
   }
 
   *:focus-visible {
-    @apply text-blue-800 no-underline outline-2 outline-offset-1 outline-blue-800;
+    @apply text-ds-dark-blue outline-ds-dark-blue no-underline outline-2 outline-offset-1;
   }
 }
 
@@ -111,10 +111,10 @@
 }
 
 @utility text-link {
-  @apply text-blue-800 underline decoration-1 underline-offset-4 visited:text-[#4c2c92] active:text-black;
+  @apply text-ds-dark-blue underline decoration-1 underline-offset-4 visited:text-[#4c2c92] active:text-black;
 
   &:focus-visible {
-    @apply text-blue-800! no-underline!;
+    @apply text-ds-dark-blue! no-underline!;
   }
 
   &:hover {

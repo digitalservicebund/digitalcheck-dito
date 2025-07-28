@@ -6,7 +6,7 @@ export default function Progress() {
   const { pathname } = useLocation();
   return (
     <nav
-      className="flex justify-center bg-blue-300"
+      className="bg-ds-mid-blue flex justify-center"
       aria-label="Digitalcheck-Fortschritt"
     >
       <ol className="list-unstyled flex list-none gap-20 sm:gap-40">
@@ -17,7 +17,7 @@ export default function Progress() {
               key={item.label}
               aria-current={isActive ? "step" : undefined}
               className={twMerge(
-                "mb-0 flex items-center py-14 text-blue-800 max-md:flex-col",
+                "text-ds-dark-blue mb-0 flex items-center py-14 max-md:flex-col",
                 isActive && "font-bold",
               )}
             >
@@ -25,7 +25,7 @@ export default function Progress() {
                 className={twMerge(
                   "ds-label-02-reg mr-8 flex h-24 w-24 items-center justify-center rounded-full border-2",
                   isActive
-                    ? "border-blue-800 bg-blue-800 font-bold text-white"
+                    ? "bg-ds-dark-blue border-ds-dark-blue font-bold text-white"
                     : "border-white",
                 )}
               >

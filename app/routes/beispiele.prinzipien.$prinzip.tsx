@@ -176,7 +176,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
                               }
                               target="_blank"
                               rel="noreferrer"
-                              className="text-blue-800 underline"
+                              className="text-ds-dark-blue underline"
                             >
                               {digitalcheck.Regelungsvorhaben?.GesetzStatus
                                 ? gesetzStatusMap[

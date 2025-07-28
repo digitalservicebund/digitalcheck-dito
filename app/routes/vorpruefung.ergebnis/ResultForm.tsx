@@ -103,7 +103,7 @@ export default function ResultForm({
           </legend>
           <div className="flex items-start pb-[40px]">
             <div className="mr-[16px] flex-shrink-0">
-              <EmailOutlined className="h-40 w-40 fill-blue-800" />
+              <EmailOutlined className="fill-ds-dark-blue h-40 w-40" />
             </div>
             <div className="ds-stack ds-stack-16 flex-grow">
               <RichText markdown={preCheckResult.form.instructions} />
@@ -160,7 +160,7 @@ export default function ResultForm({
 
       <div className="flex items-start">
         <div className="mr-[16px] flex-shrink-0">
-          <DriveFileRenameOutline className="h-40 w-40 fill-blue-800" />
+          <DriveFileRenameOutline className="fill-ds-dark-blue h-40 w-40" />
         </div>
         <div className="ds-stack ds-stack-24 flex-grow">
           <RichText markdown={preCheckResult.form.copyIntroText}></RichText>
@@ -194,7 +194,7 @@ export default function ResultForm({
                 text: isMailAddressCopied
                   ? preCheckResult.form.copyAddressButton.textCopied
                   : preCheckResult.form.copyAddressButton.text,
-                iconRight: <CopyAll className="h-40 w-40 text-blue-800" />,
+                iconRight: <CopyAll className="text-ds-dark-blue h-40 w-40" />,
                 onClick: () => {
                   void handleCopyMailAddress();
                 },
