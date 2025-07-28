@@ -232,21 +232,20 @@ export default function Index() {
         </Container>
       </div>
       <div id="angebote">
-        <div className="bg-white">
-          <Container className="ds-stack ds-stack-40">
-            <Box
-              heading={{
-                tagName: "h2",
-                text: supportOfferings.title,
-              }}
-              content={{
-                markdown: supportOfferings.text,
-              }}
-            />
-            <Tabs tabs={tabsData} initialActiveIndex={initialTabIndex} />
-          </Container>
-        </div>
+        <Container className="ds-stack ds-stack-40">
+          <Box
+            heading={{
+              tagName: "h2",
+              text: supportOfferings.title,
+            }}
+            content={{
+              markdown: supportOfferings.text,
+            }}
+          />
+          <Tabs tabs={tabsData} initialActiveIndex={initialTabIndex} />
+        </Container>
       </div>
+
       <div className="bg-ds-mid-blue">
         <Container>
           <Box

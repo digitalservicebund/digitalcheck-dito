@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import customTwMerge from "~/utils/tailwindMerge";
+import twMerge from "~/utils/tailwindMerge";
 import Container from "./Container";
 import Heading from "./Heading";
 import RichText from "./RichText";
@@ -19,7 +19,7 @@ export default function Hero({
   className,
 }: Readonly<HeroProps>) {
   return (
-    <div className={customTwMerge("bg-ds-blue", className)}>
+    <div className={twMerge("bg-ds-blue", className)}>
       <Container className="ds-stack ds-stack-16">
         <Heading tagName="h1">{title}</Heading>
         {subtitle && (

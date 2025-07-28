@@ -3,6 +3,7 @@ import { twJoin } from "tailwind-merge";
 import Button from "~/components/Button";
 import Container from "~/components/Container";
 import RichText from "~/components/RichText";
+import twMerge from "~/utils/tailwindMerge";
 
 type FeedbackQuestionOptionProps = {
   label: string;
@@ -82,11 +83,7 @@ function FeedbackQuestion({
   };
 
   return (
-    <fieldset
-      className={twJoin(
-        "border-ds-mid-blue flex flex-col gap-20 border-b-2 pt-24 pb-20 last:border-b-0 lg:flex-row lg:gap-24",
-      )}
-    >
+    <fieldset className="border-ds-mid-blue flex flex-col gap-20 border-b-2 pt-24 pb-20 last:border-b-0 lg:flex-row lg:gap-24">
       <div className="lg:w-1/2">
         <legend>
           <p>{question.text}</p>
@@ -170,7 +167,7 @@ export default function FeedbackForm(props: Readonly<FeedbackFormProps>) {
   }
 
   return (
-    <div className={twJoin("bg-ds-blue pt-40 pb-48", props.className)}>
+    <div className={twMerge("bg-ds-blue pt-40 pb-48", props.className)}>
       <Container className="bg-white" overhangingBackground>
         <h2>{props.heading}</h2>
         <form onSubmit={handleSubmit} className="mb-48">
