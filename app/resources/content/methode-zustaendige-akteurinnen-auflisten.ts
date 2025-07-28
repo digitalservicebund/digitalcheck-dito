@@ -5,8 +5,9 @@ import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsResponsibleActors = {
   title: "Zuständige Akteurinnen und Akteure auflisten",
-  subtitle: `Wenn Sie ein Regelungsvorhaben erarbeiten, ist es entscheidend, die **Zuständigkeiten der umsetzenden Akteurinnen und Akteure** zu kennen: Sie sind die Expertinnen und Experten für die digitale, praktische Umsetzung in der Praxis und damit wertvolle Gesprächspartnerinnen und -partner.`,
-  guidance: `**Zeit:** ca. vier Stunden`,
+  subtitle:
+    "Wenn Sie ein Regelungsvorhaben erarbeiten, ist es entscheidend, die **Zuständigkeiten der umsetzenden Akteurinnen und Akteure** zu kennen: Sie sind die Expertinnen und Experten für die digitale, praktische Umsetzung in der Praxis und damit wertvolle Gesprächspartnerinnen und -partner.",
+  guidance: "**Zeit:** ca. vier Stunden",
   accordion: {
     title:
       "Was ist zu tun, wenn Länder oder Kommunen für die Umsetzung zuständig sind?",
@@ -31,12 +32,12 @@ export const methodsResponsibleActors = {
     {
       image: {
         src: "/images/ebenen-auswaehlen-und-ansprechpersonen-sammeln.png",
-        alt: `Eine Excel-Tabelle mit dem Titel "Beteiligte Ebenen auswählen und Ansprechpersonen sammeln für [ARBEITSTITEL]" enthält Spalten für Name, Zuständigkeit, Akteursgruppe, Kontaktdaten und Bemerkungen. Der erste Eintrag listet als Beispiel "Maria Muster" als Referentin für das Statistische Bundesamt, zugehörig zur Akteursgruppe "Bund" mit ihren Kontaktdaten.`,
+        alt: 'Eine Excel-Tabelle mit dem Titel "Beteiligte Ebenen auswählen und Ansprechpersonen sammeln für [ARBEITSTITEL]" enthält Spalten für Name, Zuständigkeit, Akteursgruppe, Kontaktdaten und Bemerkungen. Der erste Eintrag listet als Beispiel "Maria Muster" als Referentin für das Statistische Bundesamt, zugehörig zur Akteursgruppe "Bund" mit ihren Kontaktdaten.',
       },
       label: "Vorlage",
       icon: StickyNote2Outlined,
       title: "Beteiligte Ebenen auswählen und Ansprechpersonen sammeln",
-      text: `Die Excelvorlage hilft Ihnen, die beteiligten Ebenen auszuwählen, Zuständigkeiten zu klären und hilfreiche Ansprechpersonen zu sammeln.`,
+      text: "Die Excelvorlage hilft Ihnen, die beteiligten Ebenen auszuwählen, Zuständigkeiten zu klären und hilfreiche Ansprechpersonen zu sammeln.",
       buttons: [
         {
           text: "Vorlage herunterladen (xlsx-Datei)",

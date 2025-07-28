@@ -61,7 +61,7 @@ export const index = {
   },
   interoperability: {
     title: "EU-Vorgaben zur Interoperabilität in Regelungen",
-    text: `Seit Januar 2025 tritt die [Verordnung für ein interoperables Europa (EU 2024/903)](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903) in Kraft. Bestimmte Regelungsvorhaben müssen daher die EU-Anforderungen an Interoperabilität erfüllen. Ob und wie die Verordnung Ihr Vorhaben betrifft, erfahren Sie in unserer [Vorprüfung](/vorpruefung) und auf der Übersichtsseite zur Interoperabilität.`,
+    text: "Seit Januar 2025 tritt die [Verordnung für ein interoperables Europa (EU 2024/903)](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903) in Kraft. Bestimmte Regelungsvorhaben müssen daher die EU-Anforderungen an Interoperabilität erfüllen. Ob und wie die Verordnung Ihr Vorhaben betrifft, erfahren Sie in unserer [Vorprüfung](/vorpruefung) und auf der Übersichtsseite zur Interoperabilität.",
     link: {
       text: "Übersicht zur Interoperabilität",
       href: ROUTE_INTEROPERABILITY.url,
@@ -91,13 +91,15 @@ export const index = {
         heading: {
           text: "Digitaltaugliche Regelungen sparen Ressourcen",
         },
-        content: `Eine gute digitale Umsetzung spart langfristig Zeit und sorgt dafür, dass Ziel und Wirkung des Vorhabens erreicht werden: auf Seiten der Normadressaten und -adressatinnen und auf Seiten der Verwaltung.`,
+        content:
+          "Eine gute digitale Umsetzung spart langfristig Zeit und sorgt dafür, dass Ziel und Wirkung des Vorhabens erreicht werden: auf Seiten der Normadressaten und -adressatinnen und auf Seiten der Verwaltung.",
       },
       {
         heading: {
           text: "Alle Regelungsvorhaben sind betroffen",
         },
-        content: `Der Digitalcheck gilt für alle Regelungsvorhaben (Gesetze, Verordnungen und Verwaltungsvorschriften), sowohl für neue Vorhaben als auch für Änderungen an bestehenden Regelungen.`,
+        content:
+          "Der Digitalcheck gilt für alle Regelungsvorhaben (Gesetze, Verordnungen und Verwaltungsvorschriften), sowohl für neue Vorhaben als auch für Änderungen an bestehenden Regelungen.",
       },
     ],
   },

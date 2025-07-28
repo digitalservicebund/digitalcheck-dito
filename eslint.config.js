@@ -119,6 +119,7 @@ export default tseslint.config(
           ],
         },
       ],
+      quotes: ["error", "double", { avoidEscape: true }],
     },
   },
   // Additional Rules for test files

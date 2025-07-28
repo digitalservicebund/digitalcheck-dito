@@ -269,7 +269,7 @@ for (const scenario of scenarios) {
 
     let page: Page;
     test.beforeAll(
-      `answer questions according to scenario and go to result page`,
+      "answer questions according to scenario and go to result page",
       async ({ browser }) => {
         page = await browser.newPage();
         await page.goto(questions[0].url);
