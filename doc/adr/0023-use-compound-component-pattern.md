@@ -12,7 +12,7 @@ Our current React component design uses **deeply nested properties** to configur
 - **Complex nesting**: Passing structured props for subcomponents results in complex prop trees and deeply nested configurations.
 - **Unintended resource file structures**: To match nested prop expectations, developers create similarly nested resource objects, although this was never the intention.
 
-Therefore, we concidered using the **Compound Component Pattern**. In this pattern, a parent component exposes child components as static properties. The parent manages shared state and context, while the children can consume this context, enabling flexible and expressive composition.
+Therefore, we considered using the **Compound Component Pattern**. In this pattern, a parent component exposes child components as static properties. The parent manages shared state and context, while the children can consume this context, enabling flexible and expressive composition.
 
 ### Benefits
 
@@ -25,7 +25,7 @@ Therefore, we concidered using the **Compound Component Pattern**. In this patte
 - **More boilerplate**: Components are larger due to internal state/context and child definitions.
 - **No enforced order**: Using properties inherently enforces the structure and order of child elements. With the compound component pattern, developers can unintentionally misorder or omit required child components, leading to incorrect rendering unless manually validated.
 
-### Examples of current implememtation
+### Examples of current implementation
 
 #### Tabs
 
