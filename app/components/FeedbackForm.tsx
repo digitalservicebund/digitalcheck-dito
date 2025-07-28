@@ -49,7 +49,9 @@ function FeedbackInput({
 }>) {
   const classes = twJoin(
     "px-16 h-48 sm:px-24 sm:h-64 flex items-center cursor-pointer",
-    selected ? "bg-blue-800 text-white" : "bg-blue-200 text-blue-800",
+    selected
+      ? "bg-ds-dark-blue text-white"
+      : "bg-ds-mid-light-blue text-ds-dark-blue",
   );
 
   return (
