@@ -10,6 +10,7 @@ export type HeadingProps = {
   look?: string;
   id?: string;
   children?: ReactNode;
+  ariaLabel?: string;
 };
 
 function Heading({
@@ -20,6 +21,7 @@ function Heading({
   look,
   id,
   children,
+  ariaLabel,
   ...additionalProps
 }: Readonly<HeadingProps>) {
   const Tag = tagName as keyof React.JSX.IntrinsicElements;
@@ -27,14 +29,24 @@ function Heading({
 
   if (children) {
     return (
-      <Tag id={id} className={cssClasses} {...additionalProps}>
+      <Tag
+        id={id}
+        className={cssClasses}
+        {...additionalProps}
+        aria-label={ariaLabel}
+      >
         {children ?? text}
       </Tag>
     );
   }
   if (markdown) {
     return (
-      <Tag id={id} className={cssClasses} {...additionalProps}>
+      <Tag
+        id={id}
+        className={cssClasses}
+        aria-label={ariaLabel}
+        {...additionalProps}
+      >
         <RichText markdown={markdown} />
       </Tag>
     );
@@ -43,6 +55,7 @@ function Heading({
     <Tag
       id={id}
       className={cssClasses}
+      aria-label={ariaLabel}
       {...additionalProps}
       dangerouslySetInnerHTML={{
         __html: text ?? "",

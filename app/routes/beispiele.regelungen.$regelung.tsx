@@ -87,9 +87,13 @@ export default function Gesetz() {
   const principles = useOutletContext<Prinzip[]>();
   return (
     <>
-      <Hero title={regelung.Titel} subtitle={examplesRegelungen.subtitle[0]} />
+      <Hero
+        className="bg-ds-gray"
+        title={regelung.Titel}
+        subtitle={examplesRegelungen.subtitle[0]}
+      />
 
-      <div className="bg-blue-200">
+      <div className="bg-ds-gray">
         <Container className="py-0">
           <InlineInfoList
             items={[
@@ -99,8 +103,17 @@ export default function Gesetz() {
                   ? formatDate(regelung.VeroeffentlichungsDatum)
                   : "",
               },
+
               {
+                label: examplesRegelungen.infoLabels[2],
+                value: regelung.Ressort,
+              },
+              {
+                // TODO: this seems way to complicated
                 key: examplesRegelungen.infoLabels[1],
+                label: regelung?.GesetzStatus // TODO: what if this is not set?
+                  ? gesetzStatusMap[regelung.GesetzStatus]
+                  : "",
                 value: regelung.LinkRegelungstext ? (
                   <CustomLink
                     to={regelung.LinkRegelungstext}
@@ -108,20 +121,15 @@ export default function Gesetz() {
                     rel="noreferrer"
                     className="text-blue-800 underline"
                   >
-                    {regelung?.GesetzStatus
-                      ? gesetzStatusMap[regelung.GesetzStatus]
-                      : examplesRegelungen.infoLabels[1]}
+                    {examplesRegelungen.infoLabels[1]}
                   </CustomLink>
                 ) : null,
-              },
-              {
-                label: examplesRegelungen.infoLabels[2],
-                value: regelung.Ressort,
               },
             ]}
           />
         </Container>
       </div>
+
       {regelung.Digitalchecks.map((digitalcheck, index) => {
         const tabsData: TabItem[] = [];
 

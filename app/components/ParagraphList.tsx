@@ -1,4 +1,4 @@
-import ArrowUpwardOutlined from "@digitalservicebund/icons/ArrowUpwardOutlined";
+import { ArrowUpwardOutlined } from "@digitalservicebund/icons";
 import { createContext, useContext, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
@@ -173,17 +173,20 @@ function Paragraph({ paragraph }: Readonly<{ paragraph: Paragraph }>) {
   // renders the interlaced Absaetze with relevant PrinzipErfuellungen and grouped Absaetze without relevant PrinzipErfuellungen
   return (
     <div key={paragraph.Nummer}>
-      <div className="ds-stack ds-stack-8">
+      <div className="flex flex-col gap-24 md:gap-32">
         <Heading
           tagName="h3"
           text={`§ ${paragraph.Nummer} ${paragraph.Gesetz}`}
           look="ds-subhead"
           className="font-bold"
         />
-        <p className="ds-subhead font-bold">{paragraph.Titel}</p>
-        <div className="ds-stack ds-stack-16 border-l-4 border-gray-400 pl-8">
+        {paragraph.Titel && (
+          <p className="ds-subhead font-bold">{paragraph.Titel}</p>
+        )}
+        <div className="flex flex-col gap-24 md:gap-32">
           {groupedAbsaetze.map((absatzGroup) =>
             Array.isArray(absatzGroup) ? (
+              // TODO: also italic and width like Absatz
               <DetailsSummary
                 key={absatzGroup[0].number}
                 title={getAbsatzGroupTitle(absatzGroup)}
@@ -220,17 +223,23 @@ const Absatz = ({ absatz }: { absatz: AbsatzWithNumber }) => {
 
   return (
     <explanationIdPrefixContext.Provider value={explanationIdPrefix}>
-      <div className="[&_ol]:list-decimal [&_ol_ol]:list-[lower-alpha]">
-        <BlocksRenderer
-          content={content}
-          modifiers={{
-            underline: PrincipleHighlight,
-          }}
-        />
-        <div className="ds-stack ds-stack-8 mt-8">
-          <span className="ds-subhead font-bold">
+      <div className="flex flex-col gap-16 md:grid md:grid-cols-[5fr_3fr] md:gap-32 [&_ol]:list-decimal [&_ol_ol]:list-[lower-alpha]">
+        <div className="italic">
+          <BlocksRenderer
+            content={content}
+            modifiers={{
+              underline: PrincipleHighlight,
+            }}
+          />
+        </div>
+        <div className="flex flex-col gap-8">
+          <Heading
+            tagName="h4"
+            className="ds-label-01-bold"
+            ariaLabel={`${examples.paragraphs.ariaLabelPrefix} ${absatz.number}: ${examples.paragraphs.explanation}`}
+          >
             {examples.paragraphs.explanation}
-          </span>
+          </Heading>
           {absatz.PrinzipErfuellungen.toSorted(
             (a, b) => (a.Prinzip?.Nummer ?? 0) - (b.Prinzip?.Nummer ?? 0),
           ).map(
@@ -320,12 +329,10 @@ const PrincipleExplanation = ({
 
   return (
     <div className={explanationClasses} id={id} data-testid={id}>
-      <div className="flex content-center gap-4">
-        <Heading
-          tagName="h4"
-          text={`Prinzip: ${erfuellung.Prinzip.Name}`}
-          look="ds-label-01-bold pb-8"
-        />
+      <div className="flex content-center gap-8">
+        <div>
+          <BlocksRenderer content={erfuellung.WarumGut} />
+        </div>
         {shouldHighlight && activeHighlight && (
           <Link
             replace
@@ -338,7 +345,11 @@ const PrincipleExplanation = ({
           </Link>
         )}
       </div>
-      <BlocksRenderer content={erfuellung.WarumGut} />
+      <p className="text-ds-dark-gray">
+        (
+        {`${examples.principleExplanation.principle}: ${erfuellung.Prinzip.Name}`}
+        )
+      </p>
     </div>
   );
 };

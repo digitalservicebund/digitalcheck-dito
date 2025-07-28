@@ -10,7 +10,11 @@ export const examples = {
     "Hier finden Sie Beispiele für digitaltaugliche Regelungen, sowie aus deren Erarbeitungsprozess. " +
     "Lassen Sie sich inspirieren, wie in Regelungsvorhaben Digitaltauglichkeit beachtet wurde.",
   paragraphs: {
-    explanation: "Warum ist das gut?",
+    ariaLabelPrefix: "Absatz",
+    explanation: "Warum ist dieses Beispiel gut?",
+  },
+  principleExplanation: {
+    principle: "Prinzip",
   },
   boxItems: [
     {

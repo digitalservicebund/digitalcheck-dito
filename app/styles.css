@@ -13,6 +13,9 @@
   --color-principle-6: #dfd6e2; /* order 3 */
   --color-principle-5: #cce7db; /* order 4 */
   --color-principle-3: #cce4f0; /* order 5 */
+
+  --color-ds-gray: #f6f7f8; /* gray-100 */
+  --color-ds-dark-gray: #4e596a; /* gray-900 */
 }
 
 @layer base {
