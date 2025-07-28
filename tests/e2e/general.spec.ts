@@ -194,13 +194,13 @@ test.describe("test progress bar", () => {
     });
     await expect(navigation).toBeVisible();
 
-    await expect(navigation.getByText("1")).toContainClass("bg-blue-800");
+    await expect(navigation.getByText("1")).toContainClass("bg-ds-dark-blue");
     await expect(navigation.getByText("2")).toContainClass("border-white");
     await page.goto(ROUTE_METHODS.url);
-    await expect(navigation.getByText("2")).toContainClass("bg-blue-800");
+    await expect(navigation.getByText("2")).toContainClass("bg-ds-dark-blue");
     await expect(navigation.getByText("1")).toContainClass("border-white");
     await page.goto(ROUTE_DOCUMENTATION.url);
-    await expect(navigation.getByText("3")).toContainClass("bg-blue-800");
+    await expect(navigation.getByText("3")).toContainClass("bg-ds-dark-blue");
     await expect(navigation.getByText("2")).toContainClass("border-white");
   });
 });

@@ -29,7 +29,7 @@ export default function CustomLink({
     >
       {children}
       {(target === "_blank" || isExternal) && (
-        <OpenInNewIcon className="scale-75 fill-blue-800" />
+        <OpenInNewIcon className="fill-ds-dark-blue scale-75" />
       )}
     </Link>
   );
