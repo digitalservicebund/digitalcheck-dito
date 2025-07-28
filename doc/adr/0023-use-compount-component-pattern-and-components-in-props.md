@@ -12,11 +12,11 @@ Our current React component design uses **deeply nested properties** to configur
 - **Complex nesting**: Passing structured props for subcomponents results in complex prop trees and deeply nested configurations.
 - **Unintended resource file structures**: To match nested prop expectations, developers create similarly nested resource objects, although this was never the intention.
 
-Therefore, we considered using a mix of the **Compound Component Pattern** and **Components in Props**.
+Therefore, we considered using a mix of the **Compound Component** and **Components in Props** patterns.
 
-In the **Compound Component Pattern** pattern, a parent component exposes child components as static properties. The parent manages shared state and context, while the children can consume this context, enabling flexible and expressive composition.
+In the **Compound Component** pattern, a parent component exposes child components as static properties. The parent manages shared state and context, while the children can consume this context, enabling flexible and expressive composition.
 
-In the **Components in Props** pattern, we directly pass child components into props instead of only there props to avoid deep prop nesting.
+In the **Components in Props** pattern, we directly pass child components into props to avoid deep prop nesting.
 
 ### Benefits
 
@@ -29,7 +29,7 @@ In the **Components in Props** pattern, we directly pass child components into p
 
 - **More boilerplate**: Components are larger due to internal state/context and child definitions.
 
-### Examples of current implememtation
+### Examples of current implementation
 
 #### Tabs
 
@@ -43,7 +43,7 @@ export default function Index() {
     },
     {
       title: "Tab2",
-      plausibleEventName: "tab.tab2,
+      plausibleEventName: "tab.tab2",
       content: (<Content />),
     },
   ];
@@ -95,7 +95,7 @@ export default function Index() {
 - For containers with repeatable child components (tabs, accordion, menus)
 - When child components depend on shared state (tabs, accordion, menus)
 - For more complex components where we control the position/order through child components (cards where order could change, navs with mix of links and dropdowns)
-- Container with simpler repeatable children (buttonlists, linklists)
+- Container with simpler repeatable children (button lists, link lists)
 
 ### Children
 
@@ -106,7 +106,7 @@ export default function Index() {
 
 - For child components that have a fixed position/depend on a specific place in the structure (infobox badge, icons)
 - For shorter / text only components (titles)
-- For fixed sets of sub components (enum with icons that can be displayed)
+- For fixed sets of subcomponents (enum with icons that can be displayed)
 
 ### Pattern applied to examples
 
