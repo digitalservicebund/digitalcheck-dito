@@ -113,7 +113,7 @@ export default function Gesetz() {
                     to={regelung.LinkRegelungstext}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-blue-800 underline"
+                    className="text-ds-dark-blue underline"
                   >
                     {regelung?.GesetzStatus
                       ? gesetzStatusMap[regelung.GesetzStatus]

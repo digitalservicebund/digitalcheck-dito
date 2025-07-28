@@ -23,11 +23,14 @@ export default function Breadcrumbs() {
 
   return uniqueBreadcrumbs.length ? (
     <nav
-      className="flex flex-wrap items-center bg-blue-100 px-16 py-8 text-base print:hidden"
+      className="bg-ds-blue flex flex-wrap items-center px-16 py-8 text-base print:hidden"
       data-testid="breadcrumbs-menu"
       aria-label="breadcrumb navigation"
     >
-      <Link to={ROUTE_LANDING.url} className="fill-blue-800 outline-blue-800">
+      <Link
+        to={ROUTE_LANDING.url}
+        className="fill-ds-dark-blue outline-ds-dark-blue"
+      >
         <HomeOutlined />
         <span className="sr-only">{ROUTE_LANDING.title}</span>
       </Link>

@@ -45,12 +45,12 @@ export default function DropdownMenu({
 
   // Transparent borders to avoid layout shifts
   const buttonClasses = twMerge(
-    "flex cursor-pointer items-center hover:bg-blue-100",
+    "flex cursor-pointer items-center hover:bg-ds-blue",
     !isMobile
       ? "ds-label-01-reg h-full border-b-[4px] border-transparent pr-8 pl-16 whitespace-nowrap"
       : "ds-label-01-bold w-full justify-between border-l-[4px] border-transparent p-16",
-    isActiveParent && "border-blue-800 bg-blue-100",
-    isExpanded && "bg-blue-100",
+    isActiveParent && "border-ds-dark-blue bg-ds-blue",
+    isExpanded && "bg-ds-blue",
     plausibleTrackingClass,
   );
 

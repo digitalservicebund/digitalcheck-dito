@@ -91,7 +91,7 @@ function Button({
     const isDownload = !!ext;
     const isExternal = "target" in props && props.target === "_blank";
     iconRight = isExternal ? (
-      <OpenInNewIcon className="scale-75 fill-blue-800" />
+      <OpenInNewIcon className="fill-ds-dark-blue scale-75" />
     ) : (
       iconRight
     );

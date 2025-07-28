@@ -4,7 +4,7 @@ export default function Accordion({
   items,
 }: Readonly<{ items: AccordionItemProps[] }>) {
   return (
-    <div className="border-b-2 border-b-blue-800 bg-white">
+    <div className="border-b-ds-dark-blue border-b-2 bg-white">
       {items.map((item) => (
         <AccordionItem
           key={item.headline}
