@@ -1,3 +1,4 @@
+import { Download } from "@digitalservicebund/icons";
 import { Link } from "react-router";
 import { A11Y_MESSAGE_NEW_WINDOW } from "~/resources/constants";
 import { Route } from "~/resources/staticRoutes";
@@ -14,7 +15,16 @@ export type LinkListProps = {
 export type LinkProps = Route & {
   preText?: string;
   openInNewTab?: boolean;
+  download?: boolean;
 };
+
+const downloadIcon = (
+  <Download
+    height="1.2em"
+    width="1.2em"
+    className="mr-[0.2em] inline-block! fill-current"
+  />
+);
 
 const LinkItem = ({ link }: { link: Readonly<LinkProps> }) => (
   <>
@@ -26,6 +36,7 @@ const LinkItem = ({ link }: { link: Readonly<LinkProps> }) => (
       rel={link.openInNewTab ? "noreferrer" : undefined}
       aria-describedby={link.openInNewTab ? A11Y_MESSAGE_NEW_WINDOW : undefined}
     >
+      {link.download && downloadIcon}
       {link.title} {link.openInNewTab && openInNewIconElement}
     </Link>
   </>
