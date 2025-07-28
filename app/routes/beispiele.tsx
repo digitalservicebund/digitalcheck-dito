@@ -1,5 +1,8 @@
 import { Outlet, useLoaderData } from "react-router";
+import Box from "~/components/Box";
+import Container from "~/components/Container";
 import SupportBanner from "~/components/SupportBanner";
+import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import {
   fetchStrapiData,
@@ -24,6 +27,15 @@ export default function Digitaltauglichkeit() {
   return (
     <>
       <Outlet context={useLoaderData<typeof loader>()} />
+      <Container className="bg-ds-yellow mt-40 mb-80" overhangingBackground>
+        <Box
+          heading={{
+            text: examplesRegelungen.yourExample.title,
+            tagName: "h2",
+          }}
+          content={{ markdown: examplesRegelungen.yourExample.text }}
+        />
+      </Container>
       <SupportBanner {...supportBanner} />
     </>
   );
