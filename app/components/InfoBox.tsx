@@ -1,23 +1,21 @@
-import { ReactNode } from "react";
+import { twJoin } from "tailwind-merge";
 import type { Node } from "~/utils/paragraphUtils";
 import twMerge from "~/utils/tailwindMerge";
-import Badge, { BadgeProps } from "./Badge";
+import Badge, { type BadgeProps } from "./Badge";
 import { BlocksRenderer } from "./BlocksRenderer";
 import { ButtonProps } from "./Button";
 import ButtonContainer from "./ButtonContainer";
 import DetailsSummary, { DetailsSummaryProps } from "./DetailsSummary";
 import Heading, { HeadingProps } from "./Heading";
-import { ImageBoxSize } from "./ImageBox";
+import Image, { type ImageProps } from "./Image";
 import LinkList, { LinkListProps } from "./LinkList";
 import RichText from "./RichText";
 
-export type InfoBoxIconProps = {
-  className?: string;
-  size: ImageBoxSize;
-  icon: ReactNode;
+export type InfoImageProps = ImageProps & {
+  size: "icon" | "small" | "medium" | "large";
 };
 
-export type InfoBoxProps = {
+type BaseInfoBoxProps = {
   identifier?: string;
   badge?: BadgeProps;
   heading?: HeadingProps;
@@ -28,9 +26,24 @@ export type InfoBoxProps = {
   };
   linkList?: LinkListProps;
   buttons?: ButtonProps[];
-  Icon?: React.FC<React.SVGProps<SVGSVGElement>>;
   className?: string;
   look?: "default" | "highlight" | "method";
+};
+
+type VisualProps =
+  | { type: "icon"; Icon: React.FC<React.SVGProps<SVGSVGElement>> }
+  | { type: "image"; image: InfoImageProps }
+  | { type: "none" };
+
+export type InfoBoxProps = BaseInfoBoxProps & {
+  visual?: VisualProps;
+};
+
+const imageSizes = {
+  icon: "size-80",
+  small: "size-[120px]",
+  medium: "size-[260px]",
+  large: "size-[400px]",
 };
 
 const InfoBox = ({
@@ -42,7 +55,7 @@ const InfoBox = ({
   detailsSummary,
   linkList,
   buttons,
-  Icon,
+  visual,
   look,
 }: InfoBoxProps) => {
   return (
@@ -57,8 +70,24 @@ const InfoBox = ({
         className,
       )}
     >
-      {Icon && <Icon className="hidden size-80 fill-blue-500 sm:block" />}
-
+      {visual?.type === "icon" && (
+        <visual.Icon
+          className={twJoin(
+            "hidden fill-blue-500 sm:block",
+            imageSizes["icon"],
+          )}
+        />
+      )}
+      {visual?.type === "image" && (
+        <Image
+          {...visual.image}
+          className={twMerge(
+            "object-contain",
+            imageSizes[visual.image.size],
+            visual.image.className,
+          )}
+        />
+      )}
       <div
         data-testid="info-box-content"
         className="ds-stack ds-stack-16 break-words"

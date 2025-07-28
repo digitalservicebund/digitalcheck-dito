@@ -66,7 +66,10 @@ export default function FivePrinciples() {
         <Container className="pb-64" key={slugify(principle.title)}>
           <InfoBox
             identifier={slugify(principle.title)}
-            Icon={principle.icon}
+            visual={{
+              type: "icon",
+              Icon: principle.icon,
+            }}
             heading={{
               tagName: "h2",
               text: principle.title,
