@@ -82,7 +82,7 @@ const InfoBox = ({
         <Image
           {...visual.image}
           className={twMerge(
-            "object-contain",
+            "flex-shrink-0 object-contain",
             imageSizes[visual.image.size],
             visual.image.className,
           )}
