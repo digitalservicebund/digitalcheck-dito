@@ -42,7 +42,7 @@ export type InfoBoxProps = BaseInfoBoxProps & {
 const imageSizes = {
   icon: "size-80",
   small: "size-[120px]",
-  medium: "size-[260px]",
+  medium: "size-[280px]",
   large: "size-[400px]",
 };
 
