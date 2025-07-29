@@ -30,6 +30,7 @@ import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants";
 import { POSTHOG_KEY } from "~/utils/constants.server";
 import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
+import trackClientSideError from "~/utils/trackClientSideError";
 import type { Route } from "./+types/root";
 import { PHProvider } from "./providers/PosthogProvider";
 import { notFound, serverError } from "./resources/content/error";
@@ -230,6 +231,10 @@ export default function App() {
 
 export function ErrorBoundary() {
   const error = useRouteError();
+
+  if (error instanceof Error) {
+    trackClientSideError(error);
+  }
 
   let errorStatus = "500";
   let errorTitle = serverError.title;
