@@ -6,6 +6,7 @@ import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
 import LinkListBox from "~/components/LinkListBox";
+import { PrinciplePosterBox } from "~/components/PrinciplePosterBox";
 import Separator from "~/components/Separator";
 import {
   getDetailsSummary,
@@ -90,6 +91,8 @@ export default function FivePrinciples() {
           />
         </Container>
       ))}
+
+      <PrinciplePosterBox />
 
       {methodsFivePrinciples.nextStep && (
         <Container>
