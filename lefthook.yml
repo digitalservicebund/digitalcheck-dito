@@ -16,7 +16,6 @@ pre-commit:
     secrets-audit:
       tags: security audit
       run: talisman --githook pre-commit
-      use_stdin: true
 pre-push:
   parallel: true
   commands:
