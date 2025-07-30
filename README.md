@@ -21,7 +21,7 @@ There is a `.node-version` file to simplify setup using [nodenv](https://github.
 Install the dependencies using npm.
 
 ```bash
-npm install --ignore-scripts @strapi/blocks-react-renderer
+npm install
 ```
 
 ### Testing
