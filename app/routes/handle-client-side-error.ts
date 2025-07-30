@@ -1,10 +1,19 @@
 import { ActionFunction } from "react-router";
+import { z } from "zod";
+
+const ClientSideErrorSchema = z.object({
+  message: z.string(),
+});
+
+export type ClientSideError = z.infer<typeof ClientSideErrorSchema>;
 
 const handleClientSideError = async (request: Request): Promise<Response> => {
   try {
-    console.log("Client-side error: ", {
-      ...(await request.json()),
-    });
+    const data: ClientSideError = ClientSideErrorSchema.parse(
+      await request.json(),
+    );
+
+    console.log(`Client-side error: ${JSON.stringify(data.message)}`);
 
     return new Response(null, { status: 204 }); // No Content
   } catch (error) {

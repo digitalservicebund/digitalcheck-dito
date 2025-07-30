@@ -271,6 +271,9 @@ export const ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_JSON = createRoute(
   "Ihre Digitalcheck-Dokumentation als JSON-Datei",
 );
 
+// BACKEND ROUTES
+export const ROUTE_HANDLE_CLIENT_SIDE_ERRORS = "/handle-client-side-error";
+
 export const ROUTES: Route[] = [
   ROUTE_LANDING,
   ROUTE_SUPPORT,

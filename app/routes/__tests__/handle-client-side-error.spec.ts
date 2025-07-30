@@ -13,8 +13,6 @@ describe("endpoint to handle client-side errors", () => {
   it("returns 204 for a valid JSON request", async () => {
     const payload = {
       message: "Test error message",
-      stack: "Error: stack trace",
-      timestamp: new Date().toISOString(),
     };
 
     const request = new Request("http://localhost/handle-client-side-error", {

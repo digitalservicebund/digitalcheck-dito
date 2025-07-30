@@ -17,10 +17,6 @@ describe("Tracking client-side error by logging it server-side", () => {
 
   it("sends error details to /handle-client-side-error", () => {
     const error = new Error("Test error");
-    const dummyDate = "2025-07-29T12:00:00.000Z";
-
-    vi.useFakeTimers();
-    vi.setSystemTime(new Date(dummyDate));
 
     trackClientSideError(error);
 
@@ -32,12 +28,8 @@ describe("Tracking client-side error by logging it server-side", () => {
       },
       body: JSON.stringify({
         message: "Test error",
-        stack: error.stack,
-        timestamp: dummyDate,
       }),
     });
-
-    vi.useRealTimers();
   });
 
   it("logs an error if fetch fails", async () => {

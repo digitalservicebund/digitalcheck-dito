@@ -232,10 +232,6 @@ export default function App() {
 export function ErrorBoundary() {
   const error = useRouteError();
 
-  if (error instanceof Error) {
-    trackClientSideError(error);
-  }
-
   let errorStatus = "500";
   let errorTitle = serverError.title;
   let errorMessage = serverError.message;
@@ -244,6 +240,9 @@ export function ErrorBoundary() {
     errorStatus = `${error.status}`;
     errorTitle = error.status === 404 ? notFound.title : `${error.data}`;
     errorMessage = error.status === 404 ? notFound.message : errorMessage;
+  } else if (error instanceof Error && typeof window !== "undefined") {
+    // Only track client-side errors
+    trackClientSideError(error);
   }
 
   return (
