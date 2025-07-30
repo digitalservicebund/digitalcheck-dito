@@ -7,12 +7,14 @@ pre-commit:
   commands:
     lint:
       tags: lint
-      run: npm run lint:check {staged_files}
+      run: npm run lint:fix {staged_files}
       glob: "*.{js,cjs,mjs,ts,jsx,tsx}"
+      stage_fixed: true
     check-format:
       tags: style
-      run: npm run format:check {staged_files}
+      run: npm run format:fix {staged_files}
       glob: "*.{js,cjs,mjs,ts,jsx,tsx,json,css,md,yml,yaml,html}"
+      stage_fixed: true
     secrets-audit:
       tags: security audit
       run: talisman --githook pre-commit
