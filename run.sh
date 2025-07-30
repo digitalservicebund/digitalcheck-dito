@@ -28,7 +28,7 @@ _find_placeholder_strings() {
 }
 
 _setup_repo() {
-  if _find_placeholder_strings >/dev/null; then
+  if _find_placeholder_strings > /dev/null; then
     defaultname="$(basename "$(git rev-parse --show-toplevel)")"
     _user "Name of the repository? ($defaultname) "
     read -r name
@@ -45,7 +45,7 @@ _setup_git_hooks() {
   _user "Do you want to install the Git hooks? (y/n) "
   read -r answer
   if [ "$answer" = "y" ]; then
-    if ! command -v lefthook >/dev/null 2>&1; then
+    if ! command -v lefthook > /dev/null 2>&1; then
       _fail "Setup requires Lefthook, please install first: \`brew install lefthook\`"
       exit 1
     fi
