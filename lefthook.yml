@@ -12,6 +12,10 @@ pre-commit:
     check-format:
       tags: style
       run: npm run format:check {staged_files}
+    secrets-audit:
+      tags: security audit
+      run: talisman --githook pre-commit
+      use_stdin: true
 pre-push:
   parallel: true
   commands:

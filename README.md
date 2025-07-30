@@ -38,7 +38,7 @@ For the provided Git hooks you will need to install [lefthook](https://github.co
 (git hook manager):
 
 ```bash
-brew install lefthook
+brew install lefthook talisman
 ./run.sh init
 ```
 
