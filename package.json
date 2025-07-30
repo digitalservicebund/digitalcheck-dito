@@ -18,7 +18,7 @@
     "start": "export $(grep -v '^#' .env | xargs) && react-router-serve build/server/index.js",
     "style:check": "npm run format:check && npm run lint:check",
     "style:fix": "npm run format:fix && npm run lint:fix",
-    "test": "vitest",
+    "test": "vitest run",
     "test:a11y": "playwright test tests/a11y --config=tests/playwright.config.ts",
     "test:a11y-nightly": "playwright test tests/a11y --config=tests/playwright-nightly.config.ts",
     "test:e2e": "playwright test tests/e2e --config=tests/playwright.config.ts",
