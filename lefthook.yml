@@ -12,6 +12,7 @@ pre-commit:
     check-format:
       tags: style
       run: npm run format:check {staged_files}
+      glob: "*.{js,cjs,mjs,ts,jsx,tsx,json,css,md,yml,yaml,html}"
     secrets-audit:
       tags: security audit
       run: talisman --githook pre-commit
