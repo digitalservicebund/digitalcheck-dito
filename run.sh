@@ -55,7 +55,6 @@ _setup_git_hooks() {
 }
 
 _init() {
-  _setup_repo
   _setup_git_hooks
 }
 
@@ -64,11 +63,9 @@ _help() {
   echo ""
   echo "Available commands:"
   echo "init                Set up repository for development"
-  echo "setup_git_hooks     Set up repository for development"
 }
 
 case "$@" in
-"init") _init ;;
-"setup_git_hooks") _setup_git_hooks ;;
-*) _help ;;
+  "init") _init ;;
+  *) _help ;;
 esac
