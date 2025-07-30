@@ -1,3 +1,5 @@
 fileignoreconfig:
 - filename: .env.example
   ignore_detectors: [filename]
+- filename: .env.test
+  ignore_detectors: [filename]
