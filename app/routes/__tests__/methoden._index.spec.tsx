@@ -1,7 +1,7 @@
 import { render, screen, within } from "@testing-library/react";
+import Methoden from "app/routes/methoden._index"; // The component to test
 import { MemoryRouter } from "react-router";
 import { describe, expect, it } from "vitest";
-import Methoden from "../routes/methoden._index"; // The component to test
 
 describe("Methoden Route - Integration Tests", () => {
   const renderWithRouter = (component: React.ReactElement) => {

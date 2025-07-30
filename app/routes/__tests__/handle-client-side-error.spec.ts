@@ -1,6 +1,6 @@
+import { action } from "app/routes/handle-client-side-error";
 import { ActionFunctionArgs } from "react-router";
 import { describe, expect, it, vi } from "vitest";
-import { action } from "./handle-client-side-error";
 
 async function actionHandler(request: Request) {
   // FIXME if possible: Explicitly setting types here because for some reason the types of the action function do not match the expected types

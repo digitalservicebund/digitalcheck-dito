@@ -14,7 +14,7 @@ export default defineConfig({
   build: {
     target: "ES2022",
     rollupOptions: {
-      external: [/\.spec\.ts$/], // exclude test files from production build
+      external: [/\.spec\.tsx?$/], // exclude test files from production build
     },
   },
   test: {
