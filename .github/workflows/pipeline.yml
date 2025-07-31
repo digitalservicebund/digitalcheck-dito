@@ -108,6 +108,8 @@ jobs:
   deploy-to-production:
     needs: [build-and-push-image]
     if: github.ref == 'refs/heads/main'
+    permissions:
+      packages: read
     uses: ./.github/workflows/deploy.yml
     concurrency: deploy
     with:
@@ -118,6 +120,8 @@ jobs:
   deploy-to-staging:
     needs: [build-and-push-image]
     if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/staging/')
+    permissions:
+      packages: read
     uses: ./.github/workflows/deploy.yml
     concurrency: deploy
     with:
