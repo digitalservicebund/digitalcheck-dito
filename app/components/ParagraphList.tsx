@@ -345,7 +345,7 @@ const PrincipleExplanation = ({
           </Link>
         )}
       </div>
-      <p className="text-ds-dark-gray">
+      <p className="text-gray-900">
         (
         {`${examples.principleExplanation.principle}: ${erfuellung.Prinzip.Name}`}
         )
