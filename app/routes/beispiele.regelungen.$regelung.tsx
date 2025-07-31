@@ -95,12 +95,12 @@ export default function Gesetz() {
   return (
     <>
       <Hero
-        className="bg-ds-gray"
+        className="bg-gray-100"
         title={regelung.Titel}
         subtitle={examplesRegelungen.subtitle[0]}
       />
 
-      <div className="bg-ds-gray">
+      <div className="bg-gray-100">
         <Container className="py-0">
           <InlineInfoList
             items={[
