@@ -1,6 +1,4 @@
 import { useLoaderData, useOutletContext, type UIMatch } from "react-router";
-
-import Background from "~/components/Background";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import Container from "~/components/Container";
 import CustomLink from "~/components/CustomLink";
@@ -98,7 +96,7 @@ export default function Gesetz() {
     <>
       <Hero title={regelung.Titel} subtitle={examplesRegelungen.subtitle[0]} />
 
-      <Background backgroundColor="midLightBlue">
+      <div className="bg-blue-200">
         <Container className="py-0">
           <InlineInfoList
             items={[
@@ -130,7 +128,7 @@ export default function Gesetz() {
             ]}
           />
         </Container>
-      </Background>
+      </div>
       {regelung.Digitalchecks.map((digitalcheck, index) => {
         const tabsData: TabItem[] = [];
 

@@ -1,5 +1,4 @@
 import Accordion from "~/components/Accordion";
-import Background from "~/components/Background";
 import Box from "~/components/Box.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
@@ -73,11 +72,8 @@ export default function Interoperability() {
             <ImageZoomable image={interoperability.info.image} />
           </Container>
 
-          <Background
-            backgroundColor="blue"
-            className="relative left-1/2 w-screen -translate-x-1/2 py-48"
-          >
-            <Container backgroundColor="white" overhangingBackground>
+          <div className="relative left-1/2 w-screen -translate-x-1/2 bg-blue-100 py-48">
+            <Container className="bg-white" overhangingBackground>
               <Heading
                 tagName="h2"
                 text={interoperability.resources.headline}
@@ -99,7 +95,7 @@ export default function Interoperability() {
                 </div>
               ))}
             </Container>
-          </Background>
+          </div>
         </>
       ),
     },
@@ -125,7 +121,7 @@ export default function Interoperability() {
         subtitle={interoperability.content}
       />
 
-      <Background backgroundColor="midBlue">
+      <div className="bg-blue-300">
         <Container className="flex flex-col py-0 lg:h-[626px] lg:flex-row">
           <div className="py-32 sm:py-48 lg:w-1/2 lg:self-center lg:pr-48">
             <Heading
@@ -163,7 +159,7 @@ export default function Interoperability() {
             }
           />
         </div>
-      </Background>
+      </div>
       <Container>
         <Tabs tabs={tabsData} />
       </Container>

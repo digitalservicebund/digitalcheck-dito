@@ -2,8 +2,6 @@ import { twJoin } from "tailwind-merge";
 import type { ImageProps } from "~/components/Image";
 import ImageZoomable from "~/components/ImageZoomable";
 import twMerge from "~/utils/tailwindMerge";
-import { type BackgroundColor, isBackgroundColor } from ".";
-import Background from "./Background";
 import Badge from "./Badge";
 import { type ButtonProps } from "./Button";
 import ButtonContainer from "./ButtonContainer";
@@ -17,7 +15,7 @@ export type ListItemProps = {
   spacer?: boolean | HeadingProps;
   content?: string;
   buttons?: ButtonProps[];
-  background?: string;
+  backgroundColorClass?: string;
   parentHasHeading?: boolean;
   isDisabled?: boolean;
   readonly numeric?: number;
@@ -35,14 +33,15 @@ const ListItem = ({
   buttons,
   numeric,
   hasBullet,
-  background,
   parentHasHeading,
   isDisabled,
   image,
   className,
+  backgroundColorClass,
 }: ListItemProps) => {
-  const backgroundColor =
-    background && isBackgroundColor(background) ? background : undefined;
+  const backgroundClasses = backgroundColorClass
+    ? `px-80 pt-40 pb-48 max-sm:px-16 max-sm:py-32 ${backgroundColorClass}`
+    : "mt-4";
   const textColor = isDisabled ? "text-gray-800" : "";
   const responsiveWidth = numeric ? "w-[40px]" : "w-[40px] max-sm:w-[20px]";
 
@@ -93,42 +92,29 @@ const ListItem = ({
               <div
                 className={twJoin(
                   "flex size-[20px] items-center justify-center rounded-full bg-blue-900",
-                  backgroundColor ? "mt-0" : "mt-10",
+                  backgroundColorClass ? "mt-0" : "mt-10",
                 )}
                 role="none"
               ></div>
             )}
           </div>
-          <div className={twJoin(backgroundColor && "w-full rounded-lg")}>
-            <Background
-              backgroundColor={(backgroundColor as BackgroundColor) || "white"}
-            >
-              <div
-                className={twJoin(
-                  "flex flex-col gap-16",
-                  backgroundColor
-                    ? "px-80 pt-40 pb-48 max-sm:px-16 max-sm:py-32"
-                    : "mt-4",
-                )}
-              >
-                {label && (
-                  <Badge look="hint">{label.children ?? label.text}</Badge>
-                )}
-                {headline && (
-                  <Heading
-                    tagName={parentHasHeading ? "h3" : "h2"}
-                    {...headline}
-                  />
-                )}
-                {content && <RichText markdown={content} />}
-                {image && (
-                  <ImageZoomable image={image} className="max-w-a11y" />
-                )}
-                {buttons && buttons.length > 0 && (
-                  <ButtonContainer buttons={buttons} />
-                )}
-              </div>
-            </Background>
+          <div className={twJoin(backgroundColorClass && "w-full rounded-lg")}>
+            <div className={twJoin("flex flex-col gap-16", backgroundClasses)}>
+              {label && (
+                <Badge look="hint">{label.children ?? label.text}</Badge>
+              )}
+              {headline && (
+                <Heading
+                  tagName={parentHasHeading ? "h3" : "h2"}
+                  {...headline}
+                />
+              )}
+              {content && <RichText markdown={content} />}
+              {image && <ImageZoomable image={image} className="max-w-a11y" />}
+              {buttons && buttons.length > 0 && (
+                <ButtonContainer buttons={buttons} />
+              )}
+            </div>
           </div>
         </div>
       </div>

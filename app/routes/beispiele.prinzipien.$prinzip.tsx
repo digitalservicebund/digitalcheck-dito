@@ -203,7 +203,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
         )}
       </Container>
       <div className="my-40">
-        <Container backgroundColor="blue" overhangingBackground>
+        <Container className="bg-blue-100" overhangingBackground>
           <Box
             heading={{
               text: examplesRegelungen.yourExample.title,

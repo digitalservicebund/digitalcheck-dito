@@ -1,5 +1,4 @@
 import Accordion from "~/components/Accordion";
-import Background from "~/components/Background";
 import Box from "~/components/Box";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
@@ -39,33 +38,31 @@ export default function Index() {
     {
       title: preCheck.start.info.tabName,
       content: (
-        <Background backgroundColor="blue">
-          <div className="flex flex-col-reverse items-center gap-48 px-16 py-40 md:flex-row md:gap-64 md:px-64">
-            <Image
-              url={preCheck.start.info.image.src}
-              alternativeText={preCheck.start.info.image.alt}
-              className="md:w-1/3 md:pl-32"
-            />
-            <Box
-              heading={{
-                tagName: "h3",
-                look: "ds-heading-03-reg",
-                text: preCheck.start.info.title,
-              }}
-              content={{
-                markdown: preCheck.start.info.text,
-              }}
-              buttons={[
-                {
-                  text: preCheck.start.info.button.text,
-                  href: preCheck.start.info.button.href,
-                  look: "tertiary",
-                  className: "mt-20",
-                },
-              ]}
-            />
-          </div>
-        </Background>
+        <div className="flex flex-col-reverse items-center gap-48 bg-blue-100 px-16 py-40 md:flex-row md:gap-64 md:px-64">
+          <Image
+            url={preCheck.start.info.image.src}
+            alternativeText={preCheck.start.info.image.alt}
+            className="md:w-1/3 md:pl-32"
+          />
+          <Box
+            heading={{
+              tagName: "h3",
+              look: "ds-heading-03-reg",
+              text: preCheck.start.info.title,
+            }}
+            content={{
+              markdown: preCheck.start.info.text,
+            }}
+            buttons={[
+              {
+                text: preCheck.start.info.button.text,
+                href: preCheck.start.info.button.href,
+                look: "tertiary",
+                className: "mt-20",
+              },
+            ]}
+          />
+        </div>
       ),
     },
     {

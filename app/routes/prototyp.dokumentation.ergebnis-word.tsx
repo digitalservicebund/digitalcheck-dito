@@ -1,5 +1,4 @@
 import { CheckCircleOutlined } from "@digitalservicebund/icons/index";
-import Background from "~/components/Background";
 import Box from "~/components/Box";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
@@ -28,9 +27,9 @@ export function meta() {
 export default function DocumentationResult() {
   return (
     <>
-      <Background backgroundColor="blue" className="py-40 print:pb-0">
+      <div className="bg-blue-100 py-40 print:pb-0">
         <div className="px-16">
-          <Container className="rounded-t-lg py-32" backgroundColor="midBlue">
+          <Container className="rounded-t-lg bg-blue-300 py-32">
             <div className="flex flex-col gap-16 sm:flex-row">
               <div className="flex size-36 flex-none items-center justify-center">
                 <CheckCircleOutlined className="h-full w-full" />
@@ -45,7 +44,7 @@ export default function DocumentationResult() {
               />
             </div>
           </Container>
-          <Container className="rounded-b-lg" backgroundColor="white">
+          <Container className="rounded-b-lg bg-white">
             <Box
               heading={{
                 text: result.data.title,
@@ -134,7 +133,7 @@ export default function DocumentationResult() {
             </div>
           </Container>
         </div>
-      </Background>
+      </div>
       <Container>
         <NumberedList
           heading={{

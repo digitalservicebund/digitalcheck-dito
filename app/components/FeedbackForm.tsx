@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { twJoin } from "tailwind-merge";
-import Background from "~/components/Background";
 import Button from "~/components/Button";
 import Container from "~/components/Container";
 import RichText from "~/components/RichText";
+import twMerge from "~/utils/tailwindMerge";
 
 type FeedbackQuestionOptionProps = {
   label: string;
@@ -81,11 +81,7 @@ function FeedbackQuestion({
   };
 
   return (
-    <fieldset
-      className={twJoin(
-        "flex flex-col gap-20 border-b-2 border-blue-300 pt-24 pb-20 last:border-b-0 lg:flex-row lg:gap-24",
-      )}
-    >
+    <fieldset className="flex flex-col gap-20 border-b-2 border-blue-300 pt-24 pb-20 last:border-b-0 lg:flex-row lg:gap-24">
       <div className="lg:w-1/2">
         <legend>
           <p>{question.text}</p>
@@ -157,23 +153,20 @@ export default function FeedbackForm(props: Readonly<FeedbackFormProps>) {
   if (submitted) {
     return (
       <div ref={thankYouMessageRef} tabIndex={-1} aria-live="polite">
-        <Background backgroundColor="blue" className="pt-40 pb-48">
-          <Container backgroundColor="white" overhangingBackground>
+        <div className="bg-blue-100 pt-40 pb-48">
+          <Container className="bg-white" overhangingBackground>
             <h2>{props.success.heading}</h2>
             <br />
             <p>{props.success.text}</p>
           </Container>
-        </Background>
+        </div>
       </div>
     );
   }
 
   return (
-    <Background
-      backgroundColor="blue"
-      className={twJoin("pt-40 pb-48", props.className)}
-    >
-      <Container backgroundColor="white" overhangingBackground>
+    <div className={twMerge("bg-blue-100 pt-40 pb-48", props.className)}>
+      <Container className="bg-white" overhangingBackground>
         <h2>{props.heading}</h2>
         <form onSubmit={handleSubmit} className="mb-48">
           <span>
@@ -186,6 +179,6 @@ export default function FeedbackForm(props: Readonly<FeedbackFormProps>) {
         </form>
         <RichText markdown={props.contact} className="font-bold" />
       </Container>
-    </Background>
+    </div>
   );
 }

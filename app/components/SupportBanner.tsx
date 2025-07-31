@@ -1,4 +1,3 @@
-import Background from "~/components/Background";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
 
@@ -12,7 +11,7 @@ export default function SupportBanner({
   text,
 }: Readonly<SupportBannerProps>) {
   return (
-    <Background backgroundColor="midBlue">
+    <div className="bg-blue-300">
       <Container className="ds-stack ds-stack-16">
         <Box
           heading={{
@@ -25,6 +24,6 @@ export default function SupportBanner({
           }}
         ></Box>
       </Container>
-    </Background>
+    </div>
   );
 }

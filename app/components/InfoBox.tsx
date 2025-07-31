@@ -30,6 +30,7 @@ export type InfoBoxProps = {
   buttons?: ButtonProps[];
   Icon?: React.FC<React.SVGProps<SVGSVGElement>>;
   className?: string;
+  look?: "default" | "highlight" | "method";
 };
 
 const InfoBox = ({
@@ -42,6 +43,7 @@ const InfoBox = ({
   linkList,
   buttons,
   Icon,
+  look,
 }: InfoBoxProps) => {
   return (
     <div
@@ -49,6 +51,9 @@ const InfoBox = ({
       data-testid="info-box-container"
       className={twMerge(
         "flex scroll-my-40 flex-col gap-32 sm:flex-row",
+        look === "highlight" && "rounded-lg bg-blue-100 px-16 py-40 sm:px-80",
+        look === "method" &&
+          "bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48",
         className,
       )}
     >

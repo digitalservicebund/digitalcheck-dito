@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 
-import Background from "~/components/Background";
 import Box from "~/components/Box";
 import type { ButtonProps } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
@@ -90,8 +89,7 @@ export default function Index() {
         {tab.offerings.map((offering: Offering) => (
           <Container
             key={offering.title}
-            className="mb-32 flex gap-32 rounded-xl px-40 max-md:flex-col"
-            backgroundColor="blue"
+            className="mb-32 flex gap-32 rounded-xl bg-blue-100 px-40 max-md:flex-col"
           >
             <Box
               heading={{
@@ -104,7 +102,7 @@ export default function Index() {
               buttons={offering.button ? [offering.button] : []}
             />
             <div className="flex-none space-y-20 md:w-[310px]">
-              <Background backgroundColor="white">
+              <div className="bg-white">
                 <div className="p-28">
                   <Header
                     heading={{
@@ -133,9 +131,9 @@ export default function Index() {
                     ))}
                   </div>
                 </div>
-              </Background>
+              </div>
               {offering.examples && (
-                <Background backgroundColor="white">
+                <div className="bg-white">
                   <div className="divide-y divide-gray-700">
                     {offering.examples.map((example, idx) => (
                       <div key={`${offering.title}-example-${idx}`}>
@@ -152,7 +150,7 @@ export default function Index() {
                       </div>
                     ))}
                   </div>
-                </Background>
+                </div>
               )}
             </div>
           </Container>
@@ -165,7 +163,7 @@ export default function Index() {
     <>
       <Hero title={title} subtitle={subtitle} />
 
-      <Background backgroundColor="midBlue">
+      <div className="bg-blue-300">
         <Container className="flex flex-col py-0 lg:h-[420px] lg:flex-row">
           <div className="py-32 sm:py-48 lg:w-1/2 lg:self-center">
             <RichText
@@ -182,7 +180,7 @@ export default function Index() {
             </div>
           </div>
         </Container>
-      </Background>
+      </div>
       <div className="sm:hidden">
         <SocialProofImage />
       </div>
@@ -220,7 +218,7 @@ export default function Index() {
             ))}
         </div>
       </Container>
-      <Background backgroundColor="blue">
+      <div className="bg-blue-100">
         <Container>
           <Heading id="hilfe" tagName="h2" text={supportHow.title} />
           <div className="ds-stack ds-stack-16 pt-32 pb-40">
@@ -232,24 +230,23 @@ export default function Index() {
             <ButtonContainer buttons={supportHow.buttons} />
           </div>
         </Container>
-      </Background>
-      <div id="angebote">
-        <Background backgroundColor="white">
-          <Container className="ds-stack ds-stack-40">
-            <Box
-              heading={{
-                tagName: "h2",
-                text: supportOfferings.title,
-              }}
-              content={{
-                markdown: supportOfferings.text,
-              }}
-            />
-            <Tabs tabs={tabsData} initialActiveIndex={initialTabIndex} />
-          </Container>
-        </Background>
       </div>
-      <Background backgroundColor="midBlue">
+      <div id="angebote">
+        <Container className="ds-stack ds-stack-40">
+          <Box
+            heading={{
+              tagName: "h2",
+              text: supportOfferings.title,
+            }}
+            content={{
+              markdown: supportOfferings.text,
+            }}
+          />
+          <Tabs tabs={tabsData} initialActiveIndex={initialTabIndex} />
+        </Container>
+      </div>
+
+      <div className="bg-blue-300">
         <Container>
           <Box
             heading={{
@@ -261,7 +258,7 @@ export default function Index() {
             }}
           />
         </Container>
-      </Background>
+      </div>
     </>
   );
 }

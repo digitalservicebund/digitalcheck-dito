@@ -1,4 +1,3 @@
-import Background from "~/components/Background";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
@@ -49,10 +48,7 @@ export default function SPOC() {
             className="mb-48"
             markdown={spoc.landscape.contentAfter.outro}
           />
-          <Background
-            backgroundColor="blue"
-            className="relative left-1/2 w-screen -translate-x-1/2"
-          >
+          <div className="relative left-1/2 w-screen -translate-x-1/2 bg-blue-100">
             <Container>
               <Heading
                 tagName="h2"
@@ -64,7 +60,7 @@ export default function SPOC() {
                 className="mb-48"
               />
             </Container>
-          </Background>
+          </div>
           <Container className="px-0">
             <Heading
               tagName="h2"

@@ -1,12 +1,11 @@
 import { useLoaderData } from "react-router";
 
-import Background from "~/components/Background";
 import Box from "~/components/Box";
+import Card from "~/components/Card";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Hero from "~/components/Hero";
-import HighlightBox from "~/components/HighlightBox";
-import Image from "~/components/Image";
+import InfoBox from "~/components/InfoBox";
 import { methodsITSystems } from "~/resources/content/methode-it-systeme-erfassen";
 import { methodsTechnicalFeasibility } from "~/resources/content/methode-technische-umsetzbarkeit";
 import { methodsResponsibleActors } from "~/resources/content/methode-zustaendige-akteurinnen-auflisten";
@@ -77,47 +76,39 @@ export default function Index() {
           buttons={"buttons" in content.content ? content.content.buttons : []}
         />
         {content.boxes.map((box) => (
-          <div key={box.title} className="overflow-hidden rounded-lg">
-            <Background backgroundColor="midBlue">
-              <div className="px-96 pt-64 max-sm:px-16 max-sm:pt-32">
-                <div className="&_img:object-cover &_img:object-top h-0 overflow-hidden rounded-t-lg pb-[40%] shadow-2xl">
-                  <Image url={box.image.src} alternativeText={box.image.alt} />
-                </div>
-              </div>
-            </Background>
-            <Background backgroundColor="blue">
-              <Box
-                heading={{ text: box.title, look: "ds-heading-03-reg" }}
-                badge={{ text: box.label, Icon: box.icon }}
-                content={{ markdown: box.text }}
-                buttons={"buttons" in box ? box.buttons : []}
-                className="px-96 py-64 max-sm:px-16 max-sm:py-32"
-              />
-            </Background>
-          </div>
+          <Card
+            key={box.title}
+            image={{ url: box.image.src, alternativeText: box.image.alt }}
+            heading={{ text: box.title, look: "ds-heading-03-reg" }}
+            badge={{ text: box.label, Icon: box.icon }}
+            content={{ markdown: box.text }}
+            buttons={"buttons" in box ? box.buttons : []}
+            className="px-96 py-64 max-sm:px-16 max-sm:py-32"
+          />
         ))}
       </Container>
       {"tip" in content && (
-        <Background backgroundColor="yellow">
+        <div className="bg-yellow-300">
           <Container>
-            <Box
-              heading={{ text: content.tip.title, look: "ds-heading-03-reg" }}
+            <InfoBox
+              heading={{ text: content.tip.title, tagName: "h3" }}
               badge={{ text: content.tip.label, Icon: content.tip.icon }}
-              content={{ markdown: content.tip.text }}
+              content={content.tip.text}
             />
           </Container>
-        </Background>
+        </div>
       )}
 
       <Container>
-        <HighlightBox
+        <InfoBox
           heading={{ tagName: "h2", text: interviewBanner.title }}
           content={interviewBanner.text}
+          look="highlight"
         />
       </Container>
 
       {"support" in content && (
-        <Background backgroundColor="blue">
+        <div className="bg-blue-100">
           <Container>
             <Box
               heading={{
@@ -132,7 +123,7 @@ export default function Index() {
               buttons={content.support.buttons}
             />
           </Container>
-        </Background>
+        </div>
       )}
     </>
   );

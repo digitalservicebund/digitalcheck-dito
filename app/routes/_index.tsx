@@ -1,5 +1,4 @@
 import { Link } from "react-router";
-import Background from "~/components/Background";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
@@ -47,10 +46,7 @@ export default function Index() {
           </div>
 
           {/* currently not used and hidden */}
-          <Background
-            backgroundColor="darkBlue"
-            className="relative left-1/2 hidden w-screen -translate-x-1/2 py-24"
-          >
+          <div className="relative left-1/2 hidden w-screen -translate-x-1/2 bg-blue-800 py-24">
             <Container>
               <div className="ds-stack ds-stack-32 scroll-my-40">
                 <Heading tagName="h2" text={index.principles.title} />
@@ -72,7 +68,7 @@ export default function Index() {
                 </Link>
               </div>
             </Container>
-          </Background>
+          </div>
         </>
       ),
     },
@@ -94,7 +90,7 @@ export default function Index() {
       <Hero
         title={index.title}
         subtitle={index.subtitle}
-        backgroundColor="darkBlue"
+        className="bg-blue-800 text-white"
       />
 
       <Container>

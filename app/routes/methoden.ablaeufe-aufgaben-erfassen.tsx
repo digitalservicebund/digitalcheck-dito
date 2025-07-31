@@ -1,9 +1,7 @@
 import { useLoaderData } from "react-router";
-import Background from "~/components/Background";
 import Card from "~/components/Card";
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
-import HighlightBox from "~/components/HighlightBox";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
 import Tabs, { TabItem } from "~/components/Tabs";
@@ -100,9 +98,10 @@ export default function Visualization() {
             ]}
           />
 
-          <HighlightBox
+          <InfoBox
             badge={methodsTasksProcesses.anleitung.tipp.badge}
             content={methodsTasksProcesses.anleitung.tipp.content}
+            look="highlight"
           />
 
           <Card
@@ -133,9 +132,10 @@ export default function Visualization() {
       </Container>
 
       <Container className="ds-stack ds-stack-40">
-        <HighlightBox
+        <InfoBox
           heading={{ tagName: "h2", text: interviewBanner.title }}
           content={interviewBanner.text}
+          look="highlight"
         />
         <InfoBox
           badge={methodsTasksProcesses.furtherSteps.badge}
@@ -148,7 +148,7 @@ export default function Visualization() {
         />
       </Container>
 
-      <Background backgroundColor="blue">
+      <div className="bg-blue-100">
         <Container>
           <InfoBox
             badge={methodsTasksProcesses.support.badge}
@@ -159,7 +159,7 @@ export default function Visualization() {
             content={methodsTasksProcesses.support.content}
           />
         </Container>
-      </Background>
+      </div>
     </>
   );
 }
