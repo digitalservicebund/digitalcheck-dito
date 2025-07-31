@@ -3,6 +3,7 @@ import Container from "~/components/Container";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import LinkListBox from "~/components/LinkListBox";
+import { PrinciplePosterBox } from "~/components/PrinciplePosterBox";
 import SupportBanner from "~/components/SupportBanner";
 import {
   getDetailsSummary,
@@ -36,11 +37,14 @@ export default function FundamentalsFivePrinciples() {
       </Hero>
 
       {methodsFivePrinciples.principles.map((principle) => (
-        <Container className="pb-64" key={slugify(principle.title)}>
+        <Container key={slugify(principle.title)}>
           <InfoBox
             identifier={slugify(principle.title)}
             key={slugify(principle.title)}
-            Icon={principle.icon}
+            visual={{
+              type: "icon",
+              Icon: principle.icon,
+            }}
             heading={{
               tagName: "h2",
               text: principle.title,
@@ -54,6 +58,8 @@ export default function FundamentalsFivePrinciples() {
           />
         </Container>
       ))}
+
+      <PrinciplePosterBox />
 
       <SupportBanner {...supportBanner} />
     </>

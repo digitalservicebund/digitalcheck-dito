@@ -5,3 +5,5 @@ fileignoreconfig:
   ignore_detectors: [filename]
 - filename: app/root.tsx
   allowed_patterns: [posthogKey]
+allowed_patterns:
+  - <[^>]+?\bkey=\{.*?\} # Allow <JSXElement ... key={...} patterns
