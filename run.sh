@@ -53,6 +53,10 @@ _setup_git_hooks() {
       _fail "Setup requires Talisman, please install first: \`brew install talisman\`"
       exit 1
     fi
+    if ! command -v gitleaks > /dev/null 2>&1; then
+      _fail "Setup requires Gitleaks, please install first: \`brew install gitleaks\`"
+      exit 1
+    fi
     lefthook install
     _info "Git hooks installed.."
   fi

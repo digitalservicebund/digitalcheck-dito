@@ -15,9 +15,12 @@ pre-commit:
       run: npm run format:fix {staged_files}
       glob: "*.{js,cjs,mjs,ts,jsx,tsx,json,css,md,yml,yaml,html}"
       stage_fixed: true
-    secrets-audit:
+    talisman:
       tags: security audit
       run: talisman --githook pre-commit
+    gitleaks:
+      tags: security audit
+      run: gitleaks dir -v {staged_files}
 pre-push:
   parallel: true
   commands:
