@@ -1,7 +1,10 @@
+import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import Container from "./Container";
 import InfoBox from "./InfoBox";
 
 export function PrinciplePosterBox() {
+  const { principlePosterBox } = methodsFivePrinciples;
+
   return (
     <Container>
       <InfoBox
@@ -9,27 +12,25 @@ export function PrinciplePosterBox() {
         visual={{
           type: "image",
           image: {
-            url: "/images/Poster_5Prinzipien.jpg",
-            alternativeText: "Poster der 5 Prinzipien",
+            url: principlePosterBox.imageUrl,
+            alternativeText: principlePosterBox.imageAlt,
             size: "large",
           },
         }}
         badge={{
-          text: "Download",
+          text: principlePosterBox.badgeText,
         }}
         identifier="principle-poster-box"
         heading={{
           tagName: "h2",
-          text: "Die Prinzipien als Poster",
+          text: principlePosterBox.heading,
         }}
-        content={
-          "Drucken Sie sich das Poster in A4 oder A3 aus, um die Prinzipien für digitaltaugliche Gesetzgebung immer im Blick zu haben."
-        }
+        content={principlePosterBox.content}
         linkList={{
           links: [
             {
-              title: "Download",
-              url: "/assets/pdf/Prinzipien-Poster.pdf",
+              title: principlePosterBox.downloadTitle,
+              url: principlePosterBox.downloadUrl,
               download: true,
             },
           ],
