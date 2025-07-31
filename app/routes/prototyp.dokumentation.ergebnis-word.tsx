@@ -1,4 +1,4 @@
-import { CheckCircleOutlined } from "@digitalservicebund/icons/index";
+import { CheckCircleOutlined } from "@digitalservicebund/icons";
 import Box from "~/components/Box";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";

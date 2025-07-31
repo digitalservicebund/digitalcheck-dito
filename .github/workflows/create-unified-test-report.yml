@@ -3,6 +3,9 @@ name: Create Unified Test Report
 on:
   workflow_call:
 
+permissions:
+  contents: read
+
 jobs:
   merge-reports:
     runs-on: ubuntu-latest

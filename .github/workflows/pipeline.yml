@@ -10,6 +10,9 @@ on:
   # Allow to run this workflow manually
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 env:
   PACKAGE_NAME: digitalcheck-dito
   IMAGE_NAME: digitalservicebund/digitalcheck-dito
@@ -17,6 +20,10 @@ env:
 
 jobs:
   vulnerability-scan:
+    permissions:
+      contents: read
+      packages: read
+      security-events: write
     uses: ./.github/workflows/scan.yml
     secrets: inherit
 
@@ -101,6 +108,8 @@ jobs:
   deploy-to-production:
     needs: [build-and-push-image]
     if: github.ref == 'refs/heads/main'
+    permissions:
+      packages: read
     uses: ./.github/workflows/deploy.yml
     concurrency: deploy
     with:
@@ -111,6 +120,8 @@ jobs:
   deploy-to-staging:
     needs: [build-and-push-image]
     if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/staging/')
+    permissions:
+      packages: read
     uses: ./.github/workflows/deploy.yml
     concurrency: deploy
     with:
