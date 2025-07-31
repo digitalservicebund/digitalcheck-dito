@@ -43,7 +43,7 @@ const imageSizes = {
   icon: "size-80",
   small: "size-[120px]",
   medium: "size-[280px]",
-  large: "size-[400px]",
+  large: "size-[280px] sm:size-[400px] md:size-[280px] lg:size-[400px]",
 };
 
 const InfoBox = ({
