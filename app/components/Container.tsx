@@ -11,14 +11,11 @@ export default function Container({
   children,
   className,
 }: PropsWithChildren<ContainerProps>) {
-  let cssClasses = twMerge("container pt-40 pb-48", className);
-
-  if (overhangingBackground) {
-    cssClasses = twMerge(
-      "rounded-lg container-overhanging-background",
-      cssClasses,
-    );
-  }
+  const cssClasses = twMerge(
+    "container pt-40 pb-48",
+    overhangingBackground && "rounded-lg container-overhanging-background",
+    className,
+  );
 
   return <div className={cssClasses}>{children}</div>;
 }
