@@ -10,9 +10,6 @@ on:
   # Allow to run this workflow manually
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 env:
   PACKAGE_NAME: digitalcheck-dito
   IMAGE_NAME: digitalservicebund/digitalcheck-dito
