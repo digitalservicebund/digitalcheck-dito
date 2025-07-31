@@ -10,6 +10,9 @@ on:
   # Allow to run this workflow manually
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 env:
   PACKAGE_NAME: digitalcheck-dito
   IMAGE_NAME: digitalservicebund/digitalcheck-dito
@@ -17,6 +20,10 @@ env:
 
 jobs:
   vulnerability-scan:
+    permissions:
+      contents: read
+      packages: read
+      security-events: write
     uses: ./.github/workflows/scan.yml
     secrets: inherit
 

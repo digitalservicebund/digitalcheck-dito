@@ -6,6 +6,9 @@ on:
   # Allow to run this workflow manually
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   check-test-build-deploy:
     uses: ./.github/workflows/check-and-test.yml
