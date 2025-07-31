@@ -48,7 +48,7 @@ export default function SPOC() {
             className="mb-48"
             markdown={spoc.landscape.contentAfter.outro}
           />
-          <div className="bg-ds-blue relative left-1/2 w-screen -translate-x-1/2">
+          <div className="relative left-1/2 w-screen -translate-x-1/2 bg-blue-100">
             <Container>
               <Heading
                 tagName="h2"

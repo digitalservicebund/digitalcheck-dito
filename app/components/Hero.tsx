@@ -19,7 +19,7 @@ export default function Hero({
   className,
 }: Readonly<HeroProps>) {
   return (
-    <div className={twMerge("bg-ds-blue", className)}>
+    <div className={twMerge("bg-blue-100", className)}>
       <Container className="ds-stack ds-stack-16">
         <Heading tagName="h1">{title}</Heading>
         {subtitle && (

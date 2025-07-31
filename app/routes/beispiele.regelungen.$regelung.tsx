@@ -96,7 +96,7 @@ export default function Gesetz() {
     <>
       <Hero title={regelung.Titel} subtitle={examplesRegelungen.subtitle[0]} />
 
-      <div className="bg-ds-mid-light-blue">
+      <div className="bg-blue-200">
         <Container className="py-0">
           <InlineInfoList
             items={[
@@ -113,7 +113,7 @@ export default function Gesetz() {
                     to={regelung.LinkRegelungstext}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-ds-dark-blue underline"
+                    className="text-blue-800 underline"
                   >
                     {regelung?.GesetzStatus
                       ? gesetzStatusMap[regelung.GesetzStatus]

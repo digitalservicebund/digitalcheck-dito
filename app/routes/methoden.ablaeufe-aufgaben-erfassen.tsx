@@ -148,7 +148,7 @@ export default function Visualization() {
         />
       </Container>
 
-      <div className="bg-ds-blue">
+      <div className="bg-blue-100">
         <Container>
           <InfoBox
             badge={methodsTasksProcesses.support.badge}

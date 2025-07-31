@@ -11,7 +11,7 @@ export default function SupportBanner({
   text,
 }: Readonly<SupportBannerProps>) {
   return (
-    <div className="bg-ds-mid-blue">
+    <div className="bg-blue-300">
       <Container className="ds-stack ds-stack-16">
         <Box
           heading={{

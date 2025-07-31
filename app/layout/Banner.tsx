@@ -14,7 +14,7 @@ export default function Banner({
   content,
 }: Readonly<BannerProps>) {
   return (
-    <div aria-label={ariaLabel} className="bg-ds-yellow">
+    <div aria-label={ariaLabel} className="bg-yellow-300">
       <Container className="relative flex flex-col items-center gap-8 py-24 sm:flex-row sm:py-0">
         <div className="ds-stack ds-stack-8 sm:py-24">
           <div className="flex flex-col-reverse items-start gap-8 sm:flex-row">

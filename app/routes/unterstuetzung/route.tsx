@@ -89,7 +89,7 @@ export default function Index() {
         {tab.offerings.map((offering: Offering) => (
           <Container
             key={offering.title}
-            className="bg-ds-blue mb-32 flex gap-32 rounded-xl px-40 max-md:flex-col"
+            className="mb-32 flex gap-32 rounded-xl bg-blue-100 px-40 max-md:flex-col"
           >
             <Box
               heading={{
@@ -163,7 +163,7 @@ export default function Index() {
     <>
       <Hero title={title} subtitle={subtitle} />
 
-      <div className="bg-ds-mid-blue">
+      <div className="bg-blue-300">
         <Container className="flex flex-col py-0 lg:h-[420px] lg:flex-row">
           <div className="py-32 sm:py-48 lg:w-1/2 lg:self-center">
             <RichText
@@ -204,7 +204,7 @@ export default function Index() {
                 key={supportType.title}
                 className="flex gap-16 max-lg:flex-col"
               >
-                <supportType.icon className="fill-ds-dark-blue size-48 flex-none" />
+                <supportType.icon className="size-48 flex-none fill-blue-800" />
                 <Box
                   heading={{
                     tagName: "h3",
@@ -218,7 +218,7 @@ export default function Index() {
             ))}
         </div>
       </Container>
-      <div className="bg-ds-blue">
+      <div className="bg-blue-100">
         <Container>
           <Heading id="hilfe" tagName="h2" text={supportHow.title} />
           <div className="ds-stack ds-stack-16 pt-32 pb-40">
@@ -246,7 +246,7 @@ export default function Index() {
         </Container>
       </div>
 
-      <div className="bg-ds-mid-blue">
+      <div className="bg-blue-300">
         <Container>
           <Box
             heading={{

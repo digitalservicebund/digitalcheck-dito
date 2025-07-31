@@ -20,18 +20,18 @@ export default function AccordionItem({
   const plausibleEvent = getPlausibleEventClassName(plausibleEventName);
 
   return (
-    <details className="group border-t-ds-dark-blue border-t-2" id={id}>
+    <details className="group border-t-2 border-t-blue-800" id={id}>
       <summary
         className={twJoin(
           plausibleEvent,
-          "group-open:bg-ds-mid-light-blue hover:bg-ds-mid-light-blue focus-visible:bg-ds-mid-light-blue focus-visible:outline-ds-dark-blue flex w-full cursor-pointer items-center justify-between p-24 focus-visible:outline-4 [&::-webkit-details-marker]:hidden",
+          "flex w-full cursor-pointer items-center justify-between p-24 group-open:bg-blue-200 hover:bg-blue-200 focus-visible:bg-blue-200 focus-visible:outline-4 focus-visible:outline-blue-800 [&::-webkit-details-marker]:hidden",
         )}
       >
-        <div className="text-ds-dark-blue pr-10 text-left font-bold">
+        <div className="pr-10 text-left font-bold text-blue-800">
           {headline}
         </div>
-        <Add className="fill-ds-dark-blue size-24 shrink-0 group-open:hidden" />
-        <Remove className="fill-ds-dark-blue hidden size-24 shrink-0 group-open:block" />
+        <Add className="size-24 shrink-0 fill-blue-800 group-open:hidden" />
+        <Remove className="hidden size-24 shrink-0 fill-blue-800 group-open:block" />
       </summary>
       <div className="p-24">
         {typeof content === "string" ? (

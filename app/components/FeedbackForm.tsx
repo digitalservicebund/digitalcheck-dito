@@ -49,9 +49,7 @@ function FeedbackInput({
 }>) {
   const classes = twJoin(
     "px-16 h-48 sm:px-24 sm:h-64 flex items-center cursor-pointer",
-    selected
-      ? "bg-ds-dark-blue text-white"
-      : "bg-ds-mid-light-blue text-ds-dark-blue",
+    selected ? "bg-blue-800 text-white" : "bg-blue-200 text-blue-800",
   );
 
   return (
@@ -83,7 +81,7 @@ function FeedbackQuestion({
   };
 
   return (
-    <fieldset className="border-ds-mid-blue flex flex-col gap-20 border-b-2 pt-24 pb-20 last:border-b-0 lg:flex-row lg:gap-24">
+    <fieldset className="flex flex-col gap-20 border-b-2 border-blue-300 pt-24 pb-20 last:border-b-0 lg:flex-row lg:gap-24">
       <div className="lg:w-1/2">
         <legend>
           <p>{question.text}</p>
@@ -155,7 +153,7 @@ export default function FeedbackForm(props: Readonly<FeedbackFormProps>) {
   if (submitted) {
     return (
       <div ref={thankYouMessageRef} tabIndex={-1} aria-live="polite">
-        <div className="bg-ds-blue pt-40 pb-48">
+        <div className="bg-blue-100 pt-40 pb-48">
           <Container className="bg-white" overhangingBackground>
             <h2>{props.success.heading}</h2>
             <br />
@@ -167,7 +165,7 @@ export default function FeedbackForm(props: Readonly<FeedbackFormProps>) {
   }
 
   return (
-    <div className={twMerge("bg-ds-blue pt-40 pb-48", props.className)}>
+    <div className={twMerge("bg-blue-100 pt-40 pb-48", props.className)}>
       <Container className="bg-white" overhangingBackground>
         <h2>{props.heading}</h2>
         <form onSubmit={handleSubmit} className="mb-48">

@@ -46,7 +46,7 @@ export default function Index() {
           </div>
 
           {/* currently not used and hidden */}
-          <div className="bg-ds-dark-blue relative left-1/2 hidden w-screen -translate-x-1/2 py-24">
+          <div className="relative left-1/2 hidden w-screen -translate-x-1/2 bg-blue-800 py-24">
             <Container>
               <div className="ds-stack ds-stack-32 scroll-my-40">
                 <Heading tagName="h2" text={index.principles.title} />
@@ -90,7 +90,7 @@ export default function Index() {
       <Hero
         title={index.title}
         subtitle={index.subtitle}
-        className="bg-ds-dark-blue text-white"
+        className="bg-blue-800 text-white"
       />
 
       <Container>

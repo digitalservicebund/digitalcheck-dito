@@ -173,14 +173,14 @@ export default function Result() {
     result.digital === ResultType.UNSURE ? preCheckResult.unsure.hint : "";
   return (
     <>
-      <div className="bg-ds-blue py-40 print:pb-0">
+      <div className="bg-blue-100 py-40 print:pb-0">
         <div className="px-16">
           <Container
             className={twJoin(
               "rounded-t-lg py-32",
               result.digital === ResultType.UNSURE
-                ? "bg-ds-light-yellow"
-                : "bg-ds-mid-blue",
+                ? "bg-yellow-200"
+                : "bg-blue-300",
             )}
           >
             {vorhabenTitle && (

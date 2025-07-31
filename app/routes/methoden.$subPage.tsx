@@ -88,7 +88,7 @@ export default function Index() {
         ))}
       </Container>
       {"tip" in content && (
-        <div className="bg-ds-yellow">
+        <div className="bg-yellow-300">
           <Container>
             <InfoBox
               heading={{ text: content.tip.title, tagName: "h3" }}
@@ -108,7 +108,7 @@ export default function Index() {
       </Container>
 
       {"support" in content && (
-        <div className="bg-ds-blue">
+        <div className="bg-blue-100">
           <Container>
             <Box
               heading={{

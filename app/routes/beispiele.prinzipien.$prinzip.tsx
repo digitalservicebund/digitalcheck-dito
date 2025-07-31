@@ -176,7 +176,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
                               }
                               target="_blank"
                               rel="noreferrer"
-                              className="text-ds-dark-blue underline"
+                              className="text-blue-800 underline"
                             >
                               {digitalcheck.Regelungsvorhaben?.GesetzStatus
                                 ? gesetzStatusMap[
@@ -203,7 +203,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
         )}
       </Container>
       <div className="my-40">
-        <Container className="bg-ds-blue" overhangingBackground>
+        <Container className="bg-blue-100" overhangingBackground>
           <Box
             heading={{
               text: examplesRegelungen.yourExample.title,

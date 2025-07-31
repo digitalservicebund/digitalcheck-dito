@@ -79,9 +79,9 @@ export default function DocumentationResult() {
 
   return (
     <>
-      <div className="bg-ds-blue py-40 print:pb-0">
+      <div className="bg-blue-100 py-40 print:pb-0">
         <div className="px-16">
-          <Container className="bg-ds-mid-blue rounded-t-lg py-32">
+          <Container className="rounded-t-lg bg-blue-300 py-32">
             <div className="flex flex-col gap-16 sm:flex-row">
               <div className="flex size-36 flex-none items-center justify-center">
                 <CheckCircleOutlined className="h-full w-full" />

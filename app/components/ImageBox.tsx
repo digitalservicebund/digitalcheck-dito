@@ -70,14 +70,14 @@ function ImageBox({
         <figcaption
           className={twJoin(
             "label-03-reg w- pt-[24px] **:max-w-fit",
-            background && "bg-ds-blue p-16",
+            background && "bg-blue-100 p-16",
           )}
         >
           <RichText markdown={image.caption} />
         </figcaption>
       )}
       {border && (
-        <hr className="border-ds-mid-blue my-[16px] w-[120px] border-t-[2px]" />
+        <hr className="my-[16px] w-[120px] border-t-[2px] border-blue-300" />
       )}
     </figure>
   );

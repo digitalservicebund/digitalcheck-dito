@@ -26,7 +26,7 @@ function Badge({
   const principleStyle = principleNumber
     ? HIGHLIGHT_COLORS[principleNumber].background
     : "";
-  const hintStyle = look === "hint" ? "bg-ds-mid-blue text-ds-dark-blue" : "";
+  const hintStyle = look === "hint" ? "bg-blue-300 text-blue-800" : "";
 
   return (
     <mark className={twMerge(badgeStyle, principleStyle, hintStyle, className)}>

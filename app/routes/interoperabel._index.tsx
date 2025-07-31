@@ -72,7 +72,7 @@ export default function Interoperability() {
             <ImageZoomable image={interoperability.info.image} />
           </Container>
 
-          <div className="bg-ds-blue relative left-1/2 w-screen -translate-x-1/2 py-48">
+          <div className="relative left-1/2 w-screen -translate-x-1/2 bg-blue-100 py-48">
             <Container className="bg-white" overhangingBackground>
               <Heading
                 tagName="h2"
@@ -121,7 +121,7 @@ export default function Interoperability() {
         subtitle={interoperability.content}
       />
 
-      <div className="bg-ds-mid-blue">
+      <div className="bg-blue-300">
         <Container className="flex flex-col py-0 lg:h-[626px] lg:flex-row">
           <div className="py-32 sm:py-48 lg:w-1/2 lg:self-center lg:pr-48">
             <Heading

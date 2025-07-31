@@ -64,8 +64,8 @@ export default function DropdownContentList({
             return (
               <div
                 className={twMerge(
-                  "ds-stack ds-stack-4 hover:bg-ds-blue cursor-pointer border-l-[4px] border-l-transparent py-8 pr-8 pl-16 text-left lg:border-l-[8px] lg:px-56 lg:py-24",
-                  finalIsActive && "bg-ds-blue border-ds-dark-blue",
+                  "ds-stack ds-stack-4 cursor-pointer border-l-[4px] border-l-transparent py-8 pr-8 pl-16 text-left hover:bg-blue-100 lg:border-l-[8px] lg:px-56 lg:py-24",
+                  finalIsActive && "border-blue-800 bg-blue-100",
                   option.className,
                 )}
               >

@@ -38,7 +38,7 @@ export default function Index() {
     {
       title: preCheck.start.info.tabName,
       content: (
-        <div className="bg-ds-blue flex flex-col-reverse items-center gap-48 px-16 py-40 md:flex-row md:gap-64 md:px-64">
+        <div className="flex flex-col-reverse items-center gap-48 bg-blue-100 px-16 py-40 md:flex-row md:gap-64 md:px-64">
           <Image
             url={preCheck.start.info.image.src}
             alternativeText={preCheck.start.info.image.alt}
