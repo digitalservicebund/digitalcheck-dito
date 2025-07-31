@@ -5,8 +5,6 @@ import {
   useOutletContext,
 } from "react-router";
 
-import { ArrowCircleRightOutlined } from "@digitalservicebund/icons";
-import Box from "~/components/Box";
 import Container from "~/components/Container";
 import CustomLink from "~/components/CustomLink";
 import Heading from "~/components/Heading";
@@ -112,7 +110,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
         subtitle={examplesRegelungen.principles.hero.subtitle}
       />
 
-      <Container className="ds-stack ds-stack-40">
+      <Container className="flex flex-col gap-80">
         <Tabs
           className="mb-0"
           tabs={tabsForNavigation}
@@ -121,7 +119,6 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
         />
 
         <InfoBox
-          Icon={ArrowCircleRightOutlined}
           content={prinzip.Beschreibung}
           heading={{ text: prinzip.Name, tagName: "h2" }}
           badge={{
@@ -132,29 +129,41 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
         {GuteUmsetzungen.length > 0 && <Separator />}
 
         {GuteUmsetzungen.length > 0 && (
-          <div className="ds-stack ds-stack-64 mt-40">
+          <div className="flex flex-col gap-80">
             {GuteUmsetzungen.map(
               (digitalcheck) =>
                 digitalcheck.Regelungsvorhaben && (
                   <div
                     key={digitalcheck.documentId}
                     data-testid="regelung-on-prinzip"
+                    className="flex flex-col gap-40"
                   >
-                    <Link
-                      target="_blank"
-                      to={`${ROUTE_REGELUNGEN.url}/${digitalcheck.Regelungsvorhaben.URLBezeichnung}`}
-                      rel="noreferrer"
-                      prefetch="viewport"
-                    >
+                    <div className="flex flex-col gap-16">
                       <Heading
                         tagName="h3"
                         text={digitalcheck.Regelungsvorhaben.Titel}
                         look="ds-heading-03-bold"
-                        className="text-link inline max-w-full"
+                        className="max-w-full"
                       />
-                    </Link>
+
+                      <Link
+                        target="_blank"
+                        to={`${ROUTE_REGELUNGEN.url}/${digitalcheck.Regelungsvorhaben.URLBezeichnung}`}
+                        rel="noreferrer"
+                        prefetch="viewport"
+                        className="text-ds-dark-blue underline"
+                      >
+                        Alle Beispiele zu dieser Regelung
+                      </Link>
+                    </div>
+
+                    <ParagraphList
+                      paragraphs={digitalcheck.Paragraphen}
+                      principlesToShow={[prinzip]}
+                    />
+
                     <InlineInfoList
-                      className="my-32 pl-16"
+                      className="bg-ds-mid-light-blue px-16"
                       items={[
                         {
                           label: examplesRegelungen.infoLabels[0],
@@ -192,27 +201,12 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
                         },
                       ]}
                     />
-                    <ParagraphList
-                      paragraphs={digitalcheck.Paragraphen}
-                      principlesToShow={[prinzip]}
-                    />
                   </div>
                 ),
             )}
           </div>
         )}
       </Container>
-      <div className="my-40">
-        <Container className="bg-blue-100" overhangingBackground>
-          <Box
-            heading={{
-              text: examplesRegelungen.yourExample.title,
-              tagName: "h2",
-            }}
-            content={{ markdown: examplesRegelungen.yourExample.text }}
-          />
-        </Container>
-      </div>
     </>
   );
 }
