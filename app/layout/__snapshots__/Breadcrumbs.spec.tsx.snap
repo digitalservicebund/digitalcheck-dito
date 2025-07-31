@@ -4,11 +4,11 @@ exports[`Breadcrumbs Component > Renders correctly 1`] = `
 <div>
   <nav
     aria-label="breadcrumb navigation"
-    class="bg-ds-blue flex flex-wrap items-center px-16 py-8 text-base print:hidden"
+    class="bg-blue-100 flex flex-wrap items-center px-16 py-8 text-base print:hidden"
     data-testid="breadcrumbs-menu"
   >
     <a
-      class="fill-ds-dark-blue outline-ds-dark-blue"
+      class="fill-blue-800 outline-blue-800"
       data-discover="true"
       href="/"
     >
