@@ -180,7 +180,7 @@ export default function Index() {
                         title="Welche Datei kann ich hochladen?"
                         content="Wenn Sie bereits zu einem früheren Zeitpunkt angefangen haben, die Dokumentation auszufüllen, hatten Sie die Möglichkeit einen Zwischenstand als **PDF-Datei** herunterzuladen. Diese Datei können Sie hier wieder hochladen, um daran weiterzuarbeiten."
                       />
-                      <label className="ds-label-01-reg border-ds-dark-blue text-ds-dark-blue focus-within:outline-ds-dark-blue block w-full cursor-pointer justify-center border-2 border-dashed bg-white p-40 text-center align-middle focus-within:border-solid focus-within:outline-3">
+                      <label className="ds-label-01-reg block w-full cursor-pointer justify-center border-2 border-dashed border-blue-800 bg-white p-40 text-center align-middle text-blue-800 focus-within:border-solid focus-within:outline-3 focus-within:outline-blue-800">
                         <input
                           type="file"
                           accept={

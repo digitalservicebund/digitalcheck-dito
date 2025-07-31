@@ -58,7 +58,7 @@ const LinkList = ({
 export default function Footer() {
   return (
     <footer
-      className="ds-label-03-reg border-ds-mid-blue flex w-full flex-row justify-center border-t-2 leading-snug text-gray-900 print:hidden"
+      className="ds-label-03-reg flex w-full flex-row justify-center border-t-2 border-blue-300 leading-snug text-gray-900 print:hidden"
       aria-label={footer.navLabel}
     >
       <div className="ds-stack ds-stack-32 sm:ds-stack-40 w-full max-w-6xl px-16 py-40">
@@ -99,7 +99,7 @@ export default function Footer() {
           </ul>
         </nav>
 
-        <hr className="border-ds-mid-blue mt-16 w-full border-t-2" />
+        <hr className="mt-16 w-full border-t-2 border-blue-300" />
 
         <div className="space-y-16 sm:flex sm:gap-48">
           <Image

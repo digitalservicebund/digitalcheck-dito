@@ -171,8 +171,8 @@ const PageHeader = () => {
             </a>
             <button
               className={twMerge(
-                "hover:bg-ds-blue h-full cursor-pointer border-b-[4px] border-transparent px-16",
-                mobileMenuOpen && "bg-ds-blue border-ds-dark-blue",
+                "h-full cursor-pointer border-b-[4px] border-transparent px-16 hover:bg-blue-100",
+                mobileMenuOpen && "border-blue-800 bg-blue-100",
               )}
               onClick={toggleMobileMenu}
               aria-label="Menü öffnen/schließen"

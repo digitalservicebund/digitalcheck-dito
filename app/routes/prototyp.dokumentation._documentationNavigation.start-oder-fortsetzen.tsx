@@ -122,7 +122,7 @@ export default function PrototypeDocumentationMeta() {
         }
       />
 
-      <label className="ds-label-01-reg border-ds-dark-blue text-ds-dark-blue focus-within:outline-ds-dark-blue mb-40 block flex w-full cursor-pointer justify-center border-2 border-dashed bg-white p-40 text-center align-middle focus-within:border-solid focus-within:outline-3">
+      <label className="ds-label-01-reg mb-40 block flex w-full cursor-pointer justify-center border-2 border-dashed border-blue-800 bg-white p-40 text-center align-middle text-blue-800 focus-within:border-solid focus-within:outline-3 focus-within:outline-blue-800">
         <input
           type="file"
           accept={
