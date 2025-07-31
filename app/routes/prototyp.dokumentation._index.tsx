@@ -1,4 +1,4 @@
-import { FileUploadOutlined } from "@digitalservicebund/icons/index";
+import { FileUploadOutlined } from "@digitalservicebund/icons";
 import {
   decodePDFRawStream,
   PDFArray,
