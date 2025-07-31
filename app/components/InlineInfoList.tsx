@@ -29,7 +29,7 @@ export default function InlineInfoList({
               className="inline-flex flex-col gap-4"
             >
               {item.label && (
-                <span className="ds-label-03-reg text-ds-dark-gray">
+                <span className="ds-label-03-reg text-gray-900">
                   {item.label}
                 </span>
               )}
