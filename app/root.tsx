@@ -47,7 +47,7 @@ export function loader({ request }: Route.LoaderArgs) {
 
   return {
     BASE_URL,
-    trackingDisabled: process.env.TRACKING_DISABLED === "true",
+    trackingEnabled: process.env.TRACKING_ENABLED === "true",
     posthogEnabled: process.env.POSTHOG_ENABLED === "true",
     featureFlags,
     posthogKey: POSTHOG_KEY,
@@ -146,7 +146,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
   const nonce = useNonce();
   const error = useRouteError();
   const rootLoaderData = useRouteLoaderData<typeof loader>("root");
-  const { trackingDisabled, posthogEnabled, posthogKey } = rootLoaderData ?? {};
+  const { trackingEnabled, posthogEnabled, posthogKey } = rootLoaderData ?? {};
   const location = useLocation();
 
   let metaTitles = <></>;
@@ -188,7 +188,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
         ></script>
         {metaTitles}
         <Meta />
-        {!trackingDisabled && (
+        {trackingEnabled && (
           <script
             key={error ? "error-tracking" : "app-tracking"}
             defer

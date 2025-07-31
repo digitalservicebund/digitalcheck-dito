@@ -3,3 +3,5 @@ fileignoreconfig:
   ignore_detectors: [filename]
 - filename: .env.test
   ignore_detectors: [filename]
+- filename: app/root.tsx
+  allowed_patterns: [posthogKey]

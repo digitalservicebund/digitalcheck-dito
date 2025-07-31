@@ -16,7 +16,7 @@ export default async function trackCustomEvent(
 ) {
   const startTime = Date.now();
   if (
-    process.env.TRACKING_DISABLED === "true" ||
+    process.env.TRACKING_ENABLED === "false" ||
     process.env.NODE_ENV === "development"
   ) {
     console.log("Tracking is disabled. Event not sent: ", event);
