@@ -6,6 +6,7 @@ import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
 import LinkListBox from "~/components/LinkListBox";
+import { PrinciplePosterBox } from "~/components/PrinciplePosterBox";
 import Separator from "~/components/Separator";
 import {
   getDetailsSummary,
@@ -66,7 +67,10 @@ export default function FivePrinciples() {
         <Container className="pb-64" key={slugify(principle.title)}>
           <InfoBox
             identifier={slugify(principle.title)}
-            Icon={principle.icon}
+            visual={{
+              type: "icon",
+              Icon: principle.icon,
+            }}
             heading={{
               tagName: "h2",
               text: principle.title,
@@ -87,6 +91,8 @@ export default function FivePrinciples() {
           />
         </Container>
       ))}
+
+      <PrinciplePosterBox />
 
       {methodsFivePrinciples.nextStep && (
         <Container>

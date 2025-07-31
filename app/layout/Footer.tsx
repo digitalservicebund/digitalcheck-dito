@@ -22,7 +22,9 @@ const FooterLink = ({ link }: { link: LinkProps }) => (
       rel={link.openInNewTab ? "noreferrer" : undefined}
       aria-describedby={link.openInNewTab ? A11Y_MESSAGE_NEW_WINDOW : undefined}
     >
-      {link.text} {link.openInNewTab && openInNewIconElement}
+      <span className="flex items-center">
+        {link.text} {link.openInNewTab && openInNewIconElement}
+      </span>
     </Link>
   </>
 );

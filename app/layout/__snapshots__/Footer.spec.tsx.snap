@@ -31,8 +31,12 @@ exports[`Footer Component > Renders correctly 1`] = `
                 class="text-link increase-tap-area"
                 href="tel:015140767839"
               >
-                0151/40 76 78 39
-                 
+                <span
+                  class="flex items-center"
+                >
+                  0151/40 76 78 39
+                   
+                </span>
               </a>
                oder
                
@@ -40,8 +44,12 @@ exports[`Footer Component > Renders correctly 1`] = `
                 class="text-link increase-tap-area"
                 href="mailto:digitalcheck@digitalservice.bund.de"
               >
-                digitalcheck@digitalservice.bund.de
-                 
+                <span
+                  class="flex items-center"
+                >
+                  digitalcheck@digitalservice.bund.de
+                   
+                </span>
               </a>
             </li>
             <li>
@@ -51,8 +59,12 @@ exports[`Footer Component > Renders correctly 1`] = `
                 data-discover="true"
                 href="/unterstuetzung"
               >
-                Alle Unterstützungsangebote
-                 
+                <span
+                  class="flex items-center"
+                >
+                  Alle Unterstützungsangebote
+                   
+                </span>
               </a>
             </li>
             <li>
@@ -62,8 +74,12 @@ exports[`Footer Component > Renders correctly 1`] = `
                 data-discover="true"
                 href="/unterstuetzung#angebote"
               >
-                Schulungen
-                 
+                <span
+                  class="flex items-center"
+                >
+                  Schulungen
+                   
+                </span>
               </a>
             </li>
             <li>
@@ -73,8 +89,12 @@ exports[`Footer Component > Renders correctly 1`] = `
                 data-discover="true"
                 href="/interoperabel/nationale-kontaktstelle"
               >
-                Nationale Kontaktstelle für ein interoperables Europa (2024/903 Art. 17)
-                 
+                <span
+                  class="flex items-center"
+                >
+                  Nationale Kontaktstelle für ein interoperables Europa (2024/903 Art. 17)
+                   
+                </span>
               </a>
             </li>
           </ul>
@@ -97,8 +117,12 @@ exports[`Footer Component > Renders correctly 1`] = `
                 data-discover="true"
                 href="/vorpruefung"
               >
-                1. Vorprüfung: Digitalbezug einschätzen
-                 
+                <span
+                  class="flex items-center"
+                >
+                  1. Vorprüfung: Digitalbezug einschätzen
+                   
+                </span>
               </a>
             </li>
             <li>
@@ -108,8 +132,12 @@ exports[`Footer Component > Renders correctly 1`] = `
                 data-discover="true"
                 href="/methoden"
               >
-                2. Digitaltauglichkeit der Regelung sicherstellen
-                 
+                <span
+                  class="flex items-center"
+                >
+                  2. Digitaltauglichkeit der Regelung sicherstellen
+                   
+                </span>
               </a>
             </li>
             <li>
@@ -119,8 +147,12 @@ exports[`Footer Component > Renders correctly 1`] = `
                 data-discover="true"
                 href="/dokumentation"
               >
-                3. Dokumentieren der Digitaltauglichkeit
-                 
+                <span
+                  class="flex items-center"
+                >
+                  3. Dokumentieren der Digitaltauglichkeit
+                   
+                </span>
               </a>
             </li>
           </ul>
@@ -143,8 +175,12 @@ exports[`Footer Component > Renders correctly 1`] = `
                 data-discover="true"
                 href="/grundlagen/fuenf-prinzipien"
               >
-                Prinzipien der Digitaltauglichkeit
-                 
+                <span
+                  class="flex items-center"
+                >
+                  Prinzipien der Digitaltauglichkeit
+                   
+                </span>
               </a>
             </li>
             <li>
@@ -154,8 +190,12 @@ exports[`Footer Component > Renders correctly 1`] = `
                 data-discover="true"
                 href="/grundlagen/methoden"
               >
-                Übersicht der Werkzeuge und Methoden
-                 
+                <span
+                  class="flex items-center"
+                >
+                  Übersicht der Werkzeuge und Methoden
+                   
+                </span>
               </a>
             </li>
             <li>
@@ -165,8 +205,12 @@ exports[`Footer Component > Renders correctly 1`] = `
                 data-discover="true"
                 href="/interoperabel"
               >
-                EU-Interoperabilität
-                 
+                <span
+                  class="flex items-center"
+                >
+                  EU-Interoperabilität
+                   
+                </span>
               </a>
             </li>
           </ul>
@@ -187,8 +231,12 @@ exports[`Footer Component > Renders correctly 1`] = `
               data-discover="true"
               href="/impressum"
             >
-              Impressum
-               
+              <span
+                class="flex items-center"
+              >
+                Impressum
+                 
+              </span>
             </a>
           </li>
           <li
@@ -200,8 +248,12 @@ exports[`Footer Component > Renders correctly 1`] = `
               data-discover="true"
               href="/datenschutz"
             >
-              Datenschutzerklärung
-               
+              <span
+                class="flex items-center"
+              >
+                Datenschutzerklärung
+                 
+              </span>
             </a>
           </li>
           <li
@@ -213,8 +265,12 @@ exports[`Footer Component > Renders correctly 1`] = `
               data-discover="true"
               href="/barrierefreiheit"
             >
-              Barrierefreiheit
-               
+              <span
+                class="flex items-center"
+              >
+                Barrierefreiheit
+                 
+              </span>
             </a>
           </li>
           <li
@@ -226,8 +282,12 @@ exports[`Footer Component > Renders correctly 1`] = `
               data-discover="true"
               href="/sitemap"
             >
-              Sitemap
-               
+              <span
+                class="flex items-center"
+              >
+                Sitemap
+                 
+              </span>
             </a>
           </li>
           <li
@@ -241,26 +301,30 @@ exports[`Footer Component > Renders correctly 1`] = `
               rel="noreferrer"
               target="_blank"
             >
-              Open Source Code
-               
-              <svg
-                aria-hidden="true"
-                class="mb-4 ml-[0.2em] inline-block! fill-current"
-                data-testid="OpenInNewIcon"
-                focusable="false"
-                height="1.2em"
-                viewBox="0 0 24 24"
-                width="1.2em"
-                xmlns="http://www.w3.org/2000/svg"
+              <span
+                class="flex items-center"
               >
-                <path
-                  d="M0 0h24v24H0z"
-                  fill="none"
-                />
-                <path
-                  d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
-                />
-              </svg>
+                Open Source Code
+                 
+                <svg
+                  aria-hidden="true"
+                  class="ml-2 fill-current"
+                  data-testid="OpenInNewIcon"
+                  focusable="false"
+                  height="1.2em"
+                  viewBox="0 0 24 24"
+                  width="1.2em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0 0h24v24H0z"
+                    fill="none"
+                  />
+                  <path
+                    d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+                  />
+                </svg>
+              </span>
             </a>
           </li>
         </ul>
@@ -295,26 +359,30 @@ exports[`Footer Component > Renders correctly 1`] = `
                   rel="noreferrer"
                   target="_blank"
                 >
-                  DigitalService GmbH des Bundes
-                   
-                  <svg
-                    aria-hidden="true"
-                    class="mb-4 ml-[0.2em] inline-block! fill-current"
-                    data-testid="OpenInNewIcon"
-                    focusable="false"
-                    height="1.2em"
-                    viewBox="0 0 24 24"
-                    width="1.2em"
-                    xmlns="http://www.w3.org/2000/svg"
+                  <span
+                    class="flex items-center"
                   >
-                    <path
-                      d="M0 0h24v24H0z"
-                      fill="none"
-                    />
-                    <path
-                      d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
-                    />
-                  </svg>
+                    DigitalService GmbH des Bundes
+                     
+                    <svg
+                      aria-hidden="true"
+                      class="ml-2 fill-current"
+                      data-testid="OpenInNewIcon"
+                      focusable="false"
+                      height="1.2em"
+                      viewBox="0 0 24 24"
+                      width="1.2em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M0 0h24v24H0z"
+                        fill="none"
+                      />
+                      <path
+                        d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+                      />
+                    </svg>
+                  </span>
                 </a>
               </li>
               <li>
@@ -327,26 +395,30 @@ exports[`Footer Component > Renders correctly 1`] = `
                   rel="noreferrer"
                   target="_blank"
                 >
-                  Bundesministerium für Digitales und Staatsmodernisierung
-                   
-                  <svg
-                    aria-hidden="true"
-                    class="mb-4 ml-[0.2em] inline-block! fill-current"
-                    data-testid="OpenInNewIcon"
-                    focusable="false"
-                    height="1.2em"
-                    viewBox="0 0 24 24"
-                    width="1.2em"
-                    xmlns="http://www.w3.org/2000/svg"
+                  <span
+                    class="flex items-center"
                   >
-                    <path
-                      d="M0 0h24v24H0z"
-                      fill="none"
-                    />
-                    <path
-                      d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
-                    />
-                  </svg>
+                    Bundesministerium für Digitales und Staatsmodernisierung
+                     
+                    <svg
+                      aria-hidden="true"
+                      class="ml-2 fill-current"
+                      data-testid="OpenInNewIcon"
+                      focusable="false"
+                      height="1.2em"
+                      viewBox="0 0 24 24"
+                      width="1.2em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M0 0h24v24H0z"
+                        fill="none"
+                      />
+                      <path
+                        d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+                      />
+                    </svg>
+                  </span>
                 </a>
               </li>
             </ul>
