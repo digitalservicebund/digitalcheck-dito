@@ -222,7 +222,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
 export default function App() {
   const { featureFlags } = useLoaderData<typeof loader>();
   return (
-    <main className="[&:has(.parent-bg-blue)]:bg-ds-blue grow">
+    <main className="grow [&:has(.parent-bg-blue)]:bg-blue-100">
       {/* .parent-bg-blue can be set by child components to set the background of main to blue (e.g. used for question pages) */}
       <Outlet context={{ featureFlags }} />
     </main>
@@ -247,7 +247,7 @@ export function ErrorBoundary() {
   }
 
   return (
-    <main id="error" className="bg-ds-blue grow">
+    <main id="error" className="grow bg-blue-100">
       <Container>
         <div className="ds-stack ds-stack-8 mb-32">
           <span className="ds-label-01-bold">{errorStatus}</span>

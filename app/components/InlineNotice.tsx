@@ -26,17 +26,17 @@ const lookConfig = {
     IconComponent: CheckCircleOutlinedIcon,
   },
   info: {
-    backgroundColor: "bg-ds-mid-blue",
+    backgroundColor: "bg-blue-300",
     borderColor: "border-blue-700",
     IconComponent: InfoOutlinedIcon,
   },
   warning: {
-    backgroundColor: "bg-ds-light-yellow",
+    backgroundColor: "bg-yellow-200",
     borderColor: "border-[#E5CE5C]",
     IconComponent: WarningAmberIcon,
   },
   support: {
-    backgroundColor: "bg-ds-light-yellow",
+    backgroundColor: "bg-yellow-200",
     borderColor: "border-[#E5CE5C]",
     IconComponent: ContactSupportOutlinedIcon,
   },

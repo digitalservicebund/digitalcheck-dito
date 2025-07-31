@@ -203,7 +203,7 @@ export default function Index() {
                 key={supportType.title}
                 className="flex gap-16 max-lg:flex-col"
               >
-                <supportType.icon className="fill-ds-dark-blue size-48 flex-none" />
+                <supportType.icon className="size-48 flex-none fill-blue-800" />
                 <Box
                   heading={{
                     tagName: "h3",

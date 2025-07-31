@@ -334,7 +334,7 @@ const PrincipleExplanation = ({
             aria-label="Zurück zum Text"
             onClick={() => setActiveHighlight(null)}
           >
-            <ArrowUpwardOutlined className="fill-ds-dark-blue" />
+            <ArrowUpwardOutlined className="fill-blue-800" />
           </Link>
         )}
       </div>
