@@ -4,6 +4,7 @@ import type { ClientSideError } from "~/routes/handle-client-side-error";
 export default function trackClientSideError(error: Error) {
   const body: ClientSideError = {
     message: error.message,
+    stack: error.stack,
   };
   fetch(ROUTE_HANDLE_CLIENT_SIDE_ERRORS, {
     method: "POST",

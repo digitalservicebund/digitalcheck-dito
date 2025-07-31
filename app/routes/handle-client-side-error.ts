@@ -3,6 +3,7 @@ import { z } from "zod";
 
 const ClientSideErrorSchema = z.object({
   message: z.string(),
+  stack: z.string().optional(),
 });
 
 export type ClientSideError = z.infer<typeof ClientSideErrorSchema>;
@@ -14,6 +15,7 @@ const handleClientSideError = async (request: Request): Promise<Response> => {
     );
 
     console.log(`Client-side error: ${JSON.stringify(data.message)}`);
+    console.log(JSON.stringify(data.stack));
 
     return new Response(null, { status: 204 }); // No Content
   } catch (error) {
