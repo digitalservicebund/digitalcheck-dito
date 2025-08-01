@@ -3,9 +3,7 @@ import Hero from "~/components/Hero";
 import ImageBox from "~/components/ImageBox";
 import InfoBox, { type InfoBoxProps } from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList.tsx";
-import SupportBanner from "~/components/SupportBanner";
-import { basicsDigitalReadiness } from "~/resources/content/grundlage-digitaltauglichkeit";
-import { supportBanner } from "~/resources/content/shared/support-banner";
+import { fundamentalsDigitalReadiness } from "~/resources/content/grundlage-digitaltauglichkeit";
 import { features } from "~/resources/features";
 import { ROUTE_FUNDAMENTALS_DIGITAL_READINESS } from "~/resources/staticRoutes";
 import useFeatureFlag from "~/utils/featureFlags";
@@ -25,7 +23,7 @@ export default function FundamentalsMethods() {
     });
   }
 
-  const items: InfoBoxProps[] = basicsDigitalReadiness.summary.items.map(
+  const items: InfoBoxProps[] = fundamentalsDigitalReadiness.summary.items.map(
     (item) => {
       return {
         ...item,
@@ -37,13 +35,13 @@ export default function FundamentalsMethods() {
   return (
     <>
       <Hero
-        title={basicsDigitalReadiness.title}
-        subtitle={basicsDigitalReadiness.subtitle}
+        title={fundamentalsDigitalReadiness.title}
+        subtitle={fundamentalsDigitalReadiness.subtitle}
       />
 
       <Container className="py-80">
         <InfoBoxList
-          heading={{ text: basicsDigitalReadiness.summary.title }}
+          heading={{ text: fundamentalsDigitalReadiness.summary.title }}
           items={items}
           separator
         />
@@ -52,28 +50,27 @@ export default function FundamentalsMethods() {
         <Container className="ds-stack ds-stack-40 py-80">
           <InfoBox
             heading={{
-              text: basicsDigitalReadiness.policyMaking.heading.text,
+              text: fundamentalsDigitalReadiness.policyMaking.heading.text,
               tagName: "h2",
             }}
-            content={basicsDigitalReadiness.policyMaking.content}
+            content={fundamentalsDigitalReadiness.policyMaking.content}
           />
           <InfoBox
             heading={{
-              text: basicsDigitalReadiness.phases.heading.text,
+              text: fundamentalsDigitalReadiness.phases.heading.text,
             }}
-            content={basicsDigitalReadiness.phases.content}
+            content={fundamentalsDigitalReadiness.phases.content}
           />
           <ImageBox
-            image={basicsDigitalReadiness.phasesImage.img}
+            image={fundamentalsDigitalReadiness.phasesImage.img}
             plausibleEventName={
-              basicsDigitalReadiness.phasesImage.plausibleEventName
+              fundamentalsDigitalReadiness.phasesImage.plausibleEventName
             }
             border
             size="LARGE"
           />
         </Container>
       </div>
-      <SupportBanner {...supportBanner} />
     </>
   );
 }

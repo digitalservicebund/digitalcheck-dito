@@ -5,7 +5,7 @@ import {
 } from "@digitalservicebund/icons";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
-export const basicsDigitalReadiness = {
+export const fundamentalsDigitalReadiness = {
   title: "Ihr Weg zur Digitaltauglichkeit",
   subtitle:
     "Erfahren Sie hier, was Digitaltauglichkeit für Ihr Vorhaben bedeutet, welche Vorteile sie bietet, welche Vorhaben betroffen sind und wie sich der Digitalcheck nahtlos in die Phasen Ihres Regelungsentwurfs einfügt.",
@@ -21,7 +21,6 @@ export const basicsDigitalReadiness = {
           Damit die digitale Umsetzung reibungslos klappt, muss die Regelung digitaltauglich gestaltet sein. Das heißt erstens, dass der digitalen Umsetzung nichts im Wege steht, wie zum Beispiel das persönliche Einreichen von Dokumenten. Zweitens soll aktiv gefördert werden, dass möglichst viele Schritte von Computern durchgeführt oder unterstützt werden.
         `,
         visual: {
-          type: "icon",
           Icon: WidgetsOutlined,
         },
       },
@@ -32,7 +31,6 @@ export const basicsDigitalReadiness = {
         content:
           "Eine gute digitale Umsetzung spart langfristig Zeit und sorgt dafür, dass Ziel und Wirkung des Vorhabens erreicht werden: auf Seiten der Normadressaten und -adressatinnen und auf Seiten der Verwaltung.",
         visual: {
-          type: "icon",
           Icon: HistoryToggleOffOutlined,
         },
       },
@@ -43,7 +41,6 @@ export const basicsDigitalReadiness = {
         content:
           "Der Digitalcheck gilt für alle Regelungsvorhaben (Gesetze, Verordnungen und Verwaltungsvorschriften), sowohl für neue Vorhaben als auch für Änderungen an bestehenden Regelungen.",
         visual: {
-          type: "icon",
           Icon: GradingOutlined,
         },
       },
