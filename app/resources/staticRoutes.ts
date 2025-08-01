@@ -203,6 +203,11 @@ export const ROUTE_FUNDAMENTALS_DIGITAL_READINESS = createRoute(
   "Digitaltauglichkeit",
   ROUTE_FUNDAMENTALS,
 );
+export const ROUTE_FUNDAMENTALS_NKR = createRoute(
+  "normenkontrollrat",
+  "Die Rolle des Nationalen Normenkontrollrat",
+  ROUTE_FUNDAMENTALS,
+);
 
 // PROTOTYPE DOCUMENTATION ROUTES
 export const ROUTE_PROTOTYPE = createRoute("prototyp", "Prototyp");
@@ -313,4 +318,5 @@ export const ROUTES: Route[] = [
   ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_FUNDAMENTALS_METHODS,
   ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
+  ROUTE_FUNDAMENTALS_NKR,
 ];
