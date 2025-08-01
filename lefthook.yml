@@ -12,7 +12,7 @@ pre-commit:
       stage_fixed: true
     check-format:
       tags: style
-      run: npm run format:fix {staged_files}
+      run: npm run format:fix-selected {staged_files}
       glob: "*.{js,cjs,mjs,ts,jsx,tsx,json,css,md,yml,yaml,html}"
       stage_fixed: true
     talisman:
