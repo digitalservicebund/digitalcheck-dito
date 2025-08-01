@@ -25,6 +25,7 @@ export default function FundamentalsMethods() {
   const items: InfoBoxProps[] = fundamentalsNKR.summary.items.map((item) => {
     return {
       ...item,
+      heading: { ...item.heading, tagName: "h2", look: "ds-heading-03-reg" },
       visual: { type: "icon", Icon: item.visual.Icon },
     };
   });
@@ -34,7 +35,7 @@ export default function FundamentalsMethods() {
       <Hero title={fundamentalsNKR.title} subtitle={fundamentalsNKR.subtitle} />
 
       <Container className="py-80">
-        <InfoBoxList items={items} separator />
+        <InfoBoxList items={items} separator className="mt-0" />
       </Container>
     </>
   );
