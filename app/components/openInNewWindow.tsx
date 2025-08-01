@@ -2,7 +2,11 @@ import OpenInNewIcon from "@digitalservicebund/icons/OpenInNew";
 import { renderToString } from "react-dom/server";
 
 export const openInNewIconElement = (
-  <OpenInNewIcon height="1.2em" width="1.2em" className="ml-2 fill-current" />
+  <OpenInNewIcon
+    height="1.2em"
+    width="1.2em"
+    className="ml-2 inline-block fill-current"
+  />
 );
 
 export const openInNewIconString = renderToString(openInNewIconElement);
