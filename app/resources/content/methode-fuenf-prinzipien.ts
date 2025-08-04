@@ -365,7 +365,7 @@ export const methodsFivePrinciples = {
       "Drucken Sie sich das Poster in A4 oder A3 aus, um die Prinzipien für digitaltaugliche Gesetzgebung immer im Blick zu haben.",
     imageUrl: "/images/Poster_5Prinzipien.jpg",
     imageAlt: "Poster der 5 Prinzipien",
-    downloadTitle: "Download",
+    downloadTitle: "Poster herunterladen",
     downloadUrl: "/assets/pdf/Prinzipien-Poster.pdf",
   },
 };
