@@ -308,7 +308,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                  
                 <svg
                   aria-hidden="true"
-                  class="ml-2 inline-block fill-current"
+                  class="ml-2 fill-current"
                   data-testid="OpenInNewIcon"
                   focusable="false"
                   height="1.2em"
@@ -366,7 +366,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                      
                     <svg
                       aria-hidden="true"
-                      class="ml-2 inline-block fill-current"
+                      class="ml-2 fill-current"
                       data-testid="OpenInNewIcon"
                       focusable="false"
                       height="1.2em"
@@ -402,7 +402,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                      
                     <svg
                       aria-hidden="true"
-                      class="ml-2 inline-block fill-current"
+                      class="ml-2 fill-current"
                       data-testid="OpenInNewIcon"
                       focusable="false"
                       height="1.2em"
