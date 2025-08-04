@@ -42,21 +42,21 @@ export default function Index() {
         <Container className="py-80">
           <Heading tagName="h2" text={stepByStep.title} className="mb-40" />
 
-          <ol className="list-unstyled relative grid max-w-none grid-flow-col md:grid-cols-3 md:grid-rows-[repeat(6,auto)]">
-            <div className="absolute top-1 -right-1 h-16 w-16 -translate-y-1/2 rounded-full bg-blue-300" />
+          <ol className="list-unstyled relative max-w-none md:grid md:grid-flow-col md:grid-cols-3 md:grid-rows-[repeat(6,auto)]">
+            <div className="absolute h-16 w-16 rounded-full bg-blue-300 max-md:-bottom-8 max-md:left-6 md:-top-6 md:-right-1" />
             {stepByStep.steps.map((step) => (
               <li
                 key={step.number}
-                className="row-span-6 grid grid-rows-subgrid border-t-3 border-blue-300 pr-40"
+                className="relative border-blue-300 max-md:ml-12 max-md:border-l-3 max-md:pb-40 max-md:pl-28 md:row-span-6 md:grid md:grid-rows-subgrid md:border-t-3 md:pr-40"
               >
-                <div className="absolute top-1 flex h-40 w-40 -translate-y-1/2 items-center justify-center rounded-full bg-blue-800 font-bold text-white">
+                <div className="absolute flex h-40 w-40 items-center justify-center rounded-full bg-blue-800 font-bold text-white max-md:-left-20 md:-top-20">
                   {step.number}
                 </div>
 
                 <Heading
                   tagName="h3"
                   text={step.title}
-                  className="ds-heading-03-bold mt-40"
+                  className="ds-heading-03-bold md:mt-40"
                 />
 
                 <Button
