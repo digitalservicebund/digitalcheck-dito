@@ -1,4 +1,4 @@
-import DownloadIcon from "@digitalservicebund/icons/Download";
+import FileDownloadOutlinedIcon from "@digitalservicebund/icons/FileDownloadOutlined";
 import { Link } from "react-router";
 import { A11Y_MESSAGE_NEW_WINDOW } from "~/resources/constants";
 import { Route } from "~/resources/staticRoutes";
@@ -19,10 +19,10 @@ export type LinkProps = Route & {
 };
 
 const downloadIcon = (
-  <DownloadIcon
+  <FileDownloadOutlinedIcon
     height="1.2em"
     width="1.2em"
-    className="mr-2 self-end fill-current"
+    className="mr-2 fill-current"
   />
 );
 
