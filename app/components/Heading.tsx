@@ -32,8 +32,8 @@ function Heading({
       <Tag
         id={id}
         className={cssClasses}
-        {...additionalProps}
         aria-label={ariaLabel}
+        {...additionalProps}
       >
         {children ?? text}
       </Tag>
