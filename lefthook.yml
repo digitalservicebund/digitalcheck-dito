@@ -20,7 +20,10 @@ pre-commit:
       run: talisman --githook pre-commit
     gitleaks:
       tags: security audit
-      run: gitleaks dir -v {staged_files}
+      run: |
+        for file in {staged_files}; do
+          gitleaks dir -v --no-banner "$file"
+        done
 pre-push:
   parallel: true
   commands:
