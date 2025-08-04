@@ -30,6 +30,7 @@ export const examplesRegelungen = {
       department: "Ressort:",
     },
   },
+  exampleLinkText: "Alle Beispiele zu dieser Regelung",
   principles: {
     hero: {
       title: "Die Prinzipien im Regelungstext",

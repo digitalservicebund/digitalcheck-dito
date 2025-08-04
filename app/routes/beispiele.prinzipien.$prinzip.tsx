@@ -153,7 +153,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
                         prefetch="viewport"
                         className="text-link"
                       >
-                        Alle Beispiele zu dieser Regelung
+                        {examplesRegelungen.exampleLinkText}
                       </Link>
                     </div>
 
