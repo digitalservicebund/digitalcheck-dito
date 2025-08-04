@@ -75,20 +75,6 @@ test.describe("test landing page", () => {
       .click();
     await expect(page).toHaveURL(ROUTE_PRECHECK.url);
   });
-
-  test("list items on landing page are visible", async ({ page }) => {
-    await page.goto(ROUTE_LANDING.url);
-    await expect(page.getByRole("main")).toContainText(
-      "1Vorprüfung: Digitalbezug einschätzen",
-    );
-    await expect(page.getByRole("main")).toContainText(
-      "2Erarbeiten des Regelungsvorhabens",
-    );
-    await expect(page.getByRole("main")).toContainText(
-      "3Dokumentieren des Regelungsvorhabens",
-    );
-    await expect(page.getByRole("main")).toContainText("4Prüfen durch den NKR");
-  });
 });
 
 test("footer is displayed", async ({ page }) => {
@@ -146,7 +132,7 @@ test.describe("test links", () => {
 
   test("links in landing page work", async ({ page }) => {
     await page.goto(ROUTE_LANDING.url);
-    await page.getByRole("link", { name: "Zu „Erarbeiten“" }).click();
+    await page.getByRole("link", { name: "Regelung erarbeiten" }).click();
     await expect(page).toHaveURL(ROUTE_METHODS.url);
   });
 
