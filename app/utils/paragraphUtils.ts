@@ -9,8 +9,14 @@ export type Node = {
   underline?: boolean;
 };
 
-// This function returns an ordered array of Absaetze which have a relevant PrinzipErfuellungen
-// interlaced with arrays of Absaetze which have no relevant PrinzipErfuellungen that are grouped together.
+/**
+ * This function returns an ordered array of Absaetze which have a relevant PrinzipErfuellungen
+ * interlaced with arrays of Absaetze which have no relevant PrinzipErfuellungen that are grouped together.
+ *
+ * @param absaetze
+ * @param principlesToShow
+ * @returns ordered array of Absaetze which have a relevant PrinzipErfuellungen
+ */
 export function groupAbsaetzeWithoutRelevantPrinciples(
   absaetze: Absatz[],
   principlesToShow: Prinzip[],
@@ -82,3 +88,6 @@ export function prependNumberToAbsatz(absatz: AbsatzWithNumber) {
     ...absatz.Text.slice(1),
   ];
 }
+
+export const explanationID = (baseLabelID: string, number: number) =>
+  `${baseLabelID}-${number}`;

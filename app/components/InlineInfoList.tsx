@@ -17,7 +17,7 @@ export default function InlineInfoList({
   return (
     <div
       className={twMerge(
-        "flex gap-24 py-16 max-md:flex-col md:gap-24",
+        "flex gap-8 py-16 max-md:flex-col md:gap-24",
         className,
       )}
     >
@@ -26,14 +26,16 @@ export default function InlineInfoList({
           item.value && (
             <p
               key={item.key ?? item.label}
-              className="inline-flex flex-col gap-4"
+              className="inline-flex flex-row items-center gap-4 md:flex-col md:items-start"
             >
               {item.label && (
                 <span className="ds-label-03-reg text-gray-900">
                   {item.label}
                 </span>
               )}
-              <span className="ds-label-03-bold">{item.value}</span>
+              <span className="ds-label-03-bold flex flex-col md:h-24 md:justify-center">
+                {item.value}
+              </span>
             </p>
           ),
       )}

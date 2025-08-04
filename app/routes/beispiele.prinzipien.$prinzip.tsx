@@ -151,7 +151,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
                         to={`${ROUTE_REGELUNGEN.url}/${digitalcheck.Regelungsvorhaben.URLBezeichnung}`}
                         rel="noreferrer"
                         prefetch="viewport"
-                        className="text-ds-dark-blue underline"
+                        className="text-link"
                       >
                         Alle Beispiele zu dieser Regelung
                       </Link>
@@ -163,10 +163,10 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
                     />
 
                     <InlineInfoList
-                      className="bg-ds-mid-light-blue px-16"
+                      className="bg-gray-100 px-16 py-8"
                       items={[
                         {
-                          label: examplesRegelungen.infoLabels[0],
+                          label: examplesRegelungen.infoLabels.from,
                           value: digitalcheck.Regelungsvorhaben
                             .VeroeffentlichungsDatum
                             ? formatDate(
@@ -175,8 +175,13 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
                               )
                             : "",
                         },
+
                         {
-                          key: examplesRegelungen.infoLabels[1],
+                          label: examplesRegelungen.infoLabels.resort,
+                          value: digitalcheck.Regelungsvorhaben.Ressort,
+                        },
+                        {
+                          label: examplesRegelungen.infoLabels.linkLabel,
                           value: digitalcheck.Regelungsvorhaben
                             .LinkRegelungstext ? (
                             <CustomLink
@@ -191,13 +196,10 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
                                 ? gesetzStatusMap[
                                     digitalcheck.Regelungsvorhaben.GesetzStatus
                                   ]
-                                : examplesRegelungen.infoLabels[1]}
+                                : examplesRegelungen.infoLabels
+                                    .fallbackLinkText}
                             </CustomLink>
                           ) : null,
-                        },
-                        {
-                          label: examplesRegelungen.infoLabels[2],
-                          value: digitalcheck.Regelungsvorhaben.Ressort,
                         },
                       ]}
                     />
