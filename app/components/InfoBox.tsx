@@ -63,7 +63,7 @@ const InfoBox = ({
       id={identifier}
       data-testid="info-box-container"
       className={twMerge(
-        "flex scroll-my-40 gap-32 max-md:items-center md:flex-row",
+        "flex scroll-my-40 gap-32 md:flex-row",
         visual?.type === "image" ? "flex-col-reverse" : "flex-col",
         look === "highlight" && "rounded-lg bg-blue-100 px-16 py-40 sm:px-80",
         look === "method" &&
@@ -83,7 +83,7 @@ const InfoBox = ({
         <Image
           {...visual.image}
           className={twMerge(
-            "flex-shrink-0 object-contain",
+            "flex-shrink-0 object-cover",
             imageSizes[visual.image.size],
             visual.image.className,
           )}
