@@ -98,22 +98,18 @@ export default function Gesetz() {
           <InlineInfoList
             items={[
               {
-                label: examplesRegelungen.infoLabels[0],
+                label: examplesRegelungen.infoLabels.from,
                 value: regelung.VeroeffentlichungsDatum
                   ? formatDate(regelung.VeroeffentlichungsDatum)
                   : "",
               },
 
               {
-                label: examplesRegelungen.infoLabels[2],
+                label: examplesRegelungen.infoLabels.resort,
                 value: regelung.Ressort,
               },
               {
-                // TODO: this seems way to complicated
-                key: examplesRegelungen.infoLabels[1],
-                label: regelung?.GesetzStatus // TODO: what if this is not set?
-                  ? gesetzStatusMap[regelung.GesetzStatus]
-                  : "",
+                label: examplesRegelungen.infoLabels.linkLabel,
                 value: regelung.LinkRegelungstext ? (
                   <CustomLink
                     to={regelung.LinkRegelungstext}
@@ -121,7 +117,9 @@ export default function Gesetz() {
                     rel="noreferrer"
                     className="text-blue-800 underline"
                   >
-                    {examplesRegelungen.infoLabels[1]}
+                    {regelung?.GesetzStatus
+                      ? gesetzStatusMap[regelung.GesetzStatus]
+                      : examplesRegelungen.infoLabels.fallbackLinkText}
                   </CustomLink>
                 ) : null,
               },
@@ -213,7 +211,7 @@ export default function Gesetz() {
                     markdown: examplesRegelungen.nkr.subtitle,
                   }}
                 />
-                <div className="my-32 border-l-4 border-gray-400 pl-8">
+                <div className="my-32 border-l-4 border-gray-400 pl-8 italic">
                   <BlocksRenderer
                     content={digitalcheck.NKRStellungnahmeDCText}
                   />
