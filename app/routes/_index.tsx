@@ -44,47 +44,50 @@ export default function Index() {
         <Container className="py-80">
           <Heading tagName="h2" text={stepByStep.title} className="mb-40" />
 
-          <ol className="list-unstyled relative max-w-none md:grid md:grid-flow-col md:grid-cols-3 md:grid-rows-[repeat(6,auto)]">
+          <div className="relative">
             <div className="absolute h-16 w-16 rounded-full bg-blue-300 max-md:-bottom-8 max-md:left-6 md:-top-6 md:-right-1" />
-            {stepByStep.steps.map((step) => (
-              <li
-                key={step.number}
-                className="relative border-blue-300 max-md:ml-12 max-md:border-l-3 max-md:pb-40 max-md:pl-28 md:row-span-6 md:grid md:grid-rows-subgrid md:border-t-3 md:pr-40"
-              >
-                <div className="absolute flex h-40 w-40 items-center justify-center rounded-full bg-blue-800 font-bold text-white max-md:-left-20 md:-top-20">
-                  {step.number}
-                </div>
-
-                <Heading
-                  tagName="h3"
-                  text={step.title}
-                  className="ds-heading-03-bold md:mt-40"
-                />
-
-                <Button
-                  href={step.link.href}
-                  look={step.link.look}
-                  className="mt-40 self-center"
+            <ol className="list-unstyled max-w-none md:grid md:grid-flow-col md:grid-cols-3 md:grid-rows-[repeat(6,auto)]">
+              {stepByStep.steps.map((step) => (
+                <li
+                  key={step.number}
+                  className="relative border-blue-300 max-md:ml-12 max-md:border-l-3 max-md:pb-40 max-md:pl-28 md:row-span-6 md:grid md:grid-rows-subgrid md:border-t-3 md:pr-40"
                 >
-                  {step.link.text}
-                </Button>
+                  <div className="absolute flex h-40 w-40 items-center justify-center rounded-full bg-blue-800 font-bold text-white max-md:-left-20 md:-top-20">
+                    {step.number}
+                  </div>
 
-                <div className="mt-40">
-                  <p className="font-bold">{stepByStep.procedureLabel}:</p>
-                  <RichText markdown={step.description} />
-                </div>
+                  <Heading
+                    tagName="h3"
+                    text={step.title}
+                    className="ds-heading-03-bold md:mt-40"
+                  />
 
-                <div className="mt-24 border-t-2 border-gray-400 pt-16">
-                  <p className="font-bold">{stepByStep.durationLabel}:</p>
-                  {step.duration}
-                </div>
-                <div className="mt-24">
-                  <p className="font-bold">{stepByStep.resultLabel}:</p>
-                  {step.result}
-                </div>
-              </li>
-            ))}
-          </ol>
+                  <Button
+                    href={step.link.href}
+                    look={step.link.look}
+                    className="mt-40 self-center"
+                  >
+                    {step.link.text}
+                  </Button>
+
+                  <div className="mt-40">
+                    <p className="font-bold">{stepByStep.procedureLabel}:</p>
+                    <RichText markdown={step.description} />
+                  </div>
+
+                  <div className="mt-24 border-t-2 border-gray-400 pt-16">
+                    <p className="font-bold">{stepByStep.durationLabel}:</p>
+                    {step.duration}
+                  </div>
+
+                  <div className="mt-24">
+                    <p className="font-bold">{stepByStep.resultLabel}:</p>
+                    {step.result}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
         </Container>
 
         <div className="bg-blue-100">
