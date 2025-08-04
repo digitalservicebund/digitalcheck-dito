@@ -100,13 +100,7 @@ export default function Index() {
                 text: grundlagen.wasIstDigitaltauglichkeit.title,
               }}
               content={grundlagen.wasIstDigitaltauglichkeit.content}
-              buttons={[
-                {
-                  text: grundlagen.wasIstDigitaltauglichkeit.linkText,
-                  href: "#",
-                  look: "link",
-                },
-              ]}
+              linkList={{ links: [grundlagen.wasIstDigitaltauglichkeit.link] }}
             />
 
             <InfoBox
@@ -118,13 +112,7 @@ export default function Index() {
                 text: grundlagen.nationaleNormenkontrolle.title,
               }}
               content={grundlagen.nationaleNormenkontrolle.content}
-              buttons={[
-                {
-                  text: grundlagen.nationaleNormenkontrolle.linkText,
-                  href: "#",
-                  look: "link",
-                },
-              ]}
+              linkList={{ links: [grundlagen.nationaleNormenkontrolle.link] }}
             />
           </Container>
         </div>

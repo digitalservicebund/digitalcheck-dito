@@ -1,10 +1,16 @@
 import {
   ROUTE_DOCUMENTATION,
   ROUTE_EXAMPLES,
+  ROUTE_EXAMPLES_PRINCIPLES,
+  ROUTE_EXAMPLES_VISUALISATIONS,
+  ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
+  ROUTE_FUNDAMENTALS_NKR,
   ROUTE_INTEROPERABILITY,
   ROUTE_METHODS,
   ROUTE_METHODS_PRINCIPLES,
+  ROUTE_METHODS_TASKS_PROCESSES,
   ROUTE_PRECHECK,
+  ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -72,13 +78,19 @@ export const startseite = {
         "Was ist Digitaltauglichkeit? Und wie unterstützt Sie der Digitalcheck dabei?",
       content:
         "Digitaltaugliche Regelungen ermöglichen eine rechtlich und technisch reibungslose digitale Umsetzung und fördern die automatisierte Bearbeitung von Verfahrensschritten.",
-      linkText: "Mehr zur Digitaltauglichkeit erfahren",
+      link: {
+        title: "Mehr zur Digitaltauglichkeit erfahren",
+        url: ROUTE_FUNDAMENTALS_DIGITAL_READINESS.url,
+      },
     },
     nationaleNormenkontrolle: {
       title: "Worauf achtet der Nationale Normenkontrollrat?",
       content:
         "Der Nationale Normenkontrollrat (NKR) prüft das Vorhaben auf Digitaltauglichkeit. Mit der Anwendung der **Prinzipien** und Erstellung von **Visualisierungen** kann der Nationale Normenkontrollrat die Digitaltauglichkeit besser und schneller nachvollziehen.",
-      linkText: "Mehr zum NKR erfahren",
+      link: {
+        title: "Mehr zum NKR erfahren",
+        url: ROUTE_FUNDAMENTALS_NKR.url,
+      },
     },
   },
 
@@ -89,10 +101,14 @@ export const startseite = {
     buttons: [
       {
         text: "Zu Visualisierungen",
-        href: "#",
+        href: ROUTE_METHODS_TASKS_PROCESSES.url,
         look: "tertiary" as const,
       },
-      { text: "Beispiele", href: "#", look: "ghost" as const },
+      {
+        text: "Beispiele",
+        href: ROUTE_EXAMPLES_VISUALISATIONS.url,
+        look: "ghost" as const,
+      },
     ],
   },
 
@@ -106,7 +122,11 @@ export const startseite = {
         href: ROUTE_METHODS_PRINCIPLES.url,
         look: "tertiary" as const,
       },
-      { text: "Beispiele", href: "#", look: "ghost" as const },
+      {
+        text: "Beispiele",
+        href: ROUTE_EXAMPLES_PRINCIPLES.url,
+        look: "ghost" as const,
+      },
     ],
   },
 
@@ -116,7 +136,7 @@ export const startseite = {
       "Nutzen Sie unsere persönlichen Unterstützung: Angebote, um Ihr Regelungsvorhaben digitaltauglich zu gestalten und den Prozess erfolgreich durchzuführen.",
     button: {
       text: "Angebote kennenlernen",
-      href: "#",
+      href: ROUTE_SUPPORT.url,
       look: "tertiary" as const,
     },
   },
