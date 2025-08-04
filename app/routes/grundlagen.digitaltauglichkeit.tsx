@@ -67,7 +67,6 @@ export default function FundamentalsMethods() {
               fundamentalsDigitalReadiness.phasesImage.plausibleEventName
             }
             border
-            size="LARGE"
           />
         </Container>
       </div>
