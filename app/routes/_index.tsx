@@ -193,7 +193,7 @@ export default function Index() {
             border
           />
           {/* currently not used and hidden */}
-          <div className="relative left-1/2 hidden w-screen -translate-x-1/2 bg-[url('/images/trainings.jpeg')] bg-cover bg-[0%_35%]">
+          <div className="relative left-1/2 hidden w-screen -translate-x-1/2 bg-[url('/images/trainings.jpg')] bg-cover bg-[0%_35%]">
             <Container>
               <div className="max-w-[630px] rounded-lg bg-white px-16 py-28 md:px-80 md:py-40">
                 <Box
