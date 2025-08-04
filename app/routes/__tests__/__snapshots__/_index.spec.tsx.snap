@@ -33,217 +33,221 @@ stellen damit Digitaltauglichkeit sicher.
     >
       Schritt für Schritt
     </h2>
-    <ol
-      class="list-unstyled relative max-w-none md:grid md:grid-flow-col md:grid-cols-3 md:grid-rows-[repeat(6,auto)]"
+    <div
+      class="relative"
     >
       <div
         class="absolute h-16 w-16 rounded-full bg-blue-300 max-md:-bottom-8 max-md:left-6 md:-top-6 md:-right-1"
       />
-      <li
-        class="relative border-blue-300 max-md:ml-12 max-md:border-l-3 max-md:pb-40 max-md:pl-28 md:row-span-6 md:grid md:grid-rows-subgrid md:border-t-3 md:pr-40"
+      <ol
+        class="list-unstyled max-w-none md:grid md:grid-flow-col md:grid-cols-3 md:grid-rows-[repeat(6,auto)]"
       >
-        <div
-          class="absolute flex h-40 w-40 items-center justify-center rounded-full bg-blue-800 font-bold text-white max-md:-left-20 md:-top-20"
+        <li
+          class="relative border-blue-300 max-md:ml-12 max-md:border-l-3 max-md:pb-40 max-md:pl-28 md:row-span-6 md:grid md:grid-rows-subgrid md:border-t-3 md:pr-40"
         >
-          1
-        </div>
-        <h3
-          class="hyphens-none ds-heading-03-bold md:mt-40"
-        >
-          Digitalbezug einschätzen
-        </h3>
-        <a
-          class="ds-button mt-40 self-center"
-          data-discover="true"
-          href="/vorpruefung"
-        >
-           
-          <span
-            class="ds-button-label"
+          <div
+            class="absolute flex h-40 w-40 items-center justify-center rounded-full bg-blue-800 font-bold text-white max-md:-left-20 md:-top-20"
+          >
+            1
+          </div>
+          <h3
+            class="hyphens-none ds-heading-03-bold md:mt-40"
           >
             Digitalbezug einschätzen
-          </span>
-           
-        </a>
-        <div
-          class="mt-40"
-        >
-          <p
-            class="font-bold"
+          </h3>
+          <a
+            class="ds-button mt-40 self-center"
+            data-discover="true"
+            href="/vorpruefung"
           >
-            Vorgehen
-            :
-          </p>
+             
+            <span
+              class="ds-button-label"
+            >
+              Digitalbezug einschätzen
+            </span>
+             
+          </a>
           <div
-            class="ds-stack ds-stack-8 [&_a]:text-link"
+            class="mt-40"
           >
-            <p>
-              Sie identifizieren den Digitalbezug und Interoperabilitätsanforderungen für Ihr Vorhaben.
+            <p
+              class="font-bold"
+            >
+              Vorgehen
+              :
             </p>
-            
+            <div
+              class="ds-stack ds-stack-8 [&_a]:text-link"
+            >
+              <p>
+                Sie identifizieren den Digitalbezug und Interoperabilitätsanforderungen für Ihr Vorhaben.
+              </p>
+              
 
+            </div>
           </div>
-        </div>
-        <div
-          class="mt-24 border-t-2 border-gray-400 pt-16"
-        >
-          <p
-            class="font-bold"
-          >
-            Dauer
-            :
-          </p>
-          Wenige Minuten
-        </div>
-        <div
-          class="mt-24"
-        >
-          <p
-            class="font-bold"
-          >
-            Ergebnis
-            :
-          </p>
-          Identifizierter Digital- und Interoperabilitätsbezug; Ergebnis als E-Mail mit ggf. weiteren notwendigen Normenkontrolle
-        </div>
-      </li>
-      <li
-        class="relative border-blue-300 max-md:ml-12 max-md:border-l-3 max-md:pb-40 max-md:pl-28 md:row-span-6 md:grid md:grid-rows-subgrid md:border-t-3 md:pr-40"
-      >
-        <div
-          class="absolute flex h-40 w-40 items-center justify-center rounded-full bg-blue-800 font-bold text-white max-md:-left-20 md:-top-20"
-        >
-          2
-        </div>
-        <h3
-          class="hyphens-none ds-heading-03-bold md:mt-40"
-        >
-          Digitaltauglichkeit der Regelung sicherstellen
-        </h3>
-        <a
-          class="ds-button ds-button-ghost mt-40 self-center"
-          data-discover="true"
-          href="/methoden"
-        >
-           
-          <span
-            class="ds-button-label"
-          >
-            Regelung erarbeiten
-          </span>
-           
-        </a>
-        <div
-          class="mt-40"
-        >
-          <p
-            class="font-bold"
-          >
-            Vorgehen
-            :
-          </p>
           <div
-            class="ds-stack ds-stack-8 [&_a]:text-link"
+            class="mt-24 border-t-2 border-gray-400 pt-16"
           >
-            <p>
-              Bei einer positiven Vorprüfung wenden Sie die Werkzeuge und Methoden an, die die Digitaltauglichkeit Ihres Vorhabens sicherstellen.
+            <p
+              class="font-bold"
+            >
+              Dauer
+              :
             </p>
-            
-
+            Wenige Minuten
           </div>
-        </div>
-        <div
-          class="mt-24 border-t-2 border-gray-400 pt-16"
-        >
-          <p
-            class="font-bold"
-          >
-            Dauer
-            :
-          </p>
-          Punktuell über die gesamte Zeit der Regelungsausarbeitung
-        </div>
-        <div
-          class="mt-24"
-        >
-          <p
-            class="font-bold"
-          >
-            Ergebnis
-            :
-          </p>
-          Ihre Regelung wird organisatorisch, visualisiert als zur Angebotenen Umsetzung Ihrer Regelung
-        </div>
-      </li>
-      <li
-        class="relative border-blue-300 max-md:ml-12 max-md:border-l-3 max-md:pb-40 max-md:pl-28 md:row-span-6 md:grid md:grid-rows-subgrid md:border-t-3 md:pr-40"
-      >
-        <div
-          class="absolute flex h-40 w-40 items-center justify-center rounded-full bg-blue-800 font-bold text-white max-md:-left-20 md:-top-20"
-        >
-          3
-        </div>
-        <h3
-          class="hyphens-none ds-heading-03-bold md:mt-40"
-        >
-          Dokumentieren der Digitaltauglichkeit
-        </h3>
-        <a
-          class="ds-button ds-button-ghost mt-40 self-center"
-          data-discover="true"
-          href="/dokumentation"
-        >
-           
-          <span
-            class="ds-button-label"
-          >
-            Digitaltauglichkeit dokumentieren
-          </span>
-           
-        </a>
-        <div
-          class="mt-40"
-        >
-          <p
-            class="font-bold"
-          >
-            Vorgehen
-            :
-          </p>
           <div
-            class="ds-stack ds-stack-8 [&_a]:text-link"
+            class="mt-24"
           >
-            <p>
-              Sie dokumentieren, wie Sie Digitaltauglichkeit in Ihrer Regelung sichergestellt haben.
+            <p
+              class="font-bold"
+            >
+              Ergebnis
+              :
             </p>
-            
-
+            Identifizierter Digital- und Interoperabilitätsbezug; Ergebnis als E-Mail mit ggf. weiteren notwendigen Normenkontrolle
           </div>
-        </div>
-        <div
-          class="mt-24 border-t-2 border-gray-400 pt-16"
+        </li>
+        <li
+          class="relative border-blue-300 max-md:ml-12 max-md:border-l-3 max-md:pb-40 max-md:pl-28 md:row-span-6 md:grid md:grid-rows-subgrid md:border-t-3 md:pr-40"
         >
-          <p
-            class="font-bold"
+          <div
+            class="absolute flex h-40 w-40 items-center justify-center rounded-full bg-blue-800 font-bold text-white max-md:-left-20 md:-top-20"
           >
-            Dauer
-            :
-          </p>
-          Ein bis zwei Stunden
-        </div>
-        <div
-          class="mt-24"
+            2
+          </div>
+          <h3
+            class="hyphens-none ds-heading-03-bold md:mt-40"
+          >
+            Digitaltauglichkeit der Regelung sicherstellen
+          </h3>
+          <a
+            class="ds-button ds-button-ghost mt-40 self-center"
+            data-discover="true"
+            href="/methoden"
+          >
+             
+            <span
+              class="ds-button-label"
+            >
+              Regelung erarbeiten
+            </span>
+             
+          </a>
+          <div
+            class="mt-40"
+          >
+            <p
+              class="font-bold"
+            >
+              Vorgehen
+              :
+            </p>
+            <div
+              class="ds-stack ds-stack-8 [&_a]:text-link"
+            >
+              <p>
+                Bei einer positiven Vorprüfung wenden Sie die Werkzeuge und Methoden an, die die Digitaltauglichkeit Ihres Vorhabens sicherstellen.
+              </p>
+              
+
+            </div>
+          </div>
+          <div
+            class="mt-24 border-t-2 border-gray-400 pt-16"
+          >
+            <p
+              class="font-bold"
+            >
+              Dauer
+              :
+            </p>
+            Punktuell über die gesamte Zeit der Regelungsausarbeitung
+          </div>
+          <div
+            class="mt-24"
+          >
+            <p
+              class="font-bold"
+            >
+              Ergebnis
+              :
+            </p>
+            Ihre Regelung wird organisatorisch, visualisiert als zur Angebotenen Umsetzung Ihrer Regelung
+          </div>
+        </li>
+        <li
+          class="relative border-blue-300 max-md:ml-12 max-md:border-l-3 max-md:pb-40 max-md:pl-28 md:row-span-6 md:grid md:grid-rows-subgrid md:border-t-3 md:pr-40"
         >
-          <p
-            class="font-bold"
+          <div
+            class="absolute flex h-40 w-40 items-center justify-center rounded-full bg-blue-800 font-bold text-white max-md:-left-20 md:-top-20"
           >
-            Ergebnis
-            :
-          </p>
-          Ausgefülltes Word-Dokument, welches Sie dem Normenkontrollrat senden
-        </div>
-      </li>
-    </ol>
+            3
+          </div>
+          <h3
+            class="hyphens-none ds-heading-03-bold md:mt-40"
+          >
+            Dokumentieren der Digitaltauglichkeit
+          </h3>
+          <a
+            class="ds-button ds-button-ghost mt-40 self-center"
+            data-discover="true"
+            href="/dokumentation"
+          >
+             
+            <span
+              class="ds-button-label"
+            >
+              Digitaltauglichkeit dokumentieren
+            </span>
+             
+          </a>
+          <div
+            class="mt-40"
+          >
+            <p
+              class="font-bold"
+            >
+              Vorgehen
+              :
+            </p>
+            <div
+              class="ds-stack ds-stack-8 [&_a]:text-link"
+            >
+              <p>
+                Sie dokumentieren, wie Sie Digitaltauglichkeit in Ihrer Regelung sichergestellt haben.
+              </p>
+              
+
+            </div>
+          </div>
+          <div
+            class="mt-24 border-t-2 border-gray-400 pt-16"
+          >
+            <p
+              class="font-bold"
+            >
+              Dauer
+              :
+            </p>
+            Ein bis zwei Stunden
+          </div>
+          <div
+            class="mt-24"
+          >
+            <p
+              class="font-bold"
+            >
+              Ergebnis
+              :
+            </p>
+            Ausgefülltes Word-Dokument, welches Sie dem Normenkontrollrat senden
+          </div>
+        </li>
+      </ol>
+    </div>
   </div>
   <div
     class="bg-blue-100"
