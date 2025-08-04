@@ -23,6 +23,8 @@ const {
   subtitle,
   stepByStep,
   grundlagen,
+  visualisierungen,
+  prinzipien,
   individuelleExpertise,
   quote,
 } = startseite;
@@ -130,8 +132,26 @@ export default function Index() {
         <div className="bg-[url('/images/trainings.jpg')] bg-cover bg-center">
           <Container className="py-80">
             <InfoBoxSideBySide>
-              <div />
-              <div />
+              <InfoBox
+                look="method"
+                className="bg-white"
+                heading={{
+                  tagName: "h3",
+                  text: visualisierungen.title,
+                }}
+                content={visualisierungen.content}
+                buttons={visualisierungen.buttons}
+              />
+              <InfoBox
+                look="method"
+                className="bg-white"
+                heading={{
+                  tagName: "h3",
+                  text: prinzipien.title,
+                }}
+                content={prinzipien.content}
+                buttons={prinzipien.buttons}
+              />
             </InfoBoxSideBySide>
           </Container>
         </div>
