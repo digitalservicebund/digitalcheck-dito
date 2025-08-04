@@ -2,6 +2,7 @@ import React from "react";
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
+import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
 import { BulletList, NumberedList } from "~/components/List";
 import SupportBanner from "~/components/SupportBanner";
 import { methods } from "~/resources/content/methoden";
@@ -56,7 +57,7 @@ export default function Methoden() {
           content={methods.furtherMethods.content}
         />
 
-        <div className="flex flex-col gap-24 sm:flex-row">
+        <InfoBoxSideBySide>
           <InfoBox
             look="method"
             badge={{ text: methods.itSystems.badge, look: "hint" }}
@@ -83,7 +84,7 @@ export default function Methoden() {
             content={methods.technicalFeasibility.content}
             buttons={methods.technicalFeasibility.buttons}
           />
-        </div>
+        </InfoBoxSideBySide>
       </Container>
 
       <SupportBanner {...supportBanner} />
