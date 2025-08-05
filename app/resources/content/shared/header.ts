@@ -3,6 +3,8 @@ import {
   ROUTE_DOCUMENTATION,
   ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_EXAMPLES_VISUALISATIONS,
+  ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
+  ROUTE_FUNDAMENTALS_NKR,
   ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_INTEROPERABILITY,
   ROUTE_INTEROPERABILITY_SPOC,
@@ -93,6 +95,21 @@ export const header = {
             "Verstehen Sie, was es mit EU Interoperabilität auf sich hat.",
           href: ROUTE_INTEROPERABILITY.url,
           activeBehavior: "exactMatch" as ActiveBehavior,
+        },
+        {
+          plausibleEventName: "Link+Prinzipien",
+          title: "Was ist Digitaltauglichkeit?",
+          content:
+            "Welche Relevanz Digitaltauglichkeit hat und wie Ihre Regelung davon profitiert.",
+          href: ROUTE_FUNDAMENTALS_DIGITAL_READINESS.url,
+        },
+        {
+          plausibleEventName: "Link+Prinzipien",
+          title: "NKR und Digitalcheck",
+          isNewTitle: true,
+          content:
+            "Aufgaben und Vorgehensweise des Nationalen Normenkontrollrat im Kontext des Digitalcheck.",
+          href: ROUTE_FUNDAMENTALS_NKR.url,
         },
       ],
     },

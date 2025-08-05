@@ -3,9 +3,7 @@ import Hero from "~/components/Hero";
 import { type InfoBoxProps } from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList.tsx";
 import { fundamentalsDigitalReadiness } from "~/resources/content/grundlage-digitaltauglichkeit";
-import { features } from "~/resources/features";
 import { ROUTE_FUNDAMENTALS_DIGITAL_READINESS } from "~/resources/staticRoutes";
-import useFeatureFlag from "~/utils/featureFlags";
 import constructMetaTitle from "~/utils/metaTitle";
 
 export function meta() {
@@ -13,15 +11,6 @@ export function meta() {
 }
 
 export default function FundamentalsMethods() {
-  const showPage = useFeatureFlag(features.enableNewLandingPage);
-
-  if (!showPage) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("Feature is not enabled for this environment", {
-      status: 404,
-    });
-  }
-
   const items: InfoBoxProps[] = fundamentalsDigitalReadiness.summary.items.map(
     (item) => {
       return {
