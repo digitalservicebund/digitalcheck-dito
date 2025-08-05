@@ -7,5 +7,5 @@ fileignoreconfig:
   allowed_patterns: [posthogKey]
 allowed_patterns:
   - <[^>]+?\bkey=\{.*?\} # Allow <JSXElement ... key={...} patterns
-  - passend
+  - passen
   - Anpassungen
