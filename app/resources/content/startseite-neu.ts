@@ -35,7 +35,7 @@ export const startseite = {
           look: "primary" as const,
         },
         description:
-          "Sie identifizieren den Digitalbezug und Interoperabilitätsanforderungen für Ihr Vorhaben.",
+          "Sie identifizieren Digitalbezug und Interoperabilitätsanforderungen für Ihr Vorhaben.",
         duration: "Wenige Minuten",
         result: dedent`
           - Individueller Digital- und Interoperabilitätsbezug
