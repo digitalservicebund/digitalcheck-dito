@@ -23,6 +23,16 @@ export const versionHistory = {
     },
     {
       headline: {
+        text: "Beispiele-Seite wieder online",
+      },
+      label: {
+        text: "12.06.2025",
+      },
+      content:
+        "Die Beispiele wurden an die überarbeiteten Prinzipien angepasst und die Beispiel-Seite wieder online genommen.",
+    },
+    {
+      headline: {
         text: "V1.5",
       },
       label: {
