@@ -1,6 +1,7 @@
 // These routes can't be exported from ~/routes.ts as that file isn't part of the app environment: https://github.com/remix-run/react-router/issues/12392
 
 import { preCheckQuestions } from "~/resources/content/shared/pre-check-questions";
+import { FILE_NAME_DOCUMENTATION_STATIC_WORD } from "~/utils/constants";
 import { removeTrailingSlash } from "~/utils/utilFunctions";
 
 export type Route = {
@@ -104,7 +105,7 @@ export const ROUTE_DOCUMENTATION_STATIC_PDF = createRoute(
   "Begleitende Dokumentation als Word-Dokument",
 );
 export const ROUTE_DOCUMENTATION_STATIC_WORD = createRoute(
-  "download/Dokumentieren-der-Digitaltauglichkeit_V1-5.docx",
+  "download/" + FILE_NAME_DOCUMENTATION_STATIC_WORD,
   "Begleitende Dokumentation als Word-Dokument",
 );
 

@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import { contentType } from "mime-types";
 import path from "path";
+import { FILE_NAME_DOCUMENTATION_STATIC_WORD } from "~/utils/constants";
 import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/download.$fileName";
 
@@ -17,7 +18,7 @@ export async function loader({ params, request }: Route.LoaderArgs) {
    * Used for external links to the old pdf document
    */
   if (fileName === "digitalcheck-begleitende-dokumentation.pdf") {
-    fileName = "Dokumentieren-der-Digitaltauglichkeit_V1-5.docx";
+    fileName = FILE_NAME_DOCUMENTATION_STATIC_WORD;
   }
 
   try {
