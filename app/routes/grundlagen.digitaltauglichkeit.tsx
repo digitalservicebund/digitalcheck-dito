@@ -1,7 +1,6 @@
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
-import ImageBox from "~/components/ImageBox";
-import InfoBox, { type InfoBoxProps } from "~/components/InfoBox";
+import { type InfoBoxProps } from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList.tsx";
 import { fundamentalsDigitalReadiness } from "~/resources/content/grundlage-digitaltauglichkeit";
 import { features } from "~/resources/features";
@@ -46,7 +45,7 @@ export default function FundamentalsMethods() {
           separator
         />
       </Container>
-      <div className="bg-blue-100">
+      {/* <div className="bg-blue-100">
         <Container className="ds-stack ds-stack-40 py-80">
           <InfoBox
             heading={{
@@ -69,7 +68,7 @@ export default function FundamentalsMethods() {
             border
           />
         </Container>
-      </div>
+      </div> */}
     </>
   );
 }
