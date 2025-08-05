@@ -103,7 +103,7 @@ export const startseite = {
   visualisierungen: {
     title: "Das Potenzial von Visualisierungen nutzen",
     content:
-      "Visualisierungen helfen kostspieligen Aufbau Ihrer Regelung einfach sichtbar zu machen und Digitaltauglichkeit einzuschätzen.",
+      "Visualisierungen helfen bestehende Abläufe Ihrer Regelung einfach sichtbar zu machen und Digitaltauglichkeit einzuschätzen.",
     buttons: [
       {
         text: "Zu Visualisierungen",
@@ -121,7 +121,7 @@ export const startseite = {
   prinzipien: {
     title: "Prinzipien als Grundlage für Digitaltauglichkeit einsetzen",
     content:
-      "Fünf Prinzipien helfen Ihnen dabei, bei der digitalen Umsetzung ausgeschöpfte und Hindernisse zu erkennen.",
+      "Fünf Prinzipien helfen Ihnen dabei, Chancen der digitalen Umsetzung auszuschöpfen und Hindernisse zu erkennen.",
     buttons: [
       {
         text: "Zu den Prinzipien",
@@ -137,9 +137,9 @@ export const startseite = {
   },
 
   individuelleExpertise: {
-    title: "Individuelle Digital-Expertise für Ihr Vorhaben kennenlernen",
+    title: "Individuelle Unterstützung für Ihr Vorhaben",
     content:
-      "Nutzen Sie unsere persönlichen Unterstützung: Angebote, um Ihr Regelungsvorhaben digitaltauglich zu gestalten und den Prozess erfolgreich durchzuführen.",
+      "Nutzen Sie unsere persönlichen Unterstützungsangebote, um Ihr Regelungsvorhaben digitaltauglich zu gestalten und den Prozess erfolgreich zu durchlaufen.",
     button: {
       text: "Angebote kennenlernen",
       href: ROUTE_SUPPORT.url,
