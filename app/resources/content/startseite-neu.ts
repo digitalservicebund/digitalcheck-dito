@@ -95,7 +95,7 @@ export const startseite = {
   },
 
   visualisierungen: {
-    title: "Das Potential von Visualisierungen nutzen",
+    title: "Das Potenzial von Visualisierungen nutzen",
     content:
       "Visualisierungen helfen kostspieligen Aufbau Ihrer Regelung einfach sichtbar zu machen und Digitaltauglichkeit einzuschätzen.",
     buttons: [

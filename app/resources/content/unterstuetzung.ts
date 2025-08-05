@@ -47,8 +47,8 @@ export const support = {
       },
       {
         icon: AdsClickOutlined,
-        title: "Digitales Potential ausschöpfen",
-        text: "Wir unterstützen Sie dabei die digitalen Potentiale Ihres Vorhabens auszuschöpfen, zu verbessern oder neu zu gestalten.",
+        title: "Digitales Potenzial ausschöpfen",
+        text: "Wir unterstützen Sie dabei die digitalen Potenziale Ihres Vorhabens auszuschöpfen, zu verbessern oder neu zu gestalten.",
       },
     ],
   },

@@ -152,7 +152,7 @@ export const interoperability = {
         content: dedent`
           Wie beim Prozess für digitaltaugliche Regelungen ist auch der Prozess für Interoperabilitätstaugliche Regelungen zweiteilig.
           
-          Im Rahmen einer Interoperabilitätsbewertung identifizieren Sie Potentiale und Hürden für Interoperabilität. Das Ergebnis dokumentieren Sie in einem Bericht.
+          Im Rahmen einer Interoperabilitätsbewertung identifizieren Sie Potenziale und Hürden für Interoperabilität. Das Ergebnis dokumentieren Sie in einem Bericht.
           
           Der Bericht wird im EU-Portal hochgeladen und automatisch in maschinenlesbarem Format veröffentlicht. Damit wird Ihr Vorgehen transparent für andere Mitgliedstaaten und Sie tragen dazu bei, dass andere öffentliche Stellen oder Einrichtungen der Union sich in Bezug auf Interoperabilität daran ausrichten können.
         `,
@@ -226,7 +226,7 @@ export const interoperability = {
           text: "Was ist das Ziel der Verordnung für ein interoperables Europa?",
         },
         content:
-          "Das Ziel der [Verordnung für ein interoperables Europa (EU 2024/903)](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903) ist es, digitale öffentliche Dienste zu verbessern. Die Dienste einzelner Mitgliedstaaten sollen miteinander kompatibel sein. Dafür braucht es gemeinsame Standards, um Daten zwischen den Mitgliedstaaten auszutauschen. Um digitale Potentiale und Hindernisse zu berücksichtigen, müssen öffentliche Stellen die Interoperabilität neuer Dienste berücksichtigen.",
+          "Das Ziel der [Verordnung für ein interoperables Europa (EU 2024/903)](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903) ist es, digitale öffentliche Dienste zu verbessern. Die Dienste einzelner Mitgliedstaaten sollen miteinander kompatibel sein. Dafür braucht es gemeinsame Standards, um Daten zwischen den Mitgliedstaaten auszutauschen. Um digitale Potenziale und Hindernisse zu berücksichtigen, müssen öffentliche Stellen die Interoperabilität neuer Dienste berücksichtigen.",
         detailsSummary: {
           items: [
             {
