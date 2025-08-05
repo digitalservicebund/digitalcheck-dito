@@ -13,6 +13,7 @@ import {
   ROUTE_PRIVACY,
   ROUTE_SITEMAP,
   ROUTE_SUPPORT,
+  ROUTE_VERSION_HISTORY,
 } from "~/resources/staticRoutes";
 
 export const footer = {
@@ -107,6 +108,7 @@ export const footer = {
       { url: ROUTE_PRIVACY.url, text: "Datenschutzerklärung" },
       { url: ROUTE_A11Y.url, text: "Barrierefreiheit" },
       { url: ROUTE_SITEMAP.url, text: "Sitemap" },
+      { url: ROUTE_VERSION_HISTORY.url, text: "Versionsverlauf" },
       {
         url: "https://github.com/digitalservicebund/digitalcheck-dito",
         text: "Open Source Code",

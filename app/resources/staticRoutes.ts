@@ -43,6 +43,10 @@ export const ROUTE_IMPRINT = createRoute("impressum", "Impressum");
 export const ROUTE_PRIVACY = createRoute("datenschutz", "Datenschutzerklärung");
 export const ROUTE_A11Y = createRoute("barrierefreiheit", "Barrierefreiheit");
 export const ROUTE_SITEMAP = createRoute("sitemap", "Sitemap");
+export const ROUTE_VERSION_HISTORY = createRoute(
+  "versionsverlauf",
+  "Versionsverlauf",
+);
 
 // PRECHECK ROUTES
 export const ROUTE_PRECHECK = createRoute(
@@ -295,6 +299,7 @@ export const ROUTES: Route[] = [
   ROUTE_PRIVACY,
   ROUTE_A11Y,
   ROUTE_SITEMAP,
+  ROUTE_VERSION_HISTORY,
   ROUTE_PRECHECK,
   ROUTE_PRECHECK_INFO,
   ...Object.values(preCheckQuestions).map((question) =>

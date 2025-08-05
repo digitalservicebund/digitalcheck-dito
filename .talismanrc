@@ -8,3 +8,4 @@ fileignoreconfig:
 allowed_patterns:
   - <[^>]+?\bkey=\{.*?\} # Allow <JSXElement ... key={...} patterns
   - passend
+  - Anpassungen
