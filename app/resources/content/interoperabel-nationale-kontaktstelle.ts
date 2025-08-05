@@ -93,32 +93,37 @@ export const spoc = {
     items: [
       {
         headline: {
-          text: "13.03.2024: Verordnung für ein interoperables Europa wird vom europäischen Parlament verabschiedet",
+          text: "Methoden für Digitaltauglichkeit und Interoperabilität",
+        },
+        label: {
+          text: "Aktuell",
+        },
+        content: dedent`
+          - Die inhaltlichen Schnittmengen zwischen dem Erarbeitungsprozess für digitaltaugliche Regelungen und dem Interoperabilitäts-Assessment sind identifiziert und analysiert. Der daraus entstandene Prozess wird in den Digitalcheck-Kontaktpunkten umgesetzt. Darauf aufbauend passen wir die Erarbeitungsmethoden an. Ziel ist es, den gesamten Entwicklungsprozess effizienter und zielgerichteter zu gestalten.
+        `,
+        image: {
+          url: "/images/synthese-prozess-digitalcheck-und-interoperabilitaet.png",
+          alternativeText:
+            "Die Abbildung zeigt ein strukturiertes Vorgehensmodell für den Digitalcheck und die Interoperabilitätsbewertung. Das Vorgehen des Digitalchecks und der Interoperabilitätsbewertung wird in einem neuen Prozess zusammengefasst. Er umfasst drei Hauptbereiche: Zunächst werden Akteure identifiziert, bestehende Prozesse visualisiert und neue Prozesse entwickelt. Danach werden rechtliche Rahmenbedingungen untersucht, digitale Chancen analysiert und Anforderungen definiert. Schließlich erfolgt die Umsetzung, die Nutzung bestehender oder die Entwicklung neuer Lösungen, bevor alles dokumentiert wird. Durch die visuelle Darstellung wird der neue, gebündelte Ansatz im Prozess verdeutlicht.",
         },
       },
       {
         headline: {
-          text: "10.01.2025: Verordnung tritt in Kraft und erste Änderungen sind im Digitalcheck umgesetzt:",
+          text: "Über 100 Teilnehmende in acht online Workshops",
+        },
+        label: {
+          text: "03.07.2025",
         },
         content: dedent`
-          - **Vorprüfung:** Berücksichtigt nun neben dem Digitalbezug auch die europäische Interoperabilität.
-          - Das Ergebnis der Vorprüfung wird automatisch per E-Mail versendet:
-            - Bei Digitalbezug an den NKR.
-            - Bei zusätzlichem Interoperabilitäts-Bezug auch an die nationale Kontaktstelle beim Digitalcheck-Team.
-          - Bereitstellung einer [Informationsseite](${ROUTE_INTEROPERABILITY.url}) zum Thema Interoperabilität für Legistinnen und Legisten.
+          - In den Schulungen „Visualisieren – komplexes einfach darstellen“ und “Regelungen digitaltauglich und interoperabel gestalten“ haben die Teilnehmenden erfahren, wie sie den Digitalcheck als frühzeitig Denkwerkzeug nutzen können, um Gesetze besser und umsetzbarer zu gestalten.  
         `,
       },
       {
         headline: {
-          text: "15.05.2025: Die 5 Prinzipien für digitaltaugliche Regelungen sind überarbeitet",
+          text: "Integration in die Abläufe des IT-Planungsrats",
         },
-        content: dedent`
-          - Die [5 Prinzipien für digitaltaugliche Gesetzgebung](${ROUTE_METHODS_PRINCIPLES.url}) sind überarbeitet und entsprechen sowohl den Anforderungen der Digitaltauglichkeit als auch der Interoperabilität. 
-        `,
-      },
-      {
-        headline: {
-          text: "25.06.2025: Integration in die Abläufe des IT-Planungsrats",
+        label: {
+          text: "25.06.2025",
         },
         content: dedent`
           - Die Bedeutung des IEA für das föderale IT-Architekturboard sowie Unterstützungsmöglichkeiten durch die Nationale Kontaktstelle wurden vorgestellt. 
@@ -131,23 +136,36 @@ export const spoc = {
       },
       {
         headline: {
-          text: "03.07.2025: Über 100 Teilnehmende in acht online Workshops",
+          text: "Die 5 Prinzipien für digitaltaugliche Regelungen sind überarbeitet",
+        },
+        label: {
+          text: "15.05.2025",
         },
         content: dedent`
-          - In den Schulungen „Visualisieren – komplexes einfach darstellen“ und “Regelungen digitaltauglich und interoperabel gestalten“ haben die Teilnehmenden erfahren, wie sie den Digitalcheck als frühzeitig Denkwerkzeug nutzen können, um Gesetze besser und umsetzbarer zu gestalten.  
+          - Die [5 Prinzipien für digitaltaugliche Gesetzgebung](${ROUTE_METHODS_PRINCIPLES.url}) sind überarbeitet und entsprechen sowohl den Anforderungen der Digitaltauglichkeit als auch der Interoperabilität. 
         `,
       },
       {
         headline: {
-          text: "Aktuell: Methoden für Digitaltauglichkeit und Interoperabilität",
+          text: "Verordnung tritt in Kraft und erste Änderungen sind im Digitalcheck umgesetzt:",
+        },
+        label: {
+          text: "10.01.2025",
         },
         content: dedent`
-          - Die inhaltlichen Schnittmengen zwischen dem Erarbeitungsprozess für digitaltaugliche Regelungen und dem Interoperabilitäts-Assessment sind identifiziert und analysiert. Der daraus entstandene Prozess wird in den Digitalcheck-Kontaktpunkten umgesetzt. Darauf aufbauend passen wir die Erarbeitungsmethoden an. Ziel ist es, den gesamten Entwicklungsprozess effizienter und zielgerichteter zu gestalten.
+          - **Vorprüfung:** Berücksichtigt nun neben dem Digitalbezug auch die europäische Interoperabilität.
+          - Das Ergebnis der Vorprüfung wird automatisch per E-Mail versendet:
+            - Bei Digitalbezug an den NKR.
+            - Bei zusätzlichem Interoperabilitäts-Bezug auch an die nationale Kontaktstelle beim Digitalcheck-Team.
+          - Bereitstellung einer [Informationsseite](${ROUTE_INTEROPERABILITY.url}) zum Thema Interoperabilität für Legistinnen und Legisten.
         `,
-        image: {
-          url: "/images/synthese-prozess-digitalcheck-und-interoperabilitaet.png",
-          alternativeText:
-            "Die Abbildung zeigt ein strukturiertes Vorgehensmodell für den Digitalcheck und die Interoperabilitätsbewertung. Das Vorgehen des Digitalchecks und der Interoperabilitätsbewertung wird in einem neuen Prozess zusammengefasst. Er umfasst drei Hauptbereiche: Zunächst werden Akteure identifiziert, bestehende Prozesse visualisiert und neue Prozesse entwickelt. Danach werden rechtliche Rahmenbedingungen untersucht, digitale Chancen analysiert und Anforderungen definiert. Schließlich erfolgt die Umsetzung, die Nutzung bestehender oder die Entwicklung neuer Lösungen, bevor alles dokumentiert wird. Durch die visuelle Darstellung wird der neue, gebündelte Ansatz im Prozess verdeutlicht.",
+      },
+      {
+        headline: {
+          text: "Verordnung für ein interoperables Europa wird vom europäischen Parlament verabschiedet",
+        },
+        label: {
+          text: "13.03.2024",
         },
       },
     ],
