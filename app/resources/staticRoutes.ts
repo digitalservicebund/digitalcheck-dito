@@ -268,6 +268,10 @@ export const ROUTE_PROTOTYPE_DOCUMENTATION_INTERMEDIATE_SAVE = createRoute(
   ROUTE_PROTOTYPE_DOCUMENTATION,
 );
 
+export const ROUTE_DOWNLOAD_PRINCIPLE_POSTER = createRoute(
+  "download/Prinzipien-Poster.pdf",
+  "Prinzipien-Poster",
+);
 export const ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_PDF = createRoute(
   "download/prototyp_documentation_dummy_result.pdf",
   "Ihre Digitalcheck-Dokumentation als PDF-Datei",

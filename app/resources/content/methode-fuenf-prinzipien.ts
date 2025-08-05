@@ -2,6 +2,7 @@ import { DrawOutlined } from "@digitalservicebund/icons";
 import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
 import { HeadingProps } from "~/components/Heading";
 import {
+  ROUTE_DOWNLOAD_PRINCIPLE_POSTER,
   ROUTE_EXAMPLES,
   ROUTE_EXAMPLES_AUTOMATION,
   ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY,
@@ -366,7 +367,7 @@ export const methodsFivePrinciples = {
     imageUrl: "/images/Poster_5Prinzipien.jpg",
     imageAlt: "Poster der 5 Prinzipien",
     downloadTitle: "Poster herunterladen",
-    downloadUrl: "/assets/pdf/Prinzipien-Poster.pdf",
+    downloadUrl: ROUTE_DOWNLOAD_PRINCIPLE_POSTER.url,
   },
 };
 

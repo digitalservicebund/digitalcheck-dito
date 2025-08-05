@@ -26,15 +26,13 @@ export function PrinciplePosterBox() {
           text: principlePosterBox.heading,
         }}
         content={principlePosterBox.content}
-        linkList={{
-          links: [
-            {
-              title: principlePosterBox.downloadTitle,
-              url: principlePosterBox.downloadUrl,
-              download: true,
-            },
-          ],
-        }}
+        buttons={[
+          {
+            text: principlePosterBox.downloadTitle,
+            href: principlePosterBox.downloadUrl,
+            look: "link" as const,
+          },
+        ]}
       />
     </Container>
   );
