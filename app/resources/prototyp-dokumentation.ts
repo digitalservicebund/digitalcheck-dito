@@ -1,4 +1,3 @@
-import { feedbackFormular } from "~/resources/content/shared/feedback-formular";
 import { ROUTE_FUNDAMENTALS_PRINCIPLES } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -420,52 +419,6 @@ export const prototypeDocumentation = {
         `,
       },
       downloadStarted: "Dokumentation wird heruntergeladen",
-    },
-    feedbackForm: {
-      heading: feedbackFormular.heading,
-      trackingEvent: "Feedback Dokumentation Abschluss",
-      questions: [
-        {
-          id: "simple-feedback-1",
-          trackingEvent: "wie-einfach",
-          text: "Die Dokumentation ist einfach zu nutzen.",
-          options: [
-            { label: "Ich stimme gar nicht zu", value: 1 },
-            { label: "Schwierig", value: 2 },
-            { label: "Moderat", value: 3 },
-            { label: "Einfach", value: 4 },
-            { label: "Ich stimme voll und ganz zu", value: 5 },
-          ],
-        },
-        {
-          id: "simple-feedback-2",
-          trackingEvent: "wie-einfach",
-          text: "Die Dokumentation ist hilfreich für das Erarbeiten meines Regelungsvorhabens.",
-          options: [
-            { label: "Ich stimme gar nicht zu", value: 1 },
-            { label: "Schwierig", value: 2 },
-            { label: "Moderat", value: 3 },
-            { label: "Einfach", value: 4 },
-            { label: "Ich stimme voll und ganz zu", value: 5 },
-          ],
-        },
-        {
-          id: "simple-feedback-3",
-          trackingEvent: "wie-einfach",
-          text: "Die Dokumentation ist hilfreich für die Umsetzung meines Regelungsvorhabens.",
-          options: [
-            { label: "Ich stimme gar nicht zu", value: 1 },
-            { label: "Schwierig", value: 2 },
-            { label: "Moderat", value: 3 },
-            { label: "Einfach", value: 4 },
-            { label: "Ich stimme voll und ganz zu", value: 5 },
-          ],
-        },
-      ],
-      contact:
-        "Schreiben Sie uns eine E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Feedback:%20erarbeiten.digitalcheck.bund.de), wenn wir Sie für Feedback zu unserem Service kontaktieren dürfen.",
-      button: feedbackFormular.button,
-      success: feedbackFormular.success,
     },
   },
 };

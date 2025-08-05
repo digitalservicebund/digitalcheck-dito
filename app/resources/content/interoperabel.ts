@@ -1,5 +1,4 @@
 import { Apps, Layers } from "@digitalservicebund/icons";
-import { feedbackFormular } from "~/resources/content/shared/feedback-formular";
 import { ROUTE_INTEROPERABILITY_SPOC } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -323,21 +322,5 @@ export const interoperability = {
         look: "tertiary" as const,
       },
     ],
-  },
-  feedbackForm: {
-    heading: feedbackFormular.heading,
-    trackingEvent: "Feedback Interoperabel Landing Page",
-    questions: [
-      {
-        id: "useful-feedback",
-        trackingEvent: "wie-hilfreich", // muss mit dem custom property in Plausible übereinstimmen
-        text: "Wie hilfreich waren die Informationen auf der Seite für Sie?",
-        options: feedbackFormular.optionsUseful,
-      },
-    ],
-    contact:
-      "Schreiben Sie uns eine E-Mail an [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Feedback:%20erarbeiten.digitalcheck.bund.de), wenn wir Sie für Feedback zu unserem Service kontaktieren dürfen.",
-    button: feedbackFormular.button,
-    success: feedbackFormular.success,
   },
 };

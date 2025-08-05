@@ -2,7 +2,6 @@ import Accordion from "~/components/Accordion";
 import Box from "~/components/Box.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
-import FeedbackForm from "~/components/FeedbackForm";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image";
@@ -51,10 +50,6 @@ export default function Interoperability() {
             }}
             content={{ markdown: interoperability.kontaktstelle.text }}
             buttons={interoperability.kontaktstelle.buttons}
-          />
-          <FeedbackForm
-            className="relative left-1/2 w-screen -translate-x-1/2"
-            {...interoperability.feedbackForm}
           />
         </>
       ),

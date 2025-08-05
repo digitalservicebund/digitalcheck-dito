@@ -3,7 +3,6 @@ import Box from "~/components/Box";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
-import FeedbackForm from "~/components/FeedbackForm";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import { NumberedList } from "~/components/List";
@@ -143,10 +142,6 @@ export default function DocumentationResult() {
           items={documentation.nextSteps.items}
         />
       </Container>
-      <FeedbackForm
-        className="relative left-1/2 w-screen -translate-x-1/2"
-        {...result.feedbackForm}
-      />
     </>
   );
 }
