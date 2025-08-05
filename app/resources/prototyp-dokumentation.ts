@@ -4,7 +4,7 @@ import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const prototypeDocumentation = {
   intro: {
-    title: "3. Digitaltauglichkeit dokumentieren",
+    title: "Digitaltauglichkeit dokumentieren",
     subtitle:
       "Die Dokumentation der Digitaltauglichkeit ist ein formeller, letzter Schritt. Sie dokumentieren, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben, und wie sie ins Regelungsvorhaben eingeflossen sind.",
     hints: [

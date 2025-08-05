@@ -2,7 +2,7 @@ import { steps } from "~/resources/content/shared/naechste-schritte";
 import { ROUTE_DOCUMENTATION_STATIC_WORD } from "~/resources/staticRoutes";
 
 export const documentation = {
-  title: "3. Dokumentieren der Digitaltauglichkeit",
+  title: "Dokumentieren der Digitaltauglichkeit",
   subtitle:
     "Sie dokumentieren in einem Fragebogen, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben. Und wie Sie diese in Ihr Regelungsvorhaben einfließen lassen.",
   buttons: [

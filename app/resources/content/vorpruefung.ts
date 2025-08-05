@@ -10,7 +10,7 @@ import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const preCheck = {
   start: {
-    title: "1. Vorprüfung: Digitalbezug einschätzen",
+    title: "Vorprüfung: Digitalbezug einschätzen",
     subtitle:
       "Finden Sie in 6 Fragen heraus, ob Sie in Ihrem Regelungsvorhaben Aspekte der digitalen Umsetzung und EU-Anforderungen an Interoperabilität beachten müssen.",
     hints: [
