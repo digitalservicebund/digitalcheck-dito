@@ -31,9 +31,6 @@ const createRoute = (
   extraBreadcrumbTitle,
 });
 
-// TMP ROUTES
-export const ROUTE_HINWEIS = createRoute("hinweis", "Hinweis");
-
 // BASIC ROUTES
 export const ROUTE_SUPPORT = createRoute(
   "unterstuetzung",
@@ -197,11 +194,6 @@ export const ROUTE_FUNDAMENTALS_PRINCIPLES = createRoute(
   "Fünf Prinzipien",
 );
 
-export const ROUTE_FUNDAMENTALS_METHODS = createRoute(
-  "methoden",
-  "Methoden und Werkzeuge",
-  ROUTE_FUNDAMENTALS,
-);
 export const ROUTE_FUNDAMENTALS_DIGITAL_READINESS = createRoute(
   "digitaltauglichkeit",
   "Digitaltauglichkeit",
@@ -325,7 +317,6 @@ export const ROUTES: Route[] = [
   ROUTE_EXAMPLES_VISUALISATIONS,
   ROUTE_FUNDAMENTALS,
   ROUTE_FUNDAMENTALS_PRINCIPLES,
-  ROUTE_FUNDAMENTALS_METHODS,
   ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
   ROUTE_FUNDAMENTALS_NKR,
 ];

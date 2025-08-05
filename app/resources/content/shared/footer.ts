@@ -3,7 +3,6 @@ import {
   ROUTE_DOCUMENTATION,
   ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_EXAMPLES_VISUALISATIONS,
-  ROUTE_FUNDAMENTALS_METHODS,
   ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_IMPRINT,
   ROUTE_INTEROPERABILITY,
@@ -75,10 +74,6 @@ export const footer = {
         {
           text: "Prinzipien der Digitaltauglichkeit",
           url: ROUTE_FUNDAMENTALS_PRINCIPLES.url,
-        },
-        {
-          text: "Übersicht der Werkzeuge und Methoden",
-          url: ROUTE_FUNDAMENTALS_METHODS.url,
         },
         {
           text: "EU-Interoperabilität",

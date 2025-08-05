@@ -3,7 +3,6 @@ import {
   ROUTE_DOCUMENTATION,
   ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_EXAMPLES_VISUALISATIONS,
-  ROUTE_FUNDAMENTALS_METHODS,
   ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_INTEROPERABILITY,
   ROUTE_INTEROPERABILITY_SPOC,
@@ -85,13 +84,6 @@ export const header = {
           content:
             "Auf diesen Prinzipien basieren die Instrumente des Digitalcheck.",
           href: ROUTE_FUNDAMENTALS_PRINCIPLES.url,
-        },
-        {
-          plausibleEventName: "Link+Werkzeuge+Methoden",
-          title: "Werkzeuge und Methoden",
-          content:
-            "Lernen Sie die Methoden kennen, mit denen Sie Digitaltauglichkeit sicherstellen können.",
-          href: ROUTE_FUNDAMENTALS_METHODS.url,
         },
         {
           plausibleEventName: "Link+Interoperabilität",
