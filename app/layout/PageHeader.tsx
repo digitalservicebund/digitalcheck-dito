@@ -3,7 +3,6 @@ import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
 import { useEffect, useRef, useState } from "react";
 import { Link, type UIMatch, useLocation, useMatches } from "react-router";
 import { twJoin } from "tailwind-merge";
-import Banner, { type BannerProps } from "~/layout/Banner";
 import Breadcrumbs from "~/layout/Breadcrumbs.tsx";
 import DropdownMenu from "~/layout/DropdownMenu.tsx";
 import ProgressBar from "~/layout/ProgressBar";
@@ -57,10 +56,8 @@ const getFeatureForMatches = (
 
 const PageHeader = ({
   includeBreadcrumbs = true,
-  banner,
 }: {
   includeBreadcrumbs?: boolean;
-  banner?: BannerProps;
 }) => {
   const location = useLocation();
   const currentPath = location.pathname;
@@ -205,7 +202,6 @@ const PageHeader = ({
         >
           {header.items.map((item) => renderDropdownItem(item, "mobile"))}
         </nav>
-        {banner && <Banner {...banner} />}
         {showProgressBar && <ProgressBar />}
         {showBreadcrumbs && <Breadcrumbs />}
       </header>
