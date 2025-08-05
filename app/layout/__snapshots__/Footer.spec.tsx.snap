@@ -200,6 +200,49 @@ exports[`Footer Component > Renders correctly 1`] = `
             </li>
           </ul>
         </div>
+        <div
+          class="ds-stack ds-stack-8"
+        >
+          <h2
+            class="ds-label-section"
+          >
+            Beispiele
+          </h2>
+          <ul
+            class="list-unstyled flex flex-col gap-8"
+          >
+            <li>
+               
+              <a
+                class="text-link increase-tap-area"
+                data-discover="true"
+                href="/beispiele/prinzipien"
+              >
+                <span
+                  class="flex items-center"
+                >
+                  Digitaltauglichkeit im Regelungstext
+                   
+                </span>
+              </a>
+            </li>
+            <li>
+               
+              <a
+                class="text-link increase-tap-area"
+                data-discover="true"
+                href="/beispiele/visualisierungen"
+              >
+                <span
+                  class="flex items-center"
+                >
+                  Visualisierungen
+                   
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </nav>
       <nav
         aria-label="Sitemap"
