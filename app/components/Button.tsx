@@ -60,7 +60,7 @@ function Button({
     props.className,
   );
   if (look === "link") {
-    buttonClasses = "text-link font-bold";
+    buttonClasses = "text-link inline-flex items-center";
   }
 
   const textSpan = text ? <span className="ds-button-label">{text}</span> : "";
