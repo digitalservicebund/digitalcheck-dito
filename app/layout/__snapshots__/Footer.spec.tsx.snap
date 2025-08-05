@@ -188,21 +188,6 @@ exports[`Footer Component > Renders correctly 1`] = `
               <a
                 class="text-link increase-tap-area"
                 data-discover="true"
-                href="/grundlagen/methoden"
-              >
-                <span
-                  class="flex items-center"
-                >
-                  Übersicht der Werkzeuge und Methoden
-                   
-                </span>
-              </a>
-            </li>
-            <li>
-               
-              <a
-                class="text-link increase-tap-area"
-                data-discover="true"
                 href="/interoperabel"
               >
                 <span
@@ -286,6 +271,23 @@ exports[`Footer Component > Renders correctly 1`] = `
                 class="flex items-center"
               >
                 Sitemap
+                 
+              </span>
+            </a>
+          </li>
+          <li
+            class="after:ml-8 after:inline-block after:content-['•'] last:after:content-['']"
+          >
+             
+            <a
+              class="text-link increase-tap-area"
+              data-discover="true"
+              href="/versionsverlauf"
+            >
+              <span
+                class="flex items-center"
+              >
+                Versionsverlauf
                  
               </span>
             </a>
