@@ -80,14 +80,7 @@ const BulletList = ({
       id={identifier}
     >
       {heading && <Heading className="max-sm:ds-heading-02-reg" {...heading} />}
-      <div className="absolute top-32 bottom-0 left-[8px] w-[4px] bg-blue-300">
-        <div className="absolute -left-8 w-20 rotate-180 bg-white text-center text-xl leading-none text-blue-300">
-          ▲
-        </div>
-        <div className="absolute bottom-0 -left-8 w-20 bg-white text-center text-xl leading-none text-blue-300 group-[.rotate-arrow-bottom]:rotate-180">
-          ▲
-        </div>
-      </div>
+      <div className="absolute top-32 bottom-0 left-[8px] w-[4px] bg-blue-300"></div>
       <ul
         className="list-unstyled ds-stack ds-stack-32 relative"
         aria-live="polite"
