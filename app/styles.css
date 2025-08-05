@@ -52,6 +52,11 @@
     @apply space-y-8 pl-24;
   }
 
+  li > ul:not(.list-unstyled),
+  li > ol:not(.list-unstyled) {
+    @apply mt-8;
+  }
+
   ul:not(.list-unstyled) {
     @apply list-disc;
   }
