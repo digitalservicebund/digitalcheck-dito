@@ -26,7 +26,7 @@ stellen damit Digitaltauglichkeit sicher.
     </div>
   </div>
   <div
-    class="container py-80"
+    class="container py-40 lg:py-80"
   >
     <h2
       class="hyphens-none mb-40"
@@ -37,37 +37,41 @@ stellen damit Digitaltauglichkeit sicher.
       class="relative"
     >
       <div
-        class="absolute h-16 w-16 rounded-full bg-blue-300 max-md:-bottom-8 max-md:left-6 md:-top-6 md:-right-1"
+        class="absolute h-16 w-16 rounded-full bg-blue-300 max-lg:-bottom-8 max-lg:left-10 lg:-top-6 lg:-right-1"
       />
       <ol
-        class="list-unstyled max-w-none md:grid md:grid-flow-col md:grid-cols-3 md:grid-rows-[repeat(6,auto)]"
+        class="list-unstyled max-w-none max-lg:mx-16 lg:grid lg:grid-flow-col lg:grid-cols-3 lg:grid-rows-[repeat(6,auto)]"
       >
         <li
-          class="relative border-blue-300 max-md:ml-12 max-md:border-l-3 max-md:pb-40 max-md:pl-28 md:row-span-6 md:grid md:grid-rows-subgrid md:border-t-3 md:pr-40"
+          class="relative border-blue-300 max-lg:border-l-3 max-lg:pb-40 max-lg:pl-40 lg:row-span-6 lg:grid lg:grid-rows-subgrid lg:border-t-3 lg:pr-40"
         >
           <div
-            class="absolute flex h-40 w-40 items-center justify-center rounded-full bg-blue-800 font-bold text-white max-md:-left-20 md:-top-20"
+            class="absolute flex h-40 w-40 items-center justify-center rounded-full bg-blue-800 font-bold text-white max-lg:-left-[22px] lg:-top-20"
           >
             1
           </div>
           <h3
-            class="hyphens-none ds-heading-03-bold md:mt-40"
+            class="hyphens-none ds-heading-03-bold lg:mt-40"
           >
             Digitalbezug einschätzen
           </h3>
-          <a
-            class="ds-button mt-40 self-center"
-            data-discover="true"
-            href="/vorpruefung"
+          <div
+            class="mt-40 self-center"
           >
-             
-            <span
-              class="ds-button-label"
+            <a
+              class="ds-button"
+              data-discover="true"
+              href="/vorpruefung"
             >
-              Digitalbezug einschätzen
-            </span>
-             
-          </a>
+               
+              <span
+                class="ds-button-label"
+              >
+                Digitalbezug einschätzen
+              </span>
+               
+            </a>
+          </div>
           <div
             class="mt-40"
           >
@@ -96,7 +100,15 @@ stellen damit Digitaltauglichkeit sicher.
               Dauer
               :
             </p>
-            Wenige Minuten
+            <div
+              class="ds-stack ds-stack-8 [&_a]:text-link"
+            >
+              <p>
+                Wenige Minuten
+              </p>
+              
+
+            </div>
           </div>
           <div
             class="mt-24"
@@ -107,35 +119,58 @@ stellen damit Digitaltauglichkeit sicher.
               Ergebnis
               :
             </p>
-            Identifizierter Digital- und Interoperabilitätsbezug; Ergebnis als E-Mail mit ggf. weiteren notwendigen Normenkontrolle
+            <div
+              class="ds-stack ds-stack-8 [&_a]:text-link"
+            >
+              <ul>
+                
+
+                <li>
+                  Individueller Digital- und Interoperabilitätsbezug
+                </li>
+                
+
+                <li>
+                  Ergebnis als E-Mail zum Versenden an den Nationalen Normenkontrollrat
+                </li>
+                
+
+              </ul>
+              
+
+            </div>
           </div>
         </li>
         <li
-          class="relative border-blue-300 max-md:ml-12 max-md:border-l-3 max-md:pb-40 max-md:pl-28 md:row-span-6 md:grid md:grid-rows-subgrid md:border-t-3 md:pr-40"
+          class="relative border-blue-300 max-lg:border-l-3 max-lg:pb-40 max-lg:pl-40 lg:row-span-6 lg:grid lg:grid-rows-subgrid lg:border-t-3 lg:pr-40"
         >
           <div
-            class="absolute flex h-40 w-40 items-center justify-center rounded-full bg-blue-800 font-bold text-white max-md:-left-20 md:-top-20"
+            class="absolute flex h-40 w-40 items-center justify-center rounded-full bg-blue-800 font-bold text-white max-lg:-left-[22px] lg:-top-20"
           >
             2
           </div>
           <h3
-            class="hyphens-none ds-heading-03-bold md:mt-40"
+            class="hyphens-none ds-heading-03-bold lg:mt-40"
           >
             Digitaltauglichkeit der Regelung sicherstellen
           </h3>
-          <a
-            class="ds-button ds-button-ghost mt-40 self-center"
-            data-discover="true"
-            href="/methoden"
+          <div
+            class="mt-40 self-center"
           >
-             
-            <span
-              class="ds-button-label"
+            <a
+              class="text-link inline-flex items-center"
+              data-discover="true"
+              href="/methoden"
             >
-              Regelung erarbeiten
-            </span>
-             
-          </a>
+               
+              <span
+                class="ds-button-label"
+              >
+                Regelung erarbeiten
+              </span>
+               
+            </a>
+          </div>
           <div
             class="mt-40"
           >
@@ -164,7 +199,15 @@ stellen damit Digitaltauglichkeit sicher.
               Dauer
               :
             </p>
-            Punktuell über die gesamte Zeit der Regelungsausarbeitung
+            <div
+              class="ds-stack ds-stack-8 [&_a]:text-link"
+            >
+              <p>
+                Punktuell über die gesamte Zeit der Regelungsausarbeitung
+              </p>
+              
+
+            </div>
           </div>
           <div
             class="mt-24"
@@ -175,35 +218,58 @@ stellen damit Digitaltauglichkeit sicher.
               Ergebnis
               :
             </p>
-            Ihre Regelung wird organisatorisch, visualisiert als zur Angebotenen Umsetzung Ihrer Regelung
+            <div
+              class="ds-stack ds-stack-8 [&_a]:text-link"
+            >
+              <ul>
+                
+
+                <li>
+                  Ihre Regelung wird digitaltauglich
+                </li>
+                
+
+                <li>
+                  Visualisierungen zur digitaltauglichen Umsetzung Ihrer Regelung
+                </li>
+                
+
+              </ul>
+              
+
+            </div>
           </div>
         </li>
         <li
-          class="relative border-blue-300 max-md:ml-12 max-md:border-l-3 max-md:pb-40 max-md:pl-28 md:row-span-6 md:grid md:grid-rows-subgrid md:border-t-3 md:pr-40"
+          class="relative border-blue-300 max-lg:border-l-3 max-lg:pb-40 max-lg:pl-40 lg:row-span-6 lg:grid lg:grid-rows-subgrid lg:border-t-3 lg:pr-40"
         >
           <div
-            class="absolute flex h-40 w-40 items-center justify-center rounded-full bg-blue-800 font-bold text-white max-md:-left-20 md:-top-20"
+            class="absolute flex h-40 w-40 items-center justify-center rounded-full bg-blue-800 font-bold text-white max-lg:-left-[22px] lg:-top-20"
           >
             3
           </div>
           <h3
-            class="hyphens-none ds-heading-03-bold md:mt-40"
+            class="hyphens-none ds-heading-03-bold lg:mt-40"
           >
             Dokumentieren der Digitaltauglichkeit
           </h3>
-          <a
-            class="ds-button ds-button-ghost mt-40 self-center"
-            data-discover="true"
-            href="/dokumentation"
+          <div
+            class="mt-40 self-center"
           >
-             
-            <span
-              class="ds-button-label"
+            <a
+              class="text-link inline-flex items-center"
+              data-discover="true"
+              href="/dokumentation"
             >
-              Digitaltauglichkeit dokumentieren
-            </span>
-             
-          </a>
+               
+              <span
+                class="ds-button-label"
+              >
+                Digitaltauglichkeit dokumentieren
+              </span>
+               
+            </a>
+          </div>
           <div
             class="mt-40"
           >
@@ -232,7 +298,15 @@ stellen damit Digitaltauglichkeit sicher.
               Dauer
               :
             </p>
-            Ein bis zwei Stunden
+            <div
+              class="ds-stack ds-stack-8 [&_a]:text-link"
+            >
+              <p>
+                Ein bis zwei Stunden
+              </p>
+              
+
+            </div>
           </div>
           <div
             class="mt-24"
@@ -243,7 +317,26 @@ stellen damit Digitaltauglichkeit sicher.
               Ergebnis
               :
             </p>
-            Ausgefülltes Word-Dokument, welches Sie dem Normenkontrollrat senden
+            <div
+              class="ds-stack ds-stack-8 [&_a]:text-link"
+            >
+              <ul>
+                
+
+                <li>
+                  Ausgefülltes Word-Dokument, welches Sie dem Nationalen Normenkontrollrat senden
+                </li>
+                
+
+                <li>
+                  Ihr Vorhaben ist formal bereit für die Ressortabstimmung
+                </li>
+                
+
+              </ul>
+              
+
+            </div>
           </div>
         </li>
       </ol>
@@ -253,7 +346,7 @@ stellen damit Digitaltauglichkeit sicher.
     class="bg-blue-100"
   >
     <div
-      class="container ds-stack ds-stack-40 py-80"
+      class="container ds-stack ds-stack-40 py-40 lg:py-80"
     >
       <h2
         class="hyphens-none"
@@ -430,7 +523,7 @@ stellen damit Digitaltauglichkeit sicher.
     class="bg-[url('/images/trainings.jpg')] bg-cover bg-center"
   >
     <div
-      class="container py-80"
+      class="container py-40 lg:py-80"
     >
       <div
         class="flex flex-col gap-24 sm:flex-row"
@@ -547,7 +640,7 @@ stellen damit Digitaltauglichkeit sicher.
     </div>
   </div>
   <div
-    class="container space-y-48 py-80"
+    class="container space-y-48 py-40 lg:py-80"
   >
     <div
       class="flex scroll-my-40 gap-32 md:flex-row flex-col"
