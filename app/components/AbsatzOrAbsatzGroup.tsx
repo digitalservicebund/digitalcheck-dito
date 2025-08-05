@@ -19,21 +19,21 @@ import DetailsSummary from "./DetailsSummary";
 import Heading from "./Heading";
 import PrincipleHighlightModifier from "./PrincipleHighlightModifier";
 
-type AbsatzProps = {
+type AbsatzOrAbsatzGroupProps = {
   absatz: AbsatzWithNumber | AbsatzWithNumber[];
   principlesToShow: Prinzip[];
   useAnchorLinks: boolean;
 };
 
-export default function Absatz({
+export default function AbsatzOrAbsatzGroup({
   absatz,
   principlesToShow,
   useAnchorLinks,
-}: Readonly<AbsatzProps>) {
-  const isAbsatzWithoutErfuellungen = Array.isArray(absatz);
+}: Readonly<AbsatzOrAbsatzGroupProps>) {
+  const isAbsatzGroupWithoutErfuellungen = Array.isArray(absatz);
 
-  if (isAbsatzWithoutErfuellungen)
-    return <AbsatzWithoutErfüllungen absatzGroup={absatz} />;
+  if (isAbsatzGroupWithoutErfuellungen)
+    return <AbsatzGroupWithoutErfüllungen absatzGroup={absatz} />;
 
   const content = prependNumberToAbsatz(absatz);
 
@@ -128,13 +128,13 @@ function PrincipleExplanation({
   );
 }
 
-type AbsatzWithoutErfüllungenProps = {
+type AbsatzGroupWithoutErfüllungenProps = {
   absatzGroup: AbsatzWithNumber[];
 };
 
-function AbsatzWithoutErfüllungen({
+function AbsatzGroupWithoutErfüllungen({
   absatzGroup,
-}: Readonly<AbsatzWithoutErfüllungenProps>) {
+}: Readonly<AbsatzGroupWithoutErfüllungenProps>) {
   const getAbsatzGroupTitle = (absatzGroup: AbsatzWithNumber[]) =>
     absatzGroup.length > 1
       ? `(${absatzGroup[0].number}) – (${absatzGroup[absatzGroup.length - 1].number})`

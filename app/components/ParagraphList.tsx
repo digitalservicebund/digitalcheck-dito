@@ -1,7 +1,7 @@
 import Heading from "~/components/Heading";
 import { groupAbsaetzeWithoutRelevantPrinciples } from "~/utils/paragraphUtils";
 import type { Paragraph, Prinzip } from "~/utils/strapiData.server";
-import Absatz from "./Absatz";
+import Absatz from "./AbsatzOrAbsatzGroup";
 
 /*
  Notes
@@ -21,21 +21,13 @@ import Absatz from "./Absatz";
  Architecture
  ============
  ParagraphList
- │ Renders a list of Paragraphs and manages which highlight was clicked.
- ├─ State: activeHighlight
- ├─ Context provided: principlesToShow, activeHighlight, setActiveHighlight
- ├─ Processing: Sorts Paragraphs into correct order.
- |
+ │ Renders a list of Paragraphs
  ├── Paragraph
  │    │ Renders all Absaetze of a Paragraph. Only displays if it contains Absaetze with relevant principles.
- │    ├─ Context consumed: principlesToShow
- │    ├─ Processing: Creates an array of Absaetze with relevant principles and groups of Absaetze without.
- │    │
- │    ├── Absatz
- │    │    │ Renders an Absatz with relevant principles, highlights and matching explanations.
- │    │    ├─ Context provided: explanationIdPrefix
- │    │    ├─ Processing: Adds the number of the Absatz to the text.
- │    │    │
+ │    ├── AbsatzOrAbsatzGroup
+ │    │    │ Renders an Absatz or an AbsatzGroup with relevant principles, highlights and matching explanations.
+ │    │    ├─ Context handled by PrincipleHighlightProvider: principlesToShow, activeHighlight, setActiveHighlight, explanationIdPrefix, useAnchorLinks
+ │    │    ├─ Processing: Differs between Absetze with relevant principles and groups of Absaetze without.
  │    │    ├── BlocksRenderer (with modifiers: { underline: PrincipleHighlight })
  │    │    │    │ Recursively renders the nested nodes of a Strapi text block.
  │    │    │    │ Based on the modifier, renders underlined text as PrincipleHighlights.
@@ -55,21 +47,21 @@ import Absatz from "./Absatz";
  │    │    │    └─ onClick: setActiveHighlight to null
  │    │    │
  │    │    └── PrincipleExplanation ...
- │    │
- │    ├── DetailsSummary
- │    │    │ Renders a group of Absaetze without relevant principles as a collapsible section.
- │    │    ├─ Processing: prependNumberToAbsatz()
  │    │    │
- │    │    ├── BlocksRenderer (with modifiers: { underline: PrincipleHighlight })
+ │    │    ├── DetailsSummary
+ │    │    │    │ Renders a group of Absaetze without relevant principles as a collapsible section.
+ │    │    │    ├─ Processing: prependNumberToAbsatz()
  │    │    │    │
- │    │    │    └─ PrincipleHighlight 
- │    │    │       │ Only used to remove the bracketed numbers (e.g. [1]) from the text in this case.
- │    │    │
- │    │    └── BlocksRenderer ...
+ │    │    │    ├── BlocksRenderer (with modifiers: { underline: PrincipleHighlight })
+ │    │    │    │    │
+ │    │    │    │    └─ PrincipleHighlight 
+ │    │    │    │       │ Only used to remove the bracketed numbers (e.g. [1]) from the text in this case.
+ │    │    │    │
+ │    │    │    └── BlocksRenderer ...
+ │    │    └── DetailsSummary ...
  │    │
- │    ├── Absatz ...
- │    ├── Absatz ...
- │    └── DetailsSummary ...
+ │    ├── AbsatzOrAbsatzGroup ...
+ │    └── AbsatzOrAbsatzGroup ...
  │
  ├── Paragraph ...
  └── Paragraph ...
@@ -78,7 +70,7 @@ import Absatz from "./Absatz";
  ==========================
  ┌─────────────────────────────────────────────────────────────────┐
  │  1. User clicks highlighted link (PrincipleHighlight)           │
- │  2. setActiveHighlight() in ParagraphList                       │
+ │  2. setActiveHighlight() in PrincipleHighlightProvider          │
  │  3. Navigate to #explanationID (soft scroll)                    │
  │  4. PrincipleExplanation detects shouldHighlight = true         │
  │  5. Gets border and shows arrow back button                     │
@@ -96,7 +88,7 @@ export default function ParagraphList({
   principlesToShow: Prinzip[];
 }>) {
   return (
-    <div className="ds-stack ds-stack-32">
+    <div className="space-y-32">
       {paragraphs
         .toSorted((a, b) =>
           a.Nummer.localeCompare(b.Nummer, "de-DE", { numeric: true }),
@@ -130,29 +122,27 @@ function Paragraph({
 
   // renders the interlaced Absaetze with relevant PrinzipErfuellungen and grouped Absaetze without relevant PrinzipErfuellungen
   return (
-    <div key={paragraph.Nummer}>
-      <div className="flex flex-col gap-24 md:gap-32">
-        <Heading
-          tagName="h3"
-          text={`§ ${paragraph.Nummer} ${paragraph.Gesetz}`}
-          look="ds-subhead"
-          className="font-bold"
-        />
-        {paragraph.Titel && (
-          <p className="ds-subhead font-bold">{paragraph.Titel}</p>
-        )}
-        <div className="flex flex-col gap-24 md:gap-32">
-          {groupedAbsaetze.map((absatzGroup) => (
-            <Absatz
-              key={
-                Array.isArray(absatzGroup) ? absatzGroup[0].id : absatzGroup.id
-              }
-              absatz={absatzGroup}
-              principlesToShow={principlesToShow}
-              useAnchorLinks
-            />
-          ))}
-        </div>
+    <div key={paragraph.Nummer} className="space-y-24 md:space-y-32">
+      <Heading
+        tagName="h3"
+        text={`§ ${paragraph.Nummer} ${paragraph.Gesetz}`}
+        look="ds-subhead"
+        className="font-bold"
+      />
+      {paragraph.Titel && (
+        <p className="ds-subhead font-bold">{paragraph.Titel}</p>
+      )}
+      <div className="space-y-24 md:space-y-32">
+        {groupedAbsaetze.map((absatzGroup) => (
+          <Absatz
+            key={
+              Array.isArray(absatzGroup) ? absatzGroup[0].id : absatzGroup.id
+            }
+            absatz={absatzGroup}
+            principlesToShow={principlesToShow}
+            useAnchorLinks
+          />
+        ))}
       </div>
     </div>
   );
