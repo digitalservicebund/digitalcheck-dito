@@ -14,7 +14,7 @@ export type LinkItem = {
   title: string;
 };
 
-export default function LinkListBox({
+export default function TableOfContents({
   heading,
   links,
   className,

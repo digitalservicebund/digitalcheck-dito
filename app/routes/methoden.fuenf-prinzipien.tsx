@@ -5,9 +5,9 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
-import LinkListBox from "~/components/LinkListBox";
 import { PrinciplePosterBox } from "~/components/PrinciplePosterBox";
 import Separator from "~/components/Separator";
+import TableOfContents from "~/components/TableOfContents";
 import {
   getDetailsSummary,
   methodsFivePrinciples,
@@ -28,7 +28,7 @@ export default function FivePrinciples() {
         title={methodsFivePrinciples.title}
         subtitle={methodsFivePrinciples.subtitle}
       >
-        <LinkListBox
+        <TableOfContents
           heading={methodsFivePrinciples.contentOverviewTitle}
           links={[
             {

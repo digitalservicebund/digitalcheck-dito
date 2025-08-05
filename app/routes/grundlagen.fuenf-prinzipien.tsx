@@ -2,9 +2,9 @@ import { PrincipleNumber } from "~/components/Badge";
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
-import LinkListBox from "~/components/LinkListBox";
 import { PrinciplePosterBox } from "~/components/PrinciplePosterBox";
 import SupportBanner from "~/components/SupportBanner";
+import TableOfContents from "~/components/TableOfContents";
 import {
   getDetailsSummary,
   methodsFivePrinciples,
@@ -25,7 +25,7 @@ export default function FundamentalsFivePrinciples() {
         title={methodsFivePrinciples.title}
         subtitle={methodsFivePrinciples.subtitle}
       >
-        <LinkListBox
+        <TableOfContents
           heading={methodsFivePrinciples.contentOverviewTitle}
           links={methodsFivePrinciples.principles.map((principle) => {
             return {
