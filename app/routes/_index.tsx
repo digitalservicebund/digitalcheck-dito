@@ -41,34 +41,32 @@ export default function Index() {
           className="bg-blue-800 text-white"
         />
 
-        <Container className="py-80">
+        <Container className="py-40 lg:py-80">
           <Heading tagName="h2" text={stepByStep.title} className="mb-40" />
 
           <div className="relative">
-            <div className="absolute h-16 w-16 rounded-full bg-blue-300 max-md:-bottom-8 max-md:left-6 md:-top-6 md:-right-1" />
-            <ol className="list-unstyled max-w-none md:grid md:grid-flow-col md:grid-cols-3 md:grid-rows-[repeat(6,auto)]">
+            <div className="absolute h-16 w-16 rounded-full bg-blue-300 max-lg:-bottom-8 max-lg:left-10 lg:-top-6 lg:-right-1" />
+            <ol className="list-unstyled max-w-none max-lg:mx-16 lg:grid lg:grid-flow-col lg:grid-cols-3 lg:grid-rows-[repeat(6,auto)]">
               {stepByStep.steps.map((step) => (
                 <li
                   key={step.number}
-                  className="relative border-blue-300 max-md:ml-12 max-md:border-l-3 max-md:pb-40 max-md:pl-28 md:row-span-6 md:grid md:grid-rows-subgrid md:border-t-3 md:pr-40"
+                  className="relative border-blue-300 max-lg:border-l-3 max-lg:pb-40 max-lg:pl-40 lg:row-span-6 lg:grid lg:grid-rows-subgrid lg:border-t-3 lg:pr-40"
                 >
-                  <div className="absolute flex h-40 w-40 items-center justify-center rounded-full bg-blue-800 font-bold text-white max-md:-left-20 md:-top-20">
+                  <div className="absolute flex h-40 w-40 items-center justify-center rounded-full bg-blue-800 font-bold text-white max-lg:-left-[22px] lg:-top-20">
                     {step.number}
                   </div>
 
                   <Heading
                     tagName="h3"
                     text={step.title}
-                    className="ds-heading-03-bold md:mt-40"
+                    className="ds-heading-03-bold lg:mt-40"
                   />
 
-                  <Button
-                    href={step.link.href}
-                    look={step.link.look}
-                    className="mt-40 self-center"
-                  >
-                    {step.link.text}
-                  </Button>
+                  <div className="mt-40 self-center">
+                    <Button href={step.link.href} look={step.link.look}>
+                      {step.link.text}
+                    </Button>
+                  </div>
 
                   <div className="mt-40">
                     <p className="font-bold">{stepByStep.procedureLabel}:</p>
@@ -91,7 +89,7 @@ export default function Index() {
         </Container>
 
         <div className="bg-blue-100">
-          <Container className="ds-stack ds-stack-40 py-80">
+          <Container className="ds-stack ds-stack-40 py-40 lg:py-80">
             <Heading tagName="h2" text={grundlagen.title} />
 
             <InfoBox
@@ -121,7 +119,7 @@ export default function Index() {
         </div>
 
         <div className="bg-[url('/images/trainings.jpg')] bg-cover bg-center">
-          <Container className="py-80">
+          <Container className="py-40 lg:py-80">
             <InfoBoxSideBySide>
               <InfoBox
                 look="method"
@@ -147,7 +145,7 @@ export default function Index() {
           </Container>
         </div>
 
-        <Container className="space-y-48 py-80">
+        <Container className="space-y-48 py-40 lg:py-80">
           <InfoBox
             heading={{
               tagName: "h2",

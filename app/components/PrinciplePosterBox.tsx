@@ -1,3 +1,4 @@
+import FileDownloadOutlinedIcon from "@digitalservicebund/icons/FileDownloadOutlined";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import Container from "./Container";
 import InfoBox from "./InfoBox";
@@ -31,6 +32,7 @@ export function PrinciplePosterBox() {
             text: principlePosterBox.downloadTitle,
             href: principlePosterBox.downloadUrl,
             look: "link" as const,
+            iconLeft: <FileDownloadOutlinedIcon className="fill-current" />,
           },
         ]}
       />
