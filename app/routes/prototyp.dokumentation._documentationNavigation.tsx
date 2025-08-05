@@ -3,7 +3,7 @@ import { useId } from "react";
 import { Link, Outlet, useLocation, useOutletContext } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Container from "~/components/Container";
-import LinkBar from "~/components/LinkBar";
+import Stepper from "~/components/Stepper";
 import { features } from "~/resources/features.ts";
 import {
   type Route,
@@ -49,7 +49,7 @@ export default function LayoutWithDocumentationNavigation() {
       </div>
       <section className="w-[51rem]">
         <Container className="pt-0 lg:hidden">
-          <LinkBar
+          <Stepper
             currentElementUrl={location.pathname}
             elements={filteredRoutes}
           />

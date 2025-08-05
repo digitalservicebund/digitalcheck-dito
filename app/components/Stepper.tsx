@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 
-const LinkBar = <T extends { url: string; title: string }>({
+const Stepper = <T extends { url: string; title: string }>({
   elements,
   currentElementUrl,
 }: {
@@ -29,4 +29,4 @@ const LinkBar = <T extends { url: string; title: string }>({
   );
 };
 
-export default LinkBar;
+export default Stepper;

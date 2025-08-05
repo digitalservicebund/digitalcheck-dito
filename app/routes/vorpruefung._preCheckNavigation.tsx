@@ -3,7 +3,7 @@ import { useId } from "react";
 import { Link, Outlet, useLoaderData, useRouteLoaderData } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Container from "~/components/Container";
-import LinkBar from "~/components/LinkBar";
+import Stepper from "~/components/Stepper";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { getAnswersFromCookie } from "~/utils/cookies.server";
 import customTwMerge from "~/utils/tailwindMerge";
@@ -36,7 +36,7 @@ export default function LayoutWithPreCheckNavigation() {
       <div className="w-[51rem]">
         {showLinkBar && (
           <Container className="pt-0 lg:hidden">
-            <LinkBar currentElementUrl={question.url} elements={questions} />
+            <Stepper currentElementUrl={question.url} elements={questions} />
           </Container>
         )}
         <section>
