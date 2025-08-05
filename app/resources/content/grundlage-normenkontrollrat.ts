@@ -7,9 +7,9 @@ import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const fundamentalsNKR = {
   title:
-    "Die Rolle des Nationalen Normenkontrollrat im Rahmen des Digitalcheck ",
+    "Die Rolle des Nationalen Normenkontrollrats im Rahmen des Digitalcheck ",
   subtitle:
-    "Alles zu den Aufgaben und der Vorgehensweise des Nationalen Normenkontrollrat (NKR) im Kontext des Digitalcheck",
+    "Alles zu den Aufgaben und der Vorgehensweise des Nationalen Normenkontrollrats (NKR) im Kontext des Digitalcheck",
   summary: {
     items: [
       {
@@ -17,14 +17,14 @@ export const fundamentalsNKR = {
           text: "Was sind die Aufgaben des NKR im Rahmen des Digitalcheck?",
         },
         content: dedent`
-          Der NKR hat den [gesetzlichen Auftrag](https://www.gesetze-im-internet.de/nkrg/__4.html), sicherzustellen, dass Digitalisierung bei der Ausarbeitung von Gesetzentwürfen berücksichtigt wurde.
+          Der NKR hat den [gesetzlichen Auftrag](https://www.gesetze-im-internet.de/nkrg/__4.html), sicherzustellen, dass Digitalisierung bei der Ausarbeitung von Gesetzesentwürfen berücksichtigt wird.
           <br/><br/>
           
           Seit April 2023 fließen die Ergebnisse und Bewertungen des Digitalchecks in die Stellungnahmen des NKR ein und sind [öffentlich einsehbar](https://www.normenkontrollrat.bund.de/Webs/NKR/DE/veroeffentlichungen/nkr-stellungnahmen/nkr-stellungnahmen_node.html).
           <br/><br/>
           
           **Beachten Sie:** 
-          - Der NKR prüft die Berücksichtigung der Prinzipien digitaltauglicher Gesetzgebung, jedoch nicht die Erfüllung von Anforderungen der EU-Interoperabilität nach der EU Verordnung. 
+          - Der NKR prüft die Berücksichtigung der Prinzipien digitaltauglicher Gesetzgebung, jedoch nicht die Erfüllung von Anforderungen der EU-Interoperabilität nach der EU-Verordnung. 
           - Es erfolgt nicht zu jedem Regelungsvorhaben eine Stellungnahme des NKR.
           <br/>
           
@@ -52,7 +52,7 @@ export const fundamentalsNKR = {
           
           - [Dokumentation der Digitaltauglichkeit](${ROUTE_DOCUMENTATION.url}) 
             - **Inhalt:** Dokumentation der Digitaltauglichkeit, etwa durch die Nutzung der Prinzipien digitaltauglicher Gesetzgebung und von Visualisierungen
-            - **Relevanz für den NKR:** Prüfung inwieweit die Digitalisierung bei der Erarbeitung von Ihres Vorhabens mitgedacht wurde.
+            - **Relevanz für den NKR:** Prüfung, inwieweit die Digitalisierung bei der Erarbeitung Ihres Vorhabens mitgedacht wird.
         `,
         visual: {
           Icon: FactCheckOutlined,

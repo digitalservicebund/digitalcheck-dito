@@ -205,7 +205,7 @@ export const ROUTE_FUNDAMENTALS_DIGITAL_READINESS = createRoute(
 );
 export const ROUTE_FUNDAMENTALS_NKR = createRoute(
   "normenkontrollrat",
-  "Die Rolle des Nationalen Normenkontrollrat",
+  "Die Rolle des Nationalen Normenkontrollrats",
   ROUTE_FUNDAMENTALS,
 );
 
