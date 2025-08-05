@@ -11,7 +11,7 @@ test.describe("documentation process", () => {
       .click();
     const download = await downloadPromise;
     expect(download.suggestedFilename()).toContain(
-      "Dokumentieren-der-Digitaltauglichkeit_V1-5.docx",
+      "Dokumentieren-der-Digitaltauglichkeit_V1-5-1.docx",
     );
   });
 });
