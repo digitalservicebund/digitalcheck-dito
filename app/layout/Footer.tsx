@@ -80,10 +80,10 @@ export default function Footer() {
             header={footer.top.basics.title}
             links={footer.top.basics.links}
           />
-          {/* <LinkList
+          <LinkList
             header={footer.top.examples.title}
             links={footer.top.examples.links}
-          /> */}
+          />
         </nav>
 
         <nav aria-label={footer.middle.navLabel}>
