@@ -75,12 +75,12 @@ export default function Index() {
 
                   <div className="mt-24 border-t-2 border-gray-400 pt-16">
                     <p className="font-bold">{stepByStep.durationLabel}:</p>
-                    {step.duration}
+                    <RichText markdown={step.duration} />
                   </div>
 
                   <div className="mt-24">
                     <p className="font-bold">{stepByStep.resultLabel}:</p>
-                    {step.result}
+                    <RichText markdown={step.result} />
                   </div>
                 </li>
               ))}

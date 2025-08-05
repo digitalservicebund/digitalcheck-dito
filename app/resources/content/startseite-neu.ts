@@ -37,8 +37,10 @@ export const startseite = {
         description:
           "Sie identifizieren den Digitalbezug und Interoperabilitätsanforderungen für Ihr Vorhaben.",
         duration: "Wenige Minuten",
-        result:
-          "Identifizierter Digital- und Interoperabilitätsbezug; Ergebnis als E-Mail mit ggf. weiteren notwendigen Normenkontrolle",
+        result: dedent`
+          - Individueller Digital- und Interoperabilitätsbezug
+          - Ergebnis als E-Mail zum Versenden an den Nationalen Normenkontrollrat
+        `,
       },
       {
         number: 2,
@@ -51,8 +53,10 @@ export const startseite = {
         description:
           "Bei einer positiven Vorprüfung wenden Sie die Werkzeuge und Methoden an, die die Digitaltauglichkeit Ihres Vorhabens sicherstellen.",
         duration: "Punktuell über die gesamte Zeit der Regelungsausarbeitung",
-        result:
-          "Ihre Regelung wird organisatorisch, visualisiert als zur Angebotenen Umsetzung Ihrer Regelung",
+        result: dedent`
+          - Ihre Regelung wird digitaltauglich
+          - Visualisierungen zur digitaltauglichen Umsetzung Ihrer Regelung
+        `,
       },
       {
         number: 3,
@@ -65,8 +69,10 @@ export const startseite = {
         description:
           "Sie dokumentieren, wie Sie Digitaltauglichkeit in Ihrer Regelung sichergestellt haben.",
         duration: "Ein bis zwei Stunden",
-        result:
-          "Ausgefülltes Word-Dokument, welches Sie dem Normenkontrollrat senden",
+        result: dedent`
+          - Ausgefülltes Word-Dokument, welches Sie dem Nationalen Normenkontrollrat senden
+          - Ihr Vorhaben ist formal bereit für die Ressortabstimmung
+        `,
       },
     ],
   },
