@@ -8,14 +8,19 @@ const ClientSideErrorSchema = z.object({
 
 export type ClientSideError = z.infer<typeof ClientSideErrorSchema>;
 
+/**
+ * This method simply logs the received error message and stack from client-side errors to be monitored by Grafana.
+ */
 const handleClientSideError = async (request: Request): Promise<Response> => {
   try {
     const data: ClientSideError = ClientSideErrorSchema.parse(
       await request.json(),
     );
 
-    console.log(`Client-side error: ${JSON.stringify(data.message)}`);
-    console.log(JSON.stringify(data.stack));
+    console.log(
+      `Client-side error: ${String(data.message)}`,
+      String(data.stack),
+    );
 
     return new Response(null, { status: 204 }); // No Content
   } catch (error) {

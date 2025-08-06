@@ -241,7 +241,8 @@ export function ErrorBoundary() {
     errorTitle = error.status === 404 ? notFound.title : `${error.data}`;
     errorMessage = error.status === 404 ? notFound.message : errorMessage;
   } else if (error instanceof Error && typeof window !== "undefined") {
-    // Only track client-side errors
+    // The error should be a native JS runtime error, not a route error response form the server
+    // window is only defined on client-side making sure the code is running in the browser
     trackClientSideError(error);
   }
 
