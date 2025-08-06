@@ -105,19 +105,21 @@ export const preCheck = {
       {
         plausibleEventName: "Content.FAQs.FAQ4",
         headline: "Was ist Digitalbezug?",
-        content: `Digitalbezug im Kontext der Umsetzung bedeutet, dass ein Prozess zumindest teilweise durch ein IT-System abgebildet wird. Beispiele sind:
-- eine Reihe von Aufgaben mit einem bestimmten Ziel, zum Beispiel das Ausfüllen eines Formulars in ELSTER, um die Steuererklärung einzureichen,
-- die Abfrage von Daten aus einem Register oder
-- das Bereitstellen von Informationen auf einer Website.`,
+        content: dedent`
+          Digitalbezug im Kontext der Umsetzung bedeutet, dass ein Prozess zumindest teilweise durch ein IT-System abgebildet wird. Beispiele sind:
+          - eine Reihe von Aufgaben mit einem bestimmten Ziel, zum Beispiel das Ausfüllen eines Formulars in ELSTER, um die Steuererklärung einzureichen,
+          - die Abfrage von Daten aus einem Register oder
+          - das Bereitstellen von Informationen auf einer Website.
+        `,
       },
       {
         plausibleEventName: "Content.FAQs.FAQ5",
         headline: "Warum digitaltaugliche Regelungen schreiben?",
         content: dedent`
-          **Digitaltaugliche Regelungen sparen Ressourcen**<br/>
+          <p><strong>Digitaltaugliche Regelungen sparen Ressourcen</strong></p>
           Eine gute digitale Umsetzung spart langfristig Zeit und sorgt dafür, dass Ziel und Wirkung des Vorhabens erreicht werden - aufseiten der Normadressatinnen und Normadressaten und aufseiten der Verwaltung.
 
-          **Relevant für all Regelungsvorhaben**<br/>
+          <p><strong>Relevant für all Regelungsvorhaben</strong></p>
           Der Digitalcheck gilt für alle Regelungsvorhaben - Gesetze, Verordnungen und Verwaltungsvorschriften. Es fallen sowohl neue Vorhaben, als auch Änderungen an bestehenden Regelungen darunter.
         `,
       },
