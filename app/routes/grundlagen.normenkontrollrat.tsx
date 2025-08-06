@@ -16,6 +16,7 @@ export default function FundamentalsMethods() {
       ...item,
       heading: { ...item.heading, tagName: "h2", look: "ds-heading-03-reg" },
       visual: { type: "icon", Icon: item.visual.Icon },
+      contentClassName: "ds-stack-24 [&>ul]:space-y-24",
     };
   });
 

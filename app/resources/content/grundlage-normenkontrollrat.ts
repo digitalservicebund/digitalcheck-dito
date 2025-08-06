@@ -18,15 +18,12 @@ export const fundamentalsNKR = {
         },
         content: dedent`
           Der NKR hat den [gesetzlichen Auftrag](https://www.gesetze-im-internet.de/nkrg/__4.html), sicherzustellen, dass Digitalisierung bei der Ausarbeitung von Gesetzesentwürfen berücksichtigt wird.
-          <br/><br/>
           
           Seit April 2023 fließen die Ergebnisse und Bewertungen des Digitalchecks in die Stellungnahmen des NKR ein und sind [öffentlich einsehbar](https://www.normenkontrollrat.bund.de/Webs/NKR/DE/veroeffentlichungen/nkr-stellungnahmen/nkr-stellungnahmen_node.html).
-          <br/><br/>
           
           **Beachten Sie:** 
           - Der NKR prüft die Berücksichtigung der Prinzipien digitaltauglicher Gesetzgebung, jedoch nicht die Erfüllung von Anforderungen der EU-Interoperabilität nach der EU-Verordnung. 
           - Es erfolgt nicht zu jedem Regelungsvorhaben eine Stellungnahme des NKR.
-          <br/>
           
           Bei weiteren Fragen wenden Sie sich bitte an die [zuständigen Ansprechpartnerinnen und Ansprechpartner](https://www.normenkontrollrat.bund.de/Webs/NKR/DE/der-nkr/sekretariat/sekretariat_node.html) in Ihrem Haus.
         `,
@@ -40,20 +37,16 @@ export const fundamentalsNKR = {
         },
         content: dedent`
           Der Digitalcheck unterstützt die Bundesministerien dabei, bereits in der frühen Phase eines Regelungsvorhabens den Digitalbezug zu identifizieren und anschließend die Digitaltauglichkeit sicherzustellen. Zum Einsatz kommen dabei unter anderem Prinzipien für digitaltaugliche Regelungen sowie Visualisierungen zur Umsetzung.
-          <br/><br/>
           
           Der NKR **betrachtet** in diesem Kontext:
-          <br/><br/>
           
           - Ergebnis der [Vorprüfung](${ROUTE_PRECHECK.url}) als E-Mail
             - **Inhalt:** Einschätzung zur Digitaltauglichkeit des Vorhabens
             - **Relevanz für den NKR:** frühe Kenntnisnahme der zu überprüfenden Vorhaben
-          <br/>
           
           - [Dokumentation der Digitaltauglichkeit](${ROUTE_DOCUMENTATION.url}) 
             - **Inhalt:** Dokumentation der Digitaltauglichkeit, etwa durch die Nutzung der Prinzipien digitaltauglicher Gesetzgebung und von Visualisierungen
             - **Relevanz für den NKR:** Prüfung, inwieweit die Digitalisierung bei der Erarbeitung Ihres Vorhabens mitgedacht wird.
-          <br/>
           
           - Ihr Regelungsvorhaben
             - **Inhalt:** Regelungstext für die Ressortabstimmung
