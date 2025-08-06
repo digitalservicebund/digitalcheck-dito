@@ -3,54 +3,50 @@ import { expect, test } from "@playwright/test";
 import {
   ROUTE_A11Y,
   ROUTE_DOCUMENTATION,
+  ROUTE_EXAMPLES_PRINCIPLES,
+  ROUTE_FUNDAMENTALS,
   ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_IMPRINT,
   ROUTE_LANDING,
   ROUTE_METHODS,
-  ROUTE_METHODS_COLLECT_IT_SYSTEMS,
   ROUTE_PRECHECK,
   ROUTE_PRIVACY,
   ROUTES,
 } from "~/resources/staticRoutes";
 
-test.describe("test breadcrumbs and titles", () => {
-  ROUTES.forEach((route, i) => {
+test.describe("test page titles", () => {
+  ROUTES.forEach((route) => {
     if (route.url.endsWith(".pdf")) {
       return;
     }
-    if (
-      route.url === ROUTE_LANDING.url ||
-      route.url.startsWith(ROUTE_PRECHECK.url)
-    ) {
-      test(`${route.title} to not have breadcrumbs`, async ({ page }) => {
-        await page.goto(route.url);
-        await expect(page.getByTestId("breadcrumbs-menu")).toBeHidden();
-      });
-    } else {
-      test(`${route.title} (${i}) has breadcrumbs and title`, async ({
-        page,
-      }) => {
-        await page.goto(route.url);
-        await expect(page.getByTestId("breadcrumbs-menu")).toBeVisible();
-        await expect(page).toHaveTitle(/Digitalcheck$/);
-      });
-    }
-  });
-});
-
-test.describe("test meta titles", () => {
-  test("landing title is correct", async ({ page }) => {
-    await page.goto(ROUTE_LANDING.url);
-    await expect(page).toHaveTitle(
-      "Digitalcheck: Digitaltaugliche Regelungen erarbeiten",
-    );
-  });
-
-  test("principles title is correct", async ({ page }) => {
-    await page.goto(ROUTE_FUNDAMENTALS_PRINCIPLES.url);
-    await expect(page).toHaveTitle(
-      "Fünf Prinzipien (Grundlagen) — Digitalcheck",
-    );
+    test(`${route.url} has correct title`, async ({ page }) => {
+      await page.goto(route.url);
+      const titleSuffix = " — Digitalcheck";
+      if (
+        route.url !== ROUTE_LANDING.url &&
+        !route.url.startsWith(ROUTE_PRECHECK.url) &&
+        !route.url.startsWith(ROUTE_EXAMPLES_PRINCIPLES.url) &&
+        !route.url.startsWith(ROUTE_FUNDAMENTALS_PRINCIPLES.url) &&
+        !route.url.startsWith(ROUTE_FUNDAMENTALS.url)
+      ) {
+        await expect(page).toHaveTitle(`${route.title}${titleSuffix}`);
+      } else if (route.url.startsWith(ROUTE_PRECHECK.url)) {
+        await expect(page).toHaveTitle(
+          `${ROUTE_PRECHECK.title} — Digitalcheck`,
+        );
+      } else if (
+        route.url.startsWith(ROUTE_EXAMPLES_PRINCIPLES.url) &&
+        !route.url.endsWith(ROUTE_EXAMPLES_PRINCIPLES.url)
+      ) {
+        await expect(page).toHaveTitle(
+          `${ROUTE_EXAMPLES_PRINCIPLES.title} — Digitalcheck`,
+        );
+      } else if (route.url.startsWith(ROUTE_FUNDAMENTALS_PRINCIPLES.url)) {
+        await expect(page).toHaveTitle(
+          `${ROUTE_FUNDAMENTALS_PRINCIPLES.title} — Digitalcheck`,
+        );
+      }
+    });
   });
 
   test("error page title is correct", async ({ page }) => {
@@ -105,31 +101,6 @@ test.describe("test links", () => {
     });
   });
 
-  test("breadcrumb landing link works", async ({ page }) => {
-    await page.goto(ROUTE_PRIVACY.url);
-    await page
-      .getByLabel("navigation")
-      .getByRole("link", { name: "Startseite" })
-      .click();
-    await expect(page).toHaveURL(ROUTE_LANDING.url);
-    await page.goto(ROUTE_METHODS_COLLECT_IT_SYSTEMS.url);
-    await page
-      .getByLabel("navigation")
-      .getByRole("link", { name: "Startseite" })
-      .click();
-    await expect(page).toHaveURL(ROUTE_LANDING.url);
-  });
-
-  test("breadcrumb parent link works", async ({ page }) => {
-    // using label here as there is a sidebar with the same role
-    await page.goto(ROUTE_METHODS_COLLECT_IT_SYSTEMS.url);
-    await expect(
-      page.getByTestId("breadcrumbs-menu").getByRole("link"),
-    ).toHaveCount(2);
-    await page.getByTestId("breadcrumbs-menu").getByRole("link").last().click();
-    await expect(page).toHaveURL(ROUTE_METHODS.url);
-  });
-
   test("links in landing page work", async ({ page }) => {
     await page.goto(ROUTE_LANDING.url);
     await page.getByRole("link", { name: "Regelung erarbeiten" }).click();
@@ -163,11 +134,11 @@ test.describe("test progress bar", () => {
     });
   });
 
-  ROUTES.forEach((route, i) => {
+  ROUTES.forEach((route) => {
     if (routesWithProgressBar.includes(route)) {
       return;
     }
-    test(`${route.title} (${i}) has no progress bar`, async ({ page }) => {
+    test(`${route.url} has no progress bar`, async ({ page }) => {
       await page.goto(route.url);
       await expect(page.getByLabel("Digitalcheck-Fortschritt")).toBeHidden();
     });

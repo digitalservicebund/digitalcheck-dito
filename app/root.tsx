@@ -201,7 +201,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
       <body className="flex min-h-screen flex-col">
         <PHProvider posthogEnabled={posthogEnabled} posthogKey={posthogKey}>
           <ScrollAndFocus />
-          <PageHeader includeBreadcrumbs={!error} />
+          <PageHeader />
           {children}
           <Footer />
           <span

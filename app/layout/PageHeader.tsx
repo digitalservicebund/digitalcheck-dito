@@ -3,7 +3,6 @@ import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
 import { useEffect, useRef, useState } from "react";
 import { Link, type UIMatch, useLocation, useMatches } from "react-router";
 import { twJoin } from "tailwind-merge";
-import Breadcrumbs from "~/layout/Breadcrumbs.tsx";
 import DropdownMenu from "~/layout/DropdownMenu.tsx";
 import ProgressBar from "~/layout/ProgressBar";
 import { header } from "~/resources/content/shared/header.ts";
@@ -54,11 +53,7 @@ const getFeatureForMatches = (
       matchHasHandle(match) && feature in match.handle && match.handle[feature],
   );
 
-const PageHeader = ({
-  includeBreadcrumbs = true,
-}: {
-  includeBreadcrumbs?: boolean;
-}) => {
+const PageHeader = () => {
   const location = useLocation();
   const currentPath = location.pathname;
   const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
@@ -137,8 +132,6 @@ const PageHeader = ({
 
   const matches = useMatches();
   const showProgressBar = getFeatureForMatches(matches, "hasProgressBar");
-  const hideBreadcrumbs = getFeatureForMatches(matches, "hideBreadcrumbs");
-  const showBreadcrumbs = includeBreadcrumbs && !hideBreadcrumbs;
 
   return (
     <>
@@ -203,7 +196,6 @@ const PageHeader = ({
           {header.items.map((item) => renderDropdownItem(item, "mobile"))}
         </nav>
         {showProgressBar && <ProgressBar />}
-        {showBreadcrumbs && <Breadcrumbs />}
       </header>
     </>
   );

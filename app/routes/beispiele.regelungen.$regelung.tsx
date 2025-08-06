@@ -1,4 +1,4 @@
-import { useLoaderData, useOutletContext, type UIMatch } from "react-router";
+import { useLoaderData, useOutletContext } from "react-router";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import Container from "~/components/Container";
 import CustomLink from "~/components/CustomLink";
@@ -27,13 +27,6 @@ import type { Route } from "./+types/beispiele.regelungen.$regelung";
 export function meta() {
   return constructMetaTitle(ROUTE_REGELUNGEN.title);
 }
-
-export const handle = {
-  breadcrumb: (match: UIMatch) => ({
-    title: ROUTE_REGELUNGEN.title,
-    url: match.pathname,
-  }),
-};
 
 // prinzipCoreFields are being used in paragraphFields and so need to be included
 const GET_REGELUNGSVORHABENS_BY_SLUG_QUERY = `

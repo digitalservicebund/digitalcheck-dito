@@ -1,8 +1,6 @@
-// This file is needed for the breadcrumbs to work
 import { Outlet, useOutletContext } from "react-router";
 
 export const handle = {
-  hideBreadcrumbs: true, // disable breadcrumbs for all child routes
   hasProgressBar: true, // enable progress bar for all child routes
 };
 

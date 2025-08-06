@@ -9,7 +9,6 @@ export type Route = {
   title: string;
   parent?: Route;
   hideInSitemap?: boolean;
-  extraBreadcrumbTitle?: string;
 };
 
 // LANDING ROUTE AS ROOT
@@ -23,13 +22,11 @@ const createRoute = (
   title: string,
   parent?: Route,
   hideInSitemap?: boolean,
-  extraBreadcrumbTitle?: string,
 ): Route => ({
   url: `${removeTrailingSlash(parent?.url ?? "")}/${path}`,
   title,
   parent: parent ?? ROUTE_LANDING,
   hideInSitemap,
-  extraBreadcrumbTitle,
 });
 
 // BASIC ROUTES
@@ -135,28 +132,24 @@ export const ROUTE_EXAMPLES_DIGITAL_COMMUNICATION = createRoute(
   "Digitale Angebote",
   ROUTE_EXAMPLES_PRINCIPLES,
   true,
-  "Die Prinzipien im Regelungstext",
 );
 export const ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS = createRoute(
   "datenwiederverwendung-benoetigt-einheitliches-recht",
   "Datenwiederverwendung",
   ROUTE_EXAMPLES_PRINCIPLES,
   true,
-  "Die Prinzipien im Regelungstext",
 );
 export const ROUTE_EXAMPLES_ESTABLISHED_TECHNOLOGIES = createRoute(
   "etablierte-technologien-ermoeglichen-effiziente-umsetzung",
   "Etablierte Technologien",
   ROUTE_EXAMPLES_PRINCIPLES,
   true,
-  "Die Prinzipien im Regelungstext",
 );
 export const ROUTE_EXAMPLES_AUTOMATION = createRoute(
   "automatisierung-basiert-auf-eindeutigen-regelungen",
   "Automatisierung",
   ROUTE_EXAMPLES_PRINCIPLES,
   true,
-  "Die Prinzipien im Regelungstext",
 );
 export const ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY =
   createRoute(
@@ -164,7 +157,6 @@ export const ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY =
     "Datenschutz und Informationssicherheit",
     ROUTE_EXAMPLES_PRINCIPLES,
     true,
-    "Die Prinzipien im Regelungstext",
   );
 export const ROUTE_REGELUNGEN = createRoute(
   "regelungen",
@@ -176,7 +168,6 @@ export const ROUTE_EXAMPLES_VISUALISATIONS = createRoute(
   "Beispiele für Visualisierungen",
   ROUTE_EXAMPLES,
   false,
-  "Visualisierungen",
 );
 export const ROUTE_VISUALISATION = createRoute(
   "visualisierung",
@@ -192,7 +183,6 @@ export const ROUTE_FUNDAMENTALS_PRINCIPLES = createRoute(
   "Fünf Prinzipien (Grundlagen)",
   ROUTE_FUNDAMENTALS,
   false,
-  "Fünf Prinzipien",
 );
 
 export const ROUTE_FUNDAMENTALS_DIGITAL_READINESS = createRoute(

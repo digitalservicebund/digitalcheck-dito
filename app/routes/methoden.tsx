@@ -1,4 +1,3 @@
-// This file is needed for the breadcrumbs to work
 import { Outlet, useOutletContext } from "react-router";
 
 export const handle = {

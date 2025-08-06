@@ -5,14 +5,14 @@ import InlineNotice from "~/components/InlineNotice";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { ROUTE_PRECHECK, ROUTE_PRECHECK_INFO } from "~/resources/staticRoutes";
+import { ROUTE_PRECHECK } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
 
 const { questions, generalInfo } = preCheck;
 const { headline, text, nextButton, hint } = generalInfo;
 
 export function meta() {
-  return constructMetaTitle(ROUTE_PRECHECK_INFO.title);
+  return constructMetaTitle(ROUTE_PRECHECK.title);
 }
 
 export default function GeneralInfo() {

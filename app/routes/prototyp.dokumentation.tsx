@@ -1,12 +1,6 @@
-// This file is needed for the breadcrumbs to work
 import { Outlet, useOutletContext } from "react-router";
 import { features } from "~/resources/features";
 import useFeatureFlag from "~/utils/featureFlags";
-
-export const handle = {
-  hideBreadcrumbs: true, // disable breadcrumbs for all child routes
-  hasProgressBar: true, // enable progress bar for all child routes
-};
 
 export default function PrototypDokumentation() {
   const enableDocumentationPrototype = useFeatureFlag(
