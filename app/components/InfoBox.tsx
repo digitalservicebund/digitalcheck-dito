@@ -20,6 +20,7 @@ type BaseInfoBoxProps = {
   badge?: BadgeProps;
   heading?: HeadingProps;
   content?: string | Node[];
+  contentClassName?: string;
   detailsSummary?: {
     title?: HeadingProps;
     items: DetailsSummaryProps[];
@@ -52,6 +53,7 @@ const InfoBox = ({
   badge,
   heading,
   content,
+  contentClassName,
   detailsSummary,
   linkList,
   buttons,
@@ -97,9 +99,11 @@ const InfoBox = ({
         {heading && <Heading tagName="h3" {...heading} />}
         {content &&
           (typeof content === "string" ? (
-            <RichText markdown={content} />
+            <RichText markdown={content} className={contentClassName} />
           ) : (
-            <BlocksRenderer content={content} />
+            <div className={contentClassName}>
+              <BlocksRenderer content={content} />
+            </div>
           ))}
 
         {detailsSummary && (
