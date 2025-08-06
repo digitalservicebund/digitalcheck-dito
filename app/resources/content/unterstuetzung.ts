@@ -54,7 +54,11 @@ export const support = {
   },
   supportHow: {
     title: "Schnelle Hilfe und individuelle Beratung",
-    text: "Sie können uns für dringende Anliegen unter [0151/40 76 78 39](tel:+4915140767839) anrufen oder uns eine **E-Mail** senden. Wir beantworten Ihnen alle wichtigen Fragen zum Vorgehen und Anwenden des Digitalchecks sowie allgemeine Fragen rund um das Erarbeiten digitaltauglicher Regelungen.<br /><br /> Darüber hinaus bieten wir individuelle Beratungsgespräche an. Gemeinsam klären wir, welche Unterstützungsangebote am besten zu Ihrem Bedürfnissen passen.",
+    text: dedent`
+      Sie können uns für dringende Anliegen unter [0151/40 76 78 39](tel:+4915140767839) anrufen oder uns eine **E-Mail** senden. Wir beantworten Ihnen alle wichtigen Fragen zum Vorgehen und Anwenden des Digitalchecks sowie allgemeine Fragen rund um das Erarbeiten digitaltauglicher Regelungen.
+
+      Darüber hinaus bieten wir individuelle Beratungsgespräche an. Gemeinsam klären wir, welche Unterstützungsangebote am besten zu Ihren Bedürfnissen passen.
+    `,
     buttons: [
       {
         text: "E-Mail senden",
@@ -74,16 +78,15 @@ export const support = {
             title: "Digitalbezug einschätzen lassen",
             text: dedent`
               Wir unterstützen Sie, den Digitalbezug Ihres Verfahrens einzuschätzen, indem wir die Vorprüfung gemeinsam durchgehen. 
-              <br class="block content-[''] mb-32!" />
+
               Je nach Ziel Ihres Vorhabens und Grad des Digitalbezugs, variiert der Zeitaufwand, den Sie für die Erarbeitung digitaler Aspekte einplanen sollten. 
-              <br class="block content-[''] mb-32!" />
+
               **Beispiele für einen starken Digitalbezug: Prozess/Dienstleistung/Interaktion neu aufsetzen**
               
               z. B. bei folgenden Zielen einer Regelung:
               
               - Voraussetzungen für eine Digitalisierung schaffen
               - bestehenden Umsetzungsprozesse verbessern oder neu aufsetzen
-              <br class="block content-[''] mb-24!" />
               
               **Beispiele für einen leichten bis mittleren Digitalbezug: bestehenden Prozess anpassen**
               
@@ -116,9 +119,9 @@ export const support = {
             title: "IT-Wissen einfach erklärt",
             text: dedent`
               Im geschützten Rahmen eines Gesprächs beantworten unsere Expert:innen Ihnen alle **Fragen zur IT**. 
-              <br class="block content-[''] mb-32!" />
+
               Jede Frage ist berechtigt — jede verstandene Antwort wird die Regelung digitaltauglicher machen.  
-              <br class="block content-[''] mb-32!" />
+
               Beispiele für Fragen:
               
               - Was ist eine Schnittstelle?
@@ -154,9 +157,9 @@ export const support = {
             title: "Visualisierungen erstellen",
             text: dedent`
               Wir erstellen Visualisierungen für Sie oder digitalisieren Ihre Papier-und-Stift-Skizzen.
-              <br class="block content-[''] mb-32!" />
+
               Ein Bild sagt mehr als tausend Worte — genauso helfen Visualisierungen bei Abstimmungen im Haus, zwischen Ressorts oder mit dem NKR.
-              <br class="block content-[''] mb-32!" />
+
               Die Art der Visualisierung richtet sich nach Ihren Anforderungen:
               
               - **Antragsstrecke oder ein Datenfluss im Detail verstehen**, visualisiert als Flussdiagramm
@@ -197,7 +200,7 @@ export const support = {
             title: "Digitale Umsetzung erarbeiten",
             text: dedent`
               Wenn die technischen Anforderungen komplex werden, helfen wir als neutraler Akteur dabei, die **technische Umsetzung** im Detail zu durchdenken und Nutzerfreundlichkeit, Datenverwendung und IT-Sicherheit zu beachten. 
-              <br class="block content-[''] mb-32!" />
+
               Maßnahmen, die wir z. B. für Sie erledigen:
               
               - Durchführung von **Beteiligungsformaten mit umsetzenden Akteuren und Normadressaten**, z. B. moderierte Gespräche mit nachgelagerten Behörden
@@ -248,9 +251,9 @@ export const support = {
               "Regelungen digitaltauglich gestalten – praktische Tipps für den Digitalcheck",
             text: dedent`
               Fast alles, was wir heutzutage in der Verwaltung tun, hat einen Daten- oder Digitalbezug. Regelungsvorhaben sind daher die zentrale Voraussetzung für digitale Leistungen und Prozesse und schaffen die Grundlage für einen digitalen Staat.
-              <br class="block content-[''] mb-32!" />
+
               In dieser Online-Schulung erfahren Sie, wie Sie Regelungen so formulieren, dass Sie den **Digitalcheck erfolgreich bestehen**. Wir zeigen an **Beispielen**, wie Sie Ihre Regelungen digitaltauglich schreiben können. Anhand der fünf bewährten **Prinzipien für Digitaltauglichkeit** erläutern wir, wie Sie Begriffe und Konzepte wie Automatisierung und Standardisierung optimal nutzen, um Ihre Vorhaben fit für die digitale Zukunft zu machen.
-              <br class="block content-[''] mb-32!" />
+
               Das Angebot richtet sich an alle, die in den Bundesministerien Regelungen erarbeiten. Vorkenntnisse sind nicht erforderlich.
             `,
             button: {
@@ -275,7 +278,7 @@ Mit freundlichen Grüßen
                 title: "Nächste Termine",
                 text: dedent`
                   Wir planen bald neue Termine für Schulungen in 2025. Schreiben Sie uns eine E-Mail und wir setzen Sie auf die Warteliste.
-                  <br class="block content-[''] mb-32!" />
+
                   Sie können sich bis dahin das [Schulungsmaterial ansehen](https://github.com/digitalservicebund/digitalcheck-content/tree/main/src/online-schulungen).
                 `,
               },
@@ -285,9 +288,9 @@ Mit freundlichen Grüßen
             title: "Visualisierungen – Komplexes einfach darstellen",
             text: dedent`
               Digitaltaugliche Regelungen müssen von Beginn an aus der Umsetzungsperspektive gedacht werden. Visualisierungsmethoden bieten dafür wertvolle Unterstützung: Mit ihrer Hilfe lassen sich einzelne **Prozessschritte, Zielgruppen und beteiligte Akteure** darstellen. **Mögliche Hindernisse** für eine digitale Umsetzung werden sicht- und bearbeitbar.
-              <br class="block content-[''] mb-32!" />
+
               In unserer interaktiven Online-Schulung erfahren Sie, wie Sie Visualisierungen gezielt für Ihr Regelungsvorhaben nutzen können. Anhand konkreter Beispiele lernen Sie, **eigene Visualisierungen zu erstellen** und so komplexe Vorhaben klar und verständlich zu präsentieren.
-              <br class="block content-[''] mb-32!" />
+
               Das Angebot richtet sich an alle, die in den Bundesministerien Regelungen erarbeiten. Vorkenntnisse sind nicht erforderlich.
             `,
             button: {
@@ -312,7 +315,7 @@ Mit freundlichen Grüßen
                 title: "Nächste Termine",
                 text: dedent`
                   Wir planen bald neue Termine für Schulungen in 2025. Schreiben Sie uns eine E-Mail und wir setzen Sie auf die Warteliste.
-                  <br class="block content-[''] mb-32!" />
+
                   Sie können sich bis dahin das [Schulungsmaterial ansehen](https://github.com/digitalservicebund/digitalcheck-content/tree/main/src/online-schulungen).
                 `,
               },
@@ -327,7 +330,7 @@ Mit freundlichen Grüßen
     title: "Haben Sie Fragen zu EU-Anforderungen an Interoperabilität?",
     text: dedent`
       Weitere Informationen zu den EU-Anforderungen für Interoperabilität in der Regelung finden Sie in unserer [Übersicht](${ROUTE_INTEROPERABILITY.url}).
-      <br class="block content-[''] mb-32!" />
+
       Weitere Informationen zu Governance, Zusammenarbeit und Nutzung unserer Inhalte finden Sie unter [Nationale Kontaktstelle](${ROUTE_INTEROPERABILITY_SPOC.url}) für ein interoperables Europa.`,
   },
 };

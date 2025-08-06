@@ -15,7 +15,10 @@ export default function Index() {
       <Hero title={privacy.title} />
 
       <Container>
-        <RichText markdown={privacy.content} />
+        <RichText
+          markdown={privacy.content}
+          className="ds-stack-16 [&>h2]:mt-40 [&>h3]:mt-32"
+        />
       </Container>
     </>
   );

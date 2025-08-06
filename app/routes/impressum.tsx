@@ -15,7 +15,10 @@ export default function Index() {
       <Hero title={imprint.title} />
 
       <Container>
-        <RichText markdown={imprint.content} />
+        <RichText
+          markdown={imprint.content}
+          className="ds-stack-16 [&>h2]:mt-40 [&>h3]:mt-32"
+        />
       </Container>
     </>
   );

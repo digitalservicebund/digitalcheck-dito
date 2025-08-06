@@ -14,7 +14,6 @@ export const imprint = {
     Fax: [+49 30 18681-12926](tel:+49301868112926)<br />
     E-Mail: [poststelle@bmi.bund.de](mailto:poststelle@bmi.bund.de)<br />
     DE-Mail: [poststelle@bmi-bund.de-mail.de](mailto:poststelle@bmi-bund.de-mail.de)
-    <br class="block content-[''] mb-24!" />
     
     ### Weitere Kontaktmöglichkeiten
     
@@ -23,7 +22,6 @@ export const imprint = {
     Referat DV I 3 — Digitale Verwaltungstransformation; Digitalcheck<br />
     Verantwortlich: Dany Homilius (Referatsleiterin DV I 3)<br />
     E-Mail: [DVI3@bmi.bund.de](mailto:DVI3@bmi.bund.de) 
-    <br class="block content-[''] mb-24!" />
     
     ### Realisierung, Design, Hosting
     
@@ -33,12 +31,10 @@ export const imprint = {
     Prinzessinnenstraße 8-14<br />
     10969 Berlin<br />
     E-Mail: [hallo@digitalservice.bund.de](mailto:hallo@digitalservice.bund.de)
-    <br class="block content-[''] mb-24!" />
     
     ### Datenschutz
     
     Erfahren Sie mehr hierzu in der [Datenschutzerklärung](${ROUTE_PRIVACY.url})
-    <br class="block content-[''] mb-24!" />
     
     ### Barrierefreiheit
     

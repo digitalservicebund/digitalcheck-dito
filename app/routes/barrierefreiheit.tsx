@@ -15,7 +15,10 @@ export default function Accessibility() {
       <Hero title={accessibility.title} />
 
       <Container>
-        <RichText markdown={accessibility.content} />
+        <RichText
+          markdown={accessibility.content}
+          className="ds-stack-16 [&>h2]:mt-40 [&>h3]:mt-32"
+        />
       </Container>
     </>
   );

@@ -95,7 +95,7 @@ export const preCheckResult = {
     formLegend: "Ergebnis senden und NKR frühzeitig einbinden",
     instructions: dedent`
       Wir erstellen für Sie eine E-Mail mit dem Ergebnis der Vorprüfung, die sich in Ihrem E-Mail-Programm öffnet.
-      <br/>
+
       - Schicken Sie das Ergebnis an den Nationalen Normenkontrollrat (NKR).
       - **Bei Anforderungen an Interoperabilität** erhält das Digitalcheck-Team automatisch eine Kopie und meldet sich bei Ihnen.
     `,
