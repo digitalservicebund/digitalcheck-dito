@@ -1,11 +1,9 @@
 import {
   ROUTE_DOCUMENTATION,
-  ROUTE_EXAMPLES,
   ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_EXAMPLES_VISUALISATIONS,
   ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
   ROUTE_FUNDAMENTALS_NKR,
-  ROUTE_INTEROPERABILITY,
   ROUTE_METHODS,
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_TASKS_PROCESSES,
@@ -150,81 +148,5 @@ export const startseite = {
   quote: {
     text: "„Der Digitalcheck erscheint mit den Hilfestellungen unkomplizierter als gedacht.“",
     reference: "**Referentin**<br>aus einem Bundesministerium",
-  },
-
-  dataNotice: {
-    headline: "Ihre Arbeitsstände werden eine Woche lang gespeichert.",
-    content:
-      "Um in dieser Zeit zu Ihrem alten Arbeitsstand zurückzukehren, nutzen Sie bitte denselben Rechner und Browser.",
-  },
-  trainings: {
-    title: "Beispiele für Digitaltauglichkeit",
-    text: dedent`
-      Auf dieser Seite finden Sie Beispiele für digitaltaugliche Regelungsvorhaben. Lassen Sie sich inspirieren durch:
-      - die Umsetzung der 5 Prinzipien in Regelungstexten durch konkrete Formulierungen
-      - geeignete Visualisierungen einzelner Sachverhalte und ganzer Regelungsvorhaben`,
-    link: {
-      text: "Jetzt Beispiele entdecken",
-      href: ROUTE_EXAMPLES.url,
-      look: "link" as const,
-    },
-  },
-  interoperability: {
-    title: "EU-Vorgaben zur Interoperabilität in Regelungen",
-    text: "Seit Januar 2025 tritt die [Verordnung für ein interoperables Europa (EU 2024/903)](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903) in Kraft. Bestimmte Regelungsvorhaben müssen daher die EU-Anforderungen an Interoperabilität erfüllen. Ob und wie die Verordnung Ihr Vorhaben betrifft, erfahren Sie in unserer [Vorprüfung](/vorpruefung) und auf der Übersichtsseite zur Interoperabilität.",
-    link: {
-      text: "Übersicht zur Interoperabilität",
-      href: ROUTE_INTEROPERABILITY.url,
-      look: "link" as const,
-    },
-  },
-  summary: {
-    tabName: "Was ist Digitaltauglichkeit?",
-    plausibleEventName: "Tab+Bar+Digitaltauglichkeit",
-    title: "Zusammengefasst",
-    items: [
-      {
-        heading: {
-          text: "Was ist Digitaltauglichkeit?",
-        },
-        content: dedent`
-          Regelungen werden vermehrt digital umgesetzt. Beispiele sind eine Gesetzesänderung, mit der ein Papierantrag 
-          durch einen Online-Antrag ersetzt wird oder eine Verordnung, die Änderungen in den IT-Verfahren nachgelagerter 
-          Behörden erfordert.
-          <br class="block content-[''] mb-24!" />
-          Damit die digitale Umsetzung reibungslos klappt, muss die Regelung digitaltauglich gestaltet sein. Das heißt 
-          erstens, dass der digitalen Umsetzung nichts im Wege steht, wie zum Beispiel das persönliche Einreichen von 
-          Dokumenten. Zweitens soll aktiv gefördert werden, dass möglichst viele Schritte von Computern durchgeführt 
-          oder unterstützt werden.`,
-      },
-      {
-        heading: {
-          text: "Digitaltaugliche Regelungen sparen Ressourcen",
-        },
-        content:
-          "Eine gute digitale Umsetzung spart langfristig Zeit und sorgt dafür, dass Ziel und Wirkung des Vorhabens erreicht werden: aufseiten der Normadressatinnen und Normadressaten und aufseiten der Verwaltung.",
-      },
-      {
-        heading: {
-          text: "Alle Regelungsvorhaben sind betroffen",
-        },
-        content:
-          "Der Digitalcheck gilt für alle Regelungsvorhaben (Gesetze, Verordnungen und Verwaltungsvorschriften), sowohl für neue Vorhaben als auch für Änderungen an bestehenden Regelungen.",
-      },
-    ],
-  },
-  principles: {
-    title: "5 Prinzipien für digitaltaugliche Gesetzgebung",
-    content: [
-      "Prinzip 1: Digitale Kommunikation sicherstellen",
-      "Prinzip 2: Wiederverwendung von Daten und Standards ermöglichen",
-      "Prinzip 3: Datenschutz und Informationssicherheit gewährleisten",
-      "Prinzip 4: Klare Regelungen für eine digitale Ausführung finden",
-      "Prinzip 5: Automatisierung ermöglichen",
-    ],
-    link: {
-      text: "Details und Beispiele",
-      href: ROUTE_METHODS_PRINCIPLES.url,
-    },
   },
 };
