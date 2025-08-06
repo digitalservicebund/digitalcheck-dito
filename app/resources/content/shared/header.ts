@@ -89,7 +89,7 @@ export const header = {
         },
         {
           plausibleEventName: "Link+Interoperabilität",
-          title: "EU Interoperabilität",
+          title: "EU-Interoperabilität",
           isNewTitle: true,
           content:
             "Verstehen Sie, was es mit EU Interoperabilität auf sich hat.",
