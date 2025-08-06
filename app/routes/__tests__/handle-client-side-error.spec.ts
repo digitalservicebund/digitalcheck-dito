@@ -21,7 +21,7 @@ describe("endpoint to handle client-side errors", () => {
     });
 
     await action({
-      context: undefined,
+      context: {},
       params: {},
       request,
     });
@@ -43,7 +43,7 @@ describe("endpoint to handle client-side errors", () => {
     });
 
     await action({
-      context: undefined,
+      context: {},
       params: {},
       request,
     });
@@ -68,11 +68,11 @@ describe("endpoint to handle client-side errors", () => {
       },
     });
 
-    const response = (await action({
-      context: undefined,
+    const response = await action({
+      context: {},
       params: {},
       request,
-    })) as Response;
+    });
 
     expect(response.status).toBe(204);
     expect(await response.text()).toBe(""); // No Content
@@ -89,11 +89,11 @@ describe("endpoint to handle client-side errors", () => {
       },
     });
 
-    const response = (await action({
-      context: undefined,
+    const response = await action({
+      context: {},
       params: {},
       request,
-    })) as Response;
+    });
 
     expect(response.status).toBe(400);
     expect(await response.text()).toBe("Invalid request");

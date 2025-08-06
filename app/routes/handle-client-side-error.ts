@@ -1,5 +1,5 @@
-import { ActionFunction } from "react-router";
 import { z } from "zod";
+import type { Route } from "./+types/handle-client-side-error";
 
 const ClientSideErrorSchema = z.object({
   message: z.string(),
@@ -29,5 +29,5 @@ const handleClientSideError = async (request: Request): Promise<Response> => {
   }
 };
 
-export const action: ActionFunction = async ({ request }) =>
+export const action = async ({ request }: Route.ActionArgs) =>
   handleClientSideError(request);
