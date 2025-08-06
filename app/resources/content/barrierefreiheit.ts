@@ -17,7 +17,6 @@ export const accessibility = {
     
     - Externe Links können nicht immer barrierefrei angeboten werden, da sie auf Inhalte oder Ressourcen außerhalb des aktuellen Angebots verweisen, auf die wir keinen direkten Einfluss haben.
     - Anderssprachige Abschnitte und Wörter sind nicht immer technisch als solche gekennzeichnet, was zu unverständlicher Aussprache in Vorlese-Software führen kann.
-    - An einzelnen Stellen wird ein \`<br/>\` benutzt, diese werden noch entfernt.
     
     ## Barriere melden! Hinweise zur Barrierefreiheit
     

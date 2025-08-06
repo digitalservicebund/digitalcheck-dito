@@ -10,10 +10,9 @@ export const spoc = {
   content: dedent`
     Digitale Verwaltung europaweit ohne Grenzen: Die europäische Interoperabilitätsverordnung 
     und der Digitalcheck sind die Grundlage. 
-    <br/><br/>
-    Sie befinden sich auf der Informationsseite der 
-    deutschen nationalen Kontaktstelle (2024/903 Art. 17). Gemeinsam mit der deutschen Verwaltung setzen wir 
-    die europäische Interoperabilitätsverordnung 2024/903 um, für vernetzte, bürgernahe, digitale und effiziente Verwaltungsleistungen.
+
+    Sie befinden sich auf der Informationsseite der deutschen nationalen Kontaktstelle (2024/903 Art. 17).
+    Gemeinsam mit der deutschen Verwaltung setzen wir die europäische Interoperabilitätsverordnung 2024/903 um, für vernetzte, bürgernahe, digitale und effiziente Verwaltungsleistungen.
   `,
   landscape: {
     id: "landschaft",
@@ -22,9 +21,9 @@ export const spoc = {
     content: dedent`
       Seit Anfang 2025 muss die Verordnung für ein interoperables Europa ([2024/903](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903)) in den EU Mitgliedstaaten verpflichtend umgesetzt werden.
       Damit sind alle öffentlichen Einrichtungen in Europa, also EU-Institutionen, ihre Mitgliedstaaten und auch deren Bundesländer und Kommunen, verpflichtet Interoperabilitätsbewertungen durchzuführen. 
-      <br/><br/>
+
       Diese Bewertungen sind erforderlich, bevor neue oder geänderte verbindliche Anforderungen beschlossen werden, um einen nahtlosen Datenaustausch zwischen Behörden sicherzustellen und den grenzüberschreitenden Zugang zu digitalen Verwaltungsleistungen in der EU zu ermöglichen.
-      <br/><br/>
+
       In Deutschland bettet sich diese Anforderung in die föderale Zusammenarbeit wie folgt ein:
     `,
     image: {
@@ -207,14 +206,14 @@ export const spoc = {
           "Sie sind an der Nachnutzung, Zusammenarbeit oder Kooperation mit dem Digitalcheck interessiert?",
         content: dedent`
           Wir begleiten Sie gerne bei der konkreten Umsetzung – mit Wissen, Praxiserfahrung aus anderen Regelungsvorhaben und konkreten Ideen zur Gestaltung in Ihrem Anwendungsfall.
-          <br/><br/>
+
           **Rufen Sie uns an:** 0151 4076 7839  
           Schreiben Sie uns - egal ob Legist oder Institution:  
           interoperabel@digitalservice.bund.de
-          <br/><br/>
+
           Weitere Online-Angebote des Digitalcheck für Legist:innen:  
           [https://erarbeiten.digitalcheck.bund.de/](${ROUTE_LANDING.url})
-          <br/><br/>
+
           Für weitere Inhalte zur Interoperabilität:  
           [https://erarbeiten.digitalcheck.bund.de/interoperabel/](${ROUTE_INTEROPERABILITY.url})
         `,

@@ -35,7 +35,10 @@ export default function SPOC() {
             text={spoc.landscape.headline}
             className="mb-8"
           />
-          <RichText markdown={spoc.landscape.content} className="mb-40" />
+          <RichText
+            markdown={spoc.landscape.content}
+            className="ds-stack-24 mb-40"
+          />
           <ImageZoomable image={spoc.landscape.image} />
           <RichText
             className="mt-16 mb-32"
@@ -105,7 +108,7 @@ export default function SPOC() {
                 text={section.headline}
                 className="mt-32 mb-8"
               />
-              <RichText markdown={section.content} />
+              <RichText markdown={section.content} className="ds-stack-24" />
             </div>
           ))}
         </>
@@ -115,8 +118,9 @@ export default function SPOC() {
 
   return (
     <>
-      <Hero title={spoc.headline} subtitle={spoc.content} />
-
+      <Hero title={spoc.headline}>
+        <RichText markdown={spoc.content} className="ds-subhead ds-stack-24" />
+      </Hero>
       <Container>
         <Tabs tabs={tabsData} />
       </Container>

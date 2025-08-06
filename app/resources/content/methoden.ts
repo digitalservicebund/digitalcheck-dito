@@ -10,7 +10,7 @@ import { dedent } from "~/utils/dedentMultilineStrings";
 export const methods = {
   title: "Erarbeiten eines digitaltauglichen Regelungsvorhabens",
   subtitle: dedent`
-    Hier finden Sie passende Methoden und Werkzeuge, um Digitaltauglichkeit in Ihrer Regelung sicherzustellen. 
+    Hier finden Sie passende Methoden und Werkzeuge, um Digitaltauglichkeit in Ihrer Regelung sicherzustellen.
 
     Gehen Sie am besten in der vorgeschlagenen Reihenfolge vor.
   `,
