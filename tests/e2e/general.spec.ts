@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 import {
+  type Route,
   ROUTE_A11Y,
   ROUTE_DOCUMENTATION,
   ROUTE_EXAMPLES_PRINCIPLES,
@@ -15,37 +16,33 @@ import {
 } from "~/resources/staticRoutes";
 
 test.describe("test page titles", () => {
-  ROUTES.forEach((route) => {
-    if (route.url.endsWith(".pdf")) {
-      return;
-    }
-    test(`${route.url} has correct title`, async ({ page }) => {
-      await page.goto(route.url);
+  ROUTES.filter((route) => !route.url.endsWith(".pdf")).forEach((route) => {
+    function getExpectedTitle(route: Route) {
       const titleSuffix = " — Digitalcheck";
+
+      if (route.url === ROUTE_LANDING.url)
+        return "Digitalcheck: Digitaltaugliche Regelungen erarbeiten";
+      if (route.url.startsWith(ROUTE_PRECHECK.url))
+        // All pages in the pre-check flow have the same page title
+        return `${ROUTE_PRECHECK.title}${titleSuffix}`;
       if (
-        route.url !== ROUTE_LANDING.url &&
-        !route.url.startsWith(ROUTE_PRECHECK.url) &&
-        !route.url.startsWith(ROUTE_EXAMPLES_PRINCIPLES.url) &&
-        !route.url.startsWith(ROUTE_FUNDAMENTALS_PRINCIPLES.url) &&
-        !route.url.startsWith(ROUTE_FUNDAMENTALS.url)
-      ) {
-        await expect(page).toHaveTitle(`${route.title}${titleSuffix}`);
-      } else if (route.url.startsWith(ROUTE_PRECHECK.url)) {
-        await expect(page).toHaveTitle(
-          `${ROUTE_PRECHECK.title} — Digitalcheck`,
-        );
-      } else if (
         route.url.startsWith(ROUTE_EXAMPLES_PRINCIPLES.url) &&
         !route.url.endsWith(ROUTE_EXAMPLES_PRINCIPLES.url)
       ) {
-        await expect(page).toHaveTitle(
-          `${ROUTE_EXAMPLES_PRINCIPLES.title} — Digitalcheck`,
-        );
-      } else if (route.url.startsWith(ROUTE_FUNDAMENTALS_PRINCIPLES.url)) {
-        await expect(page).toHaveTitle(
-          `${ROUTE_FUNDAMENTALS_PRINCIPLES.title} — Digitalcheck`,
-        );
+        // All tabs (and their routes) on the principle example pages have the same page title
+        return `${ROUTE_EXAMPLES_PRINCIPLES.title}${titleSuffix}`;
       }
+      if (route.url === ROUTE_FUNDAMENTALS.url) {
+        // this page does not exist and redirects to the sub-page
+        return `${ROUTE_FUNDAMENTALS_PRINCIPLES.title}${titleSuffix}`;
+      }
+
+      return `${route.title}${titleSuffix}`;
+    }
+
+    test(`${route.url} has correct title`, async ({ page }) => {
+      await page.goto(route.url);
+      await expect(page).toHaveTitle(getExpectedTitle(route));
     });
   });
 
