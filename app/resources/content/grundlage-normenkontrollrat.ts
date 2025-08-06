@@ -53,6 +53,11 @@ export const fundamentalsNKR = {
           - [Dokumentation der Digitaltauglichkeit](${ROUTE_DOCUMENTATION.url}) 
             - **Inhalt:** Dokumentation der Digitaltauglichkeit, etwa durch die Nutzung der Prinzipien digitaltauglicher Gesetzgebung und von Visualisierungen
             - **Relevanz für den NKR:** Prüfung, inwieweit die Digitalisierung bei der Erarbeitung Ihres Vorhabens mitgedacht wird.
+          <br/>
+          
+          - Ihr Regelungsvorhaben
+            - **Inhalt:** Regelungstext für die Ressortabstimmung
+            - **Relevanz für den NKR:** Prüfung der Vorhaben auf digitale Umsetzbarkeit und Erfüllungsaufwand
         `,
         visual: {
           Icon: FactCheckOutlined,
