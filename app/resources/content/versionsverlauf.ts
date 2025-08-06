@@ -9,7 +9,7 @@ export const versionHistory = {
       headline: {
         text: "V1.5.1",
       },
-      label: {
+      badge: {
         text: "31.07.2025",
       },
       content: dedent`
@@ -25,7 +25,7 @@ export const versionHistory = {
       headline: {
         text: "Beispiele-Seite wieder online",
       },
-      label: {
+      badge: {
         text: "12.06.2025",
       },
       content:
@@ -35,7 +35,7 @@ export const versionHistory = {
       headline: {
         text: "V1.5",
       },
-      label: {
+      badge: {
         text: "02.06.2025",
       },
       content: dedent`
@@ -60,7 +60,7 @@ export const versionHistory = {
       headline: {
         text: "V1.4",
       },
-      label: {
+      badge: {
         text: "10.01.2025",
       },
       content: dedent`
@@ -80,7 +80,7 @@ export const versionHistory = {
       headline: {
         text: "V1.3",
       },
-      label: {
+      badge: {
         text: "21.05.2024",
       },
       content: dedent`
@@ -93,7 +93,7 @@ export const versionHistory = {
       headline: {
         text: "V1.2",
       },
-      label: {
+      badge: {
         text: "30.06.2023",
       },
       content: dedent`
@@ -109,7 +109,7 @@ export const versionHistory = {
       headline: {
         text: "V1.1",
       },
-      label: {
+      badge: {
         text: "27.01.2023",
       },
       content: dedent`
@@ -122,7 +122,7 @@ export const versionHistory = {
       headline: {
         text: "V1.0",
       },
-      label: {
+      badge: {
         text: "27.12.2022",
       },
       content: dedent`
@@ -134,7 +134,7 @@ export const versionHistory = {
       headline: {
         text: "V0.9",
       },
-      label: {
+      badge: {
         text: "18.11.2022",
       },
       content: dedent`

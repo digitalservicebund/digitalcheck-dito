@@ -2,7 +2,7 @@ import { twJoin } from "tailwind-merge";
 import type { ImageProps } from "~/components/Image";
 import ImageZoomable from "~/components/ImageZoomable";
 import twMerge from "~/utils/tailwindMerge";
-import Badge from "./Badge";
+import Badge, { type BadgeProps } from "./Badge";
 import { type ButtonProps } from "./Button";
 import ButtonContainer from "./ButtonContainer";
 import Heading, { type HeadingProps } from "./Heading";
@@ -10,7 +10,7 @@ import RichText from "./RichText";
 
 export type ListItemProps = {
   identifier?: string;
-  label?: HeadingProps;
+  badge?: BadgeProps;
   headline?: HeadingProps;
   spacer?: boolean | HeadingProps;
   content?: string;
@@ -26,7 +26,7 @@ export type ListItemProps = {
 
 const ListItem = ({
   identifier,
-  label,
+  badge,
   headline,
   spacer,
   content,
@@ -100,9 +100,7 @@ const ListItem = ({
           </div>
           <div className={twJoin(backgroundColorClass && "w-full rounded-lg")}>
             <div className={twJoin("flex flex-col gap-16", backgroundClasses)}>
-              {label && (
-                <Badge look="hint">{label.children ?? label.text}</Badge>
-              )}
+              {badge && <Badge look="gray" {...badge} />}
               {headline && (
                 <Heading
                   tagName={parentHasHeading ? "h3" : "h2"}

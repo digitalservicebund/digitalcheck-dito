@@ -95,7 +95,7 @@ export const spoc = {
         headline: {
           text: "Methoden für Digitaltauglichkeit und Interoperabilität",
         },
-        label: {
+        badge: {
           text: "Aktuell",
         },
         content: dedent`
@@ -111,7 +111,7 @@ export const spoc = {
         headline: {
           text: "Über 100 Teilnehmende in acht online Workshops",
         },
-        label: {
+        badge: {
           text: "03.07.2025",
         },
         content: dedent`
@@ -122,7 +122,7 @@ export const spoc = {
         headline: {
           text: "Integration in die Abläufe des IT-Planungsrats",
         },
-        label: {
+        badge: {
           text: "25.06.2025",
         },
         content: dedent`
@@ -138,7 +138,7 @@ export const spoc = {
         headline: {
           text: "Die 5 Prinzipien für digitaltaugliche Regelungen sind überarbeitet",
         },
-        label: {
+        badge: {
           text: "15.05.2025",
         },
         content: dedent`
@@ -149,7 +149,7 @@ export const spoc = {
         headline: {
           text: "Verordnung tritt in Kraft und erste Änderungen sind im Digitalcheck umgesetzt:",
         },
-        label: {
+        badge: {
           text: "10.01.2025",
         },
         content: dedent`
@@ -164,7 +164,7 @@ export const spoc = {
         headline: {
           text: "Verordnung für ein interoperables Europa wird vom europäischen Parlament verabschiedet",
         },
-        label: {
+        badge: {
           text: "13.03.2024",
         },
       },

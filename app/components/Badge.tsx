@@ -9,7 +9,7 @@ export type BadgeProps = {
   children?: ReactNode;
   className?: string;
   principleNumber?: PrincipleNumber;
-  look?: "hint" | "default";
+  look?: "hint" | "gray" | "default";
   Icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 };
 
@@ -26,10 +26,17 @@ function Badge({
   const principleStyle = principleNumber
     ? HIGHLIGHT_COLORS[principleNumber].background
     : "";
-  const hintStyle = look === "hint" ? "bg-blue-300 text-blue-800" : "";
 
   return (
-    <mark className={twMerge(badgeStyle, principleStyle, hintStyle, className)}>
+    <mark
+      className={twMerge(
+        badgeStyle,
+        principleStyle,
+        look === "hint" && "bg-blue-300 text-blue-800",
+        look === "gray" && "bg-gray-300",
+        className,
+      )}
+    >
       {Icon && <Icon className="size-16 fill-gray-800" />}
       {children ?? text}
     </mark>

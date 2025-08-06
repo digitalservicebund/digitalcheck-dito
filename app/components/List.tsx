@@ -13,8 +13,8 @@ type BaseListProps = {
 function getKey(item: ListItemProps, index: number) {
   return (
     item.identifier ??
-    (typeof item.label?.text === "string"
-      ? item.label.text
+    (typeof item.badge?.text === "string"
+      ? item.badge.text
       : index.toString()) ??
     (typeof item.headline?.text === "string"
       ? item.headline.text
