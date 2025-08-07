@@ -128,9 +128,7 @@ function PrincipleExplanation({
         )}
       </div>
       <p className="ds-label-03-reg text-gray-900">
-        (
-        {`${examples.principleExplanation.principle}: ${erfuellung.Prinzip.Name}`}
-        )
+        {`(${examples.principleExplanation.principle}: ${erfuellung.Prinzip.Name})`}
       </p>
     </div>
   );
