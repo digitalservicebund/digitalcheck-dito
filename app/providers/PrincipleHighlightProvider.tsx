@@ -1,17 +1,18 @@
 import { createContext, ReactNode, useState } from "react";
 import { Prinzip } from "~/utils/strapiData.server";
+import { Optional } from "~/utils/utilityTypes";
 
-type Highlight = {
-  id: string;
-  principleNumber: number;
-};
+export type PartialPrinzip = Optional<
+  Prinzip,
+  "GuteUmsetzungen" | "Kurzbezeichnung" | "URLBezeichnung" | "documentId"
+>;
 
 type PrincipleHighlightContextType = {
-  principlesToShow: Prinzip[];
-  activeHighlight: Highlight | null;
-  setActiveHighlight: React.Dispatch<React.SetStateAction<Highlight | null>>;
-  explanationIdPrefix: string | null;
+  principlesToShow: PartialPrinzip[];
+  activeHighlight: string | null;
+  setActiveHighlight: React.Dispatch<React.SetStateAction<string | null>>;
   useAnchorLinks: boolean;
+  absatzId: string;
 };
 
 export const PrincipleHighlightContext =
@@ -19,15 +20,15 @@ export const PrincipleHighlightContext =
     principlesToShow: [],
     activeHighlight: null,
     setActiveHighlight: () => {},
-    explanationIdPrefix: null,
     useAnchorLinks: true,
+    absatzId: "",
   });
 
 type PrincipleHighlightProviderProps = {
   children: ReactNode;
-  principlesToShow: Prinzip[];
-  absatzId: number;
+  principlesToShow: PartialPrinzip[];
   useAnchorLinks: boolean;
+  absatzId: string;
 };
 
 export function PrincipleHighlightProvider({
@@ -36,21 +37,17 @@ export function PrincipleHighlightProvider({
   principlesToShow,
   useAnchorLinks = true,
 }: Readonly<PrincipleHighlightProviderProps>) {
-  const explanationIdPrefix = `erklaerung-${absatzId}`;
-
   // This ID is used to track which highlight was clicked on to provide a back link
-  const [activeHighlight, setActiveHighlight] = useState<Highlight | null>(
-    null,
-  );
+  const [activeHighlight, setActiveHighlight] = useState<string | null>(null);
 
   return (
     <PrincipleHighlightContext.Provider
       value={{
-        explanationIdPrefix,
         principlesToShow,
         activeHighlight,
         setActiveHighlight,
         useAnchorLinks,
+        absatzId,
       }}
     >
       {children}

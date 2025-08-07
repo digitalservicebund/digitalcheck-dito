@@ -1,79 +1,89 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
-import { PrincipleHighlightContext } from "~/providers/PrincipleHighlightProvider";
-import { HIGHLIGHT_COLORS } from "~/resources/constants";
+import { useIsMobileSize } from "~/hooks/deviceHook";
+import {
+  PartialPrinzip,
+  PrincipleHighlightContext,
+} from "~/providers/PrincipleHighlightProvider";
+import { PRINCIPLE_COLORS } from "~/resources/constants";
 import { explanationID, Node } from "~/utils/paragraphUtils";
 
 export default function PrincipleHighlightModifier({ node }: { node: Node }) {
-  const {
-    principlesToShow,
-    setActiveHighlight,
-    explanationIdPrefix,
-    useAnchorLinks,
-  } = useContext(PrincipleHighlightContext);
+  const { principlesToShow, setActiveHighlight, absatzId, useAnchorLinks } =
+    useContext(PrincipleHighlightContext);
 
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768); // Breakpoint md
-
-    window.addEventListener("resize", handleResize);
-    handleResize();
-
-    return () => removeEventListener("resize", handleResize);
-  }, []);
+  const isMobileSize = useIsMobileSize();
 
   const [text, numberGroup] = node.text ? node.text.split(/(\[\d])/g) : [];
-  if (!numberGroup || !explanationIdPrefix) return text;
+  if (!numberGroup) return text;
 
-  const principleNumber = Number(
-    numberGroup[1],
-  ) as keyof typeof HIGHLIGHT_COLORS;
-  if (!principlesToShow.some(({ Nummer }) => Nummer === principleNumber))
-    return text;
-  const principleName = principlesToShow.find(
-    ({ Nummer }) => Nummer === principleNumber,
-  )?.Name;
+  const principle = principlesToShow.find(
+    ({ Nummer }) => Nummer === Number(numberGroup[1]),
+  );
+
+  if (!principle) return text;
 
   // Generate a deterministic ID based on the text content and position
-  const textHash = text.split("").reduce((hash, char) => {
+  const highlightID = `highlight-${text.split("").reduce((hash, char) => {
     return hash + char.charCodeAt(0);
-  }, 0);
-  const highlightID = `markierung-${textHash}`;
+  }, 0)}`;
 
-  if (!useAnchorLinks || !isMobile)
+  if (!useAnchorLinks || !isMobileSize || !absatzId)
     return (
-      <mark
-        className={twJoin(
-          "ds-body-01-reg",
-          HIGHLIGHT_COLORS[principleNumber].background,
-        )}
+      <PrincipleHighlight
+        id={highlightID}
+        principle={principle}
+        absatzId={absatzId}
       >
         {text}
-      </mark>
+      </PrincipleHighlight>
     );
 
   return (
     <Link
       replace
-      to={`#${explanationID(explanationIdPrefix, principleNumber)}`}
+      to={`#${explanationID(absatzId, principle.Nummer)}`}
       onClick={() => {
-        setActiveHighlight({ id: highlightID, principleNumber });
+        setActiveHighlight(highlightID);
       }}
-      aria-label={`Erfüllt Prinzip ${principleName}: ${text}`}
-      title={`Erfüllt Prinzip ${principleName}`}
       className="cursor-help no-underline hover:underline"
     >
-      <mark
+      <PrincipleHighlight
         id={highlightID}
-        className={twJoin(
-          "ds-body-01-reg",
-          HIGHLIGHT_COLORS[principleNumber].background,
-        )}
+        principle={principle}
+        absatzId={absatzId}
       >
         {text}
-      </mark>
+      </PrincipleHighlight>
     </Link>
+  );
+}
+
+type PrincipleHighlightProps = {
+  id: string;
+  children: string;
+  principle: PartialPrinzip;
+  absatzId: string;
+};
+
+function PrincipleHighlight({
+  id,
+  children,
+  principle,
+  absatzId,
+}: Readonly<PrincipleHighlightProps>) {
+  return (
+    <mark
+      id={id}
+      className={twJoin(
+        "ds-body-01-reg",
+        PRINCIPLE_COLORS[principle.Nummer].background,
+      )}
+      aria-label={`Textbeispiel erfüllt Prinzip: ${principle.Name}`}
+      aria-details={absatzId && explanationID(absatzId, principle.Nummer)}
+    >
+      {children}
+    </mark>
   );
 }
