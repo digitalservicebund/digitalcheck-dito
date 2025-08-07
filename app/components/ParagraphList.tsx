@@ -143,15 +143,18 @@ function Paragraph({
   // renders the interlaced Absaetze with relevant PrinzipErfuellungen and grouped Absaetze without relevant PrinzipErfuellungen
   return (
     <div key={paragraph.Nummer} className="space-y-24 md:space-y-32">
-      <Heading
-        tagName="h3"
-        text={`§ ${paragraph.Nummer} ${paragraph.Gesetz}`}
-        look="ds-subhead"
-        className="font-bold"
-      />
-      {paragraph.Titel && (
-        <p className="ds-subhead font-bold">{paragraph.Titel}</p>
-      )}
+      <Heading tagName="h3" look="ds-subhead" className="font-bold">
+        {`§ ${paragraph.Nummer} ${paragraph.Gesetz}`}
+        {paragraph.Titel && (
+          <>
+            {" "}
+            <span className="ds-subhead block font-bold">
+              {paragraph.Titel}
+            </span>
+          </>
+        )}
+      </Heading>
+
       <div className="space-y-24 md:space-y-32">
         {groupedAbsaetze.map((absatzOrAbsatzGroup) => {
           const isAbsatzGroupWithoutErfuellungen =

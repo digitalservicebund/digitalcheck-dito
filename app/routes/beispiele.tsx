@@ -27,7 +27,7 @@ export default function Digitaltauglichkeit() {
   return (
     <>
       <Outlet context={useLoaderData<typeof loader>()} />
-      <Container className="bg-ds-yellow mt-40 mb-80" overhangingBackground>
+      <Container className="mt-40 mb-80 bg-blue-100" overhangingBackground>
         <Box
           heading={{
             text: examplesRegelungen.yourExample.title,

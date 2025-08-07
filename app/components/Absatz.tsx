@@ -110,7 +110,10 @@ function PrincipleExplanation({
       aria-description="Beispielerklärung"
     >
       <div className="flex content-center gap-8">
-        <BlocksRenderer content={erfuellung.WarumGut} />
+        <BlocksRenderer
+          className="ds-label-02-reg"
+          content={erfuellung.WarumGut}
+        />
         {shouldHighlight && activeHighlight && (
           <Link
             to={`#${activeHighlight}`}
@@ -123,7 +126,7 @@ function PrincipleExplanation({
           </Link>
         )}
       </div>
-      <p className="text-gray-900">
+      <p className="ds-label-03-reg text-gray-900">
         (
         {`${examples.principleExplanation.principle}: ${erfuellung.Prinzip.Name}`}
         )
