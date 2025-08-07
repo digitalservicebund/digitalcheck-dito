@@ -46,7 +46,7 @@ export const startseite = {
         link: {
           text: "Regelung erarbeiten",
           href: ROUTE_METHODS.url,
-          look: "link" as const,
+          look: "tertiary" as const,
         },
         description:
           "Bei einer positiven Vorprüfung wenden Sie die Werkzeuge und Methoden an, die die Digitaltauglichkeit Ihres Vorhabens sicherstellen.",
@@ -60,9 +60,9 @@ export const startseite = {
         number: 3,
         title: "Dokumentieren der Digitaltauglichkeit",
         link: {
-          text: "Digitaltauglichkeit dokumentieren",
+          text: "Dokumentation erstellen",
           href: ROUTE_DOCUMENTATION.url,
-          look: "link" as const,
+          look: "tertiary" as const,
         },
         description:
           "Sie dokumentieren, wie Sie Digitaltauglichkeit in Ihrer Regelung sichergestellt haben.",

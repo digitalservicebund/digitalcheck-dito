@@ -158,7 +158,7 @@ stellen damit Digitaltauglichkeit sicher.
             class="mt-40 self-center"
           >
             <a
-              class="text-link inline-flex items-center"
+              class="ds-button ds-button-tertiary"
               data-discover="true"
               href="/methoden"
             >
@@ -257,7 +257,7 @@ stellen damit Digitaltauglichkeit sicher.
             class="mt-40 self-center"
           >
             <a
-              class="text-link inline-flex items-center"
+              class="ds-button ds-button-tertiary"
               data-discover="true"
               href="/dokumentation"
             >
@@ -265,7 +265,7 @@ stellen damit Digitaltauglichkeit sicher.
               <span
                 class="ds-button-label"
               >
-                Digitaltauglichkeit dokumentieren
+                Dokumentation erstellen
               </span>
                
             </a>
