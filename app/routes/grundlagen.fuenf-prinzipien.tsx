@@ -1,10 +1,10 @@
-import { PrincipleNumber } from "~/components/Badge";
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import { PrinciplePosterBox } from "~/components/PrinciplePosterBox";
 import SupportBanner from "~/components/SupportBanner";
 import TableOfContents from "~/components/TableOfContents";
+import { PrinzipNummer } from "~/resources/constants";
 import {
   getDetailsSummary,
   methodsFivePrinciples,
@@ -51,7 +51,7 @@ export default function FundamentalsFivePrinciples() {
             }}
             badge={{
               children: principle.label,
-              principleNumber: principle.principleNumber as PrincipleNumber,
+              principleNumber: principle.principleNumber as PrinzipNummer,
             }}
             content={principle.content}
             detailsSummary={getDetailsSummary(principle.detailsSummary)}
