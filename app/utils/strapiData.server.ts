@@ -1,5 +1,6 @@
 import crypto from "crypto";
 import NodeCache from "node-cache";
+import { PrinzipNummer } from "~/resources/constants";
 import { type Node } from "~/utils/paragraphUtils";
 
 const url =
@@ -62,7 +63,7 @@ export type Prinzip = {
   documentId: string;
   Name: string;
   Beschreibung: Node[];
-  Nummer: 1 | 2 | 3 | 4 | 5;
+  Nummer: PrinzipNummer;
   GuteUmsetzungen: Digitalcheck[];
   URLBezeichnung: string;
   Kurzbezeichnung: string;

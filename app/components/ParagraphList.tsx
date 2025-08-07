@@ -1,7 +1,14 @@
 import Heading from "~/components/Heading";
-import { groupAbsaetzeWithoutRelevantPrinciples } from "~/utils/paragraphUtils";
+import {
+  AbsatzWithNumber,
+  groupAbsaetzeWithoutRelevantPrinciples,
+  prependNumberToAbsatz,
+} from "~/utils/paragraphUtils";
 import type { Paragraph, Prinzip } from "~/utils/strapiData.server";
-import Absatz from "./AbsatzOrAbsatzGroup";
+import Absatz from "./Absatz";
+import { BlocksRenderer } from "./BlocksRenderer";
+import DetailsSummary from "./DetailsSummary";
+import PrincipleHighlightModifier from "./PrincipleHighlightModifier";
 
 /*
  Notes
@@ -21,47 +28,60 @@ import Absatz from "./AbsatzOrAbsatzGroup";
  Architecture
  ============
  ParagraphList
- │ Renders a list of Paragraphs
+ │ Renders a list of Paragraphs.
+ ├─ Props: list of Paragraphs, list of Principles to show
+ ├─ Processing: Sorts Paragraphs into correct order.
+ |
  ├── Paragraph
  │    │ Renders all Absaetze of a Paragraph. Only displays if it contains Absaetze with relevant principles.
- │    ├── AbsatzOrAbsatzGroup
- │    │    │ Renders an Absatz or an AbsatzGroup with relevant principles, highlights and matching explanations.
- │    │    ├─ Context handled by PrincipleHighlightProvider: principlesToShow, activeHighlight, setActiveHighlight, explanationIdPrefix, useAnchorLinks
- │    │    ├─ Processing: Differs between Absetze with relevant principles and groups of Absaetze without.
- │    │    ├── BlocksRenderer (with modifiers: { underline: PrincipleHighlight })
+ │    ├─ Props: Paragraph, list of Principles to show
+ │    ├─ Processing: Creates an array of Absaetze (<Absatz />) with relevant Principles and groups of Absaetze without (<AbsatzGroupWithoutErfuellungen />).
+ │    │
+ │    ├── Absatz
+ │    │    │ Renders an Absatz with relevant Principles, highlights and matching explanations.
+ │    │    ├─ Props: Absatz to be shown, Principles to show, useAnchorLinks (boolean)
+ │    │    ├─ Context provided: absatzId, principlesToShow, useAnchorLinks
+ │    │    ├─ Processing: Adds the number of the Absatz to the text.
+ │    │    │
+ │    │    ├── BlocksRenderer (with modifiers: { underline: PrincipleHighlightModifier })
  │    │    │    │ Recursively renders the nested nodes of a Strapi text block.
  │    │    │    │ Based on the modifier, renders underlined text as PrincipleHighlights.
  │    │    │    │
  │    │    │    ├─── PrincipleHighlight
  │    │    │    │     │ Highlights a passage of text and provides a link to the explanation if the highlight is of a relevant principle.
  │    │    │    │     │ Otherwise, just return plain text.
- │    │    │    │     ├─ Context consumed: principlesToShow, setActiveHighlight, explanationIdPrefix
+ │    │    │    │     ├─ Context consumed: principlesToShow, setActiveHighlight, absatzId, useAnchorLinks
  │    │    │    │     └─ onClick: setActiveHighlight to this PrincipleHighlight
  │    │    │    │
  │    │    │    └─── PrincipleHighlight ...
  │    │    │
- │    │    ├── PrincipleExplanation
- │    │    │    │ Renders an explanation for a PrinzipErfuellung.
- │    │    │    │ Creates a link that refers to the clicked highlight.
- │    │    │    ├─ Context consumed: principlesToShow, activeHighlight, setActiveHighlight, explanationIdPrefix
- │    │    │    └─ onClick: setActiveHighlight to null
- │    │    │
- │    │    └── PrincipleExplanation ...
- │    │    │
- │    │    ├── DetailsSummary
- │    │    │    │ Renders a group of Absaetze without relevant principles as a collapsible section.
- │    │    │    ├─ Processing: prependNumberToAbsatz()
+ │    │    ├── PrincipleExplanationList
+ │    │    │    │ Renders a list of PrincipleExplanation
  │    │    │    │
- │    │    │    ├── BlocksRenderer (with modifiers: { underline: PrincipleHighlight })
- │    │    │    │    │
- │    │    │    │    └─ PrincipleHighlight 
- │    │    │    │       │ Only used to remove the bracketed numbers (e.g. [1]) from the text in this case.
+ │    │    │    ├── PrincipleExplanation
+ │    │    │    │    │ Renders an explanation for a PrinzipErfuellung.
+ │    │    │    │    │ Creates a link that refers to the clicked highlight.
+ │    │    │    │    ├─ Context consumed: absatzId, activeHighlight, setActiveHighlight
+ │    │    │    │    └─ onClick: setActiveHighlight to null
  │    │    │    │
- │    │    │    └── BlocksRenderer ...
- │    │    └── DetailsSummary ...
+ │    │    │    └── PrincipleExplanation ...
+ │    │    │
+ │    │    └── PrincipleExplanationList
  │    │
- │    ├── AbsatzOrAbsatzGroup ...
- │    └── AbsatzOrAbsatzGroup ...
+ │    ├── AbsatzGroupWithoutErfuellungen
+ │    │    │ Renders a group of Absaetze without relevant principles as a collapsible section.
+ │    │    ├─ Processing: prependNumberToAbsatz()
+ │    │    │
+ │    │    ├── BlocksRenderer (with modifiers: { underline: PrincipleHighlight })
+ │    │    │    │
+ │    │    │    └─ PrincipleHighlight 
+ │    │    │       │ Only used to remove the bracketed numbers (e.g. [1]) from the text in this case.
+ │    │    │
+ │    │    └── BlocksRenderer ...
+ │    │
+ │    ├── Absatz ...
+ │    ├── Absatz ...
+ │    └── AbsatzGroupWithoutErfuellungen ...
  │
  ├── Paragraph ...
  └── Paragraph ...
@@ -70,12 +90,12 @@ import Absatz from "./AbsatzOrAbsatzGroup";
  ==========================
  ┌─────────────────────────────────────────────────────────────────┐
  │  1. User clicks highlighted link (PrincipleHighlight)           │
- │  2. setActiveHighlight() in PrincipleHighlightProvider          │
+ │  2. setActiveHighlight() in ParagraphList                       │
  │  3. Navigate to #explanationID (soft scroll)                    │
  │  4. PrincipleExplanation detects shouldHighlight = true         │
  │  5. Gets border and shows arrow back button                     │
  │  6. User clicks back button                                     │
- │  7. setActiveHighlight(null) + navigate to #activeHighlight.id  │
+ │  7. setActiveHighlight(null) + navigate to #activeHighlight     │
  │  8. Soft scroll back to original highlighted text               │
  └─────────────────────────────────────────────────────────────────┘
  */
@@ -133,17 +153,63 @@ function Paragraph({
         <p className="ds-subhead font-bold">{paragraph.Titel}</p>
       )}
       <div className="space-y-24 md:space-y-32">
-        {groupedAbsaetze.map((absatzGroup) => (
-          <Absatz
-            key={
-              Array.isArray(absatzGroup) ? absatzGroup[0].id : absatzGroup.id
-            }
-            absatz={absatzGroup}
-            principlesToShow={principlesToShow}
-            useAnchorLinks
-          />
-        ))}
+        {groupedAbsaetze.map((absatzOrAbsatzGroup) => {
+          const isAbsatzGroupWithoutErfuellungen =
+            Array.isArray(absatzOrAbsatzGroup);
+
+          if (isAbsatzGroupWithoutErfuellungen)
+            return (
+              <AbsatzGroupWithoutErfuellungen
+                key={absatzOrAbsatzGroup[0].id}
+                absatzGroup={absatzOrAbsatzGroup}
+              />
+            );
+
+          return (
+            <Absatz
+              key={absatzOrAbsatzGroup.id}
+              absatz={absatzOrAbsatzGroup}
+              principlesToShow={principlesToShow}
+              useAnchorLinks
+            />
+          );
+        })}
       </div>
     </div>
+  );
+}
+
+type AbsatzGroupWithoutErfuellungenProps = {
+  absatzGroup: AbsatzWithNumber[];
+};
+
+function AbsatzGroupWithoutErfuellungen({
+  absatzGroup,
+}: Readonly<AbsatzGroupWithoutErfuellungenProps>) {
+  const getAbsatzGroupTitle = (absatzGroup: AbsatzWithNumber[]) =>
+    absatzGroup.length > 1
+      ? `(${absatzGroup[0].number}) – (${absatzGroup[absatzGroup.length - 1].number})`
+      : `(${absatzGroup[0].number})`;
+
+  return (
+    <DetailsSummary
+      key={absatzGroup[0].number}
+      title={getAbsatzGroupTitle(absatzGroup)}
+      bold={false}
+      className="italic"
+      content={
+        <div className="ds-stack ds-stack-8">
+          {absatzGroup.map((absatz) => (
+            <BlocksRenderer
+              key={absatz.id}
+              content={prependNumberToAbsatz(absatz)}
+              modifiers={{
+                underline: PrincipleHighlightModifier,
+              }}
+            />
+          ))}
+        </div>
+      }
+    />
   );
 }

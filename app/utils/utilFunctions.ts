@@ -23,3 +23,5 @@ export const removeTrailingSlash = (url: string) => url.replace(/\/$/, "");
 export const normalizePathname = (path: string) => {
   return removeTrailingSlash(path).split("#")[0];
 };
+
+export const isExternalUrl = (url: string) => url.startsWith("http");

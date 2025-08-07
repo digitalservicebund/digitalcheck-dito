@@ -7,6 +7,7 @@ export type Node = {
   children?: Node[];
   format?: string;
   underline?: boolean;
+  url?: string;
 };
 
 /**
@@ -89,5 +90,7 @@ export function prependNumberToAbsatz(absatz: AbsatzWithNumber) {
   ];
 }
 
-export const explanationID = (baseLabelID: string, number: number) =>
-  `${baseLabelID}-${number}`;
+export const explanationID = (absatzId: string, principleNumber: number) =>
+  `explanation-${absatzId}-${principleNumber}`;
+
+export const absatzIdTag = (absatzId: string | number) => `absatz-${absatzId}`;
