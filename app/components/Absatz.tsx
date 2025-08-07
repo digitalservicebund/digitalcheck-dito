@@ -106,6 +106,7 @@ function PrincipleExplanation({
   return (
     <div
       id={id}
+      data-testid={id}
       className={explanationClasses}
       aria-description="Beispielerklärung"
     >
