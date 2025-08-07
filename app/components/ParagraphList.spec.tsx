@@ -330,7 +330,7 @@ describe("ParagraphList", () => {
   describe("Links between highlights and reasoning", () => {
     test("Clicking on highlight shows explanation and adds backlink", () => {
       render(<RouterStubAllPrinciples />);
-      const id = "erklaerung-1-1";
+      const id = "explanation-1-1";
       const firstHighlight = screen.getByText("Text mit 1Markierung");
       expect(firstHighlight.closest("a")).toHaveAttribute("href", `/#${id}`);
 
@@ -347,8 +347,8 @@ describe("ParagraphList", () => {
       act(() => {
         screen.getByLabelText("Zurück zum Text").click();
       });
-      expect(screen.getByTestId("erklaerung-1-1")).toHaveClass("border-l-4");
-      expect(screen.getByTestId("erklaerung-1-1")).not.toHaveClass("border-4");
+      expect(screen.getByTestId("explanation-1-1")).toHaveClass("border-l-4");
+      expect(screen.getByTestId("explanation-1-1")).not.toHaveClass("border-4");
       expect(
         screen.queryByLabelText("Zurück zum Text"),
       ).not.toBeInTheDocument();
@@ -360,15 +360,15 @@ describe("ParagraphList", () => {
         screen.getByText("Text mit 1Markierung").click();
         screen.getByText("Text mit 2Markierung").click();
       });
-      expect(screen.getByTestId("erklaerung-1-1")).not.toHaveClass("border-4");
-      expect(screen.getByTestId("erklaerung-1-2")).toHaveClass("border-4");
+      expect(screen.getByTestId("explanation-1-1")).not.toHaveClass("border-4");
+      expect(screen.getByTestId("explanation-1-2")).toHaveClass("border-4");
       expect(screen.getAllByLabelText("Zurück zum Text")).toHaveLength(1);
       act(() => {
         screen.getByLabelText("Zurück zum Text").click();
       });
       // clicking on backlink removes highlighting and backlink
-      expect(screen.getByTestId("erklaerung-1-2")).toHaveClass("border-l-4");
-      expect(screen.getByTestId("erklaerung-1-2")).not.toHaveClass("border-4");
+      expect(screen.getByTestId("explanation-1-2")).toHaveClass("border-l-4");
+      expect(screen.getByTestId("explanation-1-2")).not.toHaveClass("border-4");
       expect(
         screen.queryByLabelText("Zurück zum Text"),
       ).not.toBeInTheDocument();

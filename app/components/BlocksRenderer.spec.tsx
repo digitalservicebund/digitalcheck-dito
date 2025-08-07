@@ -1,7 +1,19 @@
 import { render, screen } from "@testing-library/react";
+import { createRoutesStub } from "react-router";
 import { describe, expect, it } from "vitest";
 import type { Node } from "~/utils/paragraphUtils";
 import { BlocksRenderer } from "./BlocksRenderer";
+
+const renderBlocksRenderer = (content: Node[]) => {
+  const RouterStubBlocksRenderer = createRoutesStub([
+    {
+      path: "/",
+      Component: () => BlocksRenderer({ content }),
+    },
+  ]);
+
+  return render(<RouterStubBlocksRenderer />);
+};
 
 describe("BlocksContentRenderer", () => {
   describe("Basic rendering", () => {
@@ -11,7 +23,7 @@ describe("BlocksContentRenderer", () => {
         { type: "text", text: "Another text" },
       ];
 
-      const { container } = render(<BlocksRenderer content={content} />);
+      const { container } = renderBlocksRenderer(content);
 
       expect(container.textContent).toBe("Hello worldAnother text");
     });
@@ -24,7 +36,7 @@ describe("BlocksContentRenderer", () => {
         },
       ];
 
-      const { container } = render(<BlocksRenderer content={content} />);
+      const { container } = renderBlocksRenderer(content);
 
       const paragraph = container.querySelector("p");
       expect(paragraph).toBeInTheDocument();
@@ -92,11 +104,67 @@ describe("BlocksContentRenderer", () => {
         },
       ];
 
-      const { container } = render(<BlocksRenderer content={content} />);
+      const { container } = renderBlocksRenderer(content);
 
       const listItem = container.querySelector("li");
       expect(listItem).toBeInTheDocument();
       expect(listItem?.textContent).toBe("List item content");
+    });
+  });
+
+  describe("Link rendering", () => {
+    it("renders external link nodes with link elements (target=_blank)", () => {
+      const content: Node[] = [
+        {
+          type: "link",
+          url: "https://example.com",
+          children: [{ type: "text", text: "This is a link" }],
+        },
+      ];
+
+      const { container } = renderBlocksRenderer(content);
+
+      const link = container.querySelector("a");
+      expect(link).toBeInTheDocument();
+      expect(link?.textContent).toBe("This is a link");
+      expect(link?.target).toBe("_blank");
+      expect(link?.href).toBe("https://example.com/");
+    });
+
+    it("renders internal link nodes with link elements", () => {
+      const content: Node[] = [
+        {
+          type: "link",
+          url: "//example",
+          children: [{ type: "text", text: "This is a link" }],
+        },
+      ];
+
+      const { container } = renderBlocksRenderer(content);
+
+      const link = container.querySelector("a");
+      expect(link).toBeInTheDocument();
+      expect(link?.textContent).toBe("This is a link");
+      expect(link?.target).toBe("");
+      expect(link?.href).toBe("http://localhost:3000/example");
+    });
+
+    it("renders anchor link nodes with link elements", () => {
+      const content: Node[] = [
+        {
+          type: "link",
+          url: "/#example",
+          children: [{ type: "text", text: "This is a link" }],
+        },
+      ];
+
+      const { container } = renderBlocksRenderer(content);
+
+      const link = container.querySelector("a");
+      expect(link).toBeInTheDocument();
+      expect(link?.textContent).toBe("This is a link");
+      expect(link?.target).toBe("");
+      expect(link?.href).toBe("http://localhost:3000/#example");
     });
   });
 
@@ -120,7 +188,7 @@ describe("BlocksContentRenderer", () => {
         },
       ];
 
-      const { container } = render(<BlocksRenderer content={content} />);
+      const { container } = renderBlocksRenderer(content);
 
       const list = container.querySelector("ul");
       const listItem = container.querySelector("li");
@@ -153,7 +221,7 @@ describe("BlocksContentRenderer", () => {
         },
       ];
 
-      const { container } = render(<BlocksRenderer content={content} />);
+      const { container } = renderBlocksRenderer(content);
 
       // Check that all text content is present
       expect(container.textContent).toContain("Plain text");
@@ -217,15 +285,16 @@ describe("BlocksContentRenderer", () => {
     it("handles empty content array", () => {
       const content: Node[] = [];
 
-      const { container } = render(<BlocksRenderer content={content} />);
+      const { container } = renderBlocksRenderer(content);
 
-      expect(container.firstChild).toBeNull();
+      // Content is always wrapped in a div
+      expect(container.firstChild?.firstChild).toBeNull();
     });
 
     it("handles node without children or text", () => {
       const content: Node[] = [{ type: "paragraph" }];
 
-      const { container } = render(<BlocksRenderer content={content} />);
+      const { container } = renderBlocksRenderer(content);
 
       // Node without children returns node.text (undefined), which renders as empty
       expect(container.textContent).toBe("");
@@ -239,7 +308,7 @@ describe("BlocksContentRenderer", () => {
         },
       ];
 
-      const { container } = render(<BlocksRenderer content={content} />);
+      const { container } = renderBlocksRenderer(content);
 
       const paragraph = container.querySelector("p");
       expect(paragraph).toBeInTheDocument();
@@ -249,7 +318,7 @@ describe("BlocksContentRenderer", () => {
     it("handles text node with empty string", () => {
       const content: Node[] = [{ type: "text", text: "" }];
 
-      const { container } = render(<BlocksRenderer content={content} />);
+      const { container } = renderBlocksRenderer(content);
 
       expect(container.textContent).toBe("");
     });
