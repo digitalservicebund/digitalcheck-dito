@@ -143,16 +143,9 @@ function Paragraph({
   // renders the interlaced Absaetze with relevant PrinzipErfuellungen and grouped Absaetze without relevant PrinzipErfuellungen
   return (
     <div key={paragraph.Nummer} className="space-y-24 md:space-y-32">
-      <Heading tagName="h3" look="ds-subhead" className="font-bold">
-        {`§ ${paragraph.Nummer} ${paragraph.Gesetz}`}
-        {paragraph.Titel && (
-          <>
-            {" "}
-            <span className="ds-subhead block font-bold">
-              {paragraph.Titel}
-            </span>
-          </>
-        )}
+      <Heading tagName="h3" className="ds-label-01-bold flex flex-col gap-8">
+        <span>{`§ ${paragraph.Nummer} ${paragraph.Gesetz}`}</span>{" "}
+        <span>{paragraph.Titel}</span>
       </Heading>
 
       <div className="space-y-24 md:space-y-32">

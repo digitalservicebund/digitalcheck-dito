@@ -39,7 +39,7 @@ export default function DetailsSummary({
       )}
     >
       <summary className={summaryClasses}>{title}</summary>
-      <span className={contentWrapperClasses}>
+      <div className={contentWrapperClasses}>
         {showVerticalLine && (
           <div
             aria-hidden="true"
@@ -54,7 +54,7 @@ export default function DetailsSummary({
         ) : (
           content
         )}
-      </span>
+      </div>
     </details>
   );
 }

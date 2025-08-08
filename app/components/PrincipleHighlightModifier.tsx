@@ -81,7 +81,7 @@ function PrincipleHighlight({
         PRINCIPLE_COLORS[principle.Nummer].background,
       )}
       aria-label={`Textbeispiel erfüllt Prinzip: ${principle.Name}`}
-      aria-details={absatzId && explanationID(absatzId, principle.Nummer)}
+      aria-describedby={explanationID(absatzId, principle.Nummer)}
     >
       {children}
     </mark>

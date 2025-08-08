@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Link, useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
 import {
+  PartialPrinzip,
   PrincipleHighlightContext,
   PrincipleHighlightProvider,
 } from "~/providers/PrincipleHighlightProvider";
@@ -14,14 +15,14 @@ import {
   explanationID,
   prependNumberToAbsatz,
 } from "~/utils/paragraphUtils";
-import { Prinzip, PrinzipErfuellung } from "~/utils/strapiData.server";
+import { PrinzipErfuellung } from "~/utils/strapiData.server";
 import { BlocksRenderer } from "./BlocksRenderer";
 import Heading from "./Heading";
 import PrincipleHighlightModifier from "./PrincipleHighlightModifier";
 
 type AbsatzProps = {
   absatz: AbsatzWithNumber;
-  principlesToShow: Prinzip[];
+  principlesToShow: PartialPrinzip[];
   useAnchorLinks: boolean;
 };
 
@@ -60,6 +61,8 @@ type PrincipleExplanationListProps = {
 function PrincipleExplanationList({
   absatz,
 }: Readonly<PrincipleExplanationListProps>) {
+  if (!absatz.PrinzipErfuellungen) return undefined;
+
   return (
     <div className="flex flex-col gap-8">
       <Heading
