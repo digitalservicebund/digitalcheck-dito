@@ -17,7 +17,7 @@ import { PrincipleHighlightProvider } from "~/providers/PrincipleHighlightProvid
 import { PrinzipNummer } from "~/resources/constants";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import {
-  ROUTE_METHODS_PRINCIPLES,
+  ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_REGELUNGEN,
 } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
@@ -32,7 +32,7 @@ import { ExampleParagraph, fetchStrapiData } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 
 export function meta() {
-  return constructMetaTitle(ROUTE_METHODS_PRINCIPLES.title);
+  return constructMetaTitle(ROUTE_FUNDAMENTALS_PRINCIPLES.title);
 }
 
 type PrinzipienAnwendung = {
