@@ -39,14 +39,25 @@ export type GesetzStatus =
 
 export type PrinzipErfuellung = {
   id: number;
-  Prinzip?: Prinzip;
   WarumGut: Node[];
+  Prinzip?: Prinzip;
 };
 
 export type Absatz = {
   id: number;
   Text: Node[];
-  PrinzipErfuellungen: PrinzipErfuellung[];
+  PrinzipErfuellungen?: PrinzipErfuellung[];
+};
+
+export type ExampleParagraph = {
+  AbsatzNumber: number;
+  Paragraph: {
+    Titel?: string;
+    Nummer: PrinzipNummer;
+    Gesetz: string;
+    Absaetze: Absatz[];
+    Digitalcheck?: Digitalcheck;
+  };
 };
 
 export type Paragraph = {

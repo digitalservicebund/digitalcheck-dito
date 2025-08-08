@@ -1,20 +1,33 @@
+import { Link, useLoaderData } from "react-router";
+import Absatz from "~/components/Absatz";
 import Badge from "~/components/Badge";
+import { BlocksRenderer } from "~/components/BlocksRenderer";
 import Box from "~/components/Box";
 import Container from "~/components/Container";
-import Heading from "~/components/Heading";
+import CustomLink from "~/components/CustomLink";
+import Heading, { HeadingProps } from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
+import PrincipleHighlightModifier from "~/components/PrincipleHighlightModifier";
 import { PrinciplePosterBox } from "~/components/PrinciplePosterBox";
 import Separator from "~/components/Separator";
 import TableOfContents from "~/components/TableOfContents";
+import { PrincipleHighlightProvider } from "~/providers/PrincipleHighlightProvider";
 import { PrinzipNummer } from "~/resources/constants";
+import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import {
-  getDetailsSummary,
-  methodsFivePrinciples,
-} from "~/resources/content/methode-fuenf-prinzipien";
-import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
+  ROUTE_METHODS_PRINCIPLES,
+  ROUTE_REGELUNGEN,
+} from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
+import {
+  absatzIdTag,
+  filterErfuellungenByPrinciples,
+  getAbsatzFromExampleParagraph,
+  Node,
+} from "~/utils/paragraphUtils";
+import { ExampleParagraph, fetchStrapiData } from "~/utils/strapiData.server";
 
 import { slugify } from "~/utils/utilFunctions";
 
@@ -22,7 +35,93 @@ export function meta() {
   return constructMetaTitle(ROUTE_METHODS_PRINCIPLES.title);
 }
 
+type PrinzipienAnwendung = {
+  Title: string;
+  Text: Node[];
+  Questions?: Node[];
+  WordingExample?: Node[];
+  Example?: ExampleParagraph;
+};
+
+type Prinzip = {
+  Name: string;
+  Beschreibung: Node[];
+  order: number;
+  Nummer: PrinzipNummer;
+
+  Example?: ExampleParagraph;
+  PrinzipienAnwendung: PrinzipienAnwendung[];
+};
+
+const GET_PRINZIPS_QUERY = `
+query GetPrinzips {
+  prinzips(sort: "order") {
+    Name
+    Beschreibung
+    order
+    Nummer
+    Example {
+      AbsatzNumber
+      Paragraph {
+        Titel
+        Nummer
+        Gesetz
+        Digitalcheck {
+          Regelungsvorhaben {
+            Titel
+            URLBezeichnung
+          }
+        }
+        Absaetze {
+          id
+          Text
+          PrinzipErfuellungen {
+            id
+            WarumGut
+            Prinzip {
+              Nummer
+              Name
+            }
+          }
+        }
+      }
+    }
+    PrinzipienAnwendung {
+      Title
+      Text
+      Questions
+      WordingExample
+      Example {
+        AbsatzNumber
+        Paragraph {
+          Nummer
+          Gesetz
+          Absaetze {
+            id
+            Text
+          }
+        }
+      }
+    }
+  }
+}`;
+
+export const loader = async () => {
+  const prinzipData = await fetchStrapiData<{ prinzips: Prinzip[] }>(
+    GET_PRINZIPS_QUERY,
+  );
+
+  if ("error" in prinzipData) {
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
+    throw new Response(prinzipData.error, { status: 400 });
+  }
+
+  return { prinzips: prinzipData.prinzips };
+};
+
 export default function FivePrinciples() {
+  const { prinzips } = useLoaderData<typeof loader>();
+
   return (
     <>
       <Hero
@@ -36,10 +135,10 @@ export default function FivePrinciples() {
               id: "instruction",
               title: methodsFivePrinciples.anchor.instruction,
             },
-            ...methodsFivePrinciples.principles.map((principle) => {
+            ...prinzips.map((prinzip) => {
               return {
-                id: slugify(principle.title),
-                title: `${methodsFivePrinciples.anchor.principle} ${principle.title}`,
+                id: slugify(prinzip.Name),
+                title: `${methodsFivePrinciples.anchor.principle} ${prinzip.Name}`,
               };
             }),
           ]}
@@ -64,34 +163,36 @@ export default function FivePrinciples() {
         <Separator />
       </Container>
 
-      {methodsFivePrinciples.principles.map((principle) => (
-        <Container className="pb-64" key={slugify(principle.title)}>
-          <InfoBox
-            identifier={slugify(principle.title)}
-            visual={{
-              type: "icon",
-              Icon: principle.icon,
-            }}
-            heading={{
-              tagName: "h2",
-              text: principle.title,
-            }}
-            badge={{
-              children: principle.label,
-              principleNumber: principle.principleNumber as PrinzipNummer,
-            }}
-            content={principle.content}
-            detailsSummary={getDetailsSummary(principle.detailsSummary)}
-            buttons={[
-              {
-                look: "link",
-                text: principle.exampleLink.text,
-                href: principle.exampleLink.url,
-              },
-            ]}
-          />
-        </Container>
-      ))}
+      {prinzips.map((prinzip) => {
+        const principle = methodsFivePrinciples.principles.find(
+          ({ principleNumber }) => principleNumber === prinzip.Nummer,
+        );
+
+        if (!principle) return;
+
+        return (
+          <Container
+            className="flex flex-col gap-40 pb-64"
+            key={slugify(prinzip.Name)}
+          >
+            <InfoBox
+              identifier={slugify(prinzip.Name)}
+              heading={{
+                tagName: "h2",
+                text: prinzip.Name,
+              }}
+              badge={{
+                children: methodsFivePrinciples.principleLabel,
+                principleNumber: prinzip.Nummer,
+              }}
+              content={prinzip.Beschreibung}
+              detailsSummary={getDetailsSummary(prinzip, principle.exampleLink)}
+            />
+
+            <PrincipleExample prinzip={prinzip} />
+          </Container>
+        );
+      })}
 
       <PrinciplePosterBox />
 
@@ -114,3 +215,124 @@ export default function FivePrinciples() {
     </>
   );
 }
+
+function PrincipleExample({ prinzip }: Readonly<{ prinzip: Prinzip }>) {
+  const exampleAbsatz = getAbsatzFromExampleParagraph(prinzip.Example);
+  if (!exampleAbsatz) return undefined;
+
+  const paragraph = prinzip.Example!.Paragraph;
+  const absatzNumber = prinzip.Example!.AbsatzNumber;
+
+  const erfuellungen = exampleAbsatz.PrinzipErfuellungen
+    ? filterErfuellungenByPrinciples(exampleAbsatz.PrinzipErfuellungen, [
+        prinzip,
+      ])
+    : [];
+
+  const regelungsvorhaben = paragraph.Digitalcheck?.Regelungsvorhaben;
+
+  return (
+    <div className="space-y-16 rounded-lg border border-gray-600 bg-gray-100 px-32 py-24">
+      <Heading tagName="h3" className="flex flex-col gap-16">
+        <span>Ein Textbeispiel</span>{" "}
+        <span className="ds-label-01-bold flex flex-col gap-8">
+          <span>{`§ ${paragraph.Nummer} ${paragraph.Gesetz}`}</span>{" "}
+          <span>{paragraph.Titel}</span>
+        </span>
+      </Heading>
+
+      <Absatz
+        absatz={{
+          ...exampleAbsatz,
+          number: absatzNumber,
+          PrinzipErfuellungen: erfuellungen,
+        }}
+        principlesToShow={[prinzip]}
+        useAnchorLinks={false}
+      />
+      <p className="ds-label-03-reg items-center text-gray-900">
+        Regelung:&nbsp;
+        <CustomLink
+          target="_blank"
+          to={`${ROUTE_REGELUNGEN.url}/${regelungsvorhaben?.URLBezeichnung ?? ""}`}
+          className="text-link inline-flex"
+          rel="noreferrer"
+        >
+          {regelungsvorhaben?.Titel}
+        </CustomLink>
+      </p>
+    </div>
+  );
+}
+
+const getDetailsSummary = (prinzip: Prinzip, exampleLink: string) => {
+  const { PrinzipienAnwendung: prinzipienAnwendungen } = prinzip;
+
+  const items = prinzipienAnwendungen.map((prinzipienAnwendung) => {
+    const exampleAbsatz = getAbsatzFromExampleParagraph(
+      prinzipienAnwendung.Example,
+    );
+
+    // TODO: maybe something different than p and strong
+    const content = (
+      <div className="space-y-4">
+        <BlocksRenderer content={prinzipienAnwendung.Text} />
+        {prinzipienAnwendung.Questions && (
+          <>
+            <p>
+              <strong>{methodsFivePrinciples.questionsTitle}</strong>
+            </p>
+            <BlocksRenderer content={prinzipienAnwendung.Questions} />
+          </>
+        )}
+        {prinzipienAnwendung.WordingExample && (
+          <>
+            <p>
+              <strong>{methodsFivePrinciples.wordingExampleTitle}</strong>
+            </p>
+            <BlocksRenderer content={prinzipienAnwendung.WordingExample} />
+          </>
+        )}
+        {exampleAbsatz && (
+          <PrincipleHighlightProvider
+            absatzId={exampleAbsatz.id.toString()}
+            principlesToShow={[prinzip]}
+            useAnchorLinks={false}
+          >
+            <p>
+              <strong>
+                {methodsFivePrinciples.exampleTitle} §{" "}
+                {prinzipienAnwendung.Example!.Paragraph.Nummer}{" "}
+                {prinzipienAnwendung.Example!.Paragraph.Gesetz}:
+              </strong>
+            </p>
+            <BlocksRenderer
+              content={exampleAbsatz.Text}
+              modifiers={{
+                underline: PrincipleHighlightModifier,
+              }}
+            />
+            <Link
+              className="text-link"
+              to={`${exampleLink}#${absatzIdTag(exampleAbsatz.id)}`}
+            >
+              {methodsFivePrinciples.exampleLinkText}
+            </Link>
+          </PrincipleHighlightProvider>
+        )}
+      </div>
+    );
+
+    return { title: prinzipienAnwendung.Title, content };
+  });
+
+  if (items.length === 0) return undefined;
+
+  return {
+    title: {
+      text: methodsFivePrinciples.detailsSummaryTitle,
+      tagName: "h3",
+    } as HeadingProps,
+    items,
+  };
+};
