@@ -12,7 +12,7 @@ export const formatDate = (date: string | undefined) => {
 };
 
 export const gesetzStatusMap = {
-  Verkuendetes_Gesetz_aktuelle_Fassung: "Verkündetes Gesetz (aktuelle Fassung)",
+  Verkuendetes_Gesetz_aktuelle_Fassung: "Verkündetes Gesetz",
   Regelungsentwurf: "Regelungsentwurf",
   Text_im_Parlament: "Text im Parlament",
 };
@@ -23,3 +23,5 @@ export const removeTrailingSlash = (url: string) => url.replace(/\/$/, "");
 export const normalizePathname = (path: string) => {
   return removeTrailingSlash(path).split("#")[0];
 };
+
+export const isExternalUrl = (url: string) => url.startsWith("http");

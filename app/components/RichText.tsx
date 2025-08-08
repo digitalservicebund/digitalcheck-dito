@@ -2,6 +2,7 @@ import { marked, Marked, type Renderer, type Tokens } from "marked";
 import { A11Y_MESSAGE_NEW_WINDOW } from "~/resources/constants";
 import { getDownloadableExtensionName } from "~/utils/fileExtensionUtils";
 import twMerge from "~/utils/tailwindMerge";
+import { isExternalUrl } from "~/utils/utilFunctions";
 import { openInNewIconString } from "./openInNewWindow";
 
 export type RichTextProps = {
@@ -25,7 +26,7 @@ const RichText = ({
         const linkHtml = marked.parseInline(token.raw) as string;
 
         // Force external links to open in a new window
-        if (href.startsWith("http")) {
+        if (isExternalUrl(href)) {
           const newLinkHtml = linkHtml
             .replace(
               /^<a /,

@@ -1,5 +1,6 @@
 import crypto from "crypto";
 import NodeCache from "node-cache";
+import { PrinzipNummer } from "~/resources/constants";
 import { type Node } from "~/utils/paragraphUtils";
 
 const url =
@@ -38,14 +39,25 @@ export type GesetzStatus =
 
 export type PrinzipErfuellung = {
   id: number;
-  Prinzip?: Prinzip;
   WarumGut: Node[];
+  Prinzip?: Prinzip;
 };
 
 export type Absatz = {
   id: number;
   Text: Node[];
-  PrinzipErfuellungen: PrinzipErfuellung[];
+  PrinzipErfuellungen?: PrinzipErfuellung[];
+};
+
+export type ExampleParagraph = {
+  AbsatzNumber: number;
+  Paragraph: {
+    Titel?: string;
+    Nummer: PrinzipNummer;
+    Gesetz: string;
+    Absaetze: Absatz[];
+    Digitalcheck?: Digitalcheck;
+  };
 };
 
 export type Paragraph = {
@@ -62,7 +74,7 @@ export type Prinzip = {
   documentId: string;
   Name: string;
   Beschreibung: Node[];
-  Nummer: 1 | 2 | 3 | 4 | 5;
+  Nummer: PrinzipNummer;
   GuteUmsetzungen: Digitalcheck[];
   URLBezeichnung: string;
   Kurzbezeichnung: string;

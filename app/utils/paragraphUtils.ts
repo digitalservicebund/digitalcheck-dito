@@ -1,4 +1,10 @@
-import { Absatz, Prinzip } from "./strapiData.server";
+import { PartialPrinzip } from "~/providers/PrincipleHighlightProvider";
+import {
+  Absatz,
+  ExampleParagraph,
+  Prinzip,
+  PrinzipErfuellung,
+} from "./strapiData.server";
 
 export type AbsatzWithNumber = Absatz & { number: number };
 export type Node = {
@@ -7,27 +13,42 @@ export type Node = {
   children?: Node[];
   format?: string;
   underline?: boolean;
+  url?: string;
 };
 
-// This function returns an ordered array of Absaetze which have a relevant PrinzipErfuellungen
-// interlaced with arrays of Absaetze which have no relevant PrinzipErfuellungen that are grouped together.
+export const filterErfuellungenByPrinciples = (
+  erfuellungen: PrinzipErfuellung[],
+  principlesToShow: PartialPrinzip[],
+) =>
+  erfuellungen.filter(
+    (erfuellung) =>
+      erfuellung.Prinzip &&
+      principlesToShow
+        .map((principle) => principle.Nummer)
+        .includes(erfuellung.Prinzip.Nummer),
+  );
+
+/**
+ * This function returns an ordered array of Absaetze which have a relevant PrinzipErfuellungen
+ * interlaced with arrays of Absaetze which have no relevant PrinzipErfuellungen that are grouped together.
+ *
+ * @param absaetze
+ * @param principlesToShow
+ * @returns ordered array of Absaetze which have a relevant PrinzipErfuellungen
+ */
 export function groupAbsaetzeWithoutRelevantPrinciples(
   absaetze: Absatz[],
   principlesToShow: Prinzip[],
 ): (AbsatzWithNumber | AbsatzWithNumber[])[] {
-  // Filter relevant principles
-  const principleNumbers = principlesToShow.map(
-    (principle) => principle.Nummer,
-  );
-
   const filteredAbsaetzeWithNumber = absaetze.map((absatz, index) => ({
     ...absatz,
     number: index + 1,
-    PrinzipErfuellungen: absatz.PrinzipErfuellungen.filter(
-      (erfuellung) =>
-        erfuellung.Prinzip &&
-        principleNumbers.includes(erfuellung.Prinzip.Nummer),
-    ),
+    PrinzipErfuellungen: absatz.PrinzipErfuellungen
+      ? filterErfuellungenByPrinciples(
+          absatz.PrinzipErfuellungen,
+          principlesToShow,
+        )
+      : [],
   }));
 
   // Group consecutive Absaetze without a relevant PrinzipErfuellungen together
@@ -82,3 +103,14 @@ export function prependNumberToAbsatz(absatz: AbsatzWithNumber) {
     ...absatz.Text.slice(1),
   ];
 }
+
+export const explanationID = (absatzId: string, principleNumber: number) =>
+  `explanation-${absatzId}-${principleNumber}`;
+
+export const absatzIdTag = (absatzId: string | number) => `absatz-${absatzId}`;
+
+export const getAbsatzFromExampleParagraph = (
+  exampleParagraph?: ExampleParagraph,
+) =>
+  exampleParagraph &&
+  exampleParagraph.Paragraph.Absaetze[exampleParagraph.AbsatzNumber - 1];

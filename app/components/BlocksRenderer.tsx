@@ -1,5 +1,7 @@
 import { nestListInListItems } from "~/utils/blocksRendererUtils";
 import { type Node } from "~/utils/paragraphUtils";
+import { isExternalUrl } from "~/utils/utilFunctions";
+import CustomLink from "./CustomLink";
 
 const getElement = (node: Node): keyof JSX.IntrinsicElements => {
   switch (node.type) {
@@ -35,6 +37,28 @@ export function RecursiveRenderer({
     }
     if (node.children) {
       const Element = getElement(node);
+
+      if (node.type === "link" && node.url) {
+        const externalUrl = isExternalUrl(node.url);
+
+        // NOTE: In strapi a url has to start with "/", "#" will not be registered as valid url
+        // So if you want to use anchor tags you would have to define them like this:
+        // "/#anchor-tag"
+        // Here we remove the first "/" so it will become -> "#anchor-tag"
+        const url = externalUrl ? node.url : node.url.replace("/", "");
+
+        return (
+          <CustomLink
+            key={index}
+            to={url}
+            className="text-link inline-flex"
+            target={externalUrl ? "_blank" : undefined}
+          >
+            <RecursiveRenderer content={node.children} />
+          </CustomLink>
+        );
+      }
+
       return (
         <Element key={index}>
           <RecursiveRenderer content={node.children} modifiers={modifiers} />
@@ -45,18 +69,26 @@ export function RecursiveRenderer({
   });
 }
 
+type BlocksRendererProps = {
+  content: Node[];
+  modifiers?: Modifiers;
+  className?: string;
+  id?: string;
+};
+
 export function BlocksRenderer({
   content,
   modifiers,
-}: Readonly<{
-  content: Node[];
-  modifiers?: Modifiers;
-}>) {
+  className,
+  id,
+}: Readonly<BlocksRendererProps>) {
   const contentWithCorectlyNestedLists = nestListInListItems(content);
   return (
-    <RecursiveRenderer
-      content={contentWithCorectlyNestedLists}
-      modifiers={modifiers}
-    />
+    <div className={className} id={id}>
+      <RecursiveRenderer
+        content={contentWithCorectlyNestedLists}
+        modifiers={modifiers}
+      />
+    </div>
   );
 }
