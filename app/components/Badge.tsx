@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
-import { PRINCIPLE_COLORS, PrinzipNummer } from "~/resources/constants";
+import { PRINCIPLE_COLORS, PrincipleNumber } from "~/resources/constants";
 import twMerge from "~/utils/tailwindMerge";
 
 export type BadgeProps = {
   text?: string;
   children?: ReactNode;
   className?: string;
-  principleNumber?: PrinzipNummer;
+  principleNumber?: PrincipleNumber;
   look?: "hint" | "gray" | "default";
   Icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 };

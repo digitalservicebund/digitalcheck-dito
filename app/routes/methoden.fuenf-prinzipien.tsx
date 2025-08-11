@@ -14,7 +14,7 @@ import { PrinciplePosterBox } from "~/components/PrinciplePosterBox";
 import Separator from "~/components/Separator";
 import TableOfContents from "~/components/TableOfContents";
 import { PrincipleHighlightProvider } from "~/providers/PrincipleHighlightProvider";
-import { PrinzipNummer } from "~/resources/constants";
+import { PrincipleNumber } from "~/resources/constants";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import {
   ROUTE_METHODS_PRINCIPLES,
@@ -47,7 +47,7 @@ type Prinzip = {
   Name: string;
   Beschreibung: Node[];
   order: number;
-  Nummer: PrinzipNummer;
+  Nummer: PrincipleNumber;
 
   Example?: ExampleParagraph;
   PrinzipienAnwendung: PrinzipienAnwendung[];

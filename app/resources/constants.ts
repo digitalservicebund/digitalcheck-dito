@@ -10,4 +10,4 @@ export const PRINCIPLE_COLORS = {
   6: { background: "bg-principle-6", border: "border-principle-6" },
 } as const;
 
-export type PrinzipNummer = keyof typeof PRINCIPLE_COLORS;
+export type PrincipleNumber = keyof typeof PRINCIPLE_COLORS;
