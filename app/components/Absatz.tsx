@@ -64,7 +64,7 @@ function PrincipleExplanationList({
   if (!absatz.PrinzipErfuellungen) return undefined;
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="space-y-8">
       <Heading
         tagName="h4"
         className="ds-label-01-bold"
@@ -101,7 +101,7 @@ function PrincipleExplanation({
   const shouldHighlight = location.hash === `#${id}`;
   const color = PRINCIPLE_COLORS[erfuellung.Prinzip.Nummer];
   const explanationClasses = twJoin(
-    "w-fit max-w-[642px] px-8",
+    "w-fit max-w-[642px] px-8 space-y-4",
     color.border,
     shouldHighlight ? "border-4 p-4" : "border-l-4 p-8",
   );

@@ -90,7 +90,7 @@ import PrincipleHighlightModifier from "./PrincipleHighlightModifier";
  ==========================
  ┌─────────────────────────────────────────────────────────────────┐
  │  1. User clicks highlighted link (PrincipleHighlight)           │
- │  2. setActiveHighlight() in ParagraphList                       │
+ │  2. setActiveHighlight() in PrincipleHighlightModifier          │
  │  3. Navigate to #explanationID (soft scroll)                    │
  │  4. PrincipleExplanation detects shouldHighlight = true         │
  │  5. Gets border and shows arrow back button                     │
