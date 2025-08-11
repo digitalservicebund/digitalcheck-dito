@@ -6,6 +6,7 @@ import PrincipleHighlightContext from "~/contexts/PrincipleHighlightContext";
 import { PrincipleHighlightProvider } from "~/providers/PrincipleHighlightProvider";
 import { PRINCIPLE_COLORS } from "~/resources/constants";
 import { examples } from "~/resources/content/beispiele";
+import { absatz } from "~/resources/content/shared/absatz";
 import {
   absatzIdTag,
   AbsatzWithNumber,
@@ -108,7 +109,7 @@ function PrincipleExplanation({
       id={id}
       data-testid={id}
       className={explanationClasses}
-      aria-description="Beispielerklärung"
+      aria-description={absatz.ariaDescription}
     >
       <div className="flex content-center gap-8">
         <BlocksRenderer
@@ -119,7 +120,7 @@ function PrincipleExplanation({
           <Link
             to={`#${activeHighlight}`}
             className="ds-link-01-bold"
-            aria-label="Zurück zum Text"
+            aria-label={absatz.backLinkAriaLabel}
             onClick={() => setActiveHighlight(null)}
             replace
           >
