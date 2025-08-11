@@ -15,8 +15,8 @@ import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,
+  FullPrinzip,
   paragraphFields,
-  Prinzip,
   prinzipCoreFields,
   Regelungsvorhaben,
   visualisationFields,
@@ -84,7 +84,7 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
 
 export default function Gesetz() {
   const regelung = useLoaderData<typeof loader>();
-  const principles = useOutletContext<Prinzip[]>();
+  const principles = useOutletContext<FullPrinzip[]>();
   return (
     <>
       <Hero

@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
+import PrincipleHighlightContext from "~/contexts/PrincipleHighlightContext";
 import { useIsMobileSize } from "~/hooks/deviceHook";
-import { PrincipleHighlightContext } from "~/providers/PrincipleHighlightProvider";
 import { PRINCIPLE_COLORS } from "~/resources/constants";
 import { explanationID, Node } from "~/utils/paragraphUtils";
 import { Prinzip } from "~/utils/strapiData.server";
