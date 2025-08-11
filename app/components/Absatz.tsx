@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { Link, useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
 import {
-  PartialPrinzip,
   PrincipleHighlightContext,
   PrincipleHighlightProvider,
 } from "~/providers/PrincipleHighlightProvider";
@@ -15,14 +14,14 @@ import {
   explanationID,
   prependNumberToAbsatz,
 } from "~/utils/paragraphUtils";
-import { PrinzipErfuellung } from "~/utils/strapiData.server";
+import { Prinzip, PrinzipErfuellung } from "~/utils/strapiData.server";
 import { BlocksRenderer } from "./BlocksRenderer";
 import Heading from "./Heading";
 import PrincipleHighlightModifier from "./PrincipleHighlightModifier";
 
 type AbsatzProps = {
   absatz: AbsatzWithNumber;
-  principlesToShow: PartialPrinzip[];
+  principlesToShow: Prinzip[];
   useAnchorLinks: boolean;
 };
 

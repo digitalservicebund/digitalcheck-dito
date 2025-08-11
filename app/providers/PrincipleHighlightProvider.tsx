@@ -1,14 +1,8 @@
 import { createContext, ReactNode, useState } from "react";
 import { Prinzip } from "~/utils/strapiData.server";
-import { Optional } from "~/utils/utilityTypes";
-
-export type PartialPrinzip = Optional<
-  Prinzip,
-  "GuteUmsetzungen" | "Kurzbezeichnung" | "URLBezeichnung" | "documentId"
->;
 
 type PrincipleHighlightContextType = {
-  principlesToShow: PartialPrinzip[];
+  principlesToShow: Prinzip[];
   activeHighlight: string | null;
   setActiveHighlight: React.Dispatch<React.SetStateAction<string | null>>;
   useAnchorLinks: boolean;
@@ -26,7 +20,7 @@ export const PrincipleHighlightContext =
 
 type PrincipleHighlightProviderProps = {
   children: ReactNode;
-  principlesToShow: PartialPrinzip[];
+  principlesToShow: Prinzip[];
   useAnchorLinks: boolean;
   absatzId: string;
 };

@@ -27,7 +27,11 @@ import {
   getAbsatzFromExampleParagraph,
   Node,
 } from "~/utils/paragraphUtils";
-import { ExampleParagraph, fetchStrapiData } from "~/utils/strapiData.server";
+import {
+  ExampleParagraph,
+  fetchStrapiData,
+  GET_PRINZIPS_WITH_EXAMPLES_QUERY,
+} from "~/utils/strapiData.server";
 
 import { slugify } from "~/utils/utilFunctions";
 
@@ -53,62 +57,9 @@ type Prinzip = {
   PrinzipienAnwendung: PrinzipienAnwendung[];
 };
 
-const GET_PRINZIPS_QUERY = `
-query GetPrinzips {
-  prinzips(sort: "order") {
-    Name
-    Beschreibung
-    order
-    Nummer
-    Example {
-      AbsatzNumber
-      Paragraph {
-        Titel
-        Nummer
-        Gesetz
-        Digitalcheck {
-          Regelungsvorhaben {
-            Titel
-            URLBezeichnung
-          }
-        }
-        Absaetze {
-          id
-          Text
-          PrinzipErfuellungen {
-            id
-            WarumGut
-            Prinzip {
-              Nummer
-              Name
-            }
-          }
-        }
-      }
-    }
-    PrinzipienAnwendung {
-      Title
-      Text
-      Questions
-      WordingExample
-      Example {
-        AbsatzNumber
-        Paragraph {
-          Nummer
-          Gesetz
-          Absaetze {
-            id
-            Text
-          }
-        }
-      }
-    }
-  }
-}`;
-
 export const loader = async () => {
   const prinzipData = await fetchStrapiData<{ prinzips: Prinzip[] }>(
-    GET_PRINZIPS_QUERY,
+    GET_PRINZIPS_WITH_EXAMPLES_QUERY,
   );
 
   if ("error" in prinzipData) {

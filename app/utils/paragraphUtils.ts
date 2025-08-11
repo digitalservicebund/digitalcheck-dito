@@ -1,4 +1,3 @@
-import { PartialPrinzip } from "~/providers/PrincipleHighlightProvider";
 import {
   Absatz,
   ExampleParagraph,
@@ -18,7 +17,7 @@ export type Node = {
 
 export const filterErfuellungenByPrinciples = (
   erfuellungen: PrinzipErfuellung[],
-  principlesToShow: PartialPrinzip[],
+  principlesToShow: Prinzip[],
 ) =>
   erfuellungen.filter(
     (erfuellung) =>

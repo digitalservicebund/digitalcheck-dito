@@ -71,14 +71,17 @@ export type Paragraph = {
 };
 
 export type Prinzip = {
-  documentId: string;
   Name: string;
   Beschreibung: Node[];
   Nummer: PrincipleNumber;
+  order: number;
+};
+
+export type FullPrinzip = Prinzip & {
+  documentId: string;
   GuteUmsetzungen: Digitalcheck[];
   URLBezeichnung: string;
   Kurzbezeichnung: string;
-  order: number;
 };
 
 export type Visualisierung = {
@@ -184,6 +187,59 @@ ${prinzipCoreFields}
 query GetPrinzips {
   prinzips {
     ...PrinzipCoreFields
+  }
+}`;
+
+export const GET_PRINZIPS_WITH_EXAMPLES_QUERY = `
+query GetPrinzips {
+  prinzips(sort: "order") {
+    Name
+    Beschreibung
+    order
+    Nummer
+    Example {
+      AbsatzNumber
+      Paragraph {
+        Titel
+        Nummer
+        Gesetz
+        Digitalcheck {
+          Regelungsvorhaben {
+            Titel
+            URLBezeichnung
+          }
+        }
+        Absaetze {
+          id
+          Text
+          PrinzipErfuellungen {
+            id
+            WarumGut
+            Prinzip {
+              Nummer
+              Name
+            }
+          }
+        }
+      }
+    }
+    PrinzipienAnwendung {
+      Title
+      Text
+      Questions
+      WordingExample
+      Example {
+        AbsatzNumber
+        Paragraph {
+          Nummer
+          Gesetz
+          Absaetze {
+            id
+            Text
+          }
+        }
+      }
+    }
   }
 }`;
 

@@ -22,8 +22,8 @@ import {
 import constructMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,
+  FullPrinzip,
   paragraphFields,
-  type Prinzip,
   prinzipCoreFields,
 } from "~/utils/strapiData.server";
 import { formatDate, gesetzStatusMap } from "~/utils/utilFunctions";
@@ -59,7 +59,7 @@ query GetPrinzips($slug: String!) {
 }`;
 
 export const loader = async ({ params }: Route.LoaderArgs) => {
-  const prinzipData = await fetchStrapiData<{ prinzips: Prinzip[] }>(
+  const prinzipData = await fetchStrapiData<{ prinzips: FullPrinzip[] }>(
     GET_PRINZIPS_QUERY,
     { slug: params.prinzip },
   );
@@ -79,7 +79,7 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
 
 export default function DigitaltauglichkeitPrinzipienDetail() {
   const { prinzip } = useLoaderData<typeof loader>();
-  const prinzips = useOutletContext<Prinzip[]>();
+  const prinzips = useOutletContext<FullPrinzip[]>();
   const navigate = useNavigate();
 
   const { GuteUmsetzungen } = prinzip;
@@ -110,9 +110,9 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
         subtitle={examplesRegelungen.principles.hero.subtitle}
       />
 
-      <Container className="flex flex-col gap-80">
+      <Container className="space-y-80">
         <Tabs
-          className="mb-0"
+          className="mb-80"
           tabs={tabsForNavigation}
           initialActiveIndex={initialActiveIndexForTabs}
           onNavigateRequest={handleNavigationRequest}
@@ -129,16 +129,16 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
         {GuteUmsetzungen.length > 0 && <Separator />}
 
         {GuteUmsetzungen.length > 0 && (
-          <div className="flex flex-col gap-80">
+          <div className="space-y-80">
             {GuteUmsetzungen.map(
               (digitalcheck) =>
                 digitalcheck.Regelungsvorhaben && (
                   <div
                     key={digitalcheck.documentId}
                     data-testid="regelung-on-prinzip"
-                    className="flex flex-col gap-40"
+                    className="space-y-80"
                   >
-                    <div className="flex flex-col gap-16">
+                    <div className="space-y-16">
                       <Heading
                         tagName="h3"
                         text={digitalcheck.Regelungsvorhaben.Titel}

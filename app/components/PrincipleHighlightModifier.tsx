@@ -2,12 +2,10 @@ import { useContext } from "react";
 import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import { useIsMobileSize } from "~/hooks/deviceHook";
-import {
-  PartialPrinzip,
-  PrincipleHighlightContext,
-} from "~/providers/PrincipleHighlightProvider";
+import { PrincipleHighlightContext } from "~/providers/PrincipleHighlightProvider";
 import { PRINCIPLE_COLORS } from "~/resources/constants";
 import { explanationID, Node } from "~/utils/paragraphUtils";
+import { Prinzip } from "~/utils/strapiData.server";
 
 export default function PrincipleHighlightModifier({ node }: { node: Node }) {
   const { principlesToShow, setActiveHighlight, absatzId, useAnchorLinks } =
@@ -63,7 +61,7 @@ export default function PrincipleHighlightModifier({ node }: { node: Node }) {
 type PrincipleHighlightProps = {
   id: string;
   children: string;
-  principle: PartialPrinzip;
+  principle: Prinzip;
   absatzId: string;
 };
 

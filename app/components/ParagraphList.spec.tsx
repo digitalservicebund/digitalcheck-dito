@@ -2,10 +2,10 @@ import { render, screen } from "@testing-library/react";
 import { act } from "react";
 import { createRoutesStub } from "react-router";
 import { beforeAll, describe, test } from "vitest";
-import type { Absatz, Paragraph, Prinzip } from "~/utils/strapiData.server";
+import type { Absatz, FullPrinzip, Paragraph } from "~/utils/strapiData.server";
 import ParagraphList from "./ParagraphList";
 
-const PRINZIPS: Prinzip[] = [
+const PRINZIPS: FullPrinzip[] = [
   {
     documentId: "abc",
     Name: "Digitale Kommunikation sicherstellen",

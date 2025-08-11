@@ -4,7 +4,7 @@ import {
   groupAbsaetzeWithoutRelevantPrinciples,
   prependNumberToAbsatz,
 } from "~/utils/paragraphUtils";
-import type { Paragraph, Prinzip } from "~/utils/strapiData.server";
+import type { FullPrinzip, Paragraph } from "~/utils/strapiData.server";
 import Absatz from "./Absatz";
 import { BlocksRenderer } from "./BlocksRenderer";
 import DetailsSummary from "./DetailsSummary";
@@ -105,7 +105,7 @@ export default function ParagraphList({
   principlesToShow,
 }: Readonly<{
   paragraphs: Paragraph[];
-  principlesToShow: Prinzip[];
+  principlesToShow: FullPrinzip[];
 }>) {
   return (
     <div className="space-y-32">
@@ -129,7 +129,7 @@ function Paragraph({
   principlesToShow,
 }: Readonly<{
   paragraph: Paragraph;
-  principlesToShow: Prinzip[];
+  principlesToShow: FullPrinzip[];
 }>) {
   const groupedAbsaetze = groupAbsaetzeWithoutRelevantPrinciples(
     paragraph.Absaetze,
