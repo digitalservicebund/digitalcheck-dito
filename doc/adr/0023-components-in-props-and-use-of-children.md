@@ -1,4 +1,4 @@
-# 23. Adopt Mix of Compound Component Pattern and Components in Props
+# 23. Adopt Components in Props and Use of Children
 
 ## Status
 
@@ -12,9 +12,7 @@ Our current React component design uses **deeply nested properties** to configur
 - **Complex nesting**: Passing structured props for subcomponents results in complex prop trees and deeply nested configurations.
 - **Unintended resource file structures**: To match nested prop expectations, developers create similarly nested resource objects, although this was never the intention.
 
-Therefore, we considered using a mix of the **Compound Component** and **Components in Props** patterns.
-
-In the **Compound Component** pattern, a parent component exposes child components as static properties. The parent manages shared state and context, while the children can consume this context, enabling flexible and expressive composition.
+Therefore, we considered using **Components in Props** and **Children**. Props for child components are only used for simple types like `strings` or `numbers`. We do not want to have objects for child components in props.
 
 In the **Components in Props** pattern, we directly pass child components into props to avoid deep prop nesting.
 
@@ -27,41 +25,28 @@ In the **Components in Props** pattern, we directly pass child components into p
 
 ### Trade-offs
 
-- **More boilerplate**: Components are larger due to internal state/context and child definitions.
+- **More boilerplate**: Writing complete components produces more lines of code than just passing props for components.
+- **More freedom**: Children can be anything, so it is more easy to misuse existing components, but also more easy to implement exceptions.
 
 ### Examples of current implementation
 
 #### Tabs
 
 ```tsx
-export default function Index() {
-  const tabsData: TabItem[] = [
-    {
-      title: "Tab1",
-      plausibleEventName: "tab.tab1",
-      content: (<Content />),
-    },
-    {
-      title: "Tab2",
-      plausibleEventName: "tab.tab2",
-      content: (<Content />),
-    },
-  ];
+const tabsData: TabItem[] = [
+  {
+    title: "Tab1",
+    plausibleEventName: "tab.tab1",
+    content: <Content />,
+  },
+  {
+    title: "Tab2",
+    plausibleEventName: "tab.tab2",
+    content: <Content />,
+  },
+];
 
-  return (
-    <>
-      <Hero
-        title={index.title}
-        subtitle={index.subtitle}
-        backgroundColor="darkBlue"
-      />
-
-      <Container>
-        <Tabs tabs={tabsData} />
-      </Container>
-    </>
-  );
-}
+return <Tabs tabs={tabsData} />;
 ```
 
 #### InfoBoxList and InfoBox
@@ -113,36 +98,22 @@ export default function Index() {
 #### Tabs
 
 ```tsx
-export default function Index() {
-  return (
-    <>
-      <Hero
-        title={index.title}
-        subtitle={index.subtitle}
-        backgroundColor="darkBlue"
-      />
+<Tabs>
+  <Tabs.Tab title="Tab1" plausibleEventName="tab.tab1">
+    <Content />
+  </Tabs.Tab>
 
-      <Container>
-        <Tabs>
-          <Tabs.Tab title="Tab1" plausibleEventName="tab.tab1">
-            <Content />
-          </Tabs.Tab>
-
-          <Tabs.Tab title="Tab2" plausibleEventName="tab.tab2">
-            <Content />
-          </Tabs.Tab>
-        </Tabs>
-      </Container>
-    </>
-  );
-}
+  <Tabs.Tab title="Tab2" plausibleEventName="tab.tab2">
+    <Content />
+  </Tabs.Tab>
+</Tabs>
 ```
 
 #### InfoBox
 
 ```tsx
 <InfoBoxList heading={<Heading>Title</Heading>} separator>
-  <InfoBoxList.Item
+  <InfoBox
     badge={
       <Badge icon={badgeIcon} principleNumber="1">
         Badge Text
@@ -158,7 +129,7 @@ export default function Index() {
     }
   >
     Content **Text** in a Markdown format.
-  </InfoBoxList.Item>
+  </InfoBox>
 
   {/* Repeat InfoBoxList.Item + InfoBox for each item as needed */}
 </InfoBoxList>
@@ -169,3 +140,26 @@ export default function Index() {
 - Existing components that use the nested-prop pattern will need to be migrated.
 - Resource files will need to be flattened where nested objects were only required for prop structure.
 - More explicit component usage will improve maintainability and developer onboarding.
+
+## NOT USED pattern: strict Coupound Component Pattern
+
+NOTE: This was another idea for a component pattern, that we decided to not use.
+
+```tsx
+<InfoBoxList separator>
+  <InfoBoxList.Heading>{documentation.summary.title}</InfoBoxList.Heading>
+
+  <InfoBoxList.Item>
+    <InfoBox>
+      <InfoBox.Badge {...badge} />
+      <InfoBox.Heading {...heading} />
+      <InfoBox.Content markdown={content} />
+      <InfoBox.DetailsSummary {...detailsSummary} />
+      <InfoBox.LinkList {...linkList} />
+      <InfoBox.Buttons buttons={buttons} />
+    </InfoBox>
+  </InfoBoxList.Item>
+
+  {/* Repeat InfoBoxList.Item + InfoBox for each item as needed */}
+</InfoBoxList>
+```
