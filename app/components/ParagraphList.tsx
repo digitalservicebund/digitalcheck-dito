@@ -134,7 +134,6 @@ function Paragraph({
 }>) {
   const groupedAbsaetze = groupAbsaetzeWithoutRelevantPrinciples(
     paragraph.Absaetze,
-    principlesToShow,
   );
 
   // If there are no Absätze with relevant principles, don't show the paragraph

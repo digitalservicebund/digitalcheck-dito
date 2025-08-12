@@ -1,8 +1,6 @@
 import {
   Absatz,
-  BasePrinzip,
   ExampleParagraph,
-  PrinzipErfuellung,
   PrinzipWithAnwendungen,
   PrinzipWithAnwendungenAndExample,
 } from "./strapiData.server";
@@ -17,18 +15,6 @@ export type Node = {
   url?: string;
 };
 
-export const filterErfuellungenByPrinciples = (
-  erfuellungen: PrinzipErfuellung[],
-  principlesToShow: BasePrinzip[],
-) =>
-  erfuellungen.filter(
-    (erfuellung) =>
-      erfuellung.Prinzip &&
-      principlesToShow
-        .map((principle) => principle.Nummer)
-        .includes(erfuellung.Prinzip.Nummer),
-  );
-
 /**
  * This function returns an ordered array of Absaetze which have a relevant PrinzipErfuellungen
  * interlaced with arrays of Absaetze which have no relevant PrinzipErfuellungen that are grouped together.
@@ -39,24 +25,17 @@ export const filterErfuellungenByPrinciples = (
  */
 export function groupAbsaetzeWithoutRelevantPrinciples(
   absaetze: Absatz[],
-  principlesToShow: BasePrinzip[],
 ): (AbsatzWithNumber | AbsatzWithNumber[])[] {
   const filteredAbsaetzeWithNumber = absaetze.map((absatz, index) => ({
     ...absatz,
     number: index + 1,
-    PrinzipErfuellungen: absatz.PrinzipErfuellungen
-      ? filterErfuellungenByPrinciples(
-          absatz.PrinzipErfuellungen,
-          principlesToShow,
-        )
-      : [],
   }));
 
   // Group consecutive Absaetze without a relevant PrinzipErfuellungen together
   return filteredAbsaetzeWithNumber.reduce(
     (groups, absatz) => {
       // If the current Absatz has Erfuellungen, add it as a standalone item
-      if (absatz.PrinzipErfuellungen.length) {
+      if (absatz.PrinzipErfuellungen?.length) {
         groups.push(absatz);
         return groups;
       }

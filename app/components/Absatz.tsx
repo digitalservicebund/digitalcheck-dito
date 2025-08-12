@@ -31,6 +31,16 @@ export default function Absatz({
 }: Readonly<AbsatzProps>) {
   const content = prependNumberToAbsatz(absatz);
 
+  // Only show explanations for principles that are in the principlesToShow array
+  const principlesToShowNumbers = principlesToShow.map(
+    (principle) => principle.Nummer,
+  );
+  const erfuellungenToShow = absatz.PrinzipErfuellungen?.filter(
+    (erfuellung) =>
+      erfuellung.Prinzip?.Nummer &&
+      principlesToShowNumbers.includes(erfuellung.Prinzip.Nummer),
+  );
+
   return (
     <PrincipleHighlightProvider
       absatzId={absatz.id.toString()}
@@ -46,36 +56,38 @@ export default function Absatz({
             underline: PrincipleHighlightModifier,
           }}
         />
-        <PrincipleExplanationList absatz={absatz} />
+        {erfuellungenToShow && erfuellungenToShow.length > 0 && (
+          <PrincipleExplanationList
+            erfuellungen={erfuellungenToShow}
+            absatzNumber={absatz.number}
+          />
+        )}
       </div>
     </PrincipleHighlightProvider>
   );
 }
 
 type PrincipleExplanationListProps = {
-  absatz: AbsatzWithNumber;
+  erfuellungen: PrinzipErfuellung[];
+  absatzNumber: number;
 };
 
 function PrincipleExplanationList({
-  absatz,
+  erfuellungen,
+  absatzNumber,
 }: Readonly<PrincipleExplanationListProps>) {
-  if (!absatz.PrinzipErfuellungen) return undefined;
-
   return (
     <div className="space-y-8">
       <Heading
         tagName="h4"
         className="ds-label-01-bold"
-        ariaLabel={`${examples.paragraphs.ariaLabelPrefix} ${absatz.number}: ${examples.paragraphs.explanation}`}
+        ariaLabel={`${examples.paragraphs.ariaLabelPrefix} ${absatzNumber}: ${examples.paragraphs.explanation}`}
       >
         {examples.paragraphs.explanation}
       </Heading>
-      {absatz.PrinzipErfuellungen.map(
-        (erfuellung) =>
-          erfuellung.Prinzip && (
-            <PrincipleExplanation key={erfuellung.id} erfuellung={erfuellung} />
-          ),
-      )}
+      {erfuellungen.map((erfuellung) => (
+        <PrincipleExplanation key={erfuellung.id} erfuellung={erfuellung} />
+      ))}
     </div>
   );
 }
