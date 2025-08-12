@@ -52,7 +52,11 @@ export default function Index() {
                 />
 
                 <div className="mt-40 self-center">
-                  <Button href={step.link.href} look={step.link.look}>
+                  <Button
+                    href={step.link.href}
+                    look={step.link.look}
+                    plausibleEventName={step.link.plausibleEventName}
+                  >
                     {step.link.text}
                   </Button>
                 </div>

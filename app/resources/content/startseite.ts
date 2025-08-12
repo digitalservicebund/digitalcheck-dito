@@ -31,6 +31,8 @@ export const startseite = {
           text: "Digitalbezug einschätzen",
           href: ROUTE_PRECHECK.url,
           look: "primary" as const,
+          plausibleEventName:
+            "Content.Schritt+fuer+Schritt.Link+Digitalbezug+einschaetzen",
         },
         description:
           "Sie identifizieren Digitalbezug und Interoperabilitätsanforderungen für Ihr Vorhaben.",
@@ -47,6 +49,8 @@ export const startseite = {
           text: "Regelung erarbeiten",
           href: ROUTE_METHODS.url,
           look: "tertiary" as const,
+          plausibleEventName:
+            "Content.Schritt+fuer+Schritt.Link+Regelung+erarbeiten",
         },
         description:
           "Bei einer positiven Vorprüfung wenden Sie die Werkzeuge und Methoden an, die die Digitaltauglichkeit Ihres Vorhabens sicherstellen.",
@@ -63,6 +67,8 @@ export const startseite = {
           text: "Dokumentation erstellen",
           href: ROUTE_DOCUMENTATION.url,
           look: "tertiary" as const,
+          plausibleEventName:
+            "Content.Schritt+fuer+Schritt.Link+Dokumentation+erstellen",
         },
         description:
           "Sie dokumentieren, wie Sie Digitaltauglichkeit in Ihrer Regelung sichergestellt haben.",
@@ -85,6 +91,8 @@ export const startseite = {
       link: {
         title: "Mehr zur Digitaltauglichkeit erfahren",
         url: ROUTE_FUNDAMENTALS_DIGITAL_READINESS.url,
+        plausibleEventName:
+          "Content.Grundlagen+zum+Digitalcheck.Link+Mehr+zur+Digitaltauglichkeit+erfahren",
       },
     },
     nationaleNormenkontrolle: {
@@ -94,6 +102,8 @@ export const startseite = {
       link: {
         title: "Mehr zum NKR erfahren",
         url: ROUTE_FUNDAMENTALS_NKR.url,
+        plausibleEventName:
+          "Content.Grundlagen+zum+Digitalcheck.Link+Mehr+zum+NKR+erfahren",
       },
     },
   },
@@ -107,11 +117,13 @@ export const startseite = {
         text: "Zu Visualisierungen",
         href: ROUTE_METHODS_TASKS_PROCESSES.url,
         look: "tertiary" as const,
+        plausibleEventName: "Content.Visualisierungen.Link+Zu+Visualisierungen",
       },
       {
         text: "Beispiele",
         href: ROUTE_EXAMPLES_VISUALISATIONS.url,
         look: "ghost" as const,
+        plausibleEventName: "Content.Visualisierungen.Link+Beispiele",
       },
     ],
   },
@@ -125,11 +137,13 @@ export const startseite = {
         text: "Zu den Prinzipien",
         href: ROUTE_METHODS_PRINCIPLES.url,
         look: "tertiary" as const,
+        plausibleEventName: "Content.Prinzipien.Link+Zu+den+Prinzipien",
       },
       {
         text: "Beispiele",
         href: ROUTE_EXAMPLES_PRINCIPLES.url,
         look: "ghost" as const,
+        plausibleEventName: "Content.Prinzipien.Link+Beispiele",
       },
     ],
   },
@@ -142,6 +156,7 @@ export const startseite = {
       text: "Angebote kennenlernen",
       href: ROUTE_SUPPORT.url,
       look: "tertiary" as const,
+      plausibleEventName: "Content.Unterstuetzung.Link+Angebote+kennenlernen",
     },
   },
 

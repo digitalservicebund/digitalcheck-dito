@@ -1,6 +1,8 @@
 import { Link } from "react-router";
+import { twJoin } from "tailwind-merge";
 import { A11Y_MESSAGE_NEW_WINDOW } from "~/resources/constants";
 import { Route } from "~/resources/staticRoutes";
+import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import tailwindMerge from "~/utils/tailwindMerge";
 import Heading from "./Heading";
 import { openInNewIconElement } from "./openInNewWindow";
@@ -15,6 +17,7 @@ export type LinkProps = Route & {
   preText?: string;
   openInNewTab?: boolean;
   download?: boolean;
+  plausibleEventName?: string;
 };
 
 const LinkItem = ({ link }: { link: Readonly<LinkProps> }) => (
@@ -22,7 +25,10 @@ const LinkItem = ({ link }: { link: Readonly<LinkProps> }) => (
     {link?.preText}{" "}
     <Link
       to={link.url}
-      className="text-link increase-tap-area flex items-center"
+      className={twJoin(
+        "text-link increase-tap-area flex items-center",
+        getPlausibleEventClassName(link.plausibleEventName),
+      )}
       target={link.openInNewTab ? "_blank" : undefined}
       rel={link.openInNewTab ? "noreferrer" : undefined}
       aria-describedby={link.openInNewTab ? A11Y_MESSAGE_NEW_WINDOW : undefined}
