@@ -3,6 +3,8 @@ import {
   BasePrinzip,
   ExampleParagraph,
   PrinzipErfuellung,
+  PrinzipWithAnwendungen,
+  PrinzipWithAnwendungenAndExample,
 } from "./strapiData.server";
 
 export type AbsatzWithNumber = Absatz & { number: number };
@@ -113,3 +115,12 @@ export const getAbsatzFromExampleParagraph = (
 ) =>
   exampleParagraph &&
   exampleParagraph.Paragraph.Absaetze[exampleParagraph.AbsatzNumber - 1];
+
+export const getPrincipleWithExampleAbsatz = (
+  principle: PrinzipWithAnwendungen,
+): PrinzipWithAnwendungenAndExample | null => {
+  const exampleAbsatz = getAbsatzFromExampleParagraph(principle.Example);
+  if (!exampleAbsatz) return null;
+
+  return { ...principle, exampleAbsatz } as PrinzipWithAnwendungenAndExample;
+};

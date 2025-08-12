@@ -91,6 +91,11 @@ export type PrinzipWithAnwendungen = BasePrinzip & {
   PrinzipienAnwendung: PrinzipienAnwendung[];
 };
 
+export type PrinzipWithAnwendungenAndExample = PrinzipWithAnwendungen & {
+  Example: ExampleParagraph;
+  exampleAbsatz: Absatz;
+};
+
 export type PrinzipWithUmsetzungen = BasePrinzip & {
   documentId: string;
   GuteUmsetzungen: Digitalcheck[];

@@ -25,11 +25,13 @@ import {
   absatzIdTag,
   filterErfuellungenByPrinciples,
   getAbsatzFromExampleParagraph,
+  getPrincipleWithExampleAbsatz,
 } from "~/utils/paragraphUtils";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,
   PrinzipWithAnwendungen,
+  PrinzipWithAnwendungenAndExample,
 } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 
@@ -66,10 +68,12 @@ export default function FivePrinciples() {
               id: "instruction",
               title: methodsFivePrinciples.anchor.instruction,
             },
-            ...prinzips.map((prinzip) => ({
-              id: slugify(prinzip.Name),
-              title: `${methodsFivePrinciples.anchor.principle} ${prinzip.Name}`,
-            })),
+            ...prinzips.map((prinzip) => {
+              return {
+                id: slugify(prinzip.Name),
+                title: `${methodsFivePrinciples.anchor.principle} ${prinzip.Name}`,
+              };
+            }),
           ]}
         />
       </Hero>
@@ -93,11 +97,10 @@ export default function FivePrinciples() {
       </Container>
 
       {prinzips.map((prinzip) => {
+        const prinzipWithExampleAbsatz = getPrincipleWithExampleAbsatz(prinzip);
+
         return (
-          <Container
-            className="flex flex-col gap-40 pb-64"
-            key={slugify(prinzip.Name)}
-          >
+          <Container className="space-y-40 pb-64" key={slugify(prinzip.Name)}>
             <InfoBox
               identifier={slugify(prinzip.Name)}
               heading={{
@@ -112,41 +115,41 @@ export default function FivePrinciples() {
               detailsSummary={getDetailsSummary(prinzip)}
             />
 
-            <PrincipleExample prinzip={prinzip} />
+            {prinzipWithExampleAbsatz && (
+              <PrincipleExample prinzip={prinzipWithExampleAbsatz} />
+            )}
           </Container>
         );
       })}
 
       <PrinciplePosterBox />
 
-      {methodsFivePrinciples.nextStep && (
-        <Container>
-          <Box
-            heading={{
-              text: methodsFivePrinciples.nextStep.title,
-              look: "ds-heading-03-reg",
-            }}
-            badge={{
-              text: methodsFivePrinciples.nextStep.label,
-              Icon: methodsFivePrinciples.nextStep.icon,
-            }}
-            content={{ markdown: methodsFivePrinciples.nextStep.text }}
-            buttons={methodsFivePrinciples.nextStep.buttons}
-          />
-        </Container>
-      )}
+      <Container>
+        <Box
+          heading={{
+            text: methodsFivePrinciples.nextStep.title,
+            look: "ds-heading-03-reg",
+          }}
+          badge={{
+            text: methodsFivePrinciples.nextStep.label,
+            Icon: methodsFivePrinciples.nextStep.icon,
+          }}
+          content={{ markdown: methodsFivePrinciples.nextStep.text }}
+          buttons={methodsFivePrinciples.nextStep.buttons}
+        />
+      </Container>
     </>
   );
 }
 
 function PrincipleExample({
   prinzip,
-}: Readonly<{ prinzip: PrinzipWithAnwendungen }>) {
-  const exampleAbsatz = getAbsatzFromExampleParagraph(prinzip.Example);
-  if (!exampleAbsatz) return undefined;
-
-  const paragraph = prinzip.Example!.Paragraph;
-  const absatzNumber = prinzip.Example!.AbsatzNumber;
+}: Readonly<{
+  prinzip: PrinzipWithAnwendungenAndExample;
+}>) {
+  const exampleAbsatz = prinzip.exampleAbsatz;
+  const paragraph = prinzip.Example.Paragraph;
+  const absatzNumber = prinzip.Example.AbsatzNumber;
 
   const erfuellungen = exampleAbsatz.PrinzipErfuellungen
     ? filterErfuellungenByPrinciples(exampleAbsatz.PrinzipErfuellungen, [
@@ -255,7 +258,6 @@ const getDetailsSummary = (prinzip: PrinzipWithAnwendungen) => {
     title: {
       text: methodsFivePrinciples.detailsSummaryTitle,
       tagName: "h3",
-      className: "ds-label-01-bold",
     } as HeadingProps,
     items,
   };

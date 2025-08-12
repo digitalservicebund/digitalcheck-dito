@@ -25,11 +25,13 @@ import {
   absatzIdTag,
   filterErfuellungenByPrinciples,
   getAbsatzFromExampleParagraph,
+  getPrincipleWithExampleAbsatz,
 } from "~/utils/paragraphUtils";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,
   PrinzipWithAnwendungen,
+  PrinzipWithAnwendungenAndExample,
 } from "~/utils/strapiData.server";
 
 import { slugify } from "~/utils/utilFunctions";
@@ -96,11 +98,10 @@ export default function FivePrinciples() {
       </Container>
 
       {prinzips.map((prinzip) => {
+        const prinzipWithExampleAbsatz = getPrincipleWithExampleAbsatz(prinzip);
+
         return (
-          <Container
-            className="flex flex-col gap-40 pb-64"
-            key={slugify(prinzip.Name)}
-          >
+          <Container className="space-y-40 pb-64" key={slugify(prinzip.Name)}>
             <InfoBox
               identifier={slugify(prinzip.Name)}
               heading={{
@@ -115,41 +116,41 @@ export default function FivePrinciples() {
               detailsSummary={getDetailsSummary(prinzip)}
             />
 
-            <PrincipleExample prinzip={prinzip} />
+            {prinzipWithExampleAbsatz && (
+              <PrincipleExample prinzip={prinzipWithExampleAbsatz} />
+            )}
           </Container>
         );
       })}
 
       <PrinciplePosterBox />
 
-      {methodsFivePrinciples.nextStep && (
-        <Container>
-          <Box
-            heading={{
-              text: methodsFivePrinciples.nextStep.title,
-              look: "ds-heading-03-reg",
-            }}
-            badge={{
-              text: methodsFivePrinciples.nextStep.label,
-              Icon: methodsFivePrinciples.nextStep.icon,
-            }}
-            content={{ markdown: methodsFivePrinciples.nextStep.text }}
-            buttons={methodsFivePrinciples.nextStep.buttons}
-          />
-        </Container>
-      )}
+      <Container>
+        <Box
+          heading={{
+            text: methodsFivePrinciples.nextStep.title,
+            look: "ds-heading-03-reg",
+          }}
+          badge={{
+            text: methodsFivePrinciples.nextStep.label,
+            Icon: methodsFivePrinciples.nextStep.icon,
+          }}
+          content={{ markdown: methodsFivePrinciples.nextStep.text }}
+          buttons={methodsFivePrinciples.nextStep.buttons}
+        />
+      </Container>
     </>
   );
 }
 
 function PrincipleExample({
   prinzip,
-}: Readonly<{ prinzip: PrinzipWithAnwendungen }>) {
-  const exampleAbsatz = getAbsatzFromExampleParagraph(prinzip.Example);
-  if (!exampleAbsatz) return undefined;
-
-  const paragraph = prinzip.Example!.Paragraph;
-  const absatzNumber = prinzip.Example!.AbsatzNumber;
+}: Readonly<{
+  prinzip: PrinzipWithAnwendungenAndExample;
+}>) {
+  const exampleAbsatz = prinzip.exampleAbsatz;
+  const paragraph = prinzip.Example.Paragraph;
+  const absatzNumber = prinzip.Example.AbsatzNumber;
 
   const erfuellungen = exampleAbsatz.PrinzipErfuellungen
     ? filterErfuellungenByPrinciples(exampleAbsatz.PrinzipErfuellungen, [
@@ -207,17 +208,17 @@ const getDetailsSummary = (prinzip: PrinzipWithAnwendungen) => {
         <BlocksRenderer content={prinzipienAnwendung.Text} />
         {prinzipienAnwendung.Questions && (
           <>
-            <p>
-              <strong>{methodsFivePrinciples.questionsTitle}</strong>
-            </p>
+            <h4 className="ds-label-02-bold">
+              {methodsFivePrinciples.questionsTitle}
+            </h4>
             <BlocksRenderer content={prinzipienAnwendung.Questions} />
           </>
         )}
         {prinzipienAnwendung.WordingExample && (
           <>
-            <p>
-              <strong>{methodsFivePrinciples.wordingExampleTitle}</strong>
-            </p>
+            <h4 className="ds-label-02-bold">
+              {methodsFivePrinciples.wordingExampleTitle}
+            </h4>
             <BlocksRenderer content={prinzipienAnwendung.WordingExample} />
           </>
         )}
@@ -227,13 +228,11 @@ const getDetailsSummary = (prinzip: PrinzipWithAnwendungen) => {
             principlesToShow={[prinzip]}
             useAnchorLinks={false}
           >
-            <p>
-              <strong>
-                {methodsFivePrinciples.exampleTitle} §{" "}
-                {prinzipienAnwendung.Example!.Paragraph.Nummer}{" "}
-                {prinzipienAnwendung.Example!.Paragraph.Gesetz}:
-              </strong>
-            </p>
+            <h4 className="ds-label-02-bold">
+              {methodsFivePrinciples.exampleTitle} §{" "}
+              {prinzipienAnwendung.Example!.Paragraph.Nummer}{" "}
+              {prinzipienAnwendung.Example!.Paragraph.Gesetz}:
+            </h4>
             <BlocksRenderer
               content={exampleAbsatz.Text}
               modifiers={{
