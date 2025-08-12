@@ -193,7 +193,6 @@ const getDetailsSummary = (prinzip: PrinzipWithAnwendungen) => {
       prinzipienAnwendung.Example,
     );
 
-    // TODO: maybe something different than p and strong
     const content = (
       <div className="space-y-4">
         <BlocksRenderer content={prinzipienAnwendung.Text} />
