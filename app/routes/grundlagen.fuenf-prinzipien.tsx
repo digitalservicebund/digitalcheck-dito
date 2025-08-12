@@ -16,6 +16,7 @@ import TableOfContents from "~/components/TableOfContents";
 import { PrincipleHighlightProvider } from "~/providers/PrincipleHighlightProvider";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import {
+  ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_REGELUNGEN,
 } from "~/resources/staticRoutes";
@@ -95,12 +96,6 @@ export default function FivePrinciples() {
       </Container>
 
       {prinzips.map((prinzip) => {
-        const principle = methodsFivePrinciples.principles.find(
-          ({ principleNumber }) => principleNumber === prinzip.Nummer,
-        );
-
-        if (!principle) return;
-
         return (
           <Container
             className="flex flex-col gap-40 pb-64"
@@ -117,7 +112,7 @@ export default function FivePrinciples() {
                 principleNumber: prinzip.Nummer,
               }}
               content={prinzip.Beschreibung}
-              detailsSummary={getDetailsSummary(prinzip, principle.exampleLink)}
+              detailsSummary={getDetailsSummary(prinzip)}
             />
 
             <PrincipleExample prinzip={prinzip} />
@@ -198,10 +193,7 @@ function PrincipleExample({
   );
 }
 
-const getDetailsSummary = (
-  prinzip: PrinzipWithAnwendungen,
-  exampleLink: string,
-) => {
+const getDetailsSummary = (prinzip: PrinzipWithAnwendungen) => {
   const { PrinzipienAnwendung: prinzipienAnwendungen } = prinzip;
 
   const items = prinzipienAnwendungen.map((prinzipienAnwendung) => {
@@ -250,7 +242,7 @@ const getDetailsSummary = (
             />
             <Link
               className="text-link"
-              to={`${exampleLink}#${absatzIdTag(exampleAbsatz.id)}`}
+              to={`${ROUTE_EXAMPLES_PRINCIPLES.url}/${prinzip.URLBezeichnung}#${absatzIdTag(exampleAbsatz.id)}`}
             >
               {methodsFivePrinciples.exampleLinkText}
             </Link>

@@ -83,6 +83,7 @@ export type BasePrinzip = {
   Beschreibung: Node[];
   Nummer: PrincipleNumber;
   order: number;
+  URLBezeichnung: string;
 };
 
 export type PrinzipWithAnwendungen = BasePrinzip & {
@@ -93,7 +94,6 @@ export type PrinzipWithAnwendungen = BasePrinzip & {
 export type PrinzipWithUmsetzungen = BasePrinzip & {
   documentId: string;
   GuteUmsetzungen: Digitalcheck[];
-  URLBezeichnung: string;
   Kurzbezeichnung: string;
 };
 
@@ -210,6 +210,7 @@ query GetPrinzips {
     Beschreibung
     order
     Nummer
+    URLBezeichnung
     Example {
       AbsatzNumber
       Paragraph {
