@@ -55,18 +55,16 @@ import PrincipleHighlightModifier from "./PrincipleHighlightModifier";
  │    │    │    │
  │    │    │    └─── PrincipleHighlight ...
  │    │    │
- │    │    ├── PrincipleExplanationList
- │    │    │    │ Renders a list of PrincipleExplanation
- │    │    │    │
- │    │    │    ├── PrincipleExplanation
- │    │    │    │    │ Renders an explanation for a PrinzipErfuellung.
- │    │    │    │    │ Creates a link that refers to the clicked highlight.
- │    │    │    │    ├─ Context consumed: absatzId, activeHighlight, setActiveHighlight
- │    │    │    │    └─ onClick: setActiveHighlight to null
- │    │    │    │
- │    │    │    └── PrincipleExplanation ...
- │    │    │
  │    │    └── PrincipleExplanationList
+ │    │         │ Renders a list of PrincipleExplanation
+ │    │         │
+ │    │         ├── PrincipleExplanation
+ │    │         │    │ Renders an explanation for a PrinzipErfuellung.
+ │    │         │    │ Creates a link that refers to the clicked highlight.
+ │    │         │    ├─ Context consumed: absatzId, activeHighlight, setActiveHighlight
+ │    │         │    └─ onClick: setActiveHighlight to null
+ │    │         │
+ │    │         └── PrincipleExplanation ...
  │    │
  │    ├── AbsatzGroupWithoutErfuellungen
  │    │    │ Renders a group of Absaetze without relevant principles as a collapsible section.
@@ -80,8 +78,8 @@ import PrincipleHighlightModifier from "./PrincipleHighlightModifier";
  │    │    └── BlocksRenderer ...
  │    │
  │    ├── Absatz ...
- │    ├── Absatz ...
- │    └── AbsatzGroupWithoutErfuellungen ...
+ │    ├── AbsatzGroupWithoutErfuellungen ...
+ │    └── Absatz ...
  │
  ├── Paragraph ...
  └── Paragraph ...
