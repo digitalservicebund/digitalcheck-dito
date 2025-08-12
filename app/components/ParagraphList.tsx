@@ -1,6 +1,7 @@
 import Heading from "~/components/Heading";
 import {
   AbsatzWithNumber,
+  filterErfuellungenByPrinciples,
   groupAbsaetzeWithoutRelevantPrinciples,
   prependNumberToAbsatz,
 } from "~/utils/paragraphUtils";
@@ -132,8 +133,12 @@ function Paragraph({
   paragraph: Paragraph;
   principlesToShow: PrinzipWithUmsetzungen[];
 }>) {
-  const groupedAbsaetze = groupAbsaetzeWithoutRelevantPrinciples(
+  const absaetzeWithFilteredErfuellungen = filterErfuellungenByPrinciples(
     paragraph.Absaetze,
+    principlesToShow,
+  );
+  const groupedAbsaetze = groupAbsaetzeWithoutRelevantPrinciples(
+    absaetzeWithFilteredErfuellungen,
   );
 
   // If there are no Absätze with relevant principles, don't show the paragraph

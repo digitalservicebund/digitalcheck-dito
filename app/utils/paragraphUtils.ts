@@ -1,5 +1,6 @@
-import {
+import type {
   Absatz,
+  BasePrinzip,
   ExampleParagraph,
   PrinzipWithAnwendungen,
   PrinzipWithAnwendungenAndExample,
@@ -14,6 +15,21 @@ export type Node = {
   underline?: boolean;
   url?: string;
 };
+
+export const filterErfuellungenByPrinciples = (
+  absaetze: Absatz[],
+  principlesToShow: BasePrinzip[],
+) =>
+  absaetze.map((absatz) => ({
+    ...absatz,
+    PrinzipErfuellungen: absatz.PrinzipErfuellungen?.filter(
+      (erfuellung) =>
+        erfuellung.Prinzip &&
+        principlesToShow
+          .map((principle) => principle.Nummer)
+          .includes(erfuellung.Prinzip.Nummer),
+    ),
+  }));
 
 /**
  * This function returns an ordered array of Absaetze which have a relevant PrinzipErfuellungen
@@ -91,9 +107,7 @@ export const absatzIdTag = (absatzId: string | number) => `absatz-${absatzId}`;
 
 export const getAbsatzFromExampleParagraph = (
   exampleParagraph?: ExampleParagraph,
-) =>
-  exampleParagraph &&
-  exampleParagraph.Paragraph.Absaetze[exampleParagraph.AbsatzNumber - 1];
+) => exampleParagraph?.Paragraph.Absaetze[exampleParagraph.AbsatzNumber - 1];
 
 export const getPrincipleWithExampleAbsatz = (
   principle: PrinzipWithAnwendungen,
