@@ -13,14 +13,14 @@ import {
   explanationID,
   prependNumberToAbsatz,
 } from "~/utils/paragraphUtils";
-import { Prinzip, PrinzipErfuellung } from "~/utils/strapiData.server";
+import { BasePrinzip, PrinzipErfuellung } from "~/utils/strapiData.server";
 import { BlocksRenderer } from "./BlocksRenderer";
 import Heading from "./Heading";
 import PrincipleHighlightModifier from "./PrincipleHighlightModifier";
 
 type AbsatzProps = {
   absatz: AbsatzWithNumber;
-  principlesToShow: Prinzip[];
+  principlesToShow: BasePrinzip[];
   useAnchorLinks: boolean;
 };
 

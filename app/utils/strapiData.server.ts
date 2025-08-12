@@ -40,7 +40,7 @@ export type GesetzStatus =
 export type PrinzipErfuellung = {
   id: number;
   WarumGut: Node[];
-  Prinzip?: Prinzip;
+  Prinzip?: BasePrinzip;
 };
 
 export type Absatz = {
@@ -60,6 +60,14 @@ export type ExampleParagraph = {
   };
 };
 
+type PrinzipienAnwendung = {
+  Title: string;
+  Text: Node[];
+  Questions?: Node[];
+  WordingExample?: Node[];
+  Example?: ExampleParagraph;
+};
+
 export type Paragraph = {
   documentId: string;
   Nummer: string;
@@ -70,14 +78,19 @@ export type Paragraph = {
   Absaetze: Absatz[];
 };
 
-export type Prinzip = {
+export type BasePrinzip = {
   Name: string;
   Beschreibung: Node[];
   Nummer: PrincipleNumber;
   order: number;
 };
 
-export type FullPrinzip = Prinzip & {
+export type PrinzipWithAnwendungen = BasePrinzip & {
+  Example?: ExampleParagraph;
+  PrinzipienAnwendung: PrinzipienAnwendung[];
+};
+
+export type PrinzipWithUmsetzungen = BasePrinzip & {
   documentId: string;
   GuteUmsetzungen: Digitalcheck[];
   URLBezeichnung: string;

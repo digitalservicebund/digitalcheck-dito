@@ -1,10 +1,10 @@
 import { ReactNode, useState } from "react";
 import PrincipleHighlightContext from "~/contexts/PrincipleHighlightContext";
-import { Prinzip } from "~/utils/strapiData.server";
+import { BasePrinzip } from "~/utils/strapiData.server";
 
 type PrincipleHighlightProviderProps = {
   children: ReactNode;
-  principlesToShow: Prinzip[];
+  principlesToShow: BasePrinzip[];
   useAnchorLinks: boolean;
   absatzId: string;
 };

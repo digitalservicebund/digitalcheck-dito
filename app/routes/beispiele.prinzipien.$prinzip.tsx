@@ -22,9 +22,9 @@ import {
 import constructMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,
-  FullPrinzip,
   paragraphFields,
   prinzipCoreFields,
+  PrinzipWithUmsetzungen,
 } from "~/utils/strapiData.server";
 import { formatDate, gesetzStatusMap } from "~/utils/utilFunctions";
 import type { Route } from "./+types/beispiele.prinzipien.$prinzip";
@@ -59,10 +59,9 @@ query GetPrinzips($slug: String!) {
 }`;
 
 export const loader = async ({ params }: Route.LoaderArgs) => {
-  const prinzipData = await fetchStrapiData<{ prinzips: FullPrinzip[] }>(
-    GET_PRINZIPS_QUERY,
-    { slug: params.prinzip },
-  );
+  const prinzipData = await fetchStrapiData<{
+    prinzips: PrinzipWithUmsetzungen[];
+  }>(GET_PRINZIPS_QUERY, { slug: params.prinzip });
 
   if ("error" in prinzipData) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
@@ -79,7 +78,7 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
 
 export default function DigitaltauglichkeitPrinzipienDetail() {
   const { prinzip } = useLoaderData<typeof loader>();
-  const prinzips = useOutletContext<FullPrinzip[]>();
+  const prinzips = useOutletContext<PrinzipWithUmsetzungen[]>();
   const navigate = useNavigate();
 
   const { GuteUmsetzungen } = prinzip;

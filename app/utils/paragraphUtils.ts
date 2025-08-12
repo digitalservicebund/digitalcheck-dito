@@ -1,7 +1,7 @@
 import {
   Absatz,
+  BasePrinzip,
   ExampleParagraph,
-  Prinzip,
   PrinzipErfuellung,
 } from "./strapiData.server";
 
@@ -17,7 +17,7 @@ export type Node = {
 
 export const filterErfuellungenByPrinciples = (
   erfuellungen: PrinzipErfuellung[],
-  principlesToShow: Prinzip[],
+  principlesToShow: BasePrinzip[],
 ) =>
   erfuellungen.filter(
     (erfuellung) =>
@@ -37,7 +37,7 @@ export const filterErfuellungenByPrinciples = (
  */
 export function groupAbsaetzeWithoutRelevantPrinciples(
   absaetze: Absatz[],
-  principlesToShow: Prinzip[],
+  principlesToShow: BasePrinzip[],
 ): (AbsatzWithNumber | AbsatzWithNumber[])[] {
   const filteredAbsaetzeWithNumber = absaetze.map((absatz, index) => ({
     ...absatz,

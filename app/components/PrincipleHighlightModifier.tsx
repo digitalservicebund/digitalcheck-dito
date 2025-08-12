@@ -5,7 +5,7 @@ import PrincipleHighlightContext from "~/contexts/PrincipleHighlightContext";
 import { useIsMobileSize } from "~/hooks/deviceHook";
 import { PRINCIPLE_COLORS } from "~/resources/constants";
 import { explanationID, Node } from "~/utils/paragraphUtils";
-import { Prinzip } from "~/utils/strapiData.server";
+import { BasePrinzip } from "~/utils/strapiData.server";
 
 export default function PrincipleHighlightModifier({ node }: { node: Node }) {
   const { principlesToShow, setActiveHighlight, absatzId, useAnchorLinks } =
@@ -61,7 +61,7 @@ export default function PrincipleHighlightModifier({ node }: { node: Node }) {
 type PrincipleHighlightProps = {
   id: string;
   children: string;
-  principle: Prinzip;
+  principle: BasePrinzip;
   absatzId: string;
 };
 

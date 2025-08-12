@@ -1,8 +1,8 @@
 import { createContext } from "react";
-import { Prinzip } from "~/utils/strapiData.server";
+import { BasePrinzip } from "~/utils/strapiData.server";
 
 type PrincipleHighlightContextType = {
-  principlesToShow: Prinzip[];
+  principlesToShow: BasePrinzip[];
   activeHighlight: string | null;
   setActiveHighlight: React.Dispatch<React.SetStateAction<string | null>>;
   useAnchorLinks: boolean;

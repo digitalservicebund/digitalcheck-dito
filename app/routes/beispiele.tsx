@@ -7,13 +7,13 @@ import { supportBanner } from "~/resources/content/shared/support-banner";
 import {
   fetchStrapiData,
   GET_PRINZIPS_QUERY,
-  Prinzip,
+  PrinzipWithUmsetzungen,
 } from "~/utils/strapiData.server";
 
 export async function loader() {
-  const prinzipData = await fetchStrapiData<{ prinzips: Prinzip[] }>(
-    GET_PRINZIPS_QUERY,
-  );
+  const prinzipData = await fetchStrapiData<{
+    prinzips: PrinzipWithUmsetzungen[];
+  }>(GET_PRINZIPS_QUERY);
 
   if ("error" in prinzipData) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error

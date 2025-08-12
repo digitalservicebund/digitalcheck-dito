@@ -14,7 +14,6 @@ import { PrinciplePosterBox } from "~/components/PrinciplePosterBox";
 import Separator from "~/components/Separator";
 import TableOfContents from "~/components/TableOfContents";
 import { PrincipleHighlightProvider } from "~/providers/PrincipleHighlightProvider";
-import { PrincipleNumber } from "~/resources/constants";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import {
   ROUTE_FUNDAMENTALS_PRINCIPLES,
@@ -25,12 +24,11 @@ import {
   absatzIdTag,
   filterErfuellungenByPrinciples,
   getAbsatzFromExampleParagraph,
-  Node,
 } from "~/utils/paragraphUtils";
 import {
-  ExampleParagraph,
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,
+  PrinzipWithAnwendungen,
 } from "~/utils/strapiData.server";
 
 import { slugify } from "~/utils/utilFunctions";
@@ -39,28 +37,10 @@ export function meta() {
   return constructMetaTitle(ROUTE_FUNDAMENTALS_PRINCIPLES.title);
 }
 
-type PrinzipienAnwendung = {
-  Title: string;
-  Text: Node[];
-  Questions?: Node[];
-  WordingExample?: Node[];
-  Example?: ExampleParagraph;
-};
-
-type Prinzip = {
-  Name: string;
-  Beschreibung: Node[];
-  order: number;
-  Nummer: PrincipleNumber;
-
-  Example?: ExampleParagraph;
-  PrinzipienAnwendung: PrinzipienAnwendung[];
-};
-
 export const loader = async () => {
-  const prinzipData = await fetchStrapiData<{ prinzips: Prinzip[] }>(
-    GET_PRINZIPS_WITH_EXAMPLES_QUERY,
-  );
+  const prinzipData = await fetchStrapiData<{
+    prinzips: PrinzipWithAnwendungen[];
+  }>(GET_PRINZIPS_WITH_EXAMPLES_QUERY);
 
   if ("error" in prinzipData) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
@@ -167,7 +147,9 @@ export default function FivePrinciples() {
   );
 }
 
-function PrincipleExample({ prinzip }: Readonly<{ prinzip: Prinzip }>) {
+function PrincipleExample({
+  prinzip,
+}: Readonly<{ prinzip: PrinzipWithAnwendungen }>) {
   const exampleAbsatz = getAbsatzFromExampleParagraph(prinzip.Example);
   if (!exampleAbsatz) return undefined;
 
@@ -216,7 +198,10 @@ function PrincipleExample({ prinzip }: Readonly<{ prinzip: Prinzip }>) {
   );
 }
 
-const getDetailsSummary = (prinzip: Prinzip, exampleLink: string) => {
+const getDetailsSummary = (
+  prinzip: PrinzipWithAnwendungen,
+  exampleLink: string,
+) => {
   const { PrinzipienAnwendung: prinzipienAnwendungen } = prinzip;
 
   const items = prinzipienAnwendungen.map((prinzipienAnwendung) => {
