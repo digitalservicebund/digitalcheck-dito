@@ -59,7 +59,7 @@ stellen damit Digitaltauglichkeit sicher.
             class="mt-40 self-center"
           >
             <a
-              class="ds-button"
+              class="ds-button plausible-event-name=Content.Schritte.Button+Vorprüfung"
               data-discover="true"
               href="/vorpruefung"
             >
@@ -158,7 +158,7 @@ stellen damit Digitaltauglichkeit sicher.
             class="mt-40 self-center"
           >
             <a
-              class="ds-button ds-button-tertiary"
+              class="ds-button ds-button-tertiary plausible-event-name=Content.Schritte.Link+Erarbeiten"
               data-discover="true"
               href="/methoden"
             >
@@ -257,7 +257,7 @@ stellen damit Digitaltauglichkeit sicher.
             class="mt-40 self-center"
           >
             <a
-              class="ds-button ds-button-tertiary"
+              class="ds-button ds-button-tertiary plausible-event-name=Content.Schritte.Link+Dokumentieren"
               data-discover="true"
               href="/dokumentation"
             >
@@ -402,7 +402,7 @@ stellen damit Digitaltauglichkeit sicher.
               <li>
                  
                 <a
-                  class="text-link increase-tap-area flex items-center"
+                  class="text-link increase-tap-area flex items-center plausible-event-name=Content.Grundlagen.Link+Digitaltauglichkeit"
                   data-discover="true"
                   href="/grundlagen/digitaltauglichkeit"
                 >
@@ -505,7 +505,7 @@ stellen damit Digitaltauglichkeit sicher.
               <li>
                  
                 <a
-                  class="text-link increase-tap-area flex items-center"
+                  class="text-link increase-tap-area flex items-center plausible-event-name=Content.Grundlagen.Link+NKR"
                   data-discover="true"
                   href="/grundlagen/normenkontrollrat"
                 >
@@ -554,7 +554,7 @@ stellen damit Digitaltauglichkeit sicher.
               class="flex flex-wrap gap-16"
             >
               <a
-                class="ds-button ds-button-tertiary"
+                class="ds-button ds-button-tertiary plausible-event-name=Content.Teaser+Visualisierungen.Link+Visualisierungen"
                 data-discover="true"
                 href="/methoden/ablaeufe-aufgaben-erfassen"
               >
@@ -567,7 +567,7 @@ stellen damit Digitaltauglichkeit sicher.
                  
               </a>
               <a
-                class="ds-button ds-button-ghost"
+                class="ds-button ds-button-ghost plausible-event-name=Content.Teaser+Visualisierungen.Link+Beispiele"
                 data-discover="true"
                 href="/beispiele/visualisierungen"
               >
@@ -608,7 +608,7 @@ stellen damit Digitaltauglichkeit sicher.
               class="flex flex-wrap gap-16"
             >
               <a
-                class="ds-button ds-button-tertiary"
+                class="ds-button ds-button-tertiary plausible-event-name=Content.Teaser+Prinzipien.Link+Prinzipien"
                 data-discover="true"
                 href="/methoden/fuenf-prinzipien"
               >
@@ -621,7 +621,7 @@ stellen damit Digitaltauglichkeit sicher.
                  
               </a>
               <a
-                class="ds-button ds-button-ghost"
+                class="ds-button ds-button-ghost plausible-event-name=Content.Teaser+Prinzipien.Link+Beispiele"
                 data-discover="true"
                 href="/beispiele/prinzipien"
               >
@@ -668,7 +668,7 @@ stellen damit Digitaltauglichkeit sicher.
           class="flex flex-wrap gap-16"
         >
           <a
-            class="ds-button ds-button-tertiary"
+            class="ds-button ds-button-tertiary plausible-event-name=Content.Support.Button+Support"
             data-discover="true"
             href="/unterstuetzung"
           >
