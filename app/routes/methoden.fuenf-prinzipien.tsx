@@ -23,7 +23,6 @@ import {
 import constructMetaTitle from "~/utils/metaTitle";
 import {
   absatzIdTag,
-  filterErfuellungenByPrinciples,
   getAbsatzFromExampleParagraph,
   getPrincipleWithExampleAbsatz,
 } from "~/utils/paragraphUtils";
@@ -151,12 +150,6 @@ function PrincipleExample({
   const paragraph = prinzip.Example.Paragraph;
   const absatzNumber = prinzip.Example.AbsatzNumber;
 
-  const erfuellungen = exampleAbsatz.PrinzipErfuellungen
-    ? filterErfuellungenByPrinciples(exampleAbsatz.PrinzipErfuellungen, [
-        prinzip,
-      ])
-    : [];
-
   const regelungsvorhaben = paragraph.Digitalcheck?.Regelungsvorhaben;
 
   return (
@@ -173,7 +166,6 @@ function PrincipleExample({
         absatz={{
           ...exampleAbsatz,
           number: absatzNumber,
-          PrinzipErfuellungen: erfuellungen,
         }}
         principlesToShow={[prinzip]}
         useAnchorLinks={false}
