@@ -16,21 +16,6 @@ export type Node = {
   url?: string;
 };
 
-export const filterErfuellungenByPrinciples = (
-  absaetze: Absatz[],
-  principlesToShow: BasePrinzip[],
-) =>
-  absaetze.map((absatz) => ({
-    ...absatz,
-    PrinzipErfuellungen: absatz.PrinzipErfuellungen?.filter(
-      (erfuellung) =>
-        erfuellung.Prinzip &&
-        principlesToShow
-          .map((principle) => principle.Nummer)
-          .includes(erfuellung.Prinzip.Nummer),
-    ),
-  }));
-
 /**
  * This function returns an ordered array of Absaetze which have a relevant PrinzipErfuellungen
  * interlaced with arrays of Absaetze which have no relevant PrinzipErfuellungen that are grouped together.
@@ -41,17 +26,28 @@ export const filterErfuellungenByPrinciples = (
  */
 export function groupAbsaetzeWithoutRelevantPrinciples(
   absaetze: Absatz[],
-): (AbsatzWithNumber | AbsatzWithNumber[])[] {
+  principlesToShow: BasePrinzip[],
+) {
   const filteredAbsaetzeWithNumber = absaetze.map((absatz, index) => ({
     ...absatz,
     number: index + 1,
   }));
 
+  const relevantPrinciples = principlesToShow.map(
+    (principle) => principle.Nummer,
+  );
+
   // Group consecutive Absaetze without a relevant PrinzipErfuellungen together
   return filteredAbsaetzeWithNumber.reduce(
     (groups, absatz) => {
-      // If the current Absatz has Erfuellungen, add it as a standalone item
-      if (absatz.PrinzipErfuellungen?.length) {
+      // If the current Absatz has a relevant Erfuellung, add it as a standalone item
+      if (
+        absatz.PrinzipErfuellungen?.some(
+          (erfuellung) =>
+            erfuellung.Prinzip &&
+            relevantPrinciples.includes(erfuellung.Prinzip.Nummer),
+        )
+      ) {
         groups.push(absatz);
         return groups;
       }
