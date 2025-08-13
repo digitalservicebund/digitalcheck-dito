@@ -1,16 +1,19 @@
 import { Outlet, useLoaderData } from "react-router";
+import Box from "~/components/Box";
+import Container from "~/components/Container";
 import SupportBanner from "~/components/SupportBanner";
+import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import {
   fetchStrapiData,
   GET_PRINZIPS_QUERY,
-  Prinzip,
+  PrinzipWithUmsetzungen,
 } from "~/utils/strapiData.server";
 
 export async function loader() {
-  const prinzipData = await fetchStrapiData<{ prinzips: Prinzip[] }>(
-    GET_PRINZIPS_QUERY,
-  );
+  const prinzipData = await fetchStrapiData<{
+    prinzips: PrinzipWithUmsetzungen[];
+  }>(GET_PRINZIPS_QUERY);
 
   if ("error" in prinzipData) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
@@ -24,6 +27,15 @@ export default function Digitaltauglichkeit() {
   return (
     <>
       <Outlet context={useLoaderData<typeof loader>()} />
+      <Container className="mt-40 mb-80 bg-blue-100" overhangingBackground>
+        <Box
+          heading={{
+            text: examplesRegelungen.yourExample.title,
+            tagName: "h2",
+          }}
+          content={{ markdown: examplesRegelungen.yourExample.text }}
+        />
+      </Container>
       <SupportBanner {...supportBanner} />
     </>
   );

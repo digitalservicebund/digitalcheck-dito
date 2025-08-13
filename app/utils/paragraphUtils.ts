@@ -1,4 +1,10 @@
-import { Absatz, Prinzip } from "./strapiData.server";
+import type {
+  Absatz,
+  BasePrinzip,
+  ExampleParagraph,
+  PrinzipWithAnwendungen,
+  PrinzipWithAnwendungenAndExample,
+} from "./strapiData.server";
 
 export type AbsatzWithNumber = Absatz & { number: number };
 export type Node = {
@@ -7,34 +13,41 @@ export type Node = {
   children?: Node[];
   format?: string;
   underline?: boolean;
+  url?: string;
 };
 
-// This function returns an ordered array of Absaetze which have a relevant PrinzipErfuellungen
-// interlaced with arrays of Absaetze which have no relevant PrinzipErfuellungen that are grouped together.
+/**
+ * This function returns an ordered array of Absaetze which have a relevant PrinzipErfuellungen
+ * interlaced with arrays of Absaetze which have no relevant PrinzipErfuellungen that are grouped together.
+ *
+ * @param absaetze
+ * @param principlesToShow
+ * @returns ordered array of Absaetze which have a relevant PrinzipErfuellungen
+ */
 export function groupAbsaetzeWithoutRelevantPrinciples(
   absaetze: Absatz[],
-  principlesToShow: Prinzip[],
-): (AbsatzWithNumber | AbsatzWithNumber[])[] {
-  // Filter relevant principles
-  const principleNumbers = principlesToShow.map(
-    (principle) => principle.Nummer,
-  );
-
+  principlesToShow: BasePrinzip[],
+) {
   const filteredAbsaetzeWithNumber = absaetze.map((absatz, index) => ({
     ...absatz,
     number: index + 1,
-    PrinzipErfuellungen: absatz.PrinzipErfuellungen.filter(
-      (erfuellung) =>
-        erfuellung.Prinzip &&
-        principleNumbers.includes(erfuellung.Prinzip.Nummer),
-    ),
   }));
+
+  const relevantPrinciples = principlesToShow.map(
+    (principle) => principle.Nummer,
+  );
 
   // Group consecutive Absaetze without a relevant PrinzipErfuellungen together
   return filteredAbsaetzeWithNumber.reduce(
     (groups, absatz) => {
-      // If the current Absatz has Erfuellungen, add it as a standalone item
-      if (absatz.PrinzipErfuellungen.length) {
+      // If the current Absatz has a relevant Erfuellung, add it as a standalone item
+      if (
+        absatz.PrinzipErfuellungen?.some(
+          (erfuellung) =>
+            erfuellung.Prinzip &&
+            relevantPrinciples.includes(erfuellung.Prinzip.Nummer),
+        )
+      ) {
         groups.push(absatz);
         return groups;
       }
@@ -82,3 +95,21 @@ export function prependNumberToAbsatz(absatz: AbsatzWithNumber) {
     ...absatz.Text.slice(1),
   ];
 }
+
+export const explanationID = (absatzId: string, principleNumber: number) =>
+  `explanation-${absatzId}-${principleNumber}`;
+
+export const absatzIdTag = (absatzId: string | number) => `absatz-${absatzId}`;
+
+export const getAbsatzFromExampleParagraph = (
+  exampleParagraph?: ExampleParagraph,
+) => exampleParagraph?.Paragraph.Absaetze[exampleParagraph.AbsatzNumber - 1];
+
+export const getPrincipleWithExampleAbsatz = (
+  principle: PrinzipWithAnwendungen,
+): PrinzipWithAnwendungenAndExample | null => {
+  const exampleAbsatz = getAbsatzFromExampleParagraph(principle.Example);
+  if (!exampleAbsatz) return null;
+
+  return { ...principle, exampleAbsatz } as PrinzipWithAnwendungenAndExample;
+};

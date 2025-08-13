@@ -1,5 +1,6 @@
 import crypto from "crypto";
 import NodeCache from "node-cache";
+import { PrincipleNumber } from "~/resources/constants";
 import { type Node } from "~/utils/paragraphUtils";
 
 const url =
@@ -38,14 +39,33 @@ export type GesetzStatus =
 
 export type PrinzipErfuellung = {
   id: number;
-  Prinzip?: Prinzip;
   WarumGut: Node[];
+  Prinzip?: BasePrinzip;
 };
 
 export type Absatz = {
   id: number;
   Text: Node[];
-  PrinzipErfuellungen: PrinzipErfuellung[];
+  PrinzipErfuellungen?: PrinzipErfuellung[];
+};
+
+export type ExampleParagraph = {
+  AbsatzNumber: number;
+  Paragraph: {
+    Titel?: string;
+    Nummer: PrincipleNumber;
+    Gesetz: string;
+    Absaetze: Absatz[];
+    Digitalcheck?: Digitalcheck;
+  };
+};
+
+type PrinzipienAnwendung = {
+  Title: string;
+  Text: Node[];
+  Questions?: Node[];
+  WordingExample?: Node[];
+  Example?: ExampleParagraph;
 };
 
 export type Paragraph = {
@@ -58,15 +78,28 @@ export type Paragraph = {
   Absaetze: Absatz[];
 };
 
-export type Prinzip = {
-  documentId: string;
+export type BasePrinzip = {
   Name: string;
   Beschreibung: Node[];
-  Nummer: 1 | 2 | 3 | 4 | 5;
-  GuteUmsetzungen: Digitalcheck[];
-  URLBezeichnung: string;
-  Kurzbezeichnung: string;
+  Nummer: PrincipleNumber;
   order: number;
+  URLBezeichnung: string;
+};
+
+export type PrinzipWithAnwendungen = BasePrinzip & {
+  Example?: ExampleParagraph;
+  PrinzipienAnwendung: PrinzipienAnwendung[];
+};
+
+export type PrinzipWithAnwendungenAndExample = PrinzipWithAnwendungen & {
+  Example: ExampleParagraph;
+  exampleAbsatz: Absatz;
+};
+
+export type PrinzipWithUmsetzungen = BasePrinzip & {
+  documentId: string;
+  GuteUmsetzungen: Digitalcheck[];
+  Kurzbezeichnung: string;
 };
 
 export type Visualisierung = {
@@ -172,6 +205,60 @@ ${prinzipCoreFields}
 query GetPrinzips {
   prinzips {
     ...PrinzipCoreFields
+  }
+}`;
+
+export const GET_PRINZIPS_WITH_EXAMPLES_QUERY = `
+query GetPrinzips {
+  prinzips(sort: "order") {
+    Name
+    Beschreibung
+    order
+    Nummer
+    URLBezeichnung
+    Example {
+      AbsatzNumber
+      Paragraph {
+        Titel
+        Nummer
+        Gesetz
+        Digitalcheck {
+          Regelungsvorhaben {
+            Titel
+            URLBezeichnung
+          }
+        }
+        Absaetze {
+          id
+          Text
+          PrinzipErfuellungen {
+            id
+            WarumGut
+            Prinzip {
+              Nummer
+              Name
+            }
+          }
+        }
+      }
+    }
+    PrinzipienAnwendung {
+      Title
+      Text
+      Questions
+      WordingExample
+      Example {
+        AbsatzNumber
+        Paragraph {
+          Nummer
+          Gesetz
+          Absaetze {
+            id
+            Text
+          }
+        }
+      }
+    }
   }
 }`;
 

@@ -16,8 +16,8 @@ import constructMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,
   paragraphFields,
-  Prinzip,
   prinzipCoreFields,
+  PrinzipWithUmsetzungen,
   Regelungsvorhaben,
   visualisationFields,
 } from "~/utils/strapiData.server";
@@ -84,23 +84,32 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
 
 export default function Gesetz() {
   const regelung = useLoaderData<typeof loader>();
-  const principles = useOutletContext<Prinzip[]>();
+  const principles = useOutletContext<PrinzipWithUmsetzungen[]>();
   return (
     <>
-      <Hero title={regelung.Titel} subtitle={examplesRegelungen.subtitle[0]} />
+      <Hero
+        className="bg-gray-100"
+        title={regelung.Titel}
+        subtitle={examplesRegelungen.subtitle[0]}
+      />
 
-      <div className="bg-blue-200">
+      <div className="bg-gray-100">
         <Container className="py-0">
           <InlineInfoList
             items={[
               {
-                label: examplesRegelungen.infoLabels[0],
+                label: examplesRegelungen.infoLabels.from,
                 value: regelung.VeroeffentlichungsDatum
                   ? formatDate(regelung.VeroeffentlichungsDatum)
                   : "",
               },
+
               {
-                key: examplesRegelungen.infoLabels[1],
+                label: examplesRegelungen.infoLabels.resort,
+                value: regelung.Ressort,
+              },
+              {
+                label: examplesRegelungen.infoLabels.linkLabel,
                 value: regelung.LinkRegelungstext ? (
                   <CustomLink
                     to={regelung.LinkRegelungstext}
@@ -110,18 +119,15 @@ export default function Gesetz() {
                   >
                     {regelung?.GesetzStatus
                       ? gesetzStatusMap[regelung.GesetzStatus]
-                      : examplesRegelungen.infoLabels[1]}
+                      : examplesRegelungen.infoLabels.fallbackLinkText}
                   </CustomLink>
                 ) : null,
-              },
-              {
-                label: examplesRegelungen.infoLabels[2],
-                value: regelung.Ressort,
               },
             ]}
           />
         </Container>
       </div>
+
       {regelung.Digitalchecks.map((digitalcheck, index) => {
         const tabsData: TabItem[] = [];
 
@@ -205,7 +211,7 @@ export default function Gesetz() {
                     markdown: examplesRegelungen.nkr.subtitle,
                   }}
                 />
-                <div className="my-32 border-l-4 border-gray-400 pl-8">
+                <div className="my-32 border-l-4 border-gray-400 pl-8 italic">
                   <BlocksRenderer
                     content={digitalcheck.NKRStellungnahmeDCText}
                   />

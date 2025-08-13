@@ -5,7 +5,12 @@ export const examplesRegelungen = {
     "Hier finden Sie alles zur Digitaltauglichkeit dieser Regelung.",
     "Inhalt",
   ],
-  infoLabels: ["Fassung vom", "Aktuelle Fassung", "Ressort"],
+  infoLabels: {
+    from: "Fassung vom",
+    fallbackLinkText: "Aktuelle Fassung",
+    resort: "Ressort",
+    linkLabel: "Link",
+  },
   infoTitle: "Hinweis",
   infoText:
     "Markierte Formulierungen sind gute Beispiele für die Ermöglichung digitaler Umsetzung, trotz ausstehender Verabschiedung.",
@@ -25,6 +30,7 @@ export const examplesRegelungen = {
       department: "Ressort:",
     },
   },
+  exampleLinkText: "Alle Beispiele zu dieser Regelung",
   principles: {
     hero: {
       title: "Die Prinzipien im Regelungstext",
