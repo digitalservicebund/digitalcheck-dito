@@ -118,7 +118,7 @@ describe("BlocksContentRenderer", () => {
         {
           type: "link",
           url: "https://example.com",
-          children: [{ type: "text", text: "This is a link" }],
+          children: [{ type: "text", text: "This is an external link" }],
         },
       ];
 
@@ -126,7 +126,7 @@ describe("BlocksContentRenderer", () => {
 
       const link = container.querySelector("a");
       expect(link).toBeInTheDocument();
-      expect(link?.textContent).toBe("This is a link");
+      expect(link?.textContent).toBe("This is an external link");
       expect(link?.target).toBe("_blank");
       expect(link?.href).toBe("https://example.com/");
     });
