@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Link, useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
 import PrincipleHighlightContext from "~/contexts/PrincipleHighlightContext";
-import { PrincipleHighlightProvider } from "~/providers/PrincipleHighlightProvider";
+import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider";
 import { PRINCIPLE_COLORS } from "~/resources/constants";
 import { examples } from "~/resources/content/beispiele";
 import { absatz } from "~/resources/content/shared/absatz";

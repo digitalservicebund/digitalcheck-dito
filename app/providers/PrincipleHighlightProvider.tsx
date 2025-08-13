@@ -9,7 +9,7 @@ type PrincipleHighlightProviderProps = {
   absatzId: string;
 };
 
-export function PrincipleHighlightProvider({
+export default function PrincipleHighlightProvider({
   children,
   absatzId,
   principlesToShow,

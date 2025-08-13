@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter, useLoaderData } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
-import FivePrinciples from "~/routes/methoden.fuenf-prinzipien";
+import FivePrinciples from "~/routes/methoden.fuenf-prinzipien/route";
 import { Node } from "~/utils/paragraphUtils";
 
 // Mock react-router's useLoaderData hook, which is used by the component

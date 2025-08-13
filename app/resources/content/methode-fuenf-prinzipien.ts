@@ -25,10 +25,13 @@ export type DetailsSummaryItem = {
 export const methodsFivePrinciples = {
   title: "Chancen und Hindernisse der digitalen Umsetzung identifizieren",
   subtitle: dedent`
-    Die folgenden Prinzipien helfen Ihnen dabei, Chancen der digitalen Umsetzung auszuschöpfen und Hindernisse zu erkennen. Nutzen Sie die Prinzipien auch, um mit beteiligten Akteurinnen und Akteuren über die Umsetzung zu sprechen.
-
-    Welche Prinzipien besonders wichtig sind und wie Sie diese anwenden, hängt davon ab, worum es in Ihrem Vorhaben geht – und ob Sie ein Gesetz oder eine Verordnung entwerfen. Sie sind sich unsicher oder wollen über Ihre Einordnung reflektieren, dann nutzen Sie gern unsere [vertraulichen Unterstützungs- und Supportangebote](${ROUTE_SUPPORT.url}).
+  Die folgenden Prinzipien helfen Ihnen dabei, Chancen der digitalen Umsetzung auszuschöpfen und Hindernisse zu erkennen. Nutzen Sie die Prinzipien auch, um mit beteiligten Akteurinnen und Akteuren über die Umsetzung zu sprechen.
+  
+  Welche Prinzipien besonders wichtig sind und wie Sie diese anwenden, hängt davon ab, worum es in Ihrem Vorhaben geht – und ob Sie ein Gesetz oder eine Verordnung entwerfen. Sie sind sich unsicher oder wollen über Ihre Einordnung reflektieren, dann nutzen Sie gern unsere [vertraulichen Unterstützungs- und Supportangebote](${ROUTE_SUPPORT.url}).
   `,
+  grundlagenTitle: "Prinzipien für digitaltaugliche Gesetzgebung",
+  grundlagenSubtitle:
+    "Die Prinzipien für digitaltaugliche Gesetzgebung bilden die Basis der Instrumente des Digitalcheck. Werden sie beachtet, ist eine Regelung mit hoher Wahrscheinlichkeit digitaltauglich und folgt den Vorgaben für EU-Interoperabilität.",
   buttonText: "Beispiele betrachten",
   wordingExampleTitle: "Formulierungsbeispiel:",
   questionsTitle: "Fragen Sie sich:",
