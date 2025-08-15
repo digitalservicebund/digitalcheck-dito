@@ -35,9 +35,11 @@ type ExpectedResult = {
   negativeReasoningText?: string;
 };
 
+type UserAnswers = (question: TQuestion) => "Ja" | "Nein" | "Ich bin unsicher";
+
 interface TestScenario {
   name: string;
-  answers: (question: TQuestion) => "Ja" | "Nein" | "Ich bin unsicher";
+  answers: UserAnswers;
   expected: ExpectedResult;
 }
 
@@ -210,10 +212,12 @@ const scenarios: TestScenario[] = [
   },
 ];
 
-function generateMockAnswers(scenario: TestScenario): PreCheckAnswers {
+function mapUserAnswersToMockAnswers(
+  userAnswers: UserAnswers,
+): PreCheckAnswers {
   const answers: PreCheckAnswers = {};
   questions.forEach((question) => {
-    switch (scenario.answers(question)) {
+    switch (userAnswers(question)) {
       case "Ja":
         answers[question.id] = "yes";
         break;
@@ -248,35 +252,35 @@ vi.mock("react-router", async (importOriginal) => {
   };
 });
 
-for (const scenario of scenarios) {
-  describe(`test ${scenario.name}`, () => {
-    beforeEach(() => {
-      vi.resetAllMocks();
+// the name parameter is used for the test name
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+describe.each(scenarios)("test $name", ({ name, answers, expected }) => {
+  beforeEach(() => {
+    vi.resetAllMocks();
 
-      const answers = generateMockAnswers(scenario);
-      const result = getResultForAnswers(answers);
-      vi.mocked(useLoaderData).mockReturnValue({
-        answers: answers,
-        result: result,
-      });
-
-      render(
-        <MemoryRouter>
-          <Result />
-        </MemoryRouter>,
-      );
+    const preCheckAnswers = mapUserAnswersToMockAnswers(answers);
+    const result = getResultForAnswers(preCheckAnswers);
+    vi.mocked(useLoaderData).mockReturnValue({
+      answers: preCheckAnswers,
+      result: result,
     });
 
-    afterEach(() => {
-      vi.restoreAllMocks();
-    });
-
-    it("shows expected heading", async () => {
-      expect(
-        await screen.findByText(scenario.expected.headline, {
-          exact: false,
-        }),
-      ).toBeInTheDocument();
-    });
+    render(
+      <MemoryRouter>
+        <Result />
+      </MemoryRouter>,
+    );
   });
-}
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("shows expected heading", async () => {
+    expect(
+      await screen.findByText(expected.headline, {
+        exact: false,
+      }),
+    ).toBeInTheDocument();
+  });
+});

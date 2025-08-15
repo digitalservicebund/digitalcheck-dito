@@ -22,6 +22,9 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: ["vitest-setup.ts"],
     include: ["app/**/*.{test,spec}.ts?(x)"],
+    chaiConfig: {
+      truncateThreshold: 200,
+    },
   },
   ssr: {
     noExternal: ["posthog-js", "posthog-js/react"],
