@@ -3,6 +3,7 @@ import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
 import { useEffect, useRef, useState } from "react";
 import { Link, type UIMatch, useLocation, useMatches } from "react-router";
 import { twJoin } from "tailwind-merge";
+import { useResize } from "~/hooks/deviceHook";
 import DropdownMenu from "~/layout/DropdownMenu.tsx";
 import ProgressBar from "~/layout/ProgressBar";
 import { header } from "~/resources/content/shared/header.ts";
@@ -74,16 +75,10 @@ const PageHeader = () => {
   }, []);
 
   // Reset states on navigation or viewport changes
-  useEffect(() => {
-    const handleResize = () => {
-      setActiveDropdownId(null);
-      setMobileMenuOpen(false);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  useResize(() => {
+    setActiveDropdownId(null);
+    setMobileMenuOpen(false);
+  });
 
   // Toggle dropdown state
   const toggleDropdown = (itemText: string) => {
