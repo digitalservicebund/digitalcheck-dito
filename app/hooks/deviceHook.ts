@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
-export function useResize(onResize: () => void) {
+export function useResize(onResize: () => void, init = true) {
   useEffect(() => {
     window.addEventListener("resize", onResize);
-    onResize(); // initialize
+    if (init) onResize(); // initialize
 
     return () => removeEventListener("resize", onResize);
-  }, [onResize]);
+  }, [onResize, init]);
 }
 
 export function useScroll(onScroll: () => void) {
