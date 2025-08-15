@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useResize, useScroll } from "~/hooks/deviceHook";
 import twMerge from "~/utils/tailwindMerge";
 
@@ -15,8 +15,10 @@ export default function SVGWithMinimap({
 }: MinimapProps) {
   const [scrollRatio, setScrollRatio] = useState(0);
   const [viewportRatio, setViewportRatio] = useState(0);
+  const [imgLoading, setImgLoading] = useState(true);
 
   const svgContainerRef = useRef<HTMLDivElement>(null);
+  const svgImgRef = useRef<HTMLImageElement>(null);
 
   const drawMinimapIndicator = () => {
     const el = svgContainerRef.current;
@@ -35,6 +37,21 @@ export default function SVGWithMinimap({
 
   useResize(drawMinimapIndicator);
   useScroll(drawMinimapIndicator);
+
+  useEffect(() => {
+    const img = svgImgRef.current;
+    if (!img) return;
+
+    const onLoad = () => {
+      drawMinimapIndicator();
+      setImgLoading(false);
+    };
+
+    img.addEventListener("load", onLoad);
+    img.src = svgSrc;
+
+    return () => img.removeEventListener("load", onLoad);
+  }, [svgSrc]);
 
   return (
     <div
@@ -62,8 +79,10 @@ export default function SVGWithMinimap({
       </div>
 
       <div ref={svgContainerRef} className="flex">
+        {imgLoading && <p>Lädt...</p>}
         <img
-          src={svgSrc}
+          ref={svgImgRef}
+          src={undefined}
           alt="Visualisierung: Der Digitalcheck im Gesetzgebungsprozess"
           className="block w-full"
         />
