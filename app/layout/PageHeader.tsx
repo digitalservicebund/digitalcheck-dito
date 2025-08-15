@@ -78,7 +78,7 @@ const PageHeader = () => {
   useResize(() => {
     setActiveDropdownId(null);
     setMobileMenuOpen(false);
-  });
+  }, false);
 
   // Toggle dropdown state
   const toggleDropdown = (itemText: string) => {
