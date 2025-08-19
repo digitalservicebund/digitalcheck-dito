@@ -15,7 +15,28 @@ const posthogProxy = async (request: Request) => {
   newUrl.port = "443";
   newUrl.pathname = newUrl.pathname.replace(/^\/ph-relay/, "");
 
-  const headers = new Headers(request.headers);
+  const headers = new Headers();
+
+  // Copy only necessary headers, excluding any that might reveal client IP
+  const safeHeaders = [
+    "content-type",
+    "content-length",
+    "authorization",
+    "user-agent",
+    "accept",
+    "accept-language",
+    "cache-control",
+    "origin",
+    "referer",
+  ];
+
+  for (const headerName of safeHeaders) {
+    const value = request.headers.get(headerName);
+    if (value) {
+      headers.set(headerName, value);
+    }
+  }
+
   headers.set("host", hostname);
   headers.delete("accept-encoding");
 
