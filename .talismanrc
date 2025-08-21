@@ -9,3 +9,4 @@ allowed_patterns:
   - <[^>]+?\bkey=\{.*?\} # Allow <JSXElement ... key={...} patterns
   - passen
   - Anpassungen
+  - Pass\s # Allow "Pass " followed by a space
