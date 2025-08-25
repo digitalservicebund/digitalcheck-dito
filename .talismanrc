@@ -3,6 +3,8 @@ fileignoreconfig:
   ignore_detectors: [filename]
 - filename: .env.test
   ignore_detectors: [filename]
+- filename: package-lock.json
+  checksum: 06728f146952a7c2f5de9caf6dd17ac8e7c6b12c33bebeda56ca484853dbb288
 - filename: app/root.tsx
   allowed_patterns: [posthogKey]
 allowed_patterns:
