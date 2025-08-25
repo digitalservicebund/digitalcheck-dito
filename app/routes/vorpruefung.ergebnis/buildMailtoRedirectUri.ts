@@ -47,6 +47,19 @@ export function buildEmailBody(
   return `${emailTemplate.bodyBefore}\n${resultText}\n\n${emailTemplate.bodyAfter}`;
 }
 
+/*
+ * Optionally prefix mailto: links so that they appear to be a local page. This is so that end-to-end tests, run
+ * locally, don't cause the OS's email client to open while running tests.
+ */
+const mockMailtoLinks =
+  process.env.MOCK_MAILTO_LINKS === "true" &&
+  process.env.NODE_ENV !== "production";
+
+if (mockMailtoLinks) {
+  console.warn("Prefixing mailto: links");
+}
+export const mailtoPrefix = mockMailtoLinks ? "/mock-mailto/" : "";
+
 export default function buildMailtoRedirectUri(
   result: PreCheckResult,
   resultContent: ResultContent,
@@ -58,5 +71,5 @@ export default function buildMailtoRedirectUri(
   const cc = userEmail ? `&cc=${userEmail}` : "";
   const recipients = encodeURIComponent(resolveRecipients(result));
   const body = buildEmailBody(resultContent, negativeReasoning);
-  return `mailto:${recipients}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}${cc}`;
+  return `${mailtoPrefix}mailto:${recipients}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}${cc}`;
 }

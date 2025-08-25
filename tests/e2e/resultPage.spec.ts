@@ -9,6 +9,7 @@ import {
   ROUTE_PRECHECK_RESULT,
 } from "~/resources/staticRoutes";
 import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
+import { mailtoPrefix } from "~/routes/vorpruefung.ergebnis/buildMailtoRedirectUri.ts";
 
 const { questions } = preCheck;
 
@@ -221,35 +222,18 @@ type Mail = {
 };
 
 async function interceptMail(page: Page): Promise<Mail> {
-  const routeToIntercept = "**/vorpruefung/ergebnis.data";
-
-  // Create a promise that will be resolved when the interception completes
-  let interceptionResolve: (value: Mail | PromiseLike<Mail>) => void;
-  const interceptionPromise = new Promise<Mail>((resolve) => {
-    interceptionResolve = resolve;
-  });
-
-  // First wait for the route to be registered
-  await page.route(
-    routeToIntercept,
-    async (route) => {
-      const response = await route.fetch();
-      const location = response.headers()["location"];
-      await route.abort();
-      const mailTo = new URL(location);
-
-      interceptionResolve({
-        subject: mailTo.searchParams.get("subject") as string,
-        body: mailTo.searchParams.get("body") as string,
-        recipients: decodeURIComponent(mailTo.pathname),
-        cc: mailTo.searchParams.get("cc") as string,
-      });
-    },
-    { times: 1 },
-  );
-
   await page.getByRole("button", { name: "E-Mail erstellen" }).click();
-  return interceptionPromise;
+
+  await page.waitForURL(mailtoPrefix + "mailto:**");
+
+  const mailTo = new URL(page.url().substring(mailtoPrefix.length));
+
+  return {
+    subject: mailTo.searchParams.get("subject") as string,
+    body: mailTo.searchParams.get("body") as string,
+    recipients: decodeURIComponent(mailTo.pathname),
+    cc: mailTo.searchParams.get("cc") as string,
+  };
 }
 
 async function getEmailPreviewBodyFromPage(page: Page): Promise<string> {
