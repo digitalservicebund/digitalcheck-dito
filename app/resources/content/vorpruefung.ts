@@ -201,7 +201,7 @@ export const preCheck = {
     {
       ...preCheckQuestions.datenaustausch,
       question:
-        "Werden durch die Regelung Daten erhoben, die der Verwaltung möglicherweise bereits vorliegen?",
+        "Soll ein Datenaustausch stattfinden bspw. weil durch die Regelung Daten erhoben werden, die der Verwaltung bereits vorliegen?",
       positiveResult: "einem Austausch von Daten.",
       negativeResult: "keinem Austausch von Daten.",
       text: "**Praxisbeispiel**: Arbeitnehmende müssen ihr Gehalt in der Einkommenssteuererklärung angeben. Diese Information liegt der Sozialversicherung bereits vor. Eine Wiederverwendung dieser Daten ist bürokratiearm und sollte bei der Erarbeitung der Regelung angestrebt werden.",
