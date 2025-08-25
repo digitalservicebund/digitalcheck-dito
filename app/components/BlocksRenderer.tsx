@@ -1,3 +1,4 @@
+import { JSX } from "react";
 import { nestListInListItems } from "~/utils/blocksRendererUtils";
 import { type Node } from "~/utils/paragraphUtils";
 import { isExternalUrl } from "~/utils/utilFunctions";
@@ -36,7 +37,7 @@ export function RecursiveRenderer({
       }
     }
     if (node.children) {
-      const Element = getElement(node);
+      const NodeElement = getElement(node);
 
       if (node.type === "link" && node.url) {
         const externalUrl = isExternalUrl(node.url);
@@ -60,9 +61,9 @@ export function RecursiveRenderer({
       }
 
       return (
-        <Element key={index}>
+        <NodeElement key={index}>
           <RecursiveRenderer content={node.children} modifiers={modifiers} />
-        </Element>
+        </NodeElement>
       );
     }
     return node.text;

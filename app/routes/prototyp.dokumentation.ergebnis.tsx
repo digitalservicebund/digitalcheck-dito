@@ -69,7 +69,9 @@ export default function DocumentationResult() {
 
     const resultPdfBytes = await pdfDoc.save();
 
-    const blob = new Blob([resultPdfBytes], { type: "application/pdf" });
+    const blob = new Blob([new Uint8Array(resultPdfBytes)], {
+      type: "application/pdf",
+    });
     saveAs(
       blob,
       `digitalcheck-dokumentation-stand-${new Date().toISOString()}.pdf`,
