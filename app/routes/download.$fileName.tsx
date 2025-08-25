@@ -27,7 +27,7 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     const mimeType = contentType(fileName) || "";
 
     void trackCustomEvent(request, { name: "Download", props: { fileName } });
-    return new Response(fileData, {
+    return new Response(new Uint8Array(fileData).buffer, {
       status: 200,
       headers: {
         "Content-Type": mimeType,
