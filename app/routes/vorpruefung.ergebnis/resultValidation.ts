@@ -1,4 +1,3 @@
-import { withZod } from "@rvf/zod";
 import { z } from "zod";
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
 import type { PreCheckAnswers } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
@@ -17,10 +16,18 @@ const negativeValidation = positiveValidation.extend({
     .max(500, { message: preCheckResult.form.reasonTooLong }),
 });
 
-export default function getResultValidatorForAnswers(answers: PreCheckAnswers) {
+export default function getResultValidatorForAnswers(
+  answers: PreCheckAnswers,
+): z.ZodObject<
+  {
+    title: z.ZodString;
+    negativeReasoning?: z.ZodString;
+  },
+  z.core.$strip
+> {
   const ignoredQuestionIds = ["eu-bezug"];
   const isPositive = Object.entries(answers).some(
     ([key, value]) => value === "yes" && !ignoredQuestionIds.includes(key),
   );
-  return withZod(isPositive ? positiveValidation : negativeValidation);
+  return isPositive ? positiveValidation : negativeValidation;
 }

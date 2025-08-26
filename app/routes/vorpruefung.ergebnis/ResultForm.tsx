@@ -36,10 +36,14 @@ export default function ResultForm({
   const [isMailAddressCopied, setIsMailAddressCopied] = useState(false);
 
   const form = useForm({
-    validator: getResultValidatorForAnswers(answers),
+    schema: getResultValidatorForAnswers(answers),
     method: "post",
     onBeforeSubmit: async ({ getValidatedData }) => {
       if (await getValidatedData()) setShowEmailAlert(true);
+    },
+    defaultValues: {
+      title: "",
+      negativeReasoning: undefined,
     },
   });
 
@@ -62,9 +66,8 @@ export default function ResultForm({
 
   useEffect(() => {
     const resultContent: ResultContent = getContentForResult(answers, result);
-    const currentVorhabenTitle = (form.value("title") as string) || "";
-    const currentNegativeReasoning =
-      (form.value("negativeReasoning") as string) || "";
+    const currentVorhabenTitle = form.value("title") || "";
+    const currentNegativeReasoning = form.value("negativeReasoning") || "";
 
     const body = buildEmailBody(
       resultContent,
