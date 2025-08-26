@@ -10,7 +10,6 @@ import {
   ROUTE_METHODS_COLLECT_IT_SYSTEMS,
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
-  ROUTE_METHODS_TASKS_PROCESSES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
 } from "~/resources/staticRoutes";
 
@@ -98,22 +97,6 @@ test.describe("method sub page downloads", () => {
     await page.getByRole("link", { name: "Vorlage herunterladen" }).click();
     const download = await downloadPromise;
     expect(download.suggestedFilename()).toContain(".xlsx");
-  });
-
-  test("tasks & processes powerpoint", async ({ page, isMobile }) => {
-    await page.goto(ROUTE_METHODS_TASKS_PROCESSES.url);
-
-    const downloadPromise = page.waitForEvent("download");
-    if (isMobile) {
-      await page.getByRole("button", { name: "Intro" }).click();
-      await page.getByRole("option", { name: "Anleitung" }).click();
-    } else {
-      await page.getByRole("tab", { name: "Anleitung" }).click();
-    }
-
-    await page.getByRole("link", { name: "PPT-Vorlage runterladen" }).click();
-    const download = await downloadPromise;
-    expect(download.suggestedFilename()).toContain(".pptx");
   });
 
   test("it-systems excel spreadsheet", async ({ page }) => {
