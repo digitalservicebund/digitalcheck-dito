@@ -6,7 +6,7 @@ import {
   RemoveCircleOutline,
   WarningAmberOutlined,
 } from "@digitalservicebund/icons";
-import { validationError } from "@rvf/react-router";
+import { parseFormData, validationError } from "@rvf/react-router";
 import React, { useState } from "react";
 import { data, redirect, useLoaderData } from "react-router";
 import { twJoin } from "tailwind-merge";
@@ -94,11 +94,15 @@ export async function action({ request }: Route.ActionArgs) {
 
   // server side form validation in case the user has JavaScript disabled
   const preCheckAnswers = answers as PreCheckAnswers;
-  const validator = getResultValidatorForAnswers(preCheckAnswers);
-  const validationResult = await validator.validate({
-    title,
-    negativeReasoning,
-  });
+  const schema = getResultValidatorForAnswers(preCheckAnswers);
+
+  // parseFormData expects a FormData to be passed, thats why we create a new one here
+  const partialFormData = new FormData();
+  partialFormData.append("title", title);
+  partialFormData.append("negativeReasoning", negativeReasoning);
+
+  const validationResult = await parseFormData(partialFormData, schema);
+
   if (validationResult.error) {
     return validationError(
       validationResult.error,

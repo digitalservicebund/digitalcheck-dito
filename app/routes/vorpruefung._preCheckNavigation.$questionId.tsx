@@ -1,5 +1,4 @@
-import { useForm, validationError } from "@rvf/react-router";
-import { withZod } from "@rvf/zod";
+import { parseFormData, useForm, validationError } from "@rvf/react-router";
 import { useEffect, useState } from "react";
 import { redirect, useLoaderData } from "react-router";
 
@@ -49,29 +48,26 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   return { questionIdx, question: questions[questionIdx], answers };
 }
 
-const validator = withZod(
-  z.object({
-    answer: z
-      .string({ required_error: "Bitte wählen Sie eine Option aus." })
-      .refine(
-        (answer) => Object.keys(answerOptions).includes(answer),
-        "Bitte wählen Sie eine existierende Option aus.",
-      ),
-    questionId: z
-      .string({ required_error: "Bitte geben Sie eine Frage an." })
-      .refine(
-        (questionId) => questions.map((q) => q.id).includes(questionId),
-        "Bitte wählen Sie eine existierende Frage aus.",
-      ),
-  }),
-);
+const schema = z.object({
+  answer: z
+    .string("Bitte wählen Sie eine Option aus.")
+    .refine(
+      (answer) => Object.keys(answerOptions).includes(answer),
+      "Bitte wählen Sie eine existierende Option aus.",
+    ),
+  questionId: z
+    .string("Bitte geben Sie eine Frage an.")
+    .refine(
+      (questionId) => questions.map((q) => q.id).includes(questionId),
+      "Bitte wählen Sie eine existierende Frage aus.",
+    ),
+});
 
 export async function action({ request }: Route.ActionArgs) {
-  const result = await validator.validate(await request.formData());
+  const result = await parseFormData(await request.formData(), schema);
 
-  if (result.error) {
-    return validationError(result.error);
-  }
+  if (result.error) return validationError(result.error);
+
   const { questionId, answer } = result.data;
 
   const cookie = await getAnswersFromCookie(request);
@@ -134,11 +130,16 @@ export type PreCheckAnswers = {
 export default function Index() {
   const { questionIdx, question, answers } = useLoaderData<typeof loader>();
   const existingAnswer = answers?.[question.id];
+
   const [selectedOption, setSelectedOption] =
     useState<PreCheckAnswerOption["value"]>(existingAnswer);
   const form = useForm({
-    validator,
+    schema,
     method: "post",
+    defaultValues: {
+      answer: "",
+      questionId: "",
+    },
   });
 
   useEffect(() => {
