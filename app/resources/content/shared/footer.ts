@@ -126,6 +126,11 @@ export const footer = {
         url: "https://bmds.bund.de/",
         openInNewTab: true,
       },
+      {
+        text: "Mehr über die Initative Digitalcheck erfahren",
+        url: "https://www.digitale-verwaltung.de/Webs/DV/DE/transformation/digitalcheck/digitalcheck-node.html",
+        openInNewTab: true,
+      },
     ],
   },
 };
