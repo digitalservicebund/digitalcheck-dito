@@ -7,6 +7,7 @@ import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
+import InlineNotice from "~/components/InlineNotice";
 import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
@@ -133,6 +134,8 @@ export default function Index() {
 
   const [selectedOption, setSelectedOption] =
     useState<PreCheckAnswerOption["value"]>(existingAnswer);
+  const [hasAnswerConflict, setHasAnswerConflict] = useState(false);
+
   const form = useForm({
     schema,
     method: "post",
@@ -152,6 +155,15 @@ export default function Index() {
       text,
     }),
   );
+
+  useEffect(() => {
+    if (question.id !== "eu-bezug") return setHasAnswerConflict(false);
+    const allAnswersNo = Object.entries(answers)
+      .filter((answer) => answer[0] !== "eu-bezug")
+      .every((answer) => answer[1] === "no");
+
+    setHasAnswerConflict(allAnswersNo && selectedOption === "yes");
+  }, [answers, selectedOption, question.id]);
 
   return (
     <form {...form.getFormProps()}>
@@ -184,11 +196,21 @@ export default function Index() {
           error={
             form.formState.submitStatus == "error"
               ? form.error("answer")
-              : undefined
+              : hasAnswerConflict
+                ? preCheck.answerConflictHint.warningText
+                : undefined
           }
         />
       </fieldset>
-      <Container className="pt-0 pb-40">
+      <Container className="space-y-40 pt-0 pb-40">
+        {hasAnswerConflict && (
+          <InlineNotice
+            tagName="div"
+            look="warning"
+            title={preCheck.answerConflictHint.title}
+            content={preCheck.answerConflictHint.content}
+          />
+        )}
         <ButtonContainer
           buttons={[
             {
