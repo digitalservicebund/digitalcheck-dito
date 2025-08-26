@@ -1,23 +1,161 @@
 import {
   ArrowCircleRightOutlined,
+  DateRangeOutlined,
+  FactCheckTwoTone,
   LayersOutlined,
+  LightbulbOutlined,
+  LightbulbTwoTone,
+  ShareTwoTone,
   StickyNote2Outlined,
   SupportOutlined,
+  VisibilityTwoTone,
 } from "@digitalservicebund/icons";
 import { ButtonProps } from "~/components/Button";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import {
+  ROUTE_FUNDAMENTALS_NKR,
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX,
 } from "../staticRoutes";
 
 export const methodsTasksProcesses = {
-  title: "Aufgaben und Abläufe visualisieren",
+  title: "Das Potenzial von Visualisierungen nutzen",
   subtitle: dedent`
-    Um Ihre Regelung wirkungsvoll umzusetzen, braucht es ein klares Bild der bestehenden **Abläufe**.
-    Holen Sie sich dazu Unterstützung von den umsetzenden **Akteurinnen und Akteuren**. Ein Flussdiagramm hilft, Prozesse sichtbar zu machen und die Digitaltauglichkeit einzuschätzen.
+    Visualisierungen helfen bestehende Abläufe Ihrer Regelung einfach sichtbar zu machen und Digitaltauglichkeit einzuschätzen. Was sind die Vorteile und wie können Sie diese für Ihr Vorhaben einsetzen?
   `,
   errorMessage: "Hier hat leider etwas nicht funktioniert, das tut uns Leid.",
+
+  usage: {
+    title: "Einsatz von Visualisierungen",
+    subtitle: "Die Mehrwerte von Visualisierungen kennenlernen",
+    description: [
+      {
+        icon: ShareTwoTone,
+        text: "Frühzeitig **Komplexität** erkennen und **reduzieren**",
+      },
+      {
+        icon: LightbulbTwoTone,
+        text: "**Chancen und Hürden** der Digitalisierung erkennen",
+      },
+      {
+        icon: VisibilityTwoTone,
+        text: "**Abstimmung** vereinfachen, z.b. im Ressort und mit Verbänden",
+      },
+      {
+        icon: FactCheckTwoTone,
+        text: "Prüfung durch den **NKR** erleichtern",
+      },
+    ],
+    visualization: {
+      title: "Von der Schriftform zur Visualisierung",
+      caption:
+        "Visualisierungen schaffen ein schnelles und praktisches Verständnis für die Umsetzung.",
+      altText:
+        "Das Schaubild vergleicht die schriftliche Form einer Regelung mit ihrer Visualisierung. Links ist ein Textauszug aus einem Gesetzestext abgebildet, der die Voraussetzungen für den Erwerb eines Führerscheins beschreibt. Rechts daneben ist ein Flussdiagramm dargestellt, das den Prozess der Führerscheinprüfung vereinfacht und visualisiert.",
+    },
+  },
+
+  visualizationTypes: {
+    title: "Häufige Arten von Visualisierungen - Schritt für Schritt erklärt",
+    subtitle:
+      "Bevor Sie mit der Erstellung einer Visualisierung beginnen, sollten Sie sich fragen, welche Art für den Kontext Ihrer Regelung am besten geeignet ist.",
+    types: [
+      {
+        visual: {
+          image: {
+            url: "/images/flussdiagramm.png",
+            width: 200,
+            size: "large" as const,
+            alternativeText:
+              "Ein Flussdiagramm mit verschiedenen Formen, die durch Linien verbunden sind.",
+          },
+          type: "image" as const,
+        },
+        badge: { text: "In Kürze Verfügbar", Icon: DateRangeOutlined },
+        heading: { text: "Flussdiagramm", tagName: "h3" as const },
+        content: dedent`
+          Ein Flussdiagramm zeigt einen Prozessablauf. Es stellt die Reihenfolge von Handlungen oder Entscheidungen dar.
+
+          **Die Anleitung entsteht gerade.**
+        `,
+        buttons: [
+          {
+            text: "Anleitung",
+            link: "",
+            look: "tertiary" as const,
+            disabled: true,
+          },
+        ],
+      },
+      {
+        visual: {
+          image: {
+            url: "/images/entscheidungsbaum.png",
+            width: 200,
+            size: "large" as const,
+            alternativeText:
+              "Ein Entscheidungsbaum, bestehend aus rechteckigen Kästen und gelben Rauten mit der Beschriftung „JA / NEIN“.",
+          },
+          type: "image" as const,
+        },
+        badge: { text: "In Kürze Verfügbar", Icon: DateRangeOutlined },
+        heading: { text: "Entscheidungsbaum", tagName: "h3" as const },
+        content: dedent`
+          Der Entscheidungsbaum stellt Entscheidungslogiken und deren Auswirkungen dar.
+
+          **Die Anleitung entsteht gerade.**
+        `,
+        buttons: [
+          {
+            text: "Anleitung",
+            link: "",
+            look: "tertiary" as const,
+            disabled: true,
+          },
+        ],
+      },
+      {
+        visual: {
+          image: {
+            url: "/images/schaubild.png",
+            width: 200,
+            size: "large" as const,
+            alternativeText:
+              "Ein Schaubild, das die Beziehung zwischen verschiedenen Elementen darstellt.",
+          },
+          type: "image" as const,
+        },
+        badge: { text: "In Kürze Verfügbar", Icon: DateRangeOutlined },
+        heading: { text: "Schaubild", tagName: "h3" as const },
+        content: dedent`
+          Das Schaubild ist eine einfache Darstellung, die wenige Elemente nutzt und oft Beziehungen oder Verhältnisse zeigt.
+
+          **Die Anleitung entsteht gerade.**
+        `,
+        buttons: [
+          {
+            text: "Anleitung",
+            link: "",
+            look: "tertiary" as const,
+            disabled: true,
+          },
+        ],
+      },
+    ],
+  },
+
+  goodToKnow: {
+    badge: {
+      Icon: LightbulbOutlined,
+      text: "Gut zu wissen",
+    },
+    title: "Visualisierungen erleichtern die NKR-Prüfung",
+    content: dedent`
+      Die Vorteile von Visualisierungen helfen dem Nationalen Normenkontrollrats (NKR), Ihr Vorhaben schneller zu prüfen.
+      [Sehen Sie hier](${ROUTE_FUNDAMENTALS_NKR.url}), worauf der NKR bei Visualisierungen achtet.
+    `,
+  },
+
   intro: {
     title: "Intro",
     plausibleEventName: "Tab+Bar.Intro",
