@@ -13,6 +13,20 @@ on:
 permissions:
   contents: read
 
+secrets:
+  DEPLOY_KEY:
+    required: true
+  ARGOCD_PIPELINE_PASSWORD:
+    required: true
+  ARGOCD_SERVER:
+    required: true
+  METRICS_DEPLOYMENT_WEBHOOK_URL:
+    required: true
+  METRICS_WEBHOOK_TOKEN:
+    required: true
+  SLACK_WEBHOOK_URL:
+    required: true
+
 env:
   PACKAGE_NAME: digitalcheck-dito
   IMAGE_NAME: digitalservicebund/digitalcheck-dito
