@@ -25,18 +25,22 @@ jobs:
       packages: read
       security-events: write
     uses: ./.github/workflows/scan.yml
-    secrets: inherit
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   check-and-test:
     uses: ./.github/workflows/check-and-test.yml
-    secrets: inherit
+    secrets:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   create-unified-test-report:
     needs: [check-and-test]
     # Merge reports only if some shards have failed
     if: failure() && needs.check-and-test.result == 'failure'
     uses: ./.github/workflows/create-unified-test-report.yml
-    secrets: inherit
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-and-push-image:
     needs: [vulnerability-scan, check-and-test]
@@ -115,7 +119,13 @@ jobs:
     with:
       environment_name: production
       environment_url: https://digitalcheck.bund.de
-    secrets: inherit
+    secrets:
+      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+      ARGOCD_PIPELINE_PASSWORD: ${{ secrets.ARGOCD_PIPELINE_PASSWORD }}
+      ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
+      METRICS_DEPLOYMENT_WEBHOOK_URL: ${{ secrets.METRICS_DEPLOYMENT_WEBHOOK_URL }}
+      METRICS_WEBHOOK_TOKEN: ${{ secrets.METRICS_WEBHOOK_TOKEN }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   deploy-to-staging:
     needs: [build-and-push-image]
@@ -127,4 +137,10 @@ jobs:
     with:
       environment_name: staging
       environment_url: https://digitalcheck-dito.dev.ds4g.net/
-    secrets: inherit
+    secrets:
+      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+      ARGOCD_PIPELINE_PASSWORD: ${{ secrets.ARGOCD_PIPELINE_PASSWORD }}
+      ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
+      METRICS_DEPLOYMENT_WEBHOOK_URL: ${{ secrets.METRICS_DEPLOYMENT_WEBHOOK_URL }}
+      METRICS_WEBHOOK_TOKEN: ${{ secrets.METRICS_WEBHOOK_TOKEN }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
