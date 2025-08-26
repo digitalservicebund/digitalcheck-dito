@@ -114,7 +114,7 @@ jobs:
     concurrency: deploy
     with:
       environment_name: production
-      environment_url: https://erarbeiten.digitalcheck.bund.de
+      environment_url: https://digitalcheck.bund.de
     secrets: inherit
 
   deploy-to-staging:
