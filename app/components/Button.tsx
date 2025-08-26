@@ -86,7 +86,7 @@ function Button({
     }
   };
 
-  if (href) {
+  if (href && !(props as ButtonProps).disabled) {
     const ext = getDownloadableExtensionName(href);
     const isDownload = !!ext;
     const isExternal = "target" in props && props.target === "_blank";
