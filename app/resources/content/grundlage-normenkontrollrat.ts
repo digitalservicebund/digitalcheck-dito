@@ -2,11 +2,11 @@ import {
   FactCheckTwoTone,
   FileCopyTwoTone,
   InsertDriveFileTwoTone,
-} from "@digitalservicebund/icons/index";
+} from "@digitalservicebund/icons";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import {
   ROUTE_DOCUMENTATION,
-  ROUTE_EXAMPLES_VISUALISATIONS,
+  ROUTE_METHODS_TASKS_PROCESSES,
   ROUTE_PRECHECK,
 } from "../staticRoutes";
 
@@ -80,7 +80,7 @@ export const fundamentalsNKR = {
         
         Auch wenn Visualisierungen nicht verpflichtend sind, **erleichtern und beschleunigen** sie die NKR-Prüfung Ihres Vorhabens.
 
-        [Mehr zu Visualisierungen](${ROUTE_EXAMPLES_VISUALISATIONS.url})
+        [Mehr zu Visualisierungen](${ROUTE_METHODS_TASKS_PROCESSES.url})
       `,
     },
     infoBox2: {

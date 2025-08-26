@@ -38,7 +38,7 @@ export default function FundamentalsMethods() {
                 key={`item${i}`}
                 className="md:row-span-4 md:grid md:grid-rows-subgrid"
               >
-                <item.icon className="mb-16 h-40 w-40 fill-blue-800" />
+                <item.icon className="h-40 w-40 fill-blue-700" />
 
                 <RichText
                   className="md:row-span-3 md:grid md:grid-rows-subgrid [&>ul]:row-span-2 [&>ul]:grid [&>ul]:grid-rows-subgrid"

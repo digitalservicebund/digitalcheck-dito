@@ -1,125 +1,19 @@
-import { useLoaderData } from "react-router";
-import Card from "~/components/Card";
 import Container from "~/components/Container";
+import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
+import ImageBox from "~/components/ImageBox";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
-import Tabs, { TabItem } from "~/components/Tabs";
-import VisualisationItem from "~/components/VisualisationItem";
+import RichText from "~/components/RichText";
 import { methodsTasksProcesses } from "~/resources/content/methode-ablaeufe-aufgaben-erfassen";
-import { interviewBanner } from "~/resources/content/shared/interview-banner";
 import { ROUTE_METHODS_TASKS_PROCESSES } from "~/resources/staticRoutes.ts";
 import constructMetaTitle from "~/utils/metaTitle.ts";
-import {
-  fetchStrapiData,
-  visualisationFields,
-  Visualisierung,
-} from "~/utils/strapiData.server";
-
-const GET_VISUALISATION_QUERY = `
-${visualisationFields}
-query GetVisualisierung($documentId: ID!) {
-  visualisierung(documentId: $documentId) {
-    ...VisualisationFields
-  }
-}
-`;
 
 export function meta() {
   return constructMetaTitle(ROUTE_METHODS_TASKS_PROCESSES.title);
 }
 
-export const loader = async () => {
-  const visualisationsData = await fetchStrapiData<{
-    visualisierung: Visualisierung;
-  }>(GET_VISUALISATION_QUERY, {
-    documentId: methodsTasksProcesses.intro.example.documentId,
-  });
-
-  if ("error" in visualisationsData) {
-    console.error(visualisationsData.error);
-
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(methodsTasksProcesses.errorMessage, { status: 500 });
-  }
-
-  return visualisationsData.visualisierung;
-};
-
 export default function Visualization() {
-  const visualisationsData = useLoaderData<typeof loader>();
-
-  const tabsData: TabItem[] = [
-    {
-      title: methodsTasksProcesses.intro.title,
-      plausibleEventName: methodsTasksProcesses.intro.plausibleEventName,
-      content: (
-        <div className="ds-stack ds-stack-40">
-          <InfoBox
-            heading={{
-              text: methodsTasksProcesses.intro.visibility.heading,
-              tagName: "h2",
-            }}
-            content={methodsTasksProcesses.intro.visibility.content}
-          />
-          {visualisationsData && (
-            <VisualisationItem
-              plausibleEventName={
-                methodsTasksProcesses.intro.example.plausibleEventName
-              }
-              visualisierung={visualisationsData}
-            />
-          )}
-        </div>
-      ),
-    },
-
-    {
-      title: methodsTasksProcesses.anleitung.title,
-      plausibleEventName: methodsTasksProcesses.anleitung.plausibleEventName,
-      content: (
-        <div className="ds-stack ds-stack-40">
-          <InfoBoxList
-            items={[
-              {
-                heading: {
-                  text: methodsTasksProcesses.anleitung.ablaufe.heading,
-                  tagName: "h2",
-                },
-                content: methodsTasksProcesses.anleitung.ablaufe.content,
-              },
-              {
-                heading: {
-                  text: methodsTasksProcesses.anleitung.visualisierung.heading,
-                  tagName: "h3",
-                },
-                content: methodsTasksProcesses.anleitung.visualisierung.content,
-              },
-            ]}
-          />
-
-          <InfoBox
-            badge={methodsTasksProcesses.anleitung.tipp.badge}
-            content={methodsTasksProcesses.anleitung.tipp.content}
-            look="highlight"
-          />
-
-          <Card
-            image={methodsTasksProcesses.anleitung.vorlage.image}
-            heading={{
-              text: methodsTasksProcesses.anleitung.vorlage.heading,
-              tagName: "h3",
-            }}
-            content={{
-              markdown: methodsTasksProcesses.anleitung.vorlage.content,
-            }}
-            buttons={methodsTasksProcesses.anleitung.vorlage.buttons}
-          />
-        </div>
-      ),
-    },
-  ];
-
   return (
     <>
       <Hero
@@ -127,39 +21,59 @@ export default function Visualization() {
         title={methodsTasksProcesses.title}
       />
 
-      <Container>
-        <Tabs tabs={tabsData} />
-      </Container>
+      <Container className="space-y-40 md:my-40 md:space-y-80">
+        <section className="space-y-32 md:space-y-40">
+          <Heading tagName="h2" className="ds-heading-02-reg">
+            {methodsTasksProcesses.usage.title}
+          </Heading>
+          <p>{methodsTasksProcesses.usage.subtitle}</p>
+          <div className="space-y-32 md:grid md:grid-cols-4 md:space-y-0 md:gap-x-40">
+            {methodsTasksProcesses.usage.description.map((item, i) => (
+              <div key={i} className="space-y-16">
+                <item.icon className="size-40 fill-yellow-500 md:size-80" />
+                <RichText className="ds-label-01-reg" markdown={item.text} />
+              </div>
+            ))}
+          </div>
+        </section>
 
-      <Container className="ds-stack ds-stack-40">
+        <section className="space-y-24">
+          <Heading tagName="h3" className="ds-heading-03-reg">
+            {methodsTasksProcesses.usage.visualization.title}
+          </Heading>
+          <ImageBox
+            image={{
+              url: "/images/von-schriftform-zur-visualisierung.png",
+              caption: methodsTasksProcesses.usage.visualization.caption,
+              alternativeText:
+                methodsTasksProcesses.usage.visualization.altText,
+            }}
+            border
+          />
+        </section>
+
+        <section className="space-y-24 md:space-y-40">
+          <Heading tagName="h2" className="ds-heading-02-reg mb-8">
+            {methodsTasksProcesses.visualizationTypes.title}
+          </Heading>
+          <p>{methodsTasksProcesses.visualizationTypes.subtitle}</p>
+
+          <InfoBoxList
+            items={methodsTasksProcesses.visualizationTypes.types}
+            separator
+          />
+        </section>
+
         <InfoBox
-          heading={{ tagName: "h2", text: interviewBanner.title }}
-          content={interviewBanner.text}
           look="highlight"
-        />
-        <InfoBox
-          badge={methodsTasksProcesses.furtherSteps.badge}
+          badge={methodsTasksProcesses.goodToKnow.badge}
           heading={{
-            text: methodsTasksProcesses.furtherSteps.heading,
+            text: methodsTasksProcesses.goodToKnow.title,
             tagName: "h3",
           }}
-          content={methodsTasksProcesses.furtherSteps.content}
-          buttons={methodsTasksProcesses.furtherSteps.buttons}
+          content={methodsTasksProcesses.goodToKnow.content}
         />
       </Container>
-
-      <div className="bg-blue-100">
-        <Container>
-          <InfoBox
-            badge={methodsTasksProcesses.support.badge}
-            heading={{
-              text: methodsTasksProcesses.support.heading,
-              tagName: "h2",
-            }}
-            content={methodsTasksProcesses.support.content}
-          />
-        </Container>
-      </div>
     </>
   );
 }
