@@ -1,9 +1,14 @@
 import {
-  FactCheckOutlined,
-  ManageSearchOutlined,
-} from "@digitalservicebund/icons";
-import { ROUTE_DOCUMENTATION, ROUTE_PRECHECK } from "~/resources/staticRoutes";
+  FactCheckTwoTone,
+  FileCopyTwoTone,
+  InsertDriveFileTwoTone,
+} from "@digitalservicebund/icons/index";
 import { dedent } from "~/utils/dedentMultilineStrings";
+import {
+  ROUTE_DOCUMENTATION,
+  ROUTE_EXAMPLES_VISUALISATIONS,
+  ROUTE_PRECHECK,
+} from "../staticRoutes";
 
 export const fundamentalsNKR = {
   title:
@@ -27,9 +32,6 @@ export const fundamentalsNKR = {
           
           Bei weiteren Fragen wenden Sie sich bitte an die [zuständigen Ansprechpartnerinnen und Ansprechpartner](https://www.normenkontrollrat.bund.de/Webs/NKR/DE/der-nkr/sekretariat/sekretariat_node.html) in Ihrem Haus.
         `,
-        visual: {
-          Icon: ManageSearchOutlined,
-        },
       },
       {
         heading: {
@@ -37,27 +39,61 @@ export const fundamentalsNKR = {
         },
         content: dedent`
           Der Digitalcheck unterstützt die Bundesministerien dabei, bereits in der frühen Phase eines Regelungsvorhabens den Digitalbezug zu identifizieren und anschließend die Digitaltauglichkeit sicherzustellen. Zum Einsatz kommen dabei unter anderem Prinzipien für digitaltaugliche Regelungen sowie Visualisierungen zur Umsetzung.
-          
-          Der NKR **betrachtet** in diesem Kontext:
-          
-          - Ergebnis der [Vorprüfung](${ROUTE_PRECHECK.url}) als E-Mail
-            - **Inhalt:** Einschätzung zur Digitaltauglichkeit des Vorhabens
-            - **Relevanz für den NKR:** frühe Kenntnisnahme der zu überprüfenden Vorhaben
-          
-          - [Dokumentation der Digitaltauglichkeit](${ROUTE_DOCUMENTATION.url}) 
-            - **Inhalt:** Dokumentation der Digitaltauglichkeit, etwa durch die Nutzung der Prinzipien digitaltauglicher Gesetzgebung und von Visualisierungen
-            - **Relevanz für den NKR:** Prüfung, inwieweit die Digitalisierung bei der Erarbeitung Ihres Vorhabens mitgedacht wird.
-          
-          - Ihr Regelungsvorhaben
-            - **Inhalt:** Regelungstext für die Ressortabstimmung
-            - **Relevanz für den NKR:** Prüfung der Vorhaben auf digitale Umsetzbarkeit und Erfüllungsaufwand
         `,
-        visual: {
-          Icon: FactCheckOutlined,
-        },
       },
     ],
   },
+  NKRConsiderations: {
+    title: "Der NKR **betrachtet unter anderem** in diesem Kontext:",
+    items: [
+      {
+        icon: FactCheckTwoTone,
+        content: dedent`
+          Ergebnis der [Vorprüfung](${ROUTE_PRECHECK.url}) als E-Mail
+          - **Inhalt:**<br />Einschätzung zur Digitaltauglichkeit des Vorhabens
+          - **Relevanz für den NKR:**<br />frühe Kenntnisnahme der zu überprüfenden Vorhaben
+        `,
+      },
+      {
+        icon: InsertDriveFileTwoTone,
+        content: dedent`
+          [Dokumentation](${ROUTE_DOCUMENTATION.url}) der Digitaltauglichkeit
+          - **Inhalt:**<br />Dokumentation der Digitaltauglichkeit, etwa durch die Nutzung der Prinzipien digitaltauglicher Gesetzgebung und von Visualisierungen
+          - **Relevanz für den NKR:**<br />Prüfung, inwieweit die Digitalisierung bei der Erarbeitung von Ihres Vorhabes mitgedacht wird.
+        `,
+      },
+      {
+        icon: FileCopyTwoTone,
+        content: dedent`
+          Ihr Regelungsvorhaben
+          - **Inhalt:**<br />Regelungstext für die Ressortabstimmung
+          - **Relevanz für den NKR:**<br />Prüfung der Vorhaben auf digitale Umsetzbarkeit und Erfüllungsaufwand
+        `,
+      },
+    ],
+  },
+  visualization: {
+    infoBox1: {
+      heading: "Visualisierung für bessere Gesetzgebung",
+      content: dedent`
+        Visualisierungen sind ein wichtiger Bestandteil der **Dokumentation**. Sie machen Abläufe und Prozesse von Regelungen nachvollziehbar und zeigen, wie gut diese digital umsetzbar sind.
+        
+        Auch wenn Visualisierungen nicht verpflichtend sind, **erleichtern und beschleunigen** sie die NKR-Prüfung Ihres Vorhabens.
+
+        [Mehr zu Visualisierungen](${ROUTE_EXAMPLES_VISUALISATIONS.url})
+      `,
+    },
+    infoBox2: {
+      heading:
+        "Leitfragen und Kriterien für eine ideale Visualisierung Ihres Vorhabens:",
+      content: dedent`
+        - Hilft die Visualisierung dabei, den Regelungsinhalt **besser zu verstehen**?
+        - Ist die Visualisierung **verständlich und lesbar**? 
+        - Sind die **Quellen** der Visualisierung korrekt **angegeben**? 
+      `,
+    },
+  },
+  // Still needed?
   policyMaking: {
     heading: {
       text: "Wie funktioniert der Digitalcheck als Prozessbegleitung bei Ihrer Regelungsarbeit?",
