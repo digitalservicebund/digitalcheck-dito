@@ -10,10 +10,11 @@ import {
   SupportOutlined,
   VisibilityTwoTone,
 } from "@digitalservicebund/icons";
-import { ButtonProps } from "~/components/Button";
+import { ButtonLinkProps, ButtonProps } from "~/components/Button";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import {
   ROUTE_FUNDAMENTALS_NKR,
+  ROUTE_METHODS_FLOWCHARTS,
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX,
 } from "../staticRoutes";
@@ -81,11 +82,11 @@ export const methodsTasksProcesses = {
         buttons: [
           {
             text: "Anleitung",
-            link: "",
+            href: ROUTE_METHODS_FLOWCHARTS.url,
             look: "tertiary" as const,
             disabled: true,
           },
-        ],
+        ] as (ButtonProps | ButtonLinkProps)[],
       },
       {
         visual: {
@@ -108,11 +109,10 @@ export const methodsTasksProcesses = {
         buttons: [
           {
             text: "Anleitung",
-            link: "",
             look: "tertiary" as const,
             disabled: true,
           },
-        ],
+        ] as (ButtonProps | ButtonLinkProps)[],
       },
       {
         visual: {
@@ -135,11 +135,10 @@ export const methodsTasksProcesses = {
         buttons: [
           {
             text: "Anleitung",
-            link: "",
             look: "tertiary" as const,
             disabled: true,
           },
-        ],
+        ] as (ButtonProps | ButtonLinkProps)[],
       },
     ],
   },
