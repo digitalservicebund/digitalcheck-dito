@@ -7,6 +7,8 @@ fileignoreconfig:
   checksum: 06728f146952a7c2f5de9caf6dd17ac8e7c6b12c33bebeda56ca484853dbb288
 - filename: app/root.tsx
   allowed_patterns: [posthogKey]
+- filename: .github/workflows/pipeline.yml
+  checksum: 67ac59339b7e352d70d4a236867f8a96d4f55d9d94b11455c3ebd89197e75aea
 allowed_patterns:
   - <[^>]+?\bkey=\{.*?\} # Allow <JSXElement ... key={...} patterns
   - passen
