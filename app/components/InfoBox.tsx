@@ -3,7 +3,7 @@ import type { Node } from "~/utils/paragraphUtils";
 import twMerge from "~/utils/tailwindMerge";
 import Badge, { type BadgeProps } from "./Badge";
 import { BlocksRenderer } from "./BlocksRenderer";
-import { ButtonProps } from "./Button";
+import { ButtonLinkProps, ButtonProps } from "./Button";
 import ButtonContainer from "./ButtonContainer";
 import DetailsSummary, { DetailsSummaryProps } from "./DetailsSummary";
 import Heading, { HeadingProps } from "./Heading";
@@ -26,7 +26,7 @@ type BaseInfoBoxProps = {
     items: DetailsSummaryProps[];
   };
   linkList?: LinkListProps;
-  buttons?: ButtonProps[];
+  buttons?: (ButtonProps | ButtonLinkProps)[];
   className?: string;
   look?: "default" | "highlight" | "method";
 };
