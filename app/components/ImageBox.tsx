@@ -53,7 +53,7 @@ function ImageBox({
       {image.caption && (
         <figcaption
           className={twJoin(
-            "label-03-reg w- pt-[24px] **:max-w-fit",
+            "ds-label-03-reg w- pt-[24px] **:max-w-fit",
             background && "bg-blue-100 p-16",
           )}
         >
