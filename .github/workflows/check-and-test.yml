@@ -8,6 +8,9 @@ on:
         type: boolean
         description: "If enabled, extensive tests are executed sequentially with more devices and browsers."
         default: false
+    secrets:
+      SLACK_WEBHOOK_URL:
+        required: true
 
 env:
   PACKAGE_NAME: digitalcheck-dito
