@@ -26,7 +26,6 @@ jobs:
       security-events: write
     uses: ./.github/workflows/scan.yml
     secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   check-and-test:
@@ -39,8 +38,6 @@ jobs:
     # Merge reports only if some shards have failed
     if: failure() && needs.check-and-test.result == 'failure'
     uses: ./.github/workflows/create-unified-test-report.yml
-    secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-and-push-image:
     needs: [vulnerability-scan, check-and-test]
