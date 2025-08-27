@@ -147,12 +147,15 @@ test.describe("test question navigation", () => {
   });
 
   test("navigation leads to correct pages", async ({ page }) => {
+    // answer all questions with "Ja", except for the last one (which would quit the wizard)
     await page.goto(questions[0].url);
     for (let i = 0; i < questions.length - 1; i++) {
       await page.waitForURL(questions[i].url);
       await page.getByLabel("Ja").click();
       await page.getByRole("button", { name: "Übernehmen" }).click();
     }
+    // wait for last question to show
+    await page.waitForURL(questions[questions.length - 1].url);
 
     // Click on each question link and verify it leads to the correct page
     for (const question of questions) {
