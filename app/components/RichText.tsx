@@ -28,7 +28,7 @@ const RichText = ({
 
         // Force external links to open in a new window
         if (isExternalUrl(href)) {
-          const newLinkHtml = linkHtml
+          return linkHtml
             .replace(
               /^<a /,
               `<a target="_blank" aria-describedby=${A11Y_MESSAGE_NEW_WINDOW} rel="noopener noreferrer" class="group inline-flex items-center"`,
@@ -37,8 +37,6 @@ const RichText = ({
               `>${token.text}<`,
               `>${token.text}${openInNewIconString}<`,
             );
-
-          return newLinkHtml;
         }
 
         const ext = getDownloadableExtensionName(href);
