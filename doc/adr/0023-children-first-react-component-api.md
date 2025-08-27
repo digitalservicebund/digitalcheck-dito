@@ -6,13 +6,13 @@
 
 ## Context
 
-Our current component APIs often rely on **deeply nested configuration props** to describe the entire render tree. This has led to:
+Our previous component APIs often relied on **deeply nested configuration props** to describe the entire render tree. This has led to:
 
 - **Low transparency**: Reading a component’s usage doesn’t reveal what will actually render.
 - **Complex prop shapes**: Deep object trees for subcomponents are hard to type, test, and maintain.
 - **Leaky resource structures**: Content files end up mirroring UI nesting just to satisfy prop shapes.
 
-**Example from current code**
+**Example from previous code**
 
 ```tsx
 // app/routes/methoden.fuenf-prinzipien/Principle.tsx
@@ -30,7 +30,10 @@ Our current component APIs often rely on **deeply nested configuration props** t
 
 ## Decision
 
-We adopt a **children‑first** component design. When fixed placement of the subcomponents is needed, we use **components-in-props** (i.e., props that accept React elements). Props for child content that aren't components **should be primitives** (e.g., `string`, `number`, `boolean`) or simple flags instead of nested object trees.
+We adopt a **children‑first** component design.
+When subcomponents need to be rendered in specific locations (like a custom close button in a modal component), we use **components-in-props** (i.e., props that accept React elements).
+
+Props for child content that aren't components **should be primitives** (e.g., `string`, `number`, `boolean`) or simple flags instead of nested object trees.
 
 ### 1. Prefer Children for structure and content
 
@@ -38,12 +41,12 @@ Express layout and content directly in JSX to make render output obvious and off
 
 ```tsx
 // Before (main content as prop, limited to simple text)
-<DetailsSummary title={content.title} content={content.text} />
+<DetailsSummary title={content.title} content={content.text} buttons={[{label: "Close"}]} />
 
 // After (children with more flexibility)
 <DetailsSummary title={content.title}>
   <Richtext content={content.text} />
-  <Button />
+  <Button>Close</Button>
 </DetailsSummary>
 ```
 
@@ -111,6 +114,12 @@ Pass simple values (text, ids, numbers, booleans). Avoid passing object props th
 // ❌ Avoid: nested object just to configure subcomponents
 <Card title={{ text: "My card", level: 2 }}>
   <p>Body text</p>
+</Card>
+
+// ✅ Alternative: Use children
+<Card>
+    <Heading level={2}>My card</Heading>
+    <p>Body text</p>
 </Card>
 ```
 
