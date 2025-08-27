@@ -1,3 +1,4 @@
+import React from "react";
 import { twJoin } from "tailwind-merge";
 import type { Node } from "~/utils/paragraphUtils";
 import twMerge from "~/utils/tailwindMerge";
@@ -34,6 +35,7 @@ type BaseInfoBoxProps = {
 type VisualProps =
   | { type: "icon"; Icon: React.FC<React.SVGProps<SVGSVGElement>> }
   | { type: "image"; image: InfoImageProps }
+  | { type: "component"; Component: React.ReactElement }
   | { type: "none" };
 
 export type InfoBoxProps = BaseInfoBoxProps & {
@@ -91,6 +93,7 @@ const InfoBox = ({
           )}
         />
       )}
+      {visual?.type === "component" && visual.Component}
       <div
         data-testid="info-box-content"
         className="ds-stack ds-stack-16 break-words"

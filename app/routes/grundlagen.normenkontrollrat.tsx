@@ -25,7 +25,11 @@ export default function FundamentalsMethods() {
       <Hero title={fundamentalsNKR.title} subtitle={fundamentalsNKR.subtitle} />
 
       <Container className="space-y-40 py-40 md:py-80">
-        <InfoBoxList items={items} separator className="mt-0" />
+        <InfoBoxList
+          items={items}
+          separator
+          className="ds-stack-80 mt-0 [&>li]:pb-80"
+        />
 
         <section className="space-y-40">
           <h3 className="ds-body-01-reg">

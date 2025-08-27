@@ -3,6 +3,7 @@ import { A11Y_MESSAGE_NEW_WINDOW } from "~/resources/constants";
 import { getDownloadableExtensionName } from "~/utils/fileExtensionUtils";
 import twMerge from "~/utils/tailwindMerge";
 import { isExternalUrl } from "~/utils/utilFunctions";
+import { dowloadIconString } from "./downloadIcon";
 import { openInNewIconString } from "./openInNewWindow";
 
 export type RichTextProps = {
@@ -27,7 +28,7 @@ const RichText = ({
 
         // Force external links to open in a new window
         if (isExternalUrl(href)) {
-          const newLinkHtml = linkHtml
+          return linkHtml
             .replace(
               /^<a /,
               `<a target="_blank" aria-describedby=${A11Y_MESSAGE_NEW_WINDOW} rel="noopener noreferrer" class="group inline-flex items-center"`,
@@ -36,18 +37,18 @@ const RichText = ({
               `>${token.text}<`,
               `>${token.text}${openInNewIconString}<`,
             );
-
-          return newLinkHtml;
         }
 
         const ext = getDownloadableExtensionName(href);
 
         // Force the browser to download links to PDF/Excel files
         if (ext) {
-          return linkHtml.replace(
-            /^<a /,
-            `<a download title="${token.text} (${ext}-Datei)" `,
-          );
+          return linkHtml
+            .replace(
+              /^<a /,
+              `<a download title="${token.text} (${ext}-Datei)" class="group inline-flex items-center" `,
+            )
+            .replace(`>${token.text}<`, `>${token.text}${dowloadIconString}<`);
         }
 
         return linkHtml;

@@ -23,6 +23,9 @@ function getKey(item: ListItemProps, index: number) {
   );
 }
 
+/**
+ * @deprecated Use the component from NumberedList.tsx instead
+ */
 const NumberedList = ({
   identifier,
   items,
