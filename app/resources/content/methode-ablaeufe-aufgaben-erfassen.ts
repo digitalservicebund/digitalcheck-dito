@@ -66,7 +66,7 @@ export const methodsTasksProcesses = {
           image: {
             url: "/images/flussdiagramm.png",
             width: 200,
-            size: "large" as const,
+            size: "medium" as const,
             alternativeText:
               "Ein Flussdiagramm mit verschiedenen Formen, die durch Linien verbunden sind.",
           },
@@ -93,7 +93,7 @@ export const methodsTasksProcesses = {
           image: {
             url: "/images/entscheidungsbaum.png",
             width: 200,
-            size: "large" as const,
+            size: "medium" as const,
             alternativeText:
               "Ein Entscheidungsbaum, bestehend aus rechteckigen Kästen und gelben Rauten mit der Beschriftung „JA / NEIN“.",
           },
@@ -119,7 +119,7 @@ export const methodsTasksProcesses = {
           image: {
             url: "/images/schaubild.png",
             width: 200,
-            size: "large" as const,
+            size: "medium" as const,
             alternativeText:
               "Ein Schaubild, das die Beziehung zwischen verschiedenen Elementen darstellt.",
           },
