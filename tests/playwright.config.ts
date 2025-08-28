@@ -5,7 +5,10 @@ import { fileURLToPath } from "url";
 
 // Get the directory name of the current module
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-dotenv.config({ path: path.resolve(__dirname, "../", ".env.test") });
+dotenv.config({
+  path: path.resolve(__dirname, "../", ".env.test"),
+  quiet: true,
+});
 
 export const allProjects: PlaywrightTestConfig["projects"] = [
   {

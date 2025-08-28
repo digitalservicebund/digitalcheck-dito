@@ -6,7 +6,10 @@ import configDefault from "./playwright.config";
 
 // Get the directory name of the current module
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-dotenv.config({ path: path.resolve(__dirname, "../", ".env.test") });
+dotenv.config({
+  path: path.resolve(__dirname, "../", ".env.test"),
+  quiet: true,
+});
 
 // use larger viewports for snapshot tests
 const desktopViewport = { width: 1200, height: 4800 };
