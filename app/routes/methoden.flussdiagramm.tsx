@@ -194,6 +194,8 @@ export default function Visualization() {
               url: "/images/methoden/flussdiagramme/flussdiagramm-beispiel.png",
               caption:
                 "In diesem Beispiel ist der Antragsprozess für einen Führerschein aus Sicht der Fahrschülerin / des Fahrschülers visualisiert.",
+              alternativeText:
+                "Das Bild zeigt am Beispiel des Führerscheinantrags, wie ein Flussdiagramm funktioniert. Es stellt alle Schritte von der Anmeldung bis zur Meldebestätigung in chronologischer Reihenfolge übersichtlich dar. Die grünen Boxen erklären die jeweiligen Vorteile. Ein Flussdiagramm veranschaulicht Prozesse, verdeutlicht Verantwortlichkeiten und hilft, die Orientierung über den gesamten Ablauf zu bewahren.",
             }}
             zoomable
             border
@@ -387,7 +389,7 @@ export default function Visualization() {
                         image={{
                           url: "/images/methoden/flussdiagramme/4/beispiel-fahrschule-start-ende.png",
                           alternativeText:
-                            "Fragment eines Flussdiagramms, in denen für den Akteur Fahrschüler:in ein Kreis mit dünner Linie für Start und zwei Kreise mit dicker Linie für Enden dargestellt sind.",
+                            "Ausschnitt eines Flussdiagramms: Start des Prozesses durch einen Kreis mit dünner Linie für den Akteur Fahrschüler:in. Zwei dick umrandete Kreise zeigen verschiedene mögliche Endergebnisse.",
                         }}
                       />
                     ),
