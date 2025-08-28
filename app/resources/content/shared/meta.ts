@@ -1,6 +1,6 @@
 export const siteMeta = {
   siteName: "DigitalService",
-  siteURL: "https://erarbeiten.digitalcheck.bund.de/",
+  siteURL: "https://digitalcheck.bund.de/",
   title: "Digitalcheck",
   titleWithTagline: "Digitalcheck: Digitaltaugliche Regelungen erarbeiten",
   description:

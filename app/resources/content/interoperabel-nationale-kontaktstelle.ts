@@ -212,10 +212,10 @@ export const spoc = {
           interoperabel@digitalservice.bund.de
 
           Weitere Online-Angebote des Digitalcheck für Legist:innen:  
-          [https://erarbeiten.digitalcheck.bund.de/](${ROUTE_LANDING.url})
+          [https://digitalcheck.bund.de/](${ROUTE_LANDING.url})
 
           Für weitere Inhalte zur Interoperabilität:  
-          [https://erarbeiten.digitalcheck.bund.de/interoperabel/](${ROUTE_INTEROPERABILITY.url})
+          [https://digitalcheck.bund.de/interoperabel/](${ROUTE_INTEROPERABILITY.url})
         `,
       },
     ],

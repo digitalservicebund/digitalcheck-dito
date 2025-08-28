@@ -5,7 +5,7 @@ export const accessibility = {
   content: dedent`
     *Informationen über die Zugänglichkeit dieser Webseiten gemäß § 12 Behindertengleichstellungsgesetz (BGG) sowie über diesbezügliche Kontaktmöglichkeiten.*
     
-    Das Bundesministerium des Innern (BMI) ist bemüht, seine Webseite [erarbeiten.digitalcheck.bund.de](https://erarbeiten.digitalcheck.bund.de) so weit wie möglich barrierefrei zu gestalten. Rechtsgrundlage sind das Behindertengleichstellungsgesetz (BGG), die Barrierefreie-Informationstechnik-Verordnung (BITV 2.0) und die harmonisierte europäische Norm EN 301 549 in ihrer jeweils gültigen Fassung.
+    Das Bundesministerium des Innern (BMI) ist bemüht, seine Webseite [digitalcheck.bund.de](https://digitalcheck.bund.de) so weit wie möglich barrierefrei zu gestalten. Rechtsgrundlage sind das Behindertengleichstellungsgesetz (BGG), die Barrierefreie-Informationstechnik-Verordnung (BITV 2.0) und die harmonisierte europäische Norm EN 301 549 in ihrer jeweils gültigen Fassung.
     
     Im Rahmen eines internen Tests wurde jedoch festgestellt, dass der Webauftritt noch keine vollständige Barrierefreiheit gewährleistet. Das BMI arbeitet dementsprechend mit Nachdruck daran, die barrierefreie Gestaltung seiner Webseite weiter zu verbessern.
     
@@ -20,7 +20,7 @@ export const accessibility = {
     
     ## Barriere melden! Hinweise zur Barrierefreiheit
     
-    Sind Ihnen weitere Mängel beim barrierefreien Zugang zu Inhalten von [erarbeiten.digitalcheck.bund.de](https://erarbeiten.digitalcheck.bund.de) aufgefallen? Dann können Sie sich gern bei uns melden:
+    Sind Ihnen weitere Mängel beim barrierefreien Zugang zu Inhalten von [digitalcheck.bund.de](https://digitalcheck.bund.de) aufgefallen? Dann können Sie sich gern bei uns melden:
     
     **Bundesministerium des Innern (BMI)**<br />
     Alt Moabit 140<br />

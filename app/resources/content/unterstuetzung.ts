@@ -63,7 +63,7 @@ export const support = {
       {
         text: "E-Mail senden",
         look: "tertiary" as const,
-        href: "mailto:digitalcheck@digitalservice.bund.de?subject=Unterstützungsangebote:%20erarbeiten.digitalcheck.bund.de",
+        href: "mailto:digitalcheck@digitalservice.bund.de?subject=Unterstützungsangebote:%20digitalcheck.bund.de",
       },
     ],
   },

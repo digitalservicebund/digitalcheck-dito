@@ -7,7 +7,8 @@ export const privacy = {
     
     ### 1.1 Verantwortlicher und Datenschutzbeauftragte/r
     
-    Verantwortlich für die Verarbeitung von personenbezogenen Daten im Rahmen der Bereitstellung der Website [erarbeiten.digitalcheck.bund.de](https://erarbeiten.digitalcheck.bund.de) ist das Bundesministerium des Innern (BMI).
+    Verantwortlich für die Verarbeitung von personenbezogenen Daten im Rahmen der Bereitstellung der Website [digitalcheck.bund.de](https://digitalcheck.bund.de) ist das Bundesministerium des Innern (BMI).
+    
     Bundesministerium des Innern (BMI)
     
     Alt-Moabit 140<br />
@@ -98,6 +99,10 @@ export const privacy = {
     - beinhaltet keine personenbezogenen Daten,
     - basiert nicht auf IP oder anderen auf tatsächlichen Nutzer zurückverfolgbaren Informationen,
     - Gültigkeit endet mit Ablauf der Sitzung, spätestens nach 7 Tagen.
+    
+    ## 2a. Verarbeitung personenbezogener Daten im Zusammenhang mit der Nutzung von YouTube zur Anzeige von Videos
+    
+    ### 2a.1 Angaben zum YouTube-Profil
     
     ## 3. Datenempfänger
     

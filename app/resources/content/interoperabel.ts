@@ -27,7 +27,7 @@ export const interoperability = {
     tabName: "Häufige Fragen",
     headline: "Häufig gestellte Fragen",
     content:
-      "In diesem Bereich erhalten Sie umfassende Informationen zur Einführung der EU-Vorgaben zur Interoperabilität sowie zum Prozess der Erarbeitung von Interoperabilität in Regelungen. Wenn Sie weitere Fragen haben, dann kontaktieren Sie uns unter: [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de) oder unter [0151/40 76 78 39](tel:+4915140767839).",
+      "In diesem Bereich erhalten Sie umfassende Informationen zur Einführung der EU-Vorgaben zur Interoperabilität sowie zum Prozess der Erarbeitung von Interoperabilität in Regelungen. Wenn Sie weitere Fragen haben, dann kontaktieren Sie uns unter: [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%digitalcheck.bund.de) oder unter [0151/40 76 78 39](tel:+4915140767839).",
     items: [
       {
         headline: "Was sind „transeuropäische digitale öffentliche Dienste“?",
@@ -123,7 +123,7 @@ export const interoperability = {
           
           Die [Verordnung für ein interoperables Europa](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32024R0903) sieht in den Mitgliedstaaten nationale Kontaktstellen vor. Für Deutschland hat das Bundesministerium für Digitales und Staatsmodernisierung das Team vom Digitalcheck mit der Ausführung beauftragt. 
           
-          Wir unterstützen Sie derzeit individuell bei der Durchführung einer Interoperabilitätsbewertung für eine interoperable Regelung und bei der Erstellung eines entsprechenden Berichts. Kontaktieren Sie uns jederzeit gerne mit Ihren Anliegen - je früher, desto besser.  Schreiben Sie uns über [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de) oder rufen Sie uns an unter [0151/40 76 78 39](tel:+4915140767839).
+          Wir unterstützen Sie derzeit individuell bei der Durchführung einer Interoperabilitätsbewertung für eine interoperable Regelung und bei der Erstellung eines entsprechenden Berichts. Kontaktieren Sie uns jederzeit gerne mit Ihren Anliegen - je früher, desto besser.  Schreiben Sie uns über [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de) oder rufen Sie uns an unter [0151/40 76 78 39](tel:+4915140767839).
           
           Weitergehende Informationen können Sie hier abrufen:
           
@@ -143,7 +143,7 @@ export const interoperability = {
           
           Mit Ihnen zusammen wollen wir den Prozess der Ausarbeitung von Interoperabilitätsbewertungen aufwandsarm und anwendungsfreundlich gestalten. Um mit Ihnen zu lernen, unterstützen wir Sie deshalb bei Interoperabilitätsbewertungen und der Berichterstellung individuell. 
           
-          Kontaktieren Sie uns jederzeit gerne mit Ihren Anliegen - je früher, desto besser. Schreiben Sie uns über [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de) oder rufen Sie uns an unter [0151/40 76 78 39](tel:+4915140767839).
+          Kontaktieren Sie uns jederzeit gerne mit Ihren Anliegen - je früher, desto besser. Schreiben Sie uns über [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de) oder rufen Sie uns an unter [0151/40 76 78 39](tel:+4915140767839).
         `,
       },
       {
@@ -265,7 +265,7 @@ export const interoperability = {
 
               <p class="my-24">Durch die <a href="/vorpruefung">Digitalcheck Vorprüfung</a> identifizieren Sie bereits heute, ob Interoperabilität bei der Erarbeitung Ihrer Regelung eine Rolle spielt. Falls sich daraus eine Berichtspflicht an die Europäische Kommission ergibt, unterstützt Sie das Digitalcheck-Team dabei, eine Interoperabilitätsbewertung durchzuführen, zu dokumentieren und den Bericht einzureichen.</p>
 
-              <p class="mb-24">Wenn Sie weitere Fragen haben, dann kontaktieren Sie uns unter: <a href="mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de" class="ds-link-01-bold">interoperabel@digitalservice.bund.de</a> oder rufen Sie uns an unter <a href="tel:+4915140767839" class="ds-link-01-bold">0151/40 76 78 39</a>.</p>
+              <p class="mb-24">Wenn Sie weitere Fragen haben, dann kontaktieren Sie uns unter: <a href="mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de" class="ds-link-01-bold">interoperabel@digitalservice.bund.de</a> oder rufen Sie uns an unter <a href="tel:+4915140767839" class="ds-link-01-bold">0151/40 76 78 39</a>.</p>
 
               Weitere Quellen:
               - [European Commission - European Interoperability Framework](https://ec.europa.eu/isa2/eif_en/)

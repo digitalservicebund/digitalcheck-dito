@@ -1,7 +1,7 @@
 {
   "name": "digitalcheck-dito",
   "private": true,
-  "homepage": "https://erarbeiten.digitalcheck.bund.de/",
+  "homepage": "https://digitalcheck.bund.de/",
   "sideEffects": false,
   "type": "module",
   "scripts": {

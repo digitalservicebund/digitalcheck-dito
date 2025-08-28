@@ -33,7 +33,7 @@ export const methodsTechnicalFeasibility = {
         <h3 class="ds-subhead font-bold mt-24">Sie müssen nicht alles allein bewältigen</h3>
         
         Bei kleinen Fragen rufen Sie den Digitalcheck-Support an unter [0151/40 76 78 39](tel:+4915140767839).
-        Für ein unterstützendes, einstündiges Videotelefonat schreiben Sie eine E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de) oder buchen Sie direkt einen Termin.
+        Für ein unterstützendes, einstündiges Videotelefonat schreiben Sie eine E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de) oder buchen Sie direkt einen Termin.
     `,
     buttons: [
       {
@@ -85,7 +85,7 @@ export const methodsTechnicalFeasibility = {
       - **Erkenntnisse visuell aufzubereiten** – das ist die beste Grundlage für interne und externe Beteiligungsprozesse – und
       - die **Aussagen externer Dienstleister** zu reflektieren: Wirtschaftlichkeit kann eine Motivation für aufwändige Lösungen sein.
       
-      <p class="mt-24">Schreiben Sie uns über <a href="mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20erarbeiten.digitalcheck.bund.de" class="ds-link-01-bold">digitalcheck@digitalservice.bund.de</a> oder rufen Sie uns an unter <a href="tel:+4915140767839" class="ds-link-01-bold">0151/40 76 78 39</a>.</p>
+      <p class="mt-24">Schreiben Sie uns über <a href="mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de" class="ds-link-01-bold">digitalcheck@digitalservice.bund.de</a> oder rufen Sie uns an unter <a href="tel:+4915140767839" class="ds-link-01-bold">0151/40 76 78 39</a>.</p>
     `,
     buttons: [
       {
