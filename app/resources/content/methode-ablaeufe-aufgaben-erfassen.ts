@@ -72,7 +72,6 @@ export const methodsTasksProcesses = {
           },
           type: "image" as const,
         },
-        badge: { text: "In Kürze Verfügbar", Icon: DateRangeOutlined },
         heading: { text: "Flussdiagramm", tagName: "h3" as const },
         content:
           "Ein Flussdiagramm zeigt einen Prozessablauf. Es stellt die Reihenfolge von Handlungen oder Entscheidungen dar.",
