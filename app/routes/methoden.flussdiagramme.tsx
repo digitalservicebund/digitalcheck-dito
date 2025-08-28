@@ -422,7 +422,7 @@ export default function Visualization() {
                         "Akteure können alle Normenadressaten oder Institutionen sein.",
                       className: "border border-blue-800",
                     }}
-                    className="md:max-w-1/2"
+                    className="md:max-w-2/3 lg:max-w-1/2"
                     zoomable={false}
                     border
                   />
@@ -439,9 +439,9 @@ export default function Visualization() {
                       alternativeText:
                         "Fragment eines Flussdiagramms, in denen Kästen für Aktivitäten mit Pfeilen verbunden sind.",
                       caption:
-                        "Jede Aktivität der Akteure werden mit einem Pfeil verbunden.",
+                        "Jede Aktivität der Akteure wird mit einem Pfeil verbunden.",
                     }}
-                    className="md:max-w-1/2"
+                    className="md:max-w-2/3 lg:max-w-1/2"
                     zoomable={false}
                     border
                   />
@@ -505,7 +505,7 @@ export default function Visualization() {
                         "Eine Legende erklärt Symbole und Abkürzungen und macht so die Visualisierung verständlich.",
                     }}
                     border
-                    className="md:max-w-1/2"
+                    className="md:max-w-2/3 lg:max-w-1/2"
                   />
                   <RichText
                     markdown={dedent`
