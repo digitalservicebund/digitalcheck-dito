@@ -72,8 +72,8 @@ export const ROUTE_METHODS_TASKS_PROCESSES = createRoute(
   ROUTE_METHODS,
 );
 export const ROUTE_METHODS_FLOWCHARTS = createRoute(
-  "flussdiagramme",
-  "Flussdiagramme Anleitung",
+  "flussdiagramm",
+  "Anleitung Flussdiagramme",
   ROUTE_METHODS,
 );
 export const ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX = createRoute(
