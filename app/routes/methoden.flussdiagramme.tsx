@@ -111,7 +111,7 @@ function Step({
 }: Readonly<StepProps>) {
   return (
     <NumberedList.Item
-      className={listItemClass}
+      className="mt-4 flex flex-col gap-16"
       after={
         <>
           {fullwidthContent}
@@ -124,9 +124,8 @@ function Step({
   );
 }
 
-const listItemClass = "mt-4 flex flex-col gap-16";
 export default function Visualization() {
-  const infoBoxClass = "px-56 sm:px-56";
+  const infoBoxClass = "px-16 sm:px-56";
   const badgeForExampleContent: BadgeProps = {
     text: "Beispiel: Fahrerlaubnis",
     look: "hint",
@@ -146,11 +145,7 @@ export default function Visualization() {
           <div className="grid grid-cols-1 gap-y-32 md:grid-cols-2 md:gap-x-48 md:gap-y-40">
             {diagramElements.map((item) => (
               <div key={item.title} className="flex gap-8">
-                <img
-                  src={item.iconUrl}
-                  alt={item.title}
-                  className="size-40 md:size-80"
-                />
+                <img src={item.iconUrl} alt={item.title} className="size-80" />
                 <RichText
                   className="ds-label-02-reg"
                   markdown={item.description}
@@ -383,7 +378,9 @@ export default function Visualization() {
                         "Fragment eines Flussdiagramms mit drei horizontalen, länglichen Kästen, die am Anfang mit einer Platzhalter-Box “Akteurin/Akteur” markiert sind.",
                       caption:
                         "Akteure können alle Normenadressaten oder Institutionen sein.",
+                      className: "border border-blue-800",
                     }}
+                    className="md:max-w-1/2"
                     zoomable={false}
                     border
                   />
@@ -402,6 +399,7 @@ export default function Visualization() {
                       caption:
                         "Jede Aktivität der Akteure werden mit einem Pfeil verbunden.",
                     }}
+                    className="md:max-w-1/2"
                     zoomable={false}
                     border
                   />
@@ -464,6 +462,7 @@ export default function Visualization() {
                         "Eine Legende erklärt Symbole und Abkürzungen und macht so die Visualisierung verständlich.",
                     }}
                     border
+                    className="md:max-w-1/2"
                   />
                   <RichText
                     markdown={dedent`
