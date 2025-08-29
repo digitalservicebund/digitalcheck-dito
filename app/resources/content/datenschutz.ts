@@ -100,10 +100,6 @@ export const privacy = {
     - basiert nicht auf IP oder anderen auf tatsächlichen Nutzer zurückverfolgbaren Informationen,
     - Gültigkeit endet mit Ablauf der Sitzung, spätestens nach 7 Tagen.
     
-    ## 2a. Verarbeitung personenbezogener Daten im Zusammenhang mit der Nutzung von YouTube zur Anzeige von Videos
-    
-    ### 2a.1 Angaben zum YouTube-Profil
-    
     ## 3. Datenempfänger
     
     Das BMI setzt im Rahmen einer Auftragsverarbeitung die DigitalService GmbH des Bundes als Dienstleister ein. Mit diesem Dienstleister wurde ein Vertrag gemäß Artikel 28 Abs. 3 DSGVO geschlossen; datenschutzrechtlich verantwortlich ist das BMI. 
