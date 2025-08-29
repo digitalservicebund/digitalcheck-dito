@@ -44,7 +44,7 @@ function ImageZoomable({
         )}
       />
       <ZoomInOutlined
-        className="absolute bottom-16 left-16 size-24 bg-blue-800 p-1 shadow-sm"
+        className="absolute bottom-16 left-16 size-24 rounded-xs border-4 border-blue-800 bg-blue-800 p-1 shadow-sm"
         fill="white"
       />
     </Link>
