@@ -72,6 +72,7 @@ export default function Visualization() {
             tagName: "h3",
           }}
           content={methodsTasksProcesses.goodToKnow.content}
+          buttons={methodsTasksProcesses.goodToKnow.buttons}
         />
       </Container>
     </>

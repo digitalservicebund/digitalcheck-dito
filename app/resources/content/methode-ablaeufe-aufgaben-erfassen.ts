@@ -147,9 +147,17 @@ export const methodsTasksProcesses = {
     },
     title: "Visualisierungen erleichtern die NKR-Prüfung",
     content: dedent`
-      Die Vorteile von Visualisierungen helfen dem Nationalen Normenkontrollrats (NKR), Ihr Vorhaben schneller zu prüfen.
-      [Sehen Sie hier](${ROUTE_FUNDAMENTALS_NKR.url}), worauf der NKR bei Visualisierungen achtet.
+      Die Vorteile von Visualisierungen helfen dem Nationalen Normenkontrollrat (NKR), Ihr Vorhaben schneller zu prüfen.
+      Aber worauf achtet der NKR bei Visualisierungen? 
     `,
+    buttons: [
+      {
+        href: ROUTE_FUNDAMENTALS_NKR.url,
+        text: "Mehr dazu erfahren",
+        plausibleEventName: "Content.Link+NKR+Kriterien",
+        look: "tertiary" as const,
+      },
+    ],
   },
 
   intro: {
