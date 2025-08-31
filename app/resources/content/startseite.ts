@@ -6,7 +6,7 @@ import {
   ROUTE_FUNDAMENTALS_NKR,
   ROUTE_METHODS,
   ROUTE_METHODS_PRINCIPLES,
-  ROUTE_METHODS_TASKS_PROCESSES,
+  ROUTE_METHODS_VISUALIZE,
   ROUTE_PRECHECK,
   ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
@@ -110,7 +110,7 @@ export const startseite = {
     buttons: [
       {
         text: "Zu Visualisierungen",
-        href: ROUTE_METHODS_TASKS_PROCESSES.url,
+        href: ROUTE_METHODS_VISUALIZE.url,
         look: "tertiary" as const,
         plausibleEventName:
           "Content.Teaser+Visualisierungen.Link+Visualisierungen",

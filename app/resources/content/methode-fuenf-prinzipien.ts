@@ -4,8 +4,8 @@ import {
   ROUTE_DOWNLOAD_PRINCIPLE_POSTER,
   ROUTE_EXAMPLES,
   ROUTE_METHODS,
-  ROUTE_METHODS_TASKS_PROCESSES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
+  ROUTE_METHODS_VISUALIZE,
   ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
@@ -57,7 +57,7 @@ export const methodsFivePrinciples = {
       },
       {
         heading: { text: "Als Überprüfung für den Gesamtprozess" },
-        content: `Besonders erkenntnisreich sind die fünf Prinzipien, wenn Sie diese auf eine Skizze des geplanten Umsetzungsprozesses anwenden. Skizzieren Sie Schritt für Schritt die Umsetzung und markieren Sie die Stellen, an denen eines oder mehrere Prinzipien wichtig sind. Mehr Informationen und Anleitung zur Visualisierungen finden Sie auf [visualisieren.digitalcheck.bund.de](${ROUTE_METHODS_TASKS_PROCESSES.url}).`,
+        content: `Besonders erkenntnisreich sind die fünf Prinzipien, wenn Sie diese auf eine Skizze des geplanten Umsetzungsprozesses anwenden. Skizzieren Sie Schritt für Schritt die Umsetzung und markieren Sie die Stellen, an denen eines oder mehrere Prinzipien wichtig sind. Mehr Informationen und Anleitung zur Visualisierungen finden Sie auf [visualisieren.digitalcheck.bund.de](${ROUTE_METHODS_VISUALIZE.url}).`,
       },
       {
         heading: { text: "Als Startpunkt für ihren Regelungstext" },

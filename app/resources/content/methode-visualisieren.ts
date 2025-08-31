@@ -14,9 +14,9 @@ import { ButtonLinkProps, ButtonProps } from "~/components/Button";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import {
   ROUTE_FUNDAMENTALS_NKR,
-  ROUTE_METHODS_FLOWCHARTS,
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX,
+  ROUTE_METHODS_VISUALIZE_FLOWCHARTS,
 } from "../staticRoutes";
 
 export const methodsTasksProcesses = {
@@ -79,7 +79,7 @@ export const methodsTasksProcesses = {
         buttons: [
           {
             text: "Anleitung",
-            href: ROUTE_METHODS_FLOWCHARTS.url,
+            href: ROUTE_METHODS_VISUALIZE_FLOWCHARTS.url,
             look: "tertiary" as const,
             disabled: true,
           },

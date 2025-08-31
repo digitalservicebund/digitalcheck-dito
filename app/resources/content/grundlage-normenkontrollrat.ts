@@ -6,7 +6,7 @@ import {
 import { dedent } from "~/utils/dedentMultilineStrings";
 import {
   ROUTE_DOCUMENTATION,
-  ROUTE_METHODS_TASKS_PROCESSES,
+  ROUTE_METHODS_VISUALIZE,
   ROUTE_PRECHECK,
 } from "../staticRoutes";
 
@@ -80,7 +80,7 @@ export const fundamentalsNKR = {
         
         Auch wenn Visualisierungen nicht verpflichtend sind, **erleichtern und beschleunigen** sie die NKR-Prüfung Ihres Vorhabens.
 
-        [Mehr zu Visualisierungen](${ROUTE_METHODS_TASKS_PROCESSES.url})
+        [Mehr zu Visualisierungen](${ROUTE_METHODS_VISUALIZE.url})
       `,
     },
     infoBox2: {

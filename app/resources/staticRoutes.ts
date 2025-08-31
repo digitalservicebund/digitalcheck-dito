@@ -66,15 +66,15 @@ export const ROUTE_METHODS_RESPONSIBLE_ACTORS = createRoute(
   "Akteure auflisten",
   ROUTE_METHODS,
 );
-export const ROUTE_METHODS_TASKS_PROCESSES = createRoute(
-  "ablaeufe-aufgaben-erfassen",
-  "Abläufe erfassen",
+export const ROUTE_METHODS_VISUALIZE = createRoute(
+  "visualisieren",
+  "Visualisieren",
   ROUTE_METHODS,
 );
-export const ROUTE_METHODS_FLOWCHARTS = createRoute(
+export const ROUTE_METHODS_VISUALIZE_FLOWCHARTS = createRoute(
   "flussdiagramm",
   "Anleitung Flussdiagramme",
-  ROUTE_METHODS,
+  ROUTE_METHODS_VISUALIZE,
 );
 export const ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX = createRoute(
   "download/Anleitung_Flussdiagramm_erstellen.pptx",
@@ -296,7 +296,7 @@ export const ROUTES: Route[] = [
   ROUTE_PRECHECK_RESULT,
   ROUTE_METHODS,
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
-  ROUTE_METHODS_TASKS_PROCESSES,
+  ROUTE_METHODS_VISUALIZE,
   ROUTE_METHODS_COLLECT_IT_SYSTEMS,
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,

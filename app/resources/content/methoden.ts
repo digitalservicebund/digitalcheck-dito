@@ -2,8 +2,8 @@ import { steps } from "~/resources/content/shared/naechste-schritte";
 import {
   ROUTE_METHODS_COLLECT_IT_SYSTEMS,
   ROUTE_METHODS_PRINCIPLES,
-  ROUTE_METHODS_TASKS_PROCESSES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
+  ROUTE_METHODS_VISUALIZE,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -36,7 +36,7 @@ export const methods = {
         buttons: [
           {
             text: "Anleitung zur Visualisierung",
-            href: ROUTE_METHODS_TASKS_PROCESSES.url,
+            href: ROUTE_METHODS_VISUALIZE.url,
           },
         ],
       },

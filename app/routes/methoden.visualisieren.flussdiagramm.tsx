@@ -19,15 +19,15 @@ import Container from "~/components/Container.tsx";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
 import {
-  ROUTE_METHODS_FLOWCHARTS,
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX,
+  ROUTE_METHODS_VISUALIZE_FLOWCHARTS,
 } from "~/resources/staticRoutes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import constructMetaTitle from "~/utils/metaTitle.ts";
 
 export function meta() {
-  return constructMetaTitle(ROUTE_METHODS_FLOWCHARTS.title);
+  return constructMetaTitle(ROUTE_METHODS_VISUALIZE_FLOWCHARTS.title);
 }
 
 const diagramElements = [
