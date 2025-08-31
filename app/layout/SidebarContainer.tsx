@@ -10,7 +10,7 @@ type SidebarContainerProps = {
  * Layout component that augments the standard Container with a sidebar that sits to its side.
  * On narrow screens, the sidebar content is positioned on top.
  */
-export function SidebarContainer({
+export default function SidebarContainer({
   children,
   sidebar,
 }: Readonly<SidebarContainerProps>) {
@@ -25,5 +25,3 @@ export function SidebarContainer({
     </Container>
   );
 }
-
-export default SidebarContainer;
