@@ -36,7 +36,7 @@ describe("Methoden Route - Integration Tests", () => {
 
     expect(within(visualisationItem).getByRole("link")).toHaveAttribute(
       "href",
-      "/methoden/ablaeufe-aufgaben-erfassen",
+      "/methoden/visualisieren",
     );
 
     expect(

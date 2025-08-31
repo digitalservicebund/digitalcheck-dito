@@ -113,7 +113,7 @@ describe("Index Route - Integration Tests", () => {
       within(visualizationsBox).getByRole("link", {
         name: /Visualisierungen/,
       }),
-    ).toHaveAttribute("href", "/methoden/ablaeufe-aufgaben-erfassen");
+    ).toHaveAttribute("href", "/methoden/visualisieren");
 
     expect(
       within(visualizationsBox).getByRole("link", {
