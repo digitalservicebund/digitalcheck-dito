@@ -176,22 +176,6 @@ export const preCheck = {
         [Frage 3 zum Datenaustausch überprüfen](${ROUTE_PRECHECK.url}/${preCheckQuestions.datenaustausch.id})
       `,
     },
-    resultInteropsHint: {
-      title: "Widerspruch in Ihren Angaben",
-      content: dedent`
-        Ihre Angabe in Frage 3 (Datenaustausch):
-
-        - **Datenaustausch findet nicht statt**
-
-        Ihre Angabe in Frage 6 (Datenaustausch mit EU-Bezug):
-
-        - **Datenaustausch findet statt**
-        
-        Bitte überprüfen Sie ihre Angaben.
-
-        [Frage 3 zum Datenaustausch überprüfen](${ROUTE_PRECHECK.url}/${preCheckQuestions.datenaustausch.id})
-      `,
-    },
   },
   questions: [
     {
