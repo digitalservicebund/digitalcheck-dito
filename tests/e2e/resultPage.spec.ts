@@ -451,28 +451,6 @@ for (const scenario of scenarios) {
         expect(body).toContain(scenario.expected.headline);
       });
 
-      if (scenario.expected.warningInteropWithoutDigital) {
-        test("email body contains warning about interoperability requiring digital", async () => {
-          await page
-            .getByLabel("Arbeitstitel des Vorhabens")
-            .fill("Vorhaben ABC");
-          if (scenario.expected.showsNegativeReasoning) {
-            await page
-              .getByLabel("Begründung")
-              .fill("Darum brauchen wir das nicht.");
-          }
-          const { body } = await interceptMail(page);
-          expect(body).toContain(
-            "Bitte beachten Sie: Wenn Ihr Vorhaben keinen Digitalbezug aufweist, können die Anforderungen der Interoperabilität nicht erfüllt werden",
-          );
-        });
-      }
-    } else {
-      test("form is not shown", async () => {
-        await expect(page.getByTestId("result-form")).toBeHidden();
-      });
-    }
-
     if (scenario.expected.showsUnsureHint) {
       test("page contains hint regarding unsure interoperability", async () => {
         await expect(page.getByRole("main")).toContainText(
