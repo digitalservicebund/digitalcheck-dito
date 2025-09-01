@@ -33,6 +33,8 @@ type ExpectedResult = {
   allNegative?: boolean;
   dcPositiveIOunsure?: boolean;
   negativeReasoningText?: string;
+  inlineNoticeText?: string;
+  infoTooltip?: string;
 };
 
 type UserAnswers = (question: TQuestion) => "Ja" | "Nein" | "Ich bin unsicher";
@@ -210,6 +212,28 @@ const scenarios: TestScenario[] = [
       },
     },
   },
+  {
+    name: "negativ result for all, positive result for eu-bezug",
+    answers: (question) => {
+      if (questions.indexOf(question) === 5) return "Ja";
+      return "Nein";
+    },
+    expected: {
+      headline:
+        "Das Regelungsvorhaben hat keinen Digitalbezug und keine Anforderungen der Interoperabilität.",
+      showsInteropLink: false,
+      showsNegativeReasoning: true,
+      includesInterop: false,
+      formIsVisible: true,
+      resultPrefixes: {
+        positivePrefix: "+",
+        negativePrefix: "-",
+        unsurePrefix: "?",
+      },
+      infoTooltip: "Bitte beachten Sie den oberen Hinweis.",
+      inlineNoticeText: "Interoperabilität benötigt digitale Umsetzung",
+    },
+  },
 ];
 
 function mapUserAnswersToMockAnswers(
@@ -282,5 +306,15 @@ describe.each(scenarios)("test $name", ({ name, answers, expected }) => {
         exact: false,
       }),
     ).toBeInTheDocument();
+  });
+
+  it("shows inlineNoticeText when relevant", () => {
+    if (expected.inlineNoticeText)
+      expect(screen.getByText(expected.inlineNoticeText)).toBeInTheDocument();
+  });
+
+  it("shows infoTooltip when relevant", () => {
+    if (expected.infoTooltip)
+      expect(screen.getByText(expected.infoTooltip)).toBeInTheDocument();
   });
 });

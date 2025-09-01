@@ -159,6 +159,24 @@ export const preCheck = {
     before: "Frage ",
     between: " von ",
   },
+  answerConflictHint: {
+    euBezugHint: {
+      title: "Widerspruch in Ihren Angaben",
+      content: dedent`
+        Ihre Angabe in Frage 3 (Datenaustausch):
+
+        - **Datenaustausch findet nicht statt**
+
+        Ihre Angabe in Frage 6 (Datenaustausch mit EU-Bezug):
+
+        - **Datenaustausch findet statt**
+        
+        Bitte überprüfen Sie ihre Angaben.
+
+        [Frage 3 zum Datenaustausch überprüfen](${ROUTE_PRECHECK.url}/${preCheckQuestions.datenaustausch.id})
+      `,
+    },
+  },
   questions: [
     {
       ...preCheckQuestions.itSystem,
@@ -201,7 +219,7 @@ export const preCheck = {
     {
       ...preCheckQuestions.datenaustausch,
       question:
-        "Werden durch die Regelung Daten erhoben, die der Verwaltung möglicherweise bereits vorliegen?",
+        "Soll ein Datenaustausch stattfinden bspw. weil durch die Regelung Daten erhoben werden, die der Verwaltung bereits vorliegen?",
       positiveResult: "einem Austausch von Daten.",
       negativeResult: "keinem Austausch von Daten.",
       text: "**Praxisbeispiel**: Arbeitnehmende müssen ihr Gehalt in der Einkommenssteuererklärung angeben. Diese Information liegt der Sozialversicherung bereits vor. Eine Wiederverwendung dieser Daten ist bürokratiearm und sollte bei der Erarbeitung der Regelung angestrebt werden.",
@@ -239,8 +257,7 @@ export const preCheck = {
       negativeResult:
         "keinem Daten- und Informationsaustausch zwischen EU-Mitgliedsstaaten.",
       resultHint: {
-        positiveResult:
-          "**Bitte beachten Sie:** Wenn Ihr Vorhaben keinen Digitalbezug aufweist, können die Anforderungen der Interoperabilität nicht erfüllt werden – selbst dann nicht, wenn ein Daten- und Informationsaustausch zwischen EU-Mitgliedsstaaten stattfindet.",
+        positiveResult: "Bitte beachten Sie den oberen Hinweis.",
         unsureResult:
           "**Das können Sie tun:** Kontaktieren Sie uns unter [0151/40 76 78 39](tel:+4915140767839) oder  per E-Mail an [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de). Wir unterstützen Sie gerne bei der Beantwortung dieser Frage.",
       },

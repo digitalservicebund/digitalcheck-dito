@@ -17,6 +17,8 @@ import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
+import InfoTooltip from "~/components/InfoTooltip";
+import InlineNotice from "~/components/InlineNotice";
 import { NumberedList } from "~/components/List";
 import RichText from "~/components/RichText";
 import { preCheck } from "~/resources/content/vorpruefung";
@@ -147,10 +149,10 @@ function getReasonListItem(reason: Reason) {
   return (
     <li key={reason.text} className="flex items-start gap-12">
       {getIconForReason(reason)}
-      <span>
+      <div>
         {reason.text}
-        {reason.hint && <RichText markdown={reason.hint} />}
-      </span>
+        {reason.hint && <InfoTooltip>{reason.hint}</InfoTooltip>}
+      </div>
     </li>
   );
 }
@@ -212,7 +214,7 @@ export default function Result() {
               />
             </div>
           </Container>
-          <Container className="rounded-b-lg bg-white">
+          <Container className="space-y-40 rounded-b-lg bg-white">
             {resultContent.infoboxContent && (
               <Box
                 heading={{
@@ -222,7 +224,15 @@ export default function Result() {
                 content={{ markdown: resultContent.infoboxContent.text }}
               />
             )}
-            <div className="border-b-2 border-solid border-gray-400 pt-16 pb-40 last:border-0 last:pb-0 print:border-0 print:pb-0">
+            {resultContent.inlineNoticeContent && (
+              <InlineNotice
+                tagName="div"
+                look="tips"
+                title={resultContent.inlineNoticeContent.title}
+                content={resultContent.inlineNoticeContent.text}
+              />
+            )}
+            <div className="border-b-2 border-solid border-gray-400 pb-40 last:border-0 last:pb-0 print:border-0 print:pb-0">
               <DetailsSummary
                 title={preCheckResult.detailsTitle}
                 className="plausible-event-name=Content.Result.Accordion+Result+Detail"

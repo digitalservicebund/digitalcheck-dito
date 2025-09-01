@@ -1,6 +1,7 @@
 export type PreCheckResult = {
   digital: ResultType;
   interoperability: ResultType;
+  euBezug: ResultType;
 };
 
 export enum ResultType {
