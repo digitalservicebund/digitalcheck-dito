@@ -221,7 +221,7 @@ export default function Visualization() {
                     ### Entscheiden Sie, in welchem Medium Sie arbeiten möchten
                     
                     Wir empfehlen, den ersten Entwurf auf Papier oder einem Whiteboard zu erstellen.
-                    So können Sie einfach Fehler korrigieren und sind frei in der Darstellung.
+                    Sie können Fehler jederzeit leicht korrigieren und die Darstellung flexibel anpassen. Perfektion ist hier nicht entscheidend – wichtig ist, dass Sie anfangen
                     Sie können auch in einem einfachen Whiteboard-Programm oder Powerpoint arbeiten.
                     
                     **Darauf sollten Sie achten:**
@@ -359,8 +359,8 @@ export default function Visualization() {
 
                   Schreiben Sie beides unter die entsprechenden Symbole auf der Vorlage.<br>
                   Es gibt zwei Symbole, die in Flussdiagrammen Standard sind:
-                  - einen Kreis mit dünner Linie für Start
-                  - einen Kreis mit dicker Linie für Ende
+                  - **Start (Kreis mit dünner Linie):** Wann startet der Prozess der Akteurin oder Akteurs?
+                  - Ende (Kreis mit dicker Linie): Was soll die Akteurin oder Akteur am Ende erreichen?
                   
                   Es kann für verschiedene Akteure unterschiedliche Start- und Endpunkte geben. Konzentrieren Sie sich auf den wichtigsten.
               `}
@@ -429,11 +429,10 @@ export default function Visualization() {
                     border
                   />
                   <p>
-                    Ziehen Sie den Startpunkt an den Anfang des zugehörigen
-                    Akteurs, den Endpunkt schieben Sie nach hinten. Der genaue
-                    Punkt findet sich später. Tragen Sie nun die Aktivitäten,
-                    Entscheidungen und Informationsflüsse der Akteure
-                    schrittweise in den jeweiligen Bahnen ein.
+                    Setzen Sie den Startpunkt an den Anfang der Bahn des Akteurs, den Endpunkt ans Ende. 
+                    Der genaue Platz wird im Verlauf noch angepasst. Der genaue
+                    Punkt findet sich später. Fügen Sie nun Aktivitäten, Entscheidungen und Informationsflüsse der Akteure nacheinander in die Bahnen ein. 
+                    Formulieren Sie die Aktivitäten möglichst aktiv, z. B. „Akteur X beantragt Y“ oder „Akteur X versendet Y“.
                   </p>
                   <ImageBox
                     image={{
