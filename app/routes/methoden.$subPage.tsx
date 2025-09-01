@@ -26,22 +26,23 @@ const contentMap = {
   [ROUTE_METHODS_TECHNICAL_FEASIBILITY.title]: methodsTechnicalFeasibility,
 };
 
-const notFound = new Response("Method page not found", {
-  status: 404,
-  statusText: "Not Found",
-});
-
 export function loader({ params }: Route.LoaderArgs) {
   const { subPage } = params;
   if (!subPage) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw notFound;
+    throw new Response("Method page not found", {
+      status: 404,
+      statusText: "Not Found",
+    });
   }
 
   const route = ROUTES.find((route) => route.url.endsWith(subPage));
   if (!route || !contentMap[route.title]) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw notFound;
+    throw new Response("Method page not found", {
+      status: 404,
+      statusText: "Not Found",
+    });
   }
 
   return { route };
