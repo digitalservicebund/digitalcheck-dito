@@ -13,7 +13,7 @@ type Position = "left" | "right";
 const TOOLTIP_TEXT_WIDTH = 160;
 
 export default function InfoTooltip({ children }: Readonly<InfoTooltipProps>) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [position, setPosition] = useState<Position>("right");
   const tooltipRef = useRef<HTMLButtonElement>(null);
 
