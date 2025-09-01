@@ -3,6 +3,8 @@ import {
   ROUTE_DOCUMENTATION,
   ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_EXAMPLES_VISUALISATIONS,
+  ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
+  ROUTE_FUNDAMENTALS_NKR,
   ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_IMPRINT,
   ROUTE_INTEROPERABILITY,
@@ -78,6 +80,14 @@ export const footer = {
         {
           text: "EU-Interoperabilität",
           url: ROUTE_INTEROPERABILITY.url,
+        },
+        {
+          text: "Was ist Digitaltauglichkeit?",
+          url: ROUTE_FUNDAMENTALS_DIGITAL_READINESS.url,
+        },
+        {
+          text: "NKR und Digitalcheck",
+          url: ROUTE_FUNDAMENTALS_NKR.url,
         },
       ],
     },
