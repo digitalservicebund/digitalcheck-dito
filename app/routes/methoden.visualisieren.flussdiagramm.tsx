@@ -221,7 +221,8 @@ export default function Visualization() {
                     ### Entscheiden Sie, in welchem Medium Sie arbeiten möchten
                     
                     Wir empfehlen, den ersten Entwurf auf Papier oder einem Whiteboard zu erstellen.
-                    Sie können Fehler jederzeit leicht korrigieren und die Darstellung flexibel anpassen. Perfektion ist hier nicht entscheidend – wichtig ist, dass Sie anfangen
+                    Sie können Fehler jederzeit leicht korrigieren und die Darstellung flexibel anpassen. 
+                    Perfektion ist hier nicht entscheidend – wichtig ist, dass Sie anfangen
                     Sie können auch in einem einfachen Whiteboard-Programm oder Powerpoint arbeiten.
                     
                     **Darauf sollten Sie achten:**
