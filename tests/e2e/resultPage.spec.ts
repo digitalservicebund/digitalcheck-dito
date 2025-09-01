@@ -450,6 +450,11 @@ for (const scenario of scenarios) {
         const { body } = await interceptMail(page);
         expect(body).toContain(scenario.expected.headline);
       });
+    } else {
+      test("form is not shown", async () => {
+        await expect(page.getByTestId("result-form")).toBeHidden();
+      });
+    }
 
     if (scenario.expected.showsUnsureHint) {
       test("page contains hint regarding unsure interoperability", async () => {
