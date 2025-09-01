@@ -10,7 +10,8 @@ export function getResultForAnswers(answers: PreCheckAnswers): PreCheckResult {
     digital === ResultType.POSITIVE
       ? getResultForRelevantAnswers(answers, true)
       : ResultType.NEGATIVE;
-  return { digital, interoperability };
+  const euBezug = getResultForRelevantAnswers(answers, true);
+  return { digital, interoperability, euBezug };
 }
 
 export function getResultForRelevantAnswers(

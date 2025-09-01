@@ -6,6 +6,7 @@ import { useIsMobileSize } from "~/hooks/deviceHook";
 import { PRINCIPLE_COLORS } from "~/resources/constants";
 import { explanationID, Node } from "~/utils/paragraphUtils";
 import { BasePrinzip } from "~/utils/strapiData.server";
+import { idFromText } from "~/utils/utilFunctions";
 
 export default function PrincipleHighlightModifier({ node }: { node: Node }) {
   const { principlesToShow, setActiveHighlight, absatzId, useAnchorLinks } =
@@ -23,9 +24,7 @@ export default function PrincipleHighlightModifier({ node }: { node: Node }) {
   if (!principle) return text;
 
   // Generate a deterministic ID based on the text content and position
-  const highlightID = `highlight-${text.split("").reduce((hash, char) => {
-    return hash + char.charCodeAt(0);
-  }, 0)}`;
+  const highlightID = idFromText(text, "highlight");
 
   if (!useAnchorLinks || !isMobileSize || !absatzId)
     return (

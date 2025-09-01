@@ -196,19 +196,18 @@ export default function Index() {
           error={
             form.formState.submitStatus == "error"
               ? form.error("answer")
-              : hasAnswerConflict
-                ? preCheck.answerConflictHint.warningText
-                : undefined
+              : undefined
           }
         />
       </fieldset>
       <Container className="space-y-40 pt-0 pb-40">
         {hasAnswerConflict && (
           <InlineNotice
+            className="[&_p]:mt-24"
             tagName="div"
             look="warning"
-            title={preCheck.answerConflictHint.title}
-            content={preCheck.answerConflictHint.content}
+            title={preCheck.answerConflictHint.euBezugHint.title}
+            content={preCheck.answerConflictHint.euBezugHint.content}
           />
         )}
         <ButtonContainer

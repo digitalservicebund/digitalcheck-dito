@@ -14,6 +14,10 @@ export type ResultContent = {
     title: string;
     text: string;
   };
+  inlineNoticeContent?: {
+    title: string;
+    text: string;
+  };
   reasoningList: Reasoning[];
 };
 
@@ -125,6 +129,17 @@ function getInfoboxContentForResult(
   }
 }
 
+function getInlineNoticeContentForResult(result: PreCheckResult) {
+  const isDigitalPositive = result.digital === ResultType.POSITIVE;
+  const isEuBezugPositive = result.euBezug === ResultType.POSITIVE;
+
+  if (!isDigitalPositive && isEuBezugPositive)
+    return {
+      title: preCheckResult.inlineNotice.title,
+      text: preCheckResult.inlineNotice.content,
+    };
+}
+
 export default function getContentForResult(
   answers: PreCheckAnswers,
   result: PreCheckResult,
@@ -150,5 +165,6 @@ export default function getContentForResult(
       },
     ],
     infoboxContent: getInfoboxContentForResult(result) || undefined,
+    inlineNoticeContent: getInlineNoticeContentForResult(result),
   };
 }

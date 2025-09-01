@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { MemoryRouter, useLoaderData } from "react-router";
+import { BrowserRouter, useLoaderData } from "react-router";
 import { preCheck } from "~/resources/content/vorpruefung";
 import type {
   PreCheckAnswers,
@@ -13,10 +13,13 @@ import Index from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 const { questions } = preCheck;
 
 type ExpectedResult = {
+  nextButtonEnabled: boolean;
   showsAnswerConflictWarning: boolean;
 };
 
-type UserAnswers = (question: TQuestion) => "Ja" | "Nein" | "Ich bin unsicher";
+type UserAnswers = (
+  question: TQuestion,
+) => "Ja" | "Nein" | "Ich bin unsicher" | undefined;
 
 interface TestScenario {
   name: string;
@@ -35,6 +38,7 @@ const scenarios: TestScenario[] = [
     },
     expected: {
       showsAnswerConflictWarning: true,
+      nextButtonEnabled: true,
     },
   },
   {
@@ -46,6 +50,19 @@ const scenarios: TestScenario[] = [
     },
     expected: {
       showsAnswerConflictWarning: false,
+      nextButtonEnabled: true,
+    },
+  },
+  {
+    name: "EU Bezug unfilled",
+    answers: (question) => {
+      if (questions.indexOf(question) === 0) return "Ja";
+      else if (questions.indexOf(question) !== questionIdx) return "Nein";
+      return undefined;
+    },
+    expected: {
+      showsAnswerConflictWarning: false,
+      nextButtonEnabled: false,
     },
   },
 ];
@@ -70,6 +87,15 @@ function mapUserAnswersToMockAnswers(
   return answers;
 }
 
+vi.mock("react-router", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("react-router")>();
+  return {
+    ...actual,
+    useLoaderData: vi.fn(),
+    useActionData: vi.fn(),
+  };
+});
+
 vi.mock("@rvf/react-router", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@rvf/react-router")>();
   return {
@@ -77,19 +103,10 @@ vi.mock("@rvf/react-router", async (importOriginal) => {
     useForm: () => ({
       getFormProps: vi.fn(),
       value: vi.fn(),
-      error: vi.fn(),
       formState: {
         submitStatus: "",
       },
     }),
-  };
-});
-
-vi.mock("react-router", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("react-router")>();
-  return {
-    ...actual,
-    useLoaderData: vi.fn(),
   };
 });
 
@@ -107,9 +124,9 @@ describe.each(scenarios)("test $name", ({ name, answers, expected }) => {
     });
 
     render(
-      <MemoryRouter>
+      <BrowserRouter>
         <Index />
-      </MemoryRouter>,
+      </BrowserRouter>,
     );
   });
 

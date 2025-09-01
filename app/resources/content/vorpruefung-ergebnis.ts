@@ -71,6 +71,11 @@ export const preCheckResult = {
     contentInteroperability:
       "Das bedeutet, dass Sie weitere Schritte unternehmen müssen, um Digitalbezug und EU-Anforderungen an Interoperabilität in Ihrem Regelungsvorhaben sicherzustellen.",
   },
+  inlineNotice: {
+    title: "Interoperabilität benötigt digitale Umsetzung",
+    content:
+      "Da ihr Vorhaben keinen Digitalbezug hat, kann es auch nicht interoperabel sein. Interoperabilität bedeutet, dass verschiedene digitale Systeme miteinander kommunizieren können. Ohne digitale Komponente ist das nicht möglich.",
+  },
   interoperability: {
     info: {
       title: "Erfahren Sie mehr über Interoperabilität",

@@ -160,21 +160,38 @@ export const preCheck = {
     between: " von ",
   },
   answerConflictHint: {
-    warningText: "Beachten Sie den unteren Hinweis",
-    title: "Widerspruch in Ihren Angaben",
-    content: dedent`
-      Ihre Angabe in Frage 3 (Datenaustausch):
+    euBezugHint: {
+      title: "Widerspruch in Ihren Angaben",
+      content: dedent`
+        Ihre Angabe in Frage 3 (Datenaustausch):
 
-      - **Datenaustausch findet nicht statt**
+        - **Datenaustausch findet nicht statt**
 
-      Ihre Angabe in Frage 6 (Datenaustausch mit EU-Bezug):
+        Ihre Angabe in Frage 6 (Datenaustausch mit EU-Bezug):
 
-      - **Datenaustausch findet statt**
-      
-      Bitte überprüfen Sie ihre Angaben.
+        - **Datenaustausch findet statt**
+        
+        Bitte überprüfen Sie ihre Angaben.
 
-      [Frage 3 zum Datenaustausch überprüfen](${ROUTE_PRECHECK.url}/${preCheckQuestions.datenaustausch.id})
-    `,
+        [Frage 3 zum Datenaustausch überprüfen](${ROUTE_PRECHECK.url}/${preCheckQuestions.datenaustausch.id})
+      `,
+    },
+    resultInteropsHint: {
+      title: "Widerspruch in Ihren Angaben",
+      content: dedent`
+        Ihre Angabe in Frage 3 (Datenaustausch):
+
+        - **Datenaustausch findet nicht statt**
+
+        Ihre Angabe in Frage 6 (Datenaustausch mit EU-Bezug):
+
+        - **Datenaustausch findet statt**
+        
+        Bitte überprüfen Sie ihre Angaben.
+
+        [Frage 3 zum Datenaustausch überprüfen](${ROUTE_PRECHECK.url}/${preCheckQuestions.datenaustausch.id})
+      `,
+    },
   },
   questions: [
     {
@@ -256,8 +273,7 @@ export const preCheck = {
       negativeResult:
         "keinem Daten- und Informationsaustausch zwischen EU-Mitgliedsstaaten.",
       resultHint: {
-        positiveResult:
-          "**Bitte beachten Sie:** Wenn Ihr Vorhaben keinen Digitalbezug aufweist, können die Anforderungen der Interoperabilität nicht erfüllt werden – selbst dann nicht, wenn ein Daten- und Informationsaustausch zwischen EU-Mitgliedsstaaten stattfindet.",
+        positiveResult: "Bitte beachten Sie den oberen Hinweis.",
         unsureResult:
           "**Das können Sie tun:** Kontaktieren Sie uns unter [0151/40 76 78 39](tel:+4915140767839) oder  per E-Mail an [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de). Wir unterstützen Sie gerne bei der Beantwortung dieser Frage.",
       },
