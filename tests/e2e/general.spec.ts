@@ -55,6 +55,7 @@ test.describe("test page titles", () => {
 test.describe("test landing page", () => {
   test("landing is reachable and has h1", async ({ page }) => {
     await page.goto("/");
+    // noinspection CssInvalidPseudoSelector
     await expect(
       page.locator("h1:has-text('Digitaltaugliche Regelungen erarbeiten')"),
     ).toBeVisible();
@@ -105,7 +106,7 @@ test.describe("test links", () => {
   });
 
   test("links leading to external pages open in new tab", async ({ page }) => {
-    await page.goto(ROUTE_LANDING.url);
+    await page.goto(ROUTE_LANDING.url, { waitUntil: "domcontentloaded" });
     const link = page.getByRole("link", {
       name: "DigitalService GmbH des Bundes",
     });
