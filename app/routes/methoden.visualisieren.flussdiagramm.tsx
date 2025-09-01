@@ -9,7 +9,6 @@ import Button from "~/components/Button.tsx";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import ImageBox from "~/components/ImageBox.tsx";
-import ImageZoomable from "~/components/ImageZoomable.tsx";
 import InfoBox from "~/components/InfoBox.tsx";
 import NumberedList from "~/components/NumberedList.tsx";
 import RichText from "~/components/RichText.tsx";
@@ -135,6 +134,7 @@ export default function Visualization() {
     text: "Beispiel: Fahrerlaubnis",
     look: "hint",
   };
+  // noinspection HtmlUnknownAnchorTarget
   return (
     <>
       <Hero
@@ -280,7 +280,7 @@ export default function Visualization() {
                   visual={{
                     type: "component",
                     Component: (
-                      <ImageZoomable
+                      <ImageBox
                         image={{
                           url: "/images/methoden/flussdiagramme/2/relevante-akteure.png",
                           alternativeText:
@@ -328,7 +328,7 @@ export default function Visualization() {
                   visual={{
                     type: "component",
                     Component: (
-                      <ImageZoomable
+                      <ImageBox
                         image={{
                           url: "/images/methoden/flussdiagramme/3/ziel-perspektive-visualisierung.png",
                           alternativeText:
@@ -385,7 +385,7 @@ export default function Visualization() {
                   visual={{
                     type: "component",
                     Component: (
-                      <ImageZoomable
+                      <ImageBox
                         image={{
                           url: "/images/methoden/flussdiagramme/4/beispiel-fahrschule-start-ende.png",
                           alternativeText:
@@ -467,7 +467,7 @@ export default function Visualization() {
                   visual={{
                     type: "component",
                     Component: (
-                      <ImageZoomable
+                      <ImageBox
                         image={{
                           url: "/images/methoden/flussdiagramme/5/beispiel-fahrschule-kombiniert.png",
                           alternativeText:
@@ -536,7 +536,7 @@ export default function Visualization() {
                   visual={{
                     type: "component",
                     Component: (
-                      <ImageZoomable
+                      <ImageBox
                         image={{
                           url: "/images/methoden/flussdiagramme/6/vollständiges-beispiel.png",
                           alternativeText:
