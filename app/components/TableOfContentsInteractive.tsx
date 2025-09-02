@@ -19,7 +19,7 @@ function Item({
   href,
 }: Readonly<React.PropsWithChildren<{ href: string }>>) {
   return (
-    <li className={"ds-link-02-reg data-active:ds-link-02-bold no-underline"}>
+    <li className="ds-link-02-reg data-active:ds-link-02-bold hover:ds-link-02-bold no-underline">
       <a href={href}>{children}</a>
     </li>
   );
