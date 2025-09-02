@@ -1,4 +1,3 @@
-import { twJoin } from "tailwind-merge";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
@@ -48,10 +47,8 @@ export default function Index() {
           {documentation.nextSteps.items.map((item) => (
             <NumberedList.Item
               key={item.headline.text}
-              className={twJoin(
-                "space-y-16",
-                item.isDisabled && "text-gray-800",
-              )}
+              className="space-y-16"
+              disabled={item.isDisabled}
             >
               <p className={"ds-heading-03-reg"}>{item.headline.text}</p>
               {"content" in item && (

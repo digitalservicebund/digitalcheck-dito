@@ -69,6 +69,7 @@ export const steps = {
         plausibleEventName: "Content.Steps.Link+Dokumentieren",
       },
     ],
+    isDisabled: false,
     finished: {
       headline: {
         text: "Abgeschlossene Dokumentation der Digitaltauglichkeit.",

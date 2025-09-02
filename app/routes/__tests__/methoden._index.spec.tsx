@@ -112,28 +112,18 @@ describe("Methoden Route - Integration Tests", () => {
     ).toBeInTheDocument();
 
     expect(
-      screen.getByRole("heading", {
-        name: "Abgeschlossene Vorprüfung: Der Digitalbezug wurde eingeschätzt.",
-        level: 3,
-      }),
+      screen.getByText(
+        "Abgeschlossene Vorprüfung: Der Digitalbezug wurde eingeschätzt.",
+      ),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", {
-        name: "Abgeschlossene Erarbeitung eines digitaltauglichen Regelungsvorhabens.",
-        level: 3,
-      }),
+      screen.getByText(
+        "Abgeschlossene Erarbeitung eines digitaltauglichen Regelungsvorhabens.",
+      ),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", {
-        name: "Dokumentieren des Regelungsvorhabens",
-        level: 3,
-      }),
+      screen.getByText("Dokumentieren des Regelungsvorhabens"),
     ).toBeInTheDocument();
-    expect(
-      screen.getByRole("heading", {
-        name: "Prüfen durch den NKR",
-        level: 3,
-      }),
-    ).toBeInTheDocument();
+    expect(screen.getByText("Prüfen durch den NKR")).toBeInTheDocument();
   });
 });

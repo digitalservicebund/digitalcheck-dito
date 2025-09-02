@@ -1,9 +1,14 @@
 import React from "react";
+import { ButtonLinkProps } from "~/components/Button";
+import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
+import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
-import { BulletList, NumberedList } from "~/components/List";
+import { BulletList } from "~/components/List";
+import NumberedList from "~/components/NumberedList";
+import RichText from "~/components/RichText";
 import SupportBanner from "~/components/SupportBanner";
 import { methods } from "~/resources/content/methoden";
 import { supportBanner } from "~/resources/content/shared/support-banner";
@@ -47,11 +52,11 @@ export default function Methoden() {
     <>
       <Hero subtitle={methods.subtitle} title={methods.title} />
 
-      <Container>
+      <Container className="my-80 py-0">
         <BulletList items={methodStepsItems(true, renderStepContent)} />
       </Container>
 
-      <Container className="ds-stack ds-stack-40">
+      <Container className="my-80 space-y-40 py-0">
         <InfoBox
           heading={{ tagName: "h2", text: methods.furtherMethods.heading }}
           content={methods.furtherMethods.content}
@@ -89,14 +94,25 @@ export default function Methoden() {
 
       <SupportBanner {...supportBanner} />
       <div id={"weiter"} />
-      <Container>
-        <NumberedList
-          heading={{
-            tagName: "h2",
-            text: methods.nextSteps.title,
-          }}
-          items={methods.nextSteps.items}
-        />
+      <Container className="my-80 space-y-32 py-0">
+        <Heading tagName="h2">{methods.nextSteps.title}</Heading>
+        <NumberedList>
+          {methods.nextSteps.items.map((item) => (
+            <NumberedList.Item
+              key={item.headline.text}
+              className="space-y-16"
+              disabled={item.isDisabled}
+            >
+              <p className="ds-heading-03-reg">{item.headline.text}</p>
+              {"content" in item && (
+                <RichText markdown={item.content as string} />
+              )}
+              {"buttons" in item && (
+                <ButtonContainer buttons={item.buttons as ButtonLinkProps[]} />
+              )}
+            </NumberedList.Item>
+          ))}
+        </NumberedList>
       </Container>
     </>
   );

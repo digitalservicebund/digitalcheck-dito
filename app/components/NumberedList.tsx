@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import { twJoin } from "tailwind-merge";
 import twMerge from "~/utils/tailwindMerge.ts";
 
 /*
@@ -26,11 +27,21 @@ export type ListItemProps = {
   readonly after?: React.ReactNode;
   className?: string;
   id?: string;
+  disabled?: boolean;
 };
 
-function ListItem({ children, after, className, id }: Readonly<ListItemProps>) {
+function ListItem({
+  children,
+  after,
+  className,
+  id,
+  disabled,
+}: Readonly<ListItemProps>) {
   return (
-    <li id={id} className="scroll-my-40 space-y-40">
+    <li
+      id={id}
+      className={twJoin("scroll-my-40 space-y-40", disabled && "text-gray-800")}
+    >
       <div className="flex flex-col items-start gap-16 before:flex before:size-40 before:shrink-0 before:items-center before:justify-center before:rounded-full before:border-2 before:border-solid before:border-gray-400 before:content-[counter(list-item)] sm:flex-row">
         <div className={twMerge("mt-4", className)}>{children}</div>
       </div>
