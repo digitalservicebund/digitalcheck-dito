@@ -1,12 +1,12 @@
 import Heading from "~/components/Heading";
 import {
-  AbsatzWithNumber,
   groupAbsaetzeWithoutRelevantPrinciples,
   prependNumberToAbsatz,
 } from "~/utils/paragraphUtils";
 import type {
+  BaseAbsatz,
   Paragraph,
-  PrinzipWithUmsetzungen,
+  PrinzipWithBeispielvorhaben,
 } from "~/utils/strapiData.server";
 import Absatz from "./Absatz";
 import { BlocksRenderer } from "./BlocksRenderer";
@@ -106,7 +106,7 @@ export default function ParagraphList({
   principlesToShow,
 }: Readonly<{
   paragraphs: Paragraph[];
-  principlesToShow: PrinzipWithUmsetzungen[];
+  principlesToShow: PrinzipWithBeispielvorhaben[];
 }>) {
   return (
     <div className="space-y-32">
@@ -130,7 +130,7 @@ function Paragraph({
   principlesToShow,
 }: Readonly<{
   paragraph: Paragraph;
-  principlesToShow: PrinzipWithUmsetzungen[];
+  principlesToShow: PrinzipWithBeispielvorhaben[];
 }>) {
   const groupedAbsaetze = groupAbsaetzeWithoutRelevantPrinciples(
     paragraph.Absaetze,
@@ -157,14 +157,14 @@ function Paragraph({
           if (isAbsatzGroupWithoutErfuellungen)
             return (
               <AbsatzGroupWithoutErfuellungen
-                key={absatzOrAbsatzGroup[0].id}
+                key={absatzOrAbsatzGroup[0].documentId}
                 absatzGroup={absatzOrAbsatzGroup}
               />
             );
 
           return (
             <Absatz
-              key={absatzOrAbsatzGroup.id}
+              key={absatzOrAbsatzGroup.documentId}
               absatz={absatzOrAbsatzGroup}
               principlesToShow={principlesToShow}
               useAnchorLinks
@@ -177,20 +177,20 @@ function Paragraph({
 }
 
 type AbsatzGroupWithoutErfuellungenProps = {
-  absatzGroup: AbsatzWithNumber[];
+  absatzGroup: BaseAbsatz[];
 };
 
 function AbsatzGroupWithoutErfuellungen({
   absatzGroup,
 }: Readonly<AbsatzGroupWithoutErfuellungenProps>) {
-  const getAbsatzGroupTitle = (absatzGroup: AbsatzWithNumber[]) =>
+  const getAbsatzGroupTitle = (absatzGroup: BaseAbsatz[]) =>
     absatzGroup.length > 1
-      ? `(${absatzGroup[0].number}) – (${absatzGroup[absatzGroup.length - 1].number})`
-      : `(${absatzGroup[0].number})`;
+      ? `(${absatzGroup[0].Nummer}) – (${absatzGroup[absatzGroup.length - 1].Nummer})`
+      : `(${absatzGroup[0].Nummer})`;
 
   return (
     <DetailsSummary
-      key={absatzGroup[0].number}
+      key={absatzGroup[0].Nummer}
       title={getAbsatzGroupTitle(absatzGroup)}
       bold={false}
       className="italic"
@@ -198,7 +198,7 @@ function AbsatzGroupWithoutErfuellungen({
         <div className="ds-stack ds-stack-8">
           {absatzGroup.map((absatz) => (
             <BlocksRenderer
-              key={absatz.id}
+              key={absatz.documentId}
               content={prependNumberToAbsatz(absatz)}
               modifiers={{
                 underline: PrincipleHighlightModifier,

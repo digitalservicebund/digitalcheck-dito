@@ -38,62 +38,50 @@ const mockPrinzipsData = [
             children: [{ type: "text", text: "Anwendung Text 1.1" }],
           },
         ] as Node[],
-        Example: {
+        Beispiel: {
+          documentId: "abc-1",
+          Nummer: 1,
+          Text: [
+            {
+              type: "paragraph",
+              children: [{ type: "text", text: "Anwendung Beispieltext." }],
+            },
+          ],
+          PrinzipErfuellungen: [],
+
           Paragraph: {
             Nummer: "99",
             Gesetz: "AnwG",
             Titel: "Titel des Anwendungs-Paragraphen",
-            Absaetze: [
-              {
-                id: 99,
-                Text: [
-                  {
-                    type: "paragraph",
-                    children: [
-                      { type: "text", text: "Anwendung Beispieltext." },
-                    ],
-                  },
-                ],
-                PrinzipErfuellungen: [],
-              },
-            ],
           },
-          AbsatzNumber: 1,
-          id: 2,
         },
       },
     ],
-    Example: {
+    Beispiel: {
+      documentId: "abc-2",
+      Nummer: 2,
+      Text: [
+        {
+          type: "paragraph",
+          children: [
+            {
+              type: "text",
+              text: "Dies ist der Text des Beispiel-Absatzes.",
+            },
+          ],
+        },
+      ],
+      PrinzipErfuellungen: [],
+
       Paragraph: {
         Nummer: "42",
         Gesetz: "TestG",
         Titel: "Titel des Test-Paragraphen",
-        Digitalcheck: {
-          Regelungsvorhaben: {
-            URLBezeichnung: "test-regelung",
-            Titel: "Titel des Test-Regelungsvorhabens",
-          },
+        Beispielvorhaben: {
+          URLBezeichnung: "test-regelung",
+          Titel: "Titel des Test-Regelungsvorhabens",
         },
-        Absaetze: [
-          {
-            id: 1,
-            Text: [
-              {
-                type: "paragraph",
-                children: [
-                  {
-                    type: "text",
-                    text: "Dies ist der Text des Beispiel-Absatzes.",
-                  },
-                ],
-              },
-            ],
-            PrinzipErfuellungen: [],
-          },
-        ],
       },
-      AbsatzNumber: 1,
-      id: 1,
     },
   },
   {
@@ -195,7 +183,7 @@ describe("FivePrinciples Route - Integration Tests", () => {
     ).toBeInTheDocument();
     expect(
       within(exampleSection!).getByText(
-        "(1) Dies ist der Text des Beispiel-Absatzes.",
+        "(2) Dies ist der Text des Beispiel-Absatzes.",
       ),
     ).toBeInTheDocument();
     const link = within(exampleSection!).getByRole("link", {

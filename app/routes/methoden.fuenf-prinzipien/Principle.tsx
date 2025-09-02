@@ -5,7 +5,6 @@ import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
-import { getPrincipleWithExampleAbsatz } from "~/utils/paragraphUtils";
 import type {
   PrinzipWithAnwendungen,
   PrinzipWithAnwendungenAndExample,
@@ -18,7 +17,6 @@ type PrincipleProps = {
 };
 
 export default function Principle({ prinzip }: Readonly<PrincipleProps>) {
-  const prinzipWithExampleAbsatz = getPrincipleWithExampleAbsatz(prinzip);
   return (
     <Container className="space-y-40 pb-64" key={slugify(prinzip.Name)}>
       <InfoBox
@@ -35,8 +33,10 @@ export default function Principle({ prinzip }: Readonly<PrincipleProps>) {
         detailsSummary={getDetailsSummary(prinzip)}
       />
 
-      {prinzipWithExampleAbsatz && (
-        <PrincipleExample prinzip={prinzipWithExampleAbsatz} />
+      {prinzip.Beispiel && (
+        <PrincipleExample
+          prinzip={prinzip as PrinzipWithAnwendungenAndExample}
+        />
       )}
     </Container>
   );
@@ -47,11 +47,9 @@ type PrincipleExampleProps = {
 };
 
 function PrincipleExample({ prinzip }: Readonly<PrincipleExampleProps>) {
-  const exampleAbsatz = prinzip.exampleAbsatz;
-  const paragraph = prinzip.Example.Paragraph;
-  const absatzNumber = prinzip.Example.AbsatzNumber;
-
-  const regelungsvorhaben = paragraph.Digitalcheck?.Regelungsvorhaben;
+  const exampleAbsatz = prinzip.Beispiel;
+  const paragraph = exampleAbsatz.Paragraph;
+  const beispielvorhaben = paragraph.Beispielvorhaben;
 
   return (
     <div className="space-y-16 rounded-lg border border-gray-600 bg-gray-100 px-32 py-24">
@@ -64,10 +62,7 @@ function PrincipleExample({ prinzip }: Readonly<PrincipleExampleProps>) {
       </Heading>
 
       <Absatz
-        absatz={{
-          ...exampleAbsatz,
-          number: absatzNumber,
-        }}
+        absatz={exampleAbsatz}
         principlesToShow={[prinzip]}
         useAnchorLinks={false}
       />
@@ -75,11 +70,11 @@ function PrincipleExample({ prinzip }: Readonly<PrincipleExampleProps>) {
         Regelung:&nbsp;
         <CustomLink
           target="_blank"
-          to={`${ROUTE_REGELUNGEN.url}/${regelungsvorhaben?.URLBezeichnung ?? ""}`}
+          to={`${ROUTE_REGELUNGEN.url}/${beispielvorhaben.URLBezeichnung ?? ""}`}
           className="text-link inline-flex"
           rel="noreferrer"
         >
-          {regelungsvorhaben?.Titel}
+          {beispielvorhaben.Titel}
         </CustomLink>
       </p>
     </div>

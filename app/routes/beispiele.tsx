@@ -7,12 +7,12 @@ import { supportBanner } from "~/resources/content/shared/support-banner";
 import {
   fetchStrapiData,
   GET_PRINZIPS_QUERY,
-  PrinzipWithUmsetzungen,
+  PrinzipWithBeispielvorhaben,
 } from "~/utils/strapiData.server";
 
 export async function loader() {
   const prinzipData = await fetchStrapiData<{
-    prinzips: PrinzipWithUmsetzungen[];
+    prinzips: PrinzipWithBeispielvorhaben[];
   }>(GET_PRINZIPS_QUERY);
 
   if ("error" in prinzipData) {
