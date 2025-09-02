@@ -9,17 +9,20 @@ import { examples } from "~/resources/content/beispiele";
 import { absatz } from "~/resources/content/shared/absatz";
 import {
   absatzIdTag,
-  AbsatzWithNumber,
   explanationID,
   prependNumberToAbsatz,
 } from "~/utils/paragraphUtils";
-import { BasePrinzip, PrinzipErfuellung } from "~/utils/strapiData.server";
+import {
+  BaseAbsatz,
+  BasePrinzip,
+  PrinzipErfuellung,
+} from "~/utils/strapiData.server";
 import { BlocksRenderer } from "./BlocksRenderer";
 import Heading from "./Heading";
 import PrincipleHighlightModifier from "./PrincipleHighlightModifier";
 
 type AbsatzProps = {
-  absatz: AbsatzWithNumber;
+  absatz: BaseAbsatz;
   principlesToShow: BasePrinzip[];
   useAnchorLinks: boolean;
 };
@@ -43,13 +46,13 @@ export default function Absatz({
 
   return (
     <PrincipleHighlightProvider
-      absatzId={absatz.id.toString()}
+      absatzId={absatz.documentId}
       principlesToShow={principlesToShow}
       useAnchorLinks={useAnchorLinks}
     >
       <div className="flex flex-col gap-16 md:grid md:grid-cols-[5fr_3fr] md:gap-32 [&_ol]:list-decimal [&_ol_ol]:list-[lower-alpha]">
         <BlocksRenderer
-          id={absatzIdTag(absatz.id)}
+          id={absatzIdTag(absatz.documentId)}
           className="italic"
           content={content}
           modifiers={{
@@ -59,7 +62,7 @@ export default function Absatz({
         {erfuellungenToShow && erfuellungenToShow.length > 0 && (
           <PrincipleExplanationList
             erfuellungen={erfuellungenToShow}
-            absatzNumber={absatz.number}
+            absatzNumber={absatz.Nummer}
           />
         )}
       </div>

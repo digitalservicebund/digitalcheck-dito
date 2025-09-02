@@ -3,19 +3,19 @@ import { act } from "react";
 import { createRoutesStub } from "react-router";
 import { beforeAll, describe, test } from "vitest";
 import type {
-  Absatz,
+  BaseAbsatz,
   Paragraph,
-  PrinzipWithUmsetzungen,
+  PrinzipWithBeispielvorhaben,
 } from "~/utils/strapiData.server";
 import ParagraphList from "./ParagraphList";
 
-const PRINZIPS: PrinzipWithUmsetzungen[] = [
+const PRINZIPS: PrinzipWithBeispielvorhaben[] = [
   {
     documentId: "abc",
     Name: "Digitale Kommunikation sicherstellen",
     Beschreibung: [],
     Nummer: 1,
-    GuteUmsetzungen: [],
+    Beispielvorhaben: [],
     URLBezeichnung: "url",
     Kurzbezeichnung: "Digitale Angebote",
     order: 1,
@@ -25,7 +25,7 @@ const PRINZIPS: PrinzipWithUmsetzungen[] = [
     Name: "Daten und Standards Wiederverwenden",
     Beschreibung: [],
     Nummer: 2,
-    GuteUmsetzungen: [],
+    Beispielvorhaben: [],
     URLBezeichnung: "url",
     Kurzbezeichnung: "Standards",
     order: 2,
@@ -35,16 +35,17 @@ const PRINZIPS: PrinzipWithUmsetzungen[] = [
     Name: "Datenschutz und Informationssicherheit",
     Beschreibung: [],
     Nummer: 3,
-    GuteUmsetzungen: [],
+    Beispielvorhaben: [],
     URLBezeichnung: "url",
     Kurzbezeichnung: "Datenschutz",
     order: 3,
   },
 ];
 
-const ABSAETZE: Absatz[] = [
+const ABSAETZE: BaseAbsatz[] = [
   {
-    id: 1,
+    documentId: "abc-1",
+    Nummer: 1,
     Text: [
       {
         type: "paragraph",
@@ -80,7 +81,8 @@ const ABSAETZE: Absatz[] = [
     ],
   },
   {
-    id: 2,
+    documentId: "abc-2",
+    Nummer: 2,
     Text: [
       {
         type: "paragraph",
@@ -90,7 +92,8 @@ const ABSAETZE: Absatz[] = [
     PrinzipErfuellungen: [],
   },
   {
-    id: 3,
+    documentId: "abc-3",
+    Nummer: 3,
     Text: [
       {
         type: "paragraph",
@@ -113,7 +116,8 @@ const ABSAETZE: Absatz[] = [
     ],
   },
   {
-    id: 4,
+    documentId: "abc-4",
+    Nummer: 4,
     Text: [
       {
         type: "paragraph",
@@ -334,7 +338,7 @@ describe("ParagraphList", () => {
   describe("Links between highlights and reasoning", () => {
     test("Clicking on highlight shows explanation and adds backlink", () => {
       render(<RouterStubAllPrinciples />);
-      const id = "explanation-1-1";
+      const id = "explanation-abc-1-1";
       const firstHighlight = screen.getByText("Text mit 1Markierung");
       expect(firstHighlight.closest("a")).toHaveAttribute("href", `/#${id}`);
 
@@ -351,8 +355,8 @@ describe("ParagraphList", () => {
       act(() => {
         screen.getByLabelText("Zurück zum Text").click();
       });
-      expect(screen.getByTestId("explanation-1-1")).toHaveClass("border-l-4");
-      expect(screen.getByTestId("explanation-1-1")).not.toHaveClass("border-4");
+      expect(screen.getByTestId(id)).toHaveClass("border-l-4");
+      expect(screen.getByTestId(id)).not.toHaveClass("border-4");
       expect(
         screen.queryByLabelText("Zurück zum Text"),
       ).not.toBeInTheDocument();
@@ -364,15 +368,21 @@ describe("ParagraphList", () => {
         screen.getByText("Text mit 1Markierung").click();
         screen.getByText("Text mit 2Markierung").click();
       });
-      expect(screen.getByTestId("explanation-1-1")).not.toHaveClass("border-4");
-      expect(screen.getByTestId("explanation-1-2")).toHaveClass("border-4");
+      expect(screen.getByTestId("explanation-abc-1-1")).not.toHaveClass(
+        "border-4",
+      );
+      expect(screen.getByTestId("explanation-abc-1-2")).toHaveClass("border-4");
       expect(screen.getAllByLabelText("Zurück zum Text")).toHaveLength(1);
       act(() => {
         screen.getByLabelText("Zurück zum Text").click();
       });
       // clicking on backlink removes highlighting and backlink
-      expect(screen.getByTestId("explanation-1-2")).toHaveClass("border-l-4");
-      expect(screen.getByTestId("explanation-1-2")).not.toHaveClass("border-4");
+      expect(screen.getByTestId("explanation-abc-1-2")).toHaveClass(
+        "border-l-4",
+      );
+      expect(screen.getByTestId("explanation-abc-1-2")).not.toHaveClass(
+        "border-4",
+      );
       expect(
         screen.queryByLabelText("Zurück zum Text"),
       ).not.toBeInTheDocument();

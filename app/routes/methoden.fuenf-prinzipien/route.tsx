@@ -14,7 +14,7 @@ import constructMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,
-  PrinzipWithAnwendungen,
+  PrinzipWithAnwendungenAndExample,
 } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 import Principle from "./Principle";
@@ -25,7 +25,7 @@ export function meta() {
 
 export const loader = async () => {
   const prinzipData = await fetchStrapiData<{
-    prinzips: PrinzipWithAnwendungen[];
+    prinzips: PrinzipWithAnwendungenAndExample[];
   }>(GET_PRINZIPS_WITH_EXAMPLES_QUERY);
 
   if ("error" in prinzipData) {
