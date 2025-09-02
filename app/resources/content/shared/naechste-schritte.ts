@@ -11,6 +11,7 @@ const stepNKR = {
   },
   content:
     "Der NKR (Nationaler Normenkontrollrat) prüft Ihr Vorhaben hinsichtlich der Berücksichtigung der Prinzipien digitaltauglicher Gesetzgebung. Bei Fragen wird der NKR auf Sie zukommen.",
+  isDisabled: false,
 };
 export const steps = {
   preCheck: {
@@ -78,6 +79,7 @@ export const steps = {
   nkr: stepNKR,
   nkrFinal: {
     ...stepNKR,
+    isDisabled: false,
     content:
       stepNKR.content +
       dedent`
