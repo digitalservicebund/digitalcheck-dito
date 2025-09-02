@@ -210,7 +210,7 @@ export default function Visualization() {
             <DriveFileRenameOutline className="size-40" />
             Anleitung
           </Heading>
-          <NumberedList>
+          <NumberedList separator>
             <Step
               id={"schritt-1"}
               mainContent={
@@ -430,10 +430,13 @@ export default function Visualization() {
                     border
                   />
                   <p>
-                    Setzen Sie den Startpunkt an den Anfang der Bahn des Akteurs, den Endpunkt ans Ende. 
-                    Der genaue Platz wird im Verlauf noch angepasst. Der genaue
-                    Punkt findet sich später. Fügen Sie nun Aktivitäten, Entscheidungen und Informationsflüsse der Akteure nacheinander in die Bahnen ein. 
-                    Formulieren Sie die Aktivitäten möglichst aktiv, z. B. „Akteur X beantragt Y“ oder „Akteur X versendet Y“.
+                    Setzen Sie den Startpunkt an den Anfang der Bahn des
+                    Akteurs, den Endpunkt ans Ende. Der genaue Platz wird im
+                    Verlauf noch angepasst. Der genaue Punkt findet sich später.
+                    Fügen Sie nun Aktivitäten, Entscheidungen und
+                    Informationsflüsse der Akteure nacheinander in die Bahnen
+                    ein. Formulieren Sie die Aktivitäten möglichst aktiv, z. B.
+                    „Akteur X beantragt Y“ oder „Akteur X versendet Y“.
                   </p>
                   <ImageBox
                     image={{
@@ -557,8 +560,8 @@ export default function Visualization() {
           </NumberedList>
         </section>
       </SidebarContainer>
-      <Container className="pt-0">
-        <hr className="mb-40 border-0 border-b-2 border-solid border-blue-300" />
+      <Container className="mb-80 py-0">
+        <hr className="mb-80 border-0 border-b-2 border-solid border-blue-300" />
         <InfoBox
           badge={{
             Icon: ArrowCircleRightOutlined,

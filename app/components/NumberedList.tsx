@@ -30,12 +30,9 @@ export type ListItemProps = {
 
 function ListItem({ children, after, className, id }: Readonly<ListItemProps>) {
   return (
-    <li
-      id={id}
-      className="mt-80 scroll-my-40 space-y-40 border-b-2 border-blue-300 pb-80 first:mt-0 last:border-none last:pb-0"
-    >
+    <li id={id} className="scroll-my-40 space-y-40">
       <div className="flex flex-col items-start gap-16 before:flex before:size-40 before:shrink-0 before:items-center before:justify-center before:rounded-full before:border-2 before:border-solid before:border-gray-400 before:content-[counter(list-item)] sm:flex-row">
-        <div className={className}>{children}</div>
+        <div className={twMerge("mt-4", className)}>{children}</div>
       </div>
       {after}
     </li>
@@ -45,11 +42,28 @@ function ListItem({ children, after, className, id }: Readonly<ListItemProps>) {
 type NumberedListProps = React.OlHTMLAttributes<HTMLOListElement> & {
   children: ReactElement<ListItemProps, typeof ListItem>[];
   className?: string;
+  separator?: boolean;
 };
 
-function NumberedList({ children, className, ...props }: NumberedListProps) {
+function NumberedList({
+  children,
+  className,
+  separator,
+  ...props
+}: NumberedListProps) {
+  const separatorClass = separator
+    ? "[&>li]:border-b-2 [&>li]:border-blue-300 [&>li]:pb-80 [&>li]:last:border-none [&>li]:last:pb-0 space-y-80"
+    : "space-y-32";
+
   return (
-    <ol {...props} className={twMerge("list-unstyled scroll-my-40", className)}>
+    <ol
+      {...props}
+      className={twMerge(
+        "list-unstyled scroll-my-40",
+        separatorClass,
+        className,
+      )}
+    >
       {children}
     </ol>
   );
