@@ -541,7 +541,7 @@ export default function Visualization() {
                     Component: (
                       <ImageBox
                         image={{
-                          url: "/images/methoden/flussdiagramme/6/vollständiges-beispiel.png",
+                          url: "/images/methoden/flussdiagramme/6/vollständiges-beispiel.jpg",
                           alternativeText:
                             "Flussdiagramm, welches zusätzliche Entscheidungssymbole, ein Datenbank-Symbol sowie eine Legende enthält.",
                         }}
