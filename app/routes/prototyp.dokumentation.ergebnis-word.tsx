@@ -5,7 +5,7 @@ import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
-import { NumberedList } from "~/components/List";
+import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import { documentation } from "~/resources/content/dokumentation";
 import { prototypeDocumentation } from "~/resources/prototyp-dokumentation";
@@ -26,7 +26,7 @@ export function meta() {
 export default function DocumentationResult() {
   return (
     <>
-      <div className="bg-blue-100 py-40 print:pb-0">
+      <div className="bg-blue-100 py-80 print:pb-0">
         <div className="px-16">
           <Container className="rounded-t-lg bg-blue-300 py-32">
             <div className="flex flex-col gap-16 sm:flex-row">
@@ -133,14 +133,21 @@ export default function DocumentationResult() {
           </Container>
         </div>
       </div>
-      <Container>
-        <NumberedList
-          heading={{
-            tagName: "h2",
-            text: documentation.nextSteps.title,
-          }}
-          items={documentation.nextSteps.items}
-        />
+      <Container className="my-80 space-y-32 py-0">
+        <Heading tagName="h2">{documentation.nextSteps.title}</Heading>
+        <NumberedList>
+          {documentation.nextSteps.items.map((item) => (
+            <NumberedList.Item
+              key={item.headline.text}
+              disabled={item.isDisabled}
+            >
+              <p className="ds-heading-03-reg">{item.headline.text}</p>
+              {"content" in item && (
+                <RichText markdown={item.content as string} />
+              )}
+            </NumberedList.Item>
+          ))}
+        </NumberedList>
       </Container>
     </>
   );
