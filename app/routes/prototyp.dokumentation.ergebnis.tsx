@@ -12,7 +12,7 @@ import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
-import { NumberedList } from "~/components/List";
+import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import { documentation } from "~/resources/content/dokumentation";
 import { features } from "~/resources/features";
@@ -231,14 +231,22 @@ export default function DocumentationResult() {
           </Container>
         </div>
       </div>
-      <Container>
-        <NumberedList
-          heading={{
-            tagName: "h2",
-            text: documentation.nextSteps.title,
-          }}
-          items={documentation.nextSteps.items}
-        />
+      <Container className="my-80 space-y-32 py-0">
+        <Heading tagName="h2">{documentation.nextSteps.title}</Heading>
+
+        <NumberedList>
+          {documentation.nextSteps.items.map((item) => (
+            <NumberedList.Item
+              key={item.headline.text}
+              disabled={item.isDisabled}
+            >
+              <p className="ds-heading-03-reg">{item.headline.text}</p>
+              {"content" in item && (
+                <RichText markdown={item.content as string} />
+              )}
+            </NumberedList.Item>
+          ))}
+        </NumberedList>
       </Container>
     </>
   );
