@@ -1,5 +1,6 @@
 import { CheckCircleOutlined } from "@digitalservicebund/icons";
 import Box from "~/components/Box";
+import { ButtonLinkProps } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -145,6 +146,9 @@ export default function DocumentationResult() {
               <p className="ds-heading-03-reg">{item.headline.text}</p>
               {"content" in item && (
                 <RichText markdown={item.content as string} />
+              )}
+              {"buttons" in item && (
+                <ButtonContainer buttons={item.buttons as ButtonLinkProps[]} />
               )}
             </NumberedList.Item>
           ))}
