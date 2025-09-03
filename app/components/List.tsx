@@ -22,52 +22,6 @@ function getKey(item: ListItemProps, index: number) {
     (typeof item.content === "string" ? item.content : index.toString())
   );
 }
-
-/**
- * @deprecated Use the component from NumberedList.tsx instead
- */
-const NumberedList = ({
-  identifier,
-  items,
-  heading,
-  className,
-}: BaseListProps) => {
-  return (
-    <div
-      className={twMerge(
-        "ds-stack ds-stack-8 relative scroll-my-40",
-        className,
-      )}
-      id={identifier}
-    >
-      {heading && <Heading className="max-sm:ds-heading-02-reg" {...heading} />}
-      <ol
-        className="list-unstyled ds-stack ds-stack-32 relative"
-        aria-live="polite"
-        aria-labelledby={identifier ? `${identifier}-heading` : undefined}
-      >
-        {items.map((item, index) => (
-          <li
-            key={getKey(item, index)}
-            className="scroll-my-40 first:pt-0"
-            aria-describedby={
-              item.identifier ? `${item.identifier}-desc` : undefined
-            }
-            aria-posinset={index + 1}
-            aria-setsize={items.length}
-          >
-            <ListItem
-              {...item}
-              numeric={index + 1}
-              parentHasHeading={heading !== undefined}
-            />
-          </li>
-        ))}
-      </ol>
-    </div>
-  );
-};
-
 const BulletList = ({
   identifier,
   items,
@@ -109,4 +63,4 @@ const BulletList = ({
   );
 };
 
-export { BulletList, NumberedList };
+export { BulletList };

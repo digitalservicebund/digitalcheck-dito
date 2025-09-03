@@ -114,7 +114,7 @@ function Step({
 }: Readonly<StepProps>) {
   return (
     <NumberedList.Item
-      className="mt-4 flex scroll-my-40 flex-col gap-16"
+      className="flex scroll-my-40 flex-col gap-16"
       after={
         <>
           {fullwidthContent}

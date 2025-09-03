@@ -48,6 +48,7 @@ export const steps = {
         plausibleEventName: "Content.Steps.Link+Erarbeiten",
       },
     ],
+    isDisabled: false,
     finished: {
       headline: {
         text: "Abgeschlossene Erarbeitung eines digitaltauglichen Regelungsvorhabens.",

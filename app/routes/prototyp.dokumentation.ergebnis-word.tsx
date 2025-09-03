@@ -138,6 +138,7 @@ export default function DocumentationResult() {
         <NumberedList>
           {documentation.nextSteps.items.map((item) => (
             <NumberedList.Item
+              className="space-y-16"
               key={item.headline.text}
               disabled={item.isDisabled}
             >

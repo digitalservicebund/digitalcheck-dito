@@ -13,13 +13,15 @@ import { twJoin } from "tailwind-merge";
 
 import Accordion from "~/components/Accordion";
 import Box from "~/components/Box";
+import { ButtonLinkProps } from "~/components/Button";
+import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import InfoTooltip from "~/components/InfoTooltip";
 import InlineNotice from "~/components/InlineNotice";
-import { NumberedList } from "~/components/List";
+import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
@@ -284,7 +286,7 @@ export default function Result() {
           </Container>
         </div>
       </div>
-      <Container className="pb-40">
+      <Container className="my-80 space-y-40 py-0">
         {result.digital === ResultType.UNSURE && (
           <Box
             heading={{
@@ -304,16 +306,31 @@ export default function Result() {
           />
         )}
         {result.digital !== ResultType.UNSURE && nextSteps && (
-          <NumberedList
-            heading={{
-              text: nextSteps[result.digital].title,
-              tagName: "h2",
-            }}
-            items={nextSteps[result.digital].steps}
-          />
+          <>
+            <Heading tagName="h2">{nextSteps[result.digital].title}</Heading>
+            <NumberedList>
+              {nextSteps[result.digital].steps.map((item) => (
+                <NumberedList.Item
+                  className="space-y-16"
+                  key={item.headline.text}
+                  disabled={item.isDisabled}
+                >
+                  <p className="ds-heading-03-reg">{item.headline.text}</p>
+                  {"content" in item && (
+                    <RichText markdown={item.content as string} />
+                  )}
+                  {"buttons" in item && (
+                    <ButtonContainer
+                      buttons={item.buttons as ButtonLinkProps[]}
+                    />
+                  )}
+                </NumberedList.Item>
+              ))}
+            </NumberedList>
+          </>
         )}
       </Container>
-      <Container className="print:hidden">
+      <Container className="my-80 py-0 print:hidden">
         <Heading
           tagName="h2"
           look="ds-heading-02-reg text-center mb-64 max-sm:mb-56"
