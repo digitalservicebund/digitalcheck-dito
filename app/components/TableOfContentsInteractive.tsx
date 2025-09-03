@@ -11,16 +11,32 @@ function List({
   children,
   className,
 }: Readonly<React.PropsWithChildren<{ className?: string }>>) {
-  return <ol className={twMerge(className, "space-y-16")}>{children}</ol>;
+  return <ol className={twMerge("space-y-16 pl-16", className)}>{children}</ol>;
 }
 
-function Item({
-  children,
-  href,
-}: Readonly<React.PropsWithChildren<{ href: string }>>) {
+export type ItemProps = {
+  href: string;
+  title: string;
+  after?: React.ReactNode;
+  numbered?: boolean;
+};
+
+function Item({ title, href, after, numbered }: Readonly<ItemProps>) {
+  const numberClass = numbered && "before:content-[counter(list-item)'._'] ";
+
   return (
-    <li className="ds-link-02-reg data-active:ds-link-02-bold hover:ds-link-02-bold no-underline">
-      <a href={href}>{children}</a>
+    <li className="group my-2">
+      <a
+        href={href}
+        className={twMerge(
+          "ds-link-02-reg block cursor-pointer border-l-4 border-transparent p-8 text-blue-800 no-underline hover:bg-blue-300 focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-blue-800 data-active:border-l-blue-800 data-active:bg-blue-200 data-active:hover:bg-blue-300",
+          numberClass,
+        )}
+      >
+        {title}
+      </a>
+
+      {after}
     </li>
   );
 }
@@ -40,14 +56,14 @@ function TableOfContentsInteractive({
       (entries) => {
         entries.forEach((entry) => {
           const id = entry.target.getAttribute("id");
-          const sidebarLiElement = navRef.current?.querySelector(
+          const sidebarAnchorElement = navRef.current?.querySelector(
             `li a[href="#${id}"]`,
-          )?.parentElement;
+          );
 
           if (entry.isIntersecting) {
-            sidebarLiElement?.setAttribute("data-active", "true");
+            sidebarAnchorElement?.setAttribute("data-active", "true");
           } else {
-            sidebarLiElement?.removeAttribute("data-active");
+            sidebarAnchorElement?.removeAttribute("data-active");
           }
         });
       },

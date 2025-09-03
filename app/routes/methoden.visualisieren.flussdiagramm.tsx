@@ -146,28 +146,46 @@ export default function Visualization() {
         sidebar={
           <ToC title={"Inhalt"} selector="section[id], li[id]">
             <ToC.List className="list-unstyled list-none">
-              <ToC.Item href="#aufbau">Aufbau</ToC.Item>
+              <ToC.Item href="#aufbau" title="Aufbau" />
               {/* special case: list item with list inside, we don't want to underline all children if the parent is active */}
-              <li className={"group"}>
-                <a
-                  href="#anleitung"
-                  className="ds-link-02-reg group-data-active:ds-link-02-bold no-underline"
-                >
-                  Anleitung
-                </a>
-                <ToC.List className="mt-16">
-                  <ToC.Item href="#schritt-1">Format</ToC.Item>
-                  <ToC.Item href="#schritt-2">Akteure</ToC.Item>
-                  <ToC.Item href="#schritt-3">
-                    Ziel & Perspektive der Visualisierung
-                  </ToC.Item>
-                  <ToC.Item href="#schritt-4">
-                    Start und Ende definieren
-                  </ToC.Item>
-                  <ToC.Item href="#schritt-5">Prozess abbilden</ToC.Item>
-                  <ToC.Item href="#schritt-6">Informationen ergänzen</ToC.Item>
-                </ToC.List>
-              </li>
+              <ToC.Item
+                href="#anleitung"
+                title="Anleitung"
+                after={
+                  <ToC.List className="mt-0 list-none">
+                    <ToC.Item
+                      href="#schritt-1"
+                      title="Format"
+                      numbered
+                    ></ToC.Item>
+                    <ToC.Item
+                      href="#schritt-2"
+                      title="Akteure"
+                      numbered
+                    ></ToC.Item>
+                    <ToC.Item
+                      numbered
+                      href="#schritt-3"
+                      title="Ziel & Perspektive der Visualisierung"
+                    ></ToC.Item>
+                    <ToC.Item
+                      numbered
+                      href="#schritt-4"
+                      title="Start und Ende definieren"
+                    ></ToC.Item>
+                    <ToC.Item
+                      numbered
+                      href="#schritt-5"
+                      title="Prozess abbilden"
+                    ></ToC.Item>
+                    <ToC.Item
+                      numbered
+                      href="#schritt-6"
+                      title="Informationen ergänzen"
+                    ></ToC.Item>
+                  </ToC.List>
+                }
+              ></ToC.Item>
             </ToC.List>
           </ToC>
         }
