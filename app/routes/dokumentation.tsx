@@ -1,3 +1,4 @@
+import { ButtonLinkProps } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
@@ -53,6 +54,9 @@ export default function Index() {
               <p className={"ds-heading-03-reg"}>{item.headline.text}</p>
               {"content" in item && (
                 <RichText markdown={item.content as string} />
+              )}
+              {"buttons" in item && (
+                <ButtonContainer buttons={item.buttons as ButtonLinkProps[]} />
               )}
             </NumberedList.Item>
           ))}
