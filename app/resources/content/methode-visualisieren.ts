@@ -27,8 +27,7 @@ export const methodsTasksProcesses = {
   errorMessage: "Hier hat leider etwas nicht funktioniert, das tut uns Leid.",
 
   usage: {
-    title: "Einsatz von Visualisierungen",
-    subtitle: "Die Mehrwerte von Visualisierungen kennenlernen",
+    title: "Die Mehrwerte von Visualisierungen kennenlernen",
     description: [
       {
         icon: ShareTwoTone,
@@ -50,7 +49,7 @@ export const methodsTasksProcesses = {
     visualization: {
       title: "Von der Schriftform zur Visualisierung",
       caption:
-        "Visualisierungen schaffen ein schnelles und praktisches Verständnis für die Umsetzung.",
+        "Visualisierungen schaffen ein schnelleres Verständnis zur Umsetzung als durch Text.",
       altText:
         "Das Schaubild vergleicht die schriftliche Form einer Regelung mit ihrer Visualisierung. Links ist ein Textauszug aus einem Gesetzestext abgebildet, der die Voraussetzungen für den Erwerb eines Führerscheins beschreibt. Rechts daneben ist ein Flussdiagramm dargestellt, das den Prozess der Führerscheinprüfung vereinfacht und visualisiert.",
     },
@@ -59,7 +58,7 @@ export const methodsTasksProcesses = {
   visualizationTypes: {
     title: "Häufige Arten von Visualisierungen - Schritt für Schritt erklärt",
     subtitle:
-      "Bevor Sie mit der Erstellung einer Visualisierung beginnen, sollten Sie sich fragen, welche Art für den Kontext Ihrer Regelung am besten geeignet ist.",
+      "Bevor Sie mit der Erstellung einer Visualisierung beginnen, fragen Sie sich, welche Art für den Kontext Ihrer Regelung am besten geeignet ist.",
     types: [
       {
         visual: {
@@ -94,7 +93,7 @@ export const methodsTasksProcesses = {
           },
           type: "image" as const,
         },
-        badge: { text: "In Kürze Verfügbar", Icon: DateRangeOutlined },
+        badge: { text: "In Kürze verfügbar", Icon: DateRangeOutlined },
         heading: { text: "Entscheidungsbaum", tagName: "h3" as const },
         content: dedent`
           Der Entscheidungsbaum stellt Entscheidungslogiken und deren Auswirkungen dar.
@@ -120,7 +119,7 @@ export const methodsTasksProcesses = {
           },
           type: "image" as const,
         },
-        badge: { text: "In Kürze Verfügbar", Icon: DateRangeOutlined },
+        badge: { text: "In Kürze verfügbar", Icon: DateRangeOutlined },
         heading: { text: "Schaubild", tagName: "h3" as const },
         content: dedent`
           Das Schaubild ist eine einfache Darstellung, die wenige Elemente nutzt und oft Beziehungen oder Verhältnisse zeigt.
