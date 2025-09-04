@@ -31,7 +31,7 @@
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
-    "@digitalservice4germany/angie": "^2.1.0",
+    "@digitalservice4germany/angie": "^2.2.0",
     "@digitalservice4germany/style-dictionary": "^2.0.0",
     "@digitalservicebund/icons": "^2.0.1",
     "@headlessui/react": "^2.2.7",
