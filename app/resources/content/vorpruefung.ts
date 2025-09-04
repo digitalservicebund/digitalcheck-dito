@@ -257,9 +257,11 @@ export const preCheck = {
       negativeResult:
         "keinem Daten- und Informationsaustausch zwischen EU-Mitgliedsstaaten.",
       resultHint: {
-        positiveResult: "Bitte beachten Sie den oberen Hinweis.",
         unsureResult:
           "**Das können Sie tun:** Kontaktieren Sie uns unter [0151/40 76 78 39](tel:+4915140767839) oder  per E-Mail an [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de). Wir unterstützen Sie gerne bei der Beantwortung dieser Frage.",
+      },
+      resultTooltip: {
+        positiveResult: "Bitte beachten Sie den oberen Hinweis.",
       },
       text: "**Praxisbeispiel**: Ein Vorhaben sieht vor, dass Bürger:innen in der EU eine digitale Identitäts-Wallet nutzen können, die von ihrem Heimatstaat ausgestellt wird. Diese Wallet erlaubt es, Identitätsnachweise und Dokumente (z. B. Führerscheine, Berufsqualifikationen) grenzüberschreitend zu verwenden. Damit andere Mitgliedstaaten diese Nachweise anerkennen können, ist ein Austausch von Daten und harmonisierten Standards erforderlich, um deren Echtheit zu überprüfen.",
       hint: {

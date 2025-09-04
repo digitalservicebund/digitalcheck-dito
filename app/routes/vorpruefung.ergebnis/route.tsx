@@ -153,7 +153,8 @@ function getReasonListItem(reason: Reason) {
       {getIconForReason(reason)}
       <div>
         {reason.text}
-        {reason.hint && <InfoTooltip>{reason.hint}</InfoTooltip>}
+        {reason.tooltip && <InfoTooltip>{reason.tooltip}</InfoTooltip>}
+        {reason.hint && <RichText markdown={reason.hint} />}
       </div>
     </li>
   );

@@ -104,6 +104,11 @@ export type TQuestion = {
     negativeResult?: string;
     unsureResult?: string;
   };
+  resultTooltip?: {
+    positiveResult?: string;
+    negativeResult?: string;
+    unsureResult?: string;
+  };
   text: string;
   url: string;
   prevLink: string;

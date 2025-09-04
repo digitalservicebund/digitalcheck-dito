@@ -30,6 +30,7 @@ export type Reason = {
   answer: PreCheckAnswerOption["value"];
   text: string;
   hint?: string;
+  tooltip?: string;
 };
 
 const title = {
@@ -70,6 +71,7 @@ function getRelevantReasons(
       const answer = answers[question.id];
       let reasonText;
       let reasonHint;
+      let reasonTooltip;
 
       switch (answer) {
         case "yes":
@@ -80,15 +82,18 @@ function getRelevantReasons(
             result.digital !== ResultType.POSITIVE
           ) {
             reasonHint = question.resultHint.positiveResult;
+            reasonTooltip = question.resultTooltip?.positiveResult;
           }
           break;
         case "no":
           reasonText = question.negativeResult;
           reasonHint = question.resultHint?.negativeResult;
+          reasonTooltip = question.resultTooltip?.negativeResult;
           break;
         case "unsure":
           reasonText = question.positiveResult;
           reasonHint = question.resultHint?.unsureResult;
+          reasonTooltip = question.resultTooltip?.unsureResult;
           break;
       }
 
@@ -96,6 +101,7 @@ function getRelevantReasons(
         answer: answer,
         text: reasonText,
         hint: reasonHint,
+        tooltip: reasonTooltip,
       };
     });
 }
