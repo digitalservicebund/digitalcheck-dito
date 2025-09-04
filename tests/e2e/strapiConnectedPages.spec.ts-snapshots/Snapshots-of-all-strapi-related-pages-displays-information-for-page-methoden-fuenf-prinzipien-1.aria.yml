@@ -1,0 +1,186 @@
+- main:
+  - heading "Chancen und Hindernisse der digitalen Umsetzung identifizieren" [level=1]
+  - paragraph: Die folgenden Prinzipien helfen Ihnen dabei, Chancen der digitalen Umsetzung auszuschöpfen und Hindernisse zu erkennen. Nutzen Sie die Prinzipien auch, um mit beteiligten Akteurinnen und Akteuren über die Umsetzung zu sprechen.
+  - paragraph:
+    - text: Welche Prinzipien besonders wichtig sind und wie Sie diese anwenden, hängt davon ab, worum es in Ihrem Vorhaben geht – und ob Sie ein Gesetz oder eine Verordnung entwerfen. Sie sind sich unsicher oder wollen über Ihre Einordnung reflektieren, dann nutzen Sie gern unsere
+    - link "vertraulichen Unterstützungs- und Supportangebote":
+      - /url: /unterstuetzung
+    - text: .
+  - text: Inhalt
+  - list:
+    - listitem:
+      - 'link "↓ Anleitung: So nutzen Sie die fünf Prinzipien für Ihr Regelungsvorhaben"':
+        - /url: /methoden/fuenf-prinzipien#instruction
+    - listitem:
+      - 'link "↓ Prinzip: Digitale Angebote für alle nutzbar gestalten"':
+        - /url: /methoden/fuenf-prinzipien#digitale-angebote-f-r-alle-nutzbar-gestalten
+    - listitem:
+      - 'link "↓ Prinzip: Datenwiederverwendung benötigt einheitliches Recht"':
+        - /url: /methoden/fuenf-prinzipien#datenwiederverwendung-ben-tigt-einheitliches-recht
+    - listitem:
+      - 'link "↓ Prinzip: Etablierte Technologien ermöglichen effiziente Umsetzung"':
+        - /url: /methoden/fuenf-prinzipien#etablierte-technologien-erm-glichen-effiziente-umsetzung
+    - listitem:
+      - 'link "↓ Prinzip: Automatisierung basiert auf eindeutigen Regelungen"':
+        - /url: /methoden/fuenf-prinzipien#automatisierung-basiert-auf-eindeutigen-regelungen
+    - listitem:
+      - 'link "↓ Prinzip: Datenschutz und Informationssicherheit schaffen Vertrauen"':
+        - /url: /methoden/fuenf-prinzipien#datenschutz-und-informationssicherheit-schaffen-vertrauen
+  - mark: Anleitung
+  - heading "So nutzen Sie die fünf Prinzipien für Ihr Regelungsvorhaben" [level=2]
+  - list:
+    - listitem:
+      - heading "Als konkrete Umsetzungstipps" [level=3]
+      - paragraph: Nutzen Sie die Tipps als Inspiration, um in Ihrem Regelungsvorhaben die Möglichkeiten des Digitalen auszuschöpfen und Hindernisse zu erkennen.
+    - listitem:
+      - heading "Als Überprüfung für den Gesamtprozess" [level=3]
+      - paragraph:
+        - text: Besonders erkenntnisreich sind die fünf Prinzipien, wenn Sie diese auf eine Skizze des geplanten Umsetzungsprozesses anwenden. Skizzieren Sie Schritt für Schritt die Umsetzung und markieren Sie die Stellen, an denen eines oder mehrere Prinzipien wichtig sind. Mehr Informationen und Anleitung zur Visualisierungen finden Sie auf
+        - link "visualisieren.digitalcheck.bund.de":
+          - /url: /methoden/visualisieren
+        - text: .
+    - listitem:
+      - heading "Als Startpunkt für ihren Regelungstext" [level=3]
+      - paragraph: Nutzen Sie die gesammelten Beispiele als Startpunkt für Ihre Formulierungen. Bauen Sie auf Formulierungen auf, oder lassen Sie sich durch die Wirklogiken Ihrer Kolleginnen und Kollegen inspirieren. Sie finden gute Formulierungen, Einordnungen und deren Kontext im Regelungstext in den Beispielen.
+  - separator
+  - mark: Prinzip
+  - heading "Digitale Angebote für alle nutzbar gestalten" [level=2]
+  - paragraph: Viele Bürgerinnen, Bürger und Unternehmen sind an digitale Angebote gewöhnt und bevorzugen diese – sofern die digitale Kommunikation gut umgesetzt ist und ihren Bedürfnissen entspricht. Die Verwaltung kann digitale Daten schneller prüfen, bearbeiten und dokumentieren. Das Angebot sollte dabei immer inklusiv sein und es benötigt gegebenenfalls analoge Alternativen.
+  - heading "So wenden Sie das Prinzip an" [level=3]
+  - group: Ermöglichen Sie digitale Kommunikation
+  - group: Formulieren Sie die Regelung technologieoffen
+  - group: Denken Sie an Antragsstellung, Bearbeitung und Bescheid
+  - group: Denken Sie Barrierefreiheit von Anfang an mit
+  - group: Stellen Sie eine nutzerfreundliche Umsetzung sicher
+  - heading /Ein Textbeispiel § \d+ ZPO Kommunikations-, Austausch- und Übermittlungsformen/ [level=3]
+  - paragraph:
+    - mark: (2) Eine in diesem Gesetz angeordnete Schriftform kann auch durch Übermittlung elektronischer Dokumente oder strukturierter Datensätze über die Kommunikationsplattform ersetzt werden
+    - text: ", sofern"
+  - list:
+    - listitem: ein Identifizierungsverfahren nach Absatz 1 genutzt wird,
+    - listitem: bei der Datenübermittlung ein sicheres Verfahren verwendet wird, das die Authentizität und Integrität der Daten gewährleistet, und
+    - listitem: für die elektronischen Dokumente oder strukturierten Datensätze auf der Kommunikationsplattform eine automatisierte Bearbeitung durch das Gericht eröffnet ist.
+  - 'heading "Absatz 2: Warum ist dieses Beispiel gut?" [level=4]'
+  - list:
+    - listitem: Die digitale Übermittlung von Dokumenten ermöglicht eine Kommunikation über die digitale Kommunikationsplattform.
+    - listitem: Schriftformerfordernisse werden durch die digitale Übermittlung ersetzt.
+  - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+  - paragraph:
+    - text: "Regelung:"
+    - link "Entwurf eines Gesetzes zur Entwicklung und Erprobung eines Online-Verfahrens in der Zivilgerichtsbarkeit":
+      - /url: /beispiele/regelungen/entwurf-eines-gesetzes-zur-entwicklung-und-erprobung-eines-online-verfahrens-in-der-zivilgerichtsbarkeit
+  - mark: Prinzip
+  - heading "Datenwiederverwendung benötigt einheitliches Recht" [level=2]
+  - paragraph:
+    - text: Normadressatinnen und -adressaten sowie umsetzende Behörden sparen Kosten und Zeit, wenn das
+    - link "Once-Only-Prinzip":
+      - /url: https://www.cio.bund.de/Webs/CIO/DE/digitale-loesungen/digitale-verwaltung/registermodernisierung/registermodernisierung-node.html
+    - text: konsequent angewendet wird – also wenn Daten nur einmal angegeben und dann wiederverwendet werden. Die Grundlage dafür sind harmonisierte Rechtsbegriffe, ein datenschutzkonformer Austausch und die Berücksichtigung etablierter technischer Standards.
+  - heading "So wenden Sie das Prinzip an" [level=3]
+  - group: Nutzen Sie harmonisierte Rechtsbegriffe
+  - group: Nutzen Sie existierende Daten
+  - group: Machen Sie erhobene Daten für andere nutzbar
+  - group: Nutzen Sie bestehende technische Standards
+  - group: Suchen Sie frühzeitig den Austausch mit allen Beteiligten
+  - heading /Ein Textbeispiel § \d+ GWKH Überprüfung der gespeicherten Daten; Datenübermittlung/ [level=3]
+  - paragraph:
+    - mark: (1) Für einen effizienten Registerbetrieb gleicht das Umweltbundesamt die im Herkunftsnachweisregister für Gas und die im Herkunftsnachweisregister für Wärme oder Kälte gespeicherten Daten, einschließlich personenbezogener Daten, miteinander ab und tauscht sie zwischen diesen Registern aus
+    - text: im Hinblick auf die Erzeugung von
+  - list:
+    - listitem: Gas aus oder auf Basis von thermischer Energie sowie
+    - listitem: thermischer Energie aus Gas aus oder auf Basis von erneuerbarer Energie oder kohlenstoffarmem Gas.
+  - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+  - list:
+    - listitem: Verringert die Fehleranfälligkeit durch den Datenabgleich.
+    - listitem: Im folgenden Absatz wird der Abgleich und Austausch der Daten näher spezifiziert und erweitert.
+  - paragraph: "(Prinzip: Datenwiederverwendung benötigt einheitliches Recht)"
+  - paragraph:
+    - text: "Regelung:"
+    - link "Einrichtung Herkunftsnachweisregister für Gas, Wärme und Kälte - GWKHV":
+      - /url: /beispiele/regelungen/einrichtung-herkunftsnachweisregister-fuer-gas-waerme-und-kaelte-gwkhv
+  - mark: Prinzip
+  - heading "Etablierte Technologien ermöglichen effiziente Umsetzung" [level=2]
+  - paragraph:
+    - text: Digitale Angebote können schneller bereitgestellt sowie günstiger entwickelt und betrieben werden, wenn sie auf bestehenden Technologien aufbauen. Offene, standardisierte Schnittstellen und Open-Source erhöhen die
+    - link "Sicherheit der Angebote":
+      - /url: /methoden/fuenf-prinzipien#datenschutz-und-informationssicherheit-schaffen-vertrauen
+    - text: und fördern die Interoperabilität.
+  - heading "So wenden Sie das Prinzip an" [level=3]
+  - group: Ermöglichen Sie die Nutzung etablierter, öffentlicher Lösungen
+  - group: Bevorzugen Sie Open-Source-Software und offene Spezifikationen
+  - heading /Ein Textbeispiel § \d+ ZPO Digitale Eingabesysteme im Online-Verfahren; Verordnungsermächtigung/ [level=3]
+  - paragraph:
+    - mark: /\(1\) Die digitalen Eingabesysteme nach § \d+ Absatz 1 und 2 werden vom Bundesministerium der Justiz als Referenzimplementierung entwickelt und den Ländern zur Anwendung bei den nach § \d+ bestimmten Gerichten bundeseinheitlich bereitgestellt\. Die Länder können weitere digitale Eingabesysteme entwickeln und zur Anwendung bei den nach § \d+ bestimmten Gerichten bundeseinheitlich bereitstellen\./
+    - text: Das Bundesministerium der Justiz regelt durch Rechtsverordnung mit Zustimmung des Bundesrates die technischen, organisatorischen und datenschutzrechtlichen Rahmenbedingungen für Entwicklung, Betrieb, Pflege und Weiterentwicklung der digitalen Eingabesysteme nach Satz 2.
+  - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+  - paragraph: Die Entwicklung und bundeseinheitliche Bereitstellung von Referenzimplementierungen fördert die Nutzung etablierter und standardisierter Lösungen.
+  - paragraph: "(Prinzip: Etablierte Technologien ermöglichen effiziente Umsetzung)"
+  - paragraph:
+    - text: "Regelung:"
+    - link "Entwurf eines Gesetzes zur Entwicklung und Erprobung eines Online-Verfahrens in der Zivilgerichtsbarkeit":
+      - /url: /beispiele/regelungen/entwurf-eines-gesetzes-zur-entwicklung-und-erprobung-eines-online-verfahrens-in-der-zivilgerichtsbarkeit
+  - mark: Prinzip
+  - heading "Automatisierung basiert auf eindeutigen Regelungen" [level=2]
+  - paragraph:
+    - text: Logische und verständliche Regelungen und transparente Verfahren erleichtern den Zugang zum Recht und stärken das Vertrauen in den Staat. Einfachheit und verständliche Sprache sind durch die
+    - link "GGO":
+      - /url: https://www.verwaltungsvorschriften-im-internet.de/bsvwvbund_21072009_O11313012.htm#paragraph42:~:text=Gesetzentw%C3%BCrfe%20m%C3%BCssen%20sprachlich,hat%20empfehlenden%20Charakter.
+    - text: und das
+    - link "Handbuch der Rechtsförmlichkeit":
+      - /url: https://www.bmj.de/SharedDocs/Publikationen/DE/Fachpublikationen/Handbuch_der_Rechtsfoermlichkeit_4.pdf?__blob=publicationFile&v=1#page=147
+    - text: vorgeschrieben.
+  - paragraph: Klarheit und Logik bilden die Grundlage für automatisierte Prozesse. Wenn Begriffe eindeutig definiert sowie Entscheidungsstrukturen bestimmt sind, können Regeln und klare Ausnahmen automatisiert werden. Das spart Zeit auf Seiten der Nutzenden und der Verwaltung. Mit diesen Ressourcen können kritischere Einzelfälle bearbeitet oder Normadressatinnen und -adressaten beraten werden.
+  - heading "So wenden Sie das Prinzip an" [level=3]
+  - group: Beachten Sie bestehende Prozesse und Verantwortlichkeiten
+  - group: Nutzen Sie das Potenzial von Automatisierung
+  - group: Unterscheiden Sie zwischen genereller Regel, Ausnahmen und Ermessensspielräumen
+  - group: Schreiben Sie einfach, eindeutig und widerspruchsfrei
+  - heading "Ein Textbeispiel § 66a LuftVG Register über Betreiber von unbemannten Fluggeräten" [level=3]
+  - paragraph:
+    - text: (3) Betreiber von unbemannten Fluggeräten nach Absatz 1 Satz 1 haben dem Luftfahrt-Bundesamt vor der erstmaligen Aufnahme des Betriebs die für die Registrierung zu speichernden Daten nach Absatz 2 zu übermitteln und deren Richtigkeit auf Verlangen zu belegen, soweit dies für die Registrierung durch das Luftfahrt-Bundesamt erforderlich ist. Registrierte Betreiber haben dem Luftfahrt-Bundesamt unverzüglich jede Änderung der Voraussetzungen für eine Registrierung nach Absatz 1 und jede Änderung der Daten nach Absatz 2 zu übermitteln.
+    - mark: Das Luftfahrt-Bundesamt kann Verwaltungsakte hinsichtlich der Registrierung eines Betreibers sowie Gebührenbescheide für die Registrierung durch automatische Einrichtungen erlassen. Betreiber haben das Recht auf Darlegung des eigenen Standpunktes und das Recht auf Entscheidung durch einen Amtsträger.
+    - text: Satz 3 gilt nicht, wenn ein Betreiber Rechte nach Satz 4 geltend macht oder wenn aus anderen Gründen Anlass besteht, den Einzelfall durch Amtsträger zu bearbeiten. Setzt das Luftfahrt-Bundesamt automatische Einrichtungen zum Erlass von Verwaltungsakten ein, muss es Angaben des Betreibers berücksichtigen, die für den Einzelfall bedeutsam sind und im automatischen Verfahren nicht ermittelt würden.
+  - 'heading "Absatz 3: Warum ist dieses Beispiel gut?" [level=4]'
+  - list:
+    - listitem: Schafft die Rechtsgrundlage zur potenziellen Automatisierung.
+    - listitem: Neben der Automatisierung besteht das Recht auf Entscheidung durch einen Amtsträger.
+  - paragraph: "(Prinzip: Automatisierung basiert auf eindeutigen Regelungen)"
+  - paragraph:
+    - text: "Regelung:"
+    - link "Register über Betreiber von unbemannten Fluggeräten – LuftVG":
+      - /url: /beispiele/regelungen/register-ueber-betreiber-von-unbemannten-fluggeraeten-luft-vg
+  - mark: Prinzip
+  - heading "Datenschutz und Informationssicherheit schaffen Vertrauen" [level=2]
+  - paragraph:
+    - text: Alle Menschen haben ein Recht darauf, dass ihre Daten vor unbefugten Zugriffen geschützt werden. Der Schutz personenbezogener Daten ist in der
+    - link "DSGVO":
+      - /url: https://eur-lex.europa.eu/eli/reg/2016/679/oj?locale=de
+    - text: geregelt. Informationssicherheit umfasst alle Daten und wird je nach Bereich spezifiziert.
+  - paragraph: Eine datenschutzkonforme Regelung erhebt nur das Minimum an Daten. Datensparsamkeit ist einfach umzusetzen und verringert den Erfüllungsaufwand. Wenn weniger Daten vorliegen, müssen auch weniger Informationen geschützt werden.
+  - paragraph: Wenn Informationen den ihnen gebührenden Schutz erhalten, schafft das Vertrauen in den Staat. Die Gefahr von Missbrauch und negativen wirtschaftlichen oder sicherheitsrelevanten Konsequenzen wird verringert.
+  - heading "So wenden Sie das Prinzip an" [level=3]
+  - group: Stellen Sie den Datenschutz sicher
+  - group: Gewährleisten Sie die Informationssicherheit
+  - heading "Ein Textbeispiel § 66a LuftVG Register über Betreiber von unbemannten Fluggeräten" [level=3]
+  - paragraph:
+    - text: (4) Abweichend von Absatz 3 Satz 1 können Luftsportverbände die für die Registrierung zu speichernden Daten ihrer Mitglieder, die unbemannte Fluggeräte nach Absatz 1 Satz 1 betreiben, dem Luftfahrt-Bundesamt
+    - mark: /unter Beachtung der Verordnung \(EU\) \d+\/\d+ des Europäischen Parlaments und des Rates vom \d+\. April \d+ zum Schutz natürlicher Personen bei der Verarbeitung personenbezogener Daten/
+    - text: /, zum freien Datenverkehr und zur Aufhebung der Richtlinie \d+\/\d+\/EG \(ABl\. L \d+ vom 4\.\d+\.\d+, S\. 1; L \d+ vom \d+\.\d+\.\d+, S\. \d+; L \d+ vom \d+\.\d+\.\d+, S\. 2\) übermitteln\. Absatz 3 Satz 2 gilt entsprechend\./
+  - 'heading "Absatz 4: Warum ist dieses Beispiel gut?" [level=4]'
+  - paragraph: Verweist auf die DSGVO.
+  - paragraph: "(Prinzip: Datenschutz und Informationssicherheit schaffen Vertrauen)"
+  - paragraph:
+    - text: "Regelung:"
+    - link "Register über Betreiber von unbemannten Fluggeräten – LuftVG":
+      - /url: /beispiele/regelungen/register-ueber-betreiber-von-unbemannten-fluggeraeten-luft-vg
+  - img "Poster der 5 Prinzipien"
+  - mark: Download
+  - heading "Die Prinzipien als Poster" [level=2]
+  - paragraph: Drucken Sie sich das Poster in A4 oder A3 aus, um die Prinzipien für digitaltaugliche Gesetzgebung immer im Blick zu haben.
+  - link "Poster herunterladen":
+    - /url: /download/Prinzipien-Poster.pdf
+  - mark: "So geht es weiter:"
+  - heading "Verfassen Sie den Regelungsentwurf und dokumentieren Sie Ihre Entscheidungen" [level=2]
+  - paragraph: Die gesammelten Erkenntnisse und Ergebnisse helfen Ihnen dabei, Aspekte der Digitaltauglichkeit in Ihrem Regelungsentwurf zu berücksichtigen. Diese Entscheidungen dokumentieren Sie in einem Fragebogen.
+  - link "Zu „Erarbeiten“":
+    - /url: /methoden#verfassen-des-regelungsentwurfes
