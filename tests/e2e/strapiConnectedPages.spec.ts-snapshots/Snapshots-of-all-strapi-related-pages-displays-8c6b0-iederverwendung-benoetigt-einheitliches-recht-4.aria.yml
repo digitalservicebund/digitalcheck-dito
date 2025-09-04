@@ -1,0 +1,125 @@
+- main:
+  - heading "Einrichtung Herkunftsnachweisregister für Gas, Wärme und Kälte - GWKHV" [level=1]
+  - paragraph: Hier finden Sie alles zur Digitaltauglichkeit dieser Regelung.
+  - paragraph: /Fassung vom \d+\. Januar \d+/
+  - paragraph: Ressort BMWE
+  - paragraph:
+    - text: Link
+    - link "Verkündetes Gesetz":
+      - /url: https://www.gesetze-im-internet.de/gwkhv/BJNR08B0A0024.html
+  - tablist "Menü Navigation":
+    - tab "Formulierungen" [selected]
+  - tabpanel "Formulierungen":
+    - heading "Formulierungen aus der Regelung" [level=2]
+    - heading "§ 5 GWKHV Gemeinsame Datenbank" [level=3]
+    - paragraph:
+      - mark: /\(1\) Das Umweltbundesamt darf das Herkunftsnachweisregister für Gas, das Herkunftsnachweisregister für Wärme oder Kälte sowie das Herkunftsnachweisregister nach § \d+ des Erneuerbare-Energien-Gesetzes in derselben elektronischen Datenbank betreiben\./
+      - text: Innerhalb dieser Datenbank müssen die in Satz 1 genannten Herkunftsnachweisregister jedoch getrennt voneinander betrieben werden.
+    - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Ermöglicht eine zeitsparende Umsetzung durch Nutzung einer bereits existierenden Lösung.
+      - listitem: Ermöglicht das effiziente Betreiben der Register in derselben Datenbankinstanz, ohne die technologische Umsetzung einzuschränken.
+      - listitem: Benennt die verschiedenen Register, die in der derselben Datenbank betrieben werden dürfen.
+    - paragraph: "(Prinzip: Etablierte Technologien ermöglichen effiziente Umsetzung)"
+    - group: (2)
+    - heading "§ 8 GWKHV Kommunikationssystem" [level=3]
+    - group: (1)
+    - paragraph:
+      - mark: (2) Registerteilnehmer sind verpflichtet, für die Kommunikation mit dem Umweltbundesamt einen Zugang zu diesem Kommunikationssystem zu eröffnen und den Zugang zu nutzen
+      - text: ", insbesondere für die Stellung von Anträgen, die Abgabe von Erklärungen sowie die Übermittlung von Daten und Dokumenten."
+    - 'heading "Absatz 2: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Reduziert Aufwand in der Verwaltung, indem es Unternehmen zu digitaler Kommunikation zwingt.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - heading "§ 9 GWKHV Kontoeröffnung und -führung" [level=3]
+    - paragraph: "(1) Im Antrag auf Kontoeröffnung sind folgende Daten an das Umweltbundesamt zu übermitteln:"
+    - list:
+      - listitem:
+        - text: wenn der Antragsteller eine natürliche Person ist,
+        - list:
+          - listitem: sein Vorname und sein Nachname,
+          - listitem: seine Wohnanschrift bestehend aus Straße, Hausnummer, Postleitzahl, Ort und Staat unter Angabe von Landkreis und Bundesland,
+          - listitem: seine Telefonnummer,
+          - listitem: seine E-Mail-Adresse und
+          - listitem:
+            - mark: die Umsatzsteuer-Identifikationsnummer oder die Wirtschafts-Identifikationsnummer, soweit eine solche vergeben ist,
+      - listitem:
+        - text: wenn der Antragsteller eine juristische Person oder rechtsfähige Personengesellschaft ist,
+        - list:
+          - listitem: sein Name oder die Firma,
+          - listitem: sein Sitz,
+          - listitem: seine Telefonnummer,
+          - listitem: seine E-Mail-Adresse,
+          - listitem: die Angabe der gesetzlichen Vertreter und, sofern der Antragsteller im Handels-, Genossenschafts-, Partnerschafts- oder Vereinsregister oder in einem ähnlichen Register eingetragen ist, die Registernummer sowie die Angabe, bei welcher Stelle das Register geführt wird, und
+          - listitem:
+            - mark: die Umsatzsteuer-Identifikationsnummer oder die Wirtschafts-Identifikationsnummer, soweit eine solche vergeben ist.
+    - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Erfordert ein Identifikationsmerkmal (Umsatzsteuer-ID oder Wirtschafts-ID), was einen Abruf der restlichen geforderten Daten aus der Finanzverwaltung ermöglicht. Das legt den Grundstein für eine potentielle Datenabfrage (Erfüllung Once-Only Prinzip).
+    - paragraph: "(Prinzip: Datenwiederverwendung benötigt einheitliches Recht)"
+    - group: (2) – (3)
+    - heading /§ \d+ GWKH Überprüfung der gespeicherten Daten; Datenübermittlung/ [level=3]
+    - paragraph:
+      - mark: (1) Für einen effizienten Registerbetrieb gleicht das Umweltbundesamt die im Herkunftsnachweisregister für Gas und die im Herkunftsnachweisregister für Wärme oder Kälte gespeicherten Daten, einschließlich personenbezogener Daten, miteinander ab und tauscht sie zwischen diesen Registern aus
+      - text: im Hinblick auf die Erzeugung von
+    - list:
+      - listitem: Gas aus oder auf Basis von thermischer Energie sowie
+      - listitem: thermischer Energie aus Gas aus oder auf Basis von erneuerbarer Energie oder kohlenstoffarmem Gas.
+    - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Verringert die Fehleranfälligkeit durch den Datenabgleich.
+      - listitem: Im folgenden Absatz wird der Abgleich und Austausch der Daten näher spezifiziert und erweitert.
+    - paragraph: "(Prinzip: Datenwiederverwendung benötigt einheitliches Recht)"
+    - group: (2)
+    - paragraph:
+      - mark: (3) Soweit es zur Durchführung dieser Verordnung erforderlich ist, darf das Umweltbundesamt Daten aus dem Herkunftsnachweisregister für Gas oder dem Herkunftsnachweisregister für Wärme oder Kälte übermitteln
+      - text: an
+    - list:
+      - listitem: das Bundesministerium für Wirtschaft und Klimaschutz,
+      - listitem: das Bundesministerium für Umwelt, Naturschutz, nukleare Sicherheit und Verbraucherschutz,
+      - listitem: das Bundesministerium für Ernährung und Landwirtschaft,
+      - listitem: die nachgeordneten Behörden der in den Nummern 1 bis 3 genannten Bundesministerien,
+      - listitem: Behörden anderer Mitgliedstaaten der Europäischen Union und von Drittstaaten sowie
+      - listitem: Organe der Europäischen Union.
+    - 'heading "Absatz 3: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Schränkt die Datenübermittlung durch die Zweckbindung ein.
+    - paragraph: "(Prinzip: Datenschutz und Informationssicherheit schaffen Vertrauen)"
+    - paragraph: "(4) Das Umweltbundesamt kann den Betreibern der Datenbanken und der Register nach Absatz 2 sowie den Behörden nach Absatz 3 über elektronische Schnittstellen den Zugang zu den in einem Herkunftsnachweisregister nach § 3 gespeicherten Daten, einschließlich personenbezogener Daten, ermöglichen. Das Umweltbundesamt als übermittelnde Stelle hat über die Abrufe nach Satz 1 Aufzeichnungen zu fertigen, die die folgenden Daten enthalten müssen:"
+    - list:
+      - listitem: die bei der Durchführung der Abrufe verwendeten Daten,
+      - listitem: den Tag und die Uhrzeit der Abrufe,
+      - listitem: die Kennung der abrufenden Dienststelle und
+      - listitem: die abgerufenen Daten.
+    - paragraph:
+      - text: Die protokollierten Daten dürfen nur für Zwecke der Datenschutzkontrolle oder Datensicherung oder zur Sicherstellung eines ordnungsgemäßen Betriebs der Datenverarbeitungsanlage verwendet werden.
+      - mark: Die protokollierten Daten sind durch geeignete Vorkehrungen gegen zweckfremde Verwendung und gegen sonstigen Missbrauch zu schützen. Die protokollierten Daten sind sechs Monate nach der Protokollierung zu löschen.
+    - 'heading "Absatz 4: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Erfordert Sicherheitsvorkehrungen, die allerdings noch näher spezifiziert werden müssten.
+      - listitem: Legt klare Löschfristen fest.
+    - paragraph: "(Prinzip: Datenschutz und Informationssicherheit schaffen Vertrauen)"
+    - paragraph:
+      - mark: (5) Das Umweltbundesamt richtet eine elektronische Schnittstelle ein, die es ermöglicht, Daten an die nach Landesrecht zuständigen Behörden zu übermitteln
+      - text: /, soweit es für den Vollzug des Gebäudeenergiegesetzes vom 8\. August \d+ \(BGBl\. I S\. \d+\), das durch Artikel 1 des Gesetzes vom \d+\. Oktober \d+ \(BGBl\. \d+ I Nr\. \d+\) geändert worden ist, erforderlich ist\. Absatz 4 Satz 2 bis 5 ist entsprechend anzuwenden\./
+    - 'heading "Absatz 5: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Vermeidet durch die Bereitstellung einer Schnittstelle doppelte Datenerhebung und ermöglicht die Wiederverwendung des Registers.
+      - listitem: Die elektronische Schnittstelle stellt sicher, dass die Daten immer aktuell sind und der Zugriff protokolliert ist. Dieses Vorgehen ist dem Kopieren/Duplizieren von Daten vorzuziehen.
+    - paragraph: "(Prinzip: Datenwiederverwendung benötigt einheitliches Recht)"
+  - heading "Sie möchten Ihr Beispiel hier sehen?" [level=2]
+  - paragraph:
+    - text: Wir nehmen gerne Vorschläge für Beispiele entgegen. Wenn Sie einen digitaltauglichen Regelungstext oder eine Visualisierung haben, nutzen Sie ganz einfach unser Formular. Dort können Sie Beispiele schnell selbst übermitteln.
+    - link "Vorschlag übermitteln":
+      - /url: https://docs.google.com/forms/d/1qlGk9fRqxs9QZq6h1nbQ0CRhvoxVv-1I3KVylOyGVhU/edit
+  - paragraph:
+    - text: Oder schreiben Sie uns eine E-Mail an
+    - link "digitalcheck@digitalservice.bund.de":
+      - /url: mailto:digitalcheck@digitalservice.bund.de?subject=Beispiel:%20Digitaltauglichkeit
+    - text: . Wir melden uns zeitnah bei Ihnen.
+  - heading "Sie haben Gesprächsbedarf zu Ihrem Vorhaben?" [level=2]
+  - paragraph:
+    - text: Bei inhaltlichen Anliegen zu Ihrem Regelungsvorhaben oder Fragen helfen wir Ihnen gerne weiter. Schreiben Sie uns über
+    - link "digitalcheck@digitalservice.bund.de":
+      - /url: mailto:digitalcheck@digitalservice.bund.de?subject=Gespr%C3%A4chsbedarf:%20digitalcheck.bund.de
+    - text: oder rufen Sie uns an unter
+    - link /\d+\/\d+ \d+ \d+ \d+/:
+      - /url: tel:+4915140767839
+    - text: .

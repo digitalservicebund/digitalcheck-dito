@@ -1,0 +1,114 @@
+- main:
+  - heading "Register über Betreiber von unbemannten Fluggeräten – LuftVG" [level=1]
+  - paragraph: Hier finden Sie alles zur Digitaltauglichkeit dieser Regelung.
+  - paragraph: /Fassung vom \d+\. Juli \d+/
+  - paragraph: Ressort BMV
+  - paragraph:
+    - text: Link
+    - link "Verkündetes Gesetz":
+      - /url: https://www.gesetze-im-internet.de/luftvg/__66a.html
+  - tablist "Menü Navigation":
+    - tab "Formulierungen" [selected]
+    - tab "Visualisierung"
+    - tab "NKR Stellungnahme"
+  - tabpanel "Formulierungen":
+    - heading "Formulierungen aus der Regelung" [level=2]
+    - heading "§ 66a LuftVG Register über Betreiber von unbemannten Fluggeräten" [level=3]
+    - group: (1)
+    - paragraph:
+      - mark: "(2) Das Luftfahrt-Bundesamt ist befugt, in dem Register nach Absatz 1 zu dem in Absatz 1 Satz 2 genannten Zweck folgende Daten zu erheben, zu speichern und zu verwenden:"
+    - list:
+      - listitem: vollständiger Name und Geburtsdatum des Betreibers bei natürlichen Personen und Name oder Firma und Registergericht und Registernummer bei juristischen Personen,
+      - listitem: Anschrift des Betreibers,
+      - listitem: E-Mail-Adresse und Telefonnummer des Betreibers,
+      - listitem: Nummer der Versicherungspolice für das unbemannte Fluggerät des Betreibers,
+      - listitem: "Bestätigung folgender Erklärung durch juristische Personen: „Das unmittelbar am Betrieb beteiligte Personal verfügt über die zur Durchführung seiner Aufgaben notwendigen Kompetenzen und das unbemannte Fluggerät wird nur von Fernpiloten mit angemessenem Kompetenzniveau betrieben“ und"
+      - listitem: /vorhandene Betriebsgenehmigungen und das einem Betreiber von der zuständigen Behörde nach Teil C des Anhangs der Durchführungsverordnung \(EU\) \d+\/\d+ ausgestellte Betreiberzeugnis sowie Erklärungen mit einer Bestätigung nach Artikel \d+ Absatz 5 Buchstabe b der Durchführungsverordnung \(EU\) \d+\/\d+\./
+    - 'heading "Absatz 2: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Legt für die datenschutzkonforme Umsetzung detailliert fest, welche Daten des Betreibers erhoben, gespeichert und verwendet werden dürfen.
+    - paragraph: "(Prinzip: Datenschutz und Informationssicherheit schaffen Vertrauen)"
+    - paragraph:
+      - text: (3) Betreiber von unbemannten Fluggeräten nach Absatz 1 Satz 1 haben dem Luftfahrt-Bundesamt vor der erstmaligen Aufnahme des Betriebs die für die Registrierung zu speichernden Daten nach Absatz 2 zu übermitteln und deren Richtigkeit auf Verlangen zu belegen, soweit dies für die Registrierung durch das Luftfahrt-Bundesamt erforderlich ist. Registrierte Betreiber haben dem Luftfahrt-Bundesamt unverzüglich jede Änderung der Voraussetzungen für eine Registrierung nach Absatz 1 und jede Änderung der Daten nach Absatz 2 zu übermitteln.
+      - mark: Das Luftfahrt-Bundesamt kann Verwaltungsakte hinsichtlich der Registrierung eines Betreibers sowie Gebührenbescheide für die Registrierung durch automatische Einrichtungen erlassen. Betreiber haben das Recht auf Darlegung des eigenen Standpunktes und das Recht auf Entscheidung durch einen Amtsträger.
+      - text: Satz 3 gilt nicht, wenn ein Betreiber Rechte nach Satz 4 geltend macht oder wenn aus anderen Gründen Anlass besteht, den Einzelfall durch Amtsträger zu bearbeiten. Setzt das Luftfahrt-Bundesamt automatische Einrichtungen zum Erlass von Verwaltungsakten ein, muss es Angaben des Betreibers berücksichtigen, die für den Einzelfall bedeutsam sind und im automatischen Verfahren nicht ermittelt würden.
+    - 'heading "Absatz 3: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Schafft die Rechtsgrundlage zur potenziellen Automatisierung.
+      - listitem: Neben der Automatisierung besteht das Recht auf Entscheidung durch einen Amtsträger.
+    - paragraph: "(Prinzip: Automatisierung basiert auf eindeutigen Regelungen)"
+    - paragraph:
+      - text: (4) Abweichend von Absatz 3 Satz 1 können Luftsportverbände die für die Registrierung zu speichernden Daten ihrer Mitglieder, die unbemannte Fluggeräte nach Absatz 1 Satz 1 betreiben, dem Luftfahrt-Bundesamt
+      - mark: /unter Beachtung der Verordnung \(EU\) \d+\/\d+ des Europäischen Parlaments und des Rates vom \d+\. April \d+ zum Schutz natürlicher Personen bei der Verarbeitung personenbezogener Daten/
+      - text: /, zum freien Datenverkehr und zur Aufhebung der Richtlinie \d+\/\d+\/EG \(ABl\. L \d+ vom 4\.\d+\.\d+, S\. 1; L \d+ vom \d+\.\d+\.\d+, S\. \d+; L \d+ vom \d+\.\d+\.\d+, S\. 2\) übermitteln\. Absatz 3 Satz 2 gilt entsprechend\./
+    - 'heading "Absatz 4: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Verweist auf die DSGVO.
+    - paragraph: "(Prinzip: Datenschutz und Informationssicherheit schaffen Vertrauen)"
+    - paragraph:
+      - mark: (5) Das Luftfahrt-Bundesamt übermittelt jedem Betreiber nach Absatz 1 Satz 1 elektronisch eine Registrierungsnummer
+      - text: /, die für alle von ihm nach Absatz 1 Satz 1 betriebenen unbemannten Fluggeräte gilt und dem Luftfahrt-Bundesamt eine individuelle Identifizierung des Betreibers nach Artikel \d+ der Durchführungsverordnung \(EU\) \d+\/\d+ ermöglicht\./
+      - mark: Das Luftfahrt-Bundesamt kann die Registrierung eines Betreibers eines unbemannten Fluggerätes für den Betrieb in den Betriebskategorien „offen“ und „speziell“ durch automatische Einrichtungen bestätigen, sofern kein Anlass besteht, den Einzelfall durch Amtsträger zu bearbeiten
+      - text: /; Absatz 3 Satz 4 bis 6 gilt entsprechend\. Das Luftfahrt-Bundesamt stellt sicher, dass das Register insbesondere den Vorgaben der Artikel \d+, \d+ und \d+ der Verordnung \(EU\) \d+\/\d+ entspricht\./
+    - 'heading "Absatz 5: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Schreibt vor, dass die Übermittlung der Registrierungsnummer elektronisch zu erfolgen hat.
+      - listitem: Die Formulierung bleibt technologieoffen.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - list:
+      - listitem: Schafft die Rechtsgrundlage zur potenziellen Automatisierung.
+      - listitem: Neben der Automatisierung besteht das Recht auf Entscheidung durch einen Amtsträger.
+    - paragraph: "(Prinzip: Automatisierung basiert auf eindeutigen Regelungen)"
+    - group: (6)
+    - paragraph:
+      - text: (7) Die Übermittlung nach Absatz 6 Satz 1
+      - mark: aus dem Register darf durch Abruf im automatisierten Verfahren
+      - text: an die Polizeien des Bundes und der Länder erfolgen
+    - list:
+      - listitem: zur Verfolgung von Straftaten oder
+      - listitem: zur Abwehr von Gefahren für die öffentliche Sicherheit,
+    - paragraph: wenn diese Daten auf andere Weise nicht oder nicht rechtzeitig oder nur mit unverhältnismäßigem Aufwand zu erlangen sind. Die Verantwortung für die Zulässigkeit des einzelnen automatisierten Abrufs trägt die abrufende Stelle. Das Luftfahrt-Bundesamt überprüft die Zulässigkeit des Abrufs nur, wenn dazu Anlass besteht.
+    - 'heading "Absatz 7: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Führt zur Bereitstellung einer Schnittstelle zum automatisierten Abruf durch eine andere Behörde.
+    - paragraph: "(Prinzip: Automatisierung basiert auf eindeutigen Regelungen)"
+    - group: (8)
+    - paragraph:
+      - mark: (9) Die nach Absatz 2 gespeicherten Daten sind vom Luftfahrt-Bundesamt unverzüglich zu löschen, soweit sie für die Erfüllung der Aufgaben nach Absatz 1 Satz 2 nicht mehr erforderlich sind, spätestens nach Ablauf von fünf Jahren ab dem Tag ihrer Speicherung.
+      - text: Wird dem Luftfahrt-Bundesamt innerhalb dieser Frist die Einleitung von Ermittlungen der Staatsanwaltschaft wegen des Verdachts eines Verstoßes gegen verkehrsrechtliche Vorschriften oder Strafgesetze bei der Tätigkeit als Betreiber nach Absatz 1 bekannt und sind die Daten nach Absatz 2 im Einzelfall für die Durchführung dieser Ermittlungen und eines sich hieran anschließenden Strafverfahrens erforderlich, sind die nach Absatz 2 gespeicherten Daten abweichend von Satz 1 vom Luftfahrt-Bundesamt mit dem Abschluss des Ermittlungsverfahrens oder dem rechtskräftigen Abschluss des sich hieran anschließenden Strafverfahrens unverzüglich zu löschen.
+    - 'heading "Absatz 9: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Klare Löschfristen und -bedingungen für die Daten werden definiert.
+    - paragraph: "(Prinzip: Datenschutz und Informationssicherheit schaffen Vertrauen)"
+    - paragraph:
+      - text: /\(\d+\) Das Luftfahrt-Bundesamt legt im/
+      - mark: /Einvernehmen mit dem Bundesamt für Sicherheit in der Informationstechnik insbesondere unter Beachtung der Vorgaben der Artikel \d+, \d+ und \d+ der Verordnung \(EU\) \d+\/\d+ nähere Anforderungen an das Datenformat sowie die Anforderungen an die Sicherheit gegen unbefugte Zugriffe auf das Register und bei der Datenübertragung fest\. Sie haben dem Stand der Technik zu entsprechen und sind vom Luftfahrt-Bundesamt im Einvernehmen mit dem Bundesamt für Sicherheit in der Informationstechnik fortlaufend anzupassen/
+    - 'heading /Absatz \d+: Warum ist dieses Beispiel gut\?/ [level=4]'
+    - list:
+      - listitem: Bezieht Experten (BSI) in die Erarbeitung der Sicherheitsanforderungen mit ein.
+      - listitem: Diese sollen fortlaufend auf dem neuesten Stand gehalten werden.
+      - listitem: Verweist auf die relevanten Stellen der DSGVO.
+    - paragraph: "(Prinzip: Datenschutz und Informationssicherheit schaffen Vertrauen)"
+    - paragraph:
+      - mark: /\(\d+\) Das Luftfahrt-Bundesamt hat über die Abrufe Aufzeichnungen zu fertigen/
+      - text: ", die die bei der Durchführung der Abrufe verwendeten Daten, den Tag und die Uhrzeit der Abrufe, die Kennung der abrufenden Dienststelle und die abgerufenen Daten enthalten müssen. Ferner sind bei Abrufen aus dem Register über Betreiber von unbemannten Fluggeräten vom Luftfahrt-Bundesamt weitere Aufzeichnungen zu fertigen, die sich auf den Anlass des Abrufs erstrecken und die Feststellung der für den Abruf verantwortlichen Personen ermöglichen."
+      - mark: Die protokollierten Daten dürfen nur für Zwecke der Datenschutzkontrolle, der Datensicherung oder zur Sicherstellung eines ordnungsgemäßen Betriebs der Datenverarbeitungsanlage verwendet werden. Die Protokolldaten sind durch geeignete Vorkehrungen gegen zweckfremde Verwendung und gegen sonstigen Missbrauch zu schützen und nach sechs Monaten zu löschen.
+    - 'heading /Absatz \d+: Warum ist dieses Beispiel gut\?/ [level=4]'
+    - paragraph: Schreibt die Erstellung, Sicherung und Löschfristen von Protokollen vor, um eine spätere Überprüfung von u. A. Datenschutz und Datensicherung zu ermöglichen.
+    - paragraph: "(Prinzip: Datenschutz und Informationssicherheit schaffen Vertrauen)"
+    - group: /\(\d+\)/
+  - heading "Sie möchten Ihr Beispiel hier sehen?" [level=2]
+  - paragraph:
+    - text: Wir nehmen gerne Vorschläge für Beispiele entgegen. Wenn Sie einen digitaltauglichen Regelungstext oder eine Visualisierung haben, nutzen Sie ganz einfach unser Formular. Dort können Sie Beispiele schnell selbst übermitteln.
+    - link "Vorschlag übermitteln":
+      - /url: https://docs.google.com/forms/d/1qlGk9fRqxs9QZq6h1nbQ0CRhvoxVv-1I3KVylOyGVhU/edit
+  - paragraph:
+    - text: Oder schreiben Sie uns eine E-Mail an
+    - link "digitalcheck@digitalservice.bund.de":
+      - /url: mailto:digitalcheck@digitalservice.bund.de?subject=Beispiel:%20Digitaltauglichkeit
+    - text: . Wir melden uns zeitnah bei Ihnen.
+  - heading "Sie haben Gesprächsbedarf zu Ihrem Vorhaben?" [level=2]
+  - paragraph:
+    - text: Bei inhaltlichen Anliegen zu Ihrem Regelungsvorhaben oder Fragen helfen wir Ihnen gerne weiter. Schreiben Sie uns über
+    - link "digitalcheck@digitalservice.bund.de":
+      - /url: mailto:digitalcheck@digitalservice.bund.de?subject=Gespr%C3%A4chsbedarf:%20digitalcheck.bund.de
+    - text: oder rufen Sie uns an unter
+    - link /\d+\/\d+ \d+ \d+ \d+/:
+      - /url: tel:+4915140767839
+    - text: .

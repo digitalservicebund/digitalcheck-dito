@@ -1,0 +1,207 @@
+- main:
+  - heading "Modernisierung des Postrechts – PostG" [level=1]
+  - paragraph: Hier finden Sie alles zur Digitaltauglichkeit dieser Regelung.
+  - paragraph: Ressort BMWE
+  - paragraph:
+    - text: Link
+    - link "Verkündetes Gesetz":
+      - /url: https://www.gesetze-im-internet.de/postg_2024/BJNR0EC0B0024.html
+  - tablist "Menü Navigation":
+    - tab "Formulierungen" [selected]
+  - tabpanel "Formulierungen":
+    - heading "Formulierungen aus der Regelung" [level=2]
+    - heading "§ 4 PostG Anbieterverzeichnis" [level=3]
+    - paragraph:
+      - text: (1) Die Bundesnetzagentur für Elektrizität, Gas, Telekommunikation, Post und Eisenbahnen (Bundesnetzagentur)
+      - mark: führt ein digitales Verzeichnis der Anbieter von Postdienstleistungen (Anbieterverzeichnis).
+      - text: Postdienstleistungen dürfen nur von Anbietern erbracht werden, die in das Anbieterverzeichnis eingetragen sind. Ein Anbieter darf einen anderen Anbieter nur dann mit der Erbringung von Postdienstleistungen beauftragen, wenn der beauftragte Anbieter in das Anbieterverzeichnis eingetragen ist.
+      - mark: Die Bundesnetzagentur veröffentlicht das Anbieterverzeichnis und aktualisiert es fortlaufend.
+    - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Ein digitales Verzeichnis ermöglicht eine direkte Übermittlung und Bearbeitung von Daten.
+    - list:
+      - listitem: Die Veröffentlichung des digitalen Anbieterverzeichnisses macht die von den Anbietern erhobenen Daten für andere Akteure (Bürger, Unternehmen, andere Behörden) nutzbar.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - group: (2)
+    - paragraph:
+      - mark: (3) Innerhalb von vier Wochen nach Eingang eines vollständigen Antrags prüft die Bundesnetzagentur, ob Gründe nach Absatz 4 für die Versagung der Eintragung vorliegen.
+      - text: Liegen keine Gründe für die Versagung der Eintragung vor,
+      - mark: trägt die Bundesnetzagentur den Antragsteller in das Anbieterverzeichnis ein.
+      - text: Die erfolgte Eintragung ist dem Anbieter mitzuteilen. Liegen Gründe für die Versagung der Eintragung vor, versagt die Bundesnetzagentur die Eintragung.
+      - mark: Ist die Frist nach Satz 1 abgelaufen, ohne dass eine Eintragung oder Versagung erfolgt ist, gilt der Antragsteller als in das Anbieterverzeichnis eingetragen; die Bundesnetzagentur hat die Eintragung umgehend zu veranlassen.
+    - 'heading "Absatz 3: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: "Klare Verhältnisse: Bei Nicht-Entscheidung der Behörde innerhalb von 4 Wochen gilt der Antrag automatisch als genehmigt („Fiktionswirkung“)"
+      - listitem: Rechtssicherheit für die Antragstellenden wird geschaffen, da eindeutig feststeht, wann ein Antrag als erfolgreich abgeschlossen gilt
+    - paragraph: "(Prinzip: Automatisierung basiert auf eindeutigen Regelungen)"
+    - group: (4) – (6)
+    - heading "§ 5 PostG Zuverlässigkeit, Leistungsfähigkeit, Fachkunde" [level=3]
+    - paragraph:
+      - mark: (1) Die nach § 4 Absatz 4 Nummer 1 erforderliche Zuverlässigkeit liegt in der Regel nicht vor, wenn
+    - list:
+      - listitem:
+        - text: /der Antragsteller oder eine mit der Leitung des Betriebs oder einer Zweigniederlassung beauftragte Person in den letzten fünf Jahren vor Stellung des Antrags nach § 4 Absatz 2 wegen Versuchs oder Vollendung eines Verbrechens im Sinne von § \d+ Absatz 1 des Strafgesetzbuches oder einer der nachstehend aufgeführten Straftaten zu einer Freiheitsstrafe, Jugendstrafe, auch wenn deren Verhängung ausgesetzt worden ist, Geldstrafe von mindestens \d+ Tagessätzen oder mindestens zweimal zu einer geringeren Geldstrafe rechtskräftig verurteilt worden ist, wenn seit dem Eintritt der Rechtskraft der letzten erstinstanzlichen Verurteilung fünf Jahre und seit dem Eintritt der Rechtskraft der vorletzten erstinstanzlichen Verurteilung zehn Jahre noch nicht verstrichen sind:/
+        - list:
+          - listitem: /§§ \d+ oder 15a des Arbeitnehmerüberlassungsgesetzes,/
+          - listitem: /§ \d+ des Arbeitszeitgesetzes,/
+          - listitem: /§§ \d+, 10a oder \d+ des Schwarzarbeitsbekämpfungsgesetzes,/
+          - listitem: /§§ \d+, \d+, \d+, 266a oder \d+ des Strafgesetzbuches,/
+      - listitem:
+        - mark: /gegen den Antragsteller oder eine mit der Leitung des Betriebs oder einer Zweigniederlassung beauftragte Person in den letzten fünf Jahren vor Stellung des Antrags nach § 4 Absatz 2 bei Antragstellern mit bis zu zehn Beschäftigten mindestens zwei, bei Antragstellern mit bis zu \d+ Beschäftigten mindestens zehn, bei Antragstellern mit bis zu \d+ Beschäftigten mindestens \d+ und bei Antragstellern mit mehr als \d+ Beschäftigten mindestens \d+ unanfechtbare Bußgeldentscheidungen wegen einer der nachstehend aufgeführten Ordnungswidrigkeiten in Höhe von jeweils mindestens 1 \d+ Euro ergangen sind:/
+        - list:
+          - listitem: /§ \d+ des Arbeitnehmerentsendegesetzes,/
+          - listitem: /§ \d+ des Arbeitnehmerüberlassungsgesetzes,/
+          - listitem: /§ \d+ des Arbeitsschutzgesetzes,/
+          - listitem: /§ \d+ Absatz 1 Nummer 1 bis 7, 9 oder \d+ des Arbeitszeitgesetzes,/
+          - listitem: /§ \d+ des Mindestlohngesetzes,/
+          - listitem: § 8 Absatz 1 Nummer 2, Absatz 2 bis 4 des Schwarzarbeitsbekämpfungsgesetzes,
+          - listitem: /§ \d+ Absatz 1 oder Absatz 2 Nummer 4 des Dritten Buches Sozialgesetzbuch,/
+          - listitem: /§ \d+ Absatz 1 Nummer 1 bis 7, 8, 9 oder Absatz 2 des Siebten Buches Sozialgesetzbuch,/
+          - listitem: /§ \d+ dieses Gesetzes,/
+      - listitem: der Antragsteller oder eine mit der Leitung des Betriebs oder einer Zweigniederlassung beauftragte Person in den letzten fünf Jahren vor Stellung des Antrags nach § 4 Absatz 2 schwerwiegend oder wiederholt gegen Vorgaben dieses Gesetzes verstoßen hat und die Verstöße durch bestandskräftige Entscheidungen der Bundesnetzagentur festgestellt sind.
+    - paragraph: Im Einzelfall kann auch eine Gesamtabwägung von Umständen, die nicht in Satz 1 genannt sind und denen in ihrer Gesamtheit ein vergleichbares Gewicht wie den in Satz 1 genannten Umständen zuzumessen ist, die Annahme rechtfertigen, dass der Antragsteller nicht über die erforderliche Zuverlässigkeit verfügt.
+    - paragraph
+    - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Es werden objektive und quantifizierbare Kriterien zur Beurteilung der Zuverlässigkeit eines Antragstellers definiert, die eine automatisierte Vorprüfung oder sogar eine teilautomatisierte Entscheidung ermöglichen.
+    - list:
+      - listitem: Reduziert den manuellen Prüfaufwand
+    - paragraph: "(Prinzip: Automatisierung basiert auf eindeutigen Regelungen)"
+    - group: (2) – (3)
+    - heading /§ \d+ PostG Filialen und automatisierte Stationen/ [level=3]
+    - paragraph:
+      - mark: "(1) Betreiben Anbieter Filialen oder automatisierte Stationen, so haben sie der Bundesnetzagentur jeweils zum 1. Januar und zum 1. Juli eines Jahres die folgenden Informationen zu diesen Einrichtungen elektronisch zu übermitteln:"
+    - list:
+      - listitem: die Anschrift der Einrichtung bestehend aus Straße, Hausnummer, Postleitzahl, Ort,
+      - listitem: den Betreiber der Einrichtung in Form der in § 6 Absatz 1 Nummer 1 Buchstabe a, d und e genannten Informationen; bei juristischen Personen in Form der in § 6 Absatz 1 Nummer 2 Buchstabe a, b, d und e genannten Informationen, wobei § 6 Absatz 1 Nummer 2 Buchstabe b mit der Maßgabe zur Anwendung kommt, dass nur die Informationen nach § 6 Absatz 1 Nummer 1 Buchstabe a, d und e in Bezug genommen werden,
+      - listitem: die Art der Einrichtung.
+    - paragraph: Betreiben Anbieter Filialen oder automatisierte Stationen im Auftrag eines anderen Anbieters, so sind die Informationen nach Satz 1 ausschließlich durch den Anbieter zu übermitteln, in dessen Auftrag die Filiale oder die automatisierte Station betrieben wird.
+    - paragraph
+    - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Schnellere Prüfung, Verarbeitung und Dokumentation durch die Bundesnetzagentur möglich.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - paragraph:
+      - mark: (2) Die Bundesnetzagentur legt durch Allgemeinverfügung fest, in welcher Form und in welchem technischen Format die Informationen zu übermitteln sind.
+    - 'heading "Absatz 2: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Die Übermittlung ist technologieoffen geregelt, sodass digitale Verfahren möglich sind.
+    - list:
+      - listitem: Die Bundesnetzagentur kann in ihrer Allgemeinverfügung einheitliche Formate festlegen, um Datenaustausch und Wiederverwendung zu erleichtern. Das sorgt für strukturierte, maschinenlesbare und qualitativ hochwertige Daten.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - group: (3)
+    - heading /§ \d+ PostG Digitaler Atlas zur Postversorgung, Verordnungsermächtigung/ [level=3]
+    - paragraph:
+      - text: (1) Die Bundesnetzagentur führt einen digitalen Atlas zur Postversorgung.
+      - mark: Der digitale Atlas dient der Transparenz für die Nutzer hinsichtlich der zur Verfügung stehenden Annahme- und Zustellstrukturen einschließlich des jeweiligen Produktangebots und der Erfassung, Aufbereitung und Veröffentlichung von Postinfrastrukturdaten durch die Bundesnetzagentur.
+      - text: Die Bundesnetzagentur stellt den digitalen Atlas im Internet unentgeltlich bereit.
+    - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Digitale Erfassung und Veröffentlichung von Postinfrastrukturdaten im digitalen Atlas ermöglichen einfacheren Datenaustausch und Weiterverarbeitung zwischen Behörden.
+    - list:
+      - listitem: Daten stehen als Open Data bereit und können von Forschung, Behörden und Nutzern nachgenutzt werden.
+    - paragraph: "(Prinzip: Datenwiederverwendung benötigt einheitliches Recht)"
+    - group: (2)
+    - paragraph:
+      - text: (3) Anbieter sind verpflichtet, der Bundesnetzagentur die Informationen nach Absatz 2 auf Anforderung zu übermitteln. Die Bundesnetzagentur kann durch Allgemeinverfügung geeignete Vorgaben machen, in welcher Form, in welchem technischen Format und in welchem Detailgrad die Informationen nach Absatz 2 zu übermitteln sind und in welchen Zeitintervallen die Informationen zu aktualisieren sind.
+      - mark: /Soweit möglich greift die Bundesnetzagentur auf die Daten, die ihr nach § \d+ Absatz 1 übermittelt werden, zurück\./
+    - 'heading "Absatz 3: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: /Die Bundesnetzagentur nutzt bereits gemeldete Daten \(z[\d,.]+[bkmBKM]+\. zu Filialen und Stationen\) für den Digitalen Atlas erneut\. Das reduziert den Erfassungsaufwand für Anbieter und Verwaltung und entspricht dem Once-Only-Prinzip \(Nachnutzung\)\./
+    - paragraph: "(Prinzip: Datenwiederverwendung benötigt einheitliches Recht)"
+    - group: (4) – (5)
+    - heading /§ \d+ PostG Meldung von Mängeln/ [level=3]
+    - paragraph:
+      - text: (1) Jeder ist berechtigt, der Bundesnetzagentur Mängel zu melden, die die Qualität von Postdienstleistungen und die Gewährleistung der flächendeckenden Versorgung mit Postdienstleistungen betreffen.
+      - mark: Die Bundesnetzagentur stellt zu diesem Zweck eine digitale Plattform zur Verfügung.
+    - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Ein digitaler Weg wird bereitgestellt, um Mängel zu melden. Dieser schließt andere, nicht digitale Kommunikationswege nicht aus, sondern komplettiert diese.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - group: (2)
+    - heading /§ \d+ PostG Infrastrukturvorgaben/ [level=3]
+    - group: (1)
+    - paragraph:
+      - mark: (2) Abweichend von Absatz 1 kann die Bundesnetzagentur im Benehmen mit der jeweils betroffenen Gebietskörperschaft automatisierte Stationen anstelle von Universaldienstfilialen zulassen, wenn diese barrierefrei sind und eine Nutzung ohne eigene technische Geräte ermöglichen.
+      - text: Sie berücksichtigt dabei insbesondere
+    - list:
+      - listitem: die örtliche Nachfrage nach Postdienstleistungen,
+      - listitem: die Möglichkeit, eine Universaldienstfiliale im Sinne des Absatzes 1 einzurichten, und
+      - listitem: die flächendeckend angemessene und ausreichende Verfügbarkeit von Universaldienstfilialen, insbesondere im ländlichen Raum.
+    - paragraph: Nach Ablauf von zwei Jahren ab Zulassung einer automatisierten Station im Einzelfall überprüft die Bundesnetzagentur die getroffene Zulassungsentscheidung, wenn die betroffene Gebietskörperschaft dies beantragt und im Antrag glaubhaft macht, dass die Voraussetzungen der Sätze 1 und 2 nicht mehr vorliegen. Durch Allgemeinverfügung kann die Bundesnetzagentur nach Anhörung der betroffenen Kreise, insbesondere der kommunalen Spitzenverbände, die näheren Voraussetzungen festlegen, unter denen sie automatisierte Stationen nach Satz 1 zulässt. Sie kann insbesondere die Vorgaben der Sätze 1 und 2 konkretisieren.
+    - 'heading "Absatz 2: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Digitale Alternativen zu Filialen (automatisierte Stationen) sind nur zulässig, wenn sie barrierefrei und ohne eigene technische Geräte nutzbar sind. So werden die Bedürfnisse von Menschen mit Behinderungen berücksichtigt und eine gleichberechtigte Nutzung sichergestellt.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - group: (3) – (6)
+    - heading /§ \d+ PostG Datenschutz/ [level=3]
+    - paragraph:
+      - mark: /\(1\) Für Diensteanbieter werden die Vorgaben der Verordnung \(EU\) \d+\/\d+ des Europäischen Parlaments und des Rates vom \d+\. April \d+ zum Schutz natürlicher Personen bei der Verarbeitung personenbezogener Daten, zum freien Datenverkehr und zur Aufhebung der Richtlinie \d+\/\d+\/EG \(Datenschutz-Grundverordnung\) \(ABl\. L \d+ vom 4\.\d+\.\d+, S\. 1; L \d+ vom \d+\.\d+\.\d+, S\. \d+; L \d+ vom \d+\.\d+\.\d+, S\. 2\) in der jeweils geltenden Fassung durch die Regelungen des § \d+ sowie der §§ \d+ bis \d+ ergänzt\./
+    - paragraph
+    - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: DSGVO ist zentrale Grundlage für Datenschutz.
+    - list:
+      - listitem: /§§ \d+, \d+-\d+ Postmodernisierungsgesetz ergänzen die Vorgaben für den Postbereich\. Damit wird rechtssichere und datenschutzkonforme Verarbeitung personenbezogener Daten im Postsektor gewährleistet\./
+    - paragraph: "(Prinzip: Datenschutz und Informationssicherheit schaffen Vertrauen)"
+    - heading /§ \d+ PostG Ausweisdaten/ [level=3]
+    - group: (1) – (3)
+    - paragraph:
+      - mark: (4) Die Daten sind spätestens sechs Monate nach Ablauf gesetzlicher oder vertraglicher Verjährungsfristen zu löschen.
+    - 'heading "Absatz 4: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Sensible, nicht mehr benötigte Daten werden gelöscht, sodass sie nicht mehr verfügbar sind – das schützt sie vor Missbrauch.
+    - paragraph: "(Prinzip: Datenschutz und Informationssicherheit schaffen Vertrauen)"
+    - heading /§ \d+ PostG Verfahren zur Übermittlung von Informationen/ [level=3]
+    - paragraph:
+      - text: (1) Soweit dieses Gesetz natürliche oder juristische Personen dazu verpflichtet, Informationen an die Bundesnetzagentur zu übermitteln,
+      - mark: soll die Übermittlung ausschließlich elektronisch erfolgen, es sei denn, das Gesetz sieht ausdrücklich eine andere Form der Übermittlung vor. Zu diesem Zweck stellt die Bundesnetzagentur entsprechende elektronische Verfahren zur Verfügung, die eine sichere Übermittlung und Nutzung der Informationen sicherstellt.
+      - mark: Die Bundesnetzagentur gewährleistet insbesondere den Schutz personenbezogener Daten und den Schutz von Betriebs- und Geschäftsgeheimnissen.
+    - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Die Formulierung legt elektronische Kommunikation als Standardfall fest. Es lässt das Verfahren offen, anstatt es zu definieren.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - paragraph: Die Bundesnetzagentur wird ausdrücklich als besonders verantwortlich für Datenschutz und Informationssicherheit benannt.
+    - paragraph: "(Prinzip: Datenschutz und Informationssicherheit schaffen Vertrauen)"
+    - group: (2)
+    - paragraph:
+      - mark: (3) Soweit die Bundesnetzagentur auf Grundlage dieses Gesetzes mit natürlichen oder juristischen Personen in Kontakt tritt, soll dies ausschließlich elektronisch
+      - text: /, soweit möglich unter Nutzung der nach § 6 Absatz 1 Nummer 1 Buchstabe e und Nummer 2 Buchstabe e, jeweils auch in Verbindung mit § \d+ Absatz 1 Nummer 2 gemeldeten Adresse für die elektronische Kommunikation, erfolgen, es sei denn, das Gesetz sieht ausdrücklich eine andere Form vor\./
+    - 'heading "Absatz 3: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Die Bundesnetzagentur wird zur elektronischen Kommunikation verpflichtet.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - heading /§ \d+ PostG Datennutzung/ [level=3]
+    - paragraph:
+      - text: (1) Unbeschadet spezialgesetzlicher Regelungen ist die Bundesnetzagentur berechtigt, ihr vorliegende, aufgrund einer speziellen Ermächtigungsgrundlage erhobene Daten
+      - mark: auch zur Erfüllung weiterer gesetzlicher Aufgaben auszuwerten und zu nutzen
+      - text: /\. Dem steht die in § \d+ Absatz 2 Satz 2 und 3 genannte Zweckbestimmung nicht entgegen\./
+    - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Die Möglichkeit wird eröffnet, Daten für weitere Zwecke zu verwenden, solange eine Rechtsgrundlage existiert.
+    - paragraph: "(Prinzip: Datenwiederverwendung benötigt einheitliches Recht)"
+    - paragraph:
+      - text: /\(2\) Die Bundesnetzagentur kann die ihr vorliegenden, den Postsektor betreffenden Daten, insbesondere die aufgrund eines Auskunftsverlangens nach § \d+ erhaltenen Daten, für Dritte oder die Öffentlichkeit bereitstellen, soweit die Daten für die Öffentlichkeit Bedeutung haben können\./
+      - mark: Satz 1 gilt nicht für Daten, für die kein oder nur ein eingeschränktes Zugangsrecht insbesondere gemäß § 3 des Informationsfreiheitsgesetzes besteht, sowie für personenbezogene Daten und als solche gekennzeichnete Betriebs- oder Geschäftsgeheimnisse.
+    - 'heading "Absatz 2: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Hinweis auf die Beschränkung von Zugangsrechten von personenbezogenen Daten, als auch Daten die § 3 Informationsfreiheitsgesetz unterliegen oder gekennzeichnete Betriebs- oder Geschäftsgeheimnisse sind.
+    - paragraph: "(Prinzip: Datenschutz und Informationssicherheit schaffen Vertrauen)"
+    - paragraph:
+      - text: (3) Soweit erforderlich, werden diese Daten aggregiert oder
+      - mark: unternehmensbezogene Angaben auf sonstige Weise unkenntlich gemacht
+      - text: . Die öffentliche Bereitstellung kann insbesondere auf der Internetseite der Bundesnetzagentur erfolgen.
+    - 'heading "Absatz 3: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Daten können unkenntlich gemacht werden oder werden aggregiert, um geschützt zu werden.
+    - paragraph: "(Prinzip: Datenschutz und Informationssicherheit schaffen Vertrauen)"
+  - heading "Sie möchten Ihr Beispiel hier sehen?" [level=2]
+  - paragraph:
+    - text: Wir nehmen gerne Vorschläge für Beispiele entgegen. Wenn Sie einen digitaltauglichen Regelungstext oder eine Visualisierung haben, nutzen Sie ganz einfach unser Formular. Dort können Sie Beispiele schnell selbst übermitteln.
+    - link "Vorschlag übermitteln":
+      - /url: https://docs.google.com/forms/d/1qlGk9fRqxs9QZq6h1nbQ0CRhvoxVv-1I3KVylOyGVhU/edit
+  - paragraph:
+    - text: Oder schreiben Sie uns eine E-Mail an
+    - link "digitalcheck@digitalservice.bund.de":
+      - /url: mailto:digitalcheck@digitalservice.bund.de?subject=Beispiel:%20Digitaltauglichkeit
+    - text: . Wir melden uns zeitnah bei Ihnen.
+  - heading "Sie haben Gesprächsbedarf zu Ihrem Vorhaben?" [level=2]
+  - paragraph:
+    - text: Bei inhaltlichen Anliegen zu Ihrem Regelungsvorhaben oder Fragen helfen wir Ihnen gerne weiter. Schreiben Sie uns über
+    - link "digitalcheck@digitalservice.bund.de":
+      - /url: mailto:digitalcheck@digitalservice.bund.de?subject=Gespr%C3%A4chsbedarf:%20digitalcheck.bund.de
+    - text: oder rufen Sie uns an unter
+    - link /\d+\/\d+ \d+ \d+ \d+/:
+      - /url: tel:+4915140767839
+    - text: .
