@@ -26,7 +26,6 @@ export default function Visualization() {
           <Heading tagName="h2" className="ds-heading-02-reg">
             {methodsTasksProcesses.usage.title}
           </Heading>
-          <p>{methodsTasksProcesses.usage.subtitle}</p>
           <div className="space-y-32 md:grid md:grid-cols-4 md:space-y-0 md:gap-x-40">
             {methodsTasksProcesses.usage.description.map((item, i) => (
               <div key={i} className="space-y-16">
