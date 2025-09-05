@@ -5,20 +5,13 @@ import PrincipleHighlightModifier from "~/components/PrincipleHighlightModifier"
 import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import { ROUTE_EXAMPLES_PRINCIPLES } from "~/resources/staticRoutes";
-import {
-  absatzIdTag,
-  getAbsatzFromExampleParagraph,
-} from "~/utils/paragraphUtils";
+import { absatzIdTag } from "~/utils/paragraphUtils";
 import { PrinzipWithAnwendungen } from "~/utils/strapiData.server";
 
 export default function getDetailsSummary(prinzip: PrinzipWithAnwendungen) {
   const { PrinzipienAnwendung: prinzipienAnwendungen } = prinzip;
 
   const items = prinzipienAnwendungen.map((prinzipienAnwendung) => {
-    const exampleAbsatz = getAbsatzFromExampleParagraph(
-      prinzipienAnwendung.Example,
-    );
-
     const content = (
       <div className="space-y-4">
         <BlocksRenderer content={prinzipienAnwendung.Text} />
@@ -38,26 +31,26 @@ export default function getDetailsSummary(prinzip: PrinzipWithAnwendungen) {
             <BlocksRenderer content={prinzipienAnwendung.WordingExample} />
           </>
         )}
-        {exampleAbsatz && (
+        {prinzipienAnwendung.Beispiel && (
           <PrincipleHighlightProvider
-            absatzId={exampleAbsatz.id.toString()}
+            absatzId={prinzipienAnwendung.Beispiel.documentId}
             principlesToShow={[prinzip]}
             useAnchorLinks={false}
           >
             <h4 className="ds-label-02-bold">
               {methodsFivePrinciples.exampleTitle} §{" "}
-              {prinzipienAnwendung.Example!.Paragraph.Nummer}{" "}
-              {prinzipienAnwendung.Example!.Paragraph.Gesetz}:
+              {prinzipienAnwendung.Beispiel.Paragraph.Nummer}{" "}
+              {prinzipienAnwendung.Beispiel.Paragraph.Gesetz}:
             </h4>
             <BlocksRenderer
-              content={exampleAbsatz.Text}
+              content={prinzipienAnwendung.Beispiel.Text}
               modifiers={{
                 underline: PrincipleHighlightModifier,
               }}
             />
             <Link
               className="text-link"
-              to={`${ROUTE_EXAMPLES_PRINCIPLES.url}/${prinzip.URLBezeichnung}#${absatzIdTag(exampleAbsatz.id)}`}
+              to={`${ROUTE_EXAMPLES_PRINCIPLES.url}/${prinzip.URLBezeichnung}#${absatzIdTag(prinzipienAnwendung.Beispiel.documentId)}`}
             >
               {methodsFivePrinciples.exampleLinkText}
             </Link>

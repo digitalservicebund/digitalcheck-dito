@@ -1,0 +1,192 @@
+- main:
+  - heading "Entwurf eines Gesetzes zur Entwicklung und Erprobung eines Online-Verfahrens in der Zivilgerichtsbarkeit" [level=1]
+  - paragraph: Hier finden Sie alles zur Digitaltauglichkeit dieser Regelung.
+  - paragraph: /Fassung vom \d+\. September \d+/
+  - paragraph: Ressort BMJV
+  - paragraph:
+    - text: Link
+    - link "Text im Parlament":
+      - /url: https://dip.bundestag.de/vorgang/gesetz-zur-entwicklung-und-erprobung-eines-online-verfahrens-in-der-zivilgerichtsbarkeit/315283
+  - tablist "Menü Navigation":
+    - tab "Formulierungen" [selected]
+    - tab "Visualisierung"
+  - tabpanel "Formulierungen":
+    - heading "Hinweis" [level=2]
+    - paragraph: Markierte Formulierungen sind gute Beispiele für die Ermöglichung digitaler Umsetzung, trotz ausstehender Verabschiedung.
+    - heading "Formulierungen aus der Regelung" [level=2]
+    - heading /§ \d+ ZPO Digitale Eingabesysteme im Online-Verfahren; Verordnungsermächtigung/ [level=3]
+    - paragraph:
+      - mark: /\(1\) Die digitalen Eingabesysteme nach § \d+ Absatz 1 und 2 werden vom Bundesministerium der Justiz als Referenzimplementierung entwickelt und den Ländern zur Anwendung bei den nach § \d+ bestimmten Gerichten bundeseinheitlich bereitgestellt\. Die Länder können weitere digitale Eingabesysteme entwickeln und zur Anwendung bei den nach § \d+ bestimmten Gerichten bundeseinheitlich bereitstellen\./
+      - text: Das Bundesministerium der Justiz regelt durch Rechtsverordnung mit Zustimmung des Bundesrates die technischen, organisatorischen und datenschutzrechtlichen Rahmenbedingungen für Entwicklung, Betrieb, Pflege und Weiterentwicklung der digitalen Eingabesysteme nach Satz 2.
+    - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Die Entwicklung und bundeseinheitliche Bereitstellung von Referenzimplementierungen fördert die Nutzung etablierter und standardisierter Lösungen.
+    - paragraph: "(Prinzip: Etablierte Technologien ermöglichen effiziente Umsetzung)"
+    - paragraph:
+      - text: (2) Die nach Absatz 1 entwickelten digitalen Eingabesysteme sind über ein Justizportal des Bundes und der Länder für die Nutzer bereitzustellen.
+      - mark: Sie sind nach Maßgabe der Barrierefreie-Informationstechnik-Verordnung barrierefrei zu gestalten. Ferner ist bei der Gestaltung der digitalen Eingabesysteme deren Nutzerfreundlichkeit sowie eine einfache und intuitive Bedienbarkeit sicherzustellen.
+    - 'heading "Absatz 2: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Die digitale Eingabesysteme und die Kommunikationsplattform werden gemäß der Barrierefreie-Informationstechnik-Verordnung barrierefrei gestaltet, um die Inklusivität digitaler Angebote zu gewährleisten.
+      - listitem: Schreibt Nutzerfreundlichkeit für die Kommunikationsplattform vor.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - paragraph:
+      - mark: /\(3\) Die Stelle, die digitale Eingabesysteme nach Absatz 1 bereitstellt, darf personenbezogene Daten nur verarbeiten, soweit dies für die Zwecke der Unterstützung der digitalen Kommunikation nach § \d+ Absatz 1 und 2 erforderlich ist\. Die Daten dürfen in den digitalen Eingabesystemen zwischengespeichert werden, um dem Nutzer zu ermöglichen, sie zu einem späteren Zeitpunkt zu vervollständigen, zu korrigieren oder zu löschen\. Die zwischengespeicherten Daten sind spätestens \d+ Tage nach der letzten Bearbeitung der digitalen Eingabesysteme automatisch zu löschen\./
+    - 'heading "Absatz 3: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Legt die Zwecke fest, wann personenbezogene Daten verarbeitet werden können.
+      - listitem: Schreibt die Löschung personenbezogener Daten vor, was die Privatsphäre der Nutzer schützt und die Speicherung von Daten minimiert.
+    - paragraph: "(Prinzip: Datenschutz und Informationssicherheit schaffen Vertrauen)"
+    - paragraph:
+      - mark: (4) Elektronische Dokumente, die mithilfe digitaler Eingabesysteme erzeugt wurden, können abweichend von § 2 Absatz 1 der Elektronischer-Rechtsverkehr-Verordnung als strukturierter Datensatz übermittelt werden, sofern für diesen im Online-Verfahren eine automatisierte Bearbeitung durch das Gericht eröffnet ist.
+    - 'heading "Absatz 4: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Ermöglicht die strukturierte Datenübermittlung und die gemeinsame digitale Bearbeitung von Dokumenten, wodurch Verwaltungsprozesse effizienter werden und manuelle Arbeitsschritte entfallen.
+      - listitem: Nicht nur für die Verfahrensbeteiligten, sondern auch für die Gerichte wird ein digitales Verfahren geschaffen.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - heading /§ \d+ ZPO Digitale Strukturierung/ [level=3]
+    - paragraph:
+      - text: (1) Das Gericht kann Maßnahmen der Prozessleitung ergreifen, um den Streitstoff zu strukturieren.
+      - mark: /Für die Strukturierung nach Satz 1 können digitale Eingabesysteme nach § \d+ Absatz 2, strukturierte Datensätze oder elektronische Dokumente genutzt werden\./
+    - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Ermöglicht den Einsatz digitaler Eingabesysteme zur Aufbereitung des Streitstoffs.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - paragraph: (2) Das Gericht kann insbesondere
+    - list:
+      - listitem:
+        - mark: anordnen, dass die Parteien ihren jeweiligen weiteren Vortrag demjenigen der anderen Partei in digitaler Form gegenüberstellen
+        - text: ", und"
+      - listitem: den Parteien die Ergänzung oder Erläuterung ihres Vortrags durch Zuordnung von Eingabefeldern zum jeweiligen Streitstoff aufgeben; hiermit kann eine Frist zur Erklärung über bestimmte klärungsbedürftige Punkte verbunden werden.
+    - 'heading "Absatz 2: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Erlaubt den Gerichten, digitale Kommunikation anzuordnen.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - heading /§ \d+ ZPO Beweisaufnahme/ [level=3]
+    - paragraph:
+      - mark: /\(1\) In geeigneten Fällen kann das Gericht auf Antrag oder von Amts wegen abweichend von § \d+ Absatz 2 Satz 1 in Verbindung mit § \d+ die Beweisaufnahme auch durch Tonübertragung oder mithilfe anderer geeigneter digitaler Kommunikationsmittel gestatten/
+      - text: /oder anordnen\. § \d+ Absatz 2 Satz 2 bis 5 und Absatz 3 in Verbindung mit § \d+ bleibt unberührt\./
+    - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Beweisaufnahme wird durch digitale Kommunikationsmittel ermöglicht.
+      - listitem: Gewährleistet Technologieoffenheit durch die Verwendung breiter Begriffe wie „andere geeignete digitale Kommunikationsmittel” anstelle spezifischer Technologien.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - paragraph:
+      - mark: /\(2\) Das Gericht kann abweichend von § \d+ Absatz 1 in Verbindung mit § \d+ entscheidungserhebliche Tatsachen auch durch Aussagen von Zeugen und Auskünfte von Sachverständigen feststellen, die mittels Bild- und Tonübertragung, schriftlich, elektronisch, telefonisch oder mithilfe anderer geeigneter digitaler Kommunikationsmittel erfolgen\./
+      - text: /Eines Beweisbeschlusses nach § \d+ bis § \d+ in Verbindung mit § \d+ bedarf es nicht\. Den Parteien ist Gelegenheit zu geben, zu dem Ergebnis der Beweisaufnahme Stellung zu nehmen\./
+    - 'heading "Absatz 2: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Erlaubt digitale Kommunikationsmittel für Aussagen
+      - listitem: Erlaubt weiterhin nicht digitale Alternativen, um allen Menschen die Teilnahme zu ermöglichen
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - group: (3)
+    - heading /§ \d+ ZPO Entwicklung und Bereitstellung; Verordnungsermächtigungen/ [level=3]
+    - paragraph:
+      - text: (1) Im Online-Verfahren kann eine Kommunikationsplattform genutzt werden, die der bundeseinheitlichen Erprobung digitaler Kommunikations-, Austausch- und Übermittlungsformen zwischen den Verfahrensbeteiligten und mit dem Gericht dient.
+      - mark: /Die Kommunikationsplattform kann auch zur Bereitstellung oder gemeinschaftlichen Bearbeitung elektronischer Dokumente durch die Verfahrensbeteiligten und das Gericht genutzt werden\. Das Gericht kann in entsprechender Anwendung des § \d+ Maßnahmen der Prozessleitung ergreifen, um den Streitstoff unter Nutzung der Kommunikationsplattform zu strukturieren\./
+    - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Es wird die strukturierte Datenübermittlung und die gemeinsame digitale Bearbeitung von Dokumenten ermöglicht, wodurch Verwaltungsprozesse effizienter werden und manuelle Arbeitsschritte entfallen.
+      - listitem: Nicht nur für die Verfahrensbeteiligten, sondern auch für die Gerichte wird ein digitales Verfahren geschaffen.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - paragraph:
+      - mark: /\(2\) Die Kommunikationsplattform wird vom Bundesministerium der Justiz als Referenzimplementierung entwickelt und den Ländern zur Anwendung bei den nach § \d+ bestimmten Gerichten bundeseinheitlich bereitgestellt\. Die Länder können die Entwicklung und die bundeseinheitliche Bereitstellung der Kommunikationsplattform nach Satz 1 zur Anwendung bei den nach § \d+ bestimmten Gerichten übernehmen; entsprechendes gilt für die Bereitstellung weiterer Anwendungsmodule für die Zwecke nach Absatz 1\./
+      - text: Das Bundesministerium der Justiz regelt durch Rechtsverordnung mit Zustimmung des Bundesrates die technischen, organisatorischen und datenschutzrechtlichen Rahmenbedingungen für Entwicklung, Betrieb, Pflege und Weiterentwicklung der Kommunikationsplattform nach Satz 2 und ihrer Anwendungsmodule.
+    - 'heading "Absatz 2: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Die Entwicklung und bundeseinheitliche Bereitstellung von Referenzimplementierungen fördert die Nutzung etablierter und standardisierter Lösungen.
+    - paragraph: "(Prinzip: Etablierte Technologien ermöglichen effiziente Umsetzung)"
+    - paragraph:
+      - text: (3) Die nach Absatz 2 entwickelte Kommunikationsplattform ist über ein Justizportal des Bundes und der Länder für die Nutzer bereitzustellen.
+      - mark: Sie ist nach Maßgabe der Barrierefreie-Informationstechnik-Verordnung barrierefrei zu gestalten. Ferner ist bei der Gestaltung der Kommunikationsplattform deren Nutzerfreundlichkeit sowie eine einfache und intuitive Bedienbarkeit sicherzustellen.
+    - 'heading "Absatz 3: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Die digitale Eingabesysteme und die Kommunikationsplattform werden gemäß der Barrierefreie-Informationstechnik-Verordnung barrierefrei gestaltet, um die Inklusivität digitaler Angebote zu gewährleisten.
+      - listitem: Schreibt Nutzerfreundlichkeit für die Kommunikationsplattform vor.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - paragraph:
+      - mark: (4) Die Stelle, die die Kommunikationsplattform nach Absatz 2 bereitstellt, darf personenbezogene Daten nur verarbeiten, soweit dies für die Zwecke nach Absatz 1 erforderlich ist. Die Daten sind spätestens nach rechtskräftigem Abschluss oder nach sonstiger Beendigung des Verfahrens von der Kommunikationsplattform zu löschen.
+      - text: Elektronische Dokumente, Datensätze und sonstige Informationen aus dem über die Kommunikationsplattform geführten Verfahren sind zu den elektronisch geführten Prozessakten nach § 298a zu nehmen.
+    - 'heading "Absatz 4: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Legt die Zwecke fest, wann personenbezogene Daten verarbeitet werden können.
+      - listitem: Schreibt die Löschung personenbezogener Daten vor, was die Privatsphäre der Nutzer schützt und die Speicherung von Daten minimiert.
+    - paragraph: "(Prinzip: Datenschutz und Informationssicherheit schaffen Vertrauen)"
+    - paragraph:
+      - mark: (5) Das Bundesministerium der Justiz wird ermächtigt, durch Rechtsverordnung mit Zustimmung des Bundesrates die für die Datenübermittlung geltenden Standards und Dateiformate und die Ausgestaltung des Datenschutzes bei Nutzung der Kommunikationsplattform festzulegen.
+    - 'heading "Absatz 5: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Ermöglicht die Festlegung von Standards für die Datenübermittlung der Kommunikationsplattform durch Rechtsverordnung. Dadurch werden Interoperabilität und Datenaustausch begünstigt.
+    - paragraph: "(Prinzip: Datenwiederverwendung benötigt einheitliches Recht)"
+    - heading /§ \d+ ZPO Kommunikations-, Austausch- und Übermittlungsformen/ [level=3]
+    - paragraph:
+      - mark: /\(1\) Eine in diesem Gesetz angeordnete Schriftform kann durch unmittelbare Eingabe von Anträgen und Erklärungen der Verfahrensbeteiligten über die Kommunikationsplattform nach § \d+ ersetzt werden/
+      - text: ", sofern hierfür digitale Eingabesysteme zur Verfügung stehen und eines der folgenden Identifizierungsverfahren genutzt wird:"
+    - list:
+      - listitem: "für die Identifizierung von Rechtsanwälten: das Verfahren zum Zugang zum besonderen elektronischen Anwaltspostfach nach § 31a Absatz 3 Satz 1 der Bundesrechtsanwaltsordnung;"
+      - listitem:
+        - mark: "für die Identifizierung anderer Verfahrensbeteiligter: ein Verfahren über ein Nutzerkonto nach § 2 Absatz 5 in Verbindung mit § 3 Absatz 4 des Onlinezugangsgesetzes."
+    - paragraph: Wurde der Nachweis der Identität nach Satz 1 erbracht, so kann die spätere Authentisierung des Inhabers des Identitätsnachweises auch durch andere geeignete Authentisierungsmittel erfolgen.
+    - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Mit dem elektronischen Anwaltspostfach und den OZG-Nutzerkonten können bewährte Identifizierungsverfahren und bestehende Systeme genutzt werden.
+    - paragraph: "(Prinzip: Etablierte Technologien ermöglichen effiziente Umsetzung)"
+    - list:
+      - listitem: Ermöglicht die Ersetzung angeordneter Schriftformerfordernisse durch die Kommunikationsplattform.
+      - listitem: Diese Ersetzung erfolgt durch die Eingabe von Anträgen und Erklärungen der Verfahrensbeteiligten.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - paragraph:
+      - mark: (2) Eine in diesem Gesetz angeordnete Schriftform kann auch durch Übermittlung elektronischer Dokumente oder strukturierter Datensätze über die Kommunikationsplattform ersetzt werden
+      - text: ", sofern"
+    - list:
+      - listitem: ein Identifizierungsverfahren nach Absatz 1 genutzt wird,
+      - listitem:
+        - mark: bei der Datenübermittlung ein sicheres Verfahren verwendet wird, das die Authentizität und Integrität der Daten gewährleistet, und
+      - listitem:
+        - mark: für die elektronischen Dokumente oder strukturierten Datensätze auf der Kommunikationsplattform eine automatisierte Bearbeitung durch das Gericht eröffnet ist.
+    - 'heading "Absatz 2: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Die digitale Übermittlung von Dokumenten ermöglicht eine Kommunikation über die digitale Kommunikationsplattform.
+      - listitem: Schriftformerfordernisse werden durch die digitale Übermittlung ersetzt.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - list:
+      - listitem: Geht von einer automatisierten Bearbeitung der Daten aus.
+    - paragraph: "(Prinzip: Automatisierung basiert auf eindeutigen Regelungen)"
+    - paragraph: Stellt die Informationssicherheit sicher, indem sie die Anforderung eines sicheren Verfahrens stellt, das die Authentizität und Integrität der Daten gewährleistet.
+    - paragraph: "(Prinzip: Datenschutz und Informationssicherheit schaffen Vertrauen)"
+    - paragraph:
+      - mark: (3) Die Gerichte haben bei der digitalen Kommunikation mit den Verfahrensbeteiligten und bei der Bereitstellung von elektronischen Dokumenten zum Abruf ein sicheres Verfahren zu verwenden, das die Authentizität und Integrität der Daten gewährleistet.
+    - 'heading "Absatz 3: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Sichere Übermittlungswege und Verfahren gewährleisten, dass die Daten authentisch sind und nicht verändert wurden.
+    - paragraph: "(Prinzip: Datenschutz und Informationssicherheit schaffen Vertrauen)"
+    - group: (4)
+    - paragraph:
+      - text: /\(5\) Mit Zustimmung des Empfängers, die für das jeweilige Verfahren erteilt wird und nur mit Wirkung für die Zukunft widerruflich ist, kann abweichend von § \d+ Absatz 1 ein elektronisches Dokument auch zugestellt werden, indem es zum Datenabruf über die Kommunikationsplattform bereitgestellt wird\. Der Empfänger hat sich beim Datenabruf zu authentisieren\./
+      - mark: Die Zeitpunkte der Bereitstellung und des Abrufs sind dem Empfänger und dem Gericht automatisiert zu bestätigen.
+      - text: /§ \d+ Absatz 4 Satz 4 und 5 ist entsprechend anzuwenden\./
+    - 'heading "Absatz 5: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Schreibt automatisierte Bestätigung der Zustellung und des Abrufs vor.
+    - paragraph: "(Prinzip: Automatisierung basiert auf eindeutigen Regelungen)"
+    - heading /§ \d+ ZPO Umfang der Erprobung/ [level=3]
+    - paragraph:
+      - mark: (1) Das Bundesministerium der Justiz kann digitale Eingabesysteme als Referenzimplementierung entwickeln und bundeseinheitlich zur Erprobung bereitstellen, soweit diese dem elektronischen Erstellen von Anträgen oder Erklärungen nach § 129a Absatz 1 dienen.
+      - text: Satz 1 gilt nicht im Anwendungsbereich des Online-Verfahrens nach Abschnitt 2 dieses Buchs.
+    - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Durch die Entwicklung und bundeseinheitliche Bereitstellung von Referenzimplementierungen kann eine standardisierte Lösung zur Nachnutzung bereitgestellt werden.
+    - paragraph: "(Prinzip: Etablierte Technologien ermöglichen effiziente Umsetzung)"
+    - group: (2)
+  - heading "Sie möchten Ihr Beispiel hier sehen?" [level=2]
+  - paragraph:
+    - text: Wir nehmen gerne Vorschläge für Beispiele entgegen. Wenn Sie einen digitaltauglichen Regelungstext oder eine Visualisierung haben, nutzen Sie ganz einfach unser Formular. Dort können Sie Beispiele schnell selbst übermitteln.
+    - link "Vorschlag übermitteln":
+      - /url: https://docs.google.com/forms/d/1qlGk9fRqxs9QZq6h1nbQ0CRhvoxVv-1I3KVylOyGVhU/edit
+  - paragraph:
+    - text: Oder schreiben Sie uns eine E-Mail an
+    - link "digitalcheck@digitalservice.bund.de":
+      - /url: mailto:digitalcheck@digitalservice.bund.de?subject=Beispiel:%20Digitaltauglichkeit
+    - text: . Wir melden uns zeitnah bei Ihnen.
+  - heading "Sie haben Gesprächsbedarf zu Ihrem Vorhaben?" [level=2]
+  - paragraph:
+    - text: Bei inhaltlichen Anliegen zu Ihrem Regelungsvorhaben oder Fragen helfen wir Ihnen gerne weiter. Schreiben Sie uns über
+    - link "digitalcheck@digitalservice.bund.de":
+      - /url: mailto:digitalcheck@digitalservice.bund.de?subject=Gespr%C3%A4chsbedarf:%20digitalcheck.bund.de
+    - text: oder rufen Sie uns an unter
+    - link /\d+\/\d+ \d+ \d+ \d+/:
+      - /url: tel:+4915140767839
+    - text: .

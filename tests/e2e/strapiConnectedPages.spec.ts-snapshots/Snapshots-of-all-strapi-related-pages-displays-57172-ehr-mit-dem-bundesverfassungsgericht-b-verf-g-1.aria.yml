@@ -1,0 +1,92 @@
+- main:
+  - heading "Elektronischer Rechtsverkehr mit dem Bundesverfassungsgericht – BVerfGG" [level=1]
+  - paragraph: Hier finden Sie alles zur Digitaltauglichkeit dieser Regelung.
+  - paragraph: /Fassung vom \d+\. August \d+/
+  - paragraph: Ressort BMJV
+  - paragraph:
+    - text: Link
+    - link "Verkündetes Gesetz":
+      - /url: https://www.gesetze-im-internet.de/bverfgg/BJNR002430951.html
+  - tablist "Menü Navigation":
+    - tab "Formulierungen" [selected]
+  - tabpanel "Formulierungen":
+    - heading "Formulierungen aus der Regelung" [level=2]
+    - heading "§ 23a BVerfGG" [level=3]
+    - paragraph:
+      - mark: (1) Schriftlich einzureichende Anträge und Erklärungen sowie sonstige Schriftsätze und deren Anlagen können nach Maßgabe der folgenden Absätze als elektronische Dokumente beim Bundesverfassungsgericht eingereicht werden.
+    - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Ermöglicht elektronisches Einreichen der Dokumente.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - paragraph:
+      - mark: (2) Das elektronische Dokument muss für die Bearbeitung durch das Bundesverfassungsgericht geeignet sein. Für die Übermittlung und die Eignung zur Bearbeitung durch das Bundesverfassungsgericht gelten die in der Elektronischer-Rechtsverkehr-Verordnung geregelten technischen Rahmenbedingungen des elektronischen Rechtsverkehrs entsprechend.
+    - 'heading "Absatz 2: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Begünstigt eine effiziente technische Umsetzung, indem es die Nutzung oder Wiederverwendung eines geeigneten Datenstandards vorschreibt.
+    - list:
+      - listitem: Verweist mit der Elektronischer-Rechtsverkehr-Verordnung auf eine Regelung, die technische und rechtliche Aspekte zentral steuert.
+    - paragraph: "(Prinzip: Datenwiederverwendung benötigt einheitliches Recht)"
+    - paragraph:
+      - mark: (3) Das elektronische Dokument muss mit einer qualifizierten elektronischen Signatur der verantwortenden Person versehen sein oder von der verantwortenden Person signiert und auf einem sicheren Übermittlungsweg eingereicht werden.
+      - text: Satz 1 gilt nicht für Anlagen. Soll ein schriftlich einzureichender Antrag oder eine schriftlich einzureichende Erklärung eines Beteiligten oder eines Dritten als elektronisches Dokument eingereicht werden, so kann der unterschriebene Antrag oder die unterschriebene Erklärung in ein elektronisches Dokument übertragen und durch den Bevollmächtigten, den Vertreter oder den Beistand nach Satz 1 übermittelt werden.
+    - 'heading "Absatz 3: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Steigert den Schutz vor Fälschungen durch Verwendung eines geeigneten kryptografischen Verfahrens (qualifizierte elektronische Signatur).
+      - listitem: Führt zu erhöhter Informationssicherheit durch die Nutzung eines sicheren Übermittlungsweges (siehe Absatz 3). Dies schützt die Daten vor Veränderung und unerlaubter Einsicht während der Übertragung.
+    - paragraph: "(Prinzip: Datenschutz und Informationssicherheit schaffen Vertrauen)"
+    - group: (4)
+    - paragraph:
+      - text: (5) Ein elektronisches Dokument ist eingegangen, sobald es auf der für den Empfang bestimmten Einrichtung des Bundesverfassungsgerichts gespeichert ist.
+      - mark: Dem Absender ist eine automatisierte Bestätigung über den Zeitpunkt des Eingangs zu erteilen.
+    - 'heading "Absatz 5: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Entlastet die Verwaltung durch automatische Bestätigungen; eine Funktionalität, die von Nutzenden erwartet wird.
+    - paragraph: "(Prinzip: Automatisierung basiert auf eindeutigen Regelungen)"
+    - group: (6)
+    - heading /§ [\d,.]+[bkmBKM]+ BVerfGG/ [level=3]
+    - paragraph:
+      - text: (1) Soweit die handschriftliche Unterzeichnung durch den Richter, den Rechtspfleger oder den Urkundsbeamten der Geschäftsstelle vorgeschrieben ist,
+      - mark: genügt dieser Form die Aufzeichnung als elektronisches Dokument
+      - text: ", wenn die verantwortenden Personen am Ende des Dokuments ihren Namen hinzufügen und das Dokument mit einer qualifizierten elektronischen Signatur versehen. Der in Satz 1 genannten Form genügt auch ein elektronisches Dokument, in welches das handschriftlich unterzeichnete Schriftstück gemäß § 23e Absatz 2 Satz 4 übertragen worden ist."
+    - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Verhindert einen Medienbruch und erhöht die Nutzerfreundlichkeit durch das Ermöglichen von Alternativen zur handschriftlichen Unterzeichnung.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - heading "§ 23c BVerfGG" [level=3]
+    - paragraph:
+      - text: (1) Schriftlich einzureichende Anträge und Erklärungen sowie sonstige Schriftsätze und deren Anlagen, die durch einen Rechtsanwalt, durch eine Behörde oder durch eine juristische Person des öffentlichen Rechts einschließlich der von ihr zur Erfüllung ihrer öffentlichen Aufgaben gebildeten Zusammenschlüsse eingereicht werden,
+      - mark: sind als elektronische Dokumente zu übermitteln
+      - text: . Ist dies aus technischen Gründen vorübergehend nicht möglich, bleibt die Übermittlung nach den allgemeinen Vorschriften zulässig. Die vorübergehende Unmöglichkeit ist bei der Ersatzeinreichung oder unverzüglich danach glaubhaft zu machen;
+      - mark: auf Anforderung ist ein elektronisches Dokument nachzureichen
+      - text: .
+    - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+    - list:
+      - listitem: Macht elektronische Datenübermittlung zum Regelfall.
+      - listitem: Da der Normenadressat eine besonders befähigte Gruppe darstellt, kann hier im Regelfall komplett auf die Papierform verzichtet werden.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+    - heading "§ 23e BVerfGG" [level=3]
+    - group: (1)
+    - paragraph:
+      - mark: (2) Werden die Verfahrensakten elektronisch geführt, sind in Papierform vorliegende Schriftstücke und sonstige Unterlagen nach dem Stand der Technik zur Ersetzung der Urschrift in ein elektronisches Dokument zu übertragen.
+      - text: Es ist sicherzustellen, dass das elektronische Dokument mit den vorliegenden Schriftstücken und sonstigen Unterlagen bildlich und inhaltlich übereinstimmt. Das elektronische Dokument ist mit einem Übertragungsnachweis zu versehen, der das bei der Übertragung angewandte Verfahren und die bildliche und inhaltliche Übereinstimmung dokumentiert.
+      - mark: Wird ein von den verantwortenden Personen handschriftlich unterzeichnetes gerichtliches Schriftstück übertragen, ist der Übertragungsnachweis mit einer qualifizierten elektronischen Signatur des Urkundsbeamten der Geschäftsstelle zu versehen.
+      - text: Die in Papierform vorliegenden Schriftstücke und sonstigen Unterlagen können sechs Monate nach der Übertragung vernichtet werden, sofern sie nicht rückgabepflichtig sind.
+    - 'heading "Absatz 2: Warum ist dieses Beispiel gut?" [level=4]'
+    - paragraph: Ermöglicht eine ganzheitliche digitale Aktenführung.
+    - paragraph: "(Prinzip: Digitale Angebote für alle nutzbar gestalten)"
+  - heading "Sie möchten Ihr Beispiel hier sehen?" [level=2]
+  - paragraph:
+    - text: Wir nehmen gerne Vorschläge für Beispiele entgegen. Wenn Sie einen digitaltauglichen Regelungstext oder eine Visualisierung haben, nutzen Sie ganz einfach unser Formular. Dort können Sie Beispiele schnell selbst übermitteln.
+    - link "Vorschlag übermitteln":
+      - /url: https://docs.google.com/forms/d/1qlGk9fRqxs9QZq6h1nbQ0CRhvoxVv-1I3KVylOyGVhU/edit
+  - paragraph:
+    - text: Oder schreiben Sie uns eine E-Mail an
+    - link "digitalcheck@digitalservice.bund.de":
+      - /url: mailto:digitalcheck@digitalservice.bund.de?subject=Beispiel:%20Digitaltauglichkeit
+    - text: . Wir melden uns zeitnah bei Ihnen.
+  - heading "Sie haben Gesprächsbedarf zu Ihrem Vorhaben?" [level=2]
+  - paragraph:
+    - text: Bei inhaltlichen Anliegen zu Ihrem Regelungsvorhaben oder Fragen helfen wir Ihnen gerne weiter. Schreiben Sie uns über
+    - link "digitalcheck@digitalservice.bund.de":
+      - /url: mailto:digitalcheck@digitalservice.bund.de?subject=Gespr%C3%A4chsbedarf:%20digitalcheck.bund.de
+    - text: oder rufen Sie uns an unter
+    - link /\d+\/\d+ \d+ \d+ \d+/:
+      - /url: tel:+4915140767839
+    - text: .

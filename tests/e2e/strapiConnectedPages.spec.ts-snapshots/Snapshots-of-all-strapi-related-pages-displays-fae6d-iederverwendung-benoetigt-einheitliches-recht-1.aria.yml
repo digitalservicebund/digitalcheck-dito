@@ -1,0 +1,194 @@
+- main:
+  - heading "Die Prinzipien im Regelungstext" [level=1]
+  - paragraph: Hier finden Sie Regelungsbeispiele zur Anwendung der Prinzipien.
+  - tablist "Menü Navigation":
+    - tab "Digitale Angebote"
+    - tab "Datenwiederverwendung" [selected]
+    - tab "Etablierte Technologien"
+    - tab "Automatisierung"
+    - tab "Informationssicherheit und Datenschutz"
+  - mark: Prinzip
+  - heading "Datenwiederverwendung benötigt einheitliches Recht" [level=2]
+  - paragraph:
+    - text: Normadressatinnen und -adressaten sowie umsetzende Behörden sparen Kosten und Zeit, wenn das
+    - link "Once-Only-Prinzip":
+      - /url: https://www.cio.bund.de/Webs/CIO/DE/digitale-loesungen/digitale-verwaltung/registermodernisierung/registermodernisierung-node.html
+    - text: konsequent angewendet wird – also wenn Daten nur einmal angegeben und dann wiederverwendet werden. Die Grundlage dafür sind harmonisierte Rechtsbegriffe, ein datenschutzkonformer Austausch und die Berücksichtigung etablierter technischer Standards.
+  - separator
+  - heading "Entwurf eines Gesetzes zur Stärkung der Öffentlichen Gesundheit – BIPAM-ErrichtungsG" [level=3]
+  - link "Alle Beispiele zu dieser Regelung":
+    - /url: /beispiele/regelungen/entwurf-eines-gesetzes-zur-staerkung-der-oeffentlichen-gesundheit
+  - heading "§ 2 BIPAM–ErrichtungsG Aufgaben des Bundesinstituts" [level=3]
+  - group: (1)
+  - paragraph: "(2) Das Bundesinstitut nimmt Aufgaben nach Absatz 1, einschließlich der damit verbundenen Verarbeitung personenbezogener Gesundheitsdaten im Umfang der jeweils einschlägigen fachrechtlichen Bestimmungen, insbesondere auf folgenden Gebieten wahr:"
+  - list:
+    - listitem:
+      - mark: Beobachtung von gesundheitsrelevanten Faktoren und von gesundheitlichen Rahmenbedingungen
+    - listitem:
+      - mark: Gesundheitsberichterstattung des Bundes, einschließlich Gesundheitsmonitoring
+    - listitem:
+      - mark: Stärkung der Öffentlichen Gesundheit durch freiwillige Kooperation und Vernetzung mit Akteuren der Öffentlichen Gesundheit
+      - text: ","
+    - listitem: evidenzbasierte, zielgruppenspezifische, insbesondere auf vulnerable Bevölkerungsgruppen ausgerichtete Kommunikation im Zuständigkeitsbereich des Bundesministeriums für Gesundheit,
+    - listitem: Stärkung der Vorbeugung und Verhütung von Krankheiten sowie Stärkung der Gesundheitsförderung und der Gesundheitskompetenz in der Bevölkerung, jeweils im Rahmen der Zuständigkeit des Bundes,
+    - listitem: wissenschaftliche Forschung und Zusammenarbeit mit Institutionen auf nationaler, europäischer und internationaler Ebene, einschließlich der Unterstützung dieser Institutionen bei der Entwicklung von Leitlinien und Standards.
+  - paragraph: Besondere Vorschriften zur Bestimmung von Aufgaben bleiben hiervon unberührt, insbesondere die Aufgaben des Robert Koch-Instituts nach § 4 des Infektionsschutzgesetzes und nach § 2 Absatz 3 in Verbindung mit § 4 des BGA-Nachfolgegesetzes.
+  - 'heading "Absatz 2: Warum ist dieses Beispiel gut?" [level=4]'
+  - list:
+    - listitem: Fördert die Wiederverwendung von Daten durch standardisierte Gesundheitsberichterstattung und einheitliches Monitoring.
+    - listitem: Ermöglicht den effizienten Austausch vorhandener Daten durch die Vernetzung und Kooperation mit Akteuren der Öffentlichen Gesundheit. Vermeidet Doppelarbeit und schont Ressourcen.
+  - paragraph: "(Prinzip: Datenwiederverwendung benötigt einheitliches Recht)"
+  - group: (3)
+  - paragraph: /Fassung vom \d+\. Juli \d+/
+  - paragraph: Ressort BMG
+  - paragraph:
+    - text: Link
+    - link "Regelungsentwurf":
+      - /url: https://www.bundesgesundheitsministerium.de/service/gesetze-und-verordnungen/detail/gesetz-zur-staerkung-der-oeffentlichen-gesundheit.html
+  - heading "Elektronischer Rechtsverkehr mit dem Bundesverfassungsgericht – BVerfGG" [level=3]
+  - link "Alle Beispiele zu dieser Regelung":
+    - /url: /beispiele/regelungen/elektronischer-rechtsverkehr-mit-dem-bundesverfassungsgericht-b-verf-g
+  - heading "§ 23a BVerfGG" [level=3]
+  - group: (1)
+  - paragraph:
+    - mark: (2) Das elektronische Dokument muss für die Bearbeitung durch das Bundesverfassungsgericht geeignet sein. Für die Übermittlung und die Eignung zur Bearbeitung durch das Bundesverfassungsgericht gelten die in der Elektronischer-Rechtsverkehr-Verordnung geregelten technischen Rahmenbedingungen des elektronischen Rechtsverkehrs entsprechend.
+  - 'heading "Absatz 2: Warum ist dieses Beispiel gut?" [level=4]'
+  - list:
+    - listitem: Begünstigt eine effiziente technische Umsetzung, indem es die Nutzung oder Wiederverwendung eines geeigneten Datenstandards vorschreibt.
+  - list:
+    - listitem: Verweist mit der Elektronischer-Rechtsverkehr-Verordnung auf eine Regelung, die technische und rechtliche Aspekte zentral steuert.
+  - paragraph: "(Prinzip: Datenwiederverwendung benötigt einheitliches Recht)"
+  - group: (3) – (6)
+  - paragraph: /Fassung vom \d+\. August \d+/
+  - paragraph: Ressort BMJV
+  - paragraph:
+    - text: Link
+    - link "Verkündetes Gesetz":
+      - /url: https://www.gesetze-im-internet.de/bverfgg/BJNR002430951.html
+  - heading "Einrichtung Herkunftsnachweisregister für Gas, Wärme und Kälte - GWKHV" [level=3]
+  - link "Alle Beispiele zu dieser Regelung":
+    - /url: /beispiele/regelungen/einrichtung-herkunftsnachweisregister-fuer-gas-waerme-und-kaelte-gwkhv
+  - heading "§ 9 GWKHV Kontoeröffnung und -führung" [level=3]
+  - paragraph: "(1) Im Antrag auf Kontoeröffnung sind folgende Daten an das Umweltbundesamt zu übermitteln:"
+  - list:
+    - listitem:
+      - text: wenn der Antragsteller eine natürliche Person ist,
+      - list:
+        - listitem: sein Vorname und sein Nachname,
+        - listitem: seine Wohnanschrift bestehend aus Straße, Hausnummer, Postleitzahl, Ort und Staat unter Angabe von Landkreis und Bundesland,
+        - listitem: seine Telefonnummer,
+        - listitem: seine E-Mail-Adresse und
+        - listitem:
+          - mark: die Umsatzsteuer-Identifikationsnummer oder die Wirtschafts-Identifikationsnummer, soweit eine solche vergeben ist,
+    - listitem:
+      - text: wenn der Antragsteller eine juristische Person oder rechtsfähige Personengesellschaft ist,
+      - list:
+        - listitem: sein Name oder die Firma,
+        - listitem: sein Sitz,
+        - listitem: seine Telefonnummer,
+        - listitem: seine E-Mail-Adresse,
+        - listitem: die Angabe der gesetzlichen Vertreter und, sofern der Antragsteller im Handels-, Genossenschafts-, Partnerschafts- oder Vereinsregister oder in einem ähnlichen Register eingetragen ist, die Registernummer sowie die Angabe, bei welcher Stelle das Register geführt wird, und
+        - listitem:
+          - mark: die Umsatzsteuer-Identifikationsnummer oder die Wirtschafts-Identifikationsnummer, soweit eine solche vergeben ist.
+  - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+  - paragraph: Erfordert ein Identifikationsmerkmal (Umsatzsteuer-ID oder Wirtschafts-ID), was einen Abruf der restlichen geforderten Daten aus der Finanzverwaltung ermöglicht. Das legt den Grundstein für eine potentielle Datenabfrage (Erfüllung Once-Only Prinzip).
+  - paragraph: "(Prinzip: Datenwiederverwendung benötigt einheitliches Recht)"
+  - group: (2) – (3)
+  - heading /§ \d+ GWKH Überprüfung der gespeicherten Daten; Datenübermittlung/ [level=3]
+  - paragraph:
+    - mark: (1) Für einen effizienten Registerbetrieb gleicht das Umweltbundesamt die im Herkunftsnachweisregister für Gas und die im Herkunftsnachweisregister für Wärme oder Kälte gespeicherten Daten, einschließlich personenbezogener Daten, miteinander ab und tauscht sie zwischen diesen Registern aus
+    - text: im Hinblick auf die Erzeugung von
+  - list:
+    - listitem: Gas aus oder auf Basis von thermischer Energie sowie
+    - listitem: thermischer Energie aus Gas aus oder auf Basis von erneuerbarer Energie oder kohlenstoffarmem Gas.
+  - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+  - list:
+    - listitem: Verringert die Fehleranfälligkeit durch den Datenabgleich.
+    - listitem: Im folgenden Absatz wird der Abgleich und Austausch der Daten näher spezifiziert und erweitert.
+  - paragraph: "(Prinzip: Datenwiederverwendung benötigt einheitliches Recht)"
+  - group: (2) – (4)
+  - paragraph:
+    - mark: (5) Das Umweltbundesamt richtet eine elektronische Schnittstelle ein, die es ermöglicht, Daten an die nach Landesrecht zuständigen Behörden zu übermitteln
+    - text: /, soweit es für den Vollzug des Gebäudeenergiegesetzes vom 8\. August \d+ \(BGBl\. I S\. \d+\), das durch Artikel 1 des Gesetzes vom \d+\. Oktober \d+ \(BGBl\. \d+ I Nr\. \d+\) geändert worden ist, erforderlich ist\. Absatz 4 Satz 2 bis 5 ist entsprechend anzuwenden\./
+  - 'heading "Absatz 5: Warum ist dieses Beispiel gut?" [level=4]'
+  - list:
+    - listitem: Vermeidet durch die Bereitstellung einer Schnittstelle doppelte Datenerhebung und ermöglicht die Wiederverwendung des Registers.
+    - listitem: Die elektronische Schnittstelle stellt sicher, dass die Daten immer aktuell sind und der Zugriff protokolliert ist. Dieses Vorgehen ist dem Kopieren/Duplizieren von Daten vorzuziehen.
+  - paragraph: "(Prinzip: Datenwiederverwendung benötigt einheitliches Recht)"
+  - paragraph: /Fassung vom \d+\. Januar \d+/
+  - paragraph: Ressort BMWE
+  - paragraph:
+    - text: Link
+    - link "Verkündetes Gesetz":
+      - /url: https://www.gesetze-im-internet.de/gwkhv/BJNR08B0A0024.html
+  - heading "Modernisierung des Postrechts – PostG" [level=3]
+  - link "Alle Beispiele zu dieser Regelung":
+    - /url: /beispiele/regelungen/modernisierung-des-postrechts
+  - heading /§ \d+ PostG Digitaler Atlas zur Postversorgung, Verordnungsermächtigung/ [level=3]
+  - paragraph:
+    - text: (1) Die Bundesnetzagentur führt einen digitalen Atlas zur Postversorgung.
+    - mark: Der digitale Atlas dient der Transparenz für die Nutzer hinsichtlich der zur Verfügung stehenden Annahme- und Zustellstrukturen einschließlich des jeweiligen Produktangebots und der Erfassung, Aufbereitung und Veröffentlichung von Postinfrastrukturdaten durch die Bundesnetzagentur.
+    - text: Die Bundesnetzagentur stellt den digitalen Atlas im Internet unentgeltlich bereit.
+  - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+  - list:
+    - listitem: Digitale Erfassung und Veröffentlichung von Postinfrastrukturdaten im digitalen Atlas ermöglichen einfacheren Datenaustausch und Weiterverarbeitung zwischen Behörden.
+  - list:
+    - listitem: Daten stehen als Open Data bereit und können von Forschung, Behörden und Nutzern nachgenutzt werden.
+  - paragraph: "(Prinzip: Datenwiederverwendung benötigt einheitliches Recht)"
+  - group: (2)
+  - paragraph:
+    - text: (3) Anbieter sind verpflichtet, der Bundesnetzagentur die Informationen nach Absatz 2 auf Anforderung zu übermitteln. Die Bundesnetzagentur kann durch Allgemeinverfügung geeignete Vorgaben machen, in welcher Form, in welchem technischen Format und in welchem Detailgrad die Informationen nach Absatz 2 zu übermitteln sind und in welchen Zeitintervallen die Informationen zu aktualisieren sind.
+    - mark: /Soweit möglich greift die Bundesnetzagentur auf die Daten, die ihr nach § \d+ Absatz 1 übermittelt werden, zurück\./
+  - 'heading "Absatz 3: Warum ist dieses Beispiel gut?" [level=4]'
+  - paragraph: /Die Bundesnetzagentur nutzt bereits gemeldete Daten \(z[\d,.]+[bkmBKM]+\. zu Filialen und Stationen\) für den Digitalen Atlas erneut\. Das reduziert den Erfassungsaufwand für Anbieter und Verwaltung und entspricht dem Once-Only-Prinzip \(Nachnutzung\)\./
+  - paragraph: "(Prinzip: Datenwiederverwendung benötigt einheitliches Recht)"
+  - group: (4) – (5)
+  - heading /§ \d+ PostG Datennutzung/ [level=3]
+  - paragraph:
+    - text: (1) Unbeschadet spezialgesetzlicher Regelungen ist die Bundesnetzagentur berechtigt, ihr vorliegende, aufgrund einer speziellen Ermächtigungsgrundlage erhobene Daten
+    - mark: auch zur Erfüllung weiterer gesetzlicher Aufgaben auszuwerten und zu nutzen
+    - text: /\. Dem steht die in § \d+ Absatz 2 Satz 2 und 3 genannte Zweckbestimmung nicht entgegen\./
+  - 'heading "Absatz 1: Warum ist dieses Beispiel gut?" [level=4]'
+  - paragraph: Die Möglichkeit wird eröffnet, Daten für weitere Zwecke zu verwenden, solange eine Rechtsgrundlage existiert.
+  - paragraph: "(Prinzip: Datenwiederverwendung benötigt einheitliches Recht)"
+  - group: (2) – (3)
+  - paragraph: Ressort BMWE
+  - paragraph:
+    - text: Link
+    - link "Verkündetes Gesetz":
+      - /url: https://www.gesetze-im-internet.de/postg_2024/BJNR0EC0B0024.html
+  - heading "Entwurf eines Gesetzes zur Entwicklung und Erprobung eines Online-Verfahrens in der Zivilgerichtsbarkeit" [level=3]
+  - link "Alle Beispiele zu dieser Regelung":
+    - /url: /beispiele/regelungen/entwurf-eines-gesetzes-zur-entwicklung-und-erprobung-eines-online-verfahrens-in-der-zivilgerichtsbarkeit
+  - heading /§ \d+ ZPO Entwicklung und Bereitstellung; Verordnungsermächtigungen/ [level=3]
+  - group: (1) – (4)
+  - paragraph:
+    - mark: (5) Das Bundesministerium der Justiz wird ermächtigt, durch Rechtsverordnung mit Zustimmung des Bundesrates die für die Datenübermittlung geltenden Standards und Dateiformate und die Ausgestaltung des Datenschutzes bei Nutzung der Kommunikationsplattform festzulegen.
+  - 'heading "Absatz 5: Warum ist dieses Beispiel gut?" [level=4]'
+  - paragraph: Ermöglicht die Festlegung von Standards für die Datenübermittlung der Kommunikationsplattform durch Rechtsverordnung. Dadurch werden Interoperabilität und Datenaustausch begünstigt.
+  - paragraph: "(Prinzip: Datenwiederverwendung benötigt einheitliches Recht)"
+  - paragraph: /Fassung vom \d+\. September \d+/
+  - paragraph: Ressort BMJV
+  - paragraph:
+    - text: Link
+    - link "Text im Parlament":
+      - /url: https://dip.bundestag.de/vorgang/gesetz-zur-entwicklung-und-erprobung-eines-online-verfahrens-in-der-zivilgerichtsbarkeit/315283
+  - heading "Sie möchten Ihr Beispiel hier sehen?" [level=2]
+  - paragraph:
+    - text: Wir nehmen gerne Vorschläge für Beispiele entgegen. Wenn Sie einen digitaltauglichen Regelungstext oder eine Visualisierung haben, nutzen Sie ganz einfach unser Formular. Dort können Sie Beispiele schnell selbst übermitteln.
+    - link "Vorschlag übermitteln":
+      - /url: https://docs.google.com/forms/d/1qlGk9fRqxs9QZq6h1nbQ0CRhvoxVv-1I3KVylOyGVhU/edit
+  - paragraph:
+    - text: Oder schreiben Sie uns eine E-Mail an
+    - link "digitalcheck@digitalservice.bund.de":
+      - /url: mailto:digitalcheck@digitalservice.bund.de?subject=Beispiel:%20Digitaltauglichkeit
+    - text: . Wir melden uns zeitnah bei Ihnen.
+  - heading "Sie haben Gesprächsbedarf zu Ihrem Vorhaben?" [level=2]
+  - paragraph:
+    - text: Bei inhaltlichen Anliegen zu Ihrem Regelungsvorhaben oder Fragen helfen wir Ihnen gerne weiter. Schreiben Sie uns über
+    - link "digitalcheck@digitalservice.bund.de":
+      - /url: mailto:digitalcheck@digitalservice.bund.de?subject=Gespr%C3%A4chsbedarf:%20digitalcheck.bund.de
+    - text: oder rufen Sie uns an unter
+    - link /\d+\/\d+ \d+ \d+ \d+/:
+      - /url: tel:+4915140767839
+    - text: .

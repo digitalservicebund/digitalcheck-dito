@@ -17,7 +17,7 @@ import {
   fetchStrapiData,
   paragraphFields,
   prinzipCoreFields,
-  PrinzipWithUmsetzungen,
+  PrinzipWithBeispielvorhaben,
   Regelungsvorhaben,
   visualisationFields,
 } from "~/utils/strapiData.server";
@@ -45,6 +45,12 @@ query GetRegelungsvorhabens($slug: String!) {
     LinkRegelungstext
     NKRStellungnahmeLink
     GesetzStatus
+    Paragraphen {
+      ...ParagraphFields
+    }
+    Visualisierungen {
+      ...VisualisationFields
+    }
     Digitalchecks {
       documentId
       Titel
@@ -54,12 +60,6 @@ query GetRegelungsvorhabens($slug: String!) {
       EinschaetzungKommunikation
       EinschaetzungWiederverwendung
       NKRStellungnahmeDCText
-      Paragraphen {
-        ...ParagraphFields
-      }
-      Visualisierungen {
-        ...VisualisationFields
-      }
     }
   }
 }`;
@@ -84,7 +84,120 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
 
 export default function Gesetz() {
   const regelung = useLoaderData<typeof loader>();
-  const principles = useOutletContext<PrinzipWithUmsetzungen[]>();
+  const principles = useOutletContext<PrinzipWithBeispielvorhaben[]>();
+
+  const tabsData: TabItem[] = [];
+
+  // ----- Formulierungen / Prinziperfüllungen -----
+  if (regelung.Paragraphen.length > 0) {
+    tabsData.push({
+      title: examplesRegelungen.principles.tabName,
+      content: (
+        <>
+          {regelung.GesetzStatus !== "Verkuendetes_Gesetz_aktuelle_Fassung" && (
+            <InlineNotice
+              className="mb-40"
+              title={examplesRegelungen.infoTitle}
+              look="tips"
+              tagName="h2"
+              content={examplesRegelungen.infoText}
+            />
+          )}
+          <Heading
+            id={slugify(examplesRegelungen.principles.title)}
+            tagName="h2"
+            look="ds-heading-02-bold"
+            className="pb-40"
+          >
+            {examplesRegelungen.principles.title}
+          </Heading>
+          <ParagraphList
+            paragraphs={regelung.Paragraphen}
+            principlesToShow={principles}
+          />
+        </>
+      ),
+    });
+  }
+
+  // ----- Visualisierungen -----
+  if (regelung.Visualisierungen.length > 0) {
+    tabsData.push({
+      title: examplesRegelungen.visualisations.tabName,
+      content: (
+        <div className="ds-stack ds-stack-32">
+          <Header
+            heading={{
+              id: slugify(examplesRegelungen.visualisations.title),
+              text: examplesRegelungen.visualisations.title,
+              tagName: "h2",
+              look: "ds-heading-02-bold",
+              className: "pb-40",
+            }}
+            content={{
+              markdown: examplesRegelungen.visualisations.subtitle,
+            }}
+          />
+          {regelung.Visualisierungen.map((visualisierung) => (
+            <VisualisationItem
+              key={visualisierung.Bild.documentId}
+              visualisierung={visualisierung}
+            />
+          ))}
+        </div>
+      ),
+    });
+  }
+
+  // ----- NKR Stellungnahme -----
+  if (
+    regelung.Digitalchecks.some(
+      ({ NKRStellungnahmeDCText }) => !!NKRStellungnahmeDCText,
+    )
+  ) {
+    tabsData.push({
+      title: examplesRegelungen.nkr.tabName,
+      content: (
+        <>
+          <Header
+            heading={{
+              id: slugify(examplesRegelungen.nkr.title),
+              text: examplesRegelungen.nkr.title,
+              tagName: "h2",
+              look: "ds-heading-02-bold",
+              className: "pb-40",
+            }}
+            content={{
+              markdown: examplesRegelungen.nkr.subtitle,
+            }}
+          />
+          {regelung.Digitalchecks.filter(
+            ({ NKRStellungnahmeDCText }) => !!NKRStellungnahmeDCText,
+          ).map((digitalcheck, i) => (
+            <div
+              className="my-32 border-l-4 border-gray-400 pl-8 italic"
+              key={`digitalcheck-${i}`}
+            >
+              <BlocksRenderer content={digitalcheck.NKRStellungnahmeDCText!} />
+            </div>
+          ))}
+          {regelung.NKRStellungnahmeLink && (
+            <div>
+              {examplesRegelungen.nkr.linkText}
+              <CustomLink
+                target="_blank"
+                to={regelung.NKRStellungnahmeLink}
+                rel="noreferrer"
+              >
+                NKR Stellungnahme
+              </CustomLink>
+            </div>
+          )}
+        </>
+      ),
+    });
+  }
+
   return (
     <>
       <Hero
@@ -128,124 +241,14 @@ export default function Gesetz() {
         </Container>
       </div>
 
-      {regelung.Digitalchecks.map((digitalcheck, index) => {
-        const tabsData: TabItem[] = [];
+      <Container className="ds-stack ds-stack-40 pb-80">
+        {/* TODO: how to handle multiple digitalchecks? */}
+        {/* <Heading tagName="h2" look="ds-heading-03-bold" className="mb-24">
+          {regelung.Titel}
+        </Heading> */}
 
-        // ----- Formulierungen / Prinziperfüllungen -----
-        if (digitalcheck.Paragraphen.length > 0) {
-          tabsData.push({
-            title: examplesRegelungen.principles.tabName,
-            content: (
-              <>
-                {regelung.GesetzStatus !==
-                  "Verkuendetes_Gesetz_aktuelle_Fassung" && (
-                  <InlineNotice
-                    className="mb-40"
-                    title={examplesRegelungen.infoTitle}
-                    look="tips"
-                    tagName="h2"
-                    content={examplesRegelungen.infoText}
-                  />
-                )}
-                <Heading
-                  id={`${slugify(examplesRegelungen.principles.title)}-${index}`}
-                  tagName="h2"
-                  look="ds-heading-02-bold"
-                  className="pb-40"
-                >
-                  {examplesRegelungen.principles.title}
-                </Heading>
-                <ParagraphList
-                  paragraphs={digitalcheck.Paragraphen}
-                  principlesToShow={principles}
-                />
-              </>
-            ),
-          });
-        }
-
-        // ----- Visualisierungen -----
-        if (digitalcheck.Visualisierungen.length > 0) {
-          tabsData.push({
-            title: examplesRegelungen.visualisations.tabName,
-            content: (
-              <div className="ds-stack ds-stack-32">
-                <Header
-                  heading={{
-                    id: `${slugify(examplesRegelungen.visualisations.title)}-${index}`,
-                    text: examplesRegelungen.visualisations.title,
-                    tagName: "h2",
-                    look: "ds-heading-02-bold",
-                    className: "pb-40",
-                  }}
-                  content={{
-                    markdown: examplesRegelungen.visualisations.subtitle,
-                  }}
-                />
-                {digitalcheck.Visualisierungen.map((visualisierung) => (
-                  <VisualisationItem
-                    key={visualisierung.Bild.documentId}
-                    visualisierung={visualisierung}
-                  />
-                ))}
-              </div>
-            ),
-          });
-        }
-
-        // ----- NKR Stellungnahme -----
-        if (digitalcheck.NKRStellungnahmeDCText) {
-          tabsData.push({
-            title: examplesRegelungen.nkr.tabName,
-            content: (
-              <>
-                <Header
-                  heading={{
-                    id: `${slugify(examplesRegelungen.nkr.title)}-${index}`,
-                    text: examplesRegelungen.nkr.title,
-                    tagName: "h2",
-                    look: "ds-heading-02-bold",
-                    className: "pb-40",
-                  }}
-                  content={{
-                    markdown: examplesRegelungen.nkr.subtitle,
-                  }}
-                />
-                <div className="my-32 border-l-4 border-gray-400 pl-8 italic">
-                  <BlocksRenderer
-                    content={digitalcheck.NKRStellungnahmeDCText}
-                  />
-                </div>
-                {regelung.NKRStellungnahmeLink && (
-                  <div>
-                    {examplesRegelungen.nkr.linkText}
-                    <CustomLink
-                      target="_blank"
-                      to={regelung.NKRStellungnahmeLink}
-                      rel="noreferrer"
-                    >
-                      NKR Stellungnahme
-                    </CustomLink>
-                  </div>
-                )}
-              </>
-            ),
-          });
-        }
-        return (
-          <Container
-            key={digitalcheck.documentId}
-            className="ds-stack ds-stack-40 pb-80"
-          >
-            {regelung.Digitalchecks.length > 1 && digitalcheck.Titel && (
-              <Heading tagName="h2" look="ds-heading-03-bold" className="mb-24">
-                {digitalcheck.Titel}
-              </Heading>
-            )}
-            <Tabs tabs={tabsData} />
-          </Container>
-        );
-      })}
+        {tabsData.length > 0 && <Tabs tabs={tabsData} />}
+      </Container>
     </>
   );
 }
