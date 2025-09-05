@@ -74,7 +74,7 @@
     "@types/react-dom": "^19.1.8",
     "autoprefixer": "^10.4.21",
     "dotenv": "^17.2.1",
-    "eslint": "^9.34.0",
+    "eslint": "^9.35.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
