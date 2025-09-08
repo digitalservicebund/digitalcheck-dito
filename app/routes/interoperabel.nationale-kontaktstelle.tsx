@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import Badge from "~/components/Badge.tsx";
-import BulletList from "~/components/BulletList.tsx";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
@@ -8,6 +7,7 @@ import ImageZoomable from "~/components/ImageZoomable";
 import InfoBox from "~/components/InfoBox";
 import RichText from "~/components/RichText";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
+import Timeline from "~/components/Timeline";
 import { spoc } from "~/resources/content/interoperabel-nationale-kontaktstelle";
 import {
   ROUTE_INTEROPERABILITY,
@@ -21,13 +21,11 @@ export function meta() {
   return constructMetaTitle(ROUTE_INTEROPERABILITY_SPOC.title);
 }
 
-type TimelineItemProps = { children?: ReactNode };
-
-function TimelineItem({ children }: Readonly<TimelineItemProps>) {
+function SPoCTimelineItem({ children }: Readonly<{ children?: ReactNode }>) {
   return (
-    <BulletList.Item bullet className="mt-4 flex flex-col gap-16">
+    <Timeline.Item bullet className="mt-4 flex flex-col gap-16">
       {children}
-    </BulletList.Item>
+    </Timeline.Item>
   );
 }
 
@@ -77,8 +75,8 @@ export default function SinglePointOfContact() {
               text="Aktueller Stand der Integration in den Digitalcheck"
               className="mb-8"
             />
-            <BulletList>
-              <TimelineItem>
+            <Timeline>
+              <SPoCTimelineItem>
                 <Badge look="gray">Aktuell</Badge>
                 <h3 className="ds-subhead hyphens-none">
                   Methoden für Digitaltauglichkeit und Interoperabilität
@@ -101,8 +99,8 @@ export default function SinglePointOfContact() {
                     className: "max-w-a11y",
                   }}
                 />
-              </TimelineItem>
-              <TimelineItem>
+              </SPoCTimelineItem>
+              <SPoCTimelineItem>
                 <Badge look="gray">03.07.2025</Badge>
                 <Heading tagName="h3" look="hyphens-none ds-subhead">
                   Über 100 Teilnehmende in acht Online-Workshops
@@ -114,8 +112,8 @@ export default function SinglePointOfContact() {
                   Digitalcheck als frühzeitig Denkwerkzeug nutzen können, um
                   Gesetze besser und umsetzbarer zu gestalten.
                 </p>
-              </TimelineItem>
-              <TimelineItem>
+              </SPoCTimelineItem>
+              <SPoCTimelineItem>
                 <Badge look="gray">25.06.2025</Badge>
                 <div className="mt-4 flex flex-col gap-16">
                   <h3 className="ds-subhead hyphens-none">
@@ -135,8 +133,8 @@ export default function SinglePointOfContact() {
                     className="max-w-a11y"
                   />
                 </div>
-              </TimelineItem>
-              <TimelineItem>
+              </SPoCTimelineItem>
+              <SPoCTimelineItem>
                 <Badge look="gray">15.05.2025</Badge>
 
                 <h3 className="ds-subhead hyphens-none">
@@ -148,8 +146,8 @@ export default function SinglePointOfContact() {
                       Die [5 Prinzipien für digitaltaugliche Gesetzgebung](${ROUTE_METHODS_PRINCIPLES.url}) sind überarbeitet und entsprechen sowohl den Anforderungen der Digitaltauglichkeit als auch der Interoperabilität. 
                       `}
                 />
-              </TimelineItem>
-              <TimelineItem>
+              </SPoCTimelineItem>
+              <SPoCTimelineItem>
                 <Badge look="gray">10.01.2025</Badge>
                 <h3 className="ds-subhead hyphens-none">
                   Verordnung tritt in Kraft und erste Änderungen sind im
@@ -164,15 +162,15 @@ export default function SinglePointOfContact() {
                       - Bereitstellung einer [Informationsseite](${ROUTE_INTEROPERABILITY.url}) zum Thema Interoperabilität für Legistinnen und Legisten.
         `}
                 />
-              </TimelineItem>
-              <TimelineItem>
+              </SPoCTimelineItem>
+              <SPoCTimelineItem>
                 <Badge look="gray">13.03.2024</Badge>
                 <h3 className="ds-subhead">
                   Verordnung für ein interoperables Europa wird vom europäischen
                   Parlament verabschiedet
                 </h3>
-              </TimelineItem>
-            </BulletList>
+              </SPoCTimelineItem>
+            </Timeline>
           </Container>
         </>
       ),

@@ -1,4 +1,3 @@
-import BulletList from "~/components/BulletList.tsx";
 import { ButtonLinkProps } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
@@ -9,6 +8,7 @@ import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
 import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import SupportBanner from "~/components/SupportBanner";
+import Timeline from "~/components/Timeline.tsx";
 import { methods } from "~/resources/content/methoden";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import { ROUTE_METHODS } from "~/resources/staticRoutes";
@@ -26,32 +26,34 @@ const renderStep = (
 
   if (step.isSubstep)
     return (
-      <BulletList.Item
+      <Timeline.Item
         key={step.headline.text}
         bullet
         aria-labelledby={headingId}
       >
-        <InfoBox
-          look="method"
-          heading={{
+        <Timeline.ItemContent
+          backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
+          headline={{
             text: step.headline.text,
             look: "ds-heading-03-bold",
             id: headingId,
           }}
-          content={step.text}
           buttons={step.buttons}
+          content={step.text}
         />
-      </BulletList.Item>
+      </Timeline.Item>
     );
   return (
-    <BulletList.Item
+    <Timeline.Item
       className="mt-4 space-y-16"
       key={step.headline.text}
       aria-labelledby={headingId}
     >
-      <h2 id={headingId}>{step.headline.text}</h2>
-      <RichText markdown={step.text} />
-    </BulletList.Item>
+      <Timeline.ItemContent
+        content={step.text}
+        headline={{ ...step.headline, id: headingId }}
+      />
+    </Timeline.Item>
   );
 };
 
@@ -61,7 +63,7 @@ export default function Methoden() {
       <Hero subtitle={methods.subtitle} title={methods.title} />
 
       <Container className="my-80 py-0">
-        <BulletList>{methods.steps.items.map(renderStep)}</BulletList>
+        <Timeline>{methods.steps.items.map(renderStep)}</Timeline>
       </Container>
 
       <Container className="my-80 space-y-40 py-0">

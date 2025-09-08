@@ -11,6 +11,7 @@ fileignoreconfig:
   checksum: 67ac59339b7e352d70d4a236867f8a96d4f55d9d94b11455c3ebd89197e75aea
 allowed_patterns:
   - <[^>]+?\bkey=\{.*?\} # Allow <JSXElement ... key={...} patterns
+  - :.+key:.+ # allow type definitions that have "key"
   - passen
   - Anpassungen
   - Pass\s # Allow "Pass " followed by a space
