@@ -61,7 +61,7 @@ const PageHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
 
-  // Handle esc key
+  // Handle escape key, to close open dropdowns
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -151,7 +151,10 @@ const PageHeader = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="flex items-center max-lg:hidden">
+          <nav
+            className="flex items-center max-lg:hidden"
+            data-testid="desktop-nav"
+          >
             {header.items.map((item) => renderDropdownItem(item, "desktop"))}
           </nav>
 
