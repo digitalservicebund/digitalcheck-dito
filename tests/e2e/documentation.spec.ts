@@ -3,7 +3,7 @@ import { ROUTE_DOCUMENTATION } from "~/resources/staticRoutes";
 
 test.describe("documentation process", () => {
   test("downloading documentation document works", async ({ page }) => {
-    await page.goto(ROUTE_DOCUMENTATION.url);
+    await page.goto(ROUTE_DOCUMENTATION.url, { waitUntil: "domcontentloaded" });
 
     const downloadPromise = page.waitForEvent("download");
     await page
