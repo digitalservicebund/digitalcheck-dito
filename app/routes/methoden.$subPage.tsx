@@ -5,6 +5,7 @@ import Card from "~/components/Card";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Hero from "~/components/Hero";
+import Image from "~/components/Image.tsx";
 import InfoBox from "~/components/InfoBox";
 import { methodsITSystems } from "~/resources/content/methode-it-systeme-erfassen";
 import { methodsTechnicalFeasibility } from "~/resources/content/methode-technische-umsetzbarkeit";
@@ -48,8 +49,10 @@ export function loader({ params }: Route.LoaderArgs) {
   return { route };
 }
 
-export function meta({ data }: Route.MetaArgs) {
-  return constructMetaTitle(data ? data.route.title : ROUTE_METHODS.title);
+export function meta({ loaderData }: Route.MetaArgs) {
+  return constructMetaTitle(
+    loaderData ? loaderData.route.title : ROUTE_METHODS.title,
+  );
 }
 
 export default function Index() {
@@ -79,13 +82,14 @@ export default function Index() {
         {content.boxes.map((box) => (
           <Card
             key={box.title}
-            image={{ url: box.image.src, alternativeText: box.image.alt }}
             heading={{ text: box.title, look: "ds-heading-03-reg" }}
             badge={{ text: box.label, Icon: box.icon }}
             content={{ markdown: box.text }}
             buttons={"buttons" in box ? box.buttons : []}
             className="px-96 py-64 max-sm:px-16 max-sm:py-32"
-          />
+          >
+            <Image url={box.image.src} alternativeText={box.image.alt} />
+          </Card>
         ))}
       </Container>
       {"tip" in content && (
