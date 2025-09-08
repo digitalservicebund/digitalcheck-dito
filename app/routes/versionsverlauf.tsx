@@ -26,8 +26,8 @@ export default function VersionHistory() {
 
       <Container>
         <Timeline>
-          {historyItems.map((item) => (
-            <Timeline.Item bullet key={item.key}>
+          {historyItems.map(({ key, ...item }) => (
+            <Timeline.Item bullet key={key}>
               <Timeline.ItemContent {...item} />
             </Timeline.Item>
           ))}

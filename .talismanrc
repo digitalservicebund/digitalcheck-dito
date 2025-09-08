@@ -16,6 +16,7 @@ allowed_patterns:
   - <[^>]+?\bkey=\{.*?\} # Allow <JSXElement ... key={...} patterns
   - :.+key:.+ # allow type definitions that have "key"
   - escape\skey
+  - \{\skey, # allow destructuring of key attribute
   - passen
   - Anpassungen
   - Pass\s # Allow "Pass " followed by a space
