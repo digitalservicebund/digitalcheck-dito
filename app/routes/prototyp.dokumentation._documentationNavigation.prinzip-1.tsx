@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -16,6 +17,7 @@ import {
   ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_2,
 } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
+import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 
 const { principles, nextButton } = prototypeDocumentation;
 const { principle1, radioOptions } = principles;
@@ -105,27 +107,25 @@ export default function PrototypeDocumentationPrinciple1() {
                       label={principles.inputs.explanation.label}
                     />
                     {index < examples.length - 1 && examples.length > 1 && (
-                      <ButtonContainer
-                        buttons={[
-                          {
-                            text: "Beispiel entfernen",
-                            look: "tertiary",
-                            onClick: () => removeExample(example.id),
-                          },
-                        ]}
-                      />
+                      <ButtonContainer>
+                        <Button
+                          look="tertiary"
+                          onClick={() => removeExample(example.id)}
+                        >
+                          Beispiel entfernen
+                        </Button>
+                      </ButtonContainer>
                     )}
                     {index === examples.length - 1 && (
-                      <ButtonContainer
-                        buttons={[
-                          {
-                            text: "Weitere Referenz hinzufügen",
-                            look: "tertiary",
-                            onClick: addExample,
-                            type: "button",
-                          },
-                        ]}
-                      />
+                      <ButtonContainer>
+                        <Button
+                          onClick={addExample}
+                          type="button"
+                          look="tertiary"
+                        >
+                          Weitere Referenz hinzufügen
+                        </Button>
+                      </ButtonContainer>
                     )}
                     <hr className="mt-20 mb-20 border-t-[2px] border-gray-400" />
                   </div>
@@ -139,8 +139,8 @@ export default function PrototypeDocumentationPrinciple1() {
         </fieldset>
       </form>
 
-      <ButtonContainer
-        buttons={[
+      {renderButtonContainer(
+        [
           {
             text: nextButton,
             href: ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_2.url,
@@ -150,9 +150,9 @@ export default function PrototypeDocumentationPrinciple1() {
             href: ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION.url,
             look: "tertiary",
           },
-        ]}
-        className="mt-40"
-      />
+        ],
+        { className: "mt-40" },
+      )}
     </Container>
   );
 }

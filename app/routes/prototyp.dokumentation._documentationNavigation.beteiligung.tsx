@@ -1,3 +1,4 @@
+import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
@@ -48,20 +49,14 @@ export default function PrototypeDocumentationParticipation1() {
           <Textarea name="explanation" label={textfieldResultsLabel} />
         </fieldset>
       </form>
-      <ButtonContainer
-        buttons={[
-          {
-            text: nextButton,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_1.url,
-          },
-          {
-            text: general.buttonBack.text,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION_META.url,
-            look: "tertiary",
-          },
-        ]}
-        className="pt-40"
-      />
+      <ButtonContainer className="pt-40">
+        <Button href={ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_1.url}>
+          {nextButton}
+        </Button>
+        <Button href={ROUTE_PROTOTYPE_DOCUMENTATION_META.url} look="tertiary">
+          {general.buttonBack.text}
+        </Button>
+      </ButtonContainer>
     </Container>
   );
 }

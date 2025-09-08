@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -105,27 +106,26 @@ export default function PrototypeDocumentationPrinciple3() {
                       label={principles.inputs.explanation.label}
                     />
                     {index < examples.length - 1 && examples.length > 1 && (
-                      <ButtonContainer
-                        buttons={[
-                          {
-                            text: "Beispiel entfernen",
-                            look: "tertiary",
-                            onClick: () => removeExample(example.id),
-                          },
-                        ]}
-                      />
+                      <ButtonContainer>
+                        <Button
+                          look="tertiary"
+                          onClick={() => removeExample(example.id)}
+                          type="button"
+                        >
+                          Beispiel entfernen
+                        </Button>
+                      </ButtonContainer>
                     )}
                     {index === examples.length - 1 && (
-                      <ButtonContainer
-                        buttons={[
-                          {
-                            text: "Weitere Referenz hinzufügen",
-                            look: "tertiary",
-                            onClick: addExample,
-                            type: "button",
-                          },
-                        ]}
-                      />
+                      <ButtonContainer>
+                        <Button
+                          look="tertiary"
+                          onClick={addExample}
+                          type="button"
+                        >
+                          Weitere Referenz hinzufügen
+                        </Button>
+                      </ButtonContainer>
                     )}
                     <hr className="mt-20 mb-20 border-t-[2px] border-gray-400" />
                   </div>
@@ -138,20 +138,17 @@ export default function PrototypeDocumentationPrinciple3() {
           )}
         </fieldset>
       </form>
-      <ButtonContainer
-        buttons={[
-          {
-            text: nextButton,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_4.url,
-          },
-          {
-            text: general.buttonBack.text,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_2.url,
-            look: "tertiary",
-          },
-        ]}
-        className="pt-40"
-      />
+      <ButtonContainer className="pt-40">
+        <Button href={ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_4.url}>
+          {nextButton}
+        </Button>
+        <Button
+          href={ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_2.url}
+          look="tertiary"
+        >
+          {general.buttonBack.text}
+        </Button>
+      </ButtonContainer>
     </Container>
   );
 }

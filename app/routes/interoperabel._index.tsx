@@ -1,5 +1,6 @@
 import Accordion from "~/components/Accordion";
 import Box from "~/components/Box.tsx";
+import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
@@ -125,15 +126,12 @@ export default function Interoperability() {
               className="mb-8"
             />
             <RichText markdown={interoperability.andDigitalReadiness.content} />
-            <ButtonContainer
-              className="mt-20"
-              buttons={[
-                {
-                  text: interoperability.andDigitalReadiness.button,
-                  href: ROUTE_PRECHECK.url,
-                },
-              ]}
-            />
+            <ButtonContainer className="mt-20">
+              <Button
+                text={interoperability.andDigitalReadiness.button}
+                href={ROUTE_PRECHECK.url}
+              />
+            </ButtonContainer>
           </div>
           <div className="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">
             <div className="flex h-full w-[630px] flex-col justify-center bg-[#B3C9D6] align-middle lg:w-[50vw] [&>img]:object-contain lg:[&>img]:h-[550px]">

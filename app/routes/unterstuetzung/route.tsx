@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 
 import Box from "~/components/Box";
-import type { ButtonProps } from "~/components/Button.tsx";
-import ButtonContainer from "~/components/ButtonContainer";
+import { ButtonProps } from "~/components/Button.tsx";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
@@ -14,6 +13,7 @@ import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { support } from "~/resources/content/unterstuetzung";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
+import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 
 type Offering = {
   title: string;
@@ -227,7 +227,7 @@ export default function Index() {
                 markdown: supportHow.text,
               }}
             />
-            <ButtonContainer buttons={supportHow.buttons} />
+            {renderButtonContainer(supportHow.buttons)}
           </div>
         </Container>
       </div>

@@ -12,6 +12,7 @@ import {
 } from "pdf-lib";
 import React from "react";
 import { useNavigate } from "react-router";
+import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
@@ -139,19 +140,14 @@ export default function PrototypeDocumentationMeta() {
         Klicken Sie oder ziehen Sie eine Datei hierhin, um fortzufahren.
       </label>
 
-      <ButtonContainer
-        buttons={[
-          {
-            text: startNewButtonText,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION_META.url,
-          },
-          {
-            text: general.buttonBack.text,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION.url,
-            look: "tertiary",
-          },
-        ]}
-      />
+      <ButtonContainer>
+        <Button href={ROUTE_PROTOTYPE_DOCUMENTATION_META.url}>
+          {startNewButtonText}
+        </Button>
+        <Button href={ROUTE_PROTOTYPE_DOCUMENTATION.url} look={"tertiary"}>
+          {general.buttonBack.text}
+        </Button>
+      </ButtonContainer>
     </Container>
   );
 }

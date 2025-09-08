@@ -1,11 +1,11 @@
 import React from "react";
 import { twJoin } from "tailwind-merge";
 import type { Node } from "~/utils/paragraphUtils";
+import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 import twMerge from "~/utils/tailwindMerge";
 import Badge, { type BadgeProps } from "./Badge";
 import { BlocksRenderer } from "./BlocksRenderer";
 import { ButtonLinkProps, ButtonProps } from "./Button";
-import ButtonContainer from "./ButtonContainer";
 import DetailsSummary, { DetailsSummaryProps } from "./DetailsSummary";
 import Heading, { HeadingProps } from "./Heading";
 import Image, { type ImageProps } from "./Image";
@@ -121,7 +121,7 @@ const InfoBox = ({
         )}
         {linkList && <LinkList {...linkList} />}
 
-        {buttons && buttons.length > 0 && <ButtonContainer buttons={buttons} />}
+        {buttons && buttons.length > 0 && renderButtonContainer(buttons)}
       </div>
     </div>
   );

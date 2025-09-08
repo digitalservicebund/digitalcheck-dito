@@ -1,4 +1,4 @@
-import { ButtonLinkProps } from "~/components/Button";
+import Button, { ButtonLinkProps } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
@@ -11,6 +11,7 @@ import { documentation } from "~/resources/content/dokumentation";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import { ROUTE_DOCUMENTATION } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
+import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 
 export function meta() {
   return constructMetaTitle(ROUTE_DOCUMENTATION.title);
@@ -24,7 +25,11 @@ export default function Index() {
   return (
     <>
       <Hero title={documentation.title} subtitle={documentation.subtitle}>
-        <ButtonContainer className="mt-48" buttons={documentation.buttons} />
+        <ButtonContainer className="mt-48">
+          {documentation.buttons.map((button) => (
+            <Button key={button.text ?? button.href} {...button} />
+          ))}
+        </ButtonContainer>
       </Hero>
 
       <Container className="max-sm:p-0!">
@@ -55,9 +60,8 @@ export default function Index() {
               {"content" in item && (
                 <RichText markdown={item.content as string} />
               )}
-              {"buttons" in item && (
-                <ButtonContainer buttons={item.buttons as ButtonLinkProps[]} />
-              )}
+              {"buttons" in item &&
+                renderButtonContainer(item.buttons as ButtonLinkProps[])}
             </NumberedList.Item>
           ))}
         </NumberedList>

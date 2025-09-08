@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -16,6 +17,7 @@ import {
   ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_5,
 } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
+import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 
 const { principles, nextButton } = prototypeDocumentation;
 const { principle4, radioOptions } = principles;
@@ -104,17 +106,15 @@ export default function PrototypeDocumentationPrinciple4() {
                       name={`explanation-${example.id}`}
                       label={principles.inputs.explanation.label}
                     />
-                    {index < examples.length - 1 && examples.length > 1 && (
-                      <ButtonContainer
-                        buttons={[
-                          {
-                            text: "Beispiel entfernen",
-                            look: "tertiary",
-                            onClick: () => removeExample(example.id),
-                          },
-                        ]}
-                      />
-                    )}
+                    {index < examples.length - 1 &&
+                      examples.length > 1 &&
+                      renderButtonContainer([
+                        {
+                          text: "Beispiel entfernen",
+                          look: "tertiary",
+                          onClick: () => removeExample(example.id),
+                        },
+                      ])}
                     {index === examples.length - 1 && (
                       <ButtonContainer
                         buttons={[
@@ -138,20 +138,17 @@ export default function PrototypeDocumentationPrinciple4() {
           )}
         </fieldset>
       </form>
-      <ButtonContainer
-        buttons={[
-          {
-            text: nextButton,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_5.url,
-          },
-          {
-            text: general.buttonBack.text,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_3.url,
-            look: "tertiary",
-          },
-        ]}
-        className="pt-40"
-      />
+      <ButtonContainer className="pt-40">
+        <Button href={ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_5.url}>
+          {nextButton}
+        </Button>
+        <Button
+          href={ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_3.url}
+          look="tertiary"
+        >
+          {general.buttonBack.text}
+        </Button>
+      </ButtonContainer>
     </Container>
   );
 }

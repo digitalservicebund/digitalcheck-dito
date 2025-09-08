@@ -14,7 +14,6 @@ import { twJoin } from "tailwind-merge";
 import Accordion from "~/components/Accordion";
 import Box from "~/components/Box";
 import { ButtonLinkProps } from "~/components/Button";
-import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Header from "~/components/Header";
@@ -44,6 +43,7 @@ import {
   getHeaderFromCookie,
 } from "~/utils/cookies.server";
 import constructMetaTitle from "~/utils/metaTitle";
+import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/route";
 import { PreCheckResult, ResultType } from "./PreCheckResult";
@@ -320,11 +320,8 @@ export default function Result() {
                   {"content" in item && (
                     <RichText markdown={item.content as string} />
                   )}
-                  {"buttons" in item && (
-                    <ButtonContainer
-                      buttons={item.buttons as ButtonLinkProps[]}
-                    />
-                  )}
+                  {"buttons" in item &&
+                    renderButtonContainer(item.buttons as ButtonLinkProps[])}
                 </NumberedList.Item>
               ))}
             </NumberedList>

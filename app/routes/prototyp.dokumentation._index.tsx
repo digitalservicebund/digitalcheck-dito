@@ -213,16 +213,11 @@ export default function Index() {
           }
           className="mt-40"
         />
-        <ButtonContainer
-          className="mt-20"
-          buttons={[
-            {
-              text: "Word-Datei herunterladen",
-              href: ROUTE_DOCUMENTATION_STATIC_WORD.url,
-              look: "tertiary",
-            },
-          ]}
-        />
+        <ButtonContainer className="mt-20">
+          <Button href={ROUTE_DOCUMENTATION_STATIC_WORD.url} look={"tertiary"}>
+            Word-Datei herunterladen
+          </Button>
+        </ButtonContainer>
       </Hero>
 
       <Container>

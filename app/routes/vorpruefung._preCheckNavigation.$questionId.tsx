@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { redirect, useLoaderData } from "react-router";
 
 import { z } from "zod";
+import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -215,22 +216,22 @@ export default function Index() {
             content={preCheck.answerConflictHint.euBezugHint.content}
           />
         )}
-        <ButtonContainer
-          buttons={[
-            {
-              id: "preCheck-next-button",
-              text: nextButton,
-              type: "submit",
-              disabled: form.formState.isSubmitting,
-            },
-            {
-              id: "preCheck-back-button",
-              text: general.buttonBack.text,
-              href: question.prevLink,
-              look: "tertiary",
-            },
-          ]}
-        />
+        <ButtonContainer>
+          <Button
+            type="submit"
+            disabled={form.formState.isSubmitting}
+            id={"preCheck-next-button"}
+          >
+            {nextButton}
+          </Button>
+          <Button
+            id={"preCheck-back-button"}
+            href={question.prevLink}
+            look={"tertiary"}
+          >
+            {general.buttonBack.text}
+          </Button>
+        </ButtonContainer>
       </Container>
     </form>
   );

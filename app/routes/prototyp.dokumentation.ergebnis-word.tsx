@@ -16,6 +16,7 @@ import {
   ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_WORD,
 } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
+import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 
 const { result } = prototypeDocumentation;
 const { title } = result;
@@ -147,9 +148,8 @@ export default function DocumentationResult() {
               {"content" in item && (
                 <RichText markdown={item.content as string} />
               )}
-              {"buttons" in item && (
-                <ButtonContainer buttons={item.buttons as ButtonLinkProps[]} />
-              )}
+              {"buttons" in item &&
+                renderButtonContainer(item.buttons as ButtonLinkProps[])}
             </NumberedList.Item>
           ))}
         </NumberedList>

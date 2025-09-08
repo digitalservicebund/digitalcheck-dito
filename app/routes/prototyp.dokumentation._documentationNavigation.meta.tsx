@@ -1,4 +1,5 @@
 import { useLocation } from "react-router";
+import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
@@ -55,22 +56,21 @@ export default function PrototypeDocumentationMeta() {
           />
         </fieldset>
       </form>
-      <ButtonContainer
-        buttons={[
-          {
-            text: nextButton,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION.url,
-          },
-          {
-            text: general.buttonBack.text,
-            href: prototypeAlternativeEnabled
+      <ButtonContainer className="pt-40">
+        <Button href={ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION.url}>
+          {nextButton}
+        </Button>
+        <Button
+          href={
+            prototypeAlternativeEnabled
               ? ROUTE_PROTOTYPE_DOCUMENTATION.url
-              : ROUTE_PROTOTYPE_DOCUMENTATION_START_RESUME.url,
-            look: "tertiary",
-          },
-        ]}
-        className="pt-40"
-      />
+              : ROUTE_PROTOTYPE_DOCUMENTATION_START_RESUME.url
+          }
+          look="tertiary"
+        >
+          {general.buttonBack.text}
+        </Button>
+      </ButtonContainer>
     </Container>
   );
 }

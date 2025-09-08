@@ -7,6 +7,7 @@ import { useForm } from "@rvf/react-router";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Alert from "~/components/Alert";
 import Box from "~/components/Box.tsx";
+import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
@@ -134,17 +135,17 @@ export default function ResultForm({
                   onChange={handleNegativeReasoningChange}
                 />
               )}
-              <ButtonContainer
-                buttons={[
-                  {
-                    id: "result-email-button",
-                    text: preCheckResult.form.sendEmailButton.text,
-                    look: "primary",
-                    className:
-                      "plausible-event-name=Content.Send+Result.Button+Create+Email",
-                  },
-                ]}
-              />
+              <ButtonContainer>
+                <Button
+                  id={"result-email-button"}
+                  look={"primary"}
+                  className={
+                    "plausible-event-name=Content.Send+Result.Button+Create+Email"
+                  }
+                >
+                  {preCheckResult.form.sendEmailButton.text}
+                </Button>
+              </ButtonContainer>
               {showEmailAlert && (
                 <div className="mt-16">
                   <Alert

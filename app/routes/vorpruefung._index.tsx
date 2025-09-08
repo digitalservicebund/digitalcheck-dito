@@ -1,5 +1,6 @@
 import Accordion from "~/components/Accordion";
 import Box from "~/components/Box";
+import Button from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -92,22 +93,22 @@ export default function Index() {
             />
           ))}
         </div>
-        <ButtonContainer
-          buttons={[
-            {
-              id: PRE_CHECK_START_BUTTON_ID,
-              text: preCheck.start.buttonText,
-              href: ROUTE_PRECHECK_INFO.url,
-              type: "submit",
-            },
-            {
-              id: "preCheck-back-button",
-              text: general.buttonBack.text,
-              href: ROUTE_LANDING.url,
-              look: "tertiary",
-            },
-          ]}
-        />
+        <ButtonContainer>
+          <Button
+            id={PRE_CHECK_START_BUTTON_ID}
+            href={ROUTE_PRECHECK_INFO.url}
+            type="submit"
+          >
+            {preCheck.start.buttonText}
+          </Button>
+          <Button
+            id="preCheck-back-button"
+            href={ROUTE_LANDING.url}
+            look="tertiary"
+          >
+            {general.buttonBack.text}
+          </Button>
+        </ButtonContainer>
       </Hero>
 
       <Container>

@@ -1,5 +1,4 @@
 import { ButtonLinkProps } from "~/components/Button";
-import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
@@ -13,6 +12,7 @@ import { methods } from "~/resources/content/methoden";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import { ROUTE_METHODS } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
+import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 
 export function meta() {
   return constructMetaTitle(ROUTE_METHODS.title);
@@ -118,9 +118,8 @@ export default function Methoden() {
               {"content" in item && (
                 <RichText markdown={item.content as string} />
               )}
-              {"buttons" in item && (
-                <ButtonContainer buttons={item.buttons as ButtonLinkProps[]} />
-              )}
+              {"buttons" in item &&
+                renderButtonContainer(item.buttons as ButtonLinkProps[])}
             </NumberedList.Item>
           ))}
         </NumberedList>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -138,20 +139,17 @@ export default function PrototypeDocumentationPrinciple5() {
           )}
         </fieldset>
       </form>
-      <ButtonContainer
-        buttons={[
-          {
-            text: nextButton,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION_RESULT.url,
-          },
-          {
-            text: general.buttonBack.text,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_4.url,
-            look: "tertiary",
-          },
-        ]}
-        className="pt-40"
-      />
+      <ButtonContainer className="pt-40">
+        <Button href={ROUTE_PROTOTYPE_DOCUMENTATION_RESULT.url}>
+          {nextButton}
+        </Button>
+        <Button
+          href={ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_4.url}
+          look="tertiary"
+        >
+          {general.buttonBack.text}
+        </Button>
+      </ButtonContainer>
     </Container>
   );
 }

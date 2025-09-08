@@ -1,3 +1,4 @@
+import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
@@ -31,22 +32,18 @@ export default function GeneralInfo() {
         tagName="h2"
         content={hint.text}
       />
-      <ButtonContainer
-        buttons={[
-          {
-            id: "generalInfo-next-button",
-            text: nextButton,
-            href: questions[0].url,
-          },
-          {
-            id: "generalInfo-back-button",
-            text: general.buttonBack.text,
-            href: ROUTE_PRECHECK.url,
-            look: "tertiary",
-          },
-        ]}
-        className="pt-40"
-      />
+      <ButtonContainer className="pt-40">
+        <Button id={"generalInfo-next-button"} href={questions[0].url}>
+          {nextButton}
+        </Button>
+        <Button
+          id={"generalInfo-back-button"}
+          href={ROUTE_PRECHECK.url}
+          look={"tertiary"}
+        >
+          {general.buttonBack.text}
+        </Button>
+      </ButtonContainer>
     </Container>
   );
 }
