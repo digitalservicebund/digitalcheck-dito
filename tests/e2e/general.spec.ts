@@ -106,7 +106,7 @@ test.describe("test links", () => {
   });
 
   test("links leading to external pages open in new tab", async ({ page }) => {
-    await page.goto(ROUTE_LANDING.url);
+    await page.goto(ROUTE_LANDING.url, { waitUntil: "domcontentloaded" });
     const newTabPromise = page.waitForEvent("popup");
     await page
       .getByRole("link", {
