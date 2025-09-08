@@ -9,19 +9,35 @@ type BulletListProps = React.PropsWithChildren<{
 const Bullet = () => (
   <div
     className={
-      "mt-10 flex size-[20px] items-center justify-center rounded-full bg-blue-900"
+      "mt-10 flex size-[20px] shrink-0 items-center justify-center rounded-full bg-blue-900"
     }
     role="none"
   ></div>
 );
 
+const BulletWrapper = ({ children }: { children?: React.ReactNode }) => (
+  <div role="none" className="w-[20px] shrink-0 md:w-[40px]">
+    {children}
+  </div>
+);
+
+type BulletListItemProps = React.PropsWithChildren<{
+  bullet?: boolean;
+  className?: string;
+}> &
+  React.HTMLProps<HTMLLIElement>;
+
 const BulletListItem = ({
   children,
   bullet,
   className,
-}: React.PropsWithChildren<{ bullet?: boolean; className?: string }>) => (
-  <li className="flex scroll-my-40 flex-row items-start gap-16 first:mt-16">
-    {bullet && <Bullet />}
+  ...restProps
+}: BulletListItemProps) => (
+  <li
+    className="flex scroll-my-40 flex-row items-start gap-16 first:mt-16"
+    {...restProps}
+  >
+    <BulletWrapper>{bullet && <Bullet />}</BulletWrapper>
     <div className={className}>{children}</div>
   </li>
 );

@@ -1,4 +1,4 @@
-import React from "react";
+import BulletList from "~/components/BulletList.tsx";
 import { ButtonLinkProps } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
@@ -6,46 +6,54 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
-import { BulletList } from "~/components/List";
 import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import SupportBanner from "~/components/SupportBanner";
 import { methods } from "~/resources/content/methoden";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import { ROUTE_METHODS } from "~/resources/staticRoutes";
-import { methodStepsItems } from "~/utils/listProcessing.ts";
 import constructMetaTitle from "~/utils/metaTitle";
 
 export function meta() {
   return constructMetaTitle(ROUTE_METHODS.title);
 }
 
-interface InfoItem {
-  icon: React.FC<React.SVGProps<SVGSVGElement>>;
-  text: string;
-}
+const renderStep = (
+  step: (typeof methods.steps.items)[number],
+  index: number,
+) => {
+  const headingId = `step-h-${index}`;
 
-export type ContentRenderer = (
-  info: InfoItem[] | undefined,
-  text: string | undefined,
-) => React.JSX.Element;
-
-const renderInfoItem = (info: InfoItem) => (
-  <span key={info.text} className="mb-8 flex gap-4 last-of-type:mb-8">
-    <info.icon className="mt-6 size-16" />
-    <span>{info.text}</span>
-  </span>
-);
-
-const renderStepContent = (
-  info: InfoItem[] | undefined,
-  text: string | undefined,
-): React.JSX.Element => (
-  <>
-    {info?.map((infoItem) => renderInfoItem(infoItem))}
-    {text && <p>{text}</p>}
-  </>
-);
+  if (step.isSubstep)
+    return (
+      <BulletList.Item
+        key={step.headline.text}
+        bullet
+        aria-labelledby={headingId}
+      >
+        <InfoBox
+          look="method"
+          heading={{
+            text: step.headline.text,
+            look: "ds-heading-03-bold",
+            id: headingId,
+          }}
+          content={step.text}
+          buttons={step.buttons}
+        />
+      </BulletList.Item>
+    );
+  return (
+    <BulletList.Item
+      className="mt-4 space-y-16"
+      key={step.headline.text}
+      aria-labelledby={headingId}
+    >
+      <h2 id={headingId}>{step.headline.text}</h2>
+      <RichText markdown={step.text} />
+    </BulletList.Item>
+  );
+};
 
 export default function Methoden() {
   return (
@@ -53,7 +61,7 @@ export default function Methoden() {
       <Hero subtitle={methods.subtitle} title={methods.title} />
 
       <Container className="my-80 py-0">
-        <BulletList items={methodStepsItems(true, renderStepContent)} />
+        <BulletList>{methods.steps.items.map(renderStep)}</BulletList>
       </Container>
 
       <Container className="my-80 space-y-40 py-0">
