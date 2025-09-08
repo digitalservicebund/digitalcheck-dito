@@ -131,7 +131,7 @@ function Step({
 export default function Visualization() {
   const infoBoxClass = "px-16 sm:px-56";
   const badgeForExampleContent: BadgeProps = {
-    text: "Beispiel: Fahrerlaubnis",
+    children: "Beispiel: Fahrerlaubnis",
     look: "hint",
   };
   // noinspection HtmlUnknownAnchorTarget
@@ -257,7 +257,7 @@ export default function Visualization() {
                   className={infoBoxClass}
                   badge={{
                     Icon: LayersOutlined,
-                    text: "Vorlage für Flussdiagramm",
+                    children: "Vorlage für Flussdiagramm",
                   }}
                   content={dedent`
                     Hier können Sie eine **Powerpoint-Vorlage (PPT)** für das Flussdiagramm herunterladen.
@@ -583,7 +583,7 @@ export default function Visualization() {
         <InfoBox
           badge={{
             Icon: ArrowCircleRightOutlined,
-            text: "So geht es weiter",
+            children: "So geht es weiter",
           }}
           heading={{
             tagName: "h2",

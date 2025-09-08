@@ -6,7 +6,7 @@ import InfoBox from "./InfoBox";
 describe("InfoBox", () => {
   describe("Top level elements", () => {
     it("shows the label", () => {
-      render(<InfoBox badge={{ text: "TestLabel" }} />);
+      render(<InfoBox badge={{ children: "TestLabel" }} />);
       expect(screen.getByText("TestLabel")).toBeInTheDocument();
     });
 

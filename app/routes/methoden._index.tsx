@@ -75,7 +75,7 @@ export default function Methoden() {
         <InfoBoxSideBySide>
           <InfoBox
             look="method"
-            badge={{ text: methods.itSystems.badge, look: "hint" }}
+            badge={{ children: methods.itSystems.badge, look: "hint" }}
             heading={{
               text: methods.itSystems.heading,
               tagName: "h3",
@@ -88,7 +88,7 @@ export default function Methoden() {
           <InfoBox
             look="method"
             badge={{
-              text: methods.technicalFeasibility.badge,
+              children: methods.technicalFeasibility.badge,
               look: "hint",
             }}
             heading={{

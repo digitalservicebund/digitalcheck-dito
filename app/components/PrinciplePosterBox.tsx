@@ -26,7 +26,7 @@ export function PrinciplePosterBox({
             },
           }}
           badge={{
-            text: principlePosterBox.badgeText,
+            children: principlePosterBox.badgeText,
           }}
           identifier="principle-poster-box"
           heading={{

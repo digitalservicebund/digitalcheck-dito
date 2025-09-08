@@ -3,7 +3,6 @@ import { PRINCIPLE_COLORS, PrincipleNumber } from "~/resources/constants";
 import twMerge from "~/utils/tailwindMerge";
 
 export type BadgeProps = {
-  text?: string;
   children?: ReactNode;
   className?: string;
   principleNumber?: PrincipleNumber;
@@ -14,7 +13,6 @@ export type BadgeProps = {
 function Badge({
   className,
   children,
-  text,
   Icon,
   principleNumber,
   look = "default",
@@ -36,7 +34,7 @@ function Badge({
       )}
     >
       {Icon && <Icon className="size-16 fill-gray-800" />}
-      {children ?? text}
+      {children}
     </mark>
   );
 }

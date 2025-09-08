@@ -75,7 +75,10 @@ export default function Index() {
       <Container className="ds-stack ds-stack-32">
         <Box
           heading={{ text: content.content.title, look: "ds-heading-03-reg" }}
-          badge={{ text: content.content.label, Icon: content.content.icon }}
+          badge={{
+            children: content.content.label,
+            Icon: content.content.icon,
+          }}
           content={{ markdown: content.content.text }}
           buttons={"buttons" in content.content ? content.content.buttons : []}
         />
@@ -83,7 +86,7 @@ export default function Index() {
           <Card
             key={box.title}
             heading={{ text: box.title, look: "ds-heading-03-reg" }}
-            badge={{ text: box.label, Icon: box.icon }}
+            badge={{ children: box.label, Icon: box.icon }}
             content={{ markdown: box.text }}
             buttons={"buttons" in box ? box.buttons : []}
             className="px-96 py-64 max-sm:px-16 max-sm:py-32"
@@ -97,7 +100,7 @@ export default function Index() {
           <Container>
             <InfoBox
               heading={{ text: content.tip.title, tagName: "h3" }}
-              badge={{ text: content.tip.label, Icon: content.tip.icon }}
+              badge={{ children: content.tip.label, Icon: content.tip.icon }}
               content={content.tip.text}
             />
           </Container>
@@ -121,7 +124,7 @@ export default function Index() {
                 look: "ds-heading-03-reg",
               }}
               badge={{
-                text: content.support.label,
+                children: content.support.label,
                 Icon: content.support.icon,
               }}
               content={{ markdown: content.support.text }}

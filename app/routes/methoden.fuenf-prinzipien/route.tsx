@@ -93,7 +93,7 @@ export default function FivePrinciples() {
             look: "ds-heading-03-reg",
           }}
           badge={{
-            text: methodsFivePrinciples.nextStep.label,
+            children: methodsFivePrinciples.nextStep.label,
             Icon: methodsFivePrinciples.nextStep.icon,
           }}
           content={{ markdown: methodsFivePrinciples.nextStep.text }}

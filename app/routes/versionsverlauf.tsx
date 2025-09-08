@@ -15,6 +15,9 @@ export default function VersionHistory() {
       ...item,
       hasBullet: true,
       key: index,
+      badge: {
+        children: item.badge.text,
+      },
     }));
 
   return (
