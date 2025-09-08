@@ -9,7 +9,7 @@ fileignoreconfig:
   allowed_patterns: [posthogKey]
 - filename: .github/workflows/pipeline.yml
   allowed_patterns:
-    - @[a-z0-9]{40}
+    - "@[a-z0-9]{40}"
 - filename: .github/workflows/scan.yml
   ignore_detectors: [filecontent]
 allowed_patterns:
