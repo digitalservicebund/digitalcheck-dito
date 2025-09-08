@@ -22,6 +22,10 @@ function getKey(item: ListItemProps, index: number) {
     (typeof item.content === "string" ? item.content : index.toString())
   );
 }
+
+/**
+ * @deprecated: Use the component from BulletList.tsx instead
+ */
 const BulletList = ({
   identifier,
   items,

@@ -1,30 +1,37 @@
+import { ReactNode } from "react";
+import Badge from "~/components/Badge.tsx";
+import BulletList from "~/components/BulletList.tsx";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import ImageZoomable from "~/components/ImageZoomable";
 import InfoBox from "~/components/InfoBox";
-import { BulletList } from "~/components/List";
-import { ListItemProps } from "~/components/ListItem";
 import RichText from "~/components/RichText";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { spoc } from "~/resources/content/interoperabel-nationale-kontaktstelle";
-import { ROUTE_INTEROPERABILITY_SPOC } from "~/resources/staticRoutes";
+import {
+  ROUTE_INTEROPERABILITY,
+  ROUTE_INTEROPERABILITY_SPOC,
+  ROUTE_METHODS_PRINCIPLES,
+} from "~/resources/staticRoutes";
+import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import constructMetaTitle from "~/utils/metaTitle";
 
 export function meta() {
   return constructMetaTitle(ROUTE_INTEROPERABILITY_SPOC.title);
 }
 
-export default function SPOC() {
-  const timelineItems: ListItemProps[] = spoc.timeline.items.map((item) => ({
-    ...item,
-    hasBullet: true,
-    headline: {
-      ...item.headline,
-      tagName: "h3",
-      look: "ds-subhead",
-    },
-  }));
+type TimelineItemProps = { children?: ReactNode };
+
+function TimelineItem({ children }: Readonly<TimelineItemProps>) {
+  return (
+    <BulletList.Item bullet className="mt-4 flex flex-col gap-16">
+      {children}
+    </BulletList.Item>
+  );
+}
+
+export default function SinglePointOfContact() {
   const tabsData: TabItem[] = [
     {
       title: spoc.landscape.tabName,
@@ -67,13 +74,105 @@ export default function SPOC() {
           <Container className="px-0">
             <Heading
               tagName="h2"
-              text={spoc.timeline.headline}
+              text="Aktueller Stand der Integration in den Digitalcheck"
               className="mb-8"
             />
-            <BulletList
-              items={timelineItems}
-              className="rotate-arrow-bottom mb-48"
-            />
+            <BulletList>
+              <TimelineItem>
+                <Badge look="gray">Aktuell</Badge>
+                <h3 className="ds-subhead hyphens-none">
+                  Methoden für Digitaltauglichkeit und Interoperabilität
+                </h3>
+                <p>
+                  Die inhaltlichen Schnittmengen zwischen dem
+                  Erarbeitungsprozess für digitaltaugliche Regelungen und dem
+                  Interoperabilitäts-Assessment sind identifiziert und
+                  analysiert. Der daraus entstandene Prozess wird in den
+                  Digitalcheck-Kontaktpunkten umgesetzt. Darauf aufbauend passen
+                  wir die Erarbeitungsmethoden an. Ziel ist es, den gesamten
+                  Entwicklungsprozess effizienter und zielgerichteter zu
+                  gestalten.
+                </p>
+                <ImageZoomable
+                  image={{
+                    url: "/images/synthese-prozess-digitalcheck-und-interoperabilitaet.png",
+                    alternativeText:
+                      "Die Abbildung zeigt ein strukturiertes Vorgehensmodell für den Digitalcheck und die Interoperabilitätsbewertung. Das Vorgehen des Digitalchecks und der Interoperabilitätsbewertung wird in einem neuen Prozess zusammengefasst. Er umfasst drei Hauptbereiche: Zunächst werden Akteure identifiziert, bestehende Prozesse visualisiert und neue Prozesse entwickelt. Danach werden rechtliche Rahmenbedingungen untersucht, digitale Chancen analysiert und Anforderungen definiert. Schließlich erfolgt die Umsetzung, die Nutzung bestehender oder die Entwicklung neuer Lösungen, bevor alles dokumentiert wird. Durch die visuelle Darstellung wird der neue, gebündelte Ansatz im Prozess verdeutlicht.",
+                    className: "max-w-a11y",
+                  }}
+                />
+              </TimelineItem>
+              <TimelineItem>
+                <Badge look="gray">03.07.2025</Badge>
+                <Heading tagName="h3" look="hyphens-none ds-subhead">
+                  Über 100 Teilnehmende in acht Online-Workshops
+                </Heading>
+                <p>
+                  In den Schulungen „Visualisieren – komplexes einfach
+                  darstellen“ und “Regelungen digitaltauglich und interoperabel
+                  gestalten“ haben die Teilnehmenden erfahren, wie sie den
+                  Digitalcheck als frühzeitig Denkwerkzeug nutzen können, um
+                  Gesetze besser und umsetzbarer zu gestalten.
+                </p>
+              </TimelineItem>
+              <TimelineItem>
+                <Badge look="gray">25.06.2025</Badge>
+                <div className="mt-4 flex flex-col gap-16">
+                  <h3 className="ds-subhead hyphens-none">
+                    Integration in die Abläufe des IT-Planungsrats
+                  </h3>
+                  <p>
+                    Die Bedeutung des IEA für das föderale IT-Architekturboard
+                    sowie Unterstützungsmöglichkeiten durch die Nationale
+                    Kontaktstelle wurden vorgestellt.
+                  </p>
+                  <ImageZoomable
+                    image={{
+                      alternativeText:
+                        "Die Abbildung zeigt ein strukturiertes Vorgehensmodell für die Interoperabilitätsbewertung. Alle Steckbriefe werden von der FITKO überprüft, die letztendliche Entscheidung trifft der IT-Planungsrat. Die Dokumentation bei Interoperabilitätsbezug muss bei der EU-Kommission eingereicht werden. Die Nationale Kontaktstelle steht während des gesamten Prozesses unterstützend zur Verfügung.",
+                      url: "/images/interoperabilitaet-it-planungsrat.png",
+                    }}
+                    className="max-w-a11y"
+                  />
+                </div>
+              </TimelineItem>
+              <TimelineItem>
+                <Badge look="gray">15.05.2025</Badge>
+
+                <h3 className="ds-subhead hyphens-none">
+                  Die 5 Prinzipien für digitaltaugliche Regelungen sind
+                  überarbeitet
+                </h3>
+                <RichText
+                  markdown={dedent`
+                      Die [5 Prinzipien für digitaltaugliche Gesetzgebung](${ROUTE_METHODS_PRINCIPLES.url}) sind überarbeitet und entsprechen sowohl den Anforderungen der Digitaltauglichkeit als auch der Interoperabilität. 
+                      `}
+                />
+              </TimelineItem>
+              <TimelineItem>
+                <Badge look="gray">10.01.2025</Badge>
+                <h3 className="ds-subhead hyphens-none">
+                  Verordnung tritt in Kraft und erste Änderungen sind im
+                  Digitalcheck umgesetzt:
+                </h3>
+                <RichText
+                  markdown={dedent`
+                      - **Vorprüfung:** Berücksichtigt nun neben dem Digitalbezug auch die europäische Interoperabilität.
+                      - Das Ergebnis der Vorprüfung wird automatisch per E-Mail versendet:
+                        - Bei Digitalbezug an den NKR.
+                        - Bei zusätzlichem Interoperabilitäts-Bezug auch an die nationale Kontaktstelle beim Digitalcheck-Team.
+                      - Bereitstellung einer [Informationsseite](${ROUTE_INTEROPERABILITY.url}) zum Thema Interoperabilität für Legistinnen und Legisten.
+        `}
+                />
+              </TimelineItem>
+              <TimelineItem>
+                <Badge look="gray">13.03.2024</Badge>
+                <h3 className="ds-subhead">
+                  Verordnung für ein interoperables Europa wird vom europäischen
+                  Parlament verabschiedet
+                </h3>
+              </TimelineItem>
+            </BulletList>
           </Container>
         </>
       ),
