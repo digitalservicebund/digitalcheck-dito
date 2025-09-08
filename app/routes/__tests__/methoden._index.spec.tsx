@@ -21,7 +21,7 @@ describe("Methoden Route - Integration Tests", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders the BulletList with all methods", () => {
+  it("renders the Timeline with all methods", () => {
     expect(
       screen.getByRole("heading", {
         name: "Erfassen des Status Quo",

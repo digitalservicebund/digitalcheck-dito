@@ -36,6 +36,7 @@ const renderStep = (
           headline={{
             text: step.headline.text,
             look: "ds-heading-03-bold",
+            tagName: "h3",
             id: headingId,
           }}
           buttons={step.buttons}
