@@ -76,7 +76,7 @@ export type Paragraph = {
   Gesetz: string;
   Titel?: string;
   Artikel?: string;
-  Digitalcheck?: Digitalcheck;
+  Beispielvorhaben?: Regelungsvorhaben;
   Absaetze: BaseAbsatz[];
 };
 
@@ -114,7 +114,7 @@ export type Visualisierung = {
     url: string;
     alternativeText: string;
   };
-  Digitalcheck: Digitalcheck;
+  Beispielvorhaben: Regelungsvorhaben;
 };
 
 export type Digitalcheck = {
@@ -191,14 +191,12 @@ fragment VisualisationFields on Visualisierung {
     previewUrl
     alternativeText
   }
-  Digitalcheck {
-    Regelungsvorhaben {
-      URLBezeichnung
-      VeroeffentlichungsDatum
-      Rechtsgebiet
-      Titel
-      Ressort
-    }
+  Beispielvorhaben {
+    URLBezeichnung
+    VeroeffentlichungsDatum
+    Rechtsgebiet
+    Titel
+    Ressort
   }
 }`;
 

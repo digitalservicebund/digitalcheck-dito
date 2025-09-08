@@ -58,13 +58,12 @@ export default function VisualisationItem({
         <div className="bg-gray-100 p-12">
           <LabelValuePair
             label={examplesRegelungen.visualisations.imageInfo.legalArea}
-            value={visualisierung.Digitalcheck?.Regelungsvorhaben?.Rechtsgebiet}
+            value={visualisierung.Beispielvorhaben?.Rechtsgebiet}
           />
           <LabelValuePair
             label={examplesRegelungen.visualisations.imageInfo.publishedOn}
             value={formatDate(
-              visualisierung.Digitalcheck?.Regelungsvorhaben
-                ?.VeroeffentlichungsDatum,
+              visualisierung.Beispielvorhaben?.VeroeffentlichungsDatum,
             )}
           />
           <LabelValuePair
@@ -77,7 +76,7 @@ export default function VisualisationItem({
           />
           <LabelValuePair
             label={examplesRegelungen.visualisations.imageInfo.department}
-            value={visualisierung.Digitalcheck?.Regelungsvorhaben?.Ressort}
+            value={visualisierung.Beispielvorhaben?.Ressort}
           />
         </div>
       </div>

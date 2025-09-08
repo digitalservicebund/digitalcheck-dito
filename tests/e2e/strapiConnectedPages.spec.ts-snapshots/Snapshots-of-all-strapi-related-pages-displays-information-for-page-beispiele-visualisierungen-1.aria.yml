@@ -1,0 +1,108 @@
+- main:
+  - heading "Beispiele für Visualisierungen" [level=1]
+  - paragraph: Hier finden Sie Visualisierungen, welche Legistinnen und Legisten beim Erarbeiten der Digitaltauglichkeit geholfen haben und veröffentlicht wurden.
+  - link "Digitale-Dienste-Gesetz":
+    - /url: /beispiele/regelungen/digitale-dienste-gesetz
+    - heading "Digitale-Dienste-Gesetz" [level=2]
+  - link "Flussdiagramm zur Koordinierungsstelle für digitale Dienste, das Zuständigkeiten und Zusammenarbeit mit Bundesnetzagentur, BfDI, Bundeskriminalamt und weiteren Akteuren zeigt.":
+    - /url: /beispiele/visualisierung/Visualisierung_DDG_dd77dac88c.jpg
+    - img "Flussdiagramm zur Koordinierungsstelle für digitale Dienste, das Zuständigkeiten und Zusammenarbeit mit Bundesnetzagentur, BfDI, Bundeskriminalamt und weiteren Akteuren zeigt."
+  - text: /Veröffentlicht am:\d+\. Mai \d+ Art der Visualisierung:Schaubild Ressort:BMV/
+  - heading "Übersicht verantwortlicher Akteure nach DDG" [level=3]
+  - list:
+    - listitem: Macht die Regelung leichter verständlich, indem sie die verantwortlichen Akteure für die Umsetzung und Überwachung darstellt und wie diese mit der neu eingerichteten Koordinierungsstelle interagieren.
+    - listitem: Erleichtert das Auffinden der relevanten Textpassagen, aus welchen sich die jeweiligen Verantwortlichkeiten ergeben, durch explizite Nennung der Paragraphen.
+  - link "Gesetz zur Modernisierung und zum Bürokratieabbau im Strom- und Energiesteuerrecht":
+    - /url: /beispiele/regelungen/gesetz-zur-modernisierung-und-zum-buerokratieabbau-im-strom-und-energiesteuerrecht
+    - heading "Gesetz zur Modernisierung und zum Bürokratieabbau im Strom- und Energiesteuerrecht" [level=2]
+  - link "Ein reduzierter, prozessualer Ablauf des Antrags auf Entlastung von der Stromsteuer":
+    - /url: /beispiele/visualisierung/Flussdiagramm_fuer_9b_Antrag_auf_Entlastung_46fef47656.jpg
+    - img "Ein reduzierter, prozessualer Ablauf des Antrags auf Entlastung von der Stromsteuer"
+  - text: /Veröffentlicht am:\d+\. April \d+ Art der Visualisierung:Flussdiagramm Software zur Erstellung:Miro Ressort:BMF/
+  - heading /Vereinfachter Zielprozess Antragstellung nach §[\d,.]+[bkmBKM]+ StromStG/ [level=3]
+  - list:
+    - listitem: Abstrahiert den Antragsprozess und stellt ihn strukturiert dar, um bei verschiedenen Akteurinnen und Akteuren ein gemeinsames Verständnis zu schaffen.
+    - listitem: Zeigt die Aufteilung der Verantwortlichkeiten zwischen Unternehmen und Behörden durch klare visuelle Abgrenzung.
+    - listitem: Macht durch die Kennzeichnung automatisierter Prüfungen Digitalisierungspotenziale sichtbar.
+    - listitem: Markiert optionale Schritte und Risiken, um komplexe Abläufe verständlich zu machen und Gestaltungsspielraum aufzuzeigen.
+  - link /Eine große, komplexe Übersicht der Entscheidungen und Logiken im §[\d,.]+[bkmBKM]+/:
+    - /url: /beispiele/visualisierung/Rulemap_fuer_9b_regelt_Antragsstellung_0d5d381327.jpg
+    - img /Eine große, komplexe Übersicht der Entscheidungen und Logiken im §[\d,.]+[bkmBKM]+/
+  - text: /Veröffentlicht am:\d+\. April \d+ Art der Visualisierung:Entscheidungsbaum Software zur Erstellung:Miro Ressort:BMF/
+  - heading /Voraussetzungen für Entlastung nach §[\d,.]+[bkmBKM]+ StromStG/ [level=3]
+  - list:
+    - listitem: Macht rechtliche Logik nachvollziehbar und leichter überprüfbar, indem Voraussetzungen eindeutig und strukturiert dargestellt werden.
+    - listitem: Führt Gesetz und Verordnung zusammen und ermöglicht damit das Erfassen des Gesamtprozesses.
+    - listitem: Hebt den Ursprung der Voraussetzungen farblich hervor um eine schnelle Orientierung zu gewährleisten.
+    - listitem: Verdeutlicht Digitalisierungspotenziale durch die Unterscheidung automatisierter und manueller Schritte.
+    - listitem: Verbindet rechtliche Voraussetzungen mit Umsetzungsschritten und dient damit als Orientierung für beteiligte Akteurinnen und Akteure.
+  - link "Entwurf eines Gesetzes zur Entwicklung und Erprobung eines Online-Verfahrens in der Zivilgerichtsbarkeit":
+    - /url: /beispiele/regelungen/entwurf-eines-gesetzes-zur-entwicklung-und-erprobung-eines-online-verfahrens-in-der-zivilgerichtsbarkeit
+    - heading "Entwurf eines Gesetzes zur Entwicklung und Erprobung eines Online-Verfahrens in der Zivilgerichtsbarkeit" [level=2]
+  - link /Die Abbildung zeigt das Online-Verfahren in der Zivilgerichtsbarkeit, welches nach § \d+ I ZPO eröffnet ist\./:
+    - /url: /beispiele/visualisierung/BMJ_7065_Visualisierung_OV_Erp_G_DB_3_BMJ_0c71f91453.png
+    - img /Die Abbildung zeigt das Online-Verfahren in der Zivilgerichtsbarkeit, welches nach § \d+ I ZPO eröffnet ist\./
+  - text: /Veröffentlicht am:\d+\. September \d+ Art der Visualisierung:Flussdiagramm Software zur Erstellung:draw\.io Ressort:BMJV/
+  - heading "Ablauf Online-Verfahrens Zivilgerichtsbarkeit nach ZPO" [level=3]
+  - list:
+    - listitem: Unterteilt den Gesamtprozess in drei abgegrenzte Bereiche und erleichtert so die Orientierung im Prozess.
+    - listitem: Erleichtert das Auffinden der relevanten Textpassagen durch explizite Nennung der Regelungen, Paragraphen, Absätze und Sätze.
+    - listitem: Markiert den Kernaspekt der Regelung durch Verwendung einheitlicher Symbole.
+    - listitem: Verwendet Rauten als geläufige Darstellung für Entscheidungen in Flussdiagrammen, um schnelles Verständnis zu gewährleisten.
+  - link "Förderung des Ganztagsausbaus aus Sicht eines öffentlichen Schulträgers nach GaFöG":
+    - /url: /beispiele/regelungen/regelungsvorhaben
+    - heading "Förderung des Ganztagsausbaus aus Sicht eines öffentlichen Schulträgers nach GaFöG" [level=2]
+  - link "Die Visualisierung zeigt eine vereinfachte und beispielhafte Darstellung der Prozesse, die sich im Kontext eines Förderverfahrens für Ganztagsbetreuung aus Sicht eines öffentlichen Schulträgers abspielen.":
+    - /url: /beispiele/visualisierung/Digitalcheck_BMBFSFJ_Unterstuetzung_Geteilt_Journey_1_6431aa2170.jpg
+    - img "Die Visualisierung zeigt eine vereinfachte und beispielhafte Darstellung der Prozesse, die sich im Kontext eines Förderverfahrens für Ganztagsbetreuung aus Sicht eines öffentlichen Schulträgers abspielen."
+  - text: Art der Visualisierung:Schaubild Software zur Erstellung:Miro Ressort:BMBFSFJ
+  - heading "Förderung des Ganztagsausbaus aus Sicht eines öffentlichen Schulträgers nach GaFöG" [level=3]
+  - list:
+    - listitem: zeigt eine vereinfachte und beispielhafte Darstellung der Prozesse, die sich im Kontext eines Förderverfahrens für Ganztagsbetreuung aus Sicht eines öffentlichen Schulträgers (Empfänger des Förderprogramms) abspielen.
+    - listitem: Hebt die Verantwortlichkeiten von Bund, Ländern und Kommunen farblich hervor und macht so auf einen Blick sichtbar, wer welchen Schritt übernimmt.
+    - listitem: Stellt die Phasen eines Bauvorhabens von der Konzeption bis zur Evaluation schrittweise dar und zeigt, welche Prozesse einmalig und welche mehrfach durchlaufen werden. Dadurch ist der Gesamtprozess leicht nachvollziehbar.
+    - listitem: Macht Herausforderungen in der Umsetzung (rot) und Digitalisierungspotenziale (blau) visuell deutlich und bietet Handlungsempfehlungen für die Praxis.
+  - link "Register über Betreiber von unbemannten Fluggeräten – LuftVG":
+    - /url: /beispiele/regelungen/register-ueber-betreiber-von-unbemannten-fluggeraeten-luft-vg
+    - heading "Register über Betreiber von unbemannten Fluggeräten – LuftVG" [level=2]
+  - link "Diagramm, das die Registrierung als UAS-Betreiber beschreibt":
+    - /url: /beispiele/visualisierung/7083_Visualisierung_Luft_VG_pages_to_jpg_0001_ac5b358394.jpg
+    - img "Diagramm, das die Registrierung als UAS-Betreiber beschreibt"
+  - text: /Veröffentlicht am:\d+\. Juli \d+ Art der Visualisierung:Flussdiagramm Software zur Erstellung:Conceptboard Ressort:BMV/
+  - heading "UAS-Betreiberregistrierung nach §66a LuftVG" [level=3]
+  - list:
+    - listitem: Stellt den Prozess klar und strukturiert dar, sodass alle Schritte logisch aufeinander aufbauen und leicht nachvollziehbar sind.
+    - listitem: Fördert eine schnelle Orientierung, indem sie Paragraphen mit den Prozessschritten verknüpft.
+    - listitem: Hebt Verantwortlichkeiten farblich hervor, wodurch schnell erkennbar ist, welche Schritte von Antragstellenden, Behördenmitarbeitenden oder durch Automatisierung durchgeführt werden.
+    - listitem: Erleichtert das Erkennen von Digitalisierungspotenzialen, indem automatisierte Schritte sichtbar gemacht werden und Bereiche identifiziert werden können, die weiter digitalisiert werden könnten.
+  - link "Identifikation der Nutzer Unternehmensregisterverordnung – URV":
+    - /url: /beispiele/regelungen/identifikation-der-nutzer-unternehmensregisterverordnung-urv
+    - heading "Identifikation der Nutzer Unternehmensregisterverordnung – URV" [level=2]
+  - link "Das Bild zeigt zwei Flussdiagramme, die den Prozess der Identifizierung und Speicherung von Steuerberatern vor und nach einer Gesetzesänderung darstellen.":
+    - /url: /beispiele/visualisierung/visualisierung_Unternehmensregisterverordnung_791d12038d.jpg
+    - img "Das Bild zeigt zwei Flussdiagramme, die den Prozess der Identifizierung und Speicherung von Steuerberatern vor und nach einer Gesetzesänderung darstellen."
+  - text: /Veröffentlicht am:\d+\. Oktober \d+ Art der Visualisierung:Flussdiagramm Software zur Erstellung:PowerPoint Ressort:BMJV/
+  - heading "Vorher-Nachher-Vergleich Identifikation der Nutzer nach §3a URV" [level=3]
+  - list:
+    - listitem: Macht Auswirkungen der Änderungen – den Wegfall von Extraschritt bei Nutzergruppe – durch einen Vorher-Nachher-Vergleich nachvollziehbar.
+    - listitem: Abstrahiert die inhaltliche Komplexität zu einer schematischen Darstellung und ist damit verständlich für Fachleute und Laien.
+    - listitem: Fördert eine schnelle Orientierung durch Verknüpfung des Paragraphen mit der Visualisierung.
+  - heading "Sie möchten Ihr Beispiel hier sehen?" [level=2]
+  - paragraph:
+    - text: Wir nehmen gerne Vorschläge für Beispiele entgegen. Wenn Sie einen digitaltauglichen Regelungstext oder eine Visualisierung haben, nutzen Sie ganz einfach unser Formular. Dort können Sie Beispiele schnell selbst übermitteln.
+    - link "Vorschlag übermitteln":
+      - /url: https://docs.google.com/forms/d/1qlGk9fRqxs9QZq6h1nbQ0CRhvoxVv-1I3KVylOyGVhU/edit
+  - paragraph:
+    - text: Oder schreiben Sie uns eine E-Mail an
+    - link "digitalcheck@digitalservice.bund.de":
+      - /url: mailto:digitalcheck@digitalservice.bund.de?subject=Beispiel:%20Digitaltauglichkeit
+    - text: . Wir melden uns zeitnah bei Ihnen.
+  - heading "Sie haben Gesprächsbedarf zu Ihrem Vorhaben?" [level=2]
+  - paragraph:
+    - text: Bei inhaltlichen Anliegen zu Ihrem Regelungsvorhaben oder Fragen helfen wir Ihnen gerne weiter. Schreiben Sie uns über
+    - link "digitalcheck@digitalservice.bund.de":
+      - /url: mailto:digitalcheck@digitalservice.bund.de?subject=Gespr%C3%A4chsbedarf:%20digitalcheck.bund.de
+    - text: oder rufen Sie uns an unter
+    - link /\d+\/\d+ \d+ \d+ \d+/:
+      - /url: tel:+4915140767839
+    - text: .
