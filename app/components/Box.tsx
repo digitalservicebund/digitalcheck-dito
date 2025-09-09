@@ -15,6 +15,9 @@ export type BoxProps = {
   buttons?: (ButtonLinkProps | ButtonProps)[];
 };
 
+/**
+ * @deprecated Use InfoBox instead
+ */
 const Box = ({
   identifier,
   badge,

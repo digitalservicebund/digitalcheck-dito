@@ -5,13 +5,13 @@ import {
 
 import fileSaver from "file-saver";
 import { PDFDocument } from "pdf-lib";
-import Box from "~/components/Box";
 import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
+import InfoBox from "~/components/InfoBox.tsx";
 import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import { documentation } from "~/resources/content/dokumentation";
@@ -98,12 +98,12 @@ export default function DocumentationResult() {
             </div>
           </Container>
           <Container className="rounded-b-lg bg-white">
-            <Box
+            <InfoBox
               heading={{
                 text: result.data.title,
                 tagName: "h2",
               }}
-              content={{ markdown: result.data.text }}
+              content={result.data.text}
             />
             <DetailsSummary
               title="Alle Eingaben"
@@ -119,16 +119,14 @@ export default function DocumentationResult() {
             <hr className="mt-40 mb-32 border-t-[2px] border-gray-400" />
             {prototypeAlternativeEnabled ? (
               <>
-                <Box
+                <InfoBox
                   heading={{
                     text: "Dokumentation speichern",
                     tagName: "h2",
                   }}
-                  content={{
-                    markdown: dedent`
-                      Laden Sie die Dokumentation als PDF-Datei herunter, um sie intern abzustimmen oder direkt an den NKR zu senden.
-                      `,
-                  }}
+                  content={dedent`
+                    Laden Sie die Dokumentation als PDF-Datei herunter, um sie intern abzustimmen oder direkt an den NKR zu senden.
+                    `}
                 />
                 <DetailsSummary
                   className="mt-20"
@@ -164,17 +162,15 @@ export default function DocumentationResult() {
               </>
             ) : (
               <>
-                <Box
+                <InfoBox
                   heading={{
                     text: "Dokumentation speichern",
                     tagName: "h2",
                   }}
-                  content={{
-                    markdown: dedent`
+                  content={dedent`
                 Laden Sie die Dokumentation als PDF herunter, um sie intern abzustimmen oder direkt an den NKR zu senden.
                 
-                Sie können alternativ einen Zwischenstand speichern, um später weiterzuarbeiten.`,
-                  }}
+                Sie können alternativ einen Zwischenstand speichern, um später weiterzuarbeiten.`}
                 />
                 <ButtonContainer
                   buttons={[

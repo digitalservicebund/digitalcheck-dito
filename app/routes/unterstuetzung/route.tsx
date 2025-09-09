@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 
-import Box from "~/components/Box";
 import { ButtonProps } from "~/components/Button.tsx";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image";
+import InfoBox from "~/components/InfoBox";
 import RichText from "~/components/RichText";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { support } from "~/resources/content/unterstuetzung";
@@ -91,14 +91,12 @@ export default function Index() {
             key={offering.title}
             className="mb-32 flex gap-32 rounded-xl bg-blue-100 px-40 max-md:flex-col"
           >
-            <Box
+            <InfoBox
               heading={{
                 tagName: "h2",
                 text: offering.title,
               }}
-              content={{
-                markdown: offering.text,
-              }}
+              content={offering.text}
               buttons={offering.button ? [offering.button] : []}
             />
             <div className="flex-none space-y-20 md:w-[310px]">
@@ -188,14 +186,12 @@ export default function Index() {
         <Testimonial />
       </Container>
       <Container className="pt-48">
-        <Box
+        <InfoBox
           heading={{
             tagName: "h2",
             text: supportWhat.title,
           }}
-          content={{
-            markdown: supportWhat.subtitle,
-          }}
+          content={supportWhat.subtitle}
         />
         <div className="mt-40 flex gap-32 max-sm:flex-col">
           {supportWhat.supportTypes.length > 0 &&
@@ -205,14 +201,12 @@ export default function Index() {
                 className="flex gap-16 max-lg:flex-col"
               >
                 <supportType.icon className="size-48 flex-none fill-blue-800" />
-                <Box
+                <InfoBox
                   heading={{
                     tagName: "h3",
                     text: supportType.title,
                   }}
-                  content={{
-                    markdown: supportType.text,
-                  }}
+                  content={supportType.text}
                 />
               </div>
             ))}
@@ -222,41 +216,37 @@ export default function Index() {
         <Container>
           <Heading id="hilfe" tagName="h2" text={supportHow.title} />
           <div className="ds-stack ds-stack-16 pt-32 pb-40">
-            <Box
-              content={{
-                markdown: supportHow.text,
-              }}
-            />
+            <InfoBox>
+              <RichText markdown={supportHow.text} />
+            </InfoBox>
             {renderButtonContainer(supportHow.buttons)}
           </div>
         </Container>
       </div>
       <div id="angebote">
         <Container className="ds-stack ds-stack-40">
-          <Box
+          <InfoBox
             heading={{
               tagName: "h2",
               text: supportOfferings.title,
             }}
-            content={{
-              markdown: supportOfferings.text,
-            }}
-          />
+          >
+            <RichText markdown={supportOfferings.text} />
+          </InfoBox>
           <Tabs tabs={tabsData} initialActiveIndex={initialTabIndex} />
         </Container>
       </div>
 
       <div className="bg-blue-300">
         <Container>
-          <Box
+          <InfoBox
             heading={{
               tagName: "h2",
               text: kontaktstelle.title,
             }}
-            content={{
-              markdown: kontaktstelle.text,
-            }}
-          />
+          >
+            <RichText markdown={kontaktstelle.text} />
+          </InfoBox>
         </Container>
       </div>
     </>

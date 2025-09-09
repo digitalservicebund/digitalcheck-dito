@@ -1,6 +1,6 @@
-import Box from "~/components/Box";
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
+import InfoBox from "~/components/InfoBox.tsx";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { examples } from "~/resources/content/beispiele";
 import { ROUTE_EXAMPLES } from "~/resources/staticRoutes";
@@ -14,14 +14,14 @@ export default function Digitaltauglichkeit_index() {
   const tabsData: TabItem[] = examples.boxItems.map((item) => ({
     title: item.tabName,
     content: (
-      <Box
+      <InfoBox
         className="pb-64"
         key={item.title}
         heading={{
           tagName: "h2",
           text: item.title,
         }}
-        content={{ markdown: item.content }}
+        content={item.content}
         buttons={item.buttons}
       />
     ),

@@ -1,5 +1,4 @@
 import Accordion from "~/components/Accordion";
-import Box from "~/components/Box";
 import Button from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
@@ -7,6 +6,7 @@ import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image";
+import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxList from "~/components/InfoBoxList";
 import SupportBanner from "~/components/SupportBanner";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
@@ -45,15 +45,13 @@ export default function Index() {
             alternativeText={preCheck.start.info.image.alt}
             className="md:w-1/3 md:pl-32"
           />
-          <Box
+          <InfoBox
             heading={{
               tagName: "h3",
               look: "ds-heading-03-reg",
               text: preCheck.start.info.title,
             }}
-            content={{
-              markdown: preCheck.start.info.text,
-            }}
+            content={preCheck.start.info.text}
             buttons={[
               {
                 text: preCheck.start.info.button.text,

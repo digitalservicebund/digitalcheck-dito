@@ -1,11 +1,11 @@
 import { CheckCircleOutlined } from "@digitalservicebund/icons";
-import Box from "~/components/Box";
 import { ButtonLinkProps } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
+import InfoBox from "~/components/InfoBox.tsx";
 import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import { documentation } from "~/resources/content/dokumentation";
@@ -46,12 +46,12 @@ export default function DocumentationResult() {
             </div>
           </Container>
           <Container className="rounded-b-lg bg-white">
-            <Box
+            <InfoBox
               heading={{
                 text: result.data.title,
                 tagName: "h2",
               }}
-              content={{ markdown: result.data.text }}
+              content={result.data.text}
             />
             <DetailsSummary
               title="Alle Eingaben"
@@ -70,16 +70,15 @@ export default function DocumentationResult() {
               className="mt-40"
             />
             <hr className="mt-40 mb-32 border-t-[2px] border-gray-400" />
-            <Box
+            <InfoBox
               heading={{
                 text: "Dokumentation abstimmen",
                 tagName: "h2",
               }}
-              content={{
-                markdown:
-                  "Laden Sie die Dokumentation als Word-Datei herunterladen, um sie abzustimmen oder an den NKR zu senden.",
-              }}
-            />
+            >
+              Laden Sie die Dokumentation als Word-Datei herunterladen, um sie
+              abzustimmen oder an den NKR zu senden.
+            </InfoBox>
             <ButtonContainer
               buttons={[
                 {

@@ -1,8 +1,8 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
-import Box from "~/components/Box.tsx";
 import Container from "~/components/Container.tsx";
+import InfoBox from "~/components/InfoBox.tsx";
 import Tabs, { TabItem } from "./Tabs";
 
 class MockResizeObserver {
@@ -17,15 +17,13 @@ const mockTabs: TabItem[] = [
     title: "Example 1",
     content: (
       <Container>
-        <Box
+        <InfoBox
           heading={{
             tagName: "h3",
             look: "ds-heading-03-reg",
             text: "someTitle",
           }}
-          content={{
-            markdown: "someText",
-          }}
+          content={"someText"}
         />
       </Container>
     ),

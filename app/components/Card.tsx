@@ -1,6 +1,6 @@
-import Box, { BoxProps } from "./Box";
+import InfoBox, { InfoBoxProps } from "~/components/InfoBox.tsx";
 
-export type CardProps = BoxProps & {
+export type CardProps = InfoBoxProps & {
   children?: React.ReactNode;
 };
 
@@ -12,7 +12,7 @@ export default function Card({ children, ...boxProps }: Readonly<CardProps>) {
           {children}
         </div>
       </div>
-      <Box
+      <InfoBox
         {...boxProps}
         className="bg-blue-100 px-16 py-24 sm:px-80 sm:pt-40 sm:pb-48"
       />

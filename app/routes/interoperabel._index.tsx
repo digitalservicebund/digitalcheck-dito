@@ -1,5 +1,4 @@
 import Accordion from "~/components/Accordion";
-import Box from "~/components/Box.tsx";
 import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
@@ -7,6 +6,7 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image";
 import ImageZoomable from "~/components/ImageZoomable";
+import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxList from "~/components/InfoBoxList";
 import RichText from "~/components/RichText";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
@@ -43,13 +43,13 @@ export default function Interoperability() {
             className="mt-40 mb-8"
           />
           <RichText markdown={interoperability.andYourVorhaben.law.content} />
-          <Box
+          <InfoBox
             className="pt-64 pb-48"
             heading={{
               tagName: "h2",
               text: interoperability.kontaktstelle.title,
             }}
-            content={{ markdown: interoperability.kontaktstelle.text }}
+            content={interoperability.kontaktstelle.text}
             buttons={interoperability.kontaktstelle.buttons}
           />
         </>

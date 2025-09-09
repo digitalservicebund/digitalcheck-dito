@@ -1,6 +1,5 @@
 import { useLoaderData } from "react-router";
 
-import Box from "~/components/Box";
 import Card from "~/components/Card";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -72,14 +71,18 @@ export default function Index() {
           />
         </Container>
       )}
-      <Container className="ds-stack ds-stack-32">
-        <Box
-          heading={{ text: content.content.title, look: "ds-heading-03-reg" }}
+      <Container className="space-y-32">
+        <InfoBox
+          heading={{
+            text: content.content.title,
+            look: "ds-heading-03-reg",
+            tagName: "h2",
+          }}
           badge={{
             children: content.content.label,
             Icon: content.content.icon,
           }}
-          content={{ markdown: content.content.text }}
+          content={content.content.text}
           buttons={"buttons" in content.content ? content.content.buttons : []}
         />
         {content.boxes.map((box) => (
@@ -87,7 +90,7 @@ export default function Index() {
             key={box.title}
             heading={{ text: box.title, look: "ds-heading-03-reg" }}
             badge={{ children: box.label, Icon: box.icon }}
-            content={{ markdown: box.text }}
+            content={box.text}
             buttons={"buttons" in box ? box.buttons : []}
             className="px-96 py-64 max-sm:px-16 max-sm:py-32"
           >
@@ -118,16 +121,17 @@ export default function Index() {
       {"support" in content && (
         <div className="bg-blue-100">
           <Container>
-            <Box
+            <InfoBox
               heading={{
                 text: content.support.title,
                 look: "ds-heading-03-reg",
+                tagName: "h2",
               }}
               badge={{
                 children: content.support.label,
                 Icon: content.support.icon,
               }}
-              content={{ markdown: content.support.text }}
+              content={content.support.text}
               buttons={content.support.buttons}
             />
           </Container>

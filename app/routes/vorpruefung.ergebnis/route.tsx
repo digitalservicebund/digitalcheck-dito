@@ -12,12 +12,12 @@ import { data, redirect, useLoaderData } from "react-router";
 import { twJoin } from "tailwind-merge";
 
 import Accordion from "~/components/Accordion";
-import Box from "~/components/Box";
 import { ButtonLinkProps } from "~/components/Button";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
+import InfoBox from "~/components/InfoBox.tsx";
 import InfoTooltip from "~/components/InfoTooltip";
 import InlineNotice from "~/components/InlineNotice";
 import NumberedList from "~/components/NumberedList";
@@ -219,12 +219,12 @@ export default function Result() {
           </Container>
           <Container className="space-y-40 rounded-b-lg bg-white">
             {resultContent.infoboxContent && (
-              <Box
+              <InfoBox
                 heading={{
                   text: resultContent.infoboxContent.title,
                   tagName: "h3",
                 }}
-                content={{ markdown: resultContent.infoboxContent.text }}
+                content={resultContent.infoboxContent.text}
               />
             )}
             {resultContent.inlineNoticeContent && (
@@ -289,13 +289,12 @@ export default function Result() {
       </div>
       <Container className="my-80 space-y-40 py-0">
         {result.digital === ResultType.UNSURE && (
-          <Box
+          <InfoBox
             heading={{
               text: preCheckResult.unsure.nextStep.title,
+              tagName: "h2",
             }}
-            content={{
-              markdown: preCheckResult.unsure.nextStep.text,
-            }}
+            content={preCheckResult.unsure.nextStep.text}
             buttons={[
               {
                 id: "result-method-button",

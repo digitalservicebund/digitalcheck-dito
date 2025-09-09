@@ -1,10 +1,10 @@
 import { FileDownloadOutlined } from "@digitalservicebund/icons";
 import { useNavigate } from "react-router";
-import Box from "~/components/Box.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Header from "~/components/Header";
+import InfoBox from "~/components/InfoBox.tsx";
 import { features } from "~/resources/features";
 import {
   ROUTE_DOCUMENTATION_STATIC_PDF,
@@ -45,12 +45,12 @@ export default function DocumentationResult() {
           </div>
         </Container>
         <Container className="rounded-b-lg bg-white">
-          <Box
-            content={{
-              markdown: prototypeAlternativeEnabled
+          <InfoBox
+            content={
+              prototypeAlternativeEnabled
                 ? "Sie können die Dokumentation als auslesbare PDF-Datei speichern, um sie später wieder hochzuladen und weiter zu bearbeiten."
-                : "Sie können die Dokumentation als JSON-Datei speichern, um sie später wieder hochzuladen und weiterzubearbeiten.",
-            }}
+                : "Sie können die Dokumentation als JSON-Datei speichern, um sie später wieder hochzuladen und weiterzubearbeiten."
+            }
           />
           <DetailsSummary
             className="mt-40"

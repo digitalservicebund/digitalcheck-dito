@@ -1,6 +1,6 @@
 import { Outlet, useLoaderData } from "react-router";
-import Box from "~/components/Box";
 import Container from "~/components/Container";
+import InfoBox from "~/components/InfoBox.tsx";
 import SupportBanner from "~/components/SupportBanner";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import { supportBanner } from "~/resources/content/shared/support-banner";
@@ -28,12 +28,12 @@ export default function Digitaltauglichkeit() {
     <>
       <Outlet context={useLoaderData<typeof loader>()} />
       <Container className="mt-40 mb-80 bg-blue-100" overhangingBackground>
-        <Box
+        <InfoBox
           heading={{
             text: examplesRegelungen.yourExample.title,
             tagName: "h2",
           }}
-          content={{ markdown: examplesRegelungen.yourExample.text }}
+          content={examplesRegelungen.yourExample.text}
         />
       </Container>
       <SupportBanner {...supportBanner} />

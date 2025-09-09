@@ -1,5 +1,5 @@
-import Box from "~/components/Box";
 import Container from "~/components/Container";
+import InfoBox from "~/components/InfoBox.tsx";
 
 export type SupportBannerProps = {
   title: string;
@@ -13,16 +13,14 @@ export default function SupportBanner({
   return (
     <div className="bg-blue-300">
       <Container className="ds-stack ds-stack-16">
-        <Box
+        <InfoBox
           heading={{
             tagName: "h2",
             look: "ds-subhead font-bold",
             text: title,
           }}
-          content={{
-            markdown: text,
-          }}
-        ></Box>
+          content={text}
+        />
       </Container>
     </div>
   );

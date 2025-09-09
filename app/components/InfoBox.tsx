@@ -40,6 +40,7 @@ type VisualProps =
 
 export type InfoBoxProps = BaseInfoBoxProps & {
   visual?: VisualProps;
+  children?: React.ReactNode;
 };
 
 const imageSizes = {
@@ -61,6 +62,7 @@ const InfoBox = ({
   buttons,
   visual,
   look,
+  children,
 }: InfoBoxProps) => {
   return (
     <div
@@ -108,7 +110,7 @@ const InfoBox = ({
               <BlocksRenderer content={content} />
             </div>
           ))}
-
+        {children}
         {detailsSummary && (
           <div className="ds-stack ds-stack-8 mt-16">
             {detailsSummary.title && (

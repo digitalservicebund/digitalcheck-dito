@@ -1,9 +1,9 @@
 import { useLoaderData } from "react-router";
 import Badge from "~/components/Badge";
-import Box from "~/components/Box";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
+import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxList from "~/components/InfoBoxList";
 import { PrinciplePosterBox } from "~/components/PrinciplePosterBox";
 import Separator from "~/components/Separator";
@@ -87,16 +87,17 @@ export default function FivePrinciples() {
       <PrinciplePosterBox />
 
       <Container>
-        <Box
+        <InfoBox
           heading={{
             text: methodsFivePrinciples.nextStep.title,
             look: "ds-heading-03-reg",
+            tagName: "h2",
           }}
           badge={{
             children: methodsFivePrinciples.nextStep.label,
             Icon: methodsFivePrinciples.nextStep.icon,
           }}
-          content={{ markdown: methodsFivePrinciples.nextStep.text }}
+          content={methodsFivePrinciples.nextStep.text}
           buttons={methodsFivePrinciples.nextStep.buttons}
         />
       </Container>

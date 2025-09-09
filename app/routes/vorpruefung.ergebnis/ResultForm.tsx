@@ -6,11 +6,11 @@ import {
 import { useForm } from "@rvf/react-router";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Alert from "~/components/Alert";
-import Box from "~/components/Box.tsx";
 import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
+import InfoBox from "~/components/InfoBox.tsx";
 import Input from "~/components/Input";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
@@ -209,12 +209,12 @@ export default function ResultForm({
       </div>
       <hr className="mt-40 mb-32 border-t-[2px] border-gray-400" />
 
-      <Box
+      <InfoBox
         heading={{
           text: preCheckResult.form.outro.title,
           tagName: "h3",
         }}
-        content={{ markdown: preCheckResult.form.outro.text }}
+        content={preCheckResult.form.outro.text}
       />
       <div className="ds-stack ds-stack-16 mt-40">
         <Heading
