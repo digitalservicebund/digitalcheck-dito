@@ -29,7 +29,7 @@ const mockPrinzipsData = [
     ] as Node[],
     order: 1,
     Nummer: 1 as const,
-    PrinzipienAnwendung: [
+    PrinzipAspekt: [
       {
         Title: "Anwendung 1.1",
         Text: [
@@ -94,7 +94,7 @@ const mockPrinzipsData = [
     ] as Node[],
     order: 2,
     Nummer: 2 as const,
-    PrinzipienAnwendung: [], // No application examples
+    PrinzipAspekt: [], // No application examples
     // No Example paragraph
   },
 ];
