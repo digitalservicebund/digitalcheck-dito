@@ -43,20 +43,22 @@ export type PrinzipErfuellung = {
   Prinzip?: BasePrinzip;
 };
 
-export type Absatz = {
-  id: number;
+export type BaseAbsatz = {
+  documentId: string;
+  Nummer: number;
   Text: Node[];
   PrinzipErfuellungen?: PrinzipErfuellung[];
 };
 
-export type ExampleParagraph = {
-  AbsatzNumber: number;
+export type AbsatzWithParagraph = BaseAbsatz & {
   Paragraph: {
-    Titel?: string;
-    Nummer: PrincipleNumber;
+    Nummer: number;
     Gesetz: string;
-    Absaetze: Absatz[];
-    Digitalcheck?: Digitalcheck;
+    Titel: string;
+    Beispielvorhaben: {
+      URLBezeichnung: string;
+      Titel: string;
+    };
   };
 };
 
@@ -65,7 +67,7 @@ type PrinzipienAnwendung = {
   Text: Node[];
   Questions?: Node[];
   WordingExample?: Node[];
-  Example?: ExampleParagraph;
+  Beispiel?: AbsatzWithParagraph;
 };
 
 export type Paragraph = {
@@ -74,8 +76,8 @@ export type Paragraph = {
   Gesetz: string;
   Titel?: string;
   Artikel?: string;
-  Digitalcheck?: Digitalcheck;
-  Absaetze: Absatz[];
+  Beispielvorhaben?: Regelungsvorhaben;
+  Absaetze: BaseAbsatz[];
 };
 
 export type BasePrinzip = {
@@ -87,18 +89,17 @@ export type BasePrinzip = {
 };
 
 export type PrinzipWithAnwendungen = BasePrinzip & {
-  Example?: ExampleParagraph;
+  Beispiel?: AbsatzWithParagraph;
   PrinzipienAnwendung: PrinzipienAnwendung[];
 };
 
 export type PrinzipWithAnwendungenAndExample = PrinzipWithAnwendungen & {
-  Example: ExampleParagraph;
-  exampleAbsatz: Absatz;
+  Beispiel: AbsatzWithParagraph;
 };
 
-export type PrinzipWithUmsetzungen = BasePrinzip & {
+export type PrinzipWithBeispielvorhaben = BasePrinzip & {
   documentId: string;
-  GuteUmsetzungen: Digitalcheck[];
+  Beispielvorhaben: Regelungsvorhaben[];
   Kurzbezeichnung: string;
 };
 
@@ -113,7 +114,7 @@ export type Visualisierung = {
     url: string;
     alternativeText: string;
   };
-  Digitalcheck: Digitalcheck;
+  Beispielvorhaben: Regelungsvorhaben;
 };
 
 export type Digitalcheck = {
@@ -126,8 +127,6 @@ export type Digitalcheck = {
   EinschaetzungKlareRegelungen: EinschaetzungReferat;
   EinschaetzungAutomatisierung: EinschaetzungReferat;
   Regelungsvorhaben?: Regelungsvorhaben;
-  Paragraphen: Paragraph[];
-  Visualisierungen: Visualisierung[];
 };
 
 export type Regelungsvorhaben = {
@@ -140,6 +139,8 @@ export type Regelungsvorhaben = {
   URLBezeichnung: string;
   Rechtsgebiet?: Rechtsgebiet;
   VeroeffentlichungsDatum?: string;
+  Paragraphen: Paragraph[];
+  Visualisierungen: Visualisierung[];
   Digitalchecks: Digitalcheck[];
   LinkRegelungstext: string;
   GesetzStatus?: GesetzStatus;
@@ -163,9 +164,10 @@ fragment ParagraphFields on Paragraph {
   Titel
   Gesetz
   Artikel
-  Absaetze(pagination: { start: 0, limit: 20 }) {
-    id
+  Absaetze: Absatz(pagination: { start: 0, limit: 20 }) {
+    documentId
     Text
+    Nummer
     PrinzipErfuellungen {
       id
       WarumGut
@@ -189,14 +191,12 @@ fragment VisualisationFields on Visualisierung {
     previewUrl
     alternativeText
   }
-  Digitalcheck {
-    Regelungsvorhaben {
-      URLBezeichnung
-      VeroeffentlichungsDatum
-      Rechtsgebiet
-      Titel
-      Ressort
-    }
+  Beispielvorhaben {
+    URLBezeichnung
+    VeroeffentlichungsDatum
+    Rechtsgebiet
+    Titel
+    Ressort
   }
 }`;
 
@@ -216,29 +216,25 @@ query GetPrinzips {
     order
     Nummer
     URLBezeichnung
-    Example {
-      AbsatzNumber
+    Beispiel {
+      documentId
+      Nummer
+      Text
       Paragraph {
-        Titel
         Nummer
         Gesetz
-        Digitalcheck {
-          Regelungsvorhaben {
-            Titel
-            URLBezeichnung
-          }
+        Titel
+        Beispielvorhaben {
+          URLBezeichnung
+          Titel
         }
-        Absaetze {
-          id
-          Text
-          PrinzipErfuellungen {
-            id
-            WarumGut
-            Prinzip {
-              Nummer
-              Name
-            }
-          }
+      }
+      PrinzipErfuellungen {
+        id
+        WarumGut
+        Prinzip {
+          Nummer
+          Name
         }
       }
     }
@@ -247,20 +243,24 @@ query GetPrinzips {
       Text
       Questions
       WordingExample
-      Example {
-        AbsatzNumber
+      Beispiel {
+        documentId
+        Nummer
+        Text
         Paragraph {
           Nummer
           Gesetz
-          Absaetze {
-            id
-            Text
+          Titel
+          Beispielvorhaben {
+            URLBezeichnung
+            Titel
           }
         }
       }
     }
   }
-}`;
+}
+`;
 
 type GraphQLResponse<DataType> = {
   data: DataType;

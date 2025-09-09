@@ -1,12 +1,5 @@
-import type {
-  Absatz,
-  BasePrinzip,
-  ExampleParagraph,
-  PrinzipWithAnwendungen,
-  PrinzipWithAnwendungenAndExample,
-} from "./strapiData.server";
+import type { BaseAbsatz, BasePrinzip } from "./strapiData.server";
 
-export type AbsatzWithNumber = Absatz & { number: number };
 export type Node = {
   type: string;
   text?: string;
@@ -25,20 +18,15 @@ export type Node = {
  * @returns ordered array of Absaetze which have a relevant PrinzipErfuellungen
  */
 export function groupAbsaetzeWithoutRelevantPrinciples(
-  absaetze: Absatz[],
+  absaetze: BaseAbsatz[],
   principlesToShow: BasePrinzip[],
 ) {
-  const filteredAbsaetzeWithNumber = absaetze.map((absatz, index) => ({
-    ...absatz,
-    number: index + 1,
-  }));
-
   const relevantPrinciples = principlesToShow.map(
     (principle) => principle.Nummer,
   );
 
   // Group consecutive Absaetze without a relevant PrinzipErfuellungen together
-  return filteredAbsaetzeWithNumber.reduce(
+  return absaetze.reduce(
     (groups, absatz) => {
       // If the current Absatz has a relevant Erfuellung, add it as a standalone item
       if (
@@ -63,7 +51,7 @@ export function groupAbsaetzeWithoutRelevantPrinciples(
       lastGroup.push(absatz);
       return groups;
     },
-    [] as (AbsatzWithNumber | AbsatzWithNumber[])[],
+    [] as (BaseAbsatz | BaseAbsatz[])[],
   );
 }
 
@@ -89,9 +77,9 @@ function prependNumberRecursively(node: Node, number: number): Node {
   return node;
 }
 
-export function prependNumberToAbsatz(absatz: AbsatzWithNumber) {
+export function prependNumberToAbsatz(absatz: BaseAbsatz) {
   return [
-    prependNumberRecursively(absatz.Text[0], absatz.number),
+    prependNumberRecursively(absatz.Text[0], absatz.Nummer),
     ...absatz.Text.slice(1),
   ];
 }
@@ -100,16 +88,3 @@ export const explanationID = (absatzId: string, principleNumber: number) =>
   `explanation-${absatzId}-${principleNumber}`;
 
 export const absatzIdTag = (absatzId: string | number) => `absatz-${absatzId}`;
-
-export const getAbsatzFromExampleParagraph = (
-  exampleParagraph?: ExampleParagraph,
-) => exampleParagraph?.Paragraph.Absaetze[exampleParagraph.AbsatzNumber - 1];
-
-export const getPrincipleWithExampleAbsatz = (
-  principle: PrinzipWithAnwendungen,
-): PrinzipWithAnwendungenAndExample | null => {
-  const exampleAbsatz = getAbsatzFromExampleParagraph(principle.Example);
-  if (!exampleAbsatz) return null;
-
-  return { ...principle, exampleAbsatz } as PrinzipWithAnwendungenAndExample;
-};

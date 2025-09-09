@@ -24,7 +24,7 @@ import {
   fetchStrapiData,
   paragraphFields,
   prinzipCoreFields,
-  PrinzipWithUmsetzungen,
+  PrinzipWithBeispielvorhaben,
 } from "~/utils/strapiData.server";
 import { formatDate, gesetzStatusMap } from "~/utils/utilFunctions";
 import type { Route } from "./+types/beispiele.prinzipien.$prinzip";
@@ -39,20 +39,17 @@ ${prinzipCoreFields}
 query GetPrinzips($slug: String!) {
   prinzips(filters: { URLBezeichnung: { eq: $slug } }) {
     ...PrinzipCoreFields
-    GuteUmsetzungen {
+    Beispielvorhaben {
       documentId
+      Ressort
+      Rechtsgebiet
+      Titel
+      URLBezeichnung
+      LinkRegelungstext
+      VeroeffentlichungsDatum
+      GesetzStatus
       Paragraphen {
         ...ParagraphFields
-      }
-      Regelungsvorhaben {
-        documentId
-        Ressort
-        Rechtsgebiet
-        Titel
-        URLBezeichnung
-        LinkRegelungstext
-        VeroeffentlichungsDatum
-        GesetzStatus
       }
     }
   }
@@ -60,7 +57,7 @@ query GetPrinzips($slug: String!) {
 
 export const loader = async ({ params }: Route.LoaderArgs) => {
   const prinzipData = await fetchStrapiData<{
-    prinzips: PrinzipWithUmsetzungen[];
+    prinzips: PrinzipWithBeispielvorhaben[];
   }>(GET_PRINZIPS_QUERY, { slug: params.prinzip });
 
   if ("error" in prinzipData) {
@@ -78,10 +75,10 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
 
 export default function DigitaltauglichkeitPrinzipienDetail() {
   const { prinzip } = useLoaderData<typeof loader>();
-  const prinzips = useOutletContext<PrinzipWithUmsetzungen[]>();
+  const prinzips = useOutletContext<PrinzipWithBeispielvorhaben[]>();
   const navigate = useNavigate();
 
-  const { GuteUmsetzungen } = prinzip;
+  const { Beispielvorhaben } = prinzip;
 
   const activeTabIndex = prinzips.findIndex(
     (p) => p.URLBezeichnung === prinzip.URLBezeichnung,
@@ -125,87 +122,76 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
             principleNumber: prinzip.Nummer,
           }}
         />
-        {GuteUmsetzungen.length > 0 && <Separator />}
 
-        {GuteUmsetzungen.length > 0 && (
-          <div className="space-y-80">
-            {GuteUmsetzungen.map(
-              (digitalcheck) =>
-                digitalcheck.Regelungsvorhaben && (
-                  <div
-                    key={digitalcheck.documentId}
-                    data-testid="regelung-on-prinzip"
-                    className="space-y-80"
-                  >
-                    <div className="space-y-16">
-                      <Heading
-                        tagName="h3"
-                        text={digitalcheck.Regelungsvorhaben.Titel}
-                        look="ds-heading-03-bold"
-                        className="max-w-full"
-                      />
-
-                      <Link
-                        target="_blank"
-                        to={`${ROUTE_REGELUNGEN.url}/${digitalcheck.Regelungsvorhaben.URLBezeichnung}`}
-                        rel="noreferrer"
-                        prefetch="viewport"
-                        className="text-link"
-                      >
-                        {examplesRegelungen.exampleLinkText}
-                      </Link>
-                    </div>
-
-                    <ParagraphList
-                      paragraphs={digitalcheck.Paragraphen}
-                      principlesToShow={[prinzip]}
+        {Beispielvorhaben.length > 0 && (
+          <>
+            <Separator />
+            <div className="space-y-80">
+              {Beispielvorhaben.map((exampleProject) => (
+                <div
+                  key={exampleProject.documentId}
+                  data-testid="regelung-on-prinzip"
+                  className="space-y-80"
+                >
+                  <div className="space-y-16">
+                    <Heading
+                      tagName="h3"
+                      text={exampleProject.Titel}
+                      look="ds-heading-03-bold"
+                      className="max-w-full"
                     />
 
-                    <InlineInfoList
-                      className="bg-gray-100 px-16 py-8"
-                      items={[
-                        {
-                          label: examplesRegelungen.infoLabels.from,
-                          value: digitalcheck.Regelungsvorhaben
-                            .VeroeffentlichungsDatum
-                            ? formatDate(
-                                digitalcheck.Regelungsvorhaben
-                                  .VeroeffentlichungsDatum,
-                              )
-                            : "",
-                        },
-
-                        {
-                          label: examplesRegelungen.infoLabels.resort,
-                          value: digitalcheck.Regelungsvorhaben.Ressort,
-                        },
-                        {
-                          label: examplesRegelungen.infoLabels.linkLabel,
-                          value: digitalcheck.Regelungsvorhaben
-                            .LinkRegelungstext ? (
-                            <CustomLink
-                              to={
-                                digitalcheck.Regelungsvorhaben.LinkRegelungstext
-                              }
-                              target="_blank"
-                              rel="noreferrer"
-                              className="text-blue-800 underline"
-                            >
-                              {digitalcheck.Regelungsvorhaben?.GesetzStatus
-                                ? gesetzStatusMap[
-                                    digitalcheck.Regelungsvorhaben.GesetzStatus
-                                  ]
-                                : examplesRegelungen.infoLabels
-                                    .fallbackLinkText}
-                            </CustomLink>
-                          ) : null,
-                        },
-                      ]}
-                    />
+                    <Link
+                      target="_blank"
+                      to={`${ROUTE_REGELUNGEN.url}/${exampleProject.URLBezeichnung}`}
+                      rel="noreferrer"
+                      prefetch="viewport"
+                      className="text-link"
+                    >
+                      {examplesRegelungen.exampleLinkText}
+                    </Link>
                   </div>
-                ),
-            )}
-          </div>
+
+                  <ParagraphList
+                    paragraphs={exampleProject.Paragraphen}
+                    principlesToShow={[prinzip]}
+                  />
+
+                  <InlineInfoList
+                    className="bg-gray-100 px-16 py-8"
+                    items={[
+                      {
+                        label: examplesRegelungen.infoLabels.from,
+                        value: exampleProject.VeroeffentlichungsDatum
+                          ? formatDate(exampleProject.VeroeffentlichungsDatum)
+                          : "",
+                      },
+
+                      {
+                        label: examplesRegelungen.infoLabels.resort,
+                        value: exampleProject.Ressort,
+                      },
+                      {
+                        label: examplesRegelungen.infoLabels.linkLabel,
+                        value: exampleProject.LinkRegelungstext ? (
+                          <CustomLink
+                            to={exampleProject.LinkRegelungstext}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-blue-800 underline"
+                          >
+                            {exampleProject?.GesetzStatus
+                              ? gesetzStatusMap[exampleProject.GesetzStatus]
+                              : examplesRegelungen.infoLabels.fallbackLinkText}
+                          </CustomLink>
+                        ) : null,
+                      },
+                    ]}
+                  />
+                </div>
+              ))}
+            </div>
+          </>
         )}
       </Container>
     </>

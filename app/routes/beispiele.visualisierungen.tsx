@@ -52,7 +52,7 @@ export default function BeispieleVisualisierungen() {
   // Group visualisations by Regelung
   const groupedVisualisations = visualisationsData.reduce(
     (acc, item) => {
-      const title = item.Digitalcheck?.Regelungsvorhaben?.Titel;
+      const title = item.Beispielvorhaben?.Titel;
       if (!title) return acc;
       acc[title] = acc[title] ?? [];
       acc[title].push(item);
@@ -73,7 +73,7 @@ export default function BeispieleVisualisierungen() {
             <div key={regelungTitle}>
               <div className="ds-stack ds-stack-32">
                 <Link
-                  to={`${ROUTE_REGELUNGEN.url}/${visualisations[0].Digitalcheck?.Regelungsvorhaben?.URLBezeichnung}`}
+                  to={`${ROUTE_REGELUNGEN.url}/${visualisations[0].Beispielvorhaben?.URLBezeichnung}`}
                   prefetch="viewport"
                 >
                   <Heading
