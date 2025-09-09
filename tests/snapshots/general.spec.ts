@@ -8,7 +8,7 @@ async function wait(ms: number) {
 
 test.describe("compare snapshots", () => {
   ROUTES.filter((route) => !route.url.endsWith(".pdf")).forEach((route) => {
-    test(route.title, async ({ page }) => {
+    test(route.url, async ({ page }) => {
       // Listen for redirects and update URL if needed
       const response = await page.goto(route.url);
 
