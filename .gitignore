@@ -159,4 +159,4 @@ lefthook-local.yml
 /test-results/
 
 # Playwright snapshot testing
-tests/snapshots
+*-snapshots/
