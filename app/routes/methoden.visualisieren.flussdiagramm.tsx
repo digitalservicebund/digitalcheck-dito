@@ -14,6 +14,7 @@ import NumberedList from "~/components/NumberedList.tsx";
 import RichText from "~/components/RichText.tsx";
 
 import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
+import BackToTopButton from "~/components/BackToTopButton.tsx";
 import Container from "~/components/Container.tsx";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
@@ -602,6 +603,7 @@ export default function Visualization() {
           ]}
         />
       </Container>
+      <BackToTopButton />
     </>
   );
 }
