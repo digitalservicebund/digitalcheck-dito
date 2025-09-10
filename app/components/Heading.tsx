@@ -25,7 +25,7 @@ function Heading({
   ...additionalProps
 }: Readonly<HeadingProps>) {
   const Tag = tagName as keyof React.JSX.IntrinsicElements;
-  const cssClasses = twMerge("hyphens-none", look, className);
+  const cssClasses = twMerge(look, className);
 
   if (children) {
     return (
