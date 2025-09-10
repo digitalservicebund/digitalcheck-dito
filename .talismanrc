@@ -3,8 +3,6 @@ fileignoreconfig:
   ignore_detectors: [filename]
 - filename: .env.test
   ignore_detectors: [filename]
-- filename: package-lock.json
-  ignore_detectors: [filecontent]
 - filename: app/root.tsx
   allowed_patterns: [posthogKey]
 - filename: .github/workflows/pipeline.yml
@@ -13,10 +11,10 @@ fileignoreconfig:
 - filename: .github/workflows/scan.yml
   ignore_detectors: [filecontent]
 allowed_patterns:
-  - <[^>]+?\bkey=\{.*?\} # Allow <JSXElement ... key={...} patterns
-  - :.+key:.+ # allow type definitions that have "key"
-  - escape\skey
-  - \{\skey, # allow destructuring of key attribute
+  - key
   - passen
   - Anpassungen
   - Pass\s # Allow "Pass " followed by a space
+
+scopeconfig:
+  - scope: node  # ignores files such as package-lock.json
