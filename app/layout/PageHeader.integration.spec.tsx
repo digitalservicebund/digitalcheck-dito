@@ -1,28 +1,16 @@
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { UserEvent, userEvent } from "@testing-library/user-event";
 import React from "react";
 import { MemoryRouter } from "react-router";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { header } from "~/resources/content/shared/header.ts";
 import PageHeader from "./PageHeader";
-
-vi.mock("~/hooks/deviceHook", () => {
-  return {
-    useResize: vi.fn(),
-  };
-});
 
 vi.mock("react-router", async (importOriginal) => {
   const original = await importOriginal<typeof import("react-router")>();
   return {
     ...original,
     useMatches: vi.fn(() => []),
-    Link: vi.fn(({ to, children, ...rest }) => (
-      // just render a plain anchor tag
-      <a href={to as string} {...rest}>
-        {children}
-      </a>
-    )),
   };
 });
 
@@ -32,53 +20,87 @@ describe("PageHeader", () => {
     return render(ui, { wrapper: MemoryRouter });
   };
 
-  describe("hovering desktop navigation menu items", () => {
-    const targetText = header.items[0].text;
-    const expectedContent = header.items[0].overlayContent[0].title;
+  enum TestModes {
+    clicking = "clicking",
+    hovering = "hovering",
+  }
 
-    let desktopNav: HTMLElement;
-    let firstHeaderItem: HTMLElement;
-    let user: UserEvent;
+  for (const interaction of [TestModes.clicking, TestModes.hovering]) {
+    describe(`${interaction} desktop navigation menu items`, () => {
+      const targetText = header.items[0].text;
+      const expectedContent = header.items[0].overlayContent[0].title;
 
-    beforeEach(async () => {
-      user = userEvent.setup();
-      renderWithRouter(<PageHeader />);
+      let desktopNav: HTMLElement;
+      let firstHeaderItem: HTMLElement;
+      let user: UserEvent;
 
-      desktopNav = screen.getByTestId("desktop-nav");
-      firstHeaderItem = within(desktopNav).getByText(targetText);
+      function getDropdownElement() {
+        return within(desktopNav).queryByText(expectedContent);
+      }
 
-      expect(screen.queryByText(expectedContent)).toBeNull();
+      beforeEach(async () => {
+        user = userEvent.setup();
+        renderWithRouter(<PageHeader />);
 
-      await user.hover(firstHeaderItem);
+        desktopNav = screen.getByTestId("desktop-nav");
+        firstHeaderItem = within(desktopNav).getByRole("button", {
+          name: targetText,
+        });
+
+        expect(getDropdownElement()).toBeNull();
+
+        switch (interaction) {
+          case TestModes.hovering:
+            await user.hover(firstHeaderItem);
+            break;
+          case TestModes.clicking:
+            fireEvent.click(firstHeaderItem);
+            break;
+        }
+      });
+
+      it("opens the correct menu item", () => {
+        expect(getDropdownElement()).toBeVisible();
+      });
+
+      it.skipIf(interaction !== TestModes.hovering)(
+        "closes the correct menu item on unhover",
+        async () => {
+          expect(getDropdownElement()).toBeVisible();
+          await user.unhover(firstHeaderItem);
+          expect(getDropdownElement()).toBeNull();
+        },
+      );
+
+      it("closes the menu item on escape key", async () => {
+        expect(getDropdownElement()).toBeVisible();
+        await user.keyboard("{escape}");
+        expect(getDropdownElement()).toBeNull();
+      });
+
+      it("closes the menu item on click", async () => {
+        expect(getDropdownElement()).toBeVisible();
+        await user.click(firstHeaderItem);
+        expect(getDropdownElement()).toBeNull();
+      });
+
+      it("closes the menu item if another item is hovered", async () => {
+        expect(getDropdownElement()).toBeVisible();
+        const secondItem = within(desktopNav).getByRole("button", {
+          name: header.items[1].text,
+        });
+        await user.hover(secondItem);
+        expect(getDropdownElement()).toBeNull();
+      });
+
+      it("closes the menu item if another item is clicked", async () => {
+        expect(getDropdownElement()).toBeVisible();
+        const secondItem = within(desktopNav).getByRole("button", {
+          name: header.items[1].text,
+        });
+        await user.click(secondItem);
+        expect(getDropdownElement()).toBeNull();
+      });
     });
-
-    it("opens the correct menu item", () => {
-      expect(within(desktopNav).getByText(expectedContent)).toBeVisible();
-    });
-
-    it("closes the correct menu item on unhover", async () => {
-      expect(within(desktopNav).getByText(expectedContent)).toBeVisible();
-      await user.unhover(firstHeaderItem);
-      expect(within(desktopNav).queryByText(expectedContent)).toBeNull();
-    });
-
-    it("closes the menu item on escape key", async () => {
-      expect(within(desktopNav).getByText(expectedContent)).toBeVisible();
-      await user.keyboard("{escape}");
-      expect(within(desktopNav).queryByText(expectedContent)).toBeNull();
-    });
-
-    it("closes the menu item on click", async () => {
-      expect(within(desktopNav).getByText(expectedContent)).toBeVisible();
-      await user.click(firstHeaderItem);
-      expect(within(desktopNav).queryByText(expectedContent)).toBeNull();
-    });
-
-    it("closes the menu item if another item is hovered", async () => {
-      expect(within(desktopNav).getByText(expectedContent)).toBeVisible();
-      const secondItem = within(desktopNav).getByText(header.items[1].text);
-      await user.hover(secondItem);
-      expect(within(desktopNav).queryByText(expectedContent)).toBeNull();
-    });
-  });
+  }
 });
