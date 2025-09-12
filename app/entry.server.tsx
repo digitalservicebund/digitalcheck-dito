@@ -11,6 +11,7 @@ import { NonceProvider } from "~/utils/nonce";
 // We need to import the mock server here (which unfortunately also happens in production)
 // because we couldn't get the mocks to register in time otherwise in CI,
 // as awaiting a dynamic esm import did not work with npm run build & npm run start.
+import { STRAPI_MEDIA_URL } from "~/resources/constants.ts";
 import { mockServer } from "./mocks/node";
 
 if (
@@ -33,10 +34,6 @@ if (
 
 // Reject/cancel all pending promises after 5 seconds
 export const streamTimeout = 5000;
-
-export const STRAPI_MEDIA_URL =
-  process.env.STRAPI_MEDIA_URL ||
-  "https://secure-dinosaurs-1a634d1a3d.media.strapiapp.com";
 
 export default function handleRequest(
   request: Request,

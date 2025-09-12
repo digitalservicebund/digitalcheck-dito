@@ -2,6 +2,7 @@ import {
   ArrowDownwardOutlined,
   DriveFileRenameOutline,
   LayersOutlined,
+  OndemandVideo,
 } from "@digitalservicebund/icons";
 import React, { useRef } from "react";
 import Badge, { BadgeProps } from "~/components/Badge.tsx";
@@ -14,10 +15,12 @@ import NumberedList from "~/components/NumberedList.tsx";
 import RichText from "~/components/RichText.tsx";
 
 import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
+import { Link } from "react-router";
 import BackToTopButton from "~/components/BackToTopButton.tsx";
 import Container from "~/components/Container.tsx";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
+import { STRAPI_MEDIA_URL } from "~/resources/constants.ts";
 import {
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX,
@@ -472,13 +475,25 @@ export default function Visualization() {
                   <RichText
                     markdown={dedent`
                     **Darauf sollten Sie achten:**
-                    - Akteure, Hierarchien, Abläufe und Entscheidungen sind klar und konsistent 
+                    - Akteure, Hierarchien, Abläufe und Entscheidungen sind klar und konsistent
                     - Eine eindeutige visuelle Kodierung, zum Beispiel Farben oder Symbole, um Informationen zu unterscheiden
                     - Verweis auf wesentliche Paragraphen, relevante Akteure und EU-Vorgaben
                     
                     Das Ergebnis muss an dieser Stelle noch nicht perfekt aussehen.
                     `}
                   />
+                  <Link
+                    to={
+                      STRAPI_MEDIA_URL +
+                      "/Flussdiagramm_erstellen_live_9d1e3de185.mp4"
+                    }
+                    target="_blank"
+                    rel="noreferrer"
+                    className="ds-link-01-reg flex items-center gap-4"
+                  >
+                    <OndemandVideo className="fill-current" />
+                    Ein Beispielvideo zeigt das Entstehen eines Flussdiagramms.
+                  </Link>
                 </>
               }
               fullwidthContent={
