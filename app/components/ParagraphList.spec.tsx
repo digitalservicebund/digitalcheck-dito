@@ -61,7 +61,7 @@ const ABSAETZE: BaseAbsatz[] = [
       {
         id: 1,
         Prinzip: PRINZIPS[0],
-        WarumGut: [
+        Erklaerung: [
           {
             type: "paragraph",
             children: [{ type: "text", text: "Darum gut 1" }],
@@ -71,7 +71,7 @@ const ABSAETZE: BaseAbsatz[] = [
       {
         id: 2,
         Prinzip: PRINZIPS[1],
-        WarumGut: [
+        Erklaerung: [
           {
             type: "paragraph",
             children: [{ type: "text", text: "Darum gut 2" }],
@@ -106,7 +106,7 @@ const ABSAETZE: BaseAbsatz[] = [
       {
         id: 2,
         Prinzip: PRINZIPS[2],
-        WarumGut: [
+        Erklaerung: [
           {
             type: "paragraph",
             children: [{ type: "text", text: "Darum gut 3" }],
@@ -159,7 +159,7 @@ const ABSAETZE: BaseAbsatz[] = [
       {
         id: 2,
         Prinzip: PRINZIPS[1],
-        WarumGut: [
+        Erklaerung: [
           {
             type: "paragraph",
             children: [{ type: "text", text: "Darum gut 2" }],

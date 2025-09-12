@@ -39,7 +39,7 @@ export type GesetzStatus =
 
 export type PrinzipErfuellung = {
   id: number;
-  WarumGut: Node[];
+  Erklaerung: Node[];
   Prinzip?: BasePrinzip;
 };
 
@@ -62,7 +62,7 @@ export type AbsatzWithParagraph = BaseAbsatz & {
   };
 };
 
-type PrinzipienAnwendung = {
+type PrinzipAspekt = {
   Title: string;
   Text: Node[];
   Questions?: Node[];
@@ -76,7 +76,7 @@ export type Paragraph = {
   Gesetz: string;
   Titel?: string;
   Artikel?: string;
-  Beispielvorhaben?: Regelungsvorhaben;
+  Beispielvorhaben?: Beispielvorhaben;
   Absaetze: BaseAbsatz[];
 };
 
@@ -90,7 +90,7 @@ export type BasePrinzip = {
 
 export type PrinzipWithAnwendungen = BasePrinzip & {
   Beispiel?: AbsatzWithParagraph;
-  PrinzipienAnwendung: PrinzipienAnwendung[];
+  PrinzipAspekt: PrinzipAspekt[];
 };
 
 export type PrinzipWithAnwendungenAndExample = PrinzipWithAnwendungen & {
@@ -99,7 +99,7 @@ export type PrinzipWithAnwendungenAndExample = PrinzipWithAnwendungen & {
 
 export type PrinzipWithBeispielvorhaben = BasePrinzip & {
   documentId: string;
-  Beispielvorhaben: Regelungsvorhaben[];
+  Beispielvorhaben: Beispielvorhaben[];
   Kurzbezeichnung: string;
 };
 
@@ -114,7 +114,7 @@ export type Visualisierung = {
     url: string;
     alternativeText: string;
   };
-  Beispielvorhaben: Regelungsvorhaben;
+  Beispielvorhaben: Beispielvorhaben;
 };
 
 export type Digitalcheck = {
@@ -126,10 +126,10 @@ export type Digitalcheck = {
   EinschaetzungDatenschutz: EinschaetzungReferat;
   EinschaetzungKlareRegelungen: EinschaetzungReferat;
   EinschaetzungAutomatisierung: EinschaetzungReferat;
-  Regelungsvorhaben?: Regelungsvorhaben;
+  Beispielvorhaben?: Beispielvorhaben;
 };
 
-export type Regelungsvorhaben = {
+export type Beispielvorhaben = {
   documentId: string;
   Titel: string;
   Ressort: Ressort;
@@ -170,7 +170,7 @@ fragment ParagraphFields on Paragraph {
     Nummer
     PrinzipErfuellungen {
       id
-      WarumGut
+      Erklaerung
       Prinzip {
         ...PrinzipCoreFields
       }
@@ -231,14 +231,14 @@ query GetPrinzips {
       }
       PrinzipErfuellungen {
         id
-        WarumGut
+        Erklaerung
         Prinzip {
           Nummer
           Name
         }
       }
     }
-    PrinzipienAnwendung {
+    PrinzipAspekt {
       Title
       Text
       Questions

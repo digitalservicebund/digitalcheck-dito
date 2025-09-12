@@ -129,7 +129,7 @@ function PrincipleExplanation({
       <div className="flex content-center gap-8">
         <BlocksRenderer
           className="ds-label-02-reg"
-          content={erfuellung.WarumGut}
+          content={erfuellung.Erklaerung}
         />
         {shouldHighlight && activeHighlight && (
           <Link

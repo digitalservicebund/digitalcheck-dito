@@ -9,9 +9,9 @@ import { absatzIdTag } from "~/utils/paragraphUtils";
 import { PrinzipWithAnwendungen } from "~/utils/strapiData.server";
 
 export default function getDetailsSummary(prinzip: PrinzipWithAnwendungen) {
-  const { PrinzipienAnwendung: prinzipienAnwendungen } = prinzip;
+  const { PrinzipAspekt: prinzipAspekte } = prinzip;
 
-  const items = prinzipienAnwendungen.map((prinzipienAnwendung) => {
+  const items = prinzipAspekte.map((prinzipienAnwendung) => {
     const content = (
       <div className="space-y-4">
         <BlocksRenderer content={prinzipienAnwendung.Text} />
