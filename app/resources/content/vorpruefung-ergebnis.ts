@@ -3,6 +3,7 @@ import {
   ROUTE_INTEROPERABILITY,
   ROUTE_METHODS,
   ROUTE_PRECHECK,
+  ROUTE_PRECHECK_INFO,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -72,9 +73,16 @@ export const preCheckResult = {
       "Das bedeutet, dass Sie weitere Schritte unternehmen müssen, um Digitalbezug und EU-Anforderungen an Interoperabilität in Ihrem Regelungsvorhaben sicherzustellen.",
   },
   inlineNotice: {
-    title: "Interoperabilität benötigt digitale Umsetzung",
-    content:
-      "Da ihr Vorhaben keinen Digitalbezug hat, kann es auch nicht interoperabel sein. Interoperabilität bedeutet, dass verschiedene digitale Systeme miteinander kommunizieren können. Ohne digitale Komponente ist das nicht möglich.",
+    title: "Es liegt ein Widerspruch in Ihren Angaben vor.",
+    content: dedent`
+      Sie haben gewählt, dass Ihr Vorhaben keinen Digitalbezug hat, gleichzeitig aber, dass ein Datenaustausch auf EU-Ebene stattfindet. **Dies ist ein Widerspruch, da ein Datenaustausch auf EU-Ebene einen Digitalbezug (digitale Systeme) voraussetzt.**
+      
+      **Beachten Sie in diesem Kontext:** Interoperabilität ist die Fähigkeit digitaler Systeme, miteinander zu kommunizieren und Daten auszutauschen. **Das heisst, ohne Digitalbezug ist Interoperabilität nicht möglich.**
+
+      Haben Sie Fragen? Kontaktieren Sie uns unter [0151/40 76 78 39](tel:+4915140767839) oder [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de).
+
+      [Zurück zum Vorprüfungs-Formular](${ROUTE_PRECHECK_INFO.url})
+    `,
   },
   interoperability: {
     info: {

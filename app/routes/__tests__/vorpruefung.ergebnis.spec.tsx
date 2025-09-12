@@ -174,7 +174,7 @@ const scenarios: TestScenario[] = [
       hasInputBegruendung: true,
 
       headline:
-        "Das Regelungsvorhaben hat keinen Digitalbezug und keine Anforderungen der Interoperabilität.",
+        "Das Regelungsvorhaben hat keinen Digitalbezug und keine eindeutigen Anforderungen der Interoperabilität.",
       showsInteropLink: true,
       showsNegativeReasoning: true,
       showsUnsureHeading: false,

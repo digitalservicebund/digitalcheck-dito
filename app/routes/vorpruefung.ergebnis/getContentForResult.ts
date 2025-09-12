@@ -47,6 +47,15 @@ const title = {
 };
 
 function getResultTitle(result: PreCheckResult) {
+  if (
+    result.digital === ResultType.NEGATIVE &&
+    result.euBezug === ResultType.POSITIVE
+  ) {
+    return (
+      title.digital[result.digital] + title.interoperability[ResultType.UNSURE]
+    );
+  }
+
   return (
     title.digital[result.digital] +
     (result.digital !== ResultType.UNSURE
