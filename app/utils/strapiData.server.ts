@@ -63,10 +63,10 @@ export type AbsatzWithParagraph = BaseAbsatz & {
 };
 
 type PrinzipAspekt = {
-  Title: string;
+  Titel: string;
   Text: Node[];
-  Questions?: Node[];
-  WordingExample?: Node[];
+  Leitfragen?: Node[];
+  Formulierungsbeispiel?: Node[];
   Beispiel?: AbsatzWithParagraph;
 };
 
@@ -88,12 +88,12 @@ export type BasePrinzip = {
   URLBezeichnung: string;
 };
 
-export type PrinzipWithAnwendungen = BasePrinzip & {
+export type PrinzipWithAspekte = BasePrinzip & {
   Beispiel?: AbsatzWithParagraph;
-  PrinzipAspekt: PrinzipAspekt[];
+  Aspekte: PrinzipAspekt[];
 };
 
-export type PrinzipWithAnwendungenAndExample = PrinzipWithAnwendungen & {
+export type PrinzipWithAspekteAndExample = PrinzipWithAspekte & {
   Beispiel: AbsatzWithParagraph;
 };
 
@@ -238,11 +238,11 @@ query GetPrinzips {
         }
       }
     }
-    PrinzipAspekt {
-      Title
+    Aspekte {
+      Titel
       Text
-      Questions
-      WordingExample
+      Leitfragen
+      Formulierungsbeispiel
       Beispiel {
         documentId
         Nummer
