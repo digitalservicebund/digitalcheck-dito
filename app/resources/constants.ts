@@ -13,5 +13,5 @@ export const PRINCIPLE_COLORS = {
 export type PrincipleNumber = keyof typeof PRINCIPLE_COLORS;
 
 export const STRAPI_MEDIA_URL =
-  import.meta.env.VITE_STRAPI_MEDIA_URL ||
+  import.meta.env?.VITE_STRAPI_MEDIA_URL ||
   "https://secure-dinosaurs-1a634d1a3d.media.strapiapp.com";
