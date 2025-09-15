@@ -2,7 +2,6 @@ import {
   ArrowDownwardOutlined,
   DriveFileRenameOutline,
   LayersOutlined,
-  OndemandVideo,
 } from "@digitalservicebund/icons";
 import React, { useRef } from "react";
 import Badge, { BadgeProps } from "~/components/Badge.tsx";
@@ -482,18 +481,43 @@ export default function Visualization() {
                     Das Ergebnis muss an dieser Stelle noch nicht perfekt aussehen.
                     `}
                   />
-                  <Link
-                    to={
+                  <video
+                    controls
+                    muted
+                    width="100%"
+                    className="max-w-a11y"
+                    preload="none"
+                    poster={
                       STRAPI_MEDIA_URL +
-                      "/Flussdiagramm_erstellen_live_9d1e3de185.mp4"
+                      "/Flussdiagramm_erstellen_live_poster_9655302452.png"
                     }
-                    target="_blank"
-                    rel="noreferrer"
-                    className="ds-link-01-reg flex items-center gap-4"
+                    aria-labelledby="flussdiagramm-erstellen-live-desc"
                   >
-                    <OndemandVideo className="fill-current" />
+                    <source
+                      src={
+                        STRAPI_MEDIA_URL +
+                        "/Flussdiagramm_erstellen_live_9d1e3de185.mp4"
+                      }
+                      type="video/mp4"
+                    />
+                    <Link
+                      to={
+                        STRAPI_MEDIA_URL +
+                        "/Flussdiagramm_erstellen_live_9d1e3de185.mp4"
+                      }
+                      target="_blank"
+                      rel="noreferrer"
+                      className="ds-link-01-reg"
+                    >
+                      Video herunterladen
+                    </Link>
+                  </video>
+                  <p
+                    className="ds-label-02-reg text-gray-900"
+                    id="flussdiagramm-erstellen-live-desc"
+                  >
                     Ein Beispielvideo zeigt das Entstehen eines Flussdiagramms.
-                  </Link>
+                  </p>
                 </>
               }
               fullwidthContent={
