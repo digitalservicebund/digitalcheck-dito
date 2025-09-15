@@ -15,6 +15,7 @@ import RichText from "~/components/RichText.tsx";
 
 import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
 import { Link } from "react-router";
+import { twJoin } from "tailwind-merge";
 import BackToTopButton from "~/components/BackToTopButton.tsx";
 import Container from "~/components/Container.tsx";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
@@ -27,6 +28,7 @@ import {
 } from "~/resources/staticRoutes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import constructMetaTitle from "~/utils/metaTitle.ts";
+import { getPlausibleEventClassName } from "~/utils/plausibleUtils.ts";
 
 export function meta() {
   return constructMetaTitle(ROUTE_METHODS_VISUALIZE_FLOWCHARTS.title);
@@ -485,7 +487,10 @@ export default function Visualization() {
                     controls
                     muted
                     width="100%"
-                    className="max-w-a11y"
+                    className={twJoin(
+                      "max-w-a11y",
+                      getPlausibleEventClassName("Content.Steps.5.Video+View"),
+                    )}
                     preload="none"
                     poster={
                       STRAPI_MEDIA_URL +
