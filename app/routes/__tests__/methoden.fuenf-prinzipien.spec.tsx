@@ -29,9 +29,9 @@ const mockPrinzipsData = [
     ] as Node[],
     order: 1,
     Nummer: 1 as const,
-    PrinzipienAnwendung: [
+    Aspekte: [
       {
-        Title: "Anwendung 1.1",
+        Titel: "Anwendung 1.1",
         Text: [
           {
             type: "paragraph",
@@ -94,7 +94,7 @@ const mockPrinzipsData = [
     ] as Node[],
     order: 2,
     Nummer: 2 as const,
-    PrinzipienAnwendung: [], // No application examples
+    Aspekte: [], // No application examples
     // No Example paragraph
   },
 ];

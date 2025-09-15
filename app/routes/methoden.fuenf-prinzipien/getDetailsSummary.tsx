@@ -6,51 +6,51 @@ import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import { ROUTE_EXAMPLES_PRINCIPLES } from "~/resources/staticRoutes";
 import { absatzIdTag } from "~/utils/paragraphUtils";
-import { PrinzipWithAnwendungen } from "~/utils/strapiData.server";
+import { PrinzipWithAspekte } from "~/utils/strapiData.server";
 
-export default function getDetailsSummary(prinzip: PrinzipWithAnwendungen) {
-  const { PrinzipienAnwendung: prinzipienAnwendungen } = prinzip;
+export default function getDetailsSummary(prinzip: PrinzipWithAspekte) {
+  const { Aspekte } = prinzip;
 
-  const items = prinzipienAnwendungen.map((prinzipienAnwendung) => {
+  const items = Aspekte.map((aspekt) => {
     const content = (
       <div className="space-y-4">
-        <BlocksRenderer content={prinzipienAnwendung.Text} />
-        {prinzipienAnwendung.Questions && (
+        <BlocksRenderer content={aspekt.Text} />
+        {aspekt.Leitfragen && (
           <>
             <h4 className="ds-label-02-bold">
               {methodsFivePrinciples.questionsTitle}
             </h4>
-            <BlocksRenderer content={prinzipienAnwendung.Questions} />
+            <BlocksRenderer content={aspekt.Leitfragen} />
           </>
         )}
-        {prinzipienAnwendung.WordingExample && (
+        {aspekt.Formulierungsbeispiel && (
           <>
             <h4 className="ds-label-02-bold">
               {methodsFivePrinciples.wordingExampleTitle}
             </h4>
-            <BlocksRenderer content={prinzipienAnwendung.WordingExample} />
+            <BlocksRenderer content={aspekt.Formulierungsbeispiel} />
           </>
         )}
-        {prinzipienAnwendung.Beispiel && (
+        {aspekt.Beispiel && (
           <PrincipleHighlightProvider
-            absatzId={prinzipienAnwendung.Beispiel.documentId}
+            absatzId={aspekt.Beispiel.documentId}
             principlesToShow={[prinzip]}
             useAnchorLinks={false}
           >
             <h4 className="ds-label-02-bold">
               {methodsFivePrinciples.exampleTitle} §{" "}
-              {prinzipienAnwendung.Beispiel.Paragraph.Nummer}{" "}
-              {prinzipienAnwendung.Beispiel.Paragraph.Gesetz}:
+              {aspekt.Beispiel.Paragraph.Nummer}{" "}
+              {aspekt.Beispiel.Paragraph.Gesetz}:
             </h4>
             <BlocksRenderer
-              content={prinzipienAnwendung.Beispiel.Text}
+              content={aspekt.Beispiel.Text}
               modifiers={{
                 underline: PrincipleHighlightModifier,
               }}
             />
             <Link
               className="text-link"
-              to={`${ROUTE_EXAMPLES_PRINCIPLES.url}/${prinzip.URLBezeichnung}#${absatzIdTag(prinzipienAnwendung.Beispiel.documentId)}`}
+              to={`${ROUTE_EXAMPLES_PRINCIPLES.url}/${prinzip.URLBezeichnung}#${absatzIdTag(aspekt.Beispiel.documentId)}`}
             >
               {methodsFivePrinciples.exampleLinkText}
             </Link>
@@ -59,7 +59,7 @@ export default function getDetailsSummary(prinzip: PrinzipWithAnwendungen) {
       </div>
     );
 
-    return { title: prinzipienAnwendung.Title, content };
+    return { title: aspekt.Titel, content };
   });
 
   if (items.length === 0) return undefined;

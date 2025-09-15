@@ -14,11 +14,11 @@ import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
 import {
+  Beispielvorhaben,
   fetchStrapiData,
   paragraphFields,
   prinzipCoreFields,
   PrinzipWithBeispielvorhaben,
-  Regelungsvorhaben,
   visualisationFields,
 } from "~/utils/strapiData.server";
 import { formatDate, gesetzStatusMap, slugify } from "~/utils/utilFunctions";
@@ -33,8 +33,8 @@ const GET_REGELUNGSVORHABENS_BY_SLUG_QUERY = `
 ${prinzipCoreFields}
 ${paragraphFields}
 ${visualisationFields}
-query GetRegelungsvorhabens($slug: String!) {
-  regelungsvorhabens(filters: { URLBezeichnung: { eq: $slug } }) {
+query GetBeispielvorhabens($slug: String!) {
+  beispielvorhabens(filters: { URLBezeichnung: { eq: $slug } }) {
     documentId
     Titel
     NKRNummer
@@ -66,7 +66,7 @@ query GetRegelungsvorhabens($slug: String!) {
 
 export const loader = async ({ params }: Route.LoaderArgs) => {
   const regelungData = await fetchStrapiData<{
-    regelungsvorhabens: Regelungsvorhaben[];
+    beispielvorhabens: Beispielvorhaben[];
   }>(GET_REGELUNGSVORHABENS_BY_SLUG_QUERY, { slug: params.regelung });
 
   if ("error" in regelungData) {
@@ -74,12 +74,12 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
     throw new Response(regelungData.error, { status: 400 });
   }
 
-  if (regelungData.regelungsvorhabens.length === 0) {
+  if (regelungData.beispielvorhabens.length === 0) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw new Response("No Regelung for slug found", { status: 404 });
   }
 
-  return regelungData.regelungsvorhabens[0];
+  return regelungData.beispielvorhabens[0];
 };
 
 export default function Gesetz() {

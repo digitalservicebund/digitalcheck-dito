@@ -6,14 +6,14 @@ import InfoBox from "~/components/InfoBox";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
 import type {
-  PrinzipWithAnwendungen,
-  PrinzipWithAnwendungenAndExample,
+  PrinzipWithAspekte,
+  PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 import getDetailsSummary from "./getDetailsSummary";
 
 type PrincipleProps = {
-  prinzip: PrinzipWithAnwendungen;
+  prinzip: PrinzipWithAspekte;
 };
 
 export default function Principle({ prinzip }: Readonly<PrincipleProps>) {
@@ -34,16 +34,14 @@ export default function Principle({ prinzip }: Readonly<PrincipleProps>) {
       />
 
       {prinzip.Beispiel && (
-        <PrincipleExample
-          prinzip={prinzip as PrinzipWithAnwendungenAndExample}
-        />
+        <PrincipleExample prinzip={prinzip as PrinzipWithAspekteAndExample} />
       )}
     </Container>
   );
 }
 
 type PrincipleExampleProps = {
-  prinzip: PrinzipWithAnwendungenAndExample;
+  prinzip: PrinzipWithAspekteAndExample;
 };
 
 function PrincipleExample({ prinzip }: Readonly<PrincipleExampleProps>) {
