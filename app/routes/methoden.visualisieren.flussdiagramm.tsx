@@ -14,9 +14,13 @@ import NumberedList from "~/components/NumberedList.tsx";
 import RichText from "~/components/RichText.tsx";
 
 import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
+import { Link } from "react-router";
+import { twJoin } from "tailwind-merge";
+import BackToTopButton from "~/components/BackToTopButton.tsx";
 import Container from "~/components/Container.tsx";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
+import { STRAPI_MEDIA_URL } from "~/resources/constants.ts";
 import {
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX,
@@ -24,6 +28,7 @@ import {
 } from "~/resources/staticRoutes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import constructMetaTitle from "~/utils/metaTitle.ts";
+import { getPlausibleEventClassName } from "~/utils/plausibleUtils.ts";
 
 export function meta() {
   return constructMetaTitle(ROUTE_METHODS_VISUALIZE_FLOWCHARTS.title);
@@ -471,13 +476,53 @@ export default function Visualization() {
                   <RichText
                     markdown={dedent`
                     **Darauf sollten Sie achten:**
-                    - Akteure, Hierarchien, Abläufe und Entscheidungen sind klar und konsistent 
+                    - Akteure, Hierarchien, Abläufe und Entscheidungen sind klar und konsistent
                     - Eine eindeutige visuelle Kodierung, zum Beispiel Farben oder Symbole, um Informationen zu unterscheiden
                     - Verweis auf wesentliche Paragraphen, relevante Akteure und EU-Vorgaben
                     
                     Das Ergebnis muss an dieser Stelle noch nicht perfekt aussehen.
                     `}
                   />
+                  <video
+                    controls
+                    muted
+                    width="100%"
+                    className={twJoin(
+                      "max-w-a11y",
+                      getPlausibleEventClassName("Content.Steps.5.Video+View"),
+                    )}
+                    preload="none"
+                    poster={
+                      STRAPI_MEDIA_URL +
+                      "/Flussdiagramm_erstellen_live_poster_9655302452.png"
+                    }
+                    aria-labelledby="flussdiagramm-erstellen-live-desc"
+                  >
+                    <source
+                      src={
+                        STRAPI_MEDIA_URL +
+                        "/Flussdiagramm_erstellen_live_9d1e3de185.mp4"
+                      }
+                      type="video/mp4"
+                    />
+                    <Link
+                      to={
+                        STRAPI_MEDIA_URL +
+                        "/Flussdiagramm_erstellen_live_9d1e3de185.mp4"
+                      }
+                      target="_blank"
+                      rel="noreferrer"
+                      className="ds-link-01-reg"
+                    >
+                      Video herunterladen
+                    </Link>
+                  </video>
+                  <p
+                    className="ds-label-02-reg text-gray-900"
+                    id="flussdiagramm-erstellen-live-desc"
+                  >
+                    Ein Beispielvideo zeigt das Entstehen eines Flussdiagramms.
+                  </p>
                 </>
               }
               fullwidthContent={
@@ -602,6 +647,7 @@ export default function Visualization() {
           ]}
         />
       </Container>
+      <BackToTopButton />
     </>
   );
 }

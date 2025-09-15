@@ -147,20 +147,32 @@ test.describe("test progress bar", () => {
   });
 
   test("Correct step is highlighted in progress bar", async ({ page }) => {
-    await page.goto(ROUTE_PRECHECK.url);
     const navigation = page.getByRole("navigation", {
       name: "Digitalcheck-Fortschritt",
     });
-    await expect(navigation).toBeVisible();
 
-    await expect(navigation.getByText("1")).toContainClass("bg-blue-800");
-    await expect(navigation.getByText("2")).toContainClass("border-white");
+    const step1 = navigation.getByRole("listitem").filter({ hasText: "1" });
+    const step2 = navigation.getByRole("listitem").filter({ hasText: "2" });
+    const step3 = navigation.getByRole("listitem").filter({ hasText: "3" });
+
+    await page.goto(ROUTE_PRECHECK.url);
+    await expect(navigation).toBeVisible();
+    await expect(step1).toContainClass("font-bold");
+    await expect(step1).toHaveAttribute("aria-current", "step");
+    await expect(step2).not.toContainClass("font-bold");
+    await expect(step2).not.toHaveAttribute("aria-current", "step");
+
     await page.goto(ROUTE_METHODS.url);
-    await expect(navigation.getByText("2")).toContainClass("bg-blue-800");
-    await expect(navigation.getByText("1")).toContainClass("border-white");
+    await expect(step2).toContainClass("font-bold");
+    await expect(step2).toHaveAttribute("aria-current", "step");
+    await expect(step1).not.toContainClass("font-bold");
+    await expect(step1).not.toHaveAttribute("aria-current", "step");
+
     await page.goto(ROUTE_DOCUMENTATION.url);
-    await expect(navigation.getByText("3")).toContainClass("bg-blue-800");
-    await expect(navigation.getByText("2")).toContainClass("border-white");
+    await expect(step3).toContainClass("font-bold");
+    await expect(step3).toHaveAttribute("aria-current", "step");
+    await expect(step2).not.toContainClass("font-bold");
+    await expect(step2).not.toHaveAttribute("aria-current", "step");
   });
 });
 

@@ -229,8 +229,9 @@ export default function Result() {
             )}
             {resultContent.inlineNoticeContent && (
               <InlineNotice
+                className="[&_p]:mt-16"
                 tagName="div"
-                look="tips"
+                look="warning"
                 title={resultContent.inlineNoticeContent.title}
                 content={resultContent.inlineNoticeContent.text}
               />

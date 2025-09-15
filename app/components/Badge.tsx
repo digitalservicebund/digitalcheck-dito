@@ -4,6 +4,7 @@ import twMerge from "~/utils/tailwindMerge";
 
 export type BadgeProps = {
   children?: ReactNode;
+  text?: ReactNode;
   className?: string;
   principleNumber?: PrincipleNumber;
   look?: "hint" | "gray" | "default";
@@ -13,6 +14,7 @@ export type BadgeProps = {
 function Badge({
   className,
   children,
+  text,
   Icon,
   principleNumber,
   look = "default",
@@ -34,7 +36,7 @@ function Badge({
       )}
     >
       {Icon && <Icon className="size-16 fill-gray-800" />}
-      {children}
+      {children || text}
     </mark>
   );
 }

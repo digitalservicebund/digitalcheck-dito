@@ -1,4 +1,4 @@
-import { STRAPI_MEDIA_URL } from "~/entry.server";
+import { STRAPI_MEDIA_URL } from "~/resources/constants.ts";
 
 // Resource route that proxies our CMS for images
 export async function loader({ params }: { params: { url: string } }) {
