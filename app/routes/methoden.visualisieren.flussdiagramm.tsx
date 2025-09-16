@@ -191,6 +191,7 @@ export default function Visualization() {
                   </ToC.List>
                 }
               ></ToC.Item>
+              <ToC.Item href="#video-anleitung" title="Video-Anleitung" />
             </ToC.List>
           </ToC>
         }
@@ -483,40 +484,6 @@ export default function Visualization() {
                     Das Ergebnis muss an dieser Stelle noch nicht perfekt aussehen.
                     `}
                   />
-                  <video
-                    controls
-                    muted
-                    width="100%"
-                    className={twJoin(
-                      "max-w-a11y",
-                      getPlausibleEventClassName("Content.Steps.5.Video+View"),
-                    )}
-                    preload="none"
-                    poster={
-                      STRAPI_MEDIA_URL +
-                      "/Flussdiagramm_erstellen_live_poster_9655302452.png"
-                    }
-                    aria-labelledby="flussdiagramm-erstellen-live-desc"
-                  >
-                    <source
-                      src={
-                        STRAPI_MEDIA_URL +
-                        "/Flussdiagramm_erstellen_live_9d1e3de185.mp4"
-                      }
-                      type="video/mp4"
-                    />
-                    <Link
-                      to={
-                        STRAPI_MEDIA_URL +
-                        "/Flussdiagramm_erstellen_live_9d1e3de185.mp4"
-                      }
-                      target="_blank"
-                      rel="noreferrer"
-                      className="ds-link-01-reg"
-                    >
-                      Video herunterladen
-                    </Link>
-                  </video>
                   <p
                     className="ds-label-02-reg text-gray-900"
                     id="flussdiagramm-erstellen-live-desc"
@@ -621,6 +588,51 @@ export default function Visualization() {
               hideNextButton
             />
           </NumberedList>
+        </section>
+        <section className="scroll-my-40" id="video-anleitung">
+          <h2 className="ds-subhead mb-8">
+            Zusammenfassende Anleitung: So entsteht ein Flussdiagramm
+          </h2>
+          <p className="mb-40">
+            Im Video sehen Sie die zuvor erklärten Schritte in kompakter Form –
+            diesmal am Beispiel Einbürgerung. So wird deutlich, wie sich die
+            Methode aus dem Führerschein-Beispiel auch auf andere Themen
+            übertragen lässt.
+          </p>
+          <video
+            controls
+            muted
+            width="100%"
+            className={twJoin(
+              "max-w-a11y",
+              getPlausibleEventClassName("Content.Steps.5.Video+View"),
+            )}
+            preload="none"
+            poster={
+              STRAPI_MEDIA_URL +
+              "/Flussdiagramm_erstellen_live_poster_2_b011955559.png"
+            }
+            aria-labelledby="flussdiagramm-erstellen-live-desc"
+          >
+            <source
+              src={
+                STRAPI_MEDIA_URL +
+                "/Flussdiagramm_erstellen_live_9d1e3de185.mp4"
+              }
+              type="video/mp4"
+            />
+            <Link
+              to={
+                STRAPI_MEDIA_URL +
+                "/Flussdiagramm_erstellen_live_9d1e3de185.mp4"
+              }
+              target="_blank"
+              rel="noreferrer"
+              className="ds-link-01-reg"
+            >
+              Video herunterladen
+            </Link>
+          </video>
         </section>
       </SidebarContainer>
       <Container className="mb-80 py-0">
