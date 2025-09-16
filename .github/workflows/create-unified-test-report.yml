@@ -54,4 +54,4 @@ jobs:
       - name: Output github pages URL to summary
         run: |
           echo "### Playwright Test Report" >> $GITHUB_STEP_SUMMARY
-          echo "${{ steps.github-pages-deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "${{ steps.github-pages-deployment.outputs.page_url }}${{ github.run_id }}/" >> $GITHUB_STEP_SUMMARY
