@@ -66,9 +66,9 @@ const InlineNotice = ({
       )}
       id={identifier}
     >
-      <div className="ds-label-01-bold flex flex-row items-center gap-[4px]">
+      <div className="flex flex-row items-center gap-[4px]">
         {showIcon && <IconComponent className="mr-4 flex-none" />}
-        {heading}
+        <div className="*:ds-label-01-bold">{heading}</div>
       </div>
       <div className="leading-[26px] tracking-[0.16px]">{children}</div>
     </div>
