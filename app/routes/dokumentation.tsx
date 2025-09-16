@@ -1,6 +1,7 @@
 import Button, { ButtonLinkProps } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
+import Heading from "~/components/Heading.tsx";
 import Hero from "~/components/Hero";
 import InfoBoxList from "~/components/InfoBoxList";
 import InlineNotice from "~/components/InlineNotice";
@@ -35,10 +36,14 @@ export default function Index() {
       <Container className="max-sm:p-0!">
         <InlineNotice
           look="warning"
-          title={documentation.multipleNotice.headline}
-          tagName="h2"
-          content={documentation.multipleNotice.content}
-        />
+          heading={
+            <Heading tagName="h2">
+              {documentation.multipleNotice.headline}
+            </Heading>
+          }
+        >
+          <RichText markdown={documentation.multipleNotice.content} />
+        </InlineNotice>
       </Container>
       <Container>
         <InfoBoxList

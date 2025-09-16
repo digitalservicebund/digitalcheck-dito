@@ -230,11 +230,11 @@ export default function Result() {
             {resultContent.inlineNoticeContent && (
               <InlineNotice
                 className="[&_p]:mt-16"
-                tagName="div"
                 look="warning"
-                title={resultContent.inlineNoticeContent.title}
-                content={resultContent.inlineNoticeContent.text}
-              />
+                heading={resultContent.inlineNoticeContent.title}
+              >
+                <RichText markdown={resultContent.inlineNoticeContent.text} />
+              </InlineNotice>
             )}
             <div className="border-b-2 border-solid border-gray-400 pb-40 last:border-0 last:pb-0 print:border-0 print:pb-0">
               <DetailsSummary

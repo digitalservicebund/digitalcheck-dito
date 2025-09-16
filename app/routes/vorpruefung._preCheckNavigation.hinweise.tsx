@@ -28,10 +28,10 @@ export default function GeneralInfo() {
       <RichText markdown={text} className="mb-40" />
       <InlineNotice
         look="tips"
-        title={hint.title}
-        tagName="h2"
-        content={hint.text}
-      />
+        heading={<Heading tagName="h2">{hint.title}</Heading>}
+      >
+        <RichText markdown={hint.text} />
+      </InlineNotice>
       <ButtonContainer className="pt-40">
         <Button id={"generalInfo-next-button"} href={questions[0].url}>
           {nextButton}

@@ -3,19 +3,8 @@ import ContactSupportOutlinedIcon from "@digitalservicebund/icons/ContactSupport
 import InfoOutlinedIcon from "@digitalservicebund/icons/InfoOutlined";
 import LightbulbOutlinedIcon from "@digitalservicebund/icons/LightbulbOutlined";
 import WarningAmberIcon from "@digitalservicebund/icons/WarningAmber";
+import React from "react";
 import { twJoin } from "tailwind-merge";
-import Heading from "./Heading";
-import RichText from "./RichText";
-
-type InlineNoticeProps = {
-  identifier?: string;
-  title: string;
-  tagName: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "div";
-  look: "success" | "info" | "warning" | "support" | "tips";
-  content?: string;
-  showIcon?: boolean;
-  className?: string;
-};
 
 // We can't set border-[${borderColor}] in the template because it causes inconsistent behavior in Storybook.
 // Therefore, it's set in the config.
@@ -47,14 +36,22 @@ const lookConfig = {
   },
 };
 
+type InlineNoticeProps = {
+  identifier?: string;
+  look: keyof typeof lookConfig;
+  showIcon?: boolean;
+  className?: string;
+  children?: React.ReactNode;
+  heading?: React.ReactNode;
+};
+
 const InlineNotice = ({
   identifier,
-  title,
-  tagName,
   look,
-  content,
   className,
   showIcon = true,
+  children,
+  heading,
 }: InlineNoticeProps) => {
   const { backgroundColor, borderColor, IconComponent } = lookConfig[look];
 
@@ -69,17 +66,11 @@ const InlineNotice = ({
       )}
       id={identifier}
     >
-      <div className="flex flex-row items-center gap-[4px]">
+      <div className="ds-label-01-bold flex flex-row items-center gap-[4px]">
         {showIcon && <IconComponent className="mr-4 flex-none" />}
-        <Heading tagName={tagName} look="ds-label-01-bold">
-          {title}
-        </Heading>
+        {heading}
       </div>
-      {content && (
-        <div className="leading-[26px] tracking-[0.16px]">
-          {content && <RichText markdown={content} />}
-        </div>
-      )}
+      <div className="leading-[26px] tracking-[0.16px]">{children}</div>
     </div>
   );
 };

@@ -8,6 +8,7 @@ import Hero from "~/components/Hero";
 import InlineInfoList from "~/components/InlineInfoList";
 import InlineNotice from "~/components/InlineNotice";
 import ParagraphList from "~/components/ParagraphList";
+import RichText from "~/components/RichText.tsx";
 import Tabs, { TabItem } from "~/components/Tabs";
 import VisualisationItem from "~/components/VisualisationItem";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
@@ -97,11 +98,13 @@ export default function Gesetz() {
           {regelung.GesetzStatus !== "Verkuendetes_Gesetz_aktuelle_Fassung" && (
             <InlineNotice
               className="mb-40"
-              title={examplesRegelungen.infoTitle}
               look="tips"
-              tagName="h2"
-              content={examplesRegelungen.infoText}
-            />
+              heading={
+                <Heading tagName="h2">{examplesRegelungen.infoTitle}</Heading>
+              }
+            >
+              <RichText markdown={examplesRegelungen.infoText} />
+            </InlineNotice>
           )}
           <Heading
             id={slugify(examplesRegelungen.principles.title)}

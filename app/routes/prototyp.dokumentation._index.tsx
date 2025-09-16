@@ -223,11 +223,13 @@ export default function Index() {
       <Container>
         <InlineNotice
           look="warning"
-          title={intro.multipleNotice.headline}
-          tagName="h2"
-          content={intro.multipleNotice.content}
           className="mb-40"
-        />
+          heading={
+            <Heading tagName="h2">{intro.multipleNotice.headline}</Heading>
+          }
+        >
+          <RichText markdown={intro.multipleNotice.content} />
+        </InlineNotice>
         <InfoBoxList
           heading={{ text: intro.summary.title }}
           items={intro.summary.items}

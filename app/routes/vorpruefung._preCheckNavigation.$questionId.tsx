@@ -210,11 +210,13 @@ export default function Index() {
         {hasAnswerConflict && (
           <InlineNotice
             className="[&_p]:mt-24"
-            tagName="div"
             look="warning"
-            title={preCheck.answerConflictHint.euBezugHint.title}
-            content={preCheck.answerConflictHint.euBezugHint.content}
-          />
+            heading={preCheck.answerConflictHint.euBezugHint.title}
+          >
+            <RichText
+              markdown={preCheck.answerConflictHint.euBezugHint.content}
+            />
+          </InlineNotice>
         )}
         <ButtonContainer>
           <Button
