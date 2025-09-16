@@ -2,7 +2,7 @@ import { fireEvent, render, screen, within } from "@testing-library/react";
 import { UserEvent, userEvent } from "@testing-library/user-event";
 import React from "react";
 import { MemoryRouter } from "react-router";
-import { beforeEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { header } from "~/resources/content/shared/header.ts";
 import PageHeader from "./PageHeader";
 
