@@ -52,8 +52,7 @@ export function buildEmailBody(
  * locally, don't cause the OS's email client to open while running tests.
  */
 const mockMailtoLinks =
-  process.env.MOCK_MAILTO_LINKS === "true" &&
-  process.env.NODE_ENV !== "production";
+  import.meta.env.VITE_MOCK_MAILTO_LINKS === "true" && !import.meta.env.PROD;
 
 if (mockMailtoLinks) {
   console.warn("Prefixing mailto: links");
