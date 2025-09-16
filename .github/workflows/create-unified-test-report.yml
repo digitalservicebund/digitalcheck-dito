@@ -36,11 +36,22 @@ jobs:
           path: playwright-report
           retention-days: 14
 
+      - name: Create a unique directory for the report
+        run: |
+          mkdir -p _site/${{ github.run_id }}
+          mv playwright-report/* _site/${{ github.run_id }}/
+
       - name: Upload artifact for Pages
         uses: actions/upload-pages-artifact@v4
         with:
-          path: playwright-report
+          path: _site
+          retention-days: 14
 
       - name: Deploy to GitHub Pages
-        id: deployment
+        id: github-pages-deployment
         uses: actions/deploy-pages@v4
+
+      - name: Output github pages URL to summary
+        run: |
+          echo "### Playwright Test Report" >> $GITHUB_STEP_SUMMARY
+          echo "${{ steps.github-pages-deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
