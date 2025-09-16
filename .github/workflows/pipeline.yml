@@ -38,6 +38,10 @@ jobs:
     # Merge reports only if some shards have failed
     if: failure() && needs.check-and-test.result == 'failure'
     uses: ./.github/workflows/create-unified-test-report.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
 
   build-and-push-image:
     needs: [vulnerability-scan, check-and-test]
