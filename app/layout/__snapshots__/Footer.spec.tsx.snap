@@ -360,7 +360,7 @@ exports[`Footer Component > Renders correctly 1`] = `
               <span
                 class="flex items-center"
               >
-                Versionsverlauf
+                Das ist neu
                  
               </span>
             </a>

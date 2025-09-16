@@ -40,7 +40,7 @@ export const ROUTE_A11Y = createRoute("barrierefreiheit", "Barrierefreiheit");
 export const ROUTE_SITEMAP = createRoute("sitemap", "Sitemap");
 export const ROUTE_VERSION_HISTORY = createRoute(
   "versionsverlauf",
-  "Versionsverlauf",
+  "Das ist neu",
 );
 
 // PRECHECK ROUTES

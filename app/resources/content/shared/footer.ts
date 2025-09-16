@@ -113,7 +113,7 @@ export const footer = {
       { url: ROUTE_PRIVACY.url, text: "Datenschutzerklärung" },
       { url: ROUTE_A11Y.url, text: "Barrierefreiheit" },
       { url: ROUTE_SITEMAP.url, text: "Sitemap" },
-      { url: ROUTE_VERSION_HISTORY.url, text: "Versionsverlauf" },
+      { url: ROUTE_VERSION_HISTORY.url, text: "Das ist neu" },
       {
         url: "https://github.com/digitalservicebund/digitalcheck-dito",
         text: "Open Source Code",

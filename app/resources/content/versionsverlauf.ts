@@ -1,10 +1,116 @@
+import {
+  ROUTE_DOCUMENTATION_STATIC_WORD,
+  ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
+  ROUTE_FUNDAMENTALS_NKR,
+  ROUTE_FUNDAMENTALS_PRINCIPLES,
+  ROUTE_INTEROPERABILITY_SPOC,
+  ROUTE_METHODS_VISUALIZE,
+  ROUTE_METHODS_VISUALIZE_FLOWCHARTS,
+  ROUTE_VERSION_HISTORY,
+} from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const versionHistory = {
-  title: "Versionsverlauf",
-  subtitle:
-    "Hier können Sie alle Änderungen an den Versionen des Digitalchecks nachvollziehen.",
+  title: "Das ist neu",
+  subtitle: dedent`
+      Das Digitalcheck Angebot wird kontinuierlich weiterentwickelt. Bedürfnisse und Rückmeldungen von Nutzenden werden kurzfristig einbearbeitet. Auch geänderte und neue rechtliche Anforderungen führen zu Anpassungen. Unten finden Sie eine chronologische Übersicht der Ergänzungen und Änderungen auf der Website.
+      
+      Haben Sie Anregungen oder Wünsche? Kontaktieren Sie uns jederzeit gerne unter [0151/40 76 78 39](tel:+4915140767839) oder [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de).
+  `,
   items: [
+    {
+      badge: {
+        text: "12.09.2025",
+      },
+      content: `Anleitungs-Seite für Flussdiagramme: Video bei Schritt 5 ergänzt: Entstehen eines Flussdiagramms. [Hier ansehen](${ROUTE_METHODS_VISUALIZE_FLOWCHARTS.url}#schritt-5)`,
+    },
+    {
+      badge: {
+        text: "12.09.2025",
+      },
+      content: dedent`
+        - Neuer Hinweis auf Ergebnisseite der Vorprüfung, wenn
+          - die Angaben der Vorprüfung ergeben: Kein Digitalbezug
+          - bei der Frage zur Interoperabilität aber angegeben wird: Datenaustausch findet statt
+        - dann Anzeige eines Hinweises, Ergebnis ist in Bezug auf Datenaustausch (einmal ja / einmal nein) widersprüchlich ist + Aufruf, sich beim Support zu melden
+      `,
+    },
+    {
+      badge: {
+        text: "11.09.2025",
+      },
+      content: "Darstellung der Progress-Bar an Style der Startseite angepasst",
+    },
+    {
+      headline: {
+        text: "Anleitungs-Seite für Flussdiagramme überarbeitet",
+      },
+      badge: {
+        text: "04.09.2025",
+      },
+      content: dedent`
+        - Einstieg in Methode vereinfacht (Erklärung zur Methode ergänzt)
+        - Verständlichkeit der Inhalte verbessert
+        - Navigation innerhalb der Seite verbessert: Buttons “nächster Schritt“ + vertikale Navigations-Element auf rechter Seite
+        
+        [Hier ansehen](${ROUTE_METHODS_VISUALIZE_FLOWCHARTS.url})
+      `,
+    },
+    {
+      badge: {
+        text: "01.09.2025",
+      },
+      content: dedent`
+        Neuer Hinweis in Fragestrecke der Vorprüfung, wenn
+        - die Angaben der Vorprüfung ergeben: Kein Digitalbezug
+        - bei der Interop-Frage aber angegeben wird: Datenaustausch findet statt
+        
+        Dann Anzeige eines Hinweises, Ergebnis ist in Bezug auf Datenaustausch (einmal ja / einmal nein) widersprüchlich ist. Wir lassen die - theoretisch mögliche - Kombination aber weiterhin als Ergebnis zu.
+      `,
+    },
+    {
+      badge: {
+        text: "26.08.2025",
+      },
+      content: dedent`
+        - [digitalcheck.bund.de](https://digitalcheck.bund.de/) führt jetzt zur Digitalcheck Website und nicht mehr zur 
+        [Digitale Verwaltung Projektseite](https://www.digitale-verwaltung.de/Webs/DV/DE/transformation/digitalcheck/digitalcheck-node.html)
+        - Startseite URL: Fourth-Level-Domain entfernt
+          - vorher: erarbeiten.digitalcheck.bund.de → leitet jetzt weiter zu:
+          - neu: digitalcheck.bund.de
+        - Link zu [Digitale Verwaltung Projektseite](https://www.digitale-verwaltung.de/Webs/DV/DE/transformation/digitalcheck/digitalcheck-node.html) im Footer ergänzt
+        - Neue [Einstiegseite / Landingpage für Visualisierungen](${ROUTE_METHODS_VISUALIZE.url}) gelauncht 
+        - [NKR Infoseite](${ROUTE_FUNDAMENTALS_NKR.url}) aktualisiert 
+      `,
+    },
+    {
+      badge: {
+        text: "14.08.2025",
+      },
+      content: dedent`
+        - Grundlagen-Seite Prinzipien
+          - für jedes Prinzip ein Beispiel ergänzt
+          - wenn sinnvoll: für Aspekte je ein Beispiel ergänzt
+          - Kontextinfo “Warum ist dieses Beispiel gut“ näher an Regelungsbeispiel-Text platziert
+        
+        [hier ansehen](${ROUTE_FUNDAMENTALS_PRINCIPLES.url})
+      `,
+    },
+    {
+      badge: {
+        text: "05.08.2025",
+      },
+      content: dedent`
+        - Neue [Startseite](/)
+        - Neue Grundlagen-Seite: Was ist [Digitaltauglichkeit](${ROUTE_FUNDAMENTALS_DIGITAL_READINESS.url})?
+        - Neue Grundlagen-Seite: [NKR und Digitalcheck](${ROUTE_FUNDAMENTALS_NKR.url})
+        - Neue [Dokumentation als Word-Datei v1.5.1](${ROUTE_DOCUMENTATION_STATIC_WORD.url}) aktualisiert auf Digitalcheck Website, Github und DV
+        - Beispiele sind wieder im Footer verlinkt
+        - [Nationale Kontaktstelle-Seite](${ROUTE_INTEROPERABILITY_SPOC.url}): Zeitleiste neu sortiert (Aktuelles oben)
+        - Versionsverlauf: Das PDF auf Digitale Verwaltung ist auf die Digitalcheck Website umgezogen und hat sich dabei in eine [Webpage](${ROUTE_VERSION_HISTORY.url}) verwandelt
+        - Der Methodenfahrplan in Grundlagen ist entfernt
+      `,
+    },
     {
       headline: {
         text: "V1.5.1",
@@ -137,9 +243,7 @@ export const versionHistory = {
       badge: {
         text: "18.11.2022",
       },
-      content: dedent`
-        - Erste Version
-      `,
+      content: "Erste Version",
     },
   ],
 };
