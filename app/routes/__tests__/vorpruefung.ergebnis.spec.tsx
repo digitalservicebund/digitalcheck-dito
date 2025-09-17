@@ -1,5 +1,28 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
+
+vi.mock("react-router", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("react-router")>();
+  return {
+    ...actual,
+    useLoaderData: vi.fn(),
+    useActionData: vi.fn(),
+    useNavigate: vi.fn(),
+  };
+});
+
+vi.mock("@rvf/react-router", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@rvf/react-router")>();
+  return {
+    ...actual,
+    useForm: () => ({
+      getFormProps: vi.fn(),
+      value: vi.fn(),
+      error: vi.fn(),
+    }),
+  };
+});
+
 import { MemoryRouter, useLoaderData } from "react-router";
 
 import {
@@ -24,45 +47,35 @@ import type {
   TQuestion,
 } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { getResultForAnswers } from "~/routes/vorpruefung.ergebnis/getResultForAnswers";
-import Result from "~/routes/vorpruefung.ergebnis/route";
+import Result, { action, loader } from "~/routes/vorpruefung.ergebnis/route";
 
 const { questions } = preCheck;
 
 type ExpectedResult = {
-  // Form:
   formIsVisible: boolean;
   hasInputArbeitstitel: boolean;
   hasInputBegruendung: boolean;
-
-  // old:
   headline: string;
   showsInteropLink: boolean;
   showsNegativeReasoning: boolean;
   showsUnsureHeading: boolean;
   includesInterop: boolean;
   furtherStepsVisible: boolean;
-  interopIsPositive?: boolean;
-  warningInteropWithoutDigital?: boolean;
   showsUnsureHint?: boolean;
-  resultPrefixes?: {
-    positivePrefix: string;
-    negativePrefix: string;
-    unsurePrefix: string;
-  };
   emailBodyContains?: string[];
   allPositive?: boolean;
-  allNegative?: boolean;
   dcPositiveIOunsure?: boolean;
-  negativeReasoningText?: string;
   inlineNoticeText?: string;
   infoTooltip?: string;
   includesNkrRecipient?: boolean;
   includesDigitalcheckTeam?: boolean;
 };
 
+type Answers = (question: TQuestion) => "Ja" | "Nein" | "Ich bin unsicher";
+
 interface TestScenario {
   name: string;
-  answers: (question: TQuestion) => "Ja" | "Nein" | "Ich bin unsicher";
+  answers: Answers;
   expected: ExpectedResult;
 }
 
@@ -81,7 +94,6 @@ const scenarios: TestScenario[] = [
       showsNegativeReasoning: false,
       showsUnsureHeading: false,
       includesInterop: true,
-      interopIsPositive: true,
       furtherStepsVisible: true,
       emailBodyContains: [
         "In Bezug auf digitale Aspekte führt ihr Regelungsvorhaben zu...",
@@ -106,7 +118,6 @@ const scenarios: TestScenario[] = [
       showsNegativeReasoning: false,
       showsUnsureHeading: false,
       includesInterop: false,
-      interopIsPositive: false,
       furtherStepsVisible: true,
       includesNkrRecipient: true,
       includesDigitalcheckTeam: true,
@@ -127,9 +138,8 @@ const scenarios: TestScenario[] = [
       showsNegativeReasoning: false,
       showsUnsureHeading: false,
       includesInterop: true,
-      interopIsPositive: false,
       showsUnsureHint: true,
-      furtherStepsVisible: true, // TODO: not sure
+      furtherStepsVisible: true,
       emailBodyContains: [
         "In Bezug auf Interoperabilität ist nicht sicher, ob Ihr Regelungsvorhaben zu Folgendem führt...",
       ],
@@ -152,15 +162,11 @@ const scenarios: TestScenario[] = [
       showsNegativeReasoning: true,
       showsUnsureHeading: false,
       includesInterop: false,
-      interopIsPositive: false,
       furtherStepsVisible: false,
       emailBodyContains: [
         "In Bezug auf digitale Aspekte führt ihr Regelungsvorhaben zu...",
         "In Bezug auf Interoperabilität führt ihr Regelungsvorhaben zu...",
       ],
-      allNegative: true,
-      negativeReasoningText:
-        "Dieses Vorhaben hat keinen Digitalbezug, weil es nicht relevant ist.",
       includesNkrRecipient: true,
       includesDigitalcheckTeam: false,
     },
@@ -179,9 +185,7 @@ const scenarios: TestScenario[] = [
       showsNegativeReasoning: true,
       showsUnsureHeading: false,
       includesInterop: false,
-      interopIsPositive: true,
-      warningInteropWithoutDigital: true,
-      furtherStepsVisible: false, // TODO: unsure
+      furtherStepsVisible: false,
       includesNkrRecipient: true,
       includesDigitalcheckTeam: false,
     },
@@ -222,7 +226,6 @@ const scenarios: TestScenario[] = [
       showsNegativeReasoning: false,
       showsUnsureHeading: true,
       includesInterop: false,
-      warningInteropWithoutDigital: true,
       furtherStepsVisible: false,
       includesNkrRecipient: true,
       includesDigitalcheckTeam: true,
@@ -286,11 +289,6 @@ const scenarios: TestScenario[] = [
       furtherStepsVisible: true,
       showsUnsureHeading: false,
       includesInterop: true,
-      resultPrefixes: {
-        positivePrefix: "+",
-        negativePrefix: "-",
-        unsurePrefix: "?",
-      },
       includesNkrRecipient: true,
       includesDigitalcheckTeam: true,
     },
@@ -317,26 +315,38 @@ function mapUserAnswersToMockAnswers(
   return mockAnswers;
 }
 
-vi.mock("@rvf/react-router", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@rvf/react-router")>();
-  return {
-    ...actual,
-    useForm: () => ({
-      getFormProps: vi.fn(),
-      value: vi.fn(),
-      error: vi.fn(),
-    }),
-  };
-});
+function renderResultPage(answers: Answers) {
+  const preCheckAnswers = mapUserAnswersToMockAnswers(answers);
+  const result = getResultForAnswers(preCheckAnswers);
 
-vi.mock("react-router", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("react-router")>();
-  return {
-    ...actual,
-    useLoaderData: vi.fn(),
-    useNavigate: vi.fn(),
-  };
-});
+  vi.mocked(useLoaderData).mockReturnValue({
+    answers: preCheckAnswers,
+    result: result,
+  });
+
+  render(
+    <MemoryRouter>
+      <Result />
+    </MemoryRouter>,
+  );
+}
+
+/** Helper: Request-like object. action only calls request.formData(). */
+function createRequest(
+  answers: Answers,
+  title?: string,
+  negativeReasoning?: string,
+) {
+  const preCheckAnswers = mapUserAnswersToMockAnswers(answers);
+
+  const form: { [key: string]: string } = preCheckAnswers;
+  if (title) form["title"] = title;
+  if (negativeReasoning) form["negativeReasoning"] = negativeReasoning;
+
+  const fd = new FormData();
+  for (const [k, v] of Object.entries(form)) fd.append(k, v);
+  return { formData: () => fd } as unknown as Request;
+}
 
 beforeAll(() => {
   // Mock window.location
@@ -364,155 +374,385 @@ describe("Vorprüfung Ergebnis Page", () => {
       ({ answers, expected }) => {
         beforeEach(() => {
           vi.resetAllMocks();
+        });
 
-          const preCheckAnswers = mapUserAnswersToMockAnswers(answers);
-          const result = getResultForAnswers(preCheckAnswers);
-
-          vi.mocked(useLoaderData).mockReturnValue({
-            answers: preCheckAnswers,
-            result: result,
+        describe("page", () => {
+          beforeEach(() => {
+            renderResultPage(answers);
           });
 
-          render(
-            <MemoryRouter>
-              <Result />
-            </MemoryRouter>,
-          );
-        });
-
-        it("shows expected heading", async () => {
-          expect(
-            await screen.findByText(expected.headline, { exact: false }),
-          ).toBeInTheDocument();
-        });
-
-        it("shows/hides inline notice", () => {
-          if (expected.inlineNoticeText) {
+          it("shows expected heading", async () => {
             expect(
-              screen.getByText(expected.inlineNoticeText),
+              await screen.findByText(expected.headline, { exact: false }),
             ).toBeInTheDocument();
-          }
-        });
+          });
 
-        it("shows/hides tooltip", () => {
-          if (expected.infoTooltip) {
-            expect(screen.getByText(expected.infoTooltip)).toBeInTheDocument();
-          }
-        });
+          it("shows/hides inline notice", () => {
+            if (expected.inlineNoticeText) {
+              expect(
+                screen.getByText(expected.inlineNoticeText),
+              ).toBeInTheDocument();
+            }
+          });
 
-        it("shows/hides link to interoperability", () => {
-          if (expected.showsInteropLink) {
-            const linkInteroperability = screen.getByRole("link", {
-              name: "Übersichtsseite",
-            });
-            expect(linkInteroperability).toHaveAttribute(
-              "href",
-              ROUTE_INTEROPERABILITY.url,
-            );
+          it("shows/hides tooltip", () => {
+            if (expected.infoTooltip) {
+              expect(
+                screen.getByText(expected.infoTooltip),
+              ).toBeInTheDocument();
+            }
+          });
 
-            expect(
-              screen.getByText("Erfahren Sie mehr über Interoperabilität"),
-            ).toBeInTheDocument();
-          } else {
-            expect(
-              screen.queryByText("Erfahren Sie mehr über Interoperabilität"),
-            ).not.toBeInTheDocument();
-            expect(
-              screen.queryByRole("link", { name: "Übersichtsseite" }),
-            ).not.toBeInTheDocument();
-          }
-        });
+          it("shows/hides link to interoperability", () => {
+            if (expected.showsInteropLink) {
+              const linkInteroperability = screen.getByRole("link", {
+                name: "Übersichtsseite",
+              });
+              expect(linkInteroperability).toHaveAttribute(
+                "href",
+                ROUTE_INTEROPERABILITY.url,
+              );
 
-        it("shows/hides the form", () => {
-          if (expected.formIsVisible) {
-            expect(
-              screen.getByText("Ergebnis senden und NKR frühzeitig einbinden"),
-            ).toBeInTheDocument();
-            expect(
-              screen.getByRole("textbox", {
-                name: "Vorläufiger Arbeitstitel des Vorhabens",
-              }),
-            ).toBeInTheDocument();
-            if (expected.showsNegativeReasoning) {
+              expect(
+                screen.getByText("Erfahren Sie mehr über Interoperabilität"),
+              ).toBeInTheDocument();
+            } else {
+              expect(
+                screen.queryByText("Erfahren Sie mehr über Interoperabilität"),
+              ).not.toBeInTheDocument();
+              expect(
+                screen.queryByRole("link", { name: "Übersichtsseite" }),
+              ).not.toBeInTheDocument();
+            }
+          });
+
+          it("shows the correct results in the details summary", () => {
+            for (const question of questions) {
+              if (answers(question) === "Nein") {
+                expect(
+                  screen.getByText(question.negativeResult),
+                ).toBeInTheDocument();
+              } else {
+                expect(
+                  screen.getByText(question.positiveResult),
+                ).toBeInTheDocument();
+              }
+            }
+          });
+
+          it("shows/hides the form", () => {
+            if (expected.formIsVisible) {
+              expect(
+                screen.getByText(
+                  "Ergebnis senden und NKR frühzeitig einbinden",
+                ),
+              ).toBeInTheDocument();
               expect(
                 screen.getByRole("textbox", {
-                  name: "Begründung",
+                  name: "Vorläufiger Arbeitstitel des Vorhabens",
+                }),
+              ).toBeInTheDocument();
+              if (expected.showsNegativeReasoning) {
+                expect(
+                  screen.getByRole("textbox", {
+                    name: "Begründung",
+                  }),
+                ).toBeInTheDocument();
+              } else {
+                expect(
+                  screen.queryByRole("textbox", {
+                    name: "Begründung",
+                  }),
+                ).not.toBeInTheDocument();
+              }
+            } else {
+              expect(
+                screen.queryByText(
+                  "Ergebnis senden und NKR frühzeitig einbinden",
+                ),
+              ).not.toBeInTheDocument();
+              expect(
+                screen.queryByRole("textbox", {
+                  name: "Vorläufiger Arbeitstitel des Vorhabens",
+                }),
+              ).not.toBeInTheDocument();
+            }
+          });
+
+          it("shows/hides unsure interoperability hint", () => {
+            if (expected.showsUnsureHint) {
+              expect(
+                screen.getByText(
+                  "Das können Sie tun: Kontaktieren Sie uns unter",
+                  { exact: false },
+                ),
+              ).toBeInTheDocument();
+            } else {
+              expect(
+                screen.queryByText(
+                  "Das können Sie tun: Kontaktieren Sie uns unter",
+                  { exact: false },
+                ),
+              ).not.toBeInTheDocument();
+            }
+          });
+
+          it("shows/hides unsure answers heading", () => {
+            if (expected.showsUnsureHeading) {
+              expect(
+                screen.getByRole("heading", {
+                  level: 1,
+                  name: "Sie haben mehrere Aussagen mit „Ich bin unsicher“ beantwortet.",
                 }),
               ).toBeInTheDocument();
             } else {
               expect(
-                screen.queryByRole("textbox", {
-                  name: "Begründung",
+                screen.queryByRole("heading", {
+                  level: 1,
+                  name: "Sie haben mehrere Aussagen mit „Ich bin unsicher“ beantwortet.",
                 }),
               ).not.toBeInTheDocument();
             }
+          });
+
+          it("shows/hides furtherSteps", () => {
+            if (expected.furtherStepsVisible) {
+              expect(
+                screen.getByRole("heading", {
+                  level: 2,
+                  name: "So machen Sie weiter",
+                }),
+              ).toBeInTheDocument();
+              expect(
+                screen.getByRole("link", { name: "Zu „Erarbeiten“" }),
+              ).toHaveAttribute("href", ROUTE_METHODS.url);
+              expect(
+                screen.getByRole("link", { name: "Zu „Dokumentieren“" }),
+              ).toHaveAttribute("href", ROUTE_DOCUMENTATION.url);
+            }
+          });
+        });
+
+        describe("form validation", () => {
+          if (expected.hasInputArbeitstitel && expected.hasInputBegruendung) {
+            it("throws an error when no Arbeitstitel and Begründung is given", async () => {
+              const req = createRequest(answers);
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument
+              const res = await action({ request: req } as any);
+              // @ts-expect-error init does exist here
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+              expect(res.init.status).toBe(422);
+              // @ts-expect-error init does exist here
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+              expect(res.data.fieldErrors).toStrictEqual({
+                title: "Invalid input: expected string, received undefined",
+                negativeReasoning:
+                  "Invalid input: expected string, received undefined",
+              });
+            });
+
+            it("throws an error when only Arbeitstitel is given", async () => {
+              const req = createRequest(answers, "Example Arbeitstitel");
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument
+              const res = await action({ request: req } as any);
+              // @ts-expect-error init does exist here
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+              expect(res.init.status).toBe(422);
+              // @ts-expect-error init does exist here
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+              expect(res.data.fieldErrors).toStrictEqual({
+                negativeReasoning:
+                  "Invalid input: expected string, received undefined",
+              });
+            });
+
+            it("throws an error when only Begründung is given", async () => {
+              const req = createRequest(
+                answers,
+                undefined,
+                "Example Begründung",
+              );
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument
+              const res = await action({ request: req } as any);
+              // @ts-expect-error init does exist here
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+              expect(res.init.status).toBe(422);
+              // @ts-expect-error init does exist here
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+              expect(res.data.fieldErrors).toStrictEqual({
+                title: "Invalid input: expected string, received undefined",
+              });
+            });
+
+            it("redirects to the write an email when valid Title and Begründung", async () => {
+              const req = createRequest(
+                answers,
+                "Example Title",
+                "Example Begründung",
+              );
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument
+              const res = (await action({ request: req } as any)) as Response;
+              expect(res.status).toBe(302);
+            });
+          } else if (
+            expected.hasInputArbeitstitel &&
+            !expected.hasInputBegruendung
+          ) {
+            it("throws an error when no Arbeitstitel is given", async () => {
+              const req = createRequest(answers);
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument
+              const res = await action({ request: req } as any);
+              // @ts-expect-error init does exist here
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+              expect(res.init.status).toBe(422);
+              // @ts-expect-error init does exist here
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+              expect(res.data.fieldErrors).toStrictEqual({
+                title: "Invalid input: expected string, received undefined",
+              });
+            });
+
+            it("redirects to the write an email when valid Title", async () => {
+              const req = createRequest(answers, "Example Title");
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument
+              const res = (await action({ request: req } as any)) as Response;
+              expect(res.status).toBe(302);
+            });
           } else {
-            expect(
-              screen.queryByText(
-                "Ergebnis senden und NKR frühzeitig einbinden",
-              ),
-            ).not.toBeInTheDocument();
-            expect(
-              screen.queryByRole("textbox", {
-                name: "Vorläufiger Arbeitstitel des Vorhabens",
-              }),
-            ).not.toBeInTheDocument();
+            it("does not show the form", () => {
+              expect(
+                screen.queryByText(
+                  "Ergebnis senden und NKR frühzeitig einbinden",
+                ),
+              ).not.toBeInTheDocument();
+              expect(
+                screen.queryByRole("textbox", {
+                  name: "Vorläufiger Arbeitstitel des Vorhabens",
+                }),
+              ).not.toBeInTheDocument();
+            });
           }
         });
 
-        it("shows/hides unsure interoperability hint", () => {
-          if (expected.showsUnsureHint) {
-            expect(
-              screen.getByText(
-                "Das können Sie tun: Kontaktieren Sie uns unter",
-                { exact: false },
-              ),
-            ).toBeInTheDocument();
-          } else {
-            expect(
-              screen.queryByText(
-                "Das können Sie tun: Kontaktieren Sie uns unter",
-                { exact: false },
-              ),
-            ).not.toBeInTheDocument();
-          }
-        });
+        describe("Email", () => {
+          if (expected.hasInputArbeitstitel || expected.hasInputBegruendung) {
+            it("sends the correct email", async () => {
+              const req = createRequest(
+                answers,
+                expected.hasInputArbeitstitel ? "Example Title" : undefined,
+                expected.hasInputBegruendung ? "Example Begründung" : undefined,
+              );
 
-        it("shows/hides unsure answers heading", () => {
-          if (expected.showsUnsureHeading) {
-            expect(
-              screen.getByRole("heading", {
-                level: 1,
-                name: "Sie haben mehrere Aussagen mit „Ich bin unsicher“ beantwortet.",
-              }),
-            ).toBeInTheDocument();
-          } else {
-            expect(
-              screen.queryByRole("heading", {
-                level: 1,
-                name: "Sie haben mehrere Aussagen mit „Ich bin unsicher“ beantwortet.",
-              }),
-            ).not.toBeInTheDocument();
-          }
-        });
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument
+              const res = (await action({ request: req } as any)) as Response;
+              const locationHeader = decodeURIComponent(
+                res.headers.get("location")!,
+              );
 
-        it("shows/hides furtherSteps", () => {
-          if (expected.furtherStepsVisible) {
-            expect(
-              screen.getByRole("heading", {
-                level: 2,
-                name: "So machen Sie weiter",
-              }),
-            ).toBeInTheDocument();
-            expect(
-              screen.getByRole("link", { name: "Zu „Erarbeiten“" }),
-            ).toHaveAttribute("href", ROUTE_METHODS.url);
-            expect(
-              screen.getByRole("link", { name: "Zu „Dokumentieren“" }),
-            ).toHaveAttribute("href", ROUTE_DOCUMENTATION.url);
+              expect(res.status).toBe(302);
+              if (expected.includesNkrRecipient) {
+                expect(res.headers.get("location")).toMatch(
+                  "mailto:nkr%40bmj.bund.de",
+                );
+              }
+
+              if (expected.includesInterop) {
+                expect(res.headers.get("location")).toMatch(
+                  "interoperabel%40digitalservice.bund.de",
+                );
+              }
+
+              if (
+                expected.emailBodyContains !== undefined &&
+                expected.emailBodyContains.length > 0
+              ) {
+                for (const bodyText of expected.emailBodyContains) {
+                  expect(locationHeader).toMatch(bodyText);
+                }
+              }
+
+              for (const question of questions) {
+                if (answers(question) === "Nein") {
+                  expect(locationHeader).toMatch(question.negativeResult);
+                } else {
+                  expect(locationHeader).toMatch(question.positiveResult);
+                }
+              }
+
+              if (expected.hasInputArbeitstitel) {
+                expect(locationHeader).toMatch("Example Title");
+              }
+
+              if (expected.hasInputBegruendung) {
+                expect(locationHeader).toMatch("Example Begründung");
+              }
+
+              if (expected.allPositive) {
+                questions.forEach((question) => {
+                  expect(locationHeader).toMatch(question.positiveResult);
+                });
+              }
+
+              if (expected.dcPositiveIOunsure) {
+                expect(locationHeader).toMatch(
+                  "In Bezug auf Interoperabilität ist nicht sicher, ob Ihr Regelungsvorhaben zu Folgendem führt...",
+                );
+              }
+            });
+          } else {
+            it("does not show the form to send an email", () => {
+              renderResultPage(answers);
+
+              expect(
+                screen.queryByText(
+                  "Ergebnis senden und NKR frühzeitig einbinden",
+                ),
+              ).not.toBeInTheDocument();
+              expect(
+                screen.queryByRole("textbox", {
+                  name: "Vorläufiger Arbeitstitel des Vorhabens",
+                }),
+              ).not.toBeInTheDocument();
+            });
           }
         });
       },
     );
+  });
+
+  describe("loader", () => {
+    it("loads answers from the cookie", async () => {
+      const requestHeaders = new Headers();
+      requestHeaders.set(
+        "cookie",
+        // all positive answers
+        "user-answers=eyJhbnN3ZXJzIjp7Iml0LXN5c3RlbSI6InllcyIsInZlcnBmbGljaHR1bmdlbi1mdWVyLWJldGVpbGlndGUiOiJ5ZXMiLCJkYXRlbmF1c3RhdXNjaCI6InllcyIsImtvbW11bmlrYXRpb24iOiJ5ZXMiLCJhdXRvbWF0aXNpZXJ1bmciOiJ5ZXMiLCJldS1iZXp1ZyI6InllcyJ9LCJoYXNWaWV3ZWRSZXN1bHQiOnRydWV9; jwtToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzU3NTk4ODIwLCJleHAiOjE3NjAxOTA4MjB9.76KjFh84C0Ll9DCg5Xj0KHJokF6m66A8-2G07sd6nZs",
+      );
+
+      const request = new Request(
+        "http://localhost:5173/vorpruefung/ergebnis",
+        { headers: requestHeaders },
+      );
+
+      // @ts-expect-error expects typed loader args
+      const res = await loader({ request });
+
+      // @ts-expect-error data does exist
+      expect(res.data).toMatchObject({
+        result: {
+          digital: "Positiv",
+          interoperability: "Positiv",
+          euBezug: "Positiv",
+        },
+        answers: {
+          "it-system": "yes",
+          "verpflichtungen-fuer-beteiligte": "yes",
+          datenaustausch: "yes",
+          kommunikation: "yes",
+          automatisierung: "yes",
+          "eu-bezug": "yes",
+        },
+      });
+    });
   });
 });

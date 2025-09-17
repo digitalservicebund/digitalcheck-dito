@@ -102,8 +102,9 @@ export async function action({ request }: Route.ActionArgs) {
 
   // parseFormData expects a FormData to be passed, thats why we create a new one here
   const partialFormData = new FormData();
-  partialFormData.append("title", title);
-  partialFormData.append("negativeReasoning", negativeReasoning);
+  if (title) partialFormData.append("title", title);
+  if (negativeReasoning)
+    partialFormData.append("negativeReasoning", negativeReasoning);
 
   const validationResult = await parseFormData(partialFormData, schema);
 
