@@ -1,7 +1,7 @@
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
 import Timeline, { TimelineItemContentProps } from "~/components/Timeline.tsx";
-import { versionHistory } from "~/resources/content/versionsverlauf";
+import { news } from "~/resources/content/das-ist-neu";
 import { ROUTE_VERSION_HISTORY } from "~/resources/staticRoutes";
 import constructMetaTitle from "~/utils/metaTitle";
 
@@ -11,7 +11,7 @@ export function meta() {
 
 export default function VersionHistory() {
   const historyItems: (TimelineItemContentProps & { key: number })[] =
-    versionHistory.items.map((item, index) => ({
+    news.items.map((item, index) => ({
       ...item,
       hasBullet: true,
       key: index,
@@ -22,7 +22,7 @@ export default function VersionHistory() {
 
   return (
     <>
-      <Hero title={versionHistory.title} subtitle={versionHistory.subtitle} />
+      <Hero title={news.title} subtitle={news.subtitle} />
 
       <Container>
         <Timeline>

@@ -10,7 +10,7 @@ import {
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
-export const versionHistory = {
+export const news = {
   title: "Das ist neu",
   subtitle: dedent`
       Das Digitalcheck Angebot wird kontinuierlich weiterentwickelt. Bedürfnisse und Rückmeldungen von Nutzenden werden kurzfristig einbearbeitet. Auch geänderte und neue rechtliche Anforderungen führen zu Anpassungen. Unten finden Sie eine chronologische Übersicht der Ergänzungen und Änderungen auf der Website.
