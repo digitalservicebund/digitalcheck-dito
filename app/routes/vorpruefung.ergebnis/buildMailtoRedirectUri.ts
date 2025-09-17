@@ -51,9 +51,14 @@ export function buildEmailBody(
  * Optionally prefix mailto: links so that they appear to be a local page. This is so that end-to-end tests, run
  * locally, don't cause the OS's email client to open while running tests.
  */
-const mockMailtoLinks =
-  process.env.MOCK_MAILTO_LINKS === "true" &&
-  process.env.NODE_ENV !== "production";
+let mockMailtoLinks = false;
+try {
+  mockMailtoLinks =
+    process.env.MOCK_MAILTO_LINKS === "true" &&
+    process.env.NODE_ENV !== "production";
+} catch {
+  mockMailtoLinks = false;
+}
 
 if (mockMailtoLinks) {
   console.warn("Prefixing mailto: links");
