@@ -51,21 +51,8 @@ export function buildEmailBody(
  * Optionally prefix mailto: links so that they appear to be a local page. This is so that end-to-end tests, run
  * locally, don't cause the OS's email client to open while running tests.
  */
-const mockMailtoLinks = (function () {
-  // running in browser
-  // TODO: make import.meta.env available in Playwright E2E tests as well
-  if (import.meta.env) {
-    return (
-      import.meta.env.VITE_MOCK_MAILTO_LINKS === "true" && !import.meta.env.PROD
-    );
-  } else {
-    // running SSR
-    return (
-      process.env.MOCK_MAILTO_LINKS === "true" &&
-      process.env.NODE_ENV !== "production"
-    );
-  }
-})();
+const mockMailtoLinks =
+  import.meta.env.VITE_MOCK_MAILTO_LINKS === "true" && !import.meta.env.PROD;
 
 if (mockMailtoLinks) {
   console.warn("Prefixing mailto: links");
