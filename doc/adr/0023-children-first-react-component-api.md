@@ -152,6 +152,7 @@ For repeatable items with coordinated state (tabs, accordions, menus), use a con
 We intentionally avoid an alternative design that forces every subpart to be addressed only through static subcomponents and forbids ad‑hoc JSX as it is even more verbose, brittle, and discourages simple composition.
 
 ```tsx
+// ❌ Avoid: using typed child components for all children
 <InfoBoxList separator>
   <InfoBoxList.Heading>{documentation.summary.title}</InfoBoxList.Heading>
   <InfoBoxList.Item>
@@ -181,8 +182,8 @@ We intentionally avoid an alternative design that forces every subpart to be add
 ### Migration Plan
 
 1. **New components** must follow this ADR.
-2. **Existing components** will be migrated when touched or when we have find time in a sprint.
-3. **Resource/content files** will be flattened according to the boyscout rule.
+2. **Existing components** will be migrated when touched or when we find time in a sprint.
+3. **Resource/content files** will be flattened according to the boyscout rule (i.e. when touched).
 
 ## Implementation Notes (typing & API shape)
 
