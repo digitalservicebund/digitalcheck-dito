@@ -2,6 +2,9 @@ name: Create Unified Test Report
 
 on:
   workflow_call:
+    secrets:
+      SLACK_WEBHOOK_URL:
+        required: true
 
 permissions:
   contents: read

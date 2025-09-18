@@ -42,6 +42,8 @@ jobs:
       contents: read
       pages: write
       id-token: write
+    secrets:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   build-and-push-image:
     needs: [vulnerability-scan, check-and-test]
