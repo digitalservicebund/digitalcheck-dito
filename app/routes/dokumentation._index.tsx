@@ -34,7 +34,7 @@ function DigitalDocumentationIndex() {
   return (
     <>
       <Hero title={start.title} subtitle={start.subtitle}>
-        <div className="ds-stack ds-stack-16 mt-40 mb-20">
+        <div className="mt-40 mb-20 space-y-16">
           {start.hints.map((hint) => (
             <DetailsSummary
               key={hint.title}

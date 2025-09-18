@@ -62,7 +62,7 @@ export default function FivePrinciples() {
         />
       </Hero>
 
-      <Container className="ds-stack ds-stack-40">
+      <Container className="space-y-40 pb-0">
         <div id="instruction">
           <Badge Icon={methodsFivePrinciples.instruction.badge.Icon}>
             {methodsFivePrinciples.instruction.badge.text}
@@ -73,16 +73,17 @@ export default function FivePrinciples() {
         </div>
 
         <InfoBoxList
-          className="list-unstyled ds-stack ds-stack-40"
+          className="list-unstyled mt-0"
           items={methodsFivePrinciples.instruction.items}
         />
-
         <Separator />
       </Container>
 
-      {prinzips.map((prinzip) => (
-        <Principle prinzip={prinzip} key={prinzip.Name} />
-      ))}
+      <div className="container my-40 space-y-96">
+        {prinzips.map((prinzip) => (
+          <Principle prinzip={prinzip} key={prinzip.Name} />
+        ))}
+      </div>
 
       <PrinciplePosterBox />
 

@@ -1,5 +1,4 @@
 import Absatz from "~/components/Absatz";
-import Container from "~/components/Container";
 import CustomLink from "~/components/CustomLink";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
@@ -18,7 +17,7 @@ type PrincipleProps = {
 
 export default function Principle({ prinzip }: Readonly<PrincipleProps>) {
   return (
-    <Container className="space-y-40 pb-64" key={slugify(prinzip.Name)}>
+    <div className="space-y-40" key={slugify(prinzip.Name)}>
       <InfoBox
         identifier={slugify(prinzip.Name)}
         heading={{
@@ -36,7 +35,7 @@ export default function Principle({ prinzip }: Readonly<PrincipleProps>) {
       {prinzip.Beispiel && (
         <PrincipleExample prinzip={prinzip as PrinzipWithAspekteAndExample} />
       )}
-    </Container>
+    </div>
   );
 }
 
