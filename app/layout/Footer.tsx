@@ -7,6 +7,7 @@ import tailwindMerge from "~/utils/tailwindMerge";
 
 type LinkProps = {
   preText?: string;
+  postText?: string;
   url: string;
   text: string;
   openInNewTab?: boolean;
@@ -26,6 +27,7 @@ const FooterLink = ({ link }: { link: LinkProps }) => (
         {link.text} {link.openInNewTab && openInNewIconElement}
       </span>
     </Link>
+    {link?.postText && <> {link.postText}</>}
   </>
 );
 
@@ -101,16 +103,22 @@ export default function Footer() {
 
         <hr className="mt-16 w-full border-t-2 border-blue-300" />
 
-        <div className="space-y-16 sm:flex sm:gap-48">
-          <Image
-            url="/logo/bmds-logo.png"
-            width={120}
-            alternativeText="Logo des Bundesministerium für Digitales und Staatsmodernisierung"
-          />
-          <nav aria-label={footer.bottom.navLabel}>
-            <LinkList links={footer.bottom.links} />
-          </nav>
-        </div>
+        <nav aria-label={footer.bottom.navLabel} className="space-y-40">
+          <FooterLink link={footer.bottom.digitalserviceLink} />
+
+          <div className="space-y-16 sm:flex sm:flex-row sm:items-center sm:gap-48 sm:space-y-0">
+            <Image
+              url="/logo/bmds-logo.png"
+              width={120}
+              alternativeText="Logo des Bundesministerium für Digitales und Staatsmodernisierung"
+            />
+
+            <div className="max-w-2xl space-y-8">
+              <h3 className="ds-label-03-bold">{footer.bottom.title}</h3>
+              <LinkList links={footer.bottom.links} />
+            </div>
+          </div>
+        </nav>
       </div>
     </footer>
   );

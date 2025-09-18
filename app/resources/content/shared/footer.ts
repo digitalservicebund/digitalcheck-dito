@@ -123,21 +123,26 @@ export const footer = {
   },
   bottom: {
     navLabel: "Externe Verlinkungen",
+    title: "Federführung",
+    digitalserviceLink: {
+      preText: "Ein Angebot der",
+      text: "DigitalService GmbH des Bundes",
+      url: "https://digitalservice.bund.de/",
+      openInNewTab: true,
+    },
     links: [
       {
-        preText: "Ein Onlinedienst der",
-        text: "DigitalService GmbH des Bundes",
-        url: "https://digitalservice.bund.de/",
-        openInNewTab: true,
-      },
-      {
-        preText: "Im Auftrag des",
+        preText: "Der Digitalcheck entsteht im Auftrag des",
         text: "Bundesministerium für Digitales und Staatsmodernisierung",
         url: "https://bmds.bund.de/",
         openInNewTab: true,
       },
       {
-        text: "Mehr über die Initative Digitalcheck erfahren",
+        preText:
+          "Mehr über den politischen Auftrag und die Entstehung des Digitalcheck finden Sie auf der",
+        text: "Projektseite",
+        postText:
+          "des Bundesministeriums für Digitales und Staatsmodernisierung.",
         url: "https://www.digitale-verwaltung.de/Webs/DV/DE/transformation/digitalcheck/digitalcheck-node.html",
         openInNewTab: true,
       },
