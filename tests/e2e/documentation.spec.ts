@@ -6,9 +6,7 @@ test.describe("documentation process", () => {
     await page.goto(ROUTE_DOCUMENTATION.url, { waitUntil: "domcontentloaded" });
 
     const downloadPromise = page.waitForEvent("download");
-    await page
-      .getByRole("link", { name: "Dokumentation herunterladen" })
-      .click();
+    await page.getByRole("link", { name: "Word-Datei herunterladen" }).click();
     const download = await downloadPromise;
     expect(download.suggestedFilename()).toContain(
       "Dokumentieren-der-Digitaltauglichkeit_V1-5-1.docx",
