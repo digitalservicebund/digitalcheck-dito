@@ -192,11 +192,3 @@ test.describe("test error pages", () => {
     await expect(page).toHaveURL(ROUTE_LANDING.url);
   });
 });
-
-test.describe("pipeline test", () => {
-  test("failing test to test pipeline", async ({ page }) => {
-    // This test is intentionally failing to test the CI/CD pipeline
-    await page.goto("/");
-    expect(true).toBe(false);
-  });
-});
