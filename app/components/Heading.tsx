@@ -25,7 +25,8 @@ function Heading({
   ...additionalProps
 }: Readonly<HeadingProps>) {
   const Tag = tagName as keyof React.JSX.IntrinsicElements;
-  const cssClasses = twMerge(look, className);
+  // ensure headings don't use hyphens, except on narrow screens, where long words might break the layout
+  const cssClasses = twMerge("sm:hyphens-none", look, className);
 
   if (children) {
     return (
