@@ -158,6 +158,3 @@ jobs:
           name: playwright-a11y-blob-report-${{ matrix.shardIndex }}
           path: blob-report
           retention-days: 1
-
-      - name: Fail
-        run: exit 1
