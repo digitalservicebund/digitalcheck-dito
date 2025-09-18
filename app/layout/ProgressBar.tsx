@@ -6,10 +6,10 @@ export default function Progress() {
   const { pathname } = useLocation();
   return (
     <nav
-      className="container mt-8 mb-16 flex justify-center py-0"
+      className="container mt-8 mb-16 flex justify-center"
       aria-label={progress.ariaLabel}
     >
-      <ol className="list-unstyled relative container flex w-full list-none justify-between gap-20 p-0 px-8 after:absolute after:top-[25px] after:left-0 after:-z-10 after:w-full after:border-b-2 after:border-blue-500 sm:gap-40 sm:px-14">
+      <ol className="list-unstyled relative container flex w-full list-none justify-between gap-20 px-8 after:absolute after:top-[25px] after:left-0 after:-z-10 after:w-full after:border-b-2 after:border-blue-500 sm:gap-40 sm:px-14">
         {progress.items.map((item, index) => {
           const isActive = pathname.startsWith(item.prefix);
           return (

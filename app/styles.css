@@ -92,7 +92,7 @@
 @utility container {
   @apply mx-auto;
   max-width: 59rem;
-  padding: 2.5rem clamp(1rem, 5vw, 3rem) 3rem;
+  padding-inline: clamp(1rem, 5vw, 3rem);
 }
 
 @utility container-overhanging-background {
