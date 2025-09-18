@@ -174,7 +174,7 @@ export default function Index() {
   return (
     <form {...form.getFormProps()}>
       <input type="hidden" name="questionId" value={question.id} />
-      <fieldset className="ds-stack ds-stack-32 container pt-0 pb-40">
+      <fieldset className="ds-stack ds-stack-32 container pb-40">
         <span className="sr-only">{`${preCheck.srHint.before}${questionIdx + 1}${preCheck.srHint.between}${questions.length}`}</span>
         <legend className="ds-stack ds-stack-16">
           <Heading
