@@ -91,17 +91,9 @@ function TimelineItem({
 
 function Timeline({ className, children, ...restProps }: BulletListProps) {
   return (
-    <div
-      className={twMerge(
-        "ds-stack ds-stack-8 group relative scroll-my-40",
-        className,
-      )}
-    >
-      <div className="absolute top-32 bottom-0 left-[8px] w-[4px] bg-blue-300"></div>
-      <ul
-        className="list-unstyled ds-stack ds-stack-32 relative"
-        {...restProps}
-      >
+    <div className={twMerge("relative scroll-my-40", className)}>
+      <div className="absolute top-0 bottom-0 left-8 w-4 bg-blue-300"></div>
+      <ul className="list-unstyled relative space-y-32" {...restProps}>
         {children}
       </ul>
     </div>

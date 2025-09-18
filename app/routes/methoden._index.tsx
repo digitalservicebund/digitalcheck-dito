@@ -1,5 +1,4 @@
 import { ButtonLinkProps } from "~/components/Button";
-import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
@@ -63,49 +62,47 @@ export default function Methoden() {
     <>
       <Hero subtitle={methods.subtitle} title={methods.title} />
 
-      <Container className="my-80 py-0">
+      <div className="container my-40 space-y-40 lg:my-80 lg:space-y-80">
         <Timeline>{methods.steps.items.map(renderStep)}</Timeline>
-      </Container>
 
-      <Container className="my-80 space-y-40 py-0">
-        <InfoBox
-          heading={{ tagName: "h2", text: methods.furtherMethods.heading }}
-          content={methods.furtherMethods.content}
-        />
-
-        <InfoBoxSideBySide>
+        <section className="space-y-40">
           <InfoBox
-            look="method"
-            badge={{ children: methods.itSystems.badge, look: "hint" }}
-            heading={{
-              text: methods.itSystems.heading,
-              tagName: "h3",
-              className: "ds-heading-03-bold",
-            }}
-            content={methods.itSystems.content}
-            buttons={methods.itSystems.buttons}
+            heading={{ tagName: "h2", text: methods.furtherMethods.heading }}
+            content={methods.furtherMethods.content}
           />
 
-          <InfoBox
-            look="method"
-            badge={{
-              children: methods.technicalFeasibility.badge,
-              look: "hint",
-            }}
-            heading={{
-              text: methods.technicalFeasibility.heading,
-              tagName: "h3",
-              className: "ds-heading-03-bold",
-            }}
-            content={methods.technicalFeasibility.content}
-            buttons={methods.technicalFeasibility.buttons}
-          />
-        </InfoBoxSideBySide>
-      </Container>
+          <InfoBoxSideBySide>
+            <InfoBox
+              look="method"
+              badge={{ children: methods.itSystems.badge, look: "hint" }}
+              heading={{
+                text: methods.itSystems.heading,
+                tagName: "h3",
+                className: "ds-heading-03-bold",
+              }}
+              content={methods.itSystems.content}
+              buttons={methods.itSystems.buttons}
+            />
 
+            <InfoBox
+              look="method"
+              badge={{
+                children: methods.technicalFeasibility.badge,
+                look: "hint",
+              }}
+              heading={{
+                text: methods.technicalFeasibility.heading,
+                tagName: "h3",
+                className: "ds-heading-03-bold",
+              }}
+              content={methods.technicalFeasibility.content}
+              buttons={methods.technicalFeasibility.buttons}
+            />
+          </InfoBoxSideBySide>
+        </section>
+      </div>
       <SupportBanner {...supportBanner} />
-      <div id={"weiter"} />
-      <Container className="my-80 space-y-32 py-0">
+      <section className="container my-40 space-y-32 lg:my-80">
         <Heading tagName="h2">{methods.nextSteps.title}</Heading>
         <NumberedList>
           {methods.nextSteps.items.map((item) => (
@@ -123,7 +120,7 @@ export default function Methoden() {
             </NumberedList.Item>
           ))}
         </NumberedList>
-      </Container>
+      </section>
     </>
   );
 }
