@@ -48,9 +48,9 @@ export function loader({ params }: Route.LoaderArgs) {
   return { route };
 }
 
-export function meta({ loaderData }: Route.MetaArgs) {
+export function meta({ data }: Route.MetaArgs) {
   return constructMetaTitle(
-    loaderData ? loaderData.route.title : ROUTE_METHODS.title,
+    data?.route ? data.route.title : ROUTE_METHODS.title,
   );
 }
 

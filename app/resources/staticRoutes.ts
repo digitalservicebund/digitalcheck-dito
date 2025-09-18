@@ -1,6 +1,7 @@
 // These routes can't be exported from ~/routes.ts as that file isn't part of the app environment: https://github.com/remix-run/react-router/issues/12392
 
 import { preCheckQuestions } from "~/resources/content/shared/pre-check-questions";
+import { principles } from "~/resources/content/shared/prinzipien";
 import { FILE_NAME_DOCUMENTATION_STATIC_WORD } from "~/utils/constants";
 import { removeTrailingSlash } from "~/utils/utilFunctions";
 
@@ -17,7 +18,7 @@ export const ROUTE_LANDING = {
   title: "Startseite",
 };
 
-const createRoute = (
+export const createRoute = (
   path: string,
   title: string,
   parent?: Route,
@@ -98,6 +99,26 @@ export const ROUTE_DOCUMENTATION = createRoute(
   "dokumentation",
   "Dokumentation",
 );
+export const ROUTE_DOCUMENTATION_INFO = createRoute(
+  "informationen-zum-regelungsvorhaben",
+  "Informationen zum Regelungsvorhaben",
+  ROUTE_DOCUMENTATION,
+);
+export const ROUTE_DOCUMENTATION_PARTICIPATION = createRoute(
+  "beteiligungsformate",
+  "Beteiligungsformate",
+  ROUTE_DOCUMENTATION,
+);
+export const ROUTE_DOCUMENTATION_SUMMARY = createRoute(
+  "zusammenfassung",
+  "Zusammenfassung",
+  ROUTE_DOCUMENTATION,
+);
+export const ROUTES_DOCUMENTATION_PRINCIPLES = Object.values(principles).map(
+  (principle): Route =>
+    createRoute(principle.id, principle.title, ROUTE_DOCUMENTATION),
+);
+
 // NOTE: 70-tage replace pdf with word document
 export const ROUTE_DOCUMENTATION_STATIC_PDF = createRoute(
   "download/prototyp_documentation_dummy_result.pdf",
@@ -298,6 +319,9 @@ export const ROUTES: Route[] = [
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
   ROUTE_DOCUMENTATION,
+  ROUTE_DOCUMENTATION_INFO,
+  ROUTE_DOCUMENTATION_PARTICIPATION,
+  ...ROUTES_DOCUMENTATION_PRINCIPLES,
   ROUTE_INTEROPERABILITY,
   ROUTE_INTEROPERABILITY_SPOC,
   ROUTE_EXAMPLES,

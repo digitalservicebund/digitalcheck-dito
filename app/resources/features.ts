@@ -4,4 +4,5 @@ export const features: Record<string, string> = {
     "digitalcheck.enable-documentation-prototype-alternative",
   enableGesetzgebungsprozessOverview:
     "digitalcheck.show-gesetzgebungsprozess-overview",
+  enableDigitalDocumentation: "digitalcheck.enable-digital-documentation",
 };

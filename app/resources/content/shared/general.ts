@@ -2,6 +2,9 @@ export const general = {
   buttonBack: {
     text: "Zurück",
   },
+  buttonNext: {
+    text: "Übernehmen & weiter",
+  },
   tableOfContents: {
     headline: "Inhalt",
   },
