@@ -15,6 +15,7 @@ allowed_patterns:
   - passen
   - Anpassungen
   - Pass\s # Allow "Pass " followed by a space
+  - digitalservicebund/[^@]+@[a-z0-9]{40}
 
 scopeconfig:
   - scope: node  # ignores files such as package-lock.json
