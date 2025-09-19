@@ -1,4 +1,4 @@
-import Container from "~/components/Container";
+import ContentWrapper from "~/components/ContentWrapper";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox.tsx";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
@@ -15,7 +15,6 @@ export default function Digitaltauglichkeit_index() {
     title: item.tabName,
     content: (
       <InfoBox
-        className="pb-64"
         key={item.title}
         heading={{
           tagName: "h2",
@@ -31,9 +30,9 @@ export default function Digitaltauglichkeit_index() {
     <>
       <Hero title={examples.title} subtitle={examples.subtitle} />
 
-      <Container className="pb-0">
+      <ContentWrapper>
         <Tabs tabs={tabsData} />
-      </Container>
+      </ContentWrapper>
     </>
   );
 }
