@@ -42,8 +42,8 @@ export const examplesRegelungen = {
     title: "Formulierungen aus der Regelung",
   },
   nkr: {
-    tabName: "NKR Stellungnahme",
-    title: "NKR Stellungnahme",
+    tabName: "NKR-Stellungnahme",
+    title: "NKR-Stellungnahme",
     subtitle: "Diese Ausführungen sind der Stellungnahme des NKR entnommen.",
     linkText: "Die ganze Stellungnahme können Sie hier finden: ",
   },

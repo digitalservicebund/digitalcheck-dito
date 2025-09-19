@@ -192,7 +192,7 @@ export default function Gesetz() {
                 to={regelung.NKRStellungnahmeLink}
                 rel="noreferrer"
               >
-                NKR Stellungnahme
+                NKR-Stellungnahme
               </CustomLink>
             </div>
           )}
