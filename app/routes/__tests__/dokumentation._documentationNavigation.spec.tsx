@@ -7,6 +7,7 @@ import {
   ROUTE_DOCUMENTATION,
   ROUTE_DOCUMENTATION_INFO,
   ROUTE_DOCUMENTATION_PARTICIPATION,
+  ROUTE_DOCUMENTATION_SEND,
   ROUTE_DOCUMENTATION_SUMMARY,
   ROUTES_DOCUMENTATION_PRINCIPLES,
 } from "~/resources/staticRoutes";
@@ -16,6 +17,7 @@ import LayoutWithDocumentationNavigation from "~/routes/dokumentation._documenta
 import DocumentationPrinciple, {
   loader,
 } from "~/routes/dokumentation._documentationNavigation.$principleId";
+import DocumentationSend from "~/routes/dokumentation._documentationNavigation.absenden";
 import DocumentationParticipation from "~/routes/dokumentation._documentationNavigation.beteiligungsformate";
 import DocumentationInfo from "~/routes/dokumentation._documentationNavigation.informationen-zum-regelungsvorhaben";
 import DocumentationSummary from "~/routes/dokumentation._documentationNavigation.zusammenfassung";
@@ -56,6 +58,7 @@ const pages: Page[] = [
     createPage(principleRoute, <DocumentationPrinciple />, loader),
   ),
   createPage(ROUTE_DOCUMENTATION_SUMMARY, <DocumentationSummary />),
+  createPage(ROUTE_DOCUMENTATION_SEND, <DocumentationSend />),
 ];
 
 function renderPage({ path, element, loader }: Page) {

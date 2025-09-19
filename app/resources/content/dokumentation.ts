@@ -146,4 +146,8 @@ export const digitalDocumentation = {
     headline: "Zusammenfassung",
     text: "Hier entsteht die Zusammenfassung der Dokumentation.",
   },
+  send: {
+    headline: "Absenden",
+    text: "Hier entsteht die Absenden-Seite der Dokumentation.",
+  },
 };

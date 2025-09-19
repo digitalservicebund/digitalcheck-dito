@@ -114,6 +114,11 @@ export const ROUTE_DOCUMENTATION_SUMMARY = createRoute(
   "Zusammenfassung",
   ROUTE_DOCUMENTATION,
 );
+export const ROUTE_DOCUMENTATION_SEND = createRoute(
+  "absenden",
+  "Absenden",
+  ROUTE_DOCUMENTATION,
+);
 export const ROUTES_DOCUMENTATION_PRINCIPLES = Object.values(principles).map(
   (principle): Route =>
     createRoute(principle.id, principle.title, ROUTE_DOCUMENTATION),
