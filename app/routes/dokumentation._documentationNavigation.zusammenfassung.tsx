@@ -10,7 +10,7 @@ export function meta() {
   return constructMetaTitle(ROUTE_DOCUMENTATION_SUMMARY.title);
 }
 
-export default function DocumentationInfo() {
+export default function DocumentationSummary() {
   return (
     <>
       <Heading
