@@ -123,6 +123,13 @@ export const ROUTES_DOCUMENTATION_PRINCIPLES = Object.values(principles).map(
   (principle): Route =>
     createRoute(principle.id, principle.title, ROUTE_DOCUMENTATION),
 );
+export const ROUTES_DOCUMENTATION_ORDERED = [
+  ROUTE_DOCUMENTATION_INFO,
+  ROUTE_DOCUMENTATION_PARTICIPATION,
+  ...ROUTES_DOCUMENTATION_PRINCIPLES,
+  ROUTE_DOCUMENTATION_SUMMARY,
+  ROUTE_DOCUMENTATION_SEND,
+];
 
 // NOTE: 70-tage replace pdf with word document
 export const ROUTE_DOCUMENTATION_STATIC_PDF = createRoute(

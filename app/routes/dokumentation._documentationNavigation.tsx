@@ -11,25 +11,15 @@ import { features } from "~/resources/features";
 import {
   type Route,
   ROUTE_DOCUMENTATION,
-  ROUTE_DOCUMENTATION_INFO,
-  ROUTE_DOCUMENTATION_PARTICIPATION,
-  ROUTE_DOCUMENTATION_SEND,
-  ROUTE_DOCUMENTATION_SUMMARY,
-  ROUTES_DOCUMENTATION_PRINCIPLES,
+  ROUTES_DOCUMENTATION_ORDERED,
 } from "~/resources/staticRoutes";
 import useFeatureFlag from "~/utils/featureFlags";
 import customTwMerge from "~/utils/tailwindMerge";
 
-const routes = [
-  ROUTE_DOCUMENTATION_INFO,
-  ROUTE_DOCUMENTATION_PARTICIPATION,
-  ...ROUTES_DOCUMENTATION_PRINCIPLES,
-  ROUTE_DOCUMENTATION_SUMMARY,
-  ROUTE_DOCUMENTATION_SEND,
-];
-
 function findIndexForRoute(currentUrl: string) {
-  const index = routes.findIndex((route) => route.url === currentUrl);
+  const index = ROUTES_DOCUMENTATION_ORDERED.findIndex(
+    (route) => route.url === currentUrl,
+  );
   if (index === -1) {
     throw new Error(`Could not find route with url ${currentUrl}`);
   }
@@ -38,13 +28,13 @@ function findIndexForRoute(currentUrl: string) {
 
 function getPreviousRoute(currentUrl: string): Route {
   return findIndexForRoute(currentUrl) > 0
-    ? routes[findIndexForRoute(currentUrl) - 1]
+    ? ROUTES_DOCUMENTATION_ORDERED[findIndexForRoute(currentUrl) - 1]
     : ROUTE_DOCUMENTATION;
 }
 
 function getNextRoute(currentUrl: string): Route | null {
-  return findIndexForRoute(currentUrl) < routes.length - 1
-    ? routes[findIndexForRoute(currentUrl) + 1]
+  return findIndexForRoute(currentUrl) < ROUTES_DOCUMENTATION_ORDERED.length - 1
+    ? ROUTES_DOCUMENTATION_ORDERED[findIndexForRoute(currentUrl) + 1]
     : null;
 }
 
@@ -68,11 +58,17 @@ export default function LayoutWithDocumentationNavigation() {
   return (
     <div className="parent-bg-blue flex justify-center bg-blue-100 pt-32">
       <div className="hidden flex-none pl-32 lg:block">
-        <DocumentationNavigation routes={routes} currentRouteUrl={currentUrl} />
+        <DocumentationNavigation
+          routes={ROUTES_DOCUMENTATION_ORDERED}
+          currentRouteUrl={currentUrl}
+        />
       </div>
       <section className="w-[51rem]">
         <Container className="pt-0 lg:hidden">
-          <Stepper currentElementUrl={currentUrl} elements={routes} />
+          <Stepper
+            currentElementUrl={currentUrl}
+            elements={ROUTES_DOCUMENTATION_ORDERED}
+          />
         </Container>
         <Container className="pt-0">
           <Outlet context={useOutletContext()} />
