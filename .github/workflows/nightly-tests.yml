@@ -24,3 +24,5 @@ jobs:
       contents: read
       pages: write
       id-token: write
+    secrets:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
