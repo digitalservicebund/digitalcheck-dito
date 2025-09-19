@@ -48,9 +48,11 @@ export default function FivePrinciples() {
         />
       </Hero>
 
-      {prinzips.map((prinzip) => (
-        <Principle prinzip={prinzip} key={prinzip.Name} />
-      ))}
+      <div className="container my-40 space-y-96">
+        {prinzips.map((prinzip) => (
+          <Principle prinzip={prinzip} key={prinzip.Name} />
+        ))}
+      </div>
 
       <PrinciplePosterBox hasBlueBackground={true} />
     </>
