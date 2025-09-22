@@ -179,7 +179,7 @@ export default function Gesetz() {
           ).map((digitalcheck, i) => (
             <div
               className="my-32 border-l-4 border-gray-400 pl-8 italic"
-              key={`digitalcheck-${i}`}
+              key={digitalcheck.documentId}
             >
               <BlocksRenderer content={digitalcheck.NKRStellungnahmeDCText!} />
             </div>
