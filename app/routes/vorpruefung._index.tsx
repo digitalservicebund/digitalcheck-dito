@@ -6,6 +6,7 @@ import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image";
+import ImageBox from "~/components/ImageBox";
 import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxList from "~/components/InfoBoxList";
 import SupportBanner from "~/components/SupportBanner";
@@ -30,10 +31,21 @@ export default function Index() {
     {
       title: preCheck.start.summary.tabName,
       content: (
-        <InfoBoxList
-          heading={{ text: preCheck.start.summary.title }}
-          items={preCheck.start.summary.items}
-        />
+        <div className="space-y-40">
+          <InfoBoxList
+            heading={{ text: preCheck.start.summary.title }}
+            items={[preCheck.start.summary.start]}
+          />
+          <ImageBox
+            title={preCheck.start.summary.process.heading}
+            image={preCheck.start.summary.process.image}
+            border
+          />
+          <InfoBox
+            heading={{ text: preCheck.start.summary.title }}
+            content={preCheck.start.summary.relevance.content}
+          />
+        </div>
       ),
     },
     {
