@@ -1,28 +1,5 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-
-vi.mock("react-router", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("react-router")>();
-  return {
-    ...actual,
-    useLoaderData: vi.fn(),
-    useActionData: vi.fn(),
-    useNavigate: vi.fn(),
-  };
-});
-
-vi.mock("@rvf/react-router", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@rvf/react-router")>();
-  return {
-    ...actual,
-    useForm: () => ({
-      getFormProps: vi.fn(),
-      value: vi.fn(),
-      error: vi.fn(),
-    }),
-  };
-});
-
 import { MemoryRouter, useLoaderData } from "react-router";
 
 import {
@@ -48,6 +25,28 @@ import type {
 } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { getResultForAnswers } from "~/routes/vorpruefung.ergebnis/getResultForAnswers";
 import Result, { action, loader } from "~/routes/vorpruefung.ergebnis/route";
+
+vi.mock("react-router", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("react-router")>();
+  return {
+    ...actual,
+    useLoaderData: vi.fn(),
+    useActionData: vi.fn(),
+    useNavigate: vi.fn(),
+  };
+});
+
+vi.mock("@rvf/react-router", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@rvf/react-router")>();
+  return {
+    ...actual,
+    useForm: () => ({
+      getFormProps: vi.fn(),
+      value: vi.fn(),
+      error: vi.fn(),
+    }),
+  };
+});
 
 const { questions } = preCheck;
 
@@ -337,15 +336,13 @@ function createRequest(
   title?: string,
   negativeReasoning?: string,
 ) {
-  const preCheckAnswers = mapUserAnswersToMockAnswers(answers);
-
-  const form: { [key: string]: string } = preCheckAnswers;
+  const form: { [key: string]: string } = mapUserAnswersToMockAnswers(answers);
   if (title) form["title"] = title;
   if (negativeReasoning) form["negativeReasoning"] = negativeReasoning;
 
-  const fd = new FormData();
-  for (const [k, v] of Object.entries(form)) fd.append(k, v);
-  return { formData: () => fd } as unknown as Request;
+  const formData = new FormData();
+  for (const [key, value] of Object.entries(form)) formData.append(key, value);
+  return { formData: () => formData } as unknown as Request;
 }
 
 beforeAll(() => {

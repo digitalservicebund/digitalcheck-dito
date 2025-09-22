@@ -36,22 +36,19 @@ const positiveResultContent = [
   "einem Daten- und Informationsaustausch zwischen EU-Mitgliedsstaaten.",
 ];
 
-test.describe("test Vorprüfung Ergebnis happy path", () => {
+test.describe("Vorprüfung Ergebnis happy path", () => {
   test.describe.configure({ mode: "default" });
 
   let page: Page;
-  test.beforeAll(
-    "answer questions according to scenario and go to result page",
-    async ({ browser }) => {
-      page = await browser.newPage();
-      await page.goto(questions[0].url);
-      for (const question of questions) {
-        await page.waitForURL(question.url);
-        await page.getByLabel("Ja").click();
-        await page.getByRole("button", { name: "Übernehmen" }).click();
-      }
-    },
-  );
+  test.beforeAll("answer all questions with yes", async ({ browser }) => {
+    page = await browser.newPage();
+    await page.goto(questions[0].url);
+    for (const question of questions) {
+      await page.waitForURL(question.url);
+      await page.getByLabel("Ja").click();
+      await page.getByRole("button", { name: "Übernehmen" }).click();
+    }
+  });
 
   test.beforeEach("go to result page", async () => {
     if (page.url() !== ROUTE_PRECHECK_RESULT.url) {
