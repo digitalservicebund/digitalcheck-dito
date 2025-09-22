@@ -5,7 +5,7 @@ import {
   useOutletContext,
 } from "react-router";
 
-import Container from "~/components/Container";
+import ContentWrapper from "~/components/ContentWrapper.tsx";
 import CustomLink from "~/components/CustomLink";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
@@ -106,9 +106,9 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
         subtitle={examplesRegelungen.principles.hero.subtitle}
       />
 
-      <Container className="space-y-80">
+      <ContentWrapper className="space-y-80">
         <Tabs
-          className="mb-80"
+          className=""
           tabs={tabsForNavigation}
           initialActiveIndex={initialActiveIndexForTabs}
           onNavigateRequest={handleNavigationRequest}
@@ -193,7 +193,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
             </div>
           </>
         )}
-      </Container>
+      </ContentWrapper>
     </>
   );
 }

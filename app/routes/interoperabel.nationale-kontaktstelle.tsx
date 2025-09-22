@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Badge from "~/components/Badge.tsx";
 import Container from "~/components/Container";
+import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import ImageZoomable from "~/components/ImageZoomable";
@@ -35,41 +36,42 @@ export default function SinglePointOfContact() {
       title: spoc.landscape.tabName,
       content: (
         <>
-          <Heading
-            tagName="h2"
-            text={spoc.landscape.headline}
-            className="mb-8"
-          />
-          <RichText
-            markdown={spoc.landscape.content}
-            className="ds-stack-24 mb-40"
-          />
-          <ImageZoomable image={spoc.landscape.image} />
-          <RichText
-            className="mt-16 mb-32"
-            markdown={spoc.landscape.contentAfter.content}
-          />
-          <InfoBox
-            detailsSummary={spoc.landscape.contentAfter.infobox.detailsSummary}
-          />
-          <RichText
-            className="mb-48"
-            markdown={spoc.landscape.contentAfter.outro}
-          />
-          <div className="relative left-1/2 w-screen -translate-x-1/2 bg-blue-100">
+          <div className="container">
+            <Heading
+              tagName="h2"
+              text={spoc.landscape.headline}
+              className="mb-8"
+            />
+            <RichText
+              markdown={spoc.landscape.content}
+              className="ds-stack-24 mb-40"
+            />
+            <ImageZoomable image={spoc.landscape.image} />
+            <RichText
+              className="mt-16 mb-32"
+              markdown={spoc.landscape.contentAfter.content}
+            />
+            <InfoBox
+              detailsSummary={
+                spoc.landscape.contentAfter.infobox.detailsSummary
+              }
+            />
+            <RichText
+              className="mb-48"
+              markdown={spoc.landscape.contentAfter.outro}
+            />
+          </div>
+          <div className="bg-blue-100">
             <Container>
               <Heading
                 tagName="h2"
                 text={spoc.responsibilities.headline}
                 className="mb-8"
               />
-              <RichText
-                markdown={spoc.responsibilities.content}
-                className="mb-48"
-              />
+              <RichText markdown={spoc.responsibilities.content} />
             </Container>
           </div>
-          <Container className="px-0">
+          <ContentWrapper className="lg:mt-40">
             <Heading
               tagName="h2"
               text="Aktueller Stand der Integration in den Digitalcheck"
@@ -171,14 +173,14 @@ export default function SinglePointOfContact() {
                 </h3>
               </SPoCTimelineItem>
             </Timeline>
-          </Container>
+          </ContentWrapper>
         </>
       ),
     },
     {
       title: spoc.states.tabName,
       content: (
-        <>
+        <div className="container">
           <Heading tagName="h2" text={spoc.states.headline} />
           {spoc.states.sections.map((section) => (
             <div key={section.headline} className="last:mb-48">
@@ -190,13 +192,13 @@ export default function SinglePointOfContact() {
               <RichText markdown={section.content} />
             </div>
           ))}
-        </>
+        </div>
       ),
     },
     {
       title: spoc.contact.tabName,
       content: (
-        <>
+        <div className="container">
           <Heading tagName="h2" text={spoc.contact.headline} />
           {spoc.contact.sections.map((section) => (
             <div key={section.headline} className="last:mb-48">
@@ -208,7 +210,7 @@ export default function SinglePointOfContact() {
               <RichText markdown={section.content} className="ds-stack-24" />
             </div>
           ))}
-        </>
+        </div>
       ),
     },
   ];
@@ -218,9 +220,8 @@ export default function SinglePointOfContact() {
       <Hero title={spoc.headline}>
         <RichText markdown={spoc.content} className="ds-subhead ds-stack-24" />
       </Hero>
-      <Container>
-        <Tabs tabs={tabsData} />
-      </Container>
+
+      <Tabs wrapperClassName="container mt-40" tabs={tabsData} />
     </>
   );
 }

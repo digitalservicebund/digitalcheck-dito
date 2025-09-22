@@ -1,6 +1,6 @@
 import { useLoaderData, useOutletContext } from "react-router";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
-import Container from "~/components/Container";
+import ContentWrapper from "~/components/ContentWrapper.tsx";
 import CustomLink from "~/components/CustomLink";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
@@ -210,7 +210,7 @@ export default function Gesetz() {
       />
 
       <div className="bg-gray-100">
-        <Container className="py-0">
+        <div className="container">
           <InlineInfoList
             items={[
               {
@@ -241,17 +241,17 @@ export default function Gesetz() {
               },
             ]}
           />
-        </Container>
+        </div>
       </div>
 
-      <Container className="ds-stack ds-stack-40 pb-80">
+      <ContentWrapper>
         {/* TODO: how to handle multiple digitalchecks? */}
         {/* <Heading tagName="h2" look="ds-heading-03-bold" className="mb-24">
           {regelung.Titel}
         </Heading> */}
 
         {tabsData.length > 0 && <Tabs tabs={tabsData} />}
-      </Container>
+      </ContentWrapper>
     </>
   );
 }

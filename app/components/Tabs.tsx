@@ -23,6 +23,7 @@ export interface TabItem {
 interface TabsProps {
   tabs: TabItem[];
   className?: string;
+  wrapperClassName?: string;
   initialActiveIndex?: number;
   onNavigateRequest?: (tab: TabItem, index: number) => void;
 }
@@ -40,6 +41,7 @@ interface TabsProps {
 export default function Tabs({
   tabs,
   className,
+  wrapperClassName,
   initialActiveIndex = 0,
   onNavigateRequest,
 }: Readonly<TabsProps>) {
@@ -79,84 +81,86 @@ export default function Tabs({
 
   return (
     <>
-      <div
-        role="tablist"
-        aria-label="Menü Navigation"
-        className={twMerge(
-          "mb-40 box-border flex items-stretch border-b-[3px] border-blue-500 max-lg:hidden",
-          className,
-        )}
-      >
-        {/* Tab buttons regular view */}
-        {tabs.map((tab, index) => (
-          <button
-            key={tab.title}
-            role="tab"
-            ref={(node) => {
-              const map = getMap();
-              if (node) map.set(index, node);
-              else map.delete(index);
-            }}
-            aria-selected={activeTab === index}
-            aria-controls={
-              !onNavigateRequest ? `panel-${index + 1}` : undefined
-            }
-            id={`tab-${index + 1}`}
-            tabIndex={activeTab === index ? 0 : -1}
-            onClick={() => handleTabInteraction(index)}
-            onKeyDown={(e) => handleKeyDown(e, index)}
-            className={twMerge(
-              "relative -mb-[3px] box-border min-h-[70px] cursor-pointer border-b-[3px] border-blue-500 px-24 py-12 text-left leading-tight hyphens-auto text-blue-800 hover:bg-blue-100",
-              activeTab === index &&
-                "border-b-4 border-blue-800 bg-blue-100 font-bold",
-              getPlausibleEventClassName(`Tab+Bar.${tab.plausibleEventName}`),
-            )}
-          >
-            {tab.title}
-          </button>
-        ))}
-      </div>
-      {/* Mobile Dropdown */}
-      <div className={twMerge("mb-40 lg:hidden", className)}>
-        {/* Wrapper is needed for the styles here, Listbox provides context & state management */}
-        <Listbox
-          value={activeTab}
-          onChange={(newIndex) => {
-            handleTabInteraction(newIndex);
-          }}
+      <div className={wrapperClassName}>
+        <div
+          role="tablist"
+          aria-label="Menü Navigation"
+          className={twMerge(
+            "mb-40 box-border flex items-stretch border-b-[3px] border-blue-500 max-lg:hidden",
+            className,
+          )}
         >
-          {/* Container for positioning */}
-          <ListboxButton className="ds-label-02-bold relative h-[70px] w-full cursor-pointer border-[4px] border-transparent bg-blue-100 pl-[16px] text-left text-blue-800 hover:bg-blue-300 focus:border-blue-800">
-            {({ open }) => (
-              <>
-                {tabs[activeTab].title}
-                <span className="absolute inset-y-0 right-[16px] flex items-center">
-                  {open ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
-                </span>
-              </>
-            )}
-          </ListboxButton>
-          <ListboxOptions className="border-t-[1px] border-blue-500 focus:outline-none">
-            {tabs.map((tab, index) => (
-              <ListboxOption
-                key={tab.title}
-                className={({ focus, selected }) =>
-                  twJoin(
-                    "ds-label-02-regular relative cursor-pointer border-[4px] border-transparent py-[10px] pr-[10px] pl-[16px] text-blue-800 select-none first:pt-[16px] last:pb-[16px] focus:border-blue-800",
-                    focus ? "bg-blue-300" : "bg-blue-100",
-                    // Selected item should be just visible in ListboxButton
-                    selected && "hidden",
-                    tab.plausibleEventName &&
-                      `plausible-event-name=Tab+Bar.${tab.plausibleEventName}`,
-                  )
-                }
-                value={index}
-              >
-                {tab.title}
-              </ListboxOption>
-            ))}
-          </ListboxOptions>
-        </Listbox>
+          {/* Tab buttons regular view */}
+          {tabs.map((tab, index) => (
+            <button
+              key={tab.title}
+              role="tab"
+              ref={(node) => {
+                const map = getMap();
+                if (node) map.set(index, node);
+                else map.delete(index);
+              }}
+              aria-selected={activeTab === index}
+              aria-controls={
+                !onNavigateRequest ? `panel-${index + 1}` : undefined
+              }
+              id={`tab-${index + 1}`}
+              tabIndex={activeTab === index ? 0 : -1}
+              onClick={() => handleTabInteraction(index)}
+              onKeyDown={(e) => handleKeyDown(e, index)}
+              className={twMerge(
+                "relative -mb-[3px] box-border min-h-[70px] cursor-pointer border-b-[3px] border-blue-500 px-24 py-12 text-left leading-tight hyphens-auto text-blue-800 hover:bg-blue-100",
+                activeTab === index &&
+                  "border-b-4 border-blue-800 bg-blue-100 font-bold",
+                getPlausibleEventClassName(`Tab+Bar.${tab.plausibleEventName}`),
+              )}
+            >
+              {tab.title}
+            </button>
+          ))}
+        </div>
+        {/* Mobile Dropdown */}
+        <div className={twMerge("mb-40 lg:hidden", className)}>
+          {/* Wrapper is needed for the styles here, Listbox provides context & state management */}
+          <Listbox
+            value={activeTab}
+            onChange={(newIndex) => {
+              handleTabInteraction(newIndex);
+            }}
+          >
+            {/* Container for positioning */}
+            <ListboxButton className="ds-label-02-bold relative h-[70px] w-full cursor-pointer border-[4px] border-transparent bg-blue-100 pl-[16px] text-left text-blue-800 hover:bg-blue-300 focus:border-blue-800">
+              {({ open }) => (
+                <>
+                  {tabs[activeTab].title}
+                  <span className="absolute inset-y-0 right-[16px] flex items-center">
+                    {open ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
+                  </span>
+                </>
+              )}
+            </ListboxButton>
+            <ListboxOptions className="border-t-[1px] border-blue-500 focus:outline-none">
+              {tabs.map((tab, index) => (
+                <ListboxOption
+                  key={tab.title}
+                  className={({ focus, selected }) =>
+                    twJoin(
+                      "ds-label-02-regular relative cursor-pointer border-[4px] border-transparent py-[10px] pr-[10px] pl-[16px] text-blue-800 select-none first:pt-[16px] last:pb-[16px] focus:border-blue-800",
+                      focus ? "bg-blue-300" : "bg-blue-100",
+                      // Selected item should be just visible in ListboxButton
+                      selected && "hidden",
+                      tab.plausibleEventName &&
+                        `plausible-event-name=Tab+Bar.${tab.plausibleEventName}`,
+                    )
+                  }
+                  value={index}
+                >
+                  {tab.title}
+                </ListboxOption>
+              ))}
+            </ListboxOptions>
+          </Listbox>
+        </div>
       </div>
 
       {/* Content of each tab. Render only if not navigating */}

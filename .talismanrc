@@ -12,6 +12,8 @@ fileignoreconfig:
   ignore_detectors: [filecontent]
 allowed_patterns:
   - key
+  - onKey
+  - handleKey
   - passen
   - Anpassungen
   - Pass\s # Allow "Pass " followed by a space

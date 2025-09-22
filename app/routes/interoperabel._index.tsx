@@ -2,6 +2,7 @@ import Accordion from "~/components/Accordion";
 import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
+import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image";
@@ -44,7 +45,7 @@ export default function Interoperability() {
           />
           <RichText markdown={interoperability.andYourVorhaben.law.content} />
           <InfoBox
-            className="pt-64 pb-48"
+            className="mt-80"
             heading={{
               tagName: "h2",
               text: interoperability.kontaktstelle.title,
@@ -153,9 +154,9 @@ export default function Interoperability() {
           />
         </div>
       </div>
-      <Container>
+      <ContentWrapper>
         <Tabs tabs={tabsData} />
-      </Container>
+      </ContentWrapper>
     </>
   );
 }
