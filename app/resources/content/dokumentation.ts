@@ -143,8 +143,12 @@ export const digitalDocumentation = {
     },
   },
   summary: {
-    headline: "Zusammenfassung",
-    text: "Hier entsteht die Zusammenfassung der Dokumentation.",
+    headline: "Prüfen Sie Ihre Angaben",
+    text: "Bevor Sie die Dokumentation abschließen und zum NKR senden, prüfen Sie bitte Ihre Angaben und ändern Sie sie bei Bedarf.",
+    buttonEdit: {
+      text: "Änderungen vornehmen",
+      ariaLabelPrefix: "Änderungen vornehmen an",
+    },
   },
   send: {
     headline: "Absenden",
