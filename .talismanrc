@@ -10,6 +10,12 @@ fileignoreconfig:
     - "@[a-z0-9]{40}"
 - filename: .github/workflows/scan.yml
   ignore_detectors: [filecontent]
+- filename: app/utils/localStorage.ts
+  allowed_patterns:
+    - storageKey
+- filename: app/routes/dokumentation/documentationDataService.ts
+  allowed_patterns:
+    - STORAGE_KEY
 allowed_patterns:
   - key
   - onKey
