@@ -9,6 +9,11 @@ import {
   ROUTE_DOCUMENTATION_SUMMARY,
   ROUTES_DOCUMENTATION_ORDERED,
 } from "~/resources/staticRoutes";
+import {
+  createDocumentationData,
+  type DocumentationStep,
+  getDocumentationStep,
+} from "~/routes/dokumentation/documentationDataService";
 import constructMetaTitle from "~/utils/metaTitle";
 
 const { summary } = digitalDocumentation;
@@ -18,25 +23,53 @@ export function meta() {
 }
 
 export default function DocumentationSummary() {
-  const items: InfoBoxProps[] = ROUTES_DOCUMENTATION_ORDERED.filter(
+  const dummyData: DocumentationStep[] = ROUTES_DOCUMENTATION_ORDERED.filter(
     (route) =>
       route.url !== ROUTE_DOCUMENTATION_SUMMARY.url &&
       route.url !== ROUTE_DOCUMENTATION_SEND.url,
   ).map((route) => ({
-    identifier: route.url,
-    heading: { text: route.title },
-    children: (
-      <Link
-        to={route.url}
-        className="text-link"
-        aria-label={`${summary.buttonEdit.ariaLabelPrefix} ${route.title}`}
-      >
-        {summary.buttonEdit.text}
-      </Link>
-    ),
-    look: "highlight",
-    className: "bg-white",
+    id: route.url,
+    items: [
+      { key: "foo", value: "bar" },
+      { key: "foo", value: "bar" },
+    ],
   }));
+
+  createDocumentationData(dummyData);
+
+  const items: InfoBoxProps[] = ROUTES_DOCUMENTATION_ORDERED.filter(
+    (route) =>
+      route.url !== ROUTE_DOCUMENTATION_SUMMARY.url &&
+      route.url !== ROUTE_DOCUMENTATION_SEND.url,
+  ).map((route) => {
+    const documentationStep = getDocumentationStep(route.url);
+    return {
+      identifier: route.url,
+      heading: { text: route.title },
+      children: (
+        <>
+          <div className="space-y-28">
+            {documentationStep &&
+              documentationStep.items.map((item) => (
+                <div key={item.key}>
+                  <p className="font-bold">{item.key}</p>
+                  <p>{item.value}</p>
+                </div>
+              ))}
+          </div>
+          <Link
+            to={route.url}
+            className="text-link"
+            aria-label={`${summary.buttonEdit.ariaLabelPrefix} ${route.title}`}
+          >
+            {summary.buttonEdit.text}
+          </Link>
+        </>
+      ),
+      look: "highlight",
+      className: "bg-white",
+    };
+  });
 
   return (
     <>
