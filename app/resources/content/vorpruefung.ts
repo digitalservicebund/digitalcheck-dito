@@ -31,7 +31,9 @@ export const preCheck = {
     buttonText: "Vorprüfung starten",
     summary: {
       tabName: "Zusammengefasst",
-      title: "Zusammengefasst",
+      heading: {
+        text: "Zusammengefasst",
+      },
       start: {
         heading: {
           text: "Beginnen Sie so früh wie möglich",

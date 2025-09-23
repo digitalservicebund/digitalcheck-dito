@@ -33,7 +33,7 @@ export default function Index() {
       content: (
         <div className="space-y-40">
           <InfoBoxList
-            heading={{ text: preCheck.start.summary.title }}
+            heading={preCheck.start.summary.heading}
             items={[preCheck.start.summary.start]}
           />
           <ImageBox
@@ -42,7 +42,7 @@ export default function Index() {
             border
           />
           <InfoBox
-            heading={{ text: preCheck.start.summary.title }}
+            heading={preCheck.start.summary.relevance.heading}
             content={preCheck.start.summary.relevance.content}
           />
         </div>
