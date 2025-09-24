@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   readFromLocalStorage,
   removeFromLocalStorage,
@@ -128,6 +128,50 @@ describe("localStorage", () => {
       expect(localStorageMock.removeItem).toHaveBeenCalledWith(
         "nonExistentKey",
       );
+    });
+  });
+
+  describe("SSR compatibility", () => {
+    beforeEach(() => {
+      // Simulate server-side environment
+      Object.defineProperty(global, "window", {
+        value: undefined,
+        writable: true,
+      });
+    });
+
+    afterEach(() => {
+      // Restore window object
+      Object.defineProperty(global, "window", {
+        value: { localStorage: localStorageMock },
+        writable: true,
+      });
+    });
+
+    it("should throw error when calling readFromLocalStorage on server-side", () => {
+      expect(() => readFromLocalStorage<TestData>("testKey", "1.0.0")).toThrow(
+        "localStorage is not available. This function should only be called on the client-side.",
+      );
+      expect(localStorageMock.getItem).not.toHaveBeenCalled();
+    });
+
+    it("should throw error when calling writeToLocalStorage on server-side", () => {
+      const testData: TestData = {
+        version: "1.0.0",
+        testField: "test value",
+      };
+
+      expect(() => writeToLocalStorage(testData, "testKey")).toThrow(
+        "localStorage is not available. This function should only be called on the client-side.",
+      );
+      expect(localStorageMock.setItem).not.toHaveBeenCalled();
+    });
+
+    it("should throw error when calling removeFromLocalStorage on server-side", () => {
+      expect(() => removeFromLocalStorage("testKey")).toThrow(
+        "localStorage is not available. This function should only be called on the client-side.",
+      );
+      expect(localStorageMock.removeItem).not.toHaveBeenCalled();
     });
   });
 });

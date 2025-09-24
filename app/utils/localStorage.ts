@@ -11,6 +11,12 @@ export function readFromLocalStorage<T extends VersionedData>(
   storageKey: string,
   currentVersion: string,
 ): T | null {
+  if (typeof window === "undefined" || typeof localStorage === "undefined") {
+    throw new Error(
+      "localStorage is not available. This function should only be called on the client-side.",
+    );
+  }
+
   const stored = localStorage.getItem(storageKey);
   if (!stored) return null;
 
@@ -28,9 +34,21 @@ export function writeToLocalStorage<T extends VersionedData>(
   data: T,
   storageKey: string,
 ): void {
+  if (typeof window === "undefined" || typeof localStorage === "undefined") {
+    throw new Error(
+      "localStorage is not available. This function should only be called on the client-side.",
+    );
+  }
+
   localStorage.setItem(storageKey, JSON.stringify(data));
 }
 
 export function removeFromLocalStorage(storageKey: string): void {
+  if (typeof window === "undefined" || typeof localStorage === "undefined") {
+    throw new Error(
+      "localStorage is not available. This function should only be called on the client-side.",
+    );
+  }
+
   localStorage.removeItem(storageKey);
 }
