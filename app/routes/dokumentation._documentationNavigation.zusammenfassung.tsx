@@ -50,8 +50,8 @@ export default function DocumentationSummary() {
         <>
           <div className="space-y-28">
             {documentationStep &&
-              documentationStep.items.map((item) => (
-                <div key={item.key}>
+              documentationStep.items.map((item, index) => (
+                <div key={`${documentationStep.id}-${index}`}>
                   <p className="font-bold">{item.key}</p>
                   <p>{item.value}</p>
                 </div>
