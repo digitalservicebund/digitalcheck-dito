@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
   readFromLocalStorage,
+  removeFromLocalStorage,
   writeToLocalStorage,
 } from "~/utils/localStorage";
 import {
@@ -20,6 +21,7 @@ import {
 vi.mock("~/utils/localStorage", () => ({
   readFromLocalStorage: vi.fn(),
   writeToLocalStorage: vi.fn(),
+  removeFromLocalStorage: vi.fn(),
 }));
 
 const localStorageMock = {
@@ -32,6 +34,7 @@ Object.defineProperty(window, "localStorage", {
 
 const mockReadFromLocalStorage = vi.mocked(readFromLocalStorage);
 const mockWriteToLocalStorage = vi.mocked(writeToLocalStorage);
+const mockRemoveFromLocalStorage = vi.mocked(removeFromLocalStorage);
 
 describe("documentationDataService", () => {
   beforeEach(() => {
@@ -117,7 +120,7 @@ describe("documentationDataService", () => {
     it("should remove data from localStorage", () => {
       deleteDocumentationData();
 
-      expect(localStorageMock.removeItem).toHaveBeenCalledWith(STORAGE_KEY);
+      expect(mockRemoveFromLocalStorage).toHaveBeenCalledWith(STORAGE_KEY);
     });
   });
 

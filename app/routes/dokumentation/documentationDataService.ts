@@ -1,5 +1,6 @@
 import {
   readFromLocalStorage,
+  removeFromLocalStorage,
   type VersionedData,
   writeToLocalStorage,
 } from "~/utils/localStorage";
@@ -45,7 +46,7 @@ export function getDocumentationData(): DocumentationData | null {
 }
 
 export function deleteDocumentationData(): void {
-  localStorage.removeItem(STORAGE_KEY);
+  removeFromLocalStorage(STORAGE_KEY);
 }
 
 export function createOrUpdateDocumentationStep(
