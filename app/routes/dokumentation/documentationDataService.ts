@@ -19,8 +19,8 @@ export type DocumentationField = {
   value: string;
 };
 
-const DATA_SCHEMA_VERSION = "1";
-const STORAGE_KEY = "documentationData";
+export const DATA_SCHEMA_VERSION = "1";
+export const STORAGE_KEY = "documentationData";
 
 function writeToStorage(data: DocumentationData): void {
   writeToLocalStorage(data, STORAGE_KEY);
@@ -50,8 +50,8 @@ export function deleteDocumentationData(): void {
 
 export function createOrUpdateDocumentationStep(
   stepId: string,
-  items: DocumentationField[] = [],
-): DocumentationStep {
+  items: DocumentationField[],
+) {
   let data = getDocumentationData();
   if (!data) {
     data = createDocumentationData();
@@ -67,7 +67,6 @@ export function createOrUpdateDocumentationStep(
   }
 
   writeToStorage(data);
-  return step;
 }
 
 export function getDocumentationStep(stepId: string): DocumentationStep | null {
