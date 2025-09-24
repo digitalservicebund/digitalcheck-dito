@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
@@ -10,9 +11,8 @@ import {
   ROUTES_DOCUMENTATION_ORDERED,
 } from "~/resources/staticRoutes";
 import {
-  createDocumentationData,
-  type DocumentationStep,
-  getDocumentationStep,
+  type DocumentationData,
+  getDocumentationData,
 } from "~/routes/dokumentation/documentationDataService";
 import constructMetaTitle from "~/utils/metaTitle";
 
@@ -23,26 +23,20 @@ export function meta() {
 }
 
 export default function DocumentationSummary() {
-  const dummyData: DocumentationStep[] = ROUTES_DOCUMENTATION_ORDERED.filter(
-    (route) =>
-      route.url !== ROUTE_DOCUMENTATION_SUMMARY.url &&
-      route.url !== ROUTE_DOCUMENTATION_SEND.url,
-  ).map((route) => ({
-    id: route.url,
-    items: [
-      { key: "foo", value: "bar" },
-      { key: "foo", value: "bar" },
-    ],
-  }));
+  const [documentationData, setDocumentationData] =
+    useState<DocumentationData | null>(null);
 
-  createDocumentationData(dummyData);
+  useEffect(() => {
+    setDocumentationData(getDocumentationData());
+  }, []);
 
   const items: InfoBoxProps[] = ROUTES_DOCUMENTATION_ORDERED.filter(
     (route) =>
       route.url !== ROUTE_DOCUMENTATION_SUMMARY.url &&
       route.url !== ROUTE_DOCUMENTATION_SEND.url,
   ).map((route) => {
-    const documentationStep = getDocumentationStep(route.url);
+    const documentationStep =
+      documentationData?.steps.find((step) => step.id === route.url) || null;
     return {
       identifier: route.url,
       heading: { text: route.title },
@@ -80,7 +74,7 @@ export default function DocumentationSummary() {
         className="mb-16"
       />
       <RichText markdown={summary.text} />
-      <InfoBoxList className="ds-stack-40 mt-40" items={items} />
+      <InfoBoxList className="space-y-40" items={items} />
     </>
   );
 }
