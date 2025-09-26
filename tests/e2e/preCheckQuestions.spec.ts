@@ -217,9 +217,9 @@ test.describe("test question navigation", () => {
     ).toBeDisabled();
     await expect(
       page.getByRole("link", { name: questions[0].title }),
-    ).toHaveAttribute("aria-current", "true");
+    ).toHaveAttribute("aria-current", "page");
     await expect(
-      page.getByRole("listitem").filter({ hasText: questions[0].title }),
+      page.getByRole("link").filter({ hasText: questions[0].title }),
     ).toHaveClass(/border-l-/);
 
     // Navigate to the second question
@@ -232,9 +232,9 @@ test.describe("test question navigation", () => {
     ).toBeDisabled();
     await expect(
       page.getByRole("link", { name: questions[1].title }),
-    ).toHaveAttribute("aria-current", "true");
+    ).toHaveAttribute("aria-current", "page");
     await expect(
-      page.getByRole("listitem").filter({ hasText: questions[0].title }),
+      page.getByRole("link").filter({ hasText: questions[0].title }),
     ).toHaveClass(/border-l-/);
   });
 
