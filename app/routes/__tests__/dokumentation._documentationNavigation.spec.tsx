@@ -85,7 +85,7 @@ describe("navigation on pages of documentation", () => {
     renderPage(ROUTES_DOCUMENTATION_ORDERED[0]);
 
     const navigation = screen.getByRole("navigation", {
-      name: "Alle Fragen",
+      name: "Seitennavigation",
     });
     for (const route of ROUTES_DOCUMENTATION_ORDERED) {
       const navItem = within(navigation).getByRole("link", {

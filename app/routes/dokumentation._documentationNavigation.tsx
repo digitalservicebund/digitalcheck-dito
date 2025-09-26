@@ -4,17 +4,14 @@ import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
+import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general";
 import { features } from "~/resources/features";
 import {
   type Route,
   ROUTE_DOCUMENTATION,
-  ROUTE_DOCUMENTATION_INFO,
-  ROUTE_DOCUMENTATION_PARTICIPATION,
-  ROUTE_DOCUMENTATION_SEND,
-  ROUTE_DOCUMENTATION_SUMMARY,
   ROUTES_DOCUMENTATION_ORDERED,
-  ROUTES_DOCUMENTATION_PRINCIPLES,
+  ROUTES_DOCUMENTATION_ORDERED_NAV,
 } from "~/resources/staticRoutes";
 import useFeatureFlag from "~/utils/featureFlags";
 
@@ -57,36 +54,32 @@ export default function LayoutWithDocumentationNavigation() {
 
   const nextRoute = getNextRoute(currentUrl);
 
+  const getNavItem = (route: Route) => (
+    <Nav.Item key={route.url} url={route.url}>
+      {route.title}
+    </Nav.Item>
+  );
+
   return (
     <div className="parent-bg-blue flex justify-center bg-blue-100 pt-32">
       <div className="hidden flex-none pl-32 lg:block">
-        <Nav activeElementUrl={currentUrl} ariaLabel="Alle Fragen">
+        <Nav
+          activeElementUrl={currentUrl}
+          ariaLabel={digitalDocumentation.navigation.ariaLabel}
+        >
           <Nav.Items>
-            <Nav.Item url={ROUTE_DOCUMENTATION_INFO.url}>
-              {ROUTE_DOCUMENTATION_INFO.title}
-            </Nav.Item>
-            <Nav.Item url={ROUTE_DOCUMENTATION_PARTICIPATION.url}>
-              {ROUTE_DOCUMENTATION_PARTICIPATION.title}
-            </Nav.Item>
-            <Nav.Item
-              subItems={
-                <Nav.Items>
-                  {ROUTES_DOCUMENTATION_PRINCIPLES.map((route) => (
-                    <Nav.Item key={route.url} url={route.url}>
-                      {route.title}
-                    </Nav.Item>
-                  ))}
-                </Nav.Items>
-              }
-            >
-              Prinzip
-            </Nav.Item>
-            <Nav.Item url={ROUTE_DOCUMENTATION_SUMMARY.url}>
-              {ROUTE_DOCUMENTATION_SUMMARY.title}
-            </Nav.Item>
-            <Nav.Item url={ROUTE_DOCUMENTATION_SEND.url}>
-              {ROUTE_DOCUMENTATION_SEND.title}
-            </Nav.Item>
+            {ROUTES_DOCUMENTATION_ORDERED_NAV.map((route) => {
+              if (Array.isArray(route))
+                return (
+                  <Nav.Item
+                    key={`${route[0].url}-subItems`}
+                    subItems={<Nav.Items>{route.map(getNavItem)}</Nav.Items>}
+                  >
+                    {digitalDocumentation.navigation.principles}
+                  </Nav.Item>
+                );
+              return getNavItem(route);
+            })}
           </Nav.Items>
         </Nav>
       </div>

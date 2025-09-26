@@ -9,4 +9,6 @@ export const general = {
     headline: "Inhalt",
   },
   a11yMessageNewWindow: "(öffnet in neuem Fenster)",
+  a11yMessageCompleted: "Fertig",
+  a11yMessageError: "Fehler",
 };

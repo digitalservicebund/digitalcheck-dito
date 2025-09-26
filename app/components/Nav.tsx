@@ -17,6 +17,7 @@ import {
 } from "react";
 import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
+import { general } from "~/resources/content/shared/general";
 import twMerge from "~/utils/tailwindMerge";
 
 const NavContext = createContext<{
@@ -124,9 +125,9 @@ function NavItem({
           to={url}
           aria-label={
             hasError
-              ? `${children} - Fehler`
+              ? `${children} - ${general.a11yMessageError}`
               : isCompleted
-                ? `${children} - Fertig`
+                ? `${children} - ${general.a11yMessageCompleted}`
                 : children
           }
           aria-current={activeElementUrl === url ? "page" : undefined}

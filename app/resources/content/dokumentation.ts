@@ -102,6 +102,10 @@ export const digitalDocumentation = {
       label: "Titel des Regelungsvorhabens",
     },
   },
+  navigation: {
+    ariaLabel: "Seitennavigation",
+    principles: "Prinzipien",
+  },
   participation: {
     headline: "Praxistaugliche Umsetzung",
     textIntro: dedent`
