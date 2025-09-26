@@ -110,7 +110,7 @@ function NavItem({
           to={url}
           aria-label={isCompleted ? `${children} - completed` : children}
           aria-current={activeElementUrl === url ? "page" : undefined}
-          aria-disabled={disabled}
+          aria-disabled={disabled || activeElementUrl === url}
           className={twJoin(
             "m-0 flex flex-row items-center gap-4 border-l-4 p-16",
             hoverClasses,
