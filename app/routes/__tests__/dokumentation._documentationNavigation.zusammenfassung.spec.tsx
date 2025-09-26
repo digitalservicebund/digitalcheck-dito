@@ -1,11 +1,15 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { principles } from "~/resources/content/shared/prinzipien";
 import {
+  ROUTE_DOCUMENTATION_INFO,
+  ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_SEND,
   ROUTE_DOCUMENTATION_SUMMARY,
   ROUTES_DOCUMENTATION_ORDERED,
+  ROUTES_DOCUMENTATION_PRINCIPLES,
 } from "~/resources/staticRoutes";
 import DocumentationSummary from "~/routes/dokumentation._documentationNavigation.zusammenfassung";
 import type { DocumentationData } from "~/routes/dokumentation/documentationDataService";
@@ -16,6 +20,12 @@ vi.mock("~/routes/dokumentation/documentationDataService", () => ({
 }));
 
 const mockGetDocumentationData = vi.mocked(getDocumentationData);
+
+const allRoutes = ROUTES_DOCUMENTATION_ORDERED.filter(
+  (route) =>
+    route.url !== ROUTE_DOCUMENTATION_SUMMARY.url &&
+    route.url !== ROUTE_DOCUMENTATION_SEND.url,
+);
 
 describe("DocumentationSummary", () => {
   const renderWithRouter = () => {
@@ -30,22 +40,22 @@ describe("DocumentationSummary", () => {
     version: "1",
     steps: [
       {
-        id: "/dokumentation/informationen-zum-regelungsvorhaben",
-        items: [
-          { key: "Titel des Regelungsvorhabens", value: "Test Regelung" },
-          { key: "Beschreibung", value: "Eine Testbeschreibung" },
-        ],
+        id: ROUTE_DOCUMENTATION_INFO.url,
+        items: [{ key: "Titel", value: "Titel des Vorhabens" }],
       },
       {
-        id: "/dokumentation/beteiligungsformate",
+        id: ROUTE_DOCUMENTATION_PARTICIPATION.url,
         items: [
           { key: "Format 1", value: "Online-Konsultation" },
           { key: "Format 2", value: "Workshop" },
         ],
       },
       {
-        id: "/dokumentation/prinzip-digitale-angebote",
-        items: [{ key: "Digitale Lösung", value: "Online-Portal" }],
+        id: ROUTES_DOCUMENTATION_PRINCIPLES[0].url,
+        items: [
+          { key: "Prinzip A", value: "Erklärung A" },
+          { key: "Prinzip B", value: "Erklärung B" },
+        ],
       },
     ],
   };
@@ -79,19 +89,27 @@ describe("DocumentationSummary", () => {
     ).toBeInTheDocument();
   });
 
-  it("shows info boxes for all documentation routes except summary and send", () => {
+  it("shows info boxes with correct headings for all documentation routes except summary and send", () => {
     renderWithRouter();
 
-    const expectedRoutes = ROUTES_DOCUMENTATION_ORDERED.filter(
-      (route) =>
-        route.url !== ROUTE_DOCUMENTATION_SUMMARY.url &&
-        route.url !== ROUTE_DOCUMENTATION_SEND.url,
-    );
+    allRoutes.forEach((route) => {
+      expect(screen.getByTestId(route.url)).toBeInTheDocument();
+    });
+  });
 
-    expectedRoutes.forEach((route) => {
+  it("shows correct heading for each section", () => {
+    renderWithRouter();
+
+    allRoutes.forEach((route) => {
+      const stepContainer = screen.getByTestId(route.url);
+
+      // For principle routes, check for principle headlines instead of route titles
+      const principle = principles.find((p) => route.url.endsWith(p.id));
+      const expectedHeading = principle ? principle.headline : route.title;
+
       expect(
-        screen.getByRole("heading", {
-          name: route.title,
+        within(stepContainer).getByRole("heading", {
+          name: expectedHeading,
           level: 3,
         }),
       ).toBeInTheDocument();
@@ -101,132 +119,110 @@ describe("DocumentationSummary", () => {
   it("displays documentation data when available", () => {
     renderWithRouter();
 
-    expect(
-      screen.getByText("Titel des Regelungsvorhabens"),
-    ).toBeInTheDocument();
-    expect(screen.getByText("Test Regelung")).toBeInTheDocument();
-    expect(screen.getByText("Beschreibung")).toBeInTheDocument();
-    expect(screen.getByText("Eine Testbeschreibung")).toBeInTheDocument();
+    // Check data for informationen-zum-regelungsvorhaben
+    expect(screen.getByText("Titel")).toBeInTheDocument();
+    expect(screen.getByText("Titel des Vorhabens")).toBeInTheDocument();
 
+    // Check data for beteiligungsformate
     expect(screen.getByText("Format 1")).toBeInTheDocument();
     expect(screen.getByText("Online-Konsultation")).toBeInTheDocument();
     expect(screen.getByText("Format 2")).toBeInTheDocument();
     expect(screen.getByText("Workshop")).toBeInTheDocument();
 
-    expect(screen.getByText("Digitale Lösung")).toBeInTheDocument();
-    expect(screen.getByText("Online-Portal")).toBeInTheDocument();
+    // Check data for prinzip-digitale-angebote
+    expect(screen.getByText("Prinzip A")).toBeInTheDocument();
+    expect(screen.getByText("Erklärung A")).toBeInTheDocument();
+    expect(screen.getByText("Prinzip B")).toBeInTheDocument();
+    expect(screen.getByText("Erklärung B")).toBeInTheDocument();
   });
 
-  it("renders edit links for each documentation section", () => {
+  it("shows principle badges only for principle steps", () => {
     renderWithRouter();
 
-    const expectedRoutes = ROUTES_DOCUMENTATION_ORDERED.filter(
-      (route) =>
-        route.url !== ROUTE_DOCUMENTATION_SUMMARY.url &&
-        route.url !== ROUTE_DOCUMENTATION_SEND.url,
-    );
+    allRoutes.forEach((route) => {
+      const stepContainer = screen.getByTestId(route.url);
+      const principle = principles.find((p) => route.url.endsWith(p.id));
 
-    expectedRoutes.forEach((route) => {
-      const editLink = screen.getByRole("link", {
-        name: `Änderungen vornehmen an ${route.title}`,
-      });
-      expect(editLink).toHaveAttribute("href", route.url);
-      expect(editLink).toHaveTextContent("Änderungen vornehmen");
+      if (principle) {
+        // Principle step should have badge
+        const badge = within(stepContainer).getByText("Prinzip");
+        expect(badge).toBeInTheDocument();
+      } else {
+        // Non-principle step should not have badge
+        expect(
+          within(stepContainer).queryByText("Prinzip"),
+        ).not.toBeInTheDocument();
+      }
     });
   });
 
-  it("handles case when no documentation data is available", () => {
+  it("shows correct content and buttons for steps with data", () => {
+    renderWithRouter();
+
+    const stepsWithData = mockDocumentationData.steps;
+
+    stepsWithData.forEach((step) => {
+      const route = ROUTES_DOCUMENTATION_ORDERED.find((r) => r.url === step.id);
+      if (!route) throw Error(`Cannot find route ${step.id}.`);
+
+      const stepContainer = screen.getByTestId(route.url);
+
+      const editLink = within(stepContainer).getByRole("link", {
+        name: `${route.title} bearbeiten`,
+      });
+      expect(editLink).toHaveAttribute("href", route.url);
+      expect(editLink).toHaveTextContent("Bearbeiten");
+
+      expect(
+        within(stepContainer).queryByText(
+          "Sie haben diesen Punkt noch nicht bearbeitet.",
+        ),
+      ).not.toBeInTheDocument();
+    });
+  });
+
+  it("shows InlineNotice for steps without data", () => {
+    renderWithRouter();
+
+    const stepsWithoutData = allRoutes.filter(
+      (route) =>
+        !mockDocumentationData.steps.some((step) => step.id === route.url),
+    );
+
+    stepsWithoutData.forEach((route) => {
+      const stepContainer = screen.getByTestId(route.url);
+
+      expect(
+        within(stepContainer).getByText(
+          "Sie haben diesen Punkt noch nicht bearbeitet.",
+        ),
+      ).toBeInTheDocument();
+
+      const editNowLink = within(stepContainer).getByRole("link", {
+        name: `${route.title} jetzt bearbeiten`,
+      });
+      expect(editNowLink).toHaveAttribute("href", route.url);
+      expect(editNowLink).toHaveTextContent("Jetzt bearbeiten");
+
+      expect(
+        within(stepContainer).queryByText("Bearbeiten"),
+      ).not.toBeInTheDocument();
+    });
+  });
+
+  it("shows InlineNotice for all steps when no documentation data is available", () => {
     mockGetDocumentationData.mockReturnValue(null);
     renderWithRouter();
 
-    // Should still render the page structure
-    expect(
-      screen.getByRole("heading", {
-        name: "Prüfen Sie Ihre Angaben",
-        level: 1,
-      }),
-    ).toBeInTheDocument();
+    allRoutes.forEach((route) => {
+      const stepContainer = screen.getByTestId(route.url);
 
-    // Should still render all section headings
-    const expectedRoutes = ROUTES_DOCUMENTATION_ORDERED.filter(
-      (route) =>
-        route.url !== ROUTE_DOCUMENTATION_SUMMARY.url &&
-        route.url !== ROUTE_DOCUMENTATION_SEND.url,
-    );
-
-    expectedRoutes.forEach((route) => {
       expect(
-        screen.getByRole("heading", {
-          name: route.title,
-          level: 3,
-        }),
+        within(stepContainer).getByText(
+          "Sie haben diesen Punkt noch nicht bearbeitet.",
+        ),
       ).toBeInTheDocument();
     });
-
-    // Should not render any documentation data
-    expect(screen.queryByText("Test Regelung")).not.toBeInTheDocument();
-    expect(screen.queryByText("Online-Konsultation")).not.toBeInTheDocument();
-  });
-
-  it("handles case when documentation step is not found in data", () => {
-    const partialData: DocumentationData = {
-      version: "1",
-      steps: [
-        {
-          id: "/dokumentation/informationen-zum-regelungsvorhaben",
-          items: [{ key: "Titel", value: "Test" }],
-        },
-        // Missing other steps
-      ],
-    };
-
-    mockGetDocumentationData.mockReturnValue(partialData);
-    renderWithRouter();
-
-    // Should render data for available step
-    expect(screen.getByText("Titel")).toBeInTheDocument();
-    expect(screen.getByText("Test")).toBeInTheDocument();
-
-    // Should still render headings for missing steps but without data
-    expect(
-      screen.getByRole("heading", {
-        name: "Beteiligungsformate",
-        level: 3,
-      }),
-    ).toBeInTheDocument();
-
-    // Should not render data for missing steps
-    expect(screen.queryByText("Online-Konsultation")).not.toBeInTheDocument();
-  });
-
-  it("renders empty documentation step without crashing", () => {
-    const dataWithEmptyStep: DocumentationData = {
-      version: "1",
-      steps: [
-        {
-          id: "/dokumentation/informationen-zum-regelungsvorhaben",
-          items: [], // Empty items array
-        },
-      ],
-    };
-
-    mockGetDocumentationData.mockReturnValue(dataWithEmptyStep);
-    renderWithRouter();
-
-    // Should still render the section heading
-    expect(
-      screen.getByRole("heading", {
-        name: "Informationen zum Regelungsvorhaben",
-        level: 3,
-      }),
-    ).toBeInTheDocument();
-
-    // Should render the edit link
-    expect(
-      screen.getByRole("link", {
-        name: "Änderungen vornehmen an Informationen zum Regelungsvorhaben",
-      }),
-    ).toBeInTheDocument();
   });
 
   it("calls getDocumentationData on component mount", () => {

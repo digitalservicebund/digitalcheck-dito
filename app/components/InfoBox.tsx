@@ -18,6 +18,7 @@ export type InfoImageProps = ImageProps & {
 
 type BaseInfoBoxProps = {
   identifier?: string;
+  testId?: string;
   badge?: BadgeProps;
   heading?: HeadingProps;
   content?: string | Node[];
@@ -52,6 +53,7 @@ const imageSizes = {
 
 const InfoBox = ({
   identifier,
+  testId,
   className,
   badge,
   heading,
@@ -67,7 +69,7 @@ const InfoBox = ({
   return (
     <div
       id={identifier}
-      data-testid="info-box-container"
+      data-testid={testId || "info-box-container"}
       className={twMerge(
         "flex scroll-my-40 flex-col gap-32 md:flex-row",
         // visual?.type === "image" ? "flex-col-reverse" : "flex-col",

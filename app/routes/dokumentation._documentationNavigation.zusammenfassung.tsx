@@ -45,6 +45,7 @@ export default function DocumentationSummary() {
     );
     return {
       identifier: route.url,
+      testId: route.url,
       badge: principle && {
         text: summary.principleBadge,
         principleNumber: principle.number as PrincipleNumber,
