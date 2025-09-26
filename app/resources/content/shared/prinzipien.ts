@@ -3,6 +3,7 @@ import { dedent } from "~/utils/dedentMultilineStrings";
 export const principles = [
   {
     id: "prinzip-digitale-angebote",
+    number: 1,
     title: "Prinzip: Digitale Angebote",
     headline: "Digitale Angebote für alle nutzbar gestalten",
     details: {
@@ -33,6 +34,7 @@ export const principles = [
   },
   {
     id: "prinzip-datenwiederverwendung",
+    number: 2,
     title: "Prinzip: Datenwiederverwendung",
     headline: "Datenwiederverwendung benötigt einheitliches Recht",
     details: {
@@ -64,6 +66,7 @@ export const principles = [
   },
   {
     id: "prinzip-etablierte-technologien",
+    number: 6,
     title: "Prinzip: Etablierte Technologien",
     headline: "Etablierte Technologien ermöglichen effiziente Umsetzung",
     details: {
@@ -89,6 +92,7 @@ export const principles = [
   },
   {
     id: "prinzip-automatisierung",
+    number: 5,
     title: "Prinzip: Automatisierung",
     headline: "Automatisierung basiert auf eindeutigen Regelungen",
     details: {
@@ -125,6 +129,7 @@ export const principles = [
   },
   {
     id: "prinzip-datenschutz-und-informationssicherheit",
+    number: 3,
     title: "Prinzip: Datenschutz und Informationssicherheit",
     headline: "Datenschutz und Informationssicherheit schaffen Vertrauen",
     details: {

@@ -4,7 +4,9 @@ import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
 import RichText from "~/components/RichText";
+import { PrincipleNumber } from "~/resources/constants";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
+import { principles } from "~/resources/content/shared/prinzipien";
 import {
   ROUTE_DOCUMENTATION_SEND,
   ROUTE_DOCUMENTATION_SUMMARY,
@@ -37,9 +39,18 @@ export default function DocumentationSummary() {
   ).map((route) => {
     const documentationStep =
       documentationData?.steps.find((step) => step.id === route.url) || null;
+    const principle = principles.find((principle) =>
+      route.url.endsWith(principle.id),
+    );
     return {
       identifier: route.url,
-      heading: { text: route.title },
+      badge: principle && {
+        text: summary.principleBadge,
+        principleNumber: principle.number as PrincipleNumber,
+      },
+      heading: {
+        text: principle ? principle.headline : route.title,
+      },
       children: (
         <>
           <div className="space-y-28">

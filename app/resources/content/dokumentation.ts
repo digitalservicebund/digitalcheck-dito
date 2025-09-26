@@ -149,6 +149,7 @@ export const digitalDocumentation = {
       text: "Änderungen vornehmen",
       ariaLabelPrefix: "Änderungen vornehmen an",
     },
+    principleBadge: "Prinzip",
   },
   send: {
     headline: "Absenden",
