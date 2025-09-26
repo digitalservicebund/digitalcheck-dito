@@ -145,11 +145,11 @@ export const digitalDocumentation = {
   summary: {
     headline: "Prüfen Sie Ihre Angaben",
     text: "Bevor Sie die Dokumentation abschließen und zum NKR senden, prüfen Sie bitte Ihre Angaben und ändern Sie sie bei Bedarf.",
-    buttonUpdate: {
-      text: "Änderungen vornehmen",
-      ariaLabelPrefix: "Änderungen vornehmen an",
-    },
     buttonEdit: {
+      text: "Bearbeiten",
+      ariaLabelSuffix: " bearbeiten",
+    },
+    buttonEditNow: {
       text: "Jetzt bearbeiten",
       ariaLabelSuffix: "jetzt bearbeiten",
     },

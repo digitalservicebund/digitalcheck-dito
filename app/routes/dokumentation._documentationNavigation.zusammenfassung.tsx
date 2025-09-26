@@ -66,9 +66,9 @@ export default function DocumentationSummary() {
                 <Link
                   to={route.url}
                   className="text-link"
-                  aria-label={`${summary.buttonUpdate.ariaLabelPrefix} ${route.title}`}
+                  aria-label={`${route.title} ${summary.buttonEdit.ariaLabelSuffix}`}
                 >
-                  {summary.buttonUpdate.text}
+                  {summary.buttonEdit.text}
                 </Link>
               </>
             ) : (
@@ -83,9 +83,9 @@ export default function DocumentationSummary() {
                 <Link
                   to={route.url}
                   className="text-link"
-                  aria-label={`${route.title} ${summary.buttonEdit.ariaLabelSuffix}`}
+                  aria-label={`${route.title} ${summary.buttonEditNow.ariaLabelSuffix}`}
                 >
-                  {summary.buttonEdit.text}
+                  {summary.buttonEditNow.text}
                 </Link>
               </InlineNotice>
             )}
