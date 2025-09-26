@@ -103,6 +103,8 @@ function NavItem({
   const hoverClasses =
     "hover:border-l-blue-300 hover:bg-blue-300 hover:underline";
 
+  const focusClasses = "focus:outline-4 focus:-outline-offset-4";
+
   return (
     <li className={twJoin(url && "border-b border-b-white")}>
       {url ? (
@@ -112,8 +114,9 @@ function NavItem({
           aria-current={activeElementUrl === url ? "page" : undefined}
           aria-disabled={disabled || activeElementUrl === url}
           className={twJoin(
-            "m-0 flex flex-row items-center gap-4 border-l-4 p-16",
+            "m-0 flex flex-row items-center gap-4 border-l-4 p-16 text-black",
             hoverClasses,
+            focusClasses,
             isActive
               ? "ds-label-02-bold pointer-events-none border-l-blue-800 bg-blue-300"
               : "border-l-blue-100",
@@ -138,6 +141,7 @@ function NavItem({
                   className={twJoin(
                     "flex flex-row justify-between border-l-4 p-16",
                     hoverClasses,
+                    focusClasses,
                     isActive
                       ? open
                         ? "border-l-blue-300 bg-blue-300"
