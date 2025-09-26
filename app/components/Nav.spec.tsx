@@ -6,6 +6,7 @@ import Nav from "./Nav";
 const renderNav = (
   activeElementUrl?: string,
   completedElementUrls?: string[],
+  errorElementUrls?: string[],
 ) => {
   // Stubbing the router is needed because Nav uses Links
   const RouterStub = createRoutesStub([
@@ -16,6 +17,7 @@ const renderNav = (
           activeElementUrl={activeElementUrl}
           ariaLabel="Label Text"
           completedElementUrls={completedElementUrls}
+          errorElementUrls={errorElementUrls}
         >
           <Nav.Items>
             <Nav.Item url="/example1">Navigation Item 1</Nav.Item>
@@ -96,12 +98,31 @@ describe("Nav", () => {
     renderNav("/example3-1", ["/example1", "/example2"]);
 
     const completedElements = screen.getAllByRole("link", {
-      name: /- completed/,
+      name: /- Fertig/,
     });
     expect(completedElements.length).toBe(2);
 
     for (const element of completedElements) {
       expect(within(element).getByTestId("CheckIcon")).toBeInTheDocument();
+    }
+  });
+
+  it("shows a error icon for elements with errors", () => {
+    renderNav(
+      "/example3-1",
+      ["/example1", "/example2"],
+      ["/example2", "/example3-2"],
+    );
+
+    const elementsWithError = screen.getAllByRole("link", {
+      name: /- Fehler/,
+    });
+    expect(elementsWithError.length).toBe(2);
+
+    for (const element of elementsWithError) {
+      expect(
+        within(element).getByTestId("WarningAmberOutlinedIcon"),
+      ).toBeInTheDocument();
     }
   });
 

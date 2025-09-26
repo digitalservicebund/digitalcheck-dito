@@ -1,4 +1,8 @@
-import { Check, ChevronLeft } from "@digitalservicebund/icons";
+import {
+  Check,
+  ChevronLeft,
+  WarningAmberOutlined,
+} from "@digitalservicebund/icons";
 import {
   Disclosure,
   DisclosureButton,
@@ -12,10 +16,12 @@ import React, {
 } from "react";
 import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
+import twMerge from "~/utils/tailwindMerge";
 
 const NavContext = createContext<{
   activeElementUrl?: string;
   completedElementUrls?: string[];
+  errorElementUrls?: string[];
 }>({});
 
 export type NavItemProps = {
@@ -34,6 +40,7 @@ type NavProps = {
   ariaLabel: string;
   activeElementUrl?: string;
   completedElementUrls?: string[];
+  errorElementUrls?: string[];
 };
 
 /**
@@ -78,7 +85,8 @@ function NavItem({
   subItems,
   disabled = false,
 }: Readonly<NavItemProps>) {
-  const { activeElementUrl, completedElementUrls } = useContext(NavContext);
+  const { activeElementUrl, completedElementUrls, errorElementUrls } =
+    useContext(NavContext);
 
   // If any descendant has the active URL, this item should be considered active.
   const hasActiveDescendant = Boolean(
@@ -95,6 +103,18 @@ function NavItem({
     completedElementUrls &&
       containsMatchingUrl(subItems, (u) => completedElementUrls.includes(u)),
   );
+
+  // Error element detection: either this item's url has error or any descendant has error.
+  const hasErrorDescendant = Boolean(
+    errorElementUrls &&
+      containsMatchingUrl(subItems, (u) => errorElementUrls.includes(u)),
+  );
+
+  const hasError = Boolean(
+    errorElementUrls &&
+      (url ? errorElementUrls.includes(url) : hasErrorDescendant),
+  );
+
   const isCompleted = Boolean(
     completedElementUrls &&
       (url ? completedElementUrls.includes(url) : hasCompletedDescendant),
@@ -103,27 +123,50 @@ function NavItem({
   const hoverClasses =
     "hover:border-l-blue-300 hover:bg-blue-300 hover:underline";
 
-  const focusClasses = "focus:outline-4 focus:-outline-offset-4";
+  const hoverClassesError =
+    "hover:border-l-yellow-300 hover:bg-yellow-300 hover:underline";
+
+  const focusClasses =
+    "focus-visible:outline-4 focus-visible:-outline-offset-4 focus-visible:outline-blue-800";
+
+  const activeClasses =
+    "ds-label-02-bold pointer-events-none border-l-blue-800 bg-blue-300";
+
+  const activeErrorClasses =
+    "ds-label-02-bold pointer-events-none border-l-yellow-800 bg-yellow-300";
+
+  const activeOpenClasses = "pointer-events-none border-l-blue-300 bg-blue-300";
+
+  const activeOpenErrorClasses =
+    "pointer-events-none border-l-yellow-200 bg-yellow-200";
 
   return (
     <li className={twJoin(url && "border-b border-b-white")}>
       {url ? (
         <Link
           to={url}
-          aria-label={isCompleted ? `${children} - completed` : children}
+          aria-label={
+            hasError
+              ? `${children} - Fehler`
+              : isCompleted
+                ? `${children} - Fertig`
+                : children
+          }
           aria-current={activeElementUrl === url ? "page" : undefined}
           aria-disabled={disabled || activeElementUrl === url}
-          className={twJoin(
+          className={twMerge(
             "m-0 flex flex-row items-center gap-4 border-l-4 p-16 text-black",
-            hoverClasses,
-            focusClasses,
-            isActive
-              ? "ds-label-02-bold pointer-events-none border-l-blue-800 bg-blue-300"
+            hasError
+              ? "border-l-yellow-200 bg-yellow-200"
               : "border-l-blue-100",
+            hasError ? hoverClassesError : hoverClasses,
+            isActive && (hasError ? activeErrorClasses : activeClasses),
             disabled && "pointer-events-none text-gray-800",
+            focusClasses,
           )}
         >
-          {isCompleted && <Check className="shrink-0" />}
+          {isCompleted && !hasError && <Check className="shrink-0" />}
+          {hasError && <WarningAmberOutlined className="shrink-0" />}
           <span
             title={children}
             className="after:ds-label-02-bold after:invisible after:block after:h-0 after:content-[attr(title)]"
@@ -136,20 +179,32 @@ function NavItem({
         <Disclosure key={String(isActive)} defaultOpen={isActive}>
           {({ open }) => (
             <>
-              <DisclosureButton className="group w-full border-b border-b-white text-left">
+              <DisclosureButton
+                className={twJoin(
+                  "group w-full border-b border-b-white text-left text-black",
+                  focusClasses,
+                )}
+              >
                 <span
                   className={twJoin(
                     "flex flex-row justify-between border-l-4 p-16",
-                    hoverClasses,
-                    focusClasses,
-                    isActive
-                      ? open
-                        ? "border-l-blue-300 bg-blue-300"
-                        : "border-l-blue-800 bg-blue-300"
+                    hasError
+                      ? "border-l-yellow-200 bg-yellow-200"
                       : "border-l-blue-100",
+                    hasError ? hoverClassesError : hoverClasses,
+                    isActive &&
+                      !open &&
+                      (hasError ? activeErrorClasses : activeClasses),
+                    isActive &&
+                      open &&
+                      (hasError ? activeOpenErrorClasses : activeOpenClasses),
+                    hoverClasses,
                   )}
                 >
-                  {children}
+                  <span className="flex flex-row items-center gap-4">
+                    {hasError && <WarningAmberOutlined className="shrink-0" />}
+                    {children}
+                  </span>
                   <ChevronLeft className="w-5 rotate-270 group-data-open:rotate-90" />
                 </span>
               </DisclosureButton>
@@ -159,7 +214,11 @@ function NavItem({
               {
                 // only for screen reader and correct highlighting of Disclosure Button
                 // Also to already set the correct width
-                !open && <div className="h-0 overflow-hidden">{subItems}</div>
+                !open && (
+                  <div className="pointer-events-none invisible h-0 overflow-hidden">
+                    {subItems}
+                  </div>
+                )
               }
             </>
           )}
@@ -214,10 +273,13 @@ function Nav({
   children,
   activeElementUrl,
   completedElementUrls,
+  errorElementUrls,
   ariaLabel,
 }: Readonly<NavProps>) {
   return (
-    <NavContext.Provider value={{ activeElementUrl, completedElementUrls }}>
+    <NavContext.Provider
+      value={{ activeElementUrl, completedElementUrls, errorElementUrls }}
+    >
       <nav aria-label={ariaLabel}>{children}</nav>
     </NavContext.Provider>
   );
