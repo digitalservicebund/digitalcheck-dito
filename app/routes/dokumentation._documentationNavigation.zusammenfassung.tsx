@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
+import InlineNotice from "~/components/InlineNotice";
 import RichText from "~/components/RichText";
 import { PrincipleNumber } from "~/resources/constants";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
@@ -54,21 +55,41 @@ export default function DocumentationSummary() {
       children: (
         <>
           <div className="space-y-28">
-            {documentationStep &&
-              documentationStep.items.map((item, index) => (
-                <div key={`${documentationStep.id}-${index}`}>
-                  <p className="font-bold">{item.key}</p>
-                  <p>{item.value}</p>
-                </div>
-              ))}
+            {documentationStep?.items.length ? (
+              <>
+                {documentationStep.items.map((item, index) => (
+                  <div key={`${documentationStep.id}-${index}`}>
+                    <p className="font-bold">{item.key}</p>
+                    <p>{item.value}</p>
+                  </div>
+                ))}
+                <Link
+                  to={route.url}
+                  className="text-link"
+                  aria-label={`${summary.buttonUpdate.ariaLabelPrefix} ${route.title}`}
+                >
+                  {summary.buttonUpdate.text}
+                </Link>
+              </>
+            ) : (
+              <InlineNotice
+                look="warning"
+                heading={
+                  <Heading tagName="h4">
+                    Sie haben diesen Punkt noch nicht bearbeitet.
+                  </Heading>
+                }
+              >
+                <Link
+                  to={route.url}
+                  className="text-link"
+                  aria-label={`${route.title} ${summary.buttonEdit.ariaLabelSuffix}`}
+                >
+                  {summary.buttonEdit.text}
+                </Link>
+              </InlineNotice>
+            )}
           </div>
-          <Link
-            to={route.url}
-            className="text-link"
-            aria-label={`${summary.buttonEdit.ariaLabelPrefix} ${route.title}`}
-          >
-            {summary.buttonEdit.text}
-          </Link>
         </>
       ),
       look: "highlight",

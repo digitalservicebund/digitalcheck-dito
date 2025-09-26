@@ -98,7 +98,7 @@ const InfoBox = ({
       {visual?.type === "component" && visual.Component}
       <div
         data-testid="info-box-content"
-        className="ds-stack ds-stack-16 break-words"
+        className="ds-stack ds-stack-16 flex-grow break-words"
       >
         {badge && <Badge className="self-start" {...badge} />}
         {heading && <Heading tagName="h3" {...heading} />}
