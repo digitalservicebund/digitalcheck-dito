@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
-  readFromLocalStorage,
+  readVersionedDataFromLocalStorage,
   removeFromLocalStorage,
-  writeToLocalStorage,
-} from "~/utils/localStorage";
+  writeVersionedDataToLocalStorage,
+} from "~/utils/localStorageVersioned";
 import {
   createDocumentationData,
   createOrUpdateDocumentationStep,
@@ -32,8 +32,8 @@ Object.defineProperty(window, "localStorage", {
   value: localStorageMock,
 });
 
-const mockReadFromLocalStorage = vi.mocked(readFromLocalStorage);
-const mockWriteToLocalStorage = vi.mocked(writeToLocalStorage);
+const mockReadFromLocalStorage = vi.mocked(readVersionedDataFromLocalStorage);
+const mockWriteToLocalStorage = vi.mocked(writeVersionedDataToLocalStorage);
 const mockRemoveFromLocalStorage = vi.mocked(removeFromLocalStorage);
 
 describe("documentationDataService", () => {

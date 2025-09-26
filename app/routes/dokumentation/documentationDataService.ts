@@ -1,9 +1,9 @@
 import {
-  readFromLocalStorage,
+  readVersionedDataFromLocalStorage,
   removeFromLocalStorage,
   type VersionedData,
-  writeToLocalStorage,
-} from "~/utils/localStorage";
+  writeVersionedDataToLocalStorage,
+} from "~/utils/localStorageVersioned";
 
 export type DocumentationData = {
   version: string;
@@ -24,7 +24,7 @@ export const DATA_SCHEMA_VERSION = "1";
 export const STORAGE_KEY = "documentationData";
 
 function writeToStorage(data: DocumentationData): void {
-  writeToLocalStorage(data, STORAGE_KEY);
+  writeVersionedDataToLocalStorage(data, STORAGE_KEY);
 }
 
 export function createDocumentationData(
@@ -39,7 +39,7 @@ export function createDocumentationData(
 }
 
 export function getDocumentationData(): DocumentationData | null {
-  return readFromLocalStorage<DocumentationData>(
+  return readVersionedDataFromLocalStorage<DocumentationData>(
     STORAGE_KEY,
     DATA_SCHEMA_VERSION,
   );

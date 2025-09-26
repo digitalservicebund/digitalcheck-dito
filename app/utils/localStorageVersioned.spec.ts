@@ -1,10 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
-  readFromLocalStorage,
+  readVersionedDataFromLocalStorage,
   removeFromLocalStorage,
-  writeToLocalStorage,
+  writeVersionedDataToLocalStorage,
   type VersionedData,
-} from "./localStorage";
+} from "./localStorageVersioned";
 
 const localStorageMock = {
   getItem: vi.fn(),
@@ -35,7 +35,10 @@ describe("localStorage", () => {
       };
       localStorageMock.getItem.mockReturnValue(JSON.stringify(testData));
 
-      const result = readFromLocalStorage<TestData>("testKey", "1.0.0");
+      const result = readVersionedDataFromLocalStorage<TestData>(
+        "testKey",
+        "1.0.0",
+      );
 
       expect(result).toEqual(testData);
       expect(localStorageMock.getItem).toHaveBeenCalledWith("testKey");
@@ -44,7 +47,10 @@ describe("localStorage", () => {
     it("should return null when no data exists", () => {
       localStorageMock.getItem.mockReturnValue(null);
 
-      const result = readFromLocalStorage<TestData>("testKey", "1.0.0");
+      const result = readVersionedDataFromLocalStorage<TestData>(
+        "testKey",
+        "1.0.0",
+      );
 
       expect(result).toBeNull();
       expect(localStorageMock.getItem).toHaveBeenCalledWith("testKey");
@@ -53,7 +59,10 @@ describe("localStorage", () => {
     it("should return null when data is empty string", () => {
       localStorageMock.getItem.mockReturnValue("");
 
-      const result = readFromLocalStorage<TestData>("testKey", "1.0.0");
+      const result = readVersionedDataFromLocalStorage<TestData>(
+        "testKey",
+        "1.0.0",
+      );
 
       expect(result).toBeNull();
       expect(localStorageMock.getItem).toHaveBeenCalledWith("testKey");
@@ -66,7 +75,9 @@ describe("localStorage", () => {
       };
       localStorageMock.getItem.mockReturnValue(JSON.stringify(testData));
 
-      expect(() => readFromLocalStorage<TestData>("testKey", "2.0.0")).toThrow(
+      expect(() =>
+        readVersionedDataFromLocalStorage<TestData>("testKey", "2.0.0"),
+      ).toThrow(
         "Data version mismatch for testKey. Expected 2.0.0, found 1.0.0",
       );
     });
@@ -75,7 +86,7 @@ describe("localStorage", () => {
       localStorageMock.getItem.mockReturnValue("invalid json");
 
       expect(() =>
-        readFromLocalStorage<TestData>("testKey", "1.0.0"),
+        readVersionedDataFromLocalStorage<TestData>("testKey", "1.0.0"),
       ).toThrow();
     });
   });
@@ -87,7 +98,7 @@ describe("localStorage", () => {
         testField: "test value",
       };
 
-      writeToLocalStorage(testData, "testKey");
+      writeVersionedDataToLocalStorage(testData, "testKey");
 
       expect(localStorageMock.setItem).toHaveBeenCalledWith(
         "testKey",
@@ -106,7 +117,7 @@ describe("localStorage", () => {
         number: 42,
       };
 
-      writeToLocalStorage(complexData, "complexKey");
+      writeVersionedDataToLocalStorage(complexData, "complexKey");
 
       expect(localStorageMock.setItem).toHaveBeenCalledWith(
         "complexKey",
@@ -149,7 +160,9 @@ describe("localStorage", () => {
     });
 
     it("should throw error when calling readFromLocalStorage on server-side", () => {
-      expect(() => readFromLocalStorage<TestData>("testKey", "1.0.0")).toThrow(
+      expect(() =>
+        readVersionedDataFromLocalStorage<TestData>("testKey", "1.0.0"),
+      ).toThrow(
         "localStorage is not available. This function should only be called on the client-side.",
       );
       expect(localStorageMock.getItem).not.toHaveBeenCalled();
@@ -161,7 +174,9 @@ describe("localStorage", () => {
         testField: "test value",
       };
 
-      expect(() => writeToLocalStorage(testData, "testKey")).toThrow(
+      expect(() =>
+        writeVersionedDataToLocalStorage(testData, "testKey"),
+      ).toThrow(
         "localStorage is not available. This function should only be called on the client-side.",
       );
       expect(localStorageMock.setItem).not.toHaveBeenCalled();

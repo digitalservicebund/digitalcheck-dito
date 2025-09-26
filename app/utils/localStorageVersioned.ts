@@ -7,7 +7,7 @@ export interface VersionedData {
  * @returns The parsed data or null if not found/invalid
  * @throws Error if version mismatch is detected
  */
-export function readFromLocalStorage<T extends VersionedData>(
+export function readVersionedDataFromLocalStorage<T extends VersionedData>(
   storageKey: string,
   currentVersion: string,
 ): T | null {
@@ -30,7 +30,7 @@ export function readFromLocalStorage<T extends VersionedData>(
   return data;
 }
 
-export function writeToLocalStorage<T extends VersionedData>(
+export function writeVersionedDataToLocalStorage<T extends VersionedData>(
   data: T,
   storageKey: string,
 ): void {
