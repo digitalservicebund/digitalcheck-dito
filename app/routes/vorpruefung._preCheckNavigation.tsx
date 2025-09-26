@@ -27,18 +27,13 @@ export default function LayoutWithPreCheckNavigation() {
   return (
     <div className="parent-bg-blue flex justify-center bg-blue-100 pt-32">
       <div className="hidden flex-none pl-32 lg:block">
-        <Nav
-          ariaLabel="Alle Fragen"
-          activeElementUrl={question?.url}
-          completedElementUrls={questions
-            .filter(({ id }) => id in answers)
-            .map(({ url }) => url)}
-        >
+        <Nav ariaLabel="Alle Fragen" activeElementUrl={question?.url}>
           <Nav.Items>
-            {questions.map(({ url, title }, i) => (
+            {questions.map(({ id, url, title }, i) => (
               <Nav.Item
                 key={url}
                 url={url}
+                completed={id in answers}
                 disabled={i > firstUnansweredQuestionIndex}
               >
                 {title}

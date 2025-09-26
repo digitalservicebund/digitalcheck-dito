@@ -60,11 +60,7 @@ export default function LayoutWithDocumentationNavigation() {
   return (
     <div className="parent-bg-blue flex justify-center bg-blue-100 pt-32">
       <div className="hidden flex-none pl-32 lg:block">
-        <Nav
-          activeElementUrl={currentUrl}
-          ariaLabel="Alle Fragen"
-          completedElementUrls={[]} // TODO: to be filled
-        >
+        <Nav activeElementUrl={currentUrl} ariaLabel="Alle Fragen">
           <Nav.Items>
             <Nav.Item url={ROUTE_DOCUMENTATION_INFO.url}>
               {ROUTE_DOCUMENTATION_INFO.title}

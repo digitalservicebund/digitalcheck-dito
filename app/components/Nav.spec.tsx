@@ -5,30 +5,30 @@ import Nav from "./Nav";
 
 const renderNav = (
   activeElementUrl?: string,
-  completedElementUrls?: string[],
-  errorElementUrls?: string[],
+  withCompletedElements = false,
+  withErrorElements = false,
+  withDisabledElements = false,
 ) => {
   // Stubbing the router is needed because Nav uses Links
   const RouterStub = createRoutesStub([
     {
       path: "/",
       Component: () => (
-        <Nav
-          activeElementUrl={activeElementUrl}
-          ariaLabel="Label Text"
-          completedElementUrls={completedElementUrls}
-          errorElementUrls={errorElementUrls}
-        >
+        <Nav activeElementUrl={activeElementUrl} ariaLabel="Label Text">
           <Nav.Items>
             <Nav.Item url="/example1">Navigation Item 1</Nav.Item>
-            <Nav.Item url="/example2" disabled>
+            <Nav.Item url="/example2" disabled={withDisabledElements}>
               Navigation Item 2
             </Nav.Item>
             <Nav.Item
               subItems={
                 <Nav.Items>
-                  <Nav.Item url="/example3-1">Navigation SubItem 1</Nav.Item>
-                  <Nav.Item url="/example3-2">Navigation SubItem 2</Nav.Item>
+                  <Nav.Item url="/example3-1" completed={withCompletedElements}>
+                    Navigation SubItem 1
+                  </Nav.Item>
+                  <Nav.Item url="/example3-2" error={withErrorElements}>
+                    Navigation SubItem 2
+                  </Nav.Item>
                 </Nav.Items>
               }
             >
@@ -56,12 +56,11 @@ describe("Nav", () => {
       }),
     ).toHaveAttribute("href", "/example1");
 
-    const disabledElement = screen.getByRole("link", {
-      name: "Navigation Item 2",
-    });
-    expect(disabledElement).toHaveAttribute("href", "/example2");
-    expect(disabledElement).toHaveAttribute("aria-disabled", "true");
-    expect(disabledElement).toHaveClass("pointer-events-none", "text-gray-800");
+    expect(
+      screen.getByRole("link", {
+        name: "Navigation Item 2",
+      }),
+    ).toHaveAttribute("href", "/example2");
 
     const subItems = screen.getByRole("button", {
       name: "Navigation Item 3 with SubItems",
@@ -80,6 +79,17 @@ describe("Nav", () => {
     ).toHaveAttribute("href", "/example3-2");
   });
 
+  it("shows disabled elements as disabled", () => {
+    renderNav("", false, false, true);
+
+    const disabledElement = screen.getByRole("link", {
+      name: "Navigation Item 2",
+    });
+
+    expect(disabledElement).toHaveAttribute("aria-disabled", "true");
+    expect(disabledElement).toHaveClass("pointer-events-none", "text-gray-800");
+  });
+
   it("highlights the current element", () => {
     renderNav("/example3-1");
 
@@ -95,12 +105,12 @@ describe("Nav", () => {
   });
 
   it("shows a completed icon for completed elements", () => {
-    renderNav("/example3-1", ["/example1", "/example2"]);
+    renderNav("/example3-1", true, false, false);
 
     const completedElements = screen.getAllByRole("link", {
       name: /- Fertig/,
     });
-    expect(completedElements.length).toBe(2);
+    expect(completedElements.length).toBe(1);
 
     for (const element of completedElements) {
       expect(within(element).getByTestId("CheckIcon")).toBeInTheDocument();
@@ -108,16 +118,12 @@ describe("Nav", () => {
   });
 
   it("shows a error icon for elements with errors", () => {
-    renderNav(
-      "/example3-1",
-      ["/example1", "/example2"],
-      ["/example2", "/example3-2"],
-    );
+    renderNav("/example3-1", false, true);
 
     const elementsWithError = screen.getAllByRole("link", {
       name: /- Fehler/,
     });
-    expect(elementsWithError.length).toBe(2);
+    expect(elementsWithError.length).toBe(1);
 
     for (const element of elementsWithError) {
       expect(

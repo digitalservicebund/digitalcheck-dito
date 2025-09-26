@@ -8,8 +8,9 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import React, {
+import {
   createContext,
+  isValidElement,
   ReactElement,
   ReactNode,
   useContext,
@@ -20,8 +21,6 @@ import twMerge from "~/utils/tailwindMerge";
 
 const NavContext = createContext<{
   activeElementUrl?: string;
-  completedElementUrls?: string[];
-  errorElementUrls?: string[];
 }>({});
 
 export type NavItemProps = {
@@ -29,6 +28,8 @@ export type NavItemProps = {
   url?: string;
   subItems?: ReactNode;
   disabled?: boolean;
+  completed?: boolean;
+  error?: boolean;
 };
 
 type NavItemsProps = {
@@ -44,81 +45,57 @@ type NavProps = {
 };
 
 /**
- * Recursively scan a React node tree to find elements whose `url`
- * matches the provided predicate.
+ * Recursively scan a React node tree to find elements whose `attr`
+ * matches the provided `value`.
  */
-function containsMatchingUrl(
-  node: ReactNode,
-  predicate: (url: string) => boolean,
-): boolean {
+const containsMatchingAttr = (
+  node: ReactNode | ReactNode[],
+  attr: keyof NavItemProps,
+  value: string = "true",
+): boolean => {
   if (!node) return false;
 
   if (Array.isArray(node)) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    return node.some((n) => containsMatchingUrl(n, predicate));
+    return node.some((n) => containsMatchingAttr(n, attr, value));
   }
 
-  if (React.isValidElement(node)) {
-    const element = node as ReactElement<unknown>;
-    const props = (element.props ?? {}) as {
-      url?: string;
-      children?: ReactNode;
-      subItems?: ReactNode;
-    };
+  if (isValidElement(node)) {
+    const props = ((node as ReactElement<unknown>).props ?? {}) as NavItemProps;
 
-    if (typeof props.url === "string" && predicate(props.url)) {
-      return true;
-    }
-
-    if (containsMatchingUrl(props.children, predicate)) return true;
-    if (containsMatchingUrl(props.subItems, predicate)) return true;
-
-    return false;
+    if (props[attr] === value) return true;
+    if (containsMatchingAttr(props.children, attr, value)) return true;
+    if (containsMatchingAttr(props.subItems, attr, value)) return true;
   }
 
   return false;
-}
+};
 
 function NavItem({
   children,
   url,
   subItems,
   disabled = false,
+  completed = false,
+  error = false,
 }: Readonly<NavItemProps>) {
-  const { activeElementUrl, completedElementUrls, errorElementUrls } =
-    useContext(NavContext);
+  const { activeElementUrl } = useContext(NavContext);
 
   // If any descendant has the active URL, this item should be considered active.
   const hasActiveDescendant = Boolean(
-    activeElementUrl &&
-      containsMatchingUrl(subItems, (u) => u === activeElementUrl),
+    activeElementUrl && containsMatchingAttr(subItems, "url", activeElementUrl),
   );
 
   const isActive = Boolean(
     activeElementUrl && (activeElementUrl === url || hasActiveDescendant),
   );
 
-  // Completed detection: either this item's url is completed or any descendant is completed.
   const hasCompletedDescendant = Boolean(
-    completedElementUrls &&
-      containsMatchingUrl(subItems, (u) => completedElementUrls.includes(u)),
+    containsMatchingAttr(subItems, "completed"),
   );
+  const isCompleted = Boolean(completed || hasCompletedDescendant);
 
-  // Error element detection: either this item's url has error or any descendant has error.
-  const hasErrorDescendant = Boolean(
-    errorElementUrls &&
-      containsMatchingUrl(subItems, (u) => errorElementUrls.includes(u)),
-  );
-
-  const hasError = Boolean(
-    errorElementUrls &&
-      (url ? errorElementUrls.includes(url) : hasErrorDescendant),
-  );
-
-  const isCompleted = Boolean(
-    completedElementUrls &&
-      (url ? completedElementUrls.includes(url) : hasCompletedDescendant),
-  );
+  const hasErrorDescendant = Boolean(containsMatchingAttr(subItems, "error"));
+  const hasError = Boolean(error || hasErrorDescendant);
 
   const hoverClasses =
     "hover:border-l-blue-300 hover:bg-blue-300 hover:underline";
@@ -212,7 +189,7 @@ function NavItem({
               <DisclosurePanel>{subItems}</DisclosurePanel>
 
               {
-                // only for screen reader and correct highlighting of Disclosure Button
+                // only for correct highlighting of Disclosure Button
                 // Also to already set the correct width
                 !open && (
                   <div className="pointer-events-none invisible h-0 overflow-hidden">
@@ -240,24 +217,23 @@ function NavItems({ children }: Readonly<NavItemsProps>) {
  * @description Navigation Menu
  * 
  * @example <Nav
-              activeElementUrl={url2}
+              activeElementUrl="/url2"
               ariaLabel="Label Text"
-              completedElementUrls={[url1]}
             >
               <Nav.Items>
-                <Nav.Item url={url1}>
+                <Nav.Item url="/url1">
                   Navigation Item 1
                 </Nav.Item>
-                <Nav.Item url={url2}>
+                <Nav.Item url="/url2" error>
                   Navigation Item 2
                 </Nav.Item>
                 <Nav.Item
                   subItems={
                     <Nav.Items>
-                      <Nav.Item url={url3_1}>
+                      <Nav.Item url="/url3-1" completed>
                         Navigation SubItem 1
                       </Nav.Item>
-                      <Nav.Item url={url3_2}>
+                      <Nav.Item url="/url3-2" disabled>
                         Navigation SubItem 2
                       </Nav.Item>
                     </Nav.Items>
@@ -269,17 +245,9 @@ function NavItems({ children }: Readonly<NavItemsProps>) {
             </Nav>
  *
  */
-function Nav({
-  children,
-  activeElementUrl,
-  completedElementUrls,
-  errorElementUrls,
-  ariaLabel,
-}: Readonly<NavProps>) {
+function Nav({ children, activeElementUrl, ariaLabel }: Readonly<NavProps>) {
   return (
-    <NavContext.Provider
-      value={{ activeElementUrl, completedElementUrls, errorElementUrls }}
-    >
+    <NavContext.Provider value={{ activeElementUrl }}>
       <nav aria-label={ariaLabel}>{children}</nav>
     </NavContext.Provider>
   );
