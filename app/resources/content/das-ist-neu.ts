@@ -22,7 +22,7 @@ export const news = {
       badge: {
         text: "12.09.2025",
       },
-      content: `Anleitungs-Seite für Flussdiagramme: Video bei Schritt 5 ergänzt: Entstehen eines Flussdiagramms. [Hier ansehen](${ROUTE_METHODS_VISUALIZE_FLOWCHARTS.url}#schritt-5)`,
+      content: `Anleitungs-Seite für Flussdiagramme: Video bei Schritt 5 ergänzt: Entstehen eines Flussdiagramms. [Hier ansehen](${ROUTE_METHODS_VISUALIZE_FLOWCHARTS.url}#video-anleitung)`,
     },
     {
       badge: {
