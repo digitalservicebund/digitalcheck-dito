@@ -187,13 +187,15 @@ function NavItem({
                 </span>
               </DisclosureButton>
 
-              <DisclosurePanel>{subItems}</DisclosurePanel>
+              <DisclosurePanel className="[&_a]:pl-32">
+                {subItems}
+              </DisclosurePanel>
 
               {
                 // only for correct highlighting of Disclosure Button
                 // Also to already set the correct width
                 !open && (
-                  <div className="pointer-events-none invisible h-0 overflow-hidden">
+                  <div className="pointer-events-none invisible h-0 overflow-hidden [&_a]:pl-32">
                     {subItems}
                   </div>
                 )
