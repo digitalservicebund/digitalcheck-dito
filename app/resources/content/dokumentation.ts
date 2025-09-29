@@ -1,3 +1,4 @@
+import { TipsAndUpdatesOutlined } from "@digitalservicebund/icons";
 import { steps } from "~/resources/content/shared/naechste-schritte";
 import { ROUTE_DOCUMENTATION_STATIC_WORD } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
@@ -49,44 +50,131 @@ export const digitalDocumentation = {
     title: "Digitaltauglichkeit dokumentieren",
     subtitle:
       "Die Dokumentation der Digitaltauglichkeit ist ein formeller, letzter Schritt. Sie dokumentieren, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben, und wie sie ins Regelungsvorhaben eingeflossen sind.",
-    hints: [
-      {
-        title: "So funktioniert es",
-        text: "Dieses Online Formular führt Sie durch die fünf Prinzipien der Digitaltauglichkeit. Daraus wird die Dokumentation für den Nationalen Normenkontrollrat (NKR) generiert. Diese können Sie dann als PDF-Datei herunterladen, ablegen und schlussendlich beim NKR einreichen.",
-      },
-      {
-        title: "Vertraulich und nur für Sie zugänglich",
-        text: "Was sie eintragen, bleibt vertraulich. Ihre Eingaben werden nur genutzt, um die PDF-Datei zu erstellen. Ihre Daten werden **nicht gespeichert** oder weitergegeben. Niemand sonst kann darauf zugreifen.",
-      },
-      {
-        title: "Nur ein Vorgang zur selben Zeit",
-        text:
-          "Sie können nur an einer Dokumentation zur selben Zeit arbeiten und Ihre Daten werden nicht dauerhaft gespeichert. " +
-          "Wenn Sie einen Zwischenstand speichern möchten, können Sie die Dokumentation jederzeit als auslesbare PDF-Datei herunterladen. Sie können diese somit zu einem späteren Zeitpunkt wieder hochladen, um an der Dokumentation weiterzuarbeiten.",
-      },
-    ],
+    // hints: [
+    //   {
+    //     title: "So funktioniert es",
+    //     text: "Dieses Online Formular führt Sie durch die fünf Prinzipien der Digitaltauglichkeit. Daraus wird die Dokumentation für den Nationalen Normenkontrollrat (NKR) generiert. Diese können Sie dann als PDF-Datei herunterladen, ablegen und schlussendlich beim NKR einreichen.",
+    //   },
+    //   {
+    //     title: "Vertraulich und nur für Sie zugänglich",
+    //     text: "Was sie eintragen, bleibt vertraulich. Ihre Eingaben werden nur genutzt, um die PDF-Datei zu erstellen. Ihre Daten werden **nicht gespeichert** oder weitergegeben. Niemand sonst kann darauf zugreifen.",
+    //   },
+    //   {
+    //     title: "Nur ein Vorgang zur selben Zeit",
+    //     text:
+    //       "Sie können nur an einer Dokumentation zur selben Zeit arbeiten und Ihre Daten werden nicht dauerhaft gespeichert. " +
+    //       "Wenn Sie einen Zwischenstand speichern möchten, können Sie die Dokumentation jederzeit als auslesbare PDF-Datei herunterladen. Sie können diese somit zu einem späteren Zeitpunkt wieder hochladen, um an der Dokumentation weiterzuarbeiten.",
+    //   },
+    // ],
     buttonText: "Dokumentation starten",
     alternative: {
-      text: "**Alternativ** können Sie die Dokumentation auch als Word-Datei herunterladen und ausfüllen.",
-      buttonText: "Word-Datei herunterladen",
+      text: "**Alternativ** können Sie die Dokumentation als Word-Datei herunterladen und bearbeiten. Folgen Sie dann den Anweisungen in der Datei.",
+      buttonText: "Word-Vorlage herunterladen (.docx)",
     },
-    multipleNotice: {
-      headline: "Eine oder mehrere Dokumentationen?",
-      content:
-        "Füllen Sie eine gemeinsame Dokumentation für alle inhaltlich zusammenhängenden Regelungen eines Vorhabens aus. So viele wie nötig, so wenige wie möglich. Bitte beachten Sie, dass parallele Vorgänge momentan nicht möglich sind.",
-    },
-    summary: {
-      title: "Hinweise",
+    description: {
+      title: "So funktioniert es",
       items: [
         {
-          heading: { text: "Beginnen Sie so früh wie möglich" },
+          title: "Starten Sie die Dokumentation online",
           content:
-            "Schicken Sie die begleitende Dokumentation so früh wie möglich an Ihre Ansprechperson im NKR-Sekretariat, **spätestens mit der Einleitung der Ressortabstimmung**. Fügen Sie die Dokumentation des Digitalcheck und Visualisierungen des Umsetzungsprozesses gerne auch der Ressortabstimmung bei, damit Ihre Kolleginnen und Kollegen Ihre Entscheidungen nachvollziehen können.",
+            "Alternativ können Sie die Dokumentation als Word-Datei herunterladen und bearbeiten. Folgen Sie dann den Anweisungen in der Datei.",
         },
         {
-          heading: { text: "Das prüft der Nationale Normenkontrollrat" },
+          title: "Beantworten Sie Fragen in der angeleiteten Dokumentation",
+          content: dedent`
+          Der Kern der Dokumentation sind die fünf Prinzipien für digitaltaugliche Gesetzgebung. Diese kennen Sie bereits aus Prozessschritt 2 – Digitaltauglichkeit erarbeiten.
+
+          Während des gesamten Prozesses werden Ihre Daten vertraulich behandelt. Nur Sie können sie sehen.`,
+        },
+        {
+          title: "Senden Sie die ausgefüllte Dokumentation an den NKR",
+        },
+      ],
+    },
+    dataSavingHint: {
+      headline: "Hinweise zur Zwischenspeicherung Ihrer Daten",
+      content: dedent`
+        Ihre eingegebenen Daten werden unbegrenzt lange in der Sitzung gespeichert, bis
+
+        a) Sie die Dokumentation beendet haben,
+
+        b) Ihr SINA-Rechner die Daten löscht (falls das bei Ihnen voreingestellt ist), oder
+
+        c) Sie die Daten manuell löschen.
+
+        Sie können nur eine Dokumentation zur gleichen Zeit bearbeiten.
+      `,
+    },
+    tips: {
+      title: "Tipps",
+      items: [
+        {
+          heading: {
+            text: "Füllen Sie eine Dokumentation für alle inhaltlich zusammenhängenden Regelungen eines Vorhabens aus.",
+          },
           content:
-            "Der NKR prüft die methodische und inhaltliche Nachvollziehbarkeit. Bei Fragen wird der NKR auf Sie zukommen. Das Ziel ist eine **digital- und praxistaugliche Umsetzung** der Regelung. Sein Prüfergebnis veröffentlicht er gegebenenfalls in seinen Stellungnahmen. Wenn Sie eine Visualisierung angefertigt haben und Sie der Veröffentlichung zustimmen, kann diese an die Stellungnahme angehängt werden. Bei Fragen oder Anregungen kommt Ihre Ansprechperson im NKR-Sekretariat auf Sie zu.",
+            "Ganz nach dem Prinzip: so viele wie nötig, so wenige wie möglich. Damit sparen Sie sich Zeit und der NKR kann Zusammenhänge besser erkennen.",
+          visual: { type: "icon" as const, Icon: TipsAndUpdatesOutlined },
+        },
+        {
+          heading: { text: "Holen Sie sich eine zweite Meinung ein" },
+          content:
+            "Sie müssen nicht alleine an der Dokumentation arbeiten. Laden Sie das fertige Dokument oder einen Zwischenstand als Word-Dokument herunter und senden Sie es an eine Kollegin oder einen Kollegen.",
+          visual: { type: "icon" as const, Icon: TipsAndUpdatesOutlined },
+        },
+        {
+          heading: { text: "Nehmen Sie Ihre Visualisierung als Grundlage" },
+          content: dedent`
+            Wenn Sie in Ihrer Visualisierung die Fünf Prinzipien bereits angewendet haben, können Sie diese Punkte als Ausgangslage für die Beantwortung der Fragen nutzen.
+
+            Senden Sie die Visualisierung zum Schluss mit an den NKR.`,
+          visual: { type: "icon" as const, Icon: TipsAndUpdatesOutlined },
+        },
+      ],
+    },
+    faq: {
+      title: "Häufige Fragen",
+      questions: [
+        {
+          title: "Muss ich eine Dokumentation für meine Regelungsart machen?",
+          content: "",
+        },
+        {
+          title:
+            "Soll ich pro Vorhaben eine oder mehrere Dokumentationen ausfüllen?",
+          content: "",
+        },
+        {
+          title: "Wie gehe ich mit Mantelgesetzen um?",
+          content: "",
+        },
+        {
+          title: "Muss ich die Dokumentation online ausfüllen?",
+          content: "",
+        },
+        {
+          title: "Was passiert mit meinen Daten?",
+          content: "",
+        },
+        {
+          title: "Wie lange werden meine Daten gespeichert?",
+          content: "",
+        },
+        {
+          title: "Kann ich mehrere Dokumentationen gleichzeitig bearbeiten?",
+          content: "",
+        },
+        {
+          title: "Kann ich mit jemandem zusammen daran arbeiten?",
+          content: "",
+        },
+        {
+          title: "Was prüft der Nationale Normenkontrollrat (NKR)?",
+          content: "",
+        },
+        {
+          title: "Sind Visualisierungen verpflichtend?",
+          content: "",
         },
       ],
     },

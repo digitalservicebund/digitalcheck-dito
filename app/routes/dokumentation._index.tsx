@@ -1,7 +1,8 @@
+import { SaveAltOutlined } from "@digitalservicebund/icons";
+import Accordion from "~/components/Accordion";
 import Button, { ButtonLinkProps } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
-import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading.tsx";
 import Hero from "~/components/Hero";
 import InfoBoxList from "~/components/InfoBoxList";
@@ -13,16 +14,17 @@ import {
   digitalDocumentation,
   documentation,
 } from "~/resources/content/dokumentation";
+import { general } from "~/resources/content/shared/general";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import { features } from "~/resources/features";
 import {
   ROUTE_DOCUMENTATION,
   ROUTE_DOCUMENTATION_INFO,
   ROUTE_DOCUMENTATION_STATIC_WORD,
+  ROUTE_LANDING,
 } from "~/resources/staticRoutes";
 import useFeatureFlag from "~/utils/featureFlags";
 import constructMetaTitle from "~/utils/metaTitle";
-import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 
 const { start } = digitalDocumentation;
 
@@ -34,45 +36,90 @@ function DigitalDocumentationIndex() {
   return (
     <>
       <Hero title={start.title} subtitle={start.subtitle}>
-        <div className="mt-40 mb-20 space-y-16">
-          {start.hints.map((hint) => (
-            <DetailsSummary
-              key={hint.title}
-              title={hint.title}
-              content={hint.text}
-            />
-          ))}
-        </div>
+        <div className="mt-40 space-y-40">
+          <ButtonContainer>
+            <Button href={ROUTE_DOCUMENTATION_INFO.url}>
+              {start.buttonText}
+            </Button>
+            <Button href={ROUTE_LANDING.url} look={"tertiary"}>
+              {general.buttonBack.text}
+            </Button>
+          </ButtonContainer>
 
-        <ButtonContainer className="mt-20">
+          <div className="space-y-8">
+            <RichText markdown={start.alternative.text} />
+
+            <Button
+              look="link"
+              href={ROUTE_DOCUMENTATION_STATIC_WORD.url}
+              iconLeft={<SaveAltOutlined className="mr-2 fill-blue-800" />}
+            >
+              {start.alternative.buttonText}
+            </Button>
+          </div>
+        </div>
+      </Hero>
+
+      <div className="container my-80 space-y-80">
+        <section className="space-y-40">
+          <Heading tagName="h2">{start.description.title}</Heading>
+
+          <NumberedList>
+            {start.description.items.map((item) => (
+              <NumberedList.Item key={item.title}>
+                <span>{item.title}</span>
+                {item.content && <RichText markdown={item.content} />}
+              </NumberedList.Item>
+            ))}
+          </NumberedList>
+        </section>
+
+        <InlineNotice
+          look="tips"
+          heading={
+            <Heading tagName="h2">{start.dataSavingHint.headline}</Heading>
+          }
+        >
+          <RichText markdown={start.dataSavingHint.content} />
+        </InlineNotice>
+
+        <InfoBoxList
+          heading={{ text: start.tips.title }}
+          items={start.tips.items}
+        />
+      </div>
+
+      <section className="bg-blue-300 py-40">
+        <div className="container space-y-40">
           <Button href={ROUTE_DOCUMENTATION_INFO.url}>
             {start.buttonText}
           </Button>
-        </ButtonContainer>
 
-        <RichText markdown={start.alternative.text} className="mt-40" />
-        <ButtonContainer className="mt-20">
-          <Button href={ROUTE_DOCUMENTATION_STATIC_WORD.url} look={"tertiary"}>
-            {start.alternative.buttonText}
-          </Button>
-        </ButtonContainer>
-      </Hero>
+          <div className="space-y-8">
+            <RichText markdown={start.alternative.text} />
 
-      <Container>
-        <InlineNotice
-          look="warning"
-          className="mb-40"
-          heading={
-            <Heading tagName="h2">{start.multipleNotice.headline}</Heading>
-          }
-        >
-          <RichText markdown={start.multipleNotice.content} />
-        </InlineNotice>
-        <InfoBoxList
-          heading={{ text: start.summary.title }}
-          items={start.summary.items}
+            <Button
+              look="link"
+              href={ROUTE_DOCUMENTATION_STATIC_WORD.url}
+              iconLeft={<SaveAltOutlined className="mr-2 fill-blue-800" />}
+            >
+              {start.alternative.buttonText}
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <div className="container my-80 space-y-40">
+        <Heading tagName="h2">{start.faq.title}</Heading>
+
+        <Accordion
+          items={start.faq.questions.map(({ title, content }) => ({
+            headline: title,
+            content,
+          }))}
         />
-      </Container>
+      </div>
+
       <SupportBanner {...supportBanner} />
     </>
   );
