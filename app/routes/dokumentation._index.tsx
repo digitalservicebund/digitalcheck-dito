@@ -1,5 +1,4 @@
 import { SaveAltOutlined } from "@digitalservicebund/icons";
-import Accordion from "~/components/Accordion";
 import Button, { ButtonLinkProps } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
@@ -90,7 +89,7 @@ function DigitalDocumentationIndex() {
         />
       </div>
 
-      <section className="bg-blue-300 py-40">
+      <section className="bg-blue-100 py-40">
         <div className="container space-y-40">
           <Button href={ROUTE_DOCUMENTATION_INFO.url}>
             {start.buttonText}
@@ -110,7 +109,7 @@ function DigitalDocumentationIndex() {
         </div>
       </section>
 
-      <div className="container my-80 space-y-40">
+      {/* <div className="container my-80 space-y-40">
         <Heading tagName="h2">{start.faq.title}</Heading>
 
         <Accordion
@@ -119,7 +118,7 @@ function DigitalDocumentationIndex() {
             content,
           }))}
         />
-      </div>
+      </div> */}
 
       <SupportBanner {...supportBanner} />
     </>
