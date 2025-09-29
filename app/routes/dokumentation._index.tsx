@@ -25,6 +25,7 @@ import {
 } from "~/resources/staticRoutes";
 import useFeatureFlag from "~/utils/featureFlags";
 import constructMetaTitle from "~/utils/metaTitle";
+import { renderButtonContainer } from "~/utils/resourceUtils";
 
 const { start } = digitalDocumentation;
 
