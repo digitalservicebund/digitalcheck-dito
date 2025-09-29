@@ -50,22 +50,6 @@ export const digitalDocumentation = {
     title: "Digitaltauglichkeit dokumentieren",
     subtitle:
       "Die Dokumentation der Digitaltauglichkeit ist ein formeller, letzter Schritt. Sie dokumentieren, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben, und wie sie ins Regelungsvorhaben eingeflossen sind.",
-    // hints: [
-    //   {
-    //     title: "So funktioniert es",
-    //     text: "Dieses Online Formular führt Sie durch die fünf Prinzipien der Digitaltauglichkeit. Daraus wird die Dokumentation für den Nationalen Normenkontrollrat (NKR) generiert. Diese können Sie dann als PDF-Datei herunterladen, ablegen und schlussendlich beim NKR einreichen.",
-    //   },
-    //   {
-    //     title: "Vertraulich und nur für Sie zugänglich",
-    //     text: "Was sie eintragen, bleibt vertraulich. Ihre Eingaben werden nur genutzt, um die PDF-Datei zu erstellen. Ihre Daten werden **nicht gespeichert** oder weitergegeben. Niemand sonst kann darauf zugreifen.",
-    //   },
-    //   {
-    //     title: "Nur ein Vorgang zur selben Zeit",
-    //     text:
-    //       "Sie können nur an einer Dokumentation zur selben Zeit arbeiten und Ihre Daten werden nicht dauerhaft gespeichert. " +
-    //       "Wenn Sie einen Zwischenstand speichern möchten, können Sie die Dokumentation jederzeit als auslesbare PDF-Datei herunterladen. Sie können diese somit zu einem späteren Zeitpunkt wieder hochladen, um an der Dokumentation weiterzuarbeiten.",
-    //   },
-    // ],
     buttonText: "Dokumentation starten",
     alternative: {
       text: "**Alternativ** können Sie die Dokumentation als Word-Datei herunterladen und bearbeiten. Folgen Sie dann den Anweisungen in der Datei.",
