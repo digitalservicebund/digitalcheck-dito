@@ -140,11 +140,11 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
   const { trackingEnabled, posthogEnabled, posthogKey } = rootLoaderData ?? {};
   const location = useLocation();
 
-  let metaTitles = <></>;
+  let metaProperties = <></>;
   if (!error && rootLoaderData) {
     const url = `${rootLoaderData.BASE_URL}${location.pathname}`;
     const ogImage = `${rootLoaderData.BASE_URL}/images/og-image.png`;
-    metaTitles = (
+    metaProperties = (
       <>
         <meta property="og:site_name" content={siteMeta.siteName} />
         <meta property="og:description" content={siteMeta.description} />
@@ -178,7 +178,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdMetadata) }}
         ></script>
         <MetaTitle />
-        {metaTitles}
+        {metaProperties}
         {trackingEnabled && (
           <script
             key={error ? "error-tracking" : "app-tracking"}
