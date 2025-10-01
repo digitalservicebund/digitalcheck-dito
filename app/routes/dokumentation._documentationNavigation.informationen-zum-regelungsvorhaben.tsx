@@ -1,19 +1,16 @@
 import Heading from "~/components/Heading";
 import Input from "~/components/Input";
+import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_INFO } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
 
 const { info } = digitalDocumentation;
-
-export function meta() {
-  return constructMetaTitle(ROUTE_DOCUMENTATION_INFO.title);
-}
 
 export default function DocumentationInfo() {
   return (
     <>
+      <MetaTitle prefix={ROUTE_DOCUMENTATION_INFO.title} />
       <Heading
         text={info.headline}
         tagName="h1"

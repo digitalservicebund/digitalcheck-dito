@@ -5,12 +5,12 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxList from "~/components/InfoBoxList";
+import MetaTitle from "~/components/Meta";
 import { PrinciplePosterBox } from "~/components/PrinciplePosterBox";
 import Separator from "~/components/Separator";
 import TableOfContents from "~/components/TableOfContents";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,
@@ -18,10 +18,6 @@ import {
 } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 import Principle from "./Principle";
-
-export function meta() {
-  return constructMetaTitle(ROUTE_METHODS_PRINCIPLES.title);
-}
 
 export const loader = async () => {
   const prinzipData = await fetchStrapiData<{
@@ -41,6 +37,7 @@ export default function FivePrinciples() {
 
   return (
     <>
+      <MetaTitle prefix={ROUTE_METHODS_PRINCIPLES.title} />
       <Hero
         title={methodsFivePrinciples.title}
         subtitle={methodsFivePrinciples.subtitle}

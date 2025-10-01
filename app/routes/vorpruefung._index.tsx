@@ -15,16 +15,7 @@ import { PRE_CHECK_START_BUTTON_ID } from "~/resources/constants";
 import { general } from "~/resources/content/shared/general";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import { preCheck } from "~/resources/content/vorpruefung";
-import {
-  ROUTE_LANDING,
-  ROUTE_PRECHECK,
-  ROUTE_PRECHECK_INFO,
-} from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
-
-export function meta() {
-  return constructMetaTitle(ROUTE_PRECHECK.title);
-}
+import { ROUTE_LANDING, ROUTE_PRECHECK_INFO } from "~/resources/staticRoutes";
 
 export default function Index() {
   const tabsData: TabItem[] = [

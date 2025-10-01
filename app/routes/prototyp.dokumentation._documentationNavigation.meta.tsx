@@ -4,6 +4,7 @@ import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import Input from "~/components/Input";
+import MetaTitle from "~/components/Meta";
 import IntermediateSaveLink from "~/components/prototyp/IntermediateSaveLink.tsx";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
@@ -16,14 +17,9 @@ import {
   ROUTE_PROTOTYPE_DOCUMENTATION_START_RESUME,
 } from "~/resources/staticRoutes";
 import useFeatureFlag from "~/utils/featureFlags.ts";
-import constructMetaTitle from "~/utils/metaTitle";
 
 const { metaInfo, nextButton } = prototypeDocumentation;
 const { headline, text } = metaInfo;
-
-export function meta() {
-  return constructMetaTitle(ROUTE_PROTOTYPE_DOCUMENTATION_META.title);
-}
 
 export default function PrototypeDocumentationMeta() {
   const prototypeAlternativeEnabled = useFeatureFlag(
@@ -38,6 +34,7 @@ export default function PrototypeDocumentationMeta() {
 
   return (
     <Container className="pt-0">
+      <MetaTitle prefix={ROUTE_PROTOTYPE_DOCUMENTATION_META.title} />
       <IntermediateSaveLink />
       <Heading
         text={headline}

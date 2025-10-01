@@ -2,13 +2,9 @@ import Container from "~/components/Container";
 import Hero from "~/components/Hero";
 import { type InfoBoxProps } from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList.tsx";
+import MetaTitle from "~/components/Meta";
 import { fundamentalsDigitalReadiness } from "~/resources/content/grundlage-digitaltauglichkeit";
 import { ROUTE_FUNDAMENTALS_DIGITAL_READINESS } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
-
-export function meta() {
-  return constructMetaTitle(ROUTE_FUNDAMENTALS_DIGITAL_READINESS.title);
-}
 
 export default function FundamentalsMethods() {
   const items: InfoBoxProps[] = fundamentalsDigitalReadiness.summary.items.map(
@@ -22,6 +18,7 @@ export default function FundamentalsMethods() {
 
   return (
     <>
+      <MetaTitle prefix={ROUTE_FUNDAMENTALS_DIGITAL_READINESS.title} />
       <Hero
         title={fundamentalsDigitalReadiness.title}
         subtitle={fundamentalsDigitalReadiness.subtitle}

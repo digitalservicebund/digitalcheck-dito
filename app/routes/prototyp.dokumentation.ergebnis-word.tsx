@@ -6,6 +6,7 @@ import DetailsSummary from "~/components/DetailsSummary";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox.tsx";
+import MetaTitle from "~/components/Meta";
 import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import { documentation } from "~/resources/content/dokumentation";
@@ -15,19 +16,15 @@ import {
   ROUTE_PROTOTYPE_DOCUMENTATION_RESULT,
   ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_WORD,
 } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
 import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 
 const { result } = prototypeDocumentation;
 const { title } = result;
 
-export function meta() {
-  return constructMetaTitle(ROUTE_PROTOTYPE_DOCUMENTATION_RESULT.title);
-}
-
 export default function DocumentationResult() {
   return (
     <>
+      <MetaTitle prefix={ROUTE_PROTOTYPE_DOCUMENTATION_RESULT.title} />
       <div className="bg-blue-100 py-80 print:pb-0">
         <div className="px-16">
           <Container className="rounded-t-lg bg-blue-300 py-32">

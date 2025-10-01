@@ -20,6 +20,7 @@ import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox.tsx";
 import InfoTooltip from "~/components/InfoTooltip";
 import InlineNotice from "~/components/InlineNotice";
+import MetaTitle from "~/components/Meta";
 import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import { preCheck } from "~/resources/content/vorpruefung";
@@ -42,7 +43,6 @@ import {
   getAnswersFromCookie,
   getHeaderFromCookie,
 } from "~/utils/cookies.server";
-import constructMetaTitle from "~/utils/metaTitle";
 import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/route";
@@ -55,10 +55,6 @@ const nextSteps = {
   [ResultType.POSITIVE]: preCheckResult.positive.nextSteps,
   [ResultType.NEGATIVE]: preCheckResult.negative.nextSteps,
 };
-
-export function meta() {
-  return constructMetaTitle(ROUTE_PRECHECK_RESULT.title);
-}
 
 export async function loader({ request }: Route.LoaderArgs) {
   const cookie = await getAnswersFromCookie(request);
@@ -183,6 +179,7 @@ export default function Result() {
     result.digital === ResultType.UNSURE ? preCheckResult.unsure.hint : "";
   return (
     <>
+      <MetaTitle prefix={ROUTE_PRECHECK_RESULT.title} />
       <div className="bg-blue-100 py-40 print:pb-0">
         <div className="px-16">
           <Container

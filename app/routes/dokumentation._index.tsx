@@ -6,6 +6,7 @@ import Heading from "~/components/Heading.tsx";
 import Hero from "~/components/Hero";
 import InfoBoxList from "~/components/InfoBoxList";
 import InlineNotice from "~/components/InlineNotice";
+import MetaTitle from "~/components/Meta";
 import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText.tsx";
 import SupportBanner from "~/components/SupportBanner";
@@ -23,18 +24,14 @@ import {
   ROUTE_LANDING,
 } from "~/resources/staticRoutes";
 import useFeatureFlag from "~/utils/featureFlags";
-import constructMetaTitle from "~/utils/metaTitle";
 import { renderButtonContainer } from "~/utils/resourceUtils";
 
 const { start } = digitalDocumentation;
 
-export function meta() {
-  return constructMetaTitle(ROUTE_DOCUMENTATION.title);
-}
-
 function DigitalDocumentationIndex() {
   return (
     <>
+      <MetaTitle prefix={ROUTE_DOCUMENTATION.title} />
       <Hero title={start.title} subtitle={start.subtitle}>
         <div className="mt-40 space-y-40">
           <ButtonContainer>

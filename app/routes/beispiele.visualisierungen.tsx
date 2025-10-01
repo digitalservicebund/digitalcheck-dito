@@ -3,22 +3,18 @@ import { Link, useLoaderData } from "react-router";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
+import MetaTitle from "~/components/Meta";
 import VisualisationItem from "~/components/VisualisationItem";
 import { examplesVisualisations } from "~/resources/content/beispiele-visualisierungen";
 import {
   ROUTE_EXAMPLES_VISUALISATIONS,
   ROUTE_REGELUNGEN,
 } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,
   visualisationFields,
   Visualisierung,
 } from "~/utils/strapiData.server";
-
-export function meta() {
-  return constructMetaTitle(ROUTE_EXAMPLES_VISUALISATIONS.title);
-}
 
 const GET_VISUALISATIONS_QUERY = `
 ${visualisationFields}
@@ -62,6 +58,7 @@ export default function BeispieleVisualisierungen() {
   );
   return (
     <>
+      <MetaTitle prefix={ROUTE_EXAMPLES_VISUALISATIONS.title} />
       <Hero
         title={examplesVisualisations.title}
         subtitle={examplesVisualisations.subtitle}

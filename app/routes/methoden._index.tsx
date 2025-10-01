@@ -3,6 +3,7 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
+import MetaTitle from "~/components/Meta";
 import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import SupportBanner from "~/components/SupportBanner";
@@ -10,12 +11,7 @@ import Timeline from "~/components/Timeline.tsx";
 import { methods } from "~/resources/content/methoden";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import { ROUTE_METHODS } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
 import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
-
-export function meta() {
-  return constructMetaTitle(ROUTE_METHODS.title);
-}
 
 const renderStep = (
   step: (typeof methods.steps.items)[number],
@@ -60,6 +56,7 @@ const renderStep = (
 export default function Methoden() {
   return (
     <>
+      <MetaTitle prefix={ROUTE_METHODS.title} />
       <Hero subtitle={methods.subtitle} title={methods.title} />
 
       <div className="container my-40 space-y-40 lg:my-80 lg:space-y-80">

@@ -18,15 +18,10 @@ import {
   getAnswersFromCookie,
   getHeaderFromCookie,
 } from "~/utils/cookies.server";
-import constructMetaTitle from "~/utils/metaTitle";
 import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/vorpruefung._preCheckNavigation.$questionId";
 
 const { questions, answerOptions, nextButton } = preCheck;
-
-export function meta() {
-  return constructMetaTitle(ROUTE_PRECHECK.title);
-}
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const { answers } = await getAnswersFromCookie(request);

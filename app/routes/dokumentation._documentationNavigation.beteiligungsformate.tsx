@@ -1,19 +1,16 @@
 import Heading from "~/components/Heading";
+import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_PARTICIPATION } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
 
 const { participation } = digitalDocumentation;
-
-export function meta() {
-  return constructMetaTitle(ROUTE_DOCUMENTATION_PARTICIPATION.title);
-}
 
 export default function DocumentationParticipation() {
   return (
     <>
+      <MetaTitle prefix={ROUTE_DOCUMENTATION_PARTICIPATION.title} />
       <Heading
         text={participation.headline}
         tagName="h1"

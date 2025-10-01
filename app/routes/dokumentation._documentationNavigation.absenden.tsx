@@ -1,18 +1,15 @@
 import Heading from "~/components/Heading";
+import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_SEND } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
 
 const { send } = digitalDocumentation;
-
-export function meta() {
-  return constructMetaTitle(ROUTE_DOCUMENTATION_SEND.title);
-}
 
 export default function DocumentationSend() {
   return (
     <>
+      <MetaTitle prefix={ROUTE_DOCUMENTATION_SEND.title} />
       <Heading
         text={send.headline}
         tagName="h1"

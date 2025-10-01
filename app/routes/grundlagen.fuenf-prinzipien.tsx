@@ -1,10 +1,10 @@
 import { useLoaderData } from "react-router";
 import Hero from "~/components/Hero";
+import MetaTitle from "~/components/Meta";
 import { PrinciplePosterBox } from "~/components/PrinciplePosterBox";
 import TableOfContents from "~/components/TableOfContents";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import { ROUTE_FUNDAMENTALS_PRINCIPLES } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,
@@ -12,10 +12,6 @@ import {
 } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 import Principle from "./methoden.fuenf-prinzipien/Principle";
-
-export function meta() {
-  return constructMetaTitle(ROUTE_FUNDAMENTALS_PRINCIPLES.title);
-}
 
 export const loader = async () => {
   const prinzipData = await fetchStrapiData<{
@@ -35,6 +31,7 @@ export default function FivePrinciples() {
 
   return (
     <>
+      <MetaTitle prefix={ROUTE_FUNDAMENTALS_PRINCIPLES.title} />
       <Hero
         title={methodsFivePrinciples.grundlagenTitle}
         subtitle={methodsFivePrinciples.grundlagenSubtitle}

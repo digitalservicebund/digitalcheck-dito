@@ -6,18 +6,17 @@ import DetailsSummary from "~/components/DetailsSummary";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image.tsx";
 import InfoBox from "~/components/InfoBox";
+import MetaTitle from "~/components/Meta";
 import { methodsITSystems } from "~/resources/content/methode-it-systeme-erfassen";
 import { methodsTechnicalFeasibility } from "~/resources/content/methode-technische-umsetzbarkeit";
 import { methodsResponsibleActors } from "~/resources/content/methode-zustaendige-akteurinnen-auflisten";
 import { interviewBanner } from "~/resources/content/shared/interview-banner";
 import {
-  ROUTE_METHODS,
   ROUTE_METHODS_COLLECT_IT_SYSTEMS,
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
   ROUTES,
 } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
 import type { Route } from "./+types/methoden.$subPage";
 
 const contentMap = {
@@ -48,12 +47,6 @@ export function loader({ params }: Route.LoaderArgs) {
   return { route };
 }
 
-export function meta({ data }: Route.MetaArgs) {
-  return constructMetaTitle(
-    data?.route ? data.route.title : ROUTE_METHODS.title,
-  );
-}
-
 export default function Index() {
   const { route } = useLoaderData<typeof loader>();
   // We have to get the content here to use the icons from the content file
@@ -61,6 +54,7 @@ export default function Index() {
 
   return (
     <>
+      <MetaTitle prefix={route.title} />
       <Hero subtitle={content.subtitle} title={content.title} />
 
       {"accordion" in content && (

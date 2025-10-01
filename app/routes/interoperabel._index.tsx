@@ -9,6 +9,7 @@ import Image from "~/components/Image";
 import ImageZoomable from "~/components/ImageZoomable";
 import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxList from "~/components/InfoBoxList";
+import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { interoperability } from "~/resources/content/interoperabel";
@@ -16,11 +17,6 @@ import {
   ROUTE_INTEROPERABILITY,
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
-
-export function meta() {
-  return constructMetaTitle(ROUTE_INTEROPERABILITY.title);
-}
 
 export default function Interoperability() {
   const tabsData: TabItem[] = [
@@ -113,6 +109,7 @@ export default function Interoperability() {
   ];
   return (
     <>
+      <MetaTitle prefix={ROUTE_INTEROPERABILITY.title} />
       <Hero
         title={interoperability.headline}
         subtitle={interoperability.content}

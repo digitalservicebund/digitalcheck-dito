@@ -3,12 +3,8 @@ import { useLoaderData } from "react-router";
 
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
+import MetaTitle from "~/components/Meta";
 import { Route, ROUTE_SITEMAP, ROUTES } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
-
-export function meta() {
-  return constructMetaTitle(ROUTE_SITEMAP.title);
-}
 
 type RouteWithChildren = Route & {
   children: RouteWithChildren[];
@@ -55,6 +51,7 @@ export default function Sitemap(): ReactNode {
 
   return (
     <>
+      <MetaTitle prefix={ROUTE_SITEMAP.title} />
       <Hero title="Sitemap" />
 
       <Container>{renderRoutes(routes)}</Container>

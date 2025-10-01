@@ -2,14 +2,10 @@ import Container from "~/components/Container";
 import Hero from "~/components/Hero";
 import InfoBox, { type InfoBoxProps } from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList.tsx";
+import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { fundamentalsNKR } from "~/resources/content/grundlage-normenkontrollrat";
 import { ROUTE_FUNDAMENTALS_NKR } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
-
-export function meta() {
-  return constructMetaTitle(ROUTE_FUNDAMENTALS_NKR.title);
-}
 
 export default function FundamentalsMethods() {
   const items: InfoBoxProps[] = fundamentalsNKR.summary.items.map((item) => {
@@ -22,6 +18,7 @@ export default function FundamentalsMethods() {
 
   return (
     <>
+      <MetaTitle prefix={ROUTE_FUNDAMENTALS_NKR.title} />
       <Hero title={fundamentalsNKR.title} subtitle={fundamentalsNKR.subtitle} />
 
       <Container className="space-y-40 py-40 md:py-80">

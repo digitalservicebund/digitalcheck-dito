@@ -5,6 +5,7 @@ import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import Input from "~/components/Input";
+import MetaTitle from "~/components/Meta";
 import IntermediateSaveLink from "~/components/prototyp/IntermediateSaveLink.tsx";
 import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
@@ -16,14 +17,9 @@ import {
   ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_2,
   ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_3,
 } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
 
 const { principles, nextButton } = prototypeDocumentation;
 const { principle2, radioOptions } = principles;
-
-export function meta() {
-  return constructMetaTitle(ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_2.title);
-}
 
 export default function PrototypeDocumentationPrinciple2() {
   const [selectedOption, setSelectedOption] = useState<string>();
@@ -45,6 +41,7 @@ export default function PrototypeDocumentationPrinciple2() {
 
   return (
     <Container className="pt-0">
+      <MetaTitle prefix={ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_2.title} />
       <IntermediateSaveLink />
       <Heading
         text={principle2.headline}

@@ -11,6 +11,7 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InlineInfoList from "~/components/InlineInfoList";
+import MetaTitle from "~/components/Meta";
 import ParagraphList from "~/components/ParagraphList";
 import Separator from "~/components/Separator";
 import Tabs, { TabItem } from "~/components/Tabs";
@@ -19,7 +20,6 @@ import {
   ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_REGELUNGEN,
 } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
 import {
   fetchStrapiData,
   paragraphFields,
@@ -28,10 +28,6 @@ import {
 } from "~/utils/strapiData.server";
 import { formatDate, gesetzStatusMap } from "~/utils/utilFunctions";
 import type { Route } from "./+types/beispiele.prinzipien.$prinzip";
-
-export function meta() {
-  return constructMetaTitle(ROUTE_EXAMPLES_PRINCIPLES.title);
-}
 
 const GET_PRINZIPS_QUERY = `
 ${paragraphFields}
@@ -101,6 +97,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
 
   return (
     <>
+      <MetaTitle prefix={ROUTE_EXAMPLES_PRINCIPLES.title} />
       <Hero
         title={examplesRegelungen.principles.hero.title}
         subtitle={examplesRegelungen.principles.hero.subtitle}

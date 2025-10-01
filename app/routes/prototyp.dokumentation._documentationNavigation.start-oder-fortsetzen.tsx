@@ -17,6 +17,7 @@ import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Heading from "~/components/Heading";
+import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { features } from "~/resources/features";
@@ -27,14 +28,9 @@ import {
   ROUTE_PROTOTYPE_DOCUMENTATION_START_RESUME,
 } from "~/resources/staticRoutes";
 import useFeatureFlag from "~/utils/featureFlags";
-import constructMetaTitle from "~/utils/metaTitle";
 
 const { title, subtitle, startNewButtonText } =
   prototypeDocumentation.startOrResume;
-
-export function meta() {
-  return constructMetaTitle(ROUTE_PROTOTYPE_DOCUMENTATION_START_RESUME.title);
-}
 
 export default function PrototypeDocumentationMeta() {
   const prototypeAlternativeEnabled = useFeatureFlag(
@@ -106,6 +102,7 @@ export default function PrototypeDocumentationMeta() {
 
   return (
     <Container className="pt-0">
+      <MetaTitle prefix={ROUTE_PROTOTYPE_DOCUMENTATION_START_RESUME.title} />
       <Heading
         text={title}
         tagName="h1"

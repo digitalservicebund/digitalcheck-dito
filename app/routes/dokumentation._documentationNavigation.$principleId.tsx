@@ -2,20 +2,13 @@ import React, { useState } from "react";
 import { useLoaderData } from "react-router";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
+import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { principles } from "~/resources/content/shared/prinzipien";
-import { ROUTE_DOCUMENTATION } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
 import type { Route } from "./+types/dokumentation._documentationNavigation.$principleId";
 
 const { principlePages } = digitalDocumentation;
-
-export function meta({ data }: Route.MetaArgs) {
-  return constructMetaTitle(
-    data?.principle ? data.principle.title : ROUTE_DOCUMENTATION.title,
-  );
-}
 
 export function loader({ params }: Route.LoaderArgs) {
   const principleIdx = principles.findIndex(
@@ -40,6 +33,7 @@ export default function DocumentationPrinciple() {
 
   return (
     <>
+      <MetaTitle prefix={principle.title} />
       <Heading
         text={principle.headline}
         tagName="h1"

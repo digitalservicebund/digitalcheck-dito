@@ -2,6 +2,7 @@ import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
+import MetaTitle from "~/components/Meta";
 import IntermediateSaveLink from "~/components/prototyp/IntermediateSaveLink.tsx";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
@@ -12,7 +13,6 @@ import {
   ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION,
   ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_1,
 } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
 
 const { participation, nextButton } = prototypeDocumentation;
 const {
@@ -23,13 +23,10 @@ const {
   textfieldResultsLabel,
 } = participation;
 
-export function meta() {
-  return constructMetaTitle(ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION.title);
-}
-
 export default function PrototypeDocumentationParticipation1() {
   return (
     <Container className="pt-0">
+      <MetaTitle prefix={ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION.title} />
       <IntermediateSaveLink />
       <Heading
         text={headline}

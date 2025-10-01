@@ -18,6 +18,7 @@ import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import BackToTopButton from "~/components/BackToTopButton.tsx";
 import Container from "~/components/Container.tsx";
+import MetaTitle from "~/components/Meta";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
 import { STRAPI_MEDIA_URL } from "~/resources/constants.ts";
@@ -27,12 +28,7 @@ import {
   ROUTE_METHODS_VISUALIZE_FLOWCHARTS,
 } from "~/resources/staticRoutes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
-import constructMetaTitle from "~/utils/metaTitle.ts";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils.ts";
-
-export function meta() {
-  return constructMetaTitle(ROUTE_METHODS_VISUALIZE_FLOWCHARTS.title);
-}
 
 const diagramElements = [
   {
@@ -142,6 +138,7 @@ export default function Visualization() {
   // noinspection HtmlUnknownAnchorTarget
   return (
     <>
+      <MetaTitle prefix={ROUTE_METHODS_VISUALIZE_FLOWCHARTS.title} />
       <Hero
         title="Erstellung von Flussdiagrammen"
         subtitle="Ein Flussdiagramm visualisiert, wie ein Prozess Schritt für Schritt abläuft. Es hilft, die Reihenfolge von z.B. Handlungen, Datenflüssen oder Entscheidungen übersichtlich darzustellen."

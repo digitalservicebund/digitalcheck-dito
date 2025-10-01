@@ -22,6 +22,7 @@ import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
 import InlineNotice from "~/components/InlineNotice";
+import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import SupportBanner from "~/components/SupportBanner";
 import { supportBanner } from "~/resources/content/shared/support-banner";
@@ -33,11 +34,6 @@ import {
   ROUTE_PROTOTYPE_DOCUMENTATION_META,
 } from "~/resources/staticRoutes";
 import useFeatureFlag from "~/utils/featureFlags";
-import constructMetaTitle from "~/utils/metaTitle";
-
-export function meta() {
-  return constructMetaTitle(ROUTE_PROTOTYPE_DOCUMENTATION.title);
-}
 
 const { intro } = prototypeDocumentation;
 
@@ -130,6 +126,7 @@ export default function Index() {
 
   return (
     <>
+      <MetaTitle prefix={ROUTE_PROTOTYPE_DOCUMENTATION.title} />
       <Hero title={intro.title} subtitle={intro.subtitle}>
         <div className="ds-stack ds-stack-16 mt-40 mb-20">
           {hints.map((hint) => (

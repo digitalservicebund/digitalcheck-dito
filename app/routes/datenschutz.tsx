@@ -1,17 +1,14 @@
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
+import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { privacy } from "~/resources/content/datenschutz";
 import { ROUTE_PRIVACY } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
-
-export function meta() {
-  return constructMetaTitle(ROUTE_PRIVACY.title);
-}
 
 export default function Index() {
   return (
     <>
+      <MetaTitle prefix={ROUTE_PRIVACY.title} />
       <Hero title={privacy.title} />
 
       <Container>

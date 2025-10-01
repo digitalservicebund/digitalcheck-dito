@@ -8,11 +8,11 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image";
 import InfoBox from "~/components/InfoBox";
+import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { support } from "~/resources/content/unterstuetzung";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
 import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 
 type Offering = {
@@ -43,10 +43,6 @@ const {
   subtitle,
   kontaktstelle,
 } = support;
-
-export function meta() {
-  return constructMetaTitle(ROUTE_SUPPORT.title);
-}
 
 function Testimonial() {
   return (
@@ -159,6 +155,7 @@ export default function Index() {
 
   return (
     <>
+      <MetaTitle prefix={ROUTE_SUPPORT.title} />
       <Hero title={title} subtitle={subtitle} />
 
       <div className="bg-blue-300">

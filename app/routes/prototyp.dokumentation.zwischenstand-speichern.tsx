@@ -5,18 +5,14 @@ import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Header from "~/components/Header";
 import InfoBox from "~/components/InfoBox.tsx";
+import MetaTitle from "~/components/Meta";
 import { features } from "~/resources/features";
 import {
   ROUTE_DOCUMENTATION_STATIC_PDF,
-  ROUTE_PROTOTYPE_DOCUMENTATION_RESULT,
+  ROUTE_PROTOTYPE_DOCUMENTATION_INTERMEDIATE_SAVE,
   ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_JSON,
 } from "~/resources/staticRoutes";
 import useFeatureFlag from "~/utils/featureFlags";
-import constructMetaTitle from "~/utils/metaTitle";
-
-export function meta() {
-  return constructMetaTitle(ROUTE_PROTOTYPE_DOCUMENTATION_RESULT.title);
-}
 
 export default function DocumentationResult() {
   const navigate = useNavigate();
@@ -30,6 +26,9 @@ export default function DocumentationResult() {
 
   return (
     <div className="bg-blue-100 py-40 print:pb-0">
+      <MetaTitle
+        prefix={ROUTE_PROTOTYPE_DOCUMENTATION_INTERMEDIATE_SAVE.title}
+      />
       <div className="px-16">
         <Container className="rounded-t-lg bg-blue-300 py-32">
           <div className="flex flex-col gap-16 sm:flex-row">

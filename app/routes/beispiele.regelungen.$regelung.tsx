@@ -7,13 +7,13 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InlineInfoList from "~/components/InlineInfoList";
 import InlineNotice from "~/components/InlineNotice";
+import MetaTitle from "~/components/Meta";
 import ParagraphList from "~/components/ParagraphList";
 import RichText from "~/components/RichText.tsx";
 import Tabs, { TabItem } from "~/components/Tabs";
 import VisualisationItem from "~/components/VisualisationItem";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
 import {
   Beispielvorhaben,
   fetchStrapiData,
@@ -24,10 +24,6 @@ import {
 } from "~/utils/strapiData.server";
 import { formatDate, gesetzStatusMap, slugify } from "~/utils/utilFunctions";
 import type { Route } from "./+types/beispiele.regelungen.$regelung";
-
-export function meta() {
-  return constructMetaTitle(ROUTE_REGELUNGEN.title);
-}
 
 // prinzipCoreFields are being used in paragraphFields and so need to be included
 const GET_REGELUNGSVORHABENS_BY_SLUG_QUERY = `
@@ -203,6 +199,7 @@ export default function Gesetz() {
 
   return (
     <>
+      <MetaTitle prefix={ROUTE_REGELUNGEN.title} />
       <Hero
         className="bg-gray-100"
         title={regelung.Titel}

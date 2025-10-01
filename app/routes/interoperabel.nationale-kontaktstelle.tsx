@@ -6,6 +6,7 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import ImageZoomable from "~/components/ImageZoomable";
 import InfoBox from "~/components/InfoBox";
+import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import Timeline from "~/components/Timeline";
@@ -16,11 +17,6 @@ import {
   ROUTE_METHODS_PRINCIPLES,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
-import constructMetaTitle from "~/utils/metaTitle";
-
-export function meta() {
-  return constructMetaTitle(ROUTE_INTEROPERABILITY_SPOC.title);
-}
 
 function SPoCTimelineItem({ children }: Readonly<{ children?: ReactNode }>) {
   return (
@@ -217,6 +213,7 @@ export default function SinglePointOfContact() {
 
   return (
     <>
+      <MetaTitle prefix={ROUTE_INTEROPERABILITY_SPOC.title} />
       <Hero title={spoc.headline}>
         <RichText markdown={spoc.content} className="ds-subhead ds-stack-24" />
       </Hero>

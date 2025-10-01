@@ -1,14 +1,10 @@
 import ContentWrapper from "~/components/ContentWrapper";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox.tsx";
+import MetaTitle from "~/components/Meta";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { examples } from "~/resources/content/beispiele";
 import { ROUTE_EXAMPLES } from "~/resources/staticRoutes";
-import constructMetaTitle from "~/utils/metaTitle";
-
-export function meta() {
-  return constructMetaTitle(ROUTE_EXAMPLES.title);
-}
 
 export default function Digitaltauglichkeit_index() {
   const tabsData: TabItem[] = examples.boxItems.map((item) => ({
@@ -28,6 +24,7 @@ export default function Digitaltauglichkeit_index() {
 
   return (
     <>
+      <MetaTitle prefix={ROUTE_EXAMPLES.title} />
       <Hero title={examples.title} subtitle={examples.subtitle} />
 
       <ContentWrapper>

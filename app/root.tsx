@@ -5,7 +5,6 @@ import {
   isRouteErrorResponse,
   Links,
   type LinksFunction,
-  Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
@@ -18,6 +17,7 @@ import {
 import Button from "~/components/Button";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
+import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import Footer from "~/layout/Footer";
 import PageHeader from "~/layout/PageHeader";
@@ -34,7 +34,6 @@ import trackClientSideError from "~/utils/trackClientSideError";
 import type { Route } from "./+types/root";
 import { PHProvider } from "./providers/PosthogProvider";
 import { notFound, serverError } from "./resources/content/error";
-import constructMetaTitle from "./utils/metaTitle";
 
 export function loader({ request }: Route.LoaderArgs) {
   const featureFlags = getFeatureFlags();
@@ -52,14 +51,6 @@ export function loader({ request }: Route.LoaderArgs) {
     featureFlags,
     posthogKey: POSTHOG_KEY,
   };
-}
-
-export function meta({ error }: Route.MetaArgs) {
-  // We're only returning the title here, so that all other routes can safely override it
-  // All other meta tags are set in the Layout component
-  // TODO: When updating to React 19, dropping the meta export entirely and moving to <meta> tags everywhere
-  // might be the recommended approach: https://github.com/remix-run/react-router/issues/13507#issuecomment-2856332055
-  return constructMetaTitle(error ? "Fehler" : undefined);
 }
 
 export const headers: HeadersFunction = () => ({
@@ -186,8 +177,8 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdMetadata) }}
         ></script>
+        <MetaTitle />
         {metaTitles}
-        <Meta />
         {trackingEnabled && (
           <script
             key={error ? "error-tracking" : "app-tracking"}
@@ -248,6 +239,7 @@ export function ErrorBoundary() {
 
   return (
     <main id="error" className="grow bg-blue-100">
+      <MetaTitle prefix="Fehler" />
       <Container>
         <div className="ds-stack ds-stack-8 mb-32">
           <span className="ds-label-01-bold">{errorStatus}</span>
