@@ -5,7 +5,6 @@ import {
   ROUTE_EXAMPLES_VISUALISATIONS,
   ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
   ROUTE_FUNDAMENTALS_NKR,
-  ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_IMPRINT,
   ROUTE_INTEROPERABILITY,
   ROUTE_INTEROPERABILITY_SPOC,
@@ -73,10 +72,10 @@ export const footer = {
     basics: {
       title: "Grundlagen",
       links: [
-        {
-          text: "Prinzipien der Digitaltauglichkeit",
-          url: ROUTE_FUNDAMENTALS_PRINCIPLES.url,
-        },
+        // {
+        //   text: "Prinzipien der Digitaltauglichkeit",
+        //   url: ROUTE_FUNDAMENTALS_PRINCIPLES.url,
+        // },
         {
           text: "EU-Interoperabilität",
           url: ROUTE_INTEROPERABILITY.url,

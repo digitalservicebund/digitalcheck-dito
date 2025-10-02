@@ -2,8 +2,8 @@ import {
   ROUTE_DOCUMENTATION_STATIC_WORD,
   ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
   ROUTE_FUNDAMENTALS_NKR,
-  ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_INTEROPERABILITY_SPOC,
+  ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_VISUALIZE,
   ROUTE_METHODS_VISUALIZE_FLOWCHARTS,
   ROUTE_VERSION_HISTORY,
@@ -88,12 +88,12 @@ export const news = {
         text: "14.08.2025",
       },
       content: dedent`
-        - Grundlagen-Seite Prinzipien
+        - Prinzipien-Seite
           - für jedes Prinzip ein Beispiel ergänzt
           - wenn sinnvoll: für Aspekte je ein Beispiel ergänzt
           - Kontextinfo “Warum ist dieses Beispiel gut“ näher an Regelungsbeispiel-Text platziert
         
-        [hier ansehen](${ROUTE_FUNDAMENTALS_PRINCIPLES.url})
+        [hier ansehen](${ROUTE_METHODS_PRINCIPLES.url})
       `,
     },
     {

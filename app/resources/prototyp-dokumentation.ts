@@ -1,4 +1,4 @@
-import { ROUTE_FUNDAMENTALS_PRINCIPLES } from "~/resources/staticRoutes";
+import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const prototypeDocumentation = {
@@ -113,7 +113,7 @@ export const prototypeDocumentation = {
         - Denken Sie Barrierefreiheit von Anfang an mit 
         - Stellen Sie eine nutzerfreundliche Umsetzung sicher 
         
-        <a href="${ROUTE_FUNDAMENTALS_PRINCIPLES.url}#digitale-angebote-f-r-alle-nutzbar-gestalten" target="_blank">Mehr Informationen</a>
+        <a href="${ROUTE_METHODS_PRINCIPLES.url}#digitale-angebote-f-r-alle-nutzbar-gestalten" target="_blank">Mehr Informationen</a>
       `,
       },
       question: "Ermöglicht das Regelungsvorhaben digitale Angebote für alle?",
@@ -144,7 +144,7 @@ export const prototypeDocumentation = {
         - Nutzen Sie bestehende technische Standards 
         - Suchen Sie frühzeitig den Austausch mit allen Beteiligten
         
-        <a href="${ROUTE_FUNDAMENTALS_PRINCIPLES.url}#datenwiederverwendung-ben-tigt-einheitliches-recht" target="_blank">Mehr Informationen</a>    
+        <a href="${ROUTE_METHODS_PRINCIPLES.url}#datenwiederverwendung-ben-tigt-einheitliches-recht" target="_blank">Mehr Informationen</a>    
       `,
       },
       question: "Ermöglicht das Regelungsvorhaben Datenwiederverwendung?",
@@ -173,7 +173,7 @@ export const prototypeDocumentation = {
         - Ermöglichen Sie die Nutzung etablierter, öffentlicher Lösungen 
         - Bevorzugen Sie Open-Source-Software und offene Spezifikationen
         
-        <a href="${ROUTE_FUNDAMENTALS_PRINCIPLES.url}#etablierte-technologien-erm-glichen-effiziente-umsetzung" target="_blank">Mehr Informationen</a>  
+        <a href="${ROUTE_METHODS_PRINCIPLES.url}#etablierte-technologien-erm-glichen-effiziente-umsetzung" target="_blank">Mehr Informationen</a>  
       `,
       },
       question:
@@ -203,7 +203,7 @@ export const prototypeDocumentation = {
           - Unterscheiden Sie zwischen genereller Regel, Ausnahmen und Ermessensspielräumen 
           - Schreiben Sie einfach, eindeutig und widerspruchsfrei
           
-          <a href="${ROUTE_FUNDAMENTALS_PRINCIPLES.url}#automatisierung-basiert-auf-eindeutigen-regelungen" target="_blank">Mehr Informationen</a>    
+          <a href="${ROUTE_METHODS_PRINCIPLES.url}#automatisierung-basiert-auf-eindeutigen-regelungen" target="_blank">Mehr Informationen</a>    
         `,
       },
       question:
@@ -239,7 +239,7 @@ export const prototypeDocumentation = {
             - Stellen Sie den Datenschutz sicher 
             - Gewährleisten Sie die Informationssicherheit
             
-            <a href="${ROUTE_FUNDAMENTALS_PRINCIPLES.url}#datenschutz-und-informationssicherheit-schaffen-vertrauen" target="_blank">Mehr Informationen</a>
+            <a href="${ROUTE_METHODS_PRINCIPLES.url}#datenschutz-und-informationssicherheit-schaffen-vertrauen" target="_blank">Mehr Informationen</a>
           `,
       },
       question:
