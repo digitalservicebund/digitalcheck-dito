@@ -60,6 +60,7 @@ const LinkList = ({
 export default function Footer() {
   return (
     <footer
+      id="footer"
       className="ds-label-03-reg flex w-full flex-row justify-center border-t-2 border-blue-300 leading-snug text-gray-900 print:hidden"
       aria-label={footer.navLabel}
     >

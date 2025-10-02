@@ -24,6 +24,9 @@ export const header = {
     text: "digitalcheck@digitalservice.bund.de",
     url: "mailto:digitalcheck@digitalservice.bund.de",
   },
+  noscript: {
+    text: "**Menü funktioniert nicht?** Erlauben Sie JavaScript in den Browsereinstellungen oder navigieren Sie über den [Footer](#footer).",
+  },
   items: [
     {
       isOrderedList: true,

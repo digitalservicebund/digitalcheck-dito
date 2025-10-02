@@ -3,6 +3,8 @@ import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
 import { useEffect, useRef, useState } from "react";
 import { Link, type UIMatch, useLocation, useMatches } from "react-router";
 import { twJoin } from "tailwind-merge";
+import Container from "~/components/Container";
+import RichText from "~/components/RichText";
 import { useResize } from "~/hooks/deviceHook";
 import DropdownMenu from "~/layout/DropdownMenu.tsx";
 import ProgressBar from "~/layout/ProgressBar";
@@ -193,6 +195,13 @@ const PageHeader = () => {
         >
           {header.items.map((item) => renderDropdownItem(item, "mobile"))}
         </nav>
+        <noscript>
+          <div className="bg-yellow-200">
+            <Container className="py-4">
+              <RichText markdown={header.noscript.text} />
+            </Container>
+          </div>
+        </noscript>
         {showProgressBar && <ProgressBar />}
       </header>
     </>
