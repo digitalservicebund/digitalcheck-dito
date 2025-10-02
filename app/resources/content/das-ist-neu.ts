@@ -6,6 +6,7 @@ import {
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_VISUALIZE,
   ROUTE_METHODS_VISUALIZE_FLOWCHARTS,
+  ROUTE_REGELUNGEN,
   ROUTE_VERSION_HISTORY,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
@@ -18,6 +19,12 @@ export const news = {
       Haben Sie Anregungen oder Wünsche? Kontaktieren Sie uns jederzeit gerne unter [0151/40 76 78 39](tel:+4915140767839) oder [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de).
   `,
   items: [
+    {
+      badge: {
+        text: "01.10.2025",
+      },
+      content: `Neues Beispiel ergänzt: SGB VI-Anpassungsgesetz (Einführung Fallmanagement DRV) [Hier ansehen](${ROUTE_REGELUNGEN.url}/sgb-vi-anpassungsgesetz-einfuehrung-fallmanagement-drv)`,
+    },
     {
       badge: {
         text: "12.09.2025",
