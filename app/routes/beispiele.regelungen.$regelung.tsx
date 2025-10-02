@@ -172,7 +172,7 @@ export default function Gesetz() {
           />
           {regelung.Digitalchecks.filter(
             ({ NKRStellungnahmeDCText }) => !!NKRStellungnahmeDCText,
-          ).map((digitalcheck, i) => (
+          ).map((digitalcheck) => (
             <div
               className="my-32 border-l-4 border-gray-400 pl-8 italic"
               key={digitalcheck.documentId}
