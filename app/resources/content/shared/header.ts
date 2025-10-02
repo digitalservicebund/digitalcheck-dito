@@ -122,8 +122,8 @@ export const header = {
       overlayContent: [
         {
           plausibleEventName: "Link+Alle+Hilfestellungen",
-          title: "Alle Hilfestellungen",
-          content: "Wir unterstützen Sie mit einer Bandbreite von Angeboten.",
+          title: "Individuelle Unterstützung für Ihr Vorhaben",
+          content: "Nutzen Sie unsere persönliche Hilfestellungen bei der Regelungsarbeit.",
           href: ROUTE_SUPPORT.url,
           activeBehavior: "noHighlight" as ActiveBehavior,
         },
