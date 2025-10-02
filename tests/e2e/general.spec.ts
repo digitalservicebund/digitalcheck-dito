@@ -6,10 +6,10 @@ import {
   ROUTE_DOCUMENTATION,
   ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_FUNDAMENTALS,
-  ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_IMPRINT,
   ROUTE_LANDING,
   ROUTE_METHODS,
+  ROUTE_METHODS_PRINCIPLES,
   ROUTE_PRECHECK,
   ROUTE_PRIVACY,
   ROUTES,
@@ -34,7 +34,7 @@ test.describe("test page titles", () => {
       }
       if (route.url === ROUTE_FUNDAMENTALS.url) {
         // this page does not exist and redirects to the sub-page
-        return `${ROUTE_FUNDAMENTALS_PRINCIPLES.title}${titleSuffix}`;
+        return `${ROUTE_METHODS_PRINCIPLES.title}${titleSuffix}`;
       }
 
       return `${route.title}${titleSuffix}`;
