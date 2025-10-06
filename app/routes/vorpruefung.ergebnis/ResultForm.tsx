@@ -67,9 +67,8 @@ export default function ResultForm({
 
   useEffect(() => {
     const resultContent: ResultContent = getContentForResult(answers, result);
-    const currentVorhabenTitle = (form.value("title") as string) || "";
-    const currentNegativeReasoning =
-      (form.value("negativeReasoning") as string) || "";
+    const currentVorhabenTitle = form.value("title") ?? "";
+    const currentNegativeReasoning = form.value("negativeReasoning") ?? "";
 
     const body = buildEmailBody(
       resultContent,
