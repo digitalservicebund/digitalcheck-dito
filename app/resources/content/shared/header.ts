@@ -123,7 +123,8 @@ export const header = {
         {
           plausibleEventName: "Link+Alle+Hilfestellungen",
           title: "Individuelle Unterstützung für Ihr Vorhaben",
-          content: "Nutzen Sie unsere persönliche Hilfestellungen bei der Regelungsarbeit.",
+          content:
+            "Nutzen Sie unsere persönliche Hilfestellungen bei der Regelungsarbeit.",
           href: ROUTE_SUPPORT.url,
           activeBehavior: "noHighlight" as ActiveBehavior,
         },

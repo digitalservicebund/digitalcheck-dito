@@ -1,6 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
-  createDocumentationData,
   createOrUpdateDocumentationStep,
   DATA_SCHEMA_VERSION,
   deleteDocumentationData,
@@ -44,47 +43,6 @@ const mockRemoveFromLocalStorage = vi.mocked(removeFromLocalStorage);
 describe("documentationDataService", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-  });
-
-  describe("createDocumentationData", () => {
-    it("should create empty documentation data by default", () => {
-      const result = createDocumentationData();
-
-      expect(result).toEqual({
-        version: DATA_SCHEMA_VERSION,
-        steps: [],
-      });
-      expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
-        {
-          version: DATA_SCHEMA_VERSION,
-          steps: [],
-        },
-        STORAGE_KEY,
-      );
-    });
-
-    it("should create documentation data with provided steps", () => {
-      const testSteps: DocumentationStep[] = [
-        {
-          id: "step1",
-          items: [{ key: "field1", value: "value1" }],
-        },
-      ];
-
-      const result = createDocumentationData(testSteps);
-
-      expect(result).toEqual({
-        version: DATA_SCHEMA_VERSION,
-        steps: testSteps,
-      });
-      expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
-        {
-          version: DATA_SCHEMA_VERSION,
-          steps: testSteps,
-        },
-        STORAGE_KEY,
-      );
-    });
   });
 
   describe("getDocumentationData", () => {
@@ -138,7 +96,6 @@ describe("documentationDataService", () => {
 
       createOrUpdateDocumentationStep("step1", testFields);
 
-      expect(mockWriteToLocalStorage).toHaveBeenCalledTimes(2);
       expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
         {
           version: DATA_SCHEMA_VERSION,

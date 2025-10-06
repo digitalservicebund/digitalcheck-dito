@@ -27,17 +27,6 @@ function writeToStorage(data: DocumentationData): void {
   writeVersionedDataToLocalStorage(data, STORAGE_KEY);
 }
 
-export function createDocumentationData(
-  steps: DocumentationStep[] = [],
-): DocumentationData {
-  const data: DocumentationData = {
-    version: DATA_SCHEMA_VERSION,
-    steps: steps,
-  };
-  writeToStorage(data);
-  return data;
-}
-
 export function getDocumentationData(): DocumentationData | null {
   return readVersionedDataFromLocalStorage<DocumentationData>(
     STORAGE_KEY,
@@ -55,7 +44,10 @@ export function createOrUpdateDocumentationStep(
 ) {
   let data = getDocumentationData();
   if (!data) {
-    data = createDocumentationData();
+    data = {
+      version: DATA_SCHEMA_VERSION,
+      steps: [],
+    };
   }
 
   const existingStepIndex = data.steps.findIndex((step) => step.id === stepId);
@@ -72,9 +64,7 @@ export function createOrUpdateDocumentationStep(
 
 export function getDocumentationStep(stepId: string): DocumentationStep | null {
   const data = getDocumentationData();
-  if (!data) return null;
-
-  return data.steps.find((step) => step.id === stepId) || null;
+  return data?.steps.find((step) => step.id === stepId) || null;
 }
 
 export function deleteDocumentationStep(stepId: string): boolean {
