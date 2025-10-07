@@ -1,0 +1,112 @@
+name: Run E2E and A11y Tests
+
+on:
+  workflow_call:
+    inputs:
+      nightlyTests:
+        required: false
+        type: boolean
+        description: "If enabled, extensive tests are executed sequentially with more devices and browsers."
+        default: false
+    secrets:
+      SLACK_WEBHOOK_URL:
+        required: true
+
+env:
+  PACKAGE_NAME: digitalcheck-dito
+
+permissions:
+  contents: read
+
+jobs:
+  run-e2e-a11y-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shardIndex: [1, 2, 3, 4]
+        shardTotal: [4]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: .node-version
+          cache: npm
+          cache-dependency-path: "**/package-lock.json"
+
+      - name: Cache npm dependencies
+        id: cache-npm-deps
+        uses: actions/cache@v4
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        if: steps.cache-npm-deps.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Cache Playwright dependencies
+        id: cache-playwright-deps
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-playwright-
+
+      - name: Install E2E & A11y test dependencies
+        if: inputs.nightlyTests || steps.cache-playwright-deps.outputs.cache-hit == 'false'
+        run: npx --yes playwright install --with-deps
+
+      - name: Collect Workflow Telemetry
+        if: inputs.nightlyTests
+        uses: catchpoint/workflow-telemetry-action@94c3c3d9567a0205de6da68a76c428ce4e769af1
+        with:
+          theme: dark
+
+      - name: Run nightly E2E tests
+        if: inputs.nightlyTests
+        id: e2e-nightly
+        run: npm run test:e2e-nightly -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+
+      - name: Run E2E tests
+        if: ${{ !inputs.nightlyTests }}
+        id: e2e
+        run: npm run test:e2e -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+
+      - uses: actions/upload-artifact@v4
+        if: failure() && (steps.e2e.outcome == 'failure' || steps.e2e-nightly.outcome == 'failure')
+        with:
+          name: playwright-e2e-blob-report-${{ matrix.shardIndex }}
+          path: blob-report
+          retention-days: 1
+
+      - name: Run nightly A11Y tests
+        if: inputs.nightlyTests
+        id: a11y-nightly
+        run: npm run test:a11y-nightly -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        env:
+          # Use a different port (from the one used with E2E tests) to workaround problem in CI/GitHub Actions,
+          # starting to occur with playwright/test 1.28.0:
+          # Error: http://localhost:4173 is already used ...
+          # See https://github.com/digitalservicebund/typescript-vite-application-template/actions/runs/3486985178/jobs/5834089375
+          VITE_PORT: 4183
+
+      - name: Run A11y tests
+        if: ${{ !inputs.nightlyTests }}
+        id: a11y
+        run: npm run test:a11y -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        env:
+          VITE_PORT: 4183
+
+      - uses: actions/upload-artifact@v4
+        if: failure() && (steps.a11y.outcome == 'failure' || steps.a11y-nightly.outcome == 'failure')
+        with:
+          name: playwright-a11y-blob-report-${{ matrix.shardIndex }}
+          path: blob-report
+          retention-days: 1

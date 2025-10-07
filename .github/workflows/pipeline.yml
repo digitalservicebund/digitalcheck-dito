@@ -33,10 +33,15 @@ jobs:
     secrets:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
+  run-e2e-a11y-tests:
+    uses: ./.github/workflows/run-e2e-a11y-tests.yml
+    secrets:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
   create-unified-test-report:
-    needs: [check-and-test]
-    # Merge reports only if some shards have failed
-    if: failure() && needs.check-and-test.result == 'failure'
+    needs: [run-e2e-a11y-tests]
+    # Merge reports only if E2E/A11y test shards have failed
+    if: failure() && needs.run-e2e-a11y-tests.result == 'failure'
     uses: ./.github/workflows/create-unified-test-report.yml
     permissions:
       contents: read
@@ -46,7 +51,7 @@ jobs:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   build-and-push-image:
-    needs: [vulnerability-scan, check-and-test]
+    needs: [vulnerability-scan, check-and-test, run-e2e-a11y-tests]
     runs-on: ubuntu-latest
     permissions:
       contents: read

@@ -12,13 +12,18 @@ permissions:
 jobs:
   check-and-test:
     uses: ./.github/workflows/check-and-test.yml
+    secrets: inherit
+
+  run-e2e-a11y-tests:
+    uses: ./.github/workflows/run-e2e-a11y-tests.yml
     with:
       nightlyTests: true
     secrets: inherit
+
   create-unified-test-report:
-    needs: [check-and-test]
-    # Merge reports only if some shards have failed
-    if: failure() && needs.check-and-test.result == 'failure'
+    needs: [run-e2e-a11y-tests]
+    # Merge reports only if E2E/A11y test shards have failed
+    if: failure() && needs.run-e2e-a11y-tests.result == 'failure'
     uses: ./.github/workflows/create-unified-test-report.yml
     permissions:
       contents: read

@@ -5,11 +5,6 @@ fileignoreconfig:
   ignore_detectors: [filename]
 - filename: app/root.tsx
   allowed_patterns: [posthogKey]
-- filename: .github/workflows/pipeline.yml
-  allowed_patterns:
-    - "@[a-z0-9]{40}"
-- filename: .github/workflows/scan.yml
-  ignore_detectors: [filecontent]
 - filename: app/utils/localStorageVersioned.ts
   allowed_patterns:
     - storageKey
@@ -27,7 +22,9 @@ allowed_patterns:
   - passen
   - Anpassungen
   - Pass\s # Allow "Pass " followed by a space
-  - digitalservicebund/[^@]+@[a-z0-9]{40} # Allow any digitalservicebund action with a 40 character hash
+  - \@[a-z0-9]{40} # Allow fixing action hashes
+  - "secrets: inherit"
+  - "key: ${{ runner.os }}"
 
 scopeconfig:
   - scope: node  # ignores files such as package-lock.json
