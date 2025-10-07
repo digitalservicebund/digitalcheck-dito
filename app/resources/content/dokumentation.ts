@@ -164,12 +164,7 @@ export const digitalDocumentation = {
     },
   },
   info: {
-    headline: "Informationen zum Regelungsvorhaben",
-    text: dedent`
-      Tragen Sie den Titel des Regelungsvorhaben bzw. den Namen der Regelung ein. 
-
-      Sie können nur an einer Dokumentation zur selben Zeit arbeiten. Parallele Vorgänge sind momentan nicht möglich. Schließen Sie eine Dokumentation bitte vollständig ab, bevor Sie die nächste beginnen. Ihre Daten werden nicht dauerhaft gespeichert.
-    `,
+    headline: "Tragen Sie den Titel Ihres Regelungsvorhaben ein",
     inputTitle: {
       label: "Titel des Regelungsvorhabens",
     },

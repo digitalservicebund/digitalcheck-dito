@@ -19,8 +19,8 @@ import { supportBanner } from "~/resources/content/shared/support-banner";
 import { features } from "~/resources/features";
 import {
   ROUTE_DOCUMENTATION,
-  ROUTE_DOCUMENTATION_INFO,
   ROUTE_DOCUMENTATION_STATIC_WORD,
+  ROUTE_DOCUMENTATION_TITLE,
   ROUTE_LANDING,
 } from "~/resources/staticRoutes";
 import useFeatureFlag from "~/utils/featureFlags";
@@ -35,7 +35,7 @@ function DigitalDocumentationIndex() {
       <Hero title={start.title} subtitle={start.subtitle}>
         <div className="mt-40 space-y-40">
           <ButtonContainer>
-            <Button href={ROUTE_DOCUMENTATION_INFO.url}>
+            <Button href={ROUTE_DOCUMENTATION_TITLE.url}>
               {start.buttonText}
             </Button>
             <Button href={ROUTE_LANDING.url} look={"tertiary"}>
@@ -88,7 +88,7 @@ function DigitalDocumentationIndex() {
 
       <section className="bg-blue-100 py-40">
         <div className="container space-y-40">
-          <Button href={ROUTE_DOCUMENTATION_INFO.url}>
+          <Button href={ROUTE_DOCUMENTATION_TITLE.url}>
             {start.buttonText}
           </Button>
 

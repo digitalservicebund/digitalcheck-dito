@@ -4,10 +4,10 @@ import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { principles } from "~/resources/content/shared/prinzipien";
 import {
-  ROUTE_DOCUMENTATION_INFO,
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_SEND,
   ROUTE_DOCUMENTATION_SUMMARY,
+  ROUTE_DOCUMENTATION_TITLE,
   ROUTES_DOCUMENTATION_ORDERED,
   ROUTES_DOCUMENTATION_PRINCIPLES,
 } from "~/resources/staticRoutes";
@@ -40,7 +40,7 @@ describe("DocumentationSummary", () => {
     version: "1",
     steps: [
       {
-        id: ROUTE_DOCUMENTATION_INFO.url,
+        id: ROUTE_DOCUMENTATION_TITLE.url,
         items: [{ key: "Titel", value: "Titel des Vorhabens" }],
       },
       {
@@ -119,7 +119,6 @@ describe("DocumentationSummary", () => {
   it("displays documentation data when available", () => {
     renderWithRouter();
 
-    // Check data for informationen-zum-regelungsvorhaben
     expect(screen.getByText("Titel")).toBeInTheDocument();
     expect(screen.getByText("Titel des Vorhabens")).toBeInTheDocument();
 

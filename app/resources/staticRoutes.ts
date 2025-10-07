@@ -99,9 +99,9 @@ export const ROUTE_DOCUMENTATION = createRoute(
   "dokumentation",
   "Dokumentation",
 );
-export const ROUTE_DOCUMENTATION_INFO = createRoute(
-  "informationen-zum-regelungsvorhaben",
-  "Informationen zum Regelungsvorhaben",
+export const ROUTE_DOCUMENTATION_TITLE = createRoute(
+  "regelungsvorhaben-titel",
+  "Regelungsvorhaben Titel",
   ROUTE_DOCUMENTATION,
 );
 export const ROUTE_DOCUMENTATION_PARTICIPATION = createRoute(
@@ -125,7 +125,7 @@ export const ROUTES_DOCUMENTATION_PRINCIPLES = Object.values(principles).map(
 );
 
 export const ROUTES_DOCUMENTATION_ORDERED_NAV = [
-  ROUTE_DOCUMENTATION_INFO,
+  ROUTE_DOCUMENTATION_TITLE,
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTES_DOCUMENTATION_PRINCIPLES,
   ROUTE_DOCUMENTATION_SUMMARY,
@@ -335,7 +335,7 @@ export const ROUTES: Route[] = [
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
   ROUTE_DOCUMENTATION,
-  ROUTE_DOCUMENTATION_INFO,
+  ROUTE_DOCUMENTATION_TITLE,
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ...ROUTES_DOCUMENTATION_PRINCIPLES,
   ROUTE_INTEROPERABILITY,
