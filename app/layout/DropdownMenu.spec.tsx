@@ -92,12 +92,13 @@ describe("DropdownMenu Component", () => {
     const button = screen.getByRole("button", { name: "Aria Menu" });
     expect(button).toHaveAttribute("aria-expanded", "false");
     expect(button).toHaveAttribute("aria-haspopup", "menu");
+    const controlId = encodeURIComponent("Aria Menu");
     expect(button).toHaveAttribute(
       "aria-controls",
-      "dropdown-Aria Menu-inhalt",
+      `dropdown-${controlId}-inhalt`,
     );
     expect(
-      document.getElementById("dropdown-Aria Menu-inhalt"),
+      document.getElementById(`dropdown-${controlId}-inhalt`),
     ).not.toBeInTheDocument();
   });
 
@@ -105,17 +106,18 @@ describe("DropdownMenu Component", () => {
     renderDropdown({ label: "Aria Menu", isExpanded: true });
     const button = screen.getByRole("button", { name: "Aria Menu" });
     expect(button).toHaveAttribute("aria-expanded", "true");
+    const controlId = encodeURIComponent("Aria Menu");
     expect(button).toHaveAttribute(
       "aria-controls",
-      "dropdown-Aria Menu-inhalt",
+      `dropdown-${controlId}-inhalt`,
     );
 
-    const panel = document.getElementById("dropdown-Aria Menu-inhalt");
+    const panel = document.getElementById(`dropdown-${controlId}-inhalt`);
     expect(panel).toBeInTheDocument();
     expect(panel).toBeVisible();
     expect(panel).toHaveAttribute(
       "aria-labelledby",
-      "dropdown-Aria Menu-button",
+      `dropdown-${controlId}-button`,
     );
 
     expect(
