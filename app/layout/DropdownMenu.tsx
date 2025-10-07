@@ -38,7 +38,7 @@ export default function DropdownMenu({
   plausibleEventName,
 }: Readonly<DropdownProps>) {
   const isMobile = variant === "mobile";
-  const elementId = `dropdown-${encodeURIComponent(label)}`;
+  const elementId = `dropdown-${encodeURIComponent(label)}-${variant}`;
   const plausibleTrackingClass = getPlausibleEventClassName(
     `Nav+Bar.${plausibleEventName}.Open+Close`,
   );
