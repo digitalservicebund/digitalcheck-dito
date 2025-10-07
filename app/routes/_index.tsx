@@ -7,6 +7,7 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
+import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { startseite } from "~/resources/content/startseite";
 
@@ -24,6 +25,7 @@ const {
 export default function Index() {
   return (
     <>
+      <MetaTitle />
       <Hero
         title={title}
         subtitle={subtitle}

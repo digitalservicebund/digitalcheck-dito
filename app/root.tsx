@@ -177,7 +177,6 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdMetadata) }}
         ></script>
-        <MetaTitle />
         {metaProperties}
         {trackingEnabled && (
           <script

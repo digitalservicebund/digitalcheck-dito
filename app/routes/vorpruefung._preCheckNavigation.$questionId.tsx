@@ -9,6 +9,7 @@ import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import InlineNotice from "~/components/InlineNotice";
+import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
@@ -21,7 +22,7 @@ import {
 import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/vorpruefung._preCheckNavigation.$questionId";
 
-const { questions, answerOptions, nextButton } = preCheck;
+const { questions, answerOptions, nextButton, preCheckName } = preCheck;
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const { answers } = await getAnswersFromCookie(request);
@@ -168,6 +169,7 @@ export default function Index() {
 
   return (
     <form {...form.getFormProps()}>
+      <MetaTitle prefix={`${preCheckName}: ${question.title}`} />
       <input type="hidden" name="questionId" value={question.id} />
       <fieldset className="ds-stack ds-stack-32 container pb-40">
         <span className="sr-only">{`${preCheck.srHint.before}${questionIdx + 1}${preCheck.srHint.between}${questions.length}`}</span>

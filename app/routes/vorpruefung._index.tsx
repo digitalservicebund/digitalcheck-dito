@@ -9,13 +9,18 @@ import Image from "~/components/Image";
 import ImageBox from "~/components/ImageBox";
 import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxList from "~/components/InfoBoxList";
+import MetaTitle from "~/components/Meta";
 import SupportBanner from "~/components/SupportBanner";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { PRE_CHECK_START_BUTTON_ID } from "~/resources/constants";
 import { general } from "~/resources/content/shared/general";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { ROUTE_LANDING, ROUTE_PRECHECK_INFO } from "~/resources/staticRoutes";
+import {
+  ROUTE_LANDING,
+  ROUTE_PRECHECK,
+  ROUTE_PRECHECK_INFO,
+} from "~/resources/staticRoutes";
 
 export default function Index() {
   const tabsData: TabItem[] = [
@@ -84,6 +89,7 @@ export default function Index() {
 
   return (
     <>
+      <MetaTitle prefix={ROUTE_PRECHECK.title} />
       <Hero title={preCheck.start.title} subtitle={preCheck.start.subtitle}>
         <div className="ds-stack ds-stack-16 mb-40">
           {preCheck.start.hints.map((hint) => (

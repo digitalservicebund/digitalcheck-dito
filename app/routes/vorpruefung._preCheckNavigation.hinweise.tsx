@@ -3,17 +3,19 @@ import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import InlineNotice from "~/components/InlineNotice";
+import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { ROUTE_PRECHECK } from "~/resources/staticRoutes";
 
-const { questions, generalInfo } = preCheck;
+const { questions, generalInfo, preCheckName } = preCheck;
 const { headline, text, nextButton, hint } = generalInfo;
 
 export default function GeneralInfo() {
   return (
     <Container className="pt-0">
+      <MetaTitle prefix={`${preCheckName}: ${headline}`} />
       <Heading
         text={headline}
         tagName="h1"

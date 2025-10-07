@@ -9,6 +9,7 @@ import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questi
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const preCheck = {
+  preCheckName: "Vorprüfung",
   start: {
     title: "Vorprüfung: Digitalbezug einschätzen",
     subtitle:
