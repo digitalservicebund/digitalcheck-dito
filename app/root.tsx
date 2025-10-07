@@ -46,8 +46,8 @@ export function loader({ request }: Route.LoaderArgs) {
 
   return {
     BASE_URL,
-    trackingEnabled: true,
-    posthogEnabled: false,
+    trackingEnabled: process.env.TRACKING_ENABLED === "true",
+    posthogEnabled: process.env.POSTHOG_ENABLED === "true",
     featureFlags,
     posthogKey: POSTHOG_KEY,
   };
