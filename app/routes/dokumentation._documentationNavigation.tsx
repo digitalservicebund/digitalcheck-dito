@@ -61,7 +61,7 @@ export default function LayoutWithDocumentationNavigation() {
   );
 
   return (
-    <div className="parent-bg-blue flex justify-center bg-blue-100 pt-32">
+    <div className="parent-bg-blue my-80 flex justify-center bg-blue-100">
       <div className="hidden flex-none pl-32 lg:block">
         <Nav
           activeElementUrl={currentUrl}
@@ -90,9 +90,9 @@ export default function LayoutWithDocumentationNavigation() {
             elements={ROUTES_DOCUMENTATION_ORDERED}
           />
         </Container>
-        <Container className="pt-0">
+        <Container className="space-y-80 pt-0">
           <Outlet context={useOutletContext()} />
-          <ButtonContainer className="pt-40">
+          <ButtonContainer>
             {nextRoute && (
               <Button href={nextRoute.url}>{general.buttonNext.text}</Button>
             )}
