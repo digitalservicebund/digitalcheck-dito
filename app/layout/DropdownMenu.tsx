@@ -10,7 +10,7 @@ import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import twMerge from "~/utils/tailwindMerge";
 
 export type DropdownProps = {
-  label?: string;
+  label: string;
   className?: string;
   data: DropdownItemProps[];
   hasSupport?: boolean;
@@ -38,7 +38,7 @@ export default function DropdownMenu({
   plausibleEventName,
 }: Readonly<DropdownProps>) {
   const isMobile = variant === "mobile";
-  const elementId = `dropdown-${label}`;
+  const elementId = `dropdown-${encodeURIComponent(label)}`;
   const plausibleTrackingClass = getPlausibleEventClassName(
     `Nav+Bar.${plausibleEventName}.Open+Close`,
   );
