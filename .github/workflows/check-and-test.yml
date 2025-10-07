@@ -8,6 +8,10 @@ on:
         type: boolean
         description: "If enabled, extensive tests are executed sequentially with more devices and browsers."
         default: false
+    outputs:
+      e2e-a11y-tests-failed:
+        description: "Whether the E2E and A11y tests failed"
+        value: ${{ jobs.run-e2e-a11y-tests.result == 'failure' }}
     secrets:
       SLACK_WEBHOOK_URL:
         required: true
