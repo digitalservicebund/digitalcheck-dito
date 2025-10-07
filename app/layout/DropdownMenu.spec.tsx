@@ -95,10 +95,10 @@ describe("DropdownMenu Component", () => {
     const controlId = encodeURIComponent("Aria Menu");
     expect(button).toHaveAttribute(
       "aria-controls",
-      `dropdown-${controlId}-inhalt`,
+      `dropdown-${controlId}-desktop-inhalt`,
     );
     expect(
-      document.getElementById(`dropdown-${controlId}-inhalt`),
+      document.getElementById(`dropdown-${controlId}-desktop-inhalt`),
     ).not.toBeInTheDocument();
   });
 
@@ -109,15 +109,17 @@ describe("DropdownMenu Component", () => {
     const controlId = encodeURIComponent("Aria Menu");
     expect(button).toHaveAttribute(
       "aria-controls",
-      `dropdown-${controlId}-inhalt`,
+      `dropdown-${controlId}-desktop-inhalt`,
     );
 
-    const panel = document.getElementById(`dropdown-${controlId}-inhalt`);
+    const panel = document.getElementById(
+      `dropdown-${controlId}-desktop-inhalt`,
+    );
     expect(panel).toBeInTheDocument();
     expect(panel).toBeVisible();
     expect(panel).toHaveAttribute(
       "aria-labelledby",
-      `dropdown-${controlId}-button`,
+      `dropdown-${controlId}-desktop-button`,
     );
 
     expect(
