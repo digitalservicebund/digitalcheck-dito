@@ -5,6 +5,7 @@ import {
   ROUTE_EXAMPLES_VISUALISATIONS,
   ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
   ROUTE_FUNDAMENTALS_NKR,
+  ROUTE_FUNDAMENTALS_PRINCIPLES,
   ROUTE_INTEROPERABILITY,
   ROUTE_INTEROPERABILITY_SPOC,
   ROUTE_METHODS,
@@ -82,13 +83,13 @@ export const header = {
       plausibleEventName: "Grundlagen",
       text: "Grundlagen",
       overlayContent: [
-        // {
-        //   plausibleEventName: "Link+Prinzipien",
-        //   title: "Prinzipien für digitaltaugliche Gesetzgebung",
-        //   content:
-        //     "Auf diesen Prinzipien basieren die Instrumente des Digitalcheck.",
-        //   href: ROUTE_FUNDAMENTALS_PRINCIPLES.url,
-        // },
+        {
+          plausibleEventName: "Link+Prinzipien",
+          title: "Prinzipien für digitaltaugliche Gesetzgebung",
+          content:
+            "Auf diesen Prinzipien basieren die Instrumente des Digitalcheck.",
+          href: ROUTE_FUNDAMENTALS_PRINCIPLES.url,
+        },
         {
           plausibleEventName: "Link+Interoperabilität",
           title: "EU-Interoperabilität",
