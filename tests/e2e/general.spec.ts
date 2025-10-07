@@ -126,13 +126,15 @@ test.describe("test links", () => {
 });
 
 test.describe("test progress bar", () => {
-  const routesWithProgressBar = ROUTES.filter(
+  const routesWithProgressBarOrRedirects = ROUTES.filter(
     (route) =>
       route.url.startsWith(ROUTE_PRECHECK.url) ||
       route.url.startsWith(ROUTE_METHODS.url) ||
-      route.url.startsWith(ROUTE_DOCUMENTATION.url),
+      route.url.startsWith(ROUTE_DOCUMENTATION.url) ||
+      route.url === ROUTE_FUNDAMENTALS_PRINCIPLES.url ||
+      route.url === ROUTE_FUNDAMENTALS.url,
   );
-  routesWithProgressBar.forEach((route) => {
+  routesWithProgressBarOrRedirects.forEach((route) => {
     test(`${route.title} has progress bar`, async ({ page }) => {
       await page.goto(route.url);
       await expect(page.getByLabel("Digitalcheck-Fortschritt")).toBeVisible();
@@ -140,7 +142,7 @@ test.describe("test progress bar", () => {
   });
 
   ROUTES.forEach((route) => {
-    if (routesWithProgressBar.includes(route)) {
+    if (routesWithProgressBarOrRedirects.includes(route)) {
       return;
     }
     test(`${route.url} has no progress bar`, async ({ page }) => {
