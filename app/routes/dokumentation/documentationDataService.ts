@@ -11,12 +11,11 @@ export type DocumentationData = {
 
 export type DocumentationStep = {
   id: string;
-  items: DocumentationField[];
+  items: DocumentationField;
 };
 
 export type DocumentationField = {
-  key: string;
-  value: string;
+  [key: string]: string | DocumentationField;
 };
 
 export const DATA_SCHEMA_VERSION = "1";
@@ -37,9 +36,12 @@ export function deleteDocumentationData(): void {
   removeFromLocalStorage(STORAGE_KEY);
 }
 
+/**
+ * @param stepId url of the documentation step
+ */
 export function createOrUpdateDocumentationStep(
   stepId: string,
-  items: DocumentationField[],
+  items: DocumentationField,
 ) {
   let data = getDocumentationData();
   if (!data) {

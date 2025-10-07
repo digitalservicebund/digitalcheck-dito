@@ -196,7 +196,10 @@ export const digitalDocumentation = {
     textFieldResultsLabel: "Eingearbeitete Erkenntnisse:",
   },
   principlePages: {
-    radioOptions: ["Ja", "Teilweise", "Nein", "Nicht relevant"],
+    badge: "Prinzipien",
+    moreButton: "Mehr dazu",
+    moreInfoButton: "Mehr erfahren",
+    radioOptions: ["Ja, gänzlich oder Teilweise", "Nein", "Nicht relevant"],
     textFieldExplanationLabel: "Erklärung:",
     textFieldNegativeReasoningLabel: "Begründung:",
     buttonAdd: "Weitere Referenz hinzufügen",
@@ -211,6 +214,61 @@ export const digitalDocumentation = {
       explanation: {
         label: "Erklärung:",
       },
+    },
+    positivePrinciple: {
+      title: "Erläuterung angeben",
+      description: dedent`
+        Bitte wählen Sie, auf welchen **Schwerpunkt** dieses Prinzips Ihr Vorhaben zutrifft.
+        Zu jedem Schwerpunkt finden Sie eine kurze Beschreibung, wenn Sie ihn auswählen.
+        Falls keiner zutrifft, wählen Sie **„Eigene Erklärung hinzufügen“**.
+        
+        Sie können Ihre Angaben als Word Dokument exportieren und später in der Word Datei Ihre Dokumentation fortführen.`,
+      actions: {
+        addOwnExplanation: {
+          title: "Eigene Erklärung hinzufügen",
+        },
+        saveState: {
+          title: "Zwischenstand speichern (.docx)",
+        },
+      },
+    },
+    storageHint: {
+      title: "Ihre eingegebenen Angaben werden in der Session gespeichert.",
+      content:
+        "Sie können Ihre Angaben als Word Dokument herunterladen und zu einem späteren Zeitpunkt vervollständigen.",
+    },
+    explanationFields: {
+      title: "Ihre Erläuterung",
+      ownExplanationTitle: "Eigener Punkt",
+      ownExplanationDescription:
+        "Beschreiben Sie, wie Sie in Ihren Vorhaben das Prinzip “Digitale Angebote für alle nutzbar gestalten” umgesetzt haben.",
+      paragraphInput: {
+        label: "Paragrafen",
+        description:
+          "Paragrafen, in denen sich das Regelungsvorhaben auf den ausgewählten Schwerpunkt bezieht.",
+      },
+      reasoningInput: {
+        label: "Begründung mit Textreferenz (empfohlen für bessere Zuordnung)",
+        placeholder:
+          "Begründung und/oder Ausschnitt aus Ihrer Regelung als Kopie (Paragraf)",
+      },
+      deleteButton: "Referenz löschen",
+    },
+    dialog: {
+      deleteButton: "Löschen bestätigen",
+      cancelButton: "Abbrechen",
+      title: "Referenz löschen",
+      description: dedent`
+        Die Referenz wird entfernt und das Eingabefeld zurückgesetzt.
+        
+        Sie können jederzeit eine neue Erläuterung eintragen.`,
+    },
+    errors: {
+      answerError: "Bitte wählen Sie eine Option aus.",
+      reasoningError: "Bitte geben Sie mindestens eine Erläuterung an.",
+      errorHint: "Bitte beachten Sie den oberen Hinweis.",
+      paragraphsError: "Bitte geben sie einen Paragrafen an.",
+      reasonError: "Bitte geben sie eine Begründung an.",
     },
   },
   summary: {

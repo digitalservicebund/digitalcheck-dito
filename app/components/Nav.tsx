@@ -108,12 +108,12 @@ function NavItem({
     "focus-visible:outline-4 focus-visible:-outline-offset-4 focus-visible:outline-blue-800";
 
   const activeClasses =
-    "ds-label-02-bold pointer-events-none border-l-blue-800 bg-blue-300";
+    "ds-label-02-bold pointer-events-none border-l-blue-800 bg-blue-400";
 
   const activeErrorClasses =
     "ds-label-02-bold pointer-events-none border-l-yellow-800 bg-yellow-300";
 
-  const activeOpenClasses = "pointer-events-none border-l-blue-300 bg-blue-300";
+  const activeOpenClasses = "pointer-events-none border-l-blue-400 bg-blue-400";
 
   const activeOpenErrorClasses =
     "pointer-events-none border-l-yellow-200 bg-yellow-200";

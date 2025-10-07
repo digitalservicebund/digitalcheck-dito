@@ -136,7 +136,7 @@ function getIconForReason(reason: Reason) {
     case "no":
       return (
         <RemoveCircleOutline
-          className={twJoin(defaultClasses, "fill-[#8E001B]")}
+          className={twJoin(defaultClasses, "fill-ds-error")}
         ></RemoveCircleOutline>
       );
     case "unsure":

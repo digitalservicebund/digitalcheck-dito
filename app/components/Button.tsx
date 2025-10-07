@@ -15,7 +15,9 @@ type Props = {
   iconRight?: ReactElementWithClassname;
   fullWidth?: boolean;
   prefetch?: "intent" | "viewport" | "render";
-  onClickCallback?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+  onClickCallback?: (
+    event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>,
+  ) => void;
   plausibleEventName?: string;
 };
 
@@ -60,7 +62,10 @@ function Button({
     props.className,
   );
   if (look === "link") {
-    buttonClasses = "text-link inline-flex items-center";
+    buttonClasses = twMerge(
+      "text-link inline-flex items-center text-left space-x-8",
+      props.className,
+    );
   }
 
   const textSpan = text ? <span className="ds-button-label">{text}</span> : "";
@@ -80,7 +85,9 @@ function Button({
     }
   };
 
-  const onClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+  const onClick = (
+    event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>,
+  ) => {
     if (onClickCallback) {
       onClickCallback(event);
     }
@@ -91,7 +98,7 @@ function Button({
     const isDownload = !!ext;
     const isExternal = "target" in props && props.target === "_blank";
     iconRight = isExternal ? (
-      <OpenInNewIcon className="scale-75 fill-blue-800" />
+      <OpenInNewIcon className="-ml-8 scale-75 fill-blue-800" />
     ) : (
       iconRight
     );
@@ -121,6 +128,7 @@ function Button({
       className={buttonClasses}
       id={id}
       data-testid={id}
+      onClick={onClick}
     >
       {iconLeft} {children ? childrenSpan : textSpan} {iconRight}
     </button>

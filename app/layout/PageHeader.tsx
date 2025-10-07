@@ -134,7 +134,7 @@ const PageHeader = () => {
     <>
       {showOverlay && (
         <div
-          className="fixed inset-0 z-20 bg-[#282828] opacity-63"
+          className="fixed inset-0 z-20 bg-black/60"
           onClick={closeOpenDropdowns}
           aria-hidden="true"
         />

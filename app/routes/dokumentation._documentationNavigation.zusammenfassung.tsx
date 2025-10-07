@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
@@ -12,85 +12,96 @@ import { principles } from "~/resources/content/shared/prinzipien";
 import {
   ROUTE_DOCUMENTATION_SEND,
   ROUTE_DOCUMENTATION_SUMMARY,
-  ROUTES_DOCUMENTATION_ORDERED,
 } from "~/resources/staticRoutes";
+import { NavigationContext } from "./dokumentation._documentationNavigation";
 import {
-  type DocumentationData,
-  getDocumentationData,
-} from "~/routes/dokumentation/documentationDataService";
+  DocumentationField,
+  getDocumentationStep,
+} from "./dokumentation/documentationDataService";
 
 const { summary } = digitalDocumentation;
 
+const getAnswers = (field: DocumentationField) =>
+  Object.entries(field).map(([key, value], i) => (
+    <div key={`${key}-${i}`}>
+      <span className="block font-bold">{key}</span>
+      <span className="block">
+        {typeof value === "object" ? getAnswers(value) : value}
+      </span>
+    </div>
+  ));
+
 export default function DocumentationSummary() {
-  const [documentationData, setDocumentationData] =
-    useState<DocumentationData | null>(null);
+  const { routes } = useOutletContext<NavigationContext>();
+
+  const [items, setItems] = useState<InfoBoxProps[]>([]);
 
   useEffect(() => {
-    setDocumentationData(getDocumentationData());
-  }, []);
+    setItems(
+      routes
+        .flat()
+        .filter(
+          (route) =>
+            route.url !== ROUTE_DOCUMENTATION_SUMMARY.url &&
+            route.url !== ROUTE_DOCUMENTATION_SEND.url,
+        )
+        .map((route) => {
+          const documentationStep = getDocumentationStep(route.url);
 
-  const items: InfoBoxProps[] = ROUTES_DOCUMENTATION_ORDERED.filter(
-    (route) =>
-      route.url !== ROUTE_DOCUMENTATION_SUMMARY.url &&
-      route.url !== ROUTE_DOCUMENTATION_SEND.url,
-  ).map((route) => {
-    const documentationStep =
-      documentationData?.steps.find((step) => step.id === route.url) || null;
-    const principle = principles.find((principle) =>
-      route.url.endsWith(principle.id),
+          // TODO: get principle from strapi data
+          const principle = principles.find((principle) =>
+            route.url.endsWith(principle.id),
+          );
+
+          return {
+            identifier: route.url,
+            testId: route.url,
+            badge: principle && {
+              text: summary.principleBadge,
+              principleNumber: principle.number as PrincipleNumber,
+            },
+            heading: {
+              text: route.title,
+            },
+            children: (
+              <div className="space-y-28">
+                {documentationStep?.items ? (
+                  <>
+                    {getAnswers(documentationStep.items)}
+                    <Link
+                      to={route.url}
+                      className="text-link"
+                      aria-label={`${route.title} ${summary.buttonEdit.ariaLabelSuffix}`}
+                    >
+                      {summary.buttonEdit.text}
+                    </Link>
+                  </>
+                ) : (
+                  <InlineNotice
+                    look="warning"
+                    heading={
+                      <Heading tagName="h4">
+                        Sie haben diesen Punkt noch nicht bearbeitet.
+                      </Heading>
+                    }
+                  >
+                    <Link
+                      to={route.url}
+                      className="text-link"
+                      aria-label={`${route.title} ${summary.buttonEditNow.ariaLabelSuffix}`}
+                    >
+                      {summary.buttonEditNow.text}
+                    </Link>
+                  </InlineNotice>
+                )}
+              </div>
+            ),
+            look: "highlight",
+            className: "bg-white",
+          };
+        }),
     );
-    return {
-      identifier: route.url,
-      testId: route.url,
-      badge: principle && {
-        text: summary.principleBadge,
-        principleNumber: principle.number as PrincipleNumber,
-      },
-      heading: {
-        text: principle ? principle.headline : route.title,
-      },
-      children: (
-        <div className="space-y-28">
-          {documentationStep?.items.length ? (
-            <>
-              {documentationStep.items.map((item, index) => (
-                <div key={`${documentationStep.id}-${index}`}>
-                  <p className="font-bold">{item.key}</p>
-                  <p>{item.value}</p>
-                </div>
-              ))}
-              <Link
-                to={route.url}
-                className="text-link"
-                aria-label={`${route.title} ${summary.buttonEdit.ariaLabelSuffix}`}
-              >
-                {summary.buttonEdit.text}
-              </Link>
-            </>
-          ) : (
-            <InlineNotice
-              look="warning"
-              heading={
-                <Heading tagName="h4">
-                  Sie haben diesen Punkt noch nicht bearbeitet.
-                </Heading>
-              }
-            >
-              <Link
-                to={route.url}
-                className="text-link"
-                aria-label={`${route.title} ${summary.buttonEditNow.ariaLabelSuffix}`}
-              >
-                {summary.buttonEditNow.text}
-              </Link>
-            </InlineNotice>
-          )}
-        </div>
-      ),
-      look: "highlight",
-      className: "bg-white",
-    };
-  });
+  }, [routes]);
 
   return (
     <>
