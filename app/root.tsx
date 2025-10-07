@@ -32,6 +32,7 @@ import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
 import trackClientSideError from "~/utils/trackClientSideError";
 import type { Route } from "./+types/root";
+import { PHProvider } from "./providers/PosthogProvider";
 import { notFound, serverError } from "./resources/content/error";
 
 export function loader({ request }: Route.LoaderArgs) {
@@ -189,19 +190,21 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
         <Links />
       </head>
       <body className="flex min-h-screen flex-col">
-        <ScrollAndFocus />
-        <PageHeader />
-        {children}
-        <Footer />
-        <span
-          aria-hidden="true"
-          className="hidden"
-          id={A11Y_MESSAGE_NEW_WINDOW}
-        >
-          {general.a11yMessageNewWindow}
-        </span>
-        <ScrollRestoration nonce={nonce} />
-        <Scripts nonce={nonce} />
+        <PHProvider posthogEnabled={posthogEnabled} posthogKey={posthogKey}>
+          <ScrollAndFocus />
+          <PageHeader />
+          {children}
+          <Footer />
+          <span
+            aria-hidden="true"
+            className="hidden"
+            id={A11Y_MESSAGE_NEW_WINDOW}
+          >
+            {general.a11yMessageNewWindow}
+          </span>
+          <ScrollRestoration nonce={nonce} />
+          <Scripts nonce={nonce} />
+        </PHProvider>
       </body>
     </html>
   );
