@@ -35,8 +35,8 @@ jobs:
 
   create-unified-test-report:
     needs: [check-and-test]
-    # Merge reports only if E2E/A11y test shards have failed
-    if: failure() && needs.check-and-test.outputs.e2e-a11y-tests-failed == 'true'
+    # Merge reports only if some shards have failed
+    if: failure() && needs.check-and-test.result == 'failure'
     uses: ./.github/workflows/create-unified-test-report.yml
     permissions:
       contents: read
