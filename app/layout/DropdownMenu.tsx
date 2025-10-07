@@ -108,7 +108,7 @@ export default function DropdownMenu({
               <div className="ds-label-02-reg px-16 pt-8 pb-16 text-gray-900 lg:px-8 lg:pt-16 lg:pb-24">
                 {isMobile ? header.contactTel.msgMobile : header.contactTel.msg}
                 <a
-                  href={`tel:${header.contactTel.number}`}
+                  href={`tel:${header.contactTel.number.replace(/\s/g, "")}`}
                   className="plausible-event-name=Nav+Bar.Kontakt+Support+Layer.Link+Telefon ds-link-02-reg ml-8"
                 >
                   {header.contactTel.number}
