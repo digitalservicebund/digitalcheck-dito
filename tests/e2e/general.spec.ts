@@ -23,8 +23,7 @@ test.describe("test page titles", () => {
       if (route.url === ROUTE_LANDING.url)
         return "Digitalcheck: Digitaltaugliche Regelungen erarbeiten";
       if (route.url.startsWith(ROUTE_PRECHECK.url))
-        // All pages in the pre-check flow have the same page title
-        return `${ROUTE_PRECHECK.title}${titleSuffix}`;
+        return new RegExp(`^Vorprüfung: .*${titleSuffix}$`);
       if (
         route.url.startsWith(ROUTE_EXAMPLES_PRINCIPLES.url) &&
         !route.url.endsWith(ROUTE_EXAMPLES_PRINCIPLES.url)
