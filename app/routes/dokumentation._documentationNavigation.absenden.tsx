@@ -1,12 +1,17 @@
+import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_SEND } from "~/resources/staticRoutes";
+import { NavigationContext } from "./dokumentation._documentationNavigation";
+import DocumentationActions from "./dokumentation/DocumentationActions";
 
 const { send } = digitalDocumentation;
 
 export default function DocumentationSend() {
+  const { previousRoute } = useOutletContext<NavigationContext>();
+
   return (
     <>
       <MetaTitle prefix={ROUTE_DOCUMENTATION_SEND.title} />
@@ -17,6 +22,8 @@ export default function DocumentationSend() {
         className="mb-16"
       />
       <RichText markdown={send.text} className="mb-40" />
+
+      <DocumentationActions previousRoute={previousRoute.url} />
     </>
   );
 }

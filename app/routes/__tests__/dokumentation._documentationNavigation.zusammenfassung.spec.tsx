@@ -98,7 +98,11 @@ describe("DocumentationSummary", () => {
       (stepId: string) =>
         mockDocumentationData.steps.find(({ id }) => id === stepId) ?? null,
     );
-    mockUseOutletContext.mockReturnValue({ routes: allRoutes });
+    mockUseOutletContext.mockReturnValue({
+      routes: allRoutes,
+      previousRoute: { url: "prev" },
+      nextRoute: { url: "next" },
+    });
   });
 
   afterEach(() => {

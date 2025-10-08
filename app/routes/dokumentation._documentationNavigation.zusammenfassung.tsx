@@ -14,6 +14,7 @@ import {
   ROUTE_DOCUMENTATION_SUMMARY,
 } from "~/resources/staticRoutes";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
+import DocumentationActions from "./dokumentation/DocumentationActions";
 import {
   DocumentationField,
   getDocumentationStep,
@@ -36,7 +37,8 @@ const getAnswers = (field: DocumentationField) =>
   ));
 
 export default function DocumentationSummary() {
-  const { routes } = useOutletContext<NavigationContext>();
+  const { routes, previousRoute, nextRoute } =
+    useOutletContext<NavigationContext>();
 
   const [items, setItems] = useState<InfoBoxProps[]>([]);
 
@@ -118,6 +120,11 @@ export default function DocumentationSummary() {
       />
       <RichText markdown={summary.text} />
       <InfoBoxList className="space-y-40" items={items} />
+
+      <DocumentationActions
+        previousRoute={previousRoute.url}
+        nextRoute={nextRoute.url}
+      />
     </>
   );
 }

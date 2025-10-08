@@ -4,8 +4,8 @@ import {
   RemoveCircleOutlineOutlined,
 } from "@digitalservicebund/icons";
 import { FormScope, useField, useFieldArray, useForm } from "@rvf/react-router";
-import { useEffect } from "react";
-import { useLoaderData, useOutletContext } from "react-router";
+import { useCallback, useEffect } from "react";
+import { useLoaderData, useNavigate, useOutletContext } from "react-router";
 import { z } from "zod";
 import Badge, { BadgeProps } from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
@@ -27,6 +27,7 @@ import { fetchStrapiData } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 import type { Route } from "./+types/dokumentation._documentationNavigation.$principleId";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
+import DocumentationActions from "./dokumentation/DocumentationActions";
 import { getDocumentationStep } from "./dokumentation/documentationDataService";
 import { useDataSync } from "./dokumentation/documentationDataServiceHook";
 
@@ -65,7 +66,7 @@ type Reasoning = z.output<typeof reasoning>;
 
 const positiveAnswerSchema = z.object({
   answer: z.literal(principlePages.radioOptions[0]),
-  reasoning: z.array(reasoning, {
+  reasoning: z.array(reasoning.optional(), {
     error: principlePages.errors.reasoningError,
   }),
 });
@@ -92,17 +93,19 @@ const schema = z
     }),
   );
 
+type Aspekt = {
+  Titel: string;
+  Kurzbezeichnung: string;
+  Beschreibung: string;
+};
+
 type Prinzip = {
   Name: string;
   URLBezeichnung: string;
   documentId: string;
   Beschreibung: Node[];
   Nummer: BadgeProps["principleNumber"];
-  Aspekte: {
-    Titel: string;
-    Kurzbezeichnung: string;
-    Beschreibung: string;
-  }[];
+  Aspekte: Aspekt[];
 };
 
 const GET_PRINZIP_QUERY = `
@@ -169,7 +172,6 @@ function Reasoning({
   removeOwnReasoning,
 }: Readonly<ReasoningProps>) {
   const aspectField = useField(aspectScope);
-
   return (
     <CheckboxWithExpandableArea
       scope={checkboxScope}
@@ -235,6 +237,7 @@ function Reasoning({
                   onClick={() => {
                     closeArea();
                     closeDialog();
+
                     if (removeOwnReasoning) removeOwnReasoning();
                   }}
                 >
@@ -276,6 +279,15 @@ function PositiveAnswerFormElements({
       whenSubmitted: "onChange",
     },
   });
+
+  const remove = useCallback(
+    async (index: number, aspekt?: Aspekt) => {
+      if (aspekt)
+        await reasoningField.replace(index, { aspect: slugify(aspekt.Titel) });
+      else await reasoningField.remove(index);
+    },
+    [reasoningField],
+  );
 
   return (
     <>
@@ -320,9 +332,7 @@ function PositiveAnswerFormElements({
             checkboxScope={item.scope("checkbox")}
             paragraphScope={item.scope("paragraphs")}
             reasonScope={item.scope("reason")}
-            removeOwnReasoning={
-              aspekt ? undefined : () => reasoningField.remove(i)
-            }
+            removeOwnReasoning={() => remove(i, aspekt)}
             moreUrl={moreUrl}
             defaultValue={aspekt ? undefined : "on"}
             error={
@@ -358,7 +368,9 @@ function PositiveAnswerFormElements({
 
 export default function DocumentationPrinciple() {
   const { prinzip } = useLoaderData<typeof loader>();
-  const { currentUrl } = useOutletContext<NavigationContext>();
+  const navigate = useNavigate();
+  const { currentUrl, nextRoute, previousRoute } =
+    useOutletContext<NavigationContext>();
 
   const form = useForm({
     schema,
@@ -371,6 +383,9 @@ export default function DocumentationPrinciple() {
       whenSubmitted: "onChange",
       whenTouched: "onSubmit",
       initial: "onSubmit",
+    },
+    handleSubmit: async () => {
+      await navigate(nextRoute.url);
     },
   });
 
@@ -460,11 +475,13 @@ export default function DocumentationPrinciple() {
               prinzip={prinzip}
             />
           )}
-        </form>
 
-        <InlineNotice look="tips" heading={principlePages.storageHint.title}>
-          {principlePages.storageHint.content}
-        </InlineNotice>
+          <InlineNotice look="tips" heading={principlePages.storageHint.title}>
+            {principlePages.storageHint.content}
+          </InlineNotice>
+
+          <DocumentationActions previousRoute={previousRoute.url} submit />
+        </form>
       </div>
     </>
   );

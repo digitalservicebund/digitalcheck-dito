@@ -1,13 +1,18 @@
+import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_PARTICIPATION } from "~/resources/staticRoutes";
+import { NavigationContext } from "./dokumentation._documentationNavigation";
+import DocumentationActions from "./dokumentation/DocumentationActions";
 
 const { participation } = digitalDocumentation;
 
 export default function DocumentationParticipation() {
+  const { previousRoute } = useOutletContext<NavigationContext>();
+
   return (
     <>
       <MetaTitle prefix={ROUTE_DOCUMENTATION_PARTICIPATION.title} />
@@ -34,6 +39,8 @@ export default function DocumentationParticipation() {
             label={participation.textFieldResultsLabel}
           />
         </fieldset>
+
+        <DocumentationActions previousRoute={previousRoute.url} submit />
       </form>
     </>
   );

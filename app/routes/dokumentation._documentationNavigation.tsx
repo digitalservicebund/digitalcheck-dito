@@ -1,11 +1,8 @@
 import { Outlet, useLoaderData, useLocation } from "react-router";
-import Button from "~/components/Button";
-import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import { general } from "~/resources/content/shared/general";
 import { features } from "~/resources/features";
 import {
   type Route as InternalRoute,
@@ -21,6 +18,7 @@ export type OnNavigateCallback = () => Promise<boolean>;
 export type NavigationContext = {
   currentUrl: string;
   nextRoute: InternalRoute;
+  previousRoute: InternalRoute;
   routes: (InternalRoute | InternalRoute[])[];
 };
 
@@ -118,24 +116,8 @@ export default function LayoutWithDocumentationNavigation() {
     });
   }
 
-  // const onNavigateCallback = useRef<OnNavigateCallback | null>(null);
-
-  // const addOnNavigateCallback = (cbFn: OnNavigateCallback) => {
-  //   onNavigateCallback.current = cbFn;
-  // };
-
-  // const handleNavigation = async (url: string) => {
-  //   if (onNavigateCallback.current) {
-  //     await onNavigateCallback.current();
-  //     // TODO: what happens when invalid form?
-  //     await navigate(url);
-  //     return;
-  //   }
-
-  //   await navigate(url);
-  // };
-
   const nextRoute = getNextRoute(routes.flat(), currentUrl);
+  const previousRoute = getPreviousRoute(routes.flat(), currentUrl);
 
   const getNavItem = (route: InternalRoute) => (
     <Nav.Item key={route.url} url={route.url}>
@@ -175,19 +157,8 @@ export default function LayoutWithDocumentationNavigation() {
           {/* force remount for different principles with key={currentUrl} */}
           <Outlet
             key={currentUrl}
-            context={{ currentUrl, nextRoute, routes }}
+            context={{ currentUrl, nextRoute, previousRoute, routes }}
           />
-          <ButtonContainer>
-            {nextRoute && (
-              <Button href={nextRoute.url}>{general.buttonNext.text}</Button>
-            )}
-            <Button
-              href={getPreviousRoute(routes.flat(), currentUrl).url}
-              look="tertiary"
-            >
-              {general.buttonBack.text}
-            </Button>
-          </ButtonContainer>
         </div>
       </section>
     </div>
