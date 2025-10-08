@@ -6,7 +6,6 @@ import {
 } from "~/utils/localStorageVersioned";
 
 export type DocumentationData = {
-  version: string;
   steps: DocumentationStep[];
 } & VersionedData;
 
