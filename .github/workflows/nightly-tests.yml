@@ -12,13 +12,15 @@ permissions:
 jobs:
   check-and-test:
     uses: ./.github/workflows/check-and-test.yml
-    secrets: inherit
+    secrets:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   run-e2e-a11y-tests:
     uses: ./.github/workflows/run-e2e-a11y-tests.yml
     with:
       nightlyTests: true
-    secrets: inherit
+    secrets:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   create-unified-test-report:
     needs: [run-e2e-a11y-tests]
