@@ -169,7 +169,7 @@ export default function Index() {
 
   return (
     <form {...form.getFormProps()}>
-      <MetaTitle prefix={`${preCheckName}: ${question.title}`} />
+      <MetaTitle prefix={`${question.title} — ${preCheckName}`} />
       <input type="hidden" name="questionId" value={question.id} />
       <fieldset className="ds-stack ds-stack-32 container pb-40">
         <span className="sr-only">{`${preCheck.srHint.before}${questionIdx + 1}${preCheck.srHint.between}${questions.length}`}</span>

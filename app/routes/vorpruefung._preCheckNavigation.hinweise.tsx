@@ -15,7 +15,7 @@ const { headline, text, nextButton, hint } = generalInfo;
 export default function GeneralInfo() {
   return (
     <Container className="pt-0">
-      <MetaTitle prefix={`${preCheckName}: ${headline}`} />
+      <MetaTitle prefix={`${headline} — ${preCheckName}`} />
       <Heading
         text={headline}
         tagName="h1"
