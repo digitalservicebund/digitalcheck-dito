@@ -15,7 +15,7 @@ export type DocumentationStep = {
 };
 
 export type DocumentationField = {
-  [key: string]: string | DocumentationField;
+  [key: string]: string | DocumentationField | DocumentationField[];
 };
 
 export const DATA_SCHEMA_VERSION = "1";

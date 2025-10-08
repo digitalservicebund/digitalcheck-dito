@@ -1,11 +1,15 @@
 import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
-import { createMemoryRouter, RouterProvider } from "react-router";
+import {
+  createMemoryRouter,
+  RouterProvider,
+  useLoaderData,
+} from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   type Route,
   ROUTE_DOCUMENTATION,
-  ROUTES_DOCUMENTATION_ORDERED,
+  ROUTES_DOCUMENTATION_PRE,
 } from "~/resources/staticRoutes";
 
 import LayoutWithDocumentationNavigation from "~/routes/dokumentation._documentationNavigation";
@@ -16,6 +20,24 @@ vi.mock("~/utils/featureFlags", () => {
     default: vi.fn(),
   };
 });
+
+vi.mock("react-router", async (importOriginal) => {
+  const original = await importOriginal<typeof import("react-router")>();
+  return {
+    ...original,
+    useLoaderData: vi.fn(),
+  };
+});
+
+const mockRoutes: (Route[] | Route)[] = [
+  ...ROUTES_DOCUMENTATION_PRE,
+  [
+    {
+      title: "Prinzip A",
+      url: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
+    },
+  ],
+];
 
 function renderPage({ url }: Route) {
   function ErrorBoundary() {
@@ -49,22 +71,21 @@ function renderPage({ url }: Route) {
 describe("navigation on pages of documentation", () => {
   beforeEach(() => {
     vi.mocked(useFeatureFlag).mockReturnValue(true);
+    vi.mocked(useLoaderData).mockReturnValue({ routes: mockRoutes });
   });
 
   afterEach(() => {
     vi.restoreAllMocks();
   });
 
-  it.each(ROUTES_DOCUMENTATION_ORDERED)(
+  it.each(mockRoutes.flat())(
     "$url has back and forth navigation to previous and next page",
     (route) => {
       renderPage(route);
 
-      const index = ROUTES_DOCUMENTATION_ORDERED.findIndex(
-        ({ url }) => url === route.url,
-      );
-      const previous = ROUTES_DOCUMENTATION_ORDERED[index - 1];
-      const next = ROUTES_DOCUMENTATION_ORDERED[index + 1];
+      const index = mockRoutes.flat().findIndex(({ url }) => url === route.url);
+      const previous = mockRoutes.flat()[index - 1];
+      const next = mockRoutes.flat()[index + 1];
 
       if (previous) {
         expect(screen.getByRole("link", { name: "Zurück" })).toHaveAttribute(
@@ -82,12 +103,12 @@ describe("navigation on pages of documentation", () => {
   );
 
   it("renders sidebar navigation with links to all pages", () => {
-    renderPage(ROUTES_DOCUMENTATION_ORDERED[0]);
+    renderPage(mockRoutes.flat()[0]);
 
     const navigation = screen.getByRole("navigation", {
       name: "Seitennavigation",
     });
-    for (const route of ROUTES_DOCUMENTATION_ORDERED) {
+    for (const route of mockRoutes.flat()) {
       const navItem = within(navigation).getByRole("link", {
         name: route.title,
       });
@@ -99,7 +120,7 @@ describe("navigation on pages of documentation", () => {
     vi.spyOn(console, "error").mockImplementation(() => {}); // suppress expected error logs to keep test output clean
     vi.mocked(useFeatureFlag).mockReturnValue(false);
 
-    renderPage(ROUTES_DOCUMENTATION_ORDERED[0]);
+    renderPage(mockRoutes.flat()[0]);
     expect(screen.getByText("Something went wrong")).toBeInTheDocument();
   });
 });

@@ -100,7 +100,7 @@ describe("Nav", () => {
       "ds-label-02-bold",
       "pointer-events-none",
       "border-l-blue-800",
-      "bg-blue-300",
+      "bg-blue-400",
     );
   });
 
