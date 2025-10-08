@@ -223,7 +223,7 @@ function Reasoning({
                 look="link"
                 iconLeft={<RemoveCircleOutlineOutlined />}
                 className="text-ds-error fill-ds-error"
-                onClickCallback={() => toggleDialog()}
+                onClick={() => toggleDialog()}
               >
                 {principlePages.explanationFields.deleteButton}
               </Button>
@@ -232,7 +232,7 @@ function Reasoning({
               <div className="flex flex-row gap-12">
                 <Button
                   type="button"
-                  onClickCallback={() => {
+                  onClick={() => {
                     closeArea();
                     closeDialog();
                     if (removeOwnReasoning) removeOwnReasoning();
@@ -244,7 +244,7 @@ function Reasoning({
                 <Button
                   type="button"
                   look="tertiary"
-                  onClickCallback={() => {
+                  onClick={() => {
                     closeDialog();
                   }}
                 >
@@ -261,13 +261,15 @@ function Reasoning({
   );
 }
 
+type PositiveAnswerFormElementProps = {
+  scope: FormScope<Reasoning[]>;
+  prinzip: Prinzip;
+};
+
 function PositiveAnswerFormElements({
   scope,
   prinzip,
-}: {
-  scope: FormScope<Reasoning[]>;
-  prinzip: Prinzip;
-}) {
+}: Readonly<PositiveAnswerFormElementProps>) {
   const reasoningField = useFieldArray(scope, {
     validationBehavior: {
       initial: "onSubmit",
@@ -335,8 +337,9 @@ function PositiveAnswerFormElements({
           type="button"
           look="link"
           iconLeft={<AddCircleOutlineOutlined />}
-          onClickCallback={async () => {
+          onClick={async () => {
             await reasoningField.push({
+              aspect: undefined,
               checkbox: "on",
               paragraphs: "",
               reason: "",
