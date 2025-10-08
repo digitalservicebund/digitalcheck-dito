@@ -15,9 +15,7 @@ type Props = {
   iconRight?: ReactElementWithClassname;
   fullWidth?: boolean;
   prefetch?: "intent" | "viewport" | "render";
-  onClickCallback?: (
-    event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>,
-  ) => void;
+  onClickCallback?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   plausibleEventName?: string;
 };
 
@@ -85,9 +83,7 @@ function Button({
     }
   };
 
-  const onClick = (
-    event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>,
-  ) => {
+  const onClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     if (onClickCallback) {
       onClickCallback(event);
     }
@@ -128,7 +124,6 @@ function Button({
       className={buttonClasses}
       id={id}
       data-testid={id}
-      onClick={onClick}
     >
       {iconLeft} {children ? childrenSpan : textSpan} {iconRight}
     </button>
