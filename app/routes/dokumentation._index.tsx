@@ -24,24 +24,45 @@ import {
   ROUTE_LANDING,
 } from "~/resources/staticRoutes";
 import useFeatureFlag from "~/utils/featureFlags";
+import { useNonce } from "~/utils/nonce";
 import { renderButtonContainer } from "~/utils/resourceUtils";
 
 const { start } = digitalDocumentation;
 
 function DigitalDocumentationIndex() {
+  const nonce = useNonce();
   return (
     <>
       <MetaTitle prefix={ROUTE_DOCUMENTATION.title} />
       <Hero title={start.title} subtitle={start.subtitle}>
         <div className="mt-40 space-y-40">
           <ButtonContainer>
-            <Button href={ROUTE_DOCUMENTATION_TITLE.url}>
+            <Button href={ROUTE_DOCUMENTATION_TITLE.url} className="js-only">
               {start.buttonText}
             </Button>
+            <noscript>
+              {/* Hides the CTA when JavaScript is disabled */}
+              <style nonce={nonce}>{".js-only {display: none;}"}</style>
+              <Button href={ROUTE_DOCUMENTATION_TITLE.url} disabled={true}>
+                {start.buttonText}
+              </Button>
+            </noscript>
             <Button href={ROUTE_LANDING.url} look={"tertiary"}>
               {general.buttonBack.text}
             </Button>
           </ButtonContainer>
+
+          <noscript>
+            <InlineNotice
+              look="warning"
+              heading={
+                <Heading tagName="h2">{start.noscript.headline}</Heading>
+              }
+              className="mb-40"
+            >
+              <RichText markdown={start.noscript.content} />
+            </InlineNotice>
+          </noscript>
 
           <div className="space-y-8">
             <RichText markdown={start.alternative.text} />
@@ -58,19 +79,6 @@ function DigitalDocumentationIndex() {
       </Hero>
 
       <div className="container my-80 space-y-80">
-        <section className="space-y-40">
-          <Heading tagName="h2">{start.description.title}</Heading>
-
-          <NumberedList>
-            {start.description.items.map((item) => (
-              <NumberedList.Item key={item.title}>
-                <span>{item.title}</span>
-                {item.content && <RichText markdown={item.content} />}
-              </NumberedList.Item>
-            ))}
-          </NumberedList>
-        </section>
-
         <InlineNotice
           look="tips"
           heading={
@@ -79,43 +87,7 @@ function DigitalDocumentationIndex() {
         >
           <RichText markdown={start.dataSavingHint.content} />
         </InlineNotice>
-
-        <InfoBoxList
-          heading={{ text: start.tips.title }}
-          items={start.tips.items}
-        />
       </div>
-
-      <section className="bg-blue-100 py-40">
-        <div className="container space-y-40">
-          <Button href={ROUTE_DOCUMENTATION_TITLE.url}>
-            {start.buttonText}
-          </Button>
-
-          <div className="space-y-8">
-            <RichText markdown={start.alternative.text} />
-
-            <Button
-              look="link"
-              href={ROUTE_DOCUMENTATION_STATIC_WORD.url}
-              iconLeft={<SaveAltOutlined className="mr-2 fill-blue-800" />}
-            >
-              {start.alternative.buttonText}
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* <div className="container my-80 space-y-40">
-        <Heading tagName="h2">{start.faq.title}</Heading>
-
-        <Accordion
-          items={start.faq.questions.map(({ title, content }) => ({
-            headline: title,
-            content,
-          }))}
-        />
-      </div> */}
 
       <SupportBanner {...supportBanner} />
     </>

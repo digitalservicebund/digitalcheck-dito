@@ -47,7 +47,7 @@ export const documentation = {
 
 export const digitalDocumentation = {
   start: {
-    title: "Digitaltauglichkeit dokumentieren",
+    title: "Dokumentation der Digitaltauglichkeit",
     subtitle:
       "Die Dokumentation der Digitaltauglichkeit ist ein formeller, letzter Schritt. Sie dokumentieren, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben, und wie sie ins Regelungsvorhaben eingeflossen sind.",
     buttonText: "Dokumentation starten",
@@ -75,18 +75,21 @@ export const digitalDocumentation = {
         },
       ],
     },
+    noscript: {
+      headline: "Erlauben Sie die Nutzung von JavaScript",
+      content: dedent`
+        Um die Dokumentation zu starten, müssen Sie Ihrem Browser die Nutzung von JavaScript erlauben. Das ist nötig, damit die Seite Ihre Daten zwischenspeichern kann.
+        
+        **So geht es:** Suchen Sie in den Einstellungen Ihres Browsers nach JavaScript und erlauben Sie die Nutzung.
+      `,
+    },
     dataSavingHint: {
       headline: "Hinweise zur Zwischenspeicherung Ihrer Daten",
       content: dedent`
-        Ihre eingegebenen Daten werden unbegrenzt lange in der Sitzung gespeichert, bis
-
-        a) Sie die Dokumentation beendet haben,
-
-        b) Ihr SINA-Rechner die Daten löscht (falls das bei Ihnen voreingestellt ist), oder
-
-        c) Sie die Daten manuell löschen.
-
-        Sie können nur eine Dokumentation zur gleichen Zeit bearbeiten.
+        Ihre Daten bleiben unbegrenzt in der Sitzung gespeichert, es sei denn:
+        - Sie beenden die Dokumentation.
+        - Ihr SINA-Rechner löscht sie (prüfen Sie Ihre Einstellungen).
+        - Sie löschen die Daten manuell.
       `,
     },
     tips: {
