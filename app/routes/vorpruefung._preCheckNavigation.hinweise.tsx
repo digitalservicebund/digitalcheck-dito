@@ -7,15 +7,15 @@ import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { ROUTE_PRECHECK } from "~/resources/staticRoutes";
+import { ROUTE_PRECHECK, ROUTE_PRECHECK_INFO } from "~/resources/staticRoutes";
 
-const { questions, generalInfo, preCheckName } = preCheck;
+const { questions, generalInfo } = preCheck;
 const { headline, text, nextButton, hint } = generalInfo;
 
 export default function GeneralInfo() {
   return (
     <Container className="pt-0">
-      <MetaTitle prefix={`${headline} — ${preCheckName}`} />
+      <MetaTitle prefix={ROUTE_PRECHECK_INFO.title} />
       <Heading
         text={headline}
         tagName="h1"

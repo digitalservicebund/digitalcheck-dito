@@ -14,7 +14,10 @@ import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { ROUTE_PRECHECK } from "~/resources/staticRoutes";
+import {
+  ROUTE_PRECHECK,
+  ROUTES_PRECHECK_QUESTIONS,
+} from "~/resources/staticRoutes";
 import {
   getAnswersFromCookie,
   getHeaderFromCookie,
@@ -169,7 +172,13 @@ export default function Index() {
 
   return (
     <form {...form.getFormProps()}>
-      <MetaTitle prefix={`${question.title} — ${preCheckName}`} />
+      <MetaTitle
+        prefix={
+          ROUTES_PRECHECK_QUESTIONS.find((route) =>
+            route.url.endsWith(question.id),
+          )?.title
+        }
+      />
       <input type="hidden" name="questionId" value={question.id} />
       <fieldset className="ds-stack ds-stack-32 container pb-40">
         <span className="sr-only">{`${preCheck.srHint.before}${questionIdx + 1}${preCheck.srHint.between}${questions.length}`}</span>

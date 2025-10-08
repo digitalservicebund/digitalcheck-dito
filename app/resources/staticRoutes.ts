@@ -56,6 +56,10 @@ export const ROUTE_PRECHECK_RESULT = createRoute(
   "Ergebnis der Vorprüfung",
   ROUTE_PRECHECK,
 );
+export const ROUTES_PRECHECK_QUESTIONS = Object.values(preCheckQuestions).map(
+  (question) =>
+    createRoute(question.id, `${question.title} — Vorprüfung`, ROUTE_PRECHECK),
+);
 
 // METHODS ROUTES
 export const ROUTE_METHODS = createRoute("methoden", "Regelung erarbeiten");
@@ -324,9 +328,7 @@ export const ROUTES: Route[] = [
   ROUTE_VERSION_HISTORY,
   ROUTE_PRECHECK,
   ROUTE_PRECHECK_INFO,
-  ...Object.values(preCheckQuestions).map((question) =>
-    createRoute(question.id, question.title, ROUTE_PRECHECK),
-  ),
+  ...ROUTES_PRECHECK_QUESTIONS,
   ROUTE_PRECHECK_RESULT,
   ROUTE_METHODS,
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
