@@ -49,7 +49,7 @@ describe("documentationDataService", () => {
     it("should return data from localStorage", () => {
       const testData: DocumentationData = {
         version: DATA_SCHEMA_VERSION,
-        steps: [{ id: "step1", items: [] }],
+        steps: [{ id: "step1", items: {} }],
       };
       mockReadFromLocalStorage.mockReturnValue(testData);
 
@@ -90,9 +90,9 @@ describe("documentationDataService", () => {
   describe("createOrUpdateDocumentationStep", () => {
     it("should create new step when no data exists", () => {
       mockReadFromLocalStorage.mockReturnValue(null);
-      const testFields: DocumentationField[] = [
-        { key: "field1", value: "value1" },
-      ];
+      const testFields: DocumentationField = {
+        field1: "value1",
+      };
 
       createOrUpdateDocumentationStep("step1", testFields);
 
@@ -113,22 +113,22 @@ describe("documentationDataService", () => {
     it("should add new step to existing data", () => {
       const existingData: DocumentationData = {
         version: DATA_SCHEMA_VERSION,
-        steps: [{ id: "existingStep", items: [] }],
+        steps: [{ id: "existingStep", items: {} }],
       };
       mockReadFromLocalStorage.mockReturnValue(existingData);
 
-      const testItems: DocumentationField[] = [
-        { key: "field1", value: "value1" },
-      ];
+      const testFields: DocumentationField = {
+        field1: "value1",
+      };
 
-      createOrUpdateDocumentationStep("newStep", testItems);
+      createOrUpdateDocumentationStep("newStep", testFields);
 
       expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
         {
           version: DATA_SCHEMA_VERSION,
           steps: [
-            { id: "existingStep", items: [] },
-            { id: "newStep", items: testItems },
+            { id: "existingStep", items: {} },
+            { id: "newStep", items: testFields },
           ],
         },
         STORAGE_KEY,
@@ -138,15 +138,13 @@ describe("documentationDataService", () => {
     it("should update existing step", () => {
       const existingData: DocumentationData = {
         version: DATA_SCHEMA_VERSION,
-        steps: [
-          { id: "step1", items: [{ key: "oldField", value: "oldValue" }] },
-        ],
+        steps: [{ id: "step1", items: { oldField: "oldValue" } }],
       };
       mockReadFromLocalStorage.mockReturnValue(existingData);
 
-      const newItems: DocumentationField[] = [
-        { key: "newField", value: "newValue" },
-      ];
+      const newItems: DocumentationField = {
+        newField: "newValue",
+      };
 
       createOrUpdateDocumentationStep("step1", newItems);
 
@@ -166,12 +164,12 @@ describe("documentationDataService", () => {
       };
       mockReadFromLocalStorage.mockReturnValue(existingData);
 
-      createOrUpdateDocumentationStep("step1", []);
+      createOrUpdateDocumentationStep("step1", {});
 
       expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
         {
           version: DATA_SCHEMA_VERSION,
-          steps: [{ id: "step1", items: [] }],
+          steps: [{ id: "step1", items: {} }],
         },
         STORAGE_KEY,
       );
@@ -182,11 +180,11 @@ describe("documentationDataService", () => {
     it("should return specific step when it exists", () => {
       const testStep: DocumentationStep = {
         id: "step1",
-        items: [{ key: "field1", value: "value1" }],
+        items: { field1: "value1" },
       };
       const testData: DocumentationData = {
         version: DATA_SCHEMA_VERSION,
-        steps: [testStep, { id: "step2", items: [] }],
+        steps: [testStep, { id: "step2", items: {} }],
       };
       mockReadFromLocalStorage.mockReturnValue(testData);
 
@@ -198,7 +196,7 @@ describe("documentationDataService", () => {
     it("should return null when step does not exist", () => {
       const testData: DocumentationData = {
         version: DATA_SCHEMA_VERSION,
-        steps: [{ id: "step2", items: [] }],
+        steps: [{ id: "step2", items: {} }],
       };
       mockReadFromLocalStorage.mockReturnValue(testData);
 
@@ -221,8 +219,8 @@ describe("documentationDataService", () => {
       const testData: DocumentationData = {
         version: DATA_SCHEMA_VERSION,
         steps: [
-          { id: "step1", items: [] },
-          { id: "step2", items: [] },
+          { id: "step1", items: {} },
+          { id: "step2", items: {} },
         ],
       };
       mockReadFromLocalStorage.mockReturnValue(testData);
@@ -233,7 +231,7 @@ describe("documentationDataService", () => {
       expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
         {
           version: DATA_SCHEMA_VERSION,
-          steps: [{ id: "step2", items: [] }],
+          steps: [{ id: "step2", items: {} }],
         },
         STORAGE_KEY,
       );
@@ -242,7 +240,7 @@ describe("documentationDataService", () => {
     it("should return false when step does not exist", () => {
       const testData: DocumentationData = {
         version: DATA_SCHEMA_VERSION,
-        steps: [{ id: "step2", items: [] }],
+        steps: [{ id: "step2", items: {} }],
       };
       mockReadFromLocalStorage.mockReturnValue(testData);
 
@@ -264,7 +262,7 @@ describe("documentationDataService", () => {
     it("should handle deletion of last step", () => {
       const testData: DocumentationData = {
         version: DATA_SCHEMA_VERSION,
-        steps: [{ id: "step1", items: [] }],
+        steps: [{ id: "step1", items: {} }],
       };
       mockReadFromLocalStorage.mockReturnValue(testData);
 

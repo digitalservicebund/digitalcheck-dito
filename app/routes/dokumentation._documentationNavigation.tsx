@@ -1,4 +1,4 @@
-import { Outlet, useLocation, useOutletContext } from "react-router";
+import { Outlet, useLoaderData, useLocation } from "react-router";
 import Button from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
@@ -8,36 +8,102 @@ import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general";
 import { features } from "~/resources/features";
 import {
-  type Route,
+  type Route as InternalRoute,
   ROUTE_DOCUMENTATION,
-  ROUTES_DOCUMENTATION_ORDERED,
-  ROUTES_DOCUMENTATION_ORDERED_NAV,
+  ROUTES_DOCUMENTATION_POST,
+  ROUTES_DOCUMENTATION_PRE,
 } from "~/resources/staticRoutes";
 import useFeatureFlag from "~/utils/featureFlags";
+import { fetchStrapiData } from "~/utils/strapiData.server";
 
-function findIndexForRoute(currentUrl: string) {
-  const index = ROUTES_DOCUMENTATION_ORDERED.findIndex(
-    (route) => route.url === currentUrl,
-  );
+export type OnNavigateCallback = () => Promise<boolean>;
+
+export type NavigationContext = {
+  currentUrl: string;
+  nextRoute: InternalRoute;
+  routes: (InternalRoute | InternalRoute[])[];
+};
+
+type Prinzip = {
+  Name: string;
+  Beschreibung: string;
+  order: number;
+  Nummer: number;
+  URLBezeichnung: string;
+  Aspekte: {
+    Titel: string;
+  }[];
+};
+
+const GET_PRINZIPS_QUERY = `
+query GetPrinzips {
+  prinzips(sort: "order") {
+    Name
+    Beschreibung
+    order
+    Nummer
+    URLBezeichnung
+    Aspekte {
+      Titel
+    }
+  }
+}`;
+
+const getUrlForSlug = (slug: string) => `/dokumentation/${slug}`;
+
+function findIndexForRoute(routes: InternalRoute[], currentUrl: string) {
+  const index = routes.findIndex((route) => route.url === currentUrl);
+
   if (index === -1) {
     throw new Error(`Could not find route with url ${currentUrl}`);
   }
   return index;
 }
 
-function getPreviousRoute(currentUrl: string): Route {
-  return findIndexForRoute(currentUrl) > 0
-    ? ROUTES_DOCUMENTATION_ORDERED[findIndexForRoute(currentUrl) - 1]
+function getPreviousRoute(
+  routes: InternalRoute[],
+  currentUrl: string,
+): InternalRoute {
+  return findIndexForRoute(routes, currentUrl) > 0
+    ? routes[findIndexForRoute(routes, currentUrl) - 1]
     : ROUTE_DOCUMENTATION;
 }
 
-function getNextRoute(currentUrl: string): Route | null {
-  return findIndexForRoute(currentUrl) < ROUTES_DOCUMENTATION_ORDERED.length - 1
-    ? ROUTES_DOCUMENTATION_ORDERED[findIndexForRoute(currentUrl) + 1]
+function getNextRoute(
+  routes: InternalRoute[],
+  currentUrl: string,
+): InternalRoute | null {
+  return findIndexForRoute(routes, currentUrl) < routes.length - 1
+    ? routes[findIndexForRoute(routes, currentUrl) + 1]
     : null;
 }
 
+export const loader = async () => {
+  const prinzipData = await fetchStrapiData<{
+    prinzips: Prinzip[];
+  }>(GET_PRINZIPS_QUERY);
+
+  if ("error" in prinzipData) {
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
+    throw new Response(prinzipData.error, { status: 400 });
+  }
+
+  const { prinzips } = prinzipData;
+
+  const routes: (InternalRoute[] | InternalRoute)[] = [
+    ...ROUTES_DOCUMENTATION_PRE,
+    prinzips.map<InternalRoute>(({ Name, URLBezeichnung }) => ({
+      title: Name,
+      url: getUrlForSlug(URLBezeichnung),
+    })),
+    ...ROUTES_DOCUMENTATION_POST,
+  ];
+
+  return { routes };
+};
+
 export default function LayoutWithDocumentationNavigation() {
+  const { routes } = useLoaderData<typeof loader>();
   const location = useLocation();
   const currentUrl = location.pathname;
 
@@ -52,27 +118,44 @@ export default function LayoutWithDocumentationNavigation() {
     });
   }
 
-  const nextRoute = getNextRoute(currentUrl);
+  // const onNavigateCallback = useRef<OnNavigateCallback | null>(null);
 
-  const getNavItem = (route: Route) => (
+  // const addOnNavigateCallback = (cbFn: OnNavigateCallback) => {
+  //   onNavigateCallback.current = cbFn;
+  // };
+
+  // const handleNavigation = async (url: string) => {
+  //   if (onNavigateCallback.current) {
+  //     await onNavigateCallback.current();
+  //     // TODO: what happens when invalid form?
+  //     await navigate(url);
+  //     return;
+  //   }
+
+  //   await navigate(url);
+  // };
+
+  const nextRoute = getNextRoute(routes.flat(), currentUrl);
+
+  const getNavItem = (route: InternalRoute) => (
     <Nav.Item key={route.url} url={route.url}>
       {route.title}
     </Nav.Item>
   );
 
   return (
-    <div className="parent-bg-blue my-80 flex justify-center bg-blue-100">
+    <div className="parent-bg-blue flex justify-center bg-blue-100 py-80">
       <div className="hidden flex-none pl-32 lg:block">
         <Nav
           activeElementUrl={currentUrl}
           ariaLabel={digitalDocumentation.navigation.ariaLabel}
         >
           <Nav.Items>
-            {ROUTES_DOCUMENTATION_ORDERED_NAV.map((route) => {
+            {routes.map((route) => {
               if (Array.isArray(route))
                 return (
                   <Nav.Item
-                    key={`${route[0].url}-subItems`}
+                    key="principles"
                     subItems={<Nav.Items>{route.map(getNavItem)}</Nav.Items>}
                   >
                     {digitalDocumentation.navigation.principles}
@@ -85,22 +168,27 @@ export default function LayoutWithDocumentationNavigation() {
       </div>
       <section className="w-[51rem]">
         <Container className="pt-0 lg:hidden">
-          <Stepper
-            currentElementUrl={currentUrl}
-            elements={ROUTES_DOCUMENTATION_ORDERED}
-          />
+          <Stepper currentElementUrl={currentUrl} elements={routes} />
         </Container>
-        <Container className="space-y-80 pt-0">
-          <Outlet context={useOutletContext()} />
+
+        <div className="container space-y-[140px]">
+          {/* force remount for different principles with key={currentUrl} */}
+          <Outlet
+            key={currentUrl}
+            context={{ currentUrl, nextRoute, routes }}
+          />
           <ButtonContainer>
             {nextRoute && (
               <Button href={nextRoute.url}>{general.buttonNext.text}</Button>
             )}
-            <Button href={getPreviousRoute(currentUrl).url} look="tertiary">
+            <Button
+              href={getPreviousRoute(routes.flat(), currentUrl).url}
+              look="tertiary"
+            >
               {general.buttonBack.text}
             </Button>
           </ButtonContainer>
-        </Container>
+        </div>
       </section>
     </div>
   );

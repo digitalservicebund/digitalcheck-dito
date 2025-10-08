@@ -58,7 +58,7 @@ const InlineNotice = ({
   return (
     <div
       className={twJoin(
-        "ds-stack ds-stack-8 max-w-a11y scroll-my-40 p-16",
+        "max-w-a11y scroll-my-40 space-y-8 p-16",
         backgroundColor,
         "border-2 border-l-8",
         borderColor,
@@ -66,9 +66,9 @@ const InlineNotice = ({
       )}
       id={identifier}
     >
-      <div className="flex flex-row items-center gap-[4px]">
-        {showIcon && <IconComponent className="mr-4 flex-none" />}
-        <div className="*:ds-label-01-bold">{heading}</div>
+      <div className="flex flex-row items-center gap-4">
+        {showIcon && <IconComponent className="mr-4 flex-none self-start" />}
+        <div className="ds-label-01-bold *:ds-label-01-bold">{heading}</div>
       </div>
       <div className="leading-[26px] tracking-[0.16px]">{children}</div>
     </div>

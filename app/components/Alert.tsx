@@ -24,8 +24,8 @@ const lookConfig = {
   },
   error: {
     backgroundColor: "bg-[#F9E5EC]",
-    borderColor: "border-[#8E001B]",
-    iconColor: "fill-[#8E001B]",
+    borderColor: "border-ds-error",
+    iconColor: "fill-ds-error",
     IconComponent: ErrorOutline,
   },
   info: {

@@ -13,6 +13,8 @@
   --color-principle-6: #dfd6e2; /* order 3 */
   --color-principle-5: #cce7db; /* order 4 */
   --color-principle-3: #cce4f0; /* order 5 */
+
+  --color-ds-error: #8e001b;
 }
 
 @layer base {
@@ -109,7 +111,7 @@
 }
 
 @utility text-link {
-  @apply text-blue-800 underline decoration-1 underline-offset-4 visited:text-[#4c2c92] active:text-black;
+  @apply fill-blue-800 text-blue-800 underline decoration-1 underline-offset-4 visited:text-[#4c2c92] active:text-black;
 
   &:focus-visible {
     @apply text-blue-800! no-underline!;

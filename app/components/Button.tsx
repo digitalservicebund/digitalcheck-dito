@@ -60,7 +60,10 @@ function Button({
     props.className,
   );
   if (look === "link") {
-    buttonClasses = "text-link inline-flex items-center";
+    buttonClasses = twMerge(
+      "text-link inline-flex items-center text-left space-x-8",
+      props.className,
+    );
   }
 
   const textSpan = text ? <span className="ds-button-label">{text}</span> : "";
@@ -91,7 +94,7 @@ function Button({
     const isDownload = !!ext;
     const isExternal = "target" in props && props.target === "_blank";
     iconRight = isExternal ? (
-      <OpenInNewIcon className="scale-75 fill-blue-800" />
+      <OpenInNewIcon className="-ml-8 scale-75 fill-blue-800" />
     ) : (
       iconRight
     );
