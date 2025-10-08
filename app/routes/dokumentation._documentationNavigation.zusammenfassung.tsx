@@ -26,7 +26,11 @@ const getAnswers = (field: DocumentationField) =>
     <div key={`${key}-${i}`}>
       <span className="block font-bold">{key}</span>
       <span className="block">
-        {typeof value === "object" ? getAnswers(value) : value}
+        {typeof value === "object"
+          ? Array.isArray(value)
+            ? value.map(getAnswers)
+            : getAnswers(value)
+          : value}
       </span>
     </div>
   ));

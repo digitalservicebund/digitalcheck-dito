@@ -5,7 +5,7 @@ import InputError from "./InputError";
 type BaseInputProps = ComponentPropsWithRef<"input">;
 
 interface InputProps extends BaseInputProps {
-  scope: FormScope<ValueOfInputType<"checkbox">>;
+  scope: FormScope<ValueOfInputType<"checkbox"> | undefined>;
   size?: number;
   description?: ReactNode;
   error?: string | null;

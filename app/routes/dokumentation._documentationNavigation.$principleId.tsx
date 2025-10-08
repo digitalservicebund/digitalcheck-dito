@@ -3,7 +3,7 @@ import {
   FileDownloadOutlined,
   RemoveCircleOutlineOutlined,
 } from "@digitalservicebund/icons";
-import { FormScope, useFieldArray, useForm } from "@rvf/react-router";
+import { FormScope, useField, useFieldArray, useForm } from "@rvf/react-router";
 import { useEffect } from "react";
 import { useLoaderData, useOutletContext } from "react-router";
 import { z } from "zod";
@@ -27,16 +27,14 @@ import { fetchStrapiData } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 import type { Route } from "./+types/dokumentation._documentationNavigation.$principleId";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
-import {
-  createOrUpdateDocumentationStep,
-  DocumentationField,
-  getDocumentationStep,
-} from "./dokumentation/documentationDataService";
+import { getDocumentationStep } from "./dokumentation/documentationDataService";
+import { useDataSync } from "./dokumentation/documentationDataServiceHook";
 
 const { principlePages } = digitalDocumentation;
 
 const reasoning = z
   .object({
+    aspect: z.string().optional(),
     checkbox: z.literal("on").optional(),
     paragraphs: z.string().optional(),
     reason: z.string().optional(),
@@ -63,6 +61,8 @@ const reasoning = z
     }
   });
 
+type Reasoning = z.output<typeof reasoning>;
+
 const positiveAnswerSchema = z.object({
   answer: z.literal(principlePages.radioOptions[0]),
   reasoning: z.array(reasoning, {
@@ -72,10 +72,12 @@ const positiveAnswerSchema = z.object({
 
 const negativeAnswerSchema = z.object({
   answer: z.literal(principlePages.radioOptions[1]),
+  reasoning: z.literal(undefined),
 });
 
 const irrelevantAnswerSchema = z.object({
   answer: z.literal(principlePages.radioOptions[2]),
+  reasoning: z.literal(undefined),
 });
 
 const schema = z
@@ -143,9 +145,10 @@ type ReasoningProps = {
   label: string;
   description?: string;
   detailDescription?: string;
-  checkboxScope: FormScope<"on" | undefined>;
-  paragraphScope: FormScope<string>;
-  reasonScope: FormScope<string>;
+  aspectScope: FormScope<Reasoning["aspect"]>;
+  checkboxScope: FormScope<Reasoning["checkbox"]>;
+  paragraphScope: FormScope<Reasoning["paragraphs"]>;
+  reasonScope: FormScope<Reasoning["reason"]>;
   defaultValue?: "on";
   moreUrl?: string;
   removeOwnReasoning?: () => void;
@@ -154,6 +157,7 @@ type ReasoningProps = {
 
 function Reasoning({
   label,
+  aspectScope,
   checkboxScope,
   description,
   detailDescription,
@@ -164,6 +168,8 @@ function Reasoning({
   reasonScope,
   removeOwnReasoning,
 }: Readonly<ReasoningProps>) {
+  const aspectField = useField(aspectScope);
+
   return (
     <CheckboxWithExpandableArea
       scope={checkboxScope}
@@ -187,6 +193,8 @@ function Reasoning({
           <Heading tagName="h3">
             {principlePages.explanationFields.title}
           </Heading>
+
+          <input {...aspectField.getHiddenInputProps()} />
 
           <InputNew
             scope={paragraphScope}
@@ -253,6 +261,98 @@ function Reasoning({
   );
 }
 
+function PositiveAnswerFormElements({
+  scope,
+  prinzip,
+}: {
+  scope: FormScope<Reasoning[]>;
+  prinzip: Prinzip;
+}) {
+  const reasoningField = useFieldArray(scope, {
+    validationBehavior: {
+      initial: "onSubmit",
+      whenSubmitted: "onChange",
+    },
+  });
+
+  return (
+    <>
+      <div className="space-y-8">
+        <Heading tagName="h2">{principlePages.positivePrinciple.title}</Heading>
+        <RichText
+          markdown={principlePages.positivePrinciple.description}
+          className="space-y-24"
+        />
+      </div>
+
+      {reasoningField.error() && (
+        <InlineNotice look="warning" heading={reasoningField.error()} />
+      )}
+
+      {reasoningField.map((key, item, i) => {
+        const aspekt = prinzip.Aspekte[i];
+
+        const label = aspekt?.Titel
+          ? aspekt.Kurzbezeichnung
+          : principlePages.explanationFields.ownExplanationTitle;
+
+        const description = aspekt
+          ? aspekt.Titel
+          : principlePages.explanationFields.ownExplanationDescription;
+
+        const detailDescription = aspekt
+          ? aspekt.Beschreibung
+          : principlePages.explanationFields.ownExplanationDescription;
+
+        const moreUrl = aspekt
+          ? `${ROUTE_METHODS_PRINCIPLES.url}#${slugify(aspekt.Titel)}`
+          : undefined;
+
+        return (
+          <Reasoning
+            key={key}
+            label={label}
+            description={description}
+            detailDescription={detailDescription}
+            aspectScope={item.scope("aspect")}
+            checkboxScope={item.scope("checkbox")}
+            paragraphScope={item.scope("paragraphs")}
+            reasonScope={item.scope("reason")}
+            removeOwnReasoning={
+              aspekt ? undefined : () => reasoningField.remove(i)
+            }
+            moreUrl={moreUrl}
+            defaultValue={aspekt ? undefined : "on"}
+            error={
+              reasoningField.error() ? principlePages.errors.errorHint : null
+            }
+          />
+        );
+      })}
+
+      <div className="flex flex-col gap-32 xl:flex-row xl:gap-40">
+        <Button
+          type="button"
+          look="link"
+          iconLeft={<AddCircleOutlineOutlined />}
+          onClickCallback={async () => {
+            await reasoningField.push({
+              checkbox: "on",
+              paragraphs: "",
+              reason: "",
+            });
+          }}
+        >
+          {principlePages.positivePrinciple.actions.addOwnExplanation.title}
+        </Button>
+        <Button type="button" look="link" iconLeft={<FileDownloadOutlined />}>
+          {principlePages.positivePrinciple.actions.saveState.title}
+        </Button>
+      </div>
+    </>
+  );
+}
+
 export default function DocumentationPrinciple() {
   const { prinzip } = useLoaderData<typeof loader>();
   const { currentUrl } = useOutletContext<NavigationContext>();
@@ -262,18 +362,12 @@ export default function DocumentationPrinciple() {
     defaultValues: {
       answer: "",
       prinzipId: currentUrl,
+      reasoning: undefined,
     },
     validationBehaviorConfig: {
       whenSubmitted: "onChange",
       whenTouched: "onSubmit",
       initial: "onSubmit",
-    },
-  });
-
-  const reasoningField = useFieldArray(form.scope("reasoning"), {
-    validationBehavior: {
-      initial: "onSubmit",
-      whenSubmitted: "onChange",
     },
   });
 
@@ -288,46 +382,33 @@ export default function DocumentationPrinciple() {
       const documentationStepData = getDocumentationStep(currentUrl);
       const reasoning = documentationStepData?.items?.reasoning;
 
-      form.setValue(
-        "reasoning",
-        reasoning ??
+      if (!Array.isArray(reasoning)) {
+        form.setValue(
+          "reasoning",
           prinzip.Aspekte.map(({ Titel }) => ({
-            name: slugify(Titel),
+            aspect: slugify(Titel),
           })),
-      );
+        );
+
+        return;
+      }
+
+      form.setValue("reasoning", reasoning);
     });
     return () => {
       unsubscribe();
     };
   }, [form, prinzip.Aspekte, currentUrl]);
 
-  // don't change order with the next useEffect (it is important that this executes first)
-  useEffect(() => {
-    const documentationStepData = getDocumentationStep(currentUrl);
-
-    if (documentationStepData === null) {
-      form.resetForm({
-        prinzipId: currentUrl,
-        answer: undefined,
-        reasoning: undefined,
-      });
-    } else {
-      form.resetForm(documentationStepData.items);
-    }
-  }, [currentUrl, form]);
-
-  // don't change order with the previous useEffect (it is important that this executes second)
-  useEffect(() => {
-    const unsubscribe = form.subscribe.value((formValues) => {
-      console.log("Form changed:", formValues);
-
-      createOrUpdateDocumentationStep(
-        currentUrl,
-        formValues as DocumentationField,
-      );
-    });
-    return () => unsubscribe();
-  }, [currentUrl, form]);
+  useDataSync({
+    currentUrl,
+    form,
+    defaultValues: {
+      prinzipId: currentUrl,
+      answer: "",
+      reasoning: undefined,
+    },
+  });
 
   return (
     <>
@@ -371,94 +452,10 @@ export default function DocumentationPrinciple() {
           />
 
           {form.field("answer").value() === principlePages.radioOptions[0] && (
-            <>
-              <div className="space-y-8">
-                <Heading tagName="h2">
-                  {principlePages.positivePrinciple.title}
-                </Heading>
-                <RichText
-                  markdown={principlePages.positivePrinciple.description}
-                  className="space-y-24"
-                />
-              </div>
-
-              {reasoningField.error() && (
-                <InlineNotice look="warning" heading={reasoningField.error()} />
-              )}
-
-              {reasoningField.map((key, item, i) => {
-                const aspekt = prinzip.Aspekte[i];
-
-                const label = aspekt?.Titel
-                  ? aspekt.Kurzbezeichnung
-                  : principlePages.explanationFields.ownExplanationTitle;
-
-                const description = aspekt
-                  ? aspekt.Titel
-                  : principlePages.explanationFields.ownExplanationDescription;
-
-                const detailDescription = aspekt
-                  ? aspekt.Beschreibung
-                  : principlePages.explanationFields.ownExplanationDescription;
-
-                const moreUrl = aspekt
-                  ? `${ROUTE_METHODS_PRINCIPLES.url}#${slugify(aspekt.Titel)}`
-                  : undefined;
-
-                return (
-                  <Reasoning
-                    key={key}
-                    label={label}
-                    description={description}
-                    detailDescription={detailDescription}
-                    checkboxScope={item.scope("checkbox")}
-                    paragraphScope={item.scope("paragraphs")}
-                    reasonScope={item.scope("reason")}
-                    removeOwnReasoning={
-                      aspekt ? undefined : () => reasoningField.remove(i)
-                    }
-                    moreUrl={moreUrl}
-                    defaultValue={aspekt ? undefined : "on"}
-                    error={
-                      reasoningField.error()
-                        ? principlePages.errors.errorHint
-                        : null
-                    }
-                  />
-                );
-              })}
-
-              <div className="flex flex-col gap-32 xl:flex-row xl:gap-40">
-                <Button
-                  type="button"
-                  look="link"
-                  iconLeft={<AddCircleOutlineOutlined />}
-                  onClickCallback={async () => {
-                    const id = crypto.randomUUID();
-
-                    await reasoningField.push({
-                      id,
-                      name: id,
-                      checkbox: "on",
-                      paragraphs: "",
-                      reason: "",
-                    });
-                  }}
-                >
-                  {
-                    principlePages.positivePrinciple.actions.addOwnExplanation
-                      .title
-                  }
-                </Button>
-                <Button
-                  type="button"
-                  look="link"
-                  iconLeft={<FileDownloadOutlined />}
-                >
-                  {principlePages.positivePrinciple.actions.saveState.title}
-                </Button>
-              </div>
-            </>
+            <PositiveAnswerFormElements
+              scope={form.scope("reasoning") as FormScope<Reasoning[]>}
+              prinzip={prinzip}
+            />
           )}
         </form>
 

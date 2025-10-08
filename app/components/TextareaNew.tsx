@@ -5,7 +5,7 @@ import InputError from "./InputError";
 type BaseTextareaProps = ComponentPropsWithRef<"textarea">;
 
 interface TextareaProps extends BaseTextareaProps {
-  scope: FormScope<ValueOfInputType<"checkbox">>;
+  scope: FormScope<ValueOfInputType<"textarea"> | undefined>;
   size?: number;
   description?: ReactNode;
   error?: string | null;

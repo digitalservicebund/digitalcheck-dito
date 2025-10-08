@@ -30,7 +30,7 @@ type Prinzip = {
   order: number;
   Nummer: number;
   URLBezeichnung: string;
-  Aspecte: {
+  Aspekte: {
     Titel: string;
   }[];
 };
