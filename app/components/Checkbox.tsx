@@ -34,7 +34,7 @@ function Checkbox({
   const specialDisabledInput = disabled && includeDisabledInForm;
 
   return (
-    <div className="space-y-8">
+    <div className="max-w-a11y space-y-8">
       <div className="flex flex-row items-center gap-16">
         <input
           {...field.getInputProps({

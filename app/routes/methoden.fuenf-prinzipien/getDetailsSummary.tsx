@@ -7,11 +7,13 @@ import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzip
 import { ROUTE_EXAMPLES_PRINCIPLES } from "~/resources/staticRoutes";
 import { absatzIdTag } from "~/utils/paragraphUtils";
 import { PrinzipWithAspekte } from "~/utils/strapiData.server";
+import { slugify } from "~/utils/utilFunctions";
 
 export default function getDetailsSummary(prinzip: PrinzipWithAspekte) {
   const { Aspekte } = prinzip;
 
   const items = Aspekte.map((aspekt) => {
+    const identifier = slugify(aspekt.Titel);
     const content = (
       <div className="space-y-4">
         <BlocksRenderer content={aspekt.Text} />
@@ -59,7 +61,7 @@ export default function getDetailsSummary(prinzip: PrinzipWithAspekte) {
       </div>
     );
 
-    return { title: aspekt.Titel, content };
+    return { title: aspekt.Titel, content, identifier };
   });
 
   if (items.length === 0) return undefined;

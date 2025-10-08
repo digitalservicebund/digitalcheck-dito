@@ -39,7 +39,7 @@ function CheckboxWithExpandableArea({
   }, [checkboxControlProps.value]);
 
   return (
-    <div className="space-y-40 rounded-sm border border-blue-400 bg-blue-200 p-24">
+    <div className="max-w-a11y space-y-40 rounded-sm border border-blue-400 bg-blue-200 p-24">
       <Checkbox
         scope={scope}
         disabled={disabled || (!closeable && open)}
