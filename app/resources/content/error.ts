@@ -2,7 +2,7 @@ export const genericError = {
   title: "Ein Fehler ist aufgetreten",
   message: `Es tut uns leid, aber etwas ist schief gelaufen.
 
-Bitte versuchen Sie Folgendes:
+Folgendes könnte helfen:
 - Laden Sie die Seite neu.
 - Kehren Sie zur Startseite zurück.
 - Versuchen Sie es später erneut.
