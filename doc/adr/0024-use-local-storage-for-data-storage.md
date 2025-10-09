@@ -12,19 +12,16 @@ The user input includes sensitive information that should not be stored on our s
 
 Several client-side storage options were evaluated:
 
-- **Cookies**: Limited in size (typically 4KB per cookie), which free-text fields can easily exceed, making them unsuitable for storing larger form data.
-
+- **Cookies**: Sent to the server with every request and therefore exposing the sensitive information. Furthermore, limited in size (typically 4KB per cookie), which free-text fields can easily exceed, making them unsuitable for storing larger form data.
 - **IndexedDB**: Designed for complex relational data structures with query capabilities. While powerful, it introduces overhead in maintaining data schemas and migrations that is not justified for our straightforward storage needs.
-
+- **localStorage** Provides extensive storage capacity (typically 5-10MB), persists data across browser sessions, and has a straightforward API that is well-supported across modern browsers.
 - **sessionStorage**: Similar to localStorage in terms of API and capacity, but data is cleared when the browser tab or window is closed. This would be suitable if we preferred ephemeral storage, but we want data to persist across sessions.
-
 - **In-memory JavaScript objects**: Data is lost on page reload, making this approach unsuitable for a multi-step form where users might navigate away or refresh the page.
-
 - **File storage (download/upload)**: Many SINA setups restrict file upload capabilities for security reasons, making this option impractical for our target users.
 
 ## Decision
 
-We will use **localStorage** to persist user form data on the client. This approach provides sufficient storage capacity (typically 5-10MB), persists data across browser sessions, and has a straightforward API that is well-supported across modern browsers.
+We will use **localStorage** to persist user form data on the client since it persists data across browser sessions, does not send the data to the server and has a simple and straightforward API.
 
 ## Consequences
 
