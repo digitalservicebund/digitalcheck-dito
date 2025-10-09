@@ -230,10 +230,6 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     if (error.status === 404) {
       errorTitle = notFoundError.title;
       errorMessage = notFoundError.message;
-    } else {
-      errorTitle = error.statusText
-        ? `Fehler: ${error.statusText} - ${error.data}`
-        : `Fehler: ${error.data}`;
     }
   } else if (error instanceof Error && typeof window !== "undefined") {
     // The error should be a native JS runtime error, not a route error response from the server
