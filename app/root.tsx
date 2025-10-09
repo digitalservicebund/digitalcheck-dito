@@ -26,7 +26,6 @@ import { general } from "~/resources/content/shared/general";
 import { siteMeta } from "~/resources/content/shared/meta";
 import { ROUTE_LANDING } from "~/resources/staticRoutes";
 import sharedStyles from "~/styles.css?url";
-import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants";
 import { POSTHOG_KEY } from "~/utils/constants.server";
 import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
@@ -178,19 +177,19 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdMetadata) }}
         ></script>
         {metaProperties}
-        {trackingEnabled && (
+        {/* {trackingEnabled && (
           <script
             key={error ? "error-tracking" : "app-tracking"}
             defer
             data-domain={PLAUSIBLE_DOMAIN}
             src={PLAUSIBLE_SCRIPT}
           />
-        )}
+        )} */}
         <Links />
       </head>
       <body className="flex min-h-screen flex-col">
         <PHProvider posthogEnabled={posthogEnabled} posthogKey={posthogKey}>
-          <ScrollAndFocus />
+          {/* <ScrollAndFocus /> */}
           <PageHeader />
           {children}
           <Footer />
