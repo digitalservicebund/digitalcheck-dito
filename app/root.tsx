@@ -33,7 +33,7 @@ import { useNonce } from "~/utils/nonce";
 import trackClientSideError from "~/utils/trackClientSideError";
 import type { Route } from "./+types/root";
 import { PHProvider } from "./providers/PosthogProvider";
-import { notFound, serverError } from "./resources/content/error";
+import { genericError, notFoundError } from "./resources/content/error";
 
 export function loader({ request }: Route.LoaderArgs) {
   const featureFlags = getFeatureFlags();
@@ -219,19 +219,24 @@ export default function App() {
   );
 }
 
-export function ErrorBoundary() {
-  const error = useRouteError();
-
-  let errorStatus = "500";
-  let errorTitle = serverError.title;
-  let errorMessage = serverError.message;
+export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+  let errorStatus;
+  let errorTitle = genericError.title;
+  let errorMessage = genericError.message;
 
   if (isRouteErrorResponse(error)) {
     errorStatus = `${error.status}`;
-    errorTitle = error.status === 404 ? notFound.title : `${error.data}`;
-    errorMessage = error.status === 404 ? notFound.message : errorMessage;
+
+    if (error.status === 404) {
+      errorTitle = notFoundError.title;
+      errorMessage = notFoundError.message;
+    } else {
+      errorTitle = error.statusText
+        ? `Fehler: ${error.statusText} - ${error.data}`
+        : `Fehler: ${error.data}`;
+    }
   } else if (error instanceof Error && typeof window !== "undefined") {
-    // The error should be a native JS runtime error, not a route error response form the server
+    // The error should be a native JS runtime error, not a route error response from the server
     // window is only defined on client-side making sure the code is running in the browser
     trackClientSideError(error);
   }
@@ -241,7 +246,9 @@ export function ErrorBoundary() {
       <MetaTitle prefix="Fehler" />
       <Container>
         <div className="ds-stack ds-stack-8 mb-32">
-          <span className="ds-label-01-bold">{errorStatus}</span>
+          {errorStatus && (
+            <span className="ds-label-01-bold">{errorStatus}</span>
+          )}
           <Heading text={errorTitle} className="ds-heading-02-reg" />
           <RichText markdown={errorMessage} className="ds-subhead" />
         </div>
