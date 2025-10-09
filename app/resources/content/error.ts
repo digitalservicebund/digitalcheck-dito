@@ -3,9 +3,9 @@ export const genericError = {
   message: `Es tut uns leid, aber etwas ist schief gelaufen.
 
 Bitte versuchen Sie Folgendes:
-- Laden Sie die Seite neu
-- Kehren Sie zur Startseite zurück
-- Kommen Sie in ein wenig Zeit wieder
+- Laden Sie die Seite neu.
+- Kehren Sie zur Startseite zurück.
+- Versuchen Sie es später erneut.
 
 Falls das Problem weiterhin besteht, kontaktieren Sie uns unter [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de) oder [0151/40 76 78 39](tel:+4915140767839).`,
 };
