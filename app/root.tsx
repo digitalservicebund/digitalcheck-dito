@@ -160,12 +160,12 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
   }
 
   // this suggests a site name to search engines
-  const jsonLdMetadata = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: siteMeta.siteName,
-    url: siteMeta.siteURL,
-  };
+  // const jsonLdMetadata = {
+  //   "@context": "https://schema.org",
+  //   "@type": "WebSite",
+  //   name: siteMeta.siteName,
+  //   url: siteMeta.siteURL,
+  // };
 
   return (
     <html lang="de" className="scroll-smooth">
@@ -173,10 +173,10 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={siteMeta.description} />
-        <script
+        {/* <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdMetadata) }}
-        ></script>
+        ></script> */}
         {metaProperties}
         {trackingEnabled && (
           <script
