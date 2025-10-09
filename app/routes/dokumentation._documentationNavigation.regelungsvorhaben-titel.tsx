@@ -21,11 +21,12 @@ export default function DocumentationInfo() {
   const { currentUrl, nextRoute, previousRoute } =
     useOutletContext<NavigationContext>();
 
+  const defaultValues = {
+    title: "",
+  };
   const form = useForm({
     schema: schema,
-    defaultValues: {
-      title: "",
-    },
+    defaultValues: defaultValues,
     validationBehaviorConfig: {
       whenSubmitted: "onChange",
       whenTouched: "onSubmit",
@@ -39,9 +40,7 @@ export default function DocumentationInfo() {
   useDataSync({
     currentUrl,
     form,
-    defaultValues: {
-      title: "",
-    },
+    defaultValues,
   });
 
   return (
