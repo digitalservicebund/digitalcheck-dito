@@ -170,6 +170,7 @@ export const digitalDocumentation = {
     headline: "Tragen Sie den Titel Ihres Regelungsvorhaben ein",
     inputTitle: {
       label: "Titel des Regelungsvorhabens",
+      error: "Bitte geben Sie einen Titel ein.",
     },
   },
   navigation: {
@@ -270,8 +271,8 @@ export const digitalDocumentation = {
       answerError: "Bitte wählen Sie eine Option aus.",
       reasoningError: "Bitte geben Sie mindestens eine Erläuterung an.",
       errorHint: "Bitte beachten Sie den oberen Hinweis.",
-      paragraphsError: "Bitte geben sie einen Paragrafen an.",
-      reasonError: "Bitte geben sie eine Begründung an.",
+      paragraphsError: "Bitte geben Sie einen Paragrafen an.",
+      reasonError: "Bitte geben Sie eine Begründung an.",
     },
   },
   summary: {

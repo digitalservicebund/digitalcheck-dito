@@ -26,7 +26,7 @@ function InputNew({
 
   return (
     <div className="space-y-8">
-      <label htmlFor={inputId} className="ds-body-01-bold">
+      <label htmlFor={inputId} className="ds-label-02-reg">
         {children}
       </label>
       <input
@@ -40,7 +40,9 @@ function InputNew({
           ...rest,
         })}
       />
-      <p className="ds-body-01-reg inline-block">{description}</p>
+      {description && (
+        <p className="ds-body-01-reg inline-block">{description}</p>
+      )}
       {(error || field.error()) && (
         <InputError id={errorId}>{error || field.error()}</InputError>
       )}

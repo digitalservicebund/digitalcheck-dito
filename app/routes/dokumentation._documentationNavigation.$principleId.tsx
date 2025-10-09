@@ -33,7 +33,7 @@ import { useDataSync } from "./dokumentation/documentationDataServiceHook";
 
 const { principlePages } = digitalDocumentation;
 
-const reasoning = z
+const reasoningSchema = z
   .object({
     aspect: z.string().optional(),
     checkbox: z.literal("on").optional(),
@@ -62,11 +62,11 @@ const reasoning = z
     }
   });
 
-type Reasoning = z.output<typeof reasoning>;
+type Reasoning = z.output<typeof reasoningSchema>;
 
 const positiveAnswerSchema = z.object({
   answer: z.literal(principlePages.radioOptions[0]),
-  reasoning: z.array(reasoning.optional(), {
+  reasoning: z.array(reasoningSchema.optional(), {
     error: principlePages.errors.reasoningError,
   }),
 });
