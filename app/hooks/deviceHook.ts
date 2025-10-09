@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function useResize(onResize: () => void, init = true) {
   useEffect(() => {
@@ -23,19 +23,18 @@ export function useScroll(onScroll: () => void) {
 }
 
 export function useIsMobileSize() {
+  // Start with undefined to indicate we don't know the size yet (avoiding hydration mismatch)
+  // On the server, we can't determine the screen size, so we defer this until client-side
   const [isMobileSize, setIsMobileSize] = useState<boolean | undefined>(
     undefined,
   );
 
-  useResize(
-    // Use useCallback to prevent infinite loop
-    useCallback(() => {
-      if (typeof window !== "undefined") {
-        setIsMobileSize(window.innerWidth <= 768 /* Breakpoint md */);
-      }
-    }, []),
-  );
+  useResize(() => {
+    if (typeof window !== "undefined") {
+      setIsMobileSize(window.innerWidth <= 768 /* Breakpoint md */);
+    }
+  });
 
-  // Default to false (desktop) if not yet determined
+  // Default to false (desktop) if not yet determined to maintain backward compatibility
   return isMobileSize ?? false;
 }

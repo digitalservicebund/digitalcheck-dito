@@ -25,40 +25,35 @@ export default function PrincipleHighlightModifier({ node }: { node: Node }) {
 
   // Generate a deterministic ID based on the text content and position
   const highlightID = idFromText(text, "highlight");
-  const renderAsLink = useAnchorLinks && isMobileSize && !!absatzId;
 
-  function getPrincipleHighlight(
-    principle: BasePrinzip,
-    isHidden: boolean = false,
-  ) {
+  if (!useAnchorLinks || !isMobileSize || !absatzId)
     return (
       <PrincipleHighlight
         id={highlightID}
         principle={principle}
         absatzId={absatzId}
-        className={isHidden ? "hidden" : ""}
       >
         {text}
       </PrincipleHighlight>
     );
-  }
 
   return (
-    <>
-      <Link
-        replace
-        to={`#${explanationID(absatzId, principle.Nummer)}`}
-        onClick={() => {
-          setActiveHighlight(highlightID);
-        }}
-        className={
-          renderAsLink ? "cursor-help no-underline hover:underline" : "hidden"
-        }
+    <Link
+      replace
+      to={`#${explanationID(absatzId, principle.Nummer)}`}
+      onClick={() => {
+        setActiveHighlight(highlightID);
+      }}
+      className="cursor-help no-underline hover:underline"
+    >
+      <PrincipleHighlight
+        id={highlightID}
+        principle={principle}
+        absatzId={absatzId}
       >
-        {getPrincipleHighlight(principle)}
-      </Link>
-      {getPrincipleHighlight(principle, renderAsLink)}
-    </>
+        {text}
+      </PrincipleHighlight>
+    </Link>
   );
 }
 
@@ -67,7 +62,6 @@ type PrincipleHighlightProps = {
   children: string;
   principle: BasePrinzip;
   absatzId: string;
-  className?: string;
 };
 
 function PrincipleHighlight({
@@ -75,7 +69,6 @@ function PrincipleHighlight({
   children,
   principle,
   absatzId,
-  className,
 }: Readonly<PrincipleHighlightProps>) {
   return (
     <mark
@@ -83,7 +76,6 @@ function PrincipleHighlight({
       className={twJoin(
         "ds-body-01-reg",
         PRINCIPLE_COLORS[principle.Nummer].background,
-        className,
       )}
       aria-label={`Textbeispiel erfüllt Prinzip: ${principle.Name}`}
       aria-describedby={explanationID(absatzId, principle.Nummer)}
