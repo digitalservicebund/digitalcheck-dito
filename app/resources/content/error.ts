@@ -17,7 +17,3 @@ export const notFoundError = {
 - Wenn Sie die URL direkt eingegeben haben, überprüfen Sie die Schreibweise.
 - Versuchen Sie, die Seite von der Startseite aus erneut zu finden.`,
 };
-
-export const serverError = {
-  title: "Interner Serverfehler",
-};
