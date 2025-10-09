@@ -30,8 +30,8 @@ const {
 
 export default function Index() {
   const [showBanner, setShowBanner] = useState(true);
-  const isDocumentationFeatureEnabled = useFeatureFlag(
-    features.enableDocumentationPrototype,
+  const enableDigitalDocumentation = useFeatureFlag(
+    features.enableDigitalDocumentation,
   );
 
   return (
@@ -174,7 +174,7 @@ export default function Index() {
         />
       </Container>
 
-      {showBanner && isDocumentationFeatureEnabled && (
+      {showBanner && enableDigitalDocumentation && (
         <div className="relative flex items-center justify-center gap-40 bg-yellow-200 p-24">
           <DvrIcon className="size-96 fill-yellow-300 max-md:hidden" />
           <div className="space-y-8">
@@ -197,6 +197,7 @@ export default function Index() {
             look="ghost"
             onClick={() => setShowBanner(false)}
             className="absolute top-0 right-0 w-auto p-24"
+            aria-label="Schließen"
           >
             <CloseIcon className="fill-blue-800" />
           </Button>

@@ -1,7 +1,14 @@
 import { render, screen, within } from "@testing-library/react";
 import Index from "app/routes/_index";
 import { MemoryRouter } from "react-router";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import useFeatureFlag from "~/utils/featureFlags";
+
+vi.mock("~/utils/featureFlags", () => {
+  return {
+    default: vi.fn(),
+  };
+});
 
 describe("Index Route - Integration Tests", () => {
   const renderWithRouter = (component: React.ReactElement) => {
@@ -9,6 +16,7 @@ describe("Index Route - Integration Tests", () => {
   };
 
   beforeEach(() => {
+    vi.mocked(useFeatureFlag).mockReturnValue(true);
     renderWithRouter(<Index />);
   });
 
@@ -64,7 +72,7 @@ describe("Index Route - Integration Tests", () => {
     ).toBeInTheDocument();
 
     const step3Button = screen.getByRole("link", {
-      name: /Dokumentation/,
+      name: /Dokumentation erstellen/,
     });
     expect(step3Button).toHaveAttribute("href", "/dokumentation");
   });
@@ -158,5 +166,14 @@ describe("Index Route - Integration Tests", () => {
     expect(screen.getByText(/Digitalcheck erscheint/)).toBeInTheDocument();
 
     expect(screen.getByText("Referentin")).toBeInTheDocument();
+  });
+
+  it("renders the documentation banner", () => {
+    expect(
+      screen.getByRole("heading", {
+        name: "Digitalcheck-Dokumentation: Jetzt online ausfüllenNEU",
+        level: 2,
+      }),
+    ).toBeInTheDocument();
   });
 });
