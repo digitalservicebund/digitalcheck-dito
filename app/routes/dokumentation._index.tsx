@@ -97,6 +97,7 @@ function DigitalDocumentationIndex() {
 function DocumentationIndex() {
   return (
     <>
+      <MetaTitle prefix={ROUTE_DOCUMENTATION.title} />
       <Hero title={documentation.title} subtitle={documentation.subtitle}>
         <ButtonContainer className="mt-48">
           {documentation.buttons.map((button) => (
