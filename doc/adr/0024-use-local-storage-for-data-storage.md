@@ -1,4 +1,4 @@
-# 24. Use localStorage to store data on client-side
+# 24. Use localStorage to store data on the client
 
 ## Status
 
@@ -8,7 +8,7 @@
 
 We are building a new feature that allows users to create the Digitalcheck documentation online instead of using the existing `docx` template. To ensure usability during the form flow, we need to persist user input so that progress is not lost when navigating between pages or if the browser is closed unexpectedly.
 
-The user input includes sensitive information that should not be stored on our servers without implementing extensive security measures, compliance processes, and infrastructure. For an MVP, we aim to keep the data exclusively on the client-side. We assume that our users work on secured devices (e.g. SINA laptops), so the data remains secure as long as it does not leave the client.
+The user input includes sensitive information that should not be stored on our servers without implementing extensive security measures, compliance processes, and infrastructure. For an MVP, we aim to keep the data exclusively on the client. We assume that our users work on secured devices (e.g. SINA laptops), so the data remains secure as long as it does not leave the client.
 
 Several client-side storage options were evaluated:
 
@@ -24,7 +24,7 @@ Several client-side storage options were evaluated:
 
 ## Decision
 
-We will use **localStorage** to persist user form data on the client-side. This approach provides sufficient storage capacity (typically 5-10MB), persists data across browser sessions, and has a straightforward API that is well-supported across modern browsers.
+We will use **localStorage** to persist user form data on the client. This approach provides sufficient storage capacity (typically 5-10MB), persists data across browser sessions, and has a straightforward API that is well-supported across modern browsers.
 
 ## Consequences
 
