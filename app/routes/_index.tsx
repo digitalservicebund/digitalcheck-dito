@@ -1,6 +1,10 @@
+import CloseIcon from "@digitalservicebund/icons/Close";
 import ContactPhoneOutlinedIcon from "@digitalservicebund/icons/ContactPhoneOutlined";
+import DvrIcon from "@digitalservicebund/icons/Dvr";
 import FactCheckOutlinedIcon from "@digitalservicebund/icons/FactCheckOutlined";
 import WidgetsOutlinedIcon from "@digitalservicebund/icons/WidgetsOutlined";
+import { useState } from "react";
+import Badge from "~/components/Badge";
 import Button from "~/components/Button";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
@@ -10,6 +14,8 @@ import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { startseite } from "~/resources/content/startseite";
+import { features } from "~/resources/features";
+import useFeatureFlag from "~/utils/featureFlags";
 
 const {
   title,
@@ -23,6 +29,11 @@ const {
 } = startseite;
 
 export default function Index() {
+  const [showBanner, setShowBanner] = useState(true);
+  const isDocumentationFeatureEnabled = useFeatureFlag(
+    features.enableDocumentationPrototype,
+  );
+
   return (
     <>
       <MetaTitle />
@@ -162,6 +173,35 @@ export default function Index() {
           content={quote.reference}
         />
       </Container>
+
+      {showBanner && isDocumentationFeatureEnabled && (
+        <div className="relative flex items-center justify-center gap-40 bg-yellow-200 p-24">
+          <DvrIcon className="size-96 fill-yellow-300 max-md:hidden" />
+          <div className="space-y-8">
+            <Heading
+              tagName="h2"
+              look="ds-label-01-bold"
+              className="flex gap-8 max-md:flex-col-reverse md:items-end"
+            >
+              Digitalcheck-Dokumentation: Jetzt online ausfüllen
+              <Badge text="NEU" look="hint" />
+            </Heading>
+
+            <RichText
+              markdown={
+                "Dokumentieren wird einfacher für Sie - jetzt Schritt für Schritt mit Hilfestellungen ausfüllen: [Online-Dokumentation öffnen](/dokumentation)"
+              }
+            />
+          </div>
+          <Button
+            look="ghost"
+            onClick={() => setShowBanner(false)}
+            className="absolute top-0 right-0 w-auto p-24"
+          >
+            <CloseIcon className="fill-blue-800" />
+          </Button>
+        </div>
+      )}
     </>
   );
 }
