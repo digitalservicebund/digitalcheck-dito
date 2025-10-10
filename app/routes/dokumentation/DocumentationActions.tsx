@@ -4,30 +4,30 @@ import { general } from "~/resources/content/shared/general";
 
 type SubmitType = {
   submit: true;
-  nextRoute?: undefined;
+  nextUrl?: undefined;
 };
 
 type NextType = {
   submit?: false;
-  nextRoute?: string;
+  nextUrl?: string;
 };
 
 type DocumentationActionsProps = {
-  previousRoute?: string;
+  previousUrl?: string;
 } & (SubmitType | NextType);
 
 export default function DocumentationActions({
   submit,
-  previousRoute,
-  nextRoute,
+  previousUrl,
+  nextUrl,
 }: Readonly<DocumentationActionsProps>) {
   return (
     <ButtonContainer>
       {submit && <Button type="submit">{general.buttonNext.text}</Button>}
-      {nextRoute && <Button href={nextRoute}>{general.buttonNext.text}</Button>}
+      {nextUrl && <Button href={nextUrl}>{general.buttonNext.text}</Button>}
 
-      {previousRoute && (
-        <Button href={previousRoute} look="tertiary">
+      {previousUrl && (
+        <Button href={previousUrl} look="tertiary">
           {general.buttonBack.text}
         </Button>
       )}

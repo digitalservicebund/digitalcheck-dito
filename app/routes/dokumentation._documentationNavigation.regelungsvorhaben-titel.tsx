@@ -24,7 +24,7 @@ type Schema = z.infer<typeof schema>;
 
 export default function DocumentationTitle() {
   const navigate = useNavigate();
-  const { currentUrl, nextRoute, previousRoute } =
+  const { currentUrl, nextUrl, previousUrl } =
     useOutletContext<NavigationContext>();
 
   const form = useForm({
@@ -41,7 +41,7 @@ export default function DocumentationTitle() {
       createOrUpdateDocumentationStep(currentUrl, data);
     },
     onSubmitSuccess: async () => {
-      await navigate(nextRoute.url);
+      await navigate(nextUrl);
     },
   });
 
@@ -70,14 +70,14 @@ export default function DocumentationTitle() {
         look="ds-heading-02-reg"
         className="mb-40"
       />
-      <form {...form.getFormProps()} className="space-y-40">
+      <form {...form.getFormProps()} className="space-y-80">
         <fieldset>
           <InputNew scope={form.scope("title")}>
             {info.inputTitle.label}
           </InputNew>
         </fieldset>
 
-        <DocumentationActions previousRoute={previousRoute.url} submit />
+        <DocumentationActions previousUrl={previousUrl} submit />
       </form>
     </>
   );

@@ -37,7 +37,7 @@ const getAnswers = (field: DocumentationField) =>
   ));
 
 export default function DocumentationSummary() {
-  const { routes, previousRoute, nextRoute } =
+  const { routes, previousUrl, nextUrl } =
     useOutletContext<NavigationContext>();
 
   const [items, setItems] = useState<InfoBoxProps[]>([]);
@@ -121,10 +121,7 @@ export default function DocumentationSummary() {
       <RichText markdown={summary.text} />
       <InfoBoxList className="space-y-40" items={items} />
 
-      <DocumentationActions
-        previousRoute={previousRoute.url}
-        nextRoute={nextRoute.url}
-      />
+      <DocumentationActions previousUrl={previousUrl} nextUrl={nextUrl} />
     </>
   );
 }

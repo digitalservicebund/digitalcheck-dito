@@ -178,26 +178,36 @@ export const digitalDocumentation = {
     principles: "Prinzipien",
   },
   participation: {
-    headline: "Praxistaugliche Umsetzung",
-    textIntro: dedent`
-      Ihr Regelungsvorhaben soll den Bedürfnissen der Betroffenen entsprechen. Die Anforderungen der umsetzenden Akteurinnen und Akteure sollen Sie ebenfalls berücksichtigen. Dafür müssen Sie sich mit den Beteiligten austauschen.
-      
-      Bitte listen Sie stichpunktartig auf, ob bzw. welche Schritte Sie unternommen haben.  
-
-      **Zum Beispiel:** frühzeitige Befragung von Bürgerinnen und Bürgern, Gespräche mit Vollzugsakteurinnen und -akteuren oder Expertinnen und Experten, formelle Beteiligungsverfahren. 
-      `,
-    textFieldParticipationLabel: "Austauschformate:",
-    textResults: dedent`
-      Was haben Sie aus dem Austausch mit den Beteiligten mitgenommen? 
-      Bitte listen Sie stichpunktartig auf, welche Erkenntnisse eingearbeitet wurden. 
-      Paragrafen, die besonders umsetzungsrelevant sind, können Sie kopieren und hier einfügen.
-      
-      **Zum Beispiel:**
-      Aus Gesprächen mit Mitarbeitenden der Hauptzollämter gelernt: Das aktuelle, papierbasierte Antragsverfahren wird unter großem Aufwand am Laufen gehalten. Angesichts einer erwarteten Vervielfachung der Antragszahlen würde dies zu einer drohenden Überlastung führen. 
-      Auf Basis dieser Erkenntnis wurde entschieden, eine Online-Antragspflicht zwei Jahre früher als geplant einzuführen, um die Bearbeitung zu digitalisieren, manuelle Schritte zu reduzieren und die Prüfenden zu entlasten. 
-      Für Details lesen Sie gerne den <a href="https://digitalservice.bund.de/blog/aktuelles-beispiel-fuer-digitaltaugliche-regelungen-das-stromsteuerrecht" target="_blank">Blog-Artikel</a>.
-    `,
-    textFieldResultsLabel: "Eingearbeitete Erkenntnisse:",
+    headline: "Auswirkungen auf Betroffene und an der Umsetzung Beteiligte",
+    textIntro:
+      "Ihr Regelungsvorhaben sollte sowohl den Bedürfnissen der Betroffenen als auch den Anforderungen der Umsetzung (z. B. in Behörden) gerecht werden.",
+    formats: {
+      heading:
+        "Entspricht die Umsetzung des Regelungsvorhabens den Bedürfnissen der Betroffenen? Wie haben Sie das überprüft?",
+      content:
+        "**Zum Beispiel:** frühzeitige Befragung von Bürgerinnen und Bürgern, Gespräche mit Vollzugsakteurinnen und -akteuren oder Expertinnen und Experten, formelle Beteiligungsverfahren.",
+      textField: {
+        label: "Antwort",
+        description:
+          "Bitte listen Sie stichpunktartig auf, ob bzw. welche Schritte Sie unternommen haben.",
+        errorMessage: "Bitte geben Sie eine Antwort.",
+      },
+    },
+    results: {
+      heading:
+        "Wie spiegeln sich die Erkenntnisse, die durch die oben genannten Schritte gewonnen wurden, im Regelungsvorhaben wider?",
+      textField: {
+        label: "Antwort",
+        description:
+          "Bitte listen Sie stichpunktartig auf, welche Erkenntnisse eingearbeitet wurden und geben Sie Hinweise auf Paragrafen, die besonders umsetzungsrelevant sind.",
+        errorMessage: "Bitte geben Sie eine Antwort.",
+      },
+    },
+    tip: {
+      heading: "Ihre eingegebenen Angaben werden in der Session gespeichert.",
+      content:
+        "Sie können Ihre Angaben als Word Dokument herunterladen und zu einem späteren Zeitpunkt vervollständigen.",
+    },
   },
   principlePages: {
     badge: "Prinzipien",

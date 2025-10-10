@@ -16,8 +16,8 @@ export type OnNavigateCallback = () => Promise<boolean>;
 
 export type NavigationContext = {
   currentUrl: string;
-  nextRoute: InternalRoute;
-  previousRoute: InternalRoute;
+  nextUrl: string;
+  previousUrl: string;
   routes: (InternalRoute | InternalRoute[])[];
 };
 
@@ -115,8 +115,8 @@ export default function LayoutWithDocumentationNavigation() {
     });
   }
 
-  const nextRoute = getNextRoute(routes.flat(), currentUrl);
-  const previousRoute = getPreviousRoute(routes.flat(), currentUrl);
+  const nextUrl = getNextRoute(routes.flat(), currentUrl)?.url;
+  const previousUrl = getPreviousRoute(routes.flat(), currentUrl).url;
 
   const getNavItem = (route: InternalRoute) => (
     <Nav.Item key={route.url} url={route.url}>
@@ -151,14 +151,11 @@ export default function LayoutWithDocumentationNavigation() {
         <div className="lg:hidden">
           <Stepper currentElementUrl={currentUrl} elements={routes} />
         </div>
-
-        <div className="space-y-[140px]">
-          {/* force remount for different principles with key={currentUrl} */}
-          <Outlet
-            key={currentUrl}
-            context={{ currentUrl, nextRoute, previousRoute, routes }}
-          />
-        </div>
+        {/* force remount for different principles with key={currentUrl} */}
+        <Outlet
+          key={currentUrl}
+          context={{ currentUrl, nextUrl, previousUrl, routes }}
+        />
       </section>
     </div>
   );

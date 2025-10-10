@@ -369,7 +369,7 @@ function PositiveAnswerFormElements({
 export default function DocumentationPrinciple() {
   const { prinzip } = useLoaderData<typeof loader>();
   const navigate = useNavigate();
-  const { currentUrl, nextRoute, previousRoute } =
+  const { currentUrl, nextUrl, previousUrl } =
     useOutletContext<NavigationContext>();
 
   const form = useForm({
@@ -385,7 +385,7 @@ export default function DocumentationPrinciple() {
       initial: "onSubmit",
     },
     handleSubmit: async () => {
-      await navigate(nextRoute.url);
+      await navigate(nextUrl);
     },
   });
 
@@ -480,7 +480,7 @@ export default function DocumentationPrinciple() {
             {principlePages.storageHint.content}
           </InlineNotice>
 
-          <DocumentationActions previousRoute={previousRoute.url} submit />
+          <DocumentationActions previousUrl={previousUrl} submit />
         </form>
       </div>
     </>

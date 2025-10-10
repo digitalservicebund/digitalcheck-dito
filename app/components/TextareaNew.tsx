@@ -24,7 +24,7 @@ function TextareaNew({
   const errorId = useId();
 
   return (
-    <div className="space-y-8">
+    <>
       <label htmlFor={inputId} className="ds-body-01-bold">
         {children}
       </label>
@@ -38,11 +38,13 @@ function TextareaNew({
           ...rest,
         })}
       />
-      <p className="ds-body-01-reg inline-block">{description}</p>
+      {description && (
+        <p className="ds-label-03-reg mt-2 inline-block">{description}</p>
+      )}
       {(error || field.error()) && (
         <InputError id={errorId}>{error || field.error()}</InputError>
       )}
-    </div>
+    </>
   );
 }
 

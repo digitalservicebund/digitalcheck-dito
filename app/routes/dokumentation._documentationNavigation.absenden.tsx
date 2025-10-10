@@ -10,7 +10,7 @@ import DocumentationActions from "./dokumentation/DocumentationActions";
 const { send } = digitalDocumentation;
 
 export default function DocumentationSend() {
-  const { previousRoute } = useOutletContext<NavigationContext>();
+  const { previousUrl } = useOutletContext<NavigationContext>();
 
   return (
     <>
@@ -23,7 +23,7 @@ export default function DocumentationSend() {
       />
       <RichText markdown={send.text} className="mb-40" />
 
-      <DocumentationActions previousRoute={previousRoute.url} />
+      <DocumentationActions previousUrl={previousUrl} />
     </>
   );
 }
