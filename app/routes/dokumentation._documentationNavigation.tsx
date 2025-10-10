@@ -1,5 +1,4 @@
 import { Outlet, useLoaderData, useLocation } from "react-router";
-import Container from "~/components/Container";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
@@ -126,7 +125,7 @@ export default function LayoutWithDocumentationNavigation() {
   );
 
   return (
-    <div className="parent-bg-blue flex justify-center space-x-80 bg-blue-100 py-80 pr-48 pl-32">
+    <div className="parent-bg-blue container flex max-w-none justify-center space-x-80 bg-blue-100 py-40 lg:py-80">
       <div className="hidden flex-none lg:block">
         <Nav
           activeElementUrl={currentUrl}
@@ -148,10 +147,10 @@ export default function LayoutWithDocumentationNavigation() {
           </Nav.Items>
         </Nav>
       </div>
-      <section className="w-[51rem]">
-        <Container className="pt-0 lg:hidden">
+      <section className="w-[51rem] space-y-40">
+        <div className="lg:hidden">
           <Stepper currentElementUrl={currentUrl} elements={routes} />
-        </Container>
+        </div>
 
         <div className="space-y-[140px]">
           {/* force remount for different principles with key={currentUrl} */}

@@ -1,5 +1,4 @@
 import { Outlet, useLoaderData, useRouteLoaderData } from "react-router";
-import Container from "~/components/Container";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { preCheck } from "~/resources/content/vorpruefung";
@@ -25,7 +24,7 @@ export default function LayoutWithPreCheckNavigation() {
     : -1;
 
   return (
-    <div className="parent-bg-blue flex justify-center space-x-80 bg-blue-100 py-80 pr-48 pl-32">
+    <div className="parent-bg-blue container flex max-w-none justify-center space-x-80 bg-blue-100 py-40 lg:py-80">
       <div className="hidden flex-none lg:block">
         <Nav ariaLabel="Alle Fragen" activeElementUrl={question?.url}>
           <Nav.Items>
@@ -42,11 +41,11 @@ export default function LayoutWithPreCheckNavigation() {
           </Nav.Items>
         </Nav>
       </div>
-      <div className="w-[51rem]">
+      <div className="w-[51rem] space-y-40">
         {showLinkBar && (
-          <Container className="pt-0 lg:hidden">
+          <div className="lg:hidden">
             <Stepper currentElementUrl={question.url} elements={questions} />
-          </Container>
+          </div>
         )}
         <section>
           <Outlet />
