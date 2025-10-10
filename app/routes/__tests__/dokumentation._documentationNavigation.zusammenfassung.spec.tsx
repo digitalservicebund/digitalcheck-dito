@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
-import { MemoryRouter, useOutletContext } from "react-router";
+import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { principles } from "~/resources/content/shared/prinzipien";
 import {
@@ -9,7 +9,7 @@ import {
   ROUTE_DOCUMENTATION_TITLE,
   ROUTES_DOCUMENTATION_PRE,
 } from "~/resources/staticRoutes";
-import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
+import { mockRouter } from "~/routes/__tests__/utils/mockRouter";
 import DocumentationSummary from "~/routes/dokumentation._documentationNavigation.zusammenfassung";
 import type { DocumentationData } from "~/routes/dokumentation/documentationDataService";
 import { getDocumentationStep } from "~/routes/dokumentation/documentationDataService";
@@ -28,18 +28,7 @@ vi.mock(
   },
 );
 
-vi.mock("react-router", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("react-router")>();
-  return {
-    ...actual,
-    useOutletContext: vi.fn(),
-  };
-});
-
-const mockGetDocumentationStep = vi.mocked(getDocumentationStep);
-const mockUseOutletContext = vi.mocked(useOutletContext);
-
-const allRoutes: (Route[] | Route)[] = [
+const routes: (Route[] | Route)[] = [
   ...ROUTES_DOCUMENTATION_PRE,
   [
     {
@@ -48,6 +37,10 @@ const allRoutes: (Route[] | Route)[] = [
     },
   ],
 ];
+
+const { mockNavigationContext } = mockRouter(routes);
+
+const mockGetDocumentationStep = vi.mocked(getDocumentationStep);
 
 describe("DocumentationSummary", () => {
   const renderWithRouter = () => {
@@ -99,13 +92,7 @@ describe("DocumentationSummary", () => {
       (stepId: string) =>
         mockDocumentationData.steps.find(({ id }) => id === stepId) ?? null,
     );
-    const context: NavigationContext = {
-      currentUrl: "/dokumentation/zusammenfassung",
-      nextUrl: "/next-route",
-      previousUrl: "/previous-route",
-      routes: allRoutes,
-    };
-    mockUseOutletContext.mockReturnValue(context);
+    mockNavigationContext();
   });
 
   afterEach(() => {
@@ -136,7 +123,7 @@ describe("DocumentationSummary", () => {
   it("shows info boxes with correct headings for all documentation routes except summary and send", () => {
     renderWithRouter();
 
-    allRoutes.flat().forEach((route) => {
+    routes.flat().forEach((route) => {
       expect(screen.getByTestId(route.url)).toBeInTheDocument();
     });
   });
@@ -144,7 +131,7 @@ describe("DocumentationSummary", () => {
   it("shows correct heading for each section", () => {
     renderWithRouter();
 
-    allRoutes.flat().forEach((route) => {
+    routes.flat().forEach((route) => {
       const stepContainer = screen.getByTestId(route.url);
 
       // For principle routes, check for principle headlines instead of route titles
@@ -182,7 +169,7 @@ describe("DocumentationSummary", () => {
   it("shows principle badges only for principle steps", () => {
     renderWithRouter();
 
-    allRoutes.flat().forEach((route) => {
+    routes.flat().forEach((route) => {
       const stepContainer = screen.getByTestId(route.url);
       const principle = principles.find((p) => route.url.endsWith(p.id));
 
@@ -205,7 +192,7 @@ describe("DocumentationSummary", () => {
     const stepsWithData = mockDocumentationData.steps;
 
     stepsWithData.forEach((step) => {
-      const route = allRoutes.flat().find((r) => r.url === step.id);
+      const route = routes.flat().find((r) => r.url === step.id);
       if (!route) throw Error(`Cannot find route ${step.id}.`);
 
       const stepContainer = screen.getByTestId(route.url);
@@ -227,7 +214,7 @@ describe("DocumentationSummary", () => {
   it("shows InlineNotice for steps without data", () => {
     renderWithRouter();
 
-    const stepsWithoutData = allRoutes
+    const stepsWithoutData = routes
       .flat()
       .filter(
         (route) =>
@@ -259,7 +246,7 @@ describe("DocumentationSummary", () => {
     mockGetDocumentationStep.mockReturnValue(null);
     renderWithRouter();
 
-    allRoutes.flat().forEach((route) => {
+    routes.flat().forEach((route) => {
       const stepContainer = screen.getByTestId(route.url);
 
       expect(

@@ -5,11 +5,10 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { mockDocumentationDataService } from "~/routes/__tests__/utils/mockDocumentationDataService";
 import { mockForm } from "~/routes/__tests__/utils/mockForm";
 import { mockRouter } from "~/routes/__tests__/utils/mockRouter";
-import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
 import DocumentationTitle from "~/routes/dokumentation._documentationNavigation.regelungsvorhaben-titel";
 import { getDocumentationStep } from "~/routes/dokumentation/documentationDataService";
 
-const { mockUseOutletContext } = mockRouter();
+const { mockNavigationContext } = mockRouter();
 mockDocumentationDataService();
 mockForm();
 
@@ -26,13 +25,7 @@ describe("DocumentationTitle", () => {
 
   beforeEach(() => {
     mockGetDocumentationStep.mockReturnValue(null);
-    const context: NavigationContext = {
-      currentUrl: "/dokumentation/regelungsvorhaben-titel",
-      nextUrl: "/next-route",
-      previousUrl: "/previous-route",
-      routes: [],
-    };
-    mockUseOutletContext.mockReturnValue(context);
+    mockNavigationContext();
 
     renderWithRouter();
   });
@@ -67,6 +60,6 @@ describe("DocumentationTitle", () => {
   it("shows back button", () => {
     const backButton = screen.getByRole("link", { name: "Zurück" });
     expect(backButton).toBeInTheDocument();
-    expect(backButton).toHaveAttribute("href", "/previous-route");
+    expect(backButton).toHaveAttribute("href", "/previous-url");
   });
 });
