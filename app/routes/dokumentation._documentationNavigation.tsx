@@ -126,7 +126,7 @@ export default function LayoutWithDocumentationNavigation() {
 
   return (
     <div className="parent-bg-blue container flex max-w-none justify-center space-x-80 bg-blue-100 py-40 lg:py-80">
-      <div className="hidden flex-none lg:block">
+      <div className="hidden max-w-[248px] flex-none lg:block">
         <Nav
           activeElementUrl={currentUrl}
           ariaLabel={digitalDocumentation.navigation.ariaLabel}
