@@ -1,67 +1,19 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter, useOutletContext } from "react-router";
+import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { mockDocumentationDataService } from "~/routes/__tests__/utils/mockDocumentationDataService";
+import { mockForm } from "~/routes/__tests__/utils/mockForm";
+import { mockRouter } from "~/routes/__tests__/utils/mockRouter";
 import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
 import DocumentationParticipation from "~/routes/dokumentation._documentationNavigation.beteiligungsformate";
 import { getDocumentationStep } from "~/routes/dokumentation/documentationDataService";
 
-vi.mock(
-  "~/routes/dokumentation/documentationDataService",
-  async (importOriginal) => {
-    const actual =
-      await importOriginal<
-        typeof import("~/routes/dokumentation/documentationDataService")
-      >();
-    return {
-      ...actual,
-      getDocumentationStep: vi.fn(),
-      createOrUpdateDocumentationStep: vi.fn(),
-    };
-  },
-);
-
-vi.mock("react-router", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("react-router")>();
-  return {
-    ...actual,
-    useOutletContext: vi.fn(),
-    useNavigate: vi.fn(() => vi.fn()),
-  };
-});
-
-vi.mock("@rvf/react-router", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@rvf/react-router")>();
-  return {
-    ...actual,
-    useForm: vi.fn(() => ({
-      getFormProps: () => ({
-        id: "test-form",
-        onSubmit: vi.fn(),
-      }),
-      scope: (name: string) => ({
-        name,
-        value: "",
-        onChange: vi.fn(),
-      }),
-      dirty: () => false,
-      resetForm: vi.fn(),
-      setDirty: vi.fn(),
-    })),
-    useField: vi.fn(() => ({
-      getInputProps: (props: Record<string, unknown>) => ({
-        ...props,
-        name: "explanation",
-        value: "",
-        onChange: vi.fn(),
-      }),
-      error: () => null,
-    })),
-  };
-});
+const { mockUseOutletContext } = mockRouter();
+mockDocumentationDataService();
+mockForm();
 
 const mockGetDocumentationStep = vi.mocked(getDocumentationStep);
-const mockUseOutletContext = vi.mocked(useOutletContext);
 
 describe("DocumentationParticipation", () => {
   const renderWithRouter = () => {
