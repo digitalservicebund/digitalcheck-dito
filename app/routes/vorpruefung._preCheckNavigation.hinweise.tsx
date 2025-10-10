@@ -1,6 +1,5 @@
 import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
-import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
@@ -14,7 +13,7 @@ const { headline, text, nextButton, hint } = generalInfo;
 
 export default function GeneralInfo() {
   return (
-    <Container className="pt-0">
+    <>
       <MetaTitle prefix={ROUTE_PRECHECK_INFO.title} />
       <Heading
         text={headline}
@@ -22,25 +21,27 @@ export default function GeneralInfo() {
         look="ds-heading-02-reg"
         className="mb-16"
       />
-      <RichText markdown={text} className="mb-40" />
-      <InlineNotice
-        look="tips"
-        heading={<Heading tagName="h2">{hint.title}</Heading>}
-      >
-        <RichText markdown={hint.text} />
-      </InlineNotice>
-      <ButtonContainer className="pt-40">
-        <Button id={"generalInfo-next-button"} href={questions[0].url}>
-          {nextButton}
-        </Button>
-        <Button
-          id={"generalInfo-back-button"}
-          href={ROUTE_PRECHECK.url}
-          look={"tertiary"}
+      <div className="space-y-40">
+        <RichText markdown={text} />
+        <InlineNotice
+          look="tips"
+          heading={<Heading tagName="h2">{hint.title}</Heading>}
         >
-          {general.buttonBack.text}
-        </Button>
-      </ButtonContainer>
-    </Container>
+          <RichText markdown={hint.text} />
+        </InlineNotice>
+        <ButtonContainer>
+          <Button id={"generalInfo-next-button"} href={questions[0].url}>
+            {nextButton}
+          </Button>
+          <Button
+            id={"generalInfo-back-button"}
+            href={ROUTE_PRECHECK.url}
+            look={"tertiary"}
+          >
+            {general.buttonBack.text}
+          </Button>
+        </ButtonContainer>
+      </div>
+    </>
   );
 }

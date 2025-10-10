@@ -5,7 +5,6 @@ import { redirect, useLoaderData } from "react-router";
 import { z } from "zod";
 import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
-import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import InlineNotice from "~/components/InlineNotice";
@@ -171,7 +170,7 @@ export default function Index() {
   }, [answers, selectedOption, question.id]);
 
   return (
-    <form {...form.getFormProps()}>
+    <form {...form.getFormProps()} className="space-y-40">
       <MetaTitle
         prefix={
           ROUTES_PRECHECK_QUESTIONS.find((route) =>
@@ -180,7 +179,7 @@ export default function Index() {
         }
       />
       <input type="hidden" name="questionId" value={question.id} />
-      <fieldset className="ds-stack ds-stack-32 container pb-40">
+      <fieldset className="space-y-32">
         <span className="sr-only">{`${preCheck.srHint.before}${questionIdx + 1}${preCheck.srHint.between}${questions.length}`}</span>
         <legend className="ds-stack ds-stack-16">
           <Heading
@@ -212,7 +211,7 @@ export default function Index() {
           }
         />
       </fieldset>
-      <Container className="space-y-40 pt-0 pb-40">
+      <div className="space-y-40">
         {hasAnswerConflict && (
           <InlineNotice
             className="[&_p]:mt-24"
@@ -240,7 +239,7 @@ export default function Index() {
             {general.buttonBack.text}
           </Button>
         </ButtonContainer>
-      </Container>
+      </div>
     </form>
   );
 }

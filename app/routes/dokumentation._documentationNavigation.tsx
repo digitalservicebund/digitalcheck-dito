@@ -126,8 +126,8 @@ export default function LayoutWithDocumentationNavigation() {
   );
 
   return (
-    <div className="parent-bg-blue flex justify-center bg-blue-100 py-80">
-      <div className="hidden flex-none pl-32 lg:block">
+    <div className="parent-bg-blue flex justify-center space-x-80 bg-blue-100 py-80 pr-48 pl-32">
+      <div className="hidden flex-none lg:block">
         <Nav
           activeElementUrl={currentUrl}
           ariaLabel={digitalDocumentation.navigation.ariaLabel}
@@ -153,7 +153,7 @@ export default function LayoutWithDocumentationNavigation() {
           <Stepper currentElementUrl={currentUrl} elements={routes} />
         </Container>
 
-        <div className="container space-y-[140px]">
+        <div className="space-y-[140px]">
           {/* force remount for different principles with key={currentUrl} */}
           <Outlet
             key={currentUrl}
