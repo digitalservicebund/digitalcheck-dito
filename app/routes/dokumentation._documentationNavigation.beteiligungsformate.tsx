@@ -96,7 +96,6 @@ export default function DocumentationParticipation() {
       <form {...form.getFormProps()}>
         <fieldset className="mb-40">
           <TextareaNew
-            name="explanation"
             description={participation.formats.textField.description}
             scope={form.scope("formats")}
           >
@@ -112,7 +111,6 @@ export default function DocumentationParticipation() {
         />
         <fieldset>
           <TextareaNew
-            name="explanation"
             description={participation.results.textField.description}
             scope={form.scope("results")}
           >
