@@ -2,6 +2,7 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, useOutletContext } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
 import DocumentationTitle from "~/routes/dokumentation._documentationNavigation.regelungsvorhaben-titel";
 import { getDocumentationStep } from "~/routes/dokumentation/documentationDataService";
 
@@ -73,11 +74,13 @@ describe("DocumentationTitle", () => {
 
   beforeEach(() => {
     mockGetDocumentationStep.mockReturnValue(null);
-    mockUseOutletContext.mockReturnValue({
+    const context: NavigationContext = {
       currentUrl: "/dokumentation/regelungsvorhaben-titel",
-      nextRoute: { url: "/next-route" },
-      previousRoute: { url: "/previous-route" },
-    });
+      nextUrl: "/next-route",
+      previousUrl: "/previous-route",
+      routes: [],
+    };
+    mockUseOutletContext.mockReturnValue(context);
 
     renderWithRouter();
   });

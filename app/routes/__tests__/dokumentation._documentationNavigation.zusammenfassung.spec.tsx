@@ -9,6 +9,7 @@ import {
   ROUTE_DOCUMENTATION_TITLE,
   ROUTES_DOCUMENTATION_PRE,
 } from "~/resources/staticRoutes";
+import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
 import DocumentationSummary from "~/routes/dokumentation._documentationNavigation.zusammenfassung";
 import type { DocumentationData } from "~/routes/dokumentation/documentationDataService";
 import { getDocumentationStep } from "~/routes/dokumentation/documentationDataService";
@@ -98,11 +99,13 @@ describe("DocumentationSummary", () => {
       (stepId: string) =>
         mockDocumentationData.steps.find(({ id }) => id === stepId) ?? null,
     );
-    mockUseOutletContext.mockReturnValue({
+    const context: NavigationContext = {
+      currentUrl: "/dokumentation/zusammenfassung",
+      nextUrl: "/next-route",
+      previousUrl: "/previous-route",
       routes: allRoutes,
-      previousRoute: { url: "prev" },
-      nextRoute: { url: "next" },
-    });
+    };
+    mockUseOutletContext.mockReturnValue(context);
   });
 
   afterEach(() => {

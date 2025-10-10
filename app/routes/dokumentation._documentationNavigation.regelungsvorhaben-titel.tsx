@@ -41,7 +41,9 @@ export default function DocumentationTitle() {
       createOrUpdateDocumentationStep(currentUrl, data);
     },
     onSubmitSuccess: async () => {
-      await navigate(nextUrl);
+      if (nextUrl) {
+        await navigate(nextUrl);
+      }
     },
   });
 

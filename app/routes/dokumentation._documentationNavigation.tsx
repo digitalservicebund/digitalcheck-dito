@@ -57,21 +57,18 @@ function findIndexForRoute(routes: InternalRoute[], currentUrl: string) {
   return index;
 }
 
-function getPreviousRoute(
-  routes: InternalRoute[],
-  currentUrl: string,
-): InternalRoute {
+function getPreviousUrl(routes: InternalRoute[], currentUrl: string): string {
   return findIndexForRoute(routes, currentUrl) > 0
-    ? routes[findIndexForRoute(routes, currentUrl) - 1]
-    : ROUTE_DOCUMENTATION;
+    ? routes[findIndexForRoute(routes, currentUrl) - 1].url
+    : ROUTE_DOCUMENTATION.url;
 }
 
-function getNextRoute(
+function getNextUrl(
   routes: InternalRoute[],
   currentUrl: string,
-): InternalRoute | null {
+): string | null {
   return findIndexForRoute(routes, currentUrl) < routes.length - 1
-    ? routes[findIndexForRoute(routes, currentUrl) + 1]
+    ? routes[findIndexForRoute(routes, currentUrl) + 1].url
     : null;
 }
 
@@ -115,8 +112,8 @@ export default function LayoutWithDocumentationNavigation() {
     });
   }
 
-  const nextUrl = getNextRoute(routes.flat(), currentUrl)?.url;
-  const previousUrl = getPreviousRoute(routes.flat(), currentUrl).url;
+  const nextUrl = getNextUrl(routes.flat(), currentUrl);
+  const previousUrl = getPreviousUrl(routes.flat(), currentUrl);
 
   const getNavItem = (route: InternalRoute) => (
     <Nav.Item key={route.url} url={route.url}>

@@ -54,7 +54,9 @@ export default function DocumentationParticipation() {
       createOrUpdateDocumentationStep(currentUrl, data);
     },
     onSubmitSuccess: async () => {
-      await navigate(nextUrl);
+      if (nextUrl) {
+        await navigate(nextUrl);
+      }
     },
   });
 
