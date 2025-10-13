@@ -5,10 +5,10 @@ import CustomLink from "~/components/CustomLink";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
-import InlineInfoList from "~/components/InlineInfoList";
 import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
 import ParagraphList from "~/components/ParagraphList";
+import RegulationMetadata from "~/components/RegulationMetadata";
 import RichText from "~/components/RichText.tsx";
 import Tabs, { TabItem } from "~/components/Tabs";
 import VisualisationItem from "~/components/VisualisationItem";
@@ -22,7 +22,7 @@ import {
   PrinzipWithBeispielvorhaben,
   visualisationFields,
 } from "~/utils/strapiData.server";
-import { formatDate, gesetzStatusMap, slugify } from "~/utils/utilFunctions";
+import { slugify } from "~/utils/utilFunctions";
 import type { Route } from "./+types/beispiele.regelungen.$regelung";
 
 // prinzipCoreFields are being used in paragraphFields and so need to be included
@@ -208,36 +208,7 @@ export default function Gesetz() {
 
       <div className="bg-gray-100">
         <div className="container">
-          <InlineInfoList
-            items={[
-              {
-                label: examplesRegelungen.infoLabels.from,
-                value: regelung.VeroeffentlichungsDatum
-                  ? formatDate(regelung.VeroeffentlichungsDatum)
-                  : "",
-              },
-
-              {
-                label: examplesRegelungen.infoLabels.resort,
-                value: regelung.Ressort,
-              },
-              {
-                label: examplesRegelungen.infoLabels.linkLabel,
-                value: regelung.LinkRegelungstext ? (
-                  <CustomLink
-                    to={regelung.LinkRegelungstext}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-blue-800 underline"
-                  >
-                    {regelung?.GesetzStatus
-                      ? gesetzStatusMap[regelung.GesetzStatus]
-                      : examplesRegelungen.infoLabels.fallbackLinkText}
-                  </CustomLink>
-                ) : null,
-              },
-            ]}
-          />
+          <RegulationMetadata exampleProject={regelung} />
         </div>
       </div>
 

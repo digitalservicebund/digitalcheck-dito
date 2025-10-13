@@ -6,13 +6,12 @@ import {
 } from "react-router";
 
 import ContentWrapper from "~/components/ContentWrapper.tsx";
-import CustomLink from "~/components/CustomLink";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
-import InlineInfoList from "~/components/InlineInfoList";
 import MetaTitle from "~/components/Meta";
 import ParagraphList from "~/components/ParagraphList";
+import RegulationMetadata from "~/components/RegulationMetadata";
 import Separator from "~/components/Separator";
 import Tabs, { TabItem } from "~/components/Tabs";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
@@ -26,7 +25,6 @@ import {
   prinzipCoreFields,
   PrinzipWithBeispielvorhaben,
 } from "~/utils/strapiData.server";
-import { formatDate, gesetzStatusMap } from "~/utils/utilFunctions";
 import type { Route } from "./+types/beispiele.prinzipien.$prinzip";
 
 const GET_PRINZIPS_QUERY = `
@@ -154,37 +152,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
                     principlesToShow={[prinzip]}
                   />
 
-                  <InlineInfoList
-                    className="bg-gray-100 px-16 py-8"
-                    items={[
-                      {
-                        label: examplesRegelungen.infoLabels.from,
-                        value: exampleProject.VeroeffentlichungsDatum
-                          ? formatDate(exampleProject.VeroeffentlichungsDatum)
-                          : "",
-                      },
-
-                      {
-                        label: examplesRegelungen.infoLabels.resort,
-                        value: exampleProject.Ressort,
-                      },
-                      {
-                        label: examplesRegelungen.infoLabels.linkLabel,
-                        value: exampleProject.LinkRegelungstext ? (
-                          <CustomLink
-                            to={exampleProject.LinkRegelungstext}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="text-blue-800 underline"
-                          >
-                            {exampleProject?.GesetzStatus
-                              ? gesetzStatusMap[exampleProject.GesetzStatus]
-                              : examplesRegelungen.infoLabels.fallbackLinkText}
-                          </CustomLink>
-                        ) : null,
-                      },
-                    ]}
-                  />
+                  <RegulationMetadata exampleProject={exampleProject} />
                 </div>
               ))}
             </div>
