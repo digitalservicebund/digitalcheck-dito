@@ -22,7 +22,7 @@
     "test": "vitest run",
     "test:a11y": "playwright test tests/a11y --config=tests/playwright.config.ts",
     "test:a11y-nightly": "playwright test tests/a11y --config=tests/playwright-nightly.config.ts",
-    "test:e2e": "playwright test tests/e2e --config=tests/playwright.config.ts",
+    "test:e2e": "NODE_OPTIONS='--trace-warnings' playwright test tests/e2e --config=tests/playwright.config.ts",
     "test:e2e-nightly": "playwright test tests/e2e --config=tests/playwright-nightly.config.ts",
     "test:snapshots": "playwright test tests/snapshots --config=tests/playwright-snapshots.config.ts",
     "test:update-snapshots": "playwright test tests/snapshots --config=tests/playwright-snapshots.config.ts --update-snapshots",
