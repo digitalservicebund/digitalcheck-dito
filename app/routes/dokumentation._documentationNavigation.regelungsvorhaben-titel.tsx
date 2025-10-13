@@ -1,5 +1,4 @@
 import { useForm } from "@rvf/react-router";
-import { useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router";
 import { z } from "zod";
 import Heading from "~/components/Heading";
@@ -7,10 +6,8 @@ import InputNew from "~/components/InputNew";
 import MetaTitle from "~/components/Meta";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_TITLE } from "~/resources/staticRoutes";
-import {
-  createOrUpdateDocumentationStep,
-  getDocumentationStep,
-} from "~/routes/dokumentation/documentationDataService";
+import { createOrUpdateDocumentationStep } from "~/routes/dokumentation/documentationDataService";
+import { useResetForm } from "~/routes/dokumentation/documentationDataServiceHook";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 
@@ -20,7 +17,9 @@ const schema = z.object({
   title: z.string().min(1, { message: info.inputTitle.error }),
 });
 
-type Schema = z.infer<typeof schema>;
+const DEFAULT_VALUES = {
+  title: "",
+};
 
 export default function DocumentationTitle() {
   const navigate = useNavigate();
@@ -28,10 +27,8 @@ export default function DocumentationTitle() {
     useOutletContext<NavigationContext>();
 
   const form = useForm({
-    schema: schema,
-    defaultValues: {
-      title: "",
-    },
+    schema,
+    defaultValues: DEFAULT_VALUES,
     validationBehaviorConfig: {
       whenSubmitted: "onChange",
       whenTouched: "onSubmit",
@@ -47,21 +44,7 @@ export default function DocumentationTitle() {
     },
   });
 
-  useEffect(() => {
-    if (!form.dirty()) {
-      const documentationStepData = getDocumentationStep(currentUrl);
-
-      if (documentationStepData === null) {
-        form.resetForm({
-          title: "",
-        });
-      } else {
-        form.resetForm(documentationStepData.items as Schema);
-      }
-
-      form.setDirty(true);
-    }
-  }, [currentUrl, form]);
+  useResetForm({ currentUrl, form, defaultValues: DEFAULT_VALUES });
 
   return (
     <>

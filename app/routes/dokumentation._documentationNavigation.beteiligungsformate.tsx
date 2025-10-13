@@ -1,5 +1,4 @@
 import { useForm } from "@rvf/react-router";
-import { useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router";
 import { z } from "zod";
 import Heading from "~/components/Heading";
@@ -10,11 +9,8 @@ import RichText from "~/components/RichText";
 import TextareaNew from "~/components/TextareaNew";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_PARTICIPATION } from "~/resources/staticRoutes";
-import {
-  createOrUpdateDocumentationStep,
-  DocumentationField,
-  getDocumentationStep,
-} from "~/routes/dokumentation/documentationDataService";
+import { createOrUpdateDocumentationStep } from "~/routes/dokumentation/documentationDataService";
+import { useResetForm } from "~/routes/dokumentation/documentationDataServiceHook";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 
@@ -41,7 +37,6 @@ export default function DocumentationParticipation() {
   const { currentUrl, nextUrl, previousUrl } =
     useOutletContext<NavigationContext>();
 
-  // TODO DRY: Refactor to shared hook with other pages
   const form = useForm({
     schema,
     defaultValues: DEFAULT_VALUES,
@@ -50,7 +45,7 @@ export default function DocumentationParticipation() {
       whenTouched: "onSubmit",
       initial: "onSubmit",
     },
-    handleSubmit: (data: DocumentationField) => {
+    handleSubmit: (data) => {
       createOrUpdateDocumentationStep(currentUrl, data);
     },
     onSubmitSuccess: async () => {
@@ -60,20 +55,7 @@ export default function DocumentationParticipation() {
     },
   });
 
-  // TODO DRY: Refactor to shared hook with other pages
-  useEffect(() => {
-    if (!form.dirty()) {
-      const documentationStepData = getDocumentationStep(currentUrl);
-
-      if (documentationStepData === null) {
-        form.resetForm(DEFAULT_VALUES);
-      } else {
-        form.resetForm(documentationStepData.items as Schema);
-      }
-
-      form.setDirty(true);
-    }
-  }, [currentUrl, form]);
+  useResetForm<Schema>({ currentUrl, form, defaultValues: DEFAULT_VALUES });
 
   return (
     <>

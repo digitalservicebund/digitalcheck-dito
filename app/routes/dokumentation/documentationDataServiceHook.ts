@@ -40,3 +40,23 @@ export const useDataSync = <T>({
     return () => unsubscribe();
   }, [currentUrl, form, defaultValues]);
 };
+
+export const useResetForm = <T>({
+  currentUrl,
+  form,
+  defaultValues,
+}: UseDataSyncArgs<T>) => {
+  useEffect(() => {
+    if (!form.dirty()) {
+      const documentationStepData = getDocumentationStep(currentUrl);
+
+      if (documentationStepData === null) {
+        form.resetForm(defaultValues);
+      } else {
+        form.resetForm(documentationStepData.items as T);
+      }
+
+      form.setDirty(true);
+    }
+  }, [currentUrl, form, defaultValues]);
+};
