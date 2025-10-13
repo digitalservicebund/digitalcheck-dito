@@ -23,9 +23,10 @@ function InputNew({
   const field = useField(scope);
   const inputId = useId();
   const errorId = useId();
+  const descriptionId = useId();
 
   return (
-    <>
+    <span className="space-y-2">
       <label htmlFor={inputId} className="ds-label-02-reg">
         {children}
       </label>
@@ -34,19 +35,24 @@ function InputNew({
           id: inputId,
           type,
           ref,
-          "aria-describedby": errorId,
+          "aria-describedby": [
+            error && errorId,
+            description && descriptionId,
+          ].join(" "),
           "aria-invalid": !!field.error(),
           className: "ds-input placeholder-gray-600",
           ...rest,
         })}
       />
       {description && (
-        <p className="ds-label-03-reg mt-2 inline-block">{description}</p>
+        <p className="ds-label-03-reg inline-block" id={descriptionId}>
+          {description}
+        </p>
       )}
       {(error || field.error()) && (
         <InputError id={errorId}>{error || field.error()}</InputError>
       )}
-    </>
+    </span>
   );
 }
 

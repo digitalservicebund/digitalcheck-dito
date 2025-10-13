@@ -12,10 +12,10 @@ const InputError = ({ id, children }: InputErrorProps) => {
       role="alert"
       id={id}
       data-testid={id}
-      className="text-ds-error mt-16 flex items-center gap-x-4"
+      className="text-ds-error flex items-center gap-x-4"
     >
       <div className="shrink-0">
-        <ErrorOutline className="fill-ds-etext-ds-error" />
+        <ErrorOutline className="fill-ds-error" />
       </div>
       <span className="sr-only">Fehler:</span> {children}
     </div>
