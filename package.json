@@ -33,7 +33,7 @@
   "dependencies": {
     "@digitalservice4germany/angie": "^2.4.0",
     "@digitalservice4germany/style-dictionary": "^2.0.0",
-    "@digitalservicebund/icons": "^2.0.1",
+    "@digitalservicebund/icons": "^2.1.0",
     "@headlessui/react": "^2.2.8",
     "@react-router/node": "^7.9.1",
     "@react-router/serve": "^7.9.1",
