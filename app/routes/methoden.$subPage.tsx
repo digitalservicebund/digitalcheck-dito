@@ -1,12 +1,12 @@
 import { useLoaderData } from "react-router";
 
-import Card from "~/components/Card";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image.tsx";
 import InfoBox from "~/components/InfoBox";
 import MetaTitle from "~/components/Meta";
+import MethodCard from "~/components/MethodCard";
 import { methodsITSystems } from "~/resources/content/methode-it-systeme-erfassen";
 import { methodsTechnicalFeasibility } from "~/resources/content/methode-technische-umsetzbarkeit";
 import { methodsResponsibleActors } from "~/resources/content/methode-zustaendige-akteurinnen-auflisten";
@@ -80,16 +80,20 @@ export default function Index() {
           buttons={"buttons" in content.content ? content.content.buttons : []}
         />
         {content.boxes.map((box) => (
-          <Card
+          <MethodCard
             key={box.title}
-            heading={{ text: box.title, look: "ds-heading-03-reg" }}
-            badge={{ children: box.label, Icon: box.icon }}
-            content={box.text}
-            buttons={"buttons" in box ? box.buttons : []}
-            className="px-96 py-64 max-sm:px-16 max-sm:py-32"
-          >
-            <Image url={box.image.src} alternativeText={box.image.alt} />
-          </Card>
+            image={
+              <Image url={box.image.src} alternativeText={box.image.alt} />
+            }
+            infoBox={
+              <MethodCard.InfoBox
+                heading={{ text: box.title, look: "ds-heading-03-reg" }}
+                badge={{ children: box.label, Icon: box.icon }}
+                content={box.text}
+                buttons={"buttons" in box ? box.buttons : []}
+              />
+            }
+          />
         ))}
       </Container>
       {"tip" in content && (
