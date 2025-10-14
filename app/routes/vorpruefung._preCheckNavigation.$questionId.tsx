@@ -24,7 +24,7 @@ import {
 import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/vorpruefung._preCheckNavigation.$questionId";
 
-const { questions, answerOptions, nextButton, preCheckName } = preCheck;
+const { questions, answerOptions, nextButton } = preCheck;
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const { answers } = await getAnswersFromCookie(request);
