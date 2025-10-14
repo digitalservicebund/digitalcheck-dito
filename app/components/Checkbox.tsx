@@ -20,13 +20,12 @@ interface CheckboxProps extends BaseInputProps {
 function Checkbox({
   children,
   scope,
-  ref,
   description,
   error,
   includeDisabledInForm,
   disabled,
   ...rest
-}: CheckboxProps) {
+}: Readonly<CheckboxProps>) {
   const field = useField(scope);
   const inputId = useId();
   const errorId = useId();
@@ -40,7 +39,6 @@ function Checkbox({
           {...field.getInputProps({
             type: "checkbox",
             id: inputId,
-            ref,
             "aria-describedby": errorId,
             "aria-invalid": !!field.error(),
             className: twJoin(

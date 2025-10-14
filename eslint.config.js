@@ -91,10 +91,6 @@ export default defineConfig(
         },
       ],
 
-      // new rules that need to be addressed step-by-step
-      "react-hooks/refs": "warn",
-      "react-hooks/immutability": "warn",
-
       // TypeScript rules
       "@typescript-eslint/ban-ts-comment": "warn",
       "@typescript-eslint/no-unsafe-argument": "warn",

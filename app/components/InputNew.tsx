@@ -14,12 +14,11 @@ interface InputProps extends BaseInputProps {
 function InputNew({
   children,
   scope,
-  ref,
   description,
   error,
   type,
   ...rest
-}: InputProps) {
+}: Readonly<InputProps>) {
   const field = useField(scope);
   const inputId = useId();
   const errorId = useId();
@@ -34,7 +33,6 @@ function InputNew({
         {...field.getInputProps({
           id: inputId,
           type,
-          ref,
           "aria-describedby": [
             error && errorId,
             description && descriptionId,

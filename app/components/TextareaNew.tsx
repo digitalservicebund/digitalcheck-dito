@@ -14,11 +14,10 @@ interface TextareaProps extends BaseTextareaProps {
 function TextareaNew({
   children,
   scope,
-  ref,
   description,
   error,
   ...rest
-}: TextareaProps) {
+}: Readonly<TextareaProps>) {
   const field = useField(scope);
   const inputId = useId();
   const errorId = useId();
@@ -32,7 +31,6 @@ function TextareaNew({
       <textarea
         {...field.getInputProps({
           id: inputId,
-          ref,
           "aria-describedby": [
             error && errorId,
             description && descriptionId,

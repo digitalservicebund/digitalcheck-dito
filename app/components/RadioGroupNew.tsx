@@ -25,10 +25,9 @@ function RadioGroupNew<FormData, Value extends string | number = string>({
   options,
   label,
   className,
-  ref,
   required = true,
   ...rest
-}: RadioGroupProps<FormData, Value>) {
+}: Readonly<RadioGroupProps<FormData, Value>>) {
   const field = useField(scope);
   const errorId = useId();
 
@@ -55,7 +54,6 @@ function RadioGroupNew<FormData, Value extends string | number = string>({
               {...field.getInputProps({
                 type: "radio",
                 id: id,
-                ref,
                 "aria-describedby": errorId,
                 "aria-invalid": !!field.error(),
                 className: "ds-radio self-start",
