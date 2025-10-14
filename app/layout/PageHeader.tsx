@@ -63,6 +63,12 @@ const PageHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
 
+  // Close any open dropdown and menu
+  const closeOpenDropdowns = () => {
+    setActiveDropdownId(null);
+    setMobileMenuOpen(false);
+  };
+
   // Handle escape key, to close open dropdowns
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -85,12 +91,6 @@ const PageHeader = () => {
   // Toggle dropdown state
   const toggleDropdown = (itemText: string) => {
     setActiveDropdownId((current) => (current === itemText ? null : itemText));
-  };
-
-  // Close any open dropdown and menu
-  const closeOpenDropdowns = () => {
-    setActiveDropdownId(null);
-    setMobileMenuOpen(false);
   };
 
   // Opens and closes mobile menu
