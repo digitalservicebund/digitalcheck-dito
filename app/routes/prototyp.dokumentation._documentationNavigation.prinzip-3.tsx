@@ -23,7 +23,7 @@ const { principle3, radioOptions } = principles;
 
 export default function PrototypeDocumentationPrinciple3() {
   const [selectedOption, setSelectedOption] = useState<string>();
-  const [examples, setExamples] = useState([{ id: Date.now() }]);
+  const [examples, setExamples] = useState([{ id: 0 }]);
 
   const showPositiveFields =
     selectedOption === "Ja" || selectedOption === "Teilweise";
