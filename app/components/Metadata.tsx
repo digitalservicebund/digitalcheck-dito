@@ -1,21 +1,19 @@
 import type { ReactNode } from "react";
 import twMerge from "~/utils/tailwindMerge";
 
-export type MetadataItem =
-  | { key?: string; label: string; value: ReactNode }
-  | { key: string; label?: string; value: ReactNode };
+export type MetadataItem = { key?: string; label: string; value: ReactNode };
 
 function MetadataItem({ key, label, value }: Readonly<MetadataItem>) {
   return (
-    <p
+    <div
       key={key ?? label}
       className="inline-flex flex-row items-center gap-4 md:flex-col md:items-start"
     >
-      {label && <span className="ds-label-03-reg text-gray-900">{label}</span>}
-      <span className="ds-label-03-bold flex flex-col md:h-24 md:justify-center">
+      <dt className="ds-label-03-reg text-gray-900">{label}</dt>
+      <dd className="ds-label-03-bold flex flex-col md:h-24 md:justify-center">
         {value}
-      </span>
-    </p>
+      </dd>
+    </div>
   );
 }
 
@@ -26,14 +24,14 @@ export type MetadataProps = {
 
 function Metadata({ className, children }: Readonly<MetadataProps>) {
   return (
-    <div
+    <dl
       className={twMerge(
         "flex gap-8 py-16 max-md:flex-col md:gap-24",
         className,
       )}
     >
       {children}
-    </div>
+    </dl>
   );
 }
 
