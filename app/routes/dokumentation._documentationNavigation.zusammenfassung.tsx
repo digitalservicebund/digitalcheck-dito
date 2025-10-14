@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Link, useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
@@ -40,74 +39,68 @@ export default function DocumentationSummary() {
   const { routes, previousUrl, nextUrl } =
     useOutletContext<NavigationContext>();
 
-  const [items, setItems] = useState<InfoBoxProps[]>([]);
+  const items: InfoBoxProps[] = routes
+    .flat()
+    .filter(
+      (route) =>
+        route.url !== ROUTE_DOCUMENTATION_SUMMARY.url &&
+        route.url !== ROUTE_DOCUMENTATION_SEND.url,
+    )
+    .map((route): InfoBoxProps => {
+      const documentationStep = getDocumentationStep(route.url);
 
-  useEffect(() => {
-    setItems(
-      routes
-        .flat()
-        .filter(
-          (route) =>
-            route.url !== ROUTE_DOCUMENTATION_SUMMARY.url &&
-            route.url !== ROUTE_DOCUMENTATION_SEND.url,
-        )
-        .map((route) => {
-          const documentationStep = getDocumentationStep(route.url);
+      // TODO: get principle from strapi data
+      const principle = principles.find((principle) =>
+        route.url.endsWith(principle.id),
+      );
 
-          // TODO: get principle from strapi data
-          const principle = principles.find((principle) =>
-            route.url.endsWith(principle.id),
-          );
-
-          return {
-            identifier: route.url,
-            testId: route.url,
-            badge: principle && {
-              text: summary.principleBadge,
-              principleNumber: principle.number as PrincipleNumber,
-            },
-            heading: {
-              text: route.title,
-            },
-            children: (
-              <div className="space-y-28">
-                {documentationStep?.items ? (
-                  <>
-                    {getAnswers(documentationStep.items)}
-                    <Link
-                      to={route.url}
-                      className="text-link"
-                      aria-label={`${route.title} ${summary.buttonEdit.ariaLabelSuffix}`}
-                    >
-                      {summary.buttonEdit.text}
-                    </Link>
-                  </>
-                ) : (
-                  <InlineNotice
-                    look="warning"
-                    heading={
-                      <Heading tagName="h4">
-                        Sie haben diesen Punkt noch nicht bearbeitet.
-                      </Heading>
-                    }
-                  >
-                    <Link
-                      to={route.url}
-                      className="text-link"
-                      aria-label={`${route.title} ${summary.buttonEditNow.ariaLabelSuffix}`}
-                    >
-                      {summary.buttonEditNow.text}
-                    </Link>
-                  </InlineNotice>
-                )}
-              </div>
-            ),
-            look: "highlight",
-            className: "bg-white",
-          };
-        }),
-    );
-  }, [routes]);
+      return {
+        identifier: route.url,
+        testId: route.url,
+        badge: principle && {
+          text: summary.principleBadge,
+          principleNumber: principle.number as PrincipleNumber,
+        },
+        heading: {
+          text: route.title,
+        },
+        children: (
+          <div className="space-y-28">
+            {documentationStep?.items ? (
+              <>
+                {getAnswers(documentationStep.items)}
+                <Link
+                  to={route.url}
+                  className="text-link"
+                  aria-label={`${route.title} ${summary.buttonEdit.ariaLabelSuffix}`}
+                >
+                  {summary.buttonEdit.text}
+                </Link>
+              </>
+            ) : (
+              <InlineNotice
+                look="warning"
+                heading={
+                  <Heading tagName="h4">
+                    Sie haben diesen Punkt noch nicht bearbeitet.
+                  </Heading>
+                }
+              >
+                <Link
+                  to={route.url}
+                  className="text-link"
+                  aria-label={`${route.title} ${summary.buttonEditNow.ariaLabelSuffix}`}
+                >
+                  {summary.buttonEditNow.text}
+                </Link>
+              </InlineNotice>
+            )}
+          </div>
+        ),
+        look: "highlight",
+        className: "bg-white",
+      };
+    });
 
   return (
     <>

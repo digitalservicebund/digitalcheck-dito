@@ -136,8 +136,9 @@ export default function Index() {
   const { questionIdx, question, answers } = useLoaderData<typeof loader>();
   const existingAnswer = answers?.[question.id];
 
-  const [selectedOption, setSelectedOption] =
-    useState<PreCheckAnswerOption["value"]>(existingAnswer);
+  const [selectedOption, setSelectedOption] = useState<
+    PreCheckAnswerOption["value"] | null
+  >(null);
   const [hasAnswerConflict, setHasAnswerConflict] = useState(false);
 
   const form = useForm({
@@ -150,8 +151,10 @@ export default function Index() {
   });
 
   useEffect(() => {
-    setSelectedOption(existingAnswer);
-  }, [existingAnswer, setSelectedOption, question.id]);
+    // Clear the selection state when the question changes
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setSelectedOption(null);
+  }, [question.id]);
 
   const options: PreCheckAnswerOption[] = Object.entries(answerOptions).map(
     ([value, text]) => ({
@@ -161,6 +164,7 @@ export default function Index() {
   );
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (question.id !== "eu-bezug") return setHasAnswerConflict(false);
     const allAnswersNo = Object.entries(answers)
       .filter((answer) => answer[0] !== "eu-bezug")
@@ -200,7 +204,7 @@ export default function Index() {
         <RadioGroup
           name="answer"
           options={options}
-          selectedValue={selectedOption}
+          selectedValue={selectedOption ?? existingAnswer}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setSelectedOption(e.target.value as PreCheckAnswerOption["value"])
           }

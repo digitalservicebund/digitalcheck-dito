@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useLocation } from "react-router";
 
 import { ButtonProps } from "~/components/Button.tsx";
@@ -71,87 +71,84 @@ function SocialProofImage() {
 
 export default function Index() {
   const location = useLocation();
+  const initialTabIndex = location.hash === "#angebote" ? 2 : 0;
 
-  const [initialTabIndex, setInitialTabIndex] = useState(0);
-  useEffect(() => {
-    const targetIndex = location.hash === "#angebote" ? 2 : 0;
-    setInitialTabIndex(targetIndex);
-  }, [location.hash]);
-
-  const tabsData: TabItem[] = supportOfferings.tabs.map((tab) => ({
-    title: tab.title,
-    content: (
-      <>
-        {tab.offerings.map((offering: Offering) => (
-          <Container
-            key={offering.title}
-            className="mb-32 flex gap-32 rounded-xl bg-blue-100 px-40 max-md:flex-col"
-          >
-            <InfoBox
-              heading={{
-                tagName: "h2",
-                text: offering.title,
-              }}
-              content={offering.text}
-              buttons={offering.button ? [offering.button] : []}
-            />
-            <div className="flex-none space-y-20 md:w-[310px]">
-              <div className="bg-white">
-                <div className="p-28">
-                  <Header
-                    heading={{
-                      tagName: "h4",
-                      text: offering.sellingPoints,
-                    }}
-                  />
-                  <div className="divide-y divide-gray-700">
-                    {offering.details.map((detail) => (
-                      <div key={detail.title} className="py-16">
-                        <div className="flex items-center gap-8 pb-8">
-                          {detail.icon && (
-                            <detail.icon className="size-24 fill-gray-800" />
-                          )}
-                          <Heading
-                            tagName="p"
-                            look="ds-label-01-bold"
-                            text={detail.title}
+  const tabsData: TabItem[] = supportOfferings.tabs.map(
+    (tab): TabItem => ({
+      title: tab.title,
+      content: (
+        <>
+          {tab.offerings.map((offering: Offering) => (
+            <Container
+              key={offering.title}
+              className="mb-32 flex gap-32 rounded-xl bg-blue-100 px-40 max-md:flex-col"
+            >
+              <InfoBox
+                heading={{
+                  tagName: "h2",
+                  text: offering.title,
+                }}
+                content={offering.text}
+                buttons={offering.button ? [offering.button] : []}
+              />
+              <div className="flex-none space-y-20 md:w-[310px]">
+                <div className="bg-white">
+                  <div className="p-28">
+                    <Header
+                      heading={{
+                        tagName: "h4",
+                        text: offering.sellingPoints,
+                      }}
+                    />
+                    <div className="divide-y divide-gray-700">
+                      {offering.details.map((detail) => (
+                        <div key={detail.title} className="py-16">
+                          <div className="flex items-center gap-8 pb-8">
+                            {detail.icon && (
+                              <detail.icon className="size-24 fill-gray-800" />
+                            )}
+                            <Heading
+                              tagName="p"
+                              look="ds-label-01-bold"
+                              text={detail.title}
+                            />
+                          </div>
+                          <RichText
+                            markdown={detail.text}
+                            className="text-base"
                           />
                         </div>
-                        <RichText
-                          markdown={detail.text}
-                          className="text-base"
-                        />
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-              {offering.examples && (
-                <div className="bg-white">
-                  <div className="divide-y divide-gray-700">
-                    {offering.examples.map((example, idx) => (
-                      <div key={`${offering.title}-example-${idx}`}>
-                        {example.image && (
-                          <Image
-                            url={example.image.src}
-                            alternativeText={example.image.alt}
+                {offering.examples && (
+                  <div className="bg-white">
+                    <div className="divide-y divide-gray-700">
+                      {offering.examples.map((example, idx) => (
+                        <div key={`${offering.title}-example-${idx}`}>
+                          {example.image && (
+                            <Image
+                              url={example.image.src}
+                              alternativeText={example.image.alt}
+                            />
+                          )}
+                          <RichText
+                            markdown={example.text}
+                            className="p-20 text-base"
                           />
-                        )}
-                        <RichText
-                          markdown={example.text}
-                          className="p-20 text-base"
-                        />
-                      </div>
-                    ))}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
-          </Container>
-        ))}
-      </>
-    ),
-  }));
+                )}
+              </div>
+            </Container>
+          ))}
+        </>
+      ),
+    }),
+  );
 
   return (
     <>

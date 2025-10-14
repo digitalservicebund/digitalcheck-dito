@@ -4,7 +4,7 @@ import {
   EmailOutlined,
 } from "@digitalservicebund/icons";
 import { useForm } from "@rvf/react-router";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useMemo, useState } from "react";
 import Alert from "~/components/Alert";
 import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
@@ -32,7 +32,6 @@ export default function ResultForm({
 }>) {
   const [showEmailAlert, setShowEmailAlert] = useState<boolean>(false);
   const [warning, setWarning] = useState<string | null>(null);
-  const [emailPreviewBody, setEmailPreviewBody] = useState<string>("");
   const [isMailBodyCopied, setIsMailBodyCopied] = useState<boolean>(false);
   const [isMailAddressCopied, setIsMailAddressCopied] = useState(false);
 
@@ -65,17 +64,16 @@ export default function ResultForm({
     }
   };
 
-  useEffect(() => {
+  const emailPreviewBody = useMemo(() => {
     const resultContent: ResultContent = getContentForResult(answers, result);
     const currentVorhabenTitle = form.value("title") ?? "";
     const currentNegativeReasoning = form.value("negativeReasoning") ?? "";
 
-    const body = buildEmailBody(
+    return buildEmailBody(
       resultContent,
       currentNegativeReasoning,
       currentVorhabenTitle,
     );
-    setEmailPreviewBody(body);
   }, [answers, result, form]);
 
   const handleCopyEmailBody = async () => {
