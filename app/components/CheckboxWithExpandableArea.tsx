@@ -35,6 +35,7 @@ function CheckboxWithExpandableArea({
 
   useEffect(() => {
     const checkboxValue = checkboxControlProps.value;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setOpen(!!checkboxValue);
   }, [checkboxControlProps.value]);
 

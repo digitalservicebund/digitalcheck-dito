@@ -1,6 +1,6 @@
 import { posthog, PostHogConfig } from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect } from "react";
 import { POSTHOG_PROXY, POSTHOG_UI_HOST } from "~/utils/constants";
 
 const posthogOptions: Partial<PostHogConfig> = {
@@ -22,17 +22,12 @@ export function PHProvider({
   children,
   posthogEnabled,
   posthogKey,
-}: PHProviderProps) {
-  const [hydrated, setHydrated] = useState(false);
-
+}: Readonly<PHProviderProps>) {
   useEffect(() => {
     if (!posthogEnabled || !posthogKey) return;
-
     posthog.init(posthogKey, posthogOptions);
-
-    setHydrated(true);
   }, [posthogEnabled, posthogKey]);
 
-  if (!hydrated || !posthogEnabled) return <>{children}</>;
+  if (!posthogEnabled) return <>{children}</>;
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>;
 }
