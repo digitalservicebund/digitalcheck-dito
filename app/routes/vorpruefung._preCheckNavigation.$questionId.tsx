@@ -139,7 +139,17 @@ export default function Index() {
   const [selectedOption, setSelectedOption] = useState<
     PreCheckAnswerOption["value"] | null
   >(null);
-  const [hasAnswerConflict, setHasAnswerConflict] = useState(false);
+
+  const checkForAnswerConflict = () => {
+    if (question.id !== "eu-bezug") return false;
+    const allAnswersNo = Object.entries(answers)
+      .filter((answer) => answer[0] !== "eu-bezug")
+      .every((answer) => answer[1] === "no");
+
+    return allAnswersNo && (selectedOption ?? existingAnswer) === "yes";
+  };
+
+  const hasAnswerConflict = checkForAnswerConflict();
 
   const form = useForm({
     schema,
@@ -162,16 +172,6 @@ export default function Index() {
       text,
     }),
   );
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (question.id !== "eu-bezug") return setHasAnswerConflict(false);
-    const allAnswersNo = Object.entries(answers)
-      .filter((answer) => answer[0] !== "eu-bezug")
-      .every((answer) => answer[1] === "no");
-
-    setHasAnswerConflict(allAnswersNo && selectedOption === "yes");
-  }, [answers, selectedOption, question.id]);
 
   return (
     <form {...form.getFormProps()} className="space-y-40">
