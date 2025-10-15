@@ -125,5 +125,5 @@ export default function markdown(markdown: string) {
         }),
       });
     })
-    .filter((paragraph) => paragraph);
+    .filter((paragraph) => paragraph !== null);
 }
