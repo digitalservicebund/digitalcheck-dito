@@ -2,17 +2,29 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { mockDocumentationDataService } from "~/routes/__tests__/utils/mockDocumentationDataService";
 import { mockForm } from "~/routes/__tests__/utils/mockForm";
 import { mockRouter } from "~/routes/__tests__/utils/mockRouter";
 import DocumentationTitle from "~/routes/dokumentation._documentationNavigation.regelungsvorhaben-titel";
-import { getDocumentationStep } from "~/routes/dokumentation/documentationDataService";
+import { getDocumentationData } from "~/routes/dokumentation/documentationDataService";
+
+vi.mock(
+  "~/routes/dokumentation/documentationDataService",
+  async (importOriginal) => {
+    const actual =
+      await importOriginal<
+        typeof import("~/routes/dokumentation/documentationDataService")
+      >();
+    return {
+      ...actual,
+      getDocumentationData: vi.fn(),
+    };
+  },
+);
 
 const { mockNavigationContext } = mockRouter();
-mockDocumentationDataService();
 mockForm();
 
-const mockGetDocumentationStep = vi.mocked(getDocumentationStep);
+const mockGetDocumentationData = vi.mocked(getDocumentationData);
 
 describe("DocumentationTitle", () => {
   const renderWithRouter = () => {
@@ -24,7 +36,7 @@ describe("DocumentationTitle", () => {
   };
 
   beforeEach(() => {
-    mockGetDocumentationStep.mockReturnValue(null);
+    mockGetDocumentationData.mockReturnValue({ version: "1" });
     mockNavigationContext();
 
     renderWithRouter();
