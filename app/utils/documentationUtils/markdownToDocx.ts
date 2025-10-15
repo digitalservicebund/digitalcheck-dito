@@ -13,7 +13,7 @@ const parseMarkdownLine = (
   let currentIndex = 0;
 
   // Regular expressions for markdown patterns
-  const boldPattern = /(\*\*|__)(.*?)\1/g;
+  const boldPattern = /(\*\*)(.*?)\1/g;
   const linkPattern = /\[([^\]]+)\]\(([^)]+)\)/g;
 
   // Find all markdown patterns and their positions
