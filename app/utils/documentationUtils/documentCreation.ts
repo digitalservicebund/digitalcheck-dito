@@ -38,14 +38,9 @@ const content = {
     heading("Das ist jetzt zu tun", 1, true),
     ...markdown(dedent`
     - **Speichern** Sie die Dokumentation als **PDF**
-    - **Senden** Sie die von Ihnen erstellte Dokumentation als PDF per E-Mail an folgende Adresse: [nkr@bmj.bund.de](mailto:nkr@bmj.bund.de).
-
-    Der NKR (Nationaler Normenkontrollrat) prüft Ihr Vorhaben hinsichtlich der Berücksichtigung der Prinzipien digitaltauglicher Gesetzgebung. Bei Fragen wird der NKR auf Sie zukommen.
-    
+    - **Senden** Sie die von Ihnen erstellte Dokumentation als PDF per E-Mail an folgende Adresse: [nkr@bmj.bund.de](mailto:nkr@bmj.bund.de). Der NKR (Nationaler Normenkontrollrat) prüft Ihr Vorhaben hinsichtlich der Berücksichtigung der Prinzipien digitaltauglicher Gesetzgebung. Bei Fragen wird der NKR auf Sie zukommen.
     - **Bei Interoperabilitätsbezug** senden Sie eine Kopie der E-Mail mit der PDF-Datei an [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de).
-    
     - **Visuelle Darstellungen** und Skizzen sind vom NKR gern gesehen. Hängen Sie diese formlos als PDF oder als Screenshot an.
-    
     - Damit ist der Digitalcheck für Sie beendet.
     `),
     heading("Gut zu wissen: Das prüft der Nationale Normenkontrollrat", 2),
