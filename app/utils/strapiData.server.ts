@@ -62,7 +62,7 @@ export type AbsatzWithParagraph = BaseAbsatz & {
   };
 };
 
-type PrinzipAspekt = {
+export type PrinzipAspekt = {
   Titel: string;
   Text: Node[];
   Leitfragen?: Node[];
