@@ -98,51 +98,32 @@ const parseMarkdownLine = (
  */
 export default function markdown(markdown: string) {
   const lines = markdown.split("\n");
-  const paragraphs: Paragraph[] = [];
 
-  for (const line of lines) {
-    const trimmedLine = line.trim();
+  return lines
+    .map((line) => {
+      const trimmedLine = line.trim();
 
-    // Skip empty lines
-    if (!trimmedLine) {
-      continue;
-    }
+      // Skip empty lines
+      if (!trimmedLine) {
+        return null;
+      }
 
-    // Check if it's a bullet point
-    const isBullet =
-      trimmedLine.startsWith("- ") || trimmedLine.startsWith("* ");
-    const content = isBullet ? trimmedLine.substring(2) : trimmedLine;
+      // Check if it's a bullet point
+      const isBullet =
+        trimmedLine.startsWith("- ") || trimmedLine.startsWith("* ");
+      const content = isBullet ? trimmedLine.substring(2) : trimmedLine;
 
-    const children = parseMarkdownLine(content);
+      const children = parseMarkdownLine(content);
 
-    if (children.length === 0) {
-      // If no markdown patterns found, use simple text
-      paragraphs.push(
-        new Paragraph({
-          text: content,
-          ...(isBullet && {
-            numbering: {
-              reference: "bullet-points",
-              level: 0,
-            },
-          }),
+      return new Paragraph({
+        children,
+        ...(isBullet && {
+          numbering: {
+            reference: "bullet-points",
+            level: 0,
+          },
         }),
-      );
-    } else {
-      // Use children array for formatted text
-      paragraphs.push(
-        new Paragraph({
-          children,
-          ...(isBullet && {
-            numbering: {
-              reference: "bullet-points",
-              level: 0,
-            },
-          }),
-        }),
-      );
-    }
-  }
-
-  return paragraphs;
+      });
+    })
+    .filter((paragraph) => paragraph);
 }
