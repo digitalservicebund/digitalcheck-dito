@@ -92,7 +92,7 @@
     "playwright-core": "1.55.0",
     "prettier": "^3.6.2",
     "prettier-plugin-organize-imports": "^4.3.0",
-    "prettier-plugin-tailwindcss": "^0.6.14",
+    "prettier-plugin-tailwindcss": "^0.7.0",
     "tailwindcss": "^4.1.13",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2",
