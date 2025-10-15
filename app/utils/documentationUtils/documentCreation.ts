@@ -115,7 +115,10 @@ const numbering = {
   ],
 };
 
-const createDoc = (logoData: ArrayBuffer, principles: PrinzipWithAspekte[]) => {
+export const createDoc = (
+  logoData: ArrayBuffer,
+  principles: PrinzipWithAspekte[],
+) => {
   const date = new Date().toLocaleDateString("de-DE");
 
   const doc = new Document({
