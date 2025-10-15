@@ -208,6 +208,24 @@ query GetPrinzips {
   }
 }`;
 
+export const GET_PRINZIPS_WITH_ASPECTS_QUERY = `
+query GetPrinzips {
+  prinzips(sort: "order") {
+    Name
+    Beschreibung
+    order
+    Nummer
+    URLBezeichnung
+    Aspekte {
+      Titel
+      Text
+      Leitfragen
+      Formulierungsbeispiel
+    }
+  }
+}
+`;
+
 export const GET_PRINZIPS_WITH_EXAMPLES_QUERY = `
 query GetPrinzips {
   prinzips(sort: "order") {
