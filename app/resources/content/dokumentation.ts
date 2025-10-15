@@ -297,6 +297,8 @@ export const digitalDocumentation = {
       ariaLabelSuffix: "jetzt bearbeiten",
     },
     principleBadge: "Prinzip",
+    principleAnswerTitle:
+      "Lässt sich das Vorhaben im Sinne des Prinzips umsetzen?",
   },
   send: {
     headline: "Absenden",

@@ -1,21 +1,20 @@
 import { useForm } from "@rvf/react-router";
+import { useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router";
-import { z } from "zod";
 import Heading from "~/components/Heading";
 import InputNew from "~/components/InputNew";
 import MetaTitle from "~/components/Meta";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_TITLE } from "~/resources/staticRoutes";
-import { createOrUpdateDocumentationStep } from "~/routes/dokumentation/documentationDataService";
-import { useResetForm } from "~/routes/dokumentation/documentationDataServiceHook";
+import { policyTitleSchema } from "~/routes/dokumentation/documentationDataSchema";
+import {
+  getDocumentationData,
+  setPolicyTitle,
+} from "~/routes/dokumentation/documentationDataService";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 
 const { info } = digitalDocumentation;
-
-const schema = z.object({
-  title: z.string().min(1, { message: info.inputTitle.error }),
-});
 
 const DEFAULT_VALUES = {
   title: "",
@@ -27,15 +26,15 @@ export default function DocumentationTitle() {
     useOutletContext<NavigationContext>();
 
   const form = useForm({
-    schema,
+    schema: policyTitleSchema,
     defaultValues: DEFAULT_VALUES,
     validationBehaviorConfig: {
       whenSubmitted: "onChange",
       whenTouched: "onSubmit",
       initial: "onSubmit",
     },
-    handleSubmit: (data) => {
-      createOrUpdateDocumentationStep(currentUrl, data);
+    handleSubmit: (policyTitle) => {
+      setPolicyTitle(policyTitle);
     },
     onSubmitSuccess: async () => {
       if (nextUrl) {
@@ -44,7 +43,19 @@ export default function DocumentationTitle() {
     },
   });
 
-  useResetForm({ currentUrl, form, defaultValues: DEFAULT_VALUES });
+  useEffect(() => {
+    if (!form.dirty()) {
+      const documentationData = getDocumentationData();
+
+      form.resetForm(
+        documentationData.policyTitle === null
+          ? DEFAULT_VALUES
+          : documentationData.policyTitle,
+      );
+
+      form.setDirty(true);
+    }
+  }, [currentUrl, form]);
 
   return (
     <>

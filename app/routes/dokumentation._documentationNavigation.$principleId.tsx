@@ -6,7 +6,6 @@ import {
 import { FormScope, useField, useFieldArray, useForm } from "@rvf/react-router";
 import { useCallback, useEffect } from "react";
 import { useLoaderData, useNavigate, useOutletContext } from "react-router";
-import { z } from "zod";
 import Badge, { BadgeProps } from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import Button from "~/components/Button";
@@ -22,76 +21,22 @@ import Separator from "~/components/Separator";
 import TextareaNew from "~/components/TextareaNew";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
+import {
+  principleSchema,
+  type PrincipleReasoning,
+} from "~/routes/dokumentation/documentationDataSchema";
+import {
+  addOrUpdatePrinciple,
+  getDocumentationData,
+} from "~/routes/dokumentation/documentationDataService";
 import { Node } from "~/utils/paragraphUtils";
 import { fetchStrapiData } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 import type { Route } from "./+types/dokumentation._documentationNavigation.$principleId";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
-import { getDocumentationStep } from "./dokumentation/documentationDataService";
-import { useDataSync } from "./dokumentation/documentationDataServiceHook";
 
 const { principlePages } = digitalDocumentation;
-
-const reasoningSchema = z
-  .object({
-    aspect: z.string().optional(),
-    checkbox: z.literal("on").optional(),
-    paragraphs: z.string().optional(),
-    reason: z.string().optional(),
-  })
-  .superRefine((val, ctx) => {
-    if (val.checkbox !== "on") return;
-
-    if (!val.paragraphs) {
-      ctx.addIssue({
-        code: "custom",
-        message: principlePages.errors.paragraphsError,
-        input: val,
-        path: ["paragraphs"],
-      });
-    }
-
-    if (!val.reason) {
-      ctx.addIssue({
-        code: "custom",
-        message: principlePages.errors.reasonError,
-        input: val,
-        path: ["reason"],
-      });
-    }
-  });
-
-type Reasoning = z.output<typeof reasoningSchema>;
-
-const positiveAnswerSchema = z.object({
-  answer: z.literal(principlePages.radioOptions[0]),
-  reasoning: z.array(reasoningSchema.optional(), {
-    error: principlePages.errors.reasoningError,
-  }),
-});
-
-const negativeAnswerSchema = z.object({
-  answer: z.literal(principlePages.radioOptions[1]),
-  reasoning: z.literal(undefined),
-});
-
-const irrelevantAnswerSchema = z.object({
-  answer: z.literal(principlePages.radioOptions[2]),
-  reasoning: z.literal(undefined),
-});
-
-const schema = z
-  .discriminatedUnion(
-    "answer",
-    [positiveAnswerSchema, negativeAnswerSchema, irrelevantAnswerSchema],
-    { error: principlePages.errors.answerError },
-  )
-  .and(
-    z.object({
-      prinzipId: z.string(),
-    }),
-  );
 
 type Aspekt = {
   Titel: string;
@@ -148,10 +93,10 @@ type ReasoningProps = {
   label: string;
   description?: string;
   detailDescription?: string;
-  aspectScope: FormScope<Reasoning["aspect"]>;
-  checkboxScope: FormScope<Reasoning["checkbox"]>;
-  paragraphScope: FormScope<Reasoning["paragraphs"]>;
-  reasonScope: FormScope<Reasoning["reason"]>;
+  aspectScope: FormScope<PrincipleReasoning["aspect"]>;
+  checkboxScope: FormScope<PrincipleReasoning["checkbox"]>;
+  paragraphScope: FormScope<PrincipleReasoning["paragraphs"]>;
+  reasonScope: FormScope<PrincipleReasoning["reason"]>;
   defaultValue?: "on";
   moreUrl?: string;
   removeOwnReasoning?: () => void;
@@ -265,7 +210,7 @@ function Reasoning({
 }
 
 type PositiveAnswerFormElementProps = {
-  scope: FormScope<Reasoning[]>;
+  scope: FormScope<PrincipleReasoning[]>;
   prinzip: Prinzip;
 };
 
@@ -373,10 +318,10 @@ export default function DocumentationPrinciple() {
     useOutletContext<NavigationContext>();
 
   const form = useForm({
-    schema,
+    schema: principleSchema,
     defaultValues: {
+      id: prinzip.documentId,
       answer: "",
-      prinzipId: currentUrl,
       reasoning: undefined,
     },
     validationBehaviorConfig: {
@@ -397,8 +342,11 @@ export default function DocumentationPrinciple() {
         return;
       }
 
-      const documentationStepData = getDocumentationStep(currentUrl);
-      const reasoning = documentationStepData?.items?.reasoning;
+      const documentationData = getDocumentationData();
+      const principleData = documentationData?.principles?.find(
+        (principle) => principle.id === prinzip.documentId,
+      );
+      const reasoning = principleData?.reasoning;
 
       if (!Array.isArray(reasoning)) {
         form.setValue(
@@ -416,17 +364,34 @@ export default function DocumentationPrinciple() {
     return () => {
       unsubscribe();
     };
-  }, [form, prinzip.Aspekte, currentUrl]);
+  }, [form, prinzip.Aspekte, currentUrl, prinzip.documentId]);
 
-  useDataSync({
-    currentUrl,
-    form,
-    defaultValues: {
-      prinzipId: currentUrl,
-      answer: "",
-      reasoning: undefined,
-    },
-  });
+  useEffect(() => {
+    if (!form.dirty()) {
+      const documentationData = getDocumentationData();
+      const principleData = documentationData?.principles?.find(
+        (principle) => principle.id === prinzip.documentId,
+      );
+
+      form.resetForm(
+        principleData
+          ? principleData
+          : {
+              id: prinzip.documentId,
+              answer: "",
+              reasoning: undefined,
+            },
+      );
+
+      form.setDirty(true);
+    }
+
+    const unsubscribe = form.subscribe.value((principle) => {
+      addOrUpdatePrinciple(principle);
+    });
+
+    return () => unsubscribe();
+  }, [currentUrl, form, prinzip.documentId]);
 
   return (
     <>
@@ -453,12 +418,12 @@ export default function DocumentationPrinciple() {
         <Separator />
 
         <form {...form.getFormProps()} className="space-y-40">
-          <input {...form.getHiddenInputProps("prinzipId")} />
+          <input {...form.getHiddenInputProps("id")} />
           <RadioGroupNew
             label={
               <Heading tagName="h2" look="ds-heading-03-reg">
                 {/* TODO: in strapi */}
-                Schafft das Regelungsvorhaben die rechtlichen Vorraussetzungen
+                Schafft das Regelungsvorhaben die rechtlichen Voraussetzungen
                 für eine digitale Umsetzung?
               </Heading>
             }
@@ -471,7 +436,7 @@ export default function DocumentationPrinciple() {
 
           {form.field("answer").value() === principlePages.radioOptions[0] && (
             <PositiveAnswerFormElements
-              scope={form.scope("reasoning") as FormScope<Reasoning[]>}
+              scope={form.scope("reasoning") as FormScope<PrincipleReasoning[]>}
               prinzip={prinzip}
             />
           )}

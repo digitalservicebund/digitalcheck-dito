@@ -1,6 +1,6 @@
 import { useForm } from "@rvf/react-router";
+import { useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router";
-import { z } from "zod";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
 import InlineNotice from "~/components/InlineNotice";
@@ -9,25 +9,17 @@ import RichText from "~/components/RichText";
 import TextareaNew from "~/components/TextareaNew";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_PARTICIPATION } from "~/resources/staticRoutes";
-import { createOrUpdateDocumentationStep } from "~/routes/dokumentation/documentationDataService";
-import { useResetForm } from "~/routes/dokumentation/documentationDataServiceHook";
+import { participationSchema } from "~/routes/dokumentation/documentationDataSchema";
+import {
+  getDocumentationData,
+  setParticipation,
+} from "~/routes/dokumentation/documentationDataService";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 
 const { participation } = digitalDocumentation;
 
-const schema = z.object({
-  formats: z
-    .string()
-    .min(1, { message: participation.formats.textField.errorMessage }),
-  results: z
-    .string()
-    .min(1, { message: participation.results.textField.errorMessage }),
-});
-
-type Schema = z.infer<typeof schema>;
-
-const DEFAULT_VALUES: Schema = {
+const DEFAULT_VALUES = {
   formats: "",
   results: "",
 };
@@ -38,15 +30,15 @@ export default function DocumentationParticipation() {
     useOutletContext<NavigationContext>();
 
   const form = useForm({
-    schema,
+    schema: participationSchema,
     defaultValues: DEFAULT_VALUES,
     validationBehaviorConfig: {
       whenSubmitted: "onChange",
       whenTouched: "onSubmit",
       initial: "onSubmit",
     },
-    handleSubmit: (data) => {
-      createOrUpdateDocumentationStep(currentUrl, data);
+    handleSubmit: (participation) => {
+      setParticipation(participation);
     },
     onSubmitSuccess: async () => {
       if (nextUrl) {
@@ -55,7 +47,19 @@ export default function DocumentationParticipation() {
     },
   });
 
-  useResetForm<Schema>({ currentUrl, form, defaultValues: DEFAULT_VALUES });
+  useEffect(() => {
+    if (!form.dirty()) {
+      const documentationData = getDocumentationData();
+
+      form.resetForm(
+        documentationData.participation === null
+          ? DEFAULT_VALUES
+          : documentationData.participation,
+      );
+
+      form.setDirty(true);
+    }
+  }, [currentUrl, form]);
 
   return (
     <>

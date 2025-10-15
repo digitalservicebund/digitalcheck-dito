@@ -1,7 +1,6 @@
 // These routes can't be exported from ~/routes.ts as that file isn't part of the app environment: https://github.com/remix-run/react-router/issues/12392
 
 import { preCheckQuestions } from "~/resources/content/shared/pre-check-questions";
-import { principles } from "~/resources/content/shared/prinzipien";
 import { FILE_NAME_DOCUMENTATION_STATIC_WORD } from "~/utils/constants";
 import { removeTrailingSlash } from "~/utils/utilFunctions";
 
@@ -122,10 +121,6 @@ export const ROUTE_DOCUMENTATION_SEND = createRoute(
   "absenden",
   "Absenden",
   ROUTE_DOCUMENTATION,
-);
-export const ROUTES_DOCUMENTATION_PRINCIPLES = Object.values(principles).map(
-  (principle): Route =>
-    createRoute(principle.id, principle.title, ROUTE_DOCUMENTATION),
 );
 
 export const ROUTES_DOCUMENTATION_PRE = [

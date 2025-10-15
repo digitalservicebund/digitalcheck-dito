@@ -1,22 +1,14 @@
+import type {
+  DocumentationData,
+  Participation,
+  PolicyTitle,
+  Principle,
+} from "~/routes/dokumentation/documentationDataSchema";
 import {
   readVersionedDataFromLocalStorage,
   removeFromLocalStorage,
-  type VersionedData,
   writeVersionedDataToLocalStorage,
 } from "~/utils/localStorageVersioned";
-
-export type DocumentationData = {
-  steps: DocumentationStep[];
-} & VersionedData;
-
-export type DocumentationStep = {
-  id: string;
-  items: DocumentationField;
-};
-
-export type DocumentationField = {
-  [key: string]: string | DocumentationField | DocumentationField[];
-};
 
 export const DATA_SCHEMA_VERSION = "1";
 export const STORAGE_KEY = "documentationData";
@@ -25,60 +17,55 @@ function writeToStorage(data: DocumentationData): void {
   writeVersionedDataToLocalStorage(data, STORAGE_KEY);
 }
 
-export function getDocumentationData(): DocumentationData | null {
-  return readVersionedDataFromLocalStorage<DocumentationData>(
-    STORAGE_KEY,
-    DATA_SCHEMA_VERSION,
+export function getDocumentationData(): DocumentationData {
+  return (
+    readVersionedDataFromLocalStorage<DocumentationData>(
+      STORAGE_KEY,
+      DATA_SCHEMA_VERSION,
+    ) ?? { version: DATA_SCHEMA_VERSION }
   );
+}
+
+export function createOrUpdateDocumentationData(data: DocumentationData): void {
+  writeToStorage(data);
 }
 
 export function deleteDocumentationData(): void {
   removeFromLocalStorage(STORAGE_KEY);
 }
 
-/**
- * @param stepId url of the documentation step
- */
-export function createOrUpdateDocumentationStep(
-  stepId: string,
-  items: DocumentationField,
-) {
-  let data = getDocumentationData();
-  if (!data) {
-    data = {
-      version: DATA_SCHEMA_VERSION,
-      steps: [],
-    };
-  }
-
-  const existingStepIndex = data.steps.findIndex((step) => step.id === stepId);
-  const step: DocumentationStep = { id: stepId, items };
-
-  if (existingStepIndex >= 0) {
-    data.steps[existingStepIndex] = step;
-  } else {
-    data.steps.push(step);
-  }
-
-  writeToStorage(data);
+export function setPolicyTitle(policyTitle: PolicyTitle): void {
+  const data = getDocumentationData();
+  createOrUpdateDocumentationData({
+    ...data,
+    policyTitle,
+  });
 }
 
-export function getDocumentationStep(stepId: string): DocumentationStep | null {
+export function setParticipation(participation: Participation): void {
   const data = getDocumentationData();
-  return data?.steps.find((step) => step.id === stepId) || null;
+  createOrUpdateDocumentationData({
+    ...data,
+    participation,
+  });
 }
 
-export function deleteDocumentationStep(stepId: string): boolean {
+export function addOrUpdatePrinciple(newPrinciple: Principle): void {
   const data = getDocumentationData();
-  if (!data) return false;
+  const principles = data.principles ?? [];
+  const existingIndex = principles.findIndex(
+    (existingPrinciple) => existingPrinciple.id === newPrinciple.id,
+  );
 
-  const initialLength = data.steps.length;
-  data.steps = data.steps.filter((step) => step.id !== stepId);
+  const updatedPrinciples =
+    existingIndex >= 0
+      ? principles.map((existingPrinciple, index) =>
+          index === existingIndex ? newPrinciple : existingPrinciple,
+        )
+      : [...principles, newPrinciple];
 
-  if (data.steps.length < initialLength) {
-    writeToStorage(data);
-    return true;
-  }
-
-  return false;
+  createOrUpdateDocumentationData({
+    ...data,
+    principles: updatedPrinciples,
+  });
 }

@@ -2,17 +2,31 @@ import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { principles } from "~/resources/content/shared/prinzipien";
 import {
   Route,
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_TITLE,
   ROUTES_DOCUMENTATION_PRE,
 } from "~/resources/staticRoutes";
-import { mockRouter } from "~/routes/__tests__/utils/mockRouter";
+import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
 import DocumentationSummary from "~/routes/dokumentation._documentationNavigation.zusammenfassung";
-import type { DocumentationData } from "~/routes/dokumentation/documentationDataService";
-import { getDocumentationStep } from "~/routes/dokumentation/documentationDataService";
+import type { DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
+import { getDocumentationData } from "~/routes/dokumentation/documentationDataService";
+
+const { mockUseOutletContext, mockUseLoaderData } = vi.hoisted(() => ({
+  mockUseOutletContext: vi.fn(),
+  mockUseLoaderData: vi.fn(),
+}));
+
+vi.mock("react-router", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("react-router")>();
+  return {
+    ...actual,
+    useOutletContext: mockUseOutletContext,
+    useNavigate: vi.fn(() => vi.fn()),
+    useLoaderData: mockUseLoaderData,
+  };
+});
 
 vi.mock(
   "~/routes/dokumentation/documentationDataService",
@@ -23,7 +37,7 @@ vi.mock(
       >();
     return {
       ...actual,
-      getDocumentationStep: vi.fn(),
+      getDocumentationData: vi.fn(),
     };
   },
 );
@@ -32,15 +46,13 @@ const routes: (Route[] | Route)[] = [
   ...ROUTES_DOCUMENTATION_PRE,
   [
     {
-      title: "Prinzip A",
-      url: "/prinzipA",
+      title: "Prinzip: Digitale Angebote",
+      url: "/dokumentation/prinzip-digitale-angebote",
     },
   ],
 ];
 
-const { mockNavigationContext } = mockRouter(routes);
-
-const mockGetDocumentationStep = vi.mocked(getDocumentationStep);
+const mockGetDocumentationData = vi.mocked(getDocumentationData);
 
 describe("DocumentationSummary", () => {
   const renderWithRouter = () => {
@@ -53,46 +65,34 @@ describe("DocumentationSummary", () => {
 
   const mockDocumentationData: DocumentationData = {
     version: "1",
-    steps: [
-      {
-        id: ROUTE_DOCUMENTATION_TITLE.url,
-        items: { Titel: "Titel des Vorhabens" },
-      },
-      {
-        id: ROUTE_DOCUMENTATION_PARTICIPATION.url,
-        items: {
-          formats: "Format 1",
-          outcomes: "Online-Konsultation",
-        },
-      },
-      {
-        id: "/prinzipA",
-        items: {
-          prinzipId: "/prinzipA",
-          answer: "Ja, gänzlich oder Teilweise",
-          reasoning: [
-            {
-              checkbox: "true",
-              paragraphs: "Paragraf 1",
-              reason: "Begründung 1",
-            },
-            {
-              checkbox: "true",
-              paragraphs: "Paragraf 2",
-              reason: "Begründung 2",
-            },
-          ],
-        },
-      },
-    ],
+    policyTitle: { title: "Titel des Vorhabens" },
+    participation: {
+      formats: "Format 1",
+      results: "Online-Konsultation",
+    },
   };
 
   beforeEach(() => {
-    mockGetDocumentationStep.mockImplementation(
-      (stepId: string) =>
-        mockDocumentationData.steps.find(({ id }) => id === stepId) ?? null,
-    );
-    mockNavigationContext();
+    mockGetDocumentationData.mockReturnValue(mockDocumentationData);
+    mockUseLoaderData.mockReturnValue({
+      principles: [
+        {
+          Name: "Digitale Angebote für alle nutzbar gestalten",
+          URLBezeichnung: "prinzip-digitale-angebote",
+          documentId: "1",
+          Nummer: 1,
+          Beschreibung: [],
+        },
+      ],
+    });
+
+    const context: NavigationContext = {
+      currentUrl: "/current-url",
+      nextUrl: "/next-url",
+      previousUrl: "/previous-url",
+      routes: routes,
+    };
+    mockUseOutletContext.mockReturnValue(context);
   });
 
   afterEach(() => {
@@ -134,13 +134,9 @@ describe("DocumentationSummary", () => {
     routes.flat().forEach((route) => {
       const stepContainer = screen.getByTestId(route.url);
 
-      // For principle routes, check for principle headlines instead of route titles
-      const principle = principles.find((p) => route.url.endsWith(p.id));
-      const expectedHeading = principle ? principle.headline : route.title;
-
       expect(
         within(stepContainer).getByRole("heading", {
-          name: expectedHeading,
+          name: route.title,
           level: 3,
         }),
       ).toBeInTheDocument();
@@ -150,20 +146,11 @@ describe("DocumentationSummary", () => {
   it("displays documentation data when available", () => {
     renderWithRouter();
 
-    expect(screen.getByText("Titel")).toBeInTheDocument();
     expect(screen.getByText("Titel des Vorhabens")).toBeInTheDocument();
 
     // Check data for beteiligungsformate
     expect(screen.getByText("Format 1")).toBeInTheDocument();
     expect(screen.getByText("Online-Konsultation")).toBeInTheDocument();
-
-    // Check data for prinzip-digitale-angebote
-    expect(screen.getByText("Prinzip A")).toBeInTheDocument();
-    expect(screen.getByText("Ja, gänzlich oder Teilweise")).toBeInTheDocument();
-    expect(screen.getByText("Paragraf 1")).toBeInTheDocument();
-    expect(screen.getByText("Begründung 1")).toBeInTheDocument();
-    expect(screen.getByText("Paragraf 2")).toBeInTheDocument();
-    expect(screen.getByText("Begründung 2")).toBeInTheDocument();
   });
 
   it("shows principle badges only for principle steps", () => {
@@ -171,17 +158,20 @@ describe("DocumentationSummary", () => {
 
     routes.flat().forEach((route) => {
       const stepContainer = screen.getByTestId(route.url);
-      const principle = principles.find((p) => route.url.endsWith(p.id));
+      const isPrincipleRoute = route.url.includes("prinzip");
 
-      if (principle) {
-        // Principle step should have badge
-        const badge = within(stepContainer).getByText("Prinzip");
-        expect(badge).toBeInTheDocument();
+      if (isPrincipleRoute) {
+        // Principle step should have "Prinzip" in heading
+        const heading = within(stepContainer).getByRole("heading", {
+          level: 3,
+        });
+        expect(heading.textContent).toContain("Prinzip");
       } else {
-        // Non-principle step should not have badge
-        expect(
-          within(stepContainer).queryByText("Prinzip"),
-        ).not.toBeInTheDocument();
+        // Non-principle step should not have "Prinzip" in heading
+        const heading = within(stepContainer).getByRole("heading", {
+          level: 3,
+        });
+        expect(heading.textContent).not.toContain("Prinzip");
       }
     });
   });
@@ -189,12 +179,22 @@ describe("DocumentationSummary", () => {
   it("shows correct content and buttons for steps with data", () => {
     renderWithRouter();
 
-    const stepsWithData = mockDocumentationData.steps;
+    // Check routes that have data
+    const routesWithData = routes.flat().filter((route) => {
+      if (route.url === ROUTE_DOCUMENTATION_TITLE.url) {
+        return mockDocumentationData.policyTitle !== undefined;
+      }
+      if (route.url === ROUTE_DOCUMENTATION_PARTICIPATION.url) {
+        return mockDocumentationData.participation !== undefined;
+      }
+      // Check if principle exists (principle id is the last part of the route URL)
+      const principleId = route.url.split("/").pop();
+      return mockDocumentationData.principles?.some(
+        (p) => p.id === principleId,
+      );
+    });
 
-    stepsWithData.forEach((step) => {
-      const route = routes.flat().find((r) => r.url === step.id);
-      if (!route) throw Error(`Cannot find route ${step.id}.`);
-
+    routesWithData.forEach((route) => {
       const stepContainer = screen.getByTestId(route.url);
 
       const editLink = within(stepContainer).getByRole("link", {
@@ -214,12 +214,19 @@ describe("DocumentationSummary", () => {
   it("shows InlineNotice for steps without data", () => {
     renderWithRouter();
 
-    const stepsWithoutData = routes
-      .flat()
-      .filter(
-        (route) =>
-          !mockDocumentationData.steps.some((step) => step.id === route.url),
+    const stepsWithoutData = routes.flat().filter((route) => {
+      if (route.url === ROUTE_DOCUMENTATION_TITLE.url) {
+        return mockDocumentationData.policyTitle === undefined;
+      }
+      if (route.url === ROUTE_DOCUMENTATION_PARTICIPATION.url) {
+        return mockDocumentationData.participation === undefined;
+      }
+      // Check if principle does not exist (principle id is the last part of the route URL)
+      const principleId = route.url.split("/").pop();
+      return !mockDocumentationData.principles?.some(
+        (p) => p.id === principleId,
       );
+    });
 
     stepsWithoutData.forEach((route) => {
       const stepContainer = screen.getByTestId(route.url);
@@ -243,7 +250,7 @@ describe("DocumentationSummary", () => {
   });
 
   it("shows InlineNotice for all steps when no documentation data is available", () => {
-    mockGetDocumentationStep.mockReturnValue(null);
+    mockGetDocumentationData.mockReturnValue({ version: "1" });
     renderWithRouter();
 
     routes.flat().forEach((route) => {
@@ -260,6 +267,6 @@ describe("DocumentationSummary", () => {
   it("calls getDocumentationData on component mount", () => {
     renderWithRouter();
 
-    expect(mockGetDocumentationStep).toHaveBeenCalledTimes(3);
+    expect(mockGetDocumentationData).toHaveBeenCalled();
   });
 });

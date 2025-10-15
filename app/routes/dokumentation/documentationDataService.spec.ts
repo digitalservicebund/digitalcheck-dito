@@ -1,15 +1,14 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import type { DocumentationData } from "./documentationDataSchema";
 import {
-  createOrUpdateDocumentationStep,
+  addOrUpdatePrinciple,
+  createOrUpdateDocumentationData,
   DATA_SCHEMA_VERSION,
   deleteDocumentationData,
-  deleteDocumentationStep,
   getDocumentationData,
-  getDocumentationStep,
+  setParticipation,
+  setPolicyTitle,
   STORAGE_KEY,
-  type DocumentationData,
-  type DocumentationField,
-  type DocumentationStep,
 } from "./documentationDataService";
 
 vi.mock("~/utils/localStorageVersioned", () => ({
@@ -49,7 +48,12 @@ describe("documentationDataService", () => {
     it("should return data from localStorage", () => {
       const testData: DocumentationData = {
         version: DATA_SCHEMA_VERSION,
-        steps: [{ id: "step1", items: {} }],
+        policyTitle: { title: "Test Policy" },
+        participation: {
+          formats: "Test formats",
+          results: "Test results",
+        },
+        principles: [],
       };
       mockReadFromLocalStorage.mockReturnValue(testData);
 
@@ -62,12 +66,12 @@ describe("documentationDataService", () => {
       );
     });
 
-    it("should return null when no data exists", () => {
+    it("should return empty data object when no data exists", () => {
       mockReadFromLocalStorage.mockReturnValue(null);
 
       const result = getDocumentationData();
 
-      expect(result).toBeNull();
+      expect(result).toEqual({ version: DATA_SCHEMA_VERSION });
     });
 
     it("should propagate version mismatch errors", () => {
@@ -87,22 +91,159 @@ describe("documentationDataService", () => {
     });
   });
 
-  describe("createOrUpdateDocumentationStep", () => {
-    it("should create new step when no data exists", () => {
-      mockReadFromLocalStorage.mockReturnValue(null);
-      const testFields: DocumentationField = {
-        field1: "value1",
+  describe("createOrUpdateDocumentationData", () => {
+    it("should write data to localStorage", () => {
+      const testData: DocumentationData = {
+        version: DATA_SCHEMA_VERSION,
+        policyTitle: { title: "New Policy" },
       };
 
-      createOrUpdateDocumentationStep("step1", testFields);
+      createOrUpdateDocumentationData(testData);
+
+      expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
+        testData,
+        STORAGE_KEY,
+      );
+    });
+
+    it("should write complete data object", () => {
+      const testData: DocumentationData = {
+        version: DATA_SCHEMA_VERSION,
+        policyTitle: { title: "Policy" },
+        participation: {
+          formats: "formats",
+          results: "results",
+        },
+        principles: [
+          { id: "principle1", answer: "Ja", reasoning: [] },
+          { id: "principle2", answer: "Nein", reasoning: undefined },
+        ],
+      };
+
+      createOrUpdateDocumentationData(testData);
+
+      expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
+        testData,
+        STORAGE_KEY,
+      );
+    });
+  });
+
+  describe("setPolicyTitle", () => {
+    it("should set policy title when no data exists", () => {
+      mockReadFromLocalStorage.mockReturnValue(null);
+
+      setPolicyTitle({ title: "New Policy" });
 
       expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
         {
           version: DATA_SCHEMA_VERSION,
-          steps: [
+          policyTitle: { title: "New Policy" },
+        },
+        STORAGE_KEY,
+      );
+    });
+
+    it("should update policy title in existing data", () => {
+      const existingData: DocumentationData = {
+        version: DATA_SCHEMA_VERSION,
+        policyTitle: { title: "Old Policy" },
+        participation: {
+          formats: "formats",
+          results: "results",
+        },
+        principles: [],
+      };
+      mockReadFromLocalStorage.mockReturnValue(existingData);
+
+      setPolicyTitle({ title: "Updated Policy" });
+
+      expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
+        {
+          version: DATA_SCHEMA_VERSION,
+          policyTitle: { title: "Updated Policy" },
+          participation: {
+            formats: "formats",
+            results: "results",
+          },
+          principles: [],
+        },
+        STORAGE_KEY,
+      );
+    });
+  });
+
+  describe("setParticipation", () => {
+    it("should set participation when no data exists", () => {
+      mockReadFromLocalStorage.mockReturnValue(null);
+
+      setParticipation({
+        formats: "New formats",
+        results: "New results",
+      });
+
+      expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
+        {
+          version: DATA_SCHEMA_VERSION,
+          participation: {
+            formats: "New formats",
+            results: "New results",
+          },
+        },
+        STORAGE_KEY,
+      );
+    });
+
+    it("should update participation in existing data", () => {
+      const existingData: DocumentationData = {
+        version: DATA_SCHEMA_VERSION,
+        policyTitle: { title: "Policy" },
+        participation: {
+          formats: "Old formats",
+          results: "Old results",
+        },
+        principles: [],
+      };
+      mockReadFromLocalStorage.mockReturnValue(existingData);
+
+      setParticipation({
+        formats: "Updated formats",
+        results: "Updated results",
+      });
+
+      expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
+        {
+          version: DATA_SCHEMA_VERSION,
+          policyTitle: { title: "Policy" },
+          participation: {
+            formats: "Updated formats",
+            results: "Updated results",
+          },
+          principles: [],
+        },
+        STORAGE_KEY,
+      );
+    });
+  });
+
+  describe("addOrUpdatePrinciple", () => {
+    it("should add principle when no data exists", () => {
+      mockReadFromLocalStorage.mockReturnValue(null);
+
+      addOrUpdatePrinciple({
+        id: "principle1",
+        answer: "Ja",
+        reasoning: [],
+      });
+
+      expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
+        {
+          version: DATA_SCHEMA_VERSION,
+          principles: [
             {
-              id: "step1",
-              items: testFields,
+              id: "principle1",
+              answer: "Ja",
+              reasoning: [],
             },
           ],
         },
@@ -110,169 +251,143 @@ describe("documentationDataService", () => {
       );
     });
 
-    it("should add new step to existing data", () => {
+    it("should add principle when principles array is empty", () => {
       const existingData: DocumentationData = {
         version: DATA_SCHEMA_VERSION,
-        steps: [{ id: "existingStep", items: {} }],
+        policyTitle: { title: "Policy" },
+        principles: [],
       };
       mockReadFromLocalStorage.mockReturnValue(existingData);
 
-      const testFields: DocumentationField = {
-        field1: "value1",
-      };
-
-      createOrUpdateDocumentationStep("newStep", testFields);
+      addOrUpdatePrinciple({
+        id: "principle1",
+        answer: "Nein",
+        reasoning: undefined,
+      });
 
       expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
         {
           version: DATA_SCHEMA_VERSION,
-          steps: [
-            { id: "existingStep", items: {} },
-            { id: "newStep", items: testFields },
+          policyTitle: { title: "Policy" },
+          principles: [
+            {
+              id: "principle1",
+              answer: "Nein",
+              reasoning: undefined,
+            },
           ],
         },
         STORAGE_KEY,
       );
     });
 
-    it("should update existing step", () => {
+    it("should add principle to existing principles", () => {
       const existingData: DocumentationData = {
         version: DATA_SCHEMA_VERSION,
-        steps: [{ id: "step1", items: { oldField: "oldValue" } }],
-      };
-      mockReadFromLocalStorage.mockReturnValue(existingData);
-
-      const newItems: DocumentationField = {
-        newField: "newValue",
-      };
-
-      createOrUpdateDocumentationStep("step1", newItems);
-
-      expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
-        {
-          version: DATA_SCHEMA_VERSION,
-          steps: [{ id: "step1", items: newItems }],
-        },
-        STORAGE_KEY,
-      );
-    });
-
-    it("should handle empty items array", () => {
-      const existingData: DocumentationData = {
-        version: DATA_SCHEMA_VERSION,
-        steps: [],
-      };
-      mockReadFromLocalStorage.mockReturnValue(existingData);
-
-      createOrUpdateDocumentationStep("step1", {});
-
-      expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
-        {
-          version: DATA_SCHEMA_VERSION,
-          steps: [{ id: "step1", items: {} }],
-        },
-        STORAGE_KEY,
-      );
-    });
-  });
-
-  describe("getDocumentationStep", () => {
-    it("should return specific step when it exists", () => {
-      const testStep: DocumentationStep = {
-        id: "step1",
-        items: { field1: "value1" },
-      };
-      const testData: DocumentationData = {
-        version: DATA_SCHEMA_VERSION,
-        steps: [testStep, { id: "step2", items: {} }],
-      };
-      mockReadFromLocalStorage.mockReturnValue(testData);
-
-      const result = getDocumentationStep("step1");
-
-      expect(result).toEqual(testStep);
-    });
-
-    it("should return null when step does not exist", () => {
-      const testData: DocumentationData = {
-        version: DATA_SCHEMA_VERSION,
-        steps: [{ id: "step2", items: {} }],
-      };
-      mockReadFromLocalStorage.mockReturnValue(testData);
-
-      const result = getDocumentationStep("step1");
-
-      expect(result).toBeNull();
-    });
-
-    it("should return null when no data exists", () => {
-      mockReadFromLocalStorage.mockReturnValue(null);
-
-      const result = getDocumentationStep("step1");
-
-      expect(result).toBeNull();
-    });
-  });
-
-  describe("deleteDocumentationStep", () => {
-    it("should delete existing step and return true", () => {
-      const testData: DocumentationData = {
-        version: DATA_SCHEMA_VERSION,
-        steps: [
-          { id: "step1", items: {} },
-          { id: "step2", items: {} },
+        principles: [
+          {
+            id: "principle1",
+            answer: "Ja",
+            reasoning: [],
+          },
         ],
       };
-      mockReadFromLocalStorage.mockReturnValue(testData);
+      mockReadFromLocalStorage.mockReturnValue(existingData);
 
-      const result = deleteDocumentationStep("step1");
+      addOrUpdatePrinciple({
+        id: "principle2",
+        answer: "Nein",
+        reasoning: undefined,
+      });
 
-      expect(result).toBe(true);
       expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
         {
           version: DATA_SCHEMA_VERSION,
-          steps: [{ id: "step2", items: {} }],
+          principles: [
+            {
+              id: "principle1",
+              answer: "Ja",
+              reasoning: [],
+            },
+            {
+              id: "principle2",
+              answer: "Nein",
+              reasoning: undefined,
+            },
+          ],
         },
         STORAGE_KEY,
       );
     });
 
-    it("should return false when step does not exist", () => {
-      const testData: DocumentationData = {
+    it("should update existing principle with same id", () => {
+      const existingData: DocumentationData = {
         version: DATA_SCHEMA_VERSION,
-        steps: [{ id: "step2", items: {} }],
+        principles: [
+          {
+            id: "principle1",
+            answer: "Ja",
+            reasoning: [],
+          },
+          {
+            id: "principle2",
+            answer: "Nein",
+            reasoning: undefined,
+          },
+        ],
       };
-      mockReadFromLocalStorage.mockReturnValue(testData);
+      mockReadFromLocalStorage.mockReturnValue(existingData);
 
-      const result = deleteDocumentationStep("step1");
+      addOrUpdatePrinciple({
+        id: "principle1",
+        answer: "Nicht relevant",
+        reasoning: undefined,
+      });
 
-      expect(result).toBe(false);
-      expect(mockWriteToLocalStorage).not.toHaveBeenCalled();
-    });
-
-    it("should return false when no data exists", () => {
-      mockReadFromLocalStorage.mockReturnValue(null);
-
-      const result = deleteDocumentationStep("step1");
-
-      expect(result).toBe(false);
-      expect(mockWriteToLocalStorage).not.toHaveBeenCalled();
-    });
-
-    it("should handle deletion of last step", () => {
-      const testData: DocumentationData = {
-        version: DATA_SCHEMA_VERSION,
-        steps: [{ id: "step1", items: {} }],
-      };
-      mockReadFromLocalStorage.mockReturnValue(testData);
-
-      const result = deleteDocumentationStep("step1");
-
-      expect(result).toBe(true);
       expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
         {
           version: DATA_SCHEMA_VERSION,
-          steps: [],
+          principles: [
+            {
+              id: "principle1",
+              answer: "Nicht relevant",
+              reasoning: undefined,
+            },
+            {
+              id: "principle2",
+              answer: "Nein",
+              reasoning: undefined,
+            },
+          ],
+        },
+        STORAGE_KEY,
+      );
+    });
+
+    it("should handle principles array being undefined", () => {
+      const existingData: DocumentationData = {
+        version: DATA_SCHEMA_VERSION,
+        policyTitle: { title: "Policy" },
+      };
+      mockReadFromLocalStorage.mockReturnValue(existingData);
+
+      addOrUpdatePrinciple({
+        id: "principle1",
+        answer: "Ja",
+        reasoning: [],
+      });
+
+      expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
+        {
+          version: DATA_SCHEMA_VERSION,
+          policyTitle: { title: "Policy" },
+          principles: [
+            {
+              id: "principle1",
+              answer: "Ja",
+              reasoning: [],
+            },
+          ],
         },
         STORAGE_KEY,
       );

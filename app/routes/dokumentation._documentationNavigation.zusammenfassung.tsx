@@ -1,106 +1,216 @@
-import { Link, useOutletContext } from "react-router";
+import { type ReactNode, useEffect, useState } from "react";
+import { Link, useLoaderData, useOutletContext } from "react-router";
+import { BadgeProps } from "~/components/Badge";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
 import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
-import { PrincipleNumber } from "~/resources/constants";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import { principles } from "~/resources/content/shared/prinzipien";
 import {
-  ROUTE_DOCUMENTATION_SEND,
+  type Route,
+  ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_SUMMARY,
+  ROUTE_DOCUMENTATION_TITLE,
 } from "~/resources/staticRoutes";
+import type {
+  DocumentationData,
+  Participation,
+  PolicyTitle,
+  Principle,
+} from "~/routes/dokumentation/documentationDataSchema";
+import { Node } from "~/utils/paragraphUtils";
+import { fetchStrapiData } from "~/utils/strapiData.server";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
-import {
-  DocumentationField,
-  getDocumentationStep,
-} from "./dokumentation/documentationDataService";
+import { getDocumentationData } from "./dokumentation/documentationDataService";
 
 const { summary } = digitalDocumentation;
 
-const getAnswers = (field: DocumentationField) =>
-  Object.entries(field).map(([key, value], i) => (
-    <div key={`${key}-${i}`}>
-      <span className="block font-bold">{key}</span>
-      <span className="block">
-        {typeof value === "object"
-          ? Array.isArray(value)
-            ? value.map(getAnswers)
-            : getAnswers(value)
-          : value}
-      </span>
+type Aspekt = {
+  Titel: string;
+  Kurzbezeichnung: string;
+  Beschreibung: string;
+};
+
+type Prinzip = {
+  Name: string;
+  URLBezeichnung: string;
+  documentId: string;
+  Beschreibung: Node[];
+  Nummer: BadgeProps["principleNumber"];
+  Aspekte: Aspekt[];
+};
+
+const GET_PRINZIP_QUERY = `
+query GetPrinzips {
+  prinzips(sort: "order") {
+    Name
+    URLBezeichnung
+    documentId
+    Nummer
+    Beschreibung
+    Aspekte {
+      Titel
+      Kurzbezeichnung
+      Beschreibung
+    }
+  }
+}`;
+
+export async function loader() {
+  const prinzipData = await fetchStrapiData<{
+    prinzips: Prinzip[];
+  }>(GET_PRINZIP_QUERY);
+
+  if ("error" in prinzipData) {
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
+    throw new Response(prinzipData.error, { status: 400 });
+  }
+
+  return {
+    principles: prinzipData.prinzips,
+  };
+}
+
+const createInfoBoxItem = ({
+  route,
+  content,
+}: {
+  route: Route;
+  content?: ReactNode;
+}): InfoBoxProps => ({
+  identifier: route.url,
+  testId: route.url,
+  heading: {
+    text: route.title,
+  },
+  children: (
+    <div>
+      {content ? (
+        <div className="space-y-8">
+          <div className="space-y-28">{content}</div>
+          <Link
+            to={route.url}
+            className="text-link"
+            aria-label={`${route.title} ${summary.buttonEdit.ariaLabelSuffix}`}
+          >
+            {summary.buttonEdit.text}
+          </Link>
+        </div>
+      ) : (
+        <InlineNotice
+          look="warning"
+          heading={
+            <Heading tagName="h4">
+              Sie haben diesen Punkt noch nicht bearbeitet.
+            </Heading>
+          }
+        >
+          <Link
+            to={route.url}
+            className="text-link"
+            aria-label={`${route.title} ${summary.buttonEditNow.ariaLabelSuffix}`}
+          >
+            {summary.buttonEditNow.text}
+          </Link>
+        </InlineNotice>
+      )}
     </div>
-  ));
+  ),
+  look: "highlight",
+  className: "bg-white",
+});
+
+const renderKeyValue = (key: string, value: string) => (
+  <div>
+    <span className="block font-bold">{key}</span>
+    <span className="block">{value}</span>
+  </div>
+);
+
+const renderPolicyTitle = (policyTitle?: PolicyTitle) => {
+  if (!policyTitle) {
+    return null;
+  }
+  return renderKeyValue(
+    digitalDocumentation.info.inputTitle.label,
+    policyTitle.title,
+  );
+};
+
+const renderParticipation = (participation?: Participation) => {
+  if (!participation) {
+    return null;
+  }
+  return (
+    <>
+      {renderKeyValue(
+        digitalDocumentation.participation.formats.heading,
+        participation.formats,
+      )}
+      {renderKeyValue(
+        digitalDocumentation.participation.results.heading,
+        participation.results,
+      )}
+    </>
+  );
+};
+
+const renderPrinciple = (principle?: Principle) => {
+  if (!principle) {
+    return null;
+  }
+  return (
+    // TODO render aspects and paragraphs
+    <>{renderKeyValue(summary.principleAnswerTitle, principle.answer)}</>
+  );
+};
 
 export default function DocumentationSummary() {
   const { routes, previousUrl, nextUrl } =
     useOutletContext<NavigationContext>();
+  const { principles } = useLoaderData<typeof loader>();
+  const [documentationData, setDocumentationData] =
+    useState<DocumentationData | null>(null);
 
-  const items: InfoBoxProps[] = routes
-    .flat()
-    .filter(
-      (route) =>
-        route.url !== ROUTE_DOCUMENTATION_SUMMARY.url &&
-        route.url !== ROUTE_DOCUMENTATION_SEND.url,
-    )
-    .map((route): InfoBoxProps => {
-      const documentationStep = getDocumentationStep(route.url);
+  useEffect(() => {
+    // data is fetches from localStorage which should only happen client-side, thus we use useEffect hook to set it.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setDocumentationData(getDocumentationData());
+  }, []);
 
-      // TODO: get principle from strapi data
-      const principle = principles.find((principle) =>
-        route.url.endsWith(principle.id),
+  if (!documentationData) {
+    return null;
+  }
+
+  const items: InfoBoxProps[] = [
+    createInfoBoxItem({
+      route: ROUTE_DOCUMENTATION_TITLE,
+      content: renderPolicyTitle(documentationData.policyTitle),
+    }),
+    createInfoBoxItem({
+      route: ROUTE_DOCUMENTATION_PARTICIPATION,
+      content: renderParticipation(documentationData.participation),
+    }),
+    ...principles.map((principleContent) => {
+      const principleRoute = routes
+        .flat()
+        .find((route) => route.url.endsWith(principleContent.URLBezeichnung));
+      if (!principleRoute)
+        throw new Error(
+          `Cannot find route for principle ${principleContent.URLBezeichnung}`,
+        );
+      const principleFormData = documentationData.principles?.find(
+        (docPrinciple) => docPrinciple.id === principleContent.documentId,
       );
-
-      return {
-        identifier: route.url,
-        testId: route.url,
-        badge: principle && {
-          text: summary.principleBadge,
-          principleNumber: principle.number as PrincipleNumber,
-        },
-        heading: {
-          text: route.title,
-        },
-        children: (
-          <div className="space-y-28">
-            {documentationStep?.items ? (
-              <>
-                {getAnswers(documentationStep.items)}
-                <Link
-                  to={route.url}
-                  className="text-link"
-                  aria-label={`${route.title} ${summary.buttonEdit.ariaLabelSuffix}`}
-                >
-                  {summary.buttonEdit.text}
-                </Link>
-              </>
-            ) : (
-              <InlineNotice
-                look="warning"
-                heading={
-                  <Heading tagName="h4">
-                    Sie haben diesen Punkt noch nicht bearbeitet.
-                  </Heading>
-                }
-              >
-                <Link
-                  to={route.url}
-                  className="text-link"
-                  aria-label={`${route.title} ${summary.buttonEditNow.ariaLabelSuffix}`}
-                >
-                  {summary.buttonEditNow.text}
-                </Link>
-              </InlineNotice>
-            )}
-          </div>
-        ),
-        look: "highlight",
-        className: "bg-white",
-      };
-    });
+      return createInfoBoxItem({
+        route: principleRoute,
+        content: renderPrinciple(principleFormData),
+      });
+    }),
+  ];
 
   return (
     <>
