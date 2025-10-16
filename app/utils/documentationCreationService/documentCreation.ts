@@ -162,7 +162,7 @@ export default async function downloadDocumentation(
     const doc = createDoc(logoData, principles, documentationData);
 
     const blob = await Packer.toBlob(doc);
-    saveAs(blob, "example.docx");
+    saveAs(blob, documentationDocument.filename);
   } catch (e) {
     console.error(e);
   }
