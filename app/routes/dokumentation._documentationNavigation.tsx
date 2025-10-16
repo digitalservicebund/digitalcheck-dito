@@ -1,5 +1,4 @@
 import { Outlet, useLoaderData, useLocation } from "react-router";
-import { BadgeProps } from "~/components/Badge";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
@@ -11,33 +10,19 @@ import {
   ROUTES_DOCUMENTATION_PRE,
 } from "~/resources/staticRoutes";
 import useFeatureFlag from "~/utils/featureFlags";
-import { Node } from "~/utils/paragraphUtils";
-import { fetchStrapiData } from "~/utils/strapiData.server";
+import {
+  fetchStrapiData,
+  type PrinzipWithAspekte,
+} from "~/utils/strapiData.server";
 
 export type OnNavigateCallback = () => Promise<boolean>;
-
-export type Aspekt = {
-  Titel: string;
-  Kurzbezeichnung: string;
-  Beschreibung: string;
-};
-
-export type Prinzip = {
-  Name: string;
-  URLBezeichnung: string;
-  documentId: string;
-  Beschreibung: Node[];
-  order: number;
-  Nummer: BadgeProps["principleNumber"];
-  Aspekte: Aspekt[];
-};
 
 export type NavigationContext = {
   currentUrl: string;
   nextUrl: string;
   previousUrl: string;
   routes: (InternalRoute | InternalRoute[])[];
-  prinzips: Prinzip[];
+  prinzips: PrinzipWithAspekte[];
 };
 
 const GET_PRINZIPS_QUERY = `
@@ -85,7 +70,7 @@ function getNextUrl(
 
 export const loader = async () => {
   const prinzipData = await fetchStrapiData<{
-    prinzips: Prinzip[];
+    prinzips: PrinzipWithAspekte[];
   }>(GET_PRINZIPS_QUERY);
 
   if ("error" in prinzipData) {

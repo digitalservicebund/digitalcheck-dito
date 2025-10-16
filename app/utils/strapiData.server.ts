@@ -64,6 +64,8 @@ export type AbsatzWithParagraph = BaseAbsatz & {
 
 export type PrinzipAspekt = {
   Titel: string;
+  Kurzbezeichnung: string;
+  Beschreibung: string;
   Text: Node[];
   Leitfragen?: Node[];
   Formulierungsbeispiel?: Node[];
@@ -81,7 +83,9 @@ export type Paragraph = {
 };
 
 export type BasePrinzip = {
+  documentId: string;
   Name: string;
+  Kurzbezeichnung: string;
   Beschreibung: Node[];
   Nummer: PrincipleNumber;
   order: number;
@@ -98,9 +102,7 @@ export type PrinzipWithAspekteAndExample = PrinzipWithAspekte & {
 };
 
 export type PrinzipWithBeispielvorhaben = BasePrinzip & {
-  documentId: string;
   Beispielvorhaben: Beispielvorhaben[];
-  Kurzbezeichnung: string;
 };
 
 export type Visualisierung = {
@@ -208,24 +210,6 @@ query GetPrinzips {
   }
 }`;
 
-export const GET_PRINZIPS_WITH_ASPECTS_QUERY = `
-query GetPrinzips {
-  prinzips(sort: "order") {
-    Name
-    Beschreibung
-    order
-    Nummer
-    URLBezeichnung
-    Aspekte {
-      Titel
-      Text
-      Leitfragen
-      Formulierungsbeispiel
-    }
-  }
-}
-`;
-
 export const GET_PRINZIPS_WITH_EXAMPLES_QUERY = `
 query GetPrinzips {
   prinzips(sort: "order") {
@@ -258,6 +242,8 @@ query GetPrinzips {
     }
     Aspekte {
       Titel
+      Kurzbezeichnung
+      Beschreibung
       Text
       Leitfragen
       Formulierungsbeispiel

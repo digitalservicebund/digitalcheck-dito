@@ -81,6 +81,7 @@ describe("DocumentationSummary", () => {
       prinzips: [
         {
           Name: "Digitale Angebote für alle nutzbar gestalten",
+          Kurzbezeichnung: "Digitale Angebote",
           URLBezeichnung: "prinzip-digitale-angebote",
           documentId: "1",
           Nummer: 1,

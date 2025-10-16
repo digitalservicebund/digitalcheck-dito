@@ -29,13 +29,13 @@ import {
   addOrUpdatePrinciple,
   getDocumentationData,
 } from "~/routes/dokumentation/documentationDataService";
+import type {
+  PrinzipAspekt,
+  PrinzipWithAspekte,
+} from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 import type { Route } from "./+types/dokumentation._documentationNavigation.$principleId";
-import {
-  Aspekt,
-  NavigationContext,
-  Prinzip,
-} from "./dokumentation._documentationNavigation";
+import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 
 const { principlePages } = digitalDocumentation;
@@ -168,7 +168,7 @@ function Reasoning({
 
 type PositiveAnswerFormElementProps = {
   scope: FormScope<PrincipleReasoning[]>;
-  prinzip: Prinzip;
+  prinzip: PrinzipWithAspekte;
 };
 
 function PositiveAnswerFormElements({
@@ -183,7 +183,7 @@ function PositiveAnswerFormElements({
   });
 
   const remove = useCallback(
-    async (index: number, aspekt?: Aspekt) => {
+    async (index: number, aspekt?: PrinzipAspekt) => {
       if (aspekt)
         await reasoningField.replace(index, { aspect: slugify(aspekt.Titel) });
       else await reasoningField.remove(index);
