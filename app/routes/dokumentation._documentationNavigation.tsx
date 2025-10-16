@@ -38,6 +38,7 @@ query GetPrinzips {
       Titel
       Kurzbezeichnung
       Beschreibung
+      Text
     }
   }
 }`;

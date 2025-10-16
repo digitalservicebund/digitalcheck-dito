@@ -12,13 +12,8 @@ import {
   VerticalAlign,
   WidthType,
 } from "docx";
-import { PrinzipAspekt, PrinzipWithAspekte } from "../strapiData.server";
-import markdown from "./markdownToDocx";
-
-const EXAMPLE_PRINCIPLE_DESCRIPTION =
-  "Viele Bürgerinnen, Bürger und Unternehmen sind an digitale Angebote gewöhnt und bevorzugen diese – sofern die digitale Kommunikation gut umgesetzt ist und ihren Bedürfnissen entspricht. Die Verwaltung kann digitale Daten schneller prüfen, bearbeiten und dokumentieren. Das Angebot sollte dabei immer inklusiv sein und es benötigt gegebenenfalls analoge Alternativen.";
-const EXAMPLE_ASPECT_DESCRIPTION =
-  "Ermöglichen Sie digitale Kommunikation: Beseitigen Sie Hürden wie Schriftform oder persönliches Erscheinen und bieten Sie alternative Kommunikationswege an.";
+import type { PrinzipAspekt, PrinzipWithAspekte } from "../strapiData.server";
+import strapiBlocksToDocx from "./strapiBlocksToDocx";
 
 const NO_BORDER = {
   style: BorderStyle.NONE,
@@ -131,7 +126,7 @@ export const heading = (
 
 export const aspectElement = (aspect: PrinzipAspekt) => [
   heading(aspect.Titel, 2),
-  ...markdown(EXAMPLE_ASPECT_DESCRIPTION),
+  ...strapiBlocksToDocx(aspect.Text),
   formLabel("Paragrafen"),
   answer("§"),
   formLabel("Erläuterung"),
@@ -140,7 +135,7 @@ export const aspectElement = (aspect: PrinzipAspekt) => [
 
 export const principleElement = (principle: PrinzipWithAspekte) => [
   heading(principle.Name, 1, true),
-  ...markdown(EXAMPLE_PRINCIPLE_DESCRIPTION),
+  ...strapiBlocksToDocx(principle.Beschreibung),
   formLabel("Lässt sich das Vorhaben im Sinne des Prinzips umsetzen?"),
   answer("Ja, gänzlich oder teilweise"),
   ...principle.Aspekte.flatMap(aspectElement),
