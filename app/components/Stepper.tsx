@@ -5,20 +5,16 @@ const Stepper = <T extends { url: string; title: string }>({
   elements,
   currentElementUrl,
 }: {
-  elements: (T[] | T)[];
+  elements: T[];
   currentElementUrl: string;
 }) => {
-  const currentIndex = elements.findIndex((element) =>
-    Array.isArray(element)
-      ? element.map(({ url }) => url).includes(currentElementUrl)
-      : element.url === currentElementUrl,
+  const currentIndex = elements.findIndex(
+    (element) => element.url === currentElementUrl,
   );
 
   return (
     <div className="flex justify-center space-x-8">
-      {elements.map((element, index) => {
-        const el = Array.isArray(element) ? element[0] : element;
-
+      {elements.map((el, index) => {
         return (
           <Link
             key={el.url}

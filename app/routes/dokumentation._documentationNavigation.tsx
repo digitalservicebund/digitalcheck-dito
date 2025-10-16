@@ -146,7 +146,7 @@ export default function LayoutWithDocumentationNavigation() {
       </div>
       <section className="w-[51rem] space-y-40">
         <div className="lg:hidden">
-          <Stepper currentElementUrl={currentUrl} elements={routes} />
+          <Stepper currentElementUrl={currentUrl} elements={routes.flat()} />
         </div>
         {/* force remount for different principles with key={currentUrl} */}
         <Outlet
