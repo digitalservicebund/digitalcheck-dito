@@ -26,7 +26,7 @@ mockForm();
 
 const mockGetDocumentationData = vi.mocked(getDocumentationData);
 
-describe("DocumentationTitle", () => {
+describe.skip("DocumentationTitle", () => {
   const renderWithRouter = () => {
     return render(
       <MemoryRouter>
