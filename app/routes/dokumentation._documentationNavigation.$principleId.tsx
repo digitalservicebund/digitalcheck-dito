@@ -185,7 +185,9 @@ function PositiveAnswerFormElements({
   const remove = useCallback(
     async (index: number, aspekt?: PrinzipAspekt) => {
       if (aspekt)
-        await reasoningField.replace(index, { aspect: slugify(aspekt.Titel) });
+        await reasoningField.replace(index, {
+          aspect: slugify(aspekt.Kurzbezeichnung),
+        });
       else await reasoningField.remove(index);
     },
     [reasoningField],
@@ -320,8 +322,8 @@ export default function DocumentationPrinciple() {
       if (!Array.isArray(reasoning)) {
         form.setValue(
           "reasoning",
-          prinzip.Aspekte.map(({ Titel }) => ({
-            aspect: slugify(Titel),
+          prinzip.Aspekte.map(({ Kurzbezeichnung }) => ({
+            aspect: slugify(Kurzbezeichnung),
           })),
         );
 
