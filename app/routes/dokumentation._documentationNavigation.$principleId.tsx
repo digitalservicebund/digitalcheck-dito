@@ -6,7 +6,7 @@ import {
 import { FormScope, useField, useFieldArray, useForm } from "@rvf/react-router";
 import { useCallback, useEffect } from "react";
 import { useLoaderData, useNavigate, useOutletContext } from "react-router";
-import Badge, { BadgeProps } from "~/components/Badge";
+import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import Button from "~/components/Button";
 import CheckboxWithExpandableArea from "~/components/CheckboxWithExpandableArea";
@@ -29,44 +29,16 @@ import {
   addOrUpdatePrinciple,
   getDocumentationData,
 } from "~/routes/dokumentation/documentationDataService";
-import { Node } from "~/utils/paragraphUtils";
 import { slugify } from "~/utils/utilFunctions";
 import type { Route } from "./+types/dokumentation._documentationNavigation.$principleId";
-import { NavigationContext } from "./dokumentation._documentationNavigation";
+import {
+  Aspekt,
+  NavigationContext,
+  Prinzip,
+} from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 
 const { principlePages } = digitalDocumentation;
-
-type Aspekt = {
-  Titel: string;
-  Kurzbezeichnung: string;
-  Beschreibung: string;
-};
-
-type Prinzip = {
-  Name: string;
-  URLBezeichnung: string;
-  documentId: string;
-  Beschreibung: Node[];
-  Nummer: BadgeProps["principleNumber"];
-  Aspekte: Aspekt[];
-};
-
-const GET_PRINZIP_QUERY = `
-query GetPrinzips($slug: String!) {
-  prinzips(filters: { URLBezeichnung: { eq: $slug } }) {
-    Name
-    URLBezeichnung
-    documentId
-    Nummer
-    Beschreibung
-    Aspekte {
-      Titel
-      Kurzbezeichnung
-      Beschreibung
-    }
-  }
-}`;
 
 export async function loader({ params: { principleId } }: Route.LoaderArgs) {
   return {

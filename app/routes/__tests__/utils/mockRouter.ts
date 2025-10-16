@@ -22,6 +22,7 @@ export const mockRouter = (
       nextUrl: "/next-url",
       previousUrl: "/previous-url",
       routes: routes,
+      prinzips: [],
     };
     mockUseOutletContext.mockReturnValue(context);
   };

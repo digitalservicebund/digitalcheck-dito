@@ -16,13 +16,13 @@ import { fetchStrapiData } from "~/utils/strapiData.server";
 
 export type OnNavigateCallback = () => Promise<boolean>;
 
-type Aspekt = {
+export type Aspekt = {
   Titel: string;
   Kurzbezeichnung: string;
   Beschreibung: string;
 };
 
-type Prinzip = {
+export type Prinzip = {
   Name: string;
   URLBezeichnung: string;
   documentId: string;

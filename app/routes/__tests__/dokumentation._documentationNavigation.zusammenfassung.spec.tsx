@@ -13,9 +13,8 @@ import DocumentationSummary from "~/routes/dokumentation._documentationNavigatio
 import type { DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
 import { getDocumentationData } from "~/routes/dokumentation/documentationDataService";
 
-const { mockUseOutletContext, mockUseLoaderData } = vi.hoisted(() => ({
+const { mockUseOutletContext } = vi.hoisted(() => ({
   mockUseOutletContext: vi.fn(),
-  mockUseLoaderData: vi.fn(),
 }));
 
 vi.mock("react-router", async (importOriginal) => {
@@ -24,7 +23,6 @@ vi.mock("react-router", async (importOriginal) => {
     ...actual,
     useOutletContext: mockUseOutletContext,
     useNavigate: vi.fn(() => vi.fn()),
-    useLoaderData: mockUseLoaderData,
   };
 });
 
@@ -74,23 +72,23 @@ describe("DocumentationSummary", () => {
 
   beforeEach(() => {
     mockGetDocumentationData.mockReturnValue(mockDocumentationData);
-    mockUseLoaderData.mockReturnValue({
-      principles: [
-        {
-          Name: "Digitale Angebote für alle nutzbar gestalten",
-          URLBezeichnung: "prinzip-digitale-angebote",
-          documentId: "1",
-          Nummer: 1,
-          Beschreibung: [],
-        },
-      ],
-    });
 
     const context: NavigationContext = {
       currentUrl: "/current-url",
       nextUrl: "/next-url",
       previousUrl: "/previous-url",
       routes: routes,
+      prinzips: [
+        {
+          Name: "Digitale Angebote für alle nutzbar gestalten",
+          URLBezeichnung: "prinzip-digitale-angebote",
+          documentId: "1",
+          Nummer: 1,
+          order: 1,
+          Beschreibung: [],
+          Aspekte: [],
+        },
+      ],
     };
     mockUseOutletContext.mockReturnValue(context);
   });
