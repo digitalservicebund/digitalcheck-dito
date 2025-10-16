@@ -32,7 +32,9 @@ describe("markdownToDocx", () => {
 
       expect(Paragraph).toHaveBeenCalledTimes(1);
       expect(TextRun).toHaveBeenCalledTimes(1);
-      expect(TextRun).toHaveBeenCalledWith("Hello world");
+      expect(Paragraph).toHaveBeenCalledWith({
+        children: [new TextRun("Hello world")],
+      });
     });
 
     it("should handle multiple plain text lines", () => {
@@ -41,9 +43,15 @@ describe("markdownToDocx", () => {
       expect(Paragraph).toHaveBeenCalledTimes(3);
       expect(TextRun).toHaveBeenCalledTimes(3);
 
-      expect(TextRun).toHaveBeenNthCalledWith(1, "Line 1");
-      expect(TextRun).toHaveBeenNthCalledWith(2, "Line 2");
-      expect(TextRun).toHaveBeenNthCalledWith(3, "Line 3");
+      expect(Paragraph).toHaveBeenNthCalledWith(1, {
+        children: [new TextRun("Line 1")],
+      });
+      expect(Paragraph).toHaveBeenNthCalledWith(2, {
+        children: [new TextRun("Line 2")],
+      });
+      expect(Paragraph).toHaveBeenNthCalledWith(3, {
+        children: [new TextRun("Line 3")],
+      });
     });
 
     it("should handle empty string", () => {
@@ -60,16 +68,22 @@ describe("markdownToDocx", () => {
       expect(Paragraph).toHaveBeenCalledTimes(1);
       expect(TextRun).toHaveBeenCalledTimes(3);
 
-      expect(TextRun).toHaveBeenNthCalledWith(1, "This is ");
-      expect(TextRun).toHaveBeenNthCalledWith(2, { text: "bold", bold: true });
-      expect(TextRun).toHaveBeenNthCalledWith(3, " text");
+      expect(Paragraph).toHaveBeenNthCalledWith(1, {
+        children: [
+          new TextRun("This is "),
+          new TextRun({ text: "bold", bold: true }),
+          new TextRun(" text"),
+        ],
+      });
     });
 
     it("should handle only bold text", () => {
       markdown("**bold only**");
 
       expect(TextRun).toHaveBeenCalledTimes(1);
-      expect(TextRun).toHaveBeenCalledWith({ text: "bold only", bold: true });
+      expect(Paragraph).toHaveBeenCalledWith({
+        children: [new TextRun({ text: "bold only", bold: true })],
+      });
     });
 
     it("should handle multiple bold sections", () => {
@@ -77,13 +91,14 @@ describe("markdownToDocx", () => {
 
       expect(TextRun).toHaveBeenCalledTimes(4);
 
-      expect(TextRun).toHaveBeenNthCalledWith(1, { text: "First", bold: true });
-      expect(TextRun).toHaveBeenNthCalledWith(2, " and ");
-      expect(TextRun).toHaveBeenNthCalledWith(3, {
-        text: "Second",
-        bold: true,
+      expect(Paragraph).toHaveBeenNthCalledWith(1, {
+        children: [
+          new TextRun({ text: "First", bold: true }),
+          new TextRun(" and "),
+          new TextRun({ text: "Second", bold: true }),
+          new TextRun(" bold"),
+        ],
       });
-      expect(TextRun).toHaveBeenNthCalledWith(4, " bold");
     });
 
     it("should handle consecutive bold sections", () => {
@@ -91,10 +106,11 @@ describe("markdownToDocx", () => {
 
       expect(TextRun).toHaveBeenCalledTimes(2);
 
-      expect(TextRun).toHaveBeenNthCalledWith(1, { text: "First", bold: true });
-      expect(TextRun).toHaveBeenNthCalledWith(2, {
-        text: "Second",
-        bold: true,
+      expect(Paragraph).toHaveBeenNthCalledWith(1, {
+        children: [
+          new TextRun({ text: "First", bold: true }),
+          new TextRun({ text: "Second", bold: true }),
+        ],
       });
     });
 
@@ -102,7 +118,9 @@ describe("markdownToDocx", () => {
       markdown("This is **unclosed bold");
 
       expect(TextRun).toHaveBeenCalledTimes(1);
-      expect(TextRun).toHaveBeenCalledWith("This is **unclosed bold");
+      expect(Paragraph).toHaveBeenCalledWith({
+        children: [new TextRun("This is **unclosed bold")],
+      });
     });
   });
 
@@ -113,12 +131,16 @@ describe("markdownToDocx", () => {
       expect(TextRun).toHaveBeenCalledTimes(3);
       expect(ExternalHyperlink).toHaveBeenCalledTimes(1);
 
-      expect(TextRun).toHaveBeenNthCalledWith(1, "Visit ");
-      expect(ExternalHyperlink).toHaveBeenCalledWith({
-        children: [new TextRun({ text: "Google", style: "Hyperlink" })],
-        link: "https://google.com",
+      expect(Paragraph).toHaveBeenNthCalledWith(1, {
+        children: [
+          new TextRun("Visit "),
+          new ExternalHyperlink({
+            children: [new TextRun({ text: "Google", style: "Hyperlink" })],
+            link: "https://google.com",
+          }),
+          new TextRun(" now"),
+        ],
       });
-      expect(TextRun).toHaveBeenNthCalledWith(3, " now");
     });
 
     it("should handle only a link", () => {
@@ -127,9 +149,13 @@ describe("markdownToDocx", () => {
       // One TextRun inside the hyperlink
       expect(TextRun).toHaveBeenCalledTimes(1);
       expect(ExternalHyperlink).toHaveBeenCalledTimes(1);
-      expect(ExternalHyperlink).toHaveBeenCalledWith({
-        children: [new TextRun({ text: "Google", style: "Hyperlink" })],
-        link: "https://google.com",
+      expect(Paragraph).toHaveBeenCalledWith({
+        children: [
+          new ExternalHyperlink({
+            children: [new TextRun({ text: "Google", style: "Hyperlink" })],
+            link: "https://google.com",
+          }),
+        ],
       });
     });
 
@@ -154,7 +180,9 @@ describe("markdownToDocx", () => {
 
       expect(ExternalHyperlink).toHaveBeenCalledTimes(0);
       expect(TextRun).toHaveBeenCalledTimes(1);
-      expect(TextRun).toHaveBeenCalledWith("Visit [Google](incomplete");
+      expect(Paragraph).toHaveBeenCalledWith({
+        children: [new TextRun("Visit [Google](incomplete")],
+      });
     });
   });
 
@@ -163,27 +191,39 @@ describe("markdownToDocx", () => {
       markdown("**Bold** then [link](url) then **bold** again");
 
       expect(ExternalHyperlink).toHaveBeenCalledTimes(1);
-      expect(ExternalHyperlink).toHaveBeenCalledWith({
-        children: [new TextRun({ text: "link", style: "Hyperlink" })],
-        link: "url",
+      expect(Paragraph).toHaveBeenCalledWith({
+        children: [
+          new TextRun({ text: "Bold", bold: true }),
+          new TextRun(" then "),
+          new ExternalHyperlink({
+            children: [new TextRun({ text: "link", style: "Hyperlink" })],
+            link: "url",
+          }),
+          new TextRun(" then "),
+          new TextRun({ text: "bold", bold: true }),
+          new TextRun(" again"),
+        ],
       });
-
-      expect(TextRun).toHaveBeenCalledWith({ text: "Bold", bold: true });
-      expect(TextRun).toHaveBeenCalledWith({ text: "bold", bold: true });
     });
 
     it("should handle links around bold", () => {
       markdown("[one](url) then **bold** then [two](url)");
 
-      expect(TextRun).toHaveBeenCalledWith({ text: "bold", bold: true });
       expect(ExternalHyperlink).toHaveBeenCalledTimes(2);
-      expect(ExternalHyperlink).toHaveBeenNthCalledWith(1, {
-        children: [new TextRun({ text: "one", style: "Hyperlink" })],
-        link: "url",
-      });
-      expect(ExternalHyperlink).toHaveBeenNthCalledWith(2, {
-        children: [new TextRun({ text: "two", style: "Hyperlink" })],
-        link: "url",
+      expect(Paragraph).toHaveBeenCalledWith({
+        children: [
+          new ExternalHyperlink({
+            children: [new TextRun({ text: "one", style: "Hyperlink" })],
+            link: "url",
+          }),
+          new TextRun(" then "),
+          new TextRun({ text: "bold", bold: true }),
+          new TextRun(" then "),
+          new ExternalHyperlink({
+            children: [new TextRun({ text: "two", style: "Hyperlink" })],
+            link: "url",
+          }),
+        ],
       });
     });
   });
@@ -204,21 +244,16 @@ describe("markdownToDocx", () => {
         children: [new TextRun("Second item")],
         numbering: { reference: "bullet-points", level: 0 },
       });
-
-      expect(TextRun).toHaveBeenNthCalledWith(1, "First item");
-      expect(TextRun).toHaveBeenNthCalledWith(2, "Second item");
     });
 
     it("should handle asterisk bullet points", () => {
       markdown("* First item\n* Second item");
 
       expect(Paragraph).toHaveBeenCalledTimes(2);
-
       expect(Paragraph).toHaveBeenNthCalledWith(1, {
         children: [new TextRun("First item")],
         numbering: { reference: "bullet-points", level: 0 },
       });
-
       expect(Paragraph).toHaveBeenNthCalledWith(2, {
         children: [new TextRun("Second item")],
         numbering: { reference: "bullet-points", level: 0 },
@@ -239,10 +274,6 @@ describe("markdownToDocx", () => {
         ],
         numbering: { reference: "bullet-points", level: 0 },
       });
-
-      expect(TextRun).toHaveBeenNthCalledWith(1, "This is ");
-      expect(TextRun).toHaveBeenNthCalledWith(2, { text: "bold", bold: true });
-      expect(TextRun).toHaveBeenNthCalledWith(3, " in bullet");
     });
 
     it("should handle links in bullets", () => {
@@ -272,11 +303,18 @@ describe("markdownToDocx", () => {
       markdown("- **Bold** text and [link](https://example.com)");
 
       expect(Paragraph).toHaveBeenCalledTimes(1);
-      expect(TextRun).toHaveBeenCalledWith({ text: "Bold", bold: true });
+      expect(TextRun).toHaveBeenCalledTimes(3);
       expect(ExternalHyperlink).toHaveBeenCalledTimes(1);
-      expect(ExternalHyperlink).toHaveBeenCalledWith({
-        children: [new TextRun({ text: "link", style: "Hyperlink" })],
-        link: "https://example.com",
+      expect(Paragraph).toHaveBeenCalledWith({
+        children: [
+          new TextRun({ text: "Bold", bold: true }),
+          new TextRun(" text and "),
+          new ExternalHyperlink({
+            children: [new TextRun({ text: "link", style: "Hyperlink" })],
+            link: "https://example.com",
+          }),
+        ],
+        numbering: { reference: "bullet-points", level: 0 },
       });
     });
 
@@ -284,12 +322,11 @@ describe("markdownToDocx", () => {
       markdown("   - Indented bullet");
 
       expect(Paragraph).toHaveBeenCalledTimes(1);
+      expect(TextRun).toHaveBeenCalledWith("Indented bullet");
       expect(Paragraph).toHaveBeenCalledWith({
         children: [new TextRun("Indented bullet")],
         numbering: { reference: "bullet-points", level: 0 },
       });
-
-      expect(TextRun).toHaveBeenCalledWith("Indented bullet");
     });
   });
 
@@ -300,8 +337,12 @@ describe("markdownToDocx", () => {
       expect(Paragraph).toHaveBeenCalledTimes(2);
       expect(TextRun).toHaveBeenCalledTimes(2);
 
-      expect(TextRun).toHaveBeenNthCalledWith(1, "Line 1");
-      expect(TextRun).toHaveBeenNthCalledWith(2, "Line 2");
+      expect(Paragraph).toHaveBeenNthCalledWith(1, {
+        children: [new TextRun("Line 1")],
+      });
+      expect(Paragraph).toHaveBeenNthCalledWith(2, {
+        children: [new TextRun("Line 2")],
+      });
     });
 
     it("should skip lines with only whitespace", () => {
@@ -310,8 +351,12 @@ describe("markdownToDocx", () => {
       expect(Paragraph).toHaveBeenCalledTimes(2);
       expect(TextRun).toHaveBeenCalledTimes(2);
 
-      expect(TextRun).toHaveBeenNthCalledWith(1, "Line 1");
-      expect(TextRun).toHaveBeenNthCalledWith(2, "Line 2");
+      expect(Paragraph).toHaveBeenNthCalledWith(1, {
+        children: [new TextRun("Line 1")],
+      });
+      expect(Paragraph).toHaveBeenNthCalledWith(2, {
+        children: [new TextRun("Line 2")],
+      });
     });
   });
 
@@ -324,6 +369,8 @@ describe("markdownToDocx", () => {
       expect(Paragraph).toHaveBeenCalledTimes(1);
       expect(ExternalHyperlink).toHaveBeenCalledTimes(1);
 
+      expect(TextRun).toHaveBeenCalledWith({ text: "Start", bold: true });
+      expect(TextRun).toHaveBeenCalledWith({ text: "end", bold: true });
       expect(Paragraph).toHaveBeenNthCalledWith(1, {
         children: [
           new TextRun({ text: "Start", bold: true }),
@@ -338,16 +385,12 @@ describe("markdownToDocx", () => {
         ],
         numbering: { reference: "bullet-points", level: 0 },
       });
-
-      expect(TextRun).toHaveBeenCalledWith({ text: "Start", bold: true });
-      expect(TextRun).toHaveBeenCalledWith({ text: "end", bold: true });
     });
 
     it("should handle mixed content with bullets and paragraphs", () => {
       markdown("Introduction\n- Bullet 1\n- Bullet 2\nConclusion");
 
       expect(Paragraph).toHaveBeenCalledTimes(4);
-
       expect(Paragraph).toHaveBeenNthCalledWith(1, {
         children: [new TextRun("Introduction")],
       });
@@ -379,7 +422,6 @@ describe("markdownToDocx", () => {
 
       expect(Paragraph).toHaveBeenCalledTimes(6);
       expect(ExternalHyperlink).toHaveBeenCalledTimes(3);
-
       expect(Paragraph).toHaveBeenNthCalledWith(3, {
         children: [
           new TextRun("Erste "),

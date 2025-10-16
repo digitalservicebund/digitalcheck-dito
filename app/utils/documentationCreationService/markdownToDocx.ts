@@ -1,103 +1,13 @@
 import { ExternalHyperlink, Paragraph, TextRun } from "docx";
 
 /**
- * Parses a markdown line and returns an array of TextRun and ExternalHyperlink objects.
- * Supports:
- * - Bold text: **text** or __text__
- * - Links: [text](url)
- */
-const parseMarkdownLine = (
-  text: string,
-): Array<TextRun | ExternalHyperlink> => {
-  const children: Array<TextRun | ExternalHyperlink> = [];
-  let currentIndex = 0;
-
-  // Regular expressions for markdown patterns
-  // Limit capture groups to improve performance
-  const boldPattern = /(\*\*)(.{1,1000}?)\1/g;
-  const linkPattern = /\[([^\]]{1,1000})\]\(([^)]{1,1000})\)/g;
-
-  // Find all markdown patterns and their positions
-  const patterns: Array<{
-    start: number;
-    end: number;
-    type: string;
-    content: string;
-    url?: string;
-  }> = [];
-
-  let match;
-  while ((match = boldPattern.exec(text)) !== null) {
-    patterns.push({
-      start: match.index,
-      end: match.index + match[0].length,
-      type: "bold",
-      content: match[2],
-    });
-  }
-
-  while ((match = linkPattern.exec(text)) !== null) {
-    patterns.push({
-      start: match.index,
-      end: match.index + match[0].length,
-      type: "link",
-      content: match[1],
-      url: match[2],
-    });
-  }
-
-  // Sort patterns by start position
-  patterns.sort((a, b) => a.start - b.start);
-
-  // Process the text with the patterns
-  for (const pattern of patterns) {
-    // Add any text before this pattern
-    if (currentIndex < pattern.start) {
-      const plainText = text.substring(currentIndex, pattern.start);
-      if (plainText) {
-        children.push(new TextRun(plainText));
-      }
-    }
-
-    // Add the formatted content
-    if (pattern.type === "bold") {
-      children.push(new TextRun({ text: pattern.content, bold: true }));
-    } else if (pattern.type === "link" && pattern.url) {
-      children.push(
-        new ExternalHyperlink({
-          children: [
-            new TextRun({
-              text: pattern.content,
-              style: "Hyperlink",
-            }),
-          ],
-          link: pattern.url,
-        }),
-      );
-    }
-
-    currentIndex = pattern.end;
-  }
-
-  // Add any remaining text
-  if (currentIndex < text.length) {
-    const remainingText = text.substring(currentIndex);
-    if (remainingText) {
-      children.push(new TextRun(remainingText));
-    }
-  }
-
-  return children;
-};
-
-/**
  * Renders markdown text into an array of Paragraph objects.
  * Supports:
- * - Bullet lists (lines starting with "- " or "* ")
- * - Bold text (**text** or __text__)
+ * - Unordered lists (lines starting with "- " or "* ")
+ * - Bold text (**text**)
  * - Links ([text](url))
  */
-export default function markdown(markdown: string) {
+export default function markdown(markdown: string): Paragraph[] {
   const lines = markdown.split("\n");
 
   return lines
@@ -128,3 +38,61 @@ export default function markdown(markdown: string) {
     })
     .filter((paragraph) => paragraph !== null);
 }
+
+type Pattern = {
+  regex: RegExp;
+  render: (match: RegExpExecArray) => TextRun | ExternalHyperlink;
+};
+
+// Regular expressions for markdown patterns
+// Limit capture groups to improve performance
+const patterns: Pattern[] = [
+  {
+    // **text**
+    regex: /(\*\*)(.{1,1000}?)\1/g,
+    render: (match: RegExpExecArray) =>
+      new TextRun({ text: match[2], bold: true }),
+  },
+  {
+    // [text](url)
+    regex: /\[([^\]]{1,1000})\]\(([^)]{1,1000})\)/g,
+    render: (match: RegExpExecArray) =>
+      new ExternalHyperlink({
+        children: [new TextRun({ text: match[1], style: "Hyperlink" })],
+        link: match[2],
+      }),
+  },
+];
+
+const parseMarkdownLine = (text: string): (TextRun | ExternalHyperlink)[] => {
+  const matches = patterns
+    .flatMap((pattern) =>
+      Array.from(text.matchAll(pattern.regex), (match) => ({
+        start: match.index,
+        end: match.index + match[0].length,
+        renderedContent: pattern.render(match),
+      })),
+    )
+    .sort((a, b) => a.start - b.start);
+
+  const children: Array<TextRun | ExternalHyperlink> = [];
+  let currentIndex = 0;
+
+  const addPlainText = (start: number, end: number) => {
+    if (start < end) {
+      const plainText = text.substring(start, end);
+      if (plainText) {
+        children.push(new TextRun(plainText));
+      }
+    }
+  };
+
+  for (const match of matches) {
+    addPlainText(currentIndex, match.start); // Add any text before this pattern
+    children.push(match.renderedContent);
+    currentIndex = match.end;
+  }
+  addPlainText(currentIndex, text.length); // Add any remaining text
+
+  return children;
+};
