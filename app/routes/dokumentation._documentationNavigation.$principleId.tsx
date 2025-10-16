@@ -40,7 +40,7 @@ import DocumentationActions from "./dokumentation/DocumentationActions";
 
 const { principlePages } = digitalDocumentation;
 
-export async function loader({ params: { principleId } }: Route.LoaderArgs) {
+export function loader({ params: { principleId } }: Route.LoaderArgs) {
   return {
     principleId,
   };
@@ -279,6 +279,7 @@ export default function DocumentationPrinciple() {
   );
 
   if (!prinzip)
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw new Response("No Prinzip for slug found", { status: 404 });
 
   const form = useForm({
