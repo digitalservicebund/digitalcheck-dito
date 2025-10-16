@@ -41,6 +41,7 @@ describe("strapiBlocksToDocx", () => {
       expect(TextRun).toHaveBeenCalledTimes(1);
       expect(Paragraph).toHaveBeenCalledWith({
         children: [new TextRun("Hello world")],
+        keepNext: false,
       });
     });
 
@@ -58,12 +59,15 @@ describe("strapiBlocksToDocx", () => {
 
       expect(Paragraph).toHaveBeenNthCalledWith(1, {
         children: [new TextRun("First paragraph")],
+        keepNext: false,
       });
       expect(Paragraph).toHaveBeenNthCalledWith(2, {
         children: [new TextRun("Second paragraph")],
+        keepNext: false,
       });
       expect(Paragraph).toHaveBeenNthCalledWith(3, {
         children: [new TextRun("Third paragraph")],
+        keepNext: false,
       });
     });
 
@@ -74,6 +78,24 @@ describe("strapiBlocksToDocx", () => {
 
       expect(Paragraph).toHaveBeenCalledTimes(0);
       expect(result).toEqual([]);
+    });
+
+    it("should handle paragraphs with keepNext", () => {
+      const blocks: Node[] = [
+        simpleParagraph("Hello world"),
+        simpleParagraph("Hello world 2"),
+      ];
+
+      strapiBlocksToDocx(blocks, true);
+      expect(Paragraph).toHaveBeenCalledTimes(2);
+      expect(Paragraph).toHaveBeenNthCalledWith(1, {
+        children: [new TextRun("Hello world")],
+        keepNext: true,
+      });
+      expect(Paragraph).toHaveBeenNthCalledWith(2, {
+        children: [new TextRun("Hello world 2")],
+        keepNext: true,
+      });
     });
   });
 
@@ -114,6 +136,7 @@ describe("strapiBlocksToDocx", () => {
             link: "https://github.com",
           }),
         ],
+        keepNext: false,
       });
     });
   });
@@ -145,10 +168,12 @@ describe("strapiBlocksToDocx", () => {
       expect(Paragraph).toHaveBeenNthCalledWith(1, {
         children: [new TextRun("First item")],
         numbering: { reference: "bullet-points", level: 0 },
+        keepNext: false,
       });
       expect(Paragraph).toHaveBeenNthCalledWith(2, {
         children: [new TextRun("Second item")],
         numbering: { reference: "bullet-points", level: 0 },
+        keepNext: false,
       });
     });
   });
@@ -186,17 +211,21 @@ describe("strapiBlocksToDocx", () => {
 
       expect(Paragraph).toHaveBeenNthCalledWith(1, {
         children: [new TextRun("Introduction")],
+        keepNext: false,
       });
       expect(Paragraph).toHaveBeenNthCalledWith(2, {
         children: [new TextRun("Bullet 1")],
         numbering: { reference: "bullet-points", level: 0 },
+        keepNext: false,
       });
       expect(Paragraph).toHaveBeenNthCalledWith(3, {
         children: [new TextRun("Bullet 2")],
         numbering: { reference: "bullet-points", level: 0 },
+        keepNext: false,
       });
       expect(Paragraph).toHaveBeenNthCalledWith(4, {
         children: [new TextRun("Conclusion")],
+        keepNext: false,
       });
     });
 
@@ -235,6 +264,7 @@ describe("strapiBlocksToDocx", () => {
           }),
         ],
         numbering: { reference: "bullet-points", level: 0 },
+        keepNext: false,
       });
     });
   });
@@ -309,9 +339,11 @@ describe("strapiBlocksToDocx", () => {
 
       expect(Paragraph).toHaveBeenNthCalledWith(1, {
         children: [new TextRun("Dokumentation der Digitaltauglichkeit")],
+        keepNext: false,
       });
       expect(Paragraph).toHaveBeenNthCalledWith(2, {
         children: [new TextRun("Dies ist ein Beispiel mit Informationen.")],
+        keepNext: false,
       });
       expect(Paragraph).toHaveBeenNthCalledWith(3, {
         children: [
@@ -324,6 +356,7 @@ describe("strapiBlocksToDocx", () => {
           }),
         ],
         numbering: { reference: "bullet-points", level: 0 },
+        keepNext: false,
       });
       expect(Paragraph).toHaveBeenNthCalledWith(6, {
         children: [
@@ -336,6 +369,7 @@ describe("strapiBlocksToDocx", () => {
           }),
           new TextRun("."),
         ],
+        keepNext: false,
       });
     });
 
