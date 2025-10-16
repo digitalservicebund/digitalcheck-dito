@@ -297,6 +297,10 @@ export default function DocumentationPrinciple() {
     handleSubmit: async () => {
       await navigate(nextUrl);
     },
+    onBeforeSubmit: async () => {
+      // bypass submission
+      await navigate(nextUrl);
+    },
   });
 
   // Handle answer change
@@ -349,6 +353,9 @@ export default function DocumentationPrinciple() {
       );
 
       form.setDirty(true);
+
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      if (principleData) form.validate();
     }
 
     const unsubscribe = form.subscribe.value((principle) => {
