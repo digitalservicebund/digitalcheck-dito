@@ -5,7 +5,7 @@ import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_SEND } from "~/resources/staticRoutes";
-import downloadWord from "~/utils/documentationUtils/documentCreation";
+import downloadWord from "~/utils/documentationCreationService/documentCreation";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_ASPECTS_QUERY,
