@@ -37,13 +37,17 @@ export default function DocumentationParticipation() {
       whenTouched: "onSubmit",
       initial: "onSubmit",
     },
+    onBeforeSubmit: async ({ unvalidatedData }) => {
+      setParticipation(unvalidatedData);
+
+      // bypass submission
+      if (nextUrl) await navigate(nextUrl);
+    },
     handleSubmit: (participation) => {
       setParticipation(participation);
     },
     onSubmitSuccess: async () => {
-      if (nextUrl) {
-        await navigate(nextUrl);
-      }
+      if (nextUrl) await navigate(nextUrl);
     },
   });
 
@@ -58,6 +62,9 @@ export default function DocumentationParticipation() {
       );
 
       form.setDirty(true);
+
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      if (documentationData) form.validate();
     }
   }, [currentUrl, form]);
 

@@ -295,11 +295,11 @@ export default function DocumentationPrinciple() {
       initial: "onSubmit",
     },
     handleSubmit: async () => {
-      await navigate(nextUrl);
+      if (nextUrl) await navigate(nextUrl);
     },
     onBeforeSubmit: async () => {
       // bypass submission
-      await navigate(nextUrl);
+      if (nextUrl) await navigate(nextUrl);
     },
   });
 

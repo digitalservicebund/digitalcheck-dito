@@ -33,6 +33,12 @@ export default function DocumentationTitle() {
       whenTouched: "onSubmit",
       initial: "onSubmit",
     },
+    onBeforeSubmit: async ({ unvalidatedData }) => {
+      setPolicyTitle(unvalidatedData);
+
+      // bypass submission
+      if (nextUrl) await navigate(nextUrl);
+    },
     handleSubmit: (policyTitle) => {
       setPolicyTitle(policyTitle);
     },
@@ -54,6 +60,9 @@ export default function DocumentationTitle() {
       );
 
       form.setDirty(true);
+
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      if (documentationData) form.validate();
     }
   }, [currentUrl, form]);
 
