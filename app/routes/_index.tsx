@@ -76,7 +76,23 @@ export default function Index() {
 
                 <div className="mt-40">
                   <p className="font-bold">{stepByStep.procedureLabel}:</p>
-                  <RichText markdown={step.description} />
+                  <RichText markdown={step.description.text} />
+                  {enableDigitalDocumentation &&
+                    step.description
+                      .FEATURE_enableDigitalDocumentationHighlight && (
+                      <div className="ds-label-02-reg mt-16">
+                        <Badge look="hint" className="mr-8">
+                          {
+                            step.description
+                              .FEATURE_enableDigitalDocumentationHighlight.badge
+                          }
+                        </Badge>
+                        {
+                          step.description
+                            .FEATURE_enableDigitalDocumentationHighlight.text
+                        }
+                      </div>
+                    )}
                 </div>
 
                 <div className="mt-24 border-t-2 border-gray-400 pt-16">

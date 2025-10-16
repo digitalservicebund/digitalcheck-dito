@@ -33,8 +33,9 @@ export const startseite = {
           look: "primary" as const,
           plausibleEventName: "Content.Schritte.Button+Vorprüfung",
         },
-        description:
-          "Sie identifizieren Digitalbezug und Interoperabilitätsanforderungen für Ihr Vorhaben.",
+        description: {
+          text: "Sie identifizieren Digitalbezug und Interoperabilitätsanforderungen für Ihr Vorhaben.",
+        },
         duration: "Wenige Minuten",
         result: dedent`
           - Individueller Digital- und Interoperabilitätsbezug
@@ -50,8 +51,9 @@ export const startseite = {
           look: "tertiary" as const,
           plausibleEventName: "Content.Schritte.Link+Erarbeiten",
         },
-        description:
-          "Bei einer positiven Vorprüfung wenden Sie die Werkzeuge und Methoden an, die die Digitaltauglichkeit Ihres Vorhabens sicherstellen.",
+        description: {
+          text: "Bei einer positiven Vorprüfung wenden Sie die Werkzeuge und Methoden an, die die Digitaltauglichkeit Ihres Vorhabens sicherstellen.",
+        },
         duration: "Punktuell über die gesamte Zeit der Regelungsausarbeitung",
         result: dedent`
           - Ihre Regelung wird digitaltauglich
@@ -67,8 +69,15 @@ export const startseite = {
           look: "tertiary" as const,
           plausibleEventName: "Content.Schritte.Link+Dokumentieren",
         },
-        description:
-          "Sie dokumentieren, wie Sie Digitaltauglichkeit in Ihrer Regelung sichergestellt haben.",
+        description: {
+          text: "Sie dokumentieren, wie Sie Digitaltauglichkeit in Ihrer Regelung sichergestellt haben.",
+          // special case that depends on a feature flag being set
+          FEATURE_enableDigitalDocumentationHighlight: {
+            badge: "NEU",
+            text: "Jetzt auch online ausfüllbar.",
+          },
+        },
+
         duration: "Ein bis zwei Stunden",
         result: dedent`
           - Ausgefülltes Word-Dokument, welches Sie dem Nationalen Normenkontrollrat senden
