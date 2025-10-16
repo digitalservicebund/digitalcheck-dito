@@ -7,6 +7,8 @@ import {
 } from "docx";
 import fileSaver from "file-saver";
 import { documentationExport } from "~/resources/content/documentation-document";
+import { type DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
+import { getDocumentationData } from "~/routes/dokumentation/documentationDataService";
 import { type PrinzipWithAspekte } from "../strapiData.server";
 import {
   answer,
@@ -19,16 +21,20 @@ import markdown from "./markdownToDocx";
 const { saveAs } = fileSaver;
 
 const content = {
-  introduction: (date: string) => [
+  introduction: (
+    date: string,
+    policyTitle: DocumentationData["policyTitle"],
+    participation: DocumentationData["participation"],
+  ) => [
     heading(documentationExport.introduction.title, "title"),
     ...markdown(`${documentationExport.introduction.exportDate} ${date}`),
     heading(documentationExport.introduction.projectTitle.heading, 1),
-    answer("Beispieltitel eines Regelungsvorhabens"),
+    answer(policyTitle?.title ?? ""),
     heading(documentationExport.introduction.participationFormats.heading, 1),
     formLabel(documentationExport.introduction.participationFormats.question1),
-    answer("Beispiel für eine Beteiligung"),
+    answer(participation?.formats ?? ""),
     formLabel(documentationExport.introduction.participationFormats.question2),
-    answer("Beispiel für Erkenntnisse"),
+    answer(participation?.results ?? ""),
   ],
   nextSteps: [
     heading(documentationExport.nextSteps.heading, 1, true),
@@ -104,8 +110,16 @@ const numbering = {
 export const createDoc = (
   logoData: ArrayBuffer,
   principles: PrinzipWithAspekte[],
+  documentationData: DocumentationData,
 ) => {
   const date = new Date().toLocaleDateString("de-DE");
+  const {
+    policyTitle,
+    participation,
+    principles: principleAnswers,
+  } = documentationData;
+
+  console.log(principleAnswers);
 
   const doc = new Document({
     styles,
@@ -114,8 +128,15 @@ export const createDoc = (
       {
         headers: header(date, logoData),
         children: [
-          ...content.introduction(date),
-          ...principles.flatMap((principle) => principleElement(principle)),
+          ...content.introduction(date, policyTitle, participation),
+          ...principles.flatMap((principle) =>
+            principleElement(
+              principle,
+              principleAnswers?.find(
+                (docPrinciple) => docPrinciple.id === principle.documentId,
+              ),
+            ),
+          ),
           ...content.nextSteps,
         ],
       },
@@ -132,8 +153,9 @@ export default async function downloadDocumentation(
     // Fetch the logo from the public directory
     const logoResponse = await fetch("/logo/bmds-logo.png");
     const logoData = await logoResponse.arrayBuffer();
+    const documentationData = getDocumentationData();
 
-    const doc = createDoc(logoData, principles);
+    const doc = createDoc(logoData, principles, documentationData);
 
     const blob = await Packer.toBlob(doc);
     saveAs(blob, "example.docx");

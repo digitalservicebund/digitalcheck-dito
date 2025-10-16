@@ -8,27 +8,31 @@ import type { Node } from "../paragraphUtils";
  * - Unordered lists
  * - Links
  */
-export default function strapiBlocksToDocx(blocks: Node[]): Paragraph[] {
+export default function strapiBlocksToDocx(
+  blocks: Node[],
+  keepAllNext: boolean = false,
+): Paragraph[] {
   return blocks
     .flatMap((node) =>
       node.type === "list" && node.children
         ? node.children.map((listItem) => listItem)
         : node,
     )
-    .map((node) => nodeToDocx(node))
+    .map((node) => nodeToDocx(node, keepAllNext))
     .filter((paragraph) => paragraph !== null);
 }
 
-const nodeToDocx = (node: Node) => {
+const nodeToDocx = (node: Node, keepAllNext: boolean = false) => {
   if (!node.children) return null;
   const children = processChildren(node.children);
 
   switch (node.type) {
     case "paragraph":
-      return new Paragraph({ children });
+      return new Paragraph({ children, keepNext: keepAllNext });
     case "list-item":
       return new Paragraph({
         children,
+        keepNext: keepAllNext,
         numbering: { reference: "bullet-points", level: 0 },
       });
     default:

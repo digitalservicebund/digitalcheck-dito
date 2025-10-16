@@ -13,6 +13,11 @@ import {
   WidthType,
 } from "docx";
 import { documentationExport } from "~/resources/content/documentation-document";
+import type {
+  Principle,
+  PrincipleReasoning,
+} from "~/routes/dokumentation/documentationDataSchema";
+import { slugify } from "~/utils/utilFunctions";
 import type { PrinzipAspekt, PrinzipWithAspekte } from "../strapiData.server";
 import strapiBlocksToDocx from "./strapiBlocksToDocx";
 
@@ -87,6 +92,7 @@ export const header = (date: string, logoData: ArrayBuffer) => ({
 export const formLabel = (text: string) =>
   new Paragraph({
     children: [new TextRun({ text, bold: true })],
+    keepNext: true,
   });
 
 const BLACK_BORDER = {
@@ -101,10 +107,11 @@ const BLACK_BORDERS = {
   right: BLACK_BORDER,
 };
 
-export const answer = (text: string) =>
+export const answer = (text: string, keepNext: boolean = false) =>
   new Paragraph({
     text,
     border: BLACK_BORDERS,
+    keepNext,
   });
 
 export const heading = (
@@ -122,22 +129,36 @@ export const heading = (
     text,
     heading: headingMap[level],
     pageBreakBefore,
+    keepNext: true,
   });
 };
 
-export const aspectElement = (aspect: PrinzipAspekt) => [
+export const aspectElement = (
+  aspect: PrinzipAspekt,
+  reasoning: PrincipleReasoning | undefined,
+) => [
   heading(aspect.Titel, 2),
-  ...strapiBlocksToDocx(aspect.Text),
+  ...strapiBlocksToDocx(aspect.Text, true),
   formLabel(documentationExport.aspect.paragraphsLabel),
-  answer("§"),
+  answer(`§${reasoning?.paragraphs ?? ""}`, true),
   formLabel(documentationExport.aspect.explanationLabel),
-  answer("Beispielerklärung"),
+  answer(reasoning?.reason ?? ""),
 ];
 
-export const principleElement = (principle: PrinzipWithAspekte) => [
+export const principleElement = (
+  principle: PrinzipWithAspekte,
+  principleAnswer: Principle | undefined,
+) => [
   heading(principle.Name, 1, true),
   ...strapiBlocksToDocx(principle.Beschreibung),
   formLabel(documentationExport.principle.implementationQuestion),
-  answer("Ja, gänzlich oder teilweise"),
-  ...principle.Aspekte.flatMap(aspectElement),
+  answer(principleAnswer?.answer ?? ""),
+  ...principle.Aspekte.flatMap((aspect) =>
+    aspectElement(
+      aspect,
+      principleAnswer?.reasoning?.find(
+        (reasoning) => reasoning?.aspect === slugify(aspect.Kurzbezeichnung),
+      ),
+    ),
+  ),
 ];
