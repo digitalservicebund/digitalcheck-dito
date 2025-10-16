@@ -1,4 +1,5 @@
 import { Outlet, useLoaderData, useLocation } from "react-router";
+import { BadgeProps } from "~/components/Badge";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
@@ -10,38 +11,48 @@ import {
   ROUTES_DOCUMENTATION_PRE,
 } from "~/resources/staticRoutes";
 import useFeatureFlag from "~/utils/featureFlags";
+import { Node } from "~/utils/paragraphUtils";
 import { fetchStrapiData } from "~/utils/strapiData.server";
 
 export type OnNavigateCallback = () => Promise<boolean>;
+
+type Aspekt = {
+  Titel: string;
+  Kurzbezeichnung: string;
+  Beschreibung: string;
+};
+
+type Prinzip = {
+  Name: string;
+  URLBezeichnung: string;
+  documentId: string;
+  Beschreibung: Node[];
+  order: number;
+  Nummer: BadgeProps["principleNumber"];
+  Aspekte: Aspekt[];
+};
 
 export type NavigationContext = {
   currentUrl: string;
   nextUrl: string;
   previousUrl: string;
   routes: (InternalRoute | InternalRoute[])[];
-};
-
-type Prinzip = {
-  Name: string;
-  Beschreibung: string;
-  order: number;
-  Nummer: number;
-  URLBezeichnung: string;
-  Aspekte: {
-    Titel: string;
-  }[];
+  prinzips: Prinzip[];
 };
 
 const GET_PRINZIPS_QUERY = `
 query GetPrinzips {
   prinzips(sort: "order") {
-    Name
-    Beschreibung
+    documentId
     order
     Nummer
     URLBezeichnung
+    Name
+    Beschreibung
     Aspekte {
       Titel
+      Kurzbezeichnung
+      Beschreibung
     }
   }
 }`;
@@ -93,11 +104,11 @@ export const loader = async () => {
     ...ROUTES_DOCUMENTATION_POST,
   ];
 
-  return { routes };
+  return { routes, prinzips };
 };
 
 export default function LayoutWithDocumentationNavigation() {
-  const { routes } = useLoaderData<typeof loader>();
+  const { routes, prinzips } = useLoaderData<typeof loader>();
   const location = useLocation();
   const currentUrl = location.pathname;
 
@@ -151,7 +162,7 @@ export default function LayoutWithDocumentationNavigation() {
         {/* force remount for different principles with key={currentUrl} */}
         <Outlet
           key={currentUrl}
-          context={{ currentUrl, nextUrl, previousUrl, routes }}
+          context={{ currentUrl, nextUrl, previousUrl, routes, prinzips }}
         />
       </section>
     </div>

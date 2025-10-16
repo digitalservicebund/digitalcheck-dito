@@ -30,7 +30,6 @@ import {
   getDocumentationData,
 } from "~/routes/dokumentation/documentationDataService";
 import { Node } from "~/utils/paragraphUtils";
-import { fetchStrapiData } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 import type { Route } from "./+types/dokumentation._documentationNavigation.$principleId";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
@@ -69,23 +68,9 @@ query GetPrinzips($slug: String!) {
   }
 }`;
 
-export async function loader({ params }: Route.LoaderArgs) {
-  const prinzipData = await fetchStrapiData<{
-    prinzips: Prinzip[];
-  }>(GET_PRINZIP_QUERY, { slug: params.principleId });
-
-  if ("error" in prinzipData) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(prinzipData.error, { status: 400 });
-  }
-
-  if (prinzipData.prinzips.length === 0) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("No Prinzip for slug found", { status: 404 });
-  }
-
+export async function loader({ params: { principleId } }: Route.LoaderArgs) {
   return {
-    prinzip: prinzipData.prinzips[0],
+    principleId,
   };
 }
 
@@ -312,10 +297,17 @@ function PositiveAnswerFormElements({
 }
 
 export default function DocumentationPrinciple() {
-  const { prinzip } = useLoaderData<typeof loader>();
+  const { principleId } = useLoaderData<typeof loader>();
   const navigate = useNavigate();
-  const { currentUrl, nextUrl, previousUrl } =
+  const { currentUrl, nextUrl, previousUrl, prinzips } =
     useOutletContext<NavigationContext>();
+
+  const prinzip = prinzips.find(
+    ({ URLBezeichnung }) => URLBezeichnung === principleId,
+  );
+
+  if (!prinzip)
+    throw new Response("No Prinzip for slug found", { status: 404 });
 
   const form = useForm({
     schema: principleSchema,

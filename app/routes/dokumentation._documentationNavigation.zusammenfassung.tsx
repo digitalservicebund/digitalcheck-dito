@@ -1,6 +1,5 @@
 import { type ReactNode, useEffect, useState } from "react";
-import { Link, useLoaderData, useOutletContext } from "react-router";
-import { BadgeProps } from "~/components/Badge";
+import { Link, useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
@@ -20,59 +19,11 @@ import type {
   PolicyTitle,
   Principle,
 } from "~/routes/dokumentation/documentationDataSchema";
-import { Node } from "~/utils/paragraphUtils";
-import { fetchStrapiData } from "~/utils/strapiData.server";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { getDocumentationData } from "./dokumentation/documentationDataService";
 
 const { summary } = digitalDocumentation;
-
-type Aspekt = {
-  Titel: string;
-  Kurzbezeichnung: string;
-  Beschreibung: string;
-};
-
-type Prinzip = {
-  Name: string;
-  URLBezeichnung: string;
-  documentId: string;
-  Beschreibung: Node[];
-  Nummer: BadgeProps["principleNumber"];
-  Aspekte: Aspekt[];
-};
-
-const GET_PRINZIP_QUERY = `
-query GetPrinzips {
-  prinzips(sort: "order") {
-    Name
-    URLBezeichnung
-    documentId
-    Nummer
-    Beschreibung
-    Aspekte {
-      Titel
-      Kurzbezeichnung
-      Beschreibung
-    }
-  }
-}`;
-
-export async function loader() {
-  const prinzipData = await fetchStrapiData<{
-    prinzips: Prinzip[];
-  }>(GET_PRINZIP_QUERY);
-
-  if ("error" in prinzipData) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(prinzipData.error, { status: 400 });
-  }
-
-  return {
-    principles: prinzipData.prinzips,
-  };
-}
 
 const createInfoBoxItem = ({
   route,
@@ -169,9 +120,8 @@ const renderPrinciple = (principle?: Principle) => {
 };
 
 export default function DocumentationSummary() {
-  const { routes, previousUrl, nextUrl } =
+  const { routes, previousUrl, nextUrl, prinzips } =
     useOutletContext<NavigationContext>();
-  const { principles } = useLoaderData<typeof loader>();
   const [documentationData, setDocumentationData] =
     useState<DocumentationData | null>(null);
 
@@ -194,7 +144,7 @@ export default function DocumentationSummary() {
       route: ROUTE_DOCUMENTATION_PARTICIPATION,
       content: renderParticipation(documentationData.participation),
     }),
-    ...principles.map((principleContent) => {
+    ...prinzips.map((principleContent) => {
       const principleRoute = routes
         .flat()
         .find((route) => route.url.endsWith(principleContent.URLBezeichnung));
