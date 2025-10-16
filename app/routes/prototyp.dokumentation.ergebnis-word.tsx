@@ -1,6 +1,5 @@
 import { CheckCircleOutlined } from "@digitalservicebund/icons";
 import { ButtonLinkProps } from "~/components/Button";
-import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Header from "~/components/Header";
@@ -55,17 +54,17 @@ export default function DocumentationResult() {
               content={result.data.dummyOverview}
               className="mt-12"
             />
-            <ButtonContainer
-              buttons={[
+            {renderButtonContainer(
+              [
                 {
                   text: result.data.buttonBack,
                   look: "tertiary",
                   onClick: () =>
                     alert("Diese Funktion ist für den Test nicht verfügbar."),
                 },
-              ]}
-              className="mt-40"
-            />
+              ],
+              { className: "mt-40" },
+            )}
             <hr className="mt-40 mb-32 border-t-[2px] border-gray-400" />
             <InfoBox
               heading={{
@@ -76,15 +75,15 @@ export default function DocumentationResult() {
               Laden Sie die Dokumentation als Word-Datei herunterladen, um sie
               abzustimmen oder an den NKR zu senden.
             </InfoBox>
-            <ButtonContainer
-              buttons={[
+            {renderButtonContainer(
+              [
                 {
                   text: "Dokumentation herunterladen (Word-Datei)",
                   href: ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_WORD.url,
                 },
-              ]}
-              className="mt-40"
-            />
+              ],
+              { className: "mt-40" },
+            )}
             <hr className="mt-40 mb-32 border-t-[2px] border-gray-400" />
             <form method="post">
               <fieldset className="ds-stack ds-stack-24">
@@ -106,16 +105,16 @@ export default function DocumentationResult() {
                 </div>
               </fieldset>
             </form>
-            <ButtonContainer
-              buttons={[
+            {renderButtonContainer(
+              [
                 {
                   text: "Dokumentation herunterladen (PDF-Datei)",
                   href: ROUTE_PROTOTYPE_DOCUMENTATION_META.url,
                   look: "tertiary",
                 },
-              ]}
-              className="mb-40"
-            />
+              ],
+              { className: "mb-40" },
+            )}
             <hr className="mb-32 border-t-[2px] border-gray-400" />
             <div className="ds-stack ds-stack-16 mt-40">
               <Heading tagName="h2" text={result.form.faqs.title} />

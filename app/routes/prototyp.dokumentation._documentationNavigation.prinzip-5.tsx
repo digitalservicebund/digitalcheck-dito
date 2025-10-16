@@ -17,6 +17,7 @@ import {
   ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_5,
   ROUTE_PROTOTYPE_DOCUMENTATION_RESULT,
 } from "~/resources/staticRoutes";
+import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 
 const { principles, nextButton } = prototypeDocumentation;
 const { principle5, radioOptions } = principles;
@@ -102,29 +103,24 @@ export default function PrototypeDocumentationPrinciple5() {
                       name={`explanation-${example.id}`}
                       label={principles.inputs.explanation.label}
                     />
-                    {index < examples.length - 1 && examples.length > 1 && (
-                      <ButtonContainer
-                        buttons={[
-                          {
-                            text: "Beispiel entfernen",
-                            look: "tertiary",
-                            onClick: () => removeExample(example.id),
-                          },
-                        ]}
-                      />
-                    )}
-                    {index === examples.length - 1 && (
-                      <ButtonContainer
-                        buttons={[
-                          {
-                            text: "Weitere Referenz hinzufügen",
-                            look: "tertiary",
-                            onClick: addExample,
-                            type: "button",
-                          },
-                        ]}
-                      />
-                    )}
+                    {index < examples.length - 1 &&
+                      examples.length > 1 &&
+                      renderButtonContainer([
+                        {
+                          text: "Beispiel entfernen",
+                          look: "tertiary",
+                          onClick: () => removeExample(example.id),
+                        },
+                      ])}
+                    {index === examples.length - 1 &&
+                      renderButtonContainer([
+                        {
+                          text: "Weitere Referenz hinzufügen",
+                          look: "tertiary",
+                          onClick: addExample,
+                          type: "button",
+                        },
+                      ])}
                     <hr className="mt-20 mb-20 border-t-[2px] border-gray-400" />
                   </div>
                 ))}

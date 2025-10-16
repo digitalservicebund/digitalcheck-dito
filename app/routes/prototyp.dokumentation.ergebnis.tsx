@@ -6,7 +6,6 @@ import {
 import fileSaver from "file-saver";
 import { PDFDocument } from "pdf-lib";
 import Button from "~/components/Button.tsx";
-import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Header from "~/components/Header";
@@ -28,6 +27,7 @@ import {
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import useFeatureFlag from "~/utils/featureFlags";
+import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 
 const { saveAs } = fileSaver;
 const { result } = prototypeDocumentation;
@@ -140,8 +140,8 @@ export default function DocumentationResult() {
                     </>
                   }
                 />
-                <ButtonContainer
-                  buttons={[
+                {renderButtonContainer(
+                  [
                     {
                       text: result.data.buttonDownload,
                       onClick: () => {
@@ -153,9 +153,11 @@ export default function DocumentationResult() {
                       href: ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_WORD.url,
                       look: "tertiary",
                     },
-                  ]}
-                  className="mt-20"
-                />
+                  ],
+                  {
+                    className: "mt-20",
+                  },
+                )}
               </>
             ) : (
               <>
@@ -169,8 +171,8 @@ export default function DocumentationResult() {
                 
                 Sie können alternativ einen Zwischenstand speichern, um später weiterzuarbeiten.`}
                 />
-                <ButtonContainer
-                  buttons={[
+                {renderButtonContainer(
+                  [
                     {
                       text: result.data.buttonDownload,
                       href: ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_PDF.url,
@@ -181,9 +183,9 @@ export default function DocumentationResult() {
                       look: "ghost",
                       iconLeft: <FileDownloadOutlined />,
                     },
-                  ]}
-                  className="mt-40"
-                />
+                  ],
+                  { className: "mt-20" },
+                )}
               </>
             )}
             <hr className="mt-40 mb-32 border-t-[2px] border-gray-400" />
@@ -212,15 +214,13 @@ export default function DocumentationResult() {
               ))}
             </div>
             <hr className="mt-40 mb-32 border-t-[2px] border-gray-400" />
-            <ButtonContainer
-              buttons={[
-                {
-                  text: "Dokumentation starten oder fortsetzen",
-                  href: ROUTE_PROTOTYPE_DOCUMENTATION.url,
-                  look: "tertiary",
-                },
-              ]}
-            />
+            {renderButtonContainer([
+              {
+                text: "Dokumentation starten oder fortsetzen",
+                href: ROUTE_PROTOTYPE_DOCUMENTATION.url,
+                look: "tertiary",
+              },
+            ])}
           </Container>
         </div>
       </div>

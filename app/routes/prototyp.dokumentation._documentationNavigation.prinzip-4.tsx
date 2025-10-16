@@ -113,16 +113,11 @@ export default function PrototypeDocumentationPrinciple4() {
                         },
                       ])}
                     {index === examples.length - 1 && (
-                      <ButtonContainer
-                        buttons={[
-                          {
-                            text: "Weitere Referenz hinzufügen",
-                            look: "tertiary",
-                            onClick: addExample,
-                            type: "button",
-                          },
-                        ]}
-                      />
+                      <ButtonContainer>
+                        <Button look="tertiary" onClick={addExample}>
+                          Weitere Referenz hinzufügen
+                        </Button>
+                      </ButtonContainer>
                     )}
                     <hr className="mt-20 mb-20 border-t-[2px] border-gray-400" />
                   </div>

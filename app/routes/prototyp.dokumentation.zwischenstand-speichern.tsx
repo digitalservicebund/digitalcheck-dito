@@ -1,6 +1,5 @@
 import { FileDownloadOutlined } from "@digitalservicebund/icons";
 import { useNavigate } from "react-router";
-import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Header from "~/components/Header";
@@ -13,6 +12,7 @@ import {
   ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_JSON,
 } from "~/resources/staticRoutes";
 import useFeatureFlag from "~/utils/featureFlags";
+import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 
 export default function DocumentationResult() {
   const navigate = useNavigate();
@@ -64,8 +64,8 @@ export default function DocumentationResult() {
                 : "Eine JSON-Datei speichert Informationen als menschen- und maschinenlesbares Textformat. So können Sie die Informationen Ihrer Dokumentation jetzt sichern, später wieder laden und weiter bearbeiten."
             }
           />
-          <ButtonContainer
-            buttons={[
+          {renderButtonContainer(
+            [
               {
                 text: prototypeAlternativeEnabled
                   ? "PDF-Dokumentation herunterladen"
@@ -79,9 +79,9 @@ export default function DocumentationResult() {
                 look: "tertiary",
                 onClick: goBack,
               },
-            ]}
-            className="mt-40"
-          />
+            ],
+            { className: "mt-40" },
+          )}
         </Container>
       </div>
     </div>

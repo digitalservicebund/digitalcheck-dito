@@ -176,33 +176,33 @@ export default function ResultForm({
               </div>
             }
           />
-          <ButtonContainer
-            buttons={[
-              {
-                look: "tertiary",
-                className:
-                  "plausible-event-name=Content.Send+Result.Button+Copy+Email",
-                text: isMailBodyCopied
+          <ButtonContainer>
+            <Button
+              look="tertiary"
+              className="plausible-event-name=Content.Send+Result.Button+Copy+Email"
+              text={
+                isMailBodyCopied
                   ? preCheckResult.form.copyMailButton.textCopied
-                  : preCheckResult.form.copyMailButton.text,
-                onClick: () => {
-                  void handleCopyEmailBody();
-                },
-              },
-              {
-                look: "ghost",
-                className:
-                  "plausible-event-name=Content.Send+Result.Button+Copy+Email+Addresses",
-                text: isMailAddressCopied
+                  : preCheckResult.form.copyMailButton.text
+              }
+              onClick={() => {
+                void handleCopyEmailBody();
+              }}
+            />
+            <Button
+              look="ghost"
+              className="plausible-event-name=Content.Send+Result.Button+Copy+Email+Addresses"
+              text={
+                isMailAddressCopied
                   ? preCheckResult.form.copyAddressButton.textCopied
-                  : preCheckResult.form.copyAddressButton.text,
-                iconRight: <CopyAll className="h-40 w-40 text-blue-800" />,
-                onClick: () => {
-                  void handleCopyMailAddress();
-                },
-              },
-            ]}
-          />
+                  : preCheckResult.form.copyAddressButton.text
+              }
+              iconRight={<CopyAll className="h-40 w-40 text-blue-800" />}
+              onClick={() => {
+                void handleCopyMailAddress();
+              }}
+            />
+          </ButtonContainer>
         </div>
       </div>
       <hr className="mt-40 mb-32 border-t-[2px] border-gray-400" />
