@@ -6,7 +6,7 @@ import {
   Packer,
 } from "docx";
 import fileSaver from "file-saver";
-import { dedent } from "../dedentMultilineStrings";
+import { documentationExport } from "~/resources/content/documentation-document";
 import { type PrinzipWithAspekte } from "../strapiData.server";
 import {
   answer,
@@ -20,37 +20,23 @@ const { saveAs } = fileSaver;
 
 const content = {
   introduction: (date: string) => [
-    heading("Dokumentation der Digitaltauglichkeit", "title"),
-    ...markdown(`Export erstellt am ${date}`),
-    heading("Titel des Regelungsvorhabens", 1),
+    heading(documentationExport.introduction.title, "title"),
+    ...markdown(`${documentationExport.introduction.exportDate} ${date}`),
+    heading(documentationExport.introduction.projectTitle.heading, 1),
     answer("Beispieltitel eines Regelungsvorhabens"),
-    heading("Beteiligungsformate", 1),
-    formLabel(
-      "Entspricht die Umsetzung des Regelungsvorhabens den Bedürfnissen der Betroffenen? Wie haben Sie das überprüft?",
-    ),
+    heading(documentationExport.introduction.participationFormats.heading, 1),
+    formLabel(documentationExport.introduction.participationFormats.question1),
     answer("Beispiel für eine Beteiligung"),
-    formLabel(
-      "Wie spiegeln sich die Erkenntnisse, die durch die oben genannten Schritte gewonnen wurden, im Regelungsvorhaben wider?",
-    ),
+    formLabel(documentationExport.introduction.participationFormats.question2),
     answer("Beispiel für Erkenntnisse"),
   ],
   nextSteps: [
-    heading("Das ist jetzt zu tun", 1, true),
-    ...markdown(dedent`
-    - **Speichern** Sie die Dokumentation als **PDF**
-    - **Senden** Sie die von Ihnen erstellte Dokumentation als PDF per E-Mail an folgende Adresse: [nkr@bmj.bund.de](mailto:nkr@bmj.bund.de). Der NKR (Nationaler Normenkontrollrat) prüft Ihr Vorhaben hinsichtlich der Berücksichtigung der Prinzipien digitaltauglicher Gesetzgebung. Bei Fragen wird der NKR auf Sie zukommen.
-    - **Bei Interoperabilitätsbezug** senden Sie eine Kopie der E-Mail mit der PDF-Datei an [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de).
-    - **Visuelle Darstellungen** und Skizzen sind vom NKR gern gesehen. Hängen Sie diese formlos als PDF oder als Screenshot an.
-    - Damit ist der Digitalcheck für Sie beendet.
-    `),
-    heading("Gut zu wissen: Das prüft der Nationale Normenkontrollrat", 2),
-    ...markdown(
-      "Der NKR prüft das Regelungsvorhaben auf Möglichkeiten der digitalen Umsetzung. Die Basis ist der von Ihnen durchgeführte Digitalcheck. Das wesentliche Prüfkriterium ist die methodische und inhaltliche Nachvollziehbarkeit. Sein Prüfergebnis veröffentlicht er gegebenenfalls in seinen Stellungnahmen. Wenn Sie eine Visualisierung angefertigt haben und Sie der Veröffentlichung zustimmen, kann diese an die Stellungnahme angehängt werden. Bei Fragen oder Anregungen kommt Ihre Ansprechperson im NKR-Sekretariat auf Sie zu. ",
-    ),
-    heading("Sie haben Fragen oder benötigen Unterstützung? ", 2),
-    ...markdown(
-      "Rufen Sie uns an: 0151 4076 7839 oder schreiben Sie uns unter: [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de).",
-    ),
+    heading(documentationExport.nextSteps.heading, 1, true),
+    ...markdown(documentationExport.nextSteps.instructions),
+    heading(documentationExport.nextSteps.nkrInfo.heading, 2),
+    ...markdown(documentationExport.nextSteps.nkrInfo.content),
+    heading(documentationExport.nextSteps.support.heading, 2),
+    ...markdown(documentationExport.nextSteps.support.content),
   ],
 };
 

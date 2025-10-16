@@ -12,6 +12,7 @@ import {
   VerticalAlign,
   WidthType,
 } from "docx";
+import { documentationExport } from "~/resources/content/documentation-document";
 import type { PrinzipAspekt, PrinzipWithAspekte } from "../strapiData.server";
 import strapiBlocksToDocx from "./strapiBlocksToDocx";
 
@@ -127,16 +128,16 @@ export const heading = (
 export const aspectElement = (aspect: PrinzipAspekt) => [
   heading(aspect.Titel, 2),
   ...strapiBlocksToDocx(aspect.Text),
-  formLabel("Paragrafen"),
+  formLabel(documentationExport.aspect.paragraphsLabel),
   answer("§"),
-  formLabel("Erläuterung"),
+  formLabel(documentationExport.aspect.explanationLabel),
   answer("Beispielerklärung"),
 ];
 
 export const principleElement = (principle: PrinzipWithAspekte) => [
   heading(principle.Name, 1, true),
   ...strapiBlocksToDocx(principle.Beschreibung),
-  formLabel("Lässt sich das Vorhaben im Sinne des Prinzips umsetzen?"),
+  formLabel(documentationExport.principle.implementationQuestion),
   answer("Ja, gänzlich oder teilweise"),
   ...principle.Aspekte.flatMap(aspectElement),
 ];
