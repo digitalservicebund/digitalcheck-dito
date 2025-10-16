@@ -12,7 +12,7 @@ import {
   VerticalAlign,
   WidthType,
 } from "docx";
-import { documentationExport } from "~/resources/content/documentation-document";
+import { documentationDocument } from "~/resources/content/documentation-document";
 import type {
   Principle,
   PrincipleReasoning,
@@ -139,9 +139,9 @@ export const aspectElement = (
 ) => [
   heading(aspect.Titel, 2),
   ...strapiBlocksToDocx(aspect.Text, true),
-  formLabel(documentationExport.aspect.paragraphsLabel),
+  formLabel(documentationDocument.aspect.paragraphsLabel),
   answer(`§${reasoning?.paragraphs ?? ""}`, true),
-  formLabel(documentationExport.aspect.explanationLabel),
+  formLabel(documentationDocument.aspect.explanationLabel),
   answer(reasoning?.reason ?? ""),
 ];
 
@@ -151,7 +151,7 @@ export const principleElement = (
 ) => [
   heading(principle.Name, 1, true),
   ...strapiBlocksToDocx(principle.Beschreibung),
-  formLabel(documentationExport.principle.implementationQuestion),
+  formLabel(documentationDocument.principle.implementationQuestion),
   answer(principleAnswer?.answer ?? ""),
   ...principle.Aspekte.flatMap((aspect) =>
     aspectElement(

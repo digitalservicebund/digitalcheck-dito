@@ -1,6 +1,6 @@
 import { dedent } from "~/utils/dedentMultilineStrings";
 
-export const documentationExport = {
+export const documentationDocument = {
   introduction: {
     title: "Dokumentation der Digitaltauglichkeit",
     exportDate: "Export erstellt am",

@@ -6,7 +6,7 @@ import {
   Packer,
 } from "docx";
 import fileSaver from "file-saver";
-import { documentationExport } from "~/resources/content/documentation-document";
+import { documentationDocument } from "~/resources/content/documentation-document";
 import { type DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
 import { getDocumentationData } from "~/routes/dokumentation/documentationDataService";
 import { type PrinzipWithAspekte } from "../strapiData.server";
@@ -26,23 +26,27 @@ const content = {
     policyTitle: DocumentationData["policyTitle"],
     participation: DocumentationData["participation"],
   ) => [
-    heading(documentationExport.introduction.title, "title"),
-    ...markdown(`${documentationExport.introduction.exportDate} ${date}`),
-    heading(documentationExport.introduction.projectTitle.heading, 1),
+    heading(documentationDocument.introduction.title, "title"),
+    ...markdown(`${documentationDocument.introduction.exportDate} ${date}`),
+    heading(documentationDocument.introduction.projectTitle.heading, 1),
     answer(policyTitle?.title ?? ""),
-    heading(documentationExport.introduction.participationFormats.heading, 1),
-    formLabel(documentationExport.introduction.participationFormats.question1),
+    heading(documentationDocument.introduction.participationFormats.heading, 1),
+    formLabel(
+      documentationDocument.introduction.participationFormats.question1,
+    ),
     answer(participation?.formats ?? ""),
-    formLabel(documentationExport.introduction.participationFormats.question2),
+    formLabel(
+      documentationDocument.introduction.participationFormats.question2,
+    ),
     answer(participation?.results ?? ""),
   ],
   nextSteps: [
-    heading(documentationExport.nextSteps.heading, 1, true),
-    ...markdown(documentationExport.nextSteps.instructions),
-    heading(documentationExport.nextSteps.nkrInfo.heading, 2),
-    ...markdown(documentationExport.nextSteps.nkrInfo.content),
-    heading(documentationExport.nextSteps.support.heading, 2),
-    ...markdown(documentationExport.nextSteps.support.content),
+    heading(documentationDocument.nextSteps.heading, 1, true),
+    ...markdown(documentationDocument.nextSteps.instructions),
+    heading(documentationDocument.nextSteps.nkrInfo.heading, 2),
+    ...markdown(documentationDocument.nextSteps.nkrInfo.content),
+    heading(documentationDocument.nextSteps.support.heading, 2),
+    ...markdown(documentationDocument.nextSteps.support.content),
   ],
 };
 
