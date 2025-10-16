@@ -5,7 +5,7 @@ import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_SEND } from "~/resources/staticRoutes";
-import downloadWord from "~/utils/documentationCreationService/documentCreation";
+import downloadDocumentation from "~/utils/documentationCreationService/documentCreation";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 
@@ -24,7 +24,7 @@ export default function DocumentationSend() {
       />
       <RichText markdown={send.text} className="mb-40" />
 
-      <Button onClick={() => downloadWord(prinzips)}>
+      <Button onClick={() => downloadDocumentation(prinzips)}>
         Dokumentation herunterladen
       </Button>
 

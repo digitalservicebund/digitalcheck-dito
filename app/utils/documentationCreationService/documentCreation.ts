@@ -139,7 +139,9 @@ export const createDoc = (
   return doc;
 };
 
-export default async function downloadWord(principles: PrinzipWithAspekte[]) {
+export default async function downloadDocumentation(
+  principles: PrinzipWithAspekte[],
+) {
   try {
     // Fetch the logo from the public directory
     const logoResponse = await fetch("/logo/bmds-logo.png");
