@@ -18,6 +18,7 @@ export const mockForm = () => {
         dirty: () => false,
         resetForm: vi.fn(),
         setDirty: vi.fn(),
+        validate: vi.fn(),
       })),
       useField: vi.fn(() => ({
         getInputProps: (props: Record<string, unknown>) => ({
