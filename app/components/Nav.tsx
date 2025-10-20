@@ -52,7 +52,7 @@ type NavProps = {
 const containsMatchingAttr = (
   node: ReactNode | ReactNode[],
   attr: keyof NavItemProps,
-  value: string = "true",
+  value: string | boolean = true,
 ): boolean => {
   if (!node) return false;
 

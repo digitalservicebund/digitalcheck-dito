@@ -1,8 +1,8 @@
-import type {
-  DocumentationData,
-  Participation,
-  PolicyTitle,
-  Principle,
+import {
+  type DocumentationData,
+  type Participation,
+  type PolicyTitle,
+  type Principle,
 } from "~/routes/dokumentation/documentationDataSchema";
 import {
   readVersionedDataFromLocalStorage,
@@ -12,26 +12,39 @@ import {
 
 export const DATA_SCHEMA_VERSION = "1";
 export const STORAGE_KEY = "documentationData";
+const initialData: DocumentationData = { version: DATA_SCHEMA_VERSION };
+let cachedDocumentationData = initialData;
+
+let listeners: (() => void)[] = [];
 
 function writeToStorage(data: DocumentationData): void {
   writeVersionedDataToLocalStorage(data, STORAGE_KEY);
 }
 
 export function getDocumentationData(): DocumentationData {
-  return (
-    readVersionedDataFromLocalStorage<DocumentationData>(
-      STORAGE_KEY,
-      DATA_SCHEMA_VERSION,
-    ) ?? { version: DATA_SCHEMA_VERSION }
-  );
+  const storedData = readVersionedDataFromLocalStorage<DocumentationData>(
+    STORAGE_KEY,
+    DATA_SCHEMA_VERSION,
+  ) ?? { version: DATA_SCHEMA_VERSION };
+
+  if (cachedDocumentationData !== storedData) {
+    cachedDocumentationData = storedData;
+    emitChange();
+  }
+
+  return storedData;
 }
 
 export function createOrUpdateDocumentationData(data: DocumentationData): void {
   writeToStorage(data);
+  cachedDocumentationData = data;
+  emitChange();
 }
 
 export function deleteDocumentationData(): void {
   removeFromLocalStorage(STORAGE_KEY);
+  cachedDocumentationData = initialData;
+  emitChange();
 }
 
 export function setPolicyTitle(policyTitle: PolicyTitle): void {
@@ -68,4 +81,20 @@ export function addOrUpdatePrinciple(newPrinciple: Principle): void {
     ...data,
     principles: updatedPrinciples,
   });
+}
+
+export function subscribeToDocumentationData(listener: () => void) {
+  listeners = [...listeners, listener];
+  return () => {
+    listeners = listeners.filter((l) => l !== listener);
+  };
+}
+
+export const getDocumentationDataSnapshot = () => cachedDocumentationData;
+export const getDocumentationDataServerSnapshot = () => initialData;
+
+function emitChange() {
+  for (const listener of listeners) {
+    listener();
+  }
 }

@@ -3,7 +3,7 @@ export const general = {
     text: "Zurück",
   },
   buttonNext: {
-    text: "Übernehmen & weiter",
+    text: "Weiter",
   },
   tableOfContents: {
     headline: "Inhalt",

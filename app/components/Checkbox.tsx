@@ -9,7 +9,7 @@ type BaseInputProps = Omit<
 >;
 
 interface CheckboxProps extends BaseInputProps {
-  scope: FormScope<"on" | undefined>;
+  scope: FormScope<"on" | true | undefined>;
   size?: number;
   description?: ReactNode;
   error?: string | null;
@@ -52,7 +52,7 @@ function Checkbox({
           <input
             type="checkbox"
             className="ds-checkbox self-start"
-            value={field.value()}
+            value={field.value() ? "on" : undefined}
             checked={!!field.value()}
             disabled
           />

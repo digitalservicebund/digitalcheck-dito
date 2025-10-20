@@ -9,64 +9,57 @@ import RichText from "~/components/RichText";
 import TextareaNew from "~/components/TextareaNew";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_PARTICIPATION } from "~/resources/staticRoutes";
-import { participationSchema } from "~/routes/dokumentation/documentationDataSchema";
 import {
-  getDocumentationData,
-  setParticipation,
-} from "~/routes/dokumentation/documentationDataService";
+  defaultParticipationValues,
+  participationSchema,
+} from "~/routes/dokumentation/documentationDataSchema";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
+import { useDocumentationData } from "./dokumentation/documentationDataHook";
+import { setParticipation } from "./dokumentation/documentationDataService";
 
 const { participation } = digitalDocumentation;
-
-const DEFAULT_VALUES = {
-  formats: "",
-  results: "",
-};
 
 export default function DocumentationParticipation() {
   const navigate = useNavigate();
   const { currentUrl, nextUrl, previousUrl } =
     useOutletContext<NavigationContext>();
+  const { documentationData } = useDocumentationData();
 
   const form = useForm({
     schema: participationSchema,
-    defaultValues: DEFAULT_VALUES,
+    defaultValues: defaultParticipationValues,
     validationBehaviorConfig: {
       whenSubmitted: "onChange",
       whenTouched: "onSubmit",
       initial: "onSubmit",
     },
-    onBeforeSubmit: async ({ unvalidatedData }) => {
-      setParticipation(unvalidatedData);
-
+    onBeforeSubmit: async () => {
       // bypass submission
       if (nextUrl) await navigate(nextUrl);
     },
-    handleSubmit: (participation) => {
-      setParticipation(participation);
-    },
-    onSubmitSuccess: async () => {
+    handleSubmit: async () => {
       if (nextUrl) await navigate(nextUrl);
     },
   });
 
   useEffect(() => {
-    if (!form.dirty()) {
-      const documentationData = getDocumentationData();
+    const unsubscribe = form.subscribe.value(setParticipation);
 
-      form.resetForm(
-        documentationData.participation === null
-          ? DEFAULT_VALUES
-          : documentationData.participation,
-      );
-
-      form.setDirty(true);
+    if (
+      documentationData.participation &&
+      !form.dirty("formats") &&
+      !form.dirty("results")
+    ) {
+      form.resetForm(documentationData.participation);
+      form.setDirty("formats", true);
+      form.setDirty("results", true);
 
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      if (documentationData) form.validate();
+      form.validate();
     }
-  }, [currentUrl, form]);
+    return () => unsubscribe();
+  }, [currentUrl, form, documentationData]);
 
   return (
     <>

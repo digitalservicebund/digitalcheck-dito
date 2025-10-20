@@ -10,7 +10,7 @@ type BaseInputProps = Omit<
 interface CheckboxWithExpandableAreaProps extends BaseInputProps {
   children: ReactNode | ((args: { closeArea: () => void }) => ReactNode);
   label: string;
-  scope: FormScope<"on" | undefined>;
+  scope: FormScope<"on" | true | undefined>;
   description?: ReactNode | ((args: { open: boolean }) => ReactNode);
   closeable?: boolean;
   disabled?: boolean;

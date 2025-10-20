@@ -81,7 +81,7 @@ describe("DocumentationParticipation", () => {
 
   it("shows submit button", () => {
     const submitButton = screen.getByRole("button", {
-      name: "Übernehmen & weiter",
+      name: "Weiter",
     });
     expect(submitButton).toBeInTheDocument();
     expect(submitButton).toHaveAttribute("type", "submit");

@@ -1,5 +1,9 @@
 import { z } from "zod";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
+import {
+  ROUTE_DOCUMENTATION_PARTICIPATION,
+  ROUTE_DOCUMENTATION_TITLE,
+} from "~/resources/staticRoutes";
 import type { VersionedData } from "~/utils/localStorageVersioned";
 
 const { principlePages, participation, info } = digitalDocumentation;
@@ -20,12 +24,12 @@ export const participationSchema = z.object({
 const principleReasoningSchema = z
   .object({
     aspect: z.string().optional(),
-    checkbox: z.literal("on").optional(),
+    checkbox: z.literal(["on", true]).optional(),
     paragraphs: z.string().optional(),
     reason: z.string().optional(),
   })
   .superRefine((val, ctx) => {
-    if (val.checkbox !== "on") return;
+    if (val.checkbox === undefined) return;
 
     if (!val.paragraphs) {
       ctx.addIssue({
@@ -78,6 +82,34 @@ export const principleSchema = z
       id: z.string(),
     }),
   );
+
+export const defaultTitleValues: PolicyTitle = {
+  title: "",
+};
+
+export const defaultParticipationValues: Participation = {
+  formats: "",
+  results: "",
+};
+
+export const defaultPrincipleValues: Principle = {
+  id: "",
+  answer: "",
+  reasoning: undefined,
+};
+
+export const defaultValues: Omit<DocumentationData, "version"> = {
+  policyTitle: defaultTitleValues,
+  participation: defaultParticipationValues,
+  principles: [],
+};
+
+export const getDocumentationSchemaFormUrl = (url: string) => {
+  if (url === ROUTE_DOCUMENTATION_TITLE.url) return policyTitleSchema;
+  else if (url === ROUTE_DOCUMENTATION_PARTICIPATION.url)
+    return participationSchema;
+  else return principleSchema;
+};
 
 export const documentationSchema = z.object({
   policyTitle: policyTitleSchema.optional(),

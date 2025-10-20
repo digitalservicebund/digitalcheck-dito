@@ -22,13 +22,11 @@ import TextareaNew from "~/components/TextareaNew";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
 import {
+  defaultPrincipleValues,
   principleSchema,
   type PrincipleReasoning,
 } from "~/routes/dokumentation/documentationDataSchema";
-import {
-  addOrUpdatePrinciple,
-  getDocumentationData,
-} from "~/routes/dokumentation/documentationDataService";
+import { addOrUpdatePrinciple } from "~/routes/dokumentation/documentationDataService";
 import type {
   PrinzipAspekt,
   PrinzipWithAspekte,
@@ -37,6 +35,7 @@ import { slugify } from "~/utils/utilFunctions";
 import type { Route } from "./+types/dokumentation._documentationNavigation.$principleId";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
+import { useDocumentationData } from "./dokumentation/documentationDataHook";
 
 const { principlePages } = digitalDocumentation;
 
@@ -275,6 +274,7 @@ export default function DocumentationPrinciple() {
   const navigate = useNavigate();
   const { currentUrl, nextUrl, previousUrl, prinzips } =
     useOutletContext<NavigationContext>();
+  const { documentationData } = useDocumentationData();
 
   const prinzip = prinzips.find(
     ({ URLBezeichnung }) => URLBezeichnung === principleId,
@@ -287,9 +287,8 @@ export default function DocumentationPrinciple() {
   const form = useForm({
     schema: principleSchema,
     defaultValues: {
+      ...defaultPrincipleValues,
       id: prinzip.documentId,
-      answer: "",
-      reasoning: undefined,
     },
     validationBehaviorConfig: {
       whenSubmitted: "onChange",
@@ -305,6 +304,10 @@ export default function DocumentationPrinciple() {
     },
   });
 
+  const principleData = documentationData?.principles?.find(
+    (principle) => principle.id === prinzip.documentId,
+  );
+
   // Handle answer change
   useEffect(() => {
     const unsubscribe = form.subscribe.value("answer", (answer) => {
@@ -313,10 +316,6 @@ export default function DocumentationPrinciple() {
         return;
       }
 
-      const documentationData = getDocumentationData();
-      const principleData = documentationData?.principles?.find(
-        (principle) => principle.id === prinzip.documentId,
-      );
       const reasoning = principleData?.reasoning;
 
       if (!Array.isArray(reasoning)) {
@@ -332,40 +331,30 @@ export default function DocumentationPrinciple() {
 
       form.setValue("reasoning", reasoning);
     });
-    return () => {
-      unsubscribe();
-    };
-  }, [form, prinzip.Aspekte, currentUrl, prinzip.documentId]);
-
-  useEffect(() => {
-    if (!form.dirty()) {
-      const documentationData = getDocumentationData();
-      const principleData = documentationData?.principles?.find(
-        (principle) => principle.id === prinzip.documentId,
-      );
-
-      form.resetForm(
-        principleData
-          ? principleData
-          : {
-              id: prinzip.documentId,
-              answer: "",
-              reasoning: undefined,
-            },
-      );
-
-      form.setDirty(true);
-
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      if (principleData) form.validate();
-    }
-
-    const unsubscribe = form.subscribe.value((principle) => {
-      addOrUpdatePrinciple(principle);
-    });
 
     return () => unsubscribe();
-  }, [currentUrl, form, prinzip.documentId]);
+  }, [
+    form,
+    prinzip.Aspekte,
+    currentUrl,
+    prinzip.documentId,
+    documentationData,
+    principleData,
+  ]);
+
+  useEffect(() => {
+    const unsubscribe = form.subscribe.value(addOrUpdatePrinciple);
+
+    if (principleData && !form.dirty("answer")) {
+      form.resetForm(principleData);
+      form.setDirty("answer", true);
+
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      form.validate();
+    }
+
+    return () => unsubscribe();
+  }, [currentUrl, form, prinzip.documentId, documentationData, principleData]);
 
   return (
     <>

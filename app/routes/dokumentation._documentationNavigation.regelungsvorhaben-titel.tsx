@@ -6,65 +6,53 @@ import InputNew from "~/components/InputNew";
 import MetaTitle from "~/components/Meta";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_TITLE } from "~/resources/staticRoutes";
-import { policyTitleSchema } from "~/routes/dokumentation/documentationDataSchema";
 import {
-  getDocumentationData,
-  setPolicyTitle,
-} from "~/routes/dokumentation/documentationDataService";
+  defaultTitleValues,
+  policyTitleSchema,
+} from "~/routes/dokumentation/documentationDataSchema";
+import { setPolicyTitle } from "~/routes/dokumentation/documentationDataService";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
+import { useDocumentationData } from "./dokumentation/documentationDataHook";
 
 const { info } = digitalDocumentation;
-
-const DEFAULT_VALUES = {
-  title: "",
-};
 
 export default function DocumentationTitle() {
   const navigate = useNavigate();
   const { currentUrl, nextUrl, previousUrl } =
     useOutletContext<NavigationContext>();
+  const { documentationData } = useDocumentationData();
 
   const form = useForm({
     schema: policyTitleSchema,
-    defaultValues: DEFAULT_VALUES,
+    defaultValues: defaultTitleValues,
     validationBehaviorConfig: {
       whenSubmitted: "onChange",
       whenTouched: "onSubmit",
       initial: "onSubmit",
     },
-    onBeforeSubmit: async ({ unvalidatedData }) => {
-      setPolicyTitle(unvalidatedData);
-
+    onBeforeSubmit: async () => {
       // bypass submission
       if (nextUrl) await navigate(nextUrl);
     },
-    handleSubmit: (policyTitle) => {
-      setPolicyTitle(policyTitle);
-    },
-    onSubmitSuccess: async () => {
-      if (nextUrl) {
-        await navigate(nextUrl);
-      }
+    handleSubmit: async () => {
+      if (nextUrl) await navigate(nextUrl);
     },
   });
 
   useEffect(() => {
-    if (!form.dirty()) {
-      const documentationData = getDocumentationData();
+    const unsubscribe = form.subscribe.value(setPolicyTitle);
 
-      form.resetForm(
-        documentationData.policyTitle === null
-          ? DEFAULT_VALUES
-          : documentationData.policyTitle,
-      );
-
-      form.setDirty(true);
+    if (documentationData.policyTitle && !form.dirty("title")) {
+      form.resetForm(documentationData.policyTitle);
+      form.setDirty("title", true);
 
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      if (documentationData) form.validate();
+      form.validate();
     }
-  }, [currentUrl, form]);
+
+    return () => unsubscribe();
+  }, [currentUrl, form, documentationData]);
 
   return (
     <>

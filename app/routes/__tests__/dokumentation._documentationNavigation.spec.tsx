@@ -96,7 +96,7 @@ describe("navigation on pages of documentation", () => {
       }
       if (next) {
         const linkNext = screen.getByRole("link", {
-          name: "Übernehmen & weiter",
+          name: "Weiter",
         });
         expect(linkNext).toHaveAttribute("href", next.url);
       }
