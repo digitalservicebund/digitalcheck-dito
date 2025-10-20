@@ -1,7 +1,7 @@
 import { ExternalHyperlink, Paragraph, TextRun } from "docx";
 
 /**
- * Renders markdown text into an array of Paragraph objects.
+ * Renders Markdown text into an array of Paragraph objects.
  * Supports:
  * - Unordered lists (lines starting with "- " or "* ")
  * - Bold text (**text**)
@@ -39,33 +39,37 @@ export default function markdown(markdown: string): Paragraph[] {
     .filter((paragraph) => paragraph !== null);
 }
 
-type Pattern = {
+type PatternRenderer = {
   regex: RegExp;
   render: (match: RegExpExecArray) => TextRun | ExternalHyperlink;
 };
 
 // Regular expressions for markdown patterns
 // Limit capture groups to improve performance
-const patterns: Pattern[] = [
-  {
-    // **text**
-    regex: /(\*\*)(.{1,1000}?)\1/g,
-    render: (match: RegExpExecArray) =>
-      new TextRun({ text: match[2], bold: true }),
-  },
-  {
-    // [text](url)
-    regex: /\[([^\]]{1,1000})\]\(([^)]{1,1000})\)/g,
-    render: (match: RegExpExecArray) =>
-      new ExternalHyperlink({
-        children: [new TextRun({ text: match[1], style: "Hyperlink" })],
-        link: match[2],
-      }),
-  },
+const boldTextPattern = {
+  // example: **text**
+  regex: /(\*\*)(.{1,1000}?)\1/g,
+  render: (match: RegExpExecArray) =>
+    new TextRun({ text: match[2], bold: true }),
+};
+
+const linkTextPattern = {
+  // example: [text](url)
+  regex: /\[([^\]]{1,1000})]\(([^)]{1,1000})\)/g,
+  render: (match: RegExpExecArray) =>
+    new ExternalHyperlink({
+      children: [new TextRun({ text: match[1], style: "Hyperlink" })],
+      link: match[2],
+    }),
+};
+
+const supportedPatternRenderers: PatternRenderer[] = [
+  boldTextPattern,
+  linkTextPattern,
 ];
 
 const parseMarkdownLine = (text: string): (TextRun | ExternalHyperlink)[] => {
-  const matches = patterns
+  const matches = supportedPatternRenderers
     .flatMap((pattern) =>
       Array.from(text.matchAll(pattern.regex), (match) => ({
         start: match.index,
