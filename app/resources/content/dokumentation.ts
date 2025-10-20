@@ -300,8 +300,25 @@ export const digitalDocumentation = {
     principleAnswerTitle:
       "Lässt sich das Vorhaben im Sinne des Prinzips umsetzen?",
   },
-  send: {
-    headline: "Absenden",
-    text: "Hier entsteht die Absenden-Seite der Dokumentation.",
+  finish: {
+    heading: {
+      text: "Dokumentation abschließen",
+      markdown:
+        "Jetzt laden Sie die ausgefüllte Dokumentation herunter und senden sie an den NKR. Optional können Sie sie vorher zur Abstimmung verschicken.",
+    },
+    download: {
+      heading: "Dokumentation herunterladen",
+      content:
+        "Laden Sie die ausgefüllte Dokumentation herunter, um sie abzustimmen oder an den NKR zu senden.",
+      buttonText: "Word-Datei herunterladen (.docx)",
+    },
+    send: {
+      heading: "Fertige Dokumentation an den NKR senden",
+      content: dedent`
+        - Senden Sie die Dokumentation **als PDF per E-Mail** an folgende Adresse: [nkr@bmj.bund.de](mailto:nkr@bmj.bund.de). Der NKR prüft die methodische und inhaltliche Nachvollziehbarkeit. Bei Fragen wird der NKR auf Sie zukommen. Das Ziel ist eine digital- und praxistaugliche Umsetzung.
+        - Bei **Interoperabilitätsbezug** senden Sie eine Kopie der E-Mail mit der Dokumentation an [interoperabel@digitalservice.bund.de]().
+        - **Visualisierungen** und Skizzen sind vom NKR gern gesehen. Hängen Sie diese formlos als PDF oder als Screenshot an.`,
+    },
+    done: "Damit ist der Digitalcheck für Sie beendet.",
   },
 };
