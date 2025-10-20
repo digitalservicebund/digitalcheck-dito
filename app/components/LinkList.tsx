@@ -16,7 +16,6 @@ export type LinkListProps = {
 export type LinkProps = Route & {
   preText?: string;
   openInNewTab?: boolean;
-  download?: boolean;
   plausibleEventName?: string;
 };
 

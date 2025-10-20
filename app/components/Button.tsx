@@ -15,7 +15,6 @@ type Props = {
   iconRight?: ReactElementWithClassname;
   fullWidth?: boolean;
   prefetch?: "intent" | "viewport" | "render";
-  onClickCallback?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   plausibleEventName?: string;
 };
 
@@ -44,7 +43,6 @@ function Button({
   size,
   href,
   prefetch,
-  onClickCallback,
   plausibleEventName,
   ...props
 }: ButtonProps | ButtonLinkProps) {
@@ -83,12 +81,6 @@ function Button({
     }
   };
 
-  const onClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    if (onClickCallback) {
-      onClickCallback(event);
-    }
-  };
-
   if (href && !(props as ButtonProps).disabled) {
     const ext = getDownloadableExtensionName(href);
     const isDownload = !!ext;
@@ -102,14 +94,12 @@ function Button({
     return (
       <Link
         {...(props as ButtonLinkProps)}
+        id={id}
+        data-testid={id}
         to={href}
         className={twJoin(buttonClasses, plausibleEvent)}
         onKeyDown={onKeyDown}
-        onClick={onClick}
-        id={id}
-        data-testid={id}
         reloadDocument={isDownload}
-        download={isDownload}
         title={isDownload ? `${text} (${ext}-Datei)` : undefined}
         prefetch={prefetch}
       >
@@ -121,9 +111,9 @@ function Button({
   return (
     <button
       {...(props as ButtonProps)}
-      className={buttonClasses}
       id={id}
       data-testid={id}
+      className={buttonClasses}
     >
       {iconLeft} {children ? childrenSpan : textSpan} {iconRight}
     </button>
