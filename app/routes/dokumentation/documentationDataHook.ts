@@ -37,7 +37,7 @@ export const useDocumentationData = () => {
     if (!principleData) return undefined;
 
     const reasoning = principleData.reasoning?.filter(
-      ({ checkbox }) => checkbox !== undefined,
+      (r) => r?.checkbox !== undefined,
     );
 
     return {
