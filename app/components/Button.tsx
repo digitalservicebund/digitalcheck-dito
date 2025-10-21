@@ -101,6 +101,7 @@ function Button({
         onKeyDown={onKeyDown}
         reloadDocument={isDownload}
         title={isDownload ? `${text} (${ext}-Datei)` : undefined}
+        download={isDownload}
         prefetch={prefetch}
       >
         {iconLeft} {children ? childrenSpan : textSpan} {iconRight}
