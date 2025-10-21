@@ -10,8 +10,8 @@ import {
 } from "~/resources/staticRoutes";
 import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
 import DocumentationSummary from "~/routes/dokumentation._documentationNavigation.zusammenfassung";
+import { useDocumentationData } from "~/routes/dokumentation/documentationDataHook";
 import type { DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
-import { getDocumentationData } from "~/routes/dokumentation/documentationDataService";
 
 const { mockUseOutletContext } = vi.hoisted(() => ({
   mockUseOutletContext: vi.fn(),
@@ -27,15 +27,18 @@ vi.mock("react-router", async (importOriginal) => {
 });
 
 vi.mock(
-  "~/routes/dokumentation/documentationDataService",
+  "~/routes/dokumentation/documentationDataHook",
   async (importOriginal) => {
     const actual =
       await importOriginal<
-        typeof import("~/routes/dokumentation/documentationDataService")
+        typeof import("~/routes/dokumentation/documentationDataHook")
       >();
     return {
       ...actual,
-      getDocumentationData: vi.fn(),
+      useDocumentationData: vi.fn(() => ({
+        getDocumentationData: null,
+        findDocumentationDataForUrl: vi.fn(),
+      })),
     };
   },
 );
@@ -50,7 +53,7 @@ const routes: (Route[] | Route)[] = [
   ],
 ];
 
-const mockGetDocumentationData = vi.mocked(getDocumentationData);
+const mockUseDocumentationData = vi.mocked(useDocumentationData);
 
 describe("DocumentationSummary", () => {
   const renderWithRouter = () => {
@@ -71,7 +74,10 @@ describe("DocumentationSummary", () => {
   };
 
   beforeEach(() => {
-    mockGetDocumentationData.mockReturnValue(mockDocumentationData);
+    mockUseDocumentationData.mockReturnValue({
+      documentationData: mockDocumentationData,
+      findDocumentationDataForUrl: vi.fn(),
+    });
 
     const context: NavigationContext = {
       currentUrl: "/current-url",
@@ -249,7 +255,10 @@ describe("DocumentationSummary", () => {
   });
 
   it("shows InlineNotice for all steps when no documentation data is available", () => {
-    mockGetDocumentationData.mockReturnValue({ version: "1" });
+    mockUseDocumentationData.mockReturnValue({
+      documentationData: { version: "1" },
+      findDocumentationDataForUrl: vi.fn(),
+    });
     renderWithRouter();
 
     routes.flat().forEach((route) => {
@@ -261,11 +270,5 @@ describe("DocumentationSummary", () => {
         ),
       ).toBeInTheDocument();
     });
-  });
-
-  it("calls getDocumentationData on component mount", () => {
-    renderWithRouter();
-
-    expect(mockGetDocumentationData).toHaveBeenCalled();
   });
 });
