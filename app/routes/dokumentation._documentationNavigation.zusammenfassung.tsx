@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useState } from "react";
+import { type ReactNode } from "react";
 import { Link, useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
@@ -14,14 +14,13 @@ import {
   ROUTE_DOCUMENTATION_TITLE,
 } from "~/resources/staticRoutes";
 import type {
-  DocumentationData,
   Participation,
   PolicyTitle,
   Principle,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
-import { getDocumentationData } from "./dokumentation/documentationDataService";
+import { useDocumentationData } from "./dokumentation/documentationDataHook";
 
 const { summary } = digitalDocumentation;
 
@@ -122,18 +121,8 @@ const renderPrinciple = (principle?: Principle) => {
 export default function DocumentationSummary() {
   const { routes, previousUrl, nextUrl, prinzips } =
     useOutletContext<NavigationContext>();
-  const [documentationData, setDocumentationData] =
-    useState<DocumentationData | null>(null);
 
-  useEffect(() => {
-    // data is fetches from localStorage which should only happen client-side, thus we use useEffect hook to set it.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setDocumentationData(getDocumentationData());
-  }, []);
-
-  if (!documentationData) {
-    return null;
-  }
+  const { documentationData } = useDocumentationData();
 
   const items: InfoBoxProps[] = [
     createInfoBoxItem({
