@@ -2,7 +2,7 @@ import EmojiEventsOutlinedIcon from "@digitalservicebund/icons/EmojiEventsOutlin
 import FileDownloadOutlinedIcon from "@digitalservicebund/icons/FileDownloadOutlined";
 import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
-import InfoBox from "~/components/InfoBox";
+import InfoBoxList from "~/components/InfoBoxList";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
@@ -27,46 +27,48 @@ export default function DocumentationSend() {
         look="ds-heading-02-reg"
         className="mb-16"
       />
-      <RichText markdown={finish.heading.markdown} />
+      <RichText markdown={finish.heading.markdown} className="mb-8" />
 
-      <InfoBox
-        look="highlight"
-        className="bg-white"
-        heading={{
-          text: finish.download.heading,
-        }}
-        content={finish.download.content}
-        buttons={[
+      <InfoBoxList
+        items={[
           {
-            look: "link",
-            iconLeft: (
-              <FileDownloadOutlinedIcon className="mr-1 fill-current" />
-            ),
-            text: finish.download.buttonText,
-            onClick: () => void downloadDocumentation(prinzips),
+            look: "highlight",
+            className: "bg-white",
+            heading: {
+              text: finish.download.heading,
+            },
+            content: finish.download.content,
+            buttons: [
+              {
+                look: "link",
+                iconLeft: (
+                  <FileDownloadOutlinedIcon className="mr-1 fill-current" />
+                ),
+                text: finish.download.buttonText,
+                onClick: () => void downloadDocumentation(prinzips),
+              },
+            ],
+          },
+          {
+            look: "highlight",
+            className: "bg-white",
+            heading: {
+              text: finish.send.heading,
+            },
+            content: finish.send.content,
+          },
+          {
+            look: "highlight",
+            className: "items-center bg-green-200",
+            visual: {
+              type: "icon",
+              Icon: DoneIcon,
+            },
+            heading: {
+              text: finish.done,
+            },
           },
         ]}
-      />
-
-      <InfoBox
-        look="highlight"
-        className="bg-white"
-        heading={{
-          text: finish.send.heading,
-        }}
-        content={finish.send.content}
-      />
-
-      <InfoBox
-        look="highlight"
-        className="items-center bg-green-200"
-        visual={{
-          type: "icon",
-          Icon: DoneIcon,
-        }}
-        heading={{
-          text: finish.done,
-        }}
       />
     </>
   );
