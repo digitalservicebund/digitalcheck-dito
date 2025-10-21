@@ -15,6 +15,7 @@ interface CheckboxProps extends BaseInputProps {
   error?: string | null;
   includeDisabledInForm?: boolean;
   defaultValue?: "on";
+  warningInsteadOfError?: boolean;
 }
 
 function Checkbox({
@@ -24,13 +25,15 @@ function Checkbox({
   error,
   includeDisabledInForm,
   disabled,
+  warningInsteadOfError,
   ...rest
 }: Readonly<CheckboxProps>) {
   const field = useField(scope);
   const inputId = useId();
   const errorId = useId();
-
   const specialDisabledInput = disabled && includeDisabledInForm;
+  const hasError = !!(error || field.error()) && !warningInsteadOfError;
+  const hasWarning = !!(error || field.error()) && warningInsteadOfError;
 
   return (
     <div className="max-w-a11y space-y-8">
@@ -40,10 +43,12 @@ function Checkbox({
             type: "checkbox",
             id: inputId,
             "aria-describedby": errorId,
-            "aria-invalid": !!field.error(),
+            "aria-invalid": hasError || hasWarning,
             className: twJoin(
-              "ds-checkbox self-start",
+              "ds-checkbox self-start bg-white",
               specialDisabledInput && "hidden",
+              hasError && "has-error",
+              hasWarning && "has-warning",
             ),
             ...rest,
           })}
@@ -57,7 +62,7 @@ function Checkbox({
             disabled
           />
         )}
-        <div>
+        <div className="space-y-8">
           <label
             htmlFor={inputId}
             className={twJoin(
@@ -68,11 +73,16 @@ function Checkbox({
             {children}
           </label>
           <p className="ds-body-01-reg block">{description}</p>
+          {(hasError || hasWarning) && (
+            <InputError
+              id={errorId}
+              look={warningInsteadOfError ? "warning" : "error"}
+            >
+              {error || field.error()}
+            </InputError>
+          )}
         </div>
       </div>
-      {(error || field.error()) && (
-        <InputError id={errorId}>{error || field.error()}</InputError>
-      )}
     </div>
   );
 }

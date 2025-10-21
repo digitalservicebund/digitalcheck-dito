@@ -1,6 +1,6 @@
 import { useField, type FormScope } from "@rvf/react";
 import { ComponentPropsWithRef, useId, type ReactNode } from "react";
-import customTwMerge from "~/utils/tailwindMerge";
+import twMerge from "~/utils/tailwindMerge";
 import InputError from "./InputError";
 
 type Option<Value extends string | number> = {
@@ -18,6 +18,8 @@ interface RadioGroupProps<FormData, Value extends string | number = string>
   options: Option<Value>[];
   label?: ReactNode;
   className?: string;
+  error?: string | null;
+  warningInsteadOfError?: boolean;
 }
 
 function RadioGroupNew<FormData, Value extends string | number = string>({
@@ -25,15 +27,19 @@ function RadioGroupNew<FormData, Value extends string | number = string>({
   options,
   label,
   className,
+  error,
+  warningInsteadOfError,
   required = true,
   ...rest
 }: Readonly<RadioGroupProps<FormData, Value>>) {
   const field = useField(scope);
   const errorId = useId();
+  const hasError = !!(error || field.error()) && !warningInsteadOfError;
+  const hasWarning = !!(error || field.error()) && warningInsteadOfError;
 
   return (
     <fieldset
-      className={customTwMerge("space-y-16", className)}
+      className={twMerge("space-y-16", className)}
       aria-labelledby={label ? `${field.name()}-label` : undefined}
       aria-errormessage={errorId}
       aria-invalid={!!field.error()}
@@ -55,8 +61,12 @@ function RadioGroupNew<FormData, Value extends string | number = string>({
                 type: "radio",
                 id: id,
                 "aria-describedby": errorId,
-                "aria-invalid": !!field.error(),
-                className: "ds-radio self-start",
+                "aria-invalid": hasError || hasWarning,
+                className: twMerge(
+                  "ds-radio self-start",
+                  hasError && "has-error",
+                  hasWarning && "has-warning",
+                ),
                 value: opt.value,
                 ...rest,
               })}
@@ -73,8 +83,13 @@ function RadioGroupNew<FormData, Value extends string | number = string>({
         );
       })}
 
-      {field.error() && errorId && (
-        <InputError id={errorId}>{field.error()}</InputError>
+      {(hasError || hasWarning) && (
+        <InputError
+          id={errorId}
+          look={warningInsteadOfError ? "warning" : "error"}
+        >
+          {error || field.error()}
+        </InputError>
       )}
     </fieldset>
   );

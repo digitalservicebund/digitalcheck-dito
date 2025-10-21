@@ -90,6 +90,7 @@ function Reasoning({
       closeable={false}
       defaultValue={defaultValue}
       error={error}
+      warningInsteadOfError
     >
       {({ closeArea }) => (
         <>
@@ -104,6 +105,7 @@ function Reasoning({
             description={
               principlePages.explanationFields.paragraphInput.description
             }
+            warningInsteadOfError
           >
             {principlePages.explanationFields.paragraphInput.label}
           </InputNew>
@@ -114,6 +116,7 @@ function Reasoning({
               principlePages.explanationFields.reasoningInput.placeholder
             }
             rows={5}
+            warningInsteadOfError
           >
             {principlePages.explanationFields.reasoningInput.label}
           </TextareaNew>
@@ -395,6 +398,7 @@ export default function DocumentationPrinciple() {
               value: option,
               label: option,
             }))}
+            warningInsteadOfError
           />
 
           {form.field("answer").value() === principlePages.radioOptions[0] && (

@@ -84,6 +84,7 @@ export default function DocumentationParticipation() {
           <TextareaNew
             description={participation.formats.textField.description}
             scope={form.scope("formats")}
+            warningInsteadOfError
           >
             {participation.formats.textField.label}
           </TextareaNew>
@@ -99,6 +100,7 @@ export default function DocumentationParticipation() {
           <TextareaNew
             description={participation.results.textField.description}
             scope={form.scope("results")}
+            warningInsteadOfError
           >
             {participation.results.textField.label}
           </TextareaNew>

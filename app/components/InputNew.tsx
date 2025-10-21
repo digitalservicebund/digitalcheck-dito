@@ -1,5 +1,6 @@
 import { FormScope, useField, ValueOfInputType } from "@rvf/react-router";
 import { ComponentPropsWithRef, ReactNode, useId } from "react";
+import twMerge from "~/utils/tailwindMerge";
 import InputError from "./InputError";
 
 type BaseInputProps = ComponentPropsWithRef<"input">;
@@ -9,6 +10,7 @@ interface InputProps extends BaseInputProps {
   size?: number;
   description?: ReactNode;
   error?: string | null;
+  warningInsteadOfError?: boolean;
 }
 
 function InputNew({
@@ -17,40 +19,56 @@ function InputNew({
   description,
   error,
   type,
+  warningInsteadOfError,
   ...rest
 }: Readonly<InputProps>) {
   const field = useField(scope);
   const inputId = useId();
   const errorId = useId();
   const descriptionId = useId();
+  const hasError = !!(error || field.error()) && !warningInsteadOfError;
+  const hasWarning = !!(error || field.error()) && warningInsteadOfError;
 
   return (
-    <span className="space-y-2">
-      <label htmlFor={inputId} className="ds-label-02-reg">
+    <div className="space-y-8">
+      <label htmlFor={inputId} className="ds-label-01-reg block">
         {children}
+        {description && (
+          <span
+            className="ds-body-02-reg block text-gray-900"
+            id={descriptionId}
+          >
+            {description}
+          </span>
+        )}
       </label>
       <input
         {...field.getInputProps({
           id: inputId,
           type,
           "aria-describedby": [
-            error && errorId,
+            hasError && errorId,
             description && descriptionId,
           ].join(" "),
-          "aria-invalid": !!field.error(),
-          className: "ds-input placeholder-gray-600",
+          "aria-invalid": hasError || hasWarning,
+          className: twMerge(
+            "ds-input placeholder-gray-600",
+            hasError && "has-error",
+            hasWarning && "has-warning",
+          ),
           ...rest,
         })}
       />
-      {description && (
-        <p className="ds-label-03-reg inline-block" id={descriptionId}>
-          {description}
-        </p>
+
+      {(hasError || hasWarning) && (
+        <InputError
+          id={errorId}
+          look={warningInsteadOfError ? "warning" : "error"}
+        >
+          {error || field.error()}
+        </InputError>
       )}
-      {(error || field.error()) && (
-        <InputError id={errorId}>{error || field.error()}</InputError>
-      )}
-    </span>
+    </div>
   );
 }
 

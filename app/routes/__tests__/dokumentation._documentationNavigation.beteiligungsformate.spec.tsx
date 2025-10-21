@@ -56,7 +56,7 @@ describe("DocumentationParticipation", () => {
   });
 
   it("shows first textarea with expected label and description", () => {
-    const textareas = screen.getAllByLabelText("Antwort");
+    const textareas = screen.getAllByLabelText(/Antwort/);
     expect(textareas[0]).toBeInTheDocument();
     expect(textareas[0].tagName).toBe("TEXTAREA");
 
@@ -68,7 +68,7 @@ describe("DocumentationParticipation", () => {
   });
 
   it("shows second textarea with expected label and description", () => {
-    const textareas = screen.getAllByLabelText("Antwort");
+    const textareas = screen.getAllByLabelText(/Antwort/);
     expect(textareas[1]).toBeInTheDocument();
     expect(textareas[1].tagName).toBe("TEXTAREA");
 

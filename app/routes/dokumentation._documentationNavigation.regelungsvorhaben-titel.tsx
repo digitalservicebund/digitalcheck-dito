@@ -65,7 +65,7 @@ export default function DocumentationTitle() {
       />
       <form {...form.getFormProps()} className="space-y-80">
         <fieldset>
-          <InputNew scope={form.scope("title")}>
+          <InputNew scope={form.scope("title")} warningInsteadOfError>
             {info.inputTitle.label}
           </InputNew>
         </fieldset>

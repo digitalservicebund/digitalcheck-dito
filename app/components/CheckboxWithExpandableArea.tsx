@@ -15,6 +15,7 @@ interface CheckboxWithExpandableAreaProps extends BaseInputProps {
   closeable?: boolean;
   disabled?: boolean;
   error?: string | null;
+  warningInsteadOfError?: boolean;
   defaultValue?: "on";
 }
 
@@ -25,6 +26,7 @@ function CheckboxWithExpandableArea({
   description,
   disabled,
   error,
+  warningInsteadOfError,
   closeable = true,
   defaultValue,
   ...rest
@@ -51,6 +53,7 @@ function CheckboxWithExpandableArea({
         }
         error={error}
         defaultValue={defaultValue}
+        warningInsteadOfError={warningInsteadOfError}
         includeDisabledInForm
         {...rest}
       >
