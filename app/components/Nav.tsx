@@ -133,7 +133,7 @@ function NavItem({
           aria-current={activeElementUrl === url ? "page" : undefined}
           aria-disabled={disabled || activeElementUrl === url}
           className={twMerge(
-            "m-0 flex flex-row items-center gap-4 border-l-4 p-16 text-black",
+            "m-0 flex flex-row items-center gap-8 border-l-4 p-16 text-black",
             hasError
               ? "border-l-yellow-200 bg-yellow-200"
               : "border-l-blue-100",
@@ -179,7 +179,7 @@ function NavItem({
                     hoverClasses,
                   )}
                 >
-                  <span className="flex flex-row items-center gap-4">
+                  <span className="flex flex-row items-center gap-8">
                     {hasError && <WarningAmberOutlined className="shrink-0" />}
                     {children}
                   </span>

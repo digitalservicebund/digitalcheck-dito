@@ -129,6 +129,7 @@ export default function LayoutWithDocumentationNavigation() {
         key={route.url}
         url={route.url}
         error={formData && !valid.success}
+        completed={formData && valid.success}
       >
         {route.title}
       </Nav.Item>
