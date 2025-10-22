@@ -82,94 +82,121 @@ const createInfoBoxItem = ({
   className: "bg-white",
 });
 
-const renderAnswer = (
-  heading: string,
-  answers: { prefix: string; answer?: string }[],
-) => (
-  <div className="space-y-8">
-    <Heading tagName="h3" look="ds-subhead">
-      {heading}
-    </Heading>
-    {answers.map(({ answer, prefix }) => (
-      <p key={prefix + answer}>
-        <span className="font-bold">{prefix}</span>
-        <span>{answer}</span>
-      </p>
-    ))}
-  </div>
-);
+function Answer({
+  heading,
+  answers,
+}: {
+  heading: string;
+  answers: { prefix: string; answer?: string }[];
+}) {
+  return (
+    <div className="space-y-8">
+      <Heading tagName="h3" look="ds-subhead">
+        {heading}
+      </Heading>
+      {answers.map(({ answer, prefix }) => (
+        <p key={prefix + answer}>
+          <span className="font-bold">{prefix}</span>
+          <span>{answer}</span>
+        </p>
+      ))}
+    </div>
+  );
+}
 
-const renderPolicyTitle = (policyTitle?: PolicyTitle) => {
+function PolicyTitleContent({ policyTitle }: { policyTitle?: PolicyTitle }) {
   if (!policyTitle) {
     return null;
   }
-  return renderAnswer(digitalDocumentation.info.inputTitle.label, [
-    { prefix: summary.answerPrefix, answer: policyTitle.title },
-  ]);
-};
+  return (
+    <Answer
+      heading={digitalDocumentation.info.inputTitle.label}
+      answers={[{ prefix: summary.answerPrefix, answer: policyTitle.title }]}
+    />
+  );
+}
 
-const renderParticipation = (participation?: Participation) => {
+function ParticipationContent({
+  participation,
+}: {
+  participation?: Participation;
+}) {
   if (!participation) {
     return null;
   }
   return (
     <>
-      {renderAnswer(digitalDocumentation.participation.formats.heading, [
-        { prefix: summary.answerPrefix, answer: participation.formats },
-      ])}
-      {renderAnswer(digitalDocumentation.participation.results.heading, [
-        { prefix: summary.answerPrefix, answer: participation.results },
-      ])}
+      <Answer
+        heading={digitalDocumentation.participation.formats.heading}
+        answers={[
+          { prefix: summary.answerPrefix, answer: participation.formats },
+        ]}
+      />
+      <Answer
+        heading={digitalDocumentation.participation.results.heading}
+        answers={[
+          { prefix: summary.answerPrefix, answer: participation.results },
+        ]}
+      />
     </>
   );
-};
+}
 
-const renderPrinciple = (principle: Principle, prinzip: PrinzipWithAspekte) => {
+function PrincipleContent({
+  principle,
+  prinzip,
+}: {
+  principle: Principle;
+  prinzip: PrinzipWithAspekte;
+}) {
   return (
     <>
-      {renderAnswer(summary.principleAnswerTitle, [
-        { prefix: summary.answerPrefix, answer: principle.answer },
-      ])}
-      {isArray(principle.reasoning)
-        ? principle.reasoning
-            .filter((reasoning) => reasoning?.checkbox)
-            .map((reasoning) => {
-              const aspekt = prinzip.Aspekte.find(
-                (aspekt) => slugify(aspekt.Titel) === reasoning.aspect,
-              );
-              return (
-                <div
-                  key={principle.id + reasoning.aspect}
-                  className="space-y-8"
-                >
-                  {renderAnswer(
-                    `${
-                      aspekt
-                        ? aspekt.Kurzbezeichnung
-                        : digitalDocumentation.principlePages.explanationFields
-                            .ownExplanationTitle
-                    } 
-                    ${summary.explanationHeading}`,
-                    [
-                      {
-                        prefix: summary.paragraphsPrefix,
-                        answer: reasoning.paragraphs,
-                      },
-                      {
-                        prefix: summary.reasonPrefix,
-                        answer: reasoning.reason,
-                      },
-                    ],
-                  )}
-                </div>
-              );
-            })
-        : renderAnswer(summary.explanationHeading, [
+      <Answer
+        heading={summary.principleAnswerTitle}
+        answers={[{ prefix: summary.answerPrefix, answer: principle.answer }]}
+      />
+      {isArray(principle.reasoning) ? (
+        principle.reasoning
+          .filter((reasoning) => reasoning?.checkbox)
+          .map((reasoning) => {
+            const aspekt = prinzip.Aspekte.find(
+              (aspekt) => slugify(aspekt.Titel) === reasoning.aspect,
+            );
+            return (
+              <div key={principle.id + reasoning.aspect} className="space-y-8">
+                <Answer
+                  heading={`${
+                    aspekt
+                      ? aspekt.Kurzbezeichnung
+                      : digitalDocumentation.principlePages.explanationFields
+                          .ownExplanationTitle
+                  } 
+                    ${summary.explanationHeading}`}
+                  answers={[
+                    {
+                      prefix: summary.paragraphsPrefix,
+                      answer: reasoning.paragraphs,
+                    },
+                    {
+                      prefix: summary.reasonPrefix,
+                      answer: reasoning.reason,
+                    },
+                  ]}
+                />
+              </div>
+            );
+          })
+      ) : (
+        <Answer
+          heading={summary.explanationHeading}
+          answers={[
             { prefix: summary.answerPrefix, answer: principle.reasoning },
-          ])}
+          ]}
+        />
+      )}
     </>
   );
-};
+}
 
 export default function DocumentationSummary() {
   const { routes, previousUrl, nextUrl, prinzips } =
@@ -180,11 +207,15 @@ export default function DocumentationSummary() {
   const items: InfoBoxProps[] = [
     createInfoBoxItem({
       route: ROUTE_DOCUMENTATION_TITLE,
-      content: renderPolicyTitle(documentationData.policyTitle),
+      content: (
+        <PolicyTitleContent policyTitle={documentationData.policyTitle} />
+      ),
     }),
     createInfoBoxItem({
       route: ROUTE_DOCUMENTATION_PARTICIPATION,
-      content: renderParticipation(documentationData.participation),
+      content: (
+        <ParticipationContent participation={documentationData.participation} />
+      ),
     }),
     ...prinzips.map((prinzip) => {
       const principleRoute = routes
@@ -199,9 +230,9 @@ export default function DocumentationSummary() {
       );
       return createInfoBoxItem({
         route: principleRoute,
-        content: principleFormData
-          ? renderPrinciple(principleFormData, prinzip)
-          : null,
+        content: principleFormData ? (
+          <PrincipleContent principle={principleFormData} prinzip={prinzip} />
+        ) : null,
         badge: {
           text: summary.principleBadge,
           principleNumber: prinzip.Nummer,
