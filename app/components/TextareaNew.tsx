@@ -50,7 +50,7 @@ function TextareaNew({
           ].join(" "),
           "aria-invalid": hasError || hasWarning,
           className: twMerge(
-            "ds-textarea placeholder-gray-600",
+            "ds-textarea placeholder-gray-800",
             hasError && "has-error",
             hasWarning && "has-warning",
           ),

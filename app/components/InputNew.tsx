@@ -52,7 +52,7 @@ function InputNew({
           ].join(" "),
           "aria-invalid": hasError || hasWarning,
           className: twMerge(
-            "ds-input placeholder-gray-600",
+            "ds-input placeholder-gray-800",
             hasError && "has-error",
             hasWarning && "has-warning",
           ),

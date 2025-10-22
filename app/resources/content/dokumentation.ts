@@ -190,6 +190,10 @@ export const digitalDocumentation = {
         label: "Antwort",
         description:
           "Bitte listen Sie stichpunktartig auf, ob bzw. welche Schritte Sie unternommen haben.",
+        placeholder: dedent`
+          - Interviews mit Bürgerinnen und Bürgern
+          - ...
+        `,
         errorMessage: "Bitte geben Sie eine Antwort.",
       },
     },

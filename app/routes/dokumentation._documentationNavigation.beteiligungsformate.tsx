@@ -86,6 +86,7 @@ export default function DocumentationParticipation() {
           </legend>
           <TextareaNew
             description={participation.formats.textField.description}
+            placeholder={participation.formats.textField.placeholder}
             scope={form.scope("formats")}
             warningInsteadOfError
           >
