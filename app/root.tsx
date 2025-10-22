@@ -34,7 +34,7 @@ import trackClientSideError from "~/utils/trackClientSideError";
 import type { Route } from "./+types/root";
 import { PHProvider } from "./providers/PosthogProvider";
 import { genericError, notFoundError } from "./resources/content/error";
-import { ZFL_PREFIX } from "./routes";
+import { ZFL_ROUTE_PREFIX } from "./zfl/constants";
 
 export function loader({ request }: Route.LoaderArgs) {
   const featureFlags = getFeatureFlags();
@@ -141,7 +141,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
   const { trackingEnabled, posthogEnabled, posthogKey } = rootLoaderData ?? {};
   const location = useLocation();
 
-  const isZFLPage = location.pathname.startsWith(`/${ZFL_PREFIX}`);
+  const isZFLPage = location.pathname.startsWith(`/${ZFL_ROUTE_PREFIX}`);
 
   let metaProperties = <></>;
   if (!error && rootLoaderData) {
