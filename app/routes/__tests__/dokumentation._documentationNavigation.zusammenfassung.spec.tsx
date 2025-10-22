@@ -18,14 +18,13 @@ import DocumentationSummary from "~/routes/dokumentation._documentationNavigatio
 import { useDocumentationData } from "~/routes/dokumentation/documentationDataHook";
 import type { DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
 
+const MOCK_ROUTE_PRINCIPLE = {
+  title: "Prinzip: Digitale Angebote",
+  url: "/dokumentation/prinzip-digitale-angebote",
+};
 const routes: (Route[] | Route)[] = [
   ...ROUTES_DOCUMENTATION_PRE,
-  [
-    {
-      title: "Prinzip: Digitale Angebote",
-      url: "/dokumentation/prinzip-digitale-angebote",
-    },
-  ],
+  [MOCK_ROUTE_PRINCIPLE],
 ];
 
 const mockedUseOutletContext = vi.mocked(useOutletContext);
@@ -45,7 +44,7 @@ describe("DocumentationSummary", () => {
     policyTitle: { title: "Titel des Vorhabens" },
     participation: {
       formats: "Format 1",
-      results: "Online-Konsultation",
+      results: "Auswirkung auf die Regelung",
     },
   };
 
@@ -124,14 +123,31 @@ describe("DocumentationSummary", () => {
     });
   });
 
+  it("shows principle badges only for principle steps with correct color", () => {
+    renderWithRouter();
+
+    routes.flat().forEach((route) => {
+      const stepContainer = screen.getByTestId(route.url);
+      const isPrincipleRoute = route === MOCK_ROUTE_PRINCIPLE;
+
+      if (isPrincipleRoute) {
+        const badge = within(stepContainer).getByRole("mark");
+        expect(badge.textContent).toContain("Prinzip");
+        expect(badge.className).toContain("bg-principle-1");
+      } else {
+        const badge = within(stepContainer).queryByRole("mark");
+        expect(badge).toBeNull();
+      }
+    });
+  });
+
   it("displays documentation data when available", () => {
     renderWithRouter();
 
     expect(screen.getByText("Titel des Vorhabens")).toBeInTheDocument();
 
-    // Check data for beteiligungsformate
     expect(screen.getByText("Format 1")).toBeInTheDocument();
-    expect(screen.getByText("Online-Konsultation")).toBeInTheDocument();
+    expect(screen.getByText("Auswirkung auf die Regelung")).toBeInTheDocument();
   });
 
   it("shows correct content and buttons for steps with data", () => {
