@@ -325,7 +325,7 @@ export default function DocumentationPrinciple() {
   useEffect(() => {
     const unsubscribe = form.subscribe.value("answer", (answer) => {
       if (answer !== principlePages.radioOptions[0]) {
-        form.setValue("reasoning", undefined);
+        form.setValue("reasoning", "");
         return;
       }
 
