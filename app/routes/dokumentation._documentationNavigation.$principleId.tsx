@@ -23,6 +23,8 @@ import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
 import {
   defaultPrincipleValues,
+  IrrelevantAnswerReasoning,
+  NegativeAnswerReasoning,
   principleSchema,
   type PrincipleReasoning,
 } from "~/routes/dokumentation/documentationDataSchema";
@@ -282,6 +284,66 @@ function PositiveAnswerFormElements({
   );
 }
 
+type NegativeAnswerFormElementProps = {
+  scope: FormScope<NegativeAnswerReasoning>;
+};
+
+function NegativeAnswerFormElements({
+  scope,
+}: Readonly<NegativeAnswerFormElementProps>) {
+  return (
+    <fieldset className="space-y-40">
+      <legend className="space-y-8">
+        <Heading tagName="h2">{principlePages.negativePrinciple.title}</Heading>
+        <RichText
+          markdown={principlePages.negativePrinciple.description}
+          className="space-y-24"
+        />
+      </legend>
+
+      <TextareaNew
+        scope={scope}
+        placeholder={principlePages.negativePrinciple.placeholder}
+        rows={5}
+        warningInsteadOfError
+      >
+        {principlePages.negativePrinciple.label}
+      </TextareaNew>
+    </fieldset>
+  );
+}
+
+type IrrelevantAnswerFormElementProps = {
+  scope: FormScope<IrrelevantAnswerReasoning>;
+};
+
+function IrrelevantAnswerFormElements({
+  scope,
+}: Readonly<IrrelevantAnswerFormElementProps>) {
+  return (
+    <fieldset className="space-y-40">
+      <legend className="space-y-8">
+        <Heading tagName="h2">
+          {principlePages.irrelevantPrinciple.title}
+        </Heading>
+        <RichText
+          markdown={principlePages.irrelevantPrinciple.description}
+          className="space-y-24"
+        />
+      </legend>
+
+      <TextareaNew
+        scope={scope}
+        placeholder={principlePages.irrelevantPrinciple.placeholder}
+        rows={5}
+        warningInsteadOfError
+      >
+        {principlePages.irrelevantPrinciple.label}
+      </TextareaNew>
+    </fieldset>
+  );
+}
+
 export default function DocumentationPrinciple() {
   const { principleId } = useLoaderData<typeof loader>();
   const navigate = useNavigate();
@@ -325,7 +387,7 @@ export default function DocumentationPrinciple() {
   useEffect(() => {
     const unsubscribe = form.subscribe.value("answer", (answer) => {
       if (answer !== principlePages.radioOptions[0]) {
-        form.setValue("reasoning", undefined);
+        form.setValue("reasoning", "");
         return;
       }
 
@@ -415,6 +477,22 @@ export default function DocumentationPrinciple() {
             <PositiveAnswerFormElements
               scope={form.scope("reasoning") as FormScope<PrincipleReasoning[]>}
               prinzip={prinzip}
+            />
+          )}
+
+          {form.field("answer").value() === principlePages.radioOptions[1] && (
+            <NegativeAnswerFormElements
+              scope={
+                form.scope("reasoning") as FormScope<NegativeAnswerReasoning>
+              }
+            />
+          )}
+
+          {form.field("answer").value() === principlePages.radioOptions[2] && (
+            <IrrelevantAnswerFormElements
+              scope={
+                form.scope("reasoning") as FormScope<IrrelevantAnswerReasoning>
+              }
             />
           )}
 

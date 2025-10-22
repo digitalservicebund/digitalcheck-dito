@@ -59,12 +59,12 @@ const principlePositiveAnswerSchema = z.object({
 
 const principleNegativeAnswerSchema = z.object({
   answer: z.literal(principlePages.radioOptions[1]),
-  reasoning: z.literal(undefined),
+  reasoning: z.string().min(1, { message: principlePages.errors.reasonError }),
 });
 
 const principleIrrelevantAnswerSchema = z.object({
   answer: z.literal(principlePages.radioOptions[2]),
-  reasoning: z.literal(undefined),
+  reasoning: z.string().min(1, { message: principlePages.errors.reasonError }),
 });
 
 export const principleSchema = z
@@ -95,7 +95,7 @@ export const defaultParticipationValues: Participation = {
 export const defaultPrincipleValues: Principle = {
   id: "",
   answer: "",
-  reasoning: undefined,
+  reasoning: "",
 };
 
 export const defaultValues: Omit<DocumentationData, "version"> = {
@@ -118,6 +118,12 @@ export const documentationSchema = z.object({
 });
 
 export type PrincipleReasoning = z.infer<typeof principleReasoningSchema>;
+export type NegativeAnswerReasoning = z.infer<
+  typeof principleNegativeAnswerSchema
+>["reasoning"];
+export type IrrelevantAnswerReasoning = z.infer<
+  typeof principleIrrelevantAnswerSchema
+>["reasoning"];
 export type Principle = z.infer<typeof principleSchema>;
 export type PolicyTitle = z.infer<typeof policyTitleSchema>;
 export type Participation = z.infer<typeof participationSchema>;

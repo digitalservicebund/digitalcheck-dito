@@ -250,6 +250,26 @@ export const digitalDocumentation = {
         },
       },
     },
+    negativePrinciple: {
+      title: "Erläuterung angeben",
+      description: dedent`
+        Bitte erläutern Sie, warum das Prinzip “Digitale Angebote für alle nutzbar gestalten” **nicht** auf Ihr Vorhaben zutrifft.
+
+        Sie können Ihre Angaben als Word Dokument exportieren und später in der Word Datei Ihre Dokumentation fortführen.`,
+      label: "Begründung",
+      placeholder:
+        "Begründung warum das Prinzip nicht auf Ihr Regelungsvorhaben zutrifft.",
+    },
+    irrelevantPrinciple: {
+      title: "Erläuterung angeben",
+      description: dedent`
+        Bitte erläutern Sie, warum das Prinzip “Digitale Angebote für alle nutzbar gestalten” **nicht relevant** für Ihr Vorhaben ist.
+
+        Sie können Ihre Angaben als Word Dokument exportieren und später in der Word Datei Ihre Dokumentation fortführen.`,
+      label: "Begründung",
+      placeholder:
+        "Begründung warum das Prinzip nicht relevant für Ihr Regelungsvorhaben ist.",
+    },
     storageHint: {
       title: "Ihre eingegebenen Angaben werden in der Session gespeichert.",
       content:

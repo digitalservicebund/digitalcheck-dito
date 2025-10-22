@@ -7,6 +7,7 @@ import {
   Participation,
   PolicyTitle,
   Principle,
+  PrincipleReasoning,
 } from "./documentationDataSchema";
 import {
   getDocumentationData,
@@ -36,17 +37,21 @@ export const useDocumentationData = () => {
 
     if (!principleData) return undefined;
 
-    const reasoning = principleData.reasoning?.filter(
-      (r) => r?.checkbox !== undefined,
-    );
+    let reasoning: string | PrincipleReasoning[];
+
+    if (Array.isArray(principleData.reasoning)) {
+      reasoning = principleData.reasoning?.filter(
+        (r): r is PrincipleReasoning =>
+          r !== undefined && r.checkbox !== undefined,
+      );
+    } else {
+      reasoning = principleData.reasoning || "";
+    }
 
     return {
       ...principleData,
-      reasoning: reasoning
-        ? reasoning.length > 0
-          ? reasoning
-          : undefined
-        : undefined,
+      // @ts-expect-error somehow ts does not pic up the correct type
+      reasoning,
     };
   };
 
