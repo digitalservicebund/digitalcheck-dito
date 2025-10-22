@@ -323,6 +323,10 @@ export const digitalDocumentation = {
     principleBadge: "Prinzip",
     principleAnswerTitle:
       "Lässt sich das Vorhaben im Sinne des Prinzips umsetzen?",
+    answerPrefix: "Antwort: ",
+    paragraphsPrefix: "Paragrafen: ",
+    reasonPrefix: "Begründung: ",
+    explanationHeading: "Erläuterung",
   },
   finish: {
     heading: {

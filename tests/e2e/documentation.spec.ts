@@ -7,7 +7,7 @@ import {
   ROUTE_DOCUMENTATION_TITLE,
 } from "~/resources/staticRoutes";
 
-const { introduction, principle } = documentationDocument;
+const { introduction } = documentationDocument;
 
 test.describe("documentation absenden page", () => {
   test("downloading filled documentation works", async ({ page }, testInfo) => {

@@ -156,9 +156,12 @@ export const principleElement = (
   ...principle.Aspekte.flatMap((aspect) =>
     aspectElement(
       aspect,
-      principleAnswer?.reasoning?.find(
-        (reasoning) => reasoning?.aspect === slugify(aspect.Kurzbezeichnung),
-      ),
+      Array.isArray(principleAnswer?.reasoning)
+        ? principleAnswer.reasoning.find(
+            (reasoning) =>
+              reasoning?.aspect === slugify(aspect.Kurzbezeichnung),
+          )
+        : undefined,
     ),
   ),
 ];

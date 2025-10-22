@@ -1,5 +1,7 @@
+import { isArray } from "@posthog/core";
 import { type ReactNode } from "react";
 import { Link, useOutletContext } from "react-router";
+import type { BadgeProps } from "~/components/Badge";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
@@ -18,6 +20,8 @@ import type {
   PolicyTitle,
   Principle,
 } from "~/routes/dokumentation/documentationDataSchema";
+import type { PrinzipWithAspekte } from "~/utils/strapiData.server";
+import { slugify } from "~/utils/utilFunctions";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useDocumentationData } from "./dokumentation/documentationDataHook";
@@ -27,20 +31,25 @@ const { summary } = digitalDocumentation;
 const createInfoBoxItem = ({
   route,
   content,
+  badge,
 }: {
   route: Route;
   content?: ReactNode;
+  badge?: BadgeProps;
 }): InfoBoxProps => ({
   identifier: route.url,
   testId: route.url,
   heading: {
     text: route.title,
+    tagName: "h2",
+    look: "ds-heading-03-reg",
   },
+  badge: badge,
   children: (
-    <div>
+    <div className="mt-24">
       {content ? (
-        <div className="space-y-8">
-          <div className="space-y-28">{content}</div>
+        <div className="space-y-24">
+          {content}
           <Link
             to={route.url}
             className="text-link"
@@ -73,10 +82,20 @@ const createInfoBoxItem = ({
   className: "bg-white",
 });
 
-const renderKeyValue = (key: string, value: string) => (
-  <div>
-    <span className="block font-bold">{key}</span>
-    <span className="block">{value}</span>
+const renderAnswer = (
+  heading: string,
+  answers: { prefix: string; answer?: string }[],
+) => (
+  <div className="space-y-8">
+    <Heading tagName="h3" look="ds-subhead">
+      {heading}
+    </Heading>
+    {answers.map(({ answer, prefix }) => (
+      <p key={prefix + answer}>
+        <span className="font-bold">{prefix}</span>
+        <span>{answer}</span>
+      </p>
+    ))}
   </div>
 );
 
@@ -84,10 +103,9 @@ const renderPolicyTitle = (policyTitle?: PolicyTitle) => {
   if (!policyTitle) {
     return null;
   }
-  return renderKeyValue(
-    digitalDocumentation.info.inputTitle.label,
-    policyTitle.title,
-  );
+  return renderAnswer(digitalDocumentation.info.inputTitle.label, [
+    { prefix: summary.answerPrefix, answer: policyTitle.title },
+  ]);
 };
 
 const renderParticipation = (participation?: Participation) => {
@@ -96,25 +114,60 @@ const renderParticipation = (participation?: Participation) => {
   }
   return (
     <>
-      {renderKeyValue(
-        digitalDocumentation.participation.formats.heading,
-        participation.formats,
-      )}
-      {renderKeyValue(
-        digitalDocumentation.participation.results.heading,
-        participation.results,
-      )}
+      {renderAnswer(digitalDocumentation.participation.formats.heading, [
+        { prefix: summary.answerPrefix, answer: participation.formats },
+      ])}
+      {renderAnswer(digitalDocumentation.participation.results.heading, [
+        { prefix: summary.answerPrefix, answer: participation.results },
+      ])}
     </>
   );
 };
 
-const renderPrinciple = (principle?: Principle) => {
-  if (!principle) {
-    return null;
-  }
+const renderPrinciple = (principle: Principle, prinzip: PrinzipWithAspekte) => {
   return (
-    // TODO render aspects and paragraphs
-    <>{renderKeyValue(summary.principleAnswerTitle, principle.answer)}</>
+    <>
+      {renderAnswer(summary.principleAnswerTitle, [
+        { prefix: summary.answerPrefix, answer: principle.answer },
+      ])}
+      {isArray(principle.reasoning)
+        ? principle.reasoning
+            .filter((reasoning) => reasoning?.checkbox)
+            .map((reasoning) => {
+              const aspekt = prinzip.Aspekte.find(
+                (aspekt) => slugify(aspekt.Titel) === reasoning.aspect,
+              );
+              return (
+                <div
+                  key={principle.id + reasoning.aspect}
+                  className="space-y-8"
+                >
+                  {renderAnswer(
+                    `${
+                      aspekt
+                        ? aspekt.Kurzbezeichnung
+                        : digitalDocumentation.principlePages.explanationFields
+                            .ownExplanationTitle
+                    } 
+                    ${summary.explanationHeading}`,
+                    [
+                      {
+                        prefix: summary.paragraphsPrefix,
+                        answer: reasoning.paragraphs,
+                      },
+                      {
+                        prefix: summary.reasonPrefix,
+                        answer: reasoning.reason,
+                      },
+                    ],
+                  )}
+                </div>
+              );
+            })
+        : renderAnswer(summary.explanationHeading, [
+            { prefix: summary.answerPrefix, answer: principle.reasoning },
+          ])}
+    </>
   );
 };
 
@@ -133,20 +186,26 @@ export default function DocumentationSummary() {
       route: ROUTE_DOCUMENTATION_PARTICIPATION,
       content: renderParticipation(documentationData.participation),
     }),
-    ...prinzips.map((principleContent) => {
+    ...prinzips.map((prinzip) => {
       const principleRoute = routes
         .flat()
-        .find((route) => route.url.endsWith(principleContent.URLBezeichnung));
+        .find((route) => route.url.endsWith(prinzip.URLBezeichnung));
       if (!principleRoute)
         throw new Error(
-          `Cannot find route for principle ${principleContent.URLBezeichnung}`,
+          `Cannot find route for principle ${prinzip.URLBezeichnung}`,
         );
       const principleFormData = documentationData.principles?.find(
-        (docPrinciple) => docPrinciple.id === principleContent.documentId,
+        (principle) => principle.id === prinzip.documentId,
       );
       return createInfoBoxItem({
         route: principleRoute,
-        content: renderPrinciple(principleFormData),
+        content: principleFormData
+          ? renderPrinciple(principleFormData, prinzip)
+          : null,
+        badge: {
+          text: summary.principleBadge,
+          principleNumber: prinzip.Nummer,
+        },
       });
     }),
   ];

@@ -116,7 +116,7 @@ describe("documentationDataService", () => {
         },
         principles: [
           { id: "principle1", answer: "Ja", reasoning: [] },
-          { id: "principle2", answer: "Nein", reasoning: undefined },
+          { id: "principle2", answer: "Nein", reasoning: "" },
         ],
       };
 
@@ -262,7 +262,7 @@ describe("documentationDataService", () => {
       addOrUpdatePrinciple({
         id: "principle1",
         answer: "Nein",
-        reasoning: undefined,
+        reasoning: "",
       });
 
       expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
@@ -273,7 +273,7 @@ describe("documentationDataService", () => {
             {
               id: "principle1",
               answer: "Nein",
-              reasoning: undefined,
+              reasoning: "",
             },
           ],
         },
@@ -297,7 +297,7 @@ describe("documentationDataService", () => {
       addOrUpdatePrinciple({
         id: "principle2",
         answer: "Nein",
-        reasoning: undefined,
+        reasoning: "",
       });
 
       expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
@@ -312,7 +312,7 @@ describe("documentationDataService", () => {
             {
               id: "principle2",
               answer: "Nein",
-              reasoning: undefined,
+              reasoning: "",
             },
           ],
         },
@@ -332,7 +332,7 @@ describe("documentationDataService", () => {
           {
             id: "principle2",
             answer: "Nein",
-            reasoning: undefined,
+            reasoning: "",
           },
         ],
       };
@@ -341,7 +341,7 @@ describe("documentationDataService", () => {
       addOrUpdatePrinciple({
         id: "principle1",
         answer: "Nicht relevant",
-        reasoning: undefined,
+        reasoning: "",
       });
 
       expect(mockWriteToLocalStorage).toHaveBeenCalledWith(
@@ -351,12 +351,12 @@ describe("documentationDataService", () => {
             {
               id: "principle1",
               answer: "Nicht relevant",
-              reasoning: undefined,
+              reasoning: "",
             },
             {
               id: "principle2",
               answer: "Nein",
-              reasoning: undefined,
+              reasoning: "",
             },
           ],
         },

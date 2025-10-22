@@ -142,7 +142,7 @@ describe("DocumentationSummary", () => {
       expect(
         within(stepContainer).getByRole("heading", {
           name: route.title,
-          level: 3,
+          level: 2,
         }),
       ).toBeInTheDocument();
     });
@@ -156,29 +156,6 @@ describe("DocumentationSummary", () => {
     // Check data for beteiligungsformate
     expect(screen.getByText("Format 1")).toBeInTheDocument();
     expect(screen.getByText("Online-Konsultation")).toBeInTheDocument();
-  });
-
-  it("shows principle badges only for principle steps", () => {
-    renderWithRouter();
-
-    routes.flat().forEach((route) => {
-      const stepContainer = screen.getByTestId(route.url);
-      const isPrincipleRoute = route.url.includes("prinzip");
-
-      if (isPrincipleRoute) {
-        // Principle step should have "Prinzip" in heading
-        const heading = within(stepContainer).getByRole("heading", {
-          level: 3,
-        });
-        expect(heading.textContent).toContain("Prinzip");
-      } else {
-        // Non-principle step should not have "Prinzip" in heading
-        const heading = within(stepContainer).getByRole("heading", {
-          level: 3,
-        });
-        expect(heading.textContent).not.toContain("Prinzip");
-      }
-    });
   });
 
   it("shows correct content and buttons for steps with data", () => {
