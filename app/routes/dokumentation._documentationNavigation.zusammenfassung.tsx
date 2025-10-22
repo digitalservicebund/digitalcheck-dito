@@ -59,10 +59,7 @@ const createInfoBoxItem = ({
           </Link>
         </div>
       ) : (
-        <Warning
-          heading={"Sie haben diesen Punkt noch nicht bearbeitet."}
-          route={route}
-        />
+        <Warning heading={summary.warnings.missing} route={route} />
       )}
     </div>
   ),
@@ -87,21 +84,32 @@ function Warning({ heading, route }: { heading: string; route: Route }) {
 function Answer({
   heading,
   answers,
+  route,
 }: {
   heading: string;
   answers: { prefix: string; answer?: string }[];
+  route: Route;
 }) {
   return (
     <div className="space-y-8">
       <Heading tagName="h3" look="ds-subhead">
         {heading}
       </Heading>
-      {answers.map(({ answer, prefix }) => (
-        <p key={prefix + answer}>
-          <span className="font-bold">{prefix}</span>
-          <span>{answer}</span>
-        </p>
-      ))}
+      {answers
+        .filter(({ answer }) => answer)
+        .map(({ answer, prefix }) => (
+          <p key={prefix + answer}>
+            <span className="font-bold">{prefix}: </span>
+            <span>{answer}</span>
+          </p>
+        ))}
+      {answers.some(({ answer }) => !answer) && (
+        <Warning
+          key={heading}
+          heading={summary.warnings.incomplete}
+          route={route}
+        />
+      )}
     </div>
   );
 }
@@ -111,6 +119,7 @@ function PolicyTitleContent({ policyTitle }: { policyTitle: PolicyTitle }) {
     <Answer
       heading={digitalDocumentation.info.inputTitle.label}
       answers={[{ prefix: summary.answerPrefix, answer: policyTitle.title }]}
+      route={ROUTE_DOCUMENTATION_TITLE}
     />
   );
 }
@@ -127,12 +136,14 @@ function ParticipationContent({
         answers={[
           { prefix: summary.answerPrefix, answer: participation.formats },
         ]}
+        route={ROUTE_DOCUMENTATION_PARTICIPATION}
       />
       <Answer
         heading={digitalDocumentation.participation.results.heading}
         answers={[
           { prefix: summary.answerPrefix, answer: participation.results },
         ]}
+        route={ROUTE_DOCUMENTATION_PARTICIPATION}
       />
     </>
   );
@@ -141,22 +152,25 @@ function ParticipationContent({
 function PrincipleContent({
   principle,
   prinzip,
+  route,
 }: {
   principle: Principle;
   prinzip: PrinzipWithAspekte;
+  route: Route;
 }) {
   return (
     <>
       <Answer
         heading={summary.principleAnswerTitle}
         answers={[{ prefix: summary.answerPrefix, answer: principle.answer }]}
+        route={route}
       />
       {isArray(principle.reasoning) ? (
         principle.reasoning
           .filter((reasoning) => reasoning?.checkbox)
           .map((reasoning) => {
             const aspekt = prinzip.Aspekte.find(
-              (aspekt) => slugify(aspekt.Titel) === reasoning.aspect,
+              (aspekt) => slugify(aspekt.Kurzbezeichnung) === reasoning.aspect,
             );
             return (
               <div key={principle.id + reasoning.aspect} className="space-y-8">
@@ -178,16 +192,18 @@ function PrincipleContent({
                       answer: reasoning.reason,
                     },
                   ]}
+                  route={route}
                 />
               </div>
             );
           })
       ) : (
         <Answer
-          heading={summary.explanationHeading}
+          heading={summary.reasonPrefix}
           answers={[
             { prefix: summary.answerPrefix, answer: principle.reasoning },
           ]}
+          route={route}
         />
       )}
     </>
@@ -232,7 +248,11 @@ export default function DocumentationSummary() {
       return createInfoBoxItem({
         route: principleRoute,
         content: principleFormData ? (
-          <PrincipleContent principle={principleFormData} prinzip={prinzip} />
+          <PrincipleContent
+            principle={principleFormData}
+            prinzip={prinzip}
+            route={principleRoute}
+          />
         ) : null,
         badge: {
           text: summary.principleBadge,

@@ -323,10 +323,14 @@ export const digitalDocumentation = {
     principleBadge: "Prinzip",
     principleAnswerTitle:
       "Lässt sich das Vorhaben im Sinne des Prinzips umsetzen?",
-    answerPrefix: "Antwort: ",
-    paragraphsPrefix: "Paragrafen: ",
-    reasonPrefix: "Begründung: ",
+    answerPrefix: "Antwort",
+    paragraphsPrefix: "Paragrafen",
+    reasonPrefix: "Begründung",
     explanationHeading: "Erläuterung",
+    warnings: {
+      missing: "Sie haben diesen Punkt noch nicht bearbeitet.",
+      incomplete: "Sie haben diesen Punkt noch nicht vollständig bearbeitet.",
+    },
   },
   finish: {
     heading: {
