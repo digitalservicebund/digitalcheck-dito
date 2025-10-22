@@ -3,7 +3,7 @@ import ContactSupportOutlinedIcon from "@digitalservicebund/icons/ContactSupport
 import InfoOutlinedIcon from "@digitalservicebund/icons/InfoOutlined";
 import LightbulbOutlinedIcon from "@digitalservicebund/icons/LightbulbOutlined";
 import WarningAmberIcon from "@digitalservicebund/icons/WarningAmber";
-import React from "react";
+import React, { ComponentProps } from "react";
 import { twJoin } from "tailwind-merge";
 
 // We can't set border-[${borderColor}] in the template because it causes inconsistent behavior in Storybook.
@@ -36,7 +36,7 @@ const lookConfig = {
   },
 };
 
-type InlineNoticeProps = {
+type InlineNoticeProps = ComponentProps<"div"> & {
   identifier?: string;
   look: keyof typeof lookConfig;
   showIcon?: boolean;
@@ -52,11 +52,13 @@ const InlineNotice = ({
   showIcon = true,
   children,
   heading,
+  ...rest
 }: InlineNoticeProps) => {
   const { backgroundColor, borderColor, IconComponent } = lookConfig[look];
 
   return (
     <div
+      {...rest}
       className={twJoin(
         "max-w-a11y scroll-my-40 space-y-8 p-16",
         backgroundColor,

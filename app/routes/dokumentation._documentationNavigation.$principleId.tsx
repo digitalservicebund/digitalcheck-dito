@@ -196,57 +196,67 @@ function PositiveAnswerFormElements({
   );
 
   return (
-    <>
-      <div className="space-y-8">
+    <fieldset className="space-y-40">
+      <legend className="space-y-8">
         <Heading tagName="h2">{principlePages.positivePrinciple.title}</Heading>
         <RichText
           markdown={principlePages.positivePrinciple.description}
           className="space-y-24"
         />
-      </div>
+      </legend>
 
       {reasoningField.error() && (
-        <InlineNotice look="warning" heading={reasoningField.error()} />
+        <InlineNotice
+          role="alert"
+          look="warning"
+          heading={reasoningField.error()}
+        />
       )}
 
-      {reasoningField.map((key, item, i) => {
-        const aspekt = prinzip.Aspekte[i];
+      <div
+        className="space-y-40"
+        aria-live="polite"
+        aria-relevant="additions removals"
+      >
+        {reasoningField.map((key, item, i) => {
+          const aspekt = prinzip.Aspekte[i];
 
-        const label = aspekt?.Titel
-          ? aspekt.Kurzbezeichnung
-          : principlePages.explanationFields.ownExplanationTitle;
+          const label = aspekt?.Titel
+            ? aspekt.Kurzbezeichnung
+            : principlePages.explanationFields.ownExplanationTitle;
 
-        const description = aspekt
-          ? aspekt.Titel
-          : principlePages.explanationFields.ownExplanationDescription;
+          const description = aspekt
+            ? aspekt.Titel
+            : principlePages.explanationFields.ownExplanationDescription;
 
-        const detailDescription = aspekt
-          ? aspekt.Beschreibung
-          : principlePages.explanationFields.ownExplanationDescription;
+          const detailDescription = aspekt
+            ? aspekt.Beschreibung
+            : principlePages.explanationFields.ownExplanationDescription;
 
-        const moreUrl = aspekt
-          ? `${ROUTE_METHODS_PRINCIPLES.url}#${slugify(aspekt.Titel)}`
-          : undefined;
+          const moreUrl = aspekt
+            ? `${ROUTE_METHODS_PRINCIPLES.url}#${slugify(aspekt.Titel)}`
+            : undefined;
 
-        return (
-          <Reasoning
-            key={key}
-            label={label}
-            description={description}
-            detailDescription={detailDescription}
-            aspectScope={item.scope("aspect")}
-            checkboxScope={item.scope("checkbox")}
-            paragraphScope={item.scope("paragraphs")}
-            reasonScope={item.scope("reason")}
-            removeOwnReasoning={() => remove(i, aspekt)}
-            moreUrl={moreUrl}
-            defaultValue={aspekt ? undefined : "on"}
-            error={
-              reasoningField.error() ? principlePages.errors.errorHint : null
-            }
-          />
-        );
-      })}
+          return (
+            <Reasoning
+              key={key}
+              label={label}
+              description={description}
+              detailDescription={detailDescription}
+              aspectScope={item.scope("aspect")}
+              checkboxScope={item.scope("checkbox")}
+              paragraphScope={item.scope("paragraphs")}
+              reasonScope={item.scope("reason")}
+              removeOwnReasoning={() => remove(i, aspekt)}
+              moreUrl={moreUrl}
+              defaultValue={aspekt ? undefined : "on"}
+              error={
+                reasoningField.error() ? principlePages.errors.errorHint : null
+              }
+            />
+          );
+        })}
+      </div>
 
       <div className="flex flex-col gap-32 xl:flex-row xl:gap-40">
         <Button
@@ -268,7 +278,7 @@ function PositiveAnswerFormElements({
           {principlePages.positivePrinciple.actions.saveState.title}
         </Button>
       </div>
-    </>
+    </fieldset>
   );
 }
 

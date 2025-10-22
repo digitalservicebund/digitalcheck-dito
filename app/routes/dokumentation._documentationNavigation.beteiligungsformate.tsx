@@ -71,16 +71,19 @@ export default function DocumentationParticipation() {
         className="mb-16"
       />
       <RichText markdown={participation.textIntro} className="gap-40" />
-      <InfoBox
-        heading={{
-          tagName: "h2",
-          look: "ds-heading-03-reg",
-          text: participation.formats.heading,
-        }}
-        content={participation.formats.content}
-      />
-      <form {...form.getFormProps()}>
-        <fieldset className="mb-40">
+
+      <form className="space-y-40" {...form.getFormProps()}>
+        <fieldset className="space-y-16">
+          <legend>
+            <InfoBox
+              heading={{
+                tagName: "h2",
+                look: "ds-heading-03-reg",
+                text: participation.formats.heading,
+              }}
+              content={participation.formats.content}
+            />
+          </legend>
           <TextareaNew
             description={participation.formats.textField.description}
             scope={form.scope("formats")}
@@ -89,14 +92,16 @@ export default function DocumentationParticipation() {
             {participation.formats.textField.label}
           </TextareaNew>
         </fieldset>
-        {/*TODO: Do not place text inside a form (a11y)*/}
-        <Heading
-          tagName="h2"
-          look="ds-heading-03-reg"
-          text={participation.results.heading}
-          className="mb-16"
-        />
+
         <fieldset>
+          <legend>
+            <Heading
+              tagName="h2"
+              look="ds-heading-03-reg"
+              text={participation.results.heading}
+              className="mb-16"
+            />
+          </legend>
           <TextareaNew
             description={participation.results.textField.description}
             scope={form.scope("results")}

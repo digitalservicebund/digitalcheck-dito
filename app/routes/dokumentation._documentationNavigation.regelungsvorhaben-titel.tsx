@@ -64,11 +64,9 @@ export default function DocumentationTitle() {
         className="mb-40"
       />
       <form {...form.getFormProps()} className="space-y-80">
-        <fieldset>
-          <InputNew scope={form.scope("title")} warningInsteadOfError>
-            {info.inputTitle.label}
-          </InputNew>
-        </fieldset>
+        <InputNew scope={form.scope("title")} warningInsteadOfError>
+          {info.inputTitle.label}
+        </InputNew>
 
         <DocumentationActions previousUrl={previousUrl} submit />
       </form>
