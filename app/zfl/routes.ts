@@ -1,12 +1,13 @@
 export const ROUTE_ZFL_LANDING = {
-  url: "/zfl",
+  path: "zfl",
   title: "Zentrum für Legistik",
+  href: "/zfl",
 };
 
 const createRoute = (path: string, title: string) => ({
   path,
   title,
-  href: `${ROUTE_ZFL_LANDING.url}/${path}`,
+  href: `${ROUTE_ZFL_LANDING.href}/${path}`,
 });
 
 export const ROUTE_ZFL_TASK_FORCES = createRoute("task-forces", "Task Forces");

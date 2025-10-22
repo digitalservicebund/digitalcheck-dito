@@ -40,7 +40,7 @@ const PageHeader = () => {
       <div className="relative z-30 flex h-[72px] justify-between border-b-2 border-blue-300 bg-white pl-16 md:px-16">
         {/* Logo and title */}
         <Link
-          to={ROUTE_ZFL_LANDING.url}
+          to={ROUTE_ZFL_LANDING.href}
           className="flex items-center space-x-8"
         >
           <img src="/logo/bund-logo.png" alt="Logo des Bundes" width={54} />
