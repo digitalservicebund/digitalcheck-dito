@@ -15,10 +15,10 @@ import {
   ROUTE_DOCUMENTATION_SUMMARY,
   ROUTE_DOCUMENTATION_TITLE,
 } from "~/resources/staticRoutes";
-import type {
-  Participation,
-  PolicyTitle,
-  Principle,
+import {
+  type Participation,
+  type PolicyTitle,
+  type Principle,
 } from "~/routes/dokumentation/documentationDataSchema";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
@@ -59,28 +59,30 @@ const createInfoBoxItem = ({
           </Link>
         </div>
       ) : (
-        <InlineNotice
-          look="warning"
-          heading={
-            <Heading tagName="h4">
-              Sie haben diesen Punkt noch nicht bearbeitet.
-            </Heading>
-          }
-        >
-          <Link
-            to={route.url}
-            className="text-link"
-            aria-label={`${route.title} ${summary.buttonEditNow.ariaLabelSuffix}`}
-          >
-            {summary.buttonEditNow.text}
-          </Link>
-        </InlineNotice>
+        <Warning
+          heading={"Sie haben diesen Punkt noch nicht bearbeitet."}
+          route={route}
+        />
       )}
     </div>
   ),
   look: "highlight",
   className: "bg-white",
 });
+
+function Warning({ heading, route }: { heading: string; route: Route }) {
+  return (
+    <InlineNotice look="warning" heading={heading}>
+      <Link
+        to={route.url}
+        className="text-link"
+        aria-label={`${route.title} ${summary.buttonEditNow.ariaLabelSuffix}`}
+      >
+        {summary.buttonEditNow.text}
+      </Link>
+    </InlineNotice>
+  );
+}
 
 function Answer({
   heading,
@@ -104,10 +106,7 @@ function Answer({
   );
 }
 
-function PolicyTitleContent({ policyTitle }: { policyTitle?: PolicyTitle }) {
-  if (!policyTitle) {
-    return null;
-  }
+function PolicyTitleContent({ policyTitle }: { policyTitle: PolicyTitle }) {
   return (
     <Answer
       heading={digitalDocumentation.info.inputTitle.label}
@@ -119,11 +118,8 @@ function PolicyTitleContent({ policyTitle }: { policyTitle?: PolicyTitle }) {
 function ParticipationContent({
   participation,
 }: {
-  participation?: Participation;
+  participation: Participation;
 }) {
-  if (!participation) {
-    return null;
-  }
   return (
     <>
       <Answer
@@ -207,15 +203,20 @@ export default function DocumentationSummary() {
   const items: InfoBoxProps[] = [
     createInfoBoxItem({
       route: ROUTE_DOCUMENTATION_TITLE,
-      content: (
+      content: documentationData.policyTitle?.title ? (
         <PolicyTitleContent policyTitle={documentationData.policyTitle} />
-      ),
+      ) : null,
     }),
     createInfoBoxItem({
       route: ROUTE_DOCUMENTATION_PARTICIPATION,
-      content: (
-        <ParticipationContent participation={documentationData.participation} />
-      ),
+      content:
+        documentationData.participation &&
+        (documentationData.participation.formats ||
+          documentationData.participation.results) ? (
+          <ParticipationContent
+            participation={documentationData.participation}
+          />
+        ) : null,
     }),
     ...prinzips.map((prinzip) => {
       const principleRoute = routes
