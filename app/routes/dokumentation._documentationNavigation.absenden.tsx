@@ -12,10 +12,6 @@ import { NavigationContext } from "./dokumentation._documentationNavigation";
 
 const { finish } = digitalDocumentation;
 
-const DoneIcon = () => (
-  <EmojiEventsOutlinedIcon className="size-80 fill-green-800" />
-);
-
 export default function DocumentationSend() {
   const { prinzips } = useOutletContext<NavigationContext>();
   return (
@@ -62,7 +58,8 @@ export default function DocumentationSend() {
             className: "items-center bg-green-200",
             visual: {
               type: "icon",
-              Icon: DoneIcon,
+              Icon: EmojiEventsOutlinedIcon,
+              className: "size-80 fill-green-800",
             },
             heading: {
               text: finish.done,

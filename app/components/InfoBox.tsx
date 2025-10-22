@@ -1,5 +1,4 @@
 import React from "react";
-import { twJoin } from "tailwind-merge";
 import type { Node } from "~/utils/paragraphUtils";
 import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 import twMerge from "~/utils/tailwindMerge";
@@ -34,7 +33,11 @@ type BaseInfoBoxProps = {
 };
 
 type VisualProps =
-  | { type: "icon"; Icon: React.FC<React.SVGProps<SVGSVGElement>> }
+  | {
+      type: "icon";
+      Icon: React.FC<React.SVGProps<SVGSVGElement>>;
+      className?: string;
+    }
   | { type: "image"; image: InfoImageProps }
   | { type: "component"; Component: React.ReactElement }
   | { type: "none" };
@@ -81,9 +84,10 @@ const InfoBox = ({
     >
       {visual?.type === "icon" && (
         <visual.Icon
-          className={twJoin(
+          className={twMerge(
             "hidden fill-blue-500 sm:block",
             imageSizes["icon"],
+            visual.className,
           )}
         />
       )}
