@@ -24,7 +24,7 @@ export const participationSchema = z.object({
 const principleReasoningSchema = z
   .object({
     aspect: z.string().optional(),
-    checkbox: z.literal(["on", true]).optional(), // HTML checkboxes use "on" as value when checked whilst rvf converts in into boolean
+    checkbox: z.literal(["on", true]).optional(),
     paragraphs: z.string().optional(),
     reason: z.string().optional(),
   })
@@ -52,19 +52,19 @@ const principleReasoningSchema = z
 
 const principlePositiveAnswerSchema = z.object({
   answer: z.literal(principlePages.radioOptions[0]),
-  reasoning: z.array(principleReasoningSchema, {
+  reasoning: z.array(principleReasoningSchema.optional(), {
     error: principlePages.errors.reasoningError,
   }),
 });
 
 const principleNegativeAnswerSchema = z.object({
   answer: z.literal(principlePages.radioOptions[1]),
-  reasoning: z.string().min(1, { message: principlePages.errors.reasonError }),
+  reasoning: z.literal(undefined),
 });
 
 const principleIrrelevantAnswerSchema = z.object({
   answer: z.literal(principlePages.radioOptions[2]),
-  reasoning: z.string().min(1, { message: principlePages.errors.reasonError }),
+  reasoning: z.literal(undefined),
 });
 
 export const principleSchema = z
@@ -95,7 +95,7 @@ export const defaultParticipationValues: Participation = {
 export const defaultPrincipleValues: Principle = {
   id: "",
   answer: "",
-  reasoning: "",
+  reasoning: undefined,
 };
 
 export const defaultValues: Omit<DocumentationData, "version"> = {

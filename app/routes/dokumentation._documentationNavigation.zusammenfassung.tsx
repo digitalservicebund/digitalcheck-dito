@@ -1,4 +1,3 @@
-import { isArray } from "@posthog/core";
 import { type ReactNode } from "react";
 import { Link, useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
@@ -19,8 +18,6 @@ import type {
   PolicyTitle,
   Principle,
 } from "~/routes/dokumentation/documentationDataSchema";
-import type { PrinzipWithAspekte } from "~/utils/strapiData.server";
-import { slugify } from "~/utils/utilFunctions";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useDocumentationData } from "./dokumentation/documentationDataHook";
@@ -38,14 +35,12 @@ const createInfoBoxItem = ({
   testId: route.url,
   heading: {
     text: route.title,
-    tagName: "h2",
-    look: "ds-heading-03-reg",
   },
   children: (
-    <div className="mt-24">
+    <div>
       {content ? (
-        <div className="space-y-24">
-          {content}
+        <div className="space-y-8">
+          <div className="space-y-28">{content}</div>
           <Link
             to={route.url}
             className="text-link"
@@ -78,20 +73,10 @@ const createInfoBoxItem = ({
   className: "bg-white",
 });
 
-const renderAnswer = (
-  heading: string,
-  answers: { prefix: string; answer?: string }[],
-) => (
-  <div className="space-y-8">
-    <Heading tagName="h3" look="ds-subhead">
-      {heading}
-    </Heading>
-    {answers.map(({ answer, prefix }) => (
-      <p key={prefix + answer}>
-        <span className="font-bold">{prefix}</span>
-        <span>{answer}</span>
-      </p>
-    ))}
+const renderKeyValue = (key: string, value: string) => (
+  <div>
+    <span className="block font-bold">{key}</span>
+    <span className="block">{value}</span>
   </div>
 );
 
@@ -99,9 +84,10 @@ const renderPolicyTitle = (policyTitle?: PolicyTitle) => {
   if (!policyTitle) {
     return null;
   }
-  return renderAnswer(digitalDocumentation.info.inputTitle.label, [
-    { prefix: summary.answerPrefix, answer: policyTitle.title },
-  ]);
+  return renderKeyValue(
+    digitalDocumentation.info.inputTitle.label,
+    policyTitle.title,
+  );
 };
 
 const renderParticipation = (participation?: Participation) => {
@@ -110,66 +96,25 @@ const renderParticipation = (participation?: Participation) => {
   }
   return (
     <>
-      {renderAnswer(digitalDocumentation.participation.formats.heading, [
-        { prefix: summary.answerPrefix, answer: participation.formats },
-      ])}
-      {renderAnswer(digitalDocumentation.participation.results.heading, [
-        { prefix: summary.answerPrefix, answer: participation.results },
-      ])}
+      {renderKeyValue(
+        digitalDocumentation.participation.formats.heading,
+        participation.formats,
+      )}
+      {renderKeyValue(
+        digitalDocumentation.participation.results.heading,
+        participation.results,
+      )}
     </>
   );
 };
 
-const renderPrinciple = (
-  principle?: Principle,
-  prinzip: PrinzipWithAspekte,
-) => {
+const renderPrinciple = (principle?: Principle) => {
   if (!principle) {
     return null;
   }
   return (
-    <>
-      {renderAnswer(summary.principleAnswerTitle, [
-        { prefix: summary.answerPrefix, answer: principle.answer },
-      ])}
-      {isArray(principle.reasoning)
-        ? principle.reasoning
-            .filter((reasoning) => reasoning?.checkbox)
-            .map((reasoning) => {
-              const aspekt = prinzip.Aspekte.find(
-                (aspekt) => slugify(aspekt.Titel) === reasoning.aspect,
-              );
-              return (
-                <div
-                  key={principle.id + reasoning.aspect}
-                  className="space-y-8"
-                >
-                  {renderAnswer(
-                    `${
-                      aspekt
-                        ? aspekt.Kurzbezeichnung
-                        : digitalDocumentation.principlePages.explanationFields
-                            .ownExplanationTitle
-                    } 
-                    ${summary.explanationHeading}`,
-                    [
-                      {
-                        prefix: summary.paragraphsPrefix,
-                        answer: reasoning.paragraphs,
-                      },
-                      {
-                        prefix: summary.reasonPrefix,
-                        answer: reasoning.reason,
-                      },
-                    ],
-                  )}
-                </div>
-              );
-            })
-        : renderAnswer(summary.explanationHeading, [
-            { prefix: summary.answerPrefix, answer: principle.reasoning },
-          ])}
-    </>
+    // TODO render aspects and paragraphs
+    <>{renderKeyValue(summary.principleAnswerTitle, principle.answer)}</>
   );
 };
 
@@ -201,7 +146,7 @@ export default function DocumentationSummary() {
       );
       return createInfoBoxItem({
         route: principleRoute,
-        content: renderPrinciple(principleFormData, principleContent),
+        content: renderPrinciple(principleFormData),
       });
     }),
   ];
