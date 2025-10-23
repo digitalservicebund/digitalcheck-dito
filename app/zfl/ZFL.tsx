@@ -4,7 +4,7 @@ import Footer from "./components/Footer";
 import PageHeader from "./components/PageHeader";
 
 export function loader({ request }: Route.LoaderArgs) {
-  if (request.url.includes("digitalcheck.bund.de")) {
+  if (request.url.includes("bund.de")) {
     throw data("Not found", { status: 404 });
   }
 }
