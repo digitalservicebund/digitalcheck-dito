@@ -12,8 +12,10 @@ import {
 
 export const DATA_SCHEMA_VERSION = "1";
 export const STORAGE_KEY = "documentationData";
-const initialData: DocumentationData = { version: DATA_SCHEMA_VERSION };
-let cachedDocumentationData = initialData;
+export const initialDocumentationData: DocumentationData = {
+  version: DATA_SCHEMA_VERSION,
+};
+let cachedDocumentationData = initialDocumentationData;
 
 let listeners: (() => void)[] = [];
 
@@ -43,7 +45,7 @@ export function createOrUpdateDocumentationData(data: DocumentationData): void {
 
 export function deleteDocumentationData(): void {
   removeFromLocalStorage(STORAGE_KEY);
-  cachedDocumentationData = initialData;
+  cachedDocumentationData = initialDocumentationData;
   emitChange();
 }
 
@@ -91,7 +93,8 @@ export function subscribeToDocumentationData(listener: () => void) {
 }
 
 export const getDocumentationDataSnapshot = () => cachedDocumentationData;
-export const getDocumentationDataServerSnapshot = () => initialData;
+export const getDocumentationDataServerSnapshot = () =>
+  initialDocumentationData;
 
 function emitChange() {
   for (const listener of listeners) {

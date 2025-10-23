@@ -1,6 +1,11 @@
+// Import mocks first
+import "./utils/mockDocumentationDataService";
+import "./utils/mockRouter";
+// End of mocks
+
 import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
+import { MemoryRouter, useOutletContext } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   Route,
@@ -13,36 +18,6 @@ import DocumentationSummary from "~/routes/dokumentation._documentationNavigatio
 import { useDocumentationData } from "~/routes/dokumentation/documentationDataHook";
 import type { DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
 
-const { mockUseOutletContext } = vi.hoisted(() => ({
-  mockUseOutletContext: vi.fn(),
-}));
-
-vi.mock("react-router", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("react-router")>();
-  return {
-    ...actual,
-    useOutletContext: mockUseOutletContext,
-    useNavigate: vi.fn(() => vi.fn()),
-  };
-});
-
-vi.mock(
-  "~/routes/dokumentation/documentationDataHook",
-  async (importOriginal) => {
-    const actual =
-      await importOriginal<
-        typeof import("~/routes/dokumentation/documentationDataHook")
-      >();
-    return {
-      ...actual,
-      useDocumentationData: vi.fn(() => ({
-        getDocumentationData: null,
-        findDocumentationDataForUrl: vi.fn(),
-      })),
-    };
-  },
-);
-
 const routes: (Route[] | Route)[] = [
   ...ROUTES_DOCUMENTATION_PRE,
   [
@@ -53,7 +28,8 @@ const routes: (Route[] | Route)[] = [
   ],
 ];
 
-const mockUseDocumentationData = vi.mocked(useDocumentationData);
+const mockedUseOutletContext = vi.mocked(useOutletContext);
+const mockedUseDocumentationData = vi.mocked(useDocumentationData);
 
 describe("DocumentationSummary", () => {
   const renderWithRouter = () => {
@@ -74,7 +50,7 @@ describe("DocumentationSummary", () => {
   };
 
   beforeEach(() => {
-    mockUseDocumentationData.mockReturnValue({
+    mockedUseDocumentationData.mockReturnValue({
       documentationData: mockDocumentationData,
       findDocumentationDataForUrl: vi.fn(),
     });
@@ -97,7 +73,7 @@ describe("DocumentationSummary", () => {
         },
       ],
     };
-    mockUseOutletContext.mockReturnValue(context);
+    mockedUseOutletContext.mockReturnValue(context);
   });
 
   afterEach(() => {
@@ -232,7 +208,7 @@ describe("DocumentationSummary", () => {
   });
 
   it("shows InlineNotice for all steps when no documentation data is available", () => {
-    mockUseDocumentationData.mockReturnValue({
+    mockedUseDocumentationData.mockReturnValue({
       documentationData: { version: "1" },
       findDocumentationDataForUrl: vi.fn(),
     });

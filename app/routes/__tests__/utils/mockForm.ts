@@ -10,6 +10,7 @@ export const mockForm = () => {
           id: "test-form",
           onSubmit: vi.fn(),
         }),
+        getHiddenInputProps: vi.fn(),
         scope: (name: string) => ({
           name,
           value: "",
@@ -24,6 +25,9 @@ export const mockForm = () => {
         subscribe: {
           value: vi.fn(() => vi.fn()),
         },
+        field: vi.fn(() => ({
+          value: vi.fn(),
+        })),
       })),
       useField: vi.fn(() => ({
         getInputProps: (props: Record<string, unknown>) => ({
@@ -32,8 +36,11 @@ export const mockForm = () => {
           value: "",
           onChange: vi.fn(),
         }),
+        getHiddenInputProps: vi.fn(),
         error: () => null,
+        name: vi.fn().mockReturnValue("name"),
       })),
+      useFieldArray: vi.fn(),
     };
   });
 };
