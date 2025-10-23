@@ -1,5 +1,6 @@
 // Import mocks first
 import "./utils/mockDocumentationDataService";
+import "./utils/mockForm";
 import "./utils/mockRouter";
 // End of mocks
 
@@ -7,7 +8,6 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, useLoaderData, useOutletContext } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { mockForm } from "~/routes/__tests__/utils/mockForm";
 
 import { Route, ROUTES_DOCUMENTATION_PRE } from "~/resources/staticRoutes";
 import { NavigationContext } from "../dokumentation._documentationNavigation";
@@ -26,8 +26,6 @@ const routes: (Route[] | Route)[] = [
 const mockedUseOutletContext = vi.mocked(useOutletContext);
 // const mockedUseDocumentationData = vi.mocked(useDocumentationData);
 const mockedUseLoaderData = vi.mocked(useLoaderData);
-
-mockForm();
 
 describe("DocumentationPrinciple", () => {
   const renderWithRouter = () => {

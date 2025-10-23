@@ -1,5 +1,6 @@
 // Import mocks first
 import "./utils/mockDocumentationDataService";
+import "./utils/mockForm";
 import "./utils/mockRouter";
 // End of mocks
 
@@ -7,10 +8,7 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { mockForm } from "~/routes/__tests__/utils/mockForm";
 import DocumentationTitle from "~/routes/dokumentation._documentationNavigation.regelungsvorhaben-titel";
-
-mockForm();
 
 describe("DocumentationTitle", () => {
   const renderWithRouter = () => {
