@@ -15,9 +15,9 @@ export default function ZFLTaskForces() {
   return (
     <>
       <MetaTitle prefix={ROUTE_ZFL_TASK_FORCES.title} />
-      <Hero title={ROUTE_ZFL_TASK_FORCES.title} className="bg-white" />
+      <Hero title={ROUTE_ZFL_TASK_FORCES.title} className="bg-white md:p-40" />
 
-      <Container className="space-y-80 py-80">
+      <Container className="space-y-40 pt-0 pb-40 md:space-y-80 md:pb-80">
         <InfoBox
           visual={{
             type: "image",
@@ -51,12 +51,12 @@ export default function ZFLTaskForces() {
             }}
             content="Durch Ihre Rechtsetzung-Expertise in Kombination mit Methoden aus der agilen Software-Entwicklung entstehen praxistaugliche und zukunftsfähige Gesetze, die die Potenziale der Digitalisierung bestmöglich ausschöpfen."
           />
-          <div className="flex gap-32">
+          <div className="flex gap-32 max-md:flex-col">
             {[
               {
                 title: "Sachverhalte visualisieren",
                 content:
-                  "Komplexe Sachverhalte durch Prozess-Visualisierungen strukturieren, interne und externe Abstimmung vereinfachen.",
+                  "Komplexe Sachverhalte durch Prozess-Visualisierungen strukturieren, interne und externe Abstimmung vereinfachen",
                 icon: AccountTreeTwoToneIcon,
               },
               {
@@ -68,18 +68,24 @@ export default function ZFLTaskForces() {
               {
                 title: "Prozesse strukturieren",
                 content:
-                  "Methodische Unterstützung nutzen, Anleitungen für Praxis- und Digitaltauglichkeit erhalten.",
+                  "Methodische Unterstützung nutzen, Anleitungen für Praxis- und Digitaltauglichkeit erhalten",
                 icon: HubTwoToneIcon,
               },
             ].map((item) => (
-              <div key={item.title} className="space-y-16">
-                <item.icon className="size-40 fill-yellow-500 md:size-80" />
-                <Heading
-                  tagName="h3"
-                  look="ds-heading-03-bold"
-                  text={item.title}
-                />
-                <RichText markdown={item.content} />
+              <div
+                key={item.title}
+                className="flex gap-16 md:flex-col md:gap-32"
+              >
+                <item.icon className="fill-zfl-main80 size-40 flex-none md:size-80" />
+                <div className="space-y-8">
+                  <Heading
+                    tagName="h3"
+                    look="ds-heading-03-bold"
+                    text={item.title}
+                    className="md:pr-32"
+                  />
+                  <RichText markdown={item.content} />
+                </div>
               </div>
             ))}
           </div>
@@ -87,7 +93,7 @@ export default function ZFLTaskForces() {
       </Container>
 
       <div className="bg-[url('/images/trainings.jpg')] bg-cover bg-center">
-        <Container className="py-40 lg:py-80">
+        <Container className="md:py-80">
           <InfoBox
             look="highlight"
             className="bg-white"

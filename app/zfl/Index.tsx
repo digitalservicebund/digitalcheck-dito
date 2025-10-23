@@ -14,22 +14,18 @@ export default function ZFLIndex() {
     <>
       <MetaTitle />
       <Hero
-        title="Bessere Rechtsetzung in allen Regelungsphasen"
-        subtitle={dedent`
-          Das Zentrum für Legistik unterstützt Legistinnen und Legisten dabei, praxis- und digitaltaugliches Recht einfach zu erarbeiten.
-
-          Sie erhalten zum Beispiel operative Unterstützung beim Visualisieren, Unterstützung beim Erheben der Betroffenen-Bedürfnisse und Zugriff auf Formulierungsbeispiele. Darüber stehen Ihnen praxisnahe Schulungen und Vorlagen zur Auswahl.
-        `}
+        title="Bessere Rechtsetzung in allen Phasen Ihres Vorhabens"
+        subtitle="Das Zentrum für Legistik unterstützt Sie bei der Ausarbeitung von Regelungen. Sie stellen damit sicher, dass Ihr Vorhaben betroffenenzentriert, praxistauglich und digital umsetzbar ist."
         className="bg-zfl-main20"
       />
 
       <div className="bg-yellow-500">
         <Container className="py-8">
-          Hier ensteht das Zentrum für Legistik.
+          Das Zentrum für Legistik befindet sich aktuell im Aufbau.
         </Container>
       </div>
 
-      <Container className="py-80">
+      <Container className="py-40 md:py-80">
         <InfoBox
           visual={{
             type: "image",
@@ -41,18 +37,23 @@ export default function ZFLIndex() {
           }}
           heading={{
             tagName: "h2",
-            text: "Darum geht es",
+            text: "Diese Vorteile bietet Ihnen das Zentrum für Legistik",
           }}
           content={dedent`
-            Unser Ziel ist eine moderne, wirksame und praxisnahe Rechtsetzung. Das gelingt durch Regelungen, die betroffenenzentriert, praxistauglich und digital umsetzbar sind.
+            Das Zentrum für Legistik bietet unter anderem:
 
-            Dies ist ein wichtiger Baustein dafür, einen wirksamen und leistungsfähigen Staat ermöglichen. Daher ist das Zentrum für Legistik ein Teil des Handlungsfelds „Bessere Rechtsetzung“ in der Modernisieungsagenda.
+            - Operative Hilfe beim Visualisieren
+            - Unterstützung beim Erheben der Betroffenen-Bedürfnisse
+            - Zugriff auf Formulierungsbeispiele
+            - Praxisnahe Schulungen
+
+            Gut zu wissen: Das Zentrum für Legistik ist ein Bestandteil des Handlungsfelds „Bessere Rechtsetzung“ in der Modernisierungsagenda.
           `}
         />
       </Container>
 
       <div className="bg-blue-100">
-        <Container className="py-80">
+        <Container className="py-40 md:py-80">
           <InfoBoxList
             heading={{
               tagName: "h2",
@@ -109,7 +110,7 @@ export default function ZFLIndex() {
       </div>
 
       <div>
-        <Container className="py-80">
+        <Container className="py-40 md:py-80">
           <Contact className="bg-zfl-main20" />
         </Container>
       </div>

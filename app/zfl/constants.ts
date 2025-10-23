@@ -11,8 +11,10 @@ export const ZFL_PHONE = {
 };
 
 export const ZFL_EMAIL = {
-  display: "zfl@digitalservice.bund.de",
-  url: "mailto:zfl@digitalservice.bund.de",
+  display: "support@zfl.bund.de",
+  get url() {
+    return `mailto:${this.display}`;
+  },
   get markdown() {
     return `[${this.display}](${this.url})`;
   },

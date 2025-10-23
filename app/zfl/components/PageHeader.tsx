@@ -67,11 +67,9 @@ const PageHeader = () => {
               {item.title}
             </Link>
           ))}
-          <div className="flex flex-col px-16">
-            <a href={ZFL_PHONE.url} className="ds-link-02-reg">
-              {ZFL_PHONE.display}
-            </a>
-            <a href={ZFL_EMAIL.url} className="ds-link-02-reg">
+          <div className="ds-label-01-reg px-16 text-gray-800">
+            Kontakt:{" "}
+            <a href={ZFL_EMAIL.url} className="ds-link-01-reg">
               {ZFL_EMAIL.display}
             </a>
           </div>
@@ -115,7 +113,7 @@ const PageHeader = () => {
             to={item.href}
             className={twMerge(
               basicLinkClasses,
-              "ds-label-01-bold border-l-[4px] border-transparent p-16",
+              "ds-label-01-reg border-l-[4px] border-transparent p-16",
               currentPath === item.href && activeClasses,
             )}
             key={item.title}
@@ -123,11 +121,9 @@ const PageHeader = () => {
             {item.title}
           </Link>
         ))}
-        <div className="flex flex-col items-start px-16 py-8">
-          <a href={ZFL_PHONE.url} className="ds-link-02-reg">
-            {ZFL_PHONE.display}
-          </a>
-          <a href={ZFL_EMAIL.url} className="ds-link-02-reg">
+        <div className="ds-label-01-reg ml-4 p-16 text-gray-800">
+          Kontakt:{" "}
+          <a href={ZFL_EMAIL.url} className="ds-link-01-reg">
             {ZFL_EMAIL.display}
           </a>
         </div>

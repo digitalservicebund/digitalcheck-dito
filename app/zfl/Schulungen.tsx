@@ -14,9 +14,9 @@ export default function ZFLTrainings() {
   return (
     <>
       <MetaTitle prefix={ROUTE_ZFL_TRAININGS.title} />
-      <Hero title={ROUTE_ZFL_TRAININGS.title} className="bg-white" />
+      <Hero title={ROUTE_ZFL_TRAININGS.title} className="bg-white md:p-40" />
 
-      <Container className="space-y-80 py-80">
+      <Container className="space-y-40 pt-0 pb-40 md:space-y-80 md:pb-80">
         <InfoBox
           visual={{
             type: "image",
@@ -79,13 +79,13 @@ export default function ZFLTrainings() {
           />
         </TrainingInfo>
         <TrainingInfo
-          title="Für diese Schulungen können Sie sich vormerken lassen. Sie werden kontaktiert, sobald Termine feststehen."
+          title="Für diese Schulungen können Sie sich vormerken lassen"
           Icon={HourglassEmptyOutlinedIcon}
           shortTitle="Warteliste"
           className="bg-blue-100"
         >
           <Training title="Schulungstitel (Kurz-Schulung)" />
-          <Training title="Schulungstitel" />
+          <Training title="Schulungstitel (Kurz-Schulung)" />
           <Training title="Schulungstitel (Kurz-Schulung)" />
           <TrainingInfoItem
             title="Auf die Warteliste setzen"
@@ -124,7 +124,7 @@ const TrainingInfo = ({
   return (
     <section className={twMerge("space-y-32 rounded-lg p-32", className)}>
       <div className="space-y-8">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-8">
           <Icon className="size-24 fill-black/50" />
           <span className="ds-body-02-reg">{shortTitle}</span>
         </div>
@@ -151,10 +151,13 @@ const Training = ({ title, instances }: TrainingProps) => {
       {instances && (
         <ul className="list-unstyled space-y-8">
           {instances.map((instance) => (
-            <li key={instance.date} className="flex w-full justify-between">
-              <p className="w-1/3 font-bold">{instance.date}</p>
-              <p className="w-1/3">{instance.time}</p>
-              <p className="w-1/3">{instance.location}</p>
+            <li
+              key={instance.date}
+              className="flex w-full justify-between max-lg:flex-col"
+            >
+              <p className="font-bold lg:w-1/3">{instance.date}</p>
+              <p className="lg:w-1/3">{instance.time}</p>
+              <p className="lg:w-1/3">{instance.location}</p>
             </li>
           ))}
         </ul>

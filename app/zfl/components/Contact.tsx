@@ -1,5 +1,4 @@
 import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
-import { twJoin } from "tailwind-merge";
 import InfoBox from "~/components/InfoBox";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import twMerge from "~/utils/tailwindMerge";
@@ -12,7 +11,7 @@ export const Contact = ({ className }: { className?: string }) => (
     visual={{
       type: "icon",
       Icon: PhoneOutlined,
-      className: twJoin("fill-zfl-main80", "size-96"),
+      className: "fill-zfl-main80",
     }}
     heading={{
       tagName: "h2",
