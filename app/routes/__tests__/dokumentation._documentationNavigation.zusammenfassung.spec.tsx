@@ -16,10 +16,15 @@ import {
 import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
 import DocumentationSummary from "~/routes/dokumentation._documentationNavigation.zusammenfassung";
 import { useDocumentationData } from "~/routes/dokumentation/documentationDataHook";
-import type { DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
+import type {
+  DocumentationData,
+  Participation,
+  PolicyTitle,
+  Principle,
+} from "~/routes/dokumentation/documentationDataSchema";
 
 const MOCK_ROUTE_PRINCIPLE = {
-  title: "Prinzip: Digitale Angebote",
+  title: "Digitale Angebote",
   url: "/dokumentation/prinzip-digitale-angebote",
 };
 const routes: (Route[] | Route)[] = [
@@ -29,6 +34,26 @@ const routes: (Route[] | Route)[] = [
 
 const mockedUseOutletContext = vi.mocked(useOutletContext);
 const mockedUseDocumentationData = vi.mocked(useDocumentationData);
+
+function createDocumentationDataMock({
+  policyTitle,
+  participation,
+  principles,
+}: {
+  policyTitle?: PolicyTitle;
+  participation?: Participation;
+  principles?: Principle[];
+} = {}) {
+  return {
+    documentationData: {
+      version: "1",
+      policyTitle: policyTitle,
+      participation: participation,
+      principles: principles,
+    },
+    findDocumentationDataForUrl: vi.fn(),
+  };
+}
 
 describe("DocumentationSummary", () => {
   const renderWithRouter = () => {
@@ -194,102 +219,63 @@ describe("DocumentationSummary", () => {
     });
   });
 
-  it("shows warning for step when data is undefined", () => {
-    mockedUseDocumentationData.mockReturnValue({
-      documentationData: {
-        version: "1",
-        policyTitle: undefined,
-        participation: { formats: "Test", results: "Test" },
-      },
-      findDocumentationDataForUrl: vi.fn(),
-    });
-    renderWithRouter();
-
-    const titleContainer = screen.getByTestId(ROUTE_DOCUMENTATION_TITLE.url);
-    expect(
-      within(titleContainer).getByText(
-        "Sie haben diesen Punkt noch nicht bearbeitet.",
-      ),
-    ).toBeInTheDocument();
-  });
-
-  it("shows warning for principle when not in principles array", () => {
-    mockedUseDocumentationData.mockReturnValue({
-      documentationData: {
-        version: "1",
-        policyTitle: { title: "Test" },
-        principles: [], // not included
-      },
-      findDocumentationDataForUrl: vi.fn(),
-    });
-    renderWithRouter();
-
-    const principleContainer = screen.getByTestId(
-      "/dokumentation/prinzip-digitale-angebote",
-    );
-    expect(
-      within(principleContainer).getByText(
-        "Sie haben diesen Punkt noch nicht bearbeitet.",
-      ),
-    ).toBeInTheDocument();
-  });
-
-  it("shows warning for step when all fields are empty strings", () => {
-    mockedUseDocumentationData.mockReturnValue({
-      documentationData: {
-        version: "1",
-        policyTitle: { title: "" },
+  test.each([
+    [ROUTE_DOCUMENTATION_TITLE.url, { policyTitle: undefined }],
+    [ROUTE_DOCUMENTATION_TITLE.url, { policyTitle: { title: "" } }],
+    [ROUTE_DOCUMENTATION_PARTICIPATION.url, { participation: undefined }],
+    [
+      ROUTE_DOCUMENTATION_PARTICIPATION.url,
+      {
         participation: { formats: "", results: "" },
       },
-      findDocumentationDataForUrl: vi.fn(),
-    });
-    renderWithRouter();
-
-    const titleContainer = screen.getByTestId(ROUTE_DOCUMENTATION_TITLE.url);
-    expect(
-      within(titleContainer).getByText(
-        "Sie haben diesen Punkt noch nicht bearbeitet.",
-      ),
-    ).toBeInTheDocument();
-
-    const participationContainer = screen.getByTestId(
-      ROUTE_DOCUMENTATION_PARTICIPATION.url,
-    );
-    expect(
-      within(participationContainer).getByText(
-        "Sie haben diesen Punkt noch nicht bearbeitet.",
-      ),
-    ).toBeInTheDocument();
-  });
-
-  it("shows incomplete warning when part of the data for a step is missing", () => {
-    mockedUseDocumentationData.mockReturnValue({
-      documentationData: {
-        version: "1",
-        policyTitle: { title: "Test Title" },
-        participation: {
-          formats: "",
-          results: "Some results",
-        },
+    ],
+    [MOCK_ROUTE_PRINCIPLE.url, { principles: undefined }],
+    [MOCK_ROUTE_PRINCIPLE.url, { principles: [] }],
+    [
+      MOCK_ROUTE_PRINCIPLE.url,
+      {
+        principles: [
+          {
+            id: MOCK_ROUTE_PRINCIPLE.url,
+            answer: "",
+            reasoning: "",
+          },
+        ],
       },
-      findDocumentationDataForUrl: vi.fn(),
-    });
-    renderWithRouter();
+    ],
+  ])(
+    "shows warning for step %s when data is undefined or empty",
+    (stepId, mockData) => {
+      mockedUseDocumentationData.mockReturnValue(
+        createDocumentationDataMock(mockData),
+      );
+      renderWithRouter();
 
-    const participationContainer = screen.getByTestId(
+      const stepContainer = screen.getByTestId(stepId);
+      expect(
+        within(stepContainer).getByText(
+          "Sie haben diesen Punkt noch nicht bearbeitet.",
+        ),
+      ).toBeInTheDocument();
+    },
+  );
+
+  test.each([
+    [
       ROUTE_DOCUMENTATION_PARTICIPATION.url,
-    );
-    expect(
-      within(participationContainer).getByText(
-        "Sie haben diesen Punkt noch nicht vollständig bearbeitet.",
-      ),
-    ).toBeInTheDocument();
-  });
-
-  it("shows incomplete warning when principle positive answer has reasoning with missing paragraphs", () => {
-    mockedUseDocumentationData.mockReturnValue({
-      documentationData: {
-        version: "1",
+      {
+        participation: { formats: "some formats", results: "" },
+      },
+    ],
+    [
+      ROUTE_DOCUMENTATION_PARTICIPATION.url,
+      {
+        participation: { formats: "", results: "some results" },
+      },
+    ],
+    [
+      MOCK_ROUTE_PRINCIPLE.url,
+      {
         principles: [
           {
             id: "1",
@@ -297,7 +283,7 @@ describe("DocumentationSummary", () => {
             reasoning: [
               {
                 aspect: "test-aspect",
-                checkbox: true,
+                checkbox: true as const,
                 paragraphs: "",
                 reason: "Some reason",
               },
@@ -305,24 +291,10 @@ describe("DocumentationSummary", () => {
           },
         ],
       },
-      findDocumentationDataForUrl: vi.fn(),
-    });
-    renderWithRouter();
-
-    const principleContainer = screen.getByTestId(
-      "/dokumentation/prinzip-digitale-angebote",
-    );
-    expect(
-      within(principleContainer).getByText(
-        "Sie haben diesen Punkt noch nicht vollständig bearbeitet.",
-      ),
-    ).toBeInTheDocument();
-  });
-
-  it("shows incomplete warning when principle positive answer has reasoning with missing reason", () => {
-    mockedUseDocumentationData.mockReturnValue({
-      documentationData: {
-        version: "1",
+    ],
+    [
+      MOCK_ROUTE_PRINCIPLE.url,
+      {
         principles: [
           {
             id: "1",
@@ -330,7 +302,7 @@ describe("DocumentationSummary", () => {
             reasoning: [
               {
                 aspect: "test-aspect",
-                checkbox: true,
+                checkbox: true as const,
                 paragraphs: "Some paragraphs",
                 reason: "",
               },
@@ -338,17 +310,21 @@ describe("DocumentationSummary", () => {
           },
         ],
       },
-      findDocumentationDataForUrl: vi.fn(),
-    });
-    renderWithRouter();
+    ],
+  ])(
+    "shows incomplete warning for step %s when part of the data for a step is missing",
+    (stepId, mockData) => {
+      mockedUseDocumentationData.mockReturnValue(
+        createDocumentationDataMock(mockData),
+      );
+      renderWithRouter();
 
-    const principleContainer = screen.getByTestId(
-      "/dokumentation/prinzip-digitale-angebote",
-    );
-    expect(
-      within(principleContainer).getByText(
-        "Sie haben diesen Punkt noch nicht vollständig bearbeitet.",
-      ),
-    ).toBeInTheDocument();
-  });
+      const stepContainer = screen.getByTestId(stepId);
+      expect(
+        within(stepContainer).getByText(
+          "Sie haben diesen Punkt noch nicht vollständig bearbeitet.",
+        ),
+      ).toBeInTheDocument();
+    },
+  );
 });

@@ -247,13 +247,14 @@ export default function DocumentationSummary() {
       );
       return createInfoBoxItem({
         route: principleRoute,
-        content: principleFormData ? (
-          <PrincipleContent
-            principle={principleFormData}
-            prinzip={prinzip}
-            route={principleRoute}
-          />
-        ) : null,
+        content:
+          principleFormData && principleFormData.answer ? (
+            <PrincipleContent
+              principle={principleFormData}
+              prinzip={prinzip}
+              route={principleRoute}
+            />
+          ) : null,
         badge: {
           text: summary.principleBadge,
           principleNumber: prinzip.Nummer,
