@@ -45,7 +45,7 @@ export default function ZFLIndex() {
             - Zugriff auf Formulierungsbeispiele und Vorlagen
             - Praxisnahe Schulungen
 
-            Das Angebot wird zusammen mit Ihnen schrittweise weiterentwickelt. Im Fokus stehen dabei die Schaffung einer einheitlichen prozessualen Begleitung in unterschiedlichen Vorhaben-Phasen, der Vermittlung von Kompetenzen und von Möglichkeiten zum Austausch und aktiver Beteiligung. 
+            Das Angebot wird zusammen mit Ihnen schrittweise weiterentwickelt. Im Fokus stehen dabei die Schaffung einer einheitlichen prozessualen Begleitung in unterschiedlichen Vorhaben-Phasen, von Möglichkeiten zum Austausch und aktiver Beteiligung und der Vermittlung von Kompetenzen. 
             
             Gut zu wissen: Das Zentrum für Legistik ist ein Bestandteil des Handlungsfelds „Bessere Rechtsetzung“ in der Modernisierungsagenda.
           `}
