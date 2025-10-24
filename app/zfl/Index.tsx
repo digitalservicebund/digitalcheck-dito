@@ -40,11 +40,9 @@ export default function ZFLIndex() {
             text: "Ihre Vorteile",
           }}
           content={dedent`
-            Bereits heute für Sie nutzbar:
-
             - Operative Hilfe beim Visualisieren
             - Unterstützung beim Erheben der Betroffenen-Bedürfnisse
-            - Zugriff auf Formulierungsbeispiele
+            - Zugriff auf Formulierungsbeispiele und Vorlagen
             - Praxisnahe Schulungen
 
             Das Angebot wird zusammen mit Ihnen schrittweise weiterentwickelt. Im Fokus stehen dabei die Schaffung einer einheitlichen Begleitung in unterschiedlichen Vorhaben-Phasen, die Vermittlung von Kompetenzen und die Möglichkeiten zum Austausch und aktiver Beteiligung. 
