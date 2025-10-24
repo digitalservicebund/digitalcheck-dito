@@ -37,16 +37,18 @@ export default function ZFLIndex() {
           }}
           heading={{
             tagName: "h2",
-            text: "Diese Vorteile bietet Ihnen das Zentrum für Legistik",
+            text: "Ihre Vorteile",
           }}
           content={dedent`
-            Das Zentrum für Legistik bietet unter anderem:
+            Bereits heute für Sie nutzbar:
 
             - Operative Hilfe beim Visualisieren
             - Unterstützung beim Erheben der Betroffenen-Bedürfnisse
             - Zugriff auf Formulierungsbeispiele
             - Praxisnahe Schulungen
 
+            Das Angebot wird zusammen mit Ihnen schrittweise weiterentwickelt. Im Fokus stehen dabei die Schaffung einer einheitlichen Begleitung in unterschiedlichen Vorhaben-Phasen, die Vermittlung von Kompetenzen und die Möglichkeiten zum Austausch und aktiver Beteiligung. 
+            
             Gut zu wissen: Das Zentrum für Legistik ist ein Bestandteil des Handlungsfelds „Bessere Rechtsetzung“ in der Modernisierungsagenda.
           `}
         />
@@ -57,7 +59,7 @@ export default function ZFLIndex() {
           <InfoBoxList
             heading={{
               tagName: "h2",
-              text: "So unterstützen wir Sie bereits heute",
+              text: "Unterstützung für Sie",
             }}
             items={[
               {
