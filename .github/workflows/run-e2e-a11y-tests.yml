@@ -73,7 +73,7 @@ jobs:
         id: e2e
         run: npm run test:e2e -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         if: failure() && (steps.e2e.outcome == 'failure' || steps.e2e-nightly.outcome == 'failure')
         with:
           name: playwright-e2e-blob-report-${{ matrix.shardIndex }}
@@ -98,7 +98,7 @@ jobs:
         env:
           VITE_PORT: 4183
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         if: failure() && (steps.a11y.outcome == 'failure' || steps.a11y-nightly.outcome == 'failure')
         with:
           name: playwright-a11y-blob-report-${{ matrix.shardIndex }}
