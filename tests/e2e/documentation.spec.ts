@@ -1,60 +1,178 @@
-import { expect, test } from "@playwright/test";
+import { expect, type Page, test } from "@playwright/test";
 import { extractRawText } from "mammoth";
 import { documentationDocument } from "~/resources/content/documentation-document";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
+  ROUTE_DOCUMENTATION,
+  ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_SEND,
+  ROUTE_DOCUMENTATION_SUMMARY,
   ROUTE_DOCUMENTATION_TITLE,
 } from "~/resources/staticRoutes";
 
 const { introduction } = documentationDocument;
 
-test.describe("documentation absenden page", () => {
-  test("downloading filled documentation works", async ({ page }, testInfo) => {
-    const titleValue = "E2E Titel des Regelungsvorhabens";
-    const participationFormats = "E2E Formate Input";
-    const participationResults = "E2E Ergebnisse Input";
-    const yesAnswer = digitalDocumentation.principlePages.radioOptions[0];
+const testData = {
+  title: "E2E Titel des Regelungsvorhabens",
+  participationFormats: "E2E Formate Input",
+  participationResults: "E2E Ergebnisse Input",
+  principle1Paragraph: "§123",
+  principle1Reason: "E2E Begründung Prinzip 1",
+  principle2Paragraph: "§456",
+  principle2Reason: "E2E Begründung Prinzip 2",
+  customParagraph: "§789",
+  customReason: "E2E Eigene Erklärung",
+  negativeReason: "E2E Negative Begründung",
+  irrelevantReason: "E2E Nicht relevant Begründung",
+};
 
-    // Fill title
-    await page.goto(ROUTE_DOCUMENTATION_TITLE.url);
+test.describe("documentation flow happy path", () => {
+  test.describe.configure({ mode: "serial" });
+
+  let page: Page;
+
+  test.beforeAll(async ({ browser }) => {
+    page = await browser.newPage();
+  });
+
+  test.afterAll(async () => {
+    if (page) {
+      await page.close();
+    }
+  });
+
+  test("start documentation flow from landing page", async () => {
+    await page.goto(ROUTE_DOCUMENTATION.url);
+    await expect(page).toHaveURL(ROUTE_DOCUMENTATION.url);
+
+    await page.getByRole("link", { name: "Dokumentation starten" }).click();
+    await expect(page).toHaveURL(ROUTE_DOCUMENTATION_TITLE.url);
+  });
+
+  test("fill title page and navigate to participation", async () => {
     await page
       .getByLabel(digitalDocumentation.info.inputTitle.label)
-      .fill(titleValue);
+      .fill(testData.title);
     await page.getByRole("button", { name: "Weiter" }).click();
 
-    // Fill participation (two text areas labeled "Antwort")
-    const answers = page.getByLabel("Antwort");
-    await answers.nth(0).fill(participationFormats);
-    await answers.nth(1).fill(participationResults);
+    await expect(page).toHaveURL(ROUTE_DOCUMENTATION_PARTICIPATION.url);
+  });
+
+  test("fill participation page and navigate to first principle", async () => {
+    const textareas = page.getByLabel("Antwort");
+    await textareas.nth(0).fill(testData.participationFormats);
+    await textareas.nth(1).fill(testData.participationResults);
     await page.getByRole("button", { name: "Weiter" }).click();
 
-    // Answer first principle positively and fill one aspect
-    await page.getByLabel(yesAnswer).click();
+    expect(page.url()).not.toBe(ROUTE_DOCUMENTATION_PARTICIPATION.url);
+    await expect(page.locator("mark", { hasText: "Prinzipien" })).toBeVisible();
+  });
+
+  test("handle positive principle answer with aspect management", async () => {
+    await page.getByLabel("Ja, gänzlich oder Teilweise").click();
+
+    // Check that reasoning checkboxes are shown
     const form = page.locator("form");
-    await form.getByRole("checkbox").first().check();
-    await form.getByLabel("Paragrafen").fill("123");
+    const checkboxes = form.getByRole("checkbox");
+    await expect(checkboxes.first()).toBeVisible();
+
+    // Check first aspect and fill inputs
+    await checkboxes.first().check();
+    await expect(form.getByLabel("Paragrafen")).toBeVisible();
+    await form.getByLabel("Paragrafen").fill(testData.principle1Paragraph);
     await form
       .getByLabel(
         "Begründung mit Textreferenz (empfohlen für bessere Zuordnung)",
       )
-      .fill("E2E Begründung 1");
-    await page.getByRole("button", { name: "Weiter" }).click();
+      .fill(testData.principle1Reason);
 
-    // Answer second principle positively and fill one aspect
-    await page.getByLabel(yesAnswer).click();
-    const form2 = page.locator("form");
-    await form2.getByRole("checkbox").first().check();
-    await form2.getByLabel("Paragrafen").fill("456");
-    await form2
+    // Delete the reasoning
+    await page
+      .getByRole("button", { name: "Erläuterung löschen" })
+      .first()
+      .click();
+    await page.getByRole("button", { name: "Löschen" }).click(); // confirm deletion in dialog
+
+    // Validate checkbox is unchecked and inputs are hidden
+    await expect(checkboxes.first()).not.toBeChecked();
+
+    // Check second aspect
+    await checkboxes.nth(1).check();
+    await expect(form.getByLabel("Paragrafen")).toBeVisible();
+    await form.getByLabel("Paragrafen").fill(testData.principle2Paragraph);
+    await form
       .getByLabel(
         "Begründung mit Textreferenz (empfohlen für bessere Zuordnung)",
       )
-      .fill("E2E Begründung 2");
+      .fill(testData.principle2Reason);
+
+    // Add custom aspect
+    await page
+      .getByRole("button", { name: "Eigene Erklärung hinzufügen" })
+      .click();
+
+    // Check custom aspect checkbox (label "Eigener Punkt" should now be available)
+    await page.getByLabel("Eigener Punkt").check();
+
+    // Fill custom aspect inputs - need to target the last occurrence
+    const paragraphInputs = form.getByLabel("Paragrafen");
+    const reasonInputs = form.getByLabel(
+      "Begründung mit Textreferenz (empfohlen für bessere Zuordnung)",
+    );
+    await paragraphInputs.last().fill(testData.customParagraph);
+    await reasonInputs.last().fill(testData.customReason);
+
+    await page.getByRole("button", { name: "Weiter" }).click();
+  });
+
+  test("handle negative principle answer", async () => {
+    await page.getByLabel("Nein").click();
+
+    // Validate textarea is shown
+    const form = page.locator("form");
+    const textarea = form.getByLabel("Begründung");
+    await expect(textarea).toBeVisible();
+    await textarea.fill(testData.negativeReason);
+
+    await page.getByRole("button", { name: "Weiter" }).click();
+  });
+
+  test("handle irrelevant principle answer and navigate to summary", async () => {
+    await page.getByLabel("Nicht relevant").click();
+
+    // Validate textarea is shown
+    const form = page.locator("form");
+    const textarea = form.getByLabel("Begründung");
+    await expect(textarea).toBeVisible();
+    await textarea.fill(testData.irrelevantReason);
+
     await page.getByRole("button", { name: "Weiter" }).click();
 
-    // Go to Absenden and download
-    await page.goto(ROUTE_DOCUMENTATION_SEND.url);
+    // Continue through remaining 2 principles (4 and 5) to reach summary
+    for (let i = 0; i < 2; i++) {
+      await page.getByRole("button", { name: "Weiter" }).click();
+    }
+
+    await expect(page).toHaveURL(ROUTE_DOCUMENTATION_SUMMARY.url);
+  });
+
+  test("summary page shows entered data and navigate to absenden", async () => {
+    await expect(page).toHaveURL(ROUTE_DOCUMENTATION_SUMMARY.url);
+
+    const main = page.getByRole("main");
+    await expect(main).toContainText(testData.title);
+    await expect(main).toContainText(testData.customReason);
+    await expect(main).toContainText(testData.negativeReason);
+    await expect(main).toContainText(testData.irrelevantReason);
+
+    const weiterButton = page.getByRole("link", { name: "Weiter" });
+    await expect(weiterButton).toBeVisible({ timeout: 10000 });
+    await weiterButton.click();
+    await expect(page).toHaveURL(ROUTE_DOCUMENTATION_SEND.url);
+  });
+
+  test("download documentation from absenden page", async ({}, testInfo) => {
+    await expect(page).toHaveURL(ROUTE_DOCUMENTATION_SEND.url);
 
     const downloadPromise = page.waitForEvent("download");
     await page
@@ -70,32 +188,27 @@ test.describe("documentation absenden page", () => {
     await download.saveAs(filePath);
     const { value: docText } = await extractRawText({ path: filePath });
 
-    const parLabel = "Paragrafen";
-    const explLabel = "Erläuterung";
-    const yesOccurrences = [...docText.matchAll(new RegExp(yesAnswer, "g"))]
-      .length;
-    expect(yesOccurrences).toBe(2);
-
-    // Check that texts occur in the right order
+    // Validate that key data appears in the document in the right order
+    // TODO add some data to be validated once it is being included in the document
     const textOrder = [
       introduction.projectTitle.heading,
-      titleValue,
+      testData.title,
       introduction.participationFormats.heading,
-      participationFormats,
-      participationResults,
-      "Digitale Angebote",
-      yesAnswer,
-      parLabel,
-      "§123",
-      explLabel,
-      "E2E Begründung 1",
-      "Datenwiederverwendung",
-      yesAnswer,
-      parLabel,
-      "§456",
-      explLabel,
-      "E2E Begründung 2",
-      "Etablierte Technologien",
+      testData.participationFormats,
+      testData.participationResults,
+      "Ja, gänzlich oder Teilweise",
+      "Paragrafen",
+      testData.principle2Paragraph,
+      "Erläuterung",
+      testData.principle2Reason,
+      // TODO add "Paragrafen",
+      // TODO add testData.customParagraph
+      // TODO add "Erläuterung",
+      // TODO add testData.customReason
+      "Nein",
+      // TODO add testData.negativeReason
+      "Nicht relevant",
+      // TODO add testData.irrelevantReason
     ];
     let lastIdx = -1;
     for (const searchText of textOrder) {
