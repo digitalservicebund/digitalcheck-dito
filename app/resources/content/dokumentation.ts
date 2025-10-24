@@ -290,14 +290,14 @@ export const digitalDocumentation = {
         placeholder:
           "Begründung und/oder Ausschnitt aus Ihrer Regelung als Kopie (Paragraf)",
       },
-      deleteButton: "Referenz löschen",
+      deleteButton: "Erläuterung löschen",
     },
     dialog: {
       deleteButton: "Löschen bestätigen",
       cancelButton: "Abbrechen",
-      title: "Referenz löschen",
+      title: "Erläuterung löschen",
       description: dedent`
-        Die Referenz wird entfernt und das Eingabefeld zurückgesetzt.
+        Die Erläuterung wird entfernt und das Eingabefeld zurückgesetzt. 
         
         Sie können jederzeit eine neue Erläuterung eintragen.`,
     },
