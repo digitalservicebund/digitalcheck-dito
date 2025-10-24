@@ -3,7 +3,7 @@ import {
   FileDownloadOutlined,
   RemoveCircleOutlineOutlined,
 } from "@digitalservicebund/icons";
-import { FormScope, useField, useFieldArray, useForm } from "@rvf/react-router";
+import { FormScope, useField, useFieldArray, useForm } from "@rvf/react";
 import { useCallback, useEffect } from "react";
 import { useLoaderData, useNavigate, useOutletContext } from "react-router";
 import Badge from "~/components/Badge";

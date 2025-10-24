@@ -1,6 +1,5 @@
 // Import mocks first
 import "./utils/mockDocumentationDataService";
-import "./utils/mockForm";
 import "./utils/mockRouter";
 // End of mocks
 

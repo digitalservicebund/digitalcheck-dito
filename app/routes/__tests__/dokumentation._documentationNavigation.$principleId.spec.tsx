@@ -1,17 +1,23 @@
 // Import mocks first
 import "./utils/mockDocumentationDataService";
-import "./utils/mockForm";
 import "./utils/mockRouter";
 // End of mocks
 
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter, useLoaderData, useOutletContext } from "react-router";
+import userEvent from "@testing-library/user-event";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useLoaderData,
+  useOutletContext,
+} from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-
 import { Route, ROUTES_DOCUMENTATION_PRE } from "~/resources/staticRoutes";
 import { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationPrinciple from "../dokumentation._documentationNavigation.$principleId";
+import { useDocumentationData } from "../dokumentation/documentationDataHook";
+import { initialDocumentationData } from "../dokumentation/documentationDataService";
 
 const routes: (Route[] | Route)[] = [
   ...ROUTES_DOCUMENTATION_PRE,
@@ -24,18 +30,18 @@ const routes: (Route[] | Route)[] = [
 ];
 
 const mockedUseOutletContext = vi.mocked(useOutletContext);
-// const mockedUseDocumentationData = vi.mocked(useDocumentationData);
+const mockedUseDocumentationData = vi.mocked(useDocumentationData);
 const mockedUseLoaderData = vi.mocked(useLoaderData);
 
-describe("DocumentationPrinciple", () => {
-  const renderWithRouter = () => {
-    return render(
-      <MemoryRouter>
-        <DocumentationPrinciple />
-      </MemoryRouter>,
-    );
-  };
+const renderWithRouter = () => {
+  const router = createBrowserRouter([
+    { path: "/", Component: DocumentationPrinciple },
+  ]);
 
+  return render(<RouterProvider router={router} />);
+};
+
+describe("DocumentationPrinciple", () => {
   beforeEach(() => {
     const context: NavigationContext = {
       currentUrl: "/current-url",
@@ -51,7 +57,14 @@ describe("DocumentationPrinciple", () => {
           Nummer: 1,
           order: 1,
           Beschreibung: [],
-          Aspekte: [],
+          Aspekte: [
+            {
+              Titel: "Aspekt 1",
+              Beschreibung: "Aspekt 1 Beschreibung",
+              Kurzbezeichnung: "A1",
+              Text: [],
+            },
+          ],
         },
       ],
     };
@@ -98,5 +111,38 @@ describe("DocumentationPrinciple", () => {
     const backButton = screen.getByRole("link", { name: "Zurück" });
     expect(backButton).toBeInTheDocument();
     expect(backButton).toHaveAttribute("href", "/previous-url");
+  });
+
+  describe("positive answer", () => {
+    beforeEach(() => {
+      mockedUseDocumentationData.mockReturnValue({
+        documentationData: {
+          ...initialDocumentationData,
+          principles: [
+            {
+              id: "prinzip-1-digitale-angebote",
+              answer: "Ja, gänzlich oder Teilweise",
+              reasoning: [],
+            },
+          ],
+        },
+        findDocumentationDataForUrl: vi.fn(),
+      });
+
+      renderWithRouter();
+    });
+
+    it("shows the correct form fields for a positive answer", async () => {
+      const user = userEvent.setup();
+
+      await user.click(screen.getByLabelText("Ja, gänzlich oder Teilweise"));
+
+      expect(
+        screen.getByRole("heading", { level: 2, name: "Erläuterung angeben" }),
+      ).toBeInTheDocument();
+
+      const aspekt1Checkbox = screen.getByLabelText("A1");
+      expect(aspekt1Checkbox).toBeInTheDocument();
+    });
   });
 });

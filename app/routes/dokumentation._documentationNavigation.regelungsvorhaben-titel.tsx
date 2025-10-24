@@ -1,4 +1,4 @@
-import { useForm } from "@rvf/react-router";
+import { useForm } from "@rvf/react";
 import { useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router";
 import Heading from "~/components/Heading";

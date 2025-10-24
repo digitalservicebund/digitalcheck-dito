@@ -1,4 +1,4 @@
-import { FormScope, useField } from "@rvf/react-router";
+import { FormScope, useField } from "@rvf/react";
 import { ComponentProps, ReactNode, useEffect, useState } from "react";
 import Checkbox from "./Checkbox";
 

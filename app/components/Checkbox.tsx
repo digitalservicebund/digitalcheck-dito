@@ -1,4 +1,4 @@
-import { FormScope, useField } from "@rvf/react-router";
+import { FormScope, useField } from "@rvf/react";
 import { ComponentPropsWithRef, ReactNode, useId } from "react";
 import { twJoin } from "tailwind-merge";
 import InputError from "./InputError";
