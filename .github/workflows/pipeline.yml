@@ -96,7 +96,7 @@ jobs:
           output: "${{ env.PACKAGE_NAME }}-vulnerabilities.json"
 
       - name: Upload cosign vulnerability scan record
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: "${{ env.PACKAGE_NAME }}-vulnerabilities.json"
           path: "${{ env.PACKAGE_NAME }}-vulnerabilities.json"
