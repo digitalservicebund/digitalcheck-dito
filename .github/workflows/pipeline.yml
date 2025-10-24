@@ -103,7 +103,11 @@ jobs:
           if-no-files-found: error
 
       - name: Install cosign
+        # Third-party action, pin to commit SHA!
+        # See https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions
         uses: sigstore/cosign-installer@faadad0cce49287aee09b3a48701e75088a2c6ad # v4.0.0
+        with:
+          cosign-release: "v2.6.0"
 
       - name: Sign the published Docker image
         run: cosign sign --yes ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
