@@ -52,9 +52,20 @@ const principleReasoningSchema = z
 
 const principlePositiveAnswerSchema = z.object({
   answer: z.literal(principlePages.radioOptions[0]),
-  reasoning: z.array(principleReasoningSchema, {
-    error: principlePages.errors.reasoningError,
-  }),
+  reasoning: z
+    .array(principleReasoningSchema, {
+      error: principlePages.errors.reasoningError,
+    })
+    .optional()
+    .superRefine((val, ctx) => {
+      if (!val || val.length === 0) {
+        ctx.addIssue({
+          code: "custom",
+          message: principlePages.errors.reasoningError,
+          input: val,
+        });
+      }
+    }),
 });
 
 const principleNegativeAnswerSchema = z.object({
@@ -90,12 +101,6 @@ export const defaultTitleValues: PolicyTitle = {
 export const defaultParticipationValues: Participation = {
   formats: "",
   results: "",
-};
-
-export const defaultPrincipleValues: Principle = {
-  id: "",
-  answer: "",
-  reasoning: "",
 };
 
 export const defaultValues: Omit<DocumentationData, "version"> = {

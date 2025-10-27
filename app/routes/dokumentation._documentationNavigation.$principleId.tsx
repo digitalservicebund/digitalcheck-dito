@@ -22,7 +22,6 @@ import TextareaNew from "~/components/TextareaNew";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
 import {
-  defaultPrincipleValues,
   IrrelevantAnswerReasoning,
   NegativeAnswerReasoning,
   principleSchema,
@@ -182,7 +181,7 @@ function PositiveAnswerFormElements({
   const reasoningField = useFieldArray(scope, {
     validationBehavior: {
       initial: "onSubmit",
-      whenSubmitted: "onChange",
+      whenSubmitted: "onSubmit",
     },
   });
 
@@ -362,11 +361,11 @@ export default function DocumentationPrinciple() {
   const form = useForm({
     schema: principleSchema,
     defaultValues: {
-      ...defaultPrincipleValues,
       id: prinzip.documentId,
+      answer: "",
     },
     validationBehaviorConfig: {
-      whenSubmitted: "onChange",
+      whenSubmitted: "onSubmit",
       whenTouched: "onSubmit",
       initial: "onSubmit",
     },

@@ -1,5 +1,5 @@
 import { FormScope, useField } from "@rvf/react";
-import { ComponentProps, ReactNode, useEffect, useState } from "react";
+import { ComponentProps, ReactNode } from "react";
 import Checkbox from "./Checkbox";
 
 type BaseInputProps = Omit<
@@ -31,15 +31,10 @@ function CheckboxWithExpandableArea({
   defaultValue,
   ...rest
 }: Readonly<CheckboxWithExpandableAreaProps>) {
-  const [open, setOpen] = useState(false);
   const checkboxField = useField(scope);
   const checkboxControlProps = checkboxField.getControlProps();
 
-  useEffect(() => {
-    const checkboxValue = checkboxControlProps.value;
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setOpen(!!checkboxValue);
-  }, [checkboxControlProps.value]);
+  const open = !!checkboxControlProps.value;
 
   return (
     <div className="max-w-a11y space-y-40 rounded-sm border border-blue-400 bg-blue-200 p-24">

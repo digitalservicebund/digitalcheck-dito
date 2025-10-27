@@ -44,11 +44,9 @@ function TextareaNew({
       <textarea
         {...field.getInputProps({
           id: inputId,
-          "aria-describedby": [
-            hasError && errorId,
-            description && descriptionId,
-          ].join(" "),
+          "aria-describedby": description ? descriptionId : undefined,
           "aria-invalid": hasError || hasWarning,
+          "aria-errormessage": hasError || hasWarning ? errorId : undefined,
           className: twMerge(
             "ds-textarea placeholder-gray-800",
             hasError && "has-error",
