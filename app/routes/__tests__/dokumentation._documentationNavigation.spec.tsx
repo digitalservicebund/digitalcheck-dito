@@ -4,6 +4,7 @@ import {
   createMemoryRouter,
   RouterProvider,
   useLoaderData,
+  useOutletContext,
 } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
@@ -12,7 +13,9 @@ import {
   ROUTES_DOCUMENTATION_PRE,
 } from "~/resources/staticRoutes";
 
-import LayoutWithDocumentationNavigation from "~/routes/dokumentation._documentationNavigation";
+import LayoutWithDocumentationNavigation, {
+  NavigationContext,
+} from "~/routes/dokumentation._documentationNavigation";
 import useFeatureFlag from "~/utils/featureFlags";
 
 vi.mock("~/utils/featureFlags", () => {
@@ -44,7 +47,14 @@ function renderPage({ url }: Route) {
     return <h1>Something went wrong</h1>;
   }
   function DummyElement() {
-    return <h1>Foobar</h1>;
+    const { nextUrl, previousUrl } = useOutletContext<NavigationContext>();
+    return (
+      <>
+        <h1>Foobar</h1>
+        <a href={previousUrl}>Zurück</a>
+        <a href={nextUrl}>Weiter</a>
+      </>
+    );
   }
   const routes = [
     {
@@ -78,8 +88,7 @@ describe("navigation on pages of documentation", () => {
     vi.restoreAllMocks();
   });
 
-  // TODO: skipped for now must be tested to return the correct next and previous urls
-  it.skip.each(mockRoutes.flat())(
+  it.each(mockRoutes.flat())(
     "$url has back and forth navigation to previous and next page",
     (route) => {
       renderPage(route);
