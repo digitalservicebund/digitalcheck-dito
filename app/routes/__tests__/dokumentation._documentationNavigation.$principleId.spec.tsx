@@ -536,7 +536,6 @@ describe("DocumentationPrinciple", () => {
       expect(reasoningInput).toBeValid();
     });
 
-    // FIXME: error is not removed on clicking the checkbox
     it("removes errors on valid input for reasoning array", async () => {
       mockedUseDocumentationData.mockReturnValue({
         documentationData: {
@@ -568,12 +567,9 @@ describe("DocumentationPrinciple", () => {
       expect(reasoningError).toBeInTheDocument();
       await user.click(aspektCheckbox as unknown as HTMLElement);
 
-      // TODO: somehow the error is not removed on change here
-      // await waitFor(() => {
-      //   expect(
-      //     screen.queryByText(/Bitte geben Sie mindestens eine Erläuterung an/),
-      //   ).not.toBeInTheDocument();
-      // });
+      expect(
+        screen.queryByText(/Bitte geben Sie mindestens eine Erläuterung an/),
+      ).not.toBeInTheDocument();
     });
   });
 });

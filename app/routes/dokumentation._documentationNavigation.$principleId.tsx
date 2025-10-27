@@ -422,13 +422,21 @@ export default function DocumentationPrinciple() {
     if (principleData && !form.dirty("answer")) {
       form.resetForm(principleData);
       form.setDirty("answer", true);
-
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      form.validate();
+      form.validate().catch(() => {});
     }
 
     return () => unsubscribe();
   }, [currentUrl, form, prinzip.documentId, documentationData, principleData]);
+
+  // somehow the error for the reasoning field is not removed on change
+  // thats why we do it here manually
+  useEffect(() => {
+    const unsubscribe = form.subscribe.value("reasoning", () =>
+      form.clearError("reasoning"),
+    );
+
+    return () => unsubscribe();
+  }, [form]);
 
   return (
     <>
