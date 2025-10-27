@@ -1,3 +1,7 @@
+// Import mocks first
+import "./utils/mockDocumentationDataService";
+// End of mocks
+
 import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
 import {
@@ -10,6 +14,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   type Route,
   ROUTE_DOCUMENTATION,
+  ROUTE_DOCUMENTATION_PARTICIPATION,
+  ROUTE_DOCUMENTATION_TITLE,
   ROUTES_DOCUMENTATION_PRE,
 } from "~/resources/staticRoutes";
 
@@ -17,12 +23,13 @@ import LayoutWithDocumentationNavigation, {
   NavigationContext,
 } from "~/routes/dokumentation._documentationNavigation";
 import useFeatureFlag from "~/utils/featureFlags";
+import { useDocumentationData } from "../dokumentation/documentationDataHook";
+import { DocumentationData } from "../dokumentation/documentationDataSchema";
+import { initialDocumentationData } from "../dokumentation/documentationDataService";
 
-vi.mock("~/utils/featureFlags", () => {
-  return {
-    default: vi.fn(),
-  };
-});
+vi.mock("~/utils/featureFlags", () => ({
+  default: vi.fn(),
+}));
 
 vi.mock("react-router", async (importOriginal) => {
   const original = await importOriginal<typeof import("react-router")>();
@@ -41,6 +48,112 @@ const mockRoutes: (Route[] | Route)[] = [
     },
   ],
 ];
+
+type ValidationScenario = {
+  name: string;
+  documentationData: DocumentationData;
+  expected: {
+    completedTitle: boolean;
+    completedParticipation: boolean;
+    completedPrinciples: boolean;
+
+    warningTitle: boolean;
+    warningParticipation: boolean;
+    warningPrinciples: boolean;
+  };
+};
+
+const validationScenarios: ValidationScenario[] = [
+  {
+    name: "all valid completed",
+    documentationData: {
+      ...initialDocumentationData,
+      policyTitle: {
+        title: "Valid Title",
+      },
+      participation: {
+        formats: "Valid Formats",
+        results: "Valid Results",
+      },
+      principles: [
+        {
+          answer: "Ja, gänzlich oder Teilweise",
+          id: "1",
+          reasoning: [
+            {
+              checkbox: "on",
+              aspect: "aspect-1",
+              paragraphs: "paragraf 1",
+              reason: "begründung 1",
+            },
+          ],
+        },
+      ],
+    },
+    expected: {
+      completedTitle: false, // is current route so no states are shown
+      completedParticipation: true,
+      completedPrinciples: true,
+
+      warningTitle: false,
+      warningParticipation: false,
+      warningPrinciples: false,
+    },
+  },
+  {
+    name: "unfilled form",
+    documentationData: {
+      ...initialDocumentationData,
+    },
+    expected: {
+      completedTitle: false, // is current route so no states are shown
+      completedParticipation: false,
+      completedPrinciples: false,
+
+      warningTitle: false,
+      warningParticipation: false,
+      warningPrinciples: false,
+    },
+  },
+  {
+    name: "partial filled form with warnings",
+    documentationData: {
+      ...initialDocumentationData,
+      policyTitle: {
+        title: "",
+      },
+      participation: {
+        formats: "Valid Formats",
+        results: "Valid Results",
+      },
+      principles: [
+        {
+          answer: "Ja, gänzlich oder Teilweise",
+          id: "1",
+          reasoning: [
+            {
+              checkbox: "on",
+              aspect: "aspect-1",
+              paragraphs: "paragraf 1",
+              reason: "",
+            },
+          ],
+        },
+      ],
+    },
+    expected: {
+      completedTitle: false, // is current route so no states are shown
+      completedParticipation: true,
+      completedPrinciples: false,
+
+      warningTitle: false,
+      warningParticipation: false,
+      warningPrinciples: true,
+    },
+  },
+];
+
+const mockedUseDocumentationData = vi.mocked(useDocumentationData);
 
 function renderPage({ url }: Route) {
   function ErrorBoundary() {
@@ -77,6 +190,50 @@ function renderPage({ url }: Route) {
 
   render(<RouterProvider router={router} />);
 }
+
+const getNav = () =>
+  screen.getByRole("navigation", { name: "Seitennavigation" });
+
+const getTitel = () =>
+  within(getNav()).getByRole("link", { name: "Regelungsvorhaben Titel" });
+
+const getBeteiligungsformate = () =>
+  within(getNav()).getByRole("link", { name: "Beteiligungsformate" });
+
+const getPrinzipA = () =>
+  within(getNav()).getByRole("link", { name: "Prinzip A" });
+
+const expectCompleted = (element: HTMLElement, completed: boolean = true) => {
+  if (completed) {
+    expect(element).toHaveAccessibleDescription(
+      `${element.textContent} - Fertig`,
+    );
+    expect(within(element).getByTestId("CheckIcon")).toBeInTheDocument();
+  } else {
+    expect(element).not.toHaveAccessibleDescription(
+      `${element.textContent} - Fertig`,
+    );
+    expect(within(element).queryByTestId("CheckIcon")).not.toBeInTheDocument();
+  }
+};
+
+const expectWarning = (element: HTMLElement, warning: boolean = true) => {
+  if (warning) {
+    expect(element).toHaveAccessibleDescription(
+      `${element.textContent} - Fehler`,
+    );
+    expect(
+      within(element).getByTestId("WarningAmberOutlinedIcon"),
+    ).toBeInTheDocument();
+  } else {
+    expect(element).not.toHaveAccessibleDescription(
+      `${element.textContent} - Fehler`,
+    );
+    expect(
+      within(element).queryByTestId("WarningAmberOutlinedIcon"),
+    ).not.toBeInTheDocument();
+  }
+};
 
 describe("navigation on pages of documentation", () => {
   beforeEach(() => {
@@ -132,5 +289,47 @@ describe("navigation on pages of documentation", () => {
 
     renderPage(mockRoutes.flat()[0]);
     expect(screen.getByText("Something went wrong")).toBeInTheDocument();
+  });
+
+  describe("States", () => {
+    describe.each(validationScenarios)(
+      "Scenario: $name",
+      ({ documentationData, expected }) => {
+        beforeEach(() => {
+          mockedUseDocumentationData.mockReturnValue({
+            documentationData,
+            findDocumentationDataForUrl: vi.fn((url: string) => {
+              if (url === ROUTE_DOCUMENTATION_TITLE.url)
+                return documentationData.policyTitle;
+              else if (url === ROUTE_DOCUMENTATION_PARTICIPATION.url)
+                return documentationData.participation;
+              else return (documentationData.principles || [])[0];
+            }),
+          });
+        });
+
+        it("shows correct completed states", () => {
+          renderPage(mockRoutes.flat()[0]);
+
+          expectCompleted(getTitel(), expected.completedTitle);
+          expectCompleted(
+            getBeteiligungsformate(),
+            expected.completedParticipation,
+          );
+          expectCompleted(getPrinzipA(), expected.completedPrinciples);
+        });
+
+        it("shows correct warning states", () => {
+          renderPage(mockRoutes.flat()[0]);
+
+          expectWarning(getTitel(), expected.warningTitle);
+          expectWarning(
+            getBeteiligungsformate(),
+            expected.warningParticipation,
+          );
+          expectWarning(getPrinzipA(), expected.warningPrinciples);
+        });
+      },
+    );
   });
 });

@@ -105,31 +105,33 @@ describe("Nav", () => {
   });
 
   it("shows a completed icon for completed elements", () => {
-    renderNav("/example3-1", true, false, false);
+    renderNav("/example2", true, false, false);
 
-    const completedElements = screen.getAllByRole("link", {
-      name: /- Fertig/,
+    const completedElement = screen.getByRole("link", {
+      name: "Navigation SubItem 1",
     });
-    expect(completedElements.length).toBe(1);
+    expect(completedElement).toHaveAccessibleDescription(
+      "Navigation SubItem 1 - Fertig",
+    );
 
-    for (const element of completedElements) {
-      expect(within(element).getByTestId("CheckIcon")).toBeInTheDocument();
-    }
+    expect(
+      within(completedElement).getByTestId("CheckIcon"),
+    ).toBeInTheDocument();
   });
 
   it("shows a error icon for elements with errors", () => {
-    renderNav("/example3-1", false, true);
+    renderNav("/example2", false, true);
 
-    const elementsWithError = screen.getAllByRole("link", {
-      name: /- Fehler/,
+    const elementWithError = screen.getByRole("link", {
+      name: "Navigation SubItem 2",
     });
-    expect(elementsWithError.length).toBe(1);
+    expect(elementWithError).toHaveAccessibleDescription(
+      "Navigation SubItem 2 - Fehler",
+    );
 
-    for (const element of elementsWithError) {
-      expect(
-        within(element).getByTestId("WarningAmberOutlinedIcon"),
-      ).toBeInTheDocument();
-    }
+    expect(
+      within(elementWithError).getByTestId("WarningAmberOutlinedIcon"),
+    ).toBeInTheDocument();
   });
 
   it("automatically opens the subItems when a descendant element is active", () => {

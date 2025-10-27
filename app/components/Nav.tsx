@@ -93,10 +93,12 @@ function NavItem({
   const hasCompletedDescendant = Boolean(
     containsMatchingAttr(subItems, "completed"),
   );
-  const isCompleted = Boolean(completed || hasCompletedDescendant);
+  const isCompleted = Boolean(
+    (!isActive && completed) || hasCompletedDescendant,
+  );
 
   const hasErrorDescendant = Boolean(containsMatchingAttr(subItems, "error"));
-  const hasError = Boolean(error || hasErrorDescendant);
+  const hasError = Boolean((!isActive && error) || hasErrorDescendant);
 
   const hoverClasses =
     "hover:border-l-blue-300 hover:bg-blue-300 hover:underline";
@@ -123,7 +125,7 @@ function NavItem({
       {url ? (
         <Link
           to={url}
-          aria-label={
+          title={
             hasError
               ? `${children} - ${general.a11yMessageError}`
               : isCompleted
