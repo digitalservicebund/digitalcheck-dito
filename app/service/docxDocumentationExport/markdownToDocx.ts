@@ -7,7 +7,7 @@ import { ExternalHyperlink, Paragraph, TextRun } from "docx";
  * - Bold text (**text**)
  * - Links ([text](url))
  */
-export default function markdown(markdown: string): Paragraph[] {
+export default function renderMarkdown(markdown: string): Paragraph[] {
   const lines = markdown.split("\n");
 
   return lines

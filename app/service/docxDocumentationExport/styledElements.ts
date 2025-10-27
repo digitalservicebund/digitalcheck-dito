@@ -18,7 +18,10 @@ import type {
   PrincipleReasoning,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { slugify } from "~/utils/utilFunctions";
-import type { PrinzipAspekt, PrinzipWithAspekte } from "../strapiData.server";
+import type {
+  PrinzipAspekt,
+  PrinzipWithAspekte,
+} from "../../utils/strapiData.server";
 import strapiBlocksToDocx from "./strapiBlocksToDocx";
 
 const NO_BORDER = {

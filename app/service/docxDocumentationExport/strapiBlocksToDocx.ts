@@ -1,5 +1,5 @@
 import { ExternalHyperlink, Paragraph, TextRun } from "docx";
-import type { Node } from "../paragraphUtils";
+import type { Node } from "../../utils/paragraphUtils";
 
 /**
  * Renders Strapi blocks content into an array of Paragraph objects for docx.

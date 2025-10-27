@@ -1,7 +1,7 @@
 import { ExternalHyperlink, Paragraph, TextRun } from "docx";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { dedent } from "../dedentMultilineStrings";
-import markdown from "./markdownToDocx";
+import { dedent } from "../../utils/dedentMultilineStrings";
+import renderMarkdown from "./markdownToDocx";
 
 // This is hoisted and executed before the imports
 vi.mock("docx", async (importOriginal) => {
@@ -26,7 +26,7 @@ describe("markdownToDocx", () => {
 
   describe("plain text", () => {
     it("should convert plain text to a paragraph", () => {
-      markdown("Hello world");
+      renderMarkdown("Hello world");
 
       expect(Paragraph).toHaveBeenCalledTimes(1);
       expect(TextRun).toHaveBeenCalledTimes(1);
@@ -36,7 +36,7 @@ describe("markdownToDocx", () => {
     });
 
     it("should handle multiple plain text lines", () => {
-      markdown("Line 1\nLine 2\nLine 3");
+      renderMarkdown("Line 1\nLine 2\nLine 3");
 
       expect(Paragraph).toHaveBeenCalledTimes(3);
       expect(TextRun).toHaveBeenCalledTimes(3);
@@ -53,7 +53,7 @@ describe("markdownToDocx", () => {
     });
 
     it("should handle empty string", () => {
-      markdown("");
+      renderMarkdown("");
 
       expect(Paragraph).toHaveBeenCalledTimes(0);
     });
@@ -61,7 +61,7 @@ describe("markdownToDocx", () => {
 
   describe("bold text", () => {
     it("should convert **text** to bold", () => {
-      markdown("This is **bold** text");
+      renderMarkdown("This is **bold** text");
 
       expect(Paragraph).toHaveBeenCalledTimes(1);
       expect(TextRun).toHaveBeenCalledTimes(3);
@@ -76,7 +76,7 @@ describe("markdownToDocx", () => {
     });
 
     it("should handle only bold text", () => {
-      markdown("**bold only**");
+      renderMarkdown("**bold only**");
 
       expect(TextRun).toHaveBeenCalledTimes(1);
       expect(Paragraph).toHaveBeenCalledWith({
@@ -85,7 +85,7 @@ describe("markdownToDocx", () => {
     });
 
     it("should handle multiple bold sections", () => {
-      markdown("**First** and **Second** bold");
+      renderMarkdown("**First** and **Second** bold");
 
       expect(TextRun).toHaveBeenCalledTimes(4);
 
@@ -100,7 +100,7 @@ describe("markdownToDocx", () => {
     });
 
     it("should handle consecutive bold sections", () => {
-      markdown("**First****Second**");
+      renderMarkdown("**First****Second**");
 
       expect(TextRun).toHaveBeenCalledTimes(2);
 
@@ -113,7 +113,7 @@ describe("markdownToDocx", () => {
     });
 
     it("should treat unclosed bold markers as plain text", () => {
-      markdown("This is **unclosed bold");
+      renderMarkdown("This is **unclosed bold");
 
       expect(TextRun).toHaveBeenCalledTimes(1);
       expect(Paragraph).toHaveBeenCalledWith({
@@ -124,7 +124,7 @@ describe("markdownToDocx", () => {
 
   describe("links", () => {
     it("should convert [text](url) to hyperlink", () => {
-      markdown("Visit [Google](https://google.com) now");
+      renderMarkdown("Visit [Google](https://google.com) now");
 
       expect(TextRun).toHaveBeenCalledTimes(3);
       expect(ExternalHyperlink).toHaveBeenCalledTimes(1);
@@ -142,7 +142,7 @@ describe("markdownToDocx", () => {
     });
 
     it("should handle only a link", () => {
-      markdown("[Google](https://google.com)");
+      renderMarkdown("[Google](https://google.com)");
 
       // One TextRun inside the hyperlink
       expect(TextRun).toHaveBeenCalledTimes(1);
@@ -158,7 +158,9 @@ describe("markdownToDocx", () => {
     });
 
     it("should handle multiple links", () => {
-      markdown("[Google](https://google.com) and [GitHub](https://github.com)");
+      renderMarkdown(
+        "[Google](https://google.com) and [GitHub](https://github.com)",
+      );
 
       expect(ExternalHyperlink).toHaveBeenCalledTimes(2);
 
@@ -174,7 +176,7 @@ describe("markdownToDocx", () => {
     });
 
     it("should treat unclosed link syntax as plain text", () => {
-      markdown("Visit [Google](incomplete");
+      renderMarkdown("Visit [Google](incomplete");
 
       expect(ExternalHyperlink).toHaveBeenCalledTimes(0);
       expect(TextRun).toHaveBeenCalledTimes(1);
@@ -186,7 +188,7 @@ describe("markdownToDocx", () => {
 
   describe("combining bold and links", () => {
     it("should handle bold around links", () => {
-      markdown("**Bold** then [link](url) then **bold** again");
+      renderMarkdown("**Bold** then [link](url) then **bold** again");
 
       expect(ExternalHyperlink).toHaveBeenCalledTimes(1);
       expect(Paragraph).toHaveBeenCalledWith({
@@ -205,7 +207,7 @@ describe("markdownToDocx", () => {
     });
 
     it("should handle links around bold", () => {
-      markdown("[one](url) then **bold** then [two](url)");
+      renderMarkdown("[one](url) then **bold** then [two](url)");
 
       expect(ExternalHyperlink).toHaveBeenCalledTimes(2);
       expect(Paragraph).toHaveBeenCalledWith({
@@ -228,7 +230,7 @@ describe("markdownToDocx", () => {
 
   describe("bullet lists", () => {
     it("should handle dash bullet points", () => {
-      markdown("- First item\n- Second item");
+      renderMarkdown("- First item\n- Second item");
 
       expect(Paragraph).toHaveBeenCalledTimes(2);
       expect(TextRun).toHaveBeenCalledTimes(2);
@@ -245,7 +247,7 @@ describe("markdownToDocx", () => {
     });
 
     it("should handle asterisk bullet points", () => {
-      markdown("* First item\n* Second item");
+      renderMarkdown("* First item\n* Second item");
 
       expect(Paragraph).toHaveBeenCalledTimes(2);
       expect(Paragraph).toHaveBeenNthCalledWith(1, {
@@ -259,7 +261,7 @@ describe("markdownToDocx", () => {
     });
 
     it("should handle bold text in bullets", () => {
-      markdown("- This is **bold** in bullet");
+      renderMarkdown("- This is **bold** in bullet");
 
       expect(Paragraph).toHaveBeenCalledTimes(1);
       expect(TextRun).toHaveBeenCalledTimes(3);
@@ -275,7 +277,7 @@ describe("markdownToDocx", () => {
     });
 
     it("should handle links in bullets", () => {
-      markdown("- Visit [Google](https://google.com)");
+      renderMarkdown("- Visit [Google](https://google.com)");
 
       expect(Paragraph).toHaveBeenCalledTimes(1);
       expect(ExternalHyperlink).toHaveBeenCalledTimes(1);
@@ -298,7 +300,7 @@ describe("markdownToDocx", () => {
     });
 
     it("should handle both bold and links in bullets", () => {
-      markdown("- **Bold** text and [link](https://example.com)");
+      renderMarkdown("- **Bold** text and [link](https://example.com)");
 
       expect(Paragraph).toHaveBeenCalledTimes(1);
       expect(TextRun).toHaveBeenCalledTimes(3);
@@ -317,7 +319,7 @@ describe("markdownToDocx", () => {
     });
 
     it("should trim whitespace before checking for bullets", () => {
-      markdown("   - Indented bullet");
+      renderMarkdown("   - Indented bullet");
 
       expect(Paragraph).toHaveBeenCalledTimes(1);
       expect(TextRun).toHaveBeenCalledWith("Indented bullet");
@@ -330,7 +332,7 @@ describe("markdownToDocx", () => {
 
   describe("empty lines and paragraph breaks", () => {
     it("should skip empty lines", () => {
-      markdown("Line 1\n\nLine 2");
+      renderMarkdown("Line 1\n\nLine 2");
 
       expect(Paragraph).toHaveBeenCalledTimes(2);
       expect(TextRun).toHaveBeenCalledTimes(2);
@@ -344,7 +346,7 @@ describe("markdownToDocx", () => {
     });
 
     it("should skip lines with only whitespace", () => {
-      markdown("Line 1\n   \n\t\nLine 2");
+      renderMarkdown("Line 1\n   \n\t\nLine 2");
 
       expect(Paragraph).toHaveBeenCalledTimes(2);
       expect(TextRun).toHaveBeenCalledTimes(2);
@@ -360,7 +362,7 @@ describe("markdownToDocx", () => {
 
   describe("complex scenarios", () => {
     it("should handle all features in one bullet", () => {
-      markdown(
+      renderMarkdown(
         "- **Start** with bold, add [link](https://example.com), and **end** bold",
       );
 
@@ -386,7 +388,7 @@ describe("markdownToDocx", () => {
     });
 
     it("should handle mixed content with bullets and paragraphs", () => {
-      markdown("Introduction\n- Bullet 1\n- Bullet 2\nConclusion");
+      renderMarkdown("Introduction\n- Bullet 1\n- Bullet 2\nConclusion");
 
       expect(Paragraph).toHaveBeenCalledTimes(4);
       expect(Paragraph).toHaveBeenNthCalledWith(1, {
@@ -416,7 +418,7 @@ describe("markdownToDocx", () => {
 
         Weitere Informationen finden Sie auf [unserer Website](https://example.com).`;
 
-      markdown(markdownText);
+      renderMarkdown(markdownText);
 
       expect(Paragraph).toHaveBeenCalledTimes(6);
       expect(ExternalHyperlink).toHaveBeenCalledTimes(3);

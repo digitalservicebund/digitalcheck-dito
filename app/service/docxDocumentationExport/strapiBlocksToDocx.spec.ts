@@ -1,6 +1,6 @@
 import { ExternalHyperlink, Paragraph, TextRun } from "docx";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { Node } from "../paragraphUtils";
+import type { Node } from "../../utils/paragraphUtils";
 import strapiBlocksToDocx from "./strapiBlocksToDocx";
 
 // This is hoisted and executed before the imports

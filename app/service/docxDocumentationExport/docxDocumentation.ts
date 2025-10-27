@@ -9,15 +9,15 @@ import fileSaver from "file-saver";
 import { documentationDocument } from "~/resources/content/documentation-document";
 import { type DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
 import { getDocumentationData } from "~/routes/dokumentation/documentationDataService";
-import { type PrinzipWithAspekte } from "../strapiData.server";
+import { type PrinzipWithAspekte } from "../../utils/strapiData.server";
+import renderMarkdown from "./markdownToDocx";
 import {
   answer,
   formLabel,
   header,
   heading,
   principleElement,
-} from "./elements";
-import markdown from "./markdownToDocx";
+} from "./styledElements";
 const { saveAs } = fileSaver;
 
 const content = {
@@ -27,7 +27,9 @@ const content = {
     participation: DocumentationData["participation"],
   ) => [
     heading(documentationDocument.introduction.title, "title"),
-    ...markdown(`${documentationDocument.introduction.exportDate} ${date}`),
+    ...renderMarkdown(
+      `${documentationDocument.introduction.exportDate} ${date}`,
+    ),
     heading(documentationDocument.introduction.projectTitle.heading, 1),
     answer(policyTitle?.title ?? ""),
     heading(documentationDocument.introduction.participationFormats.heading, 1),
@@ -42,11 +44,11 @@ const content = {
   ],
   nextSteps: [
     heading(documentationDocument.nextSteps.heading, 1, true),
-    ...markdown(documentationDocument.nextSteps.instructions),
+    ...renderMarkdown(documentationDocument.nextSteps.instructions),
     heading(documentationDocument.nextSteps.nkrInfo.heading, 2),
-    ...markdown(documentationDocument.nextSteps.nkrInfo.content),
+    ...renderMarkdown(documentationDocument.nextSteps.nkrInfo.content),
     heading(documentationDocument.nextSteps.support.heading, 2),
-    ...markdown(documentationDocument.nextSteps.support.content),
+    ...renderMarkdown(documentationDocument.nextSteps.support.content),
   ],
 };
 
