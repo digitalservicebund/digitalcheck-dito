@@ -13,11 +13,9 @@ vi.mock("docx", async (importOriginal) => {
   } = await importOriginal<typeof import("docx")>();
   return {
     ...originalModule,
-    Paragraph: vi.fn((options) => new OriginalParagraph(options)),
-    TextRun: vi.fn((options) => new OriginalTestRun(options)),
-    ExternalHyperlink: vi.fn(
-      (options) => new OriginalExternalHyperlink(options),
-    ),
+    Paragraph: vi.fn(OriginalParagraph),
+    TextRun: vi.fn(OriginalTestRun),
+    ExternalHyperlink: vi.fn(OriginalExternalHyperlink),
   };
 });
 
