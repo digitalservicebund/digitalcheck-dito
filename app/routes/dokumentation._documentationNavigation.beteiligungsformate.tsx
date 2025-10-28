@@ -30,7 +30,7 @@ export default function DocumentationParticipation() {
     schema: participationSchema,
     defaultValues: defaultParticipationValues,
     validationBehaviorConfig: {
-      whenSubmitted: "onChange",
+      whenSubmitted: "onSubmit",
       whenTouched: "onSubmit",
       initial: "onSubmit",
     },

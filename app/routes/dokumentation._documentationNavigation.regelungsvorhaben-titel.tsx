@@ -27,7 +27,7 @@ export default function DocumentationTitle() {
     schema: policyTitleSchema,
     defaultValues: defaultTitleValues,
     validationBehaviorConfig: {
-      whenSubmitted: "onChange",
+      whenSubmitted: "onSubmit",
       whenTouched: "onSubmit",
       initial: "onSubmit",
     },
