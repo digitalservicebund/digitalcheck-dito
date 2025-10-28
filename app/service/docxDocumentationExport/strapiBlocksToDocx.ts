@@ -1,4 +1,4 @@
-import { ExternalHyperlink, Paragraph, TextRun } from "docx";
+import { ExternalHyperlink, IParagraphOptions, Paragraph, TextRun } from "docx";
 import type { Node } from "../../utils/paragraphUtils";
 
 /**
@@ -10,7 +10,7 @@ import type { Node } from "../../utils/paragraphUtils";
  */
 export default function strapiBlocksToDocx(
   blocks: Node[],
-  keepAllNext: boolean = false,
+  options?: Partial<IParagraphOptions>,
 ): Paragraph[] {
   return blocks
     .flatMap((node) =>
@@ -18,22 +18,22 @@ export default function strapiBlocksToDocx(
         ? node.children.map((listItem) => listItem)
         : node,
     )
-    .map((node) => nodeToDocx(node, keepAllNext))
+    .map((node) => nodeToDocx(node, options))
     .filter((paragraph) => paragraph !== null);
 }
 
-const nodeToDocx = (node: Node, keepAllNext: boolean = false) => {
+const nodeToDocx = (node: Node, options?: Partial<IParagraphOptions>) => {
   if (!node.children) return null;
   const children = processChildren(node.children);
 
   switch (node.type) {
     case "paragraph":
-      return new Paragraph({ children, keepNext: keepAllNext });
+      return new Paragraph({ children, ...options });
     case "list-item":
       return new Paragraph({
         children,
-        keepNext: keepAllNext,
         numbering: { reference: "bullet-points", level: 0 },
+        ...options,
       });
     default:
       return null;
