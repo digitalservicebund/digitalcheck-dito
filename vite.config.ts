@@ -17,15 +17,6 @@ export default defineConfig({
       external: [/\.spec\.tsx?$/], // exclude test files from production build
     },
   },
-  test: {
-    globals: true,
-    environment: "jsdom",
-    setupFiles: ["vitest-setup.ts"],
-    include: ["app/**/*.{test,spec}.ts?(x)"],
-    chaiConfig: {
-      truncateThreshold: 200,
-    },
-  },
   ssr: {
     noExternal: ["posthog-js", "posthog-js/react"],
   },
