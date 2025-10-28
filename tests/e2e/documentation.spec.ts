@@ -1,6 +1,5 @@
 import { expect, type Page, test } from "@playwright/test";
 import { extractRawText } from "mammoth";
-import { documentationDocument } from "~/resources/content/documentation-document";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
   ROUTE_DOCUMENTATION,
@@ -9,8 +8,6 @@ import {
   ROUTE_DOCUMENTATION_SUMMARY,
   ROUTE_DOCUMENTATION_TITLE,
 } from "~/resources/staticRoutes";
-
-const { introduction } = documentationDocument;
 
 const testData = {
   title: "E2E Titel des Regelungsvorhabens",
@@ -187,13 +184,13 @@ test.describe("documentation flow happy path", () => {
     const filePath = testInfo.outputPath("documentation.docx");
     await download.saveAs(filePath);
     const { value: docText } = await extractRawText({ path: filePath });
+    console.log(docText);
 
     // Validate that key data appears in the document in the right order
-    // TODO add some data to be validated once it is being included in the document
     const textOrder = [
-      introduction.projectTitle.heading,
+      "Titel Ihres Regelungsvorhaben",
       testData.title,
-      introduction.participationFormats.heading,
+      "Auswirkungen auf Betroffene",
       testData.participationFormats,
       testData.participationResults,
       "Ja, gänzlich oder Teilweise",
@@ -201,17 +198,18 @@ test.describe("documentation flow happy path", () => {
       testData.principle2Paragraph,
       "Erläuterung",
       testData.principle2Reason,
-      // TODO add "Paragrafen",
-      // TODO add testData.customParagraph
-      // TODO add "Erläuterung",
-      // TODO add testData.customReason
+      // "Paragrafen",
+      // testData.customParagraph,
+      // "Erläuterung",
+      // testData.customReason,
       "Nein",
-      // TODO add testData.negativeReason
+      testData.negativeReason,
       "Nicht relevant",
-      // TODO add testData.irrelevantReason
+      testData.irrelevantReason,
     ];
     let lastIdx = -1;
     for (const searchText of textOrder) {
+      console.log(searchText);
       const searchIdx = docText.indexOf(searchText, lastIdx);
       expect(searchIdx).toBeGreaterThan(lastIdx);
       lastIdx = searchIdx;
