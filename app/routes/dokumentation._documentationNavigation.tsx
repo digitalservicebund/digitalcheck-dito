@@ -12,6 +12,7 @@ import {
 import useFeatureFlag from "~/utils/featureFlags";
 import {
   fetchStrapiData,
+  GET_PRINZIPS_WITH_ASPECTS_QUERY,
   type PrinzipWithAspekte,
 } from "~/utils/strapiData.server";
 import { useDocumentationData } from "./dokumentation/documentationDataHook";
@@ -29,24 +30,6 @@ export type NavigationContext = {
   routes: (Route | Route[])[];
   prinzips: PrinzipWithAspekte[];
 };
-
-const GET_PRINZIPS_QUERY = `
-query GetPrinzips {
-  prinzips(sort: "order") {
-    documentId
-    order
-    Nummer
-    URLBezeichnung
-    Name
-    Beschreibung
-    Aspekte {
-      Titel
-      Kurzbezeichnung
-      Beschreibung
-      Text
-    }
-  }
-}`;
 
 const getUrlForSlug = (slug: string) => `/dokumentation/${slug}`;
 
@@ -74,7 +57,7 @@ function getNextUrl(routes: Route[], currentUrl: string): string | null {
 export const loader = async () => {
   const prinzipData = await fetchStrapiData<{
     prinzips: PrinzipWithAspekte[];
-  }>(GET_PRINZIPS_QUERY);
+  }>(GET_PRINZIPS_WITH_ASPECTS_QUERY);
 
   if ("error" in prinzipData) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error

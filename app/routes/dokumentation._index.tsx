@@ -19,7 +19,7 @@ import { supportBanner } from "~/resources/content/shared/support-banner";
 import { features } from "~/resources/features";
 import {
   ROUTE_DOCUMENTATION,
-  ROUTE_DOCUMENTATION_STATIC_WORD,
+  ROUTE_DOCUMENTATION_TEMPLATE_WORD,
   ROUTE_DOCUMENTATION_TITLE,
   ROUTE_LANDING,
 } from "~/resources/staticRoutes";
@@ -69,7 +69,7 @@ function DigitalDocumentationIndex() {
 
             <Button
               look="link"
-              href={ROUTE_DOCUMENTATION_STATIC_WORD.url}
+              href={ROUTE_DOCUMENTATION_TEMPLATE_WORD.url}
               iconLeft={<SaveAltOutlined className="mr-2 fill-blue-800" />}
             >
               {start.alternative.buttonText}

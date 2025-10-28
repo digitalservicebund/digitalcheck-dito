@@ -45,7 +45,7 @@ export default async function downloadDocumentation(
 }
 
 export const createDoc = async (
-  templateData: ArrayBuffer,
+  templateData: ArrayBuffer | Uint8Array,
   principles: PrinzipWithAspekte[],
   templateOnly: boolean,
 ) => {

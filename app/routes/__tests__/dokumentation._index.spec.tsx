@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
-  ROUTE_DOCUMENTATION_STATIC_WORD,
+  ROUTE_DOCUMENTATION_TEMPLATE_WORD,
   ROUTE_DOCUMENTATION_TITLE,
   ROUTE_LANDING,
 } from "~/resources/staticRoutes";
@@ -55,7 +55,7 @@ describe("Dokumentation Index Route - Integration Tests", () => {
     });
     expect(downloadButton).toHaveAttribute(
       "href",
-      ROUTE_DOCUMENTATION_STATIC_WORD.url,
+      ROUTE_DOCUMENTATION_TEMPLATE_WORD.url,
     );
   });
 
