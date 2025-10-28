@@ -23,6 +23,7 @@ import {
 } from "../../utils/strapiData.server";
 import strapiBlocksToDocx from "./strapiBlocksToDocx";
 const { saveAs } = fileSaver;
+const { principlePages } = digitalDocumentation;
 
 export default async function downloadDocumentation(
   principles: PrinzipWithAspekte[],
@@ -69,6 +70,11 @@ export const createDoc = (
   return patchedDocument;
 };
 
+const stringToTextRuns = (content: string) =>
+  content
+    .split("\n")
+    .map((line, idx) => new TextRun({ text: line, break: Number(idx > 0) }));
+
 const toParagraphPatch = (content?: string | Node[]): IPatch => {
   if (content && typeof content !== "string") {
     return {
@@ -78,13 +84,16 @@ const toParagraphPatch = (content?: string | Node[]): IPatch => {
   }
   return {
     type: PatchType.PARAGRAPH,
-    // Renders strings with newlines as TextRuns with breaks
-    children: (content ?? "")
-      .split("\n")
-      .map((line, idx) => new TextRun({ text: line, break: Number(idx > 0) })),
+    children: stringToTextRuns(content ?? ""),
   };
 };
 
+// Builds all patches that are needed for the principles
+// - Title
+// - Description
+// - Answer for the principle
+// - Reasoning (in case of a negative answer)
+// - Aspects and own explanation (partially filled in case of a positive answer)
 const buildPrinciplePatches = (
   principles: PrinzipWithAspekte[],
   answers: DocumentationData["principles"],
@@ -93,11 +102,32 @@ const buildPrinciplePatches = (
     const answer = answers?.find(
       (answer) => answer.id === principle.documentId,
     );
-    const positivePrincipleAnswer = answer?.answer.includes("Ja");
-    const negativePrincipleAnswer =
+    const hasPositivePrincipleAnswer = answer?.answer.includes("Ja");
+    const hasNegativePrincipleAnswer =
       answer?.answer.includes("Nein") || answer?.answer.includes("Nicht");
-    const principleAnswerOptions =
-      digitalDocumentation.principlePages.radioOptions.join(" | ");
+    const principleAnswerOptions = principlePages.radioOptions.join(" | ");
+
+    const aspectsContent = principle.Aspekte.flatMap((aspect, idx) =>
+      buildReasoningParagraphs(
+        hasPositivePrincipleAnswer
+          ? (answer?.reasoning?.[idx] as PrincipleReasoning)
+          : {},
+        aspect,
+      ),
+    );
+
+    let ownExplanationContent: Paragraph[] = [];
+    if (hasPositivePrincipleAnswer && Array.isArray(answer?.reasoning)) {
+      // Can have multiple own explanations
+      ownExplanationContent = answer.reasoning
+        .filter((reasoning) => !reasoning.aspect)
+        .flatMap((reasoning) => buildReasoningParagraphs(reasoning));
+    }
+    // Should always have at least one empty for the user to fill
+    if (ownExplanationContent.length === 0) {
+      ownExplanationContent = buildReasoningParagraphs({});
+    }
+
     return {
       ...acc,
       [`PRINCIPLE_${index + 1}_TITLE`]: toParagraphPatch(principle.Name),
@@ -110,18 +140,11 @@ const buildPrinciplePatches = (
       // We always need to fill both patches to avoid the tags rendering
       // Depending on whether the answer is positive or negative, we either fill the reasoning or the aspects
       [`PRINCIPLE_${index + 1}_REASONING`]: toParagraphPatch(
-        negativePrincipleAnswer ? (answer?.reasoning as string) : "",
+        hasNegativePrincipleAnswer ? (answer?.reasoning as string) : "",
       ),
       [`PRINCIPLE_${index + 1}_ASPECTS`]: {
         type: PatchType.DOCUMENT,
-        children: principle.Aspekte.flatMap((aspect, idx) =>
-          buildAspectParagraphs(
-            aspect,
-            positivePrincipleAnswer
-              ? (answer?.reasoning?.[idx] as PrincipleReasoning)
-              : {},
-          ),
-        ),
+        children: [...aspectsContent, ...ownExplanationContent],
       },
     };
   }, {});
@@ -132,30 +155,37 @@ const indentOptions = {
   },
 };
 
-const stringToIndentParagraph = (
-  content: string | undefined,
-  options: Partial<IParagraphOptions>,
-) =>
+// Renders strings with newlines as TextRuns with breaks
+const stringToIndentParagraph = (options: IParagraphOptions) =>
   new Paragraph({
-    text: content ?? "",
     ...options,
     ...indentOptions,
   });
 
-export const buildAspectParagraphs = (
-  aspect: PrinzipAspekt,
+// Builds the Paragraphs for the individual aspects, combining data from Strapi with the user data
+export const buildReasoningParagraphs = (
   reasoning?: PrincipleReasoning,
+  aspect?: PrinzipAspekt,
 ) => [
-  stringToIndentParagraph(aspect.Titel, { heading: HeadingLevel.HEADING_2 }),
-  ...strapiBlocksToDocx(aspect.Text, indentOptions),
-  stringToIndentParagraph(documentationDocument.aspect.paragraphsLabel, {
+  stringToIndentParagraph({
+    text: aspect?.Titel ?? principlePages.explanationFields.ownExplanationTitle,
+    heading: HeadingLevel.HEADING_2,
+  }),
+  ...(aspect ? strapiBlocksToDocx(aspect.Text, indentOptions) : []),
+  stringToIndentParagraph({
+    text: documentationDocument.aspect.paragraphsLabel,
     style: "Textbox Label",
   }),
-  stringToIndentParagraph(`§${reasoning?.paragraphs ?? ""}`, {
+  stringToIndentParagraph({
+    text: `§${reasoning?.paragraphs ?? ""}`,
     style: "Textbox",
   }),
-  stringToIndentParagraph(documentationDocument.aspect.explanationLabel, {
+  stringToIndentParagraph({
+    text: documentationDocument.aspect.explanationLabel,
     style: "Textbox Label",
   }),
-  stringToIndentParagraph(reasoning?.reason ?? "", { style: "Textbox" }),
+  stringToIndentParagraph({
+    children: stringToTextRuns(reasoning?.reason ?? ""),
+    style: "Textbox",
+  }),
 ];
