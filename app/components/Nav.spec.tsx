@@ -149,4 +149,22 @@ describe("Nav", () => {
       }),
     ).toHaveAttribute("aria-expanded", "true");
   });
+
+  it("shows a warning if one sub item has a warning", () => {
+    renderNav("/example3-1", false, true);
+    expect(
+      screen.getByRole("button", {
+        name: "Navigation Item 3 with SubItems",
+      }),
+    ).toBeInvalid();
+  });
+
+  it("does not show a warning if one sub item has a warning but also is active element", () => {
+    renderNav("/example3-2", false, true);
+    expect(
+      screen.getByRole("button", {
+        name: "Navigation Item 3 with SubItems",
+      }),
+    ).toBeValid();
+  });
 });

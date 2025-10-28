@@ -53,19 +53,26 @@ const containsMatchingAttr = (
   node: ReactNode | ReactNode[],
   attr: keyof NavItemProps,
   value: string | boolean = true,
+  activeElementUrl?: string,
 ): boolean => {
   if (!node) return false;
 
   if (Array.isArray(node)) {
-    return node.some((n) => containsMatchingAttr(n, attr, value));
+    return node.some((n) =>
+      containsMatchingAttr(n, attr, value, activeElementUrl),
+    );
   }
 
   if (isValidElement(node)) {
     const props = ((node as ReactElement<unknown>).props ?? {}) as NavItemProps;
 
-    if (props[attr] === value) return true;
-    if (containsMatchingAttr(props.children, attr, value)) return true;
-    if (containsMatchingAttr(props.subItems, attr, value)) return true;
+    const isActiveNode = props.url === activeElementUrl;
+
+    if (props[attr] === value) return !isActiveNode;
+    if (containsMatchingAttr(props.children, attr, value, activeElementUrl))
+      return true;
+    if (containsMatchingAttr(props.subItems, attr, value, activeElementUrl))
+      return true;
   }
 
   return false;
@@ -97,7 +104,9 @@ function NavItem({
     (!isActive && completed) || hasCompletedDescendant,
   );
 
-  const hasErrorDescendant = Boolean(containsMatchingAttr(subItems, "error"));
+  const hasErrorDescendant = Boolean(
+    containsMatchingAttr(subItems, "error", true, activeElementUrl),
+  );
   const hasError = Boolean((!isActive && error) || hasErrorDescendant);
 
   const hoverClasses =
@@ -164,6 +173,7 @@ function NavItem({
                   "group w-full border-b border-b-white text-left text-black",
                   focusClasses,
                 )}
+                aria-invalid={hasError}
               >
                 <span
                   className={twJoin(
