@@ -28,6 +28,7 @@ import {
   type PrincipleReasoning,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { addOrUpdatePrinciple } from "~/routes/dokumentation/documentationDataService";
+import downloadDocumentation from "~/service/docxDocumentationExport/docxDocumentation";
 import type {
   PrinzipAspekt,
   PrinzipWithAspekte,
@@ -185,6 +186,8 @@ function PositiveAnswerFormElements({
     },
   });
 
+  const { prinzips } = useOutletContext<NavigationContext>();
+
   const remove = useCallback(
     async (index: number, aspekt?: PrinzipAspekt) => {
       if (aspekt)
@@ -275,7 +278,12 @@ function PositiveAnswerFormElements({
         >
           {principlePages.positivePrinciple.actions.addOwnExplanation.title}
         </Button>
-        <Button type="button" look="link" iconLeft={<FileDownloadOutlined />}>
+        <Button
+          type="button"
+          look="link"
+          iconLeft={<FileDownloadOutlined />}
+          onClick={() => void downloadDocumentation(prinzips)}
+        >
           {principlePages.positivePrinciple.actions.saveState.title}
         </Button>
       </div>
