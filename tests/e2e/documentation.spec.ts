@@ -171,7 +171,7 @@ test.describe("documentation flow happy path", () => {
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION_SEND.url);
   });
 
-  test("download documentation from absenden page", async (_, testInfo) => {
+  test("download documentation from absenden page", async ({}, testInfo) => {
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION_SEND.url);
 
     const downloadPromise = page.waitForEvent("download");
