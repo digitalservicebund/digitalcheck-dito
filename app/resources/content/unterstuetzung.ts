@@ -258,17 +258,15 @@ export const support = {
             `,
             button: {
               text: "Auf Warteliste setzen",
-              href: encodeURI(
-                dedent`mailto:digitalcheck@digitalservice.bund.de?subject=[Digitalcheck Schulung] Anmeldung digitaltaugliche Regelungen&body=
-Guten Tag,
+              href: encodeURI(dedent`
+                mailto:digitalcheck@digitalservice.bund.de?subject=[Digitalcheck Schulung] Anmeldung digitaltaugliche Regelungen&body=Guten Tag,
 
-ich möchte mich gerne auf die Warteliste setzen lassen für die Online-Schulung:
+                ich möchte mich gerne auf die Warteliste setzen lassen für die Online-Schulung:
 
-Regelungen digitaltauglich gestalten – praktische Tipps für den Digitalcheck
+                Regelungen digitaltauglich gestalten – praktische Tipps für den Digitalcheck
 
-Mit freundlichen Grüßen
-                `,
-              ),
+                Mit freundlichen Grüßen
+                `),
               look: "tertiary" as const,
             },
             sellingPoints: "Alle Informationen auf einen Blick",
@@ -277,7 +275,21 @@ Mit freundlichen Grüßen
                 icon: TimerOutlined,
                 title: "Nächste Termine",
                 text: dedent`
-                  Wir planen bald neue Termine für Schulungen in 2025. Schreiben Sie uns eine E-Mail und wir setzen Sie auf die Warteliste.
+                  - **Dienstag, 25. November**  
+                  10:00 - 11:30 Uhr
+
+                  - **Donnerstag, 27. November**  
+                  13:00 - 14:30 Uhr
+                `,
+              },
+              {
+                icon: CheckCircleOutlined,
+                title: "Was sie bekommen",
+                text: dedent`
+                  - Tipps für einen erfolgreichen Digitalcheck
+                  - Beispiele für digitaltaugliche Formulierungen
+                  - Einführung zum Anwenden der Prinzipien für Digitaltauglichkeit
+                  - Einführung in die EU-Interoperabilität
 
                   Sie können sich bis dahin das [Schulungsmaterial ansehen](https://github.com/digitalservicebund/digitalcheck-content/tree/main/src/online-schulungen).
                 `,
