@@ -237,7 +237,7 @@ const formValidationScenarios: ValidationScenario[] = [
       ],
     },
     expected: {
-      validReasoning: false,
+      validReasoning: true,
     },
   },
   {

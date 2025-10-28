@@ -385,12 +385,16 @@ export default function DocumentationPrinciple() {
   // Handle answer change
   useEffect(() => {
     const unsubscribe = form.subscribe.value("answer", (answer) => {
+      const reasoning = principleData?.reasoning;
+
       if (answer !== principlePages.radioOptions[0]) {
-        form.setValue("reasoning", "");
+        if (reasoning && typeof reasoning === "string") {
+          form.setValue("reasoning", reasoning);
+        } else {
+          form.setValue("reasoning", "");
+        }
         return;
       }
-
-      const reasoning = principleData?.reasoning;
 
       if (!Array.isArray(reasoning)) {
         form.setValue(
