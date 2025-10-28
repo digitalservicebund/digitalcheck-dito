@@ -7,7 +7,7 @@ import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_SEND } from "~/resources/staticRoutes";
-import downloadDocumentation from "~/service/docxDocumentationExport/docxDocumentation";
+import downloadDocumentation from "~/service/wordDocumentationExport/wordDocumentation";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 
 const { finish } = digitalDocumentation;

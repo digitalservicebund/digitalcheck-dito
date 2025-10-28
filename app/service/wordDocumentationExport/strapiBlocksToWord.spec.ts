@@ -1,7 +1,7 @@
 import { ExternalHyperlink, Paragraph, TextRun } from "docx";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { Node } from "../../utils/paragraphUtils";
-import strapiBlocksToDocx from "./strapiBlocksToDocx";
+import strapiBlocksToDocx from "./strapiBlocksToWord";
 
 // This is hoisted and executed before the imports
 vi.mock("docx", async (importOriginal) => {

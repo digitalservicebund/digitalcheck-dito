@@ -28,7 +28,7 @@ import {
   type PrincipleReasoning,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { addOrUpdatePrinciple } from "~/routes/dokumentation/documentationDataService";
-import downloadDocumentation from "~/service/docxDocumentationExport/docxDocumentation";
+import downloadDocumentation from "~/service/wordDocumentationExport/wordDocumentation";
 import type {
   PrinzipAspekt,
   PrinzipWithAspekte,

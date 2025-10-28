@@ -21,39 +21,40 @@ import {
   PrinzipAspekt,
   type PrinzipWithAspekte,
 } from "../../utils/strapiData.server";
-import strapiBlocksToDocx from "./strapiBlocksToDocx";
+import strapiBlocksToDocx from "./strapiBlocksToWord";
 const { saveAs } = fileSaver;
 const { principlePages } = digitalDocumentation;
 
+export const FILE_NAME_DOCUMENTATION_TEMPLATE =
+  "VORLAGE_Dokumentation_der_Digitaltauglichkeit_V2.docx";
+
 export default async function downloadDocumentation(
   principles: PrinzipWithAspekte[],
+  templateOnly = false,
 ) {
   try {
-    // Fetch the logo from the public directory
     const template = await fetch(
-      "/documents/VORLAGE_Dokumentation_der_Digitaltauglichkeit_V2.docx",
+      `/documents/${FILE_NAME_DOCUMENTATION_TEMPLATE}`,
     );
     const templateData = await template.arrayBuffer();
-    const documentationData = getDocumentationData();
-
-    const doc = await createDoc(templateData, principles, documentationData);
+    const doc = await createDoc(templateData, principles, templateOnly);
     saveAs(doc, documentationDocument.filename);
   } catch (e) {
     console.error(e);
   }
 }
 
-export const createDoc = (
+export const createDoc = async (
   templateData: ArrayBuffer,
   principles: PrinzipWithAspekte[],
-  documentationData: DocumentationData,
+  templateOnly: boolean,
 ) => {
   const date = new Date().toLocaleDateString("de-DE");
   const {
     policyTitle,
     participation,
     principles: principleAnswers,
-  } = documentationData;
+  } = templateOnly ? {} : getDocumentationData();
 
   const patchedDocument = patchDocument({
     data: templateData,
