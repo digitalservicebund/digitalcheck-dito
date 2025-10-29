@@ -19,7 +19,7 @@ type NextType = {
 
 type DocumentationActionsProps = {
   previousUrl?: string;
-  showDownloadDraftButton: boolean;
+  showDownloadDraftButton?: boolean;
 } & (SubmitType | NextType);
 
 export default function DocumentationActions({
