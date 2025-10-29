@@ -15,7 +15,10 @@ export default function ZFLBegleitungen() {
   return (
     <>
       <MetaTitle prefix={ROUTE_ZFL_BEGLEITUNGEN.title} />
-      <Hero title={ROUTE_ZFL_BEGLEITUNGEN.title} className="bg-white md:p-40" />
+      <Hero
+        title="Begleitung für Ihr Regelungsvorhaben"
+        className="bg-white md:p-40"
+      />
 
       <Container className="space-y-40 pt-0 pb-40 md:space-y-80 md:pb-80">
         <InfoBox
