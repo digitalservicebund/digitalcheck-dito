@@ -12,6 +12,7 @@ import {
 } from "~/utils/strapiData.server";
 import type { Route } from "./+types/dokumentation.download.$fileName";
 
+// This is a route instead of client side to support clients without JS
 export async function loader({ params }: Route.LoaderArgs) {
   const { fileName } = params;
 
