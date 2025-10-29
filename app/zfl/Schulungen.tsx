@@ -41,12 +41,29 @@ export default function ZFLTrainings() {
           className="bg-zfl-main20"
         >
           <Training
-            title="Schulung: Praxisnahe und bürokratiearme Regelungen erarbeiten (4 Tage)
+            title="Regelungen digitaltauglich gestalten – praktische Tipps für den Digitalcheck (1,5 Stunden)
+            
+            Inhalte: Digitalcheck erfolgreich bearbeiten, digitaltaugliche Formulierungen, Anwenden der Prinzipien für Digitaltauglichkeit, EU-Interoperabilität"
+            instances={[
+              {
+                date: "DI 25.11.25",
+                time: "10:00 - 11:30 Uhr",
+                location: "Online",
+              },
+                  {
+                date: "DO 27.11.25",
+                time: "13:00 - 14:30 Uhr",
+                location: "Online",
+              },
+            ]}
+          />
+         title="Praxisnahe und bürokratiearme Regelungen erarbeiten (4 Tage)
+            
             Inhalte: Umsetzungsperspektive verstehen, Visualisierungen erstellen, Entscheidungsbäume ausarbeiten, Rechtsförmlichkeit und verständliche Sprache sicherstellen"
             instances={[
               {
                 date: "MO 08.12.25 - DO 11.12.25",
-                time: "09:00-16:00 Uhr",
+                time: "09:00 - 16:00 Uhr",
                 location: "Berlin (in Präsenz)",
               },
             ]}
