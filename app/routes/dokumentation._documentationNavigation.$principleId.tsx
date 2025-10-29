@@ -260,7 +260,7 @@ function PositiveAnswerFormElements({
 
       <Button
         type="button"
-        look="link"
+        look="ghost"
         iconLeft={<AddCircleOutlineOutlined />}
         onClick={async () => {
           await reasoningField.push({

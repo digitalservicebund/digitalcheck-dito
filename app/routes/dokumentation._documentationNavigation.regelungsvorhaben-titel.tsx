@@ -63,7 +63,7 @@ export default function DocumentationTitle() {
         look="ds-heading-02-reg"
         className="mb-40"
       />
-      <form {...form.getFormProps()} className="space-y-80">
+      <form {...form.getFormProps()}>
         <InputNew scope={form.scope("title")} warningInsteadOfError>
           {info.inputTitle.label}
         </InputNew>

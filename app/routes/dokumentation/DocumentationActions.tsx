@@ -31,7 +31,7 @@ export default function DocumentationActions({
   const { prinzips } = useOutletContext<NavigationContext>();
 
   return (
-    <ButtonContainer>
+    <ButtonContainer className="mt-80">
       {submit && <Button type="submit">{general.buttonNext.text}</Button>}
       {nextUrl && <Button href={nextUrl}>{general.buttonNext.text}</Button>}
 
@@ -43,7 +43,7 @@ export default function DocumentationActions({
       {showDownloadDraftButton && prinzips && (
         <Button
           type="button"
-          look="link"
+          look="ghost"
           iconLeft={<FileDownloadOutlined />}
           onClick={() => void downloadDocumentation(prinzips)}
         >

@@ -112,11 +112,10 @@ export default function DocumentationParticipation() {
           </TextareaNew>
         </fieldset>
 
-        {/*TODO: Do not place text inside a form (a11y)*/}
         <InlineNotice
           look="tips"
           heading={<Heading tagName="h2">{participation.tip.heading}</Heading>}
-          className="mt-40 mb-80"
+          className="mt-40"
         >
           <RichText markdown={participation.tip.content} />
         </InlineNotice>
