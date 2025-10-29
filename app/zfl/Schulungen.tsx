@@ -28,9 +28,11 @@ export default function ZFLTrainings() {
           }}
           heading={{
             tagName: "h2",
-            text: "In Schulungen praktisches Wissen erlangen",
+            text: "In Schulungen praktisches Wissen und Kompetenzen erlangen",
           }}
-          content="Neue Wege durch umsetzungsorientierte Kurz-Schulungen sowie umfassende Module kennenlernen."
+          content="Neue Methoden und Werkzeuge für die Rechtsetzung in umsetzungsorientierten Kurz-Schulungen und umfassenden Modulen kennenlernen. 
+
+          In den Schulungen des Zentrum für Legistik lernen Sie Methoden und Werkzeuge kennen, die Sie bei der Erarbeitung von praxisnahen und bürokratiearmen Regelungen unterstützen. In umsetzungsorientierten Kurz-Schulungen und umfassenden Modulen wenden Sie das Gelernte auch direkt an."
         />
         <TrainingInfo
           title="Zu diesen Schulungen können Sie sich direkt anmelden"
@@ -39,37 +41,13 @@ export default function ZFLTrainings() {
           className="bg-zfl-main20"
         >
           <Training
-            title="Schulungstitel (Kurz-Schulung)"
+            title="Schulung: Praxisnahe und bürokratiearme Regelungen erarbeiten (4 Tage)
+            Inhalte: Umsetzungsperspektive verstehen, Visualisierungen erstellen, Entscheidungsbäume ausarbeiten, Rechtsförmlichkeit und verständliche Sprache sicherstellen"
             instances={[
               {
-                date: "Dienstag, 05. September",
-                time: "10:00-12:00 Uhr",
-                location: "Berlin (online oder in Präsenz)",
-              },
-              {
-                date: "Mittwoch, 05. November",
-                time: "10:00-12:00 Uhr",
-                location: "Berlin (online oder in Präsenz)",
-              },
-              {
-                date: "Freitag, 05. Dezember",
-                time: "10:00-12:00 Uhr",
-                location: "Berlin (online oder in Präsenz)",
-              },
-            ]}
-          />
-          <Training
-            title="Schulungstitel"
-            instances={[
-              {
-                date: "Dienstag, 04. November",
-                time: "10:00-12:00 Uhr",
-                location: "Berlin (online oder in Präsenz)",
-              },
-              {
-                date: "Mittwoch, 05. November",
-                time: "10:00-12:00 Uhr",
-                location: "Berlin (online oder in Präsenz)",
+                date: "MO 08.12.25 - DO 11.12.25",
+                time: "09:00-16:00 Uhr",
+                location: "Berlin (in Präsenz)",
               },
             ]}
           />
