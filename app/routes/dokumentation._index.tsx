@@ -71,9 +71,8 @@ function DigitalDocumentationIndex() {
               look="link"
               href={ROUTE_DOCUMENTATION_TEMPLATE_WORD.url}
               iconLeft={<SaveAltOutlined className="mr-2 fill-blue-800" />}
-            >
-              {start.alternative.buttonText}
-            </Button>
+              text={start.alternative.buttonText}
+            />
           </div>
         </div>
       </Hero>

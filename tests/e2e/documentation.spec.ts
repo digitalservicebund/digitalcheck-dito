@@ -1,4 +1,4 @@
-import { expect, type Page, test } from "@playwright/test";
+import { expect, type Locator, type Page, test } from "@playwright/test";
 import { extractRawText } from "mammoth";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
@@ -22,6 +22,42 @@ const testData = {
   negativeReason: "E2E Negative Begründung",
   irrelevantReason: "E2E Nicht relevant Begründung",
 };
+
+async function downloadDocumentAndGetText(
+  page: Page,
+  button: Locator,
+  filePath: string,
+) {
+  const downloadPromise = page.waitForEvent("download");
+  await button.click();
+  const download = await downloadPromise;
+  expect(download.suggestedFilename()).toBe(
+    "Dokumentation_der_Digitaltauglichkeit_V2.docx",
+  );
+
+  await download.saveAs(filePath);
+  const { value: docText } = await extractRawText({ path: filePath });
+  return docText;
+}
+
+function expectStringsOrderedInText(
+  text: string,
+  expectedStringsOrdered: string[],
+  notExpectedStrings: string[],
+) {
+  // Validate that strings appears in the document in the right order
+  let expectedLastIdx = -1;
+  for (const expectedText of expectedStringsOrdered) {
+    const searchIdx = text.indexOf(expectedText, expectedLastIdx);
+    expect(searchIdx).toBeGreaterThan(expectedLastIdx);
+    expectedLastIdx = searchIdx;
+  }
+
+  for (const notExpectedText of notExpectedStrings) {
+    const searchIdx = text.indexOf(notExpectedText);
+    expect(searchIdx).toBe(-1);
+  }
+}
 
 test.describe("documentation flow happy path", () => {
   test.describe.configure({ mode: "serial" });
@@ -118,6 +154,31 @@ test.describe("documentation flow happy path", () => {
     );
     await paragraphInputs.last().fill(testData.customParagraph);
     await reasonInputs.last().fill(testData.customReason);
+  });
+
+  // eslint-disable-next-line playwright/expect-expect
+  test("download draft documentation from principle page", async ({}, testInfo) => {
+    const docText = await downloadDocumentAndGetText(
+      page,
+      page.getByRole("button", { name: "Zwischenstand speichern (.docx)" }),
+      testInfo.outputPath("documentation.docx"),
+    );
+    expectStringsOrderedInText(
+      docText,
+      [
+        "Titel Ihres Regelungsvorhaben",
+        testData.title,
+        "Auswirkungen auf Betroffene",
+        testData.participationFormats,
+        testData.participationResults,
+        "Ja, gänzlich oder Teilweise",
+        "Paragrafen",
+        testData.principle2Paragraph,
+        "Erläuterung",
+        testData.principle2Reason,
+      ],
+      [testData.negativeReason, testData.irrelevantReason],
+    );
 
     await page.getByRole("button", { name: "Weiter" }).click();
   });
@@ -171,48 +232,64 @@ test.describe("documentation flow happy path", () => {
   test("download documentation from absenden page", async ({}, testInfo) => {
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION_SEND.url);
 
-    const downloadPromise = page.waitForEvent("download");
-    await page
-      .getByRole("button", { name: "Word-Datei herunterladen (.docx)" })
-      .click();
-    const download = await downloadPromise;
-    expect(download.suggestedFilename()).toBe(
-      "Dokumentation_der_Digitaltauglichkeit_V2.docx",
+    const docText = await downloadDocumentAndGetText(
+      page,
+      page.getByRole("button", { name: "Word-Datei herunterladen (.docx)" }),
+      testInfo.outputPath("documentation.docx"),
     );
+    expectStringsOrderedInText(
+      docText,
+      [
+        "Titel Ihres Regelungsvorhaben",
+        testData.title,
+        "Auswirkungen auf Betroffene",
+        testData.participationFormats,
+        testData.participationResults,
+        "Ja, gänzlich oder Teilweise",
+        "Paragrafen",
+        testData.principle2Paragraph,
+        "Erläuterung",
+        testData.principle2Reason,
+        // "Paragrafen",
+        // testData.customParagraph,
+        // "Erläuterung",
+        // testData.customReason,
+        "Nein",
+        testData.negativeReason,
+        "Nicht relevant",
+        testData.irrelevantReason,
+      ],
+      [],
+    );
+  });
 
-    // Ensure answers appear (in the right position) in the downloaded file
-    const filePath = testInfo.outputPath("documentation.docx");
-    await download.saveAs(filePath);
-    const { value: docText } = await extractRawText({ path: filePath });
-    console.log(docText);
+  test("go to landing page and download empty document template", async ({}, testInfo) => {
+    await page.goto(ROUTE_DOCUMENTATION.url);
 
-    // Validate that key data appears in the document in the right order
-    const textOrder = [
-      "Titel Ihres Regelungsvorhaben",
-      testData.title,
-      "Auswirkungen auf Betroffene",
-      testData.participationFormats,
-      testData.participationResults,
-      "Ja, gänzlich oder Teilweise",
-      "Paragrafen",
-      testData.principle2Paragraph,
-      "Erläuterung",
-      testData.principle2Reason,
-      // "Paragrafen",
-      // testData.customParagraph,
-      // "Erläuterung",
-      // testData.customReason,
-      "Nein",
-      testData.negativeReason,
-      "Nicht relevant",
-      testData.irrelevantReason,
-    ];
-    let lastIdx = -1;
-    for (const searchText of textOrder) {
-      console.log(searchText);
-      const searchIdx = docText.indexOf(searchText, lastIdx);
-      expect(searchIdx).toBeGreaterThan(lastIdx);
-      lastIdx = searchIdx;
-    }
+    const docText = await downloadDocumentAndGetText(
+      page,
+      page.getByRole("link", { name: "Word-Vorlage herunterladen (.docx)" }),
+      testInfo.outputPath("documentation.docx"),
+    );
+    expectStringsOrderedInText(
+      docText,
+      [
+        "Titel Ihres Regelungsvorhaben",
+        "Auswirkungen auf Betroffene",
+        "Paragrafen",
+        "Erläuterung",
+      ],
+      [
+        testData.title,
+        testData.participationFormats,
+        testData.participationResults,
+        testData.principle2Paragraph,
+        testData.principle2Reason,
+        testData.customParagraph,
+        testData.customReason,
+        testData.negativeReason,
+        testData.irrelevantReason,
+      ],
+    );
   });
 });
