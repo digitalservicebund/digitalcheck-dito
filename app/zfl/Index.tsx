@@ -71,7 +71,7 @@ export default function ZFLIndex() {
                 },
                 heading: {
                   tagName: "h3",
-                  text: "Interdisziplinäre Expertise für Regelungsvorhaben",
+                  text: "Interdisziplinäre Expertise für Ihr Regelungsvorhaben",
                 },
                 content:
                   "Wir begleiten Sie mit einem interdisziplinärem Kompetenzteam. Sie erhalten dadurch ein umfassendes Verständnis von Umsetzungsprozessen und gestalten Ihr Vorhaben praxisnah und bürokratiearm.",
