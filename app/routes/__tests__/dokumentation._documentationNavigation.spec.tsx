@@ -77,7 +77,7 @@ const validationScenarios: ValidationScenario[] = [
       },
       principles: [
         {
-          answer: "Ja, gänzlich oder Teilweise",
+          answer: "Ja, gänzlich oder teilweise",
           id: "1",
           reasoning: [
             {
@@ -128,7 +128,7 @@ const validationScenarios: ValidationScenario[] = [
       },
       principles: [
         {
-          answer: "Ja, gänzlich oder Teilweise",
+          answer: "Ja, gänzlich oder teilweise",
           id: "1",
           reasoning: [
             {

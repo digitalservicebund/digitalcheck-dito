@@ -85,7 +85,7 @@ type AnswerScenario = {
 const answerScenarios: AnswerScenario[] = [
   {
     name: "positive answer, no aspect selected",
-    answer: "Ja, gänzlich oder Teilweise",
+    answer: "Ja, gänzlich oder teilweise",
     expected: {
       showsAspekte: true,
     },
@@ -120,12 +120,12 @@ type ValidationScenario = {
 const formValidationScenarios: ValidationScenario[] = [
   {
     name: "positive answer with filled aspects",
-    answer: "Ja, gänzlich oder Teilweise",
+    answer: "Ja, gänzlich oder teilweise",
     documentationData: {
       ...initialDocumentationData,
       principles: [
         {
-          answer: "Ja, gänzlich oder Teilweise",
+          answer: "Ja, gänzlich oder teilweise",
           id: "1",
           reasoning: [
             {
@@ -146,12 +146,12 @@ const formValidationScenarios: ValidationScenario[] = [
   },
   {
     name: "positive answer with partial filled aspects",
-    answer: "Ja, gänzlich oder Teilweise",
+    answer: "Ja, gänzlich oder teilweise",
     documentationData: {
       ...initialDocumentationData,
       principles: [
         {
-          answer: "Ja, gänzlich oder Teilweise",
+          answer: "Ja, gänzlich oder teilweise",
           id: "1",
           reasoning: [
             {
@@ -172,12 +172,12 @@ const formValidationScenarios: ValidationScenario[] = [
   },
   {
     name: "positive answer with unfilled aspects",
-    answer: "Ja, gänzlich oder Teilweise",
+    answer: "Ja, gänzlich oder teilweise",
     documentationData: {
       ...initialDocumentationData,
       principles: [
         {
-          answer: "Ja, gänzlich oder Teilweise",
+          answer: "Ja, gänzlich oder teilweise",
           id: "1",
           reasoning: [],
         },
@@ -323,7 +323,7 @@ describe("DocumentationPrinciple", () => {
   it("shows the correct answer options", () => {
     renderWithRouter();
 
-    ["Ja, gänzlich oder Teilweise", "Nein", "Nicht relevant"].forEach(
+    ["Ja, gänzlich oder teilweise", "Nein", "Nicht relevant"].forEach(
       (labelText) => {
         const input = screen.getByLabelText(labelText);
         expect(input).toBeInTheDocument();
@@ -458,7 +458,7 @@ describe("DocumentationPrinciple", () => {
           });
         });
 
-        it.runIf(answer === "Ja, gänzlich oder Teilweise")(
+        it.runIf(answer === "Ja, gänzlich oder teilweise")(
           "shows the correct validation for reasoning",
           async () => {
             await expectErrorUnless(
@@ -484,7 +484,7 @@ describe("DocumentationPrinciple", () => {
           },
         );
 
-        it.runIf(answer !== "Ja, gänzlich oder Teilweise")(
+        it.runIf(answer !== "Ja, gänzlich oder teilweise")(
           "shows the correct validation for reasoning",
           async () => {
             await expectErrorUnless(
@@ -543,7 +543,7 @@ describe("DocumentationPrinciple", () => {
           principles: [
             {
               id: "1",
-              answer: "Ja, gänzlich oder Teilweise",
+              answer: "Ja, gänzlich oder teilweise",
             },
           ],
         },

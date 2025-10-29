@@ -186,7 +186,7 @@ describe("DocumentationSummary", () => {
         principles: [
           {
             id: "1",
-            answer: "Ja, gänzlich oder Teilweise",
+            answer: "Ja, gänzlich oder teilweise",
             reasoning: [
               {
                 aspect: "aspect-1",
@@ -212,7 +212,7 @@ describe("DocumentationSummary", () => {
     );
 
     expect(
-      within(principleContainer).getByText("Ja, gänzlich oder Teilweise"),
+      within(principleContainer).getByText("Ja, gänzlich oder teilweise"),
     ).toBeInTheDocument();
     expect(within(principleContainer).getByText("§1, §2")).toBeInTheDocument();
     expect(
@@ -236,7 +236,7 @@ describe("DocumentationSummary", () => {
         principles: [
           {
             id: "1",
-            answer: "Ja, gänzlich oder Teilweise",
+            answer: "Ja, gänzlich oder teilweise",
             reasoning: [
               {
                 aspect: "aspect-1",
@@ -256,7 +256,7 @@ describe("DocumentationSummary", () => {
     );
 
     expect(
-      within(principleContainer).getByText("Ja, gänzlich oder Teilweise"),
+      within(principleContainer).getByText("Ja, gänzlich oder teilweise"),
     ).toBeInTheDocument();
     expect(
       within(principleContainer).getByText("Reason for aspect 1"),
@@ -435,7 +435,7 @@ describe("DocumentationSummary", () => {
         principles: [
           {
             id: "1",
-            answer: "Ja, gänzlich oder Teilweise",
+            answer: "Ja, gänzlich oder teilweise",
             reasoning: [
               {
                 aspect: "test-aspect",
@@ -454,7 +454,7 @@ describe("DocumentationSummary", () => {
         principles: [
           {
             id: "1",
-            answer: "Ja, gänzlich oder Teilweise",
+            answer: "Ja, gänzlich oder teilweise",
             reasoning: [
               {
                 aspect: "test-aspect",

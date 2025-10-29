@@ -217,7 +217,7 @@ export const digitalDocumentation = {
     badge: "Prinzipien",
     moreButton: "Mehr dazu",
     moreInfoButton: "Mehr erfahren",
-    radioOptions: ["Ja, gänzlich oder Teilweise", "Nein", "Nicht relevant"],
+    radioOptions: ["Ja, gänzlich oder teilweise", "Nein", "Nicht relevant"],
     textFieldExplanationLabel: "Erklärung:",
     textFieldNegativeReasoningLabel: "Begründung:",
     buttonAdd: "Weitere Referenz hinzufügen",

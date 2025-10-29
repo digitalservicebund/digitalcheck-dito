@@ -102,7 +102,7 @@ test.describe("documentation flow happy path", () => {
   });
 
   test("handle positive principle answer with aspect management", async () => {
-    await page.getByLabel("Ja, gänzlich oder Teilweise").click();
+    await page.getByLabel("Ja, gänzlich oder teilweise").click();
 
     // Check that reasoning checkboxes are shown
     const form = page.locator("form");
@@ -171,7 +171,7 @@ test.describe("documentation flow happy path", () => {
         "Auswirkungen auf Betroffene",
         testData.participationFormats,
         testData.participationResults,
-        "Ja, gänzlich oder Teilweise",
+        "Ja, gänzlich oder teilweise",
         "Paragrafen",
         testData.principle2Paragraph,
         "Erläuterung",
@@ -245,7 +245,7 @@ test.describe("documentation flow happy path", () => {
         "Auswirkungen auf Betroffene",
         testData.participationFormats,
         testData.participationResults,
-        "Ja, gänzlich oder Teilweise",
+        "Ja, gänzlich oder teilweise",
         "Paragrafen",
         testData.principle2Paragraph,
         "Erläuterung",
