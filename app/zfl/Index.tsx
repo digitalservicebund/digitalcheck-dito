@@ -6,7 +6,7 @@ import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { Contact } from "./components/Contact";
-import { ROUTE_ZFL_TASK_FORCES, ROUTE_ZFL_TRAININGS } from "./routes";
+import { ROUTE_ZFL_INVOLVEMENTS, ROUTE_ZFL_TRAININGS } from "./routes";
 import MetaTitle from "./ZFLMeta";
 
 export default function ZFLIndex() {
@@ -77,7 +77,7 @@ export default function ZFLIndex() {
                 buttons: [
                   {
                     text: "Mehr Informationen zu Task Forces",
-                    href: ROUTE_ZFL_TASK_FORCES.href,
+                    href: ROUTE_ZFL_INVOLVEMENTS.href,
                     look: "link",
                   },
                 ],

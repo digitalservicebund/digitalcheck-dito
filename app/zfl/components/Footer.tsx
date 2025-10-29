@@ -7,8 +7,8 @@ import { ZFL_EMAIL, ZFL_PHONE } from "../constants";
 import {
   ROUTE_ZFL_A11Y,
   ROUTE_ZFL_IMPRINT,
+  ROUTE_ZFL_INVOLVEMENTS,
   ROUTE_ZFL_PRIVACY,
-  ROUTE_ZFL_TASK_FORCES,
   ROUTE_ZFL_TRAININGS,
 } from "../routes";
 
@@ -92,8 +92,8 @@ export default function Footer() {
                 },
               ],
               {
-                text: ROUTE_ZFL_TASK_FORCES.title,
-                url: ROUTE_ZFL_TASK_FORCES.href,
+                text: ROUTE_ZFL_INVOLVEMENTS.title,
+                url: ROUTE_ZFL_INVOLVEMENTS.href,
               },
               {
                 text: ROUTE_ZFL_TRAININGS.title,
