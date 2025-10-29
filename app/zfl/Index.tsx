@@ -21,7 +21,7 @@ export default function ZFLIndex() {
 
       <div className="bg-yellow-500">
         <Container className="py-8">
-          Das Zentrum für Legistik befindet sich aktuell im Aufbau.
+          Das Angebot befindet sich aktuell im Aufbau und wird zusammen mit Ihnen schrittweise entwickelt.
         </Container>
       </div>
 
@@ -37,16 +37,16 @@ export default function ZFLIndex() {
           }}
           heading={{
             tagName: "h2",
-            text: "Ihre Vorteile",
+            text: "Vorteile des Angebots für Sie",
           }}
           content={dedent`
             - Operative Hilfe beim Visualisieren
-            - Unterstützung beim Erheben der Betroffenen-Bedürfnisse
-            - Zugriff auf Formulierungsbeispiele und Vorlagen
+            - Unterstützung beim Erheben der Betroffenen-Bedürfnisse und Umsetzungshürden
+            - Konkrete Formulierungsbeispiele und praktische Vorlagen
+            - Vereinheitlichung von Checks und Arbeitshilfen
             - Praxisnahe Schulungen
+            - Vernetzung und Austausch untereinander
 
-            Das Angebot wird zusammen mit Ihnen schrittweise weiterentwickelt. Im Fokus stehen dabei die Schaffung einer einheitlichen prozessualen Begleitung in unterschiedlichen Vorhaben-Phasen, der Vermittlung von Kompetenzen und Formaten zum Austausch untereinander. 
-            
             Gut zu wissen: Das Zentrum für Legistik ist ein Bestandteil des Handlungsfelds „Bessere Rechtsetzung“ in der Modernisierungsagenda.
           `}
         />
@@ -57,7 +57,7 @@ export default function ZFLIndex() {
           <InfoBoxList
             heading={{
               tagName: "h2",
-              text: "Unterstützung für Sie",
+              text: "Bereits verfügbare Angebote",
             }}
             items={[
               {
@@ -70,13 +70,13 @@ export default function ZFLIndex() {
                 },
                 heading: {
                   tagName: "h3",
-                  text: "Task Forces für Ihr Vorhaben nutzen",
+                  text: "Interdisziplinäre Expertise für Regelungsvorhaben nutzen",
                 },
                 content:
-                  "Spezialisierte Kompetenzteams begleiten Sie bei Ihrem Vorhaben.",
+                  "Wir begleiten Sie mit einem interdisziplinärem Kompetenzteam. Sie erhalten dadurch ein umfassendes Verständnis von Umsetzungsprozessen und gestalten Ihr Vorhaben praxisnah und bürokratiearm.",
                 buttons: [
                   {
-                    text: "Mehr Informationen zu Task Forces",
+                    text: "Mehr Informationen zu Kompetenzteams",
                     href: ROUTE_ZFL_INVOLVEMENTS.href,
                     look: "link",
                   },
@@ -95,7 +95,7 @@ export default function ZFLIndex() {
                   text: "In Schulungen praktisches Wissen erlangen",
                 },
                 content:
-                  "Neue Wege durch umsetzungsorientierte Kurz-Schulungen sowie umfassende Module kennenlernen.",
+                  "Neue Methoden und Werkzeuge für die Rechtsetzung in umsetzungsorientierten Schulungen kennenlernen.",
                 buttons: [
                   {
                     text: "Mehr Informationen zu Schulungen",
