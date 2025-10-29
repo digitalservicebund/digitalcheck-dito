@@ -13,12 +13,16 @@ const testData = {
   title: "E2E Titel des Regelungsvorhabens",
   participationFormats: "E2E Formate Input",
   participationResults: "E2E Ergebnisse Input",
-  principle1Paragraph: "§123",
+  principle1Paragraph: "123",
   principle1Reason: "E2E Begründung Prinzip 1",
-  principle2Paragraph: "§456",
+  principle2Paragraph: "456",
   principle2Reason: "E2E Begründung Prinzip 2",
-  customParagraph: "§789",
-  customReason: "E2E Eigene Erklärung",
+  principle3Paragraph: "234",
+  principle3Reason: "E2E Begründung Prinzip 3",
+  customParagraph: "789",
+  customReason: "E2E Eigene Erklärung 1",
+  customParagraph2: "1011",
+  customReason2: "E2E Eigene Erklärung 2",
   negativeReason: "E2E Negative Begründung",
   irrelevantReason: "E2E Nicht relevant Begründung",
 };
@@ -57,6 +61,11 @@ function expectStringsOrderedInText(
     const searchIdx = text.indexOf(notExpectedText);
     expect(searchIdx).toBe(-1);
   }
+}
+
+function expectDocumentToNotContainTags(text: string) {
+  const tagsIdx = /{{}}/g.exec(text);
+  expect(tagsIdx).toBeNull();
 }
 
 test.describe("documentation flow happy path", () => {
@@ -144,9 +153,6 @@ test.describe("documentation flow happy path", () => {
       .getByRole("button", { name: "Eigene Erklärung hinzufügen" })
       .click();
 
-    // Check custom aspect checkbox (label "Eigener Punkt" should now be available)
-    await page.getByLabel("Eigener Punkt").check();
-
     // Fill custom aspect inputs - need to target the last occurrence
     const paragraphInputs = form.getByLabel("Paragrafen");
     const reasonInputs = form.getByLabel(
@@ -171,14 +177,30 @@ test.describe("documentation flow happy path", () => {
         "Auswirkungen auf Betroffene",
         testData.participationFormats,
         testData.participationResults,
+        "digitale Angebote",
         "Ja, gänzlich oder teilweise",
+        "Ermöglichen Sie digitale Kommunikation",
+        "Formulieren Sie die Regelung technologieoffen",
         "Paragrafen",
         testData.principle2Paragraph,
         "Erläuterung",
         testData.principle2Reason,
+        "Denken Sie an Antragsstellung, Bearbeitung und Bescheid",
+        "Eigener Punkt",
+        "Paragrafen",
+        testData.customParagraph,
+        "Erläuterung",
+        testData.customReason,
+        "Datenwiederverwendung",
       ],
-      [testData.negativeReason, testData.irrelevantReason],
+      [
+        testData.principle1Paragraph,
+        testData.principle1Reason,
+        testData.negativeReason,
+        testData.irrelevantReason,
+      ],
     );
+    expectDocumentToNotContainTags(docText);
 
     await page.getByRole("button", { name: "Weiter" }).click();
   });
@@ -195,7 +217,7 @@ test.describe("documentation flow happy path", () => {
     await page.getByRole("button", { name: "Weiter" }).click();
   });
 
-  test("handle irrelevant principle answer and navigate to summary", async () => {
+  test("handle irrelevant principle answer and skip principle Automation", async () => {
     await page.getByLabel("Nicht relevant").click();
 
     // Validate textarea is shown
@@ -205,12 +227,46 @@ test.describe("documentation flow happy path", () => {
     await textarea.fill(testData.irrelevantReason);
 
     await page.getByRole("button", { name: "Weiter" }).click();
+    await expect(page.getByText("Automatisierung")).toBeVisible();
+    await page.getByRole("button", { name: "Weiter" }).click();
+  });
 
-    // Continue through remaining 2 principles (4 and 5) to reach summary
-    for (let i = 0; i < 2; i++) {
-      await page.getByRole("button", { name: "Weiter" }).click();
-    }
+  test("handle aspect and multiple own explanations on last principle", async () => {
+    await page.getByLabel("Ja, gänzlich oder teilweise").click();
 
+    const form = page.locator("form");
+
+    // Check last aspect
+    const checkboxes = form.getByRole("checkbox");
+    await checkboxes.last().check();
+    const paragraphInputs = form.getByLabel("Paragrafen");
+    const reasonInputs = form.getByLabel(
+      "Begründung mit Textreferenz (empfohlen für bessere Zuordnung)",
+    );
+    await expect(paragraphInputs).toBeVisible();
+    await paragraphInputs.fill(testData.principle3Paragraph);
+    await reasonInputs.fill(testData.principle3Reason);
+
+    // Add custom aspect
+    await page
+      .getByRole("button", { name: "Eigene Erklärung hinzufügen" })
+      .click();
+
+    // Fill custom aspect inputs - need to target the last occurrence
+
+    await paragraphInputs.last().fill(testData.customParagraph);
+    await reasonInputs.last().fill(testData.customReason);
+
+    // Add another custom aspect
+    await page
+      .getByRole("button", { name: "Eigene Erklärung hinzufügen" })
+      .click();
+    await paragraphInputs.last().fill(testData.customParagraph2);
+    await reasonInputs.last().fill(testData.customReason2);
+  });
+
+  test("navigate to summary", async () => {
+    await page.getByRole("button", { name: "Weiter" }).click();
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION_SUMMARY.url);
   });
 
@@ -245,22 +301,44 @@ test.describe("documentation flow happy path", () => {
         "Auswirkungen auf Betroffene",
         testData.participationFormats,
         testData.participationResults,
+        "Digitale Angebote",
         "Ja, gänzlich oder teilweise",
+        "Ermöglichen Sie digitale Kommunikation",
+        "Formulieren Sie die Regelung technologieoffen",
         "Paragrafen",
         testData.principle2Paragraph,
         "Erläuterung",
         testData.principle2Reason,
-        // "Paragrafen",
-        // testData.customParagraph,
-        // "Erläuterung",
-        // testData.customReason,
+        "Eigener Punkt",
+        "Paragrafen",
+        testData.customParagraph,
+        "Erläuterung",
+        testData.customReason,
+        "Datenwiederverwendung",
         "Nein",
         testData.negativeReason,
+        "Etablierte Technologien",
         "Nicht relevant",
         testData.irrelevantReason,
+        "Automatisierung",
+        "Datenschutz",
+        "Stellen Sie den Datenschutz sicher",
+        "Gewährleisten Sie die Informationssicherheit",
+        "Eigener Punkt",
+        "Paragrafen",
+        testData.customParagraph,
+        "Erläuterung",
+        testData.customReason,
+        "Eigener Punkt",
+        "Paragrafen",
+        testData.customParagraph2,
+        "Erläuterung",
+        testData.customReason2,
+        "Das ist jetzt zu tun",
       ],
       [],
     );
+    expectDocumentToNotContainTags(docText);
   });
 
   test("go to landing page and download empty document template", async ({}, testInfo) => {
@@ -291,5 +369,6 @@ test.describe("documentation flow happy path", () => {
         testData.irrelevantReason,
       ],
     );
+    expectDocumentToNotContainTags(docText);
   });
 });
