@@ -29,7 +29,7 @@ export default function ZFLInvolvements() {
           }}
           heading={{
             tagName: "h2",
-            text: "Interdisziplinäre Expertise für praxisnahe und digitaltaugliche Regelungen nutzen",
+            text: "Interdisziplinäre Expertise für praxisnahe und bürokratiearme Regelungen nutzen",
           }}
           content={dedent`
             Ein interdisziplinäres Team mit Kompetenzen in Design, Nutzerforschung, IT, Produkt- und Prozessmanagement begleitet sie vertraulich und mit individuellem Fokus auf Ihr Vorhaben.
