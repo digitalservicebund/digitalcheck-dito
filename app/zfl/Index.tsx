@@ -21,7 +21,7 @@ export default function ZFLIndex() {
 
       <div className="bg-yellow-500">
         <Container className="py-8">
-          Das Angebot befindet sich aktuell im Aufbau und wird zusammen mit Ihnen schrittweise entwickelt.
+          Das Angebot befindet sich aktuell im Aufbau und wird schrittweise mit Ihnen zusammen weiterentwickelt.
         </Container>
       </div>
 
