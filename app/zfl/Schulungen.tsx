@@ -29,7 +29,7 @@ export default function ZFLTrainings() {
             tagName: "h2",
             text: "In Schulungen praktisches Wissen und Kompetenzen erlangen",
           }}
-          content="In den Schulungen des Zentrum für Legistik lernen Sie Methoden und Werkzeuge kennen, die Sie bei der Erarbeitung von praxisnahen und bürokratiearmen Regelungen unterstützen. In umsetzungsorientierten Kurz-Schulungen und umfassenden Modulen wenden Sie das Gelernte auch direkt an."
+          content="In den umsetzungsorientierten Schulungen des Zentrum für Legistik lernen Sie Methoden und Werkzeuge kennen, die Sie bei der Erarbeitung von praxisnahen und bürokratiearmen Regelungen unterstützen."
         />
         <TrainingInfo
           title="Zu diesen Schulungen können Sie sich direkt anmelden"
