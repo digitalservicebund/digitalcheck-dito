@@ -29,12 +29,12 @@ export default function ZFLInvolvements() {
           }}
           heading={{
             tagName: "h2",
-            text: "Kompetenzen für praxisnahe und digitaltaugliche Regelungen nutzen",
+            text: "Interdisziplinäre Expertise für praxisnahe und digitaltaugliche Regelungen nutzen",
           }}
           content={dedent`
-            Ein interdisziplinäres Team mit Kompetenzen in Service Design, IT und Produktmanagement begleitet sie vertraulich und mit individuellem Fokus auf Ihr Vorhaben.
+            Ein interdisziplinäres Team mit Kompetenzen in Design, Nutzerforschung, IT, Produkt- und Prozessmanagement begleitet sie vertraulich und mit individuellem Fokus auf Ihr Vorhaben.
 
-            Eine Zusammenarbeit in der frühen Phase Ihres Vorhabens entfaltet dabei den größten Effekt auf die Zielorientierung Ihrer Regelung.
+            Nehmen Sie das Angebot bereits im frühen Erarbeitungsprozess in Anspruch, damit die Begleitung die größte Wirkung erzielen kann.
 
             **Kontaktieren Sie uns, um eine Begleitung für Ihr Vorhaben anzufragen:**
             
@@ -47,9 +47,9 @@ export default function ZFLInvolvements() {
           <InfoBox
             heading={{
               tagName: "h2",
-              text: "In diesen Punkten unterstützt Sie die Task Force",
+              text: "Wirkung der Zusammenarbeit",
             }}
-            content="Durch Ihre Rechtsetzung-Expertise in Kombination mit Methoden aus der agilen Software-Entwicklung entstehen praxistaugliche und zukunftsfähige Gesetze, die die Potenziale der Digitalisierung bestmöglich ausschöpfen."
+            content="Wir unterstützen Sie dabei, Umsetzungsprozesse zu verstehen und Anforderungen an praxisnahe und bürokratiearme Regelungen umzusetzen. Durch Ihre Rechtsetzungs-Expertise in Kombination mit Methoden aus der agilen Software-Entwicklung entstehen somit praxistaugliche und zukunftsfähige Gesetze, die unter Anderem die Potenziale der Digitalisierung bestmöglich ausschöpfen."
           />
           <div className="flex gap-32 max-md:flex-col">
             {[
