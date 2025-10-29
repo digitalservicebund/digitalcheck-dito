@@ -49,11 +49,13 @@ export default function ZFLInvolvements() {
               tagName: "h2",
               text: "Wirkung der Zusammenarbeit",
             }}
-            content="Wir unterstützen Sie dabei, Umsetzungsprozesse zu verstehen und Anforderungen an praxisnahe und bürokratiearme Regelungen umzusetzen. 
+            content={dedent`
+            Wir unterstützen Sie dabei, Umsetzungsprozesse zu verstehen und Anforderungen an praxisnahe und bürokratiearme Regelungen umzusetzen. 
             
             Durch Ihre Rechtsetzungs-Expertise in Kombination mit Methoden aus der agilen Software-Entwicklung entstehen somit praxistaugliche und zukunftsfähige Gesetze, die unter Anderem die Potenziale der Digitalisierung bestmöglich ausschöpfen.
             
-            So unterstützen wir Sie konkret:"
+            So unterstützen wir Sie konkret:
+            `}
           />
           <div className="flex gap-32 max-md:flex-col">
             {[
