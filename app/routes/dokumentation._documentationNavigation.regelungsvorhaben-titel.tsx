@@ -68,7 +68,11 @@ export default function DocumentationTitle() {
           {info.inputTitle.label}
         </InputNew>
 
-        <DocumentationActions previousUrl={previousUrl} submit />
+        <DocumentationActions
+          previousUrl={previousUrl}
+          submit
+          showDownloadDraftButton={true}
+        />
       </form>
     </>
   );

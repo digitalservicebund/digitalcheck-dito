@@ -1,6 +1,5 @@
 import {
   AddCircleOutlineOutlined,
-  FileDownloadOutlined,
   RemoveCircleOutlineOutlined,
 } from "@digitalservicebund/icons";
 import { FormScope, useField, useFieldArray, useForm } from "@rvf/react";
@@ -28,7 +27,6 @@ import {
   type PrincipleReasoning,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { addOrUpdatePrinciple } from "~/routes/dokumentation/documentationDataService";
-import downloadDocumentation from "~/service/wordDocumentationExport/wordDocumentation";
 import type {
   PrinzipAspekt,
   PrinzipWithAspekte,
@@ -186,8 +184,6 @@ function PositiveAnswerFormElements({
     },
   });
 
-  const { prinzips } = useOutletContext<NavigationContext>();
-
   const remove = useCallback(
     async (index: number, aspekt?: PrinzipAspekt) => {
       if (aspekt)
@@ -262,31 +258,21 @@ function PositiveAnswerFormElements({
         })}
       </div>
 
-      <div className="flex flex-col gap-32 xl:flex-row xl:gap-40">
-        <Button
-          type="button"
-          look="link"
-          iconLeft={<AddCircleOutlineOutlined />}
-          onClick={async () => {
-            await reasoningField.push({
-              aspect: undefined,
-              checkbox: "on",
-              paragraphs: "",
-              reason: "",
-            });
-          }}
-        >
-          {principlePages.positivePrinciple.actions.addOwnExplanation.title}
-        </Button>
-        <Button
-          type="button"
-          look="link"
-          iconLeft={<FileDownloadOutlined />}
-          onClick={() => void downloadDocumentation(prinzips)}
-        >
-          {principlePages.positivePrinciple.actions.saveState.title}
-        </Button>
-      </div>
+      <Button
+        type="button"
+        look="link"
+        iconLeft={<AddCircleOutlineOutlined />}
+        onClick={async () => {
+          await reasoningField.push({
+            aspect: undefined,
+            checkbox: "on",
+            paragraphs: "",
+            reason: "",
+          });
+        }}
+      >
+        {principlePages.positivePrinciple.actions.addOwnExplanation.title}
+      </Button>
     </fieldset>
   );
 }
@@ -519,7 +505,11 @@ export default function DocumentationPrinciple() {
             {principlePages.storageHint.content}
           </InlineNotice>
 
-          <DocumentationActions previousUrl={previousUrl} submit />
+          <DocumentationActions
+            previousUrl={previousUrl}
+            submit
+            showDownloadDraftButton={true}
+          />
         </form>
       </div>
     </>

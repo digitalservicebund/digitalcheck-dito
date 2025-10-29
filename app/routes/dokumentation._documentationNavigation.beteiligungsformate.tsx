@@ -121,7 +121,11 @@ export default function DocumentationParticipation() {
           <RichText markdown={participation.tip.content} />
         </InlineNotice>
 
-        <DocumentationActions previousUrl={previousUrl} submit />
+        <DocumentationActions
+          previousUrl={previousUrl}
+          submit
+          showDownloadDraftButton={true}
+        />
       </form>
     </>
   );

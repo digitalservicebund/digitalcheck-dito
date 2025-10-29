@@ -245,9 +245,6 @@ export const digitalDocumentation = {
         addOwnExplanation: {
           title: "Eigene Erklärung hinzufügen",
         },
-        saveState: {
-          title: "Zwischenstand speichern (.docx)",
-        },
       },
     },
     negativePrinciple: {
@@ -352,5 +349,10 @@ export const digitalDocumentation = {
         - **Visualisierungen** und Skizzen sind vom NKR gern gesehen. Hängen Sie diese formlos als PDF oder als Screenshot an.`,
     },
     done: "Damit ist der Digitalcheck für Sie beendet.",
+  },
+  actions: {
+    saveDraft: {
+      title: "Zwischenstand speichern (.docx)",
+    },
   },
 };
