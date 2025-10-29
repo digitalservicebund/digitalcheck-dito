@@ -1,4 +1,3 @@
-import HourglassEmptyOutlinedIcon from "@digitalservicebund/icons/HourglassEmptyOutlined";
 import TimerOutlinedIcon from "@digitalservicebund/icons/TimerOutlined";
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
@@ -39,9 +38,8 @@ export default function ZFLTrainings() {
           className="bg-zfl-main20"
         >
           <Training
-            title="Regelungen digitaltauglich gestalten – praktische Tipps für den Digitalcheck (1,5 Stunden)
-            
-            Inhalte: Digitalcheck erfolgreich bearbeiten, digitaltaugliche Formulierungen, Anwenden der Prinzipien für Digitaltauglichkeit, EU-Interoperabilität"
+            title="Regelungen digitaltauglich gestalten – praktische Tipps für den Digitalcheck (1,5 Stunden)"
+            description="Inhalte: Digitalcheck erfolgreich bearbeiten, digitaltaugliche Formulierungen, Anwenden der Prinzipien für Digitaltauglichkeit, EU-Interoperabilität"
             instances={[
               {
                 date: "DI 25.11.25",
@@ -56,9 +54,8 @@ export default function ZFLTrainings() {
             ]}
           />
           <Training
-            title="Praxisnahe und bürokratiearme Regelungen erarbeiten (4 Tage)
-            
-            Inhalte: Umsetzungsperspektive verstehen, Visualisierungen erstellen, Entscheidungsbäume ausarbeiten, Rechtsförmlichkeit und verständliche Sprache sicherstellen"
+            title="Praxisnahe und bürokratiearme Regelungen erarbeiten (4 Tage)"
+            description="Inhalte: Umsetzungsperspektive verstehen, Visualisierungen erstellen, Entscheidungsbäume ausarbeiten, Rechtsförmlichkeit und verständliche Sprache sicherstellen"
             instances={[
               {
                 date: "MO 08.12.25 - DO 11.12.25",
@@ -72,7 +69,7 @@ export default function ZFLTrainings() {
             content={`Schicken Sie uns für eine Anmeldung den Schulungs- oder Modul-Namen und Termin an die E-Mail ${ZFL_EMAIL.markdown} und wir bestätigen die Anmeldung.`}
           />
         </TrainingInfo>
-        <TrainingInfo
+        {/* <TrainingInfo
           title="Für diese Schulungen können Sie sich vormerken lassen"
           Icon={HourglassEmptyOutlinedIcon}
           shortTitle="Warteliste"
@@ -89,7 +86,7 @@ export default function ZFLTrainings() {
             title="Ihnen fehlt hier ein Thema?"
             content={`Wir nehmen gerne Wünsche für Schulungen entgegen. Schicken Sie uns Ihren Vorschlag an die E-Mail ${ZFL_EMAIL.markdown} und wir kontaktieren Sie bei Rückfragen.`}
           />
-        </TrainingInfo>
+        </TrainingInfo> */}
       </Container>
       <section className="bg-zfl-main20">
         <Container className="py-40">
@@ -131,6 +128,7 @@ const TrainingInfo = ({
 
 type TrainingProps = {
   title: string;
+  description: string;
   instances?: {
     date: string;
     time: string;
@@ -138,10 +136,11 @@ type TrainingProps = {
   }[];
 };
 
-const Training = ({ title, instances }: TrainingProps) => {
+const Training = ({ title, description, instances }: TrainingProps) => {
   return (
     <div className="space-y-8">
       <h3 className="ds-subhead">{title}</h3>
+      <RichText markdown={description} />
       {instances && (
         <ul className="list-unstyled space-y-8">
           {instances.map((instance) => (
