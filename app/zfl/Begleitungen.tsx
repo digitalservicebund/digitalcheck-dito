@@ -8,21 +8,21 @@ import InfoBox from "~/components/InfoBox";
 import RichText from "~/components/RichText";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { ZFL_EMAIL, ZFL_PHONE } from "./constants";
-import { ROUTE_ZFL_INVOLVEMENTS } from "./routes";
+import { ROUTE_ZFL_BEGLEITUNGEN } from "./routes";
 import MetaTitle from "./ZFLMeta";
 
-export default function ZFLInvolvements() {
+export default function ZFLBegleitungen() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_ZFL_INVOLVEMENTS.title} />
-      <Hero title={ROUTE_ZFL_INVOLVEMENTS.title} className="bg-white md:p-40" />
+      <MetaTitle prefix={ROUTE_ZFL_BEGLEITUNGEN.title} />
+      <Hero title={ROUTE_ZFL_BEGLEITUNGEN.title} className="bg-white md:p-40" />
 
       <Container className="space-y-40 pt-0 pb-40 md:space-y-80 md:pb-80">
         <InfoBox
           visual={{
             type: "image",
             image: {
-              url: "/zfl/Beteiligungen.png",
+              url: "/zfl/Begleitungen.png",
               alternativeText: "",
               size: "medium",
             },

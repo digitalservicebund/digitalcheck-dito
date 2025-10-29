@@ -9,12 +9,12 @@ import { useResize } from "~/hooks/deviceHook";
 import twMerge from "~/utils/tailwindMerge.ts";
 import { ZFL_EMAIL, ZFL_PHONE, ZFL_TITLE } from "../constants";
 import {
-  ROUTE_ZFL_INVOLVEMENTS,
+  ROUTE_ZFL_BEGLEITUNGEN,
   ROUTE_ZFL_LANDING,
   ROUTE_ZFL_TRAININGS,
 } from "../routes";
 
-const headerItems = [ROUTE_ZFL_INVOLVEMENTS, ROUTE_ZFL_TRAININGS];
+const headerItems = [ROUTE_ZFL_BEGLEITUNGEN, ROUTE_ZFL_TRAININGS];
 
 const PageHeader = () => {
   const location = useLocation();
