@@ -76,7 +76,7 @@ export default function ZFLIndex() {
                   "Wir begleiten Sie mit einem interdisziplinärem Kompetenzteam. Sie erhalten dadurch ein umfassendes Verständnis von Umsetzungsprozessen und gestalten Ihr Vorhaben praxisnah und bürokratiearm.",
                 buttons: [
                   {
-                    text: "Mehr Informationen zu interdisziplinärem Kompetenzteams",
+                    text: "Mehr Informationen zu interdisziplinären Kompetenzteams",
                     href: ROUTE_ZFL_INVOLVEMENTS.href,
                     look: "link",
                   },
