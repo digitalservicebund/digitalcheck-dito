@@ -31,7 +31,6 @@ export default function ZFLTrainings() {
             text: "In Schulungen praktisches Wissen und Kompetenzen erlangen",
           }}
           content="Neue Methoden und Werkzeuge für die Rechtsetzung in umsetzungsorientierten Kurz-Schulungen und umfassenden Modulen kennenlernen. 
-
           In den Schulungen des Zentrum für Legistik lernen Sie Methoden und Werkzeuge kennen, die Sie bei der Erarbeitung von praxisnahen und bürokratiearmen Regelungen unterstützen. In umsetzungsorientierten Kurz-Schulungen und umfassenden Modulen wenden Sie das Gelernte auch direkt an."
         />
         <TrainingInfo
