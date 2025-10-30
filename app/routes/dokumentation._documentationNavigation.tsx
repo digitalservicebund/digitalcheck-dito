@@ -122,25 +122,27 @@ export default function LayoutWithDocumentationNavigation() {
   return (
     <div className="parent-bg-blue container flex max-w-none justify-center space-x-80 bg-blue-100 py-40 lg:py-80">
       <div className="hidden max-w-[248px] flex-none lg:block">
-        <Nav
-          activeElementUrl={currentUrl}
-          ariaLabel={digitalDocumentation.navigation.ariaLabel}
-        >
-          <Nav.Items>
-            {routes.map((route) => {
-              if (Array.isArray(route))
-                return (
-                  <Nav.Item
-                    key="principles"
-                    subItems={<Nav.Items>{route.map(getNavItem)}</Nav.Items>}
-                  >
-                    {digitalDocumentation.navigation.principles}
-                  </Nav.Item>
-                );
-              return getNavItem(route);
-            })}
-          </Nav.Items>
-        </Nav>
+        <div className="sticky top-40">
+          <Nav
+            activeElementUrl={currentUrl}
+            ariaLabel={digitalDocumentation.navigation.ariaLabel}
+          >
+            <Nav.Items>
+              {routes.map((route) => {
+                if (Array.isArray(route))
+                  return (
+                    <Nav.Item
+                      key="principles"
+                      subItems={<Nav.Items>{route.map(getNavItem)}</Nav.Items>}
+                    >
+                      {digitalDocumentation.navigation.principles}
+                    </Nav.Item>
+                  );
+                return getNavItem(route);
+              })}
+            </Nav.Items>
+          </Nav>
+        </div>
       </div>
       <section className="w-[51rem] space-y-40">
         <div className="lg:hidden">
