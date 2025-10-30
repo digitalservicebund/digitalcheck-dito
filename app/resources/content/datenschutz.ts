@@ -141,7 +141,7 @@ export const privacy = {
     
     **d.** Schulung der Mitarbeiter: Unsere Mitarbeiter werden regelmäßig zu Datenschutz- und Sicherheitsrichtlinien geschult, um sicherzustellen, dass sie die erforderlichen Maßnahmen ergreifen, um die Vertraulichkeit der Daten zu wahren.
     
-    Im Rahmen der Verwendung des Dienstes Plausible wurden weitere Maßnahmen zur Sicherheit der personenbezogenen Daten getroffen:
+    Im Rahmen der Verwendung der Dienste Plausible und Posthog wurden weitere Maßnahmen zur Sicherheit der personenbezogenen Daten getroffen:
     
     - Speichern der Daten auf Servern in Deutschland
     - Beschränkte Zugriffsrechte auf die Daten
