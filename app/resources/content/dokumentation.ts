@@ -217,6 +217,8 @@ export const digitalDocumentation = {
     badge: "Prinzipien",
     moreButton: "Mehr dazu",
     moreInfoButton: "Mehr erfahren",
+    question:
+      "Schafft das Regelungsvorhaben die rechtlichen Vorraussetzungen für die Umsetzung des Prinzips?",
     radioOptions: ["Ja, gänzlich oder teilweise", "Nein", "Nicht relevant"],
     textFieldExplanationLabel: "Erklärung:",
     textFieldNegativeReasoningLabel: "Begründung:",

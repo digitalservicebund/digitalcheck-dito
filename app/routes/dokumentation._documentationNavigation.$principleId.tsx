@@ -465,9 +465,7 @@ export default function DocumentationPrinciple() {
           <RadioGroupNew
             label={
               <Heading tagName="h2" look="ds-heading-03-reg">
-                {/* TODO: in strapi */}
-                Schafft das Regelungsvorhaben die rechtlichen Voraussetzungen
-                für eine digitale Umsetzung?
+                {principlePages.question}
               </Heading>
             }
             scope={form.scope("answer")}
