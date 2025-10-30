@@ -92,7 +92,7 @@
   }
 
   *:focus-visible {
-    @apply text-blue-800 no-underline outline-2 outline-offset-1 outline-blue-800;
+    @apply no-underline outline-2 outline-offset-1 outline-blue-800;
   }
 }
 
