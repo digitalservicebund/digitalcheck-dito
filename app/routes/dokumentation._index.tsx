@@ -14,14 +14,12 @@ import {
   digitalDocumentation,
   documentation,
 } from "~/resources/content/dokumentation";
-import { general } from "~/resources/content/shared/general";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import { features } from "~/resources/features";
 import {
   ROUTE_DOCUMENTATION,
   ROUTE_DOCUMENTATION_TEMPLATE_WORD,
   ROUTE_DOCUMENTATION_TITLE,
-  ROUTE_LANDING,
 } from "~/resources/staticRoutes";
 import useFeatureFlag from "~/utils/featureFlags";
 import { useNonce } from "~/utils/nonce";
@@ -47,9 +45,6 @@ function DigitalDocumentationIndex() {
                 {start.buttonText}
               </Button>
             </noscript>
-            <Button href={ROUTE_LANDING.url} look={"tertiary"}>
-              {general.buttonBack.text}
-            </Button>
           </ButtonContainer>
 
           <noscript>
