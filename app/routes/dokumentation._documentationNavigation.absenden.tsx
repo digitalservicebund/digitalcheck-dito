@@ -23,7 +23,7 @@ export default function DocumentationSend() {
         look="ds-heading-02-reg"
         className="mb-16"
       />
-      <RichText markdown={finish.heading.markdown} className="mb-8" />
+      <RichText markdown={finish.heading.markdown} />
 
       <InfoBoxList
         items={[
