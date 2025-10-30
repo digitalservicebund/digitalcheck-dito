@@ -46,6 +46,25 @@ export const privacy = {
     ## 2. Verarbeitung personenbezogener Daten im Zusammenhang mit der Nutzung der Website und Rechtsgrundlagen
     
     ### 2.1 Besuch dieser Seite
+
+    Zur Verbesserung und Analyse des Nutzendenverhaltens setzen wir ein Produkt-Analyse-Tool (Posthog) ein, das uns anonym erhobene Daten über die Nutzung unserer Website liefert. Dies hilft uns, das Nutzendenverhalten zu verstehen und unsere Inhalte und Dienstleistungen kontinuierlich zu verbessern. Zu diesem Zweck erhebt der Auftragsverarbeiter DigitalService Ihre IP-Adresse und wandelt diese sofort in ein anonymisiertes Format um. Ab diesem Zeitpunkt werden keine personenbezogenen Daten mehr verarbeitet. Der Diensteanbieter Posthog verarbeitet keine personenbezogenen Daten von Ihnen.
+    
+    Weitere Informationen hierzu finden Sie in der Datenschutzerklärung von Posthog: [https://posthog.com/privacy](https://posthog.com/privacy)
+
+    Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. e) DSGVO i.V.m. § 3 BDSG
+
+    Folgende Daten werden für die Analyse verarbeitet:
+    
+    **Daten zum Nutzungsverhalten**
+    - Zeitpunkt und Dauer des Besuchs
+    - Aufgerufene Seiten
+    - Bewegungs-, Klick- und Scrollverhalten
+    
+    **Technische Daten**
+    - Gerätetyp
+    - Betriebssystem des Geräts
+    - Browser und Browserversion
+    - Bildschirmauflösung
     
     Zur Verbesserung und Analyse des Nutzendenverhaltens setzen wir ein Produkt-Analyse-Tool (plausible.io) ein, das uns anonym erhobene Daten über die Nutzung unserer Website liefert. Dies hilft uns, das Nutzendenverhalten zu verstehen und unsere Inhalte und Dienstleistungen kontinuierlich zu verbessern. Der Diensteanbieter plausible erhebt die IP-Adresse und wandelt diese sofort in ein anonymisiertes Format um. Ab diesem Zeitpunkt werden keine personenbezogenen Daten mehr verarbeitet.
     Weitere Informationen hierzu finden Sie in der Datenschutzerklärung von plausible: [https://plausible.io/data-policy](https://plausible.io/data-policy)
