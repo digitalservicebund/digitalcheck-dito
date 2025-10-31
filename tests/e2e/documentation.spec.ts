@@ -255,7 +255,6 @@ test.describe("documentation flow happy path", () => {
       .click();
 
     // Fill custom aspect inputs - need to target the last occurrence
-
     await paragraphInputs.last().fill(testData.customParagraph);
     await reasonInputs.last().fill(testData.customReason);
 

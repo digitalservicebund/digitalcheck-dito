@@ -21,8 +21,6 @@ export async function loader({ params }: Route.LoaderArgs) {
     throw new Response("Please provide a file name", { status: 400 });
   }
 
-  console.log("fileName", fileName);
-
   const principles = await fetchStrapiData<{
     prinzips: PrinzipWithAspekte[];
   }>(GET_PRINZIPS_WITH_ASPECTS_QUERY);

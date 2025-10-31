@@ -1,5 +1,5 @@
 import { ExternalHyperlink, IParagraphOptions, Paragraph, TextRun } from "docx";
-import type { Node } from "../../utils/paragraphUtils";
+import type { Node } from "~/utils/paragraphUtils";
 
 /**
  * Renders Strapi blocks content into an array of Paragraph objects for docx.
@@ -36,7 +36,7 @@ const nodeToDocx = (node: Node, options?: Partial<IParagraphOptions>) => {
         ...options,
       });
     default:
-      return null;
+      return null; // unsupported nodes are skipped and not rendered
   }
 };
 
@@ -55,8 +55,9 @@ const processChildren = (children: Node[]): (TextRun | ExternalHyperlink)[] =>
         // Recursively process children
         return processChildren(child.children);
       }
+      return null; // unsupported nodes are skipped and not rendered
     })
-    .filter((child) => child !== undefined);
+    .filter((child) => child !== null);
 
 const extractText = (children: Node[]): string =>
   children.reduce((acc, child) => {

@@ -12,16 +12,17 @@ import fileSaver from "file-saver";
 import { documentationDocument } from "~/resources/content/documentation-document";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
-  PrincipleReasoning,
   type DocumentationData,
+  PrincipleReasoning,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { getDocumentationData } from "~/routes/dokumentation/documentationDataService";
 import { Node } from "~/utils/paragraphUtils";
 import {
   PrinzipAspekt,
   type PrinzipWithAspekte,
-} from "../../utils/strapiData.server";
+} from "~/utils/strapiData.server";
 import strapiBlocksToDocx from "./strapiBlocksToWord";
+
 const { saveAs } = fileSaver;
 const { principlePages } = digitalDocumentation;
 
@@ -30,14 +31,13 @@ export const FILE_NAME_DOCUMENTATION_TEMPLATE =
 
 export default async function downloadDocumentation(
   principles: PrinzipWithAspekte[],
-  templateOnly = false,
 ) {
   try {
     const template = await fetch(
       `/documents/${FILE_NAME_DOCUMENTATION_TEMPLATE}`,
     );
     const templateData = await template.arrayBuffer();
-    const doc = await createDoc(templateData, principles, templateOnly);
+    const doc = await createDoc(templateData, principles, false);
     saveAs(doc, documentationDocument.filename);
   } catch (e) {
     console.error(e);
@@ -56,7 +56,7 @@ export const createDoc = async (
     principles: principleAnswers,
   } = templateOnly ? {} : getDocumentationData();
 
-  const patchedDocument = patchDocument({
+  return patchDocument({
     data: templateData,
     outputType: "blob",
     patches: {
@@ -67,14 +67,7 @@ export const createDoc = async (
       ...buildPrinciplePatches(principles, principleAnswers),
     },
   });
-
-  return patchedDocument;
 };
-
-const stringToTextRuns = (content: string) =>
-  content
-    .split("\n")
-    .map((line, idx) => new TextRun({ text: line, break: Number(idx > 0) }));
 
 const toParagraphPatch = (content?: string | Node[]): IPatch => {
   if (content && typeof content !== "string") {
@@ -89,6 +82,11 @@ const toParagraphPatch = (content?: string | Node[]): IPatch => {
   };
 };
 
+const stringToTextRuns = (content: string) =>
+  content
+    .split("\n")
+    .map((line, idx) => new TextRun({ text: line, break: Number(idx > 0) }));
+
 // Builds all patches that are needed for the principles
 // - Title
 // - Description
@@ -99,19 +97,18 @@ const buildPrinciplePatches = (
   principles: PrinzipWithAspekte[],
   answers: DocumentationData["principles"],
 ): Record<string, IPatch> =>
-  principles.reduce((acc, principle, index) => {
+  principles.reduce((acc, principle, principleIndex) => {
     const answer = answers?.find(
       (answer) => answer.id === principle.documentId,
     );
     const hasPositivePrincipleAnswer = answer?.answer.includes("Ja");
     const hasNegativePrincipleAnswer =
       answer?.answer.includes("Nein") || answer?.answer.includes("Nicht");
-    const principleAnswerOptions = principlePages.radioOptions.join(" | ");
 
-    const aspectsContent = principle.Aspekte.flatMap((aspect, idx) =>
+    const aspectsContent = principle.Aspekte.flatMap((aspect, aspectIndex) =>
       buildReasoningParagraphs(
         hasPositivePrincipleAnswer
-          ? (answer?.reasoning?.[idx] as PrincipleReasoning)
+          ? (answer?.reasoning?.[aspectIndex] as PrincipleReasoning)
           : {},
         aspect,
       ),
@@ -131,19 +128,21 @@ const buildPrinciplePatches = (
 
     return {
       ...acc,
-      [`PRINCIPLE_${index + 1}_TITLE`]: toParagraphPatch(principle.Name),
-      [`PRINCIPLE_${index + 1}_DESCRIPTION`]: toParagraphPatch(
+      [`PRINCIPLE_${principleIndex + 1}_TITLE`]: toParagraphPatch(
+        principle.Name,
+      ),
+      [`PRINCIPLE_${principleIndex + 1}_DESCRIPTION`]: toParagraphPatch(
         principle.Beschreibung,
       ),
-      [`PRINCIPLE_${index + 1}_ANSWER`]: toParagraphPatch(
-        answer?.answer ?? principleAnswerOptions,
+      [`PRINCIPLE_${principleIndex + 1}_ANSWER`]: toParagraphPatch(
+        answer?.answer ?? principlePages.radioOptions.join(" | "),
       ),
       // We always need to fill both patches to avoid the tags rendering
       // Depending on whether the answer is positive or negative, we either fill the reasoning or the aspects
-      [`PRINCIPLE_${index + 1}_REASONING`]: toParagraphPatch(
+      [`PRINCIPLE_${principleIndex + 1}_REASONING`]: toParagraphPatch(
         hasNegativePrincipleAnswer ? (answer?.reasoning as string) : "",
       ),
-      [`PRINCIPLE_${index + 1}_ASPECTS`]: {
+      [`PRINCIPLE_${principleIndex + 1}_ASPECTS`]: {
         type: PatchType.DOCUMENT,
         children: [...aspectsContent, ...ownExplanationContent],
       },
@@ -156,15 +155,8 @@ const indentOptions = {
   },
 };
 
-// Renders strings with newlines as TextRuns with breaks
-const stringToIndentParagraph = (options: IParagraphOptions) =>
-  new Paragraph({
-    ...options,
-    ...indentOptions,
-  });
-
-// Builds the Paragraphs for the individual aspects, combining data from Strapi with the user data
-export const buildReasoningParagraphs = (
+// Builds the docx Paragraphs for the individual aspects, combining data from Strapi with the user data
+const buildReasoningParagraphs = (
   reasoning?: PrincipleReasoning,
   aspect?: PrinzipAspekt,
 ) => [
@@ -190,3 +182,10 @@ export const buildReasoningParagraphs = (
     style: "Textbox",
   }),
 ];
+
+// Renders strings with newlines as TextRuns with breaks
+const stringToIndentParagraph = (options: IParagraphOptions) =>
+  new Paragraph({
+    ...options,
+    ...indentOptions,
+  });
