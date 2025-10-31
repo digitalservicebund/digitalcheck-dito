@@ -227,7 +227,9 @@ test.describe("documentation flow happy path", () => {
     await textarea.fill(testData.irrelevantReason);
 
     await page.getByRole("button", { name: "Weiter" }).click();
-    await expect(page.getByText("Automatisierung")).toBeVisible();
+    await page
+      .getByRole("heading", { level: 1, name: "Automatisierung" })
+      .waitFor();
     await page.getByRole("button", { name: "Weiter" }).click();
   });
 
