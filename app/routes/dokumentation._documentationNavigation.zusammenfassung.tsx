@@ -19,6 +19,7 @@ import {
   type Participation,
   type PolicyTitle,
   type Principle,
+  type PrincipleReasoning,
 } from "~/routes/dokumentation/documentationDataSchema";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
@@ -166,37 +167,11 @@ function PrincipleContent({
         route={route}
       />
       {isArray(principle.reasoning) ? (
-        principle.reasoning
-          .filter((reasoning) => reasoning?.checkbox)
-          .map((reasoning) => {
-            const aspekt = prinzip.Aspekte.find(
-              (aspekt) => slugify(aspekt.Kurzbezeichnung) === reasoning.aspect,
-            );
-            return (
-              <div key={principle.id + reasoning.aspect} className="space-y-8">
-                <Answer
-                  heading={`${
-                    aspekt
-                      ? aspekt.Kurzbezeichnung
-                      : digitalDocumentation.principlePages.explanationFields
-                          .ownExplanationTitle
-                  } 
-                    ${summary.explanationHeading}`}
-                  answers={[
-                    {
-                      prefix: summary.paragraphsPrefix,
-                      answer: reasoning.paragraphs,
-                    },
-                    {
-                      prefix: summary.reasonPrefix,
-                      answer: reasoning.reason,
-                    },
-                  ]}
-                  route={route}
-                />
-              </div>
-            );
-          })
+        <AspectsContent
+          reasoning={principle.reasoning}
+          prinzip={prinzip}
+          route={route}
+        />
       ) : (
         <Answer
           heading={summary.reasonPrefix}
@@ -206,6 +181,53 @@ function PrincipleContent({
           route={route}
         />
       )}
+    </>
+  );
+}
+
+function AspectsContent({
+  reasoning,
+  prinzip,
+  route,
+}: {
+  reasoning: PrincipleReasoning[];
+  prinzip: PrinzipWithAspekte;
+  route: Route;
+}) {
+  const checkedAspects = reasoning.filter((reasoning) => reasoning?.checkbox);
+  return checkedAspects.length === 0 ? (
+    <Warning heading={summary.warnings.incomplete} route={route} />
+  ) : (
+    <>
+      {checkedAspects.map((reasoning) => {
+        const aspekt = prinzip.Aspekte.find(
+          (aspekt) => slugify(aspekt.Kurzbezeichnung) === reasoning.aspect,
+        );
+        return (
+          <div key={reasoning.aspect} className="space-y-8">
+            <Answer
+              heading={`${
+                aspekt
+                  ? aspekt.Kurzbezeichnung
+                  : digitalDocumentation.principlePages.explanationFields
+                      .ownExplanationTitle
+              } 
+                    ${summary.explanationHeading}`}
+              answers={[
+                {
+                  prefix: summary.paragraphsPrefix,
+                  answer: reasoning.paragraphs,
+                },
+                {
+                  prefix: summary.reasonPrefix,
+                  answer: reasoning.reason,
+                },
+              ]}
+              route={route}
+            />
+          </div>
+        );
+      })}
     </>
   );
 }

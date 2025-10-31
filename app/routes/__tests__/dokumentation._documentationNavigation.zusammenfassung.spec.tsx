@@ -467,6 +467,25 @@ describe("DocumentationSummary", () => {
         ],
       },
     ],
+    [
+      MOCK_ROUTE_PRINCIPLE.url,
+      {
+        principles: [
+          {
+            id: "1",
+            answer: "Ja, gänzlich oder teilweise",
+            reasoning: [
+              {
+                aspect: "test-aspect",
+              },
+              {
+                aspect: "test-aspect-2",
+              },
+            ],
+          },
+        ],
+      },
+    ],
   ])(
     "shows incomplete warning for step %s when part of the data for a step is missing",
     (stepId, mockData) => {
