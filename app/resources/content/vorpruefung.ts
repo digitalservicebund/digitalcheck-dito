@@ -94,7 +94,7 @@ export const preCheck = {
         content: dedent`
           Interoperabilität bedeutet, dass Verwaltungen und öffentliche Einrichtungen in der EU zusammenarbeiten und Informationen austauschen können. So können digitale Dienstleistungen, wie z. B. das Beantragen von Dokumenten oder der Austausch von Gesundheitsdaten, über Länder- und Organisationsgrenzen hinweg einfach bereitgestellt werden.
           
-          Das [European Interoperability Framework (EIF)](https://interoperable-europe.ec.europa.eu/collection/nifo-national-interoperability-framework-observatory/european-interoperability-framework-detail) legt hierfür Standards und Regeln fest, die sicherstellen, dass IT-Systeme in der EU miteinander kompatibel sind. Das macht es für Bürger:innen und Unternehmen leichter, öffentliche Dienste in der gesamten EU zu nutzen.
+          Das [European Interoperability Framework (EIF)](https://interoperable-europe.ec.europa.eu/collection/nifo-national-interoperability-framework-observatory/european-interoperability-framework-detail) legt hierfür Standards und Regeln fest, die sicherstellen, dass IT-Systeme in der EU miteinander kompatibel sind. Das macht es für Bürgerinnen und Bürger sowie Unternehmen leichter, öffentliche Dienste in der gesamten EU zu nutzen.
         `,
       },
       {
@@ -218,7 +218,7 @@ export const preCheck = {
           Akteurinnen und Akteure sind in diesem Zusammenhang all diejenigen, die an der Umsetzung des Regelungsvorhabens beteiligt sind. Das können sowohl Vollzugsakteurinnen und -akteure als auch Betroffene sein.
           
           Beispiele für Akteurinnen und Akteure sind:
-          - Bürger:innen, 
+          - Bürgerinnen und Bürger, 
           - Einwohnende, 
           - Kommunen, Verwaltungen und Behörden, deren IT- oder Rechtsabteilungen
           - IT-Dienstleistende,
@@ -236,18 +236,18 @@ export const preCheck = {
       text: "**Praxisbeispiel**: Arbeitnehmende müssen ihr Gehalt in der Einkommenssteuererklärung angeben. Diese Information liegt der Sozialversicherung bereits vor. Eine Wiederverwendung dieser Daten ist bürokratiearm und sollte bei der Erarbeitung der Regelung angestrebt werden.",
       hint: {
         title: "Was ist mit „Daten erheben“ gemeint?",
-        text: "Einige Informationen liegen in der Verwaltung bereits vor: Dies können Daten von Bürger:innen, Unternehmen und Organisationen bspw. Vereinen sein. Im besten Fall werden diese Daten automatisiert zwischen den Behörden ausgetauscht.",
+        text: "Einige Informationen liegen in der Verwaltung bereits vor: Dies können Daten von Bürgerinnen und Bürger, Unternehmen und Organisationen, z.B. von Vereinen, sein. Im besten Fall werden diese Daten automatisiert zwischen den Behörden ausgetauscht.",
       },
     },
     {
       ...preCheckQuestions.kommunikation,
       question:
-        "Führt die Regelung zu einer Interaktion zwischen Behörden und Bürger:innen / Unternehmen?",
+        "Führt die Regelung zu einer Interaktion zwischen Behörden und Bürgerinnen und Bürger bzw. Unternehmen?",
       positiveResult:
-        "einer Interaktion zwischen Behörden und Bürger:innen/Unternehmen.",
+        "einer Interaktion zwischen Behörden und Bürgerinnen und Bürger bzw. Unternehmen.",
       negativeResult:
-        "keiner Interaktion zwischen Behörden und Bürger:innen/Unternehmen.",
-      text: "**Praxisbeispiel**: Ein Antrag für Steuerentlastung muss gestellt und abgeschickt werden — dies kann digital, ohne händische Unterschrift oder analoge Nachweise geschehen. Es können z.B. Unternehmen, Bürger:innen oder Organisationen den Antrag einreichen.",
+        "keiner Interaktion zwischen Behörden und Bürgerinnen und Bürger bzw. Unternehmen.",
+      text: "**Praxisbeispiel**: Ein Antrag für Steuerentlastung muss gestellt und abgeschickt werden — dies kann digital, ohne händische Unterschrift oder analoge Nachweise geschehen. Es können z.B. Unternehmen, Bürgerinnen und Bürger oder Organisationen den Antrag einreichen.",
     },
     {
       ...preCheckQuestions.automatisierung,
@@ -274,7 +274,7 @@ export const preCheck = {
       resultTooltip: {
         positiveResult: "Bitte beachten Sie den oberen Hinweis.",
       },
-      text: "**Praxisbeispiel**: Ein Vorhaben sieht vor, dass Bürger:innen in der EU eine digitale Identitäts-Wallet nutzen können, die von ihrem Heimatstaat ausgestellt wird. Diese Wallet erlaubt es, Identitätsnachweise und Dokumente (z. B. Führerscheine, Berufsqualifikationen) grenzüberschreitend zu verwenden. Damit andere Mitgliedstaaten diese Nachweise anerkennen können, ist ein Austausch von Daten und harmonisierten Standards erforderlich, um deren Echtheit zu überprüfen.",
+      text: "**Praxisbeispiel**: Ein Vorhaben sieht vor, dass Bürgerinnen und Bürger in der EU eine digitale Identitäts-Wallet nutzen können, die von ihrem Heimatstaat ausgestellt wird. Diese Wallet erlaubt es, Identitätsnachweise und Dokumente (z. B. Führerscheine, Berufsqualifikationen) grenzüberschreitend zu verwenden. Damit andere Mitgliedstaaten diese Nachweise anerkennen können, ist ein Austausch von Daten und harmonisierten Standards erforderlich, um deren Echtheit zu überprüfen.",
       hint: {
         title: "Wen betrifft dieser Daten- und Informationsaustausch?",
         text: dedent`
