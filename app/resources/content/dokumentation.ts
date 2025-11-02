@@ -61,7 +61,7 @@ export const digitalDocumentation = {
         {
           title: "Starten Sie die Dokumentation online",
           content:
-            "Alternativ können Sie die Dokumentation als Word-Datei herunterladen und bearbeiten. Folgen Sie dann den Anweisungen in der Datei.",
+            "Alternativ können sie die Dokumentation in einer Word-Datei erstellen. Folgen Sie dann den Anweisungen in der Datei.",
         },
         {
           title: "Beantworten Sie Fragen in der angeleiteten Dokumentation",
