@@ -208,16 +208,16 @@ export const preCheck = {
     {
       ...preCheckQuestions.verpflichtungenFuerBeteiligte,
       question:
-        "Entstehen durch die Regelung Mitwirkungspflichten für Akteur:innen?",
+        "Entstehen durch die Regelung Mitwirkungspflichten für Akteurinnen und Akteure?",
       positiveResult: "einer Festlegung von Mitwirkungspflichten für Akteure.",
       negativeResult: "keiner Festlegung von Mitwirkungspflichten für Akteure.",
       text: "**Praxisbeispiel**: Für eine staatliche Förderung ist neben der Land- und Forstwirtschaft nun auch das produzierende Gewerbe berechtigt. Der Anspruch dieser Unternehmen kann nicht nach denselben Kriterien geprüft werden. Die Vorhalte-/Nachweispflichten müssen auf diese Gruppe angepasst werden, dabei müssen die für die Beteiligten üblichen digitalen Möglichkeiten mitgedacht, bzw. geschaffen werden.",
       hint: {
-        title: "Wer sind Akteur:innen?",
+        title: "Wer sind Akteurinnen und Akteure?",
         text: dedent`
-          Akteur:innen sind in diesem Zusammenhang all diejenigen, die an der Umsetzung des Regelungsvorhabens beteiligt sind. Das können sowohl Vollzugsakteur:innen als auch Betroffene sein.
+          Akteurinnen und Akteure sind in diesem Zusammenhang all diejenigen, die an der Umsetzung des Regelungsvorhabens beteiligt sind. Das können sowohl Vollzugsakteurinnen und -akteure als auch Betroffene sein.
           
-          Beispiele für Akteur:innen sind:
+          Beispiele für Akteurinnen und Akteure sind:
           - Bürger:innen, 
           - Einwohnende, 
           - Kommunen, Verwaltungen und Behörden, deren IT- oder Rechtsabteilungen
