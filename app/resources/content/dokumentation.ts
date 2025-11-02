@@ -208,7 +208,7 @@ export const digitalDocumentation = {
       },
     },
     tip: {
-      heading: "Ihre eingegebenen Angaben werden in der Session gespeichert.",
+      heading: "Ihre eingegebenen Angaben werden in der Sitzung gespeichert.",
       content:
         "Sie können Ihre Angaben als Word Dokument herunterladen und zu einem späteren Zeitpunkt vervollständigen.",
     },
@@ -270,7 +270,7 @@ export const digitalDocumentation = {
         "Begründung warum das Prinzip nicht relevant für Ihr Regelungsvorhaben ist.",
     },
     storageHint: {
-      title: "Ihre eingegebenen Angaben werden in der Session gespeichert.",
+      title: "Ihre eingegebenen Angaben werden in der Sitzung gespeichert.",
       content:
         "Sie können Ihre Angaben als Word Dokument herunterladen und zu einem späteren Zeitpunkt vervollständigen.",
     },
