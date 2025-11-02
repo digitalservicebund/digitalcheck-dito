@@ -194,7 +194,7 @@ export const methodsTasksProcesses = {
       content: dedent`
         Eine ausführliche Anleitung finden Sie in unserer PowerPoint-Vorlage “**Anleitung Abläufe und Aufgaben erfassen**”.
         
-        1. **Akteure identifizieren:** Bestimmen Sie alle beteiligten Personen, Organisationen und IT-Systeme.
+        1. **Akteurinnen und Akteure identifizieren:** Bestimmen Sie alle beteiligten Personen, Organisationen und IT-Systeme.
         2. **Start/Ende festlegen:**  Legen Sie den Beginn und das Ende des Prozesses aus der Sicht der Bürgerinnen und Bürger oder der umsetzenden Behörden fest.
         3. **Prozess visualisieren:** Ordnen Sie Schritte logisch an und verbinden Sie Symbole mit Pfeilen.
       `,
