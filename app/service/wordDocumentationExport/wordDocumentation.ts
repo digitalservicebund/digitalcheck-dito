@@ -62,18 +62,28 @@ export const createDoc = async (
     outputType: "blob",
     patches: {
       TIMESTAMP: toParagraphPatch(date),
-      POLICY_TITLE: toParagraphPatch(policyTitle?.title),
-      PARTICIPATION_FORMATS: toParagraphPatch(participation?.formats),
-      PARTICIPATION_RESULTS: toParagraphPatch(participation?.results),
+      POLICY_TITLE: toParagraphPatch(answerOrPlaceholder(policyTitle?.title)),
+      PARTICIPATION_FORMATS: toParagraphPatch(
+        answerOrPlaceholder(participation?.formats),
+      ),
+      PARTICIPATION_RESULTS: toParagraphPatch(
+        answerOrPlaceholder(participation?.results),
+      ),
       ...buildPrinciplePatches(principles, principleAnswers),
     },
   });
 };
 
-const toParagraphPatch = (content?: string): IPatch => ({
+const toParagraphPatch = (content: string): IPatch => ({
   type: PatchType.PARAGRAPH,
-  children: stringToTextRuns(content ?? ""),
+  children: stringToTextRuns(content),
 });
+
+const answerOrPlaceholder = (answer?: string) =>
+  answer || documentationDocument.placeholder;
+
+const answerOrPlaceholderOptional = (answer?: string) =>
+  answer || documentationDocument.placeholderOptional;
 
 const stringToTextRuns = (content: string) =>
   content
@@ -98,6 +108,7 @@ const buildPrinciplePatches = (
     const hasNegativePrincipleAnswer =
       answer?.answer.includes("Nein") || answer?.answer.includes("Nicht");
 
+    // Build the aspects content from Strapi and user answers (if positive)
     const aspectsContent = principle.Aspekte.flatMap((aspect, aspectIndex) =>
       buildReasoningParagraphs(
         hasPositivePrincipleAnswer
@@ -107,12 +118,14 @@ const buildPrinciplePatches = (
       ),
     );
 
+    // Add the own explanation content
     let ownExplanationContent: Paragraph[] = [];
     if (hasPositivePrincipleAnswer && Array.isArray(answer?.reasoning)) {
       // Can have multiple own explanations
       ownExplanationContent = answer.reasoning
         .filter((reasoning) => !reasoning.aspect)
         .flatMap((reasoning) => buildReasoningParagraphs(reasoning));
+      // This field would not need to be filled in case of a positive answer
     }
     // Should always have at least one empty for the user to fill
     if (ownExplanationContent.length === 0) {
@@ -129,7 +142,7 @@ const buildPrinciplePatches = (
             children: [
               new Bookmark({
                 id: slugify(principle.Name),
-                children: [new TextRun(principle.Name ?? "")],
+                children: [new TextRun(principle.Name)],
               }),
             ],
           }),
@@ -145,7 +158,9 @@ const buildPrinciplePatches = (
       // We always need to fill both patches to avoid the tags rendering
       // Depending on whether the answer is positive or negative, we either fill the reasoning or the aspects
       [`PRINCIPLE_${principleIndex + 1}_REASONING`]: toParagraphPatch(
-        hasNegativePrincipleAnswer ? (answer?.reasoning as string) : "",
+        hasNegativePrincipleAnswer
+          ? answerOrPlaceholderOptional(answer?.reasoning as string)
+          : documentationDocument.placeholder,
       ),
       [`PRINCIPLE_${principleIndex + 1}_ASPECTS`]: {
         type: PatchType.DOCUMENT,
@@ -182,7 +197,7 @@ const buildReasoningParagraphs = (
     style: "Textbox Label",
   }),
   stringToIndentParagraph({
-    text: reasoning?.paragraphs ?? "",
+    text: answerOrPlaceholderOptional(reasoning?.paragraphs),
     style: "Textbox",
   }),
   stringToIndentParagraph({
@@ -190,7 +205,7 @@ const buildReasoningParagraphs = (
     style: "Textbox Label",
   }),
   stringToIndentParagraph({
-    children: stringToTextRuns(reasoning?.reason ?? ""),
+    children: stringToTextRuns(answerOrPlaceholderOptional(reasoning?.reason)),
     style: "Textbox",
   }),
 ];

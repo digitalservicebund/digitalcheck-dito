@@ -1,5 +1,6 @@
 import { expect, type Locator, type Page, test } from "@playwright/test";
 import { extractRawText } from "mammoth";
+import { documentationDocument } from "~/resources/content/documentation-document";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
   ROUTE_DOCUMENTATION,
@@ -52,7 +53,7 @@ function expectStringsOrderedInText(
   // Validate that strings appears in the document in the right order
   let expectedLastIdx = -1;
   for (const expectedText of expectedStringsOrdered) {
-    const searchIdx = text.indexOf(expectedText, expectedLastIdx);
+    const searchIdx = text.indexOf(expectedText, expectedLastIdx + 1);
     expect(searchIdx).toBeGreaterThan(expectedLastIdx);
     expectedLastIdx = searchIdx;
   }
@@ -180,12 +181,20 @@ test.describe("documentation flow happy path", () => {
         "digitale Angebote",
         "Ja, gänzlich oder teilweise",
         "Ermöglichen Sie digitale Kommunikation",
+        "Paragrafen",
+        documentationDocument.placeholderOptional,
+        "Erläuterung",
+        documentationDocument.placeholderOptional,
         "Formulieren Sie die Regelung technologieoffen",
         "Paragrafen",
         testData.principle2Paragraph,
         "Erläuterung",
         testData.principle2Reason,
         "Denken Sie an Antragsstellung, Bearbeitung und Bescheid",
+        "Paragrafen",
+        documentationDocument.placeholderOptional,
+        "Erläuterung",
+        documentationDocument.placeholderOptional,
         "Eigener Punkt",
         "Paragrafen",
         testData.customParagraph,
@@ -305,6 +314,10 @@ test.describe("documentation flow happy path", () => {
         "Digitale Angebote",
         "Ja, gänzlich oder teilweise",
         "Ermöglichen Sie digitale Kommunikation",
+        "Paragrafen",
+        documentationDocument.placeholderOptional,
+        "Erläuterung",
+        documentationDocument.placeholderOptional,
         "Formulieren Sie die Regelung technologieoffen",
         "Paragrafen",
         testData.principle2Paragraph,
@@ -324,7 +337,15 @@ test.describe("documentation flow happy path", () => {
         "Automatisierung",
         "Datenschutz",
         "Stellen Sie den Datenschutz sicher",
+        "Paragrafen",
+        documentationDocument.placeholderOptional,
+        "Erläuterung",
+        documentationDocument.placeholderOptional,
         "Gewährleisten Sie die Informationssicherheit",
+        "Paragrafen",
+        testData.principle3Paragraph,
+        "Erläuterung",
+        testData.principle3Reason,
         "Eigener Punkt",
         "Paragrafen",
         testData.customParagraph,
@@ -354,9 +375,22 @@ test.describe("documentation flow happy path", () => {
       docText,
       [
         "Titel Ihres Regelungsvorhaben",
+        documentationDocument.placeholder,
         "Auswirkungen auf Betroffene",
+        documentationDocument.placeholder,
+        documentationDocument.placeholder,
+        "Digitale Angebote",
+        "Ja, gänzlich oder teilweise | Nein | Nicht relevant",
+        "Ermöglichen Sie digitale Kommunikation",
         "Paragrafen",
+        documentationDocument.placeholderOptional,
         "Erläuterung",
+        documentationDocument.placeholderOptional,
+        "Formulieren Sie die Regelung technologieoffen",
+        "Paragrafen",
+        documentationDocument.placeholderOptional,
+        "Erläuterung",
+        documentationDocument.placeholderOptional,
       ],
       [
         testData.title,
