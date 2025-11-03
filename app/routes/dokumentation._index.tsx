@@ -37,12 +37,12 @@ function StartOverDialog() {
   return (
     <Dialog
       title={"Neue Dokumentation beginnen"}
-      openCloseButton={({ toggleDialog }) => (
+      renderToggleButton={({ toggleDialog }) => (
         <Button look="tertiary" className={"js-only"} onClick={toggleDialog}>
           {start.actions.startOver.buttonText}
         </Button>
       )}
-      dialogButtons={({ closeDialog }) => (
+      renderActionButtons={({ closeDialog }) => (
         <div className="flex flex-row gap-12">
           <Button
             type="button"

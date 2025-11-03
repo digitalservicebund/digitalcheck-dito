@@ -77,7 +77,7 @@ function Reasoning({
     <CheckboxWithExpandableArea
       scope={checkboxScope}
       label={label}
-      description={({ open }) => (
+      renderDescription={({ open }) => (
         <span className="space-x-8">
           <span>{open ? detailDescription : description}</span>
           {moreUrl && (
@@ -123,7 +123,7 @@ function Reasoning({
 
           <Dialog
             title={principlePages.dialog.title}
-            openCloseButton={({ toggleDialog }) => (
+            renderToggleButton={({ toggleDialog }) => (
               <Button
                 type="button"
                 look="link"
@@ -134,7 +134,7 @@ function Reasoning({
                 {principlePages.explanationFields.deleteButton}
               </Button>
             )}
-            dialogButtons={({ closeDialog }) => (
+            renderActionButtons={({ closeDialog }) => (
               <div className="flex flex-row gap-12">
                 <Button
                   type="button"

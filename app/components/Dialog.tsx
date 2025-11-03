@@ -10,23 +10,23 @@ type DialogProps = {
   title: string;
   description?: string;
   children: ReactNode;
-  openCloseButton?: (args: { toggleDialog: () => void }) => ReactNode;
-  dialogButtons?: (args: { closeDialog: () => void }) => ReactNode;
+  renderToggleButton?: (args: { toggleDialog: () => void }) => ReactNode;
+  renderActionButtons?: (args: { closeDialog: () => void }) => ReactNode;
 };
 
 function Dialog({
   children,
-  openCloseButton,
+  renderToggleButton,
   title,
   description,
-  dialogButtons,
+  renderActionButtons,
 }: Readonly<DialogProps>) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      {openCloseButton ? (
-        openCloseButton({ toggleDialog: () => setIsOpen(!isOpen) })
+      {renderToggleButton ? (
+        renderToggleButton({ toggleDialog: () => setIsOpen(!isOpen) })
       ) : (
         <button onClick={() => setIsOpen(true)}>Öffnen</button>
       )}
@@ -40,8 +40,8 @@ function Dialog({
             <DialogTitle className="ds-heading-02-reg">{title}</DialogTitle>
             {description && <Description>{description}</Description>}
             <div>{children}</div>
-            {dialogButtons ? (
-              dialogButtons({ closeDialog: () => setIsOpen(false) })
+            {renderActionButtons ? (
+              renderActionButtons({ closeDialog: () => setIsOpen(false) })
             ) : (
               <div className="flex gap-4">
                 <button onClick={() => setIsOpen(false)}>Cancel</button>

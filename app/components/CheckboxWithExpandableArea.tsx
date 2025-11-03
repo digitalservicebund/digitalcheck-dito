@@ -11,7 +11,7 @@ interface CheckboxWithExpandableAreaProps extends BaseInputProps {
   children: ReactNode | ((args: { closeArea: () => void }) => ReactNode);
   label: string;
   scope: FormScope<"on" | true | undefined>;
-  description?: ReactNode | ((args: { open: boolean }) => ReactNode);
+  renderDescription?: ReactNode | ((args: { open: boolean }) => ReactNode);
   closeable?: boolean;
   disabled?: boolean;
   error?: string | null;
@@ -23,7 +23,7 @@ function CheckboxWithExpandableArea({
   children,
   label,
   scope,
-  description,
+  renderDescription,
   disabled,
   error,
   warningInsteadOfError,
@@ -42,9 +42,9 @@ function CheckboxWithExpandableArea({
         scope={scope}
         disabled={disabled || (!closeable && open)}
         description={
-          typeof description === "function"
-            ? description({ open })
-            : description
+          typeof renderDescription === "function"
+            ? renderDescription({ open })
+            : renderDescription
         }
         error={error}
         defaultValue={defaultValue}
