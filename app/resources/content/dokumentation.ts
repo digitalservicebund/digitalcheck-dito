@@ -50,7 +50,25 @@ export const digitalDocumentation = {
     title: "Dokumentation der Digitaltauglichkeit",
     subtitle:
       "Die Dokumentation der Digitaltauglichkeit ist ein formeller, letzter Schritt. Sie dokumentieren, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben, und wie sie ins Regelungsvorhaben eingeflossen sind.",
-    buttonText: "Dokumentation starten",
+    actions: {
+      startInitial: {
+        buttonText: "Dokumentation starten",
+      },
+      resume: {
+        buttonText: "Dokumentation fortsetzen",
+      },
+      startOver: {
+        buttonText: "Neue Dokumentation beginnen",
+      },
+    },
+    startOverDialog: {
+      title: "Neue Dokumentation beginnen",
+      bodyMarkdown:
+        "Mit einer neuen Dokumentation werden die Daten der begonnenen Dokumentation **gelöscht**. Diese können nicht wieder hergestellt werden.",
+      actions: {
+        confirm: "Neu beginnen",
+      },
+    },
     alternative: {
       text: "**Alternativ** können Sie die Dokumentation als Word-Datei herunterladen und bearbeiten. Folgen Sie dann den Anweisungen in der Datei.",
       buttonText: "Word-Vorlage herunterladen (.docx)",

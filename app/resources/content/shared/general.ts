@@ -5,6 +5,9 @@ export const general = {
   buttonNext: {
     text: "Weiter",
   },
+  buttonCancel: {
+    text: "Abbrechen",
+  },
   tableOfContents: {
     headline: "Inhalt",
   },

@@ -55,9 +55,19 @@ export const useDocumentationData = () => {
     };
   };
 
+  const hasSavedDocumentation =
+    !!documentationData.principles ||
+    !!documentationData.participation ||
+    !!documentationData.policyTitle;
+
+  // trigger a client-side re-render to transition from SSR to CSR
   useEffect(() => {
     getDocumentationData();
   }, []);
 
-  return { documentationData, findDocumentationDataForUrl };
+  return {
+    documentationData,
+    findDocumentationDataForUrl,
+    hasSavedDocumentation,
+  };
 };
