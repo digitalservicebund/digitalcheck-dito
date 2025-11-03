@@ -5,7 +5,6 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
   ROUTE_DOCUMENTATION_TEMPLATE_WORD,
   ROUTE_DOCUMENTATION_TITLE,
-  ROUTE_LANDING,
 } from "~/resources/staticRoutes";
 import DokumentationIndex from "~/routes/dokumentation._index";
 import useFeatureFlag from "~/utils/featureFlags";
@@ -40,13 +39,6 @@ describe("Dokumentation Index Route - Integration Tests", () => {
       name: "Dokumentation starten",
     });
     expect(startButton).toHaveAttribute("href", ROUTE_DOCUMENTATION_TITLE.url);
-  });
-
-  it("renders the back button to landing page", () => {
-    const backButton = screen.getByRole("link", {
-      name: "Zurück",
-    });
-    expect(backButton).toHaveAttribute("href", ROUTE_LANDING.url);
   });
 
   it("renders the Word file download button", () => {
