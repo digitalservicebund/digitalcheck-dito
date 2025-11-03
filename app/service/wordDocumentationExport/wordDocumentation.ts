@@ -31,14 +31,14 @@ export const FILE_NAME_DOCUMENTATION_TEMPLATE =
   "VORLAGE_Dokumentation_der_Digitaltauglichkeit_V2.docx";
 
 export default async function downloadDocumentation(
-  principles: PrinzipWithAspekte[],
+  prinzips: PrinzipWithAspekte[],
 ) {
   try {
     const template = await fetch(
       `/documents/${FILE_NAME_DOCUMENTATION_TEMPLATE}`,
     );
     const templateData = await template.arrayBuffer();
-    const doc = await createDoc(templateData, principles, false);
+    const doc = await createDoc(templateData, getDocumentationData(), prinzips);
     saveAs(doc, documentationDocument.filename);
   } catch (e) {
     console.error(e);
@@ -47,15 +47,14 @@ export default async function downloadDocumentation(
 
 export const createDoc = async (
   templateData: ArrayBuffer | Uint8Array,
-  principles: PrinzipWithAspekte[],
-  templateOnly: boolean,
-) => {
-  const date = new Date().toLocaleDateString("de-DE");
-  const {
+  {
     policyTitle,
     participation,
     principles: principleAnswers,
-  } = templateOnly ? {} : getDocumentationData();
+  }: DocumentationData,
+  prinzips: PrinzipWithAspekte[],
+) => {
+  const date = new Date().toLocaleDateString("de-DE");
 
   return patchDocument({
     data: templateData,
@@ -69,7 +68,7 @@ export const createDoc = async (
       PARTICIPATION_RESULTS: toParagraphPatch(
         answerOrPlaceholder(participation?.results),
       ),
-      ...buildPrinciplePatches(principles, principleAnswers),
+      ...buildPrinciplePatches(prinzips, principleAnswers),
     },
   });
 };
@@ -97,24 +96,22 @@ const stringToTextRuns = (content: string) =>
 // - Reasoning (in case of a negative answer)
 // - Aspects and own explanation (partially filled in case of a positive answer)
 const buildPrinciplePatches = (
-  principles: PrinzipWithAspekte[],
+  prinzips: PrinzipWithAspekte[],
   answers: DocumentationData["principles"],
 ): Record<string, IPatch> =>
-  principles.reduce((acc, principle, principleIndex) => {
-    const answer = answers?.find(
-      (answer) => answer.id === principle.documentId,
-    );
+  prinzips.reduce((acc, prinzip, prinzipIndex) => {
+    const answer = answers?.find((answer) => answer.id === prinzip.documentId);
     const hasPositivePrincipleAnswer = answer?.answer.includes("Ja");
     const hasNegativePrincipleAnswer =
       answer?.answer.includes("Nein") || answer?.answer.includes("Nicht");
 
     // Build the aspects content from Strapi and user answers (if positive)
-    const aspectsContent = principle.Aspekte.flatMap((aspect, aspectIndex) =>
+    const aspectsContent = prinzip.Aspekte.flatMap((aspekt, aspektIndex) =>
       buildReasoningParagraphs(
         hasPositivePrincipleAnswer
-          ? (answer?.reasoning?.[aspectIndex] as PrincipleReasoning)
+          ? (answer?.reasoning?.[aspektIndex] as PrincipleReasoning)
           : {},
-        aspect,
+        aspekt,
       ),
     );
 
@@ -134,35 +131,35 @@ const buildPrinciplePatches = (
 
     return {
       ...acc,
-      [`PRINCIPLE_${principleIndex + 1}_TITLE`]: {
+      [`PRINCIPLE_${prinzipIndex + 1}_TITLE`]: {
         type: PatchType.DOCUMENT,
         children: [
           new Paragraph({
             heading: HeadingLevel.HEADING_1,
             children: [
               new Bookmark({
-                id: slugify(principle.Name),
-                children: [new TextRun(principle.Name)],
+                id: slugify(prinzip.Name),
+                children: [new TextRun(prinzip.Name)],
               }),
             ],
           }),
         ],
       },
-      [`PRINCIPLE_${principleIndex + 1}_DESCRIPTION`]: {
+      [`PRINCIPLE_${prinzipIndex + 1}_DESCRIPTION`]: {
         type: PatchType.DOCUMENT,
-        children: strapiBlocksToDocx(principle.Beschreibung),
+        children: strapiBlocksToDocx(prinzip.Beschreibung),
       },
-      [`PRINCIPLE_${principleIndex + 1}_ANSWER`]: toParagraphPatch(
+      [`PRINCIPLE_${prinzipIndex + 1}_ANSWER`]: toParagraphPatch(
         answer?.answer ?? principlePages.radioOptions.join(" | "),
       ),
       // We always need to fill both patches to avoid the tags rendering
       // Depending on whether the answer is positive or negative, we either fill the reasoning or the aspects
-      [`PRINCIPLE_${principleIndex + 1}_REASONING`]: toParagraphPatch(
+      [`PRINCIPLE_${prinzipIndex + 1}_REASONING`]: toParagraphPatch(
         hasNegativePrincipleAnswer
           ? answerOrPlaceholderOptional(answer?.reasoning as string)
           : documentationDocument.placeholder,
       ),
-      [`PRINCIPLE_${principleIndex + 1}_ASPECTS`]: {
+      [`PRINCIPLE_${prinzipIndex + 1}_ASPECTS`]: {
         type: PatchType.DOCUMENT,
         children: [...aspectsContent, ...ownExplanationContent],
       },
@@ -178,20 +175,20 @@ const indentOptions = {
 // Builds the docx Paragraphs for the individual aspects, combining data from Strapi with the user data
 const buildReasoningParagraphs = (
   reasoning?: PrincipleReasoning,
-  aspect?: PrinzipAspekt,
+  aspekt?: PrinzipAspekt,
 ) => [
   stringToIndentParagraph({
     heading: HeadingLevel.HEADING_2,
     children: [
-      aspect?.Titel
+      aspekt?.Titel
         ? new Bookmark({
-            id: slugify(aspect.Titel),
-            children: [new TextRun(aspect.Titel)],
+            id: slugify(aspekt.Titel),
+            children: [new TextRun(aspekt.Titel)],
           })
         : new TextRun(principlePages.explanationFields.ownExplanationTitle),
     ],
   }),
-  ...(aspect ? strapiBlocksToDocx(aspect.Text, indentOptions) : []),
+  ...(aspekt ? strapiBlocksToDocx(aspekt.Text, indentOptions) : []),
   stringToIndentParagraph({
     text: documentationDocument.aspect.paragraphsLabel,
     style: "Textbox Label",

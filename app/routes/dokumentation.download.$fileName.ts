@@ -1,6 +1,7 @@
 import { contentType } from "mime-types";
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { DATA_SCHEMA_VERSION } from "~/routes/dokumentation/documentationDataService";
 import {
   createDoc,
   FILE_NAME_DOCUMENTATION_TEMPLATE,
@@ -35,7 +36,11 @@ export async function loader({ params }: Route.LoaderArgs) {
   );
   const templateData = await fs.readFile(templatePath);
 
-  const fileData = await createDoc(templateData, principles.prinzips, true);
+  const fileData = await createDoc(
+    templateData,
+    { version: DATA_SCHEMA_VERSION },
+    principles.prinzips,
+  );
   const mimeType = contentType(fileName) || "";
 
   return new Response(fileData, {
