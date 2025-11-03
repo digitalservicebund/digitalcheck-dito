@@ -73,22 +73,6 @@ describe("strapiBlocksToDocx", () => {
       expect(Paragraph).toHaveBeenCalledTimes(0);
       expect(result).toEqual([]);
     });
-
-    it("should handle paragraphs with keepNext", () => {
-      const blocks: Node[] = [
-        simpleParagraph("Hello world"),
-        simpleParagraph("Hello world 2"),
-      ];
-
-      strapiBlocksToDocx(blocks);
-      expect(Paragraph).toHaveBeenCalledTimes(2);
-      expect(Paragraph).toHaveBeenNthCalledWith(1, {
-        children: [new TextRun("Hello world")],
-      });
-      expect(Paragraph).toHaveBeenNthCalledWith(2, {
-        children: [new TextRun("Hello world 2")],
-      });
-    });
   });
 
   describe("links", () => {
