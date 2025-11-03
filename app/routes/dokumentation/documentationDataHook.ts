@@ -41,16 +41,15 @@ export const useDocumentationData = () => {
 
     if (Array.isArray(principleData.reasoning)) {
       reasoning = principleData.reasoning?.filter(
-        (r): r is PrincipleReasoning =>
-          r !== undefined && r.checkbox !== undefined,
+        (r): r is PrincipleReasoning => r?.checkbox !== undefined,
       );
     } else {
-      reasoning = principleData.reasoning || "";
+      reasoning = principleData.reasoning ?? "";
     }
 
     return {
       ...principleData,
-      // @ts-expect-error somehow ts does not pic up the correct type
+      // @ts-expect-error somehow ts does not pick up the correct type
       reasoning,
     };
   };

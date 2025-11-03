@@ -24,10 +24,11 @@ function writeToStorage(data: DocumentationData): void {
 }
 
 export function getDocumentationData(): DocumentationData {
-  const storedData = readVersionedDataFromLocalStorage<DocumentationData>(
-    STORAGE_KEY,
-    DATA_SCHEMA_VERSION,
-  ) ?? { version: DATA_SCHEMA_VERSION };
+  const storedData =
+    readVersionedDataFromLocalStorage<DocumentationData>(
+      STORAGE_KEY,
+      DATA_SCHEMA_VERSION,
+    ) ?? initialDocumentationData;
 
   if (cachedDocumentationData !== storedData) {
     cachedDocumentationData = storedData;
