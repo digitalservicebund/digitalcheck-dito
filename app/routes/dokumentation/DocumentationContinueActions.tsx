@@ -1,0 +1,79 @@
+import { FileDownloadOutlined } from "@digitalservicebund/icons/index";
+import { useNavigate } from "react-router";
+import Button from "~/components/Button.tsx";
+import ButtonContainer from "~/components/ButtonContainer.tsx";
+import Dialog from "~/components/Dialog.tsx";
+import RichText from "~/components/RichText.tsx";
+import { digitalDocumentation } from "~/resources/content/dokumentation.ts";
+import { general } from "~/resources/content/shared/general.ts";
+import { ROUTE_DOCUMENTATION_TITLE } from "~/resources/staticRoutes.ts";
+import { useDocumentationData } from "~/routes/dokumentation/documentationDataHook.ts";
+import { deleteDocumentationData } from "~/routes/dokumentation/documentationDataService.ts";
+import { useNonce } from "~/utils/nonce.ts";
+
+const { start } = digitalDocumentation;
+function StartOverDialog() {
+  const navigate = useNavigate();
+  return (
+    <Dialog
+      title={"Neue Dokumentation beginnen"}
+      renderToggleButton={({ toggleDialog }) => (
+        <Button look="tertiary" className={"js-only"} onClick={toggleDialog}>
+          {start.actions.startOver.buttonText}
+        </Button>
+      )}
+      renderActionButtons={({ closeDialog }) => (
+        <div className="flex flex-row gap-12">
+          <Button
+            type="button"
+            onClick={async () => {
+              deleteDocumentationData();
+              await navigate(ROUTE_DOCUMENTATION_TITLE.url);
+            }}
+          >
+            {start.startOverDialog.actions.confirm}
+          </Button>
+
+          <Button type="button" look="tertiary" onClick={closeDialog}>
+            {general.buttonCancel.text}
+          </Button>
+        </div>
+      )}
+    >
+      <div className="space-y-16">
+        <RichText markdown={start.startOverDialog.bodyMarkdown} />
+        <Button iconLeft={<FileDownloadOutlined />} look="tertiary" disabled>
+          {digitalDocumentation.actions.saveDraft.title}
+        </Button>
+      </div>
+    </Dialog>
+  );
+}
+
+export function DocumentationContinueActions() {
+  const { hasSavedDocumentation } = useDocumentationData();
+  const nonce = useNonce();
+  return (
+    <ButtonContainer>
+      {hasSavedDocumentation ? (
+        <>
+          <Button href={ROUTE_DOCUMENTATION_TITLE.url} className="js-only">
+            {start.actions.resume.buttonText}
+          </Button>
+          <StartOverDialog />
+        </>
+      ) : (
+        <Button href={ROUTE_DOCUMENTATION_TITLE.url} className="js-only">
+          {start.actions.startInitial.buttonText}
+        </Button>
+      )}
+      <noscript>
+        {/* Hides the CTA when JavaScript is disabled */}
+        <style nonce={nonce}>{".js-only {display: none;}"}</style>
+        <Button href={ROUTE_DOCUMENTATION_TITLE.url} disabled={true}>
+          {start.actions.startInitial.buttonText}
+        </Button>
+      </noscript>
+    </ButtonContainer>
+  );
+}

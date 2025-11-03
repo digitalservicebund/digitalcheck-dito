@@ -1,9 +1,7 @@
 import { SaveAltOutlined } from "@digitalservicebund/icons";
-import { useNavigate } from "react-router";
 import Button, { ButtonLinkProps } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
-import Dialog from "~/components/Dialog.tsx";
 import Heading from "~/components/Heading.tsx";
 import Hero from "~/components/Hero";
 import InfoBoxList from "~/components/InfoBoxList";
@@ -16,84 +14,17 @@ import {
   digitalDocumentation,
   documentation,
 } from "~/resources/content/dokumentation";
-import { general } from "~/resources/content/shared/general";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import { features } from "~/resources/features";
 import {
   ROUTE_DOCUMENTATION,
   ROUTE_DOCUMENTATION_TEMPLATE_WORD,
-  ROUTE_DOCUMENTATION_TITLE,
 } from "~/resources/staticRoutes";
-import { useDocumentationData } from "~/routes/dokumentation/documentationDataHook.ts";
-import { deleteDocumentationData } from "~/routes/dokumentation/documentationDataService.ts";
+import { DocumentationContinueActions } from "~/routes/dokumentation/DocumentationContinueActions.tsx";
 import useFeatureFlag from "~/utils/featureFlags";
-import { useNonce } from "~/utils/nonce";
 import { renderButtonContainer } from "~/utils/resourceUtils";
 
 const { start } = digitalDocumentation;
-
-function StartOverDialog() {
-  const navigate = useNavigate();
-  return (
-    <Dialog
-      title={"Neue Dokumentation beginnen"}
-      renderToggleButton={({ toggleDialog }) => (
-        <Button look="tertiary" className={"js-only"} onClick={toggleDialog}>
-          {start.actions.startOver.buttonText}
-        </Button>
-      )}
-      renderActionButtons={({ closeDialog }) => (
-        <div className="flex flex-row gap-12">
-          <Button
-            type="button"
-            onClick={async () => {
-              deleteDocumentationData();
-              await navigate(ROUTE_DOCUMENTATION_TITLE.url);
-            }}
-          >
-            {start.startOverDialog.actions.confirm}
-          </Button>
-
-          <Button type="button" look="tertiary" onClick={closeDialog}>
-            {general.buttonCancel.text}
-          </Button>
-        </div>
-      )}
-    >
-      <div className="space-y-16">
-        <RichText markdown={start.startOverDialog.bodyMarkdown} />
-      </div>
-    </Dialog>
-  );
-}
-
-function StartOrContinueButtons() {
-  const { hasSavedDocumentation } = useDocumentationData();
-  const nonce = useNonce();
-  return (
-    <ButtonContainer>
-      {hasSavedDocumentation ? (
-        <>
-          <Button href={ROUTE_DOCUMENTATION_TITLE.url} className="js-only">
-            {start.actions.resume.buttonText}
-          </Button>
-          <StartOverDialog />
-        </>
-      ) : (
-        <Button href={ROUTE_DOCUMENTATION_TITLE.url} className="js-only">
-          {start.actions.startInitial.buttonText}
-        </Button>
-      )}
-      <noscript>
-        {/* Hides the CTA when JavaScript is disabled */}
-        <style nonce={nonce}>{".js-only {display: none;}"}</style>
-        <Button href={ROUTE_DOCUMENTATION_TITLE.url} disabled={true}>
-          {start.actions.startInitial.buttonText}
-        </Button>
-      </noscript>
-    </ButtonContainer>
-  );
-}
 
 function DigitalDocumentationIndex() {
   return (
@@ -101,7 +32,7 @@ function DigitalDocumentationIndex() {
       <MetaTitle prefix={ROUTE_DOCUMENTATION.title} />
       <Hero title={start.title} subtitle={start.subtitle}>
         <div className="mt-40 space-y-40">
-          <StartOrContinueButtons />
+          <DocumentationContinueActions />
           <noscript>
             <InlineNotice
               look="warning"
