@@ -1,4 +1,5 @@
 import {
+  Bookmark,
   convertInchesToTwip,
   HeadingLevel,
   IParagraphOptions,
@@ -16,11 +17,11 @@ import {
   PrincipleReasoning,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { getDocumentationData } from "~/routes/dokumentation/documentationDataService";
-import { Node } from "~/utils/paragraphUtils";
 import {
   PrinzipAspekt,
   type PrinzipWithAspekte,
 } from "~/utils/strapiData.server";
+import { slugify } from "~/utils/utilFunctions";
 import strapiBlocksToDocx from "./strapiBlocksToWord";
 
 const { saveAs } = fileSaver;
@@ -69,18 +70,10 @@ export const createDoc = async (
   });
 };
 
-const toParagraphPatch = (content?: string | Node[]): IPatch => {
-  if (content && typeof content !== "string") {
-    return {
-      type: PatchType.DOCUMENT,
-      children: strapiBlocksToDocx(content),
-    };
-  }
-  return {
-    type: PatchType.PARAGRAPH,
-    children: stringToTextRuns(content ?? ""),
-  };
-};
+const toParagraphPatch = (content?: string): IPatch => ({
+  type: PatchType.PARAGRAPH,
+  children: stringToTextRuns(content ?? ""),
+});
 
 const stringToTextRuns = (content: string) =>
   content
@@ -128,12 +121,24 @@ const buildPrinciplePatches = (
 
     return {
       ...acc,
-      [`PRINCIPLE_${principleIndex + 1}_TITLE`]: toParagraphPatch(
-        principle.Name,
-      ),
-      [`PRINCIPLE_${principleIndex + 1}_DESCRIPTION`]: toParagraphPatch(
-        principle.Beschreibung,
-      ),
+      [`PRINCIPLE_${principleIndex + 1}_TITLE`]: {
+        type: PatchType.DOCUMENT,
+        children: [
+          new Paragraph({
+            heading: HeadingLevel.HEADING_1,
+            children: [
+              new Bookmark({
+                id: slugify(principle.Name),
+                children: [new TextRun(principle.Name ?? "")],
+              }),
+            ],
+          }),
+        ],
+      },
+      [`PRINCIPLE_${principleIndex + 1}_DESCRIPTION`]: {
+        type: PatchType.DOCUMENT,
+        children: strapiBlocksToDocx(principle.Beschreibung),
+      },
       [`PRINCIPLE_${principleIndex + 1}_ANSWER`]: toParagraphPatch(
         answer?.answer ?? principlePages.radioOptions.join(" | "),
       ),
@@ -161,8 +166,15 @@ const buildReasoningParagraphs = (
   aspect?: PrinzipAspekt,
 ) => [
   stringToIndentParagraph({
-    text: aspect?.Titel ?? principlePages.explanationFields.ownExplanationTitle,
     heading: HeadingLevel.HEADING_2,
+    children: [
+      aspect?.Titel
+        ? new Bookmark({
+            id: slugify(aspect.Titel),
+            children: [new TextRun(aspect.Titel)],
+          })
+        : new TextRun(principlePages.explanationFields.ownExplanationTitle),
+    ],
   }),
   ...(aspect ? strapiBlocksToDocx(aspect.Text, indentOptions) : []),
   stringToIndentParagraph({

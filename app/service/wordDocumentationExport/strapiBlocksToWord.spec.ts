@@ -1,4 +1,4 @@
-import { ExternalHyperlink, Paragraph, TextRun } from "docx";
+import { ExternalHyperlink, InternalHyperlink, Paragraph, TextRun } from "docx";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { Node } from "~/utils/paragraphUtils";
 import strapiBlocksToDocx from "./strapiBlocksToWord";
@@ -9,6 +9,7 @@ vi.mock("docx", async (importOriginal) => {
     Paragraph: OriginalParagraph,
     TextRun: OriginalTestRun,
     ExternalHyperlink: OriginalExternalHyperlink,
+    InternalHyperlink: OriginalInternalHyperlink,
     ...originalModule
   } = await importOriginal<typeof import("docx")>();
   return {
@@ -16,6 +17,7 @@ vi.mock("docx", async (importOriginal) => {
     Paragraph: vi.fn(OriginalParagraph),
     TextRun: vi.fn(OriginalTestRun),
     ExternalHyperlink: vi.fn(OriginalExternalHyperlink),
+    InternalHyperlink: vi.fn(OriginalInternalHyperlink),
   };
 });
 
@@ -110,6 +112,45 @@ describe("strapiBlocksToDocx", () => {
           new ExternalHyperlink({
             children: [new TextRun({ text: "GitHub", style: "Hyperlink" })],
             link: "https://github.com",
+          }),
+        ],
+      });
+    });
+
+    it("should convert internal anchors to InternalHyperlink (/#anchor and #anchor)", () => {
+      const blocks: Node[] = [
+        {
+          type: "paragraph",
+          children: [
+            {
+              type: "link",
+              url: "/#first-anchor",
+              children: [{ type: "text", text: "First" }],
+            },
+            { type: "text", text: " and " },
+            {
+              type: "link",
+              url: "#second-anchor",
+              children: [{ type: "text", text: "Second" }],
+            },
+          ],
+        },
+      ];
+
+      strapiBlocksToDocx(blocks);
+
+      expect(InternalHyperlink).toHaveBeenCalledTimes(2);
+      expect(Paragraph).toHaveBeenCalledTimes(1);
+      expect(Paragraph).toHaveBeenCalledWith({
+        children: [
+          new InternalHyperlink({
+            children: [new TextRun({ text: "First", style: "Hyperlink" })],
+            anchor: "first-anchor",
+          }),
+          new TextRun(" and "),
+          new InternalHyperlink({
+            children: [new TextRun({ text: "Second", style: "Hyperlink" })],
+            anchor: "second-anchor",
           }),
         ],
       });
