@@ -348,7 +348,7 @@ export const digitalDocumentation = {
       content: dedent`
         - Senden Sie die Dokumentation **als PDF per E-Mail** an folgende Adresse: [nkr@bmj.bund.de](mailto:nkr@bmj.bund.de). Der NKR prüft die methodische und inhaltliche Nachvollziehbarkeit. Bei Fragen wird der NKR auf Sie zukommen. Das Ziel ist eine digital- und praxistaugliche Umsetzung.
         - Bei **Interoperabilitätsbezug** senden Sie eine Kopie der E-Mail mit der Dokumentation an [interoperabel@digitalservice.bund.de]().
-        - **Visualisierungen** und Skizzen sind vom NKR gern gesehen. Hängen Sie diese formlos als PDF oder als Screenshot an.`,
+        - Der NKR empfiehlt, **Visualisierungen** und Skizzen als ergänzende Dokumente beizufügen – formlos als PDF oder Screenshot.`,
     },
     done: "Damit ist der Digitalcheck für Sie beendet.",
   },
