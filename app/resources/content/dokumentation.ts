@@ -340,7 +340,7 @@ export const digitalDocumentation = {
     download: {
       heading: "Dokumentation herunterladen",
       content:
-        "Laden Sie die ausgefüllte Dokumentation herunter, um sie abzustimmen oder an den NKR zu senden.",
+        "Laden Sie die ausgefüllte Dokumentation herunter, um sie zu verakten und an den NKR zu senden.",
       buttonText: "Word-Datei herunterladen (.docx)",
     },
     send: {
