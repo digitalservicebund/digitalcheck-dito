@@ -305,6 +305,7 @@ describe("navigation on pages of documentation", () => {
                 return documentationData.participation;
               else return (documentationData.principles || [])[0];
             }),
+            hasSavedDocumentation: true,
           });
         });
 

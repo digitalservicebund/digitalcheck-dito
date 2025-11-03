@@ -83,6 +83,7 @@ describe("DocumentationParticipation", () => {
   describe("validation", () => {
     beforeEach(() => {
       mockedUseDocumentationData.mockReturnValue({
+        hasSavedDocumentation: true,
         documentationData: {
           ...initialDocumentationData,
           participation: {

@@ -52,6 +52,7 @@ function createDocumentationDataMock({
       principles: principles,
     },
     findDocumentationDataForUrl: vi.fn(),
+    hasSavedDocumentation: true,
   };
 }
 
@@ -77,6 +78,7 @@ describe("DocumentationSummary", () => {
     mockedUseDocumentationData.mockReturnValue({
       documentationData: mockDocumentationData,
       findDocumentationDataForUrl: vi.fn(),
+      hasSavedDocumentation: true,
     });
 
     const context: NavigationContext = {

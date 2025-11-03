@@ -70,6 +70,7 @@ describe("DocumentationTitle", () => {
           policyTitle: { title: "" },
         },
         findDocumentationDataForUrl: vi.fn(),
+        hasSavedDocumentation: true,
       });
 
       act(() => {

@@ -451,6 +451,7 @@ describe("DocumentationPrinciple", () => {
           mockedUseDocumentationData.mockReturnValue({
             documentationData,
             findDocumentationDataForUrl: vi.fn(),
+            hasSavedDocumentation: true,
           });
 
           act(() => {
@@ -507,6 +508,7 @@ describe("DocumentationPrinciple", () => {
 
     it("removes errors on valid input for reasoning string", async () => {
       mockedUseDocumentationData.mockReturnValue({
+        hasSavedDocumentation: true,
         documentationData: {
           ...initialDocumentationData,
           principles: [
@@ -538,6 +540,7 @@ describe("DocumentationPrinciple", () => {
 
     it("removes errors on valid input for reasoning array", async () => {
       mockedUseDocumentationData.mockReturnValue({
+        hasSavedDocumentation: true,
         documentationData: {
           ...initialDocumentationData,
           principles: [
