@@ -210,7 +210,7 @@ export const digitalDocumentation = {
     tip: {
       heading: "Ihre eingegebenen Angaben werden in der Sitzung gespeichert.",
       content:
-        "Sie können Ihre Angaben als Word Dokument herunterladen und zu einem späteren Zeitpunkt vervollständigen.",
+        "Sie können Ihre Angaben als Word-Dokument herunterladen und zu einem späteren Zeitpunkt vervollständigen.",
     },
   },
   principlePages: {
@@ -242,7 +242,7 @@ export const digitalDocumentation = {
         Zu jedem Schwerpunkt finden Sie eine kurze Beschreibung, wenn Sie ihn auswählen.
         Falls keiner zutrifft, wählen Sie **„Eigene Erklärung hinzufügen“**.
         
-        Sie können Ihre Angaben als Word Dokument exportieren und später in der Word Datei Ihre Dokumentation fortführen.`,
+        Sie können Ihre Angaben als Word-Dokument exportieren und später in der Word Datei Ihre Dokumentation fortführen.`,
       actions: {
         addOwnExplanation: {
           title: "Eigene Erklärung hinzufügen",
@@ -254,7 +254,7 @@ export const digitalDocumentation = {
       description: dedent`
         Bitte erläutern Sie, warum das Prinzip “Digitale Angebote für alle nutzbar gestalten” **nicht** auf Ihr Vorhaben zutrifft.
 
-        Sie können Ihre Angaben als Word Dokument exportieren und später in der Word Datei Ihre Dokumentation fortführen.`,
+        Sie können Ihre Angaben als Word-Dokument exportieren und später in der Word Datei Ihre Dokumentation fortführen.`,
       label: "Begründung",
       placeholder:
         "Begründung warum das Prinzip nicht auf Ihr Regelungsvorhaben zutrifft.",
@@ -264,7 +264,7 @@ export const digitalDocumentation = {
       description: dedent`
         Bitte erläutern Sie, warum das Prinzip “Digitale Angebote für alle nutzbar gestalten” **nicht relevant** für Ihr Vorhaben ist.
 
-        Sie können Ihre Angaben als Word Dokument exportieren und später in der Word Datei Ihre Dokumentation fortführen.`,
+        Sie können Ihre Angaben als Word-Dokument exportieren und später in der Word Datei Ihre Dokumentation fortführen.`,
       label: "Begründung",
       placeholder:
         "Begründung warum das Prinzip nicht relevant für Ihr Regelungsvorhaben ist.",
@@ -272,7 +272,7 @@ export const digitalDocumentation = {
     storageHint: {
       title: "Ihre eingegebenen Angaben werden in der Sitzung gespeichert.",
       content:
-        "Sie können Ihre Angaben als Word Dokument herunterladen und zu einem späteren Zeitpunkt vervollständigen.",
+        "Sie können Ihre Angaben als Word-Dokument herunterladen und zu einem späteren Zeitpunkt vervollständigen.",
     },
     explanationFields: {
       title: "Ihre Erläuterung",
