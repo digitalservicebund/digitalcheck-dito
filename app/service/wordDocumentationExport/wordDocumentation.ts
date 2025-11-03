@@ -182,7 +182,7 @@ const buildReasoningParagraphs = (
     style: "Textbox Label",
   }),
   stringToIndentParagraph({
-    text: `§${reasoning?.paragraphs ?? ""}`,
+    text: reasoning?.paragraphs ?? "",
     style: "Textbox",
   }),
   stringToIndentParagraph({
