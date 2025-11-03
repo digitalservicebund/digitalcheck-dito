@@ -11,11 +11,16 @@ import {
   STORAGE_KEY,
 } from "./documentationDataService";
 
-vi.mock("~/utils/localStorageVersioned", () => ({
-  readVersionedDataFromLocalStorage: vi.fn(),
-  writeVersionedDataToLocalStorage: vi.fn(),
-  removeFromLocalStorage: vi.fn(),
-}));
+vi.mock("~/utils/localStorageVersioned", async (importOriginal) => {
+  const module = await importOriginal();
+  return {
+    // @ts-expect-error import is of type unknown
+    ...module,
+    readVersionedDataFromLocalStorage: vi.fn(),
+    writeVersionedDataToLocalStorage: vi.fn(),
+    removeFromLocalStorage: vi.fn(),
+  };
+});
 
 const localStorageMock = {
   getItem: vi.fn(),
@@ -32,6 +37,7 @@ Object.defineProperty(window, "localStorage", {
 import {
   readVersionedDataFromLocalStorage,
   removeFromLocalStorage,
+  VersionMismatchError,
   writeVersionedDataToLocalStorage,
 } from "~/utils/localStorageVersioned";
 
@@ -76,10 +82,12 @@ describe("documentationDataService", () => {
 
     it("should propagate version mismatch errors", () => {
       mockReadFromLocalStorage.mockImplementation(() => {
-        throw new Error("Data version mismatch");
+        throw new VersionMismatchError("Data version mismatch");
       });
 
-      expect(() => getDocumentationData()).toThrow("Data version mismatch");
+      expect(() => getDocumentationData()).toThrow(
+        new VersionMismatchError("Data version mismatch"),
+      );
     });
   });
 

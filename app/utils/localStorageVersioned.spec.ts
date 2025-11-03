@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   readVersionedDataFromLocalStorage,
   removeFromLocalStorage,
+  VersionMismatchError,
   writeVersionedDataToLocalStorage,
   type VersionedData,
 } from "./localStorageVersioned";
@@ -78,7 +79,9 @@ describe("localStorage", () => {
       expect(() =>
         readVersionedDataFromLocalStorage<TestData>("testKey", "2.0.0"),
       ).toThrow(
-        "Data version mismatch for testKey. Expected 2.0.0, found 1.0.0",
+        new VersionMismatchError(
+          "Data version mismatch for testKey. Expected 2.0.0, found 1.0.0",
+        ),
       );
     });
 

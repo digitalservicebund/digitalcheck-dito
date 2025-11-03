@@ -2,10 +2,17 @@ export interface VersionedData {
   version: string;
 }
 
+export class VersionMismatchError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "VersionMismatchError";
+  }
+}
+
 /**
  * Read versioned data from localStorage
  * @returns The parsed data or null if not found/invalid
- * @throws Error if version mismatch is detected
+ * @throws VersionMismatchError if version mismatch is detected
  */
 export function readVersionedDataFromLocalStorage<T extends VersionedData>(
   storageKey: string,
@@ -22,7 +29,7 @@ export function readVersionedDataFromLocalStorage<T extends VersionedData>(
 
   const data: T = JSON.parse(stored) as T;
   if (data.version !== currentVersion) {
-    throw new Error(
+    throw new VersionMismatchError(
       `Data version mismatch for ${storageKey}. Expected ${currentVersion}, found ${data.version}`,
     );
   }
