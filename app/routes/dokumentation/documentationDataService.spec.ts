@@ -12,9 +12,9 @@ import {
 } from "./documentationDataService";
 
 vi.mock("~/utils/localStorageVersioned", async (importOriginal) => {
-  const module = await importOriginal();
+  const module =
+    await importOriginal<typeof import("~/utils/localStorageVersioned")>();
   return {
-    // @ts-expect-error import is of type unknown
     ...module,
     readVersionedDataFromLocalStorage: vi.fn(),
     writeVersionedDataToLocalStorage: vi.fn(),
