@@ -13,6 +13,7 @@ vi.mock(
       useDocumentationData: vi.fn(() => ({
         documentationData: initialDocumentationData,
         findDocumentationDataForUrl: vi.fn(),
+        hasSavedDocumentation: false,
       })),
     };
   },
