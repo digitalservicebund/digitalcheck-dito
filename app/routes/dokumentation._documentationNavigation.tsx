@@ -1,4 +1,4 @@
-import { Outlet, useLoaderData, useLocation } from "react-router";
+import { Outlet, useLocation } from "react-router";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
@@ -6,15 +6,10 @@ import { features } from "~/resources/features";
 import {
   type Route as _Route,
   ROUTE_DOCUMENTATION,
-  ROUTES_DOCUMENTATION_POST,
-  ROUTES_DOCUMENTATION_PRE,
 } from "~/resources/staticRoutes";
+import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import useFeatureFlag from "~/utils/featureFlags";
-import {
-  fetchStrapiData,
-  GET_PRINZIPS_WITH_ASPECTS_QUERY,
-  type PrinzipWithAspekte,
-} from "~/utils/strapiData.server";
+import { type PrinzipWithAspekte } from "~/utils/strapiData.server";
 import { useDocumentationData } from "./dokumentation/documentationDataHook";
 import { getDocumentationSchemaFormUrl } from "./dokumentation/documentationDataSchema";
 
@@ -30,8 +25,6 @@ export type NavigationContext = {
   routes: (Route | Route[])[];
   prinzips: PrinzipWithAspekte[];
 };
-
-const getUrlForSlug = (slug: string) => `/dokumentation/${slug}`;
 
 function findIndexForRoute(routes: Route[], currentUrl: string) {
   const index = routes.findIndex((route) => route.url === currentUrl);
@@ -54,33 +47,8 @@ function getNextUrl(routes: Route[], currentUrl: string): string | null {
     : null;
 }
 
-export const loader = async () => {
-  const prinzipData = await fetchStrapiData<{
-    prinzips: PrinzipWithAspekte[];
-  }>(GET_PRINZIPS_WITH_ASPECTS_QUERY);
-
-  if ("error" in prinzipData) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(prinzipData.error, { status: 400 });
-  }
-
-  const { prinzips } = prinzipData;
-
-  const routes: (Route[] | Route)[] = [
-    ...ROUTES_DOCUMENTATION_PRE,
-    prinzips.map<Route>(({ Name, URLBezeichnung, documentId }) => ({
-      title: Name,
-      url: getUrlForSlug(URLBezeichnung),
-      principleId: documentId,
-    })),
-    ...ROUTES_DOCUMENTATION_POST,
-  ];
-
-  return { routes, prinzips };
-};
-
 export default function LayoutWithDocumentationNavigation() {
-  const { routes, prinzips } = useLoaderData<typeof loader>();
+  const { routes, prinzips } = useDocumentationRouteData();
   const location = useLocation();
   const currentUrl = location.pathname;
 

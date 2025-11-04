@@ -9,11 +9,18 @@ import { general } from "~/resources/content/shared/general.ts";
 import { ROUTE_DOCUMENTATION_TITLE } from "~/resources/staticRoutes.ts";
 import { useDocumentationData } from "~/routes/dokumentation/documentationDataHook.ts";
 import { deleteDocumentationData } from "~/routes/dokumentation/documentationDataService.ts";
+import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
+import downloadDocumentation from "~/service/wordDocumentationExport/wordDocumentation.ts";
 import { useNonce } from "~/utils/nonce.ts";
 
 const { start } = digitalDocumentation;
+
 function StartOverDialog() {
   const navigate = useNavigate();
+  const supportingData = useDocumentationRouteData();
+  const downloadDraft = async () => {
+    await downloadDocumentation(supportingData.prinzips);
+  };
   return (
     <Dialog
       title={"Neue Dokumentation beginnen"}
@@ -42,7 +49,11 @@ function StartOverDialog() {
     >
       <div className="space-y-16">
         <RichText markdown={start.startOverDialog.bodyMarkdown} />
-        <Button iconLeft={<FileDownloadOutlined />} look="tertiary" disabled>
+        <Button
+          iconLeft={<FileDownloadOutlined />}
+          look="link"
+          onClick={downloadDraft}
+        >
           {digitalDocumentation.actions.saveDraft.title}
         </Button>
       </div>

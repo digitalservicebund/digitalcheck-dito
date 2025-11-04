@@ -7,8 +7,8 @@ import { render, screen, within } from "@testing-library/react";
 import {
   createMemoryRouter,
   RouterProvider,
-  useLoaderData,
   useOutletContext,
+  useRouteLoaderData,
 } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
@@ -35,7 +35,7 @@ vi.mock("react-router", async (importOriginal) => {
   const original = await importOriginal<typeof import("react-router")>();
   return {
     ...original,
-    useLoaderData: vi.fn(),
+    useRouteLoaderData: vi.fn(),
   };
 });
 
@@ -238,7 +238,7 @@ const expectWarning = (element: HTMLElement, warning: boolean = true) => {
 describe("navigation on pages of documentation", () => {
   beforeEach(() => {
     vi.mocked(useFeatureFlag).mockReturnValue(true);
-    vi.mocked(useLoaderData).mockReturnValue({ routes: mockRoutes });
+    vi.mocked(useRouteLoaderData).mockReturnValue({ routes: mockRoutes });
   });
 
   afterEach(() => {
