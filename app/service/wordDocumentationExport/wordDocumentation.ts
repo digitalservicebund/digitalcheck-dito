@@ -157,7 +157,7 @@ const buildPrinciplePatches = (
       [`PRINCIPLE_${prinzipIndex + 1}_REASONING`]: toParagraphPatch(
         hasNegativePrincipleAnswer
           ? answerOrPlaceholderOptional(answer?.reasoning as string)
-          : documentationDocument.placeholder,
+          : documentationDocument.placeholderOptional,
       ),
       [`PRINCIPLE_${prinzipIndex + 1}_ASPECTS`]: {
         type: PatchType.DOCUMENT,
@@ -172,7 +172,7 @@ const indentOptions = {
   },
 };
 
-// Builds the docx Paragraphs for the individual aspects, combining data from Strapi with the user data
+// Builds the docx Paragraphs for the individual aspects and own reasoning, combining data from Strapi with the user data
 const buildReasoningParagraphs = (
   reasoning?: PrincipleReasoning,
   aspekt?: PrinzipAspekt,
