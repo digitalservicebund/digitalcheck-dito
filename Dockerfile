@@ -1,12 +1,12 @@
 # Download and install the dependencies for building the app
-FROM node:22.4.1-alpine3.20 AS build-dependencies
+FROM node:24.11.0-alpine3.22 AS build-dependencies
 
 WORKDIR /src
 COPY ./package.json package-lock.json /src/
 RUN npm ci --ignore-scripts
 
 # Download and install the dependencies for running the app
-FROM node:22.4.1-alpine3.20 AS production-dependencies
+FROM node:24.11.0-alpine3.22 AS production-dependencies
 
 ENV NODE_ENV=production
 WORKDIR /src
@@ -14,7 +14,7 @@ COPY ./package.json package-lock.json /src/
 RUN npm ci --ignore-scripts
 
 # Build the app
-FROM node:22.4.1-alpine3.20 AS build
+FROM node:24.11.0-alpine3.22 AS build
 
 # Create app directory
 WORKDIR /src
@@ -30,7 +30,7 @@ COPY public/ public/
 RUN npm run build
 
 # Final image that runs the app
-FROM node:22.4.1-alpine3.20
+FROM node:24.11.0-alpine3.22
 
 ENV NODE_ENV=production
 ENV npm_config_cache=/tmp/.npm
