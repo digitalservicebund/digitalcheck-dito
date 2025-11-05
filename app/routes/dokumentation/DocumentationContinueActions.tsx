@@ -1,4 +1,4 @@
-import { FileDownloadOutlined } from "@digitalservicebund/icons/index";
+import { FileDownloadOutlined } from "@digitalservicebund/icons";
 import { useNavigate } from "react-router";
 import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
