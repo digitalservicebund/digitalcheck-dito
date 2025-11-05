@@ -166,7 +166,7 @@ const formValidationScenarios: ValidationScenario[] = [
     },
     expected: {
       validReasoning: true,
-      validReasoningParagraphs: false,
+      validReasoningParagraphs: true,
       validReasoningReason: true,
     },
   },
@@ -547,6 +547,11 @@ describe("DocumentationPrinciple", () => {
             {
               id: "1",
               answer: "Ja, gänzlich oder teilweise",
+              reasoning: [
+                {
+                  aspect: "aspekt 1",
+                },
+              ],
             },
           ],
         },

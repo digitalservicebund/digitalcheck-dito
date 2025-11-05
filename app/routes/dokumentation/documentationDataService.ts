@@ -50,7 +50,9 @@ export function deleteDocumentationData(): void {
   emitChange();
 }
 
-export function setPolicyTitle(policyTitle: PolicyTitle): void {
+export function setPolicyTitle(policyTitle?: PolicyTitle): void {
+  if (!policyTitle) return;
+
   const data = getDocumentationData();
   createOrUpdateDocumentationData({
     ...data,
@@ -58,7 +60,9 @@ export function setPolicyTitle(policyTitle: PolicyTitle): void {
   });
 }
 
-export function setParticipation(participation: Participation): void {
+export function setParticipation(participation?: Participation): void {
+  if (!participation) return;
+
   const data = getDocumentationData();
   createOrUpdateDocumentationData({
     ...data,
@@ -66,7 +70,9 @@ export function setParticipation(participation: Participation): void {
   });
 }
 
-export function addOrUpdatePrinciple(newPrinciple: Principle): void {
+export function addOrUpdatePrinciple(newPrinciple?: Principle): void {
+  if (!newPrinciple) return;
+
   const data = getDocumentationData();
   const principles = data.principles ?? [];
   const existingIndex = principles.findIndex(

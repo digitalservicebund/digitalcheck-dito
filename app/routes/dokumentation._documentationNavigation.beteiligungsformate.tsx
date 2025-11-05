@@ -1,6 +1,4 @@
-import { useForm } from "@rvf/react";
-import { useEffect } from "react";
-import { useNavigate, useOutletContext } from "react-router";
+import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
 import InlineNotice from "~/components/InlineNotice";
@@ -15,51 +13,27 @@ import {
 } from "~/routes/dokumentation/documentationDataSchema";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
-import { useDocumentationData } from "./dokumentation/documentationDataHook";
+import {
+  useDocumentationData,
+  useSyncedForm,
+} from "./dokumentation/documentationDataHook";
 import { setParticipation } from "./dokumentation/documentationDataService";
 
 const { participation } = digitalDocumentation;
 
 export default function DocumentationParticipation() {
-  const navigate = useNavigate();
   const { currentUrl, nextUrl, previousUrl } =
     useOutletContext<NavigationContext>();
   const { documentationData } = useDocumentationData();
 
-  const form = useForm({
+  const form = useSyncedForm({
     schema: participationSchema,
     defaultValues: defaultParticipationValues,
-    validationBehaviorConfig: {
-      whenSubmitted: "onSubmit",
-      whenTouched: "onSubmit",
-      initial: "onSubmit",
-    },
-    onBeforeSubmit: async () => {
-      // bypass submission
-      if (nextUrl) await navigate(nextUrl);
-    },
-    handleSubmit: async () => {
-      if (nextUrl) await navigate(nextUrl);
-    },
+    currentUrl,
+    setDataCallback: setParticipation,
+    storedData: documentationData.participation,
+    nextUrl,
   });
-
-  useEffect(() => {
-    const unsubscribe = form.subscribe.value(setParticipation);
-
-    if (
-      documentationData.participation &&
-      !form.dirty("formats") &&
-      !form.dirty("results")
-    ) {
-      form.resetForm(documentationData.participation);
-      form.setDirty("formats", true);
-      form.setDirty("results", true);
-
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      form.validate();
-    }
-    return () => unsubscribe();
-  }, [currentUrl, form, documentationData]);
 
   return (
     <>

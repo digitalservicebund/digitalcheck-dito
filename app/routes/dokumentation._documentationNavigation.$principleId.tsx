@@ -2,9 +2,9 @@ import {
   AddCircleOutlineOutlined,
   RemoveCircleOutlineOutlined,
 } from "@digitalservicebund/icons";
-import { FormScope, useField, useFieldArray, useForm } from "@rvf/react";
+import { FormScope, useField, useFieldArray } from "@rvf/react";
 import { useCallback, useEffect } from "react";
-import { useLoaderData, useNavigate, useOutletContext } from "react-router";
+import { useLoaderData, useOutletContext } from "react-router";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import Button from "~/components/Button";
@@ -35,7 +35,10 @@ import { slugify } from "~/utils/utilFunctions";
 import type { Route } from "./+types/dokumentation._documentationNavigation.$principleId";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
-import { useDocumentationData } from "./dokumentation/documentationDataHook";
+import {
+  useDocumentationData,
+  useSyncedForm,
+} from "./dokumentation/documentationDataHook";
 
 const { principlePages } = digitalDocumentation;
 
@@ -339,7 +342,6 @@ function IrrelevantAnswerFormElements({
 
 export default function DocumentationPrinciple() {
   const { principleId } = useLoaderData<typeof loader>();
-  const navigate = useNavigate();
   const { currentUrl, nextUrl, previousUrl, prinzips } =
     useOutletContext<NavigationContext>();
   const { documentationData } = useDocumentationData();
@@ -352,29 +354,21 @@ export default function DocumentationPrinciple() {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw new Response("No Prinzip for slug found", { status: 404 });
 
-  const form = useForm({
+  const principleData = documentationData?.principles?.find(
+    (principle) => principle.id === prinzip.documentId,
+  );
+
+  const form = useSyncedForm({
     schema: principleSchema,
     defaultValues: {
       id: prinzip.documentId,
       answer: "",
     },
-    validationBehaviorConfig: {
-      whenSubmitted: "onSubmit",
-      whenTouched: "onSubmit",
-      initial: "onSubmit",
-    },
-    handleSubmit: async () => {
-      if (nextUrl) await navigate(nextUrl);
-    },
-    onBeforeSubmit: async () => {
-      // bypass submission
-      if (nextUrl) await navigate(nextUrl);
-    },
+    currentUrl,
+    setDataCallback: addOrUpdatePrinciple,
+    storedData: principleData,
+    nextUrl,
   });
-
-  const principleData = documentationData?.principles?.find(
-    (principle) => principle.id === prinzip.documentId,
-  );
 
   // Handle answer change
   useEffect(() => {
@@ -413,18 +407,6 @@ export default function DocumentationPrinciple() {
     documentationData,
     principleData,
   ]);
-
-  useEffect(() => {
-    const unsubscribe = form.subscribe.value(addOrUpdatePrinciple);
-
-    if (principleData && !form.dirty("answer")) {
-      form.resetForm(principleData);
-      form.setDirty("answer", true);
-      form.validate().catch(() => {});
-    }
-
-    return () => unsubscribe();
-  }, [currentUrl, form, prinzip.documentId, documentationData, principleData]);
 
   // somehow the error for the reasoning field is not removed on change
   // thats why we do it here manually

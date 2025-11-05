@@ -1,6 +1,4 @@
-import { useForm } from "@rvf/react";
-import { useEffect } from "react";
-import { useNavigate, useOutletContext } from "react-router";
+import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import InputNew from "~/components/InputNew";
 import MetaTitle from "~/components/Meta";
@@ -13,46 +11,26 @@ import {
 import { setPolicyTitle } from "~/routes/dokumentation/documentationDataService";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
-import { useDocumentationData } from "./dokumentation/documentationDataHook";
+import {
+  useDocumentationData,
+  useSyncedForm,
+} from "./dokumentation/documentationDataHook";
 
 const { info } = digitalDocumentation;
 
 export default function DocumentationTitle() {
-  const navigate = useNavigate();
   const { currentUrl, nextUrl, previousUrl } =
     useOutletContext<NavigationContext>();
   const { documentationData } = useDocumentationData();
 
-  const form = useForm({
+  const form = useSyncedForm({
     schema: policyTitleSchema,
     defaultValues: defaultTitleValues,
-    validationBehaviorConfig: {
-      whenSubmitted: "onSubmit",
-      whenTouched: "onSubmit",
-      initial: "onSubmit",
-    },
-    onBeforeSubmit: async () => {
-      // bypass submission
-      if (nextUrl) await navigate(nextUrl);
-    },
-    handleSubmit: async () => {
-      if (nextUrl) await navigate(nextUrl);
-    },
+    currentUrl,
+    setDataCallback: setPolicyTitle,
+    storedData: documentationData.policyTitle,
+    nextUrl,
   });
-
-  useEffect(() => {
-    const unsubscribe = form.subscribe.value(setPolicyTitle);
-
-    if (documentationData.policyTitle && !form.dirty("title")) {
-      form.resetForm(documentationData.policyTitle);
-      form.setDirty("title", true);
-
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      form.validate();
-    }
-
-    return () => unsubscribe();
-  }, [currentUrl, form, documentationData]);
 
   return (
     <>

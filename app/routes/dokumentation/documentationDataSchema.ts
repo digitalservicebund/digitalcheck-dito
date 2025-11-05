@@ -31,16 +31,14 @@ const principleReasoningSchema = z
   .superRefine((val, ctx) => {
     if (val.checkbox === undefined) return;
 
-    if (!val.paragraphs) {
+    if (!val.paragraphs && !val.reason) {
       ctx.addIssue({
         code: "custom",
         message: principlePages.errors.paragraphsError,
         input: val,
         path: ["paragraphs"],
       });
-    }
 
-    if (!val.reason) {
       ctx.addIssue({
         code: "custom",
         message: principlePages.errors.reasonError,

@@ -144,11 +144,11 @@ const validationScenarios: ValidationScenario[] = [
     expected: {
       completedTitle: false, // is current route so no states are shown
       completedParticipation: true,
-      completedPrinciples: false,
+      completedPrinciples: true,
 
       warningTitle: false,
       warningParticipation: false,
-      warningPrinciples: true,
+      warningPrinciples: false,
     },
   },
 ];
