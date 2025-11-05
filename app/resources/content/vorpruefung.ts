@@ -209,8 +209,10 @@ export const preCheck = {
       ...preCheckQuestions.verpflichtungenFuerBeteiligte,
       question:
         "Entstehen durch die Regelung Mitwirkungspflichten für Akteurinnen und Akteure?",
-      positiveResult: "einer Festlegung von Mitwirkungspflichten für Akteurinnen und Akteure.",
-      negativeResult: "keiner Festlegung von Mitwirkungspflichten für Akteurinnen und Akteure.",
+      positiveResult:
+        "einer Festlegung von Mitwirkungspflichten für Akteurinnen und Akteure.",
+      negativeResult:
+        "keiner Festlegung von Mitwirkungspflichten für Akteurinnen und Akteure.",
       text: "**Praxisbeispiel**: Für eine staatliche Förderung ist neben der Land- und Forstwirtschaft nun auch das produzierende Gewerbe berechtigt. Der Anspruch dieser Unternehmen kann nicht nach denselben Kriterien geprüft werden. Die Vorhalte-/Nachweispflichten müssen auf diese Gruppe angepasst werden, dabei müssen die für die Beteiligten üblichen digitalen Möglichkeiten mitgedacht, bzw. geschaffen werden.",
       hint: {
         title: "Wer sind Akteurinnen und Akteurinnen und Akteure?",

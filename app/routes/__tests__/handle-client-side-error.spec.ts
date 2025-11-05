@@ -4,6 +4,15 @@ import {
 } from "app/routes/handle-client-side-error";
 import { describe, expect, it, vi } from "vitest";
 
+function getActionParams(request: Request) {
+  return {
+    context: {},
+    params: {},
+    request,
+    unstable_pattern: "/handle-client-side-error",
+  };
+}
+
 describe("endpoint to handle client-side errors", () => {
   it("logs error message and stack of client-side error to console", async () => {
     const clientSideError: ClientSideError = {
@@ -20,11 +29,7 @@ describe("endpoint to handle client-side errors", () => {
       },
     });
 
-    await action({
-      context: {},
-      params: {},
-      request,
-    });
+    await action(getActionParams(request));
 
     expect(consoleSpy).toHaveBeenCalledWith(
       `Client-side error: ${clientSideError.message}`,
@@ -42,11 +47,7 @@ describe("endpoint to handle client-side errors", () => {
       },
     });
 
-    await action({
-      context: {},
-      params: {},
-      request,
-    });
+    await action(getActionParams(request));
 
     expect(consoleSpy).toHaveBeenCalledWith(
       "Failed to handle client error:",
@@ -68,11 +69,7 @@ describe("endpoint to handle client-side errors", () => {
       },
     });
 
-    const response = await action({
-      context: {},
-      params: {},
-      request,
-    });
+    const response = await action(getActionParams(request));
 
     expect(response.status).toBe(204);
     expect(await response.text()).toBe(""); // No Content
@@ -89,11 +86,7 @@ describe("endpoint to handle client-side errors", () => {
       },
     });
 
-    const response = await action({
-      context: {},
-      params: {},
-      request,
-    });
+    const response = await action(getActionParams(request));
 
     expect(response.status).toBe(400);
     expect(await response.text()).toBe("Invalid request");
