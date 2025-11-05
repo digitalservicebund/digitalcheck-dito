@@ -101,9 +101,12 @@ const buildPrinciplePatches = (
 ): Record<string, IPatch> =>
   prinzips.reduce((acc, prinzip, prinzipIndex) => {
     const answer = answers?.find((answer) => answer.id === prinzip.documentId);
-    const hasPositivePrincipleAnswer = answer?.answer.includes("Ja");
+    const hasPositivePrincipleAnswer =
+      answer && answer.answer && answer.answer.includes("Ja");
     const hasNegativePrincipleAnswer =
-      answer?.answer.includes("Nein") || answer?.answer.includes("Nicht");
+      answer &&
+      answer.answer &&
+      (answer.answer.includes("Nein") || answer.answer.includes("Nicht"));
 
     // Build the aspects content from Strapi and user answers (if positive)
     const aspectsContent = prinzip.Aspekte.flatMap((aspekt, aspektIndex) =>
