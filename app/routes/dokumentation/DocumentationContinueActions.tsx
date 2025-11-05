@@ -23,7 +23,7 @@ function StartOverDialog() {
   };
   return (
     <Dialog
-      title={"Neue Dokumentation beginnen"}
+      title={start.startOverDialog.title}
       renderToggleButton={({ toggleDialog }) => (
         <Button look="tertiary" className={"js-only"} onClick={toggleDialog}>
           {start.actions.startOver.buttonText}
