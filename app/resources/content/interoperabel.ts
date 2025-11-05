@@ -1,5 +1,6 @@
 import { Apps, Layers } from "@digitalservicebund/icons";
 import { ROUTE_INTEROPERABILITY_SPOC } from "~/resources/staticRoutes";
+import { ContentAction } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const interoperability = {
@@ -319,9 +320,9 @@ export const interoperability = {
     buttons: [
       {
         text: "Zur Nationalen Kontaktstelle",
-        href: ROUTE_INTEROPERABILITY_SPOC.url,
+        linkTo: ROUTE_INTEROPERABILITY_SPOC.url,
         look: "tertiary" as const,
       },
-    ],
+    ] satisfies ContentAction[],
   },
 };

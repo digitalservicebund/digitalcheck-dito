@@ -1,19 +1,11 @@
 import { TipsAndUpdatesOutlined } from "@digitalservicebund/icons";
 import { steps } from "~/resources/content/shared/naechste-schritte";
-import { ROUTE_DOCUMENTATION_STATIC_WORD } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const documentation = {
   title: "Dokumentieren der Digitaltauglichkeit",
   subtitle:
     "Sie dokumentieren in einem Fragebogen, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben. Und wie Sie diese in Ihr Regelungsvorhaben einfließen lassen.",
-  buttons: [
-    {
-      // NOTE: 70-tage replace pdf with word document
-      text: "Dokumentation herunterladen (Word-Datei)",
-      href: ROUTE_DOCUMENTATION_STATIC_WORD.url,
-    },
-  ],
   multipleNotice: {
     headline: "Eine oder mehrere Dokumentationen?",
     content:

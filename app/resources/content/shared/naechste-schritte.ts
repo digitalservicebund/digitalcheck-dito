@@ -3,9 +3,10 @@ import {
   ROUTE_METHODS,
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
+import { LinkAction, Step } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
-const stepNKR = {
+const stepNKR: Step<LinkAction> = {
   headline: {
     text: "Prüfen durch den NKR",
   },
@@ -20,13 +21,10 @@ export const steps = {
     },
     content:
       "Finden Sie heraus, ob Sie in Ihrem Regelungsvorhaben Aspekte der digitalen Umsetzung und EU-Anforderungen an Interoperabilität beachten müssen. Danach entscheidet sich, ob die weiteren Schritte für Sie relevant sind.",
-    buttons: [
-      {
-        plausibleEventName: "Content.Steps.Button+Digitalbezug",
-        text: "Digitalbezug einschätzen",
-        href: ROUTE_PRECHECK.url,
-      },
-    ],
+    action: {
+      text: "Digitalbezug einschätzen",
+      linkTo: ROUTE_PRECHECK.url,
+    },
     finished: {
       headline: {
         text: "Abgeschlossene Vorprüfung: Der Digitalbezug wurde eingeschätzt.",
@@ -40,14 +38,10 @@ export const steps = {
     },
     content:
       "Nutzen Sie passende Methoden und Werkzeuge, um Digitaltauglichkeit und Interoperabilität in Ihrer Regelung sicherzustellen. Das Digitalcheck-Team steht Ihnen bei der Erarbeitung zur Verfügung.",
-    buttons: [
-      {
-        text: "Zu „Erarbeiten“",
-        href: ROUTE_METHODS.url,
-        look: "link" as const,
-        plausibleEventName: "Content.Steps.Link+Erarbeiten",
-      },
-    ],
+    action: {
+      text: "Zu „Erarbeiten“",
+      linkTo: ROUTE_METHODS.url,
+    },
     isDisabled: false,
     finished: {
       headline: {
@@ -62,14 +56,10 @@ export const steps = {
     },
     content:
       "Dokumentieren Sie in einem Fragebogen, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben. Beschreiben Sie, wie Sie diese in das Regelungsvorhaben einfließen lassen. Die Erkenntnisse der vorigen Schritte helfen Ihnen beim Ausfüllen.",
-    buttons: [
-      {
-        text: "Zu „Dokumentieren“",
-        href: ROUTE_DOCUMENTATION.url,
-        look: "link" as const,
-        plausibleEventName: "Content.Steps.Link+Dokumentieren",
-      },
-    ],
+    action: {
+      text: "Zu „Dokumentieren“",
+      linkTo: ROUTE_DOCUMENTATION.url,
+    },
     isDisabled: false,
     finished: {
       headline: {
@@ -90,4 +80,4 @@ export const steps = {
         Damit ist der Digitalcheck für Sie beendet.
       `,
   },
-};
+} satisfies { [key: string]: Step<LinkAction> };

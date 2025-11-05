@@ -1,5 +1,5 @@
 import Accordion from "~/components/Accordion";
-import Button from "~/components/Button";
+import { LinkButton } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -63,7 +63,7 @@ export default function Index() {
             buttons={[
               {
                 text: preCheck.start.info.button.text,
-                href: preCheck.start.info.button.href,
+                linkTo: preCheck.start.info.button.linkTo,
                 look: "tertiary",
                 className: "mt-20",
               },
@@ -101,20 +101,19 @@ export default function Index() {
           ))}
         </div>
         <ButtonContainer>
-          <Button
+          <LinkButton
             id={PRE_CHECK_START_BUTTON_ID}
-            href={ROUTE_PRECHECK_INFO.url}
-            type="submit"
+            to={ROUTE_PRECHECK_INFO.url}
           >
             {preCheck.start.buttonText}
-          </Button>
-          <Button
+          </LinkButton>
+          <LinkButton
             id="preCheck-back-button"
-            href={ROUTE_LANDING.url}
+            to={ROUTE_LANDING.url}
             look="tertiary"
           >
             {general.buttonBack.text}
-          </Button>
+          </LinkButton>
         </ButtonContainer>
       </Hero>
 

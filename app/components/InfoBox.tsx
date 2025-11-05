@@ -1,10 +1,11 @@
 import React from "react";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
+import { ContentAction } from "~/utils/contentTypes";
 import type { Node } from "~/utils/paragraphUtils";
 import twMerge from "~/utils/tailwindMerge";
 import Badge, { type BadgeProps } from "./Badge";
 import { BlocksRenderer } from "./BlocksRenderer";
-import Button, { ButtonLinkProps, ButtonProps } from "./Button";
+import Button, { DownloadLinkButton, LinkButton } from "./Button";
 import DetailsSummary, { DetailsSummaryProps } from "./DetailsSummary";
 import Heading, { HeadingProps } from "./Heading";
 import Image, { type ImageProps } from "./Image";
@@ -27,7 +28,7 @@ type BaseInfoBoxProps = {
     items: DetailsSummaryProps[];
   };
   linkList?: LinkListProps;
-  buttons?: (ButtonProps | ButtonLinkProps)[];
+  buttons?: ContentAction[];
   className?: string;
   look?: "default" | "highlight" | "method";
 };
@@ -131,9 +132,32 @@ const InfoBox = ({
 
         {buttons && buttons.length > 0 && (
           <ButtonContainer>
-            {buttons.map((button) => (
-              <Button key={button.text ?? button.href} {...button} />
-            ))}
+            {buttons.map((button, index) => {
+              if ("linkTo" in button) {
+                const { linkTo, text, ...rest } = button;
+                if (button.download)
+                  return (
+                    <DownloadLinkButton
+                      key={linkTo}
+                      to={linkTo}
+                      omitIcon
+                      {...rest}
+                    >
+                      {text}
+                    </DownloadLinkButton>
+                  );
+                return (
+                  <LinkButton key={linkTo} to={linkTo} {...rest}>
+                    {text}
+                  </LinkButton>
+                );
+              }
+              return (
+                <Button type="button" key={button.text} {...button}>
+                  {button.text}
+                </Button>
+              );
+            })}
           </ButtonContainer>
         )}
       </div>

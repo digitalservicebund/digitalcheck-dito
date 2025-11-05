@@ -5,7 +5,7 @@ import FactCheckOutlinedIcon from "@digitalservicebund/icons/FactCheckOutlined";
 import WidgetsOutlinedIcon from "@digitalservicebund/icons/WidgetsOutlined";
 import { useState } from "react";
 import Badge from "~/components/Badge";
-import Button from "~/components/Button";
+import Button, { LinkButton } from "~/components/Button";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
@@ -65,13 +65,13 @@ export default function Index() {
                 />
 
                 <div className="mt-40 self-center">
-                  <Button
-                    href={step.link.href}
+                  <LinkButton
+                    to={step.link.linkTo}
                     look={step.link.look}
                     plausibleEventName={step.link.plausibleEventName}
                   >
                     {step.link.text}
-                  </Button>
+                  </LinkButton>
                 </div>
 
                 <div className="mt-40">
@@ -151,7 +151,7 @@ export default function Index() {
                 text: visualisierungen.title,
               }}
               content={visualisierungen.content}
-              buttons={visualisierungen.buttons}
+              buttons={visualisierungen.links}
             />
             <InfoBox
               look="method"
@@ -161,7 +161,7 @@ export default function Index() {
                 text: prinzipien.title,
               }}
               content={prinzipien.content}
-              buttons={prinzipien.buttons}
+              buttons={prinzipien.links}
             />
           </InfoBoxSideBySide>
         </Container>
@@ -174,7 +174,7 @@ export default function Index() {
             text: individuelleExpertise.title,
           }}
           content={individuelleExpertise.content}
-          buttons={[individuelleExpertise.button]}
+          buttons={[individuelleExpertise.link]}
         />
 
         <InfoBox
@@ -214,6 +214,7 @@ export default function Index() {
             onClick={() => setShowBanner(false)}
             className="absolute top-0 right-0 w-auto p-24"
             aria-label="Schließen"
+            type="button"
           >
             <CloseIcon className="fill-blue-800" />
           </Button>

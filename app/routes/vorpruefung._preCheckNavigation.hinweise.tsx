@@ -1,4 +1,4 @@
-import Button from "~/components/Button.tsx";
+import { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Heading from "~/components/Heading";
 import InlineNotice from "~/components/InlineNotice";
@@ -30,16 +30,16 @@ export default function GeneralInfo() {
           <RichText markdown={hint.text} />
         </InlineNotice>
         <ButtonContainer>
-          <Button id={"generalInfo-next-button"} href={questions[0].url}>
+          <LinkButton id={"generalInfo-next-button"} to={questions[0].url}>
             {nextButton}
-          </Button>
-          <Button
+          </LinkButton>
+          <LinkButton
             id={"generalInfo-back-button"}
-            href={ROUTE_PRECHECK.url}
+            to={ROUTE_PRECHECK.url}
             look={"tertiary"}
           >
             {general.buttonBack.text}
-          </Button>
+          </LinkButton>
         </ButtonContainer>
       </div>
     </>

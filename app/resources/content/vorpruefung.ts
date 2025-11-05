@@ -6,6 +6,7 @@ import {
   ROUTE_PRECHECK_RESULT,
 } from "~/resources/staticRoutes";
 import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
+import { ContentAction } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const preCheck = {
@@ -80,8 +81,8 @@ export const preCheck = {
       },
       button: {
         text: "Alles zur Interoperabilität",
-        href: ROUTE_INTEROPERABILITY.url,
-      },
+        linkTo: ROUTE_INTEROPERABILITY.url,
+      } satisfies ContentAction,
     },
   },
   faq: {

@@ -1,6 +1,6 @@
 import Accordion from "~/components/Accordion";
-import Button from "~/components/Button.tsx";
-import ButtonContainer from "~/components/ButtonContainer";
+import { LinkButton } from "~/components/Button.tsx";
+import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Heading from "~/components/Heading";
@@ -125,10 +125,9 @@ export default function Interoperability() {
             />
             <RichText markdown={interoperability.andDigitalReadiness.content} />
             <ButtonContainer className="mt-20">
-              <Button
-                text={interoperability.andDigitalReadiness.button}
-                href={ROUTE_PRECHECK.url}
-              />
+              <LinkButton to={ROUTE_PRECHECK.url}>
+                {interoperability.andDigitalReadiness.button}
+              </LinkButton>
             </ButtonContainer>
           </div>
           <div className="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">

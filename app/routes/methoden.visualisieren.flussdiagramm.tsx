@@ -93,6 +93,7 @@ function NextStepButton() {
         onClick={onClick}
         size={"small"}
         iconLeft={<ArrowDownwardOutlined />}
+        type={"button"}
       >
         Nächster Schritt
       </Button>
@@ -651,7 +652,7 @@ export default function Visualization() {
             {
               text: "Zu den Prinzipien",
               look: "tertiary",
-              href: ROUTE_METHODS_PRINCIPLES.url,
+              linkTo: ROUTE_METHODS_PRINCIPLES.url,
             },
           ]}
         />

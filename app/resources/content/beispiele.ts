@@ -2,6 +2,7 @@ import {
   ROUTE_EXAMPLES_DIGITAL_COMMUNICATION,
   ROUTE_EXAMPLES_VISUALISATIONS,
 } from "~/resources/staticRoutes";
+import { ContentAction } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const examples = {
@@ -28,9 +29,9 @@ export const examples = {
       buttons: [
         {
           text: "Zu den Prinzipien",
-          href: ROUTE_EXAMPLES_DIGITAL_COMMUNICATION.url,
+          linkTo: ROUTE_EXAMPLES_DIGITAL_COMMUNICATION.url,
         },
-      ],
+      ] satisfies ContentAction[],
     },
     {
       tabName: "Visualisierungen",
@@ -43,9 +44,9 @@ export const examples = {
       buttons: [
         {
           text: "Zu den Visualisierungen",
-          href: ROUTE_EXAMPLES_VISUALISATIONS.url,
+          linkTo: ROUTE_EXAMPLES_VISUALISATIONS.url,
         },
-      ],
+      ] satisfies ContentAction[],
     },
   ],
 };

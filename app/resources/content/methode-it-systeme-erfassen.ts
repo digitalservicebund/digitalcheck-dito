@@ -2,6 +2,7 @@ import DrawOutlined from "@digitalservicebund/icons/DrawOutlined";
 import StickyNote2Outlined from "@digitalservicebund/icons/StickyNote2Outlined";
 import SupportOutlined from "@digitalservicebund/icons/SupportOutlined";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
+import { ContentAction } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsITSystems = {
@@ -46,9 +47,10 @@ export const methodsITSystems = {
       buttons: [
         {
           text: "Vorlage herunterladen (xlsx-Datei)",
-          href: "/download/Vorlage - IT-Systeme erfassen.xlsx",
+          linkTo: "/download/Vorlage - IT-Systeme erfassen.xlsx",
+          download: true,
         },
-      ],
+      ] satisfies ContentAction[],
     },
   ],
   support: {
@@ -64,8 +66,8 @@ export const methodsITSystems = {
       {
         text: "Unterstützungsangebote nutzen",
         look: "tertiary" as const,
-        href: ROUTE_SUPPORT.url,
+        linkTo: ROUTE_SUPPORT.url,
       },
-    ],
+    ] satisfies ContentAction[],
   },
 };

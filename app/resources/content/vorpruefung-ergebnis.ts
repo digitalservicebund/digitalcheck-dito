@@ -5,6 +5,7 @@ import {
   ROUTE_PRECHECK,
   ROUTE_PRECHECK_INFO,
 } from "~/resources/staticRoutes";
+import { ContentAction, LinkAction, Step } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const preCheckResult = {
@@ -36,7 +37,7 @@ export const preCheckResult = {
         },
         steps.documentation,
         steps.nkrFinal,
-      ],
+      ] satisfies Step<LinkAction>[],
     },
   },
   unsure: {
@@ -44,23 +45,23 @@ export const preCheckResult = {
     hint: "Bitte kontaktieren Sie den Digitalcheck-Support unter: [0151/40 76 78 39](tel:+4915140767839) oder schreiben Sie uns eine E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de) mit Ihren Fragen. Wir helfen Ihnen, die Vorprüfung auszufüllen.",
     actionButton: {
       text: "Vorprüfung wiederholen",
-      href: ROUTE_PRECHECK.url,
-    },
+      linkTo: ROUTE_PRECHECK.url,
+    } satisfies ContentAction,
     nextStep: {
       title:
         "Sie können auch ohne positive Vorprüfung die Digitaltauglichkeit Ihres Regelungsvorhabens sicherstellen.",
       text: "Wenn digitale Umsetzung für Ihr Regelungsvorhaben wichtig ist, finden Sie hier passende Methoden und Werkzeuge. Sie erfahren, wie Sie den Prozess darstellen und durchdenken, mit Beteiligten ins Gespräch kommen und die fünf Prinzipien anwenden.",
       link: {
         text: "Zu „Erarbeiten“",
-        href: ROUTE_METHODS.url,
-      },
+        linkTo: ROUTE_METHODS.url,
+      } satisfies ContentAction,
     },
   },
   negative: {
     title: "Das Regelungsvorhaben hat **keinen Digitalbezug** und ",
     nextSteps: {
       title: "So machen Sie weiter",
-      steps: [steps.preCheck.finished, steps.nkrFinal],
+      steps: [steps.preCheck.finished, steps.nkrFinal] satisfies Step[],
     },
   },
   infoBox: {
@@ -90,9 +91,9 @@ export const preCheckResult = {
       content: dedent`Was bedeutet Interoperabilität für Regelungen, und wie beeinflusst sie deren Erarbeitung? Auf unserer [Übersichtsseite](${ROUTE_INTEROPERABILITY.url}) finden Sie alle wichtigen Informationen dazu.`,
       button: {
         text: "Mehr zu Interoperabilität",
-        href: ROUTE_INTEROPERABILITY.url,
+        linkTo: ROUTE_INTEROPERABILITY.url,
         look: "link" as const,
-      },
+      } satisfies ContentAction,
     },
     positive: {
       title: "enthält Anforderungen der **Interoperabilität**.",

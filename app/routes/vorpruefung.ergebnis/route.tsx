@@ -8,12 +8,10 @@ import {
 } from "@digitalservicebund/icons";
 import { parseFormData, validationError } from "@rvf/react-router";
 import React, { useState } from "react";
-import { data, redirect, useLoaderData } from "react-router";
+import { data, Link, redirect, useLoaderData } from "react-router";
 import { twJoin } from "tailwind-merge";
 
 import Accordion from "~/components/Accordion";
-import Button, { ButtonLinkProps } from "~/components/Button";
-import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Header from "~/components/Header";
@@ -49,12 +47,14 @@ import type { Route } from "./+types/route";
 import { PreCheckResult, ResultType } from "./PreCheckResult";
 import getResultValidatorForAnswers from "./resultValidation";
 
+import { LinkAction, Step } from "~/utils/contentTypes.ts";
+
 const { questions } = preCheck;
 
 const nextSteps = {
-  [ResultType.POSITIVE]: preCheckResult.positive.nextSteps,
-  [ResultType.NEGATIVE]: preCheckResult.negative.nextSteps,
-};
+  [ResultType.POSITIVE as string]: preCheckResult.positive.nextSteps,
+  [ResultType.NEGATIVE as string]: preCheckResult.negative.nextSteps,
+} satisfies { [key: string]: { steps: Step<LinkAction>[] } };
 
 export async function loader({ request }: Route.LoaderArgs) {
   const cookie = await getAnswersFromCookie(request);
@@ -298,7 +298,7 @@ export default function Result() {
               {
                 id: "result-method-button",
                 text: preCheckResult.unsure.nextStep.link.text,
-                href: preCheckResult.unsure.nextStep.link.href,
+                linkTo: preCheckResult.unsure.nextStep.link.linkTo,
                 look: "link",
               },
             ]}
@@ -308,25 +308,23 @@ export default function Result() {
           <>
             <Heading tagName="h2">{nextSteps[result.digital].title}</Heading>
             <NumberedList>
-              {nextSteps[result.digital].steps.map((item) => (
-                <NumberedList.Item
-                  className="space-y-16"
-                  key={item.headline.text}
-                  disabled={item.isDisabled}
-                >
-                  <p className="ds-heading-03-reg">{item.headline.text}</p>
-                  {"content" in item && (
-                    <RichText markdown={item.content as string} />
-                  )}
-                  {"buttons" in item && (
-                    <ButtonContainer>
-                      {(item.buttons as ButtonLinkProps[]).map((button) => (
-                        <Button key={button.text ?? button.href} {...button} />
-                      ))}
-                    </ButtonContainer>
-                  )}
-                </NumberedList.Item>
-              ))}
+              {(nextSteps[result.digital].steps as Step<LinkAction>[]).map(
+                (item) => (
+                  <NumberedList.Item
+                    className="space-y-16"
+                    key={item.headline.text}
+                    disabled={item.isDisabled}
+                  >
+                    <p className="ds-heading-03-reg">{item.headline.text}</p>
+                    {"content" in item && (
+                      <RichText markdown={item.content as string} />
+                    )}
+                    {item.action && (
+                      <Link to={item.action.linkTo}>{item.action.text}</Link>
+                    )}
+                  </NumberedList.Item>
+                ),
+              )}
             </NumberedList>
           </>
         )}

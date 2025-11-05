@@ -1,5 +1,4 @@
-import Button, { ButtonLinkProps } from "~/components/Button";
-import ButtonContainer from "~/components/ButtonContainer.tsx";
+import { Link } from "react-router";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
@@ -112,12 +111,8 @@ export default function Methoden() {
               {"content" in item && (
                 <RichText markdown={item.content as string} />
               )}
-              {"buttons" in item && (
-                <ButtonContainer>
-                  {(item.buttons as ButtonLinkProps[]).map((button) => (
-                    <Button key={button.text ?? button.href} {...button} />
-                  ))}
-                </ButtonContainer>
+              {item.action && "linkTo" in item.action && (
+                <Link to={item.action.linkTo}>{item.action.text}</Link>
               )}
             </NumberedList.Item>
           ))}

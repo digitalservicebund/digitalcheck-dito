@@ -1,6 +1,6 @@
 import { twJoin } from "tailwind-merge";
 import Badge, { BadgeProps } from "~/components/Badge.tsx";
-import Button, { ButtonProps } from "~/components/Button.tsx";
+import Button, { LinkButton } from "~/components/Button.tsx";
 import Heading, { HeadingProps } from "~/components/Heading.tsx";
 import type { ImageProps } from "~/components/Image.tsx";
 import ImageZoomable from "~/components/ImageZoomable.tsx";
@@ -8,6 +8,7 @@ import RichText from "~/components/RichText.tsx";
 
 import React from "react";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
+import { ContentAction } from "~/utils/contentTypes";
 import twMerge from "~/utils/tailwindMerge";
 
 type BulletListProps = React.PropsWithChildren<{
@@ -41,7 +42,7 @@ export type TimelineItemContentProps = {
   parentHasHeading?: boolean;
   content?: string;
   image?: ImageProps;
-  buttons?: ButtonProps[];
+  buttons?: ContentAction[];
 };
 
 export function TimelineItemContent({
@@ -63,9 +64,21 @@ export function TimelineItemContent({
       {image && <ImageZoomable image={image} className="max-w-a11y" />}
       {buttons && buttons.length > 0 && (
         <ButtonContainer>
-          {buttons.map((button) => (
-            <Button key={button.text ?? button.href} {...button} />
-          ))}
+          {buttons.map((button) => {
+            if ("linkTo" in button) {
+              const { linkTo, text, ...rest } = button;
+              return (
+                <LinkButton key={linkTo} to={linkTo} {...rest}>
+                  {text}
+                </LinkButton>
+              );
+            }
+            return (
+              <Button type="button" key={button.text} {...button}>
+                {button.text}
+              </Button>
+            );
+          })}
         </ButtonContainer>
       )}
     </div>

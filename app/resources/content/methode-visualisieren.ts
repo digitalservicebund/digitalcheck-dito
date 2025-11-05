@@ -10,7 +10,7 @@ import {
   SupportOutlined,
   VisibilityTwoTone,
 } from "@digitalservicebund/icons";
-import { ButtonLinkProps, ButtonProps } from "~/components/Button";
+import { ContentAction } from "~/utils/contentTypes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import {
   ROUTE_FUNDAMENTALS_NKR,
@@ -77,10 +77,10 @@ export const methodsTasksProcesses = {
         buttons: [
           {
             text: "Anleitung",
-            href: ROUTE_METHODS_VISUALIZE_FLOWCHARTS.url,
+            linkTo: ROUTE_METHODS_VISUALIZE_FLOWCHARTS.url,
             look: "tertiary" as const,
           },
-        ] as (ButtonProps | ButtonLinkProps)[],
+        ] satisfies ContentAction[],
       },
       {
         visual: {
@@ -106,7 +106,7 @@ export const methodsTasksProcesses = {
             look: "tertiary" as const,
             disabled: true,
           },
-        ] as (ButtonProps | ButtonLinkProps)[],
+        ] as ContentAction[],
       },
       {
         visual: {
@@ -132,7 +132,7 @@ export const methodsTasksProcesses = {
             look: "tertiary" as const,
             disabled: true,
           },
-        ] as (ButtonProps | ButtonLinkProps)[],
+        ] as ContentAction[],
       },
     ],
   },
@@ -149,12 +149,12 @@ export const methodsTasksProcesses = {
     `,
     buttons: [
       {
-        href: ROUTE_FUNDAMENTALS_NKR.url,
+        linkTo: ROUTE_FUNDAMENTALS_NKR.url,
         text: "Mehr dazu erfahren",
         plausibleEventName: "Content.Link+NKR+Kriterien",
         look: "tertiary" as const,
       },
-    ],
+    ] satisfies ContentAction[],
   },
 
   intro: {
@@ -216,18 +216,20 @@ export const methodsTasksProcesses = {
         "Eine Powerpoint-Vorlage (PPT) mit einer Schritt für Schritt Anleitung zum Download finden Sie hier. Sie können diese ausdrucken oder an Ihrem Computer bearbeiten. Sofern in Ihrem Ressort Conceptboard genutzt werden kann, können Sie sich auch eine Kopie dieser Conceptboard-Vorlage erstellen. Für letzteres können Sie einen Gast-Zugang anlegen.",
       buttons: [
         {
-          href: ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX.url,
+          linkTo: ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX.url,
           text: "PPT-Vorlage runterladen",
           plausibleEventName: "Content.Anleitung.Link+Powerpoint+Vorlage",
+          download: true,
         },
         {
-          href: "https://bmas.de.conceptboard.com/board/qh33-xcny-usde-7nc6-82cy",
+          linkTo:
+            "https://bmas.de.conceptboard.com/board/qh33-xcny-usde-7nc6-82cy",
           text: "Zur Conceptboard-Vorlage",
           look: "ghost",
           plausibleEventName: "Content.Anleitung.Link+Conceptboard+Vorlage",
           target: "_blank",
         },
-      ] as ButtonProps[],
+      ] satisfies ContentAction[],
       image: {
         url: "/images/beispielflussdiagram.png",
       },
@@ -244,12 +246,12 @@ export const methodsTasksProcesses = {
       "Mit den Prinzipien für Digitaltaugliche Gesetzgebung bekommen Sie auch konkrete Hinweise darauf, worauf Sie achten müssen.",
     buttons: [
       {
-        href: ROUTE_METHODS_PRINCIPLES.url,
+        linkTo: ROUTE_METHODS_PRINCIPLES.url,
         text: "Prinzipien nutzen",
         look: "tertiary",
         plausibleEventName: "Content.Link+Prinzipien+Nutzen",
       },
-    ] as ButtonProps[],
+    ] satisfies ContentAction[],
   },
   support: {
     badge: { text: "Unterstützungsangebot", Icon: SupportOutlined },

@@ -1,6 +1,7 @@
 import DrawOutlined from "@digitalservicebund/icons/DrawOutlined";
 import LightbulbOutlined from "@digitalservicebund/icons/LightbulbOutlined";
 import StickyNote2Outlined from "@digitalservicebund/icons/StickyNote2Outlined";
+import { ContentAction } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsResponsibleActors = {
@@ -40,9 +41,10 @@ export const methodsResponsibleActors = {
       buttons: [
         {
           text: "Vorlage herunterladen (xlsx-Datei)",
-          href: "/download/Vorlage - Zuständige Akteurinnen und Akteure.xlsx",
+          linkTo: "/download/Vorlage - Zuständige Akteurinnen und Akteure.xlsx",
+          download: true,
         },
-      ],
+      ] satisfies ContentAction[],
     },
   ],
   tip: {

@@ -37,7 +37,7 @@ export function PrinciplePosterBox({
           buttons={[
             {
               text: principlePosterBox.downloadTitle,
-              href: principlePosterBox.downloadUrl,
+              linkTo: principlePosterBox.downloadUrl,
               look: "link" as const,
               iconLeft: <FileDownloadOutlinedIcon className="fill-current" />,
             },

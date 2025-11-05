@@ -8,6 +8,7 @@ import {
   ROUTE_METHODS_VISUALIZE,
   ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
+import { ContentAction } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export type DetailsSummary = {
@@ -78,9 +79,9 @@ export const methodsFivePrinciples = {
       {
         look: "tertiary" as const,
         text: "IT-Auswirkungen prüfen",
-        href: ROUTE_METHODS_TECHNICAL_FEASIBILITY.url,
+        linkTo: ROUTE_METHODS_TECHNICAL_FEASIBILITY.url,
       },
-    ],
+    ] satisfies ContentAction[],
   },
   nextStep: {
     label: "So geht es weiter:",
@@ -92,9 +93,9 @@ export const methodsFivePrinciples = {
       {
         text: "Zu „Erarbeiten“",
         look: "tertiary" as const,
-        href: ROUTE_METHODS.url + "#verfassen-des-regelungsentwurfes",
+        linkTo: ROUTE_METHODS.url + "#verfassen-des-regelungsentwurfes",
       },
-    ],
+    ] satisfies ContentAction[],
   },
   principlePosterBox: {
     badgeText: "Download",

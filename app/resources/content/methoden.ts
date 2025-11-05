@@ -5,6 +5,7 @@ import {
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
   ROUTE_METHODS_VISUALIZE,
 } from "~/resources/staticRoutes";
+import { ContentAction, Step } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methods = {
@@ -36,7 +37,7 @@ export const methods = {
         buttons: [
           {
             text: "Anleitung zur Visualisierung",
-            href: ROUTE_METHODS_VISUALIZE.url,
+            linkTo: ROUTE_METHODS_VISUALIZE.url,
           },
         ],
       },
@@ -54,9 +55,9 @@ export const methods = {
         buttons: [
           {
             text: "Prinzipien nutzen",
-            href: ROUTE_METHODS_PRINCIPLES.url,
+            linkTo: ROUTE_METHODS_PRINCIPLES.url,
           },
-        ],
+        ] satisfies ContentAction[],
       },
       {
         headline: { text: "Verfassen des Regelungsentwurfes" },
@@ -86,7 +87,7 @@ export const methods = {
       steps.methods.finished,
       steps.documentation,
       steps.nkr,
-    ],
+    ] as Step[],
   },
   furtherMethods: {
     heading: "Weitere Methoden, die Sie nutzen können",
@@ -101,9 +102,9 @@ export const methods = {
     buttons: [
       {
         text: "IT-Landschaft verstehen",
-        href: ROUTE_METHODS_COLLECT_IT_SYSTEMS.url,
+        linkTo: ROUTE_METHODS_COLLECT_IT_SYSTEMS.url,
       },
-    ],
+    ] satisfies ContentAction[],
   },
   technicalFeasibility: {
     badge: "Expertengespräch",
@@ -113,8 +114,8 @@ export const methods = {
     buttons: [
       {
         text: "IT-Auswirkungen prüfen",
-        href: ROUTE_METHODS_TECHNICAL_FEASIBILITY.url,
+        linkTo: ROUTE_METHODS_TECHNICAL_FEASIBILITY.url,
       },
-    ],
+    ] satisfies ContentAction[],
   },
 };

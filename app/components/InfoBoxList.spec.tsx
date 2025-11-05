@@ -8,14 +8,14 @@ const mockInfoBoxItems = [
     headline: undefined,
     image: undefined,
     content: "Lorem1",
-    buttons: [],
+    links: [],
   },
   {
     label: undefined,
     headline: undefined,
     image: undefined,
     content: "Lorem2",
-    buttons: [],
+    links: [],
   },
 ];
 

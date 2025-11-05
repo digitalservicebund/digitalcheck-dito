@@ -140,6 +140,7 @@ export default function ResultForm({
                   className={
                     "plausible-event-name=Content.Send+Result.Button+Create+Email"
                   }
+                  type={"submit"}
                 >
                   {preCheckResult.form.sendEmailButton.text}
                 </Button>
@@ -178,30 +179,30 @@ export default function ResultForm({
           />
           <ButtonContainer>
             <Button
+              type="button"
               look="tertiary"
               className="plausible-event-name=Content.Send+Result.Button+Copy+Email"
-              text={
-                isMailBodyCopied
-                  ? preCheckResult.form.copyMailButton.textCopied
-                  : preCheckResult.form.copyMailButton.text
-              }
               onClick={() => {
                 void handleCopyEmailBody();
               }}
-            />
+            >
+              {isMailBodyCopied
+                ? preCheckResult.form.copyMailButton.textCopied
+                : preCheckResult.form.copyMailButton.text}
+            </Button>
             <Button
+              type="button"
               look="ghost"
               className="plausible-event-name=Content.Send+Result.Button+Copy+Email+Addresses"
-              text={
-                isMailAddressCopied
-                  ? preCheckResult.form.copyAddressButton.textCopied
-                  : preCheckResult.form.copyAddressButton.text
-              }
               iconRight={<CopyAll className="h-40 w-40 text-blue-800" />}
               onClick={() => {
                 void handleCopyMailAddress();
               }}
-            />
+            >
+              {isMailAddressCopied
+                ? preCheckResult.form.copyAddressButton.textCopied
+                : preCheckResult.form.copyAddressButton.text}
+            </Button>
           </ButtonContainer>
         </div>
       </div>

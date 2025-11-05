@@ -6,6 +6,7 @@ import {
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
   ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
+import { ContentAction } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsTechnicalFeasibility = {
@@ -39,9 +40,9 @@ export const methodsTechnicalFeasibility = {
       {
         text: "Termin buchen",
         look: "tertiary" as const,
-        href: ROUTE_SUPPORT.url,
+        linkTo: ROUTE_SUPPORT.url,
       },
-    ],
+    ] satisfies ContentAction[],
   },
   boxes: [
     {
@@ -60,9 +61,10 @@ export const methodsTechnicalFeasibility = {
       buttons: [
         {
           text: "Vorlage herunterladen (PDF-Datei)",
-          href: "/documents/Schaubild Aspekte Technischer Umsetzbarkeit.pdf",
+          linkTo: "/documents/Schaubild Aspekte Technischer Umsetzbarkeit.pdf",
+          download: true,
         },
-      ],
+      ] satisfies ContentAction[],
     },
   ],
   tip: {
@@ -91,8 +93,8 @@ export const methodsTechnicalFeasibility = {
       {
         text: "Unterstützungsangebote nutzen",
         look: "tertiary" as const,
-        href: ROUTE_SUPPORT.url,
+        linkTo: ROUTE_SUPPORT.url,
       },
-    ],
+    ] satisfies ContentAction[],
   },
 };

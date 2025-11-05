@@ -1,6 +1,5 @@
-import { FileDownloadOutlined } from "@digitalservicebund/icons";
 import { useNavigate } from "react-router";
-import Button from "~/components/Button.tsx";
+import Button, { DownloadButton, LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Dialog from "~/components/Dialog.tsx";
 import RichText from "~/components/RichText.tsx";
@@ -25,7 +24,12 @@ function StartOverDialog() {
     <Dialog
       title={start.startOverDialog.title}
       renderToggleButton={({ toggleDialog }) => (
-        <Button look="tertiary" className={"js-only"} onClick={toggleDialog}>
+        <Button
+          look="tertiary"
+          className={"js-only"}
+          onClick={toggleDialog}
+          type="button"
+        >
           {start.actions.startOver.buttonText}
         </Button>
       )}
@@ -49,13 +53,9 @@ function StartOverDialog() {
     >
       <div className="space-y-16">
         <RichText markdown={start.startOverDialog.bodyMarkdown} />
-        <Button
-          iconLeft={<FileDownloadOutlined />}
-          look="link"
-          onClick={downloadDraft}
-        >
+        <DownloadButton look="link" onClick={downloadDraft}>
           {digitalDocumentation.actions.saveDraft.title}
-        </Button>
+        </DownloadButton>
       </div>
     </Dialog>
   );
@@ -68,20 +68,20 @@ export function DocumentationContinueActions() {
     <ButtonContainer>
       {hasSavedDocumentation ? (
         <>
-          <Button href={ROUTE_DOCUMENTATION_TITLE.url} className="js-only">
+          <LinkButton to={ROUTE_DOCUMENTATION_TITLE.url} className="js-only">
             {start.actions.resume.buttonText}
-          </Button>
+          </LinkButton>
           <StartOverDialog />
         </>
       ) : (
-        <Button href={ROUTE_DOCUMENTATION_TITLE.url} className="js-only">
+        <LinkButton to={ROUTE_DOCUMENTATION_TITLE.url} className="js-only">
           {start.actions.startInitial.buttonText}
-        </Button>
+        </LinkButton>
       )}
       <noscript>
         {/* Hides the CTA when JavaScript is disabled */}
         <style nonce={nonce}>{".js-only {display: none;}"}</style>
-        <Button href={ROUTE_DOCUMENTATION_TITLE.url} disabled={true}>
+        <Button type={"button"} disabled={true}>
           {start.actions.startInitial.buttonText}
         </Button>
       </noscript>

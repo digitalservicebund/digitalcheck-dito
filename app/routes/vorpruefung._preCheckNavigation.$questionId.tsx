@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { redirect, useLoaderData } from "react-router";
 
 import { z } from "zod";
-import Button from "~/components/Button.tsx";
+import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
@@ -235,13 +235,13 @@ export default function Index() {
           >
             {nextButton}
           </Button>
-          <Button
+          <LinkButton
             id={"preCheck-back-button"}
-            href={question.prevLink}
+            to={question.prevLink}
             look={"tertiary"}
           >
             {general.buttonBack.text}
-          </Button>
+          </LinkButton>
         </ButtonContainer>
       </div>
     </form>

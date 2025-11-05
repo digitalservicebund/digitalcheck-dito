@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router";
 
-import Button, { ButtonProps } from "~/components/Button.tsx";
+import { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
@@ -14,12 +14,13 @@ import RichText from "~/components/RichText";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { support } from "~/resources/content/unterstuetzung";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
+import { ContentAction } from "~/utils/contentTypes";
 
 type Offering = {
   title: string;
   text: string;
   sellingPoints: string;
-  button?: ButtonProps;
+  button?: ContentAction;
   details: {
     icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
     title: string;
@@ -214,9 +215,9 @@ export default function Index() {
               <RichText markdown={supportHow.text} />
             </InfoBox>
             <ButtonContainer>
-              {supportHow.buttons.map((button) => (
-                <Button key={button.text ?? button.href} {...button} />
-              ))}
+              <LinkButton look="tertiary" to={supportHow.link.linkTo}>
+                {supportHow.link.text}
+              </LinkButton>
             </ButtonContainer>
           </div>
         </Container>

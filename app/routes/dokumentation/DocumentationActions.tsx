@@ -1,6 +1,5 @@
-import FileDownloadOutlined from "@digitalservicebund/icons/FileDownloadOutlined";
 import { useOutletContext } from "react-router";
-import Button from "~/components/Button";
+import Button, { DownloadButton, LinkButton } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general";
@@ -33,22 +32,22 @@ export default function DocumentationActions({
   return (
     <ButtonContainer className="mt-80">
       {submit && <Button type="submit">{general.buttonNext.text}</Button>}
-      {nextUrl && <Button href={nextUrl}>{general.buttonNext.text}</Button>}
+      {nextUrl && (
+        <LinkButton to={nextUrl}>{general.buttonNext.text}</LinkButton>
+      )}
 
       {previousUrl && (
-        <Button href={previousUrl} look="tertiary">
+        <LinkButton to={previousUrl} look="tertiary">
           {general.buttonBack.text}
-        </Button>
+        </LinkButton>
       )}
       {showDownloadDraftButton && prinzips && (
-        <Button
-          type="button"
+        <DownloadButton
           look="ghost"
-          iconLeft={<FileDownloadOutlined />}
           onClick={() => void downloadDocumentation(prinzips)}
         >
           {digitalDocumentation.actions.saveDraft.title}
-        </Button>
+        </DownloadButton>
       )}
     </ButtonContainer>
   );

@@ -4,7 +4,7 @@ import {
 } from "@digitalservicebund/icons";
 import { FormScope, useField, useFieldArray } from "@rvf/react";
 import { useCallback, useEffect } from "react";
-import { useLoaderData, useOutletContext } from "react-router";
+import { Link, useLoaderData, useOutletContext } from "react-router";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import Button from "~/components/Button";
@@ -84,9 +84,9 @@ function Reasoning({
         <span className="space-x-8">
           <span>{open ? detailDescription : description}</span>
           {moreUrl && (
-            <Button href={moreUrl} look="link" target="_blank">
+            <Link to={moreUrl} target="_blank" rel="noreferrer">
               {principlePages.moreInfoButton}
-            </Button>
+            </Link>
           )}
         </span>
       )}
@@ -431,13 +431,13 @@ export default function DocumentationPrinciple() {
             className="mb-16"
           />
           <BlocksRenderer content={prinzip.Beschreibung} />
-          <Button
-            href={`${ROUTE_METHODS_PRINCIPLES.url}#${slugify(prinzip.Name)}`}
-            look="link"
+          <Link
+            to={`${ROUTE_METHODS_PRINCIPLES.url}#${slugify(prinzip.Name)}`}
             target="_blank"
+            rel="noreferrer"
           >
             {principlePages.moreButton}
-          </Button>
+          </Link>
         </div>
 
         <Separator />

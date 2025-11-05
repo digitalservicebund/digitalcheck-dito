@@ -1,5 +1,4 @@
-import { SaveAltOutlined } from "@digitalservicebund/icons";
-import Button, { ButtonLinkProps } from "~/components/Button";
+import { DownloadLinkButton } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading.tsx";
@@ -18,6 +17,7 @@ import { supportBanner } from "~/resources/content/shared/support-banner";
 import { features } from "~/resources/features";
 import {
   ROUTE_DOCUMENTATION,
+  ROUTE_DOCUMENTATION_STATIC_WORD,
   ROUTE_DOCUMENTATION_TEMPLATE_WORD,
 } from "~/resources/staticRoutes";
 import { DocumentationContinueActions } from "~/routes/dokumentation/DocumentationContinueActions.tsx";
@@ -47,12 +47,12 @@ function DigitalDocumentationIndex() {
           <div className="space-y-8">
             <RichText markdown={start.alternative.text} />
 
-            <Button
+            <DownloadLinkButton
+              to={ROUTE_DOCUMENTATION_TEMPLATE_WORD.url}
               look="link"
-              href={ROUTE_DOCUMENTATION_TEMPLATE_WORD.url}
-              iconLeft={<SaveAltOutlined className="mr-2 fill-blue-800" />}
-              text={start.alternative.buttonText}
-            />
+            >
+              {start.alternative.buttonText}
+            </DownloadLinkButton>
           </div>
         </div>
       </Hero>
@@ -79,9 +79,9 @@ function DocumentationIndex() {
       <MetaTitle prefix={ROUTE_DOCUMENTATION.title} />
       <Hero title={documentation.title} subtitle={documentation.subtitle}>
         <ButtonContainer className="mt-48">
-          {documentation.buttons.map((button) => (
-            <Button key={button.text ?? button.href} {...button} />
-          ))}
+          <DownloadLinkButton to={ROUTE_DOCUMENTATION_STATIC_WORD.url}>
+            Dokumentation herunterladen (Word-Datei)
+          </DownloadLinkButton>
         </ButtonContainer>
       </Hero>
 
@@ -114,16 +114,7 @@ function DocumentationIndex() {
               disabled={item.isDisabled}
             >
               <p className={"ds-heading-03-reg"}>{item.headline.text}</p>
-              {"content" in item && (
-                <RichText markdown={item.content as string} />
-              )}
-              {"buttons" in item && (
-                <ButtonContainer>
-                  {(item.buttons as ButtonLinkProps[]).map((button) => (
-                    <Button key={button.text ?? button.href} {...button} />
-                  ))}
-                </ButtonContainer>
-              )}
+              {"content" in item && <RichText markdown={item.content} />}
             </NumberedList.Item>
           ))}
         </NumberedList>
