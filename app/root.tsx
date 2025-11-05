@@ -14,7 +14,7 @@ import {
   useRouteLoaderData,
 } from "react-router";
 
-import Button from "~/components/Button";
+import { LinkButton } from "~/components/Button";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import MetaTitle from "~/components/Meta";
@@ -251,12 +251,9 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
           <Heading text={errorTitle} className="ds-heading-02-reg" />
           <RichText markdown={errorMessage} className="ds-subhead" />
         </div>
-        <Button
-          id="error-back-button"
-          text="Zurück zur Startseite"
-          href={ROUTE_LANDING.url}
-          look="primary"
-        ></Button>
+        <LinkButton id="error-back-button" to={ROUTE_LANDING.url}>
+          Zurück zur Startseite
+        </LinkButton>
       </Container>
     </main>
   );

@@ -78,7 +78,7 @@ export default function ZFLIndex() {
                 buttons: [
                   {
                     text: "Mehr Informationen zu interdisziplinären Kompetenzteams",
-                    href: ROUTE_ZFL_BEGLEITUNGEN.href,
+                    linkTo: ROUTE_ZFL_BEGLEITUNGEN.href,
                     look: "link",
                   },
                 ],
@@ -100,7 +100,7 @@ export default function ZFLIndex() {
                 buttons: [
                   {
                     text: "Mehr Informationen zu Schulungen",
-                    href: ROUTE_ZFL_TRAININGS.href,
+                    linkTo: ROUTE_ZFL_TRAININGS.href,
                     look: "link",
                   },
                 ],

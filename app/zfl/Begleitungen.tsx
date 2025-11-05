@@ -111,7 +111,8 @@ export default function ZFLBegleitungen() {
             buttons={[
               {
                 text: "Mehr erfahren",
-                href: "https://digitalcheck.bund.de/beispiele/regelungen/gesetz-zur-modernisierung-und-zum-buerokratieabbau-im-strom-und-energiesteuerrecht",
+                linkTo:
+                  "https://digitalcheck.bund.de/beispiele/regelungen/gesetz-zur-modernisierung-und-zum-buerokratieabbau-im-strom-und-energiesteuerrecht",
                 look: "link",
                 target: "_blank",
               },
