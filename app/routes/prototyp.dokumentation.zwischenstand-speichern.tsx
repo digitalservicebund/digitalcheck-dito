@@ -1,5 +1,7 @@
 import { FileDownloadOutlined } from "@digitalservicebund/icons";
 import { useNavigate } from "react-router";
+import Button, { ButtonLinkProps, ButtonProps } from "~/components/Button.tsx";
+import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Header from "~/components/Header";
@@ -12,7 +14,19 @@ import {
   ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_JSON,
 } from "~/resources/staticRoutes";
 import useFeatureFlag from "~/utils/featureFlags";
-import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
+
+function renderButtonContainer(
+  buttons: (ButtonLinkProps | ButtonProps)[],
+  options: { className?: string } = {},
+) {
+  return (
+    <ButtonContainer className={options.className}>
+      {buttons.map((button) => (
+        <Button key={button.text ?? button.href} {...button} />
+      ))}
+    </ButtonContainer>
+  );
+}
 
 export default function DocumentationResult() {
   const navigate = useNavigate();

@@ -17,7 +17,6 @@ import {
   ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_4,
   ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_5,
 } from "~/resources/staticRoutes";
-import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 
 const { principles, nextButton } = prototypeDocumentation;
 const { principle4, radioOptions } = principles;
@@ -103,15 +102,16 @@ export default function PrototypeDocumentationPrinciple4() {
                       name={`explanation-${example.id}`}
                       label={principles.inputs.explanation.label}
                     />
-                    {index < examples.length - 1 &&
-                      examples.length > 1 &&
-                      renderButtonContainer([
-                        {
-                          text: "Beispiel entfernen",
-                          look: "tertiary",
-                          onClick: () => removeExample(example.id),
-                        },
-                      ])}
+                    {index < examples.length - 1 && examples.length > 1 && (
+                      <ButtonContainer>
+                        <Button
+                          onClick={() => removeExample(example.id)}
+                          look="tertiary"
+                        >
+                          Beispiel entfernen
+                        </Button>
+                      </ButtonContainer>
+                    )}
                     {index === examples.length - 1 && (
                       <ButtonContainer>
                         <Button look="tertiary" onClick={addExample}>

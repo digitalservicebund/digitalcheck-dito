@@ -1,8 +1,8 @@
 import { useId } from "react";
-import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
+import ButtonContainer from "~/components/ButtonContainer.tsx";
 import twMerge from "~/utils/tailwindMerge";
 import Badge, { BadgeProps } from "./Badge";
-import { ButtonLinkProps, ButtonProps } from "./Button";
+import Button, { ButtonLinkProps, ButtonProps } from "./Button";
 import Heading, { type HeadingProps } from "./Heading";
 import RichText, { type RichTextProps } from "./RichText";
 
@@ -46,7 +46,13 @@ const Box = ({
         )}
         {content && <RichText {...content} />}
       </div>
-      {buttons && buttons.length > 0 && renderButtonContainer(buttons)}
+      {buttons && buttons.length > 0 && (
+        <ButtonContainer>
+          {buttons.map((button) => (
+            <Button key={button.text ?? button.href} {...button} />
+          ))}
+        </ButtonContainer>
+      )}
     </div>
   );
 };

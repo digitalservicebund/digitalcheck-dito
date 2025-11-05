@@ -17,7 +17,6 @@ import {
   ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_1,
   ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_2,
 } from "~/resources/staticRoutes";
-import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 
 const { principles, nextButton } = prototypeDocumentation;
 const { principle1, radioOptions } = principles;
@@ -136,20 +135,17 @@ export default function PrototypeDocumentationPrinciple1() {
         </fieldset>
       </form>
 
-      {renderButtonContainer(
-        [
-          {
-            text: nextButton,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_2.url,
-          },
-          {
-            text: general.buttonBack.text,
-            href: ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION.url,
-            look: "tertiary",
-          },
-        ],
-        { className: "mt-40" },
-      )}
+      <ButtonContainer className="mt-40">
+        <Button href={ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_2.url}>
+          {nextButton}
+        </Button>
+        <Button
+          href={ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION.url}
+          look="tertiary"
+        >
+          {general.buttonBack.text}
+        </Button>
+      </ButtonContainer>
     </Container>
   );
 }

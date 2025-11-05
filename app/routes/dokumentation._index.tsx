@@ -22,7 +22,6 @@ import {
 } from "~/resources/staticRoutes";
 import { DocumentationContinueActions } from "~/routes/dokumentation/DocumentationContinueActions.tsx";
 import useFeatureFlag from "~/utils/featureFlags";
-import { renderButtonContainer } from "~/utils/resourceUtils";
 
 const { start } = digitalDocumentation;
 
@@ -118,8 +117,13 @@ function DocumentationIndex() {
               {"content" in item && (
                 <RichText markdown={item.content as string} />
               )}
-              {"buttons" in item &&
-                renderButtonContainer(item.buttons as ButtonLinkProps[])}
+              {"buttons" in item && (
+                <ButtonContainer>
+                  {(item.buttons as ButtonLinkProps[]).map((button) => (
+                    <Button key={button.text ?? button.href} {...button} />
+                  ))}
+                </ButtonContainer>
+              )}
             </NumberedList.Item>
           ))}
         </NumberedList>

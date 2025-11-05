@@ -1,13 +1,13 @@
 import { twJoin } from "tailwind-merge";
 import Badge, { BadgeProps } from "~/components/Badge.tsx";
-import { ButtonProps } from "~/components/Button.tsx";
+import Button, { ButtonProps } from "~/components/Button.tsx";
 import Heading, { HeadingProps } from "~/components/Heading.tsx";
 import type { ImageProps } from "~/components/Image.tsx";
 import ImageZoomable from "~/components/ImageZoomable.tsx";
 import RichText from "~/components/RichText.tsx";
 
 import React from "react";
-import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
+import ButtonContainer from "~/components/ButtonContainer.tsx";
 import twMerge from "~/utils/tailwindMerge";
 
 type BulletListProps = React.PropsWithChildren<{
@@ -61,7 +61,13 @@ export function TimelineItemContent({
       )}
       {content && <RichText markdown={content} />}
       {image && <ImageZoomable image={image} className="max-w-a11y" />}
-      {buttons && buttons.length > 0 && renderButtonContainer(buttons)}
+      {buttons && buttons.length > 0 && (
+        <ButtonContainer>
+          {buttons.map((button) => (
+            <Button key={button.text ?? button.href} {...button} />
+          ))}
+        </ButtonContainer>
+      )}
     </div>
   );
 }

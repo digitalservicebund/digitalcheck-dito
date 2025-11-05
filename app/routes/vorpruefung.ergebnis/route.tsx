@@ -12,7 +12,8 @@ import { data, redirect, useLoaderData } from "react-router";
 import { twJoin } from "tailwind-merge";
 
 import Accordion from "~/components/Accordion";
-import { ButtonLinkProps } from "~/components/Button";
+import Button, { ButtonLinkProps } from "~/components/Button";
+import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Header from "~/components/Header";
@@ -43,7 +44,6 @@ import {
   getAnswersFromCookie,
   getHeaderFromCookie,
 } from "~/utils/cookies.server";
-import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/route";
 import { PreCheckResult, ResultType } from "./PreCheckResult";
@@ -318,8 +318,13 @@ export default function Result() {
                   {"content" in item && (
                     <RichText markdown={item.content as string} />
                   )}
-                  {"buttons" in item &&
-                    renderButtonContainer(item.buttons as ButtonLinkProps[])}
+                  {"buttons" in item && (
+                    <ButtonContainer>
+                      {(item.buttons as ButtonLinkProps[]).map((button) => (
+                        <Button key={button.text ?? button.href} {...button} />
+                      ))}
+                    </ButtonContainer>
+                  )}
                 </NumberedList.Item>
               ))}
             </NumberedList>

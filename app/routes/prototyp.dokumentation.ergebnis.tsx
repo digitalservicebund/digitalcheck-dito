@@ -5,7 +5,11 @@ import {
 
 import fileSaver from "file-saver";
 import { PDFDocument } from "pdf-lib";
-import Button from "~/components/Button.tsx";
+import Button, {
+  type ButtonLinkProps,
+  type ButtonProps,
+} from "~/components/Button.tsx";
+import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Header from "~/components/Header";
@@ -27,11 +31,23 @@ import {
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import useFeatureFlag from "~/utils/featureFlags";
-import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 
 const { saveAs } = fileSaver;
 const { result } = prototypeDocumentation;
 const { title } = result;
+
+function renderButtonContainer(
+  buttons: (ButtonLinkProps | ButtonProps)[],
+  options: { className?: string } = {},
+) {
+  return (
+    <ButtonContainer className={options.className}>
+      {buttons.map((button) => (
+        <Button key={button.text ?? button.href} {...button} />
+      ))}
+    </ButtonContainer>
+  );
+}
 
 export default function DocumentationResult() {
   const prototypeAlternativeEnabled = useFeatureFlag(

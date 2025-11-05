@@ -1,7 +1,8 @@
 import React from "react";
 import { useLocation } from "react-router";
 
-import { ButtonProps } from "~/components/Button.tsx";
+import Button, { ButtonProps } from "~/components/Button.tsx";
+import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
@@ -13,7 +14,6 @@ import RichText from "~/components/RichText";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { support } from "~/resources/content/unterstuetzung";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
-import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 
 type Offering = {
   title: string;
@@ -213,7 +213,11 @@ export default function Index() {
             <InfoBox>
               <RichText markdown={supportHow.text} />
             </InfoBox>
-            {renderButtonContainer(supportHow.buttons)}
+            <ButtonContainer>
+              {supportHow.buttons.map((button) => (
+                <Button key={button.text ?? button.href} {...button} />
+              ))}
+            </ButtonContainer>
           </div>
         </Container>
       </div>

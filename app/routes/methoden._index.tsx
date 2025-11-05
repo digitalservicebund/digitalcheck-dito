@@ -1,4 +1,5 @@
-import { ButtonLinkProps } from "~/components/Button";
+import Button, { ButtonLinkProps } from "~/components/Button";
+import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
@@ -11,7 +12,6 @@ import Timeline from "~/components/Timeline.tsx";
 import { methods } from "~/resources/content/methoden";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import { ROUTE_METHODS } from "~/resources/staticRoutes";
-import { renderButtonContainer } from "~/utils/resourceUtils.tsx";
 
 const renderStep = (
   step: (typeof methods.steps.items)[number],
@@ -112,8 +112,13 @@ export default function Methoden() {
               {"content" in item && (
                 <RichText markdown={item.content as string} />
               )}
-              {"buttons" in item &&
-                renderButtonContainer(item.buttons as ButtonLinkProps[])}
+              {"buttons" in item && (
+                <ButtonContainer>
+                  {(item.buttons as ButtonLinkProps[]).map((button) => (
+                    <Button key={button.text ?? button.href} {...button} />
+                  ))}
+                </ButtonContainer>
+              )}
             </NumberedList.Item>
           ))}
         </NumberedList>
