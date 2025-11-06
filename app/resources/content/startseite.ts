@@ -1,4 +1,3 @@
-import { LinkProps } from "~/components/LinkList.tsx";
 import {
   ROUTE_DOCUMENTATION,
   ROUTE_EXAMPLES_PRINCIPLES,
@@ -11,7 +10,7 @@ import {
   ROUTE_PRECHECK,
   ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
-import { ContentAction } from "~/utils/contentTypes.ts";
+import { ContentAction, LinkAction } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const startseite = {
@@ -97,20 +96,22 @@ export const startseite = {
       content:
         "Digitaltaugliche Regelungen ermöglichen eine rechtlich und technisch reibungslose digitale Umsetzung und fördern die automatisierte Bearbeitung von Verfahrensschritten.",
       link: {
-        title: "Mehr zur Digitaltauglichkeit erfahren",
-        url: ROUTE_FUNDAMENTALS_DIGITAL_READINESS.url,
+        text: "Mehr zur Digitaltauglichkeit erfahren",
+        linkTo: ROUTE_FUNDAMENTALS_DIGITAL_READINESS.url,
         plausibleEventName: "Content.Grundlagen.Link+Digitaltauglichkeit",
-      } satisfies LinkProps,
+        look: "link",
+      } satisfies LinkAction,
     },
     nationaleNormenkontrolle: {
       title: "Worauf achtet der Nationale Normenkontrollrat?",
       content:
         "Der Nationale Normenkontrollrat (NKR) prüft das Vorhaben auf Digitaltauglichkeit. Mit der Anwendung der **Prinzipien** und Erstellung von **Visualisierungen** kann der Nationale Normenkontrollrat die Digitaltauglichkeit besser und schneller nachvollziehen.",
       link: {
-        title: "Mehr zum NKR erfahren",
-        url: ROUTE_FUNDAMENTALS_NKR.url,
+        text: "Mehr zum NKR erfahren",
+        linkTo: ROUTE_FUNDAMENTALS_NKR.url,
         plausibleEventName: "Content.Grundlagen.Link+NKR",
-      } satisfies LinkProps,
+        look: "link",
+      } satisfies LinkAction,
     },
   },
 

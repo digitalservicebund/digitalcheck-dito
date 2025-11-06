@@ -9,7 +9,6 @@ import Button, { DownloadLinkButton, LinkButton } from "./Button";
 import DetailsSummary, { DetailsSummaryProps } from "./DetailsSummary";
 import Heading, { HeadingProps } from "./Heading";
 import Image, { type ImageProps } from "./Image";
-import LinkList, { LinkListProps } from "./LinkList";
 import RichText from "./RichText";
 
 export type InfoImageProps = ImageProps & {
@@ -27,7 +26,6 @@ type BaseInfoBoxProps = {
     title?: HeadingProps;
     items: DetailsSummaryProps[];
   };
-  linkList?: LinkListProps;
   actions?: ContentAction[];
   className?: string;
   look?: "default" | "highlight" | "method";
@@ -64,7 +62,6 @@ const InfoBox = ({
   content,
   contentClassName,
   detailsSummary,
-  linkList,
   actions,
   visual,
   look,
@@ -128,7 +125,6 @@ const InfoBox = ({
             ))}
           </div>
         )}
-        {linkList && <LinkList {...linkList} />}
 
         {actions && actions.length > 0 && (
           <ButtonContainer>
