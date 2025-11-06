@@ -88,8 +88,15 @@ function Button({
     className,
   });
 
+  const plausibleEventClass = getPlausibleEventClassName(plausibleEventName);
+
   return (
-    <button {...props} id={id} data-testid={id} className={buttonClasses}>
+    <button
+      {...props}
+      id={id}
+      data-testid={id}
+      className={twJoin(buttonClasses, plausibleEventClass)}
+    >
       {formatIcon(iconLeft)}
       <span className="ds-button-label">{children}</span>
       {formatIcon(iconRight)}
@@ -126,7 +133,7 @@ export function LinkButton({
   iconLeft = formatIcon(iconLeft);
   iconRight = formatIcon(iconRight);
 
-  const plausibleEvent = getPlausibleEventClassName(plausibleEventName);
+  const plausibleEventClass = getPlausibleEventClassName(plausibleEventName);
 
   // for links that have role="button" we need to add an event handler so that it can
   // be activated with the space bar
@@ -143,7 +150,7 @@ export function LinkButton({
       {...props}
       id={id}
       data-testid={id}
-      className={twJoin(buttonClasses, plausibleEvent)}
+      className={twJoin(buttonClasses, plausibleEventClass)}
       onKeyDown={onKeyDown}
       {...props}
     >
