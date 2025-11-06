@@ -407,3 +407,89 @@ test.describe("documentation flow happy path", () => {
     expectDocumentToNotContainTags(docText);
   });
 });
+
+test.describe("with partial documentation started", () => {
+  async function fillPartialDocumentationAndGoBack(page: Page) {
+    await test.step("start documentation flow from landing page, fill the title, and go back", async () => {
+      await page.goto(ROUTE_DOCUMENTATION.url);
+      await expect(page).toHaveURL(ROUTE_DOCUMENTATION.url);
+
+      await page.getByRole("link", { name: "Dokumentation starten" }).click();
+      await page
+        .getByLabel(digitalDocumentation.info.inputTitle.label)
+        .fill(testData.title);
+      await page.goBack();
+      await expect(page).toHaveURL(ROUTE_DOCUMENTATION.url);
+    });
+
+    const resumeButton = page.getByRole("link", {
+      name: "Dokumentation fortsetzen",
+    });
+    const startOverButton = page.getByRole("button", {
+      name: "Neue Dokumentation beginnen",
+    });
+
+    await test.step("see resume actions", async () => {
+      await expect(resumeButton).toBeVisible();
+      await expect(startOverButton).toBeVisible();
+    });
+
+    return { resumeButton, startOverButton };
+  }
+
+  test("can resume", async ({ page }) => {
+    const { resumeButton } = await fillPartialDocumentationAndGoBack(page);
+    await resumeButton.click();
+    await page.waitForURL(ROUTE_DOCUMENTATION_TITLE.url);
+    await expect(
+      page.getByLabel(digitalDocumentation.info.inputTitle.label),
+    ).toHaveValue(testData.title);
+  });
+
+  test("can start over", async ({ page }, testInfo) => {
+    const { startOverButton } = await fillPartialDocumentationAndGoBack(page);
+
+    async function openDialog() {
+      await startOverButton.click();
+      const dialog = page.getByRole("dialog");
+      // `toBeVisible` does not work on the dialog even though it is visible visually
+      await expect(dialog).toHaveAttribute("data-open");
+      // assert visibility of heading instead
+      await expect(dialog.getByRole("heading")).toBeVisible();
+      return dialog;
+    }
+
+    await test.step("open start-over dialog but cancel", async () => {
+      const dialog = await openDialog();
+      await dialog.getByRole("button", { name: "Abbrechen" }).click();
+      expect(page.url().endsWith(ROUTE_DOCUMENTATION.url)).toBe(true); // unchanged
+      await expect(dialog).toBeHidden();
+    });
+
+    await test.step("open start-over dialog and download draft", async () => {
+      await openDialog();
+
+      const docText = await downloadDocumentAndGetText(
+        page,
+        page.getByRole("button", { name: "Zwischenstand speichern (.docx)" }),
+        testInfo.outputPath("documentation.docx"),
+      );
+      expectStringsOrderedInText(
+        docText,
+        ["Titel Ihres Regelungsvorhaben", testData.title],
+        [],
+      );
+    });
+
+    await test.step("confirm start over", async () => {
+      const dialog = page.getByRole("dialog");
+      await dialog.getByRole("button", { name: "Neu beginnen" }).click();
+
+      await page.waitForURL(ROUTE_DOCUMENTATION_TITLE.url);
+
+      await expect(
+        page.getByLabel(digitalDocumentation.info.inputTitle.label),
+      ).toBeEmpty();
+    });
+  });
+});
