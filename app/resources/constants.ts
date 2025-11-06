@@ -1,5 +1,4 @@
 export const PRE_CHECK_START_BUTTON_ID = "preCheck-start-button";
-export const A11Y_MESSAGE_NEW_WINDOW = "a11y-message--new-window";
 
 export const PRINCIPLE_COLORS = {
   1: { background: "bg-principle-1", border: "border-principle-1" },

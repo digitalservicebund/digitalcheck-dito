@@ -1,5 +1,5 @@
 import { marked, Marked, type Renderer, type Tokens } from "marked";
-import { A11Y_MESSAGE_NEW_WINDOW } from "~/resources/constants";
+import { general } from "~/resources/content/shared/general.ts";
 import { getDownloadableExtensionName } from "~/utils/fileExtensionUtils";
 import twMerge from "~/utils/tailwindMerge";
 import { isExternalUrl } from "~/utils/utilFunctions";
@@ -31,7 +31,7 @@ const RichText = ({
           return linkHtml
             .replace(
               /^<a /,
-              `<a target="_blank" aria-describedby=${A11Y_MESSAGE_NEW_WINDOW} rel="noopener noreferrer" class="group inline-flex items-center"`,
+              `<a target="_blank" aria-description="${general.a11yMessageNewWindow}" class="group inline-flex items-center"`,
             )
             .replace(
               `>${token.text}<`,

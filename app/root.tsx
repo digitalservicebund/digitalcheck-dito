@@ -21,8 +21,6 @@ import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import Footer from "~/layout/Footer";
 import PageHeader from "~/layout/PageHeader";
-import { A11Y_MESSAGE_NEW_WINDOW } from "~/resources/constants";
-import { general } from "~/resources/content/shared/general";
 import { siteMeta } from "~/resources/content/shared/meta";
 import { ROUTE_LANDING } from "~/resources/staticRoutes";
 import sharedStyles from "~/styles.css?url";
@@ -197,13 +195,6 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
           {!isZFLPage && <PageHeader />}
           {children}
           {!isZFLPage && <Footer />}
-          <span
-            aria-hidden="true"
-            className="hidden"
-            id={A11Y_MESSAGE_NEW_WINDOW}
-          >
-            {general.a11yMessageNewWindow}
-          </span>
           <ScrollRestoration nonce={nonce} />
           <Scripts nonce={nonce} />
         </PHProvider>

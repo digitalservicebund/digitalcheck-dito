@@ -1,5 +1,6 @@
 import OpenInNewIcon from "@digitalservicebund/icons/OpenInNew";
 import { Link, LinkProps } from "react-router";
+import { general } from "~/resources/content/shared/general.ts";
 import twMerge from "~/utils/tailwindMerge";
 
 export type CustomLinkProps = Omit<LinkProps, "target">;
@@ -17,6 +18,7 @@ export default function NewTabLink({
       {...props}
       target="_blank"
       className={twMerge("flex items-center", className)}
+      aria-description={general.a11yMessageNewWindow}
     >
       {children}
       <OpenInNewIcon className="scale-75 fill-current" />
