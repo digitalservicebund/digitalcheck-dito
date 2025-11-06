@@ -69,7 +69,6 @@ function PrincipleExample({ prinzip }: Readonly<PrincipleExampleProps>) {
           target="_blank"
           to={`${ROUTE_REGELUNGEN.url}/${beispielvorhaben.URLBezeichnung ?? ""}`}
           className="text-link inline-flex"
-          rel="noreferrer"
         >
           {beispielvorhaben.Titel}
         </CustomLink>

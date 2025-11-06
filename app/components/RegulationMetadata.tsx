@@ -26,7 +26,6 @@ export default function RegulationMetadata({
             <CustomLink
               to={exampleProject.LinkRegelungstext}
               target="_blank"
-              rel="noreferrer"
               className="text-blue-800 underline"
             >
               {exampleProject.GesetzStatus

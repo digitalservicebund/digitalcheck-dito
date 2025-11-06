@@ -183,11 +183,7 @@ export default function Gesetz() {
           {regelung.NKRStellungnahmeLink && (
             <div>
               {examplesRegelungen.nkr.linkText}
-              <CustomLink
-                target="_blank"
-                to={regelung.NKRStellungnahmeLink}
-                rel="noreferrer"
-              >
+              <NewTabLink to={regelung.NKRStellungnahmeLink}>
                 NKR-Stellungnahme
               </CustomLink>
             </div>
