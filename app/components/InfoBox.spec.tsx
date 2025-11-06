@@ -1,6 +1,7 @@
-import { render, screen, within } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { createRoutesStub } from "react-router";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import { ContentAction } from "~/utils/contentTypes.ts";
 import InfoBox from "./InfoBox";
 
 describe("InfoBox", () => {
@@ -39,35 +40,38 @@ describe("InfoBox", () => {
       );
     });
 
-    it("shows the link list", () => {
-      const testLinks = {
-        header: "Test link list",
-        links: [
-          {
-            title: "Link 1",
-            url: "example.com",
-          },
-          {
-            title: "Link 2",
-            url: "example2.com",
-          },
-        ],
-      };
+    it("shows actions (buttons and links)", () => {
+      const onClick = vi.fn();
+      const actions: ContentAction[] = [
+        {
+          text: "Link 1",
+          linkTo: "example.com",
+        },
+        {
+          text: "Link 2",
+          linkTo: "example2.com",
+        },
+        { text: "Button 1", onClick },
+      ];
 
       const RouterStubInfoBoxItem = createRoutesStub([
         {
           path: "/",
-          Component: () => <InfoBox linkList={testLinks} />,
+          Component: () => <InfoBox actions={actions} />,
         },
       ]);
       render(<RouterStubInfoBoxItem />);
 
-      expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
-        "Test link list",
-      );
+      const links = screen.getAllByRole("link");
+      expect(links).toHaveLength(2);
+      expect(links.map((link) => link.textContent.trim())).toStrictEqual([
+        "Link 1",
+        "Link 2",
+      ]);
+      expect(screen.getAllByRole("button").length).toBe(1);
 
-      const linkListEl = screen.getByRole("list");
-      expect(within(linkListEl).getAllByRole("listitem").length).toBe(2);
+      screen.getByRole("button", { name: "Button 1" }).click();
+      expect(onClick).toHaveBeenCalledOnce();
     });
   });
 });

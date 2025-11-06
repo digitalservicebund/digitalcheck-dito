@@ -371,7 +371,7 @@ exports[`Footer Component > Renders correctly 1`] = `
           >
              
             <a
-              aria-describedby="a11y-message--new-window"
+              aria-description="(öffnet in neuem Fenster)"
               class="text-link increase-tap-area"
               href="https://github.com/digitalservicebund/digitalcheck-dito"
               rel="noreferrer"
@@ -415,7 +415,7 @@ exports[`Footer Component > Renders correctly 1`] = `
         Ein Angebot der
          
         <a
-          aria-describedby="a11y-message--new-window"
+          aria-description="(öffnet in neuem Fenster)"
           class="text-link increase-tap-area"
           href="https://digitalservice.bund.de/"
           rel="noreferrer"
@@ -472,7 +472,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                   Der Digitalcheck entsteht im Auftrag des
                    
                   <a
-                    aria-describedby="a11y-message--new-window"
+                    aria-description="(öffnet in neuem Fenster)"
                     class="text-link increase-tap-area"
                     href="https://bmds.bund.de/"
                     rel="noreferrer"
@@ -508,7 +508,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                   Mehr über den politischen Auftrag und die Entstehung des Digitalcheck finden Sie auf der
                    
                   <a
-                    aria-describedby="a11y-message--new-window"
+                    aria-description="(öffnet in neuem Fenster)"
                     class="text-link increase-tap-area"
                     href="https://www.digitale-verwaltung.de/Webs/DV/DE/transformation/digitalcheck/digitalcheck-node.html"
                     rel="noreferrer"
