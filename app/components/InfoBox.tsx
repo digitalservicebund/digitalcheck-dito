@@ -22,6 +22,9 @@ type BaseInfoBoxProps = {
   heading?: HeadingProps;
   content?: string | Node[];
   contentClassName?: string;
+  /**
+   * @deprecated Pass DetailsSummary in children
+   */
   detailsSummary?: {
     title?: HeadingProps;
     items: DetailsSummaryProps[];
@@ -120,8 +123,8 @@ const InfoBox = ({
             {detailsSummary.title && (
               <Heading {...detailsSummary.title} className="ds-label-02-bold" />
             )}
-            {detailsSummary.items.map((details) => (
-              <DetailsSummary key={details.title} {...details} />
+            {detailsSummary.items.map(({ title, ...details }) => (
+              <DetailsSummary key={title} title={title} {...details} />
             ))}
           </div>
         )}

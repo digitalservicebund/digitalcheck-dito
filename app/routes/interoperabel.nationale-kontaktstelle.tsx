@@ -2,10 +2,10 @@ import { ReactNode } from "react";
 import Badge from "~/components/Badge.tsx";
 import Container from "~/components/Container";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
+import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import ImageZoomable from "~/components/ImageZoomable";
-import InfoBox from "~/components/InfoBox";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
@@ -47,11 +47,16 @@ export default function SinglePointOfContact() {
               className="mt-16 mb-32"
               markdown={spoc.landscape.contentAfter.content}
             />
-            <InfoBox
-              detailsSummary={
-                spoc.landscape.contentAfter.infobox.detailsSummary
-              }
-            />
+            <DetailsSummary
+              className="mt-16 mb-32"
+              title={spoc.landscape.contentAfter.infobox.detailsSummary.title}
+            >
+              <RichText
+                markdown={
+                  spoc.landscape.contentAfter.infobox.detailsSummary.content
+                }
+              />
+            </DetailsSummary>
             <RichText
               className="mb-48"
               markdown={spoc.landscape.contentAfter.outro}

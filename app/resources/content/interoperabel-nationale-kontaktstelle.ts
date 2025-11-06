@@ -37,10 +37,8 @@ export const spoc = {
       Das Organigramm zeigt die Interaktionen der Organisationen und Behörden in Deutschland und der EU im Kontext der Verordnung (EU) 2024/903.`,
       infobox: {
         detailsSummary: {
-          items: [
-            {
-              title: "Beteiligte Organisationen und Behörden",
-              content: dedent`
+          title: "Beteiligte Organisationen und Behörden",
+          content: dedent`
                   - **Bundesländer & Kommunen:** Ausgangspunkt, mit dem Hinweis auf die dezentrale Umsetzung durch das Bundesangebot.
                   - **IT-Planungsrat:** Koordiniert und empfiehlt die Integration von IT-Strategien.
                   - **Nationale Kontaktstelle:** Zentraler Ansprechpartner für Informationsaustausch und Koordination.
@@ -48,8 +46,6 @@ export const spoc = {
                   - **EU-Kommission:** Beteiligte an der Weiterentwicklung und Reportings. 
                   - **EU-Interoperabilitätsbeirat:** EU-weite Zusammenarbeit, vertreten durch Markus Richter (Bundes-CIO).
                   - **27 EU-Staaten mit Kontaktstellen:** Nationale Kontaktstellen für Informationsaustausch.`,
-            },
-          ],
         },
       },
       outro:

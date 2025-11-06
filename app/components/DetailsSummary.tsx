@@ -5,11 +5,15 @@ import RichText from "./RichText";
 export type DetailsSummaryProps = {
   identifier?: string;
   title?: string;
+  /**
+   * @deprecated use children instead
+   */
   content?: string | ReactNode;
   bold?: boolean;
   open?: boolean;
   showVerticalLine?: boolean;
   className?: string;
+  children?: ReactNode;
 };
 
 export default function DetailsSummary({
@@ -20,6 +24,7 @@ export default function DetailsSummary({
   open = false,
   showVerticalLine = true,
   className,
+  children,
 }: Readonly<DetailsSummaryProps>) {
   const [isOpen, setIsOpen] = useState<boolean>(open);
   const detailsRef = useRef<HTMLDetailsElement | null>(null);
@@ -102,6 +107,7 @@ export default function DetailsSummary({
         ) : (
           content
         )}
+        {children}
       </div>
     </details>
   );
