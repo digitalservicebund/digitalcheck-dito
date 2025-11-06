@@ -409,37 +409,32 @@ test.describe("documentation flow happy path", () => {
 });
 
 test.describe("with partial documentation started", () => {
-  async function fillPartialDocumentationAndGoBack(page: Page) {
-    await test.step("start documentation flow from landing page, fill the title, and go back", async () => {
+  test.beforeEach(async ({ page }) => {
+    await test.step("start documentation flow from landing page", async () => {
       await page.goto(ROUTE_DOCUMENTATION.url);
       await expect(page).toHaveURL(ROUTE_DOCUMENTATION.url);
 
       await page.getByRole("link", { name: "Dokumentation starten" }).click();
+    });
+
+    await test.step("fill the title", async () => {
       await page
         .getByLabel(digitalDocumentation.info.inputTitle.label)
         .fill(testData.title);
+    });
+
+    await test.step("go back to start page", async () => {
       await page.goBack();
       await expect(page).toHaveURL(ROUTE_DOCUMENTATION.url);
     });
-
-    const resumeButton = page.getByRole("link", {
-      name: "Dokumentation fortsetzen",
-    });
-    const startOverButton = page.getByRole("button", {
-      name: "Neue Dokumentation beginnen",
-    });
-
-    await test.step("see resume actions", async () => {
-      await expect(resumeButton).toBeVisible();
-      await expect(startOverButton).toBeVisible();
-    });
-
-    return { resumeButton, startOverButton };
-  }
+  });
 
   test("can resume", async ({ page }) => {
-    const { resumeButton } = await fillPartialDocumentationAndGoBack(page);
-    await resumeButton.click();
+    await page
+      .getByRole("link", {
+        name: "Dokumentation fortsetzen",
+      })
+      .click();
     await page.waitForURL(ROUTE_DOCUMENTATION_TITLE.url);
     await expect(
       page.getByLabel(digitalDocumentation.info.inputTitle.label),
@@ -447,7 +442,9 @@ test.describe("with partial documentation started", () => {
   });
 
   test("can start over", async ({ page }, testInfo) => {
-    const { startOverButton } = await fillPartialDocumentationAndGoBack(page);
+    const startOverButton = page.getByRole("button", {
+      name: "Neue Dokumentation beginnen",
+    });
 
     async function openDialog() {
       await startOverButton.click();
