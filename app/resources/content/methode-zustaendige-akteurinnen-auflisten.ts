@@ -38,7 +38,7 @@ export const methodsResponsibleActors = {
       icon: StickyNote2Outlined,
       title: "Beteiligte Ebenen auswählen und Ansprechpersonen sammeln",
       text: "Die Excelvorlage hilft Ihnen, die beteiligten Ebenen auszuwählen, Zuständigkeiten zu klären und hilfreiche Ansprechpersonen zu sammeln.",
-      buttons: [
+      actions: [
         {
           text: "Vorlage herunterladen (xlsx-Datei)",
           linkTo: "/download/Vorlage - Zuständige Akteurinnen und Akteure.xlsx",

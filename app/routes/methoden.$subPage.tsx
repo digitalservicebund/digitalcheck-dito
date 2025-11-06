@@ -77,7 +77,7 @@ export default function Index() {
             Icon: content.content.icon,
           }}
           content={content.content.text}
-          buttons={"buttons" in content.content ? content.content.buttons : []}
+          actions={"actions" in content.content ? content.content.actions : []}
         />
         {content.boxes.map((box) => (
           <MethodCard
@@ -90,7 +90,7 @@ export default function Index() {
                 heading={{ text: box.title, look: "ds-heading-03-reg" }}
                 badge={{ children: box.label, Icon: box.icon }}
                 content={box.text}
-                buttons={"buttons" in box ? box.buttons : []}
+                actions={"actions" in box ? box.actions : []}
               />
             }
           />
@@ -130,7 +130,7 @@ export default function Index() {
                 Icon: content.support.icon,
               }}
               content={content.support.text}
-              buttons={content.support.buttons}
+              actions={content.support.actions}
             />
           </Container>
         </div>

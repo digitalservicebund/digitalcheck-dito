@@ -294,7 +294,7 @@ export default function Result() {
               tagName: "h2",
             }}
             content={preCheckResult.unsure.nextStep.text}
-            buttons={[
+            actions={[
               {
                 id: "result-method-button",
                 text: preCheckResult.unsure.nextStep.link.text,

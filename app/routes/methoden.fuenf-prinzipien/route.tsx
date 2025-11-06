@@ -96,7 +96,7 @@ export default function FivePrinciples() {
             Icon: methodsFivePrinciples.nextStep.icon,
           }}
           content={methodsFivePrinciples.nextStep.text}
-          buttons={methodsFivePrinciples.nextStep.buttons}
+          actions={methodsFivePrinciples.nextStep.actions}
         />
       </Container>
     </>

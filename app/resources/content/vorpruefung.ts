@@ -79,7 +79,7 @@ export const preCheck = {
         src: "/images/digital-readiness-meets-interop.svg",
         alt: "Illustration von Datenaustausch zwischen zwei Computer-Systemen mit EU-Flagge, symbolisiert europäische digitale Zusammenarbeit.",
       },
-      button: {
+      action: {
         text: "Alles zur Interoperabilität",
         linkTo: ROUTE_INTEROPERABILITY.url,
       } satisfies ContentAction,

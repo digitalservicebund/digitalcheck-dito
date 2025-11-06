@@ -34,7 +34,7 @@ export default function DocumentationSend() {
               text: finish.download.heading,
             },
             content: finish.download.content,
-            buttons: [
+            actions: [
               {
                 look: "link",
                 iconLeft: (

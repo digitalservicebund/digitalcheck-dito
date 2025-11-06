@@ -108,7 +108,7 @@ export default function ZFLBegleitungen() {
               text: "Praxisbeispiel: Einsatz eines interdisziplinären Kompetenzteams für das Stromsteuerrecht",
             }}
             content="„Die gründliche Analyse von Vollzugsprozessen hat uns geholfen, das Zusammenspiel zwischen den Regelungen und der Administration besser zu verstehen und so den digitalen Vollzug zu gestalten.“"
-            buttons={[
+            actions={[
               {
                 text: "Mehr erfahren",
                 linkTo:

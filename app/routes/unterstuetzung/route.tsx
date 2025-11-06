@@ -20,7 +20,7 @@ type Offering = {
   title: string;
   text: string;
   sellingPoints: string;
-  button?: ContentAction;
+  action?: ContentAction;
   details: {
     icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
     title: string;
@@ -90,7 +90,7 @@ export default function Index() {
                   text: offering.title,
                 }}
                 content={offering.text}
-                buttons={offering.button ? [offering.button] : []}
+                actions={offering.action ? [offering.action] : []}
               />
               <div className="flex-none space-y-20 md:w-[310px]">
                 <div className="bg-white">

@@ -42,13 +42,13 @@ export type TimelineItemContentProps = {
   parentHasHeading?: boolean;
   content?: string;
   image?: ImageProps;
-  buttons?: ContentAction[];
+  actions?: ContentAction[];
 };
 
 export function TimelineItemContent({
   backgroundClasses,
   badge,
-  buttons,
+  actions,
   content,
   headline,
   image,
@@ -62,9 +62,9 @@ export function TimelineItemContent({
       )}
       {content && <RichText markdown={content} />}
       {image && <ImageZoomable image={image} className="max-w-a11y" />}
-      {buttons && buttons.length > 0 && (
+      {actions && actions.length > 0 && (
         <ButtonContainer>
-          {buttons.map((button) => {
+          {actions.map((button) => {
             if ("linkTo" in button) {
               const { linkTo, text, ...rest } = button;
               return (

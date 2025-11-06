@@ -60,10 +60,10 @@ export default function Index() {
               text: preCheck.start.info.title,
             }}
             content={preCheck.start.info.text}
-            buttons={[
+            actions={[
               {
-                text: preCheck.start.info.button.text,
-                linkTo: preCheck.start.info.button.linkTo,
+                text: preCheck.start.info.action.text,
+                linkTo: preCheck.start.info.action.linkTo,
                 look: "tertiary",
                 className: "mt-20",
               },

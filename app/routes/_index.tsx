@@ -151,7 +151,7 @@ export default function Index() {
                 text: visualisierungen.title,
               }}
               content={visualisierungen.content}
-              buttons={visualisierungen.links}
+              actions={visualisierungen.links}
             />
             <InfoBox
               look="method"
@@ -161,7 +161,7 @@ export default function Index() {
                 text: prinzipien.title,
               }}
               content={prinzipien.content}
-              buttons={prinzipien.links}
+              actions={prinzipien.links}
             />
           </InfoBoxSideBySide>
         </Container>
@@ -174,7 +174,7 @@ export default function Index() {
             text: individuelleExpertise.title,
           }}
           content={individuelleExpertise.content}
-          buttons={[individuelleExpertise.link]}
+          actions={[individuelleExpertise.link]}
         />
 
         <InfoBox

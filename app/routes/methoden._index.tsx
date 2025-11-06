@@ -33,7 +33,7 @@ const renderStep = (
             tagName: "h3",
             id: headingId,
           }}
-          buttons={step.buttons}
+          actions={step.actions}
           content={step.text}
         />
       </Timeline.Item>
@@ -77,7 +77,7 @@ export default function Methoden() {
                 className: "ds-heading-03-bold",
               }}
               content={methods.itSystems.content}
-              buttons={methods.itSystems.buttons}
+              actions={methods.itSystems.actions}
             />
 
             <InfoBox
@@ -92,7 +92,7 @@ export default function Methoden() {
                 className: "ds-heading-03-bold",
               }}
               content={methods.technicalFeasibility.content}
-              buttons={methods.technicalFeasibility.buttons}
+              actions={methods.technicalFeasibility.actions}
             />
           </InfoBoxSideBySide>
         </section>

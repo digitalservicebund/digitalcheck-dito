@@ -17,7 +17,7 @@ export default function Digitaltauglichkeit_index() {
           text: item.title,
         }}
         content={item.content}
-        buttons={item.buttons}
+        actions={item.actions}
       />
     ),
   }));

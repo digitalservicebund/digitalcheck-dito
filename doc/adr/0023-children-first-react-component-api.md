@@ -41,7 +41,7 @@ Express layout and content directly in JSX to make render output obvious and off
 
 ```tsx
 // Before (main content as prop, limited to simple text)
-<DetailsSummary title={content.title} content={content.text} buttons={[{label: "Close"}]} />
+<DetailsSummary title={content.title} content={content.text} actions={[{label: "Close"}]} />
 
 // After (children with more flexibility)
 <DetailsSummary title={content.title}>

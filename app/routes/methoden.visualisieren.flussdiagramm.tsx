@@ -648,7 +648,7 @@ export default function Visualization() {
           content={
             "Sie wenden die Prinzipien auf Ihre Visualisierung an und identifizieren konkrete Möglichkeiten der Digitalisierung."
           }
-          buttons={[
+          actions={[
             {
               text: "Zu den Prinzipien",
               look: "tertiary",

@@ -317,7 +317,7 @@ export const interoperability = {
     title:
       "Informieren Sie sich weiter zu den EU-Anforderungen an Interoperabilität ",
     text: "Mehr zum Thema Governance, Kooperation und Nutzung unserer Inhalte finden Sie unter der Nationalen Kontaktstelle für ein interoperables Europa.",
-    buttons: [
+    actions: [
       {
         text: "Zur Nationalen Kontaktstelle",
         linkTo: ROUTE_INTEROPERABILITY_SPOC.url,

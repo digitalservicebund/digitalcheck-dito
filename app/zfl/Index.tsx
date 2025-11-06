@@ -75,7 +75,7 @@ export default function ZFLIndex() {
                 },
                 content:
                   "Wir begleiten Sie mit einem interdisziplinärem Kompetenzteam. Sie erhalten dadurch ein umfassendes Verständnis von Umsetzungsprozessen und gestalten Ihr Vorhaben praxisnah und bürokratiearm.",
-                buttons: [
+                actions: [
                   {
                     text: "Mehr Informationen zu interdisziplinären Kompetenzteams",
                     linkTo: ROUTE_ZFL_BEGLEITUNGEN.href,
@@ -97,7 +97,7 @@ export default function ZFLIndex() {
                 },
                 content:
                   "Neue Methoden und Werkzeuge für die Rechtsetzung in umsetzungsorientierten Schulungen kennenlernen.",
-                buttons: [
+                actions: [
                   {
                     text: "Mehr Informationen zu Schulungen",
                     linkTo: ROUTE_ZFL_TRAININGS.href,

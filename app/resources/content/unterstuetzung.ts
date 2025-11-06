@@ -255,7 +255,7 @@ export const support = {
 
               Das Angebot richtet sich an alle, die in den Bundesministerien Regelungen erarbeiten. Vorkenntnisse sind nicht erforderlich.
             `,
-            button: {
+            action: {
               text: "Auf Warteliste setzen",
               linkTo: encodeURI(dedent`
                 mailto:digitalcheck@digitalservice.bund.de?subject=[Digitalcheck Schulung] Anmeldung digitaltaugliche Regelungen&body=Guten Tag,
@@ -304,7 +304,7 @@ export const support = {
 
               Das Angebot richtet sich an alle, die in den Bundesministerien Regelungen erarbeiten. Vorkenntnisse sind nicht erforderlich.
             `,
-            button: {
+            action: {
               text: "Auf Warteliste setzen",
               linkTo: encodeURI(
                 dedent`mailto:digitalcheck@digitalservice.bund.de?subject=[Digitalcheck Schulung] Anmeldung Visualisierungen&body=

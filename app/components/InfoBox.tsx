@@ -28,7 +28,7 @@ type BaseInfoBoxProps = {
     items: DetailsSummaryProps[];
   };
   linkList?: LinkListProps;
-  buttons?: ContentAction[];
+  actions?: ContentAction[];
   className?: string;
   look?: "default" | "highlight" | "method";
 };
@@ -65,7 +65,7 @@ const InfoBox = ({
   contentClassName,
   detailsSummary,
   linkList,
-  buttons,
+  actions,
   visual,
   look,
   children,
@@ -130,9 +130,9 @@ const InfoBox = ({
         )}
         {linkList && <LinkList {...linkList} />}
 
-        {buttons && buttons.length > 0 && (
+        {actions && actions.length > 0 && (
           <ButtonContainer>
-            {buttons.map((button, index) => {
+            {actions.map((button) => {
               if ("linkTo" in button) {
                 const { linkTo, text, ...rest } = button;
                 if (button.download)

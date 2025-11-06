@@ -26,7 +26,7 @@ export const examples = {
 
         Hier finden Sie Formulierungen, wie Ihre Kolleginnen und Kollegen die Prinzipien für Digitaltaugliche Gesetzgebung genutzt haben um den Regelungstext digitaltauglich zu formulieren.
       `,
-      buttons: [
+      actions: [
         {
           text: "Zu den Prinzipien",
           linkTo: ROUTE_EXAMPLES_DIGITAL_COMMUNICATION.url,
@@ -41,7 +41,7 @@ export const examples = {
 
         Hier finden Sie Visualisierungen, welche Legistinnen und Legisten beim Erarbeiten der Digitaltauglichkeit geholfen haben und veröffentlicht wurden.
       `,
-      buttons: [
+      actions: [
         {
           text: "Zu den Visualisierungen",
           linkTo: ROUTE_EXAMPLES_VISUALISATIONS.url,

@@ -34,7 +34,7 @@ export function PrinciplePosterBox({
             text: principlePosterBox.heading,
           }}
           content={principlePosterBox.content}
-          buttons={[
+          actions={[
             {
               text: principlePosterBox.downloadTitle,
               linkTo: principlePosterBox.downloadUrl,

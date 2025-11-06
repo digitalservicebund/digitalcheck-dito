@@ -74,7 +74,7 @@ export const methodsTasksProcesses = {
         heading: { text: "Flussdiagramm", tagName: "h3" as const },
         content:
           "Ein Flussdiagramm zeigt einen Prozessablauf. Es stellt die Reihenfolge von Handlungen oder Entscheidungen dar.",
-        buttons: [
+        actions: [
           {
             text: "Anleitung",
             linkTo: ROUTE_METHODS_VISUALIZE_FLOWCHARTS.url,
@@ -100,7 +100,7 @@ export const methodsTasksProcesses = {
 
           **Die Anleitung entsteht gerade.**
         `,
-        buttons: [
+        actions: [
           {
             text: "Anleitung",
             look: "tertiary" as const,
@@ -126,7 +126,7 @@ export const methodsTasksProcesses = {
 
           **Die Anleitung entsteht gerade.**
         `,
-        buttons: [
+        actions: [
           {
             text: "Anleitung",
             look: "tertiary" as const,
@@ -147,7 +147,7 @@ export const methodsTasksProcesses = {
       Die Vorteile von Visualisierungen helfen dem Nationalen Normenkontrollrat (NKR), Ihr Vorhaben schneller zu prüfen.
       Aber worauf achtet der NKR bei Visualisierungen? 
     `,
-    buttons: [
+    actions: [
       {
         linkTo: ROUTE_FUNDAMENTALS_NKR.url,
         text: "Mehr dazu erfahren",
@@ -214,7 +214,7 @@ export const methodsTasksProcesses = {
       heading: "Anleitung Abläufe und Aufgaben erfassen",
       content:
         "Eine Powerpoint-Vorlage (PPT) mit einer Schritt für Schritt Anleitung zum Download finden Sie hier. Sie können diese ausdrucken oder an Ihrem Computer bearbeiten. Sofern in Ihrem Ressort Conceptboard genutzt werden kann, können Sie sich auch eine Kopie dieser Conceptboard-Vorlage erstellen. Für letzteres können Sie einen Gast-Zugang anlegen.",
-      buttons: [
+      actions: [
         {
           linkTo: ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX.url,
           text: "PPT-Vorlage runterladen",
@@ -244,7 +244,7 @@ export const methodsTasksProcesses = {
     heading: "Finden Sie konkrete Möglichkeiten der Digitalisierung",
     content:
       "Mit den Prinzipien für Digitaltaugliche Gesetzgebung bekommen Sie auch konkrete Hinweise darauf, worauf Sie achten müssen.",
-    buttons: [
+    actions: [
       {
         linkTo: ROUTE_METHODS_PRINCIPLES.url,
         text: "Prinzipien nutzen",

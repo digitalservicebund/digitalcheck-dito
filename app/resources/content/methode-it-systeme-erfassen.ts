@@ -44,7 +44,7 @@ export const methodsITSystems = {
       icon: StickyNote2Outlined,
       title: "IT-Systeme erfassen",
       text: "Nutzen Sie die Vorlage, um die IT-Systeme systematisch und detailliert zu dokumentieren. Sie müssen nicht selbst über das Wissen verfügen: Fragen Sie die zuständigen Akteurinnen und Akteure und ziehen Sie ggf. neutrale IT-Expertise hinzu.",
-      buttons: [
+      actions: [
         {
           text: "Vorlage herunterladen (xlsx-Datei)",
           linkTo: "/download/Vorlage - IT-Systeme erfassen.xlsx",
@@ -62,7 +62,7 @@ export const methodsITSystems = {
       
       Schreiben Sie uns über [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de) oder rufen Sie uns an unter [0151/40 76 78 39](tel:+4915140767839).
     `,
-    buttons: [
+    actions: [
       {
         text: "Unterstützungsangebote nutzen",
         look: "tertiary" as const,
