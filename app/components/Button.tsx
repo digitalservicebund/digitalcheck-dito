@@ -13,10 +13,6 @@ export type ButtonBaseProps = {
   look?: "primary" | "secondary" | "tertiary" | "ghost" | "link";
   plausibleEventName?: string;
   size?: "large" | "medium" | "small";
-  /**
-   * @deprecated use children instead
-   */
-  text?: string;
 };
 
 // require an explicit type for buttons for clarity
@@ -74,7 +70,6 @@ function createButtonClasses({
 function Button({
   id,
   children,
-  text,
   iconLeft,
   iconRight,
   fullWidth,
@@ -95,8 +90,8 @@ function Button({
 
   return (
     <button {...props} id={id} data-testid={id} className={buttonClasses}>
-      {formatIcon(iconLeft)}{" "}
-      {<span className="ds-button-label">{children ?? text}</span>}{" "}
+      {formatIcon(iconLeft)}
+      <span className="ds-button-label">{children}</span>
       {formatIcon(iconRight)}
     </button>
   );
@@ -109,7 +104,6 @@ export default Button;
  */
 export function LinkButton({
   children,
-  text,
   id,
   iconLeft,
   iconRight,
@@ -153,8 +147,7 @@ export function LinkButton({
       onKeyDown={onKeyDown}
       {...props}
     >
-      {iconLeft} <span className="ds-button-label">{children ?? text}</span>{" "}
-      {iconRight}
+      {iconLeft} <span className="ds-button-label">{children}</span> {iconRight}
     </Link>
   );
 }

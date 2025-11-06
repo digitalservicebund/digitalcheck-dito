@@ -1,7 +1,6 @@
 import { ButtonBaseProps, ButtonProps } from "~/components/Button.tsx";
 
-type BaseContentAction = Omit<ButtonBaseProps, "text"> & {
-  // The text prop is deprecated in ButtonBaseProps but expected for content files
+type BaseContentAction = ButtonBaseProps & {
   text: string;
   id?: string;
   className?: string;
