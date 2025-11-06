@@ -1,4 +1,3 @@
-import OpenInNewIcon from "@digitalservicebund/icons/OpenInNew";
 import SaveAltOutlinedIcon from "@digitalservicebund/icons/SaveAltOutlined";
 import React, { cloneElement, type ReactElement } from "react";
 import { Link, LinkProps } from "react-router";
@@ -144,13 +143,6 @@ export function LinkButton({
       event.preventDefault();
     }
   };
-
-  const isExternal = "target" in props && props.target === "_blank";
-  iconRight = isExternal ? (
-    <OpenInNewIcon className="-ml-8 scale-75 fill-blue-800" />
-  ) : (
-    iconRight
-  );
 
   return (
     <Link

@@ -1,8 +1,8 @@
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import { type Beispielvorhaben } from "~/utils/strapiData.server";
 import { formatDate, gesetzStatusMap } from "~/utils/utilFunctions";
-import CustomLink from "./CustomLink";
 import Metadata from "./Metadata";
+import NewTabLink from "./NewTabLink.tsx";
 
 export default function RegulationMetadata({
   exampleProject,
@@ -23,15 +23,14 @@ export default function RegulationMetadata({
         <Metadata.Item
           label={examplesRegelungen.infoLabels.linkLabel}
           value={
-            <CustomLink
+            <NewTabLink
               to={exampleProject.LinkRegelungstext}
-              target="_blank"
               className="text-blue-800 underline"
             >
               {exampleProject.GesetzStatus
                 ? gesetzStatusMap[exampleProject.GesetzStatus]
                 : examplesRegelungen.infoLabels.fallbackLinkText}
-            </CustomLink>
+            </NewTabLink>
           }
         />
       )}

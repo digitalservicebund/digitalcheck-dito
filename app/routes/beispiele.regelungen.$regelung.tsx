@@ -1,12 +1,12 @@
 import { useLoaderData, useOutletContext } from "react-router";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
-import CustomLink from "~/components/CustomLink";
 import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
+import NewTabLink from "~/components/NewTabLink.tsx";
 import ParagraphList from "~/components/ParagraphList";
 import RegulationMetadata from "~/components/RegulationMetadata";
 import RichText from "~/components/RichText.tsx";
@@ -185,7 +185,7 @@ export default function Gesetz() {
               {examplesRegelungen.nkr.linkText}
               <NewTabLink to={regelung.NKRStellungnahmeLink}>
                 NKR-Stellungnahme
-              </CustomLink>
+              </NewTabLink>
             </div>
           )}
         </>

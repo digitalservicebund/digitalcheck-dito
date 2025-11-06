@@ -1,8 +1,9 @@
 import { JSX } from "react";
+import { Link } from "react-router";
 import { nestListInListItems } from "~/utils/blocksRendererUtils";
 import { type Node } from "~/utils/paragraphUtils";
 import { isExternalUrl } from "~/utils/utilFunctions";
-import CustomLink from "./CustomLink";
+import NewTabLink from "./NewTabLink.tsx";
 
 const getElement = (node: Node): keyof JSX.IntrinsicElements => {
   switch (node.type) {
@@ -42,21 +43,26 @@ export function RecursiveRenderer({
       if (node.type === "link" && node.url) {
         const externalUrl = isExternalUrl(node.url);
 
+        if (externalUrl)
+          return (
+            <NewTabLink
+              key={index}
+              to={node.url}
+              className="text-link inline-flex"
+            >
+              <RecursiveRenderer content={node.children} />
+            </NewTabLink>
+          );
         // NOTE: In strapi a url has to start with "/", "#" will not be registered as valid url
-        // So if you want to use anchor tags you would have to define them like this:
+        // So if you want to use anchor tags, you would have to define them like this:
         // "/#anchor-tag"
         // Here we remove the first "/" so it will become -> "#anchor-tag"
-        const url = externalUrl ? node.url : node.url.replace("/", "");
+        const url = node.url.replace(/^\//, "");
 
         return (
-          <CustomLink
-            key={index}
-            to={url}
-            className="text-link inline-flex"
-            target={externalUrl ? "_blank" : undefined}
-          >
+          <Link key={index} to={url} className="text-link inline-flex">
             <RecursiveRenderer content={node.children} />
-          </CustomLink>
+          </Link>
         );
       }
 

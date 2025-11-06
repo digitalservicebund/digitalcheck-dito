@@ -1,7 +1,7 @@
 import Absatz from "~/components/Absatz";
-import CustomLink from "~/components/CustomLink";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
+import NewTabLink from "~/components/NewTabLink.tsx";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
 import type {
@@ -65,13 +65,12 @@ function PrincipleExample({ prinzip }: Readonly<PrincipleExampleProps>) {
       />
       <p className="ds-label-03-reg items-center text-gray-900">
         Regelung:&nbsp;
-        <CustomLink
-          target="_blank"
+        <NewTabLink
           to={`${ROUTE_REGELUNGEN.url}/${beispielvorhaben.URLBezeichnung ?? ""}`}
           className="text-link inline-flex"
         >
           {beispielvorhaben.Titel}
-        </CustomLink>
+        </NewTabLink>
       </p>
     </div>
   );
