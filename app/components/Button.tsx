@@ -185,8 +185,6 @@ export function DownloadButton(
 
 /**
  * A link to a file that looks like a button.
- * @param props
- * @constructor
  */
 export function DownloadLinkButton({
   omitIcon,
