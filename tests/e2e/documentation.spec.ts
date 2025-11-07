@@ -69,8 +69,22 @@ function expectDocumentToNotContainTags(text: string) {
   expect(tagsIdx).toBeNull();
 }
 
-test("documentation flow happy path", async ({ page }, testInfo) => {
-  await test.step("start documentation flow from landing page", async () => {
+test.describe("documentation flow happy path", () => {
+  test.describe.configure({ mode: "serial" });
+
+  let page: Page;
+
+  test.beforeAll(async ({ browser }) => {
+    page = await browser.newPage();
+  });
+
+  test.afterAll(async () => {
+    if (page) {
+      await page.close();
+    }
+  });
+
+  test("start documentation flow from landing page", async () => {
     await page.goto(ROUTE_DOCUMENTATION.url);
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION.url);
 
@@ -78,7 +92,7 @@ test("documentation flow happy path", async ({ page }, testInfo) => {
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION_TITLE.url);
   });
 
-  await test.step("fill title page and navigate to participation", async () => {
+  test("fill title page and navigate to participation", async () => {
     await page
       .getByLabel(digitalDocumentation.info.inputTitle.label)
       .fill(testData.title);
@@ -87,22 +101,17 @@ test("documentation flow happy path", async ({ page }, testInfo) => {
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION_PARTICIPATION.url);
   });
 
-  await test.step("fill participation page and navigate to first principle", async () => {
-    await page
-      .getByRole("textbox", {
-        name: "welche Schritte",
-      })
-      .fill(testData.participationFormats);
-    await page
-      .getByRole("textbox", { name: "welche Erkenntnisse" })
-      .fill(testData.participationResults);
+  test("fill participation page and navigate to first principle", async () => {
+    const textareas = page.getByLabel("Antwort");
+    await textareas.nth(0).fill(testData.participationFormats);
+    await textareas.nth(1).fill(testData.participationResults);
     await page.getByRole("button", { name: "Weiter" }).click();
 
+    expect(page.url()).not.toBe(ROUTE_DOCUMENTATION_PARTICIPATION.url);
     await expect(page.locator("mark", { hasText: "Prinzipien" })).toBeVisible();
-    expect(page.url()).not.toContain(ROUTE_DOCUMENTATION_PARTICIPATION.url);
   });
 
-  await test.step("handle positive principle answer with aspect management", async () => {
+  test("handle positive principle answer with aspect management", async () => {
     await page.getByLabel("Ja, gänzlich oder teilweise").click();
 
     // Check that reasoning checkboxes are shown
@@ -154,7 +163,8 @@ test("documentation flow happy path", async ({ page }, testInfo) => {
     await reasonInputs.last().fill(testData.customReason);
   });
 
-  await test.step("download draft documentation from principle page", async () => {
+  // eslint-disable-next-line playwright/expect-expect
+  test("download draft documentation from principle page", async ({}, testInfo) => {
     const docText = await downloadDocumentAndGetText(
       page,
       page.getByRole("button", { name: "Zwischenstand speichern (.docx)" }),
@@ -204,7 +214,7 @@ test("documentation flow happy path", async ({ page }, testInfo) => {
     await page.getByRole("button", { name: "Weiter" }).click();
   });
 
-  await test.step("handle negative principle answer", async () => {
+  test("handle negative principle answer", async () => {
     await page.getByLabel("Nein").click();
 
     // Validate textarea is shown
@@ -216,7 +226,7 @@ test("documentation flow happy path", async ({ page }, testInfo) => {
     await page.getByRole("button", { name: "Weiter" }).click();
   });
 
-  await test.step("handle irrelevant principle answer and skip principle Automation", async () => {
+  test("handle irrelevant principle answer and skip principle Automation", async () => {
     await page.getByLabel("Nicht relevant").click();
 
     // Validate textarea is shown
@@ -232,7 +242,7 @@ test("documentation flow happy path", async ({ page }, testInfo) => {
     await page.getByRole("button", { name: "Weiter" }).click();
   });
 
-  await test.step("handle aspect and multiple own explanations on last principle", async () => {
+  test("handle aspect and multiple own explanations on last principle", async () => {
     await page.getByLabel("Ja, gänzlich oder teilweise").click();
 
     const form = page.locator("form");
@@ -265,12 +275,12 @@ test("documentation flow happy path", async ({ page }, testInfo) => {
     await reasonInputs.last().fill(testData.customReason2);
   });
 
-  await test.step("navigate to summary", async () => {
+  test("navigate to summary", async () => {
     await page.getByRole("button", { name: "Weiter" }).click();
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION_SUMMARY.url);
   });
 
-  await test.step("summary page shows entered data and navigate to absenden", async () => {
+  test("summary page shows entered data and navigate to absenden", async () => {
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION_SUMMARY.url);
 
     const main = page.getByRole("main");
@@ -285,7 +295,7 @@ test("documentation flow happy path", async ({ page }, testInfo) => {
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION_SEND.url);
   });
 
-  await test.step("download documentation from absenden page", async () => {
+  test("download documentation from absenden page", async ({}, testInfo) => {
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION_SEND.url);
 
     const docText = await downloadDocumentAndGetText(
@@ -399,7 +409,6 @@ test("documentation flow happy path", async ({ page }, testInfo) => {
 });
 
 test.describe("with partial documentation started", () => {
-  // set the stage for each scenario
   test.beforeEach(async ({ page }) => {
     await test.step("start documentation flow from landing page", async () => {
       await page.goto(ROUTE_DOCUMENTATION.url);
