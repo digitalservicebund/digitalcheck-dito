@@ -134,11 +134,6 @@ export const ROUTES_DOCUMENTATION_POST = [
   ROUTE_DOCUMENTATION_SEND,
 ];
 
-// NOTE: 70-tage replace pdf with word document
-export const ROUTE_DOCUMENTATION_STATIC_PDF = createRoute(
-  "download/prototyp_documentation_dummy_result.pdf",
-  "Begleitende Dokumentation als Word-Dokument",
-);
 export const ROUTE_DOCUMENTATION_STATIC_WORD = createRoute(
   "download/" + FILE_NAME_DOCUMENTATION_STATIC_WORD,
   "Begleitende Dokumentation als Word-Dokument",
@@ -239,80 +234,9 @@ export const ROUTE_FUNDAMENTALS_NKR = createRoute(
   ROUTE_FUNDAMENTALS,
 );
 
-// PROTOTYPE DOCUMENTATION ROUTES
-export const ROUTE_PROTOTYPE = createRoute("prototyp", "Prototyp");
-
-export const ROUTE_PROTOTYPE_DOCUMENTATION = createRoute(
-  "dokumentation",
-  "Dokumentation - Prototyp",
-  ROUTE_PROTOTYPE,
-);
-export const ROUTE_PROTOTYPE_DOCUMENTATION_START_RESUME = createRoute(
-  "start-oder-fortsetzen",
-  "Dokumentation starten oder fortsetzen - Prototyp",
-  ROUTE_PROTOTYPE_DOCUMENTATION,
-);
-export const ROUTE_PROTOTYPE_DOCUMENTATION_META = createRoute(
-  "meta",
-  "Informationen zum Regelungsvorhaben - Prototyp",
-  ROUTE_PROTOTYPE_DOCUMENTATION,
-);
-export const ROUTE_PROTOTYPE_DOCUMENTATION_PARTICIPATION = createRoute(
-  "beteiligung",
-  "Praxistaugliche Umsetzung - Prototyp",
-  ROUTE_PROTOTYPE_DOCUMENTATION,
-);
-export const ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_1 = createRoute(
-  "prinzip-1",
-  "Prinzip: Digitale Angebote - Prototyp",
-  ROUTE_PROTOTYPE_DOCUMENTATION,
-);
-export const ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_2 = createRoute(
-  "prinzip-2",
-  "Prinzip: Datenwiederverwendung - Prototyp",
-  ROUTE_PROTOTYPE_DOCUMENTATION,
-);
-export const ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_3 = createRoute(
-  "prinzip-3",
-  "Prinzip: Etablierte Technologien - Prototyp",
-  ROUTE_PROTOTYPE_DOCUMENTATION,
-);
-export const ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_4 = createRoute(
-  "prinzip-4",
-  "Prinzip: Automatisierung - Prototyp",
-  ROUTE_PROTOTYPE_DOCUMENTATION,
-);
-export const ROUTE_PROTOTYPE_DOCUMENTATION_PRINCIPLE_5 = createRoute(
-  "prinzip-5",
-  "Prinzip: Datenschutz und Informationssicherheit - Prototyp",
-  ROUTE_PROTOTYPE_DOCUMENTATION,
-);
-export const ROUTE_PROTOTYPE_DOCUMENTATION_RESULT = createRoute(
-  "ergebnis",
-  "Dokumentation abschließen - Prototyp",
-  ROUTE_PROTOTYPE_DOCUMENTATION,
-);
-export const ROUTE_PROTOTYPE_DOCUMENTATION_INTERMEDIATE_SAVE = createRoute(
-  "zwischenstand-speichern",
-  "Später weiterarbeiten - Prototyp",
-  ROUTE_PROTOTYPE_DOCUMENTATION,
-);
-
 export const ROUTE_DOWNLOAD_PRINCIPLE_POSTER = createRoute(
   "download/Prinzipien-Poster.pdf",
   "Prinzipien-Poster",
-);
-export const ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_PDF = createRoute(
-  "download/prototyp_documentation_dummy_result.pdf",
-  "Ihre Digitalcheck-Dokumentation als PDF-Datei",
-);
-export const ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_WORD = createRoute(
-  "download/digitalcheck-dokumentation-04-07-2025-prototyp.docx",
-  "Ihre Digitalcheck-Dokumentation als Word-Datei",
-);
-export const ROUTE_PROTOTYPE_DOCUMENTATION_STATIC_JSON = createRoute(
-  "download/digitalcheck-vorpruefung-zwischenstand.json",
-  "Ihre Digitalcheck-Dokumentation als JSON-Datei",
 );
 
 // BACKEND ROUTES
