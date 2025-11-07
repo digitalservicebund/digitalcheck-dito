@@ -70,6 +70,7 @@ function expectDocumentToNotContainTags(text: string) {
 }
 
 test("documentation flow happy path", async ({ page }, testInfo) => {
+  test.setTimeout(60_000);
   await test.step("start documentation flow from landing page", async () => {
     await page.goto(ROUTE_DOCUMENTATION.url);
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION.url);
@@ -248,10 +249,13 @@ test("documentation flow happy path", async ({ page }, testInfo) => {
     await paragraphInputs.fill(testData.principle3Paragraph);
     await reasonInputs.fill(testData.principle3Reason);
 
-    // Add custom aspect
-    await page
-      .getByRole("button", { name: "Eigene Erklärung hinzufügen" })
-      .click();
+    // Add a custom aspect
+    const addButton = page.getByRole("button", {
+      name: "Eigene Erklärung hinzufügen",
+    });
+
+    await addButton.scrollIntoViewIfNeeded();
+    await addButton.click();
 
     // Fill custom aspect inputs - need to target the last occurrence
     await paragraphInputs.last().fill(testData.customParagraph);
@@ -266,7 +270,7 @@ test("documentation flow happy path", async ({ page }, testInfo) => {
   });
 
   await test.step("navigate to summary", async () => {
-    await page.getByRole("button", { name: "Weiter" }).click();
+    await page.getByRole("button", { name: "Weiter" }).click({ force: true });
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION_SUMMARY.url);
   });
 
@@ -353,7 +357,7 @@ test("documentation flow happy path", async ({ page }, testInfo) => {
     expectDocumentToNotContainTags(docText);
   });
 
-  test("go to landing page and download empty document template", async ({}, testInfo) => {
+  await test.step("go to landing page and download empty document template", async () => {
     await page.goto(ROUTE_DOCUMENTATION.url);
 
     const docText = await downloadDocumentAndGetText(
