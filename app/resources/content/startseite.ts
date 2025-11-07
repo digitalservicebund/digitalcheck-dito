@@ -35,7 +35,7 @@ export const startseite = {
           plausibleEventName: "Content.Schritte.Button+Vorprüfung",
         } satisfies ContentAction,
         description: {
-          text: "Sie identifizieren Digitalbezug und Interoperabilitätsanforderungen für Ihr Vorhaben.",
+          text: "Sie identifizieren Digitalbezug und Inter&shy;operabilitäts&shy;an&shy;for&shy;der&shy;un&shy;gen für Ihr Vorhaben.",
         },
         duration: "Wenige Minuten",
         result: dedent`
