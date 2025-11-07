@@ -79,10 +79,13 @@ export async function loader({ request }: Route.LoaderArgs) {
   // Set cookie to store user has viewed result
   cookie.hasViewedResult = true;
 
+  const resultContent = getContentForResult(answers, result);
+
   return data(
     {
       result,
       answers,
+      resultContent,
     },
     await getHeaderFromCookie(cookie),
   );
@@ -158,10 +161,8 @@ function getReasonListItem(reason: Reason) {
 }
 
 export default function Result() {
-  const { result, answers } = useLoaderData<typeof loader>();
+  const { result, answers, resultContent } = useLoaderData<typeof loader>();
   const [vorhabenTitle, setVorhabenTitle] = useState("");
-
-  const resultContent = getContentForResult(answers, result);
 
   function getHeaderIcon() {
     const iconClassName = "w-full h-full";
@@ -279,6 +280,7 @@ export default function Result() {
                 <ResultForm
                   result={result}
                   answers={answers}
+                  resultContent={resultContent}
                   setVorhabenTitle={setVorhabenTitle}
                 />
               </div>

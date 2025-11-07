@@ -28,7 +28,12 @@ export function buildEmailBody(
     .forEach(({ intro, reasons }) => {
       resultText += `➤ ${intro} \n\n`;
       reasons
-        .toSorted((reason) => (reason.answer === "yes" ? -1 : 1))
+        .toSorted((a, b) => {
+          if (a.answer === b.answer) {
+            return 0; // Keep the original order fixes hydration mismatch
+          }
+          return a.answer === "yes" ? -1 : 1; // "yes" comes before "no"
+        })
         .forEach((reason) => {
           resultText += reason.answer === "yes" ? "+" : "";
           resultText += reason.answer === "no" ? "-" : "";

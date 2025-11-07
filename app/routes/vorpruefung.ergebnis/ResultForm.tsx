@@ -19,15 +19,17 @@ import type { PreCheckAnswers } from "~/routes/vorpruefung._preCheckNavigation.$
 import { buildEmailBody } from "~/routes/vorpruefung.ergebnis/buildMailtoRedirectUri.ts";
 import getResultValidatorForAnswers from "~/routes/vorpruefung.ergebnis/resultValidation";
 import { PreCheckResult, ResultType } from "./PreCheckResult";
-import getContentForResult, { ResultContent } from "./getContentForResult";
+import { ResultContent } from "./getContentForResult";
 
 export default function ResultForm({
   result,
   answers,
+  resultContent,
   setVorhabenTitle,
 }: Readonly<{
   result: PreCheckResult;
   answers: PreCheckAnswers;
+  resultContent: ResultContent;
   setVorhabenTitle: Dispatch<SetStateAction<string>>;
 }>) {
   const [showEmailAlert, setShowEmailAlert] = useState<boolean>(false);
@@ -65,7 +67,6 @@ export default function ResultForm({
   };
 
   const emailPreviewBody = useMemo(() => {
-    const resultContent: ResultContent = getContentForResult(answers, result);
     const currentVorhabenTitle = form.value("title") ?? "";
     const currentNegativeReasoning = form.value("negativeReasoning") ?? "";
 
@@ -74,7 +75,7 @@ export default function ResultForm({
       currentNegativeReasoning,
       currentVorhabenTitle,
     );
-  }, [answers, result, form]);
+  }, [resultContent, form]);
 
   const handleCopyEmailBody = async () => {
     if (navigator.clipboard && emailPreviewBody) {
