@@ -25,6 +25,7 @@ import type {
 } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { getResultForAnswers } from "~/routes/vorpruefung.ergebnis/getResultForAnswers";
 import Result, { action, loader } from "~/routes/vorpruefung.ergebnis/route";
+import getContentForResult from "../vorpruefung.ergebnis/getContentForResult";
 
 vi.mock("react-router", async (importOriginal) => {
   const actual = await importOriginal<typeof import("react-router")>();
@@ -317,10 +318,12 @@ function mapUserAnswersToMockAnswers(
 function renderResultPage(answers: Answers) {
   const preCheckAnswers = mapUserAnswersToMockAnswers(answers);
   const result = getResultForAnswers(preCheckAnswers);
+  const resultContent = getContentForResult(preCheckAnswers, result);
 
   vi.mocked(useLoaderData).mockReturnValue({
     answers: preCheckAnswers,
     result: result,
+    resultContent,
   });
 
   render(
