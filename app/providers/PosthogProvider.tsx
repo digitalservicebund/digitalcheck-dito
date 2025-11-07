@@ -8,6 +8,7 @@ const posthogOptions: Partial<PostHogConfig> = {
   ui_host: POSTHOG_UI_HOST,
   defaults: "2025-05-24",
   persistence: "memory",
+  cookieless_mode: "always",
   enable_heatmaps: true,
   capture_dead_clicks: true,
 };
