@@ -75,7 +75,7 @@ export const steps = {
     content:
       stepNKR.content +
       dedent`
-        <p>Senden Sie die von Ihnen erstellte Dokumentation per E-Mail an folgende Adresse: <a href="mailto:nkr@bmj.bund.de" class="plausible-event-name=Content.Steps.Link+BMJ+Email underline hover:no-underline text-blue-700 font-bold">nkr@bmj.bund.de</a></p>
+        <p>Senden Sie die von Ihnen erstellte Dokumentation per E-Mail an folgende Adresse: <a href="mailto:nkr@bmjv.bund.de" class="plausible-event-name=Content.Steps.Link+BMJ+Email underline hover:no-underline text-blue-700 font-bold">nkr@bmjv.bund.de</a></p>
 
         Damit ist der Digitalcheck für Sie beendet.
       `,

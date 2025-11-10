@@ -670,7 +670,7 @@ describe("Vorprüfung Ergebnis Page", () => {
               expect(res.status).toBe(302);
               if (expected.includesNkrRecipient) {
                 expect(res.headers.get("location")).toMatch(
-                  "mailto:nkr%40bmj.bund.de",
+                  "mailto:nkr%40bmjv.bund.de",
                 );
               }
 

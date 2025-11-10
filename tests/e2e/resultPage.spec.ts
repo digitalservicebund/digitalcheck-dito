@@ -115,7 +115,7 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
 
     expect(subject).toBe("Digitalcheck Vorprüfung: „Vorhaben ABC“");
 
-    expect(recipients).toContain("nkr@bmj.bund.de");
+    expect(recipients).toContain("nkr@bmjv.bund.de");
     expect(recipients).toContain("interoperabel@digitalservice.bund.de");
 
     expect(body).toContain(
@@ -156,7 +156,7 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
       navigator.clipboard.readText(),
     );
     expect(clipboardText).toBe(
-      "nkr@bmj.bund.de, interoperabel@digitalservice.bund.de",
+      "nkr@bmjv.bund.de, interoperabel@digitalservice.bund.de",
     );
   });
 

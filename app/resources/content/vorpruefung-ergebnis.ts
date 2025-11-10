@@ -173,7 +173,7 @@ export const preCheckResult = {
       text: "E-Mail erstellen",
     },
     emailTemplate: {
-      toNkr: "nkr@bmj.bund.de",
+      toNkr: "nkr@bmjv.bund.de",
       toDC: "interoperabel@digitalservice.bund.de",
       subject: "Digitalcheck Vorprüfung",
       bodyBefore: dedent`
