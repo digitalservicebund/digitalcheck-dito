@@ -322,7 +322,9 @@ export default function Result() {
                       <RichText markdown={item.content as string} />
                     )}
                     {item.action && (
-                      <Link to={item.action.linkTo}>{item.action.text}</Link>
+                      <Link to={item.action.linkTo} className="text-link">
+                        {item.action.text}
+                      </Link>
                     )}
                   </NumberedList.Item>
                 ),

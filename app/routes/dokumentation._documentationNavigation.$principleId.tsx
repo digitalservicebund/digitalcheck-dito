@@ -80,16 +80,27 @@ function Reasoning({
     <CheckboxWithExpandableArea
       scope={checkboxScope}
       label={label}
-      renderDescription={({ open }) => (
-        <span className="space-x-8">
-          <span>{open ? detailDescription : description}</span>
-          {moreUrl && (
-            <Link to={moreUrl} target="_blank" rel="noreferrer">
-              {principlePages.moreInfoButton}
-            </Link>
-          )}
-        </span>
-      )}
+      renderDescription={({ open }) => {
+        let descriptionLabel = open ? detailDescription : description;
+        if (descriptionLabel && !descriptionLabel.endsWith(".")) {
+          descriptionLabel += ".";
+        }
+        return (
+          <span className="space-x-8">
+            <span>{descriptionLabel}</span>
+            {moreUrl && (
+              <Link
+                to={moreUrl}
+                target="_blank"
+                className="text-link"
+                rel="noreferrer"
+              >
+                {principlePages.moreInfoButton}
+              </Link>
+            )}
+          </span>
+        );
+      }}
       closeable={false}
       defaultValue={defaultValue}
       error={error}
@@ -434,6 +445,7 @@ export default function DocumentationPrinciple() {
           <Link
             to={`${ROUTE_METHODS_PRINCIPLES.url}#${slugify(prinzip.Name)}`}
             target="_blank"
+            className="text-link"
             rel="noreferrer"
           >
             {principlePages.moreButton}
