@@ -1,6 +1,6 @@
 import Image from "app/components/Image";
 import { Link } from "react-router";
-import { openInNewIconElement } from "~/components/openInNewWindow";
+import { OpenInNewIcon } from "~/components/OpenInNewIcon.tsx";
 import { footer } from "~/resources/content/shared/footer";
 import { general } from "~/resources/content/shared/general.ts";
 import tailwindMerge from "~/utils/tailwindMerge";
@@ -26,7 +26,7 @@ const FooterLink = ({ link }: { link: LinkProps }) => (
       }
     >
       <span className="flex items-center">
-        {link.text} {link.openInNewTab && openInNewIconElement}
+        {link.text} {link.openInNewTab && <OpenInNewIcon />}
       </span>
     </Link>
     {link?.postText && <> {link.postText}</>}

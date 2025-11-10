@@ -1,7 +1,6 @@
 import Image from "app/components/Image";
 import { Link } from "react-router";
-import { openInNewIconElement } from "~/components/openInNewWindow";
-import { general } from "~/resources/content/shared/general.ts";
+import { OpenInNewIcon } from "~/components/OpenInNewIcon.tsx";
 import tailwindMerge from "~/utils/tailwindMerge";
 import { ZFL_EMAIL, ZFL_PHONE } from "../constants";
 import {
@@ -28,12 +27,9 @@ const FooterLink = ({ link }: { link: LinkProps }) => (
       className="text-link increase-tap-area"
       target={link.openInNewTab ? "_blank" : undefined}
       rel={link.openInNewTab ? "noreferrer" : undefined}
-      aria-description={
-        link.openInNewTab ? general.a11yMessageNewWindow : undefined
-      }
     >
       <span className="flex items-center">
-        {link.text} {link.openInNewTab && openInNewIconElement}
+        {link.text} {link.openInNewTab && <OpenInNewIcon />}
       </span>
     </Link>
     {link?.postText && <> {link.postText}</>}

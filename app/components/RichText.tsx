@@ -1,10 +1,9 @@
 import { marked, Marked, type Renderer, type Tokens } from "marked";
-import { general } from "~/resources/content/shared/general.ts";
 import { getDownloadableExtensionName } from "~/utils/fileExtensionUtils";
 import twMerge from "~/utils/tailwindMerge";
 import { isExternalUrl } from "~/utils/utilFunctions";
 import { dowloadIconString } from "./downloadIcon";
-import { openInNewIconString } from "./openInNewWindow";
+import { openInNewIconString } from "./OpenInNewIcon.tsx";
 
 export type RichTextProps = {
   markdown: string;
@@ -31,7 +30,7 @@ const RichText = ({
           return linkHtml
             .replace(
               /^<a /,
-              `<a target="_blank" aria-description="${general.a11yMessageNewWindow}" class="group inline-flex items-center"`,
+              '<a target="_blank" class="group inline-flex items-center"',
             )
             .replace(
               `>${token.text}<`,

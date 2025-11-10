@@ -1,6 +1,5 @@
 import { Link, LinkProps } from "react-router";
-import { openInNewIconElement } from "~/components/openInNewWindow.tsx";
-import { general } from "~/resources/content/shared/general.ts";
+import { OpenInNewIcon } from "~/components/OpenInNewIcon.tsx";
 import twMerge from "~/utils/tailwindMerge";
 
 export type CustomLinkProps = Omit<LinkProps, "target">;
@@ -18,10 +17,9 @@ export default function NewTabLink({
       {...props}
       target="_blank"
       className={twMerge("flex items-center", className)}
-      aria-description={general.a11yMessageNewWindow}
     >
       {children}
-      {openInNewIconElement}
+      <OpenInNewIcon />
     </Link>
   );
 }
