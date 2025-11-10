@@ -3,7 +3,7 @@ import type { PropsWithChildren } from "react";
 import twMerge from "~/utils/tailwindMerge";
 
 type InputErrorProps = PropsWithChildren<{
-  id: string;
+  id?: string;
   look?: "error" | "warning";
 }>;
 

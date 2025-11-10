@@ -28,7 +28,6 @@ import {
   ROUTE_PRECHECK,
   ROUTE_PRECHECK_RESULT,
 } from "~/resources/staticRoutes";
-import type { PreCheckAnswers } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import buildMailtoRedirectUri from "~/routes/vorpruefung.ergebnis/buildMailtoRedirectUri";
 import getContentForResult, {
   type Reason,
@@ -45,9 +44,10 @@ import {
 import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/route";
 import { PreCheckResult, ResultType } from "./PreCheckResult";
-import getResultValidatorForAnswers from "./resultValidation";
+import { schema } from "./resultValidation";
 
 import { LinkAction, Step } from "~/utils/contentTypes.ts";
+import { PreCheckAnswers } from "../vorpruefung._preCheckNavigation.$questionId";
 
 const { questions } = preCheck;
 
@@ -93,19 +93,8 @@ export async function loader({ request }: Route.LoaderArgs) {
 
 export async function action({ request }: Route.ActionArgs) {
   const formData = await request.formData();
-  const { title, negativeReasoning, ...answers } = Object.fromEntries(formData);
 
-  // server side form validation in case the user has JavaScript disabled
-  const preCheckAnswers = answers as PreCheckAnswers;
-  const schema = getResultValidatorForAnswers(preCheckAnswers);
-
-  // parseFormData expects a FormData to be passed, thats why we create a new one here
-  const partialFormData = new FormData();
-  if (title) partialFormData.append("title", title);
-  if (negativeReasoning)
-    partialFormData.append("negativeReasoning", negativeReasoning);
-
-  const validationResult = await parseFormData(partialFormData, schema);
+  const validationResult = await parseFormData(formData, schema);
 
   if (validationResult.error) {
     return validationError(
@@ -114,8 +103,17 @@ export async function action({ request }: Route.ActionArgs) {
     );
   }
 
-  const result = getResultForAnswers(preCheckAnswers);
-  const resultContent = getContentForResult(preCheckAnswers, result);
+  const mappedAnswers = validationResult.data.answers.reduce(
+    (prev, { questionId, answer }) => ({
+      ...prev,
+      [questionId]: answer,
+    }),
+    {},
+  ) as PreCheckAnswers;
+
+  const result = getResultForAnswers(mappedAnswers);
+  const resultContent = getContentForResult(mappedAnswers, result);
+
   return redirect(
     buildMailtoRedirectUri(
       result,

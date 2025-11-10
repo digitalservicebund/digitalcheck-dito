@@ -96,18 +96,9 @@ vi.mock("react-router", async (importOriginal) => {
   };
 });
 
-vi.mock("@rvf/react-router", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@rvf/react-router")>();
-  return {
-    ...actual,
-    useForm: () => ({
-      getFormProps: vi.fn(),
-      value: vi.fn(),
-      formState: {
-        submitStatus: "",
-      },
-    }),
-  };
+vi.mock("@rvf/react-router", async () => {
+  const rvfReact = await import("@rvf/react");
+  return rvfReact;
 });
 
 // the name parameter is used for the test name

@@ -4,20 +4,21 @@ import {
   EmailOutlined,
 } from "@digitalservicebund/icons";
 import { useForm } from "@rvf/react-router";
-import React, { Dispatch, SetStateAction, useMemo, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import Alert from "~/components/Alert";
 import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox.tsx";
-import Input from "~/components/Input";
+import InputError from "~/components/InputError";
+import InputNew from "~/components/InputNew";
 import RichText from "~/components/RichText";
-import Textarea from "~/components/Textarea";
+import TextareaNew from "~/components/TextareaNew";
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
-import type { PreCheckAnswers } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { buildEmailBody } from "~/routes/vorpruefung.ergebnis/buildMailtoRedirectUri.ts";
-import getResultValidatorForAnswers from "~/routes/vorpruefung.ergebnis/resultValidation";
+import { schema } from "~/routes/vorpruefung.ergebnis/resultValidation";
+import { PreCheckAnswers } from "../vorpruefung._preCheckNavigation.$questionId";
 import { PreCheckResult, ResultType } from "./PreCheckResult";
 import { ResultContent } from "./getContentForResult";
 
@@ -38,33 +39,37 @@ export default function ResultForm({
   const [isMailAddressCopied, setIsMailAddressCopied] = useState(false);
 
   const form = useForm({
-    schema: getResultValidatorForAnswers(answers),
+    schema,
     method: "post",
     onBeforeSubmit: async ({ getValidatedData }) => {
       if (await getValidatedData()) setShowEmailAlert(true);
     },
     defaultValues: {
+      answers: Object.entries(answers).map(([questionId, answer]) => ({
+        questionId,
+        answer,
+      })),
       title: "",
       negativeReasoning: undefined,
     },
   });
 
-  const handleVorhabenTitleChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setVorhabenTitle(event.target.value);
-  };
+  useEffect(() => {
+    const unsubscribeTitle = form.subscribe.value("title", setVorhabenTitle);
+    const unsubscribeNegativeResoning = form.subscribe.value(
+      "negativeReasoning",
+      (value) => {
+        if (value && value.length > 2000)
+          setWarning(preCheckResult.form.reasonLong);
+        else setWarning(null);
+      },
+    );
 
-  const handleNegativeReasoningChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>,
-  ) => {
-    const value = event.target.value;
-    if (value.length > 2000) {
-      setWarning(preCheckResult.form.reasonLong);
-    } else {
-      setWarning(null);
-    }
-  };
+    return () => {
+      unsubscribeTitle();
+      unsubscribeNegativeResoning();
+    };
+  }, [form, setVorhabenTitle]);
 
   const emailPreviewBody = useMemo(() => {
     const currentVorhabenTitle = form.value("title") ?? "";
@@ -100,39 +105,41 @@ export default function ResultForm({
   return (
     <>
       <form {...form.getFormProps()} data-testid="result-form">
+        {Object.entries(answers).map((_, i) => {
+          const questionField = form.field(`answers[${i}].questionId`);
+          const answerField = form.field(`answers[${i}].answer`);
+
+          return (
+            <div key={`questionId-${i}`} className="hidden">
+              <input {...questionField.getHiddenInputProps()} />
+              <input {...answerField.getHiddenInputProps()} />
+            </div>
+          );
+        })}
+
         <fieldset className="ds-stack ds-stack-24">
           <legend>
             <Heading tagName="h3" text={preCheckResult.form.formLegend} />
           </legend>
           <div className="flex items-start pb-[40px]">
-            <div className="mr-[16px] flex-shrink-0">
+            <div className="mr-[16px] shrink-0">
               <EmailOutlined className="h-40 w-40 fill-blue-800" />
             </div>
-            <div className="ds-stack ds-stack-16 flex-grow">
+            <div className="ds-stack ds-stack-16 grow">
               <RichText markdown={preCheckResult.form.instructions} />
-              {Object.keys(answers).map((answer) => (
-                <input
-                  key={answer}
-                  name={answer}
-                  value={answers[answer]}
-                  type="hidden"
-                />
-              ))}
-              <Input
-                className="pb-4"
-                name="title"
-                label={preCheckResult.form.vorhabenTitleLabel}
-                error={form.error("title")}
-                onChange={handleVorhabenTitleChange}
-              />
+              <InputNew scope={form.scope("title")}>
+                {preCheckResult.form.vorhabenTitleLabel}
+              </InputNew>
+
               {result.digital === ResultType.NEGATIVE && (
-                <Textarea
-                  name="negativeReasoning"
-                  label={preCheckResult.form.reasonLabel}
-                  error={form.error("negativeReasoning")}
-                  warning={warning}
-                  onChange={handleNegativeReasoningChange}
-                />
+                <>
+                  <TextareaNew scope={form.scope("negativeReasoning")}>
+                    {preCheckResult.form.reasonLabel}
+                  </TextareaNew>
+                  {warning && (
+                    <InputError look={"warning"}>{warning}</InputError>
+                  )}
+                </>
               )}
               <ButtonContainer>
                 <Button
@@ -163,10 +170,10 @@ export default function ResultForm({
       </form>
 
       <div className="flex items-start">
-        <div className="mr-[16px] flex-shrink-0">
+        <div className="mr-[16px] shrink-0">
           <DriveFileRenameOutline className="h-40 w-40 fill-blue-800" />
         </div>
-        <div className="ds-stack ds-stack-24 flex-grow">
+        <div className="ds-stack ds-stack-24 grow">
           <RichText markdown={preCheckResult.form.copyIntroText}></RichText>
           <DetailsSummary
             showVerticalLine
@@ -207,7 +214,7 @@ export default function ResultForm({
           </ButtonContainer>
         </div>
       </div>
-      <hr className="mt-40 mb-32 border-t-[2px] border-gray-400" />
+      <hr className="mt-40 mb-32 border-t-2 border-gray-400" />
 
       <InfoBox
         heading={{

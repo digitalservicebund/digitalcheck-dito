@@ -145,10 +145,10 @@ function getInfoboxContentForResult(
 }
 
 function getInlineNoticeContentForResult(result: PreCheckResult) {
-  const isDigitalPositive = result.digital === ResultType.POSITIVE;
+  const isDigitalNegative = result.digital === ResultType.NEGATIVE;
   const isEuBezugPositive = result.euBezug === ResultType.POSITIVE;
 
-  if (!isDigitalPositive && isEuBezugPositive)
+  if (isDigitalNegative && isEuBezugPositive)
     return {
       title: preCheckResult.inlineNotice.title,
       text: preCheckResult.inlineNotice.content,

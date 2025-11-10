@@ -2,14 +2,13 @@ import { parseFormData, useForm, validationError } from "@rvf/react-router";
 import { useEffect, useState } from "react";
 import { redirect, useLoaderData } from "react-router";
 
-import { z } from "zod";
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
-import RadioGroup from "~/components/RadioGroup";
+import RadioGroupNew from "~/components/RadioGroupNew";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { preCheck } from "~/resources/content/vorpruefung";
@@ -23,6 +22,7 @@ import {
 } from "~/utils/cookies.server";
 import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/vorpruefung._preCheckNavigation.$questionId";
+import { answerSchema } from "./vorpruefung.ergebnis/resultValidation";
 
 const { questions, answerOptions, nextButton } = preCheck;
 
@@ -48,23 +48,8 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   return { questionIdx, question: questions[questionIdx], answers };
 }
 
-const schema = z.object({
-  answer: z
-    .string("Bitte wählen Sie eine Option aus.")
-    .refine(
-      (answer) => Object.keys(answerOptions).includes(answer),
-      "Bitte wählen Sie eine existierende Option aus.",
-    ),
-  questionId: z
-    .string("Bitte geben Sie eine Frage an.")
-    .refine(
-      (questionId) => questions.map((q) => q.id).includes(questionId),
-      "Bitte wählen Sie eine existierende Frage aus.",
-    ),
-});
-
 export async function action({ request }: Route.ActionArgs) {
-  const result = await parseFormData(await request.formData(), schema);
+  const result = await parseFormData(await request.formData(), answerSchema);
 
   if (result.error) return validationError(result.error);
 
@@ -125,7 +110,7 @@ export type TQuestion = {
 
 export type PreCheckAnswerOption = {
   value: "yes" | "no" | "unsure";
-  text: string;
+  label: string;
 };
 
 export type PreCheckAnswers = {
@@ -135,41 +120,40 @@ export type PreCheckAnswers = {
 export default function Index() {
   const { questionIdx, question, answers } = useLoaderData<typeof loader>();
   const existingAnswer = answers?.[question.id];
-
-  const [selectedOption, setSelectedOption] = useState<
-    PreCheckAnswerOption["value"] | null
-  >(null);
-
-  const checkForAnswerConflict = () => {
-    if (question.id !== "eu-bezug") return false;
-    const allAnswersNo = Object.entries(answers)
-      .filter((answer) => answer[0] !== "eu-bezug")
-      .every((answer) => answer[1] === "no");
-
-    return allAnswersNo && (selectedOption ?? existingAnswer) === "yes";
-  };
-
-  const hasAnswerConflict = checkForAnswerConflict();
+  const [hasAnswerConflict, setHasAnswerConflict] = useState(false);
 
   const form = useForm({
-    schema,
+    schema: answerSchema,
     method: "post",
     defaultValues: {
-      answer: "",
-      questionId: "",
+      questionId: question.id,
+      answer: existingAnswer,
     },
   });
 
   useEffect(() => {
-    // Clear the selection state when the question changes
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setSelectedOption(null);
-  }, [question.id]);
+    if (question.id !== "eu-bezug") return;
+
+    const checkHasAnswerConflict = (currentAnswer?: string) => {
+      const allAnswersNo = Object.entries(answers)
+        .filter((answer) => answer[0] !== "eu-bezug")
+        .every((answer) => answer[1] === "no");
+
+      setHasAnswerConflict(
+        allAnswersNo && (currentAnswer ?? existingAnswer) === "yes",
+      );
+    };
+
+    const unsubscribe = form.subscribe.value("answer", checkHasAnswerConflict);
+    checkHasAnswerConflict();
+
+    return () => unsubscribe();
+  }, [question.id, answers, existingAnswer, form]);
 
   const options: PreCheckAnswerOption[] = Object.entries(answerOptions).map(
-    ([value, text]) => ({
+    ([value, label]) => ({
       value: value as PreCheckAnswerOption["value"],
-      text,
+      label,
     }),
   );
 
@@ -182,7 +166,7 @@ export default function Index() {
           )?.title
         }
       />
-      <input type="hidden" name="questionId" value={question.id} />
+      <input {...form.getHiddenInputProps("questionId")} />
       <fieldset className="space-y-32">
         <span className="sr-only">{`${preCheck.srHint.before}${questionIdx + 1}${preCheck.srHint.between}${questions.length}`}</span>
         <legend className="ds-stack ds-stack-16">
@@ -201,19 +185,7 @@ export default function Index() {
             />
           )}
         </legend>
-        <RadioGroup
-          name="answer"
-          options={options}
-          selectedValue={selectedOption ?? existingAnswer}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setSelectedOption(e.target.value as PreCheckAnswerOption["value"])
-          }
-          error={
-            form.formState.submitStatus == "error"
-              ? form.error("answer")
-              : undefined
-          }
-        />
+        <RadioGroupNew scope={form.scope("answer")} options={options} />
       </fieldset>
       <div className="space-y-40">
         {hasAnswerConflict && (

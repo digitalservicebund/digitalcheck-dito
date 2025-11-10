@@ -48,7 +48,7 @@ export default function LayoutWithPreCheckNavigation() {
           </div>
         )}
         <section>
-          <Outlet />
+          <Outlet key={question?.url} />
         </section>
       </div>
     </div>

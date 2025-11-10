@@ -39,13 +39,10 @@ vi.mock("react-router", async (importOriginal) => {
 
 vi.mock("@rvf/react-router", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@rvf/react-router")>();
+  const rvfReact = await import("@rvf/react");
   return {
     ...actual,
-    useForm: () => ({
-      getFormProps: vi.fn(),
-      value: vi.fn(),
-      error: vi.fn(),
-    }),
+    ...rvfReact,
   };
 });
 
@@ -61,6 +58,7 @@ type ExpectedResult = {
   showsUnsureHeading: boolean;
   includesInterop: boolean;
   furtherStepsVisible: boolean;
+  showsAnswerConflictWarning?: boolean;
   showsUnsureHint?: boolean;
   emailBodyContains?: string[];
   allPositive?: boolean;
@@ -188,6 +186,7 @@ const scenarios: TestScenario[] = [
       furtherStepsVisible: false,
       includesNkrRecipient: true,
       includesDigitalcheckTeam: false,
+      showsAnswerConflictWarning: true,
     },
   },
   {
@@ -340,11 +339,17 @@ function createRequest(
   negativeReasoning?: string,
 ) {
   const form: { [key: string]: string } = mapUserAnswersToMockAnswers(answers);
-  if (title) form["title"] = title;
-  if (negativeReasoning) form["negativeReasoning"] = negativeReasoning;
 
   const formData = new FormData();
-  for (const [key, value] of Object.entries(form)) formData.append(key, value);
+
+  if (title) formData.append("title", title);
+  if (negativeReasoning)
+    formData.append("negativeReasoning", negativeReasoning);
+
+  for (const [i, [key, value]] of Object.entries(form).entries()) {
+    formData.append(`answers[${i}].questionId`, key);
+    formData.append(`answers[${i}].answer`, value);
+  }
   return { formData: () => formData } as unknown as Request;
 }
 
@@ -422,6 +427,22 @@ describe("Vorprüfung Ergebnis Page", () => {
               ).not.toBeInTheDocument();
               expect(
                 screen.queryByRole("link", { name: "Übersichtsseite" }),
+              ).not.toBeInTheDocument();
+            }
+          });
+
+          it("shows/hides warning for answer conflict", () => {
+            if (expected.showsAnswerConflictWarning) {
+              expect(
+                screen.getByText(
+                  "Es liegt ein Widerspruch in Ihren Angaben vor.",
+                ),
+              ).toBeInTheDocument();
+            } else {
+              expect(
+                screen.queryByText(
+                  "Es liegt ein Widerspruch in Ihren Angaben vor.",
+                ),
               ).not.toBeInTheDocument();
             }
           });
@@ -546,9 +567,7 @@ describe("Vorprüfung Ergebnis Page", () => {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
               expect(res.data.fieldErrors).toStrictEqual({
                 title: "Invalid input: expected string, received undefined",
-                negativeReasoning:
-                  "Invalid input: expected string, received undefined",
-              });
+              }); // validation for Begründung is no longer on the field itself (it is added via a superRefine call)
             });
 
             it("throws an error when only Arbeitstitel is given", async () => {
@@ -561,8 +580,7 @@ describe("Vorprüfung Ergebnis Page", () => {
               // @ts-expect-error init does exist here
               // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
               expect(res.data.fieldErrors).toStrictEqual({
-                negativeReasoning:
-                  "Invalid input: expected string, received undefined",
+                "": "Bitte geben Sie eine Begründung für den fehlenden Digitalbezug an.", // validation is for Begründung, added via a superRefine call
               });
             });
 
