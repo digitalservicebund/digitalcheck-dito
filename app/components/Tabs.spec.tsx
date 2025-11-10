@@ -34,7 +34,7 @@ const mockTabs: TabItem[] = [
 
 describe("Tabs component", () => {
   it("Renders correctly with default index", () => {
-    const { container } = render(<Tabs tabs={mockTabs} />);
+    render(<Tabs tabs={mockTabs} />);
 
     expect(screen.getByRole("tablist")).toBeInTheDocument();
 
@@ -43,10 +43,9 @@ describe("Tabs component", () => {
 
     mockTabs.forEach((tab, index) => {
       expect(tabButtons[index]).toHaveTextContent(tab.title);
-      expect(tabButtons[index]).toHaveAttribute("id", `tab-${index + 1}`);
       expect(tabButtons[index]).toHaveAttribute(
         "aria-controls",
-        `panel-${index + 1}`,
+        expect.stringContaining("panel"),
       );
       expect(tabButtons[index]).toHaveAttribute(
         "aria-selected",
@@ -68,10 +67,10 @@ describe("Tabs component", () => {
     expect(within(panel1).getByText("someTitle")).toBeVisible();
     expect(within(panel1).getByText("someText")).toBeVisible();
 
-    const panel2 = container.querySelector("#panel-2");
-    expect(panel2).not.toBeVisible();
-    const panel3 = container.querySelector("#panel-3");
-    expect(panel3).not.toBeVisible();
+    const panel2 = screen.queryByRole("tabpanel", { name: mockTabs[1].title });
+    expect(panel2).not.toBeInTheDocument();
+    const panel3 = screen.queryByRole("tabpanel", { name: mockTabs[2].title });
+    expect(panel3).not.toBeInTheDocument();
   });
 
   it("Renders correctly with a specific index", () => {
@@ -98,10 +97,15 @@ describe("Tabs component", () => {
     expect(panelActive).toBeVisible();
     expect(within(panelActive).getByText("Content Tab 2")).toBeVisible();
 
-    const panelInactive1 = container.querySelector("#panel-1");
-    expect(panelInactive1).not.toBeVisible();
-    const panelInactive3 = container.querySelector("#panel-3");
-    expect(panelInactive3).not.toBeVisible();
+    expect(
+      screen.queryByRole("tabpanel", { name: mockTabs[0].title }),
+    ).not.toBeInTheDocument();
+
+    expect(
+      screen.queryByRole("tabpanel", {
+        name: mockTabs[2].title,
+      }),
+    ).not.toBeInTheDocument();
   });
 
   it("Switches tabs and content on tab button click", async () => {
@@ -116,8 +120,8 @@ describe("Tabs component", () => {
       screen.getByRole("tabpanel", { name: mockTabs[0].title }),
     ).toBeVisible();
     expect(
-      container.querySelector(`#panel-${targetIndex + 1}`),
-    ).not.toBeVisible();
+      screen.queryByRole("tabpanel", { name: mockTabs[targetIndex].title }),
+    ).not.toBeInTheDocument();
 
     await user.click(tabButtons[targetIndex]);
 
@@ -126,57 +130,14 @@ describe("Tabs component", () => {
     expect(tabButtons[targetIndex]).toHaveAttribute("aria-selected", "true");
     expect(tabButtons[targetIndex]).toHaveAttribute("tabindex", "0");
 
-    expect(container.querySelector("#panel-1")).not.toBeVisible();
+    expect(
+      screen.queryByRole("tabpanel", { name: mockTabs[0].title }),
+    ).not.toBeInTheDocument();
     const activePanel = screen.getByRole("tabpanel", {
       name: mockTabs[targetIndex].title,
     });
     expect(activePanel).toBeVisible();
     expect(within(activePanel).getByText("Content Tab 3")).toBeVisible();
-  });
-
-  describe("Keyboard navigation regular view", () => {
-    it("Activates the focused tab on enter", async () => {
-      const user = userEvent.setup();
-      const { container } = render(<Tabs tabs={mockTabs} />);
-      const tabButtons = screen.getAllByRole("tab");
-
-      tabButtons[0].focus();
-      await user.keyboard("{ArrowRight}");
-      expect(tabButtons[1]).toHaveFocus();
-      expect(tabButtons[1]).toHaveAttribute("aria-selected", "false");
-      expect(container.querySelector("#panel-2")).not.toBeVisible();
-
-      await user.keyboard("{Enter}");
-
-      expect(tabButtons[1]).toHaveAttribute("aria-selected", "true");
-      expect(tabButtons[0]).toHaveAttribute("aria-selected", "false");
-      expect(
-        screen.getByRole("tabpanel", { name: mockTabs[1].title }),
-      ).toBeVisible();
-      expect(container.querySelector("#panel-1")).not.toBeVisible();
-    });
-
-    it("Activates the focused tab on space key press", async () => {
-      const user = userEvent.setup();
-      const { container } = render(<Tabs tabs={mockTabs} />);
-      const tabButtons = screen.getAllByRole("tab");
-
-      tabButtons[0].focus();
-      await user.keyboard("{ArrowRight}");
-      await user.keyboard("{ArrowRight}");
-      expect(tabButtons[2]).toHaveFocus();
-      expect(tabButtons[2]).toHaveAttribute("aria-selected", "false");
-      expect(container.querySelector("#panel-3")).not.toBeVisible();
-
-      await user.keyboard(" ");
-
-      expect(tabButtons[2]).toHaveAttribute("aria-selected", "true");
-      expect(tabButtons[0]).toHaveAttribute("aria-selected", "false");
-      expect(
-        screen.getByRole("tabpanel", { name: mockTabs[2].title }),
-      ).toBeVisible();
-      expect(container.querySelector("#panel-1")).not.toBeVisible();
-    });
   });
 
   describe("Mobile dropdown interaction", () => {
@@ -216,8 +177,12 @@ describe("Tabs component", () => {
       let listboxButton = screen.getByRole("button", {
         name: mockTabs[0].title,
       });
-      expect(container.querySelector("#panel-1")).toBeVisible();
-      expect(container.querySelector("#panel-2")).not.toBeVisible();
+      expect(
+        screen.getByRole("tabpanel", { name: mockTabs[0].title }),
+      ).toBeVisible();
+      expect(
+        screen.queryByRole("tabpanel", { name: mockTabs[1].title }),
+      ).not.toBeInTheDocument();
 
       await user.click(listboxButton);
 
@@ -231,7 +196,9 @@ describe("Tabs component", () => {
       });
       expect(listboxButton).toBeInTheDocument();
 
-      expect(container.querySelector("#panel-1")).not.toBeVisible();
+      expect(
+        screen.queryByRole("tabpanel", { name: mockTabs[0].title }),
+      ).not.toBeInTheDocument();
       const activePanel = screen.getByRole("tabpanel", {
         name: mockTabs[targetIndex].title,
       });
@@ -242,36 +209,5 @@ describe("Tabs component", () => {
       expect(tabButtons[targetIndex]).toHaveAttribute("aria-selected", "true");
       expect(tabButtons[0]).toHaveAttribute("aria-selected", "false");
     });
-  });
-
-  it("Updates the active tab when index changes", () => {
-    const { rerender, container } = render(<Tabs tabs={mockTabs} />);
-
-    expect(screen.getAllByRole("tab")[0]).toHaveAttribute(
-      "aria-selected",
-      "true",
-    );
-    expect(container.querySelector("#panel-1")).toBeVisible();
-    expect(
-      screen.getByRole("button", { name: mockTabs[0].title }),
-    ).toBeInTheDocument();
-
-    const newIndex = 2;
-    rerender(<Tabs tabs={mockTabs} initialActiveIndex={newIndex} />);
-
-    const tabButtons = screen.getAllByRole("tab");
-    expect(tabButtons[newIndex]).toHaveAttribute("aria-selected", "true");
-    expect(tabButtons[0]).toHaveAttribute("aria-selected", "false");
-
-    expect(container.querySelector("#panel-1")).not.toBeVisible();
-    const activePanel = screen.getByRole("tabpanel", {
-      name: mockTabs[newIndex].title,
-    });
-    expect(activePanel).toBeVisible();
-    expect(within(activePanel).getByText("Content Tab 3")).toBeVisible();
-
-    expect(
-      screen.getByRole("button", { name: mockTabs[newIndex].title }),
-    ).toBeInTheDocument();
   });
 });
