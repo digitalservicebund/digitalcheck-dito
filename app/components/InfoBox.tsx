@@ -130,7 +130,7 @@ const InfoBox = ({
         )}
 
         {actions && actions.length > 0 && (
-          <ButtonContainer>
+          <ButtonContainer className="mt-24">
             {actions.map((button) => {
               if ("linkTo" in button) {
                 const { linkTo, text, ...rest } = button;
