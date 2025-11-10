@@ -4,7 +4,6 @@ import { useLocation } from "react-router";
 import { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";
-import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image";
@@ -95,12 +94,7 @@ export default function Index() {
               <div className="flex-none space-y-20 md:w-[310px]">
                 <div className="bg-white">
                   <div className="p-28">
-                    <Header
-                      heading={{
-                        tagName: "h4",
-                        text: offering.sellingPoints,
-                      }}
-                    />
+                    <h4>{offering.sellingPoints}</h4>
                     <div className="divide-y divide-gray-700">
                       {offering.details.map((detail) => (
                         <div key={detail.title} className="py-16">

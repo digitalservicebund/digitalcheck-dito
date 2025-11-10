@@ -14,7 +14,6 @@ import { twJoin } from "tailwind-merge";
 import Accordion from "~/components/Accordion";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
-import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox.tsx";
 import InfoTooltip from "~/components/InfoTooltip";
@@ -158,6 +157,22 @@ function getReasonListItem(reason: Reason) {
   );
 }
 
+/**
+ * A title element for printouts.
+ */
+function PrintTitle({ title }: { title: string }) {
+  return (
+    <Heading
+      tagName="h2"
+      look="ds-heading-03-reg"
+      className="hidden pb-24 font-bold print:block"
+    >
+      {preCheckResult.print.titlePrefix}
+      {title}
+    </Heading>
+  );
+}
+
 export default function Result() {
   const { result, answers, resultContent } = useLoaderData<typeof loader>();
   const [vorhabenTitle, setVorhabenTitle] = useState("");
@@ -189,29 +204,22 @@ export default function Result() {
                 : "bg-blue-300",
             )}
           >
-            {vorhabenTitle && (
-              <Header
-                heading={{
-                  tagName: "h2",
-                  look: "ds-heading-03-reg",
-                  text: `${preCheckResult.print.titlePrefix}${vorhabenTitle}`,
-                  className: "hidden print:block pb-24 font-bold",
-                }}
-              />
-            )}
+            {vorhabenTitle && <PrintTitle title={vorhabenTitle} />}
             <div className="flex flex-col gap-16 sm:flex-row">
               <div className="flex size-36 flex-none items-center justify-center">
                 {getHeaderIcon()}
               </div>
-              <Header
-                heading={{
-                  tagName: "h1",
-                  look: "ds-heading-02-reg",
-                  markdown: resultContent.title,
-                  className: "mb-0",
-                }}
-                {...(resultHint && { content: { markdown: resultHint } })}
-              />
+              <div>
+                <Heading tagName="h1" look="ds-heading-02-reg" className="mb-0">
+                  <RichText markdown={resultContent.title} />
+                </Heading>
+                {resultHint && (
+                  <RichText
+                    markdown={resultHint}
+                    className="ds-subhead mt-16"
+                  />
+                )}
+              </div>
             </div>
           </Container>
           <Container className="space-y-40 rounded-b-lg bg-white">

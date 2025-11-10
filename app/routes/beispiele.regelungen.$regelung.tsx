@@ -1,7 +1,6 @@
 import { useLoaderData, useOutletContext } from "react-router";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
-import Header from "~/components/Header";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InlineNotice from "~/components/InlineNotice";
@@ -125,18 +124,20 @@ export default function Gesetz() {
       title: examplesRegelungen.visualisations.tabName,
       content: (
         <div className="ds-stack ds-stack-32">
-          <Header
-            heading={{
-              id: slugify(examplesRegelungen.visualisations.title),
-              text: examplesRegelungen.visualisations.title,
-              tagName: "h2",
-              look: "ds-heading-02-bold",
-              className: "pb-40",
-            }}
-            content={{
-              markdown: examplesRegelungen.visualisations.subtitle,
-            }}
-          />
+          <div className="mb-40 space-y-16">
+            <Heading
+              id={slugify(examplesRegelungen.visualisations.title)}
+              tagName="h2"
+              look="ds-heading-02-bold"
+            >
+              {examplesRegelungen.visualisations.title}
+            </Heading>
+            <RichText
+              markdown={examplesRegelungen.visualisations.subtitle}
+              className="ds-subhead"
+            />
+          </div>
+
           {regelung.Visualisierungen.map((visualisierung) => (
             <VisualisationItem
               key={visualisierung.Bild.documentId}
@@ -158,18 +159,19 @@ export default function Gesetz() {
       title: examplesRegelungen.nkr.tabName,
       content: (
         <>
-          <Header
-            heading={{
-              id: slugify(examplesRegelungen.nkr.title),
-              text: examplesRegelungen.nkr.title,
-              tagName: "h2",
-              look: "ds-heading-02-bold",
-              className: "pb-40",
-            }}
-            content={{
-              markdown: examplesRegelungen.nkr.subtitle,
-            }}
-          />
+          <div className="mb-16 space-y-16">
+            <Heading
+              id={slugify(examplesRegelungen.nkr.title)}
+              tagName="h2"
+              look="ds-heading-02-bold"
+            >
+              {examplesRegelungen.nkr.title}
+            </Heading>
+            <RichText
+              markdown={examplesRegelungen.nkr.subtitle}
+              className="ds-subhead"
+            />
+          </div>
           {regelung.Digitalchecks.filter(
             ({ NKRStellungnahmeDCText }) => !!NKRStellungnahmeDCText,
           ).map((digitalcheck) => (
