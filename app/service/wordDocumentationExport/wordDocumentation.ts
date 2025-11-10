@@ -73,7 +73,7 @@ export const createDoc = async (
   });
 };
 
-const toParagraphPatch = (content: string): IPatch => ({
+export const toParagraphPatch = (content: string): IPatch => ({
   type: PatchType.PARAGRAPH,
   children: stringToTextRuns(content),
 });
@@ -84,7 +84,7 @@ const answerOrPlaceholder = (answer?: string) =>
 const answerOrPlaceholderOptional = (answer?: string) =>
   answer || documentationDocument.placeholderOptional;
 
-const stringToTextRuns = (content: string) =>
+export const stringToTextRuns = (content: string) =>
   content
     .split("\n")
     .map((line, idx) => new TextRun({ text: line, break: Number(idx > 0) }));
@@ -95,18 +95,15 @@ const stringToTextRuns = (content: string) =>
 // - Answer for the principle
 // - Reasoning (in case of a negative answer)
 // - Aspects and own explanation (partially filled in case of a positive answer)
-const buildPrinciplePatches = (
+export const buildPrinciplePatches = (
   prinzips: PrinzipWithAspekte[],
   answers: DocumentationData["principles"],
 ): Record<string, IPatch> =>
   prinzips.reduce((acc, prinzip, prinzipIndex) => {
     const answer = answers?.find((answer) => answer.id === prinzip.documentId);
-    const hasPositivePrincipleAnswer =
-      answer && answer.answer && answer.answer.includes("Ja");
+    const hasPositivePrincipleAnswer = answer?.answer?.includes("Ja");
     const hasNegativePrincipleAnswer =
-      answer &&
-      answer.answer &&
-      (answer.answer.includes("Nein") || answer.answer.includes("Nicht"));
+      answer?.answer?.includes("Nein") || answer?.answer?.includes("Nicht");
 
     // Build the aspects content from Strapi and user answers (if positive)
     const aspectsContent = prinzip.Aspekte.flatMap((aspekt) => {
@@ -174,7 +171,7 @@ const buildPrinciplePatches = (
     };
   }, {});
 
-const indentOptions = {
+export const indentOptions = {
   indent: {
     left: convertInchesToTwip(0.5),
   },
