@@ -43,7 +43,6 @@ function RadioGroupNew<FormData, Value extends string | number = string>({
       aria-labelledby={label ? `${field.name()}-label` : undefined}
       aria-errormessage={errorId}
       aria-invalid={!!field.error()}
-      aria-required={required}
     >
       {label ? (
         <legend id={`${field.name()}-label`} className="mb-24">
@@ -62,6 +61,7 @@ function RadioGroupNew<FormData, Value extends string | number = string>({
                 id: id,
                 "aria-describedby": errorId,
                 "aria-invalid": hasError || hasWarning,
+                "aria-required": required,
                 className: twMerge(
                   "ds-radio self-start",
                   hasError && "has-error",
