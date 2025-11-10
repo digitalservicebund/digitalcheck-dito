@@ -109,14 +109,19 @@ const buildPrinciplePatches = (
       (answer.answer.includes("Nein") || answer.answer.includes("Nicht"));
 
     // Build the aspects content from Strapi and user answers (if positive)
-    const aspectsContent = prinzip.Aspekte.flatMap((aspekt, aspektIndex) =>
-      buildReasoningParagraphs(
-        hasPositivePrincipleAnswer
-          ? (answer?.reasoning?.[aspektIndex] as PrincipleReasoning)
-          : {},
+    const aspectsContent = prinzip.Aspekte.flatMap((aspekt) => {
+      // Find the reasoning entry where the aspect matches
+      const matchingReasoning = Array.isArray(answer?.reasoning)
+        ? answer?.reasoning?.find(
+            (reasoning) => reasoning.aspect === slugify(aspekt.Kurzbezeichnung),
+          )
+        : undefined;
+
+      return buildAspectParagraphs(
+        hasPositivePrincipleAnswer ? matchingReasoning : {},
         aspekt,
-      ),
-    );
+      );
+    });
 
     // Add the own explanation content
     let ownExplanationContent: Paragraph[] = [];
@@ -124,12 +129,12 @@ const buildPrinciplePatches = (
       // Can have multiple own explanations
       ownExplanationContent = answer.reasoning
         .filter((reasoning) => !reasoning.aspect)
-        .flatMap((reasoning) => buildReasoningParagraphs(reasoning));
+        .flatMap((reasoning) => buildAspectParagraphs(reasoning));
       // This field would not need to be filled in case of a positive answer
     }
     // Should always have at least one empty for the user to fill
     if (ownExplanationContent.length === 0) {
-      ownExplanationContent = buildReasoningParagraphs({});
+      ownExplanationContent = buildAspectParagraphs({});
     }
 
     return {
@@ -176,7 +181,7 @@ const indentOptions = {
 };
 
 // Builds the docx Paragraphs for the individual aspects and own reasoning, combining data from Strapi with the user data
-const buildReasoningParagraphs = (
+export const buildAspectParagraphs = (
   reasoning?: PrincipleReasoning,
   aspekt?: PrinzipAspekt,
 ) => [
