@@ -171,10 +171,13 @@ describe("FivePrinciples Route - Integration Tests", () => {
   });
 
   it("renders the principle example for principles that have one", () => {
-    const exampleSection = screen.getByRole("heading", {
+    const hgroup = screen.getByRole("heading", {
       name: /Ein Textbeispiel/,
       level: 3,
     }).parentElement;
+    expect(hgroup?.tagName).toBe("HGROUP");
+
+    const exampleSection = hgroup?.parentElement;
     expect(exampleSection).toBeInTheDocument();
 
     expect(within(exampleSection!).getByText(/§ 42 TestG/)).toBeInTheDocument();
