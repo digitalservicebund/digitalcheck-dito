@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { createRoutesStub } from "react-router";
 import { describe, expect, it } from "vitest";
+import { general } from "~/resources/content/shared/general.ts";
 import type { Node } from "~/utils/paragraphUtils";
 import { BlocksRenderer } from "./BlocksRenderer";
 
@@ -118,7 +119,12 @@ describe("BlocksContentRenderer", () => {
         {
           type: "link",
           url: "https://example.com",
-          children: [{ type: "text", text: "This is an external link" }],
+          children: [
+            {
+              type: "text",
+              text: "This is an external link",
+            },
+          ],
         },
       ];
 
@@ -126,7 +132,8 @@ describe("BlocksContentRenderer", () => {
 
       const link = container.querySelector("a");
       expect(link).toBeInTheDocument();
-      expect(link?.textContent).toBe("This is an external link");
+      expect(link?.textContent).toContain("This is an external link");
+      expect(link?.textContent).toContain(general.a11yMessageNewWindow);
       expect(link?.target).toBe("_blank");
       expect(link?.href).toBe("https://example.com/");
     });

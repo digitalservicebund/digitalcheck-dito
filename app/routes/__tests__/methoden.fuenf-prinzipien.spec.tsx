@@ -187,7 +187,7 @@ describe("FivePrinciples Route - Integration Tests", () => {
       ),
     ).toBeInTheDocument();
     const link = within(exampleSection!).getByRole("link", {
-      name: "Titel des Test-Regelungsvorhabens",
+      name: /Titel des Test-Regelungsvorhabens/,
     });
     expect(link).toBeInTheDocument();
     expect(link).toHaveAttribute("href", "/beispiele/regelungen/test-regelung");
