@@ -103,7 +103,6 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
 
       <ContentWrapper className="space-y-80">
         <Tabs
-          className=""
           tabs={tabsForNavigation}
           initialActiveIndex={initialActiveIndexForTabs}
           onNavigateRequest={handleNavigationRequest}

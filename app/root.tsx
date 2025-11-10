@@ -88,10 +88,16 @@ export function ScrollAndFocus() {
 
   useEffect(() => {
     if (!window.location.hash) {
-      // If we are not scrolling to a hash section, scroll to top and focus main element
+      // If we are not scrolling to a hash section, scroll to top and focus the main element
       window.scrollTo({ top: 0, behavior: "instant" });
       requestAnimationFrame(() => {
-        mainRef.current?.focus();
+        /*
+         Only focus the main element if another element is not already focused.
+         This is necessary for tabs, where the user should be able to keep switching tabs without losing focus.
+        */
+        if (!document.activeElement) {
+          mainRef.current?.focus();
+        }
       });
     }
   }, [pathname]);
