@@ -1,20 +1,14 @@
-import { data, Outlet } from "react-router";
+import { Outlet } from "react-router";
+import ErrorBoundaryComponent from "~/layout/ErrorBoundary";
 import type { Route } from "./+types/ZFL";
-import Footer from "./components/Footer";
-import PageHeader from "./components/PageHeader";
-
-export function loader({ request }: Route.LoaderArgs) {
-  if (request.url.includes("bund.de")) {
-    throw data("Not found", { status: 404 });
-  }
-}
+import { ROUTE_ZFL_LANDING } from "./routes";
 
 export default function ZFLLayout() {
+  return <Outlet />;
+}
+
+export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   return (
-    <>
-      <PageHeader />
-      <Outlet />
-      <Footer />
-    </>
+    <ErrorBoundaryComponent error={error} backLink={ROUTE_ZFL_LANDING.url} />
   );
 }
