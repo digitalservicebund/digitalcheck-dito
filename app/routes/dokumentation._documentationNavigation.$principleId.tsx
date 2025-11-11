@@ -456,8 +456,9 @@ export default function DocumentationPrinciple() {
     return () => unsubscribe();
   }, [form]);
 
-  const enableAlternativeExplanation =
-    useFeatureFlag(features.enableDigitalDocumentationAltExplanation) || true;
+  const enableAlternativeExplanation = useFeatureFlag(
+    features.enableDigitalDocumentationAltExplanation,
+  );
 
   const testVariant = (() => {
     if (
