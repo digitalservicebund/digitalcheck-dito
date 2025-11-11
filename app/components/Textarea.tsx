@@ -13,7 +13,7 @@ interface TextareaProps extends BaseTextareaProps {
   warningInsteadOfError?: boolean;
 }
 
-function TextareaNew({
+function Textarea({
   children,
   scope,
   description,
@@ -68,4 +68,4 @@ function TextareaNew({
   );
 }
 
-export default TextareaNew;
+export default Textarea;

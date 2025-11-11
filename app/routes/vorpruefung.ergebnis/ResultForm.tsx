@@ -11,10 +11,10 @@ import ButtonContainer from "~/components/ButtonContainer";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox.tsx";
+import Input from "~/components/Input";
 import InputError from "~/components/InputError";
-import InputNew from "~/components/InputNew";
 import RichText from "~/components/RichText";
-import TextareaNew from "~/components/TextareaNew";
+import Textarea from "~/components/Textarea";
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
 import { buildEmailBody } from "~/routes/vorpruefung.ergebnis/buildMailtoRedirectUri.ts";
 import { schema } from "~/routes/vorpruefung.ergebnis/resultValidation";
@@ -127,15 +127,15 @@ export default function ResultForm({
             </div>
             <div className="ds-stack ds-stack-16 grow">
               <RichText markdown={preCheckResult.form.instructions} />
-              <InputNew scope={form.scope("title")}>
+              <Input scope={form.scope("title")}>
                 {preCheckResult.form.vorhabenTitleLabel}
-              </InputNew>
+              </Input>
 
               {result.digital === ResultType.NEGATIVE && (
                 <>
-                  <TextareaNew scope={form.scope("negativeReasoning")}>
+                  <Textarea scope={form.scope("negativeReasoning")}>
                     {preCheckResult.form.reasonLabel}
-                  </TextareaNew>
+                  </Textarea>
                   {warning && (
                     <InputError look={"warning"}>{warning}</InputError>
                   )}

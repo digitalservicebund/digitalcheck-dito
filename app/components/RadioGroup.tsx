@@ -22,7 +22,7 @@ interface RadioGroupProps<FormData, Value extends string | number = string>
   warningInsteadOfError?: boolean;
 }
 
-function RadioGroupNew<FormData, Value extends string | number = string>({
+function RadioGroup<FormData, Value extends string | number = string>({
   scope,
   options,
   label,
@@ -95,4 +95,4 @@ function RadioGroupNew<FormData, Value extends string | number = string>({
   );
 }
 
-export default RadioGroupNew;
+export default RadioGroup;

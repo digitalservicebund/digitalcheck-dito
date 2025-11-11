@@ -4,7 +4,7 @@ import InfoBox from "~/components/InfoBox";
 import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
-import TextareaNew from "~/components/TextareaNew";
+import Textarea from "~/components/Textarea";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_PARTICIPATION } from "~/resources/staticRoutes";
 import {
@@ -58,14 +58,14 @@ export default function DocumentationParticipation() {
               content={participation.formats.content}
             />
           </legend>
-          <TextareaNew
+          <Textarea
             description={participation.formats.textField.description}
             placeholder={participation.formats.textField.placeholder}
             scope={form.scope("formats")}
             warningInsteadOfError
           >
             {participation.formats.textField.label}
-          </TextareaNew>
+          </Textarea>
         </fieldset>
 
         <fieldset>
@@ -77,13 +77,13 @@ export default function DocumentationParticipation() {
               className="mb-16"
             />
           </legend>
-          <TextareaNew
+          <Textarea
             description={participation.results.textField.description}
             scope={form.scope("results")}
             warningInsteadOfError
           >
             {participation.results.textField.label}
-          </TextareaNew>
+          </Textarea>
         </fieldset>
 
         <InlineNotice

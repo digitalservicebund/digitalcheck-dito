@@ -8,7 +8,7 @@ import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
-import RadioGroupNew from "~/components/RadioGroupNew";
+import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { preCheck } from "~/resources/content/vorpruefung";
@@ -185,7 +185,7 @@ export default function Index() {
             />
           )}
         </legend>
-        <RadioGroupNew scope={form.scope("answer")} options={options} />
+        <RadioGroup scope={form.scope("answer")} options={options} />
       </fieldset>
       <div className="space-y-40">
         {hasAnswerConflict && (

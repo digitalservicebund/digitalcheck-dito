@@ -1,6 +1,6 @@
 import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
-import InputNew from "~/components/InputNew";
+import Input from "~/components/Input";
 import MetaTitle from "~/components/Meta";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_TITLE } from "~/resources/staticRoutes";
@@ -42,9 +42,9 @@ export default function DocumentationTitle() {
         className="mb-40"
       />
       <form {...form.getFormProps()}>
-        <InputNew scope={form.scope("title")} warningInsteadOfError>
+        <Input scope={form.scope("title")} warningInsteadOfError>
           {info.inputTitle.label}
-        </InputNew>
+        </Input>
 
         <DocumentationActions
           previousUrl={previousUrl}

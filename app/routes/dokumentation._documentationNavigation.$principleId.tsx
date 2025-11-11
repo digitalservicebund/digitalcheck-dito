@@ -12,12 +12,12 @@ import CheckboxWithExpandableArea from "~/components/CheckboxWithExpandableArea"
 import Dialog from "~/components/Dialog";
 import Heading from "~/components/Heading";
 import InlineNotice from "~/components/InlineNotice";
-import InputNew from "~/components/InputNew";
+import Input from "~/components/Input";
 import MetaTitle from "~/components/Meta";
-import RadioGroupNew from "~/components/RadioGroupNew";
+import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
 import Separator from "~/components/Separator";
-import TextareaNew from "~/components/TextareaNew";
+import Textarea from "~/components/Textarea";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
 import {
@@ -114,7 +114,7 @@ function Reasoning({
 
           <input {...aspectField.getHiddenInputProps()} />
 
-          <InputNew
+          <Input
             scope={paragraphScope}
             description={
               principlePages.explanationFields.paragraphInput.description
@@ -122,9 +122,9 @@ function Reasoning({
             warningInsteadOfError
           >
             {principlePages.explanationFields.paragraphInput.label}
-          </InputNew>
+          </Input>
 
-          <TextareaNew
+          <Textarea
             scope={reasonScope}
             placeholder={
               principlePages.explanationFields.reasoningInput.placeholder
@@ -133,7 +133,7 @@ function Reasoning({
             warningInsteadOfError
           >
             {principlePages.explanationFields.reasoningInput.label}
-          </TextareaNew>
+          </Textarea>
 
           <Dialog
             title={principlePages.dialog.title}
@@ -308,14 +308,14 @@ function NegativeAnswerFormElements({
         />
       </legend>
 
-      <TextareaNew
+      <Textarea
         scope={scope}
         placeholder={principlePages.negativePrinciple.placeholder}
         rows={5}
         warningInsteadOfError
       >
         {principlePages.negativePrinciple.label}
-      </TextareaNew>
+      </Textarea>
     </fieldset>
   );
 }
@@ -339,14 +339,14 @@ function IrrelevantAnswerFormElements({
         />
       </legend>
 
-      <TextareaNew
+      <Textarea
         scope={scope}
         placeholder={principlePages.irrelevantPrinciple.placeholder}
         rows={5}
         warningInsteadOfError
       >
         {principlePages.irrelevantPrinciple.label}
-      </TextareaNew>
+      </Textarea>
     </fieldset>
   );
 }
@@ -456,7 +456,7 @@ export default function DocumentationPrinciple() {
 
         <form {...form.getFormProps()} className="space-y-40">
           <input {...form.getHiddenInputProps("id")} />
-          <RadioGroupNew
+          <RadioGroup
             label={
               <Heading tagName="h2" look="ds-heading-03-reg">
                 {principlePages.question}

@@ -13,7 +13,7 @@ interface InputProps extends BaseInputProps {
   warningInsteadOfError?: boolean;
 }
 
-function InputNew({
+function Input({
   children,
   scope,
   description,
@@ -70,4 +70,4 @@ function InputNew({
   );
 }
 
-export default InputNew;
+export default Input;
