@@ -6,7 +6,6 @@ import { useIsMobileSize } from "~/hooks/deviceHook";
 import { PRINCIPLE_COLORS } from "~/resources/constants";
 import { explanationID, Node } from "~/utils/paragraphUtils";
 import { BasePrinzip } from "~/utils/strapiData.server";
-import twMerge from "~/utils/tailwindMerge";
 import { idFromText } from "~/utils/utilFunctions";
 
 export default function PrincipleHighlightModifier({ node }: { node: Node }) {
@@ -26,38 +25,35 @@ export default function PrincipleHighlightModifier({ node }: { node: Node }) {
 
   // Generate a deterministic ID based on the text content and position
   const highlightID = idFromText(text, "highlight");
-  const renderAsLink = useAnchorLinks && isMobileSize && absatzId;
 
-  return (
-    <>
+  if (!useAnchorLinks || !isMobileSize || !absatzId)
+    return (
       <PrincipleHighlight
         id={highlightID}
         principle={principle}
         absatzId={absatzId}
-        className={renderAsLink ? "hidden" : ""}
       >
         {text}
       </PrincipleHighlight>
-      <Link
-        replace
-        to={`#${explanationID(absatzId, principle.Nummer)}`}
-        onClick={() => {
-          setActiveHighlight(highlightID);
-        }}
-        className={twMerge(
-          "cursor-help no-underline hover:underline",
-          !renderAsLink && "hidden",
-        )}
+    );
+
+  return (
+    <Link
+      replace
+      to={`#${explanationID(absatzId, principle.Nummer)}`}
+      onClick={() => {
+        setActiveHighlight(highlightID);
+      }}
+      className="cursor-help no-underline hover:underline"
+    >
+      <PrincipleHighlight
+        id={highlightID}
+        principle={principle}
+        absatzId={absatzId}
       >
-        <PrincipleHighlight
-          id={highlightID}
-          principle={principle}
-          absatzId={absatzId}
-        >
-          {text}
-        </PrincipleHighlight>
-      </Link>
-    </>
+        {text}
+      </PrincipleHighlight>
+    </Link>
   );
 }
 
@@ -66,7 +62,6 @@ type PrincipleHighlightProps = {
   children: string;
   principle: BasePrinzip;
   absatzId: string;
-  className?: string;
 };
 
 function PrincipleHighlight({
@@ -74,7 +69,6 @@ function PrincipleHighlight({
   children,
   principle,
   absatzId,
-  className,
 }: Readonly<PrincipleHighlightProps>) {
   return (
     <mark
@@ -82,7 +76,6 @@ function PrincipleHighlight({
       className={twJoin(
         "ds-body-01-reg",
         PRINCIPLE_COLORS[principle.Nummer].background,
-        className,
       )}
       aria-label={`Textbeispiel erfüllt Prinzip: ${principle.Name}`}
       aria-describedby={explanationID(absatzId, principle.Nummer)}
