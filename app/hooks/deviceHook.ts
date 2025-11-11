@@ -1,25 +1,47 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function useResize(onResize: () => void, init = true) {
+  const onResizeRef = useRef(onResize);
+
+  // Update the ref when the callback changes
+  useEffect(() => {
+    onResizeRef.current = onResize;
+  }, [onResize]);
+
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    window.addEventListener("resize", onResize);
-    if (init) onResize(); // initialize
+    const handleResize = () => {
+      onResizeRef.current();
+    };
 
-    return () => window.removeEventListener("resize", onResize);
-  }, [onResize, init]);
+    window.addEventListener("resize", handleResize);
+    if (init) handleResize(); // initialize
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, [init]);
 }
 
 export function useScroll(onScroll: () => void) {
+  const onScrollRef = useRef(onScroll);
+
+  // Update the ref when the callback changes
+  useEffect(() => {
+    onScrollRef.current = onScroll;
+  }, [onScroll]);
+
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    window.addEventListener("scroll", onScroll);
-    onScroll(); // initialize
+    const handleScroll = () => {
+      onScrollRef.current();
+    };
 
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [onScroll]);
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // initialize
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 }
 
 export function useIsMobileSize() {
