@@ -42,7 +42,7 @@ type PrincipleExampleProps = {
   prinzip: PrinzipWithAspekteAndExample;
 };
 
-function PrincipleExample({ prinzip }: Readonly<PrincipleExampleProps>) {
+export function PrincipleExample({ prinzip }: Readonly<PrincipleExampleProps>) {
   const exampleAbsatz = prinzip.Beispiel;
   const paragraph = exampleAbsatz.Paragraph;
   const beispielvorhaben = paragraph.Beispielvorhaben;

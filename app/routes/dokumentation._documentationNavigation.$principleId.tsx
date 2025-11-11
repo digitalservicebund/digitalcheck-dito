@@ -9,8 +9,10 @@ import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import Button from "~/components/Button";
 import CheckboxWithExpandableArea from "~/components/CheckboxWithExpandableArea";
+import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Dialog from "~/components/Dialog";
 import Heading from "~/components/Heading";
+import InfoBox from "~/components/InfoBox.tsx";
 import InlineNotice from "~/components/InlineNotice";
 import Input from "~/components/Input";
 import MetaTitle from "~/components/Meta";
@@ -19,7 +21,11 @@ import RichText from "~/components/RichText";
 import Separator from "~/components/Separator";
 import Textarea from "~/components/Textarea";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
+import { features } from "~/resources/features.ts";
+import {
+  ROUTE_EXAMPLES_PRINCIPLES,
+  ROUTE_METHODS_PRINCIPLES,
+} from "~/resources/staticRoutes";
 import {
   IrrelevantAnswerReasoning,
   NegativeAnswerReasoning,
@@ -27,9 +33,16 @@ import {
   type PrincipleReasoning,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { addOrUpdatePrinciple } from "~/routes/dokumentation/documentationDataService";
-import type {
+import getDetailsSummary from "~/routes/methoden.fuenf-prinzipien/getDetailsSummary.tsx";
+import { PrincipleExample } from "~/routes/methoden.fuenf-prinzipien/Principle.tsx";
+import { getFeatureFlags } from "~/utils/featureFlags.server.ts";
+import useFeatureFlag from "~/utils/featureFlags.ts";
+import {
+  fetchStrapiData,
+  GET_PRINZIPS_WITH_EXAMPLES_QUERY,
   PrinzipAspekt,
   PrinzipWithAspekte,
+  PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 import type { Route } from "./+types/dokumentation._documentationNavigation.$principleId";
@@ -42,7 +55,21 @@ import {
 
 const { principlePages } = digitalDocumentation;
 
-export function loader({ params: { principleId } }: Route.LoaderArgs) {
+export async function loader({ params: { principleId } }: Route.LoaderArgs) {
+  const featureFlags = getFeatureFlags();
+  if (featureFlags[features.enableDigitalDocumentationAltExplanation]) {
+    console.info("fetching full principles for user test");
+    const prinzipData = await fetchStrapiData<{
+      prinzips: PrinzipWithAspekteAndExample[];
+    }>(GET_PRINZIPS_WITH_EXAMPLES_QUERY);
+    if ("prinzips" in prinzipData) {
+      return {
+        principleId,
+        fullPrinciples: prinzipData.prinzips,
+      };
+    }
+  }
+
   return {
     principleId,
   };
@@ -352,7 +379,7 @@ function IrrelevantAnswerFormElements({
 }
 
 export default function DocumentationPrinciple() {
-  const { principleId } = useLoaderData<typeof loader>();
+  const { principleId, fullPrinciples } = useLoaderData<typeof loader>();
   const { currentUrl, nextUrl, previousUrl, prinzips } =
     useOutletContext<NavigationContext>();
   const { documentationData } = useDocumentationData();
@@ -429,6 +456,29 @@ export default function DocumentationPrinciple() {
     return () => unsubscribe();
   }, [form]);
 
+  const enableAlternativeExplanation =
+    useFeatureFlag(features.enableDigitalDocumentationAltExplanation) || true;
+
+  const testVariant = (() => {
+    if (
+      enableAlternativeExplanation &&
+      prinzip?.URLBezeichnung ===
+        "digitale-angebote-fuer-alle-nutzbar-gestalten"
+    )
+      return "descriptionOnBottom";
+    if (
+      enableAlternativeExplanation &&
+      prinzip?.URLBezeichnung ===
+        "datenwiederverwendung-benoetigt-einheitliches-recht"
+    )
+      return "descriptionWithAccordion";
+    return null;
+  })();
+
+  const fullPrinciple = fullPrinciples?.find(
+    (p) => p.URLBezeichnung === prinzip.URLBezeichnung,
+  );
+
   return (
     <>
       <MetaTitle prefix={prinzip.Name} />
@@ -441,15 +491,64 @@ export default function DocumentationPrinciple() {
             look="ds-heading-02-reg"
             className="mb-16"
           />
-          <BlocksRenderer content={prinzip.Beschreibung} />
-          <Link
-            to={`${ROUTE_METHODS_PRINCIPLES.url}#${slugify(prinzip.Name)}`}
-            target="_blank"
-            className="text-link"
-            rel="noreferrer"
-          >
-            {principlePages.moreButton}
-          </Link>
+          {!testVariant && (
+            <>
+              <BlocksRenderer content={prinzip.Beschreibung} />
+              <Link
+                to={`${ROUTE_METHODS_PRINCIPLES.url}#${slugify(prinzip.Name)}`}
+                target="_blank"
+                className="text-link"
+                rel="noreferrer"
+              >
+                {principlePages.moreButton}
+              </Link>
+            </>
+          )}
+          {testVariant === "descriptionWithAccordion" && (
+            <>
+              <BlocksRenderer content={prinzip.Beschreibung} />
+              {prinzip && (
+                <DetailsSummary title="Beispiele">
+                  <div className="space-y-24">
+                    <div>
+                      <h3 className={"ds-label-01-bold font-bold"}>
+                        § 8 GWKHV
+                      </h3>
+                      <p className={"ds-label-01-reg italic"}>
+                        „(2) Registerteilnehmer sind verpflichtet, für die
+                        Kommunikation mit dem Umweltbundesamt einen Zugang zu
+                        diesem Kommunikationssystem zu eröffnen und den Zugang
+                        zu nutzen, insbesondere für die Stellung von Anträgen,
+                        die Abgabe von Erklärungen sowie die Übermittlung von
+                        Daten und Dokumenten.“
+                      </p>
+                    </div>
+                    <div>
+                      <h4 className="ds-label-01-bold mt-24">
+                        Warum ist dieses Beispiel gut?
+                      </h4>
+                      <ul className="mt-8">
+                        <li>
+                          Verringert die Fehleranfälligkeit durch den
+                          Datenabgleich.
+                        </li>
+                        <li>
+                          Im folgenden Absatz wird der Abgleich und Austausch
+                          der Daten näher spezifiziert und erweitert.
+                        </li>
+                      </ul>
+                    </div>
+                    <Link
+                      className="text-link"
+                      to={`${ROUTE_EXAMPLES_PRINCIPLES.url}/${prinzip.URLBezeichnung}`}
+                    >
+                      Mehr Beispiele zu dem Prinzip
+                    </Link>
+                  </div>
+                </DetailsSummary>
+              )}
+            </>
+          )}
         </div>
 
         <Separator />
@@ -502,6 +601,42 @@ export default function DocumentationPrinciple() {
             submit
             showDownloadDraftButton={true}
           />
+
+          {testVariant === "descriptionOnBottom" && fullPrinciple && (
+            <>
+              <Separator />
+              <div className="space-y-40" key={slugify(fullPrinciple.Name)}>
+                <InfoBox
+                  identifier={slugify(fullPrinciple.Name)}
+                  heading={{
+                    tagName: "h2",
+                    text: "Das Prinzip im Detail",
+                  }}
+                  content={fullPrinciple.Beschreibung}
+                  detailsSummary={getDetailsSummary(fullPrinciple)}
+                />
+
+                {fullPrinciple.Beispiel && (
+                  <PrincipleExample prinzip={fullPrinciple} />
+                )}
+              </div>
+              <div className="space-y-8">
+                <h2 className="ds-heading-02-reg">
+                  Suchen Sie mehr Beispiele?
+                </h2>
+                <p>
+                  Mehr Beispiele finden Sie auf der{" "}
+                  <Link
+                    className="text-link"
+                    to={`/beispiele/prinzipien/${prinzip.URLBezeichnung}`}
+                  >
+                    Beispielseite zu diesem Prinzip
+                  </Link>
+                  .
+                </p>
+              </div>
+            </>
+          )}
         </form>
       </div>
     </>
