@@ -23,8 +23,7 @@ import Footer from "~/layout/Footer";
 import PageHeader from "~/layout/PageHeader";
 import { siteMeta } from "~/resources/content/shared/meta";
 import { ROUTE_LANDING } from "~/resources/staticRoutes";
-// Import CSS directly so React Router will handle it via the manifest
-import "~/styles.css";
+import sharedStyles from "~/styles.css?url";
 import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants";
 import { POSTHOG_KEY } from "~/utils/constants.server";
 import { getFeatureFlags } from "~/utils/featureFlags.server";
@@ -62,6 +61,7 @@ export const headers: HeadersFunction = () => ({
 });
 
 export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: sharedStyles },
   { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
   {
     rel: "icon",
