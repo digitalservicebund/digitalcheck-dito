@@ -1,6 +1,7 @@
 import EmojiEventsOutlinedIcon from "@digitalservicebund/icons/EmojiEventsOutlined";
-import FileDownloadOutlinedIcon from "@digitalservicebund/icons/FileDownloadOutlined";
 import { useOutletContext } from "react-router";
+import { DownloadButton } from "~/components/Button.tsx";
+import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Heading from "~/components/Heading";
 import InfoBoxList from "~/components/InfoBoxList";
 import MetaTitle from "~/components/Meta";
@@ -34,16 +35,16 @@ export default function DocumentationSend() {
               text: finish.download.heading,
             },
             content: finish.download.content,
-            actions: [
-              {
-                look: "link",
-                iconLeft: (
-                  <FileDownloadOutlinedIcon className="mr-1 fill-current" />
-                ),
-                text: finish.download.buttonText,
-                onClick: () => void downloadDocumentation(prinzips),
-              },
-            ],
+            children: (
+              <ButtonContainer>
+                <DownloadButton
+                  look="link"
+                  onClick={() => void downloadDocumentation(prinzips)}
+                >
+                  {finish.download.buttonText}
+                </DownloadButton>
+              </ButtonContainer>
+            ),
           },
           {
             look: "highlight",

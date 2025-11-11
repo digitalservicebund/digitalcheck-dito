@@ -1,31 +1,18 @@
-import { ButtonBaseProps, ButtonProps } from "~/components/Button.tsx";
+import { LinkButtonProps } from "~/components/Button.tsx";
 
-type BaseContentAction = ButtonBaseProps & {
+export type ContentLink = {
   text: string;
   id?: string;
-  className?: string;
-};
-
-export type ButtonAction = BaseContentAction &
-  Pick<ButtonProps, "onClick" | "disabled">;
-
-export type LinkAction = BaseContentAction & {
-  // maps to the `to` prop of a react-router `Link`
-  linkTo: string;
+  to: string;
   target?: string;
   download?: boolean;
-};
+  plausibleEventName?: string;
+} & Pick<LinkButtonProps, "look" | "className" | "iconLeft">;
 
-/**
- * An action can be a button with a click handler, a link to another page,
- * or a download link.
- */
-export type ContentAction = LinkAction | ButtonAction;
-
-export type Step<ActionType extends BaseContentAction = ContentAction> = {
+export type Step = {
   headline: { text: string };
   content?: string;
-  action?: ActionType;
+  link?: ContentLink;
   isDisabled?: boolean;
   finished?: { headline: { text: string }; isDisabled: boolean };
 };

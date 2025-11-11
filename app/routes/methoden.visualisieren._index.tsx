@@ -1,3 +1,5 @@
+import Button from "~/components/Button.tsx";
+import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
@@ -55,7 +57,19 @@ export default function Visualization() {
           <p>{methodsTasksProcesses.visualizationTypes.subtitle}</p>
 
           <InfoBoxList
-            items={methodsTasksProcesses.visualizationTypes.types}
+            /* TODO: Replace structure once InfoBoxList is updated to support children */
+            items={methodsTasksProcesses.visualizationTypes.types.map(
+              (item) => ({
+                ...item,
+                children: item.workInProgress && (
+                  <ButtonContainer className={"pt-8"}>
+                    <Button type="button" disabled look="tertiary">
+                      Anleitung
+                    </Button>
+                  </ButtonContainer>
+                ),
+              }),
+            )}
             separator
           />
         </section>
@@ -68,7 +82,7 @@ export default function Visualization() {
             tagName: "h3",
           }}
           content={methodsTasksProcesses.goodToKnow.content}
-          actions={methodsTasksProcesses.goodToKnow.actions}
+          links={methodsTasksProcesses.goodToKnow.links}
         />
       </Container>
     </>

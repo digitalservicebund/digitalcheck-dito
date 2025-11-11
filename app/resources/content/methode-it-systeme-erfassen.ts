@@ -2,7 +2,7 @@ import DrawOutlined from "@digitalservicebund/icons/DrawOutlined";
 import StickyNote2Outlined from "@digitalservicebund/icons/StickyNote2Outlined";
 import SupportOutlined from "@digitalservicebund/icons/SupportOutlined";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
-import { ContentAction } from "~/utils/contentTypes.ts";
+import { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsITSystems = {
@@ -44,13 +44,13 @@ export const methodsITSystems = {
       icon: StickyNote2Outlined,
       title: "IT-Systeme erfassen",
       text: "Nutzen Sie die Vorlage, um die IT-Systeme systematisch und detailliert zu dokumentieren. Sie müssen nicht selbst über das Wissen verfügen: Fragen Sie die zuständigen Akteurinnen und Akteure und ziehen Sie ggf. neutrale IT-Expertise hinzu.",
-      actions: [
+      links: [
         {
           text: "Vorlage herunterladen (xlsx-Datei)",
-          linkTo: "/download/Vorlage - IT-Systeme erfassen.xlsx",
+          to: "/download/Vorlage - IT-Systeme erfassen.xlsx",
           download: true,
         },
-      ] satisfies ContentAction[],
+      ] satisfies ContentLink[],
     },
   ],
   support: {
@@ -62,12 +62,12 @@ export const methodsITSystems = {
       
       Schreiben Sie uns über [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de) oder rufen Sie uns an unter [0151/40 76 78 39](tel:+4915140767839).
     `,
-    actions: [
+    links: [
       {
         text: "Unterstützungsangebote nutzen",
         look: "tertiary" as const,
-        linkTo: ROUTE_SUPPORT.url,
+        to: ROUTE_SUPPORT.url,
       },
-    ] satisfies ContentAction[],
+    ] satisfies ContentLink[],
   },
 };

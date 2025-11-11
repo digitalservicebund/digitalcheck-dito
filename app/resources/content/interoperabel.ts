@@ -1,6 +1,6 @@
 import { Apps, Layers } from "@digitalservicebund/icons";
 import { ROUTE_INTEROPERABILITY_SPOC } from "~/resources/staticRoutes";
-import { ContentAction } from "~/utils/contentTypes.ts";
+import { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const interoperability = {
@@ -317,12 +317,12 @@ export const interoperability = {
     title:
       "Informieren Sie sich weiter zu den EU-Anforderungen an Interoperabilität ",
     text: "Mehr zum Thema Governance, Kooperation und Nutzung unserer Inhalte finden Sie unter der Nationalen Kontaktstelle für ein interoperables Europa.",
-    actions: [
+    links: [
       {
         text: "Zur Nationalen Kontaktstelle",
-        linkTo: ROUTE_INTEROPERABILITY_SPOC.url,
+        to: ROUTE_INTEROPERABILITY_SPOC.url,
         look: "tertiary" as const,
       },
-    ] satisfies ContentAction[],
+    ] satisfies ContentLink[],
   },
 };

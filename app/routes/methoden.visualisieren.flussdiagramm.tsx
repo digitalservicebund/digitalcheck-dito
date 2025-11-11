@@ -648,11 +648,11 @@ export default function Visualization() {
           content={
             "Sie wenden die Prinzipien auf Ihre Visualisierung an und identifizieren konkrete Möglichkeiten der Digitalisierung."
           }
-          actions={[
+          links={[
             {
               text: "Zu den Prinzipien",
               look: "tertiary",
-              linkTo: ROUTE_METHODS_PRINCIPLES.url,
+              to: ROUTE_METHODS_PRINCIPLES.url,
             },
           ]}
         />

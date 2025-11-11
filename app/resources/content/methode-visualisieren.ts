@@ -10,7 +10,7 @@ import {
   SupportOutlined,
   VisibilityTwoTone,
 } from "@digitalservicebund/icons";
-import { ContentAction } from "~/utils/contentTypes";
+import { ContentLink } from "~/utils/contentTypes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import {
   ROUTE_FUNDAMENTALS_NKR,
@@ -74,13 +74,13 @@ export const methodsTasksProcesses = {
         heading: { text: "Flussdiagramm", tagName: "h3" as const },
         content:
           "Ein Flussdiagramm zeigt einen Prozessablauf. Es stellt die Reihenfolge von Handlungen oder Entscheidungen dar.",
-        actions: [
+        links: [
           {
             text: "Anleitung",
-            linkTo: ROUTE_METHODS_VISUALIZE_FLOWCHARTS.url,
+            to: ROUTE_METHODS_VISUALIZE_FLOWCHARTS.url,
             look: "tertiary" as const,
           },
-        ] satisfies ContentAction[],
+        ] satisfies ContentLink[],
       },
       {
         visual: {
@@ -100,13 +100,7 @@ export const methodsTasksProcesses = {
 
           **Die Anleitung entsteht gerade.**
         `,
-        actions: [
-          {
-            text: "Anleitung",
-            look: "tertiary" as const,
-            disabled: true,
-          },
-        ] as ContentAction[],
+        workInProgress: true,
       },
       {
         visual: {
@@ -126,13 +120,7 @@ export const methodsTasksProcesses = {
 
           **Die Anleitung entsteht gerade.**
         `,
-        actions: [
-          {
-            text: "Anleitung",
-            look: "tertiary" as const,
-            disabled: true,
-          },
-        ] as ContentAction[],
+        workInProgress: true,
       },
     ],
   },
@@ -147,14 +135,14 @@ export const methodsTasksProcesses = {
       Die Vorteile von Visualisierungen helfen dem Nationalen Normenkontrollrat (NKR), Ihr Vorhaben schneller zu prüfen.
       Aber worauf achtet der NKR bei Visualisierungen? 
     `,
-    actions: [
+    links: [
       {
-        linkTo: ROUTE_FUNDAMENTALS_NKR.url,
+        to: ROUTE_FUNDAMENTALS_NKR.url,
         text: "Mehr dazu erfahren",
         plausibleEventName: "Content.Link+NKR+Kriterien",
         look: "tertiary" as const,
       },
-    ] satisfies ContentAction[],
+    ] satisfies ContentLink[],
   },
 
   intro: {
@@ -214,22 +202,21 @@ export const methodsTasksProcesses = {
       heading: "Anleitung Abläufe und Aufgaben erfassen",
       content:
         "Eine Powerpoint-Vorlage (PPT) mit einer Schritt für Schritt Anleitung zum Download finden Sie hier. Sie können diese ausdrucken oder an Ihrem Computer bearbeiten. Sofern in Ihrem Ressort Conceptboard genutzt werden kann, können Sie sich auch eine Kopie dieser Conceptboard-Vorlage erstellen. Für letzteres können Sie einen Gast-Zugang anlegen.",
-      actions: [
+      links: [
         {
-          linkTo: ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX.url,
+          to: ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX.url,
           text: "PPT-Vorlage runterladen",
           plausibleEventName: "Content.Anleitung.Link+Powerpoint+Vorlage",
           download: true,
         },
         {
-          linkTo:
-            "https://bmas.de.conceptboard.com/board/qh33-xcny-usde-7nc6-82cy",
+          to: "https://bmas.de.conceptboard.com/board/qh33-xcny-usde-7nc6-82cy",
           text: "Zur Conceptboard-Vorlage",
           look: "ghost",
           plausibleEventName: "Content.Anleitung.Link+Conceptboard+Vorlage",
           target: "_blank",
         },
-      ] satisfies ContentAction[],
+      ] satisfies ContentLink[],
       image: {
         url: "/images/beispielflussdiagram.png",
       },
@@ -244,14 +231,14 @@ export const methodsTasksProcesses = {
     heading: "Finden Sie konkrete Möglichkeiten der Digitalisierung",
     content:
       "Mit den Prinzipien für Digitaltaugliche Gesetzgebung bekommen Sie auch konkrete Hinweise darauf, worauf Sie achten müssen.",
-    actions: [
+    links: [
       {
-        linkTo: ROUTE_METHODS_PRINCIPLES.url,
+        to: ROUTE_METHODS_PRINCIPLES.url,
         text: "Prinzipien nutzen",
         look: "tertiary",
         plausibleEventName: "Content.Link+Prinzipien+Nutzen",
       },
-    ] satisfies ContentAction[],
+    ] satisfies ContentLink[],
   },
   support: {
     badge: { text: "Unterstützungsangebot", Icon: SupportOutlined },

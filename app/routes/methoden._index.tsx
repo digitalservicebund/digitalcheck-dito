@@ -33,7 +33,7 @@ const renderStep = (
             tagName: "h3",
             id: headingId,
           }}
-          actions={step.actions}
+          links={step.links}
           content={step.text}
         />
       </Timeline.Item>
@@ -77,7 +77,7 @@ export default function Methoden() {
                 className: "ds-heading-03-bold",
               }}
               content={methods.itSystems.content}
-              actions={methods.itSystems.actions}
+              links={methods.itSystems.links}
             />
 
             <InfoBox
@@ -92,7 +92,7 @@ export default function Methoden() {
                 className: "ds-heading-03-bold",
               }}
               content={methods.technicalFeasibility.content}
-              actions={methods.technicalFeasibility.actions}
+              links={methods.technicalFeasibility.links}
             />
           </InfoBoxSideBySide>
         </section>
@@ -111,9 +111,9 @@ export default function Methoden() {
               {"content" in item && (
                 <RichText markdown={item.content as string} />
               )}
-              {item.action && "linkTo" in item.action && (
-                <Link to={item.action.linkTo} className="text-link">
-                  {item.action.text}
+              {item.link && "to" in item.link && (
+                <Link to={item.link.to} className="text-link">
+                  {item.link.text}
                 </Link>
               )}
             </NumberedList.Item>

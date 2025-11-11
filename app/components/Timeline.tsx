@@ -1,6 +1,6 @@
 import { twJoin } from "tailwind-merge";
 import Badge, { BadgeProps } from "~/components/Badge.tsx";
-import Button, { LinkButton } from "~/components/Button.tsx";
+import { LinkButton } from "~/components/Button.tsx";
 import Heading, { HeadingProps } from "~/components/Heading.tsx";
 import type { ImageProps } from "~/components/Image.tsx";
 import ImageZoomable from "~/components/ImageZoomable.tsx";
@@ -8,7 +8,7 @@ import RichText from "~/components/RichText.tsx";
 
 import React from "react";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
-import { ContentAction } from "~/utils/contentTypes";
+import { ContentLink } from "~/utils/contentTypes";
 import twMerge from "~/utils/tailwindMerge";
 
 type BulletListProps = React.PropsWithChildren<{
@@ -42,13 +42,13 @@ export type TimelineItemContentProps = {
   parentHasHeading?: boolean;
   content?: string;
   image?: ImageProps;
-  actions?: ContentAction[];
+  links?: ContentLink[];
 };
 
 export function TimelineItemContent({
   backgroundClasses,
   badge,
-  actions,
+  links,
   content,
   headline,
   image,
@@ -62,21 +62,14 @@ export function TimelineItemContent({
       )}
       {content && <RichText markdown={content} />}
       {image && <ImageZoomable image={image} className="max-w-a11y" />}
-      {actions && actions.length > 0 && (
+      {links && links.length > 0 && (
         <ButtonContainer>
-          {actions.map((button) => {
-            if ("linkTo" in button) {
-              const { linkTo, text, ...rest } = button;
-              return (
-                <LinkButton key={linkTo} to={linkTo} {...rest}>
-                  {text}
-                </LinkButton>
-              );
-            }
+          {links.map((link) => {
+            const { to, text, ...rest } = link;
             return (
-              <Button type="button" key={button.text} {...button}>
-                {button.text}
-              </Button>
+              <LinkButton key={to} to={to} {...rest}>
+                {text}
+              </LinkButton>
             );
           })}
         </ButtonContainer>

@@ -1,7 +1,7 @@
 import DrawOutlined from "@digitalservicebund/icons/DrawOutlined";
 import LightbulbOutlined from "@digitalservicebund/icons/LightbulbOutlined";
 import StickyNote2Outlined from "@digitalservicebund/icons/StickyNote2Outlined";
-import { ContentAction } from "~/utils/contentTypes.ts";
+import { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsResponsibleActors = {
@@ -38,13 +38,13 @@ export const methodsResponsibleActors = {
       icon: StickyNote2Outlined,
       title: "Beteiligte Ebenen auswählen und Ansprechpersonen sammeln",
       text: "Die Excelvorlage hilft Ihnen, die beteiligten Ebenen auszuwählen, Zuständigkeiten zu klären und hilfreiche Ansprechpersonen zu sammeln.",
-      actions: [
+      links: [
         {
           text: "Vorlage herunterladen (xlsx-Datei)",
-          linkTo: "/download/Vorlage - Zuständige Akteurinnen und Akteure.xlsx",
+          to: "/download/Vorlage - Zuständige Akteurinnen und Akteure.xlsx",
           download: true,
         },
-      ] satisfies ContentAction[],
+      ] satisfies ContentLink[],
     },
   ],
   tip: {

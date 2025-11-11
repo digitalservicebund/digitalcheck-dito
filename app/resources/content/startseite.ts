@@ -10,7 +10,7 @@ import {
   ROUTE_PRECHECK,
   ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
-import { ContentAction, LinkAction } from "~/utils/contentTypes.ts";
+import { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const startseite = {
@@ -30,10 +30,10 @@ export const startseite = {
         title: "Digitalbezug einschätzen",
         link: {
           text: "Digitalbezug einschätzen",
-          linkTo: ROUTE_PRECHECK.url,
+          to: ROUTE_PRECHECK.url,
           look: "primary" as const,
           plausibleEventName: "Content.Schritte.Button+Vorprüfung",
-        } satisfies ContentAction,
+        } satisfies ContentLink,
         description: {
           text: "Sie identifizieren Digitalbezug und Inter&shy;operabilitäts&shy;an&shy;for&shy;der&shy;un&shy;gen für Ihr Vorhaben.",
         },
@@ -48,10 +48,10 @@ export const startseite = {
         title: "Digitaltauglichkeit der Regelung sicherstellen",
         link: {
           text: "Regelung erarbeiten",
-          linkTo: ROUTE_METHODS.url,
+          to: ROUTE_METHODS.url,
           look: "tertiary" as const,
           plausibleEventName: "Content.Schritte.Link+Erarbeiten",
-        } satisfies ContentAction,
+        } satisfies ContentLink,
         description: {
           text: "Bei einer positiven Vorprüfung wenden Sie die Werkzeuge und Methoden an, die die Digitaltauglichkeit Ihres Vorhabens sicherstellen.",
         },
@@ -66,10 +66,10 @@ export const startseite = {
         title: "Dokumentieren der Digitaltauglichkeit",
         link: {
           text: "Dokumentation erstellen",
-          linkTo: ROUTE_DOCUMENTATION.url,
+          to: ROUTE_DOCUMENTATION.url,
           look: "tertiary" as const,
           plausibleEventName: "Content.Schritte.Link+Dokumentieren",
-        } satisfies ContentAction,
+        } satisfies ContentLink,
         description: {
           text: "Sie dokumentieren, wie Sie Digitaltauglichkeit in Ihrer Regelung sichergestellt haben.",
           // special case that depends on a feature flag being set
@@ -97,10 +97,10 @@ export const startseite = {
         "Digitaltaugliche Regelungen ermöglichen eine rechtlich und technisch reibungslose digitale Umsetzung und fördern die automatisierte Bearbeitung von Verfahrensschritten.",
       link: {
         text: "Mehr zur Digitaltauglichkeit erfahren",
-        linkTo: ROUTE_FUNDAMENTALS_DIGITAL_READINESS.url,
+        to: ROUTE_FUNDAMENTALS_DIGITAL_READINESS.url,
         plausibleEventName: "Content.Grundlagen.Link+Digitaltauglichkeit",
         look: "link",
-      } satisfies LinkAction,
+      } satisfies ContentLink,
     },
     nationaleNormenkontrolle: {
       title: "Worauf achtet der Nationale Normenkontrollrat?",
@@ -108,10 +108,10 @@ export const startseite = {
         "Der Nationale Normenkontrollrat (NKR) prüft das Vorhaben auf Digitaltauglichkeit. Mit der Anwendung der **Prinzipien** und Erstellung von **Visualisierungen** kann der Nationale Normenkontrollrat die Digitaltauglichkeit besser und schneller nachvollziehen.",
       link: {
         text: "Mehr zum NKR erfahren",
-        linkTo: ROUTE_FUNDAMENTALS_NKR.url,
+        to: ROUTE_FUNDAMENTALS_NKR.url,
         plausibleEventName: "Content.Grundlagen.Link+NKR",
         look: "link",
-      } satisfies LinkAction,
+      } satisfies ContentLink,
     },
   },
 
@@ -122,18 +122,18 @@ export const startseite = {
     links: [
       {
         text: "Zu Visualisierungen",
-        linkTo: ROUTE_METHODS_VISUALIZE.url,
+        to: ROUTE_METHODS_VISUALIZE.url,
         look: "tertiary" as const,
         plausibleEventName:
           "Content.Teaser+Visualisierungen.Link+Visualisierungen",
       },
       {
         text: "Beispiele",
-        linkTo: ROUTE_EXAMPLES_VISUALISATIONS.url,
+        to: ROUTE_EXAMPLES_VISUALISATIONS.url,
         look: "ghost" as const,
         plausibleEventName: "Content.Teaser+Visualisierungen.Link+Beispiele",
       },
-    ] satisfies ContentAction[],
+    ] satisfies ContentLink[],
   },
 
   prinzipien: {
@@ -143,17 +143,17 @@ export const startseite = {
     links: [
       {
         text: "Zu den Prinzipien",
-        linkTo: ROUTE_METHODS_PRINCIPLES.url,
+        to: ROUTE_METHODS_PRINCIPLES.url,
         look: "tertiary" as const,
         plausibleEventName: "Content.Teaser+Prinzipien.Link+Prinzipien",
       },
       {
         text: "Beispiele",
-        linkTo: ROUTE_EXAMPLES_PRINCIPLES.url,
+        to: ROUTE_EXAMPLES_PRINCIPLES.url,
         look: "ghost" as const,
         plausibleEventName: "Content.Teaser+Prinzipien.Link+Beispiele",
       },
-    ] satisfies ContentAction[],
+    ] satisfies ContentLink[],
   },
 
   individuelleExpertise: {
@@ -162,10 +162,10 @@ export const startseite = {
       "Nutzen Sie unsere persönlichen Unterstützungsangebote, um Ihr Regelungsvorhaben digitaltauglich zu gestalten und den Prozess erfolgreich zu durchlaufen.",
     link: {
       text: "Angebote kennenlernen",
-      linkTo: ROUTE_SUPPORT.url,
+      to: ROUTE_SUPPORT.url,
       look: "tertiary" as const,
       plausibleEventName: "Content.Support.Button+Support",
-    } satisfies ContentAction,
+    } satisfies ContentLink,
   },
 
   quote: {

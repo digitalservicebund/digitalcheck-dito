@@ -2,7 +2,7 @@ import {
   ROUTE_EXAMPLES_DIGITAL_COMMUNICATION,
   ROUTE_EXAMPLES_VISUALISATIONS,
 } from "~/resources/staticRoutes";
-import { ContentAction } from "~/utils/contentTypes.ts";
+import { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const examples = {
@@ -26,12 +26,12 @@ export const examples = {
 
         Hier finden Sie Formulierungen, wie Ihre Kolleginnen und Kollegen die Prinzipien für Digitaltaugliche Gesetzgebung genutzt haben um den Regelungstext digitaltauglich zu formulieren.
       `,
-      actions: [
+      links: [
         {
           text: "Zu den Prinzipien",
-          linkTo: ROUTE_EXAMPLES_DIGITAL_COMMUNICATION.url,
+          to: ROUTE_EXAMPLES_DIGITAL_COMMUNICATION.url,
         },
-      ] satisfies ContentAction[],
+      ] satisfies ContentLink[],
     },
     {
       tabName: "Visualisierungen",
@@ -41,12 +41,12 @@ export const examples = {
 
         Hier finden Sie Visualisierungen, welche Legistinnen und Legisten beim Erarbeiten der Digitaltauglichkeit geholfen haben und veröffentlicht wurden.
       `,
-      actions: [
+      links: [
         {
           text: "Zu den Visualisierungen",
-          linkTo: ROUTE_EXAMPLES_VISUALISATIONS.url,
+          to: ROUTE_EXAMPLES_VISUALISATIONS.url,
         },
-      ] satisfies ContentAction[],
+      ] satisfies ContentLink[],
     },
   ],
 };

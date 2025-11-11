@@ -8,7 +8,7 @@ import {
   ROUTE_METHODS_VISUALIZE,
   ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
-import { ContentAction } from "~/utils/contentTypes.ts";
+import { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export type DetailsSummary = {
@@ -75,13 +75,13 @@ export const methodsFivePrinciples = {
     icon: ArrowCircleRightOutlined,
     title: "2.5. Technische Umsetzbarkeit sicherstellen",
     text: "Analysieren Sie die Auswirkungen Ihres Regelungsvorhabens auf bestehende und neue Abläufe und IT-Systeme. Damit stellen Sie die technische Machbarkeit sicher. Greifen Sie dafür auf das Fachwissen der umsetzenden Akteurinnen und Akteure zurück.",
-    actions: [
+    links: [
       {
         look: "tertiary" as const,
         text: "IT-Auswirkungen prüfen",
-        linkTo: ROUTE_METHODS_TECHNICAL_FEASIBILITY.url,
+        to: ROUTE_METHODS_TECHNICAL_FEASIBILITY.url,
       },
-    ] satisfies ContentAction[],
+    ] satisfies ContentLink[],
   },
   nextStep: {
     label: "So geht es weiter:",
@@ -89,13 +89,13 @@ export const methodsFivePrinciples = {
     title:
       "Verfassen Sie den Regelungsentwurf und dokumentieren Sie Ihre Entscheidungen",
     text: "Die gesammelten Erkenntnisse und Ergebnisse helfen Ihnen dabei, Aspekte der Digitaltauglichkeit in Ihrem Regelungsentwurf zu berücksichtigen. Diese Entscheidungen dokumentieren Sie in einem Fragebogen.",
-    actions: [
+    links: [
       {
         text: "Zu „Erarbeiten“",
         look: "tertiary" as const,
-        linkTo: ROUTE_METHODS.url + "#verfassen-des-regelungsentwurfes",
+        to: ROUTE_METHODS.url + "#verfassen-des-regelungsentwurfes",
       },
-    ] satisfies ContentAction[],
+    ] satisfies ContentLink[],
   },
   principlePosterBox: {
     badgeText: "Download",

@@ -1,11 +1,11 @@
 import React from "react";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
-import { ContentAction } from "~/utils/contentTypes";
+import { ContentLink } from "~/utils/contentTypes";
 import type { Node } from "~/utils/paragraphUtils";
 import twMerge from "~/utils/tailwindMerge";
 import Badge, { type BadgeProps } from "./Badge";
 import { BlocksRenderer } from "./BlocksRenderer";
-import Button, { DownloadLinkButton, LinkButton } from "./Button";
+import { DownloadLinkButton, LinkButton } from "./Button";
 import DetailsSummary, { DetailsSummaryProps } from "./DetailsSummary";
 import Heading, { HeadingProps } from "./Heading";
 import Image, { type ImageProps } from "./Image";
@@ -29,7 +29,7 @@ type BaseInfoBoxProps = {
     title?: HeadingProps;
     items: DetailsSummaryProps[];
   };
-  actions?: ContentAction[];
+  links?: ContentLink[];
   className?: string;
   look?: "default" | "highlight" | "method";
 };
@@ -65,7 +65,7 @@ const InfoBox = ({
   content,
   contentClassName,
   detailsSummary,
-  actions,
+  links,
   visual,
   look,
   children,
@@ -129,32 +129,20 @@ const InfoBox = ({
           </div>
         )}
 
-        {actions && actions.length > 0 && (
+        {links && links.length > 0 && (
           <ButtonContainer className="mt-24">
-            {actions.map((button) => {
-              if ("linkTo" in button) {
-                const { linkTo, text, ...rest } = button;
-                if (button.download)
-                  return (
-                    <DownloadLinkButton
-                      key={linkTo}
-                      to={linkTo}
-                      omitIcon
-                      {...rest}
-                    >
-                      {text}
-                    </DownloadLinkButton>
-                  );
+            {links.map((link) => {
+              const { to, text, ...rest } = link;
+              if (link.download)
                 return (
-                  <LinkButton key={linkTo} to={linkTo} {...rest}>
+                  <DownloadLinkButton key={to} to={to} omitIcon {...rest}>
                     {text}
-                  </LinkButton>
+                  </DownloadLinkButton>
                 );
-              }
               return (
-                <Button type="button" key={button.text} {...button}>
-                  {button.text}
-                </Button>
+                <LinkButton key={to} to={to} {...rest}>
+                  {text}
+                </LinkButton>
               );
             })}
           </ButtonContainer>

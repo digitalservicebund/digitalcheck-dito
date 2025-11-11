@@ -5,7 +5,7 @@ import {
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
   ROUTE_METHODS_VISUALIZE,
 } from "~/resources/staticRoutes";
-import { ContentAction, Step } from "~/utils/contentTypes.ts";
+import { ContentLink, Step } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methods = {
@@ -34,12 +34,12 @@ export const methods = {
         },
         info: [],
         text: "Damit Ihre Regelung wirkungsvoll in die Praxis kommt, müssen Sie die aktuellen Abläufe verstehen. In diesem Schritt müssen Sie noch nicht auf geplante Neuerungen eingehen. Konzentrieren Sie sich auf den Status Quo.",
-        actions: [
+        links: [
           {
             text: "Anleitung zur Visualisierung",
-            linkTo: ROUTE_METHODS_VISUALIZE.url,
+            to: ROUTE_METHODS_VISUALIZE.url,
           },
-        ],
+        ] satisfies ContentLink[],
       },
       {
         headline: { text: "Entwickeln von Digitaltauglichkeit" },
@@ -52,12 +52,12 @@ export const methods = {
           text: "Finden Sie konkrete Möglichkeiten der Digitalisierung",
         },
         text: "Mit den fünf Prinzipien für Digitaltaugliche Gesetzgebung bekommen Sie auch konkrete Hinweise darauf, worauf Sie achten müssen.",
-        actions: [
+        links: [
           {
             text: "Prinzipien nutzen",
-            linkTo: ROUTE_METHODS_PRINCIPLES.url,
+            to: ROUTE_METHODS_PRINCIPLES.url,
           },
-        ] satisfies ContentAction[],
+        ] satisfies ContentLink[],
       },
       {
         headline: { text: "Verfassen des Regelungsentwurfes" },
@@ -99,23 +99,23 @@ export const methods = {
     heading: "IT-Systeme gemeinsam erfassen",
     content:
       "Nutzen Sie das Fachwissen der Akteurinnen und Akteure, um die verwendeten IT-Systeme für die Abläufe zu erfassen und zu verstehen.",
-    actions: [
+    links: [
       {
         text: "IT-Landschaft verstehen",
-        linkTo: ROUTE_METHODS_COLLECT_IT_SYSTEMS.url,
+        to: ROUTE_METHODS_COLLECT_IT_SYSTEMS.url,
       },
-    ] satisfies ContentAction[],
+    ] satisfies ContentLink[],
   },
   technicalFeasibility: {
     badge: "Expertengespräch",
     heading: "Technische Umsetzbarkeit sicherstellen",
     content:
       "Analysieren Sie die Auswirkungen Ihres Regelungsvorhabens auf bestehende sowie neue Abläufe und IT-Systeme. Damit stellen Sie die technische Machbarkeit sicher.",
-    actions: [
+    links: [
       {
         text: "IT-Auswirkungen prüfen",
-        linkTo: ROUTE_METHODS_TECHNICAL_FEASIBILITY.url,
+        to: ROUTE_METHODS_TECHNICAL_FEASIBILITY.url,
       },
-    ] satisfies ContentAction[],
+    ] satisfies ContentLink[],
   },
 };

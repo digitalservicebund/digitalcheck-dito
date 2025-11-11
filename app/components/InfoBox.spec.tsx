@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { createRoutesStub } from "react-router";
-import { describe, expect, it, vi } from "vitest";
-import { ContentAction } from "~/utils/contentTypes.ts";
+import { describe, expect, it } from "vitest";
 import InfoBox from "./InfoBox";
 
 describe("InfoBox", () => {
@@ -40,24 +39,24 @@ describe("InfoBox", () => {
       );
     });
 
-    it("shows actions (buttons and links)", () => {
-      const onClick = vi.fn();
-      const actions: ContentAction[] = [
-        {
-          text: "Link 1",
-          linkTo: "example.com",
-        },
-        {
-          text: "Link 2",
-          linkTo: "example2.com",
-        },
-        { text: "Button 1", onClick },
-      ];
-
+    it("shows links", () => {
       const RouterStubInfoBoxItem = createRoutesStub([
         {
           path: "/",
-          Component: () => <InfoBox actions={actions} />,
+          Component: () => (
+            <InfoBox
+              links={[
+                {
+                  text: "Link 1",
+                  to: "example.com",
+                },
+                {
+                  text: "Link 2",
+                  to: "example2.com",
+                },
+              ]}
+            />
+          ),
         },
       ]);
       render(<RouterStubInfoBoxItem />);
@@ -68,10 +67,6 @@ describe("InfoBox", () => {
         "Link 1",
         "Link 2",
       ]);
-      expect(screen.getAllByRole("button").length).toBe(1);
-
-      screen.getByRole("button", { name: "Button 1" }).click();
-      expect(onClick).toHaveBeenCalledOnce();
     });
   });
 });

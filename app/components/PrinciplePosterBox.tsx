@@ -34,10 +34,10 @@ export function PrinciplePosterBox({
             text: principlePosterBox.heading,
           }}
           content={principlePosterBox.content}
-          actions={[
+          links={[
             {
               text: principlePosterBox.downloadTitle,
-              linkTo: principlePosterBox.downloadUrl,
+              to: principlePosterBox.downloadUrl,
               look: "link" as const,
               iconLeft: <FileDownloadOutlinedIcon className="fill-current" />,
             },

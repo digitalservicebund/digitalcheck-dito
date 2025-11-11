@@ -47,7 +47,7 @@ export default function Interoperability() {
               text: interoperability.kontaktstelle.title,
             }}
             content={interoperability.kontaktstelle.text}
-            actions={interoperability.kontaktstelle.actions}
+            links={interoperability.kontaktstelle.links}
           />
         </>
       ),

@@ -45,7 +45,7 @@ import type { Route } from "./+types/route";
 import { PreCheckResult, ResultType } from "./PreCheckResult";
 import { schema } from "./resultValidation";
 
-import { LinkAction, Step } from "~/utils/contentTypes.ts";
+import { Step } from "~/utils/contentTypes.ts";
 import { PreCheckAnswers } from "../vorpruefung._preCheckNavigation.$questionId";
 
 const { questions } = preCheck;
@@ -53,7 +53,7 @@ const { questions } = preCheck;
 const nextSteps = {
   [ResultType.POSITIVE as string]: preCheckResult.positive.nextSteps,
   [ResultType.NEGATIVE as string]: preCheckResult.negative.nextSteps,
-} satisfies { [key: string]: { steps: Step<LinkAction>[] } };
+} satisfies { [key: string]: { steps: Step[] } };
 
 export async function loader({ request }: Route.LoaderArgs) {
   const cookie = await getAnswersFromCookie(request);
@@ -302,11 +302,11 @@ export default function Result() {
               tagName: "h2",
             }}
             content={preCheckResult.unsure.nextStep.text}
-            actions={[
+            links={[
               {
                 id: "result-method-button",
                 text: preCheckResult.unsure.nextStep.link.text,
-                linkTo: preCheckResult.unsure.nextStep.link.linkTo,
+                to: preCheckResult.unsure.nextStep.link.to,
                 look: "link",
               },
             ]}
@@ -316,25 +316,23 @@ export default function Result() {
           <>
             <Heading tagName="h2">{nextSteps[result.digital].title}</Heading>
             <NumberedList>
-              {(nextSteps[result.digital].steps as Step<LinkAction>[]).map(
-                (item) => (
-                  <NumberedList.Item
-                    className="space-y-16"
-                    key={item.headline.text}
-                    disabled={item.isDisabled}
-                  >
-                    <p className="ds-heading-03-reg">{item.headline.text}</p>
-                    {"content" in item && (
-                      <RichText markdown={item.content as string} />
-                    )}
-                    {item.action && (
-                      <Link to={item.action.linkTo} className="text-link">
-                        {item.action.text}
-                      </Link>
-                    )}
-                  </NumberedList.Item>
-                ),
-              )}
+              {(nextSteps[result.digital].steps as Step[]).map((item) => (
+                <NumberedList.Item
+                  className="space-y-16"
+                  key={item.headline.text}
+                  disabled={item.isDisabled}
+                >
+                  <p className="ds-heading-03-reg">{item.headline.text}</p>
+                  {"content" in item && (
+                    <RichText markdown={item.content as string} />
+                  )}
+                  {item.link && (
+                    <Link to={item.link.to} className="text-link">
+                      {item.link.text}
+                    </Link>
+                  )}
+                </NumberedList.Item>
+              ))}
             </NumberedList>
           </>
         )}

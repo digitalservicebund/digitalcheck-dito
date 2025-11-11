@@ -6,7 +6,7 @@ import {
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
   ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
-import { ContentAction } from "~/utils/contentTypes.ts";
+import { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsTechnicalFeasibility = {
@@ -36,13 +36,13 @@ export const methodsTechnicalFeasibility = {
         Bei kleinen Fragen rufen Sie den Digitalcheck-Support an unter [0151/40 76 78 39](tel:+4915140767839).
         Für ein unterstützendes, einstündiges Videotelefonat schreiben Sie eine E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de) oder buchen Sie direkt einen Termin.
     `,
-    actions: [
+    links: [
       {
         text: "Termin buchen",
         look: "tertiary" as const,
-        linkTo: ROUTE_SUPPORT.url,
+        to: ROUTE_SUPPORT.url,
       },
-    ] satisfies ContentAction[],
+    ] satisfies ContentLink[],
   },
   boxes: [
     {
@@ -58,13 +58,13 @@ export const methodsTechnicalFeasibility = {
         
         Das PDF ist barrierearm/barrierefrei.
       `,
-      actions: [
+      links: [
         {
           text: "Vorlage herunterladen (PDF-Datei)",
-          linkTo: "/documents/Schaubild Aspekte Technischer Umsetzbarkeit.pdf",
+          to: "/documents/Schaubild Aspekte Technischer Umsetzbarkeit.pdf",
           download: true,
         },
-      ] satisfies ContentAction[],
+      ] satisfies ContentLink[],
     },
   ],
   tip: {
@@ -89,12 +89,12 @@ export const methodsTechnicalFeasibility = {
       
       <p class="mt-24">Schreiben Sie uns über <a href="mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de" class="ds-link-01-bold">digitalcheck@digitalservice.bund.de</a> oder rufen Sie uns an unter <a href="tel:+4915140767839" class="ds-link-01-bold">0151/40 76 78 39</a>.</p>
     `,
-    actions: [
+    links: [
       {
         text: "Unterstützungsangebote nutzen",
         look: "tertiary" as const,
-        linkTo: ROUTE_SUPPORT.url,
+        to: ROUTE_SUPPORT.url,
       },
-    ] satisfies ContentAction[],
+    ] satisfies ContentLink[],
   },
 };

@@ -13,13 +13,13 @@ import RichText from "~/components/RichText";
 import Tabs, { type TabItem } from "~/components/Tabs.tsx";
 import { support } from "~/resources/content/unterstuetzung";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
-import { ContentAction } from "~/utils/contentTypes";
+import { ContentLink } from "~/utils/contentTypes";
 
 type Offering = {
   title: string;
   text: string;
   sellingPoints: string;
-  action?: ContentAction;
+  link?: ContentLink;
   details: {
     icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
     title: string;
@@ -89,7 +89,7 @@ export default function Index() {
                   text: offering.title,
                 }}
                 content={offering.text}
-                actions={offering.action ? [offering.action] : []}
+                links={offering.link ? [offering.link] : []}
               />
               <div className="flex-none space-y-20 md:w-[310px]">
                 <div className="bg-white">
@@ -209,7 +209,7 @@ export default function Index() {
               <RichText markdown={supportHow.text} />
             </InfoBox>
             <ButtonContainer>
-              <LinkButton look="tertiary" to={supportHow.link.linkTo}>
+              <LinkButton look="tertiary" to={supportHow.link.to}>
                 {supportHow.link.text}
               </LinkButton>
             </ButtonContainer>

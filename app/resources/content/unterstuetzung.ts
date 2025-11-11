@@ -8,7 +8,7 @@ import {
   ROUTE_INTEROPERABILITY,
   ROUTE_INTEROPERABILITY_SPOC,
 } from "~/resources/staticRoutes";
-import { ContentAction } from "~/utils/contentTypes.ts";
+import { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const support = {
@@ -62,9 +62,8 @@ export const support = {
     `,
     link: {
       text: "E-Mail senden",
-      linkTo:
-        "mailto:digitalcheck@digitalservice.bund.de?subject=Unterstützungsangebote:%20digitalcheck.bund.de",
-    } satisfies ContentAction,
+      to: "mailto:digitalcheck@digitalservice.bund.de?subject=Unterstützungsangebote:%20digitalcheck.bund.de",
+    } satisfies ContentLink,
   },
   supportOfferings: {
     title: "Unsere Unterstützungsangebote",
@@ -255,9 +254,9 @@ export const support = {
 
               Das Angebot richtet sich an alle, die in den Bundesministerien Regelungen erarbeiten. Vorkenntnisse sind nicht erforderlich.
             `,
-            action: {
+            link: {
               text: "Auf Warteliste setzen",
-              linkTo: encodeURI(dedent`
+              to: encodeURI(dedent`
                 mailto:digitalcheck@digitalservice.bund.de?subject=[Digitalcheck Schulung] Anmeldung digitaltaugliche Regelungen&body=Guten Tag,
 
                 ich möchte mich gerne auf die Warteliste setzen lassen für die Online-Schulung:
@@ -306,7 +305,7 @@ export const support = {
             `,
             action: {
               text: "Auf Warteliste setzen",
-              linkTo: encodeURI(
+              to: encodeURI(
                 dedent`mailto:digitalcheck@digitalservice.bund.de?subject=[Digitalcheck Schulung] Anmeldung Visualisierungen&body=
 Guten Tag,
 
@@ -318,7 +317,7 @@ Mit freundlichen Grüßen
                 `,
               ),
               look: "tertiary" as const,
-            } satisfies ContentAction,
+            } satisfies ContentLink,
             sellingPoints: "Alle Informationen auf einen Blick",
             details: [
               {

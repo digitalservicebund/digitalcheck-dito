@@ -108,11 +108,10 @@ export default function ZFLBegleitungen() {
               text: "Praxisbeispiel: Einsatz eines interdisziplinären Kompetenzteams für das Stromsteuerrecht",
             }}
             content="„Die gründliche Analyse von Vollzugsprozessen hat uns geholfen, das Zusammenspiel zwischen den Regelungen und der Administration besser zu verstehen und so den digitalen Vollzug zu gestalten.“"
-            actions={[
+            links={[
               {
                 text: "Mehr erfahren",
-                linkTo:
-                  "https://digitalcheck.bund.de/beispiele/regelungen/gesetz-zur-modernisierung-und-zum-buerokratieabbau-im-strom-und-energiesteuerrecht",
+                to: "https://digitalcheck.bund.de/beispiele/regelungen/gesetz-zur-modernisierung-und-zum-buerokratieabbau-im-strom-und-energiesteuerrecht",
                 look: "link",
                 target: "_blank",
               },

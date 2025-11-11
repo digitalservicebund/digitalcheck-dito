@@ -3,10 +3,10 @@ import {
   ROUTE_METHODS,
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
-import { LinkAction, Step } from "~/utils/contentTypes.ts";
+import { Step } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
-const stepNKR: Step<LinkAction> = {
+const stepNKR: Step = {
   headline: {
     text: "Prüfen durch den NKR",
   },
@@ -21,9 +21,9 @@ export const steps = {
     },
     content:
       "Finden Sie heraus, ob Sie in Ihrem Regelungsvorhaben Aspekte der digitalen Umsetzung und EU-Anforderungen an Interoperabilität beachten müssen. Danach entscheidet sich, ob die weiteren Schritte für Sie relevant sind.",
-    action: {
+    link: {
       text: "Digitalbezug einschätzen",
-      linkTo: ROUTE_PRECHECK.url,
+      to: ROUTE_PRECHECK.url,
     },
     finished: {
       headline: {
@@ -38,9 +38,9 @@ export const steps = {
     },
     content:
       "Nutzen Sie passende Methoden und Werkzeuge, um Digitaltauglichkeit und Interoperabilität in Ihrer Regelung sicherzustellen. Das Digitalcheck-Team steht Ihnen bei der Erarbeitung zur Verfügung.",
-    action: {
+    link: {
       text: "Zu „Erarbeiten“",
-      linkTo: ROUTE_METHODS.url,
+      to: ROUTE_METHODS.url,
     },
     isDisabled: false,
     finished: {
@@ -56,9 +56,9 @@ export const steps = {
     },
     content:
       "Dokumentieren Sie in einem Fragebogen, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben. Beschreiben Sie, wie Sie diese in das Regelungsvorhaben einfließen lassen. Die Erkenntnisse der vorigen Schritte helfen Ihnen beim Ausfüllen.",
-    action: {
+    link: {
       text: "Zu „Dokumentieren“",
-      linkTo: ROUTE_DOCUMENTATION.url,
+      to: ROUTE_DOCUMENTATION.url,
     },
     isDisabled: false,
     finished: {
@@ -80,4 +80,4 @@ export const steps = {
         Damit ist der Digitalcheck für Sie beendet.
       `,
   },
-} satisfies { [key: string]: Step<LinkAction> };
+} satisfies { [key: string]: Step };

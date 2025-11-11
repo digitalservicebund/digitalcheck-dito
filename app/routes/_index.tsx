@@ -66,7 +66,7 @@ export default function Index() {
 
                 <div className="mt-40 self-center">
                   <LinkButton
-                    to={step.link.linkTo}
+                    to={step.link.to}
                     look={step.link.look}
                     plausibleEventName={step.link.plausibleEventName}
                   >
@@ -123,7 +123,7 @@ export default function Index() {
               text: grundlagen.wasIstDigitaltauglichkeit.title,
             }}
             content={grundlagen.wasIstDigitaltauglichkeit.content}
-            actions={[grundlagen.wasIstDigitaltauglichkeit.link]}
+            links={[grundlagen.wasIstDigitaltauglichkeit.link]}
           />
 
           <InfoBox
@@ -135,7 +135,7 @@ export default function Index() {
               text: grundlagen.nationaleNormenkontrolle.title,
             }}
             content={grundlagen.nationaleNormenkontrolle.content}
-            actions={[grundlagen.nationaleNormenkontrolle.link]}
+            links={[grundlagen.nationaleNormenkontrolle.link]}
           />
         </Container>
       </div>
@@ -151,7 +151,7 @@ export default function Index() {
                 text: visualisierungen.title,
               }}
               content={visualisierungen.content}
-              actions={visualisierungen.links}
+              links={visualisierungen.links}
             />
             <InfoBox
               look="method"
@@ -161,7 +161,7 @@ export default function Index() {
                 text: prinzipien.title,
               }}
               content={prinzipien.content}
-              actions={prinzipien.links}
+              links={prinzipien.links}
             />
           </InfoBoxSideBySide>
         </Container>
@@ -174,7 +174,7 @@ export default function Index() {
             text: individuelleExpertise.title,
           }}
           content={individuelleExpertise.content}
-          actions={[individuelleExpertise.link]}
+          links={[individuelleExpertise.link]}
         />
 
         <InfoBox
