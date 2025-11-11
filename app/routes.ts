@@ -23,6 +23,7 @@ export default [
       route(ROUTE_ZFL_IMPRINT.path, "./zfl/Impressum.tsx"),
       route(ROUTE_ZFL_PRIVACY.path, "./zfl/Datenschutz.tsx"),
       route(ROUTE_ZFL_A11Y.path, "./zfl/Barrierefreiheit.tsx"),
+      route("*", "./zfl/NotFound.tsx"),
     ]),
   ]),
   ...(await flatRoutes()),
