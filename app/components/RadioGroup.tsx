@@ -41,7 +41,7 @@ function RadioGroup<FormData, Value extends string | number = string>({
     <fieldset
       className={twMerge("space-y-16", className)}
       aria-labelledby={label ? `${field.name()}-label` : undefined}
-      aria-errormessage={errorId}
+      aria-errormessage={hasError ? errorId : undefined}
       aria-invalid={!!field.error()}
     >
       {label ? (
@@ -59,7 +59,7 @@ function RadioGroup<FormData, Value extends string | number = string>({
               {...field.getInputProps({
                 type: "radio",
                 id: id,
-                "aria-describedby": errorId,
+                "aria-errormessage": hasError ? errorId : undefined,
                 "aria-invalid": hasError || hasWarning,
                 "aria-required": required,
                 className: twMerge(
