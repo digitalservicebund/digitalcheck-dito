@@ -40,7 +40,7 @@ const PageHeader = () => {
       <div className="relative z-30 flex h-[72px] justify-between border-b-2 border-blue-300 bg-white pl-16 md:px-16">
         {/* Logo and title */}
         <Link
-          to={ROUTE_ZFL_LANDING.href}
+          to={ROUTE_ZFL_LANDING.url}
           className="flex items-center space-x-8"
         >
           <img src="/logo/bund-logo.png" alt="Logo des Bundes" width={54} />
@@ -57,11 +57,11 @@ const PageHeader = () => {
           {headerItems.map((item) => (
             <Link
               key={item.title}
-              to={item.href}
+              to={item.url}
               className={twMerge(
                 basicLinkClasses,
                 "ds-label-01-reg relative h-full border-b-[4px] border-transparent px-16 whitespace-nowrap",
-                currentPath === item.href && activeClasses,
+                currentPath === item.url && activeClasses,
               )}
             >
               {item.title}
@@ -110,11 +110,11 @@ const PageHeader = () => {
       >
         {headerItems.map((item) => (
           <Link
-            to={item.href}
+            to={item.url}
             className={twMerge(
               basicLinkClasses,
               "ds-label-01-reg border-l-[4px] border-transparent p-16",
-              currentPath === item.href && activeClasses,
+              currentPath === item.url && activeClasses,
             )}
             key={item.title}
           >
