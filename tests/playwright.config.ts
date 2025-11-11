@@ -67,6 +67,9 @@ const config: PlaywrightTestConfig = {
   retries: process.env.CI ? 1 : 0, // Retry on CI only
   fullyParallel: true,
   workers: process.env.CI ? 1 : undefined, // Limit the number of workers on CI, use default locally
+  // Look for tests both in /tests and colocated under /app/zfl
+  testDir: path.resolve(__dirname, ".."),
+  testMatch: [/tests\/.*\.(spec|test)\.ts/, /app\/zfl\/.*\.(spec|test)\.ts/],
   timeout: 10_000,
   expect: {
     timeout: 5_000, // Shorter default timeout for assertions
