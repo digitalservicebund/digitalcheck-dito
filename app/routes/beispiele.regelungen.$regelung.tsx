@@ -1,3 +1,4 @@
+import React from "react";
 import { useLoaderData, useOutletContext } from "react-router";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
@@ -9,7 +10,7 @@ import NewTabLink from "~/components/NewTabLink.tsx";
 import ParagraphList from "~/components/ParagraphList";
 import RegulationMetadata from "~/components/RegulationMetadata";
 import RichText from "~/components/RichText.tsx";
-import Tabs, { TabItem } from "~/components/Tabs";
+import TabGroup from "~/components/Tabs.tsx";
 import VisualisationItem from "~/components/VisualisationItem";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
@@ -82,7 +83,7 @@ export default function Gesetz() {
   const regelung = useLoaderData<typeof loader>();
   const principles = useOutletContext<PrinzipWithBeispielvorhaben[]>();
 
-  const tabsData: TabItem[] = [];
+  const tabsData: { title: string; content: React.ReactNode }[] = [];
 
   // ----- Formulierungen / Prinziperfüllungen -----
   if (regelung.Paragraphen.length > 0) {
@@ -219,7 +220,18 @@ export default function Gesetz() {
           {regelung.Titel}
         </Heading> */}
 
-        {tabsData.length > 0 && <Tabs tabs={tabsData} />}
+        <TabGroup>
+          <TabGroup.TabList>
+            {tabsData.map(({ title }) => (
+              <TabGroup.Tab key={title}>{title}</TabGroup.Tab>
+            ))}
+          </TabGroup.TabList>
+          <TabGroup.TabPanels>
+            {tabsData.map(({ content, title }) => (
+              <TabGroup.TabPanel key={title}>{content}</TabGroup.TabPanel>
+            ))}
+          </TabGroup.TabPanels>
+        </TabGroup>
       </ContentWrapper>
     </>
   );

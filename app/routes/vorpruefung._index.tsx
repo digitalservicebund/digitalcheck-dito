@@ -11,7 +11,7 @@ import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxList from "~/components/InfoBoxList";
 import MetaTitle from "~/components/Meta";
 import SupportBanner from "~/components/SupportBanner";
-import Tabs, { type TabItem } from "~/components/Tabs.tsx";
+import TabGroup from "~/components/Tabs.tsx";
 import { PRE_CHECK_START_BUTTON_ID } from "~/resources/constants";
 import { general } from "~/resources/content/shared/general";
 import { supportBanner } from "~/resources/content/shared/support-banner";
@@ -23,70 +23,6 @@ import {
 } from "~/resources/staticRoutes";
 
 export default function Index() {
-  const tabsData: TabItem[] = [
-    {
-      title: preCheck.start.summary.tabName,
-      content: (
-        <div className="space-y-40">
-          <InfoBoxList
-            heading={preCheck.start.summary.heading}
-            items={[preCheck.start.summary.start]}
-          />
-          <ImageBox
-            title={preCheck.start.summary.process.heading}
-            image={preCheck.start.summary.process.image}
-            border
-          />
-          <InfoBox
-            heading={preCheck.start.summary.relevance.heading}
-            content={preCheck.start.summary.relevance.content}
-          />
-        </div>
-      ),
-    },
-    {
-      title: preCheck.start.info.tabName,
-      content: (
-        <div className="flex flex-col-reverse items-center gap-48 bg-blue-100 px-16 py-40 md:flex-row md:gap-64 md:px-64">
-          <Image
-            url={preCheck.start.info.image.src}
-            alternativeText={preCheck.start.info.image.alt}
-            className="md:w-1/3 md:pl-32"
-          />
-          <InfoBox
-            heading={{
-              tagName: "h3",
-              look: "ds-heading-03-reg",
-              text: preCheck.start.info.title,
-            }}
-            content={preCheck.start.info.text}
-            links={[
-              {
-                text: preCheck.start.info.action.text,
-                to: preCheck.start.info.action.to,
-                look: "tertiary",
-                className: "mt-20",
-              },
-            ]}
-          />
-        </div>
-      ),
-    },
-    {
-      title: preCheck.faq.tabName,
-      content: (
-        <>
-          <Heading
-            tagName="h2"
-            look="ds-heading-02-reg mb-64 max-sm:mb-56"
-            text={preCheck.faq.title}
-          />
-          <Accordion items={preCheck.faq.items} />
-        </>
-      ),
-    },
-  ];
-
   return (
     <>
       <MetaTitle prefix={ROUTE_PRECHECK.title} />
@@ -118,7 +54,65 @@ export default function Index() {
       </Hero>
 
       <Container>
-        <Tabs tabs={tabsData} />
+        <TabGroup>
+          <TabGroup.TabList>
+            <TabGroup.Tab>{preCheck.start.summary.tabName}</TabGroup.Tab>
+            <TabGroup.Tab>{preCheck.start.info.tabName}</TabGroup.Tab>
+            <TabGroup.Tab>{preCheck.faq.tabName}</TabGroup.Tab>
+          </TabGroup.TabList>
+          <TabGroup.TabPanels>
+            <TabGroup.TabPanel>
+              <div className="space-y-40">
+                <InfoBoxList
+                  heading={preCheck.start.summary.heading}
+                  items={[preCheck.start.summary.start]}
+                />
+                <ImageBox
+                  title={preCheck.start.summary.process.heading}
+                  image={preCheck.start.summary.process.image}
+                  border
+                />
+                <InfoBox
+                  heading={preCheck.start.summary.relevance.heading}
+                  content={preCheck.start.summary.relevance.content}
+                />
+              </div>
+            </TabGroup.TabPanel>
+            <TabGroup.TabPanel>
+              <div className="flex flex-col-reverse items-center gap-48 bg-blue-100 px-16 py-40 md:flex-row md:gap-64 md:px-64">
+                <Image
+                  url={preCheck.start.info.image.src}
+                  alternativeText={preCheck.start.info.image.alt}
+                  className="md:w-1/3 md:pl-32"
+                />
+                <InfoBox
+                  heading={{
+                    tagName: "h3",
+                    look: "ds-heading-03-reg",
+                    text: preCheck.start.info.title,
+                  }}
+                  content={preCheck.start.info.text}
+                  links={[
+                    {
+                      text: preCheck.start.info.action.text,
+                      to: preCheck.start.info.action.to,
+                      look: "tertiary",
+                      className: "mt-20",
+                    },
+                  ]}
+                />
+              </div>
+            </TabGroup.TabPanel>
+            <TabGroup.TabPanel>
+              <Heading
+                tagName="h2"
+                look="ds-heading-02-reg mb-64 max-sm:mb-56"
+                text={preCheck.faq.title}
+              />
+              <Accordion items={preCheck.faq.items} />
+            </TabGroup.TabPanel>
+          </TabGroup.TabPanels>
+        </TabGroup>
       </Container>
       <SupportBanner {...supportBanner} />
     </>

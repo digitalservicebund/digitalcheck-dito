@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import Tabs from "~/components/Tabs";
+import Tabs from "~/components/Tabs.tsx";
 import twMerge from "~/utils/tailwindMerge.ts";
 
 /**
@@ -7,9 +7,9 @@ import twMerge from "~/utils/tailwindMerge.ts";
  * Not meant to be used for full width elements.
  *
  * It wraps children in a div with `container` class and vertical margin:
- * - 40px on narrow viewports
- * - 80px on lg and above
- *   - exception: if child is Tabs set margin top to 40px instead
+ * - 40 px on narrow viewports
+ * - 80 px on lg and above
+ *   - exception: if child is Tabs, set margin top to 40 px instead
  */
 function ContentWrapper({
   children,

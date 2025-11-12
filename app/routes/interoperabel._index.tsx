@@ -1,3 +1,4 @@
+import { JSX } from "react";
 import Accordion from "~/components/Accordion";
 import { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
@@ -11,7 +12,7 @@ import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxList from "~/components/InfoBoxList";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
-import Tabs, { type TabItem } from "~/components/Tabs.tsx";
+import TabGroup from "~/components/Tabs.tsx";
 import { interoperability } from "~/resources/content/interoperabel";
 import {
   ROUTE_INTEROPERABILITY,
@@ -19,7 +20,7 @@ import {
 } from "~/resources/staticRoutes";
 
 export default function Interoperability() {
-  const tabsData: TabItem[] = [
+  const tabsData: { title: string; content: JSX.Element }[] = [
     {
       title: interoperability.andYourVorhaben.tabName,
       content: (
@@ -151,7 +152,18 @@ export default function Interoperability() {
         </div>
       </div>
       <ContentWrapper>
-        <Tabs tabs={tabsData} />
+        <TabGroup>
+          <TabGroup.TabList>
+            {tabsData.map(({ title }) => (
+              <TabGroup.Tab key={title}>{title}</TabGroup.Tab>
+            ))}
+          </TabGroup.TabList>
+          <TabGroup.TabPanels>
+            {tabsData.map(({ content, title }) => (
+              <TabGroup.TabPanel key={title}>{content}</TabGroup.TabPanel>
+            ))}
+          </TabGroup.TabPanels>
+        </TabGroup>
       </ContentWrapper>
     </>
   );

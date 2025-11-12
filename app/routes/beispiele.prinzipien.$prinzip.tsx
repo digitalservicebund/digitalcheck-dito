@@ -13,7 +13,7 @@ import MetaTitle from "~/components/Meta";
 import ParagraphList from "~/components/ParagraphList";
 import RegulationMetadata from "~/components/RegulationMetadata";
 import Separator from "~/components/Separator";
-import Tabs, { TabItem } from "~/components/Tabs";
+import TabGroup from "~/components/Tabs.tsx";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import {
   ROUTE_EXAMPLES_PRINCIPLES,
@@ -80,17 +80,10 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
 
   const initialActiveIndexForTabs = activeTabIndex !== -1 ? activeTabIndex : 0;
 
-  const tabsForNavigation: TabItem[] = prinzips.map((p) => ({
-    title: p.Kurzbezeichnung,
-    plausibleEventName: `Tab+Bar+${p.Kurzbezeichnung.replaceAll(" ", "+")}`,
-    path: `${ROUTE_EXAMPLES_PRINCIPLES.url}/${p.URLBezeichnung}`,
-    content: null, // Content is handled by the page reload, not by Tabs component
-  }));
-
-  const handleNavigationRequest = async (tab: TabItem) => {
-    if (tab.path) {
-      await navigate(tab.path);
-    }
+  const onTabChange = async (index: number) => {
+    const principle = prinzips[index];
+    const url = `${ROUTE_EXAMPLES_PRINCIPLES.url}/${principle.URLBezeichnung}`;
+    await navigate(url);
   };
 
   return (
@@ -102,11 +95,24 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
       />
 
       <ContentWrapper className="space-y-80">
-        <Tabs
-          tabs={tabsForNavigation}
+        <TabGroup
           initialActiveIndex={initialActiveIndexForTabs}
-          onNavigateRequest={handleNavigationRequest}
-        />
+          onChange={onTabChange}
+        >
+          <TabGroup.TabList>
+            {prinzips.map((principle) => {
+              return (
+                <TabGroup.Tab key={principle.Kurzbezeichnung}>
+                  {principle.Kurzbezeichnung}
+                </TabGroup.Tab>
+              );
+            })}
+          </TabGroup.TabList>
+          {/*
+            No panels here, they are rendered below, depending on the route
+            (that is updated by `onTabChange`).
+          */}
+        </TabGroup>
 
         <InfoBox
           content={prinzip.Beschreibung}

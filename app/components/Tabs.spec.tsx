@@ -1,9 +1,7 @@
-import { render, screen, within } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
-import Container from "~/components/Container.tsx";
-import InfoBox from "~/components/InfoBox.tsx";
-import Tabs, { TabItem } from "./Tabs";
+import TabGroup, { TabGroupProps } from "~/components/Tabs.tsx";
 
 class MockResizeObserver {
   observe() {}
@@ -12,202 +10,147 @@ class MockResizeObserver {
 }
 global.ResizeObserver = MockResizeObserver;
 
-const mockTabs: TabItem[] = [
-  {
-    title: "Example 1",
-    content: (
-      <Container>
-        <InfoBox
-          heading={{
-            tagName: "h3",
-            look: "ds-heading-03-reg",
-            text: "someTitle",
-          }}
-          content={"someText"}
-        />
-      </Container>
-    ),
-  },
-  { title: "Example 2", content: <div>Content Tab 2</div> },
-  { title: "Example 3", content: <span>Content Tab 3</span> },
-];
+const Example = (props: TabGroupProps) => (
+  <TabGroup {...props}>
+    <TabGroup.TabList>
+      <TabGroup.Tab>Tab 0</TabGroup.Tab>
+      <TabGroup.Tab>Tab 1</TabGroup.Tab>
+      <TabGroup.Tab>Tab 2</TabGroup.Tab>
+    </TabGroup.TabList>
+    <TabGroup.TabPanels>
+      <TabGroup.TabPanel>Tab panel 0</TabGroup.TabPanel>
+      <TabGroup.TabPanel>Tab panel 1</TabGroup.TabPanel>
+      <TabGroup.TabPanel>Tab panel 2</TabGroup.TabPanel>
+    </TabGroup.TabPanels>
+  </TabGroup>
+);
+
+function assertSelectedState(expectedIndex: number, container: HTMLElement) {
+  // 1: assert that the correct tab is selected
+  const tabs = screen.getAllByRole("tab");
+  expect(tabs).toHaveLength(3);
+
+  tabs.forEach((tab, index) => {
+    expect(tab).toHaveTextContent(`Tab ${index}`);
+    expect(tab).toHaveAttribute(
+      "aria-controls",
+      expect.stringContaining("panel"),
+    );
+    expect(tab).toHaveAttribute(
+      "aria-selected",
+      index === expectedIndex ? "true" : "false",
+    );
+    expect(tab).toHaveAttribute(
+      "tabindex",
+      index === expectedIndex ? "0" : "-1",
+    );
+  });
+
+  // 2: assert that the correct listbox item is presented
+  const listboxButtons = container.querySelectorAll(
+    'button[aria-haspopup="listbox"]',
+  );
+  expect(listboxButtons).toHaveLength(1);
+  expect(listboxButtons[0]).toHaveTextContent(`Tab ${expectedIndex}`);
+
+  // 3: assert that the correct panel is displayed
+  const panels = screen.getAllByRole("tabpanel");
+  expect(panels).toHaveLength(1);
+  expect(panels[0]).toBeVisible();
+  expect(panels[0]).toHaveTextContent(`Tab panel ${expectedIndex}`);
+}
 
 describe("Tabs component", () => {
   it("Renders correctly with default index", () => {
-    render(<Tabs tabs={mockTabs} />);
+    const { container } = render(<Example />);
 
     expect(screen.getByRole("tablist")).toBeInTheDocument();
-
-    const tabButtons = screen.getAllByRole("tab");
-    expect(tabButtons).toHaveLength(mockTabs.length);
-
-    mockTabs.forEach((tab, index) => {
-      expect(tabButtons[index]).toHaveTextContent(tab.title);
-      expect(tabButtons[index]).toHaveAttribute(
-        "aria-controls",
-        expect.stringContaining("panel"),
-      );
-      expect(tabButtons[index]).toHaveAttribute(
-        "aria-selected",
-        index === 0 ? "true" : "false",
-      );
-      expect(tabButtons[index]).toHaveAttribute(
-        "tabindex",
-        index === 0 ? "0" : "-1",
-      );
-    });
-
-    const listboxButton = screen.getByRole("button", {
-      name: mockTabs[0].title,
-    });
-    expect(listboxButton).toBeInTheDocument();
-
-    const panel1 = screen.getByRole("tabpanel", { name: mockTabs[0].title });
-    expect(panel1).toBeVisible();
-    expect(within(panel1).getByText("someTitle")).toBeVisible();
-    expect(within(panel1).getByText("someText")).toBeVisible();
-
-    const panel2 = screen.queryByRole("tabpanel", { name: mockTabs[1].title });
-    expect(panel2).not.toBeInTheDocument();
-    const panel3 = screen.queryByRole("tabpanel", { name: mockTabs[2].title });
-    expect(panel3).not.toBeInTheDocument();
+    assertSelectedState(0, container);
   });
 
   it("Renders correctly with a specific index", () => {
-    const initialIndex = 1;
-    const { container } = render(
-      <Tabs tabs={mockTabs} initialActiveIndex={initialIndex} />,
-    );
-
-    const tabButtons = screen.getAllByRole("tab");
-    expect(tabButtons[initialIndex]).toHaveAttribute("aria-selected", "true");
-    expect(tabButtons[initialIndex]).toHaveAttribute("tabindex", "0");
-    expect(tabButtons[0]).toHaveAttribute("aria-selected", "false");
-    expect(tabButtons[0]).toHaveAttribute("tabindex", "-1");
-    expect(tabButtons[2]).toHaveAttribute("aria-selected", "false");
-    expect(tabButtons[2]).toHaveAttribute("tabindex", "-1");
-
-    expect(
-      screen.getByRole("button", { name: mockTabs[initialIndex].title }),
-    ).toBeInTheDocument();
-
-    const panelActive = screen.getByRole("tabpanel", {
-      name: mockTabs[initialIndex].title,
-    });
-    expect(panelActive).toBeVisible();
-    expect(within(panelActive).getByText("Content Tab 2")).toBeVisible();
-
-    expect(
-      screen.queryByRole("tabpanel", { name: mockTabs[0].title }),
-    ).not.toBeInTheDocument();
-
-    expect(
-      screen.queryByRole("tabpanel", {
-        name: mockTabs[2].title,
-      }),
-    ).not.toBeInTheDocument();
+    const { container } = render(<Example initialActiveIndex={1} />);
+    assertSelectedState(1, container);
   });
 
   it("Switches tabs and content on tab button click", async () => {
     const user = userEvent.setup();
-    const { container } = render(<Tabs tabs={mockTabs} />);
+    const { container } = render(<Example />);
     const targetIndex = 2;
 
     const tabButtons = screen.getAllByRole("tab");
 
     expect(tabButtons[0]).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByRole("tabpanel", { name: "Tab 0" })).toBeVisible();
     expect(
-      screen.getByRole("tabpanel", { name: mockTabs[0].title }),
-    ).toBeVisible();
-    expect(
-      screen.queryByRole("tabpanel", { name: mockTabs[targetIndex].title }),
+      screen.queryByRole("tabpanel", { name: `Tab ${targetIndex}` }),
     ).not.toBeInTheDocument();
 
     await user.click(tabButtons[targetIndex]);
 
-    expect(tabButtons[0]).toHaveAttribute("aria-selected", "false");
-    expect(tabButtons[0]).toHaveAttribute("tabindex", "-1");
-    expect(tabButtons[targetIndex]).toHaveAttribute("aria-selected", "true");
-    expect(tabButtons[targetIndex]).toHaveAttribute("tabindex", "0");
+    assertSelectedState(2, container);
+  });
 
-    expect(
-      screen.queryByRole("tabpanel", { name: mockTabs[0].title }),
-    ).not.toBeInTheDocument();
-    const activePanel = screen.getByRole("tabpanel", {
-      name: mockTabs[targetIndex].title,
-    });
-    expect(activePanel).toBeVisible();
-    expect(within(activePanel).getByText("Content Tab 3")).toBeVisible();
+  it("triggers onChange calls", async () => {
+    const user = userEvent.setup();
+    const handler = vi.fn();
+    render(<Example onChange={handler} />);
+    await user.click(screen.getByRole("tab", { name: "Tab 1" }));
+    expect(handler).toHaveBeenCalledExactlyOnceWith(1);
   });
 
   describe("Mobile dropdown interaction", () => {
     it("Opens the dropdown options on button click", async () => {
       const user = userEvent.setup();
-      render(<Tabs tabs={mockTabs} />);
+      render(<Example />);
       const listboxButton = screen.getByRole("button", {
-        name: mockTabs[0].title,
+        name: "Tab 0",
       });
 
       expect(
-        screen.queryByRole("option", { name: mockTabs[1].title }),
+        screen.queryByRole("option", { name: "Tab 1" }),
       ).not.toBeInTheDocument();
 
       await user.click(listboxButton);
+      const options = screen.getAllByRole("option");
 
-      const option1 = await screen.findByRole("option", {
-        name: mockTabs[0].title,
-      });
-      const option2 = await screen.findByRole("option", {
-        name: mockTabs[1].title,
-      });
-      const option3 = await screen.findByRole("option", {
-        name: mockTabs[2].title,
-      });
-
-      expect(option1).toBeInTheDocument();
-      expect(option2).toBeInTheDocument();
-      expect(option3).toBeInTheDocument();
+      expect(options).toHaveLength(3);
+      expect(options.map((option) => option.textContent)).toStrictEqual([
+        "Tab 0",
+        "Tab 1",
+        "Tab 2",
+      ]);
     });
 
     it("Switches tabs when an option is clicked", async () => {
       const user = userEvent.setup();
-      const { container } = render(<Tabs tabs={mockTabs} />);
+      const { container } = render(<Example />);
       const targetIndex = 1;
 
-      let listboxButton = screen.getByRole("button", {
-        name: mockTabs[0].title,
+      const listboxButton = screen.getByRole("button", {
+        name: "Tab 0",
       });
-      expect(
-        screen.getByRole("tabpanel", { name: mockTabs[0].title }),
-      ).toBeVisible();
-      expect(
-        screen.queryByRole("tabpanel", { name: mockTabs[1].title }),
-      ).not.toBeInTheDocument();
+      assertSelectedState(0, container);
 
       await user.click(listboxButton);
 
       const targetOption = await screen.findByRole("option", {
-        name: mockTabs[targetIndex].title,
+        name: `Tab ${targetIndex}`,
       });
       await user.click(targetOption);
 
-      listboxButton = await screen.findByRole("button", {
-        name: mockTabs[targetIndex].title,
-      });
-      expect(listboxButton).toBeInTheDocument();
+      assertSelectedState(1, container);
+    });
 
-      expect(
-        screen.queryByRole("tabpanel", { name: mockTabs[0].title }),
-      ).not.toBeInTheDocument();
-      const activePanel = screen.getByRole("tabpanel", {
-        name: mockTabs[targetIndex].title,
-      });
-      expect(activePanel).toBeVisible();
-      expect(within(activePanel).getByText("Content Tab 2")).toBeVisible();
-
-      const tabButtons = screen.getAllByRole("tab");
-      expect(tabButtons[targetIndex]).toHaveAttribute("aria-selected", "true");
-      expect(tabButtons[0]).toHaveAttribute("aria-selected", "false");
+    it("triggers onChange calls", async () => {
+      const user = userEvent.setup();
+      const handler = vi.fn();
+      render(<Example onChange={handler} />);
+      // open the dropdown
+      await user.click(screen.getByRole("button", { name: "Tab 0" }));
+      // select the new tab
+      await user.click(screen.getByRole("option", { name: "Tab 1" }));
+      expect(handler).toHaveBeenCalledExactlyOnceWith(1);
     });
   });
 });

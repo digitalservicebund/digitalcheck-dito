@@ -10,7 +10,7 @@ import Image from "~/components/Image";
 import InfoBox from "~/components/InfoBox";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
-import Tabs, { type TabItem } from "~/components/Tabs.tsx";
+import TabGroup from "~/components/Tabs.tsx";
 import { support } from "~/resources/content/unterstuetzung";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
 import { ContentLink } from "~/utils/contentTypes";
@@ -73,8 +73,8 @@ export default function Index() {
   const location = useLocation();
   const initialTabIndex = location.hash === "#angebote" ? 2 : 0;
 
-  const tabsData: TabItem[] = supportOfferings.tabs.map(
-    (tab): TabItem => ({
+  const tabsData: { title: string; content: React.JSX.Element }[] =
+    supportOfferings.tabs.map((tab) => ({
       title: tab.title,
       content: (
         <>
@@ -142,8 +142,7 @@ export default function Index() {
           ))}
         </>
       ),
-    }),
-  );
+    }));
 
   return (
     <>
@@ -226,7 +225,18 @@ export default function Index() {
           >
             <RichText markdown={supportOfferings.text} />
           </InfoBox>
-          <Tabs tabs={tabsData} initialActiveIndex={initialTabIndex} />
+          <TabGroup initialActiveIndex={initialTabIndex}>
+            <TabGroup.TabList>
+              {tabsData.map(({ title }) => (
+                <TabGroup.Tab key={title}>{title}</TabGroup.Tab>
+              ))}
+            </TabGroup.TabList>
+            <TabGroup.TabPanels>
+              {tabsData.map(({ content, title }) => (
+                <TabGroup.TabPanel key={title}>{content}</TabGroup.TabPanel>
+              ))}
+            </TabGroup.TabPanels>
+          </TabGroup>
         </Container>
       </div>
 
