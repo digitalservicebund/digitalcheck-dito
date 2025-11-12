@@ -1,6 +1,6 @@
 @import "@digitalservice4germany/angie/fonts.css" layer(base);
 
-@import "tailwindcss";
+@import "tailwindcss" source("../app"); /* keep source to explicitly tell Tailwind where to scan for classes in your source files to prevent hydration issues */
 
 @config "@digitalservice4germany/style-dictionary/tailwind";
 @plugin "@digitalservice4germany/angie";
