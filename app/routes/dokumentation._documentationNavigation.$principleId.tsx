@@ -593,14 +593,11 @@ export default function DocumentationPrinciple() {
             />
           )}
 
-          <InlineNotice look="tips" heading={principlePages.storageHint.title}>
-            {principlePages.storageHint.content}
-          </InlineNotice>
-
           <DocumentationActions
             previousUrl={previousUrl}
             submit
-            showDownloadDraftButton={true}
+            showDownloadDraftButton
+            showSavingTip
           />
 
           {testVariant === "descriptionOnBottom" && fullPrinciple && (

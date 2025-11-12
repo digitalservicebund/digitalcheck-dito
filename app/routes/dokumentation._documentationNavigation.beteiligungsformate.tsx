@@ -1,7 +1,6 @@
 import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
-import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
@@ -86,18 +85,11 @@ export default function DocumentationParticipation() {
           </Textarea>
         </fieldset>
 
-        <InlineNotice
-          look="tips"
-          heading={<Heading tagName="h2">{participation.tip.heading}</Heading>}
-          className="mt-40"
-        >
-          <RichText markdown={participation.tip.content} />
-        </InlineNotice>
-
         <DocumentationActions
           previousUrl={previousUrl}
           submit
-          showDownloadDraftButton={true}
+          showDownloadDraftButton
+          showSavingTip
         />
       </form>
     </>

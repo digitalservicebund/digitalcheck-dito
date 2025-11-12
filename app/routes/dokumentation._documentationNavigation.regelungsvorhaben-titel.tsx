@@ -49,7 +49,8 @@ export default function DocumentationTitle() {
         <DocumentationActions
           previousUrl={previousUrl}
           submit
-          showDownloadDraftButton={true}
+          showDownloadDraftButton
+          showSavingTip
         />
       </form>
     </>

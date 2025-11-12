@@ -217,11 +217,6 @@ export const digitalDocumentation = {
         errorMessage: "Bitte geben Sie eine Antwort.",
       },
     },
-    tip: {
-      heading: "Ihre eingegebenen Angaben werden in der Sitzung gespeichert.",
-      content:
-        "Sie können Ihre Angaben als Word-Dokument herunterladen und zu einem späteren Zeitpunkt vervollständigen.",
-    },
   },
   principlePages: {
     badge: "Prinzipien",
@@ -278,11 +273,6 @@ export const digitalDocumentation = {
       label: "Begründung",
       placeholder:
         "Begründung warum das Prinzip nicht relevant für Ihr Regelungsvorhaben ist.",
-    },
-    storageHint: {
-      title: "Ihre eingegebenen Angaben werden in der Sitzung gespeichert.",
-      content:
-        "Sie können Ihre Angaben als Word-Dokument herunterladen und zu einem späteren Zeitpunkt vervollständigen.",
     },
     explanationFields: {
       title: "Ihre Erläuterung",
@@ -366,5 +356,6 @@ export const digitalDocumentation = {
     saveDraft: {
       title: "Zwischenstand speichern (.docx)",
     },
+    savingTip: "Ihre Daten werden automatisch im Browser gespeichert.",
   },
 };
