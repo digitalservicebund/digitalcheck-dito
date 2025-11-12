@@ -21,6 +21,20 @@ export const news = {
   items: [
     {
       badge: {
+        text: "11.11.2025",
+      },
+      content: dedent`
+        Die Dokumentation kann nun direkt online in einem Formular ausgefüllt werden.
+        Ihre Vorteile im Überblick:
+          - Hilfreiche Begleitung: Strukturierte Abfragen unterstützen Sie dabei, die Digitalcheck-Prinzipien präzise anzuwenden.
+          - Immer aktuell: Sie nutzen automatisch die neueste Fassung. Veraltete Word-Dokumente und Abstimmungsaufwand entfallen.
+          - Flexibel bearbeiten: Sie können jederzeit unterbrechen und die Arbeit ohne Datenverlust später fortsetzen.
+       Das fertige Ergebnis (wie bisher als Word-Datei) übermitteln Sie direkt an den NKR.
+       [Hier ansehen](${ROUTE_DOCUMENTATION.url})
+      `,
+    },
+    {
+      badge: {
         text: "01.10.2025",
       },
       content: `Neues Beispiel ergänzt: SGB VI-Anpassungsgesetz (Einführung Fallmanagement DRV) [Hier ansehen](${ROUTE_REGELUNGEN.url}/sgb-vi-anpassungsgesetz-einfuehrung-fallmanagement-drv)`,
