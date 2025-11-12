@@ -71,6 +71,7 @@ const config: PlaywrightTestConfig = {
   expect: {
     timeout: 5_000, // Shorter default timeout for assertions
   },
+  globalTimeout: process.env.CI ? 5 * 60_000 : undefined, // Stop the whole test run after 5 minutes (in CI)
   use: {
     viewport: { width: 1280, height: 720 },
     acceptDownloads: true,
