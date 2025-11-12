@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`dokumentation/route.tsx > renders the routes correctly 1`] = `
+exports[`dokumentation/route.tsx > renders the routes as in the snapshot 1`] = `
 [
   {
     "hideInSitemap": undefined,
