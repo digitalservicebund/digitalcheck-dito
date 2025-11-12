@@ -4,10 +4,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      # Set DEBUG_BUILD=true to disable minification and enable source maps for debugging
-      # This will show non-minified React errors in the browser console
-      args:
-        DEBUG_BUILD: ${DEBUG_BUILD:-false}
     env_file:
       - .env
     # For improved local development where you don't need to rebuild the image when you change the code (not working yet)
