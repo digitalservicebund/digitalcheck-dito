@@ -13,6 +13,10 @@ export default defineConfig({
   ],
   build: {
     target: "ES2022",
+    // Disable minification when DEBUG_BUILD is set for better error messages
+    minify: process.env.DEBUG_BUILD !== "true" ? "esbuild" : false,
+    // Enable source maps for debugging
+    sourcemap: process.env.DEBUG_BUILD === "true" ? true : false,
     rollupOptions: {
       external: [/\.spec\.tsx?$/], // exclude test files from production build
     },
