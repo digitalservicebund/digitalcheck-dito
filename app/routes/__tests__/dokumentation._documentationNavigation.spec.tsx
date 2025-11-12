@@ -39,7 +39,10 @@ vi.mock("react-router", async (importOriginal) => {
     useRouteLoaderData: vi.fn(),
     useOutletContext: () => {
       const originalValue = original.useOutletContext();
-      return { ...originalValue, featureFlags: {} };
+      return {
+        ...(originalValue as Record<string, unknown>),
+        featureFlags: {},
+      };
     },
   };
 });
