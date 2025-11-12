@@ -1,0 +1,89 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`dokumentation/route.tsx > renders the routes correctly 1`] = `
+[
+  {
+    "hideInSitemap": undefined,
+    "parent": {
+      "hideInSitemap": undefined,
+      "parent": {
+        "title": "Startseite",
+        "url": "/",
+      },
+      "title": "Dokumentation",
+      "url": "/dokumentation",
+    },
+    "title": "Regelungsvorhaben Titel",
+    "url": "/dokumentation/regelungsvorhaben-titel",
+  },
+  {
+    "hideInSitemap": undefined,
+    "parent": {
+      "hideInSitemap": undefined,
+      "parent": {
+        "title": "Startseite",
+        "url": "/",
+      },
+      "title": "Dokumentation",
+      "url": "/dokumentation",
+    },
+    "title": "Beteiligungsformate",
+    "url": "/dokumentation/beteiligungsformate",
+  },
+  [
+    {
+      "principleId": "r57rc9d82ulv2bsc3gdbnj73",
+      "title": "Digitale Angebote für alle nutzbar gestalten",
+      "url": "/dokumentation/digitale-angebote-fuer-alle-nutzbar-gestalten",
+    },
+    {
+      "principleId": "s18bibg9sdf0jt8up7h8btup",
+      "title": "Datenwiederverwendung benötigt einheitliches Recht",
+      "url": "/dokumentation/datenwiederverwendung-benoetigt-einheitliches-recht",
+    },
+    {
+      "principleId": "habu0yjh39lc5wug5mqsqzaj",
+      "title": "Etablierte Technologien ermöglichen effiziente Umsetzung",
+      "url": "/dokumentation/etablierte-technologien-ermoeglichen-effiziente-umsetzung",
+    },
+    {
+      "principleId": "got436pv8femeqmv6ee8wlm1",
+      "title": "Automatisierung basiert auf eindeutigen Regelungen",
+      "url": "/dokumentation/automatisierung-basiert-auf-eindeutigen-regelungen",
+    },
+    {
+      "principleId": "bnx9lmblnceu1m3uy3rziy0i",
+      "title": "Datenschutz und Informationssicherheit schaffen Vertrauen",
+      "url": "/dokumentation/datenschutz-und-informationssicherheit-schaffen-vertrauen",
+    },
+  ],
+  {
+    "hideInSitemap": undefined,
+    "parent": {
+      "hideInSitemap": undefined,
+      "parent": {
+        "title": "Startseite",
+        "url": "/",
+      },
+      "title": "Dokumentation",
+      "url": "/dokumentation",
+    },
+    "title": "Zusammenfassung",
+    "url": "/dokumentation/zusammenfassung",
+  },
+  {
+    "hideInSitemap": undefined,
+    "parent": {
+      "hideInSitemap": undefined,
+      "parent": {
+        "title": "Startseite",
+        "url": "/",
+      },
+      "title": "Dokumentation",
+      "url": "/dokumentation",
+    },
+    "title": "Absenden",
+    "url": "/dokumentation/absenden",
+  },
+]
+`;

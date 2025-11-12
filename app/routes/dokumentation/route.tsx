@@ -1,6 +1,7 @@
 import { Outlet, useOutletContext, useRouteLoaderData } from "react-router";
 import {
   Route,
+  ROUTE_DOCUMENTATION,
   ROUTES_DOCUMENTATION_POST,
   ROUTES_DOCUMENTATION_PRE,
 } from "~/resources/staticRoutes.ts";
@@ -19,7 +20,7 @@ export type DocumentationRouteData = {
   prinzips: PrinzipWithAspekte[];
 };
 
-const getUrlForSlug = (slug: string) => `/dokumentation/${slug}`;
+const getUrlForSlug = (slug: string) => `${ROUTE_DOCUMENTATION.url}/${slug}`;
 
 export const loader: () => Promise<DocumentationRouteData> = async () => {
   const prinzipData = await fetchStrapiData<{

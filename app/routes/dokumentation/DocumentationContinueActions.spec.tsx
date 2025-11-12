@@ -11,23 +11,27 @@ import { MemoryRouter } from "react-router";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general.ts";
 import { ROUTE_DOCUMENTATION_TITLE } from "~/resources/staticRoutes.ts";
-import downloadDocumentation from "~/service/wordDocumentationExport/wordDocumentation.ts";
 import { DocumentationContinueActions } from "./DocumentationContinueActions";
 import { useDocumentationData } from "./documentationDataHook";
-import {
-  deleteDocumentationData,
-  initialDocumentationData,
-} from "./documentationDataService";
+import { initialDocumentationData } from "./documentationDataService";
 
-vi.mock("~/utils/nonce", () => ({
-  useNonce: () => "test-nonce",
-}));
-
+const { mockDeleteDocumentationData, mockDownloadDocumentation } = vi.hoisted(
+  () => ({
+    mockDownloadDocumentation: vi.fn(),
+    mockDeleteDocumentationData: vi.fn(),
+  }),
+);
 vi.mock("~/service/wordDocumentationExport/wordDocumentation", () => ({
-  default: vi.fn(() => Promise.resolve()),
+  default: mockDownloadDocumentation,
 }));
 
-vi.mock("~/routes/dokumentation/documentationDataService");
+vi.mock(
+  "~/routes/dokumentation/documentationDataService",
+  async (importOriginal) => ({
+    ...(await importOriginal()),
+    deleteDocumentationData: mockDeleteDocumentationData,
+  }),
+);
 
 // Helper to set the mocked return for useDocumentationData
 const setHasSavedDocumentation = (value: boolean) => {
@@ -103,7 +107,7 @@ describe("DocumentationContinueActions", () => {
       });
       downloadButton.click();
 
-      expect(vi.mocked(downloadDocumentation)).toHaveBeenCalled();
+      expect(mockDownloadDocumentation).toHaveBeenCalled();
     });
 
     it("clears the documentation data and navigates to the first step when the start-over button is clicked", async () => {
@@ -113,7 +117,7 @@ describe("DocumentationContinueActions", () => {
       });
       confirmButton.click();
 
-      expect(vi.mocked(deleteDocumentationData)).toHaveBeenCalled();
+      expect(mockDeleteDocumentationData).toHaveBeenCalled();
       expect(mockNavigate).toHaveBeenCalledWith(ROUTE_DOCUMENTATION_TITLE.url);
     });
   });
