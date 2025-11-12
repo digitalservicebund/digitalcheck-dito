@@ -140,24 +140,8 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
 
   const isZFLPage = location.pathname.startsWith(`/${ZFL_ROUTE_PREFIX}`);
 
-  let metaProperties = <></>;
-  if (!error && rootLoaderData) {
-    const url = `${rootLoaderData.BASE_URL}${location.pathname}`;
-    const ogImage = `${rootLoaderData.BASE_URL}/images/og-image.png`;
-    metaProperties = (
-      <>
-        <meta property="og:site_name" content={siteMeta.siteName} />
-        <meta property="og:description" content={siteMeta.description} />
-        <meta property="twitter:description" content={siteMeta.description} />
-        <meta property="og:url" content={url} />
-        <meta property="twitter:url" content={url} />
-        <meta property="og:image" content={ogImage} />
-        <meta property="twitter:image" content={ogImage} />
-        <meta property="og:type" content="website" />
-        <meta property="twitter:card" content="summary_large_image" />
-      </>
-    );
-  }
+  const url = `${rootLoaderData?.BASE_URL}${location.pathname}`;
+  const ogImage = `${rootLoaderData?.BASE_URL}/images/og-image.png`;
 
   // this suggests a site name to search engines
   const jsonLdMetadata = {
@@ -172,12 +156,27 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content={siteMeta.description} />
+        {!error && rootLoaderData && !isZFLPage && (
+          <>
+            <meta name="description" content={siteMeta.description} />
+            <meta property="og:site_name" content={siteMeta.siteName} />
+            <meta property="og:description" content={siteMeta.description} />
+            <meta
+              property="twitter:description"
+              content={siteMeta.description}
+            />
+            <meta property="og:url" content={url} />
+            <meta property="twitter:url" content={url} />
+            <meta property="og:image" content={ogImage} />
+            <meta property="twitter:image" content={ogImage} />
+            <meta property="og:type" content="website" />
+            <meta property="twitter:card" content="summary_large_image" />
+          </>
+        )}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdMetadata) }}
         ></script>
-        {metaProperties}
         {trackingEnabled && (
           <script
             key={error ? "error-tracking" : "app-tracking"}
