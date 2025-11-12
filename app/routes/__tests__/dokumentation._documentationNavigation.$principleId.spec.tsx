@@ -66,6 +66,10 @@ const mockedUseOutletContext = vi.mocked(useOutletContext);
 const mockedUseDocumentationData = vi.mocked(useDocumentationData);
 const mockedUseLoaderData = vi.mocked(useLoaderData);
 
+vi.mock("~/utils/featureFlags", () => ({
+  default: vi.fn(),
+}));
+
 const renderWithRouter = () => {
   const router = createBrowserRouter([
     { path: "/", Component: DocumentationPrinciple },

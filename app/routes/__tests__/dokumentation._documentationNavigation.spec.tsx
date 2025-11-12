@@ -19,6 +19,7 @@ import {
   ROUTES_DOCUMENTATION_PRE,
 } from "~/resources/staticRoutes";
 
+import { features } from "~/resources/features.ts";
 import LayoutWithDocumentationNavigation, {
   NavigationContext,
 } from "~/routes/dokumentation._documentationNavigation";
@@ -36,6 +37,10 @@ vi.mock("react-router", async (importOriginal) => {
   return {
     ...original,
     useRouteLoaderData: vi.fn(),
+    useOutletContext: () => {
+      const originalValue = original.useOutletContext();
+      return { ...originalValue, featureFlags: {} };
+    },
   };
 });
 
@@ -237,7 +242,9 @@ const expectWarning = (element: HTMLElement, warning: boolean = true) => {
 
 describe("navigation on pages of documentation", () => {
   beforeEach(() => {
-    vi.mocked(useFeatureFlag).mockReturnValue(true);
+    vi.mocked(useFeatureFlag).mockImplementation(
+      (flag) => flag === features.enableDigitalDocumentation,
+    );
     vi.mocked(useRouteLoaderData).mockReturnValue({ routes: mockRoutes });
   });
 
