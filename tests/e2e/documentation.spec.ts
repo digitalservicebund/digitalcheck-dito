@@ -243,7 +243,9 @@ test.describe("documentation flow happy path", () => {
   });
 
   test("handle aspect and multiple own explanations on last principle", async () => {
-    await page.getByLabel("Ja, gänzlich oder teilweise").click();
+    await page
+      .getByRole("radio", { name: "Ja, gänzlich oder teilweise" })
+      .check();
 
     const form = page.locator("form");
 
