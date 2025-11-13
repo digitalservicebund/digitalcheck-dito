@@ -20,4 +20,9 @@ export default defineConfig({
   ssr: {
     noExternal: ["posthog-js", "posthog-js/react"],
   },
+  /*
+     Fix disallowed MIME type errors when running in development mode.
+     See https://github.com/vitejs/vite/discussions/13910#discussioncomment-8377145
+  */
+  base: process.env.DEVELOPMENT ? "./" : undefined,
 });
