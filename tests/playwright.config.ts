@@ -35,7 +35,12 @@ export const allProjects: PlaywrightTestConfig["projects"] = [
   },
   {
     name: "Mobile Chrome",
-    use: { ...devices["Pixel 7"] },
+    use: {
+      ...devices["Pixel 7"],
+      contextOptions: {
+        permissions: ["clipboard-read", "clipboard-write"],
+      },
+    },
   },
   // Omit tests with mobile safari due to flaky test results
   // {
