@@ -63,10 +63,6 @@ export const allProjects: PlaywrightTestConfig["projects"] = [
   },
 ];
 
-const defaultProjects = allProjects.filter(
-  (project) => project.name === "Desktop Chrome",
-);
-
 const config: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI, // Fail the build on CI if test.only is present
   retries: process.env.CI ? 1 : 0, // Retry on CI only
@@ -93,7 +89,7 @@ const config: PlaywrightTestConfig = {
       },
     ],
   ],
-  projects: defaultProjects,
+  projects: allProjects,
   webServer: {
     // We're testing the built code, but set the NODE_ENV to enable mocks
     command: "npm run build && NODE_ENV=development PORT=5172 npm run start",
