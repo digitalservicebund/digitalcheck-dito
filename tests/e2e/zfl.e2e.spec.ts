@@ -17,9 +17,13 @@ test.describe("ZFL landing and header", () => {
     ).toBeVisible();
   });
 
-  test("header links navigate to Begleitungen and Schulungen", async ({
+  test("Desktop header links navigate to Begleitungen and Schulungen", async ({
     page,
   }) => {
+    test.skip(
+      test.info().project.name.includes("Mobile"),
+      "Skipping desktop nav test on mobile.",
+    );
     await page.goto(ROUTE_ZFL_LANDING.url);
     const nav = page.getByTestId("desktop-nav");
 
@@ -76,7 +80,9 @@ test.describe("ZFL 404 within /zfl", () => {
     expect(response?.status()).toBe(404);
 
     // header from ZFL layout still visible
-    await expect(page.getByRole("link", { name: ZFL_TITLE })).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: "Logo des Bundes" }),
+    ).toBeVisible();
 
     await expect(page.locator("#error")).toBeVisible();
     await page.getByRole("link", { name: "Zurück zur Startseite" }).click();
