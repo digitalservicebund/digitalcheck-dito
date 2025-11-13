@@ -38,7 +38,6 @@ export default function DocumentationSend() {
             children: (
               <ButtonContainer>
                 <DownloadButton
-                  look="link"
                   onClick={() => void downloadDocumentation(prinzips)}
                 >
                   {finish.download.buttonText}
