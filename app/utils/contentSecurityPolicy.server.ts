@@ -17,6 +17,11 @@ function getBaseContentSecurityPolicy(): string {
     "connect-src": "'self' https://plausible.io https://*.posthog.com",
     "worker-src": "'self' https://*.posthog.com",
   };
+  const isDevelopment = process.env.NODE_ENV === "development";
+  if (isDevelopment) {
+    // allow blob: URLs in development to allow hot module replacement
+    config["worker-src"] += " blob:";
+  }
   return Object.entries(config)
     .map(([key, value]) => `${key} ${value}`)
     .join("; ");
