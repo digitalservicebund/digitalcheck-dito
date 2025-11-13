@@ -6,12 +6,14 @@ import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
 import type { EntryContext } from "react-router";
 import { ServerRouter } from "react-router";
+import { generateContentSecurityPolicy } from "~/utils/contentSecurityPolicy.server.ts";
 import logResponseStatus from "~/utils/logging";
 import { NonceProvider } from "~/utils/nonce";
-// We need to import the mock server here (which unfortunately also happens in production)
-// because we couldn't get the mocks to register in time otherwise in CI,
-// as awaiting a dynamic esm import did not work with npm run build & npm run start.
-import { STRAPI_MEDIA_URL } from "~/resources/constants.ts";
+/*
+ We need to import the mock server here (which unfortunately also happens in production)
+ because we couldn't get the mocks to register in time otherwise in CI,
+ as awaiting a dynamic esm import did not work with npm run build & npm run start.
+*/
 import { mockServer } from "./mocks/node";
 
 if (
@@ -133,7 +135,7 @@ function handleBrowserRequest(
 
   responseHeaders.set(
     "Content-Security-Policy",
-    `default-src 'self'; script-src 'self' https://*.posthog.com https: 'nonce-${nonce}'; style-src 'self' https://*.posthog.com 'nonce-${nonce}'; font-src 'self' https://*.posthog.com; img-src 'self' ${STRAPI_MEDIA_URL} data: https://*.posthog.com; media-src 'self' ${STRAPI_MEDIA_URL}; frame-ancestors 'self' https://calendar.google.com https://calendar.app.google https://*.posthog.com; frame-src 'self' https://calendar.google.com; connect-src 'self' https://plausible.io https://*.posthog.com; worker-src 'self' https://*.posthog.com;`,
+    generateContentSecurityPolicy(nonce),
   );
 
   return new Promise((resolve, reject) => {
