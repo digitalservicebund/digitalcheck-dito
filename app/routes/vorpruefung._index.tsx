@@ -1,7 +1,7 @@
-import AccordionList from "~/components/AccordionList.tsx";
 import { LinkButton } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
+import { PreCheckFAQ } from "~/components/content/PreCheckFAQ.tsx";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
@@ -109,7 +109,7 @@ export default function Index() {
                 look="ds-heading-02-reg mb-64 max-sm:mb-56"
                 text={preCheck.faq.title}
               />
-              <AccordionList items={preCheck.faq.items} />
+              <PreCheckFAQ />
             </TabGroup.TabPanel>
           </TabGroup.TabPanels>
         </TabGroup>

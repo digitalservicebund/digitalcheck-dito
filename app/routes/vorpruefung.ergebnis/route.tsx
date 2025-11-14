@@ -11,7 +11,6 @@ import React, { useState } from "react";
 import { data, Link, redirect, useLoaderData } from "react-router";
 import { twJoin } from "tailwind-merge";
 
-import AccordionList from "~/components/AccordionList.tsx";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Heading from "~/components/Heading";
@@ -45,6 +44,7 @@ import type { Route } from "./+types/route";
 import { PreCheckResult, ResultType } from "./PreCheckResult";
 import { schema } from "./resultValidation";
 
+import { PreCheckFAQ } from "~/components/content/PreCheckFAQ.tsx";
 import { Step } from "~/utils/contentTypes.ts";
 import { PreCheckAnswers } from "../vorpruefung._preCheckNavigation.$questionId";
 
@@ -343,7 +343,7 @@ export default function Result() {
           look="ds-heading-02-reg text-center mb-64 max-sm:mb-56"
           text={preCheck.faq.title}
         />
-        <AccordionList items={preCheck.faq.items} />
+        <PreCheckFAQ />
       </Container>
     </>
   );
