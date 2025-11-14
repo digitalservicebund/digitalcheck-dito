@@ -29,7 +29,8 @@ export default function DetailsSummary({
 
   const contentWrapperClasses = twJoin(
     "block pt-4 pl-[24px] text-black",
-    showVerticalLine && "relative",
+    showVerticalLine &&
+      "relative before:absolute before:top-0 before:bottom-0 before:w-px before:bg-blue-500 before:left-[11px]",
   );
 
   useEffect(() => {
@@ -80,18 +81,7 @@ export default function DetailsSummary({
         {title}
       </summary>
 
-      <div className={contentWrapperClasses}>
-        {showVerticalLine && (
-          <div
-            aria-hidden="true"
-            className={twJoin(
-              "absolute top-0 bottom-0 w-[1px] bg-blue-500",
-              "left-[11px]",
-            )}
-          />
-        )}
-        {children}
-      </div>
+      <div className={contentWrapperClasses}>{children}</div>
     </details>
   );
 }
