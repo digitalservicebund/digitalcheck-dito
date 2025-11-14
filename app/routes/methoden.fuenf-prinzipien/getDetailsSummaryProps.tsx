@@ -1,6 +1,8 @@
 import { Link } from "react-router";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
+import { DetailsSummaryProps } from "~/components/DetailsSummary.tsx";
 import type { HeadingProps } from "~/components/Heading";
+import { InfoBoxProps } from "~/components/InfoBox.tsx";
 import PrincipleHighlightModifier from "~/components/PrincipleHighlightModifier";
 import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
@@ -9,12 +11,14 @@ import { absatzIdTag } from "~/utils/paragraphUtils";
 import { PrinzipWithAspekte } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 
-export default function getDetailsSummary(prinzip: PrinzipWithAspekte) {
+export default function getDetailsSummaryProps(
+  prinzip: PrinzipWithAspekte,
+): InfoBoxProps["detailsSummary"] {
   const { Aspekte } = prinzip;
 
-  const items = Aspekte.map((aspekt) => {
+  const items: DetailsSummaryProps[] = Aspekte.map((aspekt) => {
     const identifier = slugify(aspekt.Titel);
-    const content = (
+    const children = (
       <div className="space-y-4">
         <BlocksRenderer content={aspekt.Text} />
         {aspekt.Leitfragen && (
@@ -61,7 +65,11 @@ export default function getDetailsSummary(prinzip: PrinzipWithAspekte) {
       </div>
     );
 
-    return { title: aspekt.Titel, content, identifier };
+    return {
+      title: aspekt.Titel,
+      children,
+      identifier,
+    } satisfies DetailsSummaryProps;
   });
 
   if (items.length === 0) return undefined;

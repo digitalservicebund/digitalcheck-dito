@@ -8,7 +8,7 @@ import type {
   PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
-import getDetailsSummary from "./getDetailsSummary";
+import getDetailsSummaryProps from "./getDetailsSummaryProps.tsx";
 
 type PrincipleProps = {
   prinzip: PrinzipWithAspekte;
@@ -28,7 +28,7 @@ export default function Principle({ prinzip }: Readonly<PrincipleProps>) {
           principleNumber: prinzip.Nummer,
         }}
         content={prinzip.Beschreibung}
-        detailsSummary={getDetailsSummary(prinzip)}
+        detailsSummary={getDetailsSummaryProps(prinzip)}
       />
 
       {prinzip.Beispiel && (

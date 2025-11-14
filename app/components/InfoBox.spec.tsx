@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { createRoutesStub } from "react-router";
 import { describe, expect, it } from "vitest";
-import InfoBox from "./InfoBox";
+import InfoBox, { InfoBoxProps } from "./InfoBox";
 
 describe("InfoBox", () => {
   describe("Top level elements", () => {
@@ -25,10 +25,10 @@ describe("InfoBox", () => {
     });
 
     it("shows the detailSummary", () => {
-      const testDetailSummary = {
+      const testDetailSummary: InfoBoxProps["detailsSummary"] = {
         items: [
-          { title: "Test Detail 1", content: "Test Content 1" },
-          { title: "Test Detail 2", content: "Test Content 2" },
+          { title: "Test Detail 1", children: "Test Content 1" },
+          { title: "Test Detail 2", children: "Test Content 2" },
         ],
       };
       render(<InfoBox detailsSummary={testDetailSummary} />);

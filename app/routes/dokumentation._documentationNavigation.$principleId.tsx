@@ -33,7 +33,7 @@ import {
   type PrincipleReasoning,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { addOrUpdatePrinciple } from "~/routes/dokumentation/documentationDataService";
-import getDetailsSummary from "~/routes/methoden.fuenf-prinzipien/getDetailsSummary.tsx";
+import getDetailsSummaryProps from "~/routes/methoden.fuenf-prinzipien/getDetailsSummaryProps.tsx";
 import { PrincipleExample } from "~/routes/methoden.fuenf-prinzipien/Principle.tsx";
 import { getFeatureFlags } from "~/utils/featureFlags.server.ts";
 import useFeatureFlag from "~/utils/featureFlags.ts";
@@ -611,7 +611,7 @@ export default function DocumentationPrinciple() {
                     text: "Das Prinzip im Detail",
                   }}
                   content={fullPrinciple.Beschreibung}
-                  detailsSummary={getDetailsSummary(fullPrinciple)}
+                  detailsSummary={getDetailsSummaryProps(fullPrinciple)}
                 />
 
                 {fullPrinciple.Beispiel && (

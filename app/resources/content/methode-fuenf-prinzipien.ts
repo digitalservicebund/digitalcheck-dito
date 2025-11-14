@@ -11,18 +11,6 @@ import {
 import { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
-export type DetailsSummary = {
-  title: string;
-  items: DetailsSummaryItem[];
-};
-
-export type DetailsSummaryItem = {
-  title: string;
-  text: string;
-  questions: string[];
-  wordingExample?: string;
-};
-
 export const methodsFivePrinciples = {
   title: "Chancen und Hindernisse der digitalen Umsetzung identifizieren",
   subtitle: dedent`
