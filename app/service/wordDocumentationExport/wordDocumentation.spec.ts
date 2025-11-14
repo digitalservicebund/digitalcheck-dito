@@ -1,4 +1,5 @@
 import { HeadingLevel, PatchType, TextRun } from "docx";
+import { describe, expect, it, vi } from "vitest";
 import { documentationDocument } from "~/resources/content/documentation-document";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
