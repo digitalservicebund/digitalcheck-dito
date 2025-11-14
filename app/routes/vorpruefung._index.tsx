@@ -1,4 +1,4 @@
-import Accordion from "~/components/Accordion";
+import AccordionList from "~/components/AccordionList.tsx";
 import { LinkButton } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
@@ -109,7 +109,7 @@ export default function Index() {
                 look="ds-heading-02-reg mb-64 max-sm:mb-56"
                 text={preCheck.faq.title}
               />
-              <Accordion items={preCheck.faq.items} />
+              <AccordionList items={preCheck.faq.items} />
             </TabGroup.TabPanel>
           </TabGroup.TabPanels>
         </TabGroup>

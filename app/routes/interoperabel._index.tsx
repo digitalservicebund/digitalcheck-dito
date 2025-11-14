@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import Accordion from "~/components/Accordion";
+import AccordionList from "~/components/AccordionList.tsx";
 import { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";
@@ -103,7 +103,7 @@ export default function Interoperability() {
             className="mb-8"
           />
           <RichText markdown={interoperability.faq.content} className="mb-40" />
-          <Accordion items={interoperability.faq.items} />
+          <AccordionList items={interoperability.faq.items} />
         </>
       ),
     },

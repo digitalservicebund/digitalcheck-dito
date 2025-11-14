@@ -1,6 +1,6 @@
 import AccordionItem, { AccordionItemProps } from "./AccordionItem";
 
-export default function Accordion({
+export default function AccordionList({
   items,
 }: Readonly<{ items: AccordionItemProps[] }>) {
   return (
