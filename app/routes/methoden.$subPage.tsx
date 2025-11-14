@@ -7,6 +7,7 @@ import Image from "~/components/Image.tsx";
 import InfoBox from "~/components/InfoBox";
 import MetaTitle from "~/components/Meta";
 import MethodCard from "~/components/MethodCard";
+import RichText from "~/components/RichText.tsx";
 import { methodsITSystems } from "~/resources/content/methode-it-systeme-erfassen";
 import { methodsTechnicalFeasibility } from "~/resources/content/methode-technische-umsetzbarkeit";
 import { methodsResponsibleActors } from "~/resources/content/methode-zustaendige-akteurinnen-auflisten";
@@ -59,10 +60,9 @@ export default function Index() {
 
       {"accordion" in content && (
         <Container className="pb-0">
-          <DetailsSummary
-            title={content.accordion.title}
-            content={content.accordion.text}
-          />
+          <DetailsSummary title={content.accordion.title}>
+            <RichText markdown={content.accordion.text} />
+          </DetailsSummary>
         </Container>
       )}
       <Container className="space-y-32">

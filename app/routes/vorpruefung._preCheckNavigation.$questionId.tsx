@@ -179,10 +179,9 @@ export default function Index() {
             <RichText markdown={question.text} />
           </div>
           {question.hint && (
-            <DetailsSummary
-              title={question.hint.title}
-              content={question.hint.text}
-            />
+            <DetailsSummary title={question.hint.title}>
+              <RichText markdown={question.hint.text} />
+            </DetailsSummary>
           )}
         </legend>
         <RadioGroup scope={form.scope("answer")} options={options} />

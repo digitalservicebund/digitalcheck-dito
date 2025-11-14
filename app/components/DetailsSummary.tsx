@@ -1,16 +1,10 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { twJoin } from "tailwind-merge";
-import RichText from "./RichText";
 
 export type DetailsSummaryProps = {
   identifier?: string;
   title?: string;
-  /**
-   * @deprecated use children instead
-   */
-  content?: string | ReactNode;
   bold?: boolean;
-  open?: boolean;
   showVerticalLine?: boolean;
   className?: string;
   children?: ReactNode;
@@ -19,14 +13,12 @@ export type DetailsSummaryProps = {
 export default function DetailsSummary({
   identifier,
   title,
-  content,
   bold = true,
-  open = false,
   showVerticalLine = true,
   className,
   children,
 }: Readonly<DetailsSummaryProps>) {
-  const [isOpen, setIsOpen] = useState<boolean>(open);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const detailsRef = useRef<HTMLDetailsElement | null>(null);
   const summaryRef = useRef<HTMLElement | null>(null);
 
@@ -39,10 +31,6 @@ export default function DetailsSummary({
     "block pt-4 pl-[24px] text-black",
     showVerticalLine && "relative",
   );
-
-  useEffect(() => {
-    setIsOpen(open);
-  }, [open]);
 
   useEffect(() => {
     if (!identifier) return;
@@ -101,11 +89,6 @@ export default function DetailsSummary({
               "left-[11px]",
             )}
           />
-        )}
-        {typeof content === "string" ? (
-          <RichText markdown={content} />
-        ) : (
-          content
         )}
         {children}
       </div>

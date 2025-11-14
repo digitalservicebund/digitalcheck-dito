@@ -10,6 +10,7 @@ import ImageBox from "~/components/ImageBox";
 import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxList from "~/components/InfoBoxList";
 import MetaTitle from "~/components/Meta";
+import RichText from "~/components/RichText.tsx";
 import SupportBanner from "~/components/SupportBanner";
 import TabGroup from "~/components/Tabs.tsx";
 import { PRE_CHECK_START_BUTTON_ID } from "~/resources/constants";
@@ -29,11 +30,9 @@ export default function Index() {
       <Hero title={preCheck.start.title} subtitle={preCheck.start.subtitle}>
         <div className="ds-stack ds-stack-16 mb-40">
           {preCheck.start.hints.map((hint) => (
-            <DetailsSummary
-              key={hint.title}
-              title={hint.title}
-              content={hint.text}
-            />
+            <DetailsSummary key={hint.title} title={hint.title}>
+              <RichText markdown={hint.text} />
+            </DetailsSummary>
           ))}
         </div>
         <ButtonContainer>

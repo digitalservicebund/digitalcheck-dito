@@ -245,41 +245,36 @@ export default function Result() {
               <DetailsSummary
                 title={preCheckResult.detailsTitle}
                 className="plausible-event-name=Content.Result.Accordion+Result+Detail"
-                content={
-                  <>
-                    {resultContent.reasoningList
-                      .filter(({ reasons }) => reasons.length > 0)
-                      .map(({ intro, reasons }) => (
-                        <React.Fragment key={intro}>
-                          <RichText markdown={intro} className="first:mt-16" />
-                          <ul className="ds-stack ds-stack-16 mt-16 mb-40 pl-0">
-                            {reasons
-                              .toSorted((a, b) => {
-                                if (a.answer === b.answer) {
-                                  return 0; // Keep the original order
-                                }
-                                return a.answer === "yes" ? -1 : 1; // "yes" comes before "no"
-                              })
-                              .map((reason) => getReasonListItem(reason))}
-                          </ul>
-                        </React.Fragment>
-                      ))}
+              >
+                {resultContent.reasoningList
+                  .filter(({ reasons }) => reasons.length > 0)
+                  .map(({ intro, reasons }) => (
+                    <React.Fragment key={intro}>
+                      <RichText markdown={intro} className="first:mt-16" />
+                      <ul className="ds-stack ds-stack-16 mt-16 mb-40 pl-0">
+                        {reasons
+                          .toSorted((a, b) => {
+                            if (a.answer === b.answer) {
+                              return 0; // Keep the original order
+                            }
+                            return a.answer === "yes" ? -1 : 1; // "yes" comes before "no"
+                          })
+                          .map((reason) => getReasonListItem(reason))}
+                      </ul>
+                    </React.Fragment>
+                  ))}
 
-                    {getResultForRelevantAnswers(answers, true) !==
-                      ResultType.NEGATIVE && (
-                      <div className="mt-40">
-                        <b>{preCheckResult.interoperability.info.title}</b>
-                        <RichText
-                          className="mt-8 mb-20"
-                          markdown={
-                            preCheckResult.interoperability.info.content
-                          }
-                        />
-                      </div>
-                    )}
-                  </>
-                }
-              />
+                {getResultForRelevantAnswers(answers, true) !==
+                  ResultType.NEGATIVE && (
+                  <div className="mt-40">
+                    <b>{preCheckResult.interoperability.info.title}</b>
+                    <RichText
+                      className="mt-8 mb-20"
+                      markdown={preCheckResult.interoperability.info.content}
+                    />
+                  </div>
+                )}
+              </DetailsSummary>
             </div>
             {result.digital !== ResultType.UNSURE && (
               <div className="mt-32 print:hidden">

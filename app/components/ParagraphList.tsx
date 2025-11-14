@@ -194,19 +194,18 @@ function AbsatzGroupWithoutErfuellungen({
       title={getAbsatzGroupTitle(absatzGroup)}
       bold={false}
       className="italic"
-      content={
-        <div className="ds-stack ds-stack-8">
-          {absatzGroup.map((absatz) => (
-            <BlocksRenderer
-              key={absatz.documentId}
-              content={prependNumberToAbsatz(absatz)}
-              modifiers={{
-                underline: PrincipleHighlightModifier,
-              }}
-            />
-          ))}
-        </div>
-      }
-    />
+    >
+      <div className="ds-stack ds-stack-8">
+        {absatzGroup.map((absatz) => (
+          <BlocksRenderer
+            key={absatz.documentId}
+            content={prependNumberToAbsatz(absatz)}
+            modifiers={{
+              underline: PrincipleHighlightModifier,
+            }}
+          />
+        ))}
+      </div>
+    </DetailsSummary>
   );
 }

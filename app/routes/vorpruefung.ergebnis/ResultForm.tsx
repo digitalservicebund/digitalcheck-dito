@@ -179,12 +179,11 @@ export default function ResultForm({
             showVerticalLine
             title={preCheckResult.form.previewLabel}
             className="plausible-event-name=Content.Send+Result.Accordion+Preview+Email+Text"
-            content={
-              <div data-testid="emailPreview" className="whitespace-pre-wrap">
-                {emailPreviewBody}
-              </div>
-            }
-          />
+          >
+            <div data-testid="emailPreview" className="whitespace-pre-wrap">
+              {emailPreviewBody}
+            </div>
+          </DetailsSummary>
           <ButtonContainer>
             <Button
               type="button"
@@ -234,8 +233,9 @@ export default function ResultForm({
             className={`plausible-event-name=Content.Content+Info.Accordion+FAQ${index + 1}`}
             key={detail.label}
             title={detail.label}
-            content={detail.text}
-          />
+          >
+            <RichText markdown={detail.text} />
+          </DetailsSummary>
         ))}
       </div>
     </>
