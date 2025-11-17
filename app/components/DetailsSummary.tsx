@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { twJoin } from "tailwind-merge";
+import RichText from "~/components/RichText.tsx";
 
 export type DetailsSummaryProps = {
   identifier?: string;
@@ -7,6 +8,10 @@ export type DetailsSummaryProps = {
   bold?: boolean;
   showVerticalLine?: boolean;
   className?: string;
+  /**
+   * @deprecated Use children instead
+   */
+  content?: string;
   children?: ReactNode;
 };
 
@@ -17,6 +22,7 @@ export default function DetailsSummary({
   showVerticalLine = true,
   className,
   children,
+  content,
 }: Readonly<DetailsSummaryProps>) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const detailsRef = useRef<HTMLDetailsElement | null>(null);
@@ -81,7 +87,10 @@ export default function DetailsSummary({
         {title}
       </summary>
 
-      <div className={contentWrapperClasses}>{children}</div>
+      <div className={contentWrapperClasses}>
+        {children}
+        {content && <RichText markdown={content} />}
+      </div>
     </details>
   );
 }

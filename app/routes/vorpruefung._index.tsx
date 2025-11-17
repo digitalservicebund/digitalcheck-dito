@@ -8,7 +8,6 @@ import Hero from "~/components/Hero";
 import Image from "~/components/Image";
 import ImageBox from "~/components/ImageBox";
 import InfoBox from "~/components/InfoBox.tsx";
-import InfoBoxList from "~/components/InfoBoxList";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText.tsx";
 import SupportBanner from "~/components/SupportBanner";
@@ -62,10 +61,12 @@ export default function Index() {
           <TabGroup.TabPanels>
             <TabGroup.TabPanel>
               <div className="space-y-40">
-                <InfoBoxList
-                  heading={preCheck.start.summary.heading}
-                  items={[preCheck.start.summary.start]}
-                />
+                <Heading tagName="h2">
+                  {preCheck.start.summary.heading.text}
+                </Heading>
+                <InfoBox heading={preCheck.start.summary.start.heading}>
+                  <RichText markdown={preCheck.start.summary.start.content} />
+                </InfoBox>
                 <ImageBox
                   title={preCheck.start.summary.process.heading}
                   image={preCheck.start.summary.process.image}

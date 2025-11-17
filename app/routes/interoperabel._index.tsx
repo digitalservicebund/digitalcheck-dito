@@ -59,10 +59,15 @@ export default function Interoperability() {
       content: (
         <>
           <Container className="px-0 pt-0">
-            <InfoBoxList
-              heading={{ text: interoperability.info.heading }}
-              items={interoperability.info.items}
-            />
+            <InfoBoxList heading={{ text: interoperability.info.heading }}>
+              {interoperability.info.items.map(
+                ({ detailsSummary, ...item }) => (
+                  <InfoBox key={item.heading.text} {...item}>
+                    <InfoBox.DetailsSummaryList {...detailsSummary} />
+                  </InfoBox>
+                ),
+              )}
+            </InfoBoxList>
 
             <ImageZoomable image={interoperability.info.image} />
           </Container>

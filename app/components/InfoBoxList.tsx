@@ -1,3 +1,4 @@
+import React, { ReactNode } from "react";
 import { twJoin } from "tailwind-merge";
 import twMerge from "~/utils/tailwindMerge";
 import Heading, { HeadingProps } from "./Heading";
@@ -5,16 +6,21 @@ import InfoBox, { InfoBoxProps } from "./InfoBox";
 
 type InfoBoxListProps = {
   heading?: HeadingProps;
-  items: InfoBoxProps[];
+  /**
+   * @deprecated Use children instead
+   */
+  items?: InfoBoxProps[];
   separator?: boolean;
   className?: string;
+  children?: ReactNode;
 };
 
 export default function InfoBoxList({
   separator,
   heading,
-  items,
+  items = [],
   className,
+  children,
 }: Readonly<InfoBoxListProps>) {
   return (
     <section className="ds-stack ds-stack-8">
@@ -35,6 +41,16 @@ export default function InfoBoxList({
             )}
           >
             <InfoBox {...item} />
+          </li>
+        ))}
+        {React.Children.map(children, (child) => (
+          <li
+            className={twJoin(
+              separator &&
+                "border-0 border-b-2 border-solid border-gray-400 pb-40 last:border-none last:pb-0",
+            )}
+          >
+            {child}
           </li>
         ))}
       </ul>
