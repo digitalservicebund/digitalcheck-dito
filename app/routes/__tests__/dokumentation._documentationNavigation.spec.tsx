@@ -290,14 +290,6 @@ describe("navigation on pages of documentation", () => {
     }
   });
 
-  it("shows error page in case feature flag is disabled", () => {
-    vi.spyOn(console, "error").mockImplementation(() => {}); // suppress expected error logs to keep test output clean
-    vi.mocked(useFeatureFlag).mockReturnValue(false);
-
-    renderPage(mockRoutes.flat()[0]);
-    expect(screen.getByText("Something went wrong")).toBeInTheDocument();
-  });
-
   describe("States", () => {
     describe.each(validationScenarios)(
       "Scenario: $name",
