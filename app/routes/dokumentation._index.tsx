@@ -1,31 +1,21 @@
 import { DownloadLinkButton } from "~/components/Button";
-import ButtonContainer from "~/components/ButtonContainer";
-import Container from "~/components/Container";
 import Heading from "~/components/Heading.tsx";
 import Hero from "~/components/Hero";
-import InfoBoxList from "~/components/InfoBoxList";
 import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
-import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText.tsx";
 import SupportBanner from "~/components/SupportBanner";
-import {
-  digitalDocumentation,
-  documentation,
-} from "~/resources/content/dokumentation";
+import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { supportBanner } from "~/resources/content/shared/support-banner";
-import { features } from "~/resources/features";
 import {
   ROUTE_DOCUMENTATION,
-  ROUTE_DOCUMENTATION_STATIC_WORD,
   ROUTE_DOCUMENTATION_TEMPLATE_WORD,
 } from "~/resources/staticRoutes";
 import { DocumentationContinueActions } from "~/routes/dokumentation/DocumentationContinueActions.tsx";
-import useFeatureFlag from "~/utils/featureFlags";
 
 const { start } = digitalDocumentation;
 
-function DigitalDocumentationIndex() {
+export default function Index() {
   return (
     <>
       <MetaTitle prefix={ROUTE_DOCUMENTATION.title} />
@@ -71,67 +61,4 @@ function DigitalDocumentationIndex() {
       <SupportBanner {...supportBanner} />
     </>
   );
-}
-
-function DocumentationIndex() {
-  return (
-    <>
-      <MetaTitle prefix={ROUTE_DOCUMENTATION.title} />
-      <Hero title={documentation.title} subtitle={documentation.subtitle}>
-        <ButtonContainer className="mt-48">
-          <DownloadLinkButton to={ROUTE_DOCUMENTATION_STATIC_WORD.url}>
-            Dokumentation herunterladen (Word-Datei)
-          </DownloadLinkButton>
-        </ButtonContainer>
-      </Hero>
-
-      <Container className="max-sm:p-0!">
-        <InlineNotice
-          look="warning"
-          heading={
-            <Heading tagName="h2">
-              {documentation.multipleNotice.headline}
-            </Heading>
-          }
-        >
-          <RichText markdown={documentation.multipleNotice.content} />
-        </InlineNotice>
-      </Container>
-      <Container>
-        <InfoBoxList
-          heading={{ text: documentation.summary.title }}
-          items={documentation.summary.items}
-          separator
-        />
-      </Container>
-      <Container className="mb-80 space-y-32 pb-0">
-        <h2>{documentation.nextSteps.title}</h2>
-        <NumberedList>
-          {documentation.nextSteps.items.map((item) => (
-            <NumberedList.Item
-              key={item.headline.text}
-              className="space-y-16"
-              disabled={item.isDisabled}
-            >
-              <p className={"ds-heading-03-reg"}>{item.headline.text}</p>
-              {"content" in item && <RichText markdown={item.content} />}
-            </NumberedList.Item>
-          ))}
-        </NumberedList>
-      </Container>
-      <SupportBanner {...supportBanner} />
-    </>
-  );
-}
-
-export default function Index() {
-  const enableDigitalDocumentation = useFeatureFlag(
-    features.enableDigitalDocumentation,
-  );
-
-  if (enableDigitalDocumentation) {
-    return <DigitalDocumentationIndex />;
-  }
-
-  return <DocumentationIndex />;
 }

@@ -2,13 +2,11 @@ import { Outlet, useLocation, useOutletContext } from "react-router";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import { features } from "~/resources/features";
 import {
   type Route as _Route,
   ROUTE_DOCUMENTATION,
 } from "~/resources/staticRoutes";
 import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
-import useFeatureFlag from "~/utils/featureFlags";
 import { type PrinzipWithAspekte } from "~/utils/strapiData.server";
 import { useDocumentationData } from "./dokumentation/documentationDataHook";
 import { getDocumentationSchemaFormUrl } from "./dokumentation/documentationDataSchema";
@@ -55,17 +53,6 @@ export default function LayoutWithDocumentationNavigation() {
   const { featureFlags } = useOutletContext<{
     featureFlags: Record<string, boolean>;
   }>();
-
-  const enableDigitalDocumentation = useFeatureFlag(
-    features.enableDigitalDocumentation,
-  );
-
-  if (!enableDigitalDocumentation) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("Feature is not enabled for this environment", {
-      status: 404,
-    });
-  }
 
   const nextUrl = getNextUrl(routes.flat(), currentUrl);
   const previousUrl = getPreviousUrl(routes.flat(), currentUrl);

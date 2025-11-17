@@ -14,8 +14,6 @@ import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { startseite } from "~/resources/content/startseite";
-import { features } from "~/resources/features";
-import useFeatureFlag from "~/utils/featureFlags";
 
 const {
   title,
@@ -30,9 +28,6 @@ const {
 
 export default function Index() {
   const [showBanner, setShowBanner] = useState(true);
-  const enableDigitalDocumentation = useFeatureFlag(
-    features.enableDigitalDocumentation,
-  );
 
   return (
     <>
@@ -77,22 +72,15 @@ export default function Index() {
                 <div className="mt-40">
                   <p className="font-bold">{stepByStep.procedureLabel}:</p>
                   <RichText markdown={step.description.text} />
-                  {enableDigitalDocumentation &&
-                    step.description
-                      .FEATURE_enableDigitalDocumentationHighlight && (
-                      <div className="ds-label-02-reg mt-16">
-                        <Badge look="hint" className="mr-8">
-                          {
-                            step.description
-                              .FEATURE_enableDigitalDocumentationHighlight.badge
-                          }
-                        </Badge>
-                        {
-                          step.description
-                            .FEATURE_enableDigitalDocumentationHighlight.text
-                        }
-                      </div>
-                    )}
+
+                  {step.description.digitalDocumentationHighlight && (
+                    <div className="ds-label-02-reg mt-16">
+                      <Badge look="hint" className="mr-8">
+                        {step.description.digitalDocumentationHighlight.badge}
+                      </Badge>
+                      {step.description.digitalDocumentationHighlight.text}
+                    </div>
+                  )}
                 </div>
 
                 <div className="mt-24 border-t-2 border-gray-400 pt-16">
@@ -201,7 +189,7 @@ export default function Index() {
         </InfoBox>
       </Container>
 
-      {showBanner && enableDigitalDocumentation && (
+      {showBanner && (
         <div className="relative flex items-center justify-center gap-40 bg-yellow-200 p-24">
           <DvrIcon className="size-96 fill-yellow-300 max-md:hidden" />
           <div className="space-y-8">

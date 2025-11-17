@@ -72,8 +72,7 @@ export const startseite = {
         } satisfies ContentLink,
         description: {
           text: "Sie dokumentieren, wie Sie Digitaltauglichkeit in Ihrer Regelung sichergestellt haben.",
-          // special case that depends on a feature flag being set
-          FEATURE_enableDigitalDocumentationHighlight: {
+          digitalDocumentationHighlight: {
             badge: "NEU",
             text: "Jetzt auch online ausfüllbar.",
           },
