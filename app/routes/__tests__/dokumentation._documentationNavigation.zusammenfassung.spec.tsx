@@ -368,12 +368,6 @@ describe("DocumentationSummary", () => {
           "Sie haben diesen Punkt noch nicht bearbeitet.",
         ),
       ).toBeInTheDocument();
-
-      const editNowLink = within(stepContainer).getByRole("link", {
-        name: `${route.title} jetzt bearbeiten`,
-      });
-      expect(editNowLink).toHaveAttribute("href", route.url);
-      expect(editNowLink).toHaveTextContent("Jetzt bearbeiten");
     });
   });
 

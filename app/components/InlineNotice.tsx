@@ -72,7 +72,9 @@ const InlineNotice = ({
         {showIcon && <IconComponent className="mr-4 flex-none self-start" />}
         <div className="ds-label-01-bold *:ds-label-01-bold">{heading}</div>
       </div>
-      <div className="leading-[26px] tracking-[0.16px]">{children}</div>
+      {children && (
+        <div className="leading-[26px] tracking-[0.16px]">{children}</div>
+      )}
     </div>
   );
 };

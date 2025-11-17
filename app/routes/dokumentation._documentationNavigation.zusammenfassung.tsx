@@ -49,47 +49,37 @@ const createInfoBoxItem = ({
   children: (
     <div className="mt-24">
       {content ? (
-        <div className="space-y-24">
-          {content}
-          <Link
-            to={route.url}
-            className="text-link"
-            aria-label={`${route.title} ${summary.buttonEdit.ariaLabelSuffix}`}
-          >
-            {summary.buttonEdit.text}
-          </Link>
-        </div>
+        <div className="space-y-24">{content}</div>
       ) : (
-        <Warning heading={summary.warnings.missing} route={route} />
+        <Warning type="missing" />
       )}
+      <Link
+        to={route.url}
+        className="text-link mt-24 block"
+        aria-label={`${route.title} ${summary.buttonEdit.ariaLabelSuffix}`}
+      >
+        {summary.buttonEdit.text}
+      </Link>
     </div>
   ),
   look: "highlight",
   className: "bg-white",
 });
 
-function Warning({ heading, route }: { heading: string; route: Route }) {
-  return (
-    <InlineNotice look="warning" heading={heading}>
-      <Link
-        to={route.url}
-        className="text-link"
-        aria-label={`${route.title} ${summary.buttonEditNow.ariaLabelSuffix}`}
-      >
-        {summary.buttonEditNow.text}
-      </Link>
-    </InlineNotice>
-  );
+function Warning({ type }: Readonly<{ type: "incomplete" | "missing" }>) {
+  const heading =
+    type === "incomplete"
+      ? summary.warnings.incomplete
+      : summary.warnings.missing;
+  return <InlineNotice look="warning" heading={heading}></InlineNotice>;
 }
 
 function Answer({
   heading,
   answers,
-  route,
 }: {
   heading: string;
   answers: { prefix: string; answer?: string }[];
-  route: Route;
 }) {
   return (
     <div className="space-y-8">
@@ -105,11 +95,7 @@ function Answer({
           </p>
         ))}
       {answers.some(({ answer }) => !answer) && (
-        <Warning
-          key={heading}
-          heading={summary.warnings.incomplete}
-          route={route}
-        />
+        <Warning key={heading} type="incomplete" />
       )}
     </div>
   );
@@ -120,7 +106,6 @@ function PolicyTitleContent({ policyTitle }: { policyTitle: PolicyTitle }) {
     <Answer
       heading={digitalDocumentation.info.inputTitle.label}
       answers={[{ prefix: summary.answerPrefix, answer: policyTitle.title }]}
-      route={ROUTE_DOCUMENTATION_TITLE}
     />
   );
 }
@@ -137,14 +122,12 @@ function ParticipationContent({
         answers={[
           { prefix: summary.answerPrefix, answer: participation.formats },
         ]}
-        route={ROUTE_DOCUMENTATION_PARTICIPATION}
       />
       <Answer
         heading={digitalDocumentation.participation.results.heading}
         answers={[
           { prefix: summary.answerPrefix, answer: participation.results },
         ]}
-        route={ROUTE_DOCUMENTATION_PARTICIPATION}
       />
     </>
   );
@@ -153,32 +136,24 @@ function ParticipationContent({
 function PrincipleContent({
   principle,
   prinzip,
-  route,
 }: {
   principle: Principle;
   prinzip: PrinzipWithAspekte;
-  route: Route;
 }) {
   return (
     <>
       <Answer
         heading={summary.principleAnswerTitle}
         answers={[{ prefix: summary.answerPrefix, answer: principle.answer }]}
-        route={route}
       />
       {isArray(principle.reasoning) ? (
-        <AspectsContent
-          reasoning={principle.reasoning}
-          prinzip={prinzip}
-          route={route}
-        />
+        <AspectsContent reasoning={principle.reasoning} prinzip={prinzip} />
       ) : (
         <Answer
           heading={summary.reasonPrefix}
           answers={[
             { prefix: summary.answerPrefix, answer: principle.reasoning },
           ]}
-          route={route}
         />
       )}
     </>
@@ -188,15 +163,13 @@ function PrincipleContent({
 function AspectsContent({
   reasoning,
   prinzip,
-  route,
 }: {
   reasoning: PrincipleReasoning[];
   prinzip: PrinzipWithAspekte;
-  route: Route;
 }) {
   const checkedAspects = reasoning.filter((reasoning) => reasoning?.checkbox);
   return checkedAspects.length === 0 ? (
-    <Warning heading={summary.warnings.incomplete} route={route} />
+    <Warning type="incomplete" />
   ) : (
     <>
       {checkedAspects.map((reasoning) => {
@@ -223,7 +196,6 @@ function AspectsContent({
                   answer: reasoning.reason,
                 },
               ]}
-              route={route}
             />
           </div>
         );
@@ -271,11 +243,7 @@ export default function DocumentationSummary() {
         route: principleRoute,
         content:
           principleFormData && principleFormData.answer ? (
-            <PrincipleContent
-              principle={principleFormData}
-              prinzip={prinzip}
-              route={principleRoute}
-            />
+            <PrincipleContent principle={principleFormData} prinzip={prinzip} />
           ) : null,
         badge: {
           text: summary.principleBadge,
