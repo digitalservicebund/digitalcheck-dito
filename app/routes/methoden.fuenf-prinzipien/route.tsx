@@ -70,10 +70,11 @@ export default function FivePrinciples() {
           </Heading>
         </div>
 
-        <InfoBoxList
-          className="list-unstyled mt-0"
-          items={methodsFivePrinciples.instruction.items}
-        />
+        <InfoBoxList className="list-unstyled mt-0">
+          {methodsFivePrinciples.instruction.items.map((item) => (
+            <InfoBox key={item.heading.text} {...item} />
+          ))}
+        </InfoBoxList>
         <Separator />
       </Container>
 

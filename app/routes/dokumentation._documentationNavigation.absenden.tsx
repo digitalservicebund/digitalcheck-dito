@@ -3,6 +3,7 @@ import { useOutletContext } from "react-router";
 import { DownloadButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Heading from "~/components/Heading";
+import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxList from "~/components/InfoBoxList";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
@@ -26,47 +27,45 @@ export default function DocumentationSend() {
       />
       <RichText markdown={finish.heading.markdown} />
 
-      <InfoBoxList
-        items={[
-          {
-            look: "highlight",
-            className: "bg-white",
-            heading: {
-              text: finish.download.heading,
-            },
-            content: finish.download.content,
-            children: (
-              <ButtonContainer>
-                <DownloadButton
-                  onClick={() => void downloadDocumentation(prinzips)}
-                >
-                  {finish.download.buttonText}
-                </DownloadButton>
-              </ButtonContainer>
-            ),
-          },
-          {
-            look: "highlight",
-            className: "bg-white",
-            heading: {
-              text: finish.send.heading,
-            },
-            content: finish.send.content,
-          },
-          {
-            look: "highlight",
-            className: "items-center bg-green-200",
-            visual: {
-              type: "icon",
-              Icon: EmojiEventsOutlinedIcon,
-              className: "size-80 fill-green-800",
-            },
-            heading: {
-              text: finish.done,
-            },
-          },
-        ]}
-      />
+      <InfoBoxList>
+        <InfoBox
+          look="highlight"
+          className="bg-white"
+          heading={{
+            text: finish.download.heading,
+          }}
+        >
+          <RichText markdown={finish.download.content} />
+          <ButtonContainer>
+            <DownloadButton
+              onClick={() => void downloadDocumentation(prinzips)}
+            >
+              {finish.download.buttonText}
+            </DownloadButton>
+          </ButtonContainer>
+        </InfoBox>
+        <InfoBox
+          look="highlight"
+          className="bg-white"
+          heading={{
+            text: finish.send.heading,
+          }}
+        >
+          <RichText markdown={finish.send.content} />
+        </InfoBox>
+        <InfoBox
+          heading={{
+            text: finish.done,
+          }}
+          visual={{
+            type: "icon",
+            Icon: EmojiEventsOutlinedIcon,
+            className: "size-80 fill-green-800",
+          }}
+          look="highlight"
+          className="items-center bg-green-200"
+        />
+      </InfoBoxList>
     </>
   );
 }
