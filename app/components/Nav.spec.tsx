@@ -82,20 +82,16 @@ describe("Nav", () => {
   it("shows disabled elements as disabled", () => {
     renderNav("", false, false, true);
 
-    const disabledElement = screen.getByRole("link", {
-      name: "Navigation Item 2",
-    });
+    const disabledElement = screen.getByText("Navigation Item 2");
 
-    expect(disabledElement).toHaveAttribute("aria-disabled", "true");
-    expect(disabledElement).toHaveClass("pointer-events-none", "text-gray-800");
+    expect(disabledElement).toHaveClass("text-gray-800");
   });
 
   it("highlights the current element", () => {
     renderNav("/example3-1");
 
-    const activeElement = screen.getByRole("link", {
-      current: "page",
-    });
+    const activeElement = screen.getByText("Navigation SubItem 1");
+    expect(activeElement).toHaveAttribute("aria-current", "page");
     expect(activeElement).toHaveClass(
       "ds-label-02-bold",
       "pointer-events-none",

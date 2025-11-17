@@ -78,6 +78,104 @@ const containsMatchingAttr = (
   return false;
 };
 
+const classes = {
+  hover: "hover:border-l-blue-300 hover:bg-blue-300 hover:underline",
+  hoverError: "hover:border-l-yellow-300 hover:bg-yellow-300 hover:underline",
+  focus:
+    "focus-visible:outline-4 focus-visible:-outline-offset-4 focus-visible:outline-blue-800",
+  active: "ds-label-02-bold pointer-events-none border-l-blue-800 bg-blue-400",
+  activeError:
+    "ds-label-02-bold pointer-events-none border-l-yellow-800 bg-yellow-300",
+  activeOpen: "pointer-events-none border-l-blue-400 bg-blue-400",
+  activeOpenError: "pointer-events-none border-l-yellow-200 bg-yellow-200",
+};
+
+function NavItemLink({
+  children,
+  completed,
+  currentPage: isCurrentPage,
+  disabled,
+  url,
+  error,
+}: Readonly<{
+  url: string;
+  error: NavItemProps["error"];
+  children: string;
+  completed: boolean;
+  currentPage: boolean;
+  disabled: boolean | undefined;
+}>) {
+  function getTitle() {
+    if (error) {
+      return `${children} - ${general.a11yMessageError}`;
+    }
+    if (completed) {
+      return `${children} - ${general.a11yMessageCompleted}`;
+    }
+    return children;
+  }
+
+  const statusElements = (
+    <>
+      {completed && !error && <Check className="shrink-0" />}
+      {error && <WarningAmberOutlined className="shrink-0" />}
+    </>
+  );
+
+  const wrapperClasses = "border-b border-b-white";
+  const baseClasses =
+    "m-0 flex flex-row items-center gap-8 border-l-4 p-16 text-black";
+
+  if (disabled) {
+    return (
+      <li className={wrapperClasses}>
+        <div className={twMerge(baseClasses, "text-gray-800")}>
+          {statusElements}
+          {children}
+        </div>
+      </li>
+    );
+  }
+
+  if (isCurrentPage) {
+    return (
+      <li className={wrapperClasses}>
+        <div
+          aria-current="page"
+          className={twMerge(
+            baseClasses,
+            "border-l-blue-100",
+            classes.hover,
+            classes.active,
+            classes.focus,
+          )}
+        >
+          {/* don't show status elements for the current page */}
+          {children}
+        </div>
+      </li>
+    );
+  }
+
+  return (
+    <li className={wrapperClasses}>
+      <Link
+        to={url}
+        title={getTitle()}
+        className={twMerge(
+          baseClasses,
+          error ? "border-l-yellow-200 bg-yellow-200" : "border-l-blue-100",
+          error ? classes.hoverError : classes.hover,
+          classes.focus,
+        )}
+      >
+        {statusElements}
+        {children}
+      </Link>
+    </li>
+  );
+}
+
 function NavItem({
   children,
   url,
@@ -109,113 +207,75 @@ function NavItem({
   );
   const hasError = Boolean((!isActive && error) || hasErrorDescendant);
 
-  const hoverClasses =
-    "hover:border-l-blue-300 hover:bg-blue-300 hover:underline";
+  if (url) {
+    const isCurrentPage = activeElementUrl === url;
 
-  const hoverClassesError =
-    "hover:border-l-yellow-300 hover:bg-yellow-300 hover:underline";
-
-  const focusClasses =
-    "focus-visible:outline-4 focus-visible:-outline-offset-4 focus-visible:outline-blue-800";
-
-  const activeClasses =
-    "ds-label-02-bold pointer-events-none border-l-blue-800 bg-blue-400";
-
-  const activeErrorClasses =
-    "ds-label-02-bold pointer-events-none border-l-yellow-800 bg-yellow-300";
-
-  const activeOpenClasses = "pointer-events-none border-l-blue-400 bg-blue-400";
-
-  const activeOpenErrorClasses =
-    "pointer-events-none border-l-yellow-200 bg-yellow-200";
-
+    return (
+      <NavItemLink
+        url={url}
+        error={error}
+        completed={isCompleted}
+        currentPage={isCurrentPage}
+        disabled={disabled}
+      >
+        {children}
+      </NavItemLink>
+    );
+  }
+  // if no url is given, it's a subitem, so we render a disclosure button with the subitems inside
   return (
-    <li className={twJoin(url && "border-b border-b-white")}>
-      {url ? (
-        <Link
-          to={url}
-          title={
-            hasError
-              ? `${children} - ${general.a11yMessageError}`
-              : isCompleted
-                ? `${children} - ${general.a11yMessageCompleted}`
-                : children
-          }
-          aria-current={activeElementUrl === url ? "page" : undefined}
-          aria-disabled={disabled || activeElementUrl === url}
-          className={twMerge(
-            "m-0 flex flex-row items-center gap-8 border-l-4 p-16 text-black",
-            hasError
-              ? "border-l-yellow-200 bg-yellow-200"
-              : "border-l-blue-100",
-            hasError ? hoverClassesError : hoverClasses,
-            isActive && (hasError ? activeErrorClasses : activeClasses),
-            disabled && "pointer-events-none text-gray-800",
-            focusClasses,
-          )}
-        >
-          {isCompleted && !hasError && <Check className="shrink-0" />}
-          {hasError && <WarningAmberOutlined className="shrink-0" />}
-          <span
-            title={children}
-            className="after:ds-label-02-bold after:invisible after:block after:h-0 after:content-[attr(title)]"
-          >
-            {children}
-          </span>
-        </Link>
-      ) : (
-        // key forces remount when isActive toggles, so defaultOpen can reflect the active state
-        <Disclosure key={String(isActive)} defaultOpen={isActive}>
-          {({ open }) => (
-            <>
-              <DisclosureButton
+    <li>
+      {/* key forces remount when isActive toggles, so defaultOpen can reflect the active state*/}
+      <Disclosure key={String(isActive)} defaultOpen={isActive}>
+        {({ open }) => (
+          <>
+            <DisclosureButton
+              className={twJoin(
+                "group w-full border-b border-b-white text-left text-black",
+                classes.focus,
+              )}
+              aria-invalid={hasError}
+            >
+              <span
                 className={twJoin(
-                  "group w-full border-b border-b-white text-left text-black",
-                  focusClasses,
+                  "flex flex-row justify-between border-l-4 p-16",
+                  hasError
+                    ? "border-l-yellow-200 bg-yellow-200"
+                    : "border-l-blue-100",
+                  hasError ? classes.hoverError : classes.hover,
+                  isActive &&
+                    !open &&
+                    (hasError ? classes.activeError : classes.active),
+                  isActive &&
+                    open &&
+                    (hasError ? classes.activeOpenError : classes.activeOpen),
+                  classes.hover,
                 )}
-                aria-invalid={hasError}
               >
-                <span
-                  className={twJoin(
-                    "flex flex-row justify-between border-l-4 p-16",
-                    hasError
-                      ? "border-l-yellow-200 bg-yellow-200"
-                      : "border-l-blue-100",
-                    hasError ? hoverClassesError : hoverClasses,
-                    isActive &&
-                      !open &&
-                      (hasError ? activeErrorClasses : activeClasses),
-                    isActive &&
-                      open &&
-                      (hasError ? activeOpenErrorClasses : activeOpenClasses),
-                    hoverClasses,
-                  )}
-                >
-                  <span className="flex flex-row items-center gap-8">
-                    {hasError && <WarningAmberOutlined className="shrink-0" />}
-                    {children}
-                  </span>
-                  <ChevronLeft className="w-5 rotate-270 group-data-open:rotate-90" />
+                <span className="flex h-24 flex-row items-center gap-8">
+                  {hasError && <WarningAmberOutlined className="shrink-0" />}
+                  {children}
                 </span>
-              </DisclosureButton>
+                <ChevronLeft className="w-5 rotate-270 group-data-open:rotate-90" />
+              </span>
+            </DisclosureButton>
 
-              <DisclosurePanel className="[&_a]:pl-32">
-                {subItems}
-              </DisclosurePanel>
+            <DisclosurePanel className="[&_a]:pl-32">
+              {subItems}
+            </DisclosurePanel>
 
-              {
-                // only for correct highlighting of Disclosure Button
-                // Also to already set the correct width
-                !open && (
-                  <div className="pointer-events-none invisible h-0 overflow-hidden [&_a]:pl-32">
-                    {subItems}
-                  </div>
-                )
-              }
-            </>
-          )}
-        </Disclosure>
-      )}
+            {
+              // only for correct highlighting of Disclosure Button
+              // Also to already set the correct width
+              !open && (
+                <div className="pointer-events-none invisible h-0 overflow-hidden [&_a]:pl-32">
+                  {subItems}
+                </div>
+              )
+            }
+          </>
+        )}
+      </Disclosure>
     </li>
   );
 }
