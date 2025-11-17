@@ -160,7 +160,7 @@ function getReasonListItem(reason: Reason) {
 /**
  * A title element for printouts.
  */
-function PrintTitle({ title }: { title: string }) {
+function PrintTitle({ title }: Readonly<{ title: string }>) {
   return (
     <Heading
       tagName="h2"
