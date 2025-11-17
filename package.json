@@ -20,7 +20,7 @@
     "style:check": "npm run format:check && npm run lint:check",
     "style:fix": "npm run format:fix && npm run lint:fix",
     "test": "vitest run",
-    "test:a11y": "playwright test tests/a11y --config=tests/playwright.config.ts",
+    "test:a11y": "playwright test tests/a11y --config=tests/playwright.config.ts --project=\"Desktop Chrome\"",
     "test:a11y-nightly": "playwright test tests/a11y --config=tests/playwright-nightly.config.ts",
     "test:e2e": "NODE_OPTIONS='--trace-warnings' playwright test tests/e2e --config=tests/playwright.config.ts",
     "test:e2e-nightly": "playwright test tests/e2e --config=tests/playwright-nightly.config.ts",
