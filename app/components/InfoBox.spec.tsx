@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { createRoutesStub } from "react-router";
 import { describe, expect, it } from "vitest";
-import InfoBox, { InfoBoxProps } from "./InfoBox";
+import InfoBox, { DetailsSummaryListProps } from "./InfoBox";
 
 describe("InfoBox", () => {
   describe("Top level elements", () => {
@@ -22,21 +22,6 @@ describe("InfoBox", () => {
       render(<InfoBox content="Test **Content**" />);
 
       expect(screen.getByRole("paragraph")).toHaveTextContent("Test Content");
-    });
-
-    it("shows the detailSummary", () => {
-      const testDetailSummary: InfoBoxProps["detailsSummary"] = {
-        items: [
-          { title: "Test Detail 1", children: "Test Content 1" },
-          { title: "Test Detail 2", children: "Test Content 2" },
-        ],
-      };
-      render(<InfoBox detailsSummary={testDetailSummary} />);
-
-      expect(screen.getAllByRole("group").length).toBe(2);
-      expect(screen.getAllByRole("group").at(0)).toHaveTextContent(
-        "Test Detail 1Test Content 1",
-      );
     });
 
     it("shows links", () => {
@@ -67,6 +52,27 @@ describe("InfoBox", () => {
         "Link 1",
         "Link 2",
       ]);
+    });
+  });
+
+  describe("DetailsSummaryList", () => {
+    it("shows the detailSummary", () => {
+      const testDetailSummary: DetailsSummaryListProps = {
+        title: { text: "List Title", tagName: "h3" },
+        items: [
+          { title: "Test Detail 1", children: "Test Content 1" },
+          { title: "Test Detail 2", children: "Test Content 2" },
+        ],
+      };
+      render(<InfoBox.DetailsSummaryList {...testDetailSummary} />);
+
+      expect(screen.getByRole("heading", { level: 3 })).toHaveTextContent(
+        "List Title",
+      );
+      expect(screen.getAllByRole("group").length).toBe(2);
+      expect(screen.getAllByRole("group").at(0)).toHaveTextContent(
+        "Test Detail 1Test Content 1",
+      );
     });
   });
 });

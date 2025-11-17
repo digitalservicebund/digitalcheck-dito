@@ -611,8 +611,11 @@ export default function DocumentationPrinciple() {
                     text: "Das Prinzip im Detail",
                   }}
                   content={fullPrinciple.Beschreibung}
-                  detailsSummary={getDetailsSummaryProps(fullPrinciple)}
-                />
+                >
+                  <InfoBox.DetailsSummaryList
+                    {...getDetailsSummaryProps(prinzip)}
+                  />
+                </InfoBox>
 
                 {fullPrinciple.Beispiel && (
                   <PrincipleExample prinzip={fullPrinciple} />

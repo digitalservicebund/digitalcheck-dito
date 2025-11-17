@@ -22,13 +22,6 @@ type BaseInfoBoxProps = {
   heading?: HeadingProps;
   content?: string | Node[];
   contentClassName?: string;
-  /**
-   * @deprecated Pass DetailsSummary in children
-   */
-  detailsSummary?: {
-    title?: HeadingProps;
-    items: DetailsSummaryProps[];
-  };
   links?: ContentLink[];
   className?: string;
   look?: "default" | "highlight" | "method";
@@ -64,7 +57,6 @@ const InfoBox = ({
   heading,
   content,
   contentClassName,
-  detailsSummary,
   links,
   visual,
   look,
@@ -118,38 +110,43 @@ const InfoBox = ({
             </div>
           ))}
         {children}
-        {detailsSummary && (
-          <div className="ds-stack ds-stack-8 mt-16">
-            {detailsSummary.title && (
-              <Heading {...detailsSummary.title} className="ds-label-02-bold" />
-            )}
-            {detailsSummary.items.map(({ title, ...details }) => (
-              <DetailsSummary key={title} title={title} {...details} />
-            ))}
-          </div>
-        )}
-
-        {links && links.length > 0 && (
-          <ButtonContainer className="mt-24">
-            {links.map((link) => {
-              const { to, text, ...rest } = link;
-              if (link.download)
-                return (
-                  <DownloadLinkButton key={to} to={to} omitIcon {...rest}>
-                    {text}
-                  </DownloadLinkButton>
-                );
-              return (
-                <LinkButton key={to} to={to} {...rest}>
-                  {text}
-                </LinkButton>
-              );
-            })}
-          </ButtonContainer>
-        )}
+        {links && links.length > 0 && <LinkList links={links} />}
       </div>
     </div>
   );
 };
+export type DetailsSummaryListProps = {
+  title?: HeadingProps;
+  items?: DetailsSummaryProps[];
+};
 
+const DetailsSummaryList = ({ title, items }: DetailsSummaryListProps) => (
+  <div className="ds-stack ds-stack-8 mt-16">
+    {title && <Heading {...title} className="ds-label-02-bold" />}
+    {items?.map(({ title, ...details }) => (
+      <DetailsSummary key={title} title={title} {...details} />
+    ))}
+  </div>
+);
+InfoBox.DetailsSummaryList = DetailsSummaryList;
+
+const LinkList = ({ links }: { links: ContentLink[] }) => (
+  <ButtonContainer className="mt-24">
+    {links.map((link) => {
+      const { to, text, ...rest } = link;
+      if (link.download)
+        return (
+          <DownloadLinkButton key={to} to={to} omitIcon {...rest}>
+            {text}
+          </DownloadLinkButton>
+        );
+      return (
+        <LinkButton key={to} to={to} {...rest}>
+          {text}
+        </LinkButton>
+      );
+    })}
+  </ButtonContainer>
+);
+InfoBox.LinkList = LinkList;
 export default InfoBox;

@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import { DetailsSummaryProps } from "~/components/DetailsSummary.tsx";
 import type { HeadingProps } from "~/components/Heading";
-import { InfoBoxProps } from "~/components/InfoBox.tsx";
+import { DetailsSummaryListProps } from "~/components/InfoBox.tsx";
 import PrincipleHighlightModifier from "~/components/PrincipleHighlightModifier";
 import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
@@ -13,7 +13,7 @@ import { slugify } from "~/utils/utilFunctions";
 
 export default function getDetailsSummaryProps(
   prinzip: PrinzipWithAspekte,
-): InfoBoxProps["detailsSummary"] {
+): DetailsSummaryListProps | undefined {
   const { Aspekte } = prinzip;
 
   const items: DetailsSummaryProps[] = Aspekte.map((aspekt) => {

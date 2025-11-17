@@ -28,8 +28,9 @@ export default function Principle({ prinzip }: Readonly<PrincipleProps>) {
           principleNumber: prinzip.Nummer,
         }}
         content={prinzip.Beschreibung}
-        detailsSummary={getDetailsSummaryProps(prinzip)}
-      />
+      >
+        <InfoBox.DetailsSummaryList {...getDetailsSummaryProps(prinzip)} />
+      </InfoBox>
 
       {prinzip.Beispiel && (
         <PrincipleExample prinzip={prinzip as PrinzipWithAspekteAndExample} />
