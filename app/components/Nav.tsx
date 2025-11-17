@@ -129,7 +129,10 @@ function NavItemLink({
   if (disabled) {
     return (
       <li className={wrapperClasses}>
-        <div className={twMerge(baseClasses, "text-gray-800")}>
+        <div
+          className={twMerge(baseClasses, "border-l-transparent text-gray-800")}
+          aria-disabled
+        >
           {statusElements}
           {children}
         </div>
