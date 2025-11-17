@@ -1,5 +1,6 @@
 import Container from "~/components/Container";
 import InfoBox from "~/components/InfoBox.tsx";
+import RichText from "~/components/RichText.tsx";
 
 export type SupportBannerProps = {
   title: string;
@@ -19,8 +20,9 @@ export default function SupportBanner({
             look: "ds-subhead font-bold",
             text: title,
           }}
-          content={text}
-        />
+        >
+          <RichText markdown={text} />
+        </InfoBox>
       </Container>
     </div>
   );

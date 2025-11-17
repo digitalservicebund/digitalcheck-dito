@@ -1,4 +1,5 @@
 import Absatz from "~/components/Absatz";
+import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
 import InfoBox from "~/components/InfoBox";
 import NewTabLink from "~/components/NewTabLink.tsx";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
@@ -27,8 +28,10 @@ export default function Principle({ prinzip }: Readonly<PrincipleProps>) {
           children: methodsFivePrinciples.principleLabel,
           principleNumber: prinzip.Nummer,
         }}
-        content={prinzip.Beschreibung}
       >
+        <div>
+          <BlocksRenderer content={prinzip.Beschreibung} />
+        </div>
         <InfoBox.DetailsSummaryList {...getDetailsSummaryProps(prinzip)} />
       </InfoBox>
 

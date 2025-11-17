@@ -220,8 +220,10 @@ export default function ResultForm({
           text: preCheckResult.form.outro.title,
           tagName: "h3",
         }}
-        content={preCheckResult.form.outro.text}
-      />
+      >
+        <RichText markdown={preCheckResult.form.outro.text} />
+      </InfoBox>
+
       <div className="ds-stack ds-stack-16 mt-40">
         <Heading
           tagName="h3"

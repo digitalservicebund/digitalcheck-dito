@@ -610,8 +610,10 @@ export default function DocumentationPrinciple() {
                     tagName: "h2",
                     text: "Das Prinzip im Detail",
                   }}
-                  content={fullPrinciple.Beschreibung}
                 >
+                  <div>
+                    <BlocksRenderer content={fullPrinciple.Beschreibung} />
+                  </div>
                   <InfoBox.DetailsSummaryList
                     {...getDetailsSummaryProps(prinzip)}
                   />

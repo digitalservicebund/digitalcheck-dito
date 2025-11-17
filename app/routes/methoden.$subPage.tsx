@@ -76,8 +76,8 @@ export default function Index() {
             children: content.content.label,
             Icon: content.content.icon,
           }}
-          content={content.content.text}
         >
+          <RichText markdown={content.content.text} />
           {"links" in content.content && (
             <InfoBox.LinkList links={content.content.links} />
           )}
@@ -106,8 +106,9 @@ export default function Index() {
             <InfoBox
               heading={{ text: content.tip.title, tagName: "h3" }}
               badge={{ children: content.tip.label, Icon: content.tip.icon }}
-              content={content.tip.text}
-            />
+            >
+              <RichText markdown={content.tip.text} />
+            </InfoBox>
           </Container>
         </div>
       )}
@@ -115,9 +116,10 @@ export default function Index() {
       <Container>
         <InfoBox
           heading={{ tagName: "h2", text: interviewBanner.title }}
-          content={interviewBanner.text}
           look="highlight"
-        />
+        >
+          <RichText markdown={interviewBanner.text} />
+        </InfoBox>
       </Container>
 
       {"support" in content && (
@@ -133,8 +135,8 @@ export default function Index() {
                 children: content.support.label,
                 Icon: content.support.icon,
               }}
-              content={content.support.text}
             >
+              <RichText markdown={content.support.text} />
               <InfoBox.LinkList links={content.support.links} />
             </InfoBox>
           </Container>

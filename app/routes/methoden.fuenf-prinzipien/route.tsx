@@ -7,6 +7,7 @@ import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxList from "~/components/InfoBoxList";
 import MetaTitle from "~/components/Meta";
 import { PrinciplePosterBox } from "~/components/PrinciplePosterBox";
+import RichText from "~/components/RichText.tsx";
 import Separator from "~/components/Separator";
 import TableOfContents from "~/components/TableOfContents";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
@@ -95,8 +96,8 @@ export default function FivePrinciples() {
             children: methodsFivePrinciples.nextStep.label,
             Icon: methodsFivePrinciples.nextStep.icon,
           }}
-          content={methodsFivePrinciples.nextStep.text}
         >
+          <RichText markdown={methodsFivePrinciples.nextStep.text} />
           <InfoBox.LinkList links={methodsFivePrinciples.nextStep.links} />
         </InfoBox>
       </Container>

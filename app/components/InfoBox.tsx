@@ -20,6 +20,9 @@ type BaseInfoBoxProps = {
   testId?: string;
   badge?: BadgeProps;
   heading?: HeadingProps;
+  /**
+   * @deprecated Use `children` instead.
+   */
   content?: string | Node[];
   contentClassName?: string;
   /**

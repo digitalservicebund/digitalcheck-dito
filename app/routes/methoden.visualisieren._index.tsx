@@ -81,8 +81,8 @@ export default function Visualization() {
             text: methodsTasksProcesses.goodToKnow.title,
             tagName: "h3",
           }}
-          content={methodsTasksProcesses.goodToKnow.content}
         >
+          <RichText markdown={methodsTasksProcesses.goodToKnow.content} />
           <InfoBox.LinkList links={methodsTasksProcesses.goodToKnow.links} />
         </InfoBox>
       </Container>

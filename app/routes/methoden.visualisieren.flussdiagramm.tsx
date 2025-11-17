@@ -263,7 +263,9 @@ export default function Visualization() {
                     Icon: LayersOutlined,
                     children: "Vorlage für Flussdiagramm",
                   }}
-                  content={dedent`
+                >
+                  <RichText
+                    markdown={dedent`
                     Hier können Sie eine **Powerpoint-Vorlage (PPT)** für das Flussdiagramm herunterladen.
                     In der Vorlage ist eine Schritt-für-Schritt-Anleitung enthalten.
                     Sie können diese ausdrucken oder an Ihrem Computer bearbeiten.
@@ -277,9 +279,11 @@ export default function Visualization() {
                     Sie wünschen sich ein anderes Medium?
                     Schicken Sie uns eine E-Mail an digitalcheck@digitalservice.bund.de.
                   `}
-                />
+                  />
+                </InfoBox>
               }
             />
+
             <Step
               id={"schritt-2"}
               mainContent={
@@ -312,7 +316,9 @@ export default function Visualization() {
                       />
                     ),
                   }}
-                  content={dedent`
+                >
+                  <RichText
+                    markdown={dedent`
                     Am Beispiel der Fahrerlaubnis sind die wichtigsten Akteure und Berührungspunkte
                       - Fahrschülerin,
                       - Anerkannte Prüfstelle (Fahrschule)
@@ -320,9 +326,11 @@ export default function Visualization() {
                       - Fahrerlaubnisbehörde
                       - Bundesamt für Justiz
                   `}
-                />
+                  />
+                </InfoBox>
               }
             />
+
             <Step
               id={"schritt-3"}
               mainContent={
@@ -360,14 +368,18 @@ export default function Visualization() {
                       />
                     ),
                   }}
-                  content={dedent`
+                >
+                  <RichText
+                    markdown={dedent`
                     Am Beispiel der Fahrerlaubnis:
                       - **Ziel** der Visualisierung: „Ich möchte den Prozess für die Erlangung der Fahrerlaubnis verändern und digital ermöglichen.“
                       - Die **Perspektive**  der Visualisierung ist die der Normadressaten und -adressatinnen. In diesem Fall die einer Fahrschülerin.
                   `}
-                />
+                  />
+                </InfoBox>
               }
             />
+
             <Step
               id={"schritt-4"}
               mainContent={
@@ -388,6 +400,7 @@ export default function Visualization() {
                   Es kann für verschiedene Akteure unterschiedliche Start- und Endpunkte geben. Konzentrieren Sie sich auf den wichtigsten.
               `}
                   />
+
                   <ImageBox
                     image={{
                       url: "/images/methoden/flussdiagramme/4/start-ende.png",
@@ -417,14 +430,18 @@ export default function Visualization() {
                       />
                     ),
                   }}
-                  content={dedent`
+                >
+                  <RichText
+                    markdown={dedent`
                     Am Beispiel der Fahrerlaubnis:
                       - Der **Startpunkt** für die Fahrschülerin ist der Wunsch, einen Führerschein der Klasse B zu erlangen.
                       - Der **Endpunkt** ist erst erreicht, wenn sie den Führerschein als Plastikkarte erhalten hat.
                   `}
-                />
+                  />
+                </InfoBox>
               }
             />
+
             <Step
               id={"schritt-5"}
               mainContent={
@@ -438,6 +455,7 @@ export default function Visualization() {
                       Jeder Akteur erhält eine sogenannte Schwimmbahn. Alle Aktivitäten des Akteurs finden auf dieser Schwimmbahn statt.
               `}
                   />
+
                   <ImageBox
                     image={{
                       url: "/images/methoden/flussdiagramme/5/schwimmbahnen.png",
@@ -451,6 +469,7 @@ export default function Visualization() {
                     zoomable={false}
                     border
                   />
+
                   <p>
                     Setzen Sie den Startpunkt an den Anfang der Bahn des
                     Akteurs, den Endpunkt ans Ende. Der genaue Platz wird im
@@ -472,6 +491,7 @@ export default function Visualization() {
                     zoomable={false}
                     border
                   />
+
                   <RichText
                     markdown={dedent`
                     **Darauf sollten Sie achten:**
@@ -482,6 +502,7 @@ export default function Visualization() {
                     Das Ergebnis muss an dieser Stelle noch nicht perfekt aussehen.
                     `}
                   />
+
                   <p
                     className="ds-label-02-reg text-gray-900"
                     id="flussdiagramm-erstellen-live-desc"
@@ -507,15 +528,19 @@ export default function Visualization() {
                       />
                     ),
                   }}
-                  content={dedent`
+                >
+                  <RichText
+                    markdown={dedent`
                     - **Akteure** (Fahrschüler:in, Fahrschule, Meldebehörde) haben je eine eigene Schwimmbahn.
                     - **Startpunkt** ("Möchte Führerschein erlangen") liegt am Anfang der Fahrschüler:in-Schwimmbahn.
                     - Prozess-Ablauf wird durch **Verbindungslinien** und **Schritte** dargestellt.
                     - Wesentliche **Paragraphen** (z.B. FeV § 16, BMG § 18) sind in den Kästen vermerkt.
                   `}
-                />
+                  />
+                </InfoBox>
               }
             />
+
             <Step
               id={"schritt-6"}
               mainContent={
@@ -529,6 +554,7 @@ export default function Visualization() {
                     Prüfen Sie, ob die Elemente in Ihrer Visualisierung zu Ihrer Legende passen. Falls Sie noch keine Legende haben, erstellen Sie eine. Sie sollte Abkürzungen und Symbole klar erklären. Ähnlich wie in diesem Beispiel:
                 `}
                   />
+
                   <ImageBox
                     image={{
                       url: "/images/methoden/flussdiagramme/6/legende.png",
@@ -540,6 +566,7 @@ export default function Visualization() {
                     border
                     className="md:max-w-2/3 lg:max-w-1/2"
                   />
+
                   <RichText
                     markdown={dedent`
                       Kennzeichnen Sie Ihre Visualisierung mit den wichtigsten Metadaten:
@@ -551,6 +578,7 @@ export default function Visualization() {
                       - falls zutreffend, Seitenzahlen
                     `}
                   />
+
                   <RichText
                     markdown={dedent`
                       **Darauf sollten Sie achten:**
@@ -576,12 +604,15 @@ export default function Visualization() {
                       />
                     ),
                   }}
-                  content={dedent`
+                >
+                  <RichText
+                    markdown={dedent`
                     - **Ablauf/Entscheidungen:** Der Prozess ist durch Entscheidungssymbole (◇) erweitert, die einen "bestanden/nicht bestanden" Zweig nach der Theorie- und Praxisprüfung anzeigen.
                     - **Datenspeicherung:** Ein Datenbank-Symbol wurde hinzugefügt, um das "Melderegister" darzustellen.
                     - **Legenden:** Die Bedeutung der neuen Symbole wird in einer Legende erklärt.
                   `}
-                />
+                  />
+                </InfoBox>
               }
               hideNextButton
             />
@@ -619,6 +650,7 @@ export default function Visualization() {
               }
               type="video/mp4"
             />
+
             <Link
               to={
                 STRAPI_MEDIA_URL +
@@ -645,10 +677,11 @@ export default function Visualization() {
             text: "Im nächsten Schritt wenden Sie die Prinzipien an.",
             className: "ds-heading-03-reg",
           }}
-          content={
-            "Sie wenden die Prinzipien auf Ihre Visualisierung an und identifizieren konkrete Möglichkeiten der Digitalisierung."
-          }
         >
+          <p>
+            Sie wenden die Prinzipien auf Ihre Visualisierung an und
+            identifizieren konkrete Möglichkeiten der Digitalisierung.
+          </p>
           <InfoBox.LinkList
             links={[
               {

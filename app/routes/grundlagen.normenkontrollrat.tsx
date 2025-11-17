@@ -55,8 +55,12 @@ export default function FundamentalsMethods() {
         <Container className="space-y-32 py-40 md:space-y-40 md:py-80">
           <InfoBox
             heading={{ text: fundamentalsNKR.visualization.infoBox1.heading }}
-            content={fundamentalsNKR.visualization.infoBox1.content}
-          />
+          >
+            <RichText
+              markdown={fundamentalsNKR.visualization.infoBox1.content}
+            />
+          </InfoBox>
+
           <InfoBox
             className="bg-white"
             look="highlight"
@@ -64,8 +68,11 @@ export default function FundamentalsMethods() {
               text: fundamentalsNKR.visualization.infoBox2.heading,
               className: "ds-subhead",
             }}
-            content={fundamentalsNKR.visualization.infoBox2.content}
-          />
+          >
+            <RichText
+              markdown={fundamentalsNKR.visualization.infoBox2.content}
+            />
+          </InfoBox>
         </Container>
       </div>
     </>

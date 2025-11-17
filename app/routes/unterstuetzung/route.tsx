@@ -88,8 +88,8 @@ export default function Index() {
                   tagName: "h2",
                   text: offering.title,
                 }}
-                content={offering.text}
               >
+                <RichText markdown={offering.text} />
                 {offering.link && <InfoBox.LinkList links={[offering.link]} />}
               </InfoBox>
 
@@ -181,8 +181,10 @@ export default function Index() {
             tagName: "h2",
             text: supportWhat.title,
           }}
-          content={supportWhat.subtitle}
-        />
+        >
+          <RichText markdown={supportWhat.subtitle} />
+        </InfoBox>
+
         <div className="mt-40 flex gap-32 max-sm:flex-col">
           {supportWhat.supportTypes.length > 0 &&
             supportWhat.supportTypes.map((supportType) => (
@@ -196,8 +198,9 @@ export default function Index() {
                     tagName: "h3",
                     text: supportType.title,
                   }}
-                  content={supportType.text}
-                />
+                >
+                  <RichText markdown={supportType.text} />
+                </InfoBox>
               </div>
             ))}
         </div>

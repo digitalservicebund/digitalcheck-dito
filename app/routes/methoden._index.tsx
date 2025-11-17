@@ -64,8 +64,9 @@ export default function Methoden() {
         <section className="space-y-40">
           <InfoBox
             heading={{ tagName: "h2", text: methods.furtherMethods.heading }}
-            content={methods.furtherMethods.content}
-          />
+          >
+            <RichText markdown={methods.furtherMethods.content} />
+          </InfoBox>
 
           <InfoBoxSideBySide>
             <InfoBox
@@ -76,8 +77,8 @@ export default function Methoden() {
                 tagName: "h3",
                 className: "ds-heading-03-bold",
               }}
-              content={methods.itSystems.content}
             >
+              <RichText markdown={methods.itSystems.content} />
               <InfoBox.LinkList links={methods.itSystems.links} />
             </InfoBox>
 
@@ -92,8 +93,8 @@ export default function Methoden() {
                 tagName: "h3",
                 className: "ds-heading-03-bold",
               }}
-              content={methods.technicalFeasibility.content}
             >
+              <RichText markdown={methods.technicalFeasibility.content} />
               <InfoBox.LinkList links={methods.technicalFeasibility.links} />
             </InfoBox>
           </InfoBoxSideBySide>

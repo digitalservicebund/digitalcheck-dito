@@ -5,6 +5,7 @@ import {
   useOutletContext,
 } from "react-router";
 
+import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
@@ -115,13 +116,16 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
         </TabGroup>
 
         <InfoBox
-          content={prinzip.Beschreibung}
           heading={{ text: prinzip.Name, tagName: "h2" }}
           badge={{
             children: examplesRegelungen.principles.prinzipBadge,
             principleNumber: prinzip.Nummer,
           }}
-        />
+        >
+          <div>
+            <BlocksRenderer content={prinzip.Beschreibung} />
+          </div>
+        </InfoBox>
 
         {Beispielvorhaben.length > 0 && (
           <>

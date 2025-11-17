@@ -71,10 +71,12 @@ export default function Index() {
                   image={preCheck.start.summary.process.image}
                   border
                 />
-                <InfoBox
-                  heading={preCheck.start.summary.relevance.heading}
-                  content={preCheck.start.summary.relevance.content}
-                />
+
+                <InfoBox heading={preCheck.start.summary.relevance.heading}>
+                  <RichText
+                    markdown={preCheck.start.summary.relevance.content}
+                  />
+                </InfoBox>
               </div>
             </TabGroup.TabPanel>
             <TabGroup.TabPanel>
@@ -84,14 +86,15 @@ export default function Index() {
                   alternativeText={preCheck.start.info.image.alt}
                   className="md:w-1/3 md:pl-32"
                 />
+
                 <InfoBox
                   heading={{
                     tagName: "h3",
                     look: "ds-heading-03-reg",
                     text: preCheck.start.info.title,
                   }}
-                  content={preCheck.start.info.text}
                 >
+                  <RichText markdown={preCheck.start.info.text} />
                   <InfoBox.LinkList
                     links={[
                       {

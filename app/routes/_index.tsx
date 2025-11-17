@@ -122,8 +122,8 @@ export default function Index() {
               tagName: "h3",
               text: grundlagen.wasIstDigitaltauglichkeit.title,
             }}
-            content={grundlagen.wasIstDigitaltauglichkeit.content}
           >
+            <RichText markdown={grundlagen.wasIstDigitaltauglichkeit.content} />
             <InfoBox.LinkList
               links={[grundlagen.wasIstDigitaltauglichkeit.link]}
             />
@@ -137,8 +137,8 @@ export default function Index() {
               tagName: "h3",
               text: grundlagen.nationaleNormenkontrolle.title,
             }}
-            content={grundlagen.nationaleNormenkontrolle.content}
           >
+            <RichText markdown={grundlagen.nationaleNormenkontrolle.content} />
             <InfoBox.LinkList
               links={[grundlagen.nationaleNormenkontrolle.link]}
             />
@@ -156,8 +156,8 @@ export default function Index() {
                 tagName: "h3",
                 text: visualisierungen.title,
               }}
-              content={visualisierungen.content}
             >
+              <RichText markdown={visualisierungen.content} />
               <InfoBox.LinkList links={visualisierungen.links} />
             </InfoBox>
 
@@ -168,8 +168,8 @@ export default function Index() {
                 tagName: "h3",
                 text: prinzipien.title,
               }}
-              content={prinzipien.content}
             >
+              <RichText markdown={prinzipien.content} />
               <InfoBox.LinkList links={prinzipien.links} />
             </InfoBox>
           </InfoBoxSideBySide>
@@ -182,8 +182,8 @@ export default function Index() {
             tagName: "h2",
             text: individuelleExpertise.title,
           }}
-          content={individuelleExpertise.content}
         >
+          <RichText markdown={individuelleExpertise.content} />
           <InfoBox.LinkList links={[individuelleExpertise.link]} />
         </InfoBox>
 
@@ -196,8 +196,9 @@ export default function Index() {
             text: quote.text,
             className: "ds-heading-03-reg mb-16",
           }}
-          content={quote.reference}
-        />
+        >
+          <RichText markdown={quote.reference} />
+        </InfoBox>
       </Container>
 
       {showBanner && enableDigitalDocumentation && (

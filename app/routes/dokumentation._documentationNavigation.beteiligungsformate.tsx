@@ -54,8 +54,9 @@ export default function DocumentationParticipation() {
                 look: "ds-heading-03-reg",
                 text: participation.formats.heading,
               }}
-              content={participation.formats.content}
-            />
+            >
+              <RichText markdown={participation.formats.content} />
+            </InfoBox>
           </legend>
           <Textarea
             description={participation.formats.textField.description}

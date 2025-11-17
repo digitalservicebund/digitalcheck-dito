@@ -47,8 +47,8 @@ export default function Interoperability() {
               tagName: "h2",
               text: interoperability.kontaktstelle.title,
             }}
-            content={interoperability.kontaktstelle.text}
           >
+            <RichText markdown={interoperability.kontaktstelle.text} />
             <InfoBox.LinkList links={interoperability.kontaktstelle.links} />
           </InfoBox>
         </>

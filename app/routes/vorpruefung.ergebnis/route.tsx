@@ -229,8 +229,9 @@ export default function Result() {
                   text: resultContent.infoboxContent.title,
                   tagName: "h3",
                 }}
-                content={resultContent.infoboxContent.text}
-              />
+              >
+                <RichText markdown={resultContent.infoboxContent.text} />
+              </InfoBox>
             )}
             {resultContent.inlineNoticeContent && (
               <InlineNotice
@@ -296,8 +297,8 @@ export default function Result() {
               text: preCheckResult.unsure.nextStep.title,
               tagName: "h2",
             }}
-            content={preCheckResult.unsure.nextStep.text}
           >
+            <RichText markdown={preCheckResult.unsure.nextStep.text} />
             <InfoBox.LinkList
               links={[
                 {
