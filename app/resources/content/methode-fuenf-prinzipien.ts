@@ -2,7 +2,7 @@ import { DrawOutlined } from "@digitalservicebund/icons";
 import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
 import {
   ROUTE_DOWNLOAD_PRINCIPLE_POSTER,
-  ROUTE_EXAMPLES,
+  ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_METHODS,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
   ROUTE_METHODS_VISUALIZE,
@@ -52,7 +52,13 @@ export const methodsFivePrinciples = {
         heading: { text: "Als Startpunkt für ihren Regelungstext" },
         content:
           "Nutzen Sie die gesammelten Beispiele als Startpunkt für Ihre Formulierungen. Bauen Sie auf Formulierungen auf, oder lassen Sie sich durch die Wirklogiken Ihrer Kolleginnen und Kollegen inspirieren. Sie finden gute Formulierungen, Einordnungen und deren Kontext im Regelungstext in den Beispielen.",
-        link: { url: ROUTE_EXAMPLES.url, text: "Beispiele betrachten" },
+        links: [
+          {
+            to: ROUTE_EXAMPLES_PRINCIPLES.url,
+            text: "Beispiele betrachten",
+            look: "link",
+          },
+        ] satisfies ContentLink[],
       },
     ],
   },
