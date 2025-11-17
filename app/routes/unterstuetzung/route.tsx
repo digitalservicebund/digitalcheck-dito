@@ -89,8 +89,10 @@ export default function Index() {
                   text: offering.title,
                 }}
                 content={offering.text}
-                links={offering.link ? [offering.link] : []}
-              />
+              >
+                {offering.link && <InfoBox.LinkList links={[offering.link]} />}
+              </InfoBox>
+
               <div className="flex-none space-y-20 md:w-[310px]">
                 <div className="bg-white">
                   <div className="p-28">

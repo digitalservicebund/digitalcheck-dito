@@ -123,8 +123,11 @@ export default function Index() {
               text: grundlagen.wasIstDigitaltauglichkeit.title,
             }}
             content={grundlagen.wasIstDigitaltauglichkeit.content}
-            links={[grundlagen.wasIstDigitaltauglichkeit.link]}
-          />
+          >
+            <InfoBox.LinkList
+              links={[grundlagen.wasIstDigitaltauglichkeit.link]}
+            />
+          </InfoBox>
 
           <InfoBox
             visual={{ type: "icon", Icon: FactCheckOutlinedIcon }}
@@ -135,8 +138,11 @@ export default function Index() {
               text: grundlagen.nationaleNormenkontrolle.title,
             }}
             content={grundlagen.nationaleNormenkontrolle.content}
-            links={[grundlagen.nationaleNormenkontrolle.link]}
-          />
+          >
+            <InfoBox.LinkList
+              links={[grundlagen.nationaleNormenkontrolle.link]}
+            />
+          </InfoBox>
         </Container>
       </div>
 
@@ -151,8 +157,10 @@ export default function Index() {
                 text: visualisierungen.title,
               }}
               content={visualisierungen.content}
-              links={visualisierungen.links}
-            />
+            >
+              <InfoBox.LinkList links={visualisierungen.links} />
+            </InfoBox>
+
             <InfoBox
               look="method"
               className="bg-white"
@@ -161,8 +169,9 @@ export default function Index() {
                 text: prinzipien.title,
               }}
               content={prinzipien.content}
-              links={prinzipien.links}
-            />
+            >
+              <InfoBox.LinkList links={prinzipien.links} />
+            </InfoBox>
           </InfoBoxSideBySide>
         </Container>
       </div>
@@ -174,8 +183,9 @@ export default function Index() {
             text: individuelleExpertise.title,
           }}
           content={individuelleExpertise.content}
-          links={[individuelleExpertise.link]}
-        />
+        >
+          <InfoBox.LinkList links={[individuelleExpertise.link]} />
+        </InfoBox>
 
         <InfoBox
           look="highlight"

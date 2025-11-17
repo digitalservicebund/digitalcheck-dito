@@ -23,36 +23,6 @@ describe("InfoBox", () => {
 
       expect(screen.getByRole("paragraph")).toHaveTextContent("Test Content");
     });
-
-    it("shows links", () => {
-      const RouterStubInfoBoxItem = createRoutesStub([
-        {
-          path: "/",
-          Component: () => (
-            <InfoBox
-              links={[
-                {
-                  text: "Link 1",
-                  to: "example.com",
-                },
-                {
-                  text: "Link 2",
-                  to: "example2.com",
-                },
-              ]}
-            />
-          ),
-        },
-      ]);
-      render(<RouterStubInfoBoxItem />);
-
-      const links = screen.getAllByRole("link");
-      expect(links).toHaveLength(2);
-      expect(links.map((link) => link.textContent.trim())).toStrictEqual([
-        "Link 1",
-        "Link 2",
-      ]);
-    });
   });
 
   describe("DetailsSummaryList", () => {
@@ -73,6 +43,42 @@ describe("InfoBox", () => {
       expect(screen.getAllByRole("group").at(0)).toHaveTextContent(
         "Test Detail 1Test Content 1",
       );
+    });
+  });
+
+  describe("LinkList", () => {
+    it("shows links", () => {
+      const RouterStubInfoBoxItem = createRoutesStub([
+        {
+          path: "/",
+          Component: () => (
+            <InfoBox>
+              <InfoBox.LinkList
+                links={[
+                  {
+                    text: "Link 1",
+                    to: "example.com",
+                  },
+                  {
+                    text: "Link 2",
+                    to: "example2.com",
+                    download: true,
+                  },
+                ]}
+              />
+            </InfoBox>
+          ),
+        },
+      ]);
+      render(<RouterStubInfoBoxItem />);
+
+      const links = screen.getAllByRole("link");
+      expect(links).toHaveLength(2);
+      expect(links.map((link) => link.textContent.trim())).toStrictEqual([
+        "Link 1",
+        "Link 2",
+      ]);
+      expect(links.at(1)).toHaveAttribute("download");
     });
   });
 });

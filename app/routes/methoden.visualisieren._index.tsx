@@ -82,8 +82,9 @@ export default function Visualization() {
             tagName: "h3",
           }}
           content={methodsTasksProcesses.goodToKnow.content}
-          links={methodsTasksProcesses.goodToKnow.links}
-        />
+        >
+          <InfoBox.LinkList links={methodsTasksProcesses.goodToKnow.links} />
+        </InfoBox>
       </Container>
     </>
   );

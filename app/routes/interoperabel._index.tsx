@@ -48,8 +48,9 @@ export default function Interoperability() {
               text: interoperability.kontaktstelle.title,
             }}
             content={interoperability.kontaktstelle.text}
-            links={interoperability.kontaktstelle.links}
-          />
+          >
+            <InfoBox.LinkList links={interoperability.kontaktstelle.links} />
+          </InfoBox>
         </>
       ),
     },

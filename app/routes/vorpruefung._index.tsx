@@ -91,15 +91,18 @@ export default function Index() {
                     text: preCheck.start.info.title,
                   }}
                   content={preCheck.start.info.text}
-                  links={[
-                    {
-                      text: preCheck.start.info.action.text,
-                      to: preCheck.start.info.action.to,
-                      look: "tertiary",
-                      className: "mt-20",
-                    },
-                  ]}
-                />
+                >
+                  <InfoBox.LinkList
+                    links={[
+                      {
+                        text: preCheck.start.info.action.text,
+                        to: preCheck.start.info.action.to,
+                        look: "tertiary",
+                        className: "mt-20",
+                      },
+                    ]}
+                  />
+                </InfoBox>
               </div>
             </TabGroup.TabPanel>
             <TabGroup.TabPanel>

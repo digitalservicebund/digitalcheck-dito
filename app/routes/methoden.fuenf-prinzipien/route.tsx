@@ -96,8 +96,9 @@ export default function FivePrinciples() {
             Icon: methodsFivePrinciples.nextStep.icon,
           }}
           content={methodsFivePrinciples.nextStep.text}
-          links={methodsFivePrinciples.nextStep.links}
-        />
+        >
+          <InfoBox.LinkList links={methodsFivePrinciples.nextStep.links} />
+        </InfoBox>
       </Container>
     </>
   );

@@ -26,8 +26,9 @@ export default function Digitaltauglichkeit_index() {
                   text: examples.boxItems[0].title,
                 }}
                 content={examples.boxItems[0].content}
-                links={examples.boxItems[0].links}
-              />
+              >
+                <InfoBox.LinkList links={examples.boxItems[0].links} />
+              </InfoBox>
             </TabGroup.TabPanel>
             <TabGroup.TabPanel>
               <InfoBox
@@ -36,8 +37,9 @@ export default function Digitaltauglichkeit_index() {
                   text: examples.boxItems[1].title,
                 }}
                 content={examples.boxItems[1].content}
-                links={examples.boxItems[1].links}
-              />
+              >
+                <InfoBox.LinkList links={examples.boxItems[1].links} />
+              </InfoBox>
             </TabGroup.TabPanel>
           </TabGroup.TabPanels>
         </TabGroup>

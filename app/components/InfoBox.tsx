@@ -22,6 +22,9 @@ type BaseInfoBoxProps = {
   heading?: HeadingProps;
   content?: string | Node[];
   contentClassName?: string;
+  /**
+   * @deprecated Use `children` instead.
+   */
   links?: ContentLink[];
   className?: string;
   look?: "default" | "highlight" | "method";

@@ -6,9 +6,7 @@ import InfoBox from "./InfoBox";
 
 export function PrinciplePosterBox({
   hasBlueBackground = false,
-}: Readonly<{
-  hasBlueBackground?: boolean;
-}>) {
+}: Readonly<{ hasBlueBackground?: boolean }>) {
   const { principlePosterBox } = methodsFivePrinciples;
 
   return (
@@ -34,15 +32,18 @@ export function PrinciplePosterBox({
             text: principlePosterBox.heading,
           }}
           content={principlePosterBox.content}
-          links={[
-            {
-              text: principlePosterBox.downloadTitle,
-              to: principlePosterBox.downloadUrl,
-              look: "link" as const,
-              iconLeft: <FileDownloadOutlinedIcon className="fill-current" />,
-            },
-          ]}
-        />
+        >
+          <InfoBox.LinkList
+            links={[
+              {
+                text: principlePosterBox.downloadTitle,
+                to: principlePosterBox.downloadUrl,
+                look: "link" as const,
+                iconLeft: <FileDownloadOutlinedIcon className="fill-current" />,
+              },
+            ]}
+          />
+        </InfoBox>
       </Container>
     </div>
   );

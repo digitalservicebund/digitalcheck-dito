@@ -77,8 +77,12 @@ export default function Index() {
             Icon: content.content.icon,
           }}
           content={content.content.text}
-          links={"links" in content.content ? content.content.links : []}
-        />
+        >
+          {"links" in content.content && (
+            <InfoBox.LinkList links={content.content.links} />
+          )}
+        </InfoBox>
+
         {content.boxes.map((box) => (
           <MethodCard
             key={box.title}
@@ -130,8 +134,9 @@ export default function Index() {
                 Icon: content.support.icon,
               }}
               content={content.support.text}
-              links={content.support.links}
-            />
+            >
+              <InfoBox.LinkList links={content.support.links} />
+            </InfoBox>
           </Container>
         </div>
       )}

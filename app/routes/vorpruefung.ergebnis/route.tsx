@@ -297,15 +297,18 @@ export default function Result() {
               tagName: "h2",
             }}
             content={preCheckResult.unsure.nextStep.text}
-            links={[
-              {
-                id: "result-method-button",
-                text: preCheckResult.unsure.nextStep.link.text,
-                to: preCheckResult.unsure.nextStep.link.to,
-                look: "link",
-              },
-            ]}
-          />
+          >
+            <InfoBox.LinkList
+              links={[
+                {
+                  id: "result-method-button",
+                  text: preCheckResult.unsure.nextStep.link.text,
+                  to: preCheckResult.unsure.nextStep.link.to,
+                  look: "link",
+                },
+              ]}
+            />
+          </InfoBox>
         )}
         {result.digital !== ResultType.UNSURE && nextSteps && (
           <>

@@ -648,14 +648,17 @@ export default function Visualization() {
           content={
             "Sie wenden die Prinzipien auf Ihre Visualisierung an und identifizieren konkrete Möglichkeiten der Digitalisierung."
           }
-          links={[
-            {
-              text: "Zu den Prinzipien",
-              look: "tertiary",
-              to: ROUTE_METHODS_PRINCIPLES.url,
-            },
-          ]}
-        />
+        >
+          <InfoBox.LinkList
+            links={[
+              {
+                text: "Zu den Prinzipien",
+                look: "tertiary",
+                to: ROUTE_METHODS_PRINCIPLES.url,
+              },
+            ]}
+          />
+        </InfoBox>
       </Container>
       <BackToTopButton />
     </>

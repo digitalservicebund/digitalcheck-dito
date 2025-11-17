@@ -77,8 +77,9 @@ export default function Methoden() {
                 className: "ds-heading-03-bold",
               }}
               content={methods.itSystems.content}
-              links={methods.itSystems.links}
-            />
+            >
+              <InfoBox.LinkList links={methods.itSystems.links} />
+            </InfoBox>
 
             <InfoBox
               look="method"
@@ -92,8 +93,9 @@ export default function Methoden() {
                 className: "ds-heading-03-bold",
               }}
               content={methods.technicalFeasibility.content}
-              links={methods.technicalFeasibility.links}
-            />
+            >
+              <InfoBox.LinkList links={methods.technicalFeasibility.links} />
+            </InfoBox>
           </InfoBoxSideBySide>
         </section>
       </div>
