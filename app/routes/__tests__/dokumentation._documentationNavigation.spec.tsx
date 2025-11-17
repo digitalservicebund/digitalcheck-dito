@@ -201,8 +201,7 @@ function renderPage({ url }: Route) {
 const getNav = () =>
   screen.getByRole("navigation", { name: "Seitennavigation" });
 
-const getTitel = () =>
-  within(getNav()).getByRole("link", { name: "Regelungsvorhaben Titel" });
+const getTitel = () => within(getNav()).getByText("Regelungsvorhaben Titel");
 
 const getBeteiligungsformate = () =>
   within(getNav()).getByRole("link", { name: "Beteiligungsformate" });
@@ -276,13 +275,15 @@ describe("navigation on pages of documentation", () => {
     },
   );
 
-  it("renders sidebar navigation with links to all pages", () => {
-    renderPage(mockRoutes.flat()[0]);
+  const currentRoute = mockRoutes.flat()[0];
+  it("renders sidebar navigation with links to all pages (except current)", () => {
+    renderPage(currentRoute);
 
     const navigation = screen.getByRole("navigation", {
       name: "Seitennavigation",
     });
     for (const route of mockRoutes.flat()) {
+      if (route.url === currentRoute.url) continue;
       const navItem = within(navigation).getByRole("link", {
         name: route.title,
       });
@@ -309,7 +310,7 @@ describe("navigation on pages of documentation", () => {
         });
 
         it("shows correct completed states", () => {
-          renderPage(mockRoutes.flat()[0]);
+          renderPage(currentRoute);
 
           expectCompleted(getTitel(), expected.completedTitle);
           expectCompleted(
@@ -320,7 +321,7 @@ describe("navigation on pages of documentation", () => {
         });
 
         it("shows correct warning states", () => {
-          renderPage(mockRoutes.flat()[0]);
+          renderPage(currentRoute);
 
           expectWarning(getTitel(), expected.warningTitle);
           expectWarning(
