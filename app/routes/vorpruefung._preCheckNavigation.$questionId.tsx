@@ -168,8 +168,8 @@ export default function Index() {
       />
       <input {...form.getHiddenInputProps("questionId")} />
       <fieldset className="space-y-32">
-        <span className="sr-only">{`${preCheck.srHint.before}${questionIdx + 1}${preCheck.srHint.between}${questions.length}`}</span>
         <legend className="ds-stack ds-stack-16">
+          <span className="sr-only">{`${preCheck.srHint.before}${questionIdx + 1}${preCheck.srHint.between}${questions.length}`}</span>
           <Heading
             text={question.question}
             tagName="h1"
