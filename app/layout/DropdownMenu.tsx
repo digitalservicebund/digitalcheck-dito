@@ -93,7 +93,7 @@ export default function DropdownMenu({
         id={`${elementId}-button`}
         aria-haspopup="menu"
         aria-expanded={isExpanded}
-        aria-controls={`${elementId}-inhalt`}
+        aria-controls={isExpanded ? `${elementId}-inhalt` : undefined}
       >
         {label} {isExpanded ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
       </button>

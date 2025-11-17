@@ -93,10 +93,7 @@ describe("DropdownMenu Component", () => {
     expect(button).toHaveAttribute("aria-expanded", "false");
     expect(button).toHaveAttribute("aria-haspopup", "menu");
     const controlId = encodeURIComponent("Aria Menu");
-    expect(button).toHaveAttribute(
-      "aria-controls",
-      `dropdown-${controlId}-desktop-inhalt`,
-    );
+    expect(button).not.toHaveAttribute("aria-controls");
     expect(
       document.getElementById(`dropdown-${controlId}-desktop-inhalt`),
     ).not.toBeInTheDocument();
