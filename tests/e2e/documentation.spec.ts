@@ -50,17 +50,17 @@ function expectStringsOrderedInText(
   expectedStringsOrdered: string[],
   notExpectedStrings: string[],
 ) {
-  // Validate that strings appears in the document in the right order
+  // Validate that strings appear in the document in the right order
   let expectedLastIdx = -1;
   for (const expectedText of expectedStringsOrdered) {
     const searchIdx = text.indexOf(expectedText, expectedLastIdx + 1);
-    expect(searchIdx).toBeGreaterThan(expectedLastIdx);
+    expect(searchIdx, expectedText).toBeGreaterThan(expectedLastIdx);
     expectedLastIdx = searchIdx;
   }
 
   for (const notExpectedText of notExpectedStrings) {
     const searchIdx = text.indexOf(notExpectedText);
-    expect(searchIdx).toBe(-1);
+    expect(searchIdx, notExpectedText).toBe(-1);
   }
 }
 
@@ -112,7 +112,7 @@ test.describe("documentation flow happy path", () => {
   });
 
   test("handle positive principle answer with aspect management", async () => {
-    await page.getByLabel("Ja, gänzlich oder teilweise").click();
+    await page.getByLabel("Ja, gänzlich oder teilweise").check();
 
     // Check that reasoning checkboxes are shown
     const form = page.locator("form");
@@ -215,8 +215,7 @@ test.describe("documentation flow happy path", () => {
   });
 
   test("handle negative principle answer", async () => {
-    await page.getByLabel("Nein").click();
-
+    await page.getByRole("radio", { name: "Nein" }).check();
     // Validate textarea is shown
     const form = page.locator("form");
     const textarea = form.getByLabel("Begründung");
@@ -227,7 +226,7 @@ test.describe("documentation flow happy path", () => {
   });
 
   test("handle irrelevant principle answer and skip principle Automation", async () => {
-    await page.getByLabel("Nicht relevant").click();
+    await page.getByLabel("Nicht relevant").check();
 
     // Validate textarea is shown
     const form = page.locator("form");

@@ -43,7 +43,7 @@ export default function LayoutWithPreCheckNavigation() {
       </div>
       <div className="w-[51rem] space-y-40">
         {showLinkBar && (
-          <div className="lg:hidden">
+          <div className="lg:hidden" data-testid="stepper">
             <Stepper
               currentElementUrl={question.url}
               elements={questions}

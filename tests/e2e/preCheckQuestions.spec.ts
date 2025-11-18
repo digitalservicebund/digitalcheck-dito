@@ -139,11 +139,10 @@ test.describe("test questions form", () => {
 
 test.describe("test question navigation", () => {
   test.beforeEach("skip tests on small screens", ({ viewport }) => {
-    if (viewport && viewport.width < SCREEN_LG)
-      test.skip(
-        true,
-        "Skipping because sidebar navigation is not visible on small screen",
-      );
+    test.skip(
+      Boolean(viewport && viewport.width < SCREEN_LG),
+      "Skipping because sidebar navigation is not visible on small screen",
+    );
   });
 
   test("navigation leads to correct pages", async ({ page }) => {
@@ -168,10 +167,12 @@ test.describe("test question navigation", () => {
     page,
   }) => {
     await page.goto(questions[0].url);
+    const navigation = page.getByRole("navigation", { name: "Alle Fragen" });
     for (let i = 1; i < questions.length; i++) {
-      await expect(
-        page.getByRole("link", { name: questions[i].title }),
-      ).toBeDisabled();
+      await expect(navigation.getByText(questions[i].title)).toHaveAttribute(
+        "aria-disabled",
+        "true",
+      );
     }
 
     await page.getByLabel("Ja").click();
@@ -179,63 +180,58 @@ test.describe("test question navigation", () => {
     await expect(
       page.getByRole("link", { name: questions[0].title }),
     ).toBeEnabled();
-    for (let i = 2; i < questions.length; i++) {
-      await expect(
-        page.getByRole("link", { name: questions[i].title }),
-      ).toBeDisabled();
+    for (const question of questions.slice(2)) {
+      await expect(page.getByText(question.title)).toHaveAttribute(
+        "aria-disabled",
+        "true",
+      );
     }
 
     await page.goto(questions[0].url);
     await expect(
       page.getByRole("link", { name: questions[1].title }),
     ).toBeEnabled();
-    for (let i = 2; i < questions.length; i++) {
-      await expect(
-        page.getByRole("link", { name: questions[i].title }),
-      ).toBeDisabled();
+    for (const question of questions.slice(2)) {
+      await expect(page.getByText(question.title)).toHaveAttribute(
+        "aria-disabled",
+        "true",
+      );
     }
   });
 
-  test("navigation resets when cookie is cleared", async ({ page }) => {
+  test("navigation resets when starting fresh", async ({ page }) => {
     await page.goto(questions[0].url);
-    await page.getByLabel("Ja").click();
-    await page.getByRole("button", { name: "Übernehmen" }).click();
-    await page.getByRole("link", { name: "Zurück" }).click();
-    await expect(
-      page.getByRole("link", { name: questions[0].title }),
-    ).toBeDisabled();
+    const navigation = page.getByRole("navigation", { name: "Alle Fragen" });
+    await expect(navigation.getByText(questions[0].title)).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+    for (const question of questions.slice(1)) {
+      await expect(navigation.getByText(question.title)).toHaveAttribute(
+        "aria-disabled",
+      );
+    }
   });
 
-  test("current page is disabled, has aria-current and active styling", async ({
-    page,
-  }) => {
+  test("current page has aria-current and active styling", async ({ page }) => {
     await page.goto(questions[0].url);
 
-    // Check if the first question link is disabled and has aria-current attribute
-    await expect(
-      page.getByRole("link", { name: questions[0].title }),
-    ).toBeDisabled();
-    await expect(
-      page.getByRole("link", { name: questions[0].title }),
-    ).toHaveAttribute("aria-current", "page");
-    await expect(
-      page.getByRole("link").filter({ hasText: questions[0].title }),
-    ).toHaveClass(/border-l-/);
+    const navigation = page.getByRole("navigation", { name: "Alle Fragen" });
+    // Check if the first question has aria-current attribute
+    const firstQuestionElement = navigation.getByText(questions[0].title);
+    await expect(firstQuestionElement).toHaveAttribute("aria-current", "page");
+    await expect(firstQuestionElement).toHaveClass(/border-l-/);
 
     // Navigate to the second question
     await page.getByLabel("Ja").click();
     await page.getByRole("button", { name: "Übernehmen" }).click();
 
-    // Check if the second question link is disabled and has aria-current attribute
-    await expect(
-      page.getByRole("link", { name: questions[1].title }),
-    ).toBeDisabled();
-    await expect(
-      page.getByRole("link", { name: questions[1].title }),
-    ).toHaveAttribute("aria-current", "page");
-    await expect(
-      page.getByRole("link").filter({ hasText: questions[0].title }),
-    ).toHaveClass(/border-l-/);
+    await page.waitForURL(questions[1].url);
+
+    // Check if the second question element has aria-current attribute
+    const secondQuestionElement = navigation.getByText(questions[1].title);
+    await expect(secondQuestionElement).toHaveAttribute("aria-current", "page");
+    await expect(secondQuestionElement).toHaveClass(/border-l-/);
   });
 
   test("answered question have check mark icon", async ({ page }) => {
@@ -272,8 +268,10 @@ test.describe("test question navigation", () => {
 
 test.describe("test question navigation on mobile screens", () => {
   test.beforeEach("Only run tests on mobile screens", ({ viewport }) => {
-    if (!viewport || viewport.width >= SCREEN_LG)
-      test.skip(true, "Skipping LinkBar is not visible on small screen");
+    test.skip(
+      Boolean(!viewport || viewport.width >= SCREEN_LG),
+      "Skipping LinkBar is not visible on small screen",
+    );
   });
 
   test("Navigation with LinkBar works and restricts unanswered questions", async ({
@@ -285,28 +283,33 @@ test.describe("test question navigation on mobile screens", () => {
     await page.getByLabel("Ja").click();
     await page.getByRole("button", { name: "Übernehmen" }).click();
 
-    const linkBar = page.locator(".lg\\:hidden .flex");
+    await page.waitForURL(questions[1].url);
+
+    const linkBar = page.getByTestId("stepper");
 
     // Check that the first and second question link has a dark color
-    await expect(linkBar.locator(`a[href="${questions[0].url}"]`)).toHaveClass(
+    await expect(linkBar.getByLabel(questions[0].title)).toHaveClass(
       /bg-blue-800/,
     );
-    await expect(linkBar.locator(`a[href="${questions[1].url}"]`)).toHaveClass(
+    await expect(linkBar.getByLabel(questions[1].title)).toHaveClass(
       /bg-blue-800/,
     );
 
-    // Navigate to answered question
-    await linkBar.locator(`a[href="${questions[0].url}"]`).click();
+    // Navigate back to answered question
+    await linkBar.getByRole("link", { name: questions[0].title }).click();
     await expect(page).toHaveURL(questions[0].url);
 
-    // Navigate back to second question
-    await linkBar.locator(`a[href="${questions[1].url}"]`).click();
+    // Navigate forward again to second question
+    await linkBar.getByRole("link", { name: questions[1].title }).click();
     await expect(page).toHaveURL(questions[1].url);
 
     // Navigation to next (unanswered) question is not possible
-    const unansweredQuestionLink = linkBar.locator(
-      `a[href="${questions[2].url}"]`,
+    const unansweredQuestionLink = linkBar.getByLabel(questions[2].title);
+    await expect(unansweredQuestionLink).toHaveAttribute(
+      "aria-disabled",
+      "true",
     );
+
     const originalURL = page.url();
     await unansweredQuestionLink.click();
     await expect(page).toHaveURL(originalURL);
@@ -315,16 +318,18 @@ test.describe("test question navigation on mobile screens", () => {
     await page.getByLabel("Ja").click();
     await page.getByRole("button", { name: "Übernehmen" }).click();
 
+    await page.waitForURL(questions[2].url);
+
     // Check that the second question link still has a dark color
-    await expect(linkBar.locator(`a[href="${questions[1].url}"]`)).toHaveClass(
+    await expect(linkBar.getByLabel(questions[1].title)).toHaveClass(
       /bg-blue-800/,
     );
-    await expect(linkBar.locator(`a[href="${questions[2].url}"]`)).toHaveClass(
+    await expect(linkBar.getByLabel(questions[2].title)).toHaveClass(
       /bg-blue-800/,
     );
 
-    // Clicking on second question should now navigate
-    await linkBar.locator(`a[href="${questions[1].url}"]`).click();
+    // Clicking on the second question should now navigate
+    await linkBar.getByRole("link", { name: questions[1].title }).click();
     await expect(page).toHaveURL(questions[1].url);
   });
 });
