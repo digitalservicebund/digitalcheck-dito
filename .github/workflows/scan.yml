@@ -36,7 +36,17 @@ jobs:
           limit-severities-for-sarif: true
           exit-code: 2 # Fail the build!
           version: "v0.67.2"
-
+      - name: Check trivy results
+        if: always() # Bypass non-zero exit code
+        run: |
+          if grep -qE 'HIGH|CRITICAL' trivy-results.sarif; then
+            echo "Vulnerabilities found"
+            echo "### Found vulnerabilities in trivy results" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            RESULT=$(cat trivy-results.sarif | jq -r '[.runs[].results[].message.text] | join("\\n\\n")')
+            echo -e $RESULT >> $GITHUB_STEP_SUMMARY
+            echo -e $RESULT
+          fi
       # Upload SARIF results to GitHub Security tab
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@0499de31b99561a6d14a36a5f662c2a54f91beee # v4.31.2
