@@ -44,7 +44,11 @@ export default function LayoutWithPreCheckNavigation() {
       <div className="w-[51rem] space-y-40">
         {showLinkBar && (
           <div className="lg:hidden">
-            <Stepper currentElementUrl={question.url} elements={questions} />
+            <Stepper
+              currentElementUrl={question.url}
+              elements={questions}
+              firstUnansweredQuestionIndex={firstUnansweredQuestionIndex}
+            />
           </div>
         )}
         <section>
