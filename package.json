@@ -35,8 +35,8 @@
     "@digitalservice4germany/style-dictionary": "^2.0.0",
     "@digitalservicebund/icons": "^2.1.0",
     "@headlessui/react": "^2.2.8",
-    "@react-router/node": "^7.9.1",
-    "@react-router/serve": "^7.9.1",
+    "@react-router/node": "^7.9.6",
+    "@react-router/serve": "^7.9.6",
     "@rvf/react": "^8.1.0",
     "@rvf/react-router": "^8.1.0",
     "@rvf/zod": "^7.0.4",
@@ -53,7 +53,7 @@
     "posthog-js": "^1.292.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-router": "^7.9.1",
+    "react-router": "^7.9.6",
     "tailwind-merge": "^3.3.1",
     "unleash-client": "^6.8.0",
     "zod": "^4.1.8"
@@ -64,8 +64,8 @@
     "@eslint/compat": "^1.4.0",
     "@eslint/js": "^9.37.0",
     "@playwright/test": "1.55.0",
-    "@react-router/dev": "^7.9.1",
-    "@react-router/fs-routes": "^7.9.1",
+    "@react-router/dev": "^7.9.6",
+    "@react-router/fs-routes": "^7.9.6",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
@@ -107,5 +107,8 @@
   },
   "engines": {
     "node": ">=20.19.0"
+  },
+  "overrides": {
+    "glob": "^11.1.0"
   }
 }
