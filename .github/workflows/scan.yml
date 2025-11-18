@@ -35,6 +35,7 @@ jobs:
           severity: "CRITICAL,HIGH"
           limit-severities-for-sarif: true
           exit-code: 2 # Fail the build!
+          version: "v0.67.2"
 
       # Upload SARIF results to GitHub Security tab
       - name: Upload Trivy scan results to GitHub Security tab
