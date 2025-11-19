@@ -63,15 +63,19 @@ export const spoc = {
         - bei der Klärung von Fragen zur Interoperabilität
         - beim Ausfüllen der Bewertung 
         - und insbesondere beim Identifizieren sogenannter "verbindlicher Anforderungen" und deren Auswirkungen auf die vier Ebenen der Interoperabilität.
+
       
       **Ansprechpartner** 
         Wir sind Ansprechpartner für verschiedene Akteure, darunter andere nationale Kontaktstellen, die Bundesländer, den IT-Planungsrat, die FITKO, sowie interessierte Personen und umsetzende Akteure.
+
       
       **Austausch und Weiterentwicklung auf deutscher und europäischer Ebene**
       Wir nehmen aktiv an Diskussionen auf europäischer Ebene teil, mit dem zuständigen Referat im Bundesministerium für Digitalisierung und Staatsmodernisierung sind wir Teil der Arbeitsgruppe "Interoperable Europe" und informieren auf diesem Wege das Interoperable Europe Board. Unsere Aufgabe ist es auch, die Nachnutzung von Lösungen zu fördern, Hilfestellung bei der Umsetzung von Interoperabilitätsanforderungen zu leisten und das Thema in der Verwaltung zu repräsentieren, indem wir bewährte Verfahren, sogenannte Best Practices, teilen.
+
       
       **Bereitstellung von Informationen und Austauschformaten** 
       Wir stellen Wissen bereit und bereiten das Thema verständlich auf. Dazu zählen Schulungen (https://digitalcheck.bund.de/unterstuetzung#angebote) und verschiedene Unterstützungsangebote (https://digitalcheck.bund.de/unterstuetzung).
+
 
       **Förderung von Nachnutzung, Kooperation und Zusammenarbeit:**
       Wir stellen gute Beispiele bereit, unterstützen bei der Nachnutzung und fördern sektorenübergreifende Zusammenarbeit.
