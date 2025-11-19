@@ -4,8 +4,7 @@ import { PassThrough } from "node:stream";
 import { createReadableStreamFromReadable } from "@react-router/node";
 import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
-import type { EntryContext } from "react-router";
-import { ServerRouter } from "react-router";
+import { EntryContext, redirectDocument, ServerRouter } from "react-router";
 import { generateContentSecurityPolicy } from "~/utils/contentSecurityPolicy.server.ts";
 import logResponseStatus from "~/utils/logging";
 import { NonceProvider } from "~/utils/nonce";
@@ -37,6 +36,11 @@ if (
 // Reject/cancel all pending promises after 5 seconds
 export const streamTimeout = 5000;
 
+export function shouldRedirect(request: Request): boolean {
+  const host = request.headers.get("host");
+  return host?.endsWith("erarbeiten.digitalcheck.bund.de") ?? false;
+}
+
 export default function handleRequest(
   request: Request,
   responseStatusCode: number,
@@ -47,6 +51,16 @@ export default function handleRequest(
   const isReadinessCheck =
     request.headers.get("X-Readiness-Check") === "readiness-check";
   const userAgent = request.headers.get("user-agent");
+
+  if (shouldRedirect(request)) {
+    const url = new URL(request.url);
+    const requestUri = url.pathname + url.search;
+
+    const movedPermanentlyCode = 301;
+    return redirectDocument("https://digitalcheck.bund.de" + requestUri, {
+      status: movedPermanentlyCode,
+    });
+  }
 
   if (isReadinessCheck || isbot(userAgent)) {
     return handleBotRequest(
