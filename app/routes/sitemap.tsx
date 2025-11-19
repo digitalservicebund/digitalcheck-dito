@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { useLoaderData } from "react-router";
 
-import Container from "~/components/Container";
+import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Hero from "~/components/Hero";
 import MetaTitle from "~/components/Meta";
 import { Route, ROUTE_SITEMAP, ROUTES } from "~/resources/staticRoutes";
@@ -54,7 +54,7 @@ export default function Sitemap(): ReactNode {
       <MetaTitle prefix={ROUTE_SITEMAP.title} />
       <Hero title="Sitemap" />
 
-      <Container>{renderRoutes(routes)}</Container>
+      <ContentWrapper>{renderRoutes(routes)}</ContentWrapper>
     </>
   );
 }

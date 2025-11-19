@@ -51,7 +51,7 @@ export default function Index() {
         </ButtonContainer>
       </Hero>
 
-      <Container>
+      <Container className="lg:pb-80">
         <TabGroup>
           <TabGroup.TabList>
             <TabGroup.Tab>{preCheck.start.summary.tabName}</TabGroup.Tab>

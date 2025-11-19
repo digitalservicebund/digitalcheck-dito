@@ -1,4 +1,4 @@
-import Container from "~/components/Container";
+import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Hero from "~/components/Hero";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
@@ -11,12 +11,12 @@ export default function Index() {
       <MetaTitle prefix={ROUTE_IMPRINT.title} />
       <Hero title={imprint.title} />
 
-      <Container>
+      <ContentWrapper>
         <RichText
           markdown={imprint.content}
           className="ds-stack-16 [&>h2]:mt-40 [&>h3]:mt-32"
         />
-      </Container>
+      </ContentWrapper>
     </>
   );
 }

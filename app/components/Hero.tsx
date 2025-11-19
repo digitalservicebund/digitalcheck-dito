@@ -20,7 +20,7 @@ export default function Hero({
 }: Readonly<HeroProps>) {
   return (
     <div className={twMerge("bg-blue-100", className)}>
-      <Container className="ds-stack ds-stack-16">
+      <Container className="ds-stack ds-stack-16 pb-48">
         <Heading tagName="h1">{title}</Heading>
         {subtitle && (
           <RichText markdown={subtitle} className="ds-subhead mt-16" />

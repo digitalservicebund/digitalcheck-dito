@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router";
 
 import Container from "~/components/Container";
+import ContentWrapper from "~/components/ContentWrapper.tsx";
 import DetailsSummary from "~/components/DetailsSummary";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image.tsx";
@@ -58,48 +59,50 @@ export default function Index() {
       <MetaTitle prefix={route.title} />
       <Hero subtitle={content.subtitle} title={content.title} />
 
-      {"accordion" in content && (
-        <Container className="pb-0">
-          <DetailsSummary title={content.accordion.title}>
-            <RichText markdown={content.accordion.text} />
-          </DetailsSummary>
-        </Container>
-      )}
-      <Container className="space-y-32">
-        <InfoBox
-          heading={{
-            text: content.content.title,
-            look: "ds-heading-03-reg",
-            tagName: "h2",
-          }}
-          badge={{
-            children: content.content.label,
-            Icon: content.content.icon,
-          }}
-        >
-          <RichText markdown={content.content.text} />
-          {"links" in content.content && (
-            <InfoBox.LinkList links={content.content.links} />
-          )}
-        </InfoBox>
+      <ContentWrapper>
+        {"accordion" in content && (
+          <div className="pb-0">
+            <DetailsSummary title={content.accordion.title}>
+              <RichText markdown={content.accordion.text} />
+            </DetailsSummary>
+          </div>
+        )}
+        <div className="mb-40 space-y-40 lg:space-y-80">
+          <InfoBox
+            heading={{
+              text: content.content.title,
+              look: "ds-heading-03-reg",
+              tagName: "h2",
+            }}
+            badge={{
+              children: content.content.label,
+              Icon: content.content.icon,
+            }}
+          >
+            <RichText markdown={content.content.text} />
+            {"links" in content.content && (
+              <InfoBox.LinkList links={content.content.links} />
+            )}
+          </InfoBox>
 
-        {content.boxes.map((box) => (
-          <MethodCard
-            key={box.title}
-            image={
-              <Image url={box.image.src} alternativeText={box.image.alt} />
-            }
-            infoBox={
-              <MethodCard.InfoBox
-                heading={{ text: box.title, look: "ds-heading-03-reg" }}
-                badge={{ children: box.label, Icon: box.icon }}
-                content={box.text}
-                links={"links" in box ? box.links : []}
-              />
-            }
-          />
-        ))}
-      </Container>
+          {content.boxes.map((box) => (
+            <MethodCard
+              key={box.title}
+              image={
+                <Image url={box.image.src} alternativeText={box.image.alt} />
+              }
+              infoBox={
+                <MethodCard.InfoBox
+                  heading={{ text: box.title, look: "ds-heading-03-reg" }}
+                  badge={{ children: box.label, Icon: box.icon }}
+                  content={box.text}
+                  links={"links" in box ? box.links : []}
+                />
+              }
+            />
+          ))}
+        </div>
+      </ContentWrapper>
       {"tip" in content && (
         <div className="bg-yellow-300">
           <Container>
@@ -113,7 +116,7 @@ export default function Index() {
         </div>
       )}
 
-      <Container>
+      <Container className="mt-40 lg:pb-80">
         <InfoBox
           heading={{ tagName: "h2", text: interviewBanner.title }}
           look="highlight"

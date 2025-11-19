@@ -175,7 +175,7 @@ export default function Index() {
       <Container className="lg:hidden">
         <Testimonial />
       </Container>
-      <Container className="pt-48">
+      <Container className="py-40 lg:py-80">
         <InfoBox
           heading={{
             tagName: "h2",
@@ -208,7 +208,7 @@ export default function Index() {
       <div className="bg-blue-100">
         <Container>
           <Heading id="hilfe" tagName="h2" text={supportHow.title} />
-          <div className="ds-stack ds-stack-16 pt-32 pb-40">
+          <div className="ds-stack ds-stack-16 pt-32">
             <InfoBox>
               <RichText markdown={supportHow.text} />
             </InfoBox>
@@ -221,7 +221,7 @@ export default function Index() {
         </Container>
       </div>
       <div id="angebote">
-        <Container className="ds-stack ds-stack-40">
+        <Container className="ds-stack ds-stack-40 pb-40">
           <InfoBox
             heading={{
               tagName: "h2",

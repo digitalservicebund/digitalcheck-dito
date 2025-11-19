@@ -1,4 +1,4 @@
-import Container from "~/components/Container";
+import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Hero from "~/components/Hero";
 import MetaTitle from "~/components/Meta";
 import Timeline, { TimelineItemContentProps } from "~/components/Timeline.tsx";
@@ -21,7 +21,7 @@ export default function VersionHistory() {
       <MetaTitle prefix={ROUTE_VERSION_HISTORY.title} />
       <Hero title={news.title} subtitle={news.subtitle} />
 
-      <Container>
+      <ContentWrapper>
         <Timeline>
           {historyItems.map(({ key, ...item }) => (
             <Timeline.Item bullet key={key}>
@@ -29,7 +29,7 @@ export default function VersionHistory() {
             </Timeline.Item>
           ))}
         </Timeline>
-      </Container>
+      </ContentWrapper>
     </>
   );
 }

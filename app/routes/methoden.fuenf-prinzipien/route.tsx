@@ -78,7 +78,7 @@ export default function FivePrinciples() {
         <Separator />
       </Container>
 
-      <div className="container my-40 space-y-96">
+      <div className="container my-40 space-y-96 lg:mt-80">
         {prinzips.map((prinzip) => (
           <Principle prinzip={prinzip} key={prinzip.Name} />
         ))}
