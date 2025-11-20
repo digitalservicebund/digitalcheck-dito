@@ -7,7 +7,7 @@ A digital touchpoint for _Digitalcheck: Digitaltaugliche Regelung erarbeiten_.
 
 ## Prerequisites
 
-The application requires a `.env` file. You can copy and rename the file `.env.example`. To test certain features hidden behind feature flags, you need to create a `feature-flags.json` file in the root, for example by copying it from [infra repository](https://github.com/digitalservicebund/digitalcheck-dito-infra/).
+The application requires a `.env` file. You can copy and rename the file `.env.example`. To test certain features hidden behind feature flags, you need to create a `feature-flags.json` file in the root, for example by copying it from the [test feature flags file](./tests/feature-flags.json).
 
 ### Node.js
 

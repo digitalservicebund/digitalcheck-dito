@@ -162,4 +162,4 @@ lefthook-local.yml
 *-snapshots/
 
 # Feature flags
-feature-flags.json
+/feature-flags.json
