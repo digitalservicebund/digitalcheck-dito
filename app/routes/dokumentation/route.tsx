@@ -1,4 +1,4 @@
-import { Outlet, useOutletContext, useRouteLoaderData } from "react-router";
+import { Outlet, useRouteLoaderData } from "react-router";
 import {
   Route,
   ROUTE_DOCUMENTATION,
@@ -56,6 +56,5 @@ export function useDocumentationRouteData() {
 }
 
 export default function Documentation() {
-  // We need to pass the Outlet context to the child routes for the feature flags to work
-  return <Outlet context={useOutletContext()} />;
+  return <Outlet />;
 }
