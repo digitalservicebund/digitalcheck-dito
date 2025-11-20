@@ -7,7 +7,6 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useLoaderData,
   useLocation,
   useRouteError,
   useRouteLoaderData,
@@ -20,11 +19,12 @@ import { ROUTE_LANDING } from "~/resources/staticRoutes";
 import sharedStyles from "~/styles.css?url";
 import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants";
 import { POSTHOG_KEY } from "~/utils/constants.server";
-import { getFeatureFlags } from "~/utils/featureFlags.server";
 import { useNonce } from "~/utils/nonce";
 import type { Route } from "./+types/root";
 import ErrorBoundaryComponent from "./layout/ErrorBoundary";
+import FeatureFlagProvider from "./providers/FeatureFlagProvider";
 import { PHProvider } from "./providers/PosthogProvider";
+import { getFeatureFlags } from "./utils/featureFlags.server";
 import { ZFL_ROUTE_PREFIX } from "./zfl/constants";
 
 export function loader({ request }: Route.LoaderArgs) {
@@ -135,7 +135,8 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
   const nonce = useNonce();
   const error = useRouteError();
   const rootLoaderData = useRouteLoaderData<typeof loader>("root");
-  const { trackingEnabled, posthogEnabled, posthogKey } = rootLoaderData ?? {};
+  const { trackingEnabled, posthogEnabled, posthogKey, featureFlags } =
+    rootLoaderData ?? {};
   const location = useLocation();
 
   const isZFLPage = location.pathname.startsWith(`/${ZFL_ROUTE_PREFIX}`);
@@ -189,12 +190,14 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
       </head>
       <body className="flex min-h-screen flex-col">
         <PHProvider posthogEnabled={posthogEnabled} posthogKey={posthogKey}>
-          <ScrollAndFocus />
-          {!isZFLPage && <PageHeader />}
-          {children}
-          {!isZFLPage && <Footer />}
-          <ScrollRestoration nonce={nonce} />
-          <Scripts nonce={nonce} />
+          <FeatureFlagProvider featureFlags={featureFlags ?? {}}>
+            <ScrollAndFocus />
+            {!isZFLPage && <PageHeader />}
+            {children}
+            {!isZFLPage && <Footer />}
+            <ScrollRestoration nonce={nonce} />
+            <Scripts nonce={nonce} />
+          </FeatureFlagProvider>
         </PHProvider>
       </body>
     </html>
@@ -202,11 +205,10 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
 }
 
 export default function App() {
-  const { featureFlags } = useLoaderData<typeof loader>();
   return (
     <main className="grow [&:has(.parent-bg-blue)]:bg-blue-100">
       {/* .parent-bg-blue can be set by child components to set the background of main to blue (e.g. used for question pages) */}
-      <Outlet context={{ featureFlags }} />
+      <Outlet />
     </main>
   );
 }
