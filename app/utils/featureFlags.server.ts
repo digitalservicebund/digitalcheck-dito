@@ -1,10 +1,7 @@
 import fs from "node:fs";
-import path from "node:path";
 
-const FEATURE_FLAGS_PATH = path.join(
-  process.cwd(),
-  process.env.FEATURE_FLAGS_PATH ?? "feature-flags.json",
-);
+const FEATURE_FLAGS_PATH =
+  process.env.FEATURE_FLAGS_PATH ?? "/etc/feature-flags/feature-flags.json";
 
 export const FEATURE_FLAGS = [
   "show-gesetzgebungsprozess-overview",
