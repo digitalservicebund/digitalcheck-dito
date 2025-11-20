@@ -6,6 +6,7 @@ const FEATURE_FLAGS_PATH =
 export const FEATURE_FLAGS = [
   "show-gesetzgebungsprozess-overview",
   "digital-documentation-alternative-explanation",
+  "enable-zfl",
 ] as const;
 type FeatureFlags = Record<(typeof FEATURE_FLAGS)[number], boolean>;
 
