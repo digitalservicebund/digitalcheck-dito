@@ -20,8 +20,8 @@ import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
 import Separator from "~/components/Separator";
 import Textarea from "~/components/Textarea";
+import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import { features } from "~/resources/features.ts";
 import {
   ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_METHODS_PRINCIPLES,
@@ -35,8 +35,7 @@ import {
 import { addOrUpdatePrinciple } from "~/routes/dokumentation/documentationDataService";
 import getDetailsSummaryProps from "~/routes/methoden.fuenf-prinzipien/getDetailsSummaryProps.tsx";
 import { PrincipleExample } from "~/routes/methoden.fuenf-prinzipien/Principle.tsx";
-import { getFeatureFlags } from "~/utils/featureFlags.server.ts";
-import useFeatureFlag from "~/utils/featureFlags.ts";
+import getFeatureFlag from "~/utils/featureFlags.server";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,
@@ -56,8 +55,10 @@ import {
 const { principlePages } = digitalDocumentation;
 
 export async function loader({ params: { principleId } }: Route.LoaderArgs) {
-  const featureFlags = getFeatureFlags();
-  if (featureFlags[features.enableDigitalDocumentationAltExplanation]) {
+  const enableAlternativeExplanation = getFeatureFlag(
+    "digital-documentation-alternative-explanation",
+  );
+  if (enableAlternativeExplanation) {
     console.info("fetching full principles for user test");
     const prinzipData = await fetchStrapiData<{
       prinzips: PrinzipWithAspekteAndExample[];
@@ -70,9 +71,7 @@ export async function loader({ params: { principleId } }: Route.LoaderArgs) {
     }
   }
 
-  return {
-    principleId,
-  };
+  return { principleId };
 }
 
 type ReasoningProps = {
@@ -457,7 +456,7 @@ export default function DocumentationPrinciple() {
   }, [form]);
 
   const enableAlternativeExplanation = useFeatureFlag(
-    features.enableDigitalDocumentationAltExplanation,
+    "digital-documentation-alternative-explanation",
   );
 
   const testVariant = (() => {

@@ -1,11 +1,10 @@
 import Hero from "~/components/Hero";
 import SVGWithMinimap from "~/components/SVGWithMiniMap";
-import { features } from "~/resources/features";
-import useFeatureFlag from "~/utils/featureFlags";
+import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 
 export default function Gesetzgebungsprozess() {
   const enableGesetzgebungsprozessOverview = useFeatureFlag(
-    features.enableGesetzgebungsprozessOverview,
+    "show-gesetzgebungsprozess-overview",
   );
 
   if (!enableGesetzgebungsprozessOverview) {
