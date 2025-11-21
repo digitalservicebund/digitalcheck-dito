@@ -1,9 +1,7 @@
 import { preCheck } from "~/resources/content/vorpruefung";
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
-import type {
-  PreCheckAnswerOption,
-  PreCheckAnswers,
-} from "~/routes/vorpruefung._preCheckNavigation.$questionId";
+import type { PreCheckAnswerOption } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
+import { PreCheckAnswerSchema } from "../vorpruefung/preCheckDataSchema";
 import { PreCheckResult, ResultType } from "./PreCheckResult";
 
 const { questions } = preCheck;
@@ -46,7 +44,9 @@ const title = {
   },
 };
 
-function getResultTitle(result: PreCheckResult) {
+function getResultTitle(result?: PreCheckResult) {
+  if (!result) return "";
+
   if (
     result.digital === ResultType.NEGATIVE &&
     result.euBezug === ResultType.POSITIVE
@@ -65,19 +65,26 @@ function getResultTitle(result: PreCheckResult) {
 }
 
 function getRelevantReasons(
-  answers: PreCheckAnswers,
-  result: PreCheckResult,
+  answers: PreCheckAnswerSchema[],
+  result: PreCheckResult | undefined,
   interoperability: boolean,
   sure: boolean,
 ): Reason[] {
   return questions
-    .filter(
-      (question) =>
-        !!question.interoperability === interoperability &&
-        (answers[question.id] !== "unsure") === sure,
-    )
+    .filter((question) => {
+      const answer = answers.find(
+        ({ questionId }) => questionId === question.id,
+      )?.answer;
+      if (!answer) return false;
+
+      if (interoperability !== !!question.interoperability) return false;
+
+      return (answer !== "unsure") === sure;
+    })
     .map((question) => {
-      const answer = answers[question.id];
+      const answer = answers.find(
+        ({ questionId }) => questionId === question.id,
+      )!.answer as PreCheckAnswerOption["value"];
       let reasonText;
       let reasonHint;
       let reasonTooltip;
@@ -88,7 +95,7 @@ function getRelevantReasons(
           if (
             !!question.interoperability &&
             !!question.resultHint &&
-            result.digital !== ResultType.POSITIVE
+            result?.digital !== ResultType.POSITIVE
           ) {
             reasonHint = question.resultHint.positiveResult;
             reasonTooltip = question.resultTooltip?.positiveResult;
@@ -116,14 +123,14 @@ function getRelevantReasons(
 }
 
 function getInfoboxContentForResult(
-  result: PreCheckResult,
+  result?: PreCheckResult,
 ): { title: string; text: string } | null {
   const infoboxTitle = preCheckResult.infoBox.title;
   let markdownText: string | null = null;
 
-  const isDigitalPositive = result.digital === ResultType.POSITIVE;
+  const isDigitalPositive = result?.digital === ResultType.POSITIVE;
   const isInteroperabilityPositive =
-    result.interoperability === ResultType.POSITIVE;
+    result?.interoperability === ResultType.POSITIVE;
 
   if (isDigitalPositive && isInteroperabilityPositive) {
     markdownText =
@@ -144,9 +151,9 @@ function getInfoboxContentForResult(
   }
 }
 
-function getInlineNoticeContentForResult(result: PreCheckResult) {
-  const isDigitalNegative = result.digital === ResultType.NEGATIVE;
-  const isEuBezugPositive = result.euBezug === ResultType.POSITIVE;
+function getInlineNoticeContentForResult(result?: PreCheckResult) {
+  const isDigitalNegative = result?.digital === ResultType.NEGATIVE;
+  const isEuBezugPositive = result?.euBezug === ResultType.POSITIVE;
 
   if (isDigitalNegative && isEuBezugPositive)
     return {
@@ -156,8 +163,8 @@ function getInlineNoticeContentForResult(result: PreCheckResult) {
 }
 
 export default function getContentForResult(
-  answers: PreCheckAnswers,
-  result: PreCheckResult,
+  answers: PreCheckAnswerSchema[],
+  result?: PreCheckResult,
 ): ResultContent {
   return {
     title: getResultTitle(result),

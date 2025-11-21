@@ -1,6 +1,5 @@
-import { parseFormData, useForm, validationError } from "@rvf/react-router";
 import { useEffect, useState } from "react";
-import { redirect, useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
@@ -16,18 +15,17 @@ import {
   ROUTE_PRECHECK,
   ROUTES_PRECHECK_QUESTIONS,
 } from "~/resources/staticRoutes";
-import {
-  getAnswersFromCookie,
-  getHeaderFromCookie,
-} from "~/utils/cookies.server";
-import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/vorpruefung._preCheckNavigation.$questionId";
-import { answerSchema } from "./vorpruefung.ergebnis/resultValidation";
+import { usePreCheckData, useSyncedForm } from "./vorpruefung/preCheckDataHook";
+import {
+  answerSchema,
+  PreCheckAnswerSchema,
+} from "./vorpruefung/preCheckDataSchema";
+import { addOrUpdateAnswer } from "./vorpruefung/preCheckDataService";
 
 const { questions, answerOptions, nextButton } = preCheck;
 
-export async function loader({ request, params }: Route.LoaderArgs) {
-  const { answers } = await getAnswersFromCookie(request);
+export function loader({ params }: Route.LoaderArgs) {
   const questionIdx = questions.findIndex((q) => q.id === params.questionId);
   // return 404 if the question is not found
   if (questionIdx === -1) {
@@ -37,44 +35,11 @@ export async function loader({ request, params }: Route.LoaderArgs) {
       statusText: "Not Found",
     });
   }
-  // if the user accesses a question where they haven't answered the previous questions, redirect them to the first unanswered question
-  const firstUnansweredQuestionIdx = Object.keys(answers).length;
-  if (questionIdx > firstUnansweredQuestionIdx) {
-    return redirect(questions[firstUnansweredQuestionIdx].url, {
-      status: 302,
-    });
-  }
 
-  return { questionIdx, question: questions[questionIdx], answers };
-}
-
-export async function action({ request }: Route.ActionArgs) {
-  const result = await parseFormData(await request.formData(), answerSchema);
-
-  if (result.error) return validationError(result.error);
-
-  const { questionId, answer } = result.data;
-
-  const cookie = await getAnswersFromCookie(request);
-
-  if (
-    cookie.hasViewedResult &&
-    cookie.answers[questionId] &&
-    answer !== cookie.answers[questionId]
-  ) {
-    void trackCustomEvent(request, {
-      name: "Vorprüfung Antwort geändert",
-      props: {
-        changeDetails: `Antwort Frage ${questionId}: ${cookie.answers[questionId]} → ${answer}`,
-      },
-    });
-  }
-
-  cookie.answers[questionId] = answer as PreCheckAnswerOption["value"];
-  const nextLink =
-    questions.find((q) => q.id === questionId)?.nextLink ?? ROUTE_PRECHECK.url;
-
-  return redirect(nextLink, await getHeaderFromCookie(cookie));
+  return {
+    questionIdx,
+    question: questions[questionIdx],
+  };
 }
 
 export type TQuestion = {
@@ -113,34 +78,51 @@ export type PreCheckAnswerOption = {
   label: string;
 };
 
-export type PreCheckAnswers = {
-  [x: string]: PreCheckAnswerOption["value"];
-};
-
 export default function Index() {
-  const { questionIdx, question, answers } = useLoaderData<typeof loader>();
-  const existingAnswer = answers?.[question.id];
+  const { questionIdx, question } = useLoaderData<typeof loader>();
   const [hasAnswerConflict, setHasAnswerConflict] = useState(false);
 
-  const form = useForm({
+  const { answerForQuestionId, answers, firstUnansweredQuestionIndex } =
+    usePreCheckData();
+  const navigate = useNavigate();
+  const storedAnswer = answerForQuestionId(question.id);
+  const nextLink =
+    questions.find((q) => q.id === question.id)?.nextLink ?? ROUTE_PRECHECK.url;
+
+  const form = useSyncedForm({
     schema: answerSchema,
-    method: "post",
     defaultValues: {
       questionId: question.id,
-      answer: existingAnswer,
+      answer: "",
+    },
+    storedData: storedAnswer,
+    initialValidate: true,
+    handleSubmit: async (data: PreCheckAnswerSchema) => {
+      addOrUpdateAnswer(data);
+      await navigate(nextLink);
     },
   });
+
+  // if the user accesses a question where they haven't answered the previous questions, redirect them to the first unanswered question
+  useEffect(() => {
+    if (
+      firstUnansweredQuestionIndex !== null &&
+      questionIdx > firstUnansweredQuestionIndex
+    ) {
+      void navigate(questions[firstUnansweredQuestionIndex].url);
+    }
+  }, [firstUnansweredQuestionIndex, navigate, questionIdx]);
 
   useEffect(() => {
     if (question.id !== "eu-bezug") return;
 
     const checkHasAnswerConflict = (currentAnswer?: string) => {
-      const allAnswersNo = Object.entries(answers)
-        .filter((answer) => answer[0] !== "eu-bezug")
-        .every((answer) => answer[1] === "no");
+      const allAnswersNo = answers
+        .filter(({ questionId }) => questionId !== "eu-bezug")
+        .every(({ answer }) => answer === "no");
 
       setHasAnswerConflict(
-        allAnswersNo && (currentAnswer ?? existingAnswer) === "yes",
+        allAnswersNo && (currentAnswer ?? storedAnswer?.answer) === "yes",
       );
     };
 
@@ -148,7 +130,7 @@ export default function Index() {
     checkHasAnswerConflict();
 
     return () => unsubscribe();
-  }, [question.id, answers, existingAnswer, form]);
+  }, [question.id, answers, storedAnswer, form]);
 
   const options: PreCheckAnswerOption[] = Object.entries(answerOptions).map(
     ([value, label]) => ({

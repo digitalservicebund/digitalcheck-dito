@@ -73,7 +73,7 @@ export const useSyncedForm = <
 
     if (storedData && !formTouched) {
       form.resetForm(storedData);
-      form.validate().catch(() => {});
+      void form.validate();
     }
 
     return () => unsubscribe();

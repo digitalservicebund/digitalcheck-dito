@@ -6,15 +6,14 @@ import {
   RemoveCircleOutline,
   WarningAmberOutlined,
 } from "@digitalservicebund/icons";
-import { parseFormData, validationError } from "@rvf/react-router";
-import React, { useState } from "react";
-import { data, Link, redirect, useLoaderData } from "react-router";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router";
 import { twJoin } from "tailwind-merge";
 
 import Container from "~/components/Container";
-import DetailsSummary from "~/components/DetailsSummary.tsx";
+import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
-import InfoBox from "~/components/InfoBox.tsx";
+import InfoBox from "~/components/InfoBox";
 import InfoTooltip from "~/components/InfoTooltip";
 import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
@@ -26,103 +25,20 @@ import {
   ROUTE_PRECHECK,
   ROUTE_PRECHECK_RESULT,
 } from "~/resources/staticRoutes";
-import buildMailtoRedirectUri from "~/routes/vorpruefung.ergebnis/buildMailtoRedirectUri";
 import getContentForResult, {
   type Reason,
 } from "~/routes/vorpruefung.ergebnis/getContentForResult";
-import {
-  getResultForAnswers,
-  getResultForRelevantAnswers,
-} from "~/routes/vorpruefung.ergebnis/getResultForAnswers";
 import ResultForm from "~/routes/vorpruefung.ergebnis/ResultForm";
-import {
-  getAnswersFromCookie,
-  getHeaderFromCookie,
-} from "~/utils/cookies.server";
-import trackCustomEvent from "~/utils/trackCustomEvent.server";
-import type { Route } from "./+types/route";
-import { PreCheckResult, ResultType } from "./PreCheckResult";
-import { schema } from "./resultValidation";
+import { ResultType } from "./PreCheckResult";
 
 import { PreCheckFAQ } from "~/components/content/PreCheckFAQ.tsx";
 import { Step } from "~/utils/contentTypes.ts";
-import { PreCheckAnswers } from "../vorpruefung._preCheckNavigation.$questionId";
-
-const { questions } = preCheck;
+import { usePreCheckData } from "../vorpruefung/preCheckDataHook";
 
 const nextSteps = {
   [ResultType.POSITIVE as string]: preCheckResult.positive.nextSteps,
   [ResultType.NEGATIVE as string]: preCheckResult.negative.nextSteps,
 } satisfies { [key: string]: { steps: Step[] } };
-
-export async function loader({ request }: Route.LoaderArgs) {
-  const cookie = await getAnswersFromCookie(request);
-  const { answers } = cookie;
-
-  // redirect to precheck if not all answers are present
-  if (Object.keys(answers).length !== questions.length) {
-    return redirect(ROUTE_PRECHECK.url);
-  }
-
-  const result: PreCheckResult = getResultForAnswers(answers);
-
-  void trackCustomEvent(request, {
-    name: "Vorprüfung Resultat",
-    props: { result: result.digital },
-  });
-  void trackCustomEvent(request, {
-    name: "Vorprüfung Resultat Interoperability",
-    props: { result: result.interoperability },
-  });
-
-  // Set cookie to store user has viewed result
-  cookie.hasViewedResult = true;
-
-  const resultContent = getContentForResult(answers, result);
-
-  return data(
-    {
-      result,
-      answers,
-      resultContent,
-    },
-    await getHeaderFromCookie(cookie),
-  );
-}
-
-export async function action({ request }: Route.ActionArgs) {
-  const formData = await request.formData();
-
-  const validationResult = await parseFormData(formData, schema);
-
-  if (validationResult.error) {
-    return validationError(
-      validationResult.error,
-      validationResult.submittedData,
-    );
-  }
-
-  const mappedAnswers = validationResult.data.answers.reduce(
-    (prev, { questionId, answer }) => ({
-      ...prev,
-      [questionId]: answer,
-    }),
-    {},
-  ) as PreCheckAnswers;
-
-  const result = getResultForAnswers(mappedAnswers);
-  const resultContent = getContentForResult(mappedAnswers, result);
-
-  return redirect(
-    buildMailtoRedirectUri(
-      result,
-      resultContent,
-      formData.get("title") as string,
-      formData.get("email") as string,
-      formData.get("negativeReasoning") as string,
-    ),
-  );
-}
 
 function getIconForReason(reason: Reason) {
   const defaultClasses = "w-28 h-auto shrink-0";
@@ -174,12 +90,16 @@ function PrintTitle({ title }: Readonly<{ title: string }>) {
 }
 
 export default function Result() {
-  const { result, answers, resultContent } = useLoaderData<typeof loader>();
+  // const { result, answers, resultContent } = useLoaderData<typeof loader>();
   const [vorhabenTitle, setVorhabenTitle] = useState("");
+  const { answers, firstUnansweredQuestionIndex, result } = usePreCheckData();
+  const navigate = useNavigate();
+
+  const resultContent = getContentForResult(answers, result);
 
   function getHeaderIcon() {
     const iconClassName = "w-full h-full";
-    switch (result.digital) {
+    switch (result?.digital) {
       case ResultType.POSITIVE:
         return <CheckCircleOutlined className={iconClassName} />;
       case ResultType.NEGATIVE:
@@ -189,8 +109,17 @@ export default function Result() {
     }
   }
 
+  useEffect(() => {
+    if (
+      firstUnansweredQuestionIndex !== null &&
+      firstUnansweredQuestionIndex < preCheck.questions.length - 1
+    ) {
+      void navigate(ROUTE_PRECHECK.url);
+    }
+  }, [navigate, firstUnansweredQuestionIndex]);
+
   const resultHint =
-    result.digital === ResultType.UNSURE ? preCheckResult.unsure.hint : "";
+    result?.digital === ResultType.UNSURE ? preCheckResult.unsure.hint : "";
   return (
     <>
       <MetaTitle prefix={ROUTE_PRECHECK_RESULT.title} />
@@ -199,7 +128,7 @@ export default function Result() {
           <Container
             className={twJoin(
               "rounded-t-lg py-32",
-              result.digital === ResultType.UNSURE
+              result?.digital === ResultType.UNSURE
                 ? "bg-yellow-200"
                 : "bg-blue-300",
             )}
@@ -244,6 +173,7 @@ export default function Result() {
             )}
             <div className="border-b-2 border-solid border-gray-400 pb-40 last:border-0 last:pb-0 print:border-0 print:pb-0">
               <DetailsSummary
+                data-testid="result-details"
                 title={preCheckResult.detailsTitle}
                 className="plausible-event-name=Content.Result.Accordion+Result+Detail"
               >
@@ -265,8 +195,7 @@ export default function Result() {
                     </React.Fragment>
                   ))}
 
-                {getResultForRelevantAnswers(answers, true) !==
-                  ResultType.NEGATIVE && (
+                {result?.euBezug !== ResultType.NEGATIVE && (
                   <div className="mt-40">
                     <b>{preCheckResult.interoperability.info.title}</b>
                     <RichText
@@ -277,11 +206,9 @@ export default function Result() {
                 )}
               </DetailsSummary>
             </div>
-            {result.digital !== ResultType.UNSURE && (
+            {result?.digital !== ResultType.UNSURE && (
               <div className="mt-32 print:hidden">
                 <ResultForm
-                  result={result}
-                  answers={answers}
                   resultContent={resultContent}
                   setVorhabenTitle={setVorhabenTitle}
                 />
@@ -291,7 +218,7 @@ export default function Result() {
         </div>
       </div>
       <Container className="my-80 space-y-40 py-0">
-        {result.digital === ResultType.UNSURE && (
+        {result?.digital === ResultType.UNSURE && (
           <InfoBox
             heading={{
               text: preCheckResult.unsure.nextStep.title,
@@ -311,7 +238,7 @@ export default function Result() {
             />
           </InfoBox>
         )}
-        {result.digital !== ResultType.UNSURE && nextSteps && (
+        {result && result.digital !== ResultType.UNSURE && nextSteps && (
           <>
             <Heading tagName="h2">{nextSteps[result.digital].title}</Heading>
             <NumberedList>

@@ -1,27 +1,19 @@
-import { Outlet, useLoaderData, useRouteLoaderData } from "react-router";
+import { Outlet, useRouteLoaderData } from "react-router";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { getAnswersFromCookie } from "~/utils/cookies.server";
-import type { Route } from "./+types/vorpruefung._preCheckNavigation";
 import { loader as preCheckQuestionLoader } from "./vorpruefung._preCheckNavigation.$questionId";
+import { usePreCheckData } from "./vorpruefung/preCheckDataHook";
 
 const { questions } = preCheck;
 
-export async function loader({ request }: Route.LoaderArgs) {
-  const { answers } = await getAnswersFromCookie(request);
-  return { answers };
-}
-
 export default function LayoutWithPreCheckNavigation() {
-  const { answers } = useLoaderData<typeof loader>();
+  const { answers, firstUnansweredQuestionIndex } = usePreCheckData();
+
   const question = useRouteLoaderData<typeof preCheckQuestionLoader>(
     "routes/vorpruefung._preCheckNavigation.$questionId",
   )?.question;
   const showLinkBar = !!question;
-  const firstUnansweredQuestionIndex = answers
-    ? Object.keys(answers).length
-    : -1;
 
   return (
     <div className="parent-bg-blue container flex max-w-none justify-center space-x-80 bg-blue-100 py-40 lg:py-80">
@@ -32,8 +24,8 @@ export default function LayoutWithPreCheckNavigation() {
               <Nav.Item
                 key={url}
                 url={url}
-                completed={id in answers}
-                disabled={i > firstUnansweredQuestionIndex}
+                completed={answers.some(({ questionId }) => questionId === id)}
+                disabled={i > (firstUnansweredQuestionIndex ?? 0)}
               >
                 {title}
               </Nav.Item>
@@ -47,7 +39,7 @@ export default function LayoutWithPreCheckNavigation() {
             <Stepper
               currentElementUrl={question.url}
               elements={questions}
-              firstUnansweredQuestionIndex={firstUnansweredQuestionIndex}
+              firstUnansweredQuestionIndex={firstUnansweredQuestionIndex ?? 0}
             />
           </div>
         )}

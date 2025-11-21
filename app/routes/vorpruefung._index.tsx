@@ -1,5 +1,3 @@
-import { LinkButton } from "~/components/Button";
-import ButtonContainer from "~/components/ButtonContainer";
 import Container from "~/components/Container";
 import { PreCheckFAQ } from "~/components/content/PreCheckFAQ.tsx";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -8,19 +6,15 @@ import Hero from "~/components/Hero";
 import Image from "~/components/Image";
 import ImageBox from "~/components/ImageBox";
 import InfoBox from "~/components/InfoBox.tsx";
+import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText.tsx";
 import SupportBanner from "~/components/SupportBanner";
 import TabGroup from "~/components/Tabs.tsx";
-import { PRE_CHECK_START_BUTTON_ID } from "~/resources/constants";
-import { general } from "~/resources/content/shared/general";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import { preCheck } from "~/resources/content/vorpruefung";
-import {
-  ROUTE_LANDING,
-  ROUTE_PRECHECK,
-  ROUTE_PRECHECK_INFO,
-} from "~/resources/staticRoutes";
+import { ROUTE_PRECHECK } from "~/resources/staticRoutes";
+import { PreCheckContinueActions } from "./vorpruefung/PreCheckContinueActions";
 
 export default function Index() {
   return (
@@ -34,21 +28,19 @@ export default function Index() {
             </DetailsSummary>
           ))}
         </div>
-        <ButtonContainer>
-          <LinkButton
-            id={PRE_CHECK_START_BUTTON_ID}
-            to={ROUTE_PRECHECK_INFO.url}
+
+        <PreCheckContinueActions />
+        <noscript>
+          <InlineNotice
+            look="warning"
+            heading={
+              <Heading tagName="h2">{preCheck.start.noscript.headline}</Heading>
+            }
+            className="mb-40"
           >
-            {preCheck.start.buttonText}
-          </LinkButton>
-          <LinkButton
-            id="preCheck-back-button"
-            to={ROUTE_LANDING.url}
-            look="tertiary"
-          >
-            {general.buttonBack.text}
-          </LinkButton>
-        </ButtonContainer>
+            <RichText markdown={preCheck.start.noscript.content} />
+          </InlineNotice>
+        </noscript>
       </Hero>
 
       <Container className="lg:pb-80">

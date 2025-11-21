@@ -3,10 +3,10 @@ import {
   DriveFileRenameOutline,
   EmailOutlined,
 } from "@digitalservicebund/icons";
-import { useForm } from "@rvf/react-router";
+import { useField } from "@rvf/react";
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import Alert from "~/components/Alert";
-import Button from "~/components/Button.tsx";
+import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
@@ -16,20 +16,22 @@ import InputError from "~/components/InputError";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
-import { buildEmailBody } from "~/routes/vorpruefung.ergebnis/buildMailtoRedirectUri.ts";
-import { schema } from "~/routes/vorpruefung.ergebnis/resultValidation";
-import { PreCheckAnswers } from "../vorpruefung._preCheckNavigation.$questionId";
-import { PreCheckResult, ResultType } from "./PreCheckResult";
+import {
+  buildEmailBody,
+  buildMailtoUri,
+} from "~/routes/vorpruefung.ergebnis/buildMailtoUri";
+import {
+  usePreCheckData,
+  useSyncedForm,
+} from "../vorpruefung/preCheckDataHook";
+import { resultSchema } from "../vorpruefung/preCheckDataSchema";
+import { ResultType } from "./PreCheckResult";
 import { ResultContent } from "./getContentForResult";
 
 export default function ResultForm({
-  result,
-  answers,
   resultContent,
   setVorhabenTitle,
 }: Readonly<{
-  result: PreCheckResult;
-  answers: PreCheckAnswers;
   resultContent: ResultContent;
   setVorhabenTitle: Dispatch<SetStateAction<string>>;
 }>) {
@@ -37,24 +39,27 @@ export default function ResultForm({
   const [warning, setWarning] = useState<string | null>(null);
   const [isMailBodyCopied, setIsMailBodyCopied] = useState<boolean>(false);
   const [isMailAddressCopied, setIsMailAddressCopied] = useState(false);
+  const [isValid, setIsValid] = useState(false);
+  const { resultData, result } = usePreCheckData();
 
-  const form = useForm({
-    schema,
-    method: "post",
+  const form = useSyncedForm({
+    schema: resultSchema,
     onBeforeSubmit: async ({ getValidatedData }) => {
       if (await getValidatedData()) setShowEmailAlert(true);
     },
     defaultValues: {
-      answers: Object.entries(answers).map(([questionId, answer]) => ({
-        questionId,
-        answer,
-      })),
+      result: "" as unknown as ResultType,
       title: "",
-      negativeReasoning: undefined,
+      negativeReasoning: "",
     },
+    storedData: resultData,
   });
 
   useEffect(() => {
+    const unsubscribeForm = form.subscribe.value((formValues) => {
+      const res = resultSchema.safeParse(formValues);
+      setIsValid(res.success);
+    });
     const unsubscribeTitle = form.subscribe.value("title", setVorhabenTitle);
     const unsubscribeNegativeResoning = form.subscribe.value(
       "negativeReasoning",
@@ -66,6 +71,7 @@ export default function ResultForm({
     );
 
     return () => {
+      unsubscribeForm();
       unsubscribeTitle();
       unsubscribeNegativeResoning();
     };
@@ -94,7 +100,7 @@ export default function ResultForm({
 
   const handleCopyMailAddress = async () => {
     let addressesToCopy = preCheckResult.form.emailTemplate.toNkr;
-    if (result.interoperability === ResultType.POSITIVE) {
+    if (result?.interoperability === ResultType.POSITIVE) {
       addressesToCopy += `, ${preCheckResult.form.emailTemplate.toDC}`;
     }
     await navigator.clipboard.writeText(addressesToCopy);
@@ -102,24 +108,19 @@ export default function ResultForm({
     setTimeout(() => setIsMailAddressCopied(false), 2000); // Hide Kopiert message after 2 seconds
   };
 
+  const resultField = useField(form.scope("result"));
+
   return (
     <>
       <form {...form.getFormProps()} data-testid="result-form">
-        {Object.entries(answers).map((_, i) => {
-          const questionField = form.field(`answers[${i}].questionId`);
-          const answerField = form.field(`answers[${i}].answer`);
-
-          return (
-            <div key={`questionId-${i}`} className="hidden">
-              <input {...questionField.getHiddenInputProps()} />
-              <input {...answerField.getHiddenInputProps()} />
-            </div>
-          );
-        })}
-
+        <input {...resultField.getHiddenInputProps()} />
         <fieldset className="ds-stack ds-stack-24">
           <legend>
-            <Heading tagName="h3" text={preCheckResult.form.formLegend} />
+            <Heading
+              tagName="h2"
+              className="ds-heading-03-reg"
+              text={preCheckResult.form.formLegend}
+            />
           </legend>
           <div className="flex items-start pb-[40px]">
             <div className="mr-[16px] shrink-0">
@@ -131,7 +132,7 @@ export default function ResultForm({
                 {preCheckResult.form.vorhabenTitleLabel}
               </Input>
 
-              {result.digital === ResultType.NEGATIVE && (
+              {result?.digital === ResultType.NEGATIVE && (
                 <>
                   <Textarea scope={form.scope("negativeReasoning")}>
                     {preCheckResult.form.reasonLabel}
@@ -142,16 +143,29 @@ export default function ResultForm({
                 </>
               )}
               <ButtonContainer>
-                <Button
-                  id={"result-email-button"}
-                  look={"primary"}
-                  className={
-                    "plausible-event-name=Content.Send+Result.Button+Create+Email"
-                  }
-                  type={"submit"}
-                >
-                  {preCheckResult.form.sendEmailButton.text}
-                </Button>
+                {isValid ? (
+                  <LinkButton
+                    to={buildMailtoUri(
+                      result,
+                      resultContent,
+                      form.value("title"),
+                      form.value("negativeReasoning"),
+                    )}
+                  >
+                    {preCheckResult.form.sendEmailButton.text}
+                  </LinkButton>
+                ) : (
+                  <Button
+                    id={"result-email-button"}
+                    look={"primary"}
+                    className={
+                      "plausible-event-name=Content.Send+Result.Button+Create+Email"
+                    }
+                    type={"submit"}
+                  >
+                    {preCheckResult.form.sendEmailButton.text}
+                  </Button>
+                )}
               </ButtonContainer>
               {showEmailAlert && (
                 <div className="mt-16">
