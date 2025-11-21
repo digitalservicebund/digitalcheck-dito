@@ -17,7 +17,7 @@ const getCookie = (name: string) => {
 
 const removeCookie = (name: string) => {
   if (getCookie(name)) {
-    document.cookie = `${name}=;path=/;domain=${window.location.hostname};expires=Thu, 01 Jan 1970 00:00:01 GMT`;
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
   }
 };
 
