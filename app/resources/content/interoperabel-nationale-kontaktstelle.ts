@@ -74,7 +74,7 @@ export const spoc = {
 
       
       **Bereitstellung von Informationen und Austauschformaten** 
-      Wir stellen Wissen bereit und bereiten das Thema verständlich auf. Dazu zählen Schulungen (https://digitalcheck.bund.de/unterstuetzung#angebote) und verschiedene Unterstützungsangebote (https://digitalcheck.bund.de/unterstuetzung).
+      Wir stellen Wissen bereit und bereiten das Thema verständlich auf. Dazu zählen [Schulungen](https://digitalcheck.bund.de/unterstuetzung#angebote) und verschiedene [Unterstützungsangebote](https://digitalcheck.bund.de/unterstuetzung).
 
 
       **Förderung von Nachnutzung, Kooperation und Zusammenarbeit:**
