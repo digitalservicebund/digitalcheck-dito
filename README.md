@@ -9,6 +9,10 @@ A digital touchpoint for _Digitalcheck: Digitaltaugliche Regelung erarbeiten_.
 
 The application requires a `.env` file. You can copy and rename the file `.env.example`. To test certain features hidden behind feature flags, you need to create a `feature-flags.json` file in the root, for example by copying it from the [test feature flags file](./tests/feature-flags.json).
 
+```bash
+cp ./tests/feature-flags.json ./feature-flags.json
+```
+
 ### Node.js
 
 We aim to use the current active [LTS version of nodejs](https://nodejs.dev/en/about/releases/).
