@@ -15,6 +15,9 @@ fileignoreconfig:
   allowed_patterns:
     - STORAGE_KEY
     - testKey
+- filename: app/routes/vorpruefung/preCheckDataService.ts
+  allowed_patterns:
+    - STORAGE_KEY
 allowed_patterns:
   - key
   - onKey
