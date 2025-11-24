@@ -1,5 +1,5 @@
 import { EntryContext } from "react-router";
-import { beforeEach, describe, expect, test } from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import handleRequest, { shouldRedirect } from "~/entry.server.tsx";
 
 describe("handleRequest redirect", () => {
