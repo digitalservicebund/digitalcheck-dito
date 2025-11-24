@@ -14,7 +14,7 @@ import {
   TabPanel,
   TabPanels,
 } from "@headlessui/react";
-import React, { createContext, useMemo, useState } from "react";
+import React, { createContext, useCallback, useMemo, useState } from "react";
 import { twJoin } from "tailwind-merge";
 
 export type TabListWithListboxProps = {
@@ -36,12 +36,15 @@ const TabGroup = ({
   const [selectedIndex, setSelectedIndex] =
     useState<number>(initialActiveIndex);
 
-  const onChange = (index: number) => {
-    if (parentOnChange) {
-      parentOnChange(index);
-    }
-    setSelectedIndex(index);
-  };
+  const onChange = useCallback(
+    (index: number) => {
+      if (parentOnChange) {
+        parentOnChange(index);
+      }
+      setSelectedIndex(index);
+    },
+    [parentOnChange],
+  );
 
   const context = useMemo(
     () => ({ selectedIndex, onChange }),
