@@ -43,6 +43,7 @@ type NavProps = {
   activeElementUrl?: string;
   completedElementUrls?: string[];
   errorElementUrls?: string[];
+  testId?: string;
 };
 
 /**
@@ -323,10 +324,17 @@ function NavItems({ children }: Readonly<NavItemsProps>) {
             </Nav>
  *
  */
-function Nav({ children, activeElementUrl, ariaLabel }: Readonly<NavProps>) {
+function Nav({
+  children,
+  activeElementUrl,
+  ariaLabel,
+  testId,
+}: Readonly<NavProps>) {
   return (
     <NavContext.Provider value={{ activeElementUrl }}>
-      <nav aria-label={ariaLabel}>{children}</nav>
+      <nav aria-label={ariaLabel} data-testid={testId}>
+        {children}
+      </nav>
     </NavContext.Provider>
   );
 }

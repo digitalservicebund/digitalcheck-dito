@@ -167,7 +167,7 @@ test.describe("test question navigation", () => {
     page,
   }) => {
     await page.goto(questions[0].url);
-    const navigation = page.getByRole("navigation", { name: "Alle Fragen" });
+    const navigation = page.getByTestId("main-nav");
     for (let i = 1; i < questions.length; i++) {
       await expect(navigation.getByText(questions[i].title)).toHaveAttribute(
         "aria-disabled",
@@ -181,7 +181,7 @@ test.describe("test question navigation", () => {
       page.getByRole("link", { name: questions[0].title }),
     ).toBeEnabled();
     for (const question of questions.slice(2)) {
-      await expect(page.getByText(question.title)).toHaveAttribute(
+      await expect(navigation.getByText(question.title)).toHaveAttribute(
         "aria-disabled",
         "true",
       );
@@ -192,7 +192,7 @@ test.describe("test question navigation", () => {
       page.getByRole("link", { name: questions[1].title }),
     ).toBeEnabled();
     for (const question of questions.slice(2)) {
-      await expect(page.getByText(question.title)).toHaveAttribute(
+      await expect(navigation.getByText(question.title)).toHaveAttribute(
         "aria-disabled",
         "true",
       );
@@ -288,12 +288,12 @@ test.describe("test question navigation on mobile screens", () => {
     const linkBar = page.getByTestId("stepper");
 
     // Check that the first and second question link has a dark color
-    await expect(linkBar.getByLabel(questions[0].title)).toHaveClass(
-      /bg-blue-800/,
-    );
-    await expect(linkBar.getByLabel(questions[1].title)).toHaveClass(
-      /bg-blue-800/,
-    );
+    await expect(
+      linkBar.getByRole("link", { name: questions[0].title }),
+    ).toHaveClass(/bg-blue-800/);
+    await expect(
+      linkBar.getByRole("link", { name: questions[1].title }),
+    ).toHaveClass(/bg-blue-800/);
 
     // Navigate back to answered question
     await linkBar.getByRole("link", { name: questions[0].title }).click();
@@ -303,8 +303,10 @@ test.describe("test question navigation on mobile screens", () => {
     await linkBar.getByRole("link", { name: questions[1].title }).click();
     await expect(page).toHaveURL(questions[1].url);
 
-    // Navigation to next (unanswered) question is not possible
-    const unansweredQuestionLink = linkBar.getByLabel(questions[2].title);
+    // Navigation to the next (unanswered) question is not possible
+    const unansweredQuestionLink = linkBar
+      .locator("div")
+      .filter({ hasText: questions[2].title });
     await expect(unansweredQuestionLink).toHaveAttribute(
       "aria-disabled",
       "true",
@@ -321,12 +323,12 @@ test.describe("test question navigation on mobile screens", () => {
     await page.waitForURL(questions[2].url);
 
     // Check that the second question link still has a dark color
-    await expect(linkBar.getByLabel(questions[1].title)).toHaveClass(
-      /bg-blue-800/,
-    );
-    await expect(linkBar.getByLabel(questions[2].title)).toHaveClass(
-      /bg-blue-800/,
-    );
+    await expect(
+      linkBar.getByRole("link", { name: questions[1].title }),
+    ).toHaveClass(/bg-blue-800/);
+    await expect(
+      linkBar.getByRole("link", { name: questions[2].title }),
+    ).toHaveClass(/bg-blue-800/);
 
     // Clicking on the second question should now navigate
     await linkBar.getByRole("link", { name: questions[1].title }).click();

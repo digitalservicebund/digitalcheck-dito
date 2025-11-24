@@ -18,7 +18,11 @@ export default function LayoutWithPreCheckNavigation() {
   return (
     <div className="parent-bg-blue container flex max-w-none justify-center space-x-80 bg-blue-100 py-40 lg:py-80">
       <div className="hidden flex-none lg:block">
-        <Nav ariaLabel="Alle Fragen" activeElementUrl={question?.url}>
+        <Nav
+          ariaLabel="Alle Fragen"
+          activeElementUrl={question?.url}
+          testId="main-nav"
+        >
           <Nav.Items>
             {questions.map(({ id, url, title }, i) => (
               <Nav.Item
@@ -35,13 +39,12 @@ export default function LayoutWithPreCheckNavigation() {
       </div>
       <div className="w-[51rem] space-y-40">
         {showLinkBar && (
-          <div className="lg:hidden" data-testid="stepper">
-            <Stepper
-              currentElementUrl={question.url}
-              elements={questions}
-              firstUnansweredQuestionIndex={firstUnansweredQuestionIndex ?? 0}
-            />
-          </div>
+          <Stepper
+            className="lg:hidden"
+            currentElementUrl={question.url}
+            elements={questions}
+            firstUnansweredQuestionIndex={firstUnansweredQuestionIndex ?? 0}
+          />
         )}
         <section>
           <Outlet key={question?.url} />
