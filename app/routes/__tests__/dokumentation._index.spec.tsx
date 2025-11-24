@@ -3,16 +3,16 @@ import { render, screen } from "@testing-library/react";
 import React from "react";
 import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import {
   ROUTE_DOCUMENTATION_TEMPLATE_WORD,
   ROUTE_DOCUMENTATION_TITLE,
 } from "~/resources/staticRoutes";
 import DokumentationIndex from "~/routes/dokumentation._index";
-import useFeatureFlag from "~/utils/featureFlags";
 
-vi.mock("~/utils/featureFlags", () => {
+vi.mock("~/contexts/FeatureFlagContext", () => {
   return {
-    default: vi.fn(),
+    useFeatureFlag: vi.fn(),
   };
 });
 

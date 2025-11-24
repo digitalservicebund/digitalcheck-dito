@@ -19,16 +19,16 @@ import {
   ROUTES_DOCUMENTATION_PRE,
 } from "~/resources/staticRoutes";
 
+import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import LayoutWithDocumentationNavigation, {
   NavigationContext,
 } from "~/routes/dokumentation._documentationNavigation";
-import useFeatureFlag from "~/utils/featureFlags";
 import { useDocumentationData } from "../dokumentation/documentationDataHook";
 import { DocumentationData } from "../dokumentation/documentationDataSchema";
 import { initialDocumentationData } from "../dokumentation/documentationDataService";
 
-vi.mock("~/utils/featureFlags", () => ({
-  default: vi.fn(),
+vi.mock("~/contexts/FeatureFlagContext", () => ({
+  useFeatureFlag: vi.fn(),
 }));
 
 vi.mock("react-router", async (importOriginal) => {

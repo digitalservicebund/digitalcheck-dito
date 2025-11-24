@@ -1,10 +1,11 @@
 import { data, Outlet, useLocation } from "react-router";
-import type { Route } from "./+types/ZFL";
+import getFeatureFlag from "~/utils/featureFlags.server";
+import { features } from "~/utils/featureFlags.ts";
 import Footer from "./components/Footer";
 import PageHeader from "./components/PageHeader";
 
-export function loader({ request }: Route.LoaderArgs) {
-  if (request.url.includes("bund.de")) {
+export function loader() {
+  if (!getFeatureFlag(features.enableZfl)) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw data("Not found", { status: 404 });
   }

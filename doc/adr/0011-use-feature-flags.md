@@ -3,6 +3,7 @@
 ## Status
 
 - 2024-06-22: Accepted
+- 2025-11-24: Superseded by [ADR 25](./0025-use-feature-flags-k8s.md).
 
 ## Context
 

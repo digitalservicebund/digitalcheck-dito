@@ -1,4 +1,4 @@
-import { Outlet, useLocation, useOutletContext } from "react-router";
+import { Outlet, useLocation } from "react-router";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
@@ -49,10 +49,6 @@ export default function LayoutWithDocumentationNavigation() {
   const { routes, prinzips } = useDocumentationRouteData();
   const location = useLocation();
   const currentUrl = location.pathname;
-
-  const { featureFlags } = useOutletContext<{
-    featureFlags: Record<string, boolean>;
-  }>();
 
   const nextUrl = getNextUrl(routes.flat(), currentUrl);
   const previousUrl = getPreviousUrl(routes.flat(), currentUrl);
@@ -116,7 +112,6 @@ export default function LayoutWithDocumentationNavigation() {
             previousUrl,
             routes,
             prinzips,
-            featureFlags,
           }}
         />
       </section>

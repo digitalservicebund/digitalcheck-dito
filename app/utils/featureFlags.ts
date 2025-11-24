@@ -1,11 +1,8 @@
-import { useOutletContext } from "react-router";
-
-const useFeatureFlag = (name: string) => {
-  const { featureFlags } = useOutletContext<{
-    featureFlags: Record<string, boolean>;
-  }>();
-
-  return featureFlags?.[name] || false;
-};
-
-export default useFeatureFlag;
+export const features = {
+  showGesetzgebungsprozessOverview: "showGesetzgebungsprozessOverview",
+  digitalDocumentationAlternativeExplanation:
+    "digitalDocumentationAlternativeExplanation",
+  enableZfl: "enableZfl",
+} as const;
+export type FeatureFlag = keyof typeof features;
+export type FeatureFlags = Record<FeatureFlag, boolean>;

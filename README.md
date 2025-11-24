@@ -7,9 +7,11 @@ A digital touchpoint for _Digitalcheck: Digitaltaugliche Regelung erarbeiten_.
 
 ## Prerequisites
 
-The application requires a `.env` file with the following values configured. You can copy and rename the file `.env.example`, and if running locally shouldn't need to change many of the values there.
+The application requires a `.env` file. You can copy and rename the file `.env.example`. To test certain features hidden behind feature flags, you need to create a `feature-flags.json` file in the root, for example by copying it from the [test feature flags file](./tests/feature-flags.json).
 
-- `UNLEASH_KEY`: Authorization key used for connecting to Unleash feature flag tool.
+```bash
+cp ./tests/feature-flags.json ./feature-flags.json
+```
 
 ### Node.js
 

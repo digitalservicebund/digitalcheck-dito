@@ -2,11 +2,11 @@ import { render, screen, within } from "@testing-library/react";
 import Index from "app/routes/_index";
 import { MemoryRouter } from "react-router";
 import { describe, expect, it, vi } from "vitest";
-import useFeatureFlag from "~/utils/featureFlags";
+import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 
-vi.mock("~/utils/featureFlags", () => {
+vi.mock("~/contexts/FeatureFlagContext", () => {
   return {
-    default: vi.fn(),
+    useFeatureFlag: vi.fn(),
   };
 });
 
