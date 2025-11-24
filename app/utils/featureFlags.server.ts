@@ -1,22 +1,15 @@
 import fs from "node:fs";
+import { FeatureFlag, FeatureFlags, features } from "~/utils/featureFlags.ts";
 
 const FEATURE_FLAGS_PATH =
   process.env.FEATURE_FLAGS_PATH ?? "/etc/feature-flags/feature-flags.json";
 
-export const FEATURE_FLAGS = [
-  "show-gesetzgebungsprozess-overview",
-  "digital-documentation-alternative-explanation",
-  "enable-zfl",
-] as const;
-type FeatureFlags = Record<(typeof FEATURE_FLAGS)[number], boolean>;
-
 const CACHE_TTL = 60 * 1000; // 1 minute
 
 // Sets all feature flags to false by default
-const defaultFeatureFlags: FeatureFlags = FEATURE_FLAGS.reduce((acc, flag) => {
-  acc[flag] = false;
-  return acc;
-}, {} as FeatureFlags);
+const defaultFeatureFlags: FeatureFlags = <FeatureFlags>(
+  Object.fromEntries(Object.keys(features).map((flagName) => [flagName, false]))
+);
 
 // A simple cache to avoid reading the feature flags file on every request
 let featureFlagCache = {
@@ -25,8 +18,6 @@ let featureFlagCache = {
 };
 
 export function getFeatureFlags(): FeatureFlags {
-  console.log("cwd", process.cwd());
-  console.log("feature flags path", FEATURE_FLAGS_PATH);
   const now = Date.now();
   if (now - featureFlagCache.timestamp < CACHE_TTL) {
     return featureFlagCache.data;
@@ -35,6 +26,17 @@ export function getFeatureFlags(): FeatureFlags {
   try {
     const fileContent = fs.readFileSync(FEATURE_FLAGS_PATH, "utf-8");
     const flags = JSON.parse(fileContent) as FeatureFlags;
+
+    const unexpected = Object.keys(flags).filter(
+      (flagName) => !(flagName in features),
+    );
+    if (unexpected.length > 0) {
+      console.warn(
+        `Unexpected keys in feature flags file: ${unexpected.join(", ")}`,
+        { path: FEATURE_FLAGS_PATH },
+      );
+    }
+
     featureFlagCache = {
       data: flags,
       timestamp: now,
@@ -46,9 +48,7 @@ export function getFeatureFlags(): FeatureFlags {
   }
 }
 
-export default function getFeatureFlag(
-  name: (typeof FEATURE_FLAGS)[number],
-): boolean {
+export default function getFeatureFlag(name: FeatureFlag): boolean {
   const flags = getFeatureFlags();
-  return flags[name] === true;
+  return flags[name];
 }

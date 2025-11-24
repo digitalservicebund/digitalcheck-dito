@@ -36,6 +36,7 @@ import { addOrUpdatePrinciple } from "~/routes/dokumentation/documentationDataSe
 import getDetailsSummaryProps from "~/routes/methoden.fuenf-prinzipien/getDetailsSummaryProps.tsx";
 import { PrincipleExample } from "~/routes/methoden.fuenf-prinzipien/Principle.tsx";
 import getFeatureFlag from "~/utils/featureFlags.server";
+import { features } from "~/utils/featureFlags.ts";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,
@@ -56,7 +57,7 @@ const { principlePages } = digitalDocumentation;
 
 export async function loader({ params: { principleId } }: Route.LoaderArgs) {
   const enableAlternativeExplanation = getFeatureFlag(
-    "digital-documentation-alternative-explanation",
+    features.digitalDocumentationAlternativeExplanation,
   );
   if (enableAlternativeExplanation) {
     console.info("fetching full principles for user test");
@@ -456,7 +457,7 @@ export default function DocumentationPrinciple() {
   }, [form]);
 
   const enableAlternativeExplanation = useFeatureFlag(
-    "digital-documentation-alternative-explanation",
+    features.digitalDocumentationAlternativeExplanation,
   );
 
   const testVariant = (() => {

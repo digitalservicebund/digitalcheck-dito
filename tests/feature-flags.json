@@ -1,5 +1,5 @@
 {
-  "show-gesetzgebungsprozess-overview": true,
-  "digital-documentation-alternative-explanation": true,
-  "enable-zfl": true
+  "showGesetzgebungsprozessOverview": true,
+  "digitalDocumentationAlternativeExplanation": true,
+  "enableZfl": true
 }
