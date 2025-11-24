@@ -95,7 +95,7 @@ const TabList = ({ children }: Readonly<TabListWithListboxProps>) => {
         {/* Wrapper is needed for the styles here, Listbox provides context and state management */}
         <Listbox value={context.selectedIndex} onChange={context.onChange}>
           {/* Container for positioning */}
-          <ListboxButton className="ds-label-02-bold relative h-[70px] w-full cursor-pointer border-[4px] border-transparent bg-blue-100 pl-[16px] text-left text-blue-800 hover:bg-blue-300 focus:border-blue-800">
+          <ListboxButton className="ds-label-02-bold relative h-[70px] w-full cursor-pointer border-4 border-transparent bg-blue-100 pl-[16px] text-left text-blue-800 hover:bg-blue-300 focus:border-blue-800">
             {({ open }) => (
               <>
                 {React.Children.toArray(children)[context.selectedIndex ?? 0]}
@@ -105,12 +105,12 @@ const TabList = ({ children }: Readonly<TabListWithListboxProps>) => {
               </>
             )}
           </ListboxButton>
-          <ListboxOptions className="border-t-[1px] border-blue-500 focus:outline-none">
+          <ListboxOptions className="border-t border-blue-500 focus:outline-none">
             {React.Children.map(children, (child, index) => (
               <ListboxOption
                 className={({ focus, selected }) =>
                   twJoin(
-                    "ds-label-02-regular relative cursor-pointer border-[4px] border-transparent py-[10px] pr-[10px] pl-[16px] text-blue-800 select-none first:pt-[16px] last:pb-[16px] focus:border-blue-800",
+                    "ds-label-02-regular relative cursor-pointer border-4 border-transparent py-[10px] pr-[10px] pl-[16px] text-blue-800 select-none first:pt-[16px] last:pb-[16px] focus:border-blue-800",
                     focus ? "bg-blue-300" : "bg-blue-100",
                     // Selected item should be just visible in ListboxButton
                     selected && "hidden",
