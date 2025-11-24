@@ -4,9 +4,9 @@ import { PreCheckResult, ResultType } from "./PreCheckResult";
 
 const { emailTemplate } = preCheckResult.form;
 
-function resolveRecipients(result: PreCheckResult) {
+function resolveRecipients(result?: PreCheckResult) {
   const additionalRecipient =
-    result.interoperability !== ResultType.NEGATIVE
+    result?.interoperability !== ResultType.NEGATIVE
       ? `; ${emailTemplate.toDC}`
       : "";
   return `${emailTemplate.toNkr}${additionalRecipient}`;
@@ -52,34 +52,15 @@ export function buildEmailBody(
   return `${emailTemplate.bodyBefore}\n${resultText}\n\n${emailTemplate.bodyAfter}`;
 }
 
-/*
- * Optionally prefix mailto: links so that they appear to be a local page. This is so that end-to-end tests, run
- * locally, don't cause the OS's email client to open while running tests.
- */
-let mockMailtoLinks = false;
-try {
-  mockMailtoLinks =
-    process.env.MOCK_MAILTO_LINKS === "true" &&
-    process.env.NODE_ENV !== "production";
-} catch {
-  mockMailtoLinks = false;
-}
-
-if (mockMailtoLinks) {
-  console.warn("Prefixing mailto: links");
-}
-export const mailtoPrefix = mockMailtoLinks ? "/mock-mailto/" : "";
-
-export default function buildMailtoRedirectUri(
-  result: PreCheckResult,
+export function buildMailtoUri(
+  result: PreCheckResult | undefined,
   resultContent: ResultContent,
   vorhabenTitle: string,
-  userEmail?: string,
   negativeReasoning?: string,
 ) {
   const subject = `${emailTemplate.subject}: „${vorhabenTitle}“`;
-  const cc = userEmail ? `&cc=${userEmail}` : "";
   const recipients = encodeURIComponent(resolveRecipients(result));
   const body = buildEmailBody(resultContent, negativeReasoning);
-  return `${mailtoPrefix}mailto:${recipients}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}${cc}`;
+
+  return `mailto:${recipients}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }

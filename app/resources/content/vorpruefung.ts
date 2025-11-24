@@ -84,6 +84,24 @@ export const preCheck = {
         to: ROUTE_INTEROPERABILITY.url,
       } satisfies ContentLink,
     },
+    noscript: {
+      headline: "Erlauben Sie die Nutzung von JavaScript",
+      content: dedent`
+        Um die Vorprüfung zu starten, müssen Sie Ihrem Browser die Nutzung von JavaScript erlauben. Das ist nötig, damit die Seite Ihre Daten zwischenspeichern kann.
+        
+        **So geht es:** Suchen Sie in den Einstellungen Ihres Browsers nach JavaScript und erlauben Sie die Nutzung.
+      `,
+    },
+  },
+  startOver: {
+    title: "Neue Vorprüfung beginnen",
+    buttonText: "Neue Vorprüfung beginnen",
+    confirm: "Neu beginnen",
+    bodyMarkdown:
+      "Mit einer neuen Vorprüfung werden die Daten der begonnenen Vorprüfung gelöscht. Diese können nicht wieder hergestellt werden.",
+  },
+  resume: {
+    buttonText: "Vorprüfung fortsetzen",
   },
   faq: {
     tabName: "Häufige Fragen",

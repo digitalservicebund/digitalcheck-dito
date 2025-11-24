@@ -1,10 +1,12 @@
 import { preCheck } from "~/resources/content/vorpruefung";
-import type { PreCheckAnswers } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
+import { PreCheckAnswerSchema } from "../vorpruefung/preCheckDataSchema";
 import { PreCheckResult, ResultType } from "./PreCheckResult";
 
 const { questions } = preCheck;
 
-export function getResultForAnswers(answers: PreCheckAnswers): PreCheckResult {
+export function getResultForAnswers(
+  answers: PreCheckAnswerSchema[],
+): PreCheckResult {
   const digital = getResultForRelevantAnswers(answers, false);
   const interoperability =
     digital === ResultType.POSITIVE
@@ -15,12 +17,16 @@ export function getResultForAnswers(answers: PreCheckAnswers): PreCheckResult {
 }
 
 export function getResultForRelevantAnswers(
-  answers: PreCheckAnswers,
+  answers: PreCheckAnswerSchema[],
   interoperability: boolean,
 ) {
   const relevantAnswers = questions
     .filter((question) => !!question.interoperability === interoperability)
-    .map((question) => answers[question.id]);
+    .map(
+      (question) =>
+        answers.find(({ questionId }) => questionId === question.id)?.answer,
+    );
+
   if (relevantAnswers.includes("yes")) {
     return ResultType.POSITIVE;
   }

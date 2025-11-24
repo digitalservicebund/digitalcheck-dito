@@ -1,31 +1,8 @@
 import { expect, type Page, test } from "@playwright/test";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { ROUTE_PRECHECK_RESULT } from "~/resources/staticRoutes";
-import { mailtoPrefix } from "~/routes/vorpruefung.ergebnis/buildMailtoRedirectUri";
 
 const { questions } = preCheck;
-
-type Mail = {
-  subject: string;
-  body: string;
-  recipients: string;
-  cc: string;
-};
-
-async function interceptMail(page: Page): Promise<Mail> {
-  await page.getByRole("button", { name: "E-Mail erstellen" }).click();
-
-  await page.waitForURL(mailtoPrefix + "mailto:**");
-
-  const mailTo = new URL(page.url().substring(mailtoPrefix.length));
-
-  return {
-    subject: mailTo.searchParams.get("subject") as string,
-    body: mailTo.searchParams.get("body") as string,
-    recipients: decodeURIComponent(mailTo.pathname),
-    cc: mailTo.searchParams.get("cc") as string,
-  };
-}
 
 const positiveResultContent = [
   "einer Anpassung oder Neuentwicklung einer IT-Lösung.",
@@ -111,25 +88,29 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
 
   test("email body contains title and reasoning", async () => {
     await page.getByLabel("Arbeitstitel des Vorhabens").fill("Vorhaben ABC");
-    const { subject, body, recipients } = await interceptMail(page);
 
-    expect(subject).toBe("Digitalcheck Vorprüfung: „Vorhaben ABC“");
+    const mailLink = page.getByRole("link", { name: "E-Mail erstellen" });
+    const mailUri = decodeURIComponent(
+      (await mailLink.getAttribute("href")) ?? "",
+    );
 
-    expect(recipients).toContain("nkr@bmjv.bund.de");
-    expect(recipients).toContain("interoperabel@digitalservice.bund.de");
+    expect(mailUri).toContain("Digitalcheck Vorprüfung: „Vorhaben ABC“");
 
-    expect(body).toContain(
+    expect(mailUri).toContain("nkr@bmjv.bund.de");
+    expect(mailUri).toContain("interoperabel@digitalservice.bund.de");
+
+    expect(mailUri).toContain(
       "Das Regelungsvorhaben hat einen Digitalbezug und enthält Anforderungen der Interoperabilität.",
     );
-    expect(body).toContain(
+    expect(mailUri).toContain(
       "In Bezug auf digitale Aspekte führt ihr Regelungsvorhaben zu...",
     );
-    expect(body).toContain(
+    expect(mailUri).toContain(
       "In Bezug auf Interoperabilität führt ihr Regelungsvorhaben zu...",
     );
 
     for (const resultText of positiveResultContent) {
-      expect(body).toContain(resultText);
+      expect(mailUri).toContain(resultText);
     }
   });
 

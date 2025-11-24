@@ -4,11 +4,11 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { BrowserRouter, useLoaderData } from "react-router";
 import { preCheck } from "~/resources/content/vorpruefung";
-import type {
-  PreCheckAnswers,
-  TQuestion,
-} from "~/routes/vorpruefung._preCheckNavigation.$questionId";
+import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import Index from "~/routes/vorpruefung._preCheckNavigation.$questionId";
+import { usePreCheckData } from "~/routes/vorpruefung/preCheckDataHook";
+import { ResultType } from "../vorpruefung.ergebnis/PreCheckResult";
+import { PreCheckAnswerSchema } from "../vorpruefung/preCheckDataSchema";
 
 const { questions } = preCheck;
 
@@ -69,18 +69,27 @@ const scenarios: TestScenario[] = [
 
 function mapUserAnswersToMockAnswers(
   userAnswers: UserAnswers,
-): PreCheckAnswers {
-  const answers: PreCheckAnswers = {};
+): PreCheckAnswerSchema[] {
+  const answers: PreCheckAnswerSchema[] = [];
   questions.forEach((question) => {
     switch (userAnswers(question)) {
       case "Ja":
-        answers[question.id] = "yes";
+        answers.push({
+          questionId: question.id,
+          answer: "yes",
+        });
         break;
       case "Nein":
-        answers[question.id] = "no";
+        answers.push({
+          questionId: question.id,
+          answer: "no",
+        });
         break;
       case "Ich bin unsicher":
-        answers[question.id] = "unsure";
+        answers.push({
+          questionId: question.id,
+          answer: "unsure",
+        });
         break;
     }
   });
@@ -96,22 +105,51 @@ vi.mock("react-router", async (importOriginal) => {
   };
 });
 
+vi.mock("~/routes/vorpruefung/preCheckDataHook", async (importOriginal) => {
+  const actual =
+    await importOriginal<
+      typeof import("~/routes/vorpruefung/preCheckDataHook")
+    >();
+
+  return {
+    ...actual,
+    usePreCheckData: vi.fn(),
+  };
+});
+
 vi.mock("@rvf/react-router", async () => {
   const rvfReact = await import("@rvf/react");
   return rvfReact;
 });
 
-// the name parameter is used for the test name
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-describe.each(scenarios)("test $name", ({ name, answers, expected }) => {
+describe.each(scenarios)("test $name", ({ answers, expected }) => {
   beforeEach(() => {
     vi.resetAllMocks();
 
     const preCheckAnswers = mapUserAnswersToMockAnswers(answers);
     vi.mocked(useLoaderData).mockReturnValue({
       questionIdx,
-      answers: preCheckAnswers,
       question: questions[questionIdx],
+    });
+
+    vi.mocked(usePreCheckData).mockReturnValue({
+      answerForQuestionId: vi.fn().mockReturnValue({
+        questionId: questions[questionIdx].id,
+        answer: preCheckAnswers[questionIdx]?.answer,
+      }),
+      firstUnansweredQuestionIndex: questionIdx,
+      answers: preCheckAnswers,
+      resultData: {
+        result: ResultType.POSITIVE,
+        title: "",
+        negativeReasoning: "",
+      },
+      result: {
+        digital: ResultType.POSITIVE,
+        euBezug: ResultType.POSITIVE,
+        interoperability: ResultType.POSITIVE,
+      },
+      hasData: true,
     });
 
     render(
@@ -125,15 +163,21 @@ describe.each(scenarios)("test $name", ({ name, answers, expected }) => {
     vi.restoreAllMocks();
   });
 
-  it("shows warning when there is a conflict in answers", async () => {
-    if (expected.showsAnswerConflictWarning) {
+  it.runIf(expected.showsAnswerConflictWarning)(
+    "shows warning when there is a conflict in answers",
+    async () => {
       expect(
         await screen.findByText("Widerspruch in Ihren Angaben"),
       ).toBeInTheDocument();
-    } else {
+    },
+  );
+
+  it.runIf(!expected.showsAnswerConflictWarning)(
+    "does not show warning when there is a conflict in answers",
+    () => {
       expect(
         screen.queryByText("Widerspruch in Ihren Angaben"),
       ).not.toBeInTheDocument();
-    }
-  });
+    },
+  );
 });

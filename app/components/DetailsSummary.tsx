@@ -1,8 +1,8 @@
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ComponentProps, ReactNode, useEffect, useRef, useState } from "react";
 import { twJoin } from "tailwind-merge";
 import RichText from "~/components/RichText.tsx";
 
-export type DetailsSummaryProps = {
+export type DetailsSummaryProps = ComponentProps<"details"> & {
   identifier?: string;
   title?: string;
   bold?: boolean;
@@ -23,6 +23,7 @@ export default function DetailsSummary({
   className,
   children,
   content,
+  ...rest
 }: Readonly<DetailsSummaryProps>) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const detailsRef = useRef<HTMLDetailsElement | null>(null);
@@ -72,6 +73,7 @@ export default function DetailsSummary({
 
   return (
     <details
+      {...rest}
       id={identifier}
       ref={detailsRef}
       onToggle={({ currentTarget }) => {
