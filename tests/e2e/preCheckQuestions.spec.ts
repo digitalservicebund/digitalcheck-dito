@@ -68,7 +68,14 @@ test.describe("test questions form", () => {
 
   test("answers are saved and loaded from cookie and persisted across navigations and submissions", async ({
     page,
+    browserName,
+    browser,
   }) => {
+    // TODO remove skip condition, check on 2025-12-10
+    test.skip(
+      browserName === "webkit" && browser.version() === "26.0",
+      "due to https://github.com/microsoft/playwright/issues/37766, to be addressed in Playwright 1.57",
+    );
     // was a bit of a hassle to get the cookie and react-hook-form to work together with useEffect
     // that's why the test is a bit more extensive than it could be
     // we've sinced moved to using rvf but we'll keep it like this for now

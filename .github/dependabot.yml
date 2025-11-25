@@ -28,10 +28,6 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-patch"]
-      - dependency-name: "@playwright/test"
-        versions: ["1.56.x"]
-      - dependency-name: "playwright-core"
-        versions: ["1.56.x"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
