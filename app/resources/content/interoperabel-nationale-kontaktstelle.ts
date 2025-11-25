@@ -2,6 +2,7 @@ import {
   ROUTE_INTEROPERABILITY,
   ROUTE_LANDING,
   ROUTE_METHODS_PRINCIPLES,
+  ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -57,7 +58,7 @@ export const spoc = {
     content: dedent`
       Als Nationale Kontaktstelle sind wir die zentrale Anlaufstelle in Deutschland zur Umsetzung der EU-Verordnung zur Interoperabilität (EU) 2024/903. Wir unterstützen Mitarbeitende der öffentlichen Verwaltung dabei, die Interoperabilität von digitalen Systemen zu fördern, um eine vernetzte und bürgernahe Verwaltung in ganz Europa zu ermöglichen.
       
-      **Unterstützung der Verwaltung:**  
+      ### Unterstützung der Verwaltung
       
       Wir stellen die Methodik für die Interoperabilitätsbewertung bereit und unterstützen bei der Durchführung. Ein wichtiger Aspekt ist die Integration dieser Anforderungen in den bestehenden Digitalcheck. 
       Dabei unterstützen wir Sie im gesamten Prozess: 
@@ -66,7 +67,7 @@ export const spoc = {
         - und insbesondere beim Identifizieren sogenannter "verbindlicher Anforderungen" und deren Auswirkungen auf die vier Ebenen der Interoperabilität.
 
       
-      **Ansprechpartner:**  
+      **Ansprechpartner:**
       
         Wir sind Ansprechpartner für verschiedene Akteure, darunter andere nationale Kontaktstellen, die Bundesländer, den IT-Planungsrat, die FITKO, sowie interessierte Personen und umsetzende Akteure.
 
@@ -78,7 +79,7 @@ export const spoc = {
       
       **Bereitstellung von Informationen und Austauschformaten:**  
       
-      Wir stellen Wissen bereit und bereiten das Thema verständlich auf. Dazu zählen [Schulungen](https://digitalcheck.bund.de/unterstuetzung#angebote) und verschiedene [Unterstützungsangebote](https://digitalcheck.bund.de/unterstuetzung).
+      Wir stellen Wissen bereit und bereiten das Thema verständlich auf. Dazu zählen [Schulungen](${ROUTE_SUPPORT.url}#angebote) und verschiedene [Unterstützungsangebote](${ROUTE_SUPPORT.url}).
 
 
       **Förderung von Nachnutzung, Kooperation und Zusammenarbeit:**  
