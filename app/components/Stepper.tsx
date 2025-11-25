@@ -22,7 +22,9 @@ const Stepper = <T extends { url: string; title: string }>({
 
         if (!isReachable)
           return (
-            <div
+            // eslint-disable-next-line jsx-a11y/anchor-is-valid
+            <a
+              role="link"
               key={el.url}
               aria-label={el.title}
               aria-disabled="true"
