@@ -58,7 +58,7 @@ export const spoc = {
     content: dedent`
       Als Nationale Kontaktstelle sind wir die zentrale Anlaufstelle in Deutschland zur Umsetzung der EU-Verordnung zur Interoperabilität (EU) 2024/903. Wir unterstützen Mitarbeitende der öffentlichen Verwaltung dabei, die Interoperabilität von digitalen Systemen zu fördern, um eine vernetzte und bürgernahe Verwaltung in ganz Europa zu ermöglichen.
       
-      ### Unterstützung der Verwaltung
+      **Unterstützung der Verwaltung**
       
       Wir stellen die Methodik für die Interoperabilitätsbewertung bereit und unterstützen bei der Durchführung. Ein wichtiger Aspekt ist die Integration dieser Anforderungen in den bestehenden Digitalcheck. 
       Dabei unterstützen wir Sie im gesamten Prozess: 
