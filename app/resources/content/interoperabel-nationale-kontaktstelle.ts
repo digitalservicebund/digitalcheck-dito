@@ -57,7 +57,8 @@ export const spoc = {
     content: dedent`
       Als Nationale Kontaktstelle sind wir die zentrale Anlaufstelle in Deutschland zur Umsetzung der EU-Verordnung zur Interoperabilität (EU) 2024/903. Wir unterstützen Mitarbeitende der öffentlichen Verwaltung dabei, die Interoperabilität von digitalen Systemen zu fördern, um eine vernetzte und bürgernahe Verwaltung in ganz Europa zu ermöglichen.
       
-      **Unterstützung der Verwaltung** 
+      **Unterstützung der Verwaltung:**  
+      
       Wir stellen die Methodik für die Interoperabilitätsbewertung bereit und unterstützen bei der Durchführung. Ein wichtiger Aspekt ist die Integration dieser Anforderungen in den bestehenden Digitalcheck. 
       Dabei unterstützen wir Sie im gesamten Prozess: 
         - bei der Klärung von Fragen zur Interoperabilität
@@ -65,19 +66,23 @@ export const spoc = {
         - und insbesondere beim Identifizieren sogenannter "verbindlicher Anforderungen" und deren Auswirkungen auf die vier Ebenen der Interoperabilität.
 
       
-      **Ansprechpartner** 
+      **Ansprechpartner:**  
+      
         Wir sind Ansprechpartner für verschiedene Akteure, darunter andere nationale Kontaktstellen, die Bundesländer, den IT-Planungsrat, die FITKO, sowie interessierte Personen und umsetzende Akteure.
 
       
-      **Austausch und Weiterentwicklung auf deutscher und europäischer Ebene**
+      **Austausch und Weiterentwicklung auf deutscher und europäischer Ebene:**  
+      
       Wir nehmen aktiv an Diskussionen auf europäischer Ebene teil, mit dem zuständigen Referat im Bundesministerium für Digitalisierung und Staatsmodernisierung sind wir Teil der Arbeitsgruppe "Interoperable Europe" und informieren auf diesem Wege das Interoperable Europe Board. Unsere Aufgabe ist es auch, die Nachnutzung von Lösungen zu fördern, Hilfestellung bei der Umsetzung von Interoperabilitätsanforderungen zu leisten und das Thema in der Verwaltung zu repräsentieren, indem wir bewährte Verfahren, sogenannte Best Practices, teilen.
 
       
-      **Bereitstellung von Informationen und Austauschformaten** 
+      **Bereitstellung von Informationen und Austauschformaten:**  
+      
       Wir stellen Wissen bereit und bereiten das Thema verständlich auf. Dazu zählen [Schulungen](https://digitalcheck.bund.de/unterstuetzung#angebote) und verschiedene [Unterstützungsangebote](https://digitalcheck.bund.de/unterstuetzung).
 
 
-      **Förderung von Nachnutzung, Kooperation und Zusammenarbeit:**
+      **Förderung von Nachnutzung, Kooperation und Zusammenarbeit:**  
+      
       Wir stellen gute Beispiele bereit, unterstützen bei der Nachnutzung und fördern sektorenübergreifende Zusammenarbeit.
         
       Falls Sie mit Ihrem Land kooperieren wollen, melden Sie sich bei uns.
