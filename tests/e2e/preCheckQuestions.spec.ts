@@ -311,16 +311,16 @@ test.describe("test question navigation on mobile screens", () => {
     await expect(page).toHaveURL(questions[1].url);
 
     // Navigation to the next (unanswered) question is not possible
-    const unansweredQuestionLink = linkBar
-      .locator("div")
-      .filter({ hasText: questions[2].title });
+    const unansweredQuestionLink = linkBar.getByRole("link", {
+      name: questions[2].title,
+    });
     await expect(unansweredQuestionLink).toHaveAttribute(
       "aria-disabled",
       "true",
     );
 
     const originalURL = page.url();
-    await unansweredQuestionLink.click();
+    await page.goto(questions[2].url);
     await expect(page).toHaveURL(originalURL);
 
     // Answer the second question
