@@ -18,20 +18,20 @@ type AlertProps = {
 const lookConfig = {
   success: {
     backgroundColor: "bg-white",
-    borderColor: "border-[#01854A]",
-    iconColor: "fill-[#01854A]",
+    borderColor: "border-ds-green-700",
+    iconColor: "fill-ds-green-700",
     IconComponent: Check,
   },
   error: {
-    backgroundColor: "bg-[#F9E5EC]",
+    backgroundColor: "bg-ds-red-200",
     borderColor: "border-ds-error",
     iconColor: "fill-ds-error",
     IconComponent: ErrorOutline,
   },
   info: {
     backgroundColor: "bg-white",
-    borderColor: "border-[#336F91]",
-    iconColor: "fill-[#336F91]",
+    borderColor: "border-ds-blue-700",
+    iconColor: "fill-ds-blue-700",
     IconComponent: Sync,
   },
 };
@@ -79,10 +79,10 @@ const Alert = ({
         <div className="flex grow items-start justify-end self-stretch">
           <button
             type="button"
-            className="flex size-24 cursor-pointer items-center justify-center rounded-[20px] outline-offset-2 hover:bg-white/50 focus-visible:bg-white/50 focus-visible:outline-4 focus-visible:outline-[#004B76] active:bg-white/50"
+            className="focus-visible:outline-ds-blue-800 flex size-24 cursor-pointer items-center justify-center rounded-[20px] outline-offset-2 hover:bg-white/50 focus-visible:bg-white/50 focus-visible:outline-4 active:bg-white/50"
             onClick={handleCloseButtonClick}
           >
-            <Clear className="size-16 fill-[#004B76]" />
+            <Clear className="fill-ds-blue-800 size-16" />
           </button>
         </div>
       </div>

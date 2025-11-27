@@ -11,7 +11,7 @@ import { twJoin } from "tailwind-merge";
 const lookConfig = {
   success: {
     backgroundColor: "bg-green-100",
-    borderColor: "border-[#005E34]",
+    borderColor: "border-ds-success",
     IconComponent: CheckCircleOutlinedIcon,
   },
   info: {
@@ -21,17 +21,17 @@ const lookConfig = {
   },
   warning: {
     backgroundColor: "bg-yellow-200",
-    borderColor: "border-[#E5CE5C]",
+    borderColor: "border-ds-yellow-700",
     IconComponent: WarningAmberIcon,
   },
   support: {
     backgroundColor: "bg-yellow-200",
-    borderColor: "border-[#E5CE5C]",
+    borderColor: "border-ds-yellow-700",
     IconComponent: ContactSupportOutlinedIcon,
   },
   tips: {
     backgroundColor: "bg-gray-100",
-    borderColor: "border-[#B8BDC3]",
+    borderColor: "border-ds-gray-600",
     IconComponent: LightbulbOutlinedIcon,
   },
 };

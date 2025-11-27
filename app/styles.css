@@ -19,8 +19,20 @@
 
   --color-ds-success: #005f34;
   --color-ds-error: #8e001b;
-  --color-ds-error-secondary: #b0243f;
   --color-ds-warning: #f5e05d;
+
+  --color-ds-red-200: #f9e5ec;
+  --color-ds-yellow-700: #e5ce5c;
+
+  --color-ds-blue-500: #b3c9d6;
+  --color-ds-blue-700: #336f91;
+  --color-ds-blue-800: #004b76;
+
+  --color-ds-green-700: #01854a;
+  --color-ds-green-900: #005e34;
+
+  --color-ds-gray-600: #b8bdc3;
+  --color-ds-violet: #4c2c92;
 }
 
 @layer base {
@@ -117,7 +129,7 @@
 }
 
 @utility text-link {
-  @apply fill-blue-800 text-blue-800 underline decoration-1 underline-offset-4 visited:text-[#4c2c92] active:text-black;
+  @apply visited:text-ds-violet fill-blue-800 text-blue-800 underline decoration-1 underline-offset-4 active:text-black;
 
   &:focus-visible {
     @apply text-blue-800! no-underline!;
@@ -182,10 +194,10 @@
     }
 
     &.has-error {
-      box-shadow: inset 0 0 0 2px var(--color-ds-error-secondary);
+      box-shadow: inset 0 0 0 2px var(--color-ds-error);
       &:hover,
       &:focus {
-        box-shadow: inset 0 0 0 0.25rem var(--color-ds-error-secondary);
+        box-shadow: inset 0 0 0 0.25rem var(--color-ds-error);
       }
     }
   }

@@ -31,7 +31,7 @@ function ImageBox({
   const headingTag = tagName ?? "h3";
   const imageForZoomable: ImageProps = {
     ...image,
-    className: twJoin(image.className, "border-[2px] border-[#004B760D]"),
+    className: twJoin(image.className, "border-2 border-ds-blue-800/50"),
   };
 
   return (

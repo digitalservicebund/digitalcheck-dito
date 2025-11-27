@@ -46,7 +46,7 @@ function getIconForReason(reason: Reason) {
     case "yes":
       return (
         <ControlPointOutlined
-          className={twJoin(defaultClasses, "fill-[#005E34]")}
+          className={twJoin(defaultClasses, "fill-ds-green-900")}
         ></ControlPointOutlined>
       );
     case "no":
