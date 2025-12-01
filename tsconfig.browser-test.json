@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.base.json",
+  "include": [
+    "app/routes/__tests__/**/*.test.ts",
+    "app/routes/__tests__/**/*.test.tsx",
+    "app/routes/__tests__/**/*.spec.ts",
+    "app/routes/__tests__/**/*.spec.tsx"
+  ],
+  "compilerOptions": {
+    "types": ["vite/client"]
+  }
+}

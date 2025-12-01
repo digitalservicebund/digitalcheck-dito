@@ -5,12 +5,7 @@ import devtoolsJson from "vite-plugin-devtools-json";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  plugins: [
-    !process.env.VITEST && reactRouter(),
-    tailwindcss(),
-    tsconfigPaths(),
-    devtoolsJson(),
-  ],
+  plugins: [reactRouter(), tailwindcss(), tsconfigPaths(), devtoolsJson()],
   build: {
     target: "ES2022",
     rollupOptions: {

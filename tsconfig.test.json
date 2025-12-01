@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.base.json",
+  "include": [
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "!app/routes/__tests__/**",
+    "!tests/**"
+  ],
+  "compilerOptions": {
+    "types": ["vitest/globals", "@testing-library/react", "vite/client"]
+  }
+}
