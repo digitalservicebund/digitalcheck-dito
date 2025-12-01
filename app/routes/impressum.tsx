@@ -12,22 +12,19 @@ import { dedent } from "~/utils/dedentMultilineStrings.ts";
 const content = dedent`
     ## Das Internetangebot wird herausgegeben vom
     
-    Bundesministerium des Innern (BMI)<br />
-    vorübergehend für das Bundesministerium für Digitales und Staatsmodernisierung (BMDS)<br />
+    Bundesministerium für Digitales und Staatsmodernisierung (BMDS)<br />
     Alt-Moabit 140<br />
     10557 Berlin<br />
-    Telefon: [+49 30 18681-0](tel:+4930186810)<br />
-    Fax: [+49 30 18681-12926](tel:+49301868112926)<br />
-    E-Mail: [poststelle@bmi.bund.de](mailto:poststelle@bmi.bund.de)<br />
-    DE-Mail: [poststelle@bmi-bund.de-mail.de](mailto:poststelle@bmi-bund.de-mail.de)
+    E-Mail: info@bmds.bund.de
     
     ### Weitere Kontaktmöglichkeiten
     
-    **Redaktionsleitung**<br />
-    Abteilung DV (Digitale Verwaltung; Steuerung OZG)<br />
-    Referat DV I 3 — Digitale Verwaltungstransformation; Digitalcheck<br />
-    Verantwortlich: Dany Homilius (Referatsleiterin DV I 3)<br />
-    E-Mail: [DVI3@bmi.bund.de](mailto:DVI3@bmi.bund.de) 
+    **Redaktionsleitung**
+    
+    Abteilung SB (Staatsmodernisierung und Bürokratierückbau)<br />
+    Referat SB II 3 (Methoden und Instrumente der besseren Rechtsetzung)
+
+    E-Mail: SBII3@bmds.bund.de
     
     ### Realisierung, Design, Hosting
     
