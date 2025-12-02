@@ -49,7 +49,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache-npm-deps.outputs.cache-hit != 'true'
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Cache Playwright dependencies
         id: cache-playwright-deps

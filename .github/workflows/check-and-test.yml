@@ -38,7 +38,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache-npm-deps.outputs.cache-hit != 'true'
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Audit used licences
         run: npm run audit:licences
