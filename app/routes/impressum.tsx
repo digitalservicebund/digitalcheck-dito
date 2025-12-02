@@ -17,7 +17,7 @@ const content = dedent`
     10557 Berlin<br />
     E-Mail: info@bmds.bund.de
     
-    ### Weitere Kontaktmöglichkeiten
+    ## Weitere Kontaktmöglichkeiten
     
     **Redaktionsleitung**
     
@@ -26,7 +26,7 @@ const content = dedent`
 
     E-Mail: SBII3@bmds.bund.de
     
-    ### Realisierung, Design, Hosting
+    ## Realisierung, Design, Hosting
     
     DigitalService GmbH des Bundes<br />
     Frau Christina Lang<br />
@@ -35,11 +35,11 @@ const content = dedent`
     10969 Berlin<br />
     E-Mail: [hallo@digitalservice.bund.de](mailto:hallo@digitalservice.bund.de)
     
-    ### Datenschutz
+    ## Datenschutz
     
     Erfahren Sie mehr hierzu in der [Datenschutzerklärung](${ROUTE_PRIVACY.url})
     
-    ### Barrierefreiheit
+    ## Barrierefreiheit
     
     Erfahren Sie mehr hierzu in der [Barrierefreiheitserklärung](${ROUTE_A11Y.url})
   `;
