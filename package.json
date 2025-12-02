@@ -16,6 +16,7 @@
     "lint:check": "react-router typegen && eslint --cache",
     "lint:fix": "npm run lint:check -- --fix",
     "pre-commit": "npm run build && npm run style:fix && npm run test && npm run typecheck",
+    "preinstall": "echo 'Please disable script execution for security reasons: npm config set ignore-scripts true' && exit 1",
     "start": "export $(grep -v '^#' .env | xargs) && react-router-serve build/server/index.js",
     "style:check": "npm run format:check && npm run lint:check",
     "style:fix": "npm run format:fix && npm run lint:fix",
