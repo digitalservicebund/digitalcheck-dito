@@ -52,21 +52,6 @@ describe("Dokumentation Index Route - Integration Tests", () => {
     );
   });
 
-  it("renders the inline notice for data saving hint", () => {
-    expect(
-      screen.getByRole("heading", {
-        name: "Hinweise zur Zwischenspeicherung Ihrer Daten",
-        level: 2,
-      }),
-    ).toBeInTheDocument();
-
-    expect(
-      screen.getByText(
-        /Ihre Daten bleiben unbegrenzt in der Sitzung gespeichert/,
-      ),
-    ).toBeInTheDocument();
-  });
-
   it("renders the support banner", () => {
     expect(
       screen.getByRole("heading", {

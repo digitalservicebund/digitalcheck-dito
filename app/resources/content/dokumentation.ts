@@ -93,15 +93,6 @@ export const digitalDocumentation = {
         **So geht es:** Suchen Sie in den Einstellungen Ihres Browsers nach JavaScript und erlauben Sie die Nutzung.
       `,
     },
-    dataSavingHint: {
-      headline: "Hinweise zur Zwischenspeicherung Ihrer Daten",
-      content: dedent`
-        Ihre Daten bleiben unbegrenzt in der Sitzung gespeichert, es sei denn:
-        - Sie beenden die Dokumentation.
-        - Ihr SINA-Rechner löscht sie (prüfen Sie Ihre Einstellungen).
-        - Sie löschen die Daten manuell.
-      `,
-    },
     tips: {
       title: "Tipps",
       items: [
