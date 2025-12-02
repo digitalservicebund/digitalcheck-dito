@@ -89,3 +89,31 @@ test.describe("ZFL 404 within /zfl", () => {
     await expect(page).toHaveURL(ROUTE_ZFL_LANDING.url);
   });
 });
+
+test.describe("privacy page", () => {
+  test("displays the content", async ({ page }) => {
+    await page.goto(ROUTE_ZFL_PRIVACY.url);
+    await expect(
+      page.getByRole("heading", {
+        name: "1.1 Verantwortlicher und Datenschutzbeauftragte/r",
+      }),
+    ).toBeVisible();
+  });
+});
+
+test.describe("accessibility page", () => {
+  test("displays the content", async ({ page }) => {
+    await page.goto(ROUTE_ZFL_A11Y.url);
+    await expect(
+      page.getByRole("heading", {
+        name: "Erklärung zur Barrierefreiheit",
+      }),
+    ).toBeVisible();
+
+    await expect(
+      page.getByText(
+        "Diese Erklärung gilt für die Webseite des Zentrums für Legistik",
+      ),
+    ).toBeVisible();
+  });
+});

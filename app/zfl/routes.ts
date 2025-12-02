@@ -16,8 +16,14 @@ export const ROUTE_ZFL_BEGLEITUNGEN = createRoute(
 );
 export const ROUTE_ZFL_TRAININGS = createRoute("schulungen", "Schulungen");
 export const ROUTE_ZFL_IMPRINT = createRoute("impressum", "Impressum");
-export const ROUTE_ZFL_PRIVACY = createRoute("privacy", "Datenschutzerklärung");
-export const ROUTE_ZFL_A11Y = createRoute("a11y", "Barrierefreiheit");
+export const ROUTE_ZFL_PRIVACY = createRoute(
+  "datenschutz",
+  "Datenschutzerklärung",
+);
+export const ROUTE_ZFL_A11Y = createRoute(
+  "barrierefreiheit",
+  "Barrierefreiheit",
+);
 
 export default [
   ROUTE_ZFL_LANDING,

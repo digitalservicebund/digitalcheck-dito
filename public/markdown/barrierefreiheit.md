@@ -1,0 +1,30 @@
+# Erklärung zur Barrierefreiheit
+
+Diese Erklärung gilt für die Webseite des Digitalcheck, erreichbar unter [digitalcheck.bund.de](https://digitalcheck.bund.de).
+
+Als öffentliche Stelle im Sinne der Richtlinie (EU) 2016/2102 ist das Bundesministeriums für Digitales und Staatsmodernisierung (BMDS) bemüht, ihre Webauftritte im Einklang mit den Bestimmungen des Behindertengleichstellungsgesetzes des Bundes (BGG) sowie der Barrierefreien-Informationstechnik-Verordnung (BITV 2.0) zur Umsetzung der Richtlinie (EU) 2016/2102 barrierefrei zugänglich zu machen.
+
+Diese Erklärung wurde am 21\. August 2025 erstellt.
+
+## Welche Bereiche sind nicht barrierefrei?
+
+Neu entstehende Teilbereiche der Website können Anforderungen der Barrierefreiheit noch nicht erfüllen. Die Umsetzung der Barrierefreiheit wird in diesen Fällen frühzeitig vorgenommen.
+
+## Barriere melden\! Hinweise zur Barrierefreiheit
+
+Sollten Ihnen Barrieren auffallen oder benötigen Sie weitere Informationen zur Barrierefreiheit, können Sie uns über die E-Mail-Adresse SBII3@bmds.bund.de kontaktieren. Wir sind bemüht, Ihre Anfragen zeitnah zu beantworten.
+
+## Schlichtungsverfahren
+
+Sollten Sie mit der Bearbeitung Ihrer Anfrage unzufrieden sein, können Sie sich an die Schlichtungsstelle nach § 16 BGG wenden. Die Schlichtungsstelle BGG hat die Aufgabe, bei Konflikten zum Thema Barrierefreiheit zwischen Menschen mit Behinderungen und öffentlichen Stellen des Bundes eine außergerichtliche Streitbeilegung zu unterstützen. Das Schlichtungsverfahren ist kostenlos. Es muss kein Rechtsbeistand eingeschaltet werden.
+
+Weitere Informationen zum Schlichtungsverfahren und den Möglichkeiten der Antragstellung erhalten Sie unter:  
+www.schlichtungsstelle-bgg.de
+
+Schlichtungsstelle nach dem Behindertengleichstellungsgesetz bei dem Beauftragten der Bundesregierung für die Belange von Menschen mit Behinderungen  
+Mauerstraße 53  
+10117 Berlin
+
+Telefon: \+49 30 18 527 2805  
+Fax: \+49 30 18 527 742901  
+E-Mail: info@schlichtungsstelle-bgg.de
