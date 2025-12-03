@@ -8,7 +8,7 @@ import {
   ROUTE_DOCUMENTATION_NOTES,
 } from "~/resources/staticRoutes";
 import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
-import { type PrinzipWithAspekte } from "~/utils/strapiData.server";
+import { PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
 import { useDocumentationData } from "./dokumentation/documentationDataHook";
 import { getDocumentationSchemaFormUrl } from "./dokumentation/documentationDataSchema";
 
@@ -22,7 +22,7 @@ export type NavigationContext = {
   nextUrl: string;
   previousUrl: string;
   routes: (Route | Route[])[];
-  prinzips: PrinzipWithAspekte[];
+  prinzips: PrinzipWithAspekteAndExample[];
 };
 
 function findIndexForRoute(routes: Route[], currentUrl: string) {

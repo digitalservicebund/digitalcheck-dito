@@ -7,8 +7,9 @@ import {
 } from "~/resources/staticRoutes.ts";
 import {
   fetchStrapiData,
-  GET_PRINZIPS_WITH_ASPECTS_QUERY,
+  GET_PRINZIPS_WITH_EXAMPLES_QUERY,
   type PrinzipWithAspekte,
+  PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server.ts";
 
 export const handle = {
@@ -24,8 +25,8 @@ const getUrlForSlug = (slug: string) => `${ROUTE_DOCUMENTATION.url}/${slug}`;
 
 export const loader: () => Promise<DocumentationRouteData> = async () => {
   const prinzipData = await fetchStrapiData<{
-    prinzips: PrinzipWithAspekte[];
-  }>(GET_PRINZIPS_WITH_ASPECTS_QUERY);
+    prinzips: PrinzipWithAspekteAndExample[];
+  }>(GET_PRINZIPS_WITH_EXAMPLES_QUERY);
 
   if ("error" in prinzipData) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error

@@ -22,6 +22,7 @@ vi.mock("react-router", async (importOriginal) => {
     useOutletContext: vi.fn().mockReturnValue(context),
     useNavigate: vi.fn(() => mockNavigate),
     useLoaderData: vi.fn(),
+    useParams: vi.fn(),
     useRouteLoaderData: vi.fn().mockReturnValue({
       routes: context.routes,
       prinzips: context.prinzips,

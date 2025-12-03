@@ -231,6 +231,7 @@ query GetPrinzipsWithAspects {
 export const GET_PRINZIPS_WITH_EXAMPLES_QUERY = `
 query GetPrinzips {
   prinzips(sort: "order") {
+    documentId
     Name
     Beschreibung
     order

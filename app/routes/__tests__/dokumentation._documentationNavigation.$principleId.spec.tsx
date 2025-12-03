@@ -2,20 +2,19 @@
 import "./utils/mockDocumentationDataService";
 import "./utils/mockRouter";
 // End of mocks
-
 import "@testing-library/jest-dom";
 import { act, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent, { UserEvent } from "@testing-library/user-event";
 import {
   createBrowserRouter,
   RouterProvider,
-  useLoaderData,
   useOutletContext,
+  useParams,
 } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { digitalDocumentation } from "~/resources/content/dokumentation";
 import { Route, ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes";
-import { PrinzipWithAspekte } from "~/utils/strapiData.server";
+import { PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
 import { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationPrinciple from "../dokumentation._documentationNavigation.$principleId";
 import { useDocumentationData } from "../dokumentation/documentationDataHook";
@@ -41,7 +40,7 @@ const aspekte = [
   },
 ];
 
-const prinzips: PrinzipWithAspekte[] = [
+const prinzips: PrinzipWithAspekteAndExample[] = [
   {
     Name: "Prinzip 1: Digitale Angebote",
     Kurzbezeichnung: "Prinzip 1",
@@ -51,6 +50,31 @@ const prinzips: PrinzipWithAspekte[] = [
     order: 1,
     Beschreibung: [],
     Aspekte: aspekte,
+    Beispiel: {
+      documentId: "abc-2",
+      Nummer: 2,
+      Text: [
+        {
+          type: "paragraph",
+          children: [
+            {
+              type: "text",
+              text: "Dies ist der Text des Beispiel-Absatzes.",
+            },
+          ],
+        },
+      ],
+      PrinzipErfuellungen: [],
+      Paragraph: {
+        Nummer: 42,
+        Gesetz: "TestG",
+        Titel: "Titel des Test-Paragraphen",
+        Beispielvorhaben: {
+          URLBezeichnung: "test-regelung",
+          Titel: "Titel des Test-Regelungsvorhabens",
+        },
+      },
+    },
   },
 ];
 
@@ -64,8 +88,7 @@ const context: NavigationContext = {
 
 const mockedUseOutletContext = vi.mocked(useOutletContext);
 const mockedUseDocumentationData = vi.mocked(useDocumentationData);
-const mockedUseLoaderData = vi.mocked(useLoaderData);
-
+const mockedUseParams = vi.mocked(useParams);
 const renderWithRouter = () => {
   const router = createBrowserRouter([
     { path: "/", Component: DocumentationPrinciple },
@@ -300,7 +323,7 @@ const expectErrorUnless = async (
 describe("DocumentationPrinciple", () => {
   beforeEach(() => {
     mockedUseOutletContext.mockReturnValue(context);
-    mockedUseLoaderData.mockReturnValue({
+    mockedUseParams.mockReturnValue({
       principleId: "prinzip-1-digitale-angebote",
     });
   });
@@ -317,6 +340,22 @@ describe("DocumentationPrinciple", () => {
         name: "Prinzip 1: Digitale Angebote",
         level: 1,
       }),
+    ).toBeInTheDocument();
+  });
+
+  it("shows the example text and details", () => {
+    renderWithRouter();
+    const summaryElement = screen.getByText("Beispiel zum Prinzip", {
+      selector: "details > summary",
+    });
+    expect(summaryElement).toBeInTheDocument();
+    expect(
+      within(summaryElement.parentElement!).getByText("§ 42 TestG"),
+    ).toBeInTheDocument();
+    expect(
+      within(summaryElement.parentElement!).getByText(
+        "Dies ist der Text des Beispiel-Absatzes.",
+      ),
     ).toBeInTheDocument();
   });
 

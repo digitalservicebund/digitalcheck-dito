@@ -89,7 +89,11 @@ function PrincipleExplanationList({
         {examples.paragraphs.explanation}
       </Heading>
       {erfuellungen.map((erfuellung) => (
-        <PrincipleExplanation key={erfuellung.id} erfuellung={erfuellung} />
+        <PrincipleExplanation
+          showPrincipleTitle
+          key={erfuellung.id}
+          erfuellung={erfuellung}
+        />
       ))}
     </div>
   );
@@ -97,10 +101,12 @@ function PrincipleExplanationList({
 
 type PrincipleExplanationProps = {
   erfuellung: PrinzipErfuellung;
+  showPrincipleTitle?: boolean;
 };
 
-function PrincipleExplanation({
+export function PrincipleExplanation({
   erfuellung,
+  showPrincipleTitle,
 }: Readonly<PrincipleExplanationProps>) {
   const location = useLocation();
   const { activeHighlight, setActiveHighlight, absatzId } = useContext(
@@ -143,9 +149,11 @@ function PrincipleExplanation({
           </Link>
         )}
       </div>
-      <p className="ds-label-03-reg text-gray-900">
-        {`(${examples.principleExplanation.principle}: ${erfuellung.Prinzip.Name})`}
-      </p>
+      {showPrincipleTitle && (
+        <p className="ds-label-03-reg text-gray-900">
+          {`(${examples.principleExplanation.principle}: ${erfuellung.Prinzip.Name})`}
+        </p>
+      )}
     </div>
   );
 }

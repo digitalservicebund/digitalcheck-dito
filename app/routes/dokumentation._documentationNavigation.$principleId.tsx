@@ -4,7 +4,8 @@ import {
 } from "@digitalservicebund/icons";
 import { FormScope, useField, useFieldArray } from "@rvf/react";
 import { useCallback, useEffect } from "react";
-import { Link, useLoaderData, useOutletContext } from "react-router";
+import { Link, useOutletContext, useParams } from "react-router";
+import { PrincipleExplanation } from "~/components/Absatz.tsx";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import Button from "~/components/Button";
@@ -12,15 +13,16 @@ import CheckboxWithExpandableArea from "~/components/CheckboxWithExpandableArea"
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Dialog from "~/components/Dialog";
 import Heading from "~/components/Heading";
-import InfoBox from "~/components/InfoBox.tsx";
 import InlineNotice from "~/components/InlineNotice";
 import Input from "~/components/Input";
 import MetaTitle from "~/components/Meta";
+import PrincipleHighlightModifier from "~/components/PrincipleHighlightModifier.tsx";
 import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
 import Separator from "~/components/Separator";
 import Textarea from "~/components/Textarea";
-import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
+import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider.tsx";
+import { examples } from "~/resources/content/beispiele.ts";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
   ROUTE_EXAMPLES_PRINCIPLES,
@@ -33,19 +35,12 @@ import {
   type PrincipleReasoning,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { addOrUpdatePrinciple } from "~/routes/dokumentation/documentationDataService";
-import getDetailsSummaryProps from "~/routes/methoden.fuenf-prinzipien/getDetailsSummaryProps.tsx";
-import { PrincipleExample } from "~/routes/methoden.fuenf-prinzipien/Principle.tsx";
-import getFeatureFlag from "~/utils/featureFlags.server";
-import { features } from "~/utils/featureFlags.ts";
 import {
-  fetchStrapiData,
-  GET_PRINZIPS_WITH_EXAMPLES_QUERY,
   PrinzipAspekt,
   PrinzipWithAspekte,
   PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
-import type { Route } from "./+types/dokumentation._documentationNavigation.$principleId";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import {
@@ -54,26 +49,6 @@ import {
 } from "./dokumentation/documentationDataHook";
 
 const { principlePages } = digitalDocumentation;
-
-export async function loader({ params: { principleId } }: Route.LoaderArgs) {
-  const enableAlternativeExplanation = getFeatureFlag(
-    features.digitalDocumentationAlternativeExplanation,
-  );
-  if (enableAlternativeExplanation) {
-    console.info("fetching full principles for user test");
-    const prinzipData = await fetchStrapiData<{
-      prinzips: PrinzipWithAspekteAndExample[];
-    }>(GET_PRINZIPS_WITH_EXAMPLES_QUERY);
-    if ("prinzips" in prinzipData) {
-      return {
-        principleId,
-        fullPrinciples: prinzipData.prinzips,
-      };
-    }
-  }
-
-  return { principleId };
-}
 
 type ReasoningProps = {
   label: string;
@@ -378,8 +353,69 @@ function IrrelevantAnswerFormElements({
   );
 }
 
+function PrincipleWithExample({
+  prinzip,
+}: Readonly<{
+  prinzip: PrinzipWithAspekteAndExample;
+}>) {
+  const erfuellungenToShow = prinzip.Beispiel.PrinzipErfuellungen?.filter(
+    (erfuellung) => erfuellung.Prinzip?.Nummer === prinzip.Nummer,
+  );
+
+  return (
+    <div className="space-y-8">
+      <Badge principleNumber={prinzip.Nummer}>{principlePages.badge}</Badge>
+      <Heading
+        text={prinzip.Name}
+        tagName="h1"
+        look="ds-heading-02-reg"
+        className="mb-16"
+      />
+
+      <BlocksRenderer content={prinzip.Beschreibung} />
+      {prinzip.Beispiel && (
+        <DetailsSummary title="Beispiel zum Prinzip">
+          <div className="space-y-24 pt-16">
+            <PrincipleHighlightProvider
+              absatzId={prinzip.Beispiel.documentId}
+              principlesToShow={[prinzip]}
+              useAnchorLinks={false}
+            >
+              <div>
+                <h4 className="ds-label-02-bold">
+                  § {prinzip.Beispiel.Paragraph.Nummer}{" "}
+                  {prinzip.Beispiel.Paragraph.Gesetz}
+                </h4>
+                <BlocksRenderer
+                  content={prinzip.Beispiel.Text}
+                  modifiers={{
+                    underline: PrincipleHighlightModifier,
+                  }}
+                />
+              </div>
+              {examples.paragraphs.explanation}
+              {erfuellungenToShow?.map((erfuellung) => (
+                <PrincipleExplanation
+                  key={erfuellung.id}
+                  erfuellung={erfuellung}
+                />
+              ))}
+            </PrincipleHighlightProvider>
+            <Link
+              className="text-link block font-bold"
+              to={`${ROUTE_EXAMPLES_PRINCIPLES.url}/${prinzip.URLBezeichnung}`}
+            >
+              Mehr Beispiele zu dem Prinzip
+            </Link>
+          </div>
+        </DetailsSummary>
+      )}
+    </div>
+  );
+}
+
 export default function DocumentationPrinciple() {
-  const { principleId, fullPrinciples } = useLoaderData<typeof loader>();
+  const { principleId } = useParams();
   const { currentUrl, nextUrl, previousUrl, prinzips } =
     useOutletContext<NavigationContext>();
   const { documentationData } = useDocumentationData();
@@ -456,101 +492,11 @@ export default function DocumentationPrinciple() {
     return () => unsubscribe();
   }, [form]);
 
-  const enableAlternativeExplanation = useFeatureFlag(
-    features.digitalDocumentationAlternativeExplanation,
-  );
-
-  const testVariant = (() => {
-    if (
-      enableAlternativeExplanation &&
-      prinzip?.URLBezeichnung ===
-        "digitale-angebote-fuer-alle-nutzbar-gestalten"
-    )
-      return "descriptionOnBottom";
-    if (
-      enableAlternativeExplanation &&
-      prinzip?.URLBezeichnung ===
-        "datenwiederverwendung-benoetigt-einheitliches-recht"
-    )
-      return "descriptionWithAccordion";
-    return null;
-  })();
-
-  const fullPrinciple = fullPrinciples?.find(
-    (p) => p.URLBezeichnung === prinzip.URLBezeichnung,
-  );
-
   return (
     <>
       <MetaTitle prefix={prinzip.Name} />
       <div className="space-y-40">
-        <div className="space-y-8">
-          <Badge principleNumber={prinzip.Nummer}>{principlePages.badge}</Badge>
-          <Heading
-            text={prinzip.Name}
-            tagName="h1"
-            look="ds-heading-02-reg"
-            className="mb-16"
-          />
-          {!testVariant && (
-            <>
-              <BlocksRenderer content={prinzip.Beschreibung} />
-              <Link
-                to={`${ROUTE_METHODS_PRINCIPLES.url}#${slugify(prinzip.Name)}`}
-                target="_blank"
-                className="text-link"
-                rel="noreferrer"
-              >
-                {principlePages.moreButton}
-              </Link>
-            </>
-          )}
-          {testVariant === "descriptionWithAccordion" && (
-            <>
-              <BlocksRenderer content={prinzip.Beschreibung} />
-              {prinzip && (
-                <DetailsSummary title="Beispiele">
-                  <div className="space-y-24">
-                    <div>
-                      <h3 className={"ds-label-01-bold font-bold"}>
-                        § 8 GWKHV
-                      </h3>
-                      <p className={"ds-label-01-reg italic"}>
-                        „(2) Registerteilnehmer sind verpflichtet, für die
-                        Kommunikation mit dem Umweltbundesamt einen Zugang zu
-                        diesem Kommunikationssystem zu eröffnen und den Zugang
-                        zu nutzen, insbesondere für die Stellung von Anträgen,
-                        die Abgabe von Erklärungen sowie die Übermittlung von
-                        Daten und Dokumenten.“
-                      </p>
-                    </div>
-                    <div>
-                      <h4 className="ds-label-01-bold mt-24">
-                        Warum ist dieses Beispiel gut?
-                      </h4>
-                      <ul className="mt-8">
-                        <li>
-                          Verringert die Fehleranfälligkeit durch den
-                          Datenabgleich.
-                        </li>
-                        <li>
-                          Im folgenden Absatz wird der Abgleich und Austausch
-                          der Daten näher spezifiziert und erweitert.
-                        </li>
-                      </ul>
-                    </div>
-                    <Link
-                      className="text-link"
-                      to={`${ROUTE_EXAMPLES_PRINCIPLES.url}/${prinzip.URLBezeichnung}`}
-                    >
-                      Mehr Beispiele zu dem Prinzip
-                    </Link>
-                  </div>
-                </DetailsSummary>
-              )}
-            </>
-          )}
-        </div>
+        <PrincipleWithExample prinzip={prinzip} />
 
         <Separator />
 
@@ -599,47 +545,6 @@ export default function DocumentationPrinciple() {
             showDownloadDraftButton
             showSavingTip
           />
-
-          {testVariant === "descriptionOnBottom" && fullPrinciple && (
-            <>
-              <Separator />
-              <div className="space-y-40" key={slugify(fullPrinciple.Name)}>
-                <InfoBox
-                  identifier={slugify(fullPrinciple.Name)}
-                  heading={{
-                    tagName: "h2",
-                    text: "Das Prinzip im Detail",
-                  }}
-                >
-                  <div>
-                    <BlocksRenderer content={fullPrinciple.Beschreibung} />
-                  </div>
-                  <InfoBox.DetailsSummaryList
-                    {...getDetailsSummaryProps(prinzip)}
-                  />
-                </InfoBox>
-
-                {fullPrinciple.Beispiel && (
-                  <PrincipleExample prinzip={fullPrinciple} />
-                )}
-              </div>
-              <div className="space-y-8">
-                <h2 className="ds-heading-02-reg">
-                  Suchen Sie mehr Beispiele?
-                </h2>
-                <p>
-                  Mehr Beispiele finden Sie auf der{" "}
-                  <Link
-                    className="text-link"
-                    to={`/beispiele/prinzipien/${prinzip.URLBezeichnung}`}
-                  >
-                    Beispielseite zu diesem Prinzip
-                  </Link>
-                  .
-                </p>
-              </div>
-            </>
-          )}
         </form>
       </div>
     </>
