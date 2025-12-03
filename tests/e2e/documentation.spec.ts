@@ -181,7 +181,7 @@ test.describe("documentation flow happy path", () => {
   test("download draft documentation from principle page", async ({}, testInfo) => {
     const docText = await downloadDocumentAndGetText(
       page,
-      page.getByRole("button", { name: "Zwischenstand speichern (.docx)" }),
+      page.getByRole("button", { name: "Zwischenstand herunterladen (.docx)" }),
       testInfo.outputPath("documentation.docx"),
     );
     expectStringsOrderedInText(
@@ -496,7 +496,9 @@ test.describe("with partial documentation started", () => {
 
       const docText = await downloadDocumentAndGetText(
         page,
-        page.getByRole("button", { name: "Zwischenstand speichern (.docx)" }),
+        page.getByRole("button", {
+          name: "Zwischenstand herunterladen (.docx)",
+        }),
         testInfo.outputPath("documentation.docx"),
       );
       expectStringsOrderedInText(

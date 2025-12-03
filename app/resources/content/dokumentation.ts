@@ -345,7 +345,7 @@ export const digitalDocumentation = {
   },
   actions: {
     saveDraft: {
-      title: "Zwischenstand speichern (.docx)",
+      title: "Zwischenstand herunterladen (.docx)",
     },
     savingTip: "Ihre Daten werden automatisch im Browser gespeichert.",
   },
