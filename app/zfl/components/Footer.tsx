@@ -109,7 +109,7 @@ export default function Footer() {
               },
               {
                 text: ROUTE_ZFL_PRIVACY.title,
-                url: ROUTE_ZFL_PRIVACY.url,
+                url: ROUTE_ZFL_PRIVACY.url(),
               },
               {
                 text: ROUTE_ZFL_A11Y.title,
