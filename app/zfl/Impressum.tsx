@@ -32,11 +32,11 @@ const content = dedent`
     
     ### Datenschutz
     
-    Erfahren Sie mehr hierzu in der [Datenschutzerklärung](${ROUTE_ZFL_PRIVACY.url})
+    Erfahren Sie mehr hierzu in der [Datenschutzerklärung](${ROUTE_ZFL_PRIVACY.url()})
     
     ### Barrierefreiheit
     
-    Erfahren Sie mehr hierzu in der [Barrierefreiheitserklärung](${ROUTE_ZFL_A11Y.url})
+    Erfahren Sie mehr hierzu in der [Barrierefreiheitserklärung](${ROUTE_ZFL_A11Y.url()})
   `;
 
 export default function ZFLImpressum() {

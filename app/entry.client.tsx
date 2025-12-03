@@ -1,14 +1,11 @@
 import { startTransition, StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
 import { HydratedRouter } from "react-router/dom";
+import { notOnZFL } from "./zfl/notOnZFL";
 
 startTransition(() => {
-  const hostname = window.location.hostname;
-  if (
-    hostname.startsWith("zfl.bund.de") ||
-    hostname.startsWith("zentrum-fuer-legistik.bund.de")
-  ) {
-    console.warn("Skipping hydration for ZFL domain.", hostname);
+  if (!notOnZFL()) {
+    console.warn("Skipping hydration for ZFL domain.");
     return;
   }
 

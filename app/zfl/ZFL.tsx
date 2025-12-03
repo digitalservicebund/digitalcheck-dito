@@ -9,6 +9,6 @@ export default function ZFLLayout() {
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   return (
-    <ErrorBoundaryComponent error={error} backLink={ROUTE_ZFL_LANDING.url} />
+    <ErrorBoundaryComponent error={error} backLink={ROUTE_ZFL_LANDING.url()} />
   );
 }

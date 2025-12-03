@@ -91,11 +91,11 @@ export default function Footer() {
               ],
               {
                 text: ROUTE_ZFL_BEGLEITUNGEN.title,
-                url: ROUTE_ZFL_BEGLEITUNGEN.url,
+                url: ROUTE_ZFL_BEGLEITUNGEN.url(),
               },
               {
                 text: ROUTE_ZFL_TRAININGS.title,
-                url: ROUTE_ZFL_TRAININGS.url,
+                url: ROUTE_ZFL_TRAININGS.url(),
               },
             ]}
             className="row-span-2"
@@ -105,7 +105,7 @@ export default function Footer() {
             links={[
               {
                 text: ROUTE_ZFL_IMPRINT.title,
-                url: ROUTE_ZFL_IMPRINT.url,
+                url: ROUTE_ZFL_IMPRINT.url(),
               },
               {
                 text: ROUTE_ZFL_PRIVACY.title,
@@ -113,7 +113,7 @@ export default function Footer() {
               },
               {
                 text: ROUTE_ZFL_A11Y.title,
-                url: ROUTE_ZFL_A11Y.url,
+                url: ROUTE_ZFL_A11Y.url(),
               },
             ]}
             className="row-span-2"
