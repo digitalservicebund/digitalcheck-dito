@@ -89,13 +89,37 @@ const classes = {
     "ds-label-02-bold pointer-events-none border-l-yellow-800 bg-yellow-300",
   activeOpen: "pointer-events-none border-l-blue-400 bg-blue-400",
   activeOpenError: "pointer-events-none border-l-yellow-200 bg-yellow-200",
+  wrapper: "border-b border-b-white",
+  base: "m-0 flex flex-row items-center gap-8 border-l-4 p-16 text-black",
 };
+
+function DisabledItem({
+  children,
+  statusElements,
+}: Readonly<{
+  statusElements?: ReactNode;
+  children?: ReactNode;
+}>) {
+  return (
+    <li className={twJoin(classes.wrapper, "cursor-not-allowed")}>
+      <div
+        className={twMerge(
+          classes.base,
+          "justify-between border-l-transparent text-gray-800",
+        )}
+        aria-disabled
+      >
+        {statusElements}
+        {children}
+      </div>
+    </li>
+  );
+}
 
 function NavItemLink({
   children,
   completed,
   currentPage: isCurrentPage,
-  disabled,
   url,
   error,
 }: Readonly<{
@@ -104,7 +128,6 @@ function NavItemLink({
   children: string;
   completed: boolean;
   currentPage: boolean;
-  disabled: boolean | undefined;
 }>) {
   function getTitle() {
     if (error) {
@@ -123,31 +146,13 @@ function NavItemLink({
     </>
   );
 
-  const wrapperClasses = "border-b border-b-white";
-  const baseClasses =
-    "m-0 flex flex-row items-center gap-8 border-l-4 p-16 text-black";
-
-  if (disabled) {
-    return (
-      <li className={wrapperClasses}>
-        <div
-          className={twMerge(baseClasses, "border-l-transparent text-gray-800")}
-          aria-disabled
-        >
-          {statusElements}
-          {children}
-        </div>
-      </li>
-    );
-  }
-
   if (isCurrentPage) {
     return (
-      <li className={wrapperClasses}>
+      <li className={classes.wrapper}>
         <div
           aria-current="page"
           className={twMerge(
-            baseClasses,
+            classes.base,
             "border-l-blue-100",
             classes.hover,
             classes.active,
@@ -162,12 +167,12 @@ function NavItemLink({
   }
 
   return (
-    <li className={wrapperClasses}>
+    <li className={classes.wrapper}>
       <Link
         to={url}
         title={getTitle()}
         className={twMerge(
-          baseClasses,
+          classes.base,
           error ? "border-l-yellow-200 bg-yellow-200" : "border-l-blue-100",
           error ? classes.hoverError : classes.hover,
           classes.focus,
@@ -211,6 +216,17 @@ function NavItem({
   );
   const hasError = Boolean((!isActive && error) || hasErrorDescendant);
 
+  if (disabled) {
+    return (
+      <DisabledItem>
+        {children}
+        {subItems && (
+          <ChevronLeft className="w-5 rotate-270 group-data-open:rotate-90" />
+        )}
+      </DisabledItem>
+    );
+  }
+
   if (url) {
     const isCurrentPage = activeElementUrl === url;
 
@@ -220,13 +236,12 @@ function NavItem({
         error={error}
         completed={isCompleted}
         currentPage={isCurrentPage}
-        disabled={disabled}
       >
         {children}
       </NavItemLink>
     );
   }
-  // if no url is given, it's a subitem, so we render a disclosure button with the subitems inside
+  // if no url is given, we assume it to be a subtree, so we render a disclosure button with the subitems inside
   return (
     <li>
       {/* key forces remount when isActive toggles, so defaultOpen can reflect the active state*/}

@@ -4,6 +4,7 @@ import { documentationDocument } from "~/resources/content/documentation-documen
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
   ROUTE_DOCUMENTATION,
+  ROUTE_DOCUMENTATION_NOTES,
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_SEND,
   ROUTE_DOCUMENTATION_SUMMARY,
@@ -89,10 +90,23 @@ test.describe("documentation flow happy path", () => {
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION.url);
 
     await page.getByRole("link", { name: "Dokumentation starten" }).click();
-    await expect(page).toHaveURL(ROUTE_DOCUMENTATION_TITLE.url);
+  });
+
+  test("see the notice, confirm, and continue", async () => {
+    await expect(page).toHaveURL(ROUTE_DOCUMENTATION_NOTES.url);
+    await expect(
+      page.getByRole("heading", { name: "Wichtige Hinweise" }),
+    ).toBeVisible();
+    const continueButton = page.getByRole("button", { name: "Weiter" });
+    await expect(continueButton).toBeDisabled();
+
+    await page.getByRole("checkbox", { name: "gelesen", exact: false }).check();
+    await expect(continueButton).toBeEnabled();
+    await continueButton.click();
   });
 
   test("fill title page and navigate to participation", async () => {
+    await expect(page).toHaveURL(ROUTE_DOCUMENTATION_TITLE.url);
     await page
       .getByLabel(digitalDocumentation.info.inputTitle.label)
       .fill(testData.title);
@@ -410,12 +424,23 @@ test.describe("documentation flow happy path", () => {
 });
 
 test.describe("with partial documentation started", () => {
+  async function expectAndSkipNotice(page: Page) {
+    await page.waitForURL(ROUTE_DOCUMENTATION_NOTES.url);
+    await expect(
+      page.getByRole("heading", { name: "Wichtige Hinweise" }),
+    ).toBeVisible();
+    await page.getByRole("checkbox", { name: "gelesen", exact: false }).check();
+    await page.getByRole("button", { name: "Weiter" }).click();
+  }
+
   test.beforeEach(async ({ page }) => {
-    await test.step("start documentation flow from landing page", async () => {
+    await test.step("start documentation flow from landing page and skip the notice", async () => {
       await page.goto(ROUTE_DOCUMENTATION.url);
       await expect(page).toHaveURL(ROUTE_DOCUMENTATION.url);
 
       await page.getByRole("link", { name: "Dokumentation starten" }).click();
+
+      await expectAndSkipNotice(page);
     });
 
     await test.step("fill the title", async () => {
@@ -425,6 +450,8 @@ test.describe("with partial documentation started", () => {
     });
 
     await test.step("go back to start page", async () => {
+      await page.goBack();
+      await expect(page).toHaveURL(ROUTE_DOCUMENTATION_NOTES.url);
       await page.goBack();
       await expect(page).toHaveURL(ROUTE_DOCUMENTATION.url);
     });
@@ -482,6 +509,8 @@ test.describe("with partial documentation started", () => {
     await test.step("confirm start over", async () => {
       const dialog = page.getByRole("dialog");
       await dialog.getByRole("button", { name: "Neu beginnen" }).click();
+
+      await expectAndSkipNotice(page);
 
       await page.waitForURL(ROUTE_DOCUMENTATION_TITLE.url);
 

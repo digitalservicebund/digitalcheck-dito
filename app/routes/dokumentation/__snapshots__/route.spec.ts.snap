@@ -13,6 +13,20 @@ exports[`dokumentation/route.tsx > renders the routes as in the snapshot 1`] = `
       "title": "Dokumentation",
       "url": "/dokumentation",
     },
+    "title": "Hinweise",
+    "url": "/dokumentation/hinweise",
+  },
+  {
+    "hideInSitemap": undefined,
+    "parent": {
+      "hideInSitemap": undefined,
+      "parent": {
+        "title": "Startseite",
+        "url": "/",
+      },
+      "title": "Dokumentation",
+      "url": "/dokumentation",
+    },
     "title": "Regelungsvorhaben Titel",
     "url": "/dokumentation/regelungsvorhaben-titel",
   },

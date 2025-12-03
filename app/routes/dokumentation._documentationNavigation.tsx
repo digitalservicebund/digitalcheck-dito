@@ -5,6 +5,7 @@ import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
   type Route as _Route,
   ROUTE_DOCUMENTATION,
+  ROUTE_DOCUMENTATION_NOTES,
 } from "~/resources/staticRoutes";
 import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { type PrinzipWithAspekte } from "~/utils/strapiData.server";
@@ -47,11 +48,20 @@ function getNextUrl(routes: Route[], currentUrl: string): string | null {
 
 export default function LayoutWithDocumentationNavigation() {
   const { routes, prinzips } = useDocumentationRouteData();
+
+  // exclude documentation notes
+  const displayedRoutes = routes.filter((route) => {
+    if (Array.isArray(route)) return true;
+    return route.url !== ROUTE_DOCUMENTATION_NOTES.url;
+  });
+
   const location = useLocation();
   const currentUrl = location.pathname;
 
   const nextUrl = getNextUrl(routes.flat(), currentUrl);
   const previousUrl = getPreviousUrl(routes.flat(), currentUrl);
+
+  const isNavigationDisabled = currentUrl === ROUTE_DOCUMENTATION_NOTES.url;
 
   const { findDocumentationDataForUrl } = useDocumentationData();
 
@@ -68,6 +78,7 @@ export default function LayoutWithDocumentationNavigation() {
         url={route.url}
         error={formData && !valid.success}
         completed={formData && valid.success}
+        disabled={isNavigationDisabled}
       >
         {route.title}
       </Nav.Item>
@@ -76,18 +87,19 @@ export default function LayoutWithDocumentationNavigation() {
 
   return (
     <div className="parent-bg-blue container flex max-w-none justify-center space-x-80 bg-blue-100 py-40 lg:py-80">
-      <div className="hidden max-w-[248px] flex-none lg:block">
+      <div className="hidden max-w-[248px] flex-none grow lg:block">
         <div className="sticky top-40">
           <Nav
             activeElementUrl={currentUrl}
             ariaLabel={digitalDocumentation.navigation.ariaLabel}
           >
             <Nav.Items>
-              {routes.map((route) => {
+              {displayedRoutes.map((route) => {
                 if (Array.isArray(route))
                   return (
                     <Nav.Item
                       key="principles"
+                      disabled={isNavigationDisabled}
                       subItems={<Nav.Items>{route.map(getNavItem)}</Nav.Items>}
                     >
                       {digitalDocumentation.navigation.principles}

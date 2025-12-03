@@ -9,9 +9,10 @@ import { MemoryRouter, useOutletContext } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   Route,
+  ROUTE_DOCUMENTATION_NOTES,
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_TITLE,
-  ROUTES_DOCUMENTATION_PRE,
+  ROUTES_DOCUMENTATION_INTRO,
 } from "~/resources/staticRoutes";
 import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
 import DocumentationSummary from "~/routes/dokumentation._documentationNavigation.zusammenfassung";
@@ -28,9 +29,16 @@ const MOCK_ROUTE_PRINCIPLE = {
   url: "/dokumentation/prinzip-digitale-angebote",
 };
 const routes: (Route[] | Route)[] = [
-  ...ROUTES_DOCUMENTATION_PRE,
+  ...ROUTES_DOCUMENTATION_INTRO,
   [MOCK_ROUTE_PRINCIPLE],
 ];
+
+/**
+ * Routes that are relevant for forms interaction, excluding the notes page, and summary/send steps.
+ */
+const documentationFormRoutes = routes
+  .flat()
+  .filter((route) => route.url !== ROUTE_DOCUMENTATION_NOTES.url);
 
 const mockedUseOutletContext = vi.mocked(useOutletContext);
 const mockedUseDocumentationData = vi.mocked(useDocumentationData);
@@ -127,10 +135,10 @@ describe("DocumentationSummary", () => {
     ).toBeInTheDocument();
   });
 
-  it("shows info boxes with correct headings for all documentation routes except summary and send", () => {
+  it("shows info boxes with correct headings for all form routes", () => {
     renderWithRouter();
 
-    routes.flat().forEach((route) => {
+    documentationFormRoutes.forEach((route) => {
       expect(screen.getByTestId(route.url)).toBeInTheDocument();
     });
   });
@@ -138,7 +146,7 @@ describe("DocumentationSummary", () => {
   it("shows correct heading for each section", () => {
     renderWithRouter();
 
-    routes.flat().forEach((route) => {
+    documentationFormRoutes.forEach((route) => {
       const stepContainer = screen.getByTestId(route.url);
 
       expect(
@@ -153,7 +161,7 @@ describe("DocumentationSummary", () => {
   it("shows principle badges only for principle steps with correct color", () => {
     renderWithRouter();
 
-    routes.flat().forEach((route) => {
+    documentationFormRoutes.forEach((route) => {
       const stepContainer = screen.getByTestId(route.url);
       const isPrincipleRoute = route === MOCK_ROUTE_PRINCIPLE;
 
@@ -360,7 +368,7 @@ describe("DocumentationSummary", () => {
     mockedUseDocumentationData.mockReturnValue(createDocumentationDataMock());
     renderWithRouter();
 
-    routes.flat().forEach((route) => {
+    documentationFormRoutes.forEach((route) => {
       const stepContainer = screen.getByTestId(route.url);
 
       expect(

@@ -2,8 +2,8 @@ import { Outlet, useRouteLoaderData } from "react-router";
 import {
   Route,
   ROUTE_DOCUMENTATION,
-  ROUTES_DOCUMENTATION_POST,
-  ROUTES_DOCUMENTATION_PRE,
+  ROUTES_DOCUMENTATION_FINALIZE,
+  ROUTES_DOCUMENTATION_INTRO,
 } from "~/resources/staticRoutes.ts";
 import {
   fetchStrapiData,
@@ -35,13 +35,13 @@ export const loader: () => Promise<DocumentationRouteData> = async () => {
   const { prinzips } = prinzipData;
 
   const routes: (Route[] | Route)[] = [
-    ...ROUTES_DOCUMENTATION_PRE,
+    ...ROUTES_DOCUMENTATION_INTRO,
     prinzips.map<Route>(({ Name, URLBezeichnung, documentId }) => ({
       title: Name,
       url: getUrlForSlug(URLBezeichnung),
       principleId: documentId,
     })),
-    ...ROUTES_DOCUMENTATION_POST,
+    ...ROUTES_DOCUMENTATION_FINALIZE,
   ];
 
   return { routes, prinzips };

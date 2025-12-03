@@ -5,7 +5,10 @@ import Dialog from "~/components/Dialog.tsx";
 import RichText from "~/components/RichText.tsx";
 import { digitalDocumentation } from "~/resources/content/dokumentation.ts";
 import { general } from "~/resources/content/shared/general.ts";
-import { ROUTE_DOCUMENTATION_TITLE } from "~/resources/staticRoutes.ts";
+import {
+  ROUTE_DOCUMENTATION_TITLE,
+  ROUTES_DOCUMENTATION_INTRO,
+} from "~/resources/staticRoutes.ts";
 import { useDocumentationData } from "~/routes/dokumentation/documentationDataHook.ts";
 import { deleteDocumentationData } from "~/routes/dokumentation/documentationDataService.ts";
 import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
@@ -39,7 +42,7 @@ function StartOverDialog() {
             type="button"
             onClick={async () => {
               deleteDocumentationData();
-              await navigate(ROUTE_DOCUMENTATION_TITLE.url);
+              await navigate(ROUTES_DOCUMENTATION_INTRO[0].url);
             }}
           >
             {start.startOverDialog.actions.confirm}
@@ -74,7 +77,7 @@ export function DocumentationContinueActions() {
           <StartOverDialog />
         </>
       ) : (
-        <LinkButton to={ROUTE_DOCUMENTATION_TITLE.url} className="js-only">
+        <LinkButton to={ROUTES_DOCUMENTATION_INTRO[0].url} className="js-only">
           {start.actions.startInitial.buttonText}
         </LinkButton>
       )}

@@ -14,7 +14,7 @@ import {
 } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { digitalDocumentation } from "~/resources/content/dokumentation";
-import { Route, ROUTES_DOCUMENTATION_PRE } from "~/resources/staticRoutes";
+import { Route, ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes";
 import { PrinzipWithAspekte } from "~/utils/strapiData.server";
 import { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationPrinciple from "../dokumentation._documentationNavigation.$principleId";
@@ -23,7 +23,7 @@ import { DocumentationData } from "../dokumentation/documentationDataSchema";
 import { initialDocumentationData } from "../dokumentation/documentationDataService";
 
 const routes: (Route[] | Route)[] = [
-  ...ROUTES_DOCUMENTATION_PRE,
+  ...ROUTES_DOCUMENTATION_INTRO,
   [
     {
       title: "Prinzip: Digitale Angebote",

@@ -10,7 +10,7 @@ import React from "react";
 import { MemoryRouter } from "react-router";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general.ts";
-import { ROUTE_DOCUMENTATION_TITLE } from "~/resources/staticRoutes.ts";
+import { ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes.ts";
 import { DocumentationContinueActions } from "./DocumentationContinueActions";
 import { useDocumentationData } from "./documentationDataHook";
 import { initialDocumentationData } from "./documentationDataService";
@@ -118,7 +118,9 @@ describe("DocumentationContinueActions", () => {
       confirmButton.click();
 
       expect(mockDeleteDocumentationData).toHaveBeenCalled();
-      expect(mockNavigate).toHaveBeenCalledWith(ROUTE_DOCUMENTATION_TITLE.url);
+      expect(mockNavigate).toHaveBeenCalledWith(
+        ROUTES_DOCUMENTATION_INTRO[0].url,
+      );
     });
   });
 

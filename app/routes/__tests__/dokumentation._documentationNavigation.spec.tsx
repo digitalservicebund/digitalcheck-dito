@@ -14,9 +14,10 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   type Route,
   ROUTE_DOCUMENTATION,
+  ROUTE_DOCUMENTATION_NOTES,
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_TITLE,
-  ROUTES_DOCUMENTATION_PRE,
+  ROUTES_DOCUMENTATION_INTRO,
 } from "~/resources/staticRoutes";
 
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
@@ -47,7 +48,7 @@ vi.mock("react-router", async (importOriginal) => {
 });
 
 const mockRoutes: (Route[] | Route)[] = [
-  ...ROUTES_DOCUMENTATION_PRE,
+  ...ROUTES_DOCUMENTATION_INTRO,
   [
     {
       title: "Prinzip A",
@@ -55,6 +56,13 @@ const mockRoutes: (Route[] | Route)[] = [
     },
   ],
 ];
+
+/**
+ * Routes that are relevant for forms interaction, excluding the notes page, and summary/send steps.
+ */
+const documentationFormRoutes = mockRoutes
+  .flat()
+  .filter((route) => route.url !== ROUTE_DOCUMENTATION_NOTES.url);
 
 type ValidationScenario = {
   name: string;
@@ -275,14 +283,30 @@ describe("navigation on pages of documentation", () => {
     },
   );
 
-  const currentRoute = mockRoutes.flat()[0];
-  it("renders sidebar navigation with links to all pages (except current)", () => {
+  it("disables all routes and only shows top-level items on the notes page", () => {
+    renderPage(ROUTE_DOCUMENTATION_NOTES);
+    const navigation = screen.getByRole("navigation", {
+      name: "Seitennavigation",
+    });
+    for (const title of [
+      ROUTE_DOCUMENTATION_TITLE.title,
+      ROUTE_DOCUMENTATION_PARTICIPATION.title,
+      "Prinzipien",
+    ]) {
+      const item = within(navigation).getByText(title);
+      expect(item).toHaveAttribute("aria-disabled");
+      expect(item).not.toHaveAttribute("href");
+    }
+  });
+
+  const currentRoute = ROUTE_DOCUMENTATION_TITLE;
+  it("renders sidebar navigation with links to all pages (except current and notes)", () => {
     renderPage(currentRoute);
 
     const navigation = screen.getByRole("navigation", {
       name: "Seitennavigation",
     });
-    for (const route of mockRoutes.flat()) {
+    for (const route of documentationFormRoutes) {
       if (route.url === currentRoute.url) continue;
       const navItem = within(navigation).getByRole("link", {
         name: route.title,

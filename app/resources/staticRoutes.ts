@@ -103,6 +103,11 @@ export const ROUTE_DOCUMENTATION = createRoute(
   "dokumentation",
   "Dokumentation",
 );
+export const ROUTE_DOCUMENTATION_NOTES = createRoute(
+  "hinweise",
+  "Hinweise",
+  ROUTE_DOCUMENTATION,
+);
 export const ROUTE_DOCUMENTATION_TITLE = createRoute(
   "regelungsvorhaben-titel",
   "Regelungsvorhaben Titel",
@@ -124,12 +129,13 @@ export const ROUTE_DOCUMENTATION_SEND = createRoute(
   ROUTE_DOCUMENTATION,
 );
 
-export const ROUTES_DOCUMENTATION_PRE = [
+export const ROUTES_DOCUMENTATION_INTRO = [
+  ROUTE_DOCUMENTATION_NOTES,
   ROUTE_DOCUMENTATION_TITLE,
   ROUTE_DOCUMENTATION_PARTICIPATION,
 ];
 
-export const ROUTES_DOCUMENTATION_POST = [
+export const ROUTES_DOCUMENTATION_FINALIZE = [
   ROUTE_DOCUMENTATION_SUMMARY,
   ROUTE_DOCUMENTATION_SEND,
 ];

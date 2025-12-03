@@ -6,7 +6,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import {
   ROUTE_DOCUMENTATION_TEMPLATE_WORD,
-  ROUTE_DOCUMENTATION_TITLE,
+  ROUTES_DOCUMENTATION_INTRO,
 } from "~/resources/staticRoutes";
 import DokumentationIndex from "~/routes/dokumentation._index";
 
@@ -39,7 +39,10 @@ describe("Dokumentation Index Route - Integration Tests", () => {
     const startButton = screen.getByRole("link", {
       name: "Dokumentation starten",
     });
-    expect(startButton).toHaveAttribute("href", ROUTE_DOCUMENTATION_TITLE.url);
+    expect(startButton).toHaveAttribute(
+      "href",
+      ROUTES_DOCUMENTATION_INTRO[0].url,
+    );
   });
 
   it("renders the Word file download button", () => {
