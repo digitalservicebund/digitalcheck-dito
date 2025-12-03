@@ -24,7 +24,7 @@ const content = dedent`
     ### Realisierung, Design, Hosting
     
     DigitalService GmbH des Bundes<br />
-    Frau Christina Lang<br />
+    Frau Christina Rieke Lang<br />
     Frau Anja Theurer<br />
     Prinzessinnenstraße 8-14<br />
     10969 Berlin<br />
