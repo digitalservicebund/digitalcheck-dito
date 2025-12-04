@@ -28,14 +28,6 @@ export default function ZFLIndex() {
 
       <Container className="py-40 md:py-80">
         <InfoBox
-          visual={{
-            type: "image",
-            image: {
-              url: "/zfl/Oval.png",
-              alternativeText: "",
-              size: "medium",
-            },
-          }}
           heading={{
             tagName: "h2",
             text: "Vorteile des Angebots für Sie",
