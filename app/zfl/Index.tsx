@@ -16,10 +16,10 @@ export default function ZFLIndex() {
       <Hero
         title="Bessere Rechtsetzung in allen Phasen Ihres Vorhabens"
         subtitle="Das Zentrum für Legistik unterstützt Sie bei der Ausarbeitung von Regelungen. Sie stellen damit sicher, dass Ihr Vorhaben betroffenenzentriert, praxistauglich und digital umsetzbar ist."
-        className="bg-zfl-main20"
+        className="bg-zfl-main80 text-white"
       />
 
-      <div className="bg-yellow-500">
+      <div className="bg-zfl-main20">
         <Container className="py-8">
           Das Angebot befindet sich aktuell im Aufbau und wird schrittweise mit
           Ihnen zusammen weiterentwickelt.
@@ -53,7 +53,7 @@ export default function ZFLIndex() {
         />
       </Container>
 
-      <div className="bg-blue-100">
+      <div className="bg-zfl-main20">
         <Container className="py-40 md:py-80">
           <InfoBoxList
             heading={{
@@ -67,7 +67,7 @@ export default function ZFLIndex() {
                 visual: {
                   type: "icon",
                   Icon: WidgetsOutlinedIcon,
-                  className: "fill-blue-300",
+                  className: "fill-zfl-main80",
                 },
                 heading: {
                   tagName: "h3",
@@ -89,7 +89,7 @@ export default function ZFLIndex() {
                 visual: {
                   type: "icon",
                   Icon: FactCheckOutlinedIcon,
-                  className: "fill-blue-300",
+                  className: "fill-zfl-main80",
                 },
                 heading: {
                   tagName: "h3",
