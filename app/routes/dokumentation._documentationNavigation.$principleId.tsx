@@ -226,7 +226,7 @@ function PositiveAnswerFormElements({
       {reasoningField.error() && (
         <InlineNotice
           role="alert"
-          look="warning"
+          look="missingOrIncomplete"
           heading={reasoningField.error()}
         />
       )}

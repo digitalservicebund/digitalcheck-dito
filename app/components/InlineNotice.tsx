@@ -24,6 +24,11 @@ const lookConfig = {
     borderColor: "border-ds-yellow-700",
     IconComponent: WarningAmberIcon,
   },
+  missingOrIncomplete: {
+    backgroundColor: "bg-yellow-200",
+    borderColor: "border-ds-yellow-700",
+    IconComponent: LightbulbOutlinedIcon,
+  },
   support: {
     backgroundColor: "bg-yellow-200",
     borderColor: "border-ds-yellow-700",

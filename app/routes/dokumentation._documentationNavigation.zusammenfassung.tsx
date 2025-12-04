@@ -51,7 +51,10 @@ const createInfoBoxItem = ({
       {content ? (
         <div className="space-y-24">{content}</div>
       ) : (
-        <Warning type="missing" />
+        <InlineNotice
+          look="missingOrIncomplete"
+          heading={summary.warnings.missing}
+        />
       )}
       <Link
         to={route.url}
@@ -65,14 +68,6 @@ const createInfoBoxItem = ({
   look: "highlight",
   className: "bg-white",
 });
-
-function Warning({ type }: Readonly<{ type: "incomplete" | "missing" }>) {
-  const heading =
-    type === "incomplete"
-      ? summary.warnings.incomplete
-      : summary.warnings.missing;
-  return <InlineNotice look="warning" heading={heading}></InlineNotice>;
-}
 
 function Answer({
   heading,
@@ -95,7 +90,11 @@ function Answer({
           </p>
         ))}
       {answers.some(({ answer }) => !answer) && (
-        <Warning key={heading} type="incomplete" />
+        <InlineNotice
+          look="missingOrIncomplete"
+          key={heading}
+          heading={summary.warnings.incomplete}
+        />
       )}
     </div>
   );
@@ -169,7 +168,10 @@ function AspectsContent({
 }) {
   const checkedAspects = reasoning.filter((reasoning) => reasoning?.checkbox);
   return checkedAspects.length === 0 ? (
-    <Warning type="incomplete" />
+    <InlineNotice
+      look="missingOrIncomplete"
+      heading={summary.warnings.incomplete}
+    />
   ) : (
     <>
       {checkedAspects.map((reasoning) => {

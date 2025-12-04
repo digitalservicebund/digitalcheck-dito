@@ -1,4 +1,4 @@
-import { ErrorOutline, WarningAmberOutlined } from "@digitalservicebund/icons";
+import { ErrorOutline } from "@digitalservicebund/icons";
 import type { PropsWithChildren } from "react";
 import twMerge from "~/utils/tailwindMerge";
 
@@ -19,10 +19,11 @@ const InputError = ({ id, children, look = "error" }: InputErrorProps) => {
         look === "warning" && "inline-flex bg-yellow-300 px-4 text-black",
       )}
     >
-      <div className="shrink-0">
-        {look === "error" && <ErrorOutline className="fill-ds-error" />}
-        {look === "warning" && <WarningAmberOutlined />}
-      </div>
+      {look === "error" && (
+        <div className="shrink-0">
+          <ErrorOutline className="fill-ds-error" />
+        </div>
+      )}
       <span className="sr-only">Fehler:</span> {children}
     </div>
   );
