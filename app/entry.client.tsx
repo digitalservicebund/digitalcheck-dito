@@ -1,10 +1,10 @@
 import { startTransition, StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
 import { HydratedRouter } from "react-router/dom";
-import { notOnZFL } from "./zfl/notOnZFL";
+import { isOnZFL } from "./zfl/isOnZFL";
 
 startTransition(() => {
-  if (!notOnZFL()) {
+  if (isOnZFL()) {
     console.warn("Skipping hydration for ZFL domain.");
     return;
   }

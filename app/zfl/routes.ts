@@ -1,16 +1,19 @@
-import { getZFLURL } from "./getURL";
-import { notOnZFL } from "./notOnZFL";
+type Route = {
+  path: string;
+  title: string;
+  url: string;
+};
 
 export const ROUTE_ZFL_LANDING = {
   path: "zfl",
   title: "Zentrum für Legistik",
-  url: () => (notOnZFL() ? "/zfl" : ""),
+  url: "/zfl",
 };
 
-const createRoute = (path: string, title: string) => ({
+const createRoute = (path: string, title: string): Route => ({
   path,
   title,
-  url: () => getZFLURL({ path }),
+  url: `${ROUTE_ZFL_LANDING.url}/${path}`,
 });
 
 export const ROUTE_ZFL_BEGLEITUNGEN = createRoute(
