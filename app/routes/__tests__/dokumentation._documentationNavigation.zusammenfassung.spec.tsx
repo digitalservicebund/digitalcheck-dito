@@ -23,6 +23,7 @@ import type {
   PolicyTitle,
   Principle,
 } from "~/routes/dokumentation/documentationDataSchema";
+import { AbsatzWithParagraph } from "~/utils/strapiData.server.ts";
 
 const MOCK_ROUTE_PRINCIPLE = {
   title: "Digitale Angebote",
@@ -104,6 +105,7 @@ describe("DocumentationSummary", () => {
           order: 1,
           Beschreibung: [],
           Aspekte: [],
+          Beispiel: {} as AbsatzWithParagraph,
         },
       ],
     };
