@@ -214,7 +214,9 @@ function PositiveAnswerFormElements({
   return (
     <fieldset className="space-y-40">
       <legend className="space-y-8">
-        <Heading tagName="h2">{principlePages.positivePrinciple.title}</Heading>
+        <Heading tagName="h2" className="ds-heading-03-reg">
+          {principlePages.positivePrinciple.title}
+        </Heading>
         <RichText
           markdown={principlePages.positivePrinciple.description}
           className="space-y-24"
@@ -303,7 +305,9 @@ function NegativeAnswerFormElements({
   return (
     <fieldset className="space-y-40">
       <legend className="space-y-8">
-        <Heading tagName="h2">{principlePages.negativePrinciple.title}</Heading>
+        <Heading tagName="h2" className="ds-heading-03-reg">
+          {principlePages.negativePrinciple.title}
+        </Heading>
         <RichText
           markdown={principlePages.negativePrinciple.description}
           className="space-y-24"
@@ -332,7 +336,7 @@ function IrrelevantAnswerFormElements({
   return (
     <fieldset className="space-y-40">
       <legend className="space-y-8">
-        <Heading tagName="h2">
+        <Heading tagName="h2" className="ds-heading-03-reg">
           {principlePages.irrelevantPrinciple.title}
         </Heading>
         <RichText
