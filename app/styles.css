@@ -37,6 +37,12 @@
 }
 
 @layer base {
+  .zfl-style {
+    a {
+      color: var(--color-zfl-main80);
+    }
+  }
+
   html {
     /* Keep 16px, don't change! (e.g. angie library depends on it) */
     font-size: 16px;
@@ -143,6 +149,10 @@
   .text-white & {
     @apply text-gray-100 visited:text-gray-300;
   }
+
+  .zfl-style & {
+    color: var(--color-zfl-main80);
+  }
 }
 
 @utility increase-tap-area {
@@ -176,6 +186,16 @@
 }
 
 @layer utilities {
+  .ds-link-01-reg,
+  .ds-link-01-bold,
+  .ds-link-02-reg,
+  .ds-link-02-bold,
+  .ds-link-03-reg,
+  .ds-link-03-bold {
+    .zfl-style & {
+      color: var(--color-zfl-main80);
+    }
+  }
   .ds-input,
   .ds-checkbox,
   .ds-textarea,

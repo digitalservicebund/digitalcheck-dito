@@ -66,12 +66,12 @@ export default function Footer() {
   return (
     <footer
       id="footer"
-      className="ds-label-03-reg flex w-full flex-row justify-center border-t-2 border-blue-300 leading-snug text-gray-900 print:hidden"
+      className="ds-label-03-reg border-zfl-main20 flex w-full flex-row justify-center border-t-2 leading-snug text-gray-900 print:hidden"
       aria-label="Seitenfußbereich"
     >
       <div className="w-full max-w-6xl space-y-32 px-16 py-40 sm:space-y-40">
         <nav
-          className="grid grid-cols-1 items-end justify-between gap-32 sm:grid-cols-[repeat(3,_minmax(0,_18rem))] sm:grid-rows-2"
+          className="grid grid-cols-1 items-end justify-between gap-32 sm:grid-cols-[repeat(3,minmax(0,18rem))] sm:grid-rows-2"
           aria-label="Schnellübersicht"
         >
           <LinkList
@@ -120,7 +120,7 @@ export default function Footer() {
           />
         </nav>
 
-        <hr className="mt-16 w-full border-t-2 border-blue-300" />
+        <hr className="border-zfl-main20 mt-16 w-full border-t-2" />
 
         <nav aria-label="Externe Verlinkungen" className="space-y-40">
           <div className="space-y-16 sm:flex sm:flex-row sm:items-center sm:gap-48 sm:space-y-0">

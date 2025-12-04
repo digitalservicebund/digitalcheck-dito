@@ -73,7 +73,7 @@ export default function ZFLTrainings() {
           title="Für diese Schulungen können Sie sich vormerken lassen"
           Icon={HourglassEmptyOutlinedIcon}
           shortTitle="Warteliste"
-          className="bg-blue-100"
+          className="bg-zfl-main20"
         >
           <Training title="Schulungstitel (Kurz-Schulung)" />
           <Training title="Schulungstitel (Kurz-Schulung)" />

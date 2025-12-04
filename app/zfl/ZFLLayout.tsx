@@ -29,7 +29,7 @@ export default function ZFLLayout() {
   const location = useLocation();
   const url = `${siteMeta.BASE_URL}${location.pathname}`;
   return (
-    <>
+    <div className="zfl-style">
       <meta name="description" content={siteMeta.description} />
       <meta property="og:site_name" content={siteMeta.siteName} />
       <meta property="og:description" content={siteMeta.description} />
@@ -39,6 +39,6 @@ export default function ZFLLayout() {
       <PageHeader />
       <Outlet />
       <Footer />
-    </>
+    </div>
   );
 }

@@ -32,19 +32,19 @@ const PageHeader = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
-  const basicLinkClasses = "flex items-center hover:bg-blue-100";
-  const activeClasses = "border-blue-800 bg-blue-100";
+  const basicLinkClasses = "flex items-center hover:bg-zfl-main20";
+  const activeClasses = "border-zfl-main80 bg-zfl-main20";
 
   return (
     <header className="relative" ref={headerRef}>
-      <div className="relative z-30 flex h-[72px] justify-between border-b-2 border-blue-300 bg-white pl-16 md:px-16">
+      <div className="border-zfl-main20 relative z-30 flex h-[72px] justify-between border-b-2 bg-white pl-16 md:px-16">
         {/* Logo and title */}
         <Link
           to={ROUTE_ZFL_LANDING.url}
           className="flex items-center space-x-8"
         >
           <img src="/logo/bund-logo.png" alt="Logo des Bundes" width={54} />
-          <p className="ds-label-01-bold ml-16 flex flex-col text-xl max-lg:hidden">
+          <p className="ds-label-01-bold ml-16 flex flex-col text-xl text-black max-lg:hidden">
             {ZFL_TITLE}
           </p>
         </Link>
@@ -60,7 +60,7 @@ const PageHeader = () => {
               to={item.url}
               className={twMerge(
                 basicLinkClasses,
-                "ds-label-01-reg relative h-full border-b-[4px] border-transparent px-16 whitespace-nowrap",
+                "ds-label-01-reg relative h-full border-b-4 border-transparent px-16 whitespace-nowrap",
                 currentPath === item.url && activeClasses,
               )}
             >
@@ -86,8 +86,8 @@ const PageHeader = () => {
           </a>
           <button
             className={twMerge(
-              "h-full border-b-4 border-transparent px-16 hover:bg-blue-100",
-              mobileMenuOpen && "border-blue-800 bg-blue-100",
+              "hover:bg-zfl-main20 h-full border-b-4 border-transparent px-16",
+              mobileMenuOpen && "border-zfl-main80 bg-zfl-main20",
             )}
             onClick={toggleMobileMenu}
             aria-label="Menü öffnen/schließen"
