@@ -13,6 +13,9 @@ export function loader({ request }: Route.LoaderArgs) {
   }
 
   const url = new URL(request.url);
+  console.log("url:", url);
+  console.log("pathname:", url.pathname);
+  console.log("replaced:", url.pathname.replace("/zfl", ""));
   if (isOnZFL(url) && url.pathname.includes("zfl")) {
     return redirect(url.pathname.replace("/zfl", ""));
   }
