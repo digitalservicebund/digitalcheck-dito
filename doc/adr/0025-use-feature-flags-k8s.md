@@ -31,4 +31,4 @@ We will use Kubernetes ConfigMaps as the mechanism for feature toggles. Each ins
 
 ## Alternatives Considered
 
-- **Using PostHog**: We considered using the PostHog feature flags service since we already use the suite for analytics. However, because we can only setup one project with the free tier, we rejected the option due to the lack of differentiation between environments (staging vs production).
+- **Using PostHog**: We considered using the PostHog feature flags service since we already use the suite for analytics. However, because we can only setup one project with our tier, we rejected the option due to the lack of differentiation between environments (staging vs production).
