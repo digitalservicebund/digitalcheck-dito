@@ -12,6 +12,8 @@ type DialogProps = {
   children: ReactNode;
   renderToggleButton?: (args: { toggleDialog: () => void }) => ReactNode;
   renderActionButtons?: (args: { closeDialog: () => void }) => ReactNode;
+  open?: boolean;
+  onToggle?: (value: boolean) => void;
 };
 
 function Dialog({
@@ -20,19 +22,28 @@ function Dialog({
   title,
   description,
   renderActionButtons,
+  open: parentControlledOpen,
+  onToggle,
 }: Readonly<DialogProps>) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [internalOpen, setInternalOpen] = useState(false);
+
+  const isControlled = parentControlledOpen !== undefined;
+  const isOpen = isControlled ? parentControlledOpen : internalOpen;
+
+  const handleToggle = (newOpenState: boolean) => {
+    onToggle?.(newOpenState);
+    if (!isControlled) {
+      setInternalOpen(newOpenState);
+    }
+  };
 
   return (
     <>
-      {renderToggleButton ? (
-        renderToggleButton({ toggleDialog: () => setIsOpen(!isOpen) })
-      ) : (
-        <button onClick={() => setIsOpen(true)}>Öffnen</button>
-      )}
+      {renderToggleButton &&
+        renderToggleButton({ toggleDialog: () => handleToggle(!isOpen) })}
       <HeadlessDialog
         open={isOpen}
-        onClose={() => setIsOpen(false)}
+        onClose={() => handleToggle(false)}
         className="relative z-50"
       >
         <div className="fixed inset-0 flex w-screen items-center justify-center bg-black/60 p-4">
@@ -41,11 +52,11 @@ function Dialog({
             {description && <Description>{description}</Description>}
             <div>{children}</div>
             {renderActionButtons ? (
-              renderActionButtons({ closeDialog: () => setIsOpen(false) })
+              renderActionButtons({ closeDialog: () => handleToggle(false) })
             ) : (
               <div className="flex gap-4">
-                <button onClick={() => setIsOpen(false)}>Cancel</button>
-                <button onClick={() => setIsOpen(false)}>Deactivate</button>
+                <button onClick={() => handleToggle(false)}>Cancel</button>
+                <button onClick={() => handleToggle(false)}>Deactivate</button>
               </div>
             )}
           </DialogPanel>

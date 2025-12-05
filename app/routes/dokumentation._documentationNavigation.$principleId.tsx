@@ -1,9 +1,6 @@
-import {
-  AddCircleOutlineOutlined,
-  RemoveCircleOutlineOutlined,
-} from "@digitalservicebund/icons";
+import { AddCircleOutlineOutlined } from "@digitalservicebund/icons";
 import { FormScope, useField, useFieldArray } from "@rvf/react";
-import { useCallback, useEffect } from "react";
+import { ChangeEventHandler, useCallback, useEffect, useState } from "react";
 import { Link, useOutletContext, useParams } from "react-router";
 import { PrincipleExplanation } from "~/components/Absatz.tsx";
 import Badge from "~/components/Badge";
@@ -60,7 +57,7 @@ type ReasoningProps = {
   reasonScope: FormScope<PrincipleReasoning["reason"]>;
   defaultValue?: "on";
   moreUrl?: string;
-  removeOwnReasoning?: () => void;
+  onUncheck: () => void;
   error?: string | null;
 };
 
@@ -75,112 +72,121 @@ function Reasoning({
   error,
   paragraphScope,
   reasonScope,
-  removeOwnReasoning,
+  onUncheck,
 }: Readonly<ReasoningProps>) {
   const aspectField = useField(aspectScope);
+  const checkboxField = useField(checkboxScope);
+
+  const [deleteDialog, setDeleteDialog] = useState<
+    { onConfirm: () => void } | undefined
+  >(undefined);
+
+  const onCheckboxChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    const checked = event.target.checked;
+
+    if (checked) {
+      checkboxField.setValue("on");
+    } else {
+      // ask for confirmation before removing
+      setDeleteDialog({
+        onConfirm: () => {
+          checkboxField.setValue(undefined);
+          onUncheck();
+        },
+      });
+    }
+  };
+
   return (
-    <CheckboxWithExpandableArea
-      scope={checkboxScope}
-      label={label}
-      renderDescription={({ open }) => {
-        let descriptionLabel = open ? detailDescription : description;
-        if (descriptionLabel && !descriptionLabel.endsWith(".")) {
-          descriptionLabel += ".";
-        }
-        return (
-          <span className="space-x-8">
-            <span>{descriptionLabel}</span>
-            {moreUrl && (
-              <Link
-                to={moreUrl}
-                target="_blank"
-                className="text-link"
-                rel="noreferrer"
-              >
-                {principlePages.moreInfoButton}
-              </Link>
-            )}
-          </span>
-        );
-      }}
-      closeable={false}
-      defaultValue={defaultValue}
-      error={error}
-      warningInsteadOfError
-    >
-      {({ closeArea }) => (
-        <>
-          <Heading tagName="h3">
-            {principlePages.explanationFields.title}
-          </Heading>
-
-          <input {...aspectField.getHiddenInputProps()} />
-
-          <Input
-            scope={paragraphScope}
-            description={
-              principlePages.explanationFields.paragraphInput.description
-            }
-            warningInsteadOfError
-          >
-            {principlePages.explanationFields.paragraphInput.label}
-          </Input>
-
-          <Textarea
-            scope={reasonScope}
-            placeholder={
-              principlePages.explanationFields.reasoningInput.placeholder
-            }
-            rows={5}
-            warningInsteadOfError
-          >
-            {principlePages.explanationFields.reasoningInput.label}
-          </Textarea>
-
-          <Dialog
-            title={principlePages.dialog.title}
-            renderToggleButton={({ toggleDialog }) => (
-              <Button
-                type="button"
-                look="link"
-                iconLeft={<RemoveCircleOutlineOutlined />}
-                className="text-ds-error fill-ds-error"
-                onClick={() => toggleDialog()}
-              >
-                {principlePages.explanationFields.deleteButton}
-              </Button>
-            )}
-            renderActionButtons={({ closeDialog }) => (
-              <div className="flex flex-row gap-12">
-                <Button
-                  type="button"
-                  onClick={() => {
-                    closeArea();
-                    closeDialog();
-
-                    if (removeOwnReasoning) removeOwnReasoning();
-                  }}
+    <>
+      <CheckboxWithExpandableArea
+        scope={checkboxScope}
+        label={label}
+        testId={`Aspekt ${label}`}
+        renderDescription={({ open }) => {
+          let descriptionLabel = open ? detailDescription : description;
+          if (descriptionLabel && !descriptionLabel.endsWith(".")) {
+            descriptionLabel += ".";
+          }
+          return (
+            <span className="space-x-8">
+              <span>{descriptionLabel}</span>
+              {moreUrl && (
+                <Link
+                  to={moreUrl}
+                  target="_blank"
+                  className="text-link"
+                  rel="noreferrer"
                 >
-                  {principlePages.dialog.deleteButton}
-                </Button>
+                  {principlePages.moreInfoButton}
+                </Link>
+              )}
+            </span>
+          );
+        }}
+        closeable={false}
+        defaultValue={defaultValue}
+        error={error}
+        warningInsteadOfError
+        checked={!!checkboxField.value()}
+        onChange={onCheckboxChange}
+      >
+        <Heading tagName="h3">{principlePages.explanationFields.title}</Heading>
 
-                <Button
-                  type="button"
-                  look="tertiary"
-                  onClick={() => {
-                    closeDialog();
-                  }}
-                >
-                  {principlePages.dialog.cancelButton}
-                </Button>
-              </div>
-            )}
-          >
-            <RichText markdown={principlePages.dialog.description} />
-          </Dialog>
-        </>
-      )}
-    </CheckboxWithExpandableArea>
+        <input {...aspectField.getHiddenInputProps()} />
+
+        <Input
+          scope={paragraphScope}
+          description={
+            principlePages.explanationFields.paragraphInput.description
+          }
+          warningInsteadOfError
+        >
+          {principlePages.explanationFields.paragraphInput.label}
+        </Input>
+
+        <Textarea
+          scope={reasonScope}
+          placeholder={
+            principlePages.explanationFields.reasoningInput.placeholder
+          }
+          rows={5}
+          warningInsteadOfError
+        >
+          {principlePages.explanationFields.reasoningInput.label}
+        </Textarea>
+      </CheckboxWithExpandableArea>
+      <Dialog
+        open={deleteDialog !== undefined}
+        onToggle={() => setDeleteDialog(undefined)}
+        title={principlePages.dialog.title}
+        renderActionButtons={({ closeDialog }) => (
+          <div className="flex flex-row gap-12">
+            <Button
+              type="button"
+              onClick={() => {
+                deleteDialog?.onConfirm();
+                closeDialog();
+              }}
+            >
+              {principlePages.dialog.deleteButton}
+            </Button>
+
+            <Button
+              type="button"
+              look="tertiary"
+              onClick={() => {
+                closeDialog();
+              }}
+            >
+              {principlePages.dialog.cancelButton}
+            </Button>
+          </div>
+        )}
+      >
+        <RichText markdown={principlePages.dialog.description} />
+      </Dialog>
+    </>
   );
 }
 
@@ -265,7 +271,7 @@ function PositiveAnswerFormElements({
               checkboxScope={item.scope("checkbox")}
               paragraphScope={item.scope("paragraphs")}
               reasonScope={item.scope("reason")}
-              removeOwnReasoning={() => remove(i, aspekt)}
+              onUncheck={() => remove(i, aspekt)}
               moreUrl={moreUrl}
               defaultValue={aspekt ? undefined : "on"}
               error={

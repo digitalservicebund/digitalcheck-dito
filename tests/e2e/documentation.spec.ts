@@ -128,39 +128,42 @@ test.describe("documentation flow happy path", () => {
   test("handle positive principle answer with aspect management", async () => {
     await page.getByLabel("Ja, gänzlich oder teilweise").check();
 
-    // Check that reasoning checkboxes are shown
-    const form = page.locator("form");
-    const checkboxes = form.getByRole("checkbox");
-    await expect(checkboxes.first()).toBeVisible();
-
     // Check first aspect and fill inputs
-    await checkboxes.first().check();
-    await expect(form.getByLabel("Paragrafen")).toBeVisible();
-    await form.getByLabel("Paragrafen").fill(testData.principle1Paragraph);
-    await form
-      .getByLabel(
-        "Begründung mit Textreferenz (empfohlen für bessere Zuordnung)",
-      )
+    const firstAspectSection = page.getByTestId(
+      "Aspekt Digitale Kommunikation",
+    );
+    await firstAspectSection.getByRole("checkbox").check();
+    await expect(firstAspectSection.getByLabel("Paragrafen")).toBeVisible();
+    await firstAspectSection
+      .getByLabel("Paragrafen")
+      .fill(testData.principle1Paragraph);
+
+    await firstAspectSection
+      .getByLabel("Begründung")
       .fill(testData.principle1Reason);
 
     // Delete the reasoning
+    // use .click — calling .uncheck would expect the checked state to change immediately
+    await firstAspectSection.getByRole("checkbox").click();
     await page
-      .getByRole("button", { name: "Erläuterung löschen" })
-      .first()
+      .getByRole("dialog")
+      .getByRole("button", { name: "Löschen" })
       .click();
-    await page.getByRole("button", { name: "Löschen" }).click(); // confirm deletion in dialog
 
     // Validate checkbox is unchecked and inputs are hidden
-    await expect(checkboxes.first()).not.toBeChecked();
+    await expect(firstAspectSection.getByRole("checkbox")).not.toBeChecked();
+    await expect(firstAspectSection.getByLabel("Paragrafen")).toBeHidden();
 
     // Check second aspect
-    await checkboxes.nth(1).check();
-    await expect(form.getByLabel("Paragrafen")).toBeVisible();
-    await form.getByLabel("Paragrafen").fill(testData.principle2Paragraph);
-    await form
-      .getByLabel(
-        "Begründung mit Textreferenz (empfohlen für bessere Zuordnung)",
-      )
+    const secondAspectSection = page.getByTestId("Aspekt Technologieoffenheit");
+
+    await secondAspectSection.getByRole("checkbox").check();
+    await expect(secondAspectSection.getByLabel("Paragrafen")).toBeVisible();
+    await secondAspectSection
+      .getByLabel("Paragrafen")
+      .fill(testData.principle2Paragraph);
+    await secondAspectSection
+      .getByLabel("Begründung")
       .fill(testData.principle2Reason);
 
     // Add custom aspect
@@ -168,13 +171,16 @@ test.describe("documentation flow happy path", () => {
       .getByRole("button", { name: "Eigene Erklärung hinzufügen" })
       .click();
 
-    // Fill custom aspect inputs - need to target the last occurrence
-    const paragraphInputs = form.getByLabel("Paragrafen");
-    const reasonInputs = form.getByLabel(
-      "Begründung mit Textreferenz (empfohlen für bessere Zuordnung)",
-    );
-    await paragraphInputs.last().fill(testData.customParagraph);
-    await reasonInputs.last().fill(testData.customReason);
+    // Fill custom aspect inputs
+    const customAspectSection = page.getByTestId("Aspekt Eigener Punkt");
+    await customAspectSection
+      .getByLabel("Paragrafen")
+      .fill(testData.customParagraph);
+    await customAspectSection
+      .getByLabel(
+        "Begründung mit Textreferenz (empfohlen für bessere Zuordnung)",
+      )
+      .fill(testData.customReason);
   });
 
   // eslint-disable-next-line playwright/expect-expect

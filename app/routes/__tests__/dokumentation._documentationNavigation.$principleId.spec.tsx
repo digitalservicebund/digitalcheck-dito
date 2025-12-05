@@ -440,12 +440,6 @@ describe("DocumentationPrinciple", () => {
                 "Begründung mit Textreferenz (empfohlen für bessere Zuordnung)",
               ),
             ).toBeInTheDocument();
-
-            expect(
-              within(a1Element).getByRole("button", {
-                name: "Erläuterung löschen",
-              }),
-            ).toBeInTheDocument();
           });
 
           it("allows to add an own explanation", async () => {
@@ -470,12 +464,34 @@ describe("DocumentationPrinciple", () => {
                 "Begründung mit Textreferenz (empfohlen für bessere Zuordnung)",
               ),
             ).toBeInTheDocument();
+          });
 
-            expect(
-              within(ownElement).getByRole("button", {
-                name: "Erläuterung löschen",
-              }),
-            ).toBeInTheDocument();
+          it("asks for confirmation when removing an explanation", async () => {
+            const a1Checkbox = getAspektCheckbox();
+            expect(a1Checkbox).not.toBeChecked();
+
+            await user.click(a1Checkbox);
+            expect(a1Checkbox).toBeChecked();
+
+            await user.click(a1Checkbox);
+            expect(a1Checkbox).toBeChecked(); // still checked
+
+            const dialog = screen.getByRole("dialog");
+            const dismissButton = within(dialog).getByRole("button", {
+              name: "Abbrechen",
+            });
+
+            await user.click(dismissButton);
+            expect(a1Checkbox).toBeChecked(); // still checked
+
+            await user.click(a1Checkbox);
+            const newDialog = screen.getByRole("dialog");
+            const confirmButton = within(newDialog).getByRole("button", {
+              name: "Löschen bestätigen",
+            });
+
+            await user.click(confirmButton);
+            expect(a1Checkbox).not.toBeChecked();
           });
         });
       },

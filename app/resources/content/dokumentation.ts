@@ -280,7 +280,6 @@ export const digitalDocumentation = {
         placeholder:
           "Begründung und/oder Ausschnitt aus Ihrer Regelung als Kopie (Paragraf)",
       },
-      deleteButton: "Erläuterung löschen",
     },
     dialog: {
       deleteButton: "Löschen bestätigen",

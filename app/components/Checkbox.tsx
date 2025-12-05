@@ -1,5 +1,10 @@
 import { FormScope, useField } from "@rvf/react";
-import { ComponentPropsWithRef, ReactNode, useId } from "react";
+import {
+  ChangeEventHandler,
+  ComponentPropsWithRef,
+  ReactNode,
+  useId,
+} from "react";
 import { twJoin } from "tailwind-merge";
 import InputError from "./InputError";
 
@@ -8,14 +13,21 @@ type BaseInputProps = Omit<
   "type" | "defaultValue"
 >;
 
-interface CheckboxProps extends BaseInputProps {
+export interface CheckboxProps extends BaseInputProps {
   scope: FormScope<"on" | true | undefined>;
   size?: number;
   description?: ReactNode;
   error?: string | null;
-  includeDisabledInForm?: boolean;
   defaultValue?: "on";
   warningInsteadOfError?: boolean;
+  /**
+   * Use this prop to make the component controlled.
+   */
+  checked?: boolean;
+  /**
+   * Change handler that overrides the RVF handler, to enable custom behavior.
+   */
+  onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
 function Checkbox({
@@ -23,45 +35,44 @@ function Checkbox({
   scope,
   description,
   error,
-  includeDisabledInForm,
   disabled,
   warningInsteadOfError,
+  checked,
+  onChange,
   ...rest
 }: Readonly<CheckboxProps>) {
   const field = useField(scope);
   const inputId = useId();
   const errorId = useId();
-  const specialDisabledInput = disabled && includeDisabledInForm;
   const hasError = !!(error || field.error()) && !warningInsteadOfError;
   const hasWarning = !!(error || field.error()) && warningInsteadOfError;
+
+  const inputProps = field.getInputProps({
+    type: "checkbox",
+    id: inputId,
+    "aria-describedby": errorId,
+    "aria-invalid": hasError || hasWarning,
+    className: twJoin(
+      "ds-checkbox self-start bg-white",
+      hasError && "has-error",
+      hasWarning && "has-warning",
+    ),
+    ...rest,
+  });
+
+  if (onChange) {
+    // override the RVF handler if another one is provided explicitly
+    inputProps.onChange = onChange;
+  }
+  if (checked) {
+    // prevent warning about conflicting values
+    delete inputProps.defaultChecked;
+  }
 
   return (
     <div className="max-w-a11y space-y-8">
       <div className="flex flex-row items-center gap-16">
-        <input
-          {...field.getInputProps({
-            type: "checkbox",
-            id: inputId,
-            "aria-describedby": errorId,
-            "aria-invalid": hasError || hasWarning,
-            className: twJoin(
-              "ds-checkbox self-start bg-white",
-              specialDisabledInput && "hidden",
-              hasError && "has-error",
-              hasWarning && "has-warning",
-            ),
-            ...rest,
-          })}
-        />
-        {specialDisabledInput && (
-          <input
-            type="checkbox"
-            className="ds-checkbox self-start"
-            value={field.value() ? "on" : undefined}
-            checked={!!field.value()}
-            disabled
-          />
-        )}
+        <input checked={checked} {...inputProps} />
         <div className="space-y-8">
           <label
             htmlFor={inputId}
