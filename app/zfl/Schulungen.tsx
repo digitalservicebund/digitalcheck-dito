@@ -54,11 +54,11 @@ export default function ZFLTrainings() {
             ]}
           />
           <Training
-            title="Praxisnahe und bürokratiearme Regelungen erarbeiten (4 Tage)"
+            title="Basisschulung "Praxisnahe und bürokratiearme Regelungen erarbeiten" (4 Tage)"
             description="Inhalte: Umsetzungsperspektive verstehen, Visualisierungen erstellen, Entscheidungsbäume ausarbeiten, Rechtsförmlichkeit und verständliche Sprache sicherstellen"
             instances={[
               {
-                date: "MO 08.12.25 - DO 11.12.25",
+                date: "MO 15.12.25 - DO 18.12.25",
                 time: "09:00 - 16:00 Uhr",
                 location: "Berlin (in Präsenz)",
               },
