@@ -54,7 +54,7 @@ export default function ZFLTrainings() {
             ]}
           />
           <Training
-            title="Basisschulung \"Praxisnahe und bürokratiearme Regelungen erarbeiten\" (4 Tage)"
+            title=`Basisschulung "Praxisnahe und bürokratiearme Regelungen erarbeiten" (4 Tage)`
             description="Inhalte: Umsetzungsperspektive verstehen, Visualisierungen erstellen, Entscheidungsbäume ausarbeiten, Rechtsförmlichkeit und verständliche Sprache sicherstellen"
             instances={[
               {
