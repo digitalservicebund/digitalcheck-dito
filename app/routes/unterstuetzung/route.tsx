@@ -10,7 +10,7 @@ import Image from "~/components/Image";
 import InfoBox from "~/components/InfoBox";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
-import TabGroup from "~/components/Tabs.tsx";
+import TabGroup from "~/components/Tabs/Tabs";
 import { support } from "~/resources/content/unterstuetzung";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
 import { ContentLink } from "~/utils/contentTypes";

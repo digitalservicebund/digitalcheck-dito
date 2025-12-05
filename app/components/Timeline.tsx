@@ -6,7 +6,7 @@ import type { ImageProps } from "~/components/Image.tsx";
 import ImageZoomable from "~/components/ImageZoomable.tsx";
 import RichText from "~/components/RichText.tsx";
 
-import React from "react";
+import React, { ReactNode } from "react";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import { ContentLink } from "~/utils/contentTypes";
 import twMerge from "~/utils/tailwindMerge";
@@ -41,6 +41,7 @@ export type TimelineItemContentProps = {
   headline?: HeadingProps;
   parentHasHeading?: boolean;
   content?: string;
+  children?: ReactNode;
   image?: ImageProps;
   links?: ContentLink[];
 };
@@ -53,6 +54,7 @@ export function TimelineItemContent({
   headline,
   image,
   parentHasHeading,
+  children,
 }: Readonly<TimelineItemContentProps>) {
   return (
     <div className={twJoin("flex flex-col gap-16", backgroundClasses)}>
@@ -61,6 +63,7 @@ export function TimelineItemContent({
         <Heading tagName={parentHasHeading ? "h3" : "h2"} {...headline} />
       )}
       {content && <RichText markdown={content} />}
+      {children}
       {image && <ImageZoomable image={image} className="max-w-a11y" />}
       {links && links.length > 0 && (
         <ButtonContainer>

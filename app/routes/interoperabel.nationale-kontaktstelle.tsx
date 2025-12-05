@@ -8,7 +8,7 @@ import Hero from "~/components/Hero";
 import ImageZoomable from "~/components/ImageZoomable";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
-import TabGroup from "~/components/Tabs.tsx";
+import TabGroup from "~/components/Tabs/Tabs";
 import Timeline from "~/components/Timeline";
 import { spoc } from "~/resources/content/interoperabel-nationale-kontaktstelle";
 import { ROUTE_INTEROPERABILITY_SPOC } from "~/resources/staticRoutes";

@@ -14,7 +14,7 @@ import MetaTitle from "~/components/Meta";
 import ParagraphList from "~/components/ParagraphList";
 import RegulationMetadata from "~/components/RegulationMetadata";
 import Separator from "~/components/Separator";
-import TabGroup from "~/components/Tabs.tsx";
+import TabGroup from "~/components/Tabs/Tabs";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import {
   ROUTE_EXAMPLES_PRINCIPLES,

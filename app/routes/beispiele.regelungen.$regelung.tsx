@@ -10,7 +10,7 @@ import NewTabLink from "~/components/NewTabLink.tsx";
 import ParagraphList from "~/components/ParagraphList";
 import RegulationMetadata from "~/components/RegulationMetadata";
 import RichText from "~/components/RichText.tsx";
-import TabGroup from "~/components/Tabs.tsx";
+import TabGroup from "~/components/Tabs/Tabs";
 import VisualisationItem from "~/components/VisualisationItem";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";

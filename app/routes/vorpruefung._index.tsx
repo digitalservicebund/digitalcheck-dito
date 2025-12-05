@@ -10,7 +10,7 @@ import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText.tsx";
 import SupportBanner from "~/components/SupportBanner";
-import TabGroup from "~/components/Tabs.tsx";
+import TabGroup from "~/components/Tabs/Tabs";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { ROUTE_PRECHECK } from "~/resources/staticRoutes";

@@ -3,7 +3,7 @@ import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox.tsx";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText.tsx";
-import TabGroup from "~/components/Tabs.tsx";
+import TabGroup from "~/components/Tabs/Tabs";
 import { examples } from "~/resources/content/beispiele";
 import { ROUTE_EXAMPLES } from "~/resources/staticRoutes";
 

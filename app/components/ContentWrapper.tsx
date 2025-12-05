@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import Tabs from "~/components/Tabs.tsx";
+import Tabs from "~/components/Tabs/Tabs";
 import twMerge from "~/utils/tailwindMerge.ts";
 
 /**

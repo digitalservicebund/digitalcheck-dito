@@ -14,15 +14,13 @@ import {
   TabPanel,
   TabPanels,
 } from "@headlessui/react";
-import React, { createContext, useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { twJoin } from "tailwind-merge";
+import { TabsState, TabsStateContext } from "./TabsStateContext";
 
 export type TabListWithListboxProps = {
   children: React.ReactNode;
 };
-
-type TabsState = Pick<HeadlessTabGroupProps, "selectedIndex" | "onChange">;
-const TabsStateContext = createContext<TabsState | null>(null);
 
 export type TabGroupProps = Omit<HeadlessTabGroupProps, "selectedIndex"> & {
   initialActiveIndex?: number;
