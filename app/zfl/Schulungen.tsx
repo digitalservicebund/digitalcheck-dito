@@ -42,13 +42,13 @@ export default function ZFLTrainings() {
             description="Inhalte: Digitalcheck erfolgreich bearbeiten, digitaltaugliche Formulierungen, Anwenden der Prinzipien für Digitaltauglichkeit, EU-Interoperabilität"
             instances={[
               {
-                date: "DI 25.11.25",
-                time: "10:00 - 11:30 Uhr",
+                date: "MO 12.01.26",
+                time: "11:00 - 12:00 Uhr",
                 location: "Online",
               },
               {
-                date: "DO 27.11.25",
-                time: "13:00 - 14:30 Uhr",
+                date: "MI 21.01.26",
+                time: "15:00 - 16:00 Uhr",
                 location: "Online",
               },
             ]}
