@@ -39,7 +39,6 @@ export const fundamentalsNKR = {
     ],
   },
   NKRConsiderations: {
-    title: "Der NKR **betrachtet unter anderem** in diesem Kontext:",
     items: [
       dedent`
         Ergebnis der [Vorprüfung](${ROUTE_PRECHECK.url}) als E-Mail

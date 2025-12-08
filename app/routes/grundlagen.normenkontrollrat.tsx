@@ -36,7 +36,7 @@ export default function FundamentalsMethods() {
 
         <section className="space-y-40">
           <h3 className="ds-body-01-reg">
-            <RichText markdown={fundamentalsNKR.NKRConsiderations.title} />
+            Der NKR <strong>betrachtet unter anderem</strong> in diesem Kontext:
           </h3>
 
           <FeatureList>
