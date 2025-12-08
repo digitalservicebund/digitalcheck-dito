@@ -6,6 +6,7 @@ import {
   ROUTE_SUPPORT,
   ROUTES,
 } from "~/resources/staticRoutes";
+import { checkHeadingsForFlowContent } from "./utils.ts";
 
 test.describe("basic example a11y test", () => {
   ROUTES.filter(
@@ -25,6 +26,8 @@ test.describe("basic example a11y test", () => {
 
       const accessibilityResults = await new AxeBuilder({ page }).analyze();
       expect(accessibilityResults.violations).toEqual([]);
+
+      await checkHeadingsForFlowContent(page);
     });
   });
 
@@ -33,6 +36,7 @@ test.describe("basic example a11y test", () => {
 
     const principleScanResults = await new AxeBuilder({ page }).analyze();
     expect(principleScanResults.violations).toEqual([]);
+    await checkHeadingsForFlowContent(page);
 
     // get URL of first regelung from page
     const regelungUrl = await page.getAttribute(
@@ -46,6 +50,7 @@ test.describe("basic example a11y test", () => {
 
       const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
       expect(accessibilityScanResults.violations).toEqual([]);
+      await checkHeadingsForFlowContent(page);
     }
   });
 });
