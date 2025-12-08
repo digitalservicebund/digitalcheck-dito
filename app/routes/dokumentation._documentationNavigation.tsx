@@ -26,7 +26,7 @@ export type NavigationContext = {
 };
 
 function findIndexForRoute(routes: Route[], currentUrl: string) {
-  const index = routes.findIndex((route) => route.url === currentUrl);
+  const index = routes.findIndex((route) => currentUrl.startsWith(route.url));
 
   if (index === -1) {
     throw new Error(`Could not find route with url ${currentUrl}`);

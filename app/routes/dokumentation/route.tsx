@@ -21,7 +21,10 @@ export type DocumentationRouteData = {
   prinzips: PrinzipWithAspekte[];
 };
 
-const getUrlForSlug = (slug: string) => `${ROUTE_DOCUMENTATION.url}/${slug}`;
+const getUrlForSlug = (slug: string) =>
+  slug === "datenwiederverwendung-benoetigt-einheitliches-recht"
+    ? `${ROUTE_DOCUMENTATION.url}/neu/${slug}`
+    : `${ROUTE_DOCUMENTATION.url}/${slug}`;
 
 export const loader: () => Promise<DocumentationRouteData> = async () => {
   const prinzipData = await fetchStrapiData<{
