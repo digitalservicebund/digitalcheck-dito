@@ -1,11 +1,9 @@
 import type { ReactNode } from "react";
-import RichText from "~/components/RichText";
 import twMerge from "~/utils/tailwindMerge";
 
 export type HeadingProps = {
   tagName?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "div";
   text?: string | ReactNode;
-  markdown?: string;
   className?: string;
   look?: string;
   id?: string;
@@ -16,7 +14,6 @@ export type HeadingProps = {
 function Heading({
   tagName = "h1",
   text,
-  markdown,
   className,
   look,
   id,
@@ -40,18 +37,7 @@ function Heading({
       </Tag>
     );
   }
-  if (markdown) {
-    return (
-      <Tag
-        id={id}
-        className={cssClasses}
-        aria-label={ariaLabel}
-        {...additionalProps}
-      >
-        <RichText markdown={markdown} />
-      </Tag>
-    );
-  }
+
   return (
     <Tag
       id={id}
