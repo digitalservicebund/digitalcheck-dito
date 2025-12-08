@@ -3,6 +3,7 @@
 ## Status
 
 - 2025‑08‑19: Accepted
+- 2025-12-08: Amended: use exported components, e.g., `Tab` instead of `Tabs.Tab`
 
 ## Context
 
@@ -83,9 +84,9 @@ Examples: `icon`, `badge`, `button`. These props accept **JSX elements**, not co
     detailsSummary={
       <DetailsSummary>
         {principle.detailsSummary.map((detail) => (
-          <DetailsSummary.Detail title={detail.title}>
+          <Detail title={detail.title}>
             {detail.content}
-          </DetailsSummary.Detail>
+          </Detail>
         ))}
       </DetailsSummary>
     }
@@ -125,7 +126,7 @@ Pass simple values (text, ids, numbers, booleans). Avoid passing object props th
 
 ### 4. Use Compound Containers when children share state
 
-For repeatable items with coordinated state (tabs, accordions, menus), use a container with typed child components.
+For repeatable items with coordinated state (tabs, accordions, menus), use a container with corresponding child components.
 
 ```tsx
 // Before (nested data config)
@@ -138,12 +139,12 @@ For repeatable items with coordinated state (tabs, accordions, menus), use a con
 
 // After (compound container + children)
 <Tabs>
-  <Tabs.Tab title="Tab1" plausibleEventName="tab.tab1">
+  <Tab title="Tab1" plausibleEventName="tab.tab1">
     <Content />
-  </Tabs.Tab>
-  <Tabs.Tab title="Tab2" plausibleEventName="tab.tab2">
+  </Tab>
+  <Tab title="Tab2" plausibleEventName="tab.tab2">
     <Content />
-  </Tabs.Tab>
+  </Tab>
 </Tabs>
 ```
 
@@ -154,17 +155,17 @@ We intentionally avoid an alternative design that forces every subpart to be add
 ```tsx
 // ❌ Avoid: using typed child components for all children
 <InfoBoxList separator>
-  <InfoBoxList.Heading>{documentation.summary.title}</InfoBoxList.Heading>
-  <InfoBoxList.Item>
+  <InfoBoxListHeading>{documentation.summary.title}</InfoBoxListHeading>
+  <InfoBoxListItem>
     <InfoBox>
-      <InfoBox.Badge {...badge} />
-      <InfoBox.Heading {...heading} />
-      <InfoBox.Content markdown={content} />
-      <InfoBox.DetailsSummary {...detailsSummary} />
-      <InfoBox.LinkList {...linkList} />
-      <InfoBox.Buttons buttons={buttons} />
+      <InfoBoxBadge {...badge} />
+      <InfoBoxHeading {...heading} />
+      <InfoBoxContent markdown={content} />
+      <InfoBoxDetailsSummary {...detailsSummary} />
+      <InfoBoxLinkList {...linkList} />
+      <InfoBoxButtons buttons={buttons} />
     </InfoBox>
-  </InfoBoxList.Item>
+  </InfoBoxListItem>
 </InfoBoxList>
 ```
 
@@ -183,7 +184,7 @@ We intentionally avoid an alternative design that forces every subpart to be add
 
 1. **New components** must follow this ADR.
 2. **Existing components** will be migrated when touched or when we find time in a sprint.
-3. **Resource/content files** will be flattened according to the boyscout rule (i.e. when touched).
+3. **Resource/content files** will be flattened according to the boyscout rule (i.e., when touched).
 
 ## Implementation Notes (typing & API shape)
 
