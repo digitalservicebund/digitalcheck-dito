@@ -28,10 +28,7 @@ const RichText = ({
         // Force external links to open in a new window
         if (isExternalUrl(href)) {
           return linkHtml
-            .replace(
-              /^<a /,
-              '<a target="_blank" class="group inline-flex items-center"',
-            )
+            .replace(/^<a /, '<a target="_blank" class="group"')
             .replace(
               `>${token.text}<`,
               `>${token.text}${openInNewIconString}<`,

@@ -16,7 +16,7 @@ export default function NewTabLink({
     <Link
       {...props}
       target="_blank"
-      className={twMerge("flex items-center", className)}
+      className={twMerge("text-link", className)}
     >
       {children}
       <OpenInNewIcon />

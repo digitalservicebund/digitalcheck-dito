@@ -23,10 +23,7 @@ export default function RegulationMetadata({
         <Metadata.Item
           label={examplesRegelungen.infoLabels.linkLabel}
           value={
-            <NewTabLink
-              to={exampleProject.LinkRegelungstext}
-              className="text-blue-800 underline"
-            >
+            <NewTabLink to={exampleProject.LinkRegelungstext}>
               {exampleProject.GesetzStatus
                 ? gesetzStatusMap[exampleProject.GesetzStatus]
                 : examplesRegelungen.infoLabels.fallbackLinkText}

@@ -101,10 +101,7 @@ export default function Interoperability() {
                     auszutauschen und funktionierende, grenzüberschreitende
                     Verwaltungsleistungen anzubieten. Abschließend dokumentieren
                     Sie in einem Fragebogen auf dem{" "}
-                    <NewTabLink
-                      className="text-link"
-                      to="https://interoperable-europe.ec.europa.eu/collection/assessments/submission"
-                    >
+                    <NewTabLink to="https://interoperable-europe.ec.europa.eu/collection/assessments/submission">
                       interoperable Europe-Portal
                     </NewTabLink>
                     , wie sich die Regelungsinhalte sich auf die
@@ -201,10 +198,7 @@ export default function Interoperability() {
                 </Heading>
                 <p>
                   Die{" "}
-                  <NewTabLink
-                    className="text-link"
-                    to="https://interoperable-europe.ec.europa.eu/collection/assessments/submission"
-                  >
+                  <NewTabLink to="https://interoperable-europe.ec.europa.eu/collection/assessments/submission">
                     Interoperabilitäts-Bewertung
                   </NewTabLink>{" "}
                   ist wie auch die Digitalcheck-Dokumentation ein formeller,
@@ -287,10 +281,7 @@ export default function Interoperability() {
                   </Heading>
                   <p>
                     Das Ziel der{" "}
-                    <NewTabLink
-                      className="text-link"
-                      to="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903"
-                    >
+                    <NewTabLink to="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903">
                       Verordnung für ein interoperables Europa (EU 2024/903)
                     </NewTabLink>{" "}
                     ist es, digitale öffentliche Dienste zu verbessern. Die
@@ -316,19 +307,13 @@ export default function Interoperability() {
                       <p>Quellen:</p>
                       <ul>
                         <li>
-                          <NewTabLink
-                            className="text-link"
-                            to="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903"
-                          >
+                          <NewTabLink to="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903">
                             EUR Lex - Verordnung für ein interoperables Europa
                             (EU 2024/903)
                           </NewTabLink>
                         </li>
                         <li>
-                          <NewTabLink
-                            className="text-link"
-                            to="https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs"
-                          >
+                          <NewTabLink to="https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs">
                             Interoperable Europe Portal - FAQs
                           </NewTabLink>
                         </li>
@@ -385,10 +370,7 @@ export default function Interoperability() {
                   </Heading>
                   <p>
                     Die{" "}
-                    <NewTabLink
-                      className="text-link"
-                      to="https://interoperable-europe.ec.europa.eu/collection/assessments/submission"
-                    >
+                    <NewTabLink to="https://interoperable-europe.ec.europa.eu/collection/assessments/submission">
                       Interoperabilitäts-Bewertung
                     </NewTabLink>{" "}
                     ist wie auch die Digitalcheck-Dokumentation ein formeller,
@@ -425,10 +407,7 @@ export default function Interoperability() {
                   <p>
                     Die Interoperabilitäts-Bewertung ist schließlich ein
                     Online-Formular auf{" "}
-                    <NewTabLink
-                      className="text-link"
-                      to="https://interoperable-europe.ec.europa.eu/"
-                    >
+                    <NewTabLink to="https://interoperable-europe.ec.europa.eu/">
                       interoperable Europe-Portal
                     </NewTabLink>{" "}
                     in dem Sie darzulegen, wie sich Ihre Regelung auf die
@@ -516,19 +495,13 @@ export default function Interoperability() {
                   <p>Weitere Quellen:</p>
                   <ul>
                     <li>
-                      <NewTabLink
-                        className="text-link"
-                        to="https://ec.europa.eu/isa2/eif_en/"
-                      >
+                      <NewTabLink to="https://ec.europa.eu/isa2/eif_en/">
                         European Commission - European Interoperability
                         Framework
                       </NewTabLink>
                     </li>
                     <li>
-                      <NewTabLink
-                        className="text-link"
-                        to="https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs"
-                      >
+                      <NewTabLink to="https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs">
                         Interoperable Europe Portal - FAQs
                       </NewTabLink>
                     </li>
@@ -576,10 +549,7 @@ export default function Interoperability() {
                         Standard, eine Richtlinie, ein Verbot oder eine
                         Beschränkung sein. Eine exakte Definition finden Sie in
                         der{" "}
-                        <NewTabLink
-                          className="text-link"
-                          to="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903"
-                        >
+                        <NewTabLink to="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903">
                           Verordnung in der Präambel, Erwägungsgrund 18
                         </NewTabLink>
                         .
@@ -594,19 +564,13 @@ export default function Interoperability() {
                       <p>Weitere Quellen:</p>
                       <ul>
                         <li>
-                          <NewTabLink
-                            className="text-link"
-                            to="https://ec.europa.eu/isa2/eif_en/"
-                          >
+                          <NewTabLink to="https://ec.europa.eu/isa2/eif_en/">
                             European Commission - European Interoperability
                             Framework
                           </NewTabLink>
                         </li>
                         <li>
-                          <NewTabLink
-                            className="text-link"
-                            to="https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs"
-                          >
+                          <NewTabLink to="https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs">
                             Interoperable Europe Portal - FAQs
                           </NewTabLink>
                         </li>
@@ -628,10 +592,7 @@ export default function Interoperability() {
                   </Heading>
                   <p>
                     Der{" "}
-                    <NewTabLink
-                      className="text-link"
-                      to="https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail"
-                    >
+                    <NewTabLink to="https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail">
                       Europäische Interoperabilitäts-Rahmen (EIF)
                     </NewTabLink>{" "}
                     definiert vier Ebenen der Interoperabilität, die bei der

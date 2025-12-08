@@ -45,11 +45,7 @@ export function RecursiveRenderer({
 
         if (externalUrl)
           return (
-            <NewTabLink
-              key={index}
-              to={node.url}
-              className="text-link inline-flex"
-            >
+            <NewTabLink key={index} to={node.url}>
               <RecursiveRenderer content={node.children} />
             </NewTabLink>
           );

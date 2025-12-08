@@ -70,7 +70,6 @@ export function PrincipleExample({ prinzip }: Readonly<PrincipleExampleProps>) {
         Regelung:&nbsp;
         <NewTabLink
           to={`${ROUTE_REGELUNGEN.url}/${beispielvorhaben.URLBezeichnung ?? ""}`}
-          className="text-link inline-flex"
         >
           {beispielvorhaben.Titel}
         </NewTabLink>

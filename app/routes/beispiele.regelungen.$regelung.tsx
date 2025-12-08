@@ -186,10 +186,7 @@ export default function Gesetz() {
           {regelung.NKRStellungnahmeLink && (
             <div>
               {examplesRegelungen.nkr.linkText}
-              <NewTabLink
-                to={regelung.NKRStellungnahmeLink}
-                className="text-link"
-              >
+              <NewTabLink to={regelung.NKRStellungnahmeLink}>
                 NKR-Stellungnahme
               </NewTabLink>
             </div>
