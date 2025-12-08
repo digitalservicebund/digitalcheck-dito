@@ -1,48 +1,65 @@
+/* eslint-disable no-irregular-whitespace */
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Hero from "~/components/Hero";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
-import {
-  ROUTE_A11Y,
-  ROUTE_IMPRINT,
-  ROUTE_PRIVACY,
-} from "~/resources/staticRoutes";
-import { dedent } from "~/utils/dedentMultilineStrings.ts";
+import { ROUTE_IMPRINT } from "~/resources/staticRoutes";
 
-const content = dedent`
-    ## Das Internetangebot wird herausgegeben vom
-    
-    Bundesministerium für Digitales und Staatsmodernisierung (BMDS)<br />
-    Alt-Moabit 140<br />
-    10557 Berlin<br />
-    E-Mail: info@bmds.bund.de
-    
-    ## Weitere Kontaktmöglichkeiten
-    
-    **Redaktionsleitung**
-    
-    Abteilung SB (Staatsmodernisierung und Bürokratierückbau)<br />
-    Referat SB II 3 (Methoden und Instrumente der besseren Rechtsetzung)
+const content = `
+Diese Webseite ist ein Angebot des <br />
+Bundesministeriums für Digitales und Staatsmodernisierung (BMDS)
 
-    E-Mail: SBII3@bmds.bund.de
-    
-    ## Realisierung, Design, Hosting
-    
-    DigitalService GmbH des Bundes<br />
-    Frau Christina Rieke Lang<br />
-    Frau Anja Theurer<br />
-    Prinzessinnenstraße 8-14<br />
-    10969 Berlin<br />
-    E-Mail: [hallo@digitalservice.bund.de](mailto:hallo@digitalservice.bund.de)
-    
-    ## Datenschutz
-    
-    Erfahren Sie mehr hierzu in der [Datenschutzerklärung](${ROUTE_PRIVACY.url})
-    
-    ## Barrierefreiheit
-    
-    Erfahren Sie mehr hierzu in der [Barrierefreiheitserklärung](${ROUTE_A11Y.url})
-  `;
+**Postanschrift**<br />
+Alt-Moabit 140<br />
+10557 Berlin<br />
+
+**Hausanschrift**<br />
+Englische Straße 30<br />
+10587 Berlin
+
+E-Mail: info@bmds.bund.de<br />
+Hinweis: Für Anfragen nutzen Sie bitte unser [Kontaktformular](https://bmds.bund.de/service/buergerkommunikation).
+
+**Verantwortung für das Medienangebot auf dieser Webseite**
+
+Abteilung SB (Staatsmodernisierung und Bürokratierückbau)<br />
+Referat SB II 3 (Methoden und Instrumente der besseren Rechtsetzung)
+
+E-Mail: SBII3@bmds.bund.de
+
+## Realisierung und Hosting
+
+DigitalService GmbH des Bundes<br />
+Frau Christina Rieke Lang<br />
+Frau Anja Theurer<br />
+Prinzessinnenstraße 8-14<br />
+10969 Berlin<br />
+E-Mail: [hallo@digitalservice.bund.de](mailto:hallo@digitalservice.bund.de)
+
+Fragen zu technischen Auffälligkeiten, inhaltlicher Unterstützung, Problemen oder zum Betrieb dieser Webseite können an digitalcheck@digitalservice.bund.de gerichtet werden.
+
+## Copyright für Bilder
+
+Soweit nicht anders gekennzeichnet liegt das Copyright für Bilder auf dieser Webseite beim BMDS. Mit „BMDS“ ausgezeichnete Bilder können grundsätzlich kostenfrei heruntergeladen und im Rahmen der Berichterstattung für folgende Zwecke genutzt werden: Presseveröffentlichungen, Veröffentlichungen in Printmedien, Veröffentlichungen durch Film und Fernsehen, Online- und multimediale Veröffentlichungen. Bei Verwendung des digitalen Bildes ist die Quelle „BMDS“ anzugeben. Dies gilt auch für elektronische Publikationen (z. B. Webseiten). Von jeder Veröffentlichung im Druck ist dem BMDS ein Belegexemplar unaufgefordert und kostenfrei zuzusenden.
+
+Eine darüber hinausgehende Nutzung für kommerzielle Zwecke, insbesondere für Werbezwecke, ist nicht zulässig. Bilder mit einem anderen Quellennachweis als „BMDS“ sind für eine Nutzung durch Dritte nicht freigegeben.
+
+Jegliche Bearbeitung, Umgestaltung oder Manipulation der digitalen Bilder, die über Farbkorrekturen, Ausschnitte und Verkleinerungen hinausgehen, ist unzulässig und nur mit vorheriger Zustimmung des BMDS erlaubt. Ebenso darf das digitale Bild nicht in einem sinnentstellten Zusammenhang wiedergegeben werden.
+ 
+Die Zustimmung zur Nutzung des Bildmaterials umfasst nicht die Zusicherung, dass die abgebildeten Personen, die Inhaber der Rechte an abgebildeten Werken oder die Inhaber von Marken- und sonstigen Schutzrechten die Einwilligung zu einer öffentlichen Wiedergabe erteilt haben. Die Einholung der im Einzelfall notwendigen Einwilligungen Dritter obliegt dem Nutzer. Er hat die Persönlichkeits-, Urheber-, Marken- und sonstigen Schutzrechte von abgebildeten Personen, Werken, Gegenständen oder Zeichen selbst zu beachten. Bei Missachtung solcher Rechte ist allein der Nutzer etwaigen Dritten gegenüber schadenersatzpflichtig.
+
+## Copyright für Texte und Grafiken
+
+Die auf dieser Webseite veröffentlichten Texte und Grafiken unterliegen – soweit nicht anders gekennzeichnet – dem Urheberrecht des BMDS. Gleichzeitig ist das BMDS daran interessiert, dass die auf dieser Webseite veröffentlichten Informationen weiterverbreitet und so einer möglichst breiten Öffentlichkeit bekannt gemacht werden. Soweit nicht anders gekennzeichnet, stehen die Texte und Grafiken auf dieser Webseite daher unter einer [Creative Commons Namensnennung - Keine Bearbeitungen 4.0 Lizenz](https://creativecommons.org/licenses/by-nd/4.0/deed.de). Danach dürfen Sie auch urheberrechtlich geschützte Texte und Grafiken auf dieser Webseite, soweit sie nicht dem Urheberrecht Dritter unterliegen, grundsätzlich zum privaten oder sonstigen Gebrauch verwenden und weiterverbreiten. Bei der Weiterverbreitung müssen Sie jedoch sichtbare Angaben zur Quelle und zum Urheberrecht des BMDS machen. Wenn Sie Inhalte dieser Webseite hingegen verändern, dürfen Sie diese nicht ohne Zustimmung des BMDS weiterverbreiten (vgl. hierzu im Einzelnen die o. g. Lizenz).
+
+## Rechtliche Hinweise
+
+Die Inhalte dieser Webseite werden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität sowie für externe Links wird keine Haftung übernommen.
+
+Soweit die auf dieser Webseite eingestellten Inhalte Rechtsvorschriften, amtliche Hinweise, Empfehlungen oder Auskünfte enthalten, sind sie nach bestem Wissen und unter Beachtung größtmöglicher Sorgfalt erstellt. Bei Unstimmigkeiten gilt jedoch ausschließlich die aktuelle amtliche Fassung, wie sie im dafür vorgesehenen amtlichen Verkündungsorgan veröffentlicht ist. Etwaige rechtliche Hinweise, Empfehlungen und Auskünfte sind unverbindlich; eine Rechtsberatung findet nicht statt.
+
+Bitte senden Sie eine Nachricht an SBII3@bmds.bund.de, wenn Inhalte nicht fehlerfrei, aktuell, vollständig oder verständlich sein sollten.
+ `;
 
 export default function Index() {
   return (
