@@ -1,8 +1,3 @@
-import {
-  FactCheckTwoTone,
-  FileCopyTwoTone,
-  InsertDriveFileTwoTone,
-} from "@digitalservicebund/icons";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import {
   ROUTE_DOCUMENTATION,
@@ -46,30 +41,21 @@ export const fundamentalsNKR = {
   NKRConsiderations: {
     title: "Der NKR **betrachtet unter anderem** in diesem Kontext:",
     items: [
-      {
-        icon: FactCheckTwoTone,
-        content: dedent`
-          Ergebnis der [Vorprüfung](${ROUTE_PRECHECK.url}) als E-Mail
-          - **Inhalt:**<br />Einschätzung zur Digitaltauglichkeit des Vorhabens
-          - **Relevanz für den NKR:**<br />frühe Kenntnisnahme der zu überprüfenden Vorhaben
+      dedent`
+        Ergebnis der [Vorprüfung](${ROUTE_PRECHECK.url}) als E-Mail
+        - **Inhalt:**<br />Einschätzung zur Digitaltauglichkeit des Vorhabens
+        - **Relevanz für den NKR:**<br />frühe Kenntnisnahme der zu überprüfenden Vorhaben
         `,
-      },
-      {
-        icon: InsertDriveFileTwoTone,
-        content: dedent`
-          [Dokumentation](${ROUTE_DOCUMENTATION.url}) der Digitaltauglichkeit
-          - **Inhalt:**<br />Dokumentation der Digitaltauglichkeit, etwa durch die Nutzung der Prinzipien digitaltauglicher Gesetzgebung und von Visualisierungen
-          - **Relevanz für den NKR:**<br />Prüfung, inwieweit die Digitalisierung bei der Erarbeitung von Ihres Vorhabes mitgedacht wird.
+      dedent`
+        [Dokumentation](${ROUTE_DOCUMENTATION.url}) der Digitaltauglichkeit
+        - **Inhalt:**<br />Dokumentation der Digitaltauglichkeit, etwa durch die Nutzung der Prinzipien digitaltauglicher Gesetzgebung und von Visualisierungen
+        - **Relevanz für den NKR:**<br />Prüfung, inwieweit die Digitalisierung bei der Erarbeitung von Ihres Vorhabes mitgedacht wird.
         `,
-      },
-      {
-        icon: FileCopyTwoTone,
-        content: dedent`
-          Ihr Regelungsvorhaben
-          - **Inhalt:**<br />Regelungstext für die Ressortabstimmung
-          - **Relevanz für den NKR:**<br />Prüfung der Vorhaben auf digitale Umsetzbarkeit und Erfüllungsaufwand
+      dedent`
+        Ihr Regelungsvorhaben
+        - **Inhalt:**<br />Regelungstext für die Ressortabstimmung
+        - **Relevanz für den NKR:**<br />Prüfung der Vorhaben auf digitale Umsetzbarkeit und Erfüllungsaufwand
         `,
-      },
     ],
   },
   visualization: {

@@ -1,4 +1,10 @@
+import {
+  FactCheckTwoTone,
+  FileCopyTwoTone,
+  InsertDriveFileTwoTone,
+} from "@digitalservicebund/icons";
 import Container from "~/components/Container";
+import { Feature, FeatureList } from "~/components/FeatureList.tsx";
 import Hero from "~/components/Hero";
 import InfoBox, { type InfoBoxProps } from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList.tsx";
@@ -33,21 +39,29 @@ export default function FundamentalsMethods() {
             <RichText markdown={fundamentalsNKR.NKRConsiderations.title} />
           </h3>
 
-          <div className="grid gap-x-40 gap-y-32 md:grid-cols-3 md:gap-y-16">
-            {fundamentalsNKR.NKRConsiderations.items.map((item, i) => (
-              <div
-                key={`item${i}`}
-                className="md:row-span-4 md:grid md:grid-rows-subgrid"
-              >
-                <item.icon className="h-40 w-40 fill-blue-700" />
-
-                <RichText
-                  className="md:row-span-3 md:grid md:grid-rows-subgrid [&>ul]:row-span-2 [&>ul]:grid [&>ul]:grid-rows-subgrid"
-                  markdown={item.content}
-                />
-              </div>
-            ))}
-          </div>
+          <FeatureList>
+            <Feature>
+              <FactCheckTwoTone className="size-40 fill-blue-700" />
+              <RichText
+                className="md:row-span-3 md:grid md:grid-rows-subgrid"
+                markdown={fundamentalsNKR.NKRConsiderations.items[0]}
+              />
+            </Feature>
+            <Feature>
+              <InsertDriveFileTwoTone className="size-40 fill-blue-700" />
+              <RichText
+                className="md:row-span-3 md:grid md:grid-rows-subgrid"
+                markdown={fundamentalsNKR.NKRConsiderations.items[1]}
+              />
+            </Feature>
+            <Feature>
+              <FileCopyTwoTone className="size-40 fill-blue-700" />
+              <RichText
+                className="md:row-span-3 md:grid md:grid-rows-subgrid"
+                markdown={fundamentalsNKR.NKRConsiderations.items[2]}
+              />
+            </Feature>
+          </FeatureList>
         </section>
       </Container>
 

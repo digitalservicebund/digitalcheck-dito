@@ -13,7 +13,7 @@ export const FeatureList = ({
   return (
     <ul
       className={twMerge(
-        "list-unstyled grid auto-cols-[1fr] gap-40 md:grid-flow-col",
+        "list-unstyled grid auto-cols-fr gap-40 md:grid-flow-col md:gap-y-16",
         className,
       )}
     >
@@ -27,5 +27,9 @@ export type FeatureProps = {
 };
 
 export const Feature = ({ children }: Readonly<FeatureProps>) => {
-  return <li className="flex flex-col gap-16">{children}</li>;
+  return (
+    <li className="flex flex-col gap-y-8 md:row-span-3 md:grid md:grid-rows-subgrid">
+      {children}
+    </li>
+  );
 };
