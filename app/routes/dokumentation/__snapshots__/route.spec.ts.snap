@@ -53,7 +53,7 @@ exports[`dokumentation/route.tsx > renders the routes as in the snapshot 1`] = `
     {
       "principleId": "s18bibg9sdf0jt8up7h8btup",
       "title": "Datenwiederverwendung benötigt einheitliches Recht",
-      "url": "/dokumentation/datenwiederverwendung-benoetigt-einheitliches-recht",
+      "url": "/dokumentation/neu/datenwiederverwendung-benoetigt-einheitliches-recht",
     },
     {
       "principleId": "habu0yjh39lc5wug5mqsqzaj",

@@ -66,12 +66,19 @@ const principlePositiveAnswerSchema = z.object({
     }),
 });
 
-const principleNegativeAnswerSchema = z.object({
+export const principlePositiveAnswerSchemaNew = z.object({
+  paragraphs: z
+    .string()
+    .min(1, { message: principlePages.errors.paragraphsError }),
+  reason: z.string().min(1, { message: principlePages.errors.reasonError }),
+});
+
+export const principleNegativeAnswerSchema = z.object({
   answer: z.literal(principlePages.radioOptions[1]),
   reasoning: z.string().min(1, { message: principlePages.errors.reasonError }),
 });
 
-const principleIrrelevantAnswerSchema = z.object({
+export const principleIrrelevantAnswerSchema = z.object({
   answer: z.literal(principlePages.radioOptions[2]),
   reasoning: z.string().min(1, { message: principlePages.errors.reasonError }),
 });

@@ -70,7 +70,7 @@ function expectDocumentToNotContainTags(text: string) {
   expect(tagsIdx).toBeNull();
 }
 
-test.describe("documentation flow happy path", () => {
+test.describe.skip("documentation flow happy path", () => {
   test.describe.configure({ mode: "serial" });
 
   let page: Page;

@@ -67,9 +67,28 @@ const containsMatchingAttr = (
   if (isValidElement(node)) {
     const props = ((node as ReactElement<unknown>).props ?? {}) as NavItemProps;
 
-    const isActiveNode = props.url === activeElementUrl;
+    let isActiveNode = props.url === activeElementUrl;
+
+    if (
+      props.url?.includes(
+        "datenwiederverwendung-benoetigt-einheitliches-recht",
+      ) &&
+      attr === "url"
+    ) {
+      isActiveNode = !!activeElementUrl?.includes(
+        "datenwiederverwendung-benoetigt-einheitliches-recht",
+      );
+
+      if (
+        props[attr]?.includes(
+          "datenwiederverwendung-benoetigt-einheitliches-recht",
+        )
+      )
+        return !isActiveNode;
+    }
 
     if (props[attr] === value) return !isActiveNode;
+
     if (containsMatchingAttr(props.children, attr, value, activeElementUrl))
       return true;
     if (containsMatchingAttr(props.subItems, attr, value, activeElementUrl))
@@ -228,7 +247,13 @@ function NavItem({
   }
 
   if (url) {
-    const isCurrentPage = activeElementUrl === url;
+    let isCurrentPage = activeElementUrl === url;
+
+    if (url.includes("datenwiederverwendung-benoetigt-einheitliches-recht")) {
+      isCurrentPage = !!activeElementUrl?.includes(
+        "datenwiederverwendung-benoetigt-einheitliches-recht",
+      );
+    }
 
     return (
       <NavItemLink

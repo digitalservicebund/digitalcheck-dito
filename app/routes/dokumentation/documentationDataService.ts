@@ -71,6 +71,8 @@ export function setParticipation(participation?: Participation): void {
 }
 
 export function addOrUpdatePrinciple(newPrinciple?: Principle): void {
+  console.log(newPrinciple);
+
   if (!newPrinciple) return;
 
   const data = getDocumentationData();

@@ -10,7 +10,10 @@ import {
 import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
 import { useDocumentationData } from "./dokumentation/documentationDataHook";
-import { getDocumentationSchemaFormUrl } from "./dokumentation/documentationDataSchema";
+import {
+  getDocumentationSchemaFormUrl,
+  Principle,
+} from "./dokumentation/documentationDataSchema";
 
 type Route = _Route & {
   principleId?: string;
@@ -48,6 +51,7 @@ function getNextUrl(routes: Route[], currentUrl: string): string | null {
 
 export default function LayoutWithDocumentationNavigation() {
   const { routes, prinzips } = useDocumentationRouteData();
+  const { principlePages } = digitalDocumentation;
 
   // exclude documentation notes
   const displayedRoutes = routes.filter((route) => {
@@ -72,12 +76,27 @@ export default function LayoutWithDocumentationNavigation() {
     const schema = getDocumentationSchemaFormUrl(route.url);
     const valid = schema.safeParse(formData);
 
+    let url = route.url;
+    const completed = formData && valid.success;
+
+    if (completed && url.includes("/neu/")) {
+      if ((formData as Principle).answer === principlePages.radioOptions[0]) {
+        url = `${url}/schwerpunkte`;
+      }
+      if ((formData as Principle).answer === principlePages.radioOptions[1]) {
+        url = `${url}/nein`;
+      }
+      if ((formData as Principle).answer === principlePages.radioOptions[2]) {
+        url = `${url}/nicht-relevant`;
+      }
+    }
+
     return (
       <Nav.Item
-        key={route.url}
-        url={route.url}
+        key={url}
+        url={url}
         error={formData && !valid.success}
-        completed={formData && valid.success}
+        completed={completed}
         disabled={isNavigationDisabled}
       >
         {route.title}
