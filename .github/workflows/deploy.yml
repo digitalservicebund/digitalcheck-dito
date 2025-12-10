@@ -12,7 +12,9 @@ on:
         type: string
         description: "Environment URL"
     secrets:
-      DEPLOY_KEY:
+      GITOPS_DIGITALCHECK_APP_ID:
+        required: true
+      GITOPS_DIGITALCHECK_APP_PRIVATE_KEY:
         required: true
       ARGOCD_PIPELINE_PASSWORD:
         required: true
@@ -39,13 +41,14 @@ jobs:
       url: ${{ inputs.environment_url }}
     steps:
       - name: Deploy container image
-        uses: digitalservicebund/argocd-deploy@4fac1bb67c92ed168f6d9b22f8779ce241a9e412 # v1.0.0
+        uses: digitalservicebund/argocd-deploy@faa88406a1d6afa918aad127b19735c6e54d7fb1
         with:
           environment: "${{ inputs.environment_name }}"
           version: ${{ github.sha }}
           deploying_repo: ${{ env.PACKAGE_NAME }}
           infra_repo: ${{ github.event.repository.name }}-infra
-          deploy_key: ${{ secrets.DEPLOY_KEY }}
+          github_app_id: ${{ secrets.GITOPS_DIGITALCHECK_APP_ID }}
+          github_app_private_key: ${{ secrets.GITOPS_DIGITALCHECK_APP_PRIVATE_KEY }}
           app: "${{ env.PACKAGE_NAME }}-${{ inputs.environment_name }}"
           argocd_pipeline_password: ${{ secrets.ARGOCD_PIPELINE_PASSWORD }}
           argocd_server: ${{ secrets.ARGOCD_SERVER }}
