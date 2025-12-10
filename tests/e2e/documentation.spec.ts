@@ -70,29 +70,17 @@ function expectDocumentToNotContainTags(text: string) {
   expect(tagsIdx).toBeNull();
 }
 
-test.describe("documentation flow happy path", () => {
-  test.describe.configure({ mode: "serial" });
+test("documentation flow happy path", async ({ page }, testInfo) => {
+  test.setTimeout(60_000);
 
-  let page: Page;
-
-  test.beforeAll(async ({ browser }) => {
-    page = await browser.newPage();
-  });
-
-  test.afterAll(async () => {
-    if (page) {
-      await page.close();
-    }
-  });
-
-  test("start documentation flow from landing page", async () => {
+  await test.step("start documentation flow from landing page", async () => {
     await page.goto(ROUTE_DOCUMENTATION.url);
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION.url);
 
     await page.getByRole("link", { name: "Dokumentation starten" }).click();
   });
 
-  test("see the notice, confirm, and continue", async () => {
+  await test.step("see the notice, confirm, and continue", async () => {
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION_NOTES.url);
     await expect(
       page.getByRole("heading", { name: "Wichtige Hinweise" }),
@@ -105,7 +93,7 @@ test.describe("documentation flow happy path", () => {
     await continueButton.click();
   });
 
-  test("fill title page and navigate to participation", async () => {
+  await test.step("fill title page and navigate to participation", async () => {
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION_TITLE.url);
     await page
       .getByLabel(digitalDocumentation.info.inputTitle.label)
@@ -115,17 +103,22 @@ test.describe("documentation flow happy path", () => {
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION_PARTICIPATION.url);
   });
 
-  test("fill participation page and navigate to first principle", async () => {
-    const textareas = page.getByLabel("Antwort");
-    await textareas.nth(0).fill(testData.participationFormats);
-    await textareas.nth(1).fill(testData.participationResults);
+  await test.step("fill participation page and navigate to first principle", async () => {
+    await page
+      .getByRole("textbox", {
+        name: "welche Schritte",
+      })
+      .fill(testData.participationFormats);
+    await page
+      .getByRole("textbox", { name: "welche Erkenntnisse" })
+      .fill(testData.participationResults);
     await page.getByRole("button", { name: "Weiter" }).click();
 
-    expect(page.url()).not.toBe(ROUTE_DOCUMENTATION_PARTICIPATION.url);
     await expect(page.locator("mark", { hasText: "Prinzipien" })).toBeVisible();
+    expect(page.url()).not.toContain(ROUTE_DOCUMENTATION_PARTICIPATION.url);
   });
 
-  test("handle positive principle answer with aspect management", async () => {
+  await test.step("handle positive principle answer with aspect management", async () => {
     await page.getByLabel("Ja, gänzlich oder teilweise").check();
 
     // Check first aspect and fill inputs
@@ -183,8 +176,7 @@ test.describe("documentation flow happy path", () => {
       .fill(testData.customReason);
   });
 
-  // eslint-disable-next-line playwright/expect-expect
-  test("download draft documentation from principle page", async ({}, testInfo) => {
+  await test.step("download draft documentation from principle page", async () => {
     const docText = await downloadDocumentAndGetText(
       page,
       page.getByRole("button", { name: "Zwischenstand herunterladen (.docx)" }),
@@ -234,7 +226,7 @@ test.describe("documentation flow happy path", () => {
     await page.getByRole("button", { name: "Weiter" }).click();
   });
 
-  test("handle negative principle answer", async () => {
+  await test.step("handle negative principle answer", async () => {
     await page.getByRole("radio", { name: "Nein" }).check();
     // Validate textarea is shown
     const form = page.locator("form");
@@ -245,7 +237,7 @@ test.describe("documentation flow happy path", () => {
     await page.getByRole("button", { name: "Weiter" }).click();
   });
 
-  test("handle irrelevant principle answer and skip principle Automation", async () => {
+  await test.step("handle irrelevant principle answer and skip principle Automation", async () => {
     await page.getByLabel("Nicht relevant").check();
 
     // Validate textarea is shown
@@ -261,7 +253,7 @@ test.describe("documentation flow happy path", () => {
     await page.getByRole("button", { name: "Weiter" }).click();
   });
 
-  test("handle aspect and multiple own explanations on last principle", async () => {
+  await test.step("handle aspect and multiple own explanations on last principle", async () => {
     await page
       .getByRole("radio", { name: "Ja, gänzlich oder teilweise" })
       .check();
@@ -296,12 +288,12 @@ test.describe("documentation flow happy path", () => {
     await reasonInputs.last().fill(testData.customReason2);
   });
 
-  test("navigate to summary", async () => {
+  await test.step("navigate to summary", async () => {
     await page.getByRole("button", { name: "Weiter" }).click();
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION_SUMMARY.url);
   });
 
-  test("summary page shows entered data and navigate to absenden", async () => {
+  await test.step("summary page shows entered data and navigate to absenden", async () => {
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION_SUMMARY.url);
 
     const main = page.getByRole("main");
@@ -316,7 +308,7 @@ test.describe("documentation flow happy path", () => {
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION_SEND.url);
   });
 
-  test("download documentation from absenden page", async ({}, testInfo) => {
+  await test.step("download documentation from absenden page", async () => {
     await expect(page).toHaveURL(ROUTE_DOCUMENTATION_SEND.url);
 
     const docText = await downloadDocumentAndGetText(
@@ -383,50 +375,52 @@ test.describe("documentation flow happy path", () => {
     );
     expectDocumentToNotContainTags(docText);
   });
+});
 
-  test("go to landing page and download empty document template", async ({}, testInfo) => {
-    await page.goto(ROUTE_DOCUMENTATION.url);
+test("go to landing page and download empty document template", async ({
+  page,
+}, testInfo) => {
+  await page.goto(ROUTE_DOCUMENTATION.url);
 
-    const docText = await downloadDocumentAndGetText(
-      page,
-      page.getByRole("link", { name: "Word-Vorlage herunterladen (.docx)" }),
-      testInfo.outputPath("documentation.docx"),
-    );
-    expectStringsOrderedInText(
-      docText,
-      [
-        "Titel Ihres Regelungsvorhaben",
-        documentationDocument.placeholder,
-        "Auswirkungen auf Betroffene",
-        documentationDocument.placeholder,
-        documentationDocument.placeholder,
-        "Digitale Angebote",
-        "Ja, gänzlich oder teilweise | Nein | Nicht relevant",
-        "Ermöglichen Sie digitale Kommunikation",
-        "Paragrafen",
-        documentationDocument.placeholderOptional,
-        "Erläuterung",
-        documentationDocument.placeholderOptional,
-        "Formulieren Sie die Regelung technologieoffen",
-        "Paragrafen",
-        documentationDocument.placeholderOptional,
-        "Erläuterung",
-        documentationDocument.placeholderOptional,
-      ],
-      [
-        testData.title,
-        testData.participationFormats,
-        testData.participationResults,
-        testData.principle2Paragraph,
-        testData.principle2Reason,
-        testData.customParagraph,
-        testData.customReason,
-        testData.negativeReason,
-        testData.irrelevantReason,
-      ],
-    );
-    expectDocumentToNotContainTags(docText);
-  });
+  const docText = await downloadDocumentAndGetText(
+    page,
+    page.getByRole("link", { name: "Word-Vorlage herunterladen (.docx)" }),
+    testInfo.outputPath("documentation.docx"),
+  );
+  expectStringsOrderedInText(
+    docText,
+    [
+      "Titel Ihres Regelungsvorhaben",
+      documentationDocument.placeholder,
+      "Auswirkungen auf Betroffene",
+      documentationDocument.placeholder,
+      documentationDocument.placeholder,
+      "Digitale Angebote",
+      "Ja, gänzlich oder teilweise | Nein | Nicht relevant",
+      "Ermöglichen Sie digitale Kommunikation",
+      "Paragrafen",
+      documentationDocument.placeholderOptional,
+      "Erläuterung",
+      documentationDocument.placeholderOptional,
+      "Formulieren Sie die Regelung technologieoffen",
+      "Paragrafen",
+      documentationDocument.placeholderOptional,
+      "Erläuterung",
+      documentationDocument.placeholderOptional,
+    ],
+    [
+      testData.title,
+      testData.participationFormats,
+      testData.participationResults,
+      testData.principle2Paragraph,
+      testData.principle2Reason,
+      testData.customParagraph,
+      testData.customReason,
+      testData.negativeReason,
+      testData.irrelevantReason,
+    ],
+  );
+  expectDocumentToNotContainTags(docText);
 });
 
 test.describe("with partial documentation started", () => {
