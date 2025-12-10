@@ -28,6 +28,7 @@ allowed_patterns:
   - \@[a-z0-9]{40} # Allow fixing action hashes
   - "secrets: inherit"
   - "key: ${{ runner.os }}"
+  - GITOPS_DIGITALCHECK_APP_PRIVATE_KEY
 
 scopeconfig:
   - scope: node  # ignores files such as package-lock.json

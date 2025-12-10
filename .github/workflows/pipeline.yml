@@ -132,7 +132,8 @@ jobs:
       environment_name: production
       environment_url: https://digitalcheck.bund.de
     secrets:
-      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+      GITOPS_DIGITALCHECK_APP_ID: ${{ secrets.GITOPS_DIGITALCHECK_APP_ID }}
+      GITOPS_DIGITALCHECK_APP_PRIVATE_KEY: ${{ secrets.GITOPS_DIGITALCHECK_APP_PRIVATE_KEY }}
       ARGOCD_PIPELINE_PASSWORD: ${{ secrets.ARGOCD_PIPELINE_PASSWORD }}
       ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
       METRICS_DEPLOYMENT_WEBHOOK_URL: ${{ secrets.METRICS_DEPLOYMENT_WEBHOOK_URL }}
