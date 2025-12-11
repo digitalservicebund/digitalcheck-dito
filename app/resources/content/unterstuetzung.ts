@@ -255,11 +255,11 @@ export const support = {
               Das Angebot richtet sich an alle, die in den Bundesministerien Regelungen erarbeiten. Vorkenntnisse sind nicht erforderlich.
             `,
             link: {
-              text: "Auf Warteliste setzen",
+              text: "Für Schulung anmelden",
               to: encodeURI(dedent`
                 mailto:digitalcheck@digitalservice.bund.de?subject=[Digitalcheck Schulung] Anmeldung digitaltaugliche Regelungen&body=Guten Tag,
 
-                ich möchte mich gerne auf die Warteliste setzen lassen für die Online-Schulung:
+                ich möchte mich gerne für die Online-Schulung anmelden:
 
                 Regelungen digitaltauglich gestalten – praktische Tipps für den Digitalcheck
 
@@ -273,11 +273,13 @@ export const support = {
                 icon: TimerOutlined,
                 title: "Nächste Termine",
                 text: dedent`
-                  - **Dienstag, 25. November**  
-                  10:00 - 11:30 Uhr
+                  - **Montag, 12. Januar 2026**  
+                  11:00 – 12:00 Uhr
+                  Online
 
-                  - **Donnerstag, 27. November**  
-                  13:00 - 14:30 Uhr
+                  - **Montag, 21. Januar 2026**  
+                  15:00 - 16:00 Uhr
+                  Online
                 `,
               },
               {
@@ -303,7 +305,7 @@ export const support = {
 
               Das Angebot richtet sich an alle, die in den Bundesministerien Regelungen erarbeiten. Vorkenntnisse sind nicht erforderlich.
             `,
-            action: {
+            link: {
               text: "Auf Warteliste setzen",
               to: encodeURI(
                 dedent`mailto:digitalcheck@digitalservice.bund.de?subject=[Digitalcheck Schulung] Anmeldung Visualisierungen&body=
