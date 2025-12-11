@@ -3,6 +3,7 @@
 ## Status
 
 - 2024-09-06: Accepted
+- 2025-12-11: Obsolete
 
 ## Context
 
