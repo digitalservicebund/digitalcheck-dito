@@ -29,19 +29,20 @@ export default function Digitaltauglichkeit() {
     <>
       <main>
         <Outlet context={useLoaderData<typeof loader>()} />
-        <aside>
-          <Container className="mt-80 mb-80 bg-blue-100" overhangingBackground>
-            <InfoBox
-              heading={{
-                text: examplesRegelungen.yourExample.title,
-                tagName: "h2",
-              }}
-            >
-              <RichText markdown={examplesRegelungen.yourExample.text} />
-            </InfoBox>
-          </Container>
-        </aside>
       </main>
+      <aside aria-labelledby="your-example-heading">
+        <Container className="mt-80 mb-80 bg-blue-100" overhangingBackground>
+          <InfoBox
+            heading={{
+              text: examplesRegelungen.yourExample.title,
+              tagName: "h2",
+              id: "your-example-heading",
+            }}
+          >
+            <RichText markdown={examplesRegelungen.yourExample.text} />
+          </InfoBox>
+        </Container>
+      </aside>
       <SupportBanner {...supportBanner} />
     </>
   );

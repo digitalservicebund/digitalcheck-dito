@@ -195,7 +195,7 @@ export default function Index() {
         </Container>
       </main>
       {showBanner && (
-        <div className="relative flex items-center justify-center gap-40 bg-yellow-200 p-24">
+        <aside className="relative flex items-center justify-center gap-40 bg-yellow-200 p-24">
           <DvrIcon className="size-96 fill-yellow-300 max-md:hidden" />
           <div className="space-y-8">
             <Heading
@@ -222,7 +222,7 @@ export default function Index() {
           >
             <CloseIcon className="fill-blue-800" />
           </Button>
-        </div>
+        </aside>
       )}
     </>
   );

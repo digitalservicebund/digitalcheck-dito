@@ -88,22 +88,25 @@ export default function FivePrinciples() {
         <PrinciplePosterBox />
       </main>
 
-      <Container>
-        <InfoBox
-          heading={{
-            text: methodsFivePrinciples.nextStep.title,
-            look: "ds-heading-03-reg",
-            tagName: "h2",
-          }}
-          badge={{
-            children: methodsFivePrinciples.nextStep.label,
-            Icon: methodsFivePrinciples.nextStep.icon,
-          }}
-        >
-          <RichText markdown={methodsFivePrinciples.nextStep.text} />
-          <InfoBox.LinkList links={methodsFivePrinciples.nextStep.links} />
-        </InfoBox>
-      </Container>
+      <section aria-labelledby="nextStepHeading">
+        <Container>
+          <InfoBox
+            heading={{
+              text: methodsFivePrinciples.nextStep.title,
+              look: "ds-heading-03-reg",
+              tagName: "h2",
+              id: "nextStepHeading",
+            }}
+            badge={{
+              children: methodsFivePrinciples.nextStep.label,
+              Icon: methodsFivePrinciples.nextStep.icon,
+            }}
+          >
+            <RichText markdown={methodsFivePrinciples.nextStep.text} />
+            <InfoBox.LinkList links={methodsFivePrinciples.nextStep.links} />
+          </InfoBox>
+        </Container>
+      </section>
     </>
   );
 }

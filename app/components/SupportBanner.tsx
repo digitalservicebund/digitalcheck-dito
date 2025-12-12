@@ -12,18 +12,19 @@ export default function SupportBanner({
   text,
 }: Readonly<SupportBannerProps>) {
   return (
-    <div className="bg-blue-300">
+    <aside className="bg-blue-300" aria-labelledby="support-banner-heading">
       <Container className="ds-stack ds-stack-16">
         <InfoBox
           heading={{
             tagName: "h2",
             look: "ds-subhead font-bold",
             text: title,
+            id: "support-banner-heading",
           }}
         >
           <RichText markdown={text} />
         </InfoBox>
       </Container>
-    </div>
+    </aside>
   );
 }
