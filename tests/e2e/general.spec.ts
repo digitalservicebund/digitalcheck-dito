@@ -39,6 +39,13 @@ test.describe("page titles", () => {
       // this page does not exist and redirects to the sub-page
       return `${ROUTE_METHODS_PRINCIPLES.title}${titleSuffix}`;
     }
+    if (
+      route.url.startsWith(ROUTE_DOCUMENTATION.url) &&
+      route.url !== ROUTE_DOCUMENTATION.url
+    ) {
+      // subpages of documentation
+      return `Dokumentation: ${route.title}${titleSuffix}`;
+    }
 
     return `${route.title}${titleSuffix}`;
   }
