@@ -111,7 +111,7 @@ export default function LayoutWithDocumentationNavigation() {
           </Nav>
         </div>
       </div>
-      <section className="w-[51rem] space-y-40">
+      <main className="w-[51rem] space-y-40">
         <div className="lg:hidden">
           <Stepper currentElementUrl={currentUrl} elements={routes.flat()} />
         </div>
@@ -126,7 +126,7 @@ export default function LayoutWithDocumentationNavigation() {
             prinzips,
           }}
         />
-      </section>
+      </main>
     </div>
   );
 }

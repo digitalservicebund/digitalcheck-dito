@@ -46,9 +46,9 @@ export default function LayoutWithPreCheckNavigation() {
             firstUnansweredQuestionIndex={firstUnansweredQuestionIndex ?? 0}
           />
         )}
-        <section>
+        <main>
           <Outlet key={question?.url} />
-        </section>
+        </main>
       </div>
     </div>
   );

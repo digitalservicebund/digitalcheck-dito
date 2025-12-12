@@ -34,20 +34,20 @@ export default function ErrorBoundary({
   }
 
   return (
-    <main id="error" className="grow bg-blue-100">
+    <div id="error" className="grow bg-blue-100">
       <MetaTitle prefix="Fehler" />
       <Container>
-        <div className="ds-stack ds-stack-8 mb-32">
+        <main className="ds-stack ds-stack-8 mb-32">
           {errorStatus && (
             <span className="ds-label-01-bold">{errorStatus}</span>
           )}
           <Heading text={errorTitle} className="ds-heading-02-reg" />
           <RichText markdown={errorMessage} className="ds-subhead" />
-        </div>
+        </main>
         <LinkButton id="error-back-button" to={backLink}>
           Zurück zur Startseite
         </LinkButton>
       </Container>
-    </main>
+    </div>
   );
 }
