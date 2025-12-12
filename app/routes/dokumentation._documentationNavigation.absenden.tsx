@@ -18,7 +18,7 @@ export default function DocumentationSend() {
   const { prinzips } = useOutletContext<NavigationContext>();
   return (
     <>
-      <MetaTitle prefix={ROUTE_DOCUMENTATION_SEND.title} />
+      <MetaTitle prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_SEND.title}`} />
       <Heading
         text={finish.heading.text}
         tagName="h1"

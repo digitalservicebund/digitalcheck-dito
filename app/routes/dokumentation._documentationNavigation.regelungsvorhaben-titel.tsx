@@ -34,7 +34,7 @@ export default function DocumentationTitle() {
 
   return (
     <>
-      <MetaTitle prefix={ROUTE_DOCUMENTATION_TITLE.title} />
+      <MetaTitle prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_TITLE.title}`} />
       <Heading
         text={info.headline}
         tagName="h1"

@@ -36,7 +36,9 @@ export default function DocumentationParticipation() {
 
   return (
     <>
-      <MetaTitle prefix={ROUTE_DOCUMENTATION_PARTICIPATION.title} />
+      <MetaTitle
+        prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_PARTICIPATION.title}`}
+      />
       <Heading
         text={participation.headline}
         tagName="h1"

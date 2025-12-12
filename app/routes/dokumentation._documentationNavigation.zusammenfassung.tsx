@@ -257,7 +257,9 @@ export default function DocumentationSummary() {
 
   return (
     <>
-      <MetaTitle prefix={ROUTE_DOCUMENTATION_SUMMARY.title} />
+      <MetaTitle
+        prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_SUMMARY.title}`}
+      />
       <Heading
         text={summary.headline}
         tagName="h1"

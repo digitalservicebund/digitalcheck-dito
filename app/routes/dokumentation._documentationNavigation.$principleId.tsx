@@ -504,7 +504,7 @@ export default function DocumentationPrinciple() {
 
   return (
     <>
-      <MetaTitle prefix={prinzip.Name} />
+      <MetaTitle prefix={`Dokumentation: ${prinzip.Name}`} />
       <div className="space-y-40">
         <PrincipleWithExample prinzip={prinzip} />
 
