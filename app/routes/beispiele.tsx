@@ -27,17 +27,21 @@ export async function loader() {
 export default function Digitaltauglichkeit() {
   return (
     <>
-      <Outlet context={useLoaderData<typeof loader>()} />
-      <Container className="mt-80 mb-80 bg-blue-100" overhangingBackground>
-        <InfoBox
-          heading={{
-            text: examplesRegelungen.yourExample.title,
-            tagName: "h2",
-          }}
-        >
-          <RichText markdown={examplesRegelungen.yourExample.text} />
-        </InfoBox>
-      </Container>
+      <main>
+        <Outlet context={useLoaderData<typeof loader>()} />
+        <aside>
+          <Container className="mt-80 mb-80 bg-blue-100" overhangingBackground>
+            <InfoBox
+              heading={{
+                text: examplesRegelungen.yourExample.title,
+                tagName: "h2",
+              }}
+            >
+              <RichText markdown={examplesRegelungen.yourExample.text} />
+            </InfoBox>
+          </Container>
+        </aside>
+      </main>
       <SupportBanner {...supportBanner} />
     </>
   );

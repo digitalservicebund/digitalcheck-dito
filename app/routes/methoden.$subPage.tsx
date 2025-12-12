@@ -57,94 +57,96 @@ export default function Index() {
   return (
     <>
       <MetaTitle prefix={route.title} />
-      <Hero subtitle={content.subtitle} title={content.title} />
+      <main>
+        <Hero subtitle={content.subtitle} title={content.title} />
 
-      <ContentWrapper>
-        {"accordion" in content && (
-          <div className="pb-0">
-            <DetailsSummary title={content.accordion.title}>
-              <RichText markdown={content.accordion.text} />
-            </DetailsSummary>
-          </div>
-        )}
-        <div className="mb-40 space-y-40 lg:space-y-80">
-          <InfoBox
-            heading={{
-              text: content.content.title,
-              look: "ds-heading-03-reg",
-              tagName: "h2",
-            }}
-            badge={{
-              children: content.content.label,
-              Icon: content.content.icon,
-            }}
-          >
-            <RichText markdown={content.content.text} />
-            {"links" in content.content && (
-              <InfoBox.LinkList links={content.content.links} />
-            )}
-          </InfoBox>
-
-          {content.boxes.map((box) => (
-            <MethodCard
-              key={box.title}
-              image={
-                <Image url={box.image.src} alternativeText={box.image.alt} />
-              }
-              infoBox={
-                <MethodCard.InfoBox
-                  heading={{ text: box.title, look: "ds-heading-03-reg" }}
-                  badge={{ children: box.label, Icon: box.icon }}
-                  content={box.text}
-                  links={"links" in box ? box.links : []}
-                />
-              }
-            />
-          ))}
-        </div>
-      </ContentWrapper>
-      {"tip" in content && (
-        <div className="bg-yellow-300">
-          <Container>
-            <InfoBox
-              heading={{ text: content.tip.title, tagName: "h3" }}
-              badge={{ children: content.tip.label, Icon: content.tip.icon }}
-            >
-              <RichText markdown={content.tip.text} />
-            </InfoBox>
-          </Container>
-        </div>
-      )}
-
-      <Container className="mt-40 lg:pb-80">
-        <InfoBox
-          heading={{ tagName: "h2", text: interviewBanner.title }}
-          look="highlight"
-        >
-          <RichText markdown={interviewBanner.text} />
-        </InfoBox>
-      </Container>
-
-      {"support" in content && (
-        <div className="bg-blue-100">
-          <Container>
+        <ContentWrapper>
+          {"accordion" in content && (
+            <div className="pb-0">
+              <DetailsSummary title={content.accordion.title}>
+                <RichText markdown={content.accordion.text} />
+              </DetailsSummary>
+            </div>
+          )}
+          <div className="mb-40 space-y-40 lg:space-y-80">
             <InfoBox
               heading={{
-                text: content.support.title,
+                text: content.content.title,
                 look: "ds-heading-03-reg",
                 tagName: "h2",
               }}
               badge={{
-                children: content.support.label,
-                Icon: content.support.icon,
+                children: content.content.label,
+                Icon: content.content.icon,
               }}
             >
-              <RichText markdown={content.support.text} />
-              <InfoBox.LinkList links={content.support.links} />
+              <RichText markdown={content.content.text} />
+              {"links" in content.content && (
+                <InfoBox.LinkList links={content.content.links} />
+              )}
             </InfoBox>
-          </Container>
-        </div>
-      )}
+
+            {content.boxes.map((box) => (
+              <MethodCard
+                key={box.title}
+                image={
+                  <Image url={box.image.src} alternativeText={box.image.alt} />
+                }
+                infoBox={
+                  <MethodCard.InfoBox
+                    heading={{ text: box.title, look: "ds-heading-03-reg" }}
+                    badge={{ children: box.label, Icon: box.icon }}
+                    content={box.text}
+                    links={"links" in box ? box.links : []}
+                  />
+                }
+              />
+            ))}
+          </div>
+        </ContentWrapper>
+        {"tip" in content && (
+          <div className="bg-yellow-300">
+            <Container>
+              <InfoBox
+                heading={{ text: content.tip.title, tagName: "h3" }}
+                badge={{ children: content.tip.label, Icon: content.tip.icon }}
+              >
+                <RichText markdown={content.tip.text} />
+              </InfoBox>
+            </Container>
+          </div>
+        )}
+
+        <Container className="mt-40 lg:pb-80">
+          <InfoBox
+            heading={{ tagName: "h2", text: interviewBanner.title }}
+            look="highlight"
+          >
+            <RichText markdown={interviewBanner.text} />
+          </InfoBox>
+        </Container>
+
+        {"support" in content && (
+          <div className="bg-blue-100">
+            <Container>
+              <InfoBox
+                heading={{
+                  text: content.support.title,
+                  look: "ds-heading-03-reg",
+                  tagName: "h2",
+                }}
+                badge={{
+                  children: content.support.label,
+                  Icon: content.support.icon,
+                }}
+              >
+                <RichText markdown={content.support.text} />
+                <InfoBox.LinkList links={content.support.links} />
+              </InfoBox>
+            </Container>
+          </div>
+        )}
+      </main>
     </>
   );
 }

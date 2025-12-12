@@ -25,70 +25,76 @@ export default function FundamentalsMethods() {
   return (
     <>
       <MetaTitle prefix={ROUTE_FUNDAMENTALS_NKR.title} />
-      <Hero title={fundamentalsNKR.title} subtitle={fundamentalsNKR.subtitle} />
-
-      <Container className="space-y-40 py-40 md:py-80">
-        <InfoBoxList
-          items={items}
-          separator
-          className="ds-stack-80 mt-0 [&>li]:pb-80"
+      <main>
+        <Hero
+          title={fundamentalsNKR.title}
+          subtitle={fundamentalsNKR.subtitle}
         />
 
-        <section className="space-y-40">
-          <h3 className="ds-body-01-reg">
-            Der NKR <strong>betrachtet unter anderem</strong> in diesem Kontext:
-          </h3>
+        <Container className="space-y-40 py-40 md:py-80">
+          <InfoBoxList
+            items={items}
+            separator
+            className="ds-stack-80 mt-0 [&>li]:pb-80"
+          />
 
-          <FeatureList>
-            <Feature>
-              <FactCheckTwoTone className="size-40 fill-blue-700" />
-              <RichText
-                className="md:row-span-3 md:grid md:grid-rows-subgrid"
-                markdown={fundamentalsNKR.NKRConsiderations.items[0]}
-              />
-            </Feature>
-            <Feature>
-              <InsertDriveFileTwoTone className="size-40 fill-blue-700" />
-              <RichText
-                className="md:row-span-3 md:grid md:grid-rows-subgrid"
-                markdown={fundamentalsNKR.NKRConsiderations.items[1]}
-              />
-            </Feature>
-            <Feature>
-              <FileCopyTwoTone className="size-40 fill-blue-700" />
-              <RichText
-                className="md:row-span-3 md:grid md:grid-rows-subgrid"
-                markdown={fundamentalsNKR.NKRConsiderations.items[2]}
-              />
-            </Feature>
-          </FeatureList>
-        </section>
-      </Container>
+          <section className="space-y-40">
+            <h3 className="ds-body-01-reg">
+              Der NKR <strong>betrachtet unter anderem</strong> in diesem
+              Kontext:
+            </h3>
 
-      <div className="bg-blue-100">
-        <Container className="space-y-32 py-40 md:space-y-40 md:py-80">
-          <InfoBox
-            heading={{ text: fundamentalsNKR.visualization.infoBox1.heading }}
-          >
-            <RichText
-              markdown={fundamentalsNKR.visualization.infoBox1.content}
-            />
-          </InfoBox>
-
-          <InfoBox
-            className="bg-white"
-            look="highlight"
-            heading={{
-              text: fundamentalsNKR.visualization.infoBox2.heading,
-              className: "ds-subhead",
-            }}
-          >
-            <RichText
-              markdown={fundamentalsNKR.visualization.infoBox2.content}
-            />
-          </InfoBox>
+            <FeatureList>
+              <Feature>
+                <FactCheckTwoTone className="size-40 fill-blue-700" />
+                <RichText
+                  className="md:row-span-3 md:grid md:grid-rows-subgrid"
+                  markdown={fundamentalsNKR.NKRConsiderations.items[0]}
+                />
+              </Feature>
+              <Feature>
+                <InsertDriveFileTwoTone className="size-40 fill-blue-700" />
+                <RichText
+                  className="md:row-span-3 md:grid md:grid-rows-subgrid"
+                  markdown={fundamentalsNKR.NKRConsiderations.items[1]}
+                />
+              </Feature>
+              <Feature>
+                <FileCopyTwoTone className="size-40 fill-blue-700" />
+                <RichText
+                  className="md:row-span-3 md:grid md:grid-rows-subgrid"
+                  markdown={fundamentalsNKR.NKRConsiderations.items[2]}
+                />
+              </Feature>
+            </FeatureList>
+          </section>
         </Container>
-      </div>
+
+        <div className="bg-blue-100">
+          <Container className="space-y-32 py-40 md:space-y-40 md:py-80">
+            <InfoBox
+              heading={{ text: fundamentalsNKR.visualization.infoBox1.heading }}
+            >
+              <RichText
+                markdown={fundamentalsNKR.visualization.infoBox1.content}
+              />
+            </InfoBox>
+
+            <InfoBox
+              className="bg-white"
+              look="highlight"
+              heading={{
+                text: fundamentalsNKR.visualization.infoBox2.heading,
+                className: "ds-subhead",
+              }}
+            >
+              <RichText
+                markdown={fundamentalsNKR.visualization.infoBox2.content}
+              />
+            </InfoBox>
+          </Container>
+        </div>
+      </main>
     </>
   );
 }

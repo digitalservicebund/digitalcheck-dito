@@ -128,29 +128,34 @@ export default function SinglePointOfContact() {
   return (
     <>
       <MetaTitle prefix={ROUTE_INTEROPERABILITY_SPOC.title} />
-      <Hero title={spoc.headline}>
-        <RichText markdown={spoc.content} className="ds-subhead ds-stack-24" />
-      </Hero>
-      <div className="container mt-40">
-        <TabGroup>
-          <TabGroup.TabList>
-            <TabGroup.Tab>{Overview.tabName}</TabGroup.Tab>
-            <TabGroup.Tab>{Nachnutzen.tabName}</TabGroup.Tab>
-            <TabGroup.Tab>{ServiceUndKontakt.tabName}</TabGroup.Tab>
-          </TabGroup.TabList>
-          <TabGroup.TabPanels>
-            <TabGroup.TabPanel>
-              <Overview />
-            </TabGroup.TabPanel>
-            <TabGroup.TabPanel>
-              <Nachnutzen />
-            </TabGroup.TabPanel>
-            <TabGroup.TabPanel>
-              <ServiceUndKontakt />
-            </TabGroup.TabPanel>
-          </TabGroup.TabPanels>
-        </TabGroup>
-      </div>
+      <main>
+        <Hero title={spoc.headline}>
+          <RichText
+            markdown={spoc.content}
+            className="ds-subhead ds-stack-24"
+          />
+        </Hero>
+        <div className="container mt-40">
+          <TabGroup>
+            <TabGroup.TabList>
+              <TabGroup.Tab>{Overview.tabName}</TabGroup.Tab>
+              <TabGroup.Tab>{Nachnutzen.tabName}</TabGroup.Tab>
+              <TabGroup.Tab>{ServiceUndKontakt.tabName}</TabGroup.Tab>
+            </TabGroup.TabList>
+            <TabGroup.TabPanels>
+              <TabGroup.TabPanel>
+                <Overview />
+              </TabGroup.TabPanel>
+              <TabGroup.TabPanel>
+                <Nachnutzen />
+              </TabGroup.TabPanel>
+              <TabGroup.TabPanel>
+                <ServiceUndKontakt />
+              </TabGroup.TabPanel>
+            </TabGroup.TabPanels>
+          </TabGroup>
+        </div>
+      </main>
     </>
   );
 }

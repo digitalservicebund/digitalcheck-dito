@@ -16,13 +16,13 @@ export default function Gesetzgebungsprozess() {
   }
 
   return (
-    <>
+    <main>
       <Hero title="Der Digitalcheck im Gesetzgebungsprozess"></Hero>
 
       <SVGWithMinimap
         className="mt-40 mb-80"
         svgSrc="/images/regelungen-description.svg"
       />
-    </>
+    </main>
   );
 }

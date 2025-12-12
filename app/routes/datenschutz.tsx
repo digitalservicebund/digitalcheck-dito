@@ -18,14 +18,15 @@ export default function Index() {
   return (
     <>
       <MetaTitle prefix={ROUTE_PRIVACY.title} />
-      <Hero title="Datenschutzerklärung" />
-
-      <ContentWrapper>
-        <RichText
-          markdown={content}
-          className="ds-stack-16 [&>h2]:mt-40 [&>h3]:mt-32"
-        />
-      </ContentWrapper>
+      <main>
+        <Hero title="Datenschutzerklärung" />
+        <ContentWrapper>
+          <RichText
+            markdown={content}
+            className="ds-stack-16 [&>h2]:mt-40 [&>h3]:mt-32"
+          />
+        </ContentWrapper>
+      </main>
     </>
   );
 }

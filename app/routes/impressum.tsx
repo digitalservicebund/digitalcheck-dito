@@ -65,14 +65,16 @@ export default function Index() {
   return (
     <>
       <MetaTitle prefix={ROUTE_IMPRINT.title} />
-      <Hero title={"Impressum"} />
+      <main>
+        <Hero title={"Impressum"} />
 
-      <ContentWrapper>
-        <RichText
-          markdown={content}
-          className="ds-stack-16 [&>h2]:mt-40 [&>h3]:mt-32"
-        />
-      </ContentWrapper>
+        <ContentWrapper>
+          <RichText
+            markdown={content}
+            className="ds-stack-16 [&>h2]:mt-40 [&>h3]:mt-32"
+          />
+        </ContentWrapper>
+      </main>
     </>
   );
 }

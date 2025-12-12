@@ -19,19 +19,19 @@ export default function FundamentalsMethods() {
   return (
     <>
       <MetaTitle prefix={ROUTE_FUNDAMENTALS_DIGITAL_READINESS.title} />
-      <Hero
-        title={fundamentalsDigitalReadiness.title}
-        subtitle={fundamentalsDigitalReadiness.subtitle}
-      />
-
-      <Container className="py-80">
-        <InfoBoxList
-          heading={{ text: fundamentalsDigitalReadiness.summary.title }}
-          items={items}
-          separator
+      <main>
+        <Hero
+          title={fundamentalsDigitalReadiness.title}
+          subtitle={fundamentalsDigitalReadiness.subtitle}
         />
-      </Container>
-      {/* <div className="bg-blue-100">
+        <Container className="py-80">
+          <InfoBoxList
+            heading={{ text: fundamentalsDigitalReadiness.summary.title }}
+            items={items}
+            separator
+          />
+        </Container>
+        {/* <div className="bg-blue-100">
         <Container className="ds-stack ds-stack-40 py-80">
           <InfoBox
             heading={{
@@ -55,6 +55,7 @@ export default function FundamentalsMethods() {
           />
         </Container>
       </div> */}
+      </main>
     </>
   );
 }

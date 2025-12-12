@@ -123,154 +123,160 @@ export default function Result() {
   return (
     <>
       <MetaTitle prefix={ROUTE_PRECHECK_RESULT.title} />
-      <div className="bg-blue-100 py-40 print:pb-0">
-        <div className="px-16">
-          <Container
-            className={twJoin(
-              "rounded-t-lg py-32",
-              result?.digital === ResultType.UNSURE
-                ? "bg-yellow-200"
-                : "bg-blue-300",
-            )}
-          >
-            {vorhabenTitle && <PrintTitle title={vorhabenTitle} />}
-            <div className="flex flex-col gap-16 sm:flex-row">
-              <div className="flex size-36 flex-none items-center justify-center">
-                {getHeaderIcon()}
-              </div>
-              <div>
-                <Heading tagName="h1" look="ds-heading-02-reg" className="mb-0">
-                  <RichText markdown={resultContent.title} />
-                </Heading>
-                {resultHint && (
-                  <RichText
-                    markdown={resultHint}
-                    className="ds-subhead mt-16"
-                  />
-                )}
-              </div>
-            </div>
-          </Container>
-          <Container className="space-y-40 rounded-b-lg bg-white">
-            {resultContent.infoboxContent && (
-              <InfoBox
-                heading={{
-                  text: resultContent.infoboxContent.title,
-                  tagName: "h3",
-                }}
-              >
-                <RichText markdown={resultContent.infoboxContent.text} />
-              </InfoBox>
-            )}
-            {resultContent.inlineNoticeContent && (
-              <InlineNotice
-                className="[&_p]:mt-16"
-                look="warning"
-                heading={resultContent.inlineNoticeContent.title}
-              >
-                <RichText markdown={resultContent.inlineNoticeContent.text} />
-              </InlineNotice>
-            )}
-            <div className="border-b-2 border-solid border-gray-400 pb-40 last:border-0 last:pb-0 print:border-0 print:pb-0">
-              <DetailsSummary
-                data-testid="result-details"
-                title={preCheckResult.detailsTitle}
-                className="plausible-event-name=Content.Result.Accordion+Result+Detail"
-              >
-                {resultContent.reasoningList
-                  .filter(({ reasons }) => reasons.length > 0)
-                  .map(({ intro, reasons }) => (
-                    <React.Fragment key={intro}>
-                      <RichText markdown={intro} className="first:mt-16" />
-                      <ul className="ds-stack ds-stack-16 mt-16 mb-40 pl-0">
-                        {reasons
-                          .toSorted((a, b) => {
-                            if (a.answer === b.answer) {
-                              return 0; // Keep the original order
-                            }
-                            return a.answer === "yes" ? -1 : 1; // "yes" comes before "no"
-                          })
-                          .map((reason) => getReasonListItem(reason))}
-                      </ul>
-                    </React.Fragment>
-                  ))}
-
-                {result?.euBezug !== ResultType.NEGATIVE && (
-                  <div className="mt-40">
-                    <b>{preCheckResult.interoperability.info.title}</b>
+      <main>
+        <div className="bg-blue-100 py-40 print:pb-0">
+          <div className="px-16">
+            <Container
+              className={twJoin(
+                "rounded-t-lg py-32",
+                result?.digital === ResultType.UNSURE
+                  ? "bg-yellow-200"
+                  : "bg-blue-300",
+              )}
+            >
+              {vorhabenTitle && <PrintTitle title={vorhabenTitle} />}
+              <div className="flex flex-col gap-16 sm:flex-row">
+                <div className="flex size-36 flex-none items-center justify-center">
+                  {getHeaderIcon()}
+                </div>
+                <div>
+                  <Heading
+                    tagName="h1"
+                    look="ds-heading-02-reg"
+                    className="mb-0"
+                  >
+                    <RichText markdown={resultContent.title} />
+                  </Heading>
+                  {resultHint && (
                     <RichText
-                      className="mt-8 mb-20"
-                      markdown={preCheckResult.interoperability.info.content}
+                      markdown={resultHint}
+                      className="ds-subhead mt-16"
                     />
-                  </div>
-                )}
-              </DetailsSummary>
-            </div>
-            {result?.digital !== ResultType.UNSURE && (
-              <div className="mt-32 print:hidden">
-                <ResultForm
-                  resultContent={resultContent}
-                  setVorhabenTitle={setVorhabenTitle}
-                />
+                  )}
+                </div>
               </div>
-            )}
-          </Container>
-        </div>
-      </div>
-      <Container className="my-80 space-y-40 py-0">
-        {result?.digital === ResultType.UNSURE && (
-          <InfoBox
-            heading={{
-              text: preCheckResult.unsure.nextStep.title,
-              tagName: "h2",
-            }}
-          >
-            <RichText markdown={preCheckResult.unsure.nextStep.text} />
-            <InfoBox.LinkList
-              links={[
-                {
-                  id: "result-method-button",
-                  text: preCheckResult.unsure.nextStep.link.text,
-                  to: preCheckResult.unsure.nextStep.link.to,
-                  look: "link",
-                },
-              ]}
-            />
-          </InfoBox>
-        )}
-        {result && result.digital !== ResultType.UNSURE && nextSteps && (
-          <>
-            <Heading tagName="h2">{nextSteps[result.digital].title}</Heading>
-            <NumberedList>
-              {(nextSteps[result.digital].steps as Step[]).map((item) => (
-                <NumberedList.Item
-                  className="space-y-16"
-                  key={item.headline.text}
-                  disabled={item.isDisabled}
+            </Container>
+            <Container className="space-y-40 rounded-b-lg bg-white">
+              {resultContent.infoboxContent && (
+                <InfoBox
+                  heading={{
+                    text: resultContent.infoboxContent.title,
+                    tagName: "h3",
+                  }}
                 >
-                  <p className="ds-heading-03-reg">{item.headline.text}</p>
-                  {"content" in item && (
-                    <RichText markdown={item.content as string} />
+                  <RichText markdown={resultContent.infoboxContent.text} />
+                </InfoBox>
+              )}
+              {resultContent.inlineNoticeContent && (
+                <InlineNotice
+                  className="[&_p]:mt-16"
+                  look="warning"
+                  heading={resultContent.inlineNoticeContent.title}
+                >
+                  <RichText markdown={resultContent.inlineNoticeContent.text} />
+                </InlineNotice>
+              )}
+              <div className="border-b-2 border-solid border-gray-400 pb-40 last:border-0 last:pb-0 print:border-0 print:pb-0">
+                <DetailsSummary
+                  data-testid="result-details"
+                  title={preCheckResult.detailsTitle}
+                  className="plausible-event-name=Content.Result.Accordion+Result+Detail"
+                >
+                  {resultContent.reasoningList
+                    .filter(({ reasons }) => reasons.length > 0)
+                    .map(({ intro, reasons }) => (
+                      <React.Fragment key={intro}>
+                        <RichText markdown={intro} className="first:mt-16" />
+                        <ul className="ds-stack ds-stack-16 mt-16 mb-40 pl-0">
+                          {reasons
+                            .toSorted((a, b) => {
+                              if (a.answer === b.answer) {
+                                return 0; // Keep the original order
+                              }
+                              return a.answer === "yes" ? -1 : 1; // "yes" comes before "no"
+                            })
+                            .map((reason) => getReasonListItem(reason))}
+                        </ul>
+                      </React.Fragment>
+                    ))}
+
+                  {result?.euBezug !== ResultType.NEGATIVE && (
+                    <div className="mt-40">
+                      <b>{preCheckResult.interoperability.info.title}</b>
+                      <RichText
+                        className="mt-8 mb-20"
+                        markdown={preCheckResult.interoperability.info.content}
+                      />
+                    </div>
                   )}
-                  {item.link && (
-                    <Link to={item.link.to} className="text-link">
-                      {item.link.text}
-                    </Link>
-                  )}
-                </NumberedList.Item>
-              ))}
-            </NumberedList>
-          </>
-        )}
-      </Container>
-      <Container className="my-80 py-0 print:hidden">
-        <Heading
-          tagName="h2"
-          look="ds-heading-02-reg text-center mb-64 max-sm:mb-56"
-          text={preCheck.faq.title}
-        />
-        <PreCheckFAQ />
-      </Container>
+                </DetailsSummary>
+              </div>
+              {result?.digital !== ResultType.UNSURE && (
+                <div className="mt-32 print:hidden">
+                  <ResultForm
+                    resultContent={resultContent}
+                    setVorhabenTitle={setVorhabenTitle}
+                  />
+                </div>
+              )}
+            </Container>
+          </div>
+        </div>
+        <Container className="my-80 space-y-40 py-0">
+          {result?.digital === ResultType.UNSURE && (
+            <InfoBox
+              heading={{
+                text: preCheckResult.unsure.nextStep.title,
+                tagName: "h2",
+              }}
+            >
+              <RichText markdown={preCheckResult.unsure.nextStep.text} />
+              <InfoBox.LinkList
+                links={[
+                  {
+                    id: "result-method-button",
+                    text: preCheckResult.unsure.nextStep.link.text,
+                    to: preCheckResult.unsure.nextStep.link.to,
+                    look: "link",
+                  },
+                ]}
+              />
+            </InfoBox>
+          )}
+          {result && result.digital !== ResultType.UNSURE && nextSteps && (
+            <>
+              <Heading tagName="h2">{nextSteps[result.digital].title}</Heading>
+              <NumberedList>
+                {(nextSteps[result.digital].steps as Step[]).map((item) => (
+                  <NumberedList.Item
+                    className="space-y-16"
+                    key={item.headline.text}
+                    disabled={item.isDisabled}
+                  >
+                    <p className="ds-heading-03-reg">{item.headline.text}</p>
+                    {"content" in item && (
+                      <RichText markdown={item.content as string} />
+                    )}
+                    {item.link && (
+                      <Link to={item.link.to} className="text-link">
+                        {item.link.text}
+                      </Link>
+                    )}
+                  </NumberedList.Item>
+                ))}
+              </NumberedList>
+            </>
+          )}
+        </Container>
+        <Container className="my-80 py-0 print:hidden">
+          <Heading
+            tagName="h2"
+            look="ds-heading-02-reg text-center mb-64 max-sm:mb-56"
+            text={preCheck.faq.title}
+          />
+          <PreCheckFAQ />
+        </Container>
+      </main>
     </>
   );
 }

@@ -9,14 +9,17 @@ export type RichTextProps = {
   markdown: string;
   className?: string;
   rendererOptions?: Partial<Renderer>;
+  tagName?: string;
 };
 
 const RichText = ({
   markdown,
   className,
   rendererOptions,
+  tagName = "div",
   ...props
 }: RichTextProps) => {
+  const Tag = tagName as keyof React.JSX.IntrinsicElements;
   const extension = {
     useNewRenderer: true,
     renderer: {
@@ -57,7 +60,7 @@ const RichText = ({
   const html = newMarked.parse(markdown);
 
   return html ? (
-    <div
+    <Tag
       {...props}
       className={twMerge("[&_a]:text-link space-y-8", className)}
       dangerouslySetInnerHTML={{ __html: html }}

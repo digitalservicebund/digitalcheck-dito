@@ -149,114 +149,116 @@ export default function Index() {
   return (
     <>
       <MetaTitle prefix={ROUTE_SUPPORT.title} />
-      <Hero title={title} subtitle={subtitle} />
+      <main>
+        <Hero title={title} subtitle={subtitle} />
 
-      <div className="bg-blue-300">
-        <Container className="flex flex-col py-0 lg:h-[420px] lg:flex-row">
-          <div className="py-32 sm:py-48 lg:w-1/2 lg:self-center">
-            <RichText
-              markdown={socialProof.text}
-              className="w-[370px] text-2xl leading-40 sm:text-3xl sm:max-lg:w-[480px]"
-            />
-          </div>
-          <div className="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">
-            <div className="w-[630px] lg:w-[50vw] lg:[&>img]:h-[420px] lg:[&>img]:w-full lg:[&>img]:object-none lg:[&>img]:object-[10%_75%]">
-              <SocialProofImage />
+        <div className="bg-blue-300">
+          <Container className="flex flex-col py-0 lg:h-[420px] lg:flex-row">
+            <div className="py-32 sm:py-48 lg:w-1/2 lg:self-center">
+              <RichText
+                markdown={socialProof.text}
+                className="w-[370px] text-2xl leading-40 sm:text-3xl sm:max-lg:w-[480px]"
+              />
             </div>
-            <div className="absolute bottom-40 left-40 max-w-[400px] rounded-lg bg-white/70 p-16 backdrop-blur-sm max-lg:hidden">
-              <Testimonial />
-            </div>
-          </div>
-        </Container>
-      </div>
-      <div className="sm:hidden">
-        <SocialProofImage />
-      </div>
-      <Container className="lg:hidden">
-        <Testimonial />
-      </Container>
-      <Container className="py-40 lg:py-80">
-        <InfoBox
-          heading={{
-            tagName: "h2",
-            text: supportWhat.title,
-          }}
-        >
-          <RichText markdown={supportWhat.subtitle} />
-        </InfoBox>
-
-        <div className="mt-40 flex gap-32 max-sm:flex-col">
-          {supportWhat.supportTypes.length > 0 &&
-            supportWhat.supportTypes.map((supportType) => (
-              <div
-                key={supportType.title}
-                className="flex gap-16 max-lg:flex-col"
-              >
-                <supportType.icon className="size-48 flex-none fill-blue-800" />
-                <InfoBox
-                  heading={{
-                    tagName: "h3",
-                    text: supportType.title,
-                  }}
-                >
-                  <RichText markdown={supportType.text} />
-                </InfoBox>
+            <div className="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">
+              <div className="w-[630px] lg:w-[50vw] lg:[&>img]:h-[420px] lg:[&>img]:w-full lg:[&>img]:object-none lg:[&>img]:object-[10%_75%]">
+                <SocialProofImage />
               </div>
-            ))}
+              <div className="absolute bottom-40 left-40 max-w-[400px] rounded-lg bg-white/70 p-16 backdrop-blur-sm max-lg:hidden">
+                <Testimonial />
+              </div>
+            </div>
+          </Container>
         </div>
-      </Container>
-      <div className="bg-blue-100">
-        <Container>
-          <Heading id="hilfe" tagName="h2" text={supportHow.title} />
-          <div className="ds-stack ds-stack-16 pt-32">
-            <InfoBox>
-              <RichText markdown={supportHow.text} />
-            </InfoBox>
-            <ButtonContainer>
-              <LinkButton look="tertiary" to={supportHow.link.to}>
-                {supportHow.link.text}
-              </LinkButton>
-            </ButtonContainer>
+        <div className="sm:hidden">
+          <SocialProofImage />
+        </div>
+        <Container className="lg:hidden">
+          <Testimonial />
+        </Container>
+        <Container className="py-40 lg:py-80">
+          <InfoBox
+            heading={{
+              tagName: "h2",
+              text: supportWhat.title,
+            }}
+          >
+            <RichText markdown={supportWhat.subtitle} />
+          </InfoBox>
+
+          <div className="mt-40 flex gap-32 max-sm:flex-col">
+            {supportWhat.supportTypes.length > 0 &&
+              supportWhat.supportTypes.map((supportType) => (
+                <div
+                  key={supportType.title}
+                  className="flex gap-16 max-lg:flex-col"
+                >
+                  <supportType.icon className="size-48 flex-none fill-blue-800" />
+                  <InfoBox
+                    heading={{
+                      tagName: "h3",
+                      text: supportType.title,
+                    }}
+                  >
+                    <RichText markdown={supportType.text} />
+                  </InfoBox>
+                </div>
+              ))}
           </div>
         </Container>
-      </div>
-      <div id="angebote">
-        <Container className="ds-stack ds-stack-40 pb-40">
-          <InfoBox
-            heading={{
-              tagName: "h2",
-              text: supportOfferings.title,
-            }}
-          >
-            <RichText markdown={supportOfferings.text} />
-          </InfoBox>
-          <TabGroup initialActiveIndex={initialTabIndex}>
-            <TabGroup.TabList>
-              {tabsData.map(({ title }) => (
-                <TabGroup.Tab key={title}>{title}</TabGroup.Tab>
-              ))}
-            </TabGroup.TabList>
-            <TabGroup.TabPanels>
-              {tabsData.map(({ content, title }) => (
-                <TabGroup.TabPanel key={title}>{content}</TabGroup.TabPanel>
-              ))}
-            </TabGroup.TabPanels>
-          </TabGroup>
-        </Container>
-      </div>
+        <div className="bg-blue-100">
+          <Container>
+            <Heading id="hilfe" tagName="h2" text={supportHow.title} />
+            <div className="ds-stack ds-stack-16 pt-32">
+              <InfoBox>
+                <RichText markdown={supportHow.text} />
+              </InfoBox>
+              <ButtonContainer>
+                <LinkButton look="tertiary" to={supportHow.link.to}>
+                  {supportHow.link.text}
+                </LinkButton>
+              </ButtonContainer>
+            </div>
+          </Container>
+        </div>
+        <div id="angebote">
+          <Container className="ds-stack ds-stack-40 pb-40">
+            <InfoBox
+              heading={{
+                tagName: "h2",
+                text: supportOfferings.title,
+              }}
+            >
+              <RichText markdown={supportOfferings.text} />
+            </InfoBox>
+            <TabGroup initialActiveIndex={initialTabIndex}>
+              <TabGroup.TabList>
+                {tabsData.map(({ title }) => (
+                  <TabGroup.Tab key={title}>{title}</TabGroup.Tab>
+                ))}
+              </TabGroup.TabList>
+              <TabGroup.TabPanels>
+                {tabsData.map(({ content, title }) => (
+                  <TabGroup.TabPanel key={title}>{content}</TabGroup.TabPanel>
+                ))}
+              </TabGroup.TabPanels>
+            </TabGroup>
+          </Container>
+        </div>
 
-      <div className="bg-blue-300">
-        <Container>
-          <InfoBox
-            heading={{
-              tagName: "h2",
-              text: kontaktstelle.title,
-            }}
-          >
-            <RichText markdown={kontaktstelle.text} />
-          </InfoBox>
-        </Container>
-      </div>
+        <div className="bg-blue-300">
+          <Container>
+            <InfoBox
+              heading={{
+                tagName: "h2",
+                text: kontaktstelle.title,
+              }}
+            >
+              <RichText markdown={kontaktstelle.text} />
+            </InfoBox>
+          </Container>
+        </div>
+      </main>
     </>
   );
 }

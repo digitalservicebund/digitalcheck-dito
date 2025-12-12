@@ -56,73 +56,75 @@ export default function Methoden() {
   return (
     <>
       <MetaTitle prefix={ROUTE_METHODS.title} />
-      <Hero subtitle={methods.subtitle} title={methods.title} />
+      <main>
+        <Hero subtitle={methods.subtitle} title={methods.title} />
 
-      <div className="container my-40 space-y-40 lg:my-80 lg:space-y-80">
-        <Timeline>{methods.steps.items.map(renderStep)}</Timeline>
+        <div className="container my-40 space-y-40 lg:my-80 lg:space-y-80">
+          <Timeline>{methods.steps.items.map(renderStep)}</Timeline>
 
-        <section className="space-y-40">
-          <InfoBox
-            heading={{ tagName: "h2", text: methods.furtherMethods.heading }}
-          >
-            <RichText markdown={methods.furtherMethods.content} />
-          </InfoBox>
-
-          <InfoBoxSideBySide>
+          <section className="space-y-40">
             <InfoBox
-              look="method"
-              badge={{ children: methods.itSystems.badge, look: "hint" }}
-              heading={{
-                text: methods.itSystems.heading,
-                tagName: "h3",
-                className: "ds-heading-03-bold",
-              }}
+              heading={{ tagName: "h2", text: methods.furtherMethods.heading }}
             >
-              <RichText markdown={methods.itSystems.content} />
-              <InfoBox.LinkList links={methods.itSystems.links} />
+              <RichText markdown={methods.furtherMethods.content} />
             </InfoBox>
 
-            <InfoBox
-              look="method"
-              badge={{
-                children: methods.technicalFeasibility.badge,
-                look: "hint",
-              }}
-              heading={{
-                text: methods.technicalFeasibility.heading,
-                tagName: "h3",
-                className: "ds-heading-03-bold",
-              }}
-            >
-              <RichText markdown={methods.technicalFeasibility.content} />
-              <InfoBox.LinkList links={methods.technicalFeasibility.links} />
-            </InfoBox>
-          </InfoBoxSideBySide>
+            <InfoBoxSideBySide>
+              <InfoBox
+                look="method"
+                badge={{ children: methods.itSystems.badge, look: "hint" }}
+                heading={{
+                  text: methods.itSystems.heading,
+                  tagName: "h3",
+                  className: "ds-heading-03-bold",
+                }}
+              >
+                <RichText markdown={methods.itSystems.content} />
+                <InfoBox.LinkList links={methods.itSystems.links} />
+              </InfoBox>
+
+              <InfoBox
+                look="method"
+                badge={{
+                  children: methods.technicalFeasibility.badge,
+                  look: "hint",
+                }}
+                heading={{
+                  text: methods.technicalFeasibility.heading,
+                  tagName: "h3",
+                  className: "ds-heading-03-bold",
+                }}
+              >
+                <RichText markdown={methods.technicalFeasibility.content} />
+                <InfoBox.LinkList links={methods.technicalFeasibility.links} />
+              </InfoBox>
+            </InfoBoxSideBySide>
+          </section>
+        </div>
+        <SupportBanner {...supportBanner} />
+        <section className="container my-40 space-y-32 lg:my-80">
+          <Heading tagName="h2">{methods.nextSteps.title}</Heading>
+          <NumberedList>
+            {methods.nextSteps.items.map((item) => (
+              <NumberedList.Item
+                key={item.headline.text}
+                className="space-y-16"
+                disabled={item.isDisabled}
+              >
+                <p className="ds-heading-03-reg">{item.headline.text}</p>
+                {"content" in item && (
+                  <RichText markdown={item.content as string} />
+                )}
+                {item.link && "to" in item.link && (
+                  <Link to={item.link.to} className="text-link">
+                    {item.link.text}
+                  </Link>
+                )}
+              </NumberedList.Item>
+            ))}
+          </NumberedList>
         </section>
-      </div>
-      <SupportBanner {...supportBanner} />
-      <section className="container my-40 space-y-32 lg:my-80">
-        <Heading tagName="h2">{methods.nextSteps.title}</Heading>
-        <NumberedList>
-          {methods.nextSteps.items.map((item) => (
-            <NumberedList.Item
-              key={item.headline.text}
-              className="space-y-16"
-              disabled={item.isDisabled}
-            >
-              <p className="ds-heading-03-reg">{item.headline.text}</p>
-              {"content" in item && (
-                <RichText markdown={item.content as string} />
-              )}
-              {item.link && "to" in item.link && (
-                <Link to={item.link.to} className="text-link">
-                  {item.link.text}
-                </Link>
-              )}
-            </NumberedList.Item>
-          ))}
-        </NumberedList>
-      </section>
+      </main>
     </>
   );
 }

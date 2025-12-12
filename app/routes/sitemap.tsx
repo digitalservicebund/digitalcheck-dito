@@ -52,9 +52,10 @@ export default function Sitemap(): ReactNode {
   return (
     <>
       <MetaTitle prefix={ROUTE_SITEMAP.title} />
-      <Hero title="Sitemap" />
-
-      <ContentWrapper>{renderRoutes(routes)}</ContentWrapper>
+      <main>
+        <Hero title="Sitemap" />
+        <ContentWrapper>{renderRoutes(routes)}</ContentWrapper>
+      </main>
     </>
   );
 }

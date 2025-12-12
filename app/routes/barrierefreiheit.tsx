@@ -21,6 +21,7 @@ export default function Accessibility() {
         <RichText
           markdown={content}
           className="ds-stack-16 [&>h2]:mt-40 [&>h3]:mt-32"
+          tagName="main"
         />
       </ContentWrapper>
     </>

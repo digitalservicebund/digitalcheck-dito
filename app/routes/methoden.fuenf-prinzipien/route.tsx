@@ -39,52 +39,54 @@ export default function FivePrinciples() {
   return (
     <>
       <MetaTitle prefix={ROUTE_METHODS_PRINCIPLES.title} />
-      <Hero
-        title={methodsFivePrinciples.title}
-        subtitle={methodsFivePrinciples.subtitle}
-      >
-        <TableOfContents
-          heading={methodsFivePrinciples.contentOverviewTitle}
-          links={[
-            {
-              id: "instruction",
-              title: methodsFivePrinciples.anchor.instruction,
-            },
-            ...prinzips.map((prinzip) => {
-              return {
-                id: slugify(prinzip.Name),
-                title: `${methodsFivePrinciples.anchor.principle} ${prinzip.Name}`,
-              };
-            }),
-          ]}
-        />
-      </Hero>
+      <main>
+        <Hero
+          title={methodsFivePrinciples.title}
+          subtitle={methodsFivePrinciples.subtitle}
+        >
+          <TableOfContents
+            heading={methodsFivePrinciples.contentOverviewTitle}
+            links={[
+              {
+                id: "instruction",
+                title: methodsFivePrinciples.anchor.instruction,
+              },
+              ...prinzips.map((prinzip) => {
+                return {
+                  id: slugify(prinzip.Name),
+                  title: `${methodsFivePrinciples.anchor.principle} ${prinzip.Name}`,
+                };
+              }),
+            ]}
+          />
+        </Hero>
 
-      <Container className="space-y-40 pb-0">
-        <div id="instruction">
-          <Badge Icon={methodsFivePrinciples.instruction.badge.Icon}>
-            {methodsFivePrinciples.instruction.badge.text}
-          </Badge>
-          <Heading tagName="h2">
-            {methodsFivePrinciples.instruction.title}
-          </Heading>
+        <Container className="space-y-40 pb-0">
+          <div id="instruction">
+            <Badge Icon={methodsFivePrinciples.instruction.badge.Icon}>
+              {methodsFivePrinciples.instruction.badge.text}
+            </Badge>
+            <Heading tagName="h2">
+              {methodsFivePrinciples.instruction.title}
+            </Heading>
+          </div>
+
+          <InfoBoxList className="list-unstyled mt-0">
+            {methodsFivePrinciples.instruction.items.map((item) => (
+              <InfoBox key={item.heading.text} {...item} />
+            ))}
+          </InfoBoxList>
+          <Separator />
+        </Container>
+
+        <div className="container my-40 space-y-96 lg:mt-80">
+          {prinzips.map((prinzip) => (
+            <Principle prinzip={prinzip} key={prinzip.Name} />
+          ))}
         </div>
 
-        <InfoBoxList className="list-unstyled mt-0">
-          {methodsFivePrinciples.instruction.items.map((item) => (
-            <InfoBox key={item.heading.text} {...item} />
-          ))}
-        </InfoBoxList>
-        <Separator />
-      </Container>
-
-      <div className="container my-40 space-y-96 lg:mt-80">
-        {prinzips.map((prinzip) => (
-          <Principle prinzip={prinzip} key={prinzip.Name} />
-        ))}
-      </div>
-
-      <PrinciplePosterBox />
+        <PrinciplePosterBox />
+      </main>
 
       <Container>
         <InfoBox

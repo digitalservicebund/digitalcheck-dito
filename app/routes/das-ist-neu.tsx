@@ -19,17 +19,19 @@ export default function VersionHistory() {
   return (
     <>
       <MetaTitle prefix={ROUTE_VERSION_HISTORY.title} />
-      <Hero title={news.title} subtitle={news.subtitle} />
+      <main>
+        <Hero title={news.title} subtitle={news.subtitle} />
 
-      <ContentWrapper>
-        <Timeline>
-          {historyItems.map(({ key, ...item }) => (
-            <Timeline.Item bullet key={key}>
-              <Timeline.ItemContent {...item} />
-            </Timeline.Item>
-          ))}
-        </Timeline>
-      </ContentWrapper>
+        <ContentWrapper>
+          <Timeline>
+            {historyItems.map(({ key, ...item }) => (
+              <Timeline.Item bullet key={key}>
+                <Timeline.ItemContent {...item} />
+              </Timeline.Item>
+            ))}
+          </Timeline>
+        </ContentWrapper>
+      </main>
     </>
   );
 }
