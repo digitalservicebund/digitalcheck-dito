@@ -274,11 +274,11 @@ export const support = {
                 title: "Nächste Termine",
                 text: dedent`
                   - **Montag, 12. Januar 2026**  
-                  11:00 – 12:00 Uhr
+                  11:00 – 12:30 Uhr
                   Online
 
                   - **Montag, 21. Januar 2026**  
-                  15:00 - 16:00 Uhr
+                  15:00 - 16:30 Uhr
                   Online
                 `,
               },
