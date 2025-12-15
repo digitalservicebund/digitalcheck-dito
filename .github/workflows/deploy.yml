@@ -41,7 +41,7 @@ jobs:
       url: ${{ inputs.environment_url }}
     steps:
       - name: Deploy container image
-        uses: digitalservicebund/argocd-deploy@faa88406a1d6afa918aad127b19735c6e54d7fb1
+        uses: digitalservicebund/argocd-deploy@4e758f584953506c571951ffcba33d6a6246e856
         with:
           environment: "${{ inputs.environment_name }}"
           version: ${{ github.sha }}
