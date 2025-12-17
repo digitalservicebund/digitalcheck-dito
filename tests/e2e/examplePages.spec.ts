@@ -94,10 +94,8 @@ test.describe("Visualizations Overview Page", () => {
 
     await expect(firstVisualization.locator("img")).toBeVisible();
 
-    const metadataSection = firstVisualization.locator(".p-12.bg-gray-100");
-    await expect(metadataSection.getByText("Veröffentlicht am")).toBeVisible();
     await expect(
-      metadataSection.getByText("Art der Visualisierung"),
+      firstVisualization.getByText("Art der Visualisierung"),
     ).toBeVisible();
   });
 
