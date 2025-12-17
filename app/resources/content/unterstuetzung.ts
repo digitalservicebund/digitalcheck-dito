@@ -277,7 +277,7 @@ export const support = {
                   11:00 – 12:30 Uhr
                   Online
 
-                  - **Montag, 21. Januar 2026**  
+                  - **Mittwoch, 21. Januar 2026**  
                   15:00 - 16:30 Uhr
                   Online
                 `,
