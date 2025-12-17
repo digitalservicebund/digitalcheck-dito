@@ -43,12 +43,12 @@ export default function ZFLTrainings() {
             instances={[
               {
                 date: "MO 12.01.26",
-                time: "11:00 - 12:00 Uhr",
+                time: "11:00 - 12:30 Uhr",
                 location: "Online",
               },
               {
                 date: "MI 21.01.26",
-                time: "15:00 - 16:00 Uhr",
+                time: "15:00 - 16:30 Uhr",
                 location: "Online",
               },
             ]}
