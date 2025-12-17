@@ -273,7 +273,7 @@ export const support = {
                 icon: TimerOutlined,
                 title: "Nächste Termine",
                 text: dedent`
-                  - **tag, 12. Januar 2026**  
+                  - **Montag, 12. Januar 2026**  
                   11:00 – 12:30 Uhr
                   Online
 
