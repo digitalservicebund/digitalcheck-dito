@@ -12,7 +12,7 @@ dotenv.config({
 });
 
 // use larger viewports for snapshot tests
-const desktopViewport = { width: 1200, height: 4800 };
+const desktopViewport = { width: 1200, height: 1500 };
 const mobileHeight = 3200;
 
 const config: PlaywrightTestConfig = {
