@@ -12,7 +12,7 @@ exports[`Footer Component > Renders correctly 1`] = `
     >
       <nav
         aria-label="Schnellübersicht"
-        class="grid grid-cols-1 justify-between gap-32 sm:grid-cols-[repeat(3,_minmax(0,_18rem))] sm:grid-rows-2"
+        class="grid grid-cols-1 justify-between gap-32 sm:grid-cols-[repeat(3,minmax(0,18rem))] sm:grid-rows-2"
       >
         <div
           class="ds-stack ds-stack-8 row-span-2"
@@ -362,6 +362,23 @@ exports[`Footer Component > Renders correctly 1`] = `
                 class="flex items-center"
               >
                 Das ist neu
+                 
+              </span>
+            </a>
+          </li>
+          <li
+            class="after:ml-8 after:inline-block after:content-['•'] last:after:content-['']"
+          >
+             
+            <a
+              class="text-link increase-tap-area"
+              data-discover="true"
+              href="/zahlen-und-fakten"
+            >
+              <span
+                class="flex items-center"
+              >
+                Zahlen und Fakten
                  
               </span>
             </a>
