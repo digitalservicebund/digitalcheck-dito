@@ -158,3 +158,41 @@ jobs:
       METRICS_DEPLOYMENT_WEBHOOK_URL: ${{ secrets.METRICS_DEPLOYMENT_WEBHOOK_URL }}
       METRICS_WEBHOOK_TOKEN: ${{ secrets.METRICS_WEBHOOK_TOKEN }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  deploy-to-production-stackit:
+    needs: [build-and-push-image]
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      packages: read
+    uses: ./.github/workflows/deploy.yml
+    concurrency: deploy
+    with:
+      environment_name: production-stackit
+      environment_url: https://digitalcheck.bund.de
+    secrets:
+      GITOPS_DIGITALCHECK_APP_ID: ${{ secrets.GITOPS_DIGITALCHECK_APP_ID }}
+      GITOPS_DIGITALCHECK_APP_PRIVATE_KEY: ${{ secrets.GITOPS_DIGITALCHECK_APP_PRIVATE_KEY }}
+      ARGOCD_PIPELINE_PASSWORD: ${{ secrets.ARGOCD_PIPELINE_PASSWORD }}
+      ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
+      METRICS_DEPLOYMENT_WEBHOOK_URL: ${{ secrets.METRICS_DEPLOYMENT_WEBHOOK_URL }}
+      METRICS_WEBHOOK_TOKEN: ${{ secrets.METRICS_WEBHOOK_TOKEN }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  deploy-to-staging-stackit:
+    needs: [build-and-push-image]
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/staging/')
+    permissions:
+      packages: read
+    uses: ./.github/workflows/deploy.yml
+    concurrency: deploy
+    with:
+      environment_name: staging-stackit
+      environment_url: https://digitalcheck-dito.dev.ds4g.net/
+    secrets:
+      GITOPS_DIGITALCHECK_APP_ID: ${{ secrets.GITOPS_DIGITALCHECK_APP_ID }}
+      GITOPS_DIGITALCHECK_APP_PRIVATE_KEY: ${{ secrets.GITOPS_DIGITALCHECK_APP_PRIVATE_KEY }}
+      ARGOCD_PIPELINE_PASSWORD: ${{ secrets.ARGOCD_PIPELINE_PASSWORD }}
+      ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
+      METRICS_DEPLOYMENT_WEBHOOK_URL: ${{ secrets.METRICS_DEPLOYMENT_WEBHOOK_URL }}
+      METRICS_WEBHOOK_TOKEN: ${{ secrets.METRICS_WEBHOOK_TOKEN }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

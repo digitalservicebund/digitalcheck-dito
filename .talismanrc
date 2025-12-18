@@ -29,6 +29,7 @@ allowed_patterns:
   - "secrets: inherit"
   - "key: ${{ runner.os }}"
   - GITOPS_DIGITALCHECK_APP_PRIVATE_KEY
+  - ARGOCD_PIPELINE_PASSWORD
 
 scopeconfig:
   - scope: node  # ignores files such as package-lock.json
