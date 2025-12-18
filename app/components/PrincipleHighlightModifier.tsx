@@ -77,7 +77,6 @@ function PrincipleHighlight({
         "ds-body-01-reg",
         PRINCIPLE_COLORS[principle.Nummer].background,
       )}
-      aria-label={`Textbeispiel erfüllt Prinzip: ${principle.Name}`}
       aria-describedby={explanationID(absatzId, principle.Nummer)}
     >
       {children}
