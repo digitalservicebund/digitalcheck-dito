@@ -131,12 +131,13 @@ export default function ZahlenUndFakten() {
     <>
       <MetaTitle prefix={ROUTE_NUMBERS_FACTS.title} />
       <main>
-        <Hero title="Der Digitalcheck in Zahlen">
+        <Hero
+          title="Das Zentrum für Legistik in Zahlen"
+          className="bg-transparent"
+        >
           <RichText
             markdown={dedent`
-              So wird der Digitalcheck in der Praxis genutzt: Hier finden Sie
-              aktuelle Daten zur Anwendung, unseren Unterstützungsangeboten und der
-              ressortübergreifenden Vernetzung.
+              Hier finden Sie aktuelle Daten zur Anwendung, unseren Unterstützungsangeboten und der ressortübergreifenden Vernetzung.
               
               Start der Datenerhebung: 01.01.2023
           `}
@@ -153,7 +154,7 @@ export default function ZahlenUndFakten() {
                 {elements.map((el, i) => (
                   <li
                     key={`${el.badge.text}-${i}`}
-                    className="min-w-240 space-y-16 bg-blue-100 px-32 py-40"
+                    className="bg-zfl-main20 min-w-240 space-y-16 px-32 py-40"
                   >
                     <Badge look="white" Icon={el.badge.Icon}>
                       {el.badge.text}

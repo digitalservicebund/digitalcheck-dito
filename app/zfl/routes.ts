@@ -31,6 +31,11 @@ export const ROUTE_ZFL_A11Y = createRoute(
   "Barrierefreiheit",
 );
 
+export const ROUTE_ZFL_NUMBERS_FACTS = createRoute(
+  "zahlen-und-fakten",
+  "Zahlen und Fakten",
+);
+
 export default [
   ROUTE_ZFL_LANDING,
   ROUTE_ZFL_BEGLEITUNGEN,
@@ -38,4 +43,5 @@ export default [
   ROUTE_ZFL_IMPRINT,
   ROUTE_ZFL_PRIVACY,
   ROUTE_ZFL_A11Y,
+  ROUTE_ZFL_NUMBERS_FACTS,
 ];

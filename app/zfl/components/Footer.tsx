@@ -7,6 +7,7 @@ import {
   ROUTE_ZFL_A11Y,
   ROUTE_ZFL_BEGLEITUNGEN,
   ROUTE_ZFL_IMPRINT,
+  ROUTE_ZFL_NUMBERS_FACTS,
   ROUTE_ZFL_PRIVACY,
   ROUTE_ZFL_TRAININGS,
 } from "../routes";
@@ -114,6 +115,10 @@ export default function Footer() {
               {
                 text: ROUTE_ZFL_A11Y.title,
                 url: ROUTE_ZFL_A11Y.url,
+              },
+              {
+                text: ROUTE_ZFL_NUMBERS_FACTS.title,
+                url: ROUTE_ZFL_NUMBERS_FACTS.url,
               },
             ]}
             className="row-span-2"
