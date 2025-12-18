@@ -68,7 +68,7 @@ export default function Footer() {
     >
       <div className="ds-stack ds-stack-32 sm:ds-stack-40 w-full max-w-6xl px-16 py-40">
         <nav
-          className="grid grid-cols-1 justify-between gap-32 sm:grid-cols-[repeat(3,_minmax(0,_18rem))] sm:grid-rows-2"
+          className="grid grid-cols-1 justify-between gap-32 sm:grid-cols-[repeat(3,minmax(0,18rem))] sm:grid-rows-2"
           aria-label={footer.top.navLabel}
         >
           <LinkList

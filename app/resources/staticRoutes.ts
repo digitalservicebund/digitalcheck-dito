@@ -39,6 +39,10 @@ export const ROUTE_IMPRINT = createRoute("impressum", "Impressum");
 export const ROUTE_PRIVACY = createRoute("datenschutz", "Datenschutzerklärung");
 export const ROUTE_A11Y = createRoute("barrierefreiheit", "Barrierefreiheit");
 export const ROUTE_SITEMAP = createRoute("sitemap", "Sitemap");
+export const ROUTE_NUMBERS_FACTS = createRoute(
+  "zahlen-und-fakten",
+  "Zahlen und Fakten",
+);
 export const ROUTE_VERSION_HISTORY = createRoute("das-ist-neu", "Das ist neu");
 
 // PRECHECK ROUTES

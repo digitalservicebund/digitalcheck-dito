@@ -7,7 +7,7 @@ export type BadgeProps = {
   text?: ReactNode;
   className?: string;
   principleNumber?: PrincipleNumber;
-  look?: "hint" | "gray" | "default";
+  look?: "hint" | "gray" | "default" | "white";
   Icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 };
 
@@ -32,6 +32,7 @@ function Badge({
         principleStyle,
         look === "hint" && "bg-blue-300 text-blue-800",
         look === "gray" && "bg-gray-300",
+        look === "white" && "bg-white",
         className,
       )}
     >

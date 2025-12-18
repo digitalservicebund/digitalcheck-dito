@@ -10,6 +10,7 @@ import {
   ROUTE_INTEROPERABILITY,
   ROUTE_INTEROPERABILITY_SPOC,
   ROUTE_METHODS,
+  ROUTE_NUMBERS_FACTS,
   ROUTE_PRECHECK,
   ROUTE_PRIVACY,
   ROUTE_SITEMAP,
@@ -114,6 +115,7 @@ export const footer = {
       { url: ROUTE_A11Y.url, text: "Barrierefreiheit" },
       { url: ROUTE_SITEMAP.url, text: "Sitemap" },
       { url: ROUTE_VERSION_HISTORY.url, text: "Das ist neu" },
+      { url: ROUTE_NUMBERS_FACTS.url, text: "Zahlen und Fakten" },
       {
         url: "https://github.com/digitalservicebund/digitalcheck-dito",
         text: "Open Source Code",
