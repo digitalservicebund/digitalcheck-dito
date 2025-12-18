@@ -33,7 +33,7 @@ const dsData: DsData = [
       {
         badge: {
           Icon: LocalActivityOutlined,
-          text: "Digitalcheck",
+          text: "Regelungschecks",
         },
         count: "850+",
         description: "Regelungen wurden auf Digitalbezug geprüft.",
@@ -41,15 +41,7 @@ const dsData: DsData = [
       {
         badge: {
           Icon: LocalActivityOutlined,
-          text: "Digitalcheck",
-        },
-        count: "470+",
-        description: "Regelungen sind den gesamten Digitalcheck durchlaufen.",
-      },
-      {
-        badge: {
-          Icon: LocalActivityOutlined,
-          text: "Digitalcheck",
+          text: "Regelungschecks",
         },
         count: "120+",
         description:
@@ -67,7 +59,7 @@ const dsData: DsData = [
         },
         count: "400+",
         description:
-          "Ministeriums-mitarbeitende wurden durch das Digitalcheck-Team geschult.",
+          "Ministeriums-mitarbeitende wurden durch das ZfL-Team geschult.",
       },
       {
         badge: {
@@ -83,8 +75,7 @@ const dsData: DsData = [
           text: "Unterstützung",
         },
         count: "170+",
-        description:
-          "Service Anrufe & Mails wurden vom Digitalcheck-Team bearbeitet.",
+        description: "Service Anrufe & Mails wurden vom ZfL-Team bearbeitet.",
       },
     ],
   },
