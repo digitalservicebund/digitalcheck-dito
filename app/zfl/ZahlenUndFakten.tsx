@@ -130,7 +130,7 @@ export default function ZahlenUndFakten() {
   return (
     <>
       <MetaTitle prefix={ROUTE_NUMBERS_FACTS.title} />
-      <main>
+      <>
         <Hero
           title="Das Zentrum für Legistik in Zahlen"
           className="bg-transparent"
@@ -169,7 +169,7 @@ export default function ZahlenUndFakten() {
             </Fragment>
           ))}
         </ContentWrapper>
-      </main>
+      </>
     </>
   );
 }
