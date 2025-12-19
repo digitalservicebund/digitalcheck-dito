@@ -4,6 +4,7 @@ import type { Route } from "./+types/handle-client-side-error";
 const ClientSideErrorSchema = z.object({
   message: z.string(),
   stack: z.string().optional(),
+  url: z.string().optional(),
 });
 
 export type ClientSideError = z.infer<typeof ClientSideErrorSchema>;
@@ -16,12 +17,28 @@ const handleClientSideError = async (request: Request): Promise<Response> => {
     const data: ClientSideError = ClientSideErrorSchema.parse(
       await request.json(),
     );
+    const userAgent = request.headers.get("User-Agent");
 
-    console.log(
-      `Client-side error: ${String(data.message)}`,
-      String(data.stack),
-    );
+    const isDevelopment = process.env.NODE_ENV === "development";
 
+    const error = {
+      type: "Client-side error",
+      message: data.message,
+      context: {
+        userAgent,
+        url: data.url,
+      },
+      stack: data.stack,
+    };
+
+    if (isDevelopment) {
+      // log stack as-is for easier reading
+      delete error.stack;
+      console.error(JSON.stringify(error));
+      console.log(data.stack);
+    } else {
+      console.error(JSON.stringify(error));
+    }
     return new Response(null, { status: 204 }); // No Content
   } catch (error) {
     console.error("Failed to handle client error:", error);

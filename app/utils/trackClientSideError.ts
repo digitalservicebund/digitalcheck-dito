@@ -5,6 +5,7 @@ export default function trackClientSideError(error: Error) {
   const body: ClientSideError = {
     message: error.message,
     stack: error.stack,
+    url: globalThis.location.href,
   };
   fetch(ROUTE_HANDLE_CLIENT_SIDE_ERRORS, {
     method: "POST",
