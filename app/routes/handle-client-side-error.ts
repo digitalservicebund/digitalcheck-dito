@@ -34,10 +34,10 @@ const handleClientSideError = async (request: Request): Promise<Response> => {
     if (isDevelopment) {
       // log stack as-is for easier reading
       delete error.stack;
-      console.error(JSON.stringify(error));
+      console.log(JSON.stringify(error));
       console.log(data.stack);
     } else {
-      console.error(JSON.stringify(error));
+      console.log(JSON.stringify(error));
     }
     return new Response(null, { status: 204 }); // No Content
   } catch (error) {
