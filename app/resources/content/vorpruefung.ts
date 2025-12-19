@@ -185,10 +185,6 @@ export const preCheck = {
   nav: {
     ariaLabel: "Alle Fragen",
   },
-  srHint: {
-    before: "Frage ",
-    between: " von ",
-  },
   answerConflictHint: {
     euBezugHint: {
       title: "Widerspruch in Ihren Angaben",

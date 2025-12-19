@@ -139,6 +139,8 @@ export default function Index() {
     }),
   );
 
+  const questionLabelId = `question${questionIdx}-label`;
+
   return (
     <form {...form.getFormProps()} className="space-y-40">
       <MetaTitle
@@ -149,14 +151,17 @@ export default function Index() {
         }
       />
       <input {...form.getHiddenInputProps("questionId")} />
-      <fieldset className="space-y-32">
-        <legend className="ds-stack ds-stack-16">
-          <span className="sr-only">{`${preCheck.srHint.before}${questionIdx + 1}${preCheck.srHint.between}${questions.length}`}</span>
+      <section className="space-y-32">
+        <div className="space-y-16">
           <Heading
             text={question.question}
             tagName="h1"
             look="ds-heading-02-reg"
+            id={questionLabelId}
           />
+          <div className="sr-only">
+            Frage {questionIdx + 1} von {questions.length}
+          </div>
           <div>
             <RichText markdown={question.text} />
           </div>
@@ -165,9 +170,13 @@ export default function Index() {
               <RichText markdown={question.hint.text} />
             </DetailsSummary>
           )}
-        </legend>
-        <RadioGroup scope={form.scope("answer")} options={options} />
-      </fieldset>
+        </div>
+        <RadioGroup
+          scope={form.scope("answer")}
+          options={options}
+          aria-labelledby={questionLabelId}
+        />
+      </section>
       <div className="space-y-40">
         {hasAnswerConflict && (
           <InlineNotice

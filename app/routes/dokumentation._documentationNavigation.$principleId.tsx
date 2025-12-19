@@ -218,8 +218,8 @@ function PositiveAnswerFormElements({
   );
 
   return (
-    <fieldset className="space-y-40">
-      <legend className="space-y-8">
+    <div className="space-y-40">
+      <div className="space-y-8">
         <Heading tagName="h2" className="ds-heading-03-reg">
           {principlePages.positivePrinciple.title}
         </Heading>
@@ -227,7 +227,7 @@ function PositiveAnswerFormElements({
           markdown={principlePages.positivePrinciple.description}
           className="space-y-24"
         />
-      </legend>
+      </div>
 
       {reasoningField.error() && (
         <InlineNotice
@@ -297,7 +297,7 @@ function PositiveAnswerFormElements({
       >
         {principlePages.positivePrinciple.actions.addOwnExplanation.title}
       </Button>
-    </fieldset>
+    </div>
   );
 }
 
@@ -309,8 +309,8 @@ function NegativeAnswerFormElements({
   scope,
 }: Readonly<NegativeAnswerFormElementProps>) {
   return (
-    <fieldset className="space-y-40">
-      <legend className="space-y-8">
+    <div className="space-y-40">
+      <div className="space-y-8">
         <Heading tagName="h2" className="ds-heading-03-reg">
           {principlePages.negativePrinciple.title}
         </Heading>
@@ -318,7 +318,7 @@ function NegativeAnswerFormElements({
           markdown={principlePages.negativePrinciple.description}
           className="space-y-24"
         />
-      </legend>
+      </div>
 
       <Textarea
         scope={scope}
@@ -328,7 +328,7 @@ function NegativeAnswerFormElements({
       >
         {principlePages.negativePrinciple.label}
       </Textarea>
-    </fieldset>
+    </div>
   );
 }
 
@@ -340,8 +340,8 @@ function IrrelevantAnswerFormElements({
   scope,
 }: Readonly<IrrelevantAnswerFormElementProps>) {
   return (
-    <fieldset className="space-y-40">
-      <legend className="space-y-8">
+    <div className="space-y-40">
+      <div className="space-y-8">
         <Heading tagName="h2" className="ds-heading-03-reg">
           {principlePages.irrelevantPrinciple.title}
         </Heading>
@@ -349,7 +349,7 @@ function IrrelevantAnswerFormElements({
           markdown={principlePages.irrelevantPrinciple.description}
           className="space-y-24"
         />
-      </legend>
+      </div>
 
       <Textarea
         scope={scope}
@@ -359,7 +359,7 @@ function IrrelevantAnswerFormElements({
       >
         {principlePages.irrelevantPrinciple.label}
       </Textarea>
-    </fieldset>
+    </div>
   );
 }
 
@@ -512,12 +512,16 @@ export default function DocumentationPrinciple() {
 
         <form {...form.getFormProps()} className="space-y-40">
           <input {...form.getHiddenInputProps("id")} />
+          <Heading
+            id="question-label"
+            tagName="h2"
+            look="ds-heading-03-reg"
+            className="mb-16"
+          >
+            {principlePages.question}
+          </Heading>
           <RadioGroup
-            label={
-              <Heading tagName="h2" look="ds-heading-03-reg">
-                {principlePages.question}
-              </Heading>
-            }
+            aria-labelledby="question-label"
             scope={form.scope("answer")}
             options={principlePages.radioOptions.map((option) => ({
               value: option,

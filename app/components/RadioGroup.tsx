@@ -1,5 +1,5 @@
 import { useField, type FormScope } from "@rvf/react";
-import { ComponentPropsWithRef, useId, type ReactNode } from "react";
+import { ComponentPropsWithRef, useId } from "react";
 import twMerge from "~/utils/tailwindMerge";
 import InputError from "./InputError";
 
@@ -12,11 +12,12 @@ type Option<Value extends string | number> = {
 
 type BaseInputProps = Omit<ComponentPropsWithRef<"input">, "type">;
 
-interface RadioGroupProps<FormData, Value extends string | number = string>
-  extends BaseInputProps {
+interface RadioGroupProps<
+  FormData,
+  Value extends string | number = string,
+> extends BaseInputProps {
   scope: FormScope<FormData>;
   options: Option<Value>[];
-  label?: ReactNode;
   className?: string;
   error?: string | null;
   warningInsteadOfError?: boolean;
@@ -25,7 +26,7 @@ interface RadioGroupProps<FormData, Value extends string | number = string>
 function RadioGroup<FormData, Value extends string | number = string>({
   scope,
   options,
-  label,
+  "aria-labelledby": ariaLabelledby,
   className,
   error,
   warningInsteadOfError,
@@ -37,19 +38,20 @@ function RadioGroup<FormData, Value extends string | number = string>({
   const hasError = !!(error || field.error()) && !warningInsteadOfError;
   const hasWarning = !!(error || field.error()) && warningInsteadOfError;
 
+  /*
+   Use div[role="radiogroup"] instead of a fieldset with legend since our forms
+   use headings to indicate these form sections.
+   The alternative, putting the heading inside the label, is generally
+   discouraged because it creates extra noise.
+  */
   return (
-    <fieldset
+    <div
+      role="radiogroup"
       className={twMerge("space-y-16", className)}
-      aria-labelledby={label ? `${field.name()}-label` : undefined}
+      aria-labelledby={ariaLabelledby}
       aria-errormessage={hasError ? errorId : undefined}
-      aria-invalid={!!field.error()}
+      aria-invalid={field.error() ? "true" : undefined}
     >
-      {label ? (
-        <legend id={`${field.name()}-label`} className="mb-24">
-          {label}
-        </legend>
-      ) : null}
-
       {options.map((opt, idx) => {
         const id = opt.id ?? `${String(field.name())}-${idx}`;
 
@@ -91,7 +93,7 @@ function RadioGroup<FormData, Value extends string | number = string>({
           {error || field.error()}
         </InputError>
       )}
-    </fieldset>
+    </div>
   );
 }
 
