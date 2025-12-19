@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useId } from "react";
 import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import PrincipleHighlightContext from "~/contexts/PrincipleHighlightContext";
@@ -6,11 +6,11 @@ import { useIsMobileSize } from "~/hooks/deviceHook";
 import { PRINCIPLE_COLORS } from "~/resources/constants";
 import { explanationID, Node } from "~/utils/paragraphUtils";
 import { BasePrinzip } from "~/utils/strapiData.server";
-import { idFromText } from "~/utils/utilFunctions";
 
 export default function PrincipleHighlightModifier({ node }: { node: Node }) {
   const { principlesToShow, setActiveHighlight, absatzId, useAnchorLinks } =
     useContext(PrincipleHighlightContext);
+  const highlightID = useId();
 
   const isMobileSize = useIsMobileSize();
 
@@ -22,9 +22,6 @@ export default function PrincipleHighlightModifier({ node }: { node: Node }) {
   );
 
   if (!principle) return text;
-
-  // Generate a deterministic ID based on the text content and position
-  const highlightID = idFromText(text, "highlight");
 
   if (!useAnchorLinks || !isMobileSize || !absatzId)
     return (
