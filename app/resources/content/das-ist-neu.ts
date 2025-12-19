@@ -1,12 +1,15 @@
 import {
   ROUTE_DOCUMENTATION,
   ROUTE_DOCUMENTATION_STATIC_WORD,
+  ROUTE_EXAMPLES_VISUALISATIONS,
   ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
   ROUTE_FUNDAMENTALS_NKR,
+  ROUTE_INTEROPERABILITY,
   ROUTE_INTEROPERABILITY_SPOC,
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_VISUALIZE,
   ROUTE_METHODS_VISUALIZE_FLOWCHARTS,
+  ROUTE_NUMBERS_FACTS,
   ROUTE_REGELUNGEN,
   ROUTE_VERSION_HISTORY,
 } from "~/resources/staticRoutes";
@@ -21,6 +24,26 @@ export const news = {
   `,
   items: [
     {
+      badge: { text: "18.12.2025" },
+      content: dedent`
+      "Der Digitalcheck in Zahlen" gibt eine Übersicht, was mit dem Digitalcheck bisher erreicht wurde.
+      Dazu zählen durchgeführte Digitalbezugsprüfungen, Regelungsbegleitungen durch das Team, Schulungen,
+      Interoperabilitätsberatungen und Vernetzungsangebote.
+      
+      [Hier ansehen](${ROUTE_NUMBERS_FACTS.url}).
+      `,
+    },
+    {
+      badge: { text: "17.12.2025" },
+      content: dedent`
+      Fünf neue Visualisierungen wurden auf unserer "Beispiele für Visualisierungen"-Seite veröffentlicht.
+      Diese Visualisierungen wurden von Legist:innen erarbeitet und dienen als Inspiration bzw. Positiv-Beispiele, wie
+      Veranschaulichungen helfen, den Ablauf des Regelungsvorhaben noch besser greifen zu können.
+      
+      [Hier ansehen](${ROUTE_EXAMPLES_VISUALISATIONS.url}).
+      `,
+    },
+    {
       badge: {
         text: "05.12.2025",
       },
@@ -29,6 +52,8 @@ export const news = {
       - Prozess für Regelungsvorhaben mit grenzüberschreitenden Auswirkungen innerhalb der EU
       - Klare Anforderungen für Interoperabilitätsbewertungen
       - Hintergründe und Ziele der neuen EU-Verordnung
+      
+      [Hier ansehen](${ROUTE_INTEROPERABILITY.url}?tab=2).
       `,
     },
     {
