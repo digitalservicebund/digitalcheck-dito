@@ -29,6 +29,7 @@ describe("Tracking client-side error by logging it server-side", () => {
       body: JSON.stringify({
         message: "Test error",
         stack: error.stack,
+        url: "http://localhost:3000/",
       }),
     });
   });

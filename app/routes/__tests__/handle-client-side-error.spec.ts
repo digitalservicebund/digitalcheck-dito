@@ -31,10 +31,13 @@ describe("endpoint to handle client-side errors", () => {
 
     await action(getActionParams(request));
 
-    expect(consoleSpy).toHaveBeenCalledWith(
-      `Client-side error: ${clientSideError.message}`,
-      clientSideError.stack,
-    );
+    const expectedBody = {
+      type: "Client-side error",
+      message: "Something went wrong.",
+      context: { userAgent: null },
+      stack: "Something went wrong: stack here.",
+    };
+    expect(consoleSpy).toHaveBeenCalledWith(JSON.stringify(expectedBody));
   });
 
   it("logs error to console on invalid request", async () => {
