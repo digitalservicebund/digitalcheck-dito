@@ -15,11 +15,22 @@ import { dedent } from "~/utils/dedentMultilineStrings";
 export const news = {
   title: "Das ist neu",
   subtitle: dedent`
-      Das Digitalcheck Angebot wird kontinuierlich weiterentwickelt. Bedürfnisse und Rückmeldungen von Nutzenden werden kurzfristig einbearbeitet. Auch geänderte und neue rechtliche Anforderungen führen zu Anpassungen. Unten finden Sie eine chronologische Übersicht der Ergänzungen und Änderungen auf der Website.
+      Das Digitalcheck-Angebot wird kontinuierlich weiterentwickelt. Bedürfnisse und Rückmeldungen von Nutzenden werden kurzfristig eingearbeitet. Auch geänderte und neue rechtliche Anforderungen führen zu Anpassungen. Unten finden Sie eine chronologische Übersicht der Ergänzungen und Änderungen auf der Website.
       
       Haben Sie Anregungen oder Wünsche? Kontaktieren Sie uns jederzeit gerne unter [0151/40 76 78 39](tel:+4915140767839) oder [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de).
   `,
   items: [
+    {
+      badge: {
+        text: "05.12.2025",
+      },
+      content: dedent`
+      Neue Inhalte zum Bereich Interoperabilität:
+      - Prozess für Regelungsvorhaben mit grenzüberschreitenden Auswirkungen innerhalb der EU
+      - Klare Anforderungen für Interoperabilitätsbewertungen
+      - Hintergründe und Ziele der neuen EU-Verordnung
+      `,
+    },
     {
       badge: {
         text: "11.11.2025",
