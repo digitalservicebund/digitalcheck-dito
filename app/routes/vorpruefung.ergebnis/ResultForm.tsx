@@ -114,14 +114,13 @@ export default function ResultForm({
     <>
       <form {...form.getFormProps()} data-testid="result-form">
         <input {...resultField.getHiddenInputProps()} />
-        <fieldset className="ds-stack ds-stack-24">
-          <legend>
-            <Heading
-              tagName="h2"
-              className="ds-heading-03-reg"
-              text={preCheckResult.form.formLegend}
-            />
-          </legend>
+        <div className="ds-stack ds-stack-24">
+          <Heading
+            tagName="h2"
+            className="ds-heading-03-reg"
+            text={preCheckResult.form.formLegend}
+          />
+
           <div className="flex items-start pb-[40px]">
             <div className="mr-[16px] shrink-0">
               <EmailOutlined className="h-40 w-40 fill-blue-800" />
@@ -180,7 +179,7 @@ export default function ResultForm({
               )}
             </div>
           </div>
-        </fieldset>
+        </div>
       </form>
 
       <div className="flex items-start">

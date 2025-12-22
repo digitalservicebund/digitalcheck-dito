@@ -48,18 +48,17 @@ export default function DocumentationParticipation() {
       <RichText markdown={participation.textIntro} className="gap-40" />
 
       <form className="space-y-40" {...form.getFormProps()}>
-        <fieldset className="space-y-16">
-          <legend>
-            <InfoBox
-              heading={{
-                tagName: "h2",
-                look: "ds-heading-03-reg",
-                text: participation.formats.heading,
-              }}
-            >
-              <RichText markdown={participation.formats.content} />
-            </InfoBox>
-          </legend>
+        <div className="space-y-16">
+          <InfoBox
+            heading={{
+              tagName: "h2",
+              look: "ds-heading-03-reg",
+              text: participation.formats.heading,
+            }}
+          >
+            <RichText markdown={participation.formats.content} />
+          </InfoBox>
+
           <Textarea
             description={participation.formats.textField.description}
             placeholder={participation.formats.textField.placeholder}
@@ -68,25 +67,21 @@ export default function DocumentationParticipation() {
           >
             {participation.formats.textField.label}
           </Textarea>
-        </fieldset>
+        </div>
 
-        <fieldset>
-          <legend>
-            <Heading
-              tagName="h2"
-              look="ds-heading-03-reg"
-              text={participation.results.heading}
-              className="mb-16"
-            />
-          </legend>
-          <Textarea
-            description={participation.results.textField.description}
-            scope={form.scope("results")}
-            warningInsteadOfError
-          >
-            {participation.results.textField.label}
-          </Textarea>
-        </fieldset>
+        <Heading
+          tagName="h2"
+          look="ds-heading-03-reg"
+          text={participation.results.heading}
+          className="mb-16"
+        />
+        <Textarea
+          description={participation.results.textField.description}
+          scope={form.scope("results")}
+          warningInsteadOfError
+        >
+          {participation.results.textField.label}
+        </Textarea>
 
         <DocumentationActions
           previousUrl={previousUrl}
