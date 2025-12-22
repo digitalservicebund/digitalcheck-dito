@@ -165,7 +165,7 @@ const PageHeader = () => {
           {/* Mobile View Controls */}
           <div className="flex items-center space-x-16 lg:hidden">
             <a
-              className="plausible-event-name=Nav+Bar.Mobile+Phone+Icon border-b-[4px] border-transparent"
+              className="plausible-event-name=Nav+Bar.Mobile+Phone+Icon border-b-4 border-transparent"
               href={`tel:${header.contactTel.number.replace(/\s/g, "")}`}
               aria-label={header.contactTel.msg}
             >
@@ -173,7 +173,7 @@ const PageHeader = () => {
             </a>
             <button
               className={twMerge(
-                "h-full cursor-pointer border-b-[4px] border-transparent px-16 hover:bg-blue-100",
+                "h-full cursor-pointer border-b-4 border-transparent px-16 hover:bg-blue-100",
                 mobileMenuOpen && "border-blue-800 bg-blue-100",
               )}
               onClick={toggleMobileMenu}
@@ -190,7 +190,7 @@ const PageHeader = () => {
         <nav
           id="mobile-menu"
           className={twJoin(
-            "plausible-event-name=Nav+Bar.Burger+Menu+Icon+Mobile.Open+Close absolute right-0 left-0 z-40 rounded-b-md border-t-1 border-gray-600 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]",
+            "plausible-event-name=Nav+Bar.Burger+Menu+Icon+Mobile.Open+Close absolute right-0 left-0 z-40 rounded-b-md border-t border-gray-600 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]",
             mobileMenuOpen ? "overflow-y-auto" : "invisible",
           )}
           aria-hidden={!mobileMenuOpen}

@@ -115,7 +115,7 @@ const PageHeader = () => {
             to={item.url}
             className={twMerge(
               basicLinkClasses,
-              "ds-label-01-reg border-l-[4px] border-transparent p-16",
+              "ds-label-01-reg border-l-4 border-transparent p-16",
               currentPath === item.url && activeClasses,
             )}
             key={item.title}
