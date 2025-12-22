@@ -1,3 +1,4 @@
+import { twJoin } from "tailwind-merge";
 import "./Kopfzeile.css";
 
 /**
@@ -13,9 +14,9 @@ import "./Kopfzeile.css";
  *
  * z-40 is added to ensure that a menu drawer below does not darken the banner.
  * */
-export function Kopfzeile() {
+export function Kopfzeile({ className }: { className?: string }) {
   return (
-    <header className="kern-kopfzeile z-40">
+    <div className={twJoin("kern-kopfzeile", className)}>
       <div className="kern-container-fluid">
         <div className="kern-kopfzeile__content">
           <span className="kern-kopfzeile__flagge" aria-hidden="true">
@@ -35,6 +36,6 @@ export function Kopfzeile() {
           </span>
         </div>
       </div>
-    </header>
+    </div>
   );
 }

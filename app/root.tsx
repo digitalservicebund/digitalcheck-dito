@@ -12,7 +12,6 @@ import {
   useRouteLoaderData,
 } from "react-router";
 
-import { Kopfzeile } from "~/components/kern-preview/Kopfzeile";
 import Footer from "~/layout/Footer";
 import PageHeader from "~/layout/PageHeader";
 import { siteMeta } from "~/resources/content/shared/meta";
@@ -193,7 +192,6 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
         <PHProvider posthogEnabled={posthogEnabled} posthogKey={posthogKey}>
           <FeatureFlagProvider featureFlags={featureFlags ?? {}}>
             <ScrollAndFocus />
-            <Kopfzeile />
             {!isZFLPage && <PageHeader />}
             {children}
             {!isZFLPage && <Footer />}

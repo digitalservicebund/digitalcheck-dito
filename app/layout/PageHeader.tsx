@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, type UIMatch, useLocation, useMatches } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Container from "~/components/Container";
+import { Kopfzeile } from "~/components/kern-preview/Kopfzeile.tsx";
 import RichText from "~/components/RichText";
 import { useResize } from "~/hooks/deviceHook";
 import DropdownMenu from "~/layout/DropdownMenu.tsx";
@@ -140,6 +141,7 @@ const PageHeader = () => {
         />
       )}
       <header className="relative" ref={headerRef}>
+        <Kopfzeile className="relative z-30" />
         <div className="relative z-30 flex h-[72px] justify-between border-b-2 border-blue-300 bg-white pl-16 lg:px-16">
           {/* Logo and title */}
           <Link
