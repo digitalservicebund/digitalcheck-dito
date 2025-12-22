@@ -6,6 +6,7 @@ export type Node = {
   children?: Node[];
   format?: string;
   underline?: boolean;
+  italic?: boolean;
   url?: string;
 };
 

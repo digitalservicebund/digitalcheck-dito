@@ -3,6 +3,7 @@ import { BlocksRenderer } from "~/components/BlocksRenderer";
 import { DetailsSummaryProps } from "~/components/DetailsSummary.tsx";
 import type { HeadingProps } from "~/components/Heading";
 import { DetailsSummaryListProps } from "~/components/InfoBox.tsx";
+import ItalicModifier from "~/components/ItalicModifier.tsx";
 import PrincipleHighlightModifier from "~/components/PrincipleHighlightModifier";
 import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
@@ -19,14 +20,20 @@ export default function getDetailsSummaryProps(
   const items: DetailsSummaryProps[] = Aspekte.map((aspekt) => {
     const identifier = slugify(aspekt.Titel);
     const children = (
-      <div className="space-y-4">
-        <BlocksRenderer content={aspekt.Text} />
+      <div className="space-y-4 [&_p,&_ul]:mb-8">
+        <BlocksRenderer
+          content={aspekt.Text}
+          modifiers={{ italic: ItalicModifier }}
+        />
         {aspekt.Leitfragen && (
           <>
             <h4 className="ds-label-02-bold">
               {methodsFivePrinciples.questionsTitle}
             </h4>
-            <BlocksRenderer content={aspekt.Leitfragen} />
+            <BlocksRenderer
+              content={aspekt.Leitfragen}
+              modifiers={{ italic: ItalicModifier }}
+            />
           </>
         )}
         {aspekt.Formulierungsbeispiel && (
