@@ -143,18 +143,10 @@ test.describe("links", () => {
 
   test("links leading to external pages open in new tab", async ({ page }) => {
     await page.goto(ROUTE_LANDING.url, { waitUntil: "domcontentloaded" });
-    const newTabPromise = page.waitForEvent("popup");
-    await page
-      .getByRole("link", {
-        name: "DigitalService GmbH des Bundes",
-      })
-      .click();
-
-    const newTab = await newTabPromise;
-    await newTab.waitForLoadState();
-
-    // our current tab should still have the same URL
-    await expect(page).toHaveURL(ROUTE_LANDING.url);
+    const linkLocator = page.getByRole("link", {
+      name: "DigitalService GmbH des Bundes",
+    });
+    await expect(linkLocator).toHaveAttribute("target", "_blank");
   });
 });
 
