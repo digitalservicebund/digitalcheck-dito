@@ -161,7 +161,8 @@ export default function Result() {
                 <InfoBox
                   heading={{
                     text: resultContent.infoboxContent.title,
-                    tagName: "h3",
+                    tagName: "h2",
+                    look: "ds-heading-03-reg",
                   }}
                 >
                   <RichText markdown={resultContent.infoboxContent.text} />
