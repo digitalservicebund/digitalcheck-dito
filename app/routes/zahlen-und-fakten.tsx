@@ -44,7 +44,8 @@ const dsData: DsData = [
           text: "Digitalcheck",
         },
         count: "470+",
-        description: "Regelungen sind den gesamten Digitalcheck durchlaufen.",
+        description:
+          "Regelungen haben sich mit der Umsetzung der 5 Prinzipien auseinandergesetzt.",
       },
       {
         badge: {
