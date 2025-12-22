@@ -261,8 +261,11 @@ test("documentation flow happy path", async ({ page }, testInfo) => {
     const form = page.locator("form");
 
     // Check last aspect
-    const checkboxes = form.getByRole("checkbox");
-    await checkboxes.last().check();
+    await form
+      .getByRole("checkbox", {
+        name: "Informationssicherheit",
+      })
+      .check();
     const paragraphInputs = form.getByLabel("Paragrafen");
     const reasonInputs = form.getByLabel(
       "Begründung mit Textreferenz (empfohlen für bessere Zuordnung)",
