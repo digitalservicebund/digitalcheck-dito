@@ -159,40 +159,44 @@ jobs:
       METRICS_WEBHOOK_TOKEN: ${{ secrets.METRICS_WEBHOOK_TOKEN }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-  # deploy-to-staging-stackit:
+  # TODO: Move the following two steps to deploy.yml when moving off OTC
+
+  # deploy-staging-stackit:
+  #   runs-on: ubuntu-latest
   #   needs: [deploy-to-production]
   #   if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/staging/')
-  #   permissions:
-  #     packages: read
-  #   uses: ./.github/workflows/deploy.yml
   #   concurrency: deploy
-  #   with:
-  #     environment_name: staging-stackit
-  #     environment_url: https://digitalcheck-dito.dev.ds4g.net/
-  #   secrets:
-  #     GITOPS_DIGITALCHECK_APP_ID: ${{ secrets.GITOPS_DIGITALCHECK_APP_ID }}
-  #     GITOPS_DIGITALCHECK_APP_PRIVATE_KEY: ${{ secrets.GITOPS_DIGITALCHECK_APP_PRIVATE_KEY }}
-  #     ARGOCD_PIPELINE_PASSWORD: ${{ secrets.ARGOCD_PIPELINE_PASSWORD }}
-  #     ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
-  #     METRICS_DEPLOYMENT_WEBHOOK_URL: ${{ secrets.METRICS_DEPLOYMENT_WEBHOOK_URL }}
-  #     METRICS_WEBHOOK_TOKEN: ${{ secrets.METRICS_WEBHOOK_TOKEN }}
-  #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  #   environment: staging
+  #   steps:
+  #     - name: Deploy latest container image
+  #       uses: digitalservicebund/argocd-deploy@auth-token # Use the auth-token branch for STACKIT
+  #       with:
+  #         environment: staging-stackit
+  #         version: ${{ github.sha }}
+  #         deploying_repo: ${{ env.PACKAGE_NAME }}
+  #         infra_repo: ${{ github.event.repository.name }}-infra
+  #         github_app_id: ${{ secrets.GITOPS_DIGITALCHECK_APP_ID }}
+  #         github_app_private_key: ${{ secrets.GITOPS_DIGITALCHECK_APP_PRIVATE_KEY }}
+  #         app: digitalcheck-staging
+  #         argocd_auth_token: ${{ secrets.ARGOCD_AUTH_TOKEN }}
+  #         argocd_server: ${{ secrets.ARGOCD_SERVER_STACKIT }}
 
-  # deploy-to-production-stackit:
-  #   needs: [deploy-to-staging-stackit]
+  # deploy-production-stackit:
+  #   runs-on: ubuntu-latest
+  #   needs: [deploy-to-production]
   #   if: github.ref == 'refs/heads/main'
-  #   permissions:
-  #     packages: read
-  #   uses: ./.github/workflows/deploy.yml
   #   concurrency: deploy
-  #   with:
-  #     environment_name: production-stackit
-  #     environment_url: https://digitalcheck.bund.de
-  #   secrets:
-  #     GITOPS_DIGITALCHECK_APP_ID: ${{ secrets.GITOPS_DIGITALCHECK_APP_ID }}
-  #     GITOPS_DIGITALCHECK_APP_PRIVATE_KEY: ${{ secrets.GITOPS_DIGITALCHECK_APP_PRIVATE_KEY }}
-  #     ARGOCD_PIPELINE_PASSWORD: ${{ secrets.ARGOCD_PIPELINE_PASSWORD }}
-  #     ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
-  #     METRICS_DEPLOYMENT_WEBHOOK_URL: ${{ secrets.METRICS_DEPLOYMENT_WEBHOOK_URL }}
-  #     METRICS_WEBHOOK_TOKEN: ${{ secrets.METRICS_WEBHOOK_TOKEN }}
-  #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  #   environment: production
+  #   steps:
+  #     - name: Deploy latest container image
+  #       uses: digitalservicebund/argocd-deploy@auth-token # Use the auth-token branch for STACKIT
+  #       with:
+  #         environment: production-stackit
+  #         version: ${{ github.sha }}
+  #         deploying_repo: ${{ env.PACKAGE_NAME }}
+  #         infra_repo: ${{ github.event.repository.name }}-infra
+  #         github_app_id: ${{ secrets.GITOPS_DIGITALCHECK_APP_ID }}
+  #         github_app_private_key: ${{ secrets.GITOPS_DIGITALCHECK_APP_PRIVATE_KEY }}
+  #         app: digitalcheck-production
+  #         argocd_auth_token: ${{ secrets.ARGOCD_AUTH_TOKEN }}
+  #         argocd_server: ${{ secrets.ARGOCD_SERVER_STACKIT }}
