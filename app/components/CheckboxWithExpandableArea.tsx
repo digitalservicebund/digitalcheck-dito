@@ -12,7 +12,6 @@ type CheckboxWithExpandableAreaProps = BaseInputProps &
     children: ReactNode | ((args: { closeArea: () => void }) => ReactNode);
     label: string;
     renderDescription?: ReactNode | ((args: { open: boolean }) => ReactNode);
-    closeable?: boolean;
     disabled?: boolean;
     error?: string | null;
     warningInsteadOfError?: boolean;
@@ -28,7 +27,6 @@ function CheckboxWithExpandableArea({
   disabled,
   error,
   warningInsteadOfError,
-  closeable = true,
   defaultValue,
   testId,
   ...rest

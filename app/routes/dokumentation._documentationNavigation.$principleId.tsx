@@ -124,7 +124,6 @@ function Reasoning({
             </span>
           );
         }}
-        closeable={false}
         defaultValue={defaultValue}
         error={error}
         warningInsteadOfError
