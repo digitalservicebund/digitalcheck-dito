@@ -15,6 +15,12 @@ export type TabGroupWithUrlStateProps = Omit<
   useUrlTabState?: boolean;
 };
 
+function getIndexFromUrl(searchParams: URLSearchParams) {
+  const parsed = Number(searchParams.get("tab"));
+  if (Number.isNaN(parsed)) return undefined;
+  return parsed - 1;
+}
+
 /**
  * @name TabGroupWithUrlState
  * @description Tab Group controlled by search parameter, e.g.: ?tab=2
@@ -26,8 +32,7 @@ const TabGroupWithUrlState = ({
   ...props
 }: TabGroupWithUrlStateProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const selectedIndex =
-    Number(searchParams.get("tab") ?? initialActiveIndex + 1) - 1;
+  const selectedIndex = getIndexFromUrl(searchParams) ?? initialActiveIndex;
 
   const onChange = useCallback(
     (index: number) => {
