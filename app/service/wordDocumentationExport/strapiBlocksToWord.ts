@@ -39,7 +39,8 @@ const nodeToDocx = (node: Node, options?: Partial<IParagraphOptions>) => {
     case "list-item":
       return new Paragraph({
         children,
-        numbering: { reference: "bullet-points", level: 0 },
+        // The reference is not defined in some cases, need to investigate
+        // numbering: { reference: NumberFormat.BULLET, level: 0 },
         ...options,
       });
     default:
