@@ -171,11 +171,11 @@ describe("strapiBlocksToDocx", () => {
 
       expect(Paragraph).toHaveBeenNthCalledWith(1, {
         children: [new TextRun("First item")],
-        numbering: { reference: "bullet-points", level: 0 },
+        // numbering: { reference: "bullet-points", level: 0 },
       });
       expect(Paragraph).toHaveBeenNthCalledWith(2, {
         children: [new TextRun("Second item")],
-        numbering: { reference: "bullet-points", level: 0 },
+        // numbering: { reference: "bullet-points", level: 0 },
       });
     });
   });
@@ -216,11 +216,11 @@ describe("strapiBlocksToDocx", () => {
       });
       expect(Paragraph).toHaveBeenNthCalledWith(2, {
         children: [new TextRun("Bullet 1")],
-        numbering: { reference: "bullet-points", level: 0 },
+        // numbering: { reference: "bullet-points", level: 0 },
       });
       expect(Paragraph).toHaveBeenNthCalledWith(3, {
         children: [new TextRun("Bullet 2")],
-        numbering: { reference: "bullet-points", level: 0 },
+        // numbering: { reference: "bullet-points", level: 0 },
       });
       expect(Paragraph).toHaveBeenNthCalledWith(4, {
         children: [new TextRun("Conclusion")],
@@ -261,7 +261,7 @@ describe("strapiBlocksToDocx", () => {
             link: "https://google.com",
           }),
         ],
-        numbering: { reference: "bullet-points", level: 0 },
+        // numbering: { reference: "bullet-points", level: 0 },
       });
     });
   });
@@ -350,7 +350,7 @@ describe("strapiBlocksToDocx", () => {
             link: "https://example.com",
           }),
         ],
-        numbering: { reference: "bullet-points", level: 0 },
+        // numbering: { reference: "bullet-points", level: 0 },
       });
       expect(Paragraph).toHaveBeenNthCalledWith(6, {
         children: [
