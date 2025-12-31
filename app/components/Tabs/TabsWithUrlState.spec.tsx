@@ -2,12 +2,15 @@ import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event/dist/cjs/index.js";
 import { MemoryRouter, useSearchParams } from "react-router";
 import { describe, it } from "vitest";
-import TabGroupWithUrlState from "~/components/Tabs/TabsWithUrlState.tsx";
+import TabGroupWithUrlState, {
+  getIndexFromUrl,
+} from "~/components/Tabs/TabsWithUrlState.tsx";
 
 vi.mock("react-router", async (importOriginal) => ({
   ...(await importOriginal()),
   useSearchParams: vi.fn(),
 }));
+
 describe("TabGroupWithUrlState", () => {
   const renderTabsWithRouter = () =>
     render(
@@ -53,5 +56,16 @@ describe("TabGroupWithUrlState", () => {
       "aria-selected",
       "false",
     );
+  });
+});
+
+describe("getIndexFromURL", () => {
+  it("handles 1", () => {
+    const result = getIndexFromUrl(new URLSearchParams({ tab: "1" }));
+    expect(result).toBe(0);
+  });
+  it("handles null case", () => {
+    const result = getIndexFromUrl(new URLSearchParams());
+    expect(result).toBeUndefined();
   });
 });

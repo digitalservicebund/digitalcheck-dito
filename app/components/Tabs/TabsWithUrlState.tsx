@@ -15,9 +15,9 @@ export type TabGroupWithUrlStateProps = Omit<
   useUrlTabState?: boolean;
 };
 
-function getIndexFromUrl(searchParams: URLSearchParams) {
+export function getIndexFromUrl(searchParams: URLSearchParams) {
   const parsed = Number(searchParams.get("tab"));
-  if (Number.isNaN(parsed)) return undefined;
+  if (Number.isNaN(parsed) || parsed === 0) return undefined;
   return parsed - 1;
 }
 
