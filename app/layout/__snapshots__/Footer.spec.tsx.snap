@@ -279,7 +279,7 @@ exports[`Footer Component > Renders correctly 1`] = `
         aria-label="Sitemap"
       >
         <ul
-          class="list-unstyled flex flex-row flex-wrap gap-8"
+          class="list-unstyled flex flex-row flex-wrap items-baseline gap-8"
         >
           <li
             class="after:ml-8 after:inline-block after:content-['•'] last:after:content-['']"
