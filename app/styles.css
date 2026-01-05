@@ -263,19 +263,23 @@
   --toc-gutter: 2.5rem; /* 40px */
 
   @apply breakout-grid;
-  grid-template-columns:
-    [full-start] minmax(var(--container-padding-inline), 1fr)
-    [content-start] min(
-      100% - (var(--container-padding-inline) * 4),
-      var(--max-content-width) - var(--container-padding-inline) -
-        var(--toc-min-width) - var(--toc-gutter)
-    )
-    [content-end]
-    var(--toc-gutter) /* Gutter column */
-    [toc] minmax(var(--toc-min-width), var(--toc-max-width)) /* TOC column */
-    1fr [full-end];
-  & > .toc {
-    grid-column: toc;
+
+  @media (min-width: 960px) {
+    grid-template-columns:
+      [full-start] minmax(var(--container-padding-inline), 1fr)
+      [content-start] min(
+        100% - (var(--container-padding-inline) * 4),
+        var(--max-content-width) - var(--container-padding-inline) -
+          var(--toc-min-width) - var(--toc-gutter)
+      )
+      [content-end]
+      var(--toc-gutter) /* Gutter column */
+      [toc] minmax(var(--toc-min-width), var(--toc-max-width)) /* TOC column */
+      1fr [full-end];
+
+    & > .toc {
+      grid-column: toc;
+    }
   }
 }
 
