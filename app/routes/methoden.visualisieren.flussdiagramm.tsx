@@ -7,7 +7,6 @@ import React, { useRef } from "react";
 import Badge, { BadgeProps } from "~/components/Badge.tsx";
 import Button from "~/components/Button.tsx";
 import Heading from "~/components/Heading";
-import Hero from "~/components/Hero";
 import ImageBox from "~/components/ImageBox.tsx";
 import InfoBox from "~/components/InfoBox.tsx";
 import NumberedList from "~/components/NumberedList.tsx";
@@ -140,10 +139,16 @@ export default function Visualization() {
   return (
     <>
       <MetaTitle prefix={ROUTE_METHODS_VISUALIZE_FLOWCHARTS.title} />
-      <Hero
-        title="Erstellung von Flussdiagrammen"
-        subtitle="Ein Flussdiagramm visualisiert, wie ein Prozess Schritt für Schritt abläuft. Es hilft, die Reihenfolge von z.B. Handlungen, Datenflüssen oder Entscheidungen übersichtlich darzustellen."
-      />
+      <div className="breakout-grid-toc bg-blue-100 pt-40 pb-48">
+        <div>
+          <Heading tagName="h1">Erstellung von Flussdiagrammen</Heading>
+          <p className="ds-subhead mt-16">
+            Ein Flussdiagramm visualisiert, wie ein Prozess Schritt für Schritt
+            abläuft. Es hilft, die Reihenfolge von z.B. Handlungen, Datenflüssen
+            oder Entscheidungen übersichtlich darzustellen.
+          </p>
+        </div>
+      </div>
 
       <main>
         <SidebarContainer
