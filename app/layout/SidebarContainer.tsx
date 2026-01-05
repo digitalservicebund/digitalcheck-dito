@@ -1,5 +1,4 @@
 import React from "react";
-import Container from "~/components/Container";
 
 type SidebarContainerProps = {
   children: React.ReactNode;
@@ -15,13 +14,11 @@ export default function SidebarContainer({
   sidebar,
 }: Readonly<SidebarContainerProps>) {
   return (
-    <Container className="lg:pr-0 min-[90rem]:ml-[calc((100vw-59rem)/2)] min-[90rem]:max-w-[72rem]">
-      <div className="grid grid-cols-1 gap-y-40 lg:my-40 lg:grid-cols-[1fr_minmax(184px,256px)]">
-        <div className="space-y-40 lg:space-y-80">{children}</div>
-        <div className="order-first ml-20 lg:sticky lg:top-40 lg:order-none lg:ml-0 lg:max-h-[calc(100vh-80px)] lg:self-start lg:overflow-y-auto lg:px-40">
-          {sidebar}
-        </div>
+    <div className="lg:breakout-grid-toc max-lg:container max-lg:flex max-lg:flex-col">
+      {children}
+      <div className="toc order-first pt-40 mix-blend-multiply lg:sticky lg:top-0 lg:order-0 lg:row-1 lg:ml-20 lg:max-h-[calc(100vh-80px)] lg:self-start lg:overflow-y-auto lg:py-40 lg:pr-40 lg:pl-20">
+        {sidebar}
       </div>
-    </Container>
+    </div>
   );
 }

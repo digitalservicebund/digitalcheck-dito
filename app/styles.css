@@ -34,6 +34,9 @@
 
   --color-ds-gray-600: #b8bdc3;
   --color-ds-violet: #4c2c92;
+
+  --container-padding-inline: clamp(1rem, 5vw, 3rem);
+  --max-content-width: 59rem;
 }
 
 @layer base {
@@ -118,8 +121,8 @@
 
 @utility container {
   @apply mx-auto;
-  max-width: 59rem;
-  padding-inline: clamp(1rem, 5vw, 3rem);
+  max-width: var(--max-content-width);
+  padding-inline: var(--container-padding-inline);
 }
 
 @utility container-overhanging-background {
@@ -127,8 +130,7 @@
   max-width: 63rem;
   padding: 2.5rem 3rem 3rem;
 
-  margin-left: clamp(1rem, 5vw, 3rem);
-  margin-right: clamp(1rem, 5vw, 3rem);
+  margin-inline: var(--container-padding-inline);
 }
 
 @utility ds-button {
@@ -221,5 +223,54 @@
         box-shadow: inset 0 0 0 0.25rem var(--color-ds-error);
       }
     }
+  }
+}
+
+@utility breakout-grid {
+  display: grid;
+  /* Creates a 3-column layout where the center "content" column is fluid but capped
+   at a max-width, while the side columns act as flexible gutters.
+   This allows "breakout" elements to span from content-start to content-end
+   while standard content stays centered within content-start/end.
+  */
+  grid-template-columns:
+    [full-start] minmax(var(--container-padding-inline), 1fr)
+    [content-start] min(
+      100% - (var(--container-padding-inline) * 4),
+      var(--max-content-width) - 2 * var(--container-padding-inline)
+    )
+    [content-end]
+    minmax(var(--container-padding-inline), 1fr) [full-end];
+
+  & > * {
+    grid-column: content;
+  }
+}
+
+@utility breakout-grid-toc {
+  @apply breakout-grid;
+  grid-template-columns:
+    [full-start] minmax(var(--container-padding-inline), 1fr)
+    [content-start] min(
+      100% - (var(--container-padding-inline) * 4),
+      var(--max-content-width) - var(--container-padding-inline) - 200px
+    )
+    [content-end]
+    minmax(200px, 300px) [toc] 1fr [full-end];
+  & > .toc {
+    grid-column: content-end / toc;
+  }
+}
+
+@utility breakout {
+  grid-column: full;
+
+  display: grid;
+  grid-template-columns: subgrid;
+
+  /* Place content inside the breakout back in the center column.
+   To override, use e.g., grid-column: full; on the child element(s) */
+  & > * {
+    grid-column: content;
   }
 }

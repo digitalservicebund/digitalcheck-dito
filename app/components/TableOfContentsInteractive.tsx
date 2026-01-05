@@ -11,7 +11,7 @@ function List({
   children,
   className,
 }: Readonly<React.PropsWithChildren<{ className?: string }>>) {
-  return <ol className={twMerge("space-y-16 pl-16", className)}>{children}</ol>;
+  return <ol className={twMerge("space-y-16", className)}>{children}</ol>;
 }
 
 export type ItemProps = {
@@ -25,7 +25,7 @@ function Item({ title, href, after, numbered }: Readonly<ItemProps>) {
   const numberClass = numbered && "before:content-[counter(list-item)'._'] ";
 
   return (
-    <li className="group my-2">
+    <li className="group my-2 [&>ol]:pl-16">
       <a
         href={href}
         className={twMerge(
