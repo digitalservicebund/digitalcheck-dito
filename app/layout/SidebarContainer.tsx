@@ -16,7 +16,7 @@ export default function SidebarContainer({
   return (
     <div className="lg:breakout-grid-toc max-lg:container max-lg:flex max-lg:flex-col">
       {children}
-      <div className="toc order-first pt-40 mix-blend-multiply lg:sticky lg:top-0 lg:order-0 lg:row-1 lg:ml-20 lg:max-h-[calc(100vh-80px)] lg:self-start lg:overflow-y-auto lg:py-40 lg:pr-40 lg:pl-20">
+      <div className="toc order-first pt-40 mix-blend-multiply lg:sticky lg:top-0 lg:order-0 lg:row-1 lg:max-h-[calc(100vh-80px)] lg:self-start lg:overflow-y-auto lg:py-40 lg:pr-20 lg:pl-20">
         {sidebar}
       </div>
     </div>

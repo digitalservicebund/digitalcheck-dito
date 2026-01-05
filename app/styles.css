@@ -226,13 +226,16 @@
   }
 }
 
+/*
+  Creates a 3-column grid to center main content while allowing some elements to "break out" to full width.
+  The layout is: [gutter] [main content] [gutter].
+  - The grid lines are named: `full-start`, `content-start`, `content-end`, `full-end`.
+  - The center `content` column is fluid but capped at `--max-content-width`.
+  - By default, direct children are placed in the `content` column.
+  - Use the `breakout` utility on a child to make it span the full width (e.g., for banners).
+*/
 @utility breakout-grid {
   display: grid;
-  /* Creates a 3-column layout where the center "content" column is fluid but capped
-   at a max-width, while the side columns act as flexible gutters.
-   This allows "breakout" elements to span from content-start to content-end
-   while standard content stays centered within content-start/end.
-  */
   grid-template-columns:
     [full-start] minmax(var(--container-padding-inline), 1fr)
     [content-start] min(
@@ -247,29 +250,49 @@
   }
 }
 
+/*
+  Extends `breakout-grid` to create a 4-column layout for pages with a sidebar/Table of Contents (TOC).
+  The layout is: [gutter] [main content] [TOC] [gutter].
+  - It adjusts the main content width to make space for the TOC.
+  - A child element with the `.toc` class is placed in the dedicated TOC column.
+  - As seen in `SidebarContainer.tsx`, this is used for desktop layouts.
+*/
 @utility breakout-grid-toc {
+  --toc-min-width: 200px;
+  --toc-max-width: 300px;
+  --toc-gutter: 2.5rem; /* 40px */
+
   @apply breakout-grid;
   grid-template-columns:
     [full-start] minmax(var(--container-padding-inline), 1fr)
     [content-start] min(
       100% - (var(--container-padding-inline) * 4),
-      var(--max-content-width) - var(--container-padding-inline) - 200px
+      var(--max-content-width) - var(--container-padding-inline) -
+        var(--toc-min-width) - var(--toc-gutter)
     )
     [content-end]
-    minmax(200px, 300px) [toc] 1fr [full-end];
+    var(--toc-gutter) /* Gutter column */
+    [toc] minmax(var(--toc-min-width), var(--toc-max-width)) /* TOC column */
+    1fr [full-end];
   & > .toc {
-    grid-column: content-end / toc;
+    grid-column: toc;
   }
 }
 
+/*
+  Utility to make a grid item span the full width of a `breakout-grid` parent (from `full-start` to `full-end`).
+  It also establishes a subgrid, allowing its children to align with the parent grid's columns.
+*/
 @utility breakout {
   grid-column: full;
 
   display: grid;
   grid-template-columns: subgrid;
 
-  /* Place content inside the breakout back in the center column.
-   To override, use e.g., grid-column: full; on the child element(s) */
+  /*
+    By default, children of a `breakout` element are placed back into the central `content` column of the parent grid.
+    To make a child of a `breakout` element also span the full width, apply `grid-column: full` to it.
+  */
   & > * {
     grid-column: content;
   }
