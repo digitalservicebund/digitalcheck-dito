@@ -239,13 +239,13 @@
   grid-template-columns:
     [full-start] minmax(var(--container-padding-inline), 1fr)
     [content-start] min(
-      100% - (var(--container-padding-inline) * 4),
+      100% - (var(--container-padding-inline) * 2),
       var(--max-content-width) - 2 * var(--container-padding-inline)
     )
     [content-end]
     minmax(var(--container-padding-inline), 1fr) [full-end];
 
-  & > * {
+  & > *:not([class*="breakout"]) {
     grid-column: content;
   }
 }

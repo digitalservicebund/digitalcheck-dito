@@ -6,9 +6,8 @@ import WidgetsOutlinedIcon from "@digitalservicebund/icons/WidgetsOutlined";
 import { useState } from "react";
 import Badge from "~/components/Badge";
 import Button, { LinkButton } from "~/components/Button";
-import Container from "~/components/Container";
 import Heading from "~/components/Heading";
-import Hero from "~/components/Hero";
+import { BreakoutHero } from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
 import MetaTitle from "~/components/Meta";
@@ -32,14 +31,14 @@ export default function Index() {
   return (
     <>
       <MetaTitle />
-      <main>
-        <Hero
+      <main className="breakout-grid">
+        <BreakoutHero
           title={title}
           subtitle={subtitle}
           className="bg-blue-800 text-white"
         />
 
-        <Container className="py-40 lg:py-80">
+        <div className="py-40 lg:py-80">
           <Heading tagName="h2" text={stepByStep.title} className="mb-40" />
 
           <div className="relative">
@@ -97,50 +96,43 @@ export default function Index() {
               ))}
             </ol>
           </div>
-        </Container>
-
-        <div className="bg-blue-100">
-          <Container className="ds-stack ds-stack-40 py-40 lg:py-80">
-            <Heading tagName="h2" text={grundlagen.title} />
-
-            <InfoBox
-              visual={{ type: "icon", Icon: WidgetsOutlinedIcon }}
-              look="highlight"
-              className="bg-white"
-              heading={{
-                tagName: "h3",
-                text: grundlagen.wasIstDigitaltauglichkeit.title,
-              }}
-            >
-              <RichText
-                markdown={grundlagen.wasIstDigitaltauglichkeit.content}
-              />
-              <InfoBox.LinkList
-                links={[grundlagen.wasIstDigitaltauglichkeit.link]}
-              />
-            </InfoBox>
-
-            <InfoBox
-              visual={{ type: "icon", Icon: FactCheckOutlinedIcon }}
-              look="highlight"
-              className="bg-white"
-              heading={{
-                tagName: "h3",
-                text: grundlagen.nationaleNormenkontrolle.title,
-              }}
-            >
-              <RichText
-                markdown={grundlagen.nationaleNormenkontrolle.content}
-              />
-              <InfoBox.LinkList
-                links={[grundlagen.nationaleNormenkontrolle.link]}
-              />
-            </InfoBox>
-          </Container>
         </div>
 
-        <div className="bg-[url('/images/trainings.jpg')] bg-cover bg-center">
-          <Container className="py-40 lg:py-80">
+        <div className="breakout space-y-40 bg-blue-100 py-40 lg:py-80">
+          <Heading tagName="h2" text={grundlagen.title} />
+
+          <InfoBox
+            visual={{ type: "icon", Icon: WidgetsOutlinedIcon }}
+            look="highlight"
+            className="bg-white"
+            heading={{
+              tagName: "h3",
+              text: grundlagen.wasIstDigitaltauglichkeit.title,
+            }}
+          >
+            <RichText markdown={grundlagen.wasIstDigitaltauglichkeit.content} />
+            <InfoBox.LinkList
+              links={[grundlagen.wasIstDigitaltauglichkeit.link]}
+            />
+          </InfoBox>
+
+          <InfoBox
+            visual={{ type: "icon", Icon: FactCheckOutlinedIcon }}
+            look="highlight"
+            className="bg-white"
+            heading={{
+              tagName: "h3",
+              text: grundlagen.nationaleNormenkontrolle.title,
+            }}
+          >
+            <RichText markdown={grundlagen.nationaleNormenkontrolle.content} />
+            <InfoBox.LinkList
+              links={[grundlagen.nationaleNormenkontrolle.link]}
+            />
+          </InfoBox>
+        </div>
+        <div className="breakout bg-[url('/images/trainings.jpg')] bg-cover bg-center">
+          <div className="py-40 lg:py-80">
             <InfoBoxSideBySide>
               <InfoBox
                 look="method"
@@ -166,10 +158,9 @@ export default function Index() {
                 <InfoBox.LinkList links={prinzipien.links} />
               </InfoBox>
             </InfoBoxSideBySide>
-          </Container>
+          </div>
         </div>
-
-        <Container className="space-y-48 py-40 lg:py-80">
+        <div className="space-y-48 py-40 lg:py-80">
           <InfoBox
             heading={{
               tagName: "h2",
@@ -192,7 +183,7 @@ export default function Index() {
           >
             <RichText markdown={quote.reference} />
           </InfoBox>
-        </Container>
+        </div>
       </main>
       {showBanner && (
         <aside className="relative flex items-center justify-center gap-40 bg-yellow-200 p-24">
