@@ -34,6 +34,7 @@ export default function ZFLLayout() {
         <Outlet />
       </main>
       <Footer />
+      <script src="/zfl/menu-fix.js" />
     </div>
   );
 }

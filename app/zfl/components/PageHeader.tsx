@@ -106,7 +106,7 @@ const PageHeader = () => {
         id="mobile-menu"
         className={twJoin(
           "absolute right-0 left-0 z-40 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]",
-          mobileMenuOpen ? "overflow-y-auto" : "invisible",
+          mobileMenuOpen ? "overflow-y-auto" : "invisible data-open:visible",
         )}
         aria-hidden={!mobileMenuOpen}
       >
