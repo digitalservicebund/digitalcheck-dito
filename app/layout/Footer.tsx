@@ -92,7 +92,7 @@ export default function Footer() {
         </nav>
 
         <nav aria-label={footer.middle.navLabel}>
-          <ul className="list-unstyled flex flex-row flex-wrap gap-8">
+          <ul className="list-unstyled flex flex-row flex-wrap items-baseline gap-8">
             {footer.middle.links.map((link) => (
               <li
                 key={link.url}
