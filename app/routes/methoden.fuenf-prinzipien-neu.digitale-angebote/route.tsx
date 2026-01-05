@@ -4,7 +4,7 @@ import LightbulbOutlined from "@digitalservicebund/icons/LightbulbOutlined";
 import { ReactNode } from "react";
 import { data, Link } from "react-router";
 import AccordionItem from "~/components/AccordionItem.tsx";
-import Hero from "~/components/Hero.tsx";
+import { BreakoutHero } from "~/components/Hero.tsx";
 import MetaTitle from "~/components/Meta.tsx";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer";
@@ -17,7 +17,10 @@ function Aspect({
   id,
 }: Readonly<{ children: ReactNode; id?: string }>) {
   return (
-    <section className="nth-[2n]:breakout py-80 nth-[2n]:bg-blue-100" id={id}>
+    <section
+      className="nth-[2n]:breakout col-[content] py-80 nth-[2n]:bg-blue-100"
+      id={id}
+    >
       <div className="space-y-40">{children}</div>
     </section>
   );
@@ -96,9 +99,10 @@ export default function PrinzipDigitaleAngebote() {
         prefix={ROUTE_METHODS_PRINCIPLES_NEW_DIGITALE_ANGEBOTE.title}
       />
       <main>
-        <Hero
-          title="Digitale Angebote für alle nutzbar gestalten"
-          subtitle={dedent`
+        <div className="breakout-grid-toc">
+          <BreakoutHero
+            title="Digitale Angebote für alle nutzbar gestalten"
+            subtitle={dedent`
             Eine Regelung, die gut digital umgesetzt werden kann, muss sicherstellen, dass
             Kommunikation und Bearbeitung gut digital erfolgen kann. Dieses Prinzip betrifft
             sowohl den Austausch mit der Zivilgesellschaft als auch die Zusammenarbeit
@@ -109,7 +113,8 @@ export default function PrinzipDigitaleAngebote() {
             - wie Sie digitale Möglichkeiten für einen effizienten Vollzug nutzen,
             - wie Barrierefreiheit zu bedenken ist.
             `}
-        ></Hero>
+          ></BreakoutHero>
+        </div>
         <SidebarContainer
           sidebar={
             <ToC title={"Inhalt"} selector="section[id]">
