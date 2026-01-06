@@ -35,6 +35,7 @@ export default function ZFLLayout() {
       </main>
       <Footer />
       <script src="/zfl/menu-fix.js" />
+      <script src="/zfl/posthog-fix.js" />
     </div>
   );
 }
