@@ -8,11 +8,8 @@ import { FC, Fragment, SVGProps } from "react";
 import Badge from "~/components/Badge";
 import ContentWrapper from "~/components/ContentWrapper";
 import Heading from "~/components/Heading";
-import Hero from "~/components/Hero";
 import MetaTitle from "~/components/Meta";
-import RichText from "~/components/RichText";
 import { ROUTE_NUMBERS_FACTS } from "~/resources/staticRoutes";
-import { dedent } from "~/utils/dedentMultilineStrings";
 
 type DsData = {
   title: string;
@@ -125,47 +122,51 @@ export default function ZahlenUndFakten() {
   return (
     <>
       <MetaTitle prefix={ROUTE_NUMBERS_FACTS.title} />
-      <>
-        <Hero
-          title="Das Zentrum für Legistik in Zahlen"
-          className="bg-transparent"
-        >
-          <RichText
-            markdown={dedent`
-              Seit Januar 2023 setzt die Bundesregierung den Fokus auf digitaltaugliche Regelungen (Digitalcheck) und begleitet Legistinnen und Legisten in den Bundesministerien auf dem Weg dorthin.
-
-              2026 markiert den Beginn des Zentrum für Legistik.
-              
-              Die Daten auf dieser Seite zeigen, wie unsere Instrumente und Unterstützungsangebote – zum Beispiel Digitalcheck, Begleitungen, Schulungen und Prozessvisualisierung – die Gesetzgebung in der Praxis verändern. Die verschiedenen Werkzeuge und Prozesse der Frühphase werden jetzt im Zentrum für Legistik schrittweise zusammengeführt und weiterentwickelt.`}
-          />
-        </Hero>
-
-        <ContentWrapper className="space-y-80">
-          {dsData.map(({ title, elements }) => (
-            <Fragment key={title}>
-              <Heading tagName="h2" className="mb-40">
-                {title}
-              </Heading>
-              <ul className="list-unstyled grid items-stretch justify-between gap-40 sm:grid-cols-2 lg:grid-cols-3">
-                {elements.map((el, i) => (
-                  <li
-                    key={`${el.badge.text}-${i}`}
-                    className="bg-zfl-main20 min-w-240 space-y-16 px-32 py-40"
-                  >
-                    <Badge look="white" Icon={el.badge.Icon}>
-                      {el.badge.text}
-                    </Badge>
-                    <p>
-                      <strong className="ds-heading-02-bold">{el.count}</strong>
-                    </p>
-                    <p>{el.description}</p>
-                  </li>
-                ))}
-              </ul>
-            </Fragment>
-          ))}
-        </ContentWrapper>
-      </>
+      <ContentWrapper className="space-y-80">
+        <div>
+          <h1>Das Zentrum für Legistik in Zahlen</h1>
+          <div className="mt-16 space-y-8">
+            <p>
+              Seit Januar 2023 setzt die Bundesregierung den Fokus auf
+              digitaltaugliche Regelungen (Digitalcheck) und begleitet
+              Legistinnen und Legisten in den Bundesministerien auf dem Weg
+              dorthin.
+            </p>
+            <p>2026 markiert den Beginn des Zentrum für Legistik.</p>
+            <p>
+              Die Daten auf dieser Seite zeigen, wie unsere Instrumente und
+              Unterstützungsangebote – zum Beispiel Digitalcheck, Begleitungen,
+              Schulungen und Prozessvisualisierung – die Gesetzgebung in der
+              Praxis verändern. Die verschiedenen Werkzeuge und Prozesse der
+              Frühphase werden jetzt im Zentrum für Legistik schrittweise
+              zusammengeführt und weiterentwickelt.
+            </p>
+          </div>
+        </div>
+        {dsData.map(({ title, elements }) => (
+          <Fragment key={title}>
+            <Heading tagName="h2" className="mb-40">
+              {title}
+            </Heading>
+            <ul className="list-unstyled grid items-stretch justify-between gap-40 sm:grid-cols-2 lg:grid-cols-3">
+              {elements.map((el, i) => (
+                <li
+                  key={`${el.badge.text}-${i}`}
+                  className="bg-zfl-main20 min-w-240 space-y-16 px-32 py-40"
+                >
+                  <Badge look="white" Icon={el.badge.Icon}>
+                    {el.badge.text}
+                  </Badge>
+                  <p>
+                    <strong className="ds-heading-02-bold">{el.count}</strong>
+                  </p>
+                  <p>{el.description}</p>
+                </li>
+              ))}
+            </ul>
+          </Fragment>
+        ))}
+      </ContentWrapper>
     </>
   );
 }
