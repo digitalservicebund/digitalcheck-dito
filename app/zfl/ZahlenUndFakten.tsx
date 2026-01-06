@@ -28,7 +28,7 @@ type DsData = {
 
 const dsData: DsData = [
   {
-    title: "Anwendung des Digitalchecks",
+    title: "Digitalcheck und Visualisierungen (seit 2023)",
     elements: [
       {
         badge: {
@@ -36,7 +36,8 @@ const dsData: DsData = [
           text: "Regelungschecks",
         },
         count: "850+",
-        description: "Regelungen wurden auf Digitalbezug geprüft.",
+        description:
+          "Regelungsvorhaben haben sich mit der digitalen Umsetzung auseinandergesetzt.",
       },
       {
         badge: {
@@ -45,12 +46,12 @@ const dsData: DsData = [
         },
         count: "120+",
         description:
-          "Visualisierungen wurden erstellt und dem Regelungstext beigefügt.",
+          "visualisierte Wirklogiken, durch die Komplexität reduziert und Verständlichkeit geschaffen wurde.",
       },
     ],
   },
   {
-    title: "Beratung & Schulungen",
+    title: "Wissenstransfer und Unterstützung (seit 2023)",
     elements: [
       {
         badge: {
@@ -59,7 +60,7 @@ const dsData: DsData = [
         },
         count: "400+",
         description:
-          "Ministeriums-mitarbeitende wurden durch das ZfL-Team geschult.",
+          "geschulte Mitarbeitende: Seit 2023 gibt es Schulungen und Roadshows zu Visualisierungen und Digitaltauglichkeit, in denen wir langfristige Kompetenzen aufbauen.",
       },
       {
         badge: {
@@ -67,7 +68,8 @@ const dsData: DsData = [
           text: "Unterstützung",
         },
         count: "15+",
-        description: "Regelungsvorhaben wurden durch Tasks Forces begleitet.",
+        description:
+          "Begleitungen durch interdisziplinäre Teams: Bei besonders komplexen Vorhaben standen unsere Taskforces den Legistinnen und Legisten direkt zur Seite.",
       },
       {
         badge: {
@@ -75,7 +77,8 @@ const dsData: DsData = [
           text: "Unterstützung",
         },
         count: "170+",
-        description: "Service Anrufe & Mails wurden vom ZfL-Team bearbeitet.",
+        description:
+          "Service-Anfragen: Der kurze Dienstweg zu Expertinnen und Experten, für Fragen und Sparring.",
       },
     ],
   },
@@ -88,7 +91,8 @@ const dsData: DsData = [
           text: "Interoperabilität",
         },
         count: "17",
-        description: "Vorhaben mit Interoperabilitätsbezug wurden eingereicht.",
+        description:
+          "Vorhaben hatten einen Interoperabilitätsbezug und wurden zur Transparenz auf EU-Ebene eingereicht.",
       },
       {
         badge: {
@@ -97,7 +101,7 @@ const dsData: DsData = [
         },
         count: "18",
         description:
-          "Interoperabilitäts-beratunggespräche hat das Team durchgeführt.",
+          "ausführliche Beratungsfälle zum Thema Interoperabilität hat das Team durchgeführt.",
       },
     ],
   },
@@ -111,7 +115,7 @@ const dsData: DsData = [
         },
         count: "20+",
         description:
-          "Interministerielle Arbeitsgruppen haben zum Austausch & Vernetzung stattgefunden.",
+          "Interministerielle Arbeitsgruppen haben die Erarbeitung des Digitalcheck begleitet.",
       },
     ],
   },
@@ -128,10 +132,11 @@ export default function ZahlenUndFakten() {
         >
           <RichText
             markdown={dedent`
-              Hier finden Sie aktuelle Daten zur Anwendung, unseren Unterstützungsangeboten und der ressortübergreifenden Vernetzung.
+              Seit Januar 2023 setzt die Bundesregierung den Fokus auf digitaltaugliche Regelungen (Digitalcheck) und begleitet Legistinnen und Legisten in den Bundesministerien auf dem Weg dorthin.
+
+              2026 markiert den Beginn des Zentrum für Legistik.
               
-              Start der Datenerhebung: 01.01.2023
-          `}
+              Die Daten auf dieser Seite zeigen, wie unsere Instrumente und Unterstützungsangebote – zum Beispiel Digitalcheck, Begleitungen, Schulungen und Prozessvisualisierung – die Gesetzgebung in der Praxis verändern. Die verschiedenen Werkzeuge und Prozesse der Frühphase werden jetzt im Zentrum für Legistik schrittweise zusammengeführt und weiterentwickelt.`}
           />
         </Hero>
 
