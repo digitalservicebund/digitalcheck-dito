@@ -35,6 +35,10 @@ export const ROUTE_ZFL_NUMBERS_FACTS = createRoute(
   "zahlen-und-fakten",
   "Zahlen und Fakten",
 );
+export const ROUTE_ZFL_DARAN_ARBEITEN_WIR = createRoute(
+  "daran-arbeiten-wir",
+  "Daran arbeiten wir",
+);
 
 export default [
   ROUTE_ZFL_LANDING,
@@ -44,4 +48,5 @@ export default [
   ROUTE_ZFL_PRIVACY,
   ROUTE_ZFL_A11Y,
   ROUTE_ZFL_NUMBERS_FACTS,
+  ROUTE_ZFL_DARAN_ARBEITEN_WIR,
 ];

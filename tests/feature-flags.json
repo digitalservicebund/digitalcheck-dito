@@ -1,5 +1,6 @@
 {
   "showGesetzgebungsprozessOverview": true,
   "enableZfl": true,
-  "principles26": true
+  "principles26": true,
+  "enableZflDaranArbeitenWir": true
 }

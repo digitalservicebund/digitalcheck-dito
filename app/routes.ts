@@ -8,6 +8,7 @@ import { flatRoutes } from "@react-router/fs-routes";
 import {
   ROUTE_ZFL_A11Y,
   ROUTE_ZFL_BEGLEITUNGEN,
+  ROUTE_ZFL_DARAN_ARBEITEN_WIR,
   ROUTE_ZFL_IMPRINT,
   ROUTE_ZFL_LANDING,
   ROUTE_ZFL_NUMBERS_FACTS,
@@ -25,6 +26,7 @@ export default [
       route(ROUTE_ZFL_PRIVACY.path, "./zfl/Datenschutz.tsx"),
       route(ROUTE_ZFL_A11Y.path, "./zfl/Barrierefreiheit.tsx"),
       route(ROUTE_ZFL_NUMBERS_FACTS.path, "./zfl/ZahlenUndFakten.tsx"),
+      route(ROUTE_ZFL_DARAN_ARBEITEN_WIR.path, "./zfl/DaranArbeitenWir.tsx"),
       route("*", "./zfl/NotFound.tsx"),
     ]),
   ]),

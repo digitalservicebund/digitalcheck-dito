@@ -18,6 +18,9 @@ fileignoreconfig:
 - filename: app/routes/vorpruefung/preCheckDataService.ts
   allowed_patterns:
     - STORAGE_KEY
+- filename: app/zfl/DaranArbeitenWir.tsx
+  allowed_patterns:
+    - 0?15140767839
 allowed_patterns:
   - key
   - onKey
