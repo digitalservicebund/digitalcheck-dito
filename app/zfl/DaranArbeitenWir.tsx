@@ -93,7 +93,7 @@ export default function DaranArbeitenWir(): JSX.Element {
             />
           </InfoBox>
         </div>
-        <div className="space-y-40 pt-0 pb-40 md:space-y-80 md:pb-80">
+        <div className="space-y-40 py-40 md:space-y-80 md:pb-80">
           <RichText
             className="[&_h2]:mt-40 [&_h2]:mb-16"
             markdown={offerings}
