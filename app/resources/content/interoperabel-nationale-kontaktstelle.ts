@@ -20,7 +20,7 @@ export const spoc = {
     tabName: "Überblick",
     headline: "Nationale Umsetzung der EU-Interoperabilitätsverordnung",
     content: dedent`
-      Seit Anfang 2025 muss die Verordnung für ein interoperables Europa ([2024/903](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903)) in den EU Mitgliedstaaten verpflichtend umgesetzt werden.
+      Seit Anfang 2025 muss die [Verordnung für ein interoperables Europa (2024/903)](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903) in den EU Mitgliedstaaten verpflichtend umgesetzt werden.
       Damit sind alle öffentlichen Einrichtungen in Europa, also EU-Institutionen, ihre Mitgliedstaaten und auch deren Bundesländer und Kommunen, verpflichtet Interoperabilitätsbewertungen durchzuführen. 
 
       Diese Bewertungen sind erforderlich, bevor neue oder geänderte verbindliche Anforderungen beschlossen werden, um einen nahtlosen Datenaustausch zwischen Behörden sicherzustellen und den grenzüberschreitenden Zugang zu digitalen Verwaltungsleistungen in der EU zu ermöglichen.
@@ -56,7 +56,7 @@ export const spoc = {
     id: "aufgaben",
     headline: "Aufgaben der nationalen Kontaktstelle (2024/903 Art. 17)",
     content: dedent`
-      Als Nationale Kontaktstelle sind wir die zentrale Anlaufstelle in Deutschland zur Umsetzung der EU-Verordnung zur Interoperabilität (EU) 2024/903. Wir unterstützen Mitarbeitende der öffentlichen Verwaltung dabei, die Interoperabilität von digitalen Systemen zu fördern, um eine vernetzte und bürgernahe Verwaltung in ganz Europa zu ermöglichen.
+      Als Nationale Kontaktstelle sind wir die zentrale Anlaufstelle in Deutschland zur Umsetzung der [Verordnung für ein interoperables Europa (EU 2024/903)](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903). Wir unterstützen Mitarbeitende der öffentlichen Verwaltung dabei, die Interoperabilität von digitalen Systemen zu fördern, um eine vernetzte und bürgernahe Verwaltung in ganz Europa zu ermöglichen.
       
       **Unterstützung der Verwaltung**
       
