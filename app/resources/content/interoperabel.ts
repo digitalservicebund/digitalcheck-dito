@@ -11,7 +11,7 @@ export const interoperability = {
     id: "digitaltauglich",
     headline: "Vernetzte Verwaltungen für Europa",
     content: dedent`
-        Stellen Sie sich ein digitales Europa ohne Grenzen vor. Ziel der [EU-Verordnung für ein interoperables Europa (2024/903)](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903) ist es, diese Vision Realität werden zu lassen. Bürgerinnen, Bürger und Unternehmen sollen digitale Verwaltungsleistungen nahtlos in allen EU-Ländern nutzen können. Der digitale Datenaustausch über Landes- und Sektorengrenzen hinweg wird zur Norm. Grenzüberschreitende Verwaltungsakte, wie ein Umzug in einen anderen Mitgliedstaat oder die Gründung eines Unternehmens im Ausland, lassen sich so einfach und vollständig online erledigen. Das steigert die Effizienz für alle Beteiligten und schafft einen einheitlichen digitalen Raum.
+        Stellen Sie sich ein digitales Europa ohne Grenzen vor. Ziel der [Verordnung für ein interoperables Europa (EU 2024/903)](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903) ist es, diese Vision Realität werden zu lassen. Bürgerinnen, Bürger und Unternehmen sollen digitale Verwaltungsleistungen nahtlos in allen EU-Ländern nutzen können. Der digitale Datenaustausch über Landes- und Sektorengrenzen hinweg wird zur Norm. Grenzüberschreitende Verwaltungsakte, wie ein Umzug in einen anderen Mitgliedstaat oder die Gründung eines Unternehmens im Ausland, lassen sich so einfach und vollständig online erledigen. Das steigert die Effizienz für alle Beteiligten und schafft einen einheitlichen digitalen Raum.
     `,
     image: {
       url: "/images/zusammenhang-interoperabilitaet-und-digitaltauglichkeit.png",
@@ -119,7 +119,7 @@ export const interoperability = {
         content: dedent`
           Wenn Sie eine Interoperabilitätsbewertung durchführen, stehen Ihnen Unterstützungsmaßnahmen zur Verfügung.
           
-          Die [Verordnung für ein interoperables Europa](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32024R0903) sieht in den Mitgliedstaaten nationale Kontaktstellen vor. Für Deutschland hat das Bundesministerium für Digitales und Staatsmodernisierung das Team vom Digitalcheck mit der Ausführung beauftragt. 
+          Die [Verordnung für ein interoperables Europa (EU 2024/903)](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32024R0903) sieht in den Mitgliedstaaten nationale Kontaktstellen vor. Für Deutschland hat das Bundesministerium für Digitales und Staatsmodernisierung das Team vom Digitalcheck mit der Ausführung beauftragt. 
           
           Wir unterstützen Sie derzeit individuell bei der Durchführung einer Interoperabilitätsbewertung für eine interoperable Regelung und bei der Erstellung eines entsprechenden Berichts. Kontaktieren Sie uns jederzeit gerne mit Ihren Anliegen - je früher, desto besser.  Schreiben Sie uns über [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de) oder rufen Sie uns an unter [0151/40 76 78 39](tel:+4915140767839).
           
