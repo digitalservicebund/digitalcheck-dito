@@ -69,7 +69,7 @@ const PageHeader = () => {
               {item.title}
             </Link>
           ))}
-          <div className="ds-label-01-reg px-16 text-gray-800">
+          <div className="ds-label-01-reg border-b-4 border-transparent px-16 text-gray-800">
             Kontakt:{" "}
             <a href={ZFL_EMAIL.url} className="ds-link-01-reg">
               {ZFL_EMAIL.display}
@@ -125,7 +125,7 @@ const PageHeader = () => {
         ))}
         <div className="ds-label-01-reg ml-4 p-16 text-gray-800">
           Kontakt:{" "}
-          <a href={ZFL_EMAIL.url} className="ds-link-01-reg">
+          <a href={ZFL_EMAIL.url} className="ds-label-01-reg">
             {ZFL_EMAIL.display}
           </a>
         </div>
