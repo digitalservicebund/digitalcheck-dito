@@ -123,7 +123,7 @@ export default function Interoperability() {
                     <ul>
                       <li>
                         Können nach der aktuellen Rechtslage andere
-                        EU-Bürger:innen ein digitales Angebot in diesem
+                        EU-Bürgerinnen und -Bürger ein digitales Angebot in diesem
                         Zusammenhang nutzen?
                       </li>
                       <li>Was ist nötig, um das zu ermöglichen?</li>
@@ -289,7 +289,7 @@ export default function Interoperability() {
                     <p>
                       Das Ziel der{" "}
                       <NewTabLink to="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903">
-                        Verordnung für ein interoperables Europa (EU 2024/903)
+                        Verordnung für ein interoperables Europa (EU) 2024/903
                       </NewTabLink>{" "}
                       ist es, digitale öffentliche Dienste zu verbessern. Die
                       Dienste einzelner Mitgliedstaaten sollen miteinander
@@ -316,7 +316,7 @@ export default function Interoperability() {
                           <li>
                             <NewTabLink to="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903">
                               EUR Lex - Verordnung für ein interoperables Europa
-                              (EU 2024/903)
+                              (EU) 2024/903
                             </NewTabLink>
                           </li>
                           <li>
