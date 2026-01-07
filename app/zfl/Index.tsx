@@ -1,15 +1,31 @@
 import FactCheckOutlinedIcon from "@digitalservicebund/icons/FactCheckOutlined";
 import WidgetsOutlinedIcon from "@digitalservicebund/icons/WidgetsOutlined";
+import { Link, useLoaderData } from "react-router";
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
 import { dedent } from "~/utils/dedentMultilineStrings";
+import getFeatureFlag from "~/utils/featureFlags.server.ts";
+import { features } from "~/utils/featureFlags.ts";
 import { Contact } from "./components/Contact";
-import { ROUTE_ZFL_BEGLEITUNGEN, ROUTE_ZFL_TRAININGS } from "./routes";
+import {
+  ROUTE_ZFL_BEGLEITUNGEN,
+  ROUTE_ZFL_DARAN_ARBEITEN_WIR,
+  ROUTE_ZFL_TRAININGS,
+} from "./routes";
 import MetaTitle from "./ZFLMeta";
 
+export function loader() {
+  const featureDaranArbeitenWir = getFeatureFlag(
+    features.enableZflDaranArbeitenWir,
+  );
+  return { featureDaranArbeitenWir };
+}
+
 export default function ZFLIndex() {
+  const { featureDaranArbeitenWir } = useLoaderData<typeof loader>();
+
   return (
     <>
       <MetaTitle />
@@ -23,6 +39,14 @@ export default function ZFLIndex() {
         <Container className="py-8">
           Das Angebot befindet sich aktuell im Aufbau und wird schrittweise mit
           Ihnen zusammen weiterentwickelt.
+          {featureDaranArbeitenWir && (
+            <Link
+              className={"text-link block"}
+              to={ROUTE_ZFL_DARAN_ARBEITEN_WIR.url}
+            >
+              Mehr dazu
+            </Link>
+          )}
         </Container>
       </div>
 

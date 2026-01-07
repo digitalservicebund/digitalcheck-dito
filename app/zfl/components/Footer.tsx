@@ -1,11 +1,13 @@
 import Image from "app/components/Image";
 import { Link } from "react-router";
 import { OpenInNewIcon } from "~/components/OpenInNewIcon.tsx";
+import type { FeatureFlags } from "~/utils/featureFlags.ts";
 import tailwindMerge from "~/utils/tailwindMerge";
 import { ZFL_EMAIL, ZFL_PHONE } from "../constants";
 import {
   ROUTE_ZFL_A11Y,
   ROUTE_ZFL_BEGLEITUNGEN,
+  ROUTE_ZFL_DARAN_ARBEITEN_WIR,
   ROUTE_ZFL_IMPRINT,
   ROUTE_ZFL_NUMBERS_FACTS,
   ROUTE_ZFL_PRIVACY,
@@ -46,9 +48,9 @@ const LinkList = ({
   links: (LinkProps | LinkProps[])[];
   className?: string;
 }) => (
-  <div className={tailwindMerge("ds-stack ds-stack-8", className)}>
-    {header && <h2 className="ds-label-section">{header}</h2>}
-    <ul className="list-unstyled flex flex-col gap-8">
+  <div className={tailwindMerge("grid grid-rows-subgrid space-y-8", className)}>
+    {header && <h2 className="ds-label-section row-start-1">{header}</h2>}
+    <ul className="list-unstyled row-start-2 flex flex-col gap-8">
       {links.map((link) => {
         const subLinks = Array.isArray(link) ? link : [link];
         return (
@@ -63,7 +65,23 @@ const LinkList = ({
   </div>
 );
 
-export default function Footer() {
+export default function Footer({
+  flags,
+}: Readonly<{ flags: Partial<FeatureFlags> }>) {
+  const aboutLinks = [
+    {
+      text: ROUTE_ZFL_NUMBERS_FACTS.title,
+      url: ROUTE_ZFL_NUMBERS_FACTS.url,
+    },
+  ];
+
+  if (flags.enableZflDaranArbeitenWir) {
+    aboutLinks.push({
+      text: ROUTE_ZFL_DARAN_ARBEITEN_WIR.title,
+      url: ROUTE_ZFL_DARAN_ARBEITEN_WIR.url,
+    });
+  }
+
   return (
     <footer
       id="footer"
@@ -72,7 +90,7 @@ export default function Footer() {
     >
       <div className="w-full max-w-6xl space-y-32 px-16 py-40 sm:space-y-40">
         <nav
-          className="grid grid-cols-1 items-end justify-between gap-32 sm:grid-cols-[repeat(3,minmax(0,18rem))] sm:grid-rows-2"
+          className="grid grid-cols-1 justify-between gap-x-32 gap-y-8 sm:grid-cols-[repeat(3,minmax(0,18rem))] sm:grid-rows-[repeat(2,auto)]"
           aria-label="Schnellübersicht"
         >
           <LinkList
@@ -102,6 +120,11 @@ export default function Footer() {
             className="row-span-2"
           />
           <LinkList
+            header="Über das ZfL"
+            links={aboutLinks}
+            className="row-span-2"
+          />
+          <LinkList
             header=""
             links={[
               {
@@ -115,10 +138,6 @@ export default function Footer() {
               {
                 text: ROUTE_ZFL_A11Y.title,
                 url: ROUTE_ZFL_A11Y.url,
-              },
-              {
-                text: ROUTE_ZFL_NUMBERS_FACTS.title,
-                url: ROUTE_ZFL_NUMBERS_FACTS.url,
               },
             ]}
             className="row-span-2"

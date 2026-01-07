@@ -1,4 +1,4 @@
-import { data, Outlet, useLocation } from "react-router";
+import { data, Outlet, useLoaderData, useLocation } from "react-router";
 import getFeatureFlag from "~/utils/featureFlags.server";
 import { features } from "~/utils/featureFlags.ts";
 import Footer from "./components/Footer";
@@ -9,6 +9,10 @@ export function loader() {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw data("Not found", { status: 404 });
   }
+  const enableZflDaranArbeitenWir = getFeatureFlag(
+    features.enableZflDaranArbeitenWir,
+  );
+  return { enableZflDaranArbeitenWir };
 }
 
 const siteMeta = {
@@ -21,6 +25,7 @@ const siteMeta = {
 export default function ZFLLayout() {
   const location = useLocation();
   const url = `${siteMeta.BASE_URL}${location.pathname}`;
+  const flags = useLoaderData<typeof loader>();
   return (
     <div className="zfl-style">
       <meta name="description" content={siteMeta.description} />
@@ -33,7 +38,7 @@ export default function ZFLLayout() {
       <main>
         <Outlet />
       </main>
-      <Footer />
+      <Footer flags={flags} />
       <script src="/zfl/menu-fix.js" />
       <script src="/zfl/posthog-fix.js" />
     </div>
