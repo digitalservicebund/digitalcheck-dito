@@ -1,3 +1,4 @@
+/* eslint-disable no-irregular-whitespace */
 import { JSX } from "react";
 import { data } from "react-router";
 import InfoBox from "~/components/InfoBox.tsx";
@@ -36,7 +37,7 @@ Ein gutes, frühzeitiges Verständnis von Anforderungen und Umfeld ist die Basis
 
 ### Konsolidierung der Instrumente
 
-Unterschiedliche Checks und Arbeitshilfen (wie z.B. der [Digitalcheck](https://digitalcheck.bund.de/) oder [Jugendcheck](https://jugend-check.de/)) zielen in Teilen auf die gleiche Wirkung ab: Praxis- und digitaltaugliche Regelungen und Bürokratierückbau. Bei der Zusammenführung diverser Ansätze verfolgen wir das Ziel, Ihre Regelungsarbeit einfacher und effizienter zu gestalten.<br>
+Unterschiedliche Checks und Arbeitshilfen (wie z. B. der [Digitalcheck](https://digitalcheck.bund.de/) oder [Jugendcheck](https://jugend-check.de/)) zielen in Teilen auf die gleiche Wirkung ab: Praxis- und digitaltaugliche Regelungen und Bürokratierückbau. Bei der Zusammenführung diverser Ansätze verfolgen wir das Ziel, Ihre Regelungsarbeit einfacher und effizienter zu gestalten.<br>
 [Mitarbeiten an diesem Thema](${generateMailtoLink("Konsolidierung der Instrumente")}) (öffnet E-Mail)
 
 ### Erweiterung der Schulungs-Angebote
