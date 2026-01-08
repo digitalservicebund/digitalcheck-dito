@@ -264,7 +264,8 @@
 
   @apply breakout-grid;
 
-  @media (min-width: 960px) {
+  @media (width >= 64rem) {
+    /* breakpoint lg, 1024px */
     grid-template-columns:
       [full-start] minmax(var(--container-padding-inline), 1fr)
       [content-start] min(
