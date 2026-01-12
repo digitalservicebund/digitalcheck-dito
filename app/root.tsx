@@ -149,6 +149,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: siteMeta.siteName,
+    alternateName: siteMeta.alternateName,
     url: siteMeta.siteURL,
   };
 
