@@ -170,6 +170,7 @@ test.describe("progress bar", () => {
     if (routesWithProgressBarOrRedirects.includes(route)) {
       return;
     }
+
     test(`${route.url} has no progress bar`, async ({ page }) => {
       await page.goto(route.url);
       await expect(page.getByLabel("Digitalcheck-Fortschritt")).toBeHidden();

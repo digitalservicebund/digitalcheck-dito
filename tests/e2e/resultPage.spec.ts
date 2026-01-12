@@ -17,6 +17,7 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
   test.describe.configure({ mode: "default" });
 
   let page: Page;
+
   test.beforeAll("answer all questions with yes", async ({ browser }) => {
     page = await browser.newPage();
     await page.goto(questions[0].url);

@@ -123,8 +123,8 @@ export default function Interoperability() {
                     <ul>
                       <li>
                         Können nach der aktuellen Rechtslage andere
-                        EU-Bürgerinnen und -Bürger ein digitales Angebot in diesem
-                        Zusammenhang nutzen?
+                        EU-Bürgerinnen und -Bürger ein digitales Angebot in
+                        diesem Zusammenhang nutzen?
                       </li>
                       <li>Was ist nötig, um das zu ermöglichen?</li>
                     </ul>
