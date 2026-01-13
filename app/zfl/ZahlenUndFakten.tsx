@@ -66,7 +66,7 @@ const dsData: DsData = [
         },
         count: "15+",
         description:
-          "Begleitungen durch interdisziplinäre Teams: Bei besonders komplexen Vorhaben standen unsere Taskforces den Legistinnen und Legisten direkt zur Seite.",
+          "Begleitungen durch interdisziplinäre Teams: Bei besonders komplexen Vorhaben standen unsere Regelungsbegleitungen den Legistinnen und Legisten direkt zur Seite.",
       },
       {
         badge: {
