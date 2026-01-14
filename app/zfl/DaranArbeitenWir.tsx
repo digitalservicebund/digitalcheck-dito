@@ -21,6 +21,9 @@ Das Zentrum für Legistik wird gemeinsam mit Ihnen als Legistinnen und Legisten 
 Wir möchten Sie einladen, uns Rückmeldung zu unseren Angeboten zu geben oder an kurzen Praxistests teilzunehmen. Ihr Erfahrungswissen hilft uns, die Hilfsmittel und Werkzeuge so zu gestalten, dass sie in der täglichen Arbeit tatsächlich nützlich sind. Der zeitliche Aufwand ist überschaubar und wird vorab mit Ihnen abgestimmt.
 
 Kontaktieren Sie uns zu diesem Zweck unter [0151 / 4076 7839](tel:+4915140767839) oder [support@zfl.bund.de](mailto:support@zfl.bund.de).
+
+Gut zu wissen: Das Zentrum für Legistik ist ein Bestandteil des Handlungsfelds „Bessere Rechtsetzung“ in der Modernisierungsagenda.  
+[Mehr Informationen zur Modernisierungsagenda](https://bmds.bund.de/themen/staatsmodernisierung/modernisierungsagenda-bund#c2065)
 `;
 
 const current = `
@@ -37,7 +40,7 @@ Ein gutes, frühzeitiges Verständnis von Anforderungen und Umfeld ist die Basis
 
 ### Konsolidierung der Instrumente
 
-Unterschiedliche Checks und Arbeitshilfen (wie z. B. der [Digitalcheck](https://digitalcheck.bund.de/) oder [Jugendcheck](https://jugend-check.de/)) zielen in Teilen auf die gleiche Wirkung ab: Praxis- und digitaltaugliche Regelungen und Bürokratierückbau. Bei der Zusammenführung diverser Ansätze verfolgen wir das Ziel, Ihre Regelungsarbeit einfacher und effizienter zu gestalten.<br>
+Unterschiedliche Checks und Arbeitshilfen (wie z. B. der [Digitalcheck](https://digitalcheck.bund.de/), [Gleichstellungscheck](https://www.gleichstellungs-check.de/) oder [Jugendcheck](https://jugend-check.de/)) zielen in Teilen auf die gleiche Wirkung ab: Praxis- und digitaltaugliche Regelungen und Bürokratierückbau. Bei der Zusammenführung diverser Ansätze verfolgen wir das Ziel, Ihre Regelungsarbeit einfacher und effizienter zu gestalten.<br>
 [Mitarbeiten an diesem Thema](${generateMailtoLink("Konsolidierung der Instrumente")}) (öffnet E-Mail)
 
 ### Erweiterung der Schulungs-Angebote
