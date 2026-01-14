@@ -5,6 +5,8 @@ on:
     branches:
       - main
       - "staging/**"
+  schedule:
+    - cron: "0 0 * * 1" # Every Monday at Midnight UTC (docker images need not be older than 1 week)
   pull_request:
     branches: [main]
   # Allow to run this workflow manually
