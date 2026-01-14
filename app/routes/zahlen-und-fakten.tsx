@@ -76,7 +76,8 @@ const dsData: DsData = [
           text: "Unterstützung",
         },
         count: "15+",
-        description: "Regelungsvorhaben wurden durch Regelungsbegleitungen begleitet.",
+        description:
+          "Regelungsvorhaben wurden durch Regelungsbegleitungen begleitet.",
       },
       {
         badge: {
