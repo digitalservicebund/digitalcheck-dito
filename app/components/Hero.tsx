@@ -9,6 +9,7 @@ type HeroProps = {
   title: string;
   subtitle?: string;
   children?: ReactNode;
+  preline?: ReactNode;
   className?: string;
 };
 
@@ -36,6 +37,7 @@ export default function Hero({
  * breakout-grid utility.
  */
 export function BreakoutHero({
+  preline,
   children,
   title,
   subtitle,
@@ -43,6 +45,7 @@ export function BreakoutHero({
 }: Readonly<HeroProps>) {
   return (
     <div className={twMerge("breakout bg-blue-100 pt-40 pb-48", className)}>
+      {preline}
       <Heading tagName="h1">{title}</Heading>
       {subtitle && (
         <RichText markdown={subtitle} className="ds-subhead mt-16" />

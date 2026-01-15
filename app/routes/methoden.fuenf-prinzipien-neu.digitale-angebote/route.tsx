@@ -1,9 +1,9 @@
 import { DoneAllOutlined } from "@digitalservicebund/icons";
-import BorderColorOutlined from "@digitalservicebund/icons/BorderColorOutlined";
 import LightbulbOutlined from "@digitalservicebund/icons/LightbulbOutlined";
 import { ReactNode } from "react";
 import { data, Link } from "react-router";
 import AccordionItem from "~/components/AccordionItem.tsx";
+import Badge from "~/components/Badge.tsx";
 import { BreakoutHero } from "~/components/Hero.tsx";
 import MetaTitle from "~/components/Meta.tsx";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
@@ -34,9 +34,12 @@ function AspectHeader({
   number: ReactNode;
 }>) {
   return (
-    <h2 className="mb-40 flex gap-16">
-      <span>{number}</span> {children}
-    </h2>
+    <div>
+      <Badge className="bg-principle-1 mb-16">Schwerpunkt</Badge>
+      <h2 className="mb-40 flex gap-16">
+        <span>{number}</span> {children}
+      </h2>
+    </div>
   );
 }
 
@@ -101,6 +104,17 @@ export default function PrinzipDigitaleAngebote() {
       <main>
         <div className="breakout-grid-toc">
           <BreakoutHero
+            preline={
+              <div className={"ds-subhead text-link mb-16 no-underline"}>
+                <span className="hover:cursor-not-allowed hover:underline">
+                  Methoden
+                </span>{" "}
+                {">"}{" "}
+                <span className="hover:cursor-not-allowed hover:underline">
+                  Prinzipien für digitaltaugliche Gesetzgebung
+                </span>
+              </div>
+            }
             title="Digitale Angebote für alle nutzbar gestalten"
             subtitle={dedent`
             Eine Regelung, die gut digital umgesetzt werden kann, muss sicherstellen, dass
@@ -163,7 +177,7 @@ export default function PrinzipDigitaleAngebote() {
               </p>
             </div>
             <h3 className="flex gap-20">
-              <BorderColorOutlined className="size-32" />
+              {/*<BorderColorOutlined className="size-32" />*/}
               So wenden Sie den Aspekt an
             </h3>
             <div>
