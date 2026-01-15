@@ -173,6 +173,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
             <meta property="twitter:image" content={ogImage} />
             <meta property="og:type" content="website" />
             <meta property="twitter:card" content="summary_large_image" />
+            <link rel="canonical" href={url} />
           </>
         )}
         <script
