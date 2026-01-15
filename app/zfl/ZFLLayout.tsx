@@ -24,7 +24,7 @@ const siteMeta = {
 
 export default function ZFLLayout() {
   const location = useLocation();
-  const url = `${siteMeta.BASE_URL}${location.pathname}`;
+  const url = `${siteMeta.BASE_URL}${location.pathname.replace(/^\/zfl/, "")}`;
   const flags = useLoaderData<typeof loader>();
   return (
     <div className="zfl-style">
@@ -34,6 +34,7 @@ export default function ZFLLayout() {
       <meta property="twitter:description" content={siteMeta.description} />
       <meta property="og:url" content={url} />
       <meta property="twitter:url" content={url} />
+      <link rel="canonical" href={url} />
       <PageHeader />
       <main>
         <Outlet />
