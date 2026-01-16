@@ -3,6 +3,7 @@ import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
 import { useRef, useState } from "react";
 import { Link, useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
+import Banner from "~/components/Banner";
 import Container from "~/components/Container";
 import { Kopfzeile } from "~/components/kern-preview/Kopfzeile.tsx";
 import RichText from "~/components/RichText";
@@ -38,6 +39,8 @@ const PageHeader = () => {
 
   return (
     <header className="relative" ref={headerRef}>
+      <Banner />
+
       <Kopfzeile className="relative z-30" />
       <div className="border-zfl-main20 relative z-30 flex h-[72px] justify-between border-b-2 bg-white pl-16 md:px-16">
         {/* Logo and title */}

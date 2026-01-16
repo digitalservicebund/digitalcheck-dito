@@ -21,7 +21,6 @@ import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants";
 import { POSTHOG_KEY } from "~/utils/constants.server";
 import { useNonce } from "~/utils/nonce";
 import type { Route } from "./+types/root";
-import Banner from "./components/Banner";
 import ErrorBoundaryComponent from "./layout/ErrorBoundary";
 import FeatureFlagProvider from "./providers/FeatureFlagProvider";
 import { PHProvider } from "./providers/PosthogProvider";
@@ -195,7 +194,6 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
         <PHProvider posthogEnabled={posthogEnabled} posthogKey={posthogKey}>
           <FeatureFlagProvider featureFlags={featureFlags ?? {}}>
             <ScrollAndFocus />
-            <Banner />
             {!isZFLPage && <PageHeader />}
             {children}
             {!isZFLPage && <Footer />}
