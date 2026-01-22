@@ -12,6 +12,8 @@ import SidebarContainer from "~/layout/SidebarContainer";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien.ts";
 import {
   ROUTE_EXAMPLES_PRINCIPLES,
+  ROUTE_METHODS,
+  ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_PRINCIPLES_NEW_DIGITALE_ANGEBOTE,
 } from "~/resources/staticRoutes.ts";
 import getFeatureFlag from "~/utils/featureFlags.server.ts";
@@ -24,6 +26,7 @@ import {
   PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server.ts";
 import { slugify } from "~/utils/utilFunctions.ts";
+import type { Route } from "../../../.react-router/types/app/routes/+types/beispiele.prinzipien.$prinzip.ts";
 import { PRINZIP_ASPEKTE_QUERY } from "./query";
 
 function AspectHeader({
@@ -56,7 +59,7 @@ function Formulierungsbeispiel({
   );
 }
 
-export async function loader() {
+export async function loader({ params }: Route.LoaderArgs) {
   if (!getFeatureFlag("principles26")) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw data("Not found", { status: 404 });
@@ -67,7 +70,7 @@ export async function loader() {
   const prinzipData = await fetchStrapiData<{
     prinzips: PrinzipWithAspekteAndExample[];
   }>(PRINZIP_ASPEKTE_QUERY, {
-    URLBezeichnung: "digitale-angebote-fuer-alle-nutzbar-gestalten",
+    URLBezeichnung: params.prinzip,
     status,
   });
 
@@ -182,14 +185,18 @@ export default function PrinzipDigitaleAngebote() {
         <div className="breakout-grid-toc">
           <BreakoutHero
             preline={
-              <div className={"ds-subhead text-link mb-16 no-underline"}>
-                <span className="hover:cursor-not-allowed hover:underline">
+              <div className={"ds-subhead mb-16"}>
+                <Link className="text-link" to={ROUTE_METHODS.url}>
                   Methoden
-                </span>{" "}
-                {">"}{" "}
-                <span className="hover:cursor-not-allowed hover:underline">
+                </Link>{" "}
+                <span className={"text-blue-800"}>{">"}</span>{" "}
+                <Link className="text-link" to={ROUTE_METHODS_PRINCIPLES.url}>
                   Prinzipien für digitaltaugliche Gesetzgebung
-                </span>
+                </Link>{" "}
+                <span className={"text-blue-800"}>{">"}</span>{" "}
+                <Badge className={`bg-principle-${prinzip.Nummer}`}>
+                  Prinzip {prinzip.Nummer}
+                </Badge>
               </div>
             }
             title={prinzip.Name}
