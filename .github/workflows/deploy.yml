@@ -43,13 +43,13 @@ jobs:
       - name: Deploy container image
         uses: digitalservicebund/argocd-deploy@auth-token # Use the auth-token branch for STACKIT
         with:
-          environment: production-stackit
+          environment: ${{ inputs.environment_name }}-stackit
           version: ${{ github.sha }}
           deploying_repo: ${{ env.PACKAGE_NAME }}
           infra_repo: ${{ github.event.repository.name }}-infra
           github_app_id: ${{ secrets.GITOPS_DIGITALCHECK_APP_ID }}
           github_app_private_key: ${{ secrets.GITOPS_DIGITALCHECK_APP_PRIVATE_KEY }}
-          app: digitalcheck-production
+          app: digitalcheck-${{ inputs.environment_name }}
           argocd_auth_token: ${{ secrets.ARGOCD_AUTH_TOKEN }}
           argocd_server: ${{ secrets.ARGOCD_SERVER_STACKIT }}
 
