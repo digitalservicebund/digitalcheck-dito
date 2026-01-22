@@ -1,10 +1,7 @@
 /* eslint-disable no-irregular-whitespace */
 import { JSX } from "react";
-import { data } from "react-router";
 import InfoBox from "~/components/InfoBox.tsx";
 import RichText from "~/components/RichText.tsx";
-import getFeatureFlag from "~/utils/featureFlags.server.ts";
-import { features } from "~/utils/featureFlags.ts";
 import MetaTitle from "~/zfl/ZFLMeta.tsx";
 import { ROUTE_ZFL_DARAN_ARBEITEN_WIR } from "~/zfl/routes.ts";
 
@@ -66,13 +63,6 @@ Bereits für Ihre Arbeit an Regelungen nutzbar:
 - **Digitaltauglichkeit**: Zugang zur Prüfung und Beratung via [Digitalcheck](https://digitalcheck.bund.de/)
 
 `;
-
-export function loader() {
-  if (!getFeatureFlag(features.enableZflDaranArbeitenWir)) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw data("Not found", { status: 404 });
-  }
-}
 
 export default function DaranArbeitenWir(): JSX.Element {
   return (

@@ -1,7 +1,6 @@
 import Image from "app/components/Image";
 import { Link } from "react-router";
 import { OpenInNewIcon } from "~/components/OpenInNewIcon.tsx";
-import type { FeatureFlags } from "~/utils/featureFlags.ts";
 import tailwindMerge from "~/utils/tailwindMerge";
 import { ZFL_EMAIL, ZFL_PHONE } from "../constants";
 import {
@@ -65,22 +64,17 @@ const LinkList = ({
   </div>
 );
 
-export default function Footer({
-  flags,
-}: Readonly<{ flags: Partial<FeatureFlags> }>) {
+export default function Footer() {
   const aboutLinks = [
     {
       text: ROUTE_ZFL_NUMBERS_FACTS.title,
       url: ROUTE_ZFL_NUMBERS_FACTS.url,
     },
-  ];
-
-  if (flags.enableZflDaranArbeitenWir) {
-    aboutLinks.push({
+    {
       text: ROUTE_ZFL_DARAN_ARBEITEN_WIR.title,
       url: ROUTE_ZFL_DARAN_ARBEITEN_WIR.url,
-    });
-  }
+    },
+  ];
 
   return (
     <footer
