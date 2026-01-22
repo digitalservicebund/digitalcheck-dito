@@ -1,12 +1,8 @@
-import { DrawOutlined } from "@digitalservicebund/icons";
 import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
 import {
   ROUTE_DOWNLOAD_PRINCIPLE_POSTER,
-  ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_METHODS,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
-  ROUTE_METHODS_VISUALIZE,
-  ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
 import { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
@@ -15,8 +11,6 @@ export const methodsFivePrinciples = {
   title: "Chancen und Hindernisse der digitalen Umsetzung identifizieren",
   subtitle: dedent`
   Die folgenden Prinzipien helfen Ihnen dabei, Chancen der digitalen Umsetzung auszuschöpfen und Hindernisse zu erkennen. Nutzen Sie die Prinzipien auch, um mit beteiligten Akteurinnen und Akteuren über die Umsetzung zu sprechen.
-  
-  Welche Prinzipien besonders wichtig sind und wie Sie diese anwenden, hängt davon ab, worum es in Ihrem Vorhaben geht – und ob Sie ein Gesetz oder eine Verordnung entwerfen. Sie sind sich unsicher oder wollen über Ihre Einordnung reflektieren, dann nutzen Sie gern unsere [vertraulichen Unterstützungs- und Supportangebote](${ROUTE_SUPPORT.url}).
   `,
   grundlagenTitle: "Prinzipien für digitaltaugliche Gesetzgebung",
   grundlagenSubtitle:
@@ -33,34 +27,7 @@ export const methodsFivePrinciples = {
       "Anleitung: So nutzen Sie die fünf Prinzipien für Ihr Regelungsvorhaben",
   },
   instruction: {
-    badge: {
-      Icon: DrawOutlined,
-      text: "Anleitung",
-    },
     title: "So nutzen Sie die fünf Prinzipien für Ihr Regelungsvorhaben",
-    items: [
-      {
-        heading: { text: "Als konkrete Umsetzungstipps" },
-        content:
-          "Nutzen Sie die Tipps als Inspiration, um in Ihrem Regelungsvorhaben die Möglichkeiten des Digitalen auszuschöpfen und Hindernisse zu erkennen.",
-      },
-      {
-        heading: { text: "Als Überprüfung für den Gesamtprozess" },
-        content: `Besonders erkenntnisreich sind die fünf Prinzipien, wenn Sie diese auf eine Skizze des geplanten Umsetzungsprozesses anwenden. Skizzieren Sie Schritt für Schritt die Umsetzung und markieren Sie die Stellen, an denen eines oder mehrere Prinzipien wichtig sind. Mehr Informationen und Anleitung zur Visualisierungen finden Sie auf [visualisieren.digitalcheck.bund.de](${ROUTE_METHODS_VISUALIZE.url}).`,
-      },
-      {
-        heading: { text: "Als Startpunkt für ihren Regelungstext" },
-        content:
-          "Nutzen Sie die gesammelten Beispiele als Startpunkt für Ihre Formulierungen. Bauen Sie auf Formulierungen auf, oder lassen Sie sich durch die Wirklogiken Ihrer Kolleginnen und Kollegen inspirieren. Sie finden gute Formulierungen, Einordnungen und deren Kontext im Regelungstext in den Beispielen.",
-        links: [
-          {
-            to: ROUTE_EXAMPLES_PRINCIPLES.url,
-            text: "Beispiele betrachten",
-            look: "link",
-          },
-        ] satisfies ContentLink[],
-      },
-    ],
   },
   principleLabel: "Prinzip",
   detailsSummaryTitle: "So wenden Sie das Prinzip an",

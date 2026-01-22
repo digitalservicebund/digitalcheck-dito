@@ -1,6 +1,7 @@
 import LightbulbOutlined from "@digitalservicebund/icons/LightbulbOutlined";
 import { ReactNode } from "react";
 import { data, Link, useLoaderData } from "react-router";
+import { twJoin } from "tailwind-merge";
 import AccordionItem from "~/components/AccordionItem.tsx";
 import Badge from "~/components/Badge.tsx";
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
@@ -9,6 +10,7 @@ import MetaTitle from "~/components/Meta.tsx";
 import { PrincipleHightlightNullModifier } from "~/components/PrincipleHighlightModifier.tsx";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer";
+import { PRINCIPLE_COLORS, PrincipleNumber } from "~/resources/constants.ts";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien.ts";
 import {
   ROUTE_EXAMPLES_PRINCIPLES,
@@ -30,13 +32,22 @@ import { PRINZIP_ASPEKTE_QUERY } from "./query";
 function AspectHeader({
   children,
   number,
+  principleNumber,
 }: Readonly<{
   children: ReactNode;
   number: ReactNode;
+  principleNumber: PrincipleNumber;
 }>) {
   return (
     <div>
-      <Badge className="bg-principle-1 mb-16">Schwerpunkt</Badge>
+      <Badge
+        className={twJoin(
+          PRINCIPLE_COLORS[principleNumber].background,
+          "mb-16",
+        )}
+      >
+        Schwerpunkt
+      </Badge>
       <h2 className="mb-40">
         {number} {children}
       </h2>
@@ -92,16 +103,18 @@ function ItalicModifier({ node }: Readonly<{ node: Node }>) {
 function Textbeispiel({
   beispiel,
   prinzip,
+  headingTag: HeadingTag,
 }: Readonly<{
   beispiel: AbsatzWithParagraph;
   prinzip: BasePrinzip;
+  headingTag: "h3" | "h4";
 }>) {
   const isExcerpt = !!beispiel.Auszug;
   const content = (isExcerpt ? beispiel.Auszug : null) ?? beispiel.Text;
 
   return (
     <div className="space-y-16 bg-gray-100 p-24">
-      <h4 className="ds-heading-02-reg">Ein Textbeispiel</h4>
+      <HeadingTag className="ds-heading-02-reg">Ein Textbeispiel</HeadingTag>
       <div className="ds-label-02-bold">
         § {beispiel.Paragraph.Nummer} {beispiel.Paragraph.Gesetz}
         {isExcerpt && " (Auszug)"}
@@ -133,7 +146,9 @@ function Aspect({
   return (
     <section className="my-80" id={slugify(aspect.Kurzbezeichnung)}>
       <div className="space-y-40">
-        <AspectHeader number={aspect.Nummer}>{aspect.Titel}</AspectHeader>
+        <AspectHeader number={aspect.Nummer} principleNumber={prinzip.Nummer}>
+          {aspect.Titel}
+        </AspectHeader>
         <BlocksRenderer content={aspect.Text} className={"space-y-16"} />
         {!!aspect.Anwendung.length && (
           <>
@@ -158,6 +173,7 @@ function Aspect({
                       <Textbeispiel
                         beispiel={anwendung.Beispiel}
                         prinzip={prinzip}
+                        headingTag="h4"
                       />
                     )}
                   </div>
@@ -166,12 +182,19 @@ function Aspect({
             </div>
           </>
         )}
+        {aspect.Beispiel && (
+          <Textbeispiel
+            beispiel={aspect.Beispiel}
+            prinzip={prinzip}
+            headingTag="h3"
+          />
+        )}
       </div>
     </section>
   );
 }
 
-export default function PrinzipDigitaleAngebote() {
+export default function Prinzip() {
   const { prinzip } = useLoaderData<typeof loader>();
 
   return (
@@ -185,7 +208,7 @@ export default function PrinzipDigitaleAngebote() {
             preline={
               <div>
                 <Badge className={`bg-principle-${prinzip.Nummer} mb-16`}>
-                  Prinzip {prinzip.Nummer}
+                  Prinzip {prinzip.order}
                 </Badge>
               </div>
             }

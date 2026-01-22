@@ -1,5 +1,4 @@
 import { render, screen, within } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { MemoryRouter, useLoaderData } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
@@ -89,7 +88,13 @@ const mockPrinzipsData = [
     Beschreibung: [
       {
         type: "paragraph",
-        children: [{ type: "text", text: "Beschreibung für Prinzip 2." }],
+        children: [{ type: "text", text: "Lange Beschreibung für Prinzip 2." }],
+      },
+    ] as Node[],
+    Kurzbeschreibung: [
+      {
+        type: "paragraph",
+        children: [{ type: "text", text: "Kurze Beschreibung für Prinzip 2." }],
       },
     ] as Node[],
     order: 2,
@@ -102,7 +107,10 @@ const mockPrinzipsData = [
 describe("FivePrinciples Route - Integration Tests", () => {
   beforeEach(() => {
     // Provide the mock data to the component via the mocked hook
-    vi.mocked(useLoaderData).mockReturnValue({ prinzips: mockPrinzipsData });
+    vi.mocked(useLoaderData).mockReturnValue({
+      prinzips: mockPrinzipsData,
+      useNewPrinciples: true,
+    });
 
     // Render the component within a router to handle <Link> components
     render(
@@ -124,17 +132,12 @@ describe("FivePrinciples Route - Integration Tests", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders the Table of Contents with links to principles", () => {
-    const toc = screen.getByText(
-      methodsFivePrinciples.contentOverviewTitle,
-    ).parentElement;
-    expect(toc).toBeInTheDocument();
+  it("renders the list of principles", () => {
+    const list = screen.getByTestId("prinzipien");
+    expect(list).toBeInTheDocument();
     expect(
-      within(toc!).getByRole("link", { name: /Prinzip: Prinzip Test 1/i }),
-    ).toBeInTheDocument();
-    expect(
-      within(toc!).getByRole("link", { name: /Prinzip: Prinzip Test 2/i }),
-    ).toBeInTheDocument();
+      within(list).getAllByRole("link", { name: "Mehr zum Prinzip" }),
+    ).toHaveLength(mockPrinzipsData.length);
   });
 
   it("renders the instruction section", () => {
@@ -142,12 +145,6 @@ describe("FivePrinciples Route - Integration Tests", () => {
       screen.getByRole("heading", {
         name: methodsFivePrinciples.instruction.title,
         level: 2,
-      }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("heading", {
-        name: "Als konkrete Umsetzungstipps",
-        level: 3,
       }),
     ).toBeInTheDocument();
   });
@@ -159,7 +156,6 @@ describe("FivePrinciples Route - Integration Tests", () => {
         level: 2,
       }),
     ).toBeInTheDocument();
-    expect(screen.getByText("Beschreibung für Prinzip 1.")).toBeInTheDocument();
 
     expect(
       screen.getByRole("heading", {
@@ -167,49 +163,16 @@ describe("FivePrinciples Route - Integration Tests", () => {
         level: 2,
       }),
     ).toBeInTheDocument();
-    expect(screen.getByText("Beschreibung für Prinzip 2.")).toBeInTheDocument();
   });
 
-  it("renders the principle example for principles that have one", () => {
-    const hgroup = screen.getByRole("heading", {
-      name: /Ein Textbeispiel/,
-      level: 3,
-    }).parentElement;
-    expect(hgroup?.tagName).toBe("HGROUP");
-
-    const exampleSection = hgroup?.parentElement;
-    expect(exampleSection).toBeInTheDocument();
-
-    expect(within(exampleSection!).getByText(/§ 42 TestG/)).toBeInTheDocument();
+  it("renders the description, superseded by the short description if available", () => {
+    expect(screen.getByText("Beschreibung für Prinzip 1.")).toBeInTheDocument();
     expect(
-      within(exampleSection!).getByText("Titel des Test-Paragraphen"),
+      screen.getByText("Kurze Beschreibung für Prinzip 2."),
     ).toBeInTheDocument();
     expect(
-      within(exampleSection!).getByText(
-        "(2) Dies ist der Text des Beispiel-Absatzes.",
-      ),
-    ).toBeInTheDocument();
-    const link = within(exampleSection!).getByRole("link", {
-      name: /Titel des Test-Regelungsvorhabens/,
-    });
-    expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute("href", "/beispiele/regelungen/test-regelung");
-  });
-
-  it("does not render a principle example for principles without one", () => {
-    const exampleHeadings = screen.getAllByRole("heading", {
-      name: /Ein Textbeispiel/,
-      level: 3,
-    });
-    expect(exampleHeadings).toHaveLength(1);
-  });
-
-  it("renders the 'how to apply' details section for principles", () => {
-    const detailsHeading = screen.getAllByRole("heading", {
-      name: /So wenden Sie das Prinzip an/i,
-      level: 3,
-    });
-    expect(detailsHeading.length).toBeGreaterThan(0);
+      screen.queryByText("Lange Beschreibung für Prinzip 2."),
+    ).not.toBeInTheDocument();
   });
 
   it("renders the PrinciplePosterBox component", () => {
@@ -233,20 +196,5 @@ describe("FivePrinciples Route - Integration Tests", () => {
         level: 2,
       }),
     ).toBeInTheDocument();
-  });
-
-  it("renders the example inside 'how to apply' when expanded", async () => {
-    // The details/summary element is not a button but a heading that controls the expansion
-    const detailsHeading = screen.getByRole("heading", {
-      name: /So wenden Sie das Prinzip an/i,
-      level: 3,
-    });
-
-    // Click to expand the details section
-    await userEvent.click(detailsHeading);
-
-    // After expanding, the example content should be visible
-    expect(screen.getByText(/Beispiel aus § 99 AnwG/i)).toBeInTheDocument();
-    expect(screen.getByText("Anwendung Beispieltext.")).toBeInTheDocument();
   });
 });
