@@ -9,8 +9,44 @@ import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import { ROUTE_EXAMPLES_PRINCIPLES } from "~/resources/staticRoutes";
 import { absatzIdTag } from "~/utils/paragraphUtils";
-import { PrinzipWithAspekte } from "~/utils/strapiData.server";
+import {
+  AbsatzWithParagraph,
+  PrinzipWithAspekte,
+} from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
+
+function AspectExample({
+  beispiel,
+  prinzip,
+}: Readonly<{
+  beispiel: AbsatzWithParagraph;
+  prinzip: PrinzipWithAspekte;
+}>) {
+  return (
+    <PrincipleHighlightProvider
+      absatzId={beispiel.documentId}
+      principlesToShow={[prinzip]}
+      useAnchorLinks={false}
+    >
+      <h4 className="ds-label-02-bold">
+        {methodsFivePrinciples.exampleTitle} § {beispiel.Paragraph.Nummer}{" "}
+        {beispiel.Paragraph.Gesetz}:
+      </h4>
+      <BlocksRenderer
+        content={beispiel.Text}
+        modifiers={{
+          underline: PrincipleHighlightModifier,
+        }}
+      />
+      <Link
+        className="text-link"
+        to={`${ROUTE_EXAMPLES_PRINCIPLES.url}/${prinzip.URLBezeichnung}#${absatzIdTag(beispiel.documentId)}`}
+      >
+        {methodsFivePrinciples.exampleLinkText}
+      </Link>
+    </PrincipleHighlightProvider>
+  );
+}
 
 export default function getDetailsSummaryProps(
   prinzip: PrinzipWithAspekte,
@@ -45,29 +81,7 @@ export default function getDetailsSummaryProps(
           </>
         )}
         {aspekt.Beispiel && (
-          <PrincipleHighlightProvider
-            absatzId={aspekt.Beispiel.documentId}
-            principlesToShow={[prinzip]}
-            useAnchorLinks={false}
-          >
-            <h4 className="ds-label-02-bold">
-              {methodsFivePrinciples.exampleTitle} §{" "}
-              {aspekt.Beispiel.Paragraph.Nummer}{" "}
-              {aspekt.Beispiel.Paragraph.Gesetz}:
-            </h4>
-            <BlocksRenderer
-              content={aspekt.Beispiel.Text}
-              modifiers={{
-                underline: PrincipleHighlightModifier,
-              }}
-            />
-            <Link
-              className="text-link"
-              to={`${ROUTE_EXAMPLES_PRINCIPLES.url}/${prinzip.URLBezeichnung}#${absatzIdTag(aspekt.Beispiel.documentId)}`}
-            >
-              {methodsFivePrinciples.exampleLinkText}
-            </Link>
-          </PrincipleHighlightProvider>
+          <AspectExample beispiel={aspekt.Beispiel} prinzip={prinzip} />
         )}
       </div>
     );
