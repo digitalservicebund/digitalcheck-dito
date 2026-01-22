@@ -12,8 +12,6 @@ import SidebarContainer from "~/layout/SidebarContainer";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien.ts";
 import {
   ROUTE_EXAMPLES_PRINCIPLES,
-  ROUTE_METHODS,
-  ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_PRINCIPLES_NEW_DIGITALE_ANGEBOTE,
 } from "~/resources/staticRoutes.ts";
 import getFeatureFlag from "~/utils/featureFlags.server.ts";
@@ -185,16 +183,8 @@ export default function PrinzipDigitaleAngebote() {
         <div className="breakout-grid-toc">
           <BreakoutHero
             preline={
-              <div className={"ds-subhead mb-16"}>
-                <Link className="text-link" to={ROUTE_METHODS.url}>
-                  Methoden
-                </Link>{" "}
-                <span className={"text-blue-800"}>{">"}</span>{" "}
-                <Link className="text-link" to={ROUTE_METHODS_PRINCIPLES.url}>
-                  Prinzipien für digitaltaugliche Gesetzgebung
-                </Link>{" "}
-                <span className={"text-blue-800"}>{">"}</span>{" "}
-                <Badge className={`bg-principle-${prinzip.Nummer}`}>
+              <div>
+                <Badge className={`bg-principle-${prinzip.Nummer} mb-16`}>
                   Prinzip {prinzip.Nummer}
                 </Badge>
               </div>
