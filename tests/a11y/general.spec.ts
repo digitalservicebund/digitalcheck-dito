@@ -1,12 +1,20 @@
 import { AxeBuilder } from "@axe-core/playwright";
-import { expect, test } from "@playwright/test";
+import { expect, Page, test } from "@playwright/test";
 
 import {
   ROUTE_EXAMPLES_PRINCIPLES,
+  ROUTE_METHODS_PRINCIPLES,
   ROUTE_SUPPORT,
   ROUTES,
 } from "~/resources/staticRoutes";
 import { checkHeadingsForFlowContent } from "./utils.ts";
+
+async function checkPage(page: Page) {
+  const accessibilityResults = await new AxeBuilder({ page }).analyze();
+  expect(accessibilityResults.violations).toEqual([]);
+
+  await checkHeadingsForFlowContent(page);
+}
 
 test.describe("basic example a11y test", () => {
   ROUTES.filter(
@@ -24,19 +32,14 @@ test.describe("basic example a11y test", () => {
         await page.goto(redirectedUrl);
       }
 
-      const accessibilityResults = await new AxeBuilder({ page }).analyze();
-      expect(accessibilityResults.violations).toEqual([]);
-
-      await checkHeadingsForFlowContent(page);
+      await checkPage(page);
     });
   });
 
   test("check a11y of example pages", async ({ page }) => {
     await page.goto(ROUTE_EXAMPLES_PRINCIPLES.url);
 
-    const principleScanResults = await new AxeBuilder({ page }).analyze();
-    expect(principleScanResults.violations).toEqual([]);
-    await checkHeadingsForFlowContent(page);
+    await checkPage(page);
 
     // get URL of first regelung from page
     const regelungUrl = await page.getAttribute(
@@ -48,9 +51,28 @@ test.describe("basic example a11y test", () => {
     if (regelungUrl !== null) {
       await page.goto(regelungUrl);
 
-      const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
-      expect(accessibilityScanResults.violations).toEqual([]);
-      await checkHeadingsForFlowContent(page);
+      await checkPage(page);
+    }
+  });
+
+  test("check a11y of principle pages", async ({ page }) => {
+    const principlesUrl = ROUTE_METHODS_PRINCIPLES.url;
+    await page.goto(principlesUrl);
+
+    const principleLinks = page.locator(`a[href^="${principlesUrl}/"]`); // all URLs starting with current URL
+
+    const urlPromises = (await principleLinks.all()).map((element) =>
+      element.getAttribute("href"),
+    );
+    const urls = (await Promise.all(urlPromises)).filter(
+      (url) => !!url,
+    ) as string[];
+
+    expect(urls.length).toBeGreaterThanOrEqual(5);
+
+    for (const url of urls) {
+      await page.goto(url);
+      await checkPage(page);
     }
   });
 });
