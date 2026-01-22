@@ -16,9 +16,9 @@ on:
         required: true
       GITOPS_DIGITALCHECK_APP_PRIVATE_KEY:
         required: true
-      ARGOCD_PIPELINE_PASSWORD:
+      ARGOCD_AUTH_TOKEN:
         required: true
-      ARGOCD_SERVER:
+      ARGOCD_SERVER_STACKIT:
         required: true
       METRICS_DEPLOYMENT_WEBHOOK_URL:
         required: true
