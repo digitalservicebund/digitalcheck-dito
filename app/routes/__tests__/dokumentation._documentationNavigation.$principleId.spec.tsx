@@ -14,7 +14,10 @@ import {
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { digitalDocumentation } from "~/resources/content/dokumentation";
 import { Route, ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes";
-import { PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
+import {
+  PrinzipAspekt,
+  PrinzipWithAspekteAndExample,
+} from "~/utils/strapiData.server";
 import { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationPrinciple from "../dokumentation._documentationNavigation.$principleId";
 import { useDocumentationData } from "../dokumentation/documentationDataHook";
@@ -31,12 +34,14 @@ const routes: (Route[] | Route)[] = [
   ],
 ];
 
-const aspekte = [
+const aspekte: PrinzipAspekt[] = [
   {
     Titel: "Aspekt 1",
     Beschreibung: "Aspekt 1 Beschreibung",
     Kurzbezeichnung: "A1",
     Text: [],
+    Nummer: "",
+    Anwendung: [],
   },
 ];
 
