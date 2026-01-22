@@ -7,6 +7,14 @@ import { PRINCIPLE_COLORS } from "~/resources/constants";
 import { explanationID, Node } from "~/utils/paragraphUtils";
 import { BasePrinzip } from "~/utils/strapiData.server";
 
+/**
+ * Strips references (like [1]) from the text.
+ */
+export function PrincipleHightlightNullModifier({ node }: { node: Node }) {
+  const [text] = node.text ? node.text.split(/(\[\d])/g) : [];
+  return text;
+}
+
 export default function PrincipleHighlightModifier({ node }: { node: Node }) {
   const { principlesToShow, setActiveHighlight, absatzId, useAnchorLinks } =
     useContext(PrincipleHighlightContext);

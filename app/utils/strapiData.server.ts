@@ -47,6 +47,7 @@ export type BaseAbsatz = {
   documentId: string;
   Nummer: number;
   Text: Node[];
+  Auszug?: Node[];
   PrinzipErfuellungen?: PrinzipErfuellung[];
 };
 
@@ -66,9 +67,18 @@ export type PrinzipAspekt = {
   Titel: string;
   Kurzbezeichnung: string;
   Beschreibung: string;
+  Nummer: string;
   Text: Node[];
   Leitfragen?: Node[];
   Formulierungsbeispiel?: Node[];
+  Beispiel?: AbsatzWithParagraph;
+  Anwendung: PrinzipAnwendung[];
+};
+
+export type PrinzipAnwendung = {
+  Titel: string;
+  Erklaerung: Node[];
+  Formulierungsbeispiel: Node[];
   Beispiel?: AbsatzWithParagraph;
 };
 
