@@ -1,3 +1,7 @@
+import {
+  KeyboardArrowLeft,
+  KeyboardArrowRight,
+} from "@digitalservicebund/icons";
 import LightbulbOutlined from "@digitalservicebund/icons/LightbulbOutlined";
 import { ReactNode } from "react";
 import { data, Link, useLoaderData } from "react-router";
@@ -5,6 +9,7 @@ import { twJoin } from "tailwind-merge";
 import AccordionItem from "~/components/AccordionItem.tsx";
 import Badge from "~/components/Badge.tsx";
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
+import { LinkButton } from "~/components/Button.tsx";
 import { BreakoutHero } from "~/components/Hero.tsx";
 import MetaTitle from "~/components/Meta.tsx";
 import { PrincipleHightlightNullModifier } from "~/components/PrincipleHighlightModifier.tsx";
@@ -14,6 +19,7 @@ import { PRINCIPLE_COLORS, PrincipleNumber } from "~/resources/constants.ts";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien.ts";
 import {
   ROUTE_EXAMPLES_PRINCIPLES,
+  ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_PRINCIPLES_NEW_DIGITALE_ANGEBOTE,
 } from "~/resources/staticRoutes.ts";
 import getFeatureFlag from "~/utils/featureFlags.server.ts";
@@ -27,7 +33,12 @@ import {
 } from "~/utils/strapiData.server.ts";
 import { slugify } from "~/utils/utilFunctions.ts";
 import type { Route } from "../../../.react-router/types/app/routes/+types/beispiele.prinzipien.$prinzip.ts";
-import { PRINZIP_ASPEKTE_QUERY } from "./query";
+import {
+  PRINZIP_ASPEKTE_QUERY,
+  PRINZIP_LIST_QUERY,
+  PrinzipListItem,
+  type PrinzipListQueryReturnType,
+} from "./query";
 
 function AspectHeader({
   children,
@@ -88,12 +99,22 @@ export async function loader({ params }: Route.LoaderArgs) {
     throw new Response(prinzipData.error, { status: 400 });
   }
 
+  const prinzipListData =
+    await fetchStrapiData<PrinzipListQueryReturnType>(PRINZIP_LIST_QUERY);
+  if ("error" in prinzipListData) {
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
+    throw new Response(prinzipListData.error, { status: 400 });
+  }
+
   if (prinzipData.prinzips.length === 0) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw data("Not found", { status: 404 });
   }
 
-  return { prinzip: prinzipData.prinzips[0] };
+  return {
+    prinzip: prinzipData.prinzips[0],
+    prinzipList: prinzipListData.prinzips,
+  };
 }
 
 function ItalicModifier({ node }: Readonly<{ node: Node }>) {
@@ -194,8 +215,53 @@ function Aspect({
   );
 }
 
+function PrincipleNavigation({
+  principles,
+  current,
+}: {
+  principles: PrinzipListItem[];
+  current: BasePrinzip;
+}) {
+  const index = principles.findIndex(
+    (principle) => principle.order === current.order,
+  );
+  const prev = index > 0 ? principles[index - 1] : null;
+  const next = index < principles.length - 1 ? principles[index + 1] : null;
+
+  return (
+    <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
+      {prev ? (
+        <LinkButton
+          look="tertiary"
+          to={ROUTE_METHODS_PRINCIPLES.url + "/" + prev.URLBezeichnung}
+          iconLeft={<KeyboardArrowLeft />}
+          className="text-left"
+        >
+          Vorheriges Prinzip
+          <div className="ds-label-02-reg mt-8">{prev.Name}</div>
+        </LinkButton>
+      ) : (
+        <span />
+      )}
+      {next ? (
+        <LinkButton
+          look="tertiary"
+          to={ROUTE_METHODS_PRINCIPLES.url + "/" + next.URLBezeichnung}
+          iconRight={<KeyboardArrowRight />}
+          className="text-left"
+        >
+          Nächstes Prinzip
+          <div className="ds-label-02-reg mt-8">{next.Name}</div>
+        </LinkButton>
+      ) : (
+        <span />
+      )}
+    </div>
+  );
+}
+
 export default function Prinzip() {
-  const { prinzip } = useLoaderData<typeof loader>();
+  const { prinzip, prinzipList } = useLoaderData<typeof loader>();
 
   return (
     <>
@@ -243,6 +309,9 @@ export default function Prinzip() {
             />
           ))}
         </SidebarContainer>
+        <div className="breakout-grid-toc my-80">
+          <PrincipleNavigation principles={prinzipList} current={prinzip} />
+        </div>
       </main>
     </>
   );

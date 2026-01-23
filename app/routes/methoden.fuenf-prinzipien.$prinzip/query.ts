@@ -1,3 +1,5 @@
+import { BasePrinzip } from "~/utils/strapiData.server.ts";
+
 export const PRINZIP_ASPEKTE_QUERY = `
 query Prinzip($URLBezeichnung: String!, $status: PublicationStatus!) {
   prinzips(status: $status, filters: { URLBezeichnung: { eq: $URLBezeichnung } }) {
@@ -70,3 +72,21 @@ query Prinzip($URLBezeichnung: String!, $status: PublicationStatus!) {
     }
   }
 }`;
+
+export const PRINZIP_LIST_QUERY = `
+query PrinzipList {
+  prinzips(sort: "order") {
+    Name
+    URLBezeichnung
+    order
+  }
+}
+`;
+
+export type PrinzipListItem = Pick<
+  BasePrinzip,
+  "Name" | "URLBezeichnung" | "order"
+>;
+export type PrinzipListQueryReturnType = {
+  prinzips: PrinzipListItem[];
+};
