@@ -29,7 +29,10 @@ function findIndexForRoute(routes: Route[], currentUrl: string) {
   const index = routes.findIndex((route) => route.url === currentUrl);
 
   if (index === -1) {
-    throw new Error(`Could not find route with url ${currentUrl}`);
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
+    throw new Response(`Could not find route with url ${currentUrl}`, {
+      status: 404,
+    });
   }
   return index;
 }
