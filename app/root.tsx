@@ -25,7 +25,6 @@ import ErrorBoundaryComponent from "./layout/ErrorBoundary";
 import FeatureFlagProvider from "./providers/FeatureFlagProvider";
 import { PHProvider } from "./providers/PosthogProvider";
 import { getFeatureFlags } from "./utils/featureFlags.server";
-import { ZFL_ROUTE_PREFIX } from "./zfl/constants";
 
 export function loader({ request }: Route.LoaderArgs) {
   const featureFlags = getFeatureFlags();
@@ -139,8 +138,6 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
     rootLoaderData ?? {};
   const location = useLocation();
 
-  const isZFLPage = location.pathname.startsWith(`/${ZFL_ROUTE_PREFIX}`);
-
   const url = `${rootLoaderData?.BASE_URL}${location.pathname}`;
   const ogImage = `${rootLoaderData?.BASE_URL}/images/og-image.png`;
 
@@ -158,7 +155,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {!error && rootLoaderData && !isZFLPage && (
+        {!error && rootLoaderData && (
           <>
             <meta name="description" content={siteMeta.description} />
             <meta property="og:site_name" content={siteMeta.siteName} />
@@ -194,9 +191,9 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
         <PHProvider posthogEnabled={posthogEnabled} posthogKey={posthogKey}>
           <FeatureFlagProvider featureFlags={featureFlags ?? {}}>
             <ScrollAndFocus />
-            {!isZFLPage && <PageHeader />}
+            <PageHeader />
             {children}
-            {!isZFLPage && <Footer />}
+            <Footer />
             <ScrollRestoration nonce={nonce} />
             <Scripts nonce={nonce} />
           </FeatureFlagProvider>

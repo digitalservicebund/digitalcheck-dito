@@ -14,9 +14,6 @@
   --color-principle-5: #cce7db; /* order 4 */
   --color-principle-3: #cce4f0; /* order 5 */
 
-  --color-zfl-main20: #e3e6f2;
-  --color-zfl-main80: #36349d;
-
   --color-ds-success: #005f34;
   --color-ds-error: #8e001b;
   --color-ds-warning: #f5e05d;
@@ -40,12 +37,6 @@
 }
 
 @layer base {
-  .zfl-style {
-    a {
-      color: var(--color-zfl-main80);
-    }
-  }
-
   html {
     /* Keep 16px, don't change! (e.g. angie library depends on it) */
     font-size: 16px;
@@ -151,10 +142,6 @@
   .text-white & {
     @apply text-gray-100 visited:text-gray-300;
   }
-
-  .zfl-style & {
-    color: var(--color-zfl-main80);
-  }
 }
 
 @utility increase-tap-area {
@@ -193,11 +180,6 @@
   .ds-link-02-reg,
   .ds-link-02-bold,
   .ds-link-03-reg,
-  .ds-link-03-bold {
-    .zfl-style & {
-      color: var(--color-zfl-main80);
-    }
-  }
   .ds-input,
   .ds-checkbox,
   .ds-textarea,

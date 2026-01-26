@@ -18,11 +18,6 @@ fileignoreconfig:
 - filename: app/routes/vorpruefung/preCheckDataService.ts
   allowed_patterns:
     - STORAGE_KEY
-- filename: app/zfl/DaranArbeitenWir.tsx
-  allowed_patterns:
-    - 0?15140767839
-- filename: public/zfl/posthog-fix.js
-  checksum: 5830389080a63806988dd06b1d8237c12ea3caad019e389ad979941c0c046733
 allowed_patterns:
   - key
   - onKey
