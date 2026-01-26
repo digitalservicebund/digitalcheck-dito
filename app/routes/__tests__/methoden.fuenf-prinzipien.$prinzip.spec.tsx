@@ -6,6 +6,7 @@ import { getTextFromNodes } from "~/routes/__tests__/utils/strapiUtils.ts";
 import Prinzip from "~/routes/methoden.fuenf-prinzipien.$prinzip/route";
 import { Node } from "~/utils/paragraphUtils";
 import { PrinzipWithAspekte } from "~/utils/strapiData.server.ts";
+import { PrinzipListItem } from "../methoden.fuenf-prinzipien.$prinzip/query";
 
 // Mock react-router's useLoaderData hook, which is used by the component
 // to get data from its server-side loader.
@@ -135,12 +136,15 @@ const mockPrinzipData: PrinzipWithAspekte = {
   Beispiel: undefined, // not supported at the moment
 };
 
+const mockPrinzipsList: PrinzipListItem[] = [];
+
 describe("FivePrinciples Route - Integration Tests", () => {
   let container: HTMLElement;
   beforeEach(() => {
     // Provide the mock data to the component via the mocked hook
     vi.mocked(useLoaderData).mockReturnValue({
       prinzip: mockPrinzipData,
+      prinzipList: mockPrinzipsList,
     });
 
     // Render the component within a router to handle <Link> components
