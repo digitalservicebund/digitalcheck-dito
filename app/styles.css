@@ -175,11 +175,6 @@
 }
 
 @layer utilities {
-  .ds-link-01-reg,
-  .ds-link-01-bold,
-  .ds-link-02-reg,
-  .ds-link-02-bold,
-  .ds-link-03-reg,
   .ds-input,
   .ds-checkbox,
   .ds-textarea,
