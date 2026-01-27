@@ -2,7 +2,6 @@ import {
   KeyboardArrowLeft,
   KeyboardArrowRight,
 } from "@digitalservicebund/icons";
-import LightbulbOutlined from "@digitalservicebund/icons/LightbulbOutlined";
 import { ReactNode } from "react";
 import { data, Link, useLoaderData } from "react-router";
 import { twJoin } from "tailwind-merge";
@@ -68,12 +67,13 @@ function AspectHeader({
 
 function Formulierungsbeispiel({
   children,
-}: Readonly<{ children?: ReactNode }>) {
+  headingTag: HeadingTag,
+}: Readonly<{ children?: ReactNode; headingTag: "h3" | "h4" }>) {
   return (
-    <div className="space-y-8 rounded-lg bg-green-300 p-40">
-      <div className="ds-label-02-reg flex items-center gap-8">
-        <LightbulbOutlined className={"text-black/200"} /> Formulierungsbeispiel
-      </div>
+    <div className="space-y-16 border border-gray-600 bg-green-200 p-40">
+      <HeadingTag className="ds-heading-02-reg">
+        Formulierungsbeispiel
+      </HeadingTag>
       <div>{children}</div>
     </div>
   );
@@ -141,7 +141,7 @@ function Textbeispiel({
   const content = (isExcerpt ? beispiel.Auszug : null) ?? beispiel.Text;
 
   return (
-    <div className="space-y-16 bg-gray-100 p-24">
+    <div className="space-y-16 border border-gray-600 bg-gray-100 p-24">
       <HeadingTag className="ds-heading-02-reg">Ein Textbeispiel</HeadingTag>
       <div className="ds-label-02-bold">
         § {beispiel.Paragraph.Nummer} {beispiel.Paragraph.Gesetz}
@@ -194,7 +194,7 @@ function Aspect({
                       content={anwendung.Erklaerung}
                     />
                     {anwendung.Formulierungsbeispiel && (
-                      <Formulierungsbeispiel>
+                      <Formulierungsbeispiel headingTag="h4">
                         <BlocksRenderer
                           content={anwendung.Formulierungsbeispiel}
                           modifiers={textModifiers}
