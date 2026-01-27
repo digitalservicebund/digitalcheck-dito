@@ -7,6 +7,7 @@ export type Node = {
   format?: string;
   underline?: boolean;
   italic?: boolean;
+  bold?: boolean;
   url?: string;
 };
 

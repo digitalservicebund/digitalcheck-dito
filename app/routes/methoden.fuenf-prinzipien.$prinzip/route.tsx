@@ -118,8 +118,15 @@ export async function loader({ params }: Route.LoaderArgs) {
 }
 
 function ItalicModifier({ node }: Readonly<{ node: Node }>) {
+  if (node.bold) return <strong className={"italic"}>{node.text}</strong>;
   return <i>{node.text}</i>;
 }
+
+function BoldModifier({ node }: Readonly<{ node: Node }>) {
+  return <strong>{node.text}</strong>;
+}
+
+const textModifiers = { italic: ItalicModifier, bold: BoldModifier };
 
 function Textbeispiel({
   beispiel,
@@ -130,6 +137,7 @@ function Textbeispiel({
   prinzip: BasePrinzip;
   headingTag: "h3" | "h4";
 }>) {
+  console.log(beispiel);
   const isExcerpt = !!beispiel.Auszug;
   const content = (isExcerpt ? beispiel.Auszug : null) ?? beispiel.Text;
 
@@ -143,8 +151,8 @@ function Textbeispiel({
       <BlocksRenderer
         content={content}
         modifiers={{
+          ...textModifiers,
           underline: PrincipleHightlightNullModifier,
-          italic: ItalicModifier,
         }}
       />
       <Link
@@ -186,7 +194,7 @@ function Aspect({
                       <Formulierungsbeispiel>
                         <BlocksRenderer
                           content={anwendung.Formulierungsbeispiel}
-                          modifiers={{ italic: ItalicModifier }}
+                          modifiers={textModifiers}
                         />
                       </Formulierungsbeispiel>
                     )}
