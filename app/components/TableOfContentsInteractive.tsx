@@ -78,7 +78,7 @@ function TableOfContentsInteractive({
     return () => {
       observer.disconnect();
     };
-  }, [selector]);
+  }, [selector, children]);
 
   return (
     <nav ref={navRef} aria-labelledby="toc-label" className="space-y-16">
