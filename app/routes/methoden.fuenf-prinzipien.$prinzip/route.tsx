@@ -178,7 +178,11 @@ function Aspect({
         <AspectHeader number={aspect.Nummer} principleNumber={prinzip.Nummer}>
           {aspect.Titel}
         </AspectHeader>
-        <BlocksRenderer content={aspect.Text} className={"space-y-16"} />
+        <BlocksRenderer
+          content={aspect.Text}
+          className={"space-y-16"}
+          modifiers={textModifiers}
+        />
         {!!aspect.Anwendung.length && (
           <>
             <h3>So wenden Sie den Aspekt an</h3>
