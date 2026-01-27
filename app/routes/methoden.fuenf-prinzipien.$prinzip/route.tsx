@@ -137,7 +137,6 @@ function Textbeispiel({
   prinzip: BasePrinzip;
   headingTag: "h3" | "h4";
 }>) {
-  console.log(beispiel);
   const isExcerpt = !!beispiel.Auszug;
   const content = (isExcerpt ? beispiel.Auszug : null) ?? beispiel.Text;
 
