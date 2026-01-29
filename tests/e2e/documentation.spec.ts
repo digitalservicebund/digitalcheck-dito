@@ -190,7 +190,7 @@ test("documentation flow happy path", async ({ page }, testInfo) => {
         "Auswirkungen auf Betroffene",
         testData.participationFormats,
         testData.participationResults,
-        "digitale Angebote",
+        "Digitale Angebote",
         "Ja, gänzlich oder teilweise",
         "Ermöglichen Sie digitale Kommunikation",
         "Paragrafen",
