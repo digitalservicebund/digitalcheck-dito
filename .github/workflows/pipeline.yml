@@ -132,7 +132,7 @@ jobs:
     concurrency: deploy
     with:
       environment_name: staging
-      environment_url: https://digitalcheck-dito.dev.ds4g.net/
+      environment_url: https://digitalcheck.dev.tech.digitalservice.dev
     secrets:
       GITOPS_DIGITALCHECK_APP_ID: ${{ secrets.GITOPS_DIGITALCHECK_APP_ID }}
       GITOPS_DIGITALCHECK_APP_PRIVATE_KEY: ${{ secrets.GITOPS_DIGITALCHECK_APP_PRIVATE_KEY }}
