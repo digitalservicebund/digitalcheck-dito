@@ -1,7 +1,3 @@
-import {
-  KeyboardArrowLeft,
-  KeyboardArrowRight,
-} from "@digitalservicebund/icons";
 import { ReactNode } from "react";
 import { data, Link, useLoaderData } from "react-router";
 import { twJoin } from "tailwind-merge";
@@ -240,34 +236,55 @@ function PrincipleNavigation({
   const next = index < principles.length - 1 ? principles[index + 1] : null;
 
   return (
-    <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
-      {prev ? (
-        <LinkButton
-          look="tertiary"
-          to={ROUTE_METHODS_PRINCIPLES.url + "/" + prev.URLBezeichnung}
-          iconLeft={<KeyboardArrowLeft />}
-          className="text-left"
-        >
-          Vorheriges Prinzip
-          <div className="ds-label-02-reg mt-8">{prev.Name}</div>
-        </LinkButton>
-      ) : (
-        <span />
-      )}
-      {next ? (
-        <LinkButton
-          look="tertiary"
-          to={ROUTE_METHODS_PRINCIPLES.url + "/" + next.URLBezeichnung}
-          iconRight={<KeyboardArrowRight />}
-          className="text-left"
-        >
-          Nächstes Prinzip
-          <div className="ds-label-02-reg mt-8">{next.Name}</div>
-        </LinkButton>
-      ) : (
-        <span />
-      )}
-    </div>
+    <>
+      <nav
+        aria-labelledby="principle-navigation-heading"
+        className="mb-80 space-y-8"
+      >
+        <h2 id="principle-navigation-heading" className="ds-heading-03-reg">
+          Prinzipien-Übersicht
+        </h2>
+        {principles.map((principle) => (
+          <Link
+            key={principle.order}
+            to={`${ROUTE_METHODS_PRINCIPLES.url}/${principle.URLBezeichnung}`}
+            className={twJoin(
+              "block",
+              principle.order === current.order
+                ? "ds-body-01-reg"
+                : "ds-link-01-reg",
+            )}
+          >
+            Prinzip {principle.order}: {principle.Name}
+          </Link>
+        ))}
+      </nav>
+
+      <div className="flex flex-wrap justify-between gap-16">
+        {prev ? (
+          <LinkButton
+            look="link"
+            to={ROUTE_METHODS_PRINCIPLES.url + "/" + prev.URLBezeichnung}
+            className="ds-link-01-bold"
+          >
+            Zurück zu Prinzip {prev.order}
+          </LinkButton>
+        ) : (
+          <span />
+        )}
+        {next ? (
+          <LinkButton
+            look="tertiary"
+            to={ROUTE_METHODS_PRINCIPLES.url + "/" + next.URLBezeichnung}
+            className="flex justify-center"
+          >
+            Zum nächsten Prinzip
+          </LinkButton>
+        ) : (
+          <span />
+        )}
+      </div>
+    </>
   );
 }
 
