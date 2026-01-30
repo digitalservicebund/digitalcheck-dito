@@ -1,7 +1,12 @@
-import { FeedOutlined } from "@digitalservicebund/icons";
+import {
+  AnnouncementOutlined,
+  MergeTypeOutlined,
+  RuleOutlined,
+  SocialDistanceOutlined,
+} from "@digitalservicebund/icons";
 import { data } from "react-router";
 import AccordionItem from "~/components/AccordionItem";
-import { DownloadLinkButton, LinkButton } from "~/components/Button";
+import { LinkButton } from "~/components/Button";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
@@ -34,15 +39,61 @@ export default function InterviewMethods() {
             So gelingt der Transfer von praktischer Erfahrung in praxistaugliche
             Regelungen.
           </p>
+
+          <p>
+            Die Inhalte sind auf Basis von den unten aufgeführten Quellen
+            entstanden.
+          </p>
         </Hero>
 
-        <LinkButton to={ROUTE_METHODS_INTERVIEW_METHODS_STEPS.url}>
-          Anleitung
-        </LinkButton>
+        <section className="container space-y-40">
+          <Heading tagName="h2">
+            Die Mehrwerte von Interviews mit Akteurinnen und Akteuren aus dem
+            Vollzug
+          </Heading>
+
+          <div className="space-y-32 md:grid md:grid-cols-3 md:space-y-0 md:gap-x-40">
+            <div className="space-y-16">
+              <AnnouncementOutlined className="size-40 fill-yellow-500 md:size-80" />
+              <RichText
+                className="ds-label-01-reg"
+                markdown={dedent`
+                **Erkenntnisse zur Umsetzungspraxis:**
+                
+                Sie liefern Erkenntnisse darüber, wie Regelungen im Vollzug tatsächlich wirken.
+              `}
+              />
+            </div>
+
+            <div className="space-y-16">
+              <RuleOutlined className="size-40 fill-yellow-500 md:size-80" />
+              <RichText
+                className="ds-label-01-reg"
+                markdown={dedent`
+                **Annahmen überprüfen:**
+                
+                Sie machen sichtbar, was funktioniert und was in der Praxis scheitert.
+              `}
+              />
+            </div>
+
+            <div className="space-y-16">
+              <MergeTypeOutlined className="size-40 fill-yellow-500 md:size-80" />
+              <RichText
+                className="ds-label-01-reg"
+                markdown={dedent`
+                **Verbesserte Entscheidungsgrundlage:**
+                
+                Die Erkenntnisse helfen, Services, Prozesse und Regeln gezielt zu verbessern.
+              `}
+              />
+            </div>
+          </div>
+        </section>
 
         <section className="container space-y-40">
-          <div>
-            <Heading tagName="h2">Interview-Methoden im Überblick</Heading>
+          <div className="space-y-8">
+            <Heading tagName="h3">Interview-Methoden im Überblick</Heading>
             <p>
               Damit Regelungen wirksam und praxisgerecht gestaltet werden
               können, bedarf es einer fundierten Informationsgrundlage. Der
@@ -78,8 +129,8 @@ export default function InterviewMethods() {
             </AccordionItem>
           </div>
 
-          <div>
-            <Heading tagName="h3">Qualitative Interview-Formen</Heading>
+          <div className="space-y-8">
+            <Heading tagName="h4">Qualitative Interview-Formen</Heading>
             <p>
               Je nach Projektphase und Informationsbedarf eignen sich
               unterschiedliche Interviewformen:
@@ -87,7 +138,8 @@ export default function InterviewMethods() {
           </div>
 
           <div>
-            <AccordionItem headline="Freies Interview">
+            {/* Not shown for now */}
+            {/* <AccordionItem headline="Freies Interview">
               <RichText
                 markdown={dedent`
                 - **Konzept:** Keine vorformulierten Fragen, lediglich ein grober Leitfaden als Gedankenstütze. Das Gespräch folgt dem Gedankengang der befragten Person.
@@ -95,7 +147,7 @@ export default function InterviewMethods() {
                 - **Kernnutzen:** Maximaler Erkenntnisgewinn durch volle Flexibilität.
               `}
               />
-            </AccordionItem>
+            </AccordionItem> */}
 
             <AccordionItem headline="Standardisiertes Interview">
               <RichText
@@ -119,49 +171,37 @@ export default function InterviewMethods() {
           </div>
         </section>
 
-        <hr className="container" />
-
-        <section className="container space-y-40">
-          <div className="space-y-8">
-            <Heading tagName="h2">
-              Alles auf einem Blick: Kompakte Checkliste zur Interviewführung
-            </Heading>
-            <p>
-              Nutzen Sie diese Zusammenfassung, um die methodische Qualität
-              Ihrer Interviews abzusichern und eine lückenlose Vorbereitung
-              sowie Nachbereitung sicherzustellen.
-            </p>
-          </div>
-
+        <section className="container">
           <InfoBox
             look="highlight"
-            badge={{ Icon: FeedOutlined, text: "Vorlage" }}
+            heading={{
+              text: "Akteurinnen und Akteure identifizieren und Interviews vorbereiten ",
+              tagName: "h2",
+            }}
             visual={{
-              image: {
-                url: "/images/interview-leitfaden-checkliste.png",
-                size: "medium",
-              },
-              type: "image",
+              Icon: SocialDistanceOutlined,
+              type: "icon",
             }}
           >
             <RichText
               markdown={dedent`
-                Die Checkliste bündelt die wichtigsten Handlungsempfehlungen für Vorbereitung, Durchführung und Nachbereitung.
+                In dem nachfolgenden Abschnitt finden Sie eine Anleitung wie sie relevante Akteurinnen und Akteure aus dem Vollzug identifizieren und den Leitfaden erstellen.
               `}
             />
-            <DownloadLinkButton
-              look="link"
-              to="/documents/Anleitung_Flussdiagramm_erstellen.pptx"
+            <LinkButton
+              to={ROUTE_METHODS_INTERVIEW_METHODS_STEPS.url}
+              look="tertiary"
+              className="self-start"
             >
-              Word-Vorlage
-            </DownloadLinkButton>
+              Zur Anleitung
+            </LinkButton>
           </InfoBox>
         </section>
 
-        <hr className="container" />
+        <hr className="container border-gray-400" />
 
         <section className="container space-y-8">
-          <Heading tagName="h2">Relevante Quellen</Heading>
+          <Heading tagName="h2">Genutzte Quellen</Heading>
           <RichText
             markdown={dedent`
             - Öffentliches Gestalten
