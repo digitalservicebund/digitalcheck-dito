@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useLoaderData } from "react-router";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
@@ -11,6 +11,13 @@ import Timeline from "~/components/Timeline.tsx";
 import { methods } from "~/resources/content/methoden";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import { ROUTE_METHODS } from "~/resources/staticRoutes";
+import getFeatureFlag from "~/utils/featureFlags.server";
+
+export function loader() {
+  const showInterviewLeitfaden = getFeatureFlag("showInterviewLeitfaden");
+
+  return { showInterviewLeitfaden };
+}
 
 const renderStep = (
   step: (typeof methods.steps.items)[number],
@@ -53,6 +60,8 @@ const renderStep = (
 };
 
 export default function Methoden() {
+  const { showInterviewLeitfaden } = useLoaderData<typeof loader>();
+
   return (
     <>
       <MetaTitle prefix={ROUTE_METHODS.title} />
@@ -98,6 +107,24 @@ export default function Methoden() {
                 <RichText markdown={methods.technicalFeasibility.content} />
                 <InfoBox.LinkList links={methods.technicalFeasibility.links} />
               </InfoBox>
+
+              {showInterviewLeitfaden && (
+                <InfoBox
+                  look="method"
+                  badge={{
+                    children: methods.interviewMethods.badge,
+                    look: "hint",
+                  }}
+                  heading={{
+                    text: methods.interviewMethods.heading,
+                    tagName: "h3",
+                    className: "ds-heading-03-bold",
+                  }}
+                >
+                  <RichText markdown={methods.interviewMethods.content} />
+                  <InfoBox.LinkList links={methods.interviewMethods.links} />
+                </InfoBox>
+              )}
             </InfoBoxSideBySide>
           </section>
         </div>

@@ -1,4 +1,5 @@
 {
   "showGesetzgebungsprozessOverview": true,
-  "principles26": true
+  "principles26": true,
+  "showInterviewLeitfaden": false
 }

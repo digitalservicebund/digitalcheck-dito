@@ -1,7 +1,11 @@
 export default function InfoBoxSideBySide({
   children,
 }: Readonly<{
-  children: [React.ReactNode, React.ReactNode];
+  children: React.ReactNode;
 }>) {
-  return <div className="flex flex-col gap-24 sm:flex-row">{children}</div>;
+  return (
+    <div className="grid grid-cols-1 gap-x-24 gap-y-40 sm:grid-cols-2">
+      {children}
+    </div>
+  );
 }

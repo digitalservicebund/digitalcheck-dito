@@ -101,6 +101,16 @@ export const ROUTE_METHODS_TECHNICAL_FEASIBILITY = createRoute(
   "Technische Umsetzbarkeit sicherstellen",
   ROUTE_METHODS,
 );
+export const ROUTE_METHODS_INTERVIEW_METHODS = createRoute(
+  "interview-leitfaden",
+  "Interview Leitfaden",
+  ROUTE_METHODS,
+);
+export const ROUTE_METHODS_INTERVIEW_METHODS_STEPS = createRoute(
+  "interview-leitfaden-schritte",
+  "Interview Leitfaden Schritte",
+  ROUTE_METHODS,
+);
 export const ROUTE_METHODS_PRINCIPLES_NEW = createRoute(
   "fuenf-prinzipien-neu",
   "Fünf Prinzipien",

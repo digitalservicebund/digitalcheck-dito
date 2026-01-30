@@ -29,7 +29,7 @@ export default function AccordionItem({
   const plausibleEvent = getPlausibleEventClassName(plausibleEventName);
 
   return (
-    <div className="border-t border-blue-500 last-of-type:border-b">
+    <div className="border-t-2 border-blue-400 last-of-type:border-b-2">
       <Disclosure>
         <DisclosureButton
           className={twJoin(

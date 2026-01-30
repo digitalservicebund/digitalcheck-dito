@@ -1,6 +1,7 @@
 import { steps } from "~/resources/content/shared/naechste-schritte";
 import {
   ROUTE_METHODS_COLLECT_IT_SYSTEMS,
+  ROUTE_METHODS_INTERVIEW_METHODS,
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
   ROUTE_METHODS_VISUALIZE,
@@ -115,6 +116,18 @@ export const methods = {
       {
         text: "IT-Auswirkungen prüfen",
         to: ROUTE_METHODS_TECHNICAL_FEASIBILITY.url,
+      },
+    ] satisfies ContentLink[],
+  },
+  interviewMethods: {
+    badge: "Bedarfsanalyse",
+    heading: "Perspektiven aus der Praxis einbinden",
+    content:
+      "Identifizieren und befragen Sie Akteure und Akteurinnen aus dem Vollzug. Decken Sie Hürden frühzeitig auf, um Regelungen lösungsorientiert und praxistauglich zu gestalten.",
+    links: [
+      {
+        text: "Akteure identifizieren",
+        to: ROUTE_METHODS_INTERVIEW_METHODS.url,
       },
     ] satisfies ContentLink[],
   },
