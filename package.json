@@ -91,7 +91,7 @@
     "jsdom": "^27.4.0",
     "license-checker-rseidelsohn": "^4.4.2",
     "mammoth": "^1.11.0",
-    "playwright-core": "^1.57",
+    "playwright-core": "^1.58",
     "prettier": "^3.8.1",
     "prettier-plugin-organize-imports": "^4.3.0",
     "prettier-plugin-tailwindcss": "^0.7.0",
