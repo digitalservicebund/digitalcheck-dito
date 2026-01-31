@@ -8,17 +8,28 @@ import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import FederalStateContext, {
+  getFederalStateInfo,
+} from "~/contexts/FederalStateContext";
 import DocumentationParticipation from "~/routes/dokumentation._documentationNavigation.beteiligungsformate";
 import { useDocumentationData } from "../dokumentation/documentationDataHook";
 import { initialDocumentationData } from "../dokumentation/documentationDataService";
 
 const mockedUseDocumentationData = vi.mocked(useDocumentationData);
 
+const mockFederalStateValue = {
+  currentState: "bund" as const,
+  setCurrentState: () => {},
+  stateInfo: getFederalStateInfo("bund"),
+};
+
 const renderWithRouter = () => {
   return render(
-    <MemoryRouter>
-      <DocumentationParticipation />
-    </MemoryRouter>,
+    <FederalStateContext.Provider value={mockFederalStateValue}>
+      <MemoryRouter>
+        <DocumentationParticipation />
+      </MemoryRouter>
+    </FederalStateContext.Provider>,
   );
 };
 

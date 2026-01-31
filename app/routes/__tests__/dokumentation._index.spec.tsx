@@ -1,7 +1,5 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
-import React from "react";
-import { MemoryRouter } from "react-router";
+import { screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import {
@@ -9,6 +7,7 @@ import {
   ROUTES_DOCUMENTATION_INTRO,
 } from "~/resources/staticRoutes";
 import DokumentationIndex from "~/routes/dokumentation._index";
+import { renderWithProviders } from "~/test/testUtils";
 
 vi.mock("~/contexts/FeatureFlagContext", () => {
   return {
@@ -17,13 +16,9 @@ vi.mock("~/contexts/FeatureFlagContext", () => {
 });
 
 describe("Dokumentation Index Route - Integration Tests", () => {
-  const renderWithRouter = (component: React.ReactElement) => {
-    return render(<MemoryRouter>{component}</MemoryRouter>);
-  };
-
   beforeEach(() => {
     vi.mocked(useFeatureFlag).mockReturnValue(true);
-    renderWithRouter(<DokumentationIndex />);
+    renderWithProviders(<DokumentationIndex />);
   });
 
   it("renders the Hero section with the correct title", () => {

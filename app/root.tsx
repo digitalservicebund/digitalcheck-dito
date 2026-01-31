@@ -23,6 +23,7 @@ import { useNonce } from "~/utils/nonce";
 import type { Route } from "./+types/root";
 import ErrorBoundaryComponent from "./layout/ErrorBoundary";
 import FeatureFlagProvider from "./providers/FeatureFlagProvider";
+import FederalStateProvider from "./providers/FederalStateProvider";
 import { PHProvider } from "./providers/PosthogProvider";
 import { getFeatureFlags } from "./utils/featureFlags.server";
 
@@ -190,12 +191,14 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
       <body className="flex min-h-screen flex-col">
         <PHProvider posthogEnabled={posthogEnabled} posthogKey={posthogKey}>
           <FeatureFlagProvider featureFlags={featureFlags ?? {}}>
-            <ScrollAndFocus />
-            <PageHeader />
-            {children}
-            <Footer />
-            <ScrollRestoration nonce={nonce} />
-            <Scripts nonce={nonce} />
+            <FederalStateProvider>
+              <ScrollAndFocus />
+              <PageHeader />
+              {children}
+              <Footer />
+              <ScrollRestoration nonce={nonce} />
+              <Scripts nonce={nonce} />
+            </FederalStateProvider>
           </FeatureFlagProvider>
         </PHProvider>
       </body>
