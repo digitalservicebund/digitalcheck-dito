@@ -16,6 +16,7 @@ import MetaTitle from "~/components/Meta";
 import NumberedList from "~/components/NumberedList.tsx";
 import RichText from "~/components/RichText.tsx";
 import SupportBanner from "~/components/SupportBanner";
+import { useFederalState } from "~/contexts/FederalStateContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import {
@@ -27,6 +28,12 @@ import { DocumentationContinueActions } from "~/routes/dokumentation/Documentati
 const { start } = digitalDocumentation;
 
 export default function Index() {
+  const { currentState } = useFederalState();
+  const isBrandenburg = currentState === "brandenburg";
+  const oversightBody = isBrandenburg
+    ? "Zentralstelle bessere Rechtsetzung"
+    : "NKR";
+
   return (
     <>
       <MetaTitle prefix={ROUTE_DOCUMENTATION.title} />
@@ -77,7 +84,7 @@ export default function Index() {
                   Bearbeiten Sie die Dokumentation{" "}
                   <strong>flexibel im Formular</strong> oder speichern Sie sie
                   als <strong>Word-Datei</strong>. Abschließend senden Sie die
-                  Angaben an den NKR.
+                  Angaben an {isBrandenburg ? "die" : "den"} {oversightBody}.
                 </p>
               </Feature>
               <Feature>
@@ -85,7 +92,8 @@ export default function Index() {
                 <p>
                   <strong>Vorgegebene Schwerpunkte</strong> entsprechen den
                   Anforderungen der Digitaltauglichkeit und erleichtern die{" "}
-                  <strong>Prüfung</strong> durch den NKR.
+                  <strong>Prüfung</strong> durch {isBrandenburg ? "die" : "den"}{" "}
+                  {oversightBody}.
                 </p>
               </Feature>
             </FeatureList>
@@ -106,11 +114,13 @@ export default function Index() {
               </NumberedList.Item>
               <NumberedList.Item className={"space-y-8"}>
                 <p className="ds-heading-03-reg">
-                  Senden Sie die ausgefüllte Dokumentation an den NKR
+                  Senden Sie die ausgefüllte Dokumentation an{" "}
+                  {isBrandenburg ? "die" : "den"} {oversightBody}
                 </p>
                 <p>
                   Exportieren Sie Ihre Eingaben als Word-Datei und schicken Sie
-                  sie zu jedem Zeitpunkt per E-Mail an den NKR.
+                  sie zu jedem Zeitpunkt per E-Mail an{" "}
+                  {isBrandenburg ? "die" : "den"} {oversightBody}.
                 </p>
               </NumberedList.Item>
             </NumberedList>
@@ -142,7 +152,8 @@ export default function Index() {
               <p>
                 <strong>Visualisierung einbeziehen:</strong> Verwenden Sie
                 bestehende Visualisierungen mit den fünf Prinzipien als
-                Grundlage und senden Sie sie am Ende mit an den NKR.
+                Grundlage und senden Sie sie am Ende mit an{" "}
+                {isBrandenburg ? "die" : "den"} {oversightBody}.
               </p>
             </InfoBox>
           </Container>

@@ -12,6 +12,7 @@ import InfoBox from "~/components/InfoBox";
 import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
+import { useFederalState } from "~/contexts/FederalStateContext";
 import { startseite } from "~/resources/content/startseite";
 
 const {
@@ -23,10 +24,30 @@ const {
   prinzipien,
   individuelleExpertise,
   quote,
+  brandenburg,
 } = startseite;
 
 export default function Index() {
   const [showBanner, setShowBanner] = useState(true);
+  const { currentState } = useFederalState();
+
+  const isBrandenburg = currentState === "brandenburg";
+
+  // Get the appropriate content for the step results based on federal state
+  const getStepResult = (stepNumber: number, defaultResult: string) => {
+    if (!isBrandenburg) return defaultResult;
+    if (stepNumber === 1) return brandenburg.stepByStep.steps.step1Result;
+    if (stepNumber === 3) return brandenburg.stepByStep.steps.step3Result;
+    return defaultResult;
+  };
+
+  // Get the appropriate oversight body content
+  const oversightBodyTitle = isBrandenburg
+    ? brandenburg.grundlagen.zentralstelleBessereRechtsetzung.title
+    : grundlagen.nationaleNormenkontrolle.title;
+  const oversightBodyContent = isBrandenburg
+    ? brandenburg.grundlagen.zentralstelleBessereRechtsetzung.content
+    : grundlagen.nationaleNormenkontrolle.content;
 
   return (
     <>
@@ -90,7 +111,7 @@ export default function Index() {
 
                   <div className="mt-24">
                     <p className="font-bold">{stepByStep.resultLabel}:</p>
-                    <RichText markdown={step.result} />
+                    <RichText markdown={getStepResult(step.number, step.result)} />
                   </div>
                 </li>
               ))}
@@ -122,13 +143,15 @@ export default function Index() {
             className="bg-white"
             heading={{
               tagName: "h3",
-              text: grundlagen.nationaleNormenkontrolle.title,
+              text: oversightBodyTitle,
             }}
           >
-            <RichText markdown={grundlagen.nationaleNormenkontrolle.content} />
-            <InfoBox.LinkList
-              links={[grundlagen.nationaleNormenkontrolle.link]}
-            />
+            <RichText markdown={oversightBodyContent} />
+            {!isBrandenburg && (
+              <InfoBox.LinkList
+                links={[grundlagen.nationaleNormenkontrolle.link]}
+              />
+            )}
           </InfoBox>
         </div>
         <div className="breakout bg-[url('/images/trainings.jpg')] bg-cover bg-center">
