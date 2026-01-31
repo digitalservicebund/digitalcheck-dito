@@ -168,7 +168,30 @@ export const startseite = {
   },
 
   quote: {
-    text: "„Der Digitalcheck erscheint mit den Hilfestellungen unkomplizierter als gedacht.“",
+    text: `„Der Digitalcheck erscheint mit den Hilfestellungen unkomplizierter als gedacht."`,
     reference: "**Referentin**<br>aus einem Bundesministerium",
+  },
+
+  // Brandenburg-specific content
+  brandenburg: {
+    grundlagen: {
+      zentralstelleBessereRechtsetzung: {
+        title: "Worauf achtet die Zentralstelle bessere Rechtsetzung?",
+        content:
+          "Die Zentralstelle bessere Rechtsetzung prüft das Vorhaben auf Digitaltauglichkeit. Mit der Anwendung der **Prinzipien** und Erstellung von **Visualisierungen** kann die Zentralstelle bessere Rechtsetzung die Digitaltauglichkeit besser und schneller nachvollziehen.",
+      },
+    },
+    stepByStep: {
+      steps: {
+        step1Result: dedent`
+          - Individueller Digital- und Interoperabilitätsbezug
+          - Ergebnis als E-Mail zum Versenden an die Zentralstelle bessere Rechtsetzung
+        `,
+        step3Result: dedent`
+          - Ausgefülltes Word-Dokument, welches Sie der Zentralstelle bessere Rechtsetzung senden
+          - Ihr Vorhaben ist formal bereit für die Ressortabstimmung
+        `,
+      },
+    },
   },
 };

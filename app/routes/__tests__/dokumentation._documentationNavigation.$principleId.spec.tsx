@@ -12,6 +12,9 @@ import {
   useParams,
 } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import FederalStateContext, {
+  getFederalStateInfo,
+} from "~/contexts/FederalStateContext";
 import type { digitalDocumentation } from "~/resources/content/dokumentation";
 import { Route, ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes";
 import {
@@ -94,12 +97,23 @@ const context: NavigationContext = {
 const mockedUseOutletContext = vi.mocked(useOutletContext);
 const mockedUseDocumentationData = vi.mocked(useDocumentationData);
 const mockedUseParams = vi.mocked(useParams);
+
+const mockFederalStateValue = {
+  currentState: "bund" as const,
+  setCurrentState: () => {},
+  stateInfo: getFederalStateInfo("bund"),
+};
+
 const renderWithRouter = () => {
   const router = createBrowserRouter([
     { path: "/", Component: DocumentationPrinciple },
   ]);
 
-  return render(<RouterProvider router={router} />);
+  return render(
+    <FederalStateContext.Provider value={mockFederalStateValue}>
+      <RouterProvider router={router} />
+    </FederalStateContext.Provider>,
+  );
 };
 
 type AnswerScenario = {

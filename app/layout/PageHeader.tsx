@@ -4,8 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { Link, type UIMatch, useLocation, useMatches } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Container from "~/components/Container";
+import FederalStateSelector from "~/components/FederalStateSelector";
 import { Kopfzeile } from "~/components/kern-preview/Kopfzeile.tsx";
 import RichText from "~/components/RichText";
+import { useFederalState } from "~/contexts/FederalStateContext";
 import { useResize } from "~/hooks/deviceHook";
 import DropdownMenu from "~/layout/DropdownMenu.tsx";
 import ProgressBar from "~/layout/ProgressBar";
@@ -63,6 +65,13 @@ const PageHeader = () => {
   const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
+  const { currentState, stateInfo } = useFederalState();
+
+  // Build the header title based on the selected federal state
+  const headerTitle =
+    currentState === "bund"
+      ? header.title
+      : `${header.title} ${stateInfo.name}`;
 
   // Close any open dropdown and menu
   const closeOpenDropdowns = () => {
@@ -150,7 +159,7 @@ const PageHeader = () => {
           >
             <img src="/logo/bund-logo.png" alt="Logo des Bundes" width={54} />
             <p className="ds-label-01-bold ml-16 flex flex-col text-xl max-lg:hidden">
-              {header.title}
+              {headerTitle}
             </p>
           </Link>
 
@@ -160,6 +169,7 @@ const PageHeader = () => {
             data-testid="desktop-nav"
           >
             {header.items.map((item) => renderDropdownItem(item, "desktop"))}
+            <FederalStateSelector />
           </nav>
 
           {/* Mobile View Controls */}

@@ -3,6 +3,9 @@ import { UserEvent, userEvent } from "@testing-library/user-event";
 import React from "react";
 import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import FederalStateContext, {
+  getFederalStateInfo,
+} from "~/contexts/FederalStateContext";
 import { header } from "~/resources/content/shared/header.ts";
 import PageHeader from "./PageHeader";
 
@@ -14,10 +17,21 @@ vi.mock("react-router", async (importOriginal) => {
   };
 });
 
+const mockFederalStateValue = {
+  currentState: "bund" as const,
+  setCurrentState: () => {},
+  stateInfo: getFederalStateInfo("bund"),
+};
+
 describe("PageHeader", () => {
   const renderWithRouter = (ui: React.ReactElement, { route = "/" } = {}) => {
     window.history.pushState({}, "Test page", route);
-    return render(ui, { wrapper: MemoryRouter });
+    return render(
+      <FederalStateContext.Provider value={mockFederalStateValue}>
+        {ui}
+      </FederalStateContext.Provider>,
+      { wrapper: MemoryRouter },
+    );
   };
 
   enum TestModes {

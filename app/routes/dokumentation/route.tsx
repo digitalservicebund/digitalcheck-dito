@@ -2,6 +2,7 @@ import { Outlet, useRouteLoaderData } from "react-router";
 import {
   Route,
   ROUTE_DOCUMENTATION,
+  ROUTES_DOCUMENTATION_BRANDENBURG,
   ROUTES_DOCUMENTATION_FINALIZE,
   ROUTES_DOCUMENTATION_INTRO,
 } from "~/resources/staticRoutes.ts";
@@ -18,6 +19,7 @@ export const handle = {
 
 export type DocumentationRouteData = {
   routes: (Route[] | Route)[];
+  brandenburgRoutes: Route[];
   prinzips: PrinzipWithAspekte[];
 };
 
@@ -45,7 +47,7 @@ export const loader: () => Promise<DocumentationRouteData> = async () => {
     ...ROUTES_DOCUMENTATION_FINALIZE,
   ];
 
-  return { routes, prinzips };
+  return { routes, brandenburgRoutes: ROUTES_DOCUMENTATION_BRANDENBURG, prinzips };
 };
 
 export function useDocumentationRouteData() {
