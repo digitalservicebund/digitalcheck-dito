@@ -25,11 +25,12 @@ updates:
           - "@tailwindcss/*"
       typescript-eslint:
         patterns:
+          - "typescript-eslint"
           - "@typescript-eslint/*"
-    # Too much noise with patch releases...
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-patch"]
+      playwright:
+        patterns:
+          - "playwright-core"
+          - "@playwright/*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
