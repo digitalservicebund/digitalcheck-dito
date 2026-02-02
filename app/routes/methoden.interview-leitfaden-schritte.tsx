@@ -206,7 +206,7 @@ export default function InterviewMethods() {
                   markdown={dedent`
                 Nach der Vorbereitung treten Sie in den direkten Dialog. Ziel ist es, durch gezieltes Nachfragen die tatsächliche Umsetzungspraxis zu verstehen und blinde Flecken im Vollzug aufzudecken. Das Interview gliedert sich in drei Phasen:
 
-                **Kontaktphase:** Schaffen Sie eine vertrauensvolle Gesprächsatmosphäre. Erläutern Sie nach der Begrüßung kurz Zweck, Ziele und Ablauf des Interviews. 
+                **Kontaktphase:** Schaffen Sie eine vertrauensvolle Gesprächsatmosphäre. Erläutern Sie nach der Begrüßung kurz Zweck, Ziele und Ablauf des Interviews. 
 
                 **Erhebungsphase:** Beginnen Sie mit offenen Fragen und vertiefen Sie diese gezielt entlang Ihres Leitfadens. Achten Sie auf eine ausgewogene Kombination aus offenen und geschlossenen Fragen.
                 Behandelt werden:
@@ -220,7 +220,8 @@ export default function InterviewMethods() {
                 />
 
                 <Heading tagName="h4" className="ds-body-01-bold my-40">
-                  Für die parallele Dokumentation bieten sich folgende Formen an:
+                  Für die parallele Dokumentation bieten sich folgende Formen
+                  an:
                 </Heading>
 
                 <AccordionItem headline="Wortgetreues Transkript">
