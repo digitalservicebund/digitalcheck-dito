@@ -31,14 +31,23 @@ const { principlePages, brandenburg } = digitalDocumentation;
 export const FILE_NAME_DOCUMENTATION_TEMPLATE =
   "VORLAGE_Dokumentation_der_Digitaltauglichkeit_V2.docx";
 
+export const FILE_NAME_DOCUMENTATION_TEMPLATE_BRANDENBURG =
+  "VORLAGE_Dokumentation_der_Digitaltauglichkeit_Brandenburg.docx";
+
+export function getTemplateFileName(federalState: FederalState): string {
+  if (federalState === "brandenburg") {
+    return FILE_NAME_DOCUMENTATION_TEMPLATE_BRANDENBURG;
+  }
+  return FILE_NAME_DOCUMENTATION_TEMPLATE;
+}
+
 export default async function downloadDocumentation(
   prinzips: PrinzipWithAspekte[],
   federalState: FederalState = "bund",
 ) {
   try {
-    const template = await fetch(
-      `/documents/${FILE_NAME_DOCUMENTATION_TEMPLATE}`,
-    );
+    const templateFileName = getTemplateFileName(federalState);
+    const template = await fetch(`/documents/${templateFileName}`);
     const templateData = await template.arrayBuffer();
     const doc = await createDoc(
       templateData,
