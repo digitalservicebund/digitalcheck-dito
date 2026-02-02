@@ -79,7 +79,7 @@ The feature flag system relies on three main parts:
 
 Here is a step-by-step guide to adding a new feature flag called `myNewFeature`.
 
-**1. Define the flag:**
+#### 1. Define the flag
 
 Add the new flag to the `features` object in `app/utils/featureFlags.ts`. This makes the flag available to the type system.
 
@@ -93,7 +93,7 @@ export type FeatureFlag = keyof typeof features;
 export type FeatureFlags = Record<FeatureFlag, boolean>;
 ```
 
-**2. Set the flag's value:**
+#### 2. Set the flag's value
 
 Add the flag to your local `feature-flags.json` file and set its initial value. Remember to also add it to `tests/feature-flags.json` for testing.
 
@@ -104,7 +104,7 @@ Add the flag to your local `feature-flags.json` file and set its initial value. 
 }
 ```
 
-**3. Use the flag in a component:**
+#### 3. Use the flag in a component
 
 Import the `useFeatureFlag` hook and use it to conditionally render a component or change behavior. The hook is type-safe and will only accept valid flag names.
 
@@ -122,12 +122,12 @@ export default function MyComponent() {
 
 Now you can toggle `myNewFeature` in `feature-flags.json` to switch between the `NewComponent` and `OldComponent` without needing to restart the development server.
 
-**4. Enable the feature flag for the staging environment:**
+#### 4. Enable the feature flag for the staging and production environment
 
-Switch to the [infrastructure repo](https://github.com/digitalservicebund/digitalcheck-dito-infra) and enable the feature flag in `manifests/overlays/staging-stackit/feature-flags.json` like this:
+Switch to the [infrastructure repo](https://github.com/digitalservicebund/digitalcheck-dito-infra) and enable the feature flag in `manifests/overlays/<overlay>/feature-flags.json` like this:
 
 ```json
-// manifests/overlays/staging-stackit/feature-flags.json
+// manifests/overlays/<overlay>/feature-flags.json
 {
   "myNewFeature": true
 }
@@ -144,8 +144,6 @@ Start the app in development mode. It will automatically rebuild assets when you
 ```sh
 npm run dev
 ```
-
-> **Note**: If you use an adblocker, you may need to whitelist `localhost`. Some adblockers can block local assets based on their names, which can cause runtime errors and break the UI.
 
 ### Testing
 
@@ -164,20 +162,14 @@ This package supports snapshot testing via [Playwright](https://playwright.dev/d
 
 The snapshot tests capture screenshots of static routes across different devices, as defined in `tests/playwright-snapshot.config.ts`.
 
-- **Create initial snapshots**: On the first run, this command will generate the baseline snapshots.
-  ```bash
-  npm run test:snapshots
-  ```
-- **Update snapshots**: If you've made intentional changes and need to update the snapshots, run:
-  ```bash
-  npm run test:update-snapshots
-  ```
+- Create initial snapshots: `npm run test:snapshots`. On the first run, this command generates the baseline snapshots.
+- If you've made intentional changes and need to update the snapshots: `npm run test:update-snapshots`.
 
-###### Considerations
-
-- Snapshots currently only cover static routes, not dynamic ones.
-- Snapshot tests can sometimes be flaky, especially for Webkit/Safari, due to minor rendering differences.
-- Tablet-sized viewports are not currently included in the snapshot configuration.
+> [!NOTE]
+>
+> - Snapshots currently only cover static routes, not dynamic ones.
+> - Snapshot tests can sometimes be flaky, especially for Webkit/Safari, due to minor rendering differences.
+> - Tablet-sized viewports are not currently included in the snapshot configuration.
 
 ##### Vitest Snapshot Testing
 
