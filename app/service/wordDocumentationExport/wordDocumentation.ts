@@ -10,6 +10,7 @@ import {
   TextRun,
 } from "docx";
 import fileSaver from "file-saver";
+import type { FederalState } from "~/contexts/FederalStateContext";
 import { documentationDocument } from "~/resources/content/documentation-document";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
@@ -32,13 +33,19 @@ export const FILE_NAME_DOCUMENTATION_TEMPLATE =
 
 export default async function downloadDocumentation(
   prinzips: PrinzipWithAspekte[],
+  federalState: FederalState = "bund",
 ) {
   try {
     const template = await fetch(
       `/documents/${FILE_NAME_DOCUMENTATION_TEMPLATE}`,
     );
     const templateData = await template.arrayBuffer();
-    const doc = await createDoc(templateData, getDocumentationData(), prinzips);
+    const doc = await createDoc(
+      templateData,
+      getDocumentationData(),
+      prinzips,
+      federalState,
+    );
     saveAs(doc, documentationDocument.filename);
   } catch (e) {
     console.error(e);
@@ -53,8 +60,15 @@ export const createDoc = async (
     principles: principleAnswers,
   }: DocumentationData,
   prinzips: PrinzipWithAspekte[],
+  federalState: FederalState = "bund",
 ) => {
   const date = new Date().toLocaleDateString("de-DE");
+
+  // Get federal state specific content
+  const isBrandenburg = federalState === "brandenburg";
+  const nextStepsContent = isBrandenburg
+    ? documentationDocument.brandenburg.nextSteps
+    : documentationDocument.nextSteps;
 
   return patchDocument({
     data: templateData,
@@ -69,6 +83,8 @@ export const createDoc = async (
         answerOrPlaceholder(participation?.results),
       ),
       ...buildPrinciplePatches(prinzips, principleAnswers),
+      // Federal state specific patches (if template supports them)
+      NEXT_STEPS_INSTRUCTIONS: toParagraphPatch(nextStepsContent.instructions),
     },
   });
 };

@@ -55,7 +55,7 @@ export default function DocumentationSend() {
           <RichText markdown={downloadContent} />
           <ButtonContainer>
             <DownloadButton
-              onClick={() => void downloadDocumentation(prinzips)}
+              onClick={() => void downloadDocumentation(prinzips, currentState)}
             >
               {finish.download.buttonText}
             </DownloadButton>
