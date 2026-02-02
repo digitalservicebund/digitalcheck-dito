@@ -109,10 +109,7 @@ export default function InterviewMethods() {
             <AccordionItem headline="Quantitative Interviews">
               <RichText
                 markdown={dedent`
-                Diese Methode dient dazu, bekannte Annahmen statistisch zu untermauern und vergleichbare Daten zu generieren.
-                - **Struktur:** Ein strikt standardisierter Fragenkatalog mit meist vorgegebenen Antwortmöglichkeiten.
-                - **Ziel:** Ermittlung von Häufigkeiten und Verteilungen (z. B. „Wie oft tritt ein bestimmtes Problem in der Praxis auf?“).
-                - **Vorteil:** Die Ergebnisse sind objektiv messbar und lassen sich statistisch präzise auswerten.
+                Quantitative Interviews dienen der Überprüfung bestehender Annahmen. Sie arbeiten mit standardisierten Fragen und vorgegebenen Antwortoptionen, um vergleichbare und statistisch auswertbare Daten zu erheben. Geeignet zur Messung von Häufigkeiten und Verteilungen.
               `}
               />
             </AccordionItem>
@@ -120,10 +117,7 @@ export default function InterviewMethods() {
             <AccordionItem headline="Qualitative Interviews">
               <RichText
                 markdown={dedent`
-                Hier steht das Verstehen von Zusammenhängen und Hintergründen im Vordergrund.
-                - **Struktur:** Offene Fragen lassen Raum für individuelle Erfahrungen und unterschiedliche Perspektiven.
-                - **Ziel:** Exploration neuer Erkenntnisse und tiefergehender Kontexte.
-                - **Vorteil:** Flexibilität im Gespräch erlaubt es, auch unvorhergesehene Themen detailliert zu beleuchten.
+               Qualitative Interviews dienen der Gewinnung neuer Erkenntnisse. Sie machen Erfahrungen, Perspektiven und Zusammenhänge sichtbar und ermöglichen ein vertieftes Verständnis der Praxis. Die Fragen sind offen, der Gesprächsverlauf flexibel.
               `}
               />
             </AccordionItem>
@@ -149,22 +143,18 @@ export default function InterviewMethods() {
               />
             </AccordionItem> */}
 
-            <AccordionItem headline="Standardisiertes Interview">
+            <AccordionItem headline="Standardisiertes Leitfaden-Interview">
               <RichText
                 markdown={dedent`
-                - **Konzept:** Ein fester Fragenkatalog wird ohne Abweichungen abgearbeitet. Wortlaut und Reihenfolge sind für alle Befragten identisch.
-                - **Einsatz:** Zur Erhebung detaillierter, vergleichbarer Daten, wenn die relevanten Aspekte bereits bekannt sind.
-                - **Kernnutzen:** Hohe Vergleichbarkeit der Ergebnisse. Eignet sich primär zur Gewinnung quantitativ auswertbarer Informationen.
+             Das Interview folgt einem festen, vorab definierten Fragenkatalog. Abweichungen sind nicht vorgesehen. Es eignet sich, wenn relevante Informationen bereits bekannt sind und systematisch erhoben werden sollen.
               `}
               />
             </AccordionItem>
 
-            <AccordionItem headline="Halb-standardisiertes Interview">
+            <AccordionItem headline="Halb-standardisiertes Leitfaden-Interview">
               <RichText
                 markdown={dedent`
-                - **Konzept:** Ein vorbereiteter Leitfaden sichert die Vollständigkeit der Themen, lässt aber Raum für individuelle Nachfragen und situative Anpassungen.
-                - **Einsatz:** Für die Aufgabenerhebung und zur Vertiefung bereits gewonnener Informationen.
-                - **Kernnutzen:** Es bietet genug Struktur für eine effiziente Auswertung, ist aber flexibel genug, um neuen Spuren im Gespräch nachzugehen.
+                Ein Interviewleitfaden gibt die Themen vor, lässt aber Spielraum in Reihenfolge und Formulierung der Fragen. Das Format ermöglicht gezielte Vertiefungen und neue Erkenntnisse bei gleichzeitig überschaubarem Auswertungsaufwand.
               `}
               />
             </AccordionItem>
