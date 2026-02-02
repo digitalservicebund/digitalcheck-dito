@@ -132,7 +132,7 @@ export default function InterviewMethods() {
                 </Heading>
                 <RichText
                   markdown={dedent`
-                  Skizzieren Sie die Akteurslandschaft Ihres Vorhabens. Ziel ist es, die verschiedenen Ebenen der Betroffenheit – von den Normadressaten bis zu den Rechtsakteuren – vollständig zu erfassen.
+                  Zu Beginn wird ein Überblick über alle relevanten Akteurinnen und Akteure geschaffen. Ziel ist es, Personen oder Gruppen zu identifizieren, die von der Regelung betroffen sind oder an ihrer Umsetzung beteiligt sind. Dazu gehören sowohl direkt betroffene Akteure als auch solche, die vorbereitende, unterstützende oder steuernde Aufgaben übernehmen.
                   
                   Ein Kreisdiagramm hilft Ihnen dabei, die Akteure systematisch nach ihrer Nähe zum Regelungskern zu ordnen:
                   - Zentrum (Normadressaten): Wer ist direkt von der Regelung betroffen? (z. B. Bürgerinnen, Bürger und Unternehmen)
@@ -184,16 +184,16 @@ export default function InterviewMethods() {
                 </Heading>
                 <RichText
                   markdown={dedent`
-                Nutzen Sie die folgende Tabelle, um die Ebenen von Betroffenheit und Vollzug präzise abzubilden und relevante Interview-Partnerinnen und Partner zu identifizieren.
+                Im nächsten Schritt werden die identifizierten Akteurinnen und Akteure in einer Übersicht festgehalten. Diese dient als Arbeitsgrundlage für die weitere Interviewplanung und hilft, unterschiedliche Perspektiven gezielt abzudecken. Nutzen Sie die folgende Tabelle, um die Ebenen von Betroffenheit und Vollzug präzise abzubilden und relevante Interview-Partnerinnen und Partner zu identifizieren.
 
                 Leitfragen zur Auswahl:
                 - **Betroffenheit:** Wer ist unmittelbar oder mittelbar von der Regelung betroffen?
-                - **Entscheidungskraft:** Wer entscheidet im operativen Vollzug?
-                - **Relevanz:** Welcher fachliche Mehrwert wird vom Akteur erwartet?
+                - **Entscheidungskompetenz:** Wer entscheidet oder beeinflusst Entscheidungen im Vollzug?
+                - **Relevanz:** Welche Akteure verfügen über besonderes Fachwissen oder praktische Erfahrung?
                 - **Zielsetzung:** Welches Wissen soll konkret erschlossen werden?
-                - **Praxisbezug:** Welche realen Auswirkungen sind beobachtbar?
+                - **Praxisnähe** Wer kann konkrete Auswirkungen und Herausforderungen beschreiben?
 
-                **Tipp:** Kooperationen mit Verbänden oder Gewerkschaften erleichtern den Zugang zu spezifischen Zielgruppen – insbesondere bei schwer erreichbaren Akteuren wie Leistungsempfängern.
+                **Tipp:** Kooperationen mit Verbänden oder Gewerkschaften erleichtern den Zugang zu spezifischen Zielgruppen – insbesondere bei schwer erreichbaren Akteurinnen und Akteur wie Leistungsempfängern.
               `}
                 />
               </NumberedList.Item>
@@ -204,16 +204,23 @@ export default function InterviewMethods() {
                 </Heading>
                 <RichText
                   markdown={dedent`
-                In der Erhebungsphase werden die Leitfragen des Interviews gestellt und auf die Antworten eingegangen sowie Rückfragen gestellt. Diese Phase bildet das “Herzstück” des Interviews und sollte den Großteil der Gesprächszeit einnehmen.
+                Nach der Vorbereitung treten Sie in den direkten Dialog. Ziel ist es, durch gezieltes Nachfragen die tatsächliche Umsetzungspraxis zu verstehen und blinde Flecken im Vollzug aufzudecken. Das Interview gliedert sich in drei Phasen:
 
-                Die Vertiefungsphase bietet Raum, um auf ein bis zwei Schwerpunktthemen (je nach Dauer des Gesprächs) tiefer einzugehen. Schauen Sie, wo die Interessen oder Expertisen Ihres Gegenübers liegen und haken Sie dort weiter nach.
+                **Kontaktphase:** Schaffen Sie eine vertrauensvolle Gesprächsatmosphäre. Erläutern Sie nach der Begrüßung kurz Zweck, Ziele und Ablauf des Interviews. 
 
-                In der Abschlussphase wird das Interview abgerundet und ein Ausblick über das weitere Vorgehen gegeben (z.B. Auswertung und ggf. Rückmeldung).
+                **Erhebungsphase:** Beginnen Sie mit offenen Fragen und vertiefen Sie diese gezielt entlang Ihres Leitfadens. Achten Sie auf eine ausgewogene Kombination aus offenen und geschlossenen Fragen.
+                Behandelt werden:
+                - **Kontext:** Aufgaben und Abläufe klären
+                - **Erfahrungen:** Probleme und Stärken identifizieren
+                - **Analyse:** Ursachen herausarbeiten
+                - **Lösungen:** Ansätze und Potenziale bewerten
+                
+                Ausklang & Dokumentation: Fassen Sie nach jedem Themenblock die zentralen Inhalte zusammen und dokumentieren Sie diese parallel zum Gespräch. Zum Abschluss danken Sie Ihrem Gegenüber und informieren über das weitere Vorgehen, um eine positive Grundlage für zukünftige Gespräche zu schaffen.
               `}
                 />
 
                 <Heading tagName="h4" className="ds-body-01-bold my-40">
-                  Arten der Aufzeichnung
+                  Für die parallele Dokumentation bieten sich folgende Formen an:
                 </Heading>
 
                 <AccordionItem headline="Wortgetreues Transkript">
@@ -297,7 +304,7 @@ export default function InterviewMethods() {
                 </Heading>
                 <RichText
                   markdown={dedent`
-                In mehreren Gesprächen mit einer Dauer von 45 – 60 Minuten kommen eine Menge Informationen zusammen. Nutzen Sie ggf. die Methode Individuelle Gesprächsauswertung, um Schlüsselaspekte herauszuarbeiten.
+                In mehreren Gesprächen mit einer Dauer von 45 – 60 Minuten kommen eine Menge Informationen zusammen. Im Anschluss werden die gesammelten Informationen ausgewertet. In der Regel lassen sich aus mehreren Gesprächen zentrale Muster, Herausforderungen und Erfolgsfaktoren ableiten. Nutzen Sie ggf. die Methode Individuelle Gesprächsauswertung, um Schlüsselaspekte herauszuarbeiten.
               `}
                 />
               </NumberedList.Item>
