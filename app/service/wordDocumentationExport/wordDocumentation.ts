@@ -26,7 +26,7 @@ import { slugify } from "~/utils/utilFunctions";
 import strapiBlocksToDocx from "./strapiBlocksToWord";
 
 const { saveAs } = fileSaver;
-const { principlePages } = digitalDocumentation;
+const { principlePages, brandenburg } = digitalDocumentation;
 
 export const FILE_NAME_DOCUMENTATION_TEMPLATE =
   "VORLAGE_Dokumentation_der_Digitaltauglichkeit_V2.docx";
@@ -58,6 +58,9 @@ export const createDoc = async (
     policyTitle,
     participation,
     principles: principleAnswers,
+    erforderlichkeit,
+    zweckmaessigkeit,
+    auswirkungen,
   }: DocumentationData,
   prinzips: PrinzipWithAspekte[],
   federalState: FederalState = "bund",
@@ -69,6 +72,11 @@ export const createDoc = async (
   const nextStepsContent = isBrandenburg
     ? documentationDocument.brandenburg.nextSteps
     : documentationDocument.nextSteps;
+
+  // Build Brandenburg-specific patches
+  const brandenburgPatches = isBrandenburg
+    ? buildBrandenburgPatches({ erforderlichkeit, zweckmaessigkeit, auswirkungen })
+    : {};
 
   return patchDocument({
     data: templateData,
@@ -83,8 +91,22 @@ export const createDoc = async (
         answerOrPlaceholder(participation?.results),
       ),
       ...buildPrinciplePatches(prinzips, principleAnswers),
-      // Federal state specific patches (if template supports them)
+      // Federal state specific patches
       NEXT_STEPS_INSTRUCTIONS: toParagraphPatch(nextStepsContent.instructions),
+      NEXT_STEPS_HEADING: toParagraphPatch(nextStepsContent.heading),
+      OVERSIGHT_BODY_INFO_HEADING: toParagraphPatch(
+        isBrandenburg
+          ? nextStepsContent.zbrInfo.heading
+          : documentationDocument.nextSteps.nkrInfo.heading,
+      ),
+      OVERSIGHT_BODY_INFO_CONTENT: toParagraphPatch(
+        isBrandenburg
+          ? nextStepsContent.zbrInfo.content
+          : documentationDocument.nextSteps.nkrInfo.content,
+      ),
+      SUPPORT_HEADING: toParagraphPatch(nextStepsContent.support.heading),
+      SUPPORT_CONTENT: toParagraphPatch(nextStepsContent.support.content),
+      ...brandenburgPatches,
     },
   });
 };
@@ -234,3 +256,77 @@ const stringToIndentParagraph = (options: IParagraphOptions) =>
     ...options,
     ...indentOptions,
   });
+
+// Builds patches for Brandenburg-specific pages (Erforderlichkeit, Zweckmäßigkeit, Auswirkungen)
+export const buildBrandenburgPatches = ({
+  erforderlichkeit,
+  zweckmaessigkeit,
+  auswirkungen,
+}: Pick<
+  DocumentationData,
+  "erforderlichkeit" | "zweckmaessigkeit" | "auswirkungen"
+>): Record<string, IPatch> => ({
+  // Erforderlichkeit
+  BRANDENBURG_ERFORDERLICHKEIT_TITLE: {
+    type: PatchType.DOCUMENT,
+    children: [
+      new Paragraph({
+        heading: HeadingLevel.HEADING_1,
+        children: [
+          new Bookmark({
+            id: "erforderlichkeit",
+            children: [new TextRun(brandenburg.erforderlichkeit.headline)],
+          }),
+        ],
+      }),
+    ],
+  },
+  BRANDENBURG_ERFORDERLICHKEIT_QUESTIONS: toParagraphPatch(
+    brandenburg.erforderlichkeit.textIntro,
+  ),
+  BRANDENBURG_ERFORDERLICHKEIT_ANSWER: toParagraphPatch(
+    answerOrPlaceholder(erforderlichkeit?.content),
+  ),
+  // Zweckmäßigkeit
+  BRANDENBURG_ZWECKMAESSIGKEIT_TITLE: {
+    type: PatchType.DOCUMENT,
+    children: [
+      new Paragraph({
+        heading: HeadingLevel.HEADING_1,
+        children: [
+          new Bookmark({
+            id: "zweckmaessigkeit",
+            children: [new TextRun(brandenburg.zweckmaessigkeit.headline)],
+          }),
+        ],
+      }),
+    ],
+  },
+  BRANDENBURG_ZWECKMAESSIGKEIT_QUESTIONS: toParagraphPatch(
+    brandenburg.zweckmaessigkeit.textIntro,
+  ),
+  BRANDENBURG_ZWECKMAESSIGKEIT_ANSWER: toParagraphPatch(
+    answerOrPlaceholder(zweckmaessigkeit?.content),
+  ),
+  // Auswirkungen
+  BRANDENBURG_AUSWIRKUNGEN_TITLE: {
+    type: PatchType.DOCUMENT,
+    children: [
+      new Paragraph({
+        heading: HeadingLevel.HEADING_1,
+        children: [
+          new Bookmark({
+            id: "auswirkungen",
+            children: [new TextRun(brandenburg.auswirkungen.headline)],
+          }),
+        ],
+      }),
+    ],
+  },
+  BRANDENBURG_AUSWIRKUNGEN_QUESTIONS: toParagraphPatch(
+    brandenburg.auswirkungen.textIntro,
+  ),
+  BRANDENBURG_AUSWIRKUNGEN_ANSWER: toParagraphPatch(
+    answerOrPlaceholder(auswirkungen?.content),
+  ),
+});
