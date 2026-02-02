@@ -305,7 +305,7 @@ export default function InterviewMethods() {
                 </Heading>
                 <RichText
                   markdown={dedent`
-                In mehreren Gesprächen mit einer Dauer von 45 – 60 Minuten kommen eine Menge Informationen zusammen. Im Anschluss werden die gesammelten Informationen ausgewertet. In der Regel lassen sich aus mehreren Gesprächen zentrale Muster, Herausforderungen und Erfolgsfaktoren ableiten. Nutzen Sie ggf. die Methode Individuelle Gesprächsauswertung, um Schlüsselaspekte herauszuarbeiten.
+                In mehreren Gesprächen mit einer Dauer von 45 – 60 Minuten kommen eine Menge Informationen zusammen. Im Anschluss werden die gesammelten Informationen ausgewertet. In der Regel lassen sich aus mehreren Gesprächen zentrale Muster, Herausforderungen und Erfolgsfaktoren ableiten. Nutzen Sie ggf. die [Methode Individuelle Gesprächsauswertung](https://www.oeffentliches-gestalten.de/buch/erkennen/erkenntnisse-formulieren#individuelle-gespr%C3%A4chsauswertung), um Schlüsselaspekte herauszuarbeiten.
               `}
                 />
               </NumberedList.Item>

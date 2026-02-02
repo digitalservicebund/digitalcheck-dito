@@ -11,6 +11,7 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import MetaTitle from "~/components/Meta";
+import NewTabLink from "~/components/NewTabLink";
 import RichText from "~/components/RichText";
 import {
   ROUTE_METHODS_INTERVIEW_METHODS,
@@ -159,6 +160,12 @@ export default function InterviewMethods() {
               />
             </AccordionItem>
           </div>
+          <p>
+            Weiterführende Quelle:{" "}
+            <NewTabLink to="https://www.orghandbuch.de/SharedDocs/faqs/Webs/OHB/DE/Methoden_Befragung/13_Durchfuehrung_muendliches_Interview.html">
+              Orghandbuch des BMI 2026
+            </NewTabLink>
+          </p>
         </section>
 
         <section className="container">
