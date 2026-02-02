@@ -5,145 +5,220 @@
 
 A digital touchpoint for _Digitalcheck: Digitaltaugliche Regelung erarbeiten_.
 
-## Prerequisites
+## Setup
 
-The application requires a `.env` file. You can copy and rename the file `.env.example`. To test certain features hidden behind feature flags, you need to create a `feature-flags.json` file in the root, for example by copying it from the [test feature flags file](./tests/feature-flags.json).
+### 1. Environment
+
+The application requires a `.env` file for environment variables. You can copy the example file to get started:
+
+```bash
+cp .env.example .env
+```
+
+To test features hidden behind feature flags, you also need a `feature-flags.json` file. You can copy the test configuration for this:
 
 ```bash
 cp ./tests/feature-flags.json ./feature-flags.json
 ```
 
-### Node.js
+### 2. Node.js & Dependencies
 
-We aim to use the current active [LTS version of nodejs](https://nodejs.dev/en/about/releases/).
-There is a `.node-version` file to simplify setup using [nodenv](https://github.com/nodenv/nodenv).
+We aim to use the current active [LTS version of nodejs](https://nodejs.dev/en/about/releases/) (>=20.19.0). The `.node-version` file simplifies setup when using a version manager like [nodenv](https://github.com/nodenv/nodenv).
 
-### Dependencies
-
-Install the dependencies using npm.
+Install the dependencies using `npm`.
 
 ```bash
 npm ci --ignore-scripts
 ```
 
-### Testing
+### 3. Git Hooks
 
-For E2E and a11y testing with [Playwright](https://playwright.dev/docs/intro) you will need to install the supported browsers:
+The project uses [Lefthook](https://github.com/evilmartians/lefthook) to manage Git hooks. These hooks help ensure code quality and security before you commit and push.
+
+First, install the required command-line tools:
+
+```bash
+brew install lefthook talisman gitleaks
+```
+
+Then, activate the hooks:
+
+```bash
+./run.sh init
+```
+
+The following hooks are configured in `lefthook.yml`:
+
+- **On `git commit`**:
+  - `commitlint`: Enforces [conventional commit messages](https://chris.beams.io/posts/git-commit/).
+  - `lint`: Fixes and checks for linting errors in staged files.
+  - `format`: Formats staged files using Prettier.
+  - `talisman` & `gitleaks`: Scan for secrets and sensitive information in your commit.
+- **On `git push`**:
+  - `licenses-audit`: Verifies that dependency licenses comply with the project's policy.
+
+### 4. Playwright Browsers
+
+For end-to-end (E2E) and accessibility (a11y) testing with [Playwright](https://playwright.dev/docs/intro), you need to install the required browser binaries:
 
 ```bash
 npx playwright install
 ```
 
-### Git Hooks
+## Feature Flags
 
-For the provided Git hooks you will need to install [lefthook](https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md)
-(git hook manager):
+Feature flags allow you to toggle functionality in the application without changing the code. This is useful for developing new features, A/B testing, or gradually rolling out changes.
 
-```bash
-brew install lefthook talisman gitleaks
-./run.sh init
+The feature flag system relies on three main parts:
+
+- `feature-flags.json`: A file in the root directory that defines the state of each flag (either `true` or `false`).
+- `app/utils/featureFlags.ts`: A file that exports a type-safe list of all available feature flags.
+- `app/contexts/FeatureFlagContext.ts`: A React context that provides a `useFeatureFlag` hook to access the value of a flag within any component.
+
+### How to Add a New Feature Flag
+
+Here is a step-by-step guide to adding a new feature flag called `myNewFeature`.
+
+**1. Define the flag:**
+
+Add the new flag to the `features` object in `app/utils/featureFlags.ts`. This makes the flag available to the type system.
+
+```ts
+// app/utils/featureFlags.ts
+export const features = {
+  myNewFeature: "myNewFeature", // Add your new flag here
+} as const;
+
+export type FeatureFlag = keyof typeof features;
+export type FeatureFlags = Record<FeatureFlag, boolean>;
 ```
 
-The following hooks are specified in the `lefthook.yml`:
+**2. Set the flag's value:**
 
-- `commitlint` - write [conventional commit messages](https://chris.beams.io/posts/git-commit/)
-- `lint` - avoid committing code violating linting rules
-- `format` - avoid committing wrongly formatted code
+Add the flag to your local `feature-flags.json` file and set its initial value. Remember to also add it to `tests/feature-flags.json` for testing.
 
-Before pushing, the following checks are additionally ran:
+```json
+// feature-flags.json
+{
+  "myNewFeature": false
+}
+```
 
-- `licenses-audit` - uses `license-checker-rseidelsohn` to verify dependency licenses
+**3. Use the flag in a component:**
+
+Import the `useFeatureFlag` hook and use it to conditionally render a component or change behavior. The hook is type-safe and will only accept valid flag names.
+
+```tsx
+import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
+import { NewComponent } from "./NewComponent";
+import { OldComponent } from "./OldComponent";
+
+export default function MyComponent() {
+  const myNewFeatureEnabled = useFeatureFlag("myNewFeature");
+
+  return myNewFeatureEnabled ? <NewComponent /> : <OldComponent />;
+}
+```
+
+Now you can toggle `myNewFeature` in `feature-flags.json` to switch between the `NewComponent` and `OldComponent` without needing to restart the development server.
+
+**4. Enable the feature flag for the staging environment:**
+
+Switch to the [infrastructure repo](https://github.com/digitalservicebund/digitalcheck-dito-infra) and enable the feature flag in `manifests/overlays/staging-stackit/feature-flags.json` like this:
+
+```json
+// manifests/overlays/staging-stackit/feature-flags.json
+{
+  "myNewFeature": true
+}
+```
+
+Commit your changes and push them. Our pipeline automatically applies the new feature flag after a few moments.
 
 ## Development
 
-### Run locally
+### Run Locally
 
-From your terminal:
+Start the app in development mode. It will automatically rebuild assets when you change a file.
 
 ```sh
 npm run dev
 ```
 
-This starts your app in development mode, rebuilding assets on file changes.
-Note that when running in development mode and using an adblocker, you should whitelist localhost on the adblocker,
-as it blocks local assets by name which can cause runtime errors and break UI.
+> **Note**: If you use an adblocker, you may need to whitelist `localhost`. Some adblockers can block local assets based on their names, which can cause runtime errors and break the UI.
 
 ### Testing
 
-There are
+The project includes unit, end-to-end, and accessibility tests.
 
-- unit tests (using [Vitest](https://vitest.dev/)): `npm run test`
-- end-to-end tests (using [Playwright](https://playwright.dev/docs/intro)): `npm run test:e2e`
-- accessibility tests (using [Playwright](https://playwright.dev/docs/intro) and [Axe](https://www.deque.com/axe/)): `npm run test:a11y`
-- run all tests: `npm run tests`
+- Run unit tests (with [Vitest](https://vitest.dev/)): `npm run test`
+- Run end-to-end tests (with [Playwright](https://playwright.dev/)): `npm run test:e2e`
+- Run accessibility tests (with [Playwright](https://playwright.dev/docs/intro) & [Axe](https://www.deque.com/axe/)): `npm run test:a11y`
+- Run all tests sequentially: `npm run tests`
 
 #### Snapshot Testing
 
-This package supports snapshot testing via [Playwright](https://playwright.dev/docs/test-snapshots) and [Vitest](https://vitest.dev/guide/snapshot.html).
+This package supports snapshot testing via [Playwright](https://playwright.dev/docs/test-snapshots) and [Vitest](https://vitest.dev/guide/snapshot.html). Snapshots are useful for verifying that UI components and layouts have not changed unexpectedly.
 
-##### Snapshot Testing with Playwright
+##### Playwright Snapshot Testing
 
-On the first run, `npm run test:snapshots` will create the snapshots for multiple different devices.
-[playwright-snapshot.config.ts](./tests/playwright-snapshot.config.ts) contains the configuration for the snapshot tests.
-On subsequent runs, new snapshots are compared to the existing ones.
-If they match, the test will pass, otherwise it will fail and show the differences.
+The snapshot tests capture screenshots of static routes across different devices, as defined in `tests/playwright-snapshot.config.ts`.
 
-An examplory usecase would be to check that everything still looks the same after a refactoring. You could verify that the following way:
-
-1. `npm run test:snapshots`
-2. Make changes to the code or switch to a different branch / commit
-3. `npm run test:snapshots`
-4. If the tests pass, you can be confident that the changes have not changed the UI
-
-To update existing snapshots, execute `npm run test:update-snapshots`.
+- **Create initial snapshots**: On the first run, this command will generate the baseline snapshots.
+  ```bash
+  npm run test:snapshots
+  ```
+- **Update snapshots**: If you've made intentional changes and need to update the snapshots, run:
+  ```bash
+  npm run test:update-snapshots
+  ```
 
 ###### Considerations
 
-- The snapshots currently only capture the static routes, not the dynamic routes like the PreCheck and result page. This could be improved in the future by adding a `afterEach` hook that takes a screenshot of the page after each e2e-test.
-- The snapshots can be flaky, especially for Webkit/Safari. We are waiting for the `h1` element on each page to render and afterwards wait for 100ms additionally before taking the screenshot to account for layout shifts, but this might not be enough and images sometimes still render differently.
-- Tablet-sized viewports are not part of the configuration at the moment, so be careful when making changes to the responsive layouts.
+- Snapshots currently only cover static routes, not dynamic ones.
+- Snapshot tests can sometimes be flaky, especially for Webkit/Safari, due to minor rendering differences.
+- Tablet-sized viewports are not currently included in the snapshot configuration.
 
-##### Snapshot Testing with Vitest
+##### Vitest Snapshot Testing
 
-To create a snapshot you can take a look at the `app/components/Footer.spec.tsx`.
-In this test we create a snapshot for the footer component:
+To create a component snapshot with Vitest, use `toMatchSnapshot()` in your test file. For example:
 
 ```ts
+// In a test like app/components/Footer.spec.tsx
 const { container } = render(<RouterStubFooter />);
-
 expect(container).toMatchSnapshot();
 ```
 
-To update existing snapshots either run all tests and press `u` on failing snapshots, or run:
+To update failing snapshots, run all tests and press `u` in the interactive prompt, or use the update flag directly:
 
 ```sh
 npm test -- -u
 ```
 
-More information on updating snapshots can be found [here](https://vitest.dev/guide/snapshot.html#updating-snapshots)
+For more details, see the [Vitest Snapshot documentation](https://vitest.dev/guide/snapshot.html#updating-snapshots).
 
-### Code quality checks (linting & formatting)
+### Code Quality (Linting & Formatting)
 
-The project uses [ESLint](https://eslint.org/docs/latest/) for linting and [Prettier](https://prettier.io/docs/en/) for formatting.
-
-#### Commands
+The project uses [ESLint](https://eslint.org/docs/latest/) for linting and [Prettier](https://prettier.io/docs/en/) for formatting. It's recommended to set up the [Git Hooks](#3-git-hooks) to automate this process.
 
 - Check formatting: `npm run format:check`
 - Autofix formatting issues: `npm run format:fix`
-- Check lint: `npm run lint:check`
-- Autofix lint issues: `npm run lint:fix`
-- Check style (formatting & linting): `npm run style:check`
-- Autofix style issues (formatting & linting): `npm run style:fix`
+- Check for linting errors: `npm run lint:check`
+- Autofix linting issues: `npm run lint:fix`
+- Run all style checks: `npm run style:check`
+- Autofix all style issues: `npm run style:fix`
 
 ## Build for Production
 
-Build all apps for production:
+To build the application for production:
 
 ```sh
 npm run build
 ```
 
-Preview the production build:
+This will create optimized assets in the `build/` and `public/build/` directories.
+
+To preview the production build locally:
 
 ```sh
 npm run start
@@ -153,7 +228,7 @@ npm run start
 
 ### Docker
 
-Build and run an app locally to simulate the production environment.
+You can build and run the application in a Docker container to simulate the production environment.
 
 ```sh
 npm run docker
@@ -161,9 +236,7 @@ npm run docker
 
 ### DIY
 
-If you're familiar with deploying node applications, the built-in server is production-ready.
-
-Make sure to deploy the output of `npm run build`
+The built-in server is production-ready. If you are deploying manually, make sure to deploy the output of `npm run build`:
 
 - `build/`
 - `public/build/`
@@ -171,8 +244,8 @@ Make sure to deploy the output of `npm run build`
 ## Contributing
 
 🇬🇧
-Everyone is welcome to contribute the development of the Digitalcheck applications. You can contribute by opening a pull request,
-providing documentation or answering questions or giving feedback. Please always follow the guidelines and our
+Everyone is welcome to contribute to the development of the Digitalcheck applications. You can contribute by opening a pull request,
+providing documentation, answering questions, or giving feedback. Please always follow the guidelines and our
 [Code of Conduct](CODE_OF_CONDUCT.md).
 
 🇩🇪
@@ -180,7 +253,7 @@ Jede:r ist herzlich eingeladen, die Entwicklung der Digitalcheck Applikationen m
 indem du Pull-Requests eröffnest, die Dokumentation erweiterst, Fragen beantwortest oder Feedback gibst.
 Bitte befolge immer die Richtlinien und unseren [Verhaltenskodex](CODE_OF_CONDUCT_DE.md).
 
-## Contributing code
+## Contributing Code
 
 🇬🇧
 Open a pull request with your changes and it will be reviewed by someone from the team. When you submit a pull request,
