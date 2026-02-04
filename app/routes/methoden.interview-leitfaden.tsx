@@ -32,13 +32,12 @@ export default function InterviewMethods() {
     <>
       <MetaTitle prefix={ROUTE_METHODS_INTERVIEW_METHODS.title} />
       <main className="mb-80 space-y-80">
-        <Hero title="Perspektiven aus der Praxis einbinden">
+        <Hero title="Nehmen Sie die Praxis-Perspektive für Ihr Vorhaben ein">
           <p>
-            Dieser Leitfaden dient als praktisches Werkzeug, um wertvolle
-            Erkenntnisse aus der Umsetzung zu gewinnen. Identifizieren Sie
-            relevante Stakeholder und bereiten Sie Interviews strukturiert vor.
-            So gelingt der Transfer von praktischer Erfahrung in praxistaugliche
-            Regelungen.
+            Erkenntnisse aus der Umsetzung verbessern die Wirksamkeit Ihres Vorhaben. 
+            Aber wie gelangen Sie an die Erkenntnisse? Und wie gelingt der Transfer in die Regelung? 
+            Dieser Leitfaden unterstützt Sie beim praktischen Vorgehen. 
+            Er zeigt Ihnen, wie Sie relevante Stakeholder identifizieren und Interviews strukturiert vorbereiten.
           </p>
 
           <p>
@@ -59,9 +58,9 @@ export default function InterviewMethods() {
               <RichText
                 className="ds-label-01-reg"
                 markdown={dedent`
-                **Erkenntnisse zur Umsetzungspraxis:**
+                **Wirkung des Vorhabens erhöhen:**
                 
-                Sie liefern Erkenntnisse darüber, wie Regelungen im Vollzug tatsächlich wirken.
+                Erkenntnisse zur Umsetzungspraxis machen transparent, wie Regelungen im Vollzug wirken.
               `}
               />
             </div>
@@ -71,9 +70,9 @@ export default function InterviewMethods() {
               <RichText
                 className="ds-label-01-reg"
                 markdown={dedent`
-                **Annahmen überprüfen:**
+                **Fehler vermeiden:**
                 
-                Sie machen sichtbar, was funktioniert und was in der Praxis scheitert.
+                Durch Prüfung von Annahmen wird sichtbar, was in der Praxis funktioniert - und was nicht.
               `}
               />
             </div>
@@ -83,9 +82,9 @@ export default function InterviewMethods() {
               <RichText
                 className="ds-label-01-reg"
                 markdown={dedent`
-                **Verbesserte Entscheidungsgrundlage:**
+                **Potentiale heben:**
                 
-                Die Erkenntnisse helfen, Services, Prozesse und Regeln gezielt zu verbessern.
+                Die Erkenntnisse helfen dabei, Services, Prozesse und Regeln gezielt zu verbessern.
               `}
               />
             </div>
