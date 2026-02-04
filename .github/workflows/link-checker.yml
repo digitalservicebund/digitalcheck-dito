@@ -37,7 +37,7 @@ jobs:
 
           # 1. Download and Check
           curl -sSfL "$SITEMAP_URL" | lychee --dump --exclude 'schemas' - | sed 's|http://|https://|g' > urls.txt
-          lychee --max-redirects 5 --verbose --cookie-jar tmp_cookies --exclude '.js' --format json $(cat urls.txt) > output.json
+          lychee --cache --max-cache-age 1d --max-redirects 5 --verbose --cookie-jar tmp_cookies --exclude '.js' --format json $(cat urls.txt) > output.json
 
           # 2. Merge logic (using a variable to keep the YAML clean)
           MERGE_SCRIPT='
