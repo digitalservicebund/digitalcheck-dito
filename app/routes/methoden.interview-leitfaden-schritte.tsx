@@ -219,6 +219,7 @@ export default function InterviewMethods() {
                 **Ausklang & Dokumentation**: Fassen Sie nach jedem Themenblock die zentralen Inhalte zusammen und dokumentieren Sie diese parallel zum Gespräch. Zum Abschluss danken Sie Ihrem Gegenüber und informieren über das weitere Vorgehen, um eine positive Grundlage für zukünftige Gespräche zu schaffen.
               `}
                 />
+                <br></br>
                <p>
                  Weiterführende Quelle:{" "}
                   <NewTabLink to="https://www.orghandbuch.de/SharedDocs/faqs/Webs/OHB/DE/Methoden_Befragung/13_Durchfuehrung_muendliches_Interview.html">
