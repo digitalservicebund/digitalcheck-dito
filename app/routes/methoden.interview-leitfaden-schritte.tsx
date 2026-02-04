@@ -133,12 +133,12 @@ export default function InterviewMethods() {
                 </Heading>
                 <RichText
                   markdown={dedent`
-                  Zu Beginn wird ein Überblick über alle relevanten Akteurinnen und Akteure geschaffen. Ziel ist es, Personen oder Gruppen zu identifizieren, die von der Regelung betroffen sind oder an ihrer Umsetzung beteiligt sind. Dazu gehören sowohl direkt betroffene Akteure als auch solche, die vorbereitende, unterstützende oder steuernde Aufgaben übernehmen.
+                  Zu Beginn wird ein Überblick über alle relevanten Akteurinnen und Akteure geschaffen.  Ziel ist es, Personen oder Gruppen zu identifizieren, die von der Regelung betroffen sind oder an ihrer Umsetzung beteiligt sind. Dazu gehören sowohl direkt betroffene Akteure als auch solche, die vorbereitende, unterstützende oder steuernde Aufgaben übernehmen. Eine Einteilung nach Rollen hilft Ihnen dabei, die Akteurinnen und Akteure systematisch zu ordnen.
                   
-                  Ein Kreisdiagramm hilft Ihnen dabei, die Akteure systematisch nach ihrer Nähe zum Regelungskern zu ordnen:
-                  - Zentrum (Normadressaten): Wer ist direkt von der Regelung betroffen? (z. B. Bürgerinnen, Bürger und Unternehmen)
-                  - Mittlerer Kreis (Vollzugsebene): Wer ist für die praktische Umsetzung verantwortlich? (z. B. föderaler, kommunaler oder privatwirtschaftlicher Vollzug)
-                  - Äußerer Kreis (Rechtsrahmen): Welche Akteure setzen den rechtlichen Rahmen oder beeinflussen ihn? (z. B. Rechtsakteure, ggf. EU-Ebene)
+                  Eine Einteilung nach Rollen hilft Ihnen dabei, die Akteur:innen systematisch zu ordnen:
+                  - **Wer setzt den Rechtsrahmen?:** Akteurinnen und Akteure, die Gesetze oder Regelungen gestalten oder beeinflussen (z. B. Gerichte, EU-Institutionen).
+                  - **Wer setzt das Gesetz um?:** Akteurinnen und Akteure, die die praktische Umsetzung übernehmen (z. B. Behörden, Vollzugsstellen, private Träger).
+                  - **Wen betrifft das Gesetz?:** Akteurinnen und Akteure, die die praktische Umsetzung übernehmen (z. B. Behörden, Vollzugsstellen, private Träger).
                 `}
                 />
               </NumberedList.Item>
