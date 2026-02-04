@@ -36,7 +36,7 @@ export default function InterviewMethods() {
           <p>
             In dem folgenden Abschnitt finden Sie eine praktische Anleitung wie
             sie strukturiert vorgehen können. Das Angebot befindet sich im
-            Aufbau und weitere Methoden folgen
+            Aufbau und weitere Methoden folgen.
           </p>
         </Hero>
 
@@ -138,7 +138,7 @@ export default function InterviewMethods() {
                   Eine Einteilung nach Rollen hilft Ihnen dabei, die Akteur:innen systematisch zu ordnen:
                   - **Wer setzt den Rechtsrahmen?:** Akteurinnen und Akteure, die Gesetze oder Regelungen gestalten oder beeinflussen (z. B. Gerichte, EU-Institutionen).
                   - **Wer setzt das Gesetz um?:** Akteurinnen und Akteure, die die praktische Umsetzung übernehmen (z. B. Behörden, Vollzugsstellen, private Träger).
-                  - **Wen betrifft das Gesetz?:** Akteurinnen und Akteure, die die praktische Umsetzung übernehmen (z. B. Behörden, Vollzugsstellen, private Träger).
+                  - **Wen betrifft das Gesetz?:** Akteurinnen und Akteure, die direkt betroffen sind (z. B. Bürgerinnen und Bürger, Unternehmen).
                 `}
                 />
               </NumberedList.Item>
