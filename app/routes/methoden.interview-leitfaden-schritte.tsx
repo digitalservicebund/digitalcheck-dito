@@ -220,12 +220,12 @@ export default function InterviewMethods() {
               `}
                 />
                 <br></br>
-               <p>
-                 Weiterführende Quelle:{" "}
+                <p>
+                  Weiterführende Quelle:{" "}
                   <NewTabLink to="https://www.orghandbuch.de/SharedDocs/faqs/Webs/OHB/DE/Methoden_Befragung/13_Durchfuehrung_muendliches_Interview.html">
                     Orghandbuch des BMI 2026
                   </NewTabLink>
-               </p>
+                </p>
 
                 <Heading tagName="h4" className="ds-body-01-bold my-40">
                   Für die parallele Dokumentation bieten sich folgende Formen
@@ -316,7 +316,6 @@ export default function InterviewMethods() {
                 In mehreren Gesprächen mit einer Dauer von 45 – 60 Minuten kommen eine Menge Informationen zusammen. Im Anschluss werden die gesammelten Informationen ausgewertet. In der Regel lassen sich aus mehreren Gesprächen zentrale Muster, Herausforderungen und Erfolgsfaktoren ableiten. Nutzen Sie ggf. die [Methode Individuelle Gesprächsauswertung](https://www.oeffentliches-gestalten.de/buch/erkennen/erkenntnisse-formulieren#individuelle-gespr%C3%A4chsauswertung), um Schlüsselaspekte herauszuarbeiten.
               `}
                 />
-                
               </NumberedList.Item>
             </NumberedList>
           </section>

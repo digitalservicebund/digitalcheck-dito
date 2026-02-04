@@ -11,7 +11,6 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import MetaTitle from "~/components/Meta";
-import NewTabLink from "~/components/NewTabLink";
 import RichText from "~/components/RichText";
 import {
   ROUTE_METHODS_INTERVIEW_METHODS,
@@ -34,10 +33,11 @@ export default function InterviewMethods() {
       <main className="mb-80 space-y-80">
         <Hero title="Nehmen Sie die Praxis-Perspektive für Ihr Vorhaben ein">
           <p>
-            Erkenntnisse aus der Umsetzung verbessern die Wirksamkeit Ihres Vorhaben. 
-            Aber wie gelangen Sie an die Erkenntnisse? Und wie gelingt der Transfer in die Regelung? 
-            Dieser Leitfaden unterstützt Sie beim praktischen Vorgehen. 
-            Er zeigt Ihnen, wie Sie relevante Stakeholder identifizieren und Interviews strukturiert vorbereiten.
+            Erkenntnisse aus der Umsetzung verbessern die Wirksamkeit Ihres
+            Vorhaben. Aber wie gelangen Sie an die Erkenntnisse? Und wie gelingt
+            der Transfer in die Regelung? Dieser Leitfaden unterstützt Sie beim
+            praktischen Vorgehen. Er zeigt Ihnen, wie Sie relevante Stakeholder
+            identifizieren und Interviews strukturiert vorbereiten.
           </p>
 
           <p>
