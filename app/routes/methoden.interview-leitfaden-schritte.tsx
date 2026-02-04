@@ -133,7 +133,7 @@ export default function InterviewMethods() {
                 </Heading>
                 <RichText
                   markdown={dedent`
-                  Zu Beginn wird ein Überblick über alle relevanten Akteurinnen und Akteure geschaffen.  Ziel ist es, Personen oder Gruppen zu identifizieren, die von der Regelung betroffen sind oder an ihrer Umsetzung beteiligt sind. Dazu gehören sowohl direkt betroffene Akteure als auch solche, die vorbereitende, unterstützende oder steuernde Aufgaben übernehmen. Eine Einteilung nach Rollen hilft Ihnen dabei, die Akteurinnen und Akteure systematisch zu ordnen.
+                  Zu Beginn wird ein Überblick über alle relevanten Akteurinnen und Akteure geschaffen. Ziel ist es, Personen oder Gruppen zu identifizieren, die von der Regelung betroffen sind oder an ihrer Umsetzung beteiligt sind. Dazu gehören sowohl direkt betroffene Akteure als auch solche, die vorbereitende, unterstützende oder steuernde Aufgaben übernehmen. Eine Einteilung nach Rollen hilft Ihnen dabei, die Akteurinnen und Akteure systematisch zu ordnen.
                   
                   Eine Einteilung nach Rollen hilft Ihnen dabei, die Akteur:innen systematisch zu ordnen:
                   - **Wer setzt den Rechtsrahmen?:** Akteurinnen und Akteure, die Gesetze oder Regelungen gestalten oder beeinflussen (z. B. Gerichte, EU-Institutionen).

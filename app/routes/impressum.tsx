@@ -1,4 +1,3 @@
-/* eslint-disable no-irregular-whitespace */
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Hero from "~/components/Hero";
 import MetaTitle from "~/components/Meta";
