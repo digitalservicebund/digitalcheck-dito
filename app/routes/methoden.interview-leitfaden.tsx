@@ -195,9 +195,9 @@ export default function InterviewMethods() {
           <Heading tagName="h2">Genutzte Quellen</Heading>
           <RichText
             markdown={dedent`
-            - Öffentliches Gestalten
-            - Servicehandbuch
-            - ....
+            - [Öffentliches Gestalten](https://www.oeffentliches-gestalten.de/)
+            - [Servicehandbuch](https://www.digitale-verwaltung.de/SharedDocs/downloads/Webs/DV/DE/servicehandbuch.pdf?__blob=publicationFile&v=5#page=18)
+            - [Servicestandard – Handbuch](https://servicestandard.gov.de/handbuch/#aus-der-praxis/)
           `}
           />
         </section>
