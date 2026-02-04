@@ -160,12 +160,6 @@ export default function InterviewMethods() {
               />
             </AccordionItem>
           </div>
-          <p>
-            Weiterführende Quelle:{" "}
-            <NewTabLink to="https://www.orghandbuch.de/SharedDocs/faqs/Webs/OHB/DE/Methoden_Befragung/13_Durchfuehrung_muendliches_Interview.html">
-              Orghandbuch des BMI 2026
-            </NewTabLink>
-          </p>
         </section>
 
         <section className="container">
