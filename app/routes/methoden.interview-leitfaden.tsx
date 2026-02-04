@@ -192,7 +192,7 @@ export default function InterviewMethods() {
         <hr className="container border-gray-400" />
 
         <section className="container space-y-8">
-          <Heading tagName="h2">Genutzte Quellen</Heading>
+          <Heading tagName="h2">Relevante Quellen</Heading>
           <RichText
             markdown={dedent`
             - [Öffentliches Gestalten](https://www.oeffentliches-gestalten.de/)
