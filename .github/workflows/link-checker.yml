@@ -22,7 +22,8 @@ jobs:
           restore-keys: cache-lychee-
 
       - name: Install Lychee
-        uses: lycheeverse/lychee-action@v2
+        # third-party action, pin to commit SHA
+        uses: lycheeverse/lychee-action@a8c4c7cb88f0c7386610c35eb25108e448569cb0 # v2.7.0
         with:
           lycheeVersion: v0.22.0
           args: --version
@@ -103,7 +104,8 @@ jobs:
 
       - name: Post results to Slack
         if: steps.process-links.outputs.HAS_ISSUES == 'true'
-        uses: slackapi/slack-github-action@v2.0.0
+        # third-party action, pin to commit SHA
+        uses: slackapi/slack-github-action@91efab103c0de0a537f72a35f6b8cda0ee76bf0a # v2.1.1
         with:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
