@@ -1,0 +1,117 @@
+name: Link Checker
+
+on:
+  workflow_dispatch:
+    inputs:
+      sitemap_url:
+        description: "The URL of the sitemap.xml to parse"
+        required: true
+        default: "https://example.com/sitemap.xml"
+        type: string
+
+jobs:
+  link-checker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore lychee cache
+        id: restore-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
+
+      - name: Install Lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          lycheeVersion: v0.22.0
+          args: --version
+
+      - name: Run Sitemap Check and Generate Payload
+        id: process-links
+        shell: bash
+        run: |
+          set -e
+
+          SITEMAP_URL="${{ github.event.inputs.sitemap_url }}"
+
+          # 1. Download and Check
+          curl -sSfL "$SITEMAP_URL" | lychee --dump --exclude 'schemas' - | sed 's|http://|https://|g' > urls.txt
+          lychee --max-redirects 5 --verbose --cookie-jar tmp_cookies --exclude '.js' --format json $(cat urls.txt) > output.json
+
+          # 2. Merge logic (using a variable to keep the YAML clean)
+          MERGE_SCRIPT='
+            (.error_map | to_entries | map({
+              key: .key,
+              value: [.value[] | { url: .url, status_code: .status.code }]
+            }) | from_entries) as $errors |
+            (.redirect_map | to_entries | map({
+              key: .key,
+              value: [
+                .value[] | 
+                .url as $link_url | 
+                select(.status.redirects and .status.redirects != []) | 
+                (.status.redirects | last) as $dest_url | 
+                select($link_url != $dest_url and ($dest_url | startswith($link_url) | not)) |
+                { url: $link_url, dest_url: $dest_url }
+              ]
+            }) | from_entries) as $redirects |
+            (($errors | keys) + ($redirects | keys) | unique) | map({
+              key: .,
+              value: (($errors[.] // []) + ($redirects[.] // []))
+            }) | 
+            from_entries |
+            with_entries(select(.value | length > 0))
+          '
+          jq "$MERGE_SCRIPT" output.json > merged_issues.json
+
+          # 3. Slack Payload logic
+          # We use a single-quoted string for the script to avoid shell expansion
+          SLACK_SCRIPT='
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": { 
+                    "type": "mrkdwn", 
+                    "text": "*LinkChecker* found \(to_entries | map(.value | length) | add) issues on <${{ github.server_url }}/${{ github.repository }}|${{ github.event.repository.name }}>:" 
+                  }
+                },
+                (to_entries[] | {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ("*<\(.key)|\(.key)>*\n" + ([.value[] | if .status_code then "   ❌ <\(.url)|broken link>" else "   ⚠️ <\(.url)|link> leads to <\(.dest_url)|another destination>" end] | join("\n")))
+                  }
+                })
+              ]
+            }
+          '
+          jq "$SLACK_SCRIPT" merged_issues.json > slack_payload.json
+
+          echo ""
+          echo "--- DEBUG: SLACK PAYLOAD START ---"
+          jq . slack_payload.json
+          echo "--- DEBUG: SLACK PAYLOAD END ---"
+
+          # 5. Check if we have issues to report (blocks length > 1 because of header)
+          if [ "$(jq '.blocks | length' slack_payload.json)" -gt 1 ]; then
+            echo "HAS_ISSUES=true" >> $GITHUB_OUTPUT
+          else
+            echo "HAS_ISSUES=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Post results to Slack
+        if: steps.process-links.outputs.HAS_ISSUES == 'true'
+        uses: slackapi/slack-github-action@v2.0.0
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload-file-path: ./slack_payload.json
+
+      - name: Save lychee cache
+        uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: .lycheecache
+          key: ${{ steps.restore-cache.outputs.cache-primary-key }}
