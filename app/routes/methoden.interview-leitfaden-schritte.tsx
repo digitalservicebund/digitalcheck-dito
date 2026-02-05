@@ -34,9 +34,10 @@ export default function InterviewMethods() {
       <main className="mb-80 space-y-80">
         <Hero title="Akteurinnen und Akteure identifizieren und Interviews vorbereiten">
           <p>
-            In dem folgenden Abschnitt finden Sie eine praktische Anleitung wie
-            sie strukturiert vorgehen können. Das Angebot befindet sich im
-            Aufbau und weitere Methoden folgen.
+            Im folgenden Abschnitt finden Sie eine praxisnahe Anleitung zur
+            strukturierten Vorbereitung und Durchführung von Interviews. Das
+            Angebot wird derzeit weiterentwickelt, einschließlich der
+            barrierefreien Optimierung der Vorlagen.
           </p>
         </Hero>
 
