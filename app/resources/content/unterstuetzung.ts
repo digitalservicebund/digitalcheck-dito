@@ -105,7 +105,7 @@ export const support = {
               },
               {
                 icon: CheckCircleOutlined,
-                title: "Was sie bekommen",
+                title: "Was Sie bekommen",
                 text: dedent`
                   - Expert:innen-Einschätzung zum Digitalbezug des Regelungsverfahrens: Grundlage für Planung des Regelungsvorhabens
                   - richtige Ansprechperson im NKR-Sekretariat
@@ -138,7 +138,7 @@ export const support = {
               },
               {
                 icon: CheckCircleOutlined,
-                title: "Was sie bekommen",
+                title: "Was Sie bekommen",
                 text: dedent`
                   - besseres Verständnis der digitalen Aspekte der Regelung
                   - Sicherheit in Abstimmungen mit umsetzenden Akteuren
@@ -177,7 +177,7 @@ export const support = {
               },
               {
                 icon: CheckCircleOutlined,
-                title: "Was sie bekommen",
+                title: "Was Sie bekommen",
                 text: dedent`
                   - tieferes Verständnis der digitalen Aspekte der Regelung
                   - eine Visualisierung, die die Prüfung durch den NKR informiert
@@ -218,7 +218,7 @@ export const support = {
               },
               {
                 icon: CheckCircleOutlined,
-                title: "Was sie bekommen",
+                title: "Was Sie bekommen",
                 text: dedent`
                   - Antworten auf Fragen zur digitalen Umsetzung der Regelung
                   - Material, Wissen und Argumente für Abstimmungen und Beteiligungen
@@ -284,7 +284,7 @@ export const support = {
               },
               {
                 icon: CheckCircleOutlined,
-                title: "Was sie bekommen",
+                title: "Was Sie bekommen",
                 text: dedent`
                   - Tipps für einen erfolgreichen Digitalcheck
                   - Beispiele für digitaltaugliche Formulierungen
