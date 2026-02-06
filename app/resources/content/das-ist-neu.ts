@@ -32,7 +32,7 @@ export const news = {
          - Übersicht auf der Prinzipien-Startseite klarer strukturiert
          - Darstellung auf den Detailseiten der Prinzipien übersichtlicher gestaltet, einfacher navigierbar und durch Handlungsempfehlungen ergänzt
          
-        [hier ansehen](${ROUTE_METHODS_PRINCIPLES.url})
+        [Hier ansehen](${ROUTE_METHODS_PRINCIPLES.url})
       `,
     },
     {
@@ -42,7 +42,7 @@ export const news = {
       Dazu zählen durchgeführte Digitalbezugsprüfungen, Regelungsbegleitungen durch das Team, Schulungen,
       Interoperabilitätsberatungen und Vernetzungsangebote.
       
-      [Hier ansehen](${ROUTE_NUMBERS_FACTS.url}).
+      [Hier ansehen](${ROUTE_NUMBERS_FACTS.url})
       `,
     },
     {
@@ -52,7 +52,7 @@ export const news = {
       Diese Visualisierungen wurden von Legist:innen erarbeitet und dienen als Inspiration bzw. Positiv-Beispiele, wie
       Veranschaulichungen helfen, den Ablauf des Regelungsvorhaben noch besser greifen zu können.
       
-      [Hier ansehen](${ROUTE_EXAMPLES_VISUALISATIONS.url}).
+      [Hier ansehen](${ROUTE_EXAMPLES_VISUALISATIONS.url})
       `,
     },
     {
@@ -65,7 +65,7 @@ export const news = {
       - Klare Anforderungen für Interoperabilitätsbewertungen
       - Hintergründe und Ziele der neuen EU-Verordnung
       
-      [Hier ansehen](${ROUTE_INTEROPERABILITY.url}?tab=2).
+      [Hier ansehen](${ROUTE_INTEROPERABILITY.url}?tab=2)
       `,
     },
     {
