@@ -1,8 +1,9 @@
 import { ROUTES } from "~/resources/staticRoutes";
 import type { Route } from "./+types/sitemap[.xml]";
 export const loader = ({ request }: Route.LoaderArgs) => {
-  const origin = new URL(request.url).origin;
-  const urls = ROUTES.map((route) => `${origin}${route.url}`);
+  const protocol = process.env.NODE_ENV === "production" ? "https:" : "http:";
+  const host = new URL(request.url).host;
+  const urls = ROUTES.map((route) => `${protocol}//${host}${route.url}`);
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
   <urlset
