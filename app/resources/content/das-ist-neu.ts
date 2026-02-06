@@ -24,6 +24,18 @@ export const news = {
   `,
   items: [
     {
+      badge: {
+        text: "28.01.2026",
+      },
+      content: dedent`
+       Prinzipien der Digitaltauglichkeit:
+         - Übersicht auf der Prinzipien-Startseite klarer strukturiert
+         - Darstellung auf den Detailseiten der Prinzipien übersichtlicher gestaltet, einfacher navigierbar und durch Handlungsempfehlungen ergänzt
+         
+        [hier ansehen](${ROUTE_METHODS_PRINCIPLES.url})
+      `,
+    },
+    {
       badge: { text: "18.12.2025" },
       content: dedent`
       "Der Digitalcheck in Zahlen" gibt eine Übersicht, was mit dem Digitalcheck bisher erreicht wurde.
