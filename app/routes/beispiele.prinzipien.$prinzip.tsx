@@ -146,9 +146,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
                     />
 
                     <Link
-                      target="_blank"
                       to={`${ROUTE_REGELUNGEN.url}/${exampleProject.URLBezeichnung}`}
-                      rel="noreferrer"
                       prefetch="viewport"
                       className="text-link"
                     >

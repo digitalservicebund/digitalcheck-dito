@@ -155,7 +155,7 @@ export const interoperability = {
         subtitle:
           "Hier finden Sie die wichtigsten Informationen zu Interoperabilitätsbewertungen.",
         content: dedent`
-          - [Interoperabilitätsrahmen](https://interoperable-europe.ec.europa.eu/collection/nifo-national-interoperability-framework-observatory/solution/european-interoperability-framework-eif-toolbox): Rahmenwerk mit Prinzipien zur Erarbeitung von interoperablen Regelungen
+          - [Interoperabilitätsrahmen](https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/solution/european-interoperability-framework-eif-toolbox): Rahmenwerk mit Prinzipien zur Erarbeitung von interoperablen Regelungen
           - [Leitlinien für Interoperabilitätsbewertungen](https://interoperable-europe.ec.europa.eu/sites/default/files/custom-page/attachment/2025-05/DIGIT-2024-00047-00-00-DE-TRA-00.pdf): Anleitung zur Bewertung der Interoperabilität in Regelungen
         `,
       },

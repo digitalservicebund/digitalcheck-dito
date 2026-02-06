@@ -51,7 +51,7 @@ export const examplesRegelungen = {
     title: "Sie möchten Ihr Beispiel hier sehen?",
     text: dedent`
       Wir nehmen gerne Vorschläge für Beispiele entgegen. Wenn Sie einen digitaltauglichen Regelungstext oder eine Visualisierung haben, nutzen Sie ganz einfach unser Formular. Dort können Sie Beispiele schnell selbst übermitteln.
-      [Vorschlag übermitteln](https://docs.google.com/forms/d/1qlGk9fRqxs9QZq6h1nbQ0CRhvoxVv-1I3KVylOyGVhU/edit)
+      [Vorschlag übermitteln](https://docs.google.com/forms/d/e/1FAIpQLSc05P6MW3FdFPDuTW5ToPGQQYuT1bkx5qeth7eLW5Yu7V8A5A/viewform?usp=dialog)
   
       Oder schreiben Sie uns eine E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Beispiel:%20Digitaltauglichkeit). Wir melden uns zeitnah bei Ihnen.
    `,

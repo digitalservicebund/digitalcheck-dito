@@ -19,7 +19,7 @@ Sollten Ihnen Barrieren auffallen oder benötigen Sie weitere Informationen zur 
 Sollten Sie mit der Bearbeitung Ihrer Anfrage unzufrieden sein, können Sie sich an die Schlichtungsstelle nach § 16 BGG wenden. Die Schlichtungsstelle BGG hat die Aufgabe, bei Konflikten zum Thema Barrierefreiheit zwischen Menschen mit Behinderungen und öffentlichen Stellen des Bundes eine außergerichtliche Streitbeilegung zu unterstützen. Das Schlichtungsverfahren ist kostenlos. Es muss kein Rechtsbeistand eingeschaltet werden.
 
 Weitere Informationen zum Schlichtungsverfahren und den Möglichkeiten der Antragstellung erhalten Sie unter:  
-www.schlichtungsstelle-bgg.de
+[www.schlichtungsstelle-bgg.de](https://www.schlichtungsstelle-bgg.de)
 
 Schlichtungsstelle nach dem Behindertengleichstellungsgesetz bei dem Beauftragten der Bundesregierung für die Belange von Menschen mit Behinderungen  
 Mauerstraße 53  

@@ -1,23 +1,25 @@
 fileignoreconfig:
-- filename: .env.example
-  ignore_detectors: [filename]
-- filename: .env.test
-  ignore_detectors: [filename]
-- filename: app/root.tsx
-  allowed_patterns: [posthogKey]
-- filename: app/utils/localStorageVersioned.ts
-  allowed_patterns:
-    - storageKey
-- filename: app/utils/localStorageVersioned.spec.ts
-  allowed_patterns:
-    - testKey
-- filename: app/routes/dokumentation/documentationDataService.ts
-  allowed_patterns:
-    - STORAGE_KEY
-    - testKey
-- filename: app/routes/vorpruefung/preCheckDataService.ts
-  allowed_patterns:
-    - STORAGE_KEY
+  - filename: .env.example
+    ignore_detectors: [filename]
+  - filename: .env.test
+    ignore_detectors: [filename]
+  - filename: app/root.tsx
+    allowed_patterns: [posthogKey]
+  - filename: app/utils/localStorageVersioned.ts
+    allowed_patterns:
+      - storageKey
+  - filename: app/utils/localStorageVersioned.spec.ts
+    allowed_patterns:
+      - testKey
+  - filename: app/routes/dokumentation/documentationDataService.ts
+    allowed_patterns:
+      - STORAGE_KEY
+      - testKey
+  - filename: app/routes/vorpruefung/preCheckDataService.ts
+    allowed_patterns:
+      - STORAGE_KEY
+  - filename: app/resources/content/beispiele-regelungen.ts
+    checksum: 98751b5102aa5cbf4c2382f47019d6c3de645d332c6ad8032e247615441aab2c # Google Form link misinterpreted as base64
 allowed_patterns:
   - key
   - onKey
@@ -33,4 +35,4 @@ allowed_patterns:
   - "pass: true"
 
 scopeconfig:
-  - scope: node  # ignores files such as package-lock.json
+  - scope: node # ignores files such as package-lock.json
