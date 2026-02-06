@@ -18,8 +18,6 @@ fileignoreconfig:
   - filename: app/routes/vorpruefung/preCheckDataService.ts
     allowed_patterns:
       - STORAGE_KEY
-  - filename: app/resources/content/beispiele-regelungen.ts
-    checksum: 98751b5102aa5cbf4c2382f47019d6c3de645d332c6ad8032e247615441aab2c # Google Form link misinterpreted as base64
 allowed_patterns:
   - key
   - onKey
