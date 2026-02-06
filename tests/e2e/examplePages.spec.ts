@@ -51,7 +51,6 @@ test.describe("Prinzipien Detail", () => {
 
     test(`navigates to laws associated with principle: ${principle.url}`, async ({
       page,
-      context,
     }) => {
       test.skip(principle === ROUTE_EXAMPLES_ESTABLISHED_TECHNOLOGIES); // skipped because we do not have examples for this atm
 
@@ -60,15 +59,12 @@ test.describe("Prinzipien Detail", () => {
       const lawLinks = page.locator(`a[href^="${ROUTE_REGELUNGEN.url}"]`);
       await expect(lawLinks.first()).toBeVisible();
 
-      const [newTab] = await Promise.all([
-        context.waitForEvent("page"),
-        lawLinks.first().click(),
-      ]);
+      await lawLinks.first().click();
 
-      await newTab.waitForLoadState("domcontentloaded");
-      await expect(newTab).toHaveURL(new RegExp(`${ROUTE_REGELUNGEN.url}/.+`));
+      await page.waitForLoadState("domcontentloaded");
+      await expect(page).toHaveURL(new RegExp(`${ROUTE_REGELUNGEN.url}/.+`));
 
-      const mainContent = newTab.getByRole("main");
+      const mainContent = page.getByRole("main");
       await expect(mainContent).toBeVisible();
     });
   }
