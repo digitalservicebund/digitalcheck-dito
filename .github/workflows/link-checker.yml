@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Link Checker
-        uses: digitalservicebund/link-checker-gha@0841567286f61e3761987c5f07aa01a454efc99f
+        uses: digitalservicebund/link-checker-gha@fe82c6085f208ac7e2a9d4be58b5cf87bad8e9c8
         with:
           SITEMAP_URL: "https://digitalcheck.bund.de/sitemap.xml"
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
