@@ -174,7 +174,7 @@ exports[`Footer Component > Renders correctly 1`] = `
               <a
                 class="text-link increase-tap-area"
                 data-discover="true"
-                href="/grundlagen/fuenf-prinzipien"
+                href="/methoden/fuenf-prinzipien"
               >
                 <span
                   class="flex items-center"
