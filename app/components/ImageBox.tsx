@@ -31,7 +31,7 @@ function ImageBox({
   const headingTag = tagName ?? "h3";
   const imageForZoomable: ImageProps = {
     ...image,
-    className: twJoin(image.className, "border-2 border-ds-blue-800/50"),
+    className: image.className,
   };
 
   return (
@@ -61,7 +61,7 @@ function ImageBox({
         </figcaption>
       )}
       {border && (
-        <hr className="my-[16px] w-[120px] border-t-[2px] border-blue-300" />
+        <hr className="my-[16px] w-[120px] border-t-2 border-blue-300" />
       )}
     </figure>
   );

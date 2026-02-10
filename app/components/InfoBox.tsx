@@ -94,7 +94,7 @@ const InfoBox = ({
         <Image
           {...visual.image}
           className={twMerge(
-            "flex-shrink-0 object-cover",
+            "shrink-0 object-cover",
             imageSizes[visual.image.size],
             visual.image.className,
           )}
@@ -103,7 +103,7 @@ const InfoBox = ({
       {visual?.type === "component" && visual.Component}
       <div
         data-testid="info-box-content"
-        className="ds-stack ds-stack-16 flex-grow break-words"
+        className="ds-stack ds-stack-16 grow wrap-break-word"
       >
         {badge && <Badge className="self-start" {...badge} />}
         {heading && <Heading tagName="h3" {...heading} />}

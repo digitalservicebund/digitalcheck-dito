@@ -28,6 +28,8 @@ export function loader() {
 }
 
 export default function InterviewMethods() {
+  const infoBoxClass = "px-16 sm:px-56";
+
   return (
     <>
       <MetaTitle prefix={ROUTE_METHODS_INTERVIEW_METHODS_STEPS.title} />
@@ -93,6 +95,7 @@ export default function InterviewMethods() {
                 id="step-1"
                 after={
                   <InfoBox
+                    className={infoBoxClass}
                     look="highlight"
                     badge={{
                       Icon: FeedOutlined,
@@ -104,6 +107,7 @@ export default function InterviewMethods() {
                       Component: (
                         <ImageBox
                           image={{
+                            className: "min-w-208",
                             url: "/images/interview-leitfaden-vorlage.png",
                             alternativeText:
                               "Eine Grafik, die eine beispielhafte Stakeholder-Map darstellt. Bestehend aus drei Kreisen die ineinander liegen. Im innersten Kreis: Normadressaten, im mittleren Kreis: Vollzugsebene und im äußersten Kreis: Rechts-Akterinnen und Akteure",
@@ -121,7 +125,7 @@ export default function InterviewMethods() {
                     />
                     <DownloadLinkButton
                       look="link"
-                      to="/documents/Anleitung_Flussdiagramm_erstellen.pptx"
+                      to="/documents/interview-leitfaden/Akteurlandschaft_Analyse.pptx"
                     >
                       Powerpoint-Vorlage
                     </DownloadLinkButton>
@@ -147,6 +151,7 @@ export default function InterviewMethods() {
                 id="step-2"
                 after={
                   <InfoBox
+                    className={infoBoxClass}
                     look="highlight"
                     badge={{
                       Icon: FeedOutlined,
@@ -158,6 +163,7 @@ export default function InterviewMethods() {
                       Component: (
                         <ImageBox
                           image={{
+                            className: "min-w-208",
                             url: "/images/interview-leitfaden-vorlage-schritt-2.png",
                             alternativeText:
                               "Eine Grafik, die eine beispielhafte Tabelle darstellt.",
@@ -173,7 +179,7 @@ export default function InterviewMethods() {
                     />
                     <DownloadLinkButton
                       look="link"
-                      to="/documents/Anleitung_Flussdiagramm_erstellen.pptx"
+                      to="/documents/interview-leitfaden/Umsetzung_verstehen.docx"
                     >
                       Word-Vorlage
                     </DownloadLinkButton>
@@ -336,6 +342,7 @@ export default function InterviewMethods() {
             </div>
 
             <InfoBox
+              className={infoBoxClass}
               look="highlight"
               badge={{ Icon: FeedOutlined, text: "Vorlage", look: "hint" }}
               visual={{
@@ -343,6 +350,7 @@ export default function InterviewMethods() {
                 Component: (
                   <ImageBox
                     image={{
+                      className: "min-w-208",
                       url: "/images/interview-leitfaden-checkliste.png",
                       alternativeText:
                         "Eine Grafik, die einen Screenshot der Word-Checkliste darstellt.",
@@ -358,7 +366,7 @@ export default function InterviewMethods() {
               />
               <DownloadLinkButton
                 look="link"
-                to="/documents/Anleitung_Flussdiagramm_erstellen.pptx"
+                to="/documents/interview-leitfaden/Ablaufplan_Interviewführung.docx"
               >
                 Word-Vorlage
               </DownloadLinkButton>
