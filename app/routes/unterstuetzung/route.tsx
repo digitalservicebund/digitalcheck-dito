@@ -14,6 +14,7 @@ import TabGroup from "~/components/Tabs/Tabs";
 import { support } from "~/resources/content/unterstuetzung";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
 import { ContentLink } from "~/utils/contentTypes";
+import { dedent } from "~/utils/dedentMultilineStrings";
 
 type Offering = {
   title: string;
@@ -246,18 +247,57 @@ export default function Index() {
           </Container>
         </div>
 
-        <div className="bg-blue-300">
-          <Container>
+        <div className="bg-blue-400">
+          <Container className="py-80">
             <InfoBox
+              badge={{
+                look: "hint",
+                text: "NEU",
+              }}
               heading={{
-                tagName: "h2",
-                text: kontaktstelle.title,
+                text: "Unterstützung in allen Phasen Ihres Vorhabens",
+              }}
+              look="white"
+              visual={{
+                type: "image",
+                image: {
+                  url: "/images/zfl-preview.png",
+                  size: "medium",
+                },
               }}
             >
-              <RichText markdown={kontaktstelle.text} />
+              <RichText
+                markdown={dedent`
+                  Das Zentrum für Legistik unterstützt Sie bereits in der frühen
+                  Konzeptionsphase. Sie stellen damit sicher, dass Ihr Vorhaben
+                  betroffenenzentriert, praxistauglich und digital umsetzbar ist.
+
+                  Mehr zu den Angeboten des Zentrums für Legistik erfahren:
+                `}
+              />
+              <LinkButton
+                to="https://zfl.bund.de"
+                look="tertiary"
+                className="self-start"
+                target="_blank"
+              >
+                Zum Zentrum für Legistik{" "}
+                <span className="sr-only">(öffnet in einem neuen Tab)</span>
+              </LinkButton>
             </InfoBox>
           </Container>
         </div>
+
+        <Container className="py-80">
+          <InfoBox
+            heading={{
+              tagName: "h2",
+              text: kontaktstelle.title,
+            }}
+          >
+            <RichText markdown={kontaktstelle.text} />
+          </InfoBox>
+        </Container>
       </main>
     </>
   );

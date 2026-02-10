@@ -30,7 +30,7 @@ type BaseInfoBoxProps = {
    */
   links?: ContentLink[];
   className?: string;
-  look?: "default" | "highlight" | "method";
+  look?: "default" | "highlight" | "method" | "white";
 };
 
 type VisualProps =
@@ -76,6 +76,7 @@ const InfoBox = ({
         "flex scroll-my-40 flex-col gap-32 md:flex-row",
         // visual?.type === "image" ? "flex-col-reverse" : "flex-col",
         look === "highlight" && "rounded-lg bg-blue-100 px-16 py-40 sm:px-80",
+        look === "white" && "rounded-lg bg-white px-16 py-40 sm:px-80",
         look === "method" &&
           "bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48",
         className,
@@ -94,7 +95,7 @@ const InfoBox = ({
         <Image
           {...visual.image}
           className={twMerge(
-            "shrink-0 object-cover",
+            "shrink-0 self-center object-cover md:self-start",
             imageSizes[visual.image.size],
             visual.image.className,
           )}
