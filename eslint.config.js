@@ -75,9 +75,9 @@ export default defineConfig(
         {
           skipTemplates: true,
           skipJSXText: true,
-        }
+        },
       ],
-      
+
       // React rules
       "react-refresh/only-export-components": [
         "warn",
