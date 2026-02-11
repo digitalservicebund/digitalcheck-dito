@@ -1,9 +1,10 @@
-# Digitalcheck Digital Touchpoint (DiTo)
+# Digitalcheck Digital Touchpoint / Website (DiTo)
 
 [![Pipeline](https://github.com/digitalservicebund/digitalcheck-dito/actions/workflows/pipeline.yml/badge.svg)](https://github.com/digitalservicebund/digitalcheck-dito/actions/workflows/pipeline.yml)
 [![Scan](https://github.com/digitalservicebund/digitalcheck-dito/actions/workflows/scan.yml/badge.svg)](https://github.com/digitalservicebund/digitalcheck-dito/actions/workflows/scan.yml)
 
-A digital touchpoint for _Digitalcheck: Digitaltaugliche Regelung erarbeiten_.
+The website code for [_Digitalcheck: Digitaltaugliche Regelung erarbeiten_](https://digitalcehck.bund.de).
+Contains the React Router application.
 
 ## Setup
 
