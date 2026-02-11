@@ -3,7 +3,7 @@
 [![Pipeline](https://github.com/digitalservicebund/digitalcheck-dito/actions/workflows/pipeline.yml/badge.svg)](https://github.com/digitalservicebund/digitalcheck-dito/actions/workflows/pipeline.yml)
 [![Scan](https://github.com/digitalservicebund/digitalcheck-dito/actions/workflows/scan.yml/badge.svg)](https://github.com/digitalservicebund/digitalcheck-dito/actions/workflows/scan.yml)
 
-The website code for [_Digitalcheck: Digitaltaugliche Regelung erarbeiten_](https://digitalcehck.bund.de).
+The website code for [_Digitalcheck: Digitaltaugliche Regelung erarbeiten_](https://digitalcheck.bund.de).
 Contains the React Router application.
 
 ## Setup
