@@ -17,6 +17,7 @@ import {
   ROUTE_SUPPORT,
   ROUTE_VERSION_HISTORY,
 } from "~/resources/staticRoutes";
+import { contact } from "./contact";
 
 export const footer = {
   navLabel: "Seitenfußbereich",
@@ -28,14 +29,14 @@ export const footer = {
         [
           {
             preText: "Support:",
-            text: "0151/40 76 78 39",
-            url: "tel:015140767839",
+            text: contact.phoneDisplay,
+            url: contact.phone,
           },
 
           {
             preText: " oder",
-            text: "digitalcheck@digitalservice.bund.de",
-            url: "mailto:digitalcheck@digitalservice.bund.de",
+            text: contact.email,
+            url: `mailto:${contact.email}`,
           },
         ],
         {

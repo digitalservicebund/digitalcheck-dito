@@ -8,6 +8,7 @@ import {
 import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
+import { contact } from "./shared/contact";
 
 export const preCheck = {
   preCheckName: "Vorprüfung",
@@ -129,7 +130,7 @@ export const preCheck = {
         content: dedent`
           Der Digitalcheck begleitet Sie bei der Erarbeitung für digitaltaugliche und ab Januar 2025 interoperable Regelungsvorhaben. Dieser Auftrag wurde dem Digitalcheck vom BMDS erteilt.
 
-          Wenn Ihr Regelungsvorhaben Anforderungen an Interoperabilität beinhaltet, unterstützen wir Sie dabei, diese optimal umzusetzen. In diesem Fall wird das Digitalcheck-Team automatisch über das Ergebnis informiert, sobald Sie es per E-Mail absenden. Wir setzen uns dann mit Ihnen in Verbindung, um gemeinsam die weiteren Schritte zu planen und umzusetzen. Sollten Sie vorab Fragen haben, können Sie sich jederzeit direkt an uns wenden - telefonisch unter [0151/40 76 78 39](tel:+4915140767839) oder per E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de).
+          Wenn Ihr Regelungsvorhaben Anforderungen an Interoperabilität beinhaltet, unterstützen wir Sie dabei, diese optimal umzusetzen. In diesem Fall wird das Digitalcheck-Team automatisch über das Ergebnis informiert, sobald Sie es per E-Mail absenden. Wir setzen uns dann mit Ihnen in Verbindung, um gemeinsam die weiteren Schritte zu planen und umzusetzen. Sollten Sie vorab Fragen haben, können Sie sich jederzeit direkt an uns wenden - telefonisch unter ${contact.mdPhoneLink()} oder per E-Mail an ${contact.mdMailToLink(contact.interoperabilityEmail, "Supportanfrage: digitalcheck.bund.de")}.
         `,
       },
       {
@@ -285,8 +286,7 @@ export const preCheck = {
       negativeResult:
         "keinem Daten- und Informationsaustausch zwischen EU-Mitgliedsstaaten.",
       resultHint: {
-        unsureResult:
-          "**Das können Sie tun:** Kontaktieren Sie uns unter [0151/40 76 78 39](tel:+4915140767839) oder  per E-Mail an [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de). Wir unterstützen Sie gerne bei der Beantwortung dieser Frage.",
+        unsureResult: `**Das können Sie tun:** Kontaktieren Sie uns unter ${contact.mdPhoneLink()} oder per E-Mail an ${contact.mdMailToLink(contact.interoperabilityEmail, "Supportanfrage: digitalcheck.bund.de")}. Wir unterstützen Sie gerne bei der Beantwortung dieser Frage.`,
       },
       resultTooltip: {
         positiveResult: "Bitte beachten Sie den oberen Hinweis.",

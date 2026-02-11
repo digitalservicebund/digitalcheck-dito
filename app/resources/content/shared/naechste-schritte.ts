@@ -5,6 +5,7 @@ import {
 } from "~/resources/staticRoutes";
 import { Step } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
+import { contact } from "./contact";
 
 const stepNKR: Step = {
   headline: {
@@ -75,7 +76,7 @@ export const steps = {
     content:
       stepNKR.content +
       dedent`
-        <p>Senden Sie die von Ihnen erstellte Dokumentation per E-Mail an folgende Adresse: <a href="mailto:nkr@bmjv.bund.de" class="plausible-event-name=Content.Steps.Link+BMJ+Email underline hover:no-underline text-blue-700 font-bold">nkr@bmjv.bund.de</a></p>
+        <p>Senden Sie die von Ihnen erstellte Dokumentation per E-Mail an folgende Adresse: <a href="mailto:${contact.nkrEmail}" class="plausible-event-name=Content.Steps.Link+BMJ+Email underline hover:no-underline text-blue-700 font-bold">${contact.nkrEmail}</a></p>
 
         Damit ist der Digitalcheck für Sie beendet.
       `,

@@ -1,4 +1,5 @@
 import { dedent } from "~/utils/dedentMultilineStrings";
+import { contact } from "./shared/contact";
 
 export const examplesRegelungen = {
   subtitle: [
@@ -53,7 +54,7 @@ export const examplesRegelungen = {
       Wir nehmen gerne Vorschläge für Beispiele entgegen. Wenn Sie einen digitaltauglichen Regelungstext oder eine Visualisierung haben, nutzen Sie ganz einfach unser Formular. Dort können Sie Beispiele schnell selbst übermitteln.
       [Vorschlag übermitteln](https://docs.google.com/forms/d/e/1FAIpQLSc05P6MW3FdFPDuTW5ToPGQQYuT1bkx5qeth7eLW5Yu7V8A5A/viewform)
   
-      Oder schreiben Sie uns eine E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Beispiel:%20Digitaltauglichkeit). Wir melden uns zeitnah bei Ihnen.
+      Oder schreiben Sie uns eine E-Mail an ${contact.mdMailToLink(contact.email, "Beispiel: Digitaltauglichkeit")}. Wir melden uns zeitnah bei Ihnen.
    `,
   },
 };

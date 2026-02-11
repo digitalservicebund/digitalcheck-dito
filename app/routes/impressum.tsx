@@ -2,6 +2,7 @@ import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Hero from "~/components/Hero";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
+import { contact } from "~/resources/content/shared/contact";
 import { ROUTE_IMPRINT } from "~/resources/staticRoutes";
 
 const content = `
@@ -35,7 +36,7 @@ Prinzessinnenstraße 8-14<br />
 10969 Berlin<br />
 E-Mail: [hallo@digitalservice.bund.de](mailto:hallo@digitalservice.bund.de)
 
-Fragen zu technischen Auffälligkeiten, inhaltlicher Unterstützung, Problemen oder zum Betrieb dieser Webseite können an digitalcheck@digitalservice.bund.de gerichtet werden.
+Fragen zu technischen Auffälligkeiten, inhaltlicher Unterstützung, Problemen oder zum Betrieb dieser Webseite können an ${contact.email} gerichtet werden.
 
 ## Copyright für Bilder
 

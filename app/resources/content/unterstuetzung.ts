@@ -10,6 +10,7 @@ import {
 } from "~/resources/staticRoutes";
 import { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
+import { contact } from "./shared/contact";
 
 export const support = {
   title: "Hilfe für digitaltaugliche Regelungsvorhaben",
@@ -56,13 +57,13 @@ export const support = {
   supportHow: {
     title: "Schnelle Hilfe und individuelle Beratung",
     text: dedent`
-      Sie können uns für dringende Anliegen unter [0151/40 76 78 39](tel:+4915140767839) anrufen oder uns eine **E-Mail** senden. Wir beantworten Ihnen alle wichtigen Fragen zum Vorgehen und Anwenden des Digitalchecks sowie allgemeine Fragen rund um das Erarbeiten digitaltauglicher Regelungen.
+      Sie können uns für dringende Anliegen unter ${contact.mdPhoneLink()} anrufen oder uns eine **E-Mail** senden. Wir beantworten Ihnen alle wichtigen Fragen zum Vorgehen und Anwenden des Digitalchecks sowie allgemeine Fragen rund um das Erarbeiten digitaltauglicher Regelungen.
 
       Darüber hinaus bieten wir individuelle Beratungsgespräche an. Gemeinsam klären wir, welche Unterstützungsangebote am besten zu Ihren Bedürfnissen passen.
     `,
     link: {
       text: "E-Mail senden",
-      to: "mailto:digitalcheck@digitalservice.bund.de?subject=Unterstützungsangebote:%20digitalcheck.bund.de",
+      to: `mailto:${contact.email}?subject=Unterstützungsangebote:%20digitalcheck.bund.de`,
     } satisfies ContentLink,
   },
   supportOfferings: {
@@ -257,7 +258,7 @@ export const support = {
             link: {
               text: "Für Schulung anmelden",
               to: encodeURI(dedent`
-                mailto:digitalcheck@digitalservice.bund.de?subject=[Digitalcheck Schulung] Anmeldung digitaltaugliche Regelungen&body=Guten Tag,
+                mailto:${contact.email}?subject=[Digitalcheck Schulung] Anmeldung digitaltaugliche Regelungen&body=Guten Tag,
 
                 ich möchte mich gerne für die Online-Schulung anmelden:
 
@@ -308,7 +309,7 @@ export const support = {
             link: {
               text: "Auf Warteliste setzen",
               to: encodeURI(
-                dedent`mailto:digitalcheck@digitalservice.bund.de?subject=[Digitalcheck Schulung] Anmeldung Visualisierungen&body=
+                dedent`mailto:${contact.email}?subject=[Digitalcheck Schulung] Anmeldung Visualisierungen&body=
 Guten Tag,
 
 ich möchte mich gerne auf die Warteliste setzen lassen für die Online-Schulung:

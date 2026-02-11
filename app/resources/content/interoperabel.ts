@@ -2,6 +2,7 @@ import { Apps, Layers } from "@digitalservicebund/icons";
 import { ROUTE_FUNDAMENTALS_DIGITAL_READINESS } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { getTabAnchorLink } from "~/utils/tabs";
+import { contact } from "./shared/contact";
 
 export const interoperability = {
   headline: "EU-Interoperabilität für ein digital vernetztes Europa",
@@ -23,8 +24,7 @@ export const interoperability = {
     id: "faq",
     tabName: "Häufige Fragen",
     headline: "Häufig gestellte Fragen",
-    content:
-      "In diesem Bereich erhalten Sie umfassende Informationen zur Einführung der EU-Vorgaben zur Interoperabilität sowie zum Prozess der Erarbeitung von Interoperabilität in Regelungen. Wenn Sie weitere Fragen haben, dann kontaktieren Sie uns unter: [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%digitalcheck.bund.de) oder unter [0151/40 76 78 39](tel:+4915140767839).",
+    content: `In diesem Bereich erhalten Sie umfassende Informationen zur Einführung der EU-Vorgaben zur Interoperabilität sowie zum Prozess der Erarbeitung von Interoperabilität in Regelungen. Wenn Sie weitere Fragen haben, dann kontaktieren Sie uns unter: ${contact.mdMailToLink(contact.interoperabilityEmail, "Supportanfrage: digitalcheck.bund.de")} oder unter ${contact.mdPhoneLink()}.`,
     items: [
       {
         headline: "Was bedeutet grenzüberschreitende Interoperabilität?",
@@ -100,7 +100,7 @@ export const interoperability = {
 
           Es geht darum, darzulegen, wie sich Ihre Regelung auf die EU-weite Interoperabilität auswirkt. Der wesentliche Inhalt besteht aus fünf Fragen. Die Bewertung fragt nach sogenannten „[verbindlichen Anforderungen](${getTabAnchorLink(2, "verbindliche-anforderungen")})“ und prüft deren Einfluss auf die [vier Ebenen der Interoperabilität](${getTabAnchorLink(2, "vier-ebenen-der-interoperabilitaet")}).
 
-          Wenn Sie weitere Fragen haben, dann kontaktieren Sie uns unter: [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de) oder rufen Sie uns an unter [0151/40 76 78 39](tel:015140767839).
+          Wenn Sie weitere Fragen haben, dann kontaktieren Sie uns unter: ${contact.mdMailToLink(contact.interoperabilityEmail)} oder rufen Sie uns an unter ${contact.mdPhoneLink()}.
         `,
       },
       {
@@ -121,7 +121,7 @@ export const interoperability = {
           
           Die [Verordnung für ein interoperables Europa (EU) 2024/903](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32024R0903) sieht in den Mitgliedstaaten nationale Kontaktstellen vor. Für Deutschland hat das Bundesministerium für Digitales und Staatsmodernisierung das Team vom Digitalcheck mit der Ausführung beauftragt. 
           
-          Wir unterstützen Sie derzeit individuell bei der Durchführung einer Interoperabilitätsbewertung für eine interoperable Regelung und bei der Erstellung eines entsprechenden Berichts. Kontaktieren Sie uns jederzeit gerne mit Ihren Anliegen - je früher, desto besser.  Schreiben Sie uns über [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de) oder rufen Sie uns an unter [0151/40 76 78 39](tel:+4915140767839).
+          Wir unterstützen Sie derzeit individuell bei der Durchführung einer Interoperabilitätsbewertung für eine interoperable Regelung und bei der Erstellung eines entsprechenden Berichts. Kontaktieren Sie uns jederzeit gerne mit Ihren Anliegen - je früher, desto besser.  Schreiben Sie uns über ${contact.mdMailToLink(contact.interoperabilityEmail, "Supportanfrage: digitalcheck.bund.de")} oder rufen Sie uns an unter ${contact.mdPhoneLink()}.
           
           Weitergehende Informationen können Sie hier abrufen:
           

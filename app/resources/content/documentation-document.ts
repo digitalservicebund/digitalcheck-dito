@@ -1,4 +1,5 @@
 import { dedent } from "~/utils/dedentMultilineStrings";
+import { contact } from "./shared/contact";
 
 export const documentationDocument = {
   filename: "Dokumentation_der_Digitaltauglichkeit_V2.docx",
@@ -30,8 +31,8 @@ export const documentationDocument = {
     heading: "Das ist jetzt zu tun",
     instructions: dedent`
       - **Speichern** Sie die Dokumentation als **PDF**
-      - **Senden** Sie die von Ihnen erstellte Dokumentation als PDF per E-Mail an folgende Adresse: [nkr@bmjv.bund.de](mailto:nkr@bmjv.bund.de). Der NKR (Nationaler Normenkontrollrat) prüft Ihr Vorhaben hinsichtlich der Berücksichtigung der Prinzipien digitaltauglicher Gesetzgebung. Bei Fragen wird der NKR auf Sie zukommen.
-      - **Bei Interoperabilitätsbezug** senden Sie eine Kopie der E-Mail mit der PDF-Datei an [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de).
+      - **Senden** Sie die von Ihnen erstellte Dokumentation als PDF per E-Mail an folgende Adresse: ${contact.mdMailToLink(contact.nkrEmail)}. Der NKR (Nationaler Normenkontrollrat) prüft Ihr Vorhaben hinsichtlich der Berücksichtigung der Prinzipien digitaltauglicher Gesetzgebung. Bei Fragen wird der NKR auf Sie zukommen.
+      - **Bei Interoperabilitätsbezug** senden Sie eine Kopie der E-Mail mit der PDF-Datei an ${contact.mdMailToLink(contact.interoperabilityEmail)}.
       - **Visuelle Darstellungen** und Skizzen sind vom NKR gern gesehen. Hängen Sie diese formlos als PDF oder als Screenshot an.
       - Damit ist der Digitalcheck für Sie beendet.
     `,
@@ -42,8 +43,7 @@ export const documentationDocument = {
     },
     support: {
       heading: "Sie haben Fragen oder benötigen Unterstützung? ",
-      content:
-        "Rufen Sie uns an: 0151 4076 7839 oder schreiben Sie uns unter: [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de).",
+      content: `Rufen Sie uns an: ${contact.mdPhoneLink()} oder schreiben Sie uns unter: ${contact.mdMailToLink(contact.email)}.`,
     },
   },
 };

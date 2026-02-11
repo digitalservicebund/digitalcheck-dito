@@ -18,6 +18,7 @@ import {
   ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX,
   ROUTE_METHODS_VISUALIZE_FLOWCHARTS,
 } from "../staticRoutes";
+import { contact } from "./shared/contact";
 
 export const methodsTasksProcesses = {
   title: "Das Potenzial von Visualisierungen nutzen",
@@ -246,7 +247,7 @@ export const methodsTasksProcesses = {
     content: dedent`
       Der Digitalcheck-Support unterstützt Sie bei der Visualsierung von Abläufen. Wir helfen Ihnen gerne, insbesondere bei komplexen Abläufen.
       
-      Schreiben Sie uns über [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de) oder rufen Sie uns an unter [0151/40 76 78 39](tel:015140767839).
+      Schreiben Sie uns über ${contact.mdMailToLink(contact.email)} oder rufen Sie uns an unter ${contact.mdPhoneLink()}.
     `,
   },
 };

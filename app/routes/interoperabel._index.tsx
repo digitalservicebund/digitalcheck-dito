@@ -16,6 +16,7 @@ import RichText from "~/components/RichText";
 import TabGroupWithUrlState from "~/components/Tabs/TabsWithUrlState";
 import Timeline from "~/components/Timeline";
 import { interoperability } from "~/resources/content/interoperabel";
+import { contact } from "~/resources/content/shared/contact";
 import {
   ROUTE_EXAMPLES_VISUALISATIONS,
   ROUTE_INTEROPERABILITY,
@@ -183,12 +184,12 @@ export default function Interoperability() {
                         </Heading>
                         <p>
                           Sie dokumentieren in einem Fragebogen auf dem{" "}
-                          <Link
+                          <NewTabLink
                             className="text-link"
                             to="https://interoperable-europe.ec.europa.eu/collection/assessments/submission"
                           >
                             interoperable Europe-Portal
-                          </Link>
+                          </NewTabLink>
                           , wie sich die Regelungsinhalte sich auf die
                           Interoperabilität auswirken.
                         </p>
@@ -265,15 +266,15 @@ export default function Interoperability() {
                     </p>
                     <p>
                       <strong>Rufen Sie uns an:</strong>{" "}
-                      <Link className="text-link" to="tel:+4915140767839">
-                        0151 4076 7839
+                      <Link className="text-link" to={contact.phone}>
+                        {contact.phoneDisplay}
                       </Link>{" "}
                       Schreiben Sie uns - egal ob Legist oder Institution:
                       <Link
                         className="text-link"
-                        to="mailto:interoperabel@digitalservice.bund.de"
+                        to={`mailto:${contact.interoperabilityEmail}`}
                       >
-                        interoperabel@digitalservice.bund.de
+                        {contact.interoperabilityEmail}
                       </Link>
                     </p>
                   </InfoBox>
@@ -492,14 +493,14 @@ export default function Interoperability() {
                       Wenn Sie weitere Fragen haben, dann kontaktieren Sie uns
                       unter:{" "}
                       <Link
-                        to="mailto:interoperabel@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de"
+                        to={`mailto:${contact.interoperabilityEmail}?subject=Supportanfrage:%20digitalcheck.bund.de`}
                         className="ds-link-01-bold"
                       >
-                        interoperabel@digitalservice.bund.de
+                        {contact.interoperabilityEmail}
                       </Link>{" "}
                       oder rufen Sie uns an unter{" "}
-                      <Link to="tel:+4915140767839" className="ds-link-01-bold">
-                        0151/40 76 78 39
+                      <Link to={contact.phone} className="ds-link-01-bold">
+                        {contact.phoneDisplay}
                       </Link>
                       .
                     </p>

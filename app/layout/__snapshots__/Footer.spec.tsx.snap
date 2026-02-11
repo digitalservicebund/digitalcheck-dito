@@ -30,7 +30,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                
               <a
                 class="text-link increase-tap-area"
-                href="tel:015140767839"
+                href="tel:+4915140767839"
               >
                 <span
                   class="flex items-center"

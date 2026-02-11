@@ -7,6 +7,7 @@ import {
 } from "~/resources/staticRoutes";
 import { ContentLink, Step } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
+import { contact } from "./shared/contact";
 
 export const preCheckResult = {
   title: "Ergebnis der Vorprüfung",
@@ -42,7 +43,7 @@ export const preCheckResult = {
   },
   unsure: {
     title: "Sie haben mehrere Aussagen mit „Ich bin unsicher“ beantwortet.",
-    hint: "Bitte kontaktieren Sie den Digitalcheck-Support unter: [0151/40 76 78 39](tel:+4915140767839) oder schreiben Sie uns eine E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de) mit Ihren Fragen. Wir helfen Ihnen, die Vorprüfung auszufüllen.",
+    hint: `Bitte kontaktieren Sie den Digitalcheck-Support unter: ${contact.mdPhoneLink()} oder schreiben Sie uns eine E-Mail an ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")} mit Ihren Fragen. Wir helfen Ihnen, die Vorprüfung auszufüllen.`,
     actionButton: {
       text: "Vorprüfung wiederholen",
       to: ROUTE_PRECHECK.url,
@@ -80,7 +81,7 @@ export const preCheckResult = {
       
       **Beachten Sie in diesem Kontext:** Interoperabilität ist die Fähigkeit digitaler Systeme, miteinander zu kommunizieren und Daten auszutauschen. **Das heisst, ohne Digitalbezug ist Interoperabilität nicht möglich.**
 
-      Haben Sie Fragen? Kontaktieren Sie uns unter [0151/40 76 78 39](tel:+4915140767839) oder [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de).
+      Haben Sie Fragen? Kontaktieren Sie uns unter ${contact.mdPhoneLink()} oder ${contact.mdMailToLink(contact.email)}.
 
       [Zurück zum Vorprüfungs-Formular](${ROUTE_PRECHECK_INFO.url})
     `,
@@ -129,7 +130,7 @@ export const preCheckResult = {
       "Bitte geben Sie eine kürzere Begründung ein (500 Zeichen) und ergänzen Sie diese gegebenenfalls direkt in der resultierenden E-Mail.",
     emailClientHint: {
       title: "Ihr Email-Programm wird geöffnet...",
-      text: "Dies kann je nach Anwendung einen Moment dauern. Sie können diesen Hinweis jederzeit schließen, sobald sich Ihr E-Mail-Programm geöffnet hat. Sollte sich Ihr E-Mail Programm nicht öffnen, kontaktieren Sie uns unter [0151/40 76 78 39](tel:+4915140767839) oder per E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de).",
+      text: `Dies kann je nach Anwendung einen Moment dauern. Sie können diesen Hinweis jederzeit schließen, sobald sich Ihr E-Mail-Programm geöffnet hat. Sollte sich Ihr E-Mail Programm nicht öffnen, kontaktieren Sie uns unter ${contact.mdPhoneLink()} oder per E-Mail an ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")}.`,
     },
     faqs: {
       title: "Häufige Fragen zum Senden der Vorprüfung",
@@ -173,8 +174,8 @@ export const preCheckResult = {
       text: "E-Mail erstellen",
     },
     emailTemplate: {
-      toNkr: "nkr@bmjv.bund.de",
-      toDC: "interoperabel@digitalservice.bund.de",
+      toNkr: contact.nkrEmail,
+      toDC: contact.interoperabilityEmail,
       subject: "Digitalcheck Vorprüfung",
       bodyBefore: dedent`
         Guten Tag,

@@ -8,6 +8,7 @@ import {
 } from "~/resources/staticRoutes";
 import { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
+import { contact } from "./shared/contact";
 
 export const methodsTechnicalFeasibility = {
   title: "Technische Umsetzbarkeit sicherstellen",
@@ -33,8 +34,8 @@ export const methodsTechnicalFeasibility = {
         
         <h3 class="ds-subhead font-bold mt-24">Sie müssen nicht alles allein bewältigen</h3>
         
-        Bei kleinen Fragen rufen Sie den Digitalcheck-Support an unter [0151/40 76 78 39](tel:+4915140767839).
-        Für ein unterstützendes, einstündiges Videotelefonat schreiben Sie eine E-Mail an [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de) oder buchen Sie direkt einen Termin.
+        Bei kleinen Fragen rufen Sie den Digitalcheck-Support an unter ${contact.mdPhoneLink()}.
+        Für ein unterstützendes, einstündiges Videotelefonat schreiben Sie eine E-Mail an ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")} oder buchen Sie direkt einen Termin.
     `,
     links: [
       {
@@ -87,7 +88,7 @@ export const methodsTechnicalFeasibility = {
       - **Erkenntnisse visuell aufzubereiten** – das ist die beste Grundlage für interne und externe Beteiligungsprozesse – und
       - die **Aussagen externer Dienstleister** zu reflektieren: Wirtschaftlichkeit kann eine Motivation für aufwändige Lösungen sein.
       
-      <p class="mt-24">Schreiben Sie uns über <a href="mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de" class="ds-link-01-bold">digitalcheck@digitalservice.bund.de</a> oder rufen Sie uns an unter <a href="tel:+4915140767839" class="ds-link-01-bold">0151/40 76 78 39</a>.</p>
+      Schreiben Sie uns über ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")} oder rufen Sie uns an unter ${contact.mdPhoneLink()}.
     `,
     links: [
       {

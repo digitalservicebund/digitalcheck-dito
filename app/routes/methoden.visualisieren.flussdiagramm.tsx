@@ -21,6 +21,7 @@ import MetaTitle from "~/components/Meta";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
 import { STRAPI_MEDIA_URL } from "~/resources/constants.ts";
+import { contact } from "~/resources/content/shared/contact";
 import {
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX,
@@ -291,7 +292,7 @@ export default function Visualization() {
                     [Powerpoint-Vorlage](${ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX.url})
                     
                     Sie wünschen sich ein anderes Medium?
-                    Schicken Sie uns eine E-Mail an digitalcheck@digitalservice.bund.de.
+                    Schicken Sie uns eine E-Mail an ${contact.email}.
                   `}
                       />
                     </InfoBox>

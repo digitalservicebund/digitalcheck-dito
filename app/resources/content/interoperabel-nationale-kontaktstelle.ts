@@ -5,6 +5,7 @@ import {
   ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
+import { contact } from "./shared/contact";
 
 export const spoc = {
   headline: "Nationale Kontaktstelle für ein interoperables Europa",
@@ -210,9 +211,9 @@ export const spoc = {
         content: dedent`
           Wir begleiten Sie gerne bei der konkreten Umsetzung – mit Wissen, Praxiserfahrung aus anderen Regelungsvorhaben und konkreten Ideen zur Gestaltung in Ihrem Anwendungsfall.
 
-          **Rufen Sie uns an:** 0151 4076 7839  
+          **Rufen Sie uns an:** ${contact.mdPhoneLink()}  
           Schreiben Sie uns - egal ob Legist oder Institution:  
-          interoperabel@digitalservice.bund.de
+          ${contact.mdMailToLink(contact.interoperabilityEmail)}
 
           Weitere Online-Angebote des Digitalcheck für Legist:innen:  
           [https://digitalcheck.bund.de/](${ROUTE_LANDING.url})

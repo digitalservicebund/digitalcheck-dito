@@ -4,6 +4,7 @@ import SupportOutlined from "@digitalservicebund/icons/SupportOutlined";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
 import { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
+import { contact } from "./shared/contact";
 
 export const methodsITSystems = {
   title: "IT-Systeme gemeinsam erfassen",
@@ -60,7 +61,7 @@ export const methodsITSystems = {
     text: dedent`
       Der Digitalcheck-Support unterstützt Sie mit kostenloser IT-Beratung, um Erkenntnisse zu erläutern und für Ihre Regelung zu nutzen, z. B. durch IT-Hintergrundwissen zu Schnittstellen. Jede Frage ist berechtigt – jede verstandene Antwort wird die Regelung digitaltauglicher machen. 
       
-      Schreiben Sie uns über [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de?subject=Supportanfrage:%20digitalcheck.bund.de) oder rufen Sie uns an unter [0151/40 76 78 39](tel:+4915140767839).
+      Schreiben Sie uns über ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")} oder rufen Sie uns an unter ${contact.mdPhoneLink()}.
     `,
     links: [
       {

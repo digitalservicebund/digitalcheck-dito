@@ -1,6 +1,7 @@
 import { TipsAndUpdatesOutlined } from "@digitalservicebund/icons";
 import { steps } from "~/resources/content/shared/naechste-schritte";
 import { dedent } from "~/utils/dedentMultilineStrings";
+import { contact } from "./shared/contact";
 
 export const documentation = {
   title: "Dokumentieren der Digitaltauglichkeit",
@@ -336,8 +337,8 @@ export const digitalDocumentation = {
     send: {
       heading: "Fertige Dokumentation an den NKR senden",
       content: dedent`
-        - Senden Sie die Dokumentation **als PDF per E-Mail** an folgende Adresse: [nkr@bmjv.bund.de](mailto:nkr@bmjv.bund.de). Der NKR prüft die methodische und inhaltliche Nachvollziehbarkeit. Bei Fragen wird der NKR auf Sie zukommen. Das Ziel ist eine digital- und praxistaugliche Umsetzung.
-        - Bei **Interoperabilitätsbezug** senden Sie eine Kopie der E-Mail mit der Dokumentation an [interoperabel@digitalservice.bund.de](mailto:interoperabel@digitalservice.bund.de).
+        - Senden Sie die Dokumentation **als PDF per E-Mail** an folgende Adresse: ${contact.mdMailToLink(contact.nkrEmail)}. Der NKR prüft die methodische und inhaltliche Nachvollziehbarkeit. Bei Fragen wird der NKR auf Sie zukommen. Das Ziel ist eine digital- und praxistaugliche Umsetzung.
+        - Bei **Interoperabilitätsbezug** senden Sie eine Kopie der E-Mail mit der Dokumentation an ${contact.mdMailToLink(contact.interoperabilityEmail)}.
         - Der NKR empfiehlt, **Visualisierungen** und Skizzen als ergänzende Dokumente beizufügen – formlos als PDF oder Screenshot.`,
     },
     done: "Damit ist der Digitalcheck für Sie beendet.",

@@ -1,4 +1,5 @@
 import { ActiveBehavior } from "~/components/DropdownContentList";
+import { contact } from "~/resources/content/shared/contact";
 import {
   ROUTE_DOCUMENTATION,
   ROUTE_EXAMPLES_PRINCIPLES,
@@ -18,12 +19,12 @@ export const header = {
   contactTel: {
     msg: "Kontaktieren Sie den Support:",
     msgMobile: "Support:",
-    number: "0151/40 76 78 39",
+    number: contact.phoneDisplay,
   },
   contactMail: {
     msg: "oder",
-    text: "digitalcheck@digitalservice.bund.de",
-    url: "mailto:digitalcheck@digitalservice.bund.de",
+    text: contact.email,
+    url: `mailto:${contact.email}`,
   },
   noscript: {
     text: "**Menü funktioniert nicht?** Erlauben Sie JavaScript in den Browsereinstellungen oder navigieren Sie über den [Footer](#footer).",

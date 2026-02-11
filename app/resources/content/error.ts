@@ -1,3 +1,5 @@
+import { contact } from "./shared/contact";
+
 export const genericError = {
   title: "Ein Fehler ist aufgetreten",
   message: `Es tut uns leid, aber etwas ist schief gelaufen.
@@ -7,7 +9,7 @@ Folgendes könnte helfen:
 - Kehren Sie zur Startseite zurück.
 - Versuchen Sie es später erneut.
 
-Falls das Problem weiterhin besteht, kontaktieren Sie uns unter [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de) oder [0151/40 76 78 39](tel:+4915140767839).`,
+Falls das Problem weiterhin besteht, kontaktieren Sie uns unter ${contact.mdMailToLink(contact.email)} oder ${contact.mdPhoneLink()}.`,
 };
 
 export const notFoundError = {
