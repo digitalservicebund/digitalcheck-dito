@@ -33,10 +33,11 @@ export default function InterviewMethods() {
       <main className="mb-80 space-y-80">
         <Hero title="Nehmen Sie die Praxis-Perspektive für Ihr Vorhaben ein">
           <p>
-            Erkenntnisse aus der Umsetzung verbessern die Wirksamkeit Ihres
-            Vorhaben. Aber wie gelangen Sie an die Erkenntnisse? Und wie gelingt
-            der Transfer in die Regelung? Dieser Leitfaden unterstützt Sie beim
-            praktischen Vorgehen. Er zeigt Ihnen, wie Sie relevante Stakeholder
+            Erkenntnisse aus der Umsetzung und der direkte Einbezug der
+            Betroffenen verbessern die Wirksamkeit Ihres Vorhaben. Aber wie
+            gelangen Sie an die Erkenntnisse? Und wie gelingt der Transfer in
+            die Regelung? Dieser Leitfaden unterstützt Sie beim praktischen
+            Vorgehen. Er zeigt Ihnen, wie Sie relevante Stakeholder
             identifizieren und Interviews strukturiert vorbereiten.
           </p>
 
@@ -48,8 +49,7 @@ export default function InterviewMethods() {
 
         <section className="container space-y-40">
           <Heading tagName="h2">
-            Die Mehrwerte von Interviews mit Akteurinnen und Akteuren aus dem
-            Vollzug
+            Warum die Praxisperspektive Ihre Regelungen verbessert
           </Heading>
 
           <div className="space-y-32 md:grid md:grid-cols-3 md:space-y-0 md:gap-x-40">
@@ -60,7 +60,7 @@ export default function InterviewMethods() {
                 markdown={dedent`
                 **Wirkung des Vorhabens erhöhen:**
                 
-                Erkenntnisse zur Umsetzungspraxis machen transparent, wie Regelungen im Vollzug wirken.
+                Erkenntnisse zur Umsetzungspraxis machen transparent, wie Regelungen im Vollzug wirken und umgesetzt werden.
               `}
               />
             </div>
@@ -83,8 +83,8 @@ export default function InterviewMethods() {
                 className="ds-label-01-reg"
                 markdown={dedent`
                 **Potentiale heben:**
-                
-                Die Erkenntnisse helfen dabei, Services, Prozesse und Regeln gezielt zu verbessern.
+
+                Auf Basis Ihres Vorhabens helfen die Erkenntnisse dabei, Services, Prozesse und Regeln gezielt zu verbessern.
               `}
               />
             </div>
@@ -109,7 +109,9 @@ export default function InterviewMethods() {
             <AccordionItem headline="Quantitative Interviews">
               <RichText
                 markdown={dedent`
-                Quantitative Interviews dienen der Überprüfung bestehender Annahmen. Sie arbeiten mit standardisierten Fragen und vorgegebenen Antwortoptionen, um vergleichbare und statistisch auswertbare Daten zu erheben. Geeignet zur Messung von Häufigkeiten und Verteilungen.
+                Quantitative Interviews dienen der Überprüfung bestehender Annahmen.
+                
+                Sie arbeiten mit standardisierten Fragen und vorgegebenen Antwortoptionen, um vergleichbare und statistisch auswertbare Daten zu erheben. Geeignet zur Messung von Häufigkeiten und Verteilungen.
               `}
               />
             </AccordionItem>
@@ -117,7 +119,9 @@ export default function InterviewMethods() {
             <AccordionItem headline="Qualitative Interviews">
               <RichText
                 markdown={dedent`
-               Qualitative Interviews dienen der Gewinnung neuer Erkenntnisse. Sie machen Erfahrungen, Perspektiven und Zusammenhänge sichtbar und ermöglichen ein vertieftes Verständnis der Praxis. Die Fragen sind offen, der Gesprächsverlauf flexibel.
+               Qualitative Interviews dienen der Gewinnung neuer Erkenntnisse.
+               
+               Sie machen Erfahrungen, Perspektiven und Zusammenhänge sichtbar und ermöglichen ein vertieftes Verständnis der Praxis. Die Fragen sind offen, der Gesprächsverlauf flexibel.
               `}
               />
             </AccordionItem>

@@ -37,9 +37,15 @@ export default function InterviewMethods() {
         <Hero title="Akteurinnen und Akteure identifizieren und Interviews vorbereiten">
           <p>
             Im folgenden Abschnitt finden Sie eine praxisnahe Anleitung zur
-            strukturierten Vorbereitung und Durchführung von Interviews. Das
-            Angebot wird derzeit weiterentwickelt, einschließlich der
+            strukturierten Vorbereitung und Durchführung von Interviews.
+          </p>
+          <p>
+            Das Angebot wird derzeit weiterentwickelt, einschließlich der
             barrierefreien Optimierung der Vorlagen.
+          </p>
+          <p>
+            Die Inhalte sind auf Basis von den unten aufgeführten Quellen
+            entstanden.
           </p>
         </Hero>
 
@@ -138,52 +144,95 @@ export default function InterviewMethods() {
                 </Heading>
                 <RichText
                   markdown={dedent`
-                  Zu Beginn wird ein Überblick über alle relevanten Akteurinnen und Akteure geschaffen. Ziel ist es, Personen oder Gruppen zu identifizieren, die von der Regelung betroffen sind oder an ihrer Umsetzung beteiligt sind. Dazu gehören sowohl direkt betroffene Akteure als auch solche, die vorbereitende, unterstützende oder steuernde Aufgaben übernehmen. Eine Einteilung nach Rollen hilft Ihnen dabei, die Akteurinnen und Akteure systematisch zu ordnen.
-                  
-                  Eine Einteilung nach Rollen hilft Ihnen dabei, die Akteur:innen systematisch zu ordnen:
-                  - **Wer setzt den Rechtsrahmen?:** Akteurinnen und Akteure, die Gesetze oder Regelungen gestalten oder beeinflussen (z. B. Gerichte, EU-Institutionen).
-                  - **Wer setzt das Gesetz um?:** Akteurinnen und Akteure, die die praktische Umsetzung übernehmen (z. B. Behörden, Vollzugsstellen, private Träger).
-                  - **Wen betrifft das Gesetz?:** Akteurinnen und Akteure, die direkt betroffen sind (z. B. Bürgerinnen und Bürger, Unternehmen).
+                    Zu Beginn wird ein Überblick über alle relevanten Akteurinnen und Akteure geschaffen. Ziel ist es, Personen oder Gruppen zu identifizieren, die von der Regelung betroffen sind oder an ihrer Umsetzung beteiligt sind. Dazu gehören sowohl direkt betroffene Akteure als auch solche, die vorbereitende, unterstützende oder steuernde Aufgaben übernehmen. Eine Einteilung nach Rollen hilft Ihnen dabei, die Akteurinnen und Akteure systematisch zu ordnen.
+                    
+                    Eine Einteilung nach Rollen hilft Ihnen dabei, die Akteur:innen systematisch zu ordnen:
+                    - **Wer setzt den Rechtsrahmen?**
+
+                      Akteurinnen und Akteure, die Gesetze oder Regelungen gestalten oder beeinflussen (z.B. Gerichte, EU-Institutionen).
+                    - **Wer setzt das Gesetz um?**
+                    
+                      Akteurinnen und Akteure, die die praktische Umsetzung übernehmen (z.B. Behörden, Vollzugsstellen, private Träger).
+                    - **Wen betrifft das Gesetz?**
+                    
+                      Akteurinnen und Akteure, die direkt betroffen sind (z.B. Bürgerinnen und Bürger, Unternehmen).
                 `}
                 />
               </NumberedList.Item>
               <NumberedList.Item
                 id="step-2"
                 after={
-                  <InfoBox
-                    className={infoBoxClass}
-                    look="highlight"
-                    badge={{
-                      Icon: FeedOutlined,
-                      text: "Vorlage",
-                      look: "hint",
-                    }}
-                    visual={{
-                      type: "component",
-                      Component: (
-                        <ImageBox
-                          image={{
-                            className: "min-w-208",
-                            url: "/images/interview-leitfaden-vorlage-schritt-2.png",
-                            alternativeText:
-                              "Eine Grafik, die eine beispielhafte Tabelle darstellt.",
-                          }}
-                        />
-                      ),
-                    }}
-                  >
-                    <RichText
-                      markdown={dedent`
-                      Nutzen Sie diese Tabelle zur systematischen Erfassung und Gewichtung Ihrer Gesprächs-partnerinnen und -partner. Dokumentieren Sie hier die Relevanz und den angestrebten Erkenntnisgewinn auf Basis der Leitfragen
-                    `}
-                    />
-                    <DownloadLinkButton
-                      look="link"
-                      to="/documents/interview-leitfaden/Umsetzung_verstehen.docx"
+                  <div className="space-y-40">
+                    <InfoBox
+                      className={infoBoxClass}
+                      look="highlight"
+                      badge={{
+                        Icon: FeedOutlined,
+                        text: "Vorlage",
+                        look: "hint",
+                      }}
+                      visual={{
+                        type: "component",
+                        Component: (
+                          <ImageBox
+                            image={{
+                              className: "min-w-208",
+                              url: "/images/interview-leitfaden-vorlage-schritt-2.png",
+                              alternativeText:
+                                "Eine Grafik, die eine beispielhafte Tabelle darstellt.",
+                            }}
+                          />
+                        ),
+                      }}
                     >
-                      Word-Vorlage
-                    </DownloadLinkButton>
-                  </InfoBox>
+                      <RichText
+                        markdown={dedent`
+                          Nutzen Sie diese Tabelle zur systematischen Erfassung und Gewichtung Ihrer Gesprächs-partnerinnen und -partner. Dokumentieren Sie hier die Relevanz und den angestrebten Erkenntnisgewinn auf Basis der Leitfragen
+                    `}
+                      />
+                      <DownloadLinkButton
+                        look="link"
+                        to="/documents/interview-leitfaden/Umsetzung_verstehen.docx"
+                      >
+                        Word-Vorlage
+                      </DownloadLinkButton>
+                    </InfoBox>
+
+                    <InfoBox
+                      className={infoBoxClass}
+                      look="highlight"
+                      badge={{
+                        Icon: FeedOutlined,
+                        text: "Vorlage",
+                        look: "hint",
+                      }}
+                      visual={{
+                        type: "component",
+                        Component: (
+                          <ImageBox
+                            image={{
+                              className: "min-w-208",
+                              url: "/images/interview-leitfaden-vorlage-buergercheck.png",
+                              alternativeText:
+                                "Eine Grafik, die eine beispielhafte Tabelle darstellt.",
+                            }}
+                          />
+                        ),
+                      }}
+                    >
+                      <RichText
+                        markdown={dedent`
+                          Nutzen Sie die Vorlage zur Zielgruppen-Profil aus dem Bürgercheck, um die Bedürfnisse der betroffenen Akteurinnen und Akteure (Normadressaten) tiefgreifend zu verstehen und diese gezielt zu priorisieren.
+                    `}
+                      />
+                      <DownloadLinkButton
+                        look="link"
+                        to="/documents/interview-leitfaden/Zielgruppenanaylse-Buergercheck.pptx"
+                      >
+                        Word-Vorlage
+                      </DownloadLinkButton>
+                    </InfoBox>
+                  </div>
                 }
               >
                 <Badge>Schritt 2</Badge>
@@ -192,16 +241,18 @@ export default function InterviewMethods() {
                 </Heading>
                 <RichText
                   markdown={dedent`
-                Im nächsten Schritt werden die identifizierten Akteurinnen und Akteure in einer Übersicht festgehalten. Diese dient als Arbeitsgrundlage für die weitere Interviewplanung und hilft, unterschiedliche Perspektiven gezielt abzudecken. Nutzen Sie die folgende Tabelle, um die Ebenen von Betroffenheit und Vollzug präzise abzubilden und relevante Interview-Partnerinnen und Partner zu identifizieren.
+                    Im nächsten Schritt werden die identifizierten Akteurinnen und Akteure in einer Übersicht festgehalten. Diese dient als Arbeitsgrundlage für die weitere Interviewplanung und hilft, unterschiedliche Perspektiven gezielt abzudecken.
 
-                Leitfragen zur Auswahl:
-                - **Betroffenheit:** Wer ist unmittelbar oder mittelbar von der Regelung betroffen?
-                - **Entscheidungskompetenz:** Wer entscheidet oder beeinflusst Entscheidungen im Vollzug?
-                - **Relevanz:** Welche Akteure verfügen über besonderes Fachwissen oder praktische Erfahrung?
-                - **Zielsetzung:** Welches Wissen soll konkret erschlossen werden?
-                - **Praxisnähe** Wer kann konkrete Auswirkungen und Herausforderungen beschreiben?
+                    Nutzen Sie die folgende Tabelle, um die Ebenen von Betroffenheit und Vollzug präzise abzubilden und relevante Interview-Partnerinnen und Partner zu identifizieren.
 
-                **Tipp:** Kooperationen mit Verbänden oder Gewerkschaften erleichtern den Zugang zu spezifischen Zielgruppen – insbesondere bei schwer erreichbaren Akteurinnen und Akteur wie Leistungsempfängern.
+                    Leitfragen zur Auswahl:
+                    - **Betroffenheit:** Wer ist unmittelbar oder mittelbar von der Regelung betroffen? Und wer ist wie stark betroffen?
+                    - **Entscheidungskompetenz:** Wer entscheidet oder beeinflusst Entscheidungen im Vollzug?
+                    - **Relevanz:** Welche Akteure verfügen über besonderes Fachwissen oder praktische Erfahrung?
+                    - **Zielsetzung:** Welches Wissen soll konkret erschlossen werden?
+                    - **Praxisnähe** Wer kann konkrete Auswirkungen und Herausforderungen beschreiben?
+
+                    **Tipp:** Kooperationen mit Verbänden oder Gewerkschaften erleichtern den Zugang zu spezifischen Zielgruppen - insbesondere bei schwer erreichbaren Akteurinnen und Akteur wie Leistungsempfängern.
               `}
                 />
               </NumberedList.Item>
@@ -212,18 +263,18 @@ export default function InterviewMethods() {
                 </Heading>
                 <RichText
                   markdown={dedent`
-                Nach der Vorbereitung treten Sie in den direkten Dialog. Ziel ist es, durch gezieltes Nachfragen die tatsächliche Umsetzungspraxis zu verstehen und blinde Flecken im Vollzug aufzudecken. Das Interview gliedert sich in drei Phasen:
+                    Nach der Vorbereitung treten Sie in den direkten Dialog. Ziel ist es, durch gezieltes Nachfragen die tatsächliche Umsetzungspraxis zu verstehen und blinde Flecken im Vollzug aufzudecken. Das Interview gliedert sich in drei Phasen:
 
-                **Kontaktphase:** Schaffen Sie eine vertrauensvolle Gesprächsatmosphäre. Erläutern Sie nach der Begrüßung kurz Zweck, Ziele und Ablauf des Interviews. 
+                    **Kontaktphase:** Schaffen Sie eine vertrauensvolle Gesprächsatmosphäre. Erläutern Sie nach der Begrüßung kurz Zweck, Ziele und Ablauf des Interviews. 
 
-                **Erhebungsphase:** Beginnen Sie mit offenen Fragen und vertiefen Sie diese gezielt entlang Ihres Leitfadens. Achten Sie auf eine ausgewogene Kombination aus offenen und geschlossenen Fragen.
-                Behandelt werden:
-                - **Kontext:** Aufgaben und Abläufe klären
-                - **Erfahrungen:** Probleme und Stärken identifizieren
-                - **Analyse:** Ursachen herausarbeiten
-                - **Lösungen:** Ansätze und Potenziale bewerten
-                
-                **Ausklang & Dokumentation**: Fassen Sie nach jedem Themenblock die zentralen Inhalte zusammen und dokumentieren Sie diese parallel zum Gespräch. Zum Abschluss danken Sie Ihrem Gegenüber und informieren über das weitere Vorgehen, um eine positive Grundlage für zukünftige Gespräche zu schaffen.
+                    **Erhebungsphase:** Beginnen Sie mit offenen Fragen und vertiefen Sie diese gezielt entlang Ihres Leitfadens. Achten Sie auf eine ausgewogene Kombination aus offenen und geschlossenen Fragen.
+                    Behandelt werden:
+                    - **Kontext:** Aufgaben und Abläufe klären
+                    - **Erfahrungen:** Probleme und Stärken identifizieren
+                    - **Analyse:** Ursachen herausarbeiten
+                    - **Lösungen:** Ansätze und Potenziale bewerten
+                    
+                    **Ausklang & Dokumentation**: Fassen Sie nach jedem Themenblock die zentralen Inhalte zusammen und dokumentieren Sie diese parallel zum Gespräch. Zum Abschluss danken Sie Ihrem Gegenüber und informieren über das weitere Vorgehen, um eine positive Grundlage für zukünftige Gespräche zu schaffen.
               `}
                 />
                 <br></br>
@@ -242,16 +293,16 @@ export default function InterviewMethods() {
                 <AccordionItem headline="Wortgetreues Transkript">
                   <RichText
                     markdown={dedent`
-                  Beim Transkript wird das Interview vollständig und möglichst wortgetreu verschriftlicht.
-                  
-                  **Vorteile:**
-                  - hohe Genauigkeit und Nachvollziehbarkeit
-                  - detaillierte Auswertung auch zu einem späteren Zeitpunkt möglich
-                  - besonders geeignet bei komplexen oder sensiblen Themen
+                      Beim Transkript wird das Interview vollständig und möglichst wortgetreu verschriftlicht.
+                      
+                      **Vorteile:**
+                      - hohe Genauigkeit und Nachvollziehbarkeit
+                      - detaillierte Auswertung auch zu einem späteren Zeitpunkt möglich
+                      - besonders geeignet bei komplexen oder sensiblen Themen
 
-                  **Nachteile:**
-                  - sehr zeit- und ressourcenintensiv
-                  - hoher Aufwand bei Datenschutz und Anonymisierung
+                      **Nachteile:**
+                      - sehr zeit- und ressourcenintensiv
+                      - hoher Aufwand bei Datenschutz und Anonymisierung
                 `}
                   />
                 </AccordionItem>
@@ -259,16 +310,16 @@ export default function InterviewMethods() {
                 <AccordionItem headline="Inhaltsnahe Mitschrift / Ergebnisprotokoll">
                   <RichText
                     markdown={dedent`
-                  Hierbei werden die zentralen Aussagen, Argumente und Beispiele während oder unmittelbar nach dem Interview schriftlich festgehalten.
+                      Hierbei werden die zentralen Aussagen, Argumente und Beispiele während oder unmittelbar nach dem Interview schriftlich festgehalten.
 
-                  **Vorteile:**
-                  - deutlich geringerer Aufwand
-                  - schnelle Weiterverarbeitung der Ergebnisse
-                  - gut geeignet bei klarer Fragestellung und begrenzter Interviewanzahl
-                  
-                  **Nachteile:**
-                  - geringere Detailtiefe
-                  - stärkere Abhängigkeit von der Interpretation der interviewführenden Person
+                      **Vorteile:**
+                      - deutlich geringerer Aufwand
+                      - schnelle Weiterverarbeitung der Ergebnisse
+                      - gut geeignet bei klarer Fragestellung und begrenzter Interviewanzahl
+                      
+                      **Nachteile:**
+                      - geringere Detailtiefe
+                      - stärkere Abhängigkeit von der Interpretation der interviewführenden Person
                 `}
                   />
                 </AccordionItem>
@@ -276,17 +327,17 @@ export default function InterviewMethods() {
                 <AccordionItem headline="Audioaufzeichnung">
                   <RichText
                     markdown={dedent`
-                  Das Interview wird aufgezeichnet und bei Bedarf später ausgewertet oder teilweise transkribiert.
-                  
-                  Voraussetzungen dafür sind:
-                  - vorherige ausdrückliche Einwilligung der befragten Person
-                  - klare Regelung zur Speicherung, Nutzung und Löschung
+                      Das Interview wird aufgezeichnet und bei Bedarf später ausgewertet oder teilweise transkribiert.
+                      
+                      Voraussetzungen dafür sind:
+                      - vorherige ausdrückliche Einwilligung der befragten Person
+                      - klare Regelung zur Speicherung, Nutzung und Löschung
 
-                  **Vorteile:**
-                  - Entlastung während des Gesprächs
+                      **Vorteile:**
+                      - Entlastung während des Gesprächs
 
-                  **Nachteile:**
-                  - Möglichkeit, Aussagen später zu überprüfen
+                      **Nachteile:**
+                      - Möglichkeit, Aussagen später zu überprüfen
                 `}
                   />
                 </AccordionItem>
@@ -294,20 +345,20 @@ export default function InterviewMethods() {
                 <AccordionItem headline="Videoaufzeichnung">
                   <RichText
                     markdown={dedent`
-                  Videoaufzeichnungen in der Praxis Videoformate sind aufgrund des hohen Datenschutz-Aufwands selten. Prüfen Sie vorab, ob die Relevanz für die Regelungserarbeitung den Aufwand rechtfertigt.
-                  
-                  Voraussetzungen dafür sind:
-                  - Vertraulichkeit zugesichert und eingehalten wird,
-                  - personenbezogene Daten anonymisiert werden,
-                  - die Befragten über Art und Zweck der Dokumentation informiert sind.
+                      Videoaufzeichnungen in der Praxis Videoformate sind aufgrund des hohen Datenschutz-Aufwands selten. Prüfen Sie vorab, ob die Relevanz für die Regelungserarbeitung den Aufwand rechtfertigt.
+                      
+                      Voraussetzungen dafür sind:
+                      - Vertraulichkeit zugesichert und eingehalten wird,
+                      - personenbezogene Daten anonymisiert werden,
+                      - die Befragten über Art und Zweck der Dokumentation informiert sind.
 
-                  **Vorteile:**
-                  - zusätzliche Informationen durch Mimik und Gestik
+                      **Vorteile:**
+                      - zusätzliche Informationen durch Mimik und Gestik
 
-                  **Nachteile:**
-                  - hohe Hemmschwelle für Befragte
-                  - erhöhter Datenschutz- und Organisationsaufwand
-                  - meist nicht erforderlich für die Regelungserarbeitung
+                      **Nachteile:**
+                      - hohe Hemmschwelle für Befragte
+                      - erhöhter Datenschutz- und Organisationsaufwand
+                      - meist nicht erforderlich für die Regelungserarbeitung
                 `}
                   />
                 </AccordionItem>
@@ -320,7 +371,7 @@ export default function InterviewMethods() {
                 </Heading>
                 <RichText
                   markdown={dedent`
-                In mehreren Gesprächen mit einer Dauer von 45 – 60 Minuten kommen eine Menge Informationen zusammen. Im Anschluss werden die gesammelten Informationen ausgewertet. In der Regel lassen sich aus mehreren Gesprächen zentrale Muster, Herausforderungen und Erfolgsfaktoren ableiten. Nutzen Sie ggf. die [Methode Individuelle Gesprächsauswertung](https://www.oeffentliches-gestalten.de/buch/erkennen/erkenntnisse-formulieren#individuelle-gespr%C3%A4chsauswertung), um Schlüsselaspekte herauszuarbeiten.
+                  In mehreren Gesprächen mit einer Dauer von 45 - 60 Minuten kommen eine Menge Informationen zusammen. Im Anschluss werden die gesammelten Informationen ausgewertet. In der Regel lassen sich aus mehreren Gesprächen zentrale Muster, Herausforderungen und Erfolgsfaktoren ableiten. Nutzen Sie ggf. die [Methode Individuelle Gesprächsauswertung](https://www.oeffentliches-gestalten.de/buch/erkennen/erkenntnisse-formulieren#individuelle-gespr%C3%A4chsauswertung), um Schlüsselaspekte herauszuarbeiten.
               `}
                 />
               </NumberedList.Item>
@@ -380,8 +431,9 @@ export default function InterviewMethods() {
             <RichText
               markdown={dedent`
             - [Öffentliches Gestalten](https://www.oeffentliches-gestalten.de/)
+            - [Bürgercheck](https://drive.google.com/file/d/1SZ8v2ZV2HpN6IqnzmRmSxekSsm_zH7qZ/view)
             - [Servicehandbuch](https://www.digitale-verwaltung.de/SharedDocs/downloads/Webs/DV/DE/servicehandbuch.pdf?__blob=publicationFile&v=5#page=18)
-            - [Servicestandard – Handbuch](https://servicestandard.gov.de/handbuch/#aus-der-praxis/)
+            - [Servicestandard - Handbuch](https://servicestandard.gov.de/handbuch/#aus-der-praxis/)
           `}
             />
           </section>
