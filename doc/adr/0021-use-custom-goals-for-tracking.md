@@ -1,4 +1,4 @@
-# 21. Use custom goals for tracking.
+# 21. Use custom goals for tracking
 
 ## Status
 
