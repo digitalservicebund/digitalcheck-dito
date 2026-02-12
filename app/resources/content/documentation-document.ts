@@ -2,7 +2,7 @@ import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
 
 export const documentationDocument = {
-  filename: "Dokumentation_der_Digitaltauglichkeit_V2.docx",
+  filename: "Dokumentation_der_Digitaltauglichkeit.docx",
   placeholder: "Hier ausfüllen",
   placeholderOptional: "Hier ausfüllen (falls relevant)",
   introduction: {

@@ -38,7 +38,7 @@ async function downloadDocumentAndGetText(
   await button.click();
   const download = await downloadPromise;
   expect(download.suggestedFilename()).toBe(
-    "Dokumentation_der_Digitaltauglichkeit_V2.docx",
+    "Dokumentation_der_Digitaltauglichkeit.docx",
   );
 
   await download.saveAs(filePath);
