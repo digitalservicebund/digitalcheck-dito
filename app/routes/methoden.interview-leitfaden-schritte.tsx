@@ -122,7 +122,7 @@ export default function InterviewMethods() {
                             className: "min-w-208",
                             url: "/images/interview-leitfaden-vorlage.png",
                             alternativeText:
-                              "Eine Grafik, die eine beispielhafte Stakeholder-Map darstellt. Bestehend aus drei Kreisen die ineinander liegen. Im innersten Kreis: Normadressaten, im mittleren Kreis: Vollzugsebene und im äußersten Kreis: Rechts-Akterinnen und Akteure",
+                              "Eine Grafik, die eine beispielhafte Stakeholder-Map darstellt.",
                           }}
                         />
                       ),
@@ -185,7 +185,7 @@ export default function InterviewMethods() {
                               className: "min-w-208",
                               url: "/images/interview-leitfaden-vorlage-schritt-2.png",
                               alternativeText:
-                                "Eine Grafik, die eine beispielhafte Tabelle darstellt.",
+                                "Eine Grafik, die eine beispielhafte Tabelle von Akteurinnen und Akteuren darstellt.",
                             }}
                           />
                         ),
@@ -220,7 +220,7 @@ export default function InterviewMethods() {
                               className: "min-w-208",
                               url: "/images/interview-leitfaden-vorlage-buergercheck.png",
                               alternativeText:
-                                "Eine Grafik, die eine beispielhafte Tabelle darstellt.",
+                                "Eine Grafik, die eine beispielhafte Tabelle zum besseren Verständnis von betroffenen Akteurinnen und Akteuren darstellt.",
                             }}
                           />
                         ),
