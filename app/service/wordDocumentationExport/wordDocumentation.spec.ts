@@ -1,4 +1,4 @@
-import { HeadingLevel, PatchType, TextRun } from "docx";
+import { HeadingLevel, IRunOptions, PatchType, TextRun } from "docx";
 import { describe, expect, it, vi } from "vitest";
 import { documentationDocument } from "~/resources/content/documentation-document";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
@@ -10,6 +10,7 @@ import {
   buildPrinciplePatches,
   indentOptions,
   stringToTextRuns,
+  toHyperlinkPatch,
   toParagraphPatch,
 } from "./wordDocumentation";
 
@@ -18,7 +19,7 @@ const { principlePages } = digitalDocumentation;
 const [POSITIVE_ANSWER, NEGATIVE_ANSWER, IRRELEVANT_ANSWER] =
   principlePages.radioOptions;
 
-type TextRunOptions = { text: string; break?: number };
+type TextRunOptions = { text: string; break?: number; options?: IRunOptions };
 type TextRunLike = {
   type: "TextRun";
 } & TextRunOptions;
@@ -42,12 +43,23 @@ type BookmarkLike = {
   type: "Bookmark";
 } & BookmarkOptions;
 
+type ExternalHyperlinkLike = {
+  type: "ExternalHyperlink";
+} & ExternalHyperlinkOptions;
+
+type ExternalHyperlinkOptions = {
+  children: TextRunLike[];
+  link: string;
+};
+
 // Helper function to access the paragraph mock objects without TS errors
 const asTextRunLike = (textRun: unknown): TextRunLike => textRun as TextRunLike;
 const asParagraphLike = (paragraph: unknown): ParagraphLike =>
   paragraph as ParagraphLike;
 const asBookmarkLike = (bookmark: unknown): BookmarkLike =>
   bookmark as BookmarkLike;
+const asExternalHyperlinkLike = (hyperlink: unknown): ExternalHyperlinkLike =>
+  hyperlink as ExternalHyperlinkLike;
 
 const getTextFromTextRun = (textRun: unknown): string =>
   asTextRunLike(textRun).text;
@@ -57,6 +69,14 @@ const getTextFromBookmark = (bookmark: unknown): string =>
   getTextFromTextRun(
     asBookmarkLike(asParagraphLike(bookmark).children[0]).children[0],
   );
+const getTextFromHyperlink = (hyperlink: unknown): string => {
+  return getTextFromTextRun(
+    asExternalHyperlinkLike(asParagraphLike(hyperlink).children[0]),
+  );
+};
+
+// const getLinkFromHyperlink = (hyperlink: unknown): string =>
+//   asExternalHyperlinkLike(hyperlink).link;
 
 // Mock docx with lightweight test doubles exposing constructor options
 vi.mock("docx", async (importOriginal) => {
@@ -91,11 +111,19 @@ vi.mock("docx", async (importOriginal) => {
     }
   }
 
+  class ExternalHyperlinkMock {
+    type = "ExternalHyperlink";
+    constructor(options: ExternalHyperlinkOptions) {
+      Object.assign(this, options);
+    }
+  }
+
   return {
     ...module,
     TextRun: vi.fn(TextRunMock),
     Paragraph: vi.fn(ParagraphMock),
     Bookmark: vi.fn(BookmarkMock),
+    ExternalHyperlink: vi.fn(ExternalHyperlinkMock),
   };
 });
 
@@ -428,6 +456,55 @@ describe("wordDocumentation", () => {
       expect(getTextFromTextRun(ownParagraphs2)).toBe("2");
       const ownReasoning2 = aspectsChildrenWithOwn[21];
       expect(getTextFromParagraph(ownReasoning2)).toBe("Own r2");
+    });
+  });
+
+  describe("hyperlinks", () => {
+    it("toHyperlinkPatch creates a paragraph with an email hyperlink", () => {
+      vi.clearAllMocks();
+      const emailAddress = "test@example.com";
+      const hyperlinkPatch = toHyperlinkPatch(emailAddress);
+
+      expect(hyperlinkPatch.type).toBe(PatchType.PARAGRAPH);
+      expect(hyperlinkPatch.children).toHaveLength(1);
+
+      const hyperlink = asExternalHyperlinkLike(hyperlinkPatch.children[0]);
+      expect(hyperlink.type).toBe("ExternalHyperlink");
+      expect(hyperlink.link).toBe("mailto:" + emailAddress);
+      expect(getTextFromHyperlink(hyperlinkPatch.children[0])).toBe(
+        emailAddress,
+      );
+    });
+
+    it("toHyperlinkPatch applies Hyperlink style to the text runs", () => {
+      vi.clearAllMocks();
+      const emailAddress = "contact@domain.org";
+      toHyperlinkPatch(emailAddress);
+
+      expect(TextRun).toHaveBeenCalledWith(
+        expect.objectContaining({
+          text: emailAddress,
+          style: "Hyperlink",
+        }),
+      );
+    });
+
+    it("toHyperlinkPatch handles multiline email addresses by splitting into TextRuns", () => {
+      vi.clearAllMocks();
+      const multilineEmail = "email1@test.com\nemail2@test.com";
+      toHyperlinkPatch(multilineEmail);
+
+      expect(TextRun).toHaveBeenCalledTimes(2);
+      expect(TextRun).toHaveBeenCalledWith({
+        text: "email1@test.com",
+        break: 0,
+        style: "Hyperlink",
+      });
+      expect(TextRun).toHaveBeenCalledWith({
+        text: "email2@test.com",
+        break: 1,
+        style: "Hyperlink",
+      });
     });
   });
 
