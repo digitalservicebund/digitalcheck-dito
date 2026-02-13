@@ -269,7 +269,7 @@ export default function InterviewMethods() {
                 </Heading>
                 <RichText
                   markdown={dedent`
-                    Nach der Vorbereitung treten Sie in den direkten Dialog. Ziel ist es, durch gezieltes Nachfragen die tatsächliche Umsetzungspraxis zu verstehen und blinde Flecken im Vollzug aufzudecken. Das Interview gliedert sich in drei Phasen:
+                    Nach der Vorbereitung laden Sie Ihre Gesprächspartnerinnen und Gesprächspartner zum Interview ein und treten in den direkten Dialog. Ziel ist es, durch gezieltes Nachfragen die tatsächliche Umsetzungspraxis zu verstehen und blinde Flecken im Vollzug aufzudecken. Das Interview gliedert sich in drei Phasen:
 
                     **Kontaktphase:** Schaffen Sie eine vertrauensvolle Gesprächsatmosphäre. Erläutern Sie nach der Begrüßung kurz Zweck, Ziele und Ablauf des Interviews. 
 
