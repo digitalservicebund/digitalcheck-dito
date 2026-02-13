@@ -33,8 +33,11 @@ export default function InterviewMethods() {
   return (
     <>
       <MetaTitle prefix={ROUTE_METHODS_INTERVIEW_METHODS_STEPS.title} />
-      <main className="mb-80 space-y-80">
-        <Hero title="Akteurinnen und Akteure identifizieren und Interviews vorbereiten">
+      <main className="space-y-80">
+        <Hero
+          className="mb-0 lg:mb-80"
+          title="Akteurinnen und Akteure identifizieren und Interviews vorbereiten"
+        >
           <p>
             Im folgenden Abschnitt finden Sie eine praxisnahe Anleitung zur
             strukturierten Vorbereitung und Durchführung von Interviews.
@@ -66,13 +69,13 @@ export default function InterviewMethods() {
                       ></ToC.Item>
                       <ToC.Item
                         href="#step-2"
-                        title="Ergebnisse in einer Übersicht fest"
+                        title="Halten Sie die Akteurinnen und Akteure in einer Übersicht fest"
                         numbered
                       ></ToC.Item>
                       <ToC.Item
                         numbered
                         href="#step-3"
-                        title="Gespräche führen"
+                        title="Gespräche durchführen"
                       ></ToC.Item>
                       <ToC.Item
                         numbered
@@ -88,7 +91,10 @@ export default function InterviewMethods() {
             </ToC>
           }
         >
-          <section className="container space-y-40" id="anleitung">
+          <section
+            className="container mt-80 space-y-40 lg:mt-0"
+            id="anleitung"
+          >
             <div>
               <Heading tagName="h2" className="flex gap-32">
                 <DriveFileRenameOutline className="size-40" />
@@ -144,7 +150,7 @@ export default function InterviewMethods() {
                 </Heading>
                 <RichText
                   markdown={dedent`
-                    Zu Beginn wird ein Überblick über alle relevanten Akteurinnen und Akteure geschaffen. Ziel ist es, Personen oder Gruppen zu identifizieren, die von der Regelung betroffen sind oder an ihrer Umsetzung beteiligt sind. Dazu gehören sowohl direkt betroffene Akteure als auch solche, die vorbereitende, unterstützende oder steuernde Aufgaben übernehmen. Eine Einteilung nach Rollen hilft Ihnen dabei, die Akteurinnen und Akteure systematisch zu ordnen.
+                    Zu Beginn wird ein Überblick über alle relevanten Akteurinnen und Akteure geschaffen. Ziel ist es, Personen oder Gruppen zu identifizieren, die von der Regelung betroffen sind oder an ihrer Umsetzung beteiligt sind. Dazu gehören sowohl direkt betroffene Akteure als auch solche, die vorbereitende, unterstützende oder steuernde Aufgaben übernehmen.
                     
                     Eine Einteilung nach Rollen hilft Ihnen dabei, die Akteur:innen systematisch zu ordnen:
                     - **Wer setzt den Rechtsrahmen?**
@@ -229,7 +235,7 @@ export default function InterviewMethods() {
                         look="link"
                         to="/documents/interview-leitfaden/Zielgruppenanaylse-Buergercheck.pptx"
                       >
-                        Word-Vorlage
+                        Powerpoint-Vorlage
                       </DownloadLinkButton>
                     </InfoBox>
                   </div>
@@ -252,7 +258,7 @@ export default function InterviewMethods() {
                     - **Zielsetzung:** Welches Wissen soll konkret erschlossen werden?
                     - **Praxisnähe** Wer kann konkrete Auswirkungen und Herausforderungen beschreiben?
 
-                    **Tipp:** Kooperationen mit Verbänden oder Gewerkschaften erleichtern den Zugang zu spezifischen Zielgruppen - insbesondere bei schwer erreichbaren Akteurinnen und Akteur wie Leistungsempfängern.
+                    **Tipp:** Kooperationen mit Verbänden oder Gewerkschaften erleichtern den Zugang zu spezifischen Zielgruppen - insbesondere bei schwer erreichbaren Akteurinnen und Akteuren wie Leistungsempfängern.
               `}
                 />
               </NumberedList.Item>
@@ -338,6 +344,7 @@ export default function InterviewMethods() {
 
                       **Nachteile:**
                       - Möglichkeit, Aussagen später zu überprüfen
+                      - Transkription und spätere Auswertung bedeuten einen großen zeitlichen Invest
                 `}
                   />
                 </AccordionItem>
@@ -347,7 +354,7 @@ export default function InterviewMethods() {
                     markdown={dedent`
                       Videoaufzeichnungen in der Praxis Videoformate sind aufgrund des hohen Datenschutz-Aufwands selten. Prüfen Sie vorab, ob die Relevanz für die Regelungserarbeitung den Aufwand rechtfertigt.
                       
-                      Voraussetzungen dafür sind:
+                      Voraussetzungen dafür sind, dass:
                       - Vertraulichkeit zugesichert und eingehalten wird,
                       - personenbezogene Daten anonymisiert werden,
                       - die Befragten über Art und Zweck der Dokumentation informiert sind.
@@ -428,14 +435,31 @@ export default function InterviewMethods() {
 
           <section className="container space-y-8" id="references">
             <Heading tagName="h2">Relevante Quellen</Heading>
-            <RichText
-              markdown={dedent`
-            - [Öffentliches Gestalten](https://www.oeffentliches-gestalten.de/)
-            - [Bürgercheck](https://drive.google.com/file/d/1SZ8v2ZV2HpN6IqnzmRmSxekSsm_zH7qZ/view)
-            - [Servicehandbuch](https://www.digitale-verwaltung.de/SharedDocs/downloads/Webs/DV/DE/servicehandbuch.pdf?__blob=publicationFile&v=5#page=18)
-            - [Servicestandard - Handbuch](https://servicestandard.gov.de/handbuch/#aus-der-praxis/)
-          `}
-            />
+            <ul>
+              <li>
+                <NewTabLink to="https://www.oeffentliches-gestalten.de">
+                  Öffentliches Gestalten
+                </NewTabLink>
+              </li>
+              <li>
+                <NewTabLink to="https://www.digitale-verwaltung.de/SharedDocs/downloads/Webs/DV/DE/servicehandbuch.pdf?__blob=publicationFile&v=5#page=18">
+                  Servicehandbuch
+                </NewTabLink>
+              </li>
+              <li>
+                <NewTabLink to="https://servicestandard.gov.de/handbuch/#aus-der-praxis">
+                  Servicestandard - Handbuch
+                </NewTabLink>
+              </li>
+              <li>
+                <DownloadLinkButton
+                  look="link"
+                  to="/documents/interview-leitfaden/Buergercheck.pdf"
+                >
+                  Bürgercheck
+                </DownloadLinkButton>
+              </li>
+            </ul>
           </section>
         </SidebarContainer>
       </main>

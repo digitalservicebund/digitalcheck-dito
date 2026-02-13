@@ -138,7 +138,7 @@ const DetailsSummaryList = ({ title, items }: DetailsSummaryListProps) => (
 InfoBox.DetailsSummaryList = DetailsSummaryList;
 
 const LinkList = ({ links }: { links: ContentLink[] }) => (
-  <ButtonContainer className="mt-24">
+  <ButtonContainer className="mt-auto pt-24">
     {links.map((link) => {
       const { to, text, ...rest } = link;
       if (link.download)
