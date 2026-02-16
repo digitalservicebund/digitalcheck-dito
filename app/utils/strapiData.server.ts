@@ -68,7 +68,7 @@ export type PrinzipAspekt = {
   Kurzbezeichnung: string;
   Beschreibung: string;
   Nummer: string;
-  Text: Node[];
+  Text?: Node[];
   Leitfragen?: Node[];
   Formulierungsbeispiel?: Node[];
   Beispiel?: AbsatzWithParagraph;

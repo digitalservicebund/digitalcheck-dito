@@ -57,10 +57,12 @@ export default function getDetailsSummaryProps(
     const identifier = slugify(aspekt.Titel);
     const children = (
       <div className="space-y-4 [&_p,&_ul]:mb-8">
-        <BlocksRenderer
-          content={aspekt.Text}
-          modifiers={{ italic: ItalicModifier }}
-        />
+        {aspekt.Text && (
+          <BlocksRenderer
+            content={aspekt.Text}
+            modifiers={{ italic: ItalicModifier }}
+          />
+        )}
         {aspekt.Leitfragen && (
           <>
             <h4 className="ds-label-02-bold">
