@@ -8,6 +8,7 @@ on:
 jobs:
   link-checker:
     runs-on: ubuntu-latest
+    permissions: {}
     steps:
       - name: Link Checker
         uses: digitalservicebund/link-checker-gha@fe82c6085f208ac7e2a9d4be58b5cf87bad8e9c8
