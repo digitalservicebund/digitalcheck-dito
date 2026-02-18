@@ -273,15 +273,42 @@ export const support = {
               {
                 icon: TimerOutlined,
                 title: "Nächste Termine",
-                text: dedent`
-                  - **Montag, 12. Januar 2026**  
-                  11:00 – 12:30 Uhr
-                  Online
-
-                  - **Mittwoch, 21. Januar 2026**  
-                  15:00 - 16:30 Uhr
-                  Online
-                `,
+                text: [
+                  {
+                    date: "Mittwoch, 01.04.2026",
+                    time: "10:30 - 12:00 Uhr",
+                    location: "online",
+                  },
+                  {
+                    date: "Montag, 15.04.2026",
+                    time: "10:00 - 11:30 Uhr",
+                    location: "online",
+                  },
+                  {
+                    date: "Montag, 20.04.2026",
+                    time: "13:00 - 14:30 Uhr",
+                    location: "online",
+                  },
+                  {
+                    date: "Mittwoch, 06.05.2026",
+                    time: "10:00 - 11:30 Uhr",
+                    location: "online",
+                  },
+                  {
+                    date: "Mittwoch, 13.05.2026",
+                    time: "10:00 - 11:30 Uhr",
+                    location: "online",
+                  },
+                  {
+                    date: "Montag, 18.05.2026",
+                    time: "13:00 - 14:30 Uhr",
+                    location: "online",
+                  },
+                ]
+                  .map((appointment) => {
+                    return `- **${appointment.date}**<br>${appointment.time}, ${appointment.location}`;
+                  })
+                  .join("\n"),
               },
               {
                 icon: CheckCircleOutlined,
@@ -327,7 +354,7 @@ Mit freundlichen Grüßen
                 icon: TimerOutlined,
                 title: "Nächste Termine",
                 text: dedent`
-                  Wir planen bald neue Termine für Schulungen in 2025. Schreiben Sie uns eine E-Mail und wir setzen Sie auf die Warteliste.
+                  Wir planen bald neue Termine. Schreiben Sie uns eine E-Mail und wir setzen Sie auf die Warteliste.
 
                   Sie können sich bis dahin das [Schulungsmaterial ansehen](https://github.com/digitalservicebund/digitalcheck-content/tree/main/src/online-schulungen).
                 `,
