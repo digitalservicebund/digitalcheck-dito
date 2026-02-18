@@ -28,7 +28,7 @@ export const preCheck = {
       },
       {
         title: "Was ist Interoperabilität?",
-        text: "Die EU-Anforderungen zur Interoperabilität beschreiben die Fähigkeit von Verwaltungen und öffentlichen Einrichtungen innerhalb der EU, effektiv zusammenzuarbeiten und Informationen auszutauschen. Sie ermöglicht, dass digitale öffentliche Dienstleistungen über Länder-, Sektor- und Organisationsgrenzen hinweg bereitgestellt werden können.",
+        text: "Interoperabilität macht ein digitales Europa ohne Grenzen möglich, in dem Behörden nahtlos Daten austauschen können. Ob Umzug oder Firmengründung im Ausland – Verwaltungsakte lassen sich EU-weit einfach, sicher und vollständig online erledigen. Das spart Zeit und Kosten. Grundlage dafür ist die Verordnung für ein interoperables Europa (EU) 2024/903.",
       },
     ],
     buttonText: "Vorprüfung starten",
