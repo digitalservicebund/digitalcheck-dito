@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useMemo, useState } from "react";
 import PrincipleHighlightContext from "~/contexts/PrincipleHighlightContext";
 import { BasePrinzip } from "~/utils/strapiData.server";
 
@@ -15,19 +15,28 @@ export default function PrincipleHighlightProvider({
   principlesToShow,
   useAnchorLinks = true,
 }: Readonly<PrincipleHighlightProviderProps>) {
-  // This ID is used to track which highlight was clicked on to provide a back link
+  // This ID is used to track which highlight was clicked on to provide a backlink
   const [activeHighlight, setActiveHighlight] = useState<string | null>(null);
 
+  const value = useMemo(
+    () => ({
+      principlesToShow,
+      activeHighlight,
+      setActiveHighlight,
+      useAnchorLinks,
+      absatzId,
+    }),
+    [
+      principlesToShow,
+      activeHighlight,
+      setActiveHighlight,
+      useAnchorLinks,
+      absatzId,
+    ],
+  );
+
   return (
-    <PrincipleHighlightContext.Provider
-      value={{
-        principlesToShow,
-        activeHighlight,
-        setActiveHighlight,
-        useAnchorLinks,
-        absatzId,
-      }}
-    >
+    <PrincipleHighlightContext.Provider value={value}>
       {children}
     </PrincipleHighlightContext.Provider>
   );
