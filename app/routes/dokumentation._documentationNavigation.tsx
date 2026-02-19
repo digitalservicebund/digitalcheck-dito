@@ -103,7 +103,11 @@ export default function LayoutWithDocumentationNavigation() {
                     <Nav.Item
                       key="principles"
                       disabled={isNavigationDisabled}
-                      subItems={<Nav.Items>{route.map(getNavItem)}</Nav.Items>}
+                      subItems={
+                        <Nav.Items>
+                          {route.map((element) => getNavItem(element))}
+                        </Nav.Items>
+                      }
                     >
                       {digitalDocumentation.navigation.principles}
                     </Nav.Item>
