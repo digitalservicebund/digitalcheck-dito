@@ -19,6 +19,7 @@ import RichText from "~/components/RichText";
 import Separator from "~/components/Separator";
 import Textarea from "~/components/Textarea";
 import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider.tsx";
+import { PrincipleNumber } from "~/resources/constants";
 import { examples } from "~/resources/content/beispiele.ts";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
@@ -364,8 +365,10 @@ function IrrelevantAnswerFormElements({
 
 function PrincipleWithExample({
   prinzip,
+  displayNumber,
 }: Readonly<{
   prinzip: PrinzipWithAspekteAndExample;
+  displayNumber: number;
 }>) {
   const erfuellungenToShow = prinzip.Beispiel.PrinzipErfuellungen?.filter(
     (erfuellung) => erfuellung.Prinzip?.Nummer === prinzip.Nummer,
@@ -373,7 +376,9 @@ function PrincipleWithExample({
 
   return (
     <div className="space-y-8">
-      <Badge principleNumber={prinzip.Nummer}>{principlePages.badge}</Badge>
+      <Badge principleNumber={prinzip.Nummer}>
+        Prinzip {displayNumber}
+      </Badge>
       <Heading
         text={prinzip.Name}
         tagName="h1"
@@ -429,13 +434,16 @@ export default function DocumentationPrinciple() {
     useOutletContext<NavigationContext>();
   const { documentationData } = useDocumentationData();
 
-  const prinzip = prinzips.find(
+  const prinzipIndex = prinzips.findIndex(
     ({ URLBezeichnung }) => URLBezeichnung === principleId,
   );
 
-  if (!prinzip)
+  if (prinzipIndex === -1)
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw new Response("No Prinzip for slug found", { status: 404 });
+
+  const prinzip = prinzips[prinzipIndex];
+  const displayNumber = prinzipIndex + 1;
 
   const principleData = documentationData?.principles?.find(
     (principle) => principle.id === prinzip.documentId,
@@ -505,7 +513,7 @@ export default function DocumentationPrinciple() {
     <>
       <MetaTitle prefix={`Dokumentation: ${prinzip.Name}`} />
       <div className="space-y-40">
-        <PrincipleWithExample prinzip={prinzip} />
+        <PrincipleWithExample prinzip={prinzip} displayNumber={displayNumber} />
 
         <Separator />
 

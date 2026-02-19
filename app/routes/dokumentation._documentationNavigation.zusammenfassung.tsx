@@ -8,18 +8,25 @@ import InfoBoxList from "~/components/InfoBoxList";
 import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
+import { useFederalState } from "~/contexts/FederalStateContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
   type Route,
+  ROUTE_DOCUMENTATION_AUSWIRKUNGEN,
+  ROUTE_DOCUMENTATION_ERFORDERLICHKEIT,
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_SUMMARY,
   ROUTE_DOCUMENTATION_TITLE,
+  ROUTE_DOCUMENTATION_ZWECKMAESSIGKEIT,
 } from "~/resources/staticRoutes";
 import {
+  type Auswirkungen,
+  type Erforderlichkeit,
   type Participation,
   type PolicyTitle,
   type Principle,
   type PrincipleReasoning,
+  type Zweckmaessigkeit,
 } from "~/routes/dokumentation/documentationDataSchema";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
@@ -27,7 +34,7 @@ import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useDocumentationData } from "./dokumentation/documentationDataHook";
 
-const { summary } = digitalDocumentation;
+const { summary, brandenburg } = digitalDocumentation;
 
 const createInfoBoxItem = ({
   route,
@@ -132,6 +139,51 @@ function ParticipationContent({
   );
 }
 
+function ErforderlichkeitContent({
+  erforderlichkeit,
+}: {
+  erforderlichkeit: Erforderlichkeit;
+}) {
+  return (
+    <Answer
+      heading={digitalDocumentation.brandenburg.erforderlichkeit.textField.label}
+      answers={[
+        { prefix: summary.answerPrefix, answer: erforderlichkeit.content },
+      ]}
+    />
+  );
+}
+
+function ZweckmaessigkeitContent({
+  zweckmaessigkeit,
+}: {
+  zweckmaessigkeit: Zweckmaessigkeit;
+}) {
+  return (
+    <Answer
+      heading={digitalDocumentation.brandenburg.zweckmaessigkeit.textField.label}
+      answers={[
+        { prefix: summary.answerPrefix, answer: zweckmaessigkeit.content },
+      ]}
+    />
+  );
+}
+
+function AuswirkungenContent({
+  auswirkungen,
+}: {
+  auswirkungen: Auswirkungen;
+}) {
+  return (
+    <Answer
+      heading={digitalDocumentation.brandenburg.auswirkungen.textField.label}
+      answers={[
+        { prefix: summary.answerPrefix, answer: auswirkungen.content },
+      ]}
+    />
+  );
+}
+
 function PrincipleContent({
   principle,
   prinzip,
@@ -211,6 +263,37 @@ export default function DocumentationSummary() {
     useOutletContext<NavigationContext>();
 
   const { documentationData } = useDocumentationData();
+  const { currentState } = useFederalState();
+
+  const brandenburgItems: InfoBoxProps[] =
+    currentState === "brandenburg"
+      ? [
+          createInfoBoxItem({
+            route: ROUTE_DOCUMENTATION_ERFORDERLICHKEIT,
+            content: documentationData.erforderlichkeit?.content ? (
+              <ErforderlichkeitContent
+                erforderlichkeit={documentationData.erforderlichkeit}
+              />
+            ) : null,
+          }),
+          createInfoBoxItem({
+            route: ROUTE_DOCUMENTATION_ZWECKMAESSIGKEIT,
+            content: documentationData.zweckmaessigkeit?.content ? (
+              <ZweckmaessigkeitContent
+                zweckmaessigkeit={documentationData.zweckmaessigkeit}
+              />
+            ) : null,
+          }),
+          createInfoBoxItem({
+            route: ROUTE_DOCUMENTATION_AUSWIRKUNGEN,
+            content: documentationData.auswirkungen?.content ? (
+              <AuswirkungenContent
+                auswirkungen={documentationData.auswirkungen}
+              />
+            ) : null,
+          }),
+        ]
+      : [];
 
   const items: InfoBoxProps[] = [
     createInfoBoxItem({
@@ -230,7 +313,8 @@ export default function DocumentationSummary() {
           />
         ) : null,
     }),
-    ...prinzips.map((prinzip) => {
+    ...brandenburgItems,
+    ...prinzips.map((prinzip, index) => {
       const principleRoute = routes
         .flat()
         .find((route) => route.url.endsWith(prinzip.URLBezeichnung));
@@ -241,6 +325,7 @@ export default function DocumentationSummary() {
       const principleFormData = documentationData.principles?.find(
         (principle) => principle.id === prinzip.documentId,
       );
+      const displayNumber = index + 1;
       return createInfoBoxItem({
         route: principleRoute,
         content:
@@ -248,7 +333,7 @@ export default function DocumentationSummary() {
             <PrincipleContent principle={principleFormData} prinzip={prinzip} />
           ) : null,
         badge: {
-          text: summary.principleBadge,
+          text: `${summary.principleBadge} ${displayNumber}`,
           principleNumber: prinzip.Nummer,
         },
       });
@@ -266,7 +351,11 @@ export default function DocumentationSummary() {
         look="ds-heading-02-reg"
         className="mb-16"
       />
-      <RichText markdown={summary.text} />
+      <RichText
+        markdown={
+          currentState === "brandenburg" ? brandenburg.summary.text : summary.text
+        }
+      />
       <InfoBoxList className="space-y-40" items={items} />
 
       <DocumentationActions previousUrl={previousUrl} nextUrl={nextUrl} />

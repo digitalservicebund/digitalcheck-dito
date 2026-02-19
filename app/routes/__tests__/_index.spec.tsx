@@ -1,8 +1,8 @@
-import { render, screen, within } from "@testing-library/react";
+import { screen, within } from "@testing-library/react";
 import Index from "app/routes/_index";
-import { MemoryRouter } from "react-router";
 import { describe, expect, it, vi } from "vitest";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
+import { renderWithProviders } from "~/test/testUtils";
 
 vi.mock("~/contexts/FeatureFlagContext", () => {
   return {
@@ -11,13 +11,9 @@ vi.mock("~/contexts/FeatureFlagContext", () => {
 });
 
 describe("Index Route - Integration Tests", () => {
-  const renderWithRouter = (component: React.ReactElement) => {
-    return render(<MemoryRouter>{component}</MemoryRouter>);
-  };
-
   beforeEach(() => {
     vi.mocked(useFeatureFlag).mockReturnValue(true);
-    renderWithRouter(<Index />);
+    renderWithProviders(<Index />);
   });
 
   it("renders the Hero section with the correct title", () => {

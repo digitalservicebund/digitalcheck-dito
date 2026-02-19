@@ -46,4 +46,26 @@ export const documentationDocument = {
       content: `Rufen Sie uns an: ${contact.mdPhoneLink()} oder schreiben Sie uns unter: ${contact.mdMailToLink(contact.email)}.`,
     },
   },
+  brandenburg: {
+    nextSteps: {
+      heading: "Das ist jetzt zu tun",
+      instructions: dedent`
+        - **Speichern** Sie die Dokumentation als **PDF**
+        - **Senden** Sie die von Ihnen erstellte Dokumentation als PDF per E-Mail an folgende Adresse: [zbr@mdj.brandenburg.de](mailto:zbr@mdj.brandenburg.de). Die Zentralstelle bessere Rechtsetzung prüft Ihr Vorhaben hinsichtlich der Berücksichtigung der Prinzipien digitaltauglicher Gesetzgebung. Bei Fragen wird die Zentralstelle bessere Rechtsetzung auf Sie zukommen.
+        - **Visuelle Darstellungen** und Skizzen sind gern gesehen. Hängen Sie diese formlos als PDF oder als Screenshot an.
+        - Damit ist der Digitalcheck für Sie beendet.
+      `,
+      zbrInfo: {
+        heading:
+          "Gut zu wissen: Das prüft die Zentralstelle bessere Rechtsetzung",
+        content:
+          "Die Zentralstelle bessere Rechtsetzung prüft das Regelungsvorhaben auf Möglichkeiten der digitalen Umsetzung. Die Basis ist der von Ihnen durchgeführte Digitalcheck. Das wesentliche Prüfkriterium ist die methodische und inhaltliche Nachvollziehbarkeit. Wenn Sie eine Visualisierung angefertigt haben und Sie der Veröffentlichung zustimmen, kann diese an die Stellungnahme angehängt werden. Bei Fragen oder Anregungen kommt Ihre Ansprechperson in der Zentralstelle bessere Rechtsetzung auf Sie zu.",
+      },
+      support: {
+        heading: "Sie haben Fragen oder benötigen Unterstützung?",
+        content:
+          "Schreiben Sie uns unter: [zbr@mdj.brandenburg.de](mailto:zbr@mdj.brandenburg.de).",
+      },
+    },
+  },
 };

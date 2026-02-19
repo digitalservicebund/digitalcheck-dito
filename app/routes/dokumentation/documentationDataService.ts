@@ -1,8 +1,11 @@
 import {
+  type Auswirkungen,
   type DocumentationData,
+  type Erforderlichkeit,
   type Participation,
   type PolicyTitle,
   type Principle,
+  type Zweckmaessigkeit,
 } from "~/routes/dokumentation/documentationDataSchema";
 import {
   readVersionedDataFromLocalStorage,
@@ -89,6 +92,37 @@ export function addOrUpdatePrinciple(newPrinciple?: Principle): void {
   createOrUpdateDocumentationData({
     ...data,
     principles: updatedPrinciples,
+  });
+}
+
+// Brandenburg-specific setters
+export function setErforderlichkeit(erforderlichkeit?: Erforderlichkeit): void {
+  if (!erforderlichkeit) return;
+
+  const data = getDocumentationData();
+  createOrUpdateDocumentationData({
+    ...data,
+    erforderlichkeit,
+  });
+}
+
+export function setZweckmaessigkeit(zweckmaessigkeit?: Zweckmaessigkeit): void {
+  if (!zweckmaessigkeit) return;
+
+  const data = getDocumentationData();
+  createOrUpdateDocumentationData({
+    ...data,
+    zweckmaessigkeit,
+  });
+}
+
+export function setAuswirkungen(auswirkungen?: Auswirkungen): void {
+  if (!auswirkungen) return;
+
+  const data = getDocumentationData();
+  createOrUpdateDocumentationData({
+    ...data,
+    auswirkungen,
   });
 }
 

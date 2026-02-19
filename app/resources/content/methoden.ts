@@ -1,8 +1,8 @@
 import { steps } from "~/resources/content/shared/naechste-schritte";
 import {
   ROUTE_METHODS_COLLECT_IT_SYSTEMS,
-  ROUTE_METHODS_INTERVIEW_METHODS,
   ROUTE_METHODS_PRINCIPLES,
+  ROUTE_METHODS_RESPONSIBLE_ACTORS,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
   ROUTE_METHODS_VISUALIZE,
 } from "~/resources/staticRoutes";
@@ -127,7 +127,7 @@ export const methods = {
     links: [
       {
         text: "Akteure identifizieren",
-        to: ROUTE_METHODS_INTERVIEW_METHODS.url,
+        to: ROUTE_METHODS_RESPONSIBLE_ACTORS.url,
       },
     ] satisfies ContentLink[],
   },

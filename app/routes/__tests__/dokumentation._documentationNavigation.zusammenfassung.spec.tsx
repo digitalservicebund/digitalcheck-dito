@@ -7,6 +7,9 @@ import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter, useOutletContext } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import FederalStateContext, {
+  getFederalStateInfo,
+} from "~/contexts/FederalStateContext";
 import {
   Route,
   ROUTE_DOCUMENTATION_NOTES,
@@ -67,10 +70,18 @@ function createDocumentationDataMock({
 
 describe("DocumentationSummary", () => {
   const renderWithRouter = () => {
+    const mockFederalStateValue = {
+      currentState: "bund" as const,
+      setCurrentState: () => {},
+      stateInfo: getFederalStateInfo("bund"),
+    };
+
     return render(
-      <MemoryRouter>
-        <DocumentationSummary />
-      </MemoryRouter>,
+      <FederalStateContext.Provider value={mockFederalStateValue}>
+        <MemoryRouter>
+          <DocumentationSummary />
+        </MemoryRouter>
+      </FederalStateContext.Provider>,
     );
   };
 
