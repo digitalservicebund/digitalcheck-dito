@@ -72,10 +72,10 @@ const createInfoBoxItem = ({
 function Answer({
   heading,
   answers,
-}: {
+}: Readonly<{
   heading: string;
   answers: { prefix: string; answer?: string }[];
-}) {
+}>) {
   return (
     <div className="space-y-8">
       <Heading tagName="h3" look="ds-subhead">
@@ -100,7 +100,9 @@ function Answer({
   );
 }
 
-function PolicyTitleContent({ policyTitle }: { policyTitle: PolicyTitle }) {
+function PolicyTitleContent({
+  policyTitle,
+}: Readonly<{ policyTitle: PolicyTitle }>) {
   return (
     <Answer
       heading={digitalDocumentation.info.inputTitle.label}
@@ -111,9 +113,9 @@ function PolicyTitleContent({ policyTitle }: { policyTitle: PolicyTitle }) {
 
 function ParticipationContent({
   participation,
-}: {
+}: Readonly<{
   participation: Participation;
-}) {
+}>) {
   return (
     <>
       <Answer
@@ -135,10 +137,10 @@ function ParticipationContent({
 function PrincipleContent({
   principle,
   prinzip,
-}: {
+}: Readonly<{
   principle: Principle;
   prinzip: PrinzipWithAspekte;
-}) {
+}>) {
   return (
     <>
       <Answer
