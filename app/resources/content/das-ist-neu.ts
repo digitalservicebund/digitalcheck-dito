@@ -12,6 +12,7 @@ import {
   ROUTE_NUMBERS_FACTS,
   ROUTE_REGELUNGEN,
   ROUTE_VERSION_HISTORY,
+  ROUTE_METHODS_INTERVIEW_METHODS,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
@@ -24,6 +25,17 @@ export const news = {
       Haben Sie Anregungen oder Wünsche? Kontaktieren Sie uns jederzeit gerne unter ${contact.mdPhoneLink()} oder ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")}.
   `,
   items: [
+        {
+      badge: {
+        text: "13.02.2026",
+      },
+      content: dedent`
+       Neuer Leitfaden: Praxis-Perspektive in Ihr Vorhaben einbinden
+         - Was sind Vorteile der Praxis-Perspektive und welche Interview-Methoden gibt es?
+         - Schritt für Schritt Anleitung: Akteurinnen und Akteure identifizieren und Interviews vorbereiten
+        [Hier ansehen](${ROUTE_METHODS_INTERVIEW_METHODS.url})
+      `,
+    },
     {
       badge: {
         text: "28.01.2026",
