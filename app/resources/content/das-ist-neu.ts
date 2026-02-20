@@ -33,6 +33,7 @@ export const news = {
        Neuer Leitfaden: Praxis-Perspektive in Ihr Vorhaben einbinden
          - Was sind Vorteile der Praxis-Perspektive und welche Interview-Methoden gibt es?
          - Schritt für Schritt Anleitung: Akteurinnen und Akteure identifizieren und Interviews vorbereiten
+       
         [Hier ansehen](${ROUTE_METHODS_INTERVIEW_METHODS.url})
       `,
     },
