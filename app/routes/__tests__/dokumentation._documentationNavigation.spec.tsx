@@ -11,6 +11,9 @@ import {
   useRouteLoaderData,
 } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import FederalStateContext, {
+  getFederalStateInfo,
+} from "~/contexts/FederalStateContext";
 import {
   type Route,
   ROUTE_DOCUMENTATION,
@@ -170,6 +173,12 @@ const validationScenarios: ValidationScenario[] = [
 
 const mockedUseDocumentationData = vi.mocked(useDocumentationData);
 
+const mockFederalStateValue = {
+  currentState: "bund" as const,
+  setCurrentState: () => {},
+  stateInfo: getFederalStateInfo("bund"),
+};
+
 function renderPage({ url }: Route) {
   function ErrorBoundary() {
     return <h1>Something went wrong</h1>;
@@ -203,7 +212,11 @@ function renderPage({ url }: Route) {
     initialEntries: [url],
   });
 
-  render(<RouterProvider router={router} />);
+  render(
+    <FederalStateContext.Provider value={mockFederalStateValue}>
+      <RouterProvider router={router} />
+    </FederalStateContext.Provider>,
+  );
 }
 
 const getNav = () =>

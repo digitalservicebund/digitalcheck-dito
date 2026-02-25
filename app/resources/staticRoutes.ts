@@ -101,16 +101,6 @@ export const ROUTE_METHODS_TECHNICAL_FEASIBILITY = createRoute(
   "Technische Umsetzbarkeit sicherstellen",
   ROUTE_METHODS,
 );
-export const ROUTE_METHODS_INTERVIEW_METHODS = createRoute(
-  "interview-leitfaden",
-  "Interview Leitfaden",
-  ROUTE_METHODS,
-);
-export const ROUTE_METHODS_INTERVIEW_METHODS_STEPS = createRoute(
-  "interview-leitfaden-schritte",
-  "Interview Leitfaden Schritte",
-  ROUTE_METHODS,
-);
 export const ROUTE_METHODS_PRINCIPLES_NEW = createRoute(
   "fuenf-prinzipien-neu",
   "Fünf Prinzipien",
@@ -141,6 +131,24 @@ export const ROUTE_DOCUMENTATION_PARTICIPATION = createRoute(
   "Beteiligungsformate",
   ROUTE_DOCUMENTATION,
 );
+
+// Brandenburg-specific documentation routes
+export const ROUTE_DOCUMENTATION_ERFORDERLICHKEIT = createRoute(
+  "erforderlichkeit",
+  "Erforderlichkeit",
+  ROUTE_DOCUMENTATION,
+);
+export const ROUTE_DOCUMENTATION_ZWECKMAESSIGKEIT = createRoute(
+  "zweckmaessigkeit",
+  "Zweckmäßigkeit",
+  ROUTE_DOCUMENTATION,
+);
+export const ROUTE_DOCUMENTATION_AUSWIRKUNGEN = createRoute(
+  "auswirkungen",
+  "Auswirkungen",
+  ROUTE_DOCUMENTATION,
+);
+
 export const ROUTE_DOCUMENTATION_SUMMARY = createRoute(
   "zusammenfassung",
   "Zusammenfassung",
@@ -156,6 +164,13 @@ export const ROUTES_DOCUMENTATION_INTRO = [
   ROUTE_DOCUMENTATION_NOTES,
   ROUTE_DOCUMENTATION_TITLE,
   ROUTE_DOCUMENTATION_PARTICIPATION,
+];
+
+// Brandenburg-specific routes (shown only when Brandenburg is selected)
+export const ROUTES_DOCUMENTATION_BRANDENBURG = [
+  ROUTE_DOCUMENTATION_ERFORDERLICHKEIT,
+  ROUTE_DOCUMENTATION_ZWECKMAESSIGKEIT,
+  ROUTE_DOCUMENTATION_AUSWIRKUNGEN,
 ];
 
 export const ROUTES_DOCUMENTATION_FINALIZE = [

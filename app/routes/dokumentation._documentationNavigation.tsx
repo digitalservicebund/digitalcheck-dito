@@ -1,11 +1,14 @@
+import { useMemo } from "react";
 import { Outlet, useLocation } from "react-router";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
+import { useFederalState } from "~/contexts/FederalStateContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
   type Route as _Route,
   ROUTE_DOCUMENTATION,
   ROUTE_DOCUMENTATION_NOTES,
+  ROUTE_DOCUMENTATION_PARTICIPATION,
 } from "~/resources/staticRoutes";
 import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
@@ -50,7 +53,30 @@ function getNextUrl(routes: Route[], currentUrl: string): string | null {
 }
 
 export default function LayoutWithDocumentationNavigation() {
-  const { routes, prinzips } = useDocumentationRouteData();
+  const { routes: baseRoutes, brandenburgRoutes, prinzips } = useDocumentationRouteData();
+  const { currentState } = useFederalState();
+
+  // Include Brandenburg routes after Beteiligungsformate if Brandenburg is selected
+  const routes = useMemo(() => {
+    if (currentState !== "brandenburg") {
+      return baseRoutes;
+    }
+
+    // Find the index of participation route and insert Brandenburg routes after it
+    const participationIndex = baseRoutes.findIndex(
+      (route) => !Array.isArray(route) && route.url === ROUTE_DOCUMENTATION_PARTICIPATION.url,
+    );
+
+    if (participationIndex === -1) {
+      return baseRoutes;
+    }
+
+    return [
+      ...baseRoutes.slice(0, participationIndex + 1),
+      ...brandenburgRoutes,
+      ...baseRoutes.slice(participationIndex + 1),
+    ];
+  }, [baseRoutes, brandenburgRoutes, currentState]);
 
   // exclude documentation notes
   const displayedRoutes = routes.filter((route) => {

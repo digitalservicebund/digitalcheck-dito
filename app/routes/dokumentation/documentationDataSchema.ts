@@ -1,8 +1,11 @@
 import { z } from "zod";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
+  ROUTE_DOCUMENTATION_AUSWIRKUNGEN,
+  ROUTE_DOCUMENTATION_ERFORDERLICHKEIT,
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_TITLE,
+  ROUTE_DOCUMENTATION_ZWECKMAESSIGKEIT,
 } from "~/resources/staticRoutes";
 import type { VersionedData } from "~/utils/localStorageVersioned";
 
@@ -19,6 +22,19 @@ export const participationSchema = z.object({
   results: z
     .string()
     .min(1, { message: participation.results.textField.errorMessage }),
+});
+
+// Brandenburg-specific schemas
+export const erforderlichkeitSchema = z.object({
+  content: z.string().min(1, { message: "Bitte geben Sie eine Antwort." }),
+});
+
+export const zweckmaessigkeitSchema = z.object({
+  content: z.string().min(1, { message: "Bitte geben Sie eine Antwort." }),
+});
+
+export const auswirkungenSchema = z.object({
+  content: z.string().min(1, { message: "Bitte geben Sie eine Antwort." }),
 });
 
 const principleReasoningSchema = z
@@ -101,6 +117,19 @@ export const defaultParticipationValues: Participation = {
   results: "",
 };
 
+// Brandenburg-specific default values
+export const defaultErforderlichkeitValues: Erforderlichkeit = {
+  content: "",
+};
+
+export const defaultZweckmaessigkeitValues: Zweckmaessigkeit = {
+  content: "",
+};
+
+export const defaultAuswirkungenValues: Auswirkungen = {
+  content: "",
+};
+
 export const defaultValues: Omit<DocumentationData, "version"> = {
   policyTitle: defaultTitleValues,
   participation: defaultParticipationValues,
@@ -111,6 +140,12 @@ export const getDocumentationSchemaFormUrl = (url: string) => {
   if (url === ROUTE_DOCUMENTATION_TITLE.url) return policyTitleSchema;
   else if (url === ROUTE_DOCUMENTATION_PARTICIPATION.url)
     return participationSchema;
+  else if (url === ROUTE_DOCUMENTATION_ERFORDERLICHKEIT.url)
+    return erforderlichkeitSchema;
+  else if (url === ROUTE_DOCUMENTATION_ZWECKMAESSIGKEIT.url)
+    return zweckmaessigkeitSchema;
+  else if (url === ROUTE_DOCUMENTATION_AUSWIRKUNGEN.url)
+    return auswirkungenSchema;
   else return principleSchema;
 };
 
@@ -118,6 +153,10 @@ export const documentationSchema = z.object({
   policyTitle: policyTitleSchema.optional(),
   participation: participationSchema.optional(),
   principles: z.array(principleSchema).optional(),
+  // Brandenburg-specific fields
+  erforderlichkeit: erforderlichkeitSchema.optional(),
+  zweckmaessigkeit: zweckmaessigkeitSchema.optional(),
+  auswirkungen: auswirkungenSchema.optional(),
 });
 
 export type PrincipleReasoning = z.infer<typeof principleReasoningSchema>;
@@ -130,5 +169,9 @@ export type IrrelevantAnswerReasoning = z.infer<
 export type Principle = z.infer<typeof principleSchema>;
 export type PolicyTitle = z.infer<typeof policyTitleSchema>;
 export type Participation = z.infer<typeof participationSchema>;
+// Brandenburg-specific types
+export type Erforderlichkeit = z.infer<typeof erforderlichkeitSchema>;
+export type Zweckmaessigkeit = z.infer<typeof zweckmaessigkeitSchema>;
+export type Auswirkungen = z.infer<typeof auswirkungenSchema>;
 export type DocumentationData = z.infer<typeof documentationSchema> &
   VersionedData;

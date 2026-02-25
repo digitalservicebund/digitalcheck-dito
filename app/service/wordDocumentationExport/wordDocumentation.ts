@@ -12,6 +12,7 @@ import {
   TextRun,
 } from "docx";
 import fileSaver from "file-saver";
+import type { FederalState } from "~/contexts/FederalStateContext";
 import { documentationDocument } from "~/resources/content/documentation-document";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { contact } from "~/resources/content/shared/contact";
@@ -27,20 +28,35 @@ import {
 import { slugify } from "~/utils/utilFunctions";
 import strapiBlocksToDocx from "./strapiBlocksToWord";
 const { saveAs } = fileSaver;
-const { principlePages } = digitalDocumentation;
+const { principlePages, brandenburg } = digitalDocumentation;
 
 export const FILE_NAME_DOCUMENTATION_TEMPLATE =
   "VORLAGE_Dokumentation_der_Digitaltauglichkeit_V2.docx";
 
+export const FILE_NAME_DOCUMENTATION_TEMPLATE_BRANDENBURG =
+  "VORLAGE_Dokumentation_der_Digitaltauglichkeit_Brandenburg.docx";
+
+export function getTemplateFileName(federalState: FederalState): string {
+  if (federalState === "brandenburg") {
+    return FILE_NAME_DOCUMENTATION_TEMPLATE_BRANDENBURG;
+  }
+  return FILE_NAME_DOCUMENTATION_TEMPLATE;
+}
+
 export default async function downloadDocumentation(
   prinzips: PrinzipWithAspekte[],
+  federalState: FederalState = "bund",
 ) {
   try {
-    const template = await fetch(
-      `/documents/${FILE_NAME_DOCUMENTATION_TEMPLATE}`,
-    );
+    const templateFileName = getTemplateFileName(federalState);
+    const template = await fetch(`/documents/${templateFileName}`);
     const templateData = await template.arrayBuffer();
-    const doc = await createDoc(templateData, getDocumentationData(), prinzips);
+    const doc = await createDoc(
+      templateData,
+      getDocumentationData(),
+      prinzips,
+      federalState,
+    );
     saveAs(doc, documentationDocument.filename);
   } catch (e) {
     console.error(e);
@@ -53,10 +69,25 @@ export const createDoc = async (
     policyTitle,
     participation,
     principles: principleAnswers,
+    erforderlichkeit,
+    zweckmaessigkeit,
+    auswirkungen,
   }: DocumentationData,
   prinzips: PrinzipWithAspekte[],
+  federalState: FederalState = "bund",
 ) => {
   const date = new Date().toLocaleDateString("de-DE");
+
+  // Get federal state specific content
+  const isBrandenburg = federalState === "brandenburg";
+  const nextStepsContent = isBrandenburg
+    ? documentationDocument.brandenburg.nextSteps
+    : documentationDocument.nextSteps;
+
+  // Build Brandenburg-specific patches
+  const brandenburgPatches = isBrandenburg
+    ? buildBrandenburgPatches({ erforderlichkeit, zweckmaessigkeit, auswirkungen })
+    : {};
 
   return patchDocument({
     data: templateData,
@@ -75,6 +106,22 @@ export const createDoc = async (
         answerOrPlaceholder(participation?.results),
       ),
       ...buildPrinciplePatches(prinzips, principleAnswers),
+      // Federal state specific patches
+      NEXT_STEPS_INSTRUCTIONS: toParagraphPatch(nextStepsContent.instructions),
+      NEXT_STEPS_HEADING: toParagraphPatch(nextStepsContent.heading),
+      OVERSIGHT_BODY_INFO_HEADING: toParagraphPatch(
+        isBrandenburg
+          ? nextStepsContent.zbrInfo.heading
+          : documentationDocument.nextSteps.nkrInfo.heading,
+      ),
+      OVERSIGHT_BODY_INFO_CONTENT: toParagraphPatch(
+        isBrandenburg
+          ? nextStepsContent.zbrInfo.content
+          : documentationDocument.nextSteps.nkrInfo.content,
+      ),
+      SUPPORT_HEADING: toParagraphPatch(nextStepsContent.support.heading),
+      SUPPORT_CONTENT: toParagraphPatch(nextStepsContent.support.content),
+      ...brandenburgPatches,
     },
   });
 };
@@ -239,3 +286,77 @@ const stringToIndentParagraph = (options: IParagraphOptions) =>
     ...options,
     ...indentOptions,
   });
+
+// Builds patches for Brandenburg-specific pages (Erforderlichkeit, Zweckmäßigkeit, Auswirkungen)
+export const buildBrandenburgPatches = ({
+  erforderlichkeit,
+  zweckmaessigkeit,
+  auswirkungen,
+}: Pick<
+  DocumentationData,
+  "erforderlichkeit" | "zweckmaessigkeit" | "auswirkungen"
+>): Record<string, IPatch> => ({
+  // Erforderlichkeit
+  BRANDENBURG_ERFORDERLICHKEIT_TITLE: {
+    type: PatchType.DOCUMENT,
+    children: [
+      new Paragraph({
+        heading: HeadingLevel.HEADING_1,
+        children: [
+          new Bookmark({
+            id: "erforderlichkeit",
+            children: [new TextRun(brandenburg.erforderlichkeit.headline)],
+          }),
+        ],
+      }),
+    ],
+  },
+  BRANDENBURG_ERFORDERLICHKEIT_QUESTIONS: toParagraphPatch(
+    brandenburg.erforderlichkeit.textIntro,
+  ),
+  BRANDENBURG_ERFORDERLICHKEIT_ANSWER: toParagraphPatch(
+    answerOrPlaceholder(erforderlichkeit?.content),
+  ),
+  // Zweckmäßigkeit
+  BRANDENBURG_ZWECKMAESSIGKEIT_TITLE: {
+    type: PatchType.DOCUMENT,
+    children: [
+      new Paragraph({
+        heading: HeadingLevel.HEADING_1,
+        children: [
+          new Bookmark({
+            id: "zweckmaessigkeit",
+            children: [new TextRun(brandenburg.zweckmaessigkeit.headline)],
+          }),
+        ],
+      }),
+    ],
+  },
+  BRANDENBURG_ZWECKMAESSIGKEIT_QUESTIONS: toParagraphPatch(
+    brandenburg.zweckmaessigkeit.textIntro,
+  ),
+  BRANDENBURG_ZWECKMAESSIGKEIT_ANSWER: toParagraphPatch(
+    answerOrPlaceholder(zweckmaessigkeit?.content),
+  ),
+  // Auswirkungen
+  BRANDENBURG_AUSWIRKUNGEN_TITLE: {
+    type: PatchType.DOCUMENT,
+    children: [
+      new Paragraph({
+        heading: HeadingLevel.HEADING_1,
+        children: [
+          new Bookmark({
+            id: "auswirkungen",
+            children: [new TextRun(brandenburg.auswirkungen.headline)],
+          }),
+        ],
+      }),
+    ],
+  },
+  BRANDENBURG_AUSWIRKUNGEN_QUESTIONS: toParagraphPatch(
+    brandenburg.auswirkungen.textIntro,
+  ),
+  BRANDENBURG_AUSWIRKUNGEN_ANSWER: toParagraphPatch(
+    answerOrPlaceholder(auswirkungen?.content),
+  ),
+});

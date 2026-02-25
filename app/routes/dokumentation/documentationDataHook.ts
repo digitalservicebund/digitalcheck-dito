@@ -3,14 +3,20 @@ import type { StandardSchemaV1 } from "node_modules/zod/v4/core/standard-schema"
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { useNavigate } from "react-router";
 import {
+  ROUTE_DOCUMENTATION_AUSWIRKUNGEN,
+  ROUTE_DOCUMENTATION_ERFORDERLICHKEIT,
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_TITLE,
+  ROUTE_DOCUMENTATION_ZWECKMAESSIGKEIT,
 } from "~/resources/staticRoutes";
 import {
+  Auswirkungen,
+  Erforderlichkeit,
   Participation,
   PolicyTitle,
   Principle,
   PrincipleReasoning,
+  Zweckmaessigkeit,
 } from "./documentationDataSchema";
 import {
   getDocumentationData,
@@ -91,11 +97,24 @@ export const useDocumentationData = () => {
 
   const findDocumentationDataForUrl = (
     url: string,
-  ): PolicyTitle | Participation | Principle | undefined => {
+  ):
+    | PolicyTitle
+    | Participation
+    | Principle
+    | Erforderlichkeit
+    | Zweckmaessigkeit
+    | Auswirkungen
+    | undefined => {
     if (url === ROUTE_DOCUMENTATION_TITLE.url)
       return documentationData.policyTitle;
     else if (url === ROUTE_DOCUMENTATION_PARTICIPATION.url)
       return documentationData.participation;
+    else if (url === ROUTE_DOCUMENTATION_ERFORDERLICHKEIT.url)
+      return documentationData.erforderlichkeit;
+    else if (url === ROUTE_DOCUMENTATION_ZWECKMAESSIGKEIT.url)
+      return documentationData.zweckmaessigkeit;
+    else if (url === ROUTE_DOCUMENTATION_AUSWIRKUNGEN.url)
+      return documentationData.auswirkungen;
 
     const principleData = documentationData.principles?.find(
       ({ id }) => id === url,

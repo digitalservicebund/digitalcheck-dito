@@ -349,4 +349,77 @@ export const digitalDocumentation = {
     },
     savingTip: "Ihre Daten werden automatisch im Browser gespeichert.",
   },
+  // Brandenburg-specific pages
+  brandenburg: {
+    erforderlichkeit: {
+      headline: "Erforderlichkeit",
+      textIntro: dedent`
+        a) Weshalb besteht ein zwingender Regelungsbedarf?
+
+        b) Welche bestehenden Regelungen können hiermit verbunden („einheitliches Regelwerk"), vereinfacht oder hierdurch künftig abgeschafft werden?
+
+        c) Welche vergleichbaren und welche abweichenden Regelungen bestehen in anderen Ländern?
+
+        d) Bei Umsetzung oder Durchführung von EU- oder Bundesrecht: Geht die Regelung oder gehen Teile der Regelung über die unions- oder bundesrechtlichen Vorgaben hinaus („Gold-Plating")? Wenn ja, warum ist dies erforderlich?`,
+      textField: {
+        label: "Bitte erläutern Sie:",
+        errorMessage: "Bitte geben Sie eine Antwort.",
+      },
+    },
+    zweckmaessigkeit: {
+      headline: "Zweckmäßigkeit",
+      textIntro: dedent`
+        a) Können einzelne Regelungen befristet werden? Wenn nein, warum nicht?
+
+        b) Wurden die Regelungen vorab, z. B. im Rahmen von Experimentierklauseln (Standarderprobung, andere Fachgesetze), erprobt? Wenn nein, warum nicht?
+
+        c) Wurden Normanwendende sowie Normadressatinnen und Normadressaten vorab beteiligt (sogenannter Praxischeck)? Welche Anregungen und Einwände konnten aus welchen Gründen nicht berücksichtigt werden?`,
+      textField: {
+        label: "Bitte erläutern Sie:",
+        errorMessage: "Bitte geben Sie eine Antwort.",
+      },
+    },
+    auswirkungen: {
+      headline:
+        "Auswirkungen auf Bürgerinnen und Bürger, Unternehmen und Verwaltung",
+      textIntro: dedent`
+        a) Inwiefern werden durch die Regelung Pflichten, insbesondere
+        - Mitwirkungspflichten
+        - Kontrollpflichten
+        - Berichtspflichten
+        - Statistikpflichten
+        - sonstige Pflichten
+
+        für die Bürgerinnen und Bürger, die Unternehmen oder die Verwaltung neu eingeführt bzw. bestehende Pflichten erweitert, reduziert oder tritt keine Änderung ein?
+
+        b) Auf welche Weise sollen Wirksamkeit, Aufwand und eventuelle Nebenwirkungen der Regelung nach Inkrafttreten ermittelt werden (Evaluierungsprozess)?
+
+        c) Wie viel Zeit bleibt den betroffenen Unternehmen sowie Bürgerinnen und Bürgern, um sich auf die neuen Regelungen einzustellen?
+
+        d) Wie wird die Verwaltung - insbesondere unter Berücksichtigung spezifischer Ausstattungs- und Ausschreibungserfordernisse oder organisatorischer Anforderungen - bis zum Inkrafttreten der Rechtsnormen vorbereitet?`,
+      textField: {
+        label: "Bitte erläutern Sie:",
+        errorMessage: "Bitte geben Sie eine Antwort.",
+      },
+    },
+    summary: {
+      text: "Bevor Sie die Dokumentation abschließen und an die Zentralstelle bessere Rechtsetzung senden, prüfen Sie bitte Ihre Angaben und ändern Sie sie bei Bedarf.",
+    },
+    finish: {
+      heading: {
+        markdown:
+          "Jetzt laden Sie die ausgefüllte Dokumentation herunter und senden sie an die Zentralstelle bessere Rechtsetzung. Optional können Sie sie vorher zur Abstimmung verschicken.",
+      },
+      download: {
+        content:
+          "Laden Sie die ausgefüllte Dokumentation herunter, um sie zu verakten und an die Zentralstelle bessere Rechtsetzung zu senden.",
+      },
+      send: {
+        heading: "Fertige Dokumentation an die Zentralstelle bessere Rechtsetzung senden",
+        content: dedent`
+          - Senden Sie die Dokumentation **als PDF per E-Mail** an folgende Adresse: [zbr@mdj.brandenburg.de](mailto:zbr@mdj.brandenburg.de). Die Zentralstelle bessere Rechtsetzung prüft die methodische und inhaltliche Nachvollziehbarkeit. Bei Fragen wird die Zentralstelle bessere Rechtsetzung auf Sie zukommen. Das Ziel ist eine digital- und praxistaugliche Umsetzung.
+          - Die Zentralstelle bessere Rechtsetzung empfiehlt, **Visualisierungen** und Skizzen als ergänzende Dokumente beizufügen – formlos als PDF oder Screenshot.`,
+      },
+    },
+  },
 };
