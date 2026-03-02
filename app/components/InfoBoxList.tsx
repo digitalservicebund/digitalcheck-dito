@@ -34,7 +34,7 @@ export default function InfoBoxList({
       >
         {items.map((item, i) => (
           <li
-            key={i}
+            key={item.identifier ?? i}
             className={twJoin(
               separator &&
                 "border-0 border-b-2 border-solid border-gray-400 pb-40 last:border-none last:pb-0",

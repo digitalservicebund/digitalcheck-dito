@@ -98,8 +98,8 @@ export default function DropdownContentList({
   };
 
   return isOrderedList ? (
-    <ol className={listClasses}>{data.map(mapDataToItems)}</ol>
+    <ol className={listClasses}>{data.map((o, i) => mapDataToItems(o, i))}</ol>
   ) : (
-    <ul className={listClasses}>{data.map(mapDataToItems)}</ul>
+    <ul className={listClasses}>{data.map((o, i) => mapDataToItems(o, i))}</ul>
   );
 }

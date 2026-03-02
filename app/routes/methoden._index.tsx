@@ -69,7 +69,9 @@ export default function Methoden() {
         <Hero subtitle={methods.subtitle} title={methods.title} />
 
         <div className="container my-40 space-y-40 lg:my-80 lg:space-y-80">
-          <Timeline>{methods.steps.items.map(renderStep)}</Timeline>
+          <Timeline>
+            {methods.steps.items.map((s, i) => renderStep(s, i))}
+          </Timeline>
 
           <section className="space-y-40">
             <InfoBox

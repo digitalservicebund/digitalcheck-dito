@@ -35,13 +35,13 @@ export default function Absatz({
   const content = prependNumberToAbsatz(absatz);
 
   // Only show explanations for principles that are in the principlesToShow array
-  const principlesToShowNumbers = principlesToShow.map(
-    (principle) => principle.Nummer,
+  const principlesToShowNumbers = new Set(
+    principlesToShow.map((principle) => principle.Nummer),
   );
   const erfuellungenToShow = absatz.PrinzipErfuellungen?.filter(
     (erfuellung) =>
       erfuellung.Prinzip?.Nummer &&
-      principlesToShowNumbers.includes(erfuellung.Prinzip.Nummer),
+      principlesToShowNumbers.has(erfuellung.Prinzip.Nummer),
   );
 
   return (

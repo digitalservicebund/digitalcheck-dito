@@ -39,8 +39,7 @@ function Dialog({
 
   return (
     <>
-      {renderToggleButton &&
-        renderToggleButton({ toggleDialog: () => handleToggle(!isOpen) })}
+      {renderToggleButton?.({ toggleDialog: () => handleToggle(!isOpen) })}
       <HeadlessDialog
         open={isOpen}
         onClose={() => handleToggle(false)}
