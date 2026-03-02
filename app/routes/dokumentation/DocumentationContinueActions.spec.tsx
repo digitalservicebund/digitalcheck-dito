@@ -51,6 +51,15 @@ describe("DocumentationContinueActions", () => {
     vi.clearAllMocks();
   });
 
+  async function triggerStartOverDialog() {
+    const startOverButton = await screen.findByRole("button", {
+      name: digitalDocumentation.start.actions.startOver.buttonText,
+    });
+    act(() => startOverButton.click());
+
+    return screen.getByRole("dialog");
+  }
+
   describe("when a saved documentation exists", () => {
     setHasSavedDocumentation(true);
 
@@ -74,15 +83,6 @@ describe("DocumentationContinueActions", () => {
       });
       expect(initialButton).not.toBeInTheDocument();
     });
-
-    async function triggerStartOverDialog() {
-      const startOverButton = await screen.findByRole("button", {
-        name: digitalDocumentation.start.actions.startOver.buttonText,
-      });
-      act(() => startOverButton.click());
-
-      return screen.getByRole("dialog");
-    }
 
     it("triggers a dismissable modal when the start-over button is clicked", async () => {
       const dialog = await triggerStartOverDialog();

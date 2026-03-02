@@ -217,36 +217,32 @@ const getBeteiligungsformate = () =>
 const getPrinzipA = () =>
   within(getNav()).getByRole("link", { name: "Prinzip A" });
 
-const expectCompleted = (element: HTMLElement, completed: boolean = true) => {
-  if (completed) {
-    expect(element).toHaveAccessibleDescription(
-      `${element.textContent} - Fertig`,
-    );
-    expect(within(element).getByTestId("CheckIcon")).toBeInTheDocument();
-  } else {
-    expect(element).not.toHaveAccessibleDescription(
-      `${element.textContent} - Fertig`,
-    );
-    expect(within(element).queryByTestId("CheckIcon")).not.toBeInTheDocument();
-  }
+const expectCompleted = (element: HTMLElement) => {
+  expect(element).toHaveAccessibleDescription(`${element.textContent} - Fertig`);
+  expect(within(element).getByTestId("CheckIcon")).toBeInTheDocument();
 };
 
-const expectWarning = (element: HTMLElement, warning: boolean = true) => {
-  if (warning) {
-    expect(element).toHaveAccessibleDescription(
-      `${element.textContent} - Fehler`,
-    );
-    expect(
-      within(element).getByTestId("WarningAmberOutlinedIcon"),
-    ).toBeInTheDocument();
-  } else {
-    expect(element).not.toHaveAccessibleDescription(
-      `${element.textContent} - Fehler`,
-    );
-    expect(
-      within(element).queryByTestId("WarningAmberOutlinedIcon"),
-    ).not.toBeInTheDocument();
-  }
+const expectNotCompleted = (element: HTMLElement) => {
+  expect(element).not.toHaveAccessibleDescription(
+    `${element.textContent} - Fertig`,
+  );
+  expect(within(element).queryByTestId("CheckIcon")).not.toBeInTheDocument();
+};
+
+const expectWarning = (element: HTMLElement) => {
+  expect(element).toHaveAccessibleDescription(`${element.textContent} - Fehler`);
+  expect(
+    within(element).getByTestId("WarningAmberOutlinedIcon"),
+  ).toBeInTheDocument();
+};
+
+const expectNotWarning = (element: HTMLElement) => {
+  expect(element).not.toHaveAccessibleDescription(
+    `${element.textContent} - Fehler`,
+  );
+  expect(
+    within(element).queryByTestId("WarningAmberOutlinedIcon"),
+  ).not.toBeInTheDocument();
 };
 
 describe("navigation on pages of documentation", () => {
@@ -336,23 +332,29 @@ describe("navigation on pages of documentation", () => {
         it("shows correct completed states", () => {
           renderPage(currentRoute);
 
-          expectCompleted(getTitel(), expected.completedTitle);
-          expectCompleted(
-            getBeteiligungsformate(),
-            expected.completedParticipation,
-          );
-          expectCompleted(getPrinzipA(), expected.completedPrinciples);
+          expected.completedTitle
+            ? expectCompleted(getTitel())
+            : expectNotCompleted(getTitel());
+          expected.completedParticipation
+            ? expectCompleted(getBeteiligungsformate())
+            : expectNotCompleted(getBeteiligungsformate());
+          expected.completedPrinciples
+            ? expectCompleted(getPrinzipA())
+            : expectNotCompleted(getPrinzipA());
         });
 
         it("shows correct warning states", () => {
           renderPage(currentRoute);
 
-          expectWarning(getTitel(), expected.warningTitle);
-          expectWarning(
-            getBeteiligungsformate(),
-            expected.warningParticipation,
-          );
-          expectWarning(getPrinzipA(), expected.warningPrinciples);
+          expected.warningTitle
+            ? expectWarning(getTitel())
+            : expectNotWarning(getTitel());
+          expected.warningParticipation
+            ? expectWarning(getBeteiligungsformate())
+            : expectNotWarning(getBeteiligungsformate());
+          expected.warningPrinciples
+            ? expectWarning(getPrinzipA())
+            : expectNotWarning(getPrinzipA());
         });
       },
     );

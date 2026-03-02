@@ -1,5 +1,5 @@
 import { FieldValues, FormOpts, useForm } from "@rvf/react";
-import type { StandardSchemaV1 } from "node_modules/zod/v4/core/standard-schema";
+import type { StandardSchemaV1 } from "@standard-schema/spec";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { getResultForAnswers } from "../vorpruefung.ergebnis/getResultForAnswers";
 import { PreCheckResultSchema } from "./preCheckDataSchema";

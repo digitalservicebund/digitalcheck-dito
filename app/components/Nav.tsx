@@ -14,6 +14,7 @@ import {
   ReactElement,
   ReactNode,
   useContext,
+  useMemo,
 } from "react";
 import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
@@ -345,8 +346,12 @@ function Nav({
   ariaLabel,
   testId,
 }: Readonly<NavProps>) {
+  const navContextValue = useMemo(
+    () => ({ activeElementUrl }),
+    [activeElementUrl],
+  );
   return (
-    <NavContext.Provider value={{ activeElementUrl }}>
+    <NavContext.Provider value={navContextValue}>
       <nav aria-label={ariaLabel} data-testid={testId}>
         {children}
       </nav>
