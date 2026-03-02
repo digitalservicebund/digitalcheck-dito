@@ -9,7 +9,7 @@ import downloadDocumentation from "~/service/wordDocumentationExport/wordDocumen
 
 type SubmitType = {
   submit: true;
-  nextUrl: undefined;
+  nextUrl?: undefined;
 };
 
 type NextType = {
