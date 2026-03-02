@@ -17,7 +17,6 @@ import {
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_PRINCIPLES_NEW_DIGITALE_ANGEBOTE,
 } from "~/resources/staticRoutes.ts";
-import getFeatureFlag from "~/utils/featureFlags.server.ts";
 import { absatzIdTag, Node } from "~/utils/paragraphUtils";
 import {
   AbsatzWithParagraph,
@@ -76,18 +75,10 @@ function Formulierungsbeispiel({
 }
 
 export async function loader({ params }: Route.LoaderArgs) {
-  if (!getFeatureFlag("principles26")) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw data("Not found", { status: 404 });
-  }
-
-  const status = getFeatureFlag("principles26") ? "DRAFT" : "PUBLISHED";
-
   const prinzipData = await fetchStrapiData<{
     prinzips: PrinzipWithAspekteAndExample[];
   }>(PRINZIP_ASPEKTE_QUERY, {
     URLBezeichnung: params.prinzip,
-    status,
   });
 
   if ("error" in prinzipData) {

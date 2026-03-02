@@ -15,21 +15,16 @@ import InfoBox from "~/components/InfoBox.tsx";
 import MetaTitle from "~/components/Meta";
 import { PrinciplePosterBox } from "~/components/PrinciplePosterBox";
 import RichText from "~/components/RichText.tsx";
-import Separator from "~/components/Separator.tsx";
-import TableOfContents from "~/components/TableOfContents";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import {
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_VISUALIZE,
 } from "~/resources/staticRoutes";
-import getFeatureFlag from "~/utils/featureFlags.server.ts";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,
   PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server";
-import { slugify } from "~/utils/utilFunctions";
-import Principle from "./Principle";
 
 export const loader = async () => {
   const prinzipData = await fetchStrapiData<{
@@ -41,13 +36,11 @@ export const loader = async () => {
     throw new Response(prinzipData.error, { status: 400 });
   }
 
-  const useNewPrinciples = getFeatureFlag("principles26");
-
-  return { prinzips: prinzipData.prinzips, useNewPrinciples };
+  return { prinzips: prinzipData.prinzips };
 };
 
 export default function FivePrinciples() {
-  const { prinzips, useNewPrinciples } = useLoaderData<typeof loader>();
+  const { prinzips } = useLoaderData<typeof loader>();
 
   return (
     <>
@@ -56,25 +49,7 @@ export default function FivePrinciples() {
         <Hero
           title={methodsFivePrinciples.title}
           subtitle={methodsFivePrinciples.subtitle}
-        >
-          {!useNewPrinciples && (
-            <TableOfContents
-              heading={methodsFivePrinciples.contentOverviewTitle}
-              links={[
-                {
-                  id: "instruction",
-                  title: methodsFivePrinciples.anchor.instruction,
-                },
-                ...prinzips.map((prinzip) => {
-                  return {
-                    id: slugify(prinzip.Name),
-                    title: `${methodsFivePrinciples.anchor.principle} ${prinzip.Name}`,
-                  };
-                }),
-              ]}
-            />
-          )}
-        </Hero>
+        />
 
         <Container className="space-y-40 pb-0">
           <div id="instruction">
@@ -125,55 +100,42 @@ export default function FivePrinciples() {
           </FeatureList>
         </Container>
 
-        {!useNewPrinciples && (
-          <div className="container my-40 space-y-96 lg:mt-80">
-            <Separator />
-            {prinzips.map((prinzip) => (
-              <Principle prinzip={prinzip} key={prinzip.Name} />
-            ))}
-          </div>
-        )}
-
-        {useNewPrinciples && (
-          <div className="my-40 bg-blue-100 lg:mt-80">
-            <div className="container space-y-96 py-80 lg:mt-80">
-              <div
-                className="grid grid-cols-1 gap-40 md:grid-cols-2"
-                data-testid="prinzipien"
-              >
-                {prinzips.map((prinzip) => (
-                  <div
-                    key={prinzip.order}
-                    className="flex flex-col justify-between gap-16 bg-white px-32 pt-40 pb-48"
-                  >
-                    <div className="space-y-16">
-                      <Badge className={`bg-principle-${prinzip.Nummer}`}>
-                        Prinzip {prinzip.order}
-                      </Badge>
-                      <h2 className={"ds-heading-03-reg"}>{prinzip.Name}</h2>
-                      <BlocksRenderer
-                        content={
-                          prinzip.Kurzbeschreibung ?? prinzip.Beschreibung
-                        }
-                      />
-                    </div>
-                    <LinkButton
-                      to={
-                        ROUTE_METHODS_PRINCIPLES.url +
-                        "/" +
-                        prinzip.URLBezeichnung
-                      }
-                      look={"tertiary"}
-                      className={"self-start"}
-                    >
-                      Mehr zum Prinzip
-                    </LinkButton>
+        <div className="my-40 bg-blue-100 lg:mt-80">
+          <div className="container space-y-96 py-80 lg:mt-80">
+            <div
+              className="grid grid-cols-1 gap-40 md:grid-cols-2"
+              data-testid="prinzipien"
+            >
+              {prinzips.map((prinzip) => (
+                <div
+                  key={prinzip.order}
+                  className="flex flex-col justify-between gap-16 bg-white px-32 pt-40 pb-48"
+                >
+                  <div className="space-y-16">
+                    <Badge className={`bg-principle-${prinzip.Nummer}`}>
+                      Prinzip {prinzip.order}
+                    </Badge>
+                    <h2 className={"ds-heading-03-reg"}>{prinzip.Name}</h2>
+                    <BlocksRenderer
+                      content={prinzip.Kurzbeschreibung ?? prinzip.Beschreibung}
+                    />
                   </div>
-                ))}
-              </div>
+                  <LinkButton
+                    to={
+                      ROUTE_METHODS_PRINCIPLES.url +
+                      "/" +
+                      prinzip.URLBezeichnung
+                    }
+                    look={"tertiary"}
+                    className={"self-start"}
+                  >
+                    Mehr zum Prinzip
+                  </LinkButton>
+                </div>
+              ))}
             </div>
           </div>
-        )}
+        </div>
 
         <PrinciplePosterBox />
       </main>

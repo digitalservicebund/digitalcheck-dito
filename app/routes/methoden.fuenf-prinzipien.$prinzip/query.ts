@@ -1,8 +1,8 @@
 import { BasePrinzip } from "~/utils/strapiData.server.ts";
 
 export const PRINZIP_ASPEKTE_QUERY = `
-query Prinzip($URLBezeichnung: String!, $status: PublicationStatus!) {
-  prinzips(status: $status, filters: { URLBezeichnung: { eq: $URLBezeichnung } }) {
+query Prinzip($URLBezeichnung: String!) {
+  prinzips(filters: { URLBezeichnung: { eq: $URLBezeichnung } }) {
     documentId
     Name
     Beschreibung
