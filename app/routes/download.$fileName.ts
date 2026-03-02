@@ -1,6 +1,6 @@
-import { promises as fs } from "fs";
 import { contentType } from "mime-types";
-import path from "path";
+import { promises as fs } from "node:fs";
+import path from "node:path";
 import { FILE_NAME_DOCUMENTATION_STATIC_WORD } from "~/utils/constants";
 import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/download.$fileName";

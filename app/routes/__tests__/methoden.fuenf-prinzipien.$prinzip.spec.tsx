@@ -139,7 +139,6 @@ const mockPrinzipData: PrinzipWithAspekte = {
 const mockPrinzipsList: PrinzipListItem[] = [];
 
 describe("FivePrinciples Route - Integration Tests", () => {
-  let container: HTMLElement;
   beforeEach(() => {
     // Provide the mock data to the component via the mocked hook
     vi.mocked(useLoaderData).mockReturnValue({
@@ -148,12 +147,11 @@ describe("FivePrinciples Route - Integration Tests", () => {
     });
 
     // Render the component within a router to handle <Link> components
-    const result = render(
+    render(
       <MemoryRouter>
         <Prinzip />
       </MemoryRouter>,
     );
-    container = result.container;
   });
 
   it("renders the Hero section with the correct title and subtitle", () => {

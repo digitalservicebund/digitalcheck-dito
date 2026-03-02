@@ -1,5 +1,5 @@
-import crypto from "crypto";
 import NodeCache from "node-cache";
+import crypto from "node:crypto";
 import { PrincipleNumber } from "~/resources/constants";
 import { type Node } from "~/utils/paragraphUtils";
 

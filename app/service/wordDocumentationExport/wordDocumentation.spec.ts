@@ -75,9 +75,6 @@ const getTextFromHyperlink = (hyperlink: unknown): string => {
   );
 };
 
-// const getLinkFromHyperlink = (hyperlink: unknown): string =>
-//   asExternalHyperlinkLike(hyperlink).link;
-
 // Mock docx with lightweight test doubles exposing constructor options
 vi.mock("docx", async (importOriginal) => {
   const module = await importOriginal<typeof import("docx")>();

@@ -90,7 +90,6 @@ function PrintTitle({ title }: Readonly<{ title: string }>) {
 }
 
 export default function Result() {
-  // const { result, answers, resultContent } = useLoaderData<typeof loader>();
   const [vorhabenTitle, setVorhabenTitle] = useState("");
   const { answers, firstUnansweredQuestionIndex, result } = usePreCheckData();
   const navigate = useNavigate();

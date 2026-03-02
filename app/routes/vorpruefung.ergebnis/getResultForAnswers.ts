@@ -20,17 +20,19 @@ export function getResultForRelevantAnswers(
   answers: PreCheckAnswerSchema[],
   interoperability: boolean,
 ) {
-  const relevantAnswers = questions
-    .filter((question) => !!question.interoperability === interoperability)
-    .map(
-      (question) =>
-        answers.find(({ questionId }) => questionId === question.id)?.answer,
-    );
+  const relevantAnswers = new Set(
+    questions
+      .filter((question) => !!question.interoperability === interoperability)
+      .map(
+        (question) =>
+          answers.find(({ questionId }) => questionId === question.id)?.answer,
+      ),
+  );
 
-  if (relevantAnswers.includes("yes")) {
+  if (relevantAnswers.has("yes")) {
     return ResultType.POSITIVE;
   }
-  if (relevantAnswers.includes("unsure")) {
+  if (relevantAnswers.has("unsure")) {
     return ResultType.UNSURE;
   }
   return ResultType.NEGATIVE;

@@ -83,8 +83,9 @@ function setup(answers: Answers) {
 
   const preCheckAnswers = questions.map((q) => {
     const ans = answers(q);
-    const mapped = ans === "Ja" ? "yes" : ans === "Nein" ? "no" : "unsure";
-    return { questionId: q.id, answer: mapped };
+    const answerMap = { Ja: "yes", Nein: "no", "Ich bin unsicher": "unsure" };
+    const answer = answerMap[ans];
+    return { questionId: q.id, answer };
   });
 
   vi.mocked(readVersionedDataFromLocalStorage).mockReturnValue({

@@ -243,10 +243,9 @@ export default function DocumentationSummary() {
       );
       return createInfoBoxItem({
         route: principleRoute,
-        content:
-          principleFormData && principleFormData.answer ? (
-            <PrincipleContent principle={principleFormData} prinzip={prinzip} />
-          ) : null,
+        content: principleFormData?.answer ? (
+          <PrincipleContent principle={principleFormData} prinzip={prinzip} />
+        ) : null,
         badge: {
           text: summary.principleBadge,
           principleNumber: prinzip.Nummer,

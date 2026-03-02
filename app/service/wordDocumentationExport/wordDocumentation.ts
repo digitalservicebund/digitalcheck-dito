@@ -212,9 +212,7 @@ export const buildAspectParagraphs = (
         : new TextRun(principlePages.explanationFields.ownExplanationTitle),
     ],
   }),
-  ...(aspekt && aspekt.Text
-    ? strapiBlocksToDocx(aspekt.Text, indentOptions)
-    : []),
+  ...(aspekt?.Text ? strapiBlocksToDocx(aspekt.Text, indentOptions) : []),
   stringToIndentParagraph({
     text: documentationDocument.aspect.paragraphsLabel,
     style: "Textbox Label",

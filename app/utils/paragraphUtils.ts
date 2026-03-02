@@ -23,8 +23,8 @@ export function groupAbsaetzeWithoutRelevantPrinciples(
   absaetze: BaseAbsatz[],
   principlesToShow: BasePrinzip[],
 ) {
-  const relevantPrinciples = principlesToShow.map(
-    (principle) => principle.Nummer,
+  const relevantPrinciples = new Set(
+    principlesToShow.map((principle) => principle.Nummer),
   );
 
   // Group consecutive Absaetze without a relevant PrinzipErfuellungen together
@@ -35,7 +35,7 @@ export function groupAbsaetzeWithoutRelevantPrinciples(
         absatz.PrinzipErfuellungen?.some(
           (erfuellung) =>
             erfuellung.Prinzip &&
-            relevantPrinciples.includes(erfuellung.Prinzip.Nummer),
+            relevantPrinciples.has(erfuellung.Prinzip.Nummer),
         )
       ) {
         groups.push(absatz);

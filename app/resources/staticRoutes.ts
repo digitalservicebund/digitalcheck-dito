@@ -246,12 +246,6 @@ export const ROUTE_VISUALISATION = createRoute(
 export const ROUTE_FUNDAMENTALS = createRoute("grundlagen", "Grundlagen");
 
 export const ROUTE_FUNDAMENTALS_PRINCIPLES = ROUTE_METHODS_PRINCIPLES;
-// export const ROUTE_FUNDAMENTALS_PRINCIPLES = createRoute(
-//   "fuenf-prinzipien",
-//   "Fünf Prinzipien (Grundlagen)",
-//   ROUTE_FUNDAMENTALS,
-//   false,
-// );
 
 export const ROUTE_FUNDAMENTALS_DIGITAL_READINESS = createRoute(
   "digitaltauglichkeit",

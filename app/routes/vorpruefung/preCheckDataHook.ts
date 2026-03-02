@@ -99,7 +99,7 @@ export const usePreCheckData = () => {
   const resultData = {
     title: preCheckData.title,
     negativeReasoning: preCheckData.negativeReasoning,
-    result: result && result.digital,
+    result: result?.digital,
   } as PreCheckResultSchema;
 
   return {
