@@ -5,7 +5,6 @@ import { twJoin } from "tailwind-merge";
 import PrincipleHighlightContext from "~/contexts/PrincipleHighlightContext";
 import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider";
 import { PRINCIPLE_COLORS } from "~/resources/constants";
-import { examples } from "~/resources/content/beispiele";
 import { absatz } from "~/resources/content/shared/absatz";
 import {
   absatzIdTag,
@@ -84,9 +83,9 @@ function PrincipleExplanationList({
       <Heading
         tagName="h4"
         className="ds-label-01-bold"
-        ariaLabel={`${examples.paragraphs.ariaLabelPrefix} ${absatzNumber}: ${examples.paragraphs.explanation}`}
+        ariaLabel={`Absatz ${absatzNumber}: Warum ist dieses Beispiel gut?`}
       >
-        {examples.paragraphs.explanation}
+        Warum ist dieses Beispiel gut?
       </Heading>
       {erfuellungen.map((erfuellung) => (
         <PrincipleExplanation
@@ -151,7 +150,7 @@ export function PrincipleExplanation({
       </div>
       {showPrincipleTitle && (
         <p className="ds-label-03-reg text-gray-900">
-          {`(${examples.principleExplanation.principle}: ${erfuellung.Prinzip.Name})`}
+          {`(Prinzip: ${erfuellung.Prinzip.Name})`}
         </p>
       )}
     </div>

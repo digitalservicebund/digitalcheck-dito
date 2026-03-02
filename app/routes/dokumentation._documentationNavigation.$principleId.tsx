@@ -19,7 +19,6 @@ import RichText from "~/components/RichText";
 import Separator from "~/components/Separator";
 import Textarea from "~/components/Textarea";
 import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider.tsx";
-import { examples } from "~/resources/content/beispiele.ts";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
   ROUTE_EXAMPLES_PRINCIPLES,
@@ -402,7 +401,7 @@ function PrincipleWithExample({
                   }}
                 />
               </div>
-              {examples.paragraphs.explanation}
+              Warum ist dieses Beispiel gut?
               {erfuellungenToShow?.map((erfuellung) => (
                 <PrincipleExplanation
                   key={erfuellung.id}
