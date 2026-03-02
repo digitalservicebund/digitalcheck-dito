@@ -218,7 +218,9 @@ const getPrinzipA = () =>
   within(getNav()).getByRole("link", { name: "Prinzip A" });
 
 const expectCompleted = (element: HTMLElement) => {
-  expect(element).toHaveAccessibleDescription(`${element.textContent} - Fertig`);
+  expect(element).toHaveAccessibleDescription(
+    `${element.textContent} - Fertig`,
+  );
   expect(within(element).getByTestId("CheckIcon")).toBeInTheDocument();
 };
 
@@ -230,7 +232,9 @@ const expectNotCompleted = (element: HTMLElement) => {
 };
 
 const expectWarning = (element: HTMLElement) => {
-  expect(element).toHaveAccessibleDescription(`${element.textContent} - Fehler`);
+  expect(element).toHaveAccessibleDescription(
+    `${element.textContent} - Fehler`,
+  );
   expect(
     within(element).getByTestId("WarningAmberOutlinedIcon"),
   ).toBeInTheDocument();
@@ -332,29 +336,25 @@ describe("navigation on pages of documentation", () => {
         it("shows correct completed states", () => {
           renderPage(currentRoute);
 
-          expected.completedTitle
-            ? expectCompleted(getTitel())
-            : expectNotCompleted(getTitel());
-          expected.completedParticipation
-            ? expectCompleted(getBeteiligungsformate())
-            : expectNotCompleted(getBeteiligungsformate());
-          expected.completedPrinciples
-            ? expectCompleted(getPrinzipA())
-            : expectNotCompleted(getPrinzipA());
+          if (expected.completedTitle) expectCompleted(getTitel());
+          else expectNotCompleted(getTitel());
+          if (expected.completedParticipation)
+            expectCompleted(getBeteiligungsformate());
+          else expectNotCompleted(getBeteiligungsformate());
+          if (expected.completedPrinciples) expectCompleted(getPrinzipA());
+          else expectNotCompleted(getPrinzipA());
         });
 
         it("shows correct warning states", () => {
           renderPage(currentRoute);
 
-          expected.warningTitle
-            ? expectWarning(getTitel())
-            : expectNotWarning(getTitel());
-          expected.warningParticipation
-            ? expectWarning(getBeteiligungsformate())
-            : expectNotWarning(getBeteiligungsformate());
-          expected.warningPrinciples
-            ? expectWarning(getPrinzipA())
-            : expectNotWarning(getPrinzipA());
+          if (expected.warningTitle) expectWarning(getTitel());
+          else expectNotWarning(getTitel());
+          if (expected.warningParticipation)
+            expectWarning(getBeteiligungsformate());
+          else expectNotWarning(getBeteiligungsformate());
+          if (expected.warningPrinciples) expectWarning(getPrinzipA());
+          else expectNotWarning(getPrinzipA());
         });
       },
     );
