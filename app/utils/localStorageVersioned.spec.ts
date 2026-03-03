@@ -148,7 +148,7 @@ describe("localStorage", () => {
   describe("SSR compatibility", () => {
     beforeEach(() => {
       // Simulate server-side environment
-      Object.defineProperty(global, "window", {
+      Object.defineProperty(globalThis, "window", {
         value: undefined,
         writable: true,
       });
@@ -156,7 +156,7 @@ describe("localStorage", () => {
 
     afterEach(() => {
       // Restore window object
-      Object.defineProperty(global, "window", {
+      Object.defineProperty(globalThis, "window", {
         value: { localStorage: localStorageMock },
         writable: true,
       });

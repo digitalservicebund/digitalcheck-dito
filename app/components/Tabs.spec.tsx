@@ -8,7 +8,7 @@ class MockResizeObserver {
   unobserve() {}
   disconnect() {}
 }
-global.ResizeObserver = MockResizeObserver;
+globalThis.ResizeObserver = MockResizeObserver;
 
 const Example = (props: TabGroupProps) => (
   <TabGroup {...props}>

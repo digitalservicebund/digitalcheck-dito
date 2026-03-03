@@ -57,7 +57,7 @@ export default function DetailsSummary({
       if (matchesHash(hash)) {
         setIsOpen(true);
 
-        window.requestAnimationFrame(() => {
+        globalThis.window.requestAnimationFrame(() => {
           detailsRef.current?.scrollIntoView({
             behavior: "smooth",
             block: "start",
@@ -68,7 +68,7 @@ export default function DetailsSummary({
     };
 
     // initial check
-    openIfMatches(window.location.hash);
+    openIfMatches(globalThis.window.location.hash);
   }, [identifier]);
 
   return (

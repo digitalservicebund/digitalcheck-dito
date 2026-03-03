@@ -16,7 +16,7 @@ vi.mock("react-router", async (importOriginal) => {
 
 describe("PageHeader", () => {
   const renderWithRouter = (ui: React.ReactElement, { route = "/" } = {}) => {
-    window.history.pushState({}, "Test page", route);
+    globalThis.window.history.pushState({}, "Test page", route);
     return render(ui, { wrapper: MemoryRouter });
   };
 

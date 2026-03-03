@@ -2,16 +2,16 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import trackClientSideError from "./trackClientSideError";
 
 describe("Tracking client-side error by logging it server-side", () => {
-  const originalFetch = global.fetch;
+  const originalFetch = globalThis.fetch;
 
   beforeEach(() => {
-    global.fetch = vi.fn(() =>
+    globalThis.fetch = vi.fn(() =>
       Promise.resolve(new Response(null, { status: 204 })),
     ) as never;
   });
 
   afterEach(() => {
-    global.fetch = originalFetch;
+    globalThis.fetch = originalFetch;
     vi.restoreAllMocks();
   });
 
@@ -36,7 +36,7 @@ describe("Tracking client-side error by logging it server-side", () => {
 
   it("logs an error if fetch fails", async () => {
     const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-    (global.fetch as unknown) = vi.fn(() =>
+    (globalThis.fetch as unknown) = vi.fn(() =>
       Promise.reject(new Error("Network error")),
     );
 

@@ -27,7 +27,7 @@ export default function ErrorBoundary({
       errorTitle = notFoundError.title;
       errorMessage = notFoundError.message;
     }
-  } else if (error instanceof Error && typeof window !== "undefined") {
+  } else if (error instanceof Error && typeof globalThis.window !== "undefined") {
     // The error should be a native JS runtime error, not a route error response from the server
     // window is only defined on client-side making sure the code is running in the browser
     trackClientSideError(error);

@@ -9,16 +9,16 @@ export function useResize(onResize: () => void, init = true) {
   }, [onResize]);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof globalThis.window === "undefined") return;
 
     const handleResize = () => {
       onResizeRef.current();
     };
 
-    window.addEventListener("resize", handleResize);
+    globalThis.window.addEventListener("resize", handleResize);
     if (init) handleResize(); // initialize
 
-    return () => window.removeEventListener("resize", handleResize);
+    return () => globalThis.window.removeEventListener("resize", handleResize);
   }, [init]);
 }
 
@@ -31,16 +31,16 @@ export function useScroll(onScroll: () => void) {
   }, [onScroll]);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof globalThis.window === "undefined") return;
 
     const handleScroll = () => {
       onScrollRef.current();
     };
 
-    window.addEventListener("scroll", handleScroll);
+    globalThis.window.addEventListener("scroll", handleScroll);
     handleScroll(); // initialize
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => globalThis.window.removeEventListener("scroll", handleScroll);
   }, []);
 }
 
@@ -52,8 +52,8 @@ export function useIsMobileSize() {
   );
 
   useResize(() => {
-    if (typeof window !== "undefined") {
-      setIsMobileSize(window.innerWidth <= 768 /* Breakpoint md */);
+    if (typeof globalThis.window !== "undefined") {
+      setIsMobileSize(globalThis.window.innerWidth <= 768 /* Breakpoint md */);
     }
   });
 

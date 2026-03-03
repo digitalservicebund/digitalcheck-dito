@@ -206,7 +206,13 @@ const RouterStubFirstPrinciple = createRoutesStub([
 
 describe("ParagraphList", () => {
   beforeAll(() => {
-    global.innerWidth = 500; // set isMobile to true
+    // set isMobile to true
+    Object.defineProperty(globalThis.window, "innerWidth", {
+      writable: true,
+      configurable: true,
+      value: 500,
+    });
+    globalThis.window.dispatchEvent(new Event("resize"));
   });
 
   describe("Highlighting", () => {
