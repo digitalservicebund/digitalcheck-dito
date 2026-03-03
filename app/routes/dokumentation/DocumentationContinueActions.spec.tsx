@@ -42,6 +42,15 @@ const setHasSavedDocumentation = (value: boolean) => {
   } as ReturnType<typeof useDocumentationData>);
 };
 
+async function triggerStartOverDialog() {
+  const startOverButton = await screen.findByRole("button", {
+    name: digitalDocumentation.start.actions.startOver.buttonText,
+  });
+  act(() => startOverButton.click());
+
+  return screen.getByRole("dialog");
+}
+
 describe("DocumentationContinueActions", () => {
   const renderWithRouter = (component: React.ReactElement) => {
     return render(<MemoryRouter>{component}</MemoryRouter>);
@@ -50,15 +59,6 @@ describe("DocumentationContinueActions", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
-
-  async function triggerStartOverDialog() {
-    const startOverButton = await screen.findByRole("button", {
-      name: digitalDocumentation.start.actions.startOver.buttonText,
-    });
-    act(() => startOverButton.click());
-
-    return screen.getByRole("dialog");
-  }
 
   describe("when a saved documentation exists", () => {
     setHasSavedDocumentation(true);

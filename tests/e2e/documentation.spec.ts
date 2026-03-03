@@ -426,16 +426,16 @@ test("go to landing page and download empty document template", async ({
   expectDocumentToNotContainTags(docText);
 });
 
-test.describe("with partial documentation started", () => {
-  async function expectAndSkipNotice(page: Page) {
-    await page.waitForURL(ROUTE_DOCUMENTATION_NOTES.url);
-    await expect(
-      page.getByRole("heading", { name: "Wichtige Hinweise" }),
-    ).toBeVisible();
-    await page.getByRole("checkbox", { name: "gelesen", exact: false }).check();
-    await page.getByRole("button", { name: "Weiter" }).click();
-  }
+async function expectAndSkipNotice(page: Page) {
+  await page.waitForURL(ROUTE_DOCUMENTATION_NOTES.url);
+  await expect(
+    page.getByRole("heading", { name: "Wichtige Hinweise" }),
+  ).toBeVisible();
+  await page.getByRole("checkbox", { name: "gelesen", exact: false }).check();
+  await page.getByRole("button", { name: "Weiter" }).click();
+}
 
+test.describe("with partial documentation started", () => {
   test.beforeEach(async ({ page }) => {
     await test.step("start documentation flow from landing page and skip the notice", async () => {
       await page.goto(ROUTE_DOCUMENTATION.url);

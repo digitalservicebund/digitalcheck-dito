@@ -19,8 +19,7 @@ import {
   ROUTES_PRECHECK_QUESTIONS,
 } from "~/resources/staticRoutes";
 
-test.describe("page titles", () => {
-  function getExpectedTitle(route: Route) {
+function getExpectedTitle(route: Route) {
     const titleSuffix = " — Digitalcheck";
 
     if (route.url === ROUTE_LANDING.url)
@@ -48,8 +47,9 @@ test.describe("page titles", () => {
     }
 
     return `${route.title}${titleSuffix}`;
-  }
+}
 
+test.describe("page titles", () => {
   ROUTES.filter(
     (route) =>
       !route.url.endsWith(".pdf") && !route.url.startsWith(ROUTE_PRECHECK.url),
