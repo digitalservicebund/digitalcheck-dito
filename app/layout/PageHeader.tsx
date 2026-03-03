@@ -96,14 +96,14 @@ const PageHeader = () => {
 
   // Opens and closes mobile menu
   const toggleMobileMenu = () => {
-    if (!mobileMenuOpen) {
+    if (mobileMenuOpen) {
+      closeOpenDropdowns();
+    } else {
       setMobileMenuOpen(true);
       const parentItemText = header.items.find((item) =>
         isParentItemActive(item, location.pathname),
       )?.text;
       setActiveDropdownId(parentItemText ?? null);
-    } else {
-      closeOpenDropdowns();
     }
   };
 

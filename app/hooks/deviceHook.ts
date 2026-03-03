@@ -9,7 +9,7 @@ export function useResize(onResize: () => void, init = true) {
   }, [onResize]);
 
   useEffect(() => {
-    if (typeof globalThis.window === "undefined") return;
+    if (globalThis.window === undefined) return;
 
     const handleResize = () => {
       onResizeRef.current();
@@ -31,7 +31,7 @@ export function useScroll(onScroll: () => void) {
   }, [onScroll]);
 
   useEffect(() => {
-    if (typeof globalThis.window === "undefined") return;
+    if (globalThis.window === undefined) return;
 
     const handleScroll = () => {
       onScrollRef.current();
@@ -52,7 +52,7 @@ export function useIsMobileSize() {
   );
 
   useResize(() => {
-    if (typeof globalThis.window !== "undefined") {
+    if (globalThis.window !== undefined) {
       setIsMobileSize(globalThis.window.innerWidth <= 768 /* Breakpoint md */);
     }
   });

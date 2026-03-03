@@ -54,9 +54,9 @@ export default function DropdownMenu({
     plausibleTrackingClass,
   );
 
-  const panelClasses = !isMobile
-    ? "absolute right-0 z-30 w-[512px] rounded-b-md border-t border-gray-600 bg-white pt-8 pb-16 drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]"
-    : "";
+  const panelClasses = isMobile
+    ? ""
+    : "absolute right-0 z-30 w-[512px] rounded-b-md border-t border-gray-600 bg-white pt-8 pb-16 drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]";
 
   const containerClasses = twMerge(
     "relative",

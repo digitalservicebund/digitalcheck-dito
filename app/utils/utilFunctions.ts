@@ -1,5 +1,5 @@
 export const slugify = (string: string) =>
-  string.toLowerCase().replace(/[^a-zA-Z0-9]+/g, "-");
+  string.toLowerCase().replaceAll(/[^a-zA-Z0-9]+/g, "-");
 
 export const formatDate = (date: string | undefined) => {
   return date

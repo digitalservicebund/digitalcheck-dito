@@ -185,7 +185,7 @@ function AbsatzGroupWithoutErfuellungen({
 }: Readonly<AbsatzGroupWithoutErfuellungenProps>) {
   const getAbsatzGroupTitle = (absatzGroup: BaseAbsatz[]) =>
     absatzGroup.length > 1
-      ? `(${absatzGroup[0].Nummer}) – (${absatzGroup[absatzGroup.length - 1].Nummer})`
+      ? `(${absatzGroup[0].Nummer}) – (${absatzGroup.at(-1)?.Nummer})`
       : `(${absatzGroup[0].Nummer})`;
 
   return (

@@ -58,9 +58,9 @@ function getResultTitle(result?: PreCheckResult) {
 
   return (
     title.digital[result.digital] +
-    (result.digital !== ResultType.UNSURE
-      ? title.interoperability[result.interoperability]
-      : "")
+    (result.digital === ResultType.UNSURE
+      ? ""
+      : title.interoperability[result.interoperability])
   );
 }
 
