@@ -1,38 +1,37 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
+import InfoBox from "./InfoBox";
 import InfoBoxList from "./InfoBoxList";
-
-const mockInfoBoxItems = [
-  {
-    label: undefined,
-    headline: undefined,
-    image: undefined,
-    content: "Lorem1",
-    links: [],
-  },
-  {
-    label: undefined,
-    headline: undefined,
-    image: undefined,
-    content: "Lorem2",
-    links: [],
-  },
-];
 
 describe("InfoBoxList", () => {
   describe("Separator", () => {
     it("has expected padding when the separator is enabled", () => {
-      render(<InfoBoxList items={mockInfoBoxItems} separator />);
+      render(
+        <InfoBoxList separator>
+          <InfoBox>Lorem1</InfoBox>
+          <InfoBox>Lorem2</InfoBox>
+        </InfoBoxList>,
+      );
       expect(screen.getByRole("list")).toHaveClass("ds-stack-32");
     });
 
     it("has expected padding when the separator is disabled", () => {
-      render(<InfoBoxList items={mockInfoBoxItems} separator={false} />);
+      render(
+        <InfoBoxList separator={false}>
+          <InfoBox>Lorem1</InfoBox>
+          <InfoBox>Lorem2</InfoBox>
+        </InfoBoxList>,
+      );
       expect(screen.getByRole("list")).toHaveClass("ds-stack-48");
     });
 
     it("has expected padding when the separator is unset", () => {
-      render(<InfoBoxList items={mockInfoBoxItems} />);
+      render(
+        <InfoBoxList>
+          <InfoBox>Lorem1</InfoBox>
+          <InfoBox>Lorem2</InfoBox>
+        </InfoBoxList>,
+      );
       expect(screen.getByRole("list")).toHaveClass("ds-stack-48");
     });
   });
@@ -40,10 +39,10 @@ describe("InfoBoxList", () => {
   describe("Top level elements", () => {
     it("shows the heading", () => {
       render(
-        <InfoBoxList
-          heading={{ text: "TestHeading" }}
-          items={mockInfoBoxItems}
-        />,
+        <InfoBoxList heading={{ text: "TestHeading" }}>
+          <InfoBox>Lorem1</InfoBox>
+          <InfoBox>Lorem2</InfoBox>
+        </InfoBoxList>,
       );
 
       expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
@@ -54,7 +53,12 @@ describe("InfoBoxList", () => {
 
   describe("Items", () => {
     it("renders the InfoBoxItems", () => {
-      render(<InfoBoxList items={mockInfoBoxItems} />);
+      render(
+        <InfoBoxList>
+          <InfoBox>Lorem1</InfoBox>
+          <InfoBox>Lorem2</InfoBox>
+        </InfoBoxList>,
+      );
 
       expect(screen.getAllByRole("listitem").length).toBe(2);
     });

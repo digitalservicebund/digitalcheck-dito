@@ -6,7 +6,7 @@ import {
 import Container from "~/components/Container";
 import { Feature, FeatureList } from "~/components/FeatureList.tsx";
 import Hero from "~/components/Hero";
-import InfoBox, { type InfoBoxProps } from "~/components/InfoBox";
+import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList.tsx";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
@@ -14,14 +14,6 @@ import { fundamentalsNKR } from "~/resources/content/grundlage-normenkontrollrat
 import { ROUTE_FUNDAMENTALS_NKR } from "~/resources/staticRoutes";
 
 export default function FundamentalsMethods() {
-  const items: InfoBoxProps[] = fundamentalsNKR.summary.items.map((item) => {
-    return {
-      ...item,
-      heading: { ...item.heading, tagName: "h2", look: "ds-heading-03-reg" },
-      contentClassName: "ds-stack-24 [&>ul]:space-y-24",
-    };
-  });
-
   return (
     <>
       <MetaTitle prefix={ROUTE_FUNDAMENTALS_NKR.title} />
@@ -32,12 +24,21 @@ export default function FundamentalsMethods() {
         />
 
         <Container className="space-y-40 py-40 md:py-80">
-          <InfoBoxList
-            separator
-            className="ds-stack-80 mt-0 [&>li]:pb-80"
-          >
-            {items.map((item, i) => (
-              <InfoBox key={item.identifier ?? i} {...item} />
+          <InfoBoxList separator className="ds-stack-80 mt-0 [&>li]:pb-80">
+            {fundamentalsNKR.summary.items.map((item, i) => (
+              <InfoBox
+                key={item.heading.text ?? i}
+                heading={{
+                  ...item.heading,
+                  tagName: "h2",
+                  look: "ds-heading-03-reg",
+                }}
+              >
+                <RichText
+                  markdown={item.content}
+                  className="ds-stack-24 [&>ul]:space-y-24"
+                />
+              </InfoBox>
             ))}
           </InfoBoxList>
 

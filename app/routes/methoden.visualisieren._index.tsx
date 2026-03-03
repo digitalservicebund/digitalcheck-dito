@@ -59,7 +59,9 @@ export default function Visualization() {
 
             <InfoBoxList separator>
               {methodsTasksProcesses.visualizationTypes.types.map((item) => (
-                <InfoBox key={item.heading.text} {...item}>
+                <InfoBox key={item.heading.text} heading={item.heading} visual={item.visual} badge={item.badge}>
+                  <RichText markdown={item.content} />
+                  {item.links && <InfoBox.LinkList links={item.links} />}
                   {item.workInProgress && (
                     <ButtonContainer className={"pt-8"}>
                       <Button type="button" disabled look="tertiary">

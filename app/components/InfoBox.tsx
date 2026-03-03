@@ -1,15 +1,12 @@
 import React from "react";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import { ContentLink } from "~/utils/contentTypes";
-import type { Node } from "~/utils/paragraphUtils";
 import twMerge from "~/utils/tailwindMerge";
 import Badge, { type BadgeProps } from "./Badge";
-import { BlocksRenderer } from "./BlocksRenderer";
 import { DownloadLinkButton, LinkButton } from "./Button";
 import DetailsSummary, { DetailsSummaryProps } from "./DetailsSummary";
 import Heading, { HeadingProps } from "./Heading";
 import Image, { type ImageProps } from "./Image";
-import RichText from "./RichText";
 
 export type InfoImageProps = ImageProps & {
   size: "icon" | "small" | "medium" | "large";
@@ -20,15 +17,6 @@ type BaseInfoBoxProps = {
   testId?: string;
   badge?: BadgeProps;
   heading?: HeadingProps;
-  /**
-   * @deprecated Use `children` instead.
-   */
-  content?: string | Node[];
-  contentClassName?: string;
-  /**
-   * @deprecated Use `children` instead.
-   */
-  links?: ContentLink[];
   className?: string;
   look?: "default" | "highlight" | "method" | "white";
 };
@@ -61,9 +49,6 @@ const InfoBox = ({
   className,
   badge,
   heading,
-  content,
-  contentClassName,
-  links,
   visual,
   look,
   children,
@@ -104,20 +89,11 @@ const InfoBox = ({
       {visual?.type === "component" && visual.Component}
       <div
         data-testid="info-box-content"
-        className="ds-stack ds-stack-16 grow wrap-break-word"
+        className={"ds-stack ds-stack-16 grow wrap-break-word"}
       >
         {badge && <Badge className="self-start" {...badge} />}
         {heading && <Heading tagName="h3" {...heading} />}
-        {content &&
-          (typeof content === "string" ? (
-            <RichText markdown={content} className={contentClassName} />
-          ) : (
-            <div className={contentClassName}>
-              <BlocksRenderer content={content} />
-            </div>
-          ))}
         {children}
-        {links && links.length > 0 && <LinkList links={links} />}
       </div>
     </div>
   );

@@ -1,21 +1,13 @@
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
-import InfoBox, { type InfoBoxProps } from "~/components/InfoBox";
+import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList.tsx";
 import MetaTitle from "~/components/Meta";
+import RichText from "~/components/RichText";
 import { fundamentalsDigitalReadiness } from "~/resources/content/grundlage-digitaltauglichkeit";
 import { ROUTE_FUNDAMENTALS_DIGITAL_READINESS } from "~/resources/staticRoutes";
 
 export default function FundamentalsMethods() {
-  const items: InfoBoxProps[] = fundamentalsDigitalReadiness.summary.items.map(
-    (item) => {
-      return {
-        ...item,
-        visual: { type: "icon", Icon: item.visual.Icon },
-      };
-    },
-  );
-
   return (
     <>
       <MetaTitle prefix={ROUTE_FUNDAMENTALS_DIGITAL_READINESS.title} />
@@ -29,8 +21,14 @@ export default function FundamentalsMethods() {
             heading={{ text: fundamentalsDigitalReadiness.summary.title }}
             separator
           >
-            {items.map((item, i) => (
-              <InfoBox key={item.identifier ?? i} {...item} />
+            {fundamentalsDigitalReadiness.summary.items.map((item, i) => (
+              <InfoBox
+                key={item.heading.text ?? i}
+                heading={item.heading}
+                visual={{ type: "icon", Icon: item.visual.Icon }}
+              >
+                <RichText markdown={item.content} />
+              </InfoBox>
             ))}
           </InfoBoxList>
         </Container>
@@ -41,14 +39,16 @@ export default function FundamentalsMethods() {
               text: fundamentalsDigitalReadiness.policyMaking.heading.text,
               tagName: "h2",
             }}
-            content={fundamentalsDigitalReadiness.policyMaking.content}
-          />
+          >
+            <RichText markdown={fundamentalsDigitalReadiness.policyMaking.content} />
+          </InfoBox>
           <InfoBox
             heading={{
               text: fundamentalsDigitalReadiness.phases.heading.text,
             }}
-            content={fundamentalsDigitalReadiness.phases.content}
-          />
+          >
+            <RichText markdown={fundamentalsDigitalReadiness.phases.content} />
+          </InfoBox>
           <ImageBox
             image={fundamentalsDigitalReadiness.phasesImage.img}
             plausibleEventName={
