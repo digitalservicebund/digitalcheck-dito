@@ -94,9 +94,11 @@ vi.mock("docx", async (importOriginal) => {
     }
   }
 
+  const defaultParagraphOptions: ParagraphOptions = { children: [] };
+
   class ParagraphMock {
     type = "Paragraph";
-    constructor(options: ParagraphOptions = { children: [] }) {
+    constructor(options: ParagraphOptions = defaultParagraphOptions) {
       Object.assign(this, options);
     }
   }

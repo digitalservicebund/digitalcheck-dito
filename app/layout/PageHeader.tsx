@@ -166,7 +166,7 @@ const PageHeader = () => {
           <div className="flex items-center space-x-16 lg:hidden">
             <a
               className="plausible-event-name=Nav+Bar.Mobile+Phone+Icon border-b-4 border-transparent"
-              href={`tel:${header.contactTel.number.replace(/\s/g, "")}`}
+              href={`tel:${header.contactTel.number.replaceAll(/\s/g, "")}`}
               aria-label={header.contactTel.msg}
             >
               <PhoneOutlined />

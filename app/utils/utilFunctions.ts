@@ -29,5 +29,5 @@ export const isExternalUrl = (url: string) => url.startsWith("http");
 export const idFromText = (text: string, preText?: string) =>
   (preText ? `${preText}-` : "") +
   text.split("").reduce((hash, char) => {
-    return hash + char.charCodeAt(0);
+    return hash + (char.codePointAt(0) ?? 0);
   }, 0);

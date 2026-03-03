@@ -46,9 +46,9 @@ export default function DropdownMenu({
   // Transparent borders to avoid layout shifts
   const buttonClasses = twMerge(
     "flex cursor-pointer items-center hover:bg-blue-100",
-    !isMobile
-      ? "ds-label-01-reg h-full border-b-[4px] border-transparent pr-8 pl-16 whitespace-nowrap"
-      : "ds-label-01-bold w-full justify-between border-l-[4px] border-transparent p-16",
+    isMobile
+      ? "ds-label-01-bold w-full justify-between border-l-[4px] border-transparent p-16"
+      : "ds-label-01-reg h-full border-b-[4px] border-transparent pr-8 pl-16 whitespace-nowrap",
     isActiveParent && "border-blue-800 bg-blue-100",
     isExpanded && "bg-blue-100",
     plausibleTrackingClass,
@@ -108,7 +108,7 @@ export default function DropdownMenu({
               <div className="ds-label-02-reg px-16 pt-8 pb-16 text-gray-900 lg:px-8 lg:pt-16 lg:pb-24">
                 {isMobile ? header.contactTel.msgMobile : header.contactTel.msg}
                 <a
-                  href={`tel:${header.contactTel.number.replace(/\s/g, "")}`}
+                  href={`tel:${header.contactTel.number.replaceAll(/\s/g, "")}`}
                   className="plausible-event-name=Nav+Bar.Kontakt+Support+Layer.Link+Telefon ds-link-02-reg ml-8"
                 >
                   {header.contactTel.number}

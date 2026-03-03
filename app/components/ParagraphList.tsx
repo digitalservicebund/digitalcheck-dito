@@ -138,7 +138,7 @@ function Paragraph({
   );
 
   // If there are no Absätze with relevant principles, don't show the paragraph
-  if (groupedAbsaetze.every((absatzGroup) => absatzGroup instanceof Array))
+  if (groupedAbsaetze.every((absatzGroup) => Array.isArray(absatzGroup)))
     return null;
 
   // renders the interlaced Absaetze with relevant PrinzipErfuellungen and grouped Absaetze without relevant PrinzipErfuellungen

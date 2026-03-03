@@ -79,7 +79,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
     (p) => p.URLBezeichnung === prinzip.URLBezeichnung,
   );
 
-  const initialActiveIndexForTabs = activeTabIndex !== -1 ? activeTabIndex : 0;
+  const initialActiveIndexForTabs = activeTabIndex === -1 ? 0 : activeTabIndex;
 
   const onTabChange = async (index: number) => {
     const principle = prinzips[index];

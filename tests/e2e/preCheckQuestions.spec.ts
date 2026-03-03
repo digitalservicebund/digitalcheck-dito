@@ -161,7 +161,7 @@ test.describe("test question navigation", () => {
       await page.getByRole("button", { name: "Übernehmen" }).click();
     }
     // wait for last question to show
-    await page.waitForURL(questions[questions.length - 1].url);
+    await page.waitForURL(questions.at(-1)!.url);
 
     // Click on each question link and verify it leads to the correct page
     for (const question of questions) {

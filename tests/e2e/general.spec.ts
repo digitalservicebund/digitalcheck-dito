@@ -69,11 +69,9 @@ test.describe("page titles", () => {
     await expect(page).toHaveTitle(getExpectedTitle(ROUTE_PRECHECK_INFO));
 
     await page.goto(ROUTES_PRECHECK_QUESTIONS[0].url);
-    for (let i = 0; i < ROUTES_PRECHECK_QUESTIONS.length; i++) {
-      await page.waitForURL(ROUTES_PRECHECK_QUESTIONS[i].url);
-      await expect(page).toHaveTitle(
-        getExpectedTitle(ROUTES_PRECHECK_QUESTIONS[i]),
-      );
+    for (const route of ROUTES_PRECHECK_QUESTIONS) {
+      await page.waitForURL(route.url);
+      await expect(page).toHaveTitle(getExpectedTitle(route));
       await page.getByLabel("Ja").click();
       await page.getByRole("button", { name: "Übernehmen" }).click();
     }

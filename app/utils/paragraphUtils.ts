@@ -41,7 +41,7 @@ export function groupAbsaetzeWithoutRelevantPrinciples(
         groups.push(absatz);
         return groups;
       }
-      const lastGroup = groups[groups.length - 1];
+      const lastGroup = groups.at(-1);
       // Start a new group if:
       // 1. There are no previous groups, or
       // 2. The last item had relevant PrinzipErfuellungen (thus is not an array)
