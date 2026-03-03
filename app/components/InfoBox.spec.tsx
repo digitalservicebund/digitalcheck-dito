@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { createRoutesStub } from "react-router";
 import { describe, expect, it } from "vitest";
+import RichText from "./RichText";
 import InfoBox, { DetailsSummaryListProps } from "./InfoBox";
 
 describe("InfoBox", () => {
@@ -19,7 +20,7 @@ describe("InfoBox", () => {
     });
 
     it("shows the content", () => {
-      render(<InfoBox content="Test **Content**" />);
+      render(<InfoBox><RichText markdown="Test **Content**" /></InfoBox>);
 
       expect(screen.getByRole("paragraph")).toHaveTextContent("Test Content");
     });

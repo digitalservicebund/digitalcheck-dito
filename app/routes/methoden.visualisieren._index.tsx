@@ -57,22 +57,19 @@ export default function Visualization() {
             </Heading>
             <p>{methodsTasksProcesses.visualizationTypes.subtitle}</p>
 
-            <InfoBoxList
-              /* TODO: Replace structure once InfoBoxList is updated to support children */
-              items={methodsTasksProcesses.visualizationTypes.types.map(
-                (item) => ({
-                  ...item,
-                  children: item.workInProgress && (
+            <InfoBoxList separator>
+              {methodsTasksProcesses.visualizationTypes.types.map((item, i) => (
+                <InfoBox key={item.identifier ?? i} {...item}>
+                  {item.workInProgress && (
                     <ButtonContainer className={"pt-8"}>
                       <Button type="button" disabled look="tertiary">
                         Anleitung
                       </Button>
                     </ButtonContainer>
-                  ),
-                }),
-              )}
-              separator
-            />
+                  )}
+                </InfoBox>
+              ))}
+            </InfoBoxList>
           </section>
 
           <InfoBox

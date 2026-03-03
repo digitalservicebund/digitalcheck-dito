@@ -1,6 +1,6 @@
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
-import { type InfoBoxProps } from "~/components/InfoBox";
+import InfoBox, { type InfoBoxProps } from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList.tsx";
 import MetaTitle from "~/components/Meta";
 import { fundamentalsDigitalReadiness } from "~/resources/content/grundlage-digitaltauglichkeit";
@@ -27,9 +27,12 @@ export default function FundamentalsMethods() {
         <Container className="py-80">
           <InfoBoxList
             heading={{ text: fundamentalsDigitalReadiness.summary.title }}
-            items={items}
             separator
-          />
+          >
+            {items.map((item, i) => (
+              <InfoBox key={item.identifier ?? i} {...item} />
+            ))}
+          </InfoBoxList>
         </Container>
         {/* <div className="bg-blue-100">
         <Container className="ds-stack ds-stack-40 py-80">

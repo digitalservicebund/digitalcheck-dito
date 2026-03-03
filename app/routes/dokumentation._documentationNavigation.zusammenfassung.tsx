@@ -4,6 +4,7 @@ import { Link, useOutletContext } from "react-router";
 import type { BadgeProps } from "~/components/Badge";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
+import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
 import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
@@ -268,7 +269,11 @@ export default function DocumentationSummary() {
         className="mb-16"
       />
       <RichText markdown={summary.text} />
-      <InfoBoxList className="space-y-40" items={items} />
+      <InfoBoxList className="space-y-40">
+        {items.map((item, i) => (
+          <InfoBox key={item.identifier ?? i} {...item} />
+        ))}
+      </InfoBoxList>
 
       <DocumentationActions previousUrl={previousUrl} nextUrl={nextUrl} />
     </>

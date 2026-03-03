@@ -96,9 +96,12 @@ export default function Index() {
                   <MethodCard.InfoBox
                     heading={{ text: box.title, look: "ds-heading-03-reg" }}
                     badge={{ children: box.label, Icon: box.icon }}
-                    content={box.text}
-                    links={"links" in box ? box.links : []}
-                  />
+                  >
+                    {box.text && <RichText markdown={box.text} />}
+                    {"links" in box && box.links && box.links.length > 0 && (
+                      <InfoBox.LinkList links={box.links} />
+                    )}
+                  </MethodCard.InfoBox>
                 }
               />
             ))}
