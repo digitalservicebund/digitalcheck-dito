@@ -8,23 +8,32 @@ if [ "${DEBUG}" != unset ]; then
 fi
 
 _fail() {
-  printf "\033[0;31m==> %s\033[0m\n\n" "$1"
+  local msg="$1"
+  printf "\033[0;31m==> %s\033[0m\n\n" "$msg"
+  return 0
 }
 
 _success() {
-  printf "\033[0;32m==> %s\033[0m\n\n" "$1"
+  local msg="$1"
+  printf "\033[0;32m==> %s\033[0m\n\n" "$msg"
+  return 0
 }
 
 _info() {
-  printf "\033[1;33m==> %s\033[0m\n\n" "$1"
+  local msg="$1"
+  printf "\033[1;33m==> %s\033[0m\n\n" "$msg"
+  return 0
 }
 
 _user() {
-  printf "\033[0;33m%s\033[0m" "$1"
+  local msg="$1"
+  printf "\033[0;33m%s\033[0m" "$msg"
+  return 0
 }
 
 _find_placeholder_strings() {
   grep -rlZ 'digitalcheck-dito' --exclude-dir=.git --exclude-dir=node_modules --exclude=run.sh .
+  return 0
 }
 
 _setup_repo() {
@@ -39,6 +48,7 @@ _setup_repo() {
     _find_placeholder_strings | xargs sed -i '' 's/digitalcheck-dito/'"$newname"'/g'
     _info "Renamed, please commit the changes!"
   fi
+  return 0
 }
 
 _setup_git_hooks() {
@@ -60,10 +70,12 @@ _setup_git_hooks() {
     lefthook install
     _info "Git hooks installed.."
   fi
+  return 0
 }
 
 _init() {
   _setup_git_hooks
+  return 0
 }
 
 _help() {
@@ -71,6 +83,7 @@ _help() {
   echo ""
   echo "Available commands:"
   echo "init                Set up repository for development"
+  return 0
 }
 
 case "$@" in
