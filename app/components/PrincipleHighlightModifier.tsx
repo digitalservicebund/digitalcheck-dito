@@ -15,7 +15,7 @@ export function PrincipleHightlightNullModifier({ node }: { node: Node }) {
   return text;
 }
 
-export default function PrincipleHighlightModifier({ node }: { node: Node }) {
+export default function PrincipleHighlightModifier({ node }: Readonly<{ node: Node }>) {
   const { principlesToShow, setActiveHighlight, absatzId, useAnchorLinks } =
     useContext(PrincipleHighlightContext);
   const highlightID = useId();

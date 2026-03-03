@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { useResize, useScroll } from "~/hooks/deviceHook";
 import twMerge from "~/utils/tailwindMerge";
 
-type MinimapProps = {
+type MinimapProps = Readonly<{
   svgSrc: string;
   minimapWidth?: number;
   className?: string;
-};
+}>;
 
 export default function SVGWithMinimap({
   className,

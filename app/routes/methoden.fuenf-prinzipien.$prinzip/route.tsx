@@ -218,10 +218,10 @@ function Aspect({
 function PrincipleNavigation({
   principles,
   current,
-}: {
+}: Readonly<{
   principles: PrinzipListItem[];
   current: BasePrinzip;
-}) {
+}>) {
   const index = principles.findIndex(
     (principle) => principle.order === current.order,
   );

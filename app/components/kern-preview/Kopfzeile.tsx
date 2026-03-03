@@ -14,7 +14,7 @@ import "./Kopfzeile.css";
  *
  * z-40 is added to ensure that a menu drawer below does not darken the banner.
  * */
-export function Kopfzeile({ className }: { className?: string }) {
+export function Kopfzeile({ className }: Readonly<{ className?: string }>) {
   return (
     <div className={twJoin("kern-kopfzeile", className)}>
       <div className="kern-container-fluid">
