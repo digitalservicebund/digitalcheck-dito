@@ -59,7 +59,7 @@ export default function Visualization() {
 
             <InfoBoxList separator>
               {methodsTasksProcesses.visualizationTypes.types.map((item, i) => (
-                <InfoBox key={item.identifier ?? i} {...item}>
+                <InfoBox key={i} {...item}>
                   {item.workInProgress && (
                     <ButtonContainer className={"pt-8"}>
                       <Button type="button" disabled look="tertiary">
