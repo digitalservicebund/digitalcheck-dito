@@ -6,9 +6,9 @@ const { emailTemplate } = preCheckResult.form;
 
 function resolveRecipients(result?: PreCheckResult) {
   const additionalRecipient =
-    result?.interoperability !== ResultType.NEGATIVE
-      ? `; ${emailTemplate.toDC}`
-      : "";
+    result?.interoperability === ResultType.NEGATIVE
+      ? ""
+      : `; ${emailTemplate.toDC}`;
   return `${emailTemplate.toNkr}${additionalRecipient}`;
 }
 

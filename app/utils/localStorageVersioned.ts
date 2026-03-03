@@ -18,8 +18,8 @@ export function readVersionedDataFromLocalStorage<T extends VersionedData>(
   storageKey: string,
   currentVersion: string,
 ): T | null {
-  if (typeof window === "undefined" || typeof localStorage === "undefined") {
-    throw new Error(
+  if (globalThis.window === undefined || typeof localStorage === "undefined") {
+    throw new TypeError(
       "localStorage is not available. This function should only be called on the client-side.",
     );
   }
@@ -41,8 +41,8 @@ export function writeVersionedDataToLocalStorage<T extends VersionedData>(
   data: T,
   storageKey: string,
 ): void {
-  if (typeof window === "undefined" || typeof localStorage === "undefined") {
-    throw new Error(
+  if (globalThis.window === undefined || typeof localStorage === "undefined") {
+    throw new TypeError(
       "localStorage is not available. This function should only be called on the client-side.",
     );
   }
@@ -51,8 +51,8 @@ export function writeVersionedDataToLocalStorage<T extends VersionedData>(
 }
 
 export function removeFromLocalStorage(storageKey: string): void {
-  if (typeof window === "undefined" || typeof localStorage === "undefined") {
-    throw new Error(
+  if (globalThis.window === undefined || typeof localStorage === "undefined") {
+    throw new TypeError(
       "localStorage is not available. This function should only be called on the client-side.",
     );
   }

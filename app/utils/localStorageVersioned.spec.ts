@@ -19,7 +19,7 @@ interface TestData extends VersionedData {
   testField: string;
 }
 
-Object.defineProperty(window, "localStorage", {
+Object.defineProperty(globalThis.window, "localStorage", {
   value: localStorageMock,
 });
 
