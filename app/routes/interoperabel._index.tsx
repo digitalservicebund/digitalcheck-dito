@@ -24,6 +24,7 @@ import {
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
 import { getTabAnchorLink } from "~/utils/tabs";
+import EuRechtTab from "./interoperabel.eu-recht";
 
 export default function Interoperability() {
   return (
@@ -74,6 +75,9 @@ export default function Interoperability() {
               <TabGroupWithUrlState.Tab>Hintergrund</TabGroupWithUrlState.Tab>
               <TabGroupWithUrlState.Tab>
                 Häufige Fragen
+              </TabGroupWithUrlState.Tab>
+              <TabGroupWithUrlState.Tab>
+                Angrenzendes EU-Recht
               </TabGroupWithUrlState.Tab>
             </TabGroupWithUrlState.TabList>
             <TabGroupWithUrlState.TabPanels>
@@ -356,7 +360,8 @@ export default function Interoperability() {
                       <strong>
                         hat jedes Vorhaben mit Interoperabilitätsbezug auch
                         Digitalbezug
-                      </strong>{". "}
+                      </strong>
+                      {". "}
                       Umgekehrt gilt das nicht zwingend.
                     </p>
                     <p>
@@ -675,6 +680,9 @@ export default function Interoperability() {
                     ))}
                   </div>
                 </>
+              </TabGroupWithUrlState.TabPanel>
+              <TabGroupWithUrlState.TabPanel className="mb-80">
+                <EuRechtTab></EuRechtTab>
               </TabGroupWithUrlState.TabPanel>
             </TabGroupWithUrlState.TabPanels>
           </TabGroupWithUrlState>
