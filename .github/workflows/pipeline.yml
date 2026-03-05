@@ -30,6 +30,15 @@ jobs:
     secrets:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
+  secret-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0 # Ensure Talisman can operate on a valid revision range
+      - name: Detect secrets with Talisman in incoming commits
+        uses: digitalservicebund/talisman-secrets-scan-action@1789b188ee3a1361fffd2edd4bc12ac0df0a23c1
+
   check-and-test:
     uses: ./.github/workflows/check-and-test.yml
     secrets:
@@ -53,7 +62,7 @@ jobs:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   build-and-push-image:
-    needs: [vulnerability-scan, check-and-test, run-e2e-a11y-tests]
+    needs: [vulnerability-scan, secret-scan, check-and-test, run-e2e-a11y-tests]
     runs-on: ubuntu-latest
     permissions:
       contents: read

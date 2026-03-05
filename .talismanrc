@@ -1,4 +1,6 @@
 fileignoreconfig:
+  - filename: .github/workflows/pipeline.yml
+    allowed_patterns: [secret-scan]
   - filename: .env.example
     ignore_detectors: [filename]
   - filename: .env.test
