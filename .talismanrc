@@ -2,7 +2,7 @@ fileignoreconfig:
   - filename: .github/workflows/pipeline.yml
     allowed_patterns:
       - secret-scan
-      - "password: ${{ secrets.GITHUB_TOKEN }}"
+      - "password: \\${{ secrets.GITHUB_TOKEN }}"
   - filename: .env.example
     ignore_detectors: [filename]
   - filename: .env.test
@@ -35,7 +35,7 @@ allowed_patterns:
   - Pass\s # Allow "Pass " followed by a space
   - \@[a-z0-9]{40} # Allow fixing action hashes
   - "secrets: inherit"
-  - "key: ${{ runner.os }}"
+  - "key: \\${{ runner.os }}"
   - GITOPS_DIGITALCHECK_APP_PRIVATE_KEY
   - ARGOCD_PIPELINE_PASSWORD
   - "pass: true"
