@@ -86,7 +86,9 @@ test.describe("Visualizations Overview Page", () => {
   test("displays visualization details correctly", async ({ page }) => {
     await page.goto(ROUTE_EXAMPLES_VISUALISATIONS.url);
 
-    const firstVisualization = page.locator(String.raw`.flex.max-sm\:flex-col`).first();
+    const firstVisualization = page
+      .locator(String.raw`.flex.max-sm\:flex-col`)
+      .first();
 
     await expect(firstVisualization.locator("img")).toBeVisible();
 

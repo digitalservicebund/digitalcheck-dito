@@ -28,9 +28,7 @@ export const preCheck = {
       },
       {
         title: "Was ist Interoperabilität?",
-        text:
-         "Interoperabilität macht ein digitales Europa ohne Grenzen möglich, in dem Behörden nahtlos Daten austauschen können. Ob Umzug oder Firmengründung im Ausland – Verwaltungsakte lassen sich EU-weit einfach, sicher und vollständig online erledigen. Das spart Zeit und Kosten. Grundlage dafür ist die [Verordnung für ein interoperables Europa (EU) 2024/903](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903)."
-         ,
+        text: "Interoperabilität macht ein digitales Europa ohne Grenzen möglich, in dem Behörden nahtlos Daten austauschen können. Ob Umzug oder Firmengründung im Ausland – Verwaltungsakte lassen sich EU-weit einfach, sicher und vollständig online erledigen. Das spart Zeit und Kosten. Grundlage dafür ist die [Verordnung für ein interoperables Europa (EU) 2024/903](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903).",
       },
     ],
     buttonText: "Vorprüfung starten",

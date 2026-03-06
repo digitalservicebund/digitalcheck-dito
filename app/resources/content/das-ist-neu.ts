@@ -6,13 +6,13 @@ import {
   ROUTE_FUNDAMENTALS_NKR,
   ROUTE_INTEROPERABILITY,
   ROUTE_INTEROPERABILITY_SPOC,
+  ROUTE_METHODS_INTERVIEW_METHODS,
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_VISUALIZE,
   ROUTE_METHODS_VISUALIZE_FLOWCHARTS,
   ROUTE_NUMBERS_FACTS,
   ROUTE_REGELUNGEN,
   ROUTE_VERSION_HISTORY,
-  ROUTE_METHODS_INTERVIEW_METHODS,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
@@ -25,7 +25,7 @@ export const news = {
       Haben Sie Anregungen oder Wünsche? Kontaktieren Sie uns jederzeit gerne unter ${contact.mdPhoneLink()} oder ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")}.
   `,
   items: [
-        {
+    {
       badge: {
         text: "13.02.2026",
       },

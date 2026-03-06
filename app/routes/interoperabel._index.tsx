@@ -356,7 +356,8 @@ export default function Interoperability() {
                       <strong>
                         hat jedes Vorhaben mit Interoperabilitätsbezug auch
                         Digitalbezug
-                      </strong>{". "}
+                      </strong>
+                      {". "}
                       Umgekehrt gilt das nicht zwingend.
                     </p>
                     <p>

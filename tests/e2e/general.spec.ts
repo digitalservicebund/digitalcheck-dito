@@ -20,33 +20,33 @@ import {
 } from "~/resources/staticRoutes";
 
 function getExpectedTitle(route: Route) {
-    const titleSuffix = " — Digitalcheck";
+  const titleSuffix = " — Digitalcheck";
 
-    if (route.url === ROUTE_LANDING.url)
-      return "Digitalcheck: Digitaltaugliche Regelungen erarbeiten";
-    if (
-      route.url.startsWith(ROUTE_EXAMPLES_PRINCIPLES.url) &&
-      !route.url.endsWith(ROUTE_EXAMPLES_PRINCIPLES.url)
-    ) {
-      // All tabs (and their routes) on the principle example pages have the same page title
-      return `${ROUTE_EXAMPLES_PRINCIPLES.title}${titleSuffix}`;
-    }
-    if (
-      route.url === ROUTE_FUNDAMENTALS.url ||
-      route.url === ROUTE_FUNDAMENTALS_PRINCIPLES.url
-    ) {
-      // this page does not exist and redirects to the sub-page
-      return `${ROUTE_METHODS_PRINCIPLES.title}${titleSuffix}`;
-    }
-    if (
-      route.url.startsWith(ROUTE_DOCUMENTATION.url) &&
-      route.url !== ROUTE_DOCUMENTATION.url
-    ) {
-      // subpages of documentation
-      return `Dokumentation: ${route.title}${titleSuffix}`;
-    }
+  if (route.url === ROUTE_LANDING.url)
+    return "Digitalcheck: Digitaltaugliche Regelungen erarbeiten";
+  if (
+    route.url.startsWith(ROUTE_EXAMPLES_PRINCIPLES.url) &&
+    !route.url.endsWith(ROUTE_EXAMPLES_PRINCIPLES.url)
+  ) {
+    // All tabs (and their routes) on the principle example pages have the same page title
+    return `${ROUTE_EXAMPLES_PRINCIPLES.title}${titleSuffix}`;
+  }
+  if (
+    route.url === ROUTE_FUNDAMENTALS.url ||
+    route.url === ROUTE_FUNDAMENTALS_PRINCIPLES.url
+  ) {
+    // this page does not exist and redirects to the sub-page
+    return `${ROUTE_METHODS_PRINCIPLES.title}${titleSuffix}`;
+  }
+  if (
+    route.url.startsWith(ROUTE_DOCUMENTATION.url) &&
+    route.url !== ROUTE_DOCUMENTATION.url
+  ) {
+    // subpages of documentation
+    return `Dokumentation: ${route.title}${titleSuffix}`;
+  }
 
-    return `${route.title}${titleSuffix}`;
+  return `${route.title}${titleSuffix}`;
 }
 
 test.describe("page titles", () => {

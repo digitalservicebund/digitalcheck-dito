@@ -83,9 +83,7 @@ export default function DetailsSummary({
         {title}
       </summary>
 
-      <div className={contentWrapperClasses}>
-        {children}
-      </div>
+      <div className={contentWrapperClasses}>{children}</div>
     </details>
   );
 }
