@@ -148,7 +148,12 @@ const PageHeader = () => {
             to={ROUTE_LANDING.url}
             className="plausible-event-name=Nav+Bar.Home flex items-center space-x-8"
           >
-            <img src="/logo/bund-logo.png" alt="Logo des Bundes" width={54} />
+            <img
+              src="/logo/bund-logo.png"
+              alt="Logo des Bundes"
+              width={54}
+              className="forced-colors:dark:invert"
+            />
             <p className="ds-label-01-bold ml-16 flex flex-col text-xl max-lg:hidden">
               {header.title}
             </p>

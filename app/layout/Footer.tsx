@@ -114,6 +114,7 @@ export default function Footer() {
               url="/logo/bmds-logo.png"
               width={120}
               alternativeText="Logo des Bundesministerium für Digitales und Staatsmodernisierung"
+              className="forced-colors:dark:invert"
             />
 
             <div className="max-w-2xl space-y-8">
