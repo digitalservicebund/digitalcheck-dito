@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event/dist/cjs/index.js";
 import { MemoryRouter, useSearchParams } from "react-router";
-import { describe, it } from "vitest";
+import { describe, it, vi } from "vitest";
 import TabGroupWithUrlState, {
   getIndexFromUrl,
 } from "~/components/Tabs/TabsWithUrlState.tsx";

@@ -1,3 +1,4 @@
+import { describe, it } from "vitest";
 import { news } from "./das-ist-neu";
 
 interface CustomMatchers<R> {
