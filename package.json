@@ -14,7 +14,7 @@
     "format:fix": "pnpm run format:fix-selected .",
     "format:fix-selected": "prettier --write --ignore-unknown",
     "lint:check": "react-router typegen && eslint --cache",
-    "lint:fix": "pnpm run lint:check -- --fix",
+    "lint:fix": "react-router typegen && eslint --cache --fix",
     "pre-commit": "pnpm run build && pnpm run style:fix && pnpm run test && pnpm run typecheck",
     "preinstall": "echo 'Please disable script execution for security reasons: pnpm install --ignore-scripts' && exit 1",
     "start": "export $(grep -v '^#' .env | xargs) && react-router-serve build/server/index.js",
