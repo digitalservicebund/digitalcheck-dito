@@ -30,33 +30,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
-          cache: npm
-          cache-dependency-path: "**/package-lock.json"
-
-      - name: Cache npm dependencies
-        id: cache-npm-deps
-        uses: actions/cache@v5
-        with:
-          path: |
-            **/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          cache: pnpm
 
       - name: Install dependencies
-        if: steps.cache-npm-deps.outputs.cache-hit != 'true'
-        run: npm ci --ignore-scripts
+        run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Cache Playwright dependencies
         id: cache-playwright-deps
         uses: actions/cache@v5
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: ${{ runner.os }}-playwright-
 
       - name: Install E2E & A11y test dependencies
@@ -66,12 +57,12 @@ jobs:
       - name: Run nightly E2E tests
         if: inputs.nightlyTests
         id: e2e-nightly
-        run: npm run test:e2e-nightly -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        run: pnpm run test:e2e-nightly -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
       - name: Run E2E tests
         if: ${{ !inputs.nightlyTests }}
         id: e2e
-        run: npm run test:e2e -- --project="Desktop Chrome" --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        run: pnpm run test:e2e -- --project="Desktop Chrome" --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
       - uses: actions/upload-artifact@v7
         if: failure() && (steps.e2e.outcome == 'failure' || steps.e2e-nightly.outcome == 'failure')
@@ -83,7 +74,7 @@ jobs:
       - name: Run nightly A11Y tests
         if: inputs.nightlyTests
         id: a11y-nightly
-        run: npm run test:a11y-nightly -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        run: pnpm run test:a11y-nightly -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
         env:
           # Use a different port (from the one used with E2E tests) to workaround problem in CI/GitHub Actions,
           # starting to occur with playwright/test 1.28.0:
@@ -94,7 +85,7 @@ jobs:
       - name: Run A11y tests
         if: ${{ !inputs.nightlyTests }}
         id: a11y
-        run: npm run test:a11y -- --project="Desktop Chrome" --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        run: pnpm run test:a11y -- --project="Desktop Chrome" --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
         env:
           VITE_PORT: 4183
 
