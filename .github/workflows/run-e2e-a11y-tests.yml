@@ -52,17 +52,19 @@ jobs:
 
       - name: Install E2E & A11y test dependencies
         if: inputs.nightlyTests || steps.cache-playwright-deps.outputs.cache-hit == 'false'
-        run: npx --yes playwright install --with-deps
+        run: pnpm exec playwright install --with-deps
 
       - name: Run nightly E2E tests
         if: inputs.nightlyTests
         id: e2e-nightly
-        run: pnpm run test:e2e-nightly -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        run: pnpm exec playwright test tests/e2e --config=tests/playwright-nightly.config.ts --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
       - name: Run E2E tests
         if: ${{ !inputs.nightlyTests }}
         id: e2e
-        run: pnpm run test:e2e -- --project="Desktop Chrome" --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        run: pnpm exec playwright test tests/e2e --config=tests/playwright.config.ts --project="Desktop Chrome" --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        env:
+          NODE_OPTIONS: --trace-warnings
 
       - uses: actions/upload-artifact@v7
         if: failure() && (steps.e2e.outcome == 'failure' || steps.e2e-nightly.outcome == 'failure')
@@ -74,7 +76,7 @@ jobs:
       - name: Run nightly A11Y tests
         if: inputs.nightlyTests
         id: a11y-nightly
-        run: pnpm run test:a11y-nightly -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        run: pnpm exec playwright test tests/a11y --config=tests/playwright-nightly.config.ts --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
         env:
           # Use a different port (from the one used with E2E tests) to workaround problem in CI/GitHub Actions,
           # starting to occur with playwright/test 1.28.0:
@@ -85,7 +87,7 @@ jobs:
       - name: Run A11y tests
         if: ${{ !inputs.nightlyTests }}
         id: a11y
-        run: pnpm run test:a11y -- --project="Desktop Chrome" --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        run: pnpm exec playwright test tests/a11y --config=tests/playwright.config.ts --project="Desktop Chrome" --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
         env:
           VITE_PORT: 4183
 
