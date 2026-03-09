@@ -1,10 +1,12 @@
-import { Link } from "react-router";
+import DataObjectOutlined from "@digitalservicebund/icons/DataObjectOutlined";
+import AccordionItem from "~/components/AccordionItem";
+import Container from "~/components/Container";
 import ContentWrapper from "~/components/ContentWrapper";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
-import Image from "~/components/Image";
 import InfoBox from "~/components/InfoBox";
+import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import Timeline from "~/components/Timeline";
@@ -74,50 +76,77 @@ export default function InteroperableSolutionsDcatAp() {
             Stellen Sie sich den Standard DCAT-AP als den Katalog einer
             Bibliothek vor
           </Heading>
-          <Image
-            url="/images/DCAT-AP-books.png"
-            alternativeText="Beispielbild, dass DCAT-AP mit einem strukturierten Katalog vergleicht"
-          />
-
-          <Heading tagName="h2">
-            Ein verbindlicher Standard für Deutschland
-          </Heading>
-          <p>
-            <strong>DCAT-AP.de</strong> ist das deutsche Profil dieses
-            europäischen Standards. Es stellt sicher, dass deutsche Spezifika
-            berücksichtigt werden, während die volle Kompatibilität mit der EU
-            gewahrt bleibt. Der IT-Planungsrat empfiehlt diesen Standard
-            verbindlich für den Austausch offener Verwaltungsdaten. Unter&nbsp;
-            <Link to="www.dcat-ap.de" className="ds-link-01-reg">
-              www.dcat-ap.de
-            </Link>
-            &nbsp;steht das deutsche Profil frei zur Verfügung.
-          </p>
-          <Image
-            url="/images/DCAT-AP-books.png"
-            alternativeText="Beispielbild, dass DCAT-AP mit einem strukturierten Katalog vergleicht"
-          />
-          <p>
-            <Link
-              to="https://youtu.be/_JB93__aj_M?si=RNpW3uc_f7kcLxUA&t=279"
-              className="ds-link-01-reg"
+          <InfoBoxSideBySide>
+            <InfoBox
+              look="method"
+              badge={{ children: "Ohne Standards", look: "danger" }}
+              heading={{
+                text: "Der ungeordnete Bücherstapel",
+                tagName: "h3",
+                className: "ds-heading-03-bold",
+              }}
             >
-              https://www.youtube.com/watch?v=_JB93__aj_M
-            </Link>
-            &nbsp;(4:39min)
-          </p>
+              <RichText
+                markdown={dedent`
+                  Ohne standardisierte Beschreibung (Metadaten) sind Daten wie Bücher, die wild auf einem Haufen liegen. Niemand weiß, wer der Autor ist, worum es geht oder in welcher Sprache das Buch geschrieben ist.
+                  
+                  **Folge:** Die Daten sind rechtlich vorhanden, aber faktisch unauffindbar.`}
+              />
+            </InfoBox>
 
+            <InfoBox
+              look="method"
+              badge={{ children: "Mit DCAT-AP", look: "success" }}
+              heading={{
+                text: "Der strukturierte Katalog",
+                tagName: "h3",
+                className: "ds-heading-03-bold",
+              }}
+            >
+              <RichText
+                markdown={dedent`
+                  DCAT-AP ist die Karteikarte für jedes Buch. Es zwingt dazu, **Titel, Autor (Herausgeber) und Thema** nach festen Regeln anzugeben. So können Suchmaschinen (wie das EU-Portal) die Daten automatisch finden und kategorisieren.
+                  
+                  **Ziel:** Die Regelung stellt sicher, dass diese Karteikarte korrekt ausgefüllt wird.`}
+              />
+            </InfoBox>
+          </InfoBoxSideBySide>
+        </ContentWrapper>
+
+        <div className="bg-blue-100 py-80 max-lg:px-16">
+          <Container className="bg-white">
+            <InfoBox
+              visual={{
+                type: "icon",
+                Icon: DataObjectOutlined,
+                className: "fill-blue-300",
+              }}
+              heading={{
+                tagName: "h2",
+                text: "Ein verbindlicher Standard für Deutschland",
+                look: "ds-heading-03-reg",
+              }}
+            >
+              <RichText
+                markdown={dedent`
+              **DCAT-AP.de** ist das deutsche Profil des europäischen Metadatenstandards. Es sorgt dafür, dass deutsche Spezifika berücksichtigt werden – bei voller Kompatibilität zur EU. Der IT-Planungsrat empfiehlt diesen Standard verbindlich für den Austausch offener Verwaltungsdaten. Das deutsche Profil ist frei verfügbar unter [www.dcat-ap.de](https://www.dcat-ap.de).
+
+              [YouTube-Video: Einführung zu DCAT-AP.de (4:39 min)](https://youtu.be/_JB93__aj_M?si=RNpW3uc_f7kcLxUA&t=279)
+            `}
+              />
+            </InfoBox>
+          </Container>
+        </div>
+
+        <ContentWrapper>
           <Heading tagName="h2">So stellen Sie die Nutzung sicher</Heading>
           <p>
             Integrieren Sie bereits im Gesetzentwurf eine klare Vorgabe zur
             Nutzung des Standards. Damit schaffen Sie die rechtliche Grundlage,
             dass die spätere technische Umsetzung zwingend nach DCAT-AP erfolgt,
-            um die EU-weite Auffindbarkeit zu garantieren.
-          </p>
-          <Heading tagName="h3">Ihr Weg zum interoperablen Dienst</Heading>
-          <p>
-            Um DCAT-AP erfolgreich in Ihr Regelungsvorhaben zu integrieren,
-            folgen Sie diesen Schritten:
+            um die EU-weite Auffindbarkeit zu garantieren. Um DCAT-AP
+            erfolgreich in Ihr Regelungsvorhaben zu integrieren, folgen Sie
+            diesen Schritten:
           </p>
 
           <Timeline>
@@ -166,15 +195,78 @@ export default function InteroperableSolutionsDcatAp() {
             </Timeline.Item>
           </Timeline>
 
-          {/* <section className="ds-stack ds-stack-32">
-            <Heading tagName="h2">Häufige Fragen zu DCAT-AP</Heading>
-            <div className="ds-stack ds-stack-16">
-              <AccordionItem key={item.headline} headline={item.headline}>
-                <RichText markdown={item.content} />
+          <DetailsSummary title="Wann ist eine Ausnahme zulässig?">
+            <RichText
+              markdown={dedent`
+                          Der _Interoperable Europe Act (IEA)_ sieht vor, dass die Nutzung von
+            Standards wie DCAT-AP in begründeten Fällen abgelehnt werden kann.
+            Prüfen Sie folgende Punkte:
+
+            - **Sicherheit & Geheimhaltung:** Enthält die Beschreibung des Datensatzes (die „Katalogkarte“) Informationen, die aus Gründen der öffentlichen Sicherheit oder des Datenschutzes nicht veröffentlicht werden dürfen?
+            - **Rechte Dritter:** Verhindern bestehende Lizenzen oder Urheberrechte Dritter die Nutzung dieses offenen Standards?
+            - **Unverhältnismäßigkeit:** Übersteigt der Aufwand für die Umstellung eines bestehenden, isolierten Systems den Nutzen für den grenzüberschreitenden digitalen Binnenmarkt deutlich?
+              `}
+            />
+          </DetailsSummary>
+        </ContentWrapper>
+
+        <div className="bg-blue-100 py-40 max-lg:px-16">
+          <Container className="space-y-40">
+            <Heading tagName="h2">
+              DCAT-AP in Anwendung in bestehenden Gesetzen und Richtlinien
+            </Heading>
+            <div>
+              <AccordionItem headline="Gesetz für die Nutzung von Daten des öffentlichen Sektors (Datennutzungsgesetz - DNG)">
+                <RichText
+                  markdown={dedent`
+              Mit der Umsetzung der EU-Richtlinie über offene Daten (2019/1024) wurde in Deutschland das Datennutzungsgesetz (DNG) geschaffen. Dieses verpflichtet die Verwaltung, hochwertige Datensätze (High-Value Datasets) in maschinenlesbaren Formaten bereitzustellen.
+
+              **Warum reicht Maschinenlesbarkeit allein nicht aus?**
+
+              Damit diese Daten nicht nur lesbar, sondern auch EU-weit auffindbar und nutzbar sind, braucht es eine einheitliche Beschreibung – das „digitale Etikett“. Hier setzt der Standard **DCAT-AP** (in Deutschland: **DCAT-AP.de**) an:
+
+              * **Vom Datensatz zur Auffindbarkeit:** Während das DNG die Qualität des Datensatzes (z. B. als CSV oder JSON) vorgibt, sorgt DCAT-AP für die **semantische Interoperabilität** der beschreibenden Metadaten.
+              * **Grenzüberschreitender Standard:** Durch den Standard DCAT-AP werden Datensätze automatisch zwischen lokalen, nationalen (govdata.de) und europäischen Portalen (data.europa.eu) synchronisiert.
+
+              **EU-Empfehlung:** Als offiziell anerkannte „Interoperable Europe Solution“ ist DCAT-AP die Brücke, die dafür sorgt, dass offene Verwaltungsdaten im gesamten europäischen Binnenmarkt ohne manuellen Aufwand gefunden werden können.
+
+              **Wem nützt das?**
+
+              * **Der Wirtschaft:** Start-ups nutzen diese Daten für neue Geschäftsmodelle (z. B. Mobilitäts-Apps oder KI-Training).
+              * **Der Verwaltung:** Behörden finden Daten anderer Stellen schneller, was die Effizienz steigert und Doppelerhebungen vermeidet.
+              * **Der Wissenschaft:** Durch europaweit einheitliche Metadaten können Forschende hochwertige Verwaltungsdaten über Fach- und Ländergrenzen hinweg effizient identifizieren, automatisiert zusammenführen und als verlässliche Basis nachnutzen.
+              `}
+                />
+              </AccordionItem>
+              <AccordionItem headline="Die INSPIRE-Richtlinie (Geodateninfrastruktur in Europa)">
+                <RichText
+                  markdown={dedent`
+              Ein Meilenstein der rechtlich verankerten Interoperabilität. Die Richtlinie verpflichtete die Mitgliedstaaten, Geodaten (z. B. zu Schutzgebieten oder Gewässernetzen) interoperabel bereitzustellen.
+
+              Da INSPIRE technisch sehr komplex war, wurde für die Auffindbarkeit der Daten in nationalen Katalogen und im EU-Geoportal eine Metadaten-Struktur genutzt, die heute in weiten Teilen mit DCAT-AP kompatibel ist oder darin aufgegangen ist, um eine sektorübergreifende Suche zu ermöglichen.
+
+              **Warum man das braucht:**
+
+              Umweltprobleme (wie Hochwasser oder Luftverschmutzung) halten sich nicht an Staatsgrenzen. Um eine europäische Strategie (z. B. den Green Deal) umzusetzen, müssen die Daten der Mitgliedstaaten technisch zueinander passen.
+
+              **Wem nützt das?**
+
+              * **Bürgerinnen & Bürger:** Sie können sich grenzübergreifend über Umweltbelastungen informieren.
+              * **Legistinnen & Politik:** Sie erhalten eine verlässliche Datenbasis für grenzübergreifende Infrastrukturprojekte und Klimaschutzmaßnahmen.`}
+                />
               </AccordionItem>
             </div>
-          </section> */}
-        </ContentWrapper>
+
+            <Heading tagName="h2">Weiterführende Links</Heading>
+            <RichText
+              markdown={dedent`
+            - [DCAT Application Profile for data portals in Europe](https://interoperable-europe.ec.europa.eu/collection/semic-support-centre/solution/dcat-application-profile-data-portals-europe)
+            - [EIF Perspective attributes of DCAT Application Profile for data portals in Europe](https://interoperable-europe.ec.europa.eu/collection/semic-support-centre/solution/dcat-application-profile-data-portals-europe/eif-perspective)
+            - [DCAT-AP.de](https://www.dcat-ap.de/)
+            `}
+            />
+          </Container>
+        </div>
       </main>
     </>
   );
