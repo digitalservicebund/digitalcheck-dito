@@ -3,6 +3,9 @@ fileignoreconfig:
     allowed_patterns:
       - secret-scan
       - "password: \\${{ secrets.GITHUB_TOKEN }}"
+  - filename: .github/workflows/scan.yml
+    allowed_patterns:
+      - TRIVY_PASSWORD
   - filename: .env.example
     ignore_detectors: [filename]
   - filename: .env.test
