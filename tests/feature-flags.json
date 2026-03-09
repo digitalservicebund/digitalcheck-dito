@@ -1,4 +1,5 @@
 {
   "showGesetzgebungsprozessOverview": true,
-  "showInterviewLeitfaden": false
+  "showInterviewLeitfaden": false,
+  "showDCATAP": false
 }

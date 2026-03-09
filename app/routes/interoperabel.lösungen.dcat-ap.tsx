@@ -1,4 +1,5 @@
 import DataObjectOutlined from "@digitalservicebund/icons/DataObjectOutlined";
+import { data } from "react-router";
 import AccordionItem from "~/components/AccordionItem";
 import Container from "~/components/Container";
 import ContentWrapper from "~/components/ContentWrapper";
@@ -11,6 +12,15 @@ import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import Timeline from "~/components/Timeline";
 import { dedent } from "~/utils/dedentMultilineStrings";
+import { features } from "~/utils/featureFlags";
+import getFeatureFlag from "~/utils/featureFlags.server";
+
+export function loader() {
+  if (!getFeatureFlag(features.showDCATAP)) {
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
+    throw data("Not found", { status: 404 });
+  }
+}
 
 export default function InteroperableSolutionsDcatAp() {
   return (
