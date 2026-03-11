@@ -50,7 +50,7 @@ const isParentItemActive = (item: HeaderItem, path: string): boolean => {
     // TODO: remove once we've split the 5 Prinzipien page again
     // prevents two active elements in the header for this page
     if (
-      normalizedCurrentPath == ROUTE_METHODS_PRINCIPLES.url &&
+      normalizedCurrentPath.startsWith(ROUTE_METHODS_PRINCIPLES.url) &&
       normalizedItemPath == ROUTE_METHODS.url
     ) {
       return false;
