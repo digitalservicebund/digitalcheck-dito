@@ -663,7 +663,7 @@ export default function Interoperability() {
                   <Heading
                     tagName="h2"
                     text={interoperability.faq.headline}
-                    className="mb-8"
+                    className="max-w-a11y mb-8"
                   />
                   <RichText
                     markdown={interoperability.faq.content}
