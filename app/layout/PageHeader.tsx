@@ -10,7 +10,11 @@ import { useResize } from "~/hooks/deviceHook";
 import DropdownMenu from "~/layout/DropdownMenu.tsx";
 import ProgressBar from "~/layout/ProgressBar";
 import { header } from "~/resources/content/shared/header.ts";
-import { ROUTE_LANDING } from "~/resources/staticRoutes.ts";
+import {
+  ROUTE_LANDING,
+  ROUTE_METHODS,
+  ROUTE_METHODS_PRINCIPLES,
+} from "~/resources/staticRoutes.ts";
 import { matchHasHandle, MatchWithHandle } from "~/utils/handles";
 import twMerge from "~/utils/tailwindMerge.ts";
 import { normalizePathname } from "~/utils/utilFunctions.ts";
@@ -41,6 +45,15 @@ const isParentItemActive = (item: HeaderItem, path: string): boolean => {
       subItem.activeBehavior === "exactMatch"
     ) {
       return normalizedCurrentPath === normalizedItemPath;
+    }
+
+    // TODO: remove once we've split the 5 Prinzipien page again
+    // prevents two active elements in the header for this page
+    if (
+      normalizedCurrentPath == ROUTE_METHODS_PRINCIPLES.url &&
+      normalizedItemPath == ROUTE_METHODS.url
+    ) {
+      return false;
     }
 
     return normalizedCurrentPath.startsWith(normalizedItemPath);
