@@ -1,24 +1,15 @@
 import { contentType } from "mime-types";
 import { promises as fs } from "node:fs";
 import path from "node:path";
-import { FILE_NAME_DOCUMENTATION_STATIC_WORD } from "~/utils/constants";
 import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/download.$fileName";
 
 export async function loader({ params, request }: Route.LoaderArgs) {
-  let { fileName } = params;
+  const { fileName } = params;
 
   if (!fileName) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw new Response("Please provide a file name", { status: 400 });
-  }
-
-  // NOTE: 70-tage replace pdf with word document
-  /**
-   * Used for external links to the old pdf document
-   */
-  if (fileName === "digitalcheck-begleitende-dokumentation.pdf") {
-    fileName = FILE_NAME_DOCUMENTATION_STATIC_WORD;
   }
 
   try {
