@@ -111,16 +111,6 @@ export const ROUTE_METHODS_INTERVIEW_METHODS_STEPS = createRoute(
   "Interview Leitfaden Schritte",
   ROUTE_METHODS,
 );
-export const ROUTE_METHODS_PRINCIPLES_NEW = createRoute(
-  "fuenf-prinzipien-neu",
-  "Fünf Prinzipien",
-  ROUTE_METHODS,
-);
-export const ROUTE_METHODS_PRINCIPLES_NEW_DIGITALE_ANGEBOTE = createRoute(
-  "digitale-angebote",
-  "Prinzip: Digitale Angebote",
-  ROUTE_METHODS_PRINCIPLES_NEW,
-);
 // DOCUMENTATION ROUTES
 export const ROUTE_DOCUMENTATION = createRoute(
   "dokumentation",

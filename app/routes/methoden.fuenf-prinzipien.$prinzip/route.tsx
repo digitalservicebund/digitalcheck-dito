@@ -15,7 +15,6 @@ import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzip
 import {
   ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_METHODS_PRINCIPLES,
-  ROUTE_METHODS_PRINCIPLES_NEW_DIGITALE_ANGEBOTE,
 } from "~/resources/staticRoutes.ts";
 import { absatzIdTag, Node } from "~/utils/paragraphUtils";
 import {
@@ -286,9 +285,7 @@ export default function Prinzip() {
 
   return (
     <>
-      <MetaTitle
-        prefix={ROUTE_METHODS_PRINCIPLES_NEW_DIGITALE_ANGEBOTE.title}
-      />
+      <MetaTitle prefix={`Prinzip: ${prinzip.Name}`} />
       <main>
         <div className="breakout-grid-toc">
           <BreakoutHero
