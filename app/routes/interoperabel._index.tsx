@@ -15,6 +15,7 @@ import NewTabLink from "~/components/NewTabLink";
 import RichText from "~/components/RichText";
 import TabGroupWithUrlState from "~/components/Tabs/TabsWithUrlState";
 import Timeline from "~/components/Timeline";
+import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { interoperability } from "~/resources/content/interoperabel";
 import { contact } from "~/resources/content/shared/contact";
 import {
@@ -23,10 +24,12 @@ import {
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
+import { features } from "~/utils/featureFlags";
 import { getTabAnchorLink } from "~/utils/tabs";
 import EuRechtTab from "./interoperabel.eu-recht";
 
 export default function Interoperability() {
+  const showEuRechtTab = useFeatureFlag(features.showIOEuRechtContent);
   return (
     <>
       <MetaTitle prefix={ROUTE_INTEROPERABILITY.title} />
@@ -76,9 +79,11 @@ export default function Interoperability() {
               <TabGroupWithUrlState.Tab>
                 Häufige Fragen
               </TabGroupWithUrlState.Tab>
-              <TabGroupWithUrlState.Tab>
-                Angrenzendes EU-Recht
-              </TabGroupWithUrlState.Tab>
+              {showEuRechtTab && (
+                <TabGroupWithUrlState.Tab>
+                  Angrenzendes EU-Recht
+                </TabGroupWithUrlState.Tab>
+              )}
             </TabGroupWithUrlState.TabList>
             <TabGroupWithUrlState.TabPanels>
               <TabGroupWithUrlState.TabPanel className="mb-80">
@@ -681,9 +686,11 @@ export default function Interoperability() {
                   </div>
                 </>
               </TabGroupWithUrlState.TabPanel>
-              <TabGroupWithUrlState.TabPanel className="mb-80">
-                <EuRechtTab></EuRechtTab>
-              </TabGroupWithUrlState.TabPanel>
+              {showEuRechtTab && (
+                <TabGroupWithUrlState.TabPanel className="mb-80">
+                  <EuRechtTab></EuRechtTab>
+                </TabGroupWithUrlState.TabPanel>
+              )}
             </TabGroupWithUrlState.TabPanels>
           </TabGroupWithUrlState>
         </ContentWrapper>
