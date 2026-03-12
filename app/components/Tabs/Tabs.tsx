@@ -80,12 +80,16 @@ function useTabsStateContext(): TabsState {
 const TabList = ({ children }: Readonly<TabListWithListboxProps>) => {
   const context = useTabsStateContext();
 
+  const validChildren = React.Children.toArray(children).filter(Boolean);
   return (
     <>
       <HeadlessTabList className="mb-40 box-border flex items-stretch border-b-[3px] border-blue-500 max-lg:hidden">
-        {React.Children.map(children, (child) => {
+        {validChildren.map((child, index) => {
           return (
-            <HeadlessTab className="relative -mb-[3px] box-border min-h-[70px] cursor-pointer border-b-[3px] border-blue-500 px-24 py-12 text-left leading-tight hyphens-auto text-blue-800 hover:bg-blue-100 data-selected:border-b-4 data-selected:border-blue-800 data-selected:bg-blue-100 data-selected:font-bold">
+            <HeadlessTab
+              key={index}
+              className="relative -mb-[3px] box-border min-h-[70px] cursor-pointer border-b-[3px] border-blue-500 px-24 py-12 text-left leading-tight hyphens-auto text-blue-800 hover:bg-blue-100 data-selected:border-b-4 data-selected:border-blue-800 data-selected:bg-blue-100 data-selected:font-bold"
+            >
               {child}
             </HeadlessTab>
           );
@@ -99,7 +103,7 @@ const TabList = ({ children }: Readonly<TabListWithListboxProps>) => {
           <ListboxButton className="ds-label-02-bold relative h-[70px] w-full cursor-pointer border-4 border-transparent bg-blue-100 pl-[16px] text-left text-blue-800 hover:bg-blue-300 focus:border-blue-800">
             {({ open }) => (
               <>
-                {React.Children.toArray(children)[context.selectedIndex ?? 0]}
+                {validChildren[context.selectedIndex ?? 0]}
                 <span className="absolute inset-y-0 right-[16px] flex items-center">
                   {open ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
                 </span>
@@ -107,8 +111,9 @@ const TabList = ({ children }: Readonly<TabListWithListboxProps>) => {
             )}
           </ListboxButton>
           <ListboxOptions className="border-t border-blue-500 focus:outline-none">
-            {React.Children.map(children, (child, index) => (
+            {validChildren.map((child, index) => (
               <ListboxOption
+                key={index}
                 className={({ focus, selected }) =>
                   twJoin(
                     "ds-label-02-regular relative cursor-pointer border-4 border-transparent py-[10px] pr-[10px] pl-[16px] text-blue-800 select-none first:pt-[16px] last:pb-[16px] focus:border-blue-800",
