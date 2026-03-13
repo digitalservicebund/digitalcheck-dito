@@ -125,7 +125,7 @@ export default function EuRechtTab() {
                 markdown={dedent`
                   **Im Detail**: Verordnung (EU) 2024/903 des Europäischen Parlaments und des Rates vom 13. März 2024 über Maßnahmen für ein hohes Maß an Interoperabilität des öffentlichen Sektors in der Union | [EUR-Lex](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903).
 
-                Was der Hintergrund der Verordnug ist, finden sie auf der [Hauptseite](https://digitalcheck.bund.de/interoperabel) in dieser Sektion. Weitere Informationen finden Sie auf dem [Interoperable Europe Portal]() der Europäischen Kommission`}
+                Was der Hintergrund der Verordnung ist, finden Sie auf der [Hauptseite](https://digitalcheck.bund.de/interoperabel) in dieser Sektion. Weitere Informationen finden Sie auf dem [Interoperable Europe Portal]() der Europäischen Kommission`}
               ></RichText>
             </ContentInlineComponent>
             <ContentInlineComponent
@@ -173,7 +173,7 @@ export default function EuRechtTab() {
           <Separator className="my-40"></Separator>
           <section className="space-y-40">
             <Heading
-              tagName="h2"
+              tagName="h3"
               className="font-bold"
               id={tableContent[1].href}
             >
@@ -193,7 +193,7 @@ export default function EuRechtTab() {
 
                   **Die Single-Digital-Gateway-Verordnung könnte für Sie relevant sein, wenn:** 
                   - die Bereitstellung von Informationen oder Verwaltungsdienstleistungen für Bürgerinnen und Bürger oder Unternehmen berührt ist.
-                  - das Vorhaben Informationen, Verfahren oder Hilfsdienste betrifft, die Bürger oder Unternehmen benötigen, um ihre Rechte im EU-Binnenmarkt auszuüben oder entsprechende Pflichten zu erfüllen?`}
+                  - das Vorhaben Informationen, Verfahren oder Hilfsdienste betrifft, die Bürgerinnen, Bürger oder Unternehmen benötigen, um ihre Rechte im EU-Binnenmarkt auszuüben oder entsprechende Pflichten zu erfüllen`}
               />
               <RichText
                 className="my-20 bg-blue-100"
@@ -201,7 +201,7 @@ export default function EuRechtTab() {
                   **Relevante Informationsbereiche** 
                   ([nach Single Digital Gateway-Verordnung Artikel 2](https://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32018R1724&from=DE#art_2) Absatz 2 Buchstabe a, [Anhang I](https://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32018R1724&from=DE#anx_I))
                   - **Für Bürgerinnen und Bürger**: Reisen innerhalb der Union, Arbeit und Ruhestand innerhalb der Union, Fahrzeuge in der Union, Wohnsitz in einem anderen Mitgliedstaat, Bildung oder Praktikum in einem anderen Mitgliedstaat, Medizinische Versorgung, Bürger- und Familienrechte, Verbraucherrechte, Schutz personenbezogener Daten
-                  - **Für Unterehmen**: Gründung, Führung und Schließung eines Unternehmens, Arbeitnehmer, Steuern, Waren, Dienstleistungen, Finanzierung eines Unternehmens, Öffentliche Aufträge, Gesundheit und Sicherheit am Arbeitsplatz
+                  - **Für Unternehmen**: Gründung, Führung und Schließung eines Unternehmens, Arbeitnehmer, Steuern, Waren, Dienstleistungen, Finanzierung eines Unternehmens, Öffentliche Aufträge, Gesundheit und Sicherheit am Arbeitsplatz
 
                   **Relevante Ereignisse** 
                   (nach [Single Digital Gateway-Verordnung Artikel 6](https://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32018R1724&from=DE#art_6) Absatz 1, [Anhang II](https://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32018R1724&from=DE#anx_II))
@@ -240,7 +240,7 @@ export default function EuRechtTab() {
           <Separator className="my-40"></Separator>
           <section className="space-y-40">
             <Heading
-              tagName="h2"
+              tagName="h3"
               className="font-bold"
               id={tableContent[2].href}
             >
@@ -258,7 +258,7 @@ export default function EuRechtTab() {
                 **Die Richtlinie könnte für Ihr Vorhaben relevant sein, wenn im Rahmen der Regelung:**
 
                 - Handhabung, Bereitstellung oder Weiterverwendung von Informationen des öffentlichen Sektors oder öffentlich finanzierter Forschungsdaten betroffen ist.
-                - sich der Anwendungsbereich mit einen Eintrag in [Anhang I](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32019L1024&qid=1754909351558#anx_I)(Kategorien hochwertiger Datensätze) der Durchführungsverordnung über hochwertige Datensätze überschneidet.
+                - sich der Anwendungsbereich mit einem Eintrag in [Anhang I](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32019L1024&qid=1754909351558#anx_I)(Kategorien hochwertiger Datensätze) der Durchführungsverordnung über hochwertige Datensätze überschneidet.
 
                 **Schlüsselprinzip:**
                 Bestimmte Daten im Besitz öffentlicher Stellen, öffentlicher Unternehmen und Forschungsdaten sollen standardmäßig offen erstellt und grundsätzlich für kommerzielle und nichtkommerzielle Zwecke weiterverwendbar sein. Die Richtlinie legt die Bedingungen der Weiterverwendung von Daten fest, die als offene Daten bereitgestellt werden. Die rechtliche Verpflichtung zur Bereitstellung als offene Daten folgt aus § 12a EGovG und landesrechtlichen Normen.
@@ -301,7 +301,7 @@ export default function EuRechtTab() {
           <Separator className="my-40"></Separator>
           <section className="space-y-40">
             <Heading
-              tagName="h2"
+              tagName="h3"
               className="font-bold"
               id={tableContent[3].href}
             >
@@ -332,7 +332,7 @@ export default function EuRechtTab() {
           <Separator className="my-40"></Separator>
           <section className="space-y-40">
             <Heading
-              tagName="h2"
+              tagName="h3"
               className="font-bold"
               id={tableContent[4].href}
             >
@@ -377,7 +377,7 @@ export default function EuRechtTab() {
                   Gewährleistet ein hohes Schutzniveau für Gesundheit, Sicherheit und Grundrechte vor schädlichen KI-Auswirkungen, während gleichzeitig die Innovation durch klare Regeln und einen einheitlichen Rechtsrahmen im digitalen Binnenmarkt gestärkt wird.
 
                   **Die wichtigsten Punkte bezüglich Interoperabilität:**
-                  - Die Verordnung setzt soll die technische Kompatibilität und Robustheit von KI-Systemen über Staatsgrenzen hinweg sicherstellen.
+                  - Die Verordnung soll die technische Kompatibilität und Robustheit von KI-Systemen über Staatsgrenzen hinweg sicherstellen.
                   - Der AI Act fördert den Zugriff auf hochwertige, interoperable Datensätze für das Training und Testen von KI-Systemen, um die Qualität und Nichtdiskriminierung von Algorithmen sicherzustellen.
                   - Anbieter von KI-Basismodellen müssen nachgelagerten Entwicklern detaillierte technische Informationen bereitstellen, damit diese die KI nahtlos und sicher in ihre eigenen interoperablen Dienste integrieren können.`}
               ></RichText>
