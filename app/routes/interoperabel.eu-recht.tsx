@@ -4,7 +4,7 @@ import SelectAllOutlined from "@digitalservicebund/icons/SelectAllOutlined";
 import { ReactNode } from "react";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
-import Image from "~/components/Image";
+import ImageBox from "~/components/ImageBox";
 import InfoBox from "~/components/InfoBox";
 import RichText from "~/components/RichText";
 import Separator from "~/components/Separator";
@@ -66,19 +66,18 @@ export default function EuRechtTab() {
   return (
     <>
       <div className="space-y-40">
-        <figure>
-          <Image
-            className="border-b-ds-gray-400 h-[500px] w-[848px] rounded-xs border-b px-8 py-16"
-            url={"images/european-digital-single-market.png"}
-            alternativeText="Infografik zum EU-Interoperabilitäts-Ökosystem: Sieben zentrale Rechtsakte (u. a. IEA, AI Act, DSGVO) sind kreisförmig um das Zentrum European Digital Single Market angeordnet. Die Grafik gruppiert diese in die Themenfelder Zusammenarbeit, Technologie & Datenschutz, Teilen von Daten sowie Zugang zu Diensten."
-          />
-          <figcaption className="px-8 py-16 font-light">
-            Zusammenspiel europäischer Rechtsakte: Die Infografik zeigt, wie der
-            Interoperable Europe Act und das EIF-Rahmenwerk mit weiteren
-            zentralen Verordnungen des europäischen digitalen Binnenmarkts
-            verzahnt sind.
-          </figcaption>
-        </figure>
+        <ImageBox
+          zoomable={false}
+          image={{
+            className:
+              "border-b-ds-gray-400 h-[500px] w-[848px] rounded-xs border-b px-8 py-16",
+            url: "images/european-digital-single-market.png",
+            caption:
+              "Zusammenspiel europäischer Rechtsakte: Die Infografik zeigt, wie der Interoperable Europe Act und das EIF-Rahmenwerk mit weiteren zentralen Verordnungen des europäischen digitalen Binnenmarkts verzahnt sind.",
+            alternativeText:
+              "Infografik zum EU-Interoperabilitäts-Ökosystem: Sieben zentrale Rechtsakte (u. a. IEA, AI Act, DSGVO) sind kreisförmig um das Zentrum European Digital Single Market angeordnet. Die Grafik gruppiert diese in die Themenfelder Zusammenarbeit, Technologie & Datenschutz, Teilen von Daten sowie Zugang zu Diensten.",
+          }}
+        />
         <SidebarContainer
           sidebar={
             <ToC title={"Inhalt"} selector="section[id]">
