@@ -480,8 +480,14 @@ exports[`Footer Component > Renders correctly 1`] = `
         >
           <img
             alt="Logo des Bundesministerium für Digitales und Staatsmodernisierung"
-            class="forced-colors:dark:invert"
-            src="/logo/bmds-logo.png"
+            class="forced-colors:dark:hidden"
+            src="/logo/bmds-logo.svg"
+            width="120"
+          />
+          <img
+            alt="Logo des Bundesministerium für Digitales und Staatsmodernisierung"
+            class="hidden forced-colors:dark:block"
+            src="/logo/bmds-logo-white.svg"
             width="120"
           />
           <div
