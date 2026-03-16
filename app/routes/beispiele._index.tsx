@@ -7,7 +7,9 @@ import TabGroup from "~/components/Tabs/Tabs";
 import {
   ROUTE_EXAMPLES,
   ROUTE_EXAMPLES_PRINCIPLES,
+  ROUTE_EXAMPLES_VISUALISATIONS,
   ROUTE_METHODS_PRINCIPLES,
+  ROUTE_METHODS_VISUALIZE,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 
@@ -72,8 +74,13 @@ export default function Digitaltauglichkeit_index() {
                 <InfoBox.LinkList
                   links={[
                     {
-                      text: "Zu den Visualisierungen",
-                      to: "/beispiele/visualisierungen",
+                      text: "Zu den Beispielen",
+                      to: ROUTE_EXAMPLES_VISUALISATIONS.url,
+                    },
+                    {
+                      text: "Anleitung zur Visualisierung",
+                      to: ROUTE_METHODS_VISUALIZE.url,
+                      look: "tertiary",
                     },
                   ]}
                 />
