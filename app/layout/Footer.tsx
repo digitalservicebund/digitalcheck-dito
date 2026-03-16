@@ -111,7 +111,7 @@ export default function Footer() {
 
           <div className="space-y-16 sm:flex sm:flex-row sm:items-center sm:gap-48 sm:space-y-0">
             <Image
-              url="/logo/bmds-logo.png"
+              url="/logo/bmds-logo.svg"
               width={120}
               alternativeText="Logo des Bundesministerium für Digitales und Staatsmodernisierung"
               className="forced-colors:dark:hidden"
