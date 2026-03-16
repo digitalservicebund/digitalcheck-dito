@@ -165,7 +165,13 @@ const PageHeader = () => {
               src="/logo/bund-logo.png"
               alt="Logo des Bundes"
               width={54}
-              className="forced-colors:dark:invert"
+              className="forced-colors:dark:hidden"
+            />
+            <img
+              src="/logo/bund-logo-white.svg"
+              alt="Logo des Bundes"
+              width={54}
+              className="hidden forced-colors:dark:block"
             />
             <p className="ds-label-01-bold ml-16 flex flex-col text-xl max-lg:hidden">
               {header.title}

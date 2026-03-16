@@ -114,9 +114,14 @@ export default function Footer() {
               url="/logo/bmds-logo.png"
               width={120}
               alternativeText="Logo des Bundesministerium für Digitales und Staatsmodernisierung"
-              className="forced-colors:dark:invert"
+              className="forced-colors:dark:hidden"
             />
-
+            <Image
+              url="/logo/bmds-logo-white.svg"
+              width={120}
+              alternativeText="Logo des Bundesministerium für Digitales und Staatsmodernisierung"
+              className="hidden forced-colors:dark:block"
+            />
             <div className="max-w-2xl space-y-8">
               <h3 className="ds-label-03-bold">{footer.bottom.title}</h3>
               <LinkList links={footer.bottom.links} />
