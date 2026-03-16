@@ -12,14 +12,16 @@ import {
   TextRun,
 } from "docx";
 import fileSaver from "file-saver";
+import { useCallback } from "react";
 import { documentationDocument } from "~/resources/content/documentation-document";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { contact } from "~/resources/content/shared/contact";
+import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider";
 import {
   type DocumentationData,
   PrincipleReasoning,
+  V1,
 } from "~/routes/dokumentation/documentationDataSchema";
-import { getDocumentationData } from "~/routes/dokumentation/documentationDataService";
 import {
   PrinzipAspekt,
   type PrinzipWithAspekte,
@@ -32,19 +34,30 @@ const { principlePages } = digitalDocumentation;
 export const FILE_NAME_DOCUMENTATION_TEMPLATE =
   "VORLAGE_Dokumentation_der_Digitaltauglichkeit_V2.docx";
 
-export default async function downloadDocumentation(
-  prinzips: PrinzipWithAspekte[],
-) {
-  try {
-    const template = await fetch(
-      `/documents/${FILE_NAME_DOCUMENTATION_TEMPLATE}`,
-    );
-    const templateData = await template.arrayBuffer();
-    const doc = await createDoc(templateData, getDocumentationData(), prinzips);
-    saveAs(doc, documentationDocument.filename);
-  } catch (e) {
-    console.error(e);
-  }
+export function useWordDocumentation() {
+  const { documentationData } = useDocumentationDataService();
+
+  const downloadDocumentation = useCallback(
+    async (prinzips: PrinzipWithAspekte[]) => {
+      try {
+        const template = await fetch(
+          `/documents/${FILE_NAME_DOCUMENTATION_TEMPLATE}`,
+        );
+        const templateData = await template.arrayBuffer();
+        const doc = await createDoc(
+          templateData,
+          documentationData as DocumentationData<V1>,
+          prinzips,
+        );
+        saveAs(doc, documentationDocument.filename);
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    [documentationData],
+  );
+
+  return { downloadDocumentation };
 }
 
 export const createDoc = async (
@@ -53,7 +66,7 @@ export const createDoc = async (
     policyTitle,
     participation,
     principles: principleAnswers,
-  }: DocumentationData,
+  }: DocumentationData<V1>,
   prinzips: PrinzipWithAspekte[],
 ) => {
   const date = new Date().toLocaleDateString("de-DE");
@@ -116,7 +129,7 @@ export const stringToTextRuns = (content: string, options: IRunOptions = {}) =>
 // - Aspects and own explanation (partially filled in case of a positive answer)
 export const buildPrinciplePatches = (
   prinzips: PrinzipWithAspekte[],
-  answers: DocumentationData["principles"],
+  answers: DocumentationData<V1>["principles"],
 ): Record<string, IPatch> =>
   prinzips.reduce((acc, prinzip, prinzipIndex) => {
     const answer = answers?.find((answer) => answer.id === prinzip.documentId);
@@ -198,7 +211,7 @@ export const indentOptions = {
 
 // Builds the docx Paragraphs for the individual aspects and own reasoning, combining data from Strapi with the user data
 export const buildAspectParagraphs = (
-  reasoning?: PrincipleReasoning,
+  reasoning?: PrincipleReasoning<V1>,
   aspekt?: PrinzipAspekt,
 ) => [
   stringToIndentParagraph({

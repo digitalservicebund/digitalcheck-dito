@@ -1,27 +1,41 @@
+import { useEffect } from "react";
 import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
+import HelpButton from "~/components/HelpButton";
 import Input from "~/components/Input";
 import MetaTitle from "~/components/Meta";
+import { useHelpPanel } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_TITLE } from "~/resources/staticRoutes";
 import {
   defaultTitleValues,
   policyTitleSchema,
 } from "~/routes/dokumentation/documentationDataSchema";
-import { setPolicyTitle } from "~/routes/dokumentation/documentationDataService";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
-import {
-  useDocumentationData,
-  useSyncedForm,
-} from "./dokumentation/documentationDataHook";
+import { useSyncedForm } from "./dokumentation/documentationDataHook";
+import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 
 const { info } = digitalDocumentation;
+
+const help = [
+  {
+    id: "title",
+    title: "Titel des Regelungsvorhabens",
+    content:
+      "Geben Sie hier den offiziellen Titel Ihres Regelungsvorhabens ein. Dieser Titel wird in der fertigen Dokumentation verwendet.",
+  },
+];
 
 export default function DocumentationTitle() {
   const { currentUrl, nextUrl, previousUrl } =
     useOutletContext<NavigationContext>();
-  const { documentationData } = useDocumentationData();
+  const { documentationData, setPolicyTitle } = useDocumentationDataService();
+  const { setHelpSections } = useHelpPanel();
+
+  useEffect(() => {
+    setHelpSections(help);
+  }, [setHelpSections]);
 
   const form = useSyncedForm({
     schema: policyTitleSchema,
@@ -43,7 +57,7 @@ export default function DocumentationTitle() {
       />
       <form {...form.getFormProps()}>
         <Input scope={form.scope("title")} warningInsteadOfError>
-          {info.inputTitle.label}
+          {info.inputTitle.label} <HelpButton sectionId="title" />
         </Input>
 
         <DocumentationActions

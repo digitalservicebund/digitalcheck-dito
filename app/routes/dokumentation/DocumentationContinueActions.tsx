@@ -9,20 +9,26 @@ import {
   ROUTE_DOCUMENTATION_TITLE,
   ROUTES_DOCUMENTATION_INTRO,
 } from "~/resources/staticRoutes.ts";
-import { useDocumentationData } from "~/routes/dokumentation/documentationDataHook.ts";
-import { deleteDocumentationData } from "~/routes/dokumentation/documentationDataService.ts";
 import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
-import downloadDocumentation from "~/service/wordDocumentationExport/wordDocumentation.ts";
+import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation.ts";
 import { useNonce } from "~/utils/nonce.ts";
+import { useDocumentationDataService } from "./DocumentationDataProvider";
 
 const { start } = digitalDocumentation;
 
-function StartOverDialog() {
+function StartOverDialog({
+  deleteDocumentationData,
+}: {
+  deleteDocumentationData: () => void;
+}) {
   const navigate = useNavigate();
   const supportingData = useDocumentationRouteData();
+  const { downloadDocumentation } = useWordDocumentation();
+
   const downloadDraft = async () => {
     await downloadDocumentation(supportingData.prinzips);
   };
+
   return (
     <Dialog
       title={start.startOverDialog.title}
@@ -65,7 +71,8 @@ function StartOverDialog() {
 }
 
 export function DocumentationContinueActions() {
-  const { hasSavedDocumentation } = useDocumentationData();
+  const { hasSavedDocumentation, deleteDocumentationData } =
+    useDocumentationDataService();
   const nonce = useNonce();
   return (
     <ButtonContainer>
@@ -74,7 +81,7 @@ export function DocumentationContinueActions() {
           <LinkButton to={ROUTE_DOCUMENTATION_TITLE.url} className="js-only">
             {start.actions.resume.buttonText}
           </LinkButton>
-          <StartOverDialog />
+          <StartOverDialog deleteDocumentationData={deleteDocumentationData} />
         </>
       ) : (
         <LinkButton to={ROUTES_DOCUMENTATION_INTRO[0].url} className="js-only">

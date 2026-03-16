@@ -13,19 +13,19 @@ pre-push:
   commands:
     lint:
       tags: lint
-      run: npm run lint:fix
+      run: pnpm lint:fix
       glob: "*.{js,cjs,mjs,ts,jsx,tsx}"
       stage_fixed: true
     check-format:
       tags: style
-      run: npm run format:fix-selected {staged_files}
+      run: pnpm format:fix-selected {staged_files}
       glob: "*.{js,cjs,mjs,ts,jsx,tsx,json,css,md,yml,yaml,html}"
       stage_fixed: true
     typecheck:
       tags: typecheck
-      run: npm run typecheck
+      run: pnpm typecheck
       glob: "*.{ts,tsx}"
       stage_fixed: true
     licenses-audit:
       tags: licenses audit
-      run: npm run audit:licences
+      run: pnpm audit:licences

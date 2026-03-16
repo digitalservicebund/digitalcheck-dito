@@ -1,3 +1,7 @@
+// Import mocks first
+import "./utils/mockLocalStorageVersioned";
+// End of mocks
+
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import React from "react";
@@ -9,6 +13,7 @@ import {
   ROUTES_DOCUMENTATION_INTRO,
 } from "~/resources/staticRoutes";
 import DokumentationIndex from "~/routes/dokumentation._index";
+import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
 
 vi.mock("~/contexts/FeatureFlagContext", () => {
   return {
@@ -18,7 +23,11 @@ vi.mock("~/contexts/FeatureFlagContext", () => {
 
 describe("Dokumentation Index Route - Integration Tests", () => {
   const renderWithRouter = (component: React.ReactElement) => {
-    return render(<MemoryRouter>{component}</MemoryRouter>);
+    return render(
+      <MemoryRouter>
+        <DocumentationDataProvider>{component}</DocumentationDataProvider>
+      </MemoryRouter>,
+    );
   };
 
   beforeEach(() => {

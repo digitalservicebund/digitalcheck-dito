@@ -9,24 +9,28 @@ import InfoBoxList from "~/components/InfoBoxList";
 import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
+import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
-  type Route,
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_SUMMARY,
   ROUTE_DOCUMENTATION_TITLE,
+  type Route,
 } from "~/resources/staticRoutes";
 import {
+  V1,
+  V2,
   type Participation,
   type PolicyTitle,
   type Principle,
   type PrincipleReasoning,
 } from "~/routes/dokumentation/documentationDataSchema";
+import { features } from "~/utils/featureFlags";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
-import { useDocumentationData } from "./dokumentation/documentationDataHook";
+import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 
 const { summary } = digitalDocumentation;
 
@@ -135,26 +139,92 @@ function ParticipationContent({
   );
 }
 
+function SimplifiedAspectsContent({
+  reasoning,
+  prinzip,
+}: {
+  reasoning: PrincipleReasoning;
+  prinzip: PrinzipWithAspekte;
+}) {
+  if (!reasoning.aspects || reasoning.aspects.length === 0) {
+    return (
+      <InlineNotice
+        look="missingOrIncomplete"
+        heading={summary.warnings.incomplete}
+      />
+    );
+  }
+  return (
+    <>
+      <div className="flex flex-row gap-32">
+        <span className="ds-body-01-bold">Schwerpunkte:</span>
+        <div className="flex flex-wrap gap-16">
+          {reasoning.aspects.map((aspect) => {
+            const aspekt = prinzip.Aspekte.find(
+              (a) => a.Kurzbezeichnung === aspect,
+            );
+            return (
+              <span
+                key={aspect}
+                className="rounded-full border border-blue-400 bg-blue-400 px-16 py-6 text-sm font-medium"
+              >
+                {aspekt ? aspekt.Kurzbezeichnung : aspect}
+              </span>
+            );
+          })}
+        </div>
+      </div>
+      {reasoning.explanation && (
+        <Answer
+          heading="Erläuterung"
+          answers={[
+            { prefix: summary.answerPrefix, answer: reasoning.explanation },
+          ]}
+        />
+      )}
+    </>
+  );
+}
+
 function PrincipleContent({
   principle,
   prinzip,
+  simplified,
 }: Readonly<{
-  principle: Principle;
+  principle: Principle<V1 | V2>;
   prinzip: PrinzipWithAspekte;
+  simplified?: boolean;
 }>) {
+  const reasoning = principle.reasoning;
+
+  const isSimplifiedReasoning =
+    simplified &&
+    reasoning !== null &&
+    typeof reasoning === "object" &&
+    !Array.isArray(reasoning) &&
+    "aspects" in reasoning;
+
   return (
     <>
       <Answer
         heading={summary.principleAnswerTitle}
         answers={[{ prefix: summary.answerPrefix, answer: principle.answer }]}
       />
-      {isArray(principle.reasoning) ? (
-        <AspectsContent reasoning={principle.reasoning} prinzip={prinzip} />
+      {isSimplifiedReasoning ? (
+        <SimplifiedAspectsContent
+          reasoning={reasoning as unknown as PrincipleReasoning}
+          prinzip={prinzip}
+        />
+      ) : isArray(reasoning) ? (
+        <AspectsContent reasoning={reasoning} prinzip={prinzip} />
       ) : (
         <Answer
           heading={summary.reasonPrefix}
           answers={[
-            { prefix: summary.answerPrefix, answer: principle.reasoning },
+            {
+              prefix: summary.answerPrefix,
+              answer: reasoning as string | undefined,
+            },
           ]}
         />
       )}
@@ -166,7 +236,7 @@ function AspectsContent({
   reasoning,
   prinzip,
 }: {
-  reasoning: PrincipleReasoning[];
+  reasoning: PrincipleReasoning<V1>[];
   prinzip: PrinzipWithAspekte;
 }) {
   const checkedAspects = reasoning.filter((reasoning) => reasoning?.checkbox);
@@ -213,7 +283,8 @@ export default function DocumentationSummary() {
   const { routes, previousUrl, nextUrl, prinzips } =
     useOutletContext<NavigationContext>();
 
-  const { documentationData } = useDocumentationData();
+  const { documentationData } = useDocumentationDataService();
+  const simplifiedFlow = useFeatureFlag(features.simplifiedPrincipleFlow);
 
   const items: InfoBoxProps[] = [
     createInfoBoxItem({
@@ -244,10 +315,19 @@ export default function DocumentationSummary() {
       const principleFormData = documentationData.principles?.find(
         (principle) => principle.id === prinzip.documentId,
       );
+      // In simplified flow, link to erlaeuterung sub-page if answer is saved
+      const editRoute =
+        simplifiedFlow && principleFormData?.answer
+          ? { ...principleRoute, url: `${principleRoute.url}/erlaeuterung` }
+          : principleRoute;
       return createInfoBoxItem({
-        route: principleRoute,
+        route: editRoute,
         content: principleFormData?.answer ? (
-          <PrincipleContent principle={principleFormData} prinzip={prinzip} />
+          <PrincipleContent
+            principle={principleFormData}
+            prinzip={prinzip}
+            simplified={simplifiedFlow}
+          />
         ) : null,
         badge: {
           text: summary.principleBadge,

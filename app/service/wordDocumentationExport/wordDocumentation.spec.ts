@@ -2,7 +2,10 @@ import { HeadingLevel, IRunOptions, PatchType, TextRun } from "docx";
 import { describe, expect, it, vi } from "vitest";
 import { documentationDocument } from "~/resources/content/documentation-document";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import { DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
+import {
+  DocumentationData,
+  V1,
+} from "~/routes/dokumentation/documentationDataSchema";
 import type { Node } from "~/utils/paragraphUtils";
 import { PrinzipWithAspekte } from "~/utils/strapiData.server";
 import {
@@ -196,7 +199,7 @@ describe("wordDocumentation", () => {
 
   describe("builds complete patches for principles and aspects in order", () => {
     // test a few parts, not exhaustive
-    const answers: DocumentationData["principles"] = [
+    const answers: DocumentationData<V1>["principles"] = [
       {
         id: "p1",
         answer: IRRELEVANT_ANSWER,
@@ -285,7 +288,7 @@ describe("wordDocumentation", () => {
 
   describe("placeholder logic", () => {
     it("correctly replaces patches with placeholders where needed", () => {
-      const answers: DocumentationData["principles"] = [
+      const answers: DocumentationData<V1>["principles"] = [
         {
           id: "p2",
           answer: NEGATIVE_ANSWER,
@@ -312,7 +315,7 @@ describe("wordDocumentation", () => {
     });
 
     it("fills principle reasoning with placeholder when answer is positive", () => {
-      const answers: DocumentationData["principles"] = [
+      const answers: DocumentationData<V1>["principles"] = [
         {
           id: "p1",
           answer: POSITIVE_ANSWER,
@@ -327,7 +330,7 @@ describe("wordDocumentation", () => {
     });
 
     it("fills aspects with placeholders when answer is negative or not given", () => {
-      const answers: DocumentationData["principles"] = [
+      const answers: DocumentationData<V1>["principles"] = [
         {
           id: "p1",
           answer: NEGATIVE_ANSWER,
@@ -359,7 +362,7 @@ describe("wordDocumentation", () => {
   });
 
   describe("bookmarks", () => {
-    const answers: DocumentationData["principles"] = [
+    const answers: DocumentationData<V1>["principles"] = [
       { id: "p1", answer: NEGATIVE_ANSWER, reasoning: "Darum" },
     ];
     const patches = buildPrinciplePatches(prinzips, answers);
@@ -408,7 +411,7 @@ describe("wordDocumentation", () => {
     const { ownExplanationTitle } = principlePages.explanationFields;
 
     it("adds a placeholder when none provided", () => {
-      const answersNoOwn: DocumentationData["principles"] = [
+      const answersNoOwn: DocumentationData<V1>["principles"] = [
         {
           id: "p1",
           answer: POSITIVE_ANSWER,
@@ -426,7 +429,7 @@ describe("wordDocumentation", () => {
     });
 
     it("adds multiple when provided", () => {
-      const answersWithOwn: DocumentationData["principles"] = [
+      const answersWithOwn: DocumentationData<V1>["principles"] = [
         {
           id: "p1",
           answer: POSITIVE_ANSWER,

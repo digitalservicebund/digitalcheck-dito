@@ -1,7 +1,7 @@
 import { contentType } from "mime-types";
 import { promises as fs } from "node:fs";
 import path from "node:path";
-import { DATA_SCHEMA_VERSION } from "~/routes/dokumentation/documentationDataService";
+
 import {
   createDoc,
   FILE_NAME_DOCUMENTATION_TEMPLATE,
@@ -12,6 +12,7 @@ import {
   PrinzipWithAspekte,
 } from "~/utils/strapiData.server";
 import type { Route } from "./+types/dokumentation.download.$fileName";
+import { DATA_SCHEMA_VERSION_V1 } from "./dokumentation/documentationDataSchema";
 
 // This is a route instead of client side to support clients without JS
 export async function loader({ params }: Route.LoaderArgs) {
@@ -38,7 +39,7 @@ export async function loader({ params }: Route.LoaderArgs) {
 
   const fileData = await createDoc(
     templateData,
-    { version: DATA_SCHEMA_VERSION },
+    { version: DATA_SCHEMA_VERSION_V1 },
     principles.prinzips,
   );
   const mimeType = contentType(fileName) || "";

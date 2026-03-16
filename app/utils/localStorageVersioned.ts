@@ -10,13 +10,11 @@ export class VersionMismatchError extends Error {
 }
 
 /**
- * Read versioned data from localStorage
+ * Read data from localStorage
  * @returns The parsed data or null if not found/invalid
- * @throws VersionMismatchError if version mismatch is detected
  */
-export function readVersionedDataFromLocalStorage<T extends VersionedData>(
+export function readDataFromLocalStorage<T extends VersionedData>(
   storageKey: string,
-  currentVersion: string,
 ): T | null {
   if (globalThis.window === undefined || typeof localStorage === "undefined") {
     throw new TypeError(
@@ -28,7 +26,22 @@ export function readVersionedDataFromLocalStorage<T extends VersionedData>(
   if (!stored) return null;
 
   const data: T = JSON.parse(stored) as T;
-  if (data.version !== currentVersion) {
+
+  return data;
+}
+
+/**
+ * Read versioned data from localStorage
+ * @returns The parsed data or null if not found/invalid
+ * @throws VersionMismatchError if version mismatch is detected
+ */
+export function readVersionedDataFromLocalStorage<T extends VersionedData>(
+  storageKey: string,
+  currentVersion: string,
+): T | null {
+  const data = readDataFromLocalStorage<T>(storageKey);
+
+  if (data !== null && data.version !== currentVersion) {
     throw new VersionMismatchError(
       `Data version mismatch for ${storageKey}. Expected ${currentVersion}, found ${data.version}`,
     );

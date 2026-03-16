@@ -1,5 +1,5 @@
 // Import mocks first
-import "./utils/mockDocumentationDataService";
+import "./utils/mockLocalStorageVersioned";
 import "./utils/mockRouter";
 // End of mocks
 
@@ -16,13 +16,15 @@ import {
 } from "~/resources/staticRoutes";
 import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
 import DocumentationSummary from "~/routes/dokumentation._documentationNavigation.zusammenfassung";
-import { useDocumentationData } from "~/routes/dokumentation/documentationDataHook";
+import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
 import type {
   DocumentationData,
   Participation,
   PolicyTitle,
   Principle,
+  V1,
 } from "~/routes/dokumentation/documentationDataSchema";
+import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { AbsatzWithParagraph } from "~/utils/strapiData.server.ts";
 
 const MOCK_ROUTE_PRINCIPLE = {
@@ -42,7 +44,6 @@ const documentationFormRoutes = routes
   .filter((route) => route.url !== ROUTE_DOCUMENTATION_NOTES.url);
 
 const mockedUseOutletContext = vi.mocked(useOutletContext);
-const mockedUseDocumentationData = vi.mocked(useDocumentationData);
 
 function createDocumentationDataMock({
   policyTitle,
@@ -51,25 +52,23 @@ function createDocumentationDataMock({
 }: {
   policyTitle?: PolicyTitle;
   participation?: Participation;
-  principles?: Principle[];
+  principles?: Principle<V1>[];
 } = {}) {
-  return {
-    documentationData: {
-      version: "1",
-      policyTitle: policyTitle,
-      participation: participation,
-      principles: principles,
-    },
-    findDocumentationDataForUrl: vi.fn(),
-    hasSavedDocumentation: true,
-  };
+  vi.mocked(readDataFromLocalStorage<DocumentationData<V1>>).mockReturnValue({
+    version: "1",
+    policyTitle: policyTitle,
+    participation: participation,
+    principles: principles,
+  });
 }
 
 describe("DocumentationSummary", () => {
   const renderWithRouter = () => {
     return render(
       <MemoryRouter>
-        <DocumentationSummary />
+        <DocumentationDataProvider>
+          <DocumentationSummary />
+        </DocumentationDataProvider>
       </MemoryRouter>,
     );
   };
@@ -84,11 +83,7 @@ describe("DocumentationSummary", () => {
   };
 
   beforeEach(() => {
-    mockedUseDocumentationData.mockReturnValue({
-      documentationData: mockDocumentationData,
-      findDocumentationDataForUrl: vi.fn(),
-      hasSavedDocumentation: true,
-    });
+    vi.mocked(readDataFromLocalStorage).mockReturnValue(mockDocumentationData);
 
     const context: NavigationContext = {
       currentUrl: "/current-url",
@@ -193,30 +188,28 @@ describe("DocumentationSummary", () => {
   });
 
   it("displays principle with positive answer and multiple aspects", () => {
-    mockedUseDocumentationData.mockReturnValue(
-      createDocumentationDataMock({
-        principles: [
-          {
-            id: "1",
-            answer: "Ja, gänzlich oder teilweise",
-            reasoning: [
-              {
-                aspect: "aspect-1",
-                checkbox: true,
-                paragraphs: "§1, §2",
-                reason: "Reason for aspect 1",
-              },
-              {
-                aspect: "aspect-2",
-                checkbox: true,
-                paragraphs: "§3, §4",
-                reason: "Reason for aspect 2",
-              },
-            ],
-          },
-        ],
-      }),
-    );
+    createDocumentationDataMock({
+      principles: [
+        {
+          id: "1",
+          answer: "Ja, gänzlich oder teilweise",
+          reasoning: [
+            {
+              aspect: "aspect-1",
+              checkbox: true,
+              paragraphs: "§1, §2",
+              reason: "Reason for aspect 1",
+            },
+            {
+              aspect: "aspect-2",
+              checkbox: true,
+              paragraphs: "§3, §4",
+              reason: "Reason for aspect 2",
+            },
+          ],
+        },
+      ],
+    });
     renderWithRouter();
 
     const principleContainer = screen.getByTestId(
@@ -243,24 +236,22 @@ describe("DocumentationSummary", () => {
   });
 
   it("displays incomplete principle data and show warning", () => {
-    mockedUseDocumentationData.mockReturnValue(
-      createDocumentationDataMock({
-        principles: [
-          {
-            id: "1",
-            answer: "Ja, gänzlich oder teilweise",
-            reasoning: [
-              {
-                aspect: "aspect-1",
-                checkbox: true,
-                paragraphs: "",
-                reason: "Reason for aspect 1",
-              },
-            ],
-          },
-        ],
-      }),
-    );
+    createDocumentationDataMock({
+      principles: [
+        {
+          id: "1",
+          answer: "Ja, gänzlich oder teilweise",
+          reasoning: [
+            {
+              aspect: "aspect-1",
+              checkbox: true,
+              paragraphs: "",
+              reason: "Reason for aspect 1",
+            },
+          ],
+        },
+      ],
+    });
     renderWithRouter();
 
     const principleContainer = screen.getByTestId(
@@ -281,17 +272,15 @@ describe("DocumentationSummary", () => {
   });
 
   it("displays principle with negative answer and string reasoning", () => {
-    mockedUseDocumentationData.mockReturnValue(
-      createDocumentationDataMock({
-        principles: [
-          {
-            id: "1",
-            answer: "Nein",
-            reasoning: "Reason why principle is not applicable",
-          },
-        ],
-      }),
-    );
+    createDocumentationDataMock({
+      principles: [
+        {
+          id: "1",
+          answer: "Nein",
+          reasoning: "Reason why principle is not applicable",
+        },
+      ],
+    });
     renderWithRouter();
 
     const principleContainer = screen.getByTestId(
@@ -313,17 +302,15 @@ describe("DocumentationSummary", () => {
   });
 
   it("displays principle with irrelevant answer and string reasoning", () => {
-    mockedUseDocumentationData.mockReturnValue(
-      createDocumentationDataMock({
-        principles: [
-          {
-            id: "1",
-            answer: "Nicht relevant",
-            reasoning: "Reason why principle is not relevant",
-          },
-        ],
-      }),
-    );
+    createDocumentationDataMock({
+      principles: [
+        {
+          id: "1",
+          answer: "Nicht relevant",
+          reasoning: "Reason why principle is not relevant",
+        },
+      ],
+    });
     renderWithRouter();
 
     const principleContainer = screen.getByTestId(
@@ -367,7 +354,7 @@ describe("DocumentationSummary", () => {
   });
 
   it("shows warning for all steps when no documentation data is available at all", () => {
-    mockedUseDocumentationData.mockReturnValue(createDocumentationDataMock());
+    createDocumentationDataMock();
     renderWithRouter();
 
     documentationFormRoutes.forEach((route) => {
@@ -408,9 +395,7 @@ describe("DocumentationSummary", () => {
   ])(
     "shows warning for step %s when data is undefined or empty",
     (stepId, mockData) => {
-      mockedUseDocumentationData.mockReturnValue(
-        createDocumentationDataMock(mockData),
-      );
+      createDocumentationDataMock(mockData);
       renderWithRouter();
 
       const stepContainer = screen.getByTestId(stepId);
@@ -495,9 +480,7 @@ describe("DocumentationSummary", () => {
   ])(
     "shows incomplete warning for step %s when part of the data for a step is missing",
     (stepId, mockData) => {
-      mockedUseDocumentationData.mockReturnValue(
-        createDocumentationDataMock(mockData),
-      );
+      createDocumentationDataMock(mockData);
       renderWithRouter();
 
       const stepContainer = screen.getByTestId(stepId);

@@ -45,6 +45,7 @@ type NavProps = {
   completedElementUrls?: string[];
   errorElementUrls?: string[];
   testId?: string;
+  className?: string;
 };
 
 /**
@@ -345,6 +346,7 @@ function Nav({
   activeElementUrl,
   ariaLabel,
   testId,
+  className,
 }: Readonly<NavProps>) {
   const navContextValue = useMemo(
     () => ({ activeElementUrl }),
@@ -352,7 +354,11 @@ function Nav({
   );
   return (
     <NavContext.Provider value={navContextValue}>
-      <nav aria-label={ariaLabel} data-testid={testId}>
+      <nav
+        aria-label={ariaLabel}
+        data-testid={testId}
+        className={twMerge("nav", className)}
+      >
         {children}
       </nav>
     </NavContext.Provider>

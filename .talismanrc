@@ -18,10 +18,13 @@ fileignoreconfig:
   - filename: app/utils/localStorageVersioned.spec.ts
     allowed_patterns:
       - testKey
-  - filename: app/routes/dokumentation/documentationDataService.ts
+  - filename: app/routes/dokumentation/DocumentationDataProvider.tsx
     allowed_patterns:
       - STORAGE_KEY
       - testKey
+  - filename: app/routes/dokumentation/DocumentationDataProvider.spec.tsx
+    allowed_patterns:
+      - STORAGE_KEY
   - filename: app/routes/vorpruefung/preCheckDataService.ts
     allowed_patterns:
       - STORAGE_KEY

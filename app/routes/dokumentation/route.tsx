@@ -11,6 +11,7 @@ import {
   type PrinzipWithAspekte,
   PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server.ts";
+import { DocumentationDataProvider } from "./DocumentationDataProvider";
 
 export const handle = {
   hasProgressBar: true,
@@ -48,6 +49,7 @@ export const loader: () => Promise<DocumentationRouteData> = async () => {
   return { routes, prinzips };
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useDocumentationRouteData() {
   const data = useRouteLoaderData<DocumentationRouteData>(
     "routes/dokumentation",
@@ -57,5 +59,9 @@ export function useDocumentationRouteData() {
 }
 
 export default function Documentation() {
-  return <Outlet />;
+  return (
+    <DocumentationDataProvider>
+      <Outlet />
+    </DocumentationDataProvider>
+  );
 }

@@ -1,5 +1,5 @@
 // Import mocks first
-import "./utils/mockDocumentationDataService";
+import "./utils/mockLocalStorageVersioned";
 import "./utils/mockRouter";
 // End of mocks
 
@@ -9,15 +9,23 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import DocumentationTitle from "~/routes/dokumentation._documentationNavigation.regelungsvorhaben-titel";
-import { useDocumentationData } from "../dokumentation/documentationDataHook";
-import { initialDocumentationData } from "../dokumentation/documentationDataService";
+import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
+import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
+import {
+  DATA_SCHEMA_VERSION_V1,
+  DocumentationData,
+} from "../dokumentation/documentationDataSchema";
 
-const mockedUseDocumentationData = vi.mocked(useDocumentationData);
+const mockedReadDataFromLocalStorage = vi.mocked(
+  readDataFromLocalStorage<DocumentationData>,
+);
 
 const renderWithRouter = () => {
   return render(
     <MemoryRouter>
-      <DocumentationTitle />
+      <DocumentationDataProvider>
+        <DocumentationTitle />
+      </DocumentationDataProvider>
     </MemoryRouter>,
   );
 };
@@ -64,13 +72,9 @@ describe("DocumentationTitle", () => {
 
   describe("validation", () => {
     beforeEach(() => {
-      mockedUseDocumentationData.mockReturnValue({
-        documentationData: {
-          ...initialDocumentationData,
-          policyTitle: { title: "" },
-        },
-        findDocumentationDataForUrl: vi.fn(),
-        hasSavedDocumentation: true,
+      mockedReadDataFromLocalStorage.mockReturnValue({
+        ...{ version: DATA_SCHEMA_VERSION_V1 },
+        policyTitle: { title: "" },
       });
 
       act(() => {

@@ -1,9 +1,9 @@
 // Import mocks first
-import "./utils/mockDocumentationDataService";
+import "./utils/mockLocalStorageVersioned";
 // End of mocks
 
 import "@testing-library/jest-dom";
-import { render, screen, within } from "@testing-library/react";
+import { act, render, screen, within } from "@testing-library/react";
 import {
   createMemoryRouter,
   RouterProvider,
@@ -24,9 +24,13 @@ import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import LayoutWithDocumentationNavigation, {
   NavigationContext,
 } from "~/routes/dokumentation._documentationNavigation";
-import { useDocumentationData } from "../dokumentation/documentationDataHook";
-import { DocumentationData } from "../dokumentation/documentationDataSchema";
-import { initialDocumentationData } from "../dokumentation/documentationDataService";
+import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
+import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
+import {
+  DATA_SCHEMA_VERSION_V1,
+  DocumentationData,
+  V1,
+} from "../dokumentation/documentationDataSchema";
 
 vi.mock("~/contexts/FeatureFlagContext", () => ({
   useFeatureFlag: vi.fn(),
@@ -66,7 +70,7 @@ const documentationFormRoutes = mockRoutes
 
 type ValidationScenario = {
   name: string;
-  documentationData: DocumentationData;
+  documentationData: DocumentationData<V1>;
   expected: {
     completedTitle: boolean;
     completedParticipation: boolean;
@@ -82,7 +86,7 @@ const validationScenarios: ValidationScenario[] = [
   {
     name: "all valid completed",
     documentationData: {
-      ...initialDocumentationData,
+      version: DATA_SCHEMA_VERSION_V1,
       policyTitle: {
         title: "Valid Title",
       },
@@ -93,7 +97,7 @@ const validationScenarios: ValidationScenario[] = [
       principles: [
         {
           answer: "Ja, gänzlich oder teilweise",
-          id: "1",
+          id: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
           reasoning: [
             {
               checkbox: "on",
@@ -118,7 +122,7 @@ const validationScenarios: ValidationScenario[] = [
   {
     name: "unfilled form",
     documentationData: {
-      ...initialDocumentationData,
+      version: DATA_SCHEMA_VERSION_V1,
     },
     expected: {
       completedTitle: false, // is current route so no states are shown
@@ -133,7 +137,7 @@ const validationScenarios: ValidationScenario[] = [
   {
     name: "partial filled form with warnings",
     documentationData: {
-      ...initialDocumentationData,
+      version: DATA_SCHEMA_VERSION_V1,
       policyTitle: {
         title: "",
       },
@@ -144,7 +148,7 @@ const validationScenarios: ValidationScenario[] = [
       principles: [
         {
           answer: "Ja, gänzlich oder teilweise",
-          id: "1",
+          id: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
           reasoning: [
             {
               checkbox: "on",
@@ -168,8 +172,6 @@ const validationScenarios: ValidationScenario[] = [
   },
 ];
 
-const mockedUseDocumentationData = vi.mocked(useDocumentationData);
-
 function renderPage({ url }: Route) {
   function ErrorBoundary() {
     return <h1>Something went wrong</h1>;
@@ -187,7 +189,11 @@ function renderPage({ url }: Route) {
   const routes = [
     {
       path: ROUTE_DOCUMENTATION.url,
-      element: <LayoutWithDocumentationNavigation />,
+      element: (
+        <DocumentationDataProvider>
+          <LayoutWithDocumentationNavigation />
+        </DocumentationDataProvider>
+      ),
       ErrorBoundary: ErrorBoundary,
       children: [
         {
@@ -319,23 +325,17 @@ describe("navigation on pages of documentation", () => {
     describe.each(validationScenarios)(
       "Scenario: $name",
       ({ documentationData, expected }) => {
-        beforeEach(() => {
-          mockedUseDocumentationData.mockReturnValue({
-            documentationData,
-            findDocumentationDataForUrl: vi.fn((url: string) => {
-              if (url === ROUTE_DOCUMENTATION_TITLE.url)
-                return documentationData.policyTitle;
-              else if (url === ROUTE_DOCUMENTATION_PARTICIPATION.url)
-                return documentationData.participation;
-              else return (documentationData.principles || [])[0];
-            }),
-            hasSavedDocumentation: true,
+        beforeEach(async () => {
+          vi.mocked(
+            readDataFromLocalStorage<DocumentationData<V1>>,
+          ).mockReturnValue(documentationData);
+          // eslint-disable-next-line @typescript-eslint/require-await
+          await act(async () => {
+            renderPage(currentRoute);
           });
         });
 
         it("shows correct completed states", () => {
-          renderPage(currentRoute);
-
           if (expected.completedTitle) expectCompleted(getTitel());
           else expectNotCompleted(getTitel());
           if (expected.completedParticipation)
@@ -346,8 +346,6 @@ describe("navigation on pages of documentation", () => {
         });
 
         it("shows correct warning states", () => {
-          renderPage(currentRoute);
-
           if (expected.warningTitle) expectWarning(getTitel());
           else expectNotWarning(getTitel());
           if (expected.warningParticipation)

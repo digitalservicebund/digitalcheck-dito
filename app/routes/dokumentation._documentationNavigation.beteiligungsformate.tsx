@@ -1,9 +1,12 @@
+import { useEffect } from "react";
 import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
+import HelpButton from "~/components/HelpButton";
 import InfoBox from "~/components/InfoBox";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
+import { useHelpPanel } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_PARTICIPATION } from "~/resources/staticRoutes";
 import {
@@ -12,18 +15,35 @@ import {
 } from "~/routes/dokumentation/documentationDataSchema";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
-import {
-  useDocumentationData,
-  useSyncedForm,
-} from "./dokumentation/documentationDataHook";
-import { setParticipation } from "./dokumentation/documentationDataService";
+import { useSyncedForm } from "./dokumentation/documentationDataHook";
+import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 
 const { participation } = digitalDocumentation;
+
+const help = [
+  {
+    id: "formats",
+    title: "Beteiligungsformate",
+    content:
+      "Beschreiben Sie, wie Sie die Bedürfnisse der Betroffenen erhoben haben – z. B. durch Befragungen, Gespräche mit Vollzugsakteurinnen und -akteuren oder formelle Beteiligungsverfahren.",
+  },
+  {
+    id: "results",
+    title: "Erkenntnisse",
+    content:
+      "Erläutern Sie, welche Erkenntnisse aus der Beteiligung in das Regelungsvorhaben eingeflossen sind und verweisen Sie auf relevante Paragrafen.",
+  },
+];
 
 export default function DocumentationParticipation() {
   const { currentUrl, nextUrl, previousUrl } =
     useOutletContext<NavigationContext>();
-  const { documentationData } = useDocumentationData();
+  const { setParticipation, documentationData } = useDocumentationDataService();
+  const { setHelpSections } = useHelpPanel();
+
+  useEffect(() => {
+    setHelpSections(help);
+  }, [setHelpSections]);
 
   const form = useSyncedForm({
     schema: participationSchema,
@@ -63,9 +83,11 @@ export default function DocumentationParticipation() {
             description={participation.formats.textField.description}
             placeholder={participation.formats.textField.placeholder}
             scope={form.scope("formats")}
+            data-testid="schritte"
             warningInsteadOfError
           >
-            {participation.formats.textField.label}
+            {participation.formats.textField.label}{" "}
+            <HelpButton sectionId="formats" />
           </Textarea>
         </div>
 
@@ -78,9 +100,11 @@ export default function DocumentationParticipation() {
         <Textarea
           description={participation.results.textField.description}
           scope={form.scope("results")}
+          data-testid="erkenntnisse"
           warningInsteadOfError
         >
-          {participation.results.textField.label}
+          {participation.results.textField.label}{" "}
+          <HelpButton sectionId="results" />
         </Textarea>
 
         <DocumentationActions

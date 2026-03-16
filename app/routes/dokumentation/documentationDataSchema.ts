@@ -6,6 +6,16 @@ import {
 } from "~/resources/staticRoutes";
 import type { VersionedData } from "~/utils/localStorageVersioned";
 
+export const DATA_SCHEMA_VERSION_V1 = "1";
+export const DATA_SCHEMA_VERSION_V2 = "2";
+
+export type V1 = typeof DATA_SCHEMA_VERSION_V1;
+export type V2 = typeof DATA_SCHEMA_VERSION_V2;
+
+export type DataSchemaVersion =
+  | typeof DATA_SCHEMA_VERSION_V1
+  | typeof DATA_SCHEMA_VERSION_V2;
+
 const { principlePages, participation, info } = digitalDocumentation;
 
 export const policyTitleSchema = z.object({
@@ -21,7 +31,11 @@ export const participationSchema = z.object({
     .min(1, { message: participation.results.textField.errorMessage }),
 });
 
-const principleReasoningSchema = z
+// TODO: delete when feature flag simplifiedPrincipleFlow is on
+/**
+ * @deprecated use new principleReasoningSchema below
+ */
+const principleReasoningSchemaV1 = z
   .object({
     aspect: z.string().optional(),
     checkbox: z.literal(["on", true]).optional(), // HTML checkboxes use "on" as value when checked whilst rvf converts in into boolean
@@ -48,10 +62,33 @@ const principleReasoningSchema = z
     }
   });
 
-const principlePositiveAnswerSchema = z.object({
+export const principleReasoningSchemaV2 = z.object({
+  aspects: z
+    .array(z.string())
+    .min(1, { message: principlePages.errors.reasoningError }),
+  explanation: z.string().optional(),
+});
+
+export const principleAnswerOnlySchema = z.object({
+  id: z.string(),
+  answer: z.enum(
+    [
+      principlePages.radioOptions[0],
+      principlePages.radioOptions[1],
+      principlePages.radioOptions[2],
+    ],
+    { error: principlePages.errors.answerError },
+  ),
+});
+
+// TODO: delete when feature flag simplifiedPrincipleFlow is on
+/**
+ * @deprecated use new principlePositiveAnswerSchema below
+ */
+const principlePositiveAnswerSchemaV1 = z.object({
   answer: z.literal(principlePages.radioOptions[0]),
   reasoning: z
-    .array(principleReasoningSchema, {
+    .array(principleReasoningSchemaV1, {
       error: principlePages.errors.reasoningError,
     })
     .optional()
@@ -66,21 +103,46 @@ const principlePositiveAnswerSchema = z.object({
     }),
 });
 
-const principleNegativeAnswerSchema = z.object({
+const principlePositiveAnswerSchemaV2 = z.object({
+  answer: z.literal(principlePages.radioOptions[0]),
+  reasoning: principleReasoningSchemaV2,
+});
+
+export const principleNegativeAnswerSchema = z.object({
   answer: z.literal(principlePages.radioOptions[1]),
   reasoning: z.string().min(1, { message: principlePages.errors.reasonError }),
 });
 
-const principleIrrelevantAnswerSchema = z.object({
+export const principleIrrelevantAnswerSchema = z.object({
   answer: z.literal(principlePages.radioOptions[2]),
   reasoning: z.string().min(1, { message: principlePages.errors.reasonError }),
 });
 
-export const principleSchema = z
+// TODO: delete when feature flag simplifiedPrincipleFlow is on
+/**
+ * @deprecated use new principleSchema below
+ */
+export const principleSchemaV1 = z
   .discriminatedUnion(
     "answer",
     [
-      principlePositiveAnswerSchema,
+      principlePositiveAnswerSchemaV1,
+      principleNegativeAnswerSchema,
+      principleIrrelevantAnswerSchema,
+    ],
+    { error: principlePages.errors.answerError },
+  )
+  .and(
+    z.object({
+      id: z.string(),
+    }),
+  );
+
+export const principleSchemaV2 = z
+  .discriminatedUnion(
+    "answer",
+    [
+      principlePositiveAnswerSchemaV2,
       principleNegativeAnswerSchema,
       principleIrrelevantAnswerSchema,
     ],
@@ -101,34 +163,66 @@ export const defaultParticipationValues: Participation = {
   results: "",
 };
 
-export const defaultValues: Omit<DocumentationData, "version"> = {
+export const defaultValues: DocumentationSchemaV2 | DocumentationSchemaV1 = {
   policyTitle: defaultTitleValues,
   participation: defaultParticipationValues,
   principles: [],
 };
 
-export const getDocumentationSchemaFormUrl = (url: string) => {
+// documentationSchemaV2 <- current
+export const documentationSchemaV2 = z.object({
+  policyTitle: policyTitleSchema.optional(),
+  participation: participationSchema.optional(),
+  principles: z.array(principleSchemaV2).optional(),
+});
+
+/**
+ * @deprecated use documentationSchemaV2 above
+ */
+export const documentationSchemaV1 = z.object({
+  ...documentationSchemaV2.shape,
+  principles: z.array(principleSchemaV1).optional(),
+});
+
+export const getDocumentationSchemaFormUrl = (
+  url: string,
+  simplified = false,
+) => {
   if (url === ROUTE_DOCUMENTATION_TITLE.url) return policyTitleSchema;
   else if (url === ROUTE_DOCUMENTATION_PARTICIPATION.url)
     return participationSchema;
-  else return principleSchema;
+  else return simplified ? principleSchemaV2 : principleSchemaV1;
 };
 
-export const documentationSchema = z.object({
-  policyTitle: policyTitleSchema.optional(),
-  participation: participationSchema.optional(),
-  principles: z.array(principleSchema).optional(),
-});
+type PrincipleReasoningV1 = z.infer<typeof principleReasoningSchemaV1>;
+type PrincipleReasoningV2 = z.infer<typeof principleReasoningSchemaV2>;
 
-export type PrincipleReasoning = z.infer<typeof principleReasoningSchema>;
+export type PrincipleReasoning<V extends DataSchemaVersion = V2> = V extends V1
+  ? PrincipleReasoningV1
+  : PrincipleReasoningV2;
+
 export type NegativeAnswerReasoning = z.infer<
   typeof principleNegativeAnswerSchema
 >["reasoning"];
 export type IrrelevantAnswerReasoning = z.infer<
   typeof principleIrrelevantAnswerSchema
 >["reasoning"];
-export type Principle = z.infer<typeof principleSchema>;
+
+type PrincipleV1 = z.infer<typeof principleSchemaV1>;
+type PrincipleV2 = z.infer<typeof principleSchemaV2>;
+
+export type Principle<V extends DataSchemaVersion = V2> = V extends V1
+  ? PrincipleV1
+  : PrincipleV2;
+
 export type PolicyTitle = z.infer<typeof policyTitleSchema>;
 export type Participation = z.infer<typeof participationSchema>;
-export type DocumentationData = z.infer<typeof documentationSchema> &
-  VersionedData;
+
+type DocumentationSchemaV2 = z.infer<typeof documentationSchemaV2>;
+type DocumentationSchemaV1 = z.infer<typeof documentationSchemaV1>;
+
+export type DocumentationData<V extends DataSchemaVersion = V2> = {
+  policyTitle?: PolicyTitle;
+  participation?: Participation;
+  principles?: Principle<V>[];
+} & VersionedData;

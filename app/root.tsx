@@ -205,7 +205,7 @@ export function Layout({ children }: Readonly<{ children: ReactNode }>) {
 
 export default function App() {
   return (
-    <div className="grow [&:has(.parent-bg-blue)]:bg-blue-100">
+    <div className="grow [&:has(.parent-bg-blue)]:flex [&:has(.parent-bg-blue)]:flex-col [&:has(.parent-bg-blue)]:bg-blue-100">
       {/* .parent-bg-blue can be set by child components to set the background of main to blue (e.g. used for question pages) */}
       <Outlet />
     </div>

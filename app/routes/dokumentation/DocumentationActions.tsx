@@ -5,7 +5,7 @@ import ButtonContainer from "~/components/ButtonContainer";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general";
 import { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
-import downloadDocumentation from "~/service/wordDocumentationExport/wordDocumentation";
+import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
 
 type SubmitType = {
   submit: true;
@@ -31,6 +31,7 @@ export default function DocumentationActions({
   showSavingTip = false,
 }: Readonly<DocumentationActionsProps>) {
   const { prinzips } = useOutletContext<NavigationContext>();
+  const { downloadDocumentation } = useWordDocumentation();
 
   return (
     <div className="mt-80 space-y-40">

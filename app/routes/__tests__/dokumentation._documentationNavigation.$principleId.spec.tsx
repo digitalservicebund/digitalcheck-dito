@@ -1,5 +1,5 @@
 // Import mocks first
-import "./utils/mockDocumentationDataService";
+import "./utils/mockLocalStorageVersioned";
 import "./utils/mockRouter";
 // End of mocks
 import "@testing-library/jest-dom";
@@ -14,15 +14,19 @@ import {
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { digitalDocumentation } from "~/resources/content/dokumentation";
 import { Route, ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes";
+import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import {
   PrinzipAspekt,
   PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server";
 import { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationPrinciple from "../dokumentation._documentationNavigation.$principleId";
-import { useDocumentationData } from "../dokumentation/documentationDataHook";
-import { DocumentationData } from "../dokumentation/documentationDataSchema";
-import { initialDocumentationData } from "../dokumentation/documentationDataService";
+import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
+import {
+  DATA_SCHEMA_VERSION_V1,
+  DocumentationData,
+  V1,
+} from "../dokumentation/documentationDataSchema";
 
 const routes: (Route[] | Route)[] = [
   ...ROUTES_DOCUMENTATION_INTRO,
@@ -92,11 +96,17 @@ const context: NavigationContext = {
 };
 
 const mockedUseOutletContext = vi.mocked(useOutletContext);
-const mockedUseDocumentationData = vi.mocked(useDocumentationData);
 const mockedUseParams = vi.mocked(useParams);
 const renderWithRouter = () => {
   const router = createBrowserRouter([
-    { path: "/", Component: DocumentationPrinciple },
+    {
+      path: "/",
+      element: (
+        <DocumentationDataProvider>
+          <DocumentationPrinciple />
+        </DocumentationDataProvider>
+      ),
+    },
   ]);
 
   return render(<RouterProvider router={router} />);
@@ -137,7 +147,7 @@ const answerScenarios: AnswerScenario[] = [
 type ValidationScenario = {
   name: string;
   answer: (typeof digitalDocumentation.principlePages.radioOptions)[number];
-  documentationData: DocumentationData;
+  documentationData: DocumentationData<V1>;
   expected: {
     validReasoning: boolean;
     validReasoningParagraphs?: boolean;
@@ -150,7 +160,7 @@ const formValidationScenarios: ValidationScenario[] = [
     name: "positive answer with filled aspects",
     answer: "Ja, gänzlich oder teilweise",
     documentationData: {
-      ...initialDocumentationData,
+      version: DATA_SCHEMA_VERSION_V1,
       principles: [
         {
           answer: "Ja, gänzlich oder teilweise",
@@ -176,7 +186,7 @@ const formValidationScenarios: ValidationScenario[] = [
     name: "positive answer with partial filled aspects",
     answer: "Ja, gänzlich oder teilweise",
     documentationData: {
-      ...initialDocumentationData,
+      version: DATA_SCHEMA_VERSION_V1,
       principles: [
         {
           answer: "Ja, gänzlich oder teilweise",
@@ -202,7 +212,7 @@ const formValidationScenarios: ValidationScenario[] = [
     name: "positive answer with unfilled aspects",
     answer: "Ja, gänzlich oder teilweise",
     documentationData: {
-      ...initialDocumentationData,
+      version: DATA_SCHEMA_VERSION_V1,
       principles: [
         {
           answer: "Ja, gänzlich oder teilweise",
@@ -221,7 +231,7 @@ const formValidationScenarios: ValidationScenario[] = [
     name: "negative answer with filled reasoning",
     answer: "Nein",
     documentationData: {
-      ...initialDocumentationData,
+      version: DATA_SCHEMA_VERSION_V1,
       principles: [
         {
           answer: "Nein",
@@ -238,7 +248,7 @@ const formValidationScenarios: ValidationScenario[] = [
     name: "negative answer with unfilled reasoning",
     answer: "Nein",
     documentationData: {
-      ...initialDocumentationData,
+      version: DATA_SCHEMA_VERSION_V1,
       principles: [
         {
           answer: "Nein",
@@ -255,7 +265,7 @@ const formValidationScenarios: ValidationScenario[] = [
     name: "irrelevant answer with filled reasoning",
     answer: "Nicht relevant",
     documentationData: {
-      ...initialDocumentationData,
+      version: DATA_SCHEMA_VERSION_V1,
       principles: [
         {
           answer: "Nicht relevant",
@@ -272,7 +282,7 @@ const formValidationScenarios: ValidationScenario[] = [
     name: "irrelevant answer with unfilled reasoning",
     answer: "Nicht relevant",
     documentationData: {
-      ...initialDocumentationData,
+      version: DATA_SCHEMA_VERSION_V1,
       principles: [
         {
           answer: "Nicht relevant",
@@ -508,11 +518,9 @@ describe("DocumentationPrinciple", () => {
       "form validation scenario: $name",
       ({ documentationData, expected, answer }) => {
         beforeEach(() => {
-          mockedUseDocumentationData.mockReturnValue({
+          vi.mocked(readDataFromLocalStorage).mockReturnValue(
             documentationData,
-            findDocumentationDataForUrl: vi.fn(),
-            hasSavedDocumentation: true,
-          });
+          );
 
           act(() => {
             renderWithRouter();
@@ -567,19 +575,17 @@ describe("DocumentationPrinciple", () => {
     });
 
     it("removes errors on valid input for reasoning string", async () => {
-      mockedUseDocumentationData.mockReturnValue({
-        hasSavedDocumentation: true,
-        documentationData: {
-          ...initialDocumentationData,
-          principles: [
-            {
-              id: "1",
-              answer: "Nein",
-              reasoning: "",
-            },
-          ],
-        },
-        findDocumentationDataForUrl: vi.fn(),
+      vi.mocked(
+        readDataFromLocalStorage<DocumentationData<V1>>,
+      ).mockReturnValue({
+        version: DATA_SCHEMA_VERSION_V1,
+        principles: [
+          {
+            id: "1",
+            answer: "Nein",
+            reasoning: "",
+          },
+        ],
       });
 
       act(() => {
@@ -599,23 +605,21 @@ describe("DocumentationPrinciple", () => {
     });
 
     it("removes errors on valid input for reasoning array", async () => {
-      mockedUseDocumentationData.mockReturnValue({
-        hasSavedDocumentation: true,
-        documentationData: {
-          ...initialDocumentationData,
-          principles: [
-            {
-              id: "1",
-              answer: "Ja, gänzlich oder teilweise",
-              reasoning: [
-                {
-                  aspect: "aspekt 1",
-                },
-              ],
-            },
-          ],
-        },
-        findDocumentationDataForUrl: vi.fn(),
+      vi.mocked(
+        readDataFromLocalStorage<DocumentationData<V1>>,
+      ).mockReturnValue({
+        version: DATA_SCHEMA_VERSION_V1,
+        principles: [
+          {
+            id: "1",
+            answer: "Ja, gänzlich oder teilweise",
+            reasoning: [
+              {
+                aspect: "aspekt 1",
+              },
+            ],
+          },
+        ],
       });
 
       act(() => {

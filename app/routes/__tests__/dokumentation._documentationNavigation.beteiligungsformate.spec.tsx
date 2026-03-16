@@ -1,5 +1,5 @@
 // Import mocks first
-import "./utils/mockDocumentationDataService";
+import "./utils/mockLocalStorageVersioned";
 import "./utils/mockRouter";
 // End of mocks
 
@@ -9,15 +9,20 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import DocumentationParticipation from "~/routes/dokumentation._documentationNavigation.beteiligungsformate";
-import { useDocumentationData } from "../dokumentation/documentationDataHook";
-import { initialDocumentationData } from "../dokumentation/documentationDataService";
-
-const mockedUseDocumentationData = vi.mocked(useDocumentationData);
+import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
+import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
+import {
+  DATA_SCHEMA_VERSION_V1,
+  DocumentationData,
+  V1,
+} from "../dokumentation/documentationDataSchema";
 
 const renderWithRouter = () => {
   return render(
     <MemoryRouter>
-      <DocumentationParticipation />
+      <DocumentationDataProvider>
+        <DocumentationParticipation />
+      </DocumentationDataProvider>
     </MemoryRouter>,
   );
 };
@@ -82,16 +87,14 @@ describe("DocumentationParticipation", () => {
 
   describe("validation", () => {
     beforeEach(() => {
-      mockedUseDocumentationData.mockReturnValue({
-        hasSavedDocumentation: true,
-        documentationData: {
-          ...initialDocumentationData,
-          participation: {
-            formats: "",
-            results: "",
-          },
+      vi.mocked(
+        readDataFromLocalStorage<DocumentationData<V1>>,
+      ).mockReturnValue({
+        version: DATA_SCHEMA_VERSION_V1,
+        participation: {
+          formats: "",
+          results: "",
         },
-        findDocumentationDataForUrl: vi.fn(),
       });
 
       act(() => {
@@ -100,12 +103,7 @@ describe("DocumentationParticipation", () => {
     });
 
     it("shows an error on invalid data", async () => {
-      const input1 = screen.getByLabelText(
-        "AntwortBitte listen Sie stichpunktartig auf, ob bzw. welche Schritte Sie unternommen haben.",
-      );
-      const input2 = screen.getByLabelText(
-        "AntwortBitte listen Sie stichpunktartig auf, welche Erkenntnisse eingearbeitet wurden und geben Sie Hinweise auf Paragrafen, die besonders umsetzungsrelevant sind.",
-      );
+      const [input1, input2] = screen.getAllByLabelText(/Antwort/);
 
       await waitFor(() => {
         expect(input1).toBeInvalid();
@@ -121,13 +119,7 @@ describe("DocumentationParticipation", () => {
 
     it("removes the error on change", async () => {
       const user = userEvent.setup();
-
-      const input1 = screen.getByLabelText(
-        "AntwortBitte listen Sie stichpunktartig auf, ob bzw. welche Schritte Sie unternommen haben.",
-      );
-      const input2 = screen.getByLabelText(
-        "AntwortBitte listen Sie stichpunktartig auf, welche Erkenntnisse eingearbeitet wurden und geben Sie Hinweise auf Paragrafen, die besonders umsetzungsrelevant sind.",
-      );
+      const [input1, input2] = screen.getAllByLabelText(/Antwort/);
 
       await waitFor(() => {
         expect(input1).toBeInvalid();

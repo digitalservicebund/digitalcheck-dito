@@ -104,14 +104,8 @@ test("documentation flow happy path", async ({ page }, testInfo) => {
   });
 
   await test.step("fill participation page and navigate to first principle", async () => {
-    await page
-      .getByRole("textbox", {
-        name: "welche Schritte",
-      })
-      .fill(testData.participationFormats);
-    await page
-      .getByRole("textbox", { name: "welche Erkenntnisse" })
-      .fill(testData.participationResults);
+    await page.getByTestId("schritte").fill(testData.participationFormats);
+    await page.getByTestId("erkenntnisse").fill(testData.participationResults);
     await page.getByRole("button", { name: "Weiter" }).click();
 
     await expect(page.locator("mark", { hasText: "Prinzipien" })).toBeVisible();

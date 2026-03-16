@@ -1,5 +1,5 @@
 // Import mocks first
-import "~/routes/__tests__/utils/mockDocumentationDataService";
+import "~/routes/__tests__/utils/mockLocalStorageVersioned";
 import { mockNavigate } from "~/routes/__tests__/utils/mockRouter";
 // End of mocks
 import "@testing-library/jest-dom";
@@ -11,36 +11,27 @@ import { MemoryRouter } from "react-router";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general.ts";
 import { ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes.ts";
+import {
+  readDataFromLocalStorage,
+  removeFromLocalStorage,
+} from "~/utils/localStorageVersioned";
 import { DocumentationContinueActions } from "./DocumentationContinueActions";
-import { useDocumentationData } from "./documentationDataHook";
-import { initialDocumentationData } from "./documentationDataService";
+import { DocumentationDataProvider } from "./DocumentationDataProvider";
+import {
+  DATA_SCHEMA_VERSION_V1,
+  DocumentationData,
+  V1,
+} from "./documentationDataSchema";
 
-const { mockDeleteDocumentationData, mockDownloadDocumentation } = vi.hoisted(
-  () => ({
-    mockDownloadDocumentation: vi.fn(),
-    mockDeleteDocumentationData: vi.fn(),
-  }),
-);
+const { mockDownloadDocumentation } = vi.hoisted(() => ({
+  mockDownloadDocumentation: vi.fn(),
+}));
 vi.mock("~/service/wordDocumentationExport/wordDocumentation", () => ({
   default: mockDownloadDocumentation,
+  useWordDocumentation: vi.fn(() => ({
+    downloadDocumentation: mockDownloadDocumentation,
+  })),
 }));
-
-vi.mock(
-  "~/routes/dokumentation/documentationDataService",
-  async (importOriginal) => ({
-    ...(await importOriginal()),
-    deleteDocumentationData: mockDeleteDocumentationData,
-  }),
-);
-
-// Helper to set the mocked return for useDocumentationData
-const setHasSavedDocumentation = (value: boolean) => {
-  vi.mocked(useDocumentationData).mockReturnValue({
-    documentationData: initialDocumentationData,
-    findDocumentationDataForUrl: vi.fn(),
-    hasSavedDocumentation: value,
-  } as ReturnType<typeof useDocumentationData>);
-};
 
 async function triggerStartOverDialog() {
   const startOverButton = await screen.findByRole("button", {
@@ -53,7 +44,11 @@ async function triggerStartOverDialog() {
 
 describe("DocumentationContinueActions", () => {
   const renderWithRouter = (component: React.ReactElement) => {
-    return render(<MemoryRouter>{component}</MemoryRouter>);
+    return render(
+      <MemoryRouter>
+        <DocumentationDataProvider>{component}</DocumentationDataProvider>
+      </MemoryRouter>,
+    );
   };
 
   beforeEach(() => {
@@ -61,9 +56,13 @@ describe("DocumentationContinueActions", () => {
   });
 
   describe("when a saved documentation exists", () => {
-    setHasSavedDocumentation(true);
-
     beforeEach(() => {
+      vi.mocked(
+        readDataFromLocalStorage<DocumentationData<V1>>,
+      ).mockReturnValue({
+        version: DATA_SCHEMA_VERSION_V1,
+        policyTitle: { title: "Test" },
+      });
       renderWithRouter(<DocumentationContinueActions />);
     });
 
@@ -117,7 +116,7 @@ describe("DocumentationContinueActions", () => {
       });
       confirmButton.click();
 
-      expect(mockDeleteDocumentationData).toHaveBeenCalled();
+      expect(vi.mocked(removeFromLocalStorage)).toHaveBeenCalled();
       expect(mockNavigate).toHaveBeenCalledWith(
         ROUTES_DOCUMENTATION_INTRO[0].url,
       );
@@ -126,8 +125,7 @@ describe("DocumentationContinueActions", () => {
 
   describe("when no saved documentation exists", () => {
     it("renders just the initial start action", async () => {
-      setHasSavedDocumentation(false);
-
+      vi.mocked(readDataFromLocalStorage).mockReturnValue(null);
       renderWithRouter(<DocumentationContinueActions />);
 
       const startButton = await screen.findByRole("link", {

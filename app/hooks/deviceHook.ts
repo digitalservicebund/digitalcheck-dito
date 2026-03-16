@@ -60,3 +60,15 @@ export function useIsMobileSize() {
   // Default to false (desktop) if not yet determined to maintain backward compatibility
   return isMobileSize ?? false;
 }
+
+export function useElResize(elName: string, onResize: () => void, init = true) {
+  useEffect(() => {
+    if (init) onResize();
+
+    const el = document.getElementsByTagName(elName)[0];
+    if (!el) return;
+    const observer = new ResizeObserver(onResize);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [elName, onResize, init]);
+}
