@@ -9,7 +9,8 @@ pre-commit:
       tags: security audit
       run: talisman --githook pre-commit
 pre-push:
-  parallel: true
+  # parallel to false, because lint and typecheck run react-router typegen and this sometimes fails because they override each other
+  parallel: false
   commands:
     lint:
       tags: lint
