@@ -48,7 +48,7 @@ export default function Digitaltauglichkeit_index() {
                       to: ROUTE_EXAMPLES_PRINCIPLES.url,
                     },
                     {
-                      text: "Zu den Prinzipien",
+                      text: "Prinzipien nutzen",
                       to: ROUTE_METHODS_PRINCIPLES.url,
                       look: "tertiary",
                     },
