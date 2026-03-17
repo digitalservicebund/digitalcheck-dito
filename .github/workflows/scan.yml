@@ -55,7 +55,7 @@ jobs:
           sarif_file: "trivy-results.sarif"
 
       - name: Send status to Slack
-        uses: digitalservicebund/notify-on-failure-gha@814d0c4b2ad6a3443e89c991f8657b10126510bf # v1.5.0
+        uses: digitalservicebund/notify-on-failure-gha@30386cb269b2406ec23f67ff77a20ce28ab0057c # v1.6.0
         if: ${{ failure() }}
         with:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
