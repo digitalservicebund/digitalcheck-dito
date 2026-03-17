@@ -30,7 +30,7 @@ function Textarea({
 
   return (
     <div className="space-y-8">
-      <label htmlFor={inputId} className="ds-body-01-reg block">
+      <label htmlFor={inputId} className="ds-label-01-reg block">
         {children}
       </label>
       {description && (

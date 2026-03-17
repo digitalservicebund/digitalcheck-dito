@@ -1,10 +1,8 @@
-import { useEffect } from "react";
 import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
 import Input from "~/components/Input";
 import MetaTitle from "~/components/Meta";
-import { useHelpPanel } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_TITLE } from "~/resources/staticRoutes";
 import {
@@ -18,24 +16,10 @@ import { useDocumentationDataService } from "./dokumentation/DocumentationDataPr
 
 const { info } = digitalDocumentation;
 
-const help = [
-  {
-    id: "title",
-    title: "Titel des Regelungsvorhabens",
-    content:
-      "Geben Sie hier den offiziellen Titel Ihres Regelungsvorhabens ein. Dieser Titel wird in der fertigen Dokumentation verwendet.",
-  },
-];
-
 export default function DocumentationTitle() {
   const { currentUrl, nextUrl, previousUrl } =
     useOutletContext<NavigationContext>();
   const { documentationData, setPolicyTitle } = useDocumentationDataService();
-  const { setHelpSections } = useHelpPanel();
-
-  useEffect(() => {
-    setHelpSections(help);
-  }, [setHelpSections]);
 
   const form = useSyncedForm({
     schema: policyTitleSchema,
@@ -49,24 +33,30 @@ export default function DocumentationTitle() {
   return (
     <>
       <MetaTitle prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_TITLE.title}`} />
-      <Heading
-        text={info.headline}
-        tagName="h1"
-        look="ds-heading-02-reg"
-        className="mb-40"
-      />
-      <form {...form.getFormProps()}>
-        <Input scope={form.scope("title")} warningInsteadOfError>
-          {info.inputTitle.label} <HelpButton sectionId="title" />
-        </Input>
-
-        <DocumentationActions
-          previousUrl={previousUrl}
-          submit
-          showDownloadDraftButton
-          showSavingTip
+      <div className="max-w-a11y space-y-40">
+        <Heading
+          text={info.headline}
+          tagName="h1"
+          look="ds-heading-02-reg"
+          className="mb-40"
         />
-      </form>
+        <form {...form.getFormProps()}>
+          <Input scope={form.scope("title")} warningInsteadOfError>
+            {info.inputTitle.label}
+            <HelpButton sectionId="title" title="Titel des Regelungsvorhabens">
+              Geben Sie hier den offiziellen Titel Ihres Regelungsvorhabens ein.
+              Dieser Titel wird in der fertigen Dokumentation verwendet.
+            </HelpButton>
+          </Input>
+
+          <DocumentationActions
+            previousUrl={previousUrl}
+            submit
+            showDownloadDraftButton
+            showSavingTip
+          />
+        </form>
+      </div>
     </>
   );
 }

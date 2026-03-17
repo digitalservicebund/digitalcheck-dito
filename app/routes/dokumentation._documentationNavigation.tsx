@@ -1,4 +1,5 @@
 import { Outlet, useLocation } from "react-router";
+import { twJoin } from "tailwind-merge";
 import HelpSidepanel from "~/components/HelpSidepanel";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
@@ -54,6 +55,23 @@ function getNextUrl(routes: Route[], currentUrl: string): string | null {
     : null;
 }
 
+function resolveAdjacentUrl(
+  flatRoutes: Route[],
+  fromUrl: string,
+  getAdjacent: (routes: Route[], url: string) => string | null,
+  simplifiedFlow: boolean,
+  findData: (id: string) => unknown,
+): string | null {
+  const rawUrl = getAdjacent(flatRoutes, fromUrl);
+  if (!rawUrl || !simplifiedFlow) return rawUrl;
+  const route = flatRoutes.find((r) => r.url === rawUrl);
+  if (route?.principleId) {
+    const data = findData(route.principleId) as { answer?: string } | undefined;
+    if (data?.answer) return `${rawUrl}/erlaeuterung`;
+  }
+  return rawUrl;
+}
+
 export default function LayoutWithDocumentationNavigation() {
   const { routes, prinzips } = useDocumentationRouteData();
   const simplifiedFlow = useFeatureFlag(features.simplifiedPrincipleFlow);
@@ -75,15 +93,43 @@ export default function LayoutWithDocumentationNavigation() {
 
   // For nav/stepper index lookups, use principle URL when on erlaeuterung page
   const navigationCurrentUrl = principleBaseUrl ?? currentUrl;
-  const activeNavUrl = principleBaseUrl ?? currentUrl;
+
+  const { findDocumentationDataForUrl, getDocumentationSchemaFormUrl } =
+    useDocumentationDataService();
 
   const flatRoutes = routes.flat();
+  const currentRoute = flatRoutes.find((r) => r.url === navigationCurrentUrl);
+  const currentPrincipleFormData = currentRoute?.principleId
+    ? findDocumentationDataForUrl(currentRoute.principleId)
+    : undefined;
+
   const nextUrl = isErlaeuterungPage
-    ? getNextUrl(flatRoutes, navigationCurrentUrl)
-    : getNextUrl(flatRoutes, currentUrl);
-  const previousUrl = isErlaeuterungPage
-    ? navigationCurrentUrl
-    : getPreviousUrl(flatRoutes, currentUrl);
+    ? resolveAdjacentUrl(
+        flatRoutes,
+        navigationCurrentUrl,
+        getNextUrl,
+        simplifiedFlow,
+        findDocumentationDataForUrl,
+      )
+    : simplifiedFlow &&
+        currentRoute?.principleId &&
+        (currentPrincipleFormData as { answer?: string } | undefined)?.answer
+      ? `${currentUrl}/erlaeuterung`
+      : resolveAdjacentUrl(
+          flatRoutes,
+          currentUrl,
+          getNextUrl,
+          simplifiedFlow,
+          findDocumentationDataForUrl,
+        );
+  const previousUrl =
+    resolveAdjacentUrl(
+      flatRoutes,
+      navigationCurrentUrl,
+      getPreviousUrl,
+      simplifiedFlow,
+      findDocumentationDataForUrl,
+    ) ?? ROUTE_DOCUMENTATION.url;
 
   const isNavigationDisabled = currentUrl === ROUTE_DOCUMENTATION_NOTES.url;
 
@@ -96,9 +142,6 @@ export default function LayoutWithDocumentationNavigation() {
     simplifiedFlow &&
     !excludedPanelRoutes.some((url) => currentUrl.startsWith(url));
 
-  const { findDocumentationDataForUrl, getDocumentationSchemaFormUrl } =
-    useDocumentationDataService();
-
   const getNavItem = (route: Route) => {
     const formData = findDocumentationDataForUrl(
       route.principleId || route.url,
@@ -106,15 +149,22 @@ export default function LayoutWithDocumentationNavigation() {
     const schema = getDocumentationSchemaFormUrl(route.url);
     const valid = schema.safeParse(formData);
 
-    // In simplified flow: if principle has a saved answer, link directly to erlaeuterung sub-page
-    const hasAnswer =
-      simplifiedFlow && !!(formData as { answer?: string })?.answer;
-    const navUrl = hasAnswer ? `${route.url}/erlaeuterung` : route.url;
+    const navUrl =
+      simplifiedFlow &&
+      route.principleId &&
+      (formData as { answer?: string } | undefined)?.answer
+        ? `${route.url}/erlaeuterung`
+        : route.url;
 
     return (
       <Nav.Item
         key={route.url}
         url={navUrl}
+        activeUrls={
+          route.principleId
+            ? [route.url, `${route.url}/erlaeuterung`]
+            : undefined
+        }
         error={formData && !valid.success}
         completed={formData && valid.success}
         disabled={isNavigationDisabled}
@@ -126,10 +176,15 @@ export default function LayoutWithDocumentationNavigation() {
 
   return (
     <HelpPanelProvider>
-      <div className="parent-bg-blue breakout-grid-form-steps grow bg-blue-100">
+      <div
+        className={twJoin(
+          "parent-bg-blue breakout-grid-form-steps grow bg-blue-100",
+          !showHelpPanel && "[--help-width:0]",
+        )}
+      >
         <Nav
           className="sticky top-0 hidden self-start py-40 lg:block"
-          activeElementUrl={activeNavUrl}
+          activeElementUrl={currentUrl}
           ariaLabel={digitalDocumentation.navigation.ariaLabel}
         >
           <Nav.Items>
@@ -171,7 +226,7 @@ export default function LayoutWithDocumentationNavigation() {
             }}
           />
         </main>
-        {showHelpPanel && <HelpSidepanel className="hidden lg:block" />}
+        {showHelpPanel && <HelpSidepanel />}
       </div>
     </HelpPanelProvider>
   );

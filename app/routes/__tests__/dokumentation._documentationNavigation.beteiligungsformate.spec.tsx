@@ -8,6 +8,7 @@ import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import DocumentationParticipation from "~/routes/dokumentation._documentationNavigation.beteiligungsformate";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
@@ -20,9 +21,11 @@ import {
 const renderWithRouter = () => {
   return render(
     <MemoryRouter>
-      <DocumentationDataProvider>
-        <DocumentationParticipation />
-      </DocumentationDataProvider>
+      <HelpPanelProvider>
+        <DocumentationDataProvider>
+          <DocumentationParticipation />
+        </DocumentationDataProvider>
+      </HelpPanelProvider>
     </MemoryRouter>,
   );
 };

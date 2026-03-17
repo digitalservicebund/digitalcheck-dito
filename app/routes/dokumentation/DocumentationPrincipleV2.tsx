@@ -1,96 +1,77 @@
-import { useForm } from "@rvf/react";
-import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { Link } from "react-router";
+import { BlocksRenderer } from "~/components/BlocksRenderer";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
 import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup";
-import { useHelpPanel } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
+import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
 import { PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
 import DocumentationActions from "./DocumentationActions";
+import { useSyncedForm } from "./documentationDataHook";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
 import { principleAnswerOnlySchema } from "./documentationDataSchema";
-import { PrincipleWithExample } from "./DocumentationPrincipleV1";
 
 const { radioOptions } = digitalDocumentation.principlePages;
 
-// TODO: first draft, will change
-const help = [
-  {
-    id: "question",
-    title: "Die Frage zum Prinzip",
-    content:
-      'Beurteilen Sie, ob Ihr Regelungsvorhaben die rechtlichen Voraussetzungen für das jeweilige Prinzip schafft. Wählen Sie "Ja", wenn das Vorhaben das Prinzip ganz oder teilweise unterstützt.',
-  },
-];
-
 export default function DocumentationPrincipleV2({
   currentUrl,
+  nextUrl,
   previousUrl,
   prinzip,
 }: Readonly<{
   currentUrl: string;
+  nextUrl: string;
   previousUrl: string;
   prinzip: PrinzipWithAspekteAndExample;
 }>) {
-  const navigate = useNavigate();
-  const { documentationData, addOrUpdatePrinciple } =
+  const { documentationData, addOrUpdatePrincipleAnswer } =
     useDocumentationDataService();
-  const { setHelpSections } = useHelpPanel();
-
-  // TODO: useEffect needed?
-  useEffect(() => {
-    setHelpSections(help);
-  }, [setHelpSections]);
 
   const principleData = documentationData?.principles?.find(
     (p) => p.id === prinzip.documentId,
   );
 
-  const form = useForm({
+  const storedData = principleData?.answer
+    ? { answer: principleData.answer }
+    : undefined;
+
+  const form = useSyncedForm({
     schema: principleAnswerOnlySchema,
-    defaultValues: {
-      id: prinzip.documentId,
-      answer: principleData?.answer ?? "",
-    },
-    validationBehaviorConfig: {
-      whenSubmitted: "onSubmit",
-      whenTouched: "onSubmit",
-      initial: "onSubmit",
-    },
-    handleSubmit: async (data) => {
-      const existing = documentationData?.principles?.find(
-        (p) => p.id === prinzip.documentId,
-      );
-      // Preserve existing reasoning if answer matches
-      if (existing?.answer === data.answer && "reasoning" in existing) {
-        addOrUpdatePrinciple(existing);
-      } else if (data.answer === radioOptions[0]) {
-        addOrUpdatePrinciple({
-          id: data.id,
-          answer: data.answer,
-          reasoning: { aspects: [] },
-        });
-      } else {
-        addOrUpdatePrinciple({
-          id: data.id,
-          answer: data.answer,
-          reasoning: "",
-        });
-      }
-      await navigate(`${currentUrl}/erlaeuterung`);
-    },
+    defaultValues: { answer: "" },
+    setDataCallback: (data) =>
+      addOrUpdatePrincipleAnswer(prinzip.documentId, data?.answer ?? ""),
+    storedData,
+    currentUrl,
+    nextUrl,
   });
 
   return (
     <>
       <MetaTitle prefix={`Dokumentation: ${prinzip.Name}`} />
-      <div className="space-y-40">
-        <PrincipleWithExample prinzip={prinzip} />
+      <div className="max-w-a11y space-y-40">
+        <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
+          {prinzip.Name}
+          <HelpButton
+            sectionId="1-prinzip"
+            title={`Hinweis zu "${prinzip.Name}"`}
+            className="h-28 w-28"
+          >
+            <BlocksRenderer content={prinzip.Beschreibung} />
+            <Link
+              to={ROUTE_METHODS_PRINCIPLES.url + "/" + prinzip.URLBezeichnung}
+              className="ds-link-01-reg"
+            >
+              Mehr zum Prinzip
+            </Link>
+          </HelpButton>
+        </Heading>
+
+        {prinzip.Kurzbeschreibung && (
+          <BlocksRenderer content={prinzip.Kurzbeschreibung} />
+        )}
 
         <form {...form.getFormProps()} className="space-y-40">
-          <input {...form.getHiddenInputProps("id")} />
           <Heading
             id="question-label"
             tagName="h2"
@@ -98,7 +79,19 @@ export default function DocumentationPrincipleV2({
             className="mb-16"
           >
             Schafft das Regelungsvorhaben die rechtlichen Vorraussetzungen für
-            die Umsetzung des Prinzips? <HelpButton sectionId="question" />
+            die Umsetzung des Prinzips?
+            <HelpButton
+              sectionId="2-answers"
+              title={
+                'Hinweis zu "Schafft das Regelungsvorhaben die rechtlichen Voraussetzungen für die Umsetzung des Prinzips?"'
+              }
+              className="h-28 w-28"
+            >
+              <p>
+                Geben Sie hier an ob das Prinzip &ldquo;{prinzip.Name}&rdquo;
+                auf Ihr Regelungsvorhaben zutrifft.
+              </p>
+            </HelpButton>
           </Heading>
           <RadioGroup
             aria-labelledby="question-label"

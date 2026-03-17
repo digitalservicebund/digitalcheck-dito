@@ -1,54 +1,38 @@
 import { CheckCircle } from "@digitalservicebund/icons";
-import { type FormScope, useForm } from "@rvf/react";
-import { useEffect } from "react";
-import { Link, useNavigate, useOutletContext, useParams } from "react-router";
-import { z } from "zod";
+import { Link, redirect, useOutletContext, useParams } from "react-router";
 import AspectPills from "~/components/AspectPills";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
+import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
-import { useHelpPanel } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
+import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
-import type { PrinzipWithAspekte } from "~/utils/strapiData.server";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
+import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
-import { principleReasoningSchemaV2 } from "./dokumentation/documentationDataSchema";
+import {
+  DocumentationData,
+  principleAnswerSchemaV2,
+} from "./dokumentation/documentationDataSchema";
 
 const { radioOptions } = digitalDocumentation.principlePages;
-
-const help = [
-  {
-    id: "aspects",
-    title: "Schwerpunkte und Erläuterung",
-    content:
-      "Wählen Sie die Schwerpunkte, die auf Ihr Vorhaben zutreffen, und erläutern Sie konkret, wie das Prinzip im Regelungsvorhaben umgesetzt wurde.",
-  },
-];
-
-type StoredPrincipleData = {
-  id: string;
-  answer: string;
-  reasoning?: { aspects?: string[]; explanation?: string } | string;
-};
 
 export default function DocumentationPrincipleErlaeuterung() {
   const { principleId } = useParams();
   const { currentUrl, nextUrl, previousUrl, prinzips } =
     useOutletContext<NavigationContext>();
-  const navigate = useNavigate();
   const { documentationData } = useDocumentationDataService();
-  const { setHelpSections } = useHelpPanel();
+  const { addOrUpdatePrincipleReasoning } = useDocumentationDataService();
 
-  // TODO: does this need to be in a useEffect?
-  useEffect(() => {
-    setHelpSections(help);
-  }, [setHelpSections]);
+  if (!principleId)
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
+    throw new Response("No principleId provided", { status: 404 });
 
   const prinzip = prinzips.find(
     ({ URLBezeichnung }) => URLBezeichnung === principleId,
@@ -58,26 +42,54 @@ export default function DocumentationPrincipleErlaeuterung() {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw new Response("No Prinzip for slug found", { status: 404 });
 
-  const principleData = documentationData?.principles?.find(
-    (p) => p.id === prinzip.documentId,
-  ) as StoredPrincipleData | undefined;
+  const principleData = (
+    documentationData as DocumentationData
+  )?.principles?.find((p) => p.id === prinzip.documentId);
+
+  const answer = principleData?.answer ?? "";
+  const isPositive = answer === radioOptions[0];
+  const isIrrelevant = answer === radioOptions[2];
+
+  const form = useSyncedForm({
+    schema: principleAnswerSchemaV2,
+    defaultValues: { answer, reasoning: "", aspects: [] },
+    setDataCallback: (data) =>
+      addOrUpdatePrincipleReasoning(
+        prinzip.documentId,
+        data?.reasoning ?? "",
+        isPositive ? data?.aspects : undefined,
+      ),
+    storedData: {
+      answer,
+      reasoning: principleData?.reasoning ?? "",
+      aspects: principleData?.aspects,
+    },
+    currentUrl,
+    nextUrl,
+  });
 
   // If no answer saved yet, redirect to answer page
   if (!principleData?.answer) {
-    void navigate(previousUrl, { replace: true });
+    redirect(previousUrl);
     return null;
   }
-
-  const answer = principleData.answer;
-  const isPositive = answer === radioOptions[0];
-  const isIrrelevant = answer === radioOptions[2];
-  const storedReasoning = principleData.reasoning;
 
   const changeAnswerTitle = isPositive
     ? "Sie angegeben, dass das Prinzip auf ihr Vorhaben zutrifft."
     : isIrrelevant
       ? "Sie angegeben, dass das Prinzip nicht relevant für Ihr Vorhaben ist."
       : "Sie angegeben, dass das Prinzip nicht auf ihr Vorhaben zutrifft.";
+
+  const notPositiveExplanation = (
+    <RichText
+      markdown={dedent`
+        ${isIrrelevant ? `Bitte erläutern Sie, warum das Prinzip “${prinzip.Name}” **nicht relevant** für Ihr Vorhaben ist.` : `Bitte erläutern Sie, warum das Prinzip “${prinzip.Name}” **nicht** auf Ihr Vorhaben zutrifft.`}
+        
+        Sie können Ihre Angaben als Word-Dokument exportieren und später in der Word Datei Ihre Dokumentation fortführen.
+        `}
+      className="space-y-24"
+    />
+  );
 
   return (
     <>
@@ -87,12 +99,22 @@ export default function DocumentationPrincipleErlaeuterung() {
           <Badge principleNumber={prinzip.Nummer}>
             Prinzip {prinzip.Nummer}
           </Badge>
-          <Heading
-            text={prinzip.Name}
-            tagName="h1"
-            look="ds-heading-02-reg"
-            className="mb-16"
-          />
+          <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
+            {prinzip.Name}
+            <HelpButton
+              sectionId="prinzip"
+              title={`Hinweis zu "${prinzip.Name}"`}
+              className="h-28 w-28"
+            >
+              <BlocksRenderer content={prinzip.Beschreibung} />
+              <Link
+                to={ROUTE_METHODS_PRINCIPLES.url + "/" + prinzip.URLBezeichnung}
+                className="ds-link-01-reg"
+              >
+                Mehr zum Prinzip
+              </Link>
+            </HelpButton>
+          </Heading>
 
           {prinzip.Kurzbeschreibung && (
             <BlocksRenderer content={prinzip.Kurzbeschreibung} />
@@ -103,206 +125,109 @@ export default function DocumentationPrincipleErlaeuterung() {
           <CheckCircle className="fill-ds-green-700 size-36" />
           <div>
             <p>{changeAnswerTitle}</p>
-            <Link to={previousUrl} className="text-link">
+            <Link
+              to={currentUrl.replace("/erlaeuterung", "")}
+              className="text-link"
+            >
               Angaben ändern
             </Link>
           </div>
         </div>
 
-        {isPositive ? (
-          <PositiveErlaeuterungForm
-            currentUrl={currentUrl}
-            nextUrl={nextUrl}
-            prinzip={prinzip}
-            principleId={prinzip.documentId}
-            answer={answer}
-            storedReasoning={
-              storedReasoning &&
-              typeof storedReasoning === "object" &&
-              !Array.isArray(storedReasoning)
-                ? (storedReasoning as {
-                    aspects?: string[];
-                    explanation?: string;
-                  })
-                : undefined
+        <form {...form.getFormProps()} className="space-y-40">
+          <input {...form.getHiddenInputProps("answer")} />
+
+          {isPositive ? (
+            <>
+              <div className="space-y-8">
+                <Heading tagName="h2" look="ds-heading-03-reg">
+                  Erklären Sie, in wiefern Sie auf dieses Prinzip eingegangen
+                  sind.
+                  <HelpButton
+                    sectionId="aspects"
+                    title="Hinweis zur Erklärung"
+                    className="h-28 w-28"
+                  >
+                    <>
+                      <p>
+                        Wählen Sie aus, welche Schwerpunkte für Ihr Vorhaben
+                        relevant sind.
+                      </p>
+                      <p>
+                        Diese dienen Ihnen als roter Faden für Ihre Erklärung.
+                        So formulieren Sie präzise und stellen sicher, dass Ihre
+                        Regelung das Prinzip erfüllt.
+                      </p>
+                      {prinzip.Aspekte.map((aspect) => (
+                        <DetailsSummary
+                          key={aspect.Kurzbezeichnung}
+                          title={aspect.Kurzbezeichnung}
+                        >
+                          {aspect.Text && (
+                            <BlocksRenderer content={aspect.Text} />
+                          )}
+                        </DetailsSummary>
+                      ))}
+                    </>
+                  </HelpButton>
+                </Heading>
+                <p>
+                  Wählen Sie Schwerpunkte aus, auf die Sie in der Regelung
+                  geachtet haben und geben Sie ihre eigene Erklärung an. Geben
+                  Sie die dazugehörigen Paragrafen dazu an! Wenn keines der
+                  Schwerpunkte auf Ihre Regelung zutrifft, geben Sie eine eigen
+                  Erläuterung an.
+                </p>
+              </div>
+
+              <AspectPills
+                aspekte={prinzip.Aspekte}
+                scope={form.scope("aspects")}
+                error={form.error("aspects")}
+                warningInsteadOfError
+              >
+                Schwerpunkte auswählen
+              </AspectPills>
+            </>
+          ) : (
+            <div className="space-y-8">
+              <Heading tagName="h2" look="ds-heading-03-reg">
+                Erläuterung angeben
+                <HelpButton
+                  sectionId="aspects"
+                  title="Hinweis zur Erklärung"
+                  className="h-24 w-24"
+                >
+                  {notPositiveExplanation}
+                </HelpButton>
+              </Heading>
+              {notPositiveExplanation}
+            </div>
+          )}
+
+          <Textarea
+            scope={form.scope("reasoning")}
+            description={
+              isPositive
+                ? "Tragen Sie Ihre Erläuterung ein z.B.: Online-Beratung wird ermöglicht, siehe § 1a"
+                : isIrrelevant
+                  ? "Begründung warum das Prinzip nicht relevant für Ihr Regelungsvorhaben ist."
+                  : "Begründung warum das Prinzip nicht auf Ihr Regelungsvorhaben zutrifft."
             }
+            rows={5}
+            warningInsteadOfError
+          >
+            {isPositive ? "Erläuterung zu dem Prinzip" : "Begründung"}
+          </Textarea>
+
+          <DocumentationActions
+            previousUrl={previousUrl}
+            submit
+            showDownloadDraftButton
+            showSavingTip
           />
-        ) : (
-          <NegativeErlaeuterungForm
-            currentUrl={currentUrl}
-            nextUrl={nextUrl}
-            principleId={prinzip.documentId}
-            answer={answer}
-            storedReasoning={
-              typeof storedReasoning === "string" ? storedReasoning : ""
-            }
-            isIrrelevant={isIrrelevant}
-          />
-        )}
+        </form>
       </div>
     </>
-  );
-}
-
-function PositiveErlaeuterungForm({
-  currentUrl,
-  nextUrl,
-  prinzip,
-  principleId,
-  answer,
-  storedReasoning,
-}: Readonly<{
-  currentUrl: string;
-  nextUrl: string | null;
-  prinzip: PrinzipWithAspekte;
-  principleId: string;
-  answer: string;
-  storedReasoning?: { aspects?: string[]; explanation?: string };
-}>) {
-  const navigate = useNavigate();
-  const { addOrUpdatePrinciple } = useDocumentationDataService();
-
-  const form = useForm({
-    schema: principleReasoningSchemaV2,
-    submitSource: "state",
-    defaultValues: {
-      aspects: storedReasoning?.aspects ?? [],
-      explanation: storedReasoning?.explanation ?? "",
-    },
-    validationBehaviorConfig: {
-      whenSubmitted: "onSubmit",
-      whenTouched: "onSubmit",
-      initial: "onSubmit",
-    },
-    handleSubmit: async (data) => {
-      addOrUpdatePrinciple({
-        id: principleId,
-        answer: answer,
-        reasoning: data,
-      });
-      if (nextUrl) await navigate(nextUrl);
-    },
-  });
-
-  const aspectsError = form.error("aspects");
-
-  return (
-    <form {...form.getFormProps()} className="space-y-40">
-      <div className="space-y-8">
-        <Heading tagName="h2" look="ds-heading-03-reg">
-          Erklären Sie, in wiefern Sie auf dieses Prinzip eingegangen sind.{" "}
-          <HelpButton sectionId="aspects" />
-        </Heading>
-        <p>
-          Wählen Sie Schwerpunkte aus, auf die Sie in der Regelung geachtet
-          haben und geben Sie ihre eigene Erklärung an. Geben Sie die
-          dazugehörigen Paragrafen dazu an! Wenn keines der Schwerpunkte auf
-          Ihre Regelung zutrifft, geben Sie eine eigen Erläuterung an.
-        </p>
-      </div>
-
-      <AspectPills
-        aspekte={prinzip.Aspekte}
-        scope={form.scope("aspects") as FormScope<string[]>}
-        error={aspectsError}
-      >
-        Schwerpunkte auswählen
-      </AspectPills>
-
-      <Textarea
-        description="Tragen Sie Ihre Erläuterung ein z.B.: Online-Beratung wird ermöglicht, siehe § 1a"
-        scope={form.scope("explanation")}
-        rows={5}
-        warningInsteadOfError
-      >
-        Erläuterung zu dem Prinzip
-      </Textarea>
-
-      <DocumentationActions
-        previousUrl={currentUrl.replace("/erlaeuterung", "")}
-        submit
-        showDownloadDraftButton
-        showSavingTip
-      />
-    </form>
-  );
-}
-
-function NegativeErlaeuterungForm({
-  currentUrl,
-  nextUrl,
-  principleId,
-  answer,
-  storedReasoning,
-  isIrrelevant,
-}: Readonly<{
-  currentUrl: string;
-  nextUrl: string | null;
-  principleId: string;
-  answer: string;
-  storedReasoning: string;
-  isIrrelevant: boolean;
-}>) {
-  const navigate = useNavigate();
-  const { addOrUpdatePrinciple } = useDocumentationDataService();
-
-  const form = useForm({
-    schema: z.object({
-      reasoning: z
-        .string()
-        .min(1, { message: "Bitte geben Sie eine Begründung an." }),
-    }),
-    defaultValues: { reasoning: storedReasoning },
-    validationBehaviorConfig: {
-      whenSubmitted: "onSubmit",
-      whenTouched: "onSubmit",
-      initial: "onSubmit",
-    },
-    handleSubmit: async (data) => {
-      addOrUpdatePrinciple({
-        id: principleId,
-        answer: answer,
-        reasoning: data.reasoning,
-      });
-      if (nextUrl) await navigate(nextUrl);
-    },
-  });
-
-  return (
-    <form {...form.getFormProps()} className="space-y-40">
-      <div className="space-y-8">
-        <Heading tagName="h2" look="ds-heading-03-reg">
-          Erläuterung angeben
-        </Heading>
-        <RichText
-          markdown={dedent`
-            ${isIrrelevant ? "Bitte erläutern Sie, warum das Prinzip “Digitale Angebote für alle nutzbar gestalten” **nicht relevant** für Ihr Vorhaben ist." : "Bitte erläutern Sie, warum das Prinzip “Digitale Angebote für alle nutzbar gestalten” **nicht** auf Ihr Vorhaben zutrifft."}
-            
-            Sie können Ihre Angaben als Word-Dokument exportieren und später in der Word Datei Ihre Dokumentation fortführen.
-            `}
-          className="space-y-24"
-        />
-      </div>
-
-      <Textarea
-        scope={form.scope("reasoning")}
-        placeholder={
-          isIrrelevant
-            ? "Begründung warum das Prinzip nicht relevant für Ihr Regelungsvorhaben ist."
-            : "Begründung warum das Prinzip nicht auf Ihr Regelungsvorhaben zutrifft."
-        }
-        rows={5}
-        warningInsteadOfError
-      >
-        Begründung
-      </Textarea>
-
-      <DocumentationActions
-        previousUrl={currentUrl.replace("/erlaeuterung", "")}
-        submit
-        showDownloadDraftButton
-        showSavingTip
-      />
-    </form>
   );
 }

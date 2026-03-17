@@ -62,25 +62,6 @@ const principleReasoningSchemaV1 = z
     }
   });
 
-export const principleReasoningSchemaV2 = z.object({
-  aspects: z
-    .array(z.string())
-    .min(1, { message: principlePages.errors.reasoningError }),
-  explanation: z.string().optional(),
-});
-
-export const principleAnswerOnlySchema = z.object({
-  id: z.string(),
-  answer: z.enum(
-    [
-      principlePages.radioOptions[0],
-      principlePages.radioOptions[1],
-      principlePages.radioOptions[2],
-    ],
-    { error: principlePages.errors.answerError },
-  ),
-});
-
 // TODO: delete when feature flag simplifiedPrincipleFlow is on
 /**
  * @deprecated use new principlePositiveAnswerSchema below
@@ -93,7 +74,8 @@ const principlePositiveAnswerSchemaV1 = z.object({
     })
     .optional()
     .superRefine((val, ctx) => {
-      if (!val || val.length === 0) {
+      const checkedItems = val?.filter((item) => item.checkbox !== undefined);
+      if (!checkedItems || checkedItems.length === 0) {
         ctx.addIssue({
           code: "custom",
           message: principlePages.errors.reasoningError,
@@ -103,34 +85,34 @@ const principlePositiveAnswerSchemaV1 = z.object({
     }),
 });
 
-const principlePositiveAnswerSchemaV2 = z.object({
-  answer: z.literal(principlePages.radioOptions[0]),
-  reasoning: principleReasoningSchemaV2,
-});
-
-export const principleNegativeAnswerSchema = z.object({
+/**
+ * @deprecated use new principleNegativeAnswerSchemaV2
+ */
+export const principleNegativeAnswerSchemaV1 = z.object({
   answer: z.literal(principlePages.radioOptions[1]),
   reasoning: z.string().min(1, { message: principlePages.errors.reasonError }),
 });
 
-export const principleIrrelevantAnswerSchema = z.object({
+/**
+ * @deprecated use new principleIrrelevantAnswerSchemaV2
+ */
+export const principleIrrelevantAnswerSchemaV1 = z.object({
   answer: z.literal(principlePages.radioOptions[2]),
   reasoning: z.string().min(1, { message: principlePages.errors.reasonError }),
 });
 
-// TODO: delete when feature flag simplifiedPrincipleFlow is on
 /**
- * @deprecated use new principleSchema below
+ * @deprecated use new principleSchemaV2
  */
 export const principleSchemaV1 = z
   .discriminatedUnion(
     "answer",
     [
       principlePositiveAnswerSchemaV1,
-      principleNegativeAnswerSchema,
-      principleIrrelevantAnswerSchema,
+      principleNegativeAnswerSchemaV1,
+      principleIrrelevantAnswerSchemaV1,
     ],
-    { error: principlePages.errors.answerError },
+    { message: principlePages.errors.answerError },
   )
   .and(
     z.object({
@@ -138,21 +120,59 @@ export const principleSchemaV1 = z
     }),
   );
 
-export const principleSchemaV2 = z
+export const principleAnswerOnlySchema = z.object({
+  answer: z.enum(
+    [
+      principlePages.radioOptions[0],
+      principlePages.radioOptions[1],
+      principlePages.radioOptions[2],
+    ],
+    { message: principlePages.errors.answerError },
+  ),
+});
+
+const principlePositiveAnswerSchemaV2 = z.object({
+  answer: z.literal(principlePages.radioOptions[0]),
+  aspects: z
+    .array(z.string(), {
+      message: "Bitte geben Sie mindestens einen Schwerpunkt an",
+    })
+    .min(1, {
+      message: "Bitte geben Sie mindestens einen Schwerpunkt an",
+    }),
+});
+
+const principleNegativeAnswerSchemaV2 = z.object({
+  answer: z.literal(principlePages.radioOptions[1]),
+  aspects: z.literal(undefined),
+});
+
+const principleIrrelevantAnswerSchemaV2 = z.object({
+  answer: z.literal(principlePages.radioOptions[2]),
+  aspects: z.literal(undefined),
+});
+
+const principleBaseSchemaV2 = z.object({
+  reasoning: z.string().min(1, { message: principlePages.errors.reasonError }),
+});
+
+export const principleAnswerSchemaV2 = z
   .discriminatedUnion(
     "answer",
     [
       principlePositiveAnswerSchemaV2,
-      principleNegativeAnswerSchema,
-      principleIrrelevantAnswerSchema,
+      principleNegativeAnswerSchemaV2,
+      principleIrrelevantAnswerSchemaV2,
     ],
-    { error: principlePages.errors.answerError },
+    { message: principlePages.errors.answerError },
   )
-  .and(
-    z.object({
-      id: z.string(),
-    }),
-  );
+  .and(principleBaseSchemaV2);
+
+export const principleSchemaV2 = principleAnswerSchemaV2.and(
+  z.object({
+    id: z.string(),
+  }),
+);
 
 export const defaultTitleValues: PolicyTitle = {
   title: "",
@@ -194,18 +214,14 @@ export const getDocumentationSchemaFormUrl = (
   else return simplified ? principleSchemaV2 : principleSchemaV1;
 };
 
-type PrincipleReasoningV1 = z.infer<typeof principleReasoningSchemaV1>;
-type PrincipleReasoningV2 = z.infer<typeof principleReasoningSchemaV2>;
+export type PrincipleReasoningV1 = z.infer<typeof principleReasoningSchemaV1>;
 
-export type PrincipleReasoning<V extends DataSchemaVersion = V2> = V extends V1
-  ? PrincipleReasoningV1
-  : PrincipleReasoningV2;
-
+// TODO: do I need them?
 export type NegativeAnswerReasoning = z.infer<
-  typeof principleNegativeAnswerSchema
+  typeof principleNegativeAnswerSchemaV1
 >["reasoning"];
 export type IrrelevantAnswerReasoning = z.infer<
-  typeof principleIrrelevantAnswerSchema
+  typeof principleIrrelevantAnswerSchemaV1
 >["reasoning"];
 
 type PrincipleV1 = z.infer<typeof principleSchemaV1>;

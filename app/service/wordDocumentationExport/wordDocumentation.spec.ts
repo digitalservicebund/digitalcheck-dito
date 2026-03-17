@@ -15,7 +15,7 @@ import {
   stringToTextRuns,
   toHyperlinkPatch,
   toParagraphPatch,
-} from "./wordDocumentation";
+} from "./wordDocumentationV1";
 
 const { placeholderOptional } = documentationDocument;
 const { principlePages } = digitalDocumentation;

@@ -2,12 +2,13 @@ import { CloseOutlined } from "@digitalservicebund/icons";
 import { twJoin } from "tailwind-merge";
 
 type PillProps = {
+  label: string;
   value: string;
   selected: boolean;
   onClick: (value: string) => void;
 };
 
-export function Pill({ value, selected, onClick }: PillProps) {
+export function Pill({ label, value, selected, onClick }: PillProps) {
   return (
     <button
       key={value}
@@ -21,7 +22,7 @@ export function Pill({ value, selected, onClick }: PillProps) {
           : "border-gray-400 bg-white px-16 hover:bg-blue-100",
       )}
     >
-      {value}
+      {label}
       {selected && <CloseOutlined className="size-16" />}
     </button>
   );

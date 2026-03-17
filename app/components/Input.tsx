@@ -33,15 +33,12 @@ function Input({
     <div className="space-y-8">
       <label htmlFor={inputId} className="ds-label-01-reg block">
         {children}
-        {description && (
-          <span
-            className="ds-body-02-reg block text-gray-900"
-            id={descriptionId}
-          >
-            {description}
-          </span>
-        )}
       </label>
+      {description && (
+        <p className="ds-body-02-reg block text-gray-900" id={descriptionId}>
+          {description}
+        </p>
+      )}
       <input
         {...field.getInputProps({
           id: inputId,

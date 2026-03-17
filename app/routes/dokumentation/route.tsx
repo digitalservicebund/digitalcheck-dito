@@ -1,6 +1,6 @@
 import { Outlet, useRouteLoaderData } from "react-router";
 import {
-  Route,
+  Route as _Route,
   ROUTE_DOCUMENTATION,
   ROUTES_DOCUMENTATION_FINALIZE,
   ROUTES_DOCUMENTATION_INTRO,
@@ -12,6 +12,10 @@ import {
   PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server.ts";
 import { DocumentationDataProvider } from "./DocumentationDataProvider";
+
+type Route = _Route & {
+  principleId?: string;
+};
 
 export const handle = {
   hasProgressBar: true,

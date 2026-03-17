@@ -163,4 +163,59 @@ describe("Nav", () => {
       }),
     ).toBeValid();
   });
+
+  it("activeUrls highlights item for alias URL", () => {
+    const RouterStub = createRoutesStub([
+      {
+        path: "/",
+        Component: () => (
+          <Nav activeElementUrl="/p1/erlaeuterung" ariaLabel="Label Text">
+            <Nav.Items>
+              <Nav.Item url="/p1" activeUrls={["/p1", "/p1/erlaeuterung"]}>
+                Principle 1
+              </Nav.Item>
+            </Nav.Items>
+          </Nav>
+        ),
+      },
+    ]);
+    render(<RouterStub />);
+
+    const item = screen.getByText("Principle 1");
+    expect(item).toHaveClass("ds-label-02-bold");
+  });
+
+  it("activeUrls opens parent disclosure for alias URL", () => {
+    const RouterStub = createRoutesStub([
+      {
+        path: "/",
+        Component: () => (
+          <Nav activeElementUrl="/p1/erlaeuterung" ariaLabel="Label Text">
+            <Nav.Items>
+              <Nav.Item
+                subItems={
+                  <Nav.Items>
+                    <Nav.Item
+                      url="/p1"
+                      activeUrls={["/p1", "/p1/erlaeuterung"]}
+                    >
+                      Principle 1
+                    </Nav.Item>
+                  </Nav.Items>
+                }
+              >
+                Principles
+              </Nav.Item>
+            </Nav.Items>
+          </Nav>
+        ),
+      },
+    ]);
+    render(<RouterStub />);
+
+    expect(screen.getByRole("button", { name: "Principles" })).toHaveAttribute(
+      "aria-expanded",
+      "true",
+    );
+  });
 });

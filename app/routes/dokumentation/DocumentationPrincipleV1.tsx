@@ -28,10 +28,10 @@ import {
 import {
   IrrelevantAnswerReasoning,
   NegativeAnswerReasoning,
+  PrincipleReasoningV1,
   principleSchemaV1,
   V1,
   type Principle,
-  type PrincipleReasoning,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { features } from "~/utils/featureFlags";
 import {
@@ -50,10 +50,10 @@ type ReasoningProps = {
   label: string;
   description?: string;
   detailDescription?: string;
-  aspectScope: FormScope<PrincipleReasoning<V1>["aspect"]>;
-  checkboxScope: FormScope<PrincipleReasoning<V1>["checkbox"]>;
-  paragraphScope: FormScope<PrincipleReasoning<V1>["paragraphs"]>;
-  reasonScope: FormScope<PrincipleReasoning<V1>["reason"]>;
+  aspectScope: FormScope<PrincipleReasoningV1["aspect"]>;
+  checkboxScope: FormScope<PrincipleReasoningV1["checkbox"]>;
+  paragraphScope: FormScope<PrincipleReasoningV1["paragraphs"]>;
+  reasonScope: FormScope<PrincipleReasoningV1["reason"]>;
   defaultValue?: "on";
   moreUrl?: string;
   onUncheck: () => void;
@@ -189,7 +189,7 @@ function Reasoning({
 }
 
 type PositiveAnswerFormElementProps = {
-  scope: FormScope<PrincipleReasoning<V1>[]>;
+  scope: FormScope<PrincipleReasoningV1[]>;
   prinzip: PrinzipWithAspekte;
 };
 
@@ -537,7 +537,7 @@ export default function DocumentationPrincipleV1({
           {form.field("answer").value() === principlePages.radioOptions[0] && (
             <PositiveAnswerFormElements
               scope={
-                form.scope("reasoning") as FormScope<PrincipleReasoning<V1>[]>
+                form.scope("reasoning") as FormScope<PrincipleReasoningV1[]>
               }
               prinzip={prinzip}
             />

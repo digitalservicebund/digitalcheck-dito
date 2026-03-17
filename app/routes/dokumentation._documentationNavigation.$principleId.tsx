@@ -23,6 +23,7 @@ export default function DocumentationPrinciple() {
     return (
       <DocumentationPrincipleV2
         currentUrl={currentUrl}
+        nextUrl={nextUrl}
         previousUrl={previousUrl}
         prinzip={prinzip}
       />

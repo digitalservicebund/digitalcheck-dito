@@ -18,6 +18,7 @@ import {
 } from "./DocumentationDataProvider";
 import {
   DATA_SCHEMA_VERSION_V2,
+  Principle,
   type DocumentationData,
   type V2,
 } from "./documentationDataSchema";
@@ -112,7 +113,7 @@ describe("DocumentationDataProvider", () => {
         version: DATA_SCHEMA_VERSION_V2,
         policyTitle: { title: "My Policy" },
         participation: { formats: "Workshops", results: "Results" },
-        principles: [{ id: "p1", answer: "Nein", reasoning: "" }],
+        principles: [{ id: "p1", answer: "Nein", reasoning: "", aspects: [] }],
       };
 
       const { result } = renderHook(() => useDocumentationDataService(), {
@@ -207,11 +208,17 @@ describe("DocumentationDataProvider", () => {
   });
 
   describe("addOrUpdatePrinciple", () => {
-    const principle1 = { id: "p1", answer: "Nein", reasoning: "" } as const;
-    const principle2 = {
+    const principle1: Principle = {
+      id: "p1",
+      answer: "Nein",
+      reasoning: "",
+      aspects: undefined,
+    } as const;
+    const principle2: Principle = {
       id: "p2",
       answer: "Nicht relevant",
       reasoning: "",
+      aspects: undefined,
     } as const;
 
     it("adds principle when principles is undefined (no prior data)", async () => {

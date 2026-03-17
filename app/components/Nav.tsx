@@ -28,6 +28,7 @@ const NavContext = createContext<{
 export type NavItemProps = {
   children: string;
   url?: string;
+  activeUrls?: string[];
   subItems?: ReactNode;
   disabled?: boolean;
   completed?: boolean;
@@ -46,6 +47,33 @@ type NavProps = {
   errorElementUrls?: string[];
   testId?: string;
   className?: string;
+};
+
+const urlMatchesActive = (
+  url: string | undefined,
+  activeUrls: string[] | undefined,
+  activeElementUrl: string,
+): boolean => {
+  if (url === activeElementUrl) return true;
+  if (activeUrls?.includes(activeElementUrl)) return true;
+  return false;
+};
+
+const containsActiveUrl = (
+  node: ReactNode | ReactNode[],
+  activeElementUrl: string,
+): boolean => {
+  if (!node) return false;
+  if (Array.isArray(node))
+    return node.some((n) => containsActiveUrl(n, activeElementUrl));
+  if (isValidElement(node)) {
+    const props = ((node as ReactElement<unknown>).props ?? {}) as NavItemProps;
+    if (urlMatchesActive(props.url, props.activeUrls, activeElementUrl))
+      return true;
+    if (containsActiveUrl(props.children, activeElementUrl)) return true;
+    if (containsActiveUrl(props.subItems, activeElementUrl)) return true;
+  }
+  return false;
 };
 
 /**
@@ -69,7 +97,9 @@ const containsMatchingAttr = (
   if (isValidElement(node)) {
     const props = ((node as ReactElement<unknown>).props ?? {}) as NavItemProps;
 
-    const isActiveNode = props.url === activeElementUrl;
+    const isActiveNode =
+      activeElementUrl != null &&
+      urlMatchesActive(props.url, props.activeUrls, activeElementUrl);
 
     if (props[attr] === value) return !isActiveNode;
     if (containsMatchingAttr(props.children, attr, value, activeElementUrl))
@@ -122,6 +152,7 @@ function NavItemLink({
   children,
   completed,
   currentPage: isCurrentPage,
+  active: isActive,
   url,
   error,
 }: Readonly<{
@@ -130,6 +161,7 @@ function NavItemLink({
   children: string;
   completed: boolean;
   currentPage: boolean;
+  active: boolean;
 }>) {
   function getTitle() {
     if (error) {
@@ -178,6 +210,7 @@ function NavItemLink({
           error ? "border-l-yellow-200 bg-yellow-200" : "border-l-blue-100",
           error ? classes.hoverError : classes.hover,
           classes.focus,
+          isActive && (error ? classes.activeError : classes.active),
         )}
       >
         {statusElements}
@@ -190,6 +223,7 @@ function NavItemLink({
 function NavItem({
   children,
   url,
+  activeUrls,
   subItems,
   disabled = false,
   completed = false,
@@ -199,11 +233,13 @@ function NavItem({
 
   // If any descendant has the active URL, this item should be considered active.
   const hasActiveDescendant = Boolean(
-    activeElementUrl && containsMatchingAttr(subItems, "url", activeElementUrl),
+    activeElementUrl && containsActiveUrl(subItems, activeElementUrl),
   );
 
   const isActive = Boolean(
-    activeElementUrl && (activeElementUrl === url || hasActiveDescendant),
+    activeElementUrl &&
+    (urlMatchesActive(url, activeUrls, activeElementUrl) ||
+      hasActiveDescendant),
   );
 
   const hasCompletedDescendant = Boolean(
@@ -238,6 +274,7 @@ function NavItem({
         error={error}
         completed={isCompleted}
         currentPage={isCurrentPage}
+        active={isActive && !isCurrentPage}
       >
         {children}
       </NavItemLink>

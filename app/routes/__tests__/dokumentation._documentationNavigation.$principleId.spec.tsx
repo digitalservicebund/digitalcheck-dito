@@ -12,6 +12,7 @@ import {
   useParams,
 } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import type { digitalDocumentation } from "~/resources/content/dokumentation";
 import { Route, ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
@@ -102,9 +103,11 @@ const renderWithRouter = () => {
     {
       path: "/",
       element: (
-        <DocumentationDataProvider>
-          <DocumentationPrinciple />
-        </DocumentationDataProvider>
+        <HelpPanelProvider>
+          <DocumentationDataProvider>
+            <DocumentationPrinciple />
+          </DocumentationDataProvider>
+        </HelpPanelProvider>
       ),
     },
   ]);
@@ -445,9 +448,7 @@ describe("DocumentationPrinciple", () => {
               a1Checkbox.parentElement!.parentElement!.parentElement!;
 
             expect(
-              within(a1Element).getByLabelText(
-                "ParagrafenParagrafen, in denen sich das Regelungsvorhaben auf den ausgewählten Schwerpunkt bezieht.",
-              ),
+              within(a1Element).getByLabelText("Paragrafen"),
             ).toBeInTheDocument();
 
             expect(
@@ -469,9 +470,7 @@ describe("DocumentationPrinciple", () => {
                 .parentElement!;
 
             expect(
-              within(ownElement).getByLabelText(
-                "ParagrafenParagrafen, in denen sich das Regelungsvorhaben auf den ausgewählten Schwerpunkt bezieht.",
-              ),
+              within(ownElement).getByLabelText("Paragrafen"),
             ).toBeInTheDocument();
 
             expect(
@@ -541,7 +540,7 @@ describe("DocumentationPrinciple", () => {
               await expectErrorUnless(
                 expected.validReasoningParagraphs,
                 /Bitte geben Sie einen Paragrafen an/,
-                "ParagrafenParagrafen, in denen sich das Regelungsvorhaben auf den ausgewählten Schwerpunkt bezieht.",
+                "Paragrafen",
               );
 
               await expectErrorUnless(

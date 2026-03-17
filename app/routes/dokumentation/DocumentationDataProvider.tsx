@@ -18,7 +18,7 @@ import {
   DATA_SCHEMA_VERSION_V2,
   DocumentationData,
   Principle,
-  PrincipleReasoning,
+  PrincipleReasoningV1,
   V1,
   V2,
   type Participation,
@@ -44,6 +44,15 @@ type DocumentationDataContextType = {
   setPolicyTitle: (policyTitle?: PolicyTitle) => void;
   setParticipation: (participation?: Participation) => void;
   addOrUpdatePrinciple: (newPrinciple?: Principle<V1 | V2>) => void;
+  addOrUpdatePrincipleAnswer: (
+    principleId: string,
+    newAnswer: Principle["answer"],
+  ) => void;
+  addOrUpdatePrincipleReasoning: (
+    principleId: string,
+    newReasoning: string,
+    newAspects: Principle["aspects"],
+  ) => void;
   findDocumentationDataForUrl: (
     url: string,
   ) => PolicyTitle | Participation | Principle | undefined;
@@ -97,15 +106,13 @@ export function DocumentationDataProvider({
       return {
         id: p.id,
         answer: p.answer,
-        reasoning: {
-          aspects: checked
-            .map((r) => r.aspect)
-            .filter((a): a is string => Boolean(a)),
-          explanation: checked
-            .map((r) => r.reason)
-            .filter(Boolean)
-            .join("\n"),
-        },
+        aspects: checked
+          .map((r) => r.aspect)
+          .filter((a): a is string => Boolean(a)),
+        reasoning: checked
+          .map((r) => r.reason)
+          .filter(Boolean)
+          .join("\n"),
       } as Principle;
     });
 
@@ -203,6 +210,88 @@ export function DocumentationDataProvider({
     [documentationData],
   );
 
+  const addOrUpdatePrincipleAnswer = useCallback(
+    (principleId: string, newAnswer: Principle["answer"]) => {
+      if (!principleId || !newAnswer) return;
+
+      const principles = (documentationData.principles ?? []) as Principle[];
+      const existingIndex = principles.findIndex(
+        (existingPrinciple) => existingPrinciple.id === principleId,
+      );
+
+      const defaultNewAspects = newAnswer !== radioOptions[0] ? undefined : [];
+
+      const updatedPrinciples: Principle[] =
+        existingIndex >= 0
+          ? principles.map((existingPrinciple, index) => {
+              if (index === existingIndex) {
+                const newPrinciple = {
+                  ...existingPrinciple,
+                  answer: newAnswer,
+                };
+
+                if (newAnswer !== radioOptions[0])
+                  newPrinciple.aspects = defaultNewAspects;
+
+                return newPrinciple;
+              }
+
+              return existingPrinciple;
+            })
+          : [
+              ...principles,
+              {
+                id: principleId,
+                answer: newAnswer,
+                reasoning: "",
+                aspects: defaultNewAspects,
+              },
+            ];
+
+      createOrUpdateDocumentationData({
+        ...documentationData,
+        principles: updatedPrinciples,
+      });
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [documentationData],
+  );
+
+  const addOrUpdatePrincipleReasoning = useCallback(
+    (
+      principleId: string,
+      newReasoning: string,
+      newAspects: Principle["aspects"],
+    ) => {
+      if (!principleId) return;
+
+      const principles = (documentationData.principles ?? []) as Principle[];
+      const existingIndex = principles.findIndex(
+        (existingPrinciple) => existingPrinciple.id === principleId,
+      );
+
+      if (existingIndex === -1) return;
+
+      const updatedPrinciples: Principle[] = principles.map(
+        (existingPrinciple, index) =>
+          index === existingIndex
+            ? {
+                ...existingPrinciple,
+                reasoning: newReasoning,
+                aspects: newAspects,
+              }
+            : existingPrinciple,
+      );
+
+      createOrUpdateDocumentationData({
+        ...documentationData,
+        principles: updatedPrinciples,
+      });
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [documentationData],
+  );
+
   const findDocumentationDataForUrl = useCallback(
     (url: string): PolicyTitle | Participation | Principle | undefined => {
       if (url === ROUTE_DOCUMENTATION_TITLE.url)
@@ -218,15 +307,15 @@ export function DocumentationDataProvider({
       if (simplifiedFlow) return principleData as Principle; // simplified flow stops here
 
       // TODO: remove after enabling simplifiedPrincipleFlow
-      let reasoning: string | PrincipleReasoning<V1>[];
+      let reasoning: string | PrincipleReasoningV1[];
 
       if (Array.isArray(principleData.reasoning)) {
         reasoning = principleData.reasoning?.filter(
-          (r): r is PrincipleReasoning<V1> => r?.checkbox !== undefined,
+          (r): r is PrincipleReasoningV1 => r?.checkbox !== undefined,
         );
       } else {
         reasoning =
-          (principleData.reasoning as string | PrincipleReasoning<V1>[]) ?? "";
+          (principleData.reasoning as string | PrincipleReasoningV1[]) ?? "";
       }
 
       return {
@@ -254,6 +343,8 @@ export function DocumentationDataProvider({
         setPolicyTitle,
         setParticipation,
         addOrUpdatePrinciple,
+        addOrUpdatePrincipleAnswer,
+        addOrUpdatePrincipleReasoning,
         findDocumentationDataForUrl,
       }}
     >

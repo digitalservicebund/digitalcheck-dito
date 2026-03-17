@@ -15,7 +15,6 @@ import {
   ROUTES_DOCUMENTATION_INTRO,
 } from "~/resources/staticRoutes";
 import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
-import DocumentationSummary from "~/routes/dokumentation._documentationNavigation.zusammenfassung";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
 import type {
   DocumentationData,
@@ -26,6 +25,7 @@ import type {
 } from "~/routes/dokumentation/documentationDataSchema";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { AbsatzWithParagraph } from "~/utils/strapiData.server.ts";
+import DocumentationSummaryV1 from "../dokumentation/DocumentationSummaryV1";
 
 const MOCK_ROUTE_PRINCIPLE = {
   title: "Digitale Angebote",
@@ -67,7 +67,7 @@ describe("DocumentationSummary", () => {
     return render(
       <MemoryRouter>
         <DocumentationDataProvider>
-          <DocumentationSummary />
+          <DocumentationSummaryV1 />
         </DocumentationDataProvider>
       </MemoryRouter>,
     );

@@ -3,9 +3,16 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 
 import {
-  createDoc,
-  FILE_NAME_DOCUMENTATION_TEMPLATE,
-} from "~/service/wordDocumentationExport/wordDocumentation";
+  createDoc as createDocV1,
+  FILE_NAME_DOCUMENTATION_TEMPLATE as FILE_NAME_DOCUMENTATION_TEMPLATE_V1,
+} from "~/service/wordDocumentationExport/wordDocumentationV1";
+import {
+  createDoc as createDocV2,
+  FILE_NAME_DOCUMENTATION_TEMPLATE as FILE_NAME_DOCUMENTATION_TEMPLATE_V2,
+} from "~/service/wordDocumentationExport/wordDocumentationV2";
+
+import { features } from "~/utils/featureFlags";
+import getFeatureFlag from "~/utils/featureFlags.server";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_ASPECTS_QUERY,
@@ -22,6 +29,13 @@ export async function loader({ params }: Route.LoaderArgs) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw new Response("Please provide a file name", { status: 400 });
   }
+
+  const simplifiedFlow = getFeatureFlag(features.simplifiedPrincipleFlow);
+
+  const FILE_NAME_DOCUMENTATION_TEMPLATE = simplifiedFlow
+    ? FILE_NAME_DOCUMENTATION_TEMPLATE_V2
+    : FILE_NAME_DOCUMENTATION_TEMPLATE_V1;
+  const createDoc = simplifiedFlow ? createDocV2 : createDocV1;
 
   const principles = await fetchStrapiData<{
     prinzips: PrinzipWithAspekte[];
