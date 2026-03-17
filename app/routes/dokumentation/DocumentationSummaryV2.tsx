@@ -263,7 +263,7 @@ export default function DocumentationSummaryV2() {
           <PrincipleContent principle={principleFormData} prinzip={prinzip} />
         ) : null,
         badge: {
-          text: `Prinzip ${prinzip.Nummer}`,
+          text: `Prinzip ${prinzip.order}`,
           principleNumber: prinzip.Nummer,
         },
       });

@@ -97,7 +97,7 @@ export default function DocumentationPrincipleErlaeuterung() {
       <div className="max-w-a11y space-y-40">
         <div className="space-y-8">
           <Badge principleNumber={prinzip.Nummer}>
-            Prinzip {prinzip.Nummer}
+            Prinzip {prinzip.order}
           </Badge>
           <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
             {prinzip.Name}

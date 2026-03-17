@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
@@ -50,6 +51,7 @@ export default function DocumentationPrincipleV2({
     <>
       <MetaTitle prefix={`Dokumentation: ${prinzip.Name}`} />
       <div className="max-w-a11y space-y-40">
+        <Badge principleNumber={prinzip.Nummer}>Prinzip {prinzip.order}</Badge>
         <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
           {prinzip.Name}
           <HelpButton
