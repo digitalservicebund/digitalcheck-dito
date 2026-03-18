@@ -95,7 +95,6 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
         subtitle={examplesRegelungen.principles.hero.subtitle}
       />
 
-      <ContentWrapper className="space-y-80">
         <TabGroup
           initialActiveIndex={initialActiveIndexForTabs}
           onChange={onTabChange}
@@ -114,6 +113,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
             (that is updated by `onTabChange`).
           */}
         </TabGroup>
+      <ContentWrapper compactTopSpacing className="space-y-80">
 
         <InfoBox
           heading={{ text: prinzip.Name, tagName: "h2" }}

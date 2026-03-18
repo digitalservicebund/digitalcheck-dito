@@ -211,12 +211,12 @@ export default function Gesetz() {
         </div>
       </div>
 
-      <ContentWrapper>
         {/* TODO: how to handle multiple digitalchecks? */}
         {/* <Heading tagName="h2" look="ds-heading-03-bold" className="mb-24">
           {regelung.Titel}
         </Heading> */}
 
+      <ContentWrapper compactTopSpacing>
         <TabGroup>
           <TabGroup.TabList>
             {tabsData.map(({ title }) => (

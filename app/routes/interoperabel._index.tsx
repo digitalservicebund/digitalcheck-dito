@@ -71,7 +71,6 @@ export default function Interoperability() {
             />
           </div>
         </div>
-        <ContentWrapper>
           <TabGroupWithUrlState>
             <TabGroupWithUrlState.TabList>
               <TabGroupWithUrlState.Tab>Überblick</TabGroupWithUrlState.Tab>
@@ -125,6 +124,7 @@ export default function Interoperability() {
                       Interoperabilität auswirken.
                     </p>
                   </div>
+        <ContentWrapper compactTopSpacing>
 
                   <div className="space-y-8">
                     <Heading tagName="h4" className="font-bold">

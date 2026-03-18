@@ -1,5 +1,4 @@
-import React, { ReactNode } from "react";
-import Tabs from "~/components/Tabs/Tabs";
+import { ReactNode } from "react";
 import twMerge from "~/utils/tailwindMerge.ts";
 
 /**
@@ -9,21 +8,23 @@ import twMerge from "~/utils/tailwindMerge.ts";
  * It wraps children in a div with `container` class and vertical margin:
  * - 40 px on narrow viewports
  * - 80 px on lg and above
- *   - exception: if child is Tabs, set margin top to 40 px instead
+ * - optional compact top spacing on lg and above
  */
 function ContentWrapper({
   children,
   className,
-}: Readonly<{ children: ReactNode; className?: string }>) {
-  const firstChild = React.Children.toArray(children)[0];
-  const isFirstChildTabs =
-    React.isValidElement(firstChild) && firstChild.type === Tabs;
+  compactTopSpacing = false,
+}: Readonly<{
+  children: ReactNode;
+  className?: string;
+  compactTopSpacing?: boolean;
+}>) {
 
   return (
     <div
       className={twMerge(
         "container my-40 space-y-40 lg:my-80",
-        isFirstChildTabs && "lg:mt-40",
+        compactTopSpacing && "lg:mt-40",
         className,
       )}
     >

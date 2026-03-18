@@ -22,7 +22,7 @@ export default function Digitaltauglichkeit_index() {
         subtitle="Hier finden Sie Beispiele für digitaltaugliche Regelungen, sowie aus deren Erarbeitungsprozess. Lassen Sie sich inspirieren, wie in Regelungsvorhaben Digitaltauglichkeit beachtet wurde."
       />
 
-      <ContentWrapper>
+      <ContentWrapper compactTopSpacing>
         <TabGroup>
           <TabGroup.TabList>
             <TabGroup.Tab>5 Prinzipien</TabGroup.Tab>
