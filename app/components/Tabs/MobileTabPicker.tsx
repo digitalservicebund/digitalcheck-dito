@@ -11,10 +11,10 @@ import {
 import { ReactNode } from "react";
 import { twJoin } from "tailwind-merge";
 import {
+  mobileTabPickerButtonClassName,
   mobileTabPickerOptionClassName,
   mobileTabPickerOptionsClassName,
-} from "./desktopTabClassName";
-import { mobileTabPickerButtonClassName } from "./tabUtils";
+} from "./tabUtils";
 
 export type MobileTabPickerItem = {
   key: string;

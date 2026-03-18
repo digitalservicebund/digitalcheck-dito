@@ -19,7 +19,6 @@ function ContentWrapper({
   className?: string;
   compactTopSpacing?: boolean;
 }>) {
-
   return (
     <div
       className={twMerge(
