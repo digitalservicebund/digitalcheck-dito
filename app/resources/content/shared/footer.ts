@@ -15,6 +15,7 @@ import {
   ROUTE_PRIVACY,
   ROUTE_SITEMAP,
   ROUTE_SUPPORT,
+  ROUTE_SUPPORT_TRAININGS,
   ROUTE_VERSION_HISTORY,
 } from "~/resources/staticRoutes";
 import { contact } from "./contact";
@@ -45,7 +46,7 @@ export const footer = {
         },
         {
           text: "Schulungen",
-          url: ROUTE_SUPPORT.url + "#angebote",
+          url: ROUTE_SUPPORT_TRAININGS.url,
         },
         {
           text: "Nationale Kontaktstelle für ein interoperables Europa (2024/903 Art. 17)",

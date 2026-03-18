@@ -12,6 +12,7 @@ import {
   ROUTE_METHODS,
   ROUTE_PRECHECK,
   ROUTE_SUPPORT,
+  ROUTE_SUPPORT_TRAININGS,
 } from "~/resources/staticRoutes.ts";
 
 export const header = {
@@ -135,7 +136,7 @@ export const header = {
           title: "Schulungen",
           content:
             "In dieser Online-Schulung bekommen Sie praktische Tipps für den Digitalcheck.",
-          href: ROUTE_SUPPORT.url + "#angebote",
+          href: ROUTE_SUPPORT_TRAININGS.url,
           activeBehavior: "noHighlight" as ActiveBehavior,
         },
         {

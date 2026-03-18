@@ -73,7 +73,7 @@ exports[`Footer Component > Renders correctly 1`] = `
               <a
                 class="text-link increase-tap-area"
                 data-discover="true"
-                href="/unterstuetzung#angebote"
+                href="/unterstuetzung/?tab=online-schulungen#angebote"
               >
                 <span
                   class="flex items-center"

@@ -3,6 +3,7 @@ import {
   ROUTE_LANDING,
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_SUPPORT,
+  ROUTE_SUPPORT_TRAININGS,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
@@ -80,7 +81,7 @@ export const spoc = {
       
       **Bereitstellung von Informationen und Austauschformaten:**  
       
-      Wir stellen Wissen bereit und bereiten das Thema verständlich auf. Dazu zählen [Schulungen](${ROUTE_SUPPORT.url}#angebote) und verschiedene [Unterstützungsangebote](${ROUTE_SUPPORT.url}).
+      Wir stellen Wissen bereit und bereiten das Thema verständlich auf. Dazu zählen [Schulungen](${ROUTE_SUPPORT_TRAININGS.url}) und verschiedene [Unterstützungsangebote](${ROUTE_SUPPORT.url}).
 
 
       **Förderung von Nachnutzung, Kooperation und Zusammenarbeit:**  
