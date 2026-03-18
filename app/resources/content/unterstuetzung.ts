@@ -71,6 +71,7 @@ export const support = {
     text: "Nach einem erstem Austausch finden wir gemeinsam die richtige Unterstützung für Ihre Herausforderung und Ihren Zeitplan.",
     tabs: [
       {
+        id: "schnelle-hilfe",
         title: "Schnelle Hilfe",
         offerings: [
           {
@@ -150,6 +151,7 @@ export const support = {
         ],
       },
       {
+        id: "umfangreiche-beratung",
         title: "Umfangreiche Beratung",
         offerings: [
           {
@@ -243,6 +245,7 @@ export const support = {
         ],
       },
       {
+        id: "online-schulungen",
         title: "Online-Schulungen",
         offerings: [
           {

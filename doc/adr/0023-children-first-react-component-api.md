@@ -4,6 +4,7 @@
 
 - 2025‑08‑19: Accepted
 - 2025-12-08: Amended: use exported components, e.g., `Tab` instead of `Tabs.Tab`
+- 2026-03-18: Amended: update tab examples to the current `Tabs` API
 
 ## Context
 
@@ -132,20 +133,20 @@ For repeatable items with coordinated state (tabs, accordions, menus), use a con
 // Before (nested data config)
 <Tabs
   tabs={[
-    { title: "Tab1", plausibleEventName: "tab.tab1", content: <Content /> },
-    { title: "Tab2", plausibleEventName: "tab.tab2", content: <Content /> },
+    { title: "Tab 1", content: <Content /> },
+    { title: "Tab 2", content: <Content /> },
   ]}
 />
 
-// After (compound container + children)
-<Tabs>
-  <Tab title="Tab1" plausibleEventName="tab.tab1">
-    <Content />
-  </Tab>
-  <Tab title="Tab2" plausibleEventName="tab.tab2">
-    <Content />
-  </Tab>
-</Tabs>
+// After (compound container + children, local state)
+<TabGroup>
+  <TabGroup.Tab label="5 Prinzipien">
+    <PrinciplesContent />
+  </TabGroup.Tab>
+  <TabGroup.Tab label="Visualisierungen">
+    <VisualizationsContent />
+  </TabGroup.Tab>
+</TabGroup>
 ```
 
 ### 5. Reject the strictly rigid compound pattern

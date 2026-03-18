@@ -15,6 +15,7 @@ import {
   ROUTE_VERSION_HISTORY,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
+import { getTabAnchorLink } from "~/utils/tabs";
 import { contact } from "./shared/contact";
 
 export const news = {
@@ -79,7 +80,7 @@ export const news = {
       - Klare Anforderungen für Interoperabilitätsbewertungen
       - Hintergründe und Ziele der neuen EU-Verordnung
       
-      [Hier ansehen](${ROUTE_INTEROPERABILITY.url}?tab=2)
+      [Hier ansehen](${ROUTE_INTEROPERABILITY.url}${getTabAnchorLink("hintergrund")})
       `,
     },
     {

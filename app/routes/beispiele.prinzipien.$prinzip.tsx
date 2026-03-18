@@ -1,9 +1,4 @@
-import {
-  Link,
-  useLoaderData,
-  useNavigate,
-  useOutletContext,
-} from "react-router";
+import { Link, useLoaderData, useOutletContext } from "react-router";
 
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
@@ -14,7 +9,7 @@ import MetaTitle from "~/components/Meta";
 import ParagraphList from "~/components/ParagraphList";
 import RegulationMetadata from "~/components/RegulationMetadata";
 import Separator from "~/components/Separator";
-import TabGroup from "~/components/Tabs/Tabs";
+import RouteTabs from "~/components/Tabs/RouteTabs";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import {
   ROUTE_EXAMPLES_PRINCIPLES,
@@ -71,21 +66,13 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
 export default function DigitaltauglichkeitPrinzipienDetail() {
   const { prinzip } = useLoaderData<typeof loader>();
   const prinzips = useOutletContext<PrinzipWithBeispielvorhaben[]>();
-  const navigate = useNavigate();
 
   const { Beispielvorhaben } = prinzip;
-
-  const activeTabIndex = prinzips.findIndex(
-    (p) => p.URLBezeichnung === prinzip.URLBezeichnung,
-  );
-
-  const initialActiveIndexForTabs = activeTabIndex === -1 ? 0 : activeTabIndex;
-
-  const onTabChange = async (index: number) => {
-    const principle = prinzips[index];
-    const url = `${ROUTE_EXAMPLES_PRINCIPLES.url}/${principle.URLBezeichnung}`;
-    await navigate(url);
-  };
+  const tabs = prinzips.map((principle) => ({
+    key: principle.URLBezeichnung,
+    label: principle.Kurzbezeichnung,
+    to: `${ROUTE_EXAMPLES_PRINCIPLES.url}/${principle.URLBezeichnung}`,
+  }));
 
   return (
     <>
@@ -95,25 +82,8 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
         subtitle={examplesRegelungen.principles.hero.subtitle}
       />
 
-        <TabGroup
-          initialActiveIndex={initialActiveIndexForTabs}
-          onChange={onTabChange}
-        >
-          <TabGroup.TabList>
-            {prinzips.map((principle) => {
-              return (
-                <TabGroup.Tab key={principle.Kurzbezeichnung}>
-                  {principle.Kurzbezeichnung}
-                </TabGroup.Tab>
-              );
-            })}
-          </TabGroup.TabList>
-          {/*
-            No panels here, they are rendered below, depending on the route
-            (that is updated by `onTabChange`).
-          */}
-        </TabGroup>
       <ContentWrapper compactTopSpacing className="space-y-80">
+        <RouteTabs activeKey={prinzip.URLBezeichnung} tabs={tabs} />
 
         <InfoBox
           heading={{ text: prinzip.Name, tagName: "h2" }}

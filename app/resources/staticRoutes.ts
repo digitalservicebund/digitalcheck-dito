@@ -3,6 +3,7 @@
 import { documentationDocument } from "~/resources/content/documentation-document";
 import { preCheckQuestions } from "~/resources/content/shared/pre-check-questions";
 import { FILE_NAME_DOCUMENTATION_STATIC_WORD } from "~/utils/constants";
+import { getTabAnchorLink } from "~/utils/tabs";
 import { removeTrailingSlash } from "~/utils/utilFunctions";
 
 export type Route = {
@@ -34,6 +35,11 @@ export const createRoute = (
 export const ROUTE_SUPPORT = createRoute(
   "unterstuetzung",
   "Unterstützungsangebote",
+);
+export const ROUTE_SUPPORT_TRAININGS = createRoute(
+  `${getTabAnchorLink("online-schulungen", "angebote")}`,
+  "Schulungen",
+  ROUTE_SUPPORT,
 );
 export const ROUTE_IMPRINT = createRoute("impressum", "Impressum");
 export const ROUTE_PRIVACY = createRoute("datenschutz", "Datenschutzerklärung");

@@ -1,6 +1,33 @@
 export const slugify = (string: string) =>
   string.toLowerCase().replaceAll(/[^a-zA-Z0-9]+/g, "-");
 
+const slugCharacterMap: Record<string, string> = {
+  Ä: "Ae",
+  Ö: "Oe",
+  Ü: "Ue",
+  ä: "ae",
+  ö: "oe",
+  ü: "ue",
+  ß: "ss",
+};
+
+// Normalizes strings for use as HTML IDs or URL fragments by:
+// - Trimming whitespace
+// - Replacing German umlauts with their ASCII equivalents
+// - Normalizing Unicode characters to their basic form
+// - Removing leading and trailing hyphens
+export const prettySlugify = (value: string) =>
+  slugify(
+    value
+      .trim()
+      .replace(
+        /[ÄÖÜäöüß]/g,
+        (character) => slugCharacterMap[character] ?? character,
+      )
+      .normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, ""),
+  ).replace(/^-+|-+$/g, "");
+
 export const formatDate = (date: string | undefined) => {
   return date
     ? new Intl.DateTimeFormat("de-DE", {

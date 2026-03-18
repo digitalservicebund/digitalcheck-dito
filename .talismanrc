@@ -45,6 +45,8 @@ allowed_patterns:
   - GITOPS_DIGITALCHECK_APP_PRIVATE_KEY
   - ARGOCD_PIPELINE_PASSWORD
   - "pass: true"
+  - activeKey
+  - getSelectedIndexByKey
 
 scopeconfig:
   - scope: node # ignores files such as package-lock.json

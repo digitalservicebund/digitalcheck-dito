@@ -83,12 +83,15 @@ export default function Gesetz() {
   const regelung = useLoaderData<typeof loader>();
   const principles = useOutletContext<PrinzipWithBeispielvorhaben[]>();
 
-  const tabsData: { title: string; content: React.ReactNode }[] = [];
+  const tabsData: {
+    label: string;
+    content: React.ReactNode;
+  }[] = [];
 
   // ----- Formulierungen / Prinziperfüllungen -----
   if (regelung.Paragraphen.length > 0) {
     tabsData.push({
-      title: examplesRegelungen.principles.tabName,
+      label: examplesRegelungen.principles.tabName,
       content: (
         <>
           {regelung.GesetzStatus !== "Verkuendetes_Gesetz_aktuelle_Fassung" && (
@@ -122,7 +125,7 @@ export default function Gesetz() {
   // ----- Visualisierungen -----
   if (regelung.Visualisierungen.length > 0) {
     tabsData.push({
-      title: examplesRegelungen.visualisations.tabName,
+      label: examplesRegelungen.visualisations.tabName,
       content: (
         <div className="ds-stack ds-stack-32">
           <div className="mb-40 space-y-16">
@@ -157,7 +160,7 @@ export default function Gesetz() {
     )
   ) {
     tabsData.push({
-      title: examplesRegelungen.nkr.tabName,
+      label: examplesRegelungen.nkr.tabName,
       content: (
         <>
           <div className="mb-16 space-y-16">
@@ -211,23 +214,13 @@ export default function Gesetz() {
         </div>
       </div>
 
-        {/* TODO: how to handle multiple digitalchecks? */}
-        {/* <Heading tagName="h2" look="ds-heading-03-bold" className="mb-24">
-          {regelung.Titel}
-        </Heading> */}
-
       <ContentWrapper compactTopSpacing>
         <TabGroup>
-          <TabGroup.TabList>
-            {tabsData.map(({ title }) => (
-              <TabGroup.Tab key={title}>{title}</TabGroup.Tab>
-            ))}
-          </TabGroup.TabList>
-          <TabGroup.TabPanels>
-            {tabsData.map(({ content, title }) => (
-              <TabGroup.TabPanel key={title}>{content}</TabGroup.TabPanel>
-            ))}
-          </TabGroup.TabPanels>
+          {tabsData.map(({ content, label }) => (
+            <TabGroup.Tab key={slugify(label)} label={label}>
+              {content}
+            </TabGroup.Tab>
+          ))}
         </TabGroup>
       </ContentWrapper>
     </>

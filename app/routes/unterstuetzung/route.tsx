@@ -1,5 +1,4 @@
 import React from "react";
-import { useLocation } from "react-router";
 
 import { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
@@ -10,7 +9,7 @@ import Image from "~/components/Image";
 import InfoBox from "~/components/InfoBox";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
-import TabGroup from "~/components/Tabs/Tabs";
+import { SearchParamTabs } from "~/components/Tabs/Tabs";
 import { support } from "~/resources/content/unterstuetzung";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
 import { ContentLink } from "~/utils/contentTypes";
@@ -34,7 +33,6 @@ type Offering = {
     text: string;
   }[];
 };
-
 const {
   socialProof,
   supportHow,
@@ -71,82 +69,6 @@ function SocialProofImage() {
 }
 
 export default function Index() {
-  const location = useLocation();
-  const initialTabIndex = location.hash === "#angebote" ? 2 : 0;
-
-  const tabsData: { title: string; content: React.JSX.Element }[] =
-    supportOfferings.tabs.map((tab) => ({
-      title: tab.title,
-      content: (
-        <>
-          {tab.offerings.map((offering: Offering) => (
-            <Container
-              key={offering.title}
-              className="mb-32 flex gap-32 rounded-xl bg-blue-100 px-40 max-md:flex-col"
-            >
-              <InfoBox
-                heading={{
-                  tagName: "h2",
-                  text: offering.title,
-                }}
-              >
-                <RichText markdown={offering.text} />
-                {offering.link && <InfoBox.LinkList links={[offering.link]} />}
-              </InfoBox>
-
-              <div className="flex-none space-y-20 md:w-[310px]">
-                <div className="bg-white">
-                  <div className="p-28">
-                    <h4>{offering.sellingPoints}</h4>
-                    <div className="divide-y divide-gray-700">
-                      {offering.details.map((detail) => (
-                        <div key={detail.title} className="py-16">
-                          <div className="flex items-center gap-8 pb-8">
-                            {detail.icon && (
-                              <detail.icon className="size-24 fill-gray-800" />
-                            )}
-                            <Heading
-                              tagName="p"
-                              look="ds-label-01-bold"
-                              text={detail.title}
-                            />
-                          </div>
-                          <RichText
-                            markdown={detail.text}
-                            className="text-base"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                {offering.examples && (
-                  <div className="bg-white">
-                    <div className="divide-y divide-gray-700">
-                      {offering.examples.map((example, idx) => (
-                        <div key={`${offering.title}-example-${idx}`}>
-                          {example.image && (
-                            <Image
-                              url={example.image.src}
-                              alternativeText={example.image.alt}
-                            />
-                          )}
-                          <RichText
-                            markdown={example.text}
-                            className="p-20 text-base"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </Container>
-          ))}
-        </>
-      ),
-    }));
-
   return (
     <>
       <MetaTitle prefix={ROUTE_SUPPORT.title} />
@@ -232,18 +154,82 @@ export default function Index() {
             >
               <RichText markdown={supportOfferings.text} />
             </InfoBox>
-            <TabGroup initialActiveIndex={initialTabIndex}>
-              <TabGroup.TabList>
-                {tabsData.map(({ title }) => (
-                  <TabGroup.Tab key={title}>{title}</TabGroup.Tab>
-                ))}
-              </TabGroup.TabList>
-              <TabGroup.TabPanels>
-                {tabsData.map(({ content, title }) => (
-                  <TabGroup.TabPanel key={title}>{content}</TabGroup.TabPanel>
-                ))}
-              </TabGroup.TabPanels>
-            </TabGroup>
+            <SearchParamTabs>
+              {supportOfferings.tabs.map((tab) => (
+                <SearchParamTabs.Tab
+                  key={tab.id}
+                  tabId={tab.id}
+                  label={tab.title}
+                >
+                  {tab.offerings.map((offering: Offering) => (
+                    <Container
+                      key={offering.title}
+                      className="mb-32 flex gap-32 rounded-xl bg-blue-100 px-40 max-md:flex-col"
+                    >
+                      <InfoBox
+                        heading={{
+                          tagName: "h2",
+                          text: offering.title,
+                        }}
+                      >
+                        <RichText markdown={offering.text} />
+                        {offering.link && (
+                          <InfoBox.LinkList links={[offering.link]} />
+                        )}
+                      </InfoBox>
+
+                      <div className="flex-none space-y-20 md:w-[310px]">
+                        <div className="bg-white">
+                          <div className="p-28">
+                            <h4>{offering.sellingPoints}</h4>
+                            <div className="divide-y divide-gray-700">
+                              {offering.details.map((detail) => (
+                                <div key={detail.title} className="py-16">
+                                  <div className="flex items-center gap-8 pb-8">
+                                    {detail.icon && (
+                                      <detail.icon className="size-24 fill-gray-800" />
+                                    )}
+                                    <Heading
+                                      tagName="p"
+                                      look="ds-label-01-bold"
+                                      text={detail.title}
+                                    />
+                                  </div>
+                                  <RichText
+                                    markdown={detail.text}
+                                    className="text-base"
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                        {offering.examples && (
+                          <div className="bg-white">
+                            <div className="divide-y divide-gray-700">
+                              {offering.examples.map((example, idx) => (
+                                <div key={`${offering.title}-example-${idx}`}>
+                                  {example.image && (
+                                    <Image
+                                      url={example.image.src}
+                                      alternativeText={example.image.alt}
+                                    />
+                                  )}
+                                  <RichText
+                                    markdown={example.text}
+                                    className="p-20 text-base"
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </Container>
+                  ))}
+                </SearchParamTabs.Tab>
+              ))}
+            </SearchParamTabs>
           </Container>
         </div>
 
