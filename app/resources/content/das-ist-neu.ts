@@ -28,6 +28,18 @@ export const news = {
   items: [
     {
       badge: {
+        text: "16.03.2026",
+      },
+      content: dedent`
+       Zusammenfassungen zu angrenzendem EU-Recht im Kontext des Interoperable Europe Act. Als Legistin erfahren Sie: 
+          - Welche EU-Rechtsakte könnten für Ihr Vorhaben relevant sein?
+          - Was sind die wichtigsten Punkte bezüglich Interoperabilität in dem jeweiligen Rechtsakt?
+       
+        [Hier ansehen](${ROUTE_INTEROPERABILITY.url}${getTabAnchorLink("angrenzendes-eu-recht", "angrenzendes-eu-recht")})
+      `,
+    },
+    {
+      badge: {
         text: "13.02.2026",
       },
       content: dedent`

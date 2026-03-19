@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
+import AccordionItem from "~/components/AccordionItem";
 import Badge from "~/components/Badge.tsx";
 import Container from "~/components/Container";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
-import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import ImageZoomable from "~/components/ImageZoomable";
@@ -39,14 +39,16 @@ const Overview = () => (
         className="mt-16 mb-32"
         markdown={spoc.landscape.contentAfter.content}
       />
-      <DetailsSummary
-        className="mt-16 mb-32"
-        title={spoc.landscape.contentAfter.infobox.detailsSummary.title}
-      >
-        <RichText
-          markdown={spoc.landscape.contentAfter.infobox.detailsSummary.content}
-        />
-      </DetailsSummary>
+      <div className="my-40">
+        <p className="mb-40 font-bold">
+          {spoc.landscape.contentAfter.itemContext}
+        </p>
+        {spoc.landscape.contentAfter.items.map((item) => (
+          <AccordionItem key={item.title} headline={item.title}>
+            <RichText markdown={item.content} />
+          </AccordionItem>
+        ))}
+      </div>
       <RichText
         className="mb-48"
         markdown={spoc.landscape.contentAfter.outro}
