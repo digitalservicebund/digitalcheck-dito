@@ -6,6 +6,7 @@ import {
   ROUTE_SUPPORT_TRAININGS,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
+import { getTabAnchorLink } from "~/utils/tabs";
 import { contact } from "./shared/contact";
 
 export const spoc = {
@@ -37,10 +38,12 @@ export const spoc = {
     contentAfter: {
       headline: "Rechtliche Grundlage",
       content: dedent`
-      Das Organigramm zeigt die Interaktionen der Organisationen und Behörden in Deutschland und der EU im Kontext der Verordnung (EU) 2024/903.`,
-      infobox: {
-        detailsSummary: {
-          title: "Beteiligte Organisationen und Behörden",
+      Das Organigramm zeigt die Interaktionen der Organisationen und Behörden in Deutschland und der EU im Kontext der Verordnung (EU) 2024/903.
+      
+      Um die Zusammenarbeit in der Praxis besser zu verstehen, finden Sie hier Details zu den Zuständigkeiten und zur rechtlichen Einordnung.`,
+      items: [
+        {
+          title: "Details zu beteiligten Behörden und Organisationen",
           content: dedent`
                   - **Bundesländer & Kommunen:** Ausgangspunkt, mit dem Hinweis auf die dezentrale Umsetzung durch das Bundesangebot.
                   - **IT-Planungsrat:** Koordiniert und empfiehlt die Integration von IT-Strategien.
@@ -49,7 +52,14 @@ export const spoc = {
                   - **EU-Kommission:** Beteiligte an der Weiterentwicklung und Reportings. 
                   - **27 EU-Staaten mit Kontaktstellen:** Nationale Kontaktstellen für Informationsaustausch.`,
         },
-      },
+        {
+          title: "Der rechtliche Rahmen: Einordnung in das EU-Ökosystem",
+          content: dedent`
+                  Der Interoperable Europe Act und der Europäische Interoperabilitätsrahmen (EIF) sind Teil des Ökosystems der EU-Rechtsakte für den digitalen Binnenmarkt. Weitere zentrale Verordnungen, Richtlinien und Frameworks sind darin verankert.
+                  
+                  Übersichten zu den EU-Rechtsakten finden Sie [hier](${ROUTE_INTEROPERABILITY.url}${getTabAnchorLink("angrenzendes-eu-recht", "angrenzendes-eu-recht")})`,
+        },
+      ],
       outro:
         "Deutschland integriert die Anforderungen der Verordnung (EU) 2024/903 in den Digitalcheck und folgt damit den Empfehlungen der EU. Somit werden Ressourcen effizient genutzt und Doppelstrukturen verhindert. Die nationale Kontaktstelle ist beim Digitalcheck-Team angesiedelt.",
     },

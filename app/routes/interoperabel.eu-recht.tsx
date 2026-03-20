@@ -95,7 +95,13 @@ export default function EuRechtTab() {
         >
           <div className="space-y-40">
             <div className="px-8 py-16">
-              <Heading tagName="h2">Angrenzendes EU-Recht</Heading>
+              <Heading
+                tagName="h2"
+                id="angrenzendes-eu-recht"
+                className="mb-40"
+              >
+                Angrenzendes EU-Recht
+              </Heading>
               <p>
                 Im Ökosystem der Interoperabilität spielen einige EU-Rechtsakte
                 eine Rolle. So ist beispielsweise die Verordnung für ein
