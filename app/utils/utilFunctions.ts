@@ -26,7 +26,9 @@ export const prettySlugify = (value: string) =>
       )
       .normalize("NFKD")
       .replace(/[\u0300-\u036f]/g, ""),
-  ).replace(/^-+|-+$/g, "");
+  )
+    .replace(/^-+/, "")
+    .replace(/-+$/, "");
 
 export const formatDate = (date: string | undefined) => {
   return date
