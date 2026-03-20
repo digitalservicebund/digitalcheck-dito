@@ -2,11 +2,11 @@ name: "Send Failure to Slack"
 description: "Central Step to send Slack Failure Notifications"
 
 runs:
-    using: "composite"
-    steps:
-        - name: Send failure to Slack
-          uses: digitalservicebund/notify-on-failure-gha@671832f192aee0a068fd92b2f6deb975df794a84 # v1.5.0
-          if: ${{ failure() }}
-          with:
-              SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-              SLACK_CHANNEL_ID: C063MG91QN4
+  using: "composite"
+  steps:
+    - name: Send failure to Slack
+      uses: digitalservicebund/notify-on-failure-gha@671832f192aee0a068fd92b2f6deb975df794a84 # v1.5.0
+      if: ${{ failure() }}
+      with:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
