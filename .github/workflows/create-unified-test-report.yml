@@ -63,6 +63,5 @@ jobs:
           echo "${{ steps.github-pages-deployment.outputs.page_url }}${{ github.run_id }}/" >> $GITHUB_STEP_SUMMARY
 
       - name: Send failure to Slack
-        uses: digitalservicebund/notify-on-failure-gha@814d0c4b2ad6a3443e89c991f8657b10126510bf # v1.5.0
-        with:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: ${{ failure() }}
+        uses: ./.github/actions/slack-failure-notify
