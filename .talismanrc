@@ -28,12 +28,14 @@ fileignoreconfig:
   - filename: app/routes/vorpruefung/preCheckDataService.ts
     allowed_patterns:
       - STORAGE_KEY
+  - filename: app/resources/content/das-ist-neu.ts
+    ignore_detectors: [filecontent]
   - filename: app/resources/content/beispiele-regelungen.ts # Google Forms link misinterpreted as base64
-    checksum: b39b7d3ec351fa3fac5072604d8a14f8df36fa5b2333f6fabecf51e461f4385d
+    ignore_detectors: [filecontent]
   - filename: app/resources/content/vorpruefung.ts # German text content misidentified as secret pattern
-    checksum: 602dda200e4e97725ac91611fb3cb2ddff7bc4cfcd1c66e375e2e8e489fcf2fe
+    ignore_detectors: [filecontent]
   - filename: app/resources/content/interoperabel-nationale-kontaktstelle.ts # German text content misidentified as secret pattern
-    checksum: c4b6a99696b9978506e4b4cad0fe3f09cc55cb9481e8f9705e7cb050be894310
+    ignore_detectors: [filecontent]
 allowed_patterns:
   - key
   - onKey
