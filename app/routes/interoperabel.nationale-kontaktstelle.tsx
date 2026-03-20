@@ -40,9 +40,6 @@ const Overview = () => (
         markdown={spoc.landscape.contentAfter.content}
       />
       <div className="my-40">
-        <p className="mb-40 font-bold">
-          {spoc.landscape.contentAfter.itemContext}
-        </p>
         {spoc.landscape.contentAfter.items.map((item) => (
           <AccordionItem key={item.title} headline={item.title}>
             <RichText markdown={item.content} />

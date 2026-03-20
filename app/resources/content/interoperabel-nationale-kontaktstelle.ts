@@ -38,8 +38,9 @@ export const spoc = {
     contentAfter: {
       headline: "Rechtliche Grundlage",
       content: dedent`
-      Das Organigramm zeigt die Interaktionen der Organisationen und Behörden in Deutschland und der EU im Kontext der Verordnung (EU) 2024/903.`,
-      itemContext: "Vertiefende Informationen",
+      Das Organigramm zeigt die Interaktionen der Organisationen und Behörden in Deutschland und der EU im Kontext der Verordnung (EU) 2024/903.
+      
+      Um die Zusammenarbeit in der Praxis besser zu verstehen, finden Sie hier Details zu den Zuständigkeiten und zur rechtlichen Einordnung.`,
       items: [
         {
           title: "Details zu beteiligten Behörden und Organisationen",
