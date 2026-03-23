@@ -42,10 +42,12 @@ test.describe("basic example a11y test", () => {
     await checkPage(page);
 
     // get URL of first regelung from page
-    const regelungUrl = await page.getAttribute(
-      '[data-testid="regelung-on-prinzip"] a',
-      "href",
-    );
+    const regelungUrl = await page
+      .getByTestId("regelung-on-prinzip")
+      .getByRole("link")
+      .first()
+      .getAttribute("href");
+
     expect(regelungUrl).not.toBeNull();
 
     if (regelungUrl !== null) {

@@ -51,7 +51,7 @@ export default defineConfig(
     ],
 
     settings: {
-      react: { version: "detect" },
+      react: { version: "19.2.4" },
       formComponents: ["Form"],
       linkComponents: [
         { name: "Link", linkAttribute: "to" },
@@ -154,6 +154,12 @@ export default defineConfig(
       "playwright/no-conditional-expect": "off",
       "playwright/no-conditional-in-test": "off",
       "playwright/no-skipped-test": "off",
+      "playwright/expect-expect": [
+        "warn",
+        {
+          assertFunctionNames: ["expect", "checkPage", "expect"],
+        },
+      ],
     },
   },
   // Config files in root folder
