@@ -86,7 +86,7 @@ export const spoc = {
       
       **Austausch und Weiterentwicklung auf deutscher und europäischer Ebene:**  
       
-      Wir nehmen aktiv an Diskussionen auf europäischer Ebene teil, mit dem zuständigen Referat im Bundesministerium für Digitalisierung und Staatsmodernisierung sind wir Teil der Arbeitsgruppe "Interoperable Europe" und informieren auf diesem Wege das Interoperable Europe Board. Unsere Aufgabe ist es auch, die Nachnutzung von Lösungen zu fördern, Hilfestellung bei der Umsetzung von Interoperabilitätsanforderungen zu leisten und das Thema in der Verwaltung zu repräsentieren, indem wir bewährte Verfahren, sogenannte Best Practices, teilen.
+      Wir nehmen aktiv an Diskussionen auf europäischer Ebene teil und informieren mit dem zuständigen Referat im Bundesministerium für Digitalisierung und Staatsmodernisierung das Interoperable Europe Board. Unsere Aufgabe ist es auch, die Nachnutzung von Lösungen zu fördern, Hilfestellung bei der Umsetzung von Interoperabilitätsanforderungen zu leisten und das Thema in der Verwaltung zu repräsentieren, indem wir bewährte Verfahren, sogenannte Best Practices, teilen.
 
       
       **Bereitstellung von Informationen und Austauschformaten:**  
