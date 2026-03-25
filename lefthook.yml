@@ -8,25 +8,23 @@ pre-commit:
     talisman:
       tags: security audit
       run: talisman --githook pre-commit
+    fix-format:
+      tags: style
+      run: pnpm format:fix-selected {staged_files}
+      glob: "*.{js,cjs,mjs,ts,jsx,tsx,json,css,md,yml,yaml,html}"
+      stage_fixed: true
 pre-push:
   # parallel to false, because lint and typecheck run react-router typegen and this sometimes fails because they override each other
   parallel: false
   commands:
     lint:
       tags: lint
-      run: pnpm lint:fix
+      run: pnpm lint:check {push_files}
       glob: "*.{js,cjs,mjs,ts,jsx,tsx}"
-      stage_fixed: true
-    check-format:
-      tags: style
-      run: pnpm format:fix-selected {staged_files}
-      glob: "*.{js,cjs,mjs,ts,jsx,tsx,json,css,md,yml,yaml,html}"
-      stage_fixed: true
     typecheck:
       tags: typecheck
       run: pnpm typecheck
       glob: "*.{ts,tsx}"
-      stage_fixed: true
     licenses-audit:
       tags: licenses audit
       run: pnpm audit:licences
