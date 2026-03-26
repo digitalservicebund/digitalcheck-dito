@@ -98,8 +98,15 @@ export default function VisualisationItem({
               value={visualisierung.Visualisierungstool}
             />
             <LabelValuePair
+              label="Aufwand für das Referat:"
+              value={visualisierung.Aufwand}
+            />
+            <LabelValuePair
               label="Ressort:"
-              value={visualisierung.Beispielvorhaben?.Ressort}
+              value={
+                visualisierung.Ressort ??
+                visualisierung.Beispielvorhaben?.Ressort
+              }
             />
           </div>
         </div>

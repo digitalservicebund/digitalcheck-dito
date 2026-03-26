@@ -128,6 +128,8 @@ export type Visualisierung = {
   Titel: string;
   Visualisierungsart?: string;
   Visualisierungstool?: string;
+  Aufwand?: string;
+  Ressort?: string;
   Beschreibung: Node[];
   Bild: {
     documentId: string;
@@ -205,6 +207,8 @@ fragment VisualisationFields on Visualisierung {
   Beschreibung
   Visualisierungsart
   Visualisierungstool
+  Aufwand
+  Ressort
   Bild {
     documentId
     url
