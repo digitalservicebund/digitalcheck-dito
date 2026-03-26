@@ -1,15 +1,12 @@
-import { Link, useLoaderData } from "react-router";
+import { useLoaderData } from "react-router";
 
 import Container from "~/components/Container";
-import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import MetaTitle from "~/components/Meta";
 import VisualisationItem from "~/components/VisualisationItem";
 import { examplesVisualisations } from "~/resources/content/beispiele-visualisierungen";
-import {
-  ROUTE_EXAMPLES_VISUALISATIONS,
-  ROUTE_REGELUNGEN,
-} from "~/resources/staticRoutes";
+import { ROUTE_EXAMPLES_VISUALISATIONS } from "~/resources/staticRoutes";
+import getFeatureFlag from "~/utils/featureFlags.server.ts";
 import {
   fetchStrapiData,
   visualisationFields,
@@ -18,16 +15,17 @@ import {
 
 const GET_VISUALISATIONS_QUERY = `
 ${visualisationFields}
-query GetVisualisierungen {
-  visualisierungen {
+query GetVisualisierungen($status: PublicationStatus!) {
+  visualisierungen(status: $status, sort: "createdAt:desc") {
     ...VisualisationFields
   }
 }`;
 
 export const loader = async () => {
+  const status = getFeatureFlag("showStrapiDrafts") ? "DRAFT" : "PUBLISHED";
   const visualisationsData = await fetchStrapiData<{
     visualisierungen: Visualisierung[];
-  }>(GET_VISUALISATIONS_QUERY);
+  }>(GET_VISUALISATIONS_QUERY, { status });
 
   if ("error" in visualisationsData) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
@@ -45,17 +43,6 @@ export const loader = async () => {
 export default function BeispieleVisualisierungen() {
   const visualisationsData = useLoaderData<typeof loader>();
 
-  // Group visualisations by Regelung
-  const groupedVisualisations = visualisationsData.reduce(
-    (acc, item) => {
-      const title = item.Beispielvorhaben?.Titel;
-      if (!title) return acc;
-      acc[title] = acc[title] ?? [];
-      acc[title].push(item);
-      return acc;
-    },
-    {} as Record<string, Visualisierung[]>,
-  );
   return (
     <>
       <MetaTitle prefix={ROUTE_EXAMPLES_VISUALISATIONS.title} />
@@ -64,32 +51,14 @@ export default function BeispieleVisualisierungen() {
         subtitle={examplesVisualisations.subtitle}
       />
 
-      <Container className="ds-stack ds-stack-48">
-        {Object.entries(groupedVisualisations).map(
-          ([regelungTitle, visualisations]) => (
-            <div key={regelungTitle}>
-              <div className="ds-stack ds-stack-32">
-                <Link
-                  to={`${ROUTE_REGELUNGEN.url}/${visualisations[0].Beispielvorhaben?.URLBezeichnung}`}
-                  prefetch="viewport"
-                >
-                  <Heading
-                    tagName="h2"
-                    text={regelungTitle}
-                    look="ds-heading-02-bold text-link break-words"
-                  />
-                </Link>
-
-                {visualisations.map((visualisation) => (
-                  <VisualisationItem
-                    key={visualisation.Bild.documentId}
-                    visualisierung={visualisation}
-                  />
-                ))}
-              </div>
-            </div>
-          ),
-        )}
+      <Container className="space-y-64">
+        {visualisationsData.map((visualisation) => (
+          <VisualisationItem
+            key={visualisation.documentId}
+            visualisierung={visualisation}
+            showContext
+          />
+        ))}
       </Container>
     </>
   );
