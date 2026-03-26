@@ -112,7 +112,7 @@ export default function VisualisationItem({
         </div>
         <div className="mb-12 sm:w-1/2">
           <BlocksRenderer
-            className={"space-y-8"}
+            className={"[&_p]:mb-8"}
             content={visualisierung.Beschreibung}
           />
         </div>
