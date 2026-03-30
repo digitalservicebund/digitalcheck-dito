@@ -131,6 +131,39 @@ export const interoperability = {
           - Eine Interoperabilitätsbewertung wird in einem maschinenlesbaren Bericht dokumentiert und veröffentlicht - hierfür stellt der Beirat für ein interoperables Europa ein [Online-Tool zur Verfügung](https://interoperable-europe.ec.europa.eu/collection/assessments) (Registrierung erforderlich)
         `,
       },
+      {
+        headline:
+          'Was ist eine "Lösung für ein interoperables Europa" und was bringt mir das?',
+        content: dedent`
+          Eine "Lösung für ein interoperables Europa" (Art. 7 EU 2024/903) ist ein bereits existierender, geprüfter "Standard" für digitale Dienste (wie z. B. der **Standard DCAT-AP**), der offiziell vom Interoperable Europe Board empfohlen wurde.
+
+          Stellen Sie sich diese Lösungen wie **genormte Bauteile** vor. Wenn Sie eine Regelung erarbeiten, die den eu-weiten Austausch von Daten erfordert oder ermöglichen soll, müssen Sie das Rad nicht neu erfinden. Sie nutzen stattdessen eine Lösung, die das EU-Label „Interoperable Europe solution“ trägt.
+
+          - **Beispiel DCAT-AP:** Das ist ein Standard für digitale Metadaten. Dieser Standard wurde entwickelt, um die europaweite Auffindbarkeit und Transparenz von offenen Verwaltungsdaten (Open Data) zu ermöglichen. Er legt fest, wie Informationen über Datensätze (Metadaten) beschrieben werden.
+
+          **Was bringt mir das persönlich im Gesetzgebungsprozss?**
+
+          Wenn Sie eine empfohlene Lösung nutzen, gilt Ihre Pflicht in diesem Punkt als erfüllt. Sie müssen nicht mühsam selbst begründen, warum Ihre IT-Anforderungen europaweit funktionieren – die EU-Empfehlung erledigt das für Sie.
+
+          Da diese Lösungen auf EU-Ebene bereits fachlich und rechtlich geprüft wurden, sinkt das Risiko für Einwände wegen mangelnder EU-Interoperabilität oder Inkompatibilität.
+
+          **Was bringt das für den Vollzug des Gesetzes?**
+
+          Die IT-Umsetzung Ihres Gesetzes wird erheblich günstiger und schneller, da Entwicklungsaufwand für individuelle Schnittstellen entfällt.`,
+      },
+      {
+        headline:
+          'Muss ich eine "Lösung für einer interoperables Europa" zwingend vorschreiben?',
+        content: dedent`
+          Nein. Im Gesetzestext ist keine starre technische Festlegung vorgeschrieben.
+
+          Der Interoperable Europe Act ((EU) 2024/903) strebt jedoch an, dass Rechtssetzung in der Union grenzüberschreitend digitaltauglich ist, bürokratiearm gestaltet ist und für Bürgerinnen einfach funktioniert.
+
+          Um dies zu fördern, wurden für Sie als Legistin zwei Arbeitsschritte eingeführt:
+
+          - **Prüfpflicht:** Sie sind jedoch gesetzlich verpflichtet, empfohlene Lösungen (die Interoperable Europe Solutions) für eine potenzielle Wiederverwendung in Betracht zu ziehen.
+          - **Begründungspflicht:** Wenn Sie sich gegen eine markierte „Interoperable Europe Solution“ entscheiden, müssen Sie dies im Rahmen der Interoperabilitätsbewertung begründen.`,
+      },
     ],
   },
   resources: {
