@@ -54,7 +54,7 @@ function ContentInlineComponent({
   );
 }
 
-export default function EuRechtTab() {
+export function EuRechtTab() {
   const tableContent: TableContent = [
     { title: "Zusammenarbeit in der EU", href: "zusammenarbeit" },
     { title: "Zugang zu Diensten", href: "zugang" },
