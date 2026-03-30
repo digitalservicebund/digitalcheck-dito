@@ -22,6 +22,9 @@ import { InteroperableLoesungenTab } from "./interoperabel/InteroperableLoesunge
 import { UeberblickTab } from "./interoperabel/UeberblickTab";
 import { tabIds } from "./interoperabel/tabIds";
 
+const { overviewTabId, backgroundTabId, euLawTabId, interoperableSolutionsId } =
+  tabIds;
+
 export default function Interoperability() {
   return (
     <>
@@ -64,33 +67,23 @@ export default function Interoperability() {
             />
           </div>
         </div>
-        <ContentWrapper compactTopSpacing>
+        <ContentWrapper compactTopSpacing className="mb-80">
           <SearchParamTabs>
-            <SearchParamTabs.Tab
-              tabId={tabIds.overviewTabId}
-              label="Überblick"
-              className="mb-80 space-y-40"
-            >
+            <SearchParamTabs.Tab tabId={overviewTabId} label="Überblick">
               <UeberblickTab />
             </SearchParamTabs.Tab>
-            <SearchParamTabs.Tab
-              tabId={tabIds.backgroundTabId}
-              label="Hintergrund"
-              className="mb-80 space-y-40"
-            >
+            <SearchParamTabs.Tab tabId={backgroundTabId} label="Hintergrund">
               <HintergrundTab />
             </SearchParamTabs.Tab>
             <SearchParamTabs.Tab
-              tabId={tabIds.euLawTabId}
+              tabId={euLawTabId}
               label="Angrenzendes EU-Recht"
-              className="mb-80"
             >
               <EuRechtTab />
             </SearchParamTabs.Tab>
             <SearchParamTabs.Tab
-              tabId={tabIds.interoperableSolutionsId}
+              tabId={interoperableSolutionsId}
               label="Interoperable Lösungen"
-              className="mb-80 space-y-40"
             >
               <InteroperableLoesungenTab />
             </SearchParamTabs.Tab>
