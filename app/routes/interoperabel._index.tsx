@@ -1,6 +1,6 @@
 import { ContactPhoneOutlined } from "@digitalservicebund/icons";
+import QuizIcon from "@digitalservicebund/icons/QuizOutlined";
 import { Link } from "react-router";
-import AccordionItem from "~/components/AccordionItem";
 import { LinkButton } from "~/components/Button";
 import Container from "~/components/Container";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
@@ -21,6 +21,7 @@ import { contact } from "~/resources/content/shared/contact";
 import {
   ROUTE_EXAMPLES_VISUALISATIONS,
   ROUTE_INTEROPERABILITY,
+  ROUTE_INTEROPERABILITY_FAQ,
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
@@ -30,7 +31,6 @@ import EuRechtTab from "./interoperabel.eu-recht";
 
 const overviewTabId = "ueberblick";
 const backgroundTabId = "hintergrund";
-const faqTabId = "faq";
 const euLawTabId = "angrenzendes-eu-recht";
 
 export default function Interoperability() {
@@ -644,28 +644,6 @@ export default function Interoperability() {
                 alternativeText="Die Grafik veranschaulicht die vier Ebenen der Interoperabilität mit Symbolen und kurzen Erklärungen. Die rechtliche Interoperabilität (dunkelblau, Waage-Icon) definiert die gesetzlichen Grundlagen für den Datenaustausch. Die organisatorische Interoperabilität (hellblau, vernetzte Personen) beschreibt die organisatorischen Prozesse. Die semantische Interoperabilität (graublau, Sprechblasen) stellt sicher, dass Daten und Begriffe einheitlich verstanden werden. Die technische Interoperabilität (hellgrau, Zahnräder) umfasst die technischen Systeme und Standards, die für den Datenaustausch erforderlich sind."
               />
             </SearchParamTabs.Tab>
-            <SearchParamTabs.Tab
-              tabId={faqTabId}
-              label="Häufige Fragen"
-              className="mb-80"
-            >
-              <Heading
-                tagName="h2"
-                text={interoperability.faq.headline}
-                className="max-w-a11y mb-8"
-              />
-              <RichText
-                markdown={interoperability.faq.content}
-                className="mb-40"
-              />
-              <div>
-                {interoperability.faq.items.map((item) => (
-                  <AccordionItem key={item.headline} headline={item.headline}>
-                    <RichText markdown={item.content} />
-                  </AccordionItem>
-                ))}
-              </div>
-            </SearchParamTabs.Tab>
             {showEuRechtTab && (
               <SearchParamTabs.Tab
                 tabId={euLawTabId}
@@ -704,6 +682,36 @@ export default function Interoperability() {
             </Container>
           </Container>
         </div>
+
+        <Container className="py-80">
+          <InfoBox visual={{ type: "icon", Icon: QuizIcon }}>
+            <Heading tagName="h3">Häufig gestellte Fragen</Heading>
+            <p>
+              Weitere Informationen zur Umsetzung der
+              EU-Interoperabilitäts-Vorgaben und zur Erarbeitung von Regelungen
+              finden Sie in unseren Bereich “Fragen und Antworten”.
+            </p>
+            <p>
+              Wenn Sie weitere Fragen haben, dann kontaktieren Sie uns unter:{" "}
+              <Link
+                className="text-link"
+                to={`mailto:${contact.interoperabilityEmail}`}
+              >
+                {contact.interoperabilityEmail}
+              </Link>{" "}
+              oder unter{" "}
+              <Link className="text-link" to={contact.phone}>
+                {contact.phoneDisplay}
+              </Link>
+              .
+            </p>
+            <div className="mt-24">
+              <LinkButton to={ROUTE_INTEROPERABILITY_FAQ.url} look="tertiary">
+                Zu Fragen und Antworten{" "}
+              </LinkButton>
+            </div>
+          </InfoBox>
+        </Container>
       </main>
     </>
   );

@@ -179,6 +179,11 @@ export const ROUTE_INTEROPERABILITY_SPOC = createRoute(
   "Nationale Kontaktstelle",
   ROUTE_INTEROPERABILITY,
 );
+export const ROUTE_INTEROPERABILITY_FAQ = createRoute(
+  "faq",
+  "Fragen und Antworten",
+  ROUTE_INTEROPERABILITY,
+);
 
 // EXAMPLES ROUTES
 export const ROUTE_EXAMPLES = createRoute(
