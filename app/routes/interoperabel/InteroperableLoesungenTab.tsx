@@ -1,6 +1,21 @@
+import Button, { LinkButton } from "~/components/Button";
+import ButtonContainer from "~/components/ButtonContainer";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
+
+const solutions = [
+  {
+    title: "Semantic Core Vocabularies",
+    text: "Die grenzüberschreitende Datensprache für das Once-Only-Prinzip",
+    href: undefined,
+  },
+  {
+    title: "Data Catalogue Vocabulary Application Profile (DCAT-AP)",
+    text: "Der Metadatenstandard für Offene Daten und Transparenz (Data Catalogue Vocabulary Application Profile)",
+    href: undefined,
+  },
+];
 
 export const InteroperableLoesungenTab = () => (
   <section className="space-y-40">
@@ -38,49 +53,33 @@ export const InteroperableLoesungenTab = () => (
     <Heading tagName="h2">Diese Lösungen sind aktuell verfügbar</Heading>
 
     <InfoBoxSideBySide>
-      <InfoBox
-        look="method"
-        badge={{ children: "Interoperable Lösungen", look: "hint" }}
-        heading={{
-          text: "Semantic Core Vocabularies",
-          tagName: "h3",
-          className: "ds-heading-03-bold",
-        }}
-      >
-        <p>Die grenzüberschreitende Datensprache für das Once-Only-Prinzip</p>
-        <InfoBox.LinkList
-          links={[
-            {
-              text: "Mehr zu dieser Lösung",
-              to: "#",
-              look: "tertiary",
-            },
-          ]}
-        />
-      </InfoBox>
-      <InfoBox
-        look="method"
-        badge={{ children: "Interoperable Lösungen", look: "hint" }}
-        heading={{
-          text: "Data Catalogue Vocabulary Application Profile (DCAT-AP)",
-          tagName: "h3",
-          className: "ds-heading-03-bold",
-        }}
-      >
-        <p>
-          Der Metadatenstandard für Offene Daten und Transparenz (Data Catalogue
-          Vocabulary Application Profile)
-        </p>
-        <InfoBox.LinkList
-          links={[
-            {
-              text: "Mehr zu dieser Lösung",
-              to: "#",
-              look: "tertiary",
-            },
-          ]}
-        />
-      </InfoBox>
+      {solutions.map(({ title, text, href }) => {
+        return (
+          <InfoBox
+            key={title}
+            look="method"
+            badge={{ children: "Interoperable Lösungen", look: "hint" }}
+            heading={{
+              text: title,
+              tagName: "h3",
+              className: "ds-heading-03-bold",
+            }}
+          >
+            <p>{text}</p>
+            <ButtonContainer className="mt-auto pt-24">
+              {href ? (
+                <LinkButton to={href} look="tertiary">
+                  Mehr zu dieser Lösung
+                </LinkButton>
+              ) : (
+                <Button type="button" look="tertiary" disabled>
+                  Demnächst
+                </Button>
+              )}
+            </ButtonContainer>
+          </InfoBox>
+        );
+      })}
     </InfoBoxSideBySide>
   </section>
 );
