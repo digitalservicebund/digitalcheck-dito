@@ -10,6 +10,7 @@ function getActionParams(request: Request) {
     params: {},
     request,
     unstable_pattern: "/handle-client-side-error",
+    unstable_url: new URL(request.url),
   };
 }
 
