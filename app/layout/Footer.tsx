@@ -1,5 +1,5 @@
-import Image from "app/components/Image";
 import { Link } from "react-router";
+import Image from "~/components/Image";
 import { OpenInNewIcon } from "~/components/OpenInNewIcon.tsx";
 import { footer } from "~/resources/content/shared/footer";
 import { general } from "~/resources/content/shared/general.ts";
