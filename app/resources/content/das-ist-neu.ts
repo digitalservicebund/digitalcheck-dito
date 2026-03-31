@@ -40,6 +40,19 @@ export const news = {
     },
     {
       badge: {
+        text: "26.03.2026",
+      },
+      content: dedent`
+       Anpassung der Visualisierungs-Beispiele
+       - Titel zeigen nun die Alleinstellungsmerkmale der Visualisierungen (z. B. *Grenzüberschreitender Ablauf*).
+       - Neues Feld *Aufwand für das Referat*.
+       - Neuer Inhalt: Beratungs- und Erfassungsprozess.
+       
+        [Hier ansehen](${ROUTE_EXAMPLES_VISUALISATIONS.url})
+      `,
+    },
+    {
+      badge: {
         text: "16.03.2026",
       },
       content: dedent`
@@ -57,7 +70,7 @@ export const news = {
       content: dedent`
        Neuer Leitfaden: Praxis-Perspektive in Ihr Vorhaben einbinden
          - Was sind Vorteile der Praxis-Perspektive und welche Interview-Methoden gibt es?
-         - Schritt für Schritt Anleitung: Akteurinnen und Akteure identifizieren und Interviews vorbereiten
+         - Schritt-für-Schritt-Anleitung: Akteurinnen und Akteure identifizieren und Interviews vorbereiten
        
         [Hier ansehen](${ROUTE_METHODS_INTERVIEW_METHODS.url})
       `,
