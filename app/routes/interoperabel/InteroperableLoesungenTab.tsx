@@ -19,7 +19,9 @@ const solutions = [
 
 export const InteroperableLoesungenTab = () => (
   <section className="space-y-40">
-    <Heading tagName="h2">Lösungen für ein interoperables Europa</Heading>
+    <Heading tagName="h2" id="interoperable-loesungen">
+      Lösungen für ein interoperables Europa
+    </Heading>
     <p>
       <strong>Lösungen für ein interoperables Europa</strong> sind
       wiederverwendbare Standards, die es ermöglichen, dass Verwaltungseinheiten

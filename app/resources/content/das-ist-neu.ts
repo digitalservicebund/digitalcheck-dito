@@ -28,6 +28,18 @@ export const news = {
   items: [
     {
       badge: {
+        text: "30.03.2026",
+      },
+      content: dedent`
+        Informationen und Umsetzungsvorlage zur verpflichtenden Prüfung von "Lösungen für ein interoperables Europa" nach Art. 7 des Interoperable Europe Act (EU) 2024/903. Legistinnen und Legisten erfahren,
+        - welche Lösungen für ein interoperables Europa es aktuell gibt,
+        - warum das relevant ist,
+        - welchen Mehrwert die verbindliche Festschreibung zur Nutzung stiftet.
+
+        [Hier ansehen](${ROUTE_INTEROPERABILITY.url}${getTabAnchorLink("interoperable-loesungen", "interoperable-loesungen")})`,
+    },
+    {
+      badge: {
         text: "16.03.2026",
       },
       content: dedent`
