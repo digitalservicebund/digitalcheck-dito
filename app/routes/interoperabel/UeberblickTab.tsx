@@ -62,7 +62,59 @@ export const UeberblickTab = () => (
       </ul>
     </div>
 
-    <Heading tagName="h3">Der Ablauf im Überblick</Heading>
+    <div className="space-y-8">
+      <Heading tagName="h3">Die Interoperabilitäts-Bewertung</Heading>
+      <p>
+        Die{" "}
+        <NewTabLink to="https://interoperable-europe.ec.europa.eu/collection/assessments/submission">
+          Interoperabilitäts-Bewertung
+        </NewTabLink>{" "}
+        ist wie auch die Digitalcheck-Dokumentation ein formeller, letzter
+        Schritt, in dem Sie einige Fragen zu Inhalten der Regelung beantworten.
+        Es geht darum, darzulegen, wie sich Ihre Regelung auf die EU-weite
+        Interoperabilität auswirkt. Der wesentliche Inhalt besteht aus fünf
+        Fragen. Die Bewertung fragt nach sogenannten „
+        {/* TODO: helper function for links */}
+        <Link
+          className="text-link"
+          to={getTabAnchorLink(
+            tabIds.backgroundTabId,
+            "verbindliche-anforderungen",
+          )}
+          reloadDocument
+        >
+          {" "}
+          {/* TODO: add link */}
+          verbindlichen Anforderungen
+        </Link>
+        “ und prüft deren Einfluss auf die{" "}
+        <Link
+          className="text-link"
+          to={getTabAnchorLink(
+            tabIds.backgroundTabId,
+            "vier-ebenen-der-interoperabilitaet",
+          )}
+          reloadDocument
+        >
+          {" "}
+          {/* TODO: add link */}
+          vier Ebenen der Interoperabilität
+        </Link>
+        .
+      </p>
+      <LinkButton
+        look="tertiary"
+        to="https://interoperable-europe.ec.europa.eu/collection/assessments/submission"
+        target="_blank"
+        className="mt-16"
+      >
+        Zur Interoperabilitäts-Bewertung
+      </LinkButton>
+    </div>
+
+    <Heading tagName="h3" className="mt-80">
+      Der Ablauf im Überblick
+    </Heading>
     <Timeline>
       <Timeline.Item bullet>
         <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48">
@@ -107,6 +159,21 @@ export const UeberblickTab = () => (
       <Timeline.Item bullet>
         <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48">
           <Heading tagName="h4" className="ds-heading-03-reg">
+            Optional: Lösungen für ein interoperables Europa nutzen
+          </Heading>
+          <p>
+            Lösungen für ein interoperables Europa (Art. 7 EU 2024/903) sind
+            technische Standards für den grenzüberschreitenden Datenaustausch
+            zwischen Verwaltungseinheiten. Das Interoperable Europe Board legt
+            fest, welche Lösungen zu prüfen sind. Mehr dazu im Reiter
+            <strong>„Interoperable Lösungen”</strong>
+          </p>
+        </Timeline.ItemContent>
+      </Timeline.Item>
+
+      <Timeline.Item bullet>
+        <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48">
+          <Heading tagName="h4" className="ds-heading-03-reg">
             Reichen Sie die Interoperabilitäts-Bewertung ein
           </Heading>
           <p>
@@ -126,55 +193,6 @@ export const UeberblickTab = () => (
 
     <LinkButton to={ROUTE_PRECHECK.url}>Anforderungen prüfen</LinkButton>
 
-    <Heading className="mt-80" tagName="h2">
-      Die Interoperabilitäts-Bewertung
-    </Heading>
-    <p>
-      Die{" "}
-      <NewTabLink to="https://interoperable-europe.ec.europa.eu/collection/assessments/submission">
-        Interoperabilitäts-Bewertung
-      </NewTabLink>{" "}
-      ist wie auch die Digitalcheck-Dokumentation ein formeller, letzter
-      Schritt, in dem Sie einige Fragen zu Inhalten der Regelung beantworten. Es
-      geht darum, darzulegen, wie sich Ihre Regelung auf die EU-weite
-      Interoperabilität auswirkt. Der wesentliche Inhalt besteht aus fünf
-      Fragen. Die Bewertung fragt nach sogenannten „
-      {/* TODO: helper function for links */}
-      <Link
-        className="text-link"
-        to={getTabAnchorLink(
-          tabIds.backgroundTabId,
-          "verbindliche-anforderungen",
-        )}
-        reloadDocument
-      >
-        {" "}
-        {/* TODO: add link */}
-        verbindlichen Anforderungen
-      </Link>
-      “ und prüft deren Einfluss auf die{" "}
-      <Link
-        className="text-link"
-        to={getTabAnchorLink(
-          tabIds.backgroundTabId,
-          "vier-ebenen-der-interoperabilitaet",
-        )}
-        reloadDocument
-      >
-        {" "}
-        {/* TODO: add link */}
-        vier Ebenen der Interoperabilität
-      </Link>
-      .
-    </p>
-    <LinkButton
-      look="tertiary"
-      to="https://interoperable-europe.ec.europa.eu/collection/assessments/submission"
-      target="_blank"
-    >
-      Zur Interoperabilitäts-Bewertung
-    </LinkButton>
-
     <InfoBox
       look="highlight"
       heading={{
@@ -183,19 +201,36 @@ export const UeberblickTab = () => (
       visual={{ Icon: ContactPhoneOutlined, type: "icon" }}
     >
       <p>
-        Das Digitalcheck-Team unterstützt Sie dabei, eine digitaltaugliche
-        interoperable Umsetzung zu garantieren – im gesamten Prozess: bei der
-        Klärung von Fragen zur Interoperabilität, beim Ausfüllen der Bewertung
-        und insbesondere beim Identifizieren sogenannter „verbindlicher
-        Anforderungen“ und deren Auswirkungen auf die vier Ebenen der
-        Interoperabilität.
+        Das Digitalcheck-Team unterstützt Sie im gesamten Prozess. Wir helfen
+        bei Fragen zur Interoperabilität, beim Ausfüllen der Bewertung und beim
+        Identifizieren{" "}
+        <Link
+          to={getTabAnchorLink("hintergrund", "verbindliche-anforderungen")}
+          className="text-link"
+          reloadDocument
+        >
+          verbindlicher Anforderungen
+        </Link>{" "}
+        – inklusive ihrer Auswirkungen auf die vier{" "}
+        <Link
+          to={getTabAnchorLink(
+            "hintergrund",
+            "vier-ebenen-der-interoperabilitaet",
+          )}
+          className="text-link"
+          reloadDocument
+        >
+          Interoperabilitätsebenen
+        </Link>
+        .
       </p>
       <p>
         <strong>Rufen Sie uns an:</strong>{" "}
         <Link className="text-link" to={contact.phone}>
           {contact.phoneDisplay}
-        </Link>{" "}
-        Schreiben Sie uns - egal ob Legist oder Institution:
+        </Link>
+        <br />
+        Schreiben Sie uns - egal ob Legist oder Institution:{" "}
         <Link
           className="text-link"
           to={`mailto:${contact.interoperabilityEmail}`}
