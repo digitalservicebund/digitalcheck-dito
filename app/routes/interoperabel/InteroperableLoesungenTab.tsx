@@ -49,7 +49,7 @@ export const InteroperableLoesungenTab = () => (
     </ul>
     <p>
       Wenn Ihre Regelung Interoperabilitätsbezug hat, müssen Sie nun prüfen, ob
-      eine „Lösung für einer interoperables Europa“ in Ihrem Kontext verwendet
+      eine „Lösung für ein interoperables Europa“ in Ihrem Kontext verwendet
       werden kann. Die Nicht-Verwendung muss kurz begründet werden.
     </p>
     <Heading tagName="h2">Diese Lösungen sind aktuell verfügbar</Heading>
