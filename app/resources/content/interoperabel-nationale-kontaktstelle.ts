@@ -59,6 +59,14 @@ export const spoc = {
                   
                   Übersichten zu den EU-Rechtsakten finden Sie [hier](${ROUTE_INTEROPERABILITY.url}${getTabAnchorLink("angrenzendes-eu-recht", "angrenzendes-eu-recht")})`,
         },
+        {
+          title: "Lösungen für ein interoperables Europa",
+          content: dedent`
+            Die "Lösungen für ein interoperables Europa" (Art. 7 EU 2024/903) sind etablierte technische Standards, die es ermöglichen, dass Verwaltungseinheiten effizient und sicher Daten über Ländergrenzen hinweg austauschen können. Das Interoperable Europe Board legt die von Legistinnen und Legisten zu prüfenden Lösungen fest. Das Ziel der EU ist es, unionsweit die Nutzung bewährter interoperabler Standard zu fördern und anzuregen.
+
+            Detaillierte Informationen zu den Lösungen finden Sie [hier](${ROUTE_INTEROPERABILITY.url}${getTabAnchorLink("interoperable-loesungen", "interoperable-loesungen")}).
+          `,
+        },
       ],
       outro:
         "Deutschland integriert die Anforderungen der Verordnung (EU) 2024/903 in den Digitalcheck und folgt damit den Empfehlungen der EU. Somit werden Ressourcen effizient genutzt und Doppelstrukturen verhindert. Die nationale Kontaktstelle ist beim Digitalcheck-Team angesiedelt.",
@@ -107,10 +115,21 @@ export const spoc = {
     items: [
       {
         headline: {
+          text: 'Prüfung der "Lösungen für ein interoperables Europa"',
+        },
+        badge: {
+          text: "Aktuell", // 30.03.2026
+        },
+        content: dedent`
+          Die inhaltlichen Schnittmengen zwischen dem Erarbeitungsprozess für digitaltaugliche Regelungen und dem Interoperabilitäts-Assessment sind identifiziert und analysiert. Der daraus entstandene Prozess wird in den Digitalcheck-Kontaktpunkten umgesetzt. Darauf aufbauend passen wir die Erarbeitungsmethoden an. Ziel ist es, den gesamten Entwicklungsprozess effizienter und zielgerichteter zu gestalten.
+        `,
+      },
+      {
+        headline: {
           text: "Methoden für Digitaltauglichkeit und Interoperabilität",
         },
         badge: {
-          text: "Aktuell",
+          text: "05.07.2025",
         },
         content: dedent`
           Die inhaltlichen Schnittmengen zwischen dem Erarbeitungsprozess für digitaltaugliche Regelungen und dem Interoperabilitäts-Assessment sind identifiziert und analysiert. Der daraus entstandene Prozess wird in den Digitalcheck-Kontaktpunkten umgesetzt. Darauf aufbauend passen wir die Erarbeitungsmethoden an. Ziel ist es, den gesamten Entwicklungsprozess effizienter und zielgerichteter zu gestalten.
