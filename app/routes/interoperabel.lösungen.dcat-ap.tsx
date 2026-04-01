@@ -123,7 +123,7 @@ export default function InteroperableSolutionsDcatAp() {
                 von offenen Verwaltungsdaten (z.B. Berichte, Register,
                 Statistiken) vorschreibt, dann sieht der Interoperable Europe
                 Act (IEA) vor, dass Sie die Nutzung von DCAT-AP nach Art. 7 als
-                "Lösung für ein interoperables Europa" in Ihrem
+                &quot;Lösung für ein interoperables Europa&quot; in Ihrem
                 Regelungsvorhaben prüfen.
               </p>
             </div>
