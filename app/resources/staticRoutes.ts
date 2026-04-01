@@ -185,7 +185,7 @@ export const ROUTE_INTEROPERABILITY_FAQ = createRoute(
   ROUTE_INTEROPERABILITY,
 );
 export const ROUTE_INTEROPERABILITY_SOLUTIONS = createRoute(
-  "lösungen",
+  "loesungen",
   "Lösungen",
   ROUTE_INTEROPERABILITY,
 );
