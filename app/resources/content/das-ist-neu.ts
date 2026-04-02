@@ -32,7 +32,9 @@ export const news = {
         text: "02.04.2026",
       },
       content: dedent`
-        Leitfaden zum Metadatenstandard *Data Catalogue Vocabulary Application Profile (DCAT-AP)* als „Lösung für ein interoperables Europa“ nach Art. 7 des Interoperable Europe Act (EU) 2024/903.
+        Neuer Leitfaden zum Metadatenstandard *Data Catalogue Vocabulary Application Profile (DCAT-AP)*.
+        
+        Dieser ist eine „Lösung für ein interoperables Europa“ nach Art. 7 des Interoperable Europe Act (EU) 2024/903.
 
         [Hier ansehen](${ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP.url})`,
     },
@@ -41,7 +43,7 @@ export const news = {
         text: "30.03.2026",
       },
       content: dedent`
-        Informationen und Umsetzungsvorlage zur verpflichtenden Prüfung von "Lösungen für ein interoperables Europa" nach Art. 7 des Interoperable Europe Act (EU) 2024/903. Legistinnen und Legisten erfahren,
+        Informationen und Umsetzungsvorlage zur verpflichtenden Prüfung von „Lösungen für ein interoperables Europa“ nach Art. 7 des Interoperable Europe Act (EU) 2024/903. Legistinnen und Legisten erfahren,
         - welche Lösungen für ein interoperables Europa es aktuell gibt,
         - warum das relevant ist,
         - welchen Mehrwert die verbindliche Festschreibung zur Nutzung stiftet.
