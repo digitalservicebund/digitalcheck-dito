@@ -1,9 +1,10 @@
 import { marked, Marked, type Renderer, type Tokens } from "marked";
+import { renderToString } from "react-dom/server";
 import { getDownloadableExtensionName } from "~/utils/fileExtensionUtils";
 import twMerge from "~/utils/tailwindMerge";
 import { isExternalUrl } from "~/utils/utilFunctions";
 import { dowloadIconString } from "./downloadIcon";
-import { openInNewIconString } from "./OpenInNewIcon.tsx";
+import { OpenInNewIcon } from "./OpenInNewIcon.tsx";
 
 export type RichTextProps = {
   markdown: string;
@@ -11,6 +12,8 @@ export type RichTextProps = {
   rendererOptions?: Partial<Renderer>;
   tagName?: string;
 };
+
+const openInNewIconString = renderToString(OpenInNewIcon());
 
 const RichText = ({
   markdown,
