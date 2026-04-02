@@ -80,7 +80,7 @@ export default function InteroperableSolutionsDcatAp() {
               </p>
               <p>
                 Eine Prüfung, ob diese Lösung genutzt werden kann, ist bei
-                Intoperabilitätsbezug verpflichtend.
+                Interoperabilitätsbezug verpflichtend.
               </p>
             </div>
             <Button
