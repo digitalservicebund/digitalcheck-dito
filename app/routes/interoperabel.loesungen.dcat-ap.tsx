@@ -388,23 +388,11 @@ export default function InteroperableSolutionsDcatAp() {
               <RichText
                 className="[&_h3]:mt-24"
                 markdown={dedent`
-              ## Ein verbindlicher Standard für Deutschland
+              ## Einordnung in den europäischen Rahmen
               
-              ### Einordnung im europäischen Rahmen
-              
-              Hier finden Sie die offizielle Seite der europäischen Lösung
-                DCAT-AP im Interoperable Europe Portal mit allen
-                Hintergrundinformationen zur EU-weiten Spezifikation:
-                
-              [**DCAT Application Profile for data portals in Europe**](https://interoperable-europe.ec.europa.eu/collection/semic-support-centre/solution/dcat-application-profile-data-portals-europe)
-              
-              ### Deutsches Profil
-                
-              **DCAT-AP.de** ist das deutsche Profil des europäischen Metadatenstandards. Es sorgt dafür, dass deutsche Spezifika berücksichtigt werden – bei voller Kompatibilität zur EU. Der IT-Planungsrat empfiehlt diesen Standard verbindlich für den Austausch offener Verwaltungsdaten. Das deutsche Profil ist frei verfügbar unter [www.dcat-ap.de](https://www.dcat-ap.de).
-
-            - [YouTube-Video: Einführung zu DCAT-AP.de (4:39 min)](https://youtu.be/_JB93__aj_M?si=RNpW3uc_f7kcLxUA&t=279)
-            - [EIF Perspective attributes of DCAT Application Profile for data portals in Europe](https://interoperable-europe.ec.europa.eu/collection/semic-support-centre/solution/dcat-application-profile-data-portals-europe/eif-perspective)
-            `}
+              Hier finden Sie die [Einordnung von DCAT-AP in den Europäischen Interoperabilitätsrahmen (EIF)](https://interoperable-europe.ec.europa.eu/collection/semic-support-centre/solution/dcat-application-profile-data-portals-europe/eif-perspective)
+              – diese Perspektive hilft Ihnen bei der fachlichen Begründung für die Interoperabilitätsbewertung.
+              `}
               />
             </InfoBox>
           </section>
