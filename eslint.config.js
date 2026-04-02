@@ -10,12 +10,18 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import testingLibrary from "eslint-plugin-testing-library";
 import { defineConfig } from "eslint/config";
 import globals from "globals";
+import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import tseslint from "typescript-eslint";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const { dependencies } = JSON.parse(
+  readFileSync(new URL("package.json", import.meta.url), "utf8"),
+);
+const reactVersion = dependencies.react.replace(/[^0-9.]/g, "");
 
 export default defineConfig(
   // Global ignores
@@ -51,7 +57,7 @@ export default defineConfig(
     ],
 
     settings: {
-      react: { version: "19.2.4" },
+      react: { version: reactVersion },
       formComponents: ["Form"],
       linkComponents: [
         { name: "Link", linkAttribute: "to" },
