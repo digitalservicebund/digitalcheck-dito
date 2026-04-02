@@ -5,6 +5,7 @@ import {
   ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
   ROUTE_FUNDAMENTALS_NKR,
   ROUTE_INTEROPERABILITY,
+  ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP,
   ROUTE_INTEROPERABILITY_SPOC,
   ROUTE_METHODS_INTERVIEW_METHODS,
   ROUTE_METHODS_PRINCIPLES,
@@ -26,6 +27,15 @@ export const news = {
       Haben Sie Anregungen oder Wünsche? Kontaktieren Sie uns jederzeit gerne unter ${contact.mdPhoneLink()} oder ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")}.
   `,
   items: [
+    {
+      badge: {
+        text: "02.04.2026",
+      },
+      content: dedent`
+        Leitfaden zum Metadatenstandard *Data Catalogue Vocabulary Application Profile (DCAT-AP)* als „Lösung für ein interoperables Europa“ nach Art. 7 des Interoperable Europe Act (EU) 2024/903.
+
+        [Hier ansehen](${ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP.url})`,
+    },
     {
       badge: {
         text: "30.03.2026",
