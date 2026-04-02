@@ -56,7 +56,7 @@ export const news = {
         text: "16.03.2026",
       },
       content: dedent`
-       Zusammenfassungen zu angrenzendem EU-Recht im Kontext des Interoperable Europe Act. Als Legistin erfahren Sie: 
+       Zusammenfassungen zu angrenzendem EU-Recht im Kontext des Interoperable Europe Act. Als Legist oder Legistin erfahren Sie: 
           - Welche EU-Rechtsakte könnten für Ihr Vorhaben relevant sein?
           - Was sind die wichtigsten Punkte bezüglich Interoperabilität in dem jeweiligen Rechtsakt?
        

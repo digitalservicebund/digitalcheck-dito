@@ -191,7 +191,7 @@ export default function InteroperableSolutionsDcatAp() {
                 </li>
                 <li>
                   <strong>Was kostet mich das?</strong> Als Legist oder Legistin
-                  nur einen Textbaustein in ihrem Regelungsvorhaben. Die
+                  nur einen Textbaustein in Ihrem Regelungsvorhaben. Die
                   technische Arbeit leisten dann die IT-Experten.
                 </li>
                 <li>
@@ -229,9 +229,9 @@ export default function InteroperableSolutionsDcatAp() {
             <ChapterBadge>{contents[2].title}</ChapterBadge>
             <h2>So stellen Sie die Nutzung sicher</h2>
             <p>
-              Fragen Sie sich als Legistin, wie stellen wir sicher, dass offene
-              Verwaltungsdaten nicht in digitalen Silos verschwinden, sondern
-              EU-weit gefunden werden?
+              Fragen Sie sich als Legist oder Legistin, wie stellen wir sicher,
+              dass offene Verwaltungsdaten nicht in digitalen Silos
+              verschwinden, sondern EU-weit gefunden werden?
             </p>
             <p>
               Integrieren Sie bereits im Gesetzentwurf eine klare Vorgabe zur
