@@ -28,26 +28,26 @@ jobs:
       security-events: write
     uses: ./.github/workflows/scan.yml
     secrets:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
 
   secret-scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           fetch-depth: 0 # Ensure Talisman can operate on a valid revision range
       - name: Detect secrets with Talisman in incoming commits
-        uses: digitalservicebund/talisman-secrets-scan-action@1789b188ee3a1361fffd2edd4bc12ac0df0a23c1
+        uses: digitalservicebund/talisman-secrets-scan-action@dd7513defb21028835988b40e89f7d10b3f66ed5
 
   check-and-test:
     uses: ./.github/workflows/check-and-test.yml
     secrets:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
 
   run-e2e-a11y-tests:
     uses: ./.github/workflows/run-e2e-a11y-tests.yml
-    secrets:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   create-unified-test-report:
     needs: [run-e2e-a11y-tests]
@@ -59,7 +59,8 @@ jobs:
       pages: write
       id-token: write
     secrets:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
 
   build-and-push-image:
     needs: [vulnerability-scan, secret-scan, check-and-test, run-e2e-a11y-tests]
@@ -70,7 +71,7 @@ jobs:
       packages: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@b45d80f862d83dbcd57f89517bcf500b2ab88fb2 # v4.0.0
@@ -108,7 +109,7 @@ jobs:
 
       - name: Upload cosign vulnerability scan record
         if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
         with:
           name: "${{ env.PACKAGE_NAME }}-vulnerabilities.json"
           path: "${{ env.PACKAGE_NAME }}-vulnerabilities.json"
@@ -118,7 +119,7 @@ jobs:
         if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
         # Third-party action, pin to commit SHA!
         # See https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions
-        uses: sigstore/cosign-installer@ba7bc0a3fef59531c69a25acd34668d6d3fe6f22 # v4.1.0
+        uses: sigstore/cosign-installer@cad07c2e89fa2edd6e2d7bab4c1aa38e53f76003 # v4.1.1
         with:
           cosign-release: "v2.6.0"
 
@@ -131,8 +132,11 @@ jobs:
         run: cosign attest --yes --replace --predicate ${{ env.PACKAGE_NAME }}-vulnerabilities.json --type vuln ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
       - name: Send failure to Slack
+        uses: digitalservicebund/notify-on-failure-gha@671832f192aee0a068fd92b2f6deb975df794a84 # v1.5.0
         if: failure()
-        uses: ./.github/actions/slack-failure-notify
+        with:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
 
   deploy-to-staging-stackit:
     needs: [build-and-push-image]
@@ -151,7 +155,8 @@ jobs:
       ARGOCD_SERVER_STACKIT: ${{ secrets.ARGOCD_SERVER_STACKIT }}
       METRICS_DEPLOYMENT_WEBHOOK_URL: ${{ secrets.METRICS_DEPLOYMENT_WEBHOOK_URL }}
       METRICS_WEBHOOK_TOKEN: ${{ secrets.METRICS_WEBHOOK_TOKEN }}
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
 
   deploy-to-production-stackit:
     needs: [deploy-to-staging-stackit]
@@ -170,4 +175,5 @@ jobs:
       ARGOCD_SERVER_STACKIT: ${{ secrets.ARGOCD_SERVER_STACKIT }}
       METRICS_DEPLOYMENT_WEBHOOK_URL: ${{ secrets.METRICS_DEPLOYMENT_WEBHOOK_URL }}
       METRICS_WEBHOOK_TOKEN: ${{ secrets.METRICS_WEBHOOK_TOKEN }}
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}

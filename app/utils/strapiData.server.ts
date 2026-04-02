@@ -128,6 +128,8 @@ export type Visualisierung = {
   Titel: string;
   Visualisierungsart?: string;
   Visualisierungstool?: string;
+  Aufwand?: string;
+  Ressort?: string;
   Beschreibung: Node[];
   Bild: {
     documentId: string;
@@ -205,6 +207,8 @@ fragment VisualisationFields on Visualisierung {
   Beschreibung
   Visualisierungsart
   Visualisierungstool
+  Aufwand
+  Ressort
   Bild {
     documentId
     url
@@ -338,7 +342,11 @@ function generateCacheKey(query: string, variables?: object): string {
   return `cache:${hash}`;
 }
 
-const cache = new NodeCache({ stdTTL: 300, checkperiod: 30 });
+const isDevelopment = process.env.NODE_ENV === "development";
+const options = isDevelopment
+  ? { stdTTL: 10 }
+  : { stdTTL: 300, checkperiod: 30 };
+const cache = new NodeCache(options);
 
 export async function fetchStrapiData<DataType>(
   query: string,

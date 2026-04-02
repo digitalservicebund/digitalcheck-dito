@@ -15,22 +15,6 @@ export const examplesRegelungen = {
   infoTitle: "Hinweis",
   infoText:
     "Markierte Formulierungen sind gute Beispiele für die Ermöglichung digitaler Umsetzung, trotz ausstehender Verabschiedung.",
-  visualisations: {
-    tabName: "Visualisierung",
-    title: "Visualisierungen",
-    subtitle:
-      "Diese Visualisierungen haben dem Referat geholfen Digitaltauglichkeit zu erstellen und den Sachverhalt zu kommunizieren.",
-    button: "Vergrößern",
-    imageInfo: {
-      type: "Art der Visualisierung:",
-      tool: "Software zur Erstellung:",
-      legalArea: "Rechtsbereich:",
-      publishedOn: "Veröffentlicht am:",
-      law: "Regelung:",
-      digitalCheck: "Digitalcheck",
-      department: "Ressort:",
-    },
-  },
   exampleLinkText: "Alle Beispiele zu dieser Regelung",
   principles: {
     hero: {

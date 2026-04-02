@@ -1,8 +1,8 @@
+import { describe, expect, it, vi } from "vitest";
 import {
   action,
   type ClientSideError,
-} from "app/routes/handle-client-side-error";
-import { describe, expect, it, vi } from "vitest";
+} from "~/routes/handle-client-side-error";
 
 function getActionParams(request: Request) {
   return {
@@ -10,6 +10,7 @@ function getActionParams(request: Request) {
     params: {},
     request,
     unstable_pattern: "/handle-client-side-error",
+    unstable_url: new URL(request.url),
   };
 }
 

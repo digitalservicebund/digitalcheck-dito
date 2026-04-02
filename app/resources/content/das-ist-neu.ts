@@ -28,6 +28,31 @@ export const news = {
   items: [
     {
       badge: {
+        text: "30.03.2026",
+      },
+      content: dedent`
+        Informationen und Umsetzungsvorlage zur verpflichtenden Prüfung von "Lösungen für ein interoperables Europa" nach Art. 7 des Interoperable Europe Act (EU) 2024/903. Legistinnen und Legisten erfahren,
+        - welche Lösungen für ein interoperables Europa es aktuell gibt,
+        - warum das relevant ist,
+        - welchen Mehrwert die verbindliche Festschreibung zur Nutzung stiftet.
+
+        [Hier ansehen](${ROUTE_INTEROPERABILITY.url}${getTabAnchorLink("interoperable-loesungen", "interoperable-loesungen")})`,
+    },
+    {
+      badge: {
+        text: "26.03.2026",
+      },
+      content: dedent`
+       Anpassung der Visualisierungs-Beispiele
+       - Titel zeigen nun die Alleinstellungsmerkmale der Visualisierungen (z. B. *Grenzüberschreitender Ablauf*).
+       - Neues Feld *Aufwand für das Referat*.
+       - Neuer Inhalt: Beratungs- und Erfassungsprozess.
+       
+        [Hier ansehen](${ROUTE_EXAMPLES_VISUALISATIONS.url})
+      `,
+    },
+    {
+      badge: {
         text: "16.03.2026",
       },
       content: dedent`
@@ -45,7 +70,7 @@ export const news = {
       content: dedent`
        Neuer Leitfaden: Praxis-Perspektive in Ihr Vorhaben einbinden
          - Was sind Vorteile der Praxis-Perspektive und welche Interview-Methoden gibt es?
-         - Schritt für Schritt Anleitung: Akteurinnen und Akteure identifizieren und Interviews vorbereiten
+         - Schritt-für-Schritt-Anleitung: Akteurinnen und Akteure identifizieren und Interviews vorbereiten
        
         [Hier ansehen](${ROUTE_METHODS_INTERVIEW_METHODS.url})
       `,

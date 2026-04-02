@@ -13,6 +13,8 @@ const getElement = (node: Node): keyof JSX.IntrinsicElements => {
       return node.format === "ordered" ? "ol" : "ul";
     case "list-item":
       return "li";
+    case "quote":
+      return "blockquote";
     default:
       return "div";
   }

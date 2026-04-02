@@ -14,6 +14,7 @@ import TabGroup from "~/components/Tabs/Tabs";
 import VisualisationItem from "~/components/VisualisationItem";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
+import getFeatureFlag from "~/utils/featureFlags.server.ts";
 import {
   Beispielvorhaben,
   fetchStrapiData,
@@ -30,8 +31,8 @@ const GET_REGELUNGSVORHABENS_BY_SLUG_QUERY = `
 ${prinzipCoreFields}
 ${paragraphFields}
 ${visualisationFields}
-query GetBeispielvorhabens($slug: String!) {
-  beispielvorhabens(filters: { URLBezeichnung: { eq: $slug } }) {
+query GetBeispielvorhabens($slug: String!, $status: PublicationStatus!) {
+  beispielvorhabens(filters: { URLBezeichnung: { eq: $slug } }, status: $status) {
     documentId
     Titel
     NKRNummer
@@ -62,9 +63,11 @@ query GetBeispielvorhabens($slug: String!) {
 }`;
 
 export const loader = async ({ params }: Route.LoaderArgs) => {
+  const status = getFeatureFlag("showStrapiDrafts") ? "DRAFT" : "PUBLISHED";
+
   const regelungData = await fetchStrapiData<{
     beispielvorhabens: Beispielvorhaben[];
-  }>(GET_REGELUNGSVORHABENS_BY_SLUG_QUERY, { slug: params.regelung });
+  }>(GET_REGELUNGSVORHABENS_BY_SLUG_QUERY, { slug: params.regelung, status });
 
   if ("error" in regelungData) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
@@ -125,19 +128,19 @@ export default function Gesetz() {
   // ----- Visualisierungen -----
   if (regelung.Visualisierungen.length > 0) {
     tabsData.push({
-      label: examplesRegelungen.visualisations.tabName,
+      label: "Visualisierung",
       content: (
         <div className="ds-stack ds-stack-32">
           <div className="mb-40 space-y-16">
             <Heading
-              id={slugify(examplesRegelungen.visualisations.title)}
+              id={slugify("Visualisierungen")}
               tagName="h2"
               look="ds-heading-02-bold"
             >
-              {examplesRegelungen.visualisations.title}
+              Visualisierungen
             </Heading>
             <RichText
-              markdown={examplesRegelungen.visualisations.subtitle}
+              markdown="Diese Visualisierungen haben dem Referat geholfen, Digitaltauglichkeit zu prüfen und den Sachverhalt zu kommunizieren."
               className="ds-subhead"
             />
           </div>

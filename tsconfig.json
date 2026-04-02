@@ -21,7 +21,6 @@
     "useUnknownInCatchVariables": false,
     "noEmit": true,
     "skipLibCheck": true,
-    "baseUrl": ".",
     "rootDirs": [".", "./.react-router/types"],
     "types": [
       "@react-router/node",
@@ -32,7 +31,7 @@
     "paths": {
       "~/*": ["./app/*"],
       "@digitalservicebund/icons/*": [
-        "node_modules/@digitalservicebund/icons/*"
+        "./node_modules/@digitalservicebund/icons/*"
       ]
     }
   }

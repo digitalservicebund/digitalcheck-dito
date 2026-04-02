@@ -13,14 +13,13 @@ jobs:
   check-and-test:
     uses: ./.github/workflows/check-and-test.yml
     secrets:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
 
   run-e2e-a11y-tests:
     uses: ./.github/workflows/run-e2e-a11y-tests.yml
     with:
       nightlyTests: true
-    secrets:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   create-unified-test-report:
     needs: [run-e2e-a11y-tests]
@@ -32,4 +31,5 @@ jobs:
       pages: write
       id-token: write
     secrets:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}

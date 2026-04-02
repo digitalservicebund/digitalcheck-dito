@@ -24,7 +24,9 @@ on:
         required: true
       METRICS_WEBHOOK_TOKEN:
         required: true
-      SLACK_WEBHOOK_URL:
+      SLACK_BOT_TOKEN:
+        required: true
+      SLACK_CHANNEL_ID:
         required: true
 
 env:
@@ -41,7 +43,7 @@ jobs:
       url: ${{ inputs.environment_url }}
     steps:
       - name: Deploy container image
-        uses: digitalservicebund/argocd-deploy@auth-token # Use the auth-token branch for STACKIT
+        uses: digitalservicebund/argocd-deploy@6033da861398e0d7fcffe1b195f8d58f10b62c4e # Use the auth-token branch for STACKIT
         with:
           environment: ${{ inputs.environment_name }}-stackit
           version: ${{ github.sha }}
@@ -62,5 +64,8 @@ jobs:
           metrics_webhook_token: ${{ secrets.METRICS_WEBHOOK_TOKEN }}
 
       - name: Send failure to Slack
+        uses: digitalservicebund/notify-on-failure-gha@671832f192aee0a068fd92b2f6deb975df794a84 # v1.5.0
         if: failure()
-        uses: ./.github/actions/slack-failure-notify
+        with:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}

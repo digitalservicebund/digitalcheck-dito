@@ -69,6 +69,12 @@
     @apply cursor-pointer;
   }
 
+  blockquote {
+    @apply border-l-4 border-l-blue-600 italic;
+    margin: 1em 10px;
+    padding: 0.5em 20px;
+  }
+
   ul:not(.list-unstyled),
   ol:not(.list-unstyled) {
     @apply space-y-8 pl-24;

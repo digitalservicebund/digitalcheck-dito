@@ -4,6 +4,7 @@ export const features = {
   showDCATAP: "showDCATAP",
   showIOEuRechtContent: "showIOEuRechtContent",
   simplifiedPrincipleFlow: "simplifiedPrincipleFlow",
+  showStrapiDrafts: "showStrapiDrafts",
 } as const;
 export type FeatureFlag = keyof typeof features;
 export type FeatureFlags = Record<FeatureFlag, boolean>;

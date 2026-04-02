@@ -3,7 +3,9 @@ name: Create Unified Test Report
 on:
   workflow_call:
     secrets:
-      SLACK_WEBHOOK_URL:
+      SLACK_BOT_TOKEN:
+        required: true
+      SLACK_CHANNEL_ID:
         required: true
 
 permissions:
@@ -15,10 +17,10 @@ jobs:
   merge-reports:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: Setup pnpm
-        uses: pnpm/action-setup@v5
-      - uses: actions/setup-node@v6
+        uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v5.0.0
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
         with:
           node-version: lts/*
           cache: pnpm
@@ -26,7 +28,7 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Download blob reports from GitHub Actions Artifacts
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           path: all-blob-reports
           pattern: playwright-*-blob-report-*
@@ -36,7 +38,7 @@ jobs:
         run: npx playwright merge-reports --reporter html ./all-blob-reports
 
       - name: Upload HTML report
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
         with:
           name: html-report--attempt-${{ github.run_attempt }}
           path: playwright-report
@@ -55,7 +57,7 @@ jobs:
 
       - name: Deploy to GitHub Pages
         id: github-pages-deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
       - name: Output github pages URL to summary
         run: |
@@ -63,5 +65,8 @@ jobs:
           echo "${{ steps.github-pages-deployment.outputs.page_url }}${{ github.run_id }}/" >> $GITHUB_STEP_SUMMARY
 
       - name: Send failure to Slack
-        if: ${{ failure() }}
-        uses: ./.github/actions/slack-failure-notify
+        uses: digitalservicebund/notify-on-failure-gha@671832f192aee0a068fd92b2f6deb975df794a84 # v1.5.0
+        if: failure()
+        with:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}

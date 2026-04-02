@@ -1,7 +1,7 @@
 import { render, screen, within } from "@testing-library/react";
-import Methoden from "app/routes/methoden._index"; // The component to test
 import { MemoryRouter } from "react-router";
 import { describe, expect, it, vi } from "vitest";
+import Methoden from "~/routes/methoden._index"; // The component to test
 
 vi.mock("react-router", async (importOriginal) => {
   const original = await importOriginal<typeof import("react-router")>();

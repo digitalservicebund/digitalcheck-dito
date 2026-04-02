@@ -179,6 +179,21 @@ export const ROUTE_INTEROPERABILITY_SPOC = createRoute(
   "Nationale Kontaktstelle",
   ROUTE_INTEROPERABILITY,
 );
+export const ROUTE_INTEROPERABILITY_FAQ = createRoute(
+  "faq",
+  "Fragen und Antworten",
+  ROUTE_INTEROPERABILITY,
+);
+export const ROUTE_INTEROPERABILITY_SOLUTIONS = createRoute(
+  "loesungen",
+  "Lösungen",
+  ROUTE_INTEROPERABILITY,
+);
+export const ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP = createRoute(
+  "dcat-ap",
+  "Data Catalogue Vocabulary Application Profile (DCAT-AP)",
+  ROUTE_INTEROPERABILITY_SOLUTIONS,
+);
 
 // EXAMPLES ROUTES
 export const ROUTE_EXAMPLES = createRoute(
