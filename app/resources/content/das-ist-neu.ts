@@ -5,7 +5,6 @@ import {
   ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
   ROUTE_FUNDAMENTALS_NKR,
   ROUTE_INTEROPERABILITY,
-  ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP,
   ROUTE_INTEROPERABILITY_SPOC,
   ROUTE_METHODS_INTERVIEW_METHODS,
   ROUTE_METHODS_PRINCIPLES,
@@ -29,21 +28,10 @@ export const news = {
   items: [
     {
       badge: {
-        text: "02.04.2026",
-      },
-      content: dedent`
-        Neuer Leitfaden zum Metadatenstandard *Data Catalogue Vocabulary Application Profile (DCAT-AP)*.
-        
-        Dieser ist eine „Lösung für ein interoperables Europa“ nach Art. 7 des Interoperable Europe Act (EU) 2024/903.
-
-        [Hier ansehen](${ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP.url})`,
-    },
-    {
-      badge: {
         text: "30.03.2026",
       },
       content: dedent`
-        Informationen und Umsetzungsvorlage zur verpflichtenden Prüfung von „Lösungen für ein interoperables Europa“ nach Art. 7 des Interoperable Europe Act (EU) 2024/903. Legistinnen und Legisten erfahren,
+        Informationen und Umsetzungsvorlage zur verpflichtenden Prüfung von „Lösungen für ein interoperables Europa“ nach Art. 7 der europäischen Interoperabilitätsverordnung (EU) 2024/903. Legistinnen und Legisten erfahren,
         - welche Lösungen für ein interoperables Europa es aktuell gibt,
         - warum das relevant ist,
         - welchen Mehrwert die verbindliche Festschreibung zur Nutzung stiftet.
