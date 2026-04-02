@@ -388,10 +388,17 @@ export default function InteroperableSolutionsDcatAp() {
               <RichText
                 className="[&_h3]:mt-24"
                 markdown={dedent`
-              ## Einordnung in den europäischen Rahmen
+              ## Weitere Informationen im europäischen Rahmen
+              
+              Hier finden Sie die offizielle Seite der europäischen Lösung
+                DCAT-AP im Interoperable Europe Portal mit allen
+                Hintergrundinformationen zur EU-weiten Spezifikation:
+              [DCAT Application Profile for data portals in Europe](https://interoperable-europe.ec.europa.eu/collection/semic-support-centre/solution/dcat-application-profile-data-portals-europe)
               
               Hier finden Sie die [Einordnung von DCAT-AP in den Europäischen Interoperabilitätsrahmen (EIF)](https://interoperable-europe.ec.europa.eu/collection/semic-support-centre/solution/dcat-application-profile-data-portals-europe/eif-perspective)
               – diese Perspektive hilft Ihnen bei der fachlichen Begründung für die Interoperabilitätsbewertung.
+              
+              Auf dem Youtube-Kanal von Interoperable Europe finden sie hier ein kurzes Einführungsvideo zu DCAT-AP: https://www.youtube.com/watch?v=EVsMeKBrAxg
               `}
               />
             </InfoBox>
