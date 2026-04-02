@@ -1,5 +1,4 @@
 import OpenInNewIconBase from "@digitalservicebund/icons/OpenInNew";
-import { renderToString } from "react-dom/server";
 import { general } from "~/resources/content/shared/general.ts";
 
 /**
@@ -18,5 +17,3 @@ export const OpenInNewIcon = () => (
     <span className="sr-only"> {general.a11yMessageNewWindow}</span>
   </>
 );
-
-export const openInNewIconString = renderToString(OpenInNewIcon());

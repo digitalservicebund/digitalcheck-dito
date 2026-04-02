@@ -374,6 +374,7 @@ test("documentation flow happy path", async ({ page }, testInfo) => {
   });
 });
 
+// eslint-disable-next-line playwright/expect-expect
 test("go to landing page and download empty document template", async ({
   page,
 }, testInfo) => {

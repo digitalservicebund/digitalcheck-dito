@@ -10,12 +10,18 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import testingLibrary from "eslint-plugin-testing-library";
 import { defineConfig } from "eslint/config";
 import globals from "globals";
+import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import tseslint from "typescript-eslint";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const { dependencies } = JSON.parse(
+  readFileSync(new URL("package.json", import.meta.url), "utf8"),
+);
+const reactVersion = dependencies.react.replace(/[^0-9.]/g, "");
 
 export default defineConfig(
   // Global ignores
@@ -51,7 +57,7 @@ export default defineConfig(
     ],
 
     settings: {
-      react: { version: "detect" },
+      react: { version: reactVersion },
       formComponents: ["Form"],
       linkComponents: [
         { name: "Link", linkAttribute: "to" },
@@ -154,6 +160,12 @@ export default defineConfig(
       "playwright/no-conditional-expect": "off",
       "playwright/no-conditional-in-test": "off",
       "playwright/no-skipped-test": "off",
+      "playwright/expect-expect": [
+        "warn",
+        {
+          assertFunctionNames: ["expect", "checkPage", "expect"],
+        },
+      ],
     },
   },
   // Config files in root folder
