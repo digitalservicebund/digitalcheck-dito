@@ -46,7 +46,7 @@ describe("DocumentationTitle", () => {
     it("shows the expected heading", () => {
       expect(
         screen.getByRole("heading", {
-          name: "Tragen Sie den Titel Ihres Regelungsvorhaben ein",
+          name: "Tragen Sie den Titel Ihres Regelungsvorhabens ein",
           level: 1,
         }),
       ).toBeInTheDocument();
