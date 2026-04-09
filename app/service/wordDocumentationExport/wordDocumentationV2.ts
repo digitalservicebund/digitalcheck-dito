@@ -1,11 +1,8 @@
 import {
-  Bookmark,
   convertInchesToTwip,
   ExternalHyperlink,
-  HeadingLevel,
   IPatch,
   IRunOptions,
-  Paragraph,
   patchDocument,
   PatchType,
   TextRun,
@@ -143,20 +140,7 @@ export const buildPrinciplePatches = (
 
     return {
       ...acc,
-      [`PRINCIPLE_${prinzipIndex + 1}_TITLE`]: {
-        type: PatchType.DOCUMENT,
-        children: [
-          new Paragraph({
-            heading: HeadingLevel.HEADING_1,
-            children: [
-              new Bookmark({
-                id: slugify(prinzip.Name),
-                children: [new TextRun(prinzip.Name)],
-              }),
-            ],
-          }),
-        ],
-      },
+      [`PRINCIPLE_${prinzipIndex + 1}_TITLE`]: toParagraphPatch(prinzip.Name),
       [`PRINCIPLE_${prinzipIndex + 1}_DESCRIPTION`]: {
         type: PatchType.DOCUMENT,
         children: strapiBlocksToDocx(prinzip.Beschreibung),
@@ -165,7 +149,6 @@ export const buildPrinciplePatches = (
         answer?.answer ?? principlePages.radioOptions.join(" | "),
       ),
       // We always need to fill both patches to avoid the tags rendering
-      // Depending on whether the answer is positive or negative, we either fill the reasoning or the aspects
       [`PRINCIPLE_${prinzipIndex + 1}_REASONING`]: toParagraphPatch(
         answerOrPlaceholderOptional(answer?.reasoning as string),
       ),
@@ -173,6 +156,9 @@ export const buildPrinciplePatches = (
         hasPositivePrincipleAnswer
           ? aspectsContent.join(", ")
           : documentationDocument.placeholderOptional,
+      ),
+      [`PRINCIPLE_${prinzipIndex + 1}_ASPECTS_AVAILABLE`]: toParagraphPatch(
+        prinzip.Aspekte.map((aspekt) => aspekt.Kurzbezeichnung).join(", "),
       ),
     };
   }, {});

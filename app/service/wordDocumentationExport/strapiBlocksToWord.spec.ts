@@ -1,4 +1,10 @@
-import { ExternalHyperlink, InternalHyperlink, Paragraph, TextRun } from "docx";
+import {
+  convertInchesToTwip,
+  ExternalHyperlink,
+  InternalHyperlink,
+  Paragraph,
+  TextRun,
+} from "docx";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { Node } from "~/utils/paragraphUtils";
 import strapiBlocksToDocx from "./strapiBlocksToWord";
@@ -25,6 +31,11 @@ const simpleParagraph = (text: string) => ({
   type: "paragraph",
   children: [{ type: "text", text }],
 });
+
+const bulletIndent = {
+  left: convertInchesToTwip(0.5),
+  hanging: convertInchesToTwip(0.25),
+};
 
 describe("strapiBlocksToDocx", () => {
   beforeEach(() => {
@@ -167,15 +178,15 @@ describe("strapiBlocksToDocx", () => {
       strapiBlocksToDocx(blocks);
 
       expect(Paragraph).toHaveBeenCalledTimes(2);
-      expect(TextRun).toHaveBeenCalledTimes(2);
+      expect(TextRun).toHaveBeenCalledTimes(4);
 
       expect(Paragraph).toHaveBeenNthCalledWith(1, {
-        children: [new TextRun("First item")],
-        bullet: { level: 0 },
+        children: [new TextRun({ text: "• " }), new TextRun("First item")],
+        indent: bulletIndent,
       });
       expect(Paragraph).toHaveBeenNthCalledWith(2, {
-        children: [new TextRun("Second item")],
-        bullet: { level: 0 },
+        children: [new TextRun({ text: "• " }), new TextRun("Second item")],
+        indent: bulletIndent,
       });
     });
   });
@@ -215,12 +226,12 @@ describe("strapiBlocksToDocx", () => {
         children: [new TextRun("Introduction")],
       });
       expect(Paragraph).toHaveBeenNthCalledWith(2, {
-        children: [new TextRun("Bullet 1")],
-        bullet: { level: 0 },
+        children: [new TextRun({ text: "• " }), new TextRun("Bullet 1")],
+        indent: bulletIndent,
       });
       expect(Paragraph).toHaveBeenNthCalledWith(3, {
-        children: [new TextRun("Bullet 2")],
-        bullet: { level: 0 },
+        children: [new TextRun({ text: "• " }), new TextRun("Bullet 2")],
+        indent: bulletIndent,
       });
       expect(Paragraph).toHaveBeenNthCalledWith(4, {
         children: [new TextRun("Conclusion")],
@@ -255,13 +266,14 @@ describe("strapiBlocksToDocx", () => {
 
       expect(Paragraph).toHaveBeenCalledWith({
         children: [
+          new TextRun({ text: "• " }),
           new TextRun("Visit "),
           new ExternalHyperlink({
             children: [new TextRun({ text: "Google", style: "Hyperlink" })],
             link: "https://google.com",
           }),
         ],
-        bullet: { level: 0 },
+        indent: bulletIndent,
       });
     });
   });
@@ -342,6 +354,7 @@ describe("strapiBlocksToDocx", () => {
       });
       expect(Paragraph).toHaveBeenNthCalledWith(3, {
         children: [
+          new TextRun({ text: "• " }),
           new TextRun("Erste Aufgabe: Lesen Sie die "),
           new ExternalHyperlink({
             children: [
@@ -350,7 +363,7 @@ describe("strapiBlocksToDocx", () => {
             link: "https://example.com",
           }),
         ],
-        bullet: { level: 0 },
+        indent: bulletIndent,
       });
       expect(Paragraph).toHaveBeenNthCalledWith(6, {
         children: [

@@ -1,4 +1,5 @@
 import {
+  convertInchesToTwip,
   ExternalHyperlink,
   InternalHyperlink,
   IParagraphOptions,
@@ -37,9 +38,17 @@ const nodeToDocx = (node: Node, options?: Partial<IParagraphOptions>) => {
     case "paragraph":
       return new Paragraph({ children, ...options });
     case "list-item":
+      // We don't use docx.js `bullet: { level: 0 }` here: that hardcodes
+      // `<w:numId w:val="1"/>`, and when inserted via `patchDocument` it
+      // resolves against the template's `numbering.xml` (where numId=1 is
+      // a decimal list), so bullets would render as "1., 2., 3.".
+      // Instead, render bullets as a literal "• " with a hanging indent.
       return new Paragraph({
-        children,
-        bullet: { level: 0 },
+        children: [new TextRun({ text: "• " }), ...children],
+        indent: {
+          left: convertInchesToTwip(0.5),
+          hanging: convertInchesToTwip(0.25),
+        },
         ...options,
       });
     default:
