@@ -97,7 +97,7 @@ export const header = {
           title: "EU-Interoperabilität",
           isNewTitle: true,
           content:
-            "Verstehen Sie, was es mit EU Interoperabilität auf sich hat.",
+            "Verstehen Sie, was es mit EU-Interoperabilität auf sich hat.",
           href: ROUTE_INTEROPERABILITY.url,
           activeBehavior: "exactMatch" as ActiveBehavior,
         },

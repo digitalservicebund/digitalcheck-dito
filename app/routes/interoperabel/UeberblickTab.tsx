@@ -34,7 +34,7 @@ export const UeberblickTab = () => (
         Was bedeutet das für die Erarbeitung von Regelungen?
       </Heading>
       <p>
-        Für Sie bedeutet das, dass sie grenzüberschreitende Auswirkungen eines
+        Für Sie bedeutet das, dass Sie grenzüberschreitende Auswirkungen eines
         Regelungsvorhaben einschätzen sollten, bevor Regelungen geschrieben
         werden. Denn nur wenn Sie die Interoperabilität von Anfang an mitdenken,
         schaffen Sie die rechtliche Grundlage für Behörden, um europaweit Daten
