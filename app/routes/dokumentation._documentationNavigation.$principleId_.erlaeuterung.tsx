@@ -1,4 +1,3 @@
-import { CheckCircle } from "@digitalservicebund/icons";
 import { Link, redirect, useOutletContext, useParams } from "react-router";
 import AspectPills from "~/components/AspectPills";
 import Badge from "~/components/Badge";
@@ -121,17 +120,14 @@ export default function DocumentationPrincipleErlaeuterung() {
           )}
         </div>
 
-        <div className="max-w-a11y flex flex-row items-center gap-16 rounded-lg bg-blue-300 p-24">
-          <CheckCircle className="fill-ds-green-700 size-36" />
-          <div>
-            <p>{changeAnswerTitle}</p>
-            <Link
-              to={currentUrl.replace("/erlaeuterung", "")}
-              className="text-link"
-            >
-              Angaben ändern
-            </Link>
-          </div>
+        <div className="max-w-a11y rounded-lg bg-blue-300 p-24">
+          <p>{changeAnswerTitle}</p>
+          <Link
+            to={currentUrl.replace("/erlaeuterung", "")}
+            className="text-link"
+          >
+            Angaben ändern
+          </Link>
         </div>
 
         <form {...form.getFormProps()} className="space-y-40">
@@ -196,7 +192,7 @@ export default function DocumentationPrincipleErlaeuterung() {
                 <HelpButton
                   sectionId="aspects"
                   title="Hinweis zur Erklärung"
-                  className="h-24 w-24"
+                  className="h-28 w-28"
                 >
                   {notPositiveExplanation}
                 </HelpButton>
