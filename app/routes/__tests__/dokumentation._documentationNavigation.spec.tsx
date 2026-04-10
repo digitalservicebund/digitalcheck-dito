@@ -28,8 +28,10 @@ import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import {
   DATA_SCHEMA_VERSION_V1,
+  DATA_SCHEMA_VERSION_V2,
   DocumentationData,
   V1,
+  V2,
 } from "../dokumentation/documentationDataSchema";
 
 vi.mock("~/contexts/FeatureFlagContext", () => ({
@@ -323,6 +325,151 @@ describe("navigation on pages of documentation", () => {
 
   describe("States", () => {
     describe.each(validationScenarios)(
+      "Scenario: $name",
+      ({ documentationData, expected }) => {
+        beforeEach(async () => {
+          vi.mocked(
+            readDataFromLocalStorage<DocumentationData<V1>>,
+          ).mockReturnValue(documentationData);
+          // eslint-disable-next-line @typescript-eslint/require-await
+          await act(async () => {
+            renderPage(currentRoute);
+          });
+        });
+
+        it("shows correct completed states", () => {
+          if (expected.completedTitle) expectCompleted(getTitel());
+          else expectNotCompleted(getTitel());
+          if (expected.completedParticipation)
+            expectCompleted(getBeteiligungsformate());
+          else expectNotCompleted(getBeteiligungsformate());
+          if (expected.completedPrinciples) expectCompleted(getPrinzipA());
+          else expectNotCompleted(getPrinzipA());
+        });
+
+        it("shows correct warning states", () => {
+          if (expected.warningTitle) expectWarning(getTitel());
+          else expectNotWarning(getTitel());
+          if (expected.warningParticipation)
+            expectWarning(getBeteiligungsformate());
+          else expectNotWarning(getBeteiligungsformate());
+          if (expected.warningPrinciples) expectWarning(getPrinzipA());
+          else expectNotWarning(getPrinzipA());
+        });
+      },
+    );
+  });
+
+  describe("V2 States", () => {
+    // HelpSidepanel is rendered when simplifiedPrincipleFlow is on
+    // and uses browser APIs not available in jsdom
+    beforeEach(() => {
+      Object.defineProperty(window, "matchMedia", {
+        writable: true,
+        value: vi.fn().mockImplementation((query: string) => ({
+          matches: false,
+          media: query,
+          onchange: null,
+          addListener: vi.fn(),
+          removeListener: vi.fn(),
+          addEventListener: vi.fn(),
+          removeEventListener: vi.fn(),
+          dispatchEvent: vi.fn(),
+        })),
+      });
+      vi.stubGlobal(
+        "ResizeObserver",
+        class {
+          observe = vi.fn();
+          unobserve = vi.fn();
+          disconnect = vi.fn();
+        },
+      );
+    });
+
+    const validationScenariosV2: ValidationScenario[] = [
+      {
+        name: "all valid completed (V2)",
+        documentationData: {
+          version: DATA_SCHEMA_VERSION_V2,
+          policyTitle: {
+            title: "Valid Title",
+          },
+          participation: {
+            formats: "Valid Formats",
+            results: "Valid Results",
+          },
+          principles: [
+            {
+              answer: "Ja, gänzlich oder teilweise",
+              id: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
+              reasoning: "Some reasoning",
+              aspects: ["aspect-1"],
+            },
+          ],
+        } as DocumentationData<V2> as DocumentationData<V1>,
+        expected: {
+          completedTitle: false, // is current route so no states are shown
+          completedParticipation: true,
+          completedPrinciples: true,
+
+          warningTitle: false,
+          warningParticipation: false,
+          warningPrinciples: false,
+        },
+      },
+      {
+        name: "unfilled form (V2)",
+        documentationData: {
+          version: DATA_SCHEMA_VERSION_V2,
+        } as DocumentationData<V2> as DocumentationData<V1>,
+        expected: {
+          completedTitle: false,
+          completedParticipation: false,
+          completedPrinciples: false,
+
+          warningTitle: false,
+          warningParticipation: false,
+          warningPrinciples: false,
+        },
+      },
+      {
+        name: "partial filled form (V2)",
+        documentationData: {
+          version: DATA_SCHEMA_VERSION_V2,
+          policyTitle: {
+            title: "",
+          },
+          participation: {
+            formats: "Valid Formats",
+            results: "Valid Results",
+          },
+          principles: [
+            {
+              answer: "Ja, gänzlich oder teilweise",
+              id: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
+              reasoning: "Some reasoning",
+              aspects: [], // empty aspects fails V2 validation
+            },
+          ],
+        } as DocumentationData<V2> as DocumentationData<V1>,
+        expected: {
+          completedTitle: false, // is current route so no states are shown
+          completedParticipation: true,
+          completedPrinciples: false, // aspects empty -> invalid in V2
+
+          warningTitle: false,
+          warningParticipation: false,
+          warningPrinciples: true, // data exists but invalid
+        },
+      },
+    ];
+
+    beforeEach(() => {
+      vi.mocked(useFeatureFlag).mockImplementation((_flagName) => true);
+    });
+
+    describe.each(validationScenariosV2)(
       "Scenario: $name",
       ({ documentationData, expected }) => {
         beforeEach(async () => {
