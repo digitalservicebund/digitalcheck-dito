@@ -23,11 +23,7 @@ function ToggleTabButton({
       type="button"
       aria-label={ariaLabel}
       look="tertiary"
-      className={twJoin(
-        "w-auto p-6",
-        "hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-800",
-        className,
-      )}
+      className={twJoin("w-auto fill-blue-800 p-6", className)}
       onClick={onClick}
     >
       {children}

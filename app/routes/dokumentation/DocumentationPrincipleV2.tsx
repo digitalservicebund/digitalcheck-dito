@@ -51,27 +51,31 @@ export default function DocumentationPrincipleV2({
     <>
       <MetaTitle prefix={`Dokumentation: ${prinzip.Name}`} />
       <div className="max-w-a11y space-y-40">
-        <Badge principleNumber={prinzip.Nummer}>Prinzip {prinzip.order}</Badge>
-        <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
-          {prinzip.Name}
-          <HelpButton
-            sectionId="1-prinzip"
-            title={`Hinweis zu "${prinzip.Name}"`}
-            className="h-28 w-28"
-          >
-            <BlocksRenderer content={prinzip.Beschreibung} />
-            <Link
-              to={ROUTE_METHODS_PRINCIPLES.url + "/" + prinzip.URLBezeichnung}
-              className="ds-link-01-reg"
+        <div className="space-y-8">
+          <Badge principleNumber={prinzip.Nummer}>
+            Prinzip {prinzip.order}
+          </Badge>
+          <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
+            {prinzip.Name}
+            <HelpButton
+              sectionId="1-prinzip"
+              title={`Hinweis zu "${prinzip.Name}"`}
+              className="h-28 w-28"
             >
-              Mehr zum Prinzip
-            </Link>
-          </HelpButton>
-        </Heading>
+              <BlocksRenderer content={prinzip.Beschreibung} />
+              <Link
+                to={ROUTE_METHODS_PRINCIPLES.url + "/" + prinzip.URLBezeichnung}
+                className="ds-link-01-reg"
+              >
+                Mehr zum Prinzip
+              </Link>
+            </HelpButton>
+          </Heading>
 
-        {prinzip.Kurzbeschreibung && (
-          <BlocksRenderer content={prinzip.Kurzbeschreibung} />
-        )}
+          {prinzip.Kurzbeschreibung && (
+            <BlocksRenderer content={prinzip.Kurzbeschreibung} />
+          )}
+        </div>
 
         <form {...form.getFormProps()} className="space-y-40">
           <Heading

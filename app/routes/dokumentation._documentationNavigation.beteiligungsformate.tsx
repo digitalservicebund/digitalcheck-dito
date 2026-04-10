@@ -1,16 +1,17 @@
 import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
-import InfoBox from "~/components/InfoBox";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
+import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_PARTICIPATION } from "~/resources/staticRoutes";
 import {
   defaultParticipationValues,
   participationSchema,
 } from "~/routes/dokumentation/documentationDataSchema";
+import { features } from "~/utils/featureFlags";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
@@ -19,6 +20,7 @@ import { useDocumentationDataService } from "./dokumentation/DocumentationDataPr
 const { participation } = digitalDocumentation;
 
 export default function DocumentationParticipation() {
+  const simplifiedFlow = useFeatureFlag(features.simplifiedPrincipleFlow);
   const { currentUrl, nextUrl, previousUrl } =
     useOutletContext<NavigationContext>();
   const { setParticipation, documentationData } = useDocumentationDataService();
@@ -47,53 +49,58 @@ export default function DocumentationParticipation() {
         <RichText markdown={participation.textIntro} className="gap-40" />
 
         <form className="space-y-40" {...form.getFormProps()}>
-          <div className="space-y-16">
-            <InfoBox
-              heading={{
-                tagName: "h2",
-                look: "ds-heading-03-reg",
-                text: participation.formats.heading,
-              }}
-            >
-              <RichText markdown={participation.formats.content} />
-            </InfoBox>
+          <fieldset>
+            <legend className="ds-heading-03-reg mb-16">
+              {participation.formats.heading}
+            </legend>
 
             <Textarea
-              description={participation.formats.textField.description}
+              description={
+                simplifiedFlow
+                  ? undefined
+                  : participation.formats.textField.description
+              }
               placeholder={participation.formats.textField.placeholder}
               scope={form.scope("formats")}
               data-testid="schritte"
               warningInsteadOfError
             >
-              {participation.formats.textField.label}
+              {simplifiedFlow
+                ? "Beteiligungsformate"
+                : participation.formats.textField.label}
               <HelpButton sectionId="formats" title="Beteiligungsformate">
-                Beschreiben Sie, wie Sie die Bedürfnisse der Betroffenen erhoben
-                haben – z. B. durch Befragungen, Gespräche mit
-                Vollzugsakteurinnen und -akteuren oder formelle
+                Beschreiben Sie stichpunktartig, wie Sie die Bedürfnisse der
+                Betroffenen erhoben haben – z. B. durch Befragungen, Gesprächen
+                mit Vollzugsakteurinnen und -akteuren oder formelle
                 Beteiligungsverfahren.
               </HelpButton>
             </Textarea>
-          </div>
+          </fieldset>
 
-          <Heading
-            tagName="h2"
-            look="ds-heading-03-reg"
-            text={participation.results.heading}
-            className="mb-16"
-          />
-          <Textarea
-            description={participation.results.textField.description}
-            scope={form.scope("results")}
-            data-testid="erkenntnisse"
-            warningInsteadOfError
-          >
-            {participation.results.textField.label}
-            <HelpButton sectionId="results" title="Erkenntnisse">
-              Erläutern Sie, welche Erkenntnisse aus der Beteiligung in das
-              Regelungsvorhaben eingeflossen sind und verweisen Sie auf
-              relevante Paragrafen.
-            </HelpButton>
-          </Textarea>
+          <fieldset>
+            <legend className="ds-heading-03-reg mb-16">
+              {participation.results.heading}
+            </legend>
+            <Textarea
+              description={
+                simplifiedFlow
+                  ? undefined
+                  : participation.results.textField.description
+              }
+              scope={form.scope("results")}
+              data-testid="erkenntnisse"
+              warningInsteadOfError
+            >
+              {simplifiedFlow
+                ? "Erkenntnisse"
+                : participation.results.textField.label}
+              <HelpButton sectionId="results" title="Erkenntnisse">
+                Bitte listen Sie stichpunktartig auf, welche Erkenntnisse
+                eingearbeitet wurden und geben Sie Hinweise auf Paragrafen, die
+                besonders umsetzungsrelevant sind.
+              </HelpButton>
+            </Textarea>
+          </fieldset>
 
           <DocumentationActions
             previousUrl={previousUrl}

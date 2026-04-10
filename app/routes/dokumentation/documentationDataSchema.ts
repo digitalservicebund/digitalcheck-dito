@@ -153,7 +153,9 @@ const principleIrrelevantAnswerSchemaV2 = z.object({
 });
 
 const principleBaseSchemaV2 = z.object({
-  reasoning: z.string().min(1, { message: principlePages.errors.reasonError }),
+  reasoning: z
+    .string()
+    .min(1, { message: "Bitte geben Sie eine Erklärung an." }),
 });
 
 export const principleAnswerSchemaV2 = z
