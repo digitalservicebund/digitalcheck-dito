@@ -10,12 +10,14 @@ import MetaTitle from "~/components/Meta";
 import Textarea from "~/components/Textarea";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
+import { PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 import {
   DocumentationData,
+  Principle,
   principleAnswerSchemaV2,
 } from "./dokumentation/documentationDataSchema";
 
@@ -41,32 +43,28 @@ function ExplanationLegend({ title, helpText }: ExplanationLegendProps) {
   );
 }
 
-export default function DocumentationPrincipleErlaeuterung() {
-  const { principleId } = useParams();
-  const { currentUrl, nextUrl, previousUrl, prinzips } =
-    useOutletContext<NavigationContext>();
-  const { documentationData } = useDocumentationDataService();
+type DocumentationPrincipleErlaeuterungFormProps = {
+  answer: string;
+  prinzip: PrinzipWithAspekteAndExample;
+  principleData: Principle;
+  isPositive: boolean;
+  isIrrelevant: boolean;
+  currentUrl: string;
+  nextUrl: string;
+  previousUrl: string;
+};
+
+function DocumentationPrincipleErlaeuterungForm({
+  answer,
+  prinzip,
+  principleData,
+  isPositive,
+  isIrrelevant,
+  currentUrl,
+  nextUrl,
+  previousUrl,
+}: DocumentationPrincipleErlaeuterungFormProps) {
   const { addOrUpdatePrincipleReasoning } = useDocumentationDataService();
-
-  if (!principleId)
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("No principleId provided", { status: 404 });
-
-  const prinzip = prinzips.find(
-    ({ URLBezeichnung }) => URLBezeichnung === principleId,
-  );
-
-  if (!prinzip)
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("No Prinzip for slug found", { status: 404 });
-
-  const principleData = (
-    documentationData as DocumentationData
-  )?.principles?.find((p) => p.id === prinzip.documentId);
-
-  const answer = principleData?.answer ?? "";
-  const isPositive = answer === radioOptions[0];
-  const isIrrelevant = answer === radioOptions[2];
 
   const form = useSyncedForm({
     schema: principleAnswerSchemaV2,
@@ -85,18 +83,6 @@ export default function DocumentationPrincipleErlaeuterung() {
     currentUrl,
     nextUrl,
   });
-
-  // If no answer saved yet, redirect to answer page
-  if (!principleData?.answer) {
-    redirect(previousUrl);
-    return null;
-  }
-
-  const changeAnswerTitle = isPositive
-    ? "Sie haben angegeben, dass das Prinzip auf ihr Vorhaben zutrifft."
-    : isIrrelevant
-      ? "Sie haben angegeben, dass das Prinzip nicht relevant für Ihr Vorhaben ist."
-      : "Sie haben angegeben, dass das Prinzip nicht auf ihr Vorhaben zutrifft.";
 
   const explanationTitle = isPositive ? (
     "Erklären Sie, inwiefern Sie auf dieses Prinzip eingegangen sind"
@@ -142,6 +128,86 @@ export default function DocumentationPrincipleErlaeuterung() {
   );
 
   return (
+    <form {...form.getFormProps()} className="space-y-40">
+      <input {...form.getHiddenInputProps("answer")} />
+
+      <fieldset className="space-y-16">
+        <ExplanationLegend title={explanationTitle} helpText={helpText} />
+
+        {isPositive && (
+          <AspectPills
+            aspekte={prinzip.Aspekte}
+            scope={form.scope("aspects")}
+            error={form.error("aspects")}
+            warningInsteadOfError
+          >
+            Schwerpunkte auswählen
+          </AspectPills>
+        )}
+
+        <Textarea
+          scope={form.scope("reasoning")}
+          description={
+            isPositive
+              ? "Tragen Sie Ihre Erklärung ein z.B.: Online-Beratung wird ermöglicht, siehe § 1a"
+              : undefined
+          }
+          rows={5}
+          warningInsteadOfError
+        >
+          Erklärung
+        </Textarea>
+      </fieldset>
+
+      <DocumentationActions
+        previousUrl={previousUrl}
+        submit
+        showDownloadDraftButton
+        showSavingTip
+      />
+    </form>
+  );
+}
+
+export default function DocumentationPrincipleErlaeuterung() {
+  const { principleId } = useParams();
+  const { currentUrl, nextUrl, previousUrl, prinzips } =
+    useOutletContext<NavigationContext>();
+  const { documentationData } = useDocumentationDataService();
+
+  if (!principleId)
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
+    throw new Response("No principleId provided", { status: 404 });
+
+  const prinzip = prinzips.find(
+    ({ URLBezeichnung }) => URLBezeichnung === principleId,
+  );
+
+  if (!prinzip)
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
+    throw new Response("No Prinzip for slug found", { status: 404 });
+
+  const principleData = (
+    documentationData as DocumentationData
+  )?.principles?.find((p) => p.id === prinzip.documentId);
+
+  const answer = principleData?.answer ?? "";
+  const isPositive = answer === radioOptions[0];
+  const isIrrelevant = answer === radioOptions[2];
+
+  // If no answer saved yet, redirect to answer page
+  if (!principleData?.answer) {
+    redirect(previousUrl);
+    return null;
+  }
+
+  const changeAnswerTitle = isPositive
+    ? "Sie haben angegeben, dass das Prinzip auf ihr Vorhaben zutrifft."
+    : isIrrelevant
+      ? "Sie haben angegeben, dass das Prinzip nicht relevant für Ihr Vorhaben ist."
+      : "Sie haben angegeben, dass das Prinzip nicht auf ihr Vorhaben zutrifft.";
+
+  return (
     <>
       <MetaTitle prefix={`Dokumentation: ${prinzip.Name} – Erläuterung`} />
       <div className="max-w-a11y space-y-40">
@@ -181,44 +247,16 @@ export default function DocumentationPrincipleErlaeuterung() {
           </Link>
         </div>
 
-        <form {...form.getFormProps()} className="space-y-40">
-          <input {...form.getHiddenInputProps("answer")} />
-
-          <fieldset className="space-y-16">
-            <ExplanationLegend title={explanationTitle} helpText={helpText} />
-
-            {isPositive && (
-              <AspectPills
-                aspekte={prinzip.Aspekte}
-                scope={form.scope("aspects")}
-                error={form.error("aspects")}
-                warningInsteadOfError
-              >
-                Schwerpunkte auswählen
-              </AspectPills>
-            )}
-
-            <Textarea
-              scope={form.scope("reasoning")}
-              description={
-                isPositive
-                  ? "Tragen Sie Ihre Erklärung ein z.B.: Online-Beratung wird ermöglicht, siehe § 1a"
-                  : undefined
-              }
-              rows={5}
-              warningInsteadOfError
-            >
-              Erklärung
-            </Textarea>
-          </fieldset>
-
-          <DocumentationActions
-            previousUrl={previousUrl}
-            submit
-            showDownloadDraftButton
-            showSavingTip
-          />
-        </form>
+        <DocumentationPrincipleErlaeuterungForm
+          answer={answer}
+          prinzip={prinzip}
+          principleData={principleData}
+          isPositive={isPositive}
+          isIrrelevant={isIrrelevant}
+          currentUrl={currentUrl}
+          nextUrl={nextUrl}
+          previousUrl={previousUrl}
+        />
       </div>
     </>
   );
