@@ -52,9 +52,9 @@ jobs:
       - name: Commit to gh-pages branch
         uses: JamesIves/github-pages-deploy-action@d92aa235d04922e8f08b40ce78cc5442fcfbfa2f # v4.8.0
         with:
-          folder: build/client
+          folder: build/client/digitalcheck-dito
           branch: gh-pages
-          target-folder: previews/${{ github.head_ref || github.ref_name }} # previews/my-feature-branch/
+          # target-folder: previews/${{ github.head_ref || github.ref_name }} # previews/my-feature-branch/
           clean: false # Prevents one branch preview from deleting others
 
       - name: Wait for automatic Pages deployment
