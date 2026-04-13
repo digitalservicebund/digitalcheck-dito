@@ -1,0 +1,102 @@
+import{j as e,w as f}from"./chunk-UVKPFVEO-D1_djuSg.js";import{S as p}from"./DriveFileRenameOutline-Bt9Ijk-4.js";import{A as d}from"./AccordionItem-CsTz0Z41.js";import{B as u}from"./Badge-Cib9PIQm.js";import{D as s}from"./Button-R3L22qy0.js";import{H as t}from"./Heading-BZcaNK8Z.js";import{H as k}from"./Hero-CehFKQXQ.js";import{I as h}from"./ImageBox-D8TORSVB.js";import{I as o}from"./InfoBox-Dzbz0Om3.js";import{M as b}from"./Meta-DbldSXgK.js";import{N as c}from"./NewTabLink-CNzld1dL.js";import{N as a}from"./NumberedList-B88J4CiM.js";import{R as n}from"./RichText-Bh4xpFwt.js";import{S as w,T as r}from"./SidebarContainer-hTZXVqzJ.js";import{K as x}from"./staticRoutes-EB1edRq7.js";import{d as i}from"./dedentMultilineStrings-CWXKGsTI.js";import"./tailwindMerge-IXz7yBTV.js";import"./plausibleUtils-MJGLlQt3.js";import"./disclosure-D8CBQGYV.js";import"./use-resolve-button-type-CCQueg8z.js";import"./open-closed-CGqt3hyD.js";import"./close-provider-U6ERXist.js";import"./constants--3oyf-GA.js";import"./fileExtensionUtils-CXRZ7Pzr.js";import"./Container-DbCzdLCl.js";import"./Image--T_7DWgE.js";import"./ImageZoomable-0qUl8cC5.js";import"./ZoomInOutlined-D4hWhzJg.js";import"./ButtonContainer-Js-H-5Us.js";import"./DetailsSummary-A54g8wFD.js";import"./OpenInNewIcon-lFZWn6XG.js";import"./index-BUtifBDb.js";import"./utilFunctions-CBG9PTYO.js";import"./contact-u1KNilBO.js";const g=m=>e.jsxs("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",enableBackground:"new 0 0 24 24",height:24,viewBox:"0 0 24 24",width:24,"data-testid":"FeedOutlinedIcon",focusable:"false","aria-hidden":"true"},m,{children:[e.jsx("g",{children:e.jsx("path",{d:"M0,0h24v24H0V0z",fill:"none"})}),e.jsx("g",{children:e.jsx("path",{d:"M16,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V8L16,3z M19,19H5V5h10v4h4V19z M7,17h10v-2H7V17z M12,7H7 v2h5V7z M7,13h10v-2H7V13z"})})]})),ne=f(function(){const l="px-16 sm:px-56";return e.jsxs(e.Fragment,{children:[e.jsx(b,{prefix:x.title}),e.jsxs("main",{className:"space-y-80",children:[e.jsxs(k,{className:"mb-0 lg:mb-80",title:"Akteurinnen und Akteure identifizieren und Interviews vorbereiten",children:[e.jsx("p",{children:"Im folgenden Abschnitt finden Sie eine praxisnahe Anleitung zur strukturierten Vorbereitung und Durchführung von Interviews."}),e.jsx("p",{children:"Das Angebot wird derzeit weiterentwickelt, einschließlich der barrierefreien Optimierung der Vorlagen."}),e.jsx("p",{children:"Die Inhalte sind auf Basis von den unten aufgeführten Quellen entstanden."})]}),e.jsxs(w,{className:"space-y-80",sidebar:e.jsx(r,{title:"Inhalt",selector:"section[id], li[id]",children:e.jsxs(r.List,{className:"list-unstyled list-none",children:[e.jsx(r.Item,{href:"#anleitung",title:"Anleitung",after:e.jsxs(r.List,{className:"mt-0 list-none",children:[e.jsx(r.Item,{href:"#step-1",title:"Relevante Akteurinnen und Akteure identifizieren",numbered:!0}),e.jsx(r.Item,{href:"#step-2",title:"Halten Sie die Akteurinnen und Akteure in einer Übersicht fest",numbered:!0}),e.jsx(r.Item,{numbered:!0,href:"#step-3",title:"Gespräche durchführen"}),e.jsx(r.Item,{numbered:!0,href:"#step-4",title:"Auswerten"})]})}),e.jsx(r.Item,{href:"#checklist",title:"Checkliste"}),e.jsx(r.Item,{href:"#references",title:"Relevante Quellen"})]})}),children:[e.jsxs("section",{className:"container mt-80 space-y-40 lg:mt-0",id:"anleitung",children:[e.jsx("div",{children:e.jsxs(t,{tagName:"h2",className:"flex gap-32",children:[e.jsx(p,{className:"size-40"}),"Anleitung"]})}),e.jsxs(a,{className:"space-y-80",children:[e.jsxs(a.Item,{id:"step-1",after:e.jsxs(o,{className:l,look:"highlight",badge:{Icon:g,text:"Vorlage",look:"hint"},visual:{type:"component",Component:e.jsx(h,{image:{className:"min-w-208",url:"/images/interview-leitfaden-vorlage.png",alternativeText:"Eine Grafik, die eine beispielhafte Stakeholder-Map darstellt."}})},children:[e.jsx(n,{markdown:i`
+                      **Stakeholder-Map:**
+                      
+                      Mit diesem Template ordnen Sie Akteurinnen und Akteure präzise nach ihrer Betroffenheit zu. So schaffen Sie ein  Fundament für die Interviewplanung.
+                    `}),e.jsx(s,{look:"link",to:"/documents/interview-leitfaden/Akteurlandschaft_Analyse.pptx",children:"Powerpoint-Vorlage"})]}),children:[e.jsx(u,{children:"Schritt 1"}),e.jsx(t,{tagName:"h3",className:"mb-8",children:"Relevante Akteurinnen und Akteure identifizieren"}),e.jsx(n,{markdown:i`
+                    Zu Beginn wird ein Überblick über alle relevanten Akteurinnen und Akteure geschaffen. Ziel ist es, Personen oder Gruppen zu identifizieren, die von der Regelung betroffen sind oder an ihrer Umsetzung beteiligt sind. Dazu gehören sowohl direkt betroffene Akteure als auch solche, die vorbereitende, unterstützende oder steuernde Aufgaben übernehmen.
+                    
+                    Eine Einteilung nach Rollen hilft Ihnen dabei, die Akteur:innen systematisch zu ordnen:
+                    - **Wer setzt den Rechtsrahmen?**
+
+                      Akteurinnen und Akteure, die Gesetze oder Regelungen gestalten oder beeinflussen (z.B. Gerichte, EU-Institutionen).
+                    - **Wer setzt das Gesetz um?**
+                    
+                      Akteurinnen und Akteure, die die praktische Umsetzung übernehmen (z.B. Behörden, Vollzugsstellen, private Träger).
+                    - **Wen betrifft das Gesetz?**
+                    
+                      Akteurinnen und Akteure, die direkt betroffen sind (z.B. Bürgerinnen und Bürger, Unternehmen).
+                `})]}),e.jsxs(a.Item,{id:"step-2",after:e.jsxs("div",{className:"space-y-40",children:[e.jsxs(o,{className:l,look:"highlight",badge:{Icon:g,text:"Vorlage",look:"hint"},visual:{type:"component",Component:e.jsx(h,{image:{className:"min-w-208",url:"/images/interview-leitfaden-vorlage-schritt-2.png",alternativeText:"Eine Grafik, die eine beispielhafte Tabelle von Akteurinnen und Akteuren darstellt."}})},children:[e.jsx(n,{markdown:i`
+                          Nutzen Sie diese Tabelle zur systematischen Erfassung und Gewichtung Ihrer Gesprächs-partnerinnen und -partner. Dokumentieren Sie hier die Relevanz und den angestrebten Erkenntnisgewinn auf Basis der Leitfragen
+                    `}),e.jsx(s,{look:"link",to:"/documents/interview-leitfaden/Umsetzung_verstehen.docx",children:"Word-Vorlage"})]}),e.jsxs(o,{className:l,look:"highlight",badge:{Icon:g,text:"Vorlage",look:"hint"},visual:{type:"component",Component:e.jsx(h,{image:{className:"min-w-208",url:"/images/interview-leitfaden-vorlage-buergercheck.png",alternativeText:"Eine Grafik, die eine beispielhafte Tabelle zum besseren Verständnis von betroffenen Akteurinnen und Akteuren darstellt."}})},children:[e.jsx(n,{markdown:i`
+                          Nutzen Sie die Vorlage zur Zielgruppen-Profil aus dem Bürgercheck, um die Bedürfnisse der betroffenen Akteurinnen und Akteure (Normadressaten) tiefgreifend zu verstehen und diese gezielt zu priorisieren.
+                    `}),e.jsx(s,{look:"link",to:"/documents/interview-leitfaden/Zielgruppenanaylse-Buergercheck.pptx",children:"Powerpoint-Vorlage"})]})]}),children:[e.jsx(u,{children:"Schritt 2"}),e.jsx(t,{tagName:"h3",className:"mb-8",children:"Halten Sie die Akteurinnen und Akteure in einer Übersicht fest"}),e.jsx(n,{markdown:i`
+                    Im nächsten Schritt werden die identifizierten Akteurinnen und Akteure in einer Übersicht festgehalten. Diese dient als Arbeitsgrundlage für die weitere Interviewplanung und hilft, unterschiedliche Perspektiven gezielt abzudecken.
+
+                    Nutzen Sie die folgende Tabelle, um die Ebenen von Betroffenheit und Vollzug präzise abzubilden und relevante Interview-Partnerinnen und Partner zu identifizieren.
+
+                    Leitfragen zur Auswahl:
+                    - **Betroffenheit:** Wer ist unmittelbar oder mittelbar von der Regelung betroffen? Und wer ist wie stark betroffen?
+                    - **Entscheidungskompetenz:** Wer entscheidet oder beeinflusst Entscheidungen im Vollzug?
+                    - **Relevanz:** Welche Akteure verfügen über besonderes Fachwissen oder praktische Erfahrung?
+                    - **Zielsetzung:** Welches Wissen soll konkret erschlossen werden?
+                    - **Praxisnähe** Wer kann konkrete Auswirkungen und Herausforderungen beschreiben?
+
+                    **Tipp:** Kooperationen mit Verbänden oder Gewerkschaften erleichtern den Zugang zu spezifischen Zielgruppen - insbesondere bei schwer erreichbaren Akteurinnen und Akteuren wie Leistungsempfängern.
+              `})]}),e.jsxs(a.Item,{className:"*:max-w-a11y",id:"step-3",children:[e.jsx(u,{children:"Schritt 3"}),e.jsx(t,{tagName:"h3",className:"mb-8",children:"Gespräche durchführen"}),e.jsx(n,{markdown:i`
+                    Nach der Vorbereitung laden Sie Ihre Gesprächspartnerinnen und Gesprächspartner zum Interview ein und treten in den direkten Dialog. Ziel ist es, durch gezieltes Nachfragen die tatsächliche Umsetzungspraxis zu verstehen und blinde Flecken im Vollzug aufzudecken. Das Interview gliedert sich in drei Phasen:
+
+                    **Kontaktphase:** Schaffen Sie eine vertrauensvolle Gesprächsatmosphäre. Erläutern Sie nach der Begrüßung kurz Zweck, Ziele und Ablauf des Interviews. 
+
+                    **Erhebungsphase:** Beginnen Sie mit offenen Fragen und vertiefen Sie diese gezielt entlang Ihres Leitfadens. Achten Sie auf eine ausgewogene Kombination aus offenen und geschlossenen Fragen.
+                    Behandelt werden:
+                    - **Kontext:** Aufgaben und Abläufe klären
+                    - **Erfahrungen:** Probleme und Stärken identifizieren
+                    - **Analyse:** Ursachen herausarbeiten
+                    - **Lösungen:** Ansätze und Potenziale bewerten
+                    
+                    **Ausklang & Dokumentation**: Fassen Sie nach jedem Themenblock die zentralen Inhalte zusammen und dokumentieren Sie diese parallel zum Gespräch. Zum Abschluss danken Sie Ihrem Gegenüber und informieren über das weitere Vorgehen, um eine positive Grundlage für zukünftige Gespräche zu schaffen.
+              `}),e.jsx("br",{}),e.jsxs("p",{children:["Weiterführende Quelle:"," ",e.jsx(c,{to:"https://www.orghandbuch.de/SharedDocs/faqs/Webs/OHB/DE/Methoden_Befragung/13_Durchfuehrung_muendliches_Interview.html",children:"Orghandbuch des BMI 2026"})]}),e.jsx(t,{tagName:"h4",className:"ds-body-01-bold my-40",children:"Für die parallele Dokumentation bieten sich folgende Formen an:"}),e.jsx(d,{headline:"Wortgetreues Transkript",children:e.jsx(n,{markdown:i`
+                      Beim Transkript wird das Interview vollständig und möglichst wortgetreu verschriftlicht.
+                      
+                      **Vorteile:**
+                      - hohe Genauigkeit und Nachvollziehbarkeit
+                      - detaillierte Auswertung auch zu einem späteren Zeitpunkt möglich
+                      - besonders geeignet bei komplexen oder sensiblen Themen
+
+                      **Nachteile:**
+                      - sehr zeit- und ressourcenintensiv
+                      - hoher Aufwand bei Datenschutz und Anonymisierung
+                `})}),e.jsx(d,{headline:"Inhaltsnahe Mitschrift / Ergebnisprotokoll",children:e.jsx(n,{markdown:i`
+                      Hierbei werden die zentralen Aussagen, Argumente und Beispiele während oder unmittelbar nach dem Interview schriftlich festgehalten.
+
+                      **Vorteile:**
+                      - deutlich geringerer Aufwand
+                      - schnelle Weiterverarbeitung der Ergebnisse
+                      - gut geeignet bei klarer Fragestellung und begrenzter Interviewanzahl
+                      
+                      **Nachteile:**
+                      - geringere Detailtiefe
+                      - stärkere Abhängigkeit von der Interpretation der interviewführenden Person
+                `})}),e.jsx(d,{headline:"Audioaufzeichnung",children:e.jsx(n,{markdown:i`
+                      Das Interview wird aufgezeichnet und bei Bedarf später ausgewertet oder teilweise transkribiert.
+                      
+                      Voraussetzungen dafür sind:
+                      - vorherige ausdrückliche Einwilligung der befragten Person
+                      - klare Regelung zur Speicherung, Nutzung und Löschung
+
+                      **Vorteile:**
+                      - Entlastung während des Gesprächs
+
+                      **Nachteile:**
+                      - Möglichkeit, Aussagen später zu überprüfen
+                      - Transkription und spätere Auswertung bedeuten einen großen zeitlichen Invest
+                `})}),e.jsx(d,{headline:"Videoaufzeichnung",children:e.jsx(n,{markdown:i`
+                      Videoaufzeichnungen in der Praxis Videoformate sind aufgrund des hohen Datenschutz-Aufwands selten. Prüfen Sie vorab, ob die Relevanz für die Regelungserarbeitung den Aufwand rechtfertigt.
+                      
+                      Voraussetzungen dafür sind, dass:
+                      - Vertraulichkeit zugesichert und eingehalten wird,
+                      - personenbezogene Daten anonymisiert werden,
+                      - die Befragten über Art und Zweck der Dokumentation informiert sind.
+
+                      **Vorteile:**
+                      - zusätzliche Informationen durch Mimik und Gestik
+
+                      **Nachteile:**
+                      - hohe Hemmschwelle für Befragte
+                      - erhöhter Datenschutz- und Organisationsaufwand
+                      - meist nicht erforderlich für die Regelungserarbeitung
+                `})})]}),e.jsxs(a.Item,{id:"step-4",children:[e.jsx(u,{children:"Schritt 4"}),e.jsx(t,{tagName:"h3",className:"mb-8",children:"Auswerten"}),e.jsx(n,{markdown:i`
+                  In mehreren Gesprächen mit einer Dauer von 45 - 60 Minuten kommen eine Menge Informationen zusammen. Im Anschluss werden die gesammelten Informationen ausgewertet. In der Regel lassen sich aus mehreren Gesprächen zentrale Muster, Herausforderungen und Erfolgsfaktoren ableiten. Nutzen Sie ggf. die [Methode Individuelle Gesprächsauswertung](https://www.oeffentliches-gestalten.de/buch/erkennen/erkenntnisse-formulieren#individuelle-gespr%C3%A4chsauswertung), um Schlüsselaspekte herauszuarbeiten.
+              `})]})]})]}),e.jsx("hr",{className:"container"}),e.jsxs("section",{className:"container space-y-40",id:"checklist",children:[e.jsxs("div",{className:"space-y-8",children:[e.jsx(t,{tagName:"h2",children:"Alles auf einem Blick: Kompakte Checkliste zur Interviewführung"}),e.jsx("p",{children:"Nutzen Sie diese Zusammenfassung, um die methodische Qualität Ihrer Interviews abzusichern und eine lückenlose Vorbereitung sowie Nachbereitung sicherzustellen."})]}),e.jsxs(o,{className:l,look:"highlight",badge:{Icon:g,text:"Vorlage",look:"hint"},visual:{type:"component",Component:e.jsx(h,{image:{className:"min-w-208",url:"/images/interview-leitfaden-checkliste.png",alternativeText:"Eine Grafik, die einen Screenshot der Word-Checkliste darstellt."}})},children:[e.jsx(n,{markdown:i`
+                Die Checkliste bündelt die wichtigsten Handlungsempfehlungen für Vorbereitung, Durchführung und Nachbereitung.
+              `}),e.jsx(s,{look:"link",to:"/documents/interview-leitfaden/Ablaufplan_Interviewführung.docx",children:"Word-Vorlage"})]})]}),e.jsx("hr",{className:"container"}),e.jsxs("section",{className:"container space-y-8",id:"references",children:[e.jsx(t,{tagName:"h2",children:"Relevante Quellen"}),e.jsxs("ul",{children:[e.jsx("li",{children:e.jsx(c,{to:"https://www.oeffentliches-gestalten.de",children:"Öffentliches Gestalten"})}),e.jsx("li",{children:e.jsx(c,{to:"https://www.digitale-verwaltung.de/SharedDocs/downloads/Webs/DV/DE/servicehandbuch.pdf?__blob=publicationFile&v=5#page=18",children:"Servicehandbuch"})}),e.jsx("li",{children:e.jsx(c,{to:"https://servicestandard.gov.de/handbuch/#aus-der-praxis",children:"Servicestandard - Handbuch"})}),e.jsx("li",{children:e.jsx(s,{look:"link",to:"/documents/interview-leitfaden/Buergercheck.pdf",children:"Bürgercheck"})})]})]})]})]})]})});export{ne as default};

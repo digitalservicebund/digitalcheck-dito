@@ -1,0 +1,1 @@
+const r=(t,...c)=>{const n=t.reduce((e,d,m)=>e+d+(c[m]||""),""),s=/^[ \t]*(?=\S)/gm,a=(n.match(s)||[""]).map(e=>e.length),i=Math.min(...a),o=new RegExp(`^ {${i}}`,"gm");return n.replace(o,"").trim()};export{r as d};
