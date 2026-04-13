@@ -49,30 +49,10 @@ jobs:
           echo '{"showGesetzgebungsprozessOverview":true,"showInterviewLeitfaden":true,"showDCATAP":true,"showIOEuRechtContent":true,"simplifiedPrincipleFlow":true,"showStrapiDrafts":true}' > /tmp/feature-flags.json
           FEATURE_FLAGS_PATH=/tmp/feature-flags.json pnpm run build
 
-      - name: Prepare deploy directory
-        run: |
-          PREVIEW_DIR="previews/$PREVIEW_BRANCH"
-
-          # Copy static assets into the basename directory so URLs resolve correctly
-          # (Vite outputs assets at build/client/assets/ but references them as /<basename>/assets/)
-          for dir in build/client/*/; do
-            dirname=$(basename "$dir")
-            # Skip the basename directory itself
-            if [ "$dirname" != "$REPO_NAME" ]; then
-              cp -r "$dir" "$PREVIEW_DIR/$dirname"
-            fi
-          done
-
-          # Copy root-level static files (favicons, etc.)
-          find build/client -maxdepth 1 -type f -exec cp {} "$PREVIEW_DIR/" \;
-
-          # Create SPA fallback
-          cp "$PREVIEW_DIR/index.html" "$PREVIEW_DIR/404.html"
-
       - name: Commit to gh-pages branch
         uses: JamesIves/github-pages-deploy-action@d92aa235d04922e8f08b40ce78cc5442fcfbfa2f # v4.8.0
         with:
-          folder: $PREVIEW_DIR
+          folder: build/client
           branch: gh-pages
           target-folder: previews/${{ github.head_ref || github.ref_name }} # previews/my-feature-branch/
           clean: false # Prevents one branch preview from deleting others
