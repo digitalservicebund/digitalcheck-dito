@@ -1,0 +1,103 @@
+name: PR Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+concurrency:
+  group: preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    env:
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      REPO_NAME: ${{ github.event.repository.name }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v5
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Build preview
+        env:
+          PREVIEW_BUILD: "true"
+        run: |
+          export PREVIEW_BASE_PATH="/$REPO_NAME/pr/$PR_NUMBER/"
+          pnpm run build
+
+      - name: Create SPA fallback
+        run: cp build/client/index.html build/client/404.html
+
+      - name: Deploy to gh-pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git fetch origin gh-pages || true
+
+          if git rev-parse --verify origin/gh-pages >/dev/null 2>&1; then
+            git worktree add gh-pages-branch origin/gh-pages
+          else
+            git worktree add --orphan gh-pages-branch
+            cd gh-pages-branch
+            git checkout --orphan gh-pages
+            cd ..
+          fi
+
+          rm -rf "gh-pages-branch/pr/$PR_NUMBER"
+          mkdir -p "gh-pages-branch/pr/$PR_NUMBER"
+          cp -r build/client/* "gh-pages-branch/pr/$PR_NUMBER/"
+
+          cd gh-pages-branch
+          git add .
+          git commit -m "Deploy preview for PR #$PR_NUMBER" --allow-empty
+          git push origin HEAD:gh-pages
+
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const repoName = context.payload.repository.name;
+            const owner = context.repo.owner;
+            const previewUrl = `https://${owner}.github.io/${repoName}/pr/${prNumber}/`;
+            const body = `### Preview Deployment\n\nPreview is available at: ${previewUrl}\n\nLast updated: ${new Date().toISOString()}`;
+
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+            });
+            const botComment = comments.data.find(c =>
+              c.user.type === 'Bot' && c.body.includes('### Preview Deployment')
+            );
+
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body,
+              });
+            }

@@ -24,5 +24,7 @@ export default defineConfig({
      Fix disallowed MIME type errors when running in development mode.
      See https://github.com/vitejs/vite/discussions/13910#discussioncomment-8377145
   */
-  base: process.env.DEVELOPMENT ? "./" : undefined,
+  base:
+    process.env.PREVIEW_BASE_PATH ??
+    (process.env.DEVELOPMENT ? "./" : undefined),
 });

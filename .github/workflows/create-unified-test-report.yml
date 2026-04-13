@@ -9,9 +9,7 @@ on:
         required: true
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 jobs:
   merge-reports:
@@ -44,25 +42,42 @@ jobs:
           path: playwright-report
           retention-days: 14
 
-      - name: Create a unique directory for the report
+      - name: Deploy report to gh-pages
+        env:
+          RUN_ID: ${{ github.run_id }}
+          REPO_NAME: ${{ github.event.repository.name }}
+          REPO_OWNER: ${{ github.repository_owner }}
         run: |
-          mkdir -p _site/${{ github.run_id }}
-          mv playwright-report/* _site/${{ github.run_id }}/
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Upload artifact for Pages
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: _site
-          retention-days: 14
+          git fetch origin gh-pages || true
 
-      - name: Deploy to GitHub Pages
-        id: github-pages-deployment
-        uses: actions/deploy-pages@v5
+          if git rev-parse --verify origin/gh-pages >/dev/null 2>&1; then
+            git worktree add gh-pages-branch origin/gh-pages
+          else
+            git worktree add --orphan gh-pages-branch
+            cd gh-pages-branch
+            git checkout --orphan gh-pages
+            cd ..
+          fi
 
-      - name: Output github pages URL to summary
+          mkdir -p "gh-pages-branch/reports/$RUN_ID"
+          cp -r playwright-report/* "gh-pages-branch/reports/$RUN_ID/"
+
+          cd gh-pages-branch
+          git add .
+          git commit -m "Add test report for run $RUN_ID" --allow-empty
+          git push origin HEAD:gh-pages
+
+      - name: Output report URL to summary
+        env:
+          RUN_ID: ${{ github.run_id }}
+          REPO_NAME: ${{ github.event.repository.name }}
+          REPO_OWNER: ${{ github.repository_owner }}
         run: |
           echo "### Playwright Test Report" >> $GITHUB_STEP_SUMMARY
-          echo "${{ steps.github-pages-deployment.outputs.page_url }}${{ github.run_id }}/" >> $GITHUB_STEP_SUMMARY
+          echo "https://$REPO_OWNER.github.io/$REPO_NAME/reports/$RUN_ID/" >> $GITHUB_STEP_SUMMARY
 
       - name: Send failure to Slack
         uses: digitalservicebund/notify-on-failure-gha@8570032b46ae9c2b976ec41567f595746fa44b4e # v1.6.1
