@@ -1,0 +1,126 @@
+## 1. Grundlagen
+
+### 1.1 Verantwortlicher und Datenschutzbeauftragte/r
+
+Verantwortlich für die Verarbeitung von personenbezogenen Daten ist das Bundesministerium für Digitales und Staatsmodernisierung
+
+Alt-Moabit 140  
+10557 Berlin  
+E-Mail: info@bmds.bund.de
+
+Bei konkreten Fragen zum Schutz Ihrer Daten wenden Sie sich bitte an den Datenschutzbeauftragten des BMDS:
+
+Datenschutzbeauftragter des Bundesministeriums für Digitales und Staatsmodernisierung Alt-Moabit 140  
+10557 Berlin  
+E-Mail: bds@bmds.bund.de
+
+### 1.2 Personenbezogene Daten
+
+Personenbezogene Daten sind alle Informationen, die sich auf eine identifizierte oder identifizierbare natürliche Person beziehen. Als identifizierbar wird eine natürliche Person angesehen, die direkt oder indirekt — insbesondere mittels Zuordnung zu einer Kennung wie einem Namen, zu einer Kennnummer, zu Standortdaten und/oder zu einer Online-Kennung — identifiziert werden kann.
+
+### 1.3 Auftragsverarbeiter
+
+DigitalService GmbH des Bundes  
+Prinzessinnenstraße 8-14  
+10969 Berlin
+
+**Datenschutzbeauftragter des Auftragsverarbeiters**
+
+Des Weiteren können Sie datenschutzrechtliche Fragen auch an den Datenschutzbeauftragten des DigitalService richten. Diesen erreichen Sie unter folgender Adresse:
+
+E-Mail: datenschutz@digitalservice.bund.de
+
+## 2. Datenverarbeitung im Zusammenhang mit der Nutzung der Webseite
+
+### 2.1 Besuch dieser Seite
+
+Beim Besuch dieser Webseite werden folgende Protokolldaten erhoben:
+
+**Daten zum Nutzungsverhalten**
+
+- Zeitpunkt und Dauer des Besuchs
+- Aufgerufene Seiten
+- Bewegungs-, Klick- und Scrollverhalten
+
+**Technische Daten**
+
+- Gerätetyp
+- Betriebssystem des Geräts
+- Browser und Browserversion
+- Bildschirmauflösung
+
+Zweck der Datenverarbeitung ist, die Stabilität (Fehlerkorrektur) und Sicherheit des Angebotes zu gewährleisten
+und das BSI bei der Abwehr von Gefahren für die Kommunikationstechnik des Bundes zu unterstützen.
+Die Daten werden automatisch in sogenannte Logfiles (technische Protokolldateien) geschrieben und dort angelehnt an
+§ 5 BSIG für eine Dauer von 90 Tagen aufbewahrt. Danach werden sie automatisch gelöscht.
+Der Zugriff ist durch technische und organisatorische Maßnahmen nur einem festgelegten und nachvollziehbaren Kreis von
+entsprechend angewiesenen Administratorinnen und Administratoren möglich.
+Wir sind auf Grundlage von Artikel 6 Absatz 1 lit. e EU-Datenschutz-Grundverordnung (DSGVO) in Verbindung mit
+§ 5 BSI-Gesetz zur Speicherung der Daten zum Schutz vor Angriffen auf die Internetinfrastruktur des BMDS und der
+Kommunikationstechnik des Bundes über den Zeitpunkt Ihres Besuches hinaus verpflichtet.
+
+Der Datenverkehr zwischen Ihrem Webbrowser und den Servern des Dienstes erfolgt über eine verschlüsselte HTTPS-Verbindung. HTTPS ist eine gesicherte Variante des Verbindungsprotokolls (HTTP), mit dem Webbrowser und Server Daten (bspw.: Ihre Eingaben) über das Internet austauschen, um zu verhindern, dass unbefugte Dritte von diesen Kenntnis erhalten.
+
+Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. e) DSGVO i. V. m. § 3 BDSG. Die Datenverarbeitung dient der zielgerichteten und ausgewogenen Öffentlichkeitsarbeit sowie dem Schutz der IT-Infrastruktur des Bundes. Die damit verbundene Verarbeitung Ihrer Daten beim Besuch der Seite geschieht zu diesem Zweck. Für die Erfüllung dieser Verarbeitungszwecke ist die Verarbeitung der genannten personenbezogenen Daten erforderlich.
+
+Zur Verbesserung und Analyse des Nutzendenverhaltens setzen wir ein Produkt-Analyse-Tool (Posthog) ein, das uns anonym erhobene Daten über die Nutzung unserer Webseite liefert. Dies hilft uns, das Nutzendenverhalten zu verstehen und unsere Inhalte und Dienstleistungen kontinuierlich zu verbessern. Zu diesem Zweck wird Ihre Ihre IP-Adresse erhoben und sofort in ein anonymisiertes Format umgewandelt. Ab diesem Zeitpunkt werden keine personenbezogenen Daten mehr verarbeitet. Der Diensteanbieter Posthog verarbeitet keine personenbezogenen Daten von Ihnen.
+
+Weitere Informationen hierzu finden Sie in der Datenschutzerklärung von Posthog: [https://posthog.com/privacy](https://posthog.com/privacy).
+
+### 2.2 Datenverarbeitung im Rahmen der Kontaktaufnahme
+
+Die Verarbeitung personenbezogener Daten geschieht in Abhängigkeit des Kontaktweges. Hierbei kann zwischen Kontaktaufnahme per E-Mail, per Kontaktformular oder Telefon (Hotline) unterschieden werden.  
+Unabhängig von der Wahl des Kontaktwegs erfolgt die Verarbeitung der von Ihnen im Zuge der Kontaktaufnahme übermittelten Daten auf Grundlage von Artikel 6 Absatz 1 lit. e DSGVO in Verbindung mit § 3 BDSG zum Zweck der Bearbeitung Ihres Anliegens.
+
+#### 2.2.1 Kontaktaufnahme \- per E-Mail
+
+Bei Anfragen an die Kontakt-E-Mail-Adresse [digitalcheck@digitalservice.bund.de](mailto:digitalcheck@digitalservice.bund.de) werden durch den Auftragsverarbeiter ausschließlich solche Daten verarbeitet, die notwendig sind, um mit Ihnen zu kommunizieren. Hierzu gehören insbesondere jene personenbezogenen Informationen (z. B. Name, Vorname, Anschrift, E-Mail-Adresse usw.), die unmittelbar von Ihnen übersandt werden. Die Löschung der personenbezogenen Daten erfolgt sechs Monate nach dem Zugang der letzten E-Mail.
+
+#### 2.2.2 Kontaktaufnahme \- Kontaktformular / Terminbuchungsformular
+
+Bei Anfragen über ein Kontaktformular oder Terminbuchungsformular werden durch den Auftragsverarbeiter ausschließlich solche Daten verarbeitet, die notwendig sind, um mit Ihnen zu kommunizieren oder einen Termin zu vereinbaren. Hierzu gehören insbesondere jene personenbezogenen Informationen (z.B. Name, Vorname, E-Mail-Adresse usw.), die unmittelbar von Ihnen eingegeben und übersandt werden. Die Löschung der personenbezogenen Daten erfolgt sechs Monate nach dem Zugang der letzten E-Mail.
+
+#### 2.2.3 Kontaktaufnahme \- per Telefon
+
+Bei Anrufen an die Telefonnummer des Digitalcheck-Teams werden durch den Auftragsverarbeiter ausschließlich solche Daten verarbeitet, die notwendig sind, um mit Ihnen zu kommunizieren. Hierzu gehören insbesondere jene personenbezogenen Informationen (z. B. Name, Vorname, Anschrift, E-Mail-Adresse usw.), die unmittelbar von Ihnen genannt oder übersandt werden.
+
+### 2.3 Technischer Cookie (über die Session) zur Zwischenspeicherung der Antworten in der Vorprüfung
+
+Bei Nutzung des Services wird ein technischer Cookie verwendet, welcher in einer Zeichenkette die Antworten (Ja / Nein / Vielleicht) zwischenspeichert. Diese Antworten werden dafür verwendet, ein Zurückgehen in der Navigation zu unterstützen. Der Cookie ist kurzlebig und wird mit Saisonende oder spätestens nach sieben Tagen gelöscht. Im Cookie werden keine personenbezogenen Daten gespeichert oder verarbeitet.
+
+Name: user-answers<br/>
+Wert: Zeichenkette/Hash<br/>
+Löschfrist: Session, spätestens nach 7 Tagen.
+
+Funktionen:
+
+- Antworten der Vorprüfung zwischenzuspeichern und so ein zurückgehen durch die Fragen zu ermöglichen,
+- Antworten in eine PDF zu schreiben,
+- beinhaltet keine personenbezogenen Daten,
+- basiert nicht auf IP oder anderen auf tatsächlichen Nutzer zurückverfolgbaren Informationen,
+- Gültigkeit endet mit Ablauf der Sitzung, spätestens nach 7 Tagen.
+
+## 3. Datenempfänger
+
+Im Einzelfall kann es im Einzelfall zur Weitergabe von Daten an Dritte kommen, soweit wir hierzu rechtlich verpflichtet sind oder dies zur Abwehr einer Gefahr für die öffentliche Sicherheit, zur Verfolgung von Straftaten oder zur Abwehr von Angriffen auf unsere IT-Infrastrukturen erforderlich ist. Eine Weitergabe in anderen Fällen erfolgt nicht.
+
+## 4\. Ihre Rechte
+
+Sie haben gegenüber dem BMDS folgende Rechte hinsichtlich der Sie betreffenden personenbezogenen Daten:
+
+- **Recht auf Auskunft, Art. 15 DSGVO**  
+  Mit dem Recht auf Auskunft erhält der Betroffene eine umfassende Einsicht in die ihn angehenden Daten und einige andere wichtige Kriterien wie beispielsweise die Verarbeitungszwecke oder die Dauer der Speicherung. Es gelten die in § 34 BDSG geregelten Ausnahmen von diesem Recht.
+- **Recht auf Berichtigung, Art. 16 DSGVO**  
+  Das Recht auf Berichtigung beinhaltet die Möglichkeit für den Betroffenen, unrichtige oder unvollständige ihn angehende personenbezogene Daten korrigieren zu lassen.
+- **Recht auf Löschung, Art. 17 DSGVO**  
+  Das Recht auf Löschung beinhaltet die Möglichkeit für den Betroffenen, Daten beim Verantwortlichen löschen zu lassen. Dies ist allerdings nur dann möglich, wenn die ihn angehenden personenbezogenen Daten nicht mehr notwendig sind, rechtswidrig verarbeitet werden oder eine diesbezügliche Einwilligung widerrufen wurde. Es gelten die in § 35 BDSG geregelten Ausnahmen von diesem Recht.
+- **Recht auf Einschränkung der Verarbeitung, Art. 18 DSGVO**  
+  Das Recht auf Einschränkung der Verarbeitung beinhaltet die Möglichkeit für den Betroffenen, eine weitere Verarbeitung der ihn angehenden personenbezogenen Daten vorerst zu verhindern. Eine Einschränkung tritt vor allem in der Prüfungsphase anderer Rechtewahrnehmungen durch den Betroffenen ein.
+- **Recht auf Widerspruch gegen die Erhebung, Verarbeitung und bzw. oder Nutzung, Art. 21 DSGVO**  
+  Das Recht auf Widerspruch beinhaltet die Möglichkeit, für Betroffene, in einer besonderen Situation der weiteren Verarbeitung ihrer personenbezogenen Daten zu widersprechen, soweit diese durch die Wahrnehmung öffentlicher Aufgaben oder öffentlicher sowie privater Interessen gerechtfertigt ist. Es gelten die in § 36 BDSG geregelten Ausnahmen von diesem Recht.
+- **Recht auf Datenübertragbarkeit, Art. 20 DSGVO**  
+  Das Recht auf Datenübertragbarkeit beinhaltet die Möglichkeit für den Betroffenen, die ihn angehenden personenbezogenen Daten in einem gängigen, maschinenlesbaren Format vom Verantwortlichen zu erhalten, um sie ggf. an einen anderen Verantwortlichen weiterleiten zu lassen. Gemäß Art. 20 Abs. 3 Satz 2 DSGVO steht dieses Recht aber dann nicht zur Verfügung, wenn die Datenverarbeitung der Wahrnehmung öffentlicher Aufgaben dient.
+
+Ihnen steht zudem gemäß Art. 77 DSGVO ein Beschwerderecht bei der datenschutzrechtlichen Aufsichtsbehörde, der Bundesbeauftragten für den Datenschutz und die Informationsfreiheit, zu.
+
+Sie können sich mit Fragen und Beschwerden auch an BDS@bmds.bund.de wenden.
