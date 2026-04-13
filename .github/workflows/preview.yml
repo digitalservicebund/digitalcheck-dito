@@ -45,9 +45,7 @@ jobs:
       - name: Build preview
         env:
           PREVIEW_BUILD: "true"
-        run: |
-          export PREVIEW_BASE_PATH="/$REPO_NAME/pr/$PR_NUMBER/"
-          pnpm run build
+        run: pnpm run build
 
       # - name: Prepare deploy directory
       #   run: |
