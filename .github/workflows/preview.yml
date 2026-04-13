@@ -45,7 +45,9 @@ jobs:
       - name: Build preview
         env:
           PREVIEW_BUILD: "true"
-        run: pnpm run build
+        run: |
+          echo '{"showGesetzgebungsprozessOverview":true,"showInterviewLeitfaden":true,"showDCATAP":true,"showIOEuRechtContent":true,"simplifiedPrincipleFlow":true,"showStrapiDrafts":true}' > /tmp/feature-flags.json
+          FEATURE_FLAGS_PATH=/tmp/feature-flags.json pnpm run build
 
       # - name: Prepare deploy directory
       #   run: |

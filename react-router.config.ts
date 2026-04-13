@@ -41,8 +41,9 @@ const previewPaths = [
   // Fundamentals (skip /grundlagen — redirects to /methoden/fuenf-prinzipien)
   "/grundlagen/digitaltauglichkeit",
   "/grundlagen/normenkontrollrat",
-  // Interoperability (skip /interoperabel/loesungen — redirects)
+  // Interoperability (skip /interoperabel/loesungen — redirects to /interoperabel)
   "/interoperabel",
+  "/interoperabel/loesungen/dcat-ap",
   "/interoperabel/nationale-kontaktstelle",
   "/interoperabel/faq",
   // Examples (skip /beispiele/prinzipien — redirects to first principle)
@@ -53,7 +54,7 @@ const previewPaths = [
 export default {
   ssr: true,
   ...(isPreview && {
-    basename: process.env.PREVIEW_BASE_PATH,
+    basename: process.env.PREVIEW_BASE_PATH?.replace(/\/?$/, "/"),
     prerender: previewPaths,
     routeDiscovery: { mode: "initial" },
   }),
