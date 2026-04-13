@@ -66,9 +66,10 @@ export default function Index() {
               <Feature>
                 <ViewListTwoTone className="fill-ds-feature size-80" />
                 <p>
-                  Sie werden <strong>Schritt für Schritt</strong> geführt und
-                  setzen eigene <strong>Schwerpunkte</strong>. Beispiele
-                  erleichtern das Erfassen der Digitaltauglichkeit.
+                  Sie werden <strong>Schritt für Schritt</strong> durch den
+                  Prozess geführt und setzen eigene{" "}
+                  <strong>Schwerpunkte</strong>. Beispiele erleichtern das
+                  Erfassen der Digitaltauglichkeit.
                 </p>
               </Feature>
               <Feature>
@@ -110,7 +111,7 @@ export default function Index() {
                 </p>
                 <p>
                   Exportieren Sie Ihre Eingaben als Word-Datei und schicken Sie
-                  sie zu jedem Zeitpunkt per E-Mail an den NKR.
+                  diese zu jedem Zeitpunkt per E-Mail an den NKR.
                 </p>
               </NumberedList.Item>
             </NumberedList>
@@ -136,13 +137,14 @@ export default function Index() {
               </p>
               <p>
                 <strong>Zweite Meinung nutzen:</strong> Teilen Sie
-                Zwischenstände mit Kollegen und Kolleginnen, um Feedback
+                Zwischenstände mit Kolleginnen und Kollegen, um Feedback
                 einzuholen.
               </p>
               <p>
-                <strong>Visualisierung einbeziehen:</strong> Verwenden Sie
-                bestehende Visualisierungen mit den fünf Prinzipien als
-                Grundlage und senden Sie sie am Ende mit an den NKR.
+                <strong>Visualisierung einbeziehen:</strong> Nutzen Sie Ihre
+                bereits selbst erstellten Visualisierungen (auf Basis der fünf
+                Prinzipien) als Grundlage und senden Sie diese am Ende an den
+                NKR.
               </p>
             </InfoBox>
           </Container>

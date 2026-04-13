@@ -105,7 +105,7 @@ function DocumentationPrincipleErlaeuterungForm({
         Diese dienen Ihnen als roter Faden für Ihre Erklärung. So formulieren
         Sie präzise und stellen sicher, dass Ihre Regelung das Prinzip erfüllt.
       </p>
-      <p>Geben Sie die dazugehörigen Paragrafen an!</p>
+      <p>Geben Sie auch die dazugehörigen Paragrafen an.</p>
       {prinzip.Aspekte.map((aspect) => (
         <DetailsSummary
           key={aspect.Kurzbezeichnung}
@@ -117,12 +117,12 @@ function DocumentationPrincipleErlaeuterungForm({
     </>
   ) : isIrrelevant ? (
     <>
-      Bitte erläutern Sie, warum das Prinzip “{prinzip.Name}”{" "}
+      Bitte erläutern Sie, warum das Prinzip „{prinzip.Name}“{" "}
       <strong>nicht relevant</strong> für Ihr Vorhaben ist
     </>
   ) : (
     <>
-      Bitte erläutern Sie, warum das Prinzip “{prinzip.Name}”{" "}
+      Bitte erläutern Sie, warum das Prinzip „{prinzip.Name}“{" "}
       <strong>nicht</strong> auf Ihr Vorhaben zutrifft
     </>
   );
@@ -149,7 +149,7 @@ function DocumentationPrincipleErlaeuterungForm({
           scope={form.scope("reasoning")}
           description={
             isPositive
-              ? "Tragen Sie Ihre Erklärung ein z.B.: Online-Beratung wird ermöglicht, siehe § 1a"
+              ? "Tragen Sie Ihre Erklärung ein, z. B.: Online-Beratung wird ermöglicht, siehe § 1a"
               : undefined
           }
           rows={5}
@@ -219,7 +219,7 @@ export default function DocumentationPrincipleErlaeuterung() {
             {prinzip.Name}
             <HelpButton
               sectionId="prinzip"
-              title={`Hinweis zu "${prinzip.Name}"`}
+              title={`Hinweis zu „${prinzip.Name}“`}
               className="h-28 w-28"
             >
               <BlocksRenderer content={prinzip.Beschreibung} />

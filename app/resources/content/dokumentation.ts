@@ -42,7 +42,7 @@ export const digitalDocumentation = {
   start: {
     title: "Dokumentation der Digitaltauglichkeit",
     subtitle:
-      "Die Dokumentation der Digitaltauglichkeit ist ein formeller, letzter Schritt. Sie dokumentieren, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben, und wie sie ins Regelungsvorhaben eingeflossen sind.",
+      "Die Dokumentation der Digitaltauglichkeit ist ein formeller, letzter Schritt. Sie dokumentieren, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben und wie diese ins Regelungsvorhaben eingeflossen sind.",
     actions: {
       startInitial: {
         buttonText: "Dokumentation starten",
@@ -215,7 +215,7 @@ export const digitalDocumentation = {
     moreButton: "Mehr dazu",
     moreInfoButton: "Mehr erfahren",
     question:
-      "Schafft das Regelungsvorhaben die rechtlichen Vorraussetzungen für die Umsetzung des Prinzips?",
+      "Schafft das Regelungsvorhaben die rechtlichen Voraussetzungen für die Umsetzung des Prinzips?",
     radioOptions: ["Ja, gänzlich oder teilweise", "Nein", "Nicht relevant"],
     textFieldExplanationLabel: "Erklärung:",
     textFieldNegativeReasoningLabel: "Begründung:",
@@ -301,7 +301,7 @@ export const digitalDocumentation = {
   },
   summary: {
     headline: "Prüfen Sie Ihre Angaben",
-    text: "Bevor Sie die Dokumentation abschließen und zum NKR senden, prüfen Sie bitte Ihre Angaben und ändern Sie sie bei Bedarf.",
+    text: "Bevor Sie die Dokumentation abschließen und zum NKR senden, prüfen Sie bitte Ihre Angaben und ändern Sie diese bei Bedarf.",
     buttonEdit: {
       text: "Bearbeiten",
       ariaLabelSuffix: " bearbeiten",
@@ -326,7 +326,7 @@ export const digitalDocumentation = {
     heading: {
       text: "Dokumentation abschließen",
       markdown:
-        "Jetzt laden Sie die ausgefüllte Dokumentation herunter und senden sie an den NKR. Optional können Sie sie vorher zur Abstimmung verschicken.",
+        "Laden Sie die ausgefüllte Dokumentation herunter und leiten Sie diese an den NKR weiter. Optional können Sie das Dokument vorab zur Abstimmung versenden.",
     },
     download: {
       heading: "Dokumentation herunterladen",

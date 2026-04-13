@@ -59,7 +59,7 @@ export default function DocumentationPrincipleV2({
             {prinzip.Name}
             <HelpButton
               sectionId="1-prinzip"
-              title={`Hinweis zu "${prinzip.Name}"`}
+              title={`Hinweis zu „${prinzip.Name}“`}
               className="h-28 w-28"
             >
               <BlocksRenderer content={prinzip.Beschreibung} />
@@ -84,18 +84,18 @@ export default function DocumentationPrincipleV2({
             look="ds-heading-03-reg"
             className="mb-16"
           >
-            Schafft das Regelungsvorhaben die rechtlichen Vorraussetzungen für
+            Schafft das Regelungsvorhaben die rechtlichen Voraussetzungen für
             die Umsetzung des Prinzips?
             <HelpButton
               sectionId="2-answers"
               title={
-                'Hinweis zu "Schafft das Regelungsvorhaben die rechtlichen Voraussetzungen für die Umsetzung des Prinzips?"'
+                "Hinweis zu „Schafft das Regelungsvorhaben die rechtlichen Voraussetzungen für die Umsetzung des Prinzips?“"
               }
               className="h-28 w-28"
             >
               <p>
-                Geben Sie hier an ob das Prinzip &ldquo;{prinzip.Name}&rdquo;
-                auf Ihr Regelungsvorhaben zutrifft.
+                Geben Sie hier an ob das Prinzip “{prinzip.Name}&rdquo; auf Ihr
+                Regelungsvorhaben zutrifft.
               </p>
             </HelpButton>
           </Heading>
