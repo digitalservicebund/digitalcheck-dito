@@ -39,8 +39,25 @@ jobs:
           export PREVIEW_BASE_PATH="/$REPO_NAME/pr/$PR_NUMBER/"
           pnpm run build
 
-      - name: Create SPA fallback
-        run: cp build/client/index.html build/client/404.html
+      - name: Prepare deploy directory
+        run: |
+          PREVIEW_DIR="build/client/$REPO_NAME/pr/$PR_NUMBER"
+
+          # Copy static assets into the basename directory so URLs resolve correctly
+          # (Vite outputs assets at build/client/assets/ but references them as /<basename>/assets/)
+          for dir in build/client/*/; do
+            dirname=$(basename "$dir")
+            # Skip the basename directory itself
+            if [ "$dirname" != "$REPO_NAME" ]; then
+              cp -r "$dir" "$PREVIEW_DIR/$dirname"
+            fi
+          done
+
+          # Copy root-level static files (favicons, etc.)
+          find build/client -maxdepth 1 -type f -exec cp {} "$PREVIEW_DIR/" \;
+
+          # Create SPA fallback
+          cp "$PREVIEW_DIR/index.html" "$PREVIEW_DIR/404.html"
 
       - name: Deploy to gh-pages
         run: |
@@ -58,9 +75,10 @@ jobs:
             cd ..
           fi
 
-          rm -rf "gh-pages-branch/pr/$PR_NUMBER"
-          mkdir -p "gh-pages-branch/pr/$PR_NUMBER"
-          cp -r build/client/* "gh-pages-branch/pr/$PR_NUMBER/"
+          # Copy the basename-prefixed output to gh-pages root
+          rm -rf "gh-pages-branch/$REPO_NAME/pr/$PR_NUMBER"
+          mkdir -p "gh-pages-branch/$REPO_NAME/pr/$PR_NUMBER"
+          cp -r "build/client/$REPO_NAME/pr/$PR_NUMBER/"* "gh-pages-branch/$REPO_NAME/pr/$PR_NUMBER/"
 
           cd gh-pages-branch
           git add .

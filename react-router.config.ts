@@ -52,5 +52,9 @@ const previewPaths = [
 
 export default {
   ssr: true,
-  ...(isPreview && { prerender: previewPaths }),
+  ...(isPreview && {
+    basename: process.env.PREVIEW_BASE_PATH,
+    prerender: previewPaths,
+    routeDiscovery: { mode: "initial" },
+  }),
 } satisfies Config;
