@@ -1,5 +1,62 @@
 import type { Config } from "@react-router/dev/config";
+import { isPreview } from "./app/utils/isPreview";
 
-export default {
+const prodConfig = {
   ssr: true,
 } satisfies Config;
+
+const previewPaths = [
+  "/",
+  "/impressum",
+  "/datenschutz",
+  "/barrierefreiheit",
+  "/sitemap",
+  "/das-ist-neu",
+  "/unterstuetzung",
+  // Precheck
+  "/vorpruefung",
+  "/vorpruefung/hinweise",
+  "/vorpruefung/ergebnis",
+  "/vorpruefung/it-system",
+  "/vorpruefung/verpflichtungen-fuer-beteiligte",
+  "/vorpruefung/datenaustausch",
+  "/vorpruefung/kommunikation",
+  "/vorpruefung/automatisierung",
+  "/vorpruefung/eu-bezug",
+  // Methods
+  "/methoden",
+  "/methoden/fuenf-prinzipien",
+  "/methoden/visualisieren",
+  "/methoden/visualisieren/flussdiagramm",
+  "/methoden/zustaendige-akteurinnen-auflisten",
+  "/methoden/it-systeme-erfassen",
+  "/methoden/technische-umsetzbarkeit",
+  "/methoden/interview-leitfaden",
+  "/methoden/interview-leitfaden-schritte",
+  // Documentation
+  "/dokumentation",
+  "/dokumentation/hinweise",
+  "/dokumentation/regelungsvorhaben-titel",
+  "/dokumentation/beteiligungsformate",
+  "/dokumentation/zusammenfassung",
+  "/dokumentation/absenden",
+  // Fundamentals (skip /grundlagen — redirects to /methoden/fuenf-prinzipien)
+  "/grundlagen/digitaltauglichkeit",
+  "/grundlagen/normenkontrollrat",
+  // Interoperability (skip /interoperabel/loesungen — redirects)
+  "/interoperabel",
+  "/interoperabel/nationale-kontaktstelle",
+  "/interoperabel/faq",
+  // Examples (skip /beispiele/prinzipien — redirects to first principle)
+  "/beispiele",
+  "/beispiele/visualisierungen",
+];
+
+const previewConfig = {
+  ssr: true,
+  prerender: previewPaths,
+  basename: process.env.PREVIEW_BASE_PATH || "/",
+  routeDiscovery: { mode: "initial" },
+} satisfies Config;
+
+export default isPreview ? previewConfig : prodConfig;
