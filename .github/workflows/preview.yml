@@ -49,6 +49,30 @@ jobs:
           echo '{"showGesetzgebungsprozessOverview":true,"showInterviewLeitfaden":true,"showDCATAP":true,"showIOEuRechtContent":true,"simplifiedPrincipleFlow":true,"showStrapiDrafts":true}' > /tmp/feature-flags.json
           FEATURE_FLAGS_PATH=/tmp/feature-flags.json pnpm run build
 
+      - name: Copy static assets into preview directory
+        run: |
+          PREVIEW_DIR="build/client/digitalcheck-dito/previews/$PREVIEW_BRANCH"
+          # Vite outputs assets/images/logos etc. at build/client/ root,
+          # but the HTML references them under the basename prefix.
+          # Copy them into the preview directory so paths resolve on GitHub Pages.
+          for dir in build/client/*/; do
+            dirname=$(basename "$dir")
+            if [ "$dirname" != "digitalcheck-dito" ]; then
+              cp -r "$dir" "$PREVIEW_DIR/$dirname"
+            fi
+          done
+          # Copy root-level static files (favicons, etc.)
+          find build/client -maxdepth 1 -type f -exec cp {} "$PREVIEW_DIR/" \;
+          # Also copy static dirs to deploy root for hardcoded absolute paths
+          # (e.g. <img src="/logo/bund-logo.png"> in PageHeader/Footer)
+          for dir in build/client/*/; do
+            dirname=$(basename "$dir")
+            if [ "$dirname" != "digitalcheck-dito" ]; then
+              cp -r "$dir" "build/client/digitalcheck-dito/$dirname"
+            fi
+          done
+          find build/client -maxdepth 1 -type f -exec cp {} "build/client/digitalcheck-dito/" \;
+
       - name: Commit to gh-pages branch
         uses: JamesIves/github-pages-deploy-action@d92aa235d04922e8f08b40ce78cc5442fcfbfa2f # v4.8.0
         with:
