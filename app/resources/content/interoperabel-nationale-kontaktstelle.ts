@@ -5,6 +5,7 @@ import {
   ROUTE_SUPPORT,
   ROUTE_SUPPORT_TRAININGS,
 } from "~/resources/staticRoutes";
+import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { getTabAnchorLink } from "~/utils/tabs";
 import { contact } from "./shared/contact";
@@ -31,7 +32,7 @@ export const spoc = {
       In Deutschland bettet sich diese Anforderung in die föderale Zusammenarbeit wie folgt ein:
     `,
     image: {
-      url: "/images/prozess-nationale-kontaktstelle.png",
+      url: assetPath("/images/prozess-nationale-kontaktstelle.png"),
       alternativeText:
         "Netzwerkdiagramm, das die Interaktionen verschiedener deutscher und EU-Behörden im Kontext der EU-Interoperabilitätsverordnung zeigt. Es verdeutlicht, wie Akteurinnen und Akteure wie der IT-Planungsrat, die Nationale Kontaktstelle, das BMDS und die EU-Kommission bei der Umsetzung, Koordination und dem Reporting zusammenarbeiten.",
     },
@@ -135,7 +136,9 @@ export const spoc = {
           Die inhaltlichen Schnittmengen zwischen dem Erarbeitungsprozess für digitaltaugliche Regelungen und dem Interoperabilitäts-Assessment sind identifiziert und analysiert. Der daraus entstandene Prozess wird in den Digitalcheck-Kontaktpunkten umgesetzt. Darauf aufbauend passen wir die Erarbeitungsmethoden an. Ziel ist es, den gesamten Entwicklungsprozess effizienter und zielgerichteter zu gestalten.
         `,
         image: {
-          url: "/images/synthese-prozess-digitalcheck-und-interoperabilitaet.png",
+          url: assetPath(
+            "/images/synthese-prozess-digitalcheck-und-interoperabilitaet.png",
+          ),
           alternativeText:
             "Die Abbildung zeigt ein strukturiertes Vorgehensmodell für den Digitalcheck und die Interoperabilitätsbewertung. Das Vorgehen des Digitalchecks und der Interoperabilitätsbewertung wird in einem neuen Prozess zusammengefasst. Er umfasst drei Hauptbereiche: Zunächst werden Akteurinnen und Akteure identifiziert, bestehende Prozesse visualisiert und neue Prozesse entwickelt. Danach werden rechtliche Rahmenbedingungen untersucht, digitale Chancen analysiert und Anforderungen definiert. Schließlich erfolgt die Umsetzung, die Nutzung bestehender oder die Entwicklung neuer Lösungen, bevor alles dokumentiert wird. Durch die visuelle Darstellung wird der neue, gebündelte Ansatz im Prozess verdeutlicht.",
         },
@@ -162,7 +165,7 @@ export const spoc = {
           Die Bedeutung des IEA für das föderale IT-Architekturboard sowie Unterstützungsmöglichkeiten durch die Nationale Kontaktstelle wurden vorgestellt. 
         `,
         image: {
-          url: "/images/interoperabilitaet-it-planungsrat.png",
+          url: assetPath("/images/interoperabilitaet-it-planungsrat.png"),
           alternativeText:
             "Die Abbildung zeigt ein strukturiertes Vorgehensmodell für die Interoperabilitätsbewertung. Alle Steckbriefe werden von der FITKO überprüft, die letztendliche Entscheidung trifft der IT-Planungsrat. Die Dokumentation bei Interoperabilitätsbezug muss bei der EU-Kommission eingereicht werden. Die Nationale Kontaktstelle steht während des gesamten Prozesses unterstützend zur Verfügung.",
         },

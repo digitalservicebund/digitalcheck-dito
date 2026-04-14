@@ -10,6 +10,7 @@ import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { methodsTasksProcesses } from "~/resources/content/methode-visualisieren.ts";
 import { ROUTE_METHODS_VISUALIZE } from "~/resources/staticRoutes.ts";
+import { assetPath } from "~/utils/assetPath";
 
 export default function Visualization() {
   return (
@@ -42,7 +43,9 @@ export default function Visualization() {
             </Heading>
             <ImageBox
               image={{
-                url: "/images/von-schriftform-zur-visualisierung.png",
+                url: assetPath(
+                  "/images/von-schriftform-zur-visualisierung.png",
+                ),
                 caption: methodsTasksProcesses.usage.visualization.caption,
                 alternativeText:
                   methodsTasksProcesses.usage.visualization.altText,

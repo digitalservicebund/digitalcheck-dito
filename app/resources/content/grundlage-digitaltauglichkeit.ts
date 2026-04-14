@@ -3,6 +3,7 @@ import {
   HistoryToggleOffOutlined,
   WidgetsOutlined,
 } from "@digitalservicebund/icons";
+import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const fundamentalsDigitalReadiness = {
@@ -62,7 +63,7 @@ export const fundamentalsDigitalReadiness = {
   },
   phasesImage: {
     img: {
-      url: "/images/ablaufdiagramm-v3-deutsch.jpg",
+      url: assetPath("/images/ablaufdiagramm-v3-deutsch.jpg"),
       alternativeText:
         "Flussdiagramm, das drei Pfade nach einer Vorprüfung zum Digitalbezug zeigt: 1. Kein Digitalbezug: Ergebnis-E-Mail. 2. Digitalbezug: E-Mail, Anleitung, Dokumentation, Prüfung. 3. Digitalbezug & Interoperabilität: E-Mail an zwei Stellen, Anleitung mit Support, Dokumentation, Bereitstellung auf EU-Portal.",
       caption: dedent`

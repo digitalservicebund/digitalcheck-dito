@@ -6,6 +6,7 @@ import {
   ROUTE_PRECHECK_RESULT,
 } from "~/resources/staticRoutes";
 import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
+import { assetPath } from "~/utils/assetPath";
 import { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
@@ -47,7 +48,9 @@ export const preCheck = {
       process: {
         heading: "So gehen Sie vor:",
         image: {
-          url: "/images/prozess-vorpruefung-mit-interoperabilitaet.jpg",
+          url: assetPath(
+            "/images/prozess-vorpruefung-mit-interoperabilitaet.jpg",
+          ),
           caption:
             "Der Ablauf des Digitalchecks: Von der Vorprüfung bis zur Dokumentation",
           alternativeText:

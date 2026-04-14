@@ -121,7 +121,9 @@ export default function InterviewMethods() {
                         <ImageBox
                           image={{
                             className: "min-w-208",
-                            url: "/images/interview-leitfaden-vorlage.png",
+                            url: assetPath(
+                              "/images/interview-leitfaden-vorlage.png",
+                            ),
                             alternativeText:
                               "Eine Grafik, die eine beispielhafte Stakeholder-Map darstellt.",
                           }}
@@ -186,7 +188,9 @@ export default function InterviewMethods() {
                           <ImageBox
                             image={{
                               className: "min-w-208",
-                              url: "/images/interview-leitfaden-vorlage-schritt-2.png",
+                              url: assetPath(
+                                "/images/interview-leitfaden-vorlage-schritt-2.png",
+                              ),
                               alternativeText:
                                 "Eine Grafik, die eine beispielhafte Tabelle von Akteurinnen und Akteuren darstellt.",
                             }}
@@ -223,7 +227,9 @@ export default function InterviewMethods() {
                           <ImageBox
                             image={{
                               className: "min-w-208",
-                              url: "/images/interview-leitfaden-vorlage-buergercheck.png",
+                              url: assetPath(
+                                "/images/interview-leitfaden-vorlage-buergercheck.png",
+                              ),
                               alternativeText:
                                 "Eine Grafik, die eine beispielhafte Tabelle zum besseren Verständnis von betroffenen Akteurinnen und Akteuren darstellt.",
                             }}
@@ -416,7 +422,9 @@ export default function InterviewMethods() {
                   <ImageBox
                     image={{
                       className: "min-w-208",
-                      url: "/images/interview-leitfaden-checkliste.png",
+                      url: assetPath(
+                        "/images/interview-leitfaden-checkliste.png",
+                      ),
                       alternativeText:
                         "Eine Grafik, die einen Screenshot der Word-Checkliste darstellt.",
                     }}

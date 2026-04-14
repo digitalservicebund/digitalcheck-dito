@@ -10,6 +10,7 @@ import {
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
+import { assetPath } from "~/utils/assetPath";
 import { getTabAnchorLink } from "~/utils/tabs";
 import { tabIds } from "./tabIds";
 
@@ -295,7 +296,9 @@ export const HintergrundTab = () => (
       </DetailsSummary>
       <ImageZoomable
         image={{
-          url: "/images/kriterien-interoperabilitaetsbewertung-entscheidungsbaum.png",
+          url: assetPath(
+            "/images/kriterien-interoperabilitaetsbewertung-entscheidungsbaum.png",
+          ),
           alternativeText:
             "Ein Entscheidungsdiagramm zur Bestimmung der Verpflichtung zur Interoperabilitätsbewertung. Es beginnt mit der Frage, ob es sich um eine verbindliche Anforderung handelt. Je nach Antwort folgen verschiedene Entscheidungsstufen: Offenheit für Änderungen, Verpflichtung, digitale öffentliche Dienstleistungen, betroffene Akteure und Notwendigkeit des Austauschs in Netzwerken oder Informationssystemen. Wenn alle Bedingungen erfüllt sind, führt der Prozess zur verpflichtenden Interoperabilitätsbewertung. Andernfalls ist sie nicht verpflichtend.",
         }}
