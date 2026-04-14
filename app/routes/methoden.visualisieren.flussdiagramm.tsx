@@ -33,7 +33,7 @@ import { getPlausibleEventClassName } from "~/utils/plausibleUtils.ts";
 
 const diagramElements = [
   {
-    iconUrl: "/icons/DiagramStartNode.svg",
+    iconUrl: assetPath("/icons/DiagramStartNode.svg"),
     title: "Start-/Endsymbol",
     description: dedent`
         **Start-/Endsymbol**
@@ -41,7 +41,7 @@ const diagramElements = [
         Der Kreis stellt den Beginn oder das Ende eines Prozesses dar (z.B. Antrag wird gestellt).`,
   },
   {
-    iconUrl: "/icons/DiagramDecision.svg",
+    iconUrl: assetPath("/icons/DiagramDecision.svg"),
     title: "Entscheidungssymbol",
     description: dedent`
         **Entscheidungssymbol**
@@ -49,7 +49,7 @@ const diagramElements = [
         Eine Raute steht für eine Abfrage mit mindestens zwei möglichen Ausgängen (z.B. Antrag vollständig? – ja/nein).`,
   },
   {
-    iconUrl: "/icons/DiagramActor.svg",
+    iconUrl: assetPath("/icons/DiagramActor.svg"),
     title: "Akteurin/Akteur",
     description: dedent`
       **Akteurin/Akteur**
@@ -57,7 +57,7 @@ const diagramElements = [
       Ein Rechteck mit Symbol steht für eine beteiligte Person oder Institution im Prozess (z.B. Meldebehörde oder Fahrschülerin).`,
   },
   {
-    iconUrl: "/icons/DiagramData.svg",
+    iconUrl: assetPath("/icons/DiagramData.svg"),
     title: "Datensymbol (Eingabe/Ausgabe)",
     description: dedent`
     **Datensymbol (Eingabe/Ausgabe)**
@@ -65,7 +65,7 @@ const diagramElements = [
     Dieses Symbol zeigt genutzte oder erzeugte Daten oder Ressourcen (z.B. Melderegister).`,
   },
   {
-    iconUrl: "/icons/DiagramActivity.svg",
+    iconUrl: assetPath("/icons/DiagramActivity.svg"),
     title: "Prozess-/Aktivitätssymbol",
     description: dedent`
     **Prozess-/Aktivitätssymbol**
@@ -73,7 +73,7 @@ const diagramElements = [
     Das Rechteck stellt eine Aktivität oder einen Arbeitsschritt dar (z.B. Antrag prüfen).`,
   },
   {
-    iconUrl: "/icons/DiagramConnector.svg",
+    iconUrl: assetPath("/icons/DiagramConnector.svg"),
     title: "Verbindungspfeil",
     description: dedent`
     **Verbindungspfeil**
