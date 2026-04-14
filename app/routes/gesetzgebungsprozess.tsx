@@ -1,6 +1,7 @@
 import Hero from "~/components/Hero";
 import SVGWithMinimap from "~/components/SVGWithMiniMap";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
+import { assetPath } from "~/utils/assetPath";
 import { features } from "~/utils/featureFlags.ts";
 
 export default function Gesetzgebungsprozess() {
@@ -21,7 +22,7 @@ export default function Gesetzgebungsprozess() {
 
       <SVGWithMinimap
         className="mt-40 mb-80"
-        svgSrc="/images/regelungen-description.svg"
+        svgSrc={assetPath("/images/regelungen-description.svg")}
       />
     </main>
   );

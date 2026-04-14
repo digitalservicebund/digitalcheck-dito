@@ -80,7 +80,7 @@ export const preCheck = {
         <p class="mt-24">Wenn ein Vorhaben die EU-Anforderungen für Interoperabilität erfüllen muss, hat es automatisch auch einen Digitalbezug.</p>
       `,
       image: {
-        src: "/images/digital-readiness-meets-interop.svg",
+        src: assetPath("/images/digital-readiness-meets-interop.svg"),
         alt: "Illustration von Datenaustausch zwischen zwei Computer-Systemen mit EU-Flagge, symbolisiert europäische digitale Zusammenarbeit.",
       },
       action: {

@@ -66,7 +66,9 @@ export const HintergrundTab = () => (
       </Heading>
       <Image
         className="max-w-a11y w-full py-16"
-        url="/images/zusammenhang-interoperabilitaet-und-digitaltauglichkeit-old.png"
+        url={assetPath(
+          "/images/zusammenhang-interoperabilitaet-und-digitaltauglichkeit-old.png",
+        )}
         alternativeText="Zusammenhang zwischen Digitaltauglichkeit und EU-Interoperabilität. Zwei sich überschneidende Kreise. In der Schnittmenge sind EU-weite digitale Verwaltungsdienste"
       />
       <p>
@@ -346,7 +348,7 @@ export const HintergrundTab = () => (
     </div>
     <Image
       className="max-w-a11y w-full py-16"
-      url="/images/ebenen-der-interoperabilitaet.jpg"
+      url={assetPath("/images/ebenen-der-interoperabilitaet.jpg")}
       alternativeText="Die Grafik veranschaulicht die vier Ebenen der Interoperabilität mit Symbolen und kurzen Erklärungen. Die rechtliche Interoperabilität (dunkelblau, Waage-Icon) definiert die gesetzlichen Grundlagen für den Datenaustausch. Die organisatorische Interoperabilität (hellblau, vernetzte Personen) beschreibt die organisatorischen Prozesse. Die semantische Interoperabilität (graublau, Sprechblasen) stellt sicher, dass Daten und Begriffe einheitlich verstanden werden. Die technische Interoperabilität (hellgrau, Zahnräder) umfasst die technischen Systeme und Standards, die für den Datenaustausch erforderlich sind."
     />
   </section>
