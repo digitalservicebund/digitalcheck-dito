@@ -69,6 +69,7 @@ const previewPaths = [
   "/vorpruefung/eu-bezug",
   // Methods
   "/methoden",
+  "/methoden/ablaeufe-aufgaben-erfassen",
   "/methoden/fuenf-prinzipien",
   "/methoden/visualisieren",
   "/methoden/visualisieren/flussdiagramm",
@@ -84,16 +85,20 @@ const previewPaths = [
   "/dokumentation/beteiligungsformate",
   "/dokumentation/zusammenfassung",
   "/dokumentation/absenden",
-  // Fundamentals (skip /grundlagen — redirects to /methoden/fuenf-prinzipien)
+  // Fundamentals
+  "/grundlagen",
+  "/grundlagen/fuenf-prinzipien",
   "/grundlagen/digitaltauglichkeit",
   "/grundlagen/normenkontrollrat",
-  // Interoperability (skip /interoperabel/loesungen — redirects to /interoperabel)
+  // Interoperability
   "/interoperabel",
+  "/interoperabel/loesungen",
   "/interoperabel/loesungen/dcat-ap",
   "/interoperabel/nationale-kontaktstelle",
   "/interoperabel/faq",
-  // Examples (skip /beispiele/prinzipien — redirects to first principle)
+  // Examples
   "/beispiele",
+  "/beispiele/prinzipien",
   "/beispiele/visualisierungen",
 ];
 

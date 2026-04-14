@@ -38,6 +38,8 @@ fileignoreconfig:
     ignore_detectors: [filecontent]
   - filename: public/documents/interview-leitfaden/Akteurlandschaft_Analyse.pptx # Power Point
     ignore_detectors: [filecontent]
+  - filename: app/vite-env.d.ts
+    checksum: f3fd561d4d951b8b328e6e40e389372a99ed98975a21d96ee0cf479b4470998b
 allowed_patterns:
   - key
   - onKey
