@@ -17,6 +17,7 @@ import PageHeader from "~/layout/PageHeader";
 import { siteMeta } from "~/resources/content/shared/meta";
 import { ROUTE_LANDING } from "~/resources/staticRoutes";
 import sharedStyles from "~/styles.css?url";
+import { assetPath } from "~/utils/assetPath";
 import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants";
 import { POSTHOG_KEY } from "~/utils/constants.server";
 import { useNonce } from "~/utils/nonce";
@@ -54,16 +55,16 @@ export const headers: HeadersFunction = () => ({
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: sharedStyles },
-  { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+  { rel: "icon", href: assetPath("/favicon.svg"), type: "image/svg+xml" },
   {
     rel: "icon",
-    href: "/favicon_32.png",
+    href: assetPath("/favicon_32.png"),
     type: "image/png",
     sizes: "32x32",
   },
   {
     rel: "icon",
-    href: "/favicon_64.png",
+    href: assetPath("/favicon_64.png"),
     type: "image/png",
     sizes: "64x64",
   },
