@@ -17,6 +17,7 @@ import RichText from "~/components/RichText";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer";
 import { ROUTE_METHODS_INTERVIEW_METHODS_STEPS } from "~/resources/staticRoutes";
+import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import getFeatureFlag from "~/utils/featureFlags.server";
 
@@ -137,7 +138,9 @@ export default function InterviewMethods() {
                     />
                     <DownloadLinkButton
                       look="link"
-                      to="/documents/interview-leitfaden/Akteurlandschaft_Analyse.pptx"
+                      to={assetPath(
+                        "/documents/interview-leitfaden/Akteurlandschaft_Analyse.pptx",
+                      )}
                     >
                       Powerpoint-Vorlage
                     </DownloadLinkButton>
@@ -198,7 +201,9 @@ export default function InterviewMethods() {
                       />
                       <DownloadLinkButton
                         look="link"
-                        to="/documents/interview-leitfaden/Umsetzung_verstehen.docx"
+                        to={assetPath(
+                          "/documents/interview-leitfaden/Umsetzung_verstehen.docx",
+                        )}
                       >
                         Word-Vorlage
                       </DownloadLinkButton>
@@ -233,7 +238,9 @@ export default function InterviewMethods() {
                       />
                       <DownloadLinkButton
                         look="link"
-                        to="/documents/interview-leitfaden/Zielgruppenanaylse-Buergercheck.pptx"
+                        to={assetPath(
+                          "/documents/interview-leitfaden/Zielgruppenanaylse-Buergercheck.pptx",
+                        )}
                       >
                         Powerpoint-Vorlage
                       </DownloadLinkButton>
@@ -424,7 +431,9 @@ export default function InterviewMethods() {
               />
               <DownloadLinkButton
                 look="link"
-                to="/documents/interview-leitfaden/Ablaufplan_Interviewführung.docx"
+                to={assetPath(
+                  "/documents/interview-leitfaden/Ablaufplan_Interviewführung.docx",
+                )}
               >
                 Word-Vorlage
               </DownloadLinkButton>
@@ -454,7 +463,9 @@ export default function InterviewMethods() {
               <li>
                 <DownloadLinkButton
                   look="link"
-                  to="/documents/interview-leitfaden/Buergercheck.pdf"
+                  to={assetPath(
+                    "/documents/interview-leitfaden/Buergercheck.pdf",
+                  )}
                 >
                   Bürgercheck
                 </DownloadLinkButton>

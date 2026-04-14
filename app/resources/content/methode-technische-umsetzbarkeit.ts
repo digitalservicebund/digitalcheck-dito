@@ -6,6 +6,7 @@ import {
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
   ROUTE_SUPPORT,
 } from "~/resources/staticRoutes";
+import { assetPath } from "~/utils/assetPath";
 import { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
@@ -62,7 +63,9 @@ export const methodsTechnicalFeasibility = {
       links: [
         {
           text: "Vorlage herunterladen (PDF-Datei)",
-          to: "/documents/Schaubild Aspekte Technischer Umsetzbarkeit.pdf",
+          to: assetPath(
+            "/documents/Schaubild Aspekte Technischer Umsetzbarkeit.pdf",
+          ),
           download: true,
         },
       ] satisfies ContentLink[],
