@@ -50,14 +50,14 @@ jobs:
           mv playwright-report/* _site/${{ github.run_id }}/
 
       - name: Upload artifact for Pages
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:
           path: _site
           retention-days: 14
 
       - name: Deploy to GitHub Pages
         id: github-pages-deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5
 
       - name: Output github pages URL to summary
         run: |
