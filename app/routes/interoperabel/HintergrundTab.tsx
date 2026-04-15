@@ -10,6 +10,7 @@ import {
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
+import { assetPath } from "~/utils/assetPath";
 import { getTabAnchorLink } from "~/utils/tabs";
 import { tabIds } from "./tabIds";
 
@@ -65,7 +66,9 @@ export const HintergrundTab = () => (
       </Heading>
       <Image
         className="max-w-a11y w-full py-16"
-        url="/images/zusammenhang-interoperabilitaet-und-digitaltauglichkeit-old.png"
+        url={assetPath(
+          "/images/zusammenhang-interoperabilitaet-und-digitaltauglichkeit-old.png",
+        )}
         alternativeText="Zusammenhang zwischen Digitaltauglichkeit und EU-Interoperabilität. Zwei sich überschneidende Kreise. In der Schnittmenge sind EU-weite digitale Verwaltungsdienste"
       />
       <p>
@@ -295,7 +298,9 @@ export const HintergrundTab = () => (
       </DetailsSummary>
       <ImageZoomable
         image={{
-          url: "/images/kriterien-interoperabilitaetsbewertung-entscheidungsbaum.png",
+          url: assetPath(
+            "/images/kriterien-interoperabilitaetsbewertung-entscheidungsbaum.png",
+          ),
           alternativeText:
             "Ein Entscheidungsdiagramm zur Bestimmung der Verpflichtung zur Interoperabilitätsbewertung. Es beginnt mit der Frage, ob es sich um eine verbindliche Anforderung handelt. Je nach Antwort folgen verschiedene Entscheidungsstufen: Offenheit für Änderungen, Verpflichtung, digitale öffentliche Dienstleistungen, betroffene Akteure und Notwendigkeit des Austauschs in Netzwerken oder Informationssystemen. Wenn alle Bedingungen erfüllt sind, führt der Prozess zur verpflichtenden Interoperabilitätsbewertung. Andernfalls ist sie nicht verpflichtend.",
         }}
@@ -343,7 +348,7 @@ export const HintergrundTab = () => (
     </div>
     <Image
       className="max-w-a11y w-full py-16"
-      url="/images/ebenen-der-interoperabilitaet.jpg"
+      url={assetPath("/images/ebenen-der-interoperabilitaet.jpg")}
       alternativeText="Die Grafik veranschaulicht die vier Ebenen der Interoperabilität mit Symbolen und kurzen Erklärungen. Die rechtliche Interoperabilität (dunkelblau, Waage-Icon) definiert die gesetzlichen Grundlagen für den Datenaustausch. Die organisatorische Interoperabilität (hellblau, vernetzte Personen) beschreibt die organisatorischen Prozesse. Die semantische Interoperabilität (graublau, Sprechblasen) stellt sicher, dass Daten und Begriffe einheitlich verstanden werden. Die technische Interoperabilität (hellgrau, Zahnräder) umfasst die technischen Systeme und Standards, die für den Datenaustausch erforderlich sind."
     />
   </section>

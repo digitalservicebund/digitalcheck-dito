@@ -1,4 +1,4 @@
-import { dedent } from "~/utils/dedentMultilineStrings";
+import { dedent } from "../../utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
 
 export const documentationDocument = {

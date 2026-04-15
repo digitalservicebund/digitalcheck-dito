@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import { FeatureFlag, FeatureFlags, features } from "~/utils/featureFlags.ts";
+import { isPreview } from "./preview";
 
 const FEATURE_FLAGS_PATH =
   process.env.FEATURE_FLAGS_PATH ?? "/etc/feature-flags/feature-flags.json";
@@ -11,6 +12,11 @@ const defaultFeatureFlags: FeatureFlags = <FeatureFlags>(
   Object.fromEntries(Object.keys(features).map((flagName) => [flagName, false]))
 );
 
+// Sets all feature flags to true (used in preview builds)
+const featureFlagsAllEnabled: FeatureFlags = <FeatureFlags>(
+  Object.fromEntries(Object.keys(features).map((flagName) => [flagName, true]))
+);
+
 // A simple cache to avoid reading the feature flags file on every request
 let featureFlagCache = {
   data: defaultFeatureFlags,
@@ -18,6 +24,8 @@ let featureFlagCache = {
 };
 
 export function getFeatureFlags(): FeatureFlags {
+  if (isPreview) return featureFlagsAllEnabled; // in preview builds, all feature flags are enabled by default
+
   const now = Date.now();
   if (now - featureFlagCache.timestamp < CACHE_TTL) {
     return featureFlagCache.data;

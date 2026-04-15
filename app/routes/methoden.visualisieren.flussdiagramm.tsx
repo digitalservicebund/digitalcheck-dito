@@ -27,12 +27,13 @@ import {
   ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX,
   ROUTE_METHODS_VISUALIZE_FLOWCHARTS,
 } from "~/resources/staticRoutes.ts";
+import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils.ts";
 
 const diagramElements = [
   {
-    iconUrl: "/icons/DiagramStartNode.svg",
+    iconUrl: assetPath("/icons/DiagramStartNode.svg"),
     title: "Start-/Endsymbol",
     description: dedent`
         **Start-/Endsymbol**
@@ -40,7 +41,7 @@ const diagramElements = [
         Der Kreis stellt den Beginn oder das Ende eines Prozesses dar (z.B. Antrag wird gestellt).`,
   },
   {
-    iconUrl: "/icons/DiagramDecision.svg",
+    iconUrl: assetPath("/icons/DiagramDecision.svg"),
     title: "Entscheidungssymbol",
     description: dedent`
         **Entscheidungssymbol**
@@ -48,7 +49,7 @@ const diagramElements = [
         Eine Raute steht für eine Abfrage mit mindestens zwei möglichen Ausgängen (z.B. Antrag vollständig? – ja/nein).`,
   },
   {
-    iconUrl: "/icons/DiagramActor.svg",
+    iconUrl: assetPath("/icons/DiagramActor.svg"),
     title: "Akteurin/Akteur",
     description: dedent`
       **Akteurin/Akteur**
@@ -56,7 +57,7 @@ const diagramElements = [
       Ein Rechteck mit Symbol steht für eine beteiligte Person oder Institution im Prozess (z.B. Meldebehörde oder Fahrschülerin).`,
   },
   {
-    iconUrl: "/icons/DiagramData.svg",
+    iconUrl: assetPath("/icons/DiagramData.svg"),
     title: "Datensymbol (Eingabe/Ausgabe)",
     description: dedent`
     **Datensymbol (Eingabe/Ausgabe)**
@@ -64,7 +65,7 @@ const diagramElements = [
     Dieses Symbol zeigt genutzte oder erzeugte Daten oder Ressourcen (z.B. Melderegister).`,
   },
   {
-    iconUrl: "/icons/DiagramActivity.svg",
+    iconUrl: assetPath("/icons/DiagramActivity.svg"),
     title: "Prozess-/Aktivitätssymbol",
     description: dedent`
     **Prozess-/Aktivitätssymbol**
@@ -72,7 +73,7 @@ const diagramElements = [
     Das Rechteck stellt eine Aktivität oder einen Arbeitsschritt dar (z.B. Antrag prüfen).`,
   },
   {
-    iconUrl: "/icons/DiagramConnector.svg",
+    iconUrl: assetPath("/icons/DiagramConnector.svg"),
     title: "Verbindungspfeil",
     description: dedent`
     **Verbindungspfeil**
@@ -228,7 +229,9 @@ export default function Visualization() {
               <ImageBox
                 title="Beispiel eines Flussdiagramms"
                 image={{
-                  url: "/images/methoden/flussdiagramme/flussdiagramm-beispiel.png",
+                  url: assetPath(
+                    "/images/methoden/flussdiagramme/flussdiagramm-beispiel.png",
+                  ),
                   caption:
                     "In diesem Beispiel ist der Antragsprozess für einen Führerschein aus Sicht der Fahrschülerin / des Fahrschülers visualisiert.",
                   alternativeText:
@@ -324,7 +327,9 @@ export default function Visualization() {
                         Component: (
                           <ImageBox
                             image={{
-                              url: "/images/methoden/flussdiagramme/2/relevante-akteure.png",
+                              url: assetPath(
+                                "/images/methoden/flussdiagramme/2/relevante-akteure.png",
+                              ),
                               alternativeText:
                                 "Eine Grafik, welches die Institutionen Meldebehörde, Anerkannte Prüfstelle (Fahrschule), Bundesdruckerei, Bundesamt für Justiz sowie die Rolle Fahrschüler:in ungeordnet darstellt.",
                             }}
@@ -376,7 +381,9 @@ export default function Visualization() {
                         Component: (
                           <ImageBox
                             image={{
-                              url: "/images/methoden/flussdiagramme/3/ziel-perspektive-visualisierung.png",
+                              url: assetPath(
+                                "/images/methoden/flussdiagramme/3/ziel-perspektive-visualisierung.png",
+                              ),
                               alternativeText:
                                 "Schaubild, welches Ziel der Visualisierung und Perspektive abstrakt darstellt. Das Ziel ist: Ich möchte den Prozess für Normenadressaten verbessern. Die Perspektive ist: Normenadressaten.",
                             }}
@@ -418,7 +425,9 @@ export default function Visualization() {
 
                       <ImageBox
                         image={{
-                          url: "/images/methoden/flussdiagramme/4/start-ende.png",
+                          url: assetPath(
+                            "/images/methoden/flussdiagramme/4/start-ende.png",
+                          ),
                           caption:
                             "Der Start markiert die erste Aktion eines Akteurs, das Ende die letzte.",
                           alternativeText:
@@ -439,7 +448,9 @@ export default function Visualization() {
                         Component: (
                           <ImageBox
                             image={{
-                              url: "/images/methoden/flussdiagramme/4/beispiel-fahrschule-start-ende.png",
+                              url: assetPath(
+                                "/images/methoden/flussdiagramme/4/beispiel-fahrschule-start-ende.png",
+                              ),
                               alternativeText:
                                 "Ausschnitt eines Flussdiagramms: Start des Prozesses durch einen Kreis mit dünner Linie für den Akteur Fahrschüler:in. Zwei dick umrandete Kreise zeigen verschiedene mögliche Endergebnisse.",
                             }}
@@ -474,7 +485,9 @@ export default function Visualization() {
 
                       <ImageBox
                         image={{
-                          url: "/images/methoden/flussdiagramme/5/schwimmbahnen.png",
+                          url: assetPath(
+                            "/images/methoden/flussdiagramme/5/schwimmbahnen.png",
+                          ),
                           alternativeText:
                             "Fragment eines Flussdiagramms mit drei horizontalen, länglichen Kästen, die am Anfang mit einer Platzhalter-Box “Akteurin/Akteur” markiert sind.",
                           caption:
@@ -498,7 +511,9 @@ export default function Visualization() {
                       </p>
                       <ImageBox
                         image={{
-                          url: "/images/methoden/flussdiagramme/5/aktivitäten-mit-pfeilen.png",
+                          url: assetPath(
+                            "/images/methoden/flussdiagramme/5/aktivitäten-mit-pfeilen.png",
+                          ),
                           alternativeText:
                             "Fragment eines Flussdiagramms, in denen Kästen für Aktivitäten mit Pfeilen verbunden sind.",
                           caption:
@@ -539,7 +554,9 @@ export default function Visualization() {
                         Component: (
                           <ImageBox
                             image={{
-                              url: "/images/methoden/flussdiagramme/5/beispiel-fahrschule-kombiniert.png",
+                              url: assetPath(
+                                "/images/methoden/flussdiagramme/5/beispiel-fahrschule-kombiniert.png",
+                              ),
                               alternativeText:
                                 "Flussdiagramm, welches Aktivitäten für Akteure Fahrschüler:in, Anerkannte Prüfstelle (Fahrschule) sowie Meldebehörde in farblich unterschiedlich kodierten Schwimmbahnen wie im Text beschrieben darstellt.",
                             }}
@@ -575,7 +592,9 @@ export default function Visualization() {
 
                       <ImageBox
                         image={{
-                          url: "/images/methoden/flussdiagramme/6/legende.png",
+                          url: assetPath(
+                            "/images/methoden/flussdiagramme/6/legende.png",
+                          ),
                           alternativeText:
                             "Eine Legende, die zu Symbolen aus dem Diagramm Beschriftungen ergänzt",
                           caption:
@@ -615,7 +634,9 @@ export default function Visualization() {
                         Component: (
                           <ImageBox
                             image={{
-                              url: "/images/methoden/flussdiagramme/6/vollständiges-beispiel.jpg",
+                              url: assetPath(
+                                "/images/methoden/flussdiagramme/6/vollständiges-beispiel.jpg",
+                              ),
                               alternativeText:
                                 "Flussdiagramm, welches zusätzliche Entscheidungssymbole, ein Datenbank-Symbol sowie eine Legende enthält.",
                             }}

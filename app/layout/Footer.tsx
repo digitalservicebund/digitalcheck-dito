@@ -3,6 +3,7 @@ import Image from "~/components/Image";
 import { OpenInNewIcon } from "~/components/OpenInNewIcon.tsx";
 import { footer } from "~/resources/content/shared/footer";
 import { general } from "~/resources/content/shared/general.ts";
+import { assetPath } from "~/utils/assetPath";
 import tailwindMerge from "~/utils/tailwindMerge";
 
 type LinkProps = {
@@ -111,13 +112,13 @@ export default function Footer() {
 
           <div className="space-y-16 sm:flex sm:flex-row sm:items-center sm:gap-48 sm:space-y-0">
             <Image
-              url="/logo/bmds-logo.svg"
+              url={assetPath("/logo/bmds-logo.svg")}
               width={120}
               alternativeText="Logo des Bundesministerium für Digitales und Staatsmodernisierung"
               className="forced-colors:dark:hidden"
             />
             <Image
-              url="/logo/bmds-logo-white.svg"
+              url={assetPath("/logo/bmds-logo-white.svg")}
               width={120}
               alternativeText="Logo des Bundesministerium für Digitales und Staatsmodernisierung"
               className="hidden forced-colors:dark:block"

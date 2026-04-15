@@ -1,3 +1,4 @@
+import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import {
   ROUTE_DOCUMENTATION,
@@ -95,7 +96,7 @@ export const fundamentalsNKR = {
   },
   phasesImage: {
     img: {
-      url: "/images/ablaufdiagramm-v3-deutsch.jpg",
+      url: assetPath("/images/ablaufdiagramm-v3-deutsch.jpg"),
       alternativeText:
         "Flussdiagramm, das drei Pfade nach einer Vorprüfung zum Digitalbezug zeigt: 1. Kein Digitalbezug: Ergebnis-E-Mail. 2. Digitalbezug: E-Mail, Anleitung, Dokumentation, Prüfung. 3. Digitalbezug & Interoperabilität: E-Mail an zwei Stellen, Anleitung mit Support, Dokumentation, Bereitstellung auf EU-Portal.",
       caption: dedent`

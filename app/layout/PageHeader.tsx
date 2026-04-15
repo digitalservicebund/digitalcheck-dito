@@ -15,6 +15,7 @@ import {
   ROUTE_METHODS,
   ROUTE_METHODS_PRINCIPLES,
 } from "~/resources/staticRoutes.ts";
+import { assetPath } from "~/utils/assetPath";
 import { matchHasHandle, MatchWithHandle } from "~/utils/handles";
 import twMerge from "~/utils/tailwindMerge.ts";
 import { normalizePathname } from "~/utils/utilFunctions.ts";
@@ -162,13 +163,13 @@ const PageHeader = () => {
             className="plausible-event-name=Nav+Bar.Home flex items-center space-x-8"
           >
             <img
-              src="/logo/bund-logo.png"
+              src={assetPath("/logo/bund-logo.png")}
               alt="Logo des Bundes"
               width={54}
               className="forced-colors:dark:hidden"
             />
             <img
-              src="/logo/bund-logo-white.svg"
+              src={assetPath("/logo/bund-logo-white.svg")}
               alt="Logo des Bundes"
               width={54}
               className="hidden forced-colors:dark:block"

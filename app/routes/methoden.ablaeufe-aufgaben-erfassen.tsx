@@ -1,7 +1,8 @@
-import { redirect } from "react-router";
 import { ROUTE_METHODS_VISUALIZE } from "~/resources/staticRoutes.ts";
+import { createRedirectRoute } from "~/utils/previewRedirect";
 
-const permanentRedirectCode = 308;
-export function loader() {
-  return redirect(ROUTE_METHODS_VISUALIZE.url, permanentRedirectCode);
-}
+const route = createRedirectRoute(ROUTE_METHODS_VISUALIZE.url, { status: 308 });
+
+export const loader = route.loader;
+export const meta = route.meta;
+export default route.RedirectComponent;

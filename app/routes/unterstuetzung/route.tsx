@@ -12,6 +12,7 @@ import RichText from "~/components/RichText";
 import { SearchParamTabs } from "~/components/Tabs/Tabs";
 import { support } from "~/resources/content/unterstuetzung";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
+import { assetPath } from "~/utils/assetPath";
 import { ContentLink } from "~/utils/contentTypes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -247,7 +248,7 @@ export default function Index() {
               visual={{
                 type: "image",
                 image: {
-                  url: "/images/zfl-preview.png",
+                  url: assetPath("/images/zfl-preview.png"),
                   size: "medium",
                 },
               }}

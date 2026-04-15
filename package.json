@@ -9,6 +9,7 @@
     "build": "react-router build",
     "clean": "rm -rf build/",
     "dev": "react-router dev",
+    "dev:preview": "PREVIEW_BUILD=true PREVIEW_BASE_PATH=/preview/ pnpm dev",
     "docker": "docker compose up --build",
     "format:check": "prettier --check",
     "format:fix": "pnpm run format:fix-selected .",

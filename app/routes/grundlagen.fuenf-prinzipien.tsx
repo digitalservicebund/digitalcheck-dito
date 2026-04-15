@@ -1,6 +1,8 @@
-import { redirect } from "react-router";
 import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
+import { createRedirectRoute } from "~/utils/previewRedirect";
 
-export function loader() {
-  return redirect(ROUTE_METHODS_PRINCIPLES.url);
-}
+const route = createRedirectRoute(ROUTE_METHODS_PRINCIPLES.url);
+
+export const loader = route.loader;
+export const meta = route.meta;
+export default route.RedirectComponent;

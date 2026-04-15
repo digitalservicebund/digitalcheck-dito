@@ -10,6 +10,7 @@ import {
   SupportOutlined,
   VisibilityTwoTone,
 } from "@digitalservicebund/icons";
+import { assetPath } from "~/utils/assetPath";
 import { ContentLink } from "~/utils/contentTypes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import {
@@ -64,7 +65,7 @@ export const methodsTasksProcesses = {
       {
         visual: {
           image: {
-            url: "/images/flussdiagramm.png",
+            url: assetPath("/images/flussdiagramm.png"),
             width: 200,
             size: "medium" as const,
             alternativeText:
@@ -86,7 +87,7 @@ export const methodsTasksProcesses = {
       {
         visual: {
           image: {
-            url: "/images/entscheidungsbaum.png",
+            url: assetPath("/images/entscheidungsbaum.png"),
             width: 200,
             size: "medium" as const,
             alternativeText:
@@ -106,7 +107,7 @@ export const methodsTasksProcesses = {
       {
         visual: {
           image: {
-            url: "/images/schaubild.png",
+            url: assetPath("/images/schaubild.png"),
             width: 200,
             size: "medium" as const,
             alternativeText:
@@ -219,7 +220,7 @@ export const methodsTasksProcesses = {
         },
       ] satisfies ContentLink[],
       image: {
-        url: "/images/beispielflussdiagram.png",
+        url: assetPath("/images/beispielflussdiagram.png"),
       },
     },
   },

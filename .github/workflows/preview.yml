@@ -1,0 +1,152 @@
+name: Preview
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+  delete:
+
+jobs:
+  # Builds and deploys preview when PR is opened/updated or manually triggered.
+  # Only runs for org contributors/members/owners.
+  preview:
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name != 'delete' && 
+      github.event.action != 'closed' && 
+      !contains(github.actor, '[bot]') &&
+      (github.event_name != 'pull_request' || contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR", "CONTRIBUTOR"]'), github.event.pull_request.author_association))
+    permissions:
+      contents: write
+      pull-requests: write
+    concurrency:
+      # Note: Can't use env.PREVIEW_BRANCH here as concurrency groups are evaluated before job env vars
+      group: preview-${{ github.head_ref || github.ref_name }}
+      cancel-in-progress: true
+    env:
+      PREVIEW_BRANCH: ${{ github.head_ref || github.ref_name }}
+      PREVIEW_BASE_PATH: /digitalcheck-dito/previews/${{ github.head_ref || github.ref_name }}/
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v5.0.0
+        name: Install pnpm
+
+      - name: Install Node.js
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
+        with:
+          node-version-file: .node-version
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --ignore-scripts
+
+      - name: Build preview
+        env:
+          PREVIEW_BUILD: "true"
+        run: |
+          pnpm run build
+
+      - name: Copy static assets into preview directory
+        run: |
+          PREVIEW_DIR="build/client/digitalcheck-dito/previews/$PREVIEW_BRANCH"
+          # Vite outputs assets/images/logos etc. at build/client/ root,
+          # but the HTML references them under the basename prefix.
+          # Copy them into the preview directory so paths resolve on GitHub Pages.
+          for dir in build/client/*/; do
+            dirname=$(basename "$dir")
+            if [ "$dirname" != "digitalcheck-dito" ]; then
+              cp -r "$dir" "$PREVIEW_DIR/$dirname"
+            fi
+          done
+          # Copy root-level static files (favicons, etc.)
+          find build/client -maxdepth 1 -type f -exec cp {} "$PREVIEW_DIR/" \;
+          # Also copy static dirs to deploy root for hardcoded absolute paths
+          # (e.g. <img src="/logo/bund-logo.png"> in PageHeader/Footer)
+          for dir in build/client/*/; do
+            dirname=$(basename "$dir")
+            if [ "$dirname" != "digitalcheck-dito" ]; then
+              cp -r "$dir" "build/client/digitalcheck-dito/$dirname"
+            fi
+          done
+          find build/client -maxdepth 1 -type f -exec cp {} "build/client/digitalcheck-dito/" \;
+
+      - name: Commit to gh-pages branch
+        uses: JamesIves/github-pages-deploy-action@d92aa235d04922e8f08b40ce78cc5442fcfbfa2f # v4.8.0
+        with:
+          folder: build/client/digitalcheck-dito
+          branch: gh-pages
+          # target-folder: previews/${{ github.head_ref || github.ref_name }} # previews/my-feature-branch/
+          clean: false # Prevents one branch preview from deleting others
+
+      - name: Wait for automatic Pages deployment
+        run: |
+          MAX_TIME=60
+          URL="https://digitalservicebund.github.io$PREVIEW_BASE_PATH"
+          START_TIME=$(date +%s)
+
+          while true; do
+            RESPONSE_CODE=$(curl -s --head -o /dev/null -w "%{http_code}" "$URL")
+            CURRENT_TIME=$(date +%s)
+            ELAPSED_TIME=$((CURRENT_TIME - START_TIME))
+            
+            if [ "$RESPONSE_CODE" -lt 400 ]; then
+              exit 0
+            elif [ "$ELAPSED_TIME" -ge "$MAX_TIME" ]; then
+              echo "Timeout reached. Skipping."
+              exit 1
+            else
+              echo "Waiting for 200... ($ELAPSED_TIME/$MAX_TIME seconds)"
+              sleep 5
+            fi
+          done
+
+      - name: Output Preview URL
+        run: |
+          echo "🔍 Preview deployed successfully!"
+          echo "Preview URL: https://digitalservicebund.github.io$PREVIEW_BASE_PATH"
+
+      - name: Comment PR with Preview URL
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          PREVIEW_URL="https://digitalservicebund.github.io$PREVIEW_BASE_PATH"
+          gh pr comment ${{ github.event.pull_request.number }} --body "🔍 **Preview deployed!**
+
+          Preview URL: $PREVIEW_URL"
+
+  # Removes preview when PR is closed or branch is deleted.
+  cleanup-preview:
+    runs-on: ubuntu-latest
+    if: |
+      (github.event_name == 'delete' && github.event.ref_type == 'branch') || 
+      (github.event_name == 'pull_request' && github.event.action == 'closed')
+    permissions:
+      contents: write
+    concurrency:
+      group: preview-${{ github.head_ref || github.event.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          ref: gh-pages
+
+      - name: Remove preview folder
+        run: |
+          PREVIEW_BRANCH="${{ github.head_ref || github.event.ref }}"
+          PREVIEW_PATH="previews/$PREVIEW_BRANCH"
+
+          if [ -d "$PREVIEW_PATH" ]; then
+            echo "🗑️  Removing preview for branch: $PREVIEW_BRANCH"
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git rm -rf "$PREVIEW_PATH"
+            git commit -m "Remove preview for deleted branch: $PREVIEW_BRANCH"
+            git push
+            echo "✅ Preview removed successfully! (Automatic Pages deployment will update site)"
+          else
+            echo "ℹ️  No preview found for branch: $PREVIEW_BRANCH"
+          fi

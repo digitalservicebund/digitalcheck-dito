@@ -1,4 +1,5 @@
 import { Apps, Layers } from "@digitalservicebund/icons";
+import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const interoperability = {
@@ -12,7 +13,9 @@ export const interoperability = {
         Stellen Sie sich ein digitales Europa ohne Grenzen vor. Ziel der [Verordnung für ein interoperables Europa (EU) 2024/903](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903) ist es, diese Vision Realität werden zu lassen. Bürgerinnen, Bürger und Unternehmen sollen digitale Verwaltungsleistungen nahtlos in allen EU-Ländern nutzen können. Der digitale Datenaustausch über Landes- und Sektorengrenzen hinweg wird zur Norm. Grenzüberschreitende Verwaltungsakte, wie ein Umzug in einen anderen Mitgliedstaat oder die Gründung eines Unternehmens im Ausland, lassen sich so einfach und vollständig online erledigen. Das steigert die Effizienz für alle Beteiligten und schafft einen einheitlichen digitalen Raum.
     `,
     image: {
-      url: "/images/zusammenhang-interoperabilitaet-und-digitaltauglichkeit.png",
+      url: assetPath(
+        "/images/zusammenhang-interoperabilitaet-und-digitaltauglichkeit.png",
+      ),
       alternativeText:
         "Interoperabilität wird als großer Kreis dargestellt, der einen kleineren Kreis mit digitaltauglichen Regelungen umschließt. Dies zeigt, dass digitaltaugliche Regelungen ein Teil der Interoperabilität sind.",
     },

@@ -4,6 +4,7 @@ import {
   ROUTE_METHODS,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
 } from "~/resources/staticRoutes";
+import { assetPath } from "~/utils/assetPath";
 import { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -63,7 +64,7 @@ export const methodsFivePrinciples = {
     heading: "Die Prinzipien als Poster",
     content:
       "Drucken Sie sich das Poster in A4 oder A3 aus, um die Prinzipien für digitaltaugliche Gesetzgebung immer im Blick zu haben.",
-    imageUrl: "/images/Poster_5Prinzipien.jpg",
+    imageUrl: assetPath("/images/Poster_5Prinzipien.jpg"),
     imageAlt: "Poster der 5 Prinzipien",
     downloadTitle: "Poster herunterladen",
     downloadUrl: ROUTE_DOWNLOAD_PRINCIPLE_POSTER.url,
