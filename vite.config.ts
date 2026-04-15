@@ -28,8 +28,6 @@ export default defineConfig({
     process.env.PREVIEW_BASE_PATH ??
     (process.env.DEVELOPMENT ? "./" : undefined),
   define: {
-    "import.meta.env.PREVIEW_BUILD": JSON.stringify(
-      process.env.PREVIEW_BUILD === "true",
-    ),
+    "import.meta.env.PREVIEW_BUILD": process.env.PREVIEW_BUILD,
   },
 });
