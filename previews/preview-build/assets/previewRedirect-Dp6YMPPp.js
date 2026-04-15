@@ -1,0 +1,1 @@
+import{j as a,N as u}from"./chunk-UVKPFVEO-Bar39yXQ.js";import{a as o}from"./assetPath-BpZOuc1d.js";function m(t,{status:s}={}){function e(){return null}function r(){return[{tagName:"meta",httpEquiv:"refresh",content:`0; url=${o(t)}`}]}function n(){return a.jsx(u,{to:t,replace:!0})}return{loader:e,meta:r,RedirectComponent:n}}export{m as c};
