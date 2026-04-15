@@ -138,7 +138,8 @@ export const EuRechtTab = () => {
                   markdown={dedent`
                   **Im Detail:** Der Europäische Interoperabilitätsrahmen | [Europäische Kommission](https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail)
                   
-                  Könnte der Europäische Interoperabilitätsrahmen (EIF) für Ihr Regelungsvorhaben relevant sein?
+                  **Könnte der Europäische Interoperabilitätsrahmen (EIF) für Ihr Regelungsvorhaben relevant sein?**
+                  
                   Der Europäische Interoperabilitätsrahmen (EIF) ist ein Leitfaden für die Gestaltung offener, nutzerzentrierter und grenzüberschreitend nahtloser digitaler öffentlicher Dienste. Er bündelt 12 strategische Prinzipien und vier operative Ebenen, um den Datenaustausch und die Prozesskoordination zu ermöglichen. Unter der Verordnung für ein Interoperables Europa (EU) 2024/903 dient er als verbindliches Referenzinstrument für Interoperabilitätsbewertungen zur gezielten Beseitigung digitaler Barrieren.
 
                   **Rahmenbedingungen für EU-Maßnahmen:**
