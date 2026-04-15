@@ -1,1 +1,0 @@
-import{j as o}from"./chunk-UVKPFVEO-Bar39yXQ.js";import{c as s}from"./tailwindMerge-D23Rjtiq.js";const m=({className:r,children:t})=>o.jsx("div",{className:s("flex flex-wrap gap-16",r),children:t});export{m as B};

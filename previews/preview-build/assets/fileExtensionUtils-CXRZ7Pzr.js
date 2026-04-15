@@ -1,1 +1,0 @@
-const l=n=>{const t=new Map;t.set("pdf","PDF"),t.set("docx","DOCX"),t.set("xlsx","XLSX"),t.set("pptx","PPTX"),t.set("json","JSON");const s=e(n);return(s&&t.get(s))??void 0},e=n=>{const t=n.lastIndexOf("/"),s=n.lastIndexOf(".");return s>t?n.substring(s+1):null};export{l as g};
