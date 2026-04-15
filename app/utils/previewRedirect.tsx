@@ -1,6 +1,6 @@
 import { Navigate, redirect } from "react-router";
-
 import { assetPath } from "~/utils/assetPath";
+import { isPreview } from "./preview";
 
 /**
  * Builds loader / meta / default-export for a route whose sole purpose is to
@@ -13,8 +13,6 @@ export function createRedirectRoute(
   to: string,
   { status }: { status?: number } = {},
 ) {
-  const isPreview = import.meta.env.PREVIEW_BUILD;
-
   function loader() {
     if (!isPreview) {
       return status ? redirect(to, status) : redirect(to);
