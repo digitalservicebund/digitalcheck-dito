@@ -19,7 +19,7 @@ const isPreview = import.meta.env?.PREVIEW_BUILD;
 export function Kopfzeile({ className }: Readonly<{ className?: string }>) {
   return (
     <div className={twJoin("kern-kopfzeile", className)}>
-      <div className="kern-container-fluid">
+      <div className="kern-container-fluid lg:px-0!">
         <div className="kern-kopfzeile__content">
           <span className="kern-kopfzeile__flagge" aria-hidden="true">
             <svg

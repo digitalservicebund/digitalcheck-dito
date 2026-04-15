@@ -327,6 +327,10 @@
   }
 }
 
+@utility breakout-right {
+  grid-column: content-start / full-end;
+}
+
 /*
  * Windows High Contrast mode
  */
