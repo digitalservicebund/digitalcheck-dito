@@ -1,6 +1,8 @@
 import { twJoin } from "tailwind-merge";
 import "./Kopfzeile.css";
 
+const isPreview = import.meta.env?.PREVIEW_BUILD;
+
 /**
  * The "Official Website" banner, extracted from the web component provided by
  * KERN. Using the web component directly wasn't possible with server-side
@@ -32,7 +34,10 @@ export function Kopfzeile({ className }: Readonly<{ className?: string }>) {
             </svg>
           </span>
           <span className="kern-kopfzeile__label">
-            <slot>Offizielle Website – Bundesrepublik Deutschland</slot>
+            <slot>
+              Offizielle Website – Bundesrepublik Deutschland
+              {isPreview ? " (PREVIEW)" : ""}
+            </slot>
           </span>
         </div>
       </div>
