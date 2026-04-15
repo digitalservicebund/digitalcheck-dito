@@ -30,7 +30,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
-      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v5.0.0
         name: Install pnpm
 
       - name: Install Node.js
@@ -46,8 +46,7 @@ jobs:
         env:
           PREVIEW_BUILD: "true"
         run: |
-          echo '{"showGesetzgebungsprozessOverview":true,"showInterviewLeitfaden":true,"showDCATAP":true,"showIOEuRechtContent":true,"simplifiedPrincipleFlow":true,"showStrapiDrafts":true}' > /tmp/feature-flags.json
-          FEATURE_FLAGS_PATH=/tmp/feature-flags.json pnpm run build
+          pnpm run build
 
       - name: Copy static assets into preview directory
         run: |

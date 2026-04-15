@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import { FeatureFlag, FeatureFlags, features } from "~/utils/featureFlags.ts";
+import { isPreview } from "./preview";
 
 const FEATURE_FLAGS_PATH =
   process.env.FEATURE_FLAGS_PATH ?? "/etc/feature-flags/feature-flags.json";
@@ -49,6 +50,7 @@ export function getFeatureFlags(): FeatureFlags {
 }
 
 export default function getFeatureFlag(name: FeatureFlag): boolean {
+  if (isPreview) return true; // in preview builds, all feature flags are enabled by default
   const flags = getFeatureFlags();
   return flags[name];
 }
