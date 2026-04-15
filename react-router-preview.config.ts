@@ -1,5 +1,6 @@
 import type { Config } from "@react-router/dev/config";
 
+import { ROUTES } from "./app/resources/staticRoutes";
 import {
   fetchStrapiData,
   GET_PRINZIPS_QUERY,
@@ -43,63 +44,10 @@ async function getPreviewPrerenderPaths(): Promise<string[]> {
     ...regelungSlugs.map((slug) => `/beispiele/regelungen/${slug}`),
   ];
 
-  return [...previewPaths, ...dynamicPaths];
-}
+  const staticPaths = ROUTES.map((r) => r.url);
 
-// TODO: get from route files?
-const previewPaths = [
-  "/",
-  "/impressum",
-  "/datenschutz",
-  "/barrierefreiheit",
-  "/sitemap",
-  "/das-ist-neu",
-  "/unterstuetzung",
-  "/gesetzgebungsprozess",
-  // Precheck
-  "/vorpruefung",
-  "/vorpruefung/hinweise",
-  "/vorpruefung/ergebnis",
-  "/vorpruefung/it-system",
-  "/vorpruefung/verpflichtungen-fuer-beteiligte",
-  "/vorpruefung/datenaustausch",
-  "/vorpruefung/kommunikation",
-  "/vorpruefung/automatisierung",
-  "/vorpruefung/eu-bezug",
-  // Methods
-  "/methoden",
-  "/methoden/ablaeufe-aufgaben-erfassen",
-  "/methoden/fuenf-prinzipien",
-  "/methoden/visualisieren",
-  "/methoden/visualisieren/flussdiagramm",
-  "/methoden/zustaendige-akteurinnen-auflisten",
-  "/methoden/it-systeme-erfassen",
-  "/methoden/technische-umsetzbarkeit",
-  "/methoden/interview-leitfaden",
-  "/methoden/interview-leitfaden-schritte",
-  // Documentation
-  "/dokumentation",
-  "/dokumentation/hinweise",
-  "/dokumentation/regelungsvorhaben-titel",
-  "/dokumentation/beteiligungsformate",
-  "/dokumentation/zusammenfassung",
-  "/dokumentation/absenden",
-  // Fundamentals
-  "/grundlagen",
-  "/grundlagen/fuenf-prinzipien",
-  "/grundlagen/digitaltauglichkeit",
-  "/grundlagen/normenkontrollrat",
-  // Interoperability
-  "/interoperabel",
-  "/interoperabel/loesungen",
-  "/interoperabel/loesungen/dcat-ap",
-  "/interoperabel/nationale-kontaktstelle",
-  "/interoperabel/faq",
-  // Examples
-  "/beispiele",
-  "/beispiele/prinzipien",
-  "/beispiele/visualisierungen",
-];
+  return [...staticPaths, ...dynamicPaths];
+}
 
 export const previewConfig = {
   ssr: true,

@@ -9,7 +9,7 @@ on:
 jobs:
   # Builds and deploys preview when PR is opened/updated or manually triggered.
   # Only runs for org contributors/members/owners.
-  build-and-deploy:
+  preview:
     runs-on: ubuntu-latest
     if: |
       github.event_name != 'delete' && 
