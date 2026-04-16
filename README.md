@@ -26,10 +26,10 @@ cp ./tests/feature-flags.json ./feature-flags.json
 
 We aim to use the current active [LTS version of nodejs](https://nodejs.dev/en/about/releases/) (>=20.19.0). The `.node-version` file simplifies setup when using a version manager like [nodenv](https://github.com/nodenv/nodenv).
 
-Install the dependencies using `npm`.
+Install the dependencies using [pnpm](https://pnpm.io/).
 
 ```bash
-npm ci --ignore-scripts
+pnpm install --frozen-lockfile --ignore-scripts
 ```
 
 ### 3. Git Hooks
@@ -63,7 +63,7 @@ The following hooks are configured in `lefthook.yml`:
 For end-to-end (E2E) and accessibility (a11y) testing with [Playwright](https://playwright.dev/docs/intro), you need to install the required browser binaries:
 
 ```bash
-npx playwright install
+pnpm exec playwright install
 ```
 
 ## Feature Flags
@@ -143,17 +143,17 @@ Commit your changes and push them. Our pipeline automatically applies the new fe
 Start the app in development mode. It will automatically rebuild assets when you change a file.
 
 ```sh
-npm run dev
+pnpm dev
 ```
 
 ### Testing
 
 The project includes unit, end-to-end, and accessibility tests.
 
-- Run unit tests (with [Vitest](https://vitest.dev/)): `npm run test`
-- Run end-to-end tests (with [Playwright](https://playwright.dev/)): `npm run test:e2e`
-- Run accessibility tests (with [Playwright](https://playwright.dev/docs/intro) & [Axe](https://www.deque.com/axe/)): `npm run test:a11y`
-- Run all tests sequentially: `npm run tests`
+- Run unit tests (with [Vitest](https://vitest.dev/)): `pnpm test`
+- Run end-to-end tests (with [Playwright](https://playwright.dev/)): `pnpm test:e2e`
+- Run accessibility tests (with [Playwright](https://playwright.dev/docs/intro) & [Axe](https://www.deque.com/axe/)): `pnpm test:a11y`
+- Run all tests sequentially: `pnpm tests`
 
 #### Snapshot Testing
 
@@ -163,8 +163,8 @@ This package supports snapshot testing via [Playwright](https://playwright.dev/d
 
 The snapshot tests capture screenshots of static routes across different devices, as defined in `tests/playwright-snapshot.config.ts`.
 
-- Create initial snapshots: `npm run test:snapshots`. On the first run, this command generates the baseline snapshots.
-- If you've made intentional changes and need to update the snapshots: `npm run test:update-snapshots`.
+- Create initial snapshots: `pnpm test:snapshots`. On the first run, this command generates the baseline snapshots.
+- If you've made intentional changes and need to update the snapshots: `pnpm test:update-snapshots`.
 
 > [!NOTE]
 >
@@ -185,7 +185,7 @@ expect(container).toMatchSnapshot();
 To update failing snapshots, run all tests and press `u` in the interactive prompt, or use the update flag directly:
 
 ```sh
-npm test -- -u
+pnpm test -- -u
 ```
 
 For more details, see the [Vitest Snapshot documentation](https://vitest.dev/guide/snapshot.html#updating-snapshots).
@@ -194,19 +194,19 @@ For more details, see the [Vitest Snapshot documentation](https://vitest.dev/gui
 
 The project uses [ESLint](https://eslint.org/docs/latest/) for linting and [Prettier](https://prettier.io/docs/en/) for formatting. It's recommended to set up the [Git Hooks](#3-git-hooks) to automate this process.
 
-- Check formatting: `npm run format:check`
-- Autofix formatting issues: `npm run format:fix`
-- Check for linting errors: `npm run lint:check`
-- Autofix linting issues: `npm run lint:fix`
-- Run all style checks: `npm run style:check`
-- Autofix all style issues: `npm run style:fix`
+- Check formatting: `pnpm format:check`
+- Autofix formatting issues: `pnpm format:fix`
+- Check for linting errors: `pnpm lint:check`
+- Autofix linting issues: `pnpm lint:fix`
+- Run all style checks: `pnpm style:check`
+- Autofix all style issues: `pnpm style:fix`
 
 ## Build for Production
 
 To build the application for production:
 
 ```sh
-npm run build
+pnpm build
 ```
 
 This will create optimized assets in the `build/` and `public/build/` directories.
@@ -214,7 +214,7 @@ This will create optimized assets in the `build/` and `public/build/` directorie
 To preview the production build locally:
 
 ```sh
-npm run start
+pnpm start
 ```
 
 ## Deployment
@@ -224,12 +224,12 @@ npm run start
 You can build and run the application in a Docker container to simulate the production environment.
 
 ```sh
-npm run docker
+pnpm docker
 ```
 
 ### DIY
 
-The built-in server is production-ready. If you are deploying manually, make sure to deploy the output of `npm run build`:
+The built-in server is production-ready. If you are deploying manually, make sure to deploy the output of `pnpm build`:
 
 - `build/`
 - `public/build/`
