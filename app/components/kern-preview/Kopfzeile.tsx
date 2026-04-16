@@ -20,7 +20,7 @@ export function Kopfzeile({ className }: Readonly<{ className?: string }>) {
   return (
     <div className={twJoin("kern-kopfzeile", className)}>
       <div className="kern-container-fluid">
-        <div className="kern-kopfzeile__content">
+        <div className="kern-kopfzeile__content lg:container!">
           <span className="kern-kopfzeile__flagge" aria-hidden="true">
             <svg
               xmlns="http://www.w3.org/2000/svg"

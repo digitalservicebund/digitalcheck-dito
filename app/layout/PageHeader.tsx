@@ -154,9 +154,12 @@ const PageHeader = () => {
           aria-hidden="true"
         />
       )}
-      <header className="relative" ref={headerRef}>
-        <Kopfzeile className="relative z-30" />
-        <div className="relative z-30 flex h-[72px] justify-between border-b-2 border-blue-300 bg-white pl-16 lg:px-16">
+      <header
+        className="relative z-30 border-b-2 border-blue-300 bg-white"
+        ref={headerRef}
+      >
+        <Kopfzeile className="relative" />
+        <div className="relative flex h-[70px] justify-between pl-16 lg:container">
           {/* Logo and title */}
           <Link
             to={ROUTE_LANDING.url}
@@ -229,8 +232,8 @@ const PageHeader = () => {
             </Container>
           </div>
         </noscript>
-        {showProgressBar && <ProgressBar />}
       </header>
+      {showProgressBar && <ProgressBar />}
     </>
   );
 };
