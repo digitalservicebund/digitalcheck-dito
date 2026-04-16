@@ -232,8 +232,8 @@ const PageHeader = () => {
             </Container>
           </div>
         </noscript>
-        {showProgressBar && <ProgressBar />}
       </header>
+      {showProgressBar && <ProgressBar />}
     </>
   );
 };
