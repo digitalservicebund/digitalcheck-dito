@@ -98,6 +98,7 @@ export type BasePrinzip = {
   Kurzbezeichnung: string;
   Beschreibung: Node[];
   Kurzbeschreibung?: Node[];
+  Hilfetext?: Node[];
   /**
    * Not the actual number visible to users.
    * Legacy ID used to associate Absatz fragments with principles.
@@ -257,6 +258,7 @@ query GetPrinzips {
     Name
     Beschreibung
     Kurzbeschreibung
+    Hilfetext
     order
     Nummer
     URLBezeichnung

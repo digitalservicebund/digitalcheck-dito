@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import { Link, redirect, useOutletContext, useParams } from "react-router";
 import AspectPills from "~/components/AspectPills";
 import Badge from "~/components/Badge";
@@ -22,26 +21,6 @@ import {
 } from "./dokumentation/documentationDataSchema";
 
 const { radioOptions } = digitalDocumentation.principlePages;
-
-type ExplanationLegendProps = {
-  title: ReactNode;
-  helpText: ReactNode;
-};
-
-function ExplanationLegend({ title, helpText }: ExplanationLegendProps) {
-  return (
-    <legend className="ds-heading-03-reg">
-      {title}
-      <HelpButton
-        sectionId="aspects"
-        title="Hinweis zur Erklärung"
-        className="h-28 w-28"
-      >
-        {helpText}
-      </HelpButton>
-    </legend>
-  );
-}
 
 type DocumentationPrincipleErlaeuterungFormProps = {
   answer: string;
@@ -98,41 +77,12 @@ function DocumentationPrincipleErlaeuterungForm({
     </>
   );
 
-  const helpText = isPositive ? (
-    <>
-      <p>Wählen Sie aus, welche Schwerpunkte für Ihr Vorhaben relevant sind.</p>
-      <p>
-        Diese dienen Ihnen als roter Faden für Ihre Erklärung. So formulieren
-        Sie präzise und stellen sicher, dass Ihre Regelung das Prinzip erfüllt.
-      </p>
-      <p>Geben Sie auch die dazugehörigen Paragrafen an.</p>
-      {prinzip.Aspekte.map((aspect) => (
-        <DetailsSummary
-          key={aspect.Kurzbezeichnung}
-          title={aspect.Kurzbezeichnung}
-        >
-          {aspect.Text && <BlocksRenderer content={aspect.Text} />}
-        </DetailsSummary>
-      ))}
-    </>
-  ) : isIrrelevant ? (
-    <>
-      Bitte erläutern Sie, warum das Prinzip „{prinzip.Name}“{" "}
-      <strong>nicht relevant</strong> für Ihr Vorhaben ist
-    </>
-  ) : (
-    <>
-      Bitte erläutern Sie, warum das Prinzip „{prinzip.Name}“{" "}
-      <strong>nicht</strong> auf Ihr Vorhaben zutrifft
-    </>
-  );
-
   return (
     <form {...form.getFormProps()} className="space-y-40">
       <input {...form.getHiddenInputProps("answer")} />
 
       <fieldset className="space-y-16">
-        <ExplanationLegend title={explanationTitle} helpText={helpText} />
+        <legend className="ds-heading-03-reg">{explanationTitle}</legend>
 
         {isPositive && (
           <AspectPills
@@ -142,14 +92,37 @@ function DocumentationPrincipleErlaeuterungForm({
             warningInsteadOfError
           >
             Schwerpunkte auswählen
+            <HelpButton
+              sectionId="aspects"
+              title="Schwerpunkte"
+              className="h-24 w-24"
+            >
+              <p>
+                Wählen Sie aus, welche Schwerpunkte für Ihr Vorhaben relevant
+                sind.
+              </p>
+              <p>
+                Diese dienen Ihnen als roter Faden für Ihre Erklärung. So
+                formulieren Sie präzise und stellen sicher, dass Ihre Regelung
+                das Prinzip erfüllt.
+              </p>
+              {prinzip.Aspekte.map((aspect) => (
+                <DetailsSummary
+                  key={aspect.Kurzbezeichnung}
+                  title={aspect.Kurzbezeichnung}
+                >
+                  {aspect.Text && <BlocksRenderer content={aspect.Text} />}
+                </DetailsSummary>
+              ))}
+            </HelpButton>
           </AspectPills>
         )}
 
         <Textarea
           scope={form.scope("reasoning")}
-          description={
+          placeholder={
             isPositive
-              ? "Tragen Sie Ihre Erklärung ein, z. B.: Online-Beratung wird ermöglicht, siehe § 1a"
+              ? "Tragen Sie Ihre Erklärung ein, z. B.: Online-Beratung wird ermöglicht, siehe § 1a. Geben Sie auch die dazugehörigen Paragrafen an."
               : undefined
           }
           rows={5}
@@ -222,7 +195,7 @@ export default function DocumentationPrincipleErlaeuterung() {
               title={`Hinweis zu „${prinzip.Name}“`}
               className="h-28 w-28"
             >
-              <BlocksRenderer content={prinzip.Beschreibung} />
+              <BlocksRenderer content={prinzip.Hilfetext!} />
               <Link
                 to={ROUTE_METHODS_PRINCIPLES.url + "/" + prinzip.URLBezeichnung}
                 className="ds-link-01-reg"

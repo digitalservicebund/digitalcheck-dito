@@ -62,7 +62,7 @@ export default function DocumentationPrincipleV2({
               title={`Hinweis zu „${prinzip.Name}“`}
               className="h-28 w-28"
             >
-              <BlocksRenderer content={prinzip.Beschreibung} />
+              <BlocksRenderer content={prinzip.Hilfetext!} />
               <Link
                 to={ROUTE_METHODS_PRINCIPLES.url + "/" + prinzip.URLBezeichnung}
                 className="ds-link-01-reg"
@@ -86,18 +86,6 @@ export default function DocumentationPrincipleV2({
           >
             Schafft das Regelungsvorhaben die rechtlichen Voraussetzungen für
             die Umsetzung des Prinzips?
-            <HelpButton
-              sectionId="2-answers"
-              title={
-                "Hinweis zu „Schafft das Regelungsvorhaben die rechtlichen Voraussetzungen für die Umsetzung des Prinzips?“"
-              }
-              className="h-28 w-28"
-            >
-              <p>
-                Geben Sie hier an ob das Prinzip “{prinzip.Name}&rdquo; auf Ihr
-                Regelungsvorhaben zutrifft.
-              </p>
-            </HelpButton>
           </Heading>
           <RadioGroup
             aria-labelledby="question-label"

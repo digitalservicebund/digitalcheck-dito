@@ -66,9 +66,9 @@ export default function DocumentationParticipation() {
               warningInsteadOfError
             >
               {simplifiedFlow
-                ? "Beteiligungsformate"
+                ? "Erklärung"
                 : participation.formats.textField.label}
-              <HelpButton sectionId="formats" title="Beteiligungsformate">
+              <HelpButton sectionId="formats" title="Erklärung">
                 Beschreiben Sie stichpunktartig, wie Sie die Bedürfnisse der
                 Betroffenen erhoben haben – z. B. durch Befragungen, Gesprächen
                 mit Vollzugsakteurinnen und -akteuren oder formelle
