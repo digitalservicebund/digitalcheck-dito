@@ -195,6 +195,11 @@ export const ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP = createRoute(
   "Data Catalogue Vocabulary Application Profile (DCAT-AP)",
   ROUTE_INTEROPERABILITY_SOLUTIONS,
 );
+export const ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES = createRoute(
+  "core-vocabularies",
+  "Semantic Core Vocabularies",
+  ROUTE_INTEROPERABILITY_SOLUTIONS,
+);
 
 // EXAMPLES ROUTES
 export const ROUTE_EXAMPLES = createRoute(

@@ -4,16 +4,22 @@ import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext.ts";
-import { ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP } from "~/resources/staticRoutes.ts";
+import {
+  ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES,
+  ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP,
+} from "~/resources/staticRoutes.ts";
 
 export const InteroperableLoesungenTab = () => {
   const showDCATAP = useFeatureFlag("showDCATAP");
+  const showCoreVocabularies = useFeatureFlag("showCoreVocabularies");
 
   const solutions = [
     {
       title: "Semantic Core Vocabularies",
       text: "Die grenzüberschreitende Datensprache für das Once-Only-Prinzip",
-      href: undefined,
+      href: showCoreVocabularies
+        ? ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES.url
+        : undefined,
     },
     {
       title: "Data Catalogue Vocabulary Application Profile (DCAT-AP)",
