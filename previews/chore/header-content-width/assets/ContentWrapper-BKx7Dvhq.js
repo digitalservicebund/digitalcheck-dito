@@ -1,1 +1,0 @@
-import{j as s}from"./chunk-UVKPFVEO-DaV-egx2.js";import{c as m}from"./tailwindMerge-djQsV2ED.js";function n({children:r,className:t,compactTopSpacing:e=!1}){return s.jsx("div",{className:m("container my-40 space-y-40 lg:my-80",e&&"lg:mt-40",t),children:r})}export{n as C};
