@@ -7,6 +7,7 @@
   "scripts": {
     "audit:licences": "license-checker-rseidelsohn --production --excludePrivatePackages --onlyAllow 'MIT;BSD-3-Clause;BSD-2-Clause;0BSD;ISC;Apache-2.0;MPL-2.0;BlueOak-1.0.0;Custom: LICENSE;Unlicense' --summary",
     "build": "react-router build",
+    "build:preview": "PREVIEW_BUILD=true react-router build",
     "clean": "rm -rf build/",
     "dev": "react-router dev",
     "dev:preview": "PREVIEW_BUILD=true PREVIEW_BASE_PATH=/preview/ pnpm dev",
