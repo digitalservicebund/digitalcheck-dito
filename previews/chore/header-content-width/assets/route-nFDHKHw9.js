@@ -1,0 +1,1 @@
+import{w as a,j as t,O as e,d as n}from"./chunk-UVKPFVEO-DaV-egx2.js";import{D as r}from"./DocumentationDataProvider-D_rjUpcI.js";const i={hasProgressBar:!0};function m(){return n("routes/dokumentation")}const c=a(function(){return t.jsx(r,{children:t.jsx(e,{})})});export{i as h,c as r,m as u};
