@@ -34,7 +34,7 @@
   --color-ds-violet: #4c2c92;
 
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
-  --max-content-width: 59rem;
+  --max-content-width: 76rem; /* 1216px */
 }
 
 @layer base {
