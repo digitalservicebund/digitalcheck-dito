@@ -3,21 +3,21 @@ import {
   InfoOutlined,
   LayersOutlined,
 } from "@digitalservicebund/icons";
-import CloseIcon from "@digitalservicebund/icons/Close";
-import React, { useState } from "react";
+import React from "react";
 import { data } from "react-router";
 import AccordionItem from "~/components/AccordionItem";
 import Badge from "~/components/Badge.tsx";
-import Button from "~/components/Button.tsx";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
+import { InteroperableSolutionBanner } from "~/components/InteroperableSolutionBanner.tsx";
 import MetaTitle from "~/components/Meta";
 import NewTabLink from "~/components/NewTabLink";
 import RichText from "~/components/RichText";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import Timeline from "~/components/Timeline";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
+import { ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES } from "~/resources/staticRoutes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { features } from "~/utils/featureFlags";
 import getFeatureFlag from "~/utils/featureFlags.server";
@@ -30,25 +30,25 @@ export function loader() {
   }
 }
 
-const contents = [
-  {
-    title: "Einführung",
+const sections = {
+  einfuehrung: {
     id: "einfuehrung",
+    title: "Einführung",
   },
-  {
-    title: "Erklärung",
+  erklaerung: {
     id: "erklaerung",
+    title: "Erklärung",
   },
-  {
-    title: "Umsetzung",
+  umsetzung: {
     id: "umsetzung",
+    title: "Umsetzung",
   },
-  {
-    title: "Beispiele",
+  beispiele: {
     id: "beispiele",
+    title: "Beispiele",
   },
-  { title: "Ressourcen", id: "ressourcen" },
-];
+  ressourcen: { id: "ressourcen", title: "Ressourcen" },
+};
 
 function ChapterBadge({ children }: { children: React.ReactNode }) {
   return (
@@ -59,64 +59,37 @@ function ChapterBadge({ children }: { children: React.ReactNode }) {
 }
 
 export default function InteroperableSolutionsDcatAp() {
-  const [showBanner, setShowBanner] = useState(true);
   return (
     <>
       <MetaTitle prefix="Data Catalogue Vocabulary Application Profile (DCAT-AP)" />
       <main>
         <div className="breakout-grid-toc space-y-16 bg-blue-100 pt-40 pb-48">
-          <h1>Data Catalogue Vocabulary Application Profile (DCAT-AP)</h1>
+          <h1>{ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES.title}</h1>
           <p className="ds-subhead">
             Der Metadatenstandard für offene Daten und Transparenz.
           </p>
         </div>
 
-        {showBanner && (
-          <aside className="breakout-grid-toc relative bg-yellow-200 py-24">
-            <div className="row-1 space-y-8">
-              <p className="ds-body-01-bold">
-                „Lösung für ein interoperables Europa“ nach Art. 7 der
-                Verordnung (EU) 2024/903
-              </p>
-              <p>
-                Eine Prüfung, ob diese Lösung genutzt werden kann, ist bei
-                Interoperabilitätsbezug verpflichtend.
-              </p>
-            </div>
-            <Button
-              look="ghost"
-              onClick={() => setShowBanner(false)}
-              className="breakout absolute top-0 right-0 row-1 w-auto p-24"
-              aria-label="Schließen"
-              type="button"
-            >
-              <CloseIcon className="fill-blue-800" />
-            </Button>
-          </aside>
-        )}
+        <InteroperableSolutionBanner />
 
         <SidebarContainer
           className={"space-y-80"}
           sidebar={
             <ToC title={"Inhalt"} selector="section[id]">
               <ToC.List className="list-unstyled list-none">
-                {contents.map((section) => (
-                  <ToC.Item
-                    key={section.id}
-                    href={`#${slugify(section.id)}`}
-                    title={section.title}
-                  />
+                {Object.entries(sections).map(([key, { id, title }]) => (
+                  <ToC.Item key={key} href={`#${slugify(id)}`} title={title} />
                 ))}
               </ToC.List>
             </ToC>
           }
         >
           <section
-            id={contents[0].id}
+            id={sections.einfuehrung.id}
             className={"mt-80 scroll-my-40 space-y-40"}
           >
             <div className="space-y-8">
-              <ChapterBadge>{contents[0].title}</ChapterBadge>
+              <ChapterBadge>{sections.einfuehrung.title}</ChapterBadge>
               <h2>Betrifft mich dieses Thema als Legist oder Legistin?</h2>
               <p>
                 Wenn Ihr Regelungsvorhaben die Bereitstellung oder den Austausch
@@ -202,8 +175,11 @@ export default function InteroperableSolutionsDcatAp() {
             </InfoBox>
           </section>
 
-          <section className="scroll-my-40 space-y-8" id={contents[1].id}>
-            <ChapterBadge>{contents[1].title}</ChapterBadge>
+          <section
+            className="scroll-my-40 space-y-8"
+            id={sections.erklaerung.id}
+          >
+            <ChapterBadge>{sections.erklaerung.title}</ChapterBadge>
             <h2>Worum geht es bei DCAT-AP genau?</h2>
             <p>
               Stellen Sie sich vor, ein Startup möchte eine europaweite
@@ -225,8 +201,11 @@ export default function InteroperableSolutionsDcatAp() {
               findbar machen.
             </p>
           </section>
-          <section className="scroll-my-40 space-y-8" id={contents[2].id}>
-            <ChapterBadge>{contents[2].title}</ChapterBadge>
+          <section
+            className="scroll-my-40 space-y-8"
+            id={sections.umsetzung.id}
+          >
+            <ChapterBadge>{sections.umsetzung.title}</ChapterBadge>
             <h2>So stellen Sie die Nutzung sicher</h2>
             <p>
               Fragen Sie sich als Legist oder Legistin, wie stellen wir sicher,
@@ -309,8 +288,11 @@ export default function InteroperableSolutionsDcatAp() {
               </Timeline.Item>
             </Timeline>
           </section>
-          <section className="scroll-my-40 space-y-8" id={contents[3].id}>
-            <ChapterBadge>{contents[3].title}</ChapterBadge>
+          <section
+            className="scroll-my-40 space-y-8"
+            id={sections.beispiele.id}
+          >
+            <ChapterBadge>{sections.beispiele.title}</ChapterBadge>
             <h2>
               DCAT-AP in Anwendung bei bestehenden Gesetzen und Richtlinien
             </h2>
@@ -381,10 +363,10 @@ export default function InteroperableSolutionsDcatAp() {
           </section>
           <section
             className="breakout space-y-40 bg-blue-100 py-80"
-            id={contents[4].id}
+            id={sections.ressourcen.id}
           >
             <InfoBox look="white">
-              <ChapterBadge>{contents[4].title}</ChapterBadge>
+              <ChapterBadge>{sections.ressourcen.title}</ChapterBadge>
               <RichText
                 className="[&_h3]:mt-24"
                 markdown={dedent`
