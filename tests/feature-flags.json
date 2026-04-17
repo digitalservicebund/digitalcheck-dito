@@ -1,7 +1,7 @@
 {
   "showGesetzgebungsprozessOverview": true,
   "showInterviewLeitfaden": false,
-  "showDCATAP": false,
+  "showDCATAP": true,
   "showIOEuRechtContent": true,
   "simplifiedPrincipleFlow": false
 }
