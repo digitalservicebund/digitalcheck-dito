@@ -165,7 +165,7 @@ export default function Index() {
                   {tab.offerings.map((offering: Offering) => (
                     <Container
                       key={offering.title}
-                      className="mb-32 flex gap-32 rounded-xl bg-blue-100 px-40 max-md:flex-col"
+                      className="mb-32 flex justify-between gap-32 rounded-xl bg-blue-100 px-40 max-md:flex-col"
                     >
                       <InfoBox
                         heading={{
@@ -179,7 +179,7 @@ export default function Index() {
                         )}
                       </InfoBox>
 
-                      <div className="flex-none space-y-20 md:w-[310px]">
+                      <div className="flex-none space-y-20 md:w-[310px] lg:w-[364px]">
                         <div className="bg-white">
                           <div className="p-28">
                             <h4>{offering.sellingPoints}</h4>
