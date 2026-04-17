@@ -141,18 +141,17 @@ export default function Visualization() {
   return (
     <>
       <MetaTitle prefix={ROUTE_METHODS_VISUALIZE_FLOWCHARTS.title} />
-      <div className="breakout-grid-toc bg-blue-100 pt-40 pb-48">
-        <div>
-          <Heading tagName="h1">Erstellung von Flussdiagrammen</Heading>
-          <p className="ds-subhead mt-16">
-            Ein Flussdiagramm visualisiert, wie ein Prozess Schritt für Schritt
-            abläuft. Es hilft, die Reihenfolge von z.B. Handlungen, Datenflüssen
-            oder Entscheidungen übersichtlich darzustellen.
-          </p>
-        </div>
-      </div>
-
       <main>
+        <div className="breakout-grid-toc bg-blue-100 pt-40 pb-48">
+          <div>
+            <Heading tagName="h1">Erstellung von Flussdiagrammen</Heading>
+            <p className="ds-subhead mt-16">
+              Ein Flussdiagramm visualisiert, wie ein Prozess Schritt für
+              Schritt abläuft. Es hilft, die Reihenfolge von z.B. Handlungen,
+              Datenflüssen oder Entscheidungen übersichtlich darzustellen.
+            </p>
+          </div>
+        </div>
         <SidebarContainer
           sidebar={
             <ToC title={"Inhalt"} selector="section[id], li[id]">
@@ -705,35 +704,35 @@ export default function Visualization() {
             </section>
           </div>
         </SidebarContainer>
+        <Container className="mb-80 py-0">
+          <hr className="mb-80 border-0 border-b-2 border-solid border-blue-300" />
+          <InfoBox
+            badge={{
+              Icon: ArrowCircleRightOutlined,
+              children: "So geht es weiter",
+            }}
+            heading={{
+              tagName: "h2",
+              text: "Im nächsten Schritt wenden Sie die Prinzipien an.",
+              className: "ds-heading-03-reg",
+            }}
+          >
+            <p>
+              Sie wenden die Prinzipien auf Ihre Visualisierung an und
+              identifizieren konkrete Möglichkeiten der Digitalisierung.
+            </p>
+            <InfoBox.LinkList
+              links={[
+                {
+                  text: "Zu den Prinzipien",
+                  look: "tertiary",
+                  to: ROUTE_METHODS_PRINCIPLES.url,
+                },
+              ]}
+            />
+          </InfoBox>
+        </Container>
       </main>
-      <Container className="mb-80 py-0">
-        <hr className="mb-80 border-0 border-b-2 border-solid border-blue-300" />
-        <InfoBox
-          badge={{
-            Icon: ArrowCircleRightOutlined,
-            children: "So geht es weiter",
-          }}
-          heading={{
-            tagName: "h2",
-            text: "Im nächsten Schritt wenden Sie die Prinzipien an.",
-            className: "ds-heading-03-reg",
-          }}
-        >
-          <p>
-            Sie wenden die Prinzipien auf Ihre Visualisierung an und
-            identifizieren konkrete Möglichkeiten der Digitalisierung.
-          </p>
-          <InfoBox.LinkList
-            links={[
-              {
-                text: "Zu den Prinzipien",
-                look: "tertiary",
-                to: ROUTE_METHODS_PRINCIPLES.url,
-              },
-            ]}
-          />
-        </InfoBox>
-      </Container>
       <BackToTopButton />
     </>
   );

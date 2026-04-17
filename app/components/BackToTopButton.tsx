@@ -35,6 +35,7 @@ export default function BackToTopButton() {
         isVisible ? "opacity-100" : "pointer-events-none opacity-0",
       )}
       aria-hidden={!isVisible}
+      tabIndex={isVisible ? undefined : -1}
     >
       <ArrowUpward fill={"currentColor"} />
       Zurück nach oben
