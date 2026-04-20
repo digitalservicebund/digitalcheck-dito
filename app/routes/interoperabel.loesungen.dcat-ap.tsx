@@ -17,7 +17,7 @@ import RichText from "~/components/RichText";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import Timeline from "~/components/Timeline";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
-import { ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES } from "~/resources/staticRoutes.ts";
+import { ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP } from "~/resources/staticRoutes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { features } from "~/utils/featureFlags";
 import getFeatureFlag from "~/utils/featureFlags.server";
@@ -64,7 +64,7 @@ export default function InteroperableSolutionsDcatAp() {
       <MetaTitle prefix="Data Catalogue Vocabulary Application Profile (DCAT-AP)" />
       <main>
         <div className="breakout-grid-toc space-y-16 bg-blue-100 pt-40 pb-48">
-          <h1>{ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES.title}</h1>
+          <h1>{ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP.title}</h1>
           <p className="ds-subhead">
             Der Metadatenstandard für offene Daten und Transparenz.
           </p>
