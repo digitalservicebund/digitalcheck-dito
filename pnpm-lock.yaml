@@ -214,8 +214,8 @@ importers:
         specifier: ^8.58.1
         version: 8.58.1(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.2)
       undici:
-        specifier: ^7.24.6
-        version: 7.24.6
+        specifier: ^8.0.3
+        version: 8.0.3
       vite:
         specifier: ^7.3.2
         version: 7.3.2(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)
@@ -3830,9 +3830,13 @@ packages:
   undici-types@7.18.2:
     resolution: {integrity: sha512-AsuCzffGHJybSaRrmr5eHr81mwJU3kjw6M+uprWvCXiNeN9SOGwQ3Jn8jb8m3Z6izVgknn1R0FTCEAP2QrLY/w==}
 
-  undici@7.24.6:
-    resolution: {integrity: sha512-Xi4agocCbRzt0yYMZGMA6ApD7gvtUFaxm4ZmeacWI4cZxaF6C+8I8QfofC20NAePiB/IcvZmzkJ7XPa471AEtA==}
+  undici@7.25.0:
+    resolution: {integrity: sha512-xXnp4kTyor2Zq+J1FfPI6Eq3ew5h6Vl0F/8d9XU5zZQf1tX9s2Su1/3PiMmUANFULpmksxkClamIZcaUqryHsQ==}
     engines: {node: '>=20.18.1'}
+
+  undici@8.0.3:
+    resolution: {integrity: sha512-vTLEG/ceXgu/dMTQ8uNE2zgl7I7qEkx9l9tkz2H802AkgbBMvbmHMu4YqsrpGbUAMYKSQhCbmjsWMAeGu1dYXg==}
+    engines: {node: '>=22.19.0'}
 
   unpipe@1.0.0:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}
@@ -6735,7 +6739,7 @@ snapshots:
       saxes: 6.0.0
       symbol-tree: 3.2.4
       tough-cookie: 6.0.1
-      undici: 7.24.6
+      undici: 7.25.0
       w3c-xmlserializer: 5.0.0
       webidl-conversions: 8.0.1
       whatwg-mimetype: 5.0.0
@@ -7880,7 +7884,9 @@ snapshots:
 
   undici-types@7.18.2: {}
 
-  undici@7.24.6: {}
+  undici@7.25.0: {}
+
+  undici@8.0.3: {}
 
   unpipe@1.0.0: {}
 
