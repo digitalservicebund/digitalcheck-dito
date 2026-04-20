@@ -260,9 +260,11 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
     await expect(main).toContainText(testData.title);
     await expect(main).toContainText(testData.positiveReasoning);
     await expect(main).toContainText(testData.lastPrincipleReasoning);
-    // V2 summary shows "incomplete" warning for negative/irrelevant since aspects is undefined
+    await expect(main).toContainText(testData.negativeReasoning);
+    await expect(main).toContainText(testData.irrelevantReasoning);
+    // Skipped principle (no answer) still shows the "missing" warning
     await expect(main).toContainText(
-      "Sie haben diesen Punkt noch nicht vollständig bearbeitet.",
+      "Sie haben diesen Punkt noch nicht bearbeitet.",
     );
 
     const weiterButton = page.getByRole("link", { name: "Weiter" });
