@@ -26,7 +26,10 @@ import { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationActions from "./DocumentationActions";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
 
-const { summary } = digitalDocumentation;
+const {
+  summary,
+  principlePages: { radioOptions },
+} = digitalDocumentation;
 
 const createInfoBoxItem = ({
   route,
@@ -152,12 +155,14 @@ function SimplifiedAspectsContent({
   explanation,
   aspects,
   prinzip,
+  needsAspects,
 }: {
   explanation: Principle["reasoning"];
   aspects: Principle["aspects"];
   prinzip: PrinzipWithAspekte;
+  needsAspects: boolean;
 }) {
-  if (!aspects || aspects.length === 0) {
+  if ((needsAspects && (!aspects || aspects.length === 0)) || !explanation) {
     return (
       <InlineNotice
         look="missingOrIncomplete"
@@ -167,24 +172,26 @@ function SimplifiedAspectsContent({
   }
   return (
     <>
-      <div className="grid grid-cols-2 gap-x-8">
-        <span className="ds-body-01-bold">Schwerpunkte:</span>
-        <div className="flex flex-wrap gap-16">
-          {aspects.map((aspect) => {
-            const aspekt = prinzip.Aspekte.find(
-              (a) => slugify(a.Kurzbezeichnung) === aspect,
-            );
-            return (
-              <span
-                key={aspect}
-                className="rounded-full border border-blue-400 bg-blue-400 px-16 py-6 text-sm font-medium"
-              >
-                {aspekt ? aspekt.Kurzbezeichnung : aspect}
-              </span>
-            );
-          })}
+      {aspects?.length && (
+        <div className="grid grid-cols-2 gap-x-8">
+          <span className="ds-body-01-bold">Schwerpunkte:</span>
+          <div className="flex flex-wrap gap-16">
+            {aspects.map((aspect) => {
+              const aspekt = prinzip.Aspekte.find(
+                (a) => slugify(a.Kurzbezeichnung) === aspect,
+              );
+              return (
+                <span
+                  key={aspect}
+                  className="rounded-full border border-blue-400 bg-blue-400 px-16 py-6 text-sm font-medium"
+                >
+                  {aspekt ? aspekt.Kurzbezeichnung : aspect}
+                </span>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
       {explanation && (
         <Answer answers={[{ prefix: "Erläuterung", answer: explanation }]} />
       )}
@@ -212,6 +219,7 @@ function PrincipleContent({
         explanation={principle.reasoning}
         aspects={principle.aspects}
         prinzip={prinzip}
+        needsAspects={principle.answer === radioOptions[0]}
       />
     </>
   );

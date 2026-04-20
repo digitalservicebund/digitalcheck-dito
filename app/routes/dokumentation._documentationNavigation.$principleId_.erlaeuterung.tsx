@@ -193,7 +193,7 @@ export default function DocumentationPrincipleErlaeuterung() {
             <HelpButton
               sectionId="prinzip"
               title={`Hinweis zu „${prinzip.Name}“`}
-              className="h-28 w-28"
+              className="h-24 w-24"
             >
               <BlocksRenderer content={prinzip.Hilfetext!} />
               <Link

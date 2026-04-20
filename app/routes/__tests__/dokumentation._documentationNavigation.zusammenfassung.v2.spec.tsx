@@ -252,12 +252,17 @@ describe("DocumentationSummaryV2", () => {
     );
 
     expect(within(principleContainer).getByText("Nein")).toBeInTheDocument();
-    // V2 SimplifiedAspectsContent shows incomplete when aspects is undefined
     expect(
-      within(principleContainer).getByText(
+      within(principleContainer).getByText("Reason why not applicable"),
+    ).toBeInTheDocument();
+    expect(
+      within(principleContainer).queryByText("Schwerpunkte:"),
+    ).not.toBeInTheDocument();
+    expect(
+      within(principleContainer).queryByText(
         "Sie haben diesen Punkt noch nicht vollständig bearbeitet.",
       ),
-    ).toBeInTheDocument();
+    ).not.toBeInTheDocument();
   });
 
   it("displays principle with irrelevant answer", () => {
@@ -280,7 +285,60 @@ describe("DocumentationSummaryV2", () => {
     expect(
       within(principleContainer).getByText("Nicht relevant"),
     ).toBeInTheDocument();
-    // V2 SimplifiedAspectsContent shows incomplete when aspects is undefined
+    expect(
+      within(principleContainer).getByText("Reason why not relevant"),
+    ).toBeInTheDocument();
+    expect(
+      within(principleContainer).queryByText("Schwerpunkte:"),
+    ).not.toBeInTheDocument();
+    expect(
+      within(principleContainer).queryByText(
+        "Sie haben diesen Punkt noch nicht vollständig bearbeitet.",
+      ),
+    ).not.toBeInTheDocument();
+  });
+
+  it("shows incomplete warning for negative answer with missing reasoning", () => {
+    createDocumentationDataMock({
+      principles: [
+        {
+          id: "1",
+          answer: "Nein",
+          reasoning: "",
+          aspects: undefined,
+        },
+      ],
+    });
+    renderWithRouter();
+
+    const principleContainer = screen.getByTestId(
+      "/dokumentation/prinzip-digitale-angebote/erlaeuterung",
+    );
+
+    expect(
+      within(principleContainer).getByText(
+        "Sie haben diesen Punkt noch nicht vollständig bearbeitet.",
+      ),
+    ).toBeInTheDocument();
+  });
+
+  it("shows incomplete warning for positive answer with aspects but missing reasoning", () => {
+    createDocumentationDataMock({
+      principles: [
+        {
+          id: "1",
+          answer: "Ja, gänzlich oder teilweise",
+          reasoning: "",
+          aspects: ["a1"],
+        },
+      ],
+    });
+    renderWithRouter();
+
+    const principleContainer = screen.getByTestId(
+      "/dokumentation/prinzip-digitale-angebote/erlaeuterung",
+    );
+
     expect(
       within(principleContainer).getByText(
         "Sie haben diesen Punkt noch nicht vollständig bearbeitet.",
