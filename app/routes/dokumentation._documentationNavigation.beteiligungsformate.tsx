@@ -39,7 +39,7 @@ export default function DocumentationParticipation() {
       <MetaTitle
         prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_PARTICIPATION.title}`}
       />
-      <div className="max-w-a11y space-y-40">
+      <div className="space-y-40">
         <Heading
           text={participation.headline}
           tagName="h1"

@@ -179,7 +179,8 @@ export default function LayoutWithDocumentationNavigation() {
       <div
         className={twJoin(
           "parent-bg-blue breakout-grid-form-steps grow bg-blue-100",
-          !showHelpPanel && "[--help-width:0]",
+          !simplifiedFlow &&
+            "[--content-max-width:calc(var(--max-content-width)-var(--nav-max-width)-var(--gutter)*3)] [--help-width:0]",
         )}
       >
         <Nav

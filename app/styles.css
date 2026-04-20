@@ -35,6 +35,7 @@
 
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
   --max-content-width: 76rem; /* 1216px */
+  --max-width-a11y: 630px;
 }
 
 @layer base {
@@ -161,7 +162,7 @@
 
 @utility max-w-a11y {
   /* 70ch @ 18px font size = 630px */
-  max-width: 630px;
+  max-width: var(--max-width-a11y);
 }
 
 @layer components {
@@ -279,9 +280,10 @@
 @utility breakout-grid-form-steps {
   --nav-min-width: 250px;
   --nav-max-width: 300px;
+  --content-max-width: var(--max-width-a11y);
 
   --help-width: 350px;
-  --gutter: 2.5rem; /* 40px */
+  --gutter: 3rem; /* 48px */
 
   @apply breakout-grid;
 
@@ -291,7 +293,7 @@
       [full-start] minmax(var(--container-padding-inline), 1fr)
       [nav-start] minmax(var(--nav-min-width), var(--nav-max-width))
       [nav-end] var(--gutter)
-      [content-start] minmax(min-content, var(--max-content-width))
+      [content-start] minmax(min-content, var(--content-max-width))
       [content-end] minmax(var(--gutter), 1fr)
       [help-start] var(--help-width)
       [help-end full-end];

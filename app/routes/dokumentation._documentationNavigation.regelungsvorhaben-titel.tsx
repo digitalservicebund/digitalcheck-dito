@@ -33,7 +33,7 @@ export default function DocumentationTitle() {
   return (
     <>
       <MetaTitle prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_TITLE.title}`} />
-      <div className="max-w-a11y space-y-40">
+      <div className="space-y-40">
         <Heading
           text={info.headline}
           tagName="h1"

@@ -183,7 +183,7 @@ export default function DocumentationPrincipleErlaeuterung() {
   return (
     <>
       <MetaTitle prefix={`Dokumentation: ${prinzip.Name} – Erläuterung`} />
-      <div className="max-w-a11y space-y-40">
+      <div className="space-y-40">
         <div className="space-y-8">
           <Badge principleNumber={prinzip.Nummer}>
             Prinzip {prinzip.order}
@@ -210,7 +210,7 @@ export default function DocumentationPrincipleErlaeuterung() {
           )}
         </div>
 
-        <div className="max-w-a11y rounded-lg bg-blue-300 p-24">
+        <div className="rounded-lg bg-blue-300 p-24">
           <p>{changeAnswerTitle}</p>
           <Link
             to={currentUrl.replace("/erlaeuterung", "")}
