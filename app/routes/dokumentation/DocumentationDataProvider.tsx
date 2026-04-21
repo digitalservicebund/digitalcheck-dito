@@ -3,6 +3,7 @@ import {
   ReactNode,
   useCallback,
   useContext,
+  useMemo,
   useState,
 } from "react";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
@@ -326,22 +327,36 @@ export function DocumentationDataProvider({
     !!documentationData.participation ||
     !!documentationData.policyTitle;
 
+  const value = useMemo(
+    () => ({
+      documentationData,
+      hasSavedDocumentation,
+      getDocumentationSchemaFormUrl,
+      createOrUpdateDocumentationData,
+      deleteDocumentationData,
+      setPolicyTitle,
+      setParticipation,
+      addOrUpdatePrinciple,
+      addOrUpdatePrincipleAnswer,
+      addOrUpdatePrincipleReasoning,
+      findDocumentationDataForUrl,
+    }),
+    [
+      documentationData,
+      hasSavedDocumentation,
+      getDocumentationSchemaFormUrl,
+      createOrUpdateDocumentationData,
+      deleteDocumentationData,
+      setPolicyTitle,
+      setParticipation,
+      addOrUpdatePrinciple,
+      addOrUpdatePrincipleAnswer,
+      addOrUpdatePrincipleReasoning,
+      findDocumentationDataForUrl,
+    ],
+  );
   return (
-    <DocumentationDataContext
-      value={{
-        documentationData,
-        hasSavedDocumentation,
-        getDocumentationSchemaFormUrl,
-        createOrUpdateDocumentationData,
-        deleteDocumentationData,
-        setPolicyTitle,
-        setParticipation,
-        addOrUpdatePrinciple,
-        addOrUpdatePrincipleAnswer,
-        addOrUpdatePrincipleReasoning,
-        findDocumentationDataForUrl,
-      }}
-    >
+    <DocumentationDataContext value={value}>
       {children}
     </DocumentationDataContext>
   );
