@@ -16,11 +16,8 @@ import RichText from "~/components/RichText";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import Timeline from "~/components/Timeline";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
-import {
-  ROUTE_INTEROPERABILITY_FAQ,
-  ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES,
-} from "~/resources/staticRoutes.ts";
-import { ids } from "~/routes/interoperabel.faq.tsx";
+import { ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES } from "~/resources/staticRoutes.ts";
+import { directLinks } from "~/routes/interoperabel/UeberblickTab.tsx";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { features } from "~/utils/featureFlags";
 import getFeatureFlag from "~/utils/featureFlags.server";
@@ -305,7 +302,7 @@ export default function InteroperableSolutionsDcatAp() {
                 <RichText
                   markdown={dedent`
                 Übermitteln Sie vor der Entscheidung über den Entwurf eine
-                [Interoperabilitätsbewertung](${ROUTE_INTEROPERABILITY_FAQ.url}#${ids.interoperability}),
+                [Interoperabilitätsbewertung](${directLinks.assessment}),
                 falls erforderlich.
                 `}
                 />

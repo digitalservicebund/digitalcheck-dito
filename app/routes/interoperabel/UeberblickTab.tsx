@@ -7,11 +7,21 @@ import NewTabLink from "~/components/NewTabLink";
 import Timeline from "~/components/Timeline";
 import { contact } from "~/resources/content/shared/contact";
 import {
+  ROUTE_INTEROPERABILITY,
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
 import { getTabAnchorLink } from "~/utils/tabs";
 import { tabIds } from "./tabIds";
+
+export const anchors = {
+  assessment: "bewertung",
+};
+export const directLinks = {
+  assessment:
+    ROUTE_INTEROPERABILITY.url +
+    getTabAnchorLink(tabIds.overviewTabId, anchors.assessment),
+};
 
 export const UeberblickTab = () => (
   <section className="space-y-40">
@@ -62,7 +72,7 @@ export const UeberblickTab = () => (
       </ul>
     </div>
 
-    <div className="space-y-8">
+    <div className="space-y-8" id={anchors.assessment}>
       <Heading tagName="h3">Die Interoperabilitäts-Bewertung</Heading>
       <p>
         Die{" "}

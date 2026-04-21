@@ -6,14 +6,12 @@ import RichText from "~/components/RichText";
 import { contact } from "~/resources/content/shared/contact";
 import {
   ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
+  ROUTE_INTEROPERABILITY,
   ROUTE_INTEROPERABILITY_FAQ,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { getTabAnchorLink } from "~/utils/tabs";
 
-export const ids = {
-  interoperability: "interoperabilitaets-bezug",
-};
 const faqItems = [
   {
     headline: "Was bedeutet grenzüberschreitende Interoperabilität?",
@@ -30,13 +28,12 @@ const faqItems = [
     content: dedent`
           Interoperabilitäts-Bezug ist vorhanden, wenn:
 
-          - eine (neue) [verbindliche Anforderung](${getTabAnchorLink("hintergrund", "verbindliche-anforderungen")}) definiert wird,
+          - eine (neue) [verbindliche Anforderung](${ROUTE_INTEROPERABILITY.url}${getTabAnchorLink("hintergrund", "verbindliche-anforderungen")}) definiert wird,
           - ein oder mehrere transeuropäische digitale öffentliche Dienste betroffen sind, das heißt
             - eine digitale Umsetzung vorgesehen oder davon betroffen ist
             - ein Austausch von Daten und Informationen zwischen Verwaltungen der EU-Mitgliedstaaten vorgesehen ist
             - die Anforderung von einer öffentlichen Stelle oder einer Einrichtung der Union festgelegt werden.
         `,
-    id: ids.interoperability,
   },
   {
     headline: "Was sind „transeuropäische digitale öffentliche Dienste“?",
@@ -170,11 +167,7 @@ export default function Faq() {
         </Hero>
         <div className="container mb-40 py-80">
           {faqItems.map((item) => (
-            <AccordionItem
-              key={item.headline}
-              headline={item.headline}
-              id={item.id}
-            >
+            <AccordionItem key={item.headline} headline={item.headline}>
               <RichText markdown={item.content} />
             </AccordionItem>
           ))}
