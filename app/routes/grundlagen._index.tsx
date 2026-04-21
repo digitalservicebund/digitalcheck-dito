@@ -1,8 +1,11 @@
+import { Navigate } from "react-router";
 import { ROUTE_FUNDAMENTALS_PRINCIPLES } from "~/resources/staticRoutes.ts";
-import { createRedirectRoute } from "~/utils/previewRedirect";
+import { createRedirectLoader } from "~/utils/redirectLoader";
 
-const route = createRedirectRoute(ROUTE_FUNDAMENTALS_PRINCIPLES.url);
+const to = ROUTE_FUNDAMENTALS_PRINCIPLES.url;
 
-export const loader = route.loader;
-export const meta = route.meta;
-export default route.RedirectComponent;
+export const loader = createRedirectLoader(to);
+
+export default function Redirect() {
+  return <Navigate to={to} replace />;
+}

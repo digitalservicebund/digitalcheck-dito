@@ -7,7 +7,7 @@
   "scripts": {
     "audit:licences": "license-checker-rseidelsohn --production --excludePrivatePackages --onlyAllow 'MIT;BSD-3-Clause;BSD-2-Clause;0BSD;ISC;Apache-2.0;MPL-2.0;BlueOak-1.0.0;Custom: LICENSE;Unlicense' --summary",
     "build": "react-router build",
-    "build:preview": "PREVIEW_BUILD=true react-router build",
+    "build:preview": "PREVIEW_BUILD=true PREVIEW_BASE_PATH=/ react-router build",
     "clean": "rm -rf build/",
     "dev": "react-router dev",
     "dev:preview": "PREVIEW_BUILD=true PREVIEW_BASE_PATH=/preview/ pnpm dev",
@@ -21,6 +21,7 @@
     "preinstall": "echo 'Please disable script execution for security reasons: pnpm install --ignore-scripts' && exit 1",
     "start": "export $(grep -v '^#' .env | xargs) && react-router-serve build/server/index.js",
     "start:test": "react-router-serve build/server/index.js",
+    "start:preview": "pnpm build:preview && pnpm dlx serve build/client",
     "style:check": "pnpm run format:check && pnpm run lint:check",
     "style:fix": "pnpm run format:fix && pnpm run lint:fix",
     "test": "vitest run",

@@ -1,8 +1,13 @@
+import { Navigate } from "react-router";
 import { ROUTE_EXAMPLES_DIGITAL_COMMUNICATION } from "~/resources/staticRoutes.ts";
-import { createRedirectRoute } from "~/utils/previewRedirect";
+import { createRedirectLoader } from "~/utils/redirectLoader";
 
-const route = createRedirectRoute(ROUTE_EXAMPLES_DIGITAL_COMMUNICATION.url);
+const to = ROUTE_EXAMPLES_DIGITAL_COMMUNICATION.url;
 
-export const loader = route.loader;
-export const meta = route.meta;
-export default route.RedirectComponent;
+// normal SSR build
+export const loader = createRedirectLoader(to);
+
+// preview build: use `<Navigate />`
+export default function Redirect() {
+  return <Navigate to={to} replace />;
+}
