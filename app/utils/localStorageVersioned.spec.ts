@@ -162,12 +162,10 @@ describe("localStorage", () => {
       });
     });
 
-    it("should throw error when calling readFromLocalStorage on server-side", () => {
-      expect(() =>
+    it("should return null when calling readFromLocalStorage on server-side", () => {
+      expect(
         readVersionedDataFromLocalStorage<TestData>("testKey", "1.0.0"),
-      ).toThrow(
-        "localStorage is not available. This function should only be called on the client-side.",
-      );
+      ).toBeNull();
       expect(localStorageMock.getItem).not.toHaveBeenCalled();
     });
 
