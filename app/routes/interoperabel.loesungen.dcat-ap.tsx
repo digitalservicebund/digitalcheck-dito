@@ -357,11 +357,18 @@ export default function InteroperableSolutionsDcatAp() {
                 }
               >
                 {dedent`
-                Ein Meilenstein der rechtlich verankerten Interoperabilität. Die Richtlinie verpflichtete die Mitgliedstaaten, Geodaten (z. B. zu Schutzgebieten oder Gewässernetzen) interoperabel bereitzustellen.
+                Ein Meilenstein der rechtlich verankerten Interoperabilität. Die Richtlinie verpflichtete die
+                Mitgliedstaaten, Geodaten (z. B. zu Schutzgebieten oder Gewässernetzen) interoperabel
+                bereitzustellen.
                 
-                Da INSPIRE technisch sehr komplex war, wurde für die Auffindbarkeit der Daten in nationalen Katalogen und im EU-Geoportal eine Metadaten-Struktur genutzt, die heute in weiten Teilen mit DCAT-AP kompatibel ist oder darin aufgegangen ist, um eine sektorübergreifende Suche zu ermöglichen.
+                Da INSPIRE technisch sehr komplex war, wurde für die Auffindbarkeit der Daten in nationalen Katalogen
+                und im [EU-Geoportal](https://inspire-geoportal.ec.europa.eu/srv/eng/catalog.search) eine
+                Metadaten-Struktur genutzt, die heute in weiten Teilen mit DCAT-AP kompatibel ist oder darin aufgegangen
+                ist, um eine sektorübergreifende Suche zu ermöglichen.
                 
-                **Warum man das braucht:** Umweltprobleme (wie Hochwasser oder Luftverschmutzung) halten sich nicht an Staatsgrenzen. Um eine europäische Strategie (z. B. den Green Deal) umzusetzen, müssen die Daten der Mitgliedstaaten technisch zueinander passen.
+                **Warum man das braucht:** Umweltprobleme (wie Hochwasser oder Luftverschmutzung) halten sich nicht an
+                Staatsgrenzen. Um eine europäische Strategie (z. B. den Green Deal) umzusetzen, müssen die Daten der
+                Mitgliedstaaten technisch zueinander passen.
                 
                 **Wem nützt das?**
                 - **Bürgerinnen und Bürgern:** Sie können sich grenzübergreifend über Umweltbelastungen informieren.
