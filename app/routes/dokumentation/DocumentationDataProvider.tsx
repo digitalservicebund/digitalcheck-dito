@@ -136,23 +136,29 @@ export function DocumentationDataProvider({
     ? DATA_SCHEMA_VERSION_V2
     : DATA_SCHEMA_VERSION_V1;
 
-  function getDocumentationSchemaFormUrl(url: string) {
-    return _getDocumentationSchemaFormUrl(url, simplifiedFlow);
-  }
-
   const [documentationData, setDocumentationData] = useState<
     DocumentationData<V>
   >(getInitialState(version));
 
-  function createOrUpdateDocumentationData(data: DocumentationData<V>): void {
-    writeToStorage(data);
-    setDocumentationData(data);
-  }
+  const getDocumentationSchemaFormUrl = useCallback(
+    (url: string) => {
+      return _getDocumentationSchemaFormUrl(url, simplifiedFlow);
+    },
+    [simplifiedFlow],
+  );
 
-  function deleteDocumentationData(): void {
+  const createOrUpdateDocumentationData = useCallback(
+    (data: DocumentationData<V>): void => {
+      writeToStorage(data);
+      setDocumentationData(data);
+    },
+    [],
+  );
+
+  const deleteDocumentationData = useCallback((): void => {
     removeFromLocalStorage(STORAGE_KEY);
     setDocumentationData(getInitialState(version));
-  }
+  }, [version]);
 
   const setPolicyTitle = useCallback(
     (policyTitle?: PolicyTitle) => {
@@ -163,8 +169,7 @@ export function DocumentationDataProvider({
         policyTitle,
       });
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [documentationData],
+    [documentationData, createOrUpdateDocumentationData],
   );
 
   const setParticipation = useCallback(
@@ -176,8 +181,7 @@ export function DocumentationDataProvider({
         participation,
       });
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [documentationData],
+    [documentationData, createOrUpdateDocumentationData],
   );
 
   const addOrUpdatePrinciple = useCallback(
@@ -201,8 +205,7 @@ export function DocumentationDataProvider({
         principles: updatedPrinciples,
       });
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [documentationData],
+    [documentationData, createOrUpdateDocumentationData],
   );
 
   const addOrUpdatePrincipleAnswer = useCallback(
@@ -248,8 +251,7 @@ export function DocumentationDataProvider({
         principles: updatedPrinciples,
       });
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [documentationData],
+    [documentationData, createOrUpdateDocumentationData],
   );
 
   const addOrUpdatePrincipleReasoning = useCallback(
@@ -283,8 +285,7 @@ export function DocumentationDataProvider({
         principles: updatedPrinciples,
       });
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [documentationData],
+    [documentationData, createOrUpdateDocumentationData],
   );
 
   const findDocumentationDataForUrl = useCallback(
