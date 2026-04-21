@@ -17,7 +17,11 @@ import RichText from "~/components/RichText";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import Timeline from "~/components/Timeline";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
-import { ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP } from "~/resources/staticRoutes.ts";
+import {
+  ROUTE_INTEROPERABILITY_FAQ,
+  ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP,
+} from "~/resources/staticRoutes.ts";
+import { ids } from "~/routes/interoperabel.faq.tsx";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { features } from "~/utils/featureFlags";
 import getFeatureFlag from "~/utils/featureFlags.server";
@@ -272,11 +276,19 @@ export default function InteroperableSolutionsDcatAp() {
                   </p>
                 </Timeline.ItemContent>
               </Timeline.Item>
-
+              <Timeline.Item>
+                <RichText
+                  markdown={dedent`
+                Übermitteln Sie vor der Entscheidung über den Entwurf eine
+                [Interoperabilitätsbewertung](${ROUTE_INTEROPERABILITY_FAQ.url}#${ids.interoperability}),
+                falls erforderlich.
+                `}
+                />
+              </Timeline.Item>
               <Timeline.Item bullet>
                 <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48">
                   <Heading tagName="h3" className="ds-heading-03-reg">
-                    Schritt 3: Reichen Sie die Interoperabilitäts-Bewertung ein
+                    Schritt 3: Der Dienst geht live
                   </Heading>
                   <p>
                     Sobald der Dienst live geht, werden die Daten automatisch

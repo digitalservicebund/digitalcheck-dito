@@ -5,6 +5,7 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 import { ReactNode } from "react";
+import { useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
 import RichText from "~/components/RichText";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
@@ -28,9 +29,17 @@ export default function AccordionItem({
 }: Readonly<AccordionItemProps>) {
   const plausibleEvent = getPlausibleEventClassName(plausibleEventName);
 
+  const location = useLocation();
+  const defaultOpen = location.hash ? location.hash.slice(1) === id : false;
+
   return (
-    <div className="border-t-2 border-blue-400 last-of-type:border-b-2">
-      <Disclosure>
+    <div
+      className="border-t-2 border-blue-400 last-of-type:border-b-2"
+      suppressHydrationWarning={
+        true
+      } /* if a hash is set, the panel will only be open client-side */
+    >
+      <Disclosure defaultOpen={defaultOpen}>
         <DisclosureButton
           className={twJoin(
             plausibleEvent,

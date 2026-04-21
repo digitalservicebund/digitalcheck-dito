@@ -16,7 +16,11 @@ import RichText from "~/components/RichText";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import Timeline from "~/components/Timeline";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
-import { ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES } from "~/resources/staticRoutes.ts";
+import {
+  ROUTE_INTEROPERABILITY_FAQ,
+  ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES,
+} from "~/resources/staticRoutes.ts";
+import { ids } from "~/routes/interoperabel.faq.tsx";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { features } from "~/utils/featureFlags";
 import getFeatureFlag from "~/utils/featureFlags.server";
@@ -296,6 +300,15 @@ export default function InteroperableSolutionsDcatAp() {
                     sind. Der IT-Vollzug setzt dies im Nachgang technisch um.
                   </p>
                 </Timeline.ItemContent>
+              </Timeline.Item>
+              <Timeline.Item>
+                <RichText
+                  markdown={dedent`
+                Übermitteln Sie vor der Entscheidung über den Entwurf eine
+                [Interoperabilitätsbewertung](${ROUTE_INTEROPERABILITY_FAQ.url}#${ids.interoperability}),
+                falls erforderlich.
+                `}
+                />
               </Timeline.Item>
 
               <Timeline.Item bullet>

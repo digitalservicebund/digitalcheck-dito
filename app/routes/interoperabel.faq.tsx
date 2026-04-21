@@ -11,6 +11,9 @@ import {
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { getTabAnchorLink } from "~/utils/tabs";
 
+export const ids = {
+  interoperability: "interoperabilitaets-bezug",
+};
 const faqItems = [
   {
     headline: "Was bedeutet grenzüberschreitende Interoperabilität?",
@@ -33,6 +36,7 @@ const faqItems = [
             - ein Austausch von Daten und Informationen zwischen Verwaltungen der EU-Mitgliedstaaten vorgesehen ist
             - die Anforderung von einer öffentlichen Stelle oder einer Einrichtung der Union festgelegt werden.
         `,
+    id: ids.interoperability,
   },
   {
     headline: "Was sind „transeuropäische digitale öffentliche Dienste“?",
@@ -166,7 +170,11 @@ export default function Faq() {
         </Hero>
         <div className="container mb-40 py-80">
           {faqItems.map((item) => (
-            <AccordionItem key={item.headline} headline={item.headline}>
+            <AccordionItem
+              key={item.headline}
+              headline={item.headline}
+              id={item.id}
+            >
               <RichText markdown={item.content} />
             </AccordionItem>
           ))}
