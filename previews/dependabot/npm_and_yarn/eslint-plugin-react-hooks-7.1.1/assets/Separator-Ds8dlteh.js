@@ -1,0 +1,1 @@
+import{j as o}from"./chunk-OE4NN4TA-B87l8SeB.js";import{c as e}from"./tailwindMerge-DAhKV3eC.js";function a({className:r}){return o.jsx("hr",{className:e("border-0 border-b-2 border-solid border-gray-400",r)})}export{a as S};

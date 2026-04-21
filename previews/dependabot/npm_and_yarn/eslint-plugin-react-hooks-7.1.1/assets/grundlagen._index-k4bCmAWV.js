@@ -1,0 +1,1 @@
+import{w as o}from"./chunk-OE4NN4TA-B87l8SeB.js";import{d as r}from"./staticRoutes-DxOXiJjV.js";import{c as e}from"./previewRedirect-c9uBivcD.js";import"./utilFunctions-CBG9PTYO.js";import"./contact-IM88gR3s.js";import"./assetPath-CYz_OR4C.js";const t=e(r.url),c=t.meta,d=o(t.RedirectComponent);export{d as default,c as meta};

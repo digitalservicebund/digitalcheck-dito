@@ -1,0 +1,1 @@
+import{j as r,L as n}from"./chunk-OE4NN4TA-B87l8SeB.js";import{O as o}from"./OpenInNewIcon-DlPLIjTI.js";import{c as a}from"./tailwindMerge-DAhKV3eC.js";function p({children:s,className:t,...e}){return r.jsxs(n,{...e,target:"_blank",className:a("text-link",t),children:[s,r.jsx(o,{})]})}export{p as N};
