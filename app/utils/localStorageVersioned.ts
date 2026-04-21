@@ -17,9 +17,7 @@ export function readDataFromLocalStorage<T extends VersionedData>(
   storageKey: string,
 ): T | null {
   if (globalThis.window === undefined || typeof localStorage === "undefined") {
-    throw new TypeError(
-      "localStorage is not available. This function should only be called on the client-side.",
-    );
+    return null;
   }
 
   const stored = localStorage.getItem(storageKey);

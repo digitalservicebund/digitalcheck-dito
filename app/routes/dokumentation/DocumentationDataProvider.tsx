@@ -3,7 +3,6 @@ import {
   ReactNode,
   useCallback,
   useContext,
-  useEffect,
   useState,
 } from "react";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
@@ -76,16 +75,65 @@ type DocumentationDataProviderProps = {
   children: ReactNode;
 };
 
+type V = typeof DATA_SCHEMA_VERSION_V1 | typeof DATA_SCHEMA_VERSION_V2;
+
+function writeToStorage(data: DocumentationData<V>): void {
+  writeVersionedDataToLocalStorage(data, STORAGE_KEY);
+}
+
+const { radioOptions } = digitalDocumentation.principlePages;
+
+function migrateV1ToV2(v1: DocumentationData<V1>): DocumentationData<V2> {
+  const principles = v1.principles?.map((p) => {
+    if (p.answer !== radioOptions[0] || !Array.isArray(p.reasoning)) return p;
+    const checked = p.reasoning.filter((r) => r.checkbox);
+    return {
+      id: p.id,
+      answer: p.answer,
+      aspects: checked
+        .map((r) => r.aspect)
+        .filter((a): a is string => Boolean(a)),
+      reasoning: checked
+        .map((r) => r.reason)
+        .filter(Boolean)
+        .join("\n"),
+    } as Principle;
+  });
+
+  const updatedDocumentationData: DocumentationData<V2> = {
+    version: DATA_SCHEMA_VERSION_V2,
+    policyTitle: v1.policyTitle,
+    participation: v1.participation,
+    principles: principles as Principle[],
+  };
+
+  writeToStorage(updatedDocumentationData);
+
+  return updatedDocumentationData;
+}
+
+function getInitialState(version: string) {
+  let storedData = readDataFromLocalStorage<DocumentationData<V>>(STORAGE_KEY);
+
+  if (
+    storedData &&
+    version === DATA_SCHEMA_VERSION_V2 &&
+    storedData.version === DATA_SCHEMA_VERSION_V1
+  ) {
+    storedData = migrateV1ToV2(storedData as DocumentationData<V1>);
+  }
+
+  if (storedData !== null) return storedData;
+  return { version };
+}
+
 export function DocumentationDataProvider({
   children,
-}: DocumentationDataProviderProps) {
-  const { radioOptions } = digitalDocumentation.principlePages;
+}: Readonly<DocumentationDataProviderProps>) {
   const simplifiedFlow = useFeatureFlag(features.simplifiedPrincipleFlow);
   const version = simplifiedFlow
     ? DATA_SCHEMA_VERSION_V2
     : DATA_SCHEMA_VERSION_V1;
-
-  type V = typeof version;
 
   function getDocumentationSchemaFormUrl(url: string) {
     return _getDocumentationSchemaFormUrl(url, simplifiedFlow);
@@ -93,61 +141,7 @@ export function DocumentationDataProvider({
 
   const [documentationData, setDocumentationData] = useState<
     DocumentationData<V>
-  >({ version });
-
-  function writeToStorage(data: DocumentationData<V>): void {
-    writeVersionedDataToLocalStorage(data, STORAGE_KEY);
-  }
-
-  function migrateV1ToV2(v1: DocumentationData<V1>): DocumentationData<V2> {
-    const principles = v1.principles?.map((p) => {
-      if (p.answer !== radioOptions[0] || !Array.isArray(p.reasoning)) return p;
-      const checked = p.reasoning.filter((r) => r.checkbox);
-      return {
-        id: p.id,
-        answer: p.answer,
-        aspects: checked
-          .map((r) => r.aspect)
-          .filter((a): a is string => Boolean(a)),
-        reasoning: checked
-          .map((r) => r.reason)
-          .filter(Boolean)
-          .join("\n"),
-      } as Principle;
-    });
-
-    const updatedDocumentationData: DocumentationData<V2> = {
-      version: DATA_SCHEMA_VERSION_V2,
-      policyTitle: v1.policyTitle,
-      participation: v1.participation,
-      principles: principles as Principle[],
-    };
-
-    writeToStorage(updatedDocumentationData);
-
-    return updatedDocumentationData;
-  }
-
-  function getDocumentationDataFromStorage() {
-    let storedData =
-      readDataFromLocalStorage<DocumentationData<V>>(STORAGE_KEY);
-
-    if (
-      storedData &&
-      version === DATA_SCHEMA_VERSION_V2 &&
-      storedData.version === DATA_SCHEMA_VERSION_V1
-    ) {
-      storedData = migrateV1ToV2(storedData as DocumentationData<V1>);
-    }
-
-    if (storedData !== null) setDocumentationData(storedData);
-  }
-
-  // Initial load
-  useEffect(() => {
-    getDocumentationDataFromStorage();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  >(getInitialState(version));
 
   function createOrUpdateDocumentationData(data: DocumentationData<V>): void {
     writeToStorage(data);
@@ -156,7 +150,7 @@ export function DocumentationDataProvider({
 
   function deleteDocumentationData(): void {
     removeFromLocalStorage(STORAGE_KEY);
-    setDocumentationData({ version });
+    setDocumentationData(getInitialState(version));
   }
 
   const setPolicyTitle = useCallback(
