@@ -282,10 +282,18 @@
   --nav-max-width: 300px;
   --content-max-width: var(--max-width-a11y);
 
-  --help-width: 350px;
-  --gutter: 3rem; /* 48px */
+  --help-width: 0px;
+  --gutter: 5rem; /* 80px */
 
   @apply breakout-grid;
+
+  @media (width >= 80rem) {
+    --help-width: 300px;
+  }
+
+  @media (width >= 94rem) {
+    --help-width: 350px;
+  }
 
   @media (width >= 64rem) {
     /* breakpoint lg, 1024px */

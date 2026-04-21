@@ -49,8 +49,6 @@ const asExternalHyperlinkLike = (hyperlink: unknown): ExternalHyperlinkLike =>
 
 const getTextFromTextRun = (textRun: unknown): string =>
   asTextRunLike(textRun).text;
-const getTextFromParagraph = (paragraph: unknown): string =>
-  getTextFromTextRun(asParagraphLike(paragraph).children[0]);
 const getTextFromHyperlink = (hyperlink: unknown): string => {
   return getTextFromTextRun(
     asExternalHyperlinkLike(asParagraphLike(hyperlink).children[0]),
@@ -110,6 +108,7 @@ const prinzips: PrinzipWithAspekte[] = [
     documentId: "p1",
     Name: "Principle One",
     Beschreibung: [makeNode("DESC1")],
+    Hilfetext: [makeNode("DESC1")],
     Nummer: 1,
     order: 1,
     URLBezeichnung: "principle-one",
@@ -137,6 +136,7 @@ const prinzips: PrinzipWithAspekte[] = [
     documentId: "p2",
     Name: "Principle Two",
     Beschreibung: [makeNode("DESC2")],
+    Hilfetext: [makeNode("DESC2")],
     Nummer: 2,
     order: 2,
     URLBezeichnung: "principle-two",

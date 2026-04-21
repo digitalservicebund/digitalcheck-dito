@@ -143,7 +143,7 @@ export const buildPrinciplePatches = (
       [`PRINCIPLE_${prinzipIndex + 1}_TITLE`]: toParagraphPatch(prinzip.Name),
       [`PRINCIPLE_${prinzipIndex + 1}_DESCRIPTION`]: {
         type: PatchType.DOCUMENT,
-        children: strapiBlocksToDocx(prinzip.Beschreibung),
+        children: strapiBlocksToDocx(prinzip.Hilfetext!),
       },
       [`PRINCIPLE_${prinzipIndex + 1}_ANSWER`]: toParagraphPatch(
         answer?.answer ?? principlePages.radioOptions.join(" | "),

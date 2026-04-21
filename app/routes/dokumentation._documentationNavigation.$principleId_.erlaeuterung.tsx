@@ -78,58 +78,60 @@ function DocumentationPrincipleErlaeuterungForm({
   );
 
   return (
-    <form {...form.getFormProps()} className="space-y-40">
+    <form {...form.getFormProps()} className="space-y-80">
       <input {...form.getHiddenInputProps("answer")} />
 
-      <fieldset className="space-y-16">
+      <fieldset className="space-y-24">
         <legend className="ds-heading-03-reg">{explanationTitle}</legend>
 
-        {isPositive && (
-          <AspectPills
-            aspekte={prinzip.Aspekte}
-            scope={form.scope("aspects")}
-            error={form.error("aspects")}
+        <div className="space-y-48">
+          {isPositive && (
+            <AspectPills
+              aspekte={prinzip.Aspekte}
+              scope={form.scope("aspects")}
+              error={form.error("aspects")}
+              warningInsteadOfError
+            >
+              Schwerpunkte auswählen
+              <HelpButton
+                sectionId="aspects"
+                title="Hinweis zu Schwerpunkten"
+                className="h-24 w-24"
+              >
+                <p>
+                  Wählen Sie aus, welche Schwerpunkte für Ihr Vorhaben relevant
+                  sind.
+                </p>
+                <p>
+                  Diese dienen Ihnen als roter Faden für Ihre Erklärung. So
+                  formulieren Sie präzise und stellen sicher, dass Ihre Regelung
+                  das Prinzip erfüllt.
+                </p>
+                {prinzip.Aspekte.map((aspect) => (
+                  <DetailsSummary
+                    key={aspect.Kurzbezeichnung}
+                    title={aspect.Kurzbezeichnung}
+                  >
+                    {aspect.Text && <BlocksRenderer content={aspect.Text} />}
+                  </DetailsSummary>
+                ))}
+              </HelpButton>
+            </AspectPills>
+          )}
+
+          <Textarea
+            scope={form.scope("reasoning")}
+            placeholder={
+              isPositive
+                ? "Tragen Sie Ihre Erklärung ein, z. B.: Online-Beratung wird ermöglicht, siehe § 1a. Geben Sie auch die dazugehörigen Paragrafen an."
+                : undefined
+            }
+            rows={5}
             warningInsteadOfError
           >
-            Schwerpunkte auswählen
-            <HelpButton
-              sectionId="aspects"
-              title="Schwerpunkte"
-              className="h-24 w-24"
-            >
-              <p>
-                Wählen Sie aus, welche Schwerpunkte für Ihr Vorhaben relevant
-                sind.
-              </p>
-              <p>
-                Diese dienen Ihnen als roter Faden für Ihre Erklärung. So
-                formulieren Sie präzise und stellen sicher, dass Ihre Regelung
-                das Prinzip erfüllt.
-              </p>
-              {prinzip.Aspekte.map((aspect) => (
-                <DetailsSummary
-                  key={aspect.Kurzbezeichnung}
-                  title={aspect.Kurzbezeichnung}
-                >
-                  {aspect.Text && <BlocksRenderer content={aspect.Text} />}
-                </DetailsSummary>
-              ))}
-            </HelpButton>
-          </AspectPills>
-        )}
-
-        <Textarea
-          scope={form.scope("reasoning")}
-          placeholder={
-            isPositive
-              ? "Tragen Sie Ihre Erklärung ein, z. B.: Online-Beratung wird ermöglicht, siehe § 1a. Geben Sie auch die dazugehörigen Paragrafen an."
-              : undefined
-          }
-          rows={5}
-          warningInsteadOfError
-        >
-          Erklärung
-        </Textarea>
+            Erklärung
+          </Textarea>
+        </div>
       </fieldset>
 
       <DocumentationActions
@@ -183,9 +185,9 @@ export default function DocumentationPrincipleErlaeuterung() {
   return (
     <>
       <MetaTitle prefix={`Dokumentation: ${prinzip.Name} – Erläuterung`} />
-      <div className="space-y-40">
-        <div className="space-y-8">
-          <Badge principleNumber={prinzip.Nummer}>
+      <div className="space-y-48">
+        <div className="space-y-24">
+          <Badge principleNumber={prinzip.Nummer} className="mb-8">
             Prinzip {prinzip.order}
           </Badge>
           <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
@@ -208,16 +210,16 @@ export default function DocumentationPrincipleErlaeuterung() {
           {prinzip.Kurzbeschreibung && (
             <BlocksRenderer content={prinzip.Kurzbeschreibung} />
           )}
-        </div>
 
-        <div className="rounded-lg bg-blue-300 p-24">
-          <p>{changeAnswerTitle}</p>
-          <Link
-            to={currentUrl.replace("/erlaeuterung", "")}
-            className="text-link"
-          >
-            Angaben ändern
-          </Link>
+          <div className="rounded-lg bg-blue-300 p-24">
+            <p>{changeAnswerTitle}</p>
+            <Link
+              to={currentUrl.replace("/erlaeuterung", "")}
+              className="text-link"
+            >
+              Angaben ändern
+            </Link>
+          </div>
         </div>
 
         <DocumentationPrincipleErlaeuterungForm

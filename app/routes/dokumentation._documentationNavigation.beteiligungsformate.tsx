@@ -68,7 +68,7 @@ export default function DocumentationParticipation() {
               {simplifiedFlow
                 ? "Erklärung"
                 : participation.formats.textField.label}
-              <HelpButton sectionId="formats" title="Erklärung">
+              <HelpButton sectionId="formats" title="Hinweis zur Erklärung">
                 Beschreiben Sie stichpunktartig, wie Sie die Bedürfnisse der
                 Betroffenen erhoben haben – z. B. durch Befragungen, Gesprächen
                 mit Vollzugsakteurinnen und -akteuren oder formelle
@@ -94,7 +94,7 @@ export default function DocumentationParticipation() {
               {simplifiedFlow
                 ? "Erkenntnisse"
                 : participation.results.textField.label}
-              <HelpButton sectionId="results" title="Erkenntnisse">
+              <HelpButton sectionId="results" title="Hinweis zu Erkenntnissen">
                 Bitte listen Sie stichpunktartig auf, welche Erkenntnisse
                 eingearbeitet wurden und geben Sie Hinweise auf Paragrafen, die
                 besonders umsetzungsrelevant sind.

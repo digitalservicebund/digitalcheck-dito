@@ -180,11 +180,11 @@ export default function LayoutWithDocumentationNavigation() {
         className={twJoin(
           "parent-bg-blue breakout-grid-form-steps grow bg-blue-100",
           !simplifiedFlow &&
-            "[--content-max-width:calc(var(--max-content-width)-var(--nav-max-width)-var(--gutter)*3)] [--help-width:0]",
+            "[--content-max-width:calc(var(--max-content-width)-var(--nav-max-width)-var(--gutter)-var(--container-padding-inline)*2)] [--help-width:0]",
         )}
       >
         <Nav
-          className="sticky top-0 hidden self-start py-40 lg:block"
+          className="sticky top-0 hidden self-start py-80 lg:block"
           activeElementUrl={currentUrl}
           ariaLabel={digitalDocumentation.navigation.ariaLabel}
         >
@@ -208,7 +208,7 @@ export default function LayoutWithDocumentationNavigation() {
             })}
           </Nav.Items>
         </Nav>
-        <main className="space-y-40 py-40">
+        <main className="space-y-40 py-80">
           <div className="lg:hidden">
             <Stepper
               currentElementUrl={navigationCurrentUrl}

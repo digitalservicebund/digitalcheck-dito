@@ -225,7 +225,7 @@ describe("DocumentationSummaryV2", () => {
       within(principleContainer).getByText("Ja, gänzlich oder teilweise"),
     ).toBeInTheDocument();
     expect(
-      within(principleContainer).getByText("Schwerpunkte:"),
+      within(principleContainer).getByText("Schwerpunkte"),
     ).toBeInTheDocument();
     expect(within(principleContainer).getByText("A1")).toBeInTheDocument();
     expect(within(principleContainer).getByText("A2")).toBeInTheDocument();
@@ -256,7 +256,7 @@ describe("DocumentationSummaryV2", () => {
       within(principleContainer).getByText("Reason why not applicable"),
     ).toBeInTheDocument();
     expect(
-      within(principleContainer).queryByText("Schwerpunkte:"),
+      within(principleContainer).queryByText("Schwerpunkte"),
     ).not.toBeInTheDocument();
     expect(
       within(principleContainer).queryByText(
@@ -289,7 +289,7 @@ describe("DocumentationSummaryV2", () => {
       within(principleContainer).getByText("Reason why not relevant"),
     ).toBeInTheDocument();
     expect(
-      within(principleContainer).queryByText("Schwerpunkte:"),
+      within(principleContainer).queryByText("Schwerpunkte"),
     ).not.toBeInTheDocument();
     expect(
       within(principleContainer).queryByText(

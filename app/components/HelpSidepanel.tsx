@@ -7,6 +7,8 @@ import customTwMerge from "~/utils/tailwindMerge";
 import Button from "./Button";
 import RichText from "./RichText";
 
+const BREAKPOINT = "1280px" as const;
+
 function ToggleTabButton({
   onClick,
   ariaLabel,
@@ -60,7 +62,7 @@ export default function HelpSidepanel() {
     const el = scrollableRef.current;
     if (!el) return;
 
-    if (!window.matchMedia("(min-width: 1024px)").matches) {
+    if (!window.matchMedia(`(min-width: ${BREAKPOINT})`).matches) {
       el.style.maxHeight = "100vh";
       return;
     }
@@ -78,7 +80,7 @@ export default function HelpSidepanel() {
   useElResize("main", adjustSize, true);
 
   useEffect(() => {
-    if (isOpen && !window.matchMedia("(min-width: 1024px)").matches) {
+    if (isOpen && !window.matchMedia(`(min-width: ${BREAKPOINT})`).matches) {
       document.body.style.overflow = "hidden";
     }
     return () => {
@@ -91,7 +93,7 @@ export default function HelpSidepanel() {
       {/* Mobile: backdrop when open */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm xl:hidden"
           onClick={closePanel}
           aria-hidden="true"
         />
@@ -104,11 +106,10 @@ export default function HelpSidepanel() {
           "help relative border-l border-blue-300 bg-white",
           !isOpen && "hidden",
           // Mobile overlay (overrides grid behavior)
-          "max-lg:fixed max-lg:inset-y-0 max-lg:right-0 max-lg:z-50 max-lg:w-[80vw] max-lg:max-w-[400px] max-lg:shadow-2xl",
+          "max-xl:fixed max-xl:inset-y-0 max-xl:right-0 max-xl:z-50 max-xl:w-[80vw] max-xl:max-w-[400px] max-xl:shadow-2xl",
         )}
       >
-        <div className="absolute right-16 left-0 z-10 flex flex-row justify-between bg-white px-16 py-8">
-          <h2>Hilfe</h2>
+        <div className="absolute right-16 left-0 z-10 flex flex-row justify-end bg-white px-16 pt-24 pb-16">
           <ToggleTabButton
             ariaLabel={isOpen ? "Hilfe-Panel schließen" : "Hilfe-Panel öffnen"}
             className="self-end"

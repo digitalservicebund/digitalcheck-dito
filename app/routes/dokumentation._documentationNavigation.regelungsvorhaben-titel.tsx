@@ -43,7 +43,10 @@ export default function DocumentationTitle() {
         <form {...form.getFormProps()}>
           <Input scope={form.scope("title")} warningInsteadOfError>
             {info.inputTitle.label}
-            <HelpButton sectionId="title" title="Titel des Regelungsvorhabens">
+            <HelpButton
+              sectionId="title"
+              title="Hinweis zu Titel des Regelungsvorhabens"
+            >
               Geben Sie hier den offiziellen Titel Ihres Regelungsvorhabens ein.
               Dieser Titel wird in der fertigen Dokumentation verwendet.
             </HelpButton>

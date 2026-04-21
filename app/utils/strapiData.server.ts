@@ -242,6 +242,7 @@ query GetPrinzipsWithAspects {
     URLBezeichnung
     Name
     Beschreibung
+    Hilfetext
     Aspekte {
       Titel
       Kurzbezeichnung

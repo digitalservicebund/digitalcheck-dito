@@ -70,7 +70,7 @@ const createInfoBoxItem = ({
     </div>
   ),
   look: "highlight",
-  className: "bg-white",
+  className: "bg-white sm:px-40",
 });
 
 function Answer({
@@ -81,22 +81,21 @@ function Answer({
   answers: { prefix: string; answer?: string }[];
 }>) {
   return (
-    <div className="grid grid-cols-2 gap-x-8">
+    <div className="space-y-24">
       {heading && (
-        <Heading tagName="h3" look="ds-subhead" className="col-span-2">
+        <Heading tagName="h3" look="ds-subhead">
           {heading}
         </Heading>
       )}
       {answers
         .filter(({ answer }) => answer)
         .map(({ answer, prefix }) => (
-          <p
-            key={prefix + answer}
-            className="col-span-2 grid grid-cols-subgrid"
-          >
-            <span className="font-bold">{prefix}</span>
-            <span>{answer}</span>
-          </p>
+          <div className="space-y-8" key={prefix + answer}>
+            <Heading tagName="h4" className="ds-body-01-bold">
+              {prefix}
+            </Heading>
+            <p>{answer}</p>
+          </div>
         ))}
       {answers.some(({ answer }) => !answer) && (
         <InlineNotice
@@ -173,8 +172,10 @@ function SimplifiedAspectsContent({
   return (
     <>
       {aspects?.length && (
-        <div className="grid grid-cols-2 gap-x-8">
-          <span className="ds-body-01-bold">Schwerpunkte:</span>
+        <div className="space-y-8">
+          <Heading tagName="h4" className="ds-body-01-bold">
+            Schwerpunkte
+          </Heading>
           <div className="flex flex-wrap gap-16">
             {aspects.map((aspect) => {
               const aspekt = prinzip.Aspekte.find(
@@ -295,7 +296,6 @@ export default function DocumentationSummaryV2() {
           <InfoBox key={item.identifier ?? i} {...item} />
         ))}
       </InfoBoxList>
-
       <DocumentationActions previousUrl={previousUrl} nextUrl={nextUrl} />
     </>
   );
