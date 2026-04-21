@@ -92,11 +92,10 @@ const config: PlaywrightTestConfig = {
   projects: allProjects,
   webServer: {
     // We're testing the built code, but set the NODE_ENV to enable mocks.
-    // Cannot use `npm run start` because it unconditionally exports .env which
-    // overrides FEATURE_FLAGS_PATH. Run build via npm (uses project root), then
-    // serve directly with the tests feature flag path.
+    // Use `start:test` (does not source .env) so inline env here wins; load
+    // test env from .env.test, which sets FEATURE_FLAGS_PATH to the tests file.
     command:
-      "npm run build && cd .. && export $(grep -v '^#' .env | xargs) && FEATURE_FLAGS_PATH=./tests/feature-flags.json NODE_ENV=development PORT=5172 react-router-serve build/server/index.js",
+      "pnpm run build && cd .. && export $(grep -v '^#' .env.test | xargs) && NODE_ENV=development PORT=5172 pnpm run start:test",
     port: 5172,
   },
 };

@@ -20,6 +20,7 @@
     "pre-commit": "pnpm run build && pnpm run style:fix && pnpm run test && pnpm run typecheck",
     "preinstall": "echo 'Please disable script execution for security reasons: pnpm install --ignore-scripts' && exit 1",
     "start": "export $(grep -v '^#' .env | xargs) && react-router-serve build/server/index.js",
+    "start:test": "react-router-serve build/server/index.js",
     "style:check": "pnpm run format:check && pnpm run lint:check",
     "style:fix": "pnpm run format:fix && pnpm run lint:fix",
     "test": "vitest run",
