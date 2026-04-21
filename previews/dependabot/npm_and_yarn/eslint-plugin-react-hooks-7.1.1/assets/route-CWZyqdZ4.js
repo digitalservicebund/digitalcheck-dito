@@ -1,1 +1,0 @@
-import{w as a,j as t,O as e,d as n}from"./chunk-OE4NN4TA-B87l8SeB.js";import{D as r}from"./DocumentationDataProvider-BUE2tQdP.js";const i={hasProgressBar:!0};function m(){return n("routes/dokumentation")}const c=a(function(){return t.jsx(r,{children:t.jsx(e,{})})});export{i as h,c as r,m as u};
