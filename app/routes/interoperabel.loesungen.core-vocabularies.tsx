@@ -24,7 +24,7 @@ import getFeatureFlag from "~/utils/featureFlags.server";
 import { slugify } from "~/utils/utilFunctions.ts";
 
 export function loader() {
-  if (!getFeatureFlag(features.showDCATAP)) {
+  if (!getFeatureFlag(features.showCoreVocabularies)) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw data("Not found", { status: 404 });
   }

@@ -10,7 +10,6 @@ import {
 } from "~/resources/staticRoutes.ts";
 
 export const InteroperableLoesungenTab = () => {
-  const showDCATAP = useFeatureFlag("showDCATAP");
   const showCoreVocabularies = useFeatureFlag("showCoreVocabularies");
 
   const solutions = [
@@ -24,9 +23,7 @@ export const InteroperableLoesungenTab = () => {
     {
       title: "Data Catalogue Vocabulary Application Profile (DCAT-AP)",
       text: "Der Metadatenstandard für Offene Daten und Transparenz (Data Catalogue Vocabulary Application Profile)",
-      href: showDCATAP
-        ? ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP.url
-        : undefined,
+      href: ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP.url,
     },
   ];
 
