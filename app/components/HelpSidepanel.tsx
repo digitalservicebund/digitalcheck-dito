@@ -48,7 +48,7 @@ export default function HelpSidepanel() {
         const targetTop = target.getBoundingClientRect().top;
         scrollableRef.current.scrollTo({
           top:
-            scrollableRef.current.scrollTop + (targetTop - containerTop) - 16,
+            scrollableRef.current.scrollTop + (targetTop - containerTop) - 80,
           behavior: "smooth",
         });
       }
@@ -109,47 +109,50 @@ export default function HelpSidepanel() {
           "max-xl:fixed max-xl:inset-y-0 max-xl:right-0 max-xl:z-50 max-xl:w-[80vw] max-xl:max-w-[400px] max-xl:shadow-2xl",
         )}
       >
-        <div className="absolute right-16 left-0 z-10 flex flex-row justify-end bg-white px-16 pt-24 pb-16">
-          <ToggleTabButton
-            ariaLabel={isOpen ? "Hilfe-Panel schließen" : "Hilfe-Panel öffnen"}
-            className="self-end"
-            onClick={() => (isOpen ? closePanel() : openPanel())}
-          >
-            {isOpen ? (
-              <CloseOutlined className="h-20 w-20" />
-            ) : (
-              <ChevronLeftOutlined className="h-20 w-20" />
-            )}
-          </ToggleTabButton>
-        </div>
-        <div
-          className={twJoin(
-            "sticky top-0",
-            "before:pointer-events-none before:absolute before:top-48 before:right-16 before:left-0 before:h-40 before:bg-[linear-gradient(to_bottom,white,transparent)] before:blur-xs before:content-['']",
-            "after:pointer-events-none after:absolute after:right-16 after:bottom-0 after:left-0 after:h-40 after:bg-[linear-gradient(to_top,white,transparent)] after:blur-xs after:content-['']",
-          )}
-        >
+        <div className="sticky top-0">
+          <div className="absolute right-16 left-0 z-10 flex flex-row justify-end bg-white px-16 pt-24 pb-16">
+            <ToggleTabButton
+              ariaLabel={
+                isOpen ? "Hilfe-Panel schließen" : "Hilfe-Panel öffnen"
+              }
+              className="self-end"
+              onClick={() => (isOpen ? closePanel() : openPanel())}
+            >
+              {isOpen ? (
+                <CloseOutlined className="h-20 w-20" />
+              ) : (
+                <ChevronLeftOutlined className="h-20 w-20" />
+              )}
+            </ToggleTabButton>
+          </div>
           <div
-            ref={scrollableRef}
-            className="max-h-screen overflow-x-hidden overflow-y-hidden pt-80 pb-40 wrap-break-word [scrollbar-gutter:stable] hover:overflow-y-auto max-lg:overflow-y-auto max-lg:[scrollbar-gutter:auto]"
+            className={twJoin(
+              "before:pointer-events-none before:absolute before:top-48 before:right-16 before:left-0 before:h-40 before:bg-[linear-gradient(to_bottom,white,transparent)] before:blur-xs before:content-['']",
+              "after:pointer-events-none after:absolute after:right-16 after:bottom-0 after:left-0 after:h-40 after:bg-[linear-gradient(to_top,white,transparent)] after:blur-xs after:content-['']",
+            )}
           >
-            <div className="w-full space-y-32 pr-16 pl-32">
-              {sections.map((section) => (
-                <div
-                  key={section.id}
-                  id={`help-section-${section.id}`}
-                  className="scroll-mt-40"
-                >
-                  <h3 className="ds-subhead mb-8 font-bold text-blue-800">
-                    {section.title}
-                  </h3>
-                  {typeof section.content === "string" ? (
-                    <RichText markdown={section.content} />
-                  ) : (
-                    <div className="space-y-8">{section.content}</div>
-                  )}
-                </div>
-              ))}
+            <div
+              ref={scrollableRef}
+              className="max-h-screen overflow-x-hidden overflow-y-hidden pt-80 pb-40 wrap-break-word [scrollbar-gutter:stable] hover:overflow-y-auto max-lg:overflow-y-auto max-lg:[scrollbar-gutter:auto]"
+            >
+              <div className="w-full space-y-32 pr-16 pl-32">
+                {sections.map((section) => (
+                  <div
+                    key={section.id}
+                    id={`help-section-${section.id}`}
+                    className="scroll-my-80"
+                  >
+                    <h3 className="ds-subhead mb-8 font-bold text-blue-800">
+                      {section.title}
+                    </h3>
+                    {typeof section.content === "string" ? (
+                      <RichText markdown={section.content} />
+                    ) : (
+                      <div className="space-y-8">{section.content}</div>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

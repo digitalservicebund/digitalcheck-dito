@@ -16,7 +16,7 @@ type HelpPanelContextType = {
   openPanel: (sectionId?: string) => void;
   closePanel: () => void;
   setHelpSections: (sections: HelpSection[]) => void;
-  registerSection: (section: HelpSection) => () => void;
+  registerSection: (section: HelpSection) => void;
 };
 
 const HelpPanelContext = createContext<HelpPanelContextType | null>(null);
@@ -41,6 +41,12 @@ export function HelpPanelProvider({
   const [dynamicSections, setDynamicSections] = useState<HelpSection[]>([]);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const { pathname } = useLocation();
+  const [dynamicPathname, setDynamicPathname] = useState(pathname);
+
+  if (dynamicPathname !== pathname) {
+    setDynamicPathname(pathname);
+    setDynamicSections([]);
+  }
 
   const openPanel = (sectionId?: string) => {
     setIsOpen(true);
@@ -60,11 +66,15 @@ export function HelpPanelProvider({
   );
 
   const registerSection = useCallback((section: HelpSection) => {
-    setDynamicSections((prev) => [...prev, section]);
-
-    return () => {
-      setDynamicSections((prev) => prev.filter((s) => s.id !== section.id));
-    };
+    setDynamicSections((prev) => {
+      const idx = prev.findIndex((s) => s.id === section.id);
+      if (idx >= 0) {
+        const next = [...prev];
+        next[idx] = section;
+        return next;
+      }
+      return [...prev, section];
+    });
   }, []);
 
   return (

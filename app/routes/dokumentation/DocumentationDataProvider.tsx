@@ -2,6 +2,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -113,7 +114,7 @@ function migrateV1ToV2(v1: DocumentationData<V1>): DocumentationData<V2> {
   return updatedDocumentationData;
 }
 
-function getInitialState(version: string) {
+function getInitialState(version: string): DocumentationData<V> {
   let storedData = readDataFromLocalStorage<DocumentationData<V>>(STORAGE_KEY);
 
   if (
@@ -125,7 +126,7 @@ function getInitialState(version: string) {
   }
 
   if (storedData !== null) return storedData;
-  return { version };
+  return { version } as DocumentationData<V>;
 }
 
 export function DocumentationDataProvider({
@@ -138,7 +139,15 @@ export function DocumentationDataProvider({
 
   const [documentationData, setDocumentationData] = useState<
     DocumentationData<V>
-  >(getInitialState(version));
+  >({ version } as DocumentationData<V>);
+
+  useEffect(() => {
+    // Read localStorage only on the client, after hydration, so the first
+    // client render matches the SSR HTML (empty state). The lint rule is
+    // overly strict for this case — see https://react.dev/learn/you-might-not-need-an-effect
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setDocumentationData(getInitialState(version));
+  }, [version]);
 
   const getDocumentationSchemaFormUrl = useCallback(
     (url: string) => {

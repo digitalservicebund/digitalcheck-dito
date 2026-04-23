@@ -23,7 +23,7 @@ export default function HelpButton({
 
   useEffect(() => {
     if (title && children) {
-      return registerSection({ id: sectionId, title, content: children });
+      registerSection({ id: sectionId, title, content: children });
     }
   }, [sectionId, title, children, registerSection]);
 
