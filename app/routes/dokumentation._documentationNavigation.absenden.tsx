@@ -1,5 +1,4 @@
-import EmojiEventsOutlinedIcon from "@digitalservicebund/icons/EmojiEventsOutlined";
-import { useOutletContext } from "react-router";
+import { EmojiEventsOutlined as EmojiEventsOutlinedIcon } from "@digitalservicebund/icons";
 import { DownloadButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Heading from "~/components/Heading";
@@ -7,15 +6,14 @@ import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxList from "~/components/InfoBoxList";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
+import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_SEND } from "~/resources/staticRoutes";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
-import { NavigationContext } from "./dokumentation._documentationNavigation";
-
 const { finish } = digitalDocumentation;
 
 export default function DocumentationSend() {
-  const { prinzips } = useOutletContext<NavigationContext>();
+  const { prinzips } = useNavigationContext();
   const { downloadDocumentation } = useWordDocumentation();
 
   return (

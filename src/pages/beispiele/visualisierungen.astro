@@ -1,0 +1,47 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Container from "~/components/Container";
+import Hero from "~/components/Hero";
+import MetaTitle from "~/components/Meta";
+import VisualisationItem from "~/components/VisualisationItem";
+import { examplesVisualisations } from "~/resources/content/beispiele-visualisierungen";
+import { ROUTE_EXAMPLES_VISUALISATIONS } from "~/resources/staticRoutes";
+import {
+  fetchStrapiData,
+  visualisationFields,
+  type Visualisierung,
+} from "~/utils/strapiData.server";
+
+const GET_VISUALISATIONS_QUERY = `
+${visualisationFields}
+query GetVisualisierungen($status: PublicationStatus!) {
+  visualisierungen(status: $status, sort: "createdAt:desc") {
+    ...VisualisationFields
+  }
+}`;
+
+const visualisationsResult = await fetchStrapiData<{
+  visualisierungen: Visualisierung[];
+}>(GET_VISUALISATIONS_QUERY, { status: "PUBLISHED" });
+
+const visualisationsData =
+  "error" in visualisationsResult ? [] : visualisationsResult.visualisierungen;
+---
+
+<Layout>
+  <MetaTitle prefix={ROUTE_EXAMPLES_VISUALISATIONS.title} />
+  <Hero
+    title={examplesVisualisations.title}
+    subtitle={examplesVisualisations.subtitle}
+  />
+  <Container className="space-y-64">
+    {
+      visualisationsData.map((visualisation) => (
+        <VisualisationItem
+          visualisierung={visualisation}
+          showContext
+        />
+      ))
+    }
+  </Container>
+</Layout>

@@ -1,5 +1,4 @@
-import { ReactNode } from "react";
-import { data, Link, useLoaderData } from "react-router";
+import { type ReactNode } from "react";
 import { twJoin } from "tailwind-merge";
 import AccordionItem from "~/components/AccordionItem.tsx";
 import Badge from "~/components/Badge.tsx";
@@ -17,6 +16,7 @@ import {
   ROUTE_METHODS_PRINCIPLES,
 } from "~/resources/staticRoutes.ts";
 import { absatzIdTag, Node } from "~/utils/paragraphUtils";
+import { Link } from "~/utils/routerCompat";
 import {
   AbsatzWithParagraph,
   BasePrinzip,
@@ -280,8 +280,14 @@ function PrincipleNavigation({
   );
 }
 
-export default function Prinzip() {
-  const { prinzip, prinzipList } = useLoaderData<typeof loader>();
+export default function Prinzip({
+  prinzip,
+  prinzipList = [],
+}: {
+  prinzip?: PrinzipWithAspekteAndExample;
+  prinzipList?: PrinzipListItem[];
+} = {}) {
+  if (!prinzip) return null;
 
   return (
     <>

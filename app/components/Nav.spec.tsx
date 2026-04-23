@@ -1,6 +1,6 @@
 import { render, screen, within } from "@testing-library/react";
-import { createRoutesStub } from "react-router";
 import { describe, expect, it } from "vitest";
+import { createRoutesStub } from "~/utils/routerCompat";
 import Nav from "./Nav";
 
 const renderNav = (

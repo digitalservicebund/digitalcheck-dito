@@ -1,8 +1,10 @@
-import CloseIcon from "@digitalservicebund/icons/Close";
-import ContactPhoneOutlinedIcon from "@digitalservicebund/icons/ContactPhoneOutlined";
-import DvrIcon from "@digitalservicebund/icons/Dvr";
-import FactCheckOutlinedIcon from "@digitalservicebund/icons/FactCheckOutlined";
-import WidgetsOutlinedIcon from "@digitalservicebund/icons/WidgetsOutlined";
+import {
+  Close as CloseIcon,
+  ContactPhoneOutlined as ContactPhoneOutlinedIcon,
+  Dvr as DvrIcon,
+  FactCheckOutlined as FactCheckOutlinedIcon,
+  WidgetsOutlined as WidgetsOutlinedIcon,
+} from "@digitalservicebund/icons";
 import { useState } from "react";
 import Badge from "~/components/Badge";
 import Button, { LinkButton } from "~/components/Button";

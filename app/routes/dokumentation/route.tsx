@@ -1,10 +1,10 @@
-import { Outlet, useRouteLoaderData } from "react-router";
 import {
   Route as _Route,
   ROUTE_DOCUMENTATION,
   ROUTES_DOCUMENTATION_FINALIZE,
   ROUTES_DOCUMENTATION_INTRO,
 } from "~/resources/staticRoutes.ts";
+import { Outlet, useRouteLoaderData } from "~/utils/routerCompat";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,

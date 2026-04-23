@@ -1,0 +1,17 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "~/components/Hero";
+import SVGWithMinimap from "~/components/SVGWithMiniMap";
+import { assetPath } from "~/utils/assetPath";
+---
+
+<Layout>
+  <main>
+    <Hero title="Der Digitalcheck im Gesetzgebungsprozess" />
+    <SVGWithMinimap
+      className="mt-40 mb-80"
+      svgSrc={assetPath("/images/regelungen-description.svg")}
+      client:load
+    />
+  </main>
+</Layout>

@@ -7,8 +7,8 @@ import {
   WarningAmberOutlined,
 } from "@digitalservicebund/icons";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router";
 import { twJoin } from "tailwind-merge";
+import { Link, useNavigate } from "~/utils/routerCompat";
 
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";

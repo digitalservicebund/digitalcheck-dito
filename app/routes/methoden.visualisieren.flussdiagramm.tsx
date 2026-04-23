@@ -12,8 +12,7 @@ import InfoBox from "~/components/InfoBox.tsx";
 import NumberedList from "~/components/NumberedList.tsx";
 import RichText from "~/components/RichText.tsx";
 
-import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
-import { Link } from "react-router";
+import { ArrowCircleRightOutlined } from "@digitalservicebund/icons";
 import { twJoin } from "tailwind-merge";
 import BackToTopButton from "~/components/BackToTopButton.tsx";
 import Container from "~/components/Container.tsx";
@@ -30,6 +29,7 @@ import {
 import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils.ts";
+import { Link } from "~/utils/routerCompat";
 
 const diagramElements = [
   {

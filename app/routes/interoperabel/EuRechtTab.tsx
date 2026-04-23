@@ -1,7 +1,9 @@
-import FlagOutlined from "@digitalservicebund/icons/FlagOutlined";
-import PlaylistAddCheckOutlined from "@digitalservicebund/icons/PlaylistAddCheckOutlined";
-import SelectAllOutlined from "@digitalservicebund/icons/SelectAllOutlined";
-import { ReactNode } from "react";
+import {
+  FlagOutlined,
+  PlaylistAddCheckOutlined,
+  SelectAllOutlined,
+} from "@digitalservicebund/icons";
+import { type ReactNode } from "react";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import ImageBox from "~/components/ImageBox";

@@ -1,0 +1,9 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import MethodenSubPage from "~/routes/methoden.$subPage";
+import { ROUTE_METHODS_RESPONSIBLE_ACTORS } from "~/resources/staticRoutes";
+---
+
+<Layout showProgressBar={true}>
+  <MethodenSubPage route={ROUTE_METHODS_RESPONSIBLE_ACTORS} />
+</Layout>

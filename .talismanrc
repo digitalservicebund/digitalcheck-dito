@@ -10,6 +10,11 @@ fileignoreconfig:
     ignore_detectors: [filename]
   - filename: .env.test
     ignore_detectors: [filename]
+  - filename: nginx/nginx.template.conf
+    allowed_patterns:
+      - proxy_pass
+  - filename: src/components/Posthog.astro
+    checksum: 29d1f7cc9a752975ec3954d5c56aca0f310f07d9f5a3227b7abe169015589a10
   - filename: app/root.tsx
     allowed_patterns: [posthogKey]
   - filename: app/utils/localStorageVersioned.ts

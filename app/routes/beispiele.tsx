@@ -1,4 +1,3 @@
-import { Outlet, useLoaderData } from "react-router";
 import Container from "~/components/Container";
 import InfoBox from "~/components/InfoBox.tsx";
 import RichText from "~/components/RichText.tsx";

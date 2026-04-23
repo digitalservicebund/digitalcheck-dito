@@ -1,19 +1,9 @@
 import { render, screen, within } from "@testing-library/react";
-import { MemoryRouter, useLoaderData } from "react-router";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import FivePrinciples from "~/routes/methoden.fuenf-prinzipien._index/route";
 import { Node } from "~/utils/paragraphUtils";
-
-// Mock react-router's useLoaderData hook, which is used by the component
-// to get data from its server-side loader.
-vi.mock("react-router", async (importOriginal) => {
-  const original = await importOriginal<typeof import("react-router")>();
-  return {
-    ...original,
-    useLoaderData: vi.fn(),
-  };
-});
+import { MemoryRouter } from "~/utils/routerCompat";
 
 // Create mock data that simulates the data structure returned by the loader.
 // This includes a principle with a full example and one without to test conditional rendering.
@@ -106,16 +96,10 @@ const mockPrinzipsData = [
 
 describe("FivePrinciples Route - Integration Tests", () => {
   beforeEach(() => {
-    // Provide the mock data to the component via the mocked hook
-    vi.mocked(useLoaderData).mockReturnValue({
-      prinzips: mockPrinzipsData,
-      useNewPrinciples: true,
-    });
-
     // Render the component within a router to handle <Link> components
     render(
       <MemoryRouter>
-        <FivePrinciples />
+        <FivePrinciples prinzips={mockPrinzipsData} />
       </MemoryRouter>,
     );
   });

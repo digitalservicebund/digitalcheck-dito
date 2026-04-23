@@ -8,7 +8,7 @@ import {
   ListboxOption,
   ListboxOptions,
 } from "@headlessui/react";
-import { ReactNode } from "react";
+import { type ReactNode } from "react";
 import { twJoin } from "tailwind-merge";
 import {
   mobileTabPickerButtonClassName,

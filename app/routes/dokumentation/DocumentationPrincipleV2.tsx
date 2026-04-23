@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import Heading from "~/components/Heading";
@@ -7,6 +6,7 @@ import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
+import { Link } from "~/utils/routerCompat";
 import { PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
 import DocumentationActions from "./DocumentationActions";
 import { useSyncedForm } from "./documentationDataHook";

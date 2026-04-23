@@ -1,5 +1,3 @@
-import { useLoaderData } from "react-router";
-
 import Container from "~/components/Container";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -13,12 +11,14 @@ import { methodsITSystems } from "~/resources/content/methode-it-systeme-erfasse
 import { methodsTechnicalFeasibility } from "~/resources/content/methode-technische-umsetzbarkeit";
 import { methodsResponsibleActors } from "~/resources/content/methode-zustaendige-akteurinnen-auflisten";
 import { interviewBanner } from "~/resources/content/shared/interview-banner";
+import type { Route as StaticRoute } from "~/resources/staticRoutes";
 import {
   ROUTE_METHODS_COLLECT_IT_SYSTEMS,
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
   ROUTES,
 } from "~/resources/staticRoutes";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type { Route } from "./+types/methoden.$subPage";
 
 const contentMap = {
@@ -49,8 +49,11 @@ export function loader({ params }: Route.LoaderArgs) {
   return { route };
 }
 
-export default function Index() {
-  const { route } = useLoaderData<typeof loader>();
+export default function Index({
+  route: propRoute,
+}: { route?: StaticRoute } = {}) {
+  const route = propRoute;
+  if (!route) return null;
   // We have to get the content here to use the icons from the content file
   const content = contentMap[route.title];
 

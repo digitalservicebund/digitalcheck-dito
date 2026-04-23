@@ -3,7 +3,6 @@ import {
   ShareOutlined,
   VisibilityTwoTone,
 } from "@digitalservicebund/icons";
-import { Link, useLoaderData } from "react-router";
 import Badge from "~/components/Badge.tsx";
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
 import { LinkButton } from "~/components/Button.tsx";
@@ -20,10 +19,11 @@ import {
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_METHODS_VISUALIZE,
 } from "~/resources/staticRoutes";
+import { Link } from "~/utils/routerCompat";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,
-  PrinzipWithAspekteAndExample,
+  type PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server";
 
 export const loader = async () => {
@@ -39,9 +39,11 @@ export const loader = async () => {
   return { prinzips: prinzipData.prinzips };
 };
 
-export default function FivePrinciples() {
-  const { prinzips } = useLoaderData<typeof loader>();
-
+export default function FivePrinciples({
+  prinzips = [],
+}: {
+  prinzips?: PrinzipWithAspekteAndExample[];
+} = {}) {
   return (
     <>
       <MetaTitle prefix={ROUTE_METHODS_PRINCIPLES.title} />

@@ -1,0 +1,50 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PrinzipDetail from "~/routes/beispiele.prinzipien.$prinzip";
+import {
+  fetchStrapiData,
+  paragraphFields,
+  prinzipCoreFields,
+  type PrinzipWithBeispielvorhaben,
+} from "~/utils/strapiData.server";
+
+export async function getStaticPaths() {
+  const query = `
+${paragraphFields}
+${prinzipCoreFields}
+query GetAllPrinzipsWithBeispiele {
+  prinzips {
+    ...PrinzipCoreFields
+    Beispielvorhaben {
+      documentId
+      Ressort
+      Rechtsgebiet
+      Titel
+      URLBezeichnung
+      LinkRegelungstext
+      VeroeffentlichungsDatum
+      GesetzStatus
+      Paragraphen { ...ParagraphFields }
+    }
+  }
+}`;
+
+  const result = await fetchStrapiData<{ prinzips: PrinzipWithBeispielvorhaben[] }>(query);
+  if ("error" in result) return [];
+
+  const prinzips = result.prinzips.toSorted((a, b) => a.order - b.order);
+
+  return prinzips.map((prinzip) => ({
+    params: { prinzip: prinzip.URLBezeichnung },
+    props: { prinzip, prinzips },
+  }));
+}
+
+const { prinzip, prinzips } = Astro.props;
+---
+
+<Layout>
+  <main>
+    <PrinzipDetail prinzip={prinzip} prinzips={prinzips} />
+  </main>
+</Layout>

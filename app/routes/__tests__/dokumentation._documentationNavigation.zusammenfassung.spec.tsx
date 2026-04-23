@@ -5,7 +5,6 @@ import "./utils/mockRouter";
 
 import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
-import { MemoryRouter, useOutletContext } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   Route,
@@ -24,6 +23,7 @@ import type {
   V1,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
+import { MemoryRouter, useOutletContext } from "~/utils/routerCompat";
 import { AbsatzWithParagraph } from "~/utils/strapiData.server.ts";
 import DocumentationSummaryV1 from "../dokumentation/DocumentationSummaryV1";
 

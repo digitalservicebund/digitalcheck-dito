@@ -1,4 +1,4 @@
-import FileDownloadOutlined from "@digitalservicebund/icons/FileDownloadOutlined";
+import { FileDownloadOutlined } from "@digitalservicebund/icons";
 import { renderToString } from "react-dom/server";
 
 export const downloadIconElement = (

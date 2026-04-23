@@ -4,7 +4,6 @@ import {
   LayersOutlined,
 } from "@digitalservicebund/icons";
 import React from "react";
-import { data } from "react-router";
 import AccordionItem from "~/components/AccordionItem";
 import Badge from "~/components/Badge.tsx";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -26,7 +25,7 @@ import { slugify } from "~/utils/utilFunctions.ts";
 export function loader() {
   if (!getFeatureFlag(features.showCoreVocabularies)) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw data("Not found", { status: 404 });
+    throw new Response("Not found", { status: 404 });
   }
 }
 

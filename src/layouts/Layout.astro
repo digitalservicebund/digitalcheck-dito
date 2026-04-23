@@ -1,0 +1,88 @@
+---
+import Footer from "~/layout/Footer";
+import PageHeader from "~/layout/PageHeader";
+import { siteMeta } from "~/resources/content/shared/meta";
+import "~/styles.css";
+import Posthog from "@/components/Posthog.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Pass true for routes that have a progress bar (vorpruefung, dokumentation). */
+  showProgressBar?: boolean;
+}
+
+const {
+  title,
+  description = siteMeta.description,
+  showProgressBar = false,
+} = Astro.props;
+
+const pageTitle = title
+  ? `${title} — ${siteMeta.siteName}`
+  : siteMeta.titleWithTagline;
+
+const canonicalUrl = Astro.url.href.replace(/\/$/, "");
+const ogImage = `${Astro.url.origin}/images/og-image.png`;
+
+const plausibleEnabled = import.meta.env.PUBLIC_TRACKING_ENABLED === "true";
+const posthogEnabled = !!import.meta.env.PUBLIC_POSTHOG_KEY;
+
+const jsonLdMetadata = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteMeta.siteName,
+  alternateName: siteMeta.alternateName,
+  url: siteMeta.siteURL,
+};
+---
+
+<!doctype html>
+<html lang="de" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+
+    <meta name="description" content={description} />
+    <meta property="og:site_name" content={siteMeta.siteName} />
+    <meta property="og:description" content={description} />
+    <meta property="twitter:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="twitter:image" content={ogImage} />
+    <meta property="og:type" content="website" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon_32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon_64.png" type="image/png" sizes="64x64" />
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(jsonLdMetadata)}
+    />
+
+    {
+      plausibleEnabled && (
+        <script
+          defer
+          data-domain="digitalcheck.bund.de"
+          src="https://plausible.io/js/script.tagged-events.outbound-links.js"
+        />
+      )
+    }
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <PageHeader client:load showProgressBar={showProgressBar} />
+    <div
+      class="grow [&:has(.parent-bg-blue)]:flex [&:has(.parent-bg-blue)]:flex-col [&:has(.parent-bg-blue)]:bg-blue-100"
+    >
+      <slot />
+    </div>
+    <Footer />
+    {posthogEnabled && <Posthog />}
+  </body>
+</html>

@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router";
+import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { features } from "~/utils/featureFlags";
 import getFeatureFlag from "~/utils/featureFlags.server";
 import DocumentationSummaryV1 from "./dokumentation/DocumentationSummaryV1";
@@ -10,7 +10,7 @@ export const loader = () => {
 };
 
 export default function DocumentationSummary() {
-  const { simplifiedFlow } = useLoaderData<typeof loader>();
+  const simplifiedFlow = useFeatureFlag(features.simplifiedPrincipleFlow);
 
   return simplifiedFlow ? (
     <DocumentationSummaryV2 />

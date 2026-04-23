@@ -1,6 +1,5 @@
 import { ArrowUpwardOutlined } from "@digitalservicebund/icons";
 import { useContext } from "react";
-import { Link, useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
 import PrincipleHighlightContext from "~/contexts/PrincipleHighlightContext";
 import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider";
@@ -11,6 +10,7 @@ import {
   explanationID,
   prependNumberToAbsatz,
 } from "~/utils/paragraphUtils";
+import { Link, useLocation } from "~/utils/routerCompat";
 import {
   BaseAbsatz,
   BasePrinzip,

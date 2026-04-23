@@ -1,4 +1,4 @@
-import { ActiveBehavior } from "~/components/DropdownContentList";
+import { type ActiveBehavior } from "~/components/DropdownContentList";
 import { contact } from "~/resources/content/shared/contact";
 import {
   ROUTE_DOCUMENTATION,

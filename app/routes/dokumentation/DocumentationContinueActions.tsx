@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router";
 import Button, { DownloadButton, LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Dialog from "~/components/Dialog.tsx";
@@ -12,6 +11,7 @@ import {
 import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation.ts";
 import { useNonce } from "~/utils/nonce.ts";
+import { useNavigate } from "~/utils/routerCompat";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
 
 const { start } = digitalDocumentation;

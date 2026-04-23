@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { type ReactNode } from "react";
 import AccordionItem from "~/components/AccordionItem";
 import Badge from "~/components/Badge.tsx";
 import Container from "~/components/Container";

@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import Image from "~/components/Image";
@@ -11,6 +10,7 @@ import {
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
+import { Link } from "~/utils/routerCompat";
 import { getTabAnchorLink } from "~/utils/tabs";
 import { tabIds } from "./tabIds";
 

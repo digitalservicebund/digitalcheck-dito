@@ -1,0 +1,11 @@
+---
+export function getStaticPaths() {
+  // Generate catch-all redirect entries for known sub-paths.
+  // Nginx handles the runtime wildcard redirect; this covers the build-time case.
+  return [{ params: { path: undefined } }];
+}
+
+const rawPath = Astro.params.path ?? "";
+const target = rawPath ? `/beispiele/${rawPath}` : "/beispiele";
+return Astro.redirect(target, 301);
+---

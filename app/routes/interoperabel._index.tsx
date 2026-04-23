@@ -1,5 +1,4 @@
-import QuizIcon from "@digitalservicebund/icons/QuizOutlined";
-import { Link } from "react-router";
+import { QuizOutlined as QuizIcon } from "@digitalservicebund/icons";
 import { LinkButton } from "~/components/Button";
 import Container from "~/components/Container";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
@@ -16,6 +15,7 @@ import {
   ROUTE_INTEROPERABILITY,
   ROUTE_INTEROPERABILITY_FAQ,
 } from "~/resources/staticRoutes";
+import { Link } from "~/utils/routerCompat";
 import { EuRechtTab } from "./interoperabel/EuRechtTab";
 import { HintergrundTab } from "./interoperabel/HintergrundTab";
 import { InteroperableLoesungenTab } from "./interoperabel/InteroperableLoesungenTab";

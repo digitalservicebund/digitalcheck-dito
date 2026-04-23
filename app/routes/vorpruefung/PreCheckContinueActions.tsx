@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router";
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Dialog from "~/components/Dialog.tsx";
@@ -8,6 +7,7 @@ import { general } from "~/resources/content/shared/general.ts";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { ROUTE_PRECHECK_INFO } from "~/resources/staticRoutes.ts";
 import { useNonce } from "~/utils/nonce.ts";
+import { useNavigate } from "~/utils/routerCompat";
 import { usePreCheckData } from "./preCheckDataHook";
 import { deletePreCheckData } from "./preCheckDataService";
 

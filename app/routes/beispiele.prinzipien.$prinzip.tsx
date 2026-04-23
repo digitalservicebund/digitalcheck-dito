@@ -1,4 +1,4 @@
-import { Link, useLoaderData, useOutletContext } from "react-router";
+import { Link } from "~/utils/routerCompat";
 
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
@@ -63,9 +63,14 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
   return { prinzip: prinzipData.prinzips[0] };
 };
 
-export default function DigitaltauglichkeitPrinzipienDetail() {
-  const { prinzip } = useLoaderData<typeof loader>();
-  const prinzips = useOutletContext<PrinzipWithBeispielvorhaben[]>();
+export default function DigitaltauglichkeitPrinzipienDetail({
+  prinzip,
+  prinzips = [],
+}: {
+  prinzip?: PrinzipWithBeispielvorhaben;
+  prinzips?: PrinzipWithBeispielvorhaben[];
+} = {}) {
+  if (!prinzip) return null;
 
   const { Beispielvorhaben } = prinzip;
   const tabs = prinzips.map((principle) => ({

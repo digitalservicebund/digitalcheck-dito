@@ -1,6 +1,6 @@
-import { Link } from "react-router";
 import Heading from "~/components/Heading";
 import { general } from "~/resources/content/shared/general";
+import { Link } from "~/utils/routerCompat";
 import twMerge from "~/utils/tailwindMerge";
 
 export type LinkListBoxProps = {

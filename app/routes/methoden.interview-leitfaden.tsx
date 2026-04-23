@@ -4,7 +4,6 @@ import {
   RuleOutlined,
   SocialDistanceOutlined,
 } from "@digitalservicebund/icons";
-import { data } from "react-router";
 import AccordionItem from "~/components/AccordionItem";
 import { LinkButton } from "~/components/Button";
 import Heading from "~/components/Heading";
@@ -22,7 +21,7 @@ import getFeatureFlag from "~/utils/featureFlags.server";
 export function loader() {
   if (!getFeatureFlag("showInterviewLeitfaden")) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw data("Not found", { status: 404 });
+    throw new Response("Not found", { status: 404 });
   }
 }
 

@@ -1,18 +1,23 @@
-import { Outlet, useRouteLoaderData } from "react-router";
+import { type ReactNode } from "react";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { loader as preCheckQuestionLoader } from "./vorpruefung._preCheckNavigation.$questionId";
+import { useLocation } from "~/utils/routerCompat";
 import { usePreCheckData } from "./vorpruefung/preCheckDataHook";
 
 const { questions } = preCheck;
 
-export default function LayoutWithPreCheckNavigation() {
+export default function LayoutWithPreCheckNavigation({
+  children,
+}: {
+  children?: ReactNode;
+}) {
   const { answers, firstUnansweredQuestionIndex } = usePreCheckData();
 
-  const question = useRouteLoaderData<typeof preCheckQuestionLoader>(
-    "routes/vorpruefung._preCheckNavigation.$questionId",
-  )?.question;
+  const location = useLocation();
+  const pathSegments = location.pathname.split("/").filter(Boolean);
+  const lastSegment = pathSegments[pathSegments.length - 1];
+  const question = questions.find((q) => q.id === lastSegment);
   const showLinkBar = !!question;
 
   return (
@@ -46,9 +51,7 @@ export default function LayoutWithPreCheckNavigation() {
             firstUnansweredQuestionIndex={firstUnansweredQuestionIndex ?? 0}
           />
         )}
-        <main>
-          <Outlet key={question?.url} />
-        </main>
+        <main>{children}</main>
       </div>
     </div>
   );

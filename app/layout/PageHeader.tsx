@@ -1,7 +1,9 @@
-import { MenuOpen, MenuOutlined } from "@digitalservicebund/icons";
-import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
+import {
+  MenuOpen,
+  MenuOutlined,
+  PhoneOutlined,
+} from "@digitalservicebund/icons";
 import { useEffect, useRef, useState } from "react";
-import { Link, type UIMatch, useLocation, useMatches } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Container from "~/components/Container";
 import { Kopfzeile } from "~/components/kern-preview/Kopfzeile.tsx";
@@ -16,7 +18,7 @@ import {
   ROUTE_METHODS_PRINCIPLES,
 } from "~/resources/staticRoutes.ts";
 import { assetPath } from "~/utils/assetPath";
-import { matchHasHandle, MatchWithHandle } from "~/utils/handles";
+import { Link, useLocation } from "~/utils/routerCompat";
 import twMerge from "~/utils/tailwindMerge.ts";
 import { normalizePathname } from "~/utils/utilFunctions.ts";
 
@@ -62,16 +64,12 @@ const isParentItemActive = (item: HeaderItem, path: string): boolean => {
 };
 
 // Check if a feature on a handle is enabled for a match
-const getFeatureForMatches = (
-  matches: UIMatch[],
-  feature: keyof MatchWithHandle["handle"],
-) =>
-  matches.some(
-    (match) =>
-      matchHasHandle(match) && feature in match.handle && match.handle[feature],
-  );
 
-const PageHeader = () => {
+const PageHeader = ({
+  showProgressBar = false,
+}: {
+  showProgressBar?: boolean;
+}) => {
   const location = useLocation();
   const currentPath = location.pathname;
   const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
@@ -141,9 +139,6 @@ const PageHeader = () => {
   );
 
   const showOverlay = activeDropdownId !== null || mobileMenuOpen;
-
-  const matches = useMatches();
-  const showProgressBar = getFeatureForMatches(matches, "hasProgressBar");
 
   return (
     <>

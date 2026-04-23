@@ -6,7 +6,7 @@ import type { ImageProps } from "~/components/Image.tsx";
 import ImageZoomable from "~/components/ImageZoomable.tsx";
 import RichText from "~/components/RichText.tsx";
 
-import React, { ReactNode } from "react";
+import React, { type ReactNode } from "react";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import { ContentLink } from "~/utils/contentTypes";
 import twMerge from "~/utils/tailwindMerge";

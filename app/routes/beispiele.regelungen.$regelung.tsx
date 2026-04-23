@@ -1,5 +1,5 @@
 import React from "react";
-import { useLoaderData, useOutletContext } from "react-router";
+// removed react-router imports
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Heading from "~/components/Heading";
@@ -82,9 +82,14 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
   return regelungData.beispielvorhabens[0];
 };
 
-export default function Gesetz() {
-  const regelung = useLoaderData<typeof loader>();
-  const principles = useOutletContext<PrinzipWithBeispielvorhaben[]>();
+export default function Gesetz({
+  regelung,
+  principles = [],
+}: {
+  regelung?: Beispielvorhaben;
+  principles?: PrinzipWithBeispielvorhaben[];
+} = {}) {
+  if (!regelung) return null;
 
   const tabsData: {
     label: string;

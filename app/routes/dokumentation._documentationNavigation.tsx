@@ -1,8 +1,9 @@
-import { Outlet, useLocation } from "react-router";
+import { type ReactNode, Fragment } from "react";
 import { twJoin } from "tailwind-merge";
 import HelpSidepanel from "~/components/HelpSidepanel";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
+import { DocumentationNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
@@ -13,9 +14,9 @@ import {
   ROUTE_DOCUMENTATION_SEND,
   ROUTE_DOCUMENTATION_SUMMARY,
 } from "~/resources/staticRoutes";
-import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { features } from "~/utils/featureFlags";
-import { PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
+import { useLocation } from "~/utils/routerCompat";
+import { type PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 
 type Route = _Route & {
@@ -32,27 +33,17 @@ export type NavigationContext = {
 };
 
 function findIndexForRoute(routes: Route[], currentUrl: string) {
-  const index = routes.findIndex((route) => route.url === currentUrl);
-
-  if (index === -1) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(`Could not find route with url ${currentUrl}`, {
-      status: 404,
-    });
-  }
-  return index;
+  return routes.findIndex((route) => route.url === currentUrl);
 }
 
 function getPreviousUrl(routes: Route[], currentUrl: string): string {
-  return findIndexForRoute(routes, currentUrl) > 0
-    ? routes[findIndexForRoute(routes, currentUrl) - 1].url
-    : ROUTE_DOCUMENTATION.url;
+  const idx = findIndexForRoute(routes, currentUrl);
+  return idx > 0 ? routes[idx - 1].url : ROUTE_DOCUMENTATION.url;
 }
 
 function getNextUrl(routes: Route[], currentUrl: string): string | null {
-  return findIndexForRoute(routes, currentUrl) < routes.length - 1
-    ? routes[findIndexForRoute(routes, currentUrl) + 1].url
-    : null;
+  const idx = findIndexForRoute(routes, currentUrl);
+  return idx >= 0 && idx < routes.length - 1 ? routes[idx + 1].url : null;
 }
 
 function resolveAdjacentUrl(
@@ -72,8 +63,15 @@ function resolveAdjacentUrl(
   return rawUrl;
 }
 
-export default function LayoutWithDocumentationNavigation() {
-  const { routes, prinzips } = useDocumentationRouteData();
+export default function LayoutWithDocumentationNavigation({
+  routes,
+  prinzips,
+  children,
+}: {
+  routes: (Route | Route[])[];
+  prinzips: PrinzipWithAspekteAndExample[];
+  children?: ReactNode;
+}) {
   const simplifiedFlow = useFeatureFlag(features.simplifiedPrincipleFlow);
 
   // exclude documentation notes
@@ -216,16 +214,11 @@ export default function LayoutWithDocumentationNavigation() {
             />
           </div>
           {/* force remount for different principles with key={currentUrl} */}
-          <Outlet
-            key={currentUrl}
-            context={{
-              currentUrl,
-              nextUrl,
-              previousUrl,
-              routes,
-              prinzips,
-            }}
-          />
+          <DocumentationNavigationContext.Provider
+            value={{ currentUrl, nextUrl, previousUrl, routes, prinzips }}
+          >
+            <Fragment key={currentUrl}>{children}</Fragment>
+          </DocumentationNavigationContext.Provider>
         </main>
         {showHelpPanel && <HelpSidepanel />}
       </div>

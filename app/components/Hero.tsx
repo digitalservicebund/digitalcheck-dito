@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { type ReactNode } from "react";
 import twMerge from "~/utils/tailwindMerge";
 import Container from "./Container";
 import Heading from "./Heading";

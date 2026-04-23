@@ -7,7 +7,6 @@ import { act, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import React from "react";
-import { MemoryRouter } from "react-router";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general.ts";
 import { ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes.ts";
@@ -15,6 +14,7 @@ import {
   readDataFromLocalStorage,
   removeFromLocalStorage,
 } from "~/utils/localStorageVersioned";
+import { MemoryRouter } from "~/utils/routerCompat";
 import { DocumentationContinueActions } from "./DocumentationContinueActions";
 import { DocumentationDataProvider } from "./DocumentationDataProvider";
 import {

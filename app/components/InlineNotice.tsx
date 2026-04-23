@@ -1,9 +1,11 @@
-import CheckCircleOutlinedIcon from "@digitalservicebund/icons/CheckCircleOutlined";
-import ContactSupportOutlinedIcon from "@digitalservicebund/icons/ContactSupportOutlined";
-import InfoOutlinedIcon from "@digitalservicebund/icons/InfoOutlined";
-import LightbulbOutlinedIcon from "@digitalservicebund/icons/LightbulbOutlined";
-import WarningAmberIcon from "@digitalservicebund/icons/WarningAmber";
-import React, { ComponentProps } from "react";
+import {
+  CheckCircleOutlined as CheckCircleOutlinedIcon,
+  ContactSupportOutlined as ContactSupportOutlinedIcon,
+  InfoOutlined as InfoOutlinedIcon,
+  LightbulbOutlined as LightbulbOutlinedIcon,
+  WarningAmber as WarningAmberIcon,
+} from "@digitalservicebund/icons";
+import React, { type ComponentProps } from "react";
 import { twJoin } from "tailwind-merge";
 
 // We can't set border-[${borderColor}] in the template because it causes inconsistent behavior in Storybook.

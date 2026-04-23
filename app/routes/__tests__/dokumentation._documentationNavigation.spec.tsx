@@ -4,12 +4,6 @@ import "./utils/mockLocalStorageVersioned";
 
 import "@testing-library/jest-dom";
 import { act, render, screen, within } from "@testing-library/react";
-import {
-  createMemoryRouter,
-  RouterProvider,
-  useOutletContext,
-  useRouteLoaderData,
-} from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   type Route,
@@ -19,6 +13,12 @@ import {
   ROUTE_DOCUMENTATION_TITLE,
   ROUTES_DOCUMENTATION_INTRO,
 } from "~/resources/staticRoutes";
+import {
+  createMemoryRouter,
+  RouterProvider,
+  useOutletContext,
+  useRouteLoaderData,
+} from "~/utils/routerCompat";
 
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import LayoutWithDocumentationNavigation, {
@@ -38,8 +38,9 @@ vi.mock("~/contexts/FeatureFlagContext", () => ({
   useFeatureFlag: vi.fn(),
 }));
 
-vi.mock("react-router", async (importOriginal) => {
-  const original = await importOriginal<typeof import("react-router")>();
+vi.mock("~/utils/routerCompat", async (importOriginal) => {
+  const original =
+    await importOriginal<typeof import("~/utils/routerCompat")>();
   return {
     ...original,
     useRouteLoaderData: vi.fn(),

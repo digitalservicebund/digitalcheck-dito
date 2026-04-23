@@ -1,7 +1,11 @@
 import { AddCircleOutlineOutlined } from "@digitalservicebund/icons";
-import { FormScope, useField, useFieldArray } from "@rvf/react";
-import { ChangeEventHandler, useCallback, useEffect, useState } from "react";
-import { Link } from "react-router";
+import { type FormScope, useField, useFieldArray } from "@rvf/react";
+import {
+  type ChangeEventHandler,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { PrincipleExplanation } from "~/components/Absatz.tsx";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
@@ -28,12 +32,13 @@ import {
 import {
   IrrelevantAnswerReasoning,
   NegativeAnswerReasoning,
+  type Principle,
   PrincipleReasoningV1,
   principleSchemaV1,
   V1,
-  type Principle,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { features } from "~/utils/featureFlags";
+import { Link } from "~/utils/routerCompat";
 import {
   PrinzipAspekt,
   PrinzipWithAspekte,

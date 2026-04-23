@@ -1,0 +1,21 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ContentWrapper from "~/components/ContentWrapper.tsx";
+import MetaTitle from "~/components/Meta";
+import RichText from "~/components/RichText";
+import { ROUTE_A11Y } from "~/resources/staticRoutes";
+import { readFile } from "node:fs/promises";
+
+const content = await readFile("public/markdown/barrierefreiheit.md", { encoding: "utf-8" });
+---
+
+<Layout>
+  <MetaTitle prefix={ROUTE_A11Y.title} />
+  <ContentWrapper>
+    <RichText
+      markdown={content}
+      className="ds-stack-16 [&>h2]:mt-40 [&>h3]:mt-32"
+      tagName="main"
+    />
+  </ContentWrapper>
+</Layout>

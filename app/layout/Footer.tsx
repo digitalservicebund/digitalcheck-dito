@@ -1,9 +1,9 @@
-import { Link } from "react-router";
 import Image from "~/components/Image";
 import { OpenInNewIcon } from "~/components/OpenInNewIcon.tsx";
 import { footer } from "~/resources/content/shared/footer";
 import { general } from "~/resources/content/shared/general.ts";
 import { assetPath } from "~/utils/assetPath";
+import { Link } from "~/utils/routerCompat";
 import tailwindMerge from "~/utils/tailwindMerge";
 
 type LinkProps = {

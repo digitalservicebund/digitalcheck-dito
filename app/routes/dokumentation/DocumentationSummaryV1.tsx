@@ -1,6 +1,5 @@
 import { isArray } from "@posthog/core";
 import { type ReactNode } from "react";
-import { Link, useOutletContext } from "react-router";
 import type { BadgeProps } from "~/components/Badge";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
@@ -9,6 +8,7 @@ import InfoBoxList from "~/components/InfoBoxList";
 import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
+import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
   ROUTE_DOCUMENTATION_PARTICIPATION,
@@ -24,9 +24,9 @@ import {
   type PolicyTitle,
   type Principle,
 } from "~/routes/dokumentation/documentationDataSchema";
+import { Link } from "~/utils/routerCompat";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
-import { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationActions from "./DocumentationActions";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
 
@@ -217,8 +217,7 @@ function AspectsContent({
 }
 
 export default function DocumentationSummaryV1() {
-  const { routes, previousUrl, nextUrl, prinzips } =
-    useOutletContext<NavigationContext>();
+  const { routes, previousUrl, nextUrl, prinzips } = useNavigationContext();
 
   const { documentationData } = useDocumentationDataService();
 

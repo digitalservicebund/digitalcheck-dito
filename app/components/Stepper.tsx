@@ -1,5 +1,5 @@
-import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
+import { Link } from "~/utils/routerCompat";
 
 const Stepper = <T extends { url: string; title: string }>({
   elements,

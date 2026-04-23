@@ -1,4 +1,4 @@
-import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
+import { ArrowCircleRightOutlined } from "@digitalservicebund/icons";
 import {
   ROUTE_DOWNLOAD_PRINCIPLE_POSTER,
   ROUTE_METHODS,

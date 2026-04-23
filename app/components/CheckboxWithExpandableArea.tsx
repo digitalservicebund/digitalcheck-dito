@@ -1,5 +1,5 @@
 import { useField } from "@rvf/react";
-import { ComponentProps, ReactNode } from "react";
+import { type ComponentProps, type ReactNode } from "react";
 import Checkbox, { type CheckboxProps } from "./Checkbox";
 
 type BaseInputProps = Omit<

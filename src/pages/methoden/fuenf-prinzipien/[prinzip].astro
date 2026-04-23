@@ -1,0 +1,59 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PrinzipPage from "~/routes/methoden.fuenf-prinzipien.$prinzip/route";
+import {
+  fetchStrapiData,
+  type PrinzipWithAspekteAndExample,
+} from "~/utils/strapiData.server";
+import type { PrinzipListItem, PrinzipListQueryReturnType } from "~/routes/methoden.fuenf-prinzipien.$prinzip/query";
+
+export async function getStaticPaths() {
+  const listResult = await fetchStrapiData<PrinzipListQueryReturnType>(
+    `query PrinzipList { prinzips(sort: "order") { Name URLBezeichnung order } }`,
+  );
+  if ("error" in listResult) return [];
+
+  const paths = await Promise.all(
+    listResult.prinzips.map(async (p: PrinzipListItem) => {
+      const detail = await fetchStrapiData<{ prinzips: PrinzipWithAspekteAndExample[] }>(
+        `query Prinzip($URLBezeichnung: String!) {
+          prinzips(filters: { URLBezeichnung: { eq: $URLBezeichnung } }) {
+            documentId Name Beschreibung order Nummer URLBezeichnung
+            Beispiel {
+              documentId Nummer Text
+              Paragraph { Nummer Gesetz Titel Beispielvorhaben { URLBezeichnung Titel } }
+              PrinzipErfuellungen { id Erklaerung Prinzip { Nummer Name } }
+            }
+            Aspekte {
+              Nummer Titel Kurzbezeichnung Beschreibung Text Leitfragen Formulierungsbeispiel
+              Anwendung {
+                Titel Erklaerung Formulierungsbeispiel
+                Beispiel { documentId Nummer Text Auszug Paragraph { Nummer Gesetz Titel } }
+              }
+              Beispiel {
+                documentId Nummer Text
+                Paragraph { Nummer Gesetz Titel Beispielvorhaben { URLBezeichnung Titel } }
+              }
+            }
+          }
+        }`,
+        { URLBezeichnung: p.URLBezeichnung },
+      );
+      const prinzip =
+        "error" in detail || detail.prinzips.length === 0 ? undefined : detail.prinzips[0];
+      return {
+        params: { prinzip: p.URLBezeichnung },
+        props: { prinzip, prinzipList: listResult.prinzips },
+      };
+    }),
+  );
+
+  return paths.filter((p) => p.props.prinzip !== undefined);
+}
+
+const { prinzip, prinzipList } = Astro.props;
+---
+
+<Layout showProgressBar={true}>
+  <PrinzipPage prinzip={prinzip} prinzipList={prinzipList} />
+</Layout>

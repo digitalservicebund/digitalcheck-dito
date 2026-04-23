@@ -5,16 +5,16 @@ import "./utils/mockRouter";
 import "@testing-library/jest-dom";
 import { act, render, screen } from "@testing-library/react";
 import userEvent, { UserEvent } from "@testing-library/user-event";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
+import { Route, ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes";
+import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import {
   createBrowserRouter,
   RouterProvider,
   useOutletContext,
   useParams,
-} from "react-router";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
-import { Route, ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes";
-import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
+} from "~/utils/routerCompat";
 import {
   PrinzipAspekt,
   PrinzipWithAspekteAndExample,

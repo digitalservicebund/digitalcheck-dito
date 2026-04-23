@@ -4,7 +4,7 @@ import {
   DialogTitle,
   Dialog as HeadlessDialog,
 } from "@headlessui/react";
-import { ReactNode, useState } from "react";
+import { type ReactNode, useState } from "react";
 
 type DialogProps = {
   title: string;

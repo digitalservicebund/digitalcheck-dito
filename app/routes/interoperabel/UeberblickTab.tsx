@@ -1,5 +1,4 @@
 import { ContactPhoneOutlined } from "@digitalservicebund/icons";
-import { Link } from "react-router";
 import { LinkButton } from "~/components/Button";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox.tsx";
@@ -11,6 +10,7 @@ import {
   ROUTE_METHODS_PRINCIPLES,
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
+import { Link } from "~/utils/routerCompat";
 import { getTabAnchorLink } from "~/utils/tabs";
 import { tabIds } from "./tabIds";
 

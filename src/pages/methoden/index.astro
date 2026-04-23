@@ -1,0 +1,11 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import MethodenPage from "~/routes/methoden._index";
+import getFeatureFlag from "~/utils/featureFlags.server";
+
+const showInterviewLeitfaden = getFeatureFlag("showInterviewLeitfaden");
+---
+
+<Layout showProgressBar={true}>
+  <MethodenPage showInterviewLeitfaden={showInterviewLeitfaden} />
+</Layout>

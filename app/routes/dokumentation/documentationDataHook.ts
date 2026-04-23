@@ -1,7 +1,7 @@
-import { FieldValues, FormOpts, useForm } from "@rvf/react";
+import { type FieldValues, type FormOpts, useForm } from "@rvf/react";
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "~/utils/routerCompat";
 
 type UseSyncedFormParams<
   SchemaInput extends FieldValues,

@@ -1,5 +1,5 @@
-import { useLocation } from "react-router";
 import { progress } from "~/resources/content/progress";
+import { useLocation } from "~/utils/routerCompat";
 import twMerge from "~/utils/tailwindMerge";
 
 export default function Progress() {

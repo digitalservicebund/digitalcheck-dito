@@ -1,22 +1,12 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter, useLoaderData } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { getTextFromNodes } from "~/routes/__tests__/utils/strapiUtils.ts";
 import Prinzip from "~/routes/methoden.fuenf-prinzipien.$prinzip/route";
 import { Node } from "~/utils/paragraphUtils";
+import { MemoryRouter } from "~/utils/routerCompat";
 import { PrinzipWithAspekte } from "~/utils/strapiData.server.ts";
 import { PrinzipListItem } from "../methoden.fuenf-prinzipien.$prinzip/query";
-
-// Mock react-router's useLoaderData hook, which is used by the component
-// to get data from its server-side loader.
-vi.mock("react-router", async (importOriginal) => {
-  const original = await importOriginal<typeof import("react-router")>();
-  return {
-    ...original,
-    useLoaderData: vi.fn(),
-  };
-});
 
 const IntersectionObserverMock = vi.fn(
   class {
@@ -140,16 +130,10 @@ const mockPrinzipsList: PrinzipListItem[] = [];
 
 describe("FivePrinciples Route - Integration Tests", () => {
   beforeEach(() => {
-    // Provide the mock data to the component via the mocked hook
-    vi.mocked(useLoaderData).mockReturnValue({
-      prinzip: mockPrinzipData,
-      prinzipList: mockPrinzipsList,
-    });
-
     // Render the component within a router to handle <Link> components
     render(
       <MemoryRouter>
-        <Prinzip />
+        <Prinzip prinzip={mockPrinzipData} prinzipList={mockPrinzipsList} />
       </MemoryRouter>,
     );
   });

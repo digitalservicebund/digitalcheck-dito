@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { type ReactNode } from "react";
 import { twJoin } from "tailwind-merge";
 import twMerge from "~/utils/tailwindMerge";
 import Heading, { HeadingProps } from "./Heading";

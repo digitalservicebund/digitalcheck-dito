@@ -1,9 +1,9 @@
-import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
+import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_PARTICIPATION } from "~/resources/staticRoutes";
@@ -12,7 +12,6 @@ import {
   participationSchema,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { features } from "~/utils/featureFlags";
-import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
@@ -21,8 +20,7 @@ const { participation } = digitalDocumentation;
 
 export default function DocumentationParticipation() {
   const simplifiedFlow = useFeatureFlag(features.simplifiedPrincipleFlow);
-  const { currentUrl, nextUrl, previousUrl } =
-    useOutletContext<NavigationContext>();
+  const { currentUrl, nextUrl, previousUrl } = useNavigationContext();
   const { setParticipation, documentationData } = useDocumentationDataService();
 
   const form = useSyncedForm({

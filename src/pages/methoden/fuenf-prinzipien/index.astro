@@ -1,0 +1,18 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import FivePrinciples from "~/routes/methoden.fuenf-prinzipien._index/route";
+import {
+  fetchStrapiData,
+  GET_PRINZIPS_WITH_EXAMPLES_QUERY,
+  type PrinzipWithAspekteAndExample,
+} from "~/utils/strapiData.server";
+
+const result = await fetchStrapiData<{ prinzips: PrinzipWithAspekteAndExample[] }>(
+  GET_PRINZIPS_WITH_EXAMPLES_QUERY,
+);
+const prinzips = "error" in result ? [] : result.prinzips;
+---
+
+<Layout showProgressBar={true}>
+  <FivePrinciples prinzips={prinzips} />
+</Layout>

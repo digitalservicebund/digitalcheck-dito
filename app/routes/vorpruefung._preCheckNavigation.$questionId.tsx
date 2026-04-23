@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLoaderData, useNavigate } from "react-router";
+import { useNavigate } from "~/utils/routerCompat";
 
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
@@ -15,7 +15,6 @@ import {
   ROUTE_PRECHECK,
   ROUTES_PRECHECK_QUESTIONS,
 } from "~/resources/staticRoutes";
-import type { Route } from "./+types/vorpruefung._preCheckNavigation.$questionId";
 import { usePreCheckData, useSyncedForm } from "./vorpruefung/preCheckDataHook";
 import {
   answerSchema,
@@ -25,7 +24,7 @@ import { addOrUpdateAnswer } from "./vorpruefung/preCheckDataService";
 
 const { questions, answerOptions, nextButton } = preCheck;
 
-export function loader({ params }: Route.LoaderArgs) {
+export function loader({ params }: { params: { questionId?: string } }) {
   const questionIdx = questions.findIndex((q) => q.id === params.questionId);
   // return 404 if the question is not found
   if (questionIdx === -1) {
@@ -78,8 +77,20 @@ export type PreCheckAnswerOption = {
   label: string;
 };
 
-export default function Index() {
-  const { questionIdx, question } = useLoaderData<typeof loader>();
+export default function Index({
+  questionId: questionIdProp,
+}: {
+  questionId?: string;
+}) {
+  const questionId =
+    questionIdProp ??
+    (typeof window !== "undefined"
+      ? window.location.pathname.split("/").filter(Boolean).pop()
+      : undefined);
+  const questionIdx = questions.findIndex((q) => q.id === questionId);
+  const question = questions[questionIdx];
+
+  if (!question) return null;
   const [hasAnswerConflict, setHasAnswerConflict] = useState(false);
 
   const { answerForQuestionId, answers, firstUnansweredQuestionIndex } =

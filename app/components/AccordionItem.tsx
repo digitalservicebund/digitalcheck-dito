@@ -4,11 +4,11 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import { ReactNode } from "react";
-import { useLocation } from "react-router";
+import { type ReactNode } from "react";
 import { twJoin } from "tailwind-merge";
 import RichText from "~/components/RichText";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
+import { useLocation } from "~/utils/routerCompat";
 
 export type AccordionItemProps = {
   headline: string;

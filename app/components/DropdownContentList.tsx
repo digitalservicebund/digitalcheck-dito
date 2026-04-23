@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router";
+import { NavLink, useLocation } from "~/utils/routerCompat";
 import twMerge from "~/utils/tailwindMerge";
 import { normalizePathname } from "~/utils/utilFunctions";
 import Badge from "./Badge";
