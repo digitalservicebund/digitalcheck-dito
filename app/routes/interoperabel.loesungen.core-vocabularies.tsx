@@ -93,7 +93,15 @@ export default function InteroperableSolutionsDcatAp() {
             <div className="space-y-8">
               <ChapterBadge>{sections.einfuehrung.title}</ChapterBadge>
               <h2>Betrifft mich dieses Thema als Legist oder Legistin?</h2>
-              <p>Text</p>
+              <p>
+                Wenn Ihr Regelungsvorhaben die Erfassung, die Verarbeitung oder
+                den Austausch von zentralen Verwaltungsinformationen (wie
+                beispielsweise Daten zu Personen, Unternehmen, Standorten oder
+                öffentlichen Dienstleistungen) vorgibt, sieht der Interoperable
+                Europe Act (IEA) vor, dass Sie die Nutzung der sogenannten Core
+                Vocabularies nach Art. 7 (EU) 2024/903 als „Lösung für ein
+                interoperables Europa“ in Ihrem Regelungsvorhaben prüfen.
+              </p>
             </div>
 
             <p>
@@ -137,7 +145,30 @@ export default function InteroperableSolutionsDcatAp() {
               look="method"
             >
               <ul className="space-y-32">
-                <li>TODO</li>
+                <li>
+                  <strong>Was sind Core Vocabularies?</strong> Core Vocabularies
+                  sind vereinfachte, wiederverwendbare und erweiterbare
+                  "Austausch-Sprache", welche die grundlegenden Merkmale einer
+                  Daten-Entität kontextneutral erfassen. Sie dienen als
+                  standardisierte Basisbausteine für europäische digitale
+                  Dienste.
+                </li>
+                <li>
+                  <strong>Warum ist das wichtig?</strong> Um die reibungslose
+                  Kommunikation zwischen Behörden zu gewährleisten, schlagen
+                  diese Modelle eine Brücke zwischen länderübergreifend
+                  unterschiedlich lautenden Begriffsdefinitionen. So werden
+                  semantische Interoperabilitätskonflikte gelöst und damit
+                  Datenabgleiche zwischen Registern (z.B. verschiedener Länder)
+                  ermöglicht, ohne, dass verschiedene Register jeweils verändert
+                  werden müssen.
+                </li>
+                <li>
+                  <strong>Was kostet mich das?</strong> Für Sie als Legistin
+                  oder Legist bedarf es lediglich einer verankerten Vorgabe in
+                  Ihrem Regelungsvorhaben. Die technische Ausgestaltung obliegt
+                  dem IT-Vollzug.
+                </li>
 
                 <li>
                   <strong>Wo gibt es Hilfe?</strong> Beim DigitalService /
@@ -174,19 +205,40 @@ export default function InteroperableSolutionsDcatAp() {
               Informationen problemlos ausgetauscht, maschinenlesbar verarbeitet
               und ohne Informationsverlust verstanden werden.
             </p>
-            <table className="mt-16 min-w-full overflow-auto [&_td]:w-2/9 [&_td:nth-child(4)]:w-1/3 [&_th,&_td]:px-6 [&_th,&_td]:py-3">
+            <DetailsSummary title="Für welche Bereiche gibt es Core Vocabularies?">
+              <RichText
+                markdown={dedent`
+              - **Core Person:** Für grundlegende Informationen über natürliche
+                Personen, wie Name, Geburtsdatum und Geschlecht.
+              
+              - **Core Business:** Zur eindeutigen Identifizierung und Beschreibung
+                von Unternehmen und juristischen Personen.
+              
+              - **Core Location:** Für geografische Daten, Adressen und Standorte.
+              
+              - **Core Public Service (CPSV-AP):** Ein Modell zur Beschreibung
+                öffentlicher Dienstleistungen, das es Bürgern und Unternehmen
+                erleichtert, diese zu finden und zu verstehen.
+              
+              - **Core Public Organisation:** Zur Beschreibung der Struktur und der
+                Zuständigkeiten von Behörden und öffentlichen Stellen.
+              
+              - **Core Criterion and Core Evidence Vocabulary (CCCEV):** Wird
+                insbesondere im öffentlichen Beschaffungswesen genutzt, um Kriterien
+                und die dazugehörigen Belege abzubilden.
+                
+                Mehr Informationen zu den einzelnen Core Vocabularies finden Sie
+                [hier](https://interoperable-europe.ec.europa.eu/collection/semic-support-centre/solution/core-vocabularies).
+  `}
+              />
+            </DetailsSummary>
+            <table className="mt-64 min-w-full overflow-auto [&_th,&_td]:w-1/4 [&_th,&_td]:p-16 [&_th,&_td]:pr-32">
               <thead className="">
-                <tr>
-                  <th scope="col" className="bg-blue-400 text-left">
-                    Deutsches Register
-                  </th>
-                  <th scope="col" className="bg-blue-200 text-left">
-                    Core Business Vocabularies
-                  </th>
-                  <th scope="col" className="bg-blue-400 text-left">
-                    Spanisches Register
-                  </th>
-                  <th scope="col" className={"w-1/3"}></th>
+                <tr className="bg-blue-400 text-left">
+                  <th scope="col">Deutsches Register</th>
+                  <th scope="col">Core Business Vocabularies</th>
+                  <th scope="col">Spanisches Register</th>
+                  <th scope="col">Erläuterung</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
@@ -239,7 +291,10 @@ export default function InteroperableSolutionsDcatAp() {
               nach den Core Vocabularies erfolgt, um die EU-weite semantische
               Interoperabilität zu garantieren.
             </p>
-            <DetailsSummary title={"Wann ist eine Ausnahme zulässig?"}>
+            <AccordionItem
+              headline={"Wann ist eine Ausnahme zulässig?"}
+              className={"mt-40"}
+            >
               <p>
                 Der Interoperable Europe Act (IEA) sieht vor, dass die Nutzung
                 von Standards wie DCAT-AP in begründeten Fällen abgelehnt werden
@@ -262,7 +317,54 @@ export default function InteroperableSolutionsDcatAp() {
                   digitalen Binnenmarkt deutlich?
                 </li>
               </ul>
-            </DetailsSummary>
+            </AccordionItem>
+            <AccordionItem
+              headline={"Wie verknüpfe ich Datenfelder mit Core Vocabularies?"}
+            >
+              <div className={"space-y-8"}>
+                <p>
+                  Als Hilfsmittel für die Informationsmodellierung verwenden Sie
+                  eine gemeinsame Tabelle mit nachgelagerter Behörde und
+                  IT-Diensleister.
+                </p>
+                <p>
+                  Eine solche Tabelle hilft Ihnen, gemeinsam mit nachgelagerter
+                  Behörde und IT-Diensleister, die Datenfelder des deutschen
+                  Dienstes mit den passenden Begriffen aus den Core Vocabularies
+                  zu verknüpfen. Im Folgenden ein Beispiel:
+                </p>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Ihr Begriff (im Gesetz/Formular)</th>
+                      <th>Feld im Core Location Vocabulary</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Firmenname</td>
+                      <td>legalName</td>
+                    </tr>
+                    <tr>
+                      <td>Vollständige Anschrift</td>
+                      <td>fullAddress</td>
+                    </tr>
+                    <tr>
+                      <td>Straße & Hausnummer</td>
+                      <td>thoroughfare</td>
+                    </tr>
+                    <tr>
+                      <td>Postleitzahl</td>
+                      <td>postCode</td>
+                    </tr>
+                    <tr>
+                      <td>Postleitzahl</td>
+                      <td>postName</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </AccordionItem>
             <Timeline>
               <Timeline.Item bullet>
                 <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48">
