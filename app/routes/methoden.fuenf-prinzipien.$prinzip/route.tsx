@@ -23,18 +23,11 @@ import { Link } from "~/utils/routerCompat";
 import {
   type AbsatzWithParagraph,
   type BasePrinzip,
-  fetchStrapiData,
   type PrinzipAspekt,
   type PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server.ts";
 import { slugify } from "~/utils/utilFunctions.ts";
-import type { Route } from "../../../.react-router/types/app/routes/+types/beispiele.prinzipien.$prinzip.ts";
-import {
-  PRINZIP_ASPEKTE_QUERY,
-  PRINZIP_LIST_QUERY,
-  type PrinzipListItem,
-  type PrinzipListQueryReturnType,
-} from "./query";
+import { type PrinzipListItem } from "./query";
 
 function AspectHeader({
   children,
@@ -74,36 +67,6 @@ function Formulierungsbeispiel({
       <div>{children}</div>
     </div>
   );
-}
-
-export async function loader({ params }: Route.LoaderArgs) {
-  const prinzipData = await fetchStrapiData<{
-    prinzips: PrinzipWithAspekteAndExample[];
-  }>(PRINZIP_ASPEKTE_QUERY, {
-    URLBezeichnung: params.prinzip,
-  });
-
-  if ("error" in prinzipData) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(prinzipData.error, { status: 400 });
-  }
-
-  const prinzipListData =
-    await fetchStrapiData<PrinzipListQueryReturnType>(PRINZIP_LIST_QUERY);
-  if ("error" in prinzipListData) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(prinzipListData.error, { status: 400 });
-  }
-
-  if (prinzipData.prinzips.length === 0) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw data("Not found", { status: 404 });
-  }
-
-  return {
-    prinzip: prinzipData.prinzips[0],
-    prinzipList: prinzipListData.prinzips,
-  };
 }
 
 function ItalicModifier({ node }: Readonly<{ node: Node }>) {

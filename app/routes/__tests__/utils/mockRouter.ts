@@ -7,8 +7,8 @@ const { mockNavigate } = vi.hoisted(() => ({
 
 export { mockNavigate };
 
-vi.mock("react-router", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("react-router")>();
+vi.mock("~/utils/routerCompat", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("~/utils/routerCompat")>();
   const context: NavigationContext = {
     currentUrl: "/current-url",
     nextUrl: "/next-url",

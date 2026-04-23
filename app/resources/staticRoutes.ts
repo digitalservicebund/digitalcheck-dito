@@ -1,6 +1,3 @@
-// These routes can't be exported from ~/routes.ts as that file isn't part of the app environment: https://github.com/remix-run/react-router/issues/12392
-
-// Note: Using relative import paths, no Vite-provided import aliases with "~", to make this file importable in react-router.config.ts (runs before Vite)
 import { FILE_NAME_DOCUMENTATION_STATIC_WORD } from "../utils/constants";
 import { getTabAnchorLink } from "../utils/tabs";
 import { removeTrailingSlash } from "../utils/utilFunctions";
