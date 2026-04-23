@@ -4,6 +4,7 @@ import DokumentationApp from "~/components/DokumentationApp";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,
+  type PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server";
 
 export async function getStaticPaths() {
@@ -15,7 +16,9 @@ export async function getStaticPaths() {
     "absenden",
   ];
 
-  const result = await fetchStrapiData(GET_PRINZIPS_WITH_EXAMPLES_QUERY);
+  const result = await fetchStrapiData<{
+    prinzips: PrinzipWithAspekteAndExample[];
+  }>(GET_PRINZIPS_WITH_EXAMPLES_QUERY);
   const prinzips = "error" in result ? [] : result.prinzips;
 
   const prinzipPaths = prinzips.flatMap((p: { URLBezeichnung: string }) => [

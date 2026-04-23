@@ -16,38 +16,13 @@ import {
   ROUTE_METHODS_COLLECT_IT_SYSTEMS,
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
-  ROUTES,
 } from "~/resources/staticRoutes";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import type { Route } from "./+types/methoden.$subPage";
 
 const contentMap = {
   [ROUTE_METHODS_RESPONSIBLE_ACTORS.title]: methodsResponsibleActors,
   [ROUTE_METHODS_COLLECT_IT_SYSTEMS.title]: methodsITSystems,
   [ROUTE_METHODS_TECHNICAL_FEASIBILITY.title]: methodsTechnicalFeasibility,
 };
-
-export function loader({ params }: Route.LoaderArgs) {
-  const { subPage } = params;
-  if (!subPage) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("Method page not found", {
-      status: 404,
-      statusText: "Not Found",
-    });
-  }
-
-  const route = ROUTES.find((route) => route.url.endsWith(subPage));
-  if (!route || !contentMap[route.title]) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("Method page not found", {
-      status: 404,
-      statusText: "Not Found",
-    });
-  }
-
-  return { route };
-}
 
 export default function Index({
   route: propRoute,

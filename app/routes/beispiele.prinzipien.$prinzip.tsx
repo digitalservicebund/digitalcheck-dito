@@ -15,53 +15,7 @@ import {
   ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_REGELUNGEN,
 } from "~/resources/staticRoutes";
-import {
-  fetchStrapiData,
-  paragraphFields,
-  prinzipCoreFields,
-  type PrinzipWithBeispielvorhaben,
-} from "~/utils/strapiData.server";
-import type { Route } from "./+types/beispiele.prinzipien.$prinzip";
-
-const GET_PRINZIPS_QUERY = `
-${paragraphFields}
-${prinzipCoreFields}
-query GetPrinzips($slug: String!) {
-  prinzips(filters: { URLBezeichnung: { eq: $slug } }) {
-    ...PrinzipCoreFields
-    Beispielvorhaben {
-      documentId
-      Ressort
-      Rechtsgebiet
-      Titel
-      URLBezeichnung
-      LinkRegelungstext
-      VeroeffentlichungsDatum
-      GesetzStatus
-      Paragraphen {
-        ...ParagraphFields
-      }
-    }
-  }
-}`;
-
-export const loader = async ({ params }: Route.LoaderArgs) => {
-  const prinzipData = await fetchStrapiData<{
-    prinzips: PrinzipWithBeispielvorhaben[];
-  }>(GET_PRINZIPS_QUERY, { slug: params.prinzip });
-
-  if ("error" in prinzipData) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(prinzipData.error, { status: 400 });
-  }
-
-  if (prinzipData.prinzips.length === 0) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("No Prinzip for slug found", { status: 404 });
-  }
-
-  return { prinzip: prinzipData.prinzips[0] };
-};
+import { type PrinzipWithBeispielvorhaben } from "~/utils/strapiData.server";
 
 export default function DigitaltauglichkeitPrinzipienDetail({
   prinzip,
