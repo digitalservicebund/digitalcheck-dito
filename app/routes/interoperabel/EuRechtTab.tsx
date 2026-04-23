@@ -16,7 +16,7 @@ import { slugify } from "~/utils/utilFunctions";
 
 type TableLink = {
   title: string;
-  href: string;
+  id: string;
 };
 type TableContent = TableLink[];
 
@@ -55,12 +55,12 @@ function ContentInlineComponent({
 }
 
 export const EuRechtTab = () => {
-  const tableContent: TableContent = [
-    { title: "Zusammenarbeit in der EU", href: "zusammenarbeit" },
-    { title: "Zugang zu Diensten", href: "zugang" },
-    { title: "Teilen von Daten und Informationen", href: "teilen" },
-    { title: "Datenschutz", href: "datenschutz" },
-    { title: "Technologien", href: "technologien" },
+  const tableOfContents: TableContent = [
+    { title: "Zusammenarbeit in der EU", id: "zusammenarbeit" },
+    { title: "Zugang zu Diensten", id: "zugang" },
+    { title: "Teilen von Daten und Informationen", id: "teilen" },
+    { title: "Datenschutz", id: "datenschutz" },
+    { title: "Technologien", id: "technologien" },
   ];
 
   return (
@@ -81,10 +81,10 @@ export const EuRechtTab = () => {
         sidebar={
           <ToC title={"Inhalt"} selector="section[id]">
             <ToC.List className="list-unstyled list-none">
-              {tableContent.map((section) => (
+              {tableOfContents.map((section) => (
                 <ToC.Item
-                  key={section.href}
-                  href={`#${slugify(section.href)}`}
+                  key={section.id}
+                  href={`#${slugify(section.id)}`}
                   title={section.title}
                 />
               ))}
@@ -108,14 +108,10 @@ export const EuRechtTab = () => {
               Relevanz haben könnten.
             </p>
           </div>
-          <section>
-            <section className="space-y-40">
-              <Heading
-                tagName="h3"
-                className="font-bold"
-                id={tableContent[0].href}
-              >
-                {tableContent[0].title}
+          <div>
+            <section id={tableOfContents[0].id} className="space-y-40">
+              <Heading tagName="h3" className="font-bold">
+                {tableOfContents[0].title}
               </Heading>
               <ContentInlineComponent
                 batchTitle="Verordnung"
@@ -173,13 +169,9 @@ export const EuRechtTab = () => {
               </ContentInlineComponent>
             </section>
             <Separator className="my-40"></Separator>
-            <section className="space-y-40">
-              <Heading
-                tagName="h3"
-                className="font-bold"
-                id={tableContent[1].href}
-              >
-                {tableContent[1].title}
+            <section className="space-y-40" id={tableOfContents[1].id}>
+              <Heading tagName="h3" className="font-bold">
+                {tableOfContents[1].title}
               </Heading>
               <ContentInlineComponent
                 batchTitle="Verordnung"
@@ -240,13 +232,9 @@ export const EuRechtTab = () => {
               </ContentInlineComponent>
             </section>
             <Separator className="my-40"></Separator>
-            <section className="space-y-40">
-              <Heading
-                tagName="h3"
-                className="font-bold"
-                id={tableContent[2].href}
-              >
-                {tableContent[2].title}
+            <section className="space-y-40" id={tableOfContents[2].id}>
+              <Heading tagName="h3" className="font-bold">
+                {tableOfContents[2].title}
               </Heading>
               <ContentInlineComponent
                 batchTitle="Richtlinien"
@@ -301,13 +289,9 @@ export const EuRechtTab = () => {
               </ContentInlineComponent>
             </section>
             <Separator className="my-40"></Separator>
-            <section className="space-y-40">
-              <Heading
-                tagName="h3"
-                className="font-bold"
-                id={tableContent[3].href}
-              >
-                {tableContent[3].title}
+            <section className="space-y-40" id={tableOfContents[3].id}>
+              <Heading tagName="h3" className="font-bold">
+                {tableOfContents[3].title}
               </Heading>
               <ContentInlineComponent
                 batchTitle="Verordnung"
@@ -332,13 +316,9 @@ export const EuRechtTab = () => {
               </ContentInlineComponent>
             </section>
             <Separator className="my-40"></Separator>
-            <section className="space-y-40">
-              <Heading
-                tagName="h3"
-                className="font-bold"
-                id={tableContent[4].href}
-              >
-                {tableContent[4].title}
+            <section className="space-y-40" id={tableOfContents[4].id}>
+              <Heading tagName="h3" className="font-bold">
+                {tableOfContents[4].title}
               </Heading>
 
               <ContentInlineComponent
@@ -385,7 +365,7 @@ export const EuRechtTab = () => {
                 ></RichText>
               </ContentInlineComponent>
             </section>
-          </section>
+          </div>
         </div>
       </SidebarContainer>
     </section>
