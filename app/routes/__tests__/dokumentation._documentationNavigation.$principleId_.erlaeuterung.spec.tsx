@@ -199,7 +199,9 @@ describe("DocumentationPrincipleErlaeuterung", () => {
     });
 
     it("shows reasoning textarea", () => {
-      expect(screen.getByLabelText("Erklärung")).toBeInTheDocument();
+      expect(
+        screen.getByLabelText("Erklärung", { selector: "textarea" }),
+      ).toBeInTheDocument();
     });
 
     it("shows submit and back buttons", () => {
@@ -242,7 +244,9 @@ describe("DocumentationPrincipleErlaeuterung", () => {
     });
 
     it("shows reasoning textarea", () => {
-      expect(screen.getByLabelText("Erklärung")).toBeInTheDocument();
+      expect(
+        screen.getByLabelText("Erklärung", { selector: "textarea" }),
+      ).toBeInTheDocument();
     });
   });
 
@@ -267,7 +271,9 @@ describe("DocumentationPrincipleErlaeuterung", () => {
     });
 
     it("shows reasoning textarea", () => {
-      expect(screen.getByLabelText("Erklärung")).toBeInTheDocument();
+      expect(
+        screen.getByLabelText("Erklärung", { selector: "textarea" }),
+      ).toBeInTheDocument();
     });
   });
 

@@ -121,15 +121,21 @@ function DocumentationPrincipleErlaeuterungForm({
 
           <Textarea
             scope={form.scope("reasoning")}
-            placeholder={
-              isPositive
-                ? "Tragen Sie Ihre Erklärung ein, z. B.: Online-Beratung wird ermöglicht, siehe § 1a. Geben Sie auch die dazugehörigen Paragrafen an."
-                : undefined
-            }
             rows={5}
             warningInsteadOfError
           >
             Erklärung
+            {isPositive && (
+              <HelpButton
+                sectionId="explanation"
+                title="Hinweis zu Erklärung"
+                className="h-24 w-24"
+              >
+                Tragen Sie Ihre Erklärung ein, z. B.: Online-Beratung wird
+                ermöglicht, siehe § 1a. Geben Sie auch die dazugehörigen
+                Paragrafen an.
+              </HelpButton>
+            )}
           </Textarea>
         </div>
       </fieldset>
