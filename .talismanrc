@@ -59,6 +59,7 @@ allowed_patterns:
   - "pass: true"
   - activeKey
   - getSelectedIndexByKey
+  - https://ec.europa.eu/.* # URL misidentified as secret pattern
 
 scopeconfig:
   - scope: node # ignores files such as package-lock.json

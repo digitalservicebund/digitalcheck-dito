@@ -12,7 +12,7 @@ import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import twMerge from "~/utils/tailwindMerge";
 
 export type AccordionItemProps = {
-  headline: string;
+  headline: ReactNode;
   children?: ReactNode;
   id?: string;
   plausibleEventName?: string;
