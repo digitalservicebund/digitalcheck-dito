@@ -9,12 +9,14 @@ import { useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
 import RichText from "~/components/RichText";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
+import twMerge from "~/utils/tailwindMerge";
 
 export type AccordionItemProps = {
   headline: string;
   children?: ReactNode;
   id?: string;
   plausibleEventName?: string;
+  className?: string;
 };
 
 /*
@@ -26,6 +28,7 @@ export default function AccordionItem({
   children,
   id,
   plausibleEventName,
+  className,
 }: Readonly<AccordionItemProps>) {
   const plausibleEvent = getPlausibleEventClassName(plausibleEventName);
 
@@ -34,7 +37,10 @@ export default function AccordionItem({
 
   return (
     <div
-      className="border-t-2 border-blue-400 last-of-type:border-b-2"
+      className={twMerge(
+        "border-t-2 border-blue-400 last-of-type:border-b-2",
+        className,
+      )}
       suppressHydrationWarning={
         true
       } /* if a hash is set, the panel will only be open client-side */
