@@ -39,13 +39,13 @@ export const useSyncedForm = <
       whenTouched: "onSubmit",
       initial: "onSubmit",
     },
-    onBeforeSubmit: async ({ unvalidatedData }) => {
+    onBeforeSubmit: ({ unvalidatedData }) => {
       if (!storedData) setDataCallback(unvalidatedData);
       // bypass submission
-      if (nextUrl) await navigate(nextUrl);
+      if (nextUrl) navigate(nextUrl);
     },
-    handleSubmit: async () => {
-      if (nextUrl) await navigate(nextUrl);
+    handleSubmit: () => {
+      if (nextUrl) navigate(nextUrl);
     },
   });
 

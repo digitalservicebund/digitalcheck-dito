@@ -33,7 +33,7 @@ function StartOverDialog() {
             type="button"
             onClick={async () => {
               deletePreCheckData();
-              await navigate(ROUTE_PRECHECK_INFO.url);
+              navigate(ROUTE_PRECHECK_INFO.url);
             }}
           >
             {preCheck.startOver.confirm}

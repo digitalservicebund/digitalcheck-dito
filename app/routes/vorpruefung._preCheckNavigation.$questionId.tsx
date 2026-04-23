@@ -90,7 +90,6 @@ export default function Index({
   const questionIdx = questions.findIndex((q) => q.id === questionId);
   const question = questions[questionIdx];
 
-  if (!question) return null;
   const [hasAnswerConflict, setHasAnswerConflict] = useState(false);
 
   const { answerForQuestionId, answers, firstUnansweredQuestionIndex } =
@@ -108,9 +107,9 @@ export default function Index({
     },
     storedData: storedAnswer,
     initialValidate: true,
-    handleSubmit: async (data: PreCheckAnswerSchema) => {
+    handleSubmit: (data: PreCheckAnswerSchema) => {
       addOrUpdateAnswer(data);
-      await navigate(nextLink);
+      navigate(nextLink);
     },
   });
 
@@ -120,7 +119,7 @@ export default function Index({
       firstUnansweredQuestionIndex !== null &&
       questionIdx > firstUnansweredQuestionIndex
     ) {
-      void navigate(questions[firstUnansweredQuestionIndex].url);
+      navigate(questions[firstUnansweredQuestionIndex].url);
     }
   }, [firstUnansweredQuestionIndex, navigate, questionIdx]);
 
@@ -152,6 +151,7 @@ export default function Index({
 
   const questionLabelId = `question${questionIdx}-label`;
 
+  if (!question) return null;
   return (
     <form {...form.getFormProps()} className="space-y-40">
       <MetaTitle

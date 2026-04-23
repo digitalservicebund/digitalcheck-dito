@@ -46,9 +46,9 @@ function StartOverDialog({
         <div className="flex flex-row gap-12">
           <Button
             type="button"
-            onClick={async () => {
+            onClick={() => {
               deleteDocumentationData();
-              await navigate(ROUTES_DOCUMENTATION_INTRO[0].url);
+              navigate(ROUTES_DOCUMENTATION_INTRO[0].url);
             }}
           >
             {start.startOverDialog.actions.confirm}
