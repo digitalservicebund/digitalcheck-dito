@@ -10,7 +10,7 @@ import getFeatureFlag from "~/utils/featureFlags.server.ts";
 import {
   fetchStrapiData,
   visualisationFields,
-  Visualisierung,
+  type Visualisierung,
 } from "~/utils/strapiData.server";
 
 const GET_VISUALISATIONS_QUERY = `

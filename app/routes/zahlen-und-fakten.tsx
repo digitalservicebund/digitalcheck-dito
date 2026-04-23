@@ -4,7 +4,7 @@ import {
   StarOutlineOutlined,
   VolunteerActivismOutlined,
 } from "@digitalservicebund/icons";
-import { type FC, Fragment, SVGProps } from "react";
+import { type FC, Fragment, type SVGProps } from "react";
 import Badge from "~/components/Badge";
 import ContentWrapper from "~/components/ContentWrapper";
 import Heading from "~/components/Heading";

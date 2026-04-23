@@ -7,7 +7,7 @@ import { supportBanner } from "~/resources/content/shared/support-banner";
 import {
   fetchStrapiData,
   GET_PRINZIPS_QUERY,
-  PrinzipWithBeispielvorhaben,
+  type PrinzipWithBeispielvorhaben,
 } from "~/utils/strapiData.server";
 
 export async function loader() {

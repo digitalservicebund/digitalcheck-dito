@@ -19,7 +19,7 @@ import {
   fetchStrapiData,
   paragraphFields,
   prinzipCoreFields,
-  PrinzipWithBeispielvorhaben,
+  type PrinzipWithBeispielvorhaben,
 } from "~/utils/strapiData.server";
 import type { Route } from "./+types/beispiele.prinzipien.$prinzip";
 

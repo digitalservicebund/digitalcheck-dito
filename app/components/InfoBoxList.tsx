@@ -1,7 +1,7 @@
 import React, { type ReactNode } from "react";
 import { twJoin } from "tailwind-merge";
 import twMerge from "~/utils/tailwindMerge";
-import Heading, { HeadingProps } from "./Heading";
+import Heading, { type HeadingProps } from "./Heading";
 
 type InfoBoxListProps = {
   heading?: HeadingProps;

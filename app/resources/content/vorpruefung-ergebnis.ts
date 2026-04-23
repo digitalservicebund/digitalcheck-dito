@@ -5,7 +5,7 @@ import {
   ROUTE_PRECHECK,
   ROUTE_PRECHECK_INFO,
 } from "~/resources/staticRoutes";
-import { ContentLink, Step } from "~/utils/contentTypes.ts";
+import { type ContentLink, type Step } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
 

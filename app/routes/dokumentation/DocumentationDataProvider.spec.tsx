@@ -18,8 +18,8 @@ import {
 } from "./DocumentationDataProvider";
 import {
   DATA_SCHEMA_VERSION_V2,
-  Principle,
   type DocumentationData,
+  type Principle,
   type V2,
 } from "./documentationDataSchema";
 

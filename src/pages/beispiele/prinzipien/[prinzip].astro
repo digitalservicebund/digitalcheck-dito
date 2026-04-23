@@ -29,7 +29,9 @@ query GetAllPrinzipsWithBeispiele {
   }
 }`;
 
-  const result = await fetchStrapiData<{ prinzips: PrinzipWithBeispielvorhaben[] }>(query);
+  const result = await fetchStrapiData<{
+    prinzips: PrinzipWithBeispielvorhaben[];
+  }>(query);
   if ("error" in result) return [];
 
   const prinzips = result.prinzips.toSorted((a, b) => a.order - b.order);

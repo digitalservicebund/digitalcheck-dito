@@ -1,6 +1,6 @@
 import { type ReactNode, useMemo, useState } from "react";
 import PrincipleHighlightContext from "~/contexts/PrincipleHighlightContext";
-import { BasePrinzip } from "~/utils/strapiData.server";
+import { type BasePrinzip } from "~/utils/strapiData.server";
 
 type PrincipleHighlightProviderProps = {
   children: ReactNode;

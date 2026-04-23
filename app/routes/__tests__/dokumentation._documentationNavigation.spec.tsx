@@ -22,16 +22,16 @@ import {
 
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import LayoutWithDocumentationNavigation, {
-  NavigationContext,
+  type NavigationContext,
 } from "~/routes/dokumentation._documentationNavigation";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import {
   DATA_SCHEMA_VERSION_V1,
   DATA_SCHEMA_VERSION_V2,
-  DocumentationData,
-  V1,
-  V2,
+  type DocumentationData,
+  type V1,
+  type V2,
 } from "../dokumentation/documentationDataSchema";
 
 vi.mock("~/contexts/FeatureFlagContext", () => ({

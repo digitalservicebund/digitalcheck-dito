@@ -32,7 +32,7 @@ import {
 } from "../vorpruefung/preCheckDataHook";
 import { resultSchema } from "../vorpruefung/preCheckDataSchema";
 import { ResultType } from "./PreCheckResult";
-import { ResultContent } from "./getContentForResult";
+import { type ResultContent } from "./getContentForResult";
 
 export default function ResultForm({
   resultContent,

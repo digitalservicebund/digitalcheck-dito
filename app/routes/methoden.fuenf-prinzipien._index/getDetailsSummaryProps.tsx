@@ -1,7 +1,7 @@
 import { BlocksRenderer } from "~/components/BlocksRenderer";
-import { DetailsSummaryProps } from "~/components/DetailsSummary.tsx";
+import { type DetailsSummaryProps } from "~/components/DetailsSummary.tsx";
 import type { HeadingProps } from "~/components/Heading";
-import { DetailsSummaryListProps } from "~/components/InfoBox.tsx";
+import { type DetailsSummaryListProps } from "~/components/InfoBox.tsx";
 import ItalicModifier from "~/components/ItalicModifier.tsx";
 import PrincipleHighlightModifier from "~/components/PrincipleHighlightModifier";
 import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider";
@@ -10,8 +10,8 @@ import { ROUTE_EXAMPLES_PRINCIPLES } from "~/resources/staticRoutes";
 import { absatzIdTag } from "~/utils/paragraphUtils";
 import { Link } from "~/utils/routerCompat";
 import {
-  AbsatzWithParagraph,
-  PrinzipWithAspekte,
+  type AbsatzWithParagraph,
+  type PrinzipWithAspekte,
 } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 

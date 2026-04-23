@@ -14,7 +14,7 @@ import { MemoryRouter } from "~/utils/routerCompat";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import {
   DATA_SCHEMA_VERSION_V1,
-  DocumentationData,
+  type DocumentationData,
 } from "../dokumentation/documentationDataSchema";
 
 const mockedReadDataFromLocalStorage = vi.mocked(

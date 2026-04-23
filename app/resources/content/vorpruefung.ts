@@ -7,7 +7,7 @@ import {
 } from "~/resources/staticRoutes";
 import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { assetPath } from "~/utils/assetPath";
-import { ContentLink } from "~/utils/contentTypes.ts";
+import { type ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
 

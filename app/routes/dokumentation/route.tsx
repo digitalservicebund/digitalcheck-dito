@@ -1,5 +1,5 @@
 import {
-  Route as _Route,
+  type Route as _Route,
   ROUTE_DOCUMENTATION,
   ROUTES_DOCUMENTATION_FINALIZE,
   ROUTES_DOCUMENTATION_INTRO,
@@ -9,7 +9,7 @@ import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,
   type PrinzipWithAspekte,
-  PrinzipWithAspekteAndExample,
+  type PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server.ts";
 import { DocumentationDataProvider } from "./DocumentationDataProvider";
 

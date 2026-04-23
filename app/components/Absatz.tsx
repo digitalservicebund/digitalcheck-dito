@@ -11,7 +11,7 @@ import {
   prependNumberToAbsatz,
 } from "~/utils/paragraphUtils";
 import { Link, useLocation } from "~/utils/routerCompat";
-import {
+import type {
   BaseAbsatz,
   BasePrinzip,
   PrinzipErfuellung,

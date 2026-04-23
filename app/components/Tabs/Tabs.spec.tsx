@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import TabGroup, {
   SearchParamTabs,
-  TabGroupProps,
+  type TabGroupProps,
 } from "~/components/Tabs/Tabs";
 import { MemoryRouter, useLocation } from "~/utils/routerCompat";
 

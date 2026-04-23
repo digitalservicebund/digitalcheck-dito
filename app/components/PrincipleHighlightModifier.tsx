@@ -3,9 +3,9 @@ import { twJoin } from "tailwind-merge";
 import PrincipleHighlightContext from "~/contexts/PrincipleHighlightContext";
 import { useIsMobileSize } from "~/hooks/deviceHook";
 import { PRINCIPLE_COLORS } from "~/resources/constants";
-import { explanationID, Node } from "~/utils/paragraphUtils";
+import { explanationID, type Node } from "~/utils/paragraphUtils";
 import { Link } from "~/utils/routerCompat";
-import { BasePrinzip } from "~/utils/strapiData.server";
+import { type BasePrinzip } from "~/utils/strapiData.server";
 
 /**
  * Strips references (like [1]) from the text.

@@ -7,7 +7,9 @@ import RichText from "~/components/RichText";
 import { ROUTE_PRIVACY } from "~/resources/staticRoutes";
 import { readFile } from "node:fs/promises";
 
-const content = await readFile("public/markdown/datenschutz.md", { encoding: "utf-8" });
+const content = await readFile("public/markdown/datenschutz.md", {
+  encoding: "utf-8",
+});
 ---
 
 <Layout>

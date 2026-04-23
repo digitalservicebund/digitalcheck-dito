@@ -11,7 +11,7 @@ import {
   VisibilityTwoTone,
 } from "@digitalservicebund/icons";
 import { assetPath } from "~/utils/assetPath";
-import { ContentLink } from "~/utils/contentTypes";
+import { type ContentLink } from "~/utils/contentTypes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import {
   ROUTE_FUNDAMENTALS_NKR,

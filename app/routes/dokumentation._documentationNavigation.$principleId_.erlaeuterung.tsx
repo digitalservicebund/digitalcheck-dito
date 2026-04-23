@@ -11,13 +11,13 @@ import { useNavigationContext } from "~/contexts/DocumentationNavigationContext"
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
 import { Link, useNavigate } from "~/utils/routerCompat";
-import { PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
+import { type PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 import {
-  DocumentationData,
-  Principle,
+  type DocumentationData,
+  type Principle,
   principleAnswerSchemaV2,
 } from "./dokumentation/documentationDataSchema";
 

@@ -14,7 +14,9 @@ import {
 export async function getStaticPaths() {
   const slugsResult = await fetchStrapiData<{
     beispielvorhabens: { URLBezeichnung: string }[];
-  }>(`query GetAllRegelungSlugs { beispielvorhabens(status: PUBLISHED) { URLBezeichnung } }`);
+  }>(
+    `query GetAllRegelungSlugs { beispielvorhabens(status: PUBLISHED) { URLBezeichnung } }`,
+  );
 
   if ("error" in slugsResult) return [];
 
@@ -57,8 +59,12 @@ query GetBeispielvorhaben($slug: String!) {
 }`;
 
 const [regelungResult, prinzipsResult] = await Promise.all([
-  fetchStrapiData<{ beispielvorhabens: Beispielvorhaben[] }>(regelungQuery, { slug: regelung }),
-  fetchStrapiData<{ prinzips: PrinzipWithBeispielvorhaben[] }>(GET_PRINZIPS_QUERY),
+  fetchStrapiData<{ beispielvorhabens: Beispielvorhaben[] }>(regelungQuery, {
+    slug: regelung,
+  }),
+  fetchStrapiData<{ prinzips: PrinzipWithBeispielvorhaben[] }>(
+    GET_PRINZIPS_QUERY,
+  ),
 ]);
 
 const regelungData =

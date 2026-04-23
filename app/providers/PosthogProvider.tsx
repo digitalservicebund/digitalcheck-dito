@@ -1,4 +1,4 @@
-import { posthog, PostHogConfig } from "posthog-js";
+import { posthog, type PostHogConfig } from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 import { type ReactNode, useEffect } from "react";
 import { POSTHOG_PROXY, POSTHOG_UI_HOST } from "~/utils/constants";

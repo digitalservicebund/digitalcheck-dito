@@ -4,10 +4,13 @@ import "./utils/mockRouter";
 // End of mocks
 import "@testing-library/jest-dom";
 import { act, render, screen } from "@testing-library/react";
-import userEvent, { UserEvent } from "@testing-library/user-event";
+import userEvent, { type UserEvent } from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
-import { Route, ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes";
+import {
+  type Route,
+  ROUTES_DOCUMENTATION_INTRO,
+} from "~/resources/staticRoutes";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import {
   createBrowserRouter,
@@ -16,16 +19,16 @@ import {
   useParams,
 } from "~/utils/routerCompat";
 import {
-  PrinzipAspekt,
-  PrinzipWithAspekteAndExample,
+  type PrinzipAspekt,
+  type PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server";
-import { NavigationContext } from "../dokumentation._documentationNavigation";
+import { type NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationPrinciple from "../dokumentation._documentationNavigation.$principleId";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import {
   DATA_SCHEMA_VERSION_V2,
-  DocumentationData,
-  V2,
+  type DocumentationData,
+  type V2,
 } from "../dokumentation/documentationDataSchema";
 
 vi.mock("~/contexts/FeatureFlagContext", () => ({

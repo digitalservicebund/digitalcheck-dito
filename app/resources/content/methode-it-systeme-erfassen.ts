@@ -5,7 +5,7 @@ import {
 } from "@digitalservicebund/icons";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
-import { ContentLink } from "~/utils/contentTypes.ts";
+import { type ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
 

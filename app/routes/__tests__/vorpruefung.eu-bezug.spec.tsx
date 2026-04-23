@@ -8,7 +8,7 @@ import Index from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { usePreCheckData } from "~/routes/vorpruefung/preCheckDataHook";
 import { MemoryRouter } from "~/utils/routerCompat";
 import { ResultType } from "../vorpruefung.ergebnis/PreCheckResult";
-import { PreCheckAnswerSchema } from "../vorpruefung/preCheckDataSchema";
+import { type PreCheckAnswerSchema } from "../vorpruefung/preCheckDataSchema";
 
 const { questions } = preCheck;
 

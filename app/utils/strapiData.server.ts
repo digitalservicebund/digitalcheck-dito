@@ -1,6 +1,6 @@
 import NodeCache from "node-cache";
 import crypto from "node:crypto";
-import { PrincipleNumber } from "~/resources/constants";
+import { type PrincipleNumber } from "~/resources/constants";
 import { type Node } from "~/utils/paragraphUtils";
 
 const url =

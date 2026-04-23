@@ -4,7 +4,7 @@ import {
   LayersOutlined,
 } from "@digitalservicebund/icons";
 import React, { useRef } from "react";
-import Badge, { BadgeProps } from "~/components/Badge.tsx";
+import Badge, { type BadgeProps } from "~/components/Badge.tsx";
 import Button from "~/components/Button.tsx";
 import Heading from "~/components/Heading";
 import ImageBox from "~/components/ImageBox.tsx";

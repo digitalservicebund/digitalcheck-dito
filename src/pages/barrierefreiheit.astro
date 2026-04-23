@@ -6,7 +6,9 @@ import RichText from "~/components/RichText";
 import { ROUTE_A11Y } from "~/resources/staticRoutes";
 import { readFile } from "node:fs/promises";
 
-const content = await readFile("public/markdown/barrierefreiheit.md", { encoding: "utf-8" });
+const content = await readFile("public/markdown/barrierefreiheit.md", {
+  encoding: "utf-8",
+});
 ---
 
 <Layout>

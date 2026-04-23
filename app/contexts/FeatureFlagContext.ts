@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 
-import { FeatureFlag } from "~/utils/featureFlags.ts";
+import { type FeatureFlag } from "~/utils/featureFlags.ts";
 
 export type FeatureFlags = Record<string, boolean>;
 

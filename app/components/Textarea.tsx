@@ -1,4 +1,4 @@
-import { type FormScope, useField, ValueOfInputType } from "@rvf/react";
+import { type FormScope, useField, type ValueOfInputType } from "@rvf/react";
 import { type ComponentPropsWithRef, type ReactNode, useId } from "react";
 import twMerge from "~/utils/tailwindMerge";
 import InputError from "./InputError";

@@ -1,8 +1,8 @@
 import {
   convertInchesToTwip,
   ExternalHyperlink,
-  IPatch,
-  IRunOptions,
+  type IPatch,
+  type IRunOptions,
   patchDocument,
   PatchType,
   TextRun,

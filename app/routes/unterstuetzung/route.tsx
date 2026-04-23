@@ -13,7 +13,7 @@ import { SearchParamTabs } from "~/components/Tabs/Tabs";
 import { support } from "~/resources/content/unterstuetzung";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
-import { ContentLink } from "~/utils/contentTypes";
+import { type ContentLink } from "~/utils/contentTypes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 type Offering = {

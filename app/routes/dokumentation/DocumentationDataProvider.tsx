@@ -16,13 +16,13 @@ import {
   getDocumentationSchemaFormUrl as _getDocumentationSchemaFormUrl,
   DATA_SCHEMA_VERSION_V1,
   DATA_SCHEMA_VERSION_V2,
-  DocumentationData,
-  Principle,
-  PrincipleReasoningV1,
-  V1,
-  V2,
+  type DocumentationData,
   type Participation,
   type PolicyTitle,
+  type Principle,
+  type PrincipleReasoningV1,
+  type V1,
+  type V2,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { features } from "~/utils/featureFlags";
 import {

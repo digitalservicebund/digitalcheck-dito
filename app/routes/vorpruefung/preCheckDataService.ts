@@ -5,9 +5,9 @@ import {
   writeVersionedDataToLocalStorage,
 } from "~/utils/localStorageVersioned";
 import {
-  PreCheckAnswerSchema,
-  PreCheckDataSchema,
-  PreCheckResultSchema,
+  type PreCheckAnswerSchema,
+  type PreCheckDataSchema,
+  type PreCheckResultSchema,
 } from "./preCheckDataSchema";
 
 export const DATA_SCHEMA_VERSION = "1";

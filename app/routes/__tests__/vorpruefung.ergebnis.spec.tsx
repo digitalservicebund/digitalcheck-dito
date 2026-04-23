@@ -16,7 +16,7 @@ import { readVersionedDataFromLocalStorage } from "~/utils/localStorageVersioned
 import {
   DATA_SCHEMA_VERSION,
   getPreCheckData,
-  PreCheckData,
+  type PreCheckData,
 } from "../vorpruefung/preCheckDataService";
 
 const { mockNavigate } = vi.hoisted(() => ({

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { createRoutesStub } from "~/utils/routerCompat";
-import InfoBox, { DetailsSummaryListProps } from "./InfoBox";
+import InfoBox, { type DetailsSummaryListProps } from "./InfoBox";
 import RichText from "./RichText";
 
 describe("InfoBox", () => {

@@ -18,7 +18,7 @@ import {
 import { usePreCheckData, useSyncedForm } from "./vorpruefung/preCheckDataHook";
 import {
   answerSchema,
-  PreCheckAnswerSchema,
+  type PreCheckAnswerSchema,
 } from "./vorpruefung/preCheckDataSchema";
 import { addOrUpdateAnswer } from "./vorpruefung/preCheckDataService";
 

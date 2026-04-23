@@ -17,12 +17,12 @@ import {
   type Route,
 } from "~/resources/staticRoutes";
 import {
-  PrincipleReasoningV1,
-  V1,
-  V2,
   type Participation,
   type PolicyTitle,
   type Principle,
+  type PrincipleReasoningV1,
+  type V1,
+  type V2,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { Link } from "~/utils/routerCompat";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.server";

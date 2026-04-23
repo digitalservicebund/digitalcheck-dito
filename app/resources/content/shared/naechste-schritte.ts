@@ -3,7 +3,7 @@ import {
   ROUTE_METHODS,
   ROUTE_PRECHECK,
 } from "~/resources/staticRoutes";
-import { Step } from "~/utils/contentTypes.ts";
+import { type Step } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./contact";
 

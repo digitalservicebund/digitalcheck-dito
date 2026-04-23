@@ -7,7 +7,7 @@ import RadioGroup from "~/components/RadioGroup";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
 import { Link } from "~/utils/routerCompat";
-import { PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
+import { type PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
 import DocumentationActions from "./DocumentationActions";
 import { useSyncedForm } from "./documentationDataHook";
 import { useDocumentationDataService } from "./DocumentationDataProvider";

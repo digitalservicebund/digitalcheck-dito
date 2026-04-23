@@ -9,7 +9,7 @@ import { MemoryRouter } from "~/utils/routerCompat";
 import Index from "../vorpruefung._index";
 import {
   DATA_SCHEMA_VERSION,
-  PreCheckData,
+  type PreCheckData,
 } from "../vorpruefung/preCheckDataService";
 
 vi.mock("~/utils/localStorageVersioned", async (importOriginal) => {

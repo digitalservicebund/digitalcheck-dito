@@ -1,7 +1,10 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import DokumentationApp from "~/components/DokumentationApp";
-import { fetchStrapiData, GET_PRINZIPS_WITH_EXAMPLES_QUERY } from "~/utils/strapiData.server";
+import {
+  fetchStrapiData,
+  GET_PRINZIPS_WITH_EXAMPLES_QUERY,
+} from "~/utils/strapiData.server";
 
 export async function getStaticPaths() {
   const staticPaths = [
@@ -17,7 +20,10 @@ export async function getStaticPaths() {
 
   const prinzipPaths = prinzips.flatMap((p: { URLBezeichnung: string }) => [
     { params: { slug: p.URLBezeichnung }, props: { prinzips } },
-    { params: { slug: `${p.URLBezeichnung}/erlaeuterung` }, props: { prinzips } },
+    {
+      params: { slug: `${p.URLBezeichnung}/erlaeuterung` },
+      props: { prinzips },
+    },
   ]);
 
   return [

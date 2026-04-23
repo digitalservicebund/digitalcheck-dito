@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { prependNumberToAbsatz } from "~/utils/paragraphUtils";
-import { BaseAbsatz } from "./strapiData.server";
+import { type BaseAbsatz } from "./strapiData.server";
 
 describe("prependNumberToAbsatz", () => {
   it("should prepend number to first text node in absatz", () => {

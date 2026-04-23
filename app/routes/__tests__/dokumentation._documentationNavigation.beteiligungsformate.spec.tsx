@@ -14,8 +14,8 @@ import { MemoryRouter } from "~/utils/routerCompat";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import {
   DATA_SCHEMA_VERSION_V1,
-  DocumentationData,
-  V1,
+  type DocumentationData,
+  type V1,
 } from "../dokumentation/documentationDataSchema";
 
 const renderWithRouter = () => {

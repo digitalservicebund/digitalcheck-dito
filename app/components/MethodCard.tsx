@@ -1,4 +1,4 @@
-import InfoBox, { InfoBoxProps } from "~/components/InfoBox.tsx";
+import InfoBox, { type InfoBoxProps } from "~/components/InfoBox.tsx";
 
 export type MethodCardProps = {
   image?: React.ReactNode;

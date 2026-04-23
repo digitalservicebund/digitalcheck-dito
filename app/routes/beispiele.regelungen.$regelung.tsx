@@ -16,11 +16,11 @@ import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
 import getFeatureFlag from "~/utils/featureFlags.server.ts";
 import {
-  Beispielvorhaben,
+  type Beispielvorhaben,
   fetchStrapiData,
   paragraphFields,
   prinzipCoreFields,
-  PrinzipWithBeispielvorhaben,
+  type PrinzipWithBeispielvorhaben,
   visualisationFields,
 } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";

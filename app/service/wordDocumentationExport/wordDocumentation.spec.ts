@@ -1,13 +1,13 @@
-import { HeadingLevel, IRunOptions, PatchType, TextRun } from "docx";
+import { HeadingLevel, type IRunOptions, PatchType, TextRun } from "docx";
 import { describe, expect, it, vi } from "vitest";
 import { documentationDocument } from "~/resources/content/documentation-document";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
-  DocumentationData,
-  V1,
+  type DocumentationData,
+  type V1,
 } from "~/routes/dokumentation/documentationDataSchema";
 import type { Node } from "~/utils/paragraphUtils";
-import { PrinzipWithAspekte } from "~/utils/strapiData.server";
+import { type PrinzipWithAspekte } from "~/utils/strapiData.server";
 import {
   buildAspectParagraphs,
   buildPrinciplePatches,

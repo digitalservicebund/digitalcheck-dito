@@ -30,19 +30,19 @@ import {
   ROUTE_METHODS_PRINCIPLES,
 } from "~/resources/staticRoutes";
 import {
-  IrrelevantAnswerReasoning,
-  NegativeAnswerReasoning,
+  type IrrelevantAnswerReasoning,
+  type NegativeAnswerReasoning,
   type Principle,
-  PrincipleReasoningV1,
+  type PrincipleReasoningV1,
   principleSchemaV1,
-  V1,
+  type V1,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { features } from "~/utils/featureFlags";
 import { Link } from "~/utils/routerCompat";
 import {
-  PrinzipAspekt,
-  PrinzipWithAspekte,
-  PrinzipWithAspekteAndExample,
+  type PrinzipAspekt,
+  type PrinzipWithAspekte,
+  type PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 import DocumentationActions from "./DocumentationActions";

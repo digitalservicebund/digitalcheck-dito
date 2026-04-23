@@ -1,7 +1,9 @@
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Hero from "~/components/Hero";
 import MetaTitle from "~/components/Meta";
-import Timeline, { TimelineItemContentProps } from "~/components/Timeline.tsx";
+import Timeline, {
+  type TimelineItemContentProps,
+} from "~/components/Timeline.tsx";
 import { news } from "~/resources/content/das-ist-neu";
 import { ROUTE_VERSION_HISTORY } from "~/resources/staticRoutes";
 

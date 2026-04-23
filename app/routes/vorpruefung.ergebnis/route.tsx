@@ -32,7 +32,7 @@ import ResultForm from "~/routes/vorpruefung.ergebnis/ResultForm";
 import { ResultType } from "./PreCheckResult";
 
 import { PreCheckFAQ } from "~/components/content/PreCheckFAQ.tsx";
-import { Step } from "~/utils/contentTypes.ts";
+import { type Step } from "~/utils/contentTypes.ts";
 import { usePreCheckData } from "../vorpruefung/preCheckDataHook";
 
 const nextSteps = {

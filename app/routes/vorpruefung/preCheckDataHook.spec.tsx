@@ -6,7 +6,7 @@ import { usePreCheckData } from "./preCheckDataHook";
 import {
   DATA_SCHEMA_VERSION,
   deletePreCheckData,
-  PreCheckData,
+  type PreCheckData,
 } from "./preCheckDataService";
 
 vi.mock("~/utils/localStorageVersioned", async (importOriginal) => {

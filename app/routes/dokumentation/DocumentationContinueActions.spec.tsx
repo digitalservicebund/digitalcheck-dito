@@ -19,8 +19,8 @@ import { DocumentationContinueActions } from "./DocumentationContinueActions";
 import { DocumentationDataProvider } from "./DocumentationDataProvider";
 import {
   DATA_SCHEMA_VERSION_V1,
-  DocumentationData,
-  V1,
+  type DocumentationData,
+  type V1,
 } from "./documentationDataSchema";
 
 const { mockDownloadDocumentation } = vi.hoisted(() => ({

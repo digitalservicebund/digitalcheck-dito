@@ -9,27 +9,30 @@ import MetaTitle from "~/components/Meta.tsx";
 import { PrincipleHightlightNullModifier } from "~/components/PrincipleHighlightModifier.tsx";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer";
-import { PRINCIPLE_COLORS, PrincipleNumber } from "~/resources/constants.ts";
+import {
+  PRINCIPLE_COLORS,
+  type PrincipleNumber,
+} from "~/resources/constants.ts";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien.ts";
 import {
   ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_METHODS_PRINCIPLES,
 } from "~/resources/staticRoutes.ts";
-import { absatzIdTag, Node } from "~/utils/paragraphUtils";
+import { absatzIdTag, type Node } from "~/utils/paragraphUtils";
 import { Link } from "~/utils/routerCompat";
 import {
-  AbsatzWithParagraph,
-  BasePrinzip,
+  type AbsatzWithParagraph,
+  type BasePrinzip,
   fetchStrapiData,
-  PrinzipAspekt,
-  PrinzipWithAspekteAndExample,
+  type PrinzipAspekt,
+  type PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server.ts";
 import { slugify } from "~/utils/utilFunctions.ts";
 import type { Route } from "../../../.react-router/types/app/routes/+types/beispiele.prinzipien.$prinzip.ts";
 import {
   PRINZIP_ASPEKTE_QUERY,
   PRINZIP_LIST_QUERY,
-  PrinzipListItem,
+  type PrinzipListItem,
   type PrinzipListQueryReturnType,
 } from "./query";
 

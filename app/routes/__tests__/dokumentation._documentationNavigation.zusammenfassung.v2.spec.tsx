@@ -7,7 +7,7 @@ import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
-  Route,
+  type Route,
   ROUTE_DOCUMENTATION_NOTES,
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_TITLE,
@@ -24,7 +24,7 @@ import type {
 } from "~/routes/dokumentation/documentationDataSchema";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { MemoryRouter, useOutletContext } from "~/utils/routerCompat";
-import { AbsatzWithParagraph } from "~/utils/strapiData.server.ts";
+import { type AbsatzWithParagraph } from "~/utils/strapiData.server.ts";
 import DocumentationSummaryV2 from "../dokumentation/DocumentationSummaryV2";
 
 vi.mock("~/contexts/FeatureFlagContext", () => ({

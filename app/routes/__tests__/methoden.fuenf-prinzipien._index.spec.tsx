@@ -2,7 +2,7 @@ import { render, screen, within } from "@testing-library/react";
 import { beforeEach, describe, expect, it } from "vitest";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import FivePrinciples from "~/routes/methoden.fuenf-prinzipien._index/route";
-import { Node } from "~/utils/paragraphUtils";
+import { type Node } from "~/utils/paragraphUtils";
 import { MemoryRouter } from "~/utils/routerCompat";
 
 // Create mock data that simulates the data structure returned by the loader.

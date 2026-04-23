@@ -1,14 +1,14 @@
 import { twJoin } from "tailwind-merge";
-import Badge, { BadgeProps } from "~/components/Badge.tsx";
+import Badge, { type BadgeProps } from "~/components/Badge.tsx";
 import { LinkButton } from "~/components/Button.tsx";
-import Heading, { HeadingProps } from "~/components/Heading.tsx";
+import Heading, { type HeadingProps } from "~/components/Heading.tsx";
 import type { ImageProps } from "~/components/Image.tsx";
 import ImageZoomable from "~/components/ImageZoomable.tsx";
 import RichText from "~/components/RichText.tsx";
 
 import React, { type ReactNode } from "react";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
-import { ContentLink } from "~/utils/contentTypes";
+import { type ContentLink } from "~/utils/contentTypes";
 import twMerge from "~/utils/tailwindMerge";
 
 type BulletListProps = React.PropsWithChildren<{

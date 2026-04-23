@@ -6,7 +6,7 @@ import {
   ROUTE_METHODS_TECHNICAL_FEASIBILITY,
   ROUTE_METHODS_VISUALIZE,
 } from "~/resources/staticRoutes";
-import { ContentLink, Step } from "~/utils/contentTypes.ts";
+import { type ContentLink, type Step } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methods = {
