@@ -6,9 +6,8 @@ import { defineConfig } from "astro/config";
 import process from "node:process";
 import { generateRoutes } from "./integrations/routeGenerator";
 
-const isPreview = !!process.env.PREVIEW_BUILD;
-const PREVIEW_BASE_PATH =
-  process.env.PREVIEW_BASE_PATH?.replace(/\/?$/, "/") ?? "/";
+const isPreview = process.env.PUBLIC_STAGE === "preview";
+const PREVIEW_BASE_PATH = process.env.PREVIEW_BASE_PATH;
 
 const PRODUCTION_SITE = "https://digitalcheck.bund.de";
 const PREVIEW_SITE = "https://digitalservicebund.github.io";
@@ -34,11 +33,6 @@ export default defineConfig({
         "~/": new URL("./app/", import.meta.url).pathname,
         "@/": new URL("./src/", import.meta.url).pathname,
       },
-    },
-    define: {
-      "import.meta.env.PREVIEW_BUILD": JSON.stringify(
-        process.env.PREVIEW_BUILD,
-      ),
     },
   },
   trailingSlash: "never",
