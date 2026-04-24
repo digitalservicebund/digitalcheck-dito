@@ -20,7 +20,7 @@ const groupRoutesByParent = (routes: readonly Route[]): RouteWithChildren[] => {
   routes.forEach((route) => {
     if (!route.sitemap) return;
     // Top-level pages (parent: null, path !== "/") are treated as children of home,
-    // mirroring the old behaviour where ROUTE_LANDING was the implicit root parent.
+    // mirroring the old behaviour where home was the implicit root parent.
     const parentPath = route.parent?.path ?? (route.path !== "/" ? "/" : null);
     if (!parentPath) return;
     const parentRoute = routeMap.get(parentPath);

@@ -1,10 +1,5 @@
-import {
-  ROUTE_INTEROPERABILITY,
-  ROUTE_LANDING,
-  ROUTE_METHODS_PRINCIPLES,
-  ROUTE_SUPPORT,
-  ROUTE_SUPPORT_TRAININGS,
-} from "~/resources/staticRoutes";
+import { home, interoperabel, methoden_fuenfPrinzipien, unterstuetzung } from "@/config/routes";
+import { ROUTE_SUPPORT_TRAININGS } from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { getTabAnchorLink } from "~/utils/tabs";
@@ -58,14 +53,14 @@ export const spoc = {
           content: dedent`
                   Der Interoperable Europe Act und der Europäische Interoperabilitätsrahmen (EIF) sind Teil des Ökosystems der EU-Rechtsakte für den digitalen Binnenmarkt. Weitere zentrale Verordnungen, Richtlinien und Frameworks sind darin verankert.
                   
-                  Übersichten zu den EU-Rechtsakten finden Sie [hier](${ROUTE_INTEROPERABILITY.url}${getTabAnchorLink("angrenzendes-eu-recht", "angrenzendes-eu-recht")})`,
+                  Übersichten zu den EU-Rechtsakten finden Sie [hier](${interoperabel.path}${getTabAnchorLink("angrenzendes-eu-recht", "angrenzendes-eu-recht")})`,
         },
         {
           title: "Lösungen für ein interoperables Europa",
           content: dedent`
             Die "Lösungen für ein interoperables Europa" (Art. 7 EU 2024/903) sind etablierte technische Standards, die es ermöglichen, dass Verwaltungseinheiten effizient und sicher Daten über Ländergrenzen hinweg austauschen können. Das Interoperable Europe Board legt die von Legistinnen und Legisten zu prüfenden Lösungen fest. Das Ziel der EU ist es, unionsweit die Nutzung bewährter interoperabler Standard zu fördern und anzuregen.
 
-            Detaillierte Informationen zu den Lösungen finden Sie [hier](${ROUTE_INTEROPERABILITY.url}${getTabAnchorLink("interoperable-loesungen", "interoperable-loesungen")}).
+            Detaillierte Informationen zu den Lösungen finden Sie [hier](${interoperabel.path}${getTabAnchorLink("interoperable-loesungen", "interoperable-loesungen")}).
           `,
         },
       ],
@@ -100,8 +95,7 @@ export const spoc = {
       
       **Bereitstellung von Informationen und Austauschformaten:**  
       
-      Wir stellen Wissen bereit und bereiten das Thema verständlich auf. Dazu zählen [Schulungen](${ROUTE_SUPPORT_TRAININGS.url}) und verschiedene [Unterstützungsangebote](${ROUTE_SUPPORT.url}).
-
+      Wir stellen Wissen bereit und bereiten das Thema verständlich auf. Dazu zählen [Schulungen](${ROUTE_SUPPORT_TRAININGS.url}) und verschiedene [Unterstützungsangebote](${unterstuetzung.path}).
 
       **Förderung von Nachnutzung, Kooperation und Zusammenarbeit:**  
       
@@ -178,7 +172,7 @@ export const spoc = {
           text: "15.05.2025",
         },
         content: dedent`
-          Die [5 Prinzipien für digitaltaugliche Gesetzgebung](${ROUTE_METHODS_PRINCIPLES.url}) sind überarbeitet und entsprechen sowohl den Anforderungen der Digitaltauglichkeit als auch der Interoperabilität. 
+          Die [5 Prinzipien für digitaltaugliche Gesetzgebung](${methoden_fuenfPrinzipien.path}) sind überarbeitet und entsprechen sowohl den Anforderungen der Digitaltauglichkeit als auch der Interoperabilität. 
         `,
       },
       {
@@ -193,7 +187,7 @@ export const spoc = {
           - Das Ergebnis der Vorprüfung wird automatisch per E-Mail versendet:
             - Bei Digitalbezug an den NKR.
             - Bei zusätzlichem Interoperabilitäts-Bezug auch an die nationale Kontaktstelle beim Digitalcheck-Team.
-          - Bereitstellung einer [Informationsseite](${ROUTE_INTEROPERABILITY.url}) zum Thema Interoperabilität für Legistinnen und Legisten.
+          - Bereitstellung einer [Informationsseite](${interoperabel.path}) zum Thema Interoperabilität für Legistinnen und Legisten.
         `,
       },
       {
@@ -249,10 +243,10 @@ export const spoc = {
           ${contact.mdMailToLink(contact.interoperabilityEmail)}
 
           Weitere Online-Angebote des Digitalcheck für Legist:innen:  
-          [https://digitalcheck.bund.de/](${ROUTE_LANDING.url})
+          [https://digitalcheck.bund.de/](${home.path})
 
           Für weitere Inhalte zur Interoperabilität:  
-          [https://digitalcheck.bund.de/interoperabel/](${ROUTE_INTEROPERABILITY.url})
+          [https://digitalcheck.bund.de/interoperabel/](${interoperabel.path})
         `,
       },
     ],

@@ -1,8 +1,4 @@
-import {
-  ROUTE_DOCUMENTATION,
-  ROUTE_METHODS,
-  ROUTE_PRECHECK,
-} from "~/resources/staticRoutes";
+import { dokumentation, methoden, vorpruefung } from "@/config/routes";
 import { type Step } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./contact";
@@ -24,7 +20,7 @@ export const steps = {
       "Finden Sie heraus, ob Sie in Ihrem Regelungsvorhaben Aspekte der digitalen Umsetzung und EU-Anforderungen an Interoperabilität beachten müssen. Danach entscheidet sich, ob die weiteren Schritte für Sie relevant sind.",
     link: {
       text: "Digitalbezug einschätzen",
-      to: ROUTE_PRECHECK.url,
+      to: vorpruefung.path,
     },
     finished: {
       headline: {
@@ -41,7 +37,7 @@ export const steps = {
       "Nutzen Sie passende Methoden und Werkzeuge, um Digitaltauglichkeit und Interoperabilität in Ihrer Regelung sicherzustellen. Das Digitalcheck-Team steht Ihnen bei der Erarbeitung zur Verfügung.",
     link: {
       text: "Zu „Erarbeiten“",
-      to: ROUTE_METHODS.url,
+      to: methoden.path,
     },
     isDisabled: false,
     finished: {
@@ -59,7 +55,7 @@ export const steps = {
       "Dokumentieren Sie in einem Fragebogen, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben. Beschreiben Sie, wie Sie diese in das Regelungsvorhaben einfließen lassen. Die Erkenntnisse der vorigen Schritte helfen Ihnen beim Ausfüllen.",
     link: {
       text: "Zu „Dokumentieren“",
-      to: ROUTE_DOCUMENTATION.url,
+      to: dokumentation.path,
     },
     isDisabled: false,
     finished: {

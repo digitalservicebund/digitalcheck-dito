@@ -1,3 +1,4 @@
+import { home, methoden, methoden_fuenfPrinzipien } from "@/config/routes";
 import {
   MenuOpen,
   MenuOutlined,
@@ -12,11 +13,6 @@ import { useResize } from "~/hooks/deviceHook";
 import DropdownMenu from "~/layout/DropdownMenu.tsx";
 import ProgressBar from "~/layout/ProgressBar";
 import { header } from "~/resources/content/shared/header.ts";
-import {
-  ROUTE_LANDING,
-  ROUTE_METHODS,
-  ROUTE_METHODS_PRINCIPLES,
-} from "~/resources/staticRoutes.ts";
 import { assetPath } from "~/utils/assetPath";
 import { Link, useLocation } from "~/utils/routerCompat";
 import twMerge from "~/utils/tailwindMerge.ts";
@@ -53,8 +49,8 @@ const isParentItemActive = (item: HeaderItem, path: string): boolean => {
     // TODO: remove once we've split the 5 Prinzipien page again
     // prevents two active elements in the header for this page
     if (
-      normalizedCurrentPath.startsWith(ROUTE_METHODS_PRINCIPLES.url) &&
-      normalizedItemPath == ROUTE_METHODS.url
+      normalizedCurrentPath.startsWith(methoden_fuenfPrinzipien.path) &&
+      normalizedItemPath == methoden.path
     ) {
       return false;
     }
@@ -157,7 +153,7 @@ const PageHeader = ({
         <div className="relative flex h-[70px] justify-between pl-16 lg:container">
           {/* Logo and title */}
           <Link
-            to={ROUTE_LANDING.url}
+            to={home.path}
             className="plausible-event-name=Nav+Bar.Home flex items-center space-x-8"
           >
             <img

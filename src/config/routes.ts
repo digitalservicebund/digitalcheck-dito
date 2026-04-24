@@ -88,6 +88,61 @@ export const dokumentation = {
   navLabel: null,
 } as const;
 
+export const dokumentation_absenden = {
+  key: "dokumentation_absenden",
+  path: "/dokumentation/absenden",
+  title: "Absenden",
+  parent: dokumentation,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const dokumentation_beteiligungsformate = {
+  key: "dokumentation_beteiligungsformate",
+  path: "/dokumentation/beteiligungsformate",
+  title: "Beteiligungsformate",
+  parent: dokumentation,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const dokumentation_hinweise = {
+  key: "dokumentation_hinweise",
+  path: "/dokumentation/hinweise",
+  title: "Hinweise",
+  parent: dokumentation,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const dokumentation_regelungsvorhabenTitel = {
+  key: "dokumentation_regelungsvorhabenTitel",
+  path: "/dokumentation/regelungsvorhaben-titel",
+  title: "Regelungsvorhaben Titel",
+  parent: dokumentation,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const dokumentation_zusammenfassung = {
+  key: "dokumentation_zusammenfassung",
+  path: "/dokumentation/zusammenfassung",
+  title: "Zusammenfassung",
+  parent: dokumentation,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const gesetzgebungsprozess = {
   key: "gesetzgebungsprozess",
   path: "/gesetzgebungsprozess",
@@ -459,6 +514,11 @@ export const allRoutes = [
   dasIstNeu,
   datenschutz,
   dokumentation,
+  dokumentation_absenden,
+  dokumentation_beteiligungsformate,
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+  dokumentation_zusammenfassung,
   gesetzgebungsprozess,
   grundlagen,
   grundlagen_digitaltauglichkeit,

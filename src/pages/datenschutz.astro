@@ -1,10 +1,10 @@
 ---
+import { datenschutz } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Hero from "~/components/Hero";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
-import { ROUTE_PRIVACY } from "~/resources/staticRoutes";
 import { readFile } from "node:fs/promises";
 
 export const frontmatter = {
@@ -17,7 +17,7 @@ const content = await readFile("public/markdown/datenschutz.md", {
 ---
 
 <Layout>
-  <MetaTitle prefix={ROUTE_PRIVACY.title} />
+  <MetaTitle prefix={datenschutz.title} />
   <main>
     <Hero title="Datenschutzerklärung" />
     <ContentWrapper>

@@ -1,9 +1,6 @@
+import { methoden, methoden_technischeUmsetzbarkeit } from "@/config/routes";
 import { ArrowCircleRightOutlined } from "@digitalservicebund/icons";
-import {
-  ROUTE_DOWNLOAD_PRINCIPLE_POSTER,
-  ROUTE_METHODS,
-  ROUTE_METHODS_TECHNICAL_FEASIBILITY,
-} from "~/resources/staticRoutes";
+import { ROUTE_DOWNLOAD_PRINCIPLE_POSTER } from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
 import { type ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
@@ -41,7 +38,7 @@ export const methodsFivePrinciples = {
       {
         look: "tertiary" as const,
         text: "IT-Auswirkungen prüfen",
-        to: ROUTE_METHODS_TECHNICAL_FEASIBILITY.url,
+        to: methoden_technischeUmsetzbarkeit.path,
       },
     ] satisfies ContentLink[],
   },
@@ -55,7 +52,7 @@ export const methodsFivePrinciples = {
       {
         text: "Zu „Erarbeiten“",
         look: "tertiary" as const,
-        to: ROUTE_METHODS.url + "#verfassen-des-regelungsentwurfes",
+        to: methoden.path + "#verfassen-des-regelungsentwurfes",
       },
     ] satisfies ContentLink[],
   },

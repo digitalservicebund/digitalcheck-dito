@@ -3,7 +3,6 @@ import Layout from "@/layouts/Layout.astro";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
-import { ROUTE_A11Y } from "~/resources/staticRoutes";
 import { readFile } from "node:fs/promises";
 
 export const frontmatter = {
@@ -16,7 +15,7 @@ const content = await readFile("public/markdown/barrierefreiheit.md", {
 ---
 
 <Layout>
-  <MetaTitle prefix={ROUTE_A11Y.title} />
+  <MetaTitle prefix={frontmatter.title} />
   <ContentWrapper>
     <RichText
       markdown={content}

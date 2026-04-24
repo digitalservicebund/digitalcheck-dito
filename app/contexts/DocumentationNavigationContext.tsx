@@ -6,6 +6,6 @@ export const DocumentationNavigationContext =
 
 export function useNavigationContext(): NavigationContext {
   const ctx = useContext(DocumentationNavigationContext);
-  if (!ctx) throw new Error("Must be used within DokumentationApp");
+  if (!ctx) throw new Error("Must be used within DokumentationLayout");
   return ctx;
 }

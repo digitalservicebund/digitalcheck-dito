@@ -1,11 +1,5 @@
+import { methoden_fuenfPrinzipien, methoden_interviewLeitfaden, methoden_itSystemeErfassen, methoden_technischeUmsetzbarkeit, methoden_visualisieren } from "@/config/routes";
 import { steps } from "~/resources/content/shared/naechste-schritte";
-import {
-  ROUTE_METHODS_COLLECT_IT_SYSTEMS,
-  ROUTE_METHODS_INTERVIEW_METHODS,
-  ROUTE_METHODS_PRINCIPLES,
-  ROUTE_METHODS_TECHNICAL_FEASIBILITY,
-  ROUTE_METHODS_VISUALIZE,
-} from "~/resources/staticRoutes";
 import { type ContentLink, type Step } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -38,7 +32,7 @@ export const methods = {
         links: [
           {
             text: "Anleitung zur Visualisierung",
-            to: ROUTE_METHODS_VISUALIZE.url,
+            to: methoden_visualisieren.path,
           },
         ] satisfies ContentLink[],
       },
@@ -56,7 +50,7 @@ export const methods = {
         links: [
           {
             text: "Prinzipien nutzen",
-            to: ROUTE_METHODS_PRINCIPLES.url,
+            to: methoden_fuenfPrinzipien.path,
           },
         ] satisfies ContentLink[],
       },
@@ -103,7 +97,7 @@ export const methods = {
     links: [
       {
         text: "IT-Landschaft verstehen",
-        to: ROUTE_METHODS_COLLECT_IT_SYSTEMS.url,
+        to: methoden_itSystemeErfassen.path,
       },
     ] satisfies ContentLink[],
   },
@@ -115,7 +109,7 @@ export const methods = {
     links: [
       {
         text: "IT-Auswirkungen prüfen",
-        to: ROUTE_METHODS_TECHNICAL_FEASIBILITY.url,
+        to: methoden_technischeUmsetzbarkeit.path,
       },
     ] satisfies ContentLink[],
   },
@@ -127,7 +121,7 @@ export const methods = {
     links: [
       {
         text: "Akteure identifizieren",
-        to: ROUTE_METHODS_INTERVIEW_METHODS.url,
+        to: methoden_interviewLeitfaden.path,
       },
     ] satisfies ContentLink[],
   },

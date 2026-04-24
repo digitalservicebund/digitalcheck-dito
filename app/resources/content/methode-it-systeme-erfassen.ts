@@ -1,9 +1,9 @@
+import { unterstuetzung } from "@/config/routes";
 import {
   DrawOutlined,
   StickyNote2Outlined,
   SupportOutlined,
 } from "@digitalservicebund/icons";
-import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
 import { type ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
@@ -70,7 +70,7 @@ export const methodsITSystems = {
       {
         text: "Unterstützungsangebote nutzen",
         look: "tertiary" as const,
-        to: ROUTE_SUPPORT.url,
+        to: unterstuetzung.path,
       },
     ] satisfies ContentLink[],
   },
