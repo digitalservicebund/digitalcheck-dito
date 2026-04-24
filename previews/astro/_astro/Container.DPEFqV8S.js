@@ -1,0 +1,1 @@
+import{c as e,j as a}from"./tailwindMerge.B4_tS6rG.js";function c({overhangingBackground:n,children:s,className:o}){const r=e("container py-40",n&&"rounded-lg container-overhanging-background",o);return a.jsx("div",{className:r,children:s})}export{c as C};
