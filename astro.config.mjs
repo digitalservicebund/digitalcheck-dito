@@ -4,6 +4,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import process from "node:process";
+import { generateRoutes } from "./integrations/routeGenerator";
 
 const isPreview = !!process.env.PREVIEW_BUILD;
 const PREVIEW_BASE_PATH =
@@ -18,7 +19,14 @@ export default defineConfig({
   base: isPreview ? PREVIEW_BASE_PATH : undefined,
   srcDir: "src",
   publicDir: "public",
-  integrations: [react(), sitemap()],
+  integrations: [
+    react(),
+    sitemap(),
+    generateRoutes({
+      pagesDir: "src/pages",
+      output: "src/config/routes.ts",
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
     resolve: {
