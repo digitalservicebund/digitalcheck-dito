@@ -1,0 +1,38 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SitemapList from "@/components/SitemapList.astro";
+import ContentWrapper from "~/components/ContentWrapper.tsx";
+import Hero from "~/components/Hero";
+import MetaTitle from "~/components/Meta";
+import { ROUTE_SITEMAP, ROUTES, type Route } from "~/resources/staticRoutes";
+
+type RouteWithChildren = Route & { children: RouteWithChildren[] };
+
+const groupRoutesByParent = (routes: Route[]): RouteWithChildren[] => {
+  const routeMap = new Map<string, RouteWithChildren>(
+    routes.map((route) => [route.url, { ...route, children: [] }]),
+  );
+
+  routes.forEach((route) => {
+    if (route.hideInSitemap) return;
+    const parentRoute = routeMap.get(route.parent?.url ?? "");
+    if (parentRoute) {
+      parentRoute.children.push(routeMap.get(route.url)!);
+    }
+  });
+
+  return Array.from(routeMap.values()).filter((route) => !route.parent);
+};
+
+const routes = groupRoutesByParent(ROUTES);
+---
+
+<Layout>
+  <MetaTitle prefix={ROUTE_SITEMAP.title} />
+  <main>
+    <Hero title="Sitemap" />
+    <ContentWrapper>
+      <SitemapList routes={routes} />
+    </ContentWrapper>
+  </main>
+</Layout>
