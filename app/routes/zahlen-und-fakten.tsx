@@ -1,3 +1,4 @@
+import { zahlenUndFakten } from "@/config/routes";
 import {
   LocalActivityOutlined,
   ShareOutlined,
@@ -11,7 +12,6 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
-import { ROUTE_NUMBERS_FACTS } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 type DsData = {
@@ -131,7 +131,7 @@ const dsData: DsData = [
 export default function ZahlenUndFakten() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_NUMBERS_FACTS.title} />
+      <MetaTitle prefix={zahlenUndFakten.title} />
       <main>
         <Hero title="Der Digitalcheck in Zahlen">
           <RichText

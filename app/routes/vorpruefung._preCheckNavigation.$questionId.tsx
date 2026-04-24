@@ -1,3 +1,4 @@
+import { vorpruefung } from "@/config/routes";
 import { useEffect, useState } from "react";
 import { useNavigate } from "~/utils/routerCompat";
 
@@ -11,10 +12,7 @@ import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { preCheck } from "~/resources/content/vorpruefung";
-import {
-  ROUTE_PRECHECK,
-  ROUTES_PRECHECK_QUESTIONS,
-} from "~/resources/staticRoutes";
+import { ROUTES_PRECHECK_QUESTIONS } from "~/resources/staticRoutes";
 import { usePreCheckData, useSyncedForm } from "./vorpruefung/preCheckDataHook";
 import {
   answerSchema,
@@ -97,7 +95,7 @@ export default function Index({
   const navigate = useNavigate();
   const storedAnswer = answerForQuestionId(question.id);
   const nextLink =
-    questions.find((q) => q.id === question.id)?.nextLink ?? ROUTE_PRECHECK.url;
+    questions.find((q) => q.id === question.id)?.nextLink ?? vorpruefung.path;
 
   const form = useSyncedForm({
     schema: answerSchema,

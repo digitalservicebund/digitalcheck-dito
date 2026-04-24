@@ -1,3 +1,4 @@
+import { dokumentation, interoperabel, methoden } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -5,11 +6,6 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { MemoryRouter } from "~/utils/routerCompat";
 
 import { preCheck } from "~/resources/content/vorpruefung";
-import {
-  ROUTE_DOCUMENTATION,
-  ROUTE_INTEROPERABILITY,
-  ROUTE_METHODS,
-} from "~/resources/staticRoutes";
 import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import Result from "~/routes/vorpruefung.ergebnis/route";
 import { readVersionedDataFromLocalStorage } from "~/utils/localStorageVersioned";
@@ -291,7 +287,7 @@ describe("Vorprüfung Ergebnis Page", () => {
         );
 
         if (expected.includesInterop) {
-          expect(link).toHaveAttribute("href", ROUTE_INTEROPERABILITY.url);
+          expect(link).toHaveAttribute("href", interoperabel.path);
           expect(text).toBeInTheDocument();
         } else {
           expect(link).not.toBeInTheDocument();
@@ -371,10 +367,10 @@ describe("Vorprüfung Ergebnis Page", () => {
           if (!expected.showsNegativeReasoning) {
             expect(
               screen.getByRole("link", { name: "Zu „Erarbeiten“" }),
-            ).toHaveAttribute("href", ROUTE_METHODS.url);
+            ).toHaveAttribute("href", methoden.path);
             expect(
               screen.getByRole("link", { name: "Zu „Dokumentieren“" }),
-            ).toHaveAttribute("href", ROUTE_DOCUMENTATION.url);
+            ).toHaveAttribute("href", dokumentation.path);
           }
         } else {
           expect(heading).not.toBeInTheDocument();

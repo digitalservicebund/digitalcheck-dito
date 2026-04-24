@@ -25,7 +25,7 @@ import {
   type V2,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { Link } from "~/utils/routerCompat";
-import type { PrinzipWithAspekte } from "~/utils/strapiData.server";
+import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
 import DocumentationActions from "./DocumentationActions";
 import { useDocumentationDataService } from "./DocumentationDataProvider";

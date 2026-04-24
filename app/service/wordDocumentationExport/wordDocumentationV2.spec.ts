@@ -4,7 +4,7 @@ import { documentationDocument } from "~/resources/content/documentation-documen
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { type DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
 import type { Node } from "~/utils/paragraphUtils";
-import { type PrinzipWithAspekte } from "~/utils/strapiData.server";
+import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import {
   buildPrinciplePatches,
   stringToTextRuns,

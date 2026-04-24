@@ -8,8 +8,8 @@ import {
   ROUTE_DOCUMENTATION_TITLE,
   ROUTES_DOCUMENTATION_INTRO,
 } from "~/resources/staticRoutes.ts";
-import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation.ts";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import { useNonce } from "~/utils/nonce.ts";
 import { useNavigate } from "~/utils/routerCompat";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
@@ -18,15 +18,16 @@ const { start } = digitalDocumentation;
 
 function StartOverDialog({
   deleteDocumentationData,
+  prinzips,
 }: {
   deleteDocumentationData: () => void;
+  prinzips: PrinzipWithAspekteAndExample[];
 }) {
   const navigate = useNavigate();
-  const supportingData = useDocumentationRouteData();
   const { downloadDocumentation } = useWordDocumentation();
 
   const downloadDraft = async () => {
-    await downloadDocumentation(supportingData.prinzips);
+    await downloadDocumentation(prinzips);
   };
 
   return (
@@ -70,7 +71,11 @@ function StartOverDialog({
   );
 }
 
-export function DocumentationContinueActions() {
+export function DocumentationContinueActions({
+  prinzips,
+}: {
+  prinzips: PrinzipWithAspekteAndExample[];
+}) {
   const { hasSavedDocumentation, deleteDocumentationData } =
     useDocumentationDataService();
   const nonce = useNonce();
@@ -81,7 +86,10 @@ export function DocumentationContinueActions() {
           <LinkButton to={ROUTE_DOCUMENTATION_TITLE.url} className="js-only">
             {start.actions.resume.buttonText}
           </LinkButton>
-          <StartOverDialog deleteDocumentationData={deleteDocumentationData} />
+          <StartOverDialog
+            deleteDocumentationData={deleteDocumentationData}
+            prinzips={prinzips}
+          />
         </>
       ) : (
         <LinkButton to={ROUTES_DOCUMENTATION_INTRO[0].url} className="js-only">

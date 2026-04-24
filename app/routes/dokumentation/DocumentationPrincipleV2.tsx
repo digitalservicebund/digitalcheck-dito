@@ -1,3 +1,4 @@
+import { methoden_fuenfPrinzipien } from "@/config/routes";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import Heading from "~/components/Heading";
@@ -5,9 +6,8 @@ import HelpButton from "~/components/HelpButton";
 import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
 import { Link } from "~/utils/routerCompat";
-import { type PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import DocumentationActions from "./DocumentationActions";
 import { useSyncedForm } from "./documentationDataHook";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
@@ -64,7 +64,9 @@ export default function DocumentationPrincipleV2({
             >
               <BlocksRenderer content={prinzip.Hilfetext!} />
               <Link
-                to={ROUTE_METHODS_PRINCIPLES.url + "/" + prinzip.URLBezeichnung}
+                to={
+                  methoden_fuenfPrinzipien.path + "/" + prinzip.URLBezeichnung
+                }
                 className="ds-link-01-reg"
               >
                 Mehr zum Prinzip

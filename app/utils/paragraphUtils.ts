@@ -1,4 +1,4 @@
-import type { BaseAbsatz, BasePrinzip } from "./strapiData.server";
+import type { BaseAbsatz, BasePrinzip } from "./strapiData.types";
 
 export type Node = {
   type: string;

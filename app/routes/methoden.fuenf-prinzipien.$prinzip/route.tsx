@@ -1,3 +1,4 @@
+import { beispiele_prinzipien, methoden_fuenfPrinzipien } from "@/config/routes";
 import { type ReactNode } from "react";
 import { twJoin } from "tailwind-merge";
 import AccordionItem from "~/components/AccordionItem.tsx";
@@ -14,10 +15,6 @@ import {
   type PrincipleNumber,
 } from "~/resources/constants.ts";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien.ts";
-import {
-  ROUTE_EXAMPLES_PRINCIPLES,
-  ROUTE_METHODS_PRINCIPLES,
-} from "~/resources/staticRoutes.ts";
 import { absatzIdTag, type Node } from "~/utils/paragraphUtils";
 import { Link } from "~/utils/routerCompat";
 import {
@@ -25,7 +22,7 @@ import {
   type BasePrinzip,
   type PrinzipAspekt,
   type PrinzipWithAspekteAndExample,
-} from "~/utils/strapiData.server.ts";
+} from "~/utils/strapiData.types.ts";
 import { slugify } from "~/utils/utilFunctions.ts";
 import { type PrinzipListItem } from "./query";
 
@@ -108,7 +105,7 @@ function Textbeispiel({
       />
       <Link
         className="text-link"
-        to={`${ROUTE_EXAMPLES_PRINCIPLES.url}/${prinzip.URLBezeichnung}#${absatzIdTag(beispiel.documentId)}`}
+        to={`${beispiele_prinzipien.path}/${prinzip.URLBezeichnung}#${absatzIdTag(beispiel.documentId)}`}
       >
         {methodsFivePrinciples.exampleLinkText}
       </Link>
@@ -205,7 +202,7 @@ function PrincipleNavigation({
         {principles.map((principle) => (
           <Link
             key={principle.order}
-            to={`${ROUTE_METHODS_PRINCIPLES.url}/${principle.URLBezeichnung}`}
+            to={`${methoden_fuenfPrinzipien.path}/${principle.URLBezeichnung}`}
             className={twJoin(
               "block",
               principle.order === current.order
@@ -222,7 +219,7 @@ function PrincipleNavigation({
         {prev ? (
           <LinkButton
             look="link"
-            to={ROUTE_METHODS_PRINCIPLES.url + "/" + prev.URLBezeichnung}
+            to={methoden_fuenfPrinzipien.path + "/" + prev.URLBezeichnung}
             className="ds-link-01-bold"
           >
             Zurück zu Prinzip {prev.order}
@@ -233,7 +230,7 @@ function PrincipleNavigation({
         {next ? (
           <LinkButton
             look="tertiary"
-            to={ROUTE_METHODS_PRINCIPLES.url + "/" + next.URLBezeichnung}
+            to={methoden_fuenfPrinzipien.path + "/" + next.URLBezeichnung}
             className="flex justify-center"
           >
             Zum nächsten Prinzip

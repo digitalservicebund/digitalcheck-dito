@@ -1,3 +1,4 @@
+import { vorpruefung, vorpruefung_ergebnis } from "@/config/routes";
 import {
   CancelOutlined,
   CheckCircleOutlined,
@@ -21,10 +22,6 @@ import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
-import {
-  ROUTE_PRECHECK,
-  ROUTE_PRECHECK_RESULT,
-} from "~/resources/staticRoutes";
 import getContentForResult, {
   type Reason,
 } from "~/routes/vorpruefung.ergebnis/getContentForResult";
@@ -113,7 +110,7 @@ export default function Result() {
       firstUnansweredQuestionIndex !== null &&
       firstUnansweredQuestionIndex < preCheck.questions.length - 1
     ) {
-      void navigate(ROUTE_PRECHECK.url);
+      void navigate(vorpruefung.path);
     }
   }, [navigate, firstUnansweredQuestionIndex]);
 
@@ -121,7 +118,7 @@ export default function Result() {
     result?.digital === ResultType.UNSURE ? preCheckResult.unsure.hint : "";
   return (
     <>
-      <MetaTitle prefix={ROUTE_PRECHECK_RESULT.title} />
+      <MetaTitle prefix={vorpruefung_ergebnis.title} />
       <main>
         <div className="bg-blue-100 py-40 print:pb-0">
           <div className="px-16">

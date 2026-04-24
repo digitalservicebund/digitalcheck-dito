@@ -1,3 +1,4 @@
+import { unterstuetzung } from "@/config/routes";
 import React from "react";
 
 import { LinkButton } from "~/components/Button.tsx";
@@ -11,7 +12,6 @@ import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { SearchParamTabs } from "~/components/Tabs/Tabs";
 import { support } from "~/resources/content/unterstuetzung";
-import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
 import { type ContentLink } from "~/utils/contentTypes";
 import { dedent } from "~/utils/dedentMultilineStrings";
@@ -72,7 +72,7 @@ function SocialProofImage() {
 export default function Index() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_SUPPORT.title} />
+      <MetaTitle prefix={unterstuetzung.title} />
       <main>
         <Hero title={title} subtitle={subtitle} />
 

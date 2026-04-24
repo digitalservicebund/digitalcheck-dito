@@ -1,18 +1,13 @@
 // Import mocks first
+import type { Route } from "~/resources/staticRoutes";
+import { dokumentation } from "@/config/routes";
 import "./utils/mockLocalStorageVersioned";
 // End of mocks
 
 import "@testing-library/jest-dom";
 import { act, render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import {
-  type Route,
-  ROUTE_DOCUMENTATION,
-  ROUTE_DOCUMENTATION_NOTES,
-  ROUTE_DOCUMENTATION_PARTICIPATION,
-  ROUTE_DOCUMENTATION_TITLE,
-  ROUTES_DOCUMENTATION_INTRO,
-} from "~/resources/staticRoutes";
+import { ROUTE_DOCUMENTATION_NOTES, ROUTE_DOCUMENTATION_PARTICIPATION, ROUTE_DOCUMENTATION_TITLE, ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes";
 import {
   createMemoryRouter,
   RouterProvider,
@@ -59,7 +54,7 @@ const mockRoutes: (Route[] | Route)[] = [
   [
     {
       title: "Prinzip A",
-      url: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
+      url: `${dokumentation.path}/prinzipA`,
     },
   ],
 ];
@@ -100,7 +95,7 @@ const validationScenarios: ValidationScenario[] = [
       principles: [
         {
           answer: "Ja, gänzlich oder teilweise",
-          id: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
+          id: `${dokumentation.path}/prinzipA`,
           reasoning: [
             {
               checkbox: "on",
@@ -151,7 +146,7 @@ const validationScenarios: ValidationScenario[] = [
       principles: [
         {
           answer: "Ja, gänzlich oder teilweise",
-          id: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
+          id: `${dokumentation.path}/prinzipA`,
           reasoning: [
             {
               checkbox: "on",
@@ -191,7 +186,7 @@ function renderPage({ url }: Route) {
   }
   const routes = [
     {
-      path: ROUTE_DOCUMENTATION.url,
+      path: dokumentation.path,
       element: (
         <DocumentationDataProvider>
           <LayoutWithDocumentationNavigation />
@@ -403,7 +398,7 @@ describe("navigation on pages of documentation", () => {
           principles: [
             {
               answer: "Ja, gänzlich oder teilweise",
-              id: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
+              id: `${dokumentation.path}/prinzipA`,
               reasoning: "Some reasoning",
               aspects: ["aspect-1"],
             },
@@ -448,7 +443,7 @@ describe("navigation on pages of documentation", () => {
           principles: [
             {
               answer: "Ja, gänzlich oder teilweise",
-              id: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
+              id: `${dokumentation.path}/prinzipA`,
               reasoning: "Some reasoning",
               aspects: [], // empty aspects fails V2 validation
             },

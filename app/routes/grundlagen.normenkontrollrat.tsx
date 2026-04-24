@@ -1,3 +1,4 @@
+import { grundlagen_normenkontrollrat } from "@/config/routes";
 import {
   FactCheckTwoTone,
   FileCopyTwoTone,
@@ -11,12 +12,11 @@ import InfoBoxList from "~/components/InfoBoxList.tsx";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { fundamentalsNKR } from "~/resources/content/grundlage-normenkontrollrat";
-import { ROUTE_FUNDAMENTALS_NKR } from "~/resources/staticRoutes";
 
 export default function FundamentalsMethods() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_FUNDAMENTALS_NKR.title} />
+      <MetaTitle prefix={grundlagen_normenkontrollrat.title} />
       <main>
         <Hero
           title={fundamentalsNKR.title}

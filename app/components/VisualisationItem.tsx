@@ -2,13 +2,10 @@ import { ZoomInOutlined } from "@digitalservicebund/icons";
 import { twJoin } from "tailwind-merge";
 import Heading from "~/components/Heading";
 import Image from "~/components/Image";
-import {
-  ROUTE_REGELUNGEN,
-  ROUTE_VISUALISATION,
-} from "~/resources/staticRoutes";
+import { ROUTE_REGELUNGEN, ROUTE_VISUALISATION } from "~/resources/staticRoutes";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import { Link } from "~/utils/routerCompat";
-import { type Visualisierung } from "~/utils/strapiData.server";
+import { type Visualisierung } from "~/utils/strapiData.types";
 import { formatDate } from "~/utils/utilFunctions";
 import { BlocksRenderer } from "./BlocksRenderer";
 

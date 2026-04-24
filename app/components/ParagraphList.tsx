@@ -7,7 +7,7 @@ import type {
   BaseAbsatz,
   Paragraph,
   PrinzipWithBeispielvorhaben,
-} from "~/utils/strapiData.server";
+} from "~/utils/strapiData.types";
 import Absatz from "./Absatz";
 import { BlocksRenderer } from "./BlocksRenderer";
 import DetailsSummary from "./DetailsSummary";

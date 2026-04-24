@@ -5,7 +5,7 @@ import { useIsMobileSize } from "~/hooks/deviceHook";
 import { PRINCIPLE_COLORS } from "~/resources/constants";
 import { explanationID, type Node } from "~/utils/paragraphUtils";
 import { Link } from "~/utils/routerCompat";
-import { type BasePrinzip } from "~/utils/strapiData.server";
+import { type BasePrinzip } from "~/utils/strapiData.types";
 
 /**
  * Strips references (like [1]) from the text.

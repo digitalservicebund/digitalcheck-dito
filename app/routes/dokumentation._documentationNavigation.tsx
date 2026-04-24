@@ -1,3 +1,4 @@
+import { dokumentation } from "@/config/routes";
 import { type ReactNode, Fragment } from "react";
 import { twJoin } from "tailwind-merge";
 import HelpSidepanel from "~/components/HelpSidepanel";
@@ -7,16 +8,15 @@ import { DocumentationNavigationContext } from "~/contexts/DocumentationNavigati
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
+import type { Route as _Route } from "~/resources/staticRoutes";
 import {
-  type Route as _Route,
-  ROUTE_DOCUMENTATION,
   ROUTE_DOCUMENTATION_NOTES,
   ROUTE_DOCUMENTATION_SEND,
   ROUTE_DOCUMENTATION_SUMMARY,
 } from "~/resources/staticRoutes";
 import { features } from "~/utils/featureFlags";
 import { useLocation } from "~/utils/routerCompat";
-import { type PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 
 type Route = _Route & {
@@ -38,7 +38,7 @@ function findIndexForRoute(routes: Route[], currentUrl: string) {
 
 function getPreviousUrl(routes: Route[], currentUrl: string): string {
   const idx = findIndexForRoute(routes, currentUrl);
-  return idx > 0 ? routes[idx - 1].url : ROUTE_DOCUMENTATION.url;
+  return idx > 0 ? routes[idx - 1].url : dokumentation.path;
 }
 
 function getNextUrl(routes: Route[], currentUrl: string): string | null {
@@ -127,7 +127,7 @@ export default function LayoutWithDocumentationNavigation({
       getPreviousUrl,
       simplifiedFlow,
       findDocumentationDataForUrl,
-    ) ?? ROUTE_DOCUMENTATION.url;
+    ) ?? dokumentation.path;
 
   const isNavigationDisabled = currentUrl === ROUTE_DOCUMENTATION_NOTES.url;
 

@@ -1,3 +1,7 @@
+import {
+  beispiele_prinzipien,
+  methoden_fuenfPrinzipien,
+} from "@/config/routes";
 import { AddCircleOutlineOutlined } from "@digitalservicebund/icons";
 import { type FormScope, useField, useFieldArray } from "@rvf/react";
 import {
@@ -26,10 +30,6 @@ import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider.tsx";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
-  ROUTE_EXAMPLES_PRINCIPLES,
-  ROUTE_METHODS_PRINCIPLES,
-} from "~/resources/staticRoutes";
-import {
   type IrrelevantAnswerReasoning,
   type NegativeAnswerReasoning,
   type Principle,
@@ -39,11 +39,11 @@ import {
 } from "~/routes/dokumentation/documentationDataSchema";
 import { features } from "~/utils/featureFlags";
 import { Link } from "~/utils/routerCompat";
-import {
-  type PrinzipAspekt,
-  type PrinzipWithAspekte,
-  type PrinzipWithAspekteAndExample,
-} from "~/utils/strapiData.server";
+import type {
+  PrinzipAspekt,
+  PrinzipWithAspekte,
+  PrinzipWithAspekteAndExample,
+} from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
 import DocumentationActions from "./DocumentationActions";
 import { useSyncedForm } from "./documentationDataHook";
@@ -261,7 +261,7 @@ function PositiveAnswerFormElements({
             : principlePages.explanationFields.ownExplanationDescription;
 
           const moreUrl = aspekt
-            ? `${ROUTE_METHODS_PRINCIPLES.url}#${slugify(aspekt.Titel)}`
+            ? `${methoden_fuenfPrinzipien.path}#${slugify(aspekt.Titel)}`
             : undefined;
 
           return (
@@ -422,7 +422,7 @@ export function PrincipleWithExample({
             </PrincipleHighlightProvider>
             <Link
               className="text-link block font-bold"
-              to={`${ROUTE_EXAMPLES_PRINCIPLES.url}/${prinzip.URLBezeichnung}`}
+              to={`${beispiele_prinzipien.path}/${prinzip.URLBezeichnung}`}
             >
               Mehr Beispiele zu dem Prinzip
             </Link>

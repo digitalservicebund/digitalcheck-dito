@@ -7,7 +7,7 @@ import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
 import type {
   PrinzipWithAspekte,
   PrinzipWithAspekteAndExample,
-} from "~/utils/strapiData.server";
+} from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
 import getDetailsSummaryProps from "./getDetailsSummaryProps.tsx";
 

@@ -1,4 +1,5 @@
 // Import mocks first
+import type { Route } from "~/resources/staticRoutes";
 import "./utils/mockLocalStorageVersioned";
 import "./utils/mockRouter";
 // End of mocks
@@ -8,10 +9,7 @@ import userEvent, { type UserEvent } from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import type { digitalDocumentation } from "~/resources/content/dokumentation";
-import {
-  type Route,
-  ROUTES_DOCUMENTATION_INTRO,
-} from "~/resources/staticRoutes";
+import { ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import {
   createBrowserRouter,
@@ -22,7 +20,7 @@ import {
 import {
   type PrinzipAspekt,
   type PrinzipWithAspekteAndExample,
-} from "~/utils/strapiData.server";
+} from "~/utils/strapiData.types";
 import { type NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationPrincipleErlaeuterung from "../dokumentation._documentationNavigation.$principleId_.erlaeuterung";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";

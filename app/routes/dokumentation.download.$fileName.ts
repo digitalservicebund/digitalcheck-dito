@@ -16,8 +16,8 @@ import getFeatureFlag from "~/utils/featureFlags.server";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_ASPECTS_QUERY,
-  type PrinzipWithAspekte,
 } from "~/utils/strapiData.server";
+import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import type { Route } from "./+types/dokumentation.download.$fileName";
 import { DATA_SCHEMA_VERSION_V1 } from "./dokumentation/documentationDataSchema";
 

@@ -1,3 +1,4 @@
+import { vorpruefung_hinweise } from "@/config/routes";
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Dialog from "~/components/Dialog.tsx";
@@ -5,7 +6,6 @@ import RichText from "~/components/RichText.tsx";
 import { PRE_CHECK_START_BUTTON_ID } from "~/resources/constants";
 import { general } from "~/resources/content/shared/general.ts";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { ROUTE_PRECHECK_INFO } from "~/resources/staticRoutes.ts";
 import { useNonce } from "~/utils/nonce.ts";
 import { useNavigate } from "~/utils/routerCompat";
 import { usePreCheckData } from "./preCheckDataHook";
@@ -33,7 +33,7 @@ function StartOverDialog() {
             type="button"
             onClick={async () => {
               deletePreCheckData();
-              navigate(ROUTE_PRECHECK_INFO.url);
+              navigate(vorpruefung_hinweise.path);
             }}
           >
             {preCheck.startOver.confirm}
@@ -59,7 +59,7 @@ export function PreCheckContinueActions() {
   const resumeLink =
     firstUnansweredQuestionIndex === null ||
     firstUnansweredQuestionIndex === preCheck.questions.length
-      ? ROUTE_PRECHECK_INFO.url
+      ? vorpruefung_hinweise.path
       : preCheck.questions[firstUnansweredQuestionIndex].url;
 
   return (
@@ -75,7 +75,7 @@ export function PreCheckContinueActions() {
         <LinkButton
           className="js-only"
           id={PRE_CHECK_START_BUTTON_ID}
-          to={ROUTE_PRECHECK_INFO.url}
+          to={vorpruefung_hinweise.path}
         >
           {preCheck.start.buttonText}
         </LinkButton>

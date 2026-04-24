@@ -1,14 +1,10 @@
+import { grundlagen_digitaltauglichkeit, interoperabel, interoperabel_faq } from "@/config/routes";
 import AccordionItem from "~/components/AccordionItem";
 import Hero from "~/components/Hero";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 
 import { contact } from "~/resources/content/shared/contact";
-import {
-  ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
-  ROUTE_INTEROPERABILITY,
-  ROUTE_INTEROPERABILITY_FAQ,
-} from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { getTabAnchorLink } from "~/utils/tabs";
 
@@ -20,7 +16,7 @@ const faqItems = [
           
           Im Ergebnis bedeutet ein hoher Grad an Interoperabilität, dass digitale öffentliche Dienste über Länder- und Sektorgrenzen funktionieren - Bürgerinnen und Bürger sowie Unternehmen haben eine bessere Nutzendenerfahrung und sparen Zeit und Kosten.
           
-          Die Grundlage bilden hierfür [digitaltaugliche Gesetze](${ROUTE_FUNDAMENTALS_DIGITAL_READINESS.url}), die Interoperabilität unterstützen. Für Ihre Arbeit an Vorhaben sollte Interoperabilität in unterschiedlichen Dimensionen bewertet werden. Diese Dimensionen werden im European Interoperability Framework (EIF) definiert.
+          Die Grundlage bilden hierfür [digitaltaugliche Gesetze](${grundlagen_digitaltauglichkeit.path}), die Interoperabilität unterstützen. Für Ihre Arbeit an Vorhaben sollte Interoperabilität in unterschiedlichen Dimensionen bewertet werden. Diese Dimensionen werden im European Interoperability Framework (EIF) definiert.
         `,
   },
   {
@@ -28,7 +24,7 @@ const faqItems = [
     content: dedent`
           Interoperabilitäts-Bezug ist vorhanden, wenn:
 
-          - eine (neue) [verbindliche Anforderung](${ROUTE_INTEROPERABILITY.url}${getTabAnchorLink("hintergrund", "verbindliche-anforderungen")}) definiert wird,
+          - eine (neue) [verbindliche Anforderung](${interoperabel.path}${getTabAnchorLink("hintergrund", "verbindliche-anforderungen")}) definiert wird,
           - ein oder mehrere transeuropäische digitale öffentliche Dienste betroffen sind, das heißt
             - eine digitale Umsetzung vorgesehen oder davon betroffen ist
             - ein Austausch von Daten und Informationen zwischen Verwaltungen der EU-Mitgliedstaaten vorgesehen ist
@@ -156,7 +152,7 @@ const faqItems = [
 export default function Faq() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_INTEROPERABILITY_FAQ.title} />
+      <MetaTitle prefix={interoperabel_faq.title} />
       <main>
         <Hero title="Fragen und Antworten">
           <p>

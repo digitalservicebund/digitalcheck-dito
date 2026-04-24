@@ -1,3 +1,5 @@
+import type { Route } from "@/config/routes";
+import { methoden_itSystemeErfassen, methoden_technischeUmsetzbarkeit, methoden_zustaendigeAkteurinnenAuflisten } from "@/config/routes";
 import Container from "~/components/Container";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -11,22 +13,16 @@ import { methodsITSystems } from "~/resources/content/methode-it-systeme-erfasse
 import { methodsTechnicalFeasibility } from "~/resources/content/methode-technische-umsetzbarkeit";
 import { methodsResponsibleActors } from "~/resources/content/methode-zustaendige-akteurinnen-auflisten";
 import { interviewBanner } from "~/resources/content/shared/interview-banner";
-import type { Route as StaticRoute } from "~/resources/staticRoutes";
-import {
-  ROUTE_METHODS_COLLECT_IT_SYSTEMS,
-  ROUTE_METHODS_RESPONSIBLE_ACTORS,
-  ROUTE_METHODS_TECHNICAL_FEASIBILITY,
-} from "~/resources/staticRoutes";
 
-const contentMap = {
-  [ROUTE_METHODS_RESPONSIBLE_ACTORS.title]: methodsResponsibleActors,
-  [ROUTE_METHODS_COLLECT_IT_SYSTEMS.title]: methodsITSystems,
-  [ROUTE_METHODS_TECHNICAL_FEASIBILITY.title]: methodsTechnicalFeasibility,
+const contentMap: Record<string, typeof methodsResponsibleActors | typeof methodsITSystems | typeof methodsTechnicalFeasibility> = {
+  [methoden_zustaendigeAkteurinnenAuflisten.title]: methodsResponsibleActors,
+  [methoden_itSystemeErfassen.title]: methodsITSystems,
+  [methoden_technischeUmsetzbarkeit.title]: methodsTechnicalFeasibility,
 };
 
 export default function Index({
   route: propRoute,
-}: { route?: StaticRoute } = {}) {
+}: { route?: Route } = {}) {
   const route = propRoute;
   if (!route) return null;
   // We have to get the content here to use the icons from the content file

@@ -1,3 +1,4 @@
+import { methoden_fuenfPrinzipien } from "@/config/routes";
 import { useEffect } from "react";
 import AspectPills from "~/components/AspectPills";
 import Badge from "~/components/Badge";
@@ -9,9 +10,8 @@ import MetaTitle from "~/components/Meta";
 import Textarea from "~/components/Textarea";
 import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
 import { Link, useNavigate } from "~/utils/routerCompat";
-import { type PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
@@ -211,7 +211,9 @@ export default function DocumentationPrincipleErlaeuterung() {
             >
               <BlocksRenderer content={prinzip.Hilfetext!} />
               <Link
-                to={ROUTE_METHODS_PRINCIPLES.url + "/" + prinzip.URLBezeichnung}
+                to={
+                  methoden_fuenfPrinzipien.path + "/" + prinzip.URLBezeichnung
+                }
                 className="ds-link-01-reg"
               >
                 Mehr zum Prinzip

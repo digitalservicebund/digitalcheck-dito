@@ -7,10 +7,7 @@ import { render, screen } from "@testing-library/react";
 import React from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
-import {
-  ROUTE_DOCUMENTATION_TEMPLATE_WORD,
-  ROUTES_DOCUMENTATION_INTRO,
-} from "~/resources/staticRoutes";
+import { ROUTE_DOCUMENTATION_TEMPLATE_WORD, ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes";
 import DokumentationIndex from "~/routes/dokumentation._index";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
 import { MemoryRouter } from "~/utils/routerCompat";

@@ -1,5 +1,5 @@
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
-import { type Beispielvorhaben } from "~/utils/strapiData.server";
+import { type Beispielvorhaben } from "~/utils/strapiData.types";
 import { formatDate, gesetzStatusMap } from "~/utils/utilFunctions";
 import Metadata from "./Metadata";
 import NewTabLink from "./NewTabLink.tsx";

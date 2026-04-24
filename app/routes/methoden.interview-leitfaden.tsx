@@ -1,3 +1,4 @@
+import { methoden_interviewLeitfaden, methoden_interviewLeitfadenSchritte } from "@/config/routes";
 import {
   AnnouncementOutlined,
   MergeTypeOutlined,
@@ -11,10 +12,6 @@ import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
-import {
-  ROUTE_METHODS_INTERVIEW_METHODS,
-  ROUTE_METHODS_INTERVIEW_METHODS_STEPS,
-} from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import getFeatureFlag from "~/utils/featureFlags.server";
 
@@ -28,7 +25,7 @@ export function loader() {
 export default function InterviewMethods() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_METHODS_INTERVIEW_METHODS.title} />
+      <MetaTitle prefix={methoden_interviewLeitfaden.title} />
       <main className="mb-80 space-y-80">
         <Hero title="Nehmen Sie die Praxis-Perspektive für Ihr Vorhaben ein">
           <p>
@@ -182,7 +179,7 @@ export default function InterviewMethods() {
               `}
             />
             <LinkButton
-              to={ROUTE_METHODS_INTERVIEW_METHODS_STEPS.url}
+              to={methoden_interviewLeitfadenSchritte.path}
               look="tertiary"
               className="self-start"
             >

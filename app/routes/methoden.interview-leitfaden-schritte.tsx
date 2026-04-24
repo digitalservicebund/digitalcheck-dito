@@ -1,3 +1,4 @@
+import { methoden_interviewLeitfadenSchritte } from "@/config/routes";
 import {
   DriveFileRenameOutline,
   FeedOutlined,
@@ -15,7 +16,6 @@ import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer";
-import { ROUTE_METHODS_INTERVIEW_METHODS_STEPS } from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import getFeatureFlag from "~/utils/featureFlags.server";
@@ -32,7 +32,7 @@ export default function InterviewMethods() {
 
   return (
     <>
-      <MetaTitle prefix={ROUTE_METHODS_INTERVIEW_METHODS_STEPS.title} />
+      <MetaTitle prefix={methoden_interviewLeitfadenSchritte.title} />
       <main className="space-y-80">
         <Hero
           className="mb-0 lg:mb-80"

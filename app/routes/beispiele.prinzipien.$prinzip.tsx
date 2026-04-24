@@ -1,3 +1,4 @@
+import { beispiele_prinzipien } from "@/config/routes";
 import { Link } from "~/utils/routerCompat";
 
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
@@ -11,11 +12,8 @@ import RegulationMetadata from "~/components/RegulationMetadata";
 import Separator from "~/components/Separator";
 import RouteTabs from "~/components/Tabs/RouteTabs";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
-import {
-  ROUTE_EXAMPLES_PRINCIPLES,
-  ROUTE_REGELUNGEN,
-} from "~/resources/staticRoutes";
-import { type PrinzipWithBeispielvorhaben } from "~/utils/strapiData.server";
+import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
+import { type PrinzipWithBeispielvorhaben } from "~/utils/strapiData.types";
 
 export default function DigitaltauglichkeitPrinzipienDetail({
   prinzip,
@@ -30,12 +28,12 @@ export default function DigitaltauglichkeitPrinzipienDetail({
   const tabs = prinzips.map((principle) => ({
     key: principle.URLBezeichnung,
     label: principle.Kurzbezeichnung,
-    to: `${ROUTE_EXAMPLES_PRINCIPLES.url}/${principle.URLBezeichnung}`,
+    to: `${beispiele_prinzipien.path}/${principle.URLBezeichnung}`,
   }));
 
   return (
     <>
-      <MetaTitle prefix={ROUTE_EXAMPLES_PRINCIPLES.title} />
+      <MetaTitle prefix={beispiele_prinzipien.title} />
       <Hero
         title={examplesRegelungen.principles.hero.title}
         subtitle={examplesRegelungen.principles.hero.subtitle}

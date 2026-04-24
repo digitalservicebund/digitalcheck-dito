@@ -5,7 +5,7 @@ import { getTextFromNodes } from "~/routes/__tests__/utils/strapiUtils.ts";
 import Prinzip from "~/routes/methoden.fuenf-prinzipien.$prinzip/route";
 import { type Node } from "~/utils/paragraphUtils";
 import { MemoryRouter } from "~/utils/routerCompat";
-import { type PrinzipWithAspekte } from "~/utils/strapiData.server.ts";
+import { type PrinzipWithAspekte } from "~/utils/strapiData.types.ts";
 import { type PrinzipListItem } from "../methoden.fuenf-prinzipien.$prinzip/query";
 
 const IntersectionObserverMock = vi.fn(

@@ -7,7 +7,7 @@ import {
   type V1,
 } from "~/routes/dokumentation/documentationDataSchema";
 import type { Node } from "~/utils/paragraphUtils";
-import { type PrinzipWithAspekte } from "~/utils/strapiData.server";
+import { type PrinzipWithAspekte } from "~/utils/strapiData.types";
 import {
   buildAspectParagraphs,
   buildPrinciplePatches,

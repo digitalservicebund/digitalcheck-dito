@@ -1,3 +1,4 @@
+import { methoden_fuenfPrinzipien, methoden_visualisieren_flussdiagramm } from "@/config/routes";
 import {
   ArrowDownwardOutlined,
   DriveFileRenameOutline,
@@ -21,11 +22,7 @@ import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
 import { STRAPI_MEDIA_URL } from "~/resources/constants.ts";
 import { contact } from "~/resources/content/shared/contact";
-import {
-  ROUTE_METHODS_PRINCIPLES,
-  ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX,
-  ROUTE_METHODS_VISUALIZE_FLOWCHARTS,
-} from "~/resources/staticRoutes.ts";
+import { ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX } from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils.ts";
@@ -140,7 +137,7 @@ export default function Visualization() {
   // noinspection HtmlUnknownAnchorTarget
   return (
     <>
-      <MetaTitle prefix={ROUTE_METHODS_VISUALIZE_FLOWCHARTS.title} />
+      <MetaTitle prefix={methoden_visualisieren_flussdiagramm.title} />
       <main>
         <div className="breakout-grid-toc bg-blue-100 pt-40 pb-48">
           <div>
@@ -726,7 +723,7 @@ export default function Visualization() {
                 {
                   text: "Zu den Prinzipien",
                   look: "tertiary",
-                  to: ROUTE_METHODS_PRINCIPLES.url,
+                  to: methoden_fuenfPrinzipien.path,
                 },
               ]}
             />
