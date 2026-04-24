@@ -1,4 +1,4 @@
-name: Preview (Astro)
+name: Preview (React Router)
 
 on:
   workflow_dispatch:
