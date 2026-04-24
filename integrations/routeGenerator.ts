@@ -1,7 +1,6 @@
 import type { AstroIntegration } from "astro";
 import fs, { type Dirent } from "node:fs";
 import path from "node:path";
-import { buildRoutePath } from "../src/utils/path";
 import { extractMeta } from "./routeGeneration/extractRouteMeta";
 
 type Options = {
@@ -124,7 +123,10 @@ function getFiles(dir: string): string[] {
 
       // Only return the file path if it matches our allowed extensions
       // Otherwise, return an empty array (which flatMap will remove)
-      return SUPPORTED_EXTENSIONS_REGEXP.test(entry.name) ? [full] : [];
+      const isPageFile = SUPPORTED_EXTENSIONS_REGEXP.test(entry.name);
+      // Skip dynamic route files (e.g. [slug].astro) — they have no fixed path or frontmatter title.
+      const isDynamicRoute = entry.name.startsWith("[");
+      return isPageFile && !isDynamicRoute ? [full] : [];
     });
 }
 
@@ -228,3 +230,11 @@ export function escapeStringLiteral(input: string | null): string {
     ? "null"
     : `"${input.replaceAll("\\", "\\\\").replaceAll('"', '\\"')}"`;
 }
+
+export const removeTrailingSlash = (path: string) =>
+  path.replace(/\/$/, "").replace(/^$/, "/");
+
+export const buildRoutePath = (href: string, baseUrl = ""): string => {
+  const normalizedBaseUrl = removeTrailingSlash(baseUrl);
+  return normalizedBaseUrl === "/" ? href : `${normalizedBaseUrl}${href}`;
+};
