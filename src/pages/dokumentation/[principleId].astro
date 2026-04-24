@@ -1,0 +1,31 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import DokumentationLayout from "~/components/DokumentationLayout";
+import {
+  fetchStrapiData,
+  GET_PRINZIPS_WITH_EXAMPLES_QUERY,
+} from "~/utils/strapiData.server";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
+
+export const frontmatter = {
+  title: "Dokumentation",
+};
+
+export async function getStaticPaths() {
+  const result = await fetchStrapiData<{
+    prinzips: PrinzipWithAspekteAndExample[];
+  }>(GET_PRINZIPS_WITH_EXAMPLES_QUERY);
+  const prinzips = "error" in result ? [] : result.prinzips;
+
+  return prinzips.map((p: { URLBezeichnung: string }) => ({
+    params: { principleId: p.URLBezeichnung },
+    props: { prinzips },
+  }));
+}
+
+const { prinzips } = Astro.props;
+---
+
+<Layout showProgressBar={true}>
+  <DokumentationLayout client:only="react" prinzips={prinzips} page="principle" />
+</Layout>

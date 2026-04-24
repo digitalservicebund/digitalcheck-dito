@@ -1,30 +1,39 @@
+// TODO: Compatibility layer for the React Router -> Astro migration.
+// Should become obsolete once the migration is complete and all routes are proper Astro pages.
 "use client";
-import type { Route as _Route } from "~/resources/staticRoutes";
-import { dokumentation } from "@/config/routes";
-import { ROUTES_DOCUMENTATION_FINALIZE, ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes";
+import {
+  dokumentation,
+  dokumentation_absenden,
+  dokumentation_beteiligungsformate,
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+  dokumentation_zusammenfassung,
+} from "@/config/routes";
 import LayoutWithDocumentationNavigation from "~/routes/dokumentation._documentationNavigation";
+import PrinciplePage from "~/routes/dokumentation._documentationNavigation.$principleId";
+import ErlaeuterungPage from "~/routes/dokumentation._documentationNavigation.$principleId_.erlaeuterung";
 import AbsendenPage from "~/routes/dokumentation._documentationNavigation.absenden";
 import BeteiligungsformatePage from "~/routes/dokumentation._documentationNavigation.beteiligungsformate";
 import HinweisePage from "~/routes/dokumentation._documentationNavigation.hinweise";
 import TitelPage from "~/routes/dokumentation._documentationNavigation.regelungsvorhaben-titel";
-import ErlaeuterungPage from "~/routes/dokumentation._documentationNavigation.$principleId_.erlaeuterung";
-import PrinciplePage from "~/routes/dokumentation._documentationNavigation.$principleId";
 import ZusammenfassungPage from "~/routes/dokumentation._documentationNavigation.zusammenfassung";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
-type Route = _Route & { principleId?: string };
+type Route = { url: string; title: string; principleId?: string };
 
-export type DokumentationPage =
-  | "hinweise"
-  | "regelungsvorhaben-titel"
-  | "beteiligungsformate"
-  | "zusammenfassung"
-  | "absenden"
-  | "principle"
-  | "erlaeuterung";
+const ROUTES_DOCUMENTATION_INTRO: Route[] = [
+  { url: dokumentation_hinweise.path, title: dokumentation_hinweise.title },
+  { url: dokumentation_regelungsvorhabenTitel.path, title: dokumentation_regelungsvorhabenTitel.title },
+  { url: dokumentation_beteiligungsformate.path, title: dokumentation_beteiligungsformate.title },
+];
 
-const pages: Record<DokumentationPage, React.ComponentType> = {
+const ROUTES_DOCUMENTATION_FINALIZE: Route[] = [
+  { url: dokumentation_zusammenfassung.path, title: dokumentation_zusammenfassung.title },
+  { url: dokumentation_absenden.path, title: dokumentation_absenden.title },
+];
+
+const pages = {
   hinweise: HinweisePage,
   "regelungsvorhaben-titel": TitelPage,
   beteiligungsformate: BeteiligungsformatePage,
@@ -32,7 +41,9 @@ const pages: Record<DokumentationPage, React.ComponentType> = {
   absenden: AbsendenPage,
   principle: PrinciplePage,
   erlaeuterung: ErlaeuterungPage,
-};
+} satisfies Record<string, React.ComponentType>;
+
+export type DokumentationPage = keyof typeof pages;
 
 type DokumentationLayoutProps = {
   prinzips: PrinzipWithAspekteAndExample[];

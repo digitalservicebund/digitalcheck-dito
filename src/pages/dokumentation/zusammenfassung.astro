@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import DokumentationIndexPage from "~/routes/dokumentation._index";
+import DokumentationLayout from "~/components/DokumentationLayout";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,
@@ -8,7 +8,7 @@ import {
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
 export const frontmatter = {
-  title: "Dokumentation",
+  title: "Zusammenfassung",
 };
 
 const result = await fetchStrapiData<{
@@ -17,6 +17,6 @@ const result = await fetchStrapiData<{
 const prinzips = "error" in result ? [] : result.prinzips;
 ---
 
-<Layout>
-  <DokumentationIndexPage client:only="react" prinzips={prinzips} />
+<Layout showProgressBar={true}>
+  <DokumentationLayout client:only="react" prinzips={prinzips} page="zusammenfassung" />
 </Layout>
