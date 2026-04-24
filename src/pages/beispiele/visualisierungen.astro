@@ -12,6 +12,10 @@ import {
   type Visualisierung,
 } from "~/utils/strapiData.server";
 
+export const frontmatter = {
+  title: "Beispiele für Visualisierungen",
+};
+
 const GET_VISUALISATIONS_QUERY = `
 ${visualisationFields}
 query GetVisualisierungen($status: PublicationStatus!) {

@@ -8,6 +8,11 @@ import {
   type PrinzipWithBeispielvorhaben,
 } from "~/utils/strapiData.server";
 
+export const frontmatter = {
+  title: "Die Prinzipien im Regelungstext",
+  sitemap: false,
+};
+
 export async function getStaticPaths() {
   const query = `
 ${paragraphFields}

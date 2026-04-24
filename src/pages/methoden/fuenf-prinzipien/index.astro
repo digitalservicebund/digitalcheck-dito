@@ -7,6 +7,10 @@ import {
   type PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server";
 
+export const frontmatter = {
+  title: "Fünf Prinzipien",
+};
+
 const result = await fetchStrapiData<{
   prinzips: PrinzipWithAspekteAndExample[];
 }>(GET_PRINZIPS_WITH_EXAMPLES_QUERY);

@@ -7,6 +7,10 @@ import RichText from "~/components/RichText";
 import { ROUTE_PRIVACY } from "~/resources/staticRoutes";
 import { readFile } from "node:fs/promises";
 
+export const frontmatter = {
+  title: "Datenschutzerklärung",
+};
+
 const content = await readFile("public/markdown/datenschutz.md", {
   encoding: "utf-8",
 });

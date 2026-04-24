@@ -1,6 +1,6 @@
 ---
 import SitemapListRecursive from "@/components/SitemapList.astro";
-import type { Route } from "~/resources/staticRoutes";
+import type { Route } from "@/config/routes";
 
 type RouteWithChildren = Route & { children: RouteWithChildren[] };
 
@@ -17,7 +17,7 @@ const { routes } = Astro.props;
   {
     routes.map((route) => (
       <li class="mb-4 [&_li]:my-8">
-        <a href={route.url} class="text-link hover:underline">
+        <a href={route.path} class="text-link hover:underline">
           {route.title}
         </a>
         {route.children.length > 0 && (

@@ -3,6 +3,10 @@ import Layout from "@/layouts/Layout.astro";
 import MethodenPage from "~/routes/methoden._index";
 import getFeatureFlag from "~/utils/featureFlags.server";
 
+export const frontmatter = {
+  title: "Regelung erarbeiten",
+};
+
 const showInterviewLeitfaden = getFeatureFlag("showInterviewLeitfaden");
 ---
 

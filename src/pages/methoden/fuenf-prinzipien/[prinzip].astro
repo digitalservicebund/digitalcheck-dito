@@ -10,6 +10,11 @@ import type {
   PrinzipListQueryReturnType,
 } from "~/routes/methoden.fuenf-prinzipien.$prinzip/query";
 
+export const frontmatter = {
+  title: "Fünf Prinzipien",
+  sitemap: false,
+};
+
 export async function getStaticPaths() {
   const listResult = await fetchStrapiData<PrinzipListQueryReturnType>(
     `query PrinzipList { prinzips(sort: "order") { Name URLBezeichnung order } }`,

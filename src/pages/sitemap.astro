@@ -4,33 +4,41 @@ import SitemapList from "@/components/SitemapList.astro";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Hero from "~/components/Hero";
 import MetaTitle from "~/components/Meta";
-import { ROUTE_SITEMAP, ROUTES, type Route } from "~/resources/staticRoutes";
+import { allRoutes, type Route } from "@/config/routes";
+
+export const frontmatter = {
+  title: "Sitemap",
+};
 
 type RouteWithChildren = Route & { children: RouteWithChildren[] };
 
-const groupRoutesByParent = (routes: Route[]): RouteWithChildren[] => {
+const groupRoutesByParent = (routes: readonly Route[]): RouteWithChildren[] => {
   const routeMap = new Map<string, RouteWithChildren>(
-    routes.map((route) => [route.url, { ...route, children: [] }]),
+    routes.map((route) => [route.path, { ...route, children: [] }]),
   );
 
   routes.forEach((route) => {
-    if (route.hideInSitemap) return;
-    const parentRoute = routeMap.get(route.parent?.url ?? "");
+    if (!route.sitemap) return;
+    // Top-level pages (parent: null, path !== "/") are treated as children of home,
+    // mirroring the old behaviour where ROUTE_LANDING was the implicit root parent.
+    const parentPath = route.parent?.path ?? (route.path !== "/" ? "/" : null);
+    if (!parentPath) return;
+    const parentRoute = routeMap.get(parentPath);
     if (parentRoute) {
-      parentRoute.children.push(routeMap.get(route.url)!);
+      parentRoute.children.push(routeMap.get(route.path)!);
     }
   });
 
-  return Array.from(routeMap.values()).filter((route) => !route.parent);
+  return Array.from(routeMap.values()).filter((route) => route.path === "/");
 };
 
-const routes = groupRoutesByParent(ROUTES);
+const routes = groupRoutesByParent(allRoutes);
 ---
 
 <Layout>
-  <MetaTitle prefix={ROUTE_SITEMAP.title} />
+  <MetaTitle prefix={frontmatter.title} />
   <main>
-    <Hero title="Sitemap" />
+    <Hero title={frontmatter.title} />
     <ContentWrapper>
       <SitemapList routes={routes} />
     </ContentWrapper>

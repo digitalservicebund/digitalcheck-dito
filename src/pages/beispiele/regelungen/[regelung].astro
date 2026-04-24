@@ -11,6 +11,10 @@ import {
   type PrinzipWithBeispielvorhaben,
 } from "~/utils/strapiData.server";
 
+export const frontmatter = {
+  title: "Regelungsbeispiel",
+};
+
 export async function getStaticPaths() {
   const slugsResult = await fetchStrapiData<{
     beispielvorhabens: { URLBezeichnung: string }[];
