@@ -1,0 +1,11 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PreCheckNavigation from "~/routes/vorpruefung._preCheckNavigation";
+import QuestionPage from "~/routes/vorpruefung._preCheckNavigation.$questionId";
+---
+
+<Layout showProgressBar={true}>
+  <PreCheckNavigation client:load>
+    <QuestionPage client:load questionId="eu-bezug" />
+  </PreCheckNavigation>
+</Layout>
