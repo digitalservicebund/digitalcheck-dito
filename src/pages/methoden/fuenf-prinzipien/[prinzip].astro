@@ -1,10 +1,8 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import PrinzipPage from "~/routes/methoden.fuenf-prinzipien.$prinzip/route";
-import {
-  fetchStrapiData,
-  type PrinzipWithAspekteAndExample,
-} from "~/utils/strapiData.server";
+import { fetchStrapiData } from "~/utils/strapiData.server";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import type {
   PrinzipListItem,
   PrinzipListQueryReturnType,
