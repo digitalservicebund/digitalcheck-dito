@@ -18,15 +18,8 @@ import {
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { getTabAnchorLink } from "~/utils/tabs";
-import { contact } from "./shared/contact";
 
 export const news = {
-  title: "Das ist neu",
-  subtitle: dedent`
-      Das Digitalcheck-Angebot wird kontinuierlich weiterentwickelt. Bedürfnisse und Rückmeldungen von Nutzenden werden kurzfristig eingearbeitet. Auch geänderte und neue rechtliche Anforderungen führen zu Anpassungen. Unten finden Sie eine chronologische Übersicht der Ergänzungen und Änderungen auf der Website.
-      
-      Haben Sie Anregungen oder Wünsche? Kontaktieren Sie uns jederzeit gerne unter ${contact.mdPhoneLink()} oder ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")}.
-  `,
   items: [
     {
       badge: {
