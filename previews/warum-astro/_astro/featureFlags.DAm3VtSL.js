@@ -1,0 +1,1 @@
+const e={showGesetzgebungsprozessOverview:"showGesetzgebungsprozessOverview",showInterviewLeitfaden:"showInterviewLeitfaden",showCoreVocabularies:"showCoreVocabularies",showIOEuRechtContent:"showIOEuRechtContent",simplifiedPrincipleFlow:"simplifiedPrincipleFlow",showStrapiDrafts:"showStrapiDrafts"};export{e as f};

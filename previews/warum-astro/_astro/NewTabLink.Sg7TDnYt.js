@@ -1,0 +1,1 @@
+import{j as r,c as n}from"./tailwindMerge.B4_tS6rG.js";import{O as o}from"./RichText.CCXKllUw.js";import{L as a}from"./dedentMultilineStrings.Dvfp1IIZ.js";function p({children:s,className:t,...e}){return r.jsxs(a,{...e,target:"_blank",className:n("text-link",t),children:[s,r.jsx(o,{})]})}export{p as N};
