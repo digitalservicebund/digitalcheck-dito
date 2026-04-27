@@ -1,5 +1,21 @@
-import { beispiele_visualisierungen, dasIstNeu, dokumentation, grundlagen_digitaltauglichkeit, grundlagen_normenkontrollrat, interoperabel, interoperabel_nationaleKontaktstelle, methoden_fuenfPrinzipien, methoden_interviewLeitfaden, methoden_visualisieren, methoden_visualisieren_flussdiagramm, zahlenUndFakten } from "@/config/routes";
-import { ROUTE_DOCUMENTATION_STATIC_WORD, ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
+import {
+  beispiele_visualisierungen,
+  dasIstNeu,
+  dokumentation,
+  grundlagen_digitaltauglichkeit,
+  grundlagen_normenkontrollrat,
+  interoperabel,
+  interoperabel_nationaleKontaktstelle,
+  methoden_fuenfPrinzipien,
+  methoden_interviewLeitfaden,
+  methoden_visualisieren,
+  methoden_visualisieren_flussdiagramm,
+  zahlenUndFakten,
+} from "@/config/routes";
+import {
+  ROUTE_DOCUMENTATION_STATIC_WORD,
+  ROUTE_REGELUNGEN,
+} from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { getTabAnchorLink } from "~/utils/tabs";
 import { contact } from "./shared/contact";

@@ -1,4 +1,8 @@
-import { grundlagen_normenkontrollrat, methoden_fuenfPrinzipien, methoden_visualisieren_flussdiagramm } from "@/config/routes";
+import {
+  grundlagen_normenkontrollrat,
+  methoden_fuenfPrinzipien,
+  methoden_visualisieren_flussdiagramm,
+} from "@/config/routes";
 import {
   ArrowCircleRightOutlined,
   DateRangeOutlined,
@@ -11,10 +15,10 @@ import {
   SupportOutlined,
   VisibilityTwoTone,
 } from "@digitalservicebund/icons";
+import { ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX } from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
 import { type ContentLink } from "~/utils/contentTypes";
 import { dedent } from "~/utils/dedentMultilineStrings";
-import { ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX } from "~/resources/staticRoutes";
 import { contact } from "./shared/contact";
 
 export const methodsTasksProcesses = {

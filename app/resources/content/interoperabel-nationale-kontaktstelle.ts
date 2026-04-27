@@ -1,4 +1,9 @@
-import { home, interoperabel, methoden_fuenfPrinzipien, unterstuetzung } from "@/config/routes";
+import {
+  home,
+  interoperabel,
+  methoden_fuenfPrinzipien,
+  unterstuetzung,
+} from "@/config/routes";
 import { ROUTE_SUPPORT_TRAININGS } from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings";

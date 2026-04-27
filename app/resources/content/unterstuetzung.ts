@@ -1,4 +1,7 @@
-import { interoperabel, interoperabel_nationaleKontaktstelle } from "@/config/routes";
+import {
+  interoperabel,
+  interoperabel_nationaleKontaktstelle,
+} from "@/config/routes";
 import {
   AdsClickOutlined,
   CheckCircleOutlined,

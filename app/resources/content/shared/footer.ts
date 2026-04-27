@@ -1,4 +1,22 @@
-import { barrierefreiheit, beispiele_prinzipien, beispiele_visualisierungen, dasIstNeu, datenschutz, dokumentation, grundlagen_digitaltauglichkeit, grundlagen_normenkontrollrat, impressum, interoperabel, interoperabel_nationaleKontaktstelle, methoden, methoden_fuenfPrinzipien, sitemap, unterstuetzung, vorpruefung, zahlenUndFakten } from "@/config/routes";
+import {
+  barrierefreiheit,
+  beispiele_prinzipien,
+  beispiele_visualisierungen,
+  dasIstNeu,
+  datenschutz,
+  dokumentation,
+  grundlagen_digitaltauglichkeit,
+  grundlagen_normenkontrollrat,
+  impressum,
+  interoperabel,
+  interoperabel_nationaleKontaktstelle,
+  methoden,
+  methoden_fuenfPrinzipien,
+  sitemap,
+  unterstuetzung,
+  vorpruefung,
+  zahlenUndFakten,
+} from "@/config/routes";
 import { ROUTE_SUPPORT_TRAININGS } from "~/resources/staticRoutes";
 import { contact } from "./contact";
 

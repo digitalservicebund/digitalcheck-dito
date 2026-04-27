@@ -1,4 +1,7 @@
-import { methoden_zustaendigeAkteurinnenAuflisten, unterstuetzung } from "@/config/routes";
+import {
+  methoden_zustaendigeAkteurinnenAuflisten,
+  unterstuetzung,
+} from "@/config/routes";
 import {
   DrawOutlined,
   LightbulbOutlined,

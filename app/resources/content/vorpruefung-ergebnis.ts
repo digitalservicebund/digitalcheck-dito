@@ -1,4 +1,9 @@
-import { interoperabel, methoden, vorpruefung, vorpruefung_hinweise } from "@/config/routes";
+import {
+  interoperabel,
+  methoden,
+  vorpruefung,
+  vorpruefung_hinweise,
+} from "@/config/routes";
 import { steps } from "~/resources/content/shared/naechste-schritte";
 import { type ContentLink, type Step } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";

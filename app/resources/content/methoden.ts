@@ -1,4 +1,10 @@
-import { methoden_fuenfPrinzipien, methoden_interviewLeitfaden, methoden_itSystemeErfassen, methoden_technischeUmsetzbarkeit, methoden_visualisieren } from "@/config/routes";
+import {
+  methoden_fuenfPrinzipien,
+  methoden_interviewLeitfaden,
+  methoden_itSystemeErfassen,
+  methoden_technischeUmsetzbarkeit,
+  methoden_visualisieren,
+} from "@/config/routes";
 import { steps } from "~/resources/content/shared/naechste-schritte";
 import { type ContentLink, type Step } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";

@@ -1,4 +1,8 @@
-import { dokumentation, methoden_visualisieren, vorpruefung } from "@/config/routes";
+import {
+  dokumentation,
+  methoden_visualisieren,
+  vorpruefung,
+} from "@/config/routes";
 import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings";
 

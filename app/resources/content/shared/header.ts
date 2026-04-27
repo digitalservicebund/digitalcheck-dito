@@ -1,4 +1,16 @@
-import { beispiele_prinzipien, beispiele_visualisierungen, dokumentation, grundlagen_digitaltauglichkeit, grundlagen_normenkontrollrat, interoperabel, interoperabel_nationaleKontaktstelle, methoden, methoden_fuenfPrinzipien, unterstuetzung, vorpruefung } from "@/config/routes";
+import {
+  beispiele_prinzipien,
+  beispiele_visualisierungen,
+  dokumentation,
+  grundlagen_digitaltauglichkeit,
+  grundlagen_normenkontrollrat,
+  interoperabel,
+  interoperabel_nationaleKontaktstelle,
+  methoden,
+  methoden_fuenfPrinzipien,
+  unterstuetzung,
+  vorpruefung,
+} from "@/config/routes";
 import { type ActiveBehavior } from "~/components/DropdownContentList";
 import { contact } from "~/resources/content/shared/contact";
 import { ROUTE_SUPPORT_TRAININGS } from "~/resources/staticRoutes";
