@@ -552,6 +552,11 @@ export default function InteroperableSolutionsDcatAp() {
                 Vocabularies" im Interoperable Europe Portal mit allen relevanten
                 Hintergrundinformationen: [Core Vocabularies | Interoperable Europe
                 Portal](https://interoperable-europe.ec.europa.eu/collection/semic-support-centre/core-vocabularies)
+
+                Auf dem YouTube-Kanal von Interoperable Europe finden Sie zudem ein
+                kurzes Einführungsvideo, das das Prinzip der harmonisierten
+                Datenstrukturen ("universelle Puzzleteile") für den europäischen
+                Datenaustausch anschaulich erklärt: [Catalogue of Services and CPSV-AP](https://www.youtube.com/watch?v=IE2UJCV2ggI)
               `}
               />
             </InfoBox>
