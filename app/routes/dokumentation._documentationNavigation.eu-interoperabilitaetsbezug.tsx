@@ -4,8 +4,9 @@ import MetaTitle from "~/components/Meta";
 import { ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS } from "~/resources/staticRoutes";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
+import EuInteroperabilityQuestions from "./dokumentation/EuInteroperabilityQuestions";
 
-export default function DocumentationAdditionalStep() {
+export default function DocumentationEuInteroperabilityRequirements() {
   const { previousUrl, nextUrl } = useOutletContext<NavigationContext>();
 
   return (
@@ -20,6 +21,7 @@ export default function DocumentationAdditionalStep() {
           look="ds-heading-02-reg"
           className="mb-16"
         />
+        <EuInteroperabilityQuestions />
         <DocumentationActions
           previousUrl={previousUrl}
           nextUrl={nextUrl}

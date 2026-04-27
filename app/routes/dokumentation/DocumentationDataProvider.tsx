@@ -10,6 +10,7 @@ import {
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
+  ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_TITLE,
 } from "~/resources/staticRoutes";
@@ -18,6 +19,7 @@ import {
   DATA_SCHEMA_VERSION_V1,
   DATA_SCHEMA_VERSION_V2,
   DocumentationData,
+  EuInteroperabilityOutcome,
   Principle,
   PrincipleReasoningV1,
   V1,
@@ -31,6 +33,7 @@ import {
   removeFromLocalStorage,
   writeVersionedDataToLocalStorage,
 } from "~/utils/localStorageVersioned";
+import { EU_INTEROPERABILITY_ANSWERS_STORAGE_KEY } from "./euInteroperabilityFlow.ts";
 
 export const STORAGE_KEY = "documentationData";
 
@@ -44,6 +47,9 @@ type DocumentationDataContextType = {
   deleteDocumentationData: () => void;
   setPolicyTitle: (policyTitle?: PolicyTitle) => void;
   setParticipation: (participation?: Participation) => void;
+  setEuInteroperabilityOutcome: (
+    euInteroperabilityOutcome?: EuInteroperabilityOutcome,
+  ) => void;
   addOrUpdatePrinciple: (newPrinciple?: Principle<V1 | V2>) => void;
   addOrUpdatePrincipleAnswer: (
     principleId: string,
@@ -56,7 +62,12 @@ type DocumentationDataContextType = {
   ) => void;
   findDocumentationDataForUrl: (
     url: string,
-  ) => PolicyTitle | Participation | Principle | undefined;
+  ) =>
+    | PolicyTitle
+    | Participation
+    | EuInteroperabilityOutcome
+    | Principle
+    | undefined;
 };
 
 const DocumentationDataContext =
@@ -106,6 +117,7 @@ function migrateV1ToV2(v1: DocumentationData<V1>): DocumentationData<V2> {
     version: DATA_SCHEMA_VERSION_V2,
     policyTitle: v1.policyTitle,
     participation: v1.participation,
+    euInteroperabilityOutcome: v1.euInteroperabilityOutcome,
     principles: principles as Principle[],
   };
 
@@ -166,6 +178,7 @@ export function DocumentationDataProvider({
 
   const deleteDocumentationData = useCallback((): void => {
     removeFromLocalStorage(STORAGE_KEY);
+    removeFromLocalStorage(EU_INTEROPERABILITY_ANSWERS_STORAGE_KEY);
     setDocumentationData(getInitialState(version));
   }, [version]);
 
@@ -189,6 +202,21 @@ export function DocumentationDataProvider({
         ...documentationData,
         participation,
       });
+    },
+    [documentationData, createOrUpdateDocumentationData],
+  );
+
+  const setEuInteroperabilityOutcome = useCallback(
+    (euInteroperabilityOutcome?: EuInteroperabilityOutcome) => {
+      const updatedDocumentationData = {
+        ...documentationData,
+        euInteroperabilityOutcome,
+      };
+
+      if (!euInteroperabilityOutcome)
+        delete updatedDocumentationData.euInteroperabilityOutcome;
+
+      createOrUpdateDocumentationData(updatedDocumentationData);
     },
     [documentationData, createOrUpdateDocumentationData],
   );
@@ -298,11 +326,20 @@ export function DocumentationDataProvider({
   );
 
   const findDocumentationDataForUrl = useCallback(
-    (url: string): PolicyTitle | Participation | Principle | undefined => {
+    (
+      url: string,
+    ):
+      | PolicyTitle
+      | Participation
+      | EuInteroperabilityOutcome
+      | Principle
+      | undefined => {
       if (url === ROUTE_DOCUMENTATION_TITLE.url)
         return documentationData.policyTitle;
       else if (url === ROUTE_DOCUMENTATION_PARTICIPATION.url)
         return documentationData.participation;
+      else if (url === ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS.url)
+        return documentationData.euInteroperabilityOutcome;
 
       const principleData = documentationData.principles?.find(
         ({ id }) => id === url,
@@ -335,7 +372,8 @@ export function DocumentationDataProvider({
   const hasSavedDocumentation =
     !!documentationData.principles ||
     !!documentationData.participation ||
-    !!documentationData.policyTitle;
+    !!documentationData.policyTitle ||
+    !!documentationData.euInteroperabilityOutcome;
 
   const value = useMemo(
     () => ({
@@ -346,6 +384,7 @@ export function DocumentationDataProvider({
       deleteDocumentationData,
       setPolicyTitle,
       setParticipation,
+      setEuInteroperabilityOutcome,
       addOrUpdatePrinciple,
       addOrUpdatePrincipleAnswer,
       addOrUpdatePrincipleReasoning,
@@ -359,6 +398,7 @@ export function DocumentationDataProvider({
       deleteDocumentationData,
       setPolicyTitle,
       setParticipation,
+      setEuInteroperabilityOutcome,
       addOrUpdatePrinciple,
       addOrUpdatePrincipleAnswer,
       addOrUpdatePrincipleReasoning,
