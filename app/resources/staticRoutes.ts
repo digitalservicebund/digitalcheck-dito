@@ -143,6 +143,11 @@ export const ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS = createRoute(
   "Bezug zu EU-Interoperabilität",
   ROUTE_DOCUMENTATION,
 );
+export const ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT = createRoute(
+  "interoperabilitaetsbewertung",
+  "Interoperabilitätsbewertung",
+  ROUTE_DOCUMENTATION,
+);
 export const ROUTE_DOCUMENTATION_SUMMARY = createRoute(
   "zusammenfassung",
   "Zusammenfassung",
