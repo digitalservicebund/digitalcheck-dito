@@ -5,6 +5,7 @@ import {
   ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
   ROUTE_DOCUMENTATION_SUMMARY,
 } from "~/resources/staticRoutes";
+import EUInteroperabilityAssessment from "~/routes/dokumentation/interoperability/EUInteroperabilityAssessment.tsx";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
@@ -32,6 +33,7 @@ export default function DocumentationInteroperabilityAssessment() {
           look="ds-heading-02-reg"
           className="mb-16"
         />
+        <EUInteroperabilityAssessment />
         <DocumentationActions
           previousUrl={previousUrl}
           nextUrl={nextUrl ?? ROUTE_DOCUMENTATION_SUMMARY.url}
@@ -42,4 +44,3 @@ export default function DocumentationInteroperabilityAssessment() {
     </>
   );
 }
-
