@@ -56,7 +56,7 @@ export type TQuestion = {
     unsureResult?: string;
   };
   text: string;
-  url: string;
+  path: string;
   prevLink: string;
   nextLink: string;
   hint?: {
