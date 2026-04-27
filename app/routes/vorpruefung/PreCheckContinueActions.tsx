@@ -60,7 +60,7 @@ export function PreCheckContinueActions() {
     firstUnansweredQuestionIndex === null ||
     firstUnansweredQuestionIndex === preCheck.questions.length
       ? vorpruefung_hinweise.path
-      : preCheck.questions[firstUnansweredQuestionIndex].url;
+      : preCheck.questions[firstUnansweredQuestionIndex].path;
 
   return (
     <ButtonContainer>

@@ -117,7 +117,7 @@ export default function Index({
       firstUnansweredQuestionIndex !== null &&
       questionIdx > firstUnansweredQuestionIndex
     ) {
-      navigate(questions[firstUnansweredQuestionIndex].url);
+      navigate(questions[firstUnansweredQuestionIndex].path);
     }
   }, [firstUnansweredQuestionIndex, navigate, questionIdx]);
 
