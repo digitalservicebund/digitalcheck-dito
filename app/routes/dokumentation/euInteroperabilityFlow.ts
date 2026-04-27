@@ -1,13 +1,14 @@
+import { dedent } from "~/utils/dedentMultilineStrings.ts";
+
 export const EU_INTEROPERABILITY_ANSWERS_STORAGE_KEY =
   "documentationData.euInteroperabilityAnswers";
 
-export const YES_NO_OPTIONS = ["Yes", "No"] as const;
+export const YES_NO_OPTIONS = ["Ja", "Nein"] as const;
 
 export type YesNoAnswer = (typeof YES_NO_OPTIONS)[number];
 
 export const EU_INTEROPERABILITY_QUESTION_IDS = [
   "bindingRequirementsInDecisionProcess",
-  "requirementIsBinding",
   "serviceProvidedByPublicOrUnionEntity",
   "serviceProvidedInEuContext",
   "requiresCrossBorderSystemInteraction",
@@ -20,7 +21,6 @@ export type EuInteroperabilityQuestionId =
 export const EU_INTEROPERABILITY_OUTCOME_IDS = [
   "REQUIRED",
   "NOT_REQUIRED_NO_DECISION_PROCESS",
-  "NOT_REQUIRED_NOT_BINDING",
   "NOT_REQUIRED_NOT_PROVIDED_BY_PUBLIC_OR_UNION_ENTITY",
   "NOT_REQUIRED_NOT_PROVIDED_TO_EU_ACTORS",
   "NOT_REQUIRED_NO_CROSS_BORDER_SYSTEM_INTERACTION",
@@ -35,6 +35,7 @@ type NextNode = EuInteroperabilityQuestionId | EuInteroperabilityOutcomeId;
 export type EuInteroperabilityQuestion = {
   id: EuInteroperabilityQuestionId;
   text: string;
+  details?: string;
   next: Record<YesNoAnswer, NextNode>;
 };
 
@@ -50,50 +51,47 @@ export const EU_INTEROPERABILITY_QUESTIONS: Record<
 > = {
   bindingRequirementsInDecisionProcess: {
     id: "bindingRequirementsInDecisionProcess",
-    text: "Are you in a process that defines binding requirements? (e.g. legislative process, procurement process). In other words, are the binding requirements you are looking at yet to be decided and therefore still open to change?",
+    text: "Definiert Ihre Regelung eine neue oder geänderte verbindliche Anforderung, oder passiert dies im Vollzug (z. B. durch Verwaltungsvorschriften, Architekturvorgaben)?",
+    details: dedent`
+      Dies ist bei Regelungsvorhaben in der Regel der Fall.
+      
+      Sie finden weitere Informationen zu verbindlichen Anforderungen (*binding requirements*) auf der [Seite der EU-Kommission](https://interoperable-europe.ec.europa.eu/collection/assessments/guidelines-chapter-2-when-interoperability-assessment-legally-required).
+    `,
     next: {
-      Yes: "requirementIsBinding",
-      No: "NOT_REQUIRED_NO_DECISION_PROCESS",
-    },
-  },
-  requirementIsBinding: {
-    id: "requirementIsBinding",
-    text: "Is the requirement to be decided binding? (i.e. something that limits the choices left to others)?",
-    next: {
-      Yes: "serviceProvidedByPublicOrUnionEntity",
-      No: "NOT_REQUIRED_NOT_BINDING",
+      Ja: "serviceProvidedByPublicOrUnionEntity",
+      Nein: "NOT_REQUIRED_NO_DECISION_PROCESS",
     },
   },
   serviceProvidedByPublicOrUnionEntity: {
     id: "serviceProvidedByPublicOrUnionEntity",
-    text: "Does the binding requirement concern a digital public service provided either by Union bodies or by public sector bodies?",
+    text: "Betrifft die verbindliche Anforderung einen digitalen öffentlichen Dienst, der von EU-Organen oder öffentlichen Stellen erbracht wird?",
     next: {
-      Yes: "serviceProvidedInEuContext",
-      No: "NOT_REQUIRED_NOT_PROVIDED_BY_PUBLIC_OR_UNION_ENTITY",
+      Ja: "serviceProvidedInEuContext",
+      Nein: "NOT_REQUIRED_NOT_PROVIDED_BY_PUBLIC_OR_UNION_ENTITY",
     },
   },
   serviceProvidedInEuContext: {
     id: "serviceProvidedInEuContext",
-    text: "Is the digital public service provided either to another public sector body or to a Union entity or to a natural or legal person in the EU?",
+    text: "Wird der digitale öffentliche Dienst einer anderen öffentlichen Stelle, einem EU-Organ oder einer natürlichen oder juristischen Person in der EU bereitgestellt?",
     next: {
-      Yes: "requiresCrossBorderSystemInteraction",
-      No: "NOT_REQUIRED_NOT_PROVIDED_TO_EU_ACTORS",
+      Ja: "requiresCrossBorderSystemInteraction",
+      Nein: "NOT_REQUIRED_NOT_PROVIDED_TO_EU_ACTORS",
     },
   },
   requiresCrossBorderSystemInteraction: {
     id: "requiresCrossBorderSystemInteraction",
-    text: "Does the provision of the affected digital public service require interactions by means of networks or information systems: (a) between public sector bodies that are located across Member State borders; (b) between Union entities; or (c) between Union entities and public sector bodies?",
+    text: "Erfordert die Erbringung des betroffenen digitalen öffentlichen Dienstes Interaktionen über Netze oder Informationssysteme: (a) zwischen öffentlichen Stellen über Mitgliedstaatsgrenzen hinweg, (b) zwischen EU-Organen oder (c) zwischen EU-Organen und öffentlichen Stellen?",
     next: {
-      Yes: "firstAssessmentForRequirement",
-      No: "NOT_REQUIRED_NO_CROSS_BORDER_SYSTEM_INTERACTION",
+      Ja: "firstAssessmentForRequirement",
+      Nein: "NOT_REQUIRED_NO_CROSS_BORDER_SYSTEM_INTERACTION",
     },
   },
   firstAssessmentForRequirement: {
     id: "firstAssessmentForRequirement",
-    text: "Is this the first time that an assessment is carried out for this binding requirement?",
+    text: "Wird für diese verbindliche Anforderung zum ersten Mal eine Interoperabilitätsbewertung durchgeführt?",
     next: {
-      Yes: "REQUIRED",
-      No: "NOT_REQUIRED_NOT_FIRST_ASSESSMENT",
+      Ja: "REQUIRED",
+      Nein: "NOT_REQUIRED_NOT_FIRST_ASSESSMENT",
     },
   },
 };
@@ -104,45 +102,39 @@ export const EU_INTEROPERABILITY_OUTCOMES: Record<
 > = {
   REQUIRED: {
     id: "REQUIRED",
-    title: "An interoperability assessment is required.",
+    title: "Eine Interoperabilitätsbewertung ist erforderlich.",
     description:
-      "You are legally required to perform an interoperability assessment and publish the report.",
+      "Sie sind gesetzlich verpflichtet, eine Interoperabilitätsbewertung durchzuführen und den Bericht zu veröffentlichen.",
   },
   NOT_REQUIRED_NO_DECISION_PROCESS: {
     id: "NOT_REQUIRED_NO_DECISION_PROCESS",
-    title: "No interoperability assessment is needed.",
+    title: "Keine Interoperabilitätsbewertung erforderlich.",
     description:
-      "Only if a requirement is still open for change, is it mandatory to perform an interoperability assessment.",
-  },
-  NOT_REQUIRED_NOT_BINDING: {
-    id: "NOT_REQUIRED_NOT_BINDING",
-    title: "No interoperability assessment is needed.",
-    description:
-      "Only binding requirements are essential for triggering an interoperability assessment.",
+      "Eine Interoperabilitätsbewertung ist nur dann verpflichtend, wenn eine Anforderung noch offen für Änderungen ist.",
   },
   NOT_REQUIRED_NOT_PROVIDED_BY_PUBLIC_OR_UNION_ENTITY: {
     id: "NOT_REQUIRED_NOT_PROVIDED_BY_PUBLIC_OR_UNION_ENTITY",
-    title: "No interoperability assessment is needed.",
+    title: "Keine Interoperabilitätsbewertung erforderlich.",
     description:
-      "Only public services provided by public sector bodies or Union entities are subject to the IEA.",
+      "Nur digitale öffentliche Dienste, die von öffentlichen Stellen oder EU-Organen erbracht werden, unterliegen der IEA.",
   },
   NOT_REQUIRED_NOT_PROVIDED_TO_EU_ACTORS: {
     id: "NOT_REQUIRED_NOT_PROVIDED_TO_EU_ACTORS",
-    title: "No interoperability assessment is needed.",
+    title: "Keine Interoperabilitätsbewertung erforderlich.",
     description:
-      "Only public services provided to other public sector bodies or Union entities are subject to the IEA.",
+      "Nur Dienste, die an andere öffentliche Stellen oder EU-Organe erbracht werden, unterliegen der IEA.",
   },
   NOT_REQUIRED_NO_CROSS_BORDER_SYSTEM_INTERACTION: {
     id: "NOT_REQUIRED_NO_CROSS_BORDER_SYSTEM_INTERACTION",
-    title: "No interoperability assessment is needed.",
+    title: "Keine Interoperabilitätsbewertung erforderlich.",
     description:
-      "Services confined to a single Member State do not qualify as trans-European digital public services.",
+      "Dienste, die auf einen einzigen Mitgliedstaat beschränkt sind, gelten nicht als transeuropäische digitale öffentliche Dienste.",
   },
   NOT_REQUIRED_NOT_FIRST_ASSESSMENT: {
     id: "NOT_REQUIRED_NOT_FIRST_ASSESSMENT",
-    title: "No interoperability assessment is needed.",
+    title: "Keine Interoperabilitätsbewertung erforderlich.",
     description:
-      "You are not legally required to perform an interoperability assessment. However, a voluntary assessment may still provide value.",
+      "Sie sind nicht gesetzlich verpflichtet, eine Interoperabilitätsbewertung durchzuführen. Eine freiwillige Bewertung kann jedoch dennoch sinnvoll sein.",
   },
 };
 
@@ -195,7 +187,7 @@ export function sanitizeEuInteroperabilityAnswers(
 
   for (const questionId of EU_INTEROPERABILITY_QUESTION_IDS) {
     const answer = (input as Record<string, unknown>)[questionId];
-    if (answer === "Yes" || answer === "No") normalized[questionId] = answer;
+    if (answer === "Ja" || answer === "Nein") normalized[questionId] = answer;
   }
 
   return normalized;

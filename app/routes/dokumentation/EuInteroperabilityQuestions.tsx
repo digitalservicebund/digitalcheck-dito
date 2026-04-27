@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import RichText from "~/components/RichText.tsx";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
 import {
   EU_INTEROPERABILITY_ANSWERS_STORAGE_KEY,
@@ -95,6 +96,7 @@ export default function EuInteroperabilityQuestions() {
         return (
           <fieldset key={question.id} className="space-y-16">
             <legend className="ds-heading-03-reg mb-16">{question.text}</legend>
+            {question.details && <RichText markdown={question.details} />}
             <div role="radiogroup" className="space-y-16">
               {YES_NO_OPTIONS.map((option) => {
                 const inputId = `${question.id}-${option.toLowerCase()}`;
