@@ -13,7 +13,7 @@ export type Route = {
 
 export const barrierefreiheit = {
   key: "barrierefreiheit",
-  path: "/preview/barrierefreiheit",
+  path: "/barrierefreiheit",
   title: "Barrierefreiheit",
   parent: null,
   sitemap: true,
@@ -24,7 +24,7 @@ export const barrierefreiheit = {
 
 export const beispiele = {
   key: "beispiele",
-  path: "/preview/beispiele",
+  path: "/beispiele",
   title: "Beispiele für Digitaltauglichkeit",
   parent: null,
   sitemap: true,
@@ -35,7 +35,7 @@ export const beispiele = {
 
 export const beispiele_prinzipien = {
   key: "beispiele_prinzipien",
-  path: "/preview/beispiele/prinzipien",
+  path: "/beispiele/prinzipien",
   title: "Die Prinzipien im Regelungstext",
   parent: beispiele,
   sitemap: true,
@@ -46,7 +46,7 @@ export const beispiele_prinzipien = {
 
 export const beispiele_visualisierungen = {
   key: "beispiele_visualisierungen",
-  path: "/preview/beispiele/visualisierungen",
+  path: "/beispiele/visualisierungen",
   title: "Beispiele für Visualisierungen",
   parent: beispiele,
   sitemap: true,
@@ -57,7 +57,7 @@ export const beispiele_visualisierungen = {
 
 export const dasIstNeu = {
   key: "dasIstNeu",
-  path: "/preview/das-ist-neu",
+  path: "/das-ist-neu",
   title: "Das ist neu",
   parent: null,
   sitemap: true,
@@ -68,7 +68,7 @@ export const dasIstNeu = {
 
 export const datenschutz = {
   key: "datenschutz",
-  path: "/preview/datenschutz",
+  path: "/datenschutz",
   title: "Datenschutzerklärung",
   parent: null,
   sitemap: true,
@@ -79,7 +79,7 @@ export const datenschutz = {
 
 export const dokumentation = {
   key: "dokumentation",
-  path: "/preview/dokumentation",
+  path: "/dokumentation",
   title: "Dokumentation",
   parent: null,
   sitemap: true,
@@ -90,7 +90,7 @@ export const dokumentation = {
 
 export const dokumentation_absenden = {
   key: "dokumentation_absenden",
-  path: "/preview/dokumentation/absenden",
+  path: "/dokumentation/absenden",
   title: "Absenden",
   parent: dokumentation,
   sitemap: true,
@@ -101,7 +101,7 @@ export const dokumentation_absenden = {
 
 export const dokumentation_beteiligungsformate = {
   key: "dokumentation_beteiligungsformate",
-  path: "/preview/dokumentation/beteiligungsformate",
+  path: "/dokumentation/beteiligungsformate",
   title: "Beteiligungsformate",
   parent: dokumentation,
   sitemap: true,
@@ -112,7 +112,7 @@ export const dokumentation_beteiligungsformate = {
 
 export const dokumentation_hinweise = {
   key: "dokumentation_hinweise",
-  path: "/preview/dokumentation/hinweise",
+  path: "/dokumentation/hinweise",
   title: "Hinweise",
   parent: dokumentation,
   sitemap: true,
@@ -123,7 +123,7 @@ export const dokumentation_hinweise = {
 
 export const dokumentation_regelungsvorhabenTitel = {
   key: "dokumentation_regelungsvorhabenTitel",
-  path: "/preview/dokumentation/regelungsvorhaben-titel",
+  path: "/dokumentation/regelungsvorhaben-titel",
   title: "Regelungsvorhaben Titel",
   parent: dokumentation,
   sitemap: true,
@@ -134,7 +134,7 @@ export const dokumentation_regelungsvorhabenTitel = {
 
 export const dokumentation_zusammenfassung = {
   key: "dokumentation_zusammenfassung",
-  path: "/preview/dokumentation/zusammenfassung",
+  path: "/dokumentation/zusammenfassung",
   title: "Zusammenfassung",
   parent: dokumentation,
   sitemap: true,
@@ -145,7 +145,7 @@ export const dokumentation_zusammenfassung = {
 
 export const gesetzgebungsprozess = {
   key: "gesetzgebungsprozess",
-  path: "/preview/gesetzgebungsprozess",
+  path: "/gesetzgebungsprozess",
   title: "Der Digitalcheck im Gesetzgebungsprozess",
   parent: null,
   sitemap: true,
@@ -156,7 +156,7 @@ export const gesetzgebungsprozess = {
 
 export const grundlagen = {
   key: "grundlagen",
-  path: "/preview/grundlagen",
+  path: "/grundlagen",
   title: "Grundlagen",
   parent: null,
   sitemap: true,
@@ -167,7 +167,7 @@ export const grundlagen = {
 
 export const grundlagen_digitaltauglichkeit = {
   key: "grundlagen_digitaltauglichkeit",
-  path: "/preview/grundlagen/digitaltauglichkeit",
+  path: "/grundlagen/digitaltauglichkeit",
   title: "Digitaltauglichkeit",
   parent: grundlagen,
   sitemap: true,
@@ -178,7 +178,7 @@ export const grundlagen_digitaltauglichkeit = {
 
 export const grundlagen_normenkontrollrat = {
   key: "grundlagen_normenkontrollrat",
-  path: "/preview/grundlagen/normenkontrollrat",
+  path: "/grundlagen/normenkontrollrat",
   title: "Die Rolle des Nationalen Normenkontrollrats",
   parent: grundlagen,
   sitemap: true,
@@ -189,7 +189,7 @@ export const grundlagen_normenkontrollrat = {
 
 export const home = {
   key: "home",
-  path: "/preview/",
+  path: "/",
   title: "Startseite",
   parent: null,
   sitemap: true,
@@ -200,7 +200,7 @@ export const home = {
 
 export const impressum = {
   key: "impressum",
-  path: "/preview/impressum",
+  path: "/impressum",
   title: "Impressum",
   parent: null,
   sitemap: true,
@@ -211,7 +211,7 @@ export const impressum = {
 
 export const interoperabel = {
   key: "interoperabel",
-  path: "/preview/interoperabel",
+  path: "/interoperabel",
   title: "Interoperable Regelungen",
   parent: null,
   sitemap: true,
@@ -222,7 +222,7 @@ export const interoperabel = {
 
 export const interoperabel_faq = {
   key: "interoperabel_faq",
-  path: "/preview/interoperabel/faq",
+  path: "/interoperabel/faq",
   title: "Fragen und Antworten",
   parent: interoperabel,
   sitemap: true,
@@ -233,7 +233,7 @@ export const interoperabel_faq = {
 
 export const interoperabel_loesungen = {
   key: "interoperabel_loesungen",
-  path: "/preview/interoperabel/loesungen",
+  path: "/interoperabel/loesungen",
   title: "Interoperable Lösungen",
   parent: interoperabel,
   sitemap: true,
@@ -244,7 +244,7 @@ export const interoperabel_loesungen = {
 
 export const interoperabel_loesungen_coreVocabularies = {
   key: "interoperabel_loesungen_coreVocabularies",
-  path: "/preview/interoperabel/loesungen/core-vocabularies",
+  path: "/interoperabel/loesungen/core-vocabularies",
   title: "Semantic Core Vocabularies",
   parent: interoperabel_loesungen,
   sitemap: true,
@@ -255,7 +255,7 @@ export const interoperabel_loesungen_coreVocabularies = {
 
 export const interoperabel_loesungen_dcatAp = {
   key: "interoperabel_loesungen_dcatAp",
-  path: "/preview/interoperabel/loesungen/dcat-ap",
+  path: "/interoperabel/loesungen/dcat-ap",
   title: "Data Catalogue Vocabulary Application Profile (DCAT-AP)",
   parent: interoperabel_loesungen,
   sitemap: true,
@@ -266,7 +266,7 @@ export const interoperabel_loesungen_dcatAp = {
 
 export const interoperabel_nationaleKontaktstelle = {
   key: "interoperabel_nationaleKontaktstelle",
-  path: "/preview/interoperabel/nationale-kontaktstelle",
+  path: "/interoperabel/nationale-kontaktstelle",
   title: "Nationale Kontaktstelle",
   parent: interoperabel,
   sitemap: true,
@@ -277,7 +277,7 @@ export const interoperabel_nationaleKontaktstelle = {
 
 export const methoden = {
   key: "methoden",
-  path: "/preview/methoden",
+  path: "/methoden",
   title: "Regelung erarbeiten",
   parent: null,
   sitemap: true,
@@ -288,7 +288,7 @@ export const methoden = {
 
 export const methoden_fuenfPrinzipien = {
   key: "methoden_fuenfPrinzipien",
-  path: "/preview/methoden/fuenf-prinzipien",
+  path: "/methoden/fuenf-prinzipien",
   title: "Fünf Prinzipien",
   parent: methoden,
   sitemap: true,
@@ -299,7 +299,7 @@ export const methoden_fuenfPrinzipien = {
 
 export const methoden_interviewLeitfaden = {
   key: "methoden_interviewLeitfaden",
-  path: "/preview/methoden/interview-leitfaden",
+  path: "/methoden/interview-leitfaden",
   title: "Interview Leitfaden",
   parent: methoden,
   sitemap: true,
@@ -310,7 +310,7 @@ export const methoden_interviewLeitfaden = {
 
 export const methoden_interviewLeitfadenSchritte = {
   key: "methoden_interviewLeitfadenSchritte",
-  path: "/preview/methoden/interview-leitfaden-schritte",
+  path: "/methoden/interview-leitfaden-schritte",
   title: "Interview Leitfaden Schritte",
   parent: methoden,
   sitemap: true,
@@ -321,7 +321,7 @@ export const methoden_interviewLeitfadenSchritte = {
 
 export const methoden_itSystemeErfassen = {
   key: "methoden_itSystemeErfassen",
-  path: "/preview/methoden/it-systeme-erfassen",
+  path: "/methoden/it-systeme-erfassen",
   title: "IT-Systeme erfassen",
   parent: methoden,
   sitemap: true,
@@ -332,7 +332,7 @@ export const methoden_itSystemeErfassen = {
 
 export const methoden_technischeUmsetzbarkeit = {
   key: "methoden_technischeUmsetzbarkeit",
-  path: "/preview/methoden/technische-umsetzbarkeit",
+  path: "/methoden/technische-umsetzbarkeit",
   title: "Technische Umsetzbarkeit sicherstellen",
   parent: methoden,
   sitemap: true,
@@ -343,7 +343,7 @@ export const methoden_technischeUmsetzbarkeit = {
 
 export const methoden_visualisieren = {
   key: "methoden_visualisieren",
-  path: "/preview/methoden/visualisieren",
+  path: "/methoden/visualisieren",
   title: "Visualisieren",
   parent: methoden,
   sitemap: true,
@@ -354,7 +354,7 @@ export const methoden_visualisieren = {
 
 export const methoden_visualisieren_flussdiagramm = {
   key: "methoden_visualisieren_flussdiagramm",
-  path: "/preview/methoden/visualisieren/flussdiagramm",
+  path: "/methoden/visualisieren/flussdiagramm",
   title: "Anleitung Flussdiagramme",
   parent: methoden_visualisieren,
   sitemap: true,
@@ -365,7 +365,7 @@ export const methoden_visualisieren_flussdiagramm = {
 
 export const methoden_zustaendigeAkteurinnenAuflisten = {
   key: "methoden_zustaendigeAkteurinnenAuflisten",
-  path: "/preview/methoden/zustaendige-akteurinnen-auflisten",
+  path: "/methoden/zustaendige-akteurinnen-auflisten",
   title: "Akteure auflisten",
   parent: methoden,
   sitemap: true,
@@ -376,7 +376,7 @@ export const methoden_zustaendigeAkteurinnenAuflisten = {
 
 export const sitemap = {
   key: "sitemap",
-  path: "/preview/sitemap",
+  path: "/sitemap",
   title: "Sitemap",
   parent: null,
   sitemap: true,
@@ -387,7 +387,7 @@ export const sitemap = {
 
 export const unterstuetzung = {
   key: "unterstuetzung",
-  path: "/preview/unterstuetzung",
+  path: "/unterstuetzung",
   title: "Unterstützungsangebote",
   parent: null,
   sitemap: true,
@@ -398,7 +398,7 @@ export const unterstuetzung = {
 
 export const vorpruefung = {
   key: "vorpruefung",
-  path: "/preview/vorpruefung",
+  path: "/vorpruefung",
   title: "Vorprüfung: Digitalbezug einschätzen",
   parent: null,
   sitemap: true,
@@ -409,7 +409,7 @@ export const vorpruefung = {
 
 export const vorpruefung_automatisierung = {
   key: "vorpruefung_automatisierung",
-  path: "/preview/vorpruefung/automatisierung",
+  path: "/vorpruefung/automatisierung",
   title: "Automatisierung — Vorprüfung",
   parent: vorpruefung,
   sitemap: true,
@@ -420,7 +420,7 @@ export const vorpruefung_automatisierung = {
 
 export const vorpruefung_datenaustausch = {
   key: "vorpruefung_datenaustausch",
-  path: "/preview/vorpruefung/datenaustausch",
+  path: "/vorpruefung/datenaustausch",
   title: "Datenaustausch — Vorprüfung",
   parent: vorpruefung,
   sitemap: true,
@@ -431,7 +431,7 @@ export const vorpruefung_datenaustausch = {
 
 export const vorpruefung_ergebnis = {
   key: "vorpruefung_ergebnis",
-  path: "/preview/vorpruefung/ergebnis",
+  path: "/vorpruefung/ergebnis",
   title: "Ergebnis der Vorprüfung",
   parent: vorpruefung,
   sitemap: true,
@@ -442,7 +442,7 @@ export const vorpruefung_ergebnis = {
 
 export const vorpruefung_euBezug = {
   key: "vorpruefung_euBezug",
-  path: "/preview/vorpruefung/eu-bezug",
+  path: "/vorpruefung/eu-bezug",
   title: "EU-Bezug — Vorprüfung",
   parent: vorpruefung,
   sitemap: true,
@@ -453,7 +453,7 @@ export const vorpruefung_euBezug = {
 
 export const vorpruefung_hinweise = {
   key: "vorpruefung_hinweise",
-  path: "/preview/vorpruefung/hinweise",
+  path: "/vorpruefung/hinweise",
   title: "Allgemeine Hinweise zur Vorprüfung",
   parent: vorpruefung,
   sitemap: true,
@@ -464,7 +464,7 @@ export const vorpruefung_hinweise = {
 
 export const vorpruefung_itSystem = {
   key: "vorpruefung_itSystem",
-  path: "/preview/vorpruefung/it-system",
+  path: "/vorpruefung/it-system",
   title: "IT-System — Vorprüfung",
   parent: vorpruefung,
   sitemap: true,
@@ -475,7 +475,7 @@ export const vorpruefung_itSystem = {
 
 export const vorpruefung_kommunikation = {
   key: "vorpruefung_kommunikation",
-  path: "/preview/vorpruefung/kommunikation",
+  path: "/vorpruefung/kommunikation",
   title: "Digitale Kommunikation — Vorprüfung",
   parent: vorpruefung,
   sitemap: true,
@@ -486,7 +486,7 @@ export const vorpruefung_kommunikation = {
 
 export const vorpruefung_verpflichtungenFuerBeteiligte = {
   key: "vorpruefung_verpflichtungenFuerBeteiligte",
-  path: "/preview/vorpruefung/verpflichtungen-fuer-beteiligte",
+  path: "/vorpruefung/verpflichtungen-fuer-beteiligte",
   title: "Verpflichtungen für Beteiligte — Vorprüfung",
   parent: vorpruefung,
   sitemap: true,
@@ -497,7 +497,7 @@ export const vorpruefung_verpflichtungenFuerBeteiligte = {
 
 export const zahlenUndFakten = {
   key: "zahlenUndFakten",
-  path: "/preview/zahlen-und-fakten",
+  path: "/zahlen-und-fakten",
   title: "Zahlen und Fakten",
   parent: null,
   sitemap: true,

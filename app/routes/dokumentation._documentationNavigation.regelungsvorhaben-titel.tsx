@@ -1,10 +1,10 @@
+import { dokumentation_regelungsvorhabenTitel } from "@/config/routes";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
 import Input from "~/components/Input";
 import MetaTitle from "~/components/Meta";
 import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import { ROUTE_DOCUMENTATION_TITLE } from "~/resources/staticRoutes";
 import {
   defaultTitleValues,
   policyTitleSchema,
@@ -30,7 +30,9 @@ export default function DocumentationTitle() {
 
   return (
     <>
-      <MetaTitle prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_TITLE.title}`} />
+      <MetaTitle
+        prefix={`Dokumentation: ${dokumentation_regelungsvorhabenTitel.title}`}
+      />
       <div className="space-y-40">
         <Heading
           text={info.headline}

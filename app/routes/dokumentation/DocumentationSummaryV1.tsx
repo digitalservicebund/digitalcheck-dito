@@ -1,3 +1,9 @@
+import {
+  dokumentation_beteiligungsformate,
+  dokumentation_regelungsvorhabenTitel,
+  dokumentation_zusammenfassung,
+  type Route,
+} from "@/config/routes";
 import { isArray } from "@posthog/core";
 import { type ReactNode } from "react";
 import type { BadgeProps } from "~/components/Badge";
@@ -10,12 +16,6 @@ import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import {
-  ROUTE_DOCUMENTATION_PARTICIPATION,
-  ROUTE_DOCUMENTATION_SUMMARY,
-  ROUTE_DOCUMENTATION_TITLE,
-  type Route,
-} from "~/resources/staticRoutes";
 import {
   type Participation,
   type PolicyTitle,
@@ -41,8 +41,8 @@ const createInfoBoxItem = ({
   content?: ReactNode;
   badge?: BadgeProps;
 }): InfoBoxProps => ({
-  identifier: route.url,
-  testId: route.url,
+  identifier: route.path,
+  testId: route.path,
   heading: {
     text: route.title,
     tagName: "h2",
@@ -60,7 +60,7 @@ const createInfoBoxItem = ({
         />
       )}
       <Link
-        to={route.url}
+        to={route.path}
         className="text-link mt-24 block"
         aria-label={`${route.title} ${summary.buttonEdit.ariaLabelSuffix}`}
       >
@@ -223,13 +223,13 @@ export default function DocumentationSummaryV1() {
 
   const items: InfoBoxProps[] = [
     createInfoBoxItem({
-      route: ROUTE_DOCUMENTATION_TITLE,
+      route: dokumentation_regelungsvorhabenTitel,
       content: documentationData.policyTitle?.title ? (
         <PolicyTitleContent policyTitle={documentationData.policyTitle} />
       ) : null,
     }),
     createInfoBoxItem({
-      route: ROUTE_DOCUMENTATION_PARTICIPATION,
+      route: dokumentation_beteiligungsformate,
       content:
         documentationData.participation &&
         (documentationData.participation.formats ||
@@ -267,7 +267,7 @@ export default function DocumentationSummaryV1() {
   return (
     <>
       <MetaTitle
-        prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_SUMMARY.title}`}
+        prefix={`Dokumentation: ${dokumentation_zusammenfassung.title}`}
       />
       <Heading
         text={summary.headline}

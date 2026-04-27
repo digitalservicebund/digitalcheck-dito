@@ -6,10 +6,10 @@ import "@testing-library/jest-dom";
 import { act, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+import { dokumentation_hinweise } from "@/config/routes";
 import React from "react";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general.ts";
-import { ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes.ts";
 import {
   readDataFromLocalStorage,
   removeFromLocalStorage,
@@ -117,9 +117,7 @@ describe("DocumentationContinueActions", () => {
       confirmButton.click();
 
       expect(vi.mocked(removeFromLocalStorage)).toHaveBeenCalled();
-      expect(mockNavigate).toHaveBeenCalledWith(
-        ROUTES_DOCUMENTATION_INTRO[0].url,
-      );
+      expect(mockNavigate).toHaveBeenCalledWith(dokumentation_hinweise.path);
     });
   });
 

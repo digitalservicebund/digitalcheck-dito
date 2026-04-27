@@ -8,6 +8,7 @@ import {
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
   dokumentation_zusammenfassung,
+  type Route as _Route,
 } from "@/config/routes";
 import LayoutWithDocumentationNavigation from "~/routes/dokumentation._documentationNavigation";
 import PrinciplePage from "~/routes/dokumentation._documentationNavigation.$principleId";
@@ -20,17 +21,17 @@ import ZusammenfassungPage from "~/routes/dokumentation._documentationNavigation
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
-type Route = { url: string; title: string; principleId?: string };
+type Route = _Route & { principleId?: string };
 
 const ROUTES_DOCUMENTATION_INTRO: Route[] = [
-  { url: dokumentation_hinweise.path, title: dokumentation_hinweise.title },
-  { url: dokumentation_regelungsvorhabenTitel.path, title: dokumentation_regelungsvorhabenTitel.title },
-  { url: dokumentation_beteiligungsformate.path, title: dokumentation_beteiligungsformate.title },
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+  dokumentation_beteiligungsformate,
 ];
 
 const ROUTES_DOCUMENTATION_FINALIZE: Route[] = [
-  { url: dokumentation_zusammenfassung.path, title: dokumentation_zusammenfassung.title },
-  { url: dokumentation_absenden.path, title: dokumentation_absenden.title },
+  dokumentation_zusammenfassung,
+  dokumentation_absenden,
 ];
 
 const pages = {
@@ -58,8 +59,15 @@ export default function DokumentationLayout({
     ...ROUTES_DOCUMENTATION_INTRO,
     prinzips.map<Route>(({ Name, URLBezeichnung, documentId }) => ({
       title: Name,
-      url: `${dokumentation.path}/${URLBezeichnung}`,
+      path: `${dokumentation.path}/${URLBezeichnung}`,
       principleId: documentId,
+      // TODO
+      key: `${documentId}`,
+      parent: null,
+      sitemap: false,
+      isStagingOnly: false,
+      navOrder: null,
+      navLabel: null,
     })),
     ...ROUTES_DOCUMENTATION_FINALIZE,
   ];

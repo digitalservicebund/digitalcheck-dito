@@ -28,8 +28,15 @@ const createRoute = (
 
 // Internal: only used as parent references to compute child URLs.
 const ROUTE_SUPPORT = createRoute("unterstuetzung", "Unterstützungsangebote");
-const ROUTE_PRECHECK = createRoute("vorpruefung", "Vorprüfung: Digitalbezug einschätzen");
-const ROUTE_EXAMPLES = createRoute("beispiele", "Beispiele für Digitaltauglichkeit");
+const ROUTE_PRECHECK = createRoute(
+  "vorpruefung",
+  "Vorprüfung: Digitalbezug einschätzen",
+);
+const ROUTE_EXAMPLES = createRoute(
+  "beispiele",
+  "Beispiele für Digitaltauglichkeit",
+);
+
 const ROUTE_DOCUMENTATION = createRoute("dokumentation", "Dokumentation");
 
 // ── Backend endpoint ──────────────────────────────────────────────────────────
@@ -72,43 +79,6 @@ export const ROUTE_VISUALISATION = createRoute(
   "Visualisierung",
   ROUTE_EXAMPLES,
 );
-
-// ── Dokumentation sub-pages ([...slug] dynamic route) ────────────────────────
-export const ROUTE_DOCUMENTATION_NOTES = createRoute(
-  "hinweise",
-  "Hinweise",
-  ROUTE_DOCUMENTATION,
-);
-export const ROUTE_DOCUMENTATION_TITLE = createRoute(
-  "regelungsvorhaben-titel",
-  "Regelungsvorhaben Titel",
-  ROUTE_DOCUMENTATION,
-);
-export const ROUTE_DOCUMENTATION_PARTICIPATION = createRoute(
-  "beteiligungsformate",
-  "Beteiligungsformate",
-  ROUTE_DOCUMENTATION,
-);
-export const ROUTE_DOCUMENTATION_SUMMARY = createRoute(
-  "zusammenfassung",
-  "Zusammenfassung",
-  ROUTE_DOCUMENTATION,
-);
-export const ROUTE_DOCUMENTATION_SEND = createRoute(
-  "absenden",
-  "Absenden",
-  ROUTE_DOCUMENTATION,
-);
-
-export const ROUTES_DOCUMENTATION_INTRO = [
-  ROUTE_DOCUMENTATION_NOTES,
-  ROUTE_DOCUMENTATION_TITLE,
-  ROUTE_DOCUMENTATION_PARTICIPATION,
-];
-export const ROUTES_DOCUMENTATION_FINALIZE = [
-  ROUTE_DOCUMENTATION_SUMMARY,
-  ROUTE_DOCUMENTATION_SEND,
-];
 
 // ── Pre-check question pages (generated from content, not static files) ───────
 export const ROUTES_PRECHECK_QUESTIONS = Object.values(preCheckQuestions).map(

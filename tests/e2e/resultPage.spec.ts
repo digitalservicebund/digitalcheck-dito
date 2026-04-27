@@ -1,6 +1,6 @@
+import { vorpruefung_ergebnis } from "@/config/routes";
 import { expect, type Page, test } from "@playwright/test";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { ROUTE_PRECHECK_RESULT } from "~/resources/staticRoutes";
 
 const { questions } = preCheck;
 
@@ -29,10 +29,10 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
   });
 
   test.beforeEach("go to result page", async () => {
-    if (page.url() !== ROUTE_PRECHECK_RESULT.url) {
-      await page.goto(ROUTE_PRECHECK_RESULT.url);
+    if (page.url() !== vorpruefung_ergebnis.path) {
+      await page.goto(vorpruefung_ergebnis.path);
     }
-    await page.waitForURL(ROUTE_PRECHECK_RESULT.url);
+    await page.waitForURL(vorpruefung_ergebnis.path);
   });
 
   test.afterAll("close shared page for test iteration", async () => {
