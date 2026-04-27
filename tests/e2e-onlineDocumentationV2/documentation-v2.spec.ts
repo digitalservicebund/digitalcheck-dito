@@ -1,7 +1,3 @@
-import { expect, type Locator, type Page, test } from "@playwright/test";
-import { extractRawText } from "mammoth";
-import { documentationDocument } from "~/resources/content/documentation-document";
-import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
   dokumentation,
   dokumentation_absenden,
@@ -10,6 +6,10 @@ import {
   dokumentation_regelungsvorhabenTitel,
   dokumentation_zusammenfassung,
 } from "@/config/routes";
+import { expect, type Locator, type Page, test } from "@playwright/test";
+import { extractRawText } from "mammoth";
+import { documentationDocument } from "~/resources/content/documentation-document";
+import { digitalDocumentation } from "~/resources/content/dokumentation";
 
 const testData = {
   title: "E2E V2 Titel des Regelungsvorhabens",

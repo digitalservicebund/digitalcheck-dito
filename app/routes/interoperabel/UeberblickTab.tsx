@@ -1,4 +1,8 @@
-import { interoperabel, methoden_fuenfPrinzipien, vorpruefung } from "@/config/routes";
+import {
+  interoperabel,
+  methoden_fuenfPrinzipien,
+  vorpruefung,
+} from "@/config/routes";
 import { ContactPhoneOutlined } from "@digitalservicebund/icons";
 import { LinkButton } from "~/components/Button";
 import Heading from "~/components/Heading";

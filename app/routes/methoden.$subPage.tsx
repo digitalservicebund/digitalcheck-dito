@@ -1,12 +1,15 @@
 import type { Route } from "@/config/routes";
-import { methoden_itSystemeErfassen, methoden_technischeUmsetzbarkeit, methoden_zustaendigeAkteurinnenAuflisten } from "@/config/routes";
+import {
+  methoden_itSystemeErfassen,
+  methoden_technischeUmsetzbarkeit,
+  methoden_zustaendigeAkteurinnenAuflisten,
+} from "@/config/routes";
 import Container from "~/components/Container";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import DetailsSummary from "~/components/DetailsSummary";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image.tsx";
 import InfoBox from "~/components/InfoBox";
-import MetaTitle from "~/components/Meta";
 import MethodCard from "~/components/MethodCard";
 import RichText from "~/components/RichText.tsx";
 import { methodsITSystems } from "~/resources/content/methode-it-systeme-erfassen";
@@ -14,15 +17,18 @@ import { methodsTechnicalFeasibility } from "~/resources/content/methode-technis
 import { methodsResponsibleActors } from "~/resources/content/methode-zustaendige-akteurinnen-auflisten";
 import { interviewBanner } from "~/resources/content/shared/interview-banner";
 
-const contentMap: Record<string, typeof methodsResponsibleActors | typeof methodsITSystems | typeof methodsTechnicalFeasibility> = {
+const contentMap: Record<
+  string,
+  | typeof methodsResponsibleActors
+  | typeof methodsITSystems
+  | typeof methodsTechnicalFeasibility
+> = {
   [methoden_zustaendigeAkteurinnenAuflisten.title]: methodsResponsibleActors,
   [methoden_itSystemeErfassen.title]: methodsITSystems,
   [methoden_technischeUmsetzbarkeit.title]: methodsTechnicalFeasibility,
 };
 
-export default function Index({
-  route: propRoute,
-}: { route?: Route } = {}) {
+export default function Index({ route: propRoute }: { route?: Route } = {}) {
   const route = propRoute;
   if (!route) return null;
   // We have to get the content here to use the icons from the content file
@@ -30,7 +36,6 @@ export default function Index({
 
   return (
     <>
-      <MetaTitle prefix={route.title} />
       <main>
         <Hero subtitle={content.subtitle} title={content.title} />
 

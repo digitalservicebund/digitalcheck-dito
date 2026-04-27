@@ -16,7 +16,11 @@ interface Props {
 const { title, description, showProgressBar } = Astro.props;
 ---
 
-<Layout title={title} description={description} showProgressBar={showProgressBar}>
+<Layout
+  title={title}
+  description={description}
+  showProgressBar={showProgressBar}
+>
   <slot />
   <aside aria-labelledby="your-example-heading">
     <Container className="mt-80 mb-80 bg-blue-100" overhangingBackground>

@@ -50,7 +50,7 @@ query GetAllPrinzipsWithBeispiele {
 const { prinzip, prinzips } = Astro.props;
 ---
 
-<Layout>
+<Layout title={frontmatter.title}>
   <main>
     <PrinzipDetail prinzip={prinzip} prinzips={prinzips} />
   </main>

@@ -1,7 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { readFile } from "node:fs/promises";
 
@@ -14,8 +13,7 @@ const content = await readFile("public/markdown/barrierefreiheit.md", {
 });
 ---
 
-<Layout>
-  <MetaTitle prefix={frontmatter.title} />
+<Layout title={frontmatter.title}>
   <ContentWrapper>
     <RichText
       markdown={content}

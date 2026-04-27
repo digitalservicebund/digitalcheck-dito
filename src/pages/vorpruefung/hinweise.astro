@@ -8,7 +8,7 @@ export const frontmatter = {
 };
 ---
 
-<Layout showProgressBar={true}>
+<Layout title={frontmatter.title} showProgressBar={true}>
   <PreCheckNavigation client:load>
     <HinweisePage client:load />
   </PreCheckNavigation>

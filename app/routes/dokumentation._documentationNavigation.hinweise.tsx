@@ -1,9 +1,7 @@
-import { dokumentation_beteiligungsformate } from "@/config/routes";
 import { useState } from "react";
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Heading from "~/components/Heading";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText.tsx";
 import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { general } from "~/resources/content/shared/general.ts";
@@ -32,9 +30,6 @@ export default function DocumentationParticipation() {
 
   return (
     <>
-      <MetaTitle
-        prefix={`Dokumentation: ${dokumentation_beteiligungsformate.title}`}
-      />
       <Heading
         text="Wichtige Hinweise"
         tagName="h1"

@@ -7,12 +7,10 @@ import ButtonContainer from "~/components/ButtonContainer";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import InlineNotice from "~/components/InlineNotice";
-import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { ROUTES_PRECHECK_QUESTIONS } from "~/resources/staticRoutes";
 import { usePreCheckData, useSyncedForm } from "./vorpruefung/preCheckDataHook";
 import {
   answerSchema,
@@ -152,13 +150,6 @@ export default function Index({
   if (!question) return null;
   return (
     <form {...form.getFormProps()} className="space-y-40">
-      <MetaTitle
-        prefix={
-          ROUTES_PRECHECK_QUESTIONS.find((route) =>
-            route.url.endsWith(question.id),
-          )?.title
-        }
-      />
       <input {...form.getHiddenInputProps("questionId")} />
       <section className="space-y-32">
         <div className="space-y-16">

@@ -17,6 +17,6 @@ const result = await fetchStrapiData<{
 const prinzips = "error" in result ? [] : result.prinzips;
 ---
 
-<Layout showProgressBar={true}>
+<Layout title={frontmatter.title} showProgressBar={true}>
   <FivePrinciples prinzips={prinzips} />
 </Layout>

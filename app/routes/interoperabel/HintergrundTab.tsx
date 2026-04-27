@@ -1,4 +1,8 @@
-import { beispiele_visualisierungen, methoden_fuenfPrinzipien, vorpruefung } from "@/config/routes";
+import {
+  beispiele_visualisierungen,
+  methoden_fuenfPrinzipien,
+  vorpruefung,
+} from "@/config/routes";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import Image from "~/components/Image";

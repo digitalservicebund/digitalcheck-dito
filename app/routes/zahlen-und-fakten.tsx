@@ -1,4 +1,3 @@
-import { zahlenUndFakten } from "@/config/routes";
 import {
   LocalActivityOutlined,
   ShareOutlined,
@@ -10,7 +9,6 @@ import Badge from "~/components/Badge";
 import ContentWrapper from "~/components/ContentWrapper";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -131,7 +129,6 @@ const dsData: DsData = [
 export default function ZahlenUndFakten() {
   return (
     <>
-      <MetaTitle prefix={zahlenUndFakten.title} />
       <main>
         <Hero title="Der Digitalcheck in Zahlen">
           <RichText

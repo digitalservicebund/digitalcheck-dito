@@ -1,4 +1,7 @@
-import { methoden_fuenfPrinzipien, methoden_visualisieren } from "@/config/routes";
+import {
+  methoden_fuenfPrinzipien,
+  methoden_visualisieren,
+} from "@/config/routes";
 import {
   EmojiObjectsOutlined,
   ShareOutlined,
@@ -12,7 +15,6 @@ import { Feature, FeatureList } from "~/components/FeatureList.tsx";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox.tsx";
-import MetaTitle from "~/components/Meta";
 import { PrinciplePosterBox } from "~/components/PrinciplePosterBox";
 import RichText from "~/components/RichText.tsx";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
@@ -43,7 +45,6 @@ export default function FivePrinciples({
 } = {}) {
   return (
     <>
-      <MetaTitle prefix={methoden_fuenfPrinzipien.title} />
       <main>
         <Hero
           title={methodsFivePrinciples.title}

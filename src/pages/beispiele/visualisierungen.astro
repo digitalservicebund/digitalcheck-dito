@@ -3,7 +3,6 @@ import { beispiele_visualisierungen } from "@/config/routes";
 import Layout from "@/layouts/BeispieleLayout.astro";
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
-import MetaTitle from "~/components/Meta";
 import VisualisationItem from "~/components/VisualisationItem";
 import { examplesVisualisations } from "~/resources/content/beispiele-visualisierungen";
 import {
@@ -32,8 +31,7 @@ const visualisationsData =
   "error" in visualisationsResult ? [] : visualisationsResult.visualisierungen;
 ---
 
-<Layout>
-  <MetaTitle prefix={beispiele_visualisierungen.title} />
+<Layout title={frontmatter.title}>
   <Hero
     title={examplesVisualisations.title}
     subtitle={examplesVisualisations.subtitle}

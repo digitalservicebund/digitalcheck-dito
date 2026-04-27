@@ -3,7 +3,6 @@ import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
-import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { Link } from "~/utils/routerCompat";
@@ -49,7 +48,6 @@ export default function DocumentationPrincipleV2({
 
   return (
     <>
-      <MetaTitle prefix={`Dokumentation: ${prinzip.Name}`} />
       <div className="max-w-a11y space-y-40">
         <div className="space-y-8">
           <Badge principleNumber={prinzip.Nummer}>

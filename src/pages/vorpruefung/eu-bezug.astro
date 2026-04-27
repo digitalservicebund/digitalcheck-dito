@@ -7,7 +7,7 @@ export const frontmatter = {
 };
 ---
 
-<Layout showProgressBar={true}>
+<Layout title={frontmatter.title} showProgressBar={true}>
   <PreCheckNavigation client:load>
     <QuestionPage client:load questionId="eu-bezug" />
   </PreCheckNavigation>

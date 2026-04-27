@@ -1,7 +1,5 @@
-import { dokumentation_beteiligungsformate } from "@/config/routes";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
 import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
@@ -34,9 +32,6 @@ export default function DocumentationParticipation() {
 
   return (
     <>
-      <MetaTitle
-        prefix={`Dokumentation: ${dokumentation_beteiligungsformate.title}`}
-      />
       <div className="space-y-40">
         <Heading
           text={participation.headline}

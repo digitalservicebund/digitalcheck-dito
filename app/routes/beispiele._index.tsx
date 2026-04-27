@@ -1,8 +1,12 @@
-import { beispiele, beispiele_prinzipien, beispiele_visualisierungen, methoden_fuenfPrinzipien, methoden_visualisieren } from "@/config/routes";
+import {
+  beispiele_prinzipien,
+  beispiele_visualisierungen,
+  methoden_fuenfPrinzipien,
+  methoden_visualisieren,
+} from "@/config/routes";
 import ContentWrapper from "~/components/ContentWrapper";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox.tsx";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText.tsx";
 import TabGroup from "~/components/Tabs/Tabs";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
@@ -10,7 +14,6 @@ import { dedent } from "~/utils/dedentMultilineStrings.ts";
 export default function Digitaltauglichkeit_index() {
   return (
     <>
-      <MetaTitle prefix={beispiele.title} />
       <Hero
         title="Beispiele für Digitaltauglichkeit"
         subtitle="Hier finden Sie Beispiele für digitaltaugliche Regelungen, sowie aus deren Erarbeitungsprozess. Lassen Sie sich inspirieren, wie in Regelungsvorhaben Digitaltauglichkeit beachtet wurde."

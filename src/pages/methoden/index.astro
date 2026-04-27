@@ -10,6 +10,6 @@ export const frontmatter = {
 const showInterviewLeitfaden = getFeatureFlag("showInterviewLeitfaden");
 ---
 
-<Layout showProgressBar={true}>
+<Layout title={frontmatter.title} showProgressBar={true}>
   <MethodenPage showInterviewLeitfaden={showInterviewLeitfaden} />
 </Layout>

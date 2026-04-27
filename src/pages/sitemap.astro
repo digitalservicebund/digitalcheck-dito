@@ -3,7 +3,6 @@ import Layout from "@/layouts/Layout.astro";
 import SitemapList from "@/components/SitemapList.astro";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Hero from "~/components/Hero";
-import MetaTitle from "~/components/Meta";
 import { allRoutes, type Route } from "@/config/routes";
 
 export const frontmatter = {
@@ -35,8 +34,7 @@ const groupRoutesByParent = (routes: readonly Route[]): RouteWithChildren[] => {
 const routes = groupRoutesByParent(allRoutes);
 ---
 
-<Layout>
-  <MetaTitle prefix={frontmatter.title} />
+<Layout title={frontmatter.title}>
   <main>
     <Hero title={frontmatter.title} />
     <ContentWrapper>

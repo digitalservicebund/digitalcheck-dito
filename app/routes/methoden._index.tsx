@@ -1,9 +1,7 @@
-import { methoden } from "@/config/routes";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
-import MetaTitle from "~/components/Meta";
 import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import SupportBanner from "~/components/SupportBanner";
@@ -66,7 +64,6 @@ export default function Methoden({
 } = {}) {
   return (
     <>
-      <MetaTitle prefix={methoden.title} />
       <main>
         <Hero subtitle={methods.subtitle} title={methods.title} />
 

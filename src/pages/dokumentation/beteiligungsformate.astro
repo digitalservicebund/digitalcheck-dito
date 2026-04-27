@@ -17,6 +17,10 @@ const result = await fetchStrapiData<{
 const prinzips = "error" in result ? [] : result.prinzips;
 ---
 
-<Layout showProgressBar={true}>
-  <DokumentationLayout client:only="react" prinzips={prinzips} page="beteiligungsformate" />
+<Layout title={frontmatter.title} showProgressBar={true}>
+  <DokumentationLayout
+    client:only="react"
+    prinzips={prinzips}
+    page="beteiligungsformate"
+  />
 </Layout>

@@ -7,6 +7,6 @@ export const frontmatter = {
 };
 ---
 
-<Layout showProgressBar={true}>
+<Layout title={frontmatter.title} showProgressBar={true}>
   <ErgebnisPage client:load />
 </Layout>

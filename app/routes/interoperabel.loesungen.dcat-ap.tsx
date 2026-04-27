@@ -11,7 +11,6 @@ import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
 import { InteroperableSolutionBanner } from "~/components/InteroperableSolutionBanner.tsx";
-import MetaTitle from "~/components/Meta";
 import NewTabLink from "~/components/NewTabLink";
 import RichText from "~/components/RichText";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
@@ -52,7 +51,6 @@ function ChapterBadge({ children }: { children: React.ReactNode }) {
 export default function InteroperableSolutionsDcatAp() {
   return (
     <>
-      <MetaTitle prefix="Data Catalogue Vocabulary Application Profile (DCAT-AP)" />
       <main>
         <div className="breakout-grid-toc space-y-16 bg-blue-100 pt-40 pb-48">
           <h1>{interoperabel_loesungen_dcatAp.title}</h1>

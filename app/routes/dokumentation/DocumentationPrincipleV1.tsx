@@ -20,7 +20,6 @@ import Dialog from "~/components/Dialog";
 import Heading from "~/components/Heading";
 import InlineNotice from "~/components/InlineNotice";
 import Input from "~/components/Input";
-import MetaTitle from "~/components/Meta";
 import PrincipleHighlightModifier from "~/components/PrincipleHighlightModifier.tsx";
 import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
@@ -513,7 +512,6 @@ export default function DocumentationPrincipleV1({
 
   return (
     <>
-      <MetaTitle prefix={`Dokumentation: ${prinzip.Name}`} />
       <div className="space-y-40">
         <PrincipleWithExample prinzip={prinzip} />
 

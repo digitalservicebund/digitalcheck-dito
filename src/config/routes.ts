@@ -113,7 +113,7 @@ export const dokumentation_beteiligungsformate = {
 export const dokumentation_hinweise = {
   key: "dokumentation_hinweise",
   path: "/dokumentation/hinweise",
-  title: "Hinweise",
+  title: "Dokumentation: Hinweise",
   parent: dokumentation,
   sitemap: true,
   isStagingOnly: false,
@@ -135,7 +135,7 @@ export const dokumentation_regelungsvorhabenTitel = {
 export const dokumentation_zusammenfassung = {
   key: "dokumentation_zusammenfassung",
   path: "/dokumentation/zusammenfassung",
-  title: "Zusammenfassung",
+  title: "Dokumentation: Zusammenfassung",
   parent: dokumentation,
   sitemap: true,
   isStagingOnly: false,

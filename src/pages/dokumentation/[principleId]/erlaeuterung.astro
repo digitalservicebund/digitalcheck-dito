@@ -26,6 +26,10 @@ export async function getStaticPaths() {
 const { prinzips } = Astro.props;
 ---
 
-<Layout showProgressBar={true}>
-  <DokumentationLayout client:only="react" prinzips={prinzips} page="erlaeuterung" />
+<Layout title={frontmatter.title} showProgressBar={true}>
+  <DokumentationLayout
+    client:only="react"
+    prinzips={prinzips}
+    page="erlaeuterung"
+  />
 </Layout>

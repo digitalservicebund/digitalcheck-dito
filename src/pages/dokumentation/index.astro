@@ -17,6 +17,6 @@ const result = await fetchStrapiData<{
 const prinzips = "error" in result ? [] : result.prinzips;
 ---
 
-<Layout>
+<Layout title={frontmatter.title}>
   <DokumentationIndexPage client:only="react" prinzips={prinzips} />
 </Layout>

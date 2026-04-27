@@ -1,4 +1,7 @@
-import { interoperabel_loesungen_coreVocabularies, interoperabel_loesungen_dcatAp } from "@/config/routes";
+import {
+  interoperabel_loesungen_coreVocabularies,
+  interoperabel_loesungen_dcatAp,
+} from "@/config/routes";
 import Button, { LinkButton } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import Heading from "~/components/Heading";

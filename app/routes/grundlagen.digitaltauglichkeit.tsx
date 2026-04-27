@@ -1,16 +1,13 @@
-import { grundlagen_digitaltauglichkeit } from "@/config/routes";
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList.tsx";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { fundamentalsDigitalReadiness } from "~/resources/content/grundlage-digitaltauglichkeit";
 
 export default function FundamentalsMethods() {
   return (
     <>
-      <MetaTitle prefix={grundlagen_digitaltauglichkeit.title} />
       <main>
         <Hero
           title={fundamentalsDigitalReadiness.title}

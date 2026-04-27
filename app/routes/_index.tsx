@@ -1,4 +1,15 @@
-import { beispiele_prinzipien, beispiele_visualisierungen, dokumentation, grundlagen_digitaltauglichkeit, grundlagen_normenkontrollrat, methoden, methoden_fuenfPrinzipien, methoden_visualisieren, unterstuetzung, vorpruefung } from "@/config/routes";
+import {
+  beispiele_prinzipien,
+  beispiele_visualisierungen,
+  dokumentation,
+  grundlagen_digitaltauglichkeit,
+  grundlagen_normenkontrollrat,
+  methoden,
+  methoden_fuenfPrinzipien,
+  methoden_visualisieren,
+  unterstuetzung,
+  vorpruefung,
+} from "@/config/routes";
 import {
   Close as CloseIcon,
   ContactPhoneOutlined as ContactPhoneOutlinedIcon,
@@ -13,7 +24,6 @@ import Heading from "~/components/Heading";
 import { BreakoutHero } from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -77,7 +87,6 @@ export default function Index() {
 
   return (
     <>
-      <MetaTitle />
       <main className="breakout-grid">
         <BreakoutHero
           title="Digitaltaugliche Regelungen erarbeiten"

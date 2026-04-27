@@ -6,7 +6,6 @@ import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
-import MetaTitle from "~/components/Meta";
 import ParagraphList from "~/components/ParagraphList";
 import RegulationMetadata from "~/components/RegulationMetadata";
 import Separator from "~/components/Separator";
@@ -33,7 +32,6 @@ export default function DigitaltauglichkeitPrinzipienDetail({
 
   return (
     <>
-      <MetaTitle prefix={beispiele_prinzipien.title} />
       <Hero
         title={examplesRegelungen.principles.hero.title}
         subtitle={examplesRegelungen.principles.hero.subtitle}

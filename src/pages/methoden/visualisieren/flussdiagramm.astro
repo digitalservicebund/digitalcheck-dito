@@ -7,6 +7,6 @@ import Layout from "@/layouts/Layout.astro";
 import FlussdiagrammPage from "~/routes/methoden.visualisieren.flussdiagramm";
 ---
 
-<Layout showProgressBar={true}>
+<Layout title={frontmatter.title} showProgressBar={true}>
   <FlussdiagrammPage client:load />
 </Layout>

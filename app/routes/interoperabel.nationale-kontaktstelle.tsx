@@ -1,4 +1,3 @@
-import { interoperabel_nationaleKontaktstelle } from "@/config/routes";
 import { type ReactNode } from "react";
 import AccordionItem from "~/components/AccordionItem";
 import Badge from "~/components/Badge.tsx";
@@ -7,7 +6,6 @@ import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import ImageZoomable from "~/components/ImageZoomable";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import TabGroup from "~/components/Tabs/Tabs";
 import Timeline from "~/components/Timeline";
@@ -126,7 +124,6 @@ ServiceUndKontakt.tabName = spoc.contact.tabName;
 export default function SinglePointOfContact() {
   return (
     <>
-      <MetaTitle prefix={interoperabel_nationaleKontaktstelle.title} />
       <main>
         <Hero title={spoc.headline}>
           <RichText

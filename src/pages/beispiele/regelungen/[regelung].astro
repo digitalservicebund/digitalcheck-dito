@@ -84,6 +84,6 @@ const principles =
     : prinzipsResult.prinzips.toSorted((a, b) => a.order - b.order);
 ---
 
-<Layout>
+<Layout title={frontmatter.title}>
   <GesetzPage regelung={regelungData} principles={principles} />
 </Layout>

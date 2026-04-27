@@ -6,7 +6,6 @@ import { BlocksRenderer } from "~/components/BlocksRenderer";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
-import MetaTitle from "~/components/Meta";
 import Textarea from "~/components/Textarea";
 import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
@@ -196,7 +195,6 @@ export default function DocumentationPrincipleErlaeuterung() {
 
   return (
     <>
-      <MetaTitle prefix={`Dokumentation: ${prinzip.Name} – Erläuterung`} />
       <div className="space-y-48">
         <div className="space-y-24">
           <Badge principleNumber={prinzip.Nummer} className="mb-8">

@@ -11,7 +11,6 @@ import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
 import { InteroperableSolutionBanner } from "~/components/InteroperableSolutionBanner.tsx";
-import MetaTitle from "~/components/Meta";
 import NewTabLink from "~/components/NewTabLink.tsx";
 import RichText from "~/components/RichText";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
@@ -61,9 +60,6 @@ function ChapterBadge({ children }: Readonly<{ children: React.ReactNode }>) {
 export default function InteroperableSolutionsDcatAp() {
   return (
     <>
-      <MetaTitle
-        prefix={interoperabel_loesungen_coreVocabularies.title}
-      />
       <main>
         <div className="breakout-grid-toc space-y-16 bg-blue-100 pt-40 pb-48">
           <h1>{interoperabel_loesungen_coreVocabularies.title}</h1>

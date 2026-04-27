@@ -1,7 +1,5 @@
-import { dasIstNeu } from "@/config/routes";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Hero from "~/components/Hero";
-import MetaTitle from "~/components/Meta";
 import Timeline, {
   type TimelineItemContentProps,
 } from "~/components/Timeline.tsx";
@@ -20,7 +18,6 @@ export default function VersionHistory() {
 
   return (
     <>
-      <MetaTitle prefix={dasIstNeu.title} />
       <main>
         <Hero title={news.title} subtitle={news.subtitle} />
 

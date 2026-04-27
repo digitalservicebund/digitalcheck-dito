@@ -1,7 +1,6 @@
-import { grundlagen_digitaltauglichkeit, interoperabel, interoperabel_faq } from "@/config/routes";
+import { grundlagen_digitaltauglichkeit, interoperabel } from "@/config/routes";
 import AccordionItem from "~/components/AccordionItem";
 import Hero from "~/components/Hero";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 
 import { contact } from "~/resources/content/shared/contact";
@@ -152,7 +151,6 @@ const faqItems = [
 export default function Faq() {
   return (
     <>
-      <MetaTitle prefix={interoperabel_faq.title} />
       <main>
         <Hero title="Fragen und Antworten">
           <p>

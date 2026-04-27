@@ -8,7 +8,7 @@ import {
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
 export const frontmatter = {
-  title: "Hinweise",
+  title: "Dokumentation: Hinweise",
 };
 
 const result = await fetchStrapiData<{
@@ -17,6 +17,10 @@ const result = await fetchStrapiData<{
 const prinzips = "error" in result ? [] : result.prinzips;
 ---
 
-<Layout showProgressBar={true}>
-  <DokumentationLayout client:only="react" prinzips={prinzips} page="hinweise" />
+<Layout title={frontmatter.title} showProgressBar={true}>
+  <DokumentationLayout
+    client:only="react"
+    prinzips={prinzips}
+    page="hinweise"
+  />
 </Layout>

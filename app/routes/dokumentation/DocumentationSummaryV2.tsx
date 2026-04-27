@@ -1,7 +1,6 @@
 import {
   dokumentation_beteiligungsformate,
   dokumentation_regelungsvorhabenTitel,
-  dokumentation_zusammenfassung,
   type Route,
 } from "@/config/routes";
 import { type ReactNode } from "react";
@@ -11,7 +10,6 @@ import type { InfoBoxProps } from "~/components/InfoBox";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
 import InlineNotice from "~/components/InlineNotice";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
@@ -280,9 +278,6 @@ export default function DocumentationSummaryV2() {
 
   return (
     <>
-      <MetaTitle
-        prefix={`Dokumentation: ${dokumentation_zusammenfassung.title}`}
-      />
       <Heading
         text={summary.headline}
         tagName="h1"
