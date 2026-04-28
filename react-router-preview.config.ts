@@ -1,6 +1,11 @@
 import type { Config } from "@react-router/dev/config";
 
-import { ROUTES } from "./app/resources/staticRoutes";
+import {
+  ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
+  ROUTES,
+  ROUTES_DOCUMENTATION_FINALIZE,
+  ROUTES_DOCUMENTATION_INTRO,
+} from "./app/resources/staticRoutes";
 import {
   fetchStrapiData,
   GET_PRINZIPS_QUERY,
@@ -44,9 +49,14 @@ async function getPreviewPrerenderPaths(): Promise<string[]> {
     ...regelungSlugs.map((slug) => `/beispiele/regelungen/${slug}`),
   ];
 
-  const staticPaths = ROUTES.map((r) => r.url);
+  const staticPaths = [
+    ...ROUTES.map((r) => r.url),
+    ...ROUTES_DOCUMENTATION_INTRO.map((r) => r.url),
+    ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT.url,
+    ...ROUTES_DOCUMENTATION_FINALIZE.map((r) => r.url),
+  ];
 
-  return [...staticPaths, ...dynamicPaths];
+  return [...new Set([...staticPaths, ...dynamicPaths])];
 }
 
 export const previewConfig = {
