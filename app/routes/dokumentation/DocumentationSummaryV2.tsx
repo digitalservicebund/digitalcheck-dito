@@ -251,7 +251,7 @@ export default function DocumentationSummaryV2() {
     ...prinzips.map((prinzip) => {
       const principleRoute = routes
         .flat()
-        .find((route) => route.url.endsWith(prinzip.URLBezeichnung));
+        .find((route) => route.path.endsWith(prinzip.URLBezeichnung));
       if (!principleRoute)
         throw new Error(
           `Cannot find route for principle ${prinzip.URLBezeichnung}`,
@@ -261,7 +261,7 @@ export default function DocumentationSummaryV2() {
       ) as Principle;
       // In simplified flow, link to erlaeuterung sub-page if answer is saved
       const editRoute = principleFormData?.answer
-        ? { ...principleRoute, path: `${principleRoute.url}/erlaeuterung` }
+        ? { ...principleRoute, path: `${principleRoute.path}/erlaeuterung` }
         : principleRoute;
       return createInfoBoxItem({
         route: editRoute,

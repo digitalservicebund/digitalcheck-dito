@@ -240,7 +240,7 @@ export default function DocumentationSummaryV1() {
     ...prinzips.map((prinzip) => {
       const principleRoute = routes
         .flat()
-        .find((route) => route.url.endsWith(prinzip.URLBezeichnung));
+        .find((route) => route.path.endsWith(prinzip.URLBezeichnung));
       if (!principleRoute)
         throw new Error(
           `Cannot find route for principle ${prinzip.URLBezeichnung}`,

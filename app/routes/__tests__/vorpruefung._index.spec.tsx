@@ -76,7 +76,7 @@ describe("Vorpruefung Index Route - Integration Tests", () => {
       const startButton = screen.getByRole("link", {
         name: "Vorprüfung fortsetzen",
       });
-      expect(startButton).toHaveAttribute("href", questions[1].url);
+      expect(startButton).toHaveAttribute("href", questions[1].path);
     });
 
     it("renders the CTA button to restart vorpruefung", () => {

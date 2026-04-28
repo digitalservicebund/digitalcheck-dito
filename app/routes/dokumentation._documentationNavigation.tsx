@@ -26,7 +26,7 @@ type Route = _Route & {
 export type OnNavigateCallback = () => Promise<boolean>;
 export type NavigationContext = {
   currentUrl: string;
-  nextUrl: string | null;
+  nextUrl: string;
   previousUrl: string;
   routes: (Route | Route[])[];
   prinzips: PrinzipWithAspekteAndExample[];
