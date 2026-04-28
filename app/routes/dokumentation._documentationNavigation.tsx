@@ -9,6 +9,7 @@ import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
   type Route as _Route,
   ROUTE_DOCUMENTATION,
+  ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
   ROUTE_DOCUMENTATION_NOTES,
   ROUTE_DOCUMENTATION_SEND,
   ROUTE_DOCUMENTATION_SUMMARY,
@@ -61,15 +62,35 @@ function resolveAdjacentUrl(
   getAdjacent: (routes: Route[], url: string) => string | null,
   simplifiedFlow: boolean,
   findData: (id: string) => unknown,
+  isRouteAccessible: (route: Route) => boolean,
 ): string | null {
-  const rawUrl = getAdjacent(flatRoutes, fromUrl);
-  if (!rawUrl || !simplifiedFlow) return rawUrl;
-  const route = flatRoutes.find((r) => r.url === rawUrl);
-  if (route?.principleId) {
-    const data = findData(route.principleId) as { answer?: string } | undefined;
-    if (data?.answer) return `${rawUrl}/erlaeuterung`;
+  let currentUrl = fromUrl;
+  const visited = new Set<string>();
+
+  while (true) {
+    const rawUrl = getAdjacent(flatRoutes, currentUrl);
+    if (!rawUrl) return rawUrl;
+    if (visited.has(rawUrl)) return null;
+
+    visited.add(rawUrl);
+
+    const route = flatRoutes.find((r) => r.url === rawUrl);
+    if (route && !isRouteAccessible(route)) {
+      currentUrl = rawUrl;
+      continue;
+    }
+
+    if (!simplifiedFlow) return rawUrl;
+
+    if (route?.principleId) {
+      const data = findData(route.principleId) as
+        | { answer?: string }
+        | undefined;
+      if (data?.answer) return `${rawUrl}/erlaeuterung`;
+    }
+
+    return rawUrl;
   }
-  return rawUrl;
 }
 
 export default function LayoutWithDocumentationNavigation() {
@@ -94,8 +115,25 @@ export default function LayoutWithDocumentationNavigation() {
   // For nav/stepper index lookups, use principle URL when on erlaeuterung page
   const navigationCurrentUrl = principleBaseUrl ?? currentUrl;
 
-  const { findDocumentationDataForUrl, getDocumentationSchemaFormUrl } =
-    useDocumentationDataService();
+  const {
+    documentationData,
+    findDocumentationDataForUrl,
+    getDocumentationSchemaFormUrl,
+  } = useDocumentationDataService();
+
+  const isInteroperabilityAssessmentAccessible =
+    documentationData.euInteroperabilityOutcome?.outcomeId === "REQUIRED";
+
+  const isRouteAccessible = (route: Route) => {
+    if (
+      route.url === ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT.url &&
+      !isInteroperabilityAssessmentAccessible
+    ) {
+      return false;
+    }
+
+    return true;
+  };
 
   const flatRoutes = routes.flat();
   const currentRoute = flatRoutes.find((r) => r.url === navigationCurrentUrl);
@@ -110,6 +148,7 @@ export default function LayoutWithDocumentationNavigation() {
         getNextUrl,
         simplifiedFlow,
         findDocumentationDataForUrl,
+        isRouteAccessible,
       )
     : simplifiedFlow &&
         currentRoute?.principleId &&
@@ -121,6 +160,7 @@ export default function LayoutWithDocumentationNavigation() {
           getNextUrl,
           simplifiedFlow,
           findDocumentationDataForUrl,
+          isRouteAccessible,
         );
   const previousUrl =
     resolveAdjacentUrl(
@@ -129,6 +169,7 @@ export default function LayoutWithDocumentationNavigation() {
       getPreviousUrl,
       simplifiedFlow,
       findDocumentationDataForUrl,
+      isRouteAccessible,
     ) ?? ROUTE_DOCUMENTATION.url;
 
   const isNavigationDisabled = currentUrl === ROUTE_DOCUMENTATION_NOTES.url;
@@ -167,7 +208,7 @@ export default function LayoutWithDocumentationNavigation() {
         }
         error={formData && !valid.success}
         completed={formData && valid.success}
-        disabled={isNavigationDisabled}
+        disabled={isNavigationDisabled || !isRouteAccessible(route)}
       >
         {route.title}
       </Nav.Item>
@@ -213,7 +254,7 @@ export default function LayoutWithDocumentationNavigation() {
           <div className="lg:hidden">
             <Stepper
               currentElementUrl={navigationCurrentUrl}
-              elements={routes.flat()}
+              elements={routes.flat().filter(isRouteAccessible)}
             />
           </div>
           {/* force remount for different principles with key={currentUrl} */}

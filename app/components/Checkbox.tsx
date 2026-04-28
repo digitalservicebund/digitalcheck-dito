@@ -28,6 +28,7 @@ export interface CheckboxProps extends BaseInputProps {
    * Change handler that overrides the RVF handler, to enable custom behavior.
    */
   onChange?: ChangeEventHandler<HTMLInputElement>;
+  look?: "regular" | "bold";
 }
 
 function Checkbox({
@@ -39,6 +40,7 @@ function Checkbox({
   warningInsteadOfError,
   checked,
   onChange,
+  look = "bold",
   ...rest
 }: Readonly<CheckboxProps>) {
   const field = useField(scope);
@@ -77,8 +79,9 @@ function Checkbox({
           <label
             htmlFor={inputId}
             className={twJoin(
-              "ds-body-01-bold min-h-auto! space-x-8 p-0!", // overwrite styles from ds-checkbox with "!"
+              "min-h-auto! space-x-8 p-0!", // overwrite styles from ds-checkbox with "!"
               disabled && "pointer-events-none",
+              look === "regular" ? "ds-body-01-reg" : "ds-body-01-bold",
             )}
           >
             {children}

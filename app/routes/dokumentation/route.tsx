@@ -2,6 +2,7 @@ import { Outlet, useRouteLoaderData } from "react-router";
 import {
   Route as _Route,
   ROUTE_DOCUMENTATION,
+  ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
   ROUTES_DOCUMENTATION_FINALIZE,
   ROUTES_DOCUMENTATION_INTRO,
 } from "~/resources/staticRoutes.ts";
@@ -47,6 +48,7 @@ export const loader: () => Promise<DocumentationRouteData> = async () => {
       url: getUrlForSlug(URLBezeichnung),
       principleId: documentId,
     })),
+    ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
     ...ROUTES_DOCUMENTATION_FINALIZE,
   ];
 
