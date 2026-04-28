@@ -26,9 +26,8 @@ import {
 const { mockDownloadDocumentation } = vi.hoisted(() => ({
   mockDownloadDocumentation: vi.fn(),
 }));
-vi.mock("~/service/wordDocumentationExport/wordDocumentation", () => ({
-  default: mockDownloadDocumentation,
-  useWordDocumentation: vi.fn(() => ({
+vi.mock("~/service/wordDocumentationExport/wordDocumentationV2", () => ({
+  useWordDocumentationV2: vi.fn(() => ({
     downloadDocumentation: mockDownloadDocumentation,
   })),
 }));

@@ -31,95 +31,6 @@ export const participationSchema = z.object({
     .min(1, { message: participation.results.textField.errorMessage }),
 });
 
-// TODO: delete when feature flag simplifiedPrincipleFlow is on
-/**
- * @deprecated use new principleReasoningSchema below
- */
-const principleReasoningSchemaV1 = z
-  .object({
-    aspect: z.string().optional(),
-    checkbox: z.literal(["on", true]).optional(), // HTML checkboxes use "on" as value when checked whilst rvf converts in into boolean
-    paragraphs: z.string().optional(),
-    reason: z.string().optional(),
-  })
-  .superRefine((val, ctx) => {
-    if (val.checkbox === undefined) return;
-
-    if (!val.paragraphs && !val.reason) {
-      ctx.addIssue({
-        code: "custom",
-        message: principlePages.errors.paragraphsError,
-        input: val,
-        path: ["paragraphs"],
-      });
-
-      ctx.addIssue({
-        code: "custom",
-        message: principlePages.errors.reasonError,
-        input: val,
-        path: ["reason"],
-      });
-    }
-  });
-
-// TODO: delete when feature flag simplifiedPrincipleFlow is on
-/**
- * @deprecated use new principlePositiveAnswerSchema below
- */
-const principlePositiveAnswerSchemaV1 = z.object({
-  answer: z.literal(principlePages.radioOptions[0]),
-  reasoning: z
-    .array(principleReasoningSchemaV1, {
-      error: principlePages.errors.reasoningError,
-    })
-    .optional()
-    .superRefine((val, ctx) => {
-      const checkedItems = val?.filter((item) => item.checkbox !== undefined);
-      if (!checkedItems || checkedItems.length === 0) {
-        ctx.addIssue({
-          code: "custom",
-          message: principlePages.errors.reasoningError,
-          input: val,
-        });
-      }
-    }),
-});
-
-/**
- * @deprecated use new principleNegativeAnswerSchemaV2
- */
-export const principleNegativeAnswerSchemaV1 = z.object({
-  answer: z.literal(principlePages.radioOptions[1]),
-  reasoning: z.string().min(1, { message: principlePages.errors.reasonError }),
-});
-
-/**
- * @deprecated use new principleIrrelevantAnswerSchemaV2
- */
-export const principleIrrelevantAnswerSchemaV1 = z.object({
-  answer: z.literal(principlePages.radioOptions[2]),
-  reasoning: z.string().min(1, { message: principlePages.errors.reasonError }),
-});
-
-/**
- * @deprecated use new principleSchemaV2
- */
-export const principleSchemaV1 = z
-  .discriminatedUnion(
-    "answer",
-    [
-      principlePositiveAnswerSchemaV1,
-      principleNegativeAnswerSchemaV1,
-      principleIrrelevantAnswerSchemaV1,
-    ],
-    { message: principlePages.errors.answerError },
-  )
-  .and(
-    z.object({
-      id: z.string(),
-    }),
-  );
-
 export const principleAnswerOnlySchema = z.object({
   answer: z.enum(
     [
@@ -185,48 +96,41 @@ export const defaultParticipationValues: Participation = {
   results: "",
 };
 
-export const defaultValues: DocumentationSchemaV2 | DocumentationSchemaV1 = {
+export const defaultValues: DocumentationSchemaV2 = {
   policyTitle: defaultTitleValues,
   participation: defaultParticipationValues,
   principles: [],
 };
 
-// documentationSchemaV2 <- current
 export const documentationSchemaV2 = z.object({
   policyTitle: policyTitleSchema.optional(),
   participation: participationSchema.optional(),
   principles: z.array(principleSchemaV2).optional(),
 });
 
-/**
- * @deprecated use documentationSchemaV2 above
- */
-export const documentationSchemaV1 = z.object({
-  ...documentationSchemaV2.shape,
-  principles: z.array(principleSchemaV1).optional(),
-});
-
-export const getDocumentationSchemaFormUrl = (
-  url: string,
-  simplified = false,
-) => {
+export const getDocumentationSchemaFormUrl = (url: string) => {
   if (url === ROUTE_DOCUMENTATION_TITLE.url) return policyTitleSchema;
   else if (url === ROUTE_DOCUMENTATION_PARTICIPATION.url)
     return participationSchema;
-  else return simplified ? principleSchemaV2 : principleSchemaV1;
+  else return principleSchemaV2;
 };
 
-export type PrincipleReasoningV1 = z.infer<typeof principleReasoningSchemaV1>;
+// V1 types are kept solely so migrateV1ToV2 (in DocumentationDataProvider) can
+// type its input. V1 data may still exist in users' localStorage from before
+// the simplifiedPrincipleFlow rollout.
+export type PrincipleReasoningV1 = {
+  aspect?: string;
+  checkbox?: "on" | true;
+  paragraphs?: string;
+  reason?: string;
+};
 
-// TODO: do I need them?
-export type NegativeAnswerReasoning = z.infer<
-  typeof principleNegativeAnswerSchemaV1
->["reasoning"];
-export type IrrelevantAnswerReasoning = z.infer<
-  typeof principleIrrelevantAnswerSchemaV1
->["reasoning"];
+type PrincipleV1 = {
+  id: string;
+  answer: (typeof principlePages.radioOptions)[number];
+  reasoning?: PrincipleReasoningV1[] | string;
+};
 
-type PrincipleV1 = z.infer<typeof principleSchemaV1>;
 type PrincipleV2 = z.infer<typeof principleSchemaV2>;
 
 export type Principle<V extends DataSchemaVersion = V2> = V extends V1
@@ -237,7 +141,6 @@ export type PolicyTitle = z.infer<typeof policyTitleSchema>;
 export type Participation = z.infer<typeof participationSchema>;
 
 type DocumentationSchemaV2 = z.infer<typeof documentationSchemaV2>;
-type DocumentationSchemaV1 = z.infer<typeof documentationSchemaV1>;
 
 export type DocumentationData<V extends DataSchemaVersion = V2> = {
   policyTitle?: PolicyTitle;

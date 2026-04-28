@@ -3,7 +3,6 @@ export const features = {
   showInterviewLeitfaden: "showInterviewLeitfaden",
   showCoreVocabularies: "showCoreVocabularies",
   showIOEuRechtContent: "showIOEuRechtContent",
-  simplifiedPrincipleFlow: "simplifiedPrincipleFlow",
   showStrapiDrafts: "showStrapiDrafts",
 } as const;
 export type FeatureFlag = keyof typeof features;

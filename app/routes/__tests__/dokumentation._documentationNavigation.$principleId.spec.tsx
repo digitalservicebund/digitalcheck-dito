@@ -3,7 +3,7 @@ import "./utils/mockLocalStorageVersioned";
 import "./utils/mockRouter";
 // End of mocks
 import "@testing-library/jest-dom";
-import { act, render, screen, waitFor, within } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import userEvent, { UserEvent } from "@testing-library/user-event";
 import {
   createBrowserRouter,
@@ -13,7 +13,6 @@ import {
 } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
-import type { digitalDocumentation } from "~/resources/content/dokumentation";
 import { Route, ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import {
@@ -24,9 +23,9 @@ import { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationPrinciple from "../dokumentation._documentationNavigation.$principleId";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import {
-  DATA_SCHEMA_VERSION_V1,
+  DATA_SCHEMA_VERSION_V2,
   DocumentationData,
-  V1,
+  V2,
 } from "../dokumentation/documentationDataSchema";
 
 const routes: (Route[] | Route)[] = [
@@ -98,6 +97,7 @@ const context: NavigationContext = {
 
 const mockedUseOutletContext = vi.mocked(useOutletContext);
 const mockedUseParams = vi.mocked(useParams);
+
 const renderWithRouter = () => {
   const router = createBrowserRouter([
     {
@@ -115,230 +115,7 @@ const renderWithRouter = () => {
   return render(<RouterProvider router={router} />);
 };
 
-type AnswerScenario = {
-  name: string;
-  answer: (typeof digitalDocumentation.principlePages.radioOptions)[number];
-  expected: {
-    showsAspekte: boolean;
-  };
-};
-
-const answerScenarios: AnswerScenario[] = [
-  {
-    name: "positive answer, no aspect selected",
-    answer: "Ja, gänzlich oder teilweise",
-    expected: {
-      showsAspekte: true,
-    },
-  },
-  {
-    name: "negative answer",
-    answer: "Nein",
-    expected: {
-      showsAspekte: false,
-    },
-  },
-  {
-    name: "irrelevant answer",
-    answer: "Nicht relevant",
-    expected: {
-      showsAspekte: false,
-    },
-  },
-];
-
-type ValidationScenario = {
-  name: string;
-  answer: (typeof digitalDocumentation.principlePages.radioOptions)[number];
-  documentationData: DocumentationData<V1>;
-  expected: {
-    validReasoning: boolean;
-    validReasoningParagraphs?: boolean;
-    validReasoningReason?: boolean;
-  };
-};
-
-const formValidationScenarios: ValidationScenario[] = [
-  {
-    name: "positive answer with filled aspects",
-    answer: "Ja, gänzlich oder teilweise",
-    documentationData: {
-      version: DATA_SCHEMA_VERSION_V1,
-      principles: [
-        {
-          answer: "Ja, gänzlich oder teilweise",
-          id: "1",
-          reasoning: [
-            {
-              checkbox: "on",
-              aspect: "aspect-1",
-              paragraphs: "paragraf 1",
-              reason: "begründung 1",
-            },
-          ],
-        },
-      ],
-    },
-    expected: {
-      validReasoning: true,
-      validReasoningParagraphs: true,
-      validReasoningReason: true,
-    },
-  },
-  {
-    name: "positive answer with partial filled aspects",
-    answer: "Ja, gänzlich oder teilweise",
-    documentationData: {
-      version: DATA_SCHEMA_VERSION_V1,
-      principles: [
-        {
-          answer: "Ja, gänzlich oder teilweise",
-          id: "1",
-          reasoning: [
-            {
-              checkbox: "on",
-              aspect: "aspect-1",
-              paragraphs: "",
-              reason: "begründung 1",
-            },
-          ],
-        },
-      ],
-    },
-    expected: {
-      validReasoning: true,
-      validReasoningParagraphs: true,
-      validReasoningReason: true,
-    },
-  },
-  {
-    name: "positive answer with unfilled aspects",
-    answer: "Ja, gänzlich oder teilweise",
-    documentationData: {
-      version: DATA_SCHEMA_VERSION_V1,
-      principles: [
-        {
-          answer: "Ja, gänzlich oder teilweise",
-          id: "1",
-          reasoning: [],
-        },
-      ],
-    },
-    expected: {
-      validReasoning: false,
-      validReasoningParagraphs: true,
-      validReasoningReason: true,
-    },
-  },
-  {
-    name: "negative answer with filled reasoning",
-    answer: "Nein",
-    documentationData: {
-      version: DATA_SCHEMA_VERSION_V1,
-      principles: [
-        {
-          answer: "Nein",
-          id: "1",
-          reasoning: "reasoning 1",
-        },
-      ],
-    },
-    expected: {
-      validReasoning: true,
-    },
-  },
-  {
-    name: "negative answer with unfilled reasoning",
-    answer: "Nein",
-    documentationData: {
-      version: DATA_SCHEMA_VERSION_V1,
-      principles: [
-        {
-          answer: "Nein",
-          id: "1",
-          reasoning: "",
-        },
-      ],
-    },
-    expected: {
-      validReasoning: false,
-    },
-  },
-  {
-    name: "irrelevant answer with filled reasoning",
-    answer: "Nicht relevant",
-    documentationData: {
-      version: DATA_SCHEMA_VERSION_V1,
-      principles: [
-        {
-          answer: "Nicht relevant",
-          id: "1",
-          reasoning: "reasoning 1",
-        },
-      ],
-    },
-    expected: {
-      validReasoning: true,
-    },
-  },
-  {
-    name: "irrelevant answer with unfilled reasoning",
-    answer: "Nicht relevant",
-    documentationData: {
-      version: DATA_SCHEMA_VERSION_V1,
-      principles: [
-        {
-          answer: "Nicht relevant",
-          id: "1",
-          reasoning: "",
-        },
-      ],
-    },
-    expected: {
-      validReasoning: false,
-    },
-  },
-];
-
-const getAspektCheckbox = () =>
-  screen.getByLabelText(aspekte[0].Kurzbezeichnung);
-
-const getOwnReasoningCheckbox = () => screen.getByLabelText("Eigener Punkt");
-
-const getAddExplanationBtn = () =>
-  screen.getByRole("button", { name: "Eigene Erklärung hinzufügen" });
-
-const expectErrorUnless = async (
-  condition: boolean | undefined,
-  error: string | RegExp,
-  label: string = "",
-  parentHasAlertRole: boolean = false,
-) => {
-  await waitFor(() => {
-    let inputEl;
-    if (label.length > 0) {
-      inputEl = screen.getByLabelText(label);
-      expect(inputEl).toBeInTheDocument();
-    }
-    const errorEl = screen.queryByText(error);
-
-    if (condition) {
-      if (inputEl) expect(inputEl).toBeValid();
-      expect(errorEl).not.toBeInTheDocument();
-    } else {
-      if (inputEl) {
-        expect(inputEl).toBeInvalid();
-        expect(inputEl).toHaveAccessibleErrorMessage(error);
-      }
-      expect(errorEl).toBeInTheDocument();
-      if (parentHasAlertRole) {
-        expect(errorEl?.parentElement?.parentElement).toHaveRole("alert");
-      } else expect(errorEl).toHaveRole("alert");
-    }
-  });
-};
-
-describe("DocumentationPrinciple", () => {
+describe("DocumentationPrincipleV2", () => {
   beforeEach(() => {
     mockedUseOutletContext.mockReturnValue(context);
     mockedUseParams.mockReturnValue({
@@ -355,25 +132,20 @@ describe("DocumentationPrinciple", () => {
 
     expect(
       screen.getByRole("heading", {
-        name: "Prinzip 1: Digitale Angebote",
+        name: /Prinzip 1: Digitale Angebote/,
         level: 1,
       }),
     ).toBeInTheDocument();
   });
 
-  it("shows the example text and details", () => {
+  it("shows the question heading", () => {
     renderWithRouter();
-    const summaryElement = screen.getByText("Beispiel zum Prinzip", {
-      selector: "details > summary",
-    });
-    expect(summaryElement).toBeInTheDocument();
+
     expect(
-      within(summaryElement.parentElement!).getByText("§ 42 TestG"),
-    ).toBeInTheDocument();
-    expect(
-      within(summaryElement.parentElement!).getByText(
-        "Dies ist der Text des Beispiel-Absatzes.",
-      ),
+      screen.getByRole("heading", {
+        level: 2,
+        name: /Schafft das Regelungsvorhaben/,
+      }),
     ).toBeInTheDocument();
   });
 
@@ -407,182 +179,48 @@ describe("DocumentationPrinciple", () => {
     expect(backButton).toHaveAttribute("href", "/previous-url");
   });
 
-  describe("answer scenarios", () => {
-    let user: UserEvent;
-
-    beforeEach(() => {
-      renderWithRouter();
-    });
-
-    describe.each(answerScenarios)(
-      "principle form test: $name",
-      ({ answer, expected }) => {
-        beforeEach(async () => {
-          user = userEvent.setup();
-
-          await user.click(screen.getByLabelText(answer));
-        });
-
-        it(`shows the correct form fields for answer: ${answer}`, () => {
-          expect(
-            screen.getByRole("heading", {
-              level: 2,
-              name: "Erläuterung angeben",
-            }),
-          ).toBeInTheDocument();
-
-          if (expected.showsAspekte) {
-            expect(getAspektCheckbox()).toBeInTheDocument();
-            expect(getAddExplanationBtn()).toBeInTheDocument();
-          } else {
-            expect(screen.getByLabelText("Begründung")).toBeInTheDocument();
-          }
-        });
-
-        describe.runIf(expected.showsAspekte)("Positive Answer", () => {
-          it("shows the correct form elements for a predefined Aspekt", async () => {
-            const a1Checkbox = getAspektCheckbox();
-            await user.click(a1Checkbox);
-
-            const a1Element =
-              a1Checkbox.parentElement!.parentElement!.parentElement!;
-
-            expect(
-              within(a1Element).getByLabelText("Paragrafen"),
-            ).toBeInTheDocument();
-
-            expect(
-              within(a1Element).getByLabelText(
-                "Begründung mit Textreferenz (empfohlen für bessere Zuordnung)",
-              ),
-            ).toBeInTheDocument();
-          });
-
-          it("allows to add an own explanation", async () => {
-            await user.click(
-              screen.getByRole("button", {
-                name: "Eigene Erklärung hinzufügen",
-              }),
-            );
-
-            const ownElement =
-              getOwnReasoningCheckbox().parentElement!.parentElement!
-                .parentElement!;
-
-            expect(
-              within(ownElement).getByLabelText("Paragrafen"),
-            ).toBeInTheDocument();
-
-            expect(
-              within(ownElement).getByLabelText(
-                "Begründung mit Textreferenz (empfohlen für bessere Zuordnung)",
-              ),
-            ).toBeInTheDocument();
-          });
-
-          it("asks for confirmation when removing an explanation", async () => {
-            const a1Checkbox = getAspektCheckbox();
-            expect(a1Checkbox).not.toBeChecked();
-
-            await user.click(a1Checkbox);
-            expect(a1Checkbox).toBeChecked();
-
-            await user.click(a1Checkbox);
-            expect(a1Checkbox).toBeChecked(); // still checked
-
-            const dialog = screen.getByRole("dialog");
-            const dismissButton = within(dialog).getByRole("button", {
-              name: "Abbrechen",
-            });
-
-            await user.click(dismissButton);
-            expect(a1Checkbox).toBeChecked(); // still checked
-
-            await user.click(a1Checkbox);
-            const newDialog = screen.getByRole("dialog");
-            const confirmButton = within(newDialog).getByRole("button", {
-              name: "Löschen bestätigen",
-            });
-
-            await user.click(confirmButton);
-            expect(a1Checkbox).not.toBeChecked();
-          });
-        });
-      },
-    );
-  });
-
-  describe("form validation", () => {
-    describe.each(formValidationScenarios)(
-      "form validation scenario: $name",
-      ({ documentationData, expected, answer }) => {
-        beforeEach(() => {
-          vi.mocked(readDataFromLocalStorage).mockReturnValue(
-            documentationData,
-          );
-
-          act(() => {
-            renderWithRouter();
-          });
-        });
-
-        it.runIf(answer === "Ja, gänzlich oder teilweise")(
-          "shows the correct validation for reasoning",
-          async () => {
-            await expectErrorUnless(
-              expected.validReasoning,
-              /Bitte geben Sie mindestens eine Erläuterung an/,
-              "",
-              true,
-            );
-
-            if (expected.validReasoning) {
-              await expectErrorUnless(
-                expected.validReasoningParagraphs,
-                /Bitte geben Sie einen Paragrafen an/,
-                "Paragrafen",
-              );
-
-              await expectErrorUnless(
-                expected.validReasoningReason,
-                /Bitte geben Sie eine Begründung an/,
-                "Begründung mit Textreferenz (empfohlen für bessere Zuordnung)",
-              );
-            }
-          },
-        );
-
-        it.runIf(answer !== "Ja, gänzlich oder teilweise")(
-          "shows the correct validation for reasoning",
-          async () => {
-            await expectErrorUnless(
-              expected.validReasoning,
-              /Bitte geben Sie eine Begründung an/,
-              "Begründung",
-            );
-          },
-        );
-      },
-    );
-  });
-
-  describe("validation behavior", () => {
+  describe("V2 simplicity - no aspects or reasoning on this page", () => {
     let user: UserEvent;
 
     beforeEach(() => {
       user = userEvent.setup();
+      renderWithRouter();
     });
 
-    it("removes errors on valid input for reasoning string", async () => {
+    it("does not show aspect checkboxes after selecting positive answer", async () => {
+      await user.click(screen.getByLabelText("Ja, gänzlich oder teilweise"));
+
+      expect(screen.queryByLabelText("A1")).not.toBeInTheDocument();
+      expect(
+        screen.queryByText("Eigene Erklärung hinzufügen"),
+      ).not.toBeInTheDocument();
+    });
+
+    it("does not show reasoning textarea after selecting negative answer", async () => {
+      await user.click(screen.getByLabelText("Nein"));
+
+      expect(screen.queryByLabelText("Begründung")).not.toBeInTheDocument();
+    });
+
+    it("does not show reasoning textarea after selecting irrelevant answer", async () => {
+      await user.click(screen.getByLabelText("Nicht relevant"));
+
+      expect(screen.queryByLabelText("Begründung")).not.toBeInTheDocument();
+    });
+  });
+
+  describe("pre-filled data from localStorage", () => {
+    it("pre-selects the saved answer", () => {
       vi.mocked(
-        readDataFromLocalStorage<DocumentationData<V1>>,
+        readDataFromLocalStorage<DocumentationData<V2>>,
       ).mockReturnValue({
-        version: DATA_SCHEMA_VERSION_V1,
+        version: DATA_SCHEMA_VERSION_V2,
         principles: [
           {
             id: "1",
             answer: "Nein",
-            reasoning: "",
+            reasoning: "some reasoning",
+            aspects: [],
           },
         ],
       });
@@ -591,56 +229,12 @@ describe("DocumentationPrinciple", () => {
         renderWithRouter();
       });
 
-      const reasoningInput = screen.getByLabelText("Begründung");
-      await waitFor(() => {
-        expect(reasoningInput).toBeInvalid();
-      });
-
-      await user.type(reasoningInput, "Valid Reasoning");
-      expect(reasoningInput).toBeValid();
-
-      await user.clear(reasoningInput);
-      expect(reasoningInput).toBeValid();
-    });
-
-    it("removes errors on valid input for reasoning array", async () => {
-      vi.mocked(
-        readDataFromLocalStorage<DocumentationData<V1>>,
-      ).mockReturnValue({
-        version: DATA_SCHEMA_VERSION_V1,
-        principles: [
-          {
-            id: "1",
-            answer: "Ja, gänzlich oder teilweise",
-            reasoning: [
-              {
-                aspect: "aspekt 1",
-              },
-            ],
-          },
-        ],
-      });
-
-      act(() => {
-        renderWithRouter();
-      });
-
-      let reasoningError: HTMLElement | null = null;
-      let aspektCheckbox: HTMLElement | null = null;
-
-      await waitFor(() => {
-        reasoningError = screen.getByText(
-          /Bitte geben Sie mindestens eine Erläuterung an/,
-        );
-        aspektCheckbox = getAspektCheckbox();
-      });
-
-      expect(reasoningError).toBeInTheDocument();
-      await user.click(aspektCheckbox as unknown as HTMLElement);
-
-      expect(
-        screen.queryByText(/Bitte geben Sie mindestens eine Erläuterung an/),
-      ).not.toBeInTheDocument();
+      const radio = screen.getByLabelText("Nein");
+      expect(radio).toBeChecked();
     });
   });
+
+  // Note: V2 principle page uses warningInsteadOfError and navigates via onBeforeSubmit,
+  // so form-level validation is intentionally lenient here. Full validation is tested
+  // on the erlaeuterung page where aspects and reasoning are collected.
 });

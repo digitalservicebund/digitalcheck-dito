@@ -1,6 +1,5 @@
 {
   "showGesetzgebungsprozessOverview": true,
   "showInterviewLeitfaden": false,
-  "showIOEuRechtContent": true,
-  "simplifiedPrincipleFlow": false
+  "showIOEuRechtContent": true
 }

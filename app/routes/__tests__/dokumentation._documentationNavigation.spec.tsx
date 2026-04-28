@@ -20,23 +20,15 @@ import {
   ROUTES_DOCUMENTATION_INTRO,
 } from "~/resources/staticRoutes";
 
-import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import LayoutWithDocumentationNavigation, {
   NavigationContext,
 } from "~/routes/dokumentation._documentationNavigation";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import {
-  DATA_SCHEMA_VERSION_V1,
   DATA_SCHEMA_VERSION_V2,
   DocumentationData,
-  V1,
-  V2,
 } from "../dokumentation/documentationDataSchema";
-
-vi.mock("~/contexts/FeatureFlagContext", () => ({
-  useFeatureFlag: vi.fn(),
-}));
 
 vi.mock("react-router", async (importOriginal) => {
   const original = await importOriginal<typeof import("react-router")>();
@@ -407,7 +399,7 @@ describe("navigation on pages of documentation", () => {
               aspects: ["aspect-1"],
             },
           ],
-        } as DocumentationData<V2> as DocumentationData<V1>,
+        },
         expected: {
           completedTitle: false, // is current route so no states are shown
           completedParticipation: true,
@@ -422,7 +414,7 @@ describe("navigation on pages of documentation", () => {
         name: "unfilled form (V2)",
         documentationData: {
           version: DATA_SCHEMA_VERSION_V2,
-        } as DocumentationData<V2> as DocumentationData<V1>,
+        },
         expected: {
           completedTitle: false,
           completedParticipation: false,
@@ -452,7 +444,7 @@ describe("navigation on pages of documentation", () => {
               aspects: [], // empty aspects fails V2 validation
             },
           ],
-        } as DocumentationData<V2> as DocumentationData<V1>,
+        },
         expected: {
           completedTitle: false, // is current route so no states are shown
           completedParticipation: true,

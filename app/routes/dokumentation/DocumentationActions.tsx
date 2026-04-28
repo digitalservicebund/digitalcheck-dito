@@ -5,7 +5,7 @@ import ButtonContainer from "~/components/ButtonContainer";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general";
 import { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
-import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
+import { useWordDocumentationV2 as useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentationV2";
 
 type SubmitType = {
   submit: true;
