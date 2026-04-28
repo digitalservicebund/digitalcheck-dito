@@ -34,6 +34,29 @@ const ROUTES_DOCUMENTATION_FINALIZE: Route[] = [
   dokumentation_absenden,
 ];
 
+export function buildDocumentationRoutes(
+  prinzips: Pick<
+    PrinzipWithAspekteAndExample,
+    "Name" | "URLBezeichnung" | "documentId"
+  >[],
+): (Route | Route[])[] {
+  return [
+    ...ROUTES_DOCUMENTATION_INTRO,
+    prinzips.map<Route>(({ Name, URLBezeichnung, documentId }) => ({
+      title: Name,
+      path: `${dokumentation.path}/${URLBezeichnung}`,
+      principleId: documentId,
+      key: `${documentId}`,
+      parent: null,
+      sitemap: false,
+      isStagingOnly: false,
+      navOrder: null,
+      navLabel: null,
+    })),
+    ...ROUTES_DOCUMENTATION_FINALIZE,
+  ];
+}
+
 const pages = {
   hinweise: HinweisePage,
   "regelungsvorhaben-titel": TitelPage,
@@ -55,22 +78,7 @@ export default function DokumentationLayout({
   prinzips,
   page,
 }: DokumentationLayoutProps) {
-  const routes: (Route | Route[])[] = [
-    ...ROUTES_DOCUMENTATION_INTRO,
-    prinzips.map<Route>(({ Name, URLBezeichnung, documentId }) => ({
-      title: Name,
-      path: `${dokumentation.path}/${URLBezeichnung}`,
-      principleId: documentId,
-      // TODO
-      key: `${documentId}`,
-      parent: null,
-      sitemap: false,
-      isStagingOnly: false,
-      navOrder: null,
-      navLabel: null,
-    })),
-    ...ROUTES_DOCUMENTATION_FINALIZE,
-  ];
+  const routes = buildDocumentationRoutes(prinzips);
 
   const Page = pages[page];
 
