@@ -1,6 +1,7 @@
 import { Navigate, useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import MetaTitle from "~/components/Meta";
+import TabGroup from "~/components/Tabs/Tabs.tsx";
 import {
   ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
   ROUTE_DOCUMENTATION_SUMMARY,
@@ -33,13 +34,26 @@ export default function DocumentationInteroperabilityAssessment() {
           look="ds-heading-02-reg"
           className="mb-16"
         />
-        <EUInteroperabilityAssessment />
-        <DocumentationActions
-          previousUrl={previousUrl}
-          nextUrl={nextUrl ?? ROUTE_DOCUMENTATION_SUMMARY.url}
-          showDownloadDraftButton
-          showSavingTip
-        />
+        <div
+          className={
+            "**:[[role=tablist]]:rounded-md **:[[role=tablist]]:bg-green-200 **:[[role=tablist]]:p-8 **:[[role=tablist]]:shadow-lg"
+          }
+        >
+          <p className={"p-8"}>Wählen Sie ein Testszenario:</p>
+
+          <TabGroup>
+            <TabGroup.Tab label="Variante 1: Formular">Text</TabGroup.Tab>
+            <TabGroup.Tab label="Variante 2: Ausfüllhilfe">
+              <EUInteroperabilityAssessment />
+            </TabGroup.Tab>
+            <DocumentationActions
+              previousUrl={previousUrl}
+              nextUrl={nextUrl ?? ROUTE_DOCUMENTATION_SUMMARY.url}
+              showDownloadDraftButton
+              showSavingTip
+            />
+          </TabGroup>
+        </div>
       </div>
     </>
   );
