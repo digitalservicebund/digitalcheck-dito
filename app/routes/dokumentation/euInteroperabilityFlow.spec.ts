@@ -7,12 +7,12 @@ import {
 describe("euInteroperabilityFlow", () => {
   it("returns required outcome for all yes answers", () => {
     const flowState = getEuInteroperabilityFlowState({
-      bindingRequirementsInDecisionProcess: "Yes",
-      requirementIsBinding: "Yes",
-      serviceProvidedByPublicOrUnionEntity: "Yes",
-      serviceProvidedInEuContext: "Yes",
-      requiresCrossBorderSystemInteraction: "Yes",
-      firstAssessmentForRequirement: "Yes",
+      bindingRequirementsInDecisionProcess: "Ja",
+      requirementIsBinding: "Ja",
+      serviceProvidedByPublicOrUnionEntity: "Ja",
+      serviceProvidedInEuContext: "Ja",
+      requiresCrossBorderSystemInteraction: "Ja",
+      firstAssessmentForRequirement: "Ja",
     });
 
     expect(flowState.outcomeId).toBe("REQUIRED");
@@ -21,7 +21,7 @@ describe("euInteroperabilityFlow", () => {
 
   it("returns first not-required outcome when first question is no", () => {
     const flowState = getEuInteroperabilityFlowState({
-      bindingRequirementsInDecisionProcess: "No",
+      bindingRequirementsInDecisionProcess: "Nein",
     });
 
     expect(flowState.outcomeId).toBe("NOT_REQUIRED_NO_DECISION_PROCESS");
@@ -30,8 +30,7 @@ describe("euInteroperabilityFlow", () => {
 
   it("returns the currently active question when flow is incomplete", () => {
     const flowState = getEuInteroperabilityFlowState({
-      bindingRequirementsInDecisionProcess: "Yes",
-      requirementIsBinding: "Yes",
+      bindingRequirementsInDecisionProcess: "Ja",
     });
 
     expect(flowState.activeQuestionId).toBe(
@@ -42,13 +41,13 @@ describe("euInteroperabilityFlow", () => {
 
   it("sanitizes unknown values from storage payload", () => {
     const answers = sanitizeEuInteroperabilityAnswers({
-      bindingRequirementsInDecisionProcess: "Yes",
-      requirementIsBinding: "Maybe",
-      unknownField: "No",
+      bindingRequirementsInDecisionProcess: "Ja",
+      serviceProvidedByPublicOrUnionEntity: "Maybe",
+      unknownField: "Nein",
     });
 
     expect(answers).toEqual({
-      bindingRequirementsInDecisionProcess: "Yes",
+      bindingRequirementsInDecisionProcess: "Ja",
     });
   });
 });
