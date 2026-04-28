@@ -29,6 +29,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     resolve: {
+      tsconfigPaths: false,
       alias: {
         "~/": new URL("./app/", import.meta.url).pathname,
         "@/": new URL("./src/", import.meta.url).pathname,
