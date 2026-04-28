@@ -201,7 +201,10 @@ function renderPage({ path }: Route) {
       path: dokumentation.path,
       element: (
         <DocumentationDataProvider>
-          <LayoutWithDocumentationNavigation />
+          <LayoutWithDocumentationNavigation
+            routes={mockRoutes}
+            prinzips={[]}
+          />
         </DocumentationDataProvider>
       ),
       ErrorBoundary: ErrorBoundary,

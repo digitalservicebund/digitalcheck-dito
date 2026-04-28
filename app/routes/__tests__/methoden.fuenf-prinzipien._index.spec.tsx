@@ -2,13 +2,15 @@ import { render, screen, within } from "@testing-library/react";
 import { beforeEach, describe, expect, it } from "vitest";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import FivePrinciples from "~/routes/methoden.fuenf-prinzipien._index/route";
-import { type Node } from "~/utils/paragraphUtils";
+import type { Node } from "~/utils/paragraphUtils";
 import { MemoryRouter } from "~/utils/routerCompat";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
-// Create mock data that simulates the data structure returned by the loader.
-// This includes a principle with a full example and one without to test conditional rendering.
-const mockPrinzipsData = [
+const mockPrinzipsData: PrinzipWithAspekteAndExample[] = [
   {
+    documentId: "doc-1",
+    Kurzbezeichnung: "Nutzerfreundlichkeit",
+    URLBezeichnung: "nutzerfreundlichkeit",
     Name: "Prinzip Test 1: Nutzerfreundlichkeit",
     Beschreibung: [
       {
@@ -21,6 +23,10 @@ const mockPrinzipsData = [
     Aspekte: [
       {
         Titel: "Anwendung 1.1",
+        Kurzbezeichnung: "1.1",
+        Beschreibung: "",
+        Nummer: "1.1",
+        Anwendung: [],
         Text: [
           {
             type: "paragraph",
@@ -35,13 +41,16 @@ const mockPrinzipsData = [
               type: "paragraph",
               children: [{ type: "text", text: "Anwendung Beispieltext." }],
             },
-          ],
+          ] as Node[],
           PrinzipErfuellungen: [],
-
           Paragraph: {
-            Nummer: "99",
+            Nummer: 99,
             Gesetz: "AnwG",
             Titel: "Titel des Anwendungs-Paragraphen",
+            Beispielvorhaben: {
+              URLBezeichnung: "anwendung-regelung",
+              Titel: "Anwendung-Regelungsvorhaben",
+            },
           },
         },
       },
@@ -59,11 +68,10 @@ const mockPrinzipsData = [
             },
           ],
         },
-      ],
+      ] as Node[],
       PrinzipErfuellungen: [],
-
       Paragraph: {
-        Nummer: "42",
+        Nummer: 42,
         Gesetz: "TestG",
         Titel: "Titel des Test-Paragraphen",
         Beispielvorhaben: {
@@ -74,6 +82,9 @@ const mockPrinzipsData = [
     },
   },
   {
+    documentId: "doc-2",
+    Kurzbezeichnung: "Datenminimierung",
+    URLBezeichnung: "datenminimierung",
     Name: "Prinzip Test 2: Datenminimierung",
     Beschreibung: [
       {
@@ -89,8 +100,22 @@ const mockPrinzipsData = [
     ] as Node[],
     order: 2,
     Nummer: 2 as const,
-    Aspekte: [], // No application examples
-    // No Example paragraph
+    Aspekte: [],
+    Beispiel: {
+      documentId: "doc-2-beispiel",
+      Nummer: 1,
+      Text: [] as Node[],
+      PrinzipErfuellungen: [],
+      Paragraph: {
+        Nummer: 1,
+        Gesetz: "TestG",
+        Titel: "Titel des Test-Paragraphen",
+        Beispielvorhaben: {
+          URLBezeichnung: "test-regelung-2",
+          Titel: "Titel des Test-Regelungsvorhabens 2",
+        },
+      },
+    },
   },
 ];
 

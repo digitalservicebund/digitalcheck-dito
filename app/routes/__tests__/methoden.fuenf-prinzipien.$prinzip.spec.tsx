@@ -5,7 +5,10 @@ import { getTextFromNodes } from "~/routes/__tests__/utils/strapiUtils.ts";
 import Prinzip from "~/routes/methoden.fuenf-prinzipien.$prinzip/route";
 import { type Node } from "~/utils/paragraphUtils";
 import { MemoryRouter } from "~/utils/routerCompat";
-import { type PrinzipWithAspekte } from "~/utils/strapiData.types.ts";
+import {
+  type PrinzipWithAspekte,
+  type PrinzipWithAspekteAndExample,
+} from "~/utils/strapiData.types.ts";
 import { type PrinzipListItem } from "../methoden.fuenf-prinzipien.$prinzip/query";
 
 const IntersectionObserverMock = vi.fn(
@@ -133,7 +136,10 @@ describe("FivePrinciples Route - Integration Tests", () => {
     // Render the component within a router to handle <Link> components
     render(
       <MemoryRouter>
-        <Prinzip prinzip={mockPrinzipData} prinzipList={mockPrinzipsList} />
+        <Prinzip
+          prinzip={mockPrinzipData as PrinzipWithAspekteAndExample}
+          prinzipList={mockPrinzipsList}
+        />
       </MemoryRouter>,
     );
   });
