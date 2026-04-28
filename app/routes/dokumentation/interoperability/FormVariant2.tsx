@@ -1,7 +1,6 @@
 import { useForm } from "@rvf/react";
 import { useEffect, useMemo, useState } from "react";
 import { z } from "zod";
-import { LinkButton } from "~/components/Button.tsx";
 import Checkbox from "~/components/Checkbox";
 import Input from "~/components/Input";
 import NewTabLink from "~/components/NewTabLink.tsx";
@@ -72,7 +71,7 @@ function toAnswersById(
   return defaults;
 }
 
-export default function EUInteroperabilityAssessment() {
+export default function FormVariant2() {
   const allQuestions = useMemo(
     () =>
       sections.flatMap((section) =>
@@ -163,9 +162,9 @@ export default function EUInteroperabilityAssessment() {
           </NewTabLink>
           .
         </p>
-        <LinkButton look="tertiary" to={ROUTE_DOCUMENTATION_SUMMARY.url}>
+        <a className="text-link" href={ROUTE_DOCUMENTATION_SUMMARY.url}>
           Überspringen
-        </LinkButton>
+        </a>
       </div>
       <form {...form.getFormProps()}>
         {sections.map((section) => (

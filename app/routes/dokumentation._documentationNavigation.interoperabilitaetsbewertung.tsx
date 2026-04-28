@@ -6,17 +6,19 @@ import {
   ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
   ROUTE_DOCUMENTATION_SUMMARY,
 } from "~/resources/staticRoutes";
-import EUInteroperabilityAssessment from "~/routes/dokumentation/interoperability/EUInteroperabilityAssessment.tsx";
+import FormVariant2 from "~/routes/dokumentation/interoperability/FormVariant2.tsx";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
+import FormVariant1 from "./dokumentation/interoperability/FormVariant1.tsx";
 
 export default function DocumentationInteroperabilityAssessment() {
   const { previousUrl, nextUrl } = useOutletContext<NavigationContext>();
   const { documentationData } = useDocumentationDataService();
 
   const isAccessible =
-    documentationData.euInteroperabilityOutcome?.outcomeId === "REQUIRED";
+    !documentationData.euInteroperabilityOutcome ||
+    documentationData.euInteroperabilityOutcome.outcomeId === "REQUIRED";
 
   if (!isAccessible) {
     return <Navigate replace to={ROUTE_DOCUMENTATION_SUMMARY.url} />;
@@ -42,9 +44,11 @@ export default function DocumentationInteroperabilityAssessment() {
           <p className={"p-8"}>Wählen Sie ein Testszenario:</p>
 
           <TabGroup>
-            <TabGroup.Tab label="Variante 1: Formular">Text</TabGroup.Tab>
+            <TabGroup.Tab label="Variante 1: Formular">
+              <FormVariant1 />
+            </TabGroup.Tab>
             <TabGroup.Tab label="Variante 2: Ausfüllhilfe">
-              <EUInteroperabilityAssessment />
+              <FormVariant2 />
             </TabGroup.Tab>
             <DocumentationActions
               previousUrl={previousUrl}

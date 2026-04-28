@@ -1,3 +1,7 @@
+import { ReactNode } from "react";
+import { interoperabilityExplanationParagraphs } from "~/routes/dokumentation/interoperability/explanationMarkdown.ts";
+import { ExplanationParagraph } from "~/routes/dokumentation/interoperability/FormVariant1.tsx";
+
 export type Question = {
   id: string;
   label: string;
@@ -10,7 +14,7 @@ type QuestionGroup = {
 };
 type Section = {
   title: string;
-  intro?: string;
+  intro?: ReactNode;
   groups: QuestionGroup[];
 };
 export type Answer = {
@@ -22,6 +26,11 @@ export type AnswersById = Record<string, Answer>;
 export const sections: Section[] = [
   {
     title: "Rechtliche Interoperabilität",
+    intro: (
+      <ExplanationParagraph
+        markdown={interoperabilityExplanationParagraphs.legal}
+      />
+    ),
     groups: [
       {
         title: "Positive Auswirkungen",
@@ -78,7 +87,11 @@ export const sections: Section[] = [
   },
   {
     title: "Organisatorische Interoperabilität",
-    intro: "Bitte kreuzen Sie Zutreffendes an.",
+    intro: (
+      <ExplanationParagraph
+        markdown={interoperabilityExplanationParagraphs.organizational}
+      />
+    ),
     groups: [
       {
         title: "Positive Auswirkungen",
@@ -133,7 +146,11 @@ export const sections: Section[] = [
   },
   {
     title: "Semantische Interoperabilität",
-    intro: "Bitte kreuzen Sie Zutreffendes an.",
+    intro: (
+      <ExplanationParagraph
+        markdown={interoperabilityExplanationParagraphs.semantic}
+      />
+    ),
     groups: [
       {
         title: "Positive Auswirkungen",
@@ -180,8 +197,11 @@ export const sections: Section[] = [
   },
   {
     title: "Technische Interoperabilität",
-    intro:
-      "Fokus: Infrastruktur, Schnittstellenspezifikationen und Maschinenlesbarkeit.",
+    intro: (
+      <ExplanationParagraph
+        markdown={interoperabilityExplanationParagraphs.technical}
+      />
+    ),
     groups: [
       {
         title: "Bestimmung eines positiven Effekts",
