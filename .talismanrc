@@ -12,22 +12,12 @@ fileignoreconfig:
     ignore_detectors: [filename]
   - filename: app/root.tsx
     allowed_patterns: [posthogKey]
-  - filename: app/utils/localStorageVersioned.ts
-    allowed_patterns:
-      - storageKey
   - filename: app/utils/localStorageVersioned.spec.ts
     allowed_patterns:
       - testKey
   - filename: app/routes/dokumentation/DocumentationDataProvider.tsx
     allowed_patterns:
-      - STORAGE_KEY
       - testKey
-  - filename: app/routes/dokumentation/DocumentationDataProvider.spec.tsx
-    allowed_patterns:
-      - STORAGE_KEY
-  - filename: app/routes/vorpruefung/preCheckDataService.ts
-    allowed_patterns:
-      - STORAGE_KEY
   - filename: app/resources/content/das-ist-neu.ts
     ignore_detectors: [filecontent]
   - filename: app/resources/content/beispiele-regelungen.ts # Google Forms link misinterpreted as base64
@@ -48,6 +38,7 @@ allowed_patterns:
   - handleKey
   - cacheKey
   - CacheKey
+  - STORAGE_KEY
   - passen
   - Anpassungen
   - Pass\s # Allow "Pass " followed by a space

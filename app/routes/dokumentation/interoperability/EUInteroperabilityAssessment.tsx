@@ -1,4 +1,6 @@
+import { useForm } from "@rvf/react";
 import { useEffect, useMemo, useState } from "react";
+import { z } from "zod";
 import { LinkButton } from "~/components/Button.tsx";
 import Checkbox from "~/components/Checkbox";
 import Input from "~/components/Input";
@@ -9,13 +11,22 @@ import {
   ROUTE_DOCUMENTATION_SUMMARY,
 } from "~/resources/staticRoutes.ts";
 import {
-  Answer,
   AnswersById,
   Question,
   sections,
 } from "~/routes/dokumentation/interoperability/Sections.tsx";
 
 const STORAGE_KEY = "eu-interoperability-assessment-v1";
+const assessmentFormSchema = z.record(z.string(), z.any());
+
+type AssessmentFormValues = Record<
+  string,
+  {
+    checked?: "on" | true;
+    details?: string;
+    ownStatement?: string;
+  }
+>;
 
 function createInitialAnswers(questions: Question[]): AnswersById {
   return questions.reduce<AnswersById>((acc, question) => {
@@ -28,6 +39,39 @@ function createInitialAnswers(questions: Question[]): AnswersById {
   }, {});
 }
 
+function toFormValues(answers: AnswersById): AssessmentFormValues {
+  return Object.entries(answers).reduce<AssessmentFormValues>(
+    (acc, [questionId, answer]) => {
+      acc[questionId] = {
+        checked: answer.checked ? "on" : undefined,
+        details: answer.details,
+        ownStatement: answer.ownStatement,
+      };
+      return acc;
+    },
+    {},
+  );
+}
+
+function toAnswersById(
+  values: Partial<AssessmentFormValues>,
+  questions: Question[],
+): AnswersById {
+  const defaults = createInitialAnswers(questions);
+
+  for (const question of questions) {
+    const answer = values[question.id];
+
+    defaults[question.id] = {
+      checked: !!answer?.checked,
+      details: answer?.details ?? "",
+      ownStatement: answer?.ownStatement ?? "",
+    };
+  }
+
+  return defaults;
+}
+
 export default function EUInteroperabilityAssessment() {
   const allQuestions = useMemo(
     () =>
@@ -36,10 +80,17 @@ export default function EUInteroperabilityAssessment() {
       ),
     [],
   );
-
-  const [answersById, setAnswersById] = useState<AnswersById>(() =>
-    createInitialAnswers(allQuestions),
+  const defaultAnswers = useMemo(
+    () => createInitialAnswers(allQuestions),
+    [allQuestions],
   );
+  const form = useForm({
+    schema: assessmentFormSchema,
+    defaultValues: toFormValues(defaultAnswers),
+    handleSubmit: async () => {},
+  });
+
+  const [answersById, setAnswersById] = useState<AnswersById>(defaultAnswers);
 
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -50,41 +101,32 @@ export default function EUInteroperabilityAssessment() {
 
     try {
       const parsed = JSON.parse(saved) as Partial<AnswersById>;
-      const defaults = createInitialAnswers(allQuestions);
-      const hydrated: AnswersById = { ...defaults };
-
-      for (const question of allQuestions) {
-        const answer = parsed[question.id];
-        if (!answer) {
-          continue;
-        }
-
-        hydrated[question.id] = {
-          checked: answer.checked ?? false,
-          details: answer.details ?? "",
-          ownStatement: answer.ownStatement ?? "",
-        };
-      }
+      const hydrated = toAnswersById(
+        parsed as Partial<AssessmentFormValues>,
+        allQuestions,
+      );
 
       setAnswersById(hydrated);
+      form.resetForm(toFormValues(hydrated));
     } catch {
-      setAnswersById(createInitialAnswers(allQuestions));
+      setAnswersById(defaultAnswers);
+      form.resetForm(toFormValues(defaultAnswers));
     }
-  }, [allQuestions]);
+  }, [allQuestions, defaultAnswers, form]);
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(answersById));
-  }, [answersById]);
+    const unsubscribe = form.subscribe.value((values) => {
+      const normalizedAnswers = toAnswersById(
+        values as Partial<AssessmentFormValues>,
+        allQuestions,
+      );
 
-  const updateAnswer = (questionId: string, patch: Partial<Answer>) => {
-    setAnswersById((prev) => ({
-      ...prev,
-      [questionId]: {
-        ...prev[questionId],
-        ...patch,
-      },
-    }));
-  };
+      setAnswersById(normalizedAnswers);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(normalizedAnswers));
+    });
+
+    return () => unsubscribe();
+  }, [allQuestions, form]);
 
   return (
     <>
@@ -125,74 +167,60 @@ export default function EUInteroperabilityAssessment() {
           Überspringen
         </LinkButton>
       </div>
-      {sections.map((section) => (
-        <section
-          key={section.title}
-          className={"mt-32 mb-64 border-t border-gray-600 pt-32"}
-        >
-          <h3 className={"mb-16"}>{section.title}</h3>
-          {section.intro ? <p>{section.intro}</p> : null}
+      <form {...form.getFormProps()}>
+        {sections.map((section) => (
+          <section
+            key={section.title}
+            className={"mt-32 mb-64 border-t border-gray-600 pt-32"}
+          >
+            <h3 className={"mb-16"}>{section.title}</h3>
+            {section.intro ? <p>{section.intro}</p> : null}
 
-          {section.groups.map((group) => (
-            <div key={group.title} style={{ marginBottom: "1rem" }}>
-              <h4 className={"ds-label-01-bold mt-32 mb-16"}>{group.title}</h4>
+            {section.groups.map((group) => (
+              <div key={group.title} style={{ marginBottom: "1rem" }}>
+                <h4 className={"ds-label-01-bold mt-32 mb-16"}>
+                  {group.title}
+                </h4>
 
-              {group.questions.map((question) => {
-                const answer = answersById[question.id];
+                {group.questions.map((question) => {
+                  const answer = answersById[question.id];
 
-                return (
-                  <div key={question.id} style={{ marginBottom: "0.75rem" }}>
-                    <Checkbox
-                      checked={answer?.checked ?? false}
-                      onChange={(event) =>
-                        updateAnswer(question.id, {
-                          checked: event.target.checked,
-                        })
-                      }
-                    >
-                      {question.label}
-                    </Checkbox>
-
-                    {question.requiresDetailsText && answer?.checked ? (
-                      <div className={"mt-8 ml-56"}>
-                        <Input
-                          type="text"
-                          value={answer.details}
-                          onChange={(event) =>
-                            updateAnswer(question.id, {
-                              details: event.target.value,
-                            })
-                          }
-                        >
-                          {question.requiresDetailsText}
-                        </Input>
-                      </div>
-                    ) : null}
-
-                    {question.isOwnStatement && answer?.checked ? (
-                      <div
-                        style={{ marginTop: "0.4rem", marginLeft: "1.6rem" }}
+                  return (
+                    <div key={question.id} style={{ marginBottom: "0.75rem" }}>
+                      <Checkbox
+                        scope={form.scope(`${question.id}.checked`)}
+                        look="regular"
                       >
-                        <Textarea
-                          value={answer.ownStatement}
-                          onChange={(event) =>
-                            updateAnswer(question.id, {
-                              ownStatement: event.target.value,
-                            })
-                          }
-                          rows={4}
-                        >
-                          Eigene Angaben:
-                        </Textarea>
-                      </div>
-                    ) : null}
-                  </div>
-                );
-              })}
-            </div>
-          ))}
-        </section>
-      ))}
+                        {question.label}
+                      </Checkbox>
+
+                      {question.requiresDetailsText && answer?.checked ? (
+                        <div className={"mt-8 ml-56"}>
+                          <Input
+                            type="text"
+                            scope={form.scope(`${question.id}.details`)}
+                          >
+                            {question.requiresDetailsText}
+                          </Input>
+                        </div>
+                      ) : null}
+
+                      {question.isOwnStatement && answer?.checked ? (
+                        <div className={"mt-8 ml-56"}>
+                          <Textarea
+                            scope={form.scope(`${question.id}.ownStatement`)}
+                            rows={4}
+                          ></Textarea>
+                        </div>
+                      ) : null}
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </section>
+        ))}
+      </form>
     </>
   );
 }
