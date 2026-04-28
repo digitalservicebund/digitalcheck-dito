@@ -63,6 +63,7 @@ const jsonLdMetadata = {
     <link rel="icon" href="/favicon_64.png" type="image/png" sizes="64x64" />
 
     <script
+      is:inline
       type="application/ld+json"
       set:html={JSON.stringify(jsonLdMetadata)}
     />
@@ -70,6 +71,7 @@ const jsonLdMetadata = {
     {
       plausibleEnabled && (
         <script
+          is:inline
           defer
           data-domain="digitalcheck.bund.de"
           src="https://plausible.io/js/script.tagged-events.outbound-links.js"
