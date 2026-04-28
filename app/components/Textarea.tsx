@@ -34,9 +34,9 @@ function Textarea({
         {children}
       </label>
       {description && (
-        <p className="ds-body-02-reg block text-gray-900" id={descriptionId}>
+        <div className="ds-body-02-reg block text-gray-900" id={descriptionId}>
           {description}
-        </p>
+        </div>
       )}
       <textarea
         {...field.getInputProps({
