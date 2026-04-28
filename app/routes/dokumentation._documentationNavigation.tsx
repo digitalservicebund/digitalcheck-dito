@@ -179,7 +179,7 @@ export default function LayoutWithDocumentationNavigation({
           "parent-bg-blue breakout-grid-form-steps grow bg-blue-100",
           !simplifiedFlow &&
             "[--content-max-width:calc(var(--max-content-width)-var(--nav-max-width)-var(--gutter)-var(--container-padding-inline)*2)] [--help-width:0]",
-          !showHelpPanel && "[--help-width:0]",
+          !showHelpPanel && "[--content-max-width:750px] [--help-width:0]",
         )}
       >
         <Nav

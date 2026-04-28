@@ -2,9 +2,9 @@ name: Preview (Astro)
 
 on:
   workflow_dispatch:
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-  delete:
+  # pull_request:
+  #   types: [opened, synchronize, reopened, closed]
+  # delete:
 
 jobs:
   # Builds and deploys preview when PR is opened/updated or manually triggered.

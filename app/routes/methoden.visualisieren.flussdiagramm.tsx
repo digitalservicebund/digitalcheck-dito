@@ -1,5 +1,6 @@
 import { methoden_fuenfPrinzipien } from "@/config/routes";
 import {
+  ArrowCircleRightOutlined,
   ArrowDownwardOutlined,
   DriveFileRenameOutline,
   LayersOutlined,
@@ -12,8 +13,6 @@ import ImageBox from "~/components/ImageBox.tsx";
 import InfoBox from "~/components/InfoBox.tsx";
 import NumberedList from "~/components/NumberedList.tsx";
 import RichText from "~/components/RichText.tsx";
-
-import { ArrowCircleRightOutlined } from "@digitalservicebund/icons";
 import { twJoin } from "tailwind-merge";
 import BackToTopButton from "~/components/BackToTopButton.tsx";
 import Container from "~/components/Container.tsx";
