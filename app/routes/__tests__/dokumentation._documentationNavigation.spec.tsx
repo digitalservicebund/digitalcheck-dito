@@ -192,7 +192,7 @@ function renderPage({ path }: Route) {
       <>
         <h1>Foobar</h1>
         <a href={previousUrl}>Zurück</a>
-        <a href={nextUrl}>Weiter</a>
+        <a href={nextUrl ?? undefined}>Weiter</a>
       </>
     );
   }

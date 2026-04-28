@@ -36,7 +36,7 @@ type DocumentationPrincipleErlaeuterungFormProps = {
   isPositive: boolean;
   isIrrelevant: boolean;
   currentUrl: string;
-  nextUrl: string;
+  nextUrl: string | null;
   previousUrl: string;
 };
 

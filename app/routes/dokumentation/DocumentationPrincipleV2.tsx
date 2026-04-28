@@ -21,7 +21,7 @@ export default function DocumentationPrincipleV2({
   prinzip,
 }: Readonly<{
   currentUrl: string;
-  nextUrl: string;
+  nextUrl: string | null;
   previousUrl: string;
   prinzip: PrinzipWithAspekteAndExample;
 }>) {

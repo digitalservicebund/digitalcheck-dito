@@ -13,7 +13,7 @@ type SubmitType = {
 
 type NextType = {
   submit?: false;
-  nextUrl?: string;
+  nextUrl?: string | null;
 };
 
 type DocumentationActionsProps = {

@@ -57,7 +57,7 @@ export default function DocumentationParticipation() {
           look={"primary"}
           disabled={!checked}
           type={"button"}
-          onClick={() => navigate(nextUrl)}
+          onClick={() => nextUrl && navigate(nextUrl)}
         >
           Verstanden und weiter
         </Button>

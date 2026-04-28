@@ -11,7 +11,7 @@ type UseSyncedFormParams<
 > = FormOpts<SchemaInput, SchemaOutput, SubmitResponseData> & {
   currentUrl: string;
   setDataCallback: (data: T) => void;
-  nextUrl: string;
+  nextUrl: string | null;
   storedData?: T;
   schema: StandardSchemaV1<SchemaInput, SchemaOutput>;
 };
