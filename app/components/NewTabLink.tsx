@@ -1,13 +1,6 @@
 import { OpenInNewIcon } from "~/components/OpenInNewIcon.tsx";
-import { Link } from "~/utils/routerCompat";
+import { Link, type LinkProps } from "~/utils/routerCompat";
 import twMerge from "~/utils/tailwindMerge";
-
-export type CustomLinkProps = {
-  to: string;
-  children?: React.ReactNode;
-  className?: string;
-  [key: string]: unknown;
-};
 
 /**
  * A `Link` with target="_blank" and OpenInNewIcon
@@ -16,10 +9,10 @@ export default function NewTabLink({
   children,
   className,
   ...props
-}: Readonly<Omit<CustomLinkProps, "target">>) {
+}: Readonly<Omit<LinkProps, "target">>) {
   return (
     <Link
-      {...(props as Parameters<typeof Link>[0])}
+      {...props}
       target="_blank"
       className={twMerge("text-link", className)}
     >

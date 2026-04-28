@@ -19,9 +19,13 @@ import {
   prinzipCoreFields,
   visualisationFields,
 } from "~/utils/strapiData.server";
-import type { PrinzipWithBeispielvorhaben } from "~/utils/strapiData.types";
+import type {
+  Beispielvorhaben,
+  Digitalcheck,
+  PrinzipWithBeispielvorhaben,
+  Visualisierung,
+} from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
-import type { Route } from "./+types/beispiele.regelungen.$regelung";
 
 // prinzipCoreFields are being used in paragraphFields and so need to be included
 const GET_REGELUNGSVORHABENS_BY_SLUG_QUERY = `
@@ -59,7 +63,11 @@ query GetBeispielvorhabens($slug: String!, $status: PublicationStatus!) {
   }
 }`;
 
-export const loader = async ({ params }: Route.LoaderArgs) => {
+export const loader = async ({
+  params,
+}: {
+  params: { regelung?: string };
+}) => {
   const status = getFeatureFlag("showStrapiDrafts") ? "DRAFT" : "PUBLISHED";
 
   const regelungData = await fetchStrapiData<{
@@ -147,7 +155,7 @@ export default function Gesetz({
             />
           </div>
 
-          {regelung.Visualisierungen.map((visualisierung) => (
+          {regelung.Visualisierungen.map((visualisierung: Visualisierung) => (
             <VisualisationItem
               key={visualisierung.Bild.documentId}
               visualisierung={visualisierung}
@@ -161,7 +169,7 @@ export default function Gesetz({
   // ----- NKR Stellungnahme -----
   if (
     regelung.Digitalchecks.some(
-      ({ NKRStellungnahmeDCText }) => !!NKRStellungnahmeDCText,
+      ({ NKRStellungnahmeDCText }: Digitalcheck) => !!NKRStellungnahmeDCText,
     )
   ) {
     tabsData.push({
@@ -182,8 +190,9 @@ export default function Gesetz({
             />
           </div>
           {regelung.Digitalchecks.filter(
-            ({ NKRStellungnahmeDCText }) => !!NKRStellungnahmeDCText,
-          ).map((digitalcheck) => (
+            ({ NKRStellungnahmeDCText }: Digitalcheck) =>
+              !!NKRStellungnahmeDCText,
+          ).map((digitalcheck: Digitalcheck) => (
             <div
               className="my-32 border-l-4 border-gray-400 pl-8 italic"
               key={digitalcheck.documentId}

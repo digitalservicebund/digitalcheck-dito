@@ -74,7 +74,7 @@ export function Link({
 
 // ── NavLink ──────────────────────────────────────────────────────────────────
 
-export type NavLinkProps = LinkProps & {
+export type NavLinkProps = Omit<LinkProps, "children"> & {
   children: ReactNode | (({ isActive }: { isActive: boolean }) => ReactNode);
 };
 
