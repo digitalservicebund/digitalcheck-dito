@@ -1,4 +1,4 @@
-import FileDownloadOutlinedIcon from "@digitalservicebund/icons/FileDownloadOutlined";
+import { FileDownloadOutlined as FileDownloadOutlinedIcon } from "@digitalservicebund/icons";
 import { twJoin } from "tailwind-merge";
 import RichText from "~/components/RichText.tsx";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";

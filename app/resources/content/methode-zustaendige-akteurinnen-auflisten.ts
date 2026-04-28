@@ -1,6 +1,6 @@
-import DrawOutlined from "@digitalservicebund/icons/DrawOutlined";
-import LightbulbOutlined from "@digitalservicebund/icons/LightbulbOutlined";
-import StickyNote2Outlined from "@digitalservicebund/icons/StickyNote2Outlined";
+import { DrawOutlined } from "@digitalservicebund/icons";
+import { LightbulbOutlined } from "@digitalservicebund/icons";
+import { StickyNote2Outlined } from "@digitalservicebund/icons";
 import { assetPath } from "~/utils/assetPath";
 import { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";

@@ -12,7 +12,7 @@ import InfoBox from "~/components/InfoBox.tsx";
 import NumberedList from "~/components/NumberedList.tsx";
 import RichText from "~/components/RichText.tsx";
 
-import ArrowCircleRightOutlined from "@digitalservicebund/icons/ArrowCircleRightOutlined";
+import { ArrowCircleRightOutlined } from "@digitalservicebund/icons";
 import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import BackToTopButton from "~/components/BackToTopButton.tsx";

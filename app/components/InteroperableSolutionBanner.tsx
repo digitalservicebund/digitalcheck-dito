@@ -1,4 +1,4 @@
-import CloseIcon from "@digitalservicebund/icons/Close";
+import { Close as CloseIcon } from "@digitalservicebund/icons";
 import { useState } from "react";
 import Button from "~/components/Button.tsx";
 

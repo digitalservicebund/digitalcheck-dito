@@ -1,4 +1,4 @@
-import OpenInNewIconBase from "@digitalservicebund/icons/OpenInNew";
+import { OpenInNew as OpenInNewIconBase } from "@digitalservicebund/icons";
 import { renderToString } from "react-dom/server";
 import { general } from "~/resources/content/shared/general.ts";
 

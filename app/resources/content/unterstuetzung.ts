@@ -1,9 +1,9 @@
-import AdsClickOutlined from "@digitalservicebund/icons/AdsClickOutlined";
-import CheckCircleOutlined from "@digitalservicebund/icons/CheckCircleOutlined";
-import DrawOutlined from "@digitalservicebund/icons/DrawOutlined";
-import FormatListBulletedOutlined from "@digitalservicebund/icons/FormatListBulletedOutlined";
-import PlaylistAddCheckOutlined from "@digitalservicebund/icons/PlaylistAddCheckOutlined";
-import TimerOutlined from "@digitalservicebund/icons/TimerOutlined";
+import { AdsClickOutlined } from "@digitalservicebund/icons";
+import { CheckCircleOutlined } from "@digitalservicebund/icons";
+import { DrawOutlined } from "@digitalservicebund/icons";
+import { FormatListBulletedOutlined } from "@digitalservicebund/icons";
+import { PlaylistAddCheckOutlined } from "@digitalservicebund/icons";
+import { TimerOutlined } from "@digitalservicebund/icons";
 import {
   ROUTE_INTEROPERABILITY,
   ROUTE_INTEROPERABILITY_SPOC,

@@ -1,5 +1,5 @@
 import { MenuOpen, MenuOutlined } from "@digitalservicebund/icons";
-import PhoneOutlined from "@digitalservicebund/icons/PhoneOutlined";
+import { PhoneOutlined } from "@digitalservicebund/icons";
 import { useEffect, useRef, useState } from "react";
 import { Link, type UIMatch, useLocation, useMatches } from "react-router";
 import { twJoin } from "tailwind-merge";

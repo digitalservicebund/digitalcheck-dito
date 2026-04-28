@@ -1,4 +1,4 @@
-import ZoomInOutlined from "@digitalservicebund/icons/ZoomInOutlined";
+import { ZoomInOutlined } from "@digitalservicebund/icons";
 import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Heading from "~/components/Heading";

@@ -1,5 +1,5 @@
 import { Check, Clear, Sync } from "@digitalservicebund/icons";
-import ErrorOutline from "@digitalservicebund/icons/ErrorOutline";
+import { ErrorOutline } from "@digitalservicebund/icons";
 import { type Dispatch, SetStateAction } from "react";
 import { twJoin } from "tailwind-merge";
 import Heading from "~/components/Heading";
