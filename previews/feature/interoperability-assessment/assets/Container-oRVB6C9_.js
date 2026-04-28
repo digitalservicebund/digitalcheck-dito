@@ -1,0 +1,1 @@
+import{j as e}from"./chunk-EVOBXE3Y-CCEPD6Um.js";import{c as t}from"./tailwindMerge-ZrmHxlcW.js";function i({overhangingBackground:n,children:o,className:r}){const s=t("container py-40",n&&"rounded-lg container-overhanging-background",r);return e.jsx("div",{className:s,children:o})}export{i as C};

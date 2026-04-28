@@ -1,0 +1,1 @@
+import{w as t,j as r,N as o}from"./chunk-EVOBXE3Y-CCEPD6Um.js";import{d as e}from"./staticRoutes-DH93aIw8.js";import"./utilFunctions-CBG9PTYO.js";import"./contact-IM88gR3s.js";const n=e.url,u=t(function(){return r.jsx(o,{to:n,replace:!0})});export{u as default};

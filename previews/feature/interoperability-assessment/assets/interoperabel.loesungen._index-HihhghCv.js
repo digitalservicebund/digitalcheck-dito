@@ -1,0 +1,1 @@
+import{w as e,j as o,N as r}from"./chunk-EVOBXE3Y-CCEPD6Um.js";import{b as t,g as n}from"./staticRoutes-DH93aIw8.js";import"./utilFunctions-CBG9PTYO.js";import"./contact-IM88gR3s.js";const s=t.url+n("interoperable-loesungen","interoperable-loesungen"),m=e(function(){return o.jsx(r,{to:s,replace:!0})});export{m as default};
