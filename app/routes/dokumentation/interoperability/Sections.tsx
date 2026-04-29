@@ -14,6 +14,8 @@ type QuestionGroup = {
 };
 type Section = {
   title: string;
+  id: string;
+  levelDe: string;
   intro?: ReactNode;
   groups: QuestionGroup[];
 };
@@ -25,6 +27,8 @@ export type Answer = {
 export type AnswersById = Record<string, Answer>;
 export const sections: Section[] = [
   {
+    id: "legal",
+    levelDe: "rechtliche",
     title: "Rechtliche Interoperabilität",
     intro: (
       <ExplanationParagraph
@@ -86,6 +90,8 @@ export const sections: Section[] = [
     ],
   },
   {
+    id: "organizational",
+    levelDe: "organisatorische",
     title: "Organisatorische Interoperabilität",
     intro: (
       <ExplanationParagraph
@@ -145,6 +151,8 @@ export const sections: Section[] = [
     ],
   },
   {
+    id: "semantic",
+    levelDe: "semantische",
     title: "Semantische Interoperabilität",
     intro: (
       <ExplanationParagraph
@@ -196,6 +204,8 @@ export const sections: Section[] = [
     ],
   },
   {
+    id: "technical",
+    levelDe: "technische",
     title: "Technische Interoperabilität",
     intro: (
       <ExplanationParagraph

@@ -1,12 +1,12 @@
-import { useForm, type FormApi } from "@rvf/react";
-import { ReactNode, useId } from "react";
+import { type FormApi, useForm } from "@rvf/react";
+import { ReactNode } from "react";
 import { z } from "zod";
 import NewTabLink from "~/components/NewTabLink.tsx";
-import RadioGroup, { Option } from "~/components/RadioGroup.tsx";
 import RichText from "~/components/RichText.tsx";
 import Textarea from "~/components/Textarea.tsx";
 import { ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS } from "~/resources/staticRoutes.ts";
 import { interoperabilityExplanationParagraphs } from "~/routes/dokumentation/interoperability/explanationMarkdown.ts";
+import { InteroperabilityRatingSelect } from "~/routes/dokumentation/interoperability/InteroperabilityRatingSelect.tsx";
 
 const assessmentFormSchema = z.record(z.string(), z.any());
 
@@ -23,58 +23,11 @@ function LevelAssessmentForm({
   levelDe,
   description,
 }: InteroperabilityLevelSectionProps) {
-  const options: Option<string>[] = [
-    {
-      label: (
-        <>
-          Das Vorhaben hat eine <strong>positive</strong> Auswirkung auf{" "}
-          <strong>{levelDe}</strong> Interoperabilität
-        </>
-      ),
-      value: "positive",
-    },
-    {
-      label: (
-        <>
-          Das Vorhaben hat eine <strong>neutrale</strong> Auswirkung auf{" "}
-          <strong>{levelDe}</strong> Interoperabilität
-        </>
-      ),
-      value: "neutral",
-    },
-    {
-      label: (
-        <>
-          Das Vorhaben hat eine <strong>negative oder riskante</strong>{" "}
-          Auswirkung auf <strong>{levelDe}</strong> Interoperabilität
-        </>
-      ),
-      value: "risky",
-    },
-    {
-      label: (
-        <>
-          Die <strong>{levelDe}</strong> Interoperabilitätsebene ist{" "}
-          <strong>nicht anwendbar</strong>
-        </>
-      ),
-      value: "not-applicable",
-    },
-  ];
+  const scope = form.scope(`level-${level}.rating`);
 
-  const labelId = useId();
   return (
     <div className="space-y-32">
-      <div className="space-y-8">
-        <label id={labelId} className="ds-label-01-reg block">
-          Bewerten Sie die Auswirkungen Ihres Vorhabens
-        </label>
-        <RadioGroup
-          aria-labelledby={labelId}
-          scope={form.scope(`level-${level}.rating`)}
-          options={options}
-        />
-      </div>
+      <InteroperabilityRatingSelect levelDe={levelDe} scope={scope} />
       <Textarea
         description={description}
         scope={form.scope(`level-${level}.detail`)}
@@ -85,7 +38,9 @@ function LevelAssessmentForm({
   );
 }
 
-export function ExplanationParagraph({ markdown }: { markdown: string }) {
+export function ExplanationParagraph({
+  markdown,
+}: Readonly<{ markdown: string }>) {
   return (
     <div className={"ds-body-01-reg max-w-prose text-gray-900"}>
       <RichText markdown={markdown} />

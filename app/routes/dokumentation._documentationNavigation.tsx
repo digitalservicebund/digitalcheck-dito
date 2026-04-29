@@ -9,7 +9,9 @@ import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
   type Route as _Route,
   ROUTE_DOCUMENTATION,
+  ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
   ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
+  ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS,
   ROUTE_DOCUMENTATION_NOTES,
   ROUTE_DOCUMENTATION_SEND,
   ROUTE_DOCUMENTATION_SUMMARY,
@@ -102,6 +104,32 @@ export default function LayoutWithDocumentationNavigation() {
     if (Array.isArray(route)) return true;
     return route.url !== ROUTE_DOCUMENTATION_NOTES.url;
   });
+
+  const euRouteUrls = new Set([
+    ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS.url,
+    ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS.url,
+    ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT.url,
+  ]);
+
+  const euGroupedRoutes = displayedRoutes
+    .flat()
+    .filter((route) => euRouteUrls.has(route.url));
+
+  const displayedRoutesWithoutEu = displayedRoutes.filter((route) =>
+    Array.isArray(route) ? true : !euRouteUrls.has(route.url),
+  );
+
+  const displayedRoutesWithEuGroup = [...displayedRoutesWithoutEu];
+  if (euGroupedRoutes.length > 0) {
+    const principlesIndex = displayedRoutesWithEuGroup.findIndex((route) =>
+      Array.isArray(route),
+    );
+    const euInsertIndex =
+      principlesIndex >= 0
+        ? principlesIndex + 1
+        : displayedRoutesWithEuGroup.length;
+    displayedRoutesWithEuGroup.splice(euInsertIndex, 0, euGroupedRoutes);
+  }
 
   const location = useLocation();
   const currentUrl = location.pathname;
@@ -231,11 +259,16 @@ export default function LayoutWithDocumentationNavigation() {
           ariaLabel={digitalDocumentation.navigation.ariaLabel}
         >
           <Nav.Items>
-            {displayedRoutes.map((route) => {
-              if (Array.isArray(route))
+            {displayedRoutesWithEuGroup.map((route) => {
+              if (Array.isArray(route)) {
+                const isEuGroup = route.every((element) =>
+                  euRouteUrls.has(element.url),
+                );
+
+                console.log(route);
                 return (
                   <Nav.Item
-                    key="principles"
+                    key={isEuGroup ? "eu-interoperability" : "principles"}
                     disabled={isNavigationDisabled}
                     subItems={
                       <Nav.Items>
@@ -243,9 +276,12 @@ export default function LayoutWithDocumentationNavigation() {
                       </Nav.Items>
                     }
                   >
-                    {digitalDocumentation.navigation.principles}
+                    {isEuGroup
+                      ? digitalDocumentation.navigation.euInteroperability
+                      : digitalDocumentation.navigation.principles}
                   </Nav.Item>
                 );
+              }
               return getNavItem(route);
             })}
           </Nav.Items>

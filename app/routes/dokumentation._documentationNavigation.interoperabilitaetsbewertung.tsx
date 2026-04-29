@@ -50,13 +50,13 @@ export default function DocumentationInteroperabilityAssessment() {
             <TabGroup.Tab label="Variante 2: Ausfüllhilfe">
               <FormVariant2 />
             </TabGroup.Tab>
-            <DocumentationActions
-              previousUrl={previousUrl}
-              nextUrl={nextUrl ?? ROUTE_DOCUMENTATION_SUMMARY.url}
-              showDownloadDraftButton
-              showSavingTip
-            />
           </TabGroup>
+          <DocumentationActions
+            previousUrl={previousUrl}
+            nextUrl={nextUrl ?? ROUTE_DOCUMENTATION_SUMMARY.url}
+            showDownloadDraftButton
+            showSavingTip
+          />
         </div>
       </div>
     </>

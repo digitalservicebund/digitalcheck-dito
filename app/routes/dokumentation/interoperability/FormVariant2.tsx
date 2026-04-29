@@ -9,6 +9,7 @@ import {
   ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
   ROUTE_DOCUMENTATION_SUMMARY,
 } from "~/resources/staticRoutes.ts";
+import { InteroperabilityRatingSelect } from "~/routes/dokumentation/interoperability/InteroperabilityRatingSelect.tsx";
 import {
   AnswersById,
   Question,
@@ -170,13 +171,13 @@ export default function FormVariant2() {
         {sections.map((section) => (
           <section
             key={section.title}
-            className={"mt-32 mb-64 border-t border-gray-600 pt-32"}
+            className={"mt-32 mb-64 space-y-32 border-t border-gray-600 pt-32"}
           >
             <h3 className={"mb-16"}>{section.title}</h3>
             {section.intro ? <p>{section.intro}</p> : null}
 
             {section.groups.map((group) => (
-              <div key={group.title} style={{ marginBottom: "1rem" }}>
+              <div key={group.title}>
                 <h4 className={"ds-label-01-bold mt-32 mb-16"}>
                   {group.title}
                 </h4>
@@ -217,6 +218,10 @@ export default function FormVariant2() {
                 })}
               </div>
             ))}
+            <InteroperabilityRatingSelect
+              scope={form.scope(`level-${section.title}.rating`)}
+              levelDe={section.levelDe}
+            />
           </section>
         ))}
       </form>
