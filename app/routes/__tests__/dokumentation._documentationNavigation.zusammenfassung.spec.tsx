@@ -25,7 +25,7 @@ import type {
 } from "~/routes/dokumentation/documentationDataSchema";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { AbsatzWithParagraph } from "~/utils/strapiData.server.ts";
-import DocumentationSummaryV2 from "../dokumentation/DocumentationSummaryV2";
+import DocumentationSummary from "../dokumentation._documentationNavigation.zusammenfassung";
 
 const MOCK_ROUTE_PRINCIPLE = {
   title: "Digitale Angebote",
@@ -59,12 +59,12 @@ function createDocumentationDataMock({
   });
 }
 
-describe("DocumentationSummaryV2", () => {
+describe("DocumentationSummary", () => {
   const renderWithRouter = () => {
     return render(
       <MemoryRouter>
         <DocumentationDataProvider>
-          <DocumentationSummaryV2 />
+          <DocumentationSummary />
         </DocumentationDataProvider>
       </MemoryRouter>,
     );

@@ -8,6 +8,7 @@ import {
   createMemoryRouter,
   RouterProvider,
   useOutletContext,
+  useRouteError,
   useRouteLoaderData,
 } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
@@ -26,8 +27,10 @@ import LayoutWithDocumentationNavigation, {
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import {
+  DATA_SCHEMA_VERSION_V1,
   DATA_SCHEMA_VERSION_V2,
   DocumentationData,
+  V1,
 } from "../dokumentation/documentationDataSchema";
 
 vi.mock("react-router", async (importOriginal) => {
@@ -35,13 +38,6 @@ vi.mock("react-router", async (importOriginal) => {
   return {
     ...original,
     useRouteLoaderData: vi.fn(),
-    useOutletContext: () => {
-      const originalValue = original.useOutletContext();
-      return {
-        ...(originalValue as Record<string, unknown>),
-        featureFlags: {},
-      };
-    },
   };
 });
 
@@ -157,17 +153,18 @@ const validationScenarios: ValidationScenario[] = [
     expected: {
       completedTitle: false, // is current route so no states are shown
       completedParticipation: true,
-      completedPrinciples: true,
+      completedPrinciples: false,
 
       warningTitle: false,
       warningParticipation: false,
-      warningPrinciples: false,
+      warningPrinciples: true,
     },
   },
 ];
 
 function renderPage({ url }: Route) {
   function ErrorBoundary() {
+    useRouteError();
     return <h1>Something went wrong</h1>;
   }
   function DummyElement() {
@@ -191,7 +188,7 @@ function renderPage({ url }: Route) {
       ErrorBoundary: ErrorBoundary,
       children: [
         {
-          path: url,
+          path: "*",
           element: <DummyElement />,
           HydrateFallback: () => <div></div>,
         },
@@ -251,7 +248,28 @@ const expectNotWarning = (element: HTMLElement) => {
 
 describe("navigation on pages of documentation", () => {
   beforeEach(() => {
-    vi.mocked(useFeatureFlag).mockImplementation((_flagName) => false);
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      value: vi.fn().mockImplementation((query: string) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      })),
+    });
+    vi.stubGlobal(
+      "ResizeObserver",
+      class {
+        observe = vi.fn();
+        unobserve = vi.fn();
+        disconnect = vi.fn();
+      },
+    );
+
     vi.mocked(useRouteLoaderData).mockReturnValue({ routes: mockRoutes });
   });
 
@@ -353,32 +371,6 @@ describe("navigation on pages of documentation", () => {
   });
 
   describe("V2 States", () => {
-    // HelpSidepanel is rendered when simplifiedPrincipleFlow is on
-    // and uses browser APIs not available in jsdom
-    beforeEach(() => {
-      Object.defineProperty(window, "matchMedia", {
-        writable: true,
-        value: vi.fn().mockImplementation((query: string) => ({
-          matches: false,
-          media: query,
-          onchange: null,
-          addListener: vi.fn(),
-          removeListener: vi.fn(),
-          addEventListener: vi.fn(),
-          removeEventListener: vi.fn(),
-          dispatchEvent: vi.fn(),
-        })),
-      });
-      vi.stubGlobal(
-        "ResizeObserver",
-        class {
-          observe = vi.fn();
-          unobserve = vi.fn();
-          disconnect = vi.fn();
-        },
-      );
-    });
-
     const validationScenariosV2: ValidationScenario[] = [
       {
         name: "all valid completed (V2)",
@@ -456,10 +448,6 @@ describe("navigation on pages of documentation", () => {
         },
       },
     ];
-
-    beforeEach(() => {
-      vi.mocked(useFeatureFlag).mockImplementation((_flagName) => true);
-    });
 
     describe.each(validationScenariosV2)(
       "Scenario: $name",
