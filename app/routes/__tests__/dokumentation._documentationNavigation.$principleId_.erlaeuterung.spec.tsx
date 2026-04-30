@@ -12,13 +12,13 @@ import "@testing-library/jest-dom";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent, { type UserEvent } from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { DocumentationNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import type { digitalDocumentation } from "~/resources/content/dokumentation";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import {
-  createBrowserRouter,
+  createMemoryRouter,
   RouterProvider,
-  useOutletContext,
   useParams,
 } from "~/utils/routerCompat";
 import {
@@ -111,22 +111,28 @@ const context: NavigationContext = {
   prinzips,
 };
 
-const mockedUseOutletContext = vi.mocked(useOutletContext);
 const mockedUseParams = vi.mocked(useParams);
 
 const renderWithRouter = () => {
-  const router = createBrowserRouter([
+  const router = createMemoryRouter(
+    [
+      {
+        path: "/dokumentation/prinzip-1-digitale-angebote/erlaeuterung",
+        element: (
+          <HelpPanelProvider>
+            <DocumentationDataProvider>
+              <DocumentationNavigationContext.Provider value={context}>
+                <DocumentationPrincipleErlaeuterung />
+              </DocumentationNavigationContext.Provider>
+            </DocumentationDataProvider>
+          </HelpPanelProvider>
+        ),
+      },
+    ],
     {
-      path: "/",
-      element: (
-        <HelpPanelProvider>
-          <DocumentationDataProvider>
-            <DocumentationPrincipleErlaeuterung />
-          </DocumentationDataProvider>
-        </HelpPanelProvider>
-      ),
+      initialEntries: ["/dokumentation/prinzip-1-digitale-angebote/erlaeuterung"],
     },
-  ]);
+  );
 
   return render(<RouterProvider router={router} />);
 };
@@ -151,7 +157,6 @@ const mockStoredData = (
 
 describe("DocumentationPrincipleErlaeuterung", () => {
   beforeEach(() => {
-    mockedUseOutletContext.mockReturnValue(context);
     mockedUseParams.mockReturnValue({
       principleId: "prinzip-1-digitale-angebote",
     });

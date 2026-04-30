@@ -349,21 +349,26 @@ export function createBrowserRouter(routes: RouteConfig[]): RouterObject {
 }
 
 /**
- * Renders the root route's element or Component from the stub router.
+ * Renders the root route's element or Component from the stub router,
+ * wrapped in a MemoryRouter so location context is available in tests.
  * Child routes are not rendered — tests that rely on outlet children
  * should be updated to use DocumentationNavigationContext directly.
  */
 export function RouterProvider({ router }: { router: RouterObject }) {
   const root = router.routes[0];
   if (!root) return null;
-  if (root.element) return <>{root.element}</>;
-  if (root.Component) return <root.Component />;
-  return null;
+  const element = root.element ? <>{root.element}</> : root.Component ? <root.Component /> : null;
+  return (
+    <MemoryRouter initialEntries={router.initialEntries}>
+      {element}
+    </MemoryRouter>
+  );
 }
 
 /**
  * Creates a route stub component for testing components that use router hooks.
- * Renders the matched route's Component at the given path.
+ * Renders the matched route's Component at the given path, wrapped in a
+ * MemoryRouter so Link clicks and hash navigation work in tests.
  */
 export function createRoutesStub(
   routes: Array<{
@@ -384,7 +389,11 @@ export function createRoutesStub(
     const FallbackRoute = routes[0];
     const MatchedRoute = route ?? FallbackRoute;
     if (!MatchedRoute?.Component) return null;
-    return <MatchedRoute.Component />;
+    return (
+      <MemoryRouter initialEntries={initialEntries}>
+        <MatchedRoute.Component />
+      </MemoryRouter>
+    );
   };
 }
 

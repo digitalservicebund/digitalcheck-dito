@@ -1,12 +1,13 @@
 import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { features } from "~/utils/featureFlags";
+import { useLocation } from "~/utils/routerCompat";
 import DocumentationPrincipleV1 from "./dokumentation/DocumentationPrincipleV1";
 import DocumentationPrincipleV2 from "./dokumentation/DocumentationPrincipleV2";
 
 function usePrincipleId(): string | undefined {
-  if (typeof window === "undefined") return undefined;
-  const parts = window.location.pathname.split("/");
+  const { pathname } = useLocation();
+  const parts = pathname.split("/");
   const dokIdx = parts.indexOf("dokumentation");
   return dokIdx >= 0 ? parts[dokIdx + 1] : undefined;
 }

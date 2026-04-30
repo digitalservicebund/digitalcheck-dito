@@ -1,4 +1,3 @@
-// Import mocks first
 import {
   dokumentation,
   dokumentation_beteiligungsformate,
@@ -12,18 +11,12 @@ import "./utils/mockLocalStorageVersioned";
 import "@testing-library/jest-dom";
 import { act, render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import {
-  createMemoryRouter,
-  RouterProvider,
-  useOutletContext,
-  useRouteLoaderData,
-} from "~/utils/routerCompat";
+import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
-import LayoutWithDocumentationNavigation, {
-  type NavigationContext,
-} from "~/routes/dokumentation._documentationNavigation";
+import LayoutWithDocumentationNavigation from "~/routes/dokumentation._documentationNavigation";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
+import { MemoryRouter, useRouteLoaderData } from "~/utils/routerCompat";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import {
   DATA_SCHEMA_VERSION_V1,
@@ -183,11 +176,8 @@ const validationScenarios: ValidationScenario[] = [
 ];
 
 function renderPage({ path }: Route) {
-  function ErrorBoundary() {
-    return <h1>Something went wrong</h1>;
-  }
   function DummyElement() {
-    const { nextUrl, previousUrl } = useOutletContext<NavigationContext>();
+    const { nextUrl, previousUrl } = useNavigationContext();
     return (
       <>
         <h1>Foobar</h1>
@@ -196,33 +186,16 @@ function renderPage({ path }: Route) {
       </>
     );
   }
-  const routes = [
-    {
-      path: dokumentation.path,
-      element: (
-        <DocumentationDataProvider>
-          <LayoutWithDocumentationNavigation
-            routes={mockRoutes}
-            prinzips={[]}
-          />
-        </DocumentationDataProvider>
-      ),
-      ErrorBoundary: ErrorBoundary,
-      children: [
-        {
-          path: path,
-          element: <DummyElement />,
-          HydrateFallback: () => <div></div>,
-        },
-      ],
-    },
-  ];
 
-  const router = createMemoryRouter(routes, {
-    initialEntries: [path],
-  });
-
-  render(<RouterProvider router={router} />);
+  render(
+    <MemoryRouter initialEntries={[path]}>
+      <DocumentationDataProvider>
+        <LayoutWithDocumentationNavigation routes={mockRoutes} prinzips={[]}>
+          <DummyElement />
+        </LayoutWithDocumentationNavigation>
+      </DocumentationDataProvider>
+    </MemoryRouter>,
+  );
 }
 
 const getNav = () =>

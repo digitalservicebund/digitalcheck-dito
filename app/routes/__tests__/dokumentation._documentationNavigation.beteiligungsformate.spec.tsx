@@ -7,6 +7,7 @@ import "@testing-library/jest-dom";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { DocumentationNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import DocumentationParticipation from "~/routes/dokumentation._documentationNavigation.beteiligungsformate";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
@@ -17,13 +18,16 @@ import {
   type DocumentationData,
   type V1,
 } from "../dokumentation/documentationDataSchema";
+import { mockNavigationContext } from "./utils/mockRouter";
 
 const renderWithRouter = () => {
   return render(
     <MemoryRouter>
       <HelpPanelProvider>
         <DocumentationDataProvider>
-          <DocumentationParticipation />
+          <DocumentationNavigationContext.Provider value={mockNavigationContext}>
+            <DocumentationParticipation />
+          </DocumentationNavigationContext.Provider>
         </DocumentationDataProvider>
       </HelpPanelProvider>
     </MemoryRouter>,

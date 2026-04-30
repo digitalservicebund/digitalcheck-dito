@@ -7,6 +7,7 @@ import "@testing-library/jest-dom";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { DocumentationNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import DocumentationTitle from "~/routes/dokumentation._documentationNavigation.regelungsvorhaben-titel";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
@@ -16,6 +17,7 @@ import {
   DATA_SCHEMA_VERSION_V1,
   type DocumentationData,
 } from "../dokumentation/documentationDataSchema";
+import { mockNavigationContext } from "./utils/mockRouter";
 
 const mockedReadDataFromLocalStorage = vi.mocked(
   readDataFromLocalStorage<DocumentationData>,
@@ -26,7 +28,9 @@ const renderWithRouter = () => {
     <MemoryRouter>
       <HelpPanelProvider>
         <DocumentationDataProvider>
-          <DocumentationTitle />
+          <DocumentationNavigationContext.Provider value={mockNavigationContext}>
+            <DocumentationTitle />
+          </DocumentationNavigationContext.Provider>
         </DocumentationDataProvider>
       </HelpPanelProvider>
     </MemoryRouter>,

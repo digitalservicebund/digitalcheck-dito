@@ -9,7 +9,7 @@ import HelpButton from "~/components/HelpButton";
 import Textarea from "~/components/Textarea";
 import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import { Link, useNavigate } from "~/utils/routerCompat";
+import { Link, useLocation, useNavigate } from "~/utils/routerCompat";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
@@ -21,8 +21,8 @@ import {
 } from "./dokumentation/documentationDataSchema";
 
 function usePrincipleId(): string | undefined {
-  if (typeof window === "undefined") return undefined;
-  const parts = window.location.pathname.split("/");
+  const { pathname } = useLocation();
+  const parts = pathname.split("/");
   const dokIdx = parts.indexOf("dokumentation");
   return dokIdx >= 0 ? parts[dokIdx + 1] : undefined;
 }
