@@ -36,16 +36,17 @@ export default function DocumentationActions({
   return (
     <div className="mt-80 space-y-40">
       <ButtonContainer>
-        {submit && <Button type="submit">{general.buttonNext.text}</Button>}
-        {nextUrl && (
-          <LinkButton to={nextUrl}>{general.buttonNext.text}</LinkButton>
-        )}
-
         {previousUrl && (
           <LinkButton to={previousUrl} look="tertiary">
             {general.buttonBack.text}
           </LinkButton>
         )}
+
+        {submit && <Button type="submit">{general.buttonNext.text}</Button>}
+        {nextUrl && (
+          <LinkButton to={nextUrl}>{general.buttonNext.text}</LinkButton>
+        )}
+
         {showDownloadDraftButton && prinzips && (
           <DownloadButton
             look="ghost"
