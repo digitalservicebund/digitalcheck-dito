@@ -31,6 +31,7 @@ import {
   DATA_SCHEMA_VERSION_V2,
   DocumentationData,
   V1,
+  V2,
 } from "../dokumentation/documentationDataSchema";
 
 vi.mock("react-router", async (importOriginal) => {
@@ -60,7 +61,7 @@ const documentationFormRoutes = mockRoutes
 
 type ValidationScenario = {
   name: string;
-  documentationData: DocumentationData<V1>;
+  documentationData: DocumentationData<V1> | DocumentationData<V2>;
   expected: {
     completedTitle: boolean;
     completedParticipation: boolean;
