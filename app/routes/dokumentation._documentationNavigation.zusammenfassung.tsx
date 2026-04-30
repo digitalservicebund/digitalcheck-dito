@@ -193,9 +193,7 @@ function SimplifiedAspectsContent({
           </div>
         </div>
       )}
-      {explanation && (
-        <Answer answers={[{ prefix: "Erläuterung", answer: explanation }]} />
-      )}
+      <Answer answers={[{ prefix: "Erläuterung", answer: explanation }]} />
     </>
   );
 }
