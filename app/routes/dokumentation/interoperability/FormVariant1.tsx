@@ -8,7 +8,10 @@ import Textarea from "~/components/Textarea.tsx";
 import { ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS } from "~/resources/staticRoutes.ts";
 import { interoperabilityExplanationParagraphs } from "~/routes/dokumentation/interoperability/explanationMarkdown.ts";
 import { InteroperabilityRatingSelect } from "~/routes/dokumentation/interoperability/InteroperabilityRatingSelect.tsx";
-import { sections } from "~/routes/dokumentation/interoperability/Sections.tsx";
+import {
+  Section,
+  sections,
+} from "~/routes/dokumentation/interoperability/Sections.tsx";
 
 const assessmentFormSchema = z.record(z.string(), z.any());
 
@@ -52,12 +55,12 @@ export function ExplanationParagraph({
   );
 }
 
-function ExamplesList({ level }: Readonly<{ level: string }>) {
+function ExamplesList({ level }: Readonly<{ level: Section["id"] }>) {
   const section = sections.find((section) => section.id === level);
   if (!section) return null;
   return (
     <DetailsSummary title={"Beispiele"}>
-      <div className="space-y-32">
+      <div className="mt-16 space-y-32">
         {section?.groups.map((group) => (
           <ul key={group.title}>
             <p className="ds-label-01-bold">{group.title}</p>
@@ -73,13 +76,12 @@ function ExamplesList({ level }: Readonly<{ level: string }>) {
   );
 }
 
-export default function EUInteroperabilityAssessment() {
+export default function FormVariant1() {
   const form = useForm({
     schema: assessmentFormSchema,
     defaultValues: {},
   });
 
-  const levelId = "legal";
   return (
     <div className={"space-y-8"}>
       <p>

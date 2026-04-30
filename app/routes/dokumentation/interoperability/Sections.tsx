@@ -12,9 +12,9 @@ type QuestionGroup = {
   title: string;
   questions: Question[];
 };
-type Section = {
+export type Section = {
   title: string;
-  id: string;
+  id: "legal" | "organizational" | "semantic" | "technical";
   levelDe: string;
   intro?: ReactNode;
   groups: QuestionGroup[];
