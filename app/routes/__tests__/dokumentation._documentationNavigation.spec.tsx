@@ -325,7 +325,7 @@ describe("navigation on pages of documentation", () => {
     vi.mocked(readDataFromLocalStorage<DocumentationData<V1>>).mockReturnValue({
       version: DATA_SCHEMA_VERSION_V1,
       euInteroperabilityOutcome: { outcomeId: "REQUIRED" },
-    } as DocumentationData<V1>);
+    });
 
     renderPage(currentRoute);
 
@@ -459,7 +459,7 @@ describe("navigation on pages of documentation", () => {
               aspects: ["aspect-1"],
             },
           ],
-        } as DocumentationData<V2> as DocumentationData<V1>,
+        } as DocumentationData<V2>,
         expected: {
           completedTitle: false, // is current route so no states are shown
           completedParticipation: true,
@@ -474,7 +474,7 @@ describe("navigation on pages of documentation", () => {
         name: "unfilled form (V2)",
         documentationData: {
           version: DATA_SCHEMA_VERSION_V2,
-        } as DocumentationData<V2> as DocumentationData<V1>,
+        },
         expected: {
           completedTitle: false,
           completedParticipation: false,
@@ -504,7 +504,7 @@ describe("navigation on pages of documentation", () => {
               aspects: [], // empty aspects fails V2 validation
             },
           ],
-        } as DocumentationData<V2> as DocumentationData<V1>,
+        } as DocumentationData<V2>,
         expected: {
           completedTitle: false, // is current route so no states are shown
           completedParticipation: true,

@@ -34,18 +34,22 @@ export default function BindingRequirementsForm() {
               placeholder="Beschreiben Sie die verbindliche Anforderung"
               rows={2}
               warningInsteadOfError
-              description={`Example: The market data providers shall provide the competent authority, upon request, with structured information on the total costs of production using the form set out in Annex II.`}
+              description={
+                "Example: The market data providers shall provide the competent authority, upon request, with structured information on the total costs of production using the form set out in Annex II."
+              }
             >
-              {`Beschreibung`}
+              {"Beschreibung"}
             </Textarea>
             <Textarea
               scope={requirement.scope("legalReference")}
               placeholder="§§ 1 – 5"
               rows={1}
               warningInsteadOfError
-              description={`Specify the article or section. Type a URL such as https://example.com. Use ELI format, if possible - otherwise provide a URL pointing to the binding requirement assessed.`}
+              description={
+                "Specify the article or section. Type a URL such as https://example.com. Use ELI format, if possible - otherwise provide a URL pointing to the binding requirement assessed."
+              }
             >
-              {`Paragraph oder Artikel`}
+              {"Paragraph oder Artikel"}
             </Textarea>
           </div>
         ))}

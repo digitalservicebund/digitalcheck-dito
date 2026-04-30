@@ -116,10 +116,7 @@ export default function FormVariant2() {
 
   useEffect(() => {
     const unsubscribe = form.subscribe.value((values) => {
-      const normalizedAnswers = toAnswersById(
-        values as Partial<AssessmentFormValues>,
-        allQuestions,
-      );
+      const normalizedAnswers = toAnswersById(values, allQuestions);
 
       setAnswersById(normalizedAnswers);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(normalizedAnswers));

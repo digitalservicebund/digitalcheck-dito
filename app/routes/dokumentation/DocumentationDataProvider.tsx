@@ -134,11 +134,11 @@ function getInitialState(version: string): DocumentationData<V> {
     version === DATA_SCHEMA_VERSION_V2 &&
     storedData.version === DATA_SCHEMA_VERSION_V1
   ) {
-    storedData = migrateV1ToV2(storedData as DocumentationData<V1>);
+    storedData = migrateV1ToV2(storedData);
   }
 
   if (storedData !== null) return storedData;
-  return { version } as DocumentationData<V>;
+  return { version };
 }
 
 export function DocumentationDataProvider({

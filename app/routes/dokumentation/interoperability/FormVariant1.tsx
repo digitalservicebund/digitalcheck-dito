@@ -90,7 +90,8 @@ export default function FormVariant1() {
           href={ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS.url}
           className={"text-link"}
         >
-          "{ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS.title}"
+          &quot;{ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS.title}
+          &quot;
         </a>{" "}
         haben ergeben, dass Sie für Ihr Vorhaben eine verpflichtende
         Interoperabilitätsbewertung einreichen müssen. Wählen Sie aus, welche{" "}

@@ -16,19 +16,19 @@ export function InteroperabilityRatingSelect({
   const field = useField(scope);
   const options: RatingOption[] = [
     {
-      label: `positive`,
+      label: "positive",
       value: "positive",
     },
     {
-      label: `neutrale`,
+      label: "neutrale",
       value: "neutral",
     },
     {
-      label: `negative oder riskante`,
+      label: "negative oder riskante",
       value: "risky",
     },
     {
-      label: `(nicht anwendbare)`,
+      label: "(nicht anwendbare)",
       value: "not-applicable",
     },
   ];
