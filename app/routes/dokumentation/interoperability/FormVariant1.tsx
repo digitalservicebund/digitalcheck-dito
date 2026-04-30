@@ -8,6 +8,7 @@ import Textarea from "~/components/Textarea.tsx";
 import { ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS } from "~/resources/staticRoutes.ts";
 import { interoperabilityExplanationParagraphs } from "~/routes/dokumentation/interoperability/explanationMarkdown.ts";
 import { InteroperabilityRatingSelect } from "~/routes/dokumentation/interoperability/InteroperabilityRatingSelect.tsx";
+import { sections } from "~/routes/dokumentation/interoperability/Sections.tsx";
 
 const assessmentFormSchema = z.record(z.string(), z.any());
 
@@ -51,12 +52,34 @@ export function ExplanationParagraph({
   );
 }
 
+function ExamplesList({ level }: Readonly<{ level: string }>) {
+  const section = sections.find((section) => section.id === level);
+  if (!section) return null;
+  return (
+    <DetailsSummary title={"Beispiele"}>
+      <div className="space-y-32">
+        {section?.groups.map((group) => (
+          <ul key={group.title}>
+            <p className="ds-label-01-bold">{group.title}</p>
+            {group.questions
+              .filter((q) => !q.isOwnStatement)
+              .map((q) => (
+                <li key={q.id}>{q.label}</li>
+              ))}
+          </ul>
+        ))}
+      </div>
+    </DetailsSummary>
+  );
+}
+
 export default function EUInteroperabilityAssessment() {
   const form = useForm({
     schema: assessmentFormSchema,
     defaultValues: {},
   });
 
+  const levelId = "legal";
   return (
     <div className={"space-y-8"}>
       <p>
@@ -90,6 +113,8 @@ export default function EUInteroperabilityAssessment() {
             markdown={interoperabilityExplanationParagraphs.legal}
           />
 
+          <ExamplesList level="legal" />
+
           <LevelAssessmentForm
             form={form}
             level={"legal"}
@@ -101,6 +126,7 @@ export default function EUInteroperabilityAssessment() {
           <ExplanationParagraph
             markdown={interoperabilityExplanationParagraphs.organizational}
           />
+          <ExamplesList level="organizational" />
           <LevelAssessmentForm
             form={form}
             level={"organizational"}
@@ -112,6 +138,8 @@ export default function EUInteroperabilityAssessment() {
           <ExplanationParagraph
             markdown={interoperabilityExplanationParagraphs.semantic}
           />
+          <ExamplesList level="semantic" />
+
           <LevelAssessmentForm
             form={form}
             level={"semantic"}
@@ -123,6 +151,8 @@ export default function EUInteroperabilityAssessment() {
           <ExplanationParagraph
             markdown={interoperabilityExplanationParagraphs.technical}
           />
+          <ExamplesList level="technical" />
+
           <LevelAssessmentForm
             form={form}
             level={"technical"}
