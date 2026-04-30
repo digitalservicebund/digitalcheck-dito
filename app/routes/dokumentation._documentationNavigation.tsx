@@ -13,8 +13,10 @@ import {
   ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
   ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS,
   ROUTE_DOCUMENTATION_NOTES,
+  ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_SEND,
   ROUTE_DOCUMENTATION_SUMMARY,
+  ROUTE_DOCUMENTATION_TITLE,
 } from "~/resources/staticRoutes";
 import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { features } from "~/utils/featureFlags";
@@ -33,6 +35,168 @@ export type NavigationContext = {
   routes: (Route | Route[])[];
   prinzips: PrinzipWithAspekteAndExample[];
 };
+
+type NavigationTreeContext = {
+  flatRoutes: Route[];
+  principleRoutes: Route[];
+  routeByUrl: Map<string, Route>;
+  isInteroperabilityAssessmentAccessible: boolean;
+};
+
+type NavigationItemDefinition = {
+  type: "item";
+  key: string;
+  getRoute: (context: NavigationTreeContext) => Route | null;
+  isEnabled: (context: NavigationTreeContext, route: Route) => boolean;
+};
+
+type NavigationFolderDefinition = {
+  type: "folder";
+  key: string;
+  label: string;
+  getChildren: (context: NavigationTreeContext) => NavigationItemDefinition[];
+};
+
+type NavigationDefinition =
+  | NavigationItemDefinition
+  | NavigationFolderDefinition;
+
+type ResolvedNavigationItem = {
+  type: "item";
+  key: string;
+  route: Route;
+  enabled: boolean;
+};
+
+type ResolvedNavigationFolder = {
+  type: "folder";
+  key: string;
+  label: string;
+  children: ResolvedNavigationItem[];
+};
+
+type ResolvedNavigationNode = ResolvedNavigationItem | ResolvedNavigationFolder;
+
+const alwaysEnabled = () => true;
+
+const getRouteByUrl =
+  (url: string) =>
+  ({ routeByUrl }: NavigationTreeContext) =>
+    routeByUrl.get(url) ?? null;
+
+const createRouteItem = (
+  key: string,
+  url: string,
+  isEnabled: NavigationItemDefinition["isEnabled"] = alwaysEnabled,
+): NavigationItemDefinition => ({
+  type: "item",
+  key,
+  getRoute: getRouteByUrl(url),
+  isEnabled,
+});
+
+const createPrincipleItem = (route: Route): NavigationItemDefinition => ({
+  type: "item",
+  key: route.url,
+  getRoute: () => route,
+  isEnabled: alwaysEnabled,
+});
+
+const staticDocumentationRoutes: Route[] = [
+  ROUTE_DOCUMENTATION_TITLE,
+  ROUTE_DOCUMENTATION_PARTICIPATION,
+  ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
+  ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS,
+  ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
+  ROUTE_DOCUMENTATION_SUMMARY,
+  ROUTE_DOCUMENTATION_SEND,
+];
+
+const documentationNavigationTree: NavigationDefinition[] = [
+  createRouteItem("title", ROUTE_DOCUMENTATION_TITLE.url),
+  createRouteItem("participation", ROUTE_DOCUMENTATION_PARTICIPATION.url),
+  {
+    type: "folder",
+    key: "principles",
+    label: digitalDocumentation.navigation.principles,
+    getChildren: ({ principleRoutes }) =>
+      principleRoutes.map(createPrincipleItem),
+  },
+  {
+    type: "folder",
+    key: "eu-interoperability",
+    label: digitalDocumentation.navigation.euInteroperability,
+    getChildren: () => [
+      createRouteItem(
+        "eu-interoperability-requirements",
+        ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS.url,
+      ),
+      createRouteItem(
+        "interoperability-binding-requirements",
+        ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS.url,
+      ),
+      createRouteItem(
+        "interoperability-assessment",
+        ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT.url,
+        ({ isInteroperabilityAssessmentAccessible }) =>
+          isInteroperabilityAssessmentAccessible,
+      ),
+    ],
+  },
+  createRouteItem("summary", ROUTE_DOCUMENTATION_SUMMARY.url),
+  createRouteItem("send", ROUTE_DOCUMENTATION_SEND.url),
+];
+
+function resolveNavigationItem(
+  item: NavigationItemDefinition,
+  context: NavigationTreeContext,
+): ResolvedNavigationItem | null {
+  const route = item.getRoute(context);
+  if (!route) return null;
+
+  return {
+    type: "item",
+    key: item.key,
+    route,
+    enabled: item.isEnabled(context, route),
+  };
+}
+
+function resolveNavigationTree(
+  tree: NavigationDefinition[],
+  context: NavigationTreeContext,
+): ResolvedNavigationNode[] {
+  return tree.reduce<ResolvedNavigationNode[]>((resolvedTree, node) => {
+    if (node.type === "item") {
+      const item = resolveNavigationItem(node, context);
+      if (item) resolvedTree.push(item);
+      return resolvedTree;
+    }
+
+    const children = node
+      .getChildren(context)
+      .flatMap((child) => resolveNavigationItem(child, context) ?? []);
+
+    if (children.length > 0) {
+      resolvedTree.push({
+        type: "folder",
+        key: node.key,
+        label: node.label,
+        children,
+      } satisfies ResolvedNavigationFolder);
+    }
+
+    return resolvedTree;
+  }, []);
+}
+
+function flattenNavigationItems(
+  tree: ResolvedNavigationNode[],
+): ResolvedNavigationItem[] {
+  return tree.flatMap((node) =>
+    node.type === "item" ? [node] : flattenNavigationItems(node.children),
+  );
+}
 
 function findIndexForRoute(routes: Route[], currentUrl: string) {
   const index = routes.findIndex((route) => route.url === currentUrl);
@@ -98,38 +262,16 @@ function resolveAdjacentUrl(
 export default function LayoutWithDocumentationNavigation() {
   const { routes, prinzips } = useDocumentationRouteData();
   const simplifiedFlow = useFeatureFlag(features.simplifiedPrincipleFlow);
-
-  // exclude documentation notes
-  const displayedRoutes = routes.filter((route) => {
-    if (Array.isArray(route)) return true;
-    return route.url !== ROUTE_DOCUMENTATION_NOTES.url;
-  });
-
-  const euRouteUrls = new Set([
-    ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS.url,
-    ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS.url,
-    ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT.url,
-  ]);
-
-  const euGroupedRoutes = displayedRoutes
-    .flat()
-    .filter((route) => euRouteUrls.has(route.url));
-
-  const displayedRoutesWithoutEu = displayedRoutes.filter((route) =>
-    Array.isArray(route) ? true : !euRouteUrls.has(route.url),
+  const flatRoutes = routes.flat();
+  const principleRoutes = routes.flatMap((route) =>
+    Array.isArray(route) ? route : [],
   );
-
-  const displayedRoutesWithEuGroup = [...displayedRoutesWithoutEu];
-  if (euGroupedRoutes.length > 0) {
-    const principlesIndex = displayedRoutesWithEuGroup.findIndex((route) =>
-      Array.isArray(route),
-    );
-    const euInsertIndex =
-      principlesIndex >= 0
-        ? principlesIndex + 1
-        : displayedRoutesWithEuGroup.length;
-    displayedRoutesWithEuGroup.splice(euInsertIndex, 0, euGroupedRoutes);
-  }
+  const routeByUrl = new Map(
+    [...staticDocumentationRoutes, ...flatRoutes].map((route) => [
+      route.url,
+      route,
+    ]),
+  );
 
   const location = useLocation();
   const currentUrl = location.pathname;
@@ -152,44 +294,59 @@ export default function LayoutWithDocumentationNavigation() {
   const isInteroperabilityAssessmentAccessible =
     documentationData.euInteroperabilityOutcome?.outcomeId === "REQUIRED";
 
-  const isRouteAccessible = (route: Route) => {
-    if (
-      route.url === ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT.url &&
-      !isInteroperabilityAssessmentAccessible
-    ) {
-      return false;
-    }
-
-    return true;
+  const navigationTreeContext: NavigationTreeContext = {
+    flatRoutes,
+    principleRoutes,
+    routeByUrl,
+    isInteroperabilityAssessmentAccessible,
   };
 
-  const flatRoutes = routes.flat();
+  const resolvedNavigationTree = resolveNavigationTree(
+    documentationNavigationTree,
+    navigationTreeContext,
+  );
+  const accessibleRouteUrls = new Set([
+    ROUTE_DOCUMENTATION_NOTES.url,
+    ...flattenNavigationItems(resolvedNavigationTree)
+      .filter((item) => item.enabled)
+      .map((item) => item.route.url),
+  ]);
+
+  const isRouteAccessible = (route: Route) =>
+    accessibleRouteUrls.has(route.url);
+
   const currentRoute = flatRoutes.find((r) => r.url === navigationCurrentUrl);
   const currentPrincipleFormData = currentRoute?.principleId
     ? findDocumentationDataForUrl(currentRoute.principleId)
     : undefined;
 
-  const nextUrl = isErlaeuterungPage
-    ? resolveAdjacentUrl(
-        flatRoutes,
-        navigationCurrentUrl,
-        getNextUrl,
-        simplifiedFlow,
-        findDocumentationDataForUrl,
-        isRouteAccessible,
-      )
-    : simplifiedFlow &&
-        currentRoute?.principleId &&
-        (currentPrincipleFormData as { answer?: string } | undefined)?.answer
-      ? `${currentUrl}/erlaeuterung`
-      : resolveAdjacentUrl(
-          flatRoutes,
-          currentUrl,
-          getNextUrl,
-          simplifiedFlow,
-          findDocumentationDataForUrl,
-          isRouteAccessible,
-        );
+  let nextUrl: string | null;
+
+  if (isErlaeuterungPage) {
+    nextUrl = resolveAdjacentUrl(
+      flatRoutes,
+      navigationCurrentUrl,
+      getNextUrl,
+      simplifiedFlow,
+      findDocumentationDataForUrl,
+      isRouteAccessible,
+    );
+  } else if (
+    simplifiedFlow &&
+    currentRoute?.principleId &&
+    (currentPrincipleFormData as { answer?: string } | undefined)?.answer
+  ) {
+    nextUrl = `${currentUrl}/erlaeuterung`;
+  } else {
+    nextUrl = resolveAdjacentUrl(
+      flatRoutes,
+      currentUrl,
+      getNextUrl,
+      simplifiedFlow,
+      findDocumentationDataForUrl,
+      isRouteAccessible,
+    );
+  }
   const previousUrl =
     resolveAdjacentUrl(
       flatRoutes,
@@ -211,7 +368,7 @@ export default function LayoutWithDocumentationNavigation() {
     simplifiedFlow &&
     !excludedPanelRoutes.some((url) => currentUrl.startsWith(url));
 
-  const getNavItem = (route: Route) => {
+  const getNavItem = ({ route, enabled }: ResolvedNavigationItem) => {
     const formData = findDocumentationDataForUrl(
       route.principleId || route.url,
     );
@@ -236,7 +393,7 @@ export default function LayoutWithDocumentationNavigation() {
         }
         error={formData && !valid.success}
         completed={formData && valid.success}
-        disabled={isNavigationDisabled || !isRouteAccessible(route)}
+        disabled={isNavigationDisabled || !enabled}
       >
         {route.title}
       </Nav.Item>
@@ -259,30 +416,23 @@ export default function LayoutWithDocumentationNavigation() {
           ariaLabel={digitalDocumentation.navigation.ariaLabel}
         >
           <Nav.Items>
-            {displayedRoutesWithEuGroup.map((route) => {
-              if (Array.isArray(route)) {
-                const isEuGroup = route.every((element) =>
-                  euRouteUrls.has(element.url),
-                );
-
-                console.log(route);
+            {resolvedNavigationTree.map((node) => {
+              if (node.type === "folder") {
                 return (
                   <Nav.Item
-                    key={isEuGroup ? "eu-interoperability" : "principles"}
+                    key={node.key}
                     disabled={isNavigationDisabled}
                     subItems={
                       <Nav.Items>
-                        {route.map((element) => getNavItem(element))}
+                        {node.children.map((item) => getNavItem(item))}
                       </Nav.Items>
                     }
                   >
-                    {isEuGroup
-                      ? digitalDocumentation.navigation.euInteroperability
-                      : digitalDocumentation.navigation.principles}
+                    {node.label}
                   </Nav.Item>
                 );
               }
-              return getNavItem(route);
+              return getNavItem(node);
             })}
           </Nav.Items>
         </Nav>
