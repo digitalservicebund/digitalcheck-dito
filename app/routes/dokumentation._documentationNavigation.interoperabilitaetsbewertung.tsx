@@ -36,6 +36,11 @@ export default function DocumentationInteroperabilityAssessment() {
           look="ds-heading-02-reg"
           className="mb-16"
         />
+        <p className={"ds-subhead"}>
+          Bewerten Sie: Ermöglicht Ihre Regelung, dass die Verwaltungen
+          verschiedener Mitgliedstaaten gut zusammenarbeiten können, wenn dies
+          bei digitalen Angeboten erforderlich ist?
+        </p>
         <div
           className={
             "**:[[role=tablist]]:rounded-md **:[[role=tablist]]:bg-green-200 **:[[role=tablist]]:p-8 **:[[role=tablist]]:shadow-lg"

@@ -1,6 +1,7 @@
 import { type FormApi, useForm } from "@rvf/react";
 import { ReactNode } from "react";
 import { z } from "zod";
+import DetailsSummary from "~/components/DetailsSummary.tsx";
 import NewTabLink from "~/components/NewTabLink.tsx";
 import RichText from "~/components/RichText.tsx";
 import Textarea from "~/components/Textarea.tsx";
@@ -42,9 +43,11 @@ export function ExplanationParagraph({
   markdown,
 }: Readonly<{ markdown: string }>) {
   return (
-    <div className={"ds-body-01-reg max-w-prose text-gray-900"}>
-      <RichText markdown={markdown} />
-    </div>
+    <DetailsSummary title={"Was soll hier geprüft werden?"}>
+      <div className={"ds-body-01-reg max-w-prose"}>
+        <RichText markdown={markdown} />
+      </div>
+    </DetailsSummary>
   );
 }
 
@@ -56,10 +59,6 @@ export default function EUInteroperabilityAssessment() {
 
   return (
     <div className={"space-y-8"}>
-      <h2 className={"ds-heading-03-reg"}>
-        Erklären Sie, inwiefern sich Ihre Regelung auf digitale Angebote
-        auswirkt, die über EU-Grenzen hinweg funktionieren.
-      </h2>
       <p>
         Ihre Angaben im Schritt{" "}
         <a
@@ -86,9 +85,11 @@ export default function EUInteroperabilityAssessment() {
       >
         <div className="mt-64 space-y-16">
           <h2>1. Rechtliche Auswirkungen</h2>
+
           <ExplanationParagraph
             markdown={interoperabilityExplanationParagraphs.legal}
           />
+
           <LevelAssessmentForm
             form={form}
             level={"legal"}

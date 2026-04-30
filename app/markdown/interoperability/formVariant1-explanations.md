@@ -1,23 +1,33 @@
 ## legal
 
-Ziel ist es, zu beurteilen, inwieweit die verbindlichen Anforderungen es öffentlichen Einrichtungen, die unter unterschiedlichen rechtlichen Rahmenbedingungen, politischen Leitlinien und Strategien tätig sind, ermöglichen, bei der Bereitstellung transeuropäischer digitaler öffentlicher Dienste zusammenzuarbeiten. Bei dieser Beurteilung sollten Faktoren wie die Vereinbarkeit der Anforderungen mit bestehenden Gesetzen und Vorschriften, das Potenzial für Konflikte oder Unstimmigkeiten mit anderen rechtlichen Rahmenbedingungen - einschließlich der EU-Digitalpolitik - sowie die Durchführbarkeit und Durchsetzbarkeit berücksichtigt werden.
+Ziel der Untersuchung ist es, zu prüfen, ob öffentliche Stellen trotz unterschiedlicher Gesetze und Vorgaben reibungslos bei digitalen EU-Diensten zusammenarbeiten können.
 
-(Quelle: Interoperable Europe Portal)
+Dabei wird besonders auf drei Punkte geachtet:
+
+- **Rechtssicherheit:** Passen die Anforderungen zu bestehenden Gesetzen und der EU-Digitalpolitik?
+- **Konfliktpotenzial:** Gibt es Widersprüche zu anderen Regeln?
+- **Praxis-Check:** Sind die Vorgaben tatsächlich machbar und durchsetzbar?
 
 ## organizational
 
-Ziel ist es, zu beurteilen, inwieweit die verbindlichen Anforderungen öffentlichen Organisationen dabei helfen, ihre Geschäftsprozesse, Zuständigkeiten und Erwartungen aufeinander abzustimmen, um eine qualitativ hochwertige und nahtlose Bereitstellung der transeuropäischen digitalen öffentlichen Dienste zu erreichen. Inwieweit schaffen die verbindlichen Anforderungen Chancen oder Risiken für Organisationen und ihre Arbeitsweise? Führen sie beispielsweise neue Aufgaben ein, die integriert werden müssen, oder werden dadurch Zuständigkeiten (neu) verteilt?
+Prüfen Sie, wie gut Ihre Regelung (oder ihr Vollzug) öffentlichen Stellen hilft, ihre Prozesse und Zuständigkeiten zu harmonisieren. Ziel ist es, digitale Dienste in Europa reibungslos und in hoher Qualität anzubieten.
 
-(Quelle: Interoperable Europe Portal)
+Zentrale Aspekte:
+
+- **Chancen & Risiken**: Wie verändern die Vorgaben die Arbeitsweise der Organisationen?
+- **Aufgaben**: Müssen neue Abläufe integriert werden?
+- **Verantwortlichkeiten**: Kommt es zu einer Umverteilung von Zuständigkeiten?
 
 ## semantic
 
-Ziel ist es, zu beurteilen, inwieweit die verbindlichen Anforderungen gewährleisten, dass das genaue Format und die Bedeutung der ausgetauschten Daten und Informationen in allen Phasen des Austauschs, die für die Erbringung der betreffenden transeuropäischen digitalen öffentlichen Dienste erforderlich sind, erhalten bleiben und verstanden werden. Inwieweit schaffen die verbindlichen Anforderungen Chancen oder Risiken für einen sinnvollen grenzüberschreitenden Datenaustausch? Fördern sie beispielsweise die Verwendung kontrollierter Vokabulare oder greifen sie auf neue Konzepte zurück?
+Prüfen Sie, ob die Regelung (oder ihr Vollzug) sicherstellt, dass Daten beim EU-weiten Austausch präzise und unverfälscht ankommen.
 
-(Quelle: Interoperable Europe Portal)
+Dabei stehen folgende Fragen im Mittelpunkt:
+
+- **Verständlichkeit:** Bleiben Format und Bedeutung der Informationen über alle Schritte hinweg erhalten?
+- **Chancen & Risiken:** Erleichtert oder behindert das Regelwerk den Datenaustausch?
+- **Methodik:** Werden bewährte Standards (wie kontrollierte Vokabulare) genutzt oder kommen völlig neue Konzepte zum Einsatz?
 
 ## technical
 
-Ziel ist es, zu beurteilen, inwieweit die verbindlichen Anforderungen den verschiedenen Akteuren dabei helfen, sich sicher und ordnungsgemäß miteinander zu vernetzen, damit sie die transeuropäischen digitalen öffentlichen Dienste bereitstellen können.
-
-(Quelle: Interoperable Europe Portal)
+Beurteilen Sie, inwieweit das Vorhaben den Beteiligten dabei hilft, sich sicher und ordnungsgemäß miteinander zu vernetzen, damit sie die transeuropäischen digitalen öffentlichen Dienste bereitstellen können.
