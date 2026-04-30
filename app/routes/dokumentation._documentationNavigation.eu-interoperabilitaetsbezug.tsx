@@ -2,7 +2,10 @@ import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText.tsx";
-import { ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS } from "~/resources/staticRoutes";
+import {
+  ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
+  ROUTE_INTEROPERABILITY,
+} from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
@@ -25,7 +28,9 @@ export default function DocumentationEuInteroperabilityRequirements() {
         />
         <RichText
           markdown={dedent`
-          In den folgenden Fragen geht es darum, festzustellen, ob Ihr Regelungsvorhaben Bezug zu EU-Interoperabilitätsanforderungen hat.
+          In den folgenden Fragen geht es darum, festzustellen, ob für Ihr Regelungsvorhaben nach [Artikel 3 der Verordnung für ein interoperables Europa (EU) 2024/903](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903(https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903#art_3) eine Interoperabilitätsbewertung durchgeführt werden muss.
+                    
+          [Mehr zu EU-Interoperabilität](${ROUTE_INTEROPERABILITY.url})
         `}
         />
         <EuInteroperabilityQuestions />

@@ -292,7 +292,9 @@ export default function LayoutWithDocumentationNavigation() {
   } = useDocumentationDataService();
 
   const isInteroperabilityAssessmentAccessible =
-    documentationData.euInteroperabilityOutcome?.outcomeId === "REQUIRED";
+    documentationData.euInteroperabilityOutcome?.outcomeId === "REQUIRED" ||
+    documentationData.euInteroperabilityOutcome?.outcomeId ===
+      "NOT_REQUIRED_NOT_FIRST_ASSESSMENT";
 
   const navigationTreeContext: NavigationTreeContext = {
     flatRoutes,

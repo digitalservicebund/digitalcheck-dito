@@ -35,7 +35,7 @@ export default function BindingRequirementsForm() {
               rows={2}
               warningInsteadOfError
               description={
-                "Example: The market data providers shall provide the competent authority, upon request, with structured information on the total costs of production using the form set out in Annex II."
+                "Beispiel: Die Marktdatenanbieter müssen der zuständigen Behörde auf Anfrage strukturierte Angaben zu den Gesamtproduktionskosten unter Verwendung des in Anhang II enthaltenen Formulars übermitteln."
               }
             >
               {"Beschreibung"}
@@ -46,10 +46,10 @@ export default function BindingRequirementsForm() {
               rows={1}
               warningInsteadOfError
               description={
-                "Specify the article or section. Type a URL such as https://example.com. Use ELI format, if possible - otherwise provide a URL pointing to the binding requirement assessed."
+                "Geben Sie an, aus welchem Teil des Vorhabens sich die Anforderung ergibt."
               }
             >
-              {"Paragraph oder Artikel"}
+              {"Paragraph oder sonstige Referenz"}
             </Textarea>
           </div>
         ))}
@@ -63,7 +63,7 @@ export default function BindingRequirementsForm() {
           await requirements.push({ description: "" });
         }}
       >
-        Weitere Anforderung hinzufügen
+        Weitere <i>verbindliche Anforderung</i> hinzufügen
       </Button>
     </form>
   );

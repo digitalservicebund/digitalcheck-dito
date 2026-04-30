@@ -45,17 +45,31 @@ export type EuInteroperabilityOutcome = {
   description: string;
 };
 
+export function linkToIEAArticle(index?: number) {
+  const base =
+    "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903";
+  if (!index) return base;
+  return `${base}#art_${index}`;
+}
+
+export function markdownCiteIEA(article: number, paragraph?: number) {
+  let text = `Art. ${article}`;
+  if (paragraph) text += ` Abs. ${paragraph}`;
+  text += " IEA";
+  return `[${text}](${linkToIEAArticle(article)})`;
+}
+
 export const EU_INTEROPERABILITY_QUESTIONS: Record<
   EuInteroperabilityQuestionId,
   EuInteroperabilityQuestion
 > = {
   bindingRequirementsInDecisionProcess: {
     id: "bindingRequirementsInDecisionProcess",
-    text: "Definiert Ihre Regelung eine neue oder geänderte verbindliche Anforderung, oder passiert dies im Vollzug (z. B. durch Verwaltungsvorschriften, Architekturvorgaben)?",
+    text: "Definiert oder ändert Ihre Regelung oder deren Vollzug eine Verpflichtung, ein Verbot, eine Bedingung, ein Kriterium oder eine Beschränkung rechtlicher, organisatorischer, semantischer oder technischer Art?",
     details: dedent`
       Dies ist bei Regelungsvorhaben in der Regel der Fall.
       
-      Sie finden weitere Informationen zu verbindlichen Anforderungen (*binding requirements*) auf der [Seite der EU-Kommission](https://interoperable-europe.ec.europa.eu/collection/assessments/guidelines-chapter-2-when-interoperability-assessment-legally-required).
+      Im Vollzug kann dies z. B. durch Verwaltungsvorschriften, Architekturvorgaben geschehen.
     `,
     next: {
       Ja: "serviceProvidedByPublicOrUnionEntity",
@@ -64,7 +78,8 @@ export const EU_INTEROPERABILITY_QUESTIONS: Record<
   },
   serviceProvidedByPublicOrUnionEntity: {
     id: "serviceProvidedByPublicOrUnionEntity",
-    text: "Betrifft die verbindliche Anforderung einen digitalen öffentlichen Dienst, der von EU-Organen oder öffentlichen Stellen erbracht wird?",
+    text: "Betreffen die verbindlichen Anforderungen einen digitalen öffentlichen Dienst, der von öffentlichen Stellen oder EU-Organen erbracht wird?",
+    details: `Siehe ${markdownCiteIEA(2, 2)}.`,
     next: {
       Ja: "serviceProvidedInEuContext",
       Nein: "NOT_REQUIRED_NOT_PROVIDED_BY_PUBLIC_OR_UNION_ENTITY",
@@ -80,7 +95,12 @@ export const EU_INTEROPERABILITY_QUESTIONS: Record<
   },
   requiresCrossBorderSystemInteraction: {
     id: "requiresCrossBorderSystemInteraction",
-    text: "Erfordert die Erbringung des betroffenen digitalen öffentlichen Dienstes Interaktionen über Netze oder Informationssysteme: (a) zwischen öffentlichen Stellen über Mitgliedstaatsgrenzen hinweg, (b) zwischen EU-Organen oder (c) zwischen EU-Organen und öffentlichen Stellen?",
+    text: "Erfordert die Erbringung des betroffenen digitalen öffentlichen Dienstes Interaktionen über Netze oder Informationssysteme:",
+    details: dedent`
+    - zwischen öffentlichen Stellen über Mitgliedstaatsgrenzen hinweg,
+    - zwischen EU-Organen **oder**
+    - zwischen EU-Organen und öffentlichen Stellen?
+    `,
     next: {
       Ja: "firstAssessmentForRequirement",
       Nein: "NOT_REQUIRED_NO_CROSS_BORDER_SYSTEM_INTERACTION",
@@ -116,13 +136,13 @@ export const EU_INTEROPERABILITY_OUTCOMES: Record<
     id: "NOT_REQUIRED_NOT_PROVIDED_BY_PUBLIC_OR_UNION_ENTITY",
     title: "Keine Interoperabilitätsbewertung erforderlich.",
     description:
-      "Nur digitale öffentliche Dienste, die von öffentlichen Stellen oder EU-Organen erbracht werden, unterliegen der IEA.",
+      "Nur digitale öffentliche Dienste, die von öffentlichen Stellen oder EU-Organen erbracht werden, unterliegen dem IEA.",
   },
   NOT_REQUIRED_NOT_PROVIDED_TO_EU_ACTORS: {
     id: "NOT_REQUIRED_NOT_PROVIDED_TO_EU_ACTORS",
     title: "Keine Interoperabilitätsbewertung erforderlich.",
     description:
-      "Nur Dienste, die an andere öffentliche Stellen oder EU-Organe erbracht werden, unterliegen der IEA.",
+      "Nur Dienste, die an andere öffentliche Stellen oder EU-Organe erbracht werden, unterliegen dem IEA.",
   },
   NOT_REQUIRED_NO_CROSS_BORDER_SYSTEM_INTERACTION: {
     id: "NOT_REQUIRED_NO_CROSS_BORDER_SYSTEM_INTERACTION",
