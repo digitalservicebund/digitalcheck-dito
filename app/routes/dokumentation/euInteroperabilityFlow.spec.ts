@@ -8,7 +8,6 @@ describe("euInteroperabilityFlow", () => {
   it("returns required outcome for all yes answers", () => {
     const flowState = getEuInteroperabilityFlowState({
       bindingRequirementsInDecisionProcess: "Ja",
-      requirementIsBinding: "Ja",
       serviceProvidedByPublicOrUnionEntity: "Ja",
       serviceProvidedInEuContext: "Ja",
       requiresCrossBorderSystemInteraction: "Ja",
