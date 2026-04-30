@@ -7,18 +7,13 @@ import ButtonContainer from "~/components/ButtonContainer";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
-import { useFeatureFlag } from "~/contexts/FeatureFlagContext.ts";
 
 export const InteroperableLoesungenTab = () => {
-  const showCoreVocabularies = useFeatureFlag("showCoreVocabularies");
-
   const solutions = [
     {
       title: "Semantic Core Vocabularies",
       text: "Die grenzüberschreitende Datensprache für das Once-Only-Prinzip",
-      href: showCoreVocabularies
-        ? interoperabel_loesungen_coreVocabularies.path
-        : undefined,
+      href: interoperabel_loesungen_coreVocabularies.path,
     },
     {
       title: "Data Catalogue Vocabulary Application Profile (DCAT-AP)",

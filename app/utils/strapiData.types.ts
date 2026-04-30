@@ -93,6 +93,7 @@ export type BasePrinzip = {
   Beschreibung: Node[];
   Kurzbeschreibung?: Node[];
   Hilfetext?: Node[];
+  Erklaerungshilfe?: Node[];
   /**
    * Not the actual number visible to users.
    * Legacy ID used to associate Absatz fragments with principles.

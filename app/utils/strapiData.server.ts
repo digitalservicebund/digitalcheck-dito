@@ -116,6 +116,7 @@ query GetPrinzips {
     Beschreibung
     Kurzbeschreibung
     Hilfetext
+    Erklaerungshilfe
     order
     Nummer
     URLBezeichnung
