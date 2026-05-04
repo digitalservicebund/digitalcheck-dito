@@ -1,4 +1,4 @@
-import QuizIcon from "@digitalservicebund/icons/QuizOutlined";
+import { QuizOutlined as QuizIcon } from "@digitalservicebund/icons";
 import { Link } from "react-router";
 import { LinkButton } from "~/components/Button";
 import Container from "~/components/Container";

@@ -1,4 +1,4 @@
-import EmojiEventsOutlinedIcon from "@digitalservicebund/icons/EmojiEventsOutlined";
+import { EmojiEventsOutlined as EmojiEventsOutlinedIcon } from "@digitalservicebund/icons";
 import { useOutletContext } from "react-router";
 import { DownloadButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";

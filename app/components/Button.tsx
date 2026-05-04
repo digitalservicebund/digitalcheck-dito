@@ -1,4 +1,4 @@
-import SaveAltOutlinedIcon from "@digitalservicebund/icons/SaveAltOutlined";
+import { SaveAltOutlined as SaveAltOutlinedIcon } from "@digitalservicebund/icons";
 import React, { cloneElement, type ReactElement } from "react";
 import { Link, LinkProps } from "react-router";
 import { twJoin } from "tailwind-merge";
