@@ -1,15 +1,14 @@
 import type { Config } from "@react-router/dev/config";
 
 import {
-  ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
   ROUTES,
   ROUTES_DOCUMENTATION_FINALIZE,
-  ROUTES_DOCUMENTATION_INTRO,
-} from "./app/resources/staticRoutes";
+} from "./app/resources/staticRoutes.ts";
+import { staticDocumentationRoutes } from "./app/routes/dokumentation._documentationNavigation.tsx";
 import {
   fetchStrapiData,
   GET_PRINZIPS_QUERY,
-} from "./app/utils/strapiData.server";
+} from "./app/utils/strapiData.server.ts";
 
 const GET_ALL_REGELUNGEN_SLUGS = `
 query GetAllBeispielvorhabens {
@@ -51,8 +50,7 @@ async function getPreviewPrerenderPaths(): Promise<string[]> {
 
   const staticPaths = [
     ...ROUTES.map((r) => r.url),
-    ...ROUTES_DOCUMENTATION_INTRO.map((r) => r.url),
-    ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT.url,
+    ...staticDocumentationRoutes.map((r) => r.url),
     ...ROUTES_DOCUMENTATION_FINALIZE.map((r) => r.url),
   ];
 

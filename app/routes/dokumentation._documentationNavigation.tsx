@@ -102,7 +102,7 @@ const createPrincipleItem = (route: Route): NavigationItemDefinition => ({
   isEnabled: alwaysEnabled,
 });
 
-const staticDocumentationRoutes: Route[] = [
+export const staticDocumentationRoutes: Route[] = [
   ROUTE_DOCUMENTATION_TITLE,
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
