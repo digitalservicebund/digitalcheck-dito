@@ -23,6 +23,7 @@ import {
   Question,
   sections,
 } from "~/routes/dokumentation/interoperability/Sections.tsx";
+import { assetPath } from "~/utils/assetPath.ts";
 import { type PrinzipWithAspekte } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 import strapiBlocksToDocx from "./strapiBlocksToWord";
@@ -39,7 +40,7 @@ export function useWordDocumentationV2() {
     async (prinzips: PrinzipWithAspekte[]) => {
       try {
         const template = await fetch(
-          `/documents/${FILE_NAME_DOCUMENTATION_TEMPLATE}`,
+          assetPath(`/documents/${FILE_NAME_DOCUMENTATION_TEMPLATE}`),
         );
         const templateData = await template.arrayBuffer();
         const doc = await createDoc(
