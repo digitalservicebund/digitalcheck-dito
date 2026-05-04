@@ -7,7 +7,7 @@ describe("Tracking client-side error by logging it server-side", () => {
   beforeEach(() => {
     globalThis.fetch = vi.fn(() =>
       Promise.resolve(new Response(null, { status: 204 })),
-    ) as never;
+    );
   });
 
   afterEach(() => {

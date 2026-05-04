@@ -3,6 +3,7 @@ import {
   ExternalHyperlink,
   IPatch,
   IRunOptions,
+  Paragraph,
   patchDocument,
   PatchType,
   TextRun,
@@ -14,6 +15,15 @@ import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { contact } from "~/resources/content/shared/contact";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider";
 import { type DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
+import {
+  AssessmentFormValues,
+  STORAGE_KEY,
+} from "~/routes/dokumentation/interoperability/FormVariant2.tsx";
+import {
+  Question,
+  sections,
+} from "~/routes/dokumentation/interoperability/Sections.tsx";
+import { assetPath } from "~/utils/assetPath.ts";
 import { type PrinzipWithAspekte } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 import strapiBlocksToDocx from "./strapiBlocksToWord";
@@ -30,7 +40,7 @@ export function useWordDocumentationV2() {
     async (prinzips: PrinzipWithAspekte[]) => {
       try {
         const template = await fetch(
-          `/documents/${FILE_NAME_DOCUMENTATION_TEMPLATE}`,
+          assetPath(`/documents/${FILE_NAME_DOCUMENTATION_TEMPLATE}`),
         );
         const templateData = await template.arrayBuffer();
         const doc = await createDoc(
@@ -49,12 +59,46 @@ export function useWordDocumentationV2() {
   return { downloadDocumentation };
 }
 
+export function getInteroperabilitylegaltext(): IPatch {
+  const stringValue = localStorage.getItem(STORAGE_KEY);
+  if (!stringValue) return toParagraphPatch(answerOrPlaceholder());
+  const value = JSON.parse(stringValue) as AssessmentFormValues;
+
+  const questions = sections.flatMap((section) =>
+    section.groups.flatMap((group) => group.questions),
+  );
+  const questionMap = new Map<string, Question>();
+  for (const question of questions) {
+    questionMap.set(question.id, question);
+  }
+
+  const resultText = Object.entries(value).map(([questionKey, answer]) => {
+    if (!answer.checked) return null;
+    const question = questionMap.get(questionKey);
+    if (!question) {
+      console.error("Could not find question", questionKey);
+      return null;
+    }
+    if (answer.ownStatement) return answer.ownStatement;
+    if (answer.details)
+      return String(question.label).replace(/\.$/, ": ") + answer.details; // TODO this might be a ReactNode
+    return question.label;
+  });
+
+  const filtered = resultText.filter(Boolean);
+  if (filtered.length === 1) return toParagraphPatch(filtered[0] as string);
+  const list = filtered.map((item) => `- ${item}`).join("\n");
+  return toParagraphPatch(list);
+}
+
 export const createDoc = async (
   templateData: ArrayBuffer | Uint8Array,
   {
     policyTitle,
     participation,
     principles: principleAnswers,
+    bindingRequirements,
+    euInteroperabilityOutcome,
   }: DocumentationData,
   prinzips: PrinzipWithAspekte[],
 ) => {
@@ -77,6 +121,24 @@ export const createDoc = async (
         answerOrPlaceholder(participation?.results),
       ),
       ...buildPrinciplePatches(prinzips, principleAnswers),
+      AFFECTED_SERVICES: toParagraphPatch(
+        bindingRequirements?.tedpServices
+          ?.flatMap((service) => service.value ?? "")
+          .join(", ") ?? "",
+      ),
+      AFFECTED_AREAS: toParagraphPatch(
+        Object.keys(bindingRequirements?.functions ?? {}).join(", "),
+      ),
+      BINDING_REQUIREMENTS: toParagraphPatch(
+        answerOrPlaceholder(
+          bindingRequirements?.requirements
+            .map((entry) => `${entry.description} | ${entry.legalReference}`)
+            .join(", "),
+        ),
+      ),
+      AFFECTED_STAKEHOLDERS: toParagraphPatch("TODO"),
+      INTEROPERABILITY_LEGAL_TEXT: getInteroperabilitylegaltext(),
+      INTEROPERABILITY_LEGAL_EVALUATION: toParagraphPatch("positiv"),
     },
   });
 };
@@ -94,6 +156,19 @@ export const toHyperlinkPatch = (content: string): IPatch => ({
       link: "mailto:" + content,
     }),
   ],
+});
+
+export const toListPatch = (items: string[]): IPatch => ({
+  type: PatchType.DOCUMENT,
+  children: items.map(
+    (item) =>
+      new Paragraph({
+        text: item,
+        bullet: {
+          level: 1,
+        },
+      }),
+  ),
 });
 
 const answerOrPlaceholder = (answer?: string) =>
@@ -150,7 +225,7 @@ export const buildPrinciplePatches = (
       ),
       // We always need to fill both patches to avoid the tags rendering
       [`PRINCIPLE_${prinzipIndex + 1}_REASONING`]: toParagraphPatch(
-        answerOrPlaceholderOptional(answer?.reasoning as string),
+        answerOrPlaceholderOptional(answer?.reasoning),
       ),
       [`PRINCIPLE_${prinzipIndex + 1}_ASPECTS`]: toParagraphPatch(
         hasPositivePrincipleAnswer

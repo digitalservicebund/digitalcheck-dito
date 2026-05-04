@@ -14,6 +14,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   type Route,
   ROUTE_DOCUMENTATION,
+  ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
   ROUTE_DOCUMENTATION_NOTES,
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_TITLE,
@@ -300,11 +301,62 @@ describe("navigation on pages of documentation", () => {
       ROUTE_DOCUMENTATION_TITLE.title,
       ROUTE_DOCUMENTATION_PARTICIPATION.title,
       "Prinzipien",
+      "EU-Interoperabilitaet",
     ]) {
       const item = within(navigation).getByText(title);
       expect(item).toHaveAttribute("aria-disabled");
       expect(item).not.toHaveAttribute("href");
     }
+  });
+
+  it("groups EU steps in one section after principles", () => {
+    vi.mocked(useRouteLoaderData).mockReturnValue({
+      routes: [
+        ...ROUTES_DOCUMENTATION_INTRO,
+        [
+          {
+            title: "Prinzip A",
+            url: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
+          },
+        ],
+        ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
+      ],
+    });
+    vi.mocked(readDataFromLocalStorage<DocumentationData<V1>>).mockReturnValue({
+      version: DATA_SCHEMA_VERSION_V1,
+      euInteroperabilityOutcome: { outcomeId: "REQUIRED" },
+    });
+
+    renderPage(currentRoute);
+
+    const navigation = getNav();
+    const topLevelSections = within(navigation).getAllByRole("button");
+    const sectionNames = topLevelSections.map((item) => item.textContent ?? "");
+
+    const principlesIndex = sectionNames.findIndex((text) =>
+      text.includes("Prinzipien"),
+    );
+    const euIndex = sectionNames.findIndex((text) =>
+      text.includes("EU-Interoperabilitaet"),
+    );
+
+    expect(principlesIndex).toBeGreaterThanOrEqual(0);
+    expect(euIndex).toBe(principlesIndex + 1);
+
+    const euSection = within(navigation).getByText("EU-Interoperabilitaet");
+    const euListItem = euSection.closest("li");
+    expect(euListItem).not.toBeNull();
+
+    expect(
+      within(euListItem as HTMLElement).getByText(
+        "Bezug zu EU-Interoperabilität",
+      ),
+    ).toBeInTheDocument();
+    expect(
+      within(euListItem as HTMLElement).getByText(
+        "EU-Interoperabilitätsbewertung",
+      ),
+    ).toBeInTheDocument();
   });
 
   const currentRoute = ROUTE_DOCUMENTATION_TITLE;
@@ -407,7 +459,7 @@ describe("navigation on pages of documentation", () => {
               aspects: ["aspect-1"],
             },
           ],
-        } as DocumentationData<V2> as DocumentationData<V1>,
+        } as DocumentationData<V2>,
         expected: {
           completedTitle: false, // is current route so no states are shown
           completedParticipation: true,
@@ -422,7 +474,7 @@ describe("navigation on pages of documentation", () => {
         name: "unfilled form (V2)",
         documentationData: {
           version: DATA_SCHEMA_VERSION_V2,
-        } as DocumentationData<V2> as DocumentationData<V1>,
+        },
         expected: {
           completedTitle: false,
           completedParticipation: false,
@@ -452,7 +504,7 @@ describe("navigation on pages of documentation", () => {
               aspects: [], // empty aspects fails V2 validation
             },
           ],
-        } as DocumentationData<V2> as DocumentationData<V1>,
+        } as DocumentationData<V2>,
         expected: {
           completedTitle: false, // is current route so no states are shown
           completedParticipation: true,

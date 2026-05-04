@@ -178,6 +178,7 @@ export const digitalDocumentation = {
   navigation: {
     ariaLabel: "Seitennavigation",
     principles: "Prinzipien",
+    euInteroperability: "EU-Interoperabilität",
   },
   participation: {
     headline: "Auswirkungen auf Betroffene und an der Umsetzung Beteiligte",

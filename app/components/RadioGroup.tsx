@@ -1,10 +1,10 @@
 import { useField, type FormScope } from "@rvf/react";
-import { ComponentPropsWithRef, useId } from "react";
+import { ComponentPropsWithRef, ReactNode, useId } from "react";
 import twMerge from "~/utils/tailwindMerge";
 import InputError from "./InputError";
 
-type Option<Value extends string | number> = {
-  label: string;
+export type Option<Value extends string | number> = {
+  label: ReactNode;
   value: Value;
   subText?: string;
   id?: string;

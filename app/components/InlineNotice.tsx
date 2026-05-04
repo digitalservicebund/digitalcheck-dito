@@ -1,8 +1,10 @@
-import { CheckCircleOutlined as CheckCircleOutlinedIcon } from "@digitalservicebund/icons";
-import { ContactSupportOutlined as ContactSupportOutlinedIcon } from "@digitalservicebund/icons";
-import { InfoOutlined as InfoOutlinedIcon } from "@digitalservicebund/icons";
-import { LightbulbOutlined as LightbulbOutlinedIcon } from "@digitalservicebund/icons";
-import { WarningAmber as WarningAmberIcon } from "@digitalservicebund/icons";
+import {
+  CheckCircleOutlined as CheckCircleOutlinedIcon,
+  ContactSupportOutlined as ContactSupportOutlinedIcon,
+  InfoOutlined as InfoOutlinedIcon,
+  LightbulbOutlined as LightbulbOutlinedIcon,
+  WarningAmber as WarningAmberIcon,
+} from "@digitalservicebund/icons";
 import React, { ComponentProps } from "react";
 import { twJoin } from "tailwind-merge";
 

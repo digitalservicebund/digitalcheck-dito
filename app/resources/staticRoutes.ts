@@ -138,6 +138,22 @@ export const ROUTE_DOCUMENTATION_PARTICIPATION = createRoute(
   "Beteiligungsformate",
   ROUTE_DOCUMENTATION,
 );
+export const ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS = createRoute(
+  "eu-interoperabilitaetsbezug",
+  "Bezug zu EU-Interoperabilität",
+  ROUTE_DOCUMENTATION,
+);
+export const ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT = createRoute(
+  "interoperabilitaetsbewertung",
+  "Auswirkungen",
+  ROUTE_DOCUMENTATION,
+);
+export const ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS =
+  createRoute(
+    "verbindliche-anforderungen",
+    "Verbindliche Anforderungen",
+    ROUTE_DOCUMENTATION,
+  );
 export const ROUTE_DOCUMENTATION_SUMMARY = createRoute(
   "zusammenfassung",
   "Zusammenfassung",
@@ -305,6 +321,7 @@ export const ROUTES: Route[] = [
   ROUTE_DOCUMENTATION,
   ROUTE_DOCUMENTATION_TITLE,
   ROUTE_DOCUMENTATION_PARTICIPATION,
+  ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
   ROUTE_INTEROPERABILITY,
   ROUTE_INTEROPERABILITY_SPOC,
   ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP,

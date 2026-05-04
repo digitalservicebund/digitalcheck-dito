@@ -1,10 +1,12 @@
 import { z } from "zod";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
+  ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_TITLE,
 } from "~/resources/staticRoutes";
 import type { VersionedData } from "~/utils/localStorageVersioned";
+import { EU_INTEROPERABILITY_OUTCOME_IDS } from "./euInteroperabilityFlow.tsx";
 
 export const DATA_SCHEMA_VERSION_V1 = "1";
 export const DATA_SCHEMA_VERSION_V2 = "2";
@@ -29,6 +31,10 @@ export const participationSchema = z.object({
   results: z
     .string()
     .min(1, { message: participation.results.textField.errorMessage }),
+});
+
+export const euInteroperabilityOutcomeSchema = z.object({
+  outcomeId: z.enum(EU_INTEROPERABILITY_OUTCOME_IDS),
 });
 
 // TODO: delete when feature flag simplifiedPrincipleFlow is on
@@ -195,6 +201,7 @@ export const defaultValues: DocumentationSchemaV2 | DocumentationSchemaV1 = {
 export const documentationSchemaV2 = z.object({
   policyTitle: policyTitleSchema.optional(),
   participation: participationSchema.optional(),
+  euInteroperabilityOutcome: euInteroperabilityOutcomeSchema.optional(),
   principles: z.array(principleSchemaV2).optional(),
 });
 
@@ -213,6 +220,8 @@ export const getDocumentationSchemaFormUrl = (
   if (url === ROUTE_DOCUMENTATION_TITLE.url) return policyTitleSchema;
   else if (url === ROUTE_DOCUMENTATION_PARTICIPATION.url)
     return participationSchema;
+  else if (url === ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS.url)
+    return euInteroperabilityOutcomeSchema;
   else return simplified ? principleSchemaV2 : principleSchemaV1;
 };
 
@@ -235,12 +244,37 @@ export type Principle<V extends DataSchemaVersion = V2> = V extends V1
 
 export type PolicyTitle = z.infer<typeof policyTitleSchema>;
 export type Participation = z.infer<typeof participationSchema>;
+export type EuInteroperabilityOutcome = z.infer<
+  typeof euInteroperabilityOutcomeSchema
+>;
 
 type DocumentationSchemaV2 = z.infer<typeof documentationSchemaV2>;
 type DocumentationSchemaV1 = z.infer<typeof documentationSchemaV1>;
 
+const checkboxValueSchema = z
+  .union([z.literal("on"), z.literal(true)])
+  .optional();
+
+export const bindingRequirementsSchema = z.object({
+  functions: z.array(z.string()),
+  requirements: z.array(
+    z.object({
+      number: z.string().optional(),
+      legalReference: z.string().optional(),
+      description: z.string().optional(),
+      services: z.string().optional(),
+      serviceAreas: z.array(z.string()),
+    }),
+  ),
+  stakeholderGroups: z.array(z.string()),
+});
+
+export type BindingRequirementsData = z.infer<typeof bindingRequirementsSchema>;
+
 export type DocumentationData<V extends DataSchemaVersion = V2> = {
   policyTitle?: PolicyTitle;
   participation?: Participation;
+  euInteroperabilityOutcome?: EuInteroperabilityOutcome;
+  bindingRequirements?: BindingRequirementsData;
   principles?: Principle<V>[];
 } & VersionedData;

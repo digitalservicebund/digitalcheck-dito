@@ -1,6 +1,8 @@
-import { DrawOutlined } from "@digitalservicebund/icons";
-import { StickyNote2Outlined } from "@digitalservicebund/icons";
-import { SupportOutlined } from "@digitalservicebund/icons";
+import {
+  DrawOutlined,
+  StickyNote2Outlined,
+  SupportOutlined,
+} from "@digitalservicebund/icons";
 import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
 import { ContentLink } from "~/utils/contentTypes.ts";
