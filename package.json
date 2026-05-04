@@ -41,7 +41,7 @@
     "@digitalservice4germany/style-dictionary": "^2.0.0",
     "@digitalservicebund/icons": "^2.1.0",
     "@headlessui/react": "^2.2.10",
-    "@posthog/core": "^1.27.7",
+    "@posthog/core": "^1.28.0",
     "@react-router/node": "^7.14.2",
     "@react-router/serve": "^7.14.2",
     "@rvf/react": "^8.1.1",
