@@ -1,10 +1,16 @@
 import { ReactNode } from "react";
+import NewTabLink from "~/components/NewTabLink.tsx";
+import {
+  ROUTE_INTEROPERABILITY,
+  ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES,
+  ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP,
+} from "~/resources/staticRoutes.ts";
 import { interoperabilityExplanationParagraphs } from "~/routes/dokumentation/interoperability/explanationMarkdown.ts";
 import { ExplanationParagraph } from "~/routes/dokumentation/interoperability/FormVariant1.tsx";
 
 export type Question = {
   id: string;
-  label: string;
+  label: ReactNode;
   requiresDetailsText?: string;
   isOwnStatement?: boolean;
 };
@@ -165,10 +171,51 @@ export const sections: Section[] = [
         questions: [
           {
             id: "semantik-pos-1",
-            label:
-              "Das Vorhaben schreibt die Verwendung etablierter internationaler oder EU-weiter Metadatenstandards vor (z. B. SDMX, DCAT-AP, SIMS).",
+            label: (
+              <>
+                Das Vorhaben schreibt die Verwendung etablierter internationaler
+                oder EU-weiter Metadatenstandards vor (z. B.{" "}
+                <NewTabLink to={ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP.url}>
+                  DCAT-AP
+                </NewTabLink>
+                , SDMX, SIMS).
+              </>
+            ),
             requiresDetailsText:
-              "Bitte benennen Sie die vorgesehenen Metadatenstandards:",
+              "Bitte benennen Sie die vorgesehenen interoperablen Lösungen oder Metadatenstandards:",
+          },
+          {
+            id: "semantik-pos-3",
+            label: (
+              <>
+                Es werden standardisierter Formate für spezifische Datenpunkte
+                referenziert (z.&nbsp;B.{" "}
+                <NewTabLink
+                  to={ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES.url}
+                >
+                  Core Vocabularies
+                </NewTabLink>
+                ).
+              </>
+            ),
+            requiresDetailsText:
+              "Bitte benennen Sie die referenzierten standardisierten Formate oder Datenpunkte:",
+          },
+          {
+            id: "semantik-pos-5",
+            label: (
+              <>
+                Es wurden sonstige{" "}
+                <NewTabLink
+                  to={
+                    ROUTE_INTEROPERABILITY.url + "?tab=interoperable-loesungen"
+                  }
+                >
+                  Lösungen für ein interoperables Europa
+                </NewTabLink>{" "}
+                genutzt.
+              </>
+            ),
           },
           {
             id: "semantik-pos-2",
@@ -176,11 +223,9 @@ export const sections: Section[] = [
               "Die Informationsanforderungen und Datenvariablen sind im Regelungstext oder in dessen Anhängen präzise definiert oder werden von anderen Normen präzisiert.",
           },
           {
-            id: "semantik-pos-3",
-            label:
-              "Es werden standardisierter Formate für spezifische Datenpunkte referenziert (z. B. Datum/Uhrzeit, gemeinsame Identifikatoren oder harmonisierte Formeln).",
-            requiresDetailsText:
-              "Bitte benennen Sie die referenzierten standardisierten Formate oder Datenpunkte:",
+            id: "semantik-pos-4",
+            label: "Eigene Angaben",
+            isOwnStatement: true,
           },
         ],
       },
@@ -190,7 +235,7 @@ export const sections: Section[] = [
           {
             id: "semantik-neg-1",
             label:
-              "Nennt das Vorhaben weit gefasste oder nicht präskriptive Definitionen (z. B. „elektronische Form“), die nicht interoperable Formate wie unstrukturierte PDFs oder Videos zulassen?",
+              "Das Vorhaben nennt weit gefasste oder nicht präskriptive Definitionen (z. B. „elektronische Form“), die nicht interoperable Formate wie unstrukturierte PDFs oder Videos zulassen.",
             requiresDetailsText:
               "Bitte benennen Sie die weit gefassten Definitionen oder nicht interoperablen Formate:",
           },
@@ -198,6 +243,11 @@ export const sections: Section[] = [
             id: "semantik-neg-2",
             label:
               "Die Bedeutung der ausgetauschten Daten wird ohne gemeinsamen semantischen Rahmen dem Ermessen einzelner Umsetzungsakteure überlassen.",
+          },
+          {
+            id: "semantik-neg-3",
+            label: "Eigene Angaben",
+            isOwnStatement: true,
           },
         ],
       },
@@ -226,7 +276,7 @@ export const sections: Section[] = [
           {
             id: "technik-pos-2",
             label:
-              "Der Vorschlag sieht ein zentrales Register oder eine zentrale Anlaufstelle vor, um die Notwendigkeit komplexer Multi-Point-Integrationen zu verringern.",
+              "Ein zentrales Register ersetzt viele komplizierte Einzelverbindungen zwischen den Systemen, bzw. eine zentrale Anlaufstelle reduziert den Bedarf an aufwendigen Punkt-zu-Punkt-Integrationen.",
             requiresDetailsText:
               "Bitte erläutern Sie das vorgesehene zentrale Register oder die zentrale Anlaufstelle:",
           },
@@ -250,14 +300,14 @@ export const sections: Section[] = [
           {
             id: "technik-neg-1",
             label:
-              "Erlaubt der Vorschlag „papieräquivalente“ digitale Formate (z. B. unstrukturierte Word-Dokumente) anstelle von maschinenlesbaren Daten?",
+              "Der Vorschlag erlaubt „papieräquivalente“ digitale Formate (z. B. unstrukturierte Word-Dokumente) anstelle von maschinenlesbaren Daten.",
             requiresDetailsText:
               "Bitte benennen Sie die zugelassenen papieräquivalenten digitalen Formate:",
           },
           {
             id: "technik-neg-2",
             label:
-              "Stellt die Komplexität der vorgeschlagenen technischen Lösung ein erhebliches Risiko oder ein Hindernis für die Umsetzung in bestimmten Mitgliedstaaten dar?",
+              "Die Komplexität der vorgeschlagenen technischen Lösung stellt ein erhebliches Risiko oder ein Hindernis für die Umsetzung in bestimmten Mitgliedstaaten dar.",
             requiresDetailsText:
               "Bitte erläutern Sie das erhebliche Risiko oder Hindernis für die Umsetzung:",
           },
