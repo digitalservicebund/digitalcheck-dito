@@ -6,8 +6,8 @@ import { useFieldArray } from "@rvf/react";
 import React from "react";
 import Badge from "~/components/Badge.tsx";
 import Button from "~/components/Button";
-import Checkbox from "~/components/Checkbox";
 import Input from "~/components/Input";
+import Pills from "~/components/Pills.tsx";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea.tsx";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
@@ -17,44 +17,45 @@ import { markdownCiteIEA } from "~/routes/dokumentation/euInteroperabilityFlow.t
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 
 const functionOptions = [
-  { key: "defense", label: "Verteidigung" },
-  { key: "economicAffairs", label: "Wirtschaftliche Angelegenheiten" },
-  { key: "education", label: "Bildung" },
-  { key: "environmentalProtection", label: "Umweltschutz" },
-  { key: "generalPublicServices", label: "Allgemeine öffentliche Dienste" },
-  { key: "health", label: "Gesundheit" },
+  { value: "defense", label: "Verteidigung" },
+  { value: "economicAffairs", label: "Wirtschaftliche Angelegenheiten" },
+  { value: "education", label: "Bildung" },
+  { value: "environmentalProtection", label: "Umweltschutz" },
+  { value: "generalPublicServices", label: "Allgemeine öffentliche Dienste" },
+  { value: "health", label: "Gesundheit" },
   {
-    key: "housingAndCommunityAmenities",
+    value: "housingAndCommunityAmenities",
     label: "Wohnungswesen und kommunale Einrichtungen",
   },
-  { key: "publicOrderAndSafety", label: "Öffentliche Ordnung und Sicherheit" },
   {
-    key: "recreationCultureAndReligion",
+    value: "publicOrderAndSafety",
+    label: "Öffentliche Ordnung und Sicherheit",
+  },
+  {
+    value: "recreationCultureAndReligion",
     label: "Freizeit, Kultur und Religion",
   },
-  { key: "socialProtection", label: "Sozialschutz" },
+  { value: "socialProtection", label: "Sozialschutz" },
 ] as const;
 
 const stakeholderOptions = [
-  { key: "localPublicSectorBody", label: "Lokale öffentliche Einrichtung" },
+  { value: "localPublicSectorBody", label: "Lokale öffentliche Einrichtung" },
   {
-    key: "regionalPublicSectorBody",
+    value: "regionalPublicSectorBody",
     label: "Regionale öffentliche Einrichtung",
   },
   {
-    key: "nationalPublicSectorBody",
+    value: "nationalPublicSectorBody",
     label: "Nationale öffentliche Einrichtung",
   },
   {
-    key: "europeanUnionInstitution",
+    value: "europeanUnionInstitution",
     label: "EU-Institution",
   },
-  { key: "europeanUnionAgency", label: "EU-Agentur" },
-  { key: "europeanUnionBody", label: "EU-Einrichtung" },
-  { key: "privateBusinesses", label: "Private Unternehmen" },
+  { value: "europeanUnionAgency", label: "EU-Agentur" },
+  { value: "europeanUnionBody", label: "EU-Einrichtung" },
+  { value: "privateBusinesses", label: "Private Unternehmen" },
 ] as const;
-
-type CheckboxScope = React.ComponentProps<typeof Checkbox>["scope"];
 
 type SectionNode = {
   id: string;
@@ -75,9 +76,9 @@ export default function BindingRequirementsForm({
   const form = useSyncedForm({
     schema: bindingRequirementsSchema,
     defaultValues: {
-      functions: {},
-      requirements: [{}],
-      stakeholders: {},
+      functions: [],
+      requirements: [{ serviceAreas: [] }],
+      stakeholderGroups: [],
     },
     setDataCallback: (data) => setBindingRequirementsData(data ?? undefined),
     storedData,
@@ -87,8 +88,6 @@ export default function BindingRequirementsForm({
 
   const requirements = useFieldArray(form.scope("requirements"));
   const requirementCount = form.value("requirements")?.length ?? 0;
-
-  const toCheckboxScope = (scope: unknown) => scope as CheckboxScope;
 
   const tree: SectionNode[] = [
     {
@@ -161,33 +160,18 @@ export default function BindingRequirementsForm({
                       <legend>
                         Für welche Bereiche sind diese Dienste relevant?
                       </legend>
-                      {functionOptions.map((option) => (
-                        <Checkbox
-                          key={option.key}
-                          scope={toCheckboxScope(
-                            form.scope(`functions.${option.key}`),
-                          )}
-                        >
-                          {option.label}
-                        </Checkbox>
-                      ))}
+                      <Pills
+                        scope={requirement.scope("serviceAreas")}
+                        options={functionOptions}
+                      />
                     </fieldset>
-                    <fieldset className="space-y-8">
-                      <legend>
-                        Welche Gruppen sind von den verbindlichen Anforderungen
-                        betroffen?
-                      </legend>
-                      {stakeholderOptions.map((option) => (
-                        <Checkbox
-                          key={option.key}
-                          scope={toCheckboxScope(
-                            form.scope(`stakeholders.${option.key}`),
-                          )}
-                        >
-                          {option.label}
-                        </Checkbox>
-                      ))}
-                    </fieldset>
+                    <Pills
+                      options={stakeholderOptions}
+                      scope={form.scope("stakeholderGroups")}
+                    >
+                      Welche Gruppen sind von den verbindlichen Anforderungen
+                      betroffen?
+                    </Pills>
                   </div>
                 </div>
               );
@@ -199,7 +183,7 @@ export default function BindingRequirementsForm({
             look="ghost"
             iconLeft={<AddCircleOutlineOutlined />}
             onClick={async () => {
-              await requirements.push({});
+              await requirements.push({ serviceAreas: [] });
             }}
           >
             Verbindliche Anforderung hinzufügen

@@ -256,35 +256,17 @@ const checkboxValueSchema = z
   .optional();
 
 export const bindingRequirementsSchema = z.object({
-  functions: z.object({
-    defense: checkboxValueSchema,
-    economicAffairs: checkboxValueSchema,
-    education: checkboxValueSchema,
-    environmentalProtection: checkboxValueSchema,
-    generalPublicServices: checkboxValueSchema,
-    health: checkboxValueSchema,
-    housingAndCommunityAmenities: checkboxValueSchema,
-    publicOrderAndSafety: checkboxValueSchema,
-    recreationCultureAndReligion: checkboxValueSchema,
-    socialProtection: checkboxValueSchema,
-  }),
+  functions: z.array(z.string()),
   requirements: z.array(
     z.object({
       number: z.string().optional(),
       legalReference: z.string().optional(),
       description: z.string().optional(),
       services: z.string().optional(),
+      serviceAreas: z.array(z.string()),
     }),
   ),
-  stakeholders: z.object({
-    localPublicSectorBody: checkboxValueSchema,
-    regionalPublicSectorBody: checkboxValueSchema,
-    nationalPublicSectorBody: checkboxValueSchema,
-    europeanUnionInstitution: checkboxValueSchema,
-    europeanUnionAgency: checkboxValueSchema,
-    europeanUnionBody: checkboxValueSchema,
-    privateBusinesses: checkboxValueSchema,
-  }),
+  stakeholderGroups: z.array(z.string()),
 });
 
 export type BindingRequirementsData = z.infer<typeof bindingRequirementsSchema>;
