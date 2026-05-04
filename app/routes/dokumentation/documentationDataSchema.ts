@@ -251,9 +251,48 @@ export type EuInteroperabilityOutcome = z.infer<
 type DocumentationSchemaV2 = z.infer<typeof documentationSchemaV2>;
 type DocumentationSchemaV1 = z.infer<typeof documentationSchemaV1>;
 
+const checkboxValueSchema = z
+  .union([z.literal("on"), z.literal(true)])
+  .optional();
+
+export const bindingRequirementsSchema = z.object({
+  tedpServices: z.array(z.object({ value: z.string().optional() })),
+  functions: z.object({
+    defense: checkboxValueSchema,
+    economicAffairs: checkboxValueSchema,
+    education: checkboxValueSchema,
+    environmentalProtection: checkboxValueSchema,
+    generalPublicServices: checkboxValueSchema,
+    health: checkboxValueSchema,
+    housingAndCommunityAmenities: checkboxValueSchema,
+    publicOrderAndSafety: checkboxValueSchema,
+    recreationCultureAndReligion: checkboxValueSchema,
+    socialProtection: checkboxValueSchema,
+  }),
+  requirements: z.array(
+    z.object({
+      number: z.string().optional(),
+      legalReference: z.string().optional(),
+      description: z.string().optional(),
+    }),
+  ),
+  stakeholders: z.object({
+    localPublicSectorBody: checkboxValueSchema,
+    regionalPublicSectorBody: checkboxValueSchema,
+    nationalPublicSectorBody: checkboxValueSchema,
+    europeanUnionInstitution: checkboxValueSchema,
+    europeanUnionAgency: checkboxValueSchema,
+    europeanUnionBody: checkboxValueSchema,
+    privateBusinesses: checkboxValueSchema,
+  }),
+});
+
+export type BindingRequirementsData = z.infer<typeof bindingRequirementsSchema>;
+
 export type DocumentationData<V extends DataSchemaVersion = V2> = {
   policyTitle?: PolicyTitle;
   participation?: Participation;
   euInteroperabilityOutcome?: EuInteroperabilityOutcome;
+  bindingRequirements?: BindingRequirementsData;
   principles?: Principle<V>[];
 } & VersionedData;

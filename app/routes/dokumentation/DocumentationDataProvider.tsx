@@ -16,6 +16,7 @@ import {
 } from "~/resources/staticRoutes";
 import {
   getDocumentationSchemaFormUrl as _getDocumentationSchemaFormUrl,
+  BindingRequirementsData,
   DATA_SCHEMA_VERSION_V1,
   DATA_SCHEMA_VERSION_V2,
   DocumentationData,
@@ -49,6 +50,9 @@ type DocumentationDataContextType = {
   setParticipation: (participation?: Participation) => void;
   setEuInteroperabilityOutcome: (
     euInteroperabilityOutcome?: EuInteroperabilityOutcome,
+  ) => void;
+  setBindingRequirementsData: (
+    bindingRequirements?: BindingRequirementsData,
   ) => void;
   addOrUpdatePrinciple: (newPrinciple?: Principle<V1 | V2>) => void;
   addOrUpdatePrincipleAnswer: (
@@ -221,6 +225,21 @@ export function DocumentationDataProvider({
     [documentationData, createOrUpdateDocumentationData],
   );
 
+  const setBindingRequirementsData = useCallback(
+    (bindingRequirements?: BindingRequirementsData) => {
+      const updatedDocumentationData = {
+        ...documentationData,
+        bindingRequirements,
+      };
+
+      if (!bindingRequirements)
+        delete updatedDocumentationData.bindingRequirements;
+
+      createOrUpdateDocumentationData(updatedDocumentationData);
+    },
+    [documentationData, createOrUpdateDocumentationData],
+  );
+
   const addOrUpdatePrinciple = useCallback(
     (newPrinciple?: Principle<V>) => {
       if (!newPrinciple) return;
@@ -385,6 +404,7 @@ export function DocumentationDataProvider({
       setPolicyTitle,
       setParticipation,
       setEuInteroperabilityOutcome,
+      setBindingRequirementsData,
       addOrUpdatePrinciple,
       addOrUpdatePrincipleAnswer,
       addOrUpdatePrincipleReasoning,
@@ -399,6 +419,7 @@ export function DocumentationDataProvider({
       setPolicyTitle,
       setParticipation,
       setEuInteroperabilityOutcome,
+      setBindingRequirementsData,
       addOrUpdatePrinciple,
       addOrUpdatePrincipleAnswer,
       addOrUpdatePrincipleReasoning,

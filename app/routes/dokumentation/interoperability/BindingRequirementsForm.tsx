@@ -2,21 +2,19 @@ import {
   AddCircleOutlineOutlined,
   DeleteOutlineTwoTone,
 } from "@digitalservicebund/icons";
-import { useFieldArray, useForm } from "@rvf/react";
+import { useFieldArray } from "@rvf/react";
 import React from "react";
-import { z } from "zod";
 import Badge from "~/components/Badge.tsx";
 import Button from "~/components/Button";
 import Checkbox from "~/components/Checkbox";
 import InlineNotice from "~/components/InlineNotice.tsx";
 import Input from "~/components/Input";
 import RichText from "~/components/RichText";
+import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
+import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
+import { bindingRequirementsSchema } from "~/routes/dokumentation/documentationDataSchema.ts";
 import { markdownCiteIEA } from "~/routes/dokumentation/euInteroperabilityFlow.tsx";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
-
-const checkboxValueSchema = z
-  .union([z.literal("on"), z.literal(true)])
-  .optional();
 
 const functionOptions = [
   { key: "defense", label: "Verteidigung" },
@@ -56,43 +54,6 @@ const stakeholderOptions = [
   { key: "privateBusinesses", label: "Private Unternehmen" },
 ] as const;
 
-const requirementItemSchema = z.object({
-  number: z.string().optional(),
-  legalReference: z.string().optional(),
-  description: z.string().optional(),
-  affectsData: checkboxValueSchema,
-  affectsSystems: checkboxValueSchema,
-  affectsOther: checkboxValueSchema,
-  affectsOtherText: z.string().optional(),
-});
-
-const bindingRequirementsFormSchema = z.object({
-  concernType: z.enum(["LIMITED", "MANY"]).default("LIMITED"),
-  tedpServices: z.array(z.object({ value: z.string().optional() })),
-  functions: z.object({
-    defense: checkboxValueSchema,
-    economicAffairs: checkboxValueSchema,
-    education: checkboxValueSchema,
-    environmentalProtection: checkboxValueSchema,
-    generalPublicServices: checkboxValueSchema,
-    health: checkboxValueSchema,
-    housingAndCommunityAmenities: checkboxValueSchema,
-    publicOrderAndSafety: checkboxValueSchema,
-    recreationCultureAndReligion: checkboxValueSchema,
-    socialProtection: checkboxValueSchema,
-  }),
-  requirements: z.array(requirementItemSchema),
-  stakeholders: z.object({
-    localPublicSectorBody: checkboxValueSchema,
-    regionalPublicSectorBody: checkboxValueSchema,
-    nationalPublicSectorBody: checkboxValueSchema,
-    europeanUnionInstitution: checkboxValueSchema,
-    europeanUnionAgency: checkboxValueSchema,
-    europeanUnionBody: checkboxValueSchema,
-    privateBusinesses: checkboxValueSchema,
-  }),
-});
-
 type CheckboxScope = React.ComponentProps<typeof Checkbox>["scope"];
 
 type SectionNode = {
@@ -102,17 +63,27 @@ type SectionNode = {
   render: () => React.ReactNode;
 };
 
-export default function BindingRequirementsForm() {
-  const form = useForm({
-    schema: bindingRequirementsFormSchema,
+export default function BindingRequirementsForm({
+  currentUrl,
+  nextUrl,
+}: Readonly<{ currentUrl: string; nextUrl: string }>) {
+  const { setBindingRequirementsData, documentationData } =
+    useDocumentationDataService();
+
+  const storedData = documentationData?.bindingRequirements;
+
+  const form = useSyncedForm({
+    schema: bindingRequirementsSchema,
     defaultValues: {
-      concernType: "LIMITED",
       tedpServices: [{ value: "" }],
       functions: {},
       requirements: [{}],
       stakeholders: {},
     },
-    handleSubmit: async () => {},
+    setDataCallback: (data) => setBindingRequirementsData(data ?? undefined),
+    storedData,
+    currentUrl,
+    nextUrl,
   });
 
   const requirements = useFieldArray(form.scope("requirements"));
@@ -206,10 +177,6 @@ export default function BindingRequirementsForm() {
             aria-relevant="additions removals"
           >
             {requirements.map((key, requirement, index) => {
-              const affectsOther = Boolean(
-                form.value(`requirements[${index}].affectsOther`),
-              );
-
               return (
                 <div className="space-y-16 rounded border p-16" key={key}>
                   <div className={"flex w-full justify-between"}>
@@ -243,27 +210,6 @@ export default function BindingRequirementsForm() {
                     Rechtsgrundlage für die verbindliche Anforderung, sofern
                     vorhanden
                   </Input>
-
-                  <fieldset className="space-y-8">
-                    <legend>
-                      Verbindliche Anforderung betrifft (alle zutreffenden
-                      auswählen)
-                    </legend>
-                    <Checkbox scope={requirement.scope("affectsData")}>
-                      Daten
-                    </Checkbox>
-                    <Checkbox scope={requirement.scope("affectsSystems")}>
-                      Systeme
-                    </Checkbox>
-                    <Checkbox scope={requirement.scope("affectsOther")}>
-                      Sonstiges
-                    </Checkbox>
-                    {affectsOther && (
-                      <Input scope={requirement.scope("affectsOtherText")}>
-                        Sonstiges angeben
-                      </Input>
-                    )}
-                  </fieldset>
                 </div>
               );
             })}

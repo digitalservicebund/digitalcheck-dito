@@ -2,6 +2,7 @@ import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import MetaTitle from "~/components/Meta";
 import {
+  ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
   ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS,
   ROUTE_DOCUMENTATION_SUMMARY,
 } from "~/resources/staticRoutes";
@@ -24,7 +25,12 @@ export default function DocumentationInteroperabilityAssessment() {
           look="ds-heading-02-reg"
           className="mb-16"
         />
-        <BindingRequirementsForm />
+        <BindingRequirementsForm
+          currentUrl={
+            ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS.url
+          }
+          nextUrl={ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT.url}
+        />
         <div>
           <DocumentationActions
             previousUrl={previousUrl}

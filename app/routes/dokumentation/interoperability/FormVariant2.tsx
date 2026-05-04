@@ -12,10 +12,10 @@ import {
   sections,
 } from "~/routes/dokumentation/interoperability/Sections.tsx";
 
-const STORAGE_KEY = "eu-interoperability-assessment-v1";
+export const STORAGE_KEY = "eu-interoperability-assessment-v1";
 const assessmentFormSchema = z.record(z.string(), z.any());
 
-type AssessmentFormValues = Record<
+export type AssessmentFormValues = Record<
   string,
   {
     checked?: "on" | true;
