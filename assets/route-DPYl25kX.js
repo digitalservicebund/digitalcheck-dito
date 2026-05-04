@@ -1,0 +1,1 @@
+import{L as e,l as t,t as n,z as r}from"./jsx-runtime-qDrv0oV-.js";import{t as i}from"./DocumentationDataProvider-Cu-wqVTa.js";var a=n(),o={hasProgressBar:!0};function s(){return e(`routes/dokumentation`)}var c=r(function(){return(0,a.jsx)(i,{children:(0,a.jsx)(t,{})})});export{c as n,s as r,o as t};
