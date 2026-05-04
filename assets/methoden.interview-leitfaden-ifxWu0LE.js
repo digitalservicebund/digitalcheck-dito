@@ -1,0 +1,31 @@
+import{t as e,z as t}from"./jsx-runtime-qDrv0oV-.js";import{t as n}from"./RichText-DvGTtHJy.js";import{O as r,b as i,m as a,wt as o}from"./icons-yL_t5wZF.js";import{N as s,P as c}from"./staticRoutes-DNMgQWT6.js";import{n as l}from"./contact--YzBCWCj.js";import{t as u}from"./Meta-6AR0wTaj.js";import{i as d}from"./Button-zPLT8k9W.js";import{t as f}from"./Heading-9dpKZTsv.js";import{t as p}from"./AccordionItem-DWEmYdVW.js";import{t as m}from"./InfoBox-DLHNxPrq.js";import{n as h}from"./Hero-BoEfPaTr.js";var g=e(),_=t(function(){return(0,g.jsxs)(g.Fragment,{children:[(0,g.jsx)(u,{prefix:s.title}),(0,g.jsxs)(`main`,{className:`mb-80 space-y-80`,children:[(0,g.jsxs)(h,{title:`Nehmen Sie die Praxis-Perspektive für Ihr Vorhaben ein`,children:[(0,g.jsx)(`p`,{children:`Erkenntnisse aus der Umsetzung und der direkte Einbezug der Betroffenen verbessern die Wirksamkeit Ihres Vorhaben. Aber wie gelangen Sie an die Erkenntnisse? Und wie gelingt der Transfer in die Regelung? Dieser Leitfaden unterstützt Sie beim praktischen Vorgehen. Er zeigt Ihnen, wie Sie relevante Stakeholder identifizieren und Interviews strukturiert vorbereiten.`}),(0,g.jsx)(`p`,{children:`Die Inhalte sind auf Basis von den unten aufgeführten Quellen entstanden.`})]}),(0,g.jsxs)(`section`,{className:`container space-y-40`,children:[(0,g.jsx)(f,{tagName:`h2`,children:`Warum die Praxisperspektive Ihre Regelungen verbessert`}),(0,g.jsxs)(`div`,{className:`space-y-32 md:grid md:grid-cols-3 md:space-y-0 md:gap-x-40`,children:[(0,g.jsxs)(`div`,{className:`space-y-16`,children:[(0,g.jsx)(o,{className:`size-40 fill-yellow-500 md:size-80`}),(0,g.jsx)(n,{className:`ds-label-01-reg`,markdown:l`
+                **Wirkung des Vorhabens erhöhen:**
+                
+                Erkenntnisse zur Umsetzungspraxis machen transparent, wie Regelungen im Vollzug wirken und umgesetzt werden.
+              `})]}),(0,g.jsxs)(`div`,{className:`space-y-16`,children:[(0,g.jsx)(i,{className:`size-40 fill-yellow-500 md:size-80`}),(0,g.jsx)(n,{className:`ds-label-01-reg`,markdown:l`
+                **Fehler vermeiden:**
+                
+                Durch Prüfung von Annahmen wird sichtbar, was in der Praxis funktioniert - und was nicht.
+              `})]}),(0,g.jsxs)(`div`,{className:`space-y-16`,children:[(0,g.jsx)(r,{className:`size-40 fill-yellow-500 md:size-80`}),(0,g.jsx)(n,{className:`ds-label-01-reg`,markdown:l`
+                **Potentiale heben:**
+
+                Auf Basis Ihres Vorhabens helfen die Erkenntnisse dabei, Services, Prozesse und Regeln gezielt zu verbessern.
+              `})]})]})]}),(0,g.jsxs)(`section`,{className:`container space-y-40`,children:[(0,g.jsxs)(`div`,{className:`space-y-8`,children:[(0,g.jsx)(f,{tagName:`h3`,children:`Interview-Methoden im Überblick`}),(0,g.jsx)(`p`,{children:`Damit Regelungen wirksam und praxisgerecht gestaltet werden können, bedarf es einer fundierten Informationsgrundlage. Der systematische Einbezug von Akteurinnen und Akteuren aus der Umsetzung ermöglicht es, Erfahrungen und Perspektiven aus der Praxis zu berücksichtigen. Zur Erhebung dieses Wissens können – je nach Zielsetzung – unterschiedliche Interviewtypen eingesetzt werden:`})]}),(0,g.jsxs)(`div`,{children:[(0,g.jsx)(p,{headline:`Quantitative Interviews`,children:(0,g.jsx)(n,{markdown:l`
+                Quantitative Interviews dienen der Überprüfung bestehender Annahmen.
+                
+                Sie arbeiten mit standardisierten Fragen und vorgegebenen Antwortoptionen, um vergleichbare und statistisch auswertbare Daten zu erheben. Geeignet zur Messung von Häufigkeiten und Verteilungen.
+              `})}),(0,g.jsx)(p,{headline:`Qualitative Interviews`,children:(0,g.jsx)(n,{markdown:l`
+               Qualitative Interviews dienen der Gewinnung neuer Erkenntnisse.
+               
+               Sie machen Erfahrungen, Perspektiven und Zusammenhänge sichtbar und ermöglichen ein vertieftes Verständnis der Praxis. Die Fragen sind offen, der Gesprächsverlauf flexibel.
+              `})})]}),(0,g.jsxs)(`div`,{className:`space-y-8`,children:[(0,g.jsx)(f,{tagName:`h4`,children:`Qualitative Interview-Formen`}),(0,g.jsx)(`p`,{children:`Je nach Projektphase und Informationsbedarf eignen sich unterschiedliche Interviewformen:`})]}),(0,g.jsxs)(`div`,{children:[(0,g.jsx)(p,{headline:`Standardisiertes Leitfaden-Interview`,children:(0,g.jsx)(n,{markdown:l`
+             Das Interview folgt einem festen, vorab definierten Fragenkatalog. Abweichungen sind nicht vorgesehen. Es eignet sich, wenn relevante Informationen bereits bekannt sind und systematisch erhoben werden sollen.
+              `})}),(0,g.jsx)(p,{headline:`Halb-standardisiertes Leitfaden-Interview`,children:(0,g.jsx)(n,{markdown:l`
+                Ein Interviewleitfaden gibt die Themen vor, lässt aber Spielraum in Reihenfolge und Formulierung der Fragen. Das Format ermöglicht gezielte Vertiefungen und neue Erkenntnisse bei gleichzeitig überschaubarem Auswertungsaufwand.
+              `})})]})]}),(0,g.jsx)(`section`,{className:`container`,children:(0,g.jsxs)(m,{look:`highlight`,heading:{text:`Akteurinnen und Akteure identifizieren und Interviews vorbereiten `,tagName:`h2`},visual:{Icon:a,type:`icon`},children:[(0,g.jsx)(n,{markdown:l`
+                In dem nachfolgenden Abschnitt finden Sie eine Anleitung wie sie relevante Akteurinnen und Akteure aus dem Vollzug identifizieren und den Leitfaden erstellen.
+              `}),(0,g.jsx)(d,{to:c.url,look:`tertiary`,className:`self-start`,children:`Zur Anleitung`})]})}),(0,g.jsx)(`hr`,{className:`container border-gray-400`}),(0,g.jsxs)(`section`,{className:`container space-y-8`,children:[(0,g.jsx)(f,{tagName:`h2`,children:`Relevante Quellen`}),(0,g.jsx)(n,{markdown:l`
+            - [Öffentliches Gestalten](https://www.oeffentliches-gestalten.de/)
+            - [Servicehandbuch](https://www.digitale-verwaltung.de/SharedDocs/downloads/Webs/DV/DE/servicehandbuch.pdf?__blob=publicationFile&v=5#page=18)
+            - [Servicestandard – Handbuch](https://servicestandard.gov.de/handbuch/#aus-der-praxis/)
+          `})]})]})]})});export{_ as default};

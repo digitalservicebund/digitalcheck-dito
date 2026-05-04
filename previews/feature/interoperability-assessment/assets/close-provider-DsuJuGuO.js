@@ -1,0 +1,1 @@
+import{U as e,V as t}from"./jsx-runtime-qDrv0oV-.js";var n=e(t(),1),r=(0,n.createContext)(()=>{});function i({value:e,children:t}){return n.createElement(r.Provider,{value:e},t)}export{i as t};
