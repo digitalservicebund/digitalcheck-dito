@@ -1,0 +1,1 @@
+function e(e){return`/digitalcheck-dito/previews/feature/interoperability-assessment/`.replace(/\/$/,``)+e}export{e as t};

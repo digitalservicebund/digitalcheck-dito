@@ -1,0 +1,1 @@
+import{U as e,V as t}from"./jsx-runtime-qDrv0oV-.js";import{P as n}from"./open-closed-CjidZMxI.js";var r=e(t(),1);function i(){let e=(0,r.useRef)(!1);return n(()=>(e.current=!0,()=>{e.current=!1}),[]),e}export{i as t};

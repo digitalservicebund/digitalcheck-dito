@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-qDrv0oV-.js";import{t}from"./tailwindMerge-C_bpYAlD.js";var n=e();function r({children:e,className:r,compactTopSpacing:i=!1}){return(0,n.jsx)(`div`,{className:t(`container my-40 space-y-40 lg:my-80`,i&&`lg:mt-40`,r),children:e})}export{r as t};
