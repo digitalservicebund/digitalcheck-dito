@@ -4,8 +4,8 @@ import React from "react";
 import { z } from "zod";
 import Button from "~/components/Button";
 import Checkbox from "~/components/Checkbox";
+import InlineNotice from "~/components/InlineNotice.tsx";
 import Input from "~/components/Input";
-import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
 import { markdownCiteIEA } from "~/routes/dokumentation/euInteroperabilityFlow.ts";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
@@ -15,35 +15,41 @@ const checkboxValueSchema = z
   .optional();
 
 const functionOptions = [
-  { key: "defense", label: "Defense" },
-  { key: "economicAffairs", label: "Economic affairs" },
-  { key: "education", label: "Education" },
-  { key: "environmentalProtection", label: "Environmental Protection" },
-  { key: "generalPublicServices", label: "General public services" },
-  { key: "health", label: "Health" },
+  { key: "defense", label: "Verteidigung" },
+  { key: "economicAffairs", label: "Wirtschaftliche Angelegenheiten" },
+  { key: "education", label: "Bildung" },
+  { key: "environmentalProtection", label: "Umweltschutz" },
+  { key: "generalPublicServices", label: "Allgemeine öffentliche Dienste" },
+  { key: "health", label: "Gesundheit" },
   {
     key: "housingAndCommunityAmenities",
-    label: "Housing and Community Amenities",
+    label: "Wohnungswesen und kommunale Einrichtungen",
   },
-  { key: "publicOrderAndSafety", label: "Public Order and Safety" },
+  { key: "publicOrderAndSafety", label: "Öffentliche Ordnung und Sicherheit" },
   {
     key: "recreationCultureAndReligion",
-    label: "Recreation, Culture, and Religion",
+    label: "Freizeit, Kultur und Religion",
   },
-  { key: "socialProtection", label: "Social Protection" },
+  { key: "socialProtection", label: "Sozialschutz" },
 ] as const;
 
 const stakeholderOptions = [
-  { key: "localPublicSectorBody", label: "Local public sector body" },
-  { key: "regionalPublicSectorBody", label: "Regional public sector body" },
-  { key: "nationalPublicSectorBody", label: "National public sector body" },
+  { key: "localPublicSectorBody", label: "Lokale öffentliche Einrichtung" },
+  {
+    key: "regionalPublicSectorBody",
+    label: "Regionale öffentliche Einrichtung",
+  },
+  {
+    key: "nationalPublicSectorBody",
+    label: "Nationale öffentliche Einrichtung",
+  },
   {
     key: "europeanUnionInstitution",
-    label: "European Union institution",
+    label: "EU-Institution",
   },
-  { key: "europeanUnionAgency", label: "European Union agency" },
-  { key: "europeanUnionBody", label: "European Union body" },
-  { key: "privateBusinesses", label: "Private Businesses" },
+  { key: "europeanUnionAgency", label: "EU-Agentur" },
+  { key: "europeanUnionBody", label: "EU-Einrichtung" },
+  { key: "privateBusinesses", label: "Private Unternehmen" },
 ] as const;
 
 const requirementItemSchema = z.object({
@@ -107,26 +113,25 @@ export default function BindingRequirementsForm() {
 
   const requirements = useFieldArray(form.scope("requirements"));
   const tedpServices = useFieldArray(form.scope("tedpServices"));
-  const values = form.value();
 
   const toCheckboxScope = (scope: unknown) => scope as CheckboxScope;
 
   const tree: SectionNode[] = [
     {
       id: "intro",
-      label: "Introduction",
+      label: "Einleitung",
       isEnabled: () => true,
       render: () => (
         <RichText
           markdown={dedent`
-            Bitte dokumentieren Sie alle verbindlichen Anforderungen i. S. v. ${markdownCiteIEA(2, 15)}
+            Bitte dokumentieren Sie alle verbindlichen Anforderungen i. S. v. ${markdownCiteIEA(2, 15)} und Dienste, die davon betroffen sind.
         `}
         />
       ),
     },
     {
       id: "serviceScope",
-      label: "Trans-European digital public service(s) concerned",
+      label: "Betroffene transeuropäische digitale öffentliche Dienste",
       isEnabled: () => true,
       render: () => (
         <div className="space-y-24">
@@ -134,56 +139,42 @@ export default function BindingRequirementsForm() {
             Betroffene transeuropäische Dienste
           </h2>
 
-          <fieldset className="space-y-12">
-            <legend>Die verbindlichen Anforderungen betreffen</legend>
-            <RadioGroup
-              scope={form.scope("concernType")}
-              options={[
-                {
-                  value: "LIMITED",
-                  label: "1-5 einzelne transeurop. öff. Dienste",
-                },
-                {
-                  value: "MANY",
-                  label: "Potenziell 6 oder mehr transeurop. öff. Diensts)",
-                },
-              ]}
-            />
-          </fieldset>
-
-          {values.concernType === "LIMITED" && (
+          <div className="space-y-12">
+            <p>
+              Geben Sie die betroffenen transeuropäischen digitalen öffentlichen
+              Dienste an:
+            </p>
             <div className="space-y-12">
-              <p>
-                Specify the trans-European digital public service(s) concerned:
-              </p>
-              <div className="space-y-12">
-                {tedpServices.map((key, item, index) => (
-                  <Input
-                    key={key}
-                    scope={item.scope("value")}
-                    placeholder="Dienst"
-                  >
-                    {`transeurop. öff. Dienst ${index + 1}`}
-                  </Input>
-                ))}
-              </div>
-              <Button
-                type="button"
-                look="ghost"
-                iconLeft={<AddCircleOutlineOutlined />}
-                onClick={async () => {
-                  await tedpServices.push({ value: "" });
-                }}
-              >
-                Add service
-              </Button>
+              {tedpServices.map((key, item, index) => (
+                <Input
+                  key={key}
+                  scope={item.scope("value")}
+                  placeholder="z. B. Anmeldung eines Kraftfahrzeugs"
+                >
+                  {`Dienst ${index + 1}`}
+                </Input>
+              ))}
             </div>
-          )}
+            <Button
+              type="button"
+              look="ghost"
+              iconLeft={<AddCircleOutlineOutlined />}
+              onClick={async () => {
+                await tedpServices.push({ value: "" });
+              }}
+            >
+              Dienst hinzufügen
+            </Button>
+          </div>
+          <InlineNotice look={"info"}>
+            Sie können die Auflistung der einzelnen Dienste auslassen, sofern
+            mehr als 5 Dienste betroffen sind.
+          </InlineNotice>
 
           <fieldset className="space-y-8">
             <legend>
-              Specify the concerned function of trans-European digital public
-              service(s):
+              Geben Sie die betroffene Funktion der transeuropäischen digitalen
+              öffentlichen Dienste an:
             </legend>
             {functionOptions.map((option) => (
               <Checkbox
@@ -199,12 +190,12 @@ export default function BindingRequirementsForm() {
     },
     {
       id: "bindingRequirements",
-      label: "Identification of binding requirements assessed",
+      label: "Ermittlung der geprüften verbindlichen Anforderungen",
       isEnabled: () => true,
       render: () => (
         <div className="space-y-24">
           <h2 className="ds-heading-03-reg">
-            Identification of binding requirements assessed
+            Ermittlung der geprüften verbindlichen Anforderungen
           </h2>
 
           <div
@@ -220,36 +211,38 @@ export default function BindingRequirementsForm() {
               return (
                 <div className="space-y-16 rounded border p-16" key={key}>
                   <Input
-                    scope={requirement.scope("number")}
-                    type="number"
-                    description="Number each requirement"
+                    scope={requirement.scope("description")}
+                    placeholder={
+                      "z. B. Übermittlung von Berichten an EU-Behörde"
+                    }
                   >
-                    Nr.
+                    Kurzbeschreibung oder Titel
                   </Input>
-                  <Input scope={requirement.scope("legalReference")}>
-                    Provide a legal reference for the binding requirement, if
-                    available
-                  </Input>
-                  <Input scope={requirement.scope("description")}>
-                    Provide a short description or a title
+                  <Input
+                    placeholder={"z. B. § 6"}
+                    scope={requirement.scope("legalReference")}
+                  >
+                    Rechtsgrundlage für die verbindliche Anforderung, sofern
+                    vorhanden
                   </Input>
 
                   <fieldset className="space-y-8">
                     <legend>
-                      Binding requirement affects (select all relevant)
+                      Verbindliche Anforderung betrifft (alle zutreffenden
+                      auswählen)
                     </legend>
                     <Checkbox scope={requirement.scope("affectsData")}>
-                      Data
+                      Daten
                     </Checkbox>
                     <Checkbox scope={requirement.scope("affectsSystems")}>
-                      Systems
+                      Systeme
                     </Checkbox>
                     <Checkbox scope={requirement.scope("affectsOther")}>
-                      Other
+                      Sonstiges
                     </Checkbox>
                     {affectsOther && (
                       <Input scope={requirement.scope("affectsOtherText")}>
-                        Enter other
+                        Sonstiges angeben
                       </Input>
                     )}
                   </fieldset>
@@ -266,20 +259,19 @@ export default function BindingRequirementsForm() {
               await requirements.push({});
             }}
           >
-            Add binding requirement
+            Verbindliche Anforderung hinzufügen
           </Button>
         </div>
       ),
     },
     {
       id: "stakeholders",
-      label: "Public and/or private stakeholders affected",
+      label: "Betroffene öffentliche und/oder private Interessengruppen",
       isEnabled: () => true,
       render: () => (
         <fieldset className="space-y-8">
           <legend>
-            Select the groups of stakeholders to which binding requirement(s)
-            are relevant:
+            Welche Gruppen sind von den verbindlichen Anforderungen betroffen?
           </legend>
           {stakeholderOptions.map((option) => (
             <Checkbox
