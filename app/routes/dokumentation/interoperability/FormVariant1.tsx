@@ -32,13 +32,18 @@ function LevelAssessmentForm({
 
   return (
     <div className="space-y-32">
-      <InteroperabilityRatingSelect levelDe={levelDe} scope={scope} />
+      <p>
+        Erklären Sie, inwiefern Sie die <strong>{levelDe}n</strong>{" "}
+        Voraussetzungen für eine europaweit grenzüberschreitende Nutzung
+        geschaffen haben.
+      </p>
       <Textarea
         description={description}
         scope={form.scope(`level-${level}.detail`)}
       >
-        Bitte begründen Sie Ihre Bewertung
+        Erklärung
       </Textarea>
+      <InteroperabilityRatingSelect levelDe={levelDe} scope={scope} />
     </div>
   );
 }
@@ -110,7 +115,7 @@ export default function FormVariant1() {
         className={"space-y-32 *:border-b *:border-b-gray-500 *:pb-32"}
       >
         <div className="mt-64 space-y-16">
-          <h2>1. Rechtliche Auswirkungen</h2>
+          <h2>Rechtliche Auswirkungen</h2>
 
           <ExplanationParagraph
             markdown={interoperabilityExplanationParagraphs.legal}
@@ -125,7 +130,7 @@ export default function FormVariant1() {
           />
         </div>
         <div className="space-y-16">
-          <h2>2. Organisatorische Auswirkungen</h2>
+          <h2>Organisatorische Auswirkungen</h2>
           <ExplanationParagraph
             markdown={interoperabilityExplanationParagraphs.organizational}
           />
@@ -137,7 +142,7 @@ export default function FormVariant1() {
           />
         </div>
         <div className="space-y-16">
-          <h2>3. Semantische Auswirkungen</h2>
+          <h2>Semantische Auswirkungen</h2>
           <ExplanationParagraph
             markdown={interoperabilityExplanationParagraphs.semantic}
           />
@@ -150,7 +155,7 @@ export default function FormVariant1() {
           />
         </div>
         <div className="space-y-16">
-          <h2>4. Technische Auswirkungen</h2>
+          <h2>Technische Auswirkungen</h2>
           <ExplanationParagraph
             markdown={interoperabilityExplanationParagraphs.technical}
           />
