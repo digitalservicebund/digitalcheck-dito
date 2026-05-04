@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   getEuInteroperabilityFlowState,
   sanitizeEuInteroperabilityAnswers,
-} from "./euInteroperabilityFlow.ts";
+} from "./euInteroperabilityFlow.tsx";
 
 describe("euInteroperabilityFlow", () => {
   it("returns required outcome for all yes answers", () => {

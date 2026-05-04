@@ -1,3 +1,4 @@
+import RichText from "~/components/RichText.tsx";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 
 export const EU_INTEROPERABILITY_ANSWERS_STORAGE_KEY =
@@ -42,7 +43,7 @@ export type EuInteroperabilityQuestion = {
 export type EuInteroperabilityOutcome = {
   id: EuInteroperabilityOutcomeId;
   title: string;
-  description: string;
+  description: ReactNode;
 };
 
 export function linkToIEAArticle(index?: number) {
@@ -123,8 +124,20 @@ export const EU_INTEROPERABILITY_OUTCOMES: Record<
   REQUIRED: {
     id: "REQUIRED",
     title: "Eine Interoperabilitätsbewertung ist erforderlich.",
-    description:
-      "Sie sind gesetzlich verpflichtet, eine Interoperabilitätsbewertung durchzuführen und den Bericht zu veröffentlichen.",
+    description: (
+      <RichText
+        markdown={dedent`
+          Sie sind gemäß ${markdownCiteIEA(3)} verpflichtet, eine Interoperabilitätsbewertung
+          durchzuführen und an die entsprechenden Stellen zu übermitteln.
+
+          Nutzen Sie hierfür die folgenden Schritte. Senden Sie die resultierende Dokumentation
+          (Word-Datei) an die nationale Kontaktstelle, welche sie an die EU-Kommission übermitteln wird.
+          
+          Alternativ können Sie die Interoperabilitätsbewertung auch direkt an
+          die EU-Kommission übermitteln. Nutzen Sie hierfür das [Online-Tool](https://interoperable-europe.ec.europa.eu/collection/assessments/online-tool-assessments).
+        `}
+      />
+    ),
   },
   NOT_REQUIRED_NO_DECISION_PROCESS: {
     id: "NOT_REQUIRED_NO_DECISION_PROCESS",

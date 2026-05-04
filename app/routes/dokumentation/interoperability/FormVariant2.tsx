@@ -3,12 +3,8 @@ import { useEffect, useMemo, useState } from "react";
 import { z } from "zod";
 import Checkbox from "~/components/Checkbox";
 import Input from "~/components/Input";
-import NewTabLink from "~/components/NewTabLink.tsx";
 import Textarea from "~/components/Textarea";
-import {
-  ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
-  ROUTE_DOCUMENTATION_SUMMARY,
-} from "~/resources/staticRoutes.ts";
+import { ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS } from "~/resources/staticRoutes.ts";
 import { InteroperabilityRatingSelect } from "~/routes/dokumentation/interoperability/InteroperabilityRatingSelect.tsx";
 import {
   AnswersById,
@@ -147,22 +143,6 @@ export default function FormVariant2() {
           nationale Kontaktstelle (2024/903 Art. 17) zu übermitteln, welche sie
           prüfen und anschließend an die EU-Kommission weiterleiten wird.
         </p>
-        <p>
-          Alternativ können Sie die Interoperabilitätsbewertung auch direkt an
-          die EU-Kommission übermitteln. Nutzen Sie hierfür das{" "}
-          <NewTabLink
-            to={
-              "https://interoperable-europe.ec.europa.eu/collection/assessments/online-tool-assessments"
-            }
-            className={"text-link"}
-          >
-            Online-Tool
-          </NewTabLink>
-          .
-        </p>
-        <a className="text-link" href={ROUTE_DOCUMENTATION_SUMMARY.url}>
-          Überspringen
-        </a>
       </div>
       <form {...form.getFormProps()}>
         {sections.map((section) => (

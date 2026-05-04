@@ -11,10 +11,10 @@ import {
   YES_NO_OPTIONS,
   type EuInteroperabilityQuestionId,
   type YesNoAnswer,
-} from "./euInteroperabilityFlow.ts";
+} from "./euInteroperabilityFlow.tsx";
 
 function readStoredAnswers() {
-  if (typeof window === "undefined") return {};
+  if (typeof globalThis.window === "undefined") return {};
 
   try {
     const storedAnswers = localStorage.getItem(

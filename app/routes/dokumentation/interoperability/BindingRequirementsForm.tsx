@@ -11,7 +11,7 @@ import Checkbox from "~/components/Checkbox";
 import InlineNotice from "~/components/InlineNotice.tsx";
 import Input from "~/components/Input";
 import RichText from "~/components/RichText";
-import { markdownCiteIEA } from "~/routes/dokumentation/euInteroperabilityFlow.ts";
+import { markdownCiteIEA } from "~/routes/dokumentation/euInteroperabilityFlow.tsx";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 
 const checkboxValueSchema = z
@@ -177,10 +177,7 @@ export default function BindingRequirementsForm() {
           </InlineNotice>
 
           <fieldset className="space-y-8">
-            <legend>
-              Geben Sie die betroffene Funktion der transeuropäischen digitalen
-              öffentlichen Dienste an:
-            </legend>
+            <legend>Für welche Bereiche sind diese Dienste relevant?</legend>
             {functionOptions.map((option) => (
               <Checkbox
                 key={option.key}

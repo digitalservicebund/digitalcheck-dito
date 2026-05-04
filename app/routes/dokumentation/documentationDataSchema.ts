@@ -6,7 +6,7 @@ import {
   ROUTE_DOCUMENTATION_TITLE,
 } from "~/resources/staticRoutes";
 import type { VersionedData } from "~/utils/localStorageVersioned";
-import { EU_INTEROPERABILITY_OUTCOME_IDS } from "./euInteroperabilityFlow.ts";
+import { EU_INTEROPERABILITY_OUTCOME_IDS } from "./euInteroperabilityFlow.tsx";
 
 export const DATA_SCHEMA_VERSION_V1 = "1";
 export const DATA_SCHEMA_VERSION_V2 = "2";

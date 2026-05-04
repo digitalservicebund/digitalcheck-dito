@@ -30,12 +30,9 @@ export default function DocumentationInteroperabilityAssessment() {
         prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT.title}`}
       />
       <div className="space-y-40">
-        <Heading
-          text={ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT.title}
-          tagName="h1"
-          look="ds-heading-02-reg"
-          className="mb-16"
-        />
+        <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
+          Auswirkungen auf Interoperabilität
+        </Heading>
         <p className={"ds-subhead"}>
           Bewerten Sie: Ermöglicht Ihre Regelung, dass die Verwaltungen
           verschiedener Mitgliedstaaten gut zusammenarbeiten können, wenn dies
@@ -43,10 +40,16 @@ export default function DocumentationInteroperabilityAssessment() {
         </p>
         <div
           className={
-            "**:[[role=tablist]]:rounded-md **:[[role=tablist]]:bg-green-200 **:[[role=tablist]]:p-8 **:[[role=tablist]]:shadow-lg"
+            "**:[[role=tablist]]:rounded-b-md **:[[role=tablist]]:border **:[[role=tablist]]:border-t-0 **:[[role=tablist]]:border-yellow-900 **:[[role=tablist]]:bg-yellow-200 **:[[role=tablist]]:p-8"
           }
         >
-          <p className={"p-8"}>Wählen Sie ein Testszenario:</p>
+          <p
+            className={
+              "rounded-t-md border border-b-0 border-yellow-900 bg-yellow-200 p-8"
+            }
+          >
+            Wählen Sie ein Testszenario:
+          </p>
 
           <TabGroup>
             <TabGroup.Tab label="Variante 1: Formular">
