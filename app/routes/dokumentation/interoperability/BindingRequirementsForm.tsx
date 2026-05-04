@@ -1,7 +1,11 @@
-import { AddCircleOutlineOutlined } from "@digitalservicebund/icons";
+import {
+  AddCircleOutlineOutlined,
+  DeleteOutlineTwoTone,
+} from "@digitalservicebund/icons";
 import { useFieldArray, useForm } from "@rvf/react";
 import React from "react";
 import { z } from "zod";
+import Badge from "~/components/Badge.tsx";
 import Button from "~/components/Button";
 import Checkbox from "~/components/Checkbox";
 import InlineNotice from "~/components/InlineNotice.tsx";
@@ -113,6 +117,7 @@ export default function BindingRequirementsForm() {
 
   const requirements = useFieldArray(form.scope("requirements"));
   const tedpServices = useFieldArray(form.scope("tedpServices"));
+  const requirementCount = form.value("requirements")?.length ?? 0;
 
   const toCheckboxScope = (scope: unknown) => scope as CheckboxScope;
 
@@ -201,7 +206,7 @@ export default function BindingRequirementsForm() {
           <div
             className="space-y-32"
             aria-live="polite"
-            aria-relevant="additions"
+            aria-relevant="additions removals"
           >
             {requirements.map((key, requirement, index) => {
               const affectsOther = Boolean(
@@ -210,6 +215,22 @@ export default function BindingRequirementsForm() {
 
               return (
                 <div className="space-y-16 rounded border p-16" key={key}>
+                  <div className={"flex w-full justify-between"}>
+                    <Badge look={"hint"}>Anforderung {index + 1}</Badge>
+
+                    {requirementCount > 1 && (
+                      <Button
+                        look="link"
+                        aria-label={`Anforderung ${index + 1} entfernen`}
+                        onClick={async () => {
+                          await requirements.remove(index);
+                        }}
+                        type={"button"}
+                      >
+                        <DeleteOutlineTwoTone />
+                      </Button>
+                    )}
+                  </div>
                   <Input
                     scope={requirement.scope("description")}
                     placeholder={
