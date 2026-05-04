@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import RichText from "~/components/RichText.tsx";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 
@@ -9,7 +10,6 @@ export const YES_NO_OPTIONS = ["Ja", "Nein"] as const;
 export type YesNoAnswer = (typeof YES_NO_OPTIONS)[number];
 
 export const EU_INTEROPERABILITY_QUESTION_IDS = [
-  "bindingRequirementsInDecisionProcess",
   "serviceProvidedByPublicOrUnionEntity",
   "serviceProvidedInEuContext",
   "requiresCrossBorderSystemInteraction",
@@ -64,23 +64,10 @@ export const EU_INTEROPERABILITY_QUESTIONS: Record<
   EuInteroperabilityQuestionId,
   EuInteroperabilityQuestion
 > = {
-  bindingRequirementsInDecisionProcess: {
-    id: "bindingRequirementsInDecisionProcess",
-    text: "Definiert oder ändert Ihre Regelung oder deren Vollzug eine Verpflichtung, ein Verbot, eine Bedingung, ein Kriterium oder eine Beschränkung rechtlicher, organisatorischer, semantischer oder technischer Art?",
-    details: dedent`
-      Dies ist bei Regelungsvorhaben in der Regel der Fall.
-      
-      Im Vollzug kann dies z. B. durch Verwaltungsvorschriften, Architekturvorgaben geschehen.
-    `,
-    next: {
-      Ja: "serviceProvidedByPublicOrUnionEntity",
-      Nein: "NOT_REQUIRED_NO_DECISION_PROCESS",
-    },
-  },
   serviceProvidedByPublicOrUnionEntity: {
     id: "serviceProvidedByPublicOrUnionEntity",
-    text: "Betreffen die verbindlichen Anforderungen einen digitalen öffentlichen Dienst, der von öffentlichen Stellen oder EU-Organen erbracht wird?",
-    details: `Siehe ${markdownCiteIEA(2, 2)}.`,
+    text: "Betrifft Ihre Regelung einen digitalen öffentlichen Dienst?",
+    details: `Siehe ${markdownCiteIEA(2, 2)}. Relevant sind hier nur neue oder geänderte Teile der Regelung.`,
     next: {
       Ja: "serviceProvidedInEuContext",
       Nein: "NOT_REQUIRED_NOT_PROVIDED_BY_PUBLIC_OR_UNION_ENTITY",
@@ -182,7 +169,7 @@ export type EuInteroperabilityFlowState = {
 };
 
 const FIRST_QUESTION_ID: EuInteroperabilityQuestionId =
-  "bindingRequirementsInDecisionProcess";
+  "serviceProvidedByPublicOrUnionEntity";
 
 export function getEuInteroperabilityFlowState(
   answers: EuInteroperabilityAnswers,
