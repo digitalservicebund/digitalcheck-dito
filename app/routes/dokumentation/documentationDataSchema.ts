@@ -256,7 +256,6 @@ const checkboxValueSchema = z
   .optional();
 
 export const bindingRequirementsSchema = z.object({
-  tedpServices: z.array(z.object({ value: z.string().optional() })),
   functions: z.object({
     defense: checkboxValueSchema,
     economicAffairs: checkboxValueSchema,
@@ -274,6 +273,7 @@ export const bindingRequirementsSchema = z.object({
       number: z.string().optional(),
       legalReference: z.string().optional(),
       description: z.string().optional(),
+      services: z.string().optional(),
     }),
   ),
   stakeholders: z.object({
