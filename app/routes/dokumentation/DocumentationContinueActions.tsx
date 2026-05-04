@@ -9,7 +9,7 @@ import {
   ROUTE_DOCUMENTATION_TITLE,
   ROUTES_DOCUMENTATION_INTRO,
 } from "~/resources/staticRoutes.ts";
-import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
+import { useDocumentationRouteData } from "~/routes/dokumentation/hooks.tsx";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation.ts";
 import { useNonce } from "~/utils/nonce.ts";
 import { useDocumentationDataService } from "./DocumentationDataProvider";

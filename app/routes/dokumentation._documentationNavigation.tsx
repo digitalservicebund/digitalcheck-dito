@@ -18,7 +18,7 @@ import {
   ROUTE_DOCUMENTATION_SUMMARY,
   ROUTE_DOCUMENTATION_TITLE,
 } from "~/resources/staticRoutes";
-import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
+import { useDocumentationRouteData } from "~/routes/dokumentation/hooks.tsx";
 import { features } from "~/utils/featureFlags";
 import { PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
