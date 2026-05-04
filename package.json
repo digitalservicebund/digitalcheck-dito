@@ -57,7 +57,7 @@
     "node-cache": "^5.1.2",
     "pdf-lib": "^1.17.1",
     "picomatch": "^4.0.4",
-    "posthog-js": "^1.372.3",
+    "posthog-js": "^1.372.6",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-router": "^7.14.2",
