@@ -6,8 +6,8 @@ import { useFieldArray } from "@rvf/react";
 import React from "react";
 import Badge from "~/components/Badge.tsx";
 import Button from "~/components/Button";
+import Combobox from "~/components/ComboBox.tsx";
 import Input from "~/components/Input";
-import Pills from "~/components/Pills.tsx";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea.tsx";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
@@ -158,18 +158,18 @@ export default function BindingRequirementsForm({
                       <legend>
                         Für welche Bereiche sind diese Dienste relevant?
                       </legend>
-                      <Pills
+                      <Combobox
                         scope={requirement.scope("serviceAreas")}
                         options={functionOptions}
                       />
                     </fieldset>
-                    <Pills
+                    <Combobox
                       options={stakeholderOptions}
                       scope={form.scope("stakeholderGroups")}
                     >
                       Welche Gruppen sind von den verbindlichen Anforderungen
                       betroffen?
-                    </Pills>
+                    </Combobox>
                   </div>
                 </div>
               );
