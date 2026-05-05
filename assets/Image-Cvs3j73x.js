@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-TdnDAAmO.js";var t=e();function n({url:e,width:n,height:r,alternativeText:i,className:a,...o}){return e?(0,t.jsx)(`img`,{...o,src:e,alt:i,width:n,height:r,className:a}):null}export{n as t};

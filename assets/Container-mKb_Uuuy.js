@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-TdnDAAmO.js";import{t}from"./tailwindMerge-BKTsInwI.js";var n=e();function r({overhangingBackground:e,children:r,className:i}){return(0,n.jsx)(`div`,{className:t(`container py-40`,e&&`rounded-lg container-overhanging-background`,i),children:r})}export{r as t};

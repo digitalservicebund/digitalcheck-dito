@@ -1,0 +1,1 @@
+import{a as e,f as t,l as n,m as r,o as i,s as a,u as o}from"./staticRoutes-BHUqHp-T.js";var s=[r,n,e,a,i,t,o];export{s as t};
