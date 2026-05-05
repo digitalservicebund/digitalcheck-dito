@@ -1,10 +1,13 @@
-name: Preview
+name: Preview (React Router)
 
 on:
   workflow_dispatch:
   pull_request:
     types: [opened, synchronize, reopened, closed]
   delete:
+  push:
+    branches:
+      - feature/interoperability-assessment
 
 jobs:
   # Builds and deploys preview when PR is opened/updated or manually triggered.
@@ -90,7 +93,7 @@ jobs:
             RESPONSE_CODE=$(curl -s --head -o /dev/null -w "%{http_code}" "$URL")
             CURRENT_TIME=$(date +%s)
             ELAPSED_TIME=$((CURRENT_TIME - START_TIME))
-
+            
             if [ "$RESPONSE_CODE" -lt 400 ]; then
               exit 0
             elif [ "$ELAPSED_TIME" -ge "$MAX_TIME" ]; then
