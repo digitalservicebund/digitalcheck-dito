@@ -4,7 +4,7 @@ import {
   ROUTES,
   ROUTES_DOCUMENTATION_FINALIZE,
 } from "./app/resources/staticRoutes.ts";
-import { staticDocumentationRoutes } from "./app/routes/dokumentation._documentationNavigation.tsx";
+import { staticDocumentationRoutes } from "./app/routes/dokumentation.staticDocumentationRoutes.ts";
 import {
   fetchStrapiData,
   GET_PRINZIPS_QUERY,

@@ -21,6 +21,7 @@ import {
 import { useDocumentationRouteData } from "~/routes/dokumentation/hooks.tsx";
 import { features } from "~/utils/featureFlags";
 import { PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
+import { staticDocumentationRoutes } from "./dokumentation.staticDocumentationRoutes";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 
 type Route = _Route & {
@@ -101,16 +102,6 @@ const createPrincipleItem = (route: Route): NavigationItemDefinition => ({
   getRoute: () => route,
   isEnabled: alwaysEnabled,
 });
-
-export const staticDocumentationRoutes: Route[] = [
-  ROUTE_DOCUMENTATION_TITLE,
-  ROUTE_DOCUMENTATION_PARTICIPATION,
-  ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
-  ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS,
-  ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
-  ROUTE_DOCUMENTATION_SUMMARY,
-  ROUTE_DOCUMENTATION_SEND,
-];
 
 const documentationNavigationTree: NavigationDefinition[] = [
   createRouteItem("title", ROUTE_DOCUMENTATION_TITLE.url),
