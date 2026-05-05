@@ -39,6 +39,8 @@ export const sections: Section[] = [
     intro: (
       <ExplanationParagraph
         markdown={interoperabilityExplanationParagraphs.legal}
+        level={"legal"}
+        contextLabel={"bei rechtlichen Auswirkungen"}
       />
     ),
     groups: [
@@ -102,6 +104,8 @@ export const sections: Section[] = [
     intro: (
       <ExplanationParagraph
         markdown={interoperabilityExplanationParagraphs.organizational}
+        level={"organizational"}
+        contextLabel={"bei organisatorischen Auswirkungen"}
       />
     ),
     groups: [
@@ -163,6 +167,8 @@ export const sections: Section[] = [
     intro: (
       <ExplanationParagraph
         markdown={interoperabilityExplanationParagraphs.semantic}
+        level={"semantic"}
+        contextLabel={"bei semantischen Auswirkungen"}
       />
     ),
     groups: [
@@ -260,6 +266,8 @@ export const sections: Section[] = [
     intro: (
       <ExplanationParagraph
         markdown={interoperabilityExplanationParagraphs.technical}
+        level={"technical"}
+        contextLabel={"bei technischen Auswirkungen"}
       />
     ),
     groups: [

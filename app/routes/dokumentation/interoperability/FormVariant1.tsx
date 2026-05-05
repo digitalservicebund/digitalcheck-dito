@@ -2,6 +2,7 @@ import { type FormApi, useForm } from "@rvf/react";
 import { ReactNode } from "react";
 import { z } from "zod";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
+import HelpButton from "~/components/HelpButton.tsx";
 import NewTabLink from "~/components/NewTabLink.tsx";
 import RichText from "~/components/RichText.tsx";
 import Textarea from "~/components/Textarea.tsx";
@@ -50,13 +51,18 @@ function LevelAssessmentForm({
 
 export function ExplanationParagraph({
   markdown,
-}: Readonly<{ markdown: string }>) {
+  contextLabel,
+  level,
+}: Readonly<{ markdown: string; contextLabel: string; level: Section["id"] }>) {
   return (
-    <DetailsSummary title={"Was soll hier geprüft werden?"}>
-      <div className={"ds-body-01-reg max-w-prose"}>
-        <RichText markdown={markdown} />
-      </div>
-    </DetailsSummary>
+    <HelpButton
+      sectionId={contextLabel}
+      title={`Was soll ${contextLabel} geprüft werden?`}
+    >
+      <RichText markdown={markdown} />
+
+      <ExamplesList level={level} />
+    </HelpButton>
   );
 }
 
@@ -115,13 +121,14 @@ export default function FormVariant1() {
         className={"space-y-32 *:border-b *:border-b-gray-500 *:pb-32"}
       >
         <div className="mt-64 space-y-16">
-          <h2>Rechtliche Auswirkungen</h2>
-
-          <ExplanationParagraph
-            markdown={interoperabilityExplanationParagraphs.legal}
-          />
-
-          <ExamplesList level="legal" />
+          <h2>
+            Rechtliche Auswirkungen
+            <ExplanationParagraph
+              contextLabel={"bei rechtlichen Auswirkungen"}
+              markdown={interoperabilityExplanationParagraphs.legal}
+              level={"legal"}
+            />
+          </h2>
 
           <LevelAssessmentForm
             form={form}
@@ -130,11 +137,15 @@ export default function FormVariant1() {
           />
         </div>
         <div className="space-y-16">
-          <h2>Organisatorische Auswirkungen</h2>
-          <ExplanationParagraph
-            markdown={interoperabilityExplanationParagraphs.organizational}
-          />
-          <ExamplesList level="organizational" />
+          <h2>
+            Organisatorische Auswirkungen{" "}
+            <ExplanationParagraph
+              contextLabel={"bei organisatorischen Auswirkungen"}
+              markdown={interoperabilityExplanationParagraphs.organizational}
+              level={"organizational"}
+            />
+          </h2>
+
           <LevelAssessmentForm
             form={form}
             level={"organizational"}
@@ -142,11 +153,14 @@ export default function FormVariant1() {
           />
         </div>
         <div className="space-y-16">
-          <h2>Semantische Auswirkungen</h2>
-          <ExplanationParagraph
-            markdown={interoperabilityExplanationParagraphs.semantic}
-          />
-          <ExamplesList level="semantic" />
+          <h2>
+            Semantische Auswirkungen
+            <ExplanationParagraph
+              contextLabel={"bei semantischen Auswirkungen"}
+              markdown={interoperabilityExplanationParagraphs.semantic}
+              level={"semantic"}
+            />
+          </h2>
 
           <LevelAssessmentForm
             form={form}
@@ -155,11 +169,14 @@ export default function FormVariant1() {
           />
         </div>
         <div className="space-y-16">
-          <h2>Technische Auswirkungen</h2>
-          <ExplanationParagraph
-            markdown={interoperabilityExplanationParagraphs.technical}
-          />
-          <ExamplesList level="technical" />
+          <h2>
+            Technische Auswirkungen
+            <ExplanationParagraph
+              level={"technical"}
+              contextLabel={"bei technischen Auswirkungen"}
+              markdown={interoperabilityExplanationParagraphs.technical}
+            />
+          </h2>
 
           <LevelAssessmentForm
             form={form}

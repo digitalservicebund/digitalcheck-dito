@@ -7,6 +7,7 @@ import React from "react";
 import Badge from "~/components/Badge.tsx";
 import Button from "~/components/Button";
 import Combobox from "~/components/ComboBox.tsx";
+import HelpButton from "~/components/HelpButton.tsx";
 import Input from "~/components/Input";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea.tsx";
@@ -95,7 +96,7 @@ export default function BindingRequirementsForm({
       render: () => (
         <RichText
           markdown={dedent`
-            Bitte dokumentieren Sie alle verbindlichen Anforderungen i. S. v. ${markdownCiteIEA(2, 15)} und Dienste, die davon betroffen sind.
+            Bitte dokumentieren Sie alle verbindlichen Anforderungen i. S. v. ${markdownCiteIEA(2, 15)} und Dienste, die von diesen Anforderungen betroffen sind.
         `}
         />
       ),
@@ -150,8 +151,28 @@ export default function BindingRequirementsForm({
                     vorhanden
                   </Input>
                   <div className="space-y-24">
-                    <Textarea scope={requirement.scope("services")}>
-                      Betroffene transeuropäische Dienste (1 pro Zeile)
+                    <Textarea
+                      scope={requirement.scope("services")}
+                      description="Einen Eintrag pro Zeile"
+                    >
+                      Betroffene transeuropäische Dienste
+                      <HelpButton
+                        sectionId={"transeuropean_services"}
+                        title={"Betroffene transeuropäische Dienste"}
+                      >
+                        <RichText
+                          markdown={dedent`
+                          Geben Sie hier an, welche Dienste im Sinne von
+                          ${markdownCiteIEA(2, 2)} durch die verbindliche Anforderung betroffen sind.
+                          
+                          Beispiele: 
+                          - Austausch von Dokumenten zu internationalen Warenlieferungen
+                          - Meldung von Statistikdaten
+                          - Kommunikation zwischen involvierten Behörden
+                          - EU Building Stock Observatory: monitoring and assessing the progress of Member States towards the national objectives and targets set out in their integrated national energy and climate plans
+                        `}
+                        />
+                      </HelpButton>
                     </Textarea>
 
                     <fieldset className="space-y-8">
