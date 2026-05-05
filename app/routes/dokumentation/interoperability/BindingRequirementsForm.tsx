@@ -65,9 +65,8 @@ type SectionNode = {
 };
 
 export default function BindingRequirementsForm({
-  currentUrl,
   nextUrl,
-}: Readonly<{ currentUrl: string; nextUrl: string }>) {
+}: Readonly<{ nextUrl?: string }>) {
   const { setBindingRequirementsData, documentationData } =
     useDocumentationDataService();
 
@@ -82,7 +81,6 @@ export default function BindingRequirementsForm({
     },
     setDataCallback: (data) => setBindingRequirementsData(data ?? undefined),
     storedData,
-    currentUrl,
     nextUrl,
   });
 
