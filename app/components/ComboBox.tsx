@@ -87,8 +87,8 @@ export default function Combobox({
                 />
               );
             })}
+            <ComboboxInput placeholder={"Mehr hinzufügen…"} />
           </div>
-          <ComboboxInput placeholder={"Mehr hinzufügen…"} className="w-full" />
         </div>
         <ComboboxOptions
           anchor="bottom"
