@@ -5,7 +5,7 @@ import ButtonContainer from "~/components/ButtonContainer";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general";
 import { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
-import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
+import { useWordDocumentationV2 as useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentationV2";
 
 type SubmitType = {
   submit: true;
@@ -36,16 +36,17 @@ export default function DocumentationActions({
   return (
     <div className="mt-80 space-y-40">
       <ButtonContainer>
-        {submit && <Button type="submit">{general.buttonNext.text}</Button>}
-        {nextUrl && (
-          <LinkButton to={nextUrl}>{general.buttonNext.text}</LinkButton>
-        )}
-
         {previousUrl && (
           <LinkButton to={previousUrl} look="tertiary">
             {general.buttonBack.text}
           </LinkButton>
         )}
+
+        {submit && <Button type="submit">{general.buttonNext.text}</Button>}
+        {nextUrl && (
+          <LinkButton to={nextUrl}>{general.buttonNext.text}</LinkButton>
+        )}
+
         {showDownloadDraftButton && prinzips && (
           <DownloadButton
             look="ghost"

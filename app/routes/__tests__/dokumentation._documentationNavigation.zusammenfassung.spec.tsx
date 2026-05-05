@@ -21,11 +21,11 @@ import type {
   Participation,
   PolicyTitle,
   Principle,
-  V1,
+  V2,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { AbsatzWithParagraph } from "~/utils/strapiData.server.ts";
-import DocumentationSummaryV1 from "../dokumentation/DocumentationSummaryV1";
+import DocumentationSummary from "../dokumentation._documentationNavigation.zusammenfassung";
 
 const MOCK_ROUTE_PRINCIPLE = {
   title: "Digitale Angebote",
@@ -36,9 +36,6 @@ const routes: (Route[] | Route)[] = [
   [MOCK_ROUTE_PRINCIPLE],
 ];
 
-/**
- * Routes that are relevant for forms interaction, excluding the notes page, and summary/send steps.
- */
 const documentationFormRoutes = routes
   .flat()
   .filter((route) => route.url !== ROUTE_DOCUMENTATION_NOTES.url);
@@ -52,10 +49,10 @@ function createDocumentationDataMock({
 }: {
   policyTitle?: PolicyTitle;
   participation?: Participation;
-  principles?: Principle<V1>[];
+  principles?: Principle<V2>[];
 } = {}) {
-  vi.mocked(readDataFromLocalStorage<DocumentationData<V1>>).mockReturnValue({
-    version: "1",
+  vi.mocked(readDataFromLocalStorage<DocumentationData<V2>>).mockReturnValue({
+    version: "2",
     policyTitle: policyTitle,
     participation: participation,
     principles: principles,
@@ -67,14 +64,14 @@ describe("DocumentationSummary", () => {
     return render(
       <MemoryRouter>
         <DocumentationDataProvider>
-          <DocumentationSummaryV1 />
+          <DocumentationSummary />
         </DocumentationDataProvider>
       </MemoryRouter>,
     );
   };
 
-  const mockDocumentationData: DocumentationData = {
-    version: "1",
+  const mockDocumentationData: DocumentationData<V2> = {
+    version: "2",
     policyTitle: { title: "Titel des Vorhabens" },
     participation: {
       formats: "Format 1",
@@ -99,7 +96,24 @@ describe("DocumentationSummary", () => {
           Nummer: 1,
           order: 1,
           Beschreibung: [],
-          Aspekte: [],
+          Aspekte: [
+            {
+              Titel: "Aspekt 1",
+              Kurzbezeichnung: "A1",
+              Beschreibung: "",
+              Text: [],
+              Nummer: "",
+              Anwendung: [],
+            },
+            {
+              Titel: "Aspekt 2",
+              Kurzbezeichnung: "A2",
+              Beschreibung: "",
+              Text: [],
+              Nummer: "",
+              Anwendung: [],
+            },
+          ],
           Beispiel: {} as AbsatzWithParagraph,
         },
       ],
@@ -148,7 +162,6 @@ describe("DocumentationSummary", () => {
 
       expect(
         within(stepContainer).getByRole("heading", {
-          name: route.title,
           level: 2,
         }),
       ).toBeInTheDocument();
@@ -176,8 +189,7 @@ describe("DocumentationSummary", () => {
   it("displays policy title when available", () => {
     renderWithRouter();
 
-    expect(screen.getByText("Format 1")).toBeInTheDocument();
-    expect(screen.getByText("Auswirkung auf die Regelung")).toBeInTheDocument();
+    expect(screen.getByText("Titel des Vorhabens")).toBeInTheDocument();
   });
 
   it("displays participation data when available", () => {
@@ -187,113 +199,61 @@ describe("DocumentationSummary", () => {
     expect(screen.getByText("Auswirkung auf die Regelung")).toBeInTheDocument();
   });
 
-  it("displays principle with positive answer and multiple aspects", () => {
+  it("displays principle with positive answer and aspects as pills", () => {
     createDocumentationDataMock({
       principles: [
         {
           id: "1",
           answer: "Ja, gänzlich oder teilweise",
-          reasoning: [
-            {
-              aspect: "aspect-1",
-              checkbox: true,
-              paragraphs: "§1, §2",
-              reason: "Reason for aspect 1",
-            },
-            {
-              aspect: "aspect-2",
-              checkbox: true,
-              paragraphs: "§3, §4",
-              reason: "Reason for aspect 2",
-            },
-          ],
+          reasoning: "Explanation text",
+          aspects: ["a1", "a2"],
         },
       ],
     });
     renderWithRouter();
 
+    // When answer exists, testId includes /erlaeuterung
     const principleContainer = screen.getByTestId(
-      "/dokumentation/prinzip-digitale-angebote",
-    );
-
-    expect(
-      within(principleContainer).getByText("Ja, gänzlich oder teilweise"),
-    ).toBeInTheDocument();
-    expect(within(principleContainer).getByText("§1, §2")).toBeInTheDocument();
-    expect(
-      within(principleContainer).getByText("Reason for aspect 1"),
-    ).toBeInTheDocument();
-    expect(within(principleContainer).getByText("§3, §4")).toBeInTheDocument();
-    expect(
-      within(principleContainer).getByText("Reason for aspect 2"),
-    ).toBeInTheDocument();
-
-    expect(
-      within(principleContainer).queryByText(
-        "Sie haben diesen Punkt noch nicht vollständig bearbeitet.",
-      ),
-    ).not.toBeInTheDocument();
-  });
-
-  it("displays incomplete principle data and show warning", () => {
-    createDocumentationDataMock({
-      principles: [
-        {
-          id: "1",
-          answer: "Ja, gänzlich oder teilweise",
-          reasoning: [
-            {
-              aspect: "aspect-1",
-              checkbox: true,
-              paragraphs: "",
-              reason: "Reason for aspect 1",
-            },
-          ],
-        },
-      ],
-    });
-    renderWithRouter();
-
-    const principleContainer = screen.getByTestId(
-      "/dokumentation/prinzip-digitale-angebote",
+      "/dokumentation/prinzip-digitale-angebote/erlaeuterung",
     );
 
     expect(
       within(principleContainer).getByText("Ja, gänzlich oder teilweise"),
     ).toBeInTheDocument();
     expect(
-      within(principleContainer).getByText("Reason for aspect 1"),
+      within(principleContainer).getByText("Schwerpunkte"),
     ).toBeInTheDocument();
+    expect(within(principleContainer).getByText("A1")).toBeInTheDocument();
+    expect(within(principleContainer).getByText("A2")).toBeInTheDocument();
     expect(
-      within(principleContainer).queryByText(
-        "Sie haben diesen Punkt noch nicht vollständig bearbeitet.",
-      ),
+      within(principleContainer).getByText("Explanation text"),
     ).toBeInTheDocument();
   });
 
-  it("displays principle with negative answer and string reasoning", () => {
+  it("displays principle with negative answer", () => {
     createDocumentationDataMock({
       principles: [
         {
           id: "1",
           answer: "Nein",
-          reasoning: "Reason why principle is not applicable",
+          reasoning: "Reason why not applicable",
+          aspects: undefined,
         },
       ],
     });
     renderWithRouter();
 
     const principleContainer = screen.getByTestId(
-      "/dokumentation/prinzip-digitale-angebote",
+      "/dokumentation/prinzip-digitale-angebote/erlaeuterung",
     );
 
     expect(within(principleContainer).getByText("Nein")).toBeInTheDocument();
     expect(
-      within(principleContainer).getByText(
-        "Reason why principle is not applicable",
-      ),
+      within(principleContainer).getByText("Reason why not applicable"),
     ).toBeInTheDocument();
-
+    expect(
+      within(principleContainer).queryByText("Schwerpunkte"),
+    ).not.toBeInTheDocument();
     expect(
       within(principleContainer).queryByText(
         "Sie haben diesen Punkt noch nicht vollständig bearbeitet.",
@@ -301,36 +261,130 @@ describe("DocumentationSummary", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("displays principle with irrelevant answer and string reasoning", () => {
+  it("displays principle with irrelevant answer", () => {
     createDocumentationDataMock({
       principles: [
         {
           id: "1",
           answer: "Nicht relevant",
-          reasoning: "Reason why principle is not relevant",
+          reasoning: "Reason why not relevant",
+          aspects: undefined,
         },
       ],
     });
     renderWithRouter();
 
     const principleContainer = screen.getByTestId(
-      "/dokumentation/prinzip-digitale-angebote",
+      "/dokumentation/prinzip-digitale-angebote/erlaeuterung",
     );
 
     expect(
       within(principleContainer).getByText("Nicht relevant"),
     ).toBeInTheDocument();
     expect(
-      within(principleContainer).getByText(
-        "Reason why principle is not relevant",
-      ),
+      within(principleContainer).getByText("Reason why not relevant"),
     ).toBeInTheDocument();
-
+    expect(
+      within(principleContainer).queryByText("Schwerpunkte"),
+    ).not.toBeInTheDocument();
     expect(
       within(principleContainer).queryByText(
         "Sie haben diesen Punkt noch nicht vollständig bearbeitet.",
       ),
     ).not.toBeInTheDocument();
+  });
+
+  it("shows incomplete warning for negative answer with missing reasoning", () => {
+    createDocumentationDataMock({
+      principles: [
+        {
+          id: "1",
+          answer: "Nein",
+          reasoning: "",
+          aspects: undefined,
+        },
+      ],
+    });
+    renderWithRouter();
+
+    const principleContainer = screen.getByTestId(
+      "/dokumentation/prinzip-digitale-angebote/erlaeuterung",
+    );
+
+    expect(
+      within(principleContainer).getByText(
+        "Sie haben diesen Punkt noch nicht vollständig bearbeitet.",
+      ),
+    ).toBeInTheDocument();
+  });
+
+  it("shows incomplete warning for positive answer with aspects but missing reasoning", () => {
+    createDocumentationDataMock({
+      principles: [
+        {
+          id: "1",
+          answer: "Ja, gänzlich oder teilweise",
+          reasoning: "",
+          aspects: ["a1"],
+        },
+      ],
+    });
+    renderWithRouter();
+
+    const principleContainer = screen.getByTestId(
+      "/dokumentation/prinzip-digitale-angebote/erlaeuterung",
+    );
+
+    expect(
+      within(principleContainer).getByText(
+        "Sie haben diesen Punkt noch nicht vollständig bearbeitet.",
+      ),
+    ).toBeInTheDocument();
+  });
+
+  it("links to erlaeuterung page when principle has an answer", () => {
+    createDocumentationDataMock({
+      principles: [
+        {
+          id: "1",
+          answer: "Ja, gänzlich oder teilweise",
+          reasoning: "text",
+          aspects: ["a1"],
+        },
+      ],
+    });
+    renderWithRouter();
+
+    const principleContainer = screen.getByTestId(
+      "/dokumentation/prinzip-digitale-angebote/erlaeuterung",
+    );
+
+    const editLink = within(principleContainer).getByRole("link", {
+      name: /bearbeiten/i,
+    });
+    expect(editLink).toHaveAttribute(
+      "href",
+      "/dokumentation/prinzip-digitale-angebote/erlaeuterung",
+    );
+  });
+
+  it("links to base principle page when principle has no answer", () => {
+    createDocumentationDataMock({
+      principles: [],
+    });
+    renderWithRouter();
+
+    const principleContainer = screen.getByTestId(
+      "/dokumentation/prinzip-digitale-angebote",
+    );
+
+    const editLink = within(principleContainer).getByRole("link", {
+      name: /bearbeiten/i,
+    });
+    expect(editLink).toHaveAttribute(
+      "href",
+      "/dokumentation/prinzip-digitale-angebote",
+    );
   });
 
   it("shows edit buttons for steps that have data", () => {
@@ -338,22 +392,16 @@ describe("DocumentationSummary", () => {
 
     const titleContainer = screen.getByTestId(ROUTE_DOCUMENTATION_TITLE.url);
     const titleEditLink = within(titleContainer).getByRole("link", {
-      name: `${ROUTE_DOCUMENTATION_TITLE.title} bearbeiten`,
+      name: /bearbeiten/i,
     });
     expect(titleEditLink).toHaveAttribute(
       "href",
       ROUTE_DOCUMENTATION_TITLE.url,
     );
     expect(titleEditLink).toHaveTextContent("Bearbeiten");
-
-    expect(
-      within(titleContainer).queryByText(
-        "Sie haben diesen Punkt noch nicht bearbeitet.",
-      ),
-    ).not.toBeInTheDocument();
   });
 
-  it("shows warning for all steps when no documentation data is available at all", () => {
+  it("shows warning for all steps when no documentation data is available", () => {
     createDocumentationDataMock();
     renderWithRouter();
 
@@ -368,6 +416,30 @@ describe("DocumentationSummary", () => {
     });
   });
 
+  it("shows incomplete warning for positive answer with empty aspects", () => {
+    createDocumentationDataMock({
+      principles: [
+        {
+          id: "1",
+          answer: "Ja, gänzlich oder teilweise",
+          reasoning: "text",
+          aspects: [],
+        },
+      ],
+    });
+    renderWithRouter();
+
+    const principleContainer = screen.getByTestId(
+      "/dokumentation/prinzip-digitale-angebote/erlaeuterung",
+    );
+
+    expect(
+      within(principleContainer).getByText(
+        "Sie haben diesen Punkt noch nicht vollständig bearbeitet.",
+      ),
+    ).toBeInTheDocument();
+  });
+
   test.each([
     [ROUTE_DOCUMENTATION_TITLE.url, { policyTitle: undefined }],
     [ROUTE_DOCUMENTATION_TITLE.url, { policyTitle: { title: "" } }],
@@ -379,19 +451,7 @@ describe("DocumentationSummary", () => {
       },
     ],
     [MOCK_ROUTE_PRINCIPLE.url, { principles: undefined }],
-    [MOCK_ROUTE_PRINCIPLE.url, { principles: [] }],
-    [
-      MOCK_ROUTE_PRINCIPLE.url,
-      {
-        principles: [
-          {
-            id: MOCK_ROUTE_PRINCIPLE.url,
-            answer: "",
-            reasoning: "",
-          },
-        ],
-      },
-    ],
+    [MOCK_ROUTE_PRINCIPLE.url, { principles: [] as Principle<V2>[] }],
   ])(
     "shows warning for step %s when data is undefined or empty",
     (stepId, mockData) => {
@@ -420,65 +480,8 @@ describe("DocumentationSummary", () => {
         participation: { formats: "", results: "some results" },
       },
     ],
-    [
-      MOCK_ROUTE_PRINCIPLE.url,
-      {
-        principles: [
-          {
-            id: "1",
-            answer: "Ja, gänzlich oder teilweise",
-            reasoning: [
-              {
-                aspect: "test-aspect",
-                checkbox: true as const,
-                paragraphs: "",
-                reason: "Some reason",
-              },
-            ],
-          },
-        ],
-      },
-    ],
-    [
-      MOCK_ROUTE_PRINCIPLE.url,
-      {
-        principles: [
-          {
-            id: "1",
-            answer: "Ja, gänzlich oder teilweise",
-            reasoning: [
-              {
-                aspect: "test-aspect",
-                checkbox: true as const,
-                paragraphs: "Some paragraphs",
-                reason: "",
-              },
-            ],
-          },
-        ],
-      },
-    ],
-    [
-      MOCK_ROUTE_PRINCIPLE.url,
-      {
-        principles: [
-          {
-            id: "1",
-            answer: "Ja, gänzlich oder teilweise",
-            reasoning: [
-              {
-                aspect: "test-aspect",
-              },
-              {
-                aspect: "test-aspect-2",
-              },
-            ],
-          },
-        ],
-      },
-    ],
   ])(
-    "shows incomplete warning for step %s when part of the data for a step is missing",
+    "shows incomplete warning for step %s when part of the data is missing",
     (stepId, mockData) => {
       createDocumentationDataMock(mockData);
       renderWithRouter();

@@ -9,7 +9,7 @@ import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_SEND } from "~/resources/staticRoutes";
-import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
+import { useWordDocumentationV2 as useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentationV2";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 
 const { finish } = digitalDocumentation;

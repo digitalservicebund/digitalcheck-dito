@@ -4,14 +4,12 @@ import HelpButton from "~/components/HelpButton";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
-import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_PARTICIPATION } from "~/resources/staticRoutes";
 import {
   defaultParticipationValues,
   participationSchema,
 } from "~/routes/dokumentation/documentationDataSchema";
-import { features } from "~/utils/featureFlags";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
@@ -20,7 +18,6 @@ import { useDocumentationDataService } from "./dokumentation/DocumentationDataPr
 const { participation } = digitalDocumentation;
 
 export default function DocumentationParticipation() {
-  const simplifiedFlow = useFeatureFlag(features.simplifiedPrincipleFlow);
   const { currentUrl, nextUrl, previousUrl } =
     useOutletContext<NavigationContext>();
   const { setParticipation, documentationData } = useDocumentationDataService();
@@ -55,19 +52,12 @@ export default function DocumentationParticipation() {
             </legend>
 
             <Textarea
-              description={
-                simplifiedFlow
-                  ? undefined
-                  : participation.formats.textField.description
-              }
               placeholder={participation.formats.textField.placeholder}
               scope={form.scope("formats")}
               data-testid="schritte"
               warningInsteadOfError
             >
-              {simplifiedFlow
-                ? "Erklärung"
-                : participation.formats.textField.label}
+              Erklärung
               <HelpButton sectionId="formats" title="Hinweis zur Erklärung">
                 Beschreiben Sie stichpunktartig, wie Sie die Bedürfnisse der
                 Betroffenen erhoben haben – z. B. durch Befragungen, Gesprächen
@@ -82,18 +72,11 @@ export default function DocumentationParticipation() {
               {participation.results.heading}
             </legend>
             <Textarea
-              description={
-                simplifiedFlow
-                  ? undefined
-                  : participation.results.textField.description
-              }
               scope={form.scope("results")}
               data-testid="erkenntnisse"
               warningInsteadOfError
             >
-              {simplifiedFlow
-                ? "Erkenntnisse"
-                : participation.results.textField.label}
+              Erkenntnisse
               <HelpButton sectionId="results" title="Hinweis zu Erkenntnissen">
                 Bitte listen Sie stichpunktartig auf, welche Erkenntnisse
                 eingearbeitet wurden und geben Sie Hinweise auf Paragrafen, die

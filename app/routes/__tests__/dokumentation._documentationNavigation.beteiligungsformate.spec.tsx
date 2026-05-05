@@ -49,26 +49,26 @@ describe("DocumentationParticipation", () => {
       ).toBeInTheDocument();
     });
 
-    it("shows first textarea with expected label and description", () => {
-      const textareas = screen.getAllByLabelText(/Antwort/);
-      expect(textareas[0]).toBeInTheDocument();
-      expect(textareas[0].tagName).toBe("TEXTAREA");
+    it("shows first textarea with expected label and question", () => {
+      const textarea = screen.getByRole("textbox", { name: "Erklärung" });
+      expect(textarea).toBeInTheDocument();
+      expect(textarea.tagName).toBe("TEXTAREA");
 
       expect(
         screen.getByText(
-          "Bitte listen Sie stichpunktartig auf, ob bzw. welche Schritte Sie unternommen haben.",
+          "Entspricht die Umsetzung des Regelungsvorhabens den Bedürfnissen der Betroffenen? Wie haben Sie das überprüft?",
         ),
       ).toBeInTheDocument();
     });
 
-    it("shows second textarea with expected label and description", () => {
-      const textareas = screen.getAllByLabelText(/Antwort/);
-      expect(textareas[1]).toBeInTheDocument();
-      expect(textareas[1].tagName).toBe("TEXTAREA");
+    it("shows second textarea with expected label and question", () => {
+      const textarea = screen.getByRole("textbox", { name: "Erkenntnisse" });
+      expect(textarea).toBeInTheDocument();
+      expect(textarea.tagName).toBe("TEXTAREA");
 
       expect(
         screen.getByText(
-          "Bitte listen Sie stichpunktartig auf, welche Erkenntnisse eingearbeitet wurden und geben Sie Hinweise auf Paragrafen, die besonders umsetzungsrelevant sind.",
+          "Wie spiegeln sich die Erkenntnisse, die durch die oben genannten Schritte gewonnen wurden, im Regelungsvorhaben wider?",
         ),
       ).toBeInTheDocument();
     });
@@ -106,7 +106,8 @@ describe("DocumentationParticipation", () => {
     });
 
     it("shows an error on invalid data", async () => {
-      const [input1, input2] = screen.getAllByLabelText(/Antwort/);
+      const input1 = screen.getByRole("textbox", { name: "Erklärung" });
+      const input2 = screen.getByRole("textbox", { name: "Erkenntnisse" });
 
       await waitFor(() => {
         expect(input1).toBeInvalid();
@@ -122,7 +123,8 @@ describe("DocumentationParticipation", () => {
 
     it("removes the error on change", async () => {
       const user = userEvent.setup();
-      const [input1, input2] = screen.getAllByLabelText(/Antwort/);
+      const input1 = screen.getByRole("textbox", { name: "Erklärung" });
+      const input2 = screen.getByRole("textbox", { name: "Erkenntnisse" });
 
       await waitFor(() => {
         expect(input1).toBeInvalid();

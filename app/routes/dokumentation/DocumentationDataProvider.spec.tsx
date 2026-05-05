@@ -293,6 +293,7 @@ describe("DocumentationDataProvider", () => {
         id: "p1",
         answer: "Nicht relevant",
         reasoning: "Updated reasoning",
+        aspects: undefined,
       } as const;
       act(() => result.current.addOrUpdatePrinciple(updatedPrinciple1));
 

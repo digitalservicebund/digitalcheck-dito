@@ -1,8 +1,6 @@
 import { HelpOutlineOutlined } from "@digitalservicebund/icons";
 import { ReactNode, useEffect } from "react";
-import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { useHelpPanel } from "~/contexts/HelpPanelContext";
-import { features } from "~/utils/featureFlags";
 import customTwMerge from "~/utils/tailwindMerge";
 
 type HelpButtonProps = {
@@ -19,15 +17,12 @@ export default function HelpButton({
   children,
 }: Readonly<HelpButtonProps>) {
   const { openPanel, registerSection } = useHelpPanel();
-  const simplifiedFlow = useFeatureFlag(features.simplifiedPrincipleFlow);
 
   useEffect(() => {
     if (title && children) {
       registerSection({ id: sectionId, title, content: children });
     }
   }, [sectionId, title, children, registerSection]);
-
-  if (!simplifiedFlow) return null;
 
   return (
     <>

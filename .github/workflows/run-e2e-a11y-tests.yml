@@ -6,7 +6,8 @@ on:
       nightlyTests:
         required: false
         type: boolean
-        description: "If enabled, extensive tests are executed sequentially with more devices and browsers."
+        description: "If enabled, extensive tests are executed sequentially with more
+          devices and browsers."
         default: false
 
 env:
@@ -21,8 +22,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shardIndex: [1, 2, 3, 4]
-        shardTotal: [4]
+        shardIndex: [ 1, 2, 3, 4 ]
+        shardTotal: [ 4 ]
     steps:
       - name: Checkout code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
@@ -48,35 +49,29 @@ jobs:
           restore-keys: ${{ runner.os }}-playwright-
 
       - name: Install E2E & A11y test dependencies
-        if: inputs.nightlyTests || steps.cache-playwright-deps.outputs.cache-hit == 'false'
+        if: inputs.nightlyTests || steps.cache-playwright-deps.outputs.cache-hit ==
+          'false'
         run: pnpm exec playwright install --with-deps
 
       - name: Run nightly E2E tests
         if: inputs.nightlyTests
         id: e2e-nightly
-        run: pnpm exec playwright test tests/e2e/ --config=tests/playwright-nightly.config.ts --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
-
-      - name: Run nightly E2E onlineDocumentationV2 tests
-        if: inputs.nightlyTests
-        id: e2e-onlineDocumentationV2-nightly
-        run: pnpm exec playwright test --config=tests/playwright-onlineDocumentationV2.config.ts --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        run: pnpm exec playwright test tests/e2e/
+          --config=tests/playwright-nightly.config.ts --shard=${{
+          matrix.shardIndex }}/${{ matrix.shardTotal }}
 
       - name: Run E2E tests
         if: ${{ !inputs.nightlyTests }}
         id: e2e
-        run: pnpm exec playwright test tests/e2e/ --config=tests/playwright.config.ts --project="Desktop Chrome" --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
-        env:
-          NODE_OPTIONS: --trace-warnings
-
-      - name: Run E2E onlineDocumentationV2 tests
-        if: ${{ !inputs.nightlyTests }}
-        id: e2e-onlineDocumentationV2
-        run: pnpm exec playwright test --config=tests/playwright-onlineDocumentationV2.config.ts --project="Desktop Chrome" --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        run: pnpm exec playwright test tests/e2e/ --config=tests/playwright.config.ts
+          --project="Desktop Chrome" --shard=${{ matrix.shardIndex }}/${{
+          matrix.shardTotal }}
         env:
           NODE_OPTIONS: --trace-warnings
 
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        if: failure() && (steps.e2e.outcome == 'failure' || steps.e2e-nightly.outcome == 'failure' || steps.e2e-onlineDocumentationV2.outcome == 'failure')
+        if: failure() && (steps.e2e.outcome == 'failure' || steps.e2e-nightly.outcome ==
+          'failure')
         with:
           name: playwright-e2e-blob-report-${{ matrix.shardIndex }}
           path: blob-report
@@ -85,7 +80,9 @@ jobs:
       - name: Run nightly A11Y tests
         if: inputs.nightlyTests
         id: a11y-nightly
-        run: pnpm exec playwright test tests/a11y/ --config=tests/playwright-nightly.config.ts --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        run: pnpm exec playwright test tests/a11y/
+          --config=tests/playwright-nightly.config.ts --shard=${{
+          matrix.shardIndex }}/${{ matrix.shardTotal }}
         env:
           # Use a different port (from the one used with E2E tests) to workaround problem in CI/GitHub Actions,
           # starting to occur with playwright/test 1.28.0:
@@ -96,12 +93,15 @@ jobs:
       - name: Run A11y tests
         if: ${{ !inputs.nightlyTests }}
         id: a11y
-        run: pnpm exec playwright test tests/a11y/ --config=tests/playwright.config.ts --project="Desktop Chrome" --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        run: pnpm exec playwright test tests/a11y/ --config=tests/playwright.config.ts
+          --project="Desktop Chrome" --shard=${{ matrix.shardIndex }}/${{
+          matrix.shardTotal }}
         env:
           VITE_PORT: 4183
 
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        if: failure() && (steps.a11y.outcome == 'failure' || steps.a11y-nightly.outcome == 'failure')
+        if: failure() && (steps.a11y.outcome == 'failure' || steps.a11y-nightly.outcome
+          == 'failure')
         with:
           name: playwright-a11y-blob-report-${{ matrix.shardIndex }}
           path: blob-report
