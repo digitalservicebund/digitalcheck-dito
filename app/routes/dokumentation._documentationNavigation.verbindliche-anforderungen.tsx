@@ -26,9 +26,6 @@ export default function DocumentationInteroperabilityAssessment() {
           className="mb-16"
         />
         <BindingRequirementsForm
-          currentUrl={
-            ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS.url
-          }
           nextUrl={ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT.url}
         />
         <div>

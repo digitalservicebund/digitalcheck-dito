@@ -121,14 +121,6 @@ export const createDoc = async (
         answerOrPlaceholder(participation?.results),
       ),
       ...buildPrinciplePatches(prinzips, principleAnswers),
-      AFFECTED_SERVICES: toParagraphPatch(
-        bindingRequirements?.tedpServices
-          ?.flatMap((service) => service.value ?? "")
-          .join(", ") ?? "",
-      ),
-      AFFECTED_AREAS: toParagraphPatch(
-        Object.keys(bindingRequirements?.functions ?? {}).join(", "),
-      ),
       BINDING_REQUIREMENTS: toParagraphPatch(
         answerOrPlaceholder(
           bindingRequirements?.requirements

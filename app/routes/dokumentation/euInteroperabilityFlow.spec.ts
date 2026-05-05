@@ -7,7 +7,6 @@ import {
 describe("euInteroperabilityFlow", () => {
   it("returns required outcome for all yes answers", () => {
     const flowState = getEuInteroperabilityFlowState({
-      bindingRequirementsInDecisionProcess: "Ja",
       serviceProvidedByPublicOrUnionEntity: "Ja",
       serviceProvidedInEuContext: "Ja",
       requiresCrossBorderSystemInteraction: "Ja",
@@ -20,7 +19,7 @@ describe("euInteroperabilityFlow", () => {
 
   it("returns first not-required outcome when first question is no", () => {
     const flowState = getEuInteroperabilityFlowState({
-      bindingRequirementsInDecisionProcess: "Nein",
+      serviceProvidedByPublicOrUnionEntity: "Nein",
     });
 
     expect(flowState.outcomeId).toBe("NOT_REQUIRED_NO_DECISION_PROCESS");
@@ -29,7 +28,7 @@ describe("euInteroperabilityFlow", () => {
 
   it("returns the currently active question when flow is incomplete", () => {
     const flowState = getEuInteroperabilityFlowState({
-      bindingRequirementsInDecisionProcess: "Ja",
+      serviceProvidedByPublicOrUnionEntity: "Ja",
     });
 
     expect(flowState.activeQuestionId).toBe(
