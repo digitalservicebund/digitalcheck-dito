@@ -1,22 +1,19 @@
+import {
+  beispiele_prinzipien,
+  beispiele_visualisierungen,
+  methoden_fuenfPrinzipien,
+  methoden_visualisieren,
+} from "@/config/routes";
 import ContentWrapper from "~/components/ContentWrapper";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox.tsx";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText.tsx";
 import TabGroup from "~/components/Tabs/Tabs";
-import {
-  ROUTE_EXAMPLES,
-  ROUTE_EXAMPLES_PRINCIPLES,
-  ROUTE_EXAMPLES_VISUALISATIONS,
-  ROUTE_METHODS_PRINCIPLES,
-  ROUTE_METHODS_VISUALIZE,
-} from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 
 export default function Digitaltauglichkeit_index() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_EXAMPLES.title} />
       <Hero
         title="Beispiele für Digitaltauglichkeit"
         subtitle="Hier finden Sie Beispiele für digitaltaugliche Regelungen, sowie aus deren Erarbeitungsprozess. Lassen Sie sich inspirieren, wie in Regelungsvorhaben Digitaltauglichkeit beachtet wurde."
@@ -42,11 +39,11 @@ export default function Digitaltauglichkeit_index() {
                 links={[
                   {
                     text: "Zu den Beispielen",
-                    to: ROUTE_EXAMPLES_PRINCIPLES.url,
+                    to: beispiele_prinzipien.path,
                   },
                   {
                     text: "Prinzipien nutzen",
-                    to: ROUTE_METHODS_PRINCIPLES.url,
+                    to: methoden_fuenfPrinzipien.path,
                     look: "tertiary",
                   },
                 ]}
@@ -70,11 +67,11 @@ export default function Digitaltauglichkeit_index() {
                 links={[
                   {
                     text: "Zu den Beispielen",
-                    to: ROUTE_EXAMPLES_VISUALISATIONS.url,
+                    to: beispiele_visualisierungen.path,
                   },
                   {
                     text: "Anleitung zur Visualisierung",
-                    to: ROUTE_METHODS_VISUALIZE.url,
+                    to: methoden_visualisieren.path,
                     look: "tertiary",
                   },
                 ]}

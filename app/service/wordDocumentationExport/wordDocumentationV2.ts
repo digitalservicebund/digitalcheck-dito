@@ -1,8 +1,8 @@
 import {
   convertInchesToTwip,
   ExternalHyperlink,
-  IPatch,
-  IRunOptions,
+  type IPatch,
+  type IRunOptions,
   patchDocument,
   PatchType,
   TextRun,
@@ -13,8 +13,8 @@ import { documentationDocument } from "~/resources/content/documentation-documen
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { contact } from "~/resources/content/shared/contact";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider";
-import { type DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
-import { type PrinzipWithAspekte } from "~/utils/strapiData.server";
+import type { DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
+import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
 import strapiBlocksToDocx from "./strapiBlocksToWord";
 const { saveAs } = fileSaver;

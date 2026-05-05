@@ -1,8 +1,22 @@
-import { Close as CloseIcon } from "@digitalservicebund/icons";
-import { ContactPhoneOutlined as ContactPhoneOutlinedIcon } from "@digitalservicebund/icons";
-import { Dvr as DvrIcon } from "@digitalservicebund/icons";
-import { FactCheckOutlined as FactCheckOutlinedIcon } from "@digitalservicebund/icons";
-import { WidgetsOutlined as WidgetsOutlinedIcon } from "@digitalservicebund/icons";
+import {
+  beispiele_prinzipien,
+  beispiele_visualisierungen,
+  dokumentation,
+  grundlagen_digitaltauglichkeit,
+  grundlagen_normenkontrollrat,
+  methoden,
+  methoden_fuenfPrinzipien,
+  methoden_visualisieren,
+  unterstuetzung,
+  vorpruefung,
+} from "@/config/routes";
+import {
+  Close as CloseIcon,
+  ContactPhoneOutlined as ContactPhoneOutlinedIcon,
+  Dvr as DvrIcon,
+  FactCheckOutlined as FactCheckOutlinedIcon,
+  WidgetsOutlined as WidgetsOutlinedIcon,
+} from "@digitalservicebund/icons";
 import { useState } from "react";
 import Badge from "~/components/Badge";
 import Button, { LinkButton } from "~/components/Button";
@@ -10,20 +24,7 @@ import Heading from "~/components/Heading";
 import { BreakoutHero } from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
-import {
-  ROUTE_DOCUMENTATION,
-  ROUTE_EXAMPLES_PRINCIPLES,
-  ROUTE_EXAMPLES_VISUALISATIONS,
-  ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
-  ROUTE_FUNDAMENTALS_NKR,
-  ROUTE_METHODS,
-  ROUTE_METHODS_PRINCIPLES,
-  ROUTE_METHODS_VISUALIZE,
-  ROUTE_PRECHECK,
-  ROUTE_SUPPORT,
-} from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 const steps = [
@@ -32,7 +33,7 @@ const steps = [
     title: "Digitalbezug einschätzen",
     link: {
       text: "Digitalbezug einschätzen",
-      to: ROUTE_PRECHECK.url,
+      to: vorpruefung.path,
       look: "primary" as const,
       plausibleEventName: "Content.Schritte.Button+Vorprüfung",
     },
@@ -49,7 +50,7 @@ const steps = [
     title: "Digitaltauglichkeit der Regelung sicherstellen",
     link: {
       text: "Regelung erarbeiten",
-      to: ROUTE_METHODS.url,
+      to: methoden.path,
       look: "tertiary" as const,
       plausibleEventName: "Content.Schritte.Link+Erarbeiten",
     },
@@ -66,7 +67,7 @@ const steps = [
     title: "Dokumentieren der Digitaltauglichkeit",
     link: {
       text: "Dokumentation erstellen",
-      to: ROUTE_DOCUMENTATION.url,
+      to: dokumentation.path,
       look: "tertiary" as const,
       plausibleEventName: "Content.Schritte.Link+Dokumentieren",
     },
@@ -86,7 +87,6 @@ export default function Index() {
 
   return (
     <>
-      <MetaTitle />
       <main className="breakout-grid">
         <BreakoutHero
           title="Digitaltaugliche Regelungen erarbeiten"
@@ -165,7 +165,7 @@ export default function Index() {
               links={[
                 {
                   text: "Mehr zur Digitaltauglichkeit erfahren",
-                  to: ROUTE_FUNDAMENTALS_DIGITAL_READINESS.url,
+                  to: grundlagen_digitaltauglichkeit.path,
                   plausibleEventName:
                     "Content.Grundlagen.Link+Digitaltauglichkeit",
                   look: "link",
@@ -187,7 +187,7 @@ export default function Index() {
               links={[
                 {
                   text: "Mehr zum NKR erfahren",
-                  to: ROUTE_FUNDAMENTALS_NKR.url,
+                  to: grundlagen_normenkontrollrat.path,
                   plausibleEventName: "Content.Grundlagen.Link+NKR",
                   look: "link",
                 },
@@ -208,14 +208,14 @@ export default function Index() {
                   links={[
                     {
                       text: "Zu Visualisierungen",
-                      to: ROUTE_METHODS_VISUALIZE.url,
+                      to: methoden_visualisieren.path,
                       look: "tertiary",
                       plausibleEventName:
                         "Content.Teaser+Visualisierungen.Link+Visualisierungen",
                     },
                     {
                       text: "Beispiele",
-                      to: ROUTE_EXAMPLES_VISUALISATIONS.url,
+                      to: beispiele_visualisierungen.path,
                       look: "ghost",
                       plausibleEventName:
                         "Content.Teaser+Visualisierungen.Link+Beispiele",
@@ -233,14 +233,14 @@ export default function Index() {
                   links={[
                     {
                       text: "Zu den Prinzipien",
-                      to: ROUTE_METHODS_PRINCIPLES.url,
+                      to: methoden_fuenfPrinzipien.path,
                       look: "tertiary",
                       plausibleEventName:
                         "Content.Teaser+Prinzipien.Link+Prinzipien",
                     },
                     {
                       text: "Beispiele",
-                      to: ROUTE_EXAMPLES_PRINCIPLES.url,
+                      to: beispiele_prinzipien.path,
                       look: "ghost",
                       plausibleEventName:
                         "Content.Teaser+Prinzipien.Link+Beispiele",
@@ -262,7 +262,7 @@ export default function Index() {
               links={[
                 {
                   text: "Angebote kennenlernen",
-                  to: ROUTE_SUPPORT.url,
+                  to: unterstuetzung.path,
                   look: "tertiary",
                   plausibleEventName: "Content.Support.Button+Support",
                 },

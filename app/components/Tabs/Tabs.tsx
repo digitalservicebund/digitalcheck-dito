@@ -1,14 +1,14 @@
 import {
   Tab as HeadlessTab,
   TabGroup as HeadlessTabGroup,
-  TabGroupProps as HeadlessTabGroupProps,
+  type TabGroupProps as HeadlessTabGroupProps,
   TabList as HeadlessTabList,
   TabPanel as HeadlessTabPanel,
   TabPanels,
 } from "@headlessui/react";
 import React, { useMemo, useState } from "react";
-import { useSearchParams } from "react-router";
 import { twJoin } from "tailwind-merge";
+import { useSearchParams } from "~/utils/routerCompat";
 import { tabSearchParam } from "~/utils/tabs";
 import { prettySlugify } from "~/utils/utilFunctions";
 import MobileTabPicker from "./MobileTabPicker";

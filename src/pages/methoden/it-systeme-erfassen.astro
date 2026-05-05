@@ -1,0 +1,13 @@
+---
+import { methoden_itSystemeErfassen } from "@/config/routes";
+import Layout from "@/layouts/Layout.astro";
+import MethodenSubPage from "~/routes/methoden.$subPage";
+
+export const frontmatter = {
+  title: "IT-Systeme erfassen",
+};
+---
+
+<Layout title={frontmatter.title} showProgressBar={true}>
+  <MethodenSubPage route={methoden_itSystemeErfassen} />
+</Layout>

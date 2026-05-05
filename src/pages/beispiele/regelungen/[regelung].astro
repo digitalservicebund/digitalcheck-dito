@@ -1,0 +1,89 @@
+---
+import Layout from "@/layouts/BeispieleLayout.astro";
+import GesetzPage from "~/routes/beispiele.regelungen.$regelung";
+import {
+  fetchStrapiData,
+  GET_PRINZIPS_QUERY,
+  paragraphFields,
+  prinzipCoreFields,
+  visualisationFields,
+} from "~/utils/strapiData.server";
+import type {
+  Beispielvorhaben,
+  PrinzipWithBeispielvorhaben,
+} from "~/utils/strapiData.types";
+
+export const frontmatter = {
+  title: "Regelungsbeispiel",
+};
+
+export async function getStaticPaths() {
+  const slugsResult = await fetchStrapiData<{
+    beispielvorhabens: { URLBezeichnung: string }[];
+  }>(
+    `query GetAllRegelungSlugs { beispielvorhabens(status: PUBLISHED) { URLBezeichnung } }`,
+  );
+
+  if ("error" in slugsResult) return [];
+
+  return slugsResult.beispielvorhabens.map((r) => ({
+    params: { regelung: r.URLBezeichnung },
+  }));
+}
+
+const { regelung } = Astro.params;
+
+const regelungQuery = `
+${prinzipCoreFields}
+${paragraphFields}
+${visualisationFields}
+query GetBeispielvorhaben($slug: String!) {
+  beispielvorhabens(filters: { URLBezeichnung: { eq: $slug } }, status: PUBLISHED) {
+    documentId
+    Titel
+    NKRNummer
+    Rechtsgebiet
+    Ressort
+    URLBezeichnung
+    VeroeffentlichungsDatum
+    LinkRegelungstext
+    NKRStellungnahmeLink
+    GesetzStatus
+    Paragraphen { ...ParagraphFields }
+    Visualisierungen { ...VisualisationFields }
+    Digitalchecks {
+      documentId
+      Titel
+      EinschaetzungAutomatisierung
+      EinschaetzungDatenschutz
+      EinschaetzungKlareRegelungen
+      EinschaetzungKommunikation
+      EinschaetzungWiederverwendung
+      NKRStellungnahmeDCText
+    }
+  }
+}`;
+
+const [regelungResult, prinzipsResult] = await Promise.all([
+  fetchStrapiData<{ beispielvorhabens: Beispielvorhaben[] }>(regelungQuery, {
+    slug: regelung,
+  }),
+  fetchStrapiData<{ prinzips: PrinzipWithBeispielvorhaben[] }>(
+    GET_PRINZIPS_QUERY,
+  ),
+]);
+
+const regelungData =
+  "error" in regelungResult || regelungResult.beispielvorhabens.length === 0
+    ? undefined
+    : regelungResult.beispielvorhabens[0];
+
+const principles =
+  "error" in prinzipsResult
+    ? []
+    : prinzipsResult.prinzips.toSorted((a, b) => a.order - b.order);
+---
+
+<Layout title={frontmatter.title}>
+  <GesetzPage regelung={regelungData} principles={principles} />
+</Layout>

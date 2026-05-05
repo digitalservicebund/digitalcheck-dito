@@ -4,14 +4,12 @@ import {
   StarOutlineOutlined,
   VolunteerActivismOutlined,
 } from "@digitalservicebund/icons";
-import { FC, Fragment, SVGProps } from "react";
+import { type FC, Fragment, type SVGProps } from "react";
 import Badge from "~/components/Badge";
 import ContentWrapper from "~/components/ContentWrapper";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
-import { ROUTE_NUMBERS_FACTS } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 type DsData = {
@@ -131,7 +129,6 @@ const dsData: DsData = [
 export default function ZahlenUndFakten() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_NUMBERS_FACTS.title} />
       <main>
         <Hero title="Der Digitalcheck in Zahlen">
           <RichText

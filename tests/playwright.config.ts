@@ -94,9 +94,8 @@ const config: PlaywrightTestConfig = {
     // We're testing the built code, but set the NODE_ENV to enable mocks.
     // Use `start:test` (does not source .env) so inline env here wins; load
     // test env from .env.test, which sets FEATURE_FLAGS_PATH to the tests file.
-    command:
-      "pnpm run build && cd .. && export $(grep -v '^#' .env.test | xargs) && NODE_ENV=development PORT=5172 pnpm run start:test",
-    port: 5172,
+    command: "pnpm build && pnpm preview",
+    port: 4321,
   },
 };
 

@@ -1,0 +1,12 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import CoreVocabulariesPage from "~/routes/interoperabel.loesungen.core-vocabularies";
+
+export const frontmatter = {
+  title: "Semantic Core Vocabularies",
+};
+---
+
+<Layout title={frontmatter.title}>
+  <CoreVocabulariesPage client:load />
+</Layout>

@@ -1,23 +1,23 @@
 import {
-  ROUTE_A11Y,
-  ROUTE_DOCUMENTATION,
-  ROUTE_EXAMPLES_PRINCIPLES,
-  ROUTE_EXAMPLES_VISUALISATIONS,
-  ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
-  ROUTE_FUNDAMENTALS_NKR,
-  ROUTE_FUNDAMENTALS_PRINCIPLES,
-  ROUTE_IMPRINT,
-  ROUTE_INTEROPERABILITY,
-  ROUTE_INTEROPERABILITY_SPOC,
-  ROUTE_METHODS,
-  ROUTE_NUMBERS_FACTS,
-  ROUTE_PRECHECK,
-  ROUTE_PRIVACY,
-  ROUTE_SITEMAP,
-  ROUTE_SUPPORT,
-  ROUTE_SUPPORT_TRAININGS,
-  ROUTE_VERSION_HISTORY,
-} from "~/resources/staticRoutes";
+  barrierefreiheit,
+  beispiele_prinzipien,
+  beispiele_visualisierungen,
+  dasIstNeu,
+  datenschutz,
+  dokumentation,
+  grundlagen_digitaltauglichkeit,
+  grundlagen_normenkontrollrat,
+  impressum,
+  interoperabel,
+  interoperabel_nationaleKontaktstelle,
+  methoden,
+  methoden_fuenfPrinzipien,
+  sitemap,
+  unterstuetzung,
+  vorpruefung,
+  zahlenUndFakten,
+} from "@/config/routes";
+import { ROUTE_SUPPORT_TRAININGS } from "~/resources/staticRoutes";
 import { contact } from "./contact";
 
 export const footer = {
@@ -42,7 +42,7 @@ export const footer = {
         ],
         {
           text: "Alle Unterstützungsangebote",
-          url: ROUTE_SUPPORT.url,
+          url: unterstuetzung.path,
         },
         {
           text: "Schulungen",
@@ -50,7 +50,7 @@ export const footer = {
         },
         {
           text: "Nationale Kontaktstelle für ein interoperables Europa (2024/903 Art. 17)",
-          url: ROUTE_INTEROPERABILITY_SPOC.url,
+          url: interoperabel_nationaleKontaktstelle.path,
         },
       ],
     },
@@ -60,15 +60,15 @@ export const footer = {
       links: [
         {
           text: "1. Vorprüfung: Digitalbezug einschätzen",
-          url: ROUTE_PRECHECK.url,
+          url: vorpruefung.path,
         },
         {
           text: "2. Digitaltauglichkeit der Regelung sicherstellen",
-          url: ROUTE_METHODS.url,
+          url: methoden.path,
         },
         {
           text: "3. Dokumentieren der Digitaltauglichkeit",
-          url: ROUTE_DOCUMENTATION.url,
+          url: dokumentation.path,
         },
       ],
     },
@@ -78,19 +78,19 @@ export const footer = {
       links: [
         {
           text: "Prinzipien der Digitaltauglichkeit",
-          url: ROUTE_FUNDAMENTALS_PRINCIPLES.url,
+          url: methoden_fuenfPrinzipien.path,
         },
         {
           text: "EU-Interoperabilität",
-          url: ROUTE_INTEROPERABILITY.url,
+          url: interoperabel.path,
         },
         {
           text: "Was ist Digitaltauglichkeit?",
-          url: ROUTE_FUNDAMENTALS_DIGITAL_READINESS.url,
+          url: grundlagen_digitaltauglichkeit.path,
         },
         {
           text: "NKR und Digitalcheck",
-          url: ROUTE_FUNDAMENTALS_NKR.url,
+          url: grundlagen_normenkontrollrat.path,
         },
       ],
     },
@@ -100,11 +100,11 @@ export const footer = {
       links: [
         {
           text: "Digitaltauglichkeit im Regelungstext",
-          url: ROUTE_EXAMPLES_PRINCIPLES.url,
+          url: beispiele_prinzipien.path,
         },
         {
           text: "Visualisierungen",
-          url: ROUTE_EXAMPLES_VISUALISATIONS.url,
+          url: beispiele_visualisierungen.path,
         },
       ],
     },
@@ -112,12 +112,12 @@ export const footer = {
   middle: {
     navLabel: "Sitemap",
     links: [
-      { url: ROUTE_IMPRINT.url, text: "Impressum" },
-      { url: ROUTE_PRIVACY.url, text: "Datenschutzerklärung" },
-      { url: ROUTE_A11Y.url, text: "Barrierefreiheit" },
-      { url: ROUTE_SITEMAP.url, text: "Sitemap" },
-      { url: ROUTE_VERSION_HISTORY.url, text: "Das ist neu" },
-      { url: ROUTE_NUMBERS_FACTS.url, text: "Zahlen und Fakten" },
+      { url: impressum.path, text: "Impressum" },
+      { url: datenschutz.path, text: "Datenschutzerklärung" },
+      { url: barrierefreiheit.path, text: "Barrierefreiheit" },
+      { url: sitemap.path, text: "Sitemap" },
+      { url: dasIstNeu.path, text: "Das ist neu" },
+      { url: zahlenUndFakten.path, text: "Zahlen und Fakten" },
       {
         url: "https://github.com/digitalservicebund/digitalcheck-dito",
         text: "Open Source Code",

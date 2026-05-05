@@ -1,30 +1,25 @@
 import {
-  ROUTE_DOCUMENTATION,
+  beispiele_visualisierungen,
+  dasIstNeu,
+  dokumentation,
+  grundlagen_digitaltauglichkeit,
+  grundlagen_normenkontrollrat,
+  interoperabel,
+  interoperabel_nationaleKontaktstelle,
+  methoden_fuenfPrinzipien,
+  methoden_interviewLeitfaden,
+  methoden_visualisieren,
+  methoden_visualisieren_flussdiagramm,
+  zahlenUndFakten,
+} from "@/config/routes";
+import {
   ROUTE_DOCUMENTATION_STATIC_WORD,
-  ROUTE_EXAMPLES_VISUALISATIONS,
-  ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
-  ROUTE_FUNDAMENTALS_NKR,
-  ROUTE_INTEROPERABILITY,
-  ROUTE_INTEROPERABILITY_SPOC,
-  ROUTE_METHODS_INTERVIEW_METHODS,
-  ROUTE_METHODS_PRINCIPLES,
-  ROUTE_METHODS_VISUALIZE,
-  ROUTE_METHODS_VISUALIZE_FLOWCHARTS,
-  ROUTE_NUMBERS_FACTS,
   ROUTE_REGELUNGEN,
-  ROUTE_VERSION_HISTORY,
 } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { getTabAnchorLink } from "~/utils/tabs";
-import { contact } from "./shared/contact";
 
 export const news = {
-  title: "Das ist neu",
-  subtitle: dedent`
-      Das Digitalcheck-Angebot wird kontinuierlich weiterentwickelt. Bedürfnisse und Rückmeldungen von Nutzenden werden kurzfristig eingearbeitet. Auch geänderte und neue rechtliche Anforderungen führen zu Anpassungen. Unten finden Sie eine chronologische Übersicht der Ergänzungen und Änderungen auf der Website.
-      
-      Haben Sie Anregungen oder Wünsche? Kontaktieren Sie uns jederzeit gerne unter ${contact.mdPhoneLink()} oder ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")}.
-  `,
   items: [
     {
       badge: {
@@ -36,7 +31,7 @@ export const news = {
         - warum das relevant ist,
         - welchen Mehrwert die verbindliche Festschreibung zur Nutzung stiftet.
 
-        [Hier ansehen](${ROUTE_INTEROPERABILITY.url}${getTabAnchorLink("interoperable-loesungen", "interoperable-loesungen")})`,
+        [Hier ansehen](${interoperabel.path}${getTabAnchorLink("interoperable-loesungen", "interoperable-loesungen")})`,
     },
     {
       badge: {
@@ -48,7 +43,7 @@ export const news = {
        - Neues Feld *Aufwand für das Referat*.
        - Neuer Inhalt: Beratungs- und Erfassungsprozess.
        
-        [Hier ansehen](${ROUTE_EXAMPLES_VISUALISATIONS.url})
+        [Hier ansehen](${beispiele_visualisierungen.path})
       `,
     },
     {
@@ -60,7 +55,7 @@ export const news = {
           - Welche EU-Rechtsakte könnten für Ihr Vorhaben relevant sein?
           - Was sind die wichtigsten Punkte bezüglich Interoperabilität in dem jeweiligen Rechtsakt?
        
-        [Hier ansehen](${ROUTE_INTEROPERABILITY.url}${getTabAnchorLink("angrenzendes-eu-recht", "angrenzendes-eu-recht")})
+        [Hier ansehen](${interoperabel.path}${getTabAnchorLink("angrenzendes-eu-recht", "angrenzendes-eu-recht")})
       `,
     },
     {
@@ -72,7 +67,7 @@ export const news = {
          - Was sind Vorteile der Praxis-Perspektive und welche Interview-Methoden gibt es?
          - Schritt-für-Schritt-Anleitung: Akteurinnen und Akteure identifizieren und Interviews vorbereiten
        
-        [Hier ansehen](${ROUTE_METHODS_INTERVIEW_METHODS.url})
+        [Hier ansehen](${methoden_interviewLeitfaden.path})
       `,
     },
     {
@@ -84,7 +79,7 @@ export const news = {
          - Übersicht auf der Prinzipien-Startseite klarer strukturiert
          - Darstellung auf den Detailseiten der Prinzipien übersichtlicher gestaltet, einfacher navigierbar und durch Handlungsempfehlungen ergänzt
          
-        [Hier ansehen](${ROUTE_METHODS_PRINCIPLES.url})
+        [Hier ansehen](${methoden_fuenfPrinzipien.path})
       `,
     },
     {
@@ -94,7 +89,7 @@ export const news = {
       Dazu zählen durchgeführte Digitalbezugsprüfungen, Regelungsbegleitungen durch das Team, Schulungen,
       Interoperabilitätsberatungen und Vernetzungsangebote.
       
-      [Hier ansehen](${ROUTE_NUMBERS_FACTS.url})
+      [Hier ansehen](${zahlenUndFakten.path})
       `,
     },
     {
@@ -104,7 +99,7 @@ export const news = {
       Diese Visualisierungen wurden von Legist:innen erarbeitet und dienen als Inspiration bzw. Positiv-Beispiele, wie
       Veranschaulichungen helfen, den Ablauf des Regelungsvorhaben noch besser greifen zu können.
       
-      [Hier ansehen](${ROUTE_EXAMPLES_VISUALISATIONS.url})
+      [Hier ansehen](${beispiele_visualisierungen.path})
       `,
     },
     {
@@ -117,7 +112,7 @@ export const news = {
       - Klare Anforderungen für Interoperabilitätsbewertungen
       - Hintergründe und Ziele der neuen EU-Verordnung
       
-      [Hier ansehen](${ROUTE_INTEROPERABILITY.url}${getTabAnchorLink("hintergrund")})
+      [Hier ansehen](${interoperabel.path}${getTabAnchorLink("hintergrund")})
       `,
     },
     {
@@ -131,7 +126,7 @@ export const news = {
           - Immer aktuell: Sie nutzen automatisch die neueste Fassung. Veraltete Word-Dokumente und Abstimmungsaufwand entfallen.
           - Flexibel bearbeiten: Sie können jederzeit unterbrechen und die Arbeit ohne Datenverlust später fortsetzen.
        Das fertige Ergebnis (wie bisher als Word-Datei) übermitteln Sie direkt an den NKR.
-       [Hier ansehen](${ROUTE_DOCUMENTATION.url})
+       [Hier ansehen](${dokumentation.path})
       `,
     },
     {
@@ -144,7 +139,7 @@ export const news = {
       badge: {
         text: "12.09.2025",
       },
-      content: `Anleitungs-Seite für Flussdiagramme: Video bei Schritt 5 ergänzt: Entstehen eines Flussdiagramms. [Hier ansehen](${ROUTE_METHODS_VISUALIZE_FLOWCHARTS.url}#video-anleitung)`,
+      content: `Anleitungs-Seite für Flussdiagramme: Video bei Schritt 5 ergänzt: Entstehen eines Flussdiagramms. [Hier ansehen](${methoden_visualisieren_flussdiagramm.path}#video-anleitung)`,
     },
     {
       badge: {
@@ -175,7 +170,7 @@ export const news = {
         - Verständlichkeit der Inhalte verbessert
         - Navigation innerhalb der Seite verbessert: Buttons “nächster Schritt“ + vertikale Navigations-Element auf rechter Seite
         
-        [Hier ansehen](${ROUTE_METHODS_VISUALIZE_FLOWCHARTS.url})
+        [Hier ansehen](${methoden_visualisieren_flussdiagramm.path})
       `,
     },
     {
@@ -201,8 +196,8 @@ export const news = {
           - vorher: erarbeiten.digitalcheck.bund.de → leitet jetzt weiter zu:
           - neu: digitalcheck.bund.de
         - Link zu [Digitale Verwaltung Projektseite](https://www.digitale-verwaltung.de/Webs/DV/DE/transformation/digitalcheck/digitalcheck-node.html) im Footer ergänzt
-        - Neue [Einstiegseite / Landingpage für Visualisierungen](${ROUTE_METHODS_VISUALIZE.url}) gelauncht 
-        - [NKR Infoseite](${ROUTE_FUNDAMENTALS_NKR.url}) aktualisiert 
+        - Neue [Einstiegseite / Landingpage für Visualisierungen](${methoden_visualisieren.path}) gelauncht 
+        - [NKR Infoseite](${grundlagen_normenkontrollrat.path}) aktualisiert 
       `,
     },
     {
@@ -215,7 +210,7 @@ export const news = {
           - wenn sinnvoll: für Aspekte je ein Beispiel ergänzt
           - Kontextinfo “Warum ist dieses Beispiel gut“ näher an Regelungsbeispiel-Text platziert
         
-        [hier ansehen](${ROUTE_METHODS_PRINCIPLES.url})
+        [hier ansehen](${methoden_fuenfPrinzipien.path})
       `,
     },
     {
@@ -224,12 +219,12 @@ export const news = {
       },
       content: dedent`
         - Neue [Startseite](/)
-        - Neue Grundlagen-Seite: Was ist [Digitaltauglichkeit](${ROUTE_FUNDAMENTALS_DIGITAL_READINESS.url})?
-        - Neue Grundlagen-Seite: [NKR und Digitalcheck](${ROUTE_FUNDAMENTALS_NKR.url})
+        - Neue Grundlagen-Seite: Was ist [Digitaltauglichkeit](${grundlagen_digitaltauglichkeit.path})?
+        - Neue Grundlagen-Seite: [NKR und Digitalcheck](${grundlagen_normenkontrollrat.path})
         - Neue [Dokumentation als Word-Datei v1.5.1](${ROUTE_DOCUMENTATION_STATIC_WORD.url}) aktualisiert auf Digitalcheck Website, Github und DV
         - Beispiele sind wieder im Footer verlinkt
-        - [Nationale Kontaktstelle-Seite](${ROUTE_INTEROPERABILITY_SPOC.url}): Zeitleiste neu sortiert (Aktuelles oben)
-        - Versionsverlauf: Das PDF auf Digitale Verwaltung ist auf die Digitalcheck Website umgezogen und hat sich dabei in eine [Webpage](${ROUTE_VERSION_HISTORY.url}) verwandelt
+        - [Nationale Kontaktstelle-Seite](${interoperabel_nationaleKontaktstelle.path}): Zeitleiste neu sortiert (Aktuelles oben)
+        - Versionsverlauf: Das PDF auf Digitale Verwaltung ist auf die Digitalcheck Website umgezogen und hat sich dabei in eine [Webpage](${dasIstNeu.path}) verwandelt
         - Der Methodenfahrplan in Grundlagen ist entfernt
       `,
     },

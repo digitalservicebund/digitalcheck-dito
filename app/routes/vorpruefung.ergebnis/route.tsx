@@ -1,3 +1,4 @@
+import { vorpruefung } from "@/config/routes";
 import {
   CancelOutlined,
   CheckCircleOutlined,
@@ -7,8 +8,8 @@ import {
   WarningAmberOutlined,
 } from "@digitalservicebund/icons";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router";
 import { twJoin } from "tailwind-merge";
+import { Link, useNavigate } from "~/utils/routerCompat";
 
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -16,15 +17,10 @@ import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
 import InfoTooltip from "~/components/InfoTooltip";
 import InlineNotice from "~/components/InlineNotice";
-import MetaTitle from "~/components/Meta";
 import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
-import {
-  ROUTE_PRECHECK,
-  ROUTE_PRECHECK_RESULT,
-} from "~/resources/staticRoutes";
 import getContentForResult, {
   type Reason,
 } from "~/routes/vorpruefung.ergebnis/getContentForResult";
@@ -32,7 +28,7 @@ import ResultForm from "~/routes/vorpruefung.ergebnis/ResultForm";
 import { ResultType } from "./PreCheckResult";
 
 import { PreCheckFAQ } from "~/components/content/PreCheckFAQ.tsx";
-import { Step } from "~/utils/contentTypes.ts";
+import { type Step } from "~/utils/contentTypes.ts";
 import { usePreCheckData } from "../vorpruefung/preCheckDataHook";
 
 const nextSteps = {
@@ -113,7 +109,7 @@ export default function Result() {
       firstUnansweredQuestionIndex !== null &&
       firstUnansweredQuestionIndex < preCheck.questions.length - 1
     ) {
-      void navigate(ROUTE_PRECHECK.url);
+      void navigate(vorpruefung.path);
     }
   }, [navigate, firstUnansweredQuestionIndex]);
 
@@ -121,7 +117,6 @@ export default function Result() {
     result?.digital === ResultType.UNSURE ? preCheckResult.unsure.hint : "";
   return (
     <>
-      <MetaTitle prefix={ROUTE_PRECHECK_RESULT.title} />
       <main>
         <div className="bg-blue-100 py-40 print:pb-0">
           <div className="px-16">

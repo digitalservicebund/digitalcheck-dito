@@ -1,11 +1,10 @@
 import React from "react";
-import { useLoaderData, useOutletContext } from "react-router";
+// removed react-router imports
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InlineNotice from "~/components/InlineNotice";
-import MetaTitle from "~/components/Meta";
 import NewTabLink from "~/components/NewTabLink.tsx";
 import ParagraphList from "~/components/ParagraphList";
 import RegulationMetadata from "~/components/RegulationMetadata";
@@ -13,18 +12,20 @@ import RichText from "~/components/RichText.tsx";
 import TabGroup from "~/components/Tabs/Tabs";
 import VisualisationItem from "~/components/VisualisationItem";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
-import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
 import getFeatureFlag from "~/utils/featureFlags.server.ts";
 import {
-  Beispielvorhaben,
   fetchStrapiData,
   paragraphFields,
   prinzipCoreFields,
-  PrinzipWithBeispielvorhaben,
   visualisationFields,
 } from "~/utils/strapiData.server";
+import type {
+  Beispielvorhaben,
+  Digitalcheck,
+  PrinzipWithBeispielvorhaben,
+  Visualisierung,
+} from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
-import type { Route } from "./+types/beispiele.regelungen.$regelung";
 
 // prinzipCoreFields are being used in paragraphFields and so need to be included
 const GET_REGELUNGSVORHABENS_BY_SLUG_QUERY = `
@@ -62,7 +63,11 @@ query GetBeispielvorhabens($slug: String!, $status: PublicationStatus!) {
   }
 }`;
 
-export const loader = async ({ params }: Route.LoaderArgs) => {
+export const loader = async ({
+  params,
+}: {
+  params: { regelung?: string };
+}) => {
   const status = getFeatureFlag("showStrapiDrafts") ? "DRAFT" : "PUBLISHED";
 
   const regelungData = await fetchStrapiData<{
@@ -82,9 +87,14 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
   return regelungData.beispielvorhabens[0];
 };
 
-export default function Gesetz() {
-  const regelung = useLoaderData<typeof loader>();
-  const principles = useOutletContext<PrinzipWithBeispielvorhaben[]>();
+export default function Gesetz({
+  regelung,
+  principles = [],
+}: {
+  regelung?: Beispielvorhaben;
+  principles?: PrinzipWithBeispielvorhaben[];
+} = {}) {
+  if (!regelung) return null;
 
   const tabsData: {
     label: string;
@@ -145,7 +155,7 @@ export default function Gesetz() {
             />
           </div>
 
-          {regelung.Visualisierungen.map((visualisierung) => (
+          {regelung.Visualisierungen.map((visualisierung: Visualisierung) => (
             <VisualisationItem
               key={visualisierung.Bild.documentId}
               visualisierung={visualisierung}
@@ -159,7 +169,7 @@ export default function Gesetz() {
   // ----- NKR Stellungnahme -----
   if (
     regelung.Digitalchecks.some(
-      ({ NKRStellungnahmeDCText }) => !!NKRStellungnahmeDCText,
+      ({ NKRStellungnahmeDCText }: Digitalcheck) => !!NKRStellungnahmeDCText,
     )
   ) {
     tabsData.push({
@@ -180,8 +190,9 @@ export default function Gesetz() {
             />
           </div>
           {regelung.Digitalchecks.filter(
-            ({ NKRStellungnahmeDCText }) => !!NKRStellungnahmeDCText,
-          ).map((digitalcheck) => (
+            ({ NKRStellungnahmeDCText }: Digitalcheck) =>
+              !!NKRStellungnahmeDCText,
+          ).map((digitalcheck: Digitalcheck) => (
             <div
               className="my-32 border-l-4 border-gray-400 pl-8 italic"
               key={digitalcheck.documentId}
@@ -204,7 +215,6 @@ export default function Gesetz() {
 
   return (
     <>
-      <MetaTitle prefix={ROUTE_REGELUNGEN.title} />
       <Hero
         className="bg-gray-100"
         title={regelung.Titel}

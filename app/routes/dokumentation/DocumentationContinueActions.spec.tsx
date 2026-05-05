@@ -6,21 +6,21 @@ import "@testing-library/jest-dom";
 import { act, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+import { dokumentation_hinweise } from "@/config/routes";
 import React from "react";
-import { MemoryRouter } from "react-router";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general.ts";
-import { ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes.ts";
 import {
   readDataFromLocalStorage,
   removeFromLocalStorage,
 } from "~/utils/localStorageVersioned";
+import { MemoryRouter } from "~/utils/routerCompat";
 import { DocumentationContinueActions } from "./DocumentationContinueActions";
 import { DocumentationDataProvider } from "./DocumentationDataProvider";
 import {
   DATA_SCHEMA_VERSION_V1,
-  DocumentationData,
-  V1,
+  type DocumentationData,
+  type V1,
 } from "./documentationDataSchema";
 
 const { mockDownloadDocumentation } = vi.hoisted(() => ({
@@ -63,10 +63,7 @@ describe("DocumentationContinueActions", () => {
         version: DATA_SCHEMA_VERSION_V1,
         policyTitle: { title: "Test" },
       });
-      renderWithRouter(<DocumentationContinueActions />);
-    });
-
-    it("renders resume and start-over actions", () => {
+      renderWithRouter(<DocumentationContinueActions prinzips={[]} />);
       const resumeButton = screen.getByRole("link", {
         name: digitalDocumentation.start.actions.resume.buttonText,
       });
@@ -117,16 +114,14 @@ describe("DocumentationContinueActions", () => {
       confirmButton.click();
 
       expect(vi.mocked(removeFromLocalStorage)).toHaveBeenCalled();
-      expect(mockNavigate).toHaveBeenCalledWith(
-        ROUTES_DOCUMENTATION_INTRO[0].url,
-      );
+      expect(mockNavigate).toHaveBeenCalledWith(dokumentation_hinweise.path);
     });
   });
 
   describe("when no saved documentation exists", () => {
     it("renders just the initial start action", async () => {
       vi.mocked(readDataFromLocalStorage).mockReturnValue(null);
-      renderWithRouter(<DocumentationContinueActions />);
+      renderWithRouter(<DocumentationContinueActions prinzips={[]} />);
 
       const startButton = await screen.findByRole("link", {
         name: digitalDocumentation.start.actions.startInitial.buttonText,

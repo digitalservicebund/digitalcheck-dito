@@ -1,8 +1,10 @@
-import { DrawOutlined } from "@digitalservicebund/icons";
-import { LightbulbOutlined } from "@digitalservicebund/icons";
-import { StickyNote2Outlined } from "@digitalservicebund/icons";
+import {
+  DrawOutlined,
+  LightbulbOutlined,
+  StickyNote2Outlined,
+} from "@digitalservicebund/icons";
 import { assetPath } from "~/utils/assetPath";
-import { ContentLink } from "~/utils/contentTypes.ts";
+import { type ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsResponsibleActors = {

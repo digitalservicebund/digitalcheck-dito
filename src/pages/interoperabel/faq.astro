@@ -1,0 +1,12 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import InteroperabelFaqPage from "~/routes/interoperabel.faq";
+
+export const frontmatter = {
+  title: "Fragen und Antworten",
+};
+---
+
+<Layout title={frontmatter.title}>
+  <InteroperabelFaqPage />
+</Layout>

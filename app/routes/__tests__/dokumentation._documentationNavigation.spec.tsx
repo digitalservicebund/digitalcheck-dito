@@ -1,45 +1,38 @@
-// Import mocks first
+import {
+  dokumentation,
+  dokumentation_beteiligungsformate,
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+  type Route,
+} from "@/config/routes";
 import "./utils/mockLocalStorageVersioned";
 // End of mocks
 
 import "@testing-library/jest-dom";
 import { act, render, screen, within } from "@testing-library/react";
-import {
-  createMemoryRouter,
-  RouterProvider,
-  useOutletContext,
-  useRouteLoaderData,
-} from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import {
-  type Route,
-  ROUTE_DOCUMENTATION,
-  ROUTE_DOCUMENTATION_NOTES,
-  ROUTE_DOCUMENTATION_PARTICIPATION,
-  ROUTE_DOCUMENTATION_TITLE,
-  ROUTES_DOCUMENTATION_INTRO,
-} from "~/resources/staticRoutes";
+import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
-import LayoutWithDocumentationNavigation, {
-  NavigationContext,
-} from "~/routes/dokumentation._documentationNavigation";
+import LayoutWithDocumentationNavigation from "~/routes/dokumentation._documentationNavigation";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
+import { MemoryRouter, useRouteLoaderData } from "~/utils/routerCompat";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import {
   DATA_SCHEMA_VERSION_V1,
   DATA_SCHEMA_VERSION_V2,
-  DocumentationData,
-  V1,
-  V2,
+  type DocumentationData,
+  type V1,
+  type V2,
 } from "../dokumentation/documentationDataSchema";
 
 vi.mock("~/contexts/FeatureFlagContext", () => ({
   useFeatureFlag: vi.fn(),
 }));
 
-vi.mock("react-router", async (importOriginal) => {
-  const original = await importOriginal<typeof import("react-router")>();
+vi.mock("~/utils/routerCompat", async (importOriginal) => {
+  const original =
+    await importOriginal<typeof import("~/utils/routerCompat")>();
   return {
     ...original,
     useRouteLoaderData: vi.fn(),
@@ -54,11 +47,19 @@ vi.mock("react-router", async (importOriginal) => {
 });
 
 const mockRoutes: (Route[] | Route)[] = [
-  ...ROUTES_DOCUMENTATION_INTRO,
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+  dokumentation_beteiligungsformate,
   [
     {
       title: "Prinzip A",
-      url: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
+      path: `${dokumentation.path}/prinzipA`,
+      key: "prinzipA",
+      parent: null,
+      sitemap: false,
+      isStagingOnly: false,
+      navOrder: null,
+      navLabel: null,
     },
   ],
 ];
@@ -68,7 +69,7 @@ const mockRoutes: (Route[] | Route)[] = [
  */
 const documentationFormRoutes = mockRoutes
   .flat()
-  .filter((route) => route.url !== ROUTE_DOCUMENTATION_NOTES.url);
+  .filter((route) => route.path !== dokumentation_hinweise.path);
 
 type ValidationScenario = {
   name: string;
@@ -99,7 +100,7 @@ const validationScenarios: ValidationScenario[] = [
       principles: [
         {
           answer: "Ja, gänzlich oder teilweise",
-          id: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
+          id: `${dokumentation.path}/prinzipA`,
           reasoning: [
             {
               checkbox: "on",
@@ -150,7 +151,7 @@ const validationScenarios: ValidationScenario[] = [
       principles: [
         {
           answer: "Ja, gänzlich oder teilweise",
-          id: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
+          id: `${dokumentation.path}/prinzipA`,
           reasoning: [
             {
               checkbox: "on",
@@ -174,44 +175,27 @@ const validationScenarios: ValidationScenario[] = [
   },
 ];
 
-function renderPage({ url }: Route) {
-  function ErrorBoundary() {
-    return <h1>Something went wrong</h1>;
-  }
+function renderPage({ path }: Route) {
   function DummyElement() {
-    const { nextUrl, previousUrl } = useOutletContext<NavigationContext>();
+    const { nextUrl, previousUrl } = useNavigationContext();
     return (
       <>
         <h1>Foobar</h1>
         <a href={previousUrl}>Zurück</a>
-        <a href={nextUrl}>Weiter</a>
+        <a href={nextUrl ?? undefined}>Weiter</a>
       </>
     );
   }
-  const routes = [
-    {
-      path: ROUTE_DOCUMENTATION.url,
-      element: (
-        <DocumentationDataProvider>
-          <LayoutWithDocumentationNavigation />
-        </DocumentationDataProvider>
-      ),
-      ErrorBoundary: ErrorBoundary,
-      children: [
-        {
-          path: url,
-          element: <DummyElement />,
-          HydrateFallback: () => <div></div>,
-        },
-      ],
-    },
-  ];
 
-  const router = createMemoryRouter(routes, {
-    initialEntries: [url],
-  });
-
-  render(<RouterProvider router={router} />);
+  render(
+    <MemoryRouter initialEntries={[path]}>
+      <DocumentationDataProvider>
+        <LayoutWithDocumentationNavigation routes={mockRoutes} prinzips={[]}>
+          <DummyElement />
+        </LayoutWithDocumentationNavigation>
+      </DocumentationDataProvider>
+    </MemoryRouter>,
+  );
 }
 
 const getNav = () =>
@@ -272,33 +256,35 @@ describe("navigation on pages of documentation", () => {
     (route) => {
       renderPage(route);
 
-      const index = mockRoutes.flat().findIndex(({ url }) => url === route.url);
+      const index = mockRoutes
+        .flat()
+        .findIndex(({ path }) => path === route.path);
       const previous = mockRoutes.flat()[index - 1];
       const next = mockRoutes.flat()[index + 1];
 
       if (previous) {
         expect(screen.getByRole("link", { name: "Zurück" })).toHaveAttribute(
           "href",
-          previous.url,
+          previous.path,
         );
       }
       if (next) {
         const linkNext = screen.getByRole("link", {
           name: "Weiter",
         });
-        expect(linkNext).toHaveAttribute("href", next.url);
+        expect(linkNext).toHaveAttribute("href", next.path);
       }
     },
   );
 
   it("disables all routes and only shows top-level items on the notes page", () => {
-    renderPage(ROUTE_DOCUMENTATION_NOTES);
+    renderPage(dokumentation_hinweise);
     const navigation = screen.getByRole("navigation", {
       name: "Seitennavigation",
     });
     for (const title of [
-      ROUTE_DOCUMENTATION_TITLE.title,
-      ROUTE_DOCUMENTATION_PARTICIPATION.title,
+      dokumentation_regelungsvorhabenTitel.title,
+      dokumentation_beteiligungsformate.title,
       "Prinzipien",
     ]) {
       const item = within(navigation).getByText(title);
@@ -307,7 +293,7 @@ describe("navigation on pages of documentation", () => {
     }
   });
 
-  const currentRoute = ROUTE_DOCUMENTATION_TITLE;
+  const currentRoute = dokumentation_regelungsvorhabenTitel;
   it("renders sidebar navigation with links to all pages (except current and notes)", () => {
     renderPage(currentRoute);
 
@@ -315,11 +301,11 @@ describe("navigation on pages of documentation", () => {
       name: "Seitennavigation",
     });
     for (const route of documentationFormRoutes) {
-      if (route.url === currentRoute.url) continue;
+      if (route.path === currentRoute.path) continue;
       const navItem = within(navigation).getByRole("link", {
         name: route.title,
       });
-      expect(navItem).toHaveAttribute("href", route.url);
+      expect(navItem).toHaveAttribute("href", route.path);
     }
   });
 
@@ -402,7 +388,7 @@ describe("navigation on pages of documentation", () => {
           principles: [
             {
               answer: "Ja, gänzlich oder teilweise",
-              id: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
+              id: `${dokumentation.path}/prinzipA`,
               reasoning: "Some reasoning",
               aspects: ["aspect-1"],
             },
@@ -447,7 +433,7 @@ describe("navigation on pages of documentation", () => {
           principles: [
             {
               answer: "Ja, gänzlich oder teilweise",
-              id: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
+              id: `${dokumentation.path}/prinzipA`,
               reasoning: "Some reasoning",
               aspects: [], // empty aspects fails V2 validation
             },

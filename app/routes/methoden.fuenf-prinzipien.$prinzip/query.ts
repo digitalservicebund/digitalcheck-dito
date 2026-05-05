@@ -1,4 +1,4 @@
-import { BasePrinzip } from "~/utils/strapiData.server.ts";
+import { type BasePrinzip } from "~/utils/strapiData.types.ts";
 
 export const PRINZIP_ASPEKTE_QUERY = `
 query Prinzip($URLBezeichnung: String!) {

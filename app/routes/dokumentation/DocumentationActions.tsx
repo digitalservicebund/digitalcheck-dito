@@ -1,10 +1,9 @@
 import { PublishedWithChangesOutlined } from "@digitalservicebund/icons";
-import { useOutletContext } from "react-router";
 import Button, { DownloadButton, LinkButton } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
+import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general";
-import { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
 
 type SubmitType = {
@@ -14,7 +13,7 @@ type SubmitType = {
 
 type NextType = {
   submit?: false;
-  nextUrl?: string;
+  nextUrl?: string | null;
 };
 
 type DocumentationActionsProps = {
@@ -30,7 +29,7 @@ export default function DocumentationActions({
   showDownloadDraftButton = false,
   showSavingTip = false,
 }: Readonly<DocumentationActionsProps>) {
-  const { prinzips } = useOutletContext<NavigationContext>();
+  const { prinzips } = useNavigationContext();
   const { downloadDocumentation } = useWordDocumentation();
 
   return (

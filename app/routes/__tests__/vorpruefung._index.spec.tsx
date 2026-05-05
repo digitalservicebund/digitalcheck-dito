@@ -1,15 +1,15 @@
+import { vorpruefung_hinweise } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import React from "react";
-import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { ROUTE_PRECHECK_INFO } from "~/resources/staticRoutes";
 import { readVersionedDataFromLocalStorage } from "~/utils/localStorageVersioned";
+import { MemoryRouter } from "~/utils/routerCompat";
 import Index from "../vorpruefung._index";
 import {
   DATA_SCHEMA_VERSION,
-  PreCheckData,
+  type PreCheckData,
 } from "../vorpruefung/preCheckDataService";
 
 vi.mock("~/utils/localStorageVersioned", async (importOriginal) => {
@@ -46,7 +46,7 @@ describe("Vorpruefung Index Route - Integration Tests", () => {
       const startButton = screen.getByRole("link", {
         name: "Vorprüfung starten",
       });
-      expect(startButton).toHaveAttribute("href", ROUTE_PRECHECK_INFO.url);
+      expect(startButton).toHaveAttribute("href", vorpruefung_hinweise.path);
     });
 
     it("renders the support banner", () => {
@@ -76,7 +76,7 @@ describe("Vorpruefung Index Route - Integration Tests", () => {
       const startButton = screen.getByRole("link", {
         name: "Vorprüfung fortsetzen",
       });
-      expect(startButton).toHaveAttribute("href", questions[1].url);
+      expect(startButton).toHaveAttribute("href", questions[1].path);
     });
 
     it("renders the CTA button to restart vorpruefung", () => {
@@ -107,7 +107,7 @@ describe("Vorpruefung Index Route - Integration Tests", () => {
       const startButton = screen.getByRole("link", {
         name: "Vorprüfung fortsetzen",
       });
-      expect(startButton).toHaveAttribute("href", ROUTE_PRECHECK_INFO.url);
+      expect(startButton).toHaveAttribute("href", vorpruefung_hinweise.path);
     });
 
     it("renders the CTA button to restart vorpruefung", () => {

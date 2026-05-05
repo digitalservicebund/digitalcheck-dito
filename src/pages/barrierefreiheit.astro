@@ -1,0 +1,24 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ContentWrapper from "~/components/ContentWrapper.tsx";
+import RichText from "~/components/RichText";
+import { readFile } from "node:fs/promises";
+
+export const frontmatter = {
+  title: "Barrierefreiheit",
+};
+
+const content = await readFile("public/markdown/barrierefreiheit.md", {
+  encoding: "utf-8",
+});
+---
+
+<Layout title={frontmatter.title}>
+  <ContentWrapper>
+    <RichText
+      markdown={content}
+      className="ds-stack-16 [&>h2]:mt-40 [&>h3]:mt-32"
+      tagName="main"
+    />
+  </ContentWrapper>
+</Layout>

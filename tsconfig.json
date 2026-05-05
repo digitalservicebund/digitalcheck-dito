@@ -1,10 +1,7 @@
 {
-  "include": [
-    "**/*",
-    "**/.server/**/*",
-    "**/.client/**/*",
-    ".react-router/types/**/*"
-  ],
+  "extends": "astro/tsconfigs/strict",
+  "include": ["src/**/*", "app/**/*", "**/.server/**/*", "**/.client/**/*"],
+  "exclude": ["dist", "node_modules"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022", "ES2023"],
     "isolatedModules": true,
@@ -21,15 +18,10 @@
     "useUnknownInCatchVariables": false,
     "noEmit": true,
     "skipLibCheck": true,
-    "rootDirs": [".", "./.react-router/types"],
-    "types": [
-      "@react-router/node",
-      "vite/client",
-      "vitest/globals",
-      "@testing-library/react"
-    ],
+    "types": ["vite/client", "vitest/globals", "@testing-library/react"],
     "paths": {
       "~/*": ["./app/*"],
+      "@/*": ["./src/*"],
       "@digitalservicebund/icons/*": [
         "./node_modules/@digitalservicebund/icons/*"
       ]

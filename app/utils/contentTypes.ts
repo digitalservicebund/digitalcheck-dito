@@ -1,4 +1,4 @@
-import { LinkButtonProps } from "~/components/Button.tsx";
+import { type LinkButtonProps } from "~/components/Button.tsx";
 
 export type ContentLink = {
   text: string;

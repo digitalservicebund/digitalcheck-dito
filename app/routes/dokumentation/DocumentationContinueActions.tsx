@@ -1,32 +1,33 @@
-import { useNavigate } from "react-router";
+import {
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+} from "@/config/routes";
 import Button, { DownloadButton, LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Dialog from "~/components/Dialog.tsx";
 import RichText from "~/components/RichText.tsx";
 import { digitalDocumentation } from "~/resources/content/dokumentation.ts";
 import { general } from "~/resources/content/shared/general.ts";
-import {
-  ROUTE_DOCUMENTATION_TITLE,
-  ROUTES_DOCUMENTATION_INTRO,
-} from "~/resources/staticRoutes.ts";
-import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation.ts";
 import { useNonce } from "~/utils/nonce.ts";
+import { useNavigate } from "~/utils/routerCompat";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
 
 const { start } = digitalDocumentation;
 
 function StartOverDialog({
   deleteDocumentationData,
+  prinzips,
 }: {
   deleteDocumentationData: () => void;
+  prinzips: PrinzipWithAspekteAndExample[];
 }) {
   const navigate = useNavigate();
-  const supportingData = useDocumentationRouteData();
   const { downloadDocumentation } = useWordDocumentation();
 
   const downloadDraft = async () => {
-    await downloadDocumentation(supportingData.prinzips);
+    await downloadDocumentation(prinzips);
   };
 
   return (
@@ -46,9 +47,9 @@ function StartOverDialog({
         <div className="flex flex-row gap-12">
           <Button
             type="button"
-            onClick={async () => {
+            onClick={() => {
               deleteDocumentationData();
-              await navigate(ROUTES_DOCUMENTATION_INTRO[0].url);
+              navigate(dokumentation_hinweise.path);
             }}
           >
             {start.startOverDialog.actions.confirm}
@@ -70,7 +71,11 @@ function StartOverDialog({
   );
 }
 
-export function DocumentationContinueActions() {
+export function DocumentationContinueActions({
+  prinzips,
+}: {
+  prinzips: PrinzipWithAspekteAndExample[];
+}) {
   const { hasSavedDocumentation, deleteDocumentationData } =
     useDocumentationDataService();
   const nonce = useNonce();
@@ -78,13 +83,19 @@ export function DocumentationContinueActions() {
     <ButtonContainer>
       {hasSavedDocumentation ? (
         <>
-          <LinkButton to={ROUTE_DOCUMENTATION_TITLE.url} className="js-only">
+          <LinkButton
+            to={dokumentation_regelungsvorhabenTitel.path}
+            className="js-only"
+          >
             {start.actions.resume.buttonText}
           </LinkButton>
-          <StartOverDialog deleteDocumentationData={deleteDocumentationData} />
+          <StartOverDialog
+            deleteDocumentationData={deleteDocumentationData}
+            prinzips={prinzips}
+          />
         </>
       ) : (
-        <LinkButton to={ROUTES_DOCUMENTATION_INTRO[0].url} className="js-only">
+        <LinkButton to={dokumentation_hinweise.path} className="js-only">
           {start.actions.startInitial.buttonText}
         </LinkButton>
       )}

@@ -3,17 +3,16 @@ import "./utils/mockLocalStorageVersioned";
 import "./utils/mockRouter";
 // End of mocks
 
+import {
+  dokumentation_beteiligungsformate,
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+  type Route,
+} from "@/config/routes";
 import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
-import { MemoryRouter, useOutletContext } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import {
-  Route,
-  ROUTE_DOCUMENTATION_NOTES,
-  ROUTE_DOCUMENTATION_PARTICIPATION,
-  ROUTE_DOCUMENTATION_TITLE,
-  ROUTES_DOCUMENTATION_INTRO,
-} from "~/resources/staticRoutes";
+import { DocumentationNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
 import type {
@@ -24,15 +23,24 @@ import type {
   V1,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
-import { AbsatzWithParagraph } from "~/utils/strapiData.server.ts";
+import { MemoryRouter } from "~/utils/routerCompat";
+import { type AbsatzWithParagraph } from "~/utils/strapiData.types.ts";
 import DocumentationSummaryV1 from "../dokumentation/DocumentationSummaryV1";
 
-const MOCK_ROUTE_PRINCIPLE = {
+const MOCK_ROUTE_PRINCIPLE: Route = {
   title: "Digitale Angebote",
-  url: "/dokumentation/prinzip-digitale-angebote",
+  path: "/dokumentation/prinzip-digitale-angebote",
+  key: "prinzipA",
+  parent: null,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
 };
 const routes: (Route[] | Route)[] = [
-  ...ROUTES_DOCUMENTATION_INTRO,
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+  dokumentation_beteiligungsformate,
   [MOCK_ROUTE_PRINCIPLE],
 ];
 
@@ -41,9 +49,7 @@ const routes: (Route[] | Route)[] = [
  */
 const documentationFormRoutes = routes
   .flat()
-  .filter((route) => route.url !== ROUTE_DOCUMENTATION_NOTES.url);
-
-const mockedUseOutletContext = vi.mocked(useOutletContext);
+  .filter((route) => route.path !== dokumentation_hinweise.path);
 
 function createDocumentationDataMock({
   policyTitle,
@@ -62,12 +68,34 @@ function createDocumentationDataMock({
   });
 }
 
+const mockNavigationContext: NavigationContext = {
+  currentUrl: "/current-url",
+  nextUrl: "/next-url",
+  previousUrl: "/previous-url",
+  routes: routes,
+  prinzips: [
+    {
+      Name: "Digitale Angebote für alle nutzbar gestalten",
+      Kurzbezeichnung: "Digitale Angebote",
+      URLBezeichnung: "prinzip-digitale-angebote",
+      documentId: "1",
+      Nummer: 1,
+      order: 1,
+      Beschreibung: [],
+      Aspekte: [],
+      Beispiel: {} as AbsatzWithParagraph,
+    },
+  ],
+};
+
 describe("DocumentationSummary", () => {
   const renderWithRouter = () => {
     return render(
       <MemoryRouter>
         <DocumentationDataProvider>
-          <DocumentationSummaryV1 />
+          <DocumentationNavigationContext.Provider value={mockNavigationContext}>
+            <DocumentationSummaryV1 />
+          </DocumentationNavigationContext.Provider>
         </DocumentationDataProvider>
       </MemoryRouter>,
     );
@@ -84,27 +112,6 @@ describe("DocumentationSummary", () => {
 
   beforeEach(() => {
     vi.mocked(readDataFromLocalStorage).mockReturnValue(mockDocumentationData);
-
-    const context: NavigationContext = {
-      currentUrl: "/current-url",
-      nextUrl: "/next-url",
-      previousUrl: "/previous-url",
-      routes: routes,
-      prinzips: [
-        {
-          Name: "Digitale Angebote für alle nutzbar gestalten",
-          Kurzbezeichnung: "Digitale Angebote",
-          URLBezeichnung: "prinzip-digitale-angebote",
-          documentId: "1",
-          Nummer: 1,
-          order: 1,
-          Beschreibung: [],
-          Aspekte: [],
-          Beispiel: {} as AbsatzWithParagraph,
-        },
-      ],
-    };
-    mockedUseOutletContext.mockReturnValue(context);
   });
 
   afterEach(() => {
@@ -136,7 +143,7 @@ describe("DocumentationSummary", () => {
     renderWithRouter();
 
     documentationFormRoutes.forEach((route) => {
-      expect(screen.getByTestId(route.url)).toBeInTheDocument();
+      expect(screen.getByTestId(route.path)).toBeInTheDocument();
     });
   });
 
@@ -144,7 +151,7 @@ describe("DocumentationSummary", () => {
     renderWithRouter();
 
     documentationFormRoutes.forEach((route) => {
-      const stepContainer = screen.getByTestId(route.url);
+      const stepContainer = screen.getByTestId(route.path);
 
       expect(
         within(stepContainer).getByRole("heading", {
@@ -159,7 +166,7 @@ describe("DocumentationSummary", () => {
     renderWithRouter();
 
     documentationFormRoutes.forEach((route) => {
-      const stepContainer = screen.getByTestId(route.url);
+      const stepContainer = screen.getByTestId(route.path);
       const isPrincipleRoute = route === MOCK_ROUTE_PRINCIPLE;
 
       if (isPrincipleRoute) {
@@ -336,13 +343,15 @@ describe("DocumentationSummary", () => {
   it("shows edit buttons for steps that have data", () => {
     renderWithRouter();
 
-    const titleContainer = screen.getByTestId(ROUTE_DOCUMENTATION_TITLE.url);
+    const titleContainer = screen.getByTestId(
+      dokumentation_regelungsvorhabenTitel.path,
+    );
     const titleEditLink = within(titleContainer).getByRole("link", {
-      name: `${ROUTE_DOCUMENTATION_TITLE.title} bearbeiten`,
+      name: `${dokumentation_regelungsvorhabenTitel.title} bearbeiten`,
     });
     expect(titleEditLink).toHaveAttribute(
       "href",
-      ROUTE_DOCUMENTATION_TITLE.url,
+      dokumentation_regelungsvorhabenTitel.path,
     );
     expect(titleEditLink).toHaveTextContent("Bearbeiten");
 
@@ -358,7 +367,7 @@ describe("DocumentationSummary", () => {
     renderWithRouter();
 
     documentationFormRoutes.forEach((route) => {
-      const stepContainer = screen.getByTestId(route.url);
+      const stepContainer = screen.getByTestId(route.path);
 
       expect(
         within(stepContainer).getByText(
@@ -369,23 +378,23 @@ describe("DocumentationSummary", () => {
   });
 
   test.each([
-    [ROUTE_DOCUMENTATION_TITLE.url, { policyTitle: undefined }],
-    [ROUTE_DOCUMENTATION_TITLE.url, { policyTitle: { title: "" } }],
-    [ROUTE_DOCUMENTATION_PARTICIPATION.url, { participation: undefined }],
+    [dokumentation_regelungsvorhabenTitel.path, { policyTitle: undefined }],
+    [dokumentation_regelungsvorhabenTitel.path, { policyTitle: { title: "" } }],
+    [dokumentation_beteiligungsformate.path, { participation: undefined }],
     [
-      ROUTE_DOCUMENTATION_PARTICIPATION.url,
+      dokumentation_beteiligungsformate.path,
       {
         participation: { formats: "", results: "" },
       },
     ],
-    [MOCK_ROUTE_PRINCIPLE.url, { principles: undefined }],
-    [MOCK_ROUTE_PRINCIPLE.url, { principles: [] }],
+    [MOCK_ROUTE_PRINCIPLE.path, { principles: undefined }],
+    [MOCK_ROUTE_PRINCIPLE.path, { principles: [] }],
     [
-      MOCK_ROUTE_PRINCIPLE.url,
+      MOCK_ROUTE_PRINCIPLE.path,
       {
         principles: [
           {
-            id: MOCK_ROUTE_PRINCIPLE.url,
+            id: MOCK_ROUTE_PRINCIPLE.path,
             answer: "",
             reasoning: "",
           },
@@ -409,19 +418,19 @@ describe("DocumentationSummary", () => {
 
   test.each([
     [
-      ROUTE_DOCUMENTATION_PARTICIPATION.url,
+      dokumentation_beteiligungsformate.path,
       {
         participation: { formats: "some formats", results: "" },
       },
     ],
     [
-      ROUTE_DOCUMENTATION_PARTICIPATION.url,
+      dokumentation_beteiligungsformate.path,
       {
         participation: { formats: "", results: "some results" },
       },
     ],
     [
-      MOCK_ROUTE_PRINCIPLE.url,
+      MOCK_ROUTE_PRINCIPLE.path,
       {
         principles: [
           {
@@ -440,7 +449,7 @@ describe("DocumentationSummary", () => {
       },
     ],
     [
-      MOCK_ROUTE_PRINCIPLE.url,
+      MOCK_ROUTE_PRINCIPLE.path,
       {
         principles: [
           {
@@ -459,7 +468,7 @@ describe("DocumentationSummary", () => {
       },
     ],
     [
-      MOCK_ROUTE_PRINCIPLE.url,
+      MOCK_ROUTE_PRINCIPLE.path,
       {
         principles: [
           {

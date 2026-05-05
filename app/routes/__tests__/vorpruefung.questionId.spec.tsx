@@ -1,11 +1,11 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import userEvent from "@testing-library/user-event";
-import { BrowserRouter, useLoaderData } from "react-router";
 import { preCheck } from "~/resources/content/vorpruefung";
 import Index from "~/routes/vorpruefung._preCheckNavigation.$questionId";
+import { MemoryRouter } from "~/utils/routerCompat";
 import { ResultType } from "../vorpruefung.ergebnis/PreCheckResult";
 import { usePreCheckData } from "../vorpruefung/preCheckDataHook";
 
@@ -15,12 +15,10 @@ const { mockNavigate } = vi.hoisted(() => ({
   mockNavigate: vi.fn(),
 }));
 
-vi.mock("react-router", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("react-router")>();
+vi.mock("~/utils/routerCompat", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("~/utils/routerCompat")>();
   return {
     ...actual,
-    useLoaderData: vi.fn(),
-    useActionData: vi.fn(),
     useNavigate: vi.fn(() => mockNavigate),
   };
 });
@@ -67,15 +65,10 @@ describe("PreCheck", () => {
 
   describe("PreCheck validation", () => {
     beforeEach(() => {
-      vi.mocked(useLoaderData).mockReturnValue({
-        questionIdx: 0,
-        question: questions[0],
-      });
-
       render(
-        <BrowserRouter>
-          <Index />
-        </BrowserRouter>,
+        <MemoryRouter>
+          <Index questionId={questions[0].id} />
+        </MemoryRouter>,
       );
     });
 
@@ -135,30 +128,20 @@ describe("PreCheck", () => {
     });
 
     it("redirects to last unanswered question", () => {
-      vi.mocked(useLoaderData).mockReturnValueOnce({
-        questionIdx: 2,
-        question: questions[2],
-      });
-
       render(
-        <BrowserRouter>
-          <Index />
-        </BrowserRouter>,
+        <MemoryRouter>
+          <Index questionId={questions[2].id} />
+        </MemoryRouter>,
       );
 
       expect(mockNavigate).toHaveBeenCalledWith("/vorpruefung/it-system");
     });
 
     it("does not redirect when all questions are answered", () => {
-      vi.mocked(useLoaderData).mockReturnValueOnce({
-        questionIdx: 0,
-        question: questions[0],
-      });
-
       render(
-        <BrowserRouter>
-          <Index />
-        </BrowserRouter>,
+        <MemoryRouter>
+          <Index questionId={questions[0].id} />
+        </MemoryRouter>,
       );
 
       expect(mockNavigate).not.toHaveBeenCalledWith("/vorpruefung");

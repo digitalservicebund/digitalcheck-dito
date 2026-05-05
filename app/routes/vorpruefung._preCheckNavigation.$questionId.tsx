@@ -1,31 +1,26 @@
+import { vorpruefung } from "@/config/routes";
 import { useEffect, useState } from "react";
-import { useLoaderData, useNavigate } from "react-router";
+import { useNavigate } from "~/utils/routerCompat";
 
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import InlineNotice from "~/components/InlineNotice";
-import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { preCheck } from "~/resources/content/vorpruefung";
-import {
-  ROUTE_PRECHECK,
-  ROUTES_PRECHECK_QUESTIONS,
-} from "~/resources/staticRoutes";
-import type { Route } from "./+types/vorpruefung._preCheckNavigation.$questionId";
 import { usePreCheckData, useSyncedForm } from "./vorpruefung/preCheckDataHook";
 import {
   answerSchema,
-  PreCheckAnswerSchema,
+  type PreCheckAnswerSchema,
 } from "./vorpruefung/preCheckDataSchema";
 import { addOrUpdateAnswer } from "./vorpruefung/preCheckDataService";
 
 const { questions, answerOptions, nextButton } = preCheck;
 
-export function loader({ params }: Route.LoaderArgs) {
+export function loader({ params }: { params: { questionId?: string } }) {
   const questionIdx = questions.findIndex((q) => q.id === params.questionId);
   // return 404 if the question is not found
   if (questionIdx === -1) {
@@ -59,7 +54,7 @@ export type TQuestion = {
     unsureResult?: string;
   };
   text: string;
-  url: string;
+  path: string;
   prevLink: string;
   nextLink: string;
   hint?: {
@@ -78,8 +73,19 @@ export type PreCheckAnswerOption = {
   label: string;
 };
 
-export default function Index() {
-  const { questionIdx, question } = useLoaderData<typeof loader>();
+export default function Index({
+  questionId: questionIdProp,
+}: {
+  questionId?: string;
+}) {
+  const questionId =
+    questionIdProp ??
+    (typeof window !== "undefined"
+      ? window.location.pathname.split("/").filter(Boolean).pop()
+      : undefined);
+  const questionIdx = questions.findIndex((q) => q.id === questionId);
+  const question = questions[questionIdx];
+
   const [hasAnswerConflict, setHasAnswerConflict] = useState(false);
 
   const { answerForQuestionId, answers, firstUnansweredQuestionIndex } =
@@ -87,7 +93,7 @@ export default function Index() {
   const navigate = useNavigate();
   const storedAnswer = answerForQuestionId(question.id);
   const nextLink =
-    questions.find((q) => q.id === question.id)?.nextLink ?? ROUTE_PRECHECK.url;
+    questions.find((q) => q.id === question.id)?.nextLink ?? vorpruefung.path;
 
   const form = useSyncedForm({
     schema: answerSchema,
@@ -97,9 +103,9 @@ export default function Index() {
     },
     storedData: storedAnswer,
     initialValidate: true,
-    handleSubmit: async (data: PreCheckAnswerSchema) => {
+    handleSubmit: (data: PreCheckAnswerSchema) => {
       addOrUpdateAnswer(data);
-      await navigate(nextLink);
+      navigate(nextLink);
     },
   });
 
@@ -109,7 +115,7 @@ export default function Index() {
       firstUnansweredQuestionIndex !== null &&
       questionIdx > firstUnansweredQuestionIndex
     ) {
-      void navigate(questions[firstUnansweredQuestionIndex].url);
+      navigate(questions[firstUnansweredQuestionIndex].path);
     }
   }, [firstUnansweredQuestionIndex, navigate, questionIdx]);
 
@@ -141,15 +147,9 @@ export default function Index() {
 
   const questionLabelId = `question${questionIdx}-label`;
 
+  if (!question) return null;
   return (
     <form {...form.getFormProps()} className="space-y-40">
-      <MetaTitle
-        prefix={
-          ROUTES_PRECHECK_QUESTIONS.find((route) =>
-            route.url.endsWith(question.id),
-          )?.title
-        }
-      />
       <input {...form.getHiddenInputProps("questionId")} />
       <section className="space-y-32">
         <div className="space-y-16">

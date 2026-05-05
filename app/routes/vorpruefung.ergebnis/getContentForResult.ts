@@ -1,8 +1,8 @@
 import { preCheck } from "~/resources/content/vorpruefung";
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
 import type { PreCheckAnswerOption } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
-import { PreCheckAnswerSchema } from "../vorpruefung/preCheckDataSchema";
-import { PreCheckResult, ResultType } from "./PreCheckResult";
+import { type PreCheckAnswerSchema } from "../vorpruefung/preCheckDataSchema";
+import { type PreCheckResult, ResultType } from "./PreCheckResult";
 
 const { questions } = preCheck;
 

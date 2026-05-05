@@ -6,8 +6,8 @@ import {
 } from "~/utils/localStorageVersioned";
 import { ResultType } from "../vorpruefung.ergebnis/PreCheckResult";
 import {
-  PreCheckAnswerSchema,
-  PreCheckResultSchema,
+  type PreCheckAnswerSchema,
+  type PreCheckResultSchema,
 } from "./preCheckDataSchema";
 import {
   addOrUpdateAnswer,
@@ -18,7 +18,7 @@ import {
   getPreCheckDataServerSnapshot,
   getPreCheckDataSnapshot,
   initialPreCheckData,
-  PreCheckData,
+  type PreCheckData,
   setResult,
   STORAGE_KEY,
   subscribeToPreCheckData,

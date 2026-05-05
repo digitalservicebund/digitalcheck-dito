@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { PRINCIPLE_COLORS, PrincipleNumber } from "~/resources/constants";
+import { type ReactNode } from "react";
+import { PRINCIPLE_COLORS, type PrincipleNumber } from "~/resources/constants";
 import twMerge from "~/utils/tailwindMerge";
 
 export type BadgeProps = {

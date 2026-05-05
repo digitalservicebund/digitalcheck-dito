@@ -5,12 +5,12 @@ import "@testing-library/jest-dom";
 import { act, renderHook } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { MemoryRouter } from "react-router";
 import {
   readDataFromLocalStorage,
   removeFromLocalStorage,
   writeVersionedDataToLocalStorage,
 } from "~/utils/localStorageVersioned";
+import { MemoryRouter } from "~/utils/routerCompat";
 import {
   DocumentationDataProvider,
   STORAGE_KEY,
@@ -18,8 +18,8 @@ import {
 } from "./DocumentationDataProvider";
 import {
   DATA_SCHEMA_VERSION_V2,
-  Principle,
   type DocumentationData,
+  type Principle,
   type V2,
 } from "./documentationDataSchema";
 

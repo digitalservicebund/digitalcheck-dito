@@ -1,24 +1,24 @@
+import {
+  interoperabel_loesungen_coreVocabularies,
+  interoperabel_loesungen_dcatAp,
+} from "@/config/routes";
 import Button, { LinkButton } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
-import {
-  ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES,
-  ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP,
-} from "~/resources/staticRoutes.ts";
 
 export const InteroperableLoesungenTab = () => {
   const solutions = [
     {
       title: "Semantic Core Vocabularies",
       text: "Die grenzüberschreitende Datensprache für das Once-Only-Prinzip",
-      href: ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES.url,
+      href: interoperabel_loesungen_coreVocabularies.path,
     },
     {
       title: "Data Catalogue Vocabulary Application Profile (DCAT-AP)",
       text: "Der Metadatenstandard für Offene Daten und Transparenz (Data Catalogue Vocabulary Application Profile)",
-      href: ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP.url,
+      href: interoperabel_loesungen_dcatAp.path,
     },
   ];
 

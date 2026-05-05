@@ -1,9 +1,11 @@
-import { DrawOutlined } from "@digitalservicebund/icons";
-import { StickyNote2Outlined } from "@digitalservicebund/icons";
-import { SupportOutlined } from "@digitalservicebund/icons";
-import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
+import { unterstuetzung } from "@/config/routes";
+import {
+  DrawOutlined,
+  StickyNote2Outlined,
+  SupportOutlined,
+} from "@digitalservicebund/icons";
 import { assetPath } from "~/utils/assetPath";
-import { ContentLink } from "~/utils/contentTypes.ts";
+import { type ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
 
@@ -68,7 +70,7 @@ export const methodsITSystems = {
       {
         text: "Unterstützungsangebote nutzen",
         look: "tertiary" as const,
-        to: ROUTE_SUPPORT.url,
+        to: unterstuetzung.path,
       },
     ] satisfies ContentLink[],
   },

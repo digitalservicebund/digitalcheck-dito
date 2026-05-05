@@ -1,0 +1,12 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ImpressumPage from "~/routes/impressum";
+
+export const frontmatter = {
+  title: "Impressum",
+};
+---
+
+<Layout title={frontmatter.title}>
+  <ImpressumPage />
+</Layout>

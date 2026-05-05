@@ -1,5 +1,5 @@
 import { HelpOutlineOutlined } from "@digitalservicebund/icons";
-import { ReactNode, useEffect } from "react";
+import { type ReactNode, useEffect } from "react";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { useHelpPanel } from "~/contexts/HelpPanelContext";
 import { features } from "~/utils/featureFlags";

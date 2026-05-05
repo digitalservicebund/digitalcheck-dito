@@ -1,35 +1,29 @@
+import { methoden_interviewLeitfadenSchritte } from "@/config/routes";
 import {
   AnnouncementOutlined,
   MergeTypeOutlined,
   RuleOutlined,
   SocialDistanceOutlined,
 } from "@digitalservicebund/icons";
-import { data } from "react-router";
 import AccordionItem from "~/components/AccordionItem";
 import { LinkButton } from "~/components/Button";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
-import {
-  ROUTE_METHODS_INTERVIEW_METHODS,
-  ROUTE_METHODS_INTERVIEW_METHODS_STEPS,
-} from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import getFeatureFlag from "~/utils/featureFlags.server";
 
 export function loader() {
   if (!getFeatureFlag("showInterviewLeitfaden")) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw data("Not found", { status: 404 });
+    throw new Response("Not found", { status: 404 });
   }
 }
 
 export default function InterviewMethods() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_METHODS_INTERVIEW_METHODS.title} />
       <main className="mb-80 space-y-80">
         <Hero title="Nehmen Sie die Praxis-Perspektive für Ihr Vorhaben ein">
           <p>
@@ -183,7 +177,7 @@ export default function InterviewMethods() {
               `}
             />
             <LinkButton
-              to={ROUTE_METHODS_INTERVIEW_METHODS_STEPS.url}
+              to={methoden_interviewLeitfadenSchritte.path}
               look="tertiary"
               className="self-start"
             >

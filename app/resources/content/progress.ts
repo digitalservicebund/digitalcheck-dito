@@ -1,8 +1,4 @@
-import {
-  ROUTE_DOCUMENTATION,
-  ROUTE_METHODS,
-  ROUTE_PRECHECK,
-} from "../staticRoutes";
+import { dokumentation, methoden, vorpruefung } from "@/config/routes";
 
 export const progress = {
   ariaLabel: "Digitalcheck-Fortschritt",
@@ -10,17 +6,17 @@ export const progress = {
     {
       label: "Vorprüfung",
       labelShort: "Vorprüfung",
-      prefix: ROUTE_PRECHECK.url,
+      prefix: vorpruefung.path,
     },
     {
       label: "Digitaltauglichkeit erarbeiten",
       labelShort: "Erarbeiten",
-      prefix: ROUTE_METHODS.url,
+      prefix: methoden.path,
     },
     {
       label: "Dokumentation",
       labelShort: "Dokumentation",
-      prefix: ROUTE_DOCUMENTATION.url,
+      prefix: dokumentation.path,
     },
   ],
 };

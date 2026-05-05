@@ -1,0 +1,26 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import DokumentationLayout from "~/components/DokumentationLayout";
+import {
+  fetchStrapiData,
+  GET_PRINZIPS_WITH_EXAMPLES_QUERY,
+} from "~/utils/strapiData.server";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
+
+export const frontmatter = {
+  title: "Dokumentation: Hinweise",
+};
+
+const result = await fetchStrapiData<{
+  prinzips: PrinzipWithAspekteAndExample[];
+}>(GET_PRINZIPS_WITH_EXAMPLES_QUERY);
+const prinzips = "error" in result ? [] : result.prinzips;
+---
+
+<Layout title={frontmatter.title} showProgressBar={true}>
+  <DokumentationLayout
+    client:only="react"
+    prinzips={prinzips}
+    page="hinweise"
+  />
+</Layout>

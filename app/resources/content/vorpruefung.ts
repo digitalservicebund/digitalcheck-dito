@@ -1,13 +1,13 @@
-import { preCheckQuestions } from "~/resources/content/shared/pre-check-questions";
 import {
-  ROUTE_INTEROPERABILITY,
-  ROUTE_PRECHECK,
-  ROUTE_PRECHECK_INFO,
-  ROUTE_PRECHECK_RESULT,
-} from "~/resources/staticRoutes";
+  interoperabel,
+  vorpruefung,
+  vorpruefung_ergebnis,
+  vorpruefung_hinweise,
+} from "@/config/routes";
+import { preCheckQuestions } from "~/resources/content/shared/pre-check-questions";
 import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { assetPath } from "~/utils/assetPath";
-import { ContentLink } from "~/utils/contentTypes.ts";
+import { type ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
 
@@ -85,7 +85,7 @@ export const preCheck = {
       },
       action: {
         text: "Alles zur Interoperabilität",
-        to: ROUTE_INTEROPERABILITY.url,
+        to: interoperabel.path,
       } satisfies ContentLink,
     },
     noscript: {
@@ -203,7 +203,7 @@ export const preCheck = {
         
         Bitte überprüfen Sie ihre Angaben.
 
-        [Frage 3 zum Datenaustausch überprüfen](${ROUTE_PRECHECK.url}/${preCheckQuestions.datenaustausch.id})
+        [Frage 3 zum Datenaustausch überprüfen](${vorpruefung.path}/${preCheckQuestions.datenaustausch.id})
       `,
     },
   },
@@ -309,14 +309,11 @@ export const preCheck = {
   ].map((question, index, questions) => ({
     // generate list from the questions such that each list has a path, a previous link and a next link
     ...question,
-    url: `${ROUTE_PRECHECK.url}/${question.id}`,
     prevLink:
-      index === 0
-        ? ROUTE_PRECHECK_INFO.url
-        : `${ROUTE_PRECHECK.url}/${questions[index - 1].id}`,
+      index === 0 ? vorpruefung_hinweise.path : questions[index - 1].path,
     nextLink:
       index === questions.length - 1
-        ? ROUTE_PRECHECK_RESULT.url
-        : `${ROUTE_PRECHECK.url}/${questions[index + 1].id}`,
+        ? vorpruefung_ergebnis.path
+        : questions[index + 1].path,
   })) as TQuestion[],
 };

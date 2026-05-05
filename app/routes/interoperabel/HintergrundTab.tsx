@@ -1,16 +1,16 @@
-import { Link } from "react-router";
+import {
+  beispiele_visualisierungen,
+  methoden_fuenfPrinzipien,
+  vorpruefung,
+} from "@/config/routes";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import Image from "~/components/Image";
 import ImageZoomable from "~/components/ImageZoomable";
 import NewTabLink from "~/components/NewTabLink";
 import { contact } from "~/resources/content/shared/contact";
-import {
-  ROUTE_EXAMPLES_VISUALISATIONS,
-  ROUTE_METHODS_PRINCIPLES,
-  ROUTE_PRECHECK,
-} from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
+import { Link } from "~/utils/routerCompat";
 import { getTabAnchorLink } from "~/utils/tabs";
 import { tabIds } from "./tabIds";
 
@@ -95,7 +95,7 @@ export const HintergrundTab = () => (
       </p>
       <p>
         Hier gelangen Sie zur{" "}
-        <Link className="text-link" to={ROUTE_PRECHECK.url}>
+        <Link className="text-link" to={vorpruefung.path}>
           Vorprüfung
         </Link>
         .
@@ -122,11 +122,11 @@ export const HintergrundTab = () => (
       </p>
       <p>
         Dabei helfen Ihnen die{" "}
-        <Link className="text-link" to={ROUTE_METHODS_PRINCIPLES.url}>
+        <Link className="text-link" to={methoden_fuenfPrinzipien.path}>
           5 Prinzipien für digitaltaugliche, interoperable Regelungen
         </Link>
         . Auch{" "}
-        <Link className="text-link" to={ROUTE_EXAMPLES_VISUALISATIONS.url}>
+        <Link className="text-link" to={beispiele_visualisierungen.path}>
           Prozessvisualisierungen
         </Link>{" "}
         sind hilfreich, z.B. um grenzüberschreitende Datenflüsse zu

@@ -1,21 +1,22 @@
-import { Outlet, useLocation } from "react-router";
+import {
+  dokumentation,
+  dokumentation_absenden,
+  dokumentation_hinweise,
+  dokumentation_zusammenfassung,
+  type Route as _Route,
+} from "@/config/routes";
+import { Fragment, type ReactNode } from "react";
 import { twJoin } from "tailwind-merge";
 import HelpSidepanel from "~/components/HelpSidepanel";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
+import { DocumentationNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import {
-  type Route as _Route,
-  ROUTE_DOCUMENTATION,
-  ROUTE_DOCUMENTATION_NOTES,
-  ROUTE_DOCUMENTATION_SEND,
-  ROUTE_DOCUMENTATION_SUMMARY,
-} from "~/resources/staticRoutes";
-import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { features } from "~/utils/featureFlags";
-import { PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
+import { useLocation } from "~/utils/routerCompat";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 
 type Route = _Route & {
@@ -25,34 +26,24 @@ type Route = _Route & {
 export type OnNavigateCallback = () => Promise<boolean>;
 export type NavigationContext = {
   currentUrl: string;
-  nextUrl: string;
+  nextUrl: string | null;
   previousUrl: string;
   routes: (Route | Route[])[];
   prinzips: PrinzipWithAspekteAndExample[];
 };
 
 function findIndexForRoute(routes: Route[], currentUrl: string) {
-  const index = routes.findIndex((route) => route.url === currentUrl);
-
-  if (index === -1) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(`Could not find route with url ${currentUrl}`, {
-      status: 404,
-    });
-  }
-  return index;
+  return routes.findIndex((route) => route.path === currentUrl);
 }
 
 function getPreviousUrl(routes: Route[], currentUrl: string): string {
-  return findIndexForRoute(routes, currentUrl) > 0
-    ? routes[findIndexForRoute(routes, currentUrl) - 1].url
-    : ROUTE_DOCUMENTATION.url;
+  const idx = findIndexForRoute(routes, currentUrl);
+  return idx > 0 ? routes[idx - 1].path : dokumentation.path;
 }
 
 function getNextUrl(routes: Route[], currentUrl: string): string | null {
-  return findIndexForRoute(routes, currentUrl) < routes.length - 1
-    ? routes[findIndexForRoute(routes, currentUrl) + 1].url
-    : null;
+  const idx = findIndexForRoute(routes, currentUrl);
+  return idx >= 0 && idx < routes.length - 1 ? routes[idx + 1].path : null;
 }
 
 function resolveAdjacentUrl(
@@ -64,7 +55,7 @@ function resolveAdjacentUrl(
 ): string | null {
   const rawUrl = getAdjacent(flatRoutes, fromUrl);
   if (!rawUrl || !simplifiedFlow) return rawUrl;
-  const route = flatRoutes.find((r) => r.url === rawUrl);
+  const route = flatRoutes.find((r) => r.path === rawUrl);
   if (route?.principleId) {
     const data = findData(route.principleId) as { answer?: string } | undefined;
     if (data?.answer) return `${rawUrl}/erlaeuterung`;
@@ -72,14 +63,21 @@ function resolveAdjacentUrl(
   return rawUrl;
 }
 
-export default function LayoutWithDocumentationNavigation() {
-  const { routes, prinzips } = useDocumentationRouteData();
+export default function LayoutWithDocumentationNavigation({
+  routes,
+  prinzips,
+  children,
+}: {
+  routes: (Route | Route[])[];
+  prinzips: PrinzipWithAspekteAndExample[];
+  children?: ReactNode;
+}) {
   const simplifiedFlow = useFeatureFlag(features.simplifiedPrincipleFlow);
 
   // exclude documentation notes
   const displayedRoutes = routes.filter((route) => {
     if (Array.isArray(route)) return true;
-    return route.url !== ROUTE_DOCUMENTATION_NOTES.url;
+    return route.path !== dokumentation_hinweise.path;
   });
 
   const location = useLocation();
@@ -98,7 +96,7 @@ export default function LayoutWithDocumentationNavigation() {
     useDocumentationDataService();
 
   const flatRoutes = routes.flat();
-  const currentRoute = flatRoutes.find((r) => r.url === navigationCurrentUrl);
+  const currentRoute = flatRoutes.find((r) => r.path === navigationCurrentUrl);
   const currentPrincipleFormData = currentRoute?.principleId
     ? findDocumentationDataForUrl(currentRoute.principleId)
     : undefined;
@@ -129,14 +127,14 @@ export default function LayoutWithDocumentationNavigation() {
       getPreviousUrl,
       simplifiedFlow,
       findDocumentationDataForUrl,
-    ) ?? ROUTE_DOCUMENTATION.url;
+    ) ?? dokumentation.path;
 
-  const isNavigationDisabled = currentUrl === ROUTE_DOCUMENTATION_NOTES.url;
+  const isNavigationDisabled = currentUrl === dokumentation_hinweise.path;
 
   const excludedPanelRoutes = [
-    ROUTE_DOCUMENTATION_NOTES.url,
-    ROUTE_DOCUMENTATION_SUMMARY.url,
-    ROUTE_DOCUMENTATION_SEND.url,
+    dokumentation_hinweise.path,
+    dokumentation_zusammenfassung.path,
+    dokumentation_absenden.path,
   ];
   const showHelpPanel =
     simplifiedFlow &&
@@ -144,25 +142,25 @@ export default function LayoutWithDocumentationNavigation() {
 
   const getNavItem = (route: Route) => {
     const formData = findDocumentationDataForUrl(
-      route.principleId || route.url,
+      route.principleId || route.path,
     );
-    const schema = getDocumentationSchemaFormUrl(route.url);
+    const schema = getDocumentationSchemaFormUrl(route.path);
     const valid = schema.safeParse(formData);
 
     const navUrl =
       simplifiedFlow &&
       route.principleId &&
       (formData as { answer?: string } | undefined)?.answer
-        ? `${route.url}/erlaeuterung`
-        : route.url;
+        ? `${route.path}/erlaeuterung`
+        : route.path;
 
     return (
       <Nav.Item
-        key={route.url}
+        key={route.path}
         url={navUrl}
         activeUrls={
           route.principleId
-            ? [route.url, `${route.url}/erlaeuterung`]
+            ? [route.path, `${route.path}/erlaeuterung`]
             : undefined
         }
         error={formData && !valid.success}
@@ -217,16 +215,11 @@ export default function LayoutWithDocumentationNavigation() {
             />
           </div>
           {/* force remount for different principles with key={currentUrl} */}
-          <Outlet
-            key={currentUrl}
-            context={{
-              currentUrl,
-              nextUrl,
-              previousUrl,
-              routes,
-              prinzips,
-            }}
-          />
+          <DocumentationNavigationContext.Provider
+            value={{ currentUrl, nextUrl, previousUrl, routes, prinzips }}
+          >
+            <Fragment key={currentUrl}>{children}</Fragment>
+          </DocumentationNavigationContext.Provider>
         </main>
         {showHelpPanel && <HelpSidepanel />}
       </div>

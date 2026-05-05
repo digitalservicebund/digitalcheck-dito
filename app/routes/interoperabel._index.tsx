@@ -1,5 +1,5 @@
+import { interoperabel_faq } from "@/config/routes";
 import { QuizOutlined as QuizIcon } from "@digitalservicebund/icons";
-import { Link } from "react-router";
 import { LinkButton } from "~/components/Button";
 import Container from "~/components/Container";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
@@ -7,15 +7,11 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image";
 import InfoBox from "~/components/InfoBox.tsx";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { SearchParamTabs } from "~/components/Tabs/Tabs";
 import { interoperability } from "~/resources/content/interoperabel";
 import { contact } from "~/resources/content/shared/contact";
-import {
-  ROUTE_INTEROPERABILITY,
-  ROUTE_INTEROPERABILITY_FAQ,
-} from "~/resources/staticRoutes";
+import { Link } from "~/utils/routerCompat";
 import { EuRechtTab } from "./interoperabel/EuRechtTab";
 import { HintergrundTab } from "./interoperabel/HintergrundTab";
 import { InteroperableLoesungenTab } from "./interoperabel/InteroperableLoesungenTab";
@@ -28,7 +24,6 @@ const { overviewTabId, backgroundTabId, euLawTabId, interoperableSolutionsId } =
 export default function Interoperability() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_INTEROPERABILITY.title} />
       <main>
         <Hero
           title={interoperability.headline}
@@ -140,7 +135,7 @@ export default function Interoperability() {
               .
             </p>
             <div className="mt-24">
-              <LinkButton to={ROUTE_INTEROPERABILITY_FAQ.url} look="tertiary">
+              <LinkButton to={interoperabel_faq.path} look="tertiary">
                 Zu Fragen und Antworten{" "}
               </LinkButton>
             </div>

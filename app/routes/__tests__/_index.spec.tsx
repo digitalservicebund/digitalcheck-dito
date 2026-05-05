@@ -1,8 +1,8 @@
 import { render, screen, within } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
 import { describe, expect, it, vi } from "vitest";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import Index from "~/routes/_index";
+import { MemoryRouter } from "~/utils/routerCompat";
 
 vi.mock("~/contexts/FeatureFlagContext", () => {
   return {

@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { BasePrinzip } from "~/utils/strapiData.server";
+import type { BasePrinzip } from "~/utils/strapiData.types";
 
 type PrincipleHighlightContextType = {
   principlesToShow: BasePrinzip[];

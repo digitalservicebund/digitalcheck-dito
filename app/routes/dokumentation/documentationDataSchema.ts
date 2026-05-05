@@ -1,9 +1,9 @@
+import {
+  dokumentation_beteiligungsformate,
+  dokumentation_regelungsvorhabenTitel,
+} from "@/config/routes";
 import { z } from "zod";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import {
-  ROUTE_DOCUMENTATION_PARTICIPATION,
-  ROUTE_DOCUMENTATION_TITLE,
-} from "~/resources/staticRoutes";
 import type { VersionedData } from "~/utils/localStorageVersioned";
 
 export const DATA_SCHEMA_VERSION_V1 = "1";
@@ -210,8 +210,9 @@ export const getDocumentationSchemaFormUrl = (
   url: string,
   simplified = false,
 ) => {
-  if (url === ROUTE_DOCUMENTATION_TITLE.url) return policyTitleSchema;
-  else if (url === ROUTE_DOCUMENTATION_PARTICIPATION.url)
+  if (url === dokumentation_regelungsvorhabenTitel.path)
+    return policyTitleSchema;
+  else if (url === dokumentation_beteiligungsformate.path)
     return participationSchema;
   else return simplified ? principleSchemaV2 : principleSchemaV1;
 };

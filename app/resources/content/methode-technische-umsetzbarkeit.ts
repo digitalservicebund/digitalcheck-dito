@@ -1,13 +1,15 @@
-import { DrawOutlined } from "@digitalservicebund/icons";
-import { LightbulbOutlined } from "@digitalservicebund/icons";
-import { StickyNote2Outlined } from "@digitalservicebund/icons";
-import { SupportOutlined } from "@digitalservicebund/icons";
 import {
-  ROUTE_METHODS_RESPONSIBLE_ACTORS,
-  ROUTE_SUPPORT,
-} from "~/resources/staticRoutes";
+  methoden_zustaendigeAkteurinnenAuflisten,
+  unterstuetzung,
+} from "@/config/routes";
+import {
+  DrawOutlined,
+  LightbulbOutlined,
+  StickyNote2Outlined,
+  SupportOutlined,
+} from "@digitalservicebund/icons";
 import { assetPath } from "~/utils/assetPath";
-import { ContentLink } from "~/utils/contentTypes.ts";
+import { type ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
 
@@ -27,7 +29,7 @@ export const methodsTechnicalFeasibility = {
     icon: DrawOutlined,
     title: "Verstehen Sie die Auswirkungen auf IT-Systeme",
     text: dedent`
-        Vergleichen Sie gemeinsam mit den [zuständigen Akteurinnen und Akteuren](${ROUTE_METHODS_RESPONSIBLE_ACTORS.url}) das geplante Vorhaben mit den Möglichkeiten der bestehenden IT-Systeme. Überprüfen Sie die Informationen mithilfe neutraler IT-Expertinnen und -Experten. 
+        Vergleichen Sie gemeinsam mit den [zuständigen Akteurinnen und Akteuren](${methoden_zustaendigeAkteurinnenAuflisten.path}) das geplante Vorhaben mit den Möglichkeiten der bestehenden IT-Systeme. Überprüfen Sie die Informationen mithilfe neutraler IT-Expertinnen und -Experten. 
         
         So erfahren Sie
         - welche IT-Systeme für Ihr Vorhaben verwendet werden können
@@ -42,7 +44,7 @@ export const methodsTechnicalFeasibility = {
       {
         text: "Termin buchen",
         look: "tertiary" as const,
-        to: ROUTE_SUPPORT.url,
+        to: unterstuetzung.path,
       },
     ] satisfies ContentLink[],
   },
@@ -97,7 +99,7 @@ export const methodsTechnicalFeasibility = {
       {
         text: "Unterstützungsangebote nutzen",
         look: "tertiary" as const,
-        to: ROUTE_SUPPORT.url,
+        to: unterstuetzung.path,
       },
     ] satisfies ContentLink[],
   },

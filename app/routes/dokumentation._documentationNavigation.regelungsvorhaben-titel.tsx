@@ -1,15 +1,12 @@
-import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
 import Input from "~/components/Input";
-import MetaTitle from "~/components/Meta";
+import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import { ROUTE_DOCUMENTATION_TITLE } from "~/resources/staticRoutes";
 import {
   defaultTitleValues,
   policyTitleSchema,
 } from "~/routes/dokumentation/documentationDataSchema";
-import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
@@ -17,8 +14,7 @@ import { useDocumentationDataService } from "./dokumentation/DocumentationDataPr
 const { info } = digitalDocumentation;
 
 export default function DocumentationTitle() {
-  const { currentUrl, nextUrl, previousUrl } =
-    useOutletContext<NavigationContext>();
+  const { currentUrl, nextUrl, previousUrl } = useNavigationContext();
   const { documentationData, setPolicyTitle } = useDocumentationDataService();
 
   const form = useSyncedForm({
@@ -32,7 +28,6 @@ export default function DocumentationTitle() {
 
   return (
     <>
-      <MetaTitle prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_TITLE.title}`} />
       <div className="space-y-40">
         <Heading
           text={info.headline}

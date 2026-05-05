@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { type ReactNode } from "react";
 import FeatureFlagContext, {
   type FeatureFlags,
 } from "~/contexts/FeatureFlagContext";

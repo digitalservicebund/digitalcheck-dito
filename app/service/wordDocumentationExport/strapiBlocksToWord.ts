@@ -2,7 +2,7 @@ import {
   convertInchesToTwip,
   ExternalHyperlink,
   InternalHyperlink,
-  IParagraphOptions,
+  type IParagraphOptions,
   Paragraph,
   TextRun,
 } from "docx";

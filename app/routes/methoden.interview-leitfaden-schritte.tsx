@@ -2,7 +2,6 @@ import {
   DriveFileRenameOutline,
   FeedOutlined,
 } from "@digitalservicebund/icons";
-import { data } from "react-router";
 import AccordionItem from "~/components/AccordionItem";
 import Badge from "~/components/Badge";
 import { DownloadLinkButton } from "~/components/Button";
@@ -10,13 +9,11 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import ImageBox from "~/components/ImageBox";
 import InfoBox from "~/components/InfoBox";
-import MetaTitle from "~/components/Meta";
 import NewTabLink from "~/components/NewTabLink";
 import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer";
-import { ROUTE_METHODS_INTERVIEW_METHODS_STEPS } from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import getFeatureFlag from "~/utils/featureFlags.server";
@@ -24,7 +21,7 @@ import getFeatureFlag from "~/utils/featureFlags.server";
 export function loader() {
   if (!getFeatureFlag("showInterviewLeitfaden")) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw data("Not found", { status: 404 });
+    throw new Response("Not found", { status: 404 });
   }
 }
 
@@ -33,7 +30,6 @@ export default function InterviewMethods() {
 
   return (
     <>
-      <MetaTitle prefix={ROUTE_METHODS_INTERVIEW_METHODS_STEPS.title} />
       <main className="space-y-80">
         <Hero
           className="mb-0 lg:mb-80"

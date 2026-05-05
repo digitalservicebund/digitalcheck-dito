@@ -2,31 +2,36 @@
 import "./utils/mockLocalStorageVersioned";
 import "./utils/mockRouter";
 // End of mocks
+import {
+  dokumentation_beteiligungsformate,
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+  type Route,
+} from "@/config/routes";
 import "@testing-library/jest-dom";
 import { act, render, screen, waitFor } from "@testing-library/react";
-import userEvent, { UserEvent } from "@testing-library/user-event";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  useOutletContext,
-  useParams,
-} from "react-router";
+import userEvent, { type UserEvent } from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { DocumentationNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import type { digitalDocumentation } from "~/resources/content/dokumentation";
-import { Route, ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import {
-  PrinzipAspekt,
-  PrinzipWithAspekteAndExample,
-} from "~/utils/strapiData.server";
-import { NavigationContext } from "../dokumentation._documentationNavigation";
+  createMemoryRouter,
+  RouterProvider,
+  useParams,
+} from "~/utils/routerCompat";
+import {
+  type PrinzipAspekt,
+  type PrinzipWithAspekteAndExample,
+} from "~/utils/strapiData.types";
+import { type NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationPrincipleErlaeuterung from "../dokumentation._documentationNavigation.$principleId_.erlaeuterung";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import {
   DATA_SCHEMA_VERSION_V2,
-  DocumentationData,
-  V2,
+  type DocumentationData,
+  type V2,
 } from "../dokumentation/documentationDataSchema";
 
 vi.mock("~/contexts/FeatureFlagContext", () => ({
@@ -34,11 +39,19 @@ vi.mock("~/contexts/FeatureFlagContext", () => ({
 }));
 
 const routes: (Route[] | Route)[] = [
-  ...ROUTES_DOCUMENTATION_INTRO,
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+  dokumentation_beteiligungsformate,
   [
     {
       title: "Prinzip: Digitale Angebote",
-      url: "/dokumentation/prinzip-1-digitale-angebote",
+      path: "/dokumentation/prinzip-1-digitale-angebote",
+      key: "prinzipA",
+      parent: null,
+      sitemap: false,
+      isStagingOnly: false,
+      navOrder: null,
+      navLabel: null,
     },
   ],
 ];
@@ -98,22 +111,28 @@ const context: NavigationContext = {
   prinzips,
 };
 
-const mockedUseOutletContext = vi.mocked(useOutletContext);
 const mockedUseParams = vi.mocked(useParams);
 
 const renderWithRouter = () => {
-  const router = createBrowserRouter([
+  const router = createMemoryRouter(
+    [
+      {
+        path: "/dokumentation/prinzip-1-digitale-angebote/erlaeuterung",
+        element: (
+          <HelpPanelProvider>
+            <DocumentationDataProvider>
+              <DocumentationNavigationContext.Provider value={context}>
+                <DocumentationPrincipleErlaeuterung />
+              </DocumentationNavigationContext.Provider>
+            </DocumentationDataProvider>
+          </HelpPanelProvider>
+        ),
+      },
+    ],
     {
-      path: "/",
-      element: (
-        <HelpPanelProvider>
-          <DocumentationDataProvider>
-            <DocumentationPrincipleErlaeuterung />
-          </DocumentationDataProvider>
-        </HelpPanelProvider>
-      ),
+      initialEntries: ["/dokumentation/prinzip-1-digitale-angebote/erlaeuterung"],
     },
-  ]);
+  );
 
   return render(<RouterProvider router={router} />);
 };
@@ -138,7 +157,6 @@ const mockStoredData = (
 
 describe("DocumentationPrincipleErlaeuterung", () => {
   beforeEach(() => {
-    mockedUseOutletContext.mockReturnValue(context);
     mockedUseParams.mockReturnValue({
       principleId: "prinzip-1-digitale-angebote",
     });

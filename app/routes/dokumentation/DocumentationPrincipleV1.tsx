@@ -1,7 +1,15 @@
+import {
+  beispiele_prinzipien,
+  methoden_fuenfPrinzipien,
+} from "@/config/routes";
 import { AddCircleOutlineOutlined } from "@digitalservicebund/icons";
-import { FormScope, useField, useFieldArray } from "@rvf/react";
-import { ChangeEventHandler, useCallback, useEffect, useState } from "react";
-import { Link } from "react-router";
+import { type FormScope, useField, useFieldArray } from "@rvf/react";
+import {
+  type ChangeEventHandler,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { PrincipleExplanation } from "~/components/Absatz.tsx";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
@@ -12,7 +20,6 @@ import Dialog from "~/components/Dialog";
 import Heading from "~/components/Heading";
 import InlineNotice from "~/components/InlineNotice";
 import Input from "~/components/Input";
-import MetaTitle from "~/components/Meta";
 import PrincipleHighlightModifier from "~/components/PrincipleHighlightModifier.tsx";
 import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
@@ -22,23 +29,20 @@ import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider.tsx";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
-  ROUTE_EXAMPLES_PRINCIPLES,
-  ROUTE_METHODS_PRINCIPLES,
-} from "~/resources/staticRoutes";
-import {
-  IrrelevantAnswerReasoning,
-  NegativeAnswerReasoning,
-  PrincipleReasoningV1,
-  principleSchemaV1,
-  V1,
+  type IrrelevantAnswerReasoning,
+  type NegativeAnswerReasoning,
   type Principle,
+  type PrincipleReasoningV1,
+  principleSchemaV1,
+  type V1,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { features } from "~/utils/featureFlags";
-import {
+import { Link } from "~/utils/routerCompat";
+import type {
   PrinzipAspekt,
   PrinzipWithAspekte,
   PrinzipWithAspekteAndExample,
-} from "~/utils/strapiData.server";
+} from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
 import DocumentationActions from "./DocumentationActions";
 import { useSyncedForm } from "./documentationDataHook";
@@ -256,7 +260,7 @@ function PositiveAnswerFormElements({
             : principlePages.explanationFields.ownExplanationDescription;
 
           const moreUrl = aspekt
-            ? `${ROUTE_METHODS_PRINCIPLES.url}#${slugify(aspekt.Titel)}`
+            ? `${methoden_fuenfPrinzipien.path}#${slugify(aspekt.Titel)}`
             : undefined;
 
           return (
@@ -417,7 +421,7 @@ export function PrincipleWithExample({
             </PrincipleHighlightProvider>
             <Link
               className="text-link block font-bold"
-              to={`${ROUTE_EXAMPLES_PRINCIPLES.url}/${prinzip.URLBezeichnung}`}
+              to={`${beispiele_prinzipien.path}/${prinzip.URLBezeichnung}`}
             >
               Mehr Beispiele zu dem Prinzip
             </Link>
@@ -435,7 +439,7 @@ export default function DocumentationPrincipleV1({
   prinzip,
 }: Readonly<{
   currentUrl: string;
-  nextUrl: string;
+  nextUrl: string | null;
   previousUrl: string;
   prinzip: PrinzipWithAspekteAndExample;
 }>) {
@@ -508,7 +512,6 @@ export default function DocumentationPrincipleV1({
 
   return (
     <>
-      <MetaTitle prefix={`Dokumentation: ${prinzip.Name}`} />
       <div className="space-y-40">
         <PrincipleWithExample prinzip={prinzip} />
 

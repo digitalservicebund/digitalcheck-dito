@@ -1,35 +1,30 @@
+import { methoden_fuenfPrinzipien } from "@/config/routes";
 import {
+  ArrowCircleRightOutlined,
   ArrowDownwardOutlined,
   DriveFileRenameOutline,
   LayersOutlined,
 } from "@digitalservicebund/icons";
 import React, { useRef } from "react";
-import Badge, { BadgeProps } from "~/components/Badge.tsx";
+import Badge, { type BadgeProps } from "~/components/Badge.tsx";
 import Button from "~/components/Button.tsx";
 import Heading from "~/components/Heading";
 import ImageBox from "~/components/ImageBox.tsx";
 import InfoBox from "~/components/InfoBox.tsx";
 import NumberedList from "~/components/NumberedList.tsx";
 import RichText from "~/components/RichText.tsx";
-
-import { ArrowCircleRightOutlined } from "@digitalservicebund/icons";
-import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import BackToTopButton from "~/components/BackToTopButton.tsx";
 import Container from "~/components/Container.tsx";
-import MetaTitle from "~/components/Meta";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
 import { STRAPI_MEDIA_URL } from "~/resources/constants.ts";
 import { contact } from "~/resources/content/shared/contact";
-import {
-  ROUTE_METHODS_PRINCIPLES,
-  ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX,
-  ROUTE_METHODS_VISUALIZE_FLOWCHARTS,
-} from "~/resources/staticRoutes.ts";
+import { ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX } from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils.ts";
+import { Link } from "~/utils/routerCompat";
 
 const diagramElements = [
   {
@@ -140,7 +135,6 @@ export default function Visualization() {
   // noinspection HtmlUnknownAnchorTarget
   return (
     <>
-      <MetaTitle prefix={ROUTE_METHODS_VISUALIZE_FLOWCHARTS.title} />
       <main>
         <div className="breakout-grid-toc bg-blue-100 pt-40 pb-48">
           <div>
@@ -726,7 +720,7 @@ export default function Visualization() {
                 {
                   text: "Zu den Prinzipien",
                   look: "tertiary",
-                  to: ROUTE_METHODS_PRINCIPLES.url,
+                  to: methoden_fuenfPrinzipien.path,
                 },
               ]}
             />

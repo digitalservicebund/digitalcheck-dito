@@ -8,15 +8,12 @@ import { Feature, FeatureList } from "~/components/FeatureList.tsx";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList.tsx";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { fundamentalsNKR } from "~/resources/content/grundlage-normenkontrollrat";
-import { ROUTE_FUNDAMENTALS_NKR } from "~/resources/staticRoutes";
 
 export default function FundamentalsMethods() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_FUNDAMENTALS_NKR.title} />
       <main>
         <Hero
           title={fundamentalsNKR.title}

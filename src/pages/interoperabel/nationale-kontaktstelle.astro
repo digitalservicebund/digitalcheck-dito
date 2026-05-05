@@ -1,0 +1,12 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import NationaleKontaktstellePage from "~/routes/interoperabel.nationale-kontaktstelle";
+
+export const frontmatter = {
+  title: "Nationale Kontaktstelle",
+};
+---
+
+<Layout title={frontmatter.title}>
+  <NationaleKontaktstellePage client:load />
+</Layout>

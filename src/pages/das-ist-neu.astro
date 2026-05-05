@@ -1,0 +1,54 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import Timeline, { TimelineItemContent } from "~/components/Timeline";
+import { news } from "~/resources/content/das-ist-neu";
+import { contact } from "~/resources/content/shared/contact";
+import { mailto } from "@/utils/mailtoHelper";
+
+export const frontmatter = {
+  title: "Das ist neu",
+};
+
+const TimelineItem = Timeline.Item;
+
+const historyItems = news.items.map((item, index) => ({
+  ...item,
+  hasBullet: true,
+  key: index,
+  badge: {
+    children: item.badge.text,
+  },
+}));
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>Das ist neu</h1>
+      <p slot="subtitle">
+        Das Digitalcheck-Angebot wird kontinuierlich weiterentwickelt.
+        Bedürfnisse und Rückmeldungen von Nutzenden werden kurzfristig
+        eingearbeitet. Auch geänderte und neue rechtliche Anforderungen führen
+        zu Anpassungen. Unten finden Sie eine chronologische Übersicht der
+        Ergänzungen und Änderungen auf der Website.
+      </p>
+      <p slot="subtitle">
+        Haben Sie Anregungen oder Wünsche? Kontaktieren Sie uns jederzeit gerne
+        unter <a href={contact.phone}>{contact.phoneDisplay}</a> oder <a
+          href={mailto(contact.email, "Supportanfrage: digitalcheck.bund.de")}
+          >{contact.email}
+        </a>.
+      </p>
+    </Hero>
+    <Timeline className="my-80">
+      {
+        historyItems.map(({ key, ...item }) => (
+          <TimelineItem bullet key={key}>
+            <TimelineItemContent {...item} />
+          </TimelineItem>
+        ))
+      }
+    </Timeline>
+  </main>
+</Layout>

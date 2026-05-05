@@ -1,16 +1,16 @@
+import {
+  interoperabel,
+  methoden_fuenfPrinzipien,
+  vorpruefung,
+} from "@/config/routes";
 import { ContactPhoneOutlined } from "@digitalservicebund/icons";
-import { Link } from "react-router";
 import { LinkButton } from "~/components/Button";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox.tsx";
 import NewTabLink from "~/components/NewTabLink";
 import Timeline from "~/components/Timeline";
 import { contact } from "~/resources/content/shared/contact";
-import {
-  ROUTE_INTEROPERABILITY,
-  ROUTE_METHODS_PRINCIPLES,
-  ROUTE_PRECHECK,
-} from "~/resources/staticRoutes";
+import { Link } from "~/utils/routerCompat";
 import { getTabAnchorLink } from "~/utils/tabs";
 import { tabIds } from "./tabIds";
 
@@ -19,7 +19,7 @@ export const anchors = {
 };
 export const directLinks = {
   assessment:
-    ROUTE_INTEROPERABILITY.url +
+    interoperabel.path +
     getTabAnchorLink(tabIds.overviewTabId, anchors.assessment),
 };
 
@@ -133,7 +133,7 @@ export const UeberblickTab = () => (
           </Heading>
           <p>
             Finden Sie in der{" "}
-            <Link className="text-link" to={ROUTE_PRECHECK.url}>
+            <Link className="text-link" to={vorpruefung.path}>
               Vorprüfung
             </Link>{" "}
             in 6 Fragen heraus, ob Sie in Ihrem Regelungsvorhaben Aspekte der
@@ -155,7 +155,7 @@ export const UeberblickTab = () => (
           </Heading>
           <p>
             Erarbeiten Sie Ihre Regelung anhand der{" "}
-            <Link className="text-link" to={ROUTE_METHODS_PRINCIPLES.url}>
+            <Link className="text-link" to={methoden_fuenfPrinzipien.path}>
               Fünf Prinzipien für digitaltaugliche Gesetzgebung
             </Link>
             . Diese enthalten die Anforderungen an die Interoperabilität. So
@@ -201,7 +201,7 @@ export const UeberblickTab = () => (
       </Timeline.Item>
     </Timeline>
 
-    <LinkButton to={ROUTE_PRECHECK.url}>Anforderungen prüfen</LinkButton>
+    <LinkButton to={vorpruefung.path}>Anforderungen prüfen</LinkButton>
 
     <InfoBox
       look="highlight"

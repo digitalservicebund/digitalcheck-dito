@@ -1,0 +1,21 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+const hasSubtitle = Astro.slots.has("subtitle");
+---
+
+<div class:list={["breakout bg-blue-100", className]}>
+  <div class="ds-stack ds-stack-16 py-40 pb-48">
+    <slot />
+    {
+      hasSubtitle && (
+        <div class="[&_a]:text-link space-y-8 ds-subhead mt-16">
+          <slot name="subtitle" />
+        </div>
+      )
+    }
+  </div>
+</div>

@@ -6,24 +6,28 @@ import "./utils/mockRouter";
 import "@testing-library/jest-dom";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { DocumentationNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import DocumentationParticipation from "~/routes/dokumentation._documentationNavigation.beteiligungsformate";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
+import { MemoryRouter } from "~/utils/routerCompat";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import {
   DATA_SCHEMA_VERSION_V1,
-  DocumentationData,
-  V1,
+  type DocumentationData,
+  type V1,
 } from "../dokumentation/documentationDataSchema";
+import { mockNavigationContext } from "./utils/mockRouter";
 
 const renderWithRouter = () => {
   return render(
     <MemoryRouter>
       <HelpPanelProvider>
         <DocumentationDataProvider>
-          <DocumentationParticipation />
+          <DocumentationNavigationContext.Provider value={mockNavigationContext}>
+            <DocumentationParticipation />
+          </DocumentationNavigationContext.Provider>
         </DocumentationDataProvider>
       </HelpPanelProvider>
     </MemoryRouter>,

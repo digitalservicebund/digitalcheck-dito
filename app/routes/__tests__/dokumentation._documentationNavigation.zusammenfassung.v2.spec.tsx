@@ -3,17 +3,16 @@ import "./utils/mockLocalStorageVersioned";
 import "./utils/mockRouter";
 // End of mocks
 
+import {
+  dokumentation_beteiligungsformate,
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+  type Route,
+} from "@/config/routes";
 import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
-import { MemoryRouter, useOutletContext } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import {
-  Route,
-  ROUTE_DOCUMENTATION_NOTES,
-  ROUTE_DOCUMENTATION_PARTICIPATION,
-  ROUTE_DOCUMENTATION_TITLE,
-  ROUTES_DOCUMENTATION_INTRO,
-} from "~/resources/staticRoutes";
+import { DocumentationNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
 import type {
@@ -24,27 +23,34 @@ import type {
   V2,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
-import { AbsatzWithParagraph } from "~/utils/strapiData.server.ts";
+import { MemoryRouter } from "~/utils/routerCompat";
+import { type AbsatzWithParagraph } from "~/utils/strapiData.types.ts";
 import DocumentationSummaryV2 from "../dokumentation/DocumentationSummaryV2";
 
 vi.mock("~/contexts/FeatureFlagContext", () => ({
   useFeatureFlag: vi.fn().mockReturnValue(true),
 }));
 
-const MOCK_ROUTE_PRINCIPLE = {
+const MOCK_ROUTE_PRINCIPLE: Route = {
   title: "Digitale Angebote",
-  url: "/dokumentation/prinzip-digitale-angebote",
+  path: "/dokumentation/prinzip-digitale-angebote",
+  key: "prinzipA",
+  parent: null,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
 };
 const routes: (Route[] | Route)[] = [
-  ...ROUTES_DOCUMENTATION_INTRO,
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+  dokumentation_beteiligungsformate,
   [MOCK_ROUTE_PRINCIPLE],
 ];
 
 const documentationFormRoutes = routes
   .flat()
-  .filter((route) => route.url !== ROUTE_DOCUMENTATION_NOTES.url);
-
-const mockedUseOutletContext = vi.mocked(useOutletContext);
+  .filter((route) => route.path !== dokumentation_hinweise.path);
 
 function createDocumentationDataMock({
   policyTitle,
@@ -63,12 +69,51 @@ function createDocumentationDataMock({
   });
 }
 
+const mockNavigationContext: NavigationContext = {
+  currentUrl: "/current-url",
+  nextUrl: "/next-url",
+  previousUrl: "/previous-url",
+  routes: routes,
+  prinzips: [
+    {
+      Name: "Digitale Angebote für alle nutzbar gestalten",
+      Kurzbezeichnung: "Digitale Angebote",
+      URLBezeichnung: "prinzip-digitale-angebote",
+      documentId: "1",
+      Nummer: 1,
+      order: 1,
+      Beschreibung: [],
+      Aspekte: [
+        {
+          Titel: "Aspekt 1",
+          Kurzbezeichnung: "A1",
+          Beschreibung: "",
+          Text: [],
+          Nummer: "",
+          Anwendung: [],
+        },
+        {
+          Titel: "Aspekt 2",
+          Kurzbezeichnung: "A2",
+          Beschreibung: "",
+          Text: [],
+          Nummer: "",
+          Anwendung: [],
+        },
+      ],
+      Beispiel: {} as AbsatzWithParagraph,
+    },
+  ],
+};
+
 describe("DocumentationSummaryV2", () => {
   const renderWithRouter = () => {
     return render(
       <MemoryRouter>
         <DocumentationDataProvider>
-          <DocumentationSummaryV2 />
+          <DocumentationNavigationContext.Provider value={mockNavigationContext}>
+            <DocumentationSummaryV2 />
+          </DocumentationNavigationContext.Provider>
         </DocumentationDataProvider>
       </MemoryRouter>,
     );
@@ -85,44 +130,6 @@ describe("DocumentationSummaryV2", () => {
 
   beforeEach(() => {
     vi.mocked(readDataFromLocalStorage).mockReturnValue(mockDocumentationData);
-
-    const context: NavigationContext = {
-      currentUrl: "/current-url",
-      nextUrl: "/next-url",
-      previousUrl: "/previous-url",
-      routes: routes,
-      prinzips: [
-        {
-          Name: "Digitale Angebote für alle nutzbar gestalten",
-          Kurzbezeichnung: "Digitale Angebote",
-          URLBezeichnung: "prinzip-digitale-angebote",
-          documentId: "1",
-          Nummer: 1,
-          order: 1,
-          Beschreibung: [],
-          Aspekte: [
-            {
-              Titel: "Aspekt 1",
-              Kurzbezeichnung: "A1",
-              Beschreibung: "",
-              Text: [],
-              Nummer: "",
-              Anwendung: [],
-            },
-            {
-              Titel: "Aspekt 2",
-              Kurzbezeichnung: "A2",
-              Beschreibung: "",
-              Text: [],
-              Nummer: "",
-              Anwendung: [],
-            },
-          ],
-          Beispiel: {} as AbsatzWithParagraph,
-        },
-      ],
-    };
-    mockedUseOutletContext.mockReturnValue(context);
   });
 
   afterEach(() => {
@@ -154,7 +161,7 @@ describe("DocumentationSummaryV2", () => {
     renderWithRouter();
 
     documentationFormRoutes.forEach((route) => {
-      expect(screen.getByTestId(route.url)).toBeInTheDocument();
+      expect(screen.getByTestId(route.path)).toBeInTheDocument();
     });
   });
 
@@ -162,7 +169,7 @@ describe("DocumentationSummaryV2", () => {
     renderWithRouter();
 
     documentationFormRoutes.forEach((route) => {
-      const stepContainer = screen.getByTestId(route.url);
+      const stepContainer = screen.getByTestId(route.path);
 
       expect(
         within(stepContainer).getByRole("heading", {
@@ -176,7 +183,7 @@ describe("DocumentationSummaryV2", () => {
     renderWithRouter();
 
     documentationFormRoutes.forEach((route) => {
-      const stepContainer = screen.getByTestId(route.url);
+      const stepContainer = screen.getByTestId(route.path);
       const isPrincipleRoute = route === MOCK_ROUTE_PRINCIPLE;
 
       if (isPrincipleRoute) {
@@ -394,13 +401,15 @@ describe("DocumentationSummaryV2", () => {
   it("shows edit buttons for steps that have data", () => {
     renderWithRouter();
 
-    const titleContainer = screen.getByTestId(ROUTE_DOCUMENTATION_TITLE.url);
+    const titleContainer = screen.getByTestId(
+      dokumentation_regelungsvorhabenTitel.path,
+    );
     const titleEditLink = within(titleContainer).getByRole("link", {
       name: /bearbeiten/i,
     });
     expect(titleEditLink).toHaveAttribute(
       "href",
-      ROUTE_DOCUMENTATION_TITLE.url,
+      dokumentation_regelungsvorhabenTitel.path,
     );
     expect(titleEditLink).toHaveTextContent("Bearbeiten");
   });
@@ -410,7 +419,7 @@ describe("DocumentationSummaryV2", () => {
     renderWithRouter();
 
     documentationFormRoutes.forEach((route) => {
-      const stepContainer = screen.getByTestId(route.url);
+      const stepContainer = screen.getByTestId(route.path);
 
       expect(
         within(stepContainer).getByText(
@@ -445,17 +454,17 @@ describe("DocumentationSummaryV2", () => {
   });
 
   test.each([
-    [ROUTE_DOCUMENTATION_TITLE.url, { policyTitle: undefined }],
-    [ROUTE_DOCUMENTATION_TITLE.url, { policyTitle: { title: "" } }],
-    [ROUTE_DOCUMENTATION_PARTICIPATION.url, { participation: undefined }],
+    [dokumentation_regelungsvorhabenTitel.path, { policyTitle: undefined }],
+    [dokumentation_regelungsvorhabenTitel.path, { policyTitle: { title: "" } }],
+    [dokumentation_beteiligungsformate.path, { participation: undefined }],
     [
-      ROUTE_DOCUMENTATION_PARTICIPATION.url,
+      dokumentation_beteiligungsformate.path,
       {
         participation: { formats: "", results: "" },
       },
     ],
-    [MOCK_ROUTE_PRINCIPLE.url, { principles: undefined }],
-    [MOCK_ROUTE_PRINCIPLE.url, { principles: [] as Principle<V2>[] }],
+    [MOCK_ROUTE_PRINCIPLE.path, { principles: undefined }],
+    [MOCK_ROUTE_PRINCIPLE.path, { principles: [] as Principle<V2>[] }],
   ])(
     "shows warning for step %s when data is undefined or empty",
     (stepId, mockData) => {
@@ -473,13 +482,13 @@ describe("DocumentationSummaryV2", () => {
 
   test.each([
     [
-      ROUTE_DOCUMENTATION_PARTICIPATION.url,
+      dokumentation_beteiligungsformate.path,
       {
         participation: { formats: "some formats", results: "" },
       },
     ],
     [
-      ROUTE_DOCUMENTATION_PARTICIPATION.url,
+      dokumentation_beteiligungsformate.path,
       {
         participation: { formats: "", results: "some results" },
       },

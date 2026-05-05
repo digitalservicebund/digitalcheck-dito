@@ -1,13 +1,11 @@
 import { useState } from "react";
-import { useNavigate, useOutletContext } from "react-router";
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Heading from "~/components/Heading";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText.tsx";
+import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { general } from "~/resources/content/shared/general.ts";
-import { ROUTE_DOCUMENTATION_PARTICIPATION } from "~/resources/staticRoutes";
-import { NavigationContext } from "./dokumentation._documentationNavigation";
+import { useNavigate } from "~/utils/routerCompat";
 
 const notes = `
 ## Datenspeicherung
@@ -25,16 +23,13 @@ Zur externen Weiterbearbeitung, internen Abstimmung oder für Änderungen könne
 `;
 
 export default function DocumentationParticipation() {
-  const { nextUrl, previousUrl } = useOutletContext<NavigationContext>();
+  const { nextUrl, previousUrl } = useNavigationContext();
   const navigate = useNavigate();
 
   const [checked, setChecked] = useState<boolean>(false);
 
   return (
     <>
-      <MetaTitle
-        prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_PARTICIPATION.title}`}
-      />
       <Heading
         text="Wichtige Hinweise"
         tagName="h1"
@@ -62,7 +57,7 @@ export default function DocumentationParticipation() {
           look={"primary"}
           disabled={!checked}
           type={"button"}
-          onClick={() => navigate(nextUrl)}
+          onClick={() => nextUrl && navigate(nextUrl)}
         >
           Verstanden und weiter
         </Button>

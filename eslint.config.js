@@ -1,5 +1,6 @@
 import { includeIgnoreFile } from "@eslint/compat";
 import eslint from "@eslint/js";
+import astroPlugin from "eslint-plugin-astro";
 import importPlugin from "eslint-plugin-import";
 import jsxA11y from "eslint-plugin-jsx-a11y";
 import playwright from "eslint-plugin-playwright";
@@ -34,9 +35,9 @@ export default defineConfig(
       },
     },
   },
-  // React & Typescript
+  // React & Typescript (app/ and src/ non-astro files)
   {
-    files: ["app/**/*.{ts,tsx}", "tests/**/*.{ts,tsx}"],
+    files: ["app/**/*.{ts,tsx}", "src/**/*.{ts,tsx}", "tests/**/*.{ts,tsx}"],
     extends: [
       eslint.configs.recommended,
       tseslint.configs.recommendedTypeChecked,
@@ -136,6 +137,11 @@ export default defineConfig(
       ],
       quotes: ["error", "double", { avoidEscape: true }],
     },
+  },
+  // Astro files
+  {
+    files: ["src/**/*.astro"],
+    extends: [...astroPlugin.configs.recommended],
   },
   // Additional Rules for test files
   {

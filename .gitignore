@@ -1,4 +1,8 @@
-# React Router
+# Astro
+.astro
+dist
+
+# React Router (kept for reference during migration)
 .react-router
 .cache
 build

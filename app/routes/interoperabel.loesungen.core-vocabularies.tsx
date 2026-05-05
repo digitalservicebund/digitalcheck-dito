@@ -1,3 +1,4 @@
+import { interoperabel_loesungen_coreVocabularies } from "@/config/routes";
 import {
   CheckOutlined,
   InfoOutlined,
@@ -10,13 +11,11 @@ import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
 import { InteroperableSolutionBanner } from "~/components/InteroperableSolutionBanner.tsx";
-import MetaTitle from "~/components/Meta";
 import NewTabLink from "~/components/NewTabLink.tsx";
 import RichText from "~/components/RichText";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import Timeline from "~/components/Timeline";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
-import { ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES } from "~/resources/staticRoutes.ts";
 import { directLinks } from "~/routes/interoperabel/UeberblickTab.tsx";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { slugify } from "~/utils/utilFunctions.ts";
@@ -52,12 +51,9 @@ function ChapterBadge({ children }: Readonly<{ children: React.ReactNode }>) {
 export default function InteroperableSolutionsDcatAp() {
   return (
     <>
-      <MetaTitle
-        prefix={ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES.title}
-      />
       <main>
         <div className="breakout-grid-toc space-y-16 bg-blue-100 pt-40 pb-48">
-          <h1>{ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES.title}</h1>
+          <h1>{interoperabel_loesungen_coreVocabularies.title}</h1>
           <p className="ds-subhead">
             Die grenzüberschreitende Datensprache für das Once-Only-Prinzip
           </p>

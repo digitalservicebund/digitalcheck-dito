@@ -2,15 +2,12 @@ import Container from "~/components/Container";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList.tsx";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { fundamentalsDigitalReadiness } from "~/resources/content/grundlage-digitaltauglichkeit";
-import { ROUTE_FUNDAMENTALS_DIGITAL_READINESS } from "~/resources/staticRoutes";
 
 export default function FundamentalsMethods() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_FUNDAMENTALS_DIGITAL_READINESS.title} />
       <main>
         <Hero
           title={fundamentalsDigitalReadiness.title}

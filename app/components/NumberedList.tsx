@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { type ReactElement } from "react";
 import { twJoin } from "tailwind-merge";
 import twMerge from "~/utils/tailwindMerge.ts";
 

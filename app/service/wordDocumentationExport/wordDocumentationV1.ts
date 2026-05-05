@@ -3,9 +3,9 @@ import {
   convertInchesToTwip,
   ExternalHyperlink,
   HeadingLevel,
-  IParagraphOptions,
-  IPatch,
-  IRunOptions,
+  type IParagraphOptions,
+  type IPatch,
+  type IRunOptions,
   Paragraph,
   patchDocument,
   PatchType,
@@ -19,13 +19,13 @@ import { contact } from "~/resources/content/shared/contact";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider";
 import {
   type DocumentationData,
-  PrincipleReasoningV1,
-  V1,
+  type PrincipleReasoningV1,
+  type V1,
 } from "~/routes/dokumentation/documentationDataSchema";
-import {
+import type {
   PrinzipAspekt,
-  type PrinzipWithAspekte,
-} from "~/utils/strapiData.server";
+  PrinzipWithAspekte,
+} from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
 import strapiBlocksToDocx from "./strapiBlocksToWord";
 const { saveAs } = fileSaver;

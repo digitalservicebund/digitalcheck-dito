@@ -1,11 +1,11 @@
 import { useContext, useId } from "react";
-import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import PrincipleHighlightContext from "~/contexts/PrincipleHighlightContext";
 import { useIsMobileSize } from "~/hooks/deviceHook";
 import { PRINCIPLE_COLORS } from "~/resources/constants";
-import { explanationID, Node } from "~/utils/paragraphUtils";
-import { BasePrinzip } from "~/utils/strapiData.server";
+import { explanationID, type Node } from "~/utils/paragraphUtils";
+import { Link } from "~/utils/routerCompat";
+import { type BasePrinzip } from "~/utils/strapiData.types";
 
 /**
  * Strips references (like [1]) from the text.

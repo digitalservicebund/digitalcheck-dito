@@ -1,12 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import { act } from "react";
-import { createRoutesStub } from "react-router";
 import { beforeAll, describe, test } from "vitest";
+import { createRoutesStub } from "~/utils/routerCompat";
 import type {
   BaseAbsatz,
   Paragraph,
   PrinzipWithBeispielvorhaben,
-} from "~/utils/strapiData.server";
+} from "~/utils/strapiData.types";
 import ParagraphList from "./ParagraphList";
 
 const PRINZIPS: PrinzipWithBeispielvorhaben[] = [

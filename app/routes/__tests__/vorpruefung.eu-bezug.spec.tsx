@@ -1,14 +1,14 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { BrowserRouter, useLoaderData } from "react-router";
 import { preCheck } from "~/resources/content/vorpruefung";
 import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import Index from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { usePreCheckData } from "~/routes/vorpruefung/preCheckDataHook";
+import { MemoryRouter } from "~/utils/routerCompat";
 import { ResultType } from "../vorpruefung.ergebnis/PreCheckResult";
-import { PreCheckAnswerSchema } from "../vorpruefung/preCheckDataSchema";
+import { type PreCheckAnswerSchema } from "../vorpruefung/preCheckDataSchema";
 
 const { questions } = preCheck;
 
@@ -96,15 +96,6 @@ function mapUserAnswersToMockAnswers(
   return answers;
 }
 
-vi.mock("react-router", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("react-router")>();
-  return {
-    ...actual,
-    useLoaderData: vi.fn(),
-    useActionData: vi.fn(),
-  };
-});
-
 vi.mock("~/routes/vorpruefung/preCheckDataHook", async (importOriginal) => {
   const actual =
     await importOriginal<
@@ -127,11 +118,6 @@ describe.each(scenarios)("test $name", ({ answers, expected }) => {
     vi.resetAllMocks();
 
     const preCheckAnswers = mapUserAnswersToMockAnswers(answers);
-    vi.mocked(useLoaderData).mockReturnValue({
-      questionIdx,
-      question: questions[questionIdx],
-    });
-
     vi.mocked(usePreCheckData).mockReturnValue({
       answerForQuestionId: vi.fn().mockReturnValue({
         questionId: questions[questionIdx].id,
@@ -153,9 +139,9 @@ describe.each(scenarios)("test $name", ({ answers, expected }) => {
     });
 
     render(
-      <BrowserRouter>
-        <Index />
-      </BrowserRouter>,
+      <MemoryRouter>
+        <Index questionId={questions[questionIdx].id} />
+      </MemoryRouter>,
     );
   });
 

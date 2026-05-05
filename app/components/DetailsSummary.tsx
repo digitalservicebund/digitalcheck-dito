@@ -1,4 +1,10 @@
-import { ComponentProps, ReactNode, useEffect, useRef, useState } from "react";
+import {
+  type ComponentProps,
+  type ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { twJoin } from "tailwind-merge";
 
 export type DetailsSummaryProps = ComponentProps<"details"> & {

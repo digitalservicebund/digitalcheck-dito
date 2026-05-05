@@ -16,13 +16,12 @@ import getFeatureFlag from "~/utils/featureFlags.server";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_ASPECTS_QUERY,
-  PrinzipWithAspekte,
 } from "~/utils/strapiData.server";
-import type { Route } from "./+types/dokumentation.download.$fileName";
+import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { DATA_SCHEMA_VERSION_V1 } from "./dokumentation/documentationDataSchema";
 
 // This is a route instead of client side to support clients without JS
-export async function loader({ params }: Route.LoaderArgs) {
+export async function loader({ params }: { params: { fileName?: string } }) {
   const { fileName } = params;
 
   if (!fileName) {

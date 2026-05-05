@@ -1,18 +1,23 @@
-import { Outlet, useRouteLoaderData } from "react-router";
+import { type ReactNode } from "react";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { loader as preCheckQuestionLoader } from "./vorpruefung._preCheckNavigation.$questionId";
+import { useLocation } from "~/utils/routerCompat";
 import { usePreCheckData } from "./vorpruefung/preCheckDataHook";
 
 const { questions } = preCheck;
 
-export default function LayoutWithPreCheckNavigation() {
+export default function LayoutWithPreCheckNavigation({
+  children,
+}: {
+  children?: ReactNode;
+}) {
   const { answers, firstUnansweredQuestionIndex } = usePreCheckData();
 
-  const question = useRouteLoaderData<typeof preCheckQuestionLoader>(
-    "routes/vorpruefung._preCheckNavigation.$questionId",
-  )?.question;
+  const location = useLocation();
+  const pathSegments = location.pathname.split("/").filter(Boolean);
+  const lastSegment = pathSegments[pathSegments.length - 1];
+  const question = questions.find((q) => q.id === lastSegment);
   const showLinkBar = !!question;
 
   return (
@@ -20,14 +25,14 @@ export default function LayoutWithPreCheckNavigation() {
       <div className="hidden flex-none lg:block">
         <Nav
           ariaLabel="Alle Fragen"
-          activeElementUrl={question?.url}
+          activeElementUrl={question?.path}
           testId="main-nav"
         >
           <Nav.Items>
-            {questions.map(({ id, url, title }, i) => (
+            {questions.map(({ id, path, title }, i) => (
               <Nav.Item
-                key={url}
-                url={url}
+                key={path}
+                url={path}
                 completed={answers.some(({ questionId }) => questionId === id)}
                 disabled={i > (firstUnansweredQuestionIndex ?? 0)}
               >
@@ -41,14 +46,12 @@ export default function LayoutWithPreCheckNavigation() {
         {showLinkBar && (
           <Stepper
             className="lg:hidden"
-            currentElementUrl={question.url}
+            currentElementUrl={question.path}
             elements={questions}
             firstUnansweredQuestionIndex={firstUnansweredQuestionIndex ?? 0}
           />
         )}
-        <main>
-          <Outlet key={question?.url} />
-        </main>
+        <main>{children}</main>
       </div>
     </div>
   );

@@ -1,19 +1,19 @@
-import { ActiveBehavior } from "~/components/DropdownContentList";
-import { contact } from "~/resources/content/shared/contact";
 import {
-  ROUTE_DOCUMENTATION,
-  ROUTE_EXAMPLES_PRINCIPLES,
-  ROUTE_EXAMPLES_VISUALISATIONS,
-  ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
-  ROUTE_FUNDAMENTALS_NKR,
-  ROUTE_FUNDAMENTALS_PRINCIPLES,
-  ROUTE_INTEROPERABILITY,
-  ROUTE_INTEROPERABILITY_SPOC,
-  ROUTE_METHODS,
-  ROUTE_PRECHECK,
-  ROUTE_SUPPORT,
-  ROUTE_SUPPORT_TRAININGS,
-} from "~/resources/staticRoutes.ts";
+  beispiele_prinzipien,
+  beispiele_visualisierungen,
+  dokumentation,
+  grundlagen_digitaltauglichkeit,
+  grundlagen_normenkontrollrat,
+  interoperabel,
+  interoperabel_nationaleKontaktstelle,
+  methoden,
+  methoden_fuenfPrinzipien,
+  unterstuetzung,
+  vorpruefung,
+} from "@/config/routes";
+import { type ActiveBehavior } from "~/components/DropdownContentList";
+import { contact } from "~/resources/content/shared/contact";
+import { ROUTE_SUPPORT_TRAININGS } from "~/resources/staticRoutes";
 
 export const header = {
   title: "Digitalcheck",
@@ -43,21 +43,21 @@ export const header = {
             "Anhand von 6 Fragen lernen Sie, in welchem Umfang Sie Digitaltauglichkeit beachten müssen.",
           newContent: "Mit europäischem Interoperabilitätsbezug",
 
-          href: ROUTE_PRECHECK.url,
+          href: vorpruefung.path,
         },
         {
           plausibleEventName: "Link+Erarbeiten",
           title: "Digitaltauglichkeit der Regelung sicherstellen",
           content:
             "Wir zeigen Ihnen Schritt für Schritt, wie Sie Ihr Vorhaben digitaltauglich gestalten.",
-          href: ROUTE_METHODS.url,
+          href: methoden.path,
         },
         {
           plausibleEventName: "Link+Dokumentieren",
           title: "Dokumentieren der Digitaltauglichkeit",
           content:
             "Dokumentieren Sie, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben.",
-          href: ROUTE_DOCUMENTATION.url,
+          href: dokumentation.path,
         },
       ],
     },
@@ -70,14 +70,14 @@ export const header = {
           title: "Digitaltauglichkeit im Regelungstext",
           content:
             "So wurden die 5 Prinzipien von Ihren Kolleginnen und Kollegen in Regelungen ausformuliert.",
-          href: ROUTE_EXAMPLES_PRINCIPLES.url,
+          href: beispiele_prinzipien.path,
         },
         {
           plausibleEventName: "Link+Visualisierungen",
           title: "Visualisierungen",
           content:
             "Veröffentliche Visualisierungen, welche Referaten beim Erarbeiten der Digitaltauglichkeit geholfen haben.",
-          href: ROUTE_EXAMPLES_VISUALISATIONS.url,
+          href: beispiele_visualisierungen.path,
         },
       ],
     },
@@ -90,7 +90,7 @@ export const header = {
           title: "Prinzipien für digitaltaugliche Gesetzgebung",
           content:
             "Auf diesen Prinzipien basieren die Instrumente des Digitalcheck.",
-          href: ROUTE_FUNDAMENTALS_PRINCIPLES.url,
+          href: methoden_fuenfPrinzipien.path,
         },
         {
           plausibleEventName: "Link+Interoperabilität",
@@ -98,7 +98,7 @@ export const header = {
           isNewTitle: true,
           content:
             "Verstehen Sie, was es mit EU-Interoperabilität auf sich hat.",
-          href: ROUTE_INTEROPERABILITY.url,
+          href: interoperabel.path,
           activeBehavior: "exactMatch" as ActiveBehavior,
         },
         {
@@ -106,7 +106,7 @@ export const header = {
           title: "Was ist Digitaltauglichkeit?",
           content:
             "Welche Relevanz Digitaltauglichkeit hat und wie Ihre Regelung davon profitiert.",
-          href: ROUTE_FUNDAMENTALS_DIGITAL_READINESS.url,
+          href: grundlagen_digitaltauglichkeit.path,
         },
         {
           plausibleEventName: "Link+Prinzipien",
@@ -114,7 +114,7 @@ export const header = {
           isNewTitle: true,
           content:
             "Aufgaben und Vorgehensweise des Nationalen Normenkontrollrat im Kontext des Digitalcheck.",
-          href: ROUTE_FUNDAMENTALS_NKR.url,
+          href: grundlagen_normenkontrollrat.path,
         },
       ],
     },
@@ -128,7 +128,7 @@ export const header = {
           title: "Individuelle Unterstützung für Ihr Vorhaben",
           content:
             "Nutzen Sie unsere persönliche Hilfestellungen bei der Regelungsarbeit.",
-          href: ROUTE_SUPPORT.url,
+          href: unterstuetzung.path,
           activeBehavior: "noHighlight" as ActiveBehavior,
         },
         {
@@ -145,7 +145,7 @@ export const header = {
           isNewTitle: true,
           content:
             "Nationale Kontaktstelle für ein interoperables Europa (2024/903 Art. 17).",
-          href: ROUTE_INTEROPERABILITY_SPOC.url,
+          href: interoperabel_nationaleKontaktstelle.path,
         },
       ],
     },

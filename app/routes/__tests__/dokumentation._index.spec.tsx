@@ -2,18 +2,16 @@
 import "./utils/mockLocalStorageVersioned";
 // End of mocks
 
+import { dokumentation_hinweise } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import React from "react";
-import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
-import {
-  ROUTE_DOCUMENTATION_TEMPLATE_WORD,
-  ROUTES_DOCUMENTATION_INTRO,
-} from "~/resources/staticRoutes";
+import { ROUTE_DOCUMENTATION_TEMPLATE_WORD } from "~/resources/staticRoutes";
 import DokumentationIndex from "~/routes/dokumentation._index";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
+import { MemoryRouter } from "~/utils/routerCompat";
 
 vi.mock("~/contexts/FeatureFlagContext", () => {
   return {
@@ -48,10 +46,7 @@ describe("Dokumentation Index Route - Integration Tests", () => {
     const startButton = screen.getByRole("link", {
       name: "Dokumentation starten",
     });
-    expect(startButton).toHaveAttribute(
-      "href",
-      ROUTES_DOCUMENTATION_INTRO[0].url,
-    );
+    expect(startButton).toHaveAttribute("href", dokumentation_hinweise.path);
   });
 
   it("renders the Word file download button", () => {

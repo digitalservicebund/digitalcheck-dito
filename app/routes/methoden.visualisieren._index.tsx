@@ -6,16 +6,13 @@ import Hero from "~/components/Hero";
 import ImageBox from "~/components/ImageBox";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { methodsTasksProcesses } from "~/resources/content/methode-visualisieren.ts";
-import { ROUTE_METHODS_VISUALIZE } from "~/resources/staticRoutes.ts";
 import { assetPath } from "~/utils/assetPath";
 
 export default function Visualization() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_METHODS_VISUALIZE.title} />
       <main>
         <Hero
           subtitle={methodsTasksProcesses.subtitle}

@@ -1,11 +1,11 @@
-import { steps } from "~/resources/content/shared/naechste-schritte";
 import {
-  ROUTE_INTEROPERABILITY,
-  ROUTE_METHODS,
-  ROUTE_PRECHECK,
-  ROUTE_PRECHECK_INFO,
-} from "~/resources/staticRoutes";
-import { ContentLink, Step } from "~/utils/contentTypes.ts";
+  interoperabel,
+  methoden,
+  vorpruefung,
+  vorpruefung_hinweise,
+} from "@/config/routes";
+import { steps } from "~/resources/content/shared/naechste-schritte";
+import { type ContentLink, type Step } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
 
@@ -46,7 +46,7 @@ export const preCheckResult = {
     hint: `Bitte kontaktieren Sie den Digitalcheck-Support unter: ${contact.mdPhoneLink()} oder schreiben Sie uns eine E-Mail an ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")} mit Ihren Fragen. Wir helfen Ihnen, die Vorprüfung auszufüllen.`,
     actionButton: {
       text: "Vorprüfung wiederholen",
-      to: ROUTE_PRECHECK.url,
+      to: vorpruefung.path,
     } satisfies ContentLink,
     nextStep: {
       title:
@@ -54,7 +54,7 @@ export const preCheckResult = {
       text: "Wenn digitale Umsetzung für Ihr Regelungsvorhaben wichtig ist, finden Sie hier passende Methoden und Werkzeuge. Sie erfahren, wie Sie den Prozess darstellen und durchdenken, mit Beteiligten ins Gespräch kommen und die fünf Prinzipien anwenden.",
       link: {
         text: "Zu „Erarbeiten“",
-        to: ROUTE_METHODS.url,
+        to: methoden.path,
       } satisfies ContentLink,
     },
   },
@@ -83,16 +83,16 @@ export const preCheckResult = {
 
       Haben Sie Fragen? Kontaktieren Sie uns unter ${contact.mdPhoneLink()} oder ${contact.mdMailToLink(contact.email)}.
 
-      [Zurück zum Vorprüfungs-Formular](${ROUTE_PRECHECK_INFO.url})
+      [Zurück zum Vorprüfungs-Formular](${vorpruefung_hinweise.path})
     `,
   },
   interoperability: {
     info: {
       title: "Erfahren Sie mehr über Interoperabilität",
-      content: dedent`Was bedeutet Interoperabilität für Regelungen, und wie beeinflusst sie deren Erarbeitung? Auf unserer [Übersichtsseite](${ROUTE_INTEROPERABILITY.url}) finden Sie alle wichtigen Informationen dazu.`,
+      content: dedent`Was bedeutet Interoperabilität für Regelungen, und wie beeinflusst sie deren Erarbeitung? Auf unserer [Übersichtsseite](${interoperabel.path}) finden Sie alle wichtigen Informationen dazu.`,
       button: {
         text: "Mehr zu Interoperabilität",
-        to: ROUTE_INTEROPERABILITY.url,
+        to: interoperabel.path,
         look: "link" as const,
       } satisfies ContentLink,
     },

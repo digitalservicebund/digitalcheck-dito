@@ -1,46 +1,60 @@
 import { expect, test } from "@playwright/test";
 
 import {
+  allRoutes,
+  barrierefreiheit,
+  beispiele_prinzipien,
+  datenschutz,
+  dokumentation,
+  grundlagen,
+  home,
+  impressum,
+  methoden,
+  methoden_fuenfPrinzipien,
   type Route,
-  ROUTE_A11Y,
-  ROUTE_DOCUMENTATION,
-  ROUTE_EXAMPLES_PRINCIPLES,
-  ROUTE_FUNDAMENTALS,
-  ROUTE_FUNDAMENTALS_PRINCIPLES,
-  ROUTE_IMPRINT,
-  ROUTE_LANDING,
-  ROUTE_METHODS,
-  ROUTE_METHODS_PRINCIPLES,
-  ROUTE_PRECHECK,
-  ROUTE_PRECHECK_INFO,
-  ROUTE_PRECHECK_RESULT,
-  ROUTE_PRIVACY,
-  ROUTES,
-  ROUTES_PRECHECK_QUESTIONS,
-} from "~/resources/staticRoutes";
+  vorpruefung,
+  vorpruefung_automatisierung,
+  vorpruefung_datenaustausch,
+  vorpruefung_ergebnis,
+  vorpruefung_euBezug,
+  vorpruefung_hinweise,
+  vorpruefung_itSystem,
+  vorpruefung_kommunikation,
+  vorpruefung_verpflichtungenFuerBeteiligte,
+} from "@/config/routes";
+
+// Order matches the content-defined question sequence in pre-check-questions.ts
+const ROUTES_PRECHECK_QUESTIONS = [
+  vorpruefung_itSystem,
+  vorpruefung_verpflichtungenFuerBeteiligte,
+  vorpruefung_datenaustausch,
+  vorpruefung_kommunikation,
+  vorpruefung_automatisierung,
+  vorpruefung_euBezug,
+];
 
 function getExpectedTitle(route: Route) {
   const titleSuffix = " — Digitalcheck";
 
-  if (route.url === ROUTE_LANDING.url)
+  if (route.path === home.path)
     return "Digitalcheck: Digitaltaugliche Regelungen erarbeiten";
   if (
-    route.url.startsWith(ROUTE_EXAMPLES_PRINCIPLES.url) &&
-    !route.url.endsWith(ROUTE_EXAMPLES_PRINCIPLES.url)
+    route.path.startsWith(beispiele_prinzipien.path) &&
+    !route.path.endsWith(beispiele_prinzipien.path)
   ) {
     // All tabs (and their routes) on the principle example pages have the same page title
-    return `${ROUTE_EXAMPLES_PRINCIPLES.title}${titleSuffix}`;
+    return `${beispiele_prinzipien.title}${titleSuffix}`;
   }
   if (
-    route.url === ROUTE_FUNDAMENTALS.url ||
-    route.url === ROUTE_FUNDAMENTALS_PRINCIPLES.url
+    route.path === grundlagen.path ||
+    route.path === "/grundlagen/fuenf-prinzipien"
   ) {
     // this page does not exist and redirects to the sub-page
-    return `${ROUTE_METHODS_PRINCIPLES.title}${titleSuffix}`;
+    return `${methoden_fuenfPrinzipien.title}${titleSuffix}`;
   }
   if (
-    route.url.startsWith(ROUTE_DOCUMENTATION.url) &&
-    route.url !== ROUTE_DOCUMENTATION.url
+    route.path.startsWith(dokumentation.path) &&
+    route.path !== dokumentation.path
   ) {
     // subpages of documentation
     return `Dokumentation: ${route.title}${titleSuffix}`;
@@ -50,34 +64,37 @@ function getExpectedTitle(route: Route) {
 }
 
 test.describe("page titles", () => {
-  ROUTES.filter(
-    (route) =>
-      !route.url.endsWith(".pdf") && !route.url.startsWith(ROUTE_PRECHECK.url),
-  ).forEach((route) => {
-    test(`${route.url} has correct title`, async ({ page }) => {
-      await page.goto(route.url);
-      await expect(page).toHaveTitle(getExpectedTitle(route));
+  allRoutes
+    .filter(
+      (route) =>
+        !route.path.endsWith(".pdf") &&
+        !route.path.startsWith(vorpruefung.path),
+    )
+    .forEach((route) => {
+      test(`${route.path} has correct title`, async ({ page }) => {
+        await page.goto(route.path);
+        await expect(page).toHaveTitle(getExpectedTitle(route));
+      });
     });
-  });
 
   // pre-check pages redirect to first unanswered question
   test("pre-check page titles", async ({ page }) => {
-    await page.goto(ROUTE_PRECHECK.url);
-    await expect(page).toHaveTitle(getExpectedTitle(ROUTE_PRECHECK));
+    await page.goto(vorpruefung.path);
+    await expect(page).toHaveTitle(getExpectedTitle(vorpruefung));
 
-    await page.goto(ROUTE_PRECHECK_INFO.url);
-    await expect(page).toHaveTitle(getExpectedTitle(ROUTE_PRECHECK_INFO));
+    await page.goto(vorpruefung_hinweise.path);
+    await expect(page).toHaveTitle(getExpectedTitle(vorpruefung_hinweise));
 
-    await page.goto(ROUTES_PRECHECK_QUESTIONS[0].url);
+    await page.goto(ROUTES_PRECHECK_QUESTIONS[0].path);
     for (const route of ROUTES_PRECHECK_QUESTIONS) {
-      await page.waitForURL(route.url);
+      await page.waitForURL(route.path);
       await expect(page).toHaveTitle(getExpectedTitle(route));
       await page.getByLabel("Ja").click();
       await page.getByRole("button", { name: "Übernehmen" }).click();
     }
 
-    await expect(page).toHaveURL(ROUTE_PRECHECK_RESULT.url);
-    await expect(page).toHaveTitle(getExpectedTitle(ROUTE_PRECHECK_RESULT));
+    await expect(page).toHaveURL(vorpruefung_ergebnis.path);
+    await expect(page).toHaveTitle(getExpectedTitle(vorpruefung_ergebnis));
   });
 
   test("error page title is correct", async ({ page }) => {
@@ -96,17 +113,17 @@ test.describe("landing page", () => {
   });
 
   test("CTA on landing works", async ({ page }) => {
-    await page.goto(ROUTE_LANDING.url);
+    await page.goto(home.path);
     await page
       .getByRole("link", { name: "Digitalbezug einschätzen" })
       .first()
       .click();
-    await expect(page).toHaveURL(ROUTE_PRECHECK.url);
+    await expect(page).toHaveURL(vorpruefung.path);
   });
 });
 
 test("footer is displayed", async ({ page }) => {
-  await page.goto(ROUTE_LANDING.url);
+  await page.goto(home.path);
   const footerEl = page.getByRole("contentinfo", { name: "Seitenfußbereich" });
   await expect(footerEl).toBeVisible();
   await expect(
@@ -122,25 +139,25 @@ test("footer is displayed", async ({ page }) => {
 
 test.describe("links", () => {
   [
-    { name: "Datenschutzerklärung", url: ROUTE_PRIVACY.url },
-    { name: "Barrierefreiheit", url: ROUTE_A11Y.url },
-    { name: "Impressum", url: ROUTE_IMPRINT.url },
+    { name: "Datenschutzerklärung", url: datenschutz.path },
+    { name: "Barrierefreiheit", url: barrierefreiheit.path },
+    { name: "Impressum", url: impressum.path },
   ].forEach(({ name, url }) => {
     test(`link ${url} in footer works`, async ({ page }) => {
-      await page.goto(ROUTE_LANDING.url);
+      await page.goto(home.path);
       await page.getByRole("link", { name: name }).click();
       await expect(page).toHaveURL(url);
     });
   });
 
   test("links in landing page work", async ({ page }) => {
-    await page.goto(ROUTE_LANDING.url);
+    await page.goto(home.path);
     await page.getByRole("link", { name: "Regelung erarbeiten" }).click();
-    await expect(page).toHaveURL(ROUTE_METHODS.url);
+    await expect(page).toHaveURL(methoden.path);
   });
 
   test("links leading to external pages open in new tab", async ({ page }) => {
-    await page.goto(ROUTE_LANDING.url, { waitUntil: "domcontentloaded" });
+    await page.goto(home.path, { waitUntil: "domcontentloaded" });
     const linkLocator = page.getByRole("link", {
       name: "DigitalService GmbH des Bundes",
     });
@@ -149,28 +166,28 @@ test.describe("links", () => {
 });
 
 test.describe("progress bar", () => {
-  const routesWithProgressBarOrRedirects = ROUTES.filter(
+  const routesWithProgressBarOrRedirects = allRoutes.filter(
     (route) =>
-      route.url.startsWith(ROUTE_PRECHECK.url) ||
-      route.url.startsWith(ROUTE_METHODS.url) ||
-      route.url.startsWith(ROUTE_DOCUMENTATION.url) ||
-      route.url === ROUTE_FUNDAMENTALS_PRINCIPLES.url ||
-      route.url === ROUTE_FUNDAMENTALS.url,
+      route.path.startsWith(vorpruefung.path) ||
+      route.path.startsWith(methoden.path) ||
+      route.path.startsWith(dokumentation.path) ||
+      route.path === "/grundlagen/fuenf-prinzipien" ||
+      route.path === grundlagen.path,
   );
   routesWithProgressBarOrRedirects.forEach((route) => {
     test(`${route.title} has progress bar`, async ({ page }) => {
-      await page.goto(route.url);
+      await page.goto(route.path);
       await expect(page.getByLabel("Digitalcheck-Fortschritt")).toBeVisible();
     });
   });
 
-  ROUTES.forEach((route) => {
+  allRoutes.forEach((route) => {
     if (routesWithProgressBarOrRedirects.includes(route)) {
       return;
     }
 
-    test(`${route.url} has no progress bar`, async ({ page }) => {
-      await page.goto(route.url);
+    test(`${route.path} has no progress bar`, async ({ page }) => {
+      await page.goto(route.path);
       await expect(page.getByLabel("Digitalcheck-Fortschritt")).toBeHidden();
     });
   });
@@ -184,20 +201,20 @@ test.describe("progress bar", () => {
     const step2 = navigation.getByRole("listitem").filter({ hasText: "2" });
     const step3 = navigation.getByRole("listitem").filter({ hasText: "3" });
 
-    await page.goto(ROUTE_PRECHECK.url);
+    await page.goto(vorpruefung.path);
     await expect(navigation).toBeVisible();
     await expect(step1).toContainClass("font-bold");
     await expect(step1).toHaveAttribute("aria-current", "step");
     await expect(step2).not.toContainClass("font-bold");
     await expect(step2).not.toHaveAttribute("aria-current", "step");
 
-    await page.goto(ROUTE_METHODS.url);
+    await page.goto(methoden.path);
     await expect(step2).toContainClass("font-bold");
     await expect(step2).toHaveAttribute("aria-current", "step");
     await expect(step1).not.toContainClass("font-bold");
     await expect(step1).not.toHaveAttribute("aria-current", "step");
 
-    await page.goto(ROUTE_DOCUMENTATION.url);
+    await page.goto(dokumentation.path);
     await expect(step3).toContainClass("font-bold");
     await expect(step3).toHaveAttribute("aria-current", "step");
     await expect(step2).not.toContainClass("font-bold");
@@ -218,6 +235,6 @@ test.describe("error pages", () => {
     const response = await page.goto("/does-not-exist");
     expect(response?.status()).toBe(404);
     await page.getByRole("link", { name: "Zurück zur Startseite" }).click();
-    await expect(page).toHaveURL(ROUTE_LANDING.url);
+    await expect(page).toHaveURL(home.path);
   });
 });

@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { type ReactNode } from "react";
 import AccordionItem from "~/components/AccordionItem";
 import Badge from "~/components/Badge.tsx";
 import Container from "~/components/Container";
@@ -6,12 +6,10 @@ import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import ImageZoomable from "~/components/ImageZoomable";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import TabGroup from "~/components/Tabs/Tabs";
 import Timeline from "~/components/Timeline";
 import { spoc } from "~/resources/content/interoperabel-nationale-kontaktstelle";
-import { ROUTE_INTEROPERABILITY_SPOC } from "~/resources/staticRoutes";
 
 function SPoCTimelineItem({ children }: Readonly<{ children?: ReactNode }>) {
   return (
@@ -126,7 +124,6 @@ ServiceUndKontakt.tabName = spoc.contact.tabName;
 export default function SinglePointOfContact() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_INTEROPERABILITY_SPOC.title} />
       <main>
         <Hero title={spoc.headline}>
           <RichText

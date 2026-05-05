@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import { createRoutesStub } from "react-router";
 import { describe, expect, it } from "vitest";
 import { general } from "~/resources/content/shared/general.ts";
 import type { Node } from "~/utils/paragraphUtils";
+import { createRoutesStub } from "~/utils/routerCompat";
 import { BlocksRenderer } from "./BlocksRenderer";
 
 const renderBlocksRenderer = (content: Node[]) => {

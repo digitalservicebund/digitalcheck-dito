@@ -1,28 +1,26 @@
+import {
+  dokumentation_beteiligungsformate,
+  dokumentation_regelungsvorhabenTitel,
+  type Route,
+} from "@/config/routes";
 import { type ReactNode } from "react";
-import { Link, useOutletContext } from "react-router";
 import type { BadgeProps } from "~/components/Badge";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
 import InlineNotice from "~/components/InlineNotice";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
+import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import {
-  ROUTE_DOCUMENTATION_PARTICIPATION,
-  ROUTE_DOCUMENTATION_SUMMARY,
-  ROUTE_DOCUMENTATION_TITLE,
-  type Route,
-} from "~/resources/staticRoutes";
 import {
   type Participation,
   type PolicyTitle,
   type Principle,
 } from "~/routes/dokumentation/documentationDataSchema";
-import type { PrinzipWithAspekte } from "~/utils/strapiData.server";
+import { Link } from "~/utils/routerCompat";
+import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
-import { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationActions from "./DocumentationActions";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
 
@@ -42,8 +40,8 @@ const createInfoBoxItem = ({
   content?: ReactNode;
   badge?: BadgeProps;
 }): InfoBoxProps => ({
-  identifier: route.url,
-  testId: route.url,
+  identifier: route.path,
+  testId: route.path,
   heading: {
     text: heading ?? route.title,
     tagName: "h2",
@@ -61,7 +59,7 @@ const createInfoBoxItem = ({
         />
       )}
       <Link
-        to={route.url}
+        to={route.path}
         className="text-link mt-24 block"
         aria-label={`${route.title} ${summary.buttonEdit.ariaLabelSuffix}`}
       >
@@ -227,21 +225,20 @@ function PrincipleContent({
 }
 
 export default function DocumentationSummaryV2() {
-  const { routes, previousUrl, nextUrl, prinzips } =
-    useOutletContext<NavigationContext>();
+  const { routes, previousUrl, nextUrl, prinzips } = useNavigationContext();
 
   const { documentationData } = useDocumentationDataService();
 
   const items: InfoBoxProps[] = [
     createInfoBoxItem({
       heading: "Informationen zum Regelungsvorhaben",
-      route: ROUTE_DOCUMENTATION_TITLE,
+      route: dokumentation_regelungsvorhabenTitel,
       content: documentationData.policyTitle?.title ? (
         <PolicyTitleContent policyTitle={documentationData.policyTitle} />
       ) : null,
     }),
     createInfoBoxItem({
-      route: ROUTE_DOCUMENTATION_PARTICIPATION,
+      route: dokumentation_beteiligungsformate,
       content:
         documentationData.participation &&
         (documentationData.participation.formats ||
@@ -254,7 +251,7 @@ export default function DocumentationSummaryV2() {
     ...prinzips.map((prinzip) => {
       const principleRoute = routes
         .flat()
-        .find((route) => route.url.endsWith(prinzip.URLBezeichnung));
+        .find((route) => route.path.endsWith(prinzip.URLBezeichnung));
       if (!principleRoute)
         throw new Error(
           `Cannot find route for principle ${prinzip.URLBezeichnung}`,
@@ -264,7 +261,7 @@ export default function DocumentationSummaryV2() {
       ) as Principle;
       // In simplified flow, link to erlaeuterung sub-page if answer is saved
       const editRoute = principleFormData?.answer
-        ? { ...principleRoute, url: `${principleRoute.url}/erlaeuterung` }
+        ? { ...principleRoute, path: `${principleRoute.path}/erlaeuterung` }
         : principleRoute;
       return createInfoBoxItem({
         route: editRoute,
@@ -281,9 +278,6 @@ export default function DocumentationSummaryV2() {
 
   return (
     <>
-      <MetaTitle
-        prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_SUMMARY.title}`}
-      />
       <Heading
         text={summary.headline}
         tagName="h1"
