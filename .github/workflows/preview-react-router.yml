@@ -9,7 +9,7 @@ on:
 jobs:
   # Builds and deploys preview when PR is opened/updated or manually triggered.
   # Only runs for org contributors/members/owners.
-  build-and-deploy:
+  preview:
     runs-on: ubuntu-latest
     if: |
       github.event_name != 'delete' && 
@@ -24,14 +24,13 @@ jobs:
       group: preview-${{ github.head_ref || github.ref_name }}
       cancel-in-progress: true
     env:
-      GH_PAGES_BASE_URL: https://${{ github.event.repository.owner.login }}.github.io # https://digitalservicebund.github.io
-      PREVIEW_BRANCH: ${{ github.head_ref || github.ref_name }} # e.g. my-feature-branch
-      PREVIEW_BASE_PATH: /${{ github.event.repository.name }}/previews/${{ github.head_ref || github.ref_name }} # e.g. /digitalcheck-dito/previews/my-feature-branch
+      PREVIEW_BRANCH: ${{ github.head_ref || github.ref_name }}
+      PREVIEW_BASE_PATH: /digitalcheck-dito/previews/${{ github.head_ref || github.ref_name }}/
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
-      - uses: pnpm/action-setup@903f9c1a6ebcba6cf41d87230be49611ac97822e
+      - uses: pnpm/action-setup@903f9c1a6ebcba6cf41d87230be49611ac97822e # v6.0.3
         name: Install pnpm
 
       - name: Install Node.js
@@ -43,26 +42,48 @@ jobs:
       - name: Install dependencies
         run: pnpm install --ignore-scripts
 
-      - name: Build Astro for Preview
-        run: pnpm build
+      - name: Build preview
         env:
-          PUBLIC_STAGE: "preview"
+          PREVIEW_BUILD: "true"
+        run: |
+          pnpm run build
 
-      - name: Disable Jekyll # to allow assets being served from _astro directory
-        run: touch dist/.nojekyll
+      - name: Copy static assets into preview directory
+        run: |
+          PREVIEW_DIR="build/client/digitalcheck-dito/previews/$PREVIEW_BRANCH"
+          # Vite outputs assets/images/logos etc. at build/client/ root,
+          # but the HTML references them under the basename prefix.
+          # Copy them into the preview directory so paths resolve on GitHub Pages.
+          for dir in build/client/*/; do
+            dirname=$(basename "$dir")
+            if [ "$dirname" != "digitalcheck-dito" ]; then
+              cp -r "$dir" "$PREVIEW_DIR/$dirname"
+            fi
+          done
+          # Copy root-level static files (favicons, etc.)
+          find build/client -maxdepth 1 -type f -exec cp {} "$PREVIEW_DIR/" \;
+          # Also copy static dirs to deploy root for hardcoded absolute paths
+          # (e.g. <img src="/logo/bund-logo.png"> in PageHeader/Footer)
+          for dir in build/client/*/; do
+            dirname=$(basename "$dir")
+            if [ "$dirname" != "digitalcheck-dito" ]; then
+              cp -r "$dir" "build/client/digitalcheck-dito/$dirname"
+            fi
+          done
+          find build/client -maxdepth 1 -type f -exec cp {} "build/client/digitalcheck-dito/" \;
 
       - name: Commit to gh-pages branch
         uses: JamesIves/github-pages-deploy-action@d92aa235d04922e8f08b40ce78cc5442fcfbfa2f # v4.8.0
         with:
-          folder: dist
+          folder: build/client/digitalcheck-dito
           branch: gh-pages
-          target-folder: previews/${{ github.head_ref || github.ref_name }} # previews/my-feature-branch/
+          # target-folder: previews/${{ github.head_ref || github.ref_name }} # previews/my-feature-branch/
           clean: false # Prevents one branch preview from deleting others
 
       - name: Wait for automatic Pages deployment
         run: |
-          MAX_TIME=40
-          URL="$GH_PAGES_BASE_URL$PREVIEW_BASE_PATH"
+          MAX_TIME=60
+          URL="https://digitalservicebund.github.io$PREVIEW_BASE_PATH"
           START_TIME=$(date +%s)
 
           while true; do
@@ -84,14 +105,14 @@ jobs:
       - name: Output Preview URL
         run: |
           echo "🔍 Preview deployed successfully!"
-          echo "Preview URL: $GH_PAGES_BASE_URL$PREVIEW_BASE_PATH"
+          echo "Preview URL: https://digitalservicebund.github.io$PREVIEW_BASE_PATH"
 
       - name: Comment PR with Preview URL
         if: github.event_name == 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          PREVIEW_URL="$GH_PAGES_BASE_URL$PREVIEW_BASE_PATH"
+          PREVIEW_URL="https://digitalservicebund.github.io$PREVIEW_BASE_PATH"
           gh pr comment ${{ github.event.pull_request.number }} --body "🔍 **Preview deployed!**
 
           Preview URL: $PREVIEW_URL"

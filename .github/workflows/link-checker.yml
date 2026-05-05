@@ -11,7 +11,8 @@ jobs:
     permissions: {}
     steps:
       - name: Link Checker
-        uses: digitalservicebund/link-checker-gha@3d191ff542e89f1c205793495a32ff9599eab8e4 # v1.0.1
+        uses: digitalservicebund/link-checker-gha@0b9677477e298cf3d8228ab1be8a10f1488860c6 # v2.0.1
         with:
           SITEMAP_URL: "https://digitalcheck.bund.de/sitemap.xml"
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
