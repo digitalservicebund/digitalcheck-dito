@@ -63,11 +63,7 @@ query GetBeispielvorhabens($slug: String!, $status: PublicationStatus!) {
   }
 }`;
 
-export const loader = async ({
-  params,
-}: {
-  params: { regelung?: string };
-}) => {
+export const loader = async ({ params }: { params: { regelung?: string } }) => {
   const status = getFeatureFlag("showStrapiDrafts") ? "DRAFT" : "PUBLISHED";
 
   const regelungData = await fetchStrapiData<{

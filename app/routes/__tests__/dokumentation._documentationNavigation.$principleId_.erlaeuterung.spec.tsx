@@ -130,7 +130,9 @@ const renderWithRouter = () => {
       },
     ],
     {
-      initialEntries: ["/dokumentation/prinzip-1-digitale-angebote/erlaeuterung"],
+      initialEntries: [
+        "/dokumentation/prinzip-1-digitale-angebote/erlaeuterung",
+      ],
     },
   );
 

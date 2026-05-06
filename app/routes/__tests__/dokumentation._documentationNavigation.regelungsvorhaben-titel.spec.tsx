@@ -1,6 +1,6 @@
 // Import mocks first
 import "./utils/mockLocalStorageVersioned";
-import "./utils/mockRouter";
+import { mockNavigationContext } from "./utils/mockRouter";
 // End of mocks
 
 import "@testing-library/jest-dom";
@@ -17,7 +17,6 @@ import {
   DATA_SCHEMA_VERSION_V1,
   type DocumentationData,
 } from "../dokumentation/documentationDataSchema";
-import { mockNavigationContext } from "./utils/mockRouter";
 
 const mockedReadDataFromLocalStorage = vi.mocked(
   readDataFromLocalStorage<DocumentationData>,
@@ -28,7 +27,9 @@ const renderWithRouter = () => {
     <MemoryRouter>
       <HelpPanelProvider>
         <DocumentationDataProvider>
-          <DocumentationNavigationContext.Provider value={mockNavigationContext}>
+          <DocumentationNavigationContext.Provider
+            value={mockNavigationContext}
+          >
             <DocumentationTitle />
           </DocumentationNavigationContext.Provider>
         </DocumentationDataProvider>

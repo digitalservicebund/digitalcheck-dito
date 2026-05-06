@@ -357,7 +357,11 @@ export function createBrowserRouter(routes: RouteConfig[]): RouterObject {
 export function RouterProvider({ router }: { router: RouterObject }) {
   const root = router.routes[0];
   if (!root) return null;
-  const element = root.element ? <>{root.element}</> : root.Component ? <root.Component /> : null;
+  const element = root.element ? (
+    <>{root.element}</>
+  ) : root.Component ? (
+    <root.Component />
+  ) : null;
   return (
     <MemoryRouter initialEntries={router.initialEntries}>
       {element}

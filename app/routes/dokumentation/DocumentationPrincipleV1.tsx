@@ -446,9 +446,9 @@ export default function DocumentationPrincipleV1({
   const { documentationData, addOrUpdatePrinciple } =
     useDocumentationDataService();
 
-  const principleData = (
-    documentationData?.principles as Principle<V1>[] | undefined
-  )?.find((principle) => principle.id === prinzip.documentId);
+  const principleData = documentationData?.principles?.find(
+    (principle) => principle.id === prinzip.documentId,
+  );
 
   const form = useSyncedForm({
     schema: principleSchemaV1,

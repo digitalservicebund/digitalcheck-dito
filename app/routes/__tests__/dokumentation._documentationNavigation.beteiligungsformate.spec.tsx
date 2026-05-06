@@ -1,6 +1,6 @@
 // Import mocks first
 import "./utils/mockLocalStorageVersioned";
-import "./utils/mockRouter";
+import { mockNavigationContext } from "./utils/mockRouter";
 // End of mocks
 
 import "@testing-library/jest-dom";
@@ -18,14 +18,15 @@ import {
   type DocumentationData,
   type V1,
 } from "../dokumentation/documentationDataSchema";
-import { mockNavigationContext } from "./utils/mockRouter";
 
 const renderWithRouter = () => {
   return render(
     <MemoryRouter>
       <HelpPanelProvider>
         <DocumentationDataProvider>
-          <DocumentationNavigationContext.Provider value={mockNavigationContext}>
+          <DocumentationNavigationContext.Provider
+            value={mockNavigationContext}
+          >
             <DocumentationParticipation />
           </DocumentationNavigationContext.Provider>
         </DocumentationDataProvider>

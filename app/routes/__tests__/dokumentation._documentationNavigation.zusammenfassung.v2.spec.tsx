@@ -111,7 +111,9 @@ describe("DocumentationSummaryV2", () => {
     return render(
       <MemoryRouter>
         <DocumentationDataProvider>
-          <DocumentationNavigationContext.Provider value={mockNavigationContext}>
+          <DocumentationNavigationContext.Provider
+            value={mockNavigationContext}
+          >
             <DocumentationSummaryV2 />
           </DocumentationNavigationContext.Provider>
         </DocumentationDataProvider>

@@ -6,16 +6,16 @@ import {
   LayersOutlined,
 } from "@digitalservicebund/icons";
 import React, { useRef } from "react";
+import { twJoin } from "tailwind-merge";
+import BackToTopButton from "~/components/BackToTopButton.tsx";
 import Badge, { type BadgeProps } from "~/components/Badge.tsx";
 import Button from "~/components/Button.tsx";
+import Container from "~/components/Container.tsx";
 import Heading from "~/components/Heading";
 import ImageBox from "~/components/ImageBox.tsx";
 import InfoBox from "~/components/InfoBox.tsx";
 import NumberedList from "~/components/NumberedList.tsx";
 import RichText from "~/components/RichText.tsx";
-import { twJoin } from "tailwind-merge";
-import BackToTopButton from "~/components/BackToTopButton.tsx";
-import Container from "~/components/Container.tsx";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
 import { STRAPI_MEDIA_URL } from "~/resources/constants.ts";
