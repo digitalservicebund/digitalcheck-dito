@@ -1,8 +1,7 @@
-import type { IParagraphOptions, IPatch, IRunOptions } from "docx";
+import type { IParagraphOptions, IPatch } from "docx";
 import {
   Bookmark,
   convertInchesToTwip,
-  ExternalHyperlink,
   HeadingLevel,
   Paragraph,
   patchDocument,
@@ -20,6 +19,11 @@ import type {
   PrincipleReasoningV1,
   V1,
 } from "~/routes/dokumentation/documentationDataSchema";
+import {
+  stringToTextRuns,
+  toMailtoHyperlinkPatch,
+  toParagraphPatch,
+} from "~/service/wordDocumentationExport/docxUtils.ts";
 import type {
   PrinzipAspekt,
   PrinzipWithAspekte,
@@ -70,9 +74,9 @@ export const createDoc = async (
     outputType: "blob",
     patches: {
       TIMESTAMP: toParagraphPatch(date),
-      NKR_CONTACT_EMAIL: toHyperlinkPatch(contact.nkrEmail),
-      INTEROPS_EMAIL: toHyperlinkPatch(contact.interoperabilityEmail),
-      DS_EMAIL: toHyperlinkPatch(contact.email),
+      NKR_CONTACT_EMAIL: toMailtoHyperlinkPatch(contact.nkrEmail),
+      INTEROPS_EMAIL: toMailtoHyperlinkPatch(contact.interoperabilityEmail),
+      DS_EMAIL: toMailtoHyperlinkPatch(contact.email),
       DS_PHONE: toParagraphPatch(contact.phoneDisplay),
       POLICY_TITLE: toParagraphPatch(answerOrPlaceholder(policyTitle?.title)),
       PARTICIPATION_FORMATS: toParagraphPatch(
@@ -86,34 +90,11 @@ export const createDoc = async (
   });
 };
 
-export const toParagraphPatch = (content: string): IPatch => ({
-  type: PatchType.PARAGRAPH,
-  children: stringToTextRuns(content),
-});
-
-export const toHyperlinkPatch = (content: string): IPatch => ({
-  type: PatchType.PARAGRAPH,
-  children: [
-    new ExternalHyperlink({
-      children: stringToTextRuns(content, { style: "Hyperlink" }),
-      link: "mailto:" + content,
-    }),
-  ],
-});
-
 const answerOrPlaceholder = (answer?: string) =>
   answer || documentationDocument.placeholder;
 
 const answerOrPlaceholderOptional = (answer?: string) =>
   answer || documentationDocument.placeholderOptional;
-
-export const stringToTextRuns = (content: string, options: IRunOptions = {}) =>
-  content
-    .split("\n")
-    .map(
-      (line, idx) =>
-        new TextRun({ ...options, text: line, break: Number(idx > 0) }),
-    );
 
 // Builds all patches that are needed for the principles
 // - Title
