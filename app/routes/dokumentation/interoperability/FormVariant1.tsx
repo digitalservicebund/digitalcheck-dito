@@ -47,7 +47,11 @@ function LevelAssessmentForm({
         Voraussetzungen für eine europaweit grenzüberschreitende Nutzung
         schaffen.
       </p>
-      <Textarea description={description} scope={form.scope(`${level}.detail`)}>
+      <Textarea
+        rows={5}
+        description={description}
+        scope={form.scope(`${level}.detail`)}
+      >
         Erklärung
       </Textarea>
       <InteroperabilityRatingSelect levelDe={levelDe} scope={scope} />

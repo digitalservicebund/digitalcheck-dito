@@ -4,6 +4,7 @@ import {
 } from "@digitalservicebund/icons";
 import { useFieldArray } from "@rvf/react";
 import React from "react";
+import { Link } from "react-router";
 import Badge from "~/components/Badge.tsx";
 import Button from "~/components/Button";
 import Combobox from "~/components/ComboBox.tsx";
@@ -11,6 +12,7 @@ import HelpButton from "~/components/HelpButton.tsx";
 import Input from "~/components/Input";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea.tsx";
+import { ROUTE_DOCUMENTATION_TITLE } from "~/resources/staticRoutes.ts";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import { bindingRequirementsSchema } from "~/routes/dokumentation/documentationDataSchema.ts";
@@ -104,11 +106,20 @@ export default function BindingRequirementsForm({
       id: "intro",
       isEnabled: () => true,
       render: () => (
-        <RichText
-          markdown={dedent`
+        <>
+          <RichText
+            markdown={dedent`
             Bitte dokumentieren Sie alle verbindlichen Anforderungen i. S. v. ${markdownCiteIEA(2, 15, true)} und Dienste, die von diesen Anforderungen betroffen sind.
         `}
-        />
+          />
+          <p>
+            Hintergrund: Sie haben angegeben, dass eine
+            Interoperabilitätsbewertung erforderlich ist.{" "}
+            <Link className="text-link" to={ROUTE_DOCUMENTATION_TITLE.url}>
+              Angaben ändern
+            </Link>{" "}
+          </p>
+        </>
       ),
     },
     {
