@@ -13,18 +13,21 @@ import {
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_TITLE,
 } from "~/resources/staticRoutes";
-import {
-  getDocumentationSchemaFormUrl as _getDocumentationSchemaFormUrl,
-  DATA_SCHEMA_VERSION_V1,
-  DATA_SCHEMA_VERSION_V2,
+import type {
   DocumentationData,
+  Participation,
+  PolicyTitle,
   Principle,
   PrincipleReasoningV1,
   V1,
   V2,
-  type Participation,
-  type PolicyTitle,
 } from "~/routes/dokumentation/documentationDataSchema";
+import {
+  getDocumentationSchemaFormUrl as _getDocumentationSchemaFormUrl,
+  DATA_SCHEMA_VERSION_V1,
+  DATA_SCHEMA_VERSION_V2,
+} from "~/routes/dokumentation/documentationDataSchema";
+
 import { features } from "~/utils/featureFlags";
 import {
   readDataFromLocalStorage,
@@ -146,6 +149,7 @@ export function DocumentationDataProvider({
     // client render matches the SSR HTML (empty state). The lint rule is
     // overly strict for this case — see https://react.dev/learn/you-might-not-need-an-effect
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDocumentationData(getInitialState(version));
   }, [version]);
 

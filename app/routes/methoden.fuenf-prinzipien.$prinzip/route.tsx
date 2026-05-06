@@ -28,12 +28,8 @@ import type {
 } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions.ts";
 import type { Route } from "../../../.react-router/types/app/routes/+types/beispiele.prinzipien.$prinzip.ts";
-import type {
-  PRINZIP_ASPEKTE_QUERY,
-  PRINZIP_LIST_QUERY,
-  PrinzipListItem,
-  PrinzipListQueryReturnType,
-} from "./query";
+import type { PrinzipListItem, PrinzipListQueryReturnType } from "./query";
+import { PRINZIP_ASPEKTE_QUERY, PRINZIP_LIST_QUERY } from "./query";
 
 function AspectHeader({
   children,
