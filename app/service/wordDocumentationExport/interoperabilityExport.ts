@@ -17,51 +17,12 @@ import {
   serviceAreaOptions,
   stakeholderOptions,
 } from "~/routes/dokumentation/interoperability/BindingRequirementsForm.tsx";
-import {
-  AssessmentFormValues,
-  STORAGE_KEY,
-} from "~/routes/dokumentation/interoperability/FormVariant2.tsx";
 import { interoperabilityRatingOptions } from "~/routes/dokumentation/interoperability/InteroperabilityRatingSelect.tsx";
-import {
-  Question,
-  sections,
-} from "~/routes/dokumentation/interoperability/Sections.tsx";
+
 import {
   stringToTextRuns,
   toParagraphPatch,
 } from "~/service/wordDocumentationExport/wordDocumentationV2.ts";
-
-export function getInteroperabilitylegaltext(): IPatch {
-  const stringValue = localStorage.getItem(STORAGE_KEY);
-  if (!stringValue) return toParagraphPatch("");
-  const value = JSON.parse(stringValue) as AssessmentFormValues;
-
-  const questions = sections.flatMap((section) =>
-    section.groups.flatMap((group) => group.questions),
-  );
-  const questionMap = new Map<string, Question>();
-  for (const question of questions) {
-    questionMap.set(question.id, question);
-  }
-
-  const resultText = Object.entries(value).map(([questionKey, answer]) => {
-    if (!answer.checked) return null;
-    const question = questionMap.get(questionKey);
-    if (!question) {
-      console.error("Could not find question", questionKey);
-      return null;
-    }
-    if (answer.ownStatement) return answer.ownStatement;
-    if (answer.details)
-      return String(question.label).replace(/\.$/, ": ") + answer.details; // TODO this might be a ReactNode
-    return question.label;
-  });
-
-  const filtered = resultText.filter(Boolean);
-  if (filtered.length === 1) return toParagraphPatch(filtered[0] as string);
-  const list = filtered.map((item) => `- ${item}`).join("\n");
-  return toParagraphPatch(list);
-}
 
 export function formatInteroperabilityAssessment(
   assessment: InteroperabilityAssessmentData,
@@ -83,10 +44,12 @@ export function formatInteroperabilityAssessment(
           style: "Heading 2",
           text: `${levelLabel} Interoperabilität`,
         }),
-        new Paragraph({
-          children: stringToTextRuns(data.detail ?? ""),
-          style: "Normal0",
-        }),
+        data.detail
+          ? new Paragraph({
+              children: stringToTextRuns(data.detail),
+              style: "Normal0",
+            })
+          : null,
         new Paragraph({
           children: [
             new TextRun("Bewertung: "),
@@ -96,7 +59,7 @@ export function formatInteroperabilityAssessment(
             }),
           ],
         }),
-      ];
+      ].filter((item) => item !== null);
     },
   );
 
