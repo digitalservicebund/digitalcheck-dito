@@ -1,7 +1,7 @@
+import type { VersionedData } from "~/utils/localStorageVersioned";
 import {
   readVersionedDataFromLocalStorage,
   removeFromLocalStorage,
-  type VersionedData,
   writeVersionedDataToLocalStorage,
 } from "~/utils/localStorageVersioned";
 import type {

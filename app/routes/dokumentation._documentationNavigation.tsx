@@ -6,8 +6,8 @@ import Stepper from "~/components/Stepper";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
+import type { Route as _Route } from "~/resources/staticRoutes";
 import {
-  type Route as _Route,
   ROUTE_DOCUMENTATION,
   ROUTE_DOCUMENTATION_NOTES,
   ROUTE_DOCUMENTATION_SEND,

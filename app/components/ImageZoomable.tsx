@@ -1,7 +1,8 @@
 import { ZoomInOutlined } from "@digitalservicebund/icons";
 import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
-import Image, { type ImageProps } from "~/components/Image";
+import type { ImageProps } from "~/components/Image";
+import Image from "~/components/Image";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import twMerge from "~/utils/tailwindMerge";
 

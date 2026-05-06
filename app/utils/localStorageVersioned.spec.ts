@@ -1,10 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import type { VersionedData } from "./localStorageVersioned";
 import {
   readVersionedDataFromLocalStorage,
   removeFromLocalStorage,
   VersionMismatchError,
   writeVersionedDataToLocalStorage,
-  type VersionedData,
 } from "./localStorageVersioned";
 
 const localStorageMock = {

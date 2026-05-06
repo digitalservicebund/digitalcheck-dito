@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+import type { Route } from "~/resources/staticRoutes";
 import {
-  type Route,
   ROUTE_A11Y,
   ROUTE_DOCUMENTATION,
   ROUTE_EXAMPLES_PRINCIPLES,

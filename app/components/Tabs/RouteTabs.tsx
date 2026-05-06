@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Link, useNavigate } from "react-router";
 import { twJoin } from "tailwind-merge";
 import MobileTabPicker from "./MobileTabPicker";

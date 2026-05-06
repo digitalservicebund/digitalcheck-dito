@@ -1,5 +1,5 @@
 import { isArray } from "@posthog/core";
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Link, useOutletContext } from "react-router";
 import type { BadgeProps } from "~/components/Badge";
 import Heading from "~/components/Heading";
@@ -10,11 +10,11 @@ import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
+import type { Route } from "~/resources/staticRoutes";
 import {
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_SUMMARY,
   ROUTE_DOCUMENTATION_TITLE,
-  type Route,
 } from "~/resources/staticRoutes";
 import type {
   Participation,

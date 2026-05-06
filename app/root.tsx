@@ -1,9 +1,10 @@
-import { marked, type Tokens } from "marked";
-import { type ReactNode, useEffect, useRef } from "react";
+import type { Tokens } from "marked";
+import { marked } from "marked";
+import type { ReactNode } from "react";
+import { useEffect, useRef } from "react";
+import type { HeadersFunction, LinksFunction } from "react-router";
 import {
-  type HeadersFunction,
   Links,
-  type LinksFunction,
   Outlet,
   Scripts,
   ScrollRestoration,

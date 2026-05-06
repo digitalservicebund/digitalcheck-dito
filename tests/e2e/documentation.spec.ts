@@ -1,4 +1,5 @@
-import { expect, type Locator, type Page, test } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import { extractRawText } from "mammoth";
 import { documentationDocument } from "~/resources/content/documentation-document";
 import { digitalDocumentation } from "~/resources/content/dokumentation";

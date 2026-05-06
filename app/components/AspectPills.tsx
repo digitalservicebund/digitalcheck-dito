@@ -1,6 +1,7 @@
 import type { FormScope } from "@rvf/react";
 import { useField } from "@rvf/react";
-import { type ReactNode, useCallback, useId } from "react";
+import type { ReactNode } from "react";
+import { useCallback, useId } from "react";
 import InputError from "~/components/InputError";
 import type { PrinzipAspekt } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";

@@ -7,10 +7,8 @@ import { preCheck } from "~/resources/content/vorpruefung";
 import { ROUTE_PRECHECK_INFO } from "~/resources/staticRoutes";
 import { readVersionedDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import Index from "../vorpruefung._index";
-import {
-  DATA_SCHEMA_VERSION,
-  type PreCheckData,
-} from "../vorpruefung/preCheckDataService";
+import type { PreCheckData } from "../vorpruefung/preCheckDataService";
+import { DATA_SCHEMA_VERSION } from "../vorpruefung/preCheckDataService";
 
 vi.mock("~/utils/localStorageVersioned", async (importOriginal) => {
   const actual =

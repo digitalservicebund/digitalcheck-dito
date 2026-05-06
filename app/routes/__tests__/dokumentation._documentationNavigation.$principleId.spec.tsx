@@ -5,7 +5,8 @@ import "./utils/mockRouter";
 // End of mocks
 import "@testing-library/jest-dom";
 import { act, render, screen, waitFor, within } from "@testing-library/react";
-import userEvent, { type UserEvent } from "@testing-library/user-event";
+import type { UserEvent } from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import {
   createBrowserRouter,
   RouterProvider,

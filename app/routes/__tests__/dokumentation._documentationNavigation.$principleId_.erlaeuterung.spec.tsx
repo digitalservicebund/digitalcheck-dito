@@ -281,7 +281,7 @@ describe("DocumentationPrincipleErlaeuterung", () => {
 
   describe("no answer saved - redirect", () => {
     it("does not render content when no answer is saved", () => {
-      mockStoredData("" as "Nein");
+      mockStoredData("");
       act(() => {
         renderWithRouter();
       });

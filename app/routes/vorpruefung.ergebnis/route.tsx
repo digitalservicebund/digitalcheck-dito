@@ -25,9 +25,8 @@ import {
   ROUTE_PRECHECK,
   ROUTE_PRECHECK_RESULT,
 } from "~/resources/staticRoutes";
-import getContentForResult, {
-  type Reason,
-} from "~/routes/vorpruefung.ergebnis/getContentForResult";
+import type { Reason } from "~/routes/vorpruefung.ergebnis/getContentForResult";
+import getContentForResult from "~/routes/vorpruefung.ergebnis/getContentForResult";
 import ResultForm from "~/routes/vorpruefung.ergebnis/ResultForm";
 import { ResultType } from "./PreCheckResult";
 

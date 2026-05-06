@@ -27,12 +27,12 @@ import {
   ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_METHODS_PRINCIPLES,
 } from "~/resources/staticRoutes";
-import {
-  principleSchemaV1,
-  type IrrelevantAnswerReasoning,
-  type NegativeAnswerReasoning,
-  type PrincipleReasoningV1,
+import type {
+  IrrelevantAnswerReasoning,
+  NegativeAnswerReasoning,
+  PrincipleReasoningV1,
 } from "~/routes/dokumentation/documentationDataSchema";
+import { principleSchemaV1 } from "~/routes/dokumentation/documentationDataSchema";
 import { features } from "~/utils/featureFlags";
 import type {
   PrinzipAspekt,

@@ -4,7 +4,8 @@ import {
   PhoneOutlined,
 } from "@digitalservicebund/icons";
 import { useEffect, useRef, useState } from "react";
-import { Link, type UIMatch, useLocation, useMatches } from "react-router";
+import type { UIMatch } from "react-router";
+import { Link, useLocation, useMatches } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Container from "~/components/Container";
 import { Kopfzeile } from "~/components/kern-preview/Kopfzeile.tsx";
