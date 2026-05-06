@@ -101,6 +101,10 @@ export default defineConfig(
       ],
 
       // TypeScript rules
+      "@typescript-eslint/consistent-type-imports": [
+        "warn",
+        { disallowTypeAnnotations: false },
+      ],
       "@typescript-eslint/ban-ts-comment": "warn",
       "@typescript-eslint/no-unsafe-argument": "warn",
       "@typescript-eslint/no-unsafe-assignment": "warn",
