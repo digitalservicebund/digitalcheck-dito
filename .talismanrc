@@ -12,6 +12,8 @@ fileignoreconfig:
     ignore_detectors: [filename]
   - filename: app/root.tsx
     allowed_patterns: [posthogKey]
+  - filename: app/providers/PosthogProvider.tsx
+    allowed_patterns: [posthogKey]
   - filename: app/utils/localStorageVersioned.ts
     allowed_patterns:
       - storageKey
@@ -34,6 +36,8 @@ fileignoreconfig:
     ignore_detectors: [filecontent]
   - filename: app/resources/content/vorpruefung.ts # German text content misidentified as secret pattern
     ignore_detectors: [filecontent]
+  - filename: app/resources/content/vorpruefung-ergebnis.ts
+    checksum: dd43a2a099358801855256fb455eb22c176a0a47f5020c21170046cd5a7caf37
   - filename: app/resources/content/interoperabel-nationale-kontaktstelle.ts # German text content misidentified as secret pattern
     ignore_detectors: [filecontent]
   - filename: public/documents/interview-leitfaden/Akteurlandschaft_Analyse.pptx # Power Point
@@ -41,7 +45,7 @@ fileignoreconfig:
   - filename: app/vite-env.d.ts
     checksum: f3fd561d4d951b8b328e6e40e389372a99ed98975a21d96ee0cf479b4470998b
   - filename: app/resources/content/methode-zustaendige-akteurinnen-auflisten.ts
-    checksum: fa217ba699f3fcba996e71f4335f2f21fb6379ad1e53c7e550818adf2c01089b
+    checksum: 957c92add9454aefd5145b48757ce39e277819d9775c68fe3e6dc1a73226db3e
 allowed_patterns:
   - key
   - onKey
