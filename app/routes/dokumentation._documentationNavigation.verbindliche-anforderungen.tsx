@@ -6,6 +6,7 @@ import {
   ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS,
   ROUTE_DOCUMENTATION_SUMMARY,
 } from "~/resources/staticRoutes";
+import SkipNoticeWrapper from "~/routes/dokumentation/interoperability/SkipNoticeWrapper.tsx";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import BindingRequirementsForm from "./dokumentation/interoperability/BindingRequirementsForm";
@@ -25,17 +26,18 @@ export default function DocumentationInteroperabilityAssessment() {
           look="ds-heading-02-reg"
           className="mb-16"
         />
-        <BindingRequirementsForm
-          nextUrl={ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT.url}
-        />
-        <div>
-          <DocumentationActions
-            previousUrl={previousUrl}
-            nextUrl={nextUrl ?? ROUTE_DOCUMENTATION_SUMMARY.url}
-            showDownloadDraftButton
-            showSavingTip
+        <SkipNoticeWrapper>
+          <BindingRequirementsForm
+            nextUrl={ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT.url}
           />
-        </div>
+        </SkipNoticeWrapper>
+
+        <DocumentationActions
+          previousUrl={previousUrl}
+          nextUrl={nextUrl ?? ROUTE_DOCUMENTATION_SUMMARY.url}
+          showDownloadDraftButton
+          showSavingTip
+        />
       </div>
     </>
   );

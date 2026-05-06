@@ -5,7 +5,6 @@ import Checkbox from "~/components/Checkbox";
 import InlineNotice from "~/components/InlineNotice.tsx";
 import Input from "~/components/Input";
 import Textarea from "~/components/Textarea";
-import { ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS } from "~/resources/staticRoutes.ts";
 import { InteroperabilityRatingSelect } from "~/routes/dokumentation/interoperability/InteroperabilityRatingSelect.tsx";
 import {
   AnswersById,
@@ -130,14 +129,7 @@ export default function FormVariant2() {
           Sie dafür Variante 1.
         </InlineNotice>
         <p>
-          Ihre Angaben im Schritt{" "}
-          <a
-            href={ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS.url}
-            className={"text-link"}
-          >
-            "{ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS.title}"
-          </a>{" "}
-          haben ergeben, dass Sie für Ihr Vorhaben eine verpflichtende
+          Sie haben angegeben, dass Sie für Ihr Vorhaben eine verpflichtende
           Interoperabilitätsbewertung einreichen müssen.
         </p>
         <p>

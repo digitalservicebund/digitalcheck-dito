@@ -9,7 +9,6 @@ import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
   type Route as _Route,
   ROUTE_DOCUMENTATION,
-  ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
   ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
   ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS,
   ROUTE_DOCUMENTATION_NOTES,
@@ -41,7 +40,6 @@ type NavigationTreeContext = {
   flatRoutes: Route[];
   principleRoutes: Route[];
   routeByUrl: Map<string, Route>;
-  isInteroperabilityAssessmentAccessible: boolean;
 };
 
 type NavigationItemDefinition = {
@@ -119,18 +117,12 @@ const documentationNavigationTree: NavigationDefinition[] = [
     label: digitalDocumentation.navigation.euInteroperability,
     getChildren: () => [
       createRouteItem(
-        "eu-interoperability-requirements",
-        ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS.url,
-      ),
-      createRouteItem(
         "interoperability-binding-requirements",
         ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS.url,
       ),
       createRouteItem(
         "interoperability-assessment",
         ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT.url,
-        ({ isInteroperabilityAssessmentAccessible }) =>
-          isInteroperabilityAssessmentAccessible,
       ),
     ],
   },
@@ -274,22 +266,13 @@ export default function LayoutWithDocumentationNavigation() {
   // For nav/stepper index lookups, use principle URL when on erlaeuterung page
   const navigationCurrentUrl = principleBaseUrl ?? currentUrl;
 
-  const {
-    documentationData,
-    findDocumentationDataForUrl,
-    getDocumentationSchemaFormUrl,
-  } = useDocumentationDataService();
-
-  const isInteroperabilityAssessmentAccessible =
-    documentationData.euInteroperabilityOutcome?.outcomeId === "REQUIRED" ||
-    documentationData.euInteroperabilityOutcome?.outcomeId ===
-      "NOT_REQUIRED_NOT_FIRST_ASSESSMENT";
+  const { findDocumentationDataForUrl, getDocumentationSchemaFormUrl } =
+    useDocumentationDataService();
 
   const navigationTreeContext: NavigationTreeContext = {
     flatRoutes,
     principleRoutes,
     routeByUrl,
-    isInteroperabilityAssessmentAccessible,
   };
 
   const resolvedNavigationTree = resolveNavigationTree(

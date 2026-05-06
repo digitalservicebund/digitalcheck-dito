@@ -10,7 +10,6 @@ import {
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
-  ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_TITLE,
 } from "~/resources/staticRoutes";
@@ -376,8 +375,6 @@ export function DocumentationDataProvider({
         return documentationData.policyTitle;
       else if (url === ROUTE_DOCUMENTATION_PARTICIPATION.url)
         return documentationData.participation;
-      else if (url === ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS.url)
-        return documentationData.euInteroperabilityOutcome;
 
       const principleData = documentationData.principles?.find(
         ({ id }) => id === url,

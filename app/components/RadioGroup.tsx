@@ -17,7 +17,7 @@ interface RadioGroupProps<
   Value extends string | number = string,
 > extends BaseInputProps {
   scope: FormScope<FormData>;
-  options: Option<Value>[];
+  options: readonly Option<Value>[];
   className?: string;
   error?: string | null;
   warningInsteadOfError?: boolean;

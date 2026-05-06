@@ -21,6 +21,7 @@ export type EuInteroperabilityQuestionId =
 
 export const EU_INTEROPERABILITY_OUTCOME_IDS = [
   "REQUIRED",
+  "NOT_REQUIRED_NO_REASON",
   "NOT_REQUIRED_NO_DECISION_PROCESS",
   "NOT_REQUIRED_NOT_PROVIDED_BY_PUBLIC_OR_UNION_ENTITY",
   "NOT_REQUIRED_NOT_PROVIDED_TO_EU_ACTORS",
@@ -53,10 +54,19 @@ export function linkToIEAArticle(index?: number) {
   return `${base}#art_${index}`;
 }
 
-export function markdownCiteIEA(article: number, paragraph?: number) {
+export function markdownCiteIEA(
+  article: number,
+  paragraph?: number,
+  longForm?: boolean,
+) {
   let text = `Art. ${article}`;
   if (paragraph) text += ` Abs. ${paragraph}`;
-  text += " IEA";
+
+  text +=
+    " " +
+    (longForm
+      ? "der Verordnung für ein interoperables Europa (EU) 2024/903"
+      : "IEA");
   return `[${text}](${linkToIEAArticle(article)})`;
 }
 

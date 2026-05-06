@@ -5,7 +5,6 @@ import HelpButton from "~/components/HelpButton.tsx";
 import NewTabLink from "~/components/NewTabLink.tsx";
 import RichText from "~/components/RichText.tsx";
 import Textarea from "~/components/Textarea.tsx";
-import { ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS } from "~/resources/staticRoutes.ts";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import {
@@ -109,15 +108,7 @@ export default function FormVariant1() {
   return (
     <div className={"space-y-8"}>
       <p>
-        Ihre Angaben im Schritt{" "}
-        <a
-          href={ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS.url}
-          className={"text-link"}
-        >
-          &quot;{ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS.title}
-          &quot;
-        </a>{" "}
-        haben ergeben, dass Sie für Ihr Vorhaben eine verpflichtende
+        Sie haben angegeben, dass Sie für Ihr Vorhaben eine verpflichtende
         Interoperabilitätsbewertung einreichen müssen. Wählen Sie aus, welche{" "}
         <NewTabLink
           to={
