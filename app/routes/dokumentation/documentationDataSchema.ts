@@ -264,9 +264,9 @@ export const bindingRequirementsSchema = z.object({
       description: z.string().optional(),
       services: z.string().optional(),
       serviceAreas: z.array(z.string()),
+      stakeholderGroups: z.array(z.string()),
     }),
   ),
-  stakeholderGroups: z.array(z.string()),
 });
 
 export type BindingRequirementsData = z.infer<typeof bindingRequirementsSchema>;

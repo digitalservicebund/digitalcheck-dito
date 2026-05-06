@@ -186,7 +186,7 @@ export default function BindingRequirementsForm({
                     </fieldset>
                     <Combobox
                       options={stakeholderOptions}
-                      scope={form.scope("stakeholderGroups")}
+                      scope={requirement.scope("stakeholderGroups")}
                     >
                       Welche Gruppen sind von den verbindlichen Anforderungen
                       betroffen?
