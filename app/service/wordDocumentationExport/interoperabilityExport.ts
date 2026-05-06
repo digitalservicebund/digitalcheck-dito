@@ -12,6 +12,7 @@ import { Option } from "~/components/ComboBox.tsx";
 import {
   DocumentationData,
   InteroperabilityAssessmentData,
+  PolicyTitle,
 } from "~/routes/dokumentation/documentationDataSchema.ts";
 import {
   serviceAreaOptions,
@@ -23,6 +24,16 @@ import {
   stringToTextRuns,
   toParagraphPatch,
 } from "~/service/wordDocumentationExport/wordDocumentationV2.ts";
+
+export function formatInteroperabilityMeta(policyTitle?: PolicyTitle): IPatch {
+  if (!policyTitle) return { type: PatchType.DOCUMENT, children: [] };
+
+  const table = makeTable([
+    ["Titel des Vorhabens", policyTitle.title],
+    ["Ministerium oder Organisation", policyTitle.organization ?? ""],
+  ]);
+  return { type: PatchType.DOCUMENT, children: [table] };
+}
 
 export function formatInteroperabilityAssessment(
   assessment: InteroperabilityAssessmentData,

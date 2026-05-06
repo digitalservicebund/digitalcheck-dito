@@ -18,6 +18,7 @@ import { type DocumentationData } from "~/routes/dokumentation/documentationData
 import {
   formatBindingRequirements,
   formatInteroperabilityAssessment,
+  formatInteroperabilityMeta,
 } from "~/service/wordDocumentationExport/interoperabilityExport.ts";
 import { assetPath } from "~/utils/assetPath.ts";
 import { type PrinzipWithAspekte } from "~/utils/strapiData.server";
@@ -86,6 +87,7 @@ export const createDoc = async (
         answerOrPlaceholder(participation?.results),
       ),
       ...buildPrinciplePatches(prinzips, principleAnswers),
+      INTEROPERABILITY_META: formatInteroperabilityMeta(policyTitle),
       BINDING_REQUIREMENTS: formatBindingRequirements(bindingRequirements),
       INTEROPERABILITY_ASSESSMENT: interoperabilityAssessment
         ? formatInteroperabilityAssessment(interoperabilityAssessment)
