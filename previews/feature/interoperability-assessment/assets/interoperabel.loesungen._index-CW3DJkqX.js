@@ -1,0 +1,1 @@
+import{c as e,t,z as n}from"./jsx-runtime-qDrv0oV-.js";import{$ as r,w as i}from"./staticRoutes-j8ffinMg.js";var a=t(),o=i.url+r(`interoperable-loesungen`,`interoperable-loesungen`),s=n(function(){return(0,a.jsx)(e,{to:o,replace:!0})});export{s as default};

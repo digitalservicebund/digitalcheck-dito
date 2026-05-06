@@ -1,0 +1,1 @@
+import{i as e,t}from"./jsx-runtime-qDrv0oV-.js";import{r as n}from"./RichText-CtL8rqks.js";import{t as r}from"./tailwindMerge-C_bpYAlD.js";var i=t();function a({children:t,className:a,...o}){return(0,i.jsxs)(e,{...o,target:`_blank`,className:r(`text-link`,a),children:[t,(0,i.jsx)(n,{})]})}export{a as t};

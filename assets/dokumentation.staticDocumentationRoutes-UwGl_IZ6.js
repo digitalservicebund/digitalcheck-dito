@@ -1,0 +1,1 @@
+import{a as e,c as t,d as n,l as r,o as i,p as a,s as o}from"./staticRoutes-j8ffinMg.js";var s=[o,a,t,i,e,n,r];export{s as t};
