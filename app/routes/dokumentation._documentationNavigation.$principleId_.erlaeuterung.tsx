@@ -9,7 +9,7 @@ import MetaTitle from "~/components/Meta";
 import Textarea from "~/components/Textarea";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
-import { PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";

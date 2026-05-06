@@ -8,9 +8,11 @@ import {
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,
-  type PrinzipWithAspekte,
-  PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server.ts";
+import type {
+  PrinzipWithAspekte,
+  PrinzipWithAspekteAndExample,
+} from "~/utils/strapiData.types";
 import { DocumentationDataProvider } from "./DocumentationDataProvider";
 
 type Route = _Route & {

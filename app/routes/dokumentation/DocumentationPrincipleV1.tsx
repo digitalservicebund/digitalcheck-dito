@@ -26,19 +26,19 @@ import {
   ROUTE_METHODS_PRINCIPLES,
 } from "~/resources/staticRoutes";
 import {
-  IrrelevantAnswerReasoning,
-  NegativeAnswerReasoning,
-  PrincipleReasoningV1,
   principleSchemaV1,
   V1,
+  type IrrelevantAnswerReasoning,
+  type NegativeAnswerReasoning,
   type Principle,
+  type PrincipleReasoningV1,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { features } from "~/utils/featureFlags";
-import {
+import type {
   PrinzipAspekt,
   PrinzipWithAspekte,
   PrinzipWithAspekteAndExample,
-} from "~/utils/strapiData.server";
+} from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
 import DocumentationActions from "./DocumentationActions";
 import { useSyncedForm } from "./documentationDataHook";

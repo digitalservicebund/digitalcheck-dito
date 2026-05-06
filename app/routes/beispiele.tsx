@@ -5,11 +5,8 @@ import RichText from "~/components/RichText.tsx";
 import SupportBanner from "~/components/SupportBanner";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import { supportBanner } from "~/resources/content/shared/support-banner";
-import {
-  fetchStrapiData,
-  GET_PRINZIPS_QUERY,
-  PrinzipWithBeispielvorhaben,
-} from "~/utils/strapiData.server";
+import { fetchStrapiData, GET_PRINZIPS_QUERY } from "~/utils/strapiData.server";
+import type { PrinzipWithBeispielvorhaben } from "~/utils/strapiData.types";
 
 export async function loader() {
   const prinzipData = await fetchStrapiData<{

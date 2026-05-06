@@ -1,4 +1,5 @@
 // Import mocks first
+import type { Route } from "~/resources/staticRoutes";
 import "./utils/mockLocalStorageVersioned";
 import "./utils/mockRouter";
 // End of mocks
@@ -8,7 +9,6 @@ import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter, useOutletContext } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
-  Route,
   ROUTE_DOCUMENTATION_NOTES,
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_TITLE,
@@ -24,7 +24,7 @@ import type {
   V1,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
-import { AbsatzWithParagraph } from "~/utils/strapiData.server.ts";
+import type { AbsatzWithParagraph } from "~/utils/strapiData.types";
 import DocumentationSummaryV1 from "../dokumentation/DocumentationSummaryV1";
 
 const MOCK_ROUTE_PRINCIPLE = {

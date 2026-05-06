@@ -9,10 +9,10 @@ import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import { ROUTE_EXAMPLES_PRINCIPLES } from "~/resources/staticRoutes";
 import { absatzIdTag } from "~/utils/paragraphUtils";
-import {
+import type {
   AbsatzWithParagraph,
   PrinzipWithAspekte,
-} from "~/utils/strapiData.server";
+} from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
 
 function AspectExample({

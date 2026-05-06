@@ -23,8 +23,8 @@ import {
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,
-  PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
 export const loader = async () => {
   const prinzipData = await fetchStrapiData<{

@@ -4,9 +4,9 @@ import { MemoryRouter, useLoaderData } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { getTextFromNodes } from "~/routes/__tests__/utils/strapiUtils.ts";
 import Prinzip from "~/routes/methoden.fuenf-prinzipien.$prinzip/route";
-import { Node } from "~/utils/paragraphUtils";
-import { PrinzipWithAspekte } from "~/utils/strapiData.server.ts";
-import { PrinzipListItem } from "../methoden.fuenf-prinzipien.$prinzip/query";
+import type { Node } from "~/utils/paragraphUtils";
+import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
+import type { PrinzipListItem } from "../methoden.fuenf-prinzipien.$prinzip/query";
 
 // Mock react-router's useLoaderData hook, which is used by the component
 // to get data from its server-side loader.

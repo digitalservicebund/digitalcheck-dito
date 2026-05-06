@@ -2,7 +2,7 @@ import type { FormScope } from "@rvf/react";
 import { useField } from "@rvf/react";
 import { type ReactNode, useCallback, useId } from "react";
 import InputError from "~/components/InputError";
-import type { PrinzipAspekt } from "~/utils/strapiData.server";
+import type { PrinzipAspekt } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
 import { Pill } from "./Pill";
 

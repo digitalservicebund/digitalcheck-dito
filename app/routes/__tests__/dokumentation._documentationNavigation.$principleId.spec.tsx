@@ -1,10 +1,11 @@
 // Import mocks first
+import type { Route } from "~/resources/staticRoutes";
 import "./utils/mockLocalStorageVersioned";
 import "./utils/mockRouter";
 // End of mocks
 import "@testing-library/jest-dom";
 import { act, render, screen, waitFor, within } from "@testing-library/react";
-import userEvent, { UserEvent } from "@testing-library/user-event";
+import userEvent, { type UserEvent } from "@testing-library/user-event";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -14,13 +15,13 @@ import {
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import type { digitalDocumentation } from "~/resources/content/dokumentation";
-import { Route, ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes";
+import { ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
-import {
+import type {
   PrinzipAspekt,
   PrinzipWithAspekteAndExample,
-} from "~/utils/strapiData.server";
-import { NavigationContext } from "../dokumentation._documentationNavigation";
+} from "~/utils/strapiData.types";
+import type { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationPrinciple from "../dokumentation._documentationNavigation.$principleId";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import {

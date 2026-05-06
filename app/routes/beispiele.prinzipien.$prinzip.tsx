@@ -1,5 +1,4 @@
 import { Link, useLoaderData, useOutletContext } from "react-router";
-
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Heading from "~/components/Heading";
@@ -19,8 +18,8 @@ import {
   fetchStrapiData,
   paragraphFields,
   prinzipCoreFields,
-  PrinzipWithBeispielvorhaben,
 } from "~/utils/strapiData.server";
+import type { PrinzipWithBeispielvorhaben } from "~/utils/strapiData.types";
 import type { Route } from "./+types/beispiele.prinzipien.$prinzip";
 
 const GET_PRINZIPS_QUERY = `

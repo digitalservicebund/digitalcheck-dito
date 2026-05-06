@@ -6,7 +6,7 @@ import type {
   BaseAbsatz,
   Paragraph,
   PrinzipWithBeispielvorhaben,
-} from "~/utils/strapiData.server";
+} from "~/utils/strapiData.types";
 import ParagraphList from "./ParagraphList";
 
 const PRINZIPS: PrinzipWithBeispielvorhaben[] = [

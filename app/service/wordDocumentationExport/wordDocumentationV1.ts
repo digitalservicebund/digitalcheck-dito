@@ -22,10 +22,10 @@ import {
   PrincipleReasoningV1,
   V1,
 } from "~/routes/dokumentation/documentationDataSchema";
-import {
+import type {
   PrinzipAspekt,
-  type PrinzipWithAspekte,
-} from "~/utils/strapiData.server";
+  PrinzipWithAspekte,
+} from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
 import strapiBlocksToDocx from "./strapiBlocksToWord";
 const { saveAs } = fileSaver;

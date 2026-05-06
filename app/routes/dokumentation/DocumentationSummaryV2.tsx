@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Link, useOutletContext } from "react-router";
 import type { BadgeProps } from "~/components/Badge";
 import Heading from "~/components/Heading";
@@ -15,12 +15,12 @@ import {
   ROUTE_DOCUMENTATION_TITLE,
   type Route,
 } from "~/resources/staticRoutes";
-import {
-  type Participation,
-  type PolicyTitle,
-  type Principle,
+import type {
+  Participation,
+  PolicyTitle,
+  Principle,
 } from "~/routes/dokumentation/documentationDataSchema";
-import type { PrinzipWithAspekte } from "~/utils/strapiData.server";
+import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
 import { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationActions from "./DocumentationActions";

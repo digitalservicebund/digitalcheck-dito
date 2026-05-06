@@ -1,5 +1,4 @@
 import { useLoaderData } from "react-router";
-
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
 import MetaTitle from "~/components/Meta";
@@ -10,8 +9,8 @@ import getFeatureFlag from "~/utils/featureFlags.server.ts";
 import {
   fetchStrapiData,
   visualisationFields,
-  Visualisierung,
 } from "~/utils/strapiData.server";
+import type { Visualisierung } from "~/utils/strapiData.types";
 
 const GET_VISUALISATIONS_QUERY = `
 ${visualisationFields}

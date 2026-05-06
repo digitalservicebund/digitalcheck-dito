@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { data, Link, useLoaderData } from "react-router";
 import { twJoin } from "tailwind-merge";
 import AccordionItem from "~/components/AccordionItem.tsx";
@@ -17,13 +17,13 @@ import {
   ROUTE_METHODS_PRINCIPLES,
 } from "~/resources/staticRoutes.ts";
 import { absatzIdTag, Node } from "~/utils/paragraphUtils";
-import {
+import { fetchStrapiData } from "~/utils/strapiData.server.ts";
+import type {
   AbsatzWithParagraph,
   BasePrinzip,
-  fetchStrapiData,
   PrinzipAspekt,
   PrinzipWithAspekteAndExample,
-} from "~/utils/strapiData.server.ts";
+} from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions.ts";
 import type { Route } from "../../../.react-router/types/app/routes/+types/beispiele.prinzipien.$prinzip.ts";
 import {

@@ -7,7 +7,7 @@ import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
-import { PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import DocumentationActions from "./DocumentationActions";
 import { useSyncedForm } from "./documentationDataHook";
 import { useDocumentationDataService } from "./DocumentationDataProvider";

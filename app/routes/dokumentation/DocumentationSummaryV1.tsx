@@ -24,7 +24,7 @@ import {
   type PolicyTitle,
   type Principle,
 } from "~/routes/dokumentation/documentationDataSchema";
-import type { PrinzipWithAspekte } from "~/utils/strapiData.server";
+import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
 import { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationActions from "./DocumentationActions";

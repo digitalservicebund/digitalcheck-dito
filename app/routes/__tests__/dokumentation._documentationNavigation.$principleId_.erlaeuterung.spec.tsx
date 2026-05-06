@@ -16,10 +16,10 @@ import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import type { digitalDocumentation } from "~/resources/content/dokumentation";
 import { Route, ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
-import {
+import type {
   PrinzipAspekt,
   PrinzipWithAspekteAndExample,
-} from "~/utils/strapiData.server";
+} from "~/utils/strapiData.types";
 import { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationPrincipleErlaeuterung from "../dokumentation._documentationNavigation.$principleId_.erlaeuterung";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";

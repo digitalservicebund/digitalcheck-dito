@@ -15,7 +15,7 @@ import {
 } from "~/resources/staticRoutes";
 import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { features } from "~/utils/featureFlags";
-import { PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 
 type Route = _Route & {
