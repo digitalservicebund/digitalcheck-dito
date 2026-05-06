@@ -44,11 +44,7 @@ export function useWordDocumentationV1() {
           `/documents/${FILE_NAME_DOCUMENTATION_TEMPLATE}`,
         );
         const templateData = await template.arrayBuffer();
-        const doc = await createDoc(
-          templateData,
-          documentationData as DocumentationData<V1>,
-          prinzips,
-        );
+        const doc = await createDoc(templateData, documentationData, prinzips);
         saveAs(doc, documentationDocument.filename);
       } catch (e) {
         console.error(e);

@@ -1,7 +1,9 @@
-import { DrawOutlined } from "@digitalservicebund/icons";
-import { LightbulbOutlined } from "@digitalservicebund/icons";
-import { StickyNote2Outlined } from "@digitalservicebund/icons";
-import { SupportOutlined } from "@digitalservicebund/icons";
+import {
+  DrawOutlined,
+  LightbulbOutlined,
+  StickyNote2Outlined,
+  SupportOutlined,
+} from "@digitalservicebund/icons";
 import {
   ROUTE_METHODS_RESPONSIBLE_ACTORS,
   ROUTE_SUPPORT,
