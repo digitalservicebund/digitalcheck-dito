@@ -14,7 +14,7 @@ import Textarea from "~/components/Textarea.tsx";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import { bindingRequirementsSchema } from "~/routes/dokumentation/documentationDataSchema.ts";
-import { markdownCiteIEA } from "~/routes/dokumentation/euInteroperabilityFlow.tsx";
+import { markdownCiteIEA } from "~/routes/dokumentation/interoperability/euInteroperabilityFlow.tsx";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 
 export type Option = {

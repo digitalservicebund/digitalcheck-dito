@@ -9,7 +9,7 @@ import {
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
-import EuInteroperabilityQuestions from "./dokumentation/EuInteroperabilityQuestions";
+import EuInteroperabilityQuestions from "./dokumentation/interoperability/EuInteroperabilityQuestions.tsx";
 
 export default function DocumentationEuInteroperabilityRequirements() {
   const { previousUrl, nextUrl } = useOutletContext<NavigationContext>();

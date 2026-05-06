@@ -35,7 +35,7 @@ import {
   removeFromLocalStorage,
   writeVersionedDataToLocalStorage,
 } from "~/utils/localStorageVersioned";
-import { EU_INTEROPERABILITY_ANSWERS_STORAGE_KEY } from "./euInteroperabilityFlow.tsx";
+import { EU_INTEROPERABILITY_ANSWERS_STORAGE_KEY } from "./interoperability/euInteroperabilityFlow.tsx";
 
 export const STORAGE_KEY = "documentationData";
 

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import RichText from "~/components/RichText.tsx";
-import { useDocumentationDataService } from "./DocumentationDataProvider";
+import { useDocumentationDataService } from "../DocumentationDataProvider.tsx";
 import {
   EU_INTEROPERABILITY_ANSWERS_STORAGE_KEY,
   EU_INTEROPERABILITY_OUTCOMES,
