@@ -34,7 +34,7 @@ export const participationSchema = z.object({
 });
 
 export const euInteroperabilityOutcomeSchema = z.object({
-  outcomeId: z.enum(EU_INTEROPERABILITY_OUTCOME_IDS),
+  outcomeId: z.enum(EU_INTEROPERABILITY_OUTCOME_IDS).optional(),
 });
 
 // TODO: delete when feature flag simplifiedPrincipleFlow is on

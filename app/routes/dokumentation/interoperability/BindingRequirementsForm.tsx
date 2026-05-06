@@ -17,53 +17,11 @@ import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import { bindingRequirementsSchema } from "~/routes/dokumentation/documentationDataSchema.ts";
 import { markdownCiteIEA } from "~/routes/dokumentation/interoperability/euInteroperabilityFlow.tsx";
+import {
+  serviceAreaOptions,
+  stakeholderOptions,
+} from "~/routes/dokumentation/interoperability/values.ts";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
-
-export type Option = {
-  value: string;
-  label: string;
-};
-
-export const serviceAreaOptions: readonly Option[] = [
-  { value: "defense", label: "Verteidigung" },
-  { value: "economicAffairs", label: "Wirtschaftliche Angelegenheiten" },
-  { value: "education", label: "Bildung" },
-  { value: "environmentalProtection", label: "Umweltschutz" },
-  { value: "generalPublicServices", label: "Allgemeine öffentliche Dienste" },
-  { value: "health", label: "Gesundheit" },
-  {
-    value: "housingAndCommunityAmenities",
-    label: "Wohnungswesen und kommunale Einrichtungen",
-  },
-  {
-    value: "publicOrderAndSafety",
-    label: "Öffentliche Ordnung und Sicherheit",
-  },
-  {
-    value: "recreationCultureAndReligion",
-    label: "Freizeit, Kultur und Religion",
-  },
-  { value: "socialProtection", label: "Sozialschutz" },
-] as const;
-
-export const stakeholderOptions: readonly Option[] = [
-  { value: "localPublicSectorBody", label: "Lokale öffentliche Einrichtung" },
-  {
-    value: "regionalPublicSectorBody",
-    label: "Regionale öffentliche Einrichtung",
-  },
-  {
-    value: "nationalPublicSectorBody",
-    label: "Nationale öffentliche Einrichtung",
-  },
-  {
-    value: "europeanUnionInstitution",
-    label: "EU-Institution",
-  },
-  { value: "europeanUnionAgency", label: "EU-Agentur" },
-  { value: "europeanUnionBody", label: "EU-Einrichtung" },
-  { value: "privateBusinesses", label: "Private Unternehmen" },
-] as const;
 
 type SectionNode = {
   id: string;

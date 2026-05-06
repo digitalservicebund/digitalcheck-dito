@@ -1,29 +1,6 @@
 import { FormScope, useField, ValueOfInputType } from "@rvf/react";
 import { useId } from "react";
-
-type RatingOption = {
-  label: string;
-  value: string;
-};
-
-export const interoperabilityRatingOptions: RatingOption[] = [
-  {
-    label: "förderlich",
-    value: "positive",
-  },
-  {
-    label: "neutral",
-    value: "neutral",
-  },
-  {
-    label: "negativ oder nicht förderlich",
-    value: "risky",
-  },
-  {
-    label: "nicht anwendbar",
-    value: "not-applicable",
-  },
-];
+import { interoperabilityRatingOptions } from "~/routes/dokumentation/interoperability/values.ts";
 
 export function InteroperabilityRatingSelect({
   scope,

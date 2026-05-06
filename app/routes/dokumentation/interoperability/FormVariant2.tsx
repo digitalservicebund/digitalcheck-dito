@@ -189,7 +189,7 @@ export default function FormVariant2() {
               </div>
             ))}
             <InteroperabilityRatingSelect
-              scope={form.scope(`level-${section.title}.rating`)}
+              scope={form.scope(`level-${section.id}.rating`)}
               levelDe={section.levelDe}
             />
           </section>

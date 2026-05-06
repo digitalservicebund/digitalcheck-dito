@@ -6,10 +6,10 @@ import {
   PolicyTitle,
 } from "~/routes/dokumentation/documentationDataSchema.ts";
 import {
+  interoperabilityRatingOptions,
   serviceAreaOptions,
   stakeholderOptions,
-} from "~/routes/dokumentation/interoperability/BindingRequirementsForm.tsx";
-import { interoperabilityRatingOptions } from "~/routes/dokumentation/interoperability/InteroperabilityRatingSelect.tsx";
+} from "~/routes/dokumentation/interoperability/values.ts";
 import { metadataTable } from "~/service/wordDocumentationExport/docxUtils.ts";
 
 export function buildAppendixPatch({
