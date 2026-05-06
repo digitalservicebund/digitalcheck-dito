@@ -41,7 +41,7 @@ fileignoreconfig:
   - filename: app/vite-env.d.ts
     checksum: f3fd561d4d951b8b328e6e40e389372a99ed98975a21d96ee0cf479b4470998b
   - filename: app/resources/content/methode-zustaendige-akteurinnen-auflisten.ts
-    checksum: 0ae338c5f5e7aefb9ba34d7b8d17619c5b5c14112bae75a5a81389982ec41e06
+    checksum: fa217ba699f3fcba996e71f4335f2f21fb6379ad1e53c7e550818adf2c01089b
 allowed_patterns:
   - key
   - onKey
