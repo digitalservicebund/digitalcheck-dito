@@ -1,6 +1,7 @@
 // TODO: Compatibility layer for the React Router -> Astro migration.
 // Should become obsolete once the migration is complete and all routes are proper Astro pages.
 "use client";
+import type { Route as _Route } from "@/config/routes";
 import {
   dokumentation,
   dokumentation_absenden,
@@ -8,7 +9,6 @@ import {
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
   dokumentation_zusammenfassung,
-  type Route as _Route,
 } from "@/config/routes";
 import LayoutWithDocumentationNavigation from "~/routes/dokumentation._documentationNavigation";
 import PrinciplePage from "~/routes/dokumentation._documentationNavigation.$principleId";

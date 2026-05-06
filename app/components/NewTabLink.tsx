@@ -1,5 +1,6 @@
 import { OpenInNewIcon } from "~/components/OpenInNewIcon.tsx";
-import { Link, type LinkProps } from "~/utils/routerCompat";
+import type { LinkProps } from "~/utils/routerCompat";
+import { Link } from "~/utils/routerCompat";
 import twMerge from "~/utils/tailwindMerge";
 
 /**

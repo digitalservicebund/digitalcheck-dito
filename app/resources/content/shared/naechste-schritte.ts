@@ -1,5 +1,5 @@
 import { dokumentation, methoden, vorpruefung } from "@/config/routes";
-import { type Step } from "~/utils/contentTypes.ts";
+import type { Step } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./contact";
 

@@ -1,8 +1,7 @@
+import type { IPatch, IRunOptions } from "docx";
 import {
   convertInchesToTwip,
   ExternalHyperlink,
-  type IPatch,
-  type IRunOptions,
   patchDocument,
   PatchType,
   TextRun,
@@ -150,7 +149,7 @@ export const buildPrinciplePatches = (
       ),
       // We always need to fill both patches to avoid the tags rendering
       [`PRINCIPLE_${prinzipIndex + 1}_REASONING`]: toParagraphPatch(
-        answerOrPlaceholderOptional(answer?.reasoning as string),
+        answerOrPlaceholderOptional(answer?.reasoning),
       ),
       [`PRINCIPLE_${prinzipIndex + 1}_ASPECTS`]: toParagraphPatch(
         hasPositivePrincipleAnswer

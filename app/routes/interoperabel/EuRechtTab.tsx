@@ -3,7 +3,7 @@ import {
   PlaylistAddCheckOutlined,
   SelectAllOutlined,
 } from "@digitalservicebund/icons";
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import ImageBox from "~/components/ImageBox";

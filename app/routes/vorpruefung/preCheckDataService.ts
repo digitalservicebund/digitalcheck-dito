@@ -1,13 +1,13 @@
+import type { VersionedData } from "~/utils/localStorageVersioned";
 import {
   readVersionedDataFromLocalStorage,
   removeFromLocalStorage,
-  type VersionedData,
   writeVersionedDataToLocalStorage,
 } from "~/utils/localStorageVersioned";
-import {
-  type PreCheckAnswerSchema,
-  type PreCheckDataSchema,
-  type PreCheckResultSchema,
+import type {
+  PreCheckAnswerSchema,
+  PreCheckDataSchema,
+  PreCheckResultSchema,
 } from "./preCheckDataSchema";
 
 export const DATA_SCHEMA_VERSION = "1";

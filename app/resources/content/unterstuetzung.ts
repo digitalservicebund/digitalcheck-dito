@@ -11,7 +11,7 @@ import {
   TimerOutlined,
 } from "@digitalservicebund/icons";
 import { assetPath } from "~/utils/assetPath";
-import { type ContentLink } from "~/utils/contentTypes.ts";
+import type { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
 

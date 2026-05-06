@@ -8,14 +8,8 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import {
-  createContext,
-  isValidElement,
-  type ReactElement,
-  type ReactNode,
-  useContext,
-  useMemo,
-} from "react";
+import type { ReactElement, ReactNode } from "react";
+import { createContext, isValidElement, useContext, useMemo } from "react";
 import { twJoin } from "tailwind-merge";
 import { general } from "~/resources/content/shared/general";
 import { Link } from "~/utils/routerCompat";

@@ -13,11 +13,11 @@ import DocumentationParticipation from "~/routes/dokumentation._documentationNav
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { MemoryRouter } from "~/utils/routerCompat";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
-import {
-  DATA_SCHEMA_VERSION_V1,
-  type DocumentationData,
-  type V1,
+import type {
+  DocumentationData,
+  V1,
 } from "../dokumentation/documentationDataSchema";
+import { DATA_SCHEMA_VERSION_V1 } from "../dokumentation/documentationDataSchema";
 
 const renderWithRouter = () => {
   return render(

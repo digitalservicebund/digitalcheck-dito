@@ -1,4 +1,4 @@
-import { type Node } from "~/utils/paragraphUtils.ts";
+import type { Node } from "~/utils/paragraphUtils.ts";
 
 export function getTextFromNodes(nodes: Node[]) {
   const found = nodes.reduce((acc, node) => {

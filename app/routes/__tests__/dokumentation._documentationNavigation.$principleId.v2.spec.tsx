@@ -2,15 +2,16 @@
 import "./utils/mockLocalStorageVersioned";
 import "./utils/mockRouter";
 // End of mocks
+import type { Route } from "@/config/routes";
 import {
   dokumentation_beteiligungsformate,
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
-  type Route,
 } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { act, render, screen } from "@testing-library/react";
-import userEvent, { type UserEvent } from "@testing-library/user-event";
+import type { UserEvent } from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { DocumentationNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
@@ -20,18 +21,18 @@ import {
   RouterProvider,
   useParams,
 } from "~/utils/routerCompat";
-import {
-  type PrinzipAspekt,
-  type PrinzipWithAspekteAndExample,
+import type {
+  PrinzipAspekt,
+  PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.types";
-import { type NavigationContext } from "../dokumentation._documentationNavigation";
+import type { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationPrinciple from "../dokumentation._documentationNavigation.$principleId";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
-import {
-  DATA_SCHEMA_VERSION_V2,
-  type DocumentationData,
-  type V2,
+import type {
+  DocumentationData,
+  V2,
 } from "../dokumentation/documentationDataSchema";
+import { DATA_SCHEMA_VERSION_V2 } from "../dokumentation/documentationDataSchema";
 
 vi.mock("~/contexts/FeatureFlagContext", () => ({
   useFeatureFlag: vi.fn().mockReturnValue(true),

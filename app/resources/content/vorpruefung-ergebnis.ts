@@ -5,7 +5,7 @@ import {
   vorpruefung_hinweise,
 } from "@/config/routes";
 import { steps } from "~/resources/content/shared/naechste-schritte";
-import { type ContentLink, type Step } from "~/utils/contentTypes.ts";
+import type { ContentLink, Step } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
 

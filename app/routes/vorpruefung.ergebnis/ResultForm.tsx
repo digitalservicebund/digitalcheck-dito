@@ -4,13 +4,8 @@ import {
   EmailOutlined,
 } from "@digitalservicebund/icons";
 import { useField } from "@rvf/react";
-import {
-  type Dispatch,
-  type SetStateAction,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import type { Dispatch, SetStateAction } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Alert from "~/components/Alert";
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
@@ -32,7 +27,7 @@ import {
 } from "../vorpruefung/preCheckDataHook";
 import { resultSchema } from "../vorpruefung/preCheckDataSchema";
 import { ResultType } from "./PreCheckResult";
-import { type ResultContent } from "./getContentForResult";
+import type { ResultContent } from "./getContentForResult";
 
 export default function ResultForm({
   resultContent,

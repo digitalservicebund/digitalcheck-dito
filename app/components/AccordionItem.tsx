@@ -4,7 +4,7 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { twJoin } from "tailwind-merge";
 import RichText from "~/components/RichText";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils";

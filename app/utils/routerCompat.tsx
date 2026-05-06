@@ -6,13 +6,15 @@
  * are NOT included here — those are replaced by props in Astro page components.
  */
 
+import type {
+  AnchorHTMLAttributes,
+  ComponentType,
+  DetailedHTMLProps,
+  MouseEvent,
+  ReactNode,
+} from "react";
 import {
-  type AnchorHTMLAttributes,
-  type ComponentType,
   createContext,
-  type DetailedHTMLProps,
-  type MouseEvent,
-  type ReactNode,
   useCallback,
   useContext,
   useEffect,

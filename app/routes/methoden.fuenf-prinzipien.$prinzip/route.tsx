@@ -2,7 +2,7 @@ import {
   beispiele_prinzipien,
   methoden_fuenfPrinzipien,
 } from "@/config/routes";
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { twJoin } from "tailwind-merge";
 import AccordionItem from "~/components/AccordionItem.tsx";
 import Badge from "~/components/Badge.tsx";
@@ -12,21 +12,20 @@ import { BreakoutHero } from "~/components/Hero.tsx";
 import { PrincipleHightlightNullModifier } from "~/components/PrincipleHighlightModifier.tsx";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer";
-import {
-  PRINCIPLE_COLORS,
-  type PrincipleNumber,
-} from "~/resources/constants.ts";
+import type { PrincipleNumber } from "~/resources/constants.ts";
+import { PRINCIPLE_COLORS } from "~/resources/constants.ts";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien.ts";
-import { absatzIdTag, type Node } from "~/utils/paragraphUtils";
+import type { Node } from "~/utils/paragraphUtils";
+import { absatzIdTag } from "~/utils/paragraphUtils";
 import { Link } from "~/utils/routerCompat";
-import {
-  type AbsatzWithParagraph,
-  type BasePrinzip,
-  type PrinzipAspekt,
-  type PrinzipWithAspekteAndExample,
+import type {
+  AbsatzWithParagraph,
+  BasePrinzip,
+  PrinzipAspekt,
+  PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.types.ts";
 import { slugify } from "~/utils/utilFunctions.ts";
-import { type PrinzipListItem } from "./query";
+import type { PrinzipListItem } from "./query";
 
 function AspectHeader({
   children,

@@ -1,5 +1,5 @@
-import { type PrincipleNumber } from "~/resources/constants";
-import { type Node } from "~/utils/paragraphUtils";
+import type { PrincipleNumber } from "~/resources/constants";
+import type { Node } from "~/utils/paragraphUtils";
 
 export type EinschaetzungReferat =
   | "Ja"

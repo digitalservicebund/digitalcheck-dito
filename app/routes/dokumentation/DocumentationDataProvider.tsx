@@ -2,6 +2,7 @@ import {
   dokumentation_beteiligungsformate,
   dokumentation_regelungsvorhabenTitel,
 } from "@/config/routes";
+import type { ReactNode } from "react";
 import {
   createContext,
   useCallback,
@@ -9,21 +10,22 @@ import {
   useEffect,
   useMemo,
   useState,
-  type ReactNode,
 } from "react";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
+import type {
+  DocumentationData,
+  Participation,
+  PolicyTitle,
+  Principle,
+  PrincipleReasoningV1,
+  V1,
+  V2,
+} from "~/routes/dokumentation/documentationDataSchema";
 import {
   getDocumentationSchemaFormUrl as _getDocumentationSchemaFormUrl,
   DATA_SCHEMA_VERSION_V1,
   DATA_SCHEMA_VERSION_V2,
-  type DocumentationData,
-  type Participation,
-  type PolicyTitle,
-  type Principle,
-  type PrincipleReasoningV1,
-  type V1,
-  type V2,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { features } from "~/utils/featureFlags";
 import {
@@ -122,11 +124,11 @@ function getInitialState(version: string): DocumentationData<V> {
     version === DATA_SCHEMA_VERSION_V2 &&
     storedData.version === DATA_SCHEMA_VERSION_V1
   ) {
-    storedData = migrateV1ToV2(storedData as DocumentationData<V1>);
+    storedData = migrateV1ToV2(storedData);
   }
 
   if (storedData !== null) return storedData;
-  return { version } as DocumentationData<V>;
+  return { version };
 }
 
 export function DocumentationDataProvider({

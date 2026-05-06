@@ -1,7 +1,7 @@
+import type { TabGroupProps as HeadlessTabGroupProps } from "@headlessui/react";
 import {
   Tab as HeadlessTab,
   TabGroup as HeadlessTabGroup,
-  type TabGroupProps as HeadlessTabGroupProps,
   TabList as HeadlessTabList,
   TabPanel as HeadlessTabPanel,
   TabPanels,

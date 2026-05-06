@@ -8,7 +8,7 @@ import {
 } from "~/resources/staticRoutes";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import { Link } from "~/utils/routerCompat";
-import { type Visualisierung } from "~/utils/strapiData.types";
+import type { Visualisierung } from "~/utils/strapiData.types";
 import { formatDate } from "~/utils/utilFunctions";
 import { BlocksRenderer } from "./BlocksRenderer";
 

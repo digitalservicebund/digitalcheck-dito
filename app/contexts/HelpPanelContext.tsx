@@ -1,10 +1,5 @@
-import {
-  createContext,
-  type ReactNode,
-  useCallback,
-  useContext,
-  useState,
-} from "react";
+import type { ReactNode } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 import { useLocation } from "~/utils/routerCompat";
 
 export type HelpSection = { id: string; title: string; content: ReactNode };

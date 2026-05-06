@@ -1,6 +1,7 @@
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
-import { type ResultContent } from "~/routes/vorpruefung.ergebnis/getContentForResult";
-import { type PreCheckResult, ResultType } from "./PreCheckResult";
+import type { ResultContent } from "~/routes/vorpruefung.ergebnis/getContentForResult";
+import type { PreCheckResult } from "./PreCheckResult";
+import { ResultType } from "./PreCheckResult";
 
 const { emailTemplate } = preCheckResult.form;
 

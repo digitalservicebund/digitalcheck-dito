@@ -17,11 +17,8 @@ import {
 import { MemoryRouter } from "~/utils/routerCompat";
 import { DocumentationContinueActions } from "./DocumentationContinueActions";
 import { DocumentationDataProvider } from "./DocumentationDataProvider";
-import {
-  DATA_SCHEMA_VERSION_V1,
-  type DocumentationData,
-  type V1,
-} from "./documentationDataSchema";
+import type { DocumentationData, V1 } from "./documentationDataSchema";
+import { DATA_SCHEMA_VERSION_V1 } from "./documentationDataSchema";
 
 const { mockDownloadDocumentation } = vi.hoisted(() => ({
   mockDownloadDocumentation: vi.fn(),

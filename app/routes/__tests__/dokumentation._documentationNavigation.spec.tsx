@@ -1,9 +1,9 @@
+import type { Route } from "@/config/routes";
 import {
   dokumentation,
   dokumentation_beteiligungsformate,
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
-  type Route,
 } from "@/config/routes";
 import "./utils/mockLocalStorageVersioned";
 // End of mocks
@@ -18,12 +18,14 @@ import LayoutWithDocumentationNavigation from "~/routes/dokumentation._documenta
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { MemoryRouter, useRouteLoaderData } from "~/utils/routerCompat";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
+import type {
+  DocumentationData,
+  V1,
+  V2,
+} from "../dokumentation/documentationDataSchema";
 import {
   DATA_SCHEMA_VERSION_V1,
   DATA_SCHEMA_VERSION_V2,
-  type DocumentationData,
-  type V1,
-  type V2,
 } from "../dokumentation/documentationDataSchema";
 
 vi.mock("~/contexts/FeatureFlagContext", () => ({
@@ -393,7 +395,7 @@ describe("navigation on pages of documentation", () => {
               aspects: ["aspect-1"],
             },
           ],
-        } as DocumentationData<V2> as DocumentationData<V1>,
+        } as DocumentationData<V2>,
         expected: {
           completedTitle: false, // is current route so no states are shown
           completedParticipation: true,
@@ -408,7 +410,7 @@ describe("navigation on pages of documentation", () => {
         name: "unfilled form (V2)",
         documentationData: {
           version: DATA_SCHEMA_VERSION_V2,
-        } as DocumentationData<V2> as DocumentationData<V1>,
+        },
         expected: {
           completedTitle: false,
           completedParticipation: false,
@@ -438,7 +440,7 @@ describe("navigation on pages of documentation", () => {
               aspects: [], // empty aspects fails V2 validation
             },
           ],
-        } as DocumentationData<V2> as DocumentationData<V1>,
+        } as DocumentationData<V2>,
         expected: {
           completedTitle: false, // is current route so no states are shown
           completedParticipation: true,

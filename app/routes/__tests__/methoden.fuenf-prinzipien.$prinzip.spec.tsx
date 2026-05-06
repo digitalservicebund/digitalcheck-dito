@@ -3,13 +3,13 @@ import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { getTextFromNodes } from "~/routes/__tests__/utils/strapiUtils.ts";
 import Prinzip from "~/routes/methoden.fuenf-prinzipien.$prinzip/route";
-import { type Node } from "~/utils/paragraphUtils";
+import type { Node } from "~/utils/paragraphUtils";
 import { MemoryRouter } from "~/utils/routerCompat";
-import {
-  type PrinzipWithAspekte,
-  type PrinzipWithAspekteAndExample,
+import type {
+  PrinzipWithAspekte,
+  PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.types.ts";
-import { type PrinzipListItem } from "../methoden.fuenf-prinzipien.$prinzip/query";
+import type { PrinzipListItem } from "../methoden.fuenf-prinzipien.$prinzip/query";
 
 const IntersectionObserverMock = vi.fn(
   class {

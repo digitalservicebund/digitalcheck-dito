@@ -14,11 +14,11 @@ import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
-import {
-  type DocumentationData,
-  type Principle,
-  principleAnswerSchemaV2,
+import type {
+  DocumentationData,
+  Principle,
 } from "./dokumentation/documentationDataSchema";
+import { principleAnswerSchemaV2 } from "./dokumentation/documentationDataSchema";
 
 function usePrincipleId(): string | undefined {
   const { pathname } = useLocation();

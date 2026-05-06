@@ -17,7 +17,7 @@ import {
 } from "@digitalservicebund/icons";
 import { ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX } from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
-import { type ContentLink } from "~/utils/contentTypes";
+import type { ContentLink } from "~/utils/contentTypes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
 

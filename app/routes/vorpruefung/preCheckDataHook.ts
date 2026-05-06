@@ -1,8 +1,9 @@
-import { type FieldValues, type FormOpts, useForm } from "@rvf/react";
+import type { FieldValues, FormOpts } from "@rvf/react";
+import { useForm } from "@rvf/react";
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { getResultForAnswers } from "../vorpruefung.ergebnis/getResultForAnswers";
-import { type PreCheckResultSchema } from "./preCheckDataSchema";
+import type { PreCheckResultSchema } from "./preCheckDataSchema";
 import {
   getPreCheckData,
   getPreCheckDataServerSnapshot,

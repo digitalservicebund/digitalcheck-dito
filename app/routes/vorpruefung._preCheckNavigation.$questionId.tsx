@@ -12,10 +12,8 @@ import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { usePreCheckData, useSyncedForm } from "./vorpruefung/preCheckDataHook";
-import {
-  answerSchema,
-  type PreCheckAnswerSchema,
-} from "./vorpruefung/preCheckDataSchema";
+import type { PreCheckAnswerSchema } from "./vorpruefung/preCheckDataSchema";
+import { answerSchema } from "./vorpruefung/preCheckDataSchema";
 import { addOrUpdateAnswer } from "./vorpruefung/preCheckDataService";
 
 const { questions, answerOptions, nextButton } = preCheck;

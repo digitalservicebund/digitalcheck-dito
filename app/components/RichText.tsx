@@ -1,4 +1,5 @@
-import { marked, Marked, type Renderer, type Tokens } from "marked";
+import type { Renderer, Tokens } from "marked";
+import { marked, Marked } from "marked";
 import { getDownloadableExtensionName } from "~/utils/fileExtensionUtils";
 import twMerge from "~/utils/tailwindMerge";
 import { isExternalUrl } from "~/utils/utilFunctions";

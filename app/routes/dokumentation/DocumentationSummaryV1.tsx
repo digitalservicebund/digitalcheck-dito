@@ -1,10 +1,10 @@
+import type { Route } from "@/config/routes";
 import {
   dokumentation_beteiligungsformate,
   dokumentation_regelungsvorhabenTitel,
-  type Route,
 } from "@/config/routes";
 import { isArray } from "@posthog/core";
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
 import type { BadgeProps } from "~/components/Badge";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
@@ -14,13 +14,13 @@ import InlineNotice from "~/components/InlineNotice";
 import RichText from "~/components/RichText";
 import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import {
-  type Participation,
-  type PolicyTitle,
-  type Principle,
-  type PrincipleReasoningV1,
-  type V1,
-  type V2,
+import type {
+  Participation,
+  PolicyTitle,
+  Principle,
+  PrincipleReasoningV1,
+  V1,
+  V2,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { Link } from "~/utils/routerCompat";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.types";

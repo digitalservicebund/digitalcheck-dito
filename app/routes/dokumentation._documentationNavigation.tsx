@@ -1,11 +1,12 @@
+import type { Route as _Route } from "@/config/routes";
 import {
   dokumentation,
   dokumentation_absenden,
   dokumentation_hinweise,
   dokumentation_zusammenfassung,
-  type Route as _Route,
 } from "@/config/routes";
-import { Fragment, type ReactNode } from "react";
+import type { ReactNode } from "react";
+import { Fragment } from "react";
 import { twJoin } from "tailwind-merge";
 import HelpSidepanel from "~/components/HelpSidepanel";
 import Nav from "~/components/Nav";

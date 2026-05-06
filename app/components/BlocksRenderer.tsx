@@ -1,6 +1,6 @@
-import { type JSX } from "react";
+import type { JSX } from "react";
 import { nestListInListItems } from "~/utils/blocksRendererUtils";
-import { type Node } from "~/utils/paragraphUtils";
+import type { Node } from "~/utils/paragraphUtils";
 import { Link } from "~/utils/routerCompat";
 import { isExternalUrl } from "~/utils/utilFunctions";
 import NewTabLink from "./NewTabLink.tsx";

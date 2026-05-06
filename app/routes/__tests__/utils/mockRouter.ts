@@ -1,5 +1,5 @@
 import { vi } from "vitest";
-import { type NavigationContext } from "~/routes/dokumentation._documentationNavigation";
+import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
 
 const { mockNavigate, mockNavigationContext } = vi.hoisted(() => {
   const ctx: NavigationContext = {

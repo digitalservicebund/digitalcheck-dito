@@ -1,8 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
-import {
-  action,
-  type ClientSideError,
-} from "~/routes/handle-client-side-error";
+import type { ClientSideError } from "~/routes/handle-client-side-error";
+import { action } from "~/routes/handle-client-side-error";
 
 function getActionParams(request: Request) {
   return {

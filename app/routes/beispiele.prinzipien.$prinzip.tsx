@@ -12,7 +12,7 @@ import Separator from "~/components/Separator";
 import RouteTabs from "~/components/Tabs/RouteTabs";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
-import { type PrinzipWithBeispielvorhaben } from "~/utils/strapiData.types";
+import type { PrinzipWithBeispielvorhaben } from "~/utils/strapiData.types";
 
 export default function DigitaltauglichkeitPrinzipienDetail({
   prinzip,

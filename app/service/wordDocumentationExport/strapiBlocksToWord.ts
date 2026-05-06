@@ -1,8 +1,8 @@
+import type { IParagraphOptions } from "docx";
 import {
   convertInchesToTwip,
   ExternalHyperlink,
   InternalHyperlink,
-  type IParagraphOptions,
   Paragraph,
   TextRun,
 } from "docx";

@@ -2,7 +2,7 @@ import { methoden, methoden_technischeUmsetzbarkeit } from "@/config/routes";
 import { ArrowCircleRightOutlined } from "@digitalservicebund/icons";
 import { ROUTE_DOWNLOAD_PRINCIPLE_POSTER } from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
-import { type ContentLink } from "~/utils/contentTypes.ts";
+import type { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsFivePrinciples = {

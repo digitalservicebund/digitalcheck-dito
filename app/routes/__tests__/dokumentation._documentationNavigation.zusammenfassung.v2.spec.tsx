@@ -3,11 +3,11 @@ import "./utils/mockLocalStorageVersioned";
 import "./utils/mockRouter";
 // End of mocks
 
+import type { Route } from "@/config/routes";
 import {
   dokumentation_beteiligungsformate,
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
-  type Route,
 } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
@@ -24,7 +24,7 @@ import type {
 } from "~/routes/dokumentation/documentationDataSchema";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { MemoryRouter } from "~/utils/routerCompat";
-import { type AbsatzWithParagraph } from "~/utils/strapiData.types.ts";
+import type { AbsatzWithParagraph } from "~/utils/strapiData.types.ts";
 import DocumentationSummaryV2 from "../dokumentation/DocumentationSummaryV2";
 
 vi.mock("~/contexts/FeatureFlagContext", () => ({

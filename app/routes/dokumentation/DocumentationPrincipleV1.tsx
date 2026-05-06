@@ -3,13 +3,10 @@ import {
   methoden_fuenfPrinzipien,
 } from "@/config/routes";
 import { AddCircleOutlineOutlined } from "@digitalservicebund/icons";
-import { type FormScope, useField, useFieldArray } from "@rvf/react";
-import {
-  type ChangeEventHandler,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import type { FormScope } from "@rvf/react";
+import { useField, useFieldArray } from "@rvf/react";
+import type { ChangeEventHandler } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { PrincipleExplanation } from "~/components/Absatz.tsx";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
@@ -28,12 +25,12 @@ import Textarea from "~/components/Textarea";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider.tsx";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import {
-  type IrrelevantAnswerReasoning,
-  type NegativeAnswerReasoning,
-  type PrincipleReasoningV1,
-  principleSchemaV1,
+import type {
+  IrrelevantAnswerReasoning,
+  NegativeAnswerReasoning,
+  PrincipleReasoningV1,
 } from "~/routes/dokumentation/documentationDataSchema";
+import { principleSchemaV1 } from "~/routes/dokumentation/documentationDataSchema";
 import { features } from "~/utils/featureFlags";
 import { Link } from "~/utils/routerCompat";
 import type {

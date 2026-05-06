@@ -1,11 +1,9 @@
+import type { IParagraphOptions, IPatch, IRunOptions } from "docx";
 import {
   Bookmark,
   convertInchesToTwip,
   ExternalHyperlink,
   HeadingLevel,
-  type IParagraphOptions,
-  type IPatch,
-  type IRunOptions,
   Paragraph,
   patchDocument,
   PatchType,
@@ -17,10 +15,10 @@ import { documentationDocument } from "~/resources/content/documentation-documen
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { contact } from "~/resources/content/shared/contact";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider";
-import {
-  type DocumentationData,
-  type PrincipleReasoningV1,
-  type V1,
+import type {
+  DocumentationData,
+  PrincipleReasoningV1,
+  V1,
 } from "~/routes/dokumentation/documentationDataSchema";
 import type {
   PrinzipAspekt,
@@ -44,11 +42,7 @@ export function useWordDocumentationV1() {
           `/documents/${FILE_NAME_DOCUMENTATION_TEMPLATE}`,
         );
         const templateData = await template.arrayBuffer();
-        const doc = await createDoc(
-          templateData,
-          documentationData as DocumentationData<V1>,
-          prinzips,
-        );
+        const doc = await createDoc(templateData, documentationData, prinzips);
         saveAs(doc, documentationDocument.filename);
       } catch (e) {
         console.error(e);

@@ -11,7 +11,7 @@ import RichText from "~/components/RichText";
 import { SearchParamTabs } from "~/components/Tabs/Tabs";
 import { support } from "~/resources/content/unterstuetzung";
 import { assetPath } from "~/utils/assetPath";
-import { type ContentLink } from "~/utils/contentTypes";
+import type { ContentLink } from "~/utils/contentTypes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 type Offering = {

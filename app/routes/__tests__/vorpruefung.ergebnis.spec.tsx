@@ -9,10 +9,10 @@ import { preCheck } from "~/resources/content/vorpruefung";
 import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import Result from "~/routes/vorpruefung.ergebnis/route";
 import { readVersionedDataFromLocalStorage } from "~/utils/localStorageVersioned";
+import type { PreCheckData } from "../vorpruefung/preCheckDataService";
 import {
   DATA_SCHEMA_VERSION,
   getPreCheckData,
-  type PreCheckData,
 } from "../vorpruefung/preCheckDataService";
 
 const { mockNavigate } = vi.hoisted(() => ({

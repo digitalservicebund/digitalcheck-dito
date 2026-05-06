@@ -1,7 +1,6 @@
-import { type ReactNode } from "react";
-import FeatureFlagContext, {
-  type FeatureFlags,
-} from "~/contexts/FeatureFlagContext";
+import type { ReactNode } from "react";
+import type { FeatureFlags } from "~/contexts/FeatureFlagContext";
+import FeatureFlagContext from "~/contexts/FeatureFlagContext";
 
 export default function FeatureFlagProvider({
   children,

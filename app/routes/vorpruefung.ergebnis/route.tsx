@@ -21,14 +21,13 @@ import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
-import getContentForResult, {
-  type Reason,
-} from "~/routes/vorpruefung.ergebnis/getContentForResult";
+import type { Reason } from "~/routes/vorpruefung.ergebnis/getContentForResult";
+import getContentForResult from "~/routes/vorpruefung.ergebnis/getContentForResult";
 import ResultForm from "~/routes/vorpruefung.ergebnis/ResultForm";
 import { ResultType } from "./PreCheckResult";
 
 import { PreCheckFAQ } from "~/components/content/PreCheckFAQ.tsx";
-import { type Step } from "~/utils/contentTypes.ts";
+import type { Step } from "~/utils/contentTypes.ts";
 import { usePreCheckData } from "../vorpruefung/preCheckDataHook";
 
 const nextSteps = {

@@ -13,10 +13,8 @@ import DocumentationTitle from "~/routes/dokumentation._documentationNavigation.
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { MemoryRouter } from "~/utils/routerCompat";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
-import {
-  DATA_SCHEMA_VERSION_V1,
-  type DocumentationData,
-} from "../dokumentation/documentationDataSchema";
+import type { DocumentationData } from "../dokumentation/documentationDataSchema";
+import { DATA_SCHEMA_VERSION_V1 } from "../dokumentation/documentationDataSchema";
 
 const mockedReadDataFromLocalStorage = vi.mocked(
   readDataFromLocalStorage<DocumentationData>,

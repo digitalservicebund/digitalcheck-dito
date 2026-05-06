@@ -1,6 +1,7 @@
 import { ZoomInOutlined } from "@digitalservicebund/icons";
 import { twJoin } from "tailwind-merge";
-import Image, { type ImageProps } from "~/components/Image";
+import type { ImageProps } from "~/components/Image";
+import Image from "~/components/Image";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import { Link } from "~/utils/routerCompat";
 import twMerge from "~/utils/tailwindMerge";

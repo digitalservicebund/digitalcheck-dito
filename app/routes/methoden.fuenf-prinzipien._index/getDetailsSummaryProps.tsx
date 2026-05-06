@@ -1,16 +1,16 @@
 import { beispiele_prinzipien } from "@/config/routes";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
-import { type DetailsSummaryProps } from "~/components/DetailsSummary.tsx";
-import { type DetailsSummaryListProps } from "~/components/InfoBox.tsx";
+import type { DetailsSummaryProps } from "~/components/DetailsSummary.tsx";
+import type { DetailsSummaryListProps } from "~/components/InfoBox.tsx";
 import ItalicModifier from "~/components/ItalicModifier.tsx";
 import PrincipleHighlightModifier from "~/components/PrincipleHighlightModifier";
 import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import { absatzIdTag } from "~/utils/paragraphUtils";
 import { Link } from "~/utils/routerCompat";
-import {
-  type AbsatzWithParagraph,
-  type PrinzipWithAspekte,
+import type {
+  AbsatzWithParagraph,
+  PrinzipWithAspekte,
 } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
 
