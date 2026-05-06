@@ -5,9 +5,9 @@ import {
 } from "~/utils/paragraphUtils";
 import type {
   BaseAbsatz,
+  Paragraph,
   PrinzipWithBeispielvorhaben,
 } from "~/utils/strapiData.types";
-import { Paragraph } from "~/utils/strapiData.types";
 import Absatz from "./Absatz";
 import { BlocksRenderer } from "./BlocksRenderer";
 import DetailsSummary from "./DetailsSummary";
