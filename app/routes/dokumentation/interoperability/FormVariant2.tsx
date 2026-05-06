@@ -2,6 +2,7 @@ import { useForm } from "@rvf/react";
 import { useEffect, useMemo, useState } from "react";
 import { z } from "zod";
 import Checkbox from "~/components/Checkbox";
+import InlineNotice from "~/components/InlineNotice.tsx";
 import Input from "~/components/Input";
 import Textarea from "~/components/Textarea";
 import { ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS } from "~/resources/staticRoutes.ts";
@@ -124,6 +125,10 @@ export default function FormVariant2() {
   return (
     <>
       <div className={"space-y-8"}>
+        <InlineNotice look={"warning"}>
+          Die Angaben werden aktuell nicht im Zwischenstand gespeichert. Nutzen
+          Sie dafür Variante 1.
+        </InlineNotice>
         <p>
           Ihre Angaben im Schritt{" "}
           <a

@@ -1,12 +1,17 @@
-import { type FormApi, useForm } from "@rvf/react";
+import { type FormApi } from "@rvf/react";
 import { ReactNode } from "react";
-import { z } from "zod";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import HelpButton from "~/components/HelpButton.tsx";
 import NewTabLink from "~/components/NewTabLink.tsx";
 import RichText from "~/components/RichText.tsx";
 import Textarea from "~/components/Textarea.tsx";
 import { ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS } from "~/resources/staticRoutes.ts";
+import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
+import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
+import {
+  interoperabilityAssessmentSchema,
+  type InteroperabilityAssessmentData,
+} from "~/routes/dokumentation/documentationDataSchema.ts";
 import { interoperabilityExplanationParagraphs } from "~/routes/dokumentation/interoperability/explanationMarkdown.ts";
 import { InteroperabilityRatingSelect } from "~/routes/dokumentation/interoperability/InteroperabilityRatingSelect.tsx";
 import {
@@ -14,11 +19,16 @@ import {
   sections,
 } from "~/routes/dokumentation/interoperability/Sections.tsx";
 
-const assessmentFormSchema = z.record(z.string(), z.any());
+const defaultAssessmentValues: InteroperabilityAssessmentData = {
+  legal: { detail: "", rating: "" },
+  organizational: { detail: "", rating: "" },
+  semantic: { detail: "", rating: "" },
+  technical: { detail: "", rating: "" },
+};
 
 type InteroperabilityLevelSectionProps = Readonly<{
-  form: FormApi<z.infer<typeof assessmentFormSchema>>;
-  level: string;
+  form: FormApi<InteroperabilityAssessmentData>;
+  level: Section["id"];
   levelDe: string;
   description?: ReactNode;
 }>;
@@ -29,7 +39,7 @@ function LevelAssessmentForm({
   levelDe,
   description,
 }: InteroperabilityLevelSectionProps) {
-  const scope = form.scope(`level-${level}.rating`);
+  const scope = form.scope(`${level}.rating`);
 
   return (
     <div className="space-y-32">
@@ -38,10 +48,7 @@ function LevelAssessmentForm({
         Voraussetzungen für eine europaweit grenzüberschreitende Nutzung
         geschaffen haben.
       </p>
-      <Textarea
-        description={description}
-        scope={form.scope(`level-${level}.detail`)}
-      >
+      <Textarea description={description} scope={form.scope(`${level}.detail`)}>
         Erklärung
       </Textarea>
       <InteroperabilityRatingSelect levelDe={levelDe} scope={scope} />
@@ -88,9 +95,15 @@ function ExamplesList({ level }: Readonly<{ level: Section["id"] }>) {
 }
 
 export default function FormVariant1() {
-  const form = useForm({
-    schema: assessmentFormSchema,
-    defaultValues: {},
+  const { documentationData, setInteroperabilityAssessmentData } =
+    useDocumentationDataService();
+
+  const form = useSyncedForm({
+    schema: interoperabilityAssessmentSchema,
+    defaultValues: defaultAssessmentValues,
+    storedData: documentationData.interoperabilityAssessment,
+    setDataCallback: (data) =>
+      setInteroperabilityAssessmentData(data ?? undefined),
   });
 
   return (

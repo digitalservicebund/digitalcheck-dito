@@ -21,6 +21,7 @@ import {
   DATA_SCHEMA_VERSION_V2,
   DocumentationData,
   EuInteroperabilityOutcome,
+  InteroperabilityAssessmentData,
   Principle,
   PrincipleReasoningV1,
   V1,
@@ -53,6 +54,9 @@ type DocumentationDataContextType = {
   ) => void;
   setBindingRequirementsData: (
     bindingRequirements?: BindingRequirementsData,
+  ) => void;
+  setInteroperabilityAssessmentData: (
+    interoperabilityAssessment?: InteroperabilityAssessmentData,
   ) => void;
   addOrUpdatePrinciple: (newPrinciple?: Principle<V1 | V2>) => void;
   addOrUpdatePrincipleAnswer: (
@@ -240,6 +244,21 @@ export function DocumentationDataProvider({
     [documentationData, createOrUpdateDocumentationData],
   );
 
+  const setInteroperabilityAssessmentData = useCallback(
+    (interoperabilityAssessment?: InteroperabilityAssessmentData) => {
+      const updatedDocumentationData = {
+        ...documentationData,
+        interoperabilityAssessment,
+      };
+
+      if (!interoperabilityAssessment)
+        delete updatedDocumentationData.interoperabilityAssessment;
+
+      createOrUpdateDocumentationData(updatedDocumentationData);
+    },
+    [documentationData, createOrUpdateDocumentationData],
+  );
+
   const addOrUpdatePrinciple = useCallback(
     (newPrinciple?: Principle<V>) => {
       if (!newPrinciple) return;
@@ -392,7 +411,8 @@ export function DocumentationDataProvider({
     !!documentationData.principles ||
     !!documentationData.participation ||
     !!documentationData.policyTitle ||
-    !!documentationData.euInteroperabilityOutcome;
+    !!documentationData.euInteroperabilityOutcome ||
+    !!documentationData.interoperabilityAssessment;
 
   const value = useMemo(
     () => ({
@@ -405,6 +425,7 @@ export function DocumentationDataProvider({
       setParticipation,
       setEuInteroperabilityOutcome,
       setBindingRequirementsData,
+      setInteroperabilityAssessmentData,
       addOrUpdatePrinciple,
       addOrUpdatePrincipleAnswer,
       addOrUpdatePrincipleReasoning,
@@ -420,6 +441,7 @@ export function DocumentationDataProvider({
       setParticipation,
       setEuInteroperabilityOutcome,
       setBindingRequirementsData,
+      setInteroperabilityAssessmentData,
       addOrUpdatePrinciple,
       addOrUpdatePrincipleAnswer,
       addOrUpdatePrincipleReasoning,

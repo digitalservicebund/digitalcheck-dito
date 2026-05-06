@@ -6,6 +6,25 @@ type RatingOption = {
   value: string;
 };
 
+export const interoperabilityRatingOptions: RatingOption[] = [
+  {
+    label: "förderlich",
+    value: "positive",
+  },
+  {
+    label: "neutral",
+    value: "neutral",
+  },
+  {
+    label: "negativ oder nicht förderlich",
+    value: "risky",
+  },
+  {
+    label: "nicht anwendbar",
+    value: "not-applicable",
+  },
+];
+
 export function InteroperabilityRatingSelect({
   scope,
   levelDe,
@@ -14,24 +33,6 @@ export function InteroperabilityRatingSelect({
   levelDe: string;
 }>) {
   const field = useField(scope);
-  const options: RatingOption[] = [
-    {
-      label: "förderlich",
-      value: "positive",
-    },
-    {
-      label: "neutral",
-      value: "neutral",
-    },
-    {
-      label: "negativ oder nicht förderlich",
-      value: "risky",
-    },
-    {
-      label: "nicht anwendbar",
-      value: "not-applicable",
-    },
-  ];
 
   const selectId = useId();
 
@@ -51,7 +52,7 @@ export function InteroperabilityRatingSelect({
         <option disabled={true} value="">
           bitte auswählen
         </option>
-        {options.map((option) => (
+        {interoperabilityRatingOptions.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>

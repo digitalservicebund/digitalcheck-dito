@@ -16,17 +16,14 @@ import { contact } from "~/resources/content/shared/contact";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider";
 import { type DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
 import {
-  AssessmentFormValues,
-  STORAGE_KEY,
-} from "~/routes/dokumentation/interoperability/FormVariant2.tsx";
-import {
-  Question,
-  sections,
-} from "~/routes/dokumentation/interoperability/Sections.tsx";
+  formatBindingRequirements,
+  formatInteroperabilityAssessment,
+} from "~/service/wordDocumentationExport/interoperabilityExport.ts";
 import { assetPath } from "~/utils/assetPath.ts";
 import { type PrinzipWithAspekte } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 import strapiBlocksToDocx from "./strapiBlocksToWord";
+
 const { saveAs } = fileSaver;
 const { principlePages } = digitalDocumentation;
 
@@ -59,79 +56,6 @@ export function useWordDocumentationV2() {
   return { downloadDocumentation };
 }
 
-export function getInteroperabilitylegaltext(): IPatch {
-  const stringValue = localStorage.getItem(STORAGE_KEY);
-  if (!stringValue) return toParagraphPatch(answerOrPlaceholder());
-  const value = JSON.parse(stringValue) as AssessmentFormValues;
-
-  const questions = sections.flatMap((section) =>
-    section.groups.flatMap((group) => group.questions),
-  );
-  const questionMap = new Map<string, Question>();
-  for (const question of questions) {
-    questionMap.set(question.id, question);
-  }
-
-  const resultText = Object.entries(value).map(([questionKey, answer]) => {
-    if (!answer.checked) return null;
-    const question = questionMap.get(questionKey);
-    if (!question) {
-      console.error("Could not find question", questionKey);
-      return null;
-    }
-    if (answer.ownStatement) return answer.ownStatement;
-    if (answer.details)
-      return String(question.label).replace(/\.$/, ": ") + answer.details; // TODO this might be a ReactNode
-    return question.label;
-  });
-
-  const filtered = resultText.filter(Boolean);
-  if (filtered.length === 1) return toParagraphPatch(filtered[0] as string);
-  const list = filtered.map((item) => `- ${item}`).join("\n");
-  return toParagraphPatch(list);
-}
-
-function formatBindingRequirements(
-  bindingRequirements: DocumentationData["bindingRequirements"],
-): IPatch {
-  if (!bindingRequirements?.requirements?.length)
-    return toParagraphPatch("Keine Angaben");
-
-  const requirementParagraphs: Paragraph[] =
-    bindingRequirements.requirements.flatMap((requirement, index) => {
-      const headerParagraph = new Paragraph({
-        children: [
-          new TextRun({
-            text: `Anforderung ${index + 1}`,
-            bold: true,
-            break: 1,
-          }),
-        ],
-      });
-
-      const strings = [
-        `Beschreibung: ${requirement.description}`,
-        `Rechtsgrundlage: ${requirement.legalReference}`,
-        `Transeuropäische Dienste: ${requirement.services
-          ?.split("\n")
-          .join(", ")}`,
-        `Bereiche: ${requirement.serviceAreas.join(", ")}`,
-        `Gruppen: ${(requirement.stakeholderGroups ?? ["keine"]).join(", ")}`,
-      ];
-
-      const contentParagraph = new Paragraph({
-        children: stringsToTextRuns(strings),
-      });
-
-      return [headerParagraph, contentParagraph];
-    });
-
-  return {
-    type: PatchType.DOCUMENT,
-    children: requirementParagraphs,
-  };
-}
-
 export const createDoc = async (
   templateData: ArrayBuffer | Uint8Array,
   {
@@ -139,6 +63,7 @@ export const createDoc = async (
     participation,
     principles: principleAnswers,
     bindingRequirements,
+    interoperabilityAssessment,
   }: DocumentationData,
   prinzips: PrinzipWithAspekte[],
 ) => {
@@ -162,8 +87,9 @@ export const createDoc = async (
       ),
       ...buildPrinciplePatches(prinzips, principleAnswers),
       BINDING_REQUIREMENTS: formatBindingRequirements(bindingRequirements),
-      INTEROPERABILITY_LEGAL_TEXT: getInteroperabilitylegaltext(),
-      INTEROPERABILITY_LEGAL_EVALUATION: toParagraphPatch("positiv"),
+      INTEROPERABILITY_ASSESSMENT: interoperabilityAssessment
+        ? formatInteroperabilityAssessment(interoperabilityAssessment)
+        : toParagraphPatch(""),
     },
     keepOriginalStyles: true,
   });
@@ -203,7 +129,7 @@ const answerOrPlaceholder = (answer?: string) =>
 const answerOrPlaceholderOptional = (answer?: string) =>
   answer || documentationDocument.placeholderOptional;
 
-function stringsToTextRuns(
+export function stringsToTextRuns(
   split: string[],
   options: IRunOptions = {},
 ): TextRun[] {

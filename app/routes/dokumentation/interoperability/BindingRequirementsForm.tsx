@@ -17,7 +17,12 @@ import { bindingRequirementsSchema } from "~/routes/dokumentation/documentationD
 import { markdownCiteIEA } from "~/routes/dokumentation/euInteroperabilityFlow.tsx";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 
-const functionOptions = [
+export type Option = {
+  value: string;
+  label: string;
+};
+
+export const serviceAreaOptions: readonly Option[] = [
   { value: "defense", label: "Verteidigung" },
   { value: "economicAffairs", label: "Wirtschaftliche Angelegenheiten" },
   { value: "education", label: "Bildung" },
@@ -39,7 +44,7 @@ const functionOptions = [
   { value: "socialProtection", label: "Sozialschutz" },
 ] as const;
 
-const stakeholderOptions = [
+export const stakeholderOptions: readonly Option[] = [
   { value: "localPublicSectorBody", label: "Lokale öffentliche Einrichtung" },
   {
     value: "regionalPublicSectorBody",
@@ -65,6 +70,14 @@ type SectionNode = {
   render: () => React.ReactNode;
 };
 
+const defaultRequirementValue = {
+  description: "",
+  legalReference: "",
+  services: undefined,
+  stakeholderGroups: [],
+  serviceAreas: [],
+};
+
 export default function BindingRequirementsForm({
   nextUrl,
 }: Readonly<{ nextUrl?: string }>) {
@@ -77,8 +90,7 @@ export default function BindingRequirementsForm({
     schema: bindingRequirementsSchema,
     defaultValues: {
       functions: [],
-      requirements: [{ serviceAreas: [] }],
-      stakeholderGroups: [],
+      requirements: [defaultRequirementValue],
     },
     setDataCallback: (data) => setBindingRequirementsData(data ?? undefined),
     storedData,
@@ -181,7 +193,7 @@ export default function BindingRequirementsForm({
                       </legend>
                       <Combobox
                         scope={requirement.scope("serviceAreas")}
-                        options={functionOptions}
+                        options={serviceAreaOptions}
                       />
                     </fieldset>
                     <Combobox
@@ -202,7 +214,7 @@ export default function BindingRequirementsForm({
             look="ghost"
             iconLeft={<AddCircleOutlineOutlined />}
             onClick={async () => {
-              await requirements.push({ serviceAreas: [] });
+              await requirements.push(defaultRequirementValue);
             }}
           >
             Verbindliche Anforderung hinzufügen
