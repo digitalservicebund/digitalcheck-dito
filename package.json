@@ -10,7 +10,7 @@
     "build:preview": "PUBLIC_STAGE=preview PREVIEW_BASE_PATH=/ astro build",
     "clean": "rm -rf dist/",
     "dev": "astro dev",
-    "dev:preview": "PUBLIC_STAGE=preview PREVIEW_BASE_PATH=/preview/ pnpm dev",
+    "dev:preview": "PUBLIC_STAGE=preview PREVIEW_BASE_PATH=/preview pnpm dev",
     "docker": "docker compose up --build",
     "format:check": "prettier --check",
     "format:fix": "pnpm run format:fix-selected .",
