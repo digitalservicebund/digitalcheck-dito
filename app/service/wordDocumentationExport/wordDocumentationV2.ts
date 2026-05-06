@@ -91,6 +91,47 @@ export function getInteroperabilitylegaltext(): IPatch {
   return toParagraphPatch(list);
 }
 
+function formatBindingRequirements(
+  bindingRequirements: DocumentationData["bindingRequirements"],
+): IPatch {
+  if (!bindingRequirements?.requirements?.length)
+    return toParagraphPatch("Keine Angaben");
+
+  const requirementParagraphs: Paragraph[] =
+    bindingRequirements.requirements.flatMap((requirement, index) => {
+      const headerParagraph = new Paragraph({
+        children: [
+          new TextRun({
+            text: `Anforderung ${index + 1}`,
+            bold: true,
+            break: 1,
+          }),
+        ],
+      });
+
+      const strings = [
+        `Beschreibung: ${requirement.description}`,
+        `Rechtsgrundlage: ${requirement.legalReference}`,
+        `Transeuropäische Dienste: ${requirement.services
+          ?.split("\n")
+          .join(", ")}`,
+        `Bereiche: ${requirement.serviceAreas.join(", ")}`,
+        `Gruppen: ${(requirement.stakeholderGroups ?? ["keine"]).join(", ")}`,
+      ];
+
+      const contentParagraph = new Paragraph({
+        children: stringsToTextRuns(strings),
+      });
+
+      return [headerParagraph, contentParagraph];
+    });
+
+  return {
+    type: PatchType.DOCUMENT,
+    children: requirementParagraphs,
+  };
+}
+
 export const createDoc = async (
   templateData: ArrayBuffer | Uint8Array,
   {
@@ -98,7 +139,6 @@ export const createDoc = async (
     participation,
     principles: principleAnswers,
     bindingRequirements,
-    euInteroperabilityOutcome,
   }: DocumentationData,
   prinzips: PrinzipWithAspekte[],
 ) => {
@@ -121,17 +161,11 @@ export const createDoc = async (
         answerOrPlaceholder(participation?.results),
       ),
       ...buildPrinciplePatches(prinzips, principleAnswers),
-      BINDING_REQUIREMENTS: toParagraphPatch(
-        answerOrPlaceholder(
-          bindingRequirements?.requirements
-            .map((entry) => `${entry.description} | ${entry.legalReference}`)
-            .join(", "),
-        ),
-      ),
-      AFFECTED_STAKEHOLDERS: toParagraphPatch("TODO"),
+      BINDING_REQUIREMENTS: formatBindingRequirements(bindingRequirements),
       INTEROPERABILITY_LEGAL_TEXT: getInteroperabilitylegaltext(),
       INTEROPERABILITY_LEGAL_EVALUATION: toParagraphPatch("positiv"),
     },
+    keepOriginalStyles: true,
   });
 };
 
@@ -169,13 +203,23 @@ const answerOrPlaceholder = (answer?: string) =>
 const answerOrPlaceholderOptional = (answer?: string) =>
   answer || documentationDocument.placeholderOptional;
 
-export const stringToTextRuns = (content: string, options: IRunOptions = {}) =>
-  content
-    .split("\n")
-    .map(
-      (line, idx) =>
-        new TextRun({ ...options, text: line, break: Number(idx > 0) }),
-    );
+function stringsToTextRuns(
+  split: string[],
+  options: IRunOptions = {},
+): TextRun[] {
+  return split.map(
+    (line, idx) =>
+      new TextRun({ ...options, text: line, break: Number(idx > 0) }),
+  );
+}
+
+export const stringToTextRuns = (
+  content: string,
+  options: IRunOptions = {},
+) => {
+  const split = content.split("\n");
+  return stringsToTextRuns(split, options);
+};
 
 // Builds all patches that are needed for the principles
 // - Title
