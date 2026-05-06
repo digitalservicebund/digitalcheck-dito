@@ -162,8 +162,14 @@ export default function InteroperableSolutionsDcatAp() {
                 </li>
 
                 <li>
-                  <strong>Wo gibt es Hilfe?</strong> Beim DigitalService /
-                  Nationale Kontaktstelle für Interoperabilität.
+                  <strong>Wo gibt es Hilfe?</strong> Bei der{" "}
+                  <a
+                    className="text-link"
+                    href="mailto:interoperabilitaet@zfl.bund.de"
+                  >
+                    Nationalen Kontaktstelle für Interoperabilität
+                  </a>{" "}
+                  (DigitalService).
                 </li>
               </ul>
             </InfoBox>
