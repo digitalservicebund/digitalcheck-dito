@@ -6,7 +6,7 @@ import {
   Table,
   TableCell,
   TableRow,
-  TextRun,
+  WidthType,
 } from "docx";
 import { Option } from "~/components/ComboBox.tsx";
 import {
@@ -20,24 +20,53 @@ import {
 } from "~/routes/dokumentation/interoperability/BindingRequirementsForm.tsx";
 import { interoperabilityRatingOptions } from "~/routes/dokumentation/interoperability/InteroperabilityRatingSelect.tsx";
 
-import {
-  stringToTextRuns,
-  toParagraphPatch,
-} from "~/service/wordDocumentationExport/wordDocumentationV2.ts";
+export function buildAppendixPatch({
+  policyTitle,
+  interoperabilityAssessment,
+  bindingRequirements,
+}: Pick<
+  DocumentationData,
+  "interoperabilityAssessment" | "bindingRequirements" | "policyTitle"
+>): IPatch {
+  const hasEuData =
+    interoperabilityAssessment !== undefined ||
+    Boolean(bindingRequirements?.requirements.length);
 
-export function formatInteroperabilityMeta(policyTitle?: PolicyTitle): IPatch {
-  if (!policyTitle) return { type: PatchType.DOCUMENT, children: [] };
+  if (!hasEuData)
+    return {
+      type: PatchType.PARAGRAPH,
+      children: [],
+    };
+  const children: FileChild[] = [
+    new Paragraph({
+      text: "Anhang 1: EU-Interoperabilität",
+      pageBreakBefore: true,
+      style: "Heading1",
+    }),
+    ...formatInteroperabilityMeta(policyTitle),
+    ...formatBindingRequirements(bindingRequirements),
+    ...formatInteroperabilityAssessment(interoperabilityAssessment),
+  ];
+  return {
+    type: PatchType.DOCUMENT,
+    children: children.filter((child) => child !== null),
+  };
+}
 
-  const table = makeTable([
-    ["Titel des Vorhabens", policyTitle.title],
-    ["Ministerium oder Organisation", policyTitle.organization ?? ""],
+export function formatInteroperabilityMeta(
+  policyTitle?: PolicyTitle,
+): FileChild[] {
+  const table = buildMetadataTable([
+    ["Titel des Vorhabens", policyTitle?.title ?? ""],
+    ["Ministerium oder Organisation", policyTitle?.organization ?? ""],
   ]);
-  return { type: PatchType.DOCUMENT, children: [table] };
+  return [table];
 }
 
 export function formatInteroperabilityAssessment(
-  assessment: InteroperabilityAssessmentData,
-): IPatch {
+  assessment?: InteroperabilityAssessmentData,
+): FileChild[] {
+  if (!assessment) return [];
   const levelMap: Record<keyof typeof assessment, string> = {
     legal: "Rechtliche",
     semantic: "Semantische",
@@ -46,51 +75,41 @@ export function formatInteroperabilityAssessment(
   };
   const ratingMap = keyValueToMap(interoperabilityRatingOptions);
 
-  const levelParagraphs: Paragraph[] = Object.entries(assessment).flatMap(
-    ([level, data]) => {
-      const levelLabel = levelMap[level as keyof typeof assessment];
+  return Object.entries(assessment).flatMap(([level, data]) => {
+    const levelLabel = levelMap[level as keyof typeof assessment];
 
-      return [
-        new Paragraph({
-          style: "Heading 2",
-          text: `${levelLabel} Interoperabilität`,
-        }),
-        data.detail
-          ? new Paragraph({
-              children: stringToTextRuns(data.detail),
-              style: "Normal0",
-            })
-          : null,
-        new Paragraph({
-          children: [
-            new TextRun("Bewertung: "),
-            new TextRun({
-              text: data.rating ? ratingMap.get(data.rating) : "",
-              bold: true,
-            }),
-          ],
-        }),
-      ].filter((item) => item !== null);
-    },
-  );
-
-  return { type: PatchType.DOCUMENT, children: levelParagraphs };
+    return [
+      new Paragraph({
+        style: "Heading2",
+        text: `${levelLabel} Interoperabilität`,
+      }),
+      buildMetadataTable([
+        ["Erklärung", data.detail ?? ""],
+        ["Bewertung", (data.rating ? ratingMap.get(data.rating) : "") ?? ""],
+      ]),
+    ];
+  });
 }
 
 function keyValueToMap(options: readonly Option[]): Map<string, string> {
   return new Map(options.map(({ value, label }) => [value, label]));
 }
 
-function makeTable(rows: string[][]) {
+function buildMetadataTable(rows: string[][]) {
   return new Table({
-    columnWidths: [3505, 5505],
+    width: { size: 100, type: WidthType.PERCENTAGE },
+    columnWidths: [30, 70], // for display in LibreOffice
     rows: rows.map(
       (row) =>
         new TableRow({
           children: row.map(
-            (cell) =>
+            (cell, cellIndex) =>
               new TableCell({
                 children: [new Paragraph(cell)],
+                width: {
+                  size: cellIndex === 0 ? "30%" : "70%", // for display in Microsoft Word
+                  type: WidthType.PERCENTAGE,
+                },
               }),
           ),
         }),
@@ -100,50 +119,43 @@ function makeTable(rows: string[][]) {
 
 export function formatBindingRequirements(
   bindingRequirements: DocumentationData["bindingRequirements"],
-): IPatch {
+): FileChild[] {
   if (!bindingRequirements?.requirements?.length)
-    return toParagraphPatch("Keine Angaben");
+    return [new Paragraph("Keine Angaben")];
 
   const serviceAreaMap = keyValueToMap(serviceAreaOptions);
   const stakeholderMap = keyValueToMap(stakeholderOptions);
 
-  const requirementParagraphs: FileChild[] =
-    bindingRequirements.requirements.flatMap((requirement, index) => {
-      const headerParagraph = new Paragraph({
-        style: "Heading 2",
-        children: [
-          new TextRun({
-            text: `Verbindliche Anforderung ${index + 1}`,
-          }),
-        ],
-      });
-
-      const tableData = [
-        ["Beschreibung", requirement.description ?? ""],
-        ["Rechtsgrundlage", requirement.legalReference ?? ""],
-        [
-          "Transeuropäische Dienste",
-          requirement.services?.split("\n").join(", ") ?? "",
-        ],
-        [
-          "Bereiche",
-          requirement.serviceAreas
-            .map((area) => serviceAreaMap.get(area) ?? area)
-            .join(", "),
-        ],
-        [
-          "Gruppen",
-          (requirement.stakeholderGroups ?? [])
-            .map((group) => stakeholderMap.get(group) ?? group)
-            .join(", "),
-        ],
-      ];
-
-      return [headerParagraph, makeTable(tableData)];
+  return bindingRequirements.requirements.flatMap((requirement, index) => {
+    const headerParagraph = new Paragraph({
+      style: "Heading2",
+      text:
+        index === 0
+          ? "Verbindliche Anforderung"
+          : `Verbindliche Anforderung ${index + 1}`,
     });
 
-  return {
-    type: PatchType.DOCUMENT,
-    children: requirementParagraphs,
-  };
+    const tableData = [
+      ["Beschreibung", requirement.description ?? ""],
+      ["Rechtsgrundlage", requirement.legalReference ?? ""],
+      [
+        "Transeuropäische Dienste",
+        requirement.services?.split("\n").join(", ") ?? "",
+      ],
+      [
+        "Bereiche",
+        requirement.serviceAreas
+          .map((area) => serviceAreaMap.get(area) ?? area)
+          .join(", "),
+      ],
+      [
+        "Gruppen",
+        (requirement.stakeholderGroups ?? [])
+          .map((group) => stakeholderMap.get(group) ?? group)
+          .join(", "),
+      ],
+    ];
+
+    return [headerParagraph, buildMetadataTable(tableData)];
+  });
 }
