@@ -1,7 +1,7 @@
 import {
   ExternalHyperlink,
   IPatch,
-  type IRunOptions,
+  IRunOptions,
   PatchType,
   TextRun,
 } from "docx";
