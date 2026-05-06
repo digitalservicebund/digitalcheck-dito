@@ -4,8 +4,10 @@ import {
   DriveFileRenameOutline,
   LayersOutlined,
 } from "@digitalservicebund/icons";
-import React, { useRef } from "react";
-import Badge, { BadgeProps } from "~/components/Badge.tsx";
+import type React from "react";
+import { useRef } from "react";
+import type { BadgeProps } from "~/components/Badge.tsx";
+import Badge from "~/components/Badge.tsx";
 import Button from "~/components/Button.tsx";
 import Heading from "~/components/Heading";
 import ImageBox from "~/components/ImageBox.tsx";

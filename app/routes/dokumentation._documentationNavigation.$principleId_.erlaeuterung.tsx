@@ -10,15 +10,15 @@ import Textarea from "~/components/Textarea";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_METHODS_PRINCIPLES } from "~/resources/staticRoutes";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
-import { NavigationContext } from "./dokumentation._documentationNavigation";
+import type { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
-import {
+import type {
   DocumentationData,
   Principle,
-  principleAnswerSchemaV2,
 } from "./dokumentation/documentationDataSchema";
+import { principleAnswerSchemaV2 } from "./dokumentation/documentationDataSchema";
 
 const { radioOptions } = digitalDocumentation.principlePages;
 

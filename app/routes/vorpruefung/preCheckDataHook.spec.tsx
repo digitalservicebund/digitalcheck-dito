@@ -3,11 +3,8 @@ import { it, vi } from "vitest";
 import { readVersionedDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { ResultType } from "../vorpruefung.ergebnis/PreCheckResult";
 import { usePreCheckData } from "./preCheckDataHook";
-import {
-  DATA_SCHEMA_VERSION,
-  deletePreCheckData,
-  PreCheckData,
-} from "./preCheckDataService";
+import type { PreCheckData } from "./preCheckDataService";
+import { DATA_SCHEMA_VERSION, deletePreCheckData } from "./preCheckDataService";
 
 vi.mock("~/utils/localStorageVersioned", async (importOriginal) => {
   const actual =

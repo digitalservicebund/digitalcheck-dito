@@ -24,11 +24,11 @@ import type {
 import type { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationPrinciple from "../dokumentation._documentationNavigation.$principleId";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
-import {
-  DATA_SCHEMA_VERSION_V1,
+import type {
   DocumentationData,
   V1,
 } from "../dokumentation/documentationDataSchema";
+import { DATA_SCHEMA_VERSION_V1 } from "../dokumentation/documentationDataSchema";
 
 const routes: (Route[] | Route)[] = [
   ...ROUTES_DOCUMENTATION_INTRO,

@@ -21,17 +21,18 @@ import {
 } from "~/resources/staticRoutes";
 
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
-import LayoutWithDocumentationNavigation, {
-  NavigationContext,
-} from "~/routes/dokumentation._documentationNavigation";
+import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
+import LayoutWithDocumentationNavigation from "~/routes/dokumentation._documentationNavigation";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
-import {
-  DATA_SCHEMA_VERSION_V1,
-  DATA_SCHEMA_VERSION_V2,
+import type {
   DocumentationData,
   V1,
   V2,
+} from "../dokumentation/documentationDataSchema";
+import {
+  DATA_SCHEMA_VERSION_V1,
+  DATA_SCHEMA_VERSION_V2,
 } from "../dokumentation/documentationDataSchema";
 
 vi.mock("~/contexts/FeatureFlagContext", () => ({

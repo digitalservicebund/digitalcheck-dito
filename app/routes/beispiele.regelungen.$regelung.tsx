@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { useLoaderData, useOutletContext } from "react-router";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import ContentWrapper from "~/components/ContentWrapper.tsx";

@@ -1,6 +1,8 @@
 import { AddCircleOutlineOutlined } from "@digitalservicebund/icons";
-import { FormScope, useField, useFieldArray } from "@rvf/react";
-import { ChangeEventHandler, useCallback, useEffect, useState } from "react";
+import type { FormScope } from "@rvf/react";
+import { useField, useFieldArray } from "@rvf/react";
+import type { ChangeEventHandler } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router";
 import { PrincipleExplanation } from "~/components/Absatz.tsx";
 import Badge from "~/components/Badge";
@@ -27,10 +29,8 @@ import {
 } from "~/resources/staticRoutes";
 import {
   principleSchemaV1,
-  V1,
   type IrrelevantAnswerReasoning,
   type NegativeAnswerReasoning,
-  type Principle,
   type PrincipleReasoningV1,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { features } from "~/utils/featureFlags";

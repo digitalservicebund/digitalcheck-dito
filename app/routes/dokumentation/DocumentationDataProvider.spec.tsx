@@ -16,12 +16,12 @@ import {
   STORAGE_KEY,
   useDocumentationDataService,
 } from "./DocumentationDataProvider";
-import {
-  DATA_SCHEMA_VERSION_V2,
+import type {
+  DocumentationData,
   Principle,
-  type DocumentationData,
-  type V2,
+  V2,
 } from "./documentationDataSchema";
+import { DATA_SCHEMA_VERSION_V2 } from "./documentationDataSchema";
 
 vi.mock("~/contexts/FeatureFlagContext", async (importOriginal) => {
   const actual =

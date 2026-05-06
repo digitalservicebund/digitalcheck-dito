@@ -2,7 +2,7 @@ import { Outlet, useRouteLoaderData } from "react-router";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { loader as preCheckQuestionLoader } from "./vorpruefung._preCheckNavigation.$questionId";
+import type { loader as preCheckQuestionLoader } from "./vorpruefung._preCheckNavigation.$questionId";
 import { usePreCheckData } from "./vorpruefung/preCheckDataHook";
 
 const { questions } = preCheck;

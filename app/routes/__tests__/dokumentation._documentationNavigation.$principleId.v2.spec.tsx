@@ -23,11 +23,11 @@ import type {
 import type { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationPrinciple from "../dokumentation._documentationNavigation.$principleId";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
-import {
-  DATA_SCHEMA_VERSION_V2,
+import type {
   DocumentationData,
   V2,
 } from "../dokumentation/documentationDataSchema";
+import { DATA_SCHEMA_VERSION_V2 } from "../dokumentation/documentationDataSchema";
 
 vi.mock("~/contexts/FeatureFlagContext", () => ({
   useFeatureFlag: vi.fn().mockReturnValue(true),

@@ -6,7 +6,7 @@ import "@testing-library/jest-dom";
 import { act, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import React from "react";
+import type React from "react";
 import { MemoryRouter } from "react-router";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general.ts";
@@ -17,11 +17,8 @@ import {
 } from "~/utils/localStorageVersioned";
 import { DocumentationContinueActions } from "./DocumentationContinueActions";
 import { DocumentationDataProvider } from "./DocumentationDataProvider";
-import {
-  DATA_SCHEMA_VERSION_V1,
-  DocumentationData,
-  V1,
-} from "./documentationDataSchema";
+import type { DocumentationData, V1 } from "./documentationDataSchema";
+import { DATA_SCHEMA_VERSION_V1 } from "./documentationDataSchema";
 
 const { mockDownloadDocumentation } = vi.hoisted(() => ({
   mockDownloadDocumentation: vi.fn(),

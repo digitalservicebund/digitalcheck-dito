@@ -1,8 +1,9 @@
-import { HeadingLevel, IRunOptions, PatchType, TextRun } from "docx";
+import type { IRunOptions } from "docx";
+import { HeadingLevel, PatchType, TextRun } from "docx";
 import { describe, expect, it, vi } from "vitest";
 import { documentationDocument } from "~/resources/content/documentation-document";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import {
+import type {
   DocumentationData,
   V1,
 } from "~/routes/dokumentation/documentationDataSchema";

@@ -1,8 +1,7 @@
 import { Link } from "react-router";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
-import { DetailsSummaryProps } from "~/components/DetailsSummary.tsx";
-import type { HeadingProps } from "~/components/Heading";
-import { DetailsSummaryListProps } from "~/components/InfoBox.tsx";
+import type { DetailsSummaryProps } from "~/components/DetailsSummary.tsx";
+import type { DetailsSummaryListProps } from "~/components/InfoBox.tsx";
 import ItalicModifier from "~/components/ItalicModifier.tsx";
 import PrincipleHighlightModifier from "~/components/PrincipleHighlightModifier";
 import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider";
@@ -101,7 +100,7 @@ export default function getDetailsSummaryProps(
     title: {
       text: methodsFivePrinciples.detailsSummaryTitle,
       tagName: "h3",
-    } as HeadingProps,
+    },
     items,
   };
 }

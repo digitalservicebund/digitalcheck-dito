@@ -3,7 +3,7 @@ import {
   InfoOutlined,
   LayersOutlined,
 } from "@digitalservicebund/icons";
-import React from "react";
+import type React from "react";
 import AccordionItem from "~/components/AccordionItem";
 import Badge from "~/components/Badge.tsx";
 import DetailsSummary from "~/components/DetailsSummary";

@@ -1,4 +1,5 @@
-import { Link, LinkProps } from "react-router";
+import type { LinkProps } from "react-router";
+import { Link } from "react-router";
 import { OpenInNewIcon } from "~/components/OpenInNewIcon.tsx";
 import twMerge from "~/utils/tailwindMerge";
 

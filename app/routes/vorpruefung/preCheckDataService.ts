@@ -4,7 +4,7 @@ import {
   type VersionedData,
   writeVersionedDataToLocalStorage,
 } from "~/utils/localStorageVersioned";
-import {
+import type {
   PreCheckAnswerSchema,
   PreCheckDataSchema,
   PreCheckResultSchema,

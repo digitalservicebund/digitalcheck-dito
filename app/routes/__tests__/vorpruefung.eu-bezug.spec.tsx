@@ -8,7 +8,7 @@ import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questi
 import Index from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { usePreCheckData } from "~/routes/vorpruefung/preCheckDataHook";
 import { ResultType } from "../vorpruefung.ergebnis/PreCheckResult";
-import { PreCheckAnswerSchema } from "../vorpruefung/preCheckDataSchema";
+import type { PreCheckAnswerSchema } from "../vorpruefung/preCheckDataSchema";
 
 const { questions } = preCheck;
 

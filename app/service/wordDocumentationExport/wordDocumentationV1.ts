@@ -1,11 +1,9 @@
+import type { IParagraphOptions, IPatch, IRunOptions } from "docx";
 import {
   Bookmark,
   convertInchesToTwip,
   ExternalHyperlink,
   HeadingLevel,
-  IParagraphOptions,
-  IPatch,
-  IRunOptions,
   Paragraph,
   patchDocument,
   PatchType,
@@ -17,8 +15,8 @@ import { documentationDocument } from "~/resources/content/documentation-documen
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { contact } from "~/resources/content/shared/contact";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider";
-import {
-  type DocumentationData,
+import type {
+  DocumentationData,
   PrincipleReasoningV1,
   V1,
 } from "~/routes/dokumentation/documentationDataSchema";

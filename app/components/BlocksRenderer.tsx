@@ -1,4 +1,4 @@
-import { JSX } from "react";
+import type { JSX } from "react";
 import { Link } from "react-router";
 import { nestListInListItems } from "~/utils/blocksRendererUtils";
 import { type Node } from "~/utils/paragraphUtils";

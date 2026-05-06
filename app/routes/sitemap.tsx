@@ -1,10 +1,11 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { useLoaderData } from "react-router";
 
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Hero from "~/components/Hero";
 import MetaTitle from "~/components/Meta";
-import { Route, ROUTE_SITEMAP, ROUTES } from "~/resources/staticRoutes";
+import type { Route } from "~/resources/staticRoutes";
+import { ROUTE_SITEMAP, ROUTES } from "~/resources/staticRoutes";
 
 type RouteWithChildren = Route & {
   children: RouteWithChildren[];

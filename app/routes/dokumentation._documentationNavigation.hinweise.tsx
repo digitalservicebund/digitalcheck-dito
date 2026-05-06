@@ -7,7 +7,7 @@ import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText.tsx";
 import { general } from "~/resources/content/shared/general.ts";
 import { ROUTE_DOCUMENTATION_PARTICIPATION } from "~/resources/staticRoutes";
-import { NavigationContext } from "./dokumentation._documentationNavigation";
+import type { NavigationContext } from "./dokumentation._documentationNavigation";
 
 const notes = `
 ## Datenspeicherung

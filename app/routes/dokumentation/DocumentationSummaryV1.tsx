@@ -16,17 +16,17 @@ import {
   ROUTE_DOCUMENTATION_TITLE,
   type Route,
 } from "~/resources/staticRoutes";
-import {
+import type {
+  Participation,
+  PolicyTitle,
+  Principle,
   PrincipleReasoningV1,
   V1,
   V2,
-  type Participation,
-  type PolicyTitle,
-  type Principle,
 } from "~/routes/dokumentation/documentationDataSchema";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
-import { NavigationContext } from "../dokumentation._documentationNavigation";
+import type { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationActions from "./DocumentationActions";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
 

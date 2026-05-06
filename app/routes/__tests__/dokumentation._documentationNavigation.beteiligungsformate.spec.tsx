@@ -12,11 +12,11 @@ import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import DocumentationParticipation from "~/routes/dokumentation._documentationNavigation.beteiligungsformate";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
-import {
-  DATA_SCHEMA_VERSION_V1,
+import type {
   DocumentationData,
   V1,
 } from "../dokumentation/documentationDataSchema";
+import { DATA_SCHEMA_VERSION_V1 } from "../dokumentation/documentationDataSchema";
 
 const renderWithRouter = () => {
   return render(

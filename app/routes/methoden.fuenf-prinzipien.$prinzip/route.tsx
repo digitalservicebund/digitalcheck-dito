@@ -10,13 +10,15 @@ import MetaTitle from "~/components/Meta.tsx";
 import { PrincipleHightlightNullModifier } from "~/components/PrincipleHighlightModifier.tsx";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer";
-import { PRINCIPLE_COLORS, PrincipleNumber } from "~/resources/constants.ts";
+import type { PrincipleNumber } from "~/resources/constants.ts";
+import { PRINCIPLE_COLORS } from "~/resources/constants.ts";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien.ts";
 import {
   ROUTE_EXAMPLES_PRINCIPLES,
   ROUTE_METHODS_PRINCIPLES,
 } from "~/resources/staticRoutes.ts";
-import { absatzIdTag, Node } from "~/utils/paragraphUtils";
+import type { Node } from "~/utils/paragraphUtils";
+import { absatzIdTag } from "~/utils/paragraphUtils";
 import { fetchStrapiData } from "~/utils/strapiData.server.ts";
 import type {
   AbsatzWithParagraph,
@@ -26,11 +28,11 @@ import type {
 } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions.ts";
 import type { Route } from "../../../.react-router/types/app/routes/+types/beispiele.prinzipien.$prinzip.ts";
-import {
+import type {
   PRINZIP_ASPEKTE_QUERY,
   PRINZIP_LIST_QUERY,
   PrinzipListItem,
-  type PrinzipListQueryReturnType,
+  PrinzipListQueryReturnType,
 } from "./query";
 
 function AspectHeader({

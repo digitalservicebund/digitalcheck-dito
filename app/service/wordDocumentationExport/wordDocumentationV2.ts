@@ -1,8 +1,7 @@
+import type { IPatch, IRunOptions } from "docx";
 import {
   convertInchesToTwip,
   ExternalHyperlink,
-  IPatch,
-  IRunOptions,
   patchDocument,
   PatchType,
   TextRun,

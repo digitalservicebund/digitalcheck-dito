@@ -1,7 +1,7 @@
 import { useOutletContext, useParams } from "react-router";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { features } from "~/utils/featureFlags";
-import { NavigationContext } from "./dokumentation._documentationNavigation";
+import type { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationPrincipleV1 from "./dokumentation/DocumentationPrincipleV1";
 import DocumentationPrincipleV2 from "./dokumentation/DocumentationPrincipleV2";
 

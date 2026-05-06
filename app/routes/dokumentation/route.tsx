@@ -1,6 +1,6 @@
 import { Outlet, useRouteLoaderData } from "react-router";
+import type { Route as _Route } from "~/resources/staticRoutes.ts";
 import {
-  Route as _Route,
   ROUTE_DOCUMENTATION,
   ROUTES_DOCUMENTATION_FINALIZE,
   ROUTES_DOCUMENTATION_INTRO,

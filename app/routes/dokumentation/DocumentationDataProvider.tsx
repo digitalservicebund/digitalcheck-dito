@@ -1,6 +1,6 @@
+import type { ReactNode } from "react";
 import {
   createContext,
-  ReactNode,
   useCallback,
   useContext,
   useEffect,
@@ -145,7 +145,7 @@ export function DocumentationDataProvider({
     // Read localStorage only on the client, after hydration, so the first
     // client render matches the SSR HTML (empty state). The lint rule is
     // overly strict for this case — see https://react.dev/learn/you-might-not-need-an-effect
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+
     setDocumentationData(getInitialState(version));
   }, [version]);
 

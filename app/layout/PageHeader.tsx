@@ -19,7 +19,8 @@ import {
   ROUTE_METHODS_PRINCIPLES,
 } from "~/resources/staticRoutes.ts";
 import { assetPath } from "~/utils/assetPath";
-import { matchHasHandle, MatchWithHandle } from "~/utils/handles";
+import type { MatchWithHandle } from "~/utils/handles";
+import { matchHasHandle } from "~/utils/handles";
 import twMerge from "~/utils/tailwindMerge.ts";
 import { normalizePathname } from "~/utils/utilFunctions.ts";
 

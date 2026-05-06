@@ -1,11 +1,13 @@
-import React from "react";
+import type React from "react";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
-import { ContentLink } from "~/utils/contentTypes";
+import type { ContentLink } from "~/utils/contentTypes";
 import twMerge from "~/utils/tailwindMerge";
 import Badge, { type BadgeProps } from "./Badge";
 import { DownloadLinkButton, LinkButton } from "./Button";
-import DetailsSummary, { DetailsSummaryProps } from "./DetailsSummary";
-import Heading, { HeadingProps } from "./Heading";
+import type { DetailsSummaryProps } from "./DetailsSummary";
+import DetailsSummary from "./DetailsSummary";
+import type { HeadingProps } from "./Heading";
+import Heading from "./Heading";
 import Image, { type ImageProps } from "./Image";
 
 export type InfoImageProps = ImageProps & {
