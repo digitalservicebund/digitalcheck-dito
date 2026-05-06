@@ -65,7 +65,6 @@ export const stakeholderOptions: readonly Option[] = [
 
 type SectionNode = {
   id: string;
-  label: string;
   isEnabled: () => boolean;
   render: () => React.ReactNode;
 };
@@ -103,24 +102,33 @@ export default function BindingRequirementsForm({
   const tree: SectionNode[] = [
     {
       id: "intro",
-      label: "Einleitung",
       isEnabled: () => true,
       render: () => (
         <RichText
           markdown={dedent`
-            Bitte dokumentieren Sie alle verbindlichen Anforderungen i. S. v. ${markdownCiteIEA(2, 15)} und Dienste, die von diesen Anforderungen betroffen sind.
+            Bitte dokumentieren Sie alle verbindlichen Anforderungen i. S. v. ${markdownCiteIEA(2, 15, true)} und Dienste, die von diesen Anforderungen betroffen sind.
         `}
         />
       ),
     },
     {
       id: "bindingRequirements",
-      label: "Ermittlung der geprüften verbindlichen Anforderungen",
       isEnabled: () => true,
       render: () => (
         <div className="space-y-24">
           <h2 className="ds-heading-03-reg">
-            Ermittlung der geprüften verbindlichen Anforderungen
+            In der Regelung enthaltene verbindliche Anforderungen
+            <HelpButton
+              sectionId={"verbindliche-anforderungen"}
+              title={"Was ist eine verbindliche Anforderung?"}
+            >
+              <RichText
+                markdown={dedent`
+                  Eine Definition finden Sie <a href="/interoperabel?tab=hintergrund" target="_blank">hier</a>.
+                  Diese bezieht sich auf ${markdownCiteIEA(2, 15, true)}.
+            `}
+              />
+            </HelpButton>
           </h2>
 
           <div
@@ -159,8 +167,7 @@ export default function BindingRequirementsForm({
                     placeholder={"z. B. § 6"}
                     scope={requirement.scope("legalReference")}
                   >
-                    Rechtsgrundlage für die verbindliche Anforderung, sofern
-                    vorhanden
+                    Rechtsgrundlage für die verbindliche Anforderung
                   </Input>
                   <div className="space-y-24">
                     <Textarea
@@ -200,8 +207,7 @@ export default function BindingRequirementsForm({
                       options={stakeholderOptions}
                       scope={requirement.scope("stakeholderGroups")}
                     >
-                      Welche Gruppen sind von den verbindlichen Anforderungen
-                      betroffen?
+                      Für wen gilt diese verbindliche Anforderung?
                     </Combobox>
                   </div>
                 </div>

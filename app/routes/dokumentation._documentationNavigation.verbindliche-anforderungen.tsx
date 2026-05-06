@@ -20,12 +20,17 @@ export default function DocumentationInteroperabilityAssessment() {
         prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS.title}`}
       />
       <div className="space-y-40">
-        <Heading
-          text={ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS.title}
-          tagName="h1"
-          look="ds-heading-02-reg"
-          className="mb-16"
-        />
+        <div className={"space-y-8"}>
+          <p className={"ds-subhead"}>EU-Interoperabilität</p>
+          <Heading
+            text={
+              ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS.title
+            }
+            tagName="h1"
+            look="ds-heading-02-reg"
+            className="mb-16"
+          />
+        </div>
         <SkipNoticeWrapper>
           <BindingRequirementsForm
             nextUrl={ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT.url}

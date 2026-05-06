@@ -124,22 +124,18 @@ export default function FormVariant2() {
   return (
     <>
       <div className={"space-y-8"}>
+        <p>
+          Sie können das Formular auf dieser Seite nutzen, um eine
+          vorausgefüllte Interoperabilitätsbewertung zu erstellen. Diese wird
+          als Anhang an die Digitalcheck-Dokumentation gespeichert. Im Anschluss
+          können Sie den Anhang an die nationale Kontaktstelle (2024/903 Art.
+          17) übermitteln, welche sie prüfen und anschließend an die
+          EU-Kommission weiterleiten wird.
+        </p>
         <InlineNotice look={"warning"}>
           Die Angaben werden aktuell nicht im Zwischenstand gespeichert. Nutzen
           Sie dafür Variante 1.
         </InlineNotice>
-        <p>
-          Sie haben angegeben, dass Sie für Ihr Vorhaben eine verpflichtende
-          Interoperabilitätsbewertung einreichen müssen.
-        </p>
-        <p>
-          Sie können das Formular auf dieser Seite nutzen, um eine
-          vorausgefüllte Interoperabilitätsbewertung zu erstellen. Diese wird
-          als Anhang an die Digitalcheck-Dokumentation gespeichert. Sie erhalten
-          im letzten Schritt die Möglichkeit, diese direkt an die deutsche
-          nationale Kontaktstelle (2024/903 Art. 17) zu übermitteln, welche sie
-          prüfen und anschließend an die EU-Kommission weiterleiten wird.
-        </p>
       </div>
       <form {...form.getFormProps()}>
         {sections.map((section) => (

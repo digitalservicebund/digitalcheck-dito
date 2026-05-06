@@ -6,7 +6,7 @@ import {
   ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP,
 } from "~/resources/staticRoutes.ts";
 import { interoperabilityExplanationParagraphs } from "~/routes/dokumentation/interoperability/explanationMarkdown.ts";
-import { ExplanationParagraph } from "~/routes/dokumentation/interoperability/FormVariant1.tsx";
+import { LevelHelpButton } from "~/routes/dokumentation/interoperability/FormVariant1.tsx";
 
 export type Question = {
   id: string;
@@ -19,7 +19,7 @@ type QuestionGroup = {
   questions: Question[];
 };
 export type Section = {
-  title: string;
+  title: ReactNode;
   id: "legal" | "organizational" | "semantic" | "technical";
   levelDe: string;
   intro?: ReactNode;
@@ -35,13 +35,15 @@ export const sections: Section[] = [
   {
     id: "legal",
     levelDe: "rechtliche",
-    title: "Rechtliche Interoperabilität",
-    intro: (
-      <ExplanationParagraph
-        markdown={interoperabilityExplanationParagraphs.legal}
-        level={"legal"}
-        contextLabel={"bei rechtlichen Auswirkungen"}
-      />
+    title: (
+      <>
+        Rechtliche Interoperabilität
+        <LevelHelpButton
+          markdown={interoperabilityExplanationParagraphs.legal}
+          level={"legal"}
+          contextLabel={"bei rechtlichen Auswirkungen"}
+        />
+      </>
     ),
     groups: [
       {
@@ -100,13 +102,15 @@ export const sections: Section[] = [
   {
     id: "organizational",
     levelDe: "organisatorische",
-    title: "Organisatorische Interoperabilität",
-    intro: (
-      <ExplanationParagraph
-        markdown={interoperabilityExplanationParagraphs.organizational}
-        level={"organizational"}
-        contextLabel={"bei organisatorischen Auswirkungen"}
-      />
+    title: (
+      <>
+        Organisatorische Interoperabilität
+        <LevelHelpButton
+          markdown={interoperabilityExplanationParagraphs.organizational}
+          level={"organizational"}
+          contextLabel={"bei organisatorischen Auswirkungen"}
+        />
+      </>
     ),
     groups: [
       {
@@ -163,13 +167,15 @@ export const sections: Section[] = [
   {
     id: "semantic",
     levelDe: "semantische",
-    title: "Semantische Interoperabilität",
-    intro: (
-      <ExplanationParagraph
-        markdown={interoperabilityExplanationParagraphs.semantic}
-        level={"semantic"}
-        contextLabel={"bei semantischen Auswirkungen"}
-      />
+    title: (
+      <>
+        Semantische Interoperabilität
+        <LevelHelpButton
+          markdown={interoperabilityExplanationParagraphs.semantic}
+          level={"semantic"}
+          contextLabel={"bei semantischen Auswirkungen"}
+        />
+      </>
     ),
     groups: [
       {
@@ -262,13 +268,15 @@ export const sections: Section[] = [
   {
     id: "technical",
     levelDe: "technische",
-    title: "Technische Interoperabilität",
-    intro: (
-      <ExplanationParagraph
-        markdown={interoperabilityExplanationParagraphs.technical}
-        level={"technical"}
-        contextLabel={"bei technischen Auswirkungen"}
-      />
+    title: (
+      <>
+        Technische Interoperabilität
+        <LevelHelpButton
+          markdown={interoperabilityExplanationParagraphs.technical}
+          level={"technical"}
+          contextLabel={"bei technischen Auswirkungen"}
+        />
+      </>
     ),
     groups: [
       {

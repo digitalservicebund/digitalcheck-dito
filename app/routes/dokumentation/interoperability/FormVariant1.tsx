@@ -42,10 +42,10 @@ function LevelAssessmentForm({
 
   return (
     <div className="space-y-32">
-      <p>
+      <p className={"ds-heading-03-reg"}>
         Erklären Sie, inwiefern Sie die <strong>{levelDe}n</strong>{" "}
         Voraussetzungen für eine europaweit grenzüberschreitende Nutzung
-        geschaffen haben.
+        schaffen.
       </p>
       <Textarea description={description} scope={form.scope(`${level}.detail`)}>
         Erklärung
@@ -55,7 +55,7 @@ function LevelAssessmentForm({
   );
 }
 
-export function ExplanationParagraph({
+export function LevelHelpButton({
   markdown,
   contextLabel,
   level,
@@ -108,8 +108,7 @@ export default function FormVariant1() {
   return (
     <div className={"space-y-8"}>
       <p>
-        Sie haben angegeben, dass Sie für Ihr Vorhaben eine verpflichtende
-        Interoperabilitätsbewertung einreichen müssen. Wählen Sie aus, welche{" "}
+        Geben Sie an, wie sich Ihre Regelung auf die{" "}
         <NewTabLink
           to={
             "https://interoperable-europe.ec.europa.eu/collection/assessments/guidelines-chapter-3-how-carry-out-interoperability-assessment#paragraph-49343"
@@ -117,8 +116,7 @@ export default function FormVariant1() {
         >
           Ebenen der Interoperabilität
         </NewTabLink>{" "}
-        hierdurch beeinflusst werden, und begründen Sie Ihre Auswahl. Sie können
-        die Texte vor der Übermittlung noch einmal bearbeiten.
+        auswirkt.
       </p>
       <form
         {...form.getFormProps()}
@@ -127,7 +125,7 @@ export default function FormVariant1() {
         <div className="mt-64 space-y-16">
           <h2>
             Rechtliche Auswirkungen
-            <ExplanationParagraph
+            <LevelHelpButton
               contextLabel={"bei rechtlichen Auswirkungen"}
               markdown={interoperabilityExplanationParagraphs.legal}
               level={"legal"}
@@ -143,7 +141,7 @@ export default function FormVariant1() {
         <div className="space-y-16">
           <h2>
             Organisatorische Auswirkungen{" "}
-            <ExplanationParagraph
+            <LevelHelpButton
               contextLabel={"bei organisatorischen Auswirkungen"}
               markdown={interoperabilityExplanationParagraphs.organizational}
               level={"organizational"}
@@ -159,7 +157,7 @@ export default function FormVariant1() {
         <div className="space-y-16">
           <h2>
             Semantische Auswirkungen
-            <ExplanationParagraph
+            <LevelHelpButton
               contextLabel={"bei semantischen Auswirkungen"}
               markdown={interoperabilityExplanationParagraphs.semantic}
               level={"semantic"}
@@ -175,7 +173,7 @@ export default function FormVariant1() {
         <div className="space-y-16">
           <h2>
             Technische Auswirkungen
-            <ExplanationParagraph
+            <LevelHelpButton
               level={"technical"}
               contextLabel={"bei technischen Auswirkungen"}
               markdown={interoperabilityExplanationParagraphs.technical}

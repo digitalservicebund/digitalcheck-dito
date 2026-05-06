@@ -21,9 +21,12 @@ export default function DocumentationInteroperabilityAssessment() {
         prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT.title}`}
       />
       <div className="space-y-40">
-        <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
-          Auswirkungen auf Interoperabilität
-        </Heading>
+        <div className={"space-y-8"}>
+          <p className={"ds-subhead"}>EU-Interoperabilität</p>
+          <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
+            Auswirkungen auf Interoperabilität
+          </Heading>
+        </div>
         <SkipNoticeWrapper>
           <p className={"ds-subhead"}>
             Bewerten Sie: Ermöglicht Ihre Regelung, dass die Verwaltungen

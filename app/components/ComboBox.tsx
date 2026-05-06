@@ -82,12 +82,12 @@ export default function Combobox({
                   key={value}
                   label={option?.label ?? value}
                   value={value}
-                  selected={true}
+                  selected
                   onClick={toggle}
                 />
               );
             })}
-            <ComboboxInput placeholder={"Mehr hinzufügen…"} />
+            <ComboboxInput className={"grow"} placeholder={"Auswählen…"} />
           </div>
         </div>
         <ComboboxOptions
