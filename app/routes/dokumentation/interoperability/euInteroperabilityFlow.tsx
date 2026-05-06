@@ -21,7 +21,7 @@ export type EuInteroperabilityQuestionId =
 
 export const EU_INTEROPERABILITY_OUTCOME_IDS = [
   "REQUIRED",
-  "NOT_REQUIRED_NO_REASON",
+  "NOT_REQUIRED_INDICATES_PRECHECK",
   "NOT_REQUIRED_NO_DECISION_PROCESS",
   "NOT_REQUIRED_NOT_PROVIDED_BY_PUBLIC_OR_UNION_ENTITY",
   "NOT_REQUIRED_NOT_PROVIDED_TO_EU_ACTORS",
@@ -118,6 +118,12 @@ export const EU_INTEROPERABILITY_OUTCOMES: Record<
   EuInteroperabilityOutcomeId,
   EuInteroperabilityOutcome
 > = {
+  NOT_REQUIRED_INDICATES_PRECHECK: {
+    id: "NOT_REQUIRED_INDICATES_PRECHECK",
+    title:
+      "Sie haben angegeben, dass keine Interoperabilitätsbewertung erforderlich ist.",
+    description: <></>,
+  },
   REQUIRED: {
     id: "REQUIRED",
     title: "Eine Interoperabilitätsbewertung ist erforderlich.",

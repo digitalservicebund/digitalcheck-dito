@@ -140,7 +140,7 @@ export default function FormVariant2() {
       <form {...form.getFormProps()}>
         {sections.map((section) => (
           <section
-            key={section.title}
+            key={section.id}
             className={"mt-32 mb-64 space-y-32 border-t border-gray-600 pt-32"}
           >
             <h3 className={"mb-16"}>{section.title}</h3>

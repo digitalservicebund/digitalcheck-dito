@@ -7,13 +7,13 @@ import {
 } from "~/routes/dokumentation/documentationDataSchema.ts";
 
 const defaultValues: EuInteroperabilityOutcome = {
-  outcomeId: "NOT_REQUIRED_NO_REASON",
+  outcomeId: "NOT_REQUIRED_INDICATES_PRECHECK",
 };
 
 const options = [
   { value: "REQUIRED", label: "Ja, eine Bewertung ist erforderlich." },
   {
-    value: "NOT_REQUIRED_NO_REASON",
+    value: "NOT_REQUIRED_INDICATES_PRECHECK",
     label: "Nein, eine Bewertung ist nicht erforderlich.",
   },
 ] as const;
