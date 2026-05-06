@@ -1,11 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Heading from "~/components/Heading";
 import RichText from "~/components/RichText.tsx";
 import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { general } from "~/resources/content/shared/general.ts";
-import { useNavigate } from "~/utils/routerCompat";
 
 const notes = `
 ## Datenspeicherung

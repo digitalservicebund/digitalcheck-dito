@@ -1,5 +1,5 @@
+import { Outlet } from "react-router";
 import type { Route as _Route } from "~/resources/staticRoutes.ts";
-import { Outlet } from "~/utils/routerCompat";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.types.ts";
 import { DocumentationDataProvider } from "./DocumentationDataProvider";
 

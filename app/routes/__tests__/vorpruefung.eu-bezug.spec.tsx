@@ -2,11 +2,11 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { MemoryRouter } from "react-router";
 import { preCheck } from "~/resources/content/vorpruefung";
 import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import Index from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { usePreCheckData } from "~/routes/vorpruefung/preCheckDataHook";
-import { MemoryRouter } from "~/utils/routerCompat";
 import { ResultType } from "../vorpruefung.ergebnis/PreCheckResult";
 import type { PreCheckAnswerSchema } from "../vorpruefung/preCheckDataSchema";
 

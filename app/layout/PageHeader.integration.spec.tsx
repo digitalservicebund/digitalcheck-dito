@@ -2,14 +2,13 @@ import { fireEvent, render, screen, within } from "@testing-library/react";
 import type { UserEvent } from "@testing-library/user-event";
 import { userEvent } from "@testing-library/user-event";
 import type React from "react";
+import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { header } from "~/resources/content/shared/header.ts";
-import { MemoryRouter } from "~/utils/routerCompat";
 import PageHeader from "./PageHeader";
 
-vi.mock("~/utils/routerCompat", async (importOriginal) => {
-  const original =
-    await importOriginal<typeof import("~/utils/routerCompat")>();
+vi.mock("react-router", async (importOriginal) => {
+  const original = await importOriginal<typeof import("react-router")>();
   return {
     ...original,
     useMatches: vi.fn(() => []),

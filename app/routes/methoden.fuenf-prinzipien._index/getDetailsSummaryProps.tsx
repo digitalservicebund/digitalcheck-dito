@@ -1,4 +1,5 @@
 import { beispiele_prinzipien } from "@/config/routes";
+import { Link } from "react-router";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import type { DetailsSummaryProps } from "~/components/DetailsSummary.tsx";
 import type { DetailsSummaryListProps } from "~/components/InfoBox.tsx";
@@ -7,7 +8,6 @@ import PrincipleHighlightModifier from "~/components/PrincipleHighlightModifier"
 import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import { absatzIdTag } from "~/utils/paragraphUtils";
-import { Link } from "~/utils/routerCompat";
 import type {
   AbsatzWithParagraph,
   PrinzipWithAspekte,

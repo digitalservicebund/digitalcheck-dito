@@ -1,5 +1,6 @@
 import { interoperabel_faq } from "@/config/routes";
 import { QuizOutlined as QuizIcon } from "@digitalservicebund/icons";
+import { Link } from "react-router";
 import { LinkButton } from "~/components/Button";
 import Container from "~/components/Container";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
@@ -11,7 +12,6 @@ import RichText from "~/components/RichText";
 import { SearchParamTabs } from "~/components/Tabs/Tabs";
 import { interoperability } from "~/resources/content/interoperabel";
 import { contact } from "~/resources/content/shared/contact";
-import { Link } from "~/utils/routerCompat";
 import { EuRechtTab } from "./interoperabel/EuRechtTab";
 import { HintergrundTab } from "./interoperabel/HintergrundTab";
 import { InteroperableLoesungenTab } from "./interoperabel/InteroperableLoesungenTab";

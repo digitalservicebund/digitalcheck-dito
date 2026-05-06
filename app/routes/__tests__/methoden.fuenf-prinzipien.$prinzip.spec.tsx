@@ -1,10 +1,10 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { getTextFromNodes } from "~/routes/__tests__/utils/strapiUtils.ts";
 import Prinzip from "~/routes/methoden.fuenf-prinzipien.$prinzip/route";
 import type { Node } from "~/utils/paragraphUtils";
-import { MemoryRouter } from "~/utils/routerCompat";
 import type {
   PrinzipWithAspekte,
   PrinzipWithAspekteAndExample,

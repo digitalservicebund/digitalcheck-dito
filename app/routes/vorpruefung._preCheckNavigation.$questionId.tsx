@@ -1,6 +1,6 @@
 import { vorpruefung } from "@/config/routes";
 import { useEffect, useState } from "react";
-import { useNavigate } from "~/utils/routerCompat";
+import { useNavigate } from "react-router";
 
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";

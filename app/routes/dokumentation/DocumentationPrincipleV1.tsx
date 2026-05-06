@@ -7,6 +7,7 @@ import type { FormScope } from "@rvf/react";
 import { useField, useFieldArray } from "@rvf/react";
 import type { ChangeEventHandler } from "react";
 import { useCallback, useEffect, useState } from "react";
+import { Link } from "react-router";
 import { PrincipleExplanation } from "~/components/Absatz.tsx";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
@@ -32,7 +33,6 @@ import type {
 } from "~/routes/dokumentation/documentationDataSchema";
 import { principleSchemaV1 } from "~/routes/dokumentation/documentationDataSchema";
 import { features } from "~/utils/featureFlags";
-import { Link } from "~/utils/routerCompat";
 import type {
   PrinzipAspekt,
   PrinzipWithAspekte,

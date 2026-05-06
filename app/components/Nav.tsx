@@ -10,9 +10,9 @@ import {
 } from "@headlessui/react";
 import type { ReactElement, ReactNode } from "react";
 import { createContext, isValidElement, useContext, useMemo } from "react";
+import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import { general } from "~/resources/content/shared/general";
-import { Link } from "~/utils/routerCompat";
 import twMerge from "~/utils/tailwindMerge";
 
 const NavContext = createContext<{

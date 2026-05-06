@@ -1,9 +1,9 @@
 import { render, screen, within } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it } from "vitest";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import FivePrinciples from "~/routes/methoden.fuenf-prinzipien._index/route";
 import type { Node } from "~/utils/paragraphUtils";
-import { MemoryRouter } from "~/utils/routerCompat";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
 const mockPrinzipsData: PrinzipWithAspekteAndExample[] = [

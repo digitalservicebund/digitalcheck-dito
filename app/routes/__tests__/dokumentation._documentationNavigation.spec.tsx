@@ -13,10 +13,10 @@ import { act, render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 
+import { MemoryRouter, useRouteLoaderData } from "react-router";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import LayoutWithDocumentationNavigation from "~/routes/dokumentation._documentationNavigation";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
-import { MemoryRouter, useRouteLoaderData } from "~/utils/routerCompat";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import type {
   DocumentationData,
@@ -32,9 +32,8 @@ vi.mock("~/contexts/FeatureFlagContext", () => ({
   useFeatureFlag: vi.fn(),
 }));
 
-vi.mock("~/utils/routerCompat", async (importOriginal) => {
-  const original =
-    await importOriginal<typeof import("~/utils/routerCompat")>();
+vi.mock("react-router", async (importOriginal) => {
+  const original = await importOriginal<typeof import("react-router")>();
   return {
     ...original,
     useRouteLoaderData: vi.fn(),

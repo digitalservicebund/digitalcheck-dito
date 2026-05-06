@@ -12,15 +12,11 @@ import "@testing-library/jest-dom";
 import { act, render, screen } from "@testing-library/react";
 import type { UserEvent } from "@testing-library/user-event";
 import userEvent from "@testing-library/user-event";
+import { createMemoryRouter, RouterProvider, useParams } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { DocumentationNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
-import {
-  createMemoryRouter,
-  RouterProvider,
-  useParams,
-} from "~/utils/routerCompat";
 import type {
   PrinzipAspekt,
   PrinzipWithAspekteAndExample,

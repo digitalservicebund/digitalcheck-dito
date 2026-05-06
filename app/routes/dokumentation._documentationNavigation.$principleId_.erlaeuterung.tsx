@@ -1,5 +1,6 @@
 import { methoden_fuenfPrinzipien } from "@/config/routes";
 import { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
 import AspectPills from "~/components/AspectPills";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
@@ -9,7 +10,6 @@ import HelpButton from "~/components/HelpButton";
 import Textarea from "~/components/Textarea";
 import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import { Link, useLocation, useNavigate } from "~/utils/routerCompat";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";

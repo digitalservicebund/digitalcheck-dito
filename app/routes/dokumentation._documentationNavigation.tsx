@@ -7,6 +7,7 @@ import {
 } from "@/config/routes";
 import type { ReactNode } from "react";
 import { Fragment } from "react";
+import { useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
 import HelpSidepanel from "~/components/HelpSidepanel";
 import Nav from "~/components/Nav";
@@ -16,7 +17,6 @@ import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { features } from "~/utils/featureFlags";
-import { useLocation } from "~/utils/routerCompat";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 

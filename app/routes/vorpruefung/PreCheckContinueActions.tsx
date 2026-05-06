@@ -1,4 +1,5 @@
 import { vorpruefung_hinweise } from "@/config/routes";
+import { useNavigate } from "react-router";
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Dialog from "~/components/Dialog.tsx";
@@ -7,7 +8,6 @@ import { PRE_CHECK_START_BUTTON_ID } from "~/resources/constants";
 import { general } from "~/resources/content/shared/general.ts";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { useNonce } from "~/utils/nonce.ts";
-import { useNavigate } from "~/utils/routerCompat";
 import { usePreCheckData } from "./preCheckDataHook";
 import { deletePreCheckData } from "./preCheckDataService";
 

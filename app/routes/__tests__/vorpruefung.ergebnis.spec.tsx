@@ -2,8 +2,8 @@ import { dokumentation, interoperabel, methoden } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { MemoryRouter } from "react-router";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { MemoryRouter } from "~/utils/routerCompat";
 
 import { preCheck } from "~/resources/content/vorpruefung";
 import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
@@ -19,8 +19,8 @@ const { mockNavigate } = vi.hoisted(() => ({
   mockNavigate: vi.fn(),
 }));
 
-vi.mock("~/utils/routerCompat", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("~/utils/routerCompat")>();
+vi.mock("react-router", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("react-router")>();
   return {
     ...actual,
     useLoaderData: vi.fn(),

@@ -11,6 +11,7 @@ import {
 } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { DocumentationNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
@@ -23,7 +24,6 @@ import type {
   V1,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
-import { MemoryRouter } from "~/utils/routerCompat";
 import type { AbsatzWithParagraph } from "~/utils/strapiData.types.ts";
 import DocumentationSummaryV1 from "../dokumentation/DocumentationSummaryV1";
 

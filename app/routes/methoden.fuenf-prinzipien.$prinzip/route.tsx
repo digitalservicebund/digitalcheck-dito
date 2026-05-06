@@ -3,6 +3,7 @@ import {
   methoden_fuenfPrinzipien,
 } from "@/config/routes";
 import type { ReactNode } from "react";
+import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import AccordionItem from "~/components/AccordionItem.tsx";
 import Badge from "~/components/Badge.tsx";
@@ -17,7 +18,6 @@ import { PRINCIPLE_COLORS } from "~/resources/constants.ts";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien.ts";
 import type { Node } from "~/utils/paragraphUtils";
 import { absatzIdTag } from "~/utils/paragraphUtils";
-import { Link } from "~/utils/routerCompat";
 import type {
   AbsatzWithParagraph,
   BasePrinzip,

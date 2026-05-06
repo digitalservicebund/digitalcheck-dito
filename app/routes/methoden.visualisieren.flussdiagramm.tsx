@@ -7,6 +7,7 @@ import {
 } from "@digitalservicebund/icons";
 import type React from "react";
 import { useRef } from "react";
+import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import BackToTopButton from "~/components/BackToTopButton.tsx";
 import type { BadgeProps } from "~/components/Badge.tsx";
@@ -26,7 +27,6 @@ import { ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX } from "~/resources/stati
 import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils.ts";
-import { Link } from "~/utils/routerCompat";
 
 const diagramElements = [
   {

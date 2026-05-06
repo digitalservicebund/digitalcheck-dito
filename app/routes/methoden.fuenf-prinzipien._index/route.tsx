@@ -7,6 +7,7 @@ import {
   ShareOutlined,
   VisibilityTwoTone,
 } from "@digitalservicebund/icons";
+import { Link } from "react-router";
 import Badge from "~/components/Badge.tsx";
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
 import { LinkButton } from "~/components/Button.tsx";
@@ -18,7 +19,6 @@ import InfoBox from "~/components/InfoBox.tsx";
 import { PrinciplePosterBox } from "~/components/PrinciplePosterBox";
 import RichText from "~/components/RichText.tsx";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
-import { Link } from "~/utils/routerCompat";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,

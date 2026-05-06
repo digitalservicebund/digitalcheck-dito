@@ -1,5 +1,5 @@
 import { beispiele_prinzipien } from "@/config/routes";
-import { Link } from "~/utils/routerCompat";
+import { Link } from "react-router";
 
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
 import ContentWrapper from "~/components/ContentWrapper.tsx";

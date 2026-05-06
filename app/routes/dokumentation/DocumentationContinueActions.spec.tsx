@@ -8,13 +8,13 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { dokumentation_hinweise } from "@/config/routes";
 import type React from "react";
+import { MemoryRouter } from "react-router";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general.ts";
 import {
   readDataFromLocalStorage,
   removeFromLocalStorage,
 } from "~/utils/localStorageVersioned";
-import { MemoryRouter } from "~/utils/routerCompat";
 import { DocumentationContinueActions } from "./DocumentationContinueActions";
 import { DocumentationDataProvider } from "./DocumentationDataProvider";
 import type { DocumentationData, V1 } from "./documentationDataSchema";

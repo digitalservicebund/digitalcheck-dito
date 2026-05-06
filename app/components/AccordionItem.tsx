@@ -5,10 +5,10 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 import type { ReactNode } from "react";
+import { useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
 import RichText from "~/components/RichText";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
-import { useLocation } from "~/utils/routerCompat";
 import twMerge from "~/utils/tailwindMerge";
 
 export type AccordionItemProps = {

@@ -3,9 +3,9 @@ import { render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import userEvent from "@testing-library/user-event";
+import { MemoryRouter } from "react-router";
 import { preCheck } from "~/resources/content/vorpruefung";
 import Index from "~/routes/vorpruefung._preCheckNavigation.$questionId";
-import { MemoryRouter } from "~/utils/routerCompat";
 import { ResultType } from "../vorpruefung.ergebnis/PreCheckResult";
 import { usePreCheckData } from "../vorpruefung/preCheckDataHook";
 
@@ -15,8 +15,8 @@ const { mockNavigate } = vi.hoisted(() => ({
   mockNavigate: vi.fn(),
 }));
 
-vi.mock("~/utils/routerCompat", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("~/utils/routerCompat")>();
+vi.mock("react-router", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("react-router")>();
   return {
     ...actual,
     useNavigate: vi.fn(() => mockNavigate),

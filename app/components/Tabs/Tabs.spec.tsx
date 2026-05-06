@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { MemoryRouter, useLocation } from "react-router";
 import { describe, expect, it } from "vitest";
 import type { TabGroupProps } from "~/components/Tabs/Tabs";
 import TabGroup, { SearchParamTabs } from "~/components/Tabs/Tabs";
-import { MemoryRouter, useLocation } from "~/utils/routerCompat";
 
 class MockResizeObserver {
   observe() {}

@@ -5,6 +5,7 @@ import {
 } from "@/config/routes";
 import { isArray } from "@posthog/core";
 import type { ReactNode } from "react";
+import { Link } from "react-router";
 import type { BadgeProps } from "~/components/Badge";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
@@ -22,7 +23,6 @@ import type {
   V1,
   V2,
 } from "~/routes/dokumentation/documentationDataSchema";
-import { Link } from "~/utils/routerCompat";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
 import DocumentationActions from "./DocumentationActions";

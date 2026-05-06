@@ -4,6 +4,7 @@ import {
   dokumentation_regelungsvorhabenTitel,
 } from "@/config/routes";
 import type { ReactNode } from "react";
+import { Link } from "react-router";
 import type { BadgeProps } from "~/components/Badge";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
@@ -18,7 +19,6 @@ import type {
   PolicyTitle,
   Principle,
 } from "~/routes/dokumentation/documentationDataSchema";
-import { Link } from "~/utils/routerCompat";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
 import DocumentationActions from "./DocumentationActions";

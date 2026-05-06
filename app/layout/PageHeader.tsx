@@ -5,6 +5,7 @@ import {
   PhoneOutlined,
 } from "@digitalservicebund/icons";
 import { useEffect, useRef, useState } from "react";
+import { Link, useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Container from "~/components/Container";
 import { Kopfzeile } from "~/components/kern-preview/Kopfzeile.tsx";
@@ -14,7 +15,6 @@ import DropdownMenu from "~/layout/DropdownMenu.tsx";
 import ProgressBar from "~/layout/ProgressBar";
 import { header } from "~/resources/content/shared/header.ts";
 import { assetPath } from "~/utils/assetPath";
-import { Link, useLocation } from "~/utils/routerCompat";
 import twMerge from "~/utils/tailwindMerge.ts";
 import { normalizePathname } from "~/utils/utilFunctions.ts";
 

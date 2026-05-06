@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
@@ -9,7 +10,6 @@ import Timeline from "~/components/Timeline.tsx";
 import { methods } from "~/resources/content/methoden";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import getFeatureFlag from "~/utils/featureFlags.server";
-import { Link } from "~/utils/routerCompat";
 
 export function loader() {
   const showInterviewLeitfaden = getFeatureFlag("showInterviewLeitfaden");

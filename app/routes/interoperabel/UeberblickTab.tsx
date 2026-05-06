@@ -4,13 +4,13 @@ import {
   vorpruefung,
 } from "@/config/routes";
 import { ContactPhoneOutlined } from "@digitalservicebund/icons";
+import { Link } from "react-router";
 import { LinkButton } from "~/components/Button";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox.tsx";
 import NewTabLink from "~/components/NewTabLink";
 import Timeline from "~/components/Timeline";
 import { contact } from "~/resources/content/shared/contact";
-import { Link } from "~/utils/routerCompat";
 import { getTabAnchorLink } from "~/utils/tabs";
 import { tabIds } from "./tabIds";
 

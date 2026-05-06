@@ -3,6 +3,7 @@ import {
   methoden_fuenfPrinzipien,
   vorpruefung,
 } from "@/config/routes";
+import { Link } from "react-router";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import Image from "~/components/Image";
@@ -10,7 +11,6 @@ import ImageZoomable from "~/components/ImageZoomable";
 import NewTabLink from "~/components/NewTabLink";
 import { contact } from "~/resources/content/shared/contact";
 import { assetPath } from "~/utils/assetPath";
-import { Link } from "~/utils/routerCompat";
 import { getTabAnchorLink } from "~/utils/tabs";
 import { tabIds } from "./tabIds";
 

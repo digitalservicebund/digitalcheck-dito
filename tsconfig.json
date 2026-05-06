@@ -24,7 +24,8 @@
       "@/*": ["./src/*"],
       "@digitalservicebund/icons/*": [
         "./node_modules/@digitalservicebund/icons/*"
-      ]
+      ],
+      "react-router": ["./app/utils/routerCompat.tsx"]
     }
   }
 }

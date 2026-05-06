@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
+import { useLocation } from "react-router";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { useLocation } from "~/utils/routerCompat";
 import { usePreCheckData } from "./vorpruefung/preCheckDataHook";
 
 const { questions } = preCheck;
