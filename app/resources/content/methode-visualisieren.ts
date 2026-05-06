@@ -15,7 +15,7 @@ import {
   SupportOutlined,
   VisibilityTwoTone,
 } from "@digitalservicebund/icons";
-import { ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX } from "~/resources/staticRoutes";
+import { anleitungFlussdiagramm } from "@/config/downloads";
 import { assetPath } from "~/utils/assetPath";
 import type { ContentLink } from "~/utils/contentTypes";
 import { dedent } from "~/utils/dedentMultilineStrings";
@@ -206,7 +206,7 @@ export const methodsTasksProcesses = {
         "Eine Powerpoint-Vorlage (PPT) mit einer Schritt für Schritt Anleitung zum Download finden Sie hier. Sie können diese ausdrucken oder an Ihrem Computer bearbeiten. Sofern in Ihrem Ressort Conceptboard genutzt werden kann, können Sie sich auch eine Kopie dieser Conceptboard-Vorlage erstellen. Für letzteres können Sie einen Gast-Zugang anlegen.",
       links: [
         {
-          to: ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX.url,
+          to: anleitungFlussdiagramm.path,
           text: "PPT-Vorlage runterladen",
           plausibleEventName: "Content.Anleitung.Link+Powerpoint+Vorlage",
           download: true,

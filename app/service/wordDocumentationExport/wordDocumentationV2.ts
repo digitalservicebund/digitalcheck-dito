@@ -1,3 +1,4 @@
+import { dokumentationTemplateWordV2 } from "@/config/downloads";
 import type { IPatch, IRunOptions } from "docx";
 import {
   convertInchesToTwip,
@@ -19,25 +20,20 @@ import strapiBlocksToDocx from "./strapiBlocksToWord";
 const { saveAs } = fileSaver;
 const { principlePages } = digitalDocumentation;
 
-export const FILE_NAME_DOCUMENTATION_TEMPLATE =
-  "VORLAGE_Dokumentation_der_Digitaltauglichkeit_V2.docx";
-
 export function useWordDocumentationV2() {
   const { documentationData } = useDocumentationDataService();
 
   const downloadDocumentation = useCallback(
     async (prinzips: PrinzipWithAspekte[]) => {
       try {
-        const template = await fetch(
-          `/documents/${FILE_NAME_DOCUMENTATION_TEMPLATE}`,
-        );
+        const template = await fetch(dokumentationTemplateWordV2.path);
         const templateData = await template.arrayBuffer();
         const doc = await createDoc(
           templateData,
           documentationData as DocumentationData,
           prinzips,
         );
-        saveAs(doc, documentationDocument.filename);
+        saveAs(doc, dokumentationTemplateWordV2.filename);
       } catch (e) {
         console.error(e);
       }

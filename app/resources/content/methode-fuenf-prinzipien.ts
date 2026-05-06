@@ -1,6 +1,6 @@
 import { methoden, methoden_technischeUmsetzbarkeit } from "@/config/routes";
 import { ArrowCircleRightOutlined } from "@digitalservicebund/icons";
-import { ROUTE_DOWNLOAD_PRINCIPLE_POSTER } from "~/resources/staticRoutes";
+import { prinzipienPoster } from "@/config/downloads";
 import { assetPath } from "~/utils/assetPath";
 import type { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
@@ -64,6 +64,6 @@ export const methodsFivePrinciples = {
     imageUrl: assetPath("/images/Poster_5Prinzipien.jpg"),
     imageAlt: "Poster der 5 Prinzipien",
     downloadTitle: "Poster herunterladen",
-    downloadUrl: ROUTE_DOWNLOAD_PRINCIPLE_POSTER.url,
+    downloadUrl: prinzipienPoster.path,
   },
 };

@@ -23,7 +23,7 @@ import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
 import { STRAPI_MEDIA_URL } from "~/resources/constants.ts";
 import { contact } from "~/resources/content/shared/contact";
-import { ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX } from "~/resources/staticRoutes";
+import { anleitungFlussdiagramm } from "@/config/downloads";
 import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils.ts";
@@ -287,7 +287,7 @@ export default function Visualization() {
                     
                     [Conceptboard-Vorlage](https://bmas.de.conceptboard.com/board/qh33-xcny-usde-7nc6-82cy)
                     
-                    [Powerpoint-Vorlage](${ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX.url})
+                    [Powerpoint-Vorlage](${anleitungFlussdiagramm.path})
                     
                     Sie wünschen sich ein anderes Medium?
                     Schicken Sie uns eine E-Mail an ${contact.email}.

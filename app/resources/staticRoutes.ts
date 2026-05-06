@@ -1,7 +1,5 @@
-import { FILE_NAME_DOCUMENTATION_STATIC_WORD } from "../utils/constants";
 import { getTabAnchorLink } from "../utils/tabs";
 import { removeTrailingSlash } from "../utils/utilFunctions";
-import { documentationDocument } from "./content/documentation-document";
 import { preCheckQuestions } from "./content/shared/pre-check-questions";
 
 // ⚠️ Routes fully migrated to src/config/routes.ts have been removed.
@@ -37,8 +35,6 @@ const ROUTE_EXAMPLES = createRoute(
   "Beispiele für Digitaltauglichkeit",
 );
 
-const ROUTE_DOCUMENTATION = createRoute("dokumentation", "Dokumentation");
-
 // ── Backend endpoint ──────────────────────────────────────────────────────────
 export const ROUTE_HANDLE_CLIENT_SIDE_ERRORS = "/handle-client-side-error";
 
@@ -47,25 +43,6 @@ export const ROUTE_SUPPORT_TRAININGS = createRoute(
   `${getTabAnchorLink("online-schulungen", "angebote")}`,
   "Schulungen",
   ROUTE_SUPPORT,
-);
-
-// ── Download / asset links ────────────────────────────────────────────────────
-export const ROUTE_DOWNLOAD_PRINCIPLE_POSTER = createRoute(
-  "download/Prinzipien-Poster.pdf",
-  "Prinzipien-Poster",
-);
-export const ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX = createRoute(
-  "download/Anleitung_Flussdiagramm_erstellen.pptx",
-  "Anleitung Flussdiagramm erstellen",
-);
-export const ROUTE_DOCUMENTATION_STATIC_WORD = createRoute(
-  "download/" + FILE_NAME_DOCUMENTATION_STATIC_WORD,
-  "Begleitende Dokumentation als Word-Dokument",
-);
-export const ROUTE_DOCUMENTATION_TEMPLATE_WORD = createRoute(
-  `download/${documentationDocument.filename}`,
-  "Vorlage Dokumentation der Digitaltauglichkeit",
-  ROUTE_DOCUMENTATION,
 );
 
 // ── Dynamic route base paths (no static page) ─────────────────────────────────

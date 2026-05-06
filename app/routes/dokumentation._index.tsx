@@ -1,3 +1,4 @@
+import { dokumentationStaticWordV2 } from "@/config/downloads";
 import {
   ChecklistRtl,
   SimCardDownloadTwoTone,
@@ -17,7 +18,6 @@ import RichText from "~/components/RichText.tsx";
 import SupportBanner from "~/components/SupportBanner";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { supportBanner } from "~/resources/content/shared/support-banner";
-import { ROUTE_DOCUMENTATION_TEMPLATE_WORD } from "~/resources/staticRoutes";
 import { DocumentationContinueActions } from "~/routes/dokumentation/DocumentationContinueActions.tsx";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
@@ -50,8 +50,9 @@ export default function Index({
             <div className="space-y-8">
               <RichText markdown={start.alternative.text} />
 
-              <DownloadLinkButton
-                to={ROUTE_DOCUMENTATION_TEMPLATE_WORD.url}
+              <DownloadLinkButton // TODO: use browser generated docx from template
+                to={dokumentationStaticWordV2.path}
+                download={dokumentationStaticWordV2.filename}
                 look="link"
               >
                 {start.alternative.buttonText}

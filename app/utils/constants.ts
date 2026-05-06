@@ -8,6 +8,3 @@ export const POSTHOG_UI_HOST = "https://eu.posthog.com";
 export const POSTHOG_API_HOST = "eu.i.posthog.com";
 export const POSTHOG_ASSET_HOST = "eu-assets.i.posthog.com";
 // POSTHOG_KEY uses an environment variable, and is exported in constants.server
-
-export const FILE_NAME_DOCUMENTATION_STATIC_WORD =
-  "Dokumentieren-der-Digitaltauglichkeit_V1-5-1.docx";

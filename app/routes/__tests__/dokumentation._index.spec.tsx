@@ -9,7 +9,7 @@ import type React from "react";
 import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
-import { ROUTE_DOCUMENTATION_TEMPLATE_WORD } from "~/resources/staticRoutes";
+import { dokumentationStaticWordV2 } from "@/config/downloads";
 import DokumentationIndex from "~/routes/dokumentation._index";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
 
@@ -55,7 +55,7 @@ describe("Dokumentation Index Route - Integration Tests", () => {
     });
     expect(downloadButton).toHaveAttribute(
       "href",
-      ROUTE_DOCUMENTATION_TEMPLATE_WORD.url,
+      dokumentationStaticWordV2.path,
     );
   });
 
