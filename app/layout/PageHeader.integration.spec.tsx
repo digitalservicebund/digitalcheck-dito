@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { type UserEvent, userEvent } from "@testing-library/user-event";
-import React from "react";
+import type React from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { header } from "~/resources/content/shared/header.ts";
 import { MemoryRouter } from "~/utils/routerCompat";

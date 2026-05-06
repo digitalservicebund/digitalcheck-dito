@@ -5,7 +5,8 @@ import {
   DriveFileRenameOutline,
   LayersOutlined,
 } from "@digitalservicebund/icons";
-import React, { useRef } from "react";
+import type React from "react";
+import { useRef } from "react";
 import { twJoin } from "tailwind-merge";
 import BackToTopButton from "~/components/BackToTopButton.tsx";
 import Badge, { type BadgeProps } from "~/components/Badge.tsx";

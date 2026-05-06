@@ -7,7 +7,7 @@ import { act, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { dokumentation_hinweise } from "@/config/routes";
-import React from "react";
+import type React from "react";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general.ts";
 import {

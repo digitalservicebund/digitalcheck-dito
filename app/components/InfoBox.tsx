@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import { type ContentLink } from "~/utils/contentTypes";
 import twMerge from "~/utils/tailwindMerge";

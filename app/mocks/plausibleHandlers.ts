@@ -1,4 +1,5 @@
-import { http, HttpResponse, RequestHandler } from "msw";
+import type { RequestHandler } from "msw";
+import { http, HttpResponse } from "msw";
 import { PLAUSIBLE_URL } from "~/utils/constants";
 
 const plausibleHandlers: RequestHandler[] = [

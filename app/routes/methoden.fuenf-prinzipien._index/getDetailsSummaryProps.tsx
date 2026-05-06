@@ -1,7 +1,6 @@
 import { beispiele_prinzipien } from "@/config/routes";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import { type DetailsSummaryProps } from "~/components/DetailsSummary.tsx";
-import type { HeadingProps } from "~/components/Heading";
 import { type DetailsSummaryListProps } from "~/components/InfoBox.tsx";
 import ItalicModifier from "~/components/ItalicModifier.tsx";
 import PrincipleHighlightModifier from "~/components/PrincipleHighlightModifier";
@@ -101,7 +100,7 @@ export default function getDetailsSummaryProps(
     title: {
       text: methodsFivePrinciples.detailsSummaryTitle,
       tagName: "h3",
-    } as HeadingProps,
+    },
     items,
   };
 }

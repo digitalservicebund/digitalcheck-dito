@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 // removed react-router imports
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import ContentWrapper from "~/components/ContentWrapper.tsx";

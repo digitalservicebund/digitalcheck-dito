@@ -31,10 +31,8 @@ import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
   type IrrelevantAnswerReasoning,
   type NegativeAnswerReasoning,
-  type Principle,
   type PrincipleReasoningV1,
   principleSchemaV1,
-  type V1,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { features } from "~/utils/featureFlags";
 import { Link } from "~/utils/routerCompat";

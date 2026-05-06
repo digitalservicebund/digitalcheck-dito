@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 import { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
