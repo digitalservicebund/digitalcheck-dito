@@ -46,7 +46,7 @@ export const footer = {
         },
         {
           text: "Schulungen",
-          url: ROUTE_SUPPORT_TRAININGS.url,
+          url: ROUTE_SUPPORT_TRAININGS,
         },
         {
           text: "Nationale Kontaktstelle für ein interoperables Europa (2024/903 Art. 17)",

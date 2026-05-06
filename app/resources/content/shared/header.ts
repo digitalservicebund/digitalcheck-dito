@@ -136,7 +136,7 @@ export const header = {
           title: "Schulungen",
           content:
             "In dieser Online-Schulung bekommen Sie praktische Tipps für den Digitalcheck.",
-          href: ROUTE_SUPPORT_TRAININGS.url,
+          href: ROUTE_SUPPORT_TRAININGS,
           activeBehavior: "noHighlight" as ActiveBehavior,
         },
         {
