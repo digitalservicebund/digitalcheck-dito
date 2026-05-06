@@ -20,8 +20,9 @@ export type DataSchemaVersion =
 
 const { principlePages, participation, info } = digitalDocumentation;
 
-export const policyTitleSchema = z.object({
+export const policyHeaderSchema = z.object({
   title: z.string().min(1, { message: info.inputTitle.error }),
+  organization: z.string().optional(),
 });
 
 export const participationSchema = z.object({
@@ -184,6 +185,7 @@ export const principleSchemaV2 = principleAnswerSchemaV2.and(
 
 export const defaultTitleValues: PolicyTitle = {
   title: "",
+  organization: undefined,
 };
 
 export const defaultParticipationValues: Participation = {
@@ -199,7 +201,7 @@ export const defaultValues: DocumentationSchemaV2 | DocumentationSchemaV1 = {
 
 // documentationSchemaV2 <- current
 export const documentationSchemaV2 = z.object({
-  policyTitle: policyTitleSchema.optional(),
+  policyTitle: policyHeaderSchema.optional(),
   participation: participationSchema.optional(),
   euInteroperabilityOutcome: euInteroperabilityOutcomeSchema.optional(),
   principles: z.array(principleSchemaV2).optional(),
@@ -217,7 +219,7 @@ export const getDocumentationSchemaFormUrl = (
   url: string,
   simplified = false,
 ) => {
-  if (url === ROUTE_DOCUMENTATION_TITLE.url) return policyTitleSchema;
+  if (url === ROUTE_DOCUMENTATION_TITLE.url) return policyHeaderSchema;
   else if (url === ROUTE_DOCUMENTATION_PARTICIPATION.url)
     return participationSchema;
   else if (url === ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS.url)
@@ -242,7 +244,7 @@ export type Principle<V extends DataSchemaVersion = V2> = V extends V1
   ? PrincipleV1
   : PrincipleV2;
 
-export type PolicyTitle = z.infer<typeof policyTitleSchema>;
+export type PolicyTitle = z.infer<typeof policyHeaderSchema>;
 export type Participation = z.infer<typeof participationSchema>;
 export type EuInteroperabilityOutcome = z.infer<
   typeof euInteroperabilityOutcomeSchema

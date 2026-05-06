@@ -130,7 +130,7 @@ export const ROUTE_DOCUMENTATION_NOTES = createRoute(
 );
 export const ROUTE_DOCUMENTATION_TITLE = createRoute(
   "regelungsvorhaben-titel",
-  "Regelungsvorhaben Titel",
+  "Allgemeine Daten",
   ROUTE_DOCUMENTATION,
 );
 export const ROUTE_DOCUMENTATION_PARTICIPATION = createRoute(

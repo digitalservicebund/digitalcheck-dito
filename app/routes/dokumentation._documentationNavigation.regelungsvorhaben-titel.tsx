@@ -7,7 +7,7 @@ import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { ROUTE_DOCUMENTATION_TITLE } from "~/resources/staticRoutes";
 import {
   defaultTitleValues,
-  policyTitleSchema,
+  policyHeaderSchema,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
@@ -22,7 +22,7 @@ export default function DocumentationTitle() {
   const { documentationData, setPolicyTitle } = useDocumentationDataService();
 
   const form = useSyncedForm({
-    schema: policyTitleSchema,
+    schema: policyHeaderSchema,
     defaultValues: defaultTitleValues,
     currentUrl,
     setDataCallback: setPolicyTitle,
@@ -35,12 +35,12 @@ export default function DocumentationTitle() {
       <MetaTitle prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_TITLE.title}`} />
       <div className="space-y-40">
         <Heading
-          text={info.headline}
+          text={"Ihr Regelungsvorhaben"}
           tagName="h1"
           look="ds-heading-02-reg"
           className="mb-40"
         />
-        <form {...form.getFormProps()}>
+        <form {...form.getFormProps()} className="space-y-32">
           <Input scope={form.scope("title")} warningInsteadOfError>
             {info.inputTitle.label}
             <HelpButton
@@ -50,6 +50,9 @@ export default function DocumentationTitle() {
               Geben Sie hier den offiziellen Titel Ihres Regelungsvorhabens ein.
               Dieser Titel wird in der fertigen Dokumentation verwendet.
             </HelpButton>
+          </Input>
+          <Input scope={form.scope("organization")} warningInsteadOfError>
+            Ministerium / Organisation
           </Input>
 
           <DocumentationActions

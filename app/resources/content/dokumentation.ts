@@ -169,7 +169,6 @@ export const digitalDocumentation = {
     },
   },
   info: {
-    headline: "Tragen Sie den Titel Ihres Regelungsvorhabens ein",
     inputTitle: {
       label: "Titel des Regelungsvorhabens",
       error: "Bitte geben Sie einen Titel ein.",
