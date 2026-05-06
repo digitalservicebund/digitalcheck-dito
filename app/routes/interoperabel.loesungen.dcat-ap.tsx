@@ -6,7 +6,6 @@ import {
 import type React from "react";
 import AccordionItem from "~/components/AccordionItem";
 import Badge from "~/components/Badge.tsx";
-import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
 import { InteroperableSolutionBanner } from "~/components/InteroperableSolutionBanner.tsx";
@@ -215,30 +214,40 @@ export default function InteroperableSolutionsDcatAp() {
               Grundlage, dass die spätere technische Umsetzung zwingend nach
               DCAT-AP erfolgt, um die EU-weite Auffindbarkeit zu garantieren.
             </p>
-            <DetailsSummary title={"Wann ist eine Ausnahme zulässig?"}>
-              <p>
-                Der Interoperable Europe Act (IEA) sieht vor, dass die Nutzung
-                von Standards wie DCAT-AP in begründeten Fällen abgelehnt werden
-                kann. Prüfen Sie folgende Punkte:
-              </p>
-              <ul>
-                <li>
-                  Sicherheit & Geheimhaltung: Enthält die Beschreibung des
-                  Datensatzes (die „Katalogkarte“) Informationen, die aus
-                  Gründen der öffentlichen Sicherheit oder des Datenschutzes
-                  nicht veröffentlicht werden dürfen?
-                </li>
-                <li>
-                  Rechte Dritter: Verhindern bestehende Lizenzen oder
-                  Urheberrechte Dritter die Nutzung dieses offenen Standards?
-                </li>
-                <li>
-                  Unverhältnismäßigkeit: Übersteigt der Aufwand für die
-                  Umstellung eines bestehenden, isolierten Systems den Nutzen
-                  für den grenzüberschreitenden digitalen Binnenmarkt deutlich?
-                </li>
-              </ul>
-            </DetailsSummary>
+            <div>
+              <AccordionItem
+                headline={"Wann ist eine Ausnahme zulässig?"}
+                className={"my-40"}
+              >
+                <div className="space-y-8">
+                  <p>
+                    Der Interoperable Europe Act (IEA) sieht vor, dass die
+                    Nutzung von Standards wie DCAT-AP in begründeten Fällen
+                    abgelehnt werden kann. Prüfen Sie folgende Punkte:
+                  </p>
+                  <ul>
+                    <li>
+                      Sicherheit & Geheimhaltung: Enthält die Beschreibung des
+                      Datensatzes (die „Katalogkarte“) Informationen, die aus
+                      Gründen der öffentlichen Sicherheit oder des Datenschutzes
+                      nicht veröffentlicht werden dürfen?
+                    </li>
+                    <li>
+                      Rechte Dritter: Verhindern bestehende Lizenzen oder
+                      Urheberrechte Dritter die Nutzung dieses offenen
+                      Standards?
+                    </li>
+                    <li>
+                      Unverhältnismäßigkeit: Übersteigt der Aufwand für die
+                      Umstellung eines bestehenden, isolierten Systems den
+                      Nutzen für den grenzüberschreitenden digitalen Binnenmarkt
+                      deutlich?
+                    </li>
+                  </ul>
+                </div>
+              </AccordionItem>
+            </div>
+
             <Timeline>
               <Timeline.Item bullet>
                 <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48">
