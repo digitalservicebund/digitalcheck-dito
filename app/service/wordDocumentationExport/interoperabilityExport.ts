@@ -1,4 +1,13 @@
-import { FileChild, IPatch, Paragraph, PatchType, TextRun } from "docx";
+import {
+  FileChild,
+  IPatch,
+  Paragraph,
+  PatchType,
+  Table,
+  TableCell,
+  TableRow,
+  TextRun,
+} from "docx";
 import { Option } from "~/components/ComboBox.tsx";
 import {
   DocumentationData,
@@ -18,7 +27,6 @@ import {
   sections,
 } from "~/routes/dokumentation/interoperability/Sections.tsx";
 import {
-  stringsToTextRuns,
   stringToTextRuns,
   toParagraphPatch,
 } from "~/service/wordDocumentationExport/wordDocumentationV2.ts";
@@ -99,6 +107,23 @@ function keyValueToMap(options: readonly Option[]): Map<string, string> {
   return new Map(options.map(({ value, label }) => [value, label]));
 }
 
+function makeTable(rows: string[][]) {
+  return new Table({
+    columnWidths: [3505, 5505],
+    rows: rows.map(
+      (row) =>
+        new TableRow({
+          children: row.map(
+            (cell) =>
+              new TableCell({
+                children: [new Paragraph(cell)],
+              }),
+          ),
+        }),
+    ),
+  });
+}
+
 export function formatBindingRequirements(
   bindingRequirements: DocumentationData["bindingRequirements"],
 ): IPatch {
@@ -119,26 +144,28 @@ export function formatBindingRequirements(
         ],
       });
 
-      const strings = [
-        `Beschreibung: ${requirement.description ?? ""}`,
-        `Rechtsgrundlage: ${requirement.legalReference ?? ""}`,
-        `Transeuropäische Dienste: ${requirement.services
-          ?.split("\n")
-          .join(", ")}`,
-        `Bereiche: ${requirement.serviceAreas
-          .map((area) => serviceAreaMap.get(area) ?? area)
-          .join(", ")}`,
-        `Gruppen: ${(requirement.stakeholderGroups ?? [])
-          .map((group) => stakeholderMap.get(group) ?? group)
-          .join(", ")}`,
+      const tableData = [
+        ["Beschreibung", requirement.description ?? ""],
+        ["Rechtsgrundlage", requirement.legalReference ?? ""],
+        [
+          "Transeuropäische Dienste",
+          requirement.services?.split("\n").join(", ") ?? "",
+        ],
+        [
+          "Bereiche",
+          requirement.serviceAreas
+            .map((area) => serviceAreaMap.get(area) ?? area)
+            .join(", "),
+        ],
+        [
+          "Gruppen",
+          (requirement.stakeholderGroups ?? [])
+            .map((group) => stakeholderMap.get(group) ?? group)
+            .join(", "),
+        ],
       ];
 
-      const contentParagraph = new Paragraph({
-        children: stringsToTextRuns(strings),
-        style: "Normal0",
-      });
-
-      return [headerParagraph, contentParagraph];
+      return [headerParagraph, makeTable(tableData)];
     });
 
   return {
