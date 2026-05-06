@@ -1,13 +1,4 @@
-import {
-  convertInchesToTwip,
-  ExternalHyperlink,
-  IPatch,
-  IRunOptions,
-  Paragraph,
-  patchDocument,
-  PatchType,
-  TextRun,
-} from "docx";
+import { convertInchesToTwip, IPatch, patchDocument, PatchType } from "docx";
 import fileSaver from "file-saver";
 import { useCallback } from "react";
 import { documentationDocument } from "~/resources/content/documentation-document";
@@ -15,6 +6,10 @@ import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { contact } from "~/resources/content/shared/contact";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider";
 import { type DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
+import {
+  toMailtoHyperlinkPatch,
+  toParagraphPatch,
+} from "~/service/wordDocumentationExport/docxUtils.ts";
 import { buildAppendixPatch } from "~/service/wordDocumentationExport/interoperabilityExport.ts";
 import { assetPath } from "~/utils/assetPath.ts";
 import { type PrinzipWithAspekte } from "~/utils/strapiData.server";
@@ -53,6 +48,11 @@ export function useWordDocumentationV2() {
   return { downloadDocumentation };
 }
 
+export const answerOrPlaceholder = (answer?: string) =>
+  answer || documentationDocument.placeholder;
+export const answerOrPlaceholderOptional = (answer?: string) =>
+  answer || documentationDocument.placeholderOptional;
+
 export const createDoc = async (
   templateData: ArrayBuffer | Uint8Array,
   {
@@ -71,9 +71,9 @@ export const createDoc = async (
     outputType: "blob",
     patches: {
       TIMESTAMP: toParagraphPatch(date),
-      NKR_CONTACT_EMAIL: toHyperlinkPatch(contact.nkrEmail),
-      INTEROPS_EMAIL: toHyperlinkPatch(contact.interoperabilityEmail),
-      DS_EMAIL: toHyperlinkPatch(contact.email),
+      NKR_CONTACT_EMAIL: toMailtoHyperlinkPatch(contact.nkrEmail),
+      INTEROPS_EMAIL: toMailtoHyperlinkPatch(contact.interoperabilityEmail),
+      DS_EMAIL: toMailtoHyperlinkPatch(contact.email),
       DS_PHONE: toParagraphPatch(contact.phoneDisplay),
       POLICY_TITLE: toParagraphPatch(answerOrPlaceholder(policyTitle?.title)),
       PARTICIPATION_FORMATS: toParagraphPatch(
@@ -91,58 +91,6 @@ export const createDoc = async (
     },
     keepOriginalStyles: true,
   });
-};
-
-export const toParagraphPatch = (content: string): IPatch => ({
-  type: PatchType.PARAGRAPH,
-  children: stringToTextRuns(content),
-});
-
-export const toHyperlinkPatch = (content: string): IPatch => ({
-  type: PatchType.PARAGRAPH,
-  children: [
-    new ExternalHyperlink({
-      children: stringToTextRuns(content, { style: "Hyperlink" }),
-      link: "mailto:" + content,
-    }),
-  ],
-});
-
-export const toListPatch = (items: string[]): IPatch => ({
-  type: PatchType.DOCUMENT,
-  children: items.map(
-    (item) =>
-      new Paragraph({
-        text: item,
-        bullet: {
-          level: 1,
-        },
-      }),
-  ),
-});
-
-const answerOrPlaceholder = (answer?: string) =>
-  answer || documentationDocument.placeholder;
-
-const answerOrPlaceholderOptional = (answer?: string) =>
-  answer || documentationDocument.placeholderOptional;
-
-export function stringsToTextRuns(
-  split: string[],
-  options: IRunOptions = {},
-): TextRun[] {
-  return split.map(
-    (line, idx) =>
-      new TextRun({ ...options, text: line, break: Number(idx > 0) }),
-  );
-}
-
-export const stringToTextRuns = (
-  content: string,
-  options: IRunOptions = {},
-) => {
-  const split = content.split("\n");
-  return stringsToTextRuns(split, options);
 };
 
 // Builds all patches that are needed for the principles

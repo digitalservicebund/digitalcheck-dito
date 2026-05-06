@@ -3,14 +3,14 @@ import { describe, expect, it, vi } from "vitest";
 import { documentationDocument } from "~/resources/content/documentation-document";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
+import {
+  stringToTextRuns,
+  toMailtoHyperlinkPatch,
+  toParagraphPatch,
+} from "~/service/wordDocumentationExport/docxUtils.ts";
 import type { Node } from "~/utils/paragraphUtils";
 import { PrinzipWithAspekte } from "~/utils/strapiData.server";
-import {
-  buildPrinciplePatches,
-  stringToTextRuns,
-  toHyperlinkPatch,
-  toParagraphPatch,
-} from "./wordDocumentationV2";
+import { buildPrinciplePatches } from "./wordDocumentationV2";
 
 const { placeholderOptional } = documentationDocument;
 const { principlePages } = digitalDocumentation;
@@ -296,7 +296,7 @@ describe("wordDocumentationV2", () => {
   describe("hyperlinks", () => {
     it("toHyperlinkPatch creates a paragraph with an email hyperlink", () => {
       const emailAddress = "test@example.com";
-      const hyperlinkPatch = toHyperlinkPatch(emailAddress);
+      const hyperlinkPatch = toMailtoHyperlinkPatch(emailAddress);
 
       expect(hyperlinkPatch.type).toBe(PatchType.PARAGRAPH);
       expect(hyperlinkPatch.children).toHaveLength(1);
@@ -311,7 +311,7 @@ describe("wordDocumentationV2", () => {
 
     it("toHyperlinkPatch applies Hyperlink style to the text runs", () => {
       const emailAddress = "contact@domain.org";
-      toHyperlinkPatch(emailAddress);
+      toMailtoHyperlinkPatch(emailAddress);
 
       expect(TextRun).toHaveBeenCalledWith(
         expect.objectContaining({

@@ -1,13 +1,4 @@
-import {
-  FileChild,
-  IPatch,
-  Paragraph,
-  PatchType,
-  Table,
-  TableCell,
-  TableRow,
-  WidthType,
-} from "docx";
+import { FileChild, IPatch, Paragraph, PatchType } from "docx";
 import { Option } from "~/components/ComboBox.tsx";
 import {
   DocumentationData,
@@ -19,6 +10,7 @@ import {
   stakeholderOptions,
 } from "~/routes/dokumentation/interoperability/BindingRequirementsForm.tsx";
 import { interoperabilityRatingOptions } from "~/routes/dokumentation/interoperability/InteroperabilityRatingSelect.tsx";
+import { metadataTable } from "~/service/wordDocumentationExport/docxUtils.ts";
 
 export function buildAppendixPatch({
   policyTitle,
@@ -56,7 +48,7 @@ export function buildAppendixPatch({
 export function formatInteroperabilityMeta(
   policyTitle?: PolicyTitle,
 ): FileChild[] {
-  const table = buildMetadataTable([
+  const table = metadataTable([
     ["Titel des Vorhabens", policyTitle?.title ?? ""],
     ["Ministerium oder Organisation", policyTitle?.organization ?? ""],
   ]);
@@ -83,7 +75,7 @@ export function formatInteroperabilityAssessment(
         style: "Heading2",
         text: `${levelLabel} Interoperabilität`,
       }),
-      buildMetadataTable([
+      metadataTable([
         ["Erklärung", data.detail ?? ""],
         ["Bewertung", (data.rating ? ratingMap.get(data.rating) : "") ?? ""],
       ]),
@@ -93,28 +85,6 @@ export function formatInteroperabilityAssessment(
 
 function keyValueToMap(options: readonly Option[]): Map<string, string> {
   return new Map(options.map(({ value, label }) => [value, label]));
-}
-
-function buildMetadataTable(rows: string[][]) {
-  return new Table({
-    width: { size: 100, type: WidthType.PERCENTAGE },
-    columnWidths: [30, 70], // for display in LibreOffice
-    rows: rows.map(
-      (row) =>
-        new TableRow({
-          children: row.map(
-            (cell, cellIndex) =>
-              new TableCell({
-                children: [new Paragraph(cell)],
-                width: {
-                  size: cellIndex === 0 ? "30%" : "70%", // for display in Microsoft Word
-                  type: WidthType.PERCENTAGE,
-                },
-              }),
-          ),
-        }),
-    ),
-  });
 }
 
 export function formatBindingRequirements(
@@ -156,6 +126,6 @@ export function formatBindingRequirements(
       ],
     ];
 
-    return [headerParagraph, buildMetadataTable(tableData)];
+    return [headerParagraph, metadataTable(tableData)];
   });
 }
