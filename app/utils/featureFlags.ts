@@ -1,7 +1,5 @@
 export const features = {
   showGesetzgebungsprozessOverview: "showGesetzgebungsprozessOverview",
-  showInterviewLeitfaden: "showInterviewLeitfaden",
-  showIOEuRechtContent: "showIOEuRechtContent",
   simplifiedPrincipleFlow: "simplifiedPrincipleFlow",
   showStrapiDrafts: "showStrapiDrafts",
 } as const;
