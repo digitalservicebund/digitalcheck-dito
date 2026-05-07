@@ -105,7 +105,7 @@ type Location = {
 
 type LocationContextValue = {
   location: Location;
-  navigate: (to: string) => void;
+  navigate: (to: string) => Promise<void>;
 };
 
 const LocationContext = createContext<LocationContextValue | null>(null);
@@ -154,11 +154,14 @@ export function useLocation(): Location {
 export function useNavigate() {
   const ctx = useContext(LocationContext);
   return useCallback(
-    (to: string) => {
+    async (to: string): Promise<void> => {
       if (ctx) {
-        ctx.navigate(to);
+        await ctx.navigate(to);
       } else {
         window.location.href = to;
+        // Pseudo-await: the page navigates away before this resolves,
+        // but satisfies the async contract.
+        await Promise.resolve();
       }
     },
     [ctx],
@@ -278,9 +281,10 @@ export function MemoryRouter({
     hash: parsed.hash,
   });
 
-  const navigate = useCallback((to: string) => {
+  const navigate = useCallback(async (to: string): Promise<void> => {
     const next = new URL(to, "http://localhost");
     setLoc({ pathname: next.pathname, search: next.search, hash: next.hash });
+    await Promise.resolve();
   }, []);
 
   return (

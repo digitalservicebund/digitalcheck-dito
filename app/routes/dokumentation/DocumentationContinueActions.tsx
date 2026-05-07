@@ -9,7 +9,6 @@ import Dialog from "~/components/Dialog.tsx";
 import RichText from "~/components/RichText.tsx";
 import { digitalDocumentation } from "~/resources/content/dokumentation.ts";
 import { general } from "~/resources/content/shared/general.ts";
-import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation.ts";
 import { useNonce } from "~/utils/nonce.ts";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
@@ -53,7 +52,7 @@ function StartOverDialog({
         <div className="flex flex-row gap-12">
           <Button
             type="button"
-            onClick={() => {
+            onClick={async () => {
               deleteDocumentationData();
               await navigate(ROUTES_DOCUMENTATION_INTRO[0].path);
             }}
