@@ -13,7 +13,7 @@ import { ROUTE_DOCUMENTATION_TEMPLATE_WORD } from "~/resources/staticRoutes";
 import DokumentationIndex from "~/routes/dokumentation._index";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
 
-const ROUTES_DOCUMENTATION_INTRO = [{ url: dokumentation_hinweise.path }];
+const ROUTES_DOCUMENTATION_INTRO = [{ path: dokumentation_hinweise.path }];
 
 vi.mock("~/contexts/FeatureFlagContext", () => {
   return {
@@ -50,7 +50,7 @@ describe("Dokumentation Index Route - Integration Tests", () => {
     });
     expect(startButton).toHaveAttribute(
       "href",
-      ROUTES_DOCUMENTATION_INTRO[0].url,
+      ROUTES_DOCUMENTATION_INTRO[0].path,
     );
   });
 

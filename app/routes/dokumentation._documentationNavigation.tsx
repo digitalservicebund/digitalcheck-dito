@@ -17,7 +17,7 @@ import { features } from "~/utils/featureFlags";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 
-type _Route = { url: string; title: string };
+type _Route = { path: string; title: string };
 
 type Route = _Route & {
   principleId?: string;
@@ -33,7 +33,7 @@ export type NavigationContext = {
 };
 
 function findIndexForRoute(routes: Route[], currentUrl: string) {
-  const index = routes.findIndex((route) => route.url === currentUrl);
+  const index = routes.findIndex((route) => route.path === currentUrl);
 
   if (index === -1) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
@@ -46,26 +46,26 @@ function findIndexForRoute(routes: Route[], currentUrl: string) {
 
 function getPreviousUrl(routes: Route[], currentUrl: string): string {
   return findIndexForRoute(routes, currentUrl) > 0
-    ? routes[findIndexForRoute(routes, currentUrl) - 1].url
+    ? routes[findIndexForRoute(routes, currentUrl) - 1].path
     : dokumentation.path;
 }
 
 function getNextUrl(routes: Route[], currentUrl: string): string | null {
   return findIndexForRoute(routes, currentUrl) < routes.length - 1
-    ? routes[findIndexForRoute(routes, currentUrl) + 1].url
+    ? routes[findIndexForRoute(routes, currentUrl) + 1].path
     : null;
 }
 
 function resolveAdjacentUrl(
   flatRoutes: Route[],
   fromUrl: string,
-  getAdjacent: (routes: Route[], url: string) => string | null,
+  getAdjacent: (routes: Route[], path: string) => string | null,
   simplifiedFlow: boolean,
   findData: (id: string) => unknown,
 ): string | null {
   const rawUrl = getAdjacent(flatRoutes, fromUrl);
   if (!rawUrl || !simplifiedFlow) return rawUrl;
-  const route = flatRoutes.find((r) => r.url === rawUrl);
+  const route = flatRoutes.find((r) => r.path === rawUrl);
   if (route?.principleId) {
     const data = findData(route.principleId) as { answer?: string } | undefined;
     if (data?.answer) return `${rawUrl}/erlaeuterung`;
@@ -80,7 +80,7 @@ export default function LayoutWithDocumentationNavigation() {
   // exclude documentation notes
   const displayedRoutes = routes.filter((route) => {
     if (Array.isArray(route)) return true;
-    return route.url !== dokumentation_hinweise.path;
+    return route.path !== dokumentation_hinweise.path;
   });
 
   const location = useLocation();
@@ -99,7 +99,7 @@ export default function LayoutWithDocumentationNavigation() {
     useDocumentationDataService();
 
   const flatRoutes = routes.flat();
-  const currentRoute = flatRoutes.find((r) => r.url === navigationCurrentUrl);
+  const currentRoute = flatRoutes.find((r) => r.path === navigationCurrentUrl);
   const currentPrincipleFormData = currentRoute?.principleId
     ? findDocumentationDataForUrl(currentRoute.principleId)
     : undefined;
@@ -145,25 +145,25 @@ export default function LayoutWithDocumentationNavigation() {
 
   const getNavItem = (route: Route) => {
     const formData = findDocumentationDataForUrl(
-      route.principleId || route.url,
+      route.principleId || route.path,
     );
-    const schema = getDocumentationSchemaFormUrl(route.url);
+    const schema = getDocumentationSchemaFormUrl(route.path);
     const valid = schema.safeParse(formData);
 
     const navUrl =
       simplifiedFlow &&
       route.principleId &&
       (formData as { answer?: string } | undefined)?.answer
-        ? `${route.url}/erlaeuterung`
-        : route.url;
+        ? `${route.path}/erlaeuterung`
+        : route.path;
 
     return (
       <Nav.Item
-        key={route.url}
+        key={route.path}
         url={navUrl}
         activeUrls={
           route.principleId
-            ? [route.url, `${route.url}/erlaeuterung`]
+            ? [route.path, `${route.path}/erlaeuterung`]
             : undefined
         }
         error={formData && !valid.success}

@@ -1,6 +1,5 @@
 import {
   interoperabel,
-  vorpruefung,
   vorpruefung_ergebnis,
   vorpruefung_hinweise,
 } from "@/config/routes";
@@ -203,7 +202,7 @@ export const preCheck = {
         
         Bitte überprüfen Sie ihre Angaben.
 
-        [Frage 3 zum Datenaustausch überprüfen](${vorpruefung.path}/${preCheckQuestions.datenaustausch.id})
+        [Frage 3 zum Datenaustausch überprüfen](${preCheckQuestions.datenaustausch.path})
       `,
     },
   },
@@ -309,14 +308,11 @@ export const preCheck = {
   ].map((question, index, questions) => ({
     // generate list from the questions such that each list has a path, a previous link and a next link
     ...question,
-    url: `${vorpruefung.path}/${question.id}`,
     prevLink:
-      index === 0
-        ? vorpruefung_hinweise.path
-        : `${vorpruefung.path}/${questions[index - 1].id}`,
+      index === 0 ? vorpruefung_hinweise.path : questions[index - 1].path,
     nextLink:
       index === questions.length - 1
         ? vorpruefung_ergebnis.path
-        : `${vorpruefung.path}/${questions[index + 1].id}`,
+        : questions[index + 1].path,
   })) as TQuestion[],
 };

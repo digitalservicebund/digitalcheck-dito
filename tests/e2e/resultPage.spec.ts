@@ -21,9 +21,9 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
 
   test.beforeAll("answer all questions with yes", async ({ browser }) => {
     page = await browser.newPage();
-    await page.goto(questions[0].url);
+    await page.goto(questions[0].path);
     for (const question of questions) {
-      await page.waitForURL(question.url);
+      await page.waitForURL(question.path);
       await page.getByLabel("Ja").click();
       await page.getByRole("button", { name: "Übernehmen" }).click();
     }

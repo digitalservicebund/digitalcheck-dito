@@ -3,6 +3,7 @@ import "./utils/mockLocalStorageVersioned";
 import "./utils/mockRouter";
 // End of mocks
 
+import type { Route } from "@/config/routes";
 import {
   dokumentation_beteiligungsformate,
   dokumentation_hinweise,
@@ -29,38 +30,26 @@ vi.mock("~/contexts/FeatureFlagContext", () => ({
   useFeatureFlag: vi.fn().mockReturnValue(true),
 }));
 
-type Route = { url: string; title: string };
-
-const ROUTE_DOCUMENTATION_NOTES = {
-  url: dokumentation_hinweise.path,
-  title: dokumentation_hinweise.title,
-};
-const ROUTE_DOCUMENTATION_TITLE = {
-  url: dokumentation_regelungsvorhabenTitel.path,
-  title: dokumentation_regelungsvorhabenTitel.title,
-};
-const ROUTE_DOCUMENTATION_PARTICIPATION = {
-  url: dokumentation_beteiligungsformate.path,
-  title: dokumentation_beteiligungsformate.title,
-};
-const ROUTES_DOCUMENTATION_INTRO: Route[] = [
-  ROUTE_DOCUMENTATION_NOTES,
-  ROUTE_DOCUMENTATION_TITLE,
-  ROUTE_DOCUMENTATION_PARTICIPATION,
-];
-
-const MOCK_ROUTE_PRINCIPLE = {
+const MOCK_ROUTE_PRINCIPLE: Route = {
   title: "Digitale Angebote",
-  url: "/dokumentation/prinzip-digitale-angebote",
+  path: "/dokumentation/prinzip-digitale-angebote",
+  key: "prinzipA",
+  parent: null,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
 };
 const routes: (Route[] | Route)[] = [
-  ...ROUTES_DOCUMENTATION_INTRO,
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+  dokumentation_beteiligungsformate,
   [MOCK_ROUTE_PRINCIPLE],
 ];
 
 const documentationFormRoutes = routes
   .flat()
-  .filter((route) => route.url !== ROUTE_DOCUMENTATION_NOTES.url);
+  .filter((route) => route.path !== dokumentation_hinweise.path);
 
 const mockedUseOutletContext = vi.mocked(useOutletContext);
 
@@ -172,7 +161,7 @@ describe("DocumentationSummaryV2", () => {
     renderWithRouter();
 
     documentationFormRoutes.forEach((route) => {
-      expect(screen.getByTestId(route.url)).toBeInTheDocument();
+      expect(screen.getByTestId(route.path)).toBeInTheDocument();
     });
   });
 
@@ -180,7 +169,7 @@ describe("DocumentationSummaryV2", () => {
     renderWithRouter();
 
     documentationFormRoutes.forEach((route) => {
-      const stepContainer = screen.getByTestId(route.url);
+      const stepContainer = screen.getByTestId(route.path);
 
       expect(
         within(stepContainer).getByRole("heading", {
@@ -194,7 +183,7 @@ describe("DocumentationSummaryV2", () => {
     renderWithRouter();
 
     documentationFormRoutes.forEach((route) => {
-      const stepContainer = screen.getByTestId(route.url);
+      const stepContainer = screen.getByTestId(route.path);
       const isPrincipleRoute = route === MOCK_ROUTE_PRINCIPLE;
 
       if (isPrincipleRoute) {
@@ -412,13 +401,15 @@ describe("DocumentationSummaryV2", () => {
   it("shows edit buttons for steps that have data", () => {
     renderWithRouter();
 
-    const titleContainer = screen.getByTestId(ROUTE_DOCUMENTATION_TITLE.url);
+    const titleContainer = screen.getByTestId(
+      dokumentation_regelungsvorhabenTitel.path,
+    );
     const titleEditLink = within(titleContainer).getByRole("link", {
       name: /bearbeiten/i,
     });
     expect(titleEditLink).toHaveAttribute(
       "href",
-      ROUTE_DOCUMENTATION_TITLE.url,
+      dokumentation_regelungsvorhabenTitel.path,
     );
     expect(titleEditLink).toHaveTextContent("Bearbeiten");
   });
@@ -428,7 +419,7 @@ describe("DocumentationSummaryV2", () => {
     renderWithRouter();
 
     documentationFormRoutes.forEach((route) => {
-      const stepContainer = screen.getByTestId(route.url);
+      const stepContainer = screen.getByTestId(route.path);
 
       expect(
         within(stepContainer).getByText(
@@ -463,17 +454,17 @@ describe("DocumentationSummaryV2", () => {
   });
 
   test.each([
-    [ROUTE_DOCUMENTATION_TITLE.url, { policyTitle: undefined }],
-    [ROUTE_DOCUMENTATION_TITLE.url, { policyTitle: { title: "" } }],
-    [ROUTE_DOCUMENTATION_PARTICIPATION.url, { participation: undefined }],
+    [dokumentation_regelungsvorhabenTitel.path, { policyTitle: undefined }],
+    [dokumentation_regelungsvorhabenTitel.path, { policyTitle: { title: "" } }],
+    [dokumentation_beteiligungsformate.path, { participation: undefined }],
     [
-      ROUTE_DOCUMENTATION_PARTICIPATION.url,
+      dokumentation_beteiligungsformate.path,
       {
         participation: { formats: "", results: "" },
       },
     ],
-    [MOCK_ROUTE_PRINCIPLE.url, { principles: undefined }],
-    [MOCK_ROUTE_PRINCIPLE.url, { principles: [] as Principle<V2>[] }],
+    [MOCK_ROUTE_PRINCIPLE.path, { principles: undefined }],
+    [MOCK_ROUTE_PRINCIPLE.path, { principles: [] as Principle<V2>[] }],
   ])(
     "shows warning for step %s when data is undefined or empty",
     (stepId, mockData) => {
@@ -491,13 +482,13 @@ describe("DocumentationSummaryV2", () => {
 
   test.each([
     [
-      ROUTE_DOCUMENTATION_PARTICIPATION.url,
+      dokumentation_beteiligungsformate.path,
       {
         participation: { formats: "some formats", results: "" },
       },
     ],
     [
-      ROUTE_DOCUMENTATION_PARTICIPATION.url,
+      dokumentation_beteiligungsformate.path,
       {
         participation: { formats: "", results: "some results" },
       },

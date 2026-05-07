@@ -17,29 +17,29 @@ import type {
 } from "~/utils/strapiData.types";
 import { DocumentationDataProvider } from "./DocumentationDataProvider";
 
-type _Route = { url: string; title: string };
+type _Route = { path: string; title: string };
 
 const ROUTE_DOCUMENTATION = {
-  url: dokumentation.path,
+  path: dokumentation.path,
   title: dokumentation.title,
 };
 const ROUTES_DOCUMENTATION_INTRO: _Route[] = [
-  { url: dokumentation_hinweise.path, title: dokumentation_hinweise.title },
+  { path: dokumentation_hinweise.path, title: dokumentation_hinweise.title },
   {
-    url: dokumentation_regelungsvorhabenTitel.path,
+    path: dokumentation_regelungsvorhabenTitel.path,
     title: dokumentation_regelungsvorhabenTitel.title,
   },
   {
-    url: dokumentation_beteiligungsformate.path,
+    path: dokumentation_beteiligungsformate.path,
     title: dokumentation_beteiligungsformate.title,
   },
 ];
 const ROUTES_DOCUMENTATION_FINALIZE: _Route[] = [
   {
-    url: dokumentation_zusammenfassung.path,
+    path: dokumentation_zusammenfassung.path,
     title: dokumentation_zusammenfassung.title,
   },
-  { url: dokumentation_absenden.path, title: dokumentation_absenden.title },
+  { path: dokumentation_absenden.path, title: dokumentation_absenden.title },
 ];
 
 type Route = _Route & {
@@ -55,7 +55,7 @@ export type DocumentationRouteData = {
   prinzips: PrinzipWithAspekte[];
 };
 
-const getUrlForSlug = (slug: string) => `${ROUTE_DOCUMENTATION.url}/${slug}`;
+const getUrlForSlug = (slug: string) => `${ROUTE_DOCUMENTATION.path}/${slug}`;
 
 export const loader: () => Promise<DocumentationRouteData> = async () => {
   const prinzipData = await fetchStrapiData<{
@@ -73,7 +73,7 @@ export const loader: () => Promise<DocumentationRouteData> = async () => {
     ...ROUTES_DOCUMENTATION_INTRO,
     prinzips.map<Route>(({ Name, URLBezeichnung, documentId }) => ({
       title: Name,
-      url: getUrlForSlug(URLBezeichnung),
+      path: getUrlForSlug(URLBezeichnung),
       principleId: documentId,
     })),
     ...ROUTES_DOCUMENTATION_FINALIZE,

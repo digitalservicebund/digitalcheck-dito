@@ -2,6 +2,7 @@
 import "./utils/mockLocalStorageVersioned";
 import "./utils/mockRouter";
 // End of mocks
+import type { Route } from "@/config/routes";
 import {
   dokumentation_beteiligungsformate,
   dokumentation_hinweise,
@@ -38,26 +39,20 @@ vi.mock("~/contexts/FeatureFlagContext", () => ({
   useFeatureFlag: vi.fn().mockReturnValue(true),
 }));
 
-type Route = { url: string; title: string };
-
-const ROUTES_DOCUMENTATION_INTRO: Route[] = [
-  { url: dokumentation_hinweise.path, title: dokumentation_hinweise.title },
-  {
-    url: dokumentation_regelungsvorhabenTitel.path,
-    title: dokumentation_regelungsvorhabenTitel.title,
-  },
-  {
-    url: dokumentation_beteiligungsformate.path,
-    title: dokumentation_beteiligungsformate.title,
-  },
-];
-
 const routes: (Route[] | Route)[] = [
-  ...ROUTES_DOCUMENTATION_INTRO,
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+  dokumentation_beteiligungsformate,
   [
     {
       title: "Prinzip: Digitale Angebote",
-      url: "/dokumentation/prinzip-1-digitale-angebote",
+      path: "/dokumentation/prinzip-1-digitale-angebote",
+      key: "prinzipA",
+      parent: null,
+      sitemap: false,
+      isStagingOnly: false,
+      navOrder: null,
+      navLabel: null,
     },
   ],
 ];

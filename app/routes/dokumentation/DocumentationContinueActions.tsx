@@ -15,9 +15,9 @@ import { useNonce } from "~/utils/nonce.ts";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
 
 const ROUTE_DOCUMENTATION_TITLE = {
-  url: dokumentation_regelungsvorhabenTitel.path,
+  path: dokumentation_regelungsvorhabenTitel.path,
 };
-const ROUTES_DOCUMENTATION_INTRO = [{ url: dokumentation_hinweise.path }];
+const ROUTES_DOCUMENTATION_INTRO = [{ path: dokumentation_hinweise.path }];
 
 const { start } = digitalDocumentation;
 
@@ -53,7 +53,7 @@ function StartOverDialog({
             type="button"
             onClick={async () => {
               deleteDocumentationData();
-              await navigate(ROUTES_DOCUMENTATION_INTRO[0].url);
+              await navigate(ROUTES_DOCUMENTATION_INTRO[0].path);
             }}
           >
             {start.startOverDialog.actions.confirm}
@@ -83,13 +83,13 @@ export function DocumentationContinueActions() {
     <ButtonContainer>
       {hasSavedDocumentation ? (
         <>
-          <LinkButton to={ROUTE_DOCUMENTATION_TITLE.url} className="js-only">
+          <LinkButton to={ROUTE_DOCUMENTATION_TITLE.path} className="js-only">
             {start.actions.resume.buttonText}
           </LinkButton>
           <StartOverDialog deleteDocumentationData={deleteDocumentationData} />
         </>
       ) : (
-        <LinkButton to={ROUTES_DOCUMENTATION_INTRO[0].url} className="js-only">
+        <LinkButton to={ROUTES_DOCUMENTATION_INTRO[0].path} className="js-only">
           {start.actions.startInitial.buttonText}
         </LinkButton>
       )}

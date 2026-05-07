@@ -19,9 +19,8 @@ import type { PreCheckAnswerSchema } from "./vorpruefung/preCheckDataSchema";
 import { answerSchema } from "./vorpruefung/preCheckDataSchema";
 import { addOrUpdateAnswer } from "./vorpruefung/preCheckDataService";
 
-const ROUTE_PRECHECK_URL = vorpruefung.path;
 const ROUTES_PRECHECK_QUESTIONS = Object.values(preCheckQuestions).map((q) => ({
-  url: `${vorpruefung.path}/${q.id}`,
+  path: q.path,
   title: `${q.title} — Vorprüfung`,
 }));
 
@@ -61,7 +60,7 @@ export type TQuestion = {
     unsureResult?: string;
   };
   text: string;
-  url: string;
+  path: string;
   prevLink: string;
   nextLink: string;
   hint?: {
@@ -89,7 +88,7 @@ export default function Index() {
   const navigate = useNavigate();
   const storedAnswer = answerForQuestionId(question.id);
   const nextLink =
-    questions.find((q) => q.id === question.id)?.nextLink ?? ROUTE_PRECHECK_URL;
+    questions.find((q) => q.id === question.id)?.nextLink ?? vorpruefung.path;
 
   const form = useSyncedForm({
     schema: answerSchema,
@@ -111,7 +110,7 @@ export default function Index() {
       firstUnansweredQuestionIndex !== null &&
       questionIdx > firstUnansweredQuestionIndex
     ) {
-      void navigate(questions[firstUnansweredQuestionIndex].url);
+      void navigate(questions[firstUnansweredQuestionIndex].path);
     }
   }, [firstUnansweredQuestionIndex, navigate, questionIdx]);
 
@@ -148,7 +147,7 @@ export default function Index() {
       <MetaTitle
         prefix={
           ROUTES_PRECHECK_QUESTIONS.find((route) =>
-            route.url.endsWith(question.id),
+            route.path.endsWith(question.id),
           )?.title
         }
       />

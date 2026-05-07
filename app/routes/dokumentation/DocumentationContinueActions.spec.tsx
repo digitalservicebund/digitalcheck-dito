@@ -19,7 +19,7 @@ import { DocumentationContinueActions } from "./DocumentationContinueActions";
 import { DocumentationDataProvider } from "./DocumentationDataProvider";
 import type { DocumentationData, V1 } from "./documentationDataSchema";
 import { DATA_SCHEMA_VERSION_V1 } from "./documentationDataSchema";
-const ROUTES_DOCUMENTATION_INTRO = [{ url: dokumentation_hinweise.path }];
+const ROUTES_DOCUMENTATION_INTRO = [{ path: dokumentation_hinweise.path }];
 
 const { mockDownloadDocumentation } = vi.hoisted(() => ({
   mockDownloadDocumentation: vi.fn(),
@@ -116,7 +116,7 @@ describe("DocumentationContinueActions", () => {
 
       expect(vi.mocked(removeFromLocalStorage)).toHaveBeenCalled();
       expect(mockNavigate).toHaveBeenCalledWith(
-        ROUTES_DOCUMENTATION_INTRO[0].url,
+        ROUTES_DOCUMENTATION_INTRO[0].path,
       );
     });
   });

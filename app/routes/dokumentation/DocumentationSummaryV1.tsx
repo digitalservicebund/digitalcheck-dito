@@ -29,18 +29,18 @@ import type { NavigationContext } from "../dokumentation._documentationNavigatio
 import DocumentationActions from "./DocumentationActions";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
 
-type Route = { url: string; title: string };
+type Route = { path: string; title: string };
 
 const ROUTE_DOCUMENTATION_TITLE: Route = {
-  url: dokumentation_regelungsvorhabenTitel.path,
+  path: dokumentation_regelungsvorhabenTitel.path,
   title: dokumentation_regelungsvorhabenTitel.title,
 };
 const ROUTE_DOCUMENTATION_PARTICIPATION: Route = {
-  url: dokumentation_beteiligungsformate.path,
+  path: dokumentation_beteiligungsformate.path,
   title: dokumentation_beteiligungsformate.title,
 };
 const ROUTE_DOCUMENTATION_SUMMARY: Route = {
-  url: dokumentation_zusammenfassung.path,
+  path: dokumentation_zusammenfassung.path,
   title: dokumentation_zusammenfassung.title,
 };
 
@@ -55,8 +55,8 @@ const createInfoBoxItem = ({
   content?: ReactNode;
   badge?: BadgeProps;
 }): InfoBoxProps => ({
-  identifier: route.url,
-  testId: route.url,
+  identifier: route.path,
+  testId: route.path,
   heading: {
     text: route.title,
     tagName: "h2",
@@ -74,7 +74,7 @@ const createInfoBoxItem = ({
         />
       )}
       <Link
-        to={route.url}
+        to={route.path}
         className="text-link mt-24 block"
         aria-label={`${route.title} ${summary.buttonEdit.ariaLabelSuffix}`}
       >
@@ -257,7 +257,7 @@ export default function DocumentationSummaryV1() {
     ...prinzips.map((prinzip) => {
       const principleRoute = routes
         .flat()
-        .find((route) => route.url.endsWith(prinzip.URLBezeichnung));
+        .find((route) => route.path.endsWith(prinzip.URLBezeichnung));
       if (!principleRoute)
         throw new Error(
           `Cannot find route for principle ${prinzip.URLBezeichnung}`,
