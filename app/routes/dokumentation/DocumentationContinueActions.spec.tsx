@@ -19,7 +19,6 @@ import { DocumentationContinueActions } from "./DocumentationContinueActions";
 import { DocumentationDataProvider } from "./DocumentationDataProvider";
 import type { DocumentationData, V1 } from "./documentationDataSchema";
 import { DATA_SCHEMA_VERSION_V1 } from "./documentationDataSchema";
-const ROUTES_DOCUMENTATION_INTRO = [{ path: dokumentation_hinweise.path }];
 
 const { mockDownloadDocumentation } = vi.hoisted(() => ({
   mockDownloadDocumentation: vi.fn(),
@@ -61,10 +60,7 @@ describe("DocumentationContinueActions", () => {
         version: DATA_SCHEMA_VERSION_V1,
         policyTitle: { title: "Test" },
       });
-      renderWithRouter(<DocumentationContinueActions />);
-    });
-
-    it("renders resume and start-over actions", () => {
+      renderWithRouter(<DocumentationContinueActions prinzips={[]} />);
       const resumeButton = screen.getByRole("link", {
         name: digitalDocumentation.start.actions.resume.buttonText,
       });
@@ -115,16 +111,14 @@ describe("DocumentationContinueActions", () => {
       confirmButton.click();
 
       expect(vi.mocked(removeFromLocalStorage)).toHaveBeenCalled();
-      expect(mockNavigate).toHaveBeenCalledWith(
-        ROUTES_DOCUMENTATION_INTRO[0].path,
-      );
+      expect(mockNavigate).toHaveBeenCalledWith(dokumentation_hinweise.path);
     });
   });
 
   describe("when no saved documentation exists", () => {
     it("renders just the initial start action", async () => {
       vi.mocked(readDataFromLocalStorage).mockReturnValue(null);
-      renderWithRouter(<DocumentationContinueActions />);
+      renderWithRouter(<DocumentationContinueActions prinzips={[]} />);
 
       const startButton = await screen.findByRole("link", {
         name: digitalDocumentation.start.actions.startInitial.buttonText,

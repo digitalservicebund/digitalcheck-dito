@@ -1,3 +1,5 @@
+import { anleitungFlussdiagramm } from "@/config/downloads";
+import { methoden_fuenfPrinzipien } from "@/config/routes";
 import {
   ArrowCircleRightOutlined,
   ArrowDownwardOutlined,
@@ -6,25 +8,18 @@ import {
 } from "@digitalservicebund/icons";
 import type React from "react";
 import { useRef } from "react";
+import { Link } from "react-router";
+import { twJoin } from "tailwind-merge";
+import BackToTopButton from "~/components/BackToTopButton.tsx";
 import type { BadgeProps } from "~/components/Badge.tsx";
 import Badge from "~/components/Badge.tsx";
 import Button from "~/components/Button.tsx";
+import Container from "~/components/Container.tsx";
 import Heading from "~/components/Heading";
 import ImageBox from "~/components/ImageBox.tsx";
 import InfoBox from "~/components/InfoBox.tsx";
 import NumberedList from "~/components/NumberedList.tsx";
 import RichText from "~/components/RichText.tsx";
-
-import { anleitungFlussdiagramm } from "@/config/downloads";
-import {
-  methoden_fuenfPrinzipien,
-  methoden_visualisieren_flussdiagramm,
-} from "@/config/routes";
-import { Link } from "react-router";
-import { twJoin } from "tailwind-merge";
-import BackToTopButton from "~/components/BackToTopButton.tsx";
-import Container from "~/components/Container.tsx";
-import MetaTitle from "~/components/Meta";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
 import { STRAPI_MEDIA_URL } from "~/resources/constants.ts";
@@ -142,7 +137,6 @@ export default function Visualization() {
   // noinspection HtmlUnknownAnchorTarget
   return (
     <>
-      <MetaTitle prefix={methoden_visualisieren_flussdiagramm.title} />
       <main>
         <div className="breakout-grid-toc bg-blue-100 pt-40 pb-48">
           <div>

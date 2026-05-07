@@ -24,7 +24,6 @@ import Heading from "~/components/Heading";
 import { BreakoutHero } from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -88,7 +87,6 @@ export default function Index() {
 
   return (
     <>
-      <MetaTitle />
       <main className="breakout-grid">
         <BreakoutHero
           title="Digitaltaugliche Regelungen erarbeiten"

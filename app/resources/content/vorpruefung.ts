@@ -1,5 +1,6 @@
 import {
   interoperabel,
+  vorpruefung,
   vorpruefung_ergebnis,
   vorpruefung_hinweise,
 } from "@/config/routes";
@@ -202,7 +203,7 @@ export const preCheck = {
         
         Bitte überprüfen Sie ihre Angaben.
 
-        [Frage 3 zum Datenaustausch überprüfen](${preCheckQuestions.datenaustausch.path})
+        [Frage 3 zum Datenaustausch überprüfen](${vorpruefung.path}/${preCheckQuestions.datenaustausch.id})
       `,
     },
   },

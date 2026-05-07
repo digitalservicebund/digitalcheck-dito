@@ -67,7 +67,6 @@ test.describe("page titles", () => {
   allRoutes
     .filter(
       (route) =>
-        !route.isStagingOnly &&
         !route.path.endsWith(".pdf") &&
         !route.path.startsWith(vorpruefung.path),
     )
@@ -172,6 +171,7 @@ test.describe("progress bar", () => {
       route.path.startsWith(vorpruefung.path) ||
       route.path.startsWith(methoden.path) ||
       route.path.startsWith(dokumentation.path) ||
+      route.path === "/grundlagen/fuenf-prinzipien" ||
       route.path === grundlagen.path,
   );
   routesWithProgressBarOrRedirects.forEach((route) => {

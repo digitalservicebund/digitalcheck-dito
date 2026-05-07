@@ -1,6 +1,26 @@
 import NodeCache from "node-cache";
 import crypto from "node:crypto";
 
+export type {
+  AbsatzWithParagraph,
+  BaseAbsatz,
+  BasePrinzip,
+  Beispielvorhaben,
+  Digitalcheck,
+  EinschaetzungReferat,
+  GesetzStatus,
+  Paragraph,
+  PrinzipAnwendung,
+  PrinzipAspekt,
+  PrinzipErfuellung,
+  PrinzipWithAspekte,
+  PrinzipWithAspekteAndExample,
+  PrinzipWithBeispielvorhaben,
+  Rechtsgebiet,
+  Ressort,
+  Visualisierung,
+} from "./strapiData.types";
+
 const url =
   process.env.STRAPI_URL ??
   "https://secure-dinosaurs-1a634d1a3d.strapiapp.com/graphql";

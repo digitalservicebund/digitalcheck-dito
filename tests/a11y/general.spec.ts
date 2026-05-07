@@ -1,11 +1,10 @@
 import { AxeBuilder } from "@axe-core/playwright";
-import type { Page } from "@playwright/test";
-import { expect, test } from "@playwright/test";
+import { expect, Page, test } from "@playwright/test";
 
 import {
   allRoutes,
   beispiele_prinzipien,
-  methoden_fuenfPrinzipien,
+  methoden_prinzipien,
   unterstuetzung,
 } from "@/config/routes";
 import { checkHeadingsForFlowContent } from "./utils.ts";
@@ -21,15 +20,14 @@ test.describe("basic example a11y test", () => {
   allRoutes
     .filter(
       (route) =>
-        !route.isStagingOnly &&
         ![".pdf", ".xlsx", ".docx", unterstuetzung.path].some((r) =>
-          route.path.endsWith(r),
+          route.url.endsWith(r),
         ),
     )
     .forEach((route, i) => {
-      test(`check a11y of ${route.path} (${i})`, async ({ page }) => {
+      test(`check a11y of ${route.url} (${i})`, async ({ page }) => {
         // Listen for redirects and update URL if needed
-        const response = await page.goto(route.path);
+        const response = await page.goto(route.url);
 
         if (response !== null && [301, 302].includes(response.status())) {
           const redirectedUrl = response.headers()["location"];
@@ -60,7 +58,7 @@ test.describe("basic example a11y test", () => {
   });
 
   test("check a11y of principle pages", async ({ page }) => {
-    const principlesUrl = methoden_fuenfPrinzipien.path;
+    const principlesUrl = methoden_prinzipien.path;
     await page.goto(principlesUrl);
 
     const principleLinks = page.locator(`a[href^="${principlesUrl}/"]`); // all URLs starting with current URL

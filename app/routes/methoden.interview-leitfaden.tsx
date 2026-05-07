@@ -1,7 +1,4 @@
-import {
-  methoden_interviewLeitfaden,
-  methoden_interviewLeitfadenSchritte,
-} from "@/config/routes";
+import { methoden_interviewLeitfadenSchritte } from "@/config/routes";
 import {
   AnnouncementOutlined,
   MergeTypeOutlined,
@@ -13,14 +10,20 @@ import { LinkButton } from "~/components/Button";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { dedent } from "~/utils/dedentMultilineStrings";
+import getFeatureFlag from "~/utils/featureFlags.server";
+
+export function loader() {
+  if (!getFeatureFlag("showInterviewLeitfaden")) {
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
+    throw new Response("Not found", { status: 404 });
+  }
+}
 
 export default function InterviewMethods() {
   return (
     <>
-      <MetaTitle prefix={methoden_interviewLeitfaden.title} />
       <main className="mb-80 space-y-80">
         <Hero title="Nehmen Sie die Praxis-Perspektive für Ihr Vorhaben ein">
           <p>

@@ -1,7 +1,5 @@
-import { impressum } from "@/config/routes";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Hero from "~/components/Hero";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { contact } from "~/resources/content/shared/contact";
 
@@ -64,7 +62,6 @@ Bitte senden Sie eine Nachricht an SBII3@bmds.bund.de, wenn Inhalte nicht fehler
 export default function Index() {
   return (
     <>
-      <MetaTitle prefix={impressum.title} />
       <main>
         <Hero title={"Impressum"} />
 

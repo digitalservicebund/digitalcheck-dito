@@ -2,9 +2,13 @@ import { contentType } from "mime-types";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import trackCustomEvent from "~/utils/trackCustomEvent.server";
-import type { Route } from "./+types/download.$fileName";
-
-export async function loader({ params, request }: Route.LoaderArgs) {
+export async function loader({
+  params,
+  request,
+}: {
+  params: { fileName?: string };
+  request: Request;
+}) {
   const { fileName } = params;
 
   if (!fileName) {

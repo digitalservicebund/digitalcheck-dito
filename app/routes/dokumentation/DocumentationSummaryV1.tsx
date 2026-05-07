@@ -1,19 +1,19 @@
+import type { Route } from "@/config/routes";
 import {
   dokumentation_beteiligungsformate,
   dokumentation_regelungsvorhabenTitel,
-  dokumentation_zusammenfassung,
 } from "@/config/routes";
 import { isArray } from "@posthog/core";
 import type { ReactNode } from "react";
-import { Link, useOutletContext } from "react-router";
+import { Link } from "react-router";
 import type { BadgeProps } from "~/components/Badge";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
 import InlineNotice from "~/components/InlineNotice";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
+import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import type {
   Participation,
@@ -25,24 +25,8 @@ import type {
 } from "~/routes/dokumentation/documentationDataSchema";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
-import type { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationActions from "./DocumentationActions";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
-
-type Route = { path: string; title: string };
-
-const ROUTE_DOCUMENTATION_TITLE: Route = {
-  path: dokumentation_regelungsvorhabenTitel.path,
-  title: dokumentation_regelungsvorhabenTitel.title,
-};
-const ROUTE_DOCUMENTATION_PARTICIPATION: Route = {
-  path: dokumentation_beteiligungsformate.path,
-  title: dokumentation_beteiligungsformate.title,
-};
-const ROUTE_DOCUMENTATION_SUMMARY: Route = {
-  path: dokumentation_zusammenfassung.path,
-  title: dokumentation_zusammenfassung.title,
-};
 
 const { summary } = digitalDocumentation;
 
@@ -231,20 +215,19 @@ function AspectsContent({
 }
 
 export default function DocumentationSummaryV1() {
-  const { routes, previousUrl, nextUrl, prinzips } =
-    useOutletContext<NavigationContext>();
+  const { routes, previousUrl, nextUrl, prinzips } = useNavigationContext();
 
   const { documentationData } = useDocumentationDataService();
 
   const items: InfoBoxProps[] = [
     createInfoBoxItem({
-      route: ROUTE_DOCUMENTATION_TITLE,
+      route: dokumentation_regelungsvorhabenTitel,
       content: documentationData.policyTitle?.title ? (
         <PolicyTitleContent policyTitle={documentationData.policyTitle} />
       ) : null,
     }),
     createInfoBoxItem({
-      route: ROUTE_DOCUMENTATION_PARTICIPATION,
+      route: dokumentation_beteiligungsformate,
       content:
         documentationData.participation &&
         (documentationData.participation.formats ||
@@ -281,9 +264,6 @@ export default function DocumentationSummaryV1() {
 
   return (
     <>
-      <MetaTitle
-        prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_SUMMARY.title}`}
-      />
       <Heading
         text={summary.headline}
         tagName="h1"

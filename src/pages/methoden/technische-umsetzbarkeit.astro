@@ -1,0 +1,13 @@
+---
+import { methoden_technischeUmsetzbarkeit } from "@/config/routes";
+import Layout from "@/layouts/Layout.astro";
+import MethodenSubPage from "~/routes/methoden.$subPage";
+
+export const frontmatter = {
+  title: "Technische Umsetzbarkeit sicherstellen",
+};
+---
+
+<Layout title={frontmatter.title} showProgressBar={true}>
+  <MethodenSubPage route={methoden_technischeUmsetzbarkeit} />
+</Layout>

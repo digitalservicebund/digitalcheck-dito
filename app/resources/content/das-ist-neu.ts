@@ -1,6 +1,5 @@
 import { dokumentationStaticWordV1 } from "@/config/downloads";
 import {
-  beispiele,
   beispiele_visualisierungen,
   dasIstNeu,
   dokumentation,
@@ -14,17 +13,11 @@ import {
   methoden_visualisieren_flussdiagramm,
   zahlenUndFakten,
 } from "@/config/routes";
+import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { getTabAnchorLink } from "~/utils/tabs";
-import { contact } from "./shared/contact";
 
 export const news = {
-  title: "Das ist neu",
-  subtitle: dedent`
-      Das Digitalcheck-Angebot wird kontinuierlich weiterentwickelt. Bedürfnisse und Rückmeldungen von Nutzenden werden kurzfristig eingearbeitet. Auch geänderte und neue rechtliche Anforderungen führen zu Anpassungen. Unten finden Sie eine chronologische Übersicht der Ergänzungen und Änderungen auf der Website.
-      
-      Haben Sie Anregungen oder Wünsche? Kontaktieren Sie uns jederzeit gerne unter ${contact.mdPhoneLink()} oder ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")}.
-  `,
   items: [
     {
       badge: {
@@ -138,7 +131,7 @@ export const news = {
       badge: {
         text: "01.10.2025",
       },
-      content: `Neues Beispiel ergänzt: SGB VI-Anpassungsgesetz (Einführung Fallmanagement DRV) [Hier ansehen](${`${beispiele.path}/regelungen`}/sgb-vi-anpassungsgesetz-einfuehrung-fallmanagement-drv)`,
+      content: `Neues Beispiel ergänzt: SGB VI-Anpassungsgesetz (Einführung Fallmanagement DRV) [Hier ansehen](${ROUTE_REGELUNGEN.url}/sgb-vi-anpassungsgesetz-einfuehrung-fallmanagement-drv)`,
     },
     {
       badge: {
@@ -201,8 +194,8 @@ export const news = {
           - vorher: erarbeiten.digitalcheck.bund.de → leitet jetzt weiter zu:
           - neu: digitalcheck.bund.de
         - Link zu [Digitale Verwaltung Projektseite](https://www.digitale-verwaltung.de/Webs/DV/DE/transformation/digitalcheck/digitalcheck-node.html) im Footer ergänzt
-        - Neue [Einstiegseite / Landingpage für Visualisierungen](${methoden_visualisieren.path}) gelauncht
-        - [NKR Infoseite](${grundlagen_normenkontrollrat.path}) aktualisiert
+        - Neue [Einstiegseite / Landingpage für Visualisierungen](${methoden_visualisieren.path}) gelauncht 
+        - [NKR Infoseite](${grundlagen_normenkontrollrat.path}) aktualisiert 
       `,
     },
     {

@@ -3,14 +3,13 @@ import {
   methoden_fuenfPrinzipien,
 } from "@/config/routes";
 import type { ReactNode } from "react";
-import { data, Link, useLoaderData } from "react-router";
+import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import AccordionItem from "~/components/AccordionItem.tsx";
 import Badge from "~/components/Badge.tsx";
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
 import { LinkButton } from "~/components/Button.tsx";
 import { BreakoutHero } from "~/components/Hero.tsx";
-import MetaTitle from "~/components/Meta.tsx";
 import { PrincipleHightlightNullModifier } from "~/components/PrincipleHighlightModifier.tsx";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer";
@@ -19,17 +18,14 @@ import { PRINCIPLE_COLORS } from "~/resources/constants.ts";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien.ts";
 import type { Node } from "~/utils/paragraphUtils";
 import { absatzIdTag } from "~/utils/paragraphUtils";
-import { fetchStrapiData } from "~/utils/strapiData.server.ts";
 import type {
   AbsatzWithParagraph,
   BasePrinzip,
   PrinzipAspekt,
   PrinzipWithAspekteAndExample,
-} from "~/utils/strapiData.types";
+} from "~/utils/strapiData.types.ts";
 import { slugify } from "~/utils/utilFunctions.ts";
-import type { Route } from "../../../.react-router/types/app/routes/+types/beispiele.prinzipien.$prinzip.ts";
-import type { PrinzipListItem, PrinzipListQueryReturnType } from "./query";
-import { PRINZIP_ASPEKTE_QUERY, PRINZIP_LIST_QUERY } from "./query";
+import type { PrinzipListItem } from "./query";
 
 function AspectHeader({
   children,
@@ -69,36 +65,6 @@ function Formulierungsbeispiel({
       <div>{children}</div>
     </div>
   );
-}
-
-export async function loader({ params }: Route.LoaderArgs) {
-  const prinzipData = await fetchStrapiData<{
-    prinzips: PrinzipWithAspekteAndExample[];
-  }>(PRINZIP_ASPEKTE_QUERY, {
-    URLBezeichnung: params.prinzip,
-  });
-
-  if ("error" in prinzipData) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(prinzipData.error, { status: 400 });
-  }
-
-  const prinzipListData =
-    await fetchStrapiData<PrinzipListQueryReturnType>(PRINZIP_LIST_QUERY);
-  if ("error" in prinzipListData) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(prinzipListData.error, { status: 400 });
-  }
-
-  if (prinzipData.prinzips.length === 0) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw data("Not found", { status: 404 });
-  }
-
-  return {
-    prinzip: prinzipData.prinzips[0],
-    prinzipList: prinzipListData.prinzips,
-  };
 }
 
 function ItalicModifier({ node }: Readonly<{ node: Node }>) {
@@ -278,12 +244,17 @@ function PrincipleNavigation({
   );
 }
 
-export default function Prinzip() {
-  const { prinzip, prinzipList } = useLoaderData<typeof loader>();
+export default function Prinzip({
+  prinzip,
+  prinzipList = [],
+}: {
+  prinzip?: PrinzipWithAspekteAndExample;
+  prinzipList?: PrinzipListItem[];
+} = {}) {
+  if (!prinzip) return null;
 
   return (
     <>
-      <MetaTitle prefix={`Prinzip: ${prinzip.Name}`} />
       <main>
         <div className="breakout-grid-toc">
           <BreakoutHero

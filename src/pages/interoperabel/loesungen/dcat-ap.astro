@@ -1,0 +1,12 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import DcatApPage from "~/routes/interoperabel.loesungen.dcat-ap";
+
+export const frontmatter = {
+  title: "Data Catalogue Vocabulary Application Profile (DCAT-AP)",
+};
+---
+
+<Layout title={frontmatter.title}>
+  <DcatApPage client:load />
+</Layout>

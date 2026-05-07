@@ -1,0 +1,27 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ContentWrapper from "~/components/ContentWrapper.tsx";
+import Hero from "~/components/Hero";
+import RichText from "~/components/RichText";
+import { readFile } from "node:fs/promises";
+
+export const frontmatter = {
+  title: "Datenschutzerklärung",
+};
+
+const content = await readFile("public/markdown/datenschutz.md", {
+  encoding: "utf-8",
+});
+---
+
+<Layout title={frontmatter.title}>
+  <main>
+    <Hero title="Datenschutzerklärung" />
+    <ContentWrapper>
+      <RichText
+        markdown={content}
+        className="ds-stack-16 [&>h2]:mt-40 [&>h3]:mt-32"
+      />
+    </ContentWrapper>
+  </main>
+</Layout>

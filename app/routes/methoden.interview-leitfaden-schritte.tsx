@@ -1,4 +1,3 @@
-import { methoden_interviewLeitfadenSchritte } from "@/config/routes";
 import {
   DriveFileRenameOutline,
   FeedOutlined,
@@ -10,7 +9,6 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import ImageBox from "~/components/ImageBox";
 import InfoBox from "~/components/InfoBox";
-import MetaTitle from "~/components/Meta";
 import NewTabLink from "~/components/NewTabLink";
 import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
@@ -18,13 +16,20 @@ import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer";
 import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings";
+import getFeatureFlag from "~/utils/featureFlags.server";
+
+export function loader() {
+  if (!getFeatureFlag("showInterviewLeitfaden")) {
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
+    throw new Response("Not found", { status: 404 });
+  }
+}
 
 export default function InterviewMethods() {
   const infoBoxClass = "px-16 sm:px-56";
 
   return (
     <>
-      <MetaTitle prefix={methoden_interviewLeitfadenSchritte.title} />
       <main className="space-y-80">
         <Hero
           className="mb-0 lg:mb-80"

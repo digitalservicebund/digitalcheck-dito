@@ -1,18 +1,108 @@
-import "./mockDocx.ts"; // set up mocks first
-
-import { PatchType } from "docx";
+import type { IRunOptions } from "docx";
+import { PatchType, TextRun } from "docx";
 import { describe, expect, it, vi } from "vitest";
 import { documentationDocument } from "~/resources/content/documentation-document";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import type { DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
+import type { Node } from "~/utils/paragraphUtils";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
-import { getTextFromTextRun, makeNode } from "./testUtils.ts";
-import { buildPrinciplePatches } from "./wordDocumentationV2";
+import {
+  buildPrinciplePatches,
+  stringToTextRuns,
+  toHyperlinkPatch,
+  toParagraphPatch,
+} from "./wordDocumentationV2";
 
 const { placeholderOptional } = documentationDocument;
 const { principlePages } = digitalDocumentation;
 const [POSITIVE_ANSWER, NEGATIVE_ANSWER, IRRELEVANT_ANSWER] =
   principlePages.radioOptions;
+
+type TextRunOptions = { text: string; break?: number; options?: IRunOptions };
+type TextRunLike = {
+  type: "TextRun";
+} & TextRunOptions;
+
+type ParagraphOptions = {
+  text?: string;
+  heading?: unknown;
+  indent?: { left?: number };
+  style?: string;
+  children: unknown[];
+};
+type ParagraphLike = {
+  type: "Paragraph";
+} & ParagraphOptions;
+
+type ExternalHyperlinkOptions = {
+  children: TextRunLike[];
+  link: string;
+};
+type ExternalHyperlinkLike = {
+  type: "ExternalHyperlink";
+} & ExternalHyperlinkOptions;
+
+const asTextRunLike = (textRun: unknown): TextRunLike => textRun as TextRunLike;
+const asParagraphLike = (paragraph: unknown): ParagraphLike =>
+  paragraph as ParagraphLike;
+const asExternalHyperlinkLike = (hyperlink: unknown): ExternalHyperlinkLike =>
+  hyperlink as ExternalHyperlinkLike;
+
+const getTextFromTextRun = (textRun: unknown): string =>
+  asTextRunLike(textRun).text;
+const getTextFromHyperlink = (hyperlink: unknown): string => {
+  return getTextFromTextRun(
+    asExternalHyperlinkLike(asParagraphLike(hyperlink).children[0]),
+  );
+};
+
+// Mock docx with lightweight test doubles exposing constructor options
+vi.mock("docx", async (importOriginal) => {
+  const module = await importOriginal<typeof import("docx")>();
+
+  class TextRunMock {
+    type = "TextRun";
+    text: string;
+    break: number;
+    constructor(options: TextRunOptions | string) {
+      if (typeof options === "string") {
+        this.text = options;
+        this.break = 0;
+      } else {
+        this.text = options.text;
+        this.break = options.break ?? 0;
+      }
+    }
+  }
+
+  const defaultParagraphOptions: ParagraphOptions = { children: [] };
+
+  class ParagraphMock {
+    type = "Paragraph";
+    constructor(options: ParagraphOptions = defaultParagraphOptions) {
+      Object.assign(this, options);
+    }
+  }
+
+  class ExternalHyperlinkMock {
+    type = "ExternalHyperlink";
+    constructor(options: ExternalHyperlinkOptions) {
+      Object.assign(this, options);
+    }
+  }
+
+  return {
+    ...module,
+    TextRun: vi.fn(TextRunMock),
+    Paragraph: vi.fn(ParagraphMock),
+    ExternalHyperlink: vi.fn(ExternalHyperlinkMock),
+  };
+});
+
+const makeNode = (text: string): Node => ({
+  type: "paragraph",
+  children: [{ type: "text", text }],
+});
 
 const prinzips: PrinzipWithAspekte[] = [
   {
@@ -201,6 +291,52 @@ describe("wordDocumentationV2", () => {
 
       const p1aspects = patches["PRINCIPLE_1_ASPECTS"];
       expect(getTextFromTextRun(p1aspects.children[0])).toBe("P1A1");
+    });
+  });
+
+  describe("hyperlinks", () => {
+    it("toHyperlinkPatch creates a paragraph with an email hyperlink", () => {
+      const emailAddress = "test@example.com";
+      const hyperlinkPatch = toHyperlinkPatch(emailAddress);
+
+      expect(hyperlinkPatch.type).toBe(PatchType.PARAGRAPH);
+      expect(hyperlinkPatch.children).toHaveLength(1);
+
+      const hyperlink = asExternalHyperlinkLike(hyperlinkPatch.children[0]);
+      expect(hyperlink.type).toBe("ExternalHyperlink");
+      expect(hyperlink.link).toBe("mailto:" + emailAddress);
+      expect(getTextFromHyperlink(hyperlinkPatch.children[0])).toBe(
+        emailAddress,
+      );
+    });
+
+    it("toHyperlinkPatch applies Hyperlink style to the text runs", () => {
+      const emailAddress = "contact@domain.org";
+      toHyperlinkPatch(emailAddress);
+
+      expect(TextRun).toHaveBeenCalledWith(
+        expect.objectContaining({
+          text: emailAddress,
+          style: "Hyperlink",
+        }),
+      );
+    });
+  });
+
+  describe("formatting", () => {
+    it("stringToTextRuns splits with newlines into TextRuns with breaks", () => {
+      const runs = stringToTextRuns("line1\nline2\nline3");
+      expect(runs).toHaveLength(3);
+      expect(TextRun).toHaveBeenCalledWith({ text: "line1", break: 0 });
+      expect(TextRun).toHaveBeenCalledWith({ text: "line2", break: 1 });
+      expect(TextRun).toHaveBeenCalledWith({ text: "line3", break: 1 });
+    });
+
+    it("toParagraphPatch converts a multiline string into TextRuns with breaks", () => {
+      const paraPatch = toParagraphPatch("a\nb");
+      expect(paraPatch.type).toBe(PatchType.PARAGRAPH);
+      expect(TextRun).toHaveBeenCalledWith({ text: "a", break: 0 });
+      expect(TextRun).toHaveBeenCalledWith({ text: "b", break: 1 });
     });
   });
 });

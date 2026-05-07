@@ -5,8 +5,10 @@ export type DownloadRoute = {
   readonly filename: string;
 };
 
-const rawBase = (import.meta.env?.BASE_URL as string | undefined) ?? "/";
-const basePath = rawBase === "/" ? "" : rawBase.replace(/\/$/, "");
+const basePath =
+  import.meta.env?.PUBLIC_STAGE === "preview"
+    ? import.meta.env?.BASE_URL || ""
+    : "";
 
 export const prinzipienPoster: DownloadRoute = {
   path: `${basePath}/documents/Prinzipien-Poster.pdf`,

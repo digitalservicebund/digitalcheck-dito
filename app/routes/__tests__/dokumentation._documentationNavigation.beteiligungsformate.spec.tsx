@@ -1,6 +1,6 @@
 // Import mocks first
 import "./utils/mockLocalStorageVersioned";
-import "./utils/mockRouter";
+import { mockNavigationContext } from "./utils/mockRouter";
 // End of mocks
 
 import "@testing-library/jest-dom";
@@ -8,6 +8,7 @@ import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { DocumentationNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import DocumentationParticipation from "~/routes/dokumentation._documentationNavigation.beteiligungsformate";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
@@ -23,7 +24,11 @@ const renderWithRouter = () => {
     <MemoryRouter>
       <HelpPanelProvider>
         <DocumentationDataProvider>
-          <DocumentationParticipation />
+          <DocumentationNavigationContext.Provider
+            value={mockNavigationContext}
+          >
+            <DocumentationParticipation />
+          </DocumentationNavigationContext.Provider>
         </DocumentationDataProvider>
       </HelpPanelProvider>
     </MemoryRouter>,

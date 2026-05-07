@@ -1,0 +1,45 @@
+---
+import Layout from "@/layouts/BeispieleLayout.astro";
+import Container from "~/components/Container";
+import Hero from "~/components/Hero";
+import VisualisationItem from "~/components/VisualisationItem";
+import { examplesVisualisations } from "~/resources/content/beispiele-visualisierungen";
+import {
+  fetchStrapiData,
+  visualisationFields,
+} from "~/utils/strapiData.server";
+import type { Visualisierung } from "~/utils/strapiData.types";
+
+export const frontmatter = {
+  title: "Beispiele für Visualisierungen",
+};
+
+const GET_VISUALISATIONS_QUERY = `
+${visualisationFields}
+query GetVisualisierungen($status: PublicationStatus!) {
+  visualisierungen(status: $status, sort: "createdAt:desc") {
+    ...VisualisationFields
+  }
+}`;
+
+const visualisationsResult = await fetchStrapiData<{
+  visualisierungen: Visualisierung[];
+}>(GET_VISUALISATIONS_QUERY, { status: "PUBLISHED" });
+
+const visualisationsData =
+  "error" in visualisationsResult ? [] : visualisationsResult.visualisierungen;
+---
+
+<Layout title={frontmatter.title}>
+  <Hero
+    title={examplesVisualisations.title}
+    subtitle={examplesVisualisations.subtitle}
+  />
+  <Container className="space-y-64">
+    {
+      visualisationsData.map((visualisation) => (
+        <VisualisationItem visualisierung={visualisation} showContext />
+      ))
+    }
+  </Container>
+</Layout>

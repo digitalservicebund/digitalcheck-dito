@@ -1,10 +1,8 @@
-import { methoden } from "@/config/routes";
-import { Link, useLoaderData } from "react-router";
+import { Link } from "react-router";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
-import MetaTitle from "~/components/Meta";
 import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import SupportBanner from "~/components/SupportBanner";
@@ -59,12 +57,13 @@ const renderStep = (
   );
 };
 
-export default function Methoden() {
-  const { showInterviewLeitfaden } = useLoaderData<typeof loader>();
-
+export default function Methoden({
+  showInterviewLeitfaden = false,
+}: {
+  showInterviewLeitfaden?: boolean;
+} = {}) {
   return (
     <>
-      <MetaTitle prefix={methoden.title} />
       <main>
         <Hero subtitle={methods.subtitle} title={methods.title} />
 

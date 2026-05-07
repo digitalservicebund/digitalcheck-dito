@@ -1,7 +1,3 @@
-// Import mocks first
-import "./utils/mockLocalStorageVersioned";
-// End of mocks
-
 import type { Route } from "@/config/routes";
 import {
   dokumentation,
@@ -9,18 +5,16 @@ import {
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
 } from "@/config/routes";
+import "./utils/mockLocalStorageVersioned";
+// End of mocks
+
 import "@testing-library/jest-dom";
 import { act, render, screen, within } from "@testing-library/react";
-import {
-  createMemoryRouter,
-  RouterProvider,
-  useOutletContext,
-  useRouteLoaderData,
-} from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 
+import { MemoryRouter, useRouteLoaderData } from "react-router";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
-import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
 import LayoutWithDocumentationNavigation from "~/routes/dokumentation._documentationNavigation";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
@@ -183,43 +177,26 @@ const validationScenarios: ValidationScenario[] = [
 ];
 
 function renderPage({ path }: Route) {
-  function ErrorBoundary() {
-    return <h1>Something went wrong</h1>;
-  }
   function DummyElement() {
-    const { nextUrl, previousUrl } = useOutletContext<NavigationContext>();
+    const { nextUrl, previousUrl } = useNavigationContext();
     return (
       <>
         <h1>Foobar</h1>
         <a href={previousUrl}>Zurück</a>
-        <a href={nextUrl}>Weiter</a>
+        <a href={nextUrl ?? undefined}>Weiter</a>
       </>
     );
   }
-  const routes = [
-    {
-      path: dokumentation.path,
-      element: (
-        <DocumentationDataProvider>
-          <LayoutWithDocumentationNavigation />
-        </DocumentationDataProvider>
-      ),
-      ErrorBoundary: ErrorBoundary,
-      children: [
-        {
-          path: path,
-          element: <DummyElement />,
-          HydrateFallback: () => <div></div>,
-        },
-      ],
-    },
-  ];
 
-  const router = createMemoryRouter(routes, {
-    initialEntries: [path],
-  });
-
-  render(<RouterProvider router={router} />);
+  render(
+    <MemoryRouter initialEntries={[path]}>
+      <DocumentationDataProvider>
+        <LayoutWithDocumentationNavigation routes={mockRoutes} prinzips={[]}>
+          <DummyElement />
+        </LayoutWithDocumentationNavigation>
+      </DocumentationDataProvider>
+    </MemoryRouter>,
+  );
 }
 
 const getNav = () =>
@@ -276,7 +253,7 @@ describe("navigation on pages of documentation", () => {
   });
 
   it.each(mockRoutes.flat())(
-    "$path has back and forth navigation to previous and next page",
+    "$url has back and forth navigation to previous and next page",
     (route) => {
       renderPage(route);
 

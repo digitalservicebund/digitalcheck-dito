@@ -1,6 +1,5 @@
 import { vorpruefung_ergebnis } from "@/config/routes";
-import type { Page } from "@playwright/test";
-import { expect, test } from "@playwright/test";
+import { expect, type Page, test } from "@playwright/test";
 import { preCheck } from "~/resources/content/vorpruefung";
 
 const { questions } = preCheck;
@@ -21,9 +20,9 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
 
   test.beforeAll("answer all questions with yes", async ({ browser }) => {
     page = await browser.newPage();
-    await page.goto(questions[0].path);
+    await page.goto(questions[0].url);
     for (const question of questions) {
-      await page.waitForURL(question.path);
+      await page.waitForURL(question.url);
       await page.getByLabel("Ja").click();
       await page.getByRole("button", { name: "Übernehmen" }).click();
     }

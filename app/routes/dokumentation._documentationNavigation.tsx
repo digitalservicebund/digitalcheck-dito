@@ -1,23 +1,24 @@
+import type { Route as _Route } from "@/config/routes";
 import {
   dokumentation,
   dokumentation_absenden,
   dokumentation_hinweise,
   dokumentation_zusammenfassung,
 } from "@/config/routes";
-import { Outlet, useLocation } from "react-router";
+import type { ReactNode } from "react";
+import { Fragment } from "react";
+import { useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
 import HelpSidepanel from "~/components/HelpSidepanel";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
+import { DocumentationNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { features } from "~/utils/featureFlags";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
-
-type _Route = { path: string; title: string };
 
 type Route = _Route & {
   principleId?: string;
@@ -26,40 +27,30 @@ type Route = _Route & {
 export type OnNavigateCallback = () => Promise<boolean>;
 export type NavigationContext = {
   currentUrl: string;
-  nextUrl: string;
+  nextUrl: string | null;
   previousUrl: string;
   routes: (Route | Route[])[];
   prinzips: PrinzipWithAspekteAndExample[];
 };
 
 function findIndexForRoute(routes: Route[], currentUrl: string) {
-  const index = routes.findIndex((route) => route.path === currentUrl);
-
-  if (index === -1) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(`Could not find route with url ${currentUrl}`, {
-      status: 404,
-    });
-  }
-  return index;
+  return routes.findIndex((route) => route.path === currentUrl);
 }
 
 function getPreviousUrl(routes: Route[], currentUrl: string): string {
-  return findIndexForRoute(routes, currentUrl) > 0
-    ? routes[findIndexForRoute(routes, currentUrl) - 1].path
-    : dokumentation.path;
+  const idx = findIndexForRoute(routes, currentUrl);
+  return idx > 0 ? routes[idx - 1].path : dokumentation.path;
 }
 
 function getNextUrl(routes: Route[], currentUrl: string): string | null {
-  return findIndexForRoute(routes, currentUrl) < routes.length - 1
-    ? routes[findIndexForRoute(routes, currentUrl) + 1].path
-    : null;
+  const idx = findIndexForRoute(routes, currentUrl);
+  return idx >= 0 && idx < routes.length - 1 ? routes[idx + 1].path : null;
 }
 
 function resolveAdjacentUrl(
   flatRoutes: Route[],
   fromUrl: string,
-  getAdjacent: (routes: Route[], path: string) => string | null,
+  getAdjacent: (routes: Route[], url: string) => string | null,
   simplifiedFlow: boolean,
   findData: (id: string) => unknown,
 ): string | null {
@@ -73,8 +64,15 @@ function resolveAdjacentUrl(
   return rawUrl;
 }
 
-export default function LayoutWithDocumentationNavigation() {
-  const { routes, prinzips } = useDocumentationRouteData();
+export default function LayoutWithDocumentationNavigation({
+  routes,
+  prinzips,
+  children,
+}: {
+  routes: (Route | Route[])[];
+  prinzips: PrinzipWithAspekteAndExample[];
+  children?: ReactNode;
+}) {
   const simplifiedFlow = useFeatureFlag(features.simplifiedPrincipleFlow);
 
   // exclude documentation notes
@@ -218,16 +216,11 @@ export default function LayoutWithDocumentationNavigation() {
             />
           </div>
           {/* force remount for different principles with key={currentUrl} */}
-          <Outlet
-            key={currentUrl}
-            context={{
-              currentUrl,
-              nextUrl,
-              previousUrl,
-              routes,
-              prinzips,
-            }}
-          />
+          <DocumentationNavigationContext.Provider
+            value={{ currentUrl, nextUrl, previousUrl, routes, prinzips }}
+          >
+            <Fragment key={currentUrl}>{children}</Fragment>
+          </DocumentationNavigationContext.Provider>
         </main>
         {showHelpPanel && <HelpSidepanel />}
       </div>

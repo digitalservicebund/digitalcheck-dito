@@ -1,4 +1,4 @@
-import { interoperabel, interoperabel_faq } from "@/config/routes";
+import { interoperabel_faq } from "@/config/routes";
 import { QuizOutlined as QuizIcon } from "@digitalservicebund/icons";
 import { Link } from "react-router";
 import { LinkButton } from "~/components/Button";
@@ -8,7 +8,6 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image";
 import InfoBox from "~/components/InfoBox.tsx";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { SearchParamTabs } from "~/components/Tabs/Tabs";
 import { interoperability } from "~/resources/content/interoperabel";
@@ -25,7 +24,6 @@ const { overviewTabId, backgroundTabId, euLawTabId, interoperableSolutionsId } =
 export default function Interoperability() {
   return (
     <>
-      <MetaTitle prefix={interoperabel.title} />
       <main>
         <Hero
           title={interoperability.headline}

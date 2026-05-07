@@ -10,9 +10,12 @@ fileignoreconfig:
     ignore_detectors: [filename]
   - filename: .env.test
     ignore_detectors: [filename]
+  - filename: nginx/nginx.template.conf
+    allowed_patterns:
+      - proxy_pass
+  - filename: src/components/Posthog.astro
+    checksum: 29d1f7cc9a752975ec3954d5c56aca0f310f07d9f5a3227b7abe169015589a10
   - filename: app/root.tsx
-    allowed_patterns: [posthogKey]
-  - filename: app/providers/PosthogProvider.tsx
     allowed_patterns: [posthogKey]
   - filename: app/utils/localStorageVersioned.ts
     allowed_patterns:
@@ -36,10 +39,6 @@ fileignoreconfig:
     ignore_detectors: [filecontent]
   - filename: app/resources/content/vorpruefung.ts # German text content misidentified as secret pattern
     ignore_detectors: [filecontent]
-  - filename: app/resources/content/vorpruefung-ergebnis.ts # German text content misidentified as secret pattern
-    checksum: 76f280cf6c801c7d072cb10e377c994d3d117025ad67666ff14169ee9473f357
-  - filename: app/resources/content/vorpruefung-ergebnis.ts
-    checksum: dd43a2a099358801855256fb455eb22c176a0a47f5020c21170046cd5a7caf37
   - filename: app/resources/content/interoperabel-nationale-kontaktstelle.ts # German text content misidentified as secret pattern
     ignore_detectors: [filecontent]
   - filename: public/documents/interview-leitfaden/Akteurlandschaft_Analyse.pptx # Power Point
@@ -47,7 +46,15 @@ fileignoreconfig:
   - filename: app/vite-env.d.ts
     checksum: f3fd561d4d951b8b328e6e40e389372a99ed98975a21d96ee0cf479b4470998b
   - filename: app/resources/content/methode-zustaendige-akteurinnen-auflisten.ts
-    checksum: 957c92add9454aefd5145b48757ce39e277819d9775c68fe3e6dc1a73226db3e
+    checksum: 0ae338c5f5e7aefb9ba34d7b8d17619c5b5c14112bae75a5a81389982ec41e06
+  - filename: integrations/routeGeneration/extractRouteMeta.ts
+    checksum: d648a63fdada9fc02cc3063bfb4835a4f69365c2faa8c31db2f2873bd0939449
+  - filename: integrations/routeGenerator.test.ts
+    checksum: 7c220b43d9f876f4e033937b3188aa320c9cbce4c32a88c7959fc22190342c7e
+  - filename: integrations/routeGenerator.ts
+    checksum: cf84ab1cfc87a6a303ce735703b9d8b355919e2cd1d52291820c7349144c1943
+  - filename: package.json
+    checksum: d3c57cb658650f943c5b85ff30593971a0be9a42bd9d5c0953d00f8d55b1c292
 allowed_patterns:
   - key
   - onKey

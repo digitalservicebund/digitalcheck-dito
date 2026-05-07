@@ -1,6 +1,5 @@
 import type React from "react";
 
-import { unterstuetzung } from "@/config/routes";
 import { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";
@@ -8,7 +7,6 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image";
 import InfoBox from "~/components/InfoBox";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { SearchParamTabs } from "~/components/Tabs/Tabs";
 import { support } from "~/resources/content/unterstuetzung";
@@ -72,7 +70,6 @@ function SocialProofImage() {
 export default function Index() {
   return (
     <>
-      <MetaTitle prefix={unterstuetzung.title} />
       <main>
         <Hero title={title} subtitle={subtitle} />
 

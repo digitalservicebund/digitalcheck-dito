@@ -7,7 +7,7 @@ import {
   ShareOutlined,
   VisibilityTwoTone,
 } from "@digitalservicebund/icons";
-import { Link, useLoaderData } from "react-router";
+import { Link } from "react-router";
 import Badge from "~/components/Badge.tsx";
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
 import { LinkButton } from "~/components/Button.tsx";
@@ -16,7 +16,6 @@ import { Feature, FeatureList } from "~/components/FeatureList.tsx";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox.tsx";
-import MetaTitle from "~/components/Meta";
 import { PrinciplePosterBox } from "~/components/PrinciplePosterBox";
 import RichText from "~/components/RichText.tsx";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
@@ -39,12 +38,13 @@ export const loader = async () => {
   return { prinzips: prinzipData.prinzips };
 };
 
-export default function FivePrinciples() {
-  const { prinzips } = useLoaderData<typeof loader>();
-
+export default function FivePrinciples({
+  prinzips = [],
+}: {
+  prinzips?: PrinzipWithAspekteAndExample[];
+} = {}) {
   return (
     <>
-      <MetaTitle prefix={methoden_fuenfPrinzipien.title} />
       <main>
         <Hero
           title={methodsFivePrinciples.title}

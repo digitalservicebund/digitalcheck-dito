@@ -1,26 +1,21 @@
-import { dokumentation_absenden } from "@/config/routes";
 import { EmojiEventsOutlined as EmojiEventsOutlinedIcon } from "@digitalservicebund/icons";
-import { useOutletContext } from "react-router";
 import { DownloadButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxList from "~/components/InfoBoxList";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
+import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
-import type { NavigationContext } from "./dokumentation._documentationNavigation";
-
 const { finish } = digitalDocumentation;
 
 export default function DocumentationSend() {
-  const { prinzips } = useOutletContext<NavigationContext>();
+  const { prinzips } = useNavigationContext();
   const { downloadDocumentation } = useWordDocumentation();
 
   return (
     <>
-      <MetaTitle prefix={`Dokumentation: ${dokumentation_absenden.title}`} />
       <Heading
         text={finish.heading.text}
         tagName="h1"
@@ -34,8 +29,6 @@ export default function DocumentationSend() {
           look="highlight"
           className="bg-white"
           heading={{
-            tagName: "h2",
-            look: "ds-heading-03-reg",
             text: finish.download.heading,
           }}
         >
@@ -52,8 +45,6 @@ export default function DocumentationSend() {
           look="highlight"
           className="bg-white"
           heading={{
-            tagName: "h2",
-            look: "ds-heading-03-reg",
             text: finish.send.heading,
           }}
         >
@@ -61,8 +52,6 @@ export default function DocumentationSend() {
         </InfoBox>
         <InfoBox
           heading={{
-            tagName: "h2",
-            look: "ds-heading-03-reg",
             text: finish.done,
           }}
           visual={{

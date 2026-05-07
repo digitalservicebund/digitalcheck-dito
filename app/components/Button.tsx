@@ -2,7 +2,6 @@ import { SaveAltOutlined as SaveAltOutlinedIcon } from "@digitalservicebund/icon
 import type React from "react";
 import type { ReactElement } from "react";
 import { cloneElement } from "react";
-import type { LinkProps } from "react-router";
 import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import { getDownloadableExtensionName } from "~/utils/fileExtensionUtils";
@@ -27,7 +26,10 @@ export type ButtonProps = React.ComponentPropsWithoutRef<"button"> &
   ExplicitButtonType &
   ButtonBaseProps;
 
-export type LinkButtonProps = LinkProps & ButtonBaseProps;
+export type LinkButtonProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+  to: string;
+  prefetch?: string;
+} & ButtonBaseProps;
 
 type ReactElementWithClassname = ReactElement<{ className: string }>;
 
@@ -155,7 +157,6 @@ export function LinkButton({
       data-testid={id}
       className={twJoin(buttonClasses, plausibleEventClass)}
       onKeyDown={onKeyDown}
-      {...props}
     >
       {iconLeft} <span className="ds-button-label">{children}</span> {iconRight}
     </Link>
@@ -197,7 +198,6 @@ export function DownloadLinkButton({
     <LinkButton
       iconLeft={iconLeft}
       download
-      reloadDocument
       title={extension ? `${extension}-Datei` : undefined}
       {...props}
     />

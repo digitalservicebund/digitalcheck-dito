@@ -1,4 +1,4 @@
-import { dokumentation } from "@/config/routes";
+import { dokumentationStaticWordV2 } from "@/config/downloads";
 import {
   ChecklistRtl,
   SimCardDownloadTwoTone,
@@ -13,25 +13,28 @@ import Heading from "~/components/Heading.tsx";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox.tsx";
 import InlineNotice from "~/components/InlineNotice";
-import MetaTitle from "~/components/Meta";
 import NumberedList from "~/components/NumberedList.tsx";
 import RichText from "~/components/RichText.tsx";
 import SupportBanner from "~/components/SupportBanner";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { supportBanner } from "~/resources/content/shared/support-banner";
-import { ROUTE_DOCUMENTATION_TEMPLATE_WORD } from "~/resources/staticRoutes";
 import { DocumentationContinueActions } from "~/routes/dokumentation/DocumentationContinueActions.tsx";
+import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
 const { start } = digitalDocumentation;
 
-export default function Index() {
+export default function Index({
+  prinzips = [],
+}: {
+  prinzips?: PrinzipWithAspekteAndExample[];
+}) {
   return (
-    <>
-      <MetaTitle prefix={dokumentation.title} />
+    <DocumentationDataProvider>
       <main>
         <Hero title={start.title} subtitle={start.subtitle}>
           <div className="mt-40 space-y-40">
-            <DocumentationContinueActions />
+            <DocumentationContinueActions prinzips={prinzips} />
             <noscript>
               <InlineNotice
                 look="warning"
@@ -47,8 +50,9 @@ export default function Index() {
             <div className="space-y-8">
               <RichText markdown={start.alternative.text} />
 
-              <DownloadLinkButton // TODO: replace hard-coded path & use onClick handler for client-side generation?
-                to={ROUTE_DOCUMENTATION_TEMPLATE_WORD}
+              <DownloadLinkButton // TODO: use browser generated docx from template
+                to={dokumentationStaticWordV2.path}
+                download={dokumentationStaticWordV2.filename}
                 look="link"
               >
                 {start.alternative.buttonText}
@@ -149,6 +153,6 @@ export default function Index() {
         </div>
       </main>
       <SupportBanner {...supportBanner} />
-    </>
+    </DocumentationDataProvider>
   );
 }

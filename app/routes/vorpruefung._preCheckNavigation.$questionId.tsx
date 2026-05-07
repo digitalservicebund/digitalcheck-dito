@@ -1,32 +1,24 @@
-import { useEffect, useState } from "react";
-import { useLoaderData, useNavigate } from "react-router";
-
 import { vorpruefung } from "@/config/routes";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import InlineNotice from "~/components/InlineNotice";
-import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
-import { preCheckQuestions } from "~/resources/content/shared/pre-check-questions";
 import { preCheck } from "~/resources/content/vorpruefung";
-import type { Route } from "./+types/vorpruefung._preCheckNavigation.$questionId";
 import { usePreCheckData, useSyncedForm } from "./vorpruefung/preCheckDataHook";
 import type { PreCheckAnswerSchema } from "./vorpruefung/preCheckDataSchema";
 import { answerSchema } from "./vorpruefung/preCheckDataSchema";
 import { addOrUpdateAnswer } from "./vorpruefung/preCheckDataService";
 
-const ROUTES_PRECHECK_QUESTIONS = Object.values(preCheckQuestions).map((q) => ({
-  path: q.path,
-  title: `${q.title} — Vorprüfung`,
-}));
-
 const { questions, answerOptions, nextButton } = preCheck;
 
-export function loader({ params }: Route.LoaderArgs) {
+export function loader({ params }: { params: { questionId?: string } }) {
   const questionIdx = questions.findIndex((q) => q.id === params.questionId);
   // return 404 if the question is not found
   if (questionIdx === -1) {
@@ -79,8 +71,19 @@ export type PreCheckAnswerOption = {
   label: string;
 };
 
-export default function Index() {
-  const { questionIdx, question } = useLoaderData<typeof loader>();
+export default function Index({
+  questionId: questionIdProp,
+}: {
+  questionId?: string;
+}) {
+  const questionId =
+    questionIdProp ??
+    (typeof window !== "undefined"
+      ? window.location.pathname.split("/").filter(Boolean).pop()
+      : undefined);
+  const questionIdx = questions.findIndex((q) => q.id === questionId);
+  const question = questions[questionIdx];
+
   const [hasAnswerConflict, setHasAnswerConflict] = useState(false);
 
   const { answerForQuestionId, answers, firstUnansweredQuestionIndex } =
@@ -98,9 +101,9 @@ export default function Index() {
     },
     storedData: storedAnswer,
     initialValidate: true,
-    handleSubmit: async (data: PreCheckAnswerSchema) => {
+    handleSubmit: (data: PreCheckAnswerSchema) => {
       addOrUpdateAnswer(data);
-      await navigate(nextLink);
+      navigate(nextLink);
     },
   });
 
@@ -110,7 +113,7 @@ export default function Index() {
       firstUnansweredQuestionIndex !== null &&
       questionIdx > firstUnansweredQuestionIndex
     ) {
-      void navigate(questions[firstUnansweredQuestionIndex].path);
+      navigate(questions[firstUnansweredQuestionIndex].path);
     }
   }, [firstUnansweredQuestionIndex, navigate, questionIdx]);
 
@@ -142,15 +145,9 @@ export default function Index() {
 
   const questionLabelId = `question${questionIdx}-label`;
 
+  if (!question) return null;
   return (
     <form {...form.getFormProps()} className="space-y-40">
-      <MetaTitle
-        prefix={
-          ROUTES_PRECHECK_QUESTIONS.find((route) =>
-            route.path.endsWith(question.id),
-          )?.title
-        }
-      />
       <input {...form.getHiddenInputProps("questionId")} />
       <section className="space-y-32">
         <div className="space-y-16">

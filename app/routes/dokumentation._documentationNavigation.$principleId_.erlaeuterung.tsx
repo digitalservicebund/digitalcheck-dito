@@ -1,16 +1,16 @@
 import { methoden_fuenfPrinzipien } from "@/config/routes";
-import { Link, redirect, useOutletContext, useParams } from "react-router";
+import { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
 import AspectPills from "~/components/AspectPills";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
-import MetaTitle from "~/components/Meta";
 import Textarea from "~/components/Textarea";
+import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
-import type { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
@@ -19,6 +19,13 @@ import type {
   Principle,
 } from "./dokumentation/documentationDataSchema";
 import { principleAnswerSchemaV2 } from "./dokumentation/documentationDataSchema";
+
+function usePrincipleId(): string | undefined {
+  const { pathname } = useLocation();
+  const parts = pathname.split("/");
+  const dokIdx = parts.indexOf("dokumentation");
+  return dokIdx >= 0 ? parts[dokIdx + 1] : undefined;
+}
 
 const { radioOptions } = digitalDocumentation.principlePages;
 
@@ -29,7 +36,7 @@ type DocumentationPrincipleErlaeuterungFormProps = {
   isPositive: boolean;
   isIrrelevant: boolean;
   currentUrl: string;
-  nextUrl: string;
+  nextUrl: string | null;
   previousUrl: string;
 };
 
@@ -146,22 +153,18 @@ function DocumentationPrincipleErlaeuterungForm({
 }
 
 export default function DocumentationPrincipleErlaeuterung() {
-  const { principleId } = useParams();
-  const { currentUrl, nextUrl, previousUrl, prinzips } =
-    useOutletContext<NavigationContext>();
+  const principleId = usePrincipleId();
+  const { currentUrl, nextUrl, previousUrl, prinzips } = useNavigationContext();
   const { documentationData } = useDocumentationDataService();
+  const navigate = useNavigate();
 
-  if (!principleId)
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("No principleId provided", { status: 404 });
+  if (!principleId) return null;
 
   const prinzip = prinzips.find(
     ({ URLBezeichnung }) => URLBezeichnung === principleId,
   );
 
-  if (!prinzip)
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("No Prinzip for slug found", { status: 404 });
+  if (!prinzip) return null;
 
   const principleData = (
     documentationData as DocumentationData
@@ -171,11 +174,13 @@ export default function DocumentationPrincipleErlaeuterung() {
   const isPositive = answer === radioOptions[0];
   const isIrrelevant = answer === radioOptions[2];
 
-  // If no answer saved yet, redirect to answer page
-  if (!principleData?.answer) {
-    redirect(previousUrl);
-    return null;
-  }
+  useEffect(() => {
+    if (!principleData?.answer) {
+      void navigate(previousUrl);
+    }
+  }, [principleData?.answer, previousUrl, navigate]);
+
+  if (!principleData?.answer) return null;
 
   const changeAnswerTitle = isPositive
     ? "Sie haben angegeben, dass das Prinzip auf ihr Vorhaben zutrifft."
@@ -185,7 +190,6 @@ export default function DocumentationPrincipleErlaeuterung() {
 
   return (
     <>
-      <MetaTitle prefix={`Dokumentation: ${prinzip.Name} – Erläuterung`} />
       <div className="space-y-48">
         <div className="space-y-24">
           <Badge principleNumber={prinzip.Nummer} className="mb-8">
