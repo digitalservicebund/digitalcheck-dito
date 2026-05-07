@@ -69,7 +69,7 @@ export function PrincipleExample({ prinzip }: Readonly<PrincipleExampleProps>) {
       <p className="ds-label-03-reg items-center text-gray-900">
         Regelung:&nbsp;
         <NewTabLink
-          to={`${ROUTE_REGELUNGEN.url}/${beispielvorhaben.URLBezeichnung ?? ""}`}
+          to={`${ROUTE_REGELUNGEN}/${beispielvorhaben.URLBezeichnung ?? ""}`}
         >
           {beispielvorhaben.Titel}
         </NewTabLink>
