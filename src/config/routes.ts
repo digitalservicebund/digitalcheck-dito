@@ -113,7 +113,7 @@ export const dokumentation_beteiligungsformate = {
 export const dokumentation_hinweise = {
   key: "dokumentation_hinweise",
   path: "/dokumentation/hinweise",
-  title: "Dokumentation: Hinweise",
+  title: "Hinweise",
   parent: dokumentation,
   sitemap: true,
   isStagingOnly: false,
@@ -135,7 +135,7 @@ export const dokumentation_regelungsvorhabenTitel = {
 export const dokumentation_zusammenfassung = {
   key: "dokumentation_zusammenfassung",
   path: "/dokumentation/zusammenfassung",
-  title: "Dokumentation: Zusammenfassung",
+  title: "Zusammenfassung",
   parent: dokumentation,
   sitemap: true,
   isStagingOnly: false,
@@ -212,7 +212,7 @@ export const impressum = {
 export const interoperabel = {
   key: "interoperabel",
   path: "/interoperabel",
-  title: "Interoperable Regelungen",
+  title: "Interoperable Lösungen",
   parent: null,
   sitemap: true,
   isStagingOnly: false,
