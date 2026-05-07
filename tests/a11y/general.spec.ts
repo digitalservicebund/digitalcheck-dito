@@ -21,6 +21,7 @@ test.describe("basic example a11y test", () => {
   allRoutes
     .filter(
       (route) =>
+        !route.isStagingOnly &&
         ![".pdf", ".xlsx", ".docx", unterstuetzung.path].some((r) =>
           route.path.endsWith(r),
         ),

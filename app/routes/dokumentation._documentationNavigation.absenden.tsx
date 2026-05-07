@@ -34,6 +34,8 @@ export default function DocumentationSend() {
           look="highlight"
           className="bg-white"
           heading={{
+            tagName: "h2",
+            look: "ds-heading-03-reg",
             text: finish.download.heading,
           }}
         >
@@ -50,6 +52,8 @@ export default function DocumentationSend() {
           look="highlight"
           className="bg-white"
           heading={{
+            tagName: "h2",
+            look: "ds-heading-03-reg",
             text: finish.send.heading,
           }}
         >
@@ -57,6 +61,8 @@ export default function DocumentationSend() {
         </InfoBox>
         <InfoBox
           heading={{
+            tagName: "h2",
+            look: "ds-heading-03-reg",
             text: finish.done,
           }}
           visual={{

@@ -135,7 +135,7 @@ export const dokumentation_regelungsvorhabenTitel = {
 export const dokumentation_zusammenfassung = {
   key: "dokumentation_zusammenfassung",
   path: "/dokumentation/zusammenfassung",
-  title: "Dokumentation: Zusammenfassung",
+  title: "Zusammenfassung",
   parent: dokumentation,
   sitemap: true,
   isStagingOnly: false,

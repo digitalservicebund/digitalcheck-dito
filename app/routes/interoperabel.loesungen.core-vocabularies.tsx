@@ -12,7 +12,6 @@ import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
 import { InteroperableSolutionBanner } from "~/components/InteroperableSolutionBanner.tsx";
 import MetaTitle from "~/components/Meta";
-import NewTabLink from "~/components/NewTabLink.tsx";
 import RichText from "~/components/RichText";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import Timeline from "~/components/Timeline";
@@ -481,22 +480,11 @@ export default function InteroperableSolutionsDcatAp() {
                   übersetzen zu müssen.
                 `}
               </AccordionItem>
-              <AccordionItem
-                headline={
-                  <>
-                    <NewTabLink
-                      to={
-                        "https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/blog/2017/09/19/533365899/Business+Register+Interconnection+System+BRIS"
-                      }
-                    >
-                      BRIS
-                    </NewTabLink>{" "}
-                    (Business Registers Interconnection System)
-                  </>
-                }
-              >
+              <AccordionItem headline="BRIS (Business Registers Interconnection System)">
                 <RichText
                   markdown={dedent`
+                **[BRIS](https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/blog/2017/09/19/533365899/Business+Register+Interconnection+System+BRIS) (Business Registers Interconnection System)**
+
                 Wenn Sie als Legistin oder Legist eine Regelung erarbeiten, die die
                 Überprüfung von Unternehmen vorschreibt – etwa bei der Vergabe
                 öffentlicher Aufträge, bei der Vergabe von Fördermitteln oder der
