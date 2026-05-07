@@ -26,16 +26,19 @@ export default function InfoBoxList({
           className,
         )}
       >
-        {React.Children.map(children, (child) => (
-          <li
-            className={twJoin(
-              separator &&
-                "border-0 border-b-2 border-solid border-gray-400 pb-40 last:border-none last:pb-0",
-            )}
-          >
-            {child}
-          </li>
-        ))}
+        {React.Children.map(children, (child) => {
+          if (!child) return null;
+          return (
+            <li
+              className={twJoin(
+                separator &&
+                  "border-0 border-b-2 border-solid border-gray-400 pb-40 last:border-none last:pb-0",
+              )}
+            >
+              {child}
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

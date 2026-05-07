@@ -8,8 +8,11 @@ import InfoBoxList from "~/components/InfoBoxList";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
+import { contact } from "~/resources/content/shared/contact.ts";
 import { ROUTE_DOCUMENTATION_SEND } from "~/resources/staticRoutes";
+import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
+import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 
 const { finish } = digitalDocumentation;
@@ -17,6 +20,10 @@ const { finish } = digitalDocumentation;
 export default function DocumentationSend() {
   const { prinzips } = useOutletContext<NavigationContext>();
   const { downloadDocumentation } = useWordDocumentation();
+  const { documentationData } = useDocumentationDataService();
+
+  const hasInteroperabilityRequirement =
+    documentationData.euInteroperabilityOutcome?.outcomeId === "REQUIRED";
 
   return (
     <>
@@ -55,6 +62,26 @@ export default function DocumentationSend() {
         >
           <RichText markdown={finish.send.content} />
         </InfoBox>
+        {hasInteroperabilityRequirement && (
+          <InfoBox
+            look="highlight"
+            className="bg-white"
+            heading={{
+              text: "Kopie an die nationale Kontaktstelle senden",
+            }}
+          >
+            <RichText
+              markdown={dedent`
+                - Senden Sie eine Kopie der E-Mail mit der Dokumentation an ${contact.mdMailToLink(contact.interoperabilityEmail)} (nationale Kontaktstelle nach Verordnung (EU) 2024/903 Art. 17).
+                Die Daten aus der Bewertung werden auf dem Portal [interoperable Europe](https://interoperable-europe.ec.europa.eu/collection/assessments/report/repository) veröffentlicht.
+                
+                - Bitte vermerken Sie, ab wann eine Veröffentlichung möglich sein wird:
+                    - Falls ein Referentenentwurf veröffentlicht wurde, in der Regel **ab sofort**.
+                    - Andernfalls vermerken Sie bitte das **geplante Datum** der Veröffentlichung des Referentenentwurfs. Die nationale Kontaktstelle wird sich vor einer Veröffentlichung mit Ihnen in Verbindung setzen.
+          `}
+            />
+          </InfoBox>
+        )}
         <InfoBox
           heading={{
             text: finish.done,
