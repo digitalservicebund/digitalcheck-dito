@@ -1,9 +1,9 @@
+import { barrierefreiheit } from "@/config/routes";
 import { expect, test } from "@playwright/test";
-import { ROUTE_A11Y } from "~/resources/staticRoutes";
 
 test.describe("accessibility page", () => {
   test("displays the content", async ({ page }) => {
-    await page.goto(ROUTE_A11Y.url);
+    await page.goto(barrierefreiheit.path);
     await expect(
       page.getByRole("heading", {
         name: "Erklärung zur Barrierefreiheit",

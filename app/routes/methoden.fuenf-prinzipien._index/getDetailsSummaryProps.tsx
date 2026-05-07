@@ -1,3 +1,4 @@
+import { beispiele_prinzipien } from "@/config/routes";
 import { Link } from "react-router";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import type { DetailsSummaryProps } from "~/components/DetailsSummary.tsx";
@@ -6,7 +7,6 @@ import ItalicModifier from "~/components/ItalicModifier.tsx";
 import PrincipleHighlightModifier from "~/components/PrincipleHighlightModifier";
 import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
-import { ROUTE_EXAMPLES_PRINCIPLES } from "~/resources/staticRoutes";
 import { absatzIdTag } from "~/utils/paragraphUtils";
 import type {
   AbsatzWithParagraph,
@@ -39,7 +39,7 @@ function AspectExample({
       />
       <Link
         className="text-link"
-        to={`${ROUTE_EXAMPLES_PRINCIPLES.url}/${prinzip.URLBezeichnung}#${absatzIdTag(beispiel.documentId)}`}
+        to={`${beispiele_prinzipien.path}/${prinzip.URLBezeichnung}#${absatzIdTag(beispiel.documentId)}`}
       >
         {methodsFivePrinciples.exampleLinkText}
       </Link>

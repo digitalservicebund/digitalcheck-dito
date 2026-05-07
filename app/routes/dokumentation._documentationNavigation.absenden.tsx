@@ -1,3 +1,4 @@
+import { dokumentation_absenden } from "@/config/routes";
 import { EmojiEventsOutlined as EmojiEventsOutlinedIcon } from "@digitalservicebund/icons";
 import { useOutletContext } from "react-router";
 import { DownloadButton } from "~/components/Button.tsx";
@@ -8,7 +9,6 @@ import InfoBoxList from "~/components/InfoBoxList";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import { ROUTE_DOCUMENTATION_SEND } from "~/resources/staticRoutes";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
 import type { NavigationContext } from "./dokumentation._documentationNavigation";
 
@@ -20,7 +20,7 @@ export default function DocumentationSend() {
 
   return (
     <>
-      <MetaTitle prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_SEND.title}`} />
+      <MetaTitle prefix={`Dokumentation: ${dokumentation_absenden.title}`} />
       <Heading
         text={finish.heading.text}
         tagName="h1"

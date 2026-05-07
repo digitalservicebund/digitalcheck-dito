@@ -1,8 +1,8 @@
 import { Navigate } from "react-router";
-import { ROUTE_EXAMPLES_DIGITAL_COMMUNICATION } from "~/resources/staticRoutes.ts";
 import { createRedirectLoader } from "~/utils/redirectLoader";
 
-const to = ROUTE_EXAMPLES_DIGITAL_COMMUNICATION.url;
+const to =
+  "/beispiele/prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten";
 
 // normal SSR build
 export const loader = createRedirectLoader(to);

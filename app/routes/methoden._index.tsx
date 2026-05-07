@@ -1,3 +1,4 @@
+import { methoden } from "@/config/routes";
 import { Link, useLoaderData } from "react-router";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
@@ -10,7 +11,6 @@ import SupportBanner from "~/components/SupportBanner";
 import Timeline from "~/components/Timeline.tsx";
 import { methods } from "~/resources/content/methoden";
 import { supportBanner } from "~/resources/content/shared/support-banner";
-import { ROUTE_METHODS } from "~/resources/staticRoutes";
 import getFeatureFlag from "~/utils/featureFlags.server";
 
 export function loader() {
@@ -64,7 +64,7 @@ export default function Methoden() {
 
   return (
     <>
-      <MetaTitle prefix={ROUTE_METHODS.title} />
+      <MetaTitle prefix={methoden.title} />
       <main>
         <Hero subtitle={methods.subtitle} title={methods.title} />
 

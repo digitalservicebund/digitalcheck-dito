@@ -1,19 +1,17 @@
 // Import mocks first
-import type { Route } from "~/resources/staticRoutes";
 import "./utils/mockLocalStorageVersioned";
 import "./utils/mockRouter";
 // End of mocks
 
+import {
+  dokumentation_beteiligungsformate,
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+} from "@/config/routes";
 import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter, useOutletContext } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import {
-  ROUTE_DOCUMENTATION_NOTES,
-  ROUTE_DOCUMENTATION_PARTICIPATION,
-  ROUTE_DOCUMENTATION_TITLE,
-  ROUTES_DOCUMENTATION_INTRO,
-} from "~/resources/staticRoutes";
 import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
 import type {
@@ -26,6 +24,26 @@ import type {
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import type { AbsatzWithParagraph } from "~/utils/strapiData.types";
 import DocumentationSummaryV1 from "../dokumentation/DocumentationSummaryV1";
+
+type Route = { url: string; title: string };
+
+const ROUTE_DOCUMENTATION_NOTES = {
+  url: dokumentation_hinweise.path,
+  title: dokumentation_hinweise.title,
+};
+const ROUTE_DOCUMENTATION_TITLE = {
+  url: dokumentation_regelungsvorhabenTitel.path,
+  title: dokumentation_regelungsvorhabenTitel.title,
+};
+const ROUTE_DOCUMENTATION_PARTICIPATION = {
+  url: dokumentation_beteiligungsformate.path,
+  title: dokumentation_beteiligungsformate.title,
+};
+const ROUTES_DOCUMENTATION_INTRO: Route[] = [
+  ROUTE_DOCUMENTATION_NOTES,
+  ROUTE_DOCUMENTATION_TITLE,
+  ROUTE_DOCUMENTATION_PARTICIPATION,
+];
 
 const MOCK_ROUTE_PRINCIPLE = {
   title: "Digitale Angebote",

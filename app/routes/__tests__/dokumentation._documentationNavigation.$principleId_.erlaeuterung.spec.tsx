@@ -2,6 +2,11 @@
 import "./utils/mockLocalStorageVersioned";
 import "./utils/mockRouter";
 // End of mocks
+import {
+  dokumentation_beteiligungsformate,
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+} from "@/config/routes";
 import "@testing-library/jest-dom";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import type { UserEvent } from "@testing-library/user-event";
@@ -15,8 +20,6 @@ import {
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import type { digitalDocumentation } from "~/resources/content/dokumentation";
-import type { Route } from "~/resources/staticRoutes";
-import { ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import type {
   PrinzipAspekt,
@@ -34,6 +37,20 @@ import { DATA_SCHEMA_VERSION_V2 } from "../dokumentation/documentationDataSchema
 vi.mock("~/contexts/FeatureFlagContext", () => ({
   useFeatureFlag: vi.fn().mockReturnValue(true),
 }));
+
+type Route = { url: string; title: string };
+
+const ROUTES_DOCUMENTATION_INTRO: Route[] = [
+  { url: dokumentation_hinweise.path, title: dokumentation_hinweise.title },
+  {
+    url: dokumentation_regelungsvorhabenTitel.path,
+    title: dokumentation_regelungsvorhabenTitel.title,
+  },
+  {
+    url: dokumentation_beteiligungsformate.path,
+    title: dokumentation_beteiligungsformate.title,
+  },
+];
 
 const routes: (Route[] | Route)[] = [
   ...ROUTES_DOCUMENTATION_INTRO,

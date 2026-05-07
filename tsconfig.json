@@ -29,6 +29,7 @@
       "@testing-library/react"
     ],
     "paths": {
+      "@/*": ["./src/*"],
       "~/*": ["./app/*"],
       "@digitalservicebund/icons/*": [
         "./node_modules/@digitalservicebund/icons/*"

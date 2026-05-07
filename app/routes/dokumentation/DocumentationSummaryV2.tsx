@@ -1,3 +1,8 @@
+import {
+  dokumentation_beteiligungsformate,
+  dokumentation_regelungsvorhabenTitel,
+  dokumentation_zusammenfassung,
+} from "@/config/routes";
 import type { ReactNode } from "react";
 import { Link, useOutletContext } from "react-router";
 import type { BadgeProps } from "~/components/Badge";
@@ -9,12 +14,6 @@ import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import type { Route } from "~/resources/staticRoutes";
-import {
-  ROUTE_DOCUMENTATION_PARTICIPATION,
-  ROUTE_DOCUMENTATION_SUMMARY,
-  ROUTE_DOCUMENTATION_TITLE,
-} from "~/resources/staticRoutes";
 import type {
   Participation,
   PolicyTitle,
@@ -25,6 +24,21 @@ import { slugify } from "~/utils/utilFunctions";
 import type { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationActions from "./DocumentationActions";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
+
+type Route = { url: string; title: string };
+
+const ROUTE_DOCUMENTATION_TITLE: Route = {
+  url: dokumentation_regelungsvorhabenTitel.path,
+  title: dokumentation_regelungsvorhabenTitel.title,
+};
+const ROUTE_DOCUMENTATION_PARTICIPATION: Route = {
+  url: dokumentation_beteiligungsformate.path,
+  title: dokumentation_beteiligungsformate.title,
+};
+const ROUTE_DOCUMENTATION_SUMMARY: Route = {
+  url: dokumentation_zusammenfassung.path,
+  title: dokumentation_zusammenfassung.title,
+};
 
 const {
   summary,

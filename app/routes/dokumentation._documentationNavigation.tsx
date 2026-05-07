@@ -1,3 +1,9 @@
+import {
+  dokumentation,
+  dokumentation_absenden,
+  dokumentation_hinweise,
+  dokumentation_zusammenfassung,
+} from "@/config/routes";
 import { Outlet, useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
 import HelpSidepanel from "~/components/HelpSidepanel";
@@ -6,17 +12,12 @@ import Stepper from "~/components/Stepper";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import type { Route as _Route } from "~/resources/staticRoutes";
-import {
-  ROUTE_DOCUMENTATION,
-  ROUTE_DOCUMENTATION_NOTES,
-  ROUTE_DOCUMENTATION_SEND,
-  ROUTE_DOCUMENTATION_SUMMARY,
-} from "~/resources/staticRoutes";
 import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { features } from "~/utils/featureFlags";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
+
+type _Route = { url: string; title: string };
 
 type Route = _Route & {
   principleId?: string;
@@ -46,7 +47,7 @@ function findIndexForRoute(routes: Route[], currentUrl: string) {
 function getPreviousUrl(routes: Route[], currentUrl: string): string {
   return findIndexForRoute(routes, currentUrl) > 0
     ? routes[findIndexForRoute(routes, currentUrl) - 1].url
-    : ROUTE_DOCUMENTATION.url;
+    : dokumentation.path;
 }
 
 function getNextUrl(routes: Route[], currentUrl: string): string | null {
@@ -79,7 +80,7 @@ export default function LayoutWithDocumentationNavigation() {
   // exclude documentation notes
   const displayedRoutes = routes.filter((route) => {
     if (Array.isArray(route)) return true;
-    return route.url !== ROUTE_DOCUMENTATION_NOTES.url;
+    return route.url !== dokumentation_hinweise.path;
   });
 
   const location = useLocation();
@@ -129,14 +130,14 @@ export default function LayoutWithDocumentationNavigation() {
       getPreviousUrl,
       simplifiedFlow,
       findDocumentationDataForUrl,
-    ) ?? ROUTE_DOCUMENTATION.url;
+    ) ?? dokumentation.path;
 
-  const isNavigationDisabled = currentUrl === ROUTE_DOCUMENTATION_NOTES.url;
+  const isNavigationDisabled = currentUrl === dokumentation_hinweise.path;
 
   const excludedPanelRoutes = [
-    ROUTE_DOCUMENTATION_NOTES.url,
-    ROUTE_DOCUMENTATION_SUMMARY.url,
-    ROUTE_DOCUMENTATION_SEND.url,
+    dokumentation_hinweise.path,
+    dokumentation_zusammenfassung.path,
+    dokumentation_absenden.path,
   ];
   const showHelpPanel =
     simplifiedFlow &&

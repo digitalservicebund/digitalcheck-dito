@@ -1,10 +1,10 @@
+import { datenschutz } from "@/config/routes";
 import fs from "node:fs/promises";
 import { useLoaderData } from "react-router";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Hero from "~/components/Hero";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
-import { ROUTE_PRIVACY } from "~/resources/staticRoutes";
 
 export async function loader() {
   return await fs.readFile("public/markdown/datenschutz.md", {
@@ -17,7 +17,7 @@ export default function Index() {
 
   return (
     <>
-      <MetaTitle prefix={ROUTE_PRIVACY.title} />
+      <MetaTitle prefix={datenschutz.title} />
       <main>
         <Hero title="Datenschutzerklärung" />
         <ContentWrapper>

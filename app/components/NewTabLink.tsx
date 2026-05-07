@@ -3,8 +3,6 @@ import { Link } from "react-router";
 import { OpenInNewIcon } from "~/components/OpenInNewIcon.tsx";
 import twMerge from "~/utils/tailwindMerge";
 
-export type CustomLinkProps = Omit<LinkProps, "target">;
-
 /**
  * A `Link` with target="_blank" and OpenInNewIcon
  */
@@ -12,7 +10,7 @@ export default function NewTabLink({
   children,
   className,
   ...props
-}: Readonly<CustomLinkProps>) {
+}: Readonly<Omit<LinkProps, "target">>) {
   return (
     <Link
       {...props}

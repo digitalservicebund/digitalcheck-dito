@@ -1,5 +1,5 @@
 import { vi } from "vitest";
-import {
+import type {
   ExternalHyperlinkOptions,
   ParagraphOptions,
   TextRunOptions,

@@ -1,5 +1,11 @@
 import { useLoaderData } from "react-router";
 
+import {
+  allRoutes,
+  methoden_itSystemeErfassen,
+  methoden_technischeUmsetzbarkeit,
+  methoden_zustaendigeAkteurinnenAuflisten,
+} from "@/config/routes";
 import Container from "~/components/Container";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -13,18 +19,12 @@ import { methodsITSystems } from "~/resources/content/methode-it-systeme-erfasse
 import { methodsTechnicalFeasibility } from "~/resources/content/methode-technische-umsetzbarkeit";
 import { methodsResponsibleActors } from "~/resources/content/methode-zustaendige-akteurinnen-auflisten";
 import { interviewBanner } from "~/resources/content/shared/interview-banner";
-import {
-  ROUTE_METHODS_COLLECT_IT_SYSTEMS,
-  ROUTE_METHODS_RESPONSIBLE_ACTORS,
-  ROUTE_METHODS_TECHNICAL_FEASIBILITY,
-  ROUTES,
-} from "~/resources/staticRoutes";
 import type { Route } from "./+types/methoden.$subPage";
 
 const contentMap = {
-  [ROUTE_METHODS_RESPONSIBLE_ACTORS.title]: methodsResponsibleActors,
-  [ROUTE_METHODS_COLLECT_IT_SYSTEMS.title]: methodsITSystems,
-  [ROUTE_METHODS_TECHNICAL_FEASIBILITY.title]: methodsTechnicalFeasibility,
+  [methoden_zustaendigeAkteurinnenAuflisten.title]: methodsResponsibleActors,
+  [methoden_itSystemeErfassen.title]: methodsITSystems,
+  [methoden_technischeUmsetzbarkeit.title]: methodsTechnicalFeasibility,
 };
 
 export function loader({ params }: Route.LoaderArgs) {
@@ -37,8 +37,8 @@ export function loader({ params }: Route.LoaderArgs) {
     });
   }
 
-  const route = ROUTES.find((route) => route.url.endsWith(subPage));
-  if (!route || !contentMap[route.title]) {
+  const route = allRoutes.find((route) => route.path.endsWith(subPage));
+  if (!route || !contentMap[route.title as keyof typeof contentMap]) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw new Response("Method page not found", {
       status: 404,
@@ -52,7 +52,7 @@ export function loader({ params }: Route.LoaderArgs) {
 export default function Index() {
   const { route } = useLoaderData<typeof loader>();
   // We have to get the content here to use the icons from the content file
-  const content = contentMap[route.title];
+  const content = contentMap[route.title as keyof typeof contentMap];
 
   return (
     <>

@@ -1,3 +1,7 @@
+import {
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+} from "@/config/routes";
 import { useNavigate } from "react-router";
 import Button, { DownloadButton, LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
@@ -5,14 +9,15 @@ import Dialog from "~/components/Dialog.tsx";
 import RichText from "~/components/RichText.tsx";
 import { digitalDocumentation } from "~/resources/content/dokumentation.ts";
 import { general } from "~/resources/content/shared/general.ts";
-import {
-  ROUTE_DOCUMENTATION_TITLE,
-  ROUTES_DOCUMENTATION_INTRO,
-} from "~/resources/staticRoutes.ts";
 import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation.ts";
 import { useNonce } from "~/utils/nonce.ts";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
+
+const ROUTE_DOCUMENTATION_TITLE = {
+  url: dokumentation_regelungsvorhabenTitel.path,
+};
+const ROUTES_DOCUMENTATION_INTRO = [{ url: dokumentation_hinweise.path }];
 
 const { start } = digitalDocumentation;
 

@@ -1,3 +1,7 @@
+import {
+  dokumentation_beteiligungsformate,
+  dokumentation_regelungsvorhabenTitel,
+} from "@/config/routes";
 import type { ReactNode } from "react";
 import {
   createContext,
@@ -9,10 +13,6 @@ import {
 } from "react";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import {
-  ROUTE_DOCUMENTATION_PARTICIPATION,
-  ROUTE_DOCUMENTATION_TITLE,
-} from "~/resources/staticRoutes";
 import type {
   DocumentationData,
   Participation,
@@ -303,9 +303,9 @@ export function DocumentationDataProvider({
 
   const findDocumentationDataForUrl = useCallback(
     (url: string): PolicyTitle | Participation | Principle | undefined => {
-      if (url === ROUTE_DOCUMENTATION_TITLE.url)
+      if (url === dokumentation_regelungsvorhabenTitel.path)
         return documentationData.policyTitle;
-      else if (url === ROUTE_DOCUMENTATION_PARTICIPATION.url)
+      else if (url === dokumentation_beteiligungsformate.path)
         return documentationData.participation;
 
       const principleData = documentationData.principles?.find(

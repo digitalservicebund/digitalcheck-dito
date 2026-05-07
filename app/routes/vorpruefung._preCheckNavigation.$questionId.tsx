@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router";
 
+import { vorpruefung } from "@/config/routes";
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -10,16 +11,19 @@ import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
+import { preCheckQuestions } from "~/resources/content/shared/pre-check-questions";
 import { preCheck } from "~/resources/content/vorpruefung";
-import {
-  ROUTE_PRECHECK,
-  ROUTES_PRECHECK_QUESTIONS,
-} from "~/resources/staticRoutes";
 import type { Route } from "./+types/vorpruefung._preCheckNavigation.$questionId";
 import { usePreCheckData, useSyncedForm } from "./vorpruefung/preCheckDataHook";
 import type { PreCheckAnswerSchema } from "./vorpruefung/preCheckDataSchema";
 import { answerSchema } from "./vorpruefung/preCheckDataSchema";
 import { addOrUpdateAnswer } from "./vorpruefung/preCheckDataService";
+
+const ROUTE_PRECHECK_URL = vorpruefung.path;
+const ROUTES_PRECHECK_QUESTIONS = Object.values(preCheckQuestions).map((q) => ({
+  url: `${vorpruefung.path}/${q.id}`,
+  title: `${q.title} — Vorprüfung`,
+}));
 
 const { questions, answerOptions, nextButton } = preCheck;
 
@@ -85,7 +89,7 @@ export default function Index() {
   const navigate = useNavigate();
   const storedAnswer = answerForQuestionId(question.id);
   const nextLink =
-    questions.find((q) => q.id === question.id)?.nextLink ?? ROUTE_PRECHECK.url;
+    questions.find((q) => q.id === question.id)?.nextLink ?? ROUTE_PRECHECK_URL;
 
   const form = useSyncedForm({
     schema: answerSchema,

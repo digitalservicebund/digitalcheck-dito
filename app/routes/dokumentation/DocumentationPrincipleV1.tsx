@@ -1,3 +1,7 @@
+import {
+  beispiele_prinzipien,
+  methoden_fuenfPrinzipien,
+} from "@/config/routes";
 import { AddCircleOutlineOutlined } from "@digitalservicebund/icons";
 import type { FormScope } from "@rvf/react";
 import { useField, useFieldArray } from "@rvf/react";
@@ -23,10 +27,6 @@ import Textarea from "~/components/Textarea";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider.tsx";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import {
-  ROUTE_EXAMPLES_PRINCIPLES,
-  ROUTE_METHODS_PRINCIPLES,
-} from "~/resources/staticRoutes";
 import type {
   IrrelevantAnswerReasoning,
   NegativeAnswerReasoning,
@@ -256,7 +256,7 @@ function PositiveAnswerFormElements({
             : principlePages.explanationFields.ownExplanationDescription;
 
           const moreUrl = aspekt
-            ? `${ROUTE_METHODS_PRINCIPLES.url}#${slugify(aspekt.Titel)}`
+            ? `${methoden_fuenfPrinzipien.path}#${slugify(aspekt.Titel)}`
             : undefined;
 
           return (
@@ -417,7 +417,7 @@ export function PrincipleWithExample({
             </PrincipleHighlightProvider>
             <Link
               className="text-link block font-bold"
-              to={`${ROUTE_EXAMPLES_PRINCIPLES.url}/${prinzip.URLBezeichnung}`}
+              to={`${beispiele_prinzipien.path}/${prinzip.URLBezeichnung}`}
             >
               Mehr Beispiele zu dem Prinzip
             </Link>

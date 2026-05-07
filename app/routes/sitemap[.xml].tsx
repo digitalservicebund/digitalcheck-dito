@@ -1,7 +1,5 @@
-import {
-  ROUTE_REGELUNGEN,
-  ROUTES as staticRoutes,
-} from "~/resources/staticRoutes";
+import { allRoutes as staticRoutes } from "@/config/routes";
+import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
 import { fetchStrapiData } from "~/utils/strapiData.server";
 import type { Route } from "./+types/sitemap[.xml]";
 
@@ -10,7 +8,7 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
   const host = new URL(request.url).host;
   const dynamicRoutes = await getDynamicRoutes();
   const allRoutes = [...staticRoutes, ...dynamicRoutes];
-  const allUrls = allRoutes.map((r) => `${protocol}//${host}${r.url}`);
+  const allUrls = allRoutes.map((r) => `${protocol}//${host}${r.path}`);
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
   <urlset
@@ -39,7 +37,7 @@ query GetAllBeispielvorhabens {
   }
 }`;
 
-async function getDynamicRoutes(): Promise<{ url: string }[]> {
+async function getDynamicRoutes(): Promise<{ path: string }[]> {
   const regelungenData = await fetchStrapiData<{
     beispielvorhabens: Array<{ URLBezeichnung: string }>;
   }>(GET_ALL_REGELUNGEN_SLUGS, {});
@@ -47,6 +45,6 @@ async function getDynamicRoutes(): Promise<{ url: string }[]> {
   if ("error" in regelungenData) return [];
 
   return regelungenData.beispielvorhabens.map((regelung) => ({
-    url: `${ROUTE_REGELUNGEN.url}/${regelung.URLBezeichnung}`,
+    path: `${ROUTE_REGELUNGEN}/${regelung.URLBezeichnung}`,
   }));
 }

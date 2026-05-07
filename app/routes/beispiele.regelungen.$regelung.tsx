@@ -13,7 +13,6 @@ import RichText from "~/components/RichText.tsx";
 import TabGroup from "~/components/Tabs/Tabs";
 import VisualisationItem from "~/components/VisualisationItem";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
-import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
 import getFeatureFlag from "~/utils/featureFlags.server.ts";
 import {
   fetchStrapiData,
@@ -206,7 +205,7 @@ export default function Gesetz() {
 
   return (
     <>
-      <MetaTitle prefix={ROUTE_REGELUNGEN.title} />
+      <MetaTitle prefix={"Regelungsbeispiel"} />
       <Hero
         className="bg-gray-100"
         title={regelung.Titel}

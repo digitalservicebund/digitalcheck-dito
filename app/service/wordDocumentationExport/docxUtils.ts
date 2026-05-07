@@ -1,10 +1,5 @@
-import {
-  ExternalHyperlink,
-  IPatch,
-  IRunOptions,
-  PatchType,
-  TextRun,
-} from "docx";
+import type { IPatch, IRunOptions } from "docx";
+import { ExternalHyperlink, PatchType, TextRun } from "docx";
 
 export const toParagraphPatch = (content: string): IPatch => ({
   type: PatchType.PARAGRAPH,

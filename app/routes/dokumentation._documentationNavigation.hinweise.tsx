@@ -1,3 +1,4 @@
+import { dokumentation_hinweise } from "@/config/routes";
 import { useState } from "react";
 import { useNavigate, useOutletContext } from "react-router";
 import Button, { LinkButton } from "~/components/Button.tsx";
@@ -6,7 +7,6 @@ import Heading from "~/components/Heading";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText.tsx";
 import { general } from "~/resources/content/shared/general.ts";
-import { ROUTE_DOCUMENTATION_PARTICIPATION } from "~/resources/staticRoutes";
 import type { NavigationContext } from "./dokumentation._documentationNavigation";
 
 const notes = `
@@ -32,9 +32,7 @@ export default function DocumentationParticipation() {
 
   return (
     <>
-      <MetaTitle
-        prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_PARTICIPATION.title}`}
-      />
+      <MetaTitle prefix={`Dokumentation: ${dokumentation_hinweise.title}`} />
       <Heading
         text="Wichtige Hinweise"
         tagName="h1"

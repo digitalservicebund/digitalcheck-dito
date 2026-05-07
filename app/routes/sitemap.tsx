@@ -1,26 +1,28 @@
 import type { ReactNode } from "react";
 import { useLoaderData } from "react-router";
 
+import type { Route as ConfigRoute } from "@/config/routes";
+import { allRoutes, sitemap } from "@/config/routes";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Hero from "~/components/Hero";
 import MetaTitle from "~/components/Meta";
-import type { Route } from "~/resources/staticRoutes";
-import { ROUTE_SITEMAP, ROUTES } from "~/resources/staticRoutes";
 
-type RouteWithChildren = Route & {
+type RouteWithChildren = ConfigRoute & {
   children: RouteWithChildren[];
 };
 
-const groupRoutesByParent = (routes: Route[]): RouteWithChildren[] => {
+const groupRoutesByParent = (
+  routes: readonly ConfigRoute[],
+): RouteWithChildren[] => {
   const routeMap = new Map<string, RouteWithChildren>(
-    routes.map((route) => [route.url, { ...route, children: [] }]),
+    routes.map((route) => [route.path, { ...route, children: [] }]),
   );
 
   routes.forEach((route) => {
-    if (route.hideInSitemap) return;
-    const parentRoute = routeMap.get(route.parent?.url ?? "");
+    if (!route.sitemap) return;
+    const parentRoute = routeMap.get(route.parent?.path ?? "");
     if (parentRoute) {
-      parentRoute.children.push(routeMap.get(route.url)!);
+      parentRoute.children.push(routeMap.get(route.path)!);
     }
   });
 
@@ -28,7 +30,7 @@ const groupRoutesByParent = (routes: Route[]): RouteWithChildren[] => {
 };
 
 export const loader = () => {
-  return groupRoutesByParent(ROUTES);
+  return groupRoutesByParent(allRoutes);
 };
 
 export default function Sitemap(): ReactNode {
@@ -38,8 +40,8 @@ export default function Sitemap(): ReactNode {
     // [&_li>ul] styles the nested ul elements
     <ul className="list-unstyled [&_li>ul]:ml-8 [&_li>ul]:border-l [&_li>ul]:border-gray-400 [&_li>ul]:pl-8">
       {routes.map((route) => (
-        <li key={route.url} className="mb-4 [&_li]:my-8">
-          <a href={route.url} className="text-link hover:underline">
+        <li key={route.path} className="mb-4 [&_li]:my-8">
+          <a href={route.path} className="text-link hover:underline">
             {route.title}
           </a>
           {route.children &&
@@ -52,7 +54,7 @@ export default function Sitemap(): ReactNode {
 
   return (
     <>
-      <MetaTitle prefix={ROUTE_SITEMAP.title} />
+      <MetaTitle prefix={sitemap.title} />
       <main>
         <Hero title="Sitemap" />
         <ContentWrapper>{renderRoutes(routes)}</ContentWrapper>

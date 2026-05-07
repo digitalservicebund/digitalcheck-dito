@@ -13,10 +13,10 @@ import {
   useRouteLoaderData,
 } from "react-router";
 
+import { home } from "@/config/routes";
 import Footer from "~/layout/Footer";
 import PageHeader from "~/layout/PageHeader";
 import { siteMeta } from "~/resources/content/shared/meta";
-import { ROUTE_LANDING } from "~/resources/staticRoutes";
 import sharedStyles from "~/styles.css?url";
 import { assetPath } from "~/utils/assetPath";
 import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SCRIPT } from "~/utils/constants";
@@ -215,5 +215,5 @@ export default function App() {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  return <ErrorBoundaryComponent error={error} backLink={ROUTE_LANDING.url} />;
+  return <ErrorBoundaryComponent error={error} backLink={home.path} />;
 }

@@ -1,3 +1,7 @@
+import {
+  beispiele_prinzipien,
+  methoden_fuenfPrinzipien,
+} from "@/config/routes";
 import type { ReactNode } from "react";
 import { data, Link, useLoaderData } from "react-router";
 import { twJoin } from "tailwind-merge";
@@ -13,10 +17,6 @@ import SidebarContainer from "~/layout/SidebarContainer";
 import type { PrincipleNumber } from "~/resources/constants.ts";
 import { PRINCIPLE_COLORS } from "~/resources/constants.ts";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien.ts";
-import {
-  ROUTE_EXAMPLES_PRINCIPLES,
-  ROUTE_METHODS_PRINCIPLES,
-} from "~/resources/staticRoutes.ts";
 import type { Node } from "~/utils/paragraphUtils";
 import { absatzIdTag } from "~/utils/paragraphUtils";
 import { fetchStrapiData } from "~/utils/strapiData.server.ts";
@@ -140,7 +140,7 @@ function Textbeispiel({
       />
       <Link
         className="text-link"
-        to={`${ROUTE_EXAMPLES_PRINCIPLES.url}/${prinzip.URLBezeichnung}#${absatzIdTag(beispiel.documentId)}`}
+        to={`${beispiele_prinzipien.path}/${prinzip.URLBezeichnung}#${absatzIdTag(beispiel.documentId)}`}
       >
         {methodsFivePrinciples.exampleLinkText}
       </Link>
@@ -237,7 +237,7 @@ function PrincipleNavigation({
         {principles.map((principle) => (
           <Link
             key={principle.order}
-            to={`${ROUTE_METHODS_PRINCIPLES.url}/${principle.URLBezeichnung}`}
+            to={`${methoden_fuenfPrinzipien.path}/${principle.URLBezeichnung}`}
             className={twJoin(
               "block",
               principle.order === current.order
@@ -254,7 +254,7 @@ function PrincipleNavigation({
         {prev ? (
           <LinkButton
             look="link"
-            to={ROUTE_METHODS_PRINCIPLES.url + "/" + prev.URLBezeichnung}
+            to={methoden_fuenfPrinzipien.path + "/" + prev.URLBezeichnung}
             className="ds-link-01-bold"
           >
             Zurück zu Prinzip {prev.order}
@@ -265,7 +265,7 @@ function PrincipleNavigation({
         {next ? (
           <LinkButton
             look="tertiary"
-            to={ROUTE_METHODS_PRINCIPLES.url + "/" + next.URLBezeichnung}
+            to={methoden_fuenfPrinzipien.path + "/" + next.URLBezeichnung}
             className="flex justify-center"
           >
             Zum nächsten Prinzip

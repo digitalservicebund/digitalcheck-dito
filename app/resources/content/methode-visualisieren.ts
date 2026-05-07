@@ -1,3 +1,9 @@
+import { anleitungFlussdiagramm } from "@/config/downloads";
+import {
+  grundlagen_normenkontrollrat,
+  methoden_fuenfPrinzipien,
+  methoden_visualisieren_flussdiagramm,
+} from "@/config/routes";
 import {
   ArrowCircleRightOutlined,
   DateRangeOutlined,
@@ -13,12 +19,6 @@ import {
 import { assetPath } from "~/utils/assetPath";
 import type { ContentLink } from "~/utils/contentTypes";
 import { dedent } from "~/utils/dedentMultilineStrings";
-import {
-  ROUTE_FUNDAMENTALS_NKR,
-  ROUTE_METHODS_PRINCIPLES,
-  ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX,
-  ROUTE_METHODS_VISUALIZE_FLOWCHARTS,
-} from "../staticRoutes";
 import { contact } from "./shared/contact";
 
 export const methodsTasksProcesses = {
@@ -79,7 +79,7 @@ export const methodsTasksProcesses = {
         links: [
           {
             text: "Anleitung",
-            to: ROUTE_METHODS_VISUALIZE_FLOWCHARTS.url,
+            to: methoden_visualisieren_flussdiagramm.path,
             look: "tertiary" as const,
           },
         ] satisfies ContentLink[],
@@ -139,7 +139,7 @@ export const methodsTasksProcesses = {
     `,
     links: [
       {
-        to: ROUTE_FUNDAMENTALS_NKR.url,
+        to: grundlagen_normenkontrollrat.path,
         text: "Mehr dazu erfahren",
         plausibleEventName: "Content.Link+NKR+Kriterien",
         look: "tertiary" as const,
@@ -206,7 +206,7 @@ export const methodsTasksProcesses = {
         "Eine Powerpoint-Vorlage (PPT) mit einer Schritt für Schritt Anleitung zum Download finden Sie hier. Sie können diese ausdrucken oder an Ihrem Computer bearbeiten. Sofern in Ihrem Ressort Conceptboard genutzt werden kann, können Sie sich auch eine Kopie dieser Conceptboard-Vorlage erstellen. Für letzteres können Sie einen Gast-Zugang anlegen.",
       links: [
         {
-          to: ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX.url,
+          to: anleitungFlussdiagramm.path,
           text: "PPT-Vorlage runterladen",
           plausibleEventName: "Content.Anleitung.Link+Powerpoint+Vorlage",
           download: true,
@@ -235,7 +235,7 @@ export const methodsTasksProcesses = {
       "Mit den Prinzipien für Digitaltaugliche Gesetzgebung bekommen Sie auch konkrete Hinweise darauf, worauf Sie achten müssen.",
     links: [
       {
-        to: ROUTE_METHODS_PRINCIPLES.url,
+        to: methoden_fuenfPrinzipien.path,
         text: "Prinzipien nutzen",
         look: "tertiary",
         plausibleEventName: "Content.Link+Prinzipien+Nutzen",

@@ -1,4 +1,8 @@
 import {
+  interoperabel,
+  interoperabel_nationaleKontaktstelle,
+} from "@/config/routes";
+import {
   AdsClickOutlined,
   CheckCircleOutlined,
   DrawOutlined,
@@ -6,10 +10,6 @@ import {
   PlaylistAddCheckOutlined,
   TimerOutlined,
 } from "@digitalservicebund/icons";
-import {
-  ROUTE_INTEROPERABILITY,
-  ROUTE_INTEROPERABILITY_SPOC,
-} from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
 import type { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
@@ -375,8 +375,8 @@ Mit freundlichen Grüßen
     id: "kontaktstelle",
     title: "Haben Sie Fragen zu EU-Anforderungen an Interoperabilität?",
     text: dedent`
-      Weitere Informationen zu den EU-Anforderungen für Interoperabilität in der Regelung finden Sie in unserer [Übersicht](${ROUTE_INTEROPERABILITY.url}).
+      Weitere Informationen zu den EU-Anforderungen für Interoperabilität in der Regelung finden Sie in unserer [Übersicht](${interoperabel.path}).
 
-      Weitere Informationen zu Governance, Zusammenarbeit und Nutzung unserer Inhalte finden Sie unter [Nationale Kontaktstelle](${ROUTE_INTEROPERABILITY_SPOC.url}) für ein interoperables Europa.`,
+      Weitere Informationen zu Governance, Zusammenarbeit und Nutzung unserer Inhalte finden Sie unter [Nationale Kontaktstelle](${interoperabel_nationaleKontaktstelle.path}) für ein interoperables Europa.`,
   },
 };

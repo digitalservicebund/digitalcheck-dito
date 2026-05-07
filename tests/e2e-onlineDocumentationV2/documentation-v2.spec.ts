@@ -1,16 +1,15 @@
-import type { Locator, Page } from "@playwright/test";
-import { expect, test } from "@playwright/test";
+import {
+  dokumentation,
+  dokumentation_absenden,
+  dokumentation_beteiligungsformate,
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+  dokumentation_zusammenfassung,
+} from "@/config/routes";
+import { expect, type Locator, type Page, test } from "@playwright/test";
 import { extractRawText } from "mammoth";
 import { documentationDocument } from "~/resources/content/documentation-document";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import {
-  ROUTE_DOCUMENTATION,
-  ROUTE_DOCUMENTATION_NOTES,
-  ROUTE_DOCUMENTATION_PARTICIPATION,
-  ROUTE_DOCUMENTATION_SEND,
-  ROUTE_DOCUMENTATION_SUMMARY,
-  ROUTE_DOCUMENTATION_TITLE,
-} from "~/resources/staticRoutes";
 
 const testData = {
   title: "E2E V2 Titel des Regelungsvorhabens",
@@ -66,14 +65,14 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
   test.setTimeout(60_000);
 
   await test.step("start documentation flow from landing page", async () => {
-    await page.goto(ROUTE_DOCUMENTATION.url);
-    await expect(page).toHaveURL(ROUTE_DOCUMENTATION.url);
+    await page.goto(dokumentation.path);
+    await expect(page).toHaveURL(dokumentation.path);
 
     await page.getByRole("link", { name: "Dokumentation starten" }).click();
   });
 
   await test.step("see the notice, confirm, and continue", async () => {
-    await expect(page).toHaveURL(ROUTE_DOCUMENTATION_NOTES.url);
+    await expect(page).toHaveURL(dokumentation_hinweise.path);
     await expect(
       page.getByRole("heading", { name: "Wichtige Hinweise" }),
     ).toBeVisible();
@@ -86,13 +85,13 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
   });
 
   await test.step("fill title page and navigate to participation", async () => {
-    await expect(page).toHaveURL(ROUTE_DOCUMENTATION_TITLE.url);
+    await expect(page).toHaveURL(dokumentation_regelungsvorhabenTitel.path);
     await page
       .getByLabel(digitalDocumentation.info.inputTitle.label)
       .fill(testData.title);
     await page.getByRole("button", { name: "Weiter" }).click();
 
-    await expect(page).toHaveURL(ROUTE_DOCUMENTATION_PARTICIPATION.url);
+    await expect(page).toHaveURL(dokumentation_beteiligungsformate.path);
   });
 
   await test.step("fill participation page and navigate to first principle", async () => {
@@ -104,7 +103,7 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
     await page
       .getByRole("heading", { level: 2, name: /Schafft das Regelungsvorhaben/ })
       .waitFor();
-    expect(page.url()).not.toContain(ROUTE_DOCUMENTATION_PARTICIPATION.url);
+    expect(page.url()).not.toContain(dokumentation_beteiligungsformate.path);
   });
 
   await test.step("positive principle answer page — select answer only", async () => {
@@ -253,7 +252,7 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
   });
 
   await test.step("navigate to summary", async () => {
-    await expect(page).toHaveURL(ROUTE_DOCUMENTATION_SUMMARY.url);
+    await expect(page).toHaveURL(dokumentation_zusammenfassung.path);
   });
 
   await test.step("summary page shows entered data and navigate to absenden", async () => {
@@ -271,11 +270,11 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
     const weiterButton = page.getByRole("link", { name: "Weiter" });
     await expect(weiterButton).toBeVisible({ timeout: 10000 });
     await weiterButton.click();
-    await expect(page).toHaveURL(ROUTE_DOCUMENTATION_SEND.url);
+    await expect(page).toHaveURL(dokumentation_absenden.path);
   });
 
   await test.step("download documentation from absenden page", async () => {
-    await expect(page).toHaveURL(ROUTE_DOCUMENTATION_SEND.url);
+    await expect(page).toHaveURL(dokumentation_absenden.path);
 
     const docText = await downloadDocumentAndGetText(
       page,
@@ -306,7 +305,7 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
 test("go to landing page and download empty V2 document template", async ({
   page,
 }, testInfo) => {
-  await page.goto(ROUTE_DOCUMENTATION.url);
+  await page.goto(dokumentation.path);
 
   const docText = await downloadDocumentAndGetText(
     page,
@@ -337,7 +336,7 @@ test("go to landing page and download empty V2 document template", async ({
 });
 
 async function expectAndSkipNotice(page: Page) {
-  await page.waitForURL(ROUTE_DOCUMENTATION_NOTES.url);
+  await page.waitForURL(dokumentation_hinweise.path);
   await expect(
     page.getByRole("heading", { name: "Wichtige Hinweise" }),
   ).toBeVisible();
@@ -348,8 +347,8 @@ async function expectAndSkipNotice(page: Page) {
 test.describe("with partial documentation started", () => {
   test.beforeEach(async ({ page }) => {
     await test.step("start documentation flow from landing page and skip the notice", async () => {
-      await page.goto(ROUTE_DOCUMENTATION.url);
-      await expect(page).toHaveURL(ROUTE_DOCUMENTATION.url);
+      await page.goto(dokumentation.path);
+      await expect(page).toHaveURL(dokumentation.path);
 
       await page.getByRole("link", { name: "Dokumentation starten" }).click();
 
@@ -364,9 +363,9 @@ test.describe("with partial documentation started", () => {
 
     await test.step("go back to start page", async () => {
       await page.goBack();
-      await expect(page).toHaveURL(ROUTE_DOCUMENTATION_NOTES.url);
+      await expect(page).toHaveURL(dokumentation_hinweise.path);
       await page.goBack();
-      await expect(page).toHaveURL(ROUTE_DOCUMENTATION.url);
+      await expect(page).toHaveURL(dokumentation.path);
     });
   });
 
@@ -376,7 +375,7 @@ test.describe("with partial documentation started", () => {
         name: "Dokumentation fortsetzen",
       })
       .click();
-    await page.waitForURL(ROUTE_DOCUMENTATION_TITLE.url);
+    await page.waitForURL(dokumentation_regelungsvorhabenTitel.path);
     await expect(
       page.getByLabel(digitalDocumentation.info.inputTitle.label),
     ).toHaveValue(testData.title);
@@ -400,7 +399,7 @@ test.describe("with partial documentation started", () => {
     await test.step("open start-over dialog but cancel", async () => {
       const dialog = await openDialog();
       await dialog.getByRole("button", { name: "Abbrechen" }).click();
-      expect(page.url().endsWith(ROUTE_DOCUMENTATION.url)).toBe(true);
+      expect(page.url().endsWith(dokumentation.path)).toBe(true);
       await expect(dialog).toBeHidden();
     });
 
@@ -427,7 +426,7 @@ test.describe("with partial documentation started", () => {
 
       await expectAndSkipNotice(page);
 
-      await page.waitForURL(ROUTE_DOCUMENTATION_TITLE.url);
+      await page.waitForURL(dokumentation_regelungsvorhabenTitel.path);
 
       await expect(
         page.getByLabel(digitalDocumentation.info.inputTitle.label),

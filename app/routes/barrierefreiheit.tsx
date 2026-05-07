@@ -1,9 +1,9 @@
+import { barrierefreiheit } from "@/config/routes";
 import fs from "node:fs/promises";
 import { useLoaderData } from "react-router";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
-import { ROUTE_A11Y } from "~/resources/staticRoutes";
 
 export async function loader() {
   return await fs.readFile("public/markdown/barrierefreiheit.md", {
@@ -15,7 +15,7 @@ export default function Accessibility() {
   const content = useLoaderData<typeof loader>();
   return (
     <>
-      <MetaTitle prefix={ROUTE_A11Y.title} />
+      <MetaTitle prefix={barrierefreiheit.title} />
 
       <ContentWrapper>
         <RichText

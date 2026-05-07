@@ -1,3 +1,4 @@
+import { vorpruefung, vorpruefung_hinweise } from "@/config/routes";
 import { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Heading from "~/components/Heading";
@@ -6,7 +7,6 @@ import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { ROUTE_PRECHECK, ROUTE_PRECHECK_INFO } from "~/resources/staticRoutes";
 
 const { questions, generalInfo } = preCheck;
 const { headline, text, nextButton, hint } = generalInfo;
@@ -14,7 +14,7 @@ const { headline, text, nextButton, hint } = generalInfo;
 export default function GeneralInfo() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_PRECHECK_INFO.title} />
+      <MetaTitle prefix={vorpruefung_hinweise.title} />
       <Heading
         text={headline}
         tagName="h1"
@@ -35,7 +35,7 @@ export default function GeneralInfo() {
           </LinkButton>
           <LinkButton
             id={"generalInfo-back-button"}
-            to={ROUTE_PRECHECK.url}
+            to={vorpruefung.path}
             look={"tertiary"}
           >
             {general.buttonBack.text}

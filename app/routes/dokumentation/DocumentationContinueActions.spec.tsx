@@ -6,11 +6,11 @@ import "@testing-library/jest-dom";
 import { act, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+import { dokumentation_hinweise } from "@/config/routes";
 import type React from "react";
 import { MemoryRouter } from "react-router";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general.ts";
-import { ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes.ts";
 import {
   readDataFromLocalStorage,
   removeFromLocalStorage,
@@ -19,6 +19,7 @@ import { DocumentationContinueActions } from "./DocumentationContinueActions";
 import { DocumentationDataProvider } from "./DocumentationDataProvider";
 import type { DocumentationData, V1 } from "./documentationDataSchema";
 import { DATA_SCHEMA_VERSION_V1 } from "./documentationDataSchema";
+const ROUTES_DOCUMENTATION_INTRO = [{ url: dokumentation_hinweise.path }];
 
 const { mockDownloadDocumentation } = vi.hoisted(() => ({
   mockDownloadDocumentation: vi.fn(),

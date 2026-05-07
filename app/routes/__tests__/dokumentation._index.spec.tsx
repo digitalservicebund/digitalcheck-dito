@@ -2,18 +2,18 @@
 import "./utils/mockLocalStorageVersioned";
 // End of mocks
 
+import { dokumentation_hinweise } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import type React from "react";
 import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
-import {
-  ROUTE_DOCUMENTATION_TEMPLATE_WORD,
-  ROUTES_DOCUMENTATION_INTRO,
-} from "~/resources/staticRoutes";
+import { ROUTE_DOCUMENTATION_TEMPLATE_WORD } from "~/resources/staticRoutes";
 import DokumentationIndex from "~/routes/dokumentation._index";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
+
+const ROUTES_DOCUMENTATION_INTRO = [{ url: dokumentation_hinweise.path }];
 
 vi.mock("~/contexts/FeatureFlagContext", () => {
   return {
@@ -60,7 +60,7 @@ describe("Dokumentation Index Route - Integration Tests", () => {
     });
     expect(downloadButton).toHaveAttribute(
       "href",
-      ROUTE_DOCUMENTATION_TEMPLATE_WORD.url,
+      ROUTE_DOCUMENTATION_TEMPLATE_WORD,
     );
   });
 

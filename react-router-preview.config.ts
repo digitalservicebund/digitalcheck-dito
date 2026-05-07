@@ -1,6 +1,6 @@
 import type { Config } from "@react-router/dev/config";
 
-import { ROUTES } from "./app/resources/staticRoutes";
+import { allRoutes } from "./src/config/routes";
 import {
   fetchStrapiData,
   GET_PRINZIPS_QUERY,
@@ -44,7 +44,7 @@ async function getPreviewPrerenderPaths(): Promise<string[]> {
     ...regelungSlugs.map((slug) => `/beispiele/regelungen/${slug}`),
   ];
 
-  const staticPaths = ROUTES.map((r) => r.url);
+  const staticPaths = allRoutes.map((r) => r.path);
 
   return [...staticPaths, ...dynamicPaths];
 }

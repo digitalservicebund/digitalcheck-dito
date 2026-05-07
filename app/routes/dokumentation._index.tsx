@@ -1,3 +1,4 @@
+import { dokumentation } from "@/config/routes";
 import {
   ChecklistRtl,
   SimCardDownloadTwoTone,
@@ -18,10 +19,7 @@ import RichText from "~/components/RichText.tsx";
 import SupportBanner from "~/components/SupportBanner";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { supportBanner } from "~/resources/content/shared/support-banner";
-import {
-  ROUTE_DOCUMENTATION,
-  ROUTE_DOCUMENTATION_TEMPLATE_WORD,
-} from "~/resources/staticRoutes";
+import { ROUTE_DOCUMENTATION_TEMPLATE_WORD } from "~/resources/staticRoutes";
 import { DocumentationContinueActions } from "~/routes/dokumentation/DocumentationContinueActions.tsx";
 
 const { start } = digitalDocumentation;
@@ -29,7 +27,7 @@ const { start } = digitalDocumentation;
 export default function Index() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_DOCUMENTATION.title} />
+      <MetaTitle prefix={dokumentation.title} />
       <main>
         <Hero title={start.title} subtitle={start.subtitle}>
           <div className="mt-40 space-y-40">
@@ -49,8 +47,8 @@ export default function Index() {
             <div className="space-y-8">
               <RichText markdown={start.alternative.text} />
 
-              <DownloadLinkButton
-                to={ROUTE_DOCUMENTATION_TEMPLATE_WORD.url}
+              <DownloadLinkButton // TODO: replace hard-coded path & use onClick handler for client-side generation?
+                to={ROUTE_DOCUMENTATION_TEMPLATE_WORD}
                 look="link"
               >
                 {start.alternative.buttonText}

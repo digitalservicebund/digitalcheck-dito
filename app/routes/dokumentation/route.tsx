@@ -1,10 +1,12 @@
-import { Outlet, useRouteLoaderData } from "react-router";
-import type { Route as _Route } from "~/resources/staticRoutes.ts";
 import {
-  ROUTE_DOCUMENTATION,
-  ROUTES_DOCUMENTATION_FINALIZE,
-  ROUTES_DOCUMENTATION_INTRO,
-} from "~/resources/staticRoutes.ts";
+  dokumentation,
+  dokumentation_absenden,
+  dokumentation_beteiligungsformate,
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+  dokumentation_zusammenfassung,
+} from "@/config/routes";
+import { Outlet, useRouteLoaderData } from "react-router";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,
@@ -14,6 +16,31 @@ import type {
   PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.types";
 import { DocumentationDataProvider } from "./DocumentationDataProvider";
+
+type _Route = { url: string; title: string };
+
+const ROUTE_DOCUMENTATION = {
+  url: dokumentation.path,
+  title: dokumentation.title,
+};
+const ROUTES_DOCUMENTATION_INTRO: _Route[] = [
+  { url: dokumentation_hinweise.path, title: dokumentation_hinweise.title },
+  {
+    url: dokumentation_regelungsvorhabenTitel.path,
+    title: dokumentation_regelungsvorhabenTitel.title,
+  },
+  {
+    url: dokumentation_beteiligungsformate.path,
+    title: dokumentation_beteiligungsformate.title,
+  },
+];
+const ROUTES_DOCUMENTATION_FINALIZE: _Route[] = [
+  {
+    url: dokumentation_zusammenfassung.path,
+    title: dokumentation_zusammenfassung.title,
+  },
+  { url: dokumentation_absenden.path, title: dokumentation_absenden.title },
+];
 
 type Route = _Route & {
   principleId?: string;

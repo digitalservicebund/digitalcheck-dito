@@ -1,10 +1,10 @@
+import {
+  dokumentation,
+  methoden_visualisieren,
+  vorpruefung,
+} from "@/config/routes";
 import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings";
-import {
-  ROUTE_DOCUMENTATION,
-  ROUTE_METHODS_VISUALIZE,
-  ROUTE_PRECHECK,
-} from "../staticRoutes";
 
 export const fundamentalsNKR = {
   title:
@@ -42,12 +42,12 @@ export const fundamentalsNKR = {
   NKRConsiderations: {
     items: [
       dedent`
-        Ergebnis der [Vorprüfung](${ROUTE_PRECHECK.url}) als E-Mail
+        Ergebnis der [Vorprüfung](${vorpruefung.path}) als E-Mail
         - **Inhalt:**<br />Einschätzung zur Digitaltauglichkeit des Vorhabens
         - **Relevanz für den NKR:**<br />frühe Kenntnisnahme der zu überprüfenden Vorhaben
         `,
       dedent`
-        [Dokumentation](${ROUTE_DOCUMENTATION.url}) der Digitaltauglichkeit
+        [Dokumentation](${dokumentation.path}) der Digitaltauglichkeit
         - **Inhalt:**<br />Dokumentation der Digitaltauglichkeit, etwa durch die Nutzung der Prinzipien digitaltauglicher Gesetzgebung und von Visualisierungen
         - **Relevanz für den NKR:**<br />Prüfung, inwieweit die Digitalisierung bei der Erarbeitung von Ihres Vorhabes mitgedacht wird.
         `,
@@ -66,7 +66,7 @@ export const fundamentalsNKR = {
         
         Auch wenn Visualisierungen nicht verpflichtend sind, **erleichtern und beschleunigen** sie die NKR-Prüfung Ihres Vorhabens.
 
-        [Mehr zu Visualisierungen](${ROUTE_METHODS_VISUALIZE.url})
+        [Mehr zu Visualisierungen](${methoden_visualisieren.path})
       `,
     },
     infoBox2: {

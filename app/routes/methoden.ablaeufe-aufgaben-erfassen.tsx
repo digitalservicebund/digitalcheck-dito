@@ -1,8 +1,8 @@
+import { methoden_visualisieren } from "@/config/routes";
 import { Navigate } from "react-router";
-import { ROUTE_METHODS_VISUALIZE } from "~/resources/staticRoutes.ts";
 import { createRedirectLoader } from "~/utils/redirectLoader";
 
-const to = ROUTE_METHODS_VISUALIZE.url;
+const to = methoden_visualisieren.path;
 
 export const loader = createRedirectLoader(to, 308);
 

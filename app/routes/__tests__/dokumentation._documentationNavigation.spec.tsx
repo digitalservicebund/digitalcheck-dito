@@ -2,6 +2,12 @@
 import "./utils/mockLocalStorageVersioned";
 // End of mocks
 
+import {
+  dokumentation,
+  dokumentation_beteiligungsformate,
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+} from "@/config/routes";
 import "@testing-library/jest-dom";
 import { act, render, screen, within } from "@testing-library/react";
 import {
@@ -11,14 +17,6 @@ import {
   useRouteLoaderData,
 } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import type { Route } from "~/resources/staticRoutes";
-import {
-  ROUTE_DOCUMENTATION,
-  ROUTE_DOCUMENTATION_NOTES,
-  ROUTE_DOCUMENTATION_PARTICIPATION,
-  ROUTE_DOCUMENTATION_TITLE,
-  ROUTES_DOCUMENTATION_INTRO,
-} from "~/resources/staticRoutes";
 
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
@@ -53,6 +51,30 @@ vi.mock("react-router", async (importOriginal) => {
     },
   };
 });
+
+type Route = { url: string; title: string };
+
+const ROUTE_DOCUMENTATION = {
+  url: dokumentation.path,
+  title: dokumentation.title,
+};
+const ROUTE_DOCUMENTATION_NOTES = {
+  url: dokumentation_hinweise.path,
+  title: dokumentation_hinweise.title,
+};
+const ROUTE_DOCUMENTATION_TITLE = {
+  url: dokumentation_regelungsvorhabenTitel.path,
+  title: dokumentation_regelungsvorhabenTitel.title,
+};
+const ROUTE_DOCUMENTATION_PARTICIPATION = {
+  url: dokumentation_beteiligungsformate.path,
+  title: dokumentation_beteiligungsformate.title,
+};
+const ROUTES_DOCUMENTATION_INTRO: Route[] = [
+  ROUTE_DOCUMENTATION_NOTES,
+  ROUTE_DOCUMENTATION_TITLE,
+  ROUTE_DOCUMENTATION_PARTICIPATION,
+];
 
 const mockRoutes: (Route[] | Route)[] = [
   ...ROUTES_DOCUMENTATION_INTRO,

@@ -1,3 +1,4 @@
+import { vorpruefung } from "@/config/routes";
 import Container from "~/components/Container";
 import { PreCheckFAQ } from "~/components/content/PreCheckFAQ.tsx";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -13,13 +14,12 @@ import SupportBanner from "~/components/SupportBanner";
 import TabGroup from "~/components/Tabs/Tabs";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { ROUTE_PRECHECK } from "~/resources/staticRoutes";
 import { PreCheckContinueActions } from "./vorpruefung/PreCheckContinueActions";
 
 export default function Index() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_PRECHECK.title} />
+      <MetaTitle prefix={vorpruefung.title} />
       <main>
         <Hero title={preCheck.start.title} subtitle={preCheck.start.subtitle}>
           <div className="ds-stack ds-stack-16 mb-40">

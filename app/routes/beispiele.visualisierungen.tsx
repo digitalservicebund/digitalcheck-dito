@@ -1,10 +1,10 @@
+import { beispiele_visualisierungen } from "@/config/routes";
 import { useLoaderData } from "react-router";
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
 import MetaTitle from "~/components/Meta";
 import VisualisationItem from "~/components/VisualisationItem";
 import { examplesVisualisations } from "~/resources/content/beispiele-visualisierungen";
-import { ROUTE_EXAMPLES_VISUALISATIONS } from "~/resources/staticRoutes";
 import getFeatureFlag from "~/utils/featureFlags.server.ts";
 import {
   fetchStrapiData,
@@ -44,7 +44,7 @@ export default function BeispieleVisualisierungen() {
 
   return (
     <>
-      <MetaTitle prefix={ROUTE_EXAMPLES_VISUALISATIONS.title} />
+      <MetaTitle prefix={beispiele_visualisierungen.title} />
       <Hero
         title={examplesVisualisations.title}
         subtitle={examplesVisualisations.subtitle}
