@@ -27,6 +27,7 @@ import {
   DATA_SCHEMA_VERSION_V1,
   DATA_SCHEMA_VERSION_V2,
 } from "~/routes/dokumentation/documentationDataSchema";
+
 import { features } from "~/utils/featureFlags";
 import {
   readDataFromLocalStorage,
@@ -147,6 +148,7 @@ export function DocumentationDataProvider({
     // Read localStorage only on the client, after hydration, so the first
     // client render matches the SSR HTML (empty state). The lint rule is
     // overly strict for this case — see https://react.dev/learn/you-might-not-need-an-effect
+
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setDocumentationData(getInitialState(version));
   }, [version]);

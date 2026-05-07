@@ -1,3 +1,4 @@
+import { anleitungFlussdiagramm } from "@/config/downloads";
 import {
   grundlagen_normenkontrollrat,
   methoden_fuenfPrinzipien,
@@ -15,7 +16,6 @@ import {
   SupportOutlined,
   VisibilityTwoTone,
 } from "@digitalservicebund/icons";
-import { anleitungFlussdiagramm } from "@/config/downloads";
 import { assetPath } from "~/utils/assetPath";
 import type { ContentLink } from "~/utils/contentTypes";
 import { dedent } from "~/utils/dedentMultilineStrings";

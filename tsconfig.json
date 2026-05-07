@@ -20,6 +20,7 @@
     "skipLibCheck": true,
     "types": ["vite/client", "vitest/globals", "@testing-library/react"],
     "paths": {
+      "@/*": ["./src/*"],
       "~/*": ["./app/*"],
       "@/*": ["./src/*"],
       "@digitalservicebund/icons/*": [

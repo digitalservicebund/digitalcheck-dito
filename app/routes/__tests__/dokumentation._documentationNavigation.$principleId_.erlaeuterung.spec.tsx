@@ -12,9 +12,13 @@ import "@testing-library/jest-dom";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import type { UserEvent } from "@testing-library/user-event";
 import userEvent from "@testing-library/user-event";
-import { createMemoryRouter, RouterProvider, useParams } from "react-router";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useOutletContext,
+  useParams,
+} from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { DocumentationNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import type { digitalDocumentation } from "~/resources/content/dokumentation";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
@@ -108,30 +112,22 @@ const context: NavigationContext = {
   prinzips,
 };
 
+const mockedUseOutletContext = vi.mocked(useOutletContext);
 const mockedUseParams = vi.mocked(useParams);
 
 const renderWithRouter = () => {
-  const router = createMemoryRouter(
-    [
-      {
-        path: "/dokumentation/prinzip-1-digitale-angebote/erlaeuterung",
-        element: (
-          <HelpPanelProvider>
-            <DocumentationDataProvider>
-              <DocumentationNavigationContext.Provider value={context}>
-                <DocumentationPrincipleErlaeuterung />
-              </DocumentationNavigationContext.Provider>
-            </DocumentationDataProvider>
-          </HelpPanelProvider>
-        ),
-      },
-    ],
+  const router = createBrowserRouter([
     {
-      initialEntries: [
-        "/dokumentation/prinzip-1-digitale-angebote/erlaeuterung",
-      ],
+      path: "/",
+      element: (
+        <HelpPanelProvider>
+          <DocumentationDataProvider>
+            <DocumentationPrincipleErlaeuterung />
+          </DocumentationDataProvider>
+        </HelpPanelProvider>
+      ),
     },
-  );
+  ]);
 
   return render(<RouterProvider router={router} />);
 };
@@ -156,6 +152,7 @@ const mockStoredData = (
 
 describe("DocumentationPrincipleErlaeuterung", () => {
   beforeEach(() => {
+    mockedUseOutletContext.mockReturnValue(context);
     mockedUseParams.mockReturnValue({
       principleId: "prinzip-1-digitale-angebote",
     });

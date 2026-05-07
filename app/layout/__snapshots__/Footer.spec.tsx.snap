@@ -57,6 +57,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                
               <a
                 class="text-link increase-tap-area"
+                data-discover="true"
                 href="/unterstuetzung"
               >
                 <span
@@ -71,7 +72,8 @@ exports[`Footer Component > Renders correctly 1`] = `
                
               <a
                 class="text-link increase-tap-area"
-                href="/unterstuetzung/?tab=online-schulungen#angebote"
+                data-discover="true"
+                href="/unterstuetzung?tab=online-schulungen#angebote"
               >
                 <span
                   class="flex items-center"
@@ -85,6 +87,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                
               <a
                 class="text-link increase-tap-area"
+                data-discover="true"
                 href="/interoperabel/nationale-kontaktstelle"
               >
                 <span
@@ -112,6 +115,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                
               <a
                 class="text-link increase-tap-area"
+                data-discover="true"
                 href="/vorpruefung"
               >
                 <span
@@ -126,6 +130,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                
               <a
                 class="text-link increase-tap-area"
+                data-discover="true"
                 href="/methoden"
               >
                 <span
@@ -140,6 +145,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                
               <a
                 class="text-link increase-tap-area"
+                data-discover="true"
                 href="/dokumentation"
               >
                 <span
@@ -167,6 +173,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                
               <a
                 class="text-link increase-tap-area"
+                data-discover="true"
                 href="/methoden/fuenf-prinzipien"
               >
                 <span
@@ -181,6 +188,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                
               <a
                 class="text-link increase-tap-area"
+                data-discover="true"
                 href="/interoperabel"
               >
                 <span
@@ -195,6 +203,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                
               <a
                 class="text-link increase-tap-area"
+                data-discover="true"
                 href="/grundlagen/digitaltauglichkeit"
               >
                 <span
@@ -209,6 +218,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                
               <a
                 class="text-link increase-tap-area"
+                data-discover="true"
                 href="/grundlagen/normenkontrollrat"
               >
                 <span
@@ -236,6 +246,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                
               <a
                 class="text-link increase-tap-area"
+                data-discover="true"
                 href="/beispiele/prinzipien"
               >
                 <span
@@ -250,6 +261,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                
               <a
                 class="text-link increase-tap-area"
+                data-discover="true"
                 href="/beispiele/visualisierungen"
               >
                 <span
@@ -275,6 +287,7 @@ exports[`Footer Component > Renders correctly 1`] = `
              
             <a
               class="text-link increase-tap-area"
+              data-discover="true"
               href="/impressum"
             >
               <span
@@ -291,6 +304,7 @@ exports[`Footer Component > Renders correctly 1`] = `
              
             <a
               class="text-link increase-tap-area"
+              data-discover="true"
               href="/datenschutz"
             >
               <span
@@ -307,6 +321,7 @@ exports[`Footer Component > Renders correctly 1`] = `
              
             <a
               class="text-link increase-tap-area"
+              data-discover="true"
               href="/barrierefreiheit"
             >
               <span
@@ -323,6 +338,7 @@ exports[`Footer Component > Renders correctly 1`] = `
              
             <a
               class="text-link increase-tap-area"
+              data-discover="true"
               href="/sitemap"
             >
               <span
@@ -339,6 +355,7 @@ exports[`Footer Component > Renders correctly 1`] = `
              
             <a
               class="text-link increase-tap-area"
+              data-discover="true"
               href="/das-ist-neu"
             >
               <span
@@ -355,6 +372,7 @@ exports[`Footer Component > Renders correctly 1`] = `
              
             <a
               class="text-link increase-tap-area"
+              data-discover="true"
               href="/zahlen-und-fakten"
             >
               <span

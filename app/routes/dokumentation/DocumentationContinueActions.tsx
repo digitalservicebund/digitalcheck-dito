@@ -9,10 +9,16 @@ import Dialog from "~/components/Dialog.tsx";
 import RichText from "~/components/RichText.tsx";
 import { digitalDocumentation } from "~/resources/content/dokumentation.ts";
 import { general } from "~/resources/content/shared/general.ts";
+import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation.ts";
 import { useNonce } from "~/utils/nonce.ts";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
+
+const ROUTE_DOCUMENTATION_TITLE = {
+  path: dokumentation_regelungsvorhabenTitel.path,
+};
+const ROUTES_DOCUMENTATION_INTRO = [{ path: dokumentation_hinweise.path }];
 
 const { start } = digitalDocumentation;
 
@@ -49,7 +55,7 @@ function StartOverDialog({
             type="button"
             onClick={() => {
               deleteDocumentationData();
-              navigate(dokumentation_hinweise.path);
+              await navigate(ROUTES_DOCUMENTATION_INTRO[0].path);
             }}
           >
             {start.startOverDialog.actions.confirm}
@@ -83,10 +89,7 @@ export function DocumentationContinueActions({
     <ButtonContainer>
       {hasSavedDocumentation ? (
         <>
-          <LinkButton
-            to={dokumentation_regelungsvorhabenTitel.path}
-            className="js-only"
-          >
+          <LinkButton to={ROUTE_DOCUMENTATION_TITLE.path} className="js-only">
             {start.actions.resume.buttonText}
           </LinkButton>
           <StartOverDialog
@@ -95,7 +98,7 @@ export function DocumentationContinueActions({
           />
         </>
       ) : (
-        <LinkButton to={dokumentation_hinweise.path} className="js-only">
+        <LinkButton to={ROUTES_DOCUMENTATION_INTRO[0].path} className="js-only">
           {start.actions.startInitial.buttonText}
         </LinkButton>
       )}

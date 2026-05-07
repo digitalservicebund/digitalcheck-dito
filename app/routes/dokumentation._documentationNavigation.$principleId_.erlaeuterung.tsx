@@ -1,6 +1,5 @@
 import { methoden_fuenfPrinzipien } from "@/config/routes";
-import { useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router";
+import { Link, redirect, useOutletContext, useParams } from "react-router";
 import AspectPills from "~/components/AspectPills";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
@@ -11,6 +10,7 @@ import Textarea from "~/components/Textarea";
 import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
+import type { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
@@ -19,13 +19,6 @@ import type {
   Principle,
 } from "./dokumentation/documentationDataSchema";
 import { principleAnswerSchemaV2 } from "./dokumentation/documentationDataSchema";
-
-function usePrincipleId(): string | undefined {
-  const { pathname } = useLocation();
-  const parts = pathname.split("/");
-  const dokIdx = parts.indexOf("dokumentation");
-  return dokIdx >= 0 ? parts[dokIdx + 1] : undefined;
-}
 
 const { radioOptions } = digitalDocumentation.principlePages;
 

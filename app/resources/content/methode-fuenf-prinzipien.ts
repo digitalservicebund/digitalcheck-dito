@@ -1,6 +1,6 @@
+import { prinzipienPoster } from "@/config/downloads";
 import { methoden, methoden_technischeUmsetzbarkeit } from "@/config/routes";
 import { ArrowCircleRightOutlined } from "@digitalservicebund/icons";
-import { prinzipienPoster } from "@/config/downloads";
 import { assetPath } from "~/utils/assetPath";
 import type { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";

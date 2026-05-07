@@ -1,4 +1,5 @@
 import {
+  beispiele,
   beispiele_prinzipien,
   beispiele_visualisierungen,
   methoden_fuenfPrinzipien,

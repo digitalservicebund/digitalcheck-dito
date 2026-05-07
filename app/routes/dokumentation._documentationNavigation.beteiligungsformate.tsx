@@ -1,3 +1,5 @@
+import { dokumentation_beteiligungsformate } from "@/config/routes";
+import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
 import RichText from "~/components/RichText";
@@ -10,6 +12,7 @@ import {
   participationSchema,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { features } from "~/utils/featureFlags";
+import type { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";

@@ -12,9 +12,13 @@ import "@testing-library/jest-dom";
 import { act, render, screen } from "@testing-library/react";
 import type { UserEvent } from "@testing-library/user-event";
 import userEvent from "@testing-library/user-event";
-import { createMemoryRouter, RouterProvider, useParams } from "react-router";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useOutletContext,
+  useParams,
+} from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { DocumentationNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import type {
@@ -109,32 +113,29 @@ const context: NavigationContext = {
   prinzips,
 };
 
+const mockedUseOutletContext = vi.mocked(useOutletContext);
 const mockedUseParams = vi.mocked(useParams);
 
 const renderWithRouter = () => {
-  const router = createMemoryRouter(
-    [
-      {
-        path: "/dokumentation/prinzip-1-digitale-angebote",
-        element: (
-          <HelpPanelProvider>
-            <DocumentationDataProvider>
-              <DocumentationNavigationContext.Provider value={context}>
-                <DocumentationPrinciple />
-              </DocumentationNavigationContext.Provider>
-            </DocumentationDataProvider>
-          </HelpPanelProvider>
-        ),
-      },
-    ],
-    { initialEntries: ["/dokumentation/prinzip-1-digitale-angebote"] },
-  );
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <HelpPanelProvider>
+          <DocumentationDataProvider>
+            <DocumentationPrinciple />
+          </DocumentationDataProvider>
+        </HelpPanelProvider>
+      ),
+    },
+  ]);
 
   return render(<RouterProvider router={router} />);
 };
 
 describe("DocumentationPrincipleV2", () => {
   beforeEach(() => {
+    mockedUseOutletContext.mockReturnValue(context);
     mockedUseParams.mockReturnValue({
       principleId: "prinzip-1-digitale-angebote",
     });

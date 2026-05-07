@@ -4,7 +4,6 @@ import {
   methoden_fuenfPrinzipien,
   unterstuetzung,
 } from "@/config/routes";
-import { ROUTE_SUPPORT_TRAININGS } from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { getTabAnchorLink } from "~/utils/tabs";
@@ -100,7 +99,8 @@ export const spoc = {
       
       **Bereitstellung von Informationen und Austauschformaten:**  
       
-      Wir stellen Wissen bereit und bereiten das Thema verständlich auf. Dazu zählen [Schulungen](${ROUTE_SUPPORT_TRAININGS.url}) und verschiedene [Unterstützungsangebote](${unterstuetzung.path}).
+      Wir stellen Wissen bereit und bereiten das Thema verständlich auf. Dazu zählen [Schulungen](${unterstuetzung.path}?tab=online-schulungen#angebote) und verschiedene [Unterstützungsangebote](${unterstuetzung.path}).
+
 
       **Förderung von Nachnutzung, Kooperation und Zusammenarbeit:**  
       
@@ -177,7 +177,7 @@ export const spoc = {
           text: "15.05.2025",
         },
         content: dedent`
-          Die [5 Prinzipien für digitaltaugliche Gesetzgebung](${methoden_fuenfPrinzipien.path}) sind überarbeitet und entsprechen sowohl den Anforderungen der Digitaltauglichkeit als auch der Interoperabilität. 
+          Die [5 Prinzipien für digitaltaugliche Gesetzgebung](${methoden_fuenfPrinzipien.path}) sind überarbeitet und entsprechen sowohl den Anforderungen der Digitaltauglichkeit als auch der Interoperabilität.
         `,
       },
       {

@@ -1,5 +1,6 @@
 import type React from "react";
 
+import { unterstuetzung } from "@/config/routes";
 import { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";

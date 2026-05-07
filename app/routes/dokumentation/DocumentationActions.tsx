@@ -4,6 +4,7 @@ import ButtonContainer from "~/components/ButtonContainer";
 import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general";
+import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
 
 type SubmitType = {

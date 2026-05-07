@@ -1,3 +1,4 @@
+import { grundlagen_digitaltauglichkeit } from "@/config/routes";
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";

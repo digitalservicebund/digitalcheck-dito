@@ -1,3 +1,4 @@
+import { dokumentation_hinweise } from "@/config/routes";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import Button, { LinkButton } from "~/components/Button.tsx";
@@ -6,6 +7,7 @@ import Heading from "~/components/Heading";
 import RichText from "~/components/RichText.tsx";
 import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { general } from "~/resources/content/shared/general.ts";
+import type { NavigationContext } from "./dokumentation._documentationNavigation";
 
 const notes = `
 ## Datenspeicherung

@@ -1,3 +1,4 @@
+import { zahlenUndFakten } from "@/config/routes";
 import {
   LocalActivityOutlined,
   ShareOutlined,

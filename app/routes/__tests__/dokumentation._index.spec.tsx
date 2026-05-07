@@ -9,9 +9,11 @@ import type React from "react";
 import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
-import { dokumentationStaticWordV2 } from "@/config/downloads";
+import { ROUTE_DOCUMENTATION_TEMPLATE_WORD } from "~/resources/staticRoutes";
 import DokumentationIndex from "~/routes/dokumentation._index";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
+
+const ROUTES_DOCUMENTATION_INTRO = [{ path: dokumentation_hinweise.path }];
 
 vi.mock("~/contexts/FeatureFlagContext", () => {
   return {
@@ -46,7 +48,10 @@ describe("Dokumentation Index Route - Integration Tests", () => {
     const startButton = screen.getByRole("link", {
       name: "Dokumentation starten",
     });
-    expect(startButton).toHaveAttribute("href", dokumentation_hinweise.path);
+    expect(startButton).toHaveAttribute(
+      "href",
+      ROUTES_DOCUMENTATION_INTRO[0].path,
+    );
   });
 
   it("renders the Word file download button", () => {
@@ -55,7 +60,7 @@ describe("Dokumentation Index Route - Integration Tests", () => {
     });
     expect(downloadButton).toHaveAttribute(
       "href",
-      dokumentationStaticWordV2.path,
+      ROUTE_DOCUMENTATION_TEMPLATE_WORD,
     );
   });
 

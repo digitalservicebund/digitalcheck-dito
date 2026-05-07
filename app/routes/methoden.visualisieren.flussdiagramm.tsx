@@ -7,9 +7,6 @@ import {
 } from "@digitalservicebund/icons";
 import type React from "react";
 import { useRef } from "react";
-import { Link } from "react-router";
-import { twJoin } from "tailwind-merge";
-import BackToTopButton from "~/components/BackToTopButton.tsx";
 import type { BadgeProps } from "~/components/Badge.tsx";
 import Badge from "~/components/Badge.tsx";
 import Button from "~/components/Button.tsx";
@@ -23,7 +20,6 @@ import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
 import { STRAPI_MEDIA_URL } from "~/resources/constants.ts";
 import { contact } from "~/resources/content/shared/contact";
-import { anleitungFlussdiagramm } from "@/config/downloads";
 import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils.ts";

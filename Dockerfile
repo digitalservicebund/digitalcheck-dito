@@ -9,7 +9,37 @@ COPY package.json pnpm-lock.yaml /app/
 WORKDIR /app
 RUN pnpm install --frozen-lockfile --ignore-scripts
 
-COPY . /app
+# Download and install the dependencies for running the app
+FROM node:24.11.0-alpine3.22 AS production-dependencies
+
+ENV NODE_ENV=production
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable pnpm
+
+WORKDIR /src
+COPY ./package.json pnpm-lock.yaml /src/
+RUN pnpm install --frozen-lockfile --ignore-scripts --prod
+
+# Build the app
+FROM node:24.11.0-alpine3.22 AS build
+
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable pnpm
+
+# Create app directory
+WORKDIR /src
+
+# Copy the build dependencies
+COPY --from=build-dependencies /src/node_modules node_modules/
+
+# Copy root level files
+COPY package.json pnpm-lock.yaml tsconfig.json vite.config.ts ./
+COPY app/ app/
+COPY src/ src/
+COPY public/ public/
+
 RUN pnpm run build
 
 FROM nginx:1.29.8-alpine AS runtime

@@ -1,3 +1,4 @@
+import { grundlagen_normenkontrollrat } from "@/config/routes";
 import {
   FactCheckTwoTone,
   FileCopyTwoTone,

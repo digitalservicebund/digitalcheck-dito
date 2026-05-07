@@ -11,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { twJoin } from "tailwind-merge";
 
+import { vorpruefung, vorpruefung_ergebnis } from "@/config/routes";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";

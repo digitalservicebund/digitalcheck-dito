@@ -11,9 +11,8 @@ import {
 } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
+import { MemoryRouter, useOutletContext } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { DocumentationNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
 import type {
@@ -24,7 +23,7 @@ import type {
   V1,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
-import type { AbsatzWithParagraph } from "~/utils/strapiData.types.ts";
+import type { AbsatzWithParagraph } from "~/utils/strapiData.types";
 import DocumentationSummaryV1 from "../dokumentation/DocumentationSummaryV1";
 
 const MOCK_ROUTE_PRINCIPLE: Route = {
@@ -51,6 +50,8 @@ const documentationFormRoutes = routes
   .flat()
   .filter((route) => route.path !== dokumentation_hinweise.path);
 
+const mockedUseOutletContext = vi.mocked(useOutletContext);
+
 function createDocumentationDataMock({
   policyTitle,
   participation,
@@ -68,36 +69,12 @@ function createDocumentationDataMock({
   });
 }
 
-const mockNavigationContext: NavigationContext = {
-  currentUrl: "/current-url",
-  nextUrl: "/next-url",
-  previousUrl: "/previous-url",
-  routes: routes,
-  prinzips: [
-    {
-      Name: "Digitale Angebote für alle nutzbar gestalten",
-      Kurzbezeichnung: "Digitale Angebote",
-      URLBezeichnung: "prinzip-digitale-angebote",
-      documentId: "1",
-      Nummer: 1,
-      order: 1,
-      Beschreibung: [],
-      Aspekte: [],
-      Beispiel: {} as AbsatzWithParagraph,
-    },
-  ],
-};
-
 describe("DocumentationSummary", () => {
   const renderWithRouter = () => {
     return render(
       <MemoryRouter>
         <DocumentationDataProvider>
-          <DocumentationNavigationContext.Provider
-            value={mockNavigationContext}
-          >
-            <DocumentationSummaryV1 />
-          </DocumentationNavigationContext.Provider>
+          <DocumentationSummaryV1 />
         </DocumentationDataProvider>
       </MemoryRouter>,
     );
@@ -114,6 +91,27 @@ describe("DocumentationSummary", () => {
 
   beforeEach(() => {
     vi.mocked(readDataFromLocalStorage).mockReturnValue(mockDocumentationData);
+
+    const context: NavigationContext = {
+      currentUrl: "/current-url",
+      nextUrl: "/next-url",
+      previousUrl: "/previous-url",
+      routes: routes,
+      prinzips: [
+        {
+          Name: "Digitale Angebote für alle nutzbar gestalten",
+          Kurzbezeichnung: "Digitale Angebote",
+          URLBezeichnung: "prinzip-digitale-angebote",
+          documentId: "1",
+          Nummer: 1,
+          order: 1,
+          Beschreibung: [],
+          Aspekte: [],
+          Beispiel: {} as AbsatzWithParagraph,
+        },
+      ],
+    };
+    mockedUseOutletContext.mockReturnValue(context);
   });
 
   afterEach(() => {

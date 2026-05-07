@@ -1,3 +1,4 @@
+import { impressum } from "@/config/routes";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Hero from "~/components/Hero";
 import RichText from "~/components/RichText";

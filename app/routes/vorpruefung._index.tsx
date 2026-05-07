@@ -1,3 +1,4 @@
+import { vorpruefung } from "@/config/routes";
 import Container from "~/components/Container";
 import { PreCheckFAQ } from "~/components/content/PreCheckFAQ.tsx";
 import DetailsSummary from "~/components/DetailsSummary";

@@ -7,8 +7,8 @@ function getActionParams(request: Request) {
     context: {},
     params: {},
     request,
-    unstable_pattern: "/handle-client-side-error",
-    unstable_url: new URL(request.url),
+    pattern: "/handle-client-side-error",
+    url: new URL(request.url),
   };
 }
 

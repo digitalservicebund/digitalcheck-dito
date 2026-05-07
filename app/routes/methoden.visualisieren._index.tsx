@@ -1,3 +1,4 @@
+import { methoden_visualisieren } from "@/config/routes";
 import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";

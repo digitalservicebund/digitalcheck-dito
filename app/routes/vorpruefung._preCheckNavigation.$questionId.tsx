@@ -2,6 +2,7 @@ import { vorpruefung } from "@/config/routes";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
+import { vorpruefung } from "@/config/routes";
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -10,11 +11,18 @@ import InlineNotice from "~/components/InlineNotice";
 import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
+import { preCheckQuestions } from "~/resources/content/shared/pre-check-questions";
 import { preCheck } from "~/resources/content/vorpruefung";
+import type { Route } from "./+types/vorpruefung._preCheckNavigation.$questionId";
 import { usePreCheckData, useSyncedForm } from "./vorpruefung/preCheckDataHook";
 import type { PreCheckAnswerSchema } from "./vorpruefung/preCheckDataSchema";
 import { answerSchema } from "./vorpruefung/preCheckDataSchema";
 import { addOrUpdateAnswer } from "./vorpruefung/preCheckDataService";
+
+const ROUTES_PRECHECK_QUESTIONS = Object.values(preCheckQuestions).map((q) => ({
+  path: q.path,
+  title: `${q.title} — Vorprüfung`,
+}));
 
 const { questions, answerOptions, nextButton } = preCheck;
 
@@ -113,7 +121,7 @@ export default function Index({
       firstUnansweredQuestionIndex !== null &&
       questionIdx > firstUnansweredQuestionIndex
     ) {
-      navigate(questions[firstUnansweredQuestionIndex].path);
+      void navigate(questions[firstUnansweredQuestionIndex].path);
     }
   }, [firstUnansweredQuestionIndex, navigate, questionIdx]);
 

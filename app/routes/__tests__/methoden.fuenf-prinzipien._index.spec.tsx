@@ -1,16 +1,24 @@
 import { render, screen, within } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
-import { beforeEach, describe, expect, it } from "vitest";
+import { MemoryRouter, useLoaderData } from "react-router";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import FivePrinciples from "~/routes/methoden.fuenf-prinzipien._index/route";
 import type { Node } from "~/utils/paragraphUtils";
-import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
-const mockPrinzipsData: PrinzipWithAspekteAndExample[] = [
+// Mock react-router's useLoaderData hook, which is used by the component
+// to get data from its server-side loader.
+vi.mock("react-router", async (importOriginal) => {
+  const original = await importOriginal<typeof import("react-router")>();
+  return {
+    ...original,
+    useLoaderData: vi.fn(),
+  };
+});
+
+// Create mock data that simulates the data structure returned by the loader.
+// This includes a principle with a full example and one without to test conditional rendering.
+const mockPrinzipsData = [
   {
-    documentId: "doc-1",
-    Kurzbezeichnung: "Nutzerfreundlichkeit",
-    URLBezeichnung: "nutzerfreundlichkeit",
     Name: "Prinzip Test 1: Nutzerfreundlichkeit",
     Beschreibung: [
       {
@@ -23,10 +31,6 @@ const mockPrinzipsData: PrinzipWithAspekteAndExample[] = [
     Aspekte: [
       {
         Titel: "Anwendung 1.1",
-        Kurzbezeichnung: "1.1",
-        Beschreibung: "",
-        Nummer: "1.1",
-        Anwendung: [],
         Text: [
           {
             type: "paragraph",
@@ -41,16 +45,13 @@ const mockPrinzipsData: PrinzipWithAspekteAndExample[] = [
               type: "paragraph",
               children: [{ type: "text", text: "Anwendung Beispieltext." }],
             },
-          ] as Node[],
+          ],
           PrinzipErfuellungen: [],
+
           Paragraph: {
-            Nummer: 99,
+            Nummer: "99",
             Gesetz: "AnwG",
             Titel: "Titel des Anwendungs-Paragraphen",
-            Beispielvorhaben: {
-              URLBezeichnung: "anwendung-regelung",
-              Titel: "Anwendung-Regelungsvorhaben",
-            },
           },
         },
       },
@@ -68,10 +69,11 @@ const mockPrinzipsData: PrinzipWithAspekteAndExample[] = [
             },
           ],
         },
-      ] as Node[],
+      ],
       PrinzipErfuellungen: [],
+
       Paragraph: {
-        Nummer: 42,
+        Nummer: "42",
         Gesetz: "TestG",
         Titel: "Titel des Test-Paragraphen",
         Beispielvorhaben: {
@@ -82,9 +84,6 @@ const mockPrinzipsData: PrinzipWithAspekteAndExample[] = [
     },
   },
   {
-    documentId: "doc-2",
-    Kurzbezeichnung: "Datenminimierung",
-    URLBezeichnung: "datenminimierung",
     Name: "Prinzip Test 2: Datenminimierung",
     Beschreibung: [
       {
@@ -100,31 +99,23 @@ const mockPrinzipsData: PrinzipWithAspekteAndExample[] = [
     ] as Node[],
     order: 2,
     Nummer: 2 as const,
-    Aspekte: [],
-    Beispiel: {
-      documentId: "doc-2-beispiel",
-      Nummer: 1,
-      Text: [] as Node[],
-      PrinzipErfuellungen: [],
-      Paragraph: {
-        Nummer: 1,
-        Gesetz: "TestG",
-        Titel: "Titel des Test-Paragraphen",
-        Beispielvorhaben: {
-          URLBezeichnung: "test-regelung-2",
-          Titel: "Titel des Test-Regelungsvorhabens 2",
-        },
-      },
-    },
+    Aspekte: [], // No application examples
+    // No Example paragraph
   },
 ];
 
 describe("FivePrinciples Route - Integration Tests", () => {
   beforeEach(() => {
+    // Provide the mock data to the component via the mocked hook
+    vi.mocked(useLoaderData).mockReturnValue({
+      prinzips: mockPrinzipsData,
+      useNewPrinciples: true,
+    });
+
     // Render the component within a router to handle <Link> components
     render(
       <MemoryRouter>
-        <FivePrinciples prinzips={mockPrinzipsData} />
+        <FivePrinciples />
       </MemoryRouter>,
     );
   });

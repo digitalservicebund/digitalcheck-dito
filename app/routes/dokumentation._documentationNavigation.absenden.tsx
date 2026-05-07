@@ -1,3 +1,4 @@
+import { dokumentation_absenden } from "@/config/routes";
 import { EmojiEventsOutlined as EmojiEventsOutlinedIcon } from "@digitalservicebund/icons";
 import { DownloadButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
@@ -8,6 +9,8 @@ import RichText from "~/components/RichText";
 import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
+import type { NavigationContext } from "./dokumentation._documentationNavigation";
+
 const { finish } = digitalDocumentation;
 
 export default function DocumentationSend() {
@@ -29,6 +32,8 @@ export default function DocumentationSend() {
           look="highlight"
           className="bg-white"
           heading={{
+            tagName: "h2",
+            look: "ds-heading-03-reg",
             text: finish.download.heading,
           }}
         >
@@ -45,6 +50,8 @@ export default function DocumentationSend() {
           look="highlight"
           className="bg-white"
           heading={{
+            tagName: "h2",
+            look: "ds-heading-03-reg",
             text: finish.send.heading,
           }}
         >
@@ -52,6 +59,8 @@ export default function DocumentationSend() {
         </InfoBox>
         <InfoBox
           heading={{
+            tagName: "h2",
+            look: "ds-heading-03-reg",
             text: finish.done,
           }}
           visual={{

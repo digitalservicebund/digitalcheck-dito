@@ -1,5 +1,7 @@
-import type { Route } from "@/config/routes";
+import { useLoaderData } from "react-router";
+
 import {
+  allRoutes,
   methoden_itSystemeErfassen,
   methoden_technischeUmsetzbarkeit,
   methoden_zustaendigeAkteurinnenAuflisten,
@@ -16,23 +18,40 @@ import { methodsITSystems } from "~/resources/content/methode-it-systeme-erfasse
 import { methodsTechnicalFeasibility } from "~/resources/content/methode-technische-umsetzbarkeit";
 import { methodsResponsibleActors } from "~/resources/content/methode-zustaendige-akteurinnen-auflisten";
 import { interviewBanner } from "~/resources/content/shared/interview-banner";
+import type { Route } from "./+types/methoden.$subPage";
 
-const contentMap: Record<
-  string,
-  | typeof methodsResponsibleActors
-  | typeof methodsITSystems
-  | typeof methodsTechnicalFeasibility
-> = {
+const contentMap = {
   [methoden_zustaendigeAkteurinnenAuflisten.title]: methodsResponsibleActors,
   [methoden_itSystemeErfassen.title]: methodsITSystems,
   [methoden_technischeUmsetzbarkeit.title]: methodsTechnicalFeasibility,
 };
 
-export default function Index({ route: propRoute }: { route?: Route } = {}) {
-  const route = propRoute;
-  if (!route) return null;
+export function loader({ params }: Route.LoaderArgs) {
+  const { subPage } = params;
+  if (!subPage) {
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
+    throw new Response("Method page not found", {
+      status: 404,
+      statusText: "Not Found",
+    });
+  }
+
+  const route = allRoutes.find((route) => route.path.endsWith(subPage));
+  if (!route || !contentMap[route.title as keyof typeof contentMap]) {
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
+    throw new Response("Method page not found", {
+      status: 404,
+      statusText: "Not Found",
+    });
+  }
+
+  return { route };
+}
+
+export default function Index() {
+  const { route } = useLoaderData<typeof loader>();
   // We have to get the content here to use the icons from the content file
-  const content = contentMap[route.title];
+  const content = contentMap[route.title as keyof typeof contentMap];
 
   return (
     <>

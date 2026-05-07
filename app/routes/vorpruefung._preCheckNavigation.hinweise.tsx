@@ -1,4 +1,4 @@
-import { vorpruefung } from "@/config/routes";
+import { vorpruefung, vorpruefung_hinweise } from "@/config/routes";
 import { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import Heading from "~/components/Heading";

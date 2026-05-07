@@ -1,5 +1,5 @@
 import type React from "react";
-// removed react-router imports
+import { useLoaderData, useOutletContext } from "react-router";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Heading from "~/components/Heading";
@@ -21,9 +21,7 @@ import {
 } from "~/utils/strapiData.server";
 import type {
   Beispielvorhaben,
-  Digitalcheck,
   PrinzipWithBeispielvorhaben,
-  Visualisierung,
 } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
 

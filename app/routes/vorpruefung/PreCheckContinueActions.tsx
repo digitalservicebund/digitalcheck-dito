@@ -33,7 +33,7 @@ function StartOverDialog() {
             type="button"
             onClick={async () => {
               deletePreCheckData();
-              navigate(vorpruefung_hinweise.path);
+              await navigate(vorpruefung_hinweise.path);
             }}
           >
             {preCheck.startOver.confirm}

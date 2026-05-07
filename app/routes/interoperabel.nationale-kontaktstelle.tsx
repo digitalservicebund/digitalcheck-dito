@@ -1,3 +1,4 @@
+import { interoperabel_nationaleKontaktstelle } from "@/config/routes";
 import type { ReactNode } from "react";
 import AccordionItem from "~/components/AccordionItem";
 import Badge from "~/components/Badge.tsx";

@@ -1,11 +1,11 @@
-import type { Route } from "@/config/routes";
 import {
   dokumentation_beteiligungsformate,
   dokumentation_regelungsvorhabenTitel,
+  dokumentation_zusammenfassung,
 } from "@/config/routes";
 import { isArray } from "@posthog/core";
 import type { ReactNode } from "react";
-import { Link } from "react-router";
+import { Link, useOutletContext } from "react-router";
 import type { BadgeProps } from "~/components/Badge";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
@@ -25,8 +25,24 @@ import type {
 } from "~/routes/dokumentation/documentationDataSchema";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
+import type { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationActions from "./DocumentationActions";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
+
+type Route = { path: string; title: string };
+
+const ROUTE_DOCUMENTATION_TITLE: Route = {
+  path: dokumentation_regelungsvorhabenTitel.path,
+  title: dokumentation_regelungsvorhabenTitel.title,
+};
+const ROUTE_DOCUMENTATION_PARTICIPATION: Route = {
+  path: dokumentation_beteiligungsformate.path,
+  title: dokumentation_beteiligungsformate.title,
+};
+const ROUTE_DOCUMENTATION_SUMMARY: Route = {
+  path: dokumentation_zusammenfassung.path,
+  title: dokumentation_zusammenfassung.title,
+};
 
 const { summary } = digitalDocumentation;
 

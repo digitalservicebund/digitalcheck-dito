@@ -1,4 +1,4 @@
-import { interoperabel_faq } from "@/config/routes";
+import { interoperabel, interoperabel_faq } from "@/config/routes";
 import { QuizOutlined as QuizIcon } from "@digitalservicebund/icons";
 import { Link } from "react-router";
 import { LinkButton } from "~/components/Button";

@@ -1,52 +1,65 @@
-import { expect, test } from "@playwright/test";
 import {
-  ROUTE_EXAMPLES,
-  ROUTE_EXAMPLES_AUTOMATION,
-  ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY,
-  ROUTE_EXAMPLES_DIGITAL_COMMUNICATION,
-  ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS,
-  ROUTE_LANDING,
-  ROUTE_METHODS,
-  ROUTE_METHODS_COLLECT_IT_SYSTEMS,
-  ROUTE_METHODS_PRINCIPLES,
-  ROUTE_METHODS_RESPONSIBLE_ACTORS,
-  ROUTE_METHODS_TECHNICAL_FEASIBILITY,
-} from "~/resources/staticRoutes";
+  beispiele,
+  methoden,
+  methoden_fuenfPrinzipien,
+  methoden_itSystemeErfassen,
+  methoden_technischeUmsetzbarkeit,
+  methoden_zustaendigeAkteurinnenAuflisten,
+} from "@/config/routes";
+import { expect, test } from "@playwright/test";
+
+const ROUTE_LANDING = "/";
+const ROUTE_EXAMPLES = beispiele.path;
+const ROUTE_EXAMPLES_DIGITAL_COMMUNICATION =
+  "/beispiele/prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten";
+const ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS =
+  "/beispiele/prinzipien/datenwiederverwendung-benoetigt-einheitliches-recht";
+const ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY =
+  "/beispiele/prinzipien/datenschutz-und-informationssicherheit-schaffen-vertrauen";
+const ROUTE_EXAMPLES_AUTOMATION =
+  "/beispiele/prinzipien/automatisierung-basiert-auf-eindeutigen-regelungen";
+const ROUTE_METHODS = methoden.path;
+const ROUTE_METHODS_PRINCIPLES = methoden_fuenfPrinzipien.path;
+const ROUTE_METHODS_COLLECT_IT_SYSTEMS = methoden_itSystemeErfassen.path;
+const ROUTE_METHODS_RESPONSIBLE_ACTORS =
+  methoden_zustaendigeAkteurinnenAuflisten.path;
+const ROUTE_METHODS_TECHNICAL_FEASIBILITY =
+  methoden_technischeUmsetzbarkeit.path;
 
 test.describe("five principles page", () => {
   test.fixme("five principles conditional next step is accurate", async ({
     page,
   }) => {
-    await page.goto(ROUTE_LANDING.url);
+    await page.goto(ROUTE_LANDING);
 
     await page.getByRole("link", { name: "Details und Beispiele" }).click();
-    await expect(page).toHaveURL(ROUTE_METHODS_PRINCIPLES.url);
+    await expect(page).toHaveURL(ROUTE_METHODS_PRINCIPLES);
 
     await expect(page.getByRole("main")).toContainText(
       "Vorprüfung: Digitalbezug einschätzen",
     );
     await page.getByRole("link", { name: "Digitalbezug einschätzen" }).click();
-    await expect(page).toHaveURL(ROUTE_LANDING.url);
+    await expect(page).toHaveURL(ROUTE_LANDING);
 
     await page.getByRole("link", { name: "Zu „Erarbeiten“" }).click();
-    await expect(page).toHaveURL(ROUTE_METHODS.url);
+    await expect(page).toHaveURL(ROUTE_METHODS);
 
     await page.getByRole("link", { name: "Fünf Prinzipien nutzen" }).click();
-    await expect(page).toHaveURL(ROUTE_METHODS_PRINCIPLES.url);
+    await expect(page).toHaveURL(ROUTE_METHODS_PRINCIPLES);
 
     await expect(page.getByRole("main")).toContainText(
       "Technische Umsetzbarkeit sicherstellen",
     );
     await page.getByRole("link", { name: "IT-Auswirkungen prüfen" }).click();
-    await expect(page).toHaveURL(ROUTE_METHODS_TECHNICAL_FEASIBILITY.url);
+    await expect(page).toHaveURL(ROUTE_METHODS_TECHNICAL_FEASIBILITY);
   });
 
   [
-    ROUTE_EXAMPLES.url,
-    ROUTE_EXAMPLES_DIGITAL_COMMUNICATION.url,
-    ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS.url,
-    ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY.url,
-    ROUTE_EXAMPLES_AUTOMATION.url,
+    ROUTE_EXAMPLES,
+    ROUTE_EXAMPLES_DIGITAL_COMMUNICATION,
+    ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS,
+    ROUTE_EXAMPLES_DATA_PROTECTION_AND_INFORMATION_SECURITY,
+    ROUTE_EXAMPLES_AUTOMATION,
   ].forEach((url, index) => {
     test.fixme(`five principles page ${url} links to examples`, async ({
       page,
@@ -56,7 +69,7 @@ test.describe("five principles page", () => {
       // retries to prevent flakiness for firefox
       while (attempt < 3) {
         try {
-          await page.goto(ROUTE_METHODS_PRINCIPLES.url, {
+          await page.goto(ROUTE_METHODS_PRINCIPLES, {
             waitUntil: "domcontentloaded",
           });
 
@@ -87,7 +100,7 @@ test.describe("five principles page", () => {
 
 test.describe("method sub page downloads", () => {
   test("responsible actors excel spreadsheet", async ({ page }) => {
-    await page.goto(ROUTE_METHODS_RESPONSIBLE_ACTORS.url);
+    await page.goto(ROUTE_METHODS_RESPONSIBLE_ACTORS);
 
     const downloadPromise = page.waitForEvent("download");
     await page.getByRole("link", { name: "Vorlage herunterladen" }).click();
@@ -96,7 +109,7 @@ test.describe("method sub page downloads", () => {
   });
 
   test("it-systems excel spreadsheet", async ({ page }) => {
-    await page.goto(ROUTE_METHODS_COLLECT_IT_SYSTEMS.url);
+    await page.goto(ROUTE_METHODS_COLLECT_IT_SYSTEMS);
 
     const downloadPromise = page.waitForEvent("download");
     await page.getByRole("link", { name: "Vorlage herunterladen" }).click();
@@ -105,7 +118,7 @@ test.describe("method sub page downloads", () => {
   });
 
   test("technical feasibility pdf document", async ({ page }) => {
-    await page.goto(ROUTE_METHODS_TECHNICAL_FEASIBILITY.url);
+    await page.goto(ROUTE_METHODS_TECHNICAL_FEASIBILITY);
 
     const downloadPromise = page.waitForEvent("download");
     await page.getByRole("link", { name: "Vorlage herunterladen" }).click();

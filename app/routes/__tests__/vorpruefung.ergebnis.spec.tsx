@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
+import { dokumentation, interoperabel, methoden } from "@/config/routes";
 import { preCheck } from "~/resources/content/vorpruefung";
 import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import Result from "~/routes/vorpruefung.ergebnis/route";

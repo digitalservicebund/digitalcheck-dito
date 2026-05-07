@@ -158,8 +158,14 @@ export default function InteroperableSolutionsDcatAp() {
                 </li>
 
                 <li>
-                  <strong>Wo gibt es Hilfe?</strong> Beim DigitalService /
-                  Nationale Kontaktstelle für Interoperabilität.
+                  <strong>Wo gibt es Hilfe?</strong> Bei der{" "}
+                  <a
+                    className="text-link"
+                    href="mailto:interoperabilitaet@zfl.bund.de"
+                  >
+                    Nationalen Kontaktstelle für Interoperabilität
+                  </a>{" "}
+                  (DigitalService).
                 </li>
               </ul>
             </InfoBox>
@@ -473,22 +479,11 @@ export default function InteroperableSolutionsDcatAp() {
                   übersetzen zu müssen.
                 `}
               </AccordionItem>
-              <AccordionItem
-                headline={
-                  <>
-                    <NewTabLink
-                      to={
-                        "https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/blog/2017/09/19/533365899/Business+Register+Interconnection+System+BRIS"
-                      }
-                    >
-                      BRIS
-                    </NewTabLink>{" "}
-                    (Business Registers Interconnection System)
-                  </>
-                }
-              >
+              <AccordionItem headline="BRIS (Business Registers Interconnection System)">
                 <RichText
                   markdown={dedent`
+                **[BRIS](https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/blog/2017/09/19/533365899/Business+Register+Interconnection+System+BRIS) (Business Registers Interconnection System)**
+
                 Wenn Sie als Legistin oder Legist eine Regelung erarbeiten, die die
                 Überprüfung von Unternehmen vorschreibt – etwa bei der Vergabe
                 öffentlicher Aufträge, bei der Vergabe von Fördermitteln oder der

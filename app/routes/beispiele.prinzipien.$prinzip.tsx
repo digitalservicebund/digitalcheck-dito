@@ -1,6 +1,5 @@
 import { beispiele_prinzipien } from "@/config/routes";
-import { Link } from "react-router";
-
+import { Link, useLoaderData, useOutletContext } from "react-router";
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Heading from "~/components/Heading";
@@ -12,7 +11,13 @@ import Separator from "~/components/Separator";
 import RouteTabs from "~/components/Tabs/RouteTabs";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
+import {
+  fetchStrapiData,
+  paragraphFields,
+  prinzipCoreFields,
+} from "~/utils/strapiData.server";
 import type { PrinzipWithBeispielvorhaben } from "~/utils/strapiData.types";
+import type { Route } from "./+types/beispiele.prinzipien.$prinzip";
 
 export default function DigitaltauglichkeitPrinzipienDetail({
   prinzip,
@@ -71,7 +76,7 @@ export default function DigitaltauglichkeitPrinzipienDetail({
                     />
 
                     <Link
-                      to={`${ROUTE_REGELUNGEN.url}/${exampleProject.URLBezeichnung}`}
+                      to={`${ROUTE_REGELUNGEN}/${exampleProject.URLBezeichnung}`}
                       prefetch="viewport"
                       className="text-link"
                     >

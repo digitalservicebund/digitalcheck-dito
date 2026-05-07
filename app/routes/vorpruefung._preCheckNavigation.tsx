@@ -3,6 +3,7 @@ import { useLocation } from "react-router";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { preCheck } from "~/resources/content/vorpruefung";
+import type { loader as preCheckQuestionLoader } from "./vorpruefung._preCheckNavigation.$questionId";
 import { usePreCheckData } from "./vorpruefung/preCheckDataHook";
 
 const { questions } = preCheck;
@@ -51,7 +52,9 @@ export default function LayoutWithPreCheckNavigation({
             firstUnansweredQuestionIndex={firstUnansweredQuestionIndex ?? 0}
           />
         )}
-        <main>{children}</main>
+        <main>
+          <Outlet key={question?.path} />
+        </main>
       </div>
     </div>
   );

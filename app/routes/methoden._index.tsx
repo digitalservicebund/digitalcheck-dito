@@ -1,4 +1,5 @@
-import { Link } from "react-router";
+import { methoden } from "@/config/routes";
+import { Link, useLoaderData } from "react-router";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";

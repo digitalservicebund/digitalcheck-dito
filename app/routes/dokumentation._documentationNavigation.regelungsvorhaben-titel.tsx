@@ -1,3 +1,5 @@
+import { dokumentation_regelungsvorhabenTitel } from "@/config/routes";
+import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
 import Input from "~/components/Input";
@@ -7,6 +9,7 @@ import {
   defaultTitleValues,
   policyTitleSchema,
 } from "~/routes/dokumentation/documentationDataSchema";
+import type { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";

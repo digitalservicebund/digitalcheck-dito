@@ -2,6 +2,7 @@ import { useLocation } from "react-router";
 import { useNavigationContext } from "~/contexts/DocumentationNavigationContext";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { features } from "~/utils/featureFlags";
+import type { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationPrincipleV1 from "./dokumentation/DocumentationPrincipleV1";
 import DocumentationPrincipleV2 from "./dokumentation/DocumentationPrincipleV2";
 
