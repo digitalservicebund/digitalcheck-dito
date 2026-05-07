@@ -11,10 +11,13 @@ const defaultValues: EuInteroperabilityOutcome = {
 };
 
 const options = [
-  { value: "REQUIRED", label: "Ja, eine Bewertung ist erforderlich." },
+  {
+    value: "REQUIRED",
+    label: "Ja, Bezug zu EU-Interoperabilität ist vorhanden.",
+  },
   {
     value: "NOT_REQUIRED_INDICATES_PRECHECK",
-    label: "Nein, eine Bewertung ist nicht erforderlich.",
+    label: "Nein, es ist kein Bezug vorhanden.",
   },
 ] as const;
 

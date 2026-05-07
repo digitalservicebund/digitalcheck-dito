@@ -15,7 +15,6 @@ import {
   defaultTitleValues,
   policyHeaderSchema,
 } from "~/routes/dokumentation/documentationDataSchema";
-import { markdownCiteIEA } from "~/routes/dokumentation/interoperability/euInteroperabilityFlow.tsx";
 import EuInteroperabilityOutcomeForm from "~/routes/dokumentation/interoperability/EuInteroperabilityOutcomeForm.tsx";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
@@ -69,7 +68,8 @@ export default function DocumentationTitle() {
           <h2 className={"ds-heading-03-reg"}>Bezug zu EU-Interoperabilität</h2>
           <RichText
             markdown={dedent`
-          Ergab die Vorprüfung, dass nach ${markdownCiteIEA(3, undefined, true)} eine Interoperabilitätsbewertung durchgeführt werden muss?
+          Ergab die Vorprüfung Bezug zu EU-Interoperabilität?
+          
           `}
           />
           <EuInteroperabilityOutcomeForm />
@@ -78,7 +78,7 @@ export default function DocumentationTitle() {
             look={"link"}
             onClick={() => setShowExtendedForm(!showExtendedForm)}
           >
-            Fragebogen zu Interoperabilitätsbezug{" "}
+            Fragebogen zu Interoperabilitätsbewertung{" "}
             {showExtendedForm ? "schließen" : "öffnen"}
           </Button>
           {showExtendedForm && (
