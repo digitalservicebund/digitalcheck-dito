@@ -46,8 +46,14 @@ export default defineConfig({
       },
     },
   },
-  trailingSlash: "never",
   build: {
     assets: "_astro",
   },
+  prefetch: {
+    prefetchAll: true,
+  },
+  security: {
+    csp: false,
+  },
+  trailingSlash: "never",
 });
