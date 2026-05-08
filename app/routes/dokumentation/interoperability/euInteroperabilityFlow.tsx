@@ -54,11 +54,15 @@ export function linkToIEAArticle(index?: number) {
   return `${base}#art_${index}`;
 }
 
-export function markdownCiteIEA(
-  article: number,
-  paragraph?: number,
-  longForm?: boolean,
-) {
+export function markdownCiteIEA({
+  article,
+  paragraph,
+  format = "short",
+}: {
+  article: number;
+  paragraph?: number;
+  format?: "short" | "long";
+}) {
   let text = `Art. ${article}`;
   if (paragraph) {
     const paragraphName = article === 2 ? "Nr." : "Abs.";
@@ -66,10 +70,9 @@ export function markdownCiteIEA(
   }
 
   text +=
-    " " +
-    (longForm
-      ? "der Verordnung für ein interoperables Europa (EU) 2024/903"
-      : "IEA");
+    format === "long"
+      ? " der Verordnung für ein interoperables Europa (EU) 2024/903"
+      : "";
   return `[${text}](${linkToIEAArticle(article)})`;
 }
 
@@ -80,7 +83,7 @@ export const EU_INTEROPERABILITY_QUESTIONS: Record<
   serviceProvidedByPublicOrUnionEntity: {
     id: "serviceProvidedByPublicOrUnionEntity",
     text: "Betrifft Ihre Regelung einen digitalen öffentlichen Dienst?",
-    details: `Siehe ${markdownCiteIEA(2, 2)}. Relevant sind hier nur neue oder geänderte Teile der Regelung.`,
+    details: `Siehe ${markdownCiteIEA({ article: 2, paragraph: 2 })}. Relevant sind hier nur neue oder geänderte Teile der Regelung.`,
     next: {
       Ja: "serviceProvidedInEuContext",
       Nein: "NOT_REQUIRED_NOT_PROVIDED_BY_PUBLIC_OR_UNION_ENTITY",
@@ -133,7 +136,7 @@ export const EU_INTEROPERABILITY_OUTCOMES: Record<
     description: (
       <RichText
         markdown={dedent`
-          Sie sind gemäß ${markdownCiteIEA(3)} verpflichtet, eine Interoperabilitätsbewertung
+          Sie sind gemäß ${markdownCiteIEA({ article: 3 })} verpflichtet, eine Interoperabilitätsbewertung
           durchzuführen und an die entsprechenden Stellen zu übermitteln.
 
           Nutzen Sie hierfür die folgenden Schritte. Senden Sie die resultierende Dokumentation

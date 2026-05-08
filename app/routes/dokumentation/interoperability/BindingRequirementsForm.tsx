@@ -68,7 +68,13 @@ export default function BindingRequirementsForm({
 
             Für Sie bedeutet das, dass Sie grenzüberschreitende Auswirkungen eines Regelungsvorhaben einschätzen müssen, bevor die Regelung geschrieben wird. Denn Sie legen verbindliche Anforderungen fest, die geltendes Recht werden.
 
-            Bitte dokumentieren Sie in diesem Schritt alle Teile Ihrer Regelung, die verbindliche Anforderungen i. S. v. ${markdownCiteIEA(2, 15, true)} definieren sowie digitale transeuropäische Dienste, die von diesen Anforderungen betroffen sind.
+            Bitte dokumentieren Sie in diesem Schritt alle Teile Ihrer Regelung, die verbindliche Anforderungen i. S. v. ${markdownCiteIEA(
+              {
+                article: 2,
+                paragraph: 15,
+                format: "long",
+              },
+            )} definieren sowie digitale transeuropäische Dienste, die von diesen Anforderungen betroffen sind.
         `}
         />
       ),
@@ -87,7 +93,7 @@ export default function BindingRequirementsForm({
               <RichText
                 markdown={dedent`
                   Eine Definition von verbindlichen Anforderungen finden Sie <a href="/interoperabel?tab=hintergrund" target="_blank">hier</a>.
-                  Diese bezieht sich auf ${markdownCiteIEA(2, 15, true)}.
+                  Diese bezieht sich auf ${markdownCiteIEA({ article: 2, paragraph: 15, format: "long" })}.
             `}
               />
             </HelpButton>
@@ -144,7 +150,7 @@ export default function BindingRequirementsForm({
                         <RichText
                           markdown={dedent`
                           Geben Sie hier an, welche Dienste im Sinne von
-                          ${markdownCiteIEA(2, 2)} durch die verbindliche Anforderung betroffen sind.
+                          ${markdownCiteIEA({ article: 2, paragraph: 2 })} durch die verbindliche Anforderung betroffen sind.
                           
                           Beispiele: 
                           - Austausch von Dokumenten zu internationalen Warenlieferungen

@@ -17,7 +17,7 @@ const helpText = `
 
 Sofern durch Ihre Regelung vorgesehen ist, dass Daten und Informationen zwischen
 Verwaltungen von EU-Mitgliedsstaaten ausgetauscht werden, muss nach
-${markdownCiteIEA(3, undefined, true)} in der Regel
+${markdownCiteIEA({ article: 3, format: "long" })} in der Regel
 eine Interoperabilitätsbewertung durchgeführt werden.
 
 Sollte sich nach den Bestimmungen der Verordnung dennoch keine Verpflichtung zu
