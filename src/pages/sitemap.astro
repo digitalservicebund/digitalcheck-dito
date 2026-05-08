@@ -1,0 +1,44 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SitemapList from "@/components/SitemapList.astro";
+import ContentWrapper from "~/components/ContentWrapper.tsx";
+import Hero from "~/components/Hero";
+import { allRoutes, type Route } from "@/config/routes";
+
+export const frontmatter = {
+  title: "Sitemap",
+};
+
+type RouteWithChildren = Route & { children: RouteWithChildren[] };
+
+const groupRoutesByParent = (routes: readonly Route[]): RouteWithChildren[] => {
+  const routeMap = new Map<string, RouteWithChildren>(
+    routes.map((route) => [route.path, { ...route, children: [] }]),
+  );
+
+  routes.forEach((route) => {
+    if (!route.sitemap) return;
+    // Top-level pages (parent: null, path !== "/") are treated as children of home,
+    // mirroring the old behaviour where home was the implicit root parent.
+    const parentPath = route.parent?.path ?? (route.path !== "/" ? "/" : null);
+    if (!parentPath) return;
+    const parentRoute = routeMap.get(parentPath);
+    if (parentRoute) {
+      parentRoute.children.push(routeMap.get(route.path)!);
+    }
+  });
+
+  return Array.from(routeMap.values()).filter((route) => route.path === "/");
+};
+
+const routes = groupRoutesByParent(allRoutes);
+---
+
+<Layout title={frontmatter.title}>
+  <main>
+    <Hero title={frontmatter.title} />
+    <ContentWrapper>
+      <SitemapList routes={routes} />
+    </ContentWrapper>
+  </main>
+</Layout>

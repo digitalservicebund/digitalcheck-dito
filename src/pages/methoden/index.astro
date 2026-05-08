@@ -1,0 +1,12 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import MethodenPage from "~/routes/methoden._index";
+
+export const frontmatter = {
+  title: "Regelung erarbeiten",
+};
+---
+
+<Layout title={frontmatter.title} showProgressBar={true}>
+  <MethodenPage />
+</Layout>

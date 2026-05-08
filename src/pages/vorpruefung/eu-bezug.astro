@@ -1,0 +1,22 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PreCheckNavigation from "~/routes/vorpruefung._preCheckNavigation";
+import { PreCheckQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
+import { getQuestion } from "./_getQuestion";
+
+export const frontmatter = {
+  title: "EU-Bezug — Vorprüfung",
+};
+
+const { questionIdx, question } = getQuestion("eu-bezug");
+---
+
+<Layout title={frontmatter.title} showProgressBar={true}>
+  <PreCheckNavigation client:load>
+    <PreCheckQuestion
+      client:load
+      questionIdx={questionIdx}
+      question={question}
+    />
+  </PreCheckNavigation>
+</Layout>
