@@ -6,7 +6,7 @@ import {
   TabPanel as HeadlessTabPanel,
   TabPanels,
 } from "@headlessui/react";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
 import { twJoin } from "tailwind-merge";
 import { tabSearchParam } from "~/utils/tabs";
@@ -137,6 +137,14 @@ const SearchParamTabsComponent = ({ children }: SearchParamTabsProps) => {
     resolvedTabs,
     searchParams.get(tabSearchParam) ?? undefined,
   );
+
+  useEffect(() => {
+    const { hash } = window.location;
+    if (!hash) return;
+    requestAnimationFrame(() => {
+      document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
+    });
+  }, []);
 
   const handleChange = (index: number) => {
     const tab = resolvedTabs[index];
