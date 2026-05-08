@@ -1,0 +1,1 @@
+import{c as e,t,z as n}from"./jsx-runtime-TdnDAAmO.js";import{S as r}from"./staticRoutes-D6bxjR5I.js";var i=t(),a=r.url,o=n(function(){return(0,i.jsx)(e,{to:a,replace:!0})});export{o as default};
