@@ -42,6 +42,8 @@ fileignoreconfig:
     checksum: dd43a2a099358801855256fb455eb22c176a0a47f5020c21170046cd5a7caf37
   - filename: app/resources/content/interoperabel-nationale-kontaktstelle.ts # German text content misidentified as secret pattern
     ignore_detectors: [filecontent]
+  - filename: app/resources/content/methode-zustaendige-akteurinnen-auflisten.ts # German text content misidentified as secret pattern
+    checksum: 0392a40c7098cc34b266774dab34ebe7094410777940e1a1d668d96d0953e56c
   - filename: public/documents/interview-leitfaden/Akteurlandschaft_Analyse.pptx # Power Point
     ignore_detectors: [filecontent]
   - filename: app/vite-env.d.ts
