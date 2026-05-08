@@ -60,7 +60,10 @@ export function markdownCiteIEA(
   longForm?: boolean,
 ) {
   let text = `Art. ${article}`;
-  if (paragraph) text += ` Abs. ${paragraph}`;
+  if (paragraph) {
+    const paragraphName = article === 2 ? "Nr." : "Abs.";
+    text += ` ${paragraphName} ${paragraph}`;
+  }
 
   text +=
     " " +
