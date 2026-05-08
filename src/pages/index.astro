@@ -1,0 +1,12 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import IndexPage from "~/routes/_index";
+
+export const frontmatter = {
+  title: "Startseite",
+};
+---
+
+<Layout title={frontmatter.title}>
+  <IndexPage client:load />
+</Layout>

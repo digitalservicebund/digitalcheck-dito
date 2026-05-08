@@ -1,0 +1,12 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import InterviewLeitfadenPage from "~/routes/methoden.interview-leitfaden";
+
+export const frontmatter = {
+  title: "Interview Leitfaden",
+};
+---
+
+<Layout title={frontmatter.title} showProgressBar={true}>
+  <InterviewLeitfadenPage client:load />
+</Layout>
