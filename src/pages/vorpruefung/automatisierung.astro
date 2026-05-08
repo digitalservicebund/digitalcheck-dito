@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import PreCheckNavigation from "~/routes/vorpruefung._preCheckNavigation";
+import VorpruefungNavigation from "@/components/VorpruefungNavigation";
 import { PreCheckQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { getQuestion } from "./_getQuestion";
 
@@ -12,11 +12,11 @@ const { questionIdx, question } = getQuestion("automatisierung");
 ---
 
 <Layout title={frontmatter.title} showProgressBar={true}>
-  <PreCheckNavigation client:load>
+  <VorpruefungNavigation client:load>
     <PreCheckQuestion
       client:load
       questionIdx={questionIdx}
       question={question}
     />
-  </PreCheckNavigation>
+  </VorpruefungNavigation>
 </Layout>
