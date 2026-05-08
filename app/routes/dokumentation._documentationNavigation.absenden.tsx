@@ -7,6 +7,7 @@ import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxList from "~/components/InfoBoxList";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
+import Timeline from "~/components/Timeline.tsx";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { contact } from "~/resources/content/shared/contact.ts";
 import { ROUTE_DOCUMENTATION_SEND } from "~/resources/staticRoutes";
@@ -41,37 +42,46 @@ export default function DocumentationSend() {
           look="highlight"
           className="bg-white"
           heading={{
-            text: finish.download.heading,
+            text: "1. Digitalcheck-Dokumentation abschließen",
+            tagName: "h2",
+            // text: finish.download.heading,
           }}
         >
-          <RichText markdown={finish.download.content} />
-          <ButtonContainer>
-            <DownloadButton
-              onClick={() => void downloadDocumentation(prinzips)}
-            >
-              {finish.download.buttonText}
-            </DownloadButton>
-          </ButtonContainer>
+          <Timeline>
+            <Timeline.Item bullet>
+              <Timeline.ItemContent>
+                <h3>Word-Datei herunterladen</h3>
+                <ButtonContainer>
+                  <DownloadButton
+                    onClick={() => void downloadDocumentation(prinzips)}
+                  >
+                    {finish.download.buttonText}
+                  </DownloadButton>
+                </ButtonContainer>
+              </Timeline.ItemContent>
+            </Timeline.Item>
+            <Timeline.Item bullet>
+              <Timeline.ItemContent>
+                <h3>Dokumentation an den NKR verschicken</h3>
+                <RichText markdown={finish.send.content} />
+              </Timeline.ItemContent>
+            </Timeline.Item>
+          </Timeline>
         </InfoBox>
-        <InfoBox
-          look="highlight"
-          className="bg-white"
-          heading={{
-            text: finish.send.heading,
-          }}
-        >
-          <RichText markdown={finish.send.content} />
-        </InfoBox>
+
         {hasInteroperabilityRequirement && (
           <InfoBox
             look="highlight"
             className="bg-white"
             heading={{
-              text: "Kopie an die nationale Kontaktstelle senden",
+              text: "2. Interoperabilitäts-Bewertung abschließen",
+              tagName: "h2",
             }}
           >
             <RichText
               markdown={dedent`
+              Bitte beachten Sie: Ihre Angaben zur EU-Interoperabilität sind dafür bestimmt, auf dem Portal [interoperable Europe](https://interoperable-europe.ec.europa.eu/collection/assessments/report/repository) veröffentlicht zu werden. Das geschieht erst, sobald der Referenten-Entwurf auf der Seite Ihres Ministeriums öffentlich gemacht wird.
+              
                 - Senden Sie eine Kopie der E-Mail mit der Dokumentation an ${contact.mdMailToLink(contact.interoperabilityEmail)} (nationale Kontaktstelle nach Verordnung (EU) 2024/903 Art. 17).
                 Die Daten aus der Bewertung werden auf dem Portal [interoperable Europe](https://interoperable-europe.ec.europa.eu/collection/assessments/report/repository) veröffentlicht.
                 
@@ -80,6 +90,16 @@ export default function DocumentationSend() {
                     - Andernfalls vermerken Sie bitte das **geplante Datum** der Veröffentlichung des Referentenentwurfs. Die nationale Kontaktstelle wird sich vor einer Veröffentlichung mit Ihnen in Verbindung setzen.
           `}
             />
+            <Timeline>
+              <Timeline.Item bullet>
+                <Timeline.ItemContent>
+                  <h3>
+                    Voraussichtliches Veröffentlichungsdatum des
+                    Referenten-Entwurfs angeben
+                  </h3>
+                </Timeline.ItemContent>
+              </Timeline.Item>
+            </Timeline>
           </InfoBox>
         )}
         <InfoBox
