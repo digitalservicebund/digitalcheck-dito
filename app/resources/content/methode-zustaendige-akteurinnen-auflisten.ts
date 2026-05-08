@@ -1,3 +1,4 @@
+import { zustaendigeAkteureXlsx } from "@/config/downloads";
 import {
   DrawOutlined,
   LightbulbOutlined,
@@ -46,7 +47,7 @@ export const methodsResponsibleActors = {
       links: [
         {
           text: "Vorlage herunterladen (xlsx-Datei)",
-          to: "/download/Vorlage - Zuständige Akteurinnen und Akteure.xlsx",
+          to: zustaendigeAkteureXlsx.path,
           download: true,
         },
       ] satisfies ContentLink[],

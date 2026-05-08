@@ -1,3 +1,4 @@
+import { itSystemeErfassenXlsx } from "@/config/downloads";
 import { unterstuetzung } from "@/config/routes";
 import {
   DrawOutlined,
@@ -51,7 +52,7 @@ export const methodsITSystems = {
       links: [
         {
           text: "Vorlage herunterladen (xlsx-Datei)",
-          to: "/download/Vorlage - IT-Systeme erfassen.xlsx",
+          to: itSystemeErfassenXlsx.path,
           download: true,
         },
       ] satisfies ContentLink[],

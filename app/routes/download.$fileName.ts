@@ -4,6 +4,10 @@ import path from "node:path";
 import trackCustomEvent from "~/utils/trackCustomEvent.server";
 import type { Route } from "./+types/download.$fileName";
 
+/*
+ * DEPRECATED ROUTE: Use DownloadRoute objects from @/config/downlads.ts instead
+ */
+
 export async function loader({ params, request }: Route.LoaderArgs) {
   const { fileName } = params;
 

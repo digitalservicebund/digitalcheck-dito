@@ -18,6 +18,16 @@ export const anleitungFlussdiagramm: DownloadRoute = {
   filename: "Anleitung_Flussdiagramm_erstellen.pptx",
 };
 
+export const itSystemeErfassenXlsx: DownloadRoute = {
+  path: `${basePath}/documents/Vorlage - IT-Systeme erfassen.xlsx`,
+  filename: "Vorlage - IT-Systeme erfassen.xlsx",
+};
+
+export const zustaendigeAkteureXlsx: DownloadRoute = {
+  path: `${basePath}/documents/Vorlage - Zuständige Akteurinnen und Akteure.xlsx`,
+  filename: "Vorlage - Zuständige Akteurinnen und Akteure.xlsx",
+};
+
 export const dokumentationStaticWordV1: DownloadRoute = {
   path: `${basePath}/documents/Dokumentieren-der-Digitaltauglichkeit_V1-5-1.docx`,
   filename: "Dokumentieren-der-Digitaltauglichkeit.docx",

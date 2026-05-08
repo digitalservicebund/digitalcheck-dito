@@ -114,7 +114,6 @@ export default function Methoden() {
                 <RichText markdown={methods.interviewMethods.content} />
                 <InfoBox.LinkList links={methods.interviewMethods.links} />
               </InfoBox>
-              )
             </InfoBoxSideBySide>
           </section>
         </div>
