@@ -39,9 +39,11 @@ export const loader = async () => {
   return { prinzips: prinzipData.prinzips };
 };
 
-export default function FivePrinciples() {
-  const { prinzips } = useLoaderData<typeof loader>();
-
+export function FivePrinciples({
+  prinzips,
+}: {
+  prinzips: PrinzipWithAspekteAndExample[];
+}) {
   return (
     <>
       <MetaTitle prefix={methoden_fuenfPrinzipien.title} />
@@ -161,4 +163,9 @@ export default function FivePrinciples() {
       </section>
     </>
   );
+}
+
+export default function Route() {
+  const { prinzips } = useLoaderData<typeof loader>();
+  return <FivePrinciples prinzips={prinzips} />;
 }

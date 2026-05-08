@@ -79,8 +79,13 @@ export type PreCheckAnswerOption = {
   label: string;
 };
 
-export default function Index() {
-  const { questionIdx, question } = useLoaderData<typeof loader>();
+export function PreCheckQuestion({
+  questionIdx,
+  question,
+}: {
+  questionIdx: number;
+  question: TQuestion;
+}) {
   const [hasAnswerConflict, setHasAnswerConflict] = useState(false);
 
   const { answerForQuestionId, answers, firstUnansweredQuestionIndex } =
@@ -209,4 +214,9 @@ export default function Index() {
       </div>
     </form>
   );
+}
+
+export default function Route() {
+  const { questionIdx, question } = useLoaderData<typeof loader>();
+  return <PreCheckQuestion questionIdx={questionIdx} question={question} />;
 }

@@ -1,3 +1,4 @@
+import type { Route as SiteRoute } from "@/config/routes";
 import { useLoaderData } from "react-router";
 
 import {
@@ -49,8 +50,7 @@ export function loader({ params }: Route.LoaderArgs) {
   return { route };
 }
 
-export default function Index() {
-  const { route } = useLoaderData<typeof loader>();
+export function MethodenSubPage({ route }: { route: SiteRoute }) {
   // We have to get the content here to use the icons from the content file
   const content = contentMap[route.title as keyof typeof contentMap];
 
@@ -152,4 +152,9 @@ export default function Index() {
       </main>
     </>
   );
+}
+
+export default function Route() {
+  const { route } = useLoaderData<typeof loader>();
+  return <MethodenSubPage route={route} />;
 }

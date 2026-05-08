@@ -3,7 +3,7 @@ import {
   methoden_fuenfPrinzipien,
 } from "@/config/routes";
 import type { ReactNode } from "react";
-import { data, Link, useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 import { twJoin } from "tailwind-merge";
 import AccordionItem from "~/components/AccordionItem.tsx";
 import Badge from "~/components/Badge.tsx";
@@ -92,7 +92,7 @@ export async function loader({ params }: Route.LoaderArgs) {
 
   if (prinzipData.prinzips.length === 0) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw data("Not found", { status: 404 });
+    throw new Response("Not found", { status: 404 });
   }
 
   return {
@@ -278,9 +278,13 @@ function PrincipleNavigation({
   );
 }
 
-export default function Prinzip() {
-  const { prinzip, prinzipList } = useLoaderData<typeof loader>();
-
+export function Prinzip({
+  prinzip,
+  prinzipList,
+}: {
+  prinzip: PrinzipWithAspekteAndExample;
+  prinzipList: PrinzipListItem[];
+}) {
   return (
     <>
       <MetaTitle prefix={`Prinzip: ${prinzip.Name}`} />
@@ -331,4 +335,9 @@ export default function Prinzip() {
       </main>
     </>
   );
+}
+
+export default function Route() {
+  const { prinzip, prinzipList } = useLoaderData<typeof loader>();
+  return <Prinzip prinzip={prinzip} prinzipList={prinzipList} />;
 }

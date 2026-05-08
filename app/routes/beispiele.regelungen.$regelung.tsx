@@ -83,10 +83,13 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
   return regelungData.beispielvorhabens[0];
 };
 
-export default function Gesetz() {
-  const regelung = useLoaderData<typeof loader>();
-  const principles = useOutletContext<PrinzipWithBeispielvorhaben[]>();
-
+export function Gesetz({
+  regelung,
+  principles,
+}: {
+  regelung: Beispielvorhaben;
+  principles: PrinzipWithBeispielvorhaben[];
+}) {
   const tabsData: {
     label: string;
     content: React.ReactNode;
@@ -229,4 +232,10 @@ export default function Gesetz() {
       </ContentWrapper>
     </>
   );
+}
+
+export default function Route() {
+  const regelung = useLoaderData<typeof loader>();
+  const principles = useOutletContext<PrinzipWithBeispielvorhaben[]>();
+  return <Gesetz regelung={regelung} principles={principles} />;
 }

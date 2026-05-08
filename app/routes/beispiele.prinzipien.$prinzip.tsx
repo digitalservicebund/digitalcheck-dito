@@ -60,10 +60,13 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
   return { prinzip: prinzipData.prinzips[0] };
 };
 
-export default function DigitaltauglichkeitPrinzipienDetail() {
-  const { prinzip } = useLoaderData<typeof loader>();
-  const prinzips = useOutletContext<PrinzipWithBeispielvorhaben[]>();
-
+export function DigitaltauglichkeitPrinzipienDetail({
+  prinzip,
+  prinzips,
+}: {
+  prinzip: PrinzipWithBeispielvorhaben;
+  prinzips: PrinzipWithBeispielvorhaben[];
+}) {
   const { Beispielvorhaben } = prinzip;
   const tabs = prinzips.map((principle) => ({
     key: principle.URLBezeichnung,
@@ -134,5 +137,16 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
         )}
       </ContentWrapper>
     </>
+  );
+}
+
+export default function Route() {
+  const { prinzip } = useLoaderData<typeof loader>();
+  const prinzips = useOutletContext<PrinzipWithBeispielvorhaben[]>();
+  return (
+    <DigitaltauglichkeitPrinzipienDetail
+      prinzip={prinzip}
+      prinzips={prinzips}
+    />
   );
 }
