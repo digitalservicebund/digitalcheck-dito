@@ -19,6 +19,12 @@ export default defineConfig({
   redirects: {
     "/beispiele/prinzipien":
       "/beispiele/prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten",
+    "/interoperabel/loesungen":
+      "/interoperabel?tab=interoperable-loesungen#interoperable-loesungen",
+    "/grundlagen": "/methoden/fuenf-prinzipien",
+    "/grundlagen/fuenf-prinzipien": "/methoden/fuenf-prinzipien",
+    "/methoden/ablaeufe-aufgaben-erfassen": "/methoden/visualisieren",
+    "/digitaltauglichkeit": "/beispiele",
   },
   srcDir: "src",
   publicDir: "public",
