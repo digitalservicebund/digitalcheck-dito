@@ -9,6 +9,7 @@ import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
   type Route as _Route,
   ROUTE_DOCUMENTATION,
+  ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
   ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
   ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS,
   ROUTE_DOCUMENTATION_NOTES,
@@ -116,6 +117,10 @@ const documentationNavigationTree: NavigationDefinition[] = [
     key: "eu-interoperability",
     label: digitalDocumentation.navigation.euInteroperability,
     getChildren: () => [
+      createRouteItem(
+        "eu-interoperability-requirements",
+        ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS.url,
+      ),
       createRouteItem(
         "interoperability-binding-requirements",
         ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS.url,

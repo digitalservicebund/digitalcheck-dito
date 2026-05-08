@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
+  ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_TITLE,
 } from "~/resources/staticRoutes";
@@ -221,6 +222,8 @@ export const getDocumentationSchemaFormUrl = (
   if (url === ROUTE_DOCUMENTATION_TITLE.url) return policyHeaderSchema;
   else if (url === ROUTE_DOCUMENTATION_PARTICIPATION.url)
     return participationSchema;
+  else if (url === ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS.url)
+    return euInteroperabilityOutcomeSchema;
   else return simplified ? principleSchemaV2 : principleSchemaV1;
 };
 

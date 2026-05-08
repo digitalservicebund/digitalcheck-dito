@@ -140,7 +140,7 @@ export const ROUTE_DOCUMENTATION_PARTICIPATION = createRoute(
 );
 export const ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS = createRoute(
   "eu-interoperabilitaetsbezug",
-  "Bewertung erforderlich",
+  "Bezug",
   ROUTE_DOCUMENTATION,
 );
 export const ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT = createRoute(
