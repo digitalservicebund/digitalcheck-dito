@@ -163,3 +163,6 @@ lefthook-local.yml
 
 # Feature flags
 /feature-flags.json
+
+# Astro
+.astro

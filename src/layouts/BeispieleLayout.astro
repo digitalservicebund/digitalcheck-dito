@@ -1,0 +1,39 @@
+---
+import Container from "~/components/Container";
+import InfoBox from "~/components/InfoBox";
+import RichText from "~/components/RichText";
+import SupportBanner from "~/components/SupportBanner";
+import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
+import { supportBanner } from "~/resources/content/shared/support-banner";
+import Layout from "./Layout.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  showProgressBar?: boolean;
+}
+
+const { title, description, showProgressBar } = Astro.props;
+---
+
+<Layout
+  title={title}
+  description={description}
+  showProgressBar={showProgressBar}
+>
+  <slot />
+  <aside aria-labelledby="your-example-heading">
+    <Container className="mt-80 mb-80 bg-blue-100" overhangingBackground>
+      <InfoBox
+        heading={{
+          text: examplesRegelungen.yourExample.title,
+          tagName: "h2",
+          id: "your-example-heading",
+        }}
+      >
+        <RichText markdown={examplesRegelungen.yourExample.text} />
+      </InfoBox>
+    </Container>
+  </aside>
+  <SupportBanner {...supportBanner} />
+</Layout>
