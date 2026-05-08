@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import PreCheckNavigation from "~/routes/vorpruefung._preCheckNavigation";
+import VorpruefungNavigation from "@/components/VorpruefungNavigation";
 import HinweisePage from "~/routes/vorpruefung._preCheckNavigation.hinweise";
 
 export const frontmatter = {
@@ -9,7 +9,7 @@ export const frontmatter = {
 ---
 
 <Layout title={frontmatter.title} showProgressBar={true}>
-  <PreCheckNavigation client:load>
+  <VorpruefungNavigation client:load>
     <HinweisePage client:load />
-  </PreCheckNavigation>
+  </VorpruefungNavigation>
 </Layout>

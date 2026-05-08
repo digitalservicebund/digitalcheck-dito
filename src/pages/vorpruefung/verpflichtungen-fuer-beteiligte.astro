@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import PreCheckNavigation from "~/routes/vorpruefung._preCheckNavigation";
+import VorpruefungNavigation from "@/components/VorpruefungNavigation";
 import { PreCheckQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { getQuestion } from "./_getQuestion";
 
@@ -8,15 +8,17 @@ export const frontmatter = {
   title: "Verpflichtungen für Beteiligte — Vorprüfung",
 };
 
-const { questionIdx, question } = getQuestion("kommunikation");
+const { questionIdx, question } = getQuestion(
+  "verpflichtungen-fuer-beteiligte",
+);
 ---
 
 <Layout title={frontmatter.title} showProgressBar={true}>
-  <PreCheckNavigation client:load>
+  <VorpruefungNavigation client:load>
     <PreCheckQuestion
       client:load
       questionIdx={questionIdx}
       question={question}
     />
-  </PreCheckNavigation>
+  </VorpruefungNavigation>
 </Layout>
