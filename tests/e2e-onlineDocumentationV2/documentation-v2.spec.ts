@@ -309,7 +309,7 @@ test("go to landing page and download empty V2 document template", async ({
 
   const docText = await downloadDocumentAndGetText(
     page,
-    page.getByRole("link", { name: "Word-Vorlage herunterladen (.docx)" }),
+    page.getByRole("button", { name: "Word-Vorlage herunterladen (.docx)" }),
     testInfo.outputPath("documentation-v2-template.docx"),
   );
   expectStringsOrderedInText(

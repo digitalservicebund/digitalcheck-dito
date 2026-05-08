@@ -1,4 +1,4 @@
-import { beispiele, dokumentation, unterstuetzung } from "@/config/routes";
+import { beispiele, unterstuetzung } from "@/config/routes";
 import { getTabAnchorLink } from "../utils/tabs";
 
 // ⚠️ Routes fully migrated to src/config/routes.ts or src/config/downloads.ts have been removed.
@@ -15,7 +15,3 @@ export const ROUTE_SUPPORT_TRAININGS =
 export const ROUTE_REGELUNGEN = beispiele.path + "/regelungen";
 
 export const ROUTE_VISUALISATION = beispiele.path + "/visualisierung";
-
-// ── Documentation Word file
-export const ROUTE_DOCUMENTATION_TEMPLATE_WORD =
-  dokumentation.path + "/download/Dokumentation_der_Digitaltauglichkeit.docx";

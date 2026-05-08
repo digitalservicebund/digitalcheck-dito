@@ -5,7 +5,7 @@ import {
   TipsAndUpdatesOutlined,
   ViewListTwoTone,
 } from "@digitalservicebund/icons";
-import { DownloadLinkButton } from "~/components/Button";
+import { DownloadButton } from "~/components/Button";
 import Container from "~/components/Container.tsx";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import { Feature, FeatureList } from "~/components/FeatureList.tsx";
@@ -19,12 +19,16 @@ import RichText from "~/components/RichText.tsx";
 import SupportBanner from "~/components/SupportBanner";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { supportBanner } from "~/resources/content/shared/support-banner";
-import { ROUTE_DOCUMENTATION_TEMPLATE_WORD } from "~/resources/staticRoutes";
 import { DocumentationContinueActions } from "~/routes/dokumentation/DocumentationContinueActions.tsx";
+import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
+import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation.ts";
 
 const { start } = digitalDocumentation;
 
 export default function Index() {
+  const supportingData = useDocumentationRouteData();
+  const { downloadDocumentation } = useWordDocumentation();
+
   return (
     <>
       <MetaTitle prefix={dokumentation.title} />
@@ -47,12 +51,16 @@ export default function Index() {
             <div className="space-y-8">
               <RichText markdown={start.alternative.text} />
 
-              <DownloadLinkButton // TODO: replace hard-coded path & use onClick handler for client-side generation?
-                to={ROUTE_DOCUMENTATION_TEMPLATE_WORD}
+              <DownloadButton
                 look="link"
+                onClick={() =>
+                  downloadDocumentation(supportingData.prinzips, {
+                    templateOnly: true,
+                  })
+                }
               >
                 {start.alternative.buttonText}
-              </DownloadLinkButton>
+              </DownloadButton>
             </div>
           </div>
         </Hero>

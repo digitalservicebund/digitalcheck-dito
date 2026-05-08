@@ -21,6 +21,10 @@ import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import type { Route } from "./+types/dokumentation.download.$fileName";
 import { DATA_SCHEMA_VERSION_V1 } from "./dokumentation/documentationDataSchema";
 
+/*
+ * DEPRECATED ROUTE: Replaced with client-side generation in dokumentation._index.tsx
+ */
+
 // This is a route instead of client side to support clients without JS
 export async function loader({ params }: Route.LoaderArgs) {
   const { fileName } = params;

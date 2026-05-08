@@ -7,6 +7,7 @@ import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { contact } from "~/resources/content/shared/contact";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider";
 import type { DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
+import { DATA_SCHEMA_VERSION_V2 } from "~/routes/dokumentation/documentationDataSchema";
 import {
   toMailtoHyperlinkPatch,
   toParagraphPatch,
@@ -25,7 +26,10 @@ export function useWordDocumentationV2() {
   const { documentationData } = useDocumentationDataService();
 
   const downloadDocumentation = useCallback(
-    async (prinzips: PrinzipWithAspekte[]) => {
+    async (
+      prinzips: PrinzipWithAspekte[],
+      { templateOnly = false }: { templateOnly?: boolean } = {},
+    ) => {
       try {
         const template = await fetch(
           `/documents/${FILE_NAME_DOCUMENTATION_TEMPLATE}`,
@@ -33,7 +37,9 @@ export function useWordDocumentationV2() {
         const templateData = await template.arrayBuffer();
         const doc = await createDoc(
           templateData,
-          documentationData as DocumentationData,
+          templateOnly
+            ? { version: DATA_SCHEMA_VERSION_V2 }
+            : (documentationData as DocumentationData),
           prinzips,
         );
         saveAs(doc, documentationDocument.filename);

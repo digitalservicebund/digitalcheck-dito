@@ -19,6 +19,7 @@ import type {
   PrincipleReasoningV1,
   V1,
 } from "~/routes/dokumentation/documentationDataSchema";
+import { DATA_SCHEMA_VERSION_V1 } from "~/routes/dokumentation/documentationDataSchema";
 import {
   stringToTextRuns,
   toMailtoHyperlinkPatch,
@@ -40,13 +41,22 @@ export function useWordDocumentationV1() {
   const { documentationData } = useDocumentationDataService();
 
   const downloadDocumentation = useCallback(
-    async (prinzips: PrinzipWithAspekte[]) => {
+    async (
+      prinzips: PrinzipWithAspekte[],
+      { templateOnly = false }: { templateOnly?: boolean } = {},
+    ) => {
       try {
         const template = await fetch(
           `/documents/${FILE_NAME_DOCUMENTATION_TEMPLATE}`,
         );
         const templateData = await template.arrayBuffer();
-        const doc = await createDoc(templateData, documentationData, prinzips);
+        const doc = await createDoc(
+          templateData,
+          templateOnly
+            ? { version: DATA_SCHEMA_VERSION_V1 }
+            : documentationData,
+          prinzips,
+        );
         saveAs(doc, documentationDocument.filename);
       } catch (e) {
         console.error(e);

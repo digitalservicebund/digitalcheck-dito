@@ -1,5 +1,6 @@
 // Import mocks first
 import "./utils/mockLocalStorageVersioned";
+import "./utils/mockRouter";
 // End of mocks
 
 import { dokumentation_hinweise } from "@/config/routes";
@@ -9,11 +10,19 @@ import type React from "react";
 import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
-import { ROUTE_DOCUMENTATION_TEMPLATE_WORD } from "~/resources/staticRoutes";
 import DokumentationIndex from "~/routes/dokumentation._index";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
 
 const ROUTES_DOCUMENTATION_INTRO = [{ path: dokumentation_hinweise.path }];
+
+const { mockDownloadDocumentation } = vi.hoisted(() => ({
+  mockDownloadDocumentation: vi.fn(),
+}));
+vi.mock("~/service/wordDocumentationExport/wordDocumentation", () => ({
+  useWordDocumentation: vi.fn(() => ({
+    downloadDocumentation: mockDownloadDocumentation,
+  })),
+}));
 
 vi.mock("~/contexts/FeatureFlagContext", () => {
   return {
@@ -55,13 +64,10 @@ describe("Dokumentation Index Route - Integration Tests", () => {
   });
 
   it("renders the Word file download button", () => {
-    const downloadButton = screen.getByRole("link", {
+    const downloadButton = screen.getByRole("button", {
       name: "Word-Vorlage herunterladen (.docx)",
     });
-    expect(downloadButton).toHaveAttribute(
-      "href",
-      ROUTE_DOCUMENTATION_TEMPLATE_WORD,
-    );
+    expect(downloadButton).toBeInTheDocument();
   });
 
   it("renders the support banner", () => {
