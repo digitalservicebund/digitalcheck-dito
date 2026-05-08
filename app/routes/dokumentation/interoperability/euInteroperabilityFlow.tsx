@@ -54,7 +54,7 @@ export function linkToIEAArticle(index?: number) {
   return `${base}#art_${index}`;
 }
 
-export function markdownCiteIEA({
+export function markdownLinkIEA({
   article,
   paragraph,
   format = "short",
@@ -83,7 +83,7 @@ export const EU_INTEROPERABILITY_QUESTIONS: Record<
   serviceProvidedByPublicOrUnionEntity: {
     id: "serviceProvidedByPublicOrUnionEntity",
     text: "Betrifft Ihre Regelung einen digitalen öffentlichen Dienst?",
-    details: `Siehe ${markdownCiteIEA({ article: 2, paragraph: 2 })}. Relevant sind hier nur neue oder geänderte Teile der Regelung.`,
+    details: `Siehe ${markdownLinkIEA({ article: 2, paragraph: 2 })}. Relevant sind hier nur neue oder geänderte Teile der Regelung.`,
     next: {
       Ja: "serviceProvidedInEuContext",
       Nein: "NOT_REQUIRED_NOT_PROVIDED_BY_PUBLIC_OR_UNION_ENTITY",
@@ -136,7 +136,7 @@ export const EU_INTEROPERABILITY_OUTCOMES: Record<
     description: (
       <RichText
         markdown={dedent`
-          Sie sind gemäß ${markdownCiteIEA({ article: 3 })} verpflichtet, eine Interoperabilitätsbewertung
+          Sie sind gemäß ${markdownLinkIEA({ article: 3 })} verpflichtet, eine Interoperabilitätsbewertung
           durchzuführen und an die entsprechenden Stellen zu übermitteln.
 
           Nutzen Sie hierfür die folgenden Schritte. Senden Sie die resultierende Dokumentation

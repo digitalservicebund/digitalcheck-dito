@@ -14,7 +14,7 @@ import Textarea from "~/components/Textarea.tsx";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import { bindingRequirementsSchema } from "~/routes/dokumentation/documentationDataSchema.ts";
-import { markdownCiteIEA } from "~/routes/dokumentation/interoperability/euInteroperabilityFlow.tsx";
+import { markdownLinkIEA } from "~/routes/dokumentation/interoperability/euInteroperabilityFlow.tsx";
 import {
   serviceAreaOptions,
   stakeholderOptions,
@@ -68,7 +68,7 @@ export default function BindingRequirementsForm({
 
             Für Sie bedeutet das, dass Sie grenzüberschreitende Auswirkungen eines Regelungsvorhaben einschätzen müssen, bevor die Regelung geschrieben wird. Denn Sie legen verbindliche Anforderungen fest, die geltendes Recht werden.
 
-            Bitte dokumentieren Sie in diesem Schritt alle Teile Ihrer Regelung, die verbindliche Anforderungen i. S. v. ${markdownCiteIEA(
+            Bitte dokumentieren Sie in diesem Schritt alle Teile Ihrer Regelung, die verbindliche Anforderungen i. S. v. ${markdownLinkIEA(
               {
                 article: 2,
                 paragraph: 15,
@@ -93,7 +93,7 @@ export default function BindingRequirementsForm({
               <RichText
                 markdown={dedent`
                   Eine Definition von verbindlichen Anforderungen finden Sie <a href="/interoperabel?tab=hintergrund" target="_blank">hier</a>.
-                  Diese bezieht sich auf ${markdownCiteIEA({ article: 2, paragraph: 15, format: "long" })}.
+                  Diese bezieht sich auf ${markdownLinkIEA({ article: 2, paragraph: 15, format: "long" })}.
             `}
               />
             </HelpButton>
@@ -150,7 +150,7 @@ export default function BindingRequirementsForm({
                         <RichText
                           markdown={dedent`
                           Geben Sie hier an, welche Dienste im Sinne von
-                          ${markdownCiteIEA({ article: 2, paragraph: 2 })} durch die verbindliche Anforderung betroffen sind.
+                          ${markdownLinkIEA({ article: 2, paragraph: 2 })} durch die verbindliche Anforderung betroffen sind.
                           
                           Beispiele: 
                           - Austausch von Dokumenten zu internationalen Warenlieferungen
