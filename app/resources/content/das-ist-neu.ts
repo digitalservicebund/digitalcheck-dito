@@ -28,6 +28,20 @@ export const news = {
   items: [
     {
       badge: {
+        text: "XX.XX.2026",
+      },
+      content: dedent`
+        Anpassung der Online Dokumentation für eine intuitivere Nutzbarkeit:
+        - Schlankere Fragestellungen mit einer einfachen Auswahlmöglichkeit von Schwerpunkten
+        - Neue Hilfetext-Felder direkt an den Formularfeldern
+        - Visuell klare Zusammenfassung der Eingaben
+        - Kürzere und übersichtlichere Word-Dokumentation
+        - Verbesserte Screenreader-Unterstützung
+
+        [Hier ansehen](${ROUTE_DOCUMENTATION.url})`,
+    },
+    {
+      badge: {
         text: "30.03.2026",
       },
       content: dedent`
