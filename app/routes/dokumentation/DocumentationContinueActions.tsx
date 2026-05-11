@@ -9,9 +9,9 @@ import Dialog from "~/components/Dialog.tsx";
 import RichText from "~/components/RichText.tsx";
 import { digitalDocumentation } from "~/resources/content/dokumentation.ts";
 import { general } from "~/resources/content/shared/general.ts";
-import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation.ts";
 import { useNonce } from "~/utils/nonce.ts";
+import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
 
 const ROUTE_DOCUMENTATION_TITLE = {
@@ -23,15 +23,16 @@ const { start } = digitalDocumentation;
 
 function StartOverDialog({
   deleteDocumentationData,
+  prinzips,
 }: {
   deleteDocumentationData: () => void;
+  prinzips: PrinzipWithAspekte[];
 }) {
   const navigate = useNavigate();
-  const supportingData = useDocumentationRouteData();
   const { downloadDocumentation } = useWordDocumentation();
 
   const downloadDraft = async () => {
-    await downloadDocumentation(supportingData.prinzips);
+    await downloadDocumentation(prinzips);
   };
 
   return (
@@ -75,7 +76,11 @@ function StartOverDialog({
   );
 }
 
-export function DocumentationContinueActions() {
+export function DocumentationContinueActions({
+  prinzips,
+}: {
+  prinzips: PrinzipWithAspekte[];
+}) {
   const { hasSavedDocumentation, deleteDocumentationData } =
     useDocumentationDataService();
   const nonce = useNonce();
@@ -86,7 +91,10 @@ export function DocumentationContinueActions() {
           <LinkButton to={ROUTE_DOCUMENTATION_TITLE.path} className="js-only">
             {start.actions.resume.buttonText}
           </LinkButton>
-          <StartOverDialog deleteDocumentationData={deleteDocumentationData} />
+          <StartOverDialog
+            deleteDocumentationData={deleteDocumentationData}
+            prinzips={prinzips}
+          />
         </>
       ) : (
         <LinkButton to={ROUTES_DOCUMENTATION_INTRO[0].path} className="js-only">

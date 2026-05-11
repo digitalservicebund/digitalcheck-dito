@@ -5,6 +5,7 @@ import {
   TipsAndUpdatesOutlined,
   ViewListTwoTone,
 } from "@digitalservicebund/icons";
+import { useRouteLoaderData } from "react-router";
 import { DownloadButton } from "~/components/Button";
 import Container from "~/components/Container.tsx";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
@@ -20,13 +21,17 @@ import SupportBanner from "~/components/SupportBanner";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import { DocumentationContinueActions } from "~/routes/dokumentation/DocumentationContinueActions.tsx";
-import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
+import type { DocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation.ts";
+import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 
 const { start } = digitalDocumentation;
 
-export default function Index() {
-  const supportingData = useDocumentationRouteData();
+export function DokumentationIndexPage({
+  prinzips,
+}: {
+  prinzips: PrinzipWithAspekte[];
+}) {
   const { downloadDocumentation } = useWordDocumentation();
 
   return (
@@ -35,7 +40,7 @@ export default function Index() {
       <main>
         <Hero title={start.title} subtitle={start.subtitle}>
           <div className="mt-40 space-y-40">
-            <DocumentationContinueActions />
+            <DocumentationContinueActions prinzips={prinzips} />
             <noscript>
               <InlineNotice
                 look="warning"
@@ -54,7 +59,7 @@ export default function Index() {
               <DownloadButton
                 look="link"
                 onClick={() =>
-                  downloadDocumentation(supportingData.prinzips, {
+                  downloadDocumentation(prinzips, {
                     templateOnly: true,
                   })
                 }
@@ -159,4 +164,11 @@ export default function Index() {
       <SupportBanner {...supportBanner} />
     </>
   );
+}
+
+export default function Route() {
+  const { prinzips } = useRouteLoaderData<DocumentationRouteData>(
+    "routes/dokumentation",
+  )!;
+  return <DokumentationIndexPage prinzips={prinzips} />;
 }

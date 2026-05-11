@@ -61,7 +61,7 @@ describe("DocumentationContinueActions", () => {
         version: DATA_SCHEMA_VERSION_V1,
         policyTitle: { title: "Test" },
       });
-      renderWithRouter(<DocumentationContinueActions />);
+      renderWithRouter(<DocumentationContinueActions prinzips={[]} />);
     });
 
     it("renders resume and start-over actions", () => {
@@ -124,7 +124,7 @@ describe("DocumentationContinueActions", () => {
   describe("when no saved documentation exists", () => {
     it("renders just the initial start action", async () => {
       vi.mocked(readDataFromLocalStorage).mockReturnValue(null);
-      renderWithRouter(<DocumentationContinueActions />);
+      renderWithRouter(<DocumentationContinueActions prinzips={[]} />);
 
       const startButton = await screen.findByRole("link", {
         name: digitalDocumentation.start.actions.startInitial.buttonText,
