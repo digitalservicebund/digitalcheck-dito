@@ -119,6 +119,12 @@ export const header = {
       ],
     },
     {
+      plausibleEventName: "Bundesländer",
+      text: "Bundesländer",
+      href: "/bundeslaender",
+      overlayContent: [],
+    },
+    {
       plausibleEventName: "Kontakt+Support",
       text: "Kontakt und Support",
       hasSupport: true,

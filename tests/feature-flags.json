@@ -1,3 +1,4 @@
 {
-  "showGesetzgebungsprozessOverview": true
+  "showGesetzgebungsprozessOverview": true,
+  "showBundeslaenderContent": false
 }

@@ -16,9 +16,12 @@ import DropdownMenu from "~/layout/DropdownMenu.tsx";
 import ProgressBar from "~/layout/ProgressBar";
 import { header } from "~/resources/content/shared/header.ts";
 
+import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { assetPath } from "~/utils/assetPath";
+import { features } from "~/utils/featureFlags";
 import type { MatchWithHandle } from "~/utils/handles";
 import { matchHasHandle } from "~/utils/handles";
+import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import twMerge from "~/utils/tailwindMerge.ts";
 import { normalizePathname } from "~/utils/utilFunctions.ts";
 
@@ -32,13 +35,28 @@ interface SubItem {
 interface HeaderItem {
   text: string;
   plausibleEventName: string;
+  href?: string;
   overlayContent: SubItem[];
   hasSupport?: boolean;
   isOrderedList?: boolean;
 }
 
+const isFlatHeaderItem = (
+  item: HeaderItem,
+): item is HeaderItem & { href: string } => typeof item.href === "string";
+
+type responsiveOptions = "desktop" | "mobile";
+
 // Check if an item href matches the current path
 const isParentItemActive = (item: HeaderItem, path: string): boolean => {
+  // Items without dropdown
+  if (item.href) {
+    const normalizedItemPath = normalizePathname(item.href);
+    const normalizedCurrentPath = normalizePathname(path);
+    return normalizedCurrentPath.startsWith(normalizedItemPath);
+  }
+
+  // Items with dropdown
   return item.overlayContent.some((subItem) => {
     const normalizedItemPath = normalizePathname(subItem.href);
     const normalizedCurrentPath = normalizePathname(path);
@@ -76,6 +94,10 @@ const getFeatureForMatches = (
 const PageHeader = () => {
   const location = useLocation();
   const currentPath = location.pathname;
+  const showBundeslaender = useFeatureFlag(features.showBundeslaenderContent);
+  const navItems = header.items.filter(
+    (item) => item.href !== "/bundeslaender" || showBundeslaender,
+  );
   const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -123,10 +145,7 @@ const PageHeader = () => {
     }
   };
 
-  const renderDropdownItem = (
-    item: HeaderItem,
-    variant: "desktop" | "mobile",
-  ) => (
+  const renderDropdownItem = (item: HeaderItem, variant: responsiveOptions) => (
     <DropdownMenu
       key={`${item.text}-${variant}`}
       label={item.text}
@@ -141,6 +160,43 @@ const PageHeader = () => {
       onItemClick={closeOpenDropdowns}
     />
   );
+
+  const renderFlatItem = (
+    item: HeaderItem & { href: string },
+    variant: responsiveOptions,
+  ) => {
+    const isMobile = variant === "mobile";
+    const isActive = isParentItemActive(item, currentPath);
+    const plausibleClass = getPlausibleEventClassName(
+      `Nav+Bar.${item.plausibleEventName}.Link`,
+    );
+
+    return (
+      <Link
+        key={`${item.text}-${variant}`}
+        to={item.href}
+        onClick={closeOpenDropdowns}
+        className={twMerge(
+          "flex items-center hover:bg-blue-100",
+          isMobile
+            ? "ds-label-01-bold w-full border-l-4 border-transparent p-16"
+            : "ds-label-01-reg h-full border-b-4 border-transparent px-16 whitespace-nowrap",
+          isActive && "border-blue-800 bg-blue-100",
+          plausibleClass,
+        )}
+      >
+        {item.text}
+      </Link>
+    );
+  };
+
+  const renderNavItem = (item: HeaderItem, variant: "desktop" | "mobile") => {
+    if (isFlatHeaderItem(item)) {
+      return renderFlatItem(item, variant);
+    } else {
+      return renderDropdownItem(item, variant);
+    }
+  };
 
   const showOverlay = activeDropdownId !== null || mobileMenuOpen;
 
@@ -189,7 +245,7 @@ const PageHeader = () => {
             className="flex items-center max-lg:hidden"
             data-testid="desktop-nav"
           >
-            {header.items.map((item) => renderDropdownItem(item, "desktop"))}
+            {navItems.map((item) => renderNavItem(item, "desktop"))}
           </nav>
 
           {/* Mobile View Controls */}
@@ -225,7 +281,7 @@ const PageHeader = () => {
           )}
           aria-hidden={!mobileMenuOpen}
         >
-          {header.items.map((item) => renderDropdownItem(item, "mobile"))}
+          {navItems.map((item) => renderNavItem(item, "mobile"))}
         </nav>
         <noscript>
           <div className="bg-yellow-200">
