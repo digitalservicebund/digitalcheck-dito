@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import type { FeatureFlag, FeatureFlags } from "~/utils/featureFlags.ts";
 import { features } from "~/utils/featureFlags.ts";
-import { isPreview } from "./preview";
+import { isProduction } from "./preview";
 
 const FEATURE_FLAGS_PATH =
   process.env.FEATURE_FLAGS_PATH ?? "/etc/feature-flags/feature-flags.json";
@@ -25,7 +25,7 @@ let featureFlagCache = {
 };
 
 export function getFeatureFlags(): FeatureFlags {
-  if (isPreview) return featureFlagsAllEnabled; // in preview builds, all feature flags are enabled by default
+  if (!isProduction) return featureFlagsAllEnabled; // in staging/preview/development builds, all feature flags are enabled by default
 
   const now = Date.now();
   if (now - featureFlagCache.timestamp < CACHE_TTL) {

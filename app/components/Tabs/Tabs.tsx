@@ -141,9 +141,7 @@ const SearchParamTabsComponent = ({ children }: SearchParamTabsProps) => {
   useEffect(() => {
     const { hash } = window.location;
     if (!hash) return;
-    requestAnimationFrame(() => {
-      document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
-    });
+    document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
   const handleChange = (index: number) => {
