@@ -9,25 +9,20 @@ import Dialog from "~/components/Dialog.tsx";
 import RichText from "~/components/RichText.tsx";
 import { digitalDocumentation } from "~/resources/content/dokumentation.ts";
 import { general } from "~/resources/content/shared/general.ts";
-import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation.ts";
+import { useWordDocumentationV2 as useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentationV2.ts";
 import { useNonce } from "~/utils/nonce.ts";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
-
-const ROUTE_DOCUMENTATION_TITLE = {
-  path: dokumentation_regelungsvorhabenTitel.path,
-};
-const ROUTES_DOCUMENTATION_INTRO = [{ path: dokumentation_hinweise.path }];
 
 const { start } = digitalDocumentation;
 
 function StartOverDialog({
   deleteDocumentationData,
   prinzips,
-}: {
+}: Readonly<{
   deleteDocumentationData: () => void;
   prinzips: PrinzipWithAspekte[];
-}) {
+}>) {
   const navigate = useNavigate();
   const { downloadDocumentation } = useWordDocumentation();
 
@@ -54,7 +49,7 @@ function StartOverDialog({
             type="button"
             onClick={async () => {
               deleteDocumentationData();
-              await navigate(ROUTES_DOCUMENTATION_INTRO[0].path);
+              await navigate(dokumentation_hinweise.path);
             }}
           >
             {start.startOverDialog.actions.confirm}
@@ -88,7 +83,10 @@ export function DocumentationContinueActions({
     <ButtonContainer>
       {hasSavedDocumentation ? (
         <>
-          <LinkButton to={ROUTE_DOCUMENTATION_TITLE.path} className="js-only">
+          <LinkButton
+            to={dokumentation_regelungsvorhabenTitel.path}
+            className="js-only"
+          >
             {start.actions.resume.buttonText}
           </LinkButton>
           <StartOverDialog
@@ -97,7 +95,7 @@ export function DocumentationContinueActions({
           />
         </>
       ) : (
-        <LinkButton to={ROUTES_DOCUMENTATION_INTRO[0].path} className="js-only">
+        <LinkButton to={dokumentation_hinweise.path} className="js-only">
           {start.actions.startInitial.buttonText}
         </LinkButton>
       )}

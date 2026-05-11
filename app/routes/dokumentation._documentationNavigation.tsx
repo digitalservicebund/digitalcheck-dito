@@ -5,16 +5,13 @@ import {
   dokumentation_zusammenfassung,
 } from "@/config/routes";
 import { Outlet, useLocation } from "react-router";
-import { twJoin } from "tailwind-merge";
 import HelpSidepanel from "~/components/HelpSidepanel";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
-import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
-import { features } from "~/utils/featureFlags";
-import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 
 type _Route = { path: string; title: string };
@@ -60,11 +57,10 @@ function resolveAdjacentUrl(
   flatRoutes: Route[],
   fromUrl: string,
   getAdjacent: (routes: Route[], path: string) => string | null,
-  simplifiedFlow: boolean,
   findData: (id: string) => unknown,
 ): string | null {
   const rawUrl = getAdjacent(flatRoutes, fromUrl);
-  if (!rawUrl || !simplifiedFlow) return rawUrl;
+  if (!rawUrl) return rawUrl;
   const route = flatRoutes.find((r) => r.path === rawUrl);
   if (route?.principleId) {
     const data = findData(route.principleId) as { answer?: string } | undefined;
@@ -75,7 +71,6 @@ function resolveAdjacentUrl(
 
 export default function LayoutWithDocumentationNavigation() {
   const { routes, prinzips } = useDocumentationRouteData();
-  const simplifiedFlow = useFeatureFlag(features.simplifiedPrincipleFlow);
 
   // exclude documentation notes
   const displayedRoutes = routes.filter((route) => {
@@ -109,18 +104,15 @@ export default function LayoutWithDocumentationNavigation() {
         flatRoutes,
         navigationCurrentUrl,
         getNextUrl,
-        simplifiedFlow,
         findDocumentationDataForUrl,
       )
-    : simplifiedFlow &&
-        currentRoute?.principleId &&
+    : currentRoute?.principleId &&
         (currentPrincipleFormData as { answer?: string } | undefined)?.answer
       ? `${currentUrl}/erlaeuterung`
       : resolveAdjacentUrl(
           flatRoutes,
           currentUrl,
           getNextUrl,
-          simplifiedFlow,
           findDocumentationDataForUrl,
         );
   const previousUrl =
@@ -128,7 +120,6 @@ export default function LayoutWithDocumentationNavigation() {
       flatRoutes,
       navigationCurrentUrl,
       getPreviousUrl,
-      simplifiedFlow,
       findDocumentationDataForUrl,
     ) ?? dokumentation.path;
 
@@ -139,9 +130,9 @@ export default function LayoutWithDocumentationNavigation() {
     dokumentation_zusammenfassung.path,
     dokumentation_absenden.path,
   ];
-  const showHelpPanel =
-    simplifiedFlow &&
-    !excludedPanelRoutes.some((url) => currentUrl.startsWith(url));
+  const showHelpPanel = !excludedPanelRoutes.some((url) =>
+    currentUrl.startsWith(url),
+  );
 
   const getNavItem = (route: Route) => {
     const formData = findDocumentationDataForUrl(
@@ -151,9 +142,7 @@ export default function LayoutWithDocumentationNavigation() {
     const valid = schema.safeParse(formData);
 
     const navUrl =
-      simplifiedFlow &&
-      route.principleId &&
-      (formData as { answer?: string } | undefined)?.answer
+      route.principleId && (formData as { answer?: string } | undefined)?.answer
         ? `${route.path}/erlaeuterung`
         : route.path;
 
@@ -178,12 +167,11 @@ export default function LayoutWithDocumentationNavigation() {
   return (
     <HelpPanelProvider>
       <div
-        className={twJoin(
-          "parent-bg-blue breakout-grid-form-steps grow bg-blue-100",
-          !simplifiedFlow &&
-            "[--content-max-width:calc(var(--max-content-width)-var(--nav-max-width)-var(--gutter)-var(--container-padding-inline)*2)] [--help-width:0]",
-          !showHelpPanel && "[--content-max-width:750px] [--help-width:0]",
-        )}
+        className={
+          showHelpPanel
+            ? "parent-bg-blue breakout-grid-form-steps grow bg-blue-100"
+            : "parent-bg-blue breakout-grid-form-steps grow bg-blue-100 [--content-max-width:750px] [--help-width:0]"
+        }
       >
         <Nav
           className="sticky top-0 hidden self-start py-80 lg:block"

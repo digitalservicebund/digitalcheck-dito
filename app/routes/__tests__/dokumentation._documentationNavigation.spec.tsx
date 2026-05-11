@@ -15,11 +15,11 @@ import {
   createMemoryRouter,
   RouterProvider,
   useOutletContext,
+  useRouteError,
   useRouteLoaderData,
 } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
 import LayoutWithDocumentationNavigation from "~/routes/dokumentation._documentationNavigation";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
@@ -34,22 +34,11 @@ import {
   DATA_SCHEMA_VERSION_V2,
 } from "../dokumentation/documentationDataSchema";
 
-vi.mock("~/contexts/FeatureFlagContext", () => ({
-  useFeatureFlag: vi.fn(),
-}));
-
 vi.mock("react-router", async (importOriginal) => {
   const original = await importOriginal<typeof import("react-router")>();
   return {
     ...original,
     useRouteLoaderData: vi.fn(),
-    useOutletContext: () => {
-      const originalValue = original.useOutletContext();
-      return {
-        ...(originalValue as Record<string, unknown>),
-        featureFlags: {},
-      };
-    },
   };
 });
 
@@ -80,7 +69,7 @@ const documentationFormRoutes = mockRoutes
 
 type ValidationScenario = {
   name: string;
-  documentationData: DocumentationData<V1>;
+  documentationData: DocumentationData<V1> | DocumentationData<V2>;
   expected: {
     completedTitle: boolean;
     completedParticipation: boolean;
@@ -173,17 +162,18 @@ const validationScenarios: ValidationScenario[] = [
     expected: {
       completedTitle: false, // is current route so no states are shown
       completedParticipation: true,
-      completedPrinciples: true,
+      completedPrinciples: false,
 
       warningTitle: false,
       warningParticipation: false,
-      warningPrinciples: false,
+      warningPrinciples: true,
     },
   },
 ];
 
 function renderPage({ path }: Route) {
   function ErrorBoundary() {
+    useRouteError();
     return <h1>Something went wrong</h1>;
   }
   function DummyElement() {
@@ -207,7 +197,7 @@ function renderPage({ path }: Route) {
       ErrorBoundary: ErrorBoundary,
       children: [
         {
-          path: path,
+          path: "*",
           element: <DummyElement />,
           HydrateFallback: () => <div></div>,
         },
@@ -267,7 +257,28 @@ const expectNotWarning = (element: HTMLElement) => {
 
 describe("navigation on pages of documentation", () => {
   beforeEach(() => {
-    vi.mocked(useFeatureFlag).mockImplementation((_flagName) => false);
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      value: vi.fn().mockImplementation((query: string) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      })),
+    });
+    vi.stubGlobal(
+      "ResizeObserver",
+      class {
+        observe = vi.fn();
+        unobserve = vi.fn();
+        disconnect = vi.fn();
+      },
+    );
+
     vi.mocked(useRouteLoaderData).mockReturnValue({ routes: mockRoutes });
   });
 
@@ -371,32 +382,6 @@ describe("navigation on pages of documentation", () => {
   });
 
   describe("V2 States", () => {
-    // HelpSidepanel is rendered when simplifiedPrincipleFlow is on
-    // and uses browser APIs not available in jsdom
-    beforeEach(() => {
-      Object.defineProperty(window, "matchMedia", {
-        writable: true,
-        value: vi.fn().mockImplementation((query: string) => ({
-          matches: false,
-          media: query,
-          onchange: null,
-          addListener: vi.fn(),
-          removeListener: vi.fn(),
-          addEventListener: vi.fn(),
-          removeEventListener: vi.fn(),
-          dispatchEvent: vi.fn(),
-        })),
-      });
-      vi.stubGlobal(
-        "ResizeObserver",
-        class {
-          observe = vi.fn();
-          unobserve = vi.fn();
-          disconnect = vi.fn();
-        },
-      );
-    });
-
     const validationScenariosV2: ValidationScenario[] = [
       {
         name: "all valid completed (V2)",
@@ -417,7 +402,7 @@ describe("navigation on pages of documentation", () => {
               aspects: ["aspect-1"],
             },
           ],
-        } as DocumentationData<V2>,
+        },
         expected: {
           completedTitle: false, // is current route so no states are shown
           completedParticipation: true,
@@ -462,7 +447,7 @@ describe("navigation on pages of documentation", () => {
               aspects: [], // empty aspects fails V2 validation
             },
           ],
-        } as DocumentationData<V2>,
+        },
         expected: {
           completedTitle: false, // is current route so no states are shown
           completedParticipation: true,
@@ -474,10 +459,6 @@ describe("navigation on pages of documentation", () => {
         },
       },
     ];
-
-    beforeEach(() => {
-      vi.mocked(useFeatureFlag).mockImplementation((_flagName) => true);
-    });
 
     describe.each(validationScenariosV2)(
       "Scenario: $name",

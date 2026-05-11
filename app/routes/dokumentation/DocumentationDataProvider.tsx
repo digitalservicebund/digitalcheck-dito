@@ -11,14 +11,12 @@ import {
   useMemo,
   useState,
 } from "react";
-import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import type {
   DocumentationData,
   Participation,
   PolicyTitle,
   Principle,
-  PrincipleReasoningV1,
   V1,
   V2,
 } from "~/routes/dokumentation/documentationDataSchema";
@@ -28,7 +26,6 @@ import {
   DATA_SCHEMA_VERSION_V2,
 } from "~/routes/dokumentation/documentationDataSchema";
 
-import { features } from "~/utils/featureFlags";
 import {
   readDataFromLocalStorage,
   removeFromLocalStorage,
@@ -38,16 +35,16 @@ import {
 export const STORAGE_KEY = "documentationData";
 
 type DocumentationDataContextType = {
-  documentationData: DocumentationData<V1 | V2>;
+  documentationData: DocumentationData;
   hasSavedDocumentation: boolean;
   getDocumentationSchemaFormUrl: (
     url: string,
   ) => ReturnType<typeof _getDocumentationSchemaFormUrl>;
-  createOrUpdateDocumentationData: (data: DocumentationData<V1 | V2>) => void;
+  createOrUpdateDocumentationData: (data: DocumentationData) => void;
   deleteDocumentationData: () => void;
   setPolicyTitle: (policyTitle?: PolicyTitle) => void;
   setParticipation: (participation?: Participation) => void;
-  addOrUpdatePrinciple: (newPrinciple?: Principle<V1 | V2>) => void;
+  addOrUpdatePrinciple: (newPrinciple?: Principle) => void;
   addOrUpdatePrincipleAnswer: (
     principleId: string,
     newAnswer: Principle["answer"],
@@ -80,9 +77,7 @@ type DocumentationDataProviderProps = {
   children: ReactNode;
 };
 
-type V = typeof DATA_SCHEMA_VERSION_V1 | typeof DATA_SCHEMA_VERSION_V2;
-
-function writeToStorage(data: DocumentationData<V>): void {
+function writeToStorage(data: DocumentationData): void {
   writeVersionedDataToLocalStorage(data, STORAGE_KEY);
 }
 
@@ -117,32 +112,25 @@ function migrateV1ToV2(v1: DocumentationData<V1>): DocumentationData<V2> {
   return updatedDocumentationData;
 }
 
-function getInitialState(version: string): DocumentationData<V> {
-  let storedData = readDataFromLocalStorage<DocumentationData<V>>(STORAGE_KEY);
+function getInitialState(): DocumentationData {
+  let storedData = readDataFromLocalStorage<
+    DocumentationData<V1> | DocumentationData
+  >(STORAGE_KEY);
 
-  if (
-    storedData &&
-    version === DATA_SCHEMA_VERSION_V2 &&
-    storedData.version === DATA_SCHEMA_VERSION_V1
-  ) {
-    storedData = migrateV1ToV2(storedData);
+  if (storedData && storedData.version === DATA_SCHEMA_VERSION_V1) {
+    storedData = migrateV1ToV2(storedData as DocumentationData<V1>);
   }
 
-  if (storedData !== null) return storedData;
-  return { version };
+  if (storedData !== null) return storedData as DocumentationData;
+  return { version: DATA_SCHEMA_VERSION_V2 };
 }
 
 export function DocumentationDataProvider({
   children,
 }: Readonly<DocumentationDataProviderProps>) {
-  const simplifiedFlow = useFeatureFlag(features.simplifiedPrincipleFlow);
-  const version = simplifiedFlow
-    ? DATA_SCHEMA_VERSION_V2
-    : DATA_SCHEMA_VERSION_V1;
-
-  const [documentationData, setDocumentationData] = useState<
-    DocumentationData<V>
-  >({ version } as DocumentationData<V>);
+  const [documentationData, setDocumentationData] = useState<DocumentationData>(
+    { version: DATA_SCHEMA_VERSION_V2 },
+  );
 
   useEffect(() => {
     // Read localStorage only on the client, after hydration, so the first
@@ -150,18 +138,15 @@ export function DocumentationDataProvider({
     // overly strict for this case — see https://react.dev/learn/you-might-not-need-an-effect
 
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setDocumentationData(getInitialState(version));
-  }, [version]);
+    setDocumentationData(getInitialState());
+  }, []);
 
-  const getDocumentationSchemaFormUrl = useCallback(
-    (url: string) => {
-      return _getDocumentationSchemaFormUrl(url, simplifiedFlow);
-    },
-    [simplifiedFlow],
-  );
+  const getDocumentationSchemaFormUrl = useCallback((url: string) => {
+    return _getDocumentationSchemaFormUrl(url);
+  }, []);
 
   const createOrUpdateDocumentationData = useCallback(
-    (data: DocumentationData<V>): void => {
+    (data: DocumentationData): void => {
       writeToStorage(data);
       setDocumentationData(data);
     },
@@ -170,8 +155,8 @@ export function DocumentationDataProvider({
 
   const deleteDocumentationData = useCallback((): void => {
     removeFromLocalStorage(STORAGE_KEY);
-    setDocumentationData(getInitialState(version));
-  }, [version]);
+    setDocumentationData(getInitialState());
+  }, []);
 
   const setPolicyTitle = useCallback(
     (policyTitle?: PolicyTitle) => {
@@ -198,10 +183,10 @@ export function DocumentationDataProvider({
   );
 
   const addOrUpdatePrinciple = useCallback(
-    (newPrinciple?: Principle<V>) => {
+    (newPrinciple?: Principle) => {
       if (!newPrinciple) return;
 
-      const principles = documentationData.principles ?? ([] as Principle<V>[]);
+      const principles = documentationData.principles ?? [];
       const existingIndex = principles.findIndex(
         (existingPrinciple) => existingPrinciple.id === newPrinciple.id,
       );
@@ -225,7 +210,7 @@ export function DocumentationDataProvider({
     (principleId: string, newAnswer: Principle["answer"]) => {
       if (!principleId || !newAnswer) return;
 
-      const principles = (documentationData.principles ?? []) as Principle[];
+      const principles = documentationData.principles ?? [];
       const existingIndex = principles.findIndex(
         (existingPrinciple) => existingPrinciple.id === principleId,
       );
@@ -275,7 +260,7 @@ export function DocumentationDataProvider({
     ) => {
       if (!principleId) return;
 
-      const principles = (documentationData.principles ?? []) as Principle[];
+      const principles = documentationData.principles ?? [];
       const existingIndex = principles.findIndex(
         (existingPrinciple) => existingPrinciple.id === principleId,
       );
@@ -308,32 +293,9 @@ export function DocumentationDataProvider({
       else if (url === dokumentation_beteiligungsformate.path)
         return documentationData.participation;
 
-      const principleData = documentationData.principles?.find(
-        ({ id }) => id === url,
-      );
-
-      if (!principleData) return undefined;
-      if (simplifiedFlow) return principleData as Principle; // simplified flow stops here
-
-      // TODO: remove after enabling simplifiedPrincipleFlow
-      let reasoning: string | PrincipleReasoningV1[];
-
-      if (Array.isArray(principleData.reasoning)) {
-        reasoning = principleData.reasoning?.filter(
-          (r): r is PrincipleReasoningV1 => r?.checkbox !== undefined,
-        );
-      } else {
-        reasoning =
-          (principleData.reasoning as string | PrincipleReasoningV1[]) ?? "";
-      }
-
-      return {
-        ...principleData,
-        // @ts-expect-error somehow ts does not pick up the correct type
-        reasoning,
-      };
+      return documentationData.principles?.find(({ id }) => id === url);
     },
-    [documentationData, simplifiedFlow],
+    [documentationData],
   );
 
   const hasSavedDocumentation =
