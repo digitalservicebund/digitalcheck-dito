@@ -77,7 +77,7 @@ const faqItems = [
     content: dedent`
           Der **Europäische Interoperabilitätsrahmen (EIF)** hilft europäischen öffentlichen Verwaltungen, ihre digitalen Dienste so zu gestalten, dass sie über Ländergrenzen und verschiedene Sektoren hinweg nahtlos zusammenarbeiten. Der EIF eine Art Handbuch, das sicherstellt, dass die digitalen Systeme von Behörden in Deutschland, Frankreich, Polen und anderen EU-Ländern „miteinander sprechen“ können.
 
-          Der [Europäische Interoperabilitäts-Rahmen (EIF)](https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail) definiert vier Ebenen der Interoperabilität, die bei der Gesetzgebung berücksichtigt werden müssen. Mehr dazu [hier](${getTabAnchorLink("hintergrund", "vier-ebenen-der-interoperabilitaet")}).
+          Der [Europäische Interoperabilitäts-Rahmen (EIF)](https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail) definiert vier Ebenen der Interoperabilität, die bei der Gesetzgebung berücksichtigt werden müssen. Mehr dazu [hier](${interoperabel.path}${getTabAnchorLink("hintergrund", "vier-ebenen-der-interoperabilitaet")}).
         `,
   },
   {
@@ -85,7 +85,7 @@ const faqItems = [
     content: dedent`
           Die [Interoperabilitäts-Bewertung](https://interoperable-europe.ec.europa.eu/collection/assessments/submission) ist wie auch die Digitalcheck-Dokumentation ein formeller, letzter Schritt, in dem Sie einige Fragen zu Inhalten der Regelung beantworten. 
 
-          Es geht darum, darzulegen, wie sich Ihre Regelung auf die EU-weite Interoperabilität auswirkt. Der wesentliche Inhalt besteht aus fünf Fragen. Die Bewertung fragt nach sogenannten „[verbindlichen Anforderungen](${getTabAnchorLink("hintergrund", "verbindliche-anforderungen")})“ und prüft deren Einfluss auf die [vier Ebenen der Interoperabilität](${getTabAnchorLink("hintergrund", "vier-ebenen-der-interoperabilitaet")}).
+          Es geht darum, darzulegen, wie sich Ihre Regelung auf die EU-weite Interoperabilität auswirkt. Der wesentliche Inhalt besteht aus fünf Fragen. Die Bewertung fragt nach sogenannten „[verbindlichen Anforderungen](${interoperabel.path}${getTabAnchorLink("hintergrund", "verbindliche-anforderungen")})“ und prüft deren Einfluss auf die [vier Ebenen der Interoperabilität](${interoperabel.path}${getTabAnchorLink("hintergrund", "vier-ebenen-der-interoperabilitaet")}).
 
           Wenn Sie weitere Fragen haben, dann kontaktieren Sie uns unter: ${contact.mdMailToLink(contact.interoperabilityEmail)} oder rufen Sie uns an unter ${contact.mdPhoneLink()}.
         `,
