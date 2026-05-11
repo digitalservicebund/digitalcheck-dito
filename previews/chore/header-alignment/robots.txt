@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: /download/
-Disallow: /feature-flags/
-Disallow: /health-check/
