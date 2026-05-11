@@ -9,6 +9,7 @@ import NewTabLink from "~/components/NewTabLink";
 import Timeline from "~/components/Timeline";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { contact } from "~/resources/content/shared/contact";
+import { assetPath } from "~/utils/assetPath";
 import { features } from "~/utils/featureFlags";
 
 export default function BundeslaenderInfoPage() {
@@ -61,7 +62,7 @@ export default function BundeslaenderInfoPage() {
             <div className="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">
               <div className="flex h-full w-[630px] flex-col justify-center align-middle lg:w-[50vw] [&>img]:object-contain lg:[&>img]:h-[550px]">
                 <Image
-                  url={"public/images/bundeslaender.png"}
+                  url={assetPath("/images/bundeslaender.png")}
                   alternativeText="Eine stilisierte Karte von Deutschland mit den Grenzen der Bundesländer auf blauem Hintergrund."
                 />
               </div>
@@ -105,7 +106,7 @@ export default function BundeslaenderInfoPage() {
               </li>
             </ul>
             <Image
-              url={"public/images/example-laender-page.png"}
+              url={assetPath("/images/example-laender-page.png")}
               alternativeText="Ein Laptop auf hellblauem Hintergrund zeigt den grafischen Entwurf einer Webseite der hessischen Landesregierung."
               className="h-340 w-630 pt-40"
             ></Image>
