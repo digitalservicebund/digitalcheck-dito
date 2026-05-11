@@ -24,7 +24,6 @@ export default defineConfig({
     "/grundlagen": "/methoden/fuenf-prinzipien",
     "/grundlagen/fuenf-prinzipien": "/methoden/fuenf-prinzipien",
     "/methoden/ablaeufe-aufgaben-erfassen": "/methoden/visualisieren",
-    "/digitaltauglichkeit": "/beispiele",
   },
   srcDir: "src",
   publicDir: "public",
