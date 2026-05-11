@@ -14,10 +14,7 @@ import type { NavigationContext } from "./dokumentation._documentationNavigation
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
-import type {
-  DocumentationData,
-  Principle,
-} from "./dokumentation/documentationDataSchema";
+import type { Principle } from "./dokumentation/documentationDataSchema";
 import { principleAnswerSchemaV2 } from "./dokumentation/documentationDataSchema";
 
 const { radioOptions } = digitalDocumentation.principlePages;
@@ -163,9 +160,9 @@ export default function DocumentationPrincipleErlaeuterung() {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw new Response("No Prinzip for slug found", { status: 404 });
 
-  const principleData = (
-    documentationData as DocumentationData
-  )?.principles?.find((p) => p.id === prinzip.documentId);
+  const principleData = documentationData?.principles?.find(
+    (p) => p.id === prinzip.documentId,
+  );
 
   const answer = principleData?.answer ?? "";
   const isPositive = answer === radioOptions[0];

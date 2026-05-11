@@ -22,7 +22,7 @@ import {
 } from "~/routes/dokumentation/documentationDataSchema";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
-import { NavigationContext } from "./dokumentation._documentationNavigation";
+import type { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 

@@ -118,7 +118,7 @@ function getInitialState(): DocumentationData {
   >(STORAGE_KEY);
 
   if (storedData && storedData.version === DATA_SCHEMA_VERSION_V1) {
-    storedData = migrateV1ToV2(storedData as DocumentationData<V1>);
+    storedData = migrateV1ToV2(storedData);
   }
 
   if (storedData !== null) return storedData as DocumentationData;

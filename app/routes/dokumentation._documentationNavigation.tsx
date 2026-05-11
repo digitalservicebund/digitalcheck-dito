@@ -11,7 +11,7 @@ import Stepper from "~/components/Stepper";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
-import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 
 type _Route = { path: string; title: string };

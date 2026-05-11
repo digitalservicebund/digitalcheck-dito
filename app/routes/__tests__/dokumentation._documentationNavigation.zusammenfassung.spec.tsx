@@ -22,7 +22,7 @@ import type {
   V2,
 } from "~/routes/dokumentation/documentationDataSchema";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
-import type { AbsatzWithParagraph } from "~/utils/strapiData.server.ts";
+import type { AbsatzWithParagraph } from "~/utils/strapiData.types";
 import DocumentationSummary from "../dokumentation._documentationNavigation.zusammenfassung";
 
 const MOCK_ROUTE_PRINCIPLE = {

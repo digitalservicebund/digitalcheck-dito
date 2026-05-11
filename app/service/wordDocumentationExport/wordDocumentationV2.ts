@@ -39,7 +39,7 @@ export function useWordDocumentationV2() {
           templateData,
           templateOnly
             ? { version: DATA_SCHEMA_VERSION_V2 }
-            : (documentationData as DocumentationData),
+            : documentationData,
           prinzips,
         );
         saveAs(doc, documentationDocument.filename);
