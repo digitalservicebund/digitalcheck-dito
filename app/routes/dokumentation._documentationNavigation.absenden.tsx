@@ -9,7 +9,7 @@ import InfoBoxList from "~/components/InfoBoxList";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import { useWordDocumentationV2 as useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentationV2";
+import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
 import type { NavigationContext } from "./dokumentation._documentationNavigation";
 
 const { finish } = digitalDocumentation;

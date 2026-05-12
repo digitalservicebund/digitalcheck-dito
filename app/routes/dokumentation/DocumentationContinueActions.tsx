@@ -9,7 +9,7 @@ import Dialog from "~/components/Dialog.tsx";
 import RichText from "~/components/RichText.tsx";
 import { digitalDocumentation } from "~/resources/content/dokumentation.ts";
 import { general } from "~/resources/content/shared/general.ts";
-import { useWordDocumentationV2 as useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentationV2.ts";
+import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
 import { useNonce } from "~/utils/nonce.ts";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { useDocumentationDataService } from "./DocumentationDataProvider";

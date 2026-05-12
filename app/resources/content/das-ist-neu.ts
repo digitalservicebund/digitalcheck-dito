@@ -1,4 +1,3 @@
-import { dokumentationStaticWordV1 } from "@/config/downloads";
 import {
   beispiele,
   beispiele_visualisierungen,
@@ -240,7 +239,7 @@ export const news = {
         - Neue [Startseite](/)
         - Neue Grundlagen-Seite: Was ist [Digitaltauglichkeit](${grundlagen_digitaltauglichkeit.path})?
         - Neue Grundlagen-Seite: [NKR und Digitalcheck](${grundlagen_normenkontrollrat.path})
-        - Neue [Dokumentation als Word-Datei v1.5.1](${dokumentationStaticWordV1.path}) aktualisiert auf Digitalcheck Website, Github und DV
+        - Neue Dokumentation als Word-Datei v1.5.1 aktualisiert auf Digitalcheck Website, Github und DV
         - Beispiele sind wieder im Footer verlinkt
         - [Nationale Kontaktstelle-Seite](${interoperabel_nationaleKontaktstelle.path}): Zeitleiste neu sortiert (Aktuelles oben)
         - Versionsverlauf: Das PDF auf Digitale Verwaltung ist auf die Digitalcheck Website umgezogen und hat sich dabei in eine [Webpage](${dasIstNeu.path}) verwandelt

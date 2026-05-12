@@ -2,11 +2,9 @@ import { contentType } from "mime-types";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
-import {
-  createDoc,
-  FILE_NAME_DOCUMENTATION_TEMPLATE,
-} from "~/service/wordDocumentationExport/wordDocumentationV2";
+import { createDoc } from "~/service/wordDocumentationExport/wordDocumentation";
 
+import { dokumentationTemplateWord } from "@/config/downloads";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_ASPECTS_QUERY,
@@ -35,11 +33,7 @@ export async function loader({ params }: Route.LoaderArgs) {
     throw new Error(principles.error);
   }
 
-  const templatePath = path.join(
-    "public",
-    "documents",
-    FILE_NAME_DOCUMENTATION_TEMPLATE,
-  );
+  const templatePath = path.join("public", dokumentationTemplateWord.path);
   const templateData = await fs.readFile(templatePath);
 
   const fileData = await createDoc(

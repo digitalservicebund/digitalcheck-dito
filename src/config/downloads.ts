@@ -28,22 +28,7 @@ export const zustaendigeAkteureXlsx: DownloadRoute = {
   filename: "Vorlage - Zuständige Akteurinnen und Akteure.xlsx",
 };
 
-export const dokumentationStaticWordV1: DownloadRoute = {
-  path: `${basePath}/documents/Dokumentieren-der-Digitaltauglichkeit_V1-5-1.docx`,
-  filename: "Dokumentieren-der-Digitaltauglichkeit.docx",
-};
-
-export const dokumentationStaticWordV2: DownloadRoute = {
-  path: `${basePath}/documents/Dokumentation_der_Digitaltauglichkeit_V2.docx`, // TODO: use dynamic generation
-  filename: "Dokumentation_der_Digitaltauglichkeit.docx",
-};
-
-export const dokumentationTemplateWordV1: DownloadRoute = {
-  path: `${basePath}/documents/VORLAGE_Dokumentation_der_Digitaltauglichkeit_V1.docx`,
-  filename: "Dokumentieren-der-Digitaltauglichkeit.docx",
-};
-
-export const dokumentationTemplateWordV2: DownloadRoute = {
-  path: `${basePath}/documents/VORLAGE_Dokumentation_der_Digitaltauglichkeit_V2.docx`,
+export const dokumentationTemplateWord: DownloadRoute = {
+  path: `${basePath}/documents/TEMPLATE_Dokumentation_der_Digitaltauglichkeit.docx`,
   filename: "Dokumentation_der_Digitaltauglichkeit.docx",
 };

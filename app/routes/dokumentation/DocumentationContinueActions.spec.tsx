@@ -24,8 +24,8 @@ const ROUTES_DOCUMENTATION_INTRO = [{ path: dokumentation_hinweise.path }];
 const { mockDownloadDocumentation } = vi.hoisted(() => ({
   mockDownloadDocumentation: vi.fn(),
 }));
-vi.mock("~/service/wordDocumentationExport/wordDocumentationV2", () => ({
-  useWordDocumentationV2: vi.fn(() => ({
+vi.mock("~/service/wordDocumentationExport/wordDocumentation", () => ({
+  useWordDocumentation: vi.fn(() => ({
     downloadDocumentation: mockDownloadDocumentation,
   })),
 }));

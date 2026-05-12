@@ -7,7 +7,7 @@ import { digitalDocumentation } from "~/resources/content/dokumentation";
 import type { DocumentationData } from "~/routes/dokumentation/documentationDataSchema";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { getTextFromTextRun, makeNode } from "./testUtils.ts";
-import { buildPrinciplePatches } from "./wordDocumentationV2";
+import { buildPrinciplePatches } from "./wordDocumentation.ts";
 
 const { placeholderOptional } = documentationDocument;
 const { principlePages } = digitalDocumentation;

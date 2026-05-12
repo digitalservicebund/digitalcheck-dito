@@ -22,7 +22,7 @@ import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import { DocumentationContinueActions } from "~/routes/dokumentation/DocumentationContinueActions.tsx";
 import type { DocumentationRouteData } from "~/routes/dokumentation/route.tsx";
-import { useWordDocumentationV2 as useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentationV2.ts";
+import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 
 const { start } = digitalDocumentation;
