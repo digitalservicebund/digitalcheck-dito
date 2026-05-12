@@ -94,8 +94,8 @@ importers:
         specifier: ^21.0.0
         version: 21.0.0
       '@commitlint/types':
-        specifier: ^20.5.0
-        version: 20.5.0
+        specifier: ^21.0.0
+        version: 21.0.0
       '@eslint/compat':
         specifier: ^2.1.0
         version: 2.1.0(eslint@9.39.4(jiti@2.7.0))
@@ -391,10 +391,6 @@ packages:
   '@commitlint/config-conventional@21.0.0':
     resolution: {integrity: sha512-QJX/rPK4Yu3f5J4OCIBy5aXq2e0EEdwSDFZ3NQvFAXTm3gs12ipyZ+yjhZxm3hHn6DB8wuv3zhFTL1I2tYzUBA==}
     engines: {node: '>=22.12.0'}
-
-  '@commitlint/types@20.5.0':
-    resolution: {integrity: sha512-ZJoS8oSq2CAZEpc/YI9SulLrdiIyXeHb/OGqGrkUP6Q7YV+0ouNAa7GjqRdXeQPncHQIDz/jbCTlHScvYvO/gA==}
-    engines: {node: '>=v18'}
 
   '@commitlint/types@21.0.0':
     resolution: {integrity: sha512-6nEz+M7I90iix4sviA8NLwskOuyt0M98KUU2aYgiKbn46jMSxUm1l2ACtzRd9ec+y38aKyJhW4Fp6NW0z35kJQ==}
@@ -4455,11 +4451,6 @@ snapshots:
     dependencies:
       '@commitlint/types': 21.0.0
       conventional-changelog-conventionalcommits: 9.3.1
-
-  '@commitlint/types@20.5.0':
-    dependencies:
-      conventional-commits-parser: 6.4.0
-      picocolors: 1.1.1
 
   '@commitlint/types@21.0.0':
     dependencies:
