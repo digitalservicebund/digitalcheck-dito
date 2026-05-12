@@ -1,6 +1,3 @@
-import NodeCache from "node-cache";
-import crypto from "node:crypto";
-
 const url =
   process.env.STRAPI_URL ??
   "https://secure-dinosaurs-1a634d1a3d.strapiapp.com/graphql";
@@ -168,37 +165,10 @@ type errorResponse = {
   error: string;
 };
 
-function generateCacheKey(query: string, variables?: object): string {
-  const variablesString = variables
-    ? JSON.stringify(
-        variables,
-        Object.keys(variables).sort((a, b) => a.localeCompare(b)),
-      )
-    : "";
-  const hash = crypto
-    .createHash("md5")
-    .update(query + variablesString)
-    .digest("hex");
-  return `cache:${hash}`;
-}
-
-const isDevelopment = process.env.NODE_ENV === "development";
-const options = isDevelopment
-  ? { stdTTL: 10 }
-  : { stdTTL: 300, checkperiod: 30 };
-const cache = new NodeCache(options);
-
 export async function fetchStrapiData<DataType>(
   query: string,
   variables?: object,
 ): Promise<DataType | errorResponse> {
-  const cacheKey = generateCacheKey(query, variables);
-  const cachedData = cache.get<DataType>(cacheKey);
-
-  if (cachedData) {
-    return cachedData;
-  }
-
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -228,7 +198,5 @@ export async function fetchStrapiData<DataType>(
       error: responseData.errors[0].message,
     };
   }
-  cache.set(cacheKey, responseData.data);
-
   return responseData.data;
 }
