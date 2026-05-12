@@ -3,7 +3,6 @@ import ContentWrapper from "~/components/ContentWrapper";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image";
-import InfoBox from "~/components/InfoBox";
 import MetaTitle from "~/components/Meta";
 import NewTabLink from "~/components/NewTabLink";
 import Timeline from "~/components/Timeline";
@@ -60,7 +59,7 @@ export default function BundeslaenderInfoPage() {
               </p>
             </div>
             <div className="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">
-              <div className="flex h-full w-[630px] flex-col justify-center align-middle lg:w-[50vw] [&>img]:object-contain lg:[&>img]:h-[550px]">
+              <div className="bg-ds-blue-500 flex h-full w-[630px] flex-col justify-center align-middle lg:w-[50vw] [&>img]:object-contain lg:[&>img]:h-[550px]">
                 <Image
                   url={assetPath("/images/bundeslaender.png")}
                   alternativeText="Eine stilisierte Karte von Deutschland mit den Grenzen der Bundesländer auf blauem Hintergrund."
@@ -69,8 +68,8 @@ export default function BundeslaenderInfoPage() {
             </div>
           </Container>
         </div>
-        <ContentWrapper compactTopSpacing>
-          <div className="py-40">
+        <ContentWrapper className="space-y-40">
+          <div className="">
             <Heading tagName="h2" className="pb-8">
               Angebot
             </Heading>
@@ -111,21 +110,24 @@ export default function BundeslaenderInfoPage() {
               className="h-340 w-630 pt-40"
             ></Image>
           </div>
-          <div className="py-40">
+          <div className="">
             <Heading tagName="h2">
               Prozess: Kooperation und Erstellung Ihrer Landingpage
             </Heading>
             <Timeline>
-              <Timeline.Item bullet className="max-w-a11y w-full">
+              <Timeline.Item bullet className="w-full max-w-[694px]">
                 <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-80 sm:pt-40 sm:pb-48">
                   <Heading tagName="h3">Schritt 1: Kontakt aufnehmen</Heading>
                   <p>
                     Kontaktieren Sie uns bei Interesse direkt unter{" "}
-                    {contact.bmdsEmail}.
+                    <a href={`mailto:${contact.bmdsEmail}`}>
+                      {contact.bmdsEmail}
+                    </a>
+                    .
                   </p>
                 </Timeline.ItemContent>
               </Timeline.Item>
-              <Timeline.Item bullet className="max-w-a11y w-full">
+              <Timeline.Item bullet className="w-full max-w-[694px]">
                 <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-80 sm:pt-40 sm:pb-48">
                   <Heading tagName="h3">Schritt 2: Gemeinsamer Termin</Heading>
                   <p>
@@ -134,7 +136,7 @@ export default function BundeslaenderInfoPage() {
                   </p>
                 </Timeline.ItemContent>
               </Timeline.Item>
-              <Timeline.Item bullet className="max-w-a11y w-full">
+              <Timeline.Item bullet className="w-full max-w-[694px]">
                 <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-80 sm:pt-40 sm:pb-48">
                   <Heading tagName="h3">
                     Schritt 3: Kooperationsvereinbarung
@@ -146,7 +148,7 @@ export default function BundeslaenderInfoPage() {
                   </p>
                 </Timeline.ItemContent>
               </Timeline.Item>
-              <Timeline.Item bullet className="max-w-a11y w-full">
+              <Timeline.Item bullet className="w-full max-w-[694px]">
                 <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-80 sm:pt-40 sm:pb-48">
                   <Heading tagName="h3">Schritt 4: Inhalte erstellen</Heading>
                   <p>
@@ -157,7 +159,7 @@ export default function BundeslaenderInfoPage() {
                   </p>
                 </Timeline.ItemContent>
               </Timeline.Item>
-              <Timeline.Item bullet className="max-w-a11y w-full">
+              <Timeline.Item bullet className="w-full max-w-[694px]">
                 <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-80 sm:pt-40 sm:pb-48">
                   <Heading tagName="h3">
                     Schritt 5: Erstellung der Unterseite
@@ -168,7 +170,7 @@ export default function BundeslaenderInfoPage() {
                   </p>
                 </Timeline.ItemContent>
               </Timeline.Item>
-              <Timeline.Item bullet className="max-w-a11y w-full">
+              <Timeline.Item bullet className="w-full max-w-[694px]">
                 <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-80 sm:pt-40 sm:pb-48">
                   <Heading tagName="h3">Schritt 6: Freigabe</Heading>
                   <p>
@@ -180,26 +182,20 @@ export default function BundeslaenderInfoPage() {
             </Timeline>
           </div>
         </ContentWrapper>
-        <aside className="bg-blue-300" aria-labelledby="support-banner-heading">
-          <Container className="ds-stack py-80">
-            <InfoBox
-              heading={{
-                tagName: "h2",
-                look: "ds-subhead font-bold",
-                text: "Kontakt",
-                id: "support-banner-heading",
-              }}
-            >
+        <div className="bg-blue-300">
+          <Container className="py-32 sm:py-80">
+            <Heading tagName="h3" text="Kontakt" />
+            <div className="ds-stack ds-stack-16 pt-32">
               <p>
                 Sie haben Interesse an einer Kooperationsvereinbarung oder
                 Rückfragen zum Prozess? Kontaktieren Sie uns unter{" "}
-                {contact.bmdsEmail}.
+                <a href={`mailto:${contact.bmdsEmail}`}>{contact.bmdsEmail}</a>.
               </p>
               <br></br>
               <p>Ansprechpartnerin: Katharina Berndt</p>
-            </InfoBox>
+            </div>
           </Container>
-        </aside>
+        </div>
       </main>
     </>
   );
