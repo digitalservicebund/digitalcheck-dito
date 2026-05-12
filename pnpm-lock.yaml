@@ -21,8 +21,8 @@ importers:
         specifier: ^2.2.10
         version: 2.2.10(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@posthog/core':
-        specifier: ^1.28.3
-        version: 1.28.3
+        specifier: ^1.28.4
+        version: 1.28.4
       '@react-router/node':
         specifier: ^7.15.0
         version: 7.15.0(react-router@7.15.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(typescript@6.0.3)
