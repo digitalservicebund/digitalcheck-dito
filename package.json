@@ -57,7 +57,6 @@
     "marked": "^18.0.4",
     "mime-types": "^3.0.2",
     "msw": "^2.14.6",
-    "node-cache": "^5.1.2",
     "pdf-lib": "^1.17.1",
     "picomatch": "^4.0.4",
     "posthog-js": "^1.376.0",
