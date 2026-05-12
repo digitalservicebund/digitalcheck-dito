@@ -15,11 +15,18 @@ import { principleAnswerOnlySchema } from "./dokumentation/documentationDataSche
 
 const { radioOptions } = digitalDocumentation.principlePages;
 
-export default function DocumentationPrinciple() {
-  const { principleId } = useParams();
-  const { currentUrl, nextUrl, previousUrl, prinzips } =
-    useOutletContext<NavigationContext>();
-
+export function DocumentationPrinciple({
+  principleId,
+  currentUrl,
+  nextUrl,
+  previousUrl,
+  prinzips,
+}: Pick<
+  NavigationContext,
+  "currentUrl" | "nextUrl" | "previousUrl" | "prinzips"
+> & {
+  principleId: string;
+}) {
   const prinzip = prinzips.find(
     ({ URLBezeichnung }) => URLBezeichnung === principleId,
   );
@@ -110,5 +117,23 @@ export default function DocumentationPrinciple() {
         </form>
       </div>
     </>
+  );
+}
+
+export default function Route() {
+  const { principleId } = useParams();
+  const { currentUrl, nextUrl, previousUrl, prinzips } =
+    useOutletContext<NavigationContext>();
+  if (!principleId)
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
+    throw new Response("No principleId provided", { status: 404 });
+  return (
+    <DocumentationPrinciple
+      principleId={principleId}
+      currentUrl={currentUrl}
+      nextUrl={nextUrl}
+      previousUrl={previousUrl}
+      prinzips={prinzips}
+    />
   );
 }

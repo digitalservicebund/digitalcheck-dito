@@ -142,15 +142,19 @@ function DocumentationPrincipleErlaeuterungForm({
   );
 }
 
-export default function DocumentationPrincipleErlaeuterung() {
-  const { principleId } = useParams();
-  const { currentUrl, nextUrl, previousUrl, prinzips } =
-    useOutletContext<NavigationContext>();
+export function DocumentationPrincipleErlaeuterung({
+  principleId,
+  currentUrl,
+  nextUrl,
+  previousUrl,
+  prinzips,
+}: Pick<
+  NavigationContext,
+  "currentUrl" | "nextUrl" | "previousUrl" | "prinzips"
+> & {
+  principleId: string;
+}) {
   const { documentationData } = useDocumentationDataService();
-
-  if (!principleId)
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("No principleId provided", { status: 404 });
 
   const prinzip = prinzips.find(
     ({ URLBezeichnung }) => URLBezeichnung === principleId,
@@ -234,5 +238,23 @@ export default function DocumentationPrincipleErlaeuterung() {
         />
       </div>
     </>
+  );
+}
+
+export default function Route() {
+  const { principleId } = useParams();
+  const { currentUrl, nextUrl, previousUrl, prinzips } =
+    useOutletContext<NavigationContext>();
+  if (!principleId)
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
+    throw new Response("No principleId provided", { status: 404 });
+  return (
+    <DocumentationPrincipleErlaeuterung
+      principleId={principleId}
+      currentUrl={currentUrl}
+      nextUrl={nextUrl}
+      previousUrl={previousUrl}
+      prinzips={prinzips}
+    />
   );
 }

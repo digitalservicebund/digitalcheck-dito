@@ -224,10 +224,12 @@ function PrincipleContent({
   );
 }
 
-export default function DocumentationSummary() {
-  const { routes, previousUrl, nextUrl, prinzips } =
-    useOutletContext<NavigationContext>();
-
+export function DocumentationSummary({
+  routes,
+  previousUrl,
+  nextUrl,
+  prinzips,
+}: Pick<NavigationContext, "routes" | "previousUrl" | "nextUrl" | "prinzips">) {
   const { documentationData } = useDocumentationDataService();
 
   const items: InfoBoxProps[] = [
@@ -295,5 +297,18 @@ export default function DocumentationSummary() {
       </InfoBoxList>
       <DocumentationActions previousUrl={previousUrl} nextUrl={nextUrl} />
     </>
+  );
+}
+
+export default function Route() {
+  const { routes, previousUrl, nextUrl, prinzips } =
+    useOutletContext<NavigationContext>();
+  return (
+    <DocumentationSummary
+      routes={routes}
+      previousUrl={previousUrl}
+      nextUrl={nextUrl}
+      prinzips={prinzips}
+    />
   );
 }

@@ -17,9 +17,11 @@ import { useDocumentationDataService } from "./dokumentation/DocumentationDataPr
 
 const { participation } = digitalDocumentation;
 
-export default function DocumentationParticipation() {
-  const { currentUrl, nextUrl, previousUrl } =
-    useOutletContext<NavigationContext>();
+export function DocumentationParticipation({
+  currentUrl,
+  nextUrl,
+  previousUrl,
+}: Pick<NavigationContext, "currentUrl" | "nextUrl" | "previousUrl">) {
   const { setParticipation, documentationData } = useDocumentationDataService();
 
   const form = useSyncedForm({
@@ -94,5 +96,17 @@ export default function DocumentationParticipation() {
         </form>
       </div>
     </>
+  );
+}
+
+export default function Route() {
+  const { currentUrl, nextUrl, previousUrl } =
+    useOutletContext<NavigationContext>();
+  return (
+    <DocumentationParticipation
+      currentUrl={currentUrl}
+      nextUrl={nextUrl}
+      previousUrl={previousUrl}
+    />
   );
 }

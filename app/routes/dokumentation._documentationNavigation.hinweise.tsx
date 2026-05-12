@@ -24,8 +24,10 @@ b) Ihr SINA-Rechner die Daten löscht (falls das bei Ihnen voreingestellt ist)
 Zur externen Weiterbearbeitung, internen Abstimmung oder für Änderungen können Sie den aktuellen Stand Ihrer Angaben als Word-Dokument exportieren und lokal speichern. Die finale Datei können Sie zu jedem Zeitpunkt per E-Mail an den NKR versenden.
 `;
 
-export default function DocumentationParticipation() {
-  const { nextUrl, previousUrl } = useOutletContext<NavigationContext>();
+export function DocumentationHinweise({
+  nextUrl,
+  previousUrl,
+}: Pick<NavigationContext, "nextUrl" | "previousUrl">) {
   const navigate = useNavigate();
 
   const [checked, setChecked] = useState<boolean>(false);
@@ -70,4 +72,9 @@ export default function DocumentationParticipation() {
       </ButtonContainer>
     </>
   );
+}
+
+export default function Route() {
+  const { nextUrl, previousUrl } = useOutletContext<NavigationContext>();
+  return <DocumentationHinweise nextUrl={nextUrl} previousUrl={previousUrl} />;
 }

@@ -10,6 +10,7 @@ import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
+import type { DocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
@@ -69,9 +70,10 @@ function resolveAdjacentUrl(
   return rawUrl;
 }
 
-export default function LayoutWithDocumentationNavigation() {
-  const { routes, prinzips } = useDocumentationRouteData();
-
+export function LayoutWithDocumentationNavigation({
+  routes,
+  prinzips,
+}: DocumentationRouteData) {
   // exclude documentation notes
   const displayedRoutes = routes.filter((route) => {
     if (Array.isArray(route)) return true;
@@ -220,5 +222,12 @@ export default function LayoutWithDocumentationNavigation() {
         {showHelpPanel && <HelpSidepanel />}
       </div>
     </HelpPanelProvider>
+  );
+}
+
+export default function Route() {
+  const { routes, prinzips } = useDocumentationRouteData();
+  return (
+    <LayoutWithDocumentationNavigation routes={routes} prinzips={prinzips} />
   );
 }

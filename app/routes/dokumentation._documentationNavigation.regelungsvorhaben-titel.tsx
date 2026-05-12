@@ -16,9 +16,11 @@ import { useDocumentationDataService } from "./dokumentation/DocumentationDataPr
 
 const { info } = digitalDocumentation;
 
-export default function DocumentationTitle() {
-  const { currentUrl, nextUrl, previousUrl } =
-    useOutletContext<NavigationContext>();
+export function DocumentationTitle({
+  currentUrl,
+  nextUrl,
+  previousUrl,
+}: Pick<NavigationContext, "currentUrl" | "nextUrl" | "previousUrl">) {
   const { documentationData, setPolicyTitle } = useDocumentationDataService();
 
   const form = useSyncedForm({
@@ -63,5 +65,17 @@ export default function DocumentationTitle() {
         </form>
       </div>
     </>
+  );
+}
+
+export default function Route() {
+  const { currentUrl, nextUrl, previousUrl } =
+    useOutletContext<NavigationContext>();
+  return (
+    <DocumentationTitle
+      currentUrl={currentUrl}
+      nextUrl={nextUrl}
+      previousUrl={previousUrl}
+    />
   );
 }

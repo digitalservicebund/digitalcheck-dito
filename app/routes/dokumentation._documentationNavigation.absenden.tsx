@@ -14,8 +14,9 @@ import type { NavigationContext } from "./dokumentation._documentationNavigation
 
 const { finish } = digitalDocumentation;
 
-export default function DocumentationSend() {
-  const { prinzips } = useOutletContext<NavigationContext>();
+export function DocumentationSend({
+  prinzips,
+}: Pick<NavigationContext, "prinzips">) {
   const { downloadDocumentation } = useWordDocumentation();
 
   return (
@@ -76,4 +77,9 @@ export default function DocumentationSend() {
       </InfoBoxList>
     </>
   );
+}
+
+export default function Route() {
+  const { prinzips } = useOutletContext<NavigationContext>();
+  return <DocumentationSend prinzips={prinzips} />;
 }
