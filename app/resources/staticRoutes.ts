@@ -13,5 +13,3 @@ export const ROUTE_SUPPORT_TRAININGS =
 
 // ── Dynamic route base paths (no static page) ─────────────────────────────────
 export const ROUTE_REGELUNGEN = beispiele.path + "/regelungen";
-
-export const ROUTE_VISUALISATION = beispiele.path + "/visualisierung";
