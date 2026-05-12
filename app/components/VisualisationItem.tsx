@@ -1,13 +1,8 @@
 import { ZoomInOutlined } from "@digitalservicebund/icons";
 import { Link } from "react-router";
-import { twJoin } from "tailwind-merge";
 import Heading from "~/components/Heading";
 import Image from "~/components/Image";
-import {
-  ROUTE_REGELUNGEN,
-  ROUTE_VISUALISATION,
-} from "~/resources/staticRoutes";
-import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
+import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
 import type { Visualisierung } from "~/utils/strapiData.types";
 import { formatDate } from "~/utils/utilFunctions";
 import { BlocksRenderer } from "./BlocksRenderer";
@@ -28,12 +23,8 @@ const LabelValuePair = ({ label, value }: { label: string; value?: string }) =>
 
 export default function VisualisationItem({
   visualisierung,
-  plausibleEventName,
   showContext,
 }: Readonly<VisualisationItemProps>) {
-  const visualisationUrl = visualisierung.Bild.url.split("/").pop();
-  const plausibleEvent = getPlausibleEventClassName(plausibleEventName);
-
   return (
     <div className="ds-stack ds-stack-32">
       <Heading
@@ -57,15 +48,8 @@ export default function VisualisationItem({
       <div className="flex gap-16 max-sm:flex-col sm:gap-24">
         <div className="sm:w-1/2">
           <Link
-            to={`${ROUTE_VISUALISATION}/${visualisationUrl}`}
-            reloadDocument
-            target="_blank"
-            rel="noreferrer"
-            state={{ image: visualisierung.Bild }}
-            className={twJoin(
-              "relative block aspect-square cursor-zoom-in overflow-hidden border border-blue-500",
-              plausibleEvent,
-            )}
+            to={visualisierung.Bild.url}
+            className="relative block aspect-square cursor-zoom-in overflow-hidden border border-blue-500"
           >
             <Image
               url={visualisierung.Bild.url}
