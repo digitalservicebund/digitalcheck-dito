@@ -18,7 +18,9 @@ import BeteiligungsformatePage from "~/routes/dokumentation._documentationNaviga
 import HinweisePage from "~/routes/dokumentation._documentationNavigation.hinweise";
 import TitelPage from "~/routes/dokumentation._documentationNavigation.regelungsvorhaben-titel";
 import ZusammenfassungPage from "~/routes/dokumentation._documentationNavigation.zusammenfassung";
+import { DokumentationIndexPage } from "~/routes/dokumentation._index";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
+
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
 type Route = _Route & { principleId?: string };
@@ -58,6 +60,7 @@ export function buildDocumentationRoutes(
 }
 
 const pages = {
+  index: DokumentationIndexPage,
   hinweise: HinweisePage,
   "regelungsvorhaben-titel": TitelPage,
   beteiligungsformate: BeteiligungsformatePage,
