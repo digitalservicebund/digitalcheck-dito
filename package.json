@@ -57,8 +57,8 @@
     "pdf-lib": "^1.17.1",
     "picomatch": "^4.0.4",
     "posthog-js": "^1.372.9",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
     "react-router": "^7.15.0",
     "tailwind-merge": "^3.5.0",
     "zod": "~4.2.1"
