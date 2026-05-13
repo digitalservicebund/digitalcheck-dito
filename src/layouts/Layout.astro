@@ -13,6 +13,8 @@ interface Props {
   showProgressBar?: boolean;
 }
 
+const currentPath = Astro.url.pathname;
+
 const {
   title,
   description = siteMeta.description,
@@ -87,7 +89,7 @@ const jsonLdMetadata = {
     <!-- <ClientRouter /> -->
   </head>
   <body class="flex min-h-screen flex-col">
-    <PageHeader client:load />
+    <PageHeader client:load currentPath={currentPath} />
     {showProgressBar && <ProgressBar />}
     <div
       class="grow [&:has(.parent-bg-blue)]:flex [&:has(.parent-bg-blue)]:flex-col [&:has(.parent-bg-blue)]:bg-blue-100"

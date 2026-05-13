@@ -5,7 +5,7 @@ import {
   PhoneOutlined,
 } from "@digitalservicebund/icons";
 import { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router";
+import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Container from "~/components/Container";
 import { Kopfzeile } from "~/components/kern-preview/Kopfzeile.tsx";
@@ -75,9 +75,7 @@ const isParentItemActive = (item: HeaderItem, path: string): boolean => {
   });
 };
 
-const PageHeader = () => {
-  const location = useLocation();
-  const currentPath = location.pathname;
+const PageHeader = ({ currentPath }: { currentPath: string }) => {
   const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
