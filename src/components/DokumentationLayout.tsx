@@ -212,6 +212,7 @@ function DokumentationLayoutInner({
           <DocumentationPrincipleErlaeuterung
             principleId={principleId}
             currentUrl={currentUrl}
+            navigationBaseUrl={navigationCurrentUrl}
             nextUrl={nextUrl ?? ""}
             previousUrl={previousUrl}
             prinzips={prinzips}
