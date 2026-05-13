@@ -1,4 +1,3 @@
-import { includeIgnoreFile } from "@eslint/compat";
 import eslint from "@eslint/js";
 import importPlugin from "eslint-plugin-import";
 import jsxA11y from "eslint-plugin-jsx-a11y";
@@ -18,8 +17,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default defineConfig(
-  // Global ignores
-  includeIgnoreFile(fileURLToPath(new URL(".gitignore", import.meta.url))),
   // Global settings
   {
     languageOptions: {
