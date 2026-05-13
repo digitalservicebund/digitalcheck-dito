@@ -111,12 +111,22 @@ function Answer({
 function PolicyTitleContent({
   policyTitle,
 }: Readonly<{ policyTitle: PolicyTitle }>) {
+  const publicationAnswer =
+    policyTitle.publicationDate || policyTitle.publicationLink;
+  const publicationPrefix = policyTitle.publicationDate
+    ? "Voraussichtliches Veröffentlichungsdatum"
+    : "Link zum Referentenentwurf";
+
   return (
     <Answer
       answers={[
         {
           prefix: "Vorläufiger Arbeitstitel des Vorhabens",
           answer: policyTitle.title,
+        },
+        {
+          prefix: publicationPrefix,
+          answer: publicationAnswer,
         },
       ]}
     />

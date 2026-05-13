@@ -23,6 +23,9 @@ const { principlePages, participation, info } = digitalDocumentation;
 export const policyHeaderSchema = z.object({
   title: z.string().min(1, { message: info.inputTitle.error }),
   organization: z.string().optional(),
+  publicationStatus: z.string(),
+  publicationDate: z.string().optional(),
+  publicationLink: z.string().optional(),
 });
 
 export const participationSchema = z.object({
@@ -186,6 +189,9 @@ export const principleSchemaV2 = principleAnswerSchemaV2.and(
 export const defaultTitleValues: PolicyTitle = {
   title: "",
   organization: undefined,
+  publicationStatus: "",
+  publicationDate: "",
+  publicationLink: "",
 };
 
 export const defaultParticipationValues: Participation = {

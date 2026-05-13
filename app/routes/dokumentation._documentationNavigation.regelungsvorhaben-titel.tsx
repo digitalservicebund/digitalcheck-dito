@@ -1,3 +1,4 @@
+import { useField } from "@rvf/react";
 import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
@@ -30,6 +31,10 @@ export default function DocumentationTitle() {
     nextUrl,
   });
 
+  const publicationStatusField = useField(form.scope("publicationStatus"));
+  const publicationDateField = useField(form.scope("publicationDate"));
+  const publicationLinkField = useField(form.scope("publicationLink"));
+
   return (
     <>
       <MetaTitle prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_TITLE.title}`} />
@@ -54,7 +59,61 @@ export default function DocumentationTitle() {
           <Input scope={form.scope("organization")} warningInsteadOfError>
             Ministerium / Organisation
           </Input>
+          <legend className="ds-heading-03-reg mb-16">
+            Wann soll der Referentenentwurf vorraussichtlich veröffentlicht
+            werden?
+            <HelpButton
+              sectionId="veröffentlichung"
+              title="Hinweis zur Veröffentlichung des Regelungsvorhabens"
+            ></HelpButton>
+          </legend>
+          <div className="space-y-24">
+            <div>
+              <label className="flex items-center gap-12">
+                <input
+                  type="radio"
+                  name="publicationStatus"
+                  value="planned"
+                  {...publicationStatusField.getInputProps({
+                    type: "radio",
+                    onChange: () => publicationLinkField.setValue(""),
+                  })}
+                  className="ds-radio"
+                />
+                <span>Die Veröffentlichung ist geplant am...</span>
+              </label>
+              {publicationStatusField.value() === "planned" && (
+                <div className="mt-16 ml-28">
+                  <Input scope={form.scope("publicationDate")}>
+                    Voraussichtliches Veröffentlichungsdatum
+                  </Input>
+                </div>
+              )}
+            </div>
 
+            <div>
+              <label className="flex items-center gap-12">
+                <input
+                  type="radio"
+                  name="publicationStatus"
+                  value="published"
+                  {...publicationStatusField.getInputProps({
+                    type: "radio",
+                    onChange: () => publicationDateField.setValue(""),
+                  })}
+                  className="ds-radio"
+                />
+                <span>Er ist bereits veröffentlicht</span>
+              </label>
+              {publicationStatusField.value() === "published" && (
+                <div className="mt-16 ml-28">
+                  <Input scope={form.scope("publicationLink")}>
+                    Bitte Link zum Referentenentwurf einfügen
+                  </Input>
+                </div>
+              )}
+            </div>
+          </div>
           <DocumentationActions
             previousUrl={previousUrl}
             submit
