@@ -11,7 +11,7 @@ export const frontmatter = {
 const { questionIdx, question } = getQuestion("eu-bezug");
 ---
 
-<Layout title={frontmatter.title} showProgressBar={true}>
+<Layout title={frontmatter.title} showProgressBar>
   <VorpruefungNavigation client:load>
     <PreCheckQuestion
       client:load
