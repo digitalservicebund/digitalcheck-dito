@@ -1,0 +1,12 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "exclude": ["dist"],
+  "compilerOptions": {
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "paths": {
+      "@/*": ["./src/*"],
+      "~/*": ["./app/*"],
+      "react-router": ["./app/utils/routerCompat.tsx"]
+    }
+  }
+}
