@@ -12,7 +12,6 @@ import { Kopfzeile } from "~/components/kern-preview/Kopfzeile.tsx";
 import RichText from "~/components/RichText";
 import { useResize } from "~/hooks/deviceHook";
 import DropdownMenu from "~/layout/DropdownMenu.tsx";
-import ProgressBar from "~/layout/ProgressBar";
 import { header } from "~/resources/content/shared/header.ts";
 
 import { assetPath } from "~/utils/assetPath";
@@ -76,11 +75,7 @@ const isParentItemActive = (item: HeaderItem, path: string): boolean => {
   });
 };
 
-const PageHeader = ({
-  showProgressBar = false,
-}: {
-  showProgressBar?: boolean;
-}) => {
+const PageHeader = () => {
   const location = useLocation();
   const currentPath = location.pathname;
   const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
@@ -273,7 +268,6 @@ const PageHeader = ({
           </div>
         </noscript>
       </header>
-      {showProgressBar && <ProgressBar />}
     </>
   );
 };

@@ -17,6 +17,6 @@ const result = await fetchStrapiData<{
 const prinzips = "error" in result ? [] : result.prinzips;
 ---
 
-<Layout title={frontmatter.title}>
+<Layout title={frontmatter.title} showProgressBar>
   <DokumentationIndexPageWithProvider client:load prinzips={prinzips} />
 </Layout>
