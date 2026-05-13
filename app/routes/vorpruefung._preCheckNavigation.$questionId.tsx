@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLoaderData, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 import { vorpruefung } from "@/config/routes";
 import Button, { LinkButton } from "~/components/Button.tsx";
@@ -13,11 +13,12 @@ import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
 import { preCheckQuestions } from "~/resources/content/shared/pre-check-questions";
 import { preCheck } from "~/resources/content/vorpruefung";
-import type { Route } from "./+types/vorpruefung._preCheckNavigation.$questionId";
 import { usePreCheckData, useSyncedForm } from "./vorpruefung/preCheckDataHook";
 import type { PreCheckAnswerSchema } from "./vorpruefung/preCheckDataSchema";
 import { answerSchema } from "./vorpruefung/preCheckDataSchema";
 import { addOrUpdateAnswer } from "./vorpruefung/preCheckDataService";
+
+// data fetching moved to @/src/pages/vorpruefung/
 
 const ROUTES_PRECHECK_QUESTIONS = Object.values(preCheckQuestions).map((q) => ({
   path: q.path,
@@ -25,23 +26,6 @@ const ROUTES_PRECHECK_QUESTIONS = Object.values(preCheckQuestions).map((q) => ({
 }));
 
 const { questions, answerOptions, nextButton } = preCheck;
-
-export function loader({ params }: Route.LoaderArgs) {
-  const questionIdx = questions.findIndex((q) => q.id === params.questionId);
-  // return 404 if the question is not found
-  if (questionIdx === -1) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("Question not found", {
-      status: 404,
-      statusText: "Not Found",
-    });
-  }
-
-  return {
-    questionIdx,
-    question: questions[questionIdx],
-  };
-}
 
 export type TQuestion = {
   id: string;
@@ -214,9 +198,4 @@ export function PreCheckQuestion({
       </div>
     </form>
   );
-}
-
-export default function Route() {
-  const { questionIdx, question } = useLoaderData<typeof loader>();
-  return <PreCheckQuestion questionIdx={questionIdx} question={question} />;
 }

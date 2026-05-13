@@ -152,7 +152,7 @@ export function useLocation(): Location {
  * Intended for use during render, e.g. to guard a route when a precondition
  * is not met (redirect to previous step when no answer has been saved yet).
  */
-export function redirect(url: string): void {
+export function redirect(url: string, _status?: number): void {
   if (typeof window !== "undefined") {
     window.location.replace(url);
   }
