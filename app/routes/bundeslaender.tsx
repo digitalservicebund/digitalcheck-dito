@@ -1,4 +1,4 @@
-import FileDownloadOutlined from "@digitalservicebund/icons/FileDownloadOutlined";
+import { FileDownloadOutlined } from "@digitalservicebund/icons";
 import Container from "~/components/Container";
 import ContentWrapper from "~/components/ContentWrapper";
 import Heading from "~/components/Heading";
