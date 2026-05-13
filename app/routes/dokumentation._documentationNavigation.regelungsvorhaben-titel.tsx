@@ -20,7 +20,11 @@ export function DocumentationTitle({
   currentUrl,
   nextUrl,
   previousUrl,
-}: Pick<NavigationContext, "currentUrl" | "nextUrl" | "previousUrl">) {
+  prinzips,
+}: Pick<
+  NavigationContext,
+  "currentUrl" | "nextUrl" | "previousUrl" | "prinzips"
+>) {
   const { documentationData, setPolicyTitle } = useDocumentationDataService();
 
   const form = useSyncedForm({
@@ -61,6 +65,7 @@ export function DocumentationTitle({
             submit
             showDownloadDraftButton
             showSavingTip
+            prinzips={prinzips}
           />
         </form>
       </div>
@@ -69,13 +74,14 @@ export function DocumentationTitle({
 }
 
 export default function Route() {
-  const { currentUrl, nextUrl, previousUrl } =
+  const { currentUrl, nextUrl, previousUrl, prinzips } =
     useOutletContext<NavigationContext>();
   return (
     <DocumentationTitle
       currentUrl={currentUrl}
       nextUrl={nextUrl}
       previousUrl={previousUrl}
+      prinzips={prinzips}
     />
   );
 }

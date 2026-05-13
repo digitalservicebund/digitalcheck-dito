@@ -21,7 +21,11 @@ export function DocumentationParticipation({
   currentUrl,
   nextUrl,
   previousUrl,
-}: Pick<NavigationContext, "currentUrl" | "nextUrl" | "previousUrl">) {
+  prinzips,
+}: Pick<
+  NavigationContext,
+  "currentUrl" | "nextUrl" | "previousUrl" | "prinzips"
+>) {
   const { setParticipation, documentationData } = useDocumentationDataService();
 
   const form = useSyncedForm({
@@ -92,6 +96,7 @@ export function DocumentationParticipation({
             submit
             showDownloadDraftButton
             showSavingTip
+            prinzips={prinzips}
           />
         </form>
       </div>
@@ -100,13 +105,14 @@ export function DocumentationParticipation({
 }
 
 export default function Route() {
-  const { currentUrl, nextUrl, previousUrl } =
+  const { currentUrl, nextUrl, previousUrl, prinzips } =
     useOutletContext<NavigationContext>();
   return (
     <DocumentationParticipation
       currentUrl={currentUrl}
       nextUrl={nextUrl}
       previousUrl={previousUrl}
+      prinzips={prinzips}
     />
   );
 }

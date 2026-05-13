@@ -4,14 +4,13 @@ import {
   dokumentation_hinweise,
   dokumentation_zusammenfassung,
 } from "@/config/routes";
-import { Outlet, useLocation } from "react-router";
+import type { ReactNode } from "react";
+import { Outlet, useLocation, useRouteLoaderData } from "react-router";
 import HelpSidepanel from "~/components/HelpSidepanel";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import type { DocumentationRouteData } from "~/routes/dokumentation/route.tsx";
-import { useDocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 
@@ -73,15 +72,19 @@ function resolveAdjacentUrl(
 export function LayoutWithDocumentationNavigation({
   routes,
   prinzips,
-}: DocumentationRouteData) {
+  children,
+  currentUrl,
+}: {
+  routes: (Route | Route[])[];
+  prinzips: PrinzipWithAspekteAndExample[];
+  children?: ReactNode;
+  currentUrl: string;
+}) {
   // exclude documentation notes
   const displayedRoutes = routes.filter((route) => {
     if (Array.isArray(route)) return true;
     return route.path !== dokumentation_hinweise.path;
   });
-
-  const location = useLocation();
-  const currentUrl = location.pathname;
 
   // Detect erlaeuterung sub-page
   const isErlaeuterungPage = currentUrl.endsWith("/erlaeuterung");
@@ -218,6 +221,7 @@ export function LayoutWithDocumentationNavigation({
               prinzips,
             }}
           />
+          {children}
         </main>
         {showHelpPanel && <HelpSidepanel />}
       </div>
@@ -226,8 +230,18 @@ export function LayoutWithDocumentationNavigation({
 }
 
 export default function Route() {
-  const { routes, prinzips } = useDocumentationRouteData();
+  const data = useRouteLoaderData<{
+    routes: (Route | Route[])[];
+    prinzips: PrinzipWithAspekteAndExample[];
+  }>("routes/dokumentation");
+  const location = useLocation();
+  const currentUrl = location.pathname;
+  if (!data) return null;
   return (
-    <LayoutWithDocumentationNavigation routes={routes} prinzips={prinzips} />
+    <LayoutWithDocumentationNavigation
+      routes={data.routes}
+      prinzips={data.prinzips}
+      currentUrl={currentUrl}
+    />
   );
 }

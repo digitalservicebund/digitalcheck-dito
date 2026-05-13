@@ -28,6 +28,7 @@ type DocumentationPrincipleErlaeuterungFormProps = {
   currentUrl: string;
   nextUrl: string;
   previousUrl: string;
+  prinzips: NavigationContext["prinzips"];
 };
 
 function DocumentationPrincipleErlaeuterungForm({
@@ -39,6 +40,7 @@ function DocumentationPrincipleErlaeuterungForm({
   currentUrl,
   nextUrl,
   previousUrl,
+  prinzips,
 }: DocumentationPrincipleErlaeuterungFormProps) {
   const { addOrUpdatePrincipleReasoning } = useDocumentationDataService();
 
@@ -137,6 +139,7 @@ function DocumentationPrincipleErlaeuterungForm({
         submit
         showDownloadDraftButton
         showSavingTip
+        prinzips={prinzips}
       />
     </form>
   );
@@ -235,6 +238,7 @@ export function DocumentationPrincipleErlaeuterung({
           currentUrl={currentUrl}
           nextUrl={nextUrl}
           previousUrl={previousUrl}
+          prinzips={prinzips}
         />
       </div>
     </>

@@ -113,6 +113,7 @@ export function DocumentationPrinciple({
             submit
             showDownloadDraftButton
             showSavingTip
+            prinzips={prinzips}
           />
         </form>
       </div>

@@ -1,5 +1,4 @@
 import { PublishedWithChangesOutlined } from "@digitalservicebund/icons";
-import { useOutletContext } from "react-router";
 import Button, { DownloadButton, LinkButton } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
@@ -21,6 +20,7 @@ type DocumentationActionsProps = {
   previousUrl?: string;
   showDownloadDraftButton?: boolean;
   showSavingTip?: boolean;
+  prinzips?: NavigationContext["prinzips"];
 } & (SubmitType | NextType);
 
 export default function DocumentationActions({
@@ -29,8 +29,8 @@ export default function DocumentationActions({
   nextUrl,
   showDownloadDraftButton = false,
   showSavingTip = false,
+  prinzips,
 }: Readonly<DocumentationActionsProps>) {
-  const { prinzips } = useOutletContext<NavigationContext>();
   const { downloadDocumentation } = useWordDocumentation();
 
   return (
