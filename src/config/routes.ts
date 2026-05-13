@@ -55,6 +55,17 @@ export const beispiele_visualisierungen = {
   navLabel: null,
 } as const;
 
+export const bundeslaender = {
+  key: "bundeslaender",
+  path: "/bundeslaender",
+  title: "Gemeinsamer Digitalcheck für Bund und Länder",
+  parent: null,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const dasIstNeu = {
   key: "dasIstNeu",
   path: "/das-ist-neu",
@@ -511,6 +522,7 @@ export const allRoutes = [
   beispiele,
   beispiele_prinzipien,
   beispiele_visualisierungen,
+  bundeslaender,
   dasIstNeu,
   datenschutz,
   dokumentation,

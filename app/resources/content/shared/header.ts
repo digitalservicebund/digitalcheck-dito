@@ -1,6 +1,7 @@
 import {
   beispiele_prinzipien,
   beispiele_visualisierungen,
+  bundeslaender,
   dokumentation,
   grundlagen_digitaltauglichkeit,
   grundlagen_normenkontrollrat,
@@ -121,7 +122,7 @@ export const header = {
     {
       plausibleEventName: "Bundesländer",
       text: "Bundesländer",
-      href: "/bundeslaender",
+      href: bundeslaender.path,
       overlayContent: [],
     },
     {
