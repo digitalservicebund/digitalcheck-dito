@@ -4,6 +4,7 @@ import PageHeader from "~/layout/PageHeader";
 import { siteMeta } from "~/resources/content/shared/meta";
 import "@/styles/globals.css";
 import Posthog from "@/components/Posthog.astro";
+import ProgressBar from "@/components/global/ProgressBar.astro";
 
 interface Props {
   title?: string;
@@ -86,7 +87,8 @@ const jsonLdMetadata = {
     <!-- <ClientRouter /> -->
   </head>
   <body class="flex min-h-screen flex-col">
-    <PageHeader client:load showProgressBar={showProgressBar} />
+    <PageHeader client:load />
+    {showProgressBar && <ProgressBar />}
     <div
       class="grow [&:has(.parent-bg-blue)]:flex [&:has(.parent-bg-blue)]:flex-col [&:has(.parent-bg-blue)]:bg-blue-100"
     >
