@@ -10,6 +10,8 @@ fileignoreconfig:
     ignore_detectors: [filename]
   - filename: .env.test
     ignore_detectors: [filename]
+  - filename: src/env.d.ts
+    ignore_detectors: [filename]
   - filename: app/root.tsx
     allowed_patterns: [posthogKey]
   - filename: app/providers/PosthogProvider.tsx
