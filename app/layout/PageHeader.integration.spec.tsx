@@ -41,7 +41,7 @@ describe("PageHeader", () => {
 
       beforeEach(async () => {
         user = userEvent.setup();
-        renderWithRouter(<PageHeader />);
+        renderWithRouter(<PageHeader currentPath="/" />);
 
         desktopNav = screen.getByTestId("desktop-nav");
         firstHeaderItem = within(desktopNav).getByRole("button", {
