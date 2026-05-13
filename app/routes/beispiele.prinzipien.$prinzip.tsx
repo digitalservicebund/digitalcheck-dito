@@ -1,5 +1,5 @@
 import { beispiele_prinzipien } from "@/config/routes";
-import { Link, useLoaderData, useOutletContext } from "react-router";
+import { Link } from "react-router";
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Heading from "~/components/Heading";
@@ -12,53 +12,9 @@ import Separator from "~/components/Separator";
 import RouteTabs from "~/components/Tabs/RouteTabs";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
-import {
-  fetchStrapiData,
-  paragraphFields,
-  prinzipCoreFields,
-} from "~/utils/strapiData.server";
 import type { PrinzipWithBeispielvorhaben } from "~/utils/strapiData.types";
-import type { Route } from "./+types/beispiele.prinzipien.$prinzip";
 
-const GET_PRINZIPS_QUERY = `
-${paragraphFields}
-${prinzipCoreFields}
-query GetPrinzips($slug: String!) {
-  prinzips(filters: { URLBezeichnung: { eq: $slug } }) {
-    ...PrinzipCoreFields
-    Beispielvorhaben {
-      documentId
-      Ressort
-      Rechtsgebiet
-      Titel
-      URLBezeichnung
-      LinkRegelungstext
-      VeroeffentlichungsDatum
-      GesetzStatus
-      Paragraphen {
-        ...ParagraphFields
-      }
-    }
-  }
-}`;
-
-export const loader = async ({ params }: Route.LoaderArgs) => {
-  const prinzipData = await fetchStrapiData<{
-    prinzips: PrinzipWithBeispielvorhaben[];
-  }>(GET_PRINZIPS_QUERY, { slug: params.prinzip });
-
-  if ("error" in prinzipData) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(prinzipData.error, { status: 400 });
-  }
-
-  if (prinzipData.prinzips.length === 0) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("No Prinzip for slug found", { status: 404 });
-  }
-
-  return { prinzip: prinzipData.prinzips[0] };
-};
+// data fetching moved to @/src/pages/beispiele/prinzipien/[prinzip].astro
 
 export function DigitaltauglichkeitPrinzipienDetail({
   prinzip,
@@ -137,16 +93,5 @@ export function DigitaltauglichkeitPrinzipienDetail({
         )}
       </ContentWrapper>
     </>
-  );
-}
-
-export default function Route() {
-  const { prinzip } = useLoaderData<typeof loader>();
-  const prinzips = useOutletContext<PrinzipWithBeispielvorhaben[]>();
-  return (
-    <DigitaltauglichkeitPrinzipienDetail
-      prinzip={prinzip}
-      prinzips={prinzips}
-    />
   );
 }

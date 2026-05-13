@@ -1,5 +1,4 @@
 import type React from "react";
-import { useLoaderData, useOutletContext } from "react-router";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Heading from "~/components/Heading";
@@ -13,75 +12,13 @@ import RichText from "~/components/RichText.tsx";
 import TabGroup from "~/components/Tabs/Tabs";
 import VisualisationItem from "~/components/VisualisationItem";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
-import getFeatureFlag from "~/utils/featureFlags.server.ts";
-import {
-  fetchStrapiData,
-  paragraphFields,
-  prinzipCoreFields,
-  visualisationFields,
-} from "~/utils/strapiData.server";
 import type {
   Beispielvorhaben,
   PrinzipWithBeispielvorhaben,
 } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
-import type { Route } from "./+types/beispiele.regelungen.$regelung";
 
-// prinzipCoreFields are being used in paragraphFields and so need to be included
-const GET_REGELUNGSVORHABENS_BY_SLUG_QUERY = `
-${prinzipCoreFields}
-${paragraphFields}
-${visualisationFields}
-query GetBeispielvorhabens($slug: String!, $status: PublicationStatus!) {
-  beispielvorhabens(filters: { URLBezeichnung: { eq: $slug } }, status: $status) {
-    documentId
-    Titel
-    NKRNummer
-    Rechtsgebiet
-    Ressort
-    URLBezeichnung
-    VeroeffentlichungsDatum
-    LinkRegelungstext
-    NKRStellungnahmeLink
-    GesetzStatus
-    Paragraphen {
-      ...ParagraphFields
-    }
-    Visualisierungen {
-      ...VisualisationFields
-    }
-    Digitalchecks {
-      documentId
-      Titel
-      EinschaetzungAutomatisierung
-      EinschaetzungDatenschutz
-      EinschaetzungKlareRegelungen
-      EinschaetzungKommunikation
-      EinschaetzungWiederverwendung
-      NKRStellungnahmeDCText
-    }
-  }
-}`;
-
-export const loader = async ({ params }: Route.LoaderArgs) => {
-  const status = getFeatureFlag("showStrapiDrafts") ? "DRAFT" : "PUBLISHED";
-
-  const regelungData = await fetchStrapiData<{
-    beispielvorhabens: Beispielvorhaben[];
-  }>(GET_REGELUNGSVORHABENS_BY_SLUG_QUERY, { slug: params.regelung, status });
-
-  if ("error" in regelungData) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(regelungData.error, { status: 400 });
-  }
-
-  if (regelungData.beispielvorhabens.length === 0) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("No Regelung for slug found", { status: 404 });
-  }
-
-  return regelungData.beispielvorhabens[0];
-};
+// data fetching moved to @/src/pages/beispiele/regelungen/[regelung].astro
 
 export function Gesetz({
   regelung,
@@ -232,10 +169,4 @@ export function Gesetz({
       </ContentWrapper>
     </>
   );
-}
-
-export default function Route() {
-  const regelung = useLoaderData<typeof loader>();
-  const principles = useOutletContext<PrinzipWithBeispielvorhaben[]>();
-  return <Gesetz regelung={regelung} principles={principles} />;
 }

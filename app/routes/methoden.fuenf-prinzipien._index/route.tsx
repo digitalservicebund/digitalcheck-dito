@@ -7,7 +7,7 @@ import {
   ShareOutlined,
   VisibilityTwoTone,
 } from "@digitalservicebund/icons";
-import { Link, useLoaderData } from "react-router";
+import { Link } from "react-router";
 import Badge from "~/components/Badge.tsx";
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
 import { LinkButton } from "~/components/Button.tsx";
@@ -20,24 +20,9 @@ import MetaTitle from "~/components/Meta";
 import { PrinciplePosterBox } from "~/components/PrinciplePosterBox";
 import RichText from "~/components/RichText.tsx";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
-import {
-  fetchStrapiData,
-  GET_PRINZIPS_WITH_EXAMPLES_QUERY,
-} from "~/utils/strapiData.server";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
-export const loader = async () => {
-  const prinzipData = await fetchStrapiData<{
-    prinzips: PrinzipWithAspekteAndExample[];
-  }>(GET_PRINZIPS_WITH_EXAMPLES_QUERY);
-
-  if ("error" in prinzipData) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(prinzipData.error, { status: 400 });
-  }
-
-  return { prinzips: prinzipData.prinzips };
-};
+// data fetching moved to @/src/pages/methoden/fuenf-prinzipien/index.astro
 
 export function FivePrinciples({
   prinzips,
@@ -163,9 +148,4 @@ export function FivePrinciples({
       </section>
     </>
   );
-}
-
-export default function Route() {
-  const { prinzips } = useLoaderData<typeof loader>();
-  return <FivePrinciples prinzips={prinzips} />;
 }
