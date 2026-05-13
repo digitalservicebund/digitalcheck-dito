@@ -2,10 +2,10 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { BrowserRouter, useLoaderData } from "react-router";
+import { BrowserRouter } from "react-router";
 import { preCheck } from "~/resources/content/vorpruefung";
 import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
-import Index from "~/routes/vorpruefung._preCheckNavigation.$questionId";
+import { PreCheckQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { usePreCheckData } from "~/routes/vorpruefung/preCheckDataHook";
 import { ResultType } from "../vorpruefung.ergebnis/PreCheckResult";
 import type { PreCheckAnswerSchema } from "../vorpruefung/preCheckDataSchema";
@@ -127,10 +127,6 @@ describe.each(scenarios)("test $name", ({ answers, expected }) => {
     vi.resetAllMocks();
 
     const preCheckAnswers = mapUserAnswersToMockAnswers(answers);
-    vi.mocked(useLoaderData).mockReturnValue({
-      questionIdx,
-      question: questions[questionIdx],
-    });
 
     vi.mocked(usePreCheckData).mockReturnValue({
       answerForQuestionId: vi.fn().mockReturnValue({
@@ -154,7 +150,10 @@ describe.each(scenarios)("test $name", ({ answers, expected }) => {
 
     render(
       <BrowserRouter>
-        <Index />
+        <PreCheckQuestion
+          questionIdx={questionIdx}
+          question={questions[questionIdx]}
+        />
       </BrowserRouter>,
     );
   });

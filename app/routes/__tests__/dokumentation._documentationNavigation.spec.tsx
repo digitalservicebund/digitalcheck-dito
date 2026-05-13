@@ -16,12 +16,11 @@ import {
   RouterProvider,
   useOutletContext,
   useRouteError,
-  useRouteLoaderData,
 } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
-import LayoutWithDocumentationNavigation from "~/routes/dokumentation._documentationNavigation";
+import { LayoutWithDocumentationNavigation } from "~/routes/dokumentation._documentationNavigation";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import type {
@@ -33,14 +32,6 @@ import {
   DATA_SCHEMA_VERSION_V1,
   DATA_SCHEMA_VERSION_V2,
 } from "../dokumentation/documentationDataSchema";
-
-vi.mock("react-router", async (importOriginal) => {
-  const original = await importOriginal<typeof import("react-router")>();
-  return {
-    ...original,
-    useRouteLoaderData: vi.fn(),
-  };
-});
 
 const mockRoutes: (Route[] | Route)[] = [
   dokumentation_hinweise,
@@ -191,7 +182,11 @@ function renderPage({ path }: Route) {
       path: dokumentation.path,
       element: (
         <DocumentationDataProvider>
-          <LayoutWithDocumentationNavigation />
+          <LayoutWithDocumentationNavigation
+            routes={mockRoutes}
+            prinzips={[]}
+            currentUrl={path}
+          />
         </DocumentationDataProvider>
       ),
       ErrorBoundary: ErrorBoundary,
@@ -278,8 +273,6 @@ describe("navigation on pages of documentation", () => {
         disconnect = vi.fn();
       },
     );
-
-    vi.mocked(useRouteLoaderData).mockReturnValue({ routes: mockRoutes });
   });
 
   afterEach(() => {

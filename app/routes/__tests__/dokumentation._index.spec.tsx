@@ -9,8 +9,7 @@ import { render, screen } from "@testing-library/react";
 import type React from "react";
 import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
-import DokumentationIndex from "~/routes/dokumentation._index";
+import { DokumentationIndexPage } from "~/routes/dokumentation._index";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
 
 const ROUTES_DOCUMENTATION_INTRO = [{ path: dokumentation_hinweise.path }];
@@ -40,8 +39,7 @@ describe("Dokumentation Index Route - Integration Tests", () => {
   };
 
   beforeEach(() => {
-    vi.mocked(useFeatureFlag).mockReturnValue(true);
-    renderWithRouter(<DokumentationIndex />);
+    renderWithRouter(<DokumentationIndexPage prinzips={[]} />);
   });
 
   it("renders the Hero section with the correct title", () => {
