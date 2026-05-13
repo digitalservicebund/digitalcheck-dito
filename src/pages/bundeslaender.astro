@@ -1,0 +1,13 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import BundeslaenderPage from "~/routes/bundeslaender";
+
+export const frontmatter = {
+  title: "Gemeinsamer Digitalcheck für Bund und Länder",
+  isStagingOnly: true,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <BundeslaenderPage />
+</Layout>
