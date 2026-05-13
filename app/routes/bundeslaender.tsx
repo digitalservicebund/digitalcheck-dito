@@ -1,3 +1,4 @@
+import FileDownloadOutlined from "@digitalservicebund/icons/FileDownloadOutlined";
 import Container from "~/components/Container";
 import ContentWrapper from "~/components/ContentWrapper";
 import Heading from "~/components/Heading";
@@ -68,8 +69,8 @@ export default function BundeslaenderInfoPage() {
             </div>
           </Container>
         </div>
-        <ContentWrapper className="space-y-40">
-          <div className="">
+        <ContentWrapper className="space-y-80">
+          <div>
             <Heading tagName="h2" className="pb-8">
               Angebot
             </Heading>
@@ -110,8 +111,8 @@ export default function BundeslaenderInfoPage() {
               className="h-340 w-630 pt-40"
             ></Image>
           </div>
-          <div className="">
-            <Heading tagName="h2">
+          <div>
+            <Heading tagName="h2" className="max-w-[800px] pb-40">
               Prozess: Kooperation und Erstellung Ihrer Landingpage
             </Heading>
             <Timeline>
@@ -120,7 +121,10 @@ export default function BundeslaenderInfoPage() {
                   <Heading tagName="h3">Schritt 1: Kontakt aufnehmen</Heading>
                   <p>
                     Kontaktieren Sie uns bei Interesse direkt unter{" "}
-                    <a href={`mailto:${contact.bmdsEmail}`}>
+                    <a
+                      href={`mailto:${contact.bmdsEmail}`}
+                      className="text-link"
+                    >
                       {contact.bmdsEmail}
                     </a>
                     .
@@ -185,15 +189,30 @@ export default function BundeslaenderInfoPage() {
         <div className="bg-blue-300">
           <Container className="py-32 sm:py-80">
             <Heading tagName="h3" text="Kontakt" />
-            <div className="ds-stack ds-stack-16 pt-32">
+            <div className="ds-stack pt-32 pb-[56px]">
               <p>
                 Sie haben Interesse an einer Kooperationsvereinbarung oder
                 Rückfragen zum Prozess? Kontaktieren Sie uns unter{" "}
-                <a href={`mailto:${contact.bmdsEmail}`}>{contact.bmdsEmail}</a>.
+                <a className="text-link" href={`mailto:${contact.bmdsEmail}`}>
+                  {contact.bmdsEmail}
+                </a>
+                .
               </p>
               <br></br>
               <p>Ansprechpartnerin: Katharina Berndt</p>
             </div>
+            <a
+              href={assetPath("/documents/BundeslaenderInfoPage.pdf")}
+              download
+              className="text-link inline-flex items-center gap-8"
+            >
+              <FileDownloadOutlined
+                height="1.5em"
+                width="1.5em"
+                className="fill-current"
+              />
+              Diese Seite als PDF herunterladen
+            </a>
           </Container>
         </div>
       </main>
