@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.base.json",
+  "include": [".astro/types.d.ts", "**/*.test.ts", "**/*.test.tsx"],
+  "exclude": ["tests/**"],
+  "compilerOptions": {
+    "types": ["vitest/globals"]
+  }
+}
