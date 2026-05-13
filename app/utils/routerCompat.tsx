@@ -220,7 +220,7 @@ export function useSearchParams(): [URLSearchParams, SetSearchParams] {
 /**
  * Stub for react-router's `<Outlet>`. Renders nothing in static/Astro context.
  */
-export function Outlet() {
+export function Outlet(_props?: { context?: unknown }) {
   return null;
 }
 

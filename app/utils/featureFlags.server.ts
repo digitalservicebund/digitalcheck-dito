@@ -1,7 +1,7 @@
+import { isProduction } from "@/config/stage";
 import fs from "node:fs";
 import type { FeatureFlag, FeatureFlags } from "~/utils/featureFlags.ts";
 import { features } from "~/utils/featureFlags.ts";
-import { isProduction } from "./preview";
 
 const FEATURE_FLAGS_PATH =
   process.env.FEATURE_FLAGS_PATH ?? "/etc/feature-flags/feature-flags.json";

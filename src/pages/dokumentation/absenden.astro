@@ -19,8 +19,9 @@ const prinzips = "error" in result ? [] : result.prinzips;
 
 <Layout title={frontmatter.title} showProgressBar={true}>
   <DokumentationLayout
-    client:only="react"
+    client:load
     prinzips={prinzips}
     page="absenden"
+    currentUrl={Astro.url.pathname}
   />
 </Layout>

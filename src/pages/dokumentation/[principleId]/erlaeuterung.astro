@@ -28,8 +28,9 @@ const { prinzips } = Astro.props;
 
 <Layout title={frontmatter.title} showProgressBar={true}>
   <DokumentationLayout
-    client:only="react"
+    client:load
     prinzips={prinzips}
     page="erlaeuterung"
+    currentUrl={Astro.url.pathname}
   />
 </Layout>
