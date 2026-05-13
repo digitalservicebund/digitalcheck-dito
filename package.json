@@ -7,7 +7,7 @@
   "scripts": {
     "audit:licences": "license-checker-rseidelsohn --production --excludePrivatePackages --onlyAllow 'MIT;BSD-3-Clause;BSD-2-Clause;0BSD;ISC;Apache-2.0;MPL-2.0;BlueOak-1.0.0;Custom: LICENSE;Unlicense' --summary",
     "build": "astro build",
-    "build:preview": "PREVIEW_BUILD=true PREVIEW_BASE_PATH=/ react-router build",
+    "build:preview": "PUBLIC_STAGE=preview PREVIEW_BASE_PATH=/ pnpm build",
     "clean": "rm -rf build/",
     "dev": "PUBLIC_STAGE=development pnpm astro dev",
     "dev:preview": "PREVIEW_BUILD=true PREVIEW_BASE_PATH=/preview/ pnpm dev",
@@ -15,15 +15,10 @@
     "format:check": "prettier --check",
     "format:fix": "pnpm run format:fix-selected .",
     "format:fix-selected": "prettier --write --ignore-unknown",
-    "lint:check": "react-router typegen && eslint --cache",
-    "lint:fix": "react-router typegen && eslint --cache --fix",
-    "pre-commit": "pnpm run build && pnpm run style:fix && pnpm run test && pnpm run typecheck",
+    "lint:check": "eslint --cache",
+    "lint:fix": "eslint --cache --fix",
     "preinstall": "echo 'Please disable script execution for security reasons: pnpm install --ignore-scripts' && exit 1",
-    "start": "export $(grep -v '^#' .env | xargs) && react-router-serve build/server/index.js",
-    "start:test": "react-router-serve build/server/index.js",
-    "start:preview": "pnpm build:preview && pnpm dlx serve build/client",
-    "style:check": "pnpm run format:check && pnpm run lint:check",
-    "style:fix": "pnpm run format:fix && pnpm run lint:fix",
+    "start:preview": "pnpm build:preview && pnpm dlx serve dist",
     "test": "vitest run",
     "test:a11y": "playwright test tests/a11y --config=tests/playwright.config.ts --project=\"Desktop Chrome\"",
     "test:a11y-nightly": "playwright test tests/a11y --config=tests/playwright-nightly.config.ts",
@@ -33,7 +28,7 @@
     "test:update-snapshots": "playwright test tests/snapshots --config=tests/playwright-snapshots.config.ts --update-snapshots",
     "tests": "vitest run && pnpm run test:e2e && pnpm run test:a11y",
     "tests-nightly": "vitest run && pnpm run test:e2e-nightly && pnpm run test:a11y-nightly",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "astro check"
   },
   "dependencies": {
     "@astrojs/react": "^5.0.4",
