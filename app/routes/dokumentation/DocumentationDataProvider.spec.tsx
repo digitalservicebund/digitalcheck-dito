@@ -42,7 +42,10 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
   </MemoryRouter>
 );
 
-const emptyData: DocumentationData<V2> = { version: DATA_SCHEMA_VERSION_V2 };
+const baseData: DocumentationData<V2> = {
+  version: DATA_SCHEMA_VERSION_V2,
+  initialized: true,
+};
 
 describe("DocumentationDataProvider", () => {
   beforeEach(() => {
@@ -53,7 +56,7 @@ describe("DocumentationDataProvider", () => {
   describe("documentationData (initial load)", () => {
     it("returns data from localStorage on mount", async () => {
       const storedData: DocumentationData<V2> = {
-        version: DATA_SCHEMA_VERSION_V2,
+        ...baseData,
         policyTitle: { title: "Stored Title" },
       };
       mockRead.mockReturnValue(storedData);
@@ -74,7 +77,7 @@ describe("DocumentationDataProvider", () => {
       });
       await act(async () => {});
 
-      expect(result.current.documentationData).toEqual(emptyData);
+      expect(result.current.documentationData).toEqual(baseData);
     });
   });
 
@@ -94,7 +97,7 @@ describe("DocumentationDataProvider", () => {
   describe("createOrUpdateDocumentationData", () => {
     it("writes single field data to localStorage", async () => {
       const data: DocumentationData<V2> = {
-        version: DATA_SCHEMA_VERSION_V2,
+        ...baseData,
         policyTitle: { title: "My Policy" },
       };
 
@@ -110,7 +113,7 @@ describe("DocumentationDataProvider", () => {
 
     it("writes complete data object to localStorage", async () => {
       const data: DocumentationData<V2> = {
-        version: DATA_SCHEMA_VERSION_V2,
+        ...baseData,
         policyTitle: { title: "My Policy" },
         participation: { formats: "Workshops", results: "Results" },
         principles: [{ id: "p1", answer: "Nein", reasoning: "", aspects: [] }],
@@ -139,14 +142,14 @@ describe("DocumentationDataProvider", () => {
       act(() => result.current.setPolicyTitle({ title: "New Title" }));
 
       expect(mockWrite).toHaveBeenCalledWith(
-        { ...emptyData, policyTitle: { title: "New Title" } },
+        { ...baseData, policyTitle: { title: "New Title" } },
         STORAGE_KEY,
       );
     });
 
     it("updates policyTitle while preserving existing data", async () => {
       const existingData: DocumentationData<V2> = {
-        version: DATA_SCHEMA_VERSION_V2,
+        ...baseData,
         policyTitle: { title: "Old Title" },
         participation: { formats: "Online", results: "Some results" },
       };
@@ -179,14 +182,14 @@ describe("DocumentationDataProvider", () => {
       act(() => result.current.setParticipation(participation));
 
       expect(mockWrite).toHaveBeenCalledWith(
-        { ...emptyData, participation },
+        { ...baseData, participation },
         STORAGE_KEY,
       );
     });
 
     it("updates participation while preserving existing data", async () => {
       const existingData: DocumentationData<V2> = {
-        version: DATA_SCHEMA_VERSION_V2,
+        ...baseData,
         policyTitle: { title: "My Policy" },
         participation: { formats: "Old format", results: "Old results" },
       };
@@ -232,14 +235,14 @@ describe("DocumentationDataProvider", () => {
       act(() => result.current.addOrUpdatePrinciple(principle1));
 
       expect(mockWrite).toHaveBeenCalledWith(
-        { ...emptyData, principles: [principle1] },
+        { ...baseData, principles: [principle1] },
         STORAGE_KEY,
       );
     });
 
     it("adds principle to an empty principles array", async () => {
       const existingData: DocumentationData<V2> = {
-        version: DATA_SCHEMA_VERSION_V2,
+        ...baseData,
         principles: [],
       };
       mockRead.mockReturnValue(existingData);
@@ -259,7 +262,7 @@ describe("DocumentationDataProvider", () => {
 
     it("appends principle to existing principles array", async () => {
       const existingData: DocumentationData<V2> = {
-        version: DATA_SCHEMA_VERSION_V2,
+        ...baseData,
         principles: [principle1],
       };
       mockRead.mockReturnValue(existingData);
@@ -279,7 +282,7 @@ describe("DocumentationDataProvider", () => {
 
     it("updates principle with matching id in-place, preserving other principles", async () => {
       const existingData: DocumentationData<V2> = {
-        version: DATA_SCHEMA_VERSION_V2,
+        ...baseData,
         principles: [principle1, principle2],
       };
       mockRead.mockReturnValue(existingData);

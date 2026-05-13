@@ -147,4 +147,5 @@ export type DocumentationData<V extends DataSchemaVersion = V2> = {
   policyTitle?: PolicyTitle;
   participation?: Participation;
   principles?: Principle<V>[];
+  initialized?: boolean;
 } & VersionedData;

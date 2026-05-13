@@ -1,5 +1,6 @@
 import { methoden_fuenfPrinzipien } from "@/config/routes";
-import { Link, redirect, useOutletContext, useParams } from "react-router";
+import { useEffect } from "react";
+import { Link, useNavigate, useOutletContext, useParams } from "react-router";
 import AspectPills from "~/components/AspectPills";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
@@ -148,12 +149,13 @@ function DocumentationPrincipleErlaeuterungForm({
 export function DocumentationPrincipleErlaeuterung({
   principleId,
   currentUrl,
+  navigationBaseUrl,
   nextUrl,
   previousUrl,
   prinzips,
 }: Pick<
   NavigationContext,
-  "currentUrl" | "nextUrl" | "previousUrl" | "prinzips"
+  "currentUrl" | "navigationBaseUrl" | "nextUrl" | "previousUrl" | "prinzips"
 > & {
   principleId: string;
 }) {
@@ -162,6 +164,8 @@ export function DocumentationPrincipleErlaeuterung({
   const prinzip = prinzips.find(
     ({ URLBezeichnung }) => URLBezeichnung === principleId,
   );
+
+  const navigate = useNavigate();
 
   if (!prinzip)
     // eslint-disable-next-line @typescript-eslint/only-throw-error
@@ -176,10 +180,12 @@ export function DocumentationPrincipleErlaeuterung({
   const isIrrelevant = answer === radioOptions[2];
 
   // If no answer saved yet, redirect to answer page
-  if (!principleData?.answer) {
-    redirect(previousUrl);
-    return null;
-  }
+  useEffect(() => {
+    if (documentationData.initialized && !principleData?.answer)
+      void navigate(navigationBaseUrl);
+  }, [documentationData, principleData, navigate, navigationBaseUrl]);
+
+  if (!principleData?.answer) return null;
 
   const changeAnswerTitle = isPositive
     ? "Sie haben angegeben, dass das Prinzip auf ihr Vorhaben zutrifft."
@@ -247,7 +253,7 @@ export function DocumentationPrincipleErlaeuterung({
 
 export default function Route() {
   const { principleId } = useParams();
-  const { currentUrl, nextUrl, previousUrl, prinzips } =
+  const { currentUrl, navigationBaseUrl, nextUrl, previousUrl, prinzips } =
     useOutletContext<NavigationContext>();
   if (!principleId)
     // eslint-disable-next-line @typescript-eslint/only-throw-error
@@ -256,6 +262,7 @@ export default function Route() {
     <DocumentationPrincipleErlaeuterung
       principleId={principleId}
       currentUrl={currentUrl}
+      navigationBaseUrl={navigationBaseUrl}
       nextUrl={nextUrl}
       previousUrl={previousUrl}
       prinzips={prinzips}

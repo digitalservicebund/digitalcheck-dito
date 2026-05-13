@@ -4,6 +4,7 @@ import type { NavigationContext } from "~/routes/dokumentation._documentationNav
 const { mockNavigate, mockNavigationContext } = vi.hoisted(() => {
   const ctx: NavigationContext = {
     currentUrl: "/current-url",
+    navigationBaseUrl: "/current-url",
     nextUrl: "/next-url",
     previousUrl: "/previous-url",
     routes: [],

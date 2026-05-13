@@ -103,6 +103,7 @@ const prinzips: PrinzipWithAspekteAndExample[] = [
 
 const context: NavigationContext = {
   currentUrl: "/current-url",
+  navigationBaseUrl: "/current-url",
   nextUrl: "/next-url",
   previousUrl: "/previous-url",
   routes: routes,

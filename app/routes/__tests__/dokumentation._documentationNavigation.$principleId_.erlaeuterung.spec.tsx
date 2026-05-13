@@ -106,6 +106,7 @@ const prinzips: PrinzipWithAspekteAndExample[] = [
 
 const context: NavigationContext = {
   currentUrl: "/dokumentation/prinzip-1-digitale-angebote/erlaeuterung",
+  navigationBaseUrl: "/dokumentation/prinzip-1-digitale-angebote",
   nextUrl: "/next-url",
   previousUrl: "/dokumentation/prinzip-1-digitale-angebote",
   routes: routes,

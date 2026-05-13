@@ -336,6 +336,38 @@ test("go to landing page and download empty V2 document template", async ({
   expectDocumentToNotContainTags(docText);
 });
 
+test("redirects to answer page when navigating directly to erläuterung without an answer", async ({
+  page,
+}) => {
+  await test.step("navigate through flow to reach first principle page", async () => {
+    await page.goto(dokumentation.path);
+    await page.getByRole("link", { name: "Dokumentation starten" }).click();
+
+    await page.waitForURL(dokumentation_hinweise.path);
+    await page.getByRole("checkbox", { name: "gelesen", exact: false }).check();
+    await page.getByRole("button", { name: "Weiter" }).click();
+
+    await page.waitForURL(dokumentation_regelungsvorhabenTitel.path);
+    await page.getByRole("button", { name: "Weiter" }).click();
+
+    await page.waitForURL(dokumentation_beteiligungsformate.path);
+    await page.getByRole("button", { name: "Weiter" }).click();
+
+    // Wait until we're on a principle answer page (no answer given yet)
+    await page.waitForURL(/\/dokumentation\/prinzip-/, { timeout: 5000 });
+  });
+
+  const principlePageUrl = page.url();
+
+  await test.step("navigate directly to erläuterung without answering", async () => {
+    await page.goto(`${principlePageUrl}/erlaeuterung`);
+  });
+
+  await test.step("verify redirect back to principle answer page", async () => {
+    await expect(page).toHaveURL(principlePageUrl);
+  });
+});
+
 async function expectAndSkipNotice(page: Page) {
   await page.waitForURL(dokumentation_hinweise.path);
   await expect(

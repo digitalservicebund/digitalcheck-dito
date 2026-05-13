@@ -121,15 +121,16 @@ function getInitialState(): DocumentationData {
     storedData = migrateV1ToV2(storedData);
   }
 
-  if (storedData !== null) return storedData as DocumentationData;
-  return { version: DATA_SCHEMA_VERSION_V2 };
+  if (storedData !== null)
+    return { ...storedData, initialized: true } as DocumentationData;
+  return { version: DATA_SCHEMA_VERSION_V2, initialized: true };
 }
 
 export function DocumentationDataProvider({
   children,
 }: Readonly<DocumentationDataProviderProps>) {
   const [documentationData, setDocumentationData] = useState<DocumentationData>(
-    { version: DATA_SCHEMA_VERSION_V2 },
+    { version: DATA_SCHEMA_VERSION_V2, initialized: false },
   );
 
   useEffect(() => {

@@ -23,6 +23,7 @@ type Route = _Route & {
 export type OnNavigateCallback = () => Promise<boolean>;
 export type NavigationContext = {
   currentUrl: string;
+  navigationBaseUrl: string;
   nextUrl: string;
   previousUrl: string;
   routes: (Route | Route[])[];
@@ -88,18 +89,16 @@ export function LayoutWithDocumentationNavigation({
 
   // Detect erlaeuterung sub-page
   const isErlaeuterungPage = currentUrl.endsWith("/erlaeuterung");
-  const principleBaseUrl = isErlaeuterungPage
-    ? currentUrl.replace("/erlaeuterung", "")
-    : null;
-
   // For nav/stepper index lookups, use principle URL when on erlaeuterung page
-  const navigationCurrentUrl = principleBaseUrl ?? currentUrl;
+  const navigationBaseUrl = isErlaeuterungPage
+    ? currentUrl.replace("/erlaeuterung", "")
+    : currentUrl;
 
   const { findDocumentationDataForUrl, getDocumentationSchemaFormUrl } =
     useDocumentationDataService();
 
   const flatRoutes = routes.flat();
-  const currentRoute = flatRoutes.find((r) => r.path === navigationCurrentUrl);
+  const currentRoute = flatRoutes.find((r) => r.path === navigationBaseUrl);
   const currentPrincipleFormData = currentRoute?.principleId
     ? findDocumentationDataForUrl(currentRoute.principleId)
     : undefined;
@@ -107,7 +106,7 @@ export function LayoutWithDocumentationNavigation({
   const nextUrl = isErlaeuterungPage
     ? resolveAdjacentUrl(
         flatRoutes,
-        navigationCurrentUrl,
+        navigationBaseUrl,
         getNextUrl,
         findDocumentationDataForUrl,
       )
@@ -123,7 +122,7 @@ export function LayoutWithDocumentationNavigation({
   const previousUrl =
     resolveAdjacentUrl(
       flatRoutes,
-      navigationCurrentUrl,
+      navigationBaseUrl,
       getPreviousUrl,
       findDocumentationDataForUrl,
     ) ?? dokumentation.path;
@@ -206,7 +205,7 @@ export function LayoutWithDocumentationNavigation({
         <main className="space-y-40 py-80">
           <div className="lg:hidden">
             <Stepper
-              currentElementUrl={navigationCurrentUrl}
+              currentElementUrl={navigationBaseUrl}
               elements={routes.flat()}
             />
           </div>
@@ -215,6 +214,7 @@ export function LayoutWithDocumentationNavigation({
             key={currentUrl}
             context={{
               currentUrl,
+              navigationBaseUrl,
               nextUrl,
               previousUrl,
               routes,
