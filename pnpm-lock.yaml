@@ -21,8 +21,8 @@ importers:
         specifier: ^2.2.10
         version: 2.2.10(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@posthog/core':
-        specifier: ^1.28.4
-        version: 1.28.4
+        specifier: ^1.28.5
+        version: 1.28.5
       '@react-router/node':
         specifier: ^7.15.0
         version: 7.15.0(react-router@7.15.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(typescript@6.0.3)
@@ -926,8 +926,14 @@ packages:
   '@posthog/core@1.28.4':
     resolution: {integrity: sha512-wmtUYHYqA3zIAKDKvYWRNWAQsWOIBwxV08e+bWzVy0wQQzpaS/LzzRupXWRMRrLOk+1x3JKFxbqA3n0QGvpqsQ==}
 
+  '@posthog/core@1.28.5':
+    resolution: {integrity: sha512-9K04ql516XoD2Xviou0iqBK9jfbakquvAPYR4yUxRTOCZt+Pf19IhXHb5+0PbS3OIsZL6n6qmG9AsNw2xhzcHA==}
+
   '@posthog/types@1.372.10':
     resolution: {integrity: sha512-KuT3vLu3LSFsNWCwasS4gqjH/ysAyIUcB/aJSmKyNhDd/85hAznHRz1eSSl0sMvtsDTYiQIq0I0ybduVbrpPew==}
+
+  '@posthog/types@1.373.0':
+    resolution: {integrity: sha512-HuYzXYelk0rVxq/5UvYvmiJvWkg2AhgJO18uj0lNnoV6Q0pI7he92/MUeoL3GRkVZQEqxCjRB2gJ0od+EBvEZQ==}
 
   '@protobufjs/aspromise@1.1.2':
     resolution: {integrity: sha512-j+gKExEuLmKwvz3OgROXtrJ2UG2x8Ch2YZUxahh+s1F2HZ+wAceUNLkvy6zKCPVRkU++ZWQrdxsUeQXmcg4uoQ==}
@@ -4951,7 +4957,13 @@ snapshots:
     dependencies:
       '@posthog/types': 1.372.10
 
+  '@posthog/core@1.28.5':
+    dependencies:
+      '@posthog/types': 1.373.0
+
   '@posthog/types@1.372.10': {}
+
+  '@posthog/types@1.373.0': {}
 
   '@protobufjs/aspromise@1.1.2': {}
 
