@@ -16,9 +16,7 @@ import DropdownMenu from "~/layout/DropdownMenu.tsx";
 import ProgressBar from "~/layout/ProgressBar";
 import { header } from "~/resources/content/shared/header.ts";
 
-import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { assetPath } from "~/utils/assetPath";
-import { features } from "~/utils/featureFlags";
 import type { MatchWithHandle } from "~/utils/handles";
 import { matchHasHandle } from "~/utils/handles";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
@@ -94,10 +92,6 @@ const getFeatureForMatches = (
 const PageHeader = () => {
   const location = useLocation();
   const currentPath = location.pathname;
-  const showBundeslaender = useFeatureFlag(features.showBundeslaenderContent);
-  const navItems = header.items.filter(
-    (item) => item.href !== "/bundeslaender" || showBundeslaender,
-  );
   const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -245,7 +239,7 @@ const PageHeader = () => {
             className="flex items-center max-lg:hidden"
             data-testid="desktop-nav"
           >
-            {navItems.map((item) => renderNavItem(item, "desktop"))}
+            {header.items.map((item) => renderNavItem(item, "desktop"))}
           </nav>
 
           {/* Mobile View Controls */}
@@ -281,7 +275,7 @@ const PageHeader = () => {
           )}
           aria-hidden={!mobileMenuOpen}
         >
-          {navItems.map((item) => renderNavItem(item, "mobile"))}
+          {header.items.map((item) => renderNavItem(item, "mobile"))}
         </nav>
         <noscript>
           <div className="bg-yellow-200">

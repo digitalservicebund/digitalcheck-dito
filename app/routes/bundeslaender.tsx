@@ -7,23 +7,10 @@ import Image from "~/components/Image";
 import MetaTitle from "~/components/Meta";
 import NewTabLink from "~/components/NewTabLink";
 import Timeline from "~/components/Timeline";
-import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { contact } from "~/resources/content/shared/contact";
 import { assetPath } from "~/utils/assetPath";
-import { features } from "~/utils/featureFlags";
 
 export default function BundeslaenderInfoPage() {
-  const enableBundeslaenderContent = useFeatureFlag(
-    features.showBundeslaenderContent,
-  );
-
-  if (!enableBundeslaenderContent) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("Feature is not enabled for this environment", {
-      status: 404,
-    });
-  }
-
   return (
     <>
       <MetaTitle />
