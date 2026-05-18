@@ -5,7 +5,7 @@ import {
   dokumentation_zusammenfassung,
 } from "@/config/routes";
 import { type ReactNode } from "react";
-import { Link, useOutletContext } from "react-router";
+import { Link } from "react-router";
 import type { BadgeProps } from "~/components/Badge";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
@@ -20,11 +20,14 @@ import {
   type PolicyTitle,
   type Principle,
 } from "~/routes/dokumentation/documentationDataSchema";
-import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
+import type {
+  PrinzipWithAspekte,
+  PrinzipWithAspekteAndExample,
+} from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
-import type { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
+import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
 const {
   summary,
@@ -224,12 +227,9 @@ function PrincipleContent({
   );
 }
 
-export function DocumentationSummary({
-  routes,
-  previousUrl,
-  nextUrl,
-  prinzips,
-}: Pick<NavigationContext, "routes" | "previousUrl" | "nextUrl" | "prinzips">) {
+export function DocumentationSummary() {
+  const { routes, previousUrl, nextUrl, prinzips } =
+    useDocumentationNavigation();
   const { documentationData } = useDocumentationDataService();
 
   const items: InfoBoxProps[] = [
@@ -301,14 +301,22 @@ export function DocumentationSummary({
 }
 
 export default function Route() {
-  const { routes, previousUrl, nextUrl, prinzips } =
-    useOutletContext<NavigationContext>();
+  return <DocumentationSummary />;
+}
+
+// Astro page export
+import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
+
+export function ZusammenfassungPage({
+  prinzips,
+  currentUrl,
+}: {
+  prinzips: PrinzipWithAspekteAndExample[];
+  currentUrl: string;
+}) {
   return (
-    <DocumentationSummary
-      routes={routes}
-      previousUrl={previousUrl}
-      nextUrl={nextUrl}
-      prinzips={prinzips}
-    />
+    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
+      <DocumentationSummary />
+    </DocumentationPageShell>
   );
 }

@@ -1,6 +1,6 @@
 import { methoden_fuenfPrinzipien } from "@/config/routes";
 import { useEffect } from "react";
-import { Link, useNavigate, useOutletContext, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import AspectPills from "~/components/AspectPills";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
@@ -11,12 +11,12 @@ import MetaTitle from "~/components/Meta";
 import Textarea from "~/components/Textarea";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
-import type { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 import type { Principle } from "./dokumentation/documentationDataSchema";
 import { principleAnswerSchemaV2 } from "./dokumentation/documentationDataSchema";
+import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
 const { radioOptions } = digitalDocumentation.principlePages;
 
@@ -26,10 +26,6 @@ type DocumentationPrincipleErlaeuterungFormProps = {
   principleData: Principle;
   isPositive: boolean;
   isIrrelevant: boolean;
-  currentUrl: string;
-  nextUrl: string;
-  previousUrl: string;
-  prinzips: NavigationContext["prinzips"];
 };
 
 function DocumentationPrincipleErlaeuterungForm({
@@ -38,11 +34,9 @@ function DocumentationPrincipleErlaeuterungForm({
   principleData,
   isPositive,
   isIrrelevant,
-  currentUrl,
-  nextUrl,
-  previousUrl,
-  prinzips,
 }: DocumentationPrincipleErlaeuterungFormProps) {
+  const { currentUrl, nextUrl, previousUrl, prinzips } =
+    useDocumentationNavigation();
   const { addOrUpdatePrincipleReasoning } = useDocumentationDataService();
 
   const form = useSyncedForm({
@@ -148,17 +142,11 @@ function DocumentationPrincipleErlaeuterungForm({
 
 export function DocumentationPrincipleErlaeuterung({
   principleId,
-  currentUrl,
-  navigationBaseUrl,
-  nextUrl,
-  previousUrl,
-  prinzips,
-}: Pick<
-  NavigationContext,
-  "currentUrl" | "navigationBaseUrl" | "nextUrl" | "previousUrl" | "prinzips"
-> & {
+}: {
   principleId: string;
 }) {
+  const { currentUrl, navigationBaseUrl, prinzips } =
+    useDocumentationNavigation();
   const { documentationData } = useDocumentationDataService();
 
   const prinzip = prinzips.find(
@@ -241,10 +229,6 @@ export function DocumentationPrincipleErlaeuterung({
           principleData={principleData}
           isPositive={isPositive}
           isIrrelevant={isIrrelevant}
-          currentUrl={currentUrl}
-          nextUrl={nextUrl}
-          previousUrl={previousUrl}
-          prinzips={prinzips}
         />
       </div>
     </>
@@ -253,19 +237,27 @@ export function DocumentationPrincipleErlaeuterung({
 
 export default function Route() {
   const { principleId } = useParams();
-  const { currentUrl, navigationBaseUrl, nextUrl, previousUrl, prinzips } =
-    useOutletContext<NavigationContext>();
   if (!principleId)
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw new Response("No principleId provided", { status: 404 });
+  return <DocumentationPrincipleErlaeuterung principleId={principleId} />;
+}
+
+// Astro page export
+import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
+
+export function ErlaeuterungPage({
+  prinzips,
+  currentUrl,
+  principleId,
+}: {
+  prinzips: PrinzipWithAspekteAndExample[];
+  currentUrl: string;
+  principleId: string;
+}) {
   return (
-    <DocumentationPrincipleErlaeuterung
-      principleId={principleId}
-      currentUrl={currentUrl}
-      navigationBaseUrl={navigationBaseUrl}
-      nextUrl={nextUrl}
-      previousUrl={previousUrl}
-      prinzips={prinzips}
-    />
+    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
+      <DocumentationPrincipleErlaeuterung principleId={principleId} />
+    </DocumentationPageShell>
   );
 }

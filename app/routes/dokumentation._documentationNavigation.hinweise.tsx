@@ -1,13 +1,13 @@
 import { dokumentation_hinweise } from "@/config/routes";
 import { useState } from "react";
-import { useNavigate, useOutletContext } from "react-router";
+import { useNavigate } from "react-router";
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Heading from "~/components/Heading";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText.tsx";
 import { general } from "~/resources/content/shared/general.ts";
-import type { NavigationContext } from "./dokumentation._documentationNavigation";
+import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
 const notes = `
 ## Datenspeicherung
@@ -24,10 +24,8 @@ b) Ihr SINA-Rechner die Daten löscht (falls das bei Ihnen voreingestellt ist)
 Zur externen Weiterbearbeitung, internen Abstimmung oder für Änderungen können Sie den aktuellen Stand Ihrer Angaben als Word-Dokument exportieren und lokal speichern. Die finale Datei können Sie zu jedem Zeitpunkt per E-Mail an den NKR versenden.
 `;
 
-export function DocumentationHinweise({
-  nextUrl,
-  previousUrl,
-}: Pick<NavigationContext, "nextUrl" | "previousUrl">) {
+export function DocumentationHinweise() {
+  const { nextUrl, previousUrl } = useDocumentationNavigation();
   const navigate = useNavigate();
 
   const [checked, setChecked] = useState<boolean>(false);
@@ -75,6 +73,23 @@ export function DocumentationHinweise({
 }
 
 export default function Route() {
-  const { nextUrl, previousUrl } = useOutletContext<NavigationContext>();
-  return <DocumentationHinweise nextUrl={nextUrl} previousUrl={previousUrl} />;
+  return <DocumentationHinweise />;
+}
+
+// Astro page export
+import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
+
+export function HinweisePage({
+  prinzips,
+  currentUrl,
+}: {
+  prinzips: PrinzipWithAspekteAndExample[];
+  currentUrl: string;
+}) {
+  return (
+    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
+      <DocumentationHinweise />
+    </DocumentationPageShell>
+  );
 }

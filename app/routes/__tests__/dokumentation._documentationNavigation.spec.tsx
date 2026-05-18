@@ -11,16 +11,11 @@ import {
 } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { act, render, screen, within } from "@testing-library/react";
-import {
-  createMemoryRouter,
-  RouterProvider,
-  useOutletContext,
-  useRouteError,
-} from "react-router";
+import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
 import { LayoutWithDocumentationNavigation } from "~/routes/dokumentation._documentationNavigation";
+import { useDocumentationNavigation } from "~/routes/dokumentation/DocumentationNavigationContext";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import type {
@@ -163,12 +158,8 @@ const validationScenarios: ValidationScenario[] = [
 ];
 
 function renderPage({ path }: Route) {
-  function ErrorBoundary() {
-    useRouteError();
-    return <h1>Something went wrong</h1>;
-  }
   function DummyElement() {
-    const { nextUrl, previousUrl } = useOutletContext<NavigationContext>();
+    const { nextUrl, previousUrl } = useDocumentationNavigation();
     return (
       <>
         <h1>Foobar</h1>
@@ -177,34 +168,20 @@ function renderPage({ path }: Route) {
       </>
     );
   }
-  const routes = [
-    {
-      path: dokumentation.path,
-      element: (
-        <DocumentationDataProvider>
-          <LayoutWithDocumentationNavigation
-            routes={mockRoutes}
-            prinzips={[]}
-            currentUrl={path}
-          />
-        </DocumentationDataProvider>
-      ),
-      ErrorBoundary: ErrorBoundary,
-      children: [
-        {
-          path: "*",
-          element: <DummyElement />,
-          HydrateFallback: () => <div></div>,
-        },
-      ],
-    },
-  ];
 
-  const router = createMemoryRouter(routes, {
-    initialEntries: [path],
-  });
-
-  render(<RouterProvider router={router} />);
+  render(
+    <MemoryRouter initialEntries={[path]}>
+      <DocumentationDataProvider>
+        <LayoutWithDocumentationNavigation
+          routes={mockRoutes}
+          prinzips={[]}
+          currentUrl={path}
+        >
+          <DummyElement />
+        </LayoutWithDocumentationNavigation>
+      </DocumentationDataProvider>
+    </MemoryRouter>,
+  );
 }
 
 const getNav = () =>

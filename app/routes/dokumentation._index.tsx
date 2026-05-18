@@ -23,7 +23,10 @@ import { supportBanner } from "~/resources/content/shared/support-banner";
 import { DocumentationContinueActions } from "~/routes/dokumentation/DocumentationContinueActions.tsx";
 import type { DocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
-import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
+import type {
+  PrinzipWithAspekte,
+  PrinzipWithAspekteAndExample,
+} from "~/utils/strapiData.types";
 
 const { start } = digitalDocumentation;
 
@@ -171,4 +174,19 @@ export default function Route() {
     "routes/dokumentation",
   )!;
   return <DokumentationIndexPage prinzips={prinzips} />;
+}
+
+// Astro page export
+import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
+
+export function DokumentationIndexPageWithProvider({
+  prinzips,
+}: {
+  prinzips: PrinzipWithAspekteAndExample[];
+}) {
+  return (
+    <DocumentationDataProvider>
+      <DokumentationIndexPage prinzips={prinzips} />
+    </DocumentationDataProvider>
+  );
 }

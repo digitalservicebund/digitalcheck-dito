@@ -1,8 +1,8 @@
 import { vi } from "vitest";
-import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
+import type { DocumentationNavigationContextType } from "~/routes/dokumentation/DocumentationNavigationContext";
 
 const { mockNavigate, mockNavigationContext } = vi.hoisted(() => {
-  const ctx: NavigationContext = {
+  const ctx: DocumentationNavigationContextType = {
     currentUrl: "/current-url",
     navigationBaseUrl: "/current-url",
     nextUrl: "/next-url",
@@ -33,3 +33,19 @@ vi.mock("react-router", async (importOriginal) => {
     }),
   };
 });
+
+vi.mock(
+  "~/routes/dokumentation/DocumentationNavigationContext",
+  async (importOriginal) => {
+    const actual =
+      await importOriginal<
+        typeof import("~/routes/dokumentation/DocumentationNavigationContext")
+      >();
+    return {
+      ...actual,
+      useDocumentationNavigation: vi
+        .fn()
+        .mockReturnValue(mockNavigationContext),
+    };
+  },
+);

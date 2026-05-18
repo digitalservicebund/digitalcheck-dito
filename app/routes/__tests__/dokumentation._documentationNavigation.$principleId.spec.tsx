@@ -1,6 +1,6 @@
 // Import mocks first
 import "./utils/mockLocalStorageVersioned";
-import "./utils/mockRouter";
+import { mockNavigationContext } from "./utils/mockRouter";
 // End of mocks
 import type { Route } from "@/config/routes";
 import {
@@ -12,12 +12,7 @@ import "@testing-library/jest-dom";
 import { act, render, screen } from "@testing-library/react";
 import type { UserEvent } from "@testing-library/user-event";
 import userEvent from "@testing-library/user-event";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  useOutletContext,
-  useParams,
-} from "react-router";
+import { createBrowserRouter, RouterProvider, useParams } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
@@ -25,7 +20,6 @@ import type {
   PrinzipAspekt,
   PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.types";
-import type { NavigationContext } from "../dokumentation._documentationNavigation";
 import DocumentationPrinciple from "../dokumentation._documentationNavigation.$principleId";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import type {
@@ -101,16 +95,6 @@ const prinzips: PrinzipWithAspekteAndExample[] = [
   },
 ];
 
-const context: NavigationContext = {
-  currentUrl: "/current-url",
-  navigationBaseUrl: "/current-url",
-  nextUrl: "/next-url",
-  previousUrl: "/previous-url",
-  routes: routes,
-  prinzips,
-};
-
-const mockedUseOutletContext = vi.mocked(useOutletContext);
 const mockedUseParams = vi.mocked(useParams);
 
 const renderWithRouter = () => {
@@ -132,7 +116,12 @@ const renderWithRouter = () => {
 
 describe("DocumentationPrincipleV2", () => {
   beforeEach(() => {
-    mockedUseOutletContext.mockReturnValue(context);
+    mockNavigationContext.currentUrl = "/current-url";
+    mockNavigationContext.navigationBaseUrl = "/current-url";
+    mockNavigationContext.nextUrl = "/next-url";
+    mockNavigationContext.previousUrl = "/previous-url";
+    mockNavigationContext.routes = routes;
+    mockNavigationContext.prinzips = prinzips;
     mockedUseParams.mockReturnValue({
       principleId: "prinzip-1-digitale-angebote",
     });

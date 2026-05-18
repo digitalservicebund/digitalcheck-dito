@@ -133,7 +133,7 @@ export default function HelpSidepanel() {
           >
             <div
               ref={scrollableRef}
-              className="max-h-screen overflow-x-hidden overflow-y-hidden pt-80 pb-40 wrap-break-word [scrollbar-gutter:stable] hover:overflow-y-auto max-lg:overflow-y-auto max-lg:[scrollbar-gutter:auto]"
+              className="max-h-screen [scrollbar-gutter:stable] overflow-x-hidden overflow-y-hidden pt-80 pb-40 wrap-break-word hover:overflow-y-auto max-lg:[scrollbar-gutter:auto] max-lg:overflow-y-auto"
             >
               <div className="w-full space-y-32 pr-16 pl-32">
                 {sections.map((section) => (

@@ -13,6 +13,7 @@ import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
+import { DocumentationNavigationContext } from "./dokumentation/DocumentationNavigationContext";
 
 type _Route = { path: string; title: string };
 
@@ -168,64 +169,75 @@ export function LayoutWithDocumentationNavigation({
     );
   };
 
+  const navigationContextValue = {
+    currentUrl,
+    navigationBaseUrl,
+    nextUrl: nextUrl ?? "",
+    previousUrl,
+    routes,
+    prinzips,
+  };
+
   return (
-    <HelpPanelProvider>
-      <div
-        className={
-          showHelpPanel
-            ? "parent-bg-blue breakout-grid-form-steps grow bg-blue-100"
-            : "parent-bg-blue breakout-grid-form-steps grow bg-blue-100 [--content-max-width:750px] [--help-width:0]"
-        }
-      >
-        <Nav
-          className="sticky top-0 hidden self-start py-80 lg:block"
-          activeElementUrl={currentUrl}
-          ariaLabel={digitalDocumentation.navigation.ariaLabel}
+    <DocumentationNavigationContext.Provider value={navigationContextValue}>
+      <HelpPanelProvider>
+        <div
+          className={
+            showHelpPanel
+              ? "parent-bg-blue breakout-grid-form-steps grow bg-blue-100"
+              : "parent-bg-blue breakout-grid-form-steps grow bg-blue-100 [--content-max-width:750px] [--help-width:0]"
+          }
         >
-          <Nav.Items>
-            {displayedRoutes.map((route) => {
-              if (Array.isArray(route))
-                return (
-                  <Nav.Item
-                    key="principles"
-                    disabled={isNavigationDisabled}
-                    subItems={
-                      <Nav.Items>
-                        {route.map((element) => getNavItem(element))}
-                      </Nav.Items>
-                    }
-                  >
-                    {digitalDocumentation.navigation.principles}
-                  </Nav.Item>
-                );
-              return getNavItem(route);
-            })}
-          </Nav.Items>
-        </Nav>
-        <main className="space-y-40 py-80">
-          <div className="lg:hidden">
-            <Stepper
-              currentElementUrl={navigationBaseUrl}
-              elements={routes.flat()}
+          <Nav
+            className="sticky top-0 hidden self-start py-80 lg:block"
+            activeElementUrl={currentUrl}
+            ariaLabel={digitalDocumentation.navigation.ariaLabel}
+          >
+            <Nav.Items>
+              {displayedRoutes.map((route) => {
+                if (Array.isArray(route))
+                  return (
+                    <Nav.Item
+                      key="principles"
+                      disabled={isNavigationDisabled}
+                      subItems={
+                        <Nav.Items>
+                          {route.map((element) => getNavItem(element))}
+                        </Nav.Items>
+                      }
+                    >
+                      {digitalDocumentation.navigation.principles}
+                    </Nav.Item>
+                  );
+                return getNavItem(route);
+              })}
+            </Nav.Items>
+          </Nav>
+          <main className="space-y-40 py-80">
+            <div className="lg:hidden">
+              <Stepper
+                currentElementUrl={navigationBaseUrl}
+                elements={routes.flat()}
+              />
+            </div>
+            {/* force remount for different principles with key={currentUrl} */}
+            <Outlet
+              key={currentUrl}
+              context={{
+                currentUrl,
+                navigationBaseUrl,
+                nextUrl,
+                previousUrl,
+                routes,
+                prinzips,
+              }}
             />
-          </div>
-          {/* force remount for different principles with key={currentUrl} */}
-          <Outlet
-            key={currentUrl}
-            context={{
-              currentUrl,
-              navigationBaseUrl,
-              nextUrl,
-              previousUrl,
-              routes,
-              prinzips,
-            }}
-          />
-          {children}
-        </main>
-        {showHelpPanel && <HelpSidepanel />}
-      </div>
-    </HelpPanelProvider>
+            {children}
+          </main>
+          {showHelpPanel && <HelpSidepanel />}
+        </div>
+      </HelpPanelProvider>
+    </DocumentationNavigationContext.Provider>
   );
 }
 

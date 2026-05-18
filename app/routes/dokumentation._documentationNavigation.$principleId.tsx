@@ -1,5 +1,5 @@
 import { methoden_fuenfPrinzipien } from "@/config/routes";
-import { Link, useOutletContext, useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import Heading from "~/components/Heading";
@@ -7,26 +7,21 @@ import HelpButton from "~/components/HelpButton";
 import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import type { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 import { principleAnswerOnlySchema } from "./dokumentation/documentationDataSchema";
+import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
 const { radioOptions } = digitalDocumentation.principlePages;
 
 export function DocumentationPrinciple({
   principleId,
-  currentUrl,
-  nextUrl,
-  previousUrl,
-  prinzips,
-}: Pick<
-  NavigationContext,
-  "currentUrl" | "nextUrl" | "previousUrl" | "prinzips"
-> & {
+}: {
   principleId: string;
 }) {
+  const { currentUrl, nextUrl, previousUrl, prinzips } =
+    useDocumentationNavigation();
   const prinzip = prinzips.find(
     ({ URLBezeichnung }) => URLBezeichnung === principleId,
   );
@@ -123,18 +118,28 @@ export function DocumentationPrinciple({
 
 export default function Route() {
   const { principleId } = useParams();
-  const { currentUrl, nextUrl, previousUrl, prinzips } =
-    useOutletContext<NavigationContext>();
   if (!principleId)
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw new Response("No principleId provided", { status: 404 });
+  return <DocumentationPrinciple principleId={principleId} />;
+}
+
+// Astro page export
+import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
+
+export function PrinciplePage({
+  prinzips,
+  currentUrl,
+  principleId,
+}: {
+  prinzips: PrinzipWithAspekteAndExample[];
+  currentUrl: string;
+  principleId: string;
+}) {
   return (
-    <DocumentationPrinciple
-      principleId={principleId}
-      currentUrl={currentUrl}
-      nextUrl={nextUrl}
-      previousUrl={previousUrl}
-      prinzips={prinzips}
-    />
+    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
+      <DocumentationPrinciple principleId={principleId} />
+    </DocumentationPageShell>
   );
 }

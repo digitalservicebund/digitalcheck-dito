@@ -1,6 +1,5 @@
 import { dokumentation_absenden } from "@/config/routes";
 import { EmojiEventsOutlined as EmojiEventsOutlinedIcon } from "@digitalservicebund/icons";
-import { useOutletContext } from "react-router";
 import { DownloadButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Heading from "~/components/Heading";
@@ -10,13 +9,12 @@ import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
-import type { NavigationContext } from "./dokumentation._documentationNavigation";
+import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
 const { finish } = digitalDocumentation;
 
-export function DocumentationSend({
-  prinzips,
-}: Pick<NavigationContext, "prinzips">) {
+export function DocumentationSend() {
+  const { prinzips } = useDocumentationNavigation();
   const { downloadDocumentation } = useWordDocumentation();
 
   return (
@@ -80,6 +78,23 @@ export function DocumentationSend({
 }
 
 export default function Route() {
-  const { prinzips } = useOutletContext<NavigationContext>();
-  return <DocumentationSend prinzips={prinzips} />;
+  return <DocumentationSend />;
+}
+
+// Astro page export
+import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
+
+export function AbsendenPage({
+  prinzips,
+  currentUrl,
+}: {
+  prinzips: PrinzipWithAspekteAndExample[];
+  currentUrl: string;
+}) {
+  return (
+    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
+      <DocumentationSend />
+    </DocumentationPageShell>
+  );
 }

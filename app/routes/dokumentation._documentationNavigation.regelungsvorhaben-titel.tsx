@@ -1,5 +1,4 @@
 import { dokumentation_regelungsvorhabenTitel } from "@/config/routes";
-import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
 import Input from "~/components/Input";
@@ -9,22 +8,16 @@ import {
   defaultTitleValues,
   policyTitleSchema,
 } from "~/routes/dokumentation/documentationDataSchema";
-import type { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
+import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
 const { info } = digitalDocumentation;
 
-export function DocumentationTitle({
-  currentUrl,
-  nextUrl,
-  previousUrl,
-  prinzips,
-}: Pick<
-  NavigationContext,
-  "currentUrl" | "nextUrl" | "previousUrl" | "prinzips"
->) {
+export function DocumentationTitle() {
+  const { currentUrl, nextUrl, previousUrl, prinzips } =
+    useDocumentationNavigation();
   const { documentationData, setPolicyTitle } = useDocumentationDataService();
 
   const form = useSyncedForm({
@@ -74,14 +67,23 @@ export function DocumentationTitle({
 }
 
 export default function Route() {
-  const { currentUrl, nextUrl, previousUrl, prinzips } =
-    useOutletContext<NavigationContext>();
+  return <DocumentationTitle />;
+}
+
+// Astro page export
+import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
+
+export function TitelPage({
+  prinzips,
+  currentUrl,
+}: {
+  prinzips: PrinzipWithAspekteAndExample[];
+  currentUrl: string;
+}) {
   return (
-    <DocumentationTitle
-      currentUrl={currentUrl}
-      nextUrl={nextUrl}
-      previousUrl={previousUrl}
-      prinzips={prinzips}
-    />
+    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
+      <DocumentationTitle />
+    </DocumentationPageShell>
   );
 }

@@ -1,5 +1,4 @@
 import { dokumentation_beteiligungsformate } from "@/config/routes";
-import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
 import MetaTitle from "~/components/Meta";
@@ -10,22 +9,16 @@ import {
   defaultParticipationValues,
   participationSchema,
 } from "~/routes/dokumentation/documentationDataSchema";
-import type { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
+import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
 const { participation } = digitalDocumentation;
 
-export function DocumentationParticipation({
-  currentUrl,
-  nextUrl,
-  previousUrl,
-  prinzips,
-}: Pick<
-  NavigationContext,
-  "currentUrl" | "nextUrl" | "previousUrl" | "prinzips"
->) {
+export function DocumentationParticipation() {
+  const { currentUrl, nextUrl, previousUrl, prinzips } =
+    useDocumentationNavigation();
   const { setParticipation, documentationData } = useDocumentationDataService();
 
   const form = useSyncedForm({
@@ -105,14 +98,23 @@ export function DocumentationParticipation({
 }
 
 export default function Route() {
-  const { currentUrl, nextUrl, previousUrl, prinzips } =
-    useOutletContext<NavigationContext>();
+  return <DocumentationParticipation />;
+}
+
+// Astro page export
+import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
+
+export function BeteiligungsformatePage({
+  prinzips,
+  currentUrl,
+}: {
+  prinzips: PrinzipWithAspekteAndExample[];
+  currentUrl: string;
+}) {
   return (
-    <DocumentationParticipation
-      currentUrl={currentUrl}
-      nextUrl={nextUrl}
-      previousUrl={previousUrl}
-      prinzips={prinzips}
-    />
+    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
+      <DocumentationParticipation />
+    </DocumentationPageShell>
   );
 }
