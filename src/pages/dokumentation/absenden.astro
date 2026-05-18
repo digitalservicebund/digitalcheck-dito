@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import DokumentationLayout from "@/components/DokumentationLayout";
+import { AbsendenPage } from "~/routes/dokumentation._documentationNavigation.absenden";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,
@@ -18,10 +18,9 @@ const prinzips = "error" in result ? [] : result.prinzips;
 ---
 
 <Layout title={frontmatter.title} showProgressBar>
-  <DokumentationLayout
+  <AbsendenPage
     client:load
     prinzips={prinzips}
-    page="absenden"
     currentUrl={Astro.url.pathname}
   />
 </Layout>
