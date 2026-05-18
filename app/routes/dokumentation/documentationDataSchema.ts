@@ -55,12 +55,12 @@ const principlePositiveAnswerSchemaV2 = z.object({
 
 const principleNegativeAnswerSchemaV2 = z.object({
   answer: z.literal(principlePages.radioOptions[1]),
-  aspects: z.literal(undefined),
+  aspects: z.undefined().optional(),
 });
 
 const principleIrrelevantAnswerSchemaV2 = z.object({
   answer: z.literal(principlePages.radioOptions[2]),
-  aspects: z.literal(undefined),
+  aspects: z.undefined().optional(),
 });
 
 const principleBaseSchemaV2 = z.object({
