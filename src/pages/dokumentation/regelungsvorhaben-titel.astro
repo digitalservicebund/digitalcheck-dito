@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import DokumentationLayout from "@/components/DokumentationLayout";
+import { TitelPage } from "~/routes/dokumentation._documentationNavigation.regelungsvorhaben-titel";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,
@@ -18,10 +18,5 @@ const prinzips = "error" in result ? [] : result.prinzips;
 ---
 
 <Layout title={frontmatter.title} showProgressBar>
-  <DokumentationLayout
-    client:load
-    prinzips={prinzips}
-    page="regelungsvorhaben-titel"
-    currentUrl={Astro.url.pathname}
-  />
+  <TitelPage client:load prinzips={prinzips} currentUrl={Astro.url.pathname} />
 </Layout>
