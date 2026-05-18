@@ -43,7 +43,7 @@ export const support = {
       {
         icon: DrawOutlined,
         title: "Visualisierungen erstellen",
-        text: "Wir erstellen in wenigen Tagen eine Visualisierung für Sie — hilfreich bei Abstimmungen im Haus, zwischen Ressorts oder mit dem NKR.",
+        text: "Wir erstellen in wenigen Tagen eine Visualisierung für Sie — hilfreich um Sachverhalte abzustimmen, Zusammenhänge zu verstehen und für Abstimmungen im Haus und zwischen Ressorts.",
       },
       {
         icon: PlaylistAddCheckOutlined,
@@ -113,7 +113,6 @@ export const support = {
                 title: "Was Sie bekommen",
                 text: dedent`
                   - Expert:innen-Einschätzung zum Digitalbezug des Regelungsverfahrens: Grundlage für Planung des Regelungsvorhabens
-                  - richtige Ansprechperson im NKR-Sekretariat
                 `,
               },
             ],
@@ -162,7 +161,7 @@ export const support = {
             text: dedent`
               Wir erstellen Visualisierungen für Sie oder digitalisieren Ihre Papier-und-Stift-Skizzen.
 
-              Ein Bild sagt mehr als tausend Worte — genauso helfen Visualisierungen bei Abstimmungen im Haus, zwischen Ressorts oder mit dem NKR.
+              Ein Bild sagt mehr als tausend Worte — genauso helfen Visualisierungen um Sachverhalte abzustimmen, Zusammenhänge zu verstehen und bei Abstimmungen im Haus und zwischen Ressorts.
 
               Die Art der Visualisierung richtet sich nach Ihren Anforderungen:
               

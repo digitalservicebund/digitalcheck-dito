@@ -43,7 +43,9 @@ const steps = [
     duration: "Wenige Minuten",
     result: dedent`
       - Individueller Digital- und Interoperabilitätsbezug
-      - Ergebnis als E-Mail zum Versenden an den Nationalen Normenkontrollrat
+      - Ergebnis als E-Mail an Prüfstelle schicken.
+      - Auf Bundesebene ist zum Beispiel der Normen Kontrollrat (NKR) die zuständige Prüfstelle.
+
     `,
   },
   {

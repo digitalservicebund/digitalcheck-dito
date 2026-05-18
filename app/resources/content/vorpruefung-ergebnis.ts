@@ -107,15 +107,15 @@ export const preCheckResult = {
     },
   },
   form: {
-    formLegend: "Ergebnis senden und NKR frühzeitig einbinden",
+    formLegend: "Ergebnis senden und Prüfstelle frühzeitig einbinden",
     instructions: dedent`
       Wir erstellen für Sie eine E-Mail mit dem Ergebnis der Vorprüfung, die sich in Ihrem E-Mail-Programm öffnet.
 
-      - Schicken Sie das Ergebnis an den Nationalen Normenkontrollrat (NKR).
+      - Schicken Sie das Ergebnis an Ihre Prüfstelle (wenn keine Prüfstelle vorhanden ist, dient das Ergebnis als Dokumentation und zur Selbstprüfung)
       - **Bei Anforderungen an Interoperabilität** erhält das Digitalcheck-Team automatisch eine Kopie und meldet sich bei Ihnen.
     `,
     previewLabel: "Vorschau der E-Mail-Vorlage",
-    copyIntroText: dedent`**Alternativ** können Sie das Ergebnis der Vorprüfung einfach als Text kopieren und manuell an den NKR schicken oder bei Ihren Dokumenten speichern.`,
+    copyIntroText: dedent`**Alternativ** können Sie das Ergebnis der Vorprüfung einfach als Text kopieren und manuell an die zuständige Prüfstelle schicken oder bei Ihren Dokumenten speichern.`,
     vorhabenTitleLabel: "Vorläufiger Arbeitstitel des Vorhabens",
     vorhabenTitleRequired: "Bitte geben Sie einen Titel für Ihr Vorhaben an.",
     vorhabenTitleTooLong:
@@ -153,10 +153,6 @@ export const preCheckResult = {
             - Nutzen Sie, falls vorhanden, die direkte Veraktungsfunktion in Outlook.
           `,
         },
-        {
-          label: "Warum die Vorprüfung an den NKR schicken?",
-          text: "Erfahrungswerte zeigen, dass ein frühzeitiger Austausch mit dem NKR oder dem DigitalService das Erarbeiten für Sie vereinfacht und die Prüfung beschleunigt. So können Sie von den Erfahrungen in anderen Vorhaben profitieren – wenn Sie dies wünschen.",
-        },
       ],
     },
     downloadPdfButton: {
@@ -165,10 +161,6 @@ export const preCheckResult = {
     copyMailButton: {
       text: "E-Mail-Text kopieren",
       textCopied: "Text Kopiert!",
-    },
-    copyAddressButton: {
-      text: "Empfängeradresse kopieren",
-      textCopied: "Adresse kopiert!",
     },
     sendEmailButton: {
       text: "E-Mail erstellen",
@@ -192,7 +184,6 @@ export const preCheckResult = {
     outro: {
       title: "Darum ist es wichtig",
       text: dedent`
-      - Je **früher** Sie sich mit dem NKR zu Digitalbezug austauschen, desto schneller ist die Prüfung abgeschlossen.
       - Bei Interoperabilitätsbezug unterstützt Sie das Digitalcheck-Team gezielt bei der Umsetzung der EU-Anforderungen.
     `,
     },

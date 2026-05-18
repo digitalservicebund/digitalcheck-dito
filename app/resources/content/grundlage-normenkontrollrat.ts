@@ -8,7 +8,7 @@ import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const fundamentalsNKR = {
   title:
-    "Die Rolle des Nationalen Normenkontrollrats im Rahmen des Digitalcheck ",
+    "Die Rolle des Nationalen Normenkontrollrats im Rahmen des Digitalcheck",
   subtitle:
     "Alles zu den Aufgaben und der Vorgehensweise des Nationalen Normenkontrollrats (NKR) im Kontext des Digitalcheck",
   summary: {

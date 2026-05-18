@@ -40,7 +40,7 @@ export const fundamentalsDigitalReadiness = {
           text: "Alle Regelungsvorhaben sind betroffen",
         },
         content:
-          "Der Digitalcheck gilt für alle Regelungsvorhaben (Gesetze, Verordnungen und Verwaltungsvorschriften), sowohl für neue Vorhaben als auch für Änderungen an bestehenden Regelungen.",
+          "Der Digitalcheck gilt für alle Regelungsvorhaben  auf Bundesebene (Gesetze, Verordnungen und Verwaltungsvorschriften), sowohl für neue Vorhaben als auch für Änderungen an bestehenden Regelungen.",
         visual: {
           Icon: GradingOutlined,
         },
