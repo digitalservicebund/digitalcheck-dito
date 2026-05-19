@@ -3,16 +3,16 @@ import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { usePreCheckData } from "~/routes/vorpruefung/preCheckDataHook";
-import { useLocation } from "~/utils/routerCompat";
 
 const { questions } = preCheck;
 
 export default function VorpruefungNavigation({
   children,
+  pathname,
 }: {
   children: ReactNode;
+  pathname: string;
 }) {
-  const { pathname } = useLocation();
   const { answers, firstUnansweredQuestionIndex } = usePreCheckData();
 
   return (

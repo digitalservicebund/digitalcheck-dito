@@ -9,7 +9,7 @@ export const frontmatter = {
 ---
 
 <Layout title={frontmatter.title} showProgressBar>
-  <VorpruefungNavigation client:load>
+  <VorpruefungNavigation client:load pathname={Astro.url.pathname}>
     <HinweisePage client:load />
   </VorpruefungNavigation>
 </Layout>
