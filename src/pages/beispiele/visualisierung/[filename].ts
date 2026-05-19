@@ -1,3 +1,4 @@
+import { getImageFilename } from "@/utils/images";
 import type { APIRoute, GetStaticPaths } from "astro";
 import {
   fetchStrapiData,
@@ -21,7 +22,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   if ("error" in result) return [];
 
   return result.visualisierungen.map((v) => ({
-    params: { filename: new URL(v.Bild.url).pathname.split("/").pop() },
+    params: { filename: getImageFilename(v) },
     props: { url: v.Bild.url },
   }));
 };
