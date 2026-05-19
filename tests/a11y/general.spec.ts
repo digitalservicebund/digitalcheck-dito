@@ -6,7 +6,6 @@ import {
   allRoutes,
   beispiele_prinzipien,
   methoden_fuenfPrinzipien,
-  unterstuetzung,
 } from "@/config/routes";
 import { checkHeadingsForFlowContent } from "./utils.ts";
 
@@ -22,9 +21,7 @@ test.describe("basic example a11y test", () => {
     .filter(
       (route) =>
         !route.isStagingOnly &&
-        ![".pdf", ".xlsx", ".docx", unterstuetzung.path].some((r) =>
-          route.path.endsWith(r),
-        ),
+        ![".pdf", ".xlsx", ".docx"].some((r) => route.path.endsWith(r)),
     )
     .forEach((route, i) => {
       test(`check a11y of ${route.path} (${i})`, async ({ page }) => {

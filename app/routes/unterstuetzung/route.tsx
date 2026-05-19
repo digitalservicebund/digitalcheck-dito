@@ -184,7 +184,9 @@ export default function Index() {
                       <div className="flex-none space-y-20 md:w-[310px] lg:w-[364px]">
                         <div className="bg-white">
                           <div className="p-28">
-                            <h4>{offering.sellingPoints}</h4>
+                            <h3 className="text-lg">
+                              {offering.sellingPoints}
+                            </h3>
                             <div className="divide-y divide-gray-700">
                               {offering.details.map((detail) => (
                                 <div key={detail.title} className="py-16">
@@ -251,6 +253,8 @@ export default function Index() {
                 type: "image",
                 image: {
                   url: assetPath("/images/zfl-preview.png"),
+                  alternativeText:
+                    "Screenshot der Website des Zentrum für Legistik",
                   size: "medium",
                 },
               }}
