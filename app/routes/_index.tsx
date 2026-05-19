@@ -26,6 +26,7 @@ import InfoBox from "~/components/InfoBox";
 import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
+import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 const steps = [
@@ -204,7 +205,12 @@ export default function Index() {
           </InfoBox>
         </div>
 
-        <div className="breakout bg-[url('/images/trainings.jpg')] bg-cover bg-center">
+        <div
+          className="breakout bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${assetPath("/images/trainings.jpg")})`,
+          }}
+        >
           <div className="py-40 lg:py-80">
             <InfoBoxSideBySide>
               <InfoBox look="method" className="bg-white">
