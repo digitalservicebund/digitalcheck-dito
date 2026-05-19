@@ -67,5 +67,5 @@ const title = prinzip ? `Prinzip: ${prinzip.Name}` : "Fünf Prinzipien";
 ---
 
 <Layout title={title} showProgressBar>
-  <Prinzip prinzip={prinzip!} prinzipList={prinzipList} />
+  <Prinzip prinzip={prinzip!} prinzipList={prinzipList} client:load />
 </Layout>
