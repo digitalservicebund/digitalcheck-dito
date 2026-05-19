@@ -1,3 +1,4 @@
+import { getImagePath } from "@/utils/images";
 import { ZoomInOutlined } from "@digitalservicebund/icons";
 import { Link } from "react-router";
 import Heading from "~/components/Heading";
@@ -48,13 +49,13 @@ export default function VisualisationItem({
       <div className="flex gap-16 max-sm:flex-col sm:gap-24">
         <div className="sm:w-1/2">
           <Link
-            to={`/beispiele/visualisierung/${new URL(visualisierung.Bild.url).pathname.split("/").pop()}`}
+            to={getImagePath(visualisierung)}
             target="_blank"
             rel="noreferrer"
             className="relative block aspect-square cursor-zoom-in overflow-hidden border border-blue-500"
           >
             <Image
-              url={visualisierung.Bild.url}
+              url={getImagePath(visualisierung)}
               alternativeText={visualisierung.Bild.alternativeText}
               className="size-full object-cover"
             />
