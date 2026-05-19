@@ -8,7 +8,7 @@ import {
 } from "@headlessui/react";
 import type { FormScope } from "@rvf/react";
 import { useField } from "@rvf/react";
-import { type ReactNode, useId, useMemo } from "react";
+import { type ReactNode, useId } from "react";
 import InputError from "~/components/InputError";
 
 export type Option = {
@@ -39,10 +39,7 @@ export default function Combobox({
   const descriptionId = useId();
   const control = field.getControlProps();
   const selectedValues = control.value ?? [];
-  const optionsByValue = useMemo(
-    () => new Map(options.map((option) => [option.value, option] as const)),
-    [options],
-  );
+  const selectedSet = new Set(selectedValues);
 
   // fix for rvf's broken validation on controlled array elements (only show error when no options provided)
   const noneSelected = selectedValues.length === 0;
@@ -51,11 +48,9 @@ export default function Combobox({
   const hasWarning =
     !!(error || field.error()) && !!warningInsteadOfError && noneSelected;
 
-  const displayValue = selectedValues
-    .map((value) => {
-      const option = optionsByValue.get(value);
-      return option?.label ?? value;
-    })
+  const displayValue = options
+    .filter((option) => selectedSet.has(option.value))
+    .map((option) => option.label)
     .join(", ");
 
   return (
