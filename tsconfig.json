@@ -1,13 +1,21 @@
 {
-  "extends": "./tsconfig.base.json",
-  "include": [".astro/types.d.ts", "**/*"],
+  "extends": "astro/tsconfigs/strict",
   "exclude": [
-    "**/*.test.ts",
+    "dist",
+    "build",
+    "tests/playwright-report",
     "**/*.spec.ts",
     "**/*.spec.tsx",
-    "**/*.test.tsx",
-    "tests/**",
-    "dist",
-    "build"
-  ]
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ],
+  "include": [".astro/types.d.ts", "**/*"],
+  "compilerOptions": {
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "paths": {
+      "@/*": ["./src/*"],
+      "~/*": ["./app/*"],
+      "react-router": ["./app/utils/routerCompat.tsx"]
+    }
+  }
 }
