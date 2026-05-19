@@ -103,7 +103,7 @@ export default function DocumentationTitle() {
                   })}
                   className="ds-radio"
                 />
-                <span>Er ist bereits veröffentlicht</span>
+                <span>Der Referentenentwurf ist bereits veröffentlicht</span>
               </label>
               {publicationStatusField.value() === "published" && (
                 <div className="mt-16 ml-28">
