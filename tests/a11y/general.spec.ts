@@ -9,6 +9,7 @@ import {
   vorpruefung_ergebnis,
 } from "@/config/routes";
 import { preCheck } from "~/resources/content/vorpruefung";
+import { waitForHydration } from "../e2e/helpers";
 import { checkHeadingsForFlowContent } from "./utils.ts";
 
 // The vorpruefung sub-routes redirect to the first step (/vorpruefung/it-system)
@@ -20,6 +21,7 @@ const excludedRoutes = [
 ];
 
 async function checkPage(page: Page) {
+  await waitForHydration(page);
   const accessibilityResults = await new AxeBuilder({ page }).analyze();
   expect(accessibilityResults.violations).toEqual([]);
 
