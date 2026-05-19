@@ -12,7 +12,7 @@ const { questionIdx, question } = getQuestion("eu-bezug");
 ---
 
 <Layout title={frontmatter.title} showProgressBar>
-  <VorpruefungNavigation client:load>
+  <VorpruefungNavigation client:load pathname={Astro.url.pathname}>
     <PreCheckQuestion
       client:load
       questionIdx={questionIdx}
