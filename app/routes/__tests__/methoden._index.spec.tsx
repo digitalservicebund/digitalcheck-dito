@@ -124,6 +124,8 @@ describe("Methoden Route - Integration Tests", () => {
     expect(
       screen.getByText("Dokumentieren des Regelungsvorhabens"),
     ).toBeInTheDocument();
-    expect(screen.getByText("Prüfen durch den NKR")).toBeInTheDocument();
+    expect(
+      screen.getByText("Prüfen durch zuständige Prüfstelle"),
+    ).toBeInTheDocument();
   });
 });

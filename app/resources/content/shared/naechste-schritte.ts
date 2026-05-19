@@ -1,14 +1,12 @@
 import { dokumentation, methoden, vorpruefung } from "@/config/routes";
 import type { Step } from "~/utils/contentTypes.ts";
-import { dedent } from "~/utils/dedentMultilineStrings";
-import { contact } from "./contact";
 
-const stepNKR: Step = {
+const stepPruefstelle: Step = {
   headline: {
-    text: "Prüfen durch den NKR",
+    text: "Prüfen durch zuständige Prüfstelle",
   },
   content:
-    "Der NKR (Nationaler Normenkontrollrat) prüft Ihr Vorhaben hinsichtlich der Berücksichtigung der Prinzipien digitaltauglicher Gesetzgebung. Bei Fragen wird der NKR auf Sie zukommen.",
+    "Ihre Prüfstelle untersucht ihr Vorhaben hinsichtlich der Berücksichtigung der Prinzipien digitaltauglicher Gesetzgebung. Senden Sie die von Ihnen erstelle Dokumentation per E-Mail an Ihre Prüfstelle. Die E-Mail-Adresse finden Sie am Ende der Dokumentationserstellung. Damit ist der Digitacheck für Sie beendet. Wenn Sie keine Prüfstelle haben, dient die Dokumentation zur Selbstprüfung.",
   isDisabled: false,
 };
 export const steps = {
@@ -65,16 +63,10 @@ export const steps = {
       isDisabled: true,
     },
   },
-  nkr: stepNKR,
+  nkr: stepPruefstelle,
   nkrFinal: {
-    ...stepNKR,
+    ...stepPruefstelle,
     isDisabled: false,
-    content:
-      stepNKR.content +
-      dedent`
-        <p>Senden Sie die von Ihnen erstellte Dokumentation per E-Mail an folgende Adresse: <a href="mailto:${contact.nkrEmail}" class="plausible-event-name=Content.Steps.Link+BMJ+Email underline hover:no-underline text-blue-700 font-bold">${contact.nkrEmail}</a></p>
-
-        Damit ist der Digitalcheck für Sie beendet.
-      `,
+    content: stepPruefstelle.content,
   },
 } satisfies { [key: string]: Step };

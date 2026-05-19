@@ -18,10 +18,14 @@ export default function FundamentalsMethods() {
     <>
       <MetaTitle prefix={grundlagen_normenkontrollrat.title} />
       <main>
-        <Hero
-          title={fundamentalsNKR.title}
-          subtitle={fundamentalsNKR.subtitle}
-        />
+        <Hero title={fundamentalsNKR.title} subtitle={fundamentalsNKR.subtitle}>
+          <RichText
+            markdown={
+              "Diese Seite richtet sich **ausschließlich** an Bundesministerien."
+            }
+            className="ds-subhead"
+          />
+        </Hero>
 
         <Container className="space-y-40 py-40 md:py-80">
           <InfoBoxList separator className="ds-stack-80 mt-0 [&>li]:pb-80">

@@ -118,33 +118,6 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
 
   // only run on chromium because clipboard permissions don't work with firefox / safari
   // https://github.com/microsoft/playwright/issues/13037
-  test("can copy email address to clipboard", async ({ browserName }) => {
-    if (
-      browserName === "webkit" ||
-      browserName === "firefox" ||
-      test.info().project.name === "Desktop Edge"
-    ) {
-      test.skip(
-        true,
-        "Skipping clipboard test on WebKit, Firefox, and Desktop Edge.",
-      );
-    }
-    const copyAddressButton = page.getByRole("button", {
-      name: "Empfängeradresse kopieren",
-    });
-    await expect(copyAddressButton).toBeVisible();
-    await copyAddressButton.click();
-
-    const clipboardText = await page.evaluate(() =>
-      navigator.clipboard.readText(),
-    );
-    expect(clipboardText).toBe(
-      "nkr@bmjv.bund.de, interoperabel@digitalservice.bund.de",
-    );
-  });
-
-  // only run on chromium because clipboard permissions don't work with firefox / safari
-  // https://github.com/microsoft/playwright/issues/13037
   test("can copy email content to clipboard", async ({ browserName }) => {
     if (
       browserName === "webkit" ||

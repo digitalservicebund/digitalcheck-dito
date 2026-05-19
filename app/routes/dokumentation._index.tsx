@@ -1,6 +1,5 @@
 import { dokumentation } from "@/config/routes";
 import {
-  ChecklistRtl,
   SimCardDownloadTwoTone,
   TipsAndUpdatesOutlined,
   ViewListTwoTone,
@@ -92,15 +91,8 @@ export function DokumentationIndexPage({
                   Bearbeiten Sie die Dokumentation{" "}
                   <strong>flexibel im Formular</strong> oder speichern Sie sie
                   als <strong>Word-Datei</strong>. Abschließend senden Sie die
-                  Angaben an den NKR.
-                </p>
-              </Feature>
-              <Feature>
-                <ChecklistRtl className="fill-ds-feature size-80" />
-                <p>
-                  <strong>Vorgegebene Schwerpunkte</strong> entsprechen den
-                  Anforderungen der Digitaltauglichkeit und erleichtern die{" "}
-                  <strong>Prüfung</strong> durch den NKR.
+                  Angaben an Ihre zuständige Prüfstelle (z.B. auf Bundesebene an
+                  den NKR.) Ansonsten dient die Dokumentation zur Selbstprüfung.
                 </p>
               </Feature>
             </FeatureList>
@@ -121,11 +113,15 @@ export function DokumentationIndexPage({
               </NumberedList.Item>
               <NumberedList.Item className={"space-y-8"}>
                 <p className="ds-heading-03-reg">
-                  Senden Sie die ausgefüllte Dokumentation an den NKR
+                  Senden Sie die ausgefüllte Dokumentation an Ihre Prüfstelle
+                  oder speichern Sie Sie das Dokument ab
                 </p>
                 <p>
                   Exportieren Sie Ihre Eingaben als Word-Datei und schicken Sie
-                  diese zu jedem Zeitpunkt per E-Mail an den NKR.
+                  diese zu jedem Zeitpunkt per E-Mail an Ihre zuständige
+                  Prüfstelle oder speichern Sie das Dokument ab. Die
+                  E-Mail-Adresse finden Sie am Ende der
+                  Dokumentationserstellung.
                 </p>
               </NumberedList.Item>
             </NumberedList>

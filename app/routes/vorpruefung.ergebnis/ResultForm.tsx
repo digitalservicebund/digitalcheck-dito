@@ -1,5 +1,4 @@
 import {
-  CopyAll,
   DriveFileRenameOutline,
   EmailOutlined,
 } from "@digitalservicebund/icons";
@@ -128,19 +127,21 @@ export default function ResultForm({
             </div>
             <div className="ds-stack ds-stack-16 grow">
               <RichText markdown={preCheckResult.form.instructions} />
-              <Input scope={form.scope("title")}>
-                {preCheckResult.form.vorhabenTitleLabel}
-              </Input>
+              <div className="max-w-a11y">
+                <Input scope={form.scope("title")}>
+                  {preCheckResult.form.vorhabenTitleLabel}
+                </Input>
+              </div>
 
               {result?.digital === ResultType.NEGATIVE && (
-                <>
+                <div className="max-w-a11y">
                   <Textarea scope={form.scope("negativeReasoning")}>
                     {preCheckResult.form.reasonLabel}
                   </Textarea>
                   {warning && (
                     <InputError look={"warning"}>{warning}</InputError>
                   )}
-                </>
+                </div>
               )}
               <ButtonContainer>
                 {isValid ? (
@@ -210,19 +211,6 @@ export default function ResultForm({
               {isMailBodyCopied
                 ? preCheckResult.form.copyMailButton.textCopied
                 : preCheckResult.form.copyMailButton.text}
-            </Button>
-            <Button
-              type="button"
-              look="ghost"
-              className="plausible-event-name=Content.Send+Result.Button+Copy+Email+Addresses"
-              iconRight={<CopyAll className="h-40 w-40 text-blue-800" />}
-              onClick={() => {
-                void handleCopyMailAddress();
-              }}
-            >
-              {isMailAddressCopied
-                ? preCheckResult.form.copyAddressButton.textCopied
-                : preCheckResult.form.copyAddressButton.text}
             </Button>
           </ButtonContainer>
         </div>

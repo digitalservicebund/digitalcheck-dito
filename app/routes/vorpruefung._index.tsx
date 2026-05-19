@@ -98,12 +98,12 @@ export default function Index() {
                 />
               </InfoBox>
             </TabGroup.Tab>
+            <Heading
+              tagName="h2"
+              look="ds-he ading-02-reg mb-64 max-sm:mb-56"
+              text={preCheck.faq.title}
+            />
             <TabGroup.Tab label={preCheck.faq.tabName}>
-              <Heading
-                tagName="h2"
-                look="ds-heading-02-reg mb-64 max-sm:mb-56"
-                text={preCheck.faq.title}
-              />
               <PreCheckFAQ />
             </TabGroup.Tab>
           </TabGroup>
