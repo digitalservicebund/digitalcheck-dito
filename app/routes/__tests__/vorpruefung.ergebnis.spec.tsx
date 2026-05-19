@@ -324,7 +324,7 @@ describe("Vorprüfung Ergebnis Page", () => {
       it(`should ${expected.formIsVisible ? "show" : "hide"} the contact form`, () => {
         setup(answers);
         const formHeader = screen.queryByText(
-          "Ergebnis senden und NKR frühzeitig einbinden",
+          "Ergebnis absenden und Prüfstelle frühzeitig einbinden",
         );
         const titleInput = screen.queryByRole("textbox", {
           name: "Vorläufiger Arbeitstitel des Vorhabens",

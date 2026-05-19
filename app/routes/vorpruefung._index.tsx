@@ -100,7 +100,7 @@ export default function Index() {
             </TabGroup.Tab>
             <Heading
               tagName="h2"
-              look="ds-heading-02-reg mb-64 max-sm:mb-56"
+              look="ds-he ading-02-reg mb-64 max-sm:mb-56"
               text={preCheck.faq.title}
             />
             <TabGroup.Tab label={preCheck.faq.tabName}>
