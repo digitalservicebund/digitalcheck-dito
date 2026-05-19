@@ -1,10 +1,10 @@
 import type { Config } from "@react-router/dev/config";
 
-import { allRoutes } from "./src/config/routes";
 import {
   fetchStrapiData,
   GET_PRINZIPS_QUERY,
 } from "./app/utils/strapiData.server";
+import { allRoutes } from "./src/config/routes";
 
 const GET_ALL_REGELUNGEN_SLUGS = `
 query GetAllBeispielvorhabens {
