@@ -1,1 +1,0 @@
-function e(e){return`/digitalcheck-dito/previews/ZFL-269-Content-Anpassung/`.replace(/\/$/,``)+e}export{e as t};
