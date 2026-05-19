@@ -12,19 +12,27 @@ const PREVIEW_BASE_PATH = process.env.PREVIEW_BASE_PATH;
 const PRODUCTION_SITE = "https://digitalcheck.bund.de";
 const PREVIEW_SITE = "https://digitalservicebund.github.io";
 
+const base = isPreview ? PREVIEW_BASE_PATH : undefined;
+
+const rawRedirects = {
+  "/beispiele/prinzipien":
+    "/beispiele/prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten",
+  "/interoperabel/loesungen":
+    "/interoperabel?tab=interoperable-loesungen#interoperable-loesungen",
+  "/grundlagen": "/methoden/fuenf-prinzipien",
+  "/grundlagen/fuenf-prinzipien": "/methoden/fuenf-prinzipien",
+  "/methoden/ablaeufe-aufgaben-erfassen": "/methoden/visualisieren",
+};
+
+const redirects = Object.fromEntries(
+  Object.entries(rawRedirects).map(([from, to]) => [from, (base ?? "") + to]),
+);
+
 export default defineConfig({
   output: "static",
   site: isPreview ? PREVIEW_SITE : PRODUCTION_SITE,
-  base: isPreview ? PREVIEW_BASE_PATH : undefined,
-  redirects: {
-    "/beispiele/prinzipien":
-      "/beispiele/prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten",
-    "/interoperabel/loesungen":
-      "/interoperabel?tab=interoperable-loesungen#interoperable-loesungen",
-    "/grundlagen": "/methoden/fuenf-prinzipien",
-    "/grundlagen/fuenf-prinzipien": "/methoden/fuenf-prinzipien",
-    "/methoden/ablaeufe-aufgaben-erfassen": "/methoden/visualisieren",
-  },
+  base,
+  redirects,
   srcDir: "src",
   publicDir: "public",
   integrations: [
@@ -53,5 +61,4 @@ export default defineConfig({
   security: {
     csp: false,
   },
-  trailingSlash: "never",
 });
