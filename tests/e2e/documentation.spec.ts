@@ -405,6 +405,7 @@ test.describe("with partial documentation started", () => {
       })
       .click();
     await page.waitForURL(dokumentation_regelungsvorhabenTitel.path);
+    await waitForHydration(page);
     await expect(
       page.getByLabel(digitalDocumentation.info.inputTitle.label),
     ).toHaveValue(testData.title);

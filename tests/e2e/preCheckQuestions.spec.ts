@@ -30,6 +30,7 @@ test.describe("test questions form", () => {
     await waitForHydration(page);
     await page.getByTestId(PRE_CHECK_START_BUTTON_ID).click();
     await page.waitForURL(vorpruefung_hinweise.path);
+    await waitForHydration(page);
     await page.getByRole("link", { name: "Okay & weiter" }).click();
     for (const element of questions) {
       await page.waitForURL(element.path);

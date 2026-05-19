@@ -2,6 +2,7 @@ import { vorpruefung_ergebnis } from "@/config/routes";
 import type { Page } from "@playwright/test";
 import { expect, test } from "@playwright/test";
 import { preCheck } from "~/resources/content/vorpruefung";
+import { waitForHydration } from "./helpers";
 
 const { questions } = preCheck;
 
@@ -24,6 +25,7 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
     await page.goto(questions[0].path);
     for (const question of questions) {
       await page.waitForURL(question.path);
+      await waitForHydration(page);
       await page.getByLabel("Ja").click();
       await page.getByRole("button", { name: "Übernehmen" }).click();
     }
