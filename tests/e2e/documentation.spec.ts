@@ -11,6 +11,7 @@ import {
   dokumentation_regelungsvorhabenTitel,
   dokumentation_zusammenfassung,
 } from "@/config/routes";
+import { waitForHydration } from "./helpers";
 
 const testData = {
   title: "E2E V2 Titel des Regelungsvorhabens",
@@ -68,12 +69,14 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
   await test.step("start documentation flow from landing page", async () => {
     await page.goto(dokumentation.path);
     await expect(page).toHaveURL(dokumentation.path);
+    await waitForHydration(page);
 
     await page.getByRole("link", { name: "Dokumentation starten" }).click();
   });
 
   await test.step("see the notice, confirm, and continue", async () => {
     await expect(page).toHaveURL(dokumentation_hinweise.path);
+    await waitForHydration(page);
     await expect(
       page.getByRole("heading", { name: "Wichtige Hinweise" }),
     ).toBeVisible();
@@ -87,6 +90,7 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
 
   await test.step("fill title page and navigate to participation", async () => {
     await expect(page).toHaveURL(dokumentation_regelungsvorhabenTitel.path);
+    await waitForHydration(page);
     await page
       .getByLabel(digitalDocumentation.info.inputTitle.label)
       .fill(testData.title);
@@ -96,6 +100,7 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
   });
 
   await test.step("fill participation page and navigate to first principle", async () => {
+    await waitForHydration(page);
     await page.getByTestId("schritte").fill(testData.participationFormats);
     await page.getByTestId("erkenntnisse").fill(testData.participationResults);
     await page.getByRole("button", { name: "Weiter" }).click();
@@ -108,6 +113,7 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
   });
 
   await test.step("positive principle answer page — select answer only", async () => {
+    await waitForHydration(page);
     // V2: answer page only shows radio buttons, no aspects or reasoning
     await page.getByLabel("Ja, gänzlich oder teilweise").check();
 
@@ -121,6 +127,7 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
   await test.step("positive principle erläuterung page — select aspects and fill reasoning", async () => {
     // Should be on the erlaeuterung sub-page
     await page.waitForURL(/\/erlaeuterung$/, { timeout: 5000 });
+    await waitForHydration(page);
 
     // Verify confirmation text for positive answer
     await expect(
@@ -175,11 +182,13 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
     await page
       .getByRole("heading", { level: 2, name: /Schafft das Regelungsvorhaben/ })
       .waitFor();
+    await waitForHydration(page);
 
     await page.getByRole("radio", { name: "Nein" }).check();
     // Wait for navigation context to update after answer is saved
     await page.getByRole("button", { name: "Weiter" }).click();
     await page.waitForURL(/\/erlaeuterung$/, { timeout: 5000 });
+    await waitForHydration(page);
 
     // Verify negative confirmation text
     await expect(
@@ -200,10 +209,12 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
     await page
       .getByRole("heading", { level: 2, name: /Schafft das Regelungsvorhaben/ })
       .waitFor();
+    await waitForHydration(page);
 
     await page.getByLabel("Nicht relevant").check();
     await page.getByRole("button", { name: "Weiter" }).click();
     await page.waitForURL(/\/erlaeuterung$/, { timeout: 5000 });
+    await waitForHydration(page);
 
     // Verify irrelevant confirmation text
     await expect(
@@ -225,6 +236,7 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
     await page
       .getByRole("heading", { level: 2, name: /Schafft das Regelungsvorhaben/ })
       .waitFor();
+    await waitForHydration(page);
 
     await page.getByRole("button", { name: "Weiter" }).click();
   });
@@ -233,12 +245,14 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
     await page
       .getByRole("heading", { level: 2, name: /Schafft das Regelungsvorhaben/ })
       .waitFor();
+    await waitForHydration(page);
 
     await page
       .getByRole("radio", { name: "Ja, gänzlich oder teilweise" })
       .check();
     await page.getByRole("button", { name: "Weiter" }).click();
     await page.waitForURL(/\/erlaeuterung$/, { timeout: 5000 });
+    await waitForHydration(page);
 
     // Select multiple aspect pills
     const aspectButtons = page.locator("button[aria-pressed]");
@@ -307,6 +321,7 @@ test("go to landing page and download empty V2 document template", async ({
   page,
 }, testInfo) => {
   await page.goto(dokumentation.path);
+  await waitForHydration(page);
 
   const docText = await downloadDocumentAndGetText(
     page,
@@ -347,6 +362,7 @@ test("redirects to answer page when navigating directly to erläuterung without 
 
 async function expectAndSkipNotice(page: Page) {
   await page.waitForURL(dokumentation_hinweise.path);
+  await waitForHydration(page);
   await expect(
     page.getByRole("heading", { name: "Wichtige Hinweise" }),
   ).toBeVisible();
@@ -359,6 +375,7 @@ test.describe("with partial documentation started", () => {
     await test.step("start documentation flow from landing page and skip the notice", async () => {
       await page.goto(dokumentation.path);
       await expect(page).toHaveURL(dokumentation.path);
+      await waitForHydration(page);
 
       await page.getByRole("link", { name: "Dokumentation starten" }).click();
 
@@ -366,6 +383,7 @@ test.describe("with partial documentation started", () => {
     });
 
     await test.step("fill the title", async () => {
+      await waitForHydration(page);
       await page
         .getByLabel(digitalDocumentation.info.inputTitle.label)
         .fill(testData.title);
@@ -376,6 +394,7 @@ test.describe("with partial documentation started", () => {
       await expect(page).toHaveURL(dokumentation_hinweise.path);
       await page.goBack();
       await expect(page).toHaveURL(dokumentation.path);
+      await waitForHydration(page);
     });
   });
 
@@ -392,6 +411,7 @@ test.describe("with partial documentation started", () => {
   });
 
   test("can start over", async ({ page }, testInfo) => {
+    await waitForHydration(page);
     const startOverButton = page.getByRole("button", {
       name: "Neue Dokumentation beginnen",
     });

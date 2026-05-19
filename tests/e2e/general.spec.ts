@@ -22,6 +22,7 @@ import {
   vorpruefung_kommunikation,
   vorpruefung_verpflichtungenFuerBeteiligte,
 } from "@/config/routes";
+import { waitForHydration } from "./helpers";
 
 // Order matches the content-defined question sequence in pre-check-questions.ts
 const ROUTES_PRECHECK_QUESTIONS = [
@@ -89,6 +90,7 @@ test.describe("page titles", () => {
     await page.goto(ROUTES_PRECHECK_QUESTIONS[0].path);
     for (const route of ROUTES_PRECHECK_QUESTIONS) {
       await page.waitForURL(route.path);
+      await waitForHydration(page);
       await expect(page).toHaveTitle(getExpectedTitle(route));
       await page.getByLabel("Ja").click();
       await page.getByRole("button", { name: "Übernehmen" }).click();

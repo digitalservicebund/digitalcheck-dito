@@ -6,6 +6,7 @@ import {
 import { expect, test } from "@playwright/test";
 import { PRE_CHECK_START_BUTTON_ID } from "~/resources/constants";
 import { preCheck } from "~/resources/content/vorpruefung";
+import { waitForHydration } from "./helpers";
 
 const { questions } = preCheck;
 
@@ -17,6 +18,7 @@ test.describe("test questions form", () => {
     const answerOptions = ["Ja", "Nein", "Ich bin unsicher"];
     for (let i = 0; i < questions.length; i++) {
       await page.waitForURL(questions[i].path);
+      await waitForHydration(page);
       await page.getByLabel(answerOptions[i % answerOptions.length]).click();
       await page.getByRole("button", { name: "Übernehmen" }).click();
     }
@@ -25,11 +27,13 @@ test.describe("test questions form", () => {
 
   test("clicking through pre-check works", async ({ page }) => {
     await page.goto(vorpruefung.path);
+    await waitForHydration(page);
     await page.getByTestId(PRE_CHECK_START_BUTTON_ID).click();
     await page.waitForURL(vorpruefung_hinweise.path);
     await page.getByRole("link", { name: "Okay & weiter" }).click();
     for (const element of questions) {
       await page.waitForURL(element.path);
+      await waitForHydration(page);
       await expect(page.getByRole("heading", { level: 1 })).toContainText(
         element.question.replaceAll("&#8209;", "‑"), // workaround for non-breaking hyphen present in last question
       );
@@ -45,6 +49,7 @@ test.describe("test questions form", () => {
 
   test("cant submit form without answers", async ({ page }) => {
     await page.goto(questions[0].path);
+    await waitForHydration(page);
     await page.getByRole("button", { name: "Übernehmen" }).click();
     await expect(page).toHaveURL(questions[0].path);
     await expect(page.getByRole("main")).toContainText(
@@ -54,11 +59,13 @@ test.describe("test questions form", () => {
 
   test("back button works", async ({ page }) => {
     await page.goto(questions[0].path);
+    await waitForHydration(page);
     await page.getByRole("link", { name: "Zurück" }).click();
     await expect(page).toHaveURL(vorpruefung_hinweise.path);
     await page.getByRole("link", { name: "Zurück" }).click();
     await expect(page).toHaveURL(vorpruefung.path);
     await page.goto(questions[0].path);
+    await waitForHydration(page);
     await page.getByLabel("Ja").click();
     await page.getByRole("button", { name: "Übernehmen" }).click();
     await expect(page).toHaveURL(questions[1].path);
@@ -81,18 +88,23 @@ test.describe("test questions form", () => {
     // we've sinced moved to using rvf but we'll keep it like this for now
     await page.goto(questions[0].path);
     await page.waitForURL(questions[0].path);
+    await waitForHydration(page);
     await page.getByLabel("Ja").click();
     await page.getByRole("button", { name: "Übernehmen" }).click();
     await page.waitForURL(questions[1].path);
+    await waitForHydration(page);
     await page.getByLabel("Nein").click();
     await page.getByRole("button", { name: "Übernehmen" }).click();
     await page.waitForURL(questions[2].path);
+    await waitForHydration(page);
     await page.getByLabel("Ich bin unsicher").click();
     await page.getByRole("button", { name: "Übernehmen" }).click();
     await page.waitForURL(questions[3].path);
+    await waitForHydration(page);
     await expect(page).toHaveURL(questions[3].path);
     await page.getByLabel("Ja").click();
     await page.reload();
+    await waitForHydration(page);
     await expect(page).toHaveURL(questions[3].path);
     await expect(page.getByLabel("Ja")).not.toBeChecked();
     await page.getByRole("link", { name: "Zurück" }).click();
@@ -100,6 +112,7 @@ test.describe("test questions form", () => {
     await page.getByRole("link", { name: "Zurück" }).click();
     await expect(page.getByLabel("Nein")).toBeChecked();
     await page.goto(questions[0].path);
+    await waitForHydration(page);
     await expect(page.getByLabel("Ja")).toBeChecked();
     await page.getByRole("button", { name: "Übernehmen" }).click();
     await page.waitForURL(questions[1].path);
@@ -110,6 +123,7 @@ test.describe("test questions form", () => {
     await page.getByRole("link", { name: "Zurück" }).click();
     await expect(page.getByLabel("Nein")).toBeChecked();
     await page.reload();
+    await waitForHydration(page);
     await page.getByRole("link", { name: "Zurück" }).click();
     await expect(page.getByLabel("Ja")).toBeChecked();
     await page.getByRole("button", { name: "Übernehmen" }).click();
@@ -128,14 +142,17 @@ test.describe("test questions form", () => {
   test("redirect to first unanswered question", async ({ page }) => {
     await page.goto(questions[0].path);
     await page.waitForURL(questions[0].path);
+    await waitForHydration(page);
     await page.getByLabel("Ja").click();
     await page.getByRole("button", { name: "Übernehmen" }).click();
     await page.waitForURL(questions[1].path);
+    await waitForHydration(page);
     await page.getByLabel("Nein").click();
     await page.getByRole("button", { name: "Übernehmen" }).click();
     await page.waitForURL(questions[2].path);
     await page.goto(questions[4].path);
     await expect(page).toHaveURL(questions[2].path);
+    await waitForHydration(page);
     await page.getByLabel("Nein").click();
     await page.getByRole("button", { name: "Übernehmen" }).click();
     await page.waitForURL(questions[3].path);
@@ -157,11 +174,13 @@ test.describe("test question navigation", () => {
     await page.goto(questions[0].path);
     for (let i = 0; i < questions.length - 1; i++) {
       await page.waitForURL(questions[i].path);
+      await waitForHydration(page);
       await page.getByLabel("Ja").click();
       await page.getByRole("button", { name: "Übernehmen" }).click();
     }
     // wait for last question to show
     await page.waitForURL(questions.at(-1)!.path);
+    await waitForHydration(page);
 
     // Click on each question link and verify it leads to the correct page
     for (const question of questions) {
@@ -174,6 +193,7 @@ test.describe("test question navigation", () => {
     page,
   }) => {
     await page.goto(questions[0].path);
+    await waitForHydration(page);
     const navigation = page.getByTestId("main-nav");
     for (let i = 1; i < questions.length; i++) {
       await expect(navigation.getByText(questions[i].title)).toHaveAttribute(
@@ -222,6 +242,7 @@ test.describe("test question navigation", () => {
 
   test("current page has aria-current and active styling", async ({ page }) => {
     await page.goto(questions[0].path);
+    await waitForHydration(page);
 
     const navigation = page.getByRole("navigation", { name: "Alle Fragen" });
     // Check if the first question has aria-current attribute
@@ -243,6 +264,7 @@ test.describe("test question navigation", () => {
 
   test("answered question have check mark icon", async ({ page }) => {
     await page.goto(questions[0].path);
+    await waitForHydration(page);
     await page.getByLabel("Ja").click();
     await page.getByRole("button", { name: "Übernehmen" }).click();
 
