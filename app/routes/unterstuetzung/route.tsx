@@ -15,7 +15,6 @@ import { support } from "~/resources/content/unterstuetzung";
 import { assetPath } from "~/utils/assetPath";
 import type { ContentLink } from "~/utils/contentTypes";
 import { dedent } from "~/utils/dedentMultilineStrings";
-import { useHydrationMarker } from "~/utils/useHydrationMarker";
 
 type Offering = {
   title: string;
@@ -71,7 +70,6 @@ function SocialProofImage() {
 }
 
 export default function Index() {
-  useHydrationMarker();
   return (
     <>
       <MetaTitle prefix={unterstuetzung.title} />
