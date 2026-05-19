@@ -37,8 +37,6 @@ fileignoreconfig:
   - filename: app/resources/content/vorpruefung.ts # German text content misidentified as secret pattern
     ignore_detectors: [filecontent]
   - filename: app/resources/content/vorpruefung-ergebnis.ts # German text content misidentified as secret pattern
-    checksum: 76f280cf6c801c7d072cb10e377c994d3d117025ad67666ff14169ee9473f357
-  - filename: app/resources/content/vorpruefung-ergebnis.ts
     checksum: 356e2177cff6c4579cbae0c4321d9d6e4752ba93bdf17fb7b7d99e105ff99cff
   - filename: app/resources/content/interoperabel-nationale-kontaktstelle.ts # German text content misidentified as secret pattern
     ignore_detectors: [filecontent]
