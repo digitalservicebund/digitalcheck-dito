@@ -31,7 +31,6 @@ import {
   removeFromLocalStorage,
   writeVersionedDataToLocalStorage,
 } from "~/utils/localStorageVersioned";
-import { useHydrationMarker } from "~/utils/useHydrationMarker";
 
 export const STORAGE_KEY = "documentationData";
 
@@ -130,7 +129,6 @@ function getInitialState(): DocumentationData {
 export function DocumentationDataProvider({
   children,
 }: Readonly<DocumentationDataProviderProps>) {
-  useHydrationMarker();
   const [documentationData, setDocumentationData] = useState<DocumentationData>(
     { version: DATA_SCHEMA_VERSION_V2, initialized: false },
   );
