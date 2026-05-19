@@ -12,7 +12,6 @@ import { SearchParamTabs } from "~/components/Tabs/Tabs";
 import { support } from "~/resources/content/unterstuetzung";
 import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings";
-import { useHydrationMarker } from "~/utils/useHydrationMarker";
 
 const {
   socialProof,
@@ -50,7 +49,6 @@ function SocialProofImage() {
 }
 
 export default function Index() {
-  useHydrationMarker();
   return (
     <>
       <MetaTitle prefix={unterstuetzung.title} />
