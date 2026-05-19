@@ -18,11 +18,7 @@ async function checkPage(page: Page) {
 
 test.describe("basic example a11y test", () => {
   allRoutes
-    .filter(
-      (route) =>
-        !route.isStagingOnly &&
-        ![".pdf", ".xlsx", ".docx"].some((r) => route.path.endsWith(r)),
-    )
+    .filter((route) => !route.isStagingOnly)
     .forEach((route, i) => {
       test(`check a11y of ${route.path} (${i})`, async ({ page }) => {
         // Listen for redirects and update URL if needed
