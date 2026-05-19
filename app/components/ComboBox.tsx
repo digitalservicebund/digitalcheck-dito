@@ -1,4 +1,6 @@
+import { ChevronLeft } from "@digitalservicebund/icons";
 import {
+  ComboboxButton,
   ComboboxInput,
   ComboboxOption,
   ComboboxOptions,
@@ -8,7 +10,6 @@ import type { FormScope } from "@rvf/react";
 import { useField } from "@rvf/react";
 import { type ReactNode, useId, useMemo } from "react";
 import InputError from "~/components/InputError";
-import { Pill } from "./Pill";
 
 export type Option = {
   value: string;
@@ -50,6 +51,13 @@ export default function Combobox({
   const hasWarning =
     !!(error || field.error()) && !!warningInsteadOfError && noneSelected;
 
+  const displayValue = selectedValues
+    .map((value) => {
+      const option = optionsByValue.get(value);
+      return option?.label ?? value;
+    })
+    .join(", ");
+
   return (
     <fieldset className="space-y-8">
       {children && (
@@ -69,40 +77,44 @@ export default function Combobox({
         value={selectedValues}
         onChange={control.onChange}
       >
-        <div className={"ds-textarea h-auto"}>
-          <div className={"flex flex-wrap gap-8"}>
-            {selectedValues.map((value) => {
-              const toggle = () =>
-                control.onChange(
-                  selectedValues.filter((thisValue) => thisValue !== value),
-                );
-              const option = optionsByValue.get(value);
-              return (
-                <Pill
-                  key={value}
-                  label={option?.label ?? value}
-                  value={value}
-                  selected
-                  onClick={toggle}
-                />
-              );
-            })}
-            <ComboboxInput className={"grow"} placeholder={"Auswählen…"} />
+        <div className={"h-auto"}>
+          <div className={"relative flex flex-wrap gap-8"}>
+            <ComboboxInput
+              className={"ds-textarea grow pr-32 data-multiple:text-sm"}
+              placeholder={"Auswählen…"}
+              displayValue={() => displayValue}
+              data-multiple={selectedValues.length > 1 ? true : undefined}
+            />
+            <ComboboxButton className="group absolute inset-y-0 right-0 px-8">
+              <ChevronLeft className="size-24 rotate-270 fill-black/60 group-data-hover:fill-black" />
+            </ComboboxButton>
           </div>
         </div>
         <ComboboxOptions
           anchor="bottom"
-          className="w-(--input-width) border border-gray-400 bg-white empty:invisible"
+          className="w-(--input-width) space-y-8 border border-gray-400 bg-white p-8 shadow-lg empty:invisible"
         >
           {options.map((option) => {
-            if (selectedValues.includes(option.value)) return null;
             return (
               <ComboboxOption
                 key={option.value}
                 value={option.value}
-                className="cursor-pointer px-12 py-8 data-focus:bg-blue-100 data-selected:font-bold"
+                className={"flex"}
               >
-                {option.label}
+                {({ selected }) => (
+                  <>
+                    <input
+                      id={legendId + option.value}
+                      type="checkbox"
+                      checked={selected}
+                      onChange={() => undefined}
+                      className="ds-checkbox ds-checkbox-small"
+                    />
+                    <label htmlFor={legendId + option.value}>
+                      {option.label}
+                    </label>
+                  </>
+                )}
               </ComboboxOption>
             );
           })}

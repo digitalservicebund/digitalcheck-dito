@@ -6,9 +6,9 @@ import { useFieldArray } from "@rvf/react";
 import React from "react";
 import Badge from "~/components/Badge.tsx";
 import Button from "~/components/Button";
+import Combobox from "~/components/ComboBox.tsx";
 import HelpButton from "~/components/HelpButton.tsx";
 import Input from "~/components/Input";
-import Pills from "~/components/Pills.tsx";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea.tsx";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
@@ -166,21 +166,19 @@ export default function BindingRequirementsForm({
                       </HelpButton>
                     </Textarea>
 
-                    <fieldset className="space-y-8">
-                      <legend>
-                        Für welche Bereiche sind diese Dienste relevant?
-                      </legend>
-                      <Pills
-                        scope={requirement.scope("serviceAreas")}
-                        options={serviceAreaOptions}
-                      />
-                    </fieldset>
-                    <Pills
+                    <Combobox
+                      options={serviceAreaOptions}
+                      scope={requirement.scope("serviceAreas")}
+                    >
+                      Für welche Bereiche sind diese Dienste relevant?
+                    </Combobox>
+
+                    <Combobox
                       options={stakeholderOptions}
                       scope={requirement.scope("stakeholderGroups")}
                     >
                       Für wen gilt diese verbindliche Anforderung?
-                    </Pills>
+                    </Combobox>
                   </div>
                 </div>
               );
