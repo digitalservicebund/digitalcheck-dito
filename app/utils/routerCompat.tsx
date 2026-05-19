@@ -57,6 +57,7 @@ export function Link({
   relative: _relative,
   reloadDocument: _reloadDocument,
   unstable_viewTransition: _vt,
+  children,
   onClick,
   ...rest
 }: LinkProps) {
@@ -67,11 +68,15 @@ export function Link({
   const handleClick = ctx
     ? (e: MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
-        ctx.navigate(to);
+        void ctx.navigate(to);
         onClick?.(e);
       }
     : onClick;
-  return <a href={resolvedHref} onClick={handleClick} {...rest} />;
+  return (
+    <a href={resolvedHref} onClick={handleClick} {...rest}>
+      {children}
+    </a>
+  );
 }
 
 // ── NavLink ──────────────────────────────────────────────────────────────────
@@ -203,7 +208,7 @@ export function useSearchParams(): [URLSearchParams, SetSearchParams] {
     const next = updater(new URLSearchParams(loc.search));
     const search = next.toString() ? `?${next.toString()}` : "";
     if (ctx) {
-      ctx.navigate(loc.pathname + search + loc.hash);
+      void ctx.navigate(loc.pathname + search + loc.hash);
     } else {
       const url = new URL(window.location.href);
       url.search = next.toString();
