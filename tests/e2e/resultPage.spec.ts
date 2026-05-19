@@ -36,6 +36,7 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
       await page.goto(vorpruefung_ergebnis.path);
     }
     await page.waitForURL(vorpruefung_ergebnis.path);
+    await waitForHydration(page);
   });
 
   test.afterAll("close shared page for test iteration", async () => {
