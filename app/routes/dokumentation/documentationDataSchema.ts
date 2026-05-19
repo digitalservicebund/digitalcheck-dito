@@ -266,8 +266,8 @@ export const bindingRequirementsSchema = z.object({
       legalReference: z.string().optional(),
       description: z.string().optional(),
       services: z.string().optional(),
-      serviceAreas: z.array(z.string()),
-      stakeholderGroups: z.array(z.string()),
+      serviceAreas: z.array(z.string()).default([]),
+      stakeholderGroups: z.array(z.string()).default([]),
     }),
   ),
 });

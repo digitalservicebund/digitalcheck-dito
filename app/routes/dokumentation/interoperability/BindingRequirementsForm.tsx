@@ -6,14 +6,17 @@ import { useFieldArray } from "@rvf/react";
 import React from "react";
 import Badge from "~/components/Badge.tsx";
 import Button from "~/components/Button";
-import Combobox from "~/components/ComboBox.tsx";
 import HelpButton from "~/components/HelpButton.tsx";
 import Input from "~/components/Input";
+import Pills from "~/components/Pills.tsx";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea.tsx";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
-import { bindingRequirementsSchema } from "~/routes/dokumentation/documentationDataSchema.ts";
+import {
+  BindingRequirementsData,
+  bindingRequirementsSchema,
+} from "~/routes/dokumentation/documentationDataSchema.ts";
 import { markdownLinkIEA } from "~/routes/dokumentation/interoperability/euInteroperabilityFlow.tsx";
 import {
   serviceAreaOptions,
@@ -27,13 +30,14 @@ type SectionNode = {
   render: () => React.ReactNode;
 };
 
-const defaultRequirementValue = {
-  description: "",
-  legalReference: "",
-  services: undefined,
-  stakeholderGroups: [],
-  serviceAreas: [],
-};
+const defaultRequirementValue: BindingRequirementsData["requirements"][number] =
+  {
+    description: "",
+    legalReference: "",
+    services: undefined,
+    stakeholderGroups: [],
+    serviceAreas: [],
+  };
 
 export default function BindingRequirementsForm({
   nextUrl,
@@ -166,17 +170,17 @@ export default function BindingRequirementsForm({
                       <legend>
                         Für welche Bereiche sind diese Dienste relevant?
                       </legend>
-                      <Combobox
+                      <Pills
                         scope={requirement.scope("serviceAreas")}
                         options={serviceAreaOptions}
                       />
                     </fieldset>
-                    <Combobox
+                    <Pills
                       options={stakeholderOptions}
                       scope={requirement.scope("stakeholderGroups")}
                     >
                       Für wen gilt diese verbindliche Anforderung?
-                    </Combobox>
+                    </Pills>
                   </div>
                 </div>
               );
