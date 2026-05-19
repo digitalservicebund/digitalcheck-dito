@@ -138,6 +138,17 @@ export default defineConfig(
       quotes: ["error", "double", { avoidEscape: true }],
     },
   },
+  // Spec/test files are excluded from the default tsconfig.json, so the
+  // type-aware parser needs the test tsconfig to resolve them.
+  {
+    files: ["**/*.{spec,test}.{ts,tsx}"],
+    languageOptions: {
+      parserOptions: {
+        project: ["./tsconfig.test.json"],
+        tsconfigRootDir: __dirname,
+      },
+    },
+  },
   // Additional Rules for test files
   {
     files: ["**/a11y/*.{spec,test}.{ts,tsx}", "**/e2e/*.{spec,test}.{ts,tsx}"],

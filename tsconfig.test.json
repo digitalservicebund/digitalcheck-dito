@@ -1,5 +1,13 @@
 {
   "extends": "./tsconfig.json",
-  "include": [".astro/types.d.ts", "**/*"],
+  "include": [
+    ".astro/types.d.ts",
+    "**/*",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ],
+  "exclude": ["dist", "build", "tests/playwright-report"],
   "files": ["vitest.d.ts"]
 }
