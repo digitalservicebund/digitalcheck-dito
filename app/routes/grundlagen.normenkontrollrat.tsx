@@ -21,8 +21,9 @@ export default function FundamentalsMethods() {
         <Hero title={fundamentalsNKR.title} subtitle={fundamentalsNKR.subtitle}>
           <RichText
             markdown={
-              "Diese Seite richtet sich ausschließlich an Bundesministerien."
+              "Diese Seite richtet sich **ausschließlich** an Bundesministerien."
             }
+            className="ds-subhead"
           />
         </Hero>
 

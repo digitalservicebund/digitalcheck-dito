@@ -267,7 +267,7 @@ export default function Result() {
         <Container className="my-80 py-0 print:hidden">
           <Heading
             tagName="h2"
-            look="ds-heading-02-reg text-center mb-64 max-sm:mb-56"
+            look="ds-heading-02-reg mb-64 max-sm:mb-56"
             text={preCheck.faq.title}
           />
           <PreCheckFAQ />

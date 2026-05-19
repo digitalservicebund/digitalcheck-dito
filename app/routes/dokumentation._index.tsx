@@ -111,12 +111,14 @@ export function DokumentationIndexPage({
               <NumberedList.Item className={"space-y-8"}>
                 <p className="ds-heading-03-reg">
                   Senden Sie die ausgefüllte Dokumentation an Ihre Prüfstelle
-                  oder speichern Sie Sie das Dokument ab.
+                  oder speichern Sie Sie das Dokument ab
                 </p>
                 <p>
                   Exportieren Sie Ihre Eingaben als Word-Datei und schicken Sie
                   diese zu jedem Zeitpunkt per E-Mail an Ihre zuständige
-                  Prüfstelle oder speichern Sie das Dokument ab.
+                  Prüfstelle oder speichern Sie das Dokument ab. Die
+                  E-Mail-Adresse finden Sie am Ende der
+                  Dokumentationserstellung.
                 </p>
               </NumberedList.Item>
             </NumberedList>

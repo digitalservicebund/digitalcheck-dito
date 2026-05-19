@@ -107,7 +107,7 @@ export const preCheckResult = {
     },
   },
   form: {
-    formLegend: "Ergebnis senden und Prüfstelle frühzeitig einbinden",
+    formLegend: "Ergebnis absenden und Prüfstelle frühzeitig einbinden",
     instructions: dedent`
       Wir erstellen für Sie eine E-Mail mit dem Ergebnis der Vorprüfung, die sich in Ihrem E-Mail-Programm öffnet.
 
@@ -183,9 +183,7 @@ export const preCheckResult = {
     downloadStarted: "Vorprüfung wird heruntergeladen",
     outro: {
       title: "Darum ist es wichtig",
-      text: dedent`
-      - Bei Interoperabilitätsbezug unterstützt Sie das Digitalcheck-Team gezielt bei der Umsetzung der EU-Anforderungen.
-    `,
+      text: "Bei Interoperabilitätsbezug unterstützt Sie das Digitalcheck-Team gezielt bei der Umsetzung der EU-Anforderungen.",
     },
   },
   print: {

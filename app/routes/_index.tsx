@@ -43,9 +43,7 @@ const steps = [
     duration: "Wenige Minuten",
     result: dedent`
       - Individueller Digital- und Interoperabilitätsbezug
-      - Ergebnis als E-Mail an Prüfstelle schicken.
-      - Auf Bundesebene ist zum Beispiel der Normen Kontrollrat (NKR) die zuständige Prüfstelle.
-
+      - Ergebnis als E-Mail an Prüfstelle* schicken oder als Dokumentation zur Selbstprüfung nutzen.
     `,
   },
   {
@@ -145,6 +143,12 @@ export default function Index() {
                   <div className="mt-24">
                     <p className="font-bold">Ergebnis:</p>
                     <RichText markdown={step.result} />
+                    {step.number === 1 && (
+                      <p className="mt-16">
+                        * Auf Bundesebene ist zum Beispiel der Normen
+                        Kontrollrat (NKR) die zuständige Prüfstelle.
+                      </p>
+                    )}
                   </div>
                 </li>
               ))}
