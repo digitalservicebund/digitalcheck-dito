@@ -2,6 +2,7 @@ import { EmojiEventsOutlined as EmojiEventsOutlinedIcon } from "@digitalserviceb
 import { useOutletContext } from "react-router";
 import { DownloadButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
+import CheckboxCard from "~/components/CheckboxCard.tsx";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxList from "~/components/InfoBoxList";
@@ -38,14 +39,12 @@ export default function DocumentationSend() {
       <RichText markdown={finish.heading.markdown} />
 
       <InfoBoxList>
-        <InfoBox
-          look="highlight"
-          className="bg-white"
-          heading={{
-            text: "1. Digitalcheck-Dokumentation abschließen",
-            tagName: "h2",
-            // text: finish.download.heading,
-          }}
+        <CheckboxCard
+          heading={
+            <span className={"ds-heading-02-reg"}>
+              1. Digitalcheck-Dokumentation abschließen
+            </span>
+          }
         >
           <Timeline>
             <Timeline.Item bullet>
@@ -67,40 +66,31 @@ export default function DocumentationSend() {
               </Timeline.ItemContent>
             </Timeline.Item>
           </Timeline>
-        </InfoBox>
+        </CheckboxCard>
 
         {hasInteroperabilityRequirement && (
-          <InfoBox
-            look="highlight"
-            className="bg-white"
-            heading={{
-              text: "2. Interoperabilitäts-Bewertung abschließen",
-              tagName: "h2",
-            }}
+          <CheckboxCard
+            heading={
+              <span className={"ds-heading-02-reg"}>
+                2. Interoperabilitäts-Bewertung abschließen
+              </span>
+            }
           >
             <RichText
               markdown={dedent`
               Bitte beachten Sie: Ihre Angaben zur EU-Interoperabilität sind dafür bestimmt, auf dem Portal [interoperable Europe](https://interoperable-europe.ec.europa.eu/collection/assessments/report/repository) veröffentlicht zu werden. Das geschieht erst, sobald der Referenten-Entwurf auf der Seite Ihres Ministeriums öffentlich gemacht wird.
+          `}
+            />
+
+            <RichText
+              markdown={dedent`
               
                 - Senden Sie eine Kopie der E-Mail mit der Dokumentation an ${contact.mdMailToLink(contact.interoperabilityEmail)} (nationale Kontaktstelle nach Verordnung (EU) 2024/903 Art. 17).
                 Die Daten aus der Bewertung werden auf dem Portal [interoperable Europe](https://interoperable-europe.ec.europa.eu/collection/assessments/report/repository) veröffentlicht.
-                
-                - Bitte vermerken Sie, ab wann eine Veröffentlichung möglich sein wird:
-                    - Falls ein Referentenentwurf veröffentlicht wurde, in der Regel **ab sofort**.
-                    - Andernfalls vermerken Sie bitte das **geplante Datum** der Veröffentlichung des Referentenentwurfs. Die nationale Kontaktstelle wird sich vor einer Veröffentlichung mit Ihnen in Verbindung setzen.
+ 
           `}
             />
-            <Timeline>
-              <Timeline.Item bullet>
-                <Timeline.ItemContent>
-                  <h3>
-                    Voraussichtliches Veröffentlichungsdatum des
-                    Referenten-Entwurfs angeben
-                  </h3>
-                </Timeline.ItemContent>
-              </Timeline.Item>
-            </Timeline>
-          </InfoBox>
+          </CheckboxCard>
         )}
         <InfoBox
           heading={{
