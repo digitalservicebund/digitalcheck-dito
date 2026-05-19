@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router";
 import { twJoin } from "tailwind-merge";
 
 import { vorpruefung, vorpruefung_ergebnis } from "@/config/routes";
+import { marked } from "marked";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
@@ -139,9 +140,8 @@ export default function Result() {
                     tagName="h1"
                     look="ds-heading-02-reg"
                     className="mb-0"
-                  >
-                    <RichText markdown={resultContent.title} />
-                  </Heading>
+                    text={marked.parseInline(resultContent.title) as string}
+                  />
                   {resultHint && (
                     <RichText
                       markdown={resultHint}
