@@ -1,0 +1,1 @@
+import{R as e,c as t,t as n}from"./jsx-runtime-HxXggYeA.js";var r=n(),i=`/beispiele/prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten`,a=e(function(){return(0,r.jsx)(t,{to:i,replace:!0})});export{a as default};

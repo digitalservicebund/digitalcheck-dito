@@ -1,0 +1,1 @@
+import{B as e,H as t}from"./jsx-runtime-HxXggYeA.js";var n=t(e(),1),r=(0,n.createContext)(()=>{});function i({value:e,children:t}){return n.createElement(r.Provider,{value:e},t)}export{i as t};
