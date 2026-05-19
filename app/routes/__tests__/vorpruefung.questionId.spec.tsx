@@ -35,11 +35,6 @@ vi.mock("~/routes/vorpruefung/preCheckDataHook", async (importOriginal) => {
   };
 });
 
-vi.mock("@rvf/react-router", async () => {
-  const rvfReact = await import("@rvf/react");
-  return rvfReact;
-});
-
 describe("PreCheck", () => {
   beforeEach(() => {
     const answers = [{ questionId: questions[0].id, answer: "yes" }];
