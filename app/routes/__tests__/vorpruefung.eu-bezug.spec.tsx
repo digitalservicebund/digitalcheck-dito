@@ -117,11 +117,6 @@ vi.mock("~/routes/vorpruefung/preCheckDataHook", async (importOriginal) => {
   };
 });
 
-vi.mock("@rvf/react-router", async () => {
-  const rvfReact = await import("@rvf/react");
-  return rvfReact;
-});
-
 describe.each(scenarios)("test $name", ({ answers, expected }) => {
   beforeEach(() => {
     vi.resetAllMocks();
