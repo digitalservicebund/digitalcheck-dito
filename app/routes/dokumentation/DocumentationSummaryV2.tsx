@@ -10,16 +10,21 @@ import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
+  ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
+  ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS,
   ROUTE_DOCUMENTATION_PARTICIPATION,
   ROUTE_DOCUMENTATION_SUMMARY,
   ROUTE_DOCUMENTATION_TITLE,
   type Route,
 } from "~/resources/staticRoutes";
 import {
+  BindingRequirementsData,
+  DocumentationData,
   type Participation,
   type PolicyTitle,
   type Principle,
 } from "~/routes/dokumentation/documentationDataSchema";
+import RequirementDetail from "~/routes/dokumentation/interoperability/RequirementDetail.tsx";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.server";
 import { slugify } from "~/utils/utilFunctions";
 import { NavigationContext } from "../dokumentation._documentationNavigation";
@@ -123,6 +128,10 @@ function PolicyTitleContent({
         {
           prefix: "Vorläufiger Arbeitstitel des Vorhabens",
           answer: policyTitle.title,
+        },
+        {
+          prefix: "Ministerium / Organisation",
+          answer: policyTitle.organization,
         },
         {
           prefix: publicationPrefix,
@@ -236,6 +245,63 @@ function PrincipleContent({
   );
 }
 
+function InteroperabilityContent({
+  data,
+}: Readonly<{ data: DocumentationData<"2"> }>) {
+  if (!data.euInteroperabilityOutcome?.outcomeId) return null;
+  const outcome =
+    data.euInteroperabilityOutcome?.outcomeId === "REQUIRED" ? "Ja" : "Nein";
+  return (
+    <Answer
+      answers={[
+        {
+          prefix: "Ergab die Vorprüfung Bezug zu EU-Interoperabilität?",
+          answer: outcome,
+        },
+      ]}
+    />
+  );
+}
+
+function BindingRequirementSummary(
+  bindingRequirements: BindingRequirementsData | undefined,
+) {
+  if (!bindingRequirements) return null;
+  return bindingRequirements.requirements.map((bindingRequirement, index) => {
+    return (
+      <>
+        {index > 0 && <hr className="text-gray-700" />}
+        <div key={bindingRequirement.description}>
+          <RequirementDetail requirement={bindingRequirement} />
+        </div>
+      </>
+    );
+  });
+}
+
+function createInteroperabilityInfoBoxItems(
+  documentationData: DocumentationData<"2">,
+): InfoBoxProps[] {
+  const detailsRequired =
+    documentationData.euInteroperabilityOutcome?.outcomeId === "REQUIRED";
+
+  return [
+    createInfoBoxItem({
+      heading: "EU-Interoperabilität",
+      route: ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
+      content: <InteroperabilityContent data={documentationData} />,
+    }),
+    detailsRequired &&
+      createInfoBoxItem({
+        heading: "Verbindliche Anforderungen",
+        route: ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS,
+        content: BindingRequirementSummary(
+          documentationData.bindingRequirements,
+        ),
+      }),
+  ].filter(Boolean) as InfoBoxProps[];
+}
+
 export default function DocumentationSummaryV2() {
   const { routes, previousUrl, nextUrl, prinzips } =
     useOutletContext<NavigationContext>();
@@ -287,6 +353,10 @@ export default function DocumentationSummaryV2() {
         },
       });
     }),
+
+    ...createInteroperabilityInfoBoxItems(
+      documentationData as DocumentationData<"2">,
+    ),
   ];
 
   return (
