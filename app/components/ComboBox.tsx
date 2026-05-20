@@ -8,13 +8,9 @@ import {
 } from "@headlessui/react";
 import type { FormScope } from "@rvf/react";
 import { useField } from "@rvf/react";
-import { type ReactNode, useId } from "react";
+import { Fragment, type ReactNode, useId } from "react";
 import InputError from "~/components/InputError";
-
-export type Option = {
-  value: string;
-  label: string;
-};
+import { Option } from "~/utils/keyValue.ts";
 
 export type ComboboxProps = {
   options: Readonly<Option[]>;
@@ -73,15 +69,16 @@ export default function Combobox({
         onChange={control.onChange}
       >
         <div className={"h-auto"}>
-          <div className={"relative flex flex-wrap gap-8"}>
-            <ComboboxInput
-              className={"ds-textarea grow pr-32 data-multiple:text-sm"}
-              placeholder={"Auswählen…"}
-              displayValue={() => displayValue}
-              data-multiple={selectedValues.length > 1 ? true : undefined}
-            />
+          <div className={"relative"}>
+            <ComboboxInput as={Fragment}>
+              <input
+                className={"ds-textarea pr-32 data-multiple:text-sm"}
+                data-multiple={selectedValues.length > 1 ? true : undefined}
+                value={displayValue}
+              ></input>
+            </ComboboxInput>
             <ComboboxButton className="group absolute inset-y-0 right-0 px-8">
-              <ChevronLeft className="size-24 rotate-270 fill-black/60 group-data-hover:fill-black" />
+              <ChevronLeft className="size-24 rotate-270 fill-black/60 transition-transform group-data-hover:fill-black group-data-open:rotate-90" />
             </ComboboxButton>
           </div>
         </div>

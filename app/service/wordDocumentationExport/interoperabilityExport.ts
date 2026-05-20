@@ -1,5 +1,4 @@
 import { FileChild, IPatch, Paragraph, PatchType } from "docx";
-import { Option } from "~/components/ComboBox.tsx";
 import {
   DocumentationData,
   InteroperabilityAssessmentData,
@@ -11,6 +10,7 @@ import {
   stakeholderOptions,
 } from "~/routes/dokumentation/interoperability/values.ts";
 import { metadataTable } from "~/service/wordDocumentationExport/docxUtils.ts";
+import { keyValueToMap } from "~/utils/keyValue.ts";
 
 export function buildAppendixPatch({
   policyTitle,
@@ -81,10 +81,6 @@ export function formatInteroperabilityAssessment(
       ]),
     ];
   });
-}
-
-function keyValueToMap(options: readonly Option[]): Map<string, string> {
-  return new Map(options.map(({ value, label }) => [value, label]));
 }
 
 export function formatBindingRequirements(
