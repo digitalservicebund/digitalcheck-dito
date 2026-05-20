@@ -1,1 +1,0 @@
-const e="/digitalcheck-dito/previews/astro-new",t=e.replace(/\/$/,""),a={path:`${t}/documents/Anleitung_Flussdiagramm_erstellen.pptx`},i={path:`${t}/documents/TEMPLATE_Dokumentation_der_Digitaltauglichkeit.docx`,filename:"Dokumentation_der_Digitaltauglichkeit.docx"};export{a,i as d};
