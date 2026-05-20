@@ -24,14 +24,17 @@ export const serviceAreaOptions: readonly Option[] = [
   { value: "socialProtection", label: "Sozialschutz" },
 ] as const;
 export const stakeholderOptions: readonly Option[] = [
-  { value: "localPublicSectorBody", label: "Lokale öffentliche Einrichtung" },
+  {
+    value: "localPublicSectorBody",
+    label: "Öffentliche Stelle (Kommunen / lokal)",
+  },
   {
     value: "regionalPublicSectorBody",
-    label: "Regionale öffentliche Einrichtung",
+    label: "Öffentliche Stelle (Länder / regional)",
   },
   {
     value: "nationalPublicSectorBody",
-    label: "Nationale öffentliche Einrichtung",
+    label: "Öffentliche Stelle (Bund / national)",
   },
   {
     value: "europeanUnionInstitution",

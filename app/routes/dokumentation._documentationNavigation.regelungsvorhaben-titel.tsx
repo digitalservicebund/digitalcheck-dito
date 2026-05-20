@@ -60,8 +60,8 @@ export default function DocumentationTitle() {
             Ministerium / Organisation
           </Input>
           <legend className="ds-heading-03-reg mb-16">
-            Wann soll der Referentenentwurf vorraussichtlich veröffentlicht
-            werden?
+            Wann soll der Referentenentwurf voraussichtlich auf der Webseite
+            Ihres Ministeriums veröffentlicht werden?
             <HelpButton
               sectionId="veröffentlichung"
               title="Hinweis zur Veröffentlichung des Regelungsvorhabens"
@@ -84,7 +84,10 @@ export default function DocumentationTitle() {
               </label>
               {publicationStatusField.value() === "planned" && (
                 <div className="mt-16 ml-28">
-                  <Input scope={form.scope("publicationDate")}>
+                  <Input
+                    description="Eine ungefähre Angabe (Monat) ist ausreichend."
+                    scope={form.scope("publicationDate")}
+                  >
                     Voraussichtliches Veröffentlichungsdatum
                   </Input>
                 </div>
@@ -108,7 +111,7 @@ export default function DocumentationTitle() {
               {publicationStatusField.value() === "published" && (
                 <div className="mt-16 ml-28">
                   <Input scope={form.scope("publicationLink")}>
-                    Bitte Link zum Referentenentwurf einfügen
+                    Link zum Referentenentwurf
                   </Input>
                 </div>
               )}
