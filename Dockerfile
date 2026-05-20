@@ -28,5 +28,11 @@ COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /src/dist_production /usr/share/nginx/html/
 # COPY --from=build /src/dist_staging /usr/share/nginx/staging
 
+RUN chown -R nginx:nginx /usr/share/nginx/html /etc/nginx/conf.d /var/cache/nginx /var/log/nginx \
+	&& touch /var/run/nginx.pid \
+	&& chown nginx:nginx /var/run/nginx.pid
+
+USER nginx
+
 EXPOSE 3000
 CMD ["nginx", "-g", "daemon off;"]
