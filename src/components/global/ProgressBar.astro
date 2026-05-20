@@ -34,9 +34,7 @@ const { pathname } = Astro.url;
                 "ds-label-02-bold mr-8 flex h-24 w-24 items-center justify-center rounded-full border-2 border-blue-800",
                 { "[anchor-name:--progress-start]": isFirst },
                 { "[anchor-name:--progress-end]": isLast },
-                isActive
-                  ? "bg-blue-800 text-white"
-                  : "bg-white text-blue-800",
+                isActive ? "bg-blue-800 text-white" : "bg-white text-blue-800",
               ]}
             >
               {index + 1}
