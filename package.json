@@ -7,19 +7,20 @@
   "scripts": {
     "audit:licences": "license-checker-rseidelsohn --production --excludePrivatePackages --onlyAllow 'MIT;BSD-3-Clause;BSD-2-Clause;0BSD;ISC;Apache-2.0;MPL-2.0;BlueOak-1.0.0;Custom: LICENSE;Unlicense' --summary",
     "build": "astro build",
-    "build:preview": "PUBLIC_STAGE=preview PREVIEW_BASE_PATH=/preview pnpm build",
-    "clean": "rm -rf dist/",
     "dev": "PUBLIC_STAGE=development pnpm astro dev",
     "dev:preview": "PUBLIC_STAGE=preview PREVIEW_BASE_PATH=/preview astro dev",
-    "docker": "docker compose up --build",
-    "format:check": "prettier --check",
+    "docker:build": "docker build -t digitalcheck-dito .",
+    "docker:run": "docker run -d -p 8080:8080 --name digitalcheck-dito digitalcheck-dito:latest",
+    "docker:stop": "docker stop digitalcheck-dito || true && docker rm digitalcheck-dito",
+    "docker:dev": "pnpm run docker:build && npm run docker:run",
+    "docker:logs": "docker logs -f digitalcheck-dito",
+    "format": "prettier --check",
     "format:fix": "pnpm run format:fix-selected .",
     "format:fix-selected": "prettier --write --ignore-unknown",
-    "lint:check": "eslint --cache",
+    "lint": "eslint --cache",
     "lint:fix": "eslint --cache --fix",
     "preinstall": "echo 'Please disable script execution for security reasons: pnpm install --ignore-scripts' && exit 1",
     "preview": "astro preview",
-    "start:preview": "pnpm build:preview && pnpm dlx serve dist",
     "test": "vitest run",
     "test:a11y": "playwright test tests/a11y --config=tests/playwright.config.ts --project=\"Desktop Chrome\"",
     "test:a11y-nightly": "playwright test tests/a11y --config=tests/playwright-nightly.config.ts",
@@ -108,13 +109,5 @@
     "vite-plugin-devtools-json": "^1.0.0",
     "vitest": "^4.1.7"
   },
-  "packageManager": "pnpm@11.4.0",
-  "engines": {
-    "node": ">=20.19.0"
-  },
-  "overrides": {
-    "protobufjs@<7.5.5": ">=7.5.5",
-    "glob": "^11.1.0",
-    "qs": "^6.14.1"
-  }
+  "packageManager": "pnpm@11.4.0"
 }
