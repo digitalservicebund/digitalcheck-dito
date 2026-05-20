@@ -61,4 +61,5 @@ export default defineConfig({
   security: {
     csp: false,
   },
+  trailingSlash: "never",
 });
