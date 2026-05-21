@@ -25,6 +25,14 @@ export const news = {
       Haben Sie Anregungen oder Wünsche? Kontaktieren Sie uns jederzeit gerne unter ${contact.mdPhoneLink()} oder ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")}.
   `,
   items: [
+   {
+      badge: {
+        text: "20.05.2026",
+      },
+      content: dedent`
+        Neue Seite: Gemeinsamer Digitalcheck für Bund und Länder
+        [Hier ansehen](${bundeslaender.path})`,
+    },
     {
       badge: {
         text: "11.05.2026",
