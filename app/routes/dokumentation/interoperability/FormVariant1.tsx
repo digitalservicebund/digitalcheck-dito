@@ -66,7 +66,7 @@ export function LevelHelpButton({
 }: Readonly<{ markdown: string; contextLabel: string; level: Section["id"] }>) {
   return (
     <HelpButton
-      sectionId={contextLabel}
+      sectionId={`checks-level-${level}`}
       title={`Was soll ${contextLabel} geprüft werden?`}
     >
       <RichText markdown={markdown} />
