@@ -2,11 +2,6 @@ name: Create Unified Test Report
 
 on:
   workflow_call:
-    secrets:
-      SLACK_BOT_TOKEN:
-        required: true
-      SLACK_CHANNEL_ID:
-        required: true
 
 permissions:
   contents: read
@@ -66,10 +61,3 @@ jobs:
         run: |
           echo "### Playwright Test Report" >> $GITHUB_STEP_SUMMARY
           echo "${{ steps.github-pages-deployment.outputs.page_url }}${{ github.run_id }}/" >> $GITHUB_STEP_SUMMARY
-
-      - name: Send failure to Slack
-        uses: digitalservicebund/notify-on-failure-gha@8570032b46ae9c2b976ec41567f595746fa44b4e # v1.6.1
-        if: failure()
-        with:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}

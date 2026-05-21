@@ -48,6 +48,9 @@ jobs:
 
   run-e2e-a11y-tests:
     uses: ./.github/workflows/run-e2e-a11y-tests.yml
+    secrets:
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
 
   create-unified-test-report:
     needs: [run-e2e-a11y-tests]
@@ -58,9 +61,6 @@ jobs:
       contents: read
       pages: write
       id-token: write
-    secrets:
-      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-      SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
 
   build-and-push-image:
     needs: [vulnerability-scan, secret-scan, check-and-test, run-e2e-a11y-tests]

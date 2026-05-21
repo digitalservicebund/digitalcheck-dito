@@ -10,6 +10,11 @@ on:
           "If enabled, extensive tests are executed sequentially with more
           devices and browsers."
         default: false
+    secrets:
+      SLACK_BOT_TOKEN:
+        required: true
+      SLACK_CHANNEL_ID:
+        required: true
 
 env:
   PACKAGE_NAME: digitalcheck-dito
@@ -112,3 +117,15 @@ jobs:
           name: playwright-a11y-blob-report-${{ matrix.shardIndex }}
           path: blob-report
           retention-days: 1
+
+  notify-e2e-a11y-failure:
+    needs: [run-e2e-a11y-tests]
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - name: Send failure to Slack
+        uses: digitalservicebund/notify-on-failure-gha@8570032b46ae9c2b976ec41567f595746fa44b4e # v1.6.1
+        with:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
