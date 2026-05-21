@@ -1,0 +1,1 @@
+import{U as e,V as t}from"./jsx-runtime-TdnDAAmO.js";var n=e(t(),1),r=n.createContext(``);r.Provider;var i=()=>n.useContext(r);export{i as t};

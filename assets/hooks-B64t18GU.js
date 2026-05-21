@@ -1,0 +1,1 @@
+import{L as e}from"./jsx-runtime-TdnDAAmO.js";function t(){return e(`routes/dokumentation`)}export{t};
