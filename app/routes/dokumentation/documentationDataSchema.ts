@@ -6,7 +6,6 @@ import {
   ROUTE_DOCUMENTATION_TITLE,
 } from "~/resources/staticRoutes";
 import type { VersionedData } from "~/utils/localStorageVersioned";
-import { EU_INTEROPERABILITY_OUTCOME_IDS } from "./interoperability/euInteroperabilityFlow.tsx";
 
 export const DATA_SCHEMA_VERSION_V1 = "1";
 export const DATA_SCHEMA_VERSION_V2 = "2";
@@ -36,6 +35,16 @@ export const participationSchema = z.object({
     .string()
     .min(1, { message: participation.results.textField.errorMessage }),
 });
+
+export const EU_INTEROPERABILITY_OUTCOME_IDS = [
+  "REQUIRED",
+  "NOT_REQUIRED_INDICATES_PRECHECK",
+  "NOT_REQUIRED_NO_DECISION_PROCESS",
+  "NOT_REQUIRED_NOT_PROVIDED_BY_PUBLIC_OR_UNION_ENTITY",
+  "NOT_REQUIRED_NOT_PROVIDED_TO_EU_ACTORS",
+  "NOT_REQUIRED_NO_CROSS_BORDER_SYSTEM_INTERACTION",
+  "NOT_REQUIRED_NOT_FIRST_ASSESSMENT",
+] as const;
 
 export const euInteroperabilityOutcomeSchema = z.object({
   outcomeId: z.enum(EU_INTEROPERABILITY_OUTCOME_IDS).optional(),

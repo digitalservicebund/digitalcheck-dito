@@ -7,8 +7,8 @@ import {
   ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
   ROUTE_INTEROPERABILITY,
 } from "~/resources/staticRoutes";
-import { markdownLinkIEA } from "~/routes/dokumentation/interoperability/euInteroperabilityFlow.tsx";
 import EuInteroperabilityOutcomeForm from "~/routes/dokumentation/interoperability/EuInteroperabilityOutcomeForm.tsx";
+import { markdownLinkIEA } from "~/routes/dokumentation/interoperability/markdownLinkIEA.tsx";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 

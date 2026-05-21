@@ -34,7 +34,6 @@ import {
   removeFromLocalStorage,
   writeVersionedDataToLocalStorage,
 } from "~/utils/localStorageVersioned";
-import { EU_INTEROPERABILITY_ANSWERS_STORAGE_KEY } from "./interoperability/euInteroperabilityFlow.tsx";
 
 export const STORAGE_KEY = "documentationData";
 
@@ -185,7 +184,6 @@ export function DocumentationDataProvider({
 
   const deleteDocumentationData = useCallback((): void => {
     removeFromLocalStorage(STORAGE_KEY);
-    removeFromLocalStorage(EU_INTEROPERABILITY_ANSWERS_STORAGE_KEY);
     setDocumentationData(getInitialState(version));
   }, [version]);
 

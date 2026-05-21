@@ -17,7 +17,7 @@ import {
   BindingRequirementsData,
   bindingRequirementsSchema,
 } from "~/routes/dokumentation/documentationDataSchema.ts";
-import { markdownLinkIEA } from "~/routes/dokumentation/interoperability/euInteroperabilityFlow.tsx";
+import { markdownLinkIEA } from "~/routes/dokumentation/interoperability/markdownLinkIEA.tsx";
 import {
   serviceAreaOptions,
   stakeholderOptions,
