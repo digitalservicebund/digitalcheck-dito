@@ -1,9 +1,5 @@
 import { expect, test } from "@playwright/test";
 
-test("TEMPORARY: force failure to test report workflow", () => {
-  expect(true).toBe(false);
-});
-
 import {
   allRoutes,
   barrierefreiheit,
