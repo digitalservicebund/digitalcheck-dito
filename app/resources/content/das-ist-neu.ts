@@ -32,6 +32,7 @@ export const news = {
       },
       content: dedent`
         Neue Seite: Gemeinsamer Digitalcheck für Bund und Länder
+        
         [Hier ansehen](${bundeslaender.path})`,
     },
     {
