@@ -1,6 +1,7 @@
 import {
   beispiele,
   beispiele_visualisierungen,
+  bundeslaender,
   dasIstNeu,
   dokumentation,
   grundlagen_digitaltauglichkeit,
@@ -25,7 +26,7 @@ export const news = {
       Haben Sie Anregungen oder Wünsche? Kontaktieren Sie uns jederzeit gerne unter ${contact.mdPhoneLink()} oder ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")}.
   `,
   items: [
-   {
+    {
       badge: {
         text: "20.05.2026",
       },
