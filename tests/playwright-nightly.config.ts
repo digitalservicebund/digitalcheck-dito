@@ -18,6 +18,7 @@ const config: PlaywrightTestConfig = {
   workers: 1,
   retries: 5, // retry more often to allow flaky tests to succeed
   globalTimeout: process.env.CI ? 10 * 60_000 : undefined, // Give nightly tests more time in CI (10 minutes)
+  timeout: 20_000,
 };
 
 export default config;
