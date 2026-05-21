@@ -16,6 +16,9 @@ permissions:
 jobs:
   merge-reports:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.github-pages-deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: Setup pnpm
