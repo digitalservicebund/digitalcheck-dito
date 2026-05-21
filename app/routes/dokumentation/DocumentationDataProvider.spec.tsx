@@ -54,7 +54,7 @@ describe("DocumentationDataProvider", () => {
     it("returns data from localStorage on mount", async () => {
       const storedData: DocumentationData<V2> = {
         version: DATA_SCHEMA_VERSION_V2,
-        policyTitle: { title: "Stored Title" },
+        policyTitle: { title: "Stored Title", publicationStatus: "" },
       };
       mockRead.mockReturnValue(storedData);
 
@@ -95,7 +95,7 @@ describe("DocumentationDataProvider", () => {
     it("writes single field data to localStorage", async () => {
       const data: DocumentationData<V2> = {
         version: DATA_SCHEMA_VERSION_V2,
-        policyTitle: { title: "My Policy" },
+        policyTitle: { title: "My Policy", publicationStatus: "" },
       };
 
       const { result } = renderHook(() => useDocumentationDataService(), {
@@ -111,7 +111,7 @@ describe("DocumentationDataProvider", () => {
     it("writes complete data object to localStorage", async () => {
       const data: DocumentationData<V2> = {
         version: DATA_SCHEMA_VERSION_V2,
-        policyTitle: { title: "My Policy" },
+        policyTitle: { title: "My Policy", publicationStatus: "" },
         participation: { formats: "Workshops", results: "Results" },
         principles: [{ id: "p1", answer: "Nein", reasoning: "", aspects: [] }],
       };
@@ -139,7 +139,10 @@ describe("DocumentationDataProvider", () => {
       act(() => result.current.setPolicyTitle({ title: "New Title" }));
 
       expect(mockWrite).toHaveBeenCalledWith(
-        { ...emptyData, policyTitle: { title: "New Title" } },
+        {
+          ...emptyData,
+          policyTitle: { title: "New Title", publicationStatus: "" },
+        },
         STORAGE_KEY,
       );
     });
@@ -147,7 +150,7 @@ describe("DocumentationDataProvider", () => {
     it("updates policyTitle while preserving existing data", async () => {
       const existingData: DocumentationData<V2> = {
         version: DATA_SCHEMA_VERSION_V2,
-        policyTitle: { title: "Old Title" },
+        policyTitle: { title: "Old Title", publicationStatus: "" },
         participation: { formats: "Online", results: "Some results" },
       };
       mockRead.mockReturnValue(existingData);
@@ -160,7 +163,10 @@ describe("DocumentationDataProvider", () => {
       act(() => result.current.setPolicyTitle({ title: "Updated Title" }));
 
       expect(mockWrite).toHaveBeenCalledWith(
-        { ...existingData, policyTitle: { title: "Updated Title" } },
+        {
+          ...existingData,
+          policyTitle: { title: "Updated Title", publicationStatus: "" },
+        },
         STORAGE_KEY,
       );
     });
@@ -187,7 +193,7 @@ describe("DocumentationDataProvider", () => {
     it("updates participation while preserving existing data", async () => {
       const existingData: DocumentationData<V2> = {
         version: DATA_SCHEMA_VERSION_V2,
-        policyTitle: { title: "My Policy" },
+        policyTitle: { title: "My Policy", publicationStatus: "" },
         participation: { formats: "Old format", results: "Old results" },
       };
       mockRead.mockReturnValue(existingData);

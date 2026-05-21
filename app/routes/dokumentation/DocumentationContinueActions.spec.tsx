@@ -61,7 +61,7 @@ describe("DocumentationContinueActions", () => {
         readDataFromLocalStorage<DocumentationData<V1>>,
       ).mockReturnValue({
         version: DATA_SCHEMA_VERSION_V1,
-        policyTitle: { title: "Test" },
+        policyTitle: { title: "Test", publicationStatus: "" },
       });
       renderWithRouter(<DocumentationContinueActions />);
     });
