@@ -76,7 +76,7 @@ describe("DocumentationSummaryV2", () => {
 
   const mockDocumentationData: DocumentationData<V2> = {
     version: "2",
-    policyTitle: { title: "Titel des Vorhabens" },
+    policyTitle: { title: "Titel des Vorhabens", publicationStatus: "" },
     participation: {
       formats: "Format 1",
       results: "Auswirkung auf die Regelung",
@@ -446,7 +446,10 @@ describe("DocumentationSummaryV2", () => {
 
   test.each([
     [ROUTE_DOCUMENTATION_TITLE.url, { policyTitle: undefined }],
-    [ROUTE_DOCUMENTATION_TITLE.url, { policyTitle: { title: "" } }],
+    [
+      ROUTE_DOCUMENTATION_TITLE.url,
+      { policyTitle: { title: "", publicationStatus: "" } },
+    ],
     [ROUTE_DOCUMENTATION_PARTICIPATION.url, { participation: undefined }],
     [
       ROUTE_DOCUMENTATION_PARTICIPATION.url,
