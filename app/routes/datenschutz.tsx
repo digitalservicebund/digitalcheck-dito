@@ -1,1 +1,1 @@
-// moved to @/src/pages/datenschutz.astro
+// moved to @/src/pages/datenschutz.mdx

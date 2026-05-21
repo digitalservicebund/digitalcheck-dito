@@ -33,6 +33,7 @@
     "typecheck": "astro check"
   },
   "dependencies": {
+    "@astrojs/mdx": "^5.0.6",
     "@astrojs/react": "^5.0.4",
     "@astrojs/sitemap": "^3.7.2",
     "@digitalservice4germany/angie": "^2.4.0",

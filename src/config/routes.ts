@@ -80,7 +80,7 @@ export const dasIstNeu = {
 export const datenschutz = {
   key: "datenschutz",
   path: "/datenschutz",
-  title: "Datenschutzerklärung",
+  title: "Datenschutz",
   parent: null,
   sitemap: true,
   isStagingOnly: false,

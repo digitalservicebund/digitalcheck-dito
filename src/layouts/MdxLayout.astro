@@ -1,0 +1,46 @@
+---
+import Layout from "./Layout.astro";
+import Hero from "@/components/Hero.astro";
+import type { MarkdownLayoutProps } from "astro";
+
+type Props = MarkdownLayoutProps<{
+  title: string;
+  heroTitle?: string;
+}>;
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>{frontmatter.heroTitle ?? frontmatter.title}</h1>
+    </Hero>
+    <div class="content-wrapper py-40 space-y-8 lg:py-80 [&_a]:text-link">
+      <slot />
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .content-wrapper {
+    h2:not(:first-child) {
+      margin-top: 40px;
+    }
+    h3 {
+      margin-top: 32px;
+    }
+    a[href^="http"]::after {
+      content: "";
+      display: inline-block;
+      width: 0.875em;
+      height: 0.875em;
+      margin-inline-start: 0.25em;
+      margin-bottom: -0.125em;
+      background-color: currentColor;
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z'/%3E%3C/svg%3E");
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+    }
+  }
+</style>

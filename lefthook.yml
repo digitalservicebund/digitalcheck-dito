@@ -19,7 +19,7 @@ pre-push:
   commands:
     lint:
       tags: lint
-      run: pnpm lint:check {push_files}
+      run: pnpm lint {push_files}
       glob: "*.{js,cjs,mjs,ts,jsx,tsx}"
     typecheck:
       tags: typecheck

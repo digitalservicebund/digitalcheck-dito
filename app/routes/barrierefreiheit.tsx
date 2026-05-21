@@ -1,1 +1,1 @@
-// moved to @/src/pages/barrierefreiheit.astro
+// moved to @/src/pages/barrierefreiheit.mdx
