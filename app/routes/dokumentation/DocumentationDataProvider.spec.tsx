@@ -136,7 +136,12 @@ describe("DocumentationDataProvider", () => {
       });
       await act(async () => {});
 
-      act(() => result.current.setPolicyTitle({ title: "New Title" }));
+      act(() =>
+        result.current.setPolicyTitle({
+          title: "New Title",
+          publicationStatus: "",
+        }),
+      );
 
       expect(mockWrite).toHaveBeenCalledWith(
         {
@@ -160,7 +165,12 @@ describe("DocumentationDataProvider", () => {
       });
       await act(async () => {});
 
-      act(() => result.current.setPolicyTitle({ title: "Updated Title" }));
+      act(() =>
+        result.current.setPolicyTitle({
+          title: "Updated Title",
+          publicationStatus: "",
+        }),
+      );
 
       expect(mockWrite).toHaveBeenCalledWith(
         {

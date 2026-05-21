@@ -53,7 +53,10 @@ export default function BindingRequirementsForm({
       functions: [],
       requirements: [defaultRequirementValue],
     },
-    setDataCallback: (data) => setBindingRequirementsData(data ?? undefined),
+    setDataCallback: (data) =>
+      setBindingRequirementsData(
+        data ? bindingRequirementsSchema.parse(data) : undefined,
+      ), // apply the .default([]) values set in the schema
     storedData,
     nextUrl,
   });
