@@ -33,7 +33,7 @@ export default defineConfig(
   },
   // React & Typescript
   {
-    files: ["app/**/*.{ts,tsx}", "tests/**/*.{ts,tsx}"],
+    files: ["app/**/*.{ts,tsx}", "src/**/*.{ts,tsx}", "tests/**/*.{ts,tsx}"],
     extends: [
       eslint.configs.recommended,
       tseslint.configs.recommendedTypeChecked,
