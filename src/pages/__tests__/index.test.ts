@@ -1,28 +1,24 @@
-import { render, screen, within } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
-import { describe, expect, it, vi } from "vitest";
-import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
-import Index from "~/routes/_index";
-
-vi.mock("~/contexts/FeatureFlagContext", () => {
-  return {
-    useFeatureFlag: vi.fn(),
-  };
-});
+// @vitest-environment node
+import Index from "@/pages/index.astro";
+import { renderToDOM } from "@/utils/testUtils";
+import type { BoundFunctions, queries } from "@testing-library/dom";
+import { within } from "@testing-library/dom";
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+import { beforeAll, describe, expect, it } from "vitest";
 
 describe("Index Route - Integration Tests", () => {
-  const renderWithRouter = (component: React.ReactElement) => {
-    return render(<MemoryRouter>{component}</MemoryRouter>);
-  };
+  let main: BoundFunctions<typeof queries>;
+  let aside: BoundFunctions<typeof queries>;
 
-  beforeEach(() => {
-    vi.mocked(useFeatureFlag).mockReturnValue(true);
-    renderWithRouter(<Index />);
+  beforeAll(async () => {
+    const { dom } = await renderToDOM(Index as AstroComponentFactory);
+    main = within(dom.querySelector("main")!);
+    aside = within(dom.querySelector("aside")!);
   });
 
   it("renders the Hero section with the correct title", () => {
     expect(
-      screen.getByRole("heading", {
+      main.getByRole("heading", {
         name: "Digitaltaugliche Regelungen erarbeiten",
         level: 1,
       }),
@@ -31,7 +27,7 @@ describe("Index Route - Integration Tests", () => {
 
   it("renders the step-by-step section with all three steps", () => {
     expect(
-      screen.getByRole("heading", {
+      main.getByRole("heading", {
         name: "Schritt für Schritt",
         level: 2,
       }),
@@ -39,39 +35,39 @@ describe("Index Route - Integration Tests", () => {
 
     // Step 1
     expect(
-      screen.getByRole("heading", {
+      main.getByRole("heading", {
         name: /Digitalbezug/,
         level: 3,
       }),
     ).toBeInTheDocument();
 
-    const step1Button = screen.getByRole("link", {
+    const step1Button = main.getByRole("link", {
       name: /Digitalbezug/,
     });
     expect(step1Button).toHaveAttribute("href", "/vorpruefung");
 
     // Step 2
     expect(
-      screen.getByRole("heading", {
+      main.getByRole("heading", {
         name: /Digitaltauglichkeit der Regelung/,
         level: 3,
       }),
     ).toBeInTheDocument();
 
-    const step2Button = screen.getByRole("link", {
+    const step2Button = main.getByRole("link", {
       name: "Regelung erarbeiten",
     });
     expect(step2Button).toHaveAttribute("href", "/methoden");
 
     // Step 3
     expect(
-      screen.getByRole("heading", {
+      main.getByRole("heading", {
         name: /Dokumentieren/,
         level: 3,
       }),
     ).toBeInTheDocument();
 
-    const step3Button = screen.getByRole("link", {
+    const step3Button = main.getByRole("link", {
       name: /Dokumentation erstellen/,
     });
     expect(step3Button).toHaveAttribute("href", "/dokumentation");
@@ -79,14 +75,14 @@ describe("Index Route - Integration Tests", () => {
 
   it("renders the Grundlagen section with correct InfoBoxes", () => {
     expect(
-      screen.getByRole("heading", {
+      main.getByRole("heading", {
         name: "Einführung zum Digitalcheck",
         level: 2,
       }),
     ).toBeInTheDocument();
 
     // First InfoBox
-    const digitalTauglichkeitBox = screen.getByRole("heading", {
+    const digitalTauglichkeitBox = main.getByRole("heading", {
       name: /Was ist Digitaltauglichkeit?/,
       level: 3,
     }).parentElement!;
@@ -98,7 +94,7 @@ describe("Index Route - Integration Tests", () => {
     ).toHaveAttribute("href", "/grundlagen/digitaltauglichkeit");
 
     // Second InfoBox
-    const nkrBox = screen.getByRole("heading", {
+    const nkrBox = main.getByRole("heading", {
       name: /Nationale Normenkontrollrat/,
       level: 3,
     }).parentElement!;
@@ -112,7 +108,7 @@ describe("Index Route - Integration Tests", () => {
 
   it("renders the visualizations and principles InfoBoxes with correct links", () => {
     // Visualizations InfoBox
-    const visualizationsBox = screen.getByRole("heading", {
+    const visualizationsBox = main.getByRole("heading", {
       name: /Visualisierungen/,
       level: 3,
     }).parentElement!;
@@ -130,7 +126,7 @@ describe("Index Route - Integration Tests", () => {
     ).toHaveAttribute("href", "/beispiele/visualisierungen");
 
     // Principles InfoBox
-    const principlesBox = screen.getByRole("heading", {
+    const principlesBox = main.getByRole("heading", {
       name: /Prinzipien/,
       level: 3,
     }).parentElement!;
@@ -150,28 +146,28 @@ describe("Index Route - Integration Tests", () => {
 
   it("renders the individual support section", () => {
     expect(
-      screen.getByRole("heading", {
+      main.getByRole("heading", {
         name: /Unterstützung/,
         level: 2,
       }),
     ).toBeInTheDocument();
 
-    const supportButton = screen.getByRole("link", {
+    const supportButton = main.getByRole("link", {
       name: /Angebote/,
     });
     expect(supportButton).toHaveAttribute("href", "/unterstuetzung");
   });
 
   it("renders the quote section", () => {
-    expect(screen.getByText(/Digitalcheck erscheint/)).toBeInTheDocument();
+    expect(main.getByText(/Digitalcheck erscheint/)).toBeInTheDocument();
 
-    expect(screen.getByText("Referentin")).toBeInTheDocument();
+    expect(main.getByText("Referentin")).toBeInTheDocument();
   });
 
   it("renders the documentation banner", () => {
     expect(
-      screen.getByRole("heading", {
-        name: "Digitalcheck-Dokumentation: Jetzt online ausfüllenNEU",
+      aside.getByRole("heading", {
+        name: /Digitalcheck-Dokumentation: Jetzt online ausfüllen/,
         level: 2,
       }),
     ).toBeInTheDocument();
