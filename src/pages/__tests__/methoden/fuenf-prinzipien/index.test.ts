@@ -1,13 +1,17 @@
-import { render, screen, within } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
+// @vitest-environment node
+import FivePrinciples from "@/pages/methoden/fuenf-prinzipien/index.astro";
+import { renderToDOM } from "@/utils/testUtils";
+import type { BoundFunctions, queries } from "@testing-library/dom";
+import { within } from "@testing-library/dom";
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
 import { beforeEach, describe, expect, it } from "vitest";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
-import { FivePrinciples } from "~/routes/methoden.fuenf-prinzipien._index/route";
 import type { Node } from "~/utils/paragraphUtils";
 
 // Create mock data that simulates the data structure returned by the loader.
 // This includes a principle with a full example and one without to test conditional rendering.
-const mockPrinzipsData = [
+// vi.hoisted ensures this is initialized before the hoisted vi.mock() factory runs.
+const mockPrinzipsData = vi.hoisted(() => [
   {
     Name: "Prinzip Test 1: Nutzerfreundlichkeit",
     Beschreibung: [
@@ -92,17 +96,18 @@ const mockPrinzipsData = [
     Aspekte: [], // No application examples
     // No Example paragraph
   },
-];
+]);
+
+vi.mock("~/utils/strapiData.server", () => ({
+  GET_PRINZIPS_WITH_EXAMPLES_QUERY: "MOCK_QUERY_STRING",
+  fetchStrapiData: vi.fn().mockResolvedValue({ prinzips: mockPrinzipsData }),
+}));
 
 describe("FivePrinciples Route - Integration Tests", () => {
-  beforeEach(() => {
-    // Render the component within a router to handle <Link> components
-    render(
-      <MemoryRouter>
-        {/* @ts-expect-error mock data does not fully satisfy PrinzipWithAspekteAndExample */}
-        <FivePrinciples prinzips={mockPrinzipsData} />
-      </MemoryRouter>,
-    );
+  let screen: BoundFunctions<typeof queries>;
+  beforeEach(async () => {
+    const { dom } = await renderToDOM(FivePrinciples as AstroComponentFactory);
+    screen = within(dom.body);
   });
 
   it("renders the Hero section with the correct title and subtitle", () => {
