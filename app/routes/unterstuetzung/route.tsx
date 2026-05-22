@@ -1,5 +1,3 @@
-import type React from "react";
-
 import { unterstuetzung } from "@/config/routes";
 import { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
@@ -13,28 +11,9 @@ import RichText from "~/components/RichText";
 import { SearchParamTabs } from "~/components/Tabs/Tabs";
 import { support } from "~/resources/content/unterstuetzung";
 import { assetPath } from "~/utils/assetPath";
-import type { ContentLink } from "~/utils/contentTypes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { useHydrationMarker } from "~/utils/useHydrationMarker";
 
-type Offering = {
-  title: string;
-  text: string;
-  sellingPoints: string;
-  link?: ContentLink;
-  details: {
-    icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-    title: string;
-    text: string;
-  }[];
-  examples?: {
-    image?: {
-      src: string;
-      alt: string;
-    };
-    text: string;
-  }[];
-};
 const {
   socialProof,
   supportHow,
@@ -164,7 +143,7 @@ export default function Index() {
                   tabId={tab.id}
                   label={tab.title}
                 >
-                  {tab.offerings.map((offering: Offering) => (
+                  {tab.offerings.map((offering) => (
                     <Container
                       key={offering.title}
                       className="mb-32 flex justify-between gap-32 rounded-xl bg-blue-100 px-40 max-md:flex-col"
@@ -176,7 +155,7 @@ export default function Index() {
                         }}
                       >
                         <RichText markdown={offering.text} />
-                        {offering.link && (
+                        {"link" in offering && (
                           <InfoBox.LinkList links={[offering.link]} />
                         )}
                       </InfoBox>
@@ -209,12 +188,12 @@ export default function Index() {
                             </div>
                           </div>
                         </div>
-                        {offering.examples && (
+                        {"examples" in offering && (
                           <div className="bg-white">
                             <div className="divide-y divide-gray-700">
                               {offering.examples.map((example, idx) => (
                                 <div key={`${offering.title}-example-${idx}`}>
-                                  {example.image && (
+                                  {"image" in example && (
                                     <Image
                                       url={example.image.src}
                                       alternativeText={example.image.alt}

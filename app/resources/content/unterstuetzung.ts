@@ -378,4 +378,4 @@ Mit freundlichen Grüßen
 
       Weitere Informationen zu Governance, Zusammenarbeit und Nutzung unserer Inhalte finden Sie unter [Nationale Kontaktstelle](${interoperabel_nationaleKontaktstelle.path}) für ein interoperables Europa.`,
   },
-};
+} as const;
