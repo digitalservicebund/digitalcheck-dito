@@ -140,7 +140,8 @@ jobs:
 
   deploy-to-staging-stackit:
     needs: [build-and-push-image]
-    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/staging/')
+    # if: github.ref == 'refs/heads/main' # ongoing Astro migration: deploy only staging/astro-new branch to staging
+    if: startsWith(github.ref, 'refs/heads/staging/')
     permissions:
       packages: read
     uses: ./.github/workflows/deploy.yml
