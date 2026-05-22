@@ -136,6 +136,10 @@ export default defineConfig(
         },
       ],
       quotes: ["error", "double", { avoidEscape: true }],
+
+      // Astro virtual modules (e.g. astro:middleware, astro:content) are
+      // injected at build time and cannot be resolved statically.
+      "import/no-unresolved": ["error", { ignore: ["^astro:"] }],
     },
   },
   // Spec/test files are excluded from the default tsconfig.json, so the
