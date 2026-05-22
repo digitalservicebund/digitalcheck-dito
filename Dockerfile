@@ -3,7 +3,7 @@ FROM node:26.1.0-alpine3.23 AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable pnpm
+RUN npm install -g pnpm
 
 WORKDIR /src
 COPY ./package.json pnpm-lock.yaml ./
