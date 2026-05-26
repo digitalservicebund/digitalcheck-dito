@@ -41,9 +41,9 @@ export const loader = async () => {
 
 export function FivePrinciples({
   prinzips,
-}: {
+}: Readonly<{
   prinzips: PrinzipWithAspekteAndExample[];
-}) {
+}>) {
   return (
     <>
       <MetaTitle prefix={methoden_fuenfPrinzipien.title} />

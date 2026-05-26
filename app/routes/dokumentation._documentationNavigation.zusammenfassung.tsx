@@ -158,12 +158,12 @@ function SimplifiedAspectsContent({
   aspects,
   prinzip,
   needsAspects,
-}: {
+}: Readonly<{
   explanation: Principle["reasoning"];
   aspects: Principle["aspects"];
   prinzip: PrinzipWithAspekte;
   needsAspects: boolean;
-}) {
+}>) {
   if ((needsAspects && (!aspects || aspects.length === 0)) || !explanation) {
     return (
       <InlineNotice
@@ -310,10 +310,10 @@ import { DocumentationPageShell } from "@/components/dokumentation/Documentation
 export function ZusammenfassungPage({
   prinzips,
   currentUrl,
-}: {
+}: Readonly<{
   prinzips: PrinzipWithAspekteAndExample[];
   currentUrl: string;
-}) {
+}>) {
   return (
     <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
       <DocumentationSummary />

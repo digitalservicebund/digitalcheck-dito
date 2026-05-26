@@ -82,10 +82,10 @@ export type PreCheckAnswerOption = {
 export function PreCheckQuestion({
   questionIdx,
   question,
-}: {
+}: Readonly<{
   questionIdx: number;
   question: TQuestion;
-}) {
+}>) {
   const [hasAnswerConflict, setHasAnswerConflict] = useState(false);
 
   const { answerForQuestionId, answers, firstUnansweredQuestionIndex } =

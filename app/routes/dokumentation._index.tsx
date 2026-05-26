@@ -31,9 +31,9 @@ const { start } = digitalDocumentation;
 
 export function DokumentationIndexPage({
   prinzips,
-}: {
+}: Readonly<{
   prinzips: PrinzipWithAspekte[];
-}) {
+}>) {
   const { downloadDocumentation } = useWordDocumentation();
 
   return (
@@ -177,9 +177,9 @@ import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationD
 
 export function DokumentationIndexPageWithProvider({
   prinzips,
-}: {
+}: Readonly<{
   prinzips: PrinzipWithAspekteAndExample[];
-}) {
+}>) {
   return (
     <DocumentationDataProvider>
       <DokumentationIndexPage prinzips={prinzips} />

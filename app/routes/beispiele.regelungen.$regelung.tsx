@@ -86,10 +86,10 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
 export function Gesetz({
   regelung,
   principles,
-}: {
+}: Readonly<{
   regelung: Beispielvorhaben;
   principles: PrinzipWithBeispielvorhaben[];
-}) {
+}>) {
   const tabsData: {
     label: string;
     content: React.ReactNode;

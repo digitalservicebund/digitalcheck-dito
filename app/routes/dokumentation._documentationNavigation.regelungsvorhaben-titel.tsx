@@ -77,10 +77,10 @@ import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 export function TitelPage({
   prinzips,
   currentUrl,
-}: {
+}: Readonly<{
   prinzips: PrinzipWithAspekteAndExample[];
   currentUrl: string;
-}) {
+}>) {
   return (
     <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
       <DocumentationTitle />

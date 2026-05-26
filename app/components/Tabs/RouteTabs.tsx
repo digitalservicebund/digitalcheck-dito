@@ -14,10 +14,10 @@ export type RouteTab = {
   to: string;
 };
 
-export type RouteTabsProps = {
+export type RouteTabsProps = Readonly<{
   activeKey?: string;
   tabs: RouteTab[];
-};
+}>;
 
 // Renders a list of tabs as links and navigates to the corresponding route when a tab is selected.
 export default function RouteTabs({ activeKey, tabs }: RouteTabsProps) {

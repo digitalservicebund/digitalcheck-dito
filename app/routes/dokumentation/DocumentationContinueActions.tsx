@@ -73,9 +73,9 @@ function StartOverDialog({
 
 export function DocumentationContinueActions({
   prinzips,
-}: {
+}: Readonly<{
   prinzips: PrinzipWithAspekte[];
-}) {
+}>) {
   const { hasSavedDocumentation, deleteDocumentationData } =
     useDocumentationDataService();
   const nonce = useNonce();

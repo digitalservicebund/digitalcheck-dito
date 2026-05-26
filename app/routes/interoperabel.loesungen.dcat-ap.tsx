@@ -40,7 +40,7 @@ const sections = {
   ressourcen: { id: "ressourcen", title: "Ressourcen" },
 };
 
-function ChapterBadge({ children }: { children: React.ReactNode }) {
+function ChapterBadge({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <Badge look={"hint"} Icon={LayersOutlined}>
       {children}

@@ -281,10 +281,10 @@ function PrincipleNavigation({
 export function Prinzip({
   prinzip,
   prinzipList,
-}: {
+}: Readonly<{
   prinzip: PrinzipWithAspekteAndExample;
   prinzipList: PrinzipListItem[];
-}) {
+}>) {
   return (
     <>
       <MetaTitle prefix={`Prinzip: ${prinzip.Name}`} />

@@ -88,10 +88,10 @@ import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 export function AbsendenPage({
   prinzips,
   currentUrl,
-}: {
+}: Readonly<{
   prinzips: PrinzipWithAspekteAndExample[];
   currentUrl: string;
-}) {
+}>) {
   return (
     <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
       <DocumentationSend />

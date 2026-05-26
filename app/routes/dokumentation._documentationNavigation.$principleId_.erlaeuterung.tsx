@@ -20,13 +20,13 @@ import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigat
 
 const { radioOptions } = digitalDocumentation.principlePages;
 
-type DocumentationPrincipleErlaeuterungFormProps = {
+type DocumentationPrincipleErlaeuterungFormProps = Readonly<{
   answer: string;
   prinzip: PrinzipWithAspekteAndExample;
   principleData: Principle;
   isPositive: boolean;
   isIrrelevant: boolean;
-};
+}>;
 
 function DocumentationPrincipleErlaeuterungForm({
   answer,
@@ -142,9 +142,9 @@ function DocumentationPrincipleErlaeuterungForm({
 
 export function DocumentationPrincipleErlaeuterung({
   principleId,
-}: {
+}: Readonly<{
   principleId: string;
-}) {
+}>) {
   const { currentUrl, navigationBaseUrl, prinzips } =
     useDocumentationNavigation();
   const { documentationData } = useDocumentationDataService();
@@ -250,11 +250,11 @@ export function ErlaeuterungPage({
   prinzips,
   currentUrl,
   principleId,
-}: {
+}: Readonly<{
   prinzips: PrinzipWithAspekteAndExample[];
   currentUrl: string;
   principleId: string;
-}) {
+}>) {
   return (
     <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
       <DocumentationPrincipleErlaeuterung principleId={principleId} />

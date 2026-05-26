@@ -50,7 +50,7 @@ export function loader({ params }: Route.LoaderArgs) {
   return { route };
 }
 
-export function MethodenSubPage({ route }: { route: SiteRoute }) {
+export function MethodenSubPage({ route }: Readonly<{ route: SiteRoute }>) {
   // We have to get the content here to use the icons from the content file
   const content = contentMap[route.title as keyof typeof contentMap];
 

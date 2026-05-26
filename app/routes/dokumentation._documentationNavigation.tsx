@@ -76,12 +76,12 @@ export function LayoutWithDocumentationNavigation({
   prinzips,
   children,
   currentUrl,
-}: {
+}: Readonly<{
   routes: (Route | Route[])[];
   prinzips: PrinzipWithAspekteAndExample[];
   children?: ReactNode;
   currentUrl: string;
-}) {
+}>) {
   // exclude documentation notes
   const displayedRoutes = routes.filter((route) => {
     if (Array.isArray(route)) return true;

@@ -63,10 +63,10 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
 export function DigitaltauglichkeitPrinzipienDetail({
   prinzip,
   prinzips,
-}: {
+}: Readonly<{
   prinzip: PrinzipWithBeispielvorhaben;
   prinzips: PrinzipWithBeispielvorhaben[];
-}) {
+}>) {
   const { Beispielvorhaben } = prinzip;
   const tabs = prinzips.map((principle) => ({
     key: principle.URLBezeichnung,

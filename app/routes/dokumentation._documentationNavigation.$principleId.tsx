@@ -17,9 +17,9 @@ const { radioOptions } = digitalDocumentation.principlePages;
 
 export function DocumentationPrinciple({
   principleId,
-}: {
+}: Readonly<{
   principleId: string;
-}) {
+}>) {
   const { currentUrl, nextUrl, previousUrl, prinzips } =
     useDocumentationNavigation();
   const prinzip = prinzips.find(
@@ -132,11 +132,11 @@ export function PrinciplePage({
   prinzips,
   currentUrl,
   principleId,
-}: {
+}: Readonly<{
   prinzips: PrinzipWithAspekteAndExample[];
   currentUrl: string;
   principleId: string;
-}) {
+}>) {
   return (
     <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
       <DocumentationPrinciple principleId={principleId} />

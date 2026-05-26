@@ -21,11 +21,11 @@ export type MobileTabPickerItem = {
   label: ReactNode;
 };
 
-type MobileTabPickerProps = {
+type MobileTabPickerProps = Readonly<{
   items: MobileTabPickerItem[];
   selectedIndex: number;
   onChange: (index: number) => void;
-};
+}>;
 
 export default function MobileTabPicker({
   items,

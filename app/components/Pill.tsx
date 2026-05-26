@@ -1,12 +1,12 @@
 import { CloseOutlined } from "@digitalservicebund/icons";
 import { twJoin } from "tailwind-merge";
 
-type PillProps = {
+type PillProps = Readonly<{
   label: string;
   value: string;
   selected: boolean;
   onClick: (value: string) => void;
-};
+}>;
 
 export function Pill({ label, value, selected, onClick }: PillProps) {
   return (

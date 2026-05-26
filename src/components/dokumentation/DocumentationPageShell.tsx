@@ -53,11 +53,11 @@ export function DocumentationPageShell({
   prinzips,
   currentUrl,
   children,
-}: {
+}: Readonly<{
   prinzips: PrinzipWithAspekteAndExample[];
   currentUrl: string;
   children: ReactNode;
-}) {
+}>) {
   const routes = buildDocumentationRoutes(prinzips);
   return (
     <DocumentationDataProvider>
