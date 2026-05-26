@@ -229,7 +229,7 @@ const expectNotWarning = (element: HTMLElement) => {
 
 describe("navigation on pages of documentation", () => {
   beforeEach(() => {
-    Object.defineProperty(window, "matchMedia", {
+    Object.defineProperty(globalThis, "matchMedia", {
       writable: true,
       value: vi.fn().mockImplementation((query: string) => ({
         matches: false,

@@ -62,8 +62,7 @@ export default function HelpSidepanel() {
     const el = scrollableRef.current;
     if (!el) return;
 
-    if (!window.matchMedia(`(min-width: ${BREAKPOINT})`).matches) {
-      el.style.maxHeight = "100vh";
+    if (!globalThis.matchMedia(`(min-width: ${BREAKPOINT})`).matches) {
       return;
     }
 
@@ -80,7 +79,10 @@ export default function HelpSidepanel() {
   useElResize("main", adjustSize, true);
 
   useEffect(() => {
-    if (isOpen && !window.matchMedia(`(min-width: ${BREAKPOINT})`).matches) {
+    if (
+      isOpen &&
+      !globalThis.matchMedia(`(min-width: ${BREAKPOINT})`).matches
+    ) {
       document.body.style.overflow = "hidden";
     }
     return () => {
