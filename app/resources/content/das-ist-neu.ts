@@ -161,7 +161,7 @@ export const news = {
       badge: {
         text: "01.10.2025",
       },
-      content: `Neues Beispiel ergänzt: SGB VI-Anpassungsgesetz (Einführung Fallmanagement DRV) [Hier ansehen](${`${beispiele.path}/regelungen`}/sgb-vi-anpassungsgesetz-einfuehrung-fallmanagement-drv)`,
+      content: `Neues Beispiel ergänzt: SGB VI-Anpassungsgesetz (Einführung Fallmanagement DRV) [Hier ansehen](${beispiele.path}/regelungen/sgb-vi-anpassungsgesetz-einfuehrung-fallmanagement-drv)`,
     },
     {
       badge: {
