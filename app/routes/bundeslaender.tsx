@@ -114,7 +114,7 @@ export default function BundeslaenderInfoPage() {
                     >
                       {contact.bmdsEmail}
                     </a>
-                    .
+                    {"."}
                   </p>
                 </Timeline.ItemContent>
               </Timeline.Item>
@@ -183,7 +183,7 @@ export default function BundeslaenderInfoPage() {
                 <a className="text-link" href={`mailto:${contact.bmdsEmail}`}>
                   {contact.bmdsEmail}
                 </a>
-                .
+                {"."}
               </p>
               <br></br>
               <p>Ansprechpartnerin: Katharina Berndt</p>

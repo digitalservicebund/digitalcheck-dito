@@ -175,7 +175,7 @@ export const UeberblickTab = () => (
             Lösungen für ein interoperables Europa (Art. 7 EU 2024/903) sind
             technische Standards für den grenzüberschreitenden Datenaustausch
             zwischen Verwaltungseinheiten. Das Interoperable Europe Board legt
-            fest, welche Lösungen zu prüfen sind. Mehr dazu im Reiter
+            fest, welche Lösungen zu prüfen sind. Mehr dazu im Reiter{" "}
             <strong>„Interoperable Lösungen”</strong>
           </p>
         </Timeline.ItemContent>
