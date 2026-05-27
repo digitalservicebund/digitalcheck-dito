@@ -37,10 +37,7 @@ export default function AccordionItem({
 
   return (
     <div
-      className={twMerge(
-        "border-t-2 border-blue-400 last-of-type:border-b-2",
-        className,
-      )}
+      className={twMerge("border-b-2 border-blue-400", className)}
       suppressHydrationWarning={
         true
       } /* if a hash is set, the panel will only be open client-side */
