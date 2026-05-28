@@ -17,9 +17,10 @@ export async function getStaticPaths() {
   const listResult = await fetchStrapiData<PrinzipListQueryReturnType>(
     `query PrinzipList { prinzips(sort: "order") { Name URLBezeichnung order } }`,
   );
-  if ("error" in listResult) return [];
+  if ("error" in listResult)
+    throw new Error(`Failed to fetch Strapi data: ${listResult.error}`);
 
-  const paths = await Promise.all(
+  return Promise.all(
     listResult.prinzips.map(async (p: PrinzipListItem) => {
       const detail = await fetchStrapiData<{
         prinzips: PrinzipWithAspekteAndExample[];
@@ -47,18 +48,15 @@ export async function getStaticPaths() {
         }`,
         { URLBezeichnung: p.URLBezeichnung },
       );
-      const prinzip =
-        "error" in detail || detail.prinzips.length === 0
-          ? undefined
-          : detail.prinzips[0];
+      if ("error" in detail)
+        throw new Error(`Failed to fetch Strapi data: ${detail.error}`);
+      const prinzip = detail.prinzips[0];
       return {
         params: { prinzip: p.URLBezeichnung },
         props: { prinzip, prinzipList: listResult.prinzips },
       };
     }),
   );
-
-  return paths.filter((p) => p.props.prinzip !== undefined);
 }
 
 const { prinzip, prinzipList } = Astro.props;

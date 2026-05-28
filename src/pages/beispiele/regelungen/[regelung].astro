@@ -24,7 +24,8 @@ export async function getStaticPaths() {
     `query GetAllRegelungSlugs { beispielvorhabens(status: PUBLISHED) { URLBezeichnung } }`,
   );
 
-  if ("error" in slugsResult) return [];
+  if ("error" in slugsResult)
+    throw new Error(`Failed to fetch Strapi data: ${slugsResult.error}`);
 
   return slugsResult.beispielvorhabens.map((r) => ({
     params: { regelung: r.URLBezeichnung },
@@ -72,16 +73,16 @@ const [regelungResult, prinzipsResult] = await Promise.all([
     GET_PRINZIPS_QUERY,
   ),
 ]);
-
-const regelungData =
-  "error" in regelungResult || regelungResult.beispielvorhabens.length === 0
-    ? undefined
-    : regelungResult.beispielvorhabens[0];
-
-const principles =
-  "error" in prinzipsResult
-    ? []
-    : prinzipsResult.prinzips.toSorted((a, b) => a.order - b.order);
+if ("error" in regelungResult)
+  throw new Error(`Failed to fetch Strapi data: ${regelungResult.error}`);
+if ("error" in prinzipsResult)
+  throw new Error(`Failed to fetch Strapi data: ${prinzipsResult.error}`);
+if (!regelungResult.beispielvorhabens.length)
+  throw new Error(`Strapi data regelungResult has no beispielvorhabens`);
+const regelungData = regelungResult.beispielvorhabens[0];
+const principles = prinzipsResult.prinzips.toSorted(
+  (a, b) => a.order - b.order,
+);
 ---
 
 <Layout title={frontmatter.title}>

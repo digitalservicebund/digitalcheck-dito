@@ -25,9 +25,9 @@ query GetVisualisierungen($status: PublicationStatus!) {
 const visualisationsResult = await fetchStrapiData<{
   visualisierungen: Visualisierung[];
 }>(GET_VISUALISATIONS_QUERY, { status: "PUBLISHED" });
-
-const visualisationsData =
-  "error" in visualisationsResult ? [] : visualisationsResult.visualisierungen;
+if ("error" in visualisationsResult)
+  throw new Error(`Failed to fetch Strapi data: ${visualisationsResult.error}`);
+const visualisationsData = visualisationsResult.visualisierungen;
 ---
 
 <Layout title={frontmatter.title}>
