@@ -13,29 +13,31 @@ export const frontmatter = {
 ---
 
 <Layout title={frontmatter.title}>
-      <main>
-        <Hero
-          title={fundamentalsDigitalReadiness.title}
-          subtitle={fundamentalsDigitalReadiness.subtitle}
-        />
-        <Container className="py-80">
-          <InfoBoxList
-            heading={{ text: fundamentalsDigitalReadiness.summary.title }}
-            separator
-          >
-            <h2 slot="heading">
-              {fundamentalsDigitalReadiness.summary.title}
-            </h2>
-            {fundamentalsDigitalReadiness.summary.items.map((item, i) => (
-              <InfoBox
-                key={item.heading.text ?? i}
-                heading={item.heading}
-                visual={{ type: "icon", Icon: item.visual.Icon }}
-              >
-                <RichText markdown={item.content} />
-              </InfoBox>
-            ))}
-          </InfoBoxList>
-        </Container>
-      </main>
+  <main>
+    <Hero
+      title={fundamentalsDigitalReadiness.title}
+      subtitle={fundamentalsDigitalReadiness.subtitle}
+    />
+    <Container className="py-80">
+      <InfoBoxList
+        heading={{ text: fundamentalsDigitalReadiness.summary.title }}
+        separator
+      >
+        <h2 slot="heading">
+          {fundamentalsDigitalReadiness.summary.title}
+        </h2>
+        {
+          fundamentalsDigitalReadiness.summary.items.map((item, i) => (
+            <InfoBox
+              key={item.heading.text ?? i}
+              heading={item.heading}
+              visual={{ type: "icon", Icon: item.visual.Icon }}
+            >
+              <RichText markdown={item.content} />
+            </InfoBox>
+          ))
+        }
+      </InfoBoxList>
+    </Container>
+  </main>
 </Layout>
