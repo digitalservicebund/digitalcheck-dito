@@ -80,7 +80,7 @@ describe("Index Route - Integration Tests", () => {
   it("renders the Grundlagen section with correct InfoBoxes", () => {
     expect(
       screen.getByRole("heading", {
-        name: "Grundlagen zum Digitalcheck",
+        name: "Einführung zum Digitalcheck",
         level: 2,
       }),
     ).toBeInTheDocument();
