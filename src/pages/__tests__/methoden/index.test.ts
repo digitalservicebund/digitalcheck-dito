@@ -1,15 +1,17 @@
-import { render, screen, within } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
+// @vitest-environment node
+import Methoden from "@/pages/methoden/index.astro"; // The component to test
+import { renderToDOM } from "@/utils/testUtils";
+import type { BoundFunctions, queries } from "@testing-library/dom";
+import { within } from "@testing-library/dom";
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
 import { describe, expect, it } from "vitest";
-import Methoden from "~/routes/methoden._index"; // The component to test
 
 describe("Methoden Route - Integration Tests", () => {
-  const renderWithRouter = (component: React.ReactElement) => {
-    return render(<MemoryRouter>{component}</MemoryRouter>);
-  };
+  let screen: BoundFunctions<typeof queries>;
 
-  beforeEach(() => {
-    renderWithRouter(<Methoden />);
+  beforeEach(async () => {
+    const { dom } = await renderToDOM(Methoden as AstroComponentFactory);
+    screen = within(dom.body);
   });
 
   it("renders the Hero section with the correct title", () => {
