@@ -21,12 +21,13 @@ const contents = [
 ];
 
 interface Props {
+  title: string;
   content: (typeof contents)[number];
 }
-const { content } = Astro.props;
+const { title, content } = Astro.props;
 ---
 
-<Layout title={content.title} showProgressBar>
+<Layout title={title} showProgressBar>
   <main>
     <Hero subtitle={content.subtitle} title={content.title} />
 
