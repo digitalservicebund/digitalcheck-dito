@@ -106,13 +106,13 @@ const tabs = prinzips.map((principle) => ({
                       className="max-w-full"
                     />
 
-                    <Link
-                      to={`${ROUTE_REGELUNGEN}/${exampleProject.URLBezeichnung}`}
-                      prefetch="viewport"
+                    <a
+                      href={`${ROUTE_REGELUNGEN}/${exampleProject.URLBezeichnung}`}
+                      data-astro-prefetch="viewport"
                       className="text-link"
                     >
                       {examplesRegelungen.exampleLinkText}
-                    </Link>
+                    </a>
                   </div>
 
                   <ParagraphList

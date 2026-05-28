@@ -131,9 +131,9 @@ export const frontmatter = {
                 <RichText markdown={item.content as string} />
               )}
               {item.link && "to" in item.link && (
-                <Link to={item.link.to} className="text-link">
+                <a href={item.link.to} className="text-link">
                   {item.link.text}
-                </Link>
+                </a>
               )}
             </NumberedList.Item>
           ))
