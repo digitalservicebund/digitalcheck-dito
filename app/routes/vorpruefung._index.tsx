@@ -1,4 +1,5 @@
 import { vorpruefung } from "@/config/routes";
+import Badge from "~/components/Badge";
 import Container from "~/components/Container";
 import { PreCheckFAQ } from "~/components/content/PreCheckFAQ.tsx";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -58,11 +59,14 @@ export default function Index() {
               <InfoBox heading={preCheck.start.summary.start.heading}>
                 <RichText markdown={preCheck.start.summary.start.content} />
               </InfoBox>
-              <ImageBox
-                title={preCheck.start.summary.process.heading}
-                image={preCheck.start.summary.process.image}
-                border
-              />
+              <div>
+                <Badge look="hint" className="mr-8" text="Bundesebene"></Badge>
+                <ImageBox
+                  title={preCheck.start.summary.process.heading}
+                  image={preCheck.start.summary.process.image}
+                  border
+                />
+              </div>
 
               <InfoBox heading={preCheck.start.summary.relevance.heading}>
                 <RichText markdown={preCheck.start.summary.relevance.content} />

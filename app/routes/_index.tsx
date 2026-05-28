@@ -78,7 +78,7 @@ const steps = [
     procedureHighlight: { badge: "NEU", text: "Jetzt auch online ausfüllbar." },
     duration: "Ein bis zwei Stunden",
     result: dedent`
-      - Ausgefülltes Word-Dokument, welches Sie dem Nationalen Normenkontrollrat senden
+      - Ausgefülltes Word-Dokument- welches Sie an Ihre jeweilige Prüfstelle* senden
       - Ihr Vorhaben ist formal bereit für die Ressortabstimmung
     `,
   },
@@ -158,7 +158,7 @@ export default function Index() {
         </div>
 
         <div className="breakout space-y-40 bg-blue-100 py-40 lg:py-80">
-          <Heading tagName="h2" text="Grundlagen zum Digitalcheck" />
+          <Heading tagName="h2" text="Einführung zum Digitalcheck" />
 
           <InfoBox
             visual={{ type: "icon", Icon: WidgetsOutlinedIcon }}
@@ -188,6 +188,7 @@ export default function Index() {
             look="highlight"
             className="bg-white"
           >
+            <Badge look="hint" className="mr-8" text="Bundesebene"></Badge>
             <Heading tagName="h3">
               Worauf achtet der Nationale Normenkontrollrat?
             </Heading>
