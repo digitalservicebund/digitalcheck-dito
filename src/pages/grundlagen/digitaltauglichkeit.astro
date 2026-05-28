@@ -1,6 +1,11 @@
 ---
+import InfoBoxList from "@/components/InfoBoxList.astro";
 import Layout from "@/layouts/Layout.astro";
-import DigitaltauglichkeitPage from "~/routes/grundlagen.digitaltauglichkeit";
+import Container from "~/components/Container";
+import Hero from "~/components/Hero";
+import InfoBox from "~/components/InfoBox";
+import RichText from "~/components/RichText";
+import { fundamentalsDigitalReadiness } from "~/resources/content/grundlage-digitaltauglichkeit";
 
 export const frontmatter = {
   title: "Digitaltauglichkeit",
@@ -8,5 +13,29 @@ export const frontmatter = {
 ---
 
 <Layout title={frontmatter.title}>
-  <DigitaltauglichkeitPage />
+      <main>
+        <Hero
+          title={fundamentalsDigitalReadiness.title}
+          subtitle={fundamentalsDigitalReadiness.subtitle}
+        />
+        <Container className="py-80">
+          <InfoBoxList
+            heading={{ text: fundamentalsDigitalReadiness.summary.title }}
+            separator
+          >
+            <h2 slot="heading">
+              {fundamentalsDigitalReadiness.summary.title}
+            </h2>
+            {fundamentalsDigitalReadiness.summary.items.map((item, i) => (
+              <InfoBox
+                key={item.heading.text ?? i}
+                heading={item.heading}
+                visual={{ type: "icon", Icon: item.visual.Icon }}
+              >
+                <RichText markdown={item.content} />
+              </InfoBox>
+            ))}
+          </InfoBoxList>
+        </Container>
+      </main>
 </Layout>
