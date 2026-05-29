@@ -59,7 +59,7 @@ export default function Index() {
               <InfoBox heading={preCheck.start.summary.start.heading}>
                 <RichText markdown={preCheck.start.summary.start.content} />
               </InfoBox>
-              <div>
+              <div className="space-y-8">
                 <Badge look="hint" className="mr-8" text="Bundesebene"></Badge>
                 <ImageBox
                   title={preCheck.start.summary.process.heading}
