@@ -19,17 +19,13 @@ export const frontmatter = {
       subtitle={fundamentalsDigitalReadiness.subtitle}
     />
     <Container className="py-80">
-      <InfoBoxList
-        heading={{ text: fundamentalsDigitalReadiness.summary.title }}
-        separator
-      >
+      <InfoBoxList separator>
         <h2 slot="heading">
           {fundamentalsDigitalReadiness.summary.title}
         </h2>
         {
-          fundamentalsDigitalReadiness.summary.items.map((item, i) => (
+          fundamentalsDigitalReadiness.summary.items.map((item) => (
             <InfoBox
-              key={item.heading.text ?? i}
               heading={item.heading}
               visual={{ type: "icon", Icon: item.visual.Icon }}
             >

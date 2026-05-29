@@ -6,7 +6,6 @@ import {
   prinzipCoreFields,
 } from "~/utils/strapiData.server";
 import { beispiele_prinzipien } from "@/config/routes";
-import { Link } from "react-router";
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Heading from "~/components/Heading";
@@ -109,7 +108,7 @@ const tabs = prinzips.map((principle) => ({
                     <a
                       href={`${ROUTE_REGELUNGEN}/${exampleProject.URLBezeichnung}`}
                       data-astro-prefetch="viewport"
-                      className="text-link"
+                      class="text-link"
                     >
                       {examplesRegelungen.exampleLinkText}
                     </a>

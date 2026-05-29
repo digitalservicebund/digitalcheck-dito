@@ -1,6 +1,5 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { Link } from "react-router";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
@@ -131,7 +130,7 @@ export const frontmatter = {
                 <RichText markdown={item.content as string} />
               )}
               {item.link && "to" in item.link && (
-                <a href={item.link.to} className="text-link">
+                <a href={item.link.to} class="text-link">
                   {item.link.text}
                 </a>
               )}

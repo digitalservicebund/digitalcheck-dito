@@ -1,8 +1,7 @@
 import { ROUTE_HANDLE_CLIENT_SIDE_ERRORS } from "~/resources/staticRoutes";
-import type { ClientSideError } from "~/routes/handle-client-side-error";
 
 export default function trackClientSideError(error: Error) {
-  const body: ClientSideError = {
+  const body = {
     message: error.message,
     stack: error.stack,
     url: globalThis.location.href,
