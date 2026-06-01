@@ -1,6 +1,6 @@
+import { ROUTE_REGELUNGEN } from "@/config/additionalRoutes";
 import { beispiele_visualisierungen } from "@/config/routes";
 import { expect, test } from "@playwright/test";
-import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
 
 const ROUTE_EXAMPLES_DIGITAL_COMMUNICATION =
   "/beispiele/prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten";

@@ -1,9 +1,9 @@
+import { ROUTE_REGELUNGEN } from "@/config/additionalRoutes";
 import { getImagePath } from "@/utils/images";
 import { ZoomInOutlined } from "@digitalservicebund/icons";
 import { Link } from "react-router";
 import Heading from "~/components/Heading";
 import Image from "~/components/Image";
-import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
 import type { Visualisierung } from "~/utils/strapiData.types";
 import { formatDate } from "~/utils/utilFunctions";
 import { BlocksRenderer } from "./BlocksRenderer";
