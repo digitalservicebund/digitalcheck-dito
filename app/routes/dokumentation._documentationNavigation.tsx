@@ -137,12 +137,12 @@ const documentationNavigationTree: NavigationDefinition[] = [
         ROUTE_DOCUMENTATION_INTEROPERABILITY_ORGANIZATIONAL.url,
       ),
       createRouteItem(
-        "assessment-technical",
-        ROUTE_DOCUMENTATION_INTEROPERABILITY_TECHNICAL.url,
-      ),
-      createRouteItem(
         "assessment-semantic",
         ROUTE_DOCUMENTATION_INTEROPERABILITY_SEMANTIC.url,
+      ),
+      createRouteItem(
+        "assessment-technical",
+        ROUTE_DOCUMENTATION_INTEROPERABILITY_TECHNICAL.url,
       ),
     ],
   },
