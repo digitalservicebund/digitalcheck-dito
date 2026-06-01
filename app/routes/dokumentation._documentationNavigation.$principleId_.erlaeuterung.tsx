@@ -1,6 +1,6 @@
 import { methoden_fuenfPrinzipien } from "@/config/routes";
 import { useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router";
+import { Link, useNavigate } from "react-router";
 import AspectPills from "~/components/AspectPills";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
@@ -233,14 +233,6 @@ export function DocumentationPrincipleErlaeuterung({
       </div>
     </>
   );
-}
-
-export default function Route() {
-  const { principleId } = useParams();
-  if (!principleId)
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("No principleId provided", { status: 404 });
-  return <DocumentationPrincipleErlaeuterung principleId={principleId} />;
 }
 
 // Astro page export

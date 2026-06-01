@@ -2,8 +2,7 @@
  * Compatibility shim replacing react-router primitives with browser-native
  * equivalents for use in Astro (static) context.
  *
- * Route-specific hooks (useLoaderData, Outlet, useOutletContext, useParams, etc.)
- * are NOT included here — those are replaced by props in Astro page components.
+ * Route-specific hooks are NOT included here — those are replaced by props in Astro page components.
  */
 
 import type {
@@ -79,27 +78,6 @@ export function Link({
   );
 }
 
-// ── NavLink ──────────────────────────────────────────────────────────────────
-
-export type NavLinkProps = Omit<LinkProps, "children"> & {
-  children: ReactNode | (({ isActive }: { isActive: boolean }) => ReactNode);
-};
-
-/**
- * Drop-in replacement for react-router's `<NavLink>`.
- * Marks the link active when `href` matches the current pathname.
- */
-export function NavLink({ to, children, ...rest }: NavLinkProps) {
-  const { pathname } = useLocation();
-  const isActive =
-    pathname === to || pathname.startsWith(to.endsWith("/") ? to : to + "/");
-  return (
-    <a href={to} aria-current={isActive ? "page" : undefined} {...rest}>
-      {typeof children === "function" ? children({ isActive }) : children}
-    </a>
-  );
-}
-
 // ── Location context (for MemoryRouter / test environment) ───────────────────
 
 type Location = {
@@ -147,20 +125,6 @@ export function useLocation(): Location {
   }, [ctx]);
 
   return ctx?.location ?? windowLocation;
-}
-
-// ── redirect ─────────────────────────────────────────────────────────────────
-
-/**
- * Drop-in replacement for react-router's `redirect`.
- * Navigates immediately via `window.location.replace` (no-op during SSR).
- * Intended for use during render, e.g. to guard a route when a precondition
- * is not met (redirect to previous step when no answer has been saved yet).
- */
-export function redirect(url: string, _status?: number): void {
-  if (typeof window !== "undefined") {
-    window.location.replace(url);
-  }
 }
 
 // ── useNavigate ──────────────────────────────────────────────────────────────
@@ -220,65 +184,6 @@ export function useSearchParams(): [URLSearchParams, SetSearchParams] {
   return [params, setSearchParams];
 }
 
-// ── Outlet ───────────────────────────────────────────────────────────────────
-
-/**
- * Stub for react-router's `<Outlet>`. Renders nothing in static/Astro context.
- */
-export function Outlet(_props?: { context?: unknown }) {
-  return null;
-}
-
-// ── useRouteLoaderData ───────────────────────────────────────────────────────
-
-/**
- * Stub for react-router's `useRouteLoaderData`. Returns undefined in static context.
- */
-export function useRouteLoaderData<T = unknown>(
-  _routeId: string,
-): T | undefined {
-  return undefined;
-}
-
-// ── useParams ────────────────────────────────────────────────────────────────
-
-/**
- * Read named URL params from a pattern provided at call site.
- * In Astro static mode, components receive params as props.
- * This hook reads them from window.location.pathname as a fallback.
- *
- * Usage: const { principleId } = useParams<{ principleId: string }>();
- * The values are extracted by matching against `patternSegments` in the pathname.
- */
-export function useParams<T extends Record<string, string>>(): Partial<T> {
-  if (typeof window === "undefined") return {};
-  const pathname = window.location.pathname;
-  const segments = pathname.split("/").filter(Boolean);
-  // Return raw segments as an object so callers can destructure what they need
-  return segments.reduce<Record<string, string>>((acc, seg, i) => {
-    acc[`_${i}`] = seg;
-    return acc;
-  }, {}) as Partial<T>;
-}
-
-// ── useOutletContext ──────────────────────────────────────────────────────────
-
-/**
- * Stub — Outlet context is replaced by React context in Astro.
- * Child components should use useContext(NavigationContext) instead.
- */
-export function useOutletContext<T>(): T {
-  return {} as T;
-}
-
-// ── useLoaderData / useRouteLoaderData stubs ──────────────────────────────────
-
-/** Stub — data loading is done in Astro frontmatter. */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function useLoaderData<T = any>(): T {
-  return {} as T;
-}
-
 // ── Testing shims ─────────────────────────────────────────────────────────────
 // These exports allow test files that previously imported from "react-router"
 // to continue working without the package installed.
@@ -313,87 +218,6 @@ export function MemoryRouter({
   );
 }
 
-/** Alias of MemoryRouter for test compatibility. */
-export function BrowserRouter({ children }: { children: ReactNode }) {
-  return <>{children}</>;
-}
-
-/** Renders its element or Component — works inside Routes in test wrappers. */
-export function Route({
-  element,
-  Component,
-}: {
-  path?: string;
-  element?: ReactNode;
-  Component?: ComponentType;
-  children?: ReactNode;
-}) {
-  if (element) return <>{element}</>;
-  if (Component) return <Component />;
-  return null;
-}
-
-/** Renders all Route children (simplified — no path-matching needed for tests). */
-export function Routes({ children }: { children: ReactNode }) {
-  return <>{children}</>;
-}
-
-type RouteConfig = {
-  path: string;
-  element?: ReactNode;
-  Component?: ComponentType;
-  ErrorBoundary?: ComponentType;
-  HydrateFallback?: ComponentType;
-  children?: RouteConfig[];
-  loader?: () => unknown;
-};
-
-type RouterObject = {
-  routes: RouteConfig[];
-  initialEntries: string[];
-};
-
-/**
- * Creates a stub router for use with RouterProvider in tests.
- * Renders the root route's element/Component at the initial entry path.
- */
-export function createMemoryRouter(
-  routes: RouteConfig[],
-  opts?: { initialEntries?: string[] },
-): RouterObject {
-  return { routes, initialEntries: opts?.initialEntries ?? ["/"] };
-}
-
-export function createBrowserRouter(routes: RouteConfig[]): RouterObject {
-  return {
-    routes,
-    initialEntries: [
-      typeof window !== "undefined" ? window.location.pathname : "/",
-    ],
-  };
-}
-
-/**
- * Renders the root route's element or Component from the stub router,
- * wrapped in a MemoryRouter so location context is available in tests.
- * Child routes are not rendered — tests that rely on outlet children
- * should be updated to use DocumentationNavigationContext directly.
- */
-export function RouterProvider({ router }: { router: RouterObject }) {
-  const root = router.routes[0];
-  if (!root) return null;
-  const element = root.element ? (
-    <>{root.element}</>
-  ) : root.Component ? (
-    <root.Component />
-  ) : null;
-  return (
-    <MemoryRouter initialEntries={router.initialEntries}>
-      {element}
-    </MemoryRouter>
-  );
-}
-
 /**
  * Creates a route stub component for testing components that use router hooks.
  * Renders the matched route's Component at the given path, wrapped in a
@@ -425,7 +249,3 @@ export function createRoutesStub(
     );
   };
 }
-
-/** Type stub for react-router's EntryContext (used in entry.server tests). */
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export type EntryContext = {};

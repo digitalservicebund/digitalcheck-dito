@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter, Route, Routes } from "react-router";
+import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { ReactNode } from "react";
@@ -61,13 +61,7 @@ const RouterWrapper = ({
 }: {
   children: ReactNode;
   initialEntries: string[];
-}) => (
-  <MemoryRouter initialEntries={initialEntries}>
-    <Routes>
-      <Route path="*" element={children} />
-    </Routes>
-  </MemoryRouter>
-);
+}) => <MemoryRouter initialEntries={initialEntries}>{children}</MemoryRouter>;
 
 describe("DropdownMenu Component", () => {
   beforeEach(() => {

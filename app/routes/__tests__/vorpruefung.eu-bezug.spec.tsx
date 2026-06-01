@@ -2,7 +2,6 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { BrowserRouter } from "react-router";
 import { preCheck } from "~/resources/content/vorpruefung";
 import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { PreCheckQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
@@ -96,15 +95,6 @@ function mapUserAnswersToMockAnswers(
   return answers;
 }
 
-vi.mock("react-router", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("react-router")>();
-  return {
-    ...actual,
-    useLoaderData: vi.fn(),
-    useActionData: vi.fn(),
-  };
-});
-
 vi.mock("~/routes/vorpruefung/preCheckDataHook", async (importOriginal) => {
   const actual =
     await importOriginal<
@@ -144,12 +134,10 @@ describe.each(scenarios)("test $name", ({ answers, expected }) => {
     });
 
     render(
-      <BrowserRouter>
-        <PreCheckQuestion
-          questionIdx={questionIdx}
-          question={questions[questionIdx]}
-        />
-      </BrowserRouter>,
+      <PreCheckQuestion
+        questionIdx={questionIdx}
+        question={questions[questionIdx]}
+      />,
     );
   });
 

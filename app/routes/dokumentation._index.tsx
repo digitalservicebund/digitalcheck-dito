@@ -4,7 +4,6 @@ import {
   TipsAndUpdatesOutlined,
   ViewListTwoTone,
 } from "@digitalservicebund/icons";
-import { useRouteLoaderData } from "react-router";
 import { DownloadButton } from "~/components/Button";
 import Container from "~/components/Container.tsx";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
@@ -20,7 +19,6 @@ import SupportBanner from "~/components/SupportBanner";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import { DocumentationContinueActions } from "~/routes/dokumentation/DocumentationContinueActions.tsx";
-import type { DocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
 import type {
   PrinzipWithAspekte,
@@ -163,13 +161,6 @@ export function DokumentationIndexPage({
       <SupportBanner {...supportBanner} />
     </>
   );
-}
-
-export default function Route() {
-  const { prinzips } = useRouteLoaderData<DocumentationRouteData>(
-    "routes/dokumentation",
-  )!;
-  return <DokumentationIndexPage prinzips={prinzips} />;
 }
 
 // Astro page export

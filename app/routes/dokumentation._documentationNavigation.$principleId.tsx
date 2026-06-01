@@ -1,5 +1,5 @@
 import { methoden_fuenfPrinzipien } from "@/config/routes";
-import { Link, useParams } from "react-router";
+import { Link } from "react-router";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import Heading from "~/components/Heading";
@@ -114,14 +114,6 @@ export function DocumentationPrinciple({
       </div>
     </>
   );
-}
-
-export default function Route() {
-  const { principleId } = useParams();
-  if (!principleId)
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("No principleId provided", { status: 404 });
-  return <DocumentationPrinciple principleId={principleId} />;
 }
 
 // Astro page export

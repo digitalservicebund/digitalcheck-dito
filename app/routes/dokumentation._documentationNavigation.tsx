@@ -5,7 +5,6 @@ import {
   dokumentation_zusammenfassung,
 } from "@/config/routes";
 import type { ReactNode } from "react";
-import { Outlet, useLocation, useRouteLoaderData } from "react-router";
 import HelpSidepanel from "~/components/HelpSidepanel";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
@@ -220,40 +219,11 @@ export function LayoutWithDocumentationNavigation({
                 elements={routes.flat()}
               />
             </div>
-            {/* force remount for different principles with key={currentUrl} */}
-            <Outlet
-              key={currentUrl}
-              context={{
-                currentUrl,
-                navigationBaseUrl,
-                nextUrl,
-                previousUrl,
-                routes,
-                prinzips,
-              }}
-            />
             {children}
           </main>
           {showHelpPanel && <HelpSidepanel />}
         </div>
       </HelpPanelProvider>
     </DocumentationNavigationContext.Provider>
-  );
-}
-
-export default function Route() {
-  const data = useRouteLoaderData<{
-    routes: (Route | Route[])[];
-    prinzips: PrinzipWithAspekteAndExample[];
-  }>("routes/dokumentation");
-  const location = useLocation();
-  const currentUrl = location.pathname;
-  if (!data) return null;
-  return (
-    <LayoutWithDocumentationNavigation
-      routes={data.routes}
-      prinzips={data.prinzips}
-      currentUrl={currentUrl}
-    />
   );
 }

@@ -3,7 +3,6 @@ import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import userEvent from "@testing-library/user-event";
-import { BrowserRouter } from "react-router";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { PreCheckQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { ResultType } from "../vorpruefung.ergebnis/PreCheckResult";
@@ -60,11 +59,7 @@ describe("PreCheck", () => {
 
   describe("PreCheck validation", () => {
     beforeEach(() => {
-      render(
-        <BrowserRouter>
-          <PreCheckQuestion questionIdx={0} question={questions[0]} />
-        </BrowserRouter>,
-      );
+      render(<PreCheckQuestion questionIdx={0} question={questions[0]} />);
     });
 
     it("shows error when trying to click next without selecting an answer", async () => {
@@ -123,21 +118,13 @@ describe("PreCheck", () => {
     });
 
     it("redirects to last unanswered question", () => {
-      render(
-        <BrowserRouter>
-          <PreCheckQuestion questionIdx={2} question={questions[2]} />
-        </BrowserRouter>,
-      );
+      render(<PreCheckQuestion questionIdx={2} question={questions[2]} />);
 
       expect(mockNavigate).toHaveBeenCalledWith("/vorpruefung/it-system");
     });
 
     it("does not redirect when all questions are answered", () => {
-      render(
-        <BrowserRouter>
-          <PreCheckQuestion questionIdx={0} question={questions[0]} />
-        </BrowserRouter>,
-      );
+      render(<PreCheckQuestion questionIdx={0} question={questions[0]} />);
 
       expect(mockNavigate).not.toHaveBeenCalledWith("/vorpruefung");
     });
