@@ -305,7 +305,7 @@ export default function Route() {
 }
 
 // Astro page export
-import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
+import { DocumentationPageShell } from "@/components/DocumentationPageShell";
 
 export function ZusammenfassungPage({
   prinzips,
