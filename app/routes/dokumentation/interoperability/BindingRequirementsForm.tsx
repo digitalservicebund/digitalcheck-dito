@@ -71,17 +71,17 @@ export default function BindingRequirementsForm({
       render: () => (
         <RichText
           markdown={dedent`
-            Eine digitales Angebot gilt als interoperabel, wenn es ermöglicht, dass es grenzüberschreitend nutzbar ist. Also, dass z. B. Daten von Bürgerinnen und Bürgern aus anderen EU-Ländern verarbeitet werden können.
+            Eine Regelung ist förderlich für die Interoperabilität, wenn sie es ermöglicht, dass Daten in der EU grenzüberschreitend verarbeitet werden können.
 
-            Für Sie bedeutet das, dass Sie grenzüberschreitende Auswirkungen eines Regelungsvorhaben einschätzen müssen, bevor die Regelung geschrieben wird. Denn Sie legen verbindliche Anforderungen fest, die geltendes Recht werden.
+            In diesem Schritt wird gefragt, ob Ihre Regelung verbindliche Anforderungen enthält, die sich auf digitale transeuropäische Dienste auswirken:
 
-            Bitte dokumentieren Sie in diesem Schritt alle Teile Ihrer Regelung, die verbindliche Anforderungen i. S. v. ${markdownLinkIEA(
+            Bitte dokumentieren Sie alle verbindlichen Anforderungen im Sinne von ${markdownLinkIEA(
               {
                 article: 2,
                 paragraph: 15,
                 format: "long",
               },
-            )} definieren sowie digitale transeuropäische Dienste, die von diesen Anforderungen betroffen sind.
+            )} und die digitalen transeuropäischen Dienste, die davon betroffen sind.
         `}
         />
       ),
@@ -99,8 +99,10 @@ export default function BindingRequirementsForm({
             >
               <RichText
                 markdown={dedent`
-                  Eine Definition von verbindlichen Anforderungen finden Sie <a href="/interoperabel?tab=hintergrund" target="_blank">hier</a>.
-                  Diese bezieht sich auf ${markdownLinkIEA({ article: 2, paragraph: 15, format: "long" })}.
+                  Verbindliche Anforderungen können Vorgaben z. B. durch Gesetze oder Verordnungen sein. Der Begriff schließt aber auch Verträge oder Ausschreibungen ein.
+                  Entscheidend ist außerdem die Frage, ob die Vorgabe festschreibt, wie Daten zwischen Systemen verschiedener EU-Länder fließen.
+                  
+                  Siehe ${markdownLinkIEA({ article: 2, paragraph: 15, format: "long" })}.
             `}
               />
             </HelpButton>
@@ -152,18 +154,25 @@ export default function BindingRequirementsForm({
                       Betroffene transeuropäische Dienste
                       <HelpButton
                         sectionId={"transeuropean_services"}
-                        title={"Betroffene transeuropäische Dienste"}
+                        title={"Was sind digitale transeuropäische Dienste?"}
                       >
                         <RichText
                           markdown={dedent`
-                          Geben Sie hier an, welche Dienste im Sinne von
-                          ${markdownLinkIEA({ article: 2, paragraph: 2 })} durch die verbindliche Anforderung betroffen sind.
+                          Beispiele können Dinge sein wie ein Austausch von Dokumenten zu internationalen Warenlieferungen, Meldung von Statistikdaten oder die Kommunikation zwischen involvierten Behörden.
+
+                          Die Verordnung nennt folgende Beispiele:
+                          - Gegenseitige Anerkennung akademischer Diplome oder Berufsqualifikationen
+                          - Austausch von Fahrzeugdaten für die Verkehrssicherheit
+                          - Zugang zu Sozialversicherungs- und Gesundheitsdaten – darunter Pandemie- und Impfbescheinigungen
+                          - Informationsaustausch in Bezug auf Steuern, Zölle, Vergabe öffentlicher Aufträge
+                          - Digitale Führerscheine
+                          - Handelsregister
                           
-                          Beispiele: 
-                          - Austausch von Dokumenten zu internationalen Warenlieferungen
-                          - Meldung von Statistikdaten
-                          - Kommunikation zwischen involvierten Behörden
-                          - EU Building Stock Observatory: monitoring and assessing the progress of Member States towards the national objectives and targets set out in their integrated national energy and climate plans
+                          Siehe ${markdownLinkIEA({ recital: 6, format: "long" })}.
+                          
+                          **Was ist hier zu dokumentieren?**
+                          
+                          *Bevor* Sie neue oder wesentlich veränderte verbindliche Anforderungen festschreiben, die das Design, die Beschaffung, die Entwicklung oder die Implementierung solcher digitalen transeuropäischen Dienste betreffen, müssen Sie deren eine Auswirkungen auf die Interoperabilität bewerten.
                         `}
                         />
                       </HelpButton>

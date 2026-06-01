@@ -2,6 +2,7 @@ import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton.tsx";
 import MetaTitle from "~/components/Meta";
+import NewTabLink from "~/components/NewTabLink.tsx";
 import RichText from "~/components/RichText.tsx";
 import {
   ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
@@ -18,14 +19,10 @@ const helpText = `
 Sofern durch Ihre Regelung vorgesehen ist, dass Daten und Informationen zwischen
 Verwaltungen von EU-Mitgliedsstaaten ausgetauscht werden, muss nach
 ${markdownLinkIEA({ article: 3, format: "long" })} in der Regel
-eine Interoperabilitätsbewertung durchgeführt werden.
+eine Interoperabilitätsbewertung durchgeführt werden.`;
 
-Sollte sich nach den Bestimmungen der Verordnung dennoch keine Verpflichtung zu
-einer Bewertung ergeben und Sie möchten auch keine frewillige Bewertung durchführen,
-wählen Sie die Option "Nein, es ist kein Bezug vorhanden".
-          
-[Mehr zu EU-Interoperabilität](${ROUTE_INTEROPERABILITY.url})
-`;
+const secondaryHelpText = `
+Sollte sich nach den Bestimmungen der Verordnung dennoch keine Verpflichtung zu einer Bewertung ergeben und Sie möchten auch keine frewillige Bewertung durchführen, wählen Sie die Option "Nein, es ist kein Bezug vorhanden".`;
 
 export default function DocumentationEuInteroperabilityRequirements() {
   const { previousUrl, nextUrl } = useOutletContext<NavigationContext>();
@@ -48,6 +45,15 @@ export default function DocumentationEuInteroperabilityRequirements() {
             title={"Bezug zu EU-Interoperabilität"}
           >
             <RichText markdown={helpText} />
+            <NewTabLink
+              to={
+                ROUTE_INTEROPERABILITY.url +
+                "?tab=hintergrund#verbindliche-anforderungen"
+              }
+            >
+              Wann ist eine Interoperabilitäts-Bewertung verpflichtend?
+            </NewTabLink>
+            <RichText markdown={secondaryHelpText} className="mt-8" />
           </HelpButton>
         </p>
         <EuInteroperabilityOutcomeForm />
