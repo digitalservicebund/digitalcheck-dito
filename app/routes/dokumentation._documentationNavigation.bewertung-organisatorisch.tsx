@@ -1,4 +1,4 @@
-import { FormScope } from "@rvf/react";
+import { FormScope, useField } from "@rvf/react";
 import { useOutletContext } from "react-router";
 import { z } from "zod";
 import Badge from "~/components/Badge.tsx";
@@ -28,14 +28,17 @@ import DocumentationActions from "./dokumentation/DocumentationActions";
 function DetailFormElement({
   scope,
 }: Readonly<{
-  scope: FormScope<
-    z.infer<typeof interoperabilityAssessmentLevelSchema>["detail"]
-  >;
+  scope: FormScope<z.infer<typeof interoperabilityAssessmentLevelSchema>>;
 }>) {
+  const field = useField(scope.scope("rating"));
+  const radioValue = field.value();
+  if (!radioValue || radioValue === "not-applicable") {
+    return null;
+  }
   return (
     <Textarea
       description={`Tragen Sie Ihre Erläuterung ein, z. B.: „Anträge müssen innerhalb von 3 Tagen an die zuständige Stelle weitergeleitet werden.“ und Benennung der Stelle.`}
-      scope={scope}
+      scope={scope.scope("detail")}
       rows={5}
       warningInsteadOfError
     >
@@ -93,9 +96,7 @@ export default function DocumentationInteroperabilityAssessment() {
             options={interoperabilityRatingOptions2}
             warningInsteadOfError
           />
-          {form.value("organizational.rating") === "positive" && (
-            <DetailFormElement scope={form.scope("organizational.detail")} />
-          )}
+          <DetailFormElement scope={form.scope("organizational")} />
         </SkipNoticeWrapper>
         <DocumentationActions
           previousUrl={previousUrl}

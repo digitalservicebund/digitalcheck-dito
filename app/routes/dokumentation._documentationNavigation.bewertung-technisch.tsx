@@ -1,4 +1,4 @@
-import { FormScope } from "@rvf/react";
+import { FormScope, useField } from "@rvf/react";
 import { useOutletContext } from "react-router";
 import { z } from "zod";
 import Badge from "~/components/Badge.tsx";
@@ -28,14 +28,18 @@ import DocumentationActions from "./dokumentation/DocumentationActions";
 function DetailFormElement({
   scope,
 }: Readonly<{
-  scope: FormScope<
-    z.infer<typeof interoperabilityAssessmentLevelSchema>["detail"]
-  >;
+  scope: FormScope<z.infer<typeof interoperabilityAssessmentLevelSchema>>;
 }>) {
+  const field = useField(scope.scope("rating"));
+  const radioValue = field.value();
+  if (!radioValue || radioValue === "not-applicable") {
+    return null;
+  }
+
   return (
     <Textarea
       description={`Tragen Sie Ihre Erläuterung ein, z. B.: „Die Schnittstellen entsprechen dem Standard X." oder „Das System nutzt das Protokoll Y."`}
-      scope={scope}
+      scope={scope.scope("detail")}
       rows={5}
       warningInsteadOfError
     >
@@ -70,10 +74,10 @@ export default function DocumentationInteroperabilityAssessmentTechnical() {
             Technische Voraussetzungen für den Datenaustausch schaffen
           </Heading>
           <p>
-            {/* TODO: Add description for technical interoperability */}
-            Systeme müssen technisch in der Lage sein, miteinander zu
-            kommunizieren – durch gemeinsame Protokolle, Schnittstellen und
-            Standards.
+            Die technische Ebene der Interoperabilität sorgt dafür, dass
+            verschiedene Verwaltungen über kompatible IT-Systeme, Datenstandards
+            und Schnittstellen (APIs) tatsächlich miteinander kommunizieren
+            können – ohne manuelle Anpassungen pro Fall.
           </p>
           <DetailsSummary title={"Beispiel"}>
             Der Austausch von Nachweisen zwischen Behörden erfolgt
@@ -92,9 +96,8 @@ export default function DocumentationInteroperabilityAssessmentTechnical() {
             options={interoperabilityRatingOptions2}
             warningInsteadOfError
           />
-          {form.value("technical.rating") === "positive" && (
-            <DetailFormElement scope={form.scope("technical.detail")} />
-          )}
+
+          <DetailFormElement scope={form.scope("technical")} />
         </SkipNoticeWrapper>
         <DocumentationActions
           previousUrl={previousUrl}
