@@ -8,8 +8,8 @@ import Textarea from "~/components/Textarea.tsx";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import {
-  interoperabilityAssessmentSchema,
   type InteroperabilityAssessmentData,
+  interoperabilityAssessmentSchema,
 } from "~/routes/dokumentation/documentationDataSchema.ts";
 import { interoperabilityExplanationParagraphs } from "~/routes/dokumentation/interoperability/explanationMarkdown.ts";
 import { InteroperabilityRatingSelect } from "~/routes/dokumentation/interoperability/InteroperabilityRatingSelect.tsx";
@@ -17,13 +17,7 @@ import {
   Section,
   sections,
 } from "~/routes/dokumentation/interoperability/Sections.tsx";
-
-const defaultAssessmentValues: InteroperabilityAssessmentData = {
-  legal: { detail: "", rating: "" },
-  organizational: { detail: "", rating: "" },
-  semantic: { detail: "", rating: "" },
-  technical: { detail: "", rating: "" },
-};
+import { defaultAssessmentValues } from "~/routes/dokumentation/interoperability/values.ts";
 
 type InteroperabilityLevelSectionProps = Readonly<{
   form: FormApi<InteroperabilityAssessmentData>;

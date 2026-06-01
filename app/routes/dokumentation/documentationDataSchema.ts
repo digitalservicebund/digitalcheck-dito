@@ -288,7 +288,7 @@ const interoperabilityRatingSchema = z.enum([
   "not-applicable",
 ]);
 
-const interoperabilityAssessmentLevelSchema = z.object({
+export const interoperabilityAssessmentLevelSchema = z.object({
   detail: z.string().optional(),
   rating: z.union([interoperabilityRatingSchema, z.literal("")]).optional(),
 });

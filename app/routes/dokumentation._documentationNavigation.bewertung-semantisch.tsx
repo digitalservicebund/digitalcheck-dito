@@ -7,7 +7,7 @@ import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup.tsx";
 import Textarea from "~/components/Textarea.tsx";
 import {
-  ROUTE_DOCUMENTATION_INTEROPERABILITY_ORGANIZATIONAL,
+  ROUTE_DOCUMENTATION_INTEROPERABILITY_SEMANTIC,
   ROUTE_DOCUMENTATION_SUMMARY,
 } from "~/resources/staticRoutes";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
@@ -33,7 +33,7 @@ function DetailFormElement({
 }>) {
   return (
     <Textarea
-      description={`Tragen Sie Ihre Erläuterung ein, z. B.: „Anträge müssen innerhalb von 3 Tagen an die zuständige Stelle weitergeleitet werden.“ und Benennung der Stelle.`}
+      description={`Tragen Sie Ihre Erläuterung ein, z. B.: „Datenbegriffe werden gemäß dem Vokabular X einheitlich definiert." oder „Es wird das Datenmodell Y verwendet."`}
       scope={scope}
       rows={5}
       warningInsteadOfError
@@ -43,7 +43,7 @@ function DetailFormElement({
   );
 }
 
-export default function DocumentationInteroperabilityAssessment() {
+export default function DocumentationInteroperabilityAssessmentSemantic() {
   const { previousUrl, nextUrl } = useOutletContext<NavigationContext>();
 
   const { documentationData, setInteroperabilityAssessmentData } =
@@ -60,40 +60,43 @@ export default function DocumentationInteroperabilityAssessment() {
   return (
     <>
       <MetaTitle
-        prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_INTEROPERABILITY_ORGANIZATIONAL.title}`}
+        prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_INTEROPERABILITY_SEMANTIC.title}`}
       />
       <div className="space-y-40">
         <div className={"space-y-8"}>
-          <Badge look="hint">Organisatorische Interoperabilität</Badge>
+          <Badge look="hint">Semantische Interoperabilität</Badge>
           <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
-            Organisatorische Strukturen für Interoperabilität
+            Gemeinsame Bedeutung von Daten sicherstellen
           </Heading>
           <p>
-            Zuständigkeiten und Prozesse müssen so abgestimmt sein, dass die
-            Zusammenarbeit reibungslos funktionieren kann, anstatt an
-            Behördengrenzen zu stocken.
+            Semantische Klarheit sorgt dafür, dass „was gesendet wird, auch
+            genau so verstanden wird“. Rechtsbegriffe müssen gleich definiert
+            und Datenfelder kompatibel sein, damit IT-Systeme sie zweifelsfrei
+            verarbeiten können.
           </p>
           <p>
-            <strong>Beispiel:</strong> Wenn ein Unternehmen seinen Standort von
-            Deutschland nach Spanien verlegt, sind die beteiligten Behörden
-            beider Länder (z. B. über das Single Digital Gateway) miteinander
-            verknüpft, um die Gewerbeummeldung abzuwickeln. Auch Zuständigkeiten
-            müssen dazu geklärt sein.
+            <strong>Beispiel:</strong> Das Datenfeld für „Wohnsitz“ wird in ganz
+            Europa nach demselben Standard (z. B. den{" "}
+            <i>Semantic Core Vocabularies</i>) definiert. So verstehen das
+            spanische System und das deutsche System dasselbe.
           </p>
         </div>
         <SkipNoticeWrapper>
           <h2 id="question-label" className="ds-heading-03-reg mb-16">
-            Schafft das Regelungsvorhaben die <strong>organisatorischen</strong>{" "}
-            Voraussetzungen für einen Datenaustausch innerhalb der EU?
+            Stellt das Regelungsvorhaben sicher, dass{" "}
+            <strong>
+              semantische Definitionen von Begriffen und Datenfeldern
+            </strong>{" "}
+            den Datenaustausch über EU-Grenzen ermöglichen?
           </h2>
           <RadioGroup
             aria-labelledby="question-label"
-            scope={form.scope("organizational.rating")}
+            scope={form.scope("semantic.rating")}
             options={interoperabilityRatingOptions2}
             warningInsteadOfError
           />
-          {form.value("organizational.rating") === "positive" && (
-            <DetailFormElement scope={form.scope("organizational.detail")} />
+          {form.value("semantic.rating") === "positive" && (
+            <DetailFormElement scope={form.scope("semantic.detail")} />
           )}
         </SkipNoticeWrapper>
         <DocumentationActions

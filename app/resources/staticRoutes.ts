@@ -148,6 +148,26 @@ export const ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT = createRoute(
   "Auswirkungen",
   ROUTE_DOCUMENTATION,
 );
+export const ROUTE_DOCUMENTATION_INTEROPERABILITY_LEGAL = createRoute(
+  "bewertung-rechtlich",
+  "Rechtliche Interoperabilität",
+  ROUTE_DOCUMENTATION,
+);
+export const ROUTE_DOCUMENTATION_INTEROPERABILITY_ORGANIZATIONAL = createRoute(
+  "bewertung-organisatorisch",
+  "Organisatorische Interoperabilität",
+  ROUTE_DOCUMENTATION,
+);
+export const ROUTE_DOCUMENTATION_INTEROPERABILITY_SEMANTIC = createRoute(
+  "bewertung-semantisch",
+  "Semantische Interoperabilität",
+  ROUTE_DOCUMENTATION,
+);
+export const ROUTE_DOCUMENTATION_INTEROPERABILITY_TECHNICAL = createRoute(
+  "bewertung-technisch",
+  "Technische Interoperabilität",
+  ROUTE_DOCUMENTATION,
+);
 export const ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS =
   createRoute(
     "verbindliche-anforderungen",

@@ -7,7 +7,7 @@ import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup.tsx";
 import Textarea from "~/components/Textarea.tsx";
 import {
-  ROUTE_DOCUMENTATION_INTEROPERABILITY_LEGAL,
+  ROUTE_DOCUMENTATION_INTEROPERABILITY_ORGANIZATIONAL,
   ROUTE_DOCUMENTATION_SUMMARY,
 } from "~/resources/staticRoutes";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
@@ -33,9 +33,7 @@ function DetailFormElement({
 }>) {
   return (
     <Textarea
-      description={`Tragen Sie Ihre Erläuterung ein, z. B.: „Die Datenübermittlung erfolgt
-          ausschließlich nach dem Verfahren X.“ oder „Behörde A darf Daten von
-          Behörde B abrufen.“`}
+      description={`Tragen Sie Ihre Erläuterung ein, z. B.: „Anträge müssen innerhalb von 3 Tagen an die zuständige Stelle weitergeleitet werden.“ und Benennung der Stelle.`}
       scope={scope}
       rows={5}
       warningInsteadOfError
@@ -62,38 +60,40 @@ export default function DocumentationInteroperabilityAssessment() {
   return (
     <>
       <MetaTitle
-        prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_INTEROPERABILITY_LEGAL.title}`}
+        prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_INTEROPERABILITY_ORGANIZATIONAL.title}`}
       />
       <div className="space-y-40">
         <div className={"space-y-8"}>
-          <Badge look="hint">Rechtliche Interoperabilität</Badge>
+          <Badge look="hint">Organisatorische Interoperabilität</Badge>
           <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
-            Rechtliche Grundlage für den Datenaustausch schaffen
+            Organisatorische Strukturen für Interoperabilität
           </Heading>
           <p>
-            Eine Regelung sollte so gestaltet sein, dass Behörden Daten über
-            Grenzen hinweg austauschen dürfen. Keine rechtlichen Barrieren
-            dürfen einen digitalen Austausch blockieren.
+            Zuständigkeiten und Prozesse müssen so abgestimmt sein, dass die
+            Zusammenarbeit reibungslos funktionieren kann, anstatt an
+            Behördengrenzen zu stocken.
           </p>
           <p>
-            <strong>Beispiel:</strong> Eine Verordnung erlaubt es einer
-            deutschen Behörde, Bildungsabschlüsse direkt digital bei einer
-            Behörde in Frankreich zu verifizieren.
+            <strong>Beispiel:</strong> Wenn ein Unternehmen seinen Standort von
+            Deutschland nach Spanien verlegt, sind die beteiligten Behörden
+            beider Länder (z. B. über das Single Digital Gateway) miteinander
+            verknüpft, um die Gewerbeummeldung abzuwickeln. Auch Zuständigkeiten
+            müssen dazu geklärt sein.
           </p>
         </div>
         <SkipNoticeWrapper>
           <h2 id="question-label" className="ds-heading-03-reg mb-16">
-            Schafft das Regelungsvorhaben die <strong>rechtlichen</strong>{" "}
+            Schafft das Regelungsvorhaben die <strong>organisatorischen</strong>{" "}
             Voraussetzungen für einen Datenaustausch innerhalb der EU?
           </h2>
           <RadioGroup
             aria-labelledby="question-label"
-            scope={form.scope("legal.rating")}
+            scope={form.scope("organizational.rating")}
             options={interoperabilityRatingOptions2}
             warningInsteadOfError
           />
-          {form.value("legal.rating") === "positive" && (
-            <DetailFormElement scope={form.scope("legal.detail")} />
+          {form.value("organizational.rating") === "positive" && (
+            <DetailFormElement scope={form.scope("organizational.detail")} />
           )}
         </SkipNoticeWrapper>
         <DocumentationActions
