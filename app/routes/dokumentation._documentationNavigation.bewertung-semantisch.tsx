@@ -39,7 +39,9 @@ function DetailFormElement({
   }
   return (
     <Textarea
-      description={`Tragen Sie Ihre Erläuterung ein, z. B.: „Datenbegriffe werden gemäß dem Vokabular X einheitlich definiert." oder „Es wird das Datenmodell Y verwendet."`}
+      description={
+        "Tragen Sie Ihre Erläuterung ein, z. B.: „Datenbegriffe werden gemäß dem Vokabular X einheitlich definiert.” oder „Es wird das Datenmodell Y verwendet.”"
+      }
       scope={scope.scope("detail")}
       rows={5}
       warningInsteadOfError

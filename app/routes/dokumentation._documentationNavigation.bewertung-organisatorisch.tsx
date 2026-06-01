@@ -37,7 +37,9 @@ function DetailFormElement({
   }
   return (
     <Textarea
-      description={`Tragen Sie Ihre Erläuterung ein, z. B.: „Anträge müssen innerhalb von 3 Tagen an die zuständige Stelle weitergeleitet werden.“ und Benennung der Stelle.`}
+      description={
+        "Tragen Sie Ihre Erläuterung ein, z. B.: „Anträge müssen innerhalb von 3 Tagen an die zuständige Stelle weitergeleitet werden.“ und Benennung der Stelle."
+      }
       scope={scope.scope("detail")}
       rows={5}
       warningInsteadOfError
