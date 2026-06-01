@@ -2,6 +2,7 @@ import { FormScope } from "@rvf/react";
 import { useOutletContext } from "react-router";
 import { z } from "zod";
 import Badge from "~/components/Badge.tsx";
+import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Heading from "~/components/Heading";
 import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup.tsx";
@@ -73,13 +74,13 @@ export default function DocumentationInteroperabilityAssessment() {
             Zusammenarbeit reibungslos funktionieren kann, anstatt an
             Behördengrenzen zu stocken.
           </p>
-          <p>
-            <strong>Beispiel:</strong> Wenn ein Unternehmen seinen Standort von
-            Deutschland nach Spanien verlegt, sind die beteiligten Behörden
-            beider Länder (z. B. über das Single Digital Gateway) miteinander
-            verknüpft, um die Gewerbeummeldung abzuwickeln. Auch Zuständigkeiten
-            müssen dazu geklärt sein.
-          </p>
+          <DetailsSummary title={"Beispiel"}>
+            Wenn ein Unternehmen seinen Standort von Deutschland nach Spanien
+            verlegt, sind die beteiligten Behörden beider Länder (z. B. über das
+            Single Digital Gateway) miteinander verknüpft, um die
+            Gewerbeummeldung abzuwickeln. Auch Zuständigkeiten müssen dazu
+            geklärt sein.
+          </DetailsSummary>
         </div>
         <SkipNoticeWrapper>
           <h2 id="question-label" className="ds-heading-03-reg mb-16">

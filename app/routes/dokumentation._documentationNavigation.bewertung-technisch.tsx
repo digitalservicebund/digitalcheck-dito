@@ -2,6 +2,7 @@ import { FormScope } from "@rvf/react";
 import { useOutletContext } from "react-router";
 import { z } from "zod";
 import Badge from "~/components/Badge.tsx";
+import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Heading from "~/components/Heading";
 import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup.tsx";
@@ -74,11 +75,11 @@ export default function DocumentationInteroperabilityAssessmentTechnical() {
             kommunizieren – durch gemeinsame Protokolle, Schnittstellen und
             Standards.
           </p>
-          <p>
-            <strong>Beispiel:</strong> {/* TODO: Add a concrete example */}
-            Eine Regelung schreibt vor, dass Meldedaten über eine definierte
-            REST-API im JSON-Format übermittelt werden.
-          </p>
+          <DetailsSummary title={"Beispiel"}>
+            Der Austausch von Nachweisen zwischen Behörden erfolgt
+            vollautomatisch im Hintergrund über standardisierte Schnittstellen
+            (APIs) und gesicherte europäische Netze.
+          </DetailsSummary>
         </div>
         <SkipNoticeWrapper>
           <h2 id="question-label" className="ds-heading-03-reg mb-16">

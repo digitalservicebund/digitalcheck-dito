@@ -2,6 +2,7 @@ import { FormScope } from "@rvf/react";
 import { useOutletContext } from "react-router";
 import { z } from "zod";
 import Badge from "~/components/Badge.tsx";
+import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Heading from "~/components/Heading";
 import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup.tsx";
@@ -75,11 +76,11 @@ export default function DocumentationInteroperabilityAssessment() {
             Grenzen hinweg austauschen dürfen. Keine rechtlichen Barrieren
             dürfen einen digitalen Austausch blockieren.
           </p>
-          <p>
-            <strong>Beispiel:</strong> Eine Verordnung erlaubt es einer
-            deutschen Behörde, Bildungsabschlüsse direkt digital bei einer
-            Behörde in Frankreich zu verifizieren.
-          </p>
+          <DetailsSummary title={"Beispiel"}>
+            Eine Verordnung erlaubt es einer deutschen Behörde,
+            Bildungsabschlüsse direkt digital bei einer Behörde in Frankreich zu
+            verifizieren.
+          </DetailsSummary>
         </div>
         <SkipNoticeWrapper>
           <h2 id="question-label" className="ds-heading-03-reg mb-16">

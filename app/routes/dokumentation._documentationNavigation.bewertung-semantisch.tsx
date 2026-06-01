@@ -2,6 +2,7 @@ import { FormScope } from "@rvf/react";
 import { useOutletContext } from "react-router";
 import { z } from "zod";
 import Badge from "~/components/Badge.tsx";
+import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Heading from "~/components/Heading";
 import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup.tsx";
@@ -74,12 +75,11 @@ export default function DocumentationInteroperabilityAssessmentSemantic() {
             und Datenfelder kompatibel sein, damit IT-Systeme sie zweifelsfrei
             verarbeiten können.
           </p>
-          <p>
-            <strong>Beispiel:</strong> Das Datenfeld für „Wohnsitz“ wird in ganz
-            Europa nach demselben Standard (z. B. den{" "}
-            <i>Semantic Core Vocabularies</i>) definiert. So verstehen das
-            spanische System und das deutsche System dasselbe.
-          </p>
+          <DetailsSummary title={"Beispiel"}>
+            Das Datenfeld für „Wohnsitz“ wird in ganz Europa nach demselben
+            Standard (z. B. den <i>Semantic Core Vocabularies</i>) definiert. So
+            verstehen das spanische System und das deutsche System dasselbe.
+          </DetailsSummary>
         </div>
         <SkipNoticeWrapper>
           <h2 id="question-label" className="ds-heading-03-reg mb-16">
