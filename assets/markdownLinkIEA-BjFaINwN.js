@@ -1,0 +1,1 @@
+function e({article:e,paragraph:n,format:r=`short`}){let i=`Art. ${e}`;return n&&(i+=` ${e===2?`Nr.`:`Abs.`} ${n}`),i+=r===`long`?` der Verordnung für ein interoperables Europa (EU) 2024/903`:``,`[${i}](${t(e)})`}function t(e){let t=`https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903`;return e?`${t}#art_${e}`:t}export{e as t};

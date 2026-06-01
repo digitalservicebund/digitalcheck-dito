@@ -1,0 +1,1 @@
+var e=e=>{let n=new Map;n.set(`pdf`,`PDF`),n.set(`docx`,`DOCX`),n.set(`xlsx`,`XLSX`),n.set(`pptx`,`PPTX`),n.set(`json`,`JSON`);let r=t(e);return(r&&n.get(r))??void 0},t=e=>{let t=e.lastIndexOf(`/`),n=e.lastIndexOf(`.`);return n>t?e.substring(n+1):null};export{e as t};
