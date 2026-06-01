@@ -5,11 +5,13 @@ import Badge from "~/components/Badge.tsx";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Heading from "~/components/Heading";
 import MetaTitle from "~/components/Meta";
+import NewTabLink from "~/components/NewTabLink.tsx";
 import RadioGroup from "~/components/RadioGroup.tsx";
 import Textarea from "~/components/Textarea.tsx";
 import {
   ROUTE_DOCUMENTATION_INTEROPERABILITY_SEMANTIC,
   ROUTE_DOCUMENTATION_SUMMARY,
+  ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES,
 } from "~/resources/staticRoutes";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
@@ -80,8 +82,14 @@ export default function DocumentationInteroperabilityAssessmentSemantic() {
           </p>
           <DetailsSummary title={"Beispiel"}>
             Das Datenfeld für „Wohnsitz“ wird in ganz Europa nach demselben
-            Standard (z. B. den <i>Semantic Core Vocabularies</i>) definiert. So
-            verstehen das spanische System und das deutsche System dasselbe.
+            Standard (z. B. den{" "}
+            <NewTabLink
+              to={ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES.url}
+            >
+              <i>Semantic Core Vocabularies</i>
+            </NewTabLink>
+            ) definiert. So verstehen das spanische System und das deutsche
+            System dasselbe.
           </DetailsSummary>
         </div>
         <SkipNoticeWrapper>
