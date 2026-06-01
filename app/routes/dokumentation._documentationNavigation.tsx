@@ -10,7 +10,6 @@ import {
   type Route as _Route,
   ROUTE_DOCUMENTATION,
   ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
-  ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
   ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS,
   ROUTE_DOCUMENTATION_INTEROPERABILITY_LEGAL,
   ROUTE_DOCUMENTATION_INTEROPERABILITY_ORGANIZATIONAL,
@@ -128,10 +127,6 @@ const documentationNavigationTree: NavigationDefinition[] = [
       createRouteItem(
         "interoperability-binding-requirements",
         ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS.url,
-      ),
-      createRouteItem(
-        "interoperability-assessment",
-        ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT.url,
       ),
       createRouteItem(
         "assessment-legal",
