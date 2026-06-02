@@ -10,7 +10,7 @@ import HelpButton from "~/components/HelpButton";
 import MetaTitle from "~/components/Meta";
 import Textarea from "~/components/Textarea";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
+import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
@@ -22,7 +22,7 @@ const { radioOptions } = digitalDocumentation.principlePages;
 
 type DocumentationPrincipleErlaeuterungFormProps = Readonly<{
   answer: string;
-  prinzip: PrinzipWithAspekteAndExample;
+  prinzip: PrinzipWithAspekte;
   principleData: Principle;
   isPositive: boolean;
   isIrrelevant: boolean;
@@ -251,7 +251,7 @@ export function ErlaeuterungPage({
   currentUrl,
   principleId,
 }: Readonly<{
-  prinzips: PrinzipWithAspekteAndExample[];
+  prinzips: PrinzipWithAspekte[];
   currentUrl: string;
   principleId: string;
 }>) {

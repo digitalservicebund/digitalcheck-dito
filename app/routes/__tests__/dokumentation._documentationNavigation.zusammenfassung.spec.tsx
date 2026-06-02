@@ -20,6 +20,7 @@ import type {
   Principle,
   V2,
 } from "~/routes/dokumentation/documentationDataSchema";
+import { RouteGroup } from "~/routes/dokumentation/DocumentationNavigationContext.tsx";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import type { AbsatzWithParagraph } from "~/utils/strapiData.types";
 import { DocumentationSummary } from "../dokumentation._documentationNavigation.zusammenfassung";
@@ -34,15 +35,15 @@ const MOCK_ROUTE_PRINCIPLE = {
   navOrder: null,
   navLabel: null,
 };
-const routes: (Route[] | Route)[] = [
+const routes: (RouteGroup | Route)[] = [
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
   dokumentation_beteiligungsformate,
-  [MOCK_ROUTE_PRINCIPLE],
+  { title: "Prinzipien", routes: [MOCK_ROUTE_PRINCIPLE] },
 ];
 
 const documentationFormRoutes = routes
-  .flat()
+  .flatMap((route) => ("routes" in route ? route.routes : route))
   .filter((route) => route.path !== dokumentation_hinweise.path);
 
 function createDocumentationDataMock({

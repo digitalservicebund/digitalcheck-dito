@@ -1,25 +1,51 @@
 import {
   dokumentation,
   dokumentation_absenden,
+  dokumentation_beteiligungsformate,
   dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
   dokumentation_zusammenfassung,
 } from "@/config/routes";
-import type { ReactNode } from "react";
+import { ReactNode, useMemo } from "react";
 import { Outlet, useLocation, useRouteLoaderData } from "react-router";
 import HelpSidepanel from "~/components/HelpSidepanel";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
+import { loader } from "~/routes/dokumentation/route.tsx";
+import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
+import type {
+  Route,
+  RouteGroup,
+} from "./dokumentation/DocumentationNavigationContext";
 import { DocumentationNavigationContext } from "./dokumentation/DocumentationNavigationContext";
 
-type _Route = { path: string; title: string };
-
-type Route = _Route & {
-  principleId?: string;
+const ROUTE_DOCUMENTATION = {
+  path: dokumentation.path,
+  title: dokumentation.title,
 };
+const ROUTES_DOCUMENTATION_INTRO: Route[] = [
+  { path: dokumentation_hinweise.path, title: dokumentation_hinweise.title },
+  {
+    path: dokumentation_regelungsvorhabenTitel.path,
+    title: dokumentation_regelungsvorhabenTitel.title,
+  },
+  {
+    path: dokumentation_beteiligungsformate.path,
+    title: dokumentation_beteiligungsformate.title,
+  },
+];
+
+const ROUTES_DOCUMENTATION_FINALIZE: Route[] = [
+  {
+    path: dokumentation_zusammenfassung.path,
+    title: dokumentation_zusammenfassung.title,
+  },
+  { path: dokumentation_absenden.path, title: dokumentation_absenden.title },
+];
+const getUrlForSlug = (slug: string) => `${ROUTE_DOCUMENTATION.path}/${slug}`;
 
 export type OnNavigateCallback = () => Promise<boolean>;
 export type NavigationContext = {
@@ -27,8 +53,8 @@ export type NavigationContext = {
   navigationBaseUrl: string;
   nextUrl: string;
   previousUrl: string;
-  routes: (Route | Route[])[];
-  prinzips: PrinzipWithAspekteAndExample[];
+  routes: (Route | RouteGroup)[];
+  prinzips: PrinzipWithAspekte[];
 };
 
 function findIndexForRoute(routes: Route[], currentUrl: string) {
@@ -77,14 +103,14 @@ export function LayoutWithDocumentationNavigation({
   children,
   currentUrl,
 }: Readonly<{
-  routes: (Route | Route[])[];
-  prinzips: PrinzipWithAspekteAndExample[];
+  routes: (Route | RouteGroup)[];
+  prinzips: PrinzipWithAspekte[];
   children?: ReactNode;
   currentUrl: string;
 }>) {
   // exclude documentation notes
   const displayedRoutes = routes.filter((route) => {
-    if (Array.isArray(route)) return true;
+    if ("routes" in route) return true; // RouteGroup
     return route.path !== dokumentation_hinweise.path;
   });
 
@@ -98,7 +124,9 @@ export function LayoutWithDocumentationNavigation({
   const { findDocumentationDataForUrl, getDocumentationSchemaFormUrl } =
     useDocumentationDataService();
 
-  const flatRoutes = routes.flat();
+  const flatRoutes = routes.flatMap((route) =>
+    "routes" in route ? route.routes : route,
+  );
   const currentRoute = flatRoutes.find((r) => r.path === navigationBaseUrl);
   const currentPrincipleFormData = currentRoute?.principleId
     ? findDocumentationDataForUrl(currentRoute.principleId)
@@ -169,14 +197,17 @@ export function LayoutWithDocumentationNavigation({
     );
   };
 
-  const navigationContextValue = {
-    currentUrl,
-    navigationBaseUrl,
-    nextUrl: nextUrl ?? "",
-    previousUrl,
-    routes,
-    prinzips,
-  };
+  const navigationContextValue = useMemo(
+    () => ({
+      currentUrl,
+      navigationBaseUrl,
+      nextUrl: nextUrl ?? "",
+      previousUrl,
+      routes,
+      prinzips,
+    }),
+    [currentUrl, navigationBaseUrl, nextUrl, previousUrl, routes, prinzips],
+  );
 
   return (
     <DocumentationNavigationContext.Provider value={navigationContextValue}>
@@ -195,18 +226,18 @@ export function LayoutWithDocumentationNavigation({
           >
             <Nav.Items>
               {displayedRoutes.map((route) => {
-                if (Array.isArray(route))
+                if ("routes" in route)
                   return (
                     <Nav.Item
-                      key="principles"
+                      key={route.title}
                       disabled={isNavigationDisabled}
                       subItems={
                         <Nav.Items>
-                          {route.map((element) => getNavItem(element))}
+                          {route.routes.map((element) => getNavItem(element))}
                         </Nav.Items>
                       }
                     >
-                      {digitalDocumentation.navigation.principles}
+                      {route.title}
                     </Nav.Item>
                   );
                 return getNavItem(route);
@@ -217,7 +248,7 @@ export function LayoutWithDocumentationNavigation({
             <div className="lg:hidden">
               <Stepper
                 currentElementUrl={navigationBaseUrl}
-                elements={routes.flat()}
+                elements={flatRoutes}
               />
             </div>
             {/* force remount for different principles with key={currentUrl} */}
@@ -242,16 +273,29 @@ export function LayoutWithDocumentationNavigation({
 }
 
 export default function Route() {
-  const data = useRouteLoaderData<{
-    routes: (Route | Route[])[];
-    prinzips: PrinzipWithAspekteAndExample[];
-  }>("routes/dokumentation");
+  const data = useRouteLoaderData<typeof loader>("routes/dokumentation");
   const location = useLocation();
   const currentUrl = location.pathname;
   if (!data) return null;
+
+  const routes: (Route | RouteGroup)[] = [
+    ...ROUTES_DOCUMENTATION_INTRO,
+    {
+      title: "Prinzipien",
+      routes: data.prinzips.map<Route>(
+        ({ Name, URLBezeichnung, documentId }) => ({
+          title: Name,
+          path: getUrlForSlug(URLBezeichnung),
+          principleId: documentId,
+        }),
+      ),
+    },
+    ...ROUTES_DOCUMENTATION_FINALIZE,
+  ];
+
   return (
     <LayoutWithDocumentationNavigation
-      routes={data.routes}
+      routes={routes}
       prinzips={data.prinzips}
       currentUrl={currentUrl}
     />
