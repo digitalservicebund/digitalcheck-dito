@@ -30,7 +30,6 @@ export default function DropdownContentList({
   isOrderedList = false,
   onItemClick,
   isMobile = false,
-  parentPlausibleEvent,
 }: Readonly<DropdownContentListProps>) {
   const location = useLocation();
   const listClasses = twMerge(
