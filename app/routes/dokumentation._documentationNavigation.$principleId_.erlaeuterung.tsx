@@ -9,7 +9,7 @@ import HelpButton from "~/components/HelpButton";
 import MetaTitle from "~/components/Meta";
 import Textarea from "~/components/Textarea";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
+import { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
@@ -24,7 +24,7 @@ const { radioOptions } = digitalDocumentation.principlePages;
 
 type DocumentationPrincipleErlaeuterungFormProps = {
   answer: string;
-  prinzip: PrinzipWithAspekteAndExample;
+  prinzip: PrinzipWithAspekte;
   principleData: Principle;
   isPositive: boolean;
   isIrrelevant: boolean;

@@ -1,16 +1,21 @@
 "use client";
 import { createContext, useContext } from "react";
-import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
+import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 
-type Route = { path: string; title: string; principleId?: string };
+export type Route = { path: string; title: string; principleId?: string };
+
+export type RouteGroup = {
+  title: string;
+  routes: Route[];
+};
 
 export type DocumentationNavigationContextType = {
   currentUrl: string;
   navigationBaseUrl: string;
   nextUrl: string;
   previousUrl: string;
-  routes: (Route | Route[])[];
-  prinzips: PrinzipWithAspekteAndExample[];
+  routes: (Route | RouteGroup)[];
+  prinzips: PrinzipWithAspekte[];
 };
 
 export const DocumentationNavigationContext =

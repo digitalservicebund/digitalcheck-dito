@@ -154,9 +154,9 @@ export const dokumentation_zusammenfassung = {
   navLabel: null,
 } as const;
 
-export const dokumentation_interoperabilitaet = {
-  key: "dokumentation_interoperabilitaet",
-  path: "/dokumentation/interoperabilitaet",
+export const dokumentation_euInteroperabilitaetsbezug = {
+  key: "dokumentation_euInteroperabilitaetsbezug",
+  path: "/dokumentation/eu-interoperabilitaetsbezug",
   title: "Interoperabilität",
   parent: dokumentation,
   sitemap: true,
@@ -165,7 +165,7 @@ export const dokumentation_interoperabilitaet = {
   navLabel: null,
 } as const;
 
-export const dokumentation_verbindliche_anforderungen = {
+export const dokumentation_verbindlicheAnforderungen = {
   key: "dokumentation_verbindliche_anforderungen",
   path: "/dokumentation/verbindliche-anforderungen",
   title: "Verbindliche Anforderungen",
@@ -180,6 +180,39 @@ export const dokumentation_bewertungRechtlich = {
   key: "dokumentation_bewertungRechtlich",
   path: "/dokumentation/bewertung-rechtlich",
   title: "Rechtliche Interoperabilität",
+  parent: dokumentation,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const dokumentation_bewertungOrganisatorisch = {
+  key: "dokumentation_bewertungOrganisatorisch",
+  path: "/dokumentation/bewertung-organisatorisch",
+  title: "Organisatorische Interoperabilität",
+  parent: dokumentation,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const dokumentation_bewertungSemantisch = {
+  key: "dokumentation_bewertungSemantisch",
+  path: "/dokumentation/bewertung-semantisch",
+  title: "Semantische Interoperabilität",
+  parent: dokumentation,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const dokumentation_bewertungTechnisch = {
+  key: "dokumentation_bewertungTechnisch",
+  path: "/dokumentation/bewertung-technisch",
+  title: "Technische Interoperabilität",
   parent: dokumentation,
   sitemap: true,
   isStagingOnly: false,
@@ -552,8 +585,12 @@ export const allRoutes = [
   dokumentation_beteiligungsformate,
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
-  dokumentation_verbindliche_anforderungen,
-  dokumentation_interoperabilitaet,
+  dokumentation_verbindlicheAnforderungen,
+  dokumentation_euInteroperabilitaetsbezug,
+  dokumentation_bewertungRechtlich,
+  dokumentation_bewertungOrganisatorisch,
+  dokumentation_bewertungSemantisch,
+  dokumentation_bewertungTechnisch,
   dokumentation_zusammenfassung,
   grundlagen,
   grundlagen_digitaltauglichkeit,

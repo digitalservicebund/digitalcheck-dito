@@ -1,5 +1,5 @@
 import {
-  dokumentation_verbindliche_anforderungen,
+  dokumentation_verbindlicheAnforderungen,
   interoperabel,
 } from "@/config/routes.ts";
 import { useOutletContext } from "react-router";
@@ -29,7 +29,7 @@ export default function DocumentationEuInteroperabilityRequirements() {
   return (
     <>
       <MetaTitle
-        prefix={`Dokumentation: ${dokumentation_verbindliche_anforderungen.title}`}
+        prefix={`Dokumentation: ${dokumentation_verbindlicheAnforderungen.title}`}
       />
       <div className="space-y-40">
         <Heading

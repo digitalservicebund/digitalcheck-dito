@@ -1,5 +1,4 @@
 "use client";
-import type { Route as _Route } from "@/config/routes";
 import {
   dokumentation,
   dokumentation_absenden,
@@ -11,9 +10,11 @@ import {
 import type { ReactNode } from "react";
 import { LayoutWithDocumentationNavigation } from "~/routes/dokumentation._documentationNavigation";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
+import type {
+  Route,
+  RouteGroup,
+} from "~/routes/dokumentation/DocumentationNavigationContext";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
-
-type Route = _Route & { principleId?: string };
 
 const ROUTES_DOCUMENTATION_INTRO: Route[] = [
   dokumentation_hinweise,
@@ -31,20 +32,17 @@ function buildDocumentationRoutes(
     PrinzipWithAspekteAndExample,
     "Name" | "URLBezeichnung" | "documentId"
   >[],
-): (Route | Route[])[] {
+): (Route | RouteGroup)[] {
   return [
     ...ROUTES_DOCUMENTATION_INTRO,
-    prinzips.map<Route>(({ Name, URLBezeichnung, documentId }) => ({
-      title: Name,
-      path: `${dokumentation.path}/${URLBezeichnung}`,
-      principleId: documentId,
-      key: `${documentId}`,
-      parent: null,
-      sitemap: false,
-      isStagingOnly: false,
-      navOrder: null,
-      navLabel: null,
-    })),
+    {
+      title: "Prinzipien",
+      routes: prinzips.map<Route>(({ Name, URLBezeichnung, documentId }) => ({
+        title: Name,
+        path: `${dokumentation.path}/${URLBezeichnung}`,
+        principleId: documentId,
+      })),
+    },
     ...ROUTES_DOCUMENTATION_FINALIZE,
   ];
 }

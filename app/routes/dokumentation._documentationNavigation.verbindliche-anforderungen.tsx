@@ -1,6 +1,6 @@
 import {
   dokumentation_bewertungRechtlich,
-  dokumentation_verbindliche_anforderungen,
+  dokumentation_verbindlicheAnforderungen,
   dokumentation_zusammenfassung,
 } from "@/config/routes.ts";
 import { useOutletContext } from "react-router";
@@ -17,13 +17,13 @@ export default function DocumentationInteroperabilityAssessment() {
   return (
     <>
       <MetaTitle
-        prefix={`Dokumentation: ${dokumentation_verbindliche_anforderungen.title}`}
+        prefix={`Dokumentation: ${dokumentation_verbindlicheAnforderungen.title}`}
       />
       <div className="space-y-40">
         <div className={"space-y-8"}>
           <p className={"ds-subhead"}>EU-Interoperabilität</p>
           <Heading
-            text={dokumentation_verbindliche_anforderungen.title}
+            text={dokumentation_verbindlicheAnforderungen.title}
             tagName="h1"
             look="ds-heading-02-reg"
             className="mb-16"

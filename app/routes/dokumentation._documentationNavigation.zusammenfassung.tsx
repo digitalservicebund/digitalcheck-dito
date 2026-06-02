@@ -1,9 +1,9 @@
 import type { Route } from "@/config/routes";
 import {
   dokumentation_beteiligungsformate,
-  dokumentation_interoperabilitaet,
+  dokumentation_euInteroperabilitaetsbezug,
   dokumentation_regelungsvorhabenTitel,
-  dokumentation_verbindliche_anforderungen,
+  dokumentation_verbindlicheAnforderungen,
   dokumentation_zusammenfassung,
 } from "@/config/routes";
 import { type ReactNode } from "react";
@@ -288,13 +288,13 @@ function createInteroperabilityInfoBoxItems(
   return [
     createInfoBoxItem({
       heading: "EU-Interoperabilität",
-      route: dokumentation_interoperabilitaet,
+      route: dokumentation_euInteroperabilitaetsbezug,
       content: <InteroperabilityContent data={documentationData} />,
     }),
     detailsRequired &&
       createInfoBoxItem({
         heading: "Verbindliche Anforderungen",
-        route: dokumentation_verbindliche_anforderungen,
+        route: dokumentation_verbindlicheAnforderungen,
         content: BindingRequirementSummary(
           documentationData.bindingRequirements,
         ),
@@ -328,7 +328,7 @@ export function DocumentationSummary() {
     }),
     ...prinzips.map((prinzip) => {
       const principleRoute = routes
-        .flat()
+        .flatMap((route) => ("routes" in route ? route.routes : route))
         .find((route) => route.path.endsWith(prinzip.URLBezeichnung));
       if (!principleRoute)
         throw new Error(

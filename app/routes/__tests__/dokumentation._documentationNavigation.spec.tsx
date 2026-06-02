@@ -5,10 +5,9 @@ import "./utils/mockLocalStorageVersioned";
 import {
   dokumentation,
   dokumentation_beteiligungsformate,
+  dokumentation_euInteroperabilitaetsbezug,
   dokumentation_hinweise,
-  dokumentation_interoperabilitaet,
   dokumentation_regelungsvorhabenTitel,
-  Route,
 } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { act, render, screen, within } from "@testing-library/react";
@@ -16,7 +15,11 @@ import { MemoryRouter, useRouteLoaderData } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { LayoutWithDocumentationNavigation } from "~/routes/dokumentation._documentationNavigation";
-import { useDocumentationNavigation } from "~/routes/dokumentation/DocumentationNavigationContext";
+import {
+  type Route,
+  type RouteGroup,
+  useDocumentationNavigation,
+} from "~/routes/dokumentation/DocumentationNavigationContext";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import type {
@@ -29,30 +32,31 @@ import {
   DATA_SCHEMA_VERSION_V2,
 } from "../dokumentation/documentationDataSchema";
 
-const mockRoutes: (Route[] | Route)[] = [
+const mockRoutes: (RouteGroup | Route)[] = [
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
   dokumentation_beteiligungsformate,
-  [
-    {
-      title: "Prinzip A",
-      path: `${dokumentation.path}/prinzipA`,
-      key: "prinzipA",
-      parent: null,
-      sitemap: false,
-      isStagingOnly: false,
-      navOrder: null,
-      navLabel: null,
-    },
-  ],
+  {
+    title: "Prinzipien",
+    routes: [
+      {
+        title: "Prinzip A",
+        path: `${dokumentation.path}/prinzipA`,
+      },
+    ],
+  },
 ];
 
 /**
  * Routes that are relevant for forms interaction, excluding the notes page, and summary/send steps.
  */
-const documentationFormRoutes = mockRoutes
-  .flat()
-  .filter((route) => route.path !== dokumentation_hinweise.path);
+const flattenedMockRoutes = mockRoutes.flatMap((route) =>
+  "routes" in route ? route.routes : route,
+);
+
+const documentationFormRoutes = flattenedMockRoutes.filter(
+  (route) => route.path !== dokumentation_hinweise.path,
+);
 
 type ValidationScenario = {
   name: string;
@@ -259,16 +263,16 @@ describe("navigation on pages of documentation", () => {
     vi.restoreAllMocks();
   });
 
-  it.each(mockRoutes.flat())(
+  it.each(flattenedMockRoutes)(
     "$path has back and forth navigation to previous and next page",
     (route) => {
       renderPage(route);
 
-      const index = mockRoutes
-        .flat()
-        .findIndex(({ path }) => path === route.path);
-      const previous = mockRoutes.flat()[index - 1];
-      const next = mockRoutes.flat()[index + 1];
+      const index = flattenedMockRoutes.findIndex(
+        ({ path }) => path === route.path,
+      );
+      const previous = flattenedMockRoutes[index - 1];
+      const next = flattenedMockRoutes[index + 1];
 
       if (previous) {
         expect(screen.getByRole("link", { name: "Zurück" })).toHaveAttribute(
@@ -309,7 +313,7 @@ describe("navigation on pages of documentation", () => {
           title: "Prinzip A",
           url: `${dokumentation.path}/prinzipA`,
         },
-        dokumentation_interoperabilitaet,
+        dokumentation_euInteroperabilitaetsbezug,
       ],
     });
     vi.mocked(readDataFromLocalStorage<DocumentationData<V1>>).mockReturnValue({
