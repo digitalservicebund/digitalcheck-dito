@@ -1,5 +1,5 @@
+import { beispiele_prinzipien } from "@/config/routes";
 import { Link, useLoaderData, useOutletContext } from "react-router";
-
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Heading from "~/components/Heading";
@@ -11,16 +11,13 @@ import RegulationMetadata from "~/components/RegulationMetadata";
 import Separator from "~/components/Separator";
 import RouteTabs from "~/components/Tabs/RouteTabs";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
-import {
-  ROUTE_EXAMPLES_PRINCIPLES,
-  ROUTE_REGELUNGEN,
-} from "~/resources/staticRoutes";
+import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
 import {
   fetchStrapiData,
   paragraphFields,
   prinzipCoreFields,
-  PrinzipWithBeispielvorhaben,
 } from "~/utils/strapiData.server";
+import type { PrinzipWithBeispielvorhaben } from "~/utils/strapiData.types";
 import type { Route } from "./+types/beispiele.prinzipien.$prinzip";
 
 const GET_PRINZIPS_QUERY = `
@@ -63,20 +60,23 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
   return { prinzip: prinzipData.prinzips[0] };
 };
 
-export default function DigitaltauglichkeitPrinzipienDetail() {
-  const { prinzip } = useLoaderData<typeof loader>();
-  const prinzips = useOutletContext<PrinzipWithBeispielvorhaben[]>();
-
+export function DigitaltauglichkeitPrinzipienDetail({
+  prinzip,
+  prinzips,
+}: Readonly<{
+  prinzip: PrinzipWithBeispielvorhaben;
+  prinzips: PrinzipWithBeispielvorhaben[];
+}>) {
   const { Beispielvorhaben } = prinzip;
   const tabs = prinzips.map((principle) => ({
     key: principle.URLBezeichnung,
     label: principle.Kurzbezeichnung,
-    to: `${ROUTE_EXAMPLES_PRINCIPLES.url}/${principle.URLBezeichnung}`,
+    to: `${beispiele_prinzipien.path}/${principle.URLBezeichnung}`,
   }));
 
   return (
     <>
-      <MetaTitle prefix={ROUTE_EXAMPLES_PRINCIPLES.title} />
+      <MetaTitle prefix={beispiele_prinzipien.title} />
       <Hero
         title={examplesRegelungen.principles.hero.title}
         subtitle={examplesRegelungen.principles.hero.subtitle}
@@ -116,7 +116,7 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
                     />
 
                     <Link
-                      to={`${ROUTE_REGELUNGEN.url}/${exampleProject.URLBezeichnung}`}
+                      to={`${ROUTE_REGELUNGEN}/${exampleProject.URLBezeichnung}`}
                       prefetch="viewport"
                       className="text-link"
                     >
@@ -137,5 +137,16 @@ export default function DigitaltauglichkeitPrinzipienDetail() {
         )}
       </ContentWrapper>
     </>
+  );
+}
+
+export default function Route() {
+  const { prinzip } = useLoaderData<typeof loader>();
+  const prinzips = useOutletContext<PrinzipWithBeispielvorhaben[]>();
+  return (
+    <DigitaltauglichkeitPrinzipienDetail
+      prinzip={prinzip}
+      prinzips={prinzips}
+    />
   );
 }

@@ -1,8 +1,7 @@
 import { HelpOutlineOutlined } from "@digitalservicebund/icons";
-import { ReactNode, useEffect } from "react";
-import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
+import type { ReactNode } from "react";
+import { useEffect } from "react";
 import { useHelpPanel } from "~/contexts/HelpPanelContext";
-import { features } from "~/utils/featureFlags";
 import customTwMerge from "~/utils/tailwindMerge";
 
 type HelpButtonProps = {
@@ -13,7 +12,7 @@ type HelpButtonProps = {
 };
 
 /**
- * Renders an inline help icon for a section when the simplified flow feature flag is enabled.
+ * Renders an inline help icon for a section.
  * Pass a stable `sectionId` and provide `title` + `children` to register the section's help
  * content; clicking the icon opens the help panel for that section.
  */
@@ -24,15 +23,12 @@ export default function HelpButton({
   children,
 }: Readonly<HelpButtonProps>) {
   const { openPanel, registerSection } = useHelpPanel();
-  const simplifiedFlow = useFeatureFlag(features.simplifiedPrincipleFlow);
 
   useEffect(() => {
     if (title && children) {
       registerSection({ id: sectionId, title, content: children });
     }
   }, [sectionId, title, children, registerSection]);
-
-  if (!simplifiedFlow) return null;
 
   return (
     <>

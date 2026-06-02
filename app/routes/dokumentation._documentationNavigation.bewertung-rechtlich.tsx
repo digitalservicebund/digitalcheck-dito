@@ -7,10 +7,8 @@ import Heading from "~/components/Heading";
 import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup.tsx";
 import Textarea from "~/components/Textarea.tsx";
-import {
-  ROUTE_DOCUMENTATION_INTEROPERABILITY_LEGAL,
-  ROUTE_DOCUMENTATION_SUMMARY,
-} from "~/resources/staticRoutes";
+
+import { dokumentation_zusammenfassung } from "@/config/routes.ts";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
 import {
@@ -65,9 +63,7 @@ export default function DocumentationInteroperabilityAssessment() {
 
   return (
     <>
-      <MetaTitle
-        prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_INTEROPERABILITY_LEGAL.title}`}
-      />
+      <MetaTitle prefix={"Dokumentation: Rechtliche Interoperabilität"} />
       <div className="space-y-40">
         <div className={"space-y-8"}>
           <Badge look="hint">Rechtliche Interoperabilität</Badge>
@@ -101,7 +97,7 @@ export default function DocumentationInteroperabilityAssessment() {
         </SkipNoticeWrapper>
         <DocumentationActions
           previousUrl={previousUrl}
-          nextUrl={nextUrl ?? ROUTE_DOCUMENTATION_SUMMARY.url}
+          nextUrl={nextUrl ?? dokumentation_zusammenfassung.path}
           showDownloadDraftButton
           showSavingTip
         />

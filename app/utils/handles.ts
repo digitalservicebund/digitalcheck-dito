@@ -1,4 +1,4 @@
-import { UIMatch } from "react-router";
+import type { UIMatch } from "react-router";
 
 export type MatchWithHandle = UIMatch & {
   handle: {

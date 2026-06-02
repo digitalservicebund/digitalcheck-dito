@@ -1,15 +1,7 @@
 import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import Methoden from "~/routes/methoden._index"; // The component to test
-
-vi.mock("react-router", async (importOriginal) => {
-  const original = await importOriginal<typeof import("react-router")>();
-  return {
-    ...original,
-    useLoaderData: vi.fn().mockReturnValue({ showInterviewLeitfaden: true }),
-  };
-});
 
 describe("Methoden Route - Integration Tests", () => {
   const renderWithRouter = (component: React.ReactElement) => {
@@ -132,6 +124,8 @@ describe("Methoden Route - Integration Tests", () => {
     expect(
       screen.getByText("Dokumentieren des Regelungsvorhabens"),
     ).toBeInTheDocument();
-    expect(screen.getByText("Prüfen durch den NKR")).toBeInTheDocument();
+    expect(
+      screen.getByText("Prüfen durch zuständige Prüfstelle"),
+    ).toBeInTheDocument();
   });
 });

@@ -11,11 +11,11 @@ import {
   explanationID,
   prependNumberToAbsatz,
 } from "~/utils/paragraphUtils";
-import {
+import type {
   BaseAbsatz,
   BasePrinzip,
   PrinzipErfuellung,
-} from "~/utils/strapiData.server";
+} from "~/utils/strapiData.types";
 import { BlocksRenderer } from "./BlocksRenderer";
 import Heading from "./Heading";
 import PrincipleHighlightModifier from "./PrincipleHighlightModifier";

@@ -1,13 +1,12 @@
+import {
+  interoperabel,
+  interoperabel_loesungen_coreVocabularies,
+  interoperabel_loesungen_dcatAp,
+} from "@/config/routes";
 import { ReactNode } from "react";
 import NewTabLink from "~/components/NewTabLink.tsx";
-import {
-  ROUTE_INTEROPERABILITY,
-  ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES,
-  ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP,
-} from "~/resources/staticRoutes.ts";
 import { interoperabilityExplanationParagraphs } from "~/routes/dokumentation/interoperability/explanationMarkdown.ts";
 import { LevelHelpButton } from "~/routes/dokumentation/interoperability/FormVariant1.tsx";
-
 export type Question = {
   id: string;
   label: ReactNode;
@@ -187,7 +186,7 @@ export const sections: Section[] = [
               <>
                 Das Vorhaben schreibt die Verwendung etablierter internationaler
                 oder EU-weiter Metadatenstandards vor (z. B.{" "}
-                <NewTabLink to={ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP.url}>
+                <NewTabLink to={interoperabel_loesungen_dcatAp.path}>
                   DCAT-AP
                 </NewTabLink>
                 , SDMX, SIMS).
@@ -202,9 +201,7 @@ export const sections: Section[] = [
               <>
                 Es werden standardisierter Formate für spezifische Datenpunkte
                 referenziert (z.&nbsp;B.{" "}
-                <NewTabLink
-                  to={ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES.url}
-                >
+                <NewTabLink to={interoperabel_loesungen_coreVocabularies.path}>
                   Core Vocabularies
                 </NewTabLink>
                 ).
@@ -219,9 +216,7 @@ export const sections: Section[] = [
               <>
                 Es wurden sonstige{" "}
                 <NewTabLink
-                  to={
-                    ROUTE_INTEROPERABILITY.url + "?tab=interoperable-loesungen"
-                  }
+                  to={interoperabel.path + "?tab=interoperable-loesungen"}
                 >
                   Lösungen für ein interoperables Europa
                 </NewTabLink>{" "}

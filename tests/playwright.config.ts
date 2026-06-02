@@ -1,4 +1,5 @@
-import { devices, PlaywrightTestConfig } from "@playwright/test";
+import type { PlaywrightTestConfig } from "@playwright/test";
+import { devices } from "@playwright/test";
 import dotenv from "dotenv";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -95,8 +96,9 @@ const config: PlaywrightTestConfig = {
     // Use `start:test` (does not source .env) so inline env here wins; load
     // test env from .env.test, which sets FEATURE_FLAGS_PATH to the tests file.
     command:
-      "pnpm run build && cd .. && export $(grep -v '^#' .env.test | xargs) && NODE_ENV=development PORT=5172 pnpm run start:test",
+      "pnpm run build && export $(grep -v '^#' .env.test | xargs) && NODE_ENV=development PORT=5172 pnpm run start:test",
     port: 5172,
+    cwd: path.resolve(__dirname, ".."),
   },
 };
 

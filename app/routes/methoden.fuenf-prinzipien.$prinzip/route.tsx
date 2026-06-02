@@ -1,5 +1,9 @@
-import { ReactNode } from "react";
-import { data, Link, useLoaderData } from "react-router";
+import {
+  beispiele_prinzipien,
+  methoden_fuenfPrinzipien,
+} from "@/config/routes";
+import type { ReactNode } from "react";
+import { Link, useLoaderData } from "react-router";
 import { twJoin } from "tailwind-merge";
 import AccordionItem from "~/components/AccordionItem.tsx";
 import Badge from "~/components/Badge.tsx";
@@ -10,28 +14,22 @@ import MetaTitle from "~/components/Meta.tsx";
 import { PrincipleHightlightNullModifier } from "~/components/PrincipleHighlightModifier.tsx";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer";
-import { PRINCIPLE_COLORS, PrincipleNumber } from "~/resources/constants.ts";
+import type { PrincipleNumber } from "~/resources/constants.ts";
+import { PRINCIPLE_COLORS } from "~/resources/constants.ts";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien.ts";
-import {
-  ROUTE_EXAMPLES_PRINCIPLES,
-  ROUTE_METHODS_PRINCIPLES,
-} from "~/resources/staticRoutes.ts";
-import { absatzIdTag, Node } from "~/utils/paragraphUtils";
-import {
+import type { Node } from "~/utils/paragraphUtils";
+import { absatzIdTag } from "~/utils/paragraphUtils";
+import { fetchStrapiData } from "~/utils/strapiData.server.ts";
+import type {
   AbsatzWithParagraph,
   BasePrinzip,
-  fetchStrapiData,
   PrinzipAspekt,
   PrinzipWithAspekteAndExample,
-} from "~/utils/strapiData.server.ts";
+} from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions.ts";
 import type { Route } from "../../../.react-router/types/app/routes/+types/beispiele.prinzipien.$prinzip.ts";
-import {
-  PRINZIP_ASPEKTE_QUERY,
-  PRINZIP_LIST_QUERY,
-  PrinzipListItem,
-  type PrinzipListQueryReturnType,
-} from "./query";
+import type { PrinzipListItem, PrinzipListQueryReturnType } from "./query";
+import { PRINZIP_ASPEKTE_QUERY, PRINZIP_LIST_QUERY } from "./query";
 
 function AspectHeader({
   children,
@@ -94,7 +92,7 @@ export async function loader({ params }: Route.LoaderArgs) {
 
   if (prinzipData.prinzips.length === 0) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw data("Not found", { status: 404 });
+    throw new Response("Not found", { status: 404 });
   }
 
   return {
@@ -142,7 +140,7 @@ function Textbeispiel({
       />
       <Link
         className="text-link"
-        to={`${ROUTE_EXAMPLES_PRINCIPLES.url}/${prinzip.URLBezeichnung}#${absatzIdTag(beispiel.documentId)}`}
+        to={`${beispiele_prinzipien.path}/${prinzip.URLBezeichnung}#${absatzIdTag(beispiel.documentId)}`}
       >
         {methodsFivePrinciples.exampleLinkText}
       </Link>
@@ -239,7 +237,7 @@ function PrincipleNavigation({
         {principles.map((principle) => (
           <Link
             key={principle.order}
-            to={`${ROUTE_METHODS_PRINCIPLES.url}/${principle.URLBezeichnung}`}
+            to={`${methoden_fuenfPrinzipien.path}/${principle.URLBezeichnung}`}
             className={twJoin(
               "block",
               principle.order === current.order
@@ -256,7 +254,7 @@ function PrincipleNavigation({
         {prev ? (
           <LinkButton
             look="link"
-            to={ROUTE_METHODS_PRINCIPLES.url + "/" + prev.URLBezeichnung}
+            to={methoden_fuenfPrinzipien.path + "/" + prev.URLBezeichnung}
             className="ds-link-01-bold"
           >
             Zurück zu Prinzip {prev.order}
@@ -267,7 +265,7 @@ function PrincipleNavigation({
         {next ? (
           <LinkButton
             look="tertiary"
-            to={ROUTE_METHODS_PRINCIPLES.url + "/" + next.URLBezeichnung}
+            to={methoden_fuenfPrinzipien.path + "/" + next.URLBezeichnung}
             className="flex justify-center"
           >
             Zum nächsten Prinzip
@@ -280,9 +278,13 @@ function PrincipleNavigation({
   );
 }
 
-export default function Prinzip() {
-  const { prinzip, prinzipList } = useLoaderData<typeof loader>();
-
+export function Prinzip({
+  prinzip,
+  prinzipList,
+}: Readonly<{
+  prinzip: PrinzipWithAspekteAndExample;
+  prinzipList: PrinzipListItem[];
+}>) {
   return (
     <>
       <MetaTitle prefix={`Prinzip: ${prinzip.Name}`} />
@@ -333,4 +335,9 @@ export default function Prinzip() {
       </main>
     </>
   );
+}
+
+export default function Route() {
+  const { prinzip, prinzipList } = useLoaderData<typeof loader>();
+  return <Prinzip prinzip={prinzip} prinzipList={prinzipList} />;
 }

@@ -1,9 +1,11 @@
+import { unterstuetzung } from "@/config/routes";
 import { expect, test } from "@playwright/test";
-import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
+import { waitForHydration } from "./helpers";
 
 test.describe("test support page", () => {
   test.beforeEach("Go to support page", async ({ page }) => {
-    await page.goto(ROUTE_SUPPORT.url);
+    await page.goto(unterstuetzung.path);
+    await waitForHydration(page);
   });
 
   test("suppport tabs switch between offerings", async ({ page, isMobile }) => {

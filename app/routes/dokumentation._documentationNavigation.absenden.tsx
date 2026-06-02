@@ -1,5 +1,5 @@
+import { dokumentation_absenden } from "@/config/routes";
 import { EmojiEventsOutlined as EmojiEventsOutlinedIcon } from "@digitalservicebund/icons";
-import { useOutletContext } from "react-router";
 import { DownloadButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import CheckboxCard from "~/components/CheckboxCard.tsx";
@@ -11,16 +11,15 @@ import RichText from "~/components/RichText";
 import Timeline from "~/components/Timeline.tsx";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { contact } from "~/resources/content/shared/contact.ts";
-import { ROUTE_DOCUMENTATION_SEND } from "~/resources/staticRoutes";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
-import { NavigationContext } from "./dokumentation._documentationNavigation";
+import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
 const { finish } = digitalDocumentation;
 
-export default function DocumentationSend() {
-  const { prinzips } = useOutletContext<NavigationContext>();
+export function DocumentationSend() {
+  const { prinzips } = useDocumentationNavigation();
   const { downloadDocumentation } = useWordDocumentation();
   const { documentationData } = useDocumentationDataService();
 
@@ -29,7 +28,7 @@ export default function DocumentationSend() {
 
   return (
     <>
-      <MetaTitle prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_SEND.title}`} />
+      <MetaTitle prefix={`Dokumentation: ${dokumentation_absenden.title}`} />
       <Heading
         text={finish.heading.text}
         tagName="h1"
@@ -94,6 +93,8 @@ export default function DocumentationSend() {
         )}
         <InfoBox
           heading={{
+            tagName: "h2",
+            look: "ds-heading-03-reg",
             text: finish.done,
           }}
           visual={{
@@ -106,5 +107,27 @@ export default function DocumentationSend() {
         />
       </InfoBoxList>
     </>
+  );
+}
+
+export default function Route() {
+  return <DocumentationSend />;
+}
+
+// Astro page export
+import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
+
+export function AbsendenPage({
+  prinzips,
+  currentUrl,
+}: Readonly<{
+  prinzips: PrinzipWithAspekteAndExample[];
+  currentUrl: string;
+}>) {
+  return (
+    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
+      <DocumentationSend />
+    </DocumentationPageShell>
   );
 }

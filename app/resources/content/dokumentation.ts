@@ -169,6 +169,7 @@ export const digitalDocumentation = {
     },
   },
   info: {
+    headline: "Tragen Sie den Titel Ihres Regelungsvorhabens ein",
     inputTitle: {
       label: "Titel des Regelungsvorhabens",
       error: "Bitte geben Sie einen Titel ein.",
@@ -177,7 +178,6 @@ export const digitalDocumentation = {
   navigation: {
     ariaLabel: "Seitennavigation",
     principles: "Prinzipien",
-    euInteroperability: "EU-Interoperabilität",
   },
   participation: {
     headline: "Auswirkungen auf Betroffene und an der Umsetzung Beteiligte",
@@ -338,6 +338,7 @@ export const digitalDocumentation = {
       heading: "Fertige Dokumentation an den NKR senden",
       content: dedent`
         - Senden Sie die Dokumentation **als PDF per E-Mail** an folgende Adresse: ${contact.mdMailToLink(contact.nkrEmail)}. Der NKR prüft die methodische und inhaltliche Nachvollziehbarkeit. Bei Fragen wird der NKR auf Sie zukommen. Das Ziel ist eine digital- und praxistaugliche Umsetzung.
+        - Bei **Interoperabilitätsbezug** senden Sie eine Kopie der E-Mail mit der Dokumentation an ${contact.mdMailToLink(contact.interoperabilityEmail)}.
         - Der NKR empfiehlt, **Visualisierungen** und Skizzen als ergänzende Dokumente beizufügen – formlos als PDF oder Screenshot.`,
     },
     done: "Damit ist der Digitalcheck für Sie beendet.",

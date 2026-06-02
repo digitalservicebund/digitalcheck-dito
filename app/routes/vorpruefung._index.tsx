@@ -1,3 +1,5 @@
+import { vorpruefung } from "@/config/routes";
+import Badge from "~/components/Badge";
 import Container from "~/components/Container";
 import { PreCheckFAQ } from "~/components/content/PreCheckFAQ.tsx";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -13,13 +15,12 @@ import SupportBanner from "~/components/SupportBanner";
 import TabGroup from "~/components/Tabs/Tabs";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { ROUTE_PRECHECK } from "~/resources/staticRoutes";
 import { PreCheckContinueActions } from "./vorpruefung/PreCheckContinueActions";
 
 export default function Index() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_PRECHECK.title} />
+      <MetaTitle prefix={vorpruefung.title} />
       <main>
         <Hero title={preCheck.start.title} subtitle={preCheck.start.subtitle}>
           <div className="ds-stack ds-stack-16 mb-40">
@@ -58,11 +59,14 @@ export default function Index() {
               <InfoBox heading={preCheck.start.summary.start.heading}>
                 <RichText markdown={preCheck.start.summary.start.content} />
               </InfoBox>
-              <ImageBox
-                title={preCheck.start.summary.process.heading}
-                image={preCheck.start.summary.process.image}
-                border
-              />
+              <div className="space-y-8">
+                <Badge look="hint" className="mr-8" text="Bundesebene"></Badge>
+                <ImageBox
+                  title={preCheck.start.summary.process.heading}
+                  image={preCheck.start.summary.process.image}
+                  border
+                />
+              </div>
 
               <InfoBox heading={preCheck.start.summary.relevance.heading}>
                 <RichText markdown={preCheck.start.summary.relevance.content} />
@@ -98,12 +102,12 @@ export default function Index() {
                 />
               </InfoBox>
             </TabGroup.Tab>
+            <Heading
+              tagName="h2"
+              look="ds-he ading-02-reg mb-64 max-sm:mb-56"
+              text={preCheck.faq.title}
+            />
             <TabGroup.Tab label={preCheck.faq.tabName}>
-              <Heading
-                tagName="h2"
-                look="ds-heading-02-reg mb-64 max-sm:mb-56"
-                text={preCheck.faq.title}
-              />
               <PreCheckFAQ />
             </TabGroup.Tab>
           </TabGroup>

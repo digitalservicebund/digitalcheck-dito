@@ -1,14 +1,10 @@
 import type { Config } from "@react-router/dev/config";
 
 import {
-  ROUTES,
-  ROUTES_DOCUMENTATION_FINALIZE,
-} from "./app/resources/staticRoutes.ts";
-import { staticDocumentationRoutes } from "./app/routes/dokumentation.staticDocumentationRoutes.ts";
-import {
   fetchStrapiData,
   GET_PRINZIPS_QUERY,
-} from "./app/utils/strapiData.server.ts";
+} from "./app/utils/strapiData.server";
+import { allRoutes } from "./src/config/routes";
 
 const GET_ALL_REGELUNGEN_SLUGS = `
 query GetAllBeispielvorhabens {
@@ -48,13 +44,9 @@ async function getPreviewPrerenderPaths(): Promise<string[]> {
     ...regelungSlugs.map((slug) => `/beispiele/regelungen/${slug}`),
   ];
 
-  const staticPaths = [
-    ...ROUTES.map((r) => r.url),
-    ...staticDocumentationRoutes.map((r) => r.url),
-    ...ROUTES_DOCUMENTATION_FINALIZE.map((r) => r.url),
-  ];
+  const staticPaths = allRoutes.map((r) => r.path);
 
-  return [...new Set([...staticPaths, ...dynamicPaths])];
+  return [...staticPaths, ...dynamicPaths];
 }
 
 export const previewConfig = {

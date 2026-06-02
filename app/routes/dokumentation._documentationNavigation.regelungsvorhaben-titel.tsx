@@ -1,25 +1,24 @@
+import { dokumentation_regelungsvorhabenTitel } from "@/config/routes";
 import { useField } from "@rvf/react";
-import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
 import Input from "~/components/Input";
 import MetaTitle from "~/components/Meta";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import { ROUTE_DOCUMENTATION_TITLE } from "~/resources/staticRoutes";
 import {
   defaultTitleValues,
   policyHeaderSchema,
 } from "~/routes/dokumentation/documentationDataSchema";
-import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
+import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
 const { info } = digitalDocumentation;
 
-export default function DocumentationTitle() {
-  const { currentUrl, nextUrl, previousUrl } =
-    useOutletContext<NavigationContext>();
+export function DocumentationTitle() {
+  const { currentUrl, nextUrl, previousUrl, prinzips } =
+    useDocumentationNavigation();
   const { documentationData, setPolicyTitle } = useDocumentationDataService();
 
   const form = useSyncedForm({
@@ -37,7 +36,9 @@ export default function DocumentationTitle() {
 
   return (
     <>
-      <MetaTitle prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_TITLE.title}`} />
+      <MetaTitle
+        prefix={`Dokumentation: ${dokumentation_regelungsvorhabenTitel.title}`}
+      />
       <div className="space-y-40">
         <Heading
           text={"Ihr Regelungsvorhaben"}
@@ -122,9 +123,32 @@ export default function DocumentationTitle() {
             submit
             showDownloadDraftButton
             showSavingTip
+            prinzips={prinzips}
           />
         </form>
       </div>
     </>
+  );
+}
+
+export default function Route() {
+  return <DocumentationTitle />;
+}
+
+// Astro page export
+import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
+
+export function TitelPage({
+  prinzips,
+  currentUrl,
+}: Readonly<{
+  prinzips: PrinzipWithAspekteAndExample[];
+  currentUrl: string;
+}>) {
+  return (
+    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
+      <DocumentationTitle />
+    </DocumentationPageShell>
   );
 }

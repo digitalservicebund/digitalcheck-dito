@@ -8,7 +8,7 @@ import {
   ListboxOption,
   ListboxOptions,
 } from "@headlessui/react";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { twJoin } from "tailwind-merge";
 import {
   mobileTabPickerButtonClassName,
@@ -21,11 +21,11 @@ export type MobileTabPickerItem = {
   label: ReactNode;
 };
 
-type MobileTabPickerProps = {
+type MobileTabPickerProps = Readonly<{
   items: MobileTabPickerItem[];
   selectedIndex: number;
   onChange: (index: number) => void;
-};
+}>;
 
 export default function MobileTabPicker({
   items,

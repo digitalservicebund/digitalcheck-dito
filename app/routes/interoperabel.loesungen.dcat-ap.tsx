@@ -1,12 +1,12 @@
+import { interoperabel_loesungen_dcatAp } from "@/config/routes";
 import {
   CheckOutlined,
   InfoOutlined,
   LayersOutlined,
 } from "@digitalservicebund/icons";
-import React from "react";
+import type React from "react";
 import AccordionItem from "~/components/AccordionItem";
 import Badge from "~/components/Badge.tsx";
-import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
 import { InteroperableSolutionBanner } from "~/components/InteroperableSolutionBanner.tsx";
@@ -16,7 +16,6 @@ import RichText from "~/components/RichText";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import Timeline from "~/components/Timeline";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
-import { ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP } from "~/resources/staticRoutes.ts";
 import { directLinks } from "~/routes/interoperabel/UeberblickTab.tsx";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { slugify } from "~/utils/utilFunctions.ts";
@@ -41,7 +40,7 @@ const sections = {
   ressourcen: { id: "ressourcen", title: "Ressourcen" },
 };
 
-function ChapterBadge({ children }: { children: React.ReactNode }) {
+function ChapterBadge({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <Badge look={"hint"} Icon={LayersOutlined}>
       {children}
@@ -55,7 +54,7 @@ export default function InteroperableSolutionsDcatAp() {
       <MetaTitle prefix="Data Catalogue Vocabulary Application Profile (DCAT-AP)" />
       <main>
         <div className="breakout-grid-toc space-y-16 bg-blue-100 pt-40 pb-48">
-          <h1>{ROUTE_INTEROPERABILITY_SOLUTIONS_DCAT_AP.title}</h1>
+          <h1>{interoperabel_loesungen_dcatAp.title}</h1>
           <p className="ds-subhead">
             Der Metadatenstandard für offene Daten und Transparenz.
           </p>
@@ -159,8 +158,14 @@ export default function InteroperableSolutionsDcatAp() {
                   technische Arbeit leisten dann die IT-Experten.
                 </li>
                 <li>
-                  <strong>Wo gibt es Hilfe?</strong> Beim DigitalService /
-                  Nationale Kontaktstelle für Interoperabilität.
+                  <strong>Wo gibt es Hilfe?</strong> Bei der{" "}
+                  <a
+                    className="text-link"
+                    href="mailto:interoperabilitaet@zfl.bund.de"
+                  >
+                    Nationalen Kontaktstelle für Interoperabilität
+                  </a>{" "}
+                  (DigitalService).
                 </li>
               </ul>
             </InfoBox>
@@ -209,30 +214,40 @@ export default function InteroperableSolutionsDcatAp() {
               Grundlage, dass die spätere technische Umsetzung zwingend nach
               DCAT-AP erfolgt, um die EU-weite Auffindbarkeit zu garantieren.
             </p>
-            <DetailsSummary title={"Wann ist eine Ausnahme zulässig?"}>
-              <p>
-                Der Interoperable Europe Act (IEA) sieht vor, dass die Nutzung
-                von Standards wie DCAT-AP in begründeten Fällen abgelehnt werden
-                kann. Prüfen Sie folgende Punkte:
-              </p>
-              <ul>
-                <li>
-                  Sicherheit & Geheimhaltung: Enthält die Beschreibung des
-                  Datensatzes (die „Katalogkarte“) Informationen, die aus
-                  Gründen der öffentlichen Sicherheit oder des Datenschutzes
-                  nicht veröffentlicht werden dürfen?
-                </li>
-                <li>
-                  Rechte Dritter: Verhindern bestehende Lizenzen oder
-                  Urheberrechte Dritter die Nutzung dieses offenen Standards?
-                </li>
-                <li>
-                  Unverhältnismäßigkeit: Übersteigt der Aufwand für die
-                  Umstellung eines bestehenden, isolierten Systems den Nutzen
-                  für den grenzüberschreitenden digitalen Binnenmarkt deutlich?
-                </li>
-              </ul>
-            </DetailsSummary>
+            <div>
+              <AccordionItem
+                headline={"Wann ist eine Ausnahme zulässig?"}
+                className={"my-40"}
+              >
+                <div className="space-y-8">
+                  <p>
+                    Der Interoperable Europe Act (IEA) sieht vor, dass die
+                    Nutzung von Standards wie DCAT-AP in begründeten Fällen
+                    abgelehnt werden kann. Prüfen Sie folgende Punkte:
+                  </p>
+                  <ul>
+                    <li>
+                      Sicherheit & Geheimhaltung: Enthält die Beschreibung des
+                      Datensatzes (die „Katalogkarte“) Informationen, die aus
+                      Gründen der öffentlichen Sicherheit oder des Datenschutzes
+                      nicht veröffentlicht werden dürfen?
+                    </li>
+                    <li>
+                      Rechte Dritter: Verhindern bestehende Lizenzen oder
+                      Urheberrechte Dritter die Nutzung dieses offenen
+                      Standards?
+                    </li>
+                    <li>
+                      Unverhältnismäßigkeit: Übersteigt der Aufwand für die
+                      Umstellung eines bestehenden, isolierten Systems den
+                      Nutzen für den grenzüberschreitenden digitalen Binnenmarkt
+                      deutlich?
+                    </li>
+                  </ul>
+                </div>
+              </AccordionItem>
+            </div>
+
             <Timeline>
               <Timeline.Item bullet>
                 <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48">

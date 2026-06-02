@@ -2,9 +2,9 @@ import {
   ExpandLessOutlined,
   ExpandMoreOutlined,
 } from "@digitalservicebund/icons";
-import { PointerEvent } from "react";
+import type { PointerEvent } from "react";
+import type { DropdownItemProps } from "~/components/DropdownContentList";
 import DropdownContentList from "~/components/DropdownContentList";
-import type { DropdownItemProps } from "~/components/DropdownContentList.tsx";
 import { header } from "~/resources/content/shared/header.ts";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import twMerge from "~/utils/tailwindMerge";

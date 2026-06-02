@@ -1,6 +1,8 @@
-import { expect, type Page, test } from "@playwright/test";
+import { vorpruefung_ergebnis } from "@/config/routes";
+import type { Page } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { ROUTE_PRECHECK_RESULT } from "~/resources/staticRoutes";
+import { waitForHydration } from "./helpers";
 
 const { questions } = preCheck;
 
@@ -20,19 +22,21 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
 
   test.beforeAll("answer all questions with yes", async ({ browser }) => {
     page = await browser.newPage();
-    await page.goto(questions[0].url);
+    await page.goto(questions[0].path);
     for (const question of questions) {
-      await page.waitForURL(question.url);
+      await page.waitForURL(question.path);
+      await waitForHydration(page);
       await page.getByLabel("Ja").click();
       await page.getByRole("button", { name: "Übernehmen" }).click();
     }
   });
 
   test.beforeEach("go to result page", async () => {
-    if (page.url() !== ROUTE_PRECHECK_RESULT.url) {
-      await page.goto(ROUTE_PRECHECK_RESULT.url);
+    if (page.url() !== vorpruefung_ergebnis.path) {
+      await page.goto(vorpruefung_ergebnis.path);
     }
-    await page.waitForURL(ROUTE_PRECHECK_RESULT.url);
+    await page.waitForURL(vorpruefung_ergebnis.path);
+    await waitForHydration(page);
   });
 
   test.afterAll("close shared page for test iteration", async () => {
@@ -113,33 +117,6 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
     for (const resultText of positiveResultContent) {
       expect(mailUri).toContain(resultText);
     }
-  });
-
-  // only run on chromium because clipboard permissions don't work with firefox / safari
-  // https://github.com/microsoft/playwright/issues/13037
-  test("can copy email address to clipboard", async ({ browserName }) => {
-    if (
-      browserName === "webkit" ||
-      browserName === "firefox" ||
-      test.info().project.name === "Desktop Edge"
-    ) {
-      test.skip(
-        true,
-        "Skipping clipboard test on WebKit, Firefox, and Desktop Edge.",
-      );
-    }
-    const copyAddressButton = page.getByRole("button", {
-      name: "Empfängeradresse kopieren",
-    });
-    await expect(copyAddressButton).toBeVisible();
-    await copyAddressButton.click();
-
-    const clipboardText = await page.evaluate(() =>
-      navigator.clipboard.readText(),
-    );
-    expect(clipboardText).toBe(
-      "nkr@bmjv.bund.de, interoperabel@digitalservice.bund.de",
-    );
   });
 
   // only run on chromium because clipboard permissions don't work with firefox / safari

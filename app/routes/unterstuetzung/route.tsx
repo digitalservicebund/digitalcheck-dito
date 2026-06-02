@@ -1,5 +1,4 @@
-import React from "react";
-
+import { unterstuetzung } from "@/config/routes";
 import { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";
@@ -11,29 +10,10 @@ import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { SearchParamTabs } from "~/components/Tabs/Tabs";
 import { support } from "~/resources/content/unterstuetzung";
-import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
-import { ContentLink } from "~/utils/contentTypes";
 import { dedent } from "~/utils/dedentMultilineStrings";
+import { useHydrationMarker } from "~/utils/useHydrationMarker";
 
-type Offering = {
-  title: string;
-  text: string;
-  sellingPoints: string;
-  link?: ContentLink;
-  details: {
-    icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-    title: string;
-    text: string;
-  }[];
-  examples?: {
-    image?: {
-      src: string;
-      alt: string;
-    };
-    text: string;
-  }[];
-};
 const {
   socialProof,
   supportHow,
@@ -70,9 +50,10 @@ function SocialProofImage() {
 }
 
 export default function Index() {
+  useHydrationMarker();
   return (
     <>
-      <MetaTitle prefix={ROUTE_SUPPORT.title} />
+      <MetaTitle prefix={unterstuetzung.title} />
       <main>
         <Hero title={title} subtitle={subtitle} />
 
@@ -162,7 +143,7 @@ export default function Index() {
                   tabId={tab.id}
                   label={tab.title}
                 >
-                  {tab.offerings.map((offering: Offering) => (
+                  {tab.offerings.map((offering) => (
                     <Container
                       key={offering.title}
                       className="mb-32 flex justify-between gap-32 rounded-xl bg-blue-100 px-40 max-md:flex-col"
@@ -174,7 +155,7 @@ export default function Index() {
                         }}
                       >
                         <RichText markdown={offering.text} />
-                        {offering.link && (
+                        {"link" in offering && (
                           <InfoBox.LinkList links={[offering.link]} />
                         )}
                       </InfoBox>
@@ -182,7 +163,9 @@ export default function Index() {
                       <div className="flex-none space-y-20 md:w-[310px] lg:w-[364px]">
                         <div className="bg-white">
                           <div className="p-28">
-                            <h4>{offering.sellingPoints}</h4>
+                            <h3 className="text-lg">
+                              {offering.sellingPoints}
+                            </h3>
                             <div className="divide-y divide-gray-700">
                               {offering.details.map((detail) => (
                                 <div key={detail.title} className="py-16">
@@ -205,12 +188,12 @@ export default function Index() {
                             </div>
                           </div>
                         </div>
-                        {offering.examples && (
+                        {"examples" in offering && (
                           <div className="bg-white">
                             <div className="divide-y divide-gray-700">
                               {offering.examples.map((example, idx) => (
                                 <div key={`${offering.title}-example-${idx}`}>
-                                  {example.image && (
+                                  {"image" in example && (
                                     <Image
                                       url={example.image.src}
                                       alternativeText={example.image.alt}
@@ -249,6 +232,8 @@ export default function Index() {
                 type: "image",
                 image: {
                   url: assetPath("/images/zfl-preview.png"),
+                  alternativeText:
+                    "Screenshot der Website des Zentrum für Legistik",
                   size: "medium",
                 },
               }}

@@ -1,9 +1,9 @@
+import { impressum } from "@/config/routes";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Hero from "~/components/Hero";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { contact } from "~/resources/content/shared/contact";
-import { ROUTE_IMPRINT } from "~/resources/staticRoutes";
 
 const content = `
 Diese Webseite ist ein Angebot des <br />
@@ -64,7 +64,7 @@ Bitte senden Sie eine Nachricht an SBII3@bmds.bund.de, wenn Inhalte nicht fehler
 export default function Index() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_IMPRINT.title} />
+      <MetaTitle prefix={impressum.title} />
       <main>
         <Hero title={"Impressum"} />
 

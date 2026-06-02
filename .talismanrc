@@ -12,6 +12,11 @@ fileignoreconfig:
     ignore_detectors: [filename]
   - filename: app/root.tsx
     allowed_patterns: [posthogKey]
+  - filename: app/providers/PosthogProvider.tsx
+    allowed_patterns: [posthogKey]
+  - filename: app/utils/localStorageVersioned.ts
+    allowed_patterns:
+      - storageKey
   - filename: app/utils/localStorageVersioned.spec.ts
     allowed_patterns:
       - testKey
@@ -24,14 +29,21 @@ fileignoreconfig:
     ignore_detectors: [filecontent]
   - filename: app/resources/content/vorpruefung.ts # German text content misidentified as secret pattern
     ignore_detectors: [filecontent]
+  - filename: app/resources/content/vorpruefung-ergebnis.ts # German text content misidentified as secret pattern
+    checksum: 356e2177cff6c4579cbae0c4321d9d6e4752ba93bdf17fb7b7d99e105ff99cff
   - filename: app/resources/content/interoperabel-nationale-kontaktstelle.ts # German text content misidentified as secret pattern
     ignore_detectors: [filecontent]
+  - filename: app/resources/content/methode-zustaendige-akteurinnen-auflisten.ts # German text content misidentified as secret pattern
+    checksum: 0392a40c7098cc34b266774dab34ebe7094410777940e1a1d668d96d0953e56c
   - filename: public/documents/interview-leitfaden/Akteurlandschaft_Analyse.pptx # Power Point
     ignore_detectors: [filecontent]
   - filename: app/vite-env.d.ts
     checksum: f3fd561d4d951b8b328e6e40e389372a99ed98975a21d96ee0cf479b4470998b
   - filename: app/resources/content/methode-zustaendige-akteurinnen-auflisten.ts
-    checksum: 0ae338c5f5e7aefb9ba34d7b8d17619c5b5c14112bae75a5a81389982ec41e06
+    checksum: 957c92add9454aefd5145b48757ce39e277819d9775c68fe3e6dc1a73226db3e
+  - filename: public/documents/BundeslaenderInfoPage.pdf
+    checksum: b5034dcbaa91c8cddcb4d75843b211b4a4cea87fb78b64ad327705d1f91b25cf
+
 allowed_patterns:
   - key
   - onKey

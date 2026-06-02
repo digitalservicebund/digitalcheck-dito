@@ -8,7 +8,7 @@ import {
   ROUTE_VISUALISATION,
 } from "~/resources/staticRoutes";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
-import { Visualisierung } from "~/utils/strapiData.server";
+import type { Visualisierung } from "~/utils/strapiData.types";
 import { formatDate } from "~/utils/utilFunctions";
 import { BlocksRenderer } from "./BlocksRenderer";
 
@@ -45,7 +45,7 @@ export default function VisualisationItem({
         <div>
           <strong>Kontext: </strong>
           <Link
-            to={`${ROUTE_REGELUNGEN.url}/${visualisierung.Beispielvorhaben.URLBezeichnung}`}
+            to={`${ROUTE_REGELUNGEN}/${visualisierung.Beispielvorhaben.URLBezeichnung}`}
             prefetch="viewport"
             className="text-link"
           >
@@ -57,7 +57,7 @@ export default function VisualisationItem({
       <div className="flex gap-16 max-sm:flex-col sm:gap-24">
         <div className="sm:w-1/2">
           <Link
-            to={`${ROUTE_VISUALISATION.url}/${visualisationUrl}`}
+            to={`${ROUTE_VISUALISATION}/${visualisationUrl}`}
             reloadDocument
             target="_blank"
             rel="noreferrer"

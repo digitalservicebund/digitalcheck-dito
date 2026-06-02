@@ -10,6 +10,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { twJoin } from "tailwind-merge";
 
+import { vorpruefung, vorpruefung_ergebnis } from "@/config/routes";
+import { marked } from "marked";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
@@ -21,18 +23,13 @@ import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
-import {
-  ROUTE_PRECHECK,
-  ROUTE_PRECHECK_RESULT,
-} from "~/resources/staticRoutes";
-import getContentForResult, {
-  type Reason,
-} from "~/routes/vorpruefung.ergebnis/getContentForResult";
+import type { Reason } from "~/routes/vorpruefung.ergebnis/getContentForResult";
+import getContentForResult from "~/routes/vorpruefung.ergebnis/getContentForResult";
 import ResultForm from "~/routes/vorpruefung.ergebnis/ResultForm";
 import { ResultType } from "./PreCheckResult";
 
 import { PreCheckFAQ } from "~/components/content/PreCheckFAQ.tsx";
-import { Step } from "~/utils/contentTypes.ts";
+import type { Step } from "~/utils/contentTypes.ts";
 import { usePreCheckData } from "../vorpruefung/preCheckDataHook";
 
 const nextSteps = {
@@ -113,7 +110,7 @@ export default function Result() {
       firstUnansweredQuestionIndex !== null &&
       firstUnansweredQuestionIndex < preCheck.questions.length - 1
     ) {
-      void navigate(ROUTE_PRECHECK.url);
+      void navigate(vorpruefung.path);
     }
   }, [navigate, firstUnansweredQuestionIndex]);
 
@@ -121,7 +118,7 @@ export default function Result() {
     result?.digital === ResultType.UNSURE ? preCheckResult.unsure.hint : "";
   return (
     <>
-      <MetaTitle prefix={ROUTE_PRECHECK_RESULT.title} />
+      <MetaTitle prefix={vorpruefung_ergebnis.title} />
       <main>
         <div className="bg-blue-100 py-40 print:pb-0">
           <div className="px-16">
@@ -143,9 +140,8 @@ export default function Result() {
                     tagName="h1"
                     look="ds-heading-02-reg"
                     className="mb-0"
-                  >
-                    <RichText markdown={resultContent.title} />
-                  </Heading>
+                    text={marked.parseInline(resultContent.title) as string}
+                  />
                   {resultHint && (
                     <RichText
                       markdown={resultHint}
@@ -271,7 +267,7 @@ export default function Result() {
         <Container className="my-80 py-0 print:hidden">
           <Heading
             tagName="h2"
-            look="ds-heading-02-reg text-center mb-64 max-sm:mb-56"
+            look="ds-heading-02-reg mb-64 max-sm:mb-56"
             text={preCheck.faq.title}
           />
           <PreCheckFAQ />

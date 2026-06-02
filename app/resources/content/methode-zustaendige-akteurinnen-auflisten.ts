@@ -1,10 +1,11 @@
+import { zustaendigeAkteureXlsx } from "@/config/downloads";
 import {
   DrawOutlined,
   LightbulbOutlined,
   StickyNote2Outlined,
 } from "@digitalservicebund/icons";
 import { assetPath } from "~/utils/assetPath";
-import { ContentLink } from "~/utils/contentTypes.ts";
+import type { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const methodsResponsibleActors = {
@@ -46,7 +47,7 @@ export const methodsResponsibleActors = {
       links: [
         {
           text: "Vorlage herunterladen (xlsx-Datei)",
-          to: "/download/Vorlage - Zuständige Akteurinnen und Akteure.xlsx",
+          to: zustaendigeAkteureXlsx.path,
           download: true,
         },
       ] satisfies ContentLink[],

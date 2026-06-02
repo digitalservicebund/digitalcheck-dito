@@ -1,4 +1,16 @@
 import {
+  beispiele_prinzipien,
+  beispiele_visualisierungen,
+  dokumentation,
+  grundlagen_digitaltauglichkeit,
+  grundlagen_normenkontrollrat,
+  methoden,
+  methoden_fuenfPrinzipien,
+  methoden_visualisieren,
+  unterstuetzung,
+  vorpruefung,
+} from "@/config/routes";
+import {
   Close as CloseIcon,
   ContactPhoneOutlined as ContactPhoneOutlinedIcon,
   Dvr as DvrIcon,
@@ -14,18 +26,7 @@ import InfoBox from "~/components/InfoBox";
 import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
-import {
-  ROUTE_DOCUMENTATION,
-  ROUTE_EXAMPLES_PRINCIPLES,
-  ROUTE_EXAMPLES_VISUALISATIONS,
-  ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
-  ROUTE_FUNDAMENTALS_NKR,
-  ROUTE_METHODS,
-  ROUTE_METHODS_PRINCIPLES,
-  ROUTE_METHODS_VISUALIZE,
-  ROUTE_PRECHECK,
-  ROUTE_SUPPORT,
-} from "~/resources/staticRoutes";
+import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 const steps = [
@@ -34,7 +35,7 @@ const steps = [
     title: "Digitalbezug einschätzen",
     link: {
       text: "Digitalbezug einschätzen",
-      to: ROUTE_PRECHECK.url,
+      to: vorpruefung.path,
       look: "primary" as const,
       plausibleEventName: "Content.Schritte.Button+Vorprüfung",
     },
@@ -43,7 +44,7 @@ const steps = [
     duration: "Wenige Minuten",
     result: dedent`
       - Individueller Digital- und Interoperabilitätsbezug
-      - Ergebnis als E-Mail zum Versenden an den Nationalen Normenkontrollrat
+      - Ergebnis als E-Mail an Prüfstelle* schicken oder als Dokumentation zur Selbstprüfung nutzen.
     `,
   },
   {
@@ -51,7 +52,7 @@ const steps = [
     title: "Digitaltauglichkeit der Regelung sicherstellen",
     link: {
       text: "Regelung erarbeiten",
-      to: ROUTE_METHODS.url,
+      to: methoden.path,
       look: "tertiary" as const,
       plausibleEventName: "Content.Schritte.Link+Erarbeiten",
     },
@@ -68,7 +69,7 @@ const steps = [
     title: "Dokumentieren der Digitaltauglichkeit",
     link: {
       text: "Dokumentation erstellen",
-      to: ROUTE_DOCUMENTATION.url,
+      to: dokumentation.path,
       look: "tertiary" as const,
       plausibleEventName: "Content.Schritte.Link+Dokumentieren",
     },
@@ -77,7 +78,7 @@ const steps = [
     procedureHighlight: { badge: "NEU", text: "Jetzt auch online ausfüllbar." },
     duration: "Ein bis zwei Stunden",
     result: dedent`
-      - Ausgefülltes Word-Dokument, welches Sie dem Nationalen Normenkontrollrat senden
+      - Ausgefülltes Word-Dokument- welches Sie an Ihre jeweilige Prüfstelle* senden
       - Ihr Vorhaben ist formal bereit für die Ressortabstimmung
     `,
   },
@@ -143,6 +144,12 @@ export default function Index() {
                   <div className="mt-24">
                     <p className="font-bold">Ergebnis:</p>
                     <RichText markdown={step.result} />
+                    {step.number === 1 && (
+                      <p className="mt-16">
+                        * Auf Bundesebene ist zum Beispiel der Normen
+                        Kontrollrat (NKR) die zuständige Prüfstelle.
+                      </p>
+                    )}
                   </div>
                 </li>
               ))}
@@ -151,7 +158,7 @@ export default function Index() {
         </div>
 
         <div className="breakout space-y-40 bg-blue-100 py-40 lg:py-80">
-          <Heading tagName="h2" text="Grundlagen zum Digitalcheck" />
+          <Heading tagName="h2" text="Einführung zum Digitalcheck" />
 
           <InfoBox
             visual={{ type: "icon", Icon: WidgetsOutlinedIcon }}
@@ -167,7 +174,7 @@ export default function Index() {
               links={[
                 {
                   text: "Mehr zur Digitaltauglichkeit erfahren",
-                  to: ROUTE_FUNDAMENTALS_DIGITAL_READINESS.url,
+                  to: grundlagen_digitaltauglichkeit.path,
                   plausibleEventName:
                     "Content.Grundlagen.Link+Digitaltauglichkeit",
                   look: "link",
@@ -181,6 +188,7 @@ export default function Index() {
             look="highlight"
             className="bg-white"
           >
+            <Badge look="hint" className="mr-8" text="Bundesebene"></Badge>
             <Heading tagName="h3">
               Worauf achtet der Nationale Normenkontrollrat?
             </Heading>
@@ -189,7 +197,7 @@ export default function Index() {
               links={[
                 {
                   text: "Mehr zum NKR erfahren",
-                  to: ROUTE_FUNDAMENTALS_NKR.url,
+                  to: grundlagen_normenkontrollrat.path,
                   plausibleEventName: "Content.Grundlagen.Link+NKR",
                   look: "link",
                 },
@@ -198,7 +206,12 @@ export default function Index() {
           </InfoBox>
         </div>
 
-        <div className="breakout bg-[url('/images/trainings.jpg')] bg-cover bg-center">
+        <div
+          className="breakout bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${assetPath("/images/trainings.jpg")})`,
+          }}
+        >
           <div className="py-40 lg:py-80">
             <InfoBoxSideBySide>
               <InfoBox look="method" className="bg-white">
@@ -210,14 +223,14 @@ export default function Index() {
                   links={[
                     {
                       text: "Zu Visualisierungen",
-                      to: ROUTE_METHODS_VISUALIZE.url,
+                      to: methoden_visualisieren.path,
                       look: "tertiary",
                       plausibleEventName:
                         "Content.Teaser+Visualisierungen.Link+Visualisierungen",
                     },
                     {
                       text: "Beispiele",
-                      to: ROUTE_EXAMPLES_VISUALISATIONS.url,
+                      to: beispiele_visualisierungen.path,
                       look: "ghost",
                       plausibleEventName:
                         "Content.Teaser+Visualisierungen.Link+Beispiele",
@@ -235,14 +248,14 @@ export default function Index() {
                   links={[
                     {
                       text: "Zu den Prinzipien",
-                      to: ROUTE_METHODS_PRINCIPLES.url,
+                      to: methoden_fuenfPrinzipien.path,
                       look: "tertiary",
                       plausibleEventName:
                         "Content.Teaser+Prinzipien.Link+Prinzipien",
                     },
                     {
                       text: "Beispiele",
-                      to: ROUTE_EXAMPLES_PRINCIPLES.url,
+                      to: beispiele_prinzipien.path,
                       look: "ghost",
                       plausibleEventName:
                         "Content.Teaser+Prinzipien.Link+Beispiele",
@@ -264,7 +277,7 @@ export default function Index() {
               links={[
                 {
                   text: "Angebote kennenlernen",
-                  to: ROUTE_SUPPORT.url,
+                  to: unterstuetzung.path,
                   look: "tertiary",
                   plausibleEventName: "Content.Support.Button+Support",
                 },

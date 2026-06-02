@@ -12,10 +12,8 @@ import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import DocumentationTitle from "~/routes/dokumentation._documentationNavigation.regelungsvorhaben-titel";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
-import {
-  DATA_SCHEMA_VERSION_V1,
-  DocumentationData,
-} from "../dokumentation/documentationDataSchema";
+import type { DocumentationData } from "../dokumentation/documentationDataSchema";
+import { DATA_SCHEMA_VERSION_V1 } from "../dokumentation/documentationDataSchema";
 
 const mockedReadDataFromLocalStorage = vi.mocked(
   readDataFromLocalStorage<DocumentationData>,
@@ -53,7 +51,9 @@ describe("DocumentationTitle", () => {
     });
 
     it("shows an input element with the expected label", () => {
-      const input = screen.getByLabelText("Titel des Regelungsvorhabens");
+      const input = screen.getByRole("textbox", {
+        name: "Titel des Regelungsvorhabens",
+      });
       expect(input).toBeInTheDocument();
       expect(input.tagName).toBe("INPUT");
     });
@@ -77,7 +77,7 @@ describe("DocumentationTitle", () => {
     beforeEach(() => {
       mockedReadDataFromLocalStorage.mockReturnValue({
         ...{ version: DATA_SCHEMA_VERSION_V1 },
-        policyTitle: { title: "", publicationStatus: "" },
+        policyTitle: { title: "" },
       });
 
       act(() => {
@@ -86,7 +86,9 @@ describe("DocumentationTitle", () => {
     });
 
     it("shows an error on invalid data", async () => {
-      const input = screen.getByLabelText("Titel des Regelungsvorhabens");
+      const input = screen.getByRole("textbox", {
+        name: "Titel des Regelungsvorhabens",
+      });
       await waitFor(() => {
         expect(input).toBeInvalid();
       });
@@ -98,7 +100,9 @@ describe("DocumentationTitle", () => {
     it("removes the error on change", async () => {
       const user = userEvent.setup();
 
-      const input = screen.getByLabelText("Titel des Regelungsvorhabens");
+      const input = screen.getByRole("textbox", {
+        name: "Titel des Regelungsvorhabens",
+      });
       await waitFor(() => {
         expect(input).toBeInvalid();
       });

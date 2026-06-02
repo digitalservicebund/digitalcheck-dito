@@ -1,8 +1,8 @@
+import { methoden_fuenfPrinzipien } from "@/config/routes";
 import { Navigate } from "react-router";
-import { ROUTE_FUNDAMENTALS_PRINCIPLES } from "~/resources/staticRoutes.ts";
 import { createRedirectLoader } from "~/utils/redirectLoader";
 
-const to = ROUTE_FUNDAMENTALS_PRINCIPLES.url;
+const to = methoden_fuenfPrinzipien.path;
 
 export const loader = createRedirectLoader(to);
 

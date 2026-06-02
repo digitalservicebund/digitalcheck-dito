@@ -2,64 +2,47 @@
 import "./utils/mockLocalStorageVersioned";
 // End of mocks
 
+import {
+  dokumentation,
+  dokumentation_beteiligungsformate,
+  dokumentation_hinweise,
+  dokumentation_interoperabilitaet,
+  dokumentation_regelungsvorhabenTitel,
+  Route,
+} from "@/config/routes";
 import "@testing-library/jest-dom";
 import { act, render, screen, within } from "@testing-library/react";
-import {
-  createMemoryRouter,
-  RouterProvider,
-  useOutletContext,
-  useRouteLoaderData,
-} from "react-router";
+import { MemoryRouter, useRouteLoaderData } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import {
-  type Route,
-  ROUTE_DOCUMENTATION,
-  ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
-  ROUTE_DOCUMENTATION_NOTES,
-  ROUTE_DOCUMENTATION_PARTICIPATION,
-  ROUTE_DOCUMENTATION_TITLE,
-  ROUTES_DOCUMENTATION_INTRO,
-} from "~/resources/staticRoutes";
 
-import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
-import LayoutWithDocumentationNavigation, {
-  NavigationContext,
-} from "~/routes/dokumentation._documentationNavigation";
+import { LayoutWithDocumentationNavigation } from "~/routes/dokumentation._documentationNavigation";
+import { useDocumentationNavigation } from "~/routes/dokumentation/DocumentationNavigationContext";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
-import {
-  DATA_SCHEMA_VERSION_V1,
-  DATA_SCHEMA_VERSION_V2,
+import type {
   DocumentationData,
   V1,
   V2,
 } from "../dokumentation/documentationDataSchema";
-
-vi.mock("~/contexts/FeatureFlagContext", () => ({
-  useFeatureFlag: vi.fn(),
-}));
-
-vi.mock("react-router", async (importOriginal) => {
-  const original = await importOriginal<typeof import("react-router")>();
-  return {
-    ...original,
-    useRouteLoaderData: vi.fn(),
-    useOutletContext: () => {
-      const originalValue = original.useOutletContext();
-      return {
-        ...(originalValue as Record<string, unknown>),
-        featureFlags: {},
-      };
-    },
-  };
-});
+import {
+  DATA_SCHEMA_VERSION_V1,
+  DATA_SCHEMA_VERSION_V2,
+} from "../dokumentation/documentationDataSchema";
 
 const mockRoutes: (Route[] | Route)[] = [
-  ...ROUTES_DOCUMENTATION_INTRO,
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+  dokumentation_beteiligungsformate,
   [
     {
       title: "Prinzip A",
-      url: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
+      path: `${dokumentation.path}/prinzipA`,
+      key: "prinzipA",
+      parent: null,
+      sitemap: false,
+      isStagingOnly: false,
+      navOrder: null,
+      navLabel: null,
     },
   ],
 ];
@@ -69,11 +52,11 @@ const mockRoutes: (Route[] | Route)[] = [
  */
 const documentationFormRoutes = mockRoutes
   .flat()
-  .filter((route) => route.url !== ROUTE_DOCUMENTATION_NOTES.url);
+  .filter((route) => route.path !== dokumentation_hinweise.path);
 
 type ValidationScenario = {
   name: string;
-  documentationData: DocumentationData<V1>;
+  documentationData: DocumentationData<V1> | DocumentationData<V2>;
   expected: {
     completedTitle: boolean;
     completedParticipation: boolean;
@@ -92,7 +75,7 @@ const validationScenarios: ValidationScenario[] = [
       version: DATA_SCHEMA_VERSION_V1,
       policyTitle: {
         title: "Valid Title",
-        publicationStatus: "",
+        publicationStatus: "published",
       },
       participation: {
         formats: "Valid Formats",
@@ -101,7 +84,7 @@ const validationScenarios: ValidationScenario[] = [
       principles: [
         {
           answer: "Ja, gänzlich oder teilweise",
-          id: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
+          id: `${dokumentation.path}/prinzipA`,
           reasoning: [
             {
               checkbox: "on",
@@ -144,7 +127,7 @@ const validationScenarios: ValidationScenario[] = [
       version: DATA_SCHEMA_VERSION_V1,
       policyTitle: {
         title: "",
-        publicationStatus: "",
+        publicationStatus: "planned",
       },
       participation: {
         formats: "Valid Formats",
@@ -153,7 +136,7 @@ const validationScenarios: ValidationScenario[] = [
       principles: [
         {
           answer: "Ja, gänzlich oder teilweise",
-          id: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
+          id: `${dokumentation.path}/prinzipA`,
           reasoning: [
             {
               checkbox: "on",
@@ -168,21 +151,18 @@ const validationScenarios: ValidationScenario[] = [
     expected: {
       completedTitle: false, // is current route so no states are shown
       completedParticipation: true,
-      completedPrinciples: true,
+      completedPrinciples: false,
 
       warningTitle: false,
       warningParticipation: false,
-      warningPrinciples: false,
+      warningPrinciples: true,
     },
   },
 ];
 
-function renderPage({ url }: Route) {
-  function ErrorBoundary() {
-    return <h1>Something went wrong</h1>;
-  }
+function renderPage({ path }: Route) {
   function DummyElement() {
-    const { nextUrl, previousUrl } = useOutletContext<NavigationContext>();
+    const { nextUrl, previousUrl } = useDocumentationNavigation();
     return (
       <>
         <h1>Foobar</h1>
@@ -191,30 +171,20 @@ function renderPage({ url }: Route) {
       </>
     );
   }
-  const routes = [
-    {
-      path: ROUTE_DOCUMENTATION.url,
-      element: (
-        <DocumentationDataProvider>
-          <LayoutWithDocumentationNavigation />
-        </DocumentationDataProvider>
-      ),
-      ErrorBoundary: ErrorBoundary,
-      children: [
-        {
-          path: url,
-          element: <DummyElement />,
-          HydrateFallback: () => <div></div>,
-        },
-      ],
-    },
-  ];
 
-  const router = createMemoryRouter(routes, {
-    initialEntries: [url],
-  });
-
-  render(<RouterProvider router={router} />);
+  render(
+    <MemoryRouter initialEntries={[path]}>
+      <DocumentationDataProvider>
+        <LayoutWithDocumentationNavigation
+          routes={mockRoutes}
+          prinzips={[]}
+          currentUrl={path}
+        >
+          <DummyElement />
+        </LayoutWithDocumentationNavigation>
+      </DocumentationDataProvider>
+    </MemoryRouter>,
+  );
 }
 
 const getNav = () =>
@@ -262,8 +232,27 @@ const expectNotWarning = (element: HTMLElement) => {
 
 describe("navigation on pages of documentation", () => {
   beforeEach(() => {
-    vi.mocked(useFeatureFlag).mockImplementation((_flagName) => false);
-    vi.mocked(useRouteLoaderData).mockReturnValue({ routes: mockRoutes });
+    Object.defineProperty(globalThis, "matchMedia", {
+      writable: true,
+      value: vi.fn().mockImplementation((query: string) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      })),
+    });
+    vi.stubGlobal(
+      "ResizeObserver",
+      class {
+        observe = vi.fn();
+        unobserve = vi.fn();
+        disconnect = vi.fn();
+      },
+    );
   });
 
   afterEach(() => {
@@ -271,37 +260,39 @@ describe("navigation on pages of documentation", () => {
   });
 
   it.each(mockRoutes.flat())(
-    "$url has back and forth navigation to previous and next page",
+    "$path has back and forth navigation to previous and next page",
     (route) => {
       renderPage(route);
 
-      const index = mockRoutes.flat().findIndex(({ url }) => url === route.url);
+      const index = mockRoutes
+        .flat()
+        .findIndex(({ path }) => path === route.path);
       const previous = mockRoutes.flat()[index - 1];
       const next = mockRoutes.flat()[index + 1];
 
       if (previous) {
         expect(screen.getByRole("link", { name: "Zurück" })).toHaveAttribute(
           "href",
-          previous.url,
+          previous.path,
         );
       }
       if (next) {
         const linkNext = screen.getByRole("link", {
           name: "Weiter",
         });
-        expect(linkNext).toHaveAttribute("href", next.url);
+        expect(linkNext).toHaveAttribute("href", next.path);
       }
     },
   );
 
   it("disables all routes and only shows top-level items on the notes page", () => {
-    renderPage(ROUTE_DOCUMENTATION_NOTES);
+    renderPage(dokumentation_hinweise);
     const navigation = screen.getByRole("navigation", {
       name: "Seitennavigation",
     });
     for (const title of [
-      ROUTE_DOCUMENTATION_TITLE.title,
-      ROUTE_DOCUMENTATION_PARTICIPATION.title,
+      dokumentation_regelungsvorhabenTitel.title,
+      dokumentation_beteiligungsformate.title,
       "Prinzipien",
       "EU-Interoperabilitaet",
     ]) {
@@ -314,14 +305,11 @@ describe("navigation on pages of documentation", () => {
   it("groups EU steps in one section after principles", () => {
     vi.mocked(useRouteLoaderData).mockReturnValue({
       routes: [
-        ...ROUTES_DOCUMENTATION_INTRO,
-        [
-          {
-            title: "Prinzip A",
-            url: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
-          },
-        ],
-        ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
+        {
+          title: "Prinzip A",
+          url: `${dokumentation.path}/prinzipA`,
+        },
+        dokumentation_interoperabilitaet,
       ],
     });
     vi.mocked(readDataFromLocalStorage<DocumentationData<V1>>).mockReturnValue({
@@ -361,7 +349,7 @@ describe("navigation on pages of documentation", () => {
     ).toBeInTheDocument();
   });
 
-  const currentRoute = ROUTE_DOCUMENTATION_TITLE;
+  const currentRoute = dokumentation_regelungsvorhabenTitel;
   it("renders sidebar navigation with links to all pages (except current and notes)", () => {
     renderPage(currentRoute);
 
@@ -369,11 +357,11 @@ describe("navigation on pages of documentation", () => {
       name: "Seitennavigation",
     });
     for (const route of documentationFormRoutes) {
-      if (route.url === currentRoute.url) continue;
+      if (route.path === currentRoute.path) continue;
       const navItem = within(navigation).getByRole("link", {
         name: route.title,
       });
-      expect(navItem).toHaveAttribute("href", route.url);
+      expect(navItem).toHaveAttribute("href", route.path);
     }
   });
 
@@ -415,32 +403,6 @@ describe("navigation on pages of documentation", () => {
   });
 
   describe("V2 States", () => {
-    // HelpSidepanel is rendered when simplifiedPrincipleFlow is on
-    // and uses browser APIs not available in jsdom
-    beforeEach(() => {
-      Object.defineProperty(window, "matchMedia", {
-        writable: true,
-        value: vi.fn().mockImplementation((query: string) => ({
-          matches: false,
-          media: query,
-          onchange: null,
-          addListener: vi.fn(),
-          removeListener: vi.fn(),
-          addEventListener: vi.fn(),
-          removeEventListener: vi.fn(),
-          dispatchEvent: vi.fn(),
-        })),
-      });
-      vi.stubGlobal(
-        "ResizeObserver",
-        class {
-          observe = vi.fn();
-          unobserve = vi.fn();
-          disconnect = vi.fn();
-        },
-      );
-    });
-
     const validationScenariosV2: ValidationScenario[] = [
       {
         name: "all valid completed (V2)",
@@ -456,12 +418,12 @@ describe("navigation on pages of documentation", () => {
           principles: [
             {
               answer: "Ja, gänzlich oder teilweise",
-              id: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
+              id: `${dokumentation.path}/prinzipA`,
               reasoning: "Some reasoning",
               aspects: ["aspect-1"],
             },
           ],
-        } as DocumentationData<V2>,
+        },
         expected: {
           completedTitle: false, // is current route so no states are shown
           completedParticipation: true,
@@ -493,7 +455,7 @@ describe("navigation on pages of documentation", () => {
           version: DATA_SCHEMA_VERSION_V2,
           policyTitle: {
             title: "",
-            publicationStatus: "",
+            publicationStatus: "published",
           },
           participation: {
             formats: "Valid Formats",
@@ -502,12 +464,12 @@ describe("navigation on pages of documentation", () => {
           principles: [
             {
               answer: "Ja, gänzlich oder teilweise",
-              id: `${ROUTE_DOCUMENTATION.url}/prinzipA`,
+              id: `${dokumentation.path}/prinzipA`,
               reasoning: "Some reasoning",
               aspects: [], // empty aspects fails V2 validation
             },
           ],
-        } as DocumentationData<V2>,
+        },
         expected: {
           completedTitle: false, // is current route so no states are shown
           completedParticipation: true,
@@ -519,10 +481,6 @@ describe("navigation on pages of documentation", () => {
         },
       },
     ];
-
-    beforeEach(() => {
-      vi.mocked(useFeatureFlag).mockImplementation((_flagName) => true);
-    });
 
     describe.each(validationScenariosV2)(
       "Scenario: $name",

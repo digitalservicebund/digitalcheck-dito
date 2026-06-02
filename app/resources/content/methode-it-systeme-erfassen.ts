@@ -1,11 +1,12 @@
+import { itSystemeErfassenXlsx } from "@/config/downloads";
+import { unterstuetzung } from "@/config/routes";
 import {
   DrawOutlined,
   StickyNote2Outlined,
   SupportOutlined,
 } from "@digitalservicebund/icons";
-import { ROUTE_SUPPORT } from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
-import { ContentLink } from "~/utils/contentTypes.ts";
+import type { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
 
@@ -51,7 +52,7 @@ export const methodsITSystems = {
       links: [
         {
           text: "Vorlage herunterladen (xlsx-Datei)",
-          to: "/download/Vorlage - IT-Systeme erfassen.xlsx",
+          to: itSystemeErfassenXlsx.path,
           download: true,
         },
       ] satisfies ContentLink[],
@@ -70,7 +71,7 @@ export const methodsITSystems = {
       {
         text: "Unterstützungsangebote nutzen",
         look: "tertiary" as const,
-        to: ROUTE_SUPPORT.url,
+        to: unterstuetzung.path,
       },
     ] satisfies ContentLink[],
   },

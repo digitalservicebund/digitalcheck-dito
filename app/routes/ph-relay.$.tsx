@@ -1,6 +1,6 @@
 // Reverse proxy for Posthog
 
-import { ActionFunction, LoaderFunction } from "react-router";
+import type { ActionFunction, LoaderFunction } from "react-router";
 import { POSTHOG_API_HOST, POSTHOG_ASSET_HOST } from "~/utils/constants";
 
 const posthogProxy = async (request: Request) => {

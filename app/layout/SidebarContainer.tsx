@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import customTwMerge from "~/utils/tailwindMerge";
 
 type SidebarContainerProps = {

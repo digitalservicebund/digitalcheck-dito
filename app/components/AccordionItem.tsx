@@ -4,7 +4,7 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
 import RichText from "~/components/RichText";

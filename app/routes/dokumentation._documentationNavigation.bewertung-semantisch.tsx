@@ -1,3 +1,7 @@
+import {
+  dokumentation_zusammenfassung,
+  interoperabel_loesungen_coreVocabularies,
+} from "@/config/routes.ts";
 import { FormScope, useField } from "@rvf/react";
 import { useOutletContext } from "react-router";
 import { z } from "zod";
@@ -8,11 +12,6 @@ import MetaTitle from "~/components/Meta";
 import NewTabLink from "~/components/NewTabLink.tsx";
 import RadioGroup from "~/components/RadioGroup.tsx";
 import Textarea from "~/components/Textarea.tsx";
-import {
-  ROUTE_DOCUMENTATION_INTEROPERABILITY_SEMANTIC,
-  ROUTE_DOCUMENTATION_SUMMARY,
-  ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES,
-} from "~/resources/staticRoutes";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
 import {
@@ -67,9 +66,7 @@ export default function DocumentationInteroperabilityAssessmentSemantic() {
 
   return (
     <>
-      <MetaTitle
-        prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_INTEROPERABILITY_SEMANTIC.title}`}
-      />
+      <MetaTitle prefix={"Dokumentation: Semantische Interoperabilität"} />
       <div className="space-y-40">
         <div className={"space-y-8"}>
           <Badge look="hint">Semantische Interoperabilität</Badge>
@@ -85,9 +82,7 @@ export default function DocumentationInteroperabilityAssessmentSemantic() {
           <DetailsSummary title={"Beispiel"}>
             Das Datenfeld für „Wohnsitz“ wird in ganz Europa nach demselben
             Standard (z. B. den{" "}
-            <NewTabLink
-              to={ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES.url}
-            >
+            <NewTabLink to={interoperabel_loesungen_coreVocabularies.path}>
               <i>Semantic Core Vocabularies</i>
             </NewTabLink>
             ) definiert. So verstehen das spanische System und das deutsche
@@ -112,7 +107,7 @@ export default function DocumentationInteroperabilityAssessmentSemantic() {
         </SkipNoticeWrapper>
         <DocumentationActions
           previousUrl={previousUrl}
-          nextUrl={nextUrl ?? ROUTE_DOCUMENTATION_SUMMARY.url}
+          nextUrl={nextUrl ?? dokumentation_zusammenfassung.path}
           showDownloadDraftButton
           showSavingTip
         />

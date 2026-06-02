@@ -1,4 +1,8 @@
 import {
+  methoden_fuenfPrinzipien,
+  methoden_visualisieren,
+} from "@/config/routes";
+import {
   EmojiObjectsOutlined,
   ShareOutlined,
   VisibilityTwoTone,
@@ -17,14 +21,10 @@ import { PrinciplePosterBox } from "~/components/PrinciplePosterBox";
 import RichText from "~/components/RichText.tsx";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
 import {
-  ROUTE_METHODS_PRINCIPLES,
-  ROUTE_METHODS_VISUALIZE,
-} from "~/resources/staticRoutes";
-import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_EXAMPLES_QUERY,
-  PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.server";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
 export const loader = async () => {
   const prinzipData = await fetchStrapiData<{
@@ -39,12 +39,14 @@ export const loader = async () => {
   return { prinzips: prinzipData.prinzips };
 };
 
-export default function FivePrinciples() {
-  const { prinzips } = useLoaderData<typeof loader>();
-
+export function FivePrinciples({
+  prinzips,
+}: Readonly<{
+  prinzips: PrinzipWithAspekteAndExample[];
+}>) {
   return (
     <>
-      <MetaTitle prefix={ROUTE_METHODS_PRINCIPLES.title} />
+      <MetaTitle prefix={methoden_fuenfPrinzipien.title} />
       <main>
         <Hero
           title={methodsFivePrinciples.title}
@@ -68,7 +70,7 @@ export default function FivePrinciples() {
                   Umsetzungsprozesses an. So lokalisieren Sie relevante
                   Schnittstellen Schritt für Schritt.
                 </p>
-                <Link to={ROUTE_METHODS_VISUALIZE.url} className="text-link">
+                <Link to={methoden_visualisieren.path} className="text-link">
                   Zur Methode Visualisieren
                 </Link>
               </div>
@@ -122,7 +124,7 @@ export default function FivePrinciples() {
                   </div>
                   <LinkButton
                     to={
-                      ROUTE_METHODS_PRINCIPLES.url +
+                      methoden_fuenfPrinzipien.path +
                       "/" +
                       prinzip.URLBezeichnung
                     }
@@ -161,4 +163,9 @@ export default function FivePrinciples() {
       </section>
     </>
   );
+}
+
+export default function Route() {
+  const { prinzips } = useLoaderData<typeof loader>();
+  return <FivePrinciples prinzips={prinzips} />;
 }

@@ -1,31 +1,21 @@
-import { Outlet, useLocation } from "react-router";
-import { twJoin } from "tailwind-merge";
+import {
+  dokumentation,
+  dokumentation_absenden,
+  dokumentation_hinweise,
+  dokumentation_zusammenfassung,
+} from "@/config/routes";
+import type { ReactNode } from "react";
+import { Outlet, useLocation, useRouteLoaderData } from "react-router";
 import HelpSidepanel from "~/components/HelpSidepanel";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
-import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import {
-  type Route as _Route,
-  ROUTE_DOCUMENTATION,
-  ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
-  ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS,
-  ROUTE_DOCUMENTATION_INTEROPERABILITY_LEGAL,
-  ROUTE_DOCUMENTATION_INTEROPERABILITY_ORGANIZATIONAL,
-  ROUTE_DOCUMENTATION_INTEROPERABILITY_SEMANTIC,
-  ROUTE_DOCUMENTATION_INTEROPERABILITY_TECHNICAL,
-  ROUTE_DOCUMENTATION_NOTES,
-  ROUTE_DOCUMENTATION_PARTICIPATION,
-  ROUTE_DOCUMENTATION_SEND,
-  ROUTE_DOCUMENTATION_SUMMARY,
-  ROUTE_DOCUMENTATION_TITLE,
-} from "~/resources/staticRoutes";
-import { useDocumentationRouteData } from "~/routes/dokumentation/hooks.tsx";
-import { features } from "~/utils/featureFlags";
-import { PrinzipWithAspekteAndExample } from "~/utils/strapiData.server";
-import { staticDocumentationRoutes } from "./dokumentation.staticDocumentationRoutes";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
+import { DocumentationNavigationContext } from "./dokumentation/DocumentationNavigationContext";
+
+type _Route = { path: string; title: string };
 
 type Route = _Route & {
   principleId?: string;
@@ -34,423 +24,236 @@ type Route = _Route & {
 export type OnNavigateCallback = () => Promise<boolean>;
 export type NavigationContext = {
   currentUrl: string;
+  navigationBaseUrl: string;
   nextUrl: string;
   previousUrl: string;
   routes: (Route | Route[])[];
   prinzips: PrinzipWithAspekteAndExample[];
 };
 
-type NavigationTreeContext = {
-  flatRoutes: Route[];
-  principleRoutes: Route[];
-  routeByUrl: Map<string, Route>;
-};
-
-type NavigationItemDefinition = {
-  type: "item";
-  key: string;
-  getRoute: (context: NavigationTreeContext) => Route | null;
-  isEnabled: (context: NavigationTreeContext, route: Route) => boolean;
-};
-
-type NavigationFolderDefinition = {
-  type: "folder";
-  key: string;
-  label: string;
-  getChildren: (context: NavigationTreeContext) => NavigationItemDefinition[];
-};
-
-type NavigationDefinition =
-  | NavigationItemDefinition
-  | NavigationFolderDefinition;
-
-type ResolvedNavigationItem = {
-  type: "item";
-  key: string;
-  route: Route;
-  enabled: boolean;
-};
-
-type ResolvedNavigationFolder = {
-  type: "folder";
-  key: string;
-  label: string;
-  children: ResolvedNavigationItem[];
-};
-
-type ResolvedNavigationNode = ResolvedNavigationItem | ResolvedNavigationFolder;
-
-const alwaysEnabled = () => true;
-
-const getRouteByUrl =
-  (url: string) =>
-  ({ routeByUrl }: NavigationTreeContext) =>
-    routeByUrl.get(url) ?? null;
-
-const createRouteItem = (
-  key: string,
-  url: string,
-  isEnabled: NavigationItemDefinition["isEnabled"] = alwaysEnabled,
-): NavigationItemDefinition => ({
-  type: "item",
-  key,
-  getRoute: getRouteByUrl(url),
-  isEnabled,
-});
-
-const createPrincipleItem = (route: Route): NavigationItemDefinition => ({
-  type: "item",
-  key: route.url,
-  getRoute: () => route,
-  isEnabled: alwaysEnabled,
-});
-
-const documentationNavigationTree: NavigationDefinition[] = [
-  createRouteItem("title", ROUTE_DOCUMENTATION_TITLE.url),
-  createRouteItem("participation", ROUTE_DOCUMENTATION_PARTICIPATION.url),
-  {
-    type: "folder",
-    key: "principles",
-    label: digitalDocumentation.navigation.principles,
-    getChildren: ({ principleRoutes }) =>
-      principleRoutes.map(createPrincipleItem),
-  },
-  {
-    type: "folder",
-    key: "eu-interoperability",
-    label: digitalDocumentation.navigation.euInteroperability,
-    getChildren: () => [
-      createRouteItem(
-        "eu-interoperability-requirements",
-        ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS.url,
-      ),
-      createRouteItem(
-        "interoperability-binding-requirements",
-        ROUTE_DOCUMENTATION_INTEROPERABILITY_BINDING_REQUIREMENTS.url,
-      ),
-      createRouteItem(
-        "assessment-legal",
-        ROUTE_DOCUMENTATION_INTEROPERABILITY_LEGAL.url,
-      ),
-      createRouteItem(
-        "assessment-organizational",
-        ROUTE_DOCUMENTATION_INTEROPERABILITY_ORGANIZATIONAL.url,
-      ),
-      createRouteItem(
-        "assessment-semantic",
-        ROUTE_DOCUMENTATION_INTEROPERABILITY_SEMANTIC.url,
-      ),
-      createRouteItem(
-        "assessment-technical",
-        ROUTE_DOCUMENTATION_INTEROPERABILITY_TECHNICAL.url,
-      ),
-    ],
-  },
-  createRouteItem("summary", ROUTE_DOCUMENTATION_SUMMARY.url),
-  createRouteItem("send", ROUTE_DOCUMENTATION_SEND.url),
-];
-
-function resolveNavigationItem(
-  item: NavigationItemDefinition,
-  context: NavigationTreeContext,
-): ResolvedNavigationItem | null {
-  const route = item.getRoute(context);
-  if (!route) return null;
-
-  return {
-    type: "item",
-    key: item.key,
-    route,
-    enabled: item.isEnabled(context, route),
-  };
-}
-
-function resolveNavigationTree(
-  tree: NavigationDefinition[],
-  context: NavigationTreeContext,
-): ResolvedNavigationNode[] {
-  return tree.reduce<ResolvedNavigationNode[]>((resolvedTree, node) => {
-    if (node.type === "item") {
-      const item = resolveNavigationItem(node, context);
-      if (item) resolvedTree.push(item);
-      return resolvedTree;
-    }
-
-    const children = node
-      .getChildren(context)
-      .flatMap((child) => resolveNavigationItem(child, context) ?? []);
-
-    if (children.length > 0) {
-      resolvedTree.push({
-        type: "folder",
-        key: node.key,
-        label: node.label,
-        children,
-      } satisfies ResolvedNavigationFolder);
-    }
-
-    return resolvedTree;
-  }, []);
-}
-
-function flattenNavigationItems(
-  tree: ResolvedNavigationNode[],
-): ResolvedNavigationItem[] {
-  return tree.flatMap((node) =>
-    node.type === "item" ? [node] : flattenNavigationItems(node.children),
-  );
-}
-
 function findIndexForRoute(routes: Route[], currentUrl: string) {
-  const index = routes.findIndex((route) => route.url === currentUrl);
+  const index = routes.findIndex((route) => route.path === currentUrl);
 
   if (index === -1) {
-    console.error(`Could not find route with url ${currentUrl}`);
-    return 0;
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
+    throw new Response(`Could not find route with url ${currentUrl}`, {
+      status: 404,
+    });
   }
   return index;
 }
 
 function getPreviousUrl(routes: Route[], currentUrl: string): string {
   return findIndexForRoute(routes, currentUrl) > 0
-    ? routes[findIndexForRoute(routes, currentUrl) - 1].url
-    : ROUTE_DOCUMENTATION.url;
+    ? routes[findIndexForRoute(routes, currentUrl) - 1].path
+    : dokumentation.path;
 }
 
 function getNextUrl(routes: Route[], currentUrl: string): string | null {
   return findIndexForRoute(routes, currentUrl) < routes.length - 1
-    ? routes[findIndexForRoute(routes, currentUrl) + 1].url
+    ? routes[findIndexForRoute(routes, currentUrl) + 1].path
     : null;
 }
 
 function resolveAdjacentUrl(
   flatRoutes: Route[],
   fromUrl: string,
-  getAdjacent: (routes: Route[], url: string) => string | null,
-  simplifiedFlow: boolean,
+  getAdjacent: (routes: Route[], path: string) => string | null,
   findData: (id: string) => unknown,
-  isRouteAccessible: (route: Route) => boolean,
 ): string | null {
-  let currentUrl = fromUrl;
-  const visited = new Set<string>();
-
-  while (true) {
-    const rawUrl = getAdjacent(flatRoutes, currentUrl);
-    if (!rawUrl) return rawUrl;
-    if (visited.has(rawUrl)) return null;
-
-    visited.add(rawUrl);
-
-    const route = flatRoutes.find((r) => r.url === rawUrl);
-    if (route && !isRouteAccessible(route)) {
-      currentUrl = rawUrl;
-      continue;
-    }
-
-    if (!simplifiedFlow) return rawUrl;
-
-    if (route?.principleId) {
-      const data = findData(route.principleId) as
-        | { answer?: string }
-        | undefined;
-      if (data?.answer) return `${rawUrl}/erlaeuterung`;
-    }
-
-    return rawUrl;
+  const rawUrl = getAdjacent(flatRoutes, fromUrl);
+  if (!rawUrl) return rawUrl;
+  const route = flatRoutes.find((r) => r.path === rawUrl);
+  if (route?.principleId) {
+    const data = findData(route.principleId) as { answer?: string } | undefined;
+    if (data?.answer) return `${rawUrl}/erlaeuterung`;
   }
+  return rawUrl;
 }
 
-export default function LayoutWithDocumentationNavigation() {
-  const { routes, prinzips } = useDocumentationRouteData();
-  const simplifiedFlow = useFeatureFlag(features.simplifiedPrincipleFlow);
-  const flatRoutes = routes.flat();
-  const principleRoutes = routes.flatMap((route) =>
-    Array.isArray(route) ? route : [],
-  );
-  const routeByUrl = new Map(
-    [...staticDocumentationRoutes, ...flatRoutes].map((route) => [
-      route.url,
-      route,
-    ]),
-  );
-
-  const location = useLocation();
-  const currentUrl = location.pathname;
+export function LayoutWithDocumentationNavigation({
+  routes,
+  prinzips,
+  children,
+  currentUrl,
+}: Readonly<{
+  routes: (Route | Route[])[];
+  prinzips: PrinzipWithAspekteAndExample[];
+  children?: ReactNode;
+  currentUrl: string;
+}>) {
+  // exclude documentation notes
+  const displayedRoutes = routes.filter((route) => {
+    if (Array.isArray(route)) return true;
+    return route.path !== dokumentation_hinweise.path;
+  });
 
   // Detect erlaeuterung sub-page
   const isErlaeuterungPage = currentUrl.endsWith("/erlaeuterung");
-  const principleBaseUrl = isErlaeuterungPage
-    ? currentUrl.replace("/erlaeuterung", "")
-    : null;
-
   // For nav/stepper index lookups, use principle URL when on erlaeuterung page
-  const navigationCurrentUrl = principleBaseUrl ?? currentUrl;
+  const navigationBaseUrl = isErlaeuterungPage
+    ? currentUrl.replace("/erlaeuterung", "")
+    : currentUrl;
 
   const { findDocumentationDataForUrl, getDocumentationSchemaFormUrl } =
     useDocumentationDataService();
 
-  const navigationTreeContext: NavigationTreeContext = {
-    flatRoutes,
-    principleRoutes,
-    routeByUrl,
-  };
-
-  const resolvedNavigationTree = resolveNavigationTree(
-    documentationNavigationTree,
-    navigationTreeContext,
-  );
-  const accessibleRouteUrls = new Set([
-    ROUTE_DOCUMENTATION_NOTES.url,
-    ...flattenNavigationItems(resolvedNavigationTree)
-      .filter((item) => item.enabled)
-      .map((item) => item.route.url),
-  ]);
-
-  const isRouteAccessible = (route: Route) =>
-    accessibleRouteUrls.has(route.url);
-
-  const currentRoute = flatRoutes.find((r) => r.url === navigationCurrentUrl);
+  const flatRoutes = routes.flat();
+  const currentRoute = flatRoutes.find((r) => r.path === navigationBaseUrl);
   const currentPrincipleFormData = currentRoute?.principleId
     ? findDocumentationDataForUrl(currentRoute.principleId)
     : undefined;
 
-  let nextUrl: string | null;
-
-  if (isErlaeuterungPage) {
-    nextUrl = resolveAdjacentUrl(
-      flatRoutes,
-      navigationCurrentUrl,
-      getNextUrl,
-      simplifiedFlow,
-      findDocumentationDataForUrl,
-      isRouteAccessible,
-    );
-  } else if (
-    simplifiedFlow &&
-    currentRoute?.principleId &&
-    (currentPrincipleFormData as { answer?: string } | undefined)?.answer
-  ) {
-    nextUrl = `${currentUrl}/erlaeuterung`;
-  } else {
-    nextUrl = resolveAdjacentUrl(
-      flatRoutes,
-      currentUrl,
-      getNextUrl,
-      simplifiedFlow,
-      findDocumentationDataForUrl,
-      isRouteAccessible,
-    );
-  }
+  const nextUrl = isErlaeuterungPage
+    ? resolveAdjacentUrl(
+        flatRoutes,
+        navigationBaseUrl,
+        getNextUrl,
+        findDocumentationDataForUrl,
+      )
+    : currentRoute?.principleId &&
+        (currentPrincipleFormData as { answer?: string } | undefined)?.answer
+      ? `${currentUrl}/erlaeuterung`
+      : resolveAdjacentUrl(
+          flatRoutes,
+          currentUrl,
+          getNextUrl,
+          findDocumentationDataForUrl,
+        );
   const previousUrl =
     resolveAdjacentUrl(
       flatRoutes,
-      navigationCurrentUrl,
+      navigationBaseUrl,
       getPreviousUrl,
-      simplifiedFlow,
       findDocumentationDataForUrl,
-      isRouteAccessible,
-    ) ?? ROUTE_DOCUMENTATION.url;
+    ) ?? dokumentation.path;
 
-  const isNavigationDisabled = currentUrl === ROUTE_DOCUMENTATION_NOTES.url;
+  const isNavigationDisabled = currentUrl === dokumentation_hinweise.path;
 
   const excludedPanelRoutes = [
-    ROUTE_DOCUMENTATION_NOTES.url,
-    ROUTE_DOCUMENTATION_SUMMARY.url,
-    ROUTE_DOCUMENTATION_SEND.url,
+    dokumentation_hinweise.path,
+    dokumentation_zusammenfassung.path,
+    dokumentation_absenden.path,
   ];
-  const showHelpPanel =
-    simplifiedFlow &&
-    !excludedPanelRoutes.some((url) => currentUrl.startsWith(url));
+  const showHelpPanel = !excludedPanelRoutes.some((url) =>
+    currentUrl.startsWith(url),
+  );
 
-  const getNavItem = ({ route, enabled }: ResolvedNavigationItem) => {
+  const getNavItem = (route: Route) => {
     const formData = findDocumentationDataForUrl(
-      route.principleId || route.url,
+      route.principleId || route.path,
     );
-    const schema = getDocumentationSchemaFormUrl(route.url);
+    const schema = getDocumentationSchemaFormUrl(route.path);
     const valid = schema.safeParse(formData);
 
     const navUrl =
-      simplifiedFlow &&
-      route.principleId &&
-      (formData as { answer?: string } | undefined)?.answer
-        ? `${route.url}/erlaeuterung`
-        : route.url;
+      route.principleId && (formData as { answer?: string } | undefined)?.answer
+        ? `${route.path}/erlaeuterung`
+        : route.path;
 
     return (
       <Nav.Item
-        key={route.url}
+        key={route.path}
         url={navUrl}
         activeUrls={
           route.principleId
-            ? [route.url, `${route.url}/erlaeuterung`]
+            ? [route.path, `${route.path}/erlaeuterung`]
             : undefined
         }
         error={formData && !valid.success}
         completed={formData && valid.success}
-        disabled={isNavigationDisabled || !enabled}
+        disabled={isNavigationDisabled}
       >
         {route.title}
       </Nav.Item>
     );
   };
 
+  const navigationContextValue = {
+    currentUrl,
+    navigationBaseUrl,
+    nextUrl: nextUrl ?? "",
+    previousUrl,
+    routes,
+    prinzips,
+  };
+
   return (
-    <HelpPanelProvider>
-      <div
-        className={twJoin(
-          "parent-bg-blue breakout-grid-form-steps grow bg-blue-100",
-          !simplifiedFlow &&
-            "[--content-max-width:calc(var(--max-content-width)-var(--nav-max-width)-var(--gutter)-var(--container-padding-inline)*2)] [--help-width:0]",
-          !showHelpPanel && "[--content-max-width:750px] [--help-width:0]",
-        )}
-      >
-        <Nav
-          className="sticky top-0 hidden self-start py-80 lg:block"
-          activeElementUrl={currentUrl}
-          ariaLabel={digitalDocumentation.navigation.ariaLabel}
+    <DocumentationNavigationContext.Provider value={navigationContextValue}>
+      <HelpPanelProvider>
+        <div
+          className={
+            showHelpPanel
+              ? "parent-bg-blue breakout-grid-form-steps grow bg-blue-100"
+              : "parent-bg-blue breakout-grid-form-steps grow bg-blue-100 [--content-max-width:750px] [--help-width:0]"
+          }
         >
-          <Nav.Items>
-            {resolvedNavigationTree.map((node) => {
-              if (node.type === "folder") {
-                return (
-                  <Nav.Item
-                    key={node.key}
-                    disabled={isNavigationDisabled}
-                    subItems={
-                      <Nav.Items>
-                        {node.children.map((item) => getNavItem(item))}
-                      </Nav.Items>
-                    }
-                  >
-                    {node.label}
-                  </Nav.Item>
-                );
-              }
-              return getNavItem(node);
-            })}
-          </Nav.Items>
-        </Nav>
-        <main className="space-y-40 py-80">
-          <div className="lg:hidden">
-            <Stepper
-              currentElementUrl={navigationCurrentUrl}
-              elements={routes.flat().filter(isRouteAccessible)}
+          <Nav
+            className="sticky top-0 hidden self-start py-80 lg:block"
+            activeElementUrl={currentUrl}
+            ariaLabel={digitalDocumentation.navigation.ariaLabel}
+          >
+            <Nav.Items>
+              {displayedRoutes.map((route) => {
+                if (Array.isArray(route))
+                  return (
+                    <Nav.Item
+                      key="principles"
+                      disabled={isNavigationDisabled}
+                      subItems={
+                        <Nav.Items>
+                          {route.map((element) => getNavItem(element))}
+                        </Nav.Items>
+                      }
+                    >
+                      {digitalDocumentation.navigation.principles}
+                    </Nav.Item>
+                  );
+                return getNavItem(route);
+              })}
+            </Nav.Items>
+          </Nav>
+          <main className="space-y-40 py-80">
+            <div className="lg:hidden">
+              <Stepper
+                currentElementUrl={navigationBaseUrl}
+                elements={routes.flat()}
+              />
+            </div>
+            {/* force remount for different principles with key={currentUrl} */}
+            <Outlet
+              key={currentUrl}
+              context={{
+                currentUrl,
+                navigationBaseUrl,
+                nextUrl,
+                previousUrl,
+                routes,
+                prinzips,
+              }}
             />
-          </div>
-          {/* force remount for different principles with key={currentUrl} */}
-          <Outlet
-            key={currentUrl}
-            context={{
-              currentUrl,
-              nextUrl,
-              previousUrl,
-              routes,
-              prinzips,
-            }}
-          />
-        </main>
-        {showHelpPanel && <HelpSidepanel />}
-      </div>
-    </HelpPanelProvider>
+            {children}
+          </main>
+          {showHelpPanel && <HelpSidepanel />}
+        </div>
+      </HelpPanelProvider>
+    </DocumentationNavigationContext.Provider>
+  );
+}
+
+export default function Route() {
+  const data = useRouteLoaderData<{
+    routes: (Route | Route[])[];
+    prinzips: PrinzipWithAspekteAndExample[];
+  }>("routes/dokumentation");
+  const location = useLocation();
+  const currentUrl = location.pathname;
+  if (!data) return null;
+  return (
+    <LayoutWithDocumentationNavigation
+      routes={data.routes}
+      prinzips={data.prinzips}
+      currentUrl={currentUrl}
+    />
   );
 }

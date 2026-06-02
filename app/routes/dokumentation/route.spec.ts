@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
-
-import { loader } from "~/routes/dokumentation/route.tsx";
+import { loader } from "./route.tsx";
 
 describe("dokumentation/route.tsx", () => {
   it("renders the routes as in the snapshot", async () => {

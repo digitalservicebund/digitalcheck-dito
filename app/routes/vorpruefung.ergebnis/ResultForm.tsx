@@ -1,10 +1,10 @@
 import {
-  CopyAll,
   DriveFileRenameOutline,
   EmailOutlined,
 } from "@digitalservicebund/icons";
 import { useField } from "@rvf/react";
-import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Alert from "~/components/Alert";
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
@@ -26,7 +26,7 @@ import {
 } from "../vorpruefung/preCheckDataHook";
 import { resultSchema } from "../vorpruefung/preCheckDataSchema";
 import { ResultType } from "./PreCheckResult";
-import { ResultContent } from "./getContentForResult";
+import type { ResultContent } from "./getContentForResult";
 
 export default function ResultForm({
   resultContent,
@@ -38,7 +38,7 @@ export default function ResultForm({
   const [showEmailAlert, setShowEmailAlert] = useState<boolean>(false);
   const [warning, setWarning] = useState<string | null>(null);
   const [isMailBodyCopied, setIsMailBodyCopied] = useState<boolean>(false);
-  const [isMailAddressCopied, setIsMailAddressCopied] = useState(false);
+  // const [isMailAddressCopied, setIsMailAddressCopied] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const { resultData, result } = usePreCheckData();
 
@@ -98,15 +98,15 @@ export default function ResultForm({
     }
   };
 
-  const handleCopyMailAddress = async () => {
-    let addressesToCopy = preCheckResult.form.emailTemplate.toNkr;
-    if (result?.interoperability === ResultType.POSITIVE) {
-      addressesToCopy += `, ${preCheckResult.form.emailTemplate.toDC}`;
-    }
-    await navigator.clipboard.writeText(addressesToCopy);
-    setIsMailAddressCopied(true);
-    setTimeout(() => setIsMailAddressCopied(false), 2000); // Hide Kopiert message after 2 seconds
-  };
+  // const handleCopyMailAddress = async () => {
+  //   let addressesToCopy = preCheckResult.form.emailTemplate.toNkr;
+  //   if (result?.interoperability === ResultType.POSITIVE) {
+  //     addressesToCopy += `, ${preCheckResult.form.emailTemplate.toDC}`;
+  //   }
+  //   await navigator.clipboard.writeText(addressesToCopy);
+  //   setIsMailAddressCopied(true);
+  //   setTimeout(() => setIsMailAddressCopied(false), 2000); // Hide Kopiert message after 2 seconds
+  // };
 
   const resultField = useField(form.scope("result"));
 
@@ -127,19 +127,21 @@ export default function ResultForm({
             </div>
             <div className="ds-stack ds-stack-16 grow">
               <RichText markdown={preCheckResult.form.instructions} />
-              <Input scope={form.scope("title")}>
-                {preCheckResult.form.vorhabenTitleLabel}
-              </Input>
+              <div className="max-w-a11y">
+                <Input scope={form.scope("title")}>
+                  {preCheckResult.form.vorhabenTitleLabel}
+                </Input>
+              </div>
 
               {result?.digital === ResultType.NEGATIVE && (
-                <>
+                <div className="max-w-a11y">
                   <Textarea scope={form.scope("negativeReasoning")}>
                     {preCheckResult.form.reasonLabel}
                   </Textarea>
                   {warning && (
                     <InputError look={"warning"}>{warning}</InputError>
                   )}
-                </>
+                </div>
               )}
               <ButtonContainer>
                 {isValid ? (
@@ -209,19 +211,6 @@ export default function ResultForm({
               {isMailBodyCopied
                 ? preCheckResult.form.copyMailButton.textCopied
                 : preCheckResult.form.copyMailButton.text}
-            </Button>
-            <Button
-              type="button"
-              look="ghost"
-              className="plausible-event-name=Content.Send+Result.Button+Copy+Email+Addresses"
-              iconRight={<CopyAll className="h-40 w-40 text-blue-800" />}
-              onClick={() => {
-                void handleCopyMailAddress();
-              }}
-            >
-              {isMailAddressCopied
-                ? preCheckResult.form.copyAddressButton.textCopied
-                : preCheckResult.form.copyAddressButton.text}
             </Button>
           </ButtonContainer>
         </div>

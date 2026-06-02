@@ -6,28 +6,25 @@ import "@testing-library/jest-dom";
 import { act, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import React from "react";
+import { dokumentation_hinweise } from "@/config/routes";
+import type React from "react";
 import { MemoryRouter } from "react-router";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general.ts";
-import { ROUTES_DOCUMENTATION_INTRO } from "~/resources/staticRoutes.ts";
 import {
   readDataFromLocalStorage,
   removeFromLocalStorage,
 } from "~/utils/localStorageVersioned";
 import { DocumentationContinueActions } from "./DocumentationContinueActions";
 import { DocumentationDataProvider } from "./DocumentationDataProvider";
-import {
-  DATA_SCHEMA_VERSION_V1,
-  DocumentationData,
-  V1,
-} from "./documentationDataSchema";
+import type { DocumentationData, V1 } from "./documentationDataSchema";
+import { DATA_SCHEMA_VERSION_V1 } from "./documentationDataSchema";
+const ROUTES_DOCUMENTATION_INTRO = [{ path: dokumentation_hinweise.path }];
 
 const { mockDownloadDocumentation } = vi.hoisted(() => ({
   mockDownloadDocumentation: vi.fn(),
 }));
 vi.mock("~/service/wordDocumentationExport/wordDocumentation", () => ({
-  default: mockDownloadDocumentation,
   useWordDocumentation: vi.fn(() => ({
     downloadDocumentation: mockDownloadDocumentation,
   })),
@@ -61,9 +58,9 @@ describe("DocumentationContinueActions", () => {
         readDataFromLocalStorage<DocumentationData<V1>>,
       ).mockReturnValue({
         version: DATA_SCHEMA_VERSION_V1,
-        policyTitle: { title: "Test", publicationStatus: "" },
+        policyTitle: { title: "Test" },
       });
-      renderWithRouter(<DocumentationContinueActions />);
+      renderWithRouter(<DocumentationContinueActions prinzips={[]} />);
     });
 
     it("renders resume and start-over actions", () => {
@@ -118,7 +115,7 @@ describe("DocumentationContinueActions", () => {
 
       expect(vi.mocked(removeFromLocalStorage)).toHaveBeenCalled();
       expect(mockNavigate).toHaveBeenCalledWith(
-        ROUTES_DOCUMENTATION_INTRO[0].url,
+        ROUTES_DOCUMENTATION_INTRO[0].path,
       );
     });
   });
@@ -126,7 +123,7 @@ describe("DocumentationContinueActions", () => {
   describe("when no saved documentation exists", () => {
     it("renders just the initial start action", async () => {
       vi.mocked(readDataFromLocalStorage).mockReturnValue(null);
-      renderWithRouter(<DocumentationContinueActions />);
+      renderWithRouter(<DocumentationContinueActions prinzips={[]} />);
 
       const startButton = await screen.findByRole("link", {
         name: digitalDocumentation.start.actions.startInitial.buttonText,

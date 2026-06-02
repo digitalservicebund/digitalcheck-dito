@@ -28,12 +28,11 @@
     "test:a11y": "playwright test tests/a11y --config=tests/playwright.config.ts --project=\"Desktop Chrome\"",
     "test:a11y-nightly": "playwright test tests/a11y --config=tests/playwright-nightly.config.ts",
     "test:e2e": "NODE_OPTIONS='--trace-warnings' playwright test tests/e2e/ --config=tests/playwright.config.ts",
-    "test:e2e-onlineDocumentationV2": "NODE_OPTIONS='--trace-warnings' playwright test --config=tests/playwright-onlineDocumentationV2.config.ts",
     "test:e2e-nightly": "playwright test tests/e2e/ --config=tests/playwright-nightly.config.ts",
     "test:snapshots": "playwright test tests/snapshots --config=tests/playwright-snapshots.config.ts",
     "test:update-snapshots": "playwright test tests/snapshots --config=tests/playwright-snapshots.config.ts --update-snapshots",
-    "tests": "vitest run && pnpm run test:e2e && pnpm run test:e2e-onlineDocumentationV2 && pnpm run test:a11y",
-    "tests-nightly": "vitest run && pnpm run test:e2e-nightly && pnpm run test:e2e-onlineDocumentationV2 && pnpm run test:a11y-nightly",
+    "tests": "vitest run && pnpm run test:e2e && pnpm run test:a11y",
+    "tests-nightly": "vitest run && pnpm run test:e2e-nightly && pnpm run test:a11y-nightly",
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {

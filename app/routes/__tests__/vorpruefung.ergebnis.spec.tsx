@@ -4,19 +4,15 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
+import { dokumentation, interoperabel, methoden } from "@/config/routes";
 import { preCheck } from "~/resources/content/vorpruefung";
-import {
-  ROUTE_DOCUMENTATION,
-  ROUTE_INTEROPERABILITY,
-  ROUTE_METHODS,
-} from "~/resources/staticRoutes";
 import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import Result from "~/routes/vorpruefung.ergebnis/route";
 import { readVersionedDataFromLocalStorage } from "~/utils/localStorageVersioned";
+import type { PreCheckData } from "../vorpruefung/preCheckDataService";
 import {
   DATA_SCHEMA_VERSION,
   getPreCheckData,
-  PreCheckData,
 } from "../vorpruefung/preCheckDataService";
 
 const { mockNavigate } = vi.hoisted(() => ({
@@ -291,7 +287,7 @@ describe("Vorprüfung Ergebnis Page", () => {
         );
 
         if (expected.includesInterop) {
-          expect(link).toHaveAttribute("href", ROUTE_INTEROPERABILITY.url);
+          expect(link).toHaveAttribute("href", interoperabel.path);
           expect(text).toBeInTheDocument();
         } else {
           expect(link).not.toBeInTheDocument();
@@ -328,7 +324,7 @@ describe("Vorprüfung Ergebnis Page", () => {
       it(`should ${expected.formIsVisible ? "show" : "hide"} the contact form`, () => {
         setup(answers);
         const formHeader = screen.queryByText(
-          "Ergebnis senden und NKR frühzeitig einbinden",
+          "Ergebnis absenden und Prüfstelle frühzeitig einbinden",
         );
         const titleInput = screen.queryByRole("textbox", {
           name: "Vorläufiger Arbeitstitel des Vorhabens",
@@ -371,10 +367,10 @@ describe("Vorprüfung Ergebnis Page", () => {
           if (!expected.showsNegativeReasoning) {
             expect(
               screen.getByRole("link", { name: "Zu „Erarbeiten“" }),
-            ).toHaveAttribute("href", ROUTE_METHODS.url);
+            ).toHaveAttribute("href", methoden.path);
             expect(
               screen.getByRole("link", { name: "Zu „Dokumentieren“" }),
-            ).toHaveAttribute("href", ROUTE_DOCUMENTATION.url);
+            ).toHaveAttribute("href", dokumentation.path);
           }
         } else {
           expect(heading).not.toBeInTheDocument();

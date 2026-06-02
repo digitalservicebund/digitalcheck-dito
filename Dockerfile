@@ -37,6 +37,7 @@ COPY --from=build-dependencies /src/node_modules node_modules/
 # Copy root level files
 COPY package.json pnpm-lock.yaml tsconfig.json vite.config.ts ./
 COPY app/ app/
+COPY src/ src/
 COPY public/ public/
 
 RUN pnpm run build

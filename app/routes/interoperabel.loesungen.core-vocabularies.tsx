@@ -1,9 +1,10 @@
+import { interoperabel_loesungen_coreVocabularies } from "@/config/routes";
 import {
   CheckOutlined,
   InfoOutlined,
   LayersOutlined,
 } from "@digitalservicebund/icons";
-import React from "react";
+import type React from "react";
 import AccordionItem from "~/components/AccordionItem";
 import Badge from "~/components/Badge.tsx";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -11,12 +12,10 @@ import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
 import { InteroperableSolutionBanner } from "~/components/InteroperableSolutionBanner.tsx";
 import MetaTitle from "~/components/Meta";
-import NewTabLink from "~/components/NewTabLink.tsx";
 import RichText from "~/components/RichText";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import Timeline from "~/components/Timeline";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
-import { ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES } from "~/resources/staticRoutes.ts";
 import { directLinks } from "~/routes/interoperabel/UeberblickTab.tsx";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { slugify } from "~/utils/utilFunctions.ts";
@@ -52,12 +51,10 @@ function ChapterBadge({ children }: Readonly<{ children: React.ReactNode }>) {
 export default function InteroperableSolutionsDcatAp() {
   return (
     <>
-      <MetaTitle
-        prefix={ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES.title}
-      />
+      <MetaTitle prefix={interoperabel_loesungen_coreVocabularies.title} />
       <main>
         <div className="breakout-grid-toc space-y-16 bg-blue-100 pt-40 pb-48">
-          <h1>{ROUTE_INTEROPERABILITY_SOLUTIONS_CORE_VOCABULARIES.title}</h1>
+          <h1>{interoperabel_loesungen_coreVocabularies.title}</h1>
           <p className="ds-subhead">
             Die grenzüberschreitende Datensprache für das Once-Only-Prinzip
           </p>
@@ -162,8 +159,14 @@ export default function InteroperableSolutionsDcatAp() {
                 </li>
 
                 <li>
-                  <strong>Wo gibt es Hilfe?</strong> Beim DigitalService /
-                  Nationale Kontaktstelle für Interoperabilität.
+                  <strong>Wo gibt es Hilfe?</strong> Bei der{" "}
+                  <a
+                    className="text-link"
+                    href="mailto:interoperabilitaet@zfl.bund.de"
+                  >
+                    Nationalen Kontaktstelle für Interoperabilität
+                  </a>{" "}
+                  (DigitalService).
                 </li>
               </ul>
             </InfoBox>
@@ -477,22 +480,11 @@ export default function InteroperableSolutionsDcatAp() {
                   übersetzen zu müssen.
                 `}
               </AccordionItem>
-              <AccordionItem
-                headline={
-                  <>
-                    <NewTabLink
-                      to={
-                        "https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/blog/2017/09/19/533365899/Business+Register+Interconnection+System+BRIS"
-                      }
-                    >
-                      BRIS
-                    </NewTabLink>{" "}
-                    (Business Registers Interconnection System)
-                  </>
-                }
-              >
+              <AccordionItem headline="BRIS (Business Registers Interconnection System)">
                 <RichText
                   markdown={dedent`
+                **[BRIS](https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/blog/2017/09/19/533365899/Business+Register+Interconnection+System+BRIS) (Business Registers Interconnection System)**
+
                 Wenn Sie als Legistin oder Legist eine Regelung erarbeiten, die die
                 Überprüfung von Unternehmen vorschreibt – etwa bei der Vergabe
                 öffentlicher Aufträge, bei der Vergabe von Fördermitteln oder der

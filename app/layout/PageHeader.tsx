@@ -1,10 +1,12 @@
+import { home, methoden, methoden_fuenfPrinzipien } from "@/config/routes";
 import {
   MenuOpen,
   MenuOutlined,
   PhoneOutlined,
 } from "@digitalservicebund/icons";
 import { useEffect, useRef, useState } from "react";
-import { Link, type UIMatch, useLocation, useMatches } from "react-router";
+import type { UIMatch } from "react-router";
+import { Link, useLocation, useMatches } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Container from "~/components/Container";
 import { Kopfzeile } from "~/components/kern-preview/Kopfzeile.tsx";
@@ -13,13 +15,11 @@ import { useResize } from "~/hooks/deviceHook";
 import DropdownMenu from "~/layout/DropdownMenu.tsx";
 import ProgressBar from "~/layout/ProgressBar";
 import { header } from "~/resources/content/shared/header.ts";
-import {
-  ROUTE_LANDING,
-  ROUTE_METHODS,
-  ROUTE_METHODS_PRINCIPLES,
-} from "~/resources/staticRoutes.ts";
+
 import { assetPath } from "~/utils/assetPath";
-import { matchHasHandle, MatchWithHandle } from "~/utils/handles";
+import type { MatchWithHandle } from "~/utils/handles";
+import { matchHasHandle } from "~/utils/handles";
+import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import twMerge from "~/utils/tailwindMerge.ts";
 import { normalizePathname } from "~/utils/utilFunctions.ts";
 
@@ -33,13 +33,28 @@ interface SubItem {
 interface HeaderItem {
   text: string;
   plausibleEventName: string;
+  href?: string;
   overlayContent: SubItem[];
   hasSupport?: boolean;
   isOrderedList?: boolean;
 }
 
+const isFlatHeaderItem = (
+  item: HeaderItem,
+): item is HeaderItem & { href: string } => typeof item.href === "string";
+
+type responsiveOptions = "desktop" | "mobile";
+
 // Check if an item href matches the current path
 const isParentItemActive = (item: HeaderItem, path: string): boolean => {
+  // Items without dropdown
+  if (item.href) {
+    const normalizedItemPath = normalizePathname(item.href);
+    const normalizedCurrentPath = normalizePathname(path);
+    return normalizedCurrentPath.startsWith(normalizedItemPath);
+  }
+
+  // Items with dropdown
   return item.overlayContent.some((subItem) => {
     const normalizedItemPath = normalizePathname(subItem.href);
     const normalizedCurrentPath = normalizePathname(path);
@@ -54,8 +69,8 @@ const isParentItemActive = (item: HeaderItem, path: string): boolean => {
     // TODO: remove once we've split the 5 Prinzipien page again
     // prevents two active elements in the header for this page
     if (
-      normalizedCurrentPath.startsWith(ROUTE_METHODS_PRINCIPLES.url) &&
-      normalizedItemPath == ROUTE_METHODS.url
+      normalizedCurrentPath.startsWith(methoden_fuenfPrinzipien.path) &&
+      normalizedItemPath == methoden.path
     ) {
       return false;
     }
@@ -124,10 +139,7 @@ const PageHeader = () => {
     }
   };
 
-  const renderDropdownItem = (
-    item: HeaderItem,
-    variant: "desktop" | "mobile",
-  ) => (
+  const renderDropdownItem = (item: HeaderItem, variant: responsiveOptions) => (
     <DropdownMenu
       key={`${item.text}-${variant}`}
       label={item.text}
@@ -142,6 +154,43 @@ const PageHeader = () => {
       onItemClick={closeOpenDropdowns}
     />
   );
+
+  const renderFlatItem = (
+    item: HeaderItem & { href: string },
+    variant: responsiveOptions,
+  ) => {
+    const isMobile = variant === "mobile";
+    const isActive = isParentItemActive(item, currentPath);
+    const plausibleClass = getPlausibleEventClassName(
+      `Nav+Bar.${item.plausibleEventName}.Link`,
+    );
+
+    return (
+      <Link
+        key={`${item.text}-${variant}`}
+        to={item.href}
+        onClick={closeOpenDropdowns}
+        className={twMerge(
+          "flex items-center hover:bg-blue-100",
+          isMobile
+            ? "ds-label-01-bold w-full border-l-4 border-transparent p-16"
+            : "ds-label-01-reg h-full border-b-4 border-transparent px-16 whitespace-nowrap",
+          isActive && "border-blue-800 bg-blue-100",
+          plausibleClass,
+        )}
+      >
+        {item.text}
+      </Link>
+    );
+  };
+
+  const renderNavItem = (item: HeaderItem, variant: "desktop" | "mobile") => {
+    if (isFlatHeaderItem(item)) {
+      return renderFlatItem(item, variant);
+    } else {
+      return renderDropdownItem(item, variant);
+    }
+  };
 
   const showOverlay = activeDropdownId !== null || mobileMenuOpen;
 
@@ -165,7 +214,7 @@ const PageHeader = () => {
         <div className="relative flex h-[70px] justify-between pl-16 lg:container">
           {/* Logo and title */}
           <Link
-            to={ROUTE_LANDING.url}
+            to={home.path}
             className="plausible-event-name=Nav+Bar.Home flex items-center space-x-8"
           >
             <img
@@ -190,7 +239,7 @@ const PageHeader = () => {
             className="flex items-center max-lg:hidden"
             data-testid="desktop-nav"
           >
-            {header.items.map((item) => renderDropdownItem(item, "desktop"))}
+            {header.items.map((item) => renderNavItem(item, "desktop"))}
           </nav>
 
           {/* Mobile View Controls */}
@@ -226,7 +275,7 @@ const PageHeader = () => {
           )}
           aria-hidden={!mobileMenuOpen}
         >
-          {header.items.map((item) => renderDropdownItem(item, "mobile"))}
+          {header.items.map((item) => renderNavItem(item, "mobile"))}
         </nav>
         <noscript>
           <div className="bg-yellow-200">

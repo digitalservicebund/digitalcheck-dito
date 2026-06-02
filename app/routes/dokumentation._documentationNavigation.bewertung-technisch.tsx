@@ -1,3 +1,4 @@
+import { dokumentation_zusammenfassung } from "@/config/routes.ts";
 import { FormScope, useField } from "@rvf/react";
 import { useOutletContext } from "react-router";
 import { z } from "zod";
@@ -7,10 +8,6 @@ import Heading from "~/components/Heading";
 import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup.tsx";
 import Textarea from "~/components/Textarea.tsx";
-import {
-  ROUTE_DOCUMENTATION_INTEROPERABILITY_TECHNICAL,
-  ROUTE_DOCUMENTATION_SUMMARY,
-} from "~/resources/staticRoutes";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
 import {
@@ -66,9 +63,7 @@ export default function DocumentationInteroperabilityAssessmentTechnical() {
 
   return (
     <>
-      <MetaTitle
-        prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_INTEROPERABILITY_TECHNICAL.title}`}
-      />
+      <MetaTitle prefix={"Dokumentation: Technische Interoperabilität"} />
       <div className="space-y-40">
         <div className={"space-y-8"}>
           <Badge look="hint">Technische Interoperabilität</Badge>
@@ -103,7 +98,7 @@ export default function DocumentationInteroperabilityAssessmentTechnical() {
         </SkipNoticeWrapper>
         <DocumentationActions
           previousUrl={previousUrl}
-          nextUrl={nextUrl ?? ROUTE_DOCUMENTATION_SUMMARY.url}
+          nextUrl={nextUrl ?? dokumentation_zusammenfassung.path}
           showDownloadDraftButton
           showSavingTip
         />

@@ -4,8 +4,10 @@ import {
   DriveFileRenameOutline,
   LayersOutlined,
 } from "@digitalservicebund/icons";
-import React, { useRef } from "react";
-import Badge, { BadgeProps } from "~/components/Badge.tsx";
+import type React from "react";
+import { useRef } from "react";
+import type { BadgeProps } from "~/components/Badge.tsx";
+import Badge from "~/components/Badge.tsx";
 import Button from "~/components/Button.tsx";
 import Heading from "~/components/Heading";
 import ImageBox from "~/components/ImageBox.tsx";
@@ -13,6 +15,11 @@ import InfoBox from "~/components/InfoBox.tsx";
 import NumberedList from "~/components/NumberedList.tsx";
 import RichText from "~/components/RichText.tsx";
 
+import { anleitungFlussdiagramm } from "@/config/downloads";
+import {
+  methoden_fuenfPrinzipien,
+  methoden_visualisieren_flussdiagramm,
+} from "@/config/routes";
 import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import BackToTopButton from "~/components/BackToTopButton.tsx";
@@ -22,11 +29,6 @@ import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
 import { STRAPI_MEDIA_URL } from "~/resources/constants.ts";
 import { contact } from "~/resources/content/shared/contact";
-import {
-  ROUTE_METHODS_PRINCIPLES,
-  ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX,
-  ROUTE_METHODS_VISUALIZE_FLOWCHARTS,
-} from "~/resources/staticRoutes.ts";
 import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils.ts";
@@ -140,7 +142,7 @@ export default function Visualization() {
   // noinspection HtmlUnknownAnchorTarget
   return (
     <>
-      <MetaTitle prefix={ROUTE_METHODS_VISUALIZE_FLOWCHARTS.title} />
+      <MetaTitle prefix={methoden_visualisieren_flussdiagramm.title} />
       <main>
         <div className="breakout-grid-toc bg-blue-100 pt-40 pb-48">
           <div>
@@ -291,7 +293,7 @@ export default function Visualization() {
                     
                     [Conceptboard-Vorlage](https://bmas.de.conceptboard.com/board/qh33-xcny-usde-7nc6-82cy)
                     
-                    [Powerpoint-Vorlage](${ROUTE_METHODS_TASKS_PROCESSES_POWERPOINT_PPTX.url})
+                    [Powerpoint-Vorlage](${anleitungFlussdiagramm.path})
                     
                     Sie wünschen sich ein anderes Medium?
                     Schicken Sie uns eine E-Mail an ${contact.email}.
@@ -726,7 +728,7 @@ export default function Visualization() {
                 {
                   text: "Zu den Prinzipien",
                   look: "tertiary",
-                  to: ROUTE_METHODS_PRINCIPLES.url,
+                  to: methoden_fuenfPrinzipien.path,
                 },
               ]}
             />

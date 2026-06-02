@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router";
 
+import { vorpruefung } from "@/config/routes";
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -10,18 +11,18 @@ import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
+import { preCheckQuestions } from "~/resources/content/shared/pre-check-questions";
 import { preCheck } from "~/resources/content/vorpruefung";
-import {
-  ROUTE_PRECHECK,
-  ROUTES_PRECHECK_QUESTIONS,
-} from "~/resources/staticRoutes";
 import type { Route } from "./+types/vorpruefung._preCheckNavigation.$questionId";
 import { usePreCheckData, useSyncedForm } from "./vorpruefung/preCheckDataHook";
-import {
-  answerSchema,
-  PreCheckAnswerSchema,
-} from "./vorpruefung/preCheckDataSchema";
+import type { PreCheckAnswerSchema } from "./vorpruefung/preCheckDataSchema";
+import { answerSchema } from "./vorpruefung/preCheckDataSchema";
 import { addOrUpdateAnswer } from "./vorpruefung/preCheckDataService";
+
+const ROUTES_PRECHECK_QUESTIONS = Object.values(preCheckQuestions).map((q) => ({
+  path: q.path,
+  title: `${q.title} — Vorprüfung`,
+}));
 
 const { questions, answerOptions, nextButton } = preCheck;
 
@@ -59,7 +60,7 @@ export type TQuestion = {
     unsureResult?: string;
   };
   text: string;
-  url: string;
+  path: string;
   prevLink: string;
   nextLink: string;
   hint?: {
@@ -78,8 +79,13 @@ export type PreCheckAnswerOption = {
   label: string;
 };
 
-export default function Index() {
-  const { questionIdx, question } = useLoaderData<typeof loader>();
+export function PreCheckQuestion({
+  questionIdx,
+  question,
+}: Readonly<{
+  questionIdx: number;
+  question: TQuestion;
+}>) {
   const [hasAnswerConflict, setHasAnswerConflict] = useState(false);
 
   const { answerForQuestionId, answers, firstUnansweredQuestionIndex } =
@@ -87,7 +93,7 @@ export default function Index() {
   const navigate = useNavigate();
   const storedAnswer = answerForQuestionId(question.id);
   const nextLink =
-    questions.find((q) => q.id === question.id)?.nextLink ?? ROUTE_PRECHECK.url;
+    questions.find((q) => q.id === question.id)?.nextLink ?? vorpruefung.path;
 
   const form = useSyncedForm({
     schema: answerSchema,
@@ -109,7 +115,7 @@ export default function Index() {
       firstUnansweredQuestionIndex !== null &&
       questionIdx > firstUnansweredQuestionIndex
     ) {
-      void navigate(questions[firstUnansweredQuestionIndex].url);
+      void navigate(questions[firstUnansweredQuestionIndex].path);
     }
   }, [firstUnansweredQuestionIndex, navigate, questionIdx]);
 
@@ -146,7 +152,7 @@ export default function Index() {
       <MetaTitle
         prefix={
           ROUTES_PRECHECK_QUESTIONS.find((route) =>
-            route.url.endsWith(question.id),
+            route.path.endsWith(question.id),
           )?.title
         }
       />
@@ -208,4 +214,9 @@ export default function Index() {
       </div>
     </form>
   );
+}
+
+export default function Route() {
+  const { questionIdx, question } = useLoaderData<typeof loader>();
+  return <PreCheckQuestion questionIdx={questionIdx} question={question} />;
 }

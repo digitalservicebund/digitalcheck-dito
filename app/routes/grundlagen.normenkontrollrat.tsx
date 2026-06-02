@@ -1,3 +1,4 @@
+import { grundlagen_normenkontrollrat } from "@/config/routes";
 import {
   FactCheckTwoTone,
   FileCopyTwoTone,
@@ -11,17 +12,20 @@ import InfoBoxList from "~/components/InfoBoxList.tsx";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { fundamentalsNKR } from "~/resources/content/grundlage-normenkontrollrat";
-import { ROUTE_FUNDAMENTALS_NKR } from "~/resources/staticRoutes";
 
 export default function FundamentalsMethods() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_FUNDAMENTALS_NKR.title} />
+      <MetaTitle prefix={grundlagen_normenkontrollrat.title} />
       <main>
-        <Hero
-          title={fundamentalsNKR.title}
-          subtitle={fundamentalsNKR.subtitle}
-        />
+        <Hero title={fundamentalsNKR.title} subtitle={fundamentalsNKR.subtitle}>
+          <RichText
+            markdown={
+              "Diese Seite richtet sich **ausschließlich** an Bundesministerien."
+            }
+            className="ds-subhead"
+          />
+        </Hero>
 
         <Container className="space-y-40 py-40 md:py-80">
           <InfoBoxList separator className="ds-stack-80 mt-0 [&>li]:pb-80">

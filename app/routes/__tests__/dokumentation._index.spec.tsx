@@ -1,19 +1,27 @@
 // Import mocks first
 import "./utils/mockLocalStorageVersioned";
+import "./utils/mockRouter";
 // End of mocks
 
+import { dokumentation_hinweise } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import React from "react";
+import type React from "react";
 import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
-import {
-  ROUTE_DOCUMENTATION_TEMPLATE_WORD,
-  ROUTES_DOCUMENTATION_INTRO,
-} from "~/resources/staticRoutes";
-import DokumentationIndex from "~/routes/dokumentation._index";
+import { DokumentationIndexPage } from "~/routes/dokumentation._index";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
+
+const ROUTES_DOCUMENTATION_INTRO = [{ path: dokumentation_hinweise.path }];
+
+const { mockDownloadDocumentation } = vi.hoisted(() => ({
+  mockDownloadDocumentation: vi.fn(),
+}));
+vi.mock("~/service/wordDocumentationExport/wordDocumentation", () => ({
+  useWordDocumentation: vi.fn(() => ({
+    downloadDocumentation: mockDownloadDocumentation,
+  })),
+}));
 
 vi.mock("~/contexts/FeatureFlagContext", () => {
   return {
@@ -31,8 +39,7 @@ describe("Dokumentation Index Route - Integration Tests", () => {
   };
 
   beforeEach(() => {
-    vi.mocked(useFeatureFlag).mockReturnValue(true);
-    renderWithRouter(<DokumentationIndex />);
+    renderWithRouter(<DokumentationIndexPage prinzips={[]} />);
   });
 
   it("renders the Hero section with the correct title", () => {
@@ -50,18 +57,15 @@ describe("Dokumentation Index Route - Integration Tests", () => {
     });
     expect(startButton).toHaveAttribute(
       "href",
-      ROUTES_DOCUMENTATION_INTRO[0].url,
+      ROUTES_DOCUMENTATION_INTRO[0].path,
     );
   });
 
   it("renders the Word file download button", () => {
-    const downloadButton = screen.getByRole("link", {
+    const downloadButton = screen.getByRole("button", {
       name: "Word-Vorlage herunterladen (.docx)",
     });
-    expect(downloadButton).toHaveAttribute(
-      "href",
-      ROUTE_DOCUMENTATION_TEMPLATE_WORD.url,
-    );
+    expect(downloadButton).toBeInTheDocument();
   });
 
   it("renders the support banner", () => {

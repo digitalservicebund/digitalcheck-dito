@@ -1,10 +1,11 @@
+import { dokumentation } from "@/config/routes";
 import {
-  ChecklistRtl,
   SimCardDownloadTwoTone,
   TipsAndUpdatesOutlined,
   ViewListTwoTone,
 } from "@digitalservicebund/icons";
-import { DownloadLinkButton } from "~/components/Button";
+import { useRouteLoaderData } from "react-router";
+import { DownloadButton } from "~/components/Button";
 import Container from "~/components/Container.tsx";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import { Feature, FeatureList } from "~/components/FeatureList.tsx";
@@ -18,22 +19,30 @@ import RichText from "~/components/RichText.tsx";
 import SupportBanner from "~/components/SupportBanner";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { supportBanner } from "~/resources/content/shared/support-banner";
-import {
-  ROUTE_DOCUMENTATION,
-  ROUTE_DOCUMENTATION_TEMPLATE_WORD,
-} from "~/resources/staticRoutes";
 import { DocumentationContinueActions } from "~/routes/dokumentation/DocumentationContinueActions.tsx";
+import type { DocumentationRouteData } from "~/routes/dokumentation/route.tsx";
+import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
+import type {
+  PrinzipWithAspekte,
+  PrinzipWithAspekteAndExample,
+} from "~/utils/strapiData.types";
 
 const { start } = digitalDocumentation;
 
-export default function Index() {
+export function DokumentationIndexPage({
+  prinzips,
+}: Readonly<{
+  prinzips: PrinzipWithAspekte[];
+}>) {
+  const { downloadDocumentation } = useWordDocumentation();
+
   return (
     <>
-      <MetaTitle prefix={ROUTE_DOCUMENTATION.title} />
+      <MetaTitle prefix={dokumentation.title} />
       <main>
         <Hero title={start.title} subtitle={start.subtitle}>
           <div className="mt-40 space-y-40">
-            <DocumentationContinueActions />
+            <DocumentationContinueActions prinzips={prinzips} />
             <noscript>
               <InlineNotice
                 look="warning"
@@ -49,12 +58,16 @@ export default function Index() {
             <div className="space-y-8">
               <RichText markdown={start.alternative.text} />
 
-              <DownloadLinkButton
-                to={ROUTE_DOCUMENTATION_TEMPLATE_WORD.url}
+              <DownloadButton
                 look="link"
+                onClick={() =>
+                  downloadDocumentation(prinzips, {
+                    templateOnly: true,
+                  })
+                }
               >
                 {start.alternative.buttonText}
-              </DownloadLinkButton>
+              </DownloadButton>
             </div>
           </div>
         </Hero>
@@ -78,15 +91,8 @@ export default function Index() {
                   Bearbeiten Sie die Dokumentation{" "}
                   <strong>flexibel im Formular</strong> oder speichern Sie sie
                   als <strong>Word-Datei</strong>. Abschließend senden Sie die
-                  Angaben an den NKR.
-                </p>
-              </Feature>
-              <Feature>
-                <ChecklistRtl className="fill-ds-feature size-80" />
-                <p>
-                  <strong>Vorgegebene Schwerpunkte</strong> entsprechen den
-                  Anforderungen der Digitaltauglichkeit und erleichtern die{" "}
-                  <strong>Prüfung</strong> durch den NKR.
+                  Angaben an Ihre zuständige Prüfstelle (z.B. auf Bundesebene an
+                  den NKR.) Ansonsten dient die Dokumentation zur Selbstprüfung.
                 </p>
               </Feature>
             </FeatureList>
@@ -107,11 +113,15 @@ export default function Index() {
               </NumberedList.Item>
               <NumberedList.Item className={"space-y-8"}>
                 <p className="ds-heading-03-reg">
-                  Senden Sie die ausgefüllte Dokumentation an den NKR
+                  Senden Sie die ausgefüllte Dokumentation an Ihre Prüfstelle
+                  oder speichern Sie Sie das Dokument ab
                 </p>
                 <p>
                   Exportieren Sie Ihre Eingaben als Word-Datei und schicken Sie
-                  diese zu jedem Zeitpunkt per E-Mail an den NKR.
+                  diese zu jedem Zeitpunkt per E-Mail an Ihre zuständige
+                  Prüfstelle oder speichern Sie das Dokument ab. Die
+                  E-Mail-Adresse finden Sie am Ende der
+                  Dokumentationserstellung.
                 </p>
               </NumberedList.Item>
             </NumberedList>
@@ -152,5 +162,27 @@ export default function Index() {
       </main>
       <SupportBanner {...supportBanner} />
     </>
+  );
+}
+
+export default function Route() {
+  const { prinzips } = useRouteLoaderData<DocumentationRouteData>(
+    "routes/dokumentation",
+  )!;
+  return <DokumentationIndexPage prinzips={prinzips} />;
+}
+
+// Astro page export
+import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
+
+export function DokumentationIndexPageWithProvider({
+  prinzips,
+}: Readonly<{
+  prinzips: PrinzipWithAspekteAndExample[];
+}>) {
+  return (
+    <DocumentationDataProvider>
+      <DokumentationIndexPage prinzips={prinzips} />
+    </DocumentationDataProvider>
   );
 }

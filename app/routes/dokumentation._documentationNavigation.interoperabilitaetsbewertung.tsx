@@ -1,11 +1,8 @@
+import { dokumentation_zusammenfassung } from "@/config/routes.ts";
 import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import MetaTitle from "~/components/Meta";
 import TabGroup from "~/components/Tabs/Tabs.tsx";
-import {
-  ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT,
-  ROUTE_DOCUMENTATION_SUMMARY,
-} from "~/resources/staticRoutes";
 import FormVariant2 from "~/routes/dokumentation/interoperability/FormVariant2.tsx";
 import SkipNoticeWrapper from "~/routes/dokumentation/interoperability/SkipNoticeWrapper.tsx";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
@@ -17,9 +14,7 @@ export default function DocumentationInteroperabilityAssessment() {
 
   return (
     <>
-      <MetaTitle
-        prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_INTEROPERABILITY_ASSESSMENT.title}`}
-      />
+      <MetaTitle prefix={"Dokumentation: Auswirkungen auf Interoperabilität"} />
       <div className="space-y-40">
         <div className={"space-y-8"}>
           <p className={"ds-subhead"}>EU-Interoperabilität</p>
@@ -58,7 +53,7 @@ export default function DocumentationInteroperabilityAssessment() {
         </SkipNoticeWrapper>
         <DocumentationActions
           previousUrl={previousUrl}
-          nextUrl={nextUrl ?? ROUTE_DOCUMENTATION_SUMMARY.url}
+          nextUrl={nextUrl ?? dokumentation_zusammenfassung.path}
           showDownloadDraftButton
           showSavingTip
         />

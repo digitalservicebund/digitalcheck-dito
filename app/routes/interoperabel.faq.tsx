@@ -3,12 +3,12 @@ import Hero from "~/components/Hero";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 
-import { contact } from "~/resources/content/shared/contact";
 import {
-  ROUTE_FUNDAMENTALS_DIGITAL_READINESS,
-  ROUTE_INTEROPERABILITY,
-  ROUTE_INTEROPERABILITY_FAQ,
-} from "~/resources/staticRoutes";
+  grundlagen_digitaltauglichkeit,
+  interoperabel,
+  interoperabel_faq,
+} from "@/config/routes";
+import { contact } from "~/resources/content/shared/contact";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { getTabAnchorLink } from "~/utils/tabs";
 
@@ -20,7 +20,7 @@ const faqItems = [
           
           Im Ergebnis bedeutet ein hoher Grad an Interoperabilität, dass digitale öffentliche Dienste über Länder- und Sektorgrenzen funktionieren - Bürgerinnen und Bürger sowie Unternehmen haben eine bessere Nutzendenerfahrung und sparen Zeit und Kosten.
           
-          Die Grundlage bilden hierfür [digitaltaugliche Gesetze](${ROUTE_FUNDAMENTALS_DIGITAL_READINESS.url}), die Interoperabilität unterstützen. Für Ihre Arbeit an Vorhaben sollte Interoperabilität in unterschiedlichen Dimensionen bewertet werden. Diese Dimensionen werden im European Interoperability Framework (EIF) definiert.
+          Die Grundlage bilden hierfür [digitaltaugliche Gesetze](${grundlagen_digitaltauglichkeit.path}), die Interoperabilität unterstützen. Für Ihre Arbeit an Vorhaben sollte Interoperabilität in unterschiedlichen Dimensionen bewertet werden. Diese Dimensionen werden im European Interoperability Framework (EIF) definiert.
         `,
   },
   {
@@ -28,7 +28,7 @@ const faqItems = [
     content: dedent`
           Interoperabilitäts-Bezug ist vorhanden, wenn:
 
-          - eine (neue) [verbindliche Anforderung](${ROUTE_INTEROPERABILITY.url}${getTabAnchorLink("hintergrund", "verbindliche-anforderungen")}) definiert wird,
+          - eine (neue) [verbindliche Anforderung](${interoperabel.path}${getTabAnchorLink("hintergrund", "verbindliche-anforderungen")}) definiert wird,
           - ein oder mehrere transeuropäische digitale öffentliche Dienste betroffen sind, das heißt
             - eine digitale Umsetzung vorgesehen oder davon betroffen ist
             - ein Austausch von Daten und Informationen zwischen Verwaltungen der EU-Mitgliedstaaten vorgesehen ist
@@ -77,7 +77,7 @@ const faqItems = [
     content: dedent`
           Der **Europäische Interoperabilitätsrahmen (EIF)** hilft europäischen öffentlichen Verwaltungen, ihre digitalen Dienste so zu gestalten, dass sie über Ländergrenzen und verschiedene Sektoren hinweg nahtlos zusammenarbeiten. Der EIF eine Art Handbuch, das sicherstellt, dass die digitalen Systeme von Behörden in Deutschland, Frankreich, Polen und anderen EU-Ländern „miteinander sprechen“ können.
 
-          Der [Europäische Interoperabilitäts-Rahmen (EIF)](https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail) definiert vier Ebenen der Interoperabilität, die bei der Gesetzgebung berücksichtigt werden müssen. Mehr dazu [hier](${getTabAnchorLink("hintergrund", "vier-ebenen-der-interoperabilitaet")}).
+          Der [Europäische Interoperabilitäts-Rahmen (EIF)](https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail) definiert vier Ebenen der Interoperabilität, die bei der Gesetzgebung berücksichtigt werden müssen. Mehr dazu [hier](${interoperabel.path}${getTabAnchorLink("hintergrund", "vier-ebenen-der-interoperabilitaet")}).
         `,
   },
   {
@@ -85,7 +85,7 @@ const faqItems = [
     content: dedent`
           Die [Interoperabilitäts-Bewertung](https://interoperable-europe.ec.europa.eu/collection/assessments/submission) ist wie auch die Digitalcheck-Dokumentation ein formeller, letzter Schritt, in dem Sie einige Fragen zu Inhalten der Regelung beantworten. 
 
-          Es geht darum, darzulegen, wie sich Ihre Regelung auf die EU-weite Interoperabilität auswirkt. Der wesentliche Inhalt besteht aus fünf Fragen. Die Bewertung fragt nach sogenannten „[verbindlichen Anforderungen](${getTabAnchorLink("hintergrund", "verbindliche-anforderungen")})“ und prüft deren Einfluss auf die [vier Ebenen der Interoperabilität](${getTabAnchorLink("hintergrund", "vier-ebenen-der-interoperabilitaet")}).
+          Es geht darum, darzulegen, wie sich Ihre Regelung auf die EU-weite Interoperabilität auswirkt. Der wesentliche Inhalt besteht aus fünf Fragen. Die Bewertung fragt nach sogenannten „[verbindlichen Anforderungen](${interoperabel.path}${getTabAnchorLink("hintergrund", "verbindliche-anforderungen")})“ und prüft deren Einfluss auf die [vier Ebenen der Interoperabilität](${interoperabel.path}${getTabAnchorLink("hintergrund", "vier-ebenen-der-interoperabilitaet")}).
 
           Wenn Sie weitere Fragen haben, dann kontaktieren Sie uns unter: ${contact.mdMailToLink(contact.interoperabilityEmail)} oder rufen Sie uns an unter ${contact.mdPhoneLink()}.
         `,
@@ -156,7 +156,7 @@ const faqItems = [
 export default function Faq() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_INTEROPERABILITY_FAQ.title} />
+      <MetaTitle prefix={interoperabel_faq.title} />
       <main>
         <Hero title="Fragen und Antworten">
           <p>

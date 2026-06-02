@@ -1,13 +1,13 @@
+import {
+  dokumentation_verbindliche_anforderungen,
+  interoperabel,
+} from "@/config/routes.ts";
 import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton.tsx";
 import MetaTitle from "~/components/Meta";
 import NewTabLink from "~/components/NewTabLink.tsx";
 import RichText from "~/components/RichText.tsx";
-import {
-  ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS,
-  ROUTE_INTEROPERABILITY,
-} from "~/resources/staticRoutes";
 import EuInteroperabilityOutcomeForm from "~/routes/dokumentation/interoperability/EuInteroperabilityOutcomeForm.tsx";
 import { markdownLinkIEA } from "~/routes/dokumentation/interoperability/markdownLinkIEA.tsx";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
@@ -29,7 +29,7 @@ export default function DocumentationEuInteroperabilityRequirements() {
   return (
     <>
       <MetaTitle
-        prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_EU_INTEROPERABILITY_REQUIREMENTS.title}`}
+        prefix={`Dokumentation: ${dokumentation_verbindliche_anforderungen.title}`}
       />
       <div className="space-y-40">
         <Heading
@@ -47,7 +47,7 @@ export default function DocumentationEuInteroperabilityRequirements() {
             <RichText markdown={helpText} />
             <NewTabLink
               to={
-                ROUTE_INTEROPERABILITY.url +
+                interoperabel.path +
                 "?tab=hintergrund#verbindliche-anforderungen"
               }
             >

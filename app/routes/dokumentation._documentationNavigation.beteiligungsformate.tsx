@@ -1,3 +1,4 @@
+import { dokumentation_beteiligungsformate } from "@/config/routes.ts";
 import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
@@ -6,7 +7,6 @@ import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
 import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import { ROUTE_DOCUMENTATION_PARTICIPATION } from "~/resources/staticRoutes";
 import {
   defaultParticipationValues,
   participationSchema,
@@ -37,7 +37,7 @@ export default function DocumentationParticipation() {
   return (
     <>
       <MetaTitle
-        prefix={`Dokumentation: ${ROUTE_DOCUMENTATION_PARTICIPATION.title}`}
+        prefix={`Dokumentation: ${dokumentation_beteiligungsformate.title}`}
       />
       <div className="space-y-40">
         <Heading

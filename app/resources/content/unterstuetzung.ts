@@ -1,4 +1,8 @@
 import {
+  interoperabel,
+  interoperabel_nationaleKontaktstelle,
+} from "@/config/routes";
+import {
   AdsClickOutlined,
   CheckCircleOutlined,
   DrawOutlined,
@@ -6,12 +10,8 @@ import {
   PlaylistAddCheckOutlined,
   TimerOutlined,
 } from "@digitalservicebund/icons";
-import {
-  ROUTE_INTEROPERABILITY,
-  ROUTE_INTEROPERABILITY_SPOC,
-} from "~/resources/staticRoutes";
 import { assetPath } from "~/utils/assetPath";
-import { ContentLink } from "~/utils/contentTypes.ts";
+import type { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
 
@@ -43,7 +43,7 @@ export const support = {
       {
         icon: DrawOutlined,
         title: "Visualisierungen erstellen",
-        text: "Wir erstellen in wenigen Tagen eine Visualisierung für Sie — hilfreich bei Abstimmungen im Haus, zwischen Ressorts oder mit dem NKR.",
+        text: "Wir erstellen in wenigen Tagen eine Visualisierung für Sie — hilfreich um Sachverhalte abzustimmen, Zusammenhänge zu verstehen und für Abstimmungen im Haus und zwischen Ressorts.",
       },
       {
         icon: PlaylistAddCheckOutlined,
@@ -113,7 +113,6 @@ export const support = {
                 title: "Was Sie bekommen",
                 text: dedent`
                   - Expert:innen-Einschätzung zum Digitalbezug des Regelungsverfahrens: Grundlage für Planung des Regelungsvorhabens
-                  - richtige Ansprechperson im NKR-Sekretariat
                 `,
               },
             ],
@@ -162,7 +161,7 @@ export const support = {
             text: dedent`
               Wir erstellen Visualisierungen für Sie oder digitalisieren Ihre Papier-und-Stift-Skizzen.
 
-              Ein Bild sagt mehr als tausend Worte — genauso helfen Visualisierungen bei Abstimmungen im Haus, zwischen Ressorts oder mit dem NKR.
+              Ein Bild sagt mehr als tausend Worte — genauso helfen Visualisierungen um Sachverhalte abzustimmen, Zusammenhänge zu verstehen und bei Abstimmungen im Haus und zwischen Ressorts.
 
               Die Art der Visualisierung richtet sich nach Ihren Anforderungen:
               
@@ -375,8 +374,8 @@ Mit freundlichen Grüßen
     id: "kontaktstelle",
     title: "Haben Sie Fragen zu EU-Anforderungen an Interoperabilität?",
     text: dedent`
-      Weitere Informationen zu den EU-Anforderungen für Interoperabilität in der Regelung finden Sie in unserer [Übersicht](${ROUTE_INTEROPERABILITY.url}).
+      Weitere Informationen zu den EU-Anforderungen für Interoperabilität in der Regelung finden Sie in unserer [Übersicht](${interoperabel.path}).
 
-      Weitere Informationen zu Governance, Zusammenarbeit und Nutzung unserer Inhalte finden Sie unter [Nationale Kontaktstelle](${ROUTE_INTEROPERABILITY_SPOC.url}) für ein interoperables Europa.`,
+      Weitere Informationen zu Governance, Zusammenarbeit und Nutzung unserer Inhalte finden Sie unter [Nationale Kontaktstelle](${interoperabel_nationaleKontaktstelle.path}) für ein interoperables Europa.`,
   },
-};
+} as const;

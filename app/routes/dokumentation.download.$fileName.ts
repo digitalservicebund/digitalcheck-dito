@@ -2,24 +2,20 @@ import { contentType } from "mime-types";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
-import {
-  createDoc as createDocV1,
-  FILE_NAME_DOCUMENTATION_TEMPLATE as FILE_NAME_DOCUMENTATION_TEMPLATE_V1,
-} from "~/service/wordDocumentationExport/wordDocumentationV1";
-import {
-  createDoc as createDocV2,
-  FILE_NAME_DOCUMENTATION_TEMPLATE as FILE_NAME_DOCUMENTATION_TEMPLATE_V2,
-} from "~/service/wordDocumentationExport/wordDocumentationV2";
+import { createDoc } from "~/service/wordDocumentationExport/wordDocumentation";
 
-import { features } from "~/utils/featureFlags";
-import getFeatureFlag from "~/utils/featureFlags.server";
+import { dokumentationTemplateWord } from "@/config/downloads";
 import {
   fetchStrapiData,
   GET_PRINZIPS_WITH_ASPECTS_QUERY,
-  PrinzipWithAspekte,
 } from "~/utils/strapiData.server";
+import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import type { Route } from "./+types/dokumentation.download.$fileName";
-import { DATA_SCHEMA_VERSION_V1 } from "./dokumentation/documentationDataSchema";
+import { DATA_SCHEMA_VERSION_V2 } from "./dokumentation/documentationDataSchema";
+
+/*
+ * DEPRECATED ROUTE: Replaced with client-side generation in dokumentation._index.tsx
+ */
 
 // This is a route instead of client side to support clients without JS
 export async function loader({ params }: Route.LoaderArgs) {
@@ -30,13 +26,6 @@ export async function loader({ params }: Route.LoaderArgs) {
     throw new Response("Please provide a file name", { status: 400 });
   }
 
-  const simplifiedFlow = getFeatureFlag(features.simplifiedPrincipleFlow);
-
-  const FILE_NAME_DOCUMENTATION_TEMPLATE = simplifiedFlow
-    ? FILE_NAME_DOCUMENTATION_TEMPLATE_V2
-    : FILE_NAME_DOCUMENTATION_TEMPLATE_V1;
-  const createDoc = simplifiedFlow ? createDocV2 : createDocV1;
-
   const principles = await fetchStrapiData<{
     prinzips: PrinzipWithAspekte[];
   }>(GET_PRINZIPS_WITH_ASPECTS_QUERY);
@@ -44,16 +33,12 @@ export async function loader({ params }: Route.LoaderArgs) {
     throw new Error(principles.error);
   }
 
-  const templatePath = path.join(
-    "public",
-    "documents",
-    FILE_NAME_DOCUMENTATION_TEMPLATE,
-  );
+  const templatePath = path.join("public", dokumentationTemplateWord.path);
   const templateData = await fs.readFile(templatePath);
 
   const fileData = await createDoc(
     templateData,
-    { version: DATA_SCHEMA_VERSION_V1 },
+    { version: DATA_SCHEMA_VERSION_V2 },
     principles.prinzips,
   );
   const mimeType = contentType(fileName) || "";

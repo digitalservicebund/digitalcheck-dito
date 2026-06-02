@@ -1,7 +1,8 @@
 import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
+import { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId.tsx";
 
-const Stepper = <T extends { url: string; title: string }>({
+const Stepper = <T extends Pick<TQuestion, "path" | "title">>({
   elements,
   currentElementUrl,
   firstUnansweredQuestionIndex,
@@ -13,7 +14,7 @@ const Stepper = <T extends { url: string; title: string }>({
   className?: string;
 }) => {
   const currentIndex = elements.findIndex(
-    (element) => element.url === currentElementUrl,
+    (element) => element.path === currentElementUrl,
   );
 
   return (
@@ -30,7 +31,7 @@ const Stepper = <T extends { url: string; title: string }>({
             // eslint-disable-next-line jsx-a11y/anchor-is-valid
             <a
               role="link"
-              key={el.url}
+              key={el.path}
               aria-disabled="true"
               className={"h-6 flex-1 bg-blue-300 transition-all duration-300"}
             >
@@ -39,8 +40,8 @@ const Stepper = <T extends { url: string; title: string }>({
           );
         return (
           <Link
-            key={el.url}
-            to={el.url}
+            key={el.path}
+            to={el.path}
             className={twJoin(
               "h-6 flex-1 transition-all duration-300",
               index <= currentIndex ? "bg-blue-800" : "bg-blue-600",

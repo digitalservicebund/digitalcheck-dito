@@ -2,7 +2,7 @@ import { Outlet, useRouteLoaderData } from "react-router";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { preCheck } from "~/resources/content/vorpruefung";
-import { loader as preCheckQuestionLoader } from "./vorpruefung._preCheckNavigation.$questionId";
+import type { loader as preCheckQuestionLoader } from "./vorpruefung._preCheckNavigation.$questionId";
 import { usePreCheckData } from "./vorpruefung/preCheckDataHook";
 
 const { questions } = preCheck;
@@ -20,14 +20,14 @@ export default function LayoutWithPreCheckNavigation() {
       <div className="hidden flex-none lg:block">
         <Nav
           ariaLabel="Alle Fragen"
-          activeElementUrl={question?.url}
+          activeElementUrl={question?.path}
           testId="main-nav"
         >
           <Nav.Items>
-            {questions.map(({ id, url, title }, i) => (
+            {questions.map(({ id, path, title }, i) => (
               <Nav.Item
-                key={url}
-                url={url}
+                key={path}
+                url={path}
                 completed={answers.some(({ questionId }) => questionId === id)}
                 disabled={i > (firstUnansweredQuestionIndex ?? 0)}
               >
@@ -41,13 +41,13 @@ export default function LayoutWithPreCheckNavigation() {
         {showLinkBar && (
           <Stepper
             className="lg:hidden"
-            currentElementUrl={question.url}
+            currentElementUrl={question.path}
             elements={questions}
             firstUnansweredQuestionIndex={firstUnansweredQuestionIndex ?? 0}
           />
         )}
         <main>
-          <Outlet key={question?.url} />
+          <Outlet key={question?.path} />
         </main>
       </div>
     </div>

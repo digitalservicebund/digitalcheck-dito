@@ -1,11 +1,11 @@
-import { steps } from "~/resources/content/shared/naechste-schritte";
 import {
-  ROUTE_INTEROPERABILITY,
-  ROUTE_METHODS,
-  ROUTE_PRECHECK,
-  ROUTE_PRECHECK_INFO,
-} from "~/resources/staticRoutes";
-import { ContentLink, Step } from "~/utils/contentTypes.ts";
+  interoperabel,
+  methoden,
+  vorpruefung,
+  vorpruefung_hinweise,
+} from "@/config/routes";
+import { steps } from "~/resources/content/shared/naechste-schritte";
+import type { ContentLink, Step } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
 
@@ -46,7 +46,7 @@ export const preCheckResult = {
     hint: `Bitte kontaktieren Sie den Digitalcheck-Support unter: ${contact.mdPhoneLink()} oder schreiben Sie uns eine E-Mail an ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")} mit Ihren Fragen. Wir helfen Ihnen, die Vorprüfung auszufüllen.`,
     actionButton: {
       text: "Vorprüfung wiederholen",
-      to: ROUTE_PRECHECK.url,
+      to: vorpruefung.path,
     } satisfies ContentLink,
     nextStep: {
       title:
@@ -54,7 +54,7 @@ export const preCheckResult = {
       text: "Wenn digitale Umsetzung für Ihr Regelungsvorhaben wichtig ist, finden Sie hier passende Methoden und Werkzeuge. Sie erfahren, wie Sie den Prozess darstellen und durchdenken, mit Beteiligten ins Gespräch kommen und die fünf Prinzipien anwenden.",
       link: {
         text: "Zu „Erarbeiten“",
-        to: ROUTE_METHODS.url,
+        to: methoden.path,
       } satisfies ContentLink,
     },
   },
@@ -83,16 +83,16 @@ export const preCheckResult = {
 
       Haben Sie Fragen? Kontaktieren Sie uns unter ${contact.mdPhoneLink()} oder ${contact.mdMailToLink(contact.email)}.
 
-      [Zurück zum Vorprüfungs-Formular](${ROUTE_PRECHECK_INFO.url})
+      [Zurück zum Vorprüfungs-Formular](${vorpruefung_hinweise.path})
     `,
   },
   interoperability: {
     info: {
       title: "Erfahren Sie mehr über Interoperabilität",
-      content: dedent`Was bedeutet Interoperabilität für Regelungen, und wie beeinflusst sie deren Erarbeitung? Auf unserer [Übersichtsseite](${ROUTE_INTEROPERABILITY.url}) finden Sie alle wichtigen Informationen dazu.`,
+      content: dedent`Was bedeutet Interoperabilität für Regelungen, und wie beeinflusst sie deren Erarbeitung? Auf unserer [Übersichtsseite](${interoperabel.path}) finden Sie alle wichtigen Informationen dazu.`,
       button: {
         text: "Mehr zu Interoperabilität",
-        to: ROUTE_INTEROPERABILITY.url,
+        to: interoperabel.path,
         look: "link" as const,
       } satisfies ContentLink,
     },
@@ -107,15 +107,15 @@ export const preCheckResult = {
     },
   },
   form: {
-    formLegend: "Ergebnis senden und NKR frühzeitig einbinden",
+    formLegend: "Ergebnis absenden und Prüfstelle frühzeitig einbinden",
     instructions: dedent`
       Wir erstellen für Sie eine E-Mail mit dem Ergebnis der Vorprüfung, die sich in Ihrem E-Mail-Programm öffnet.
 
-      - Schicken Sie das Ergebnis an den Nationalen Normenkontrollrat (NKR).
+      - Schicken Sie das Ergebnis an Ihre Prüfstelle (wenn keine Prüfstelle vorhanden ist, dient das Ergebnis als Dokumentation und zur Selbstprüfung)
       - **Bei Anforderungen an Interoperabilität** erhält das Digitalcheck-Team automatisch eine Kopie und meldet sich bei Ihnen.
     `,
     previewLabel: "Vorschau der E-Mail-Vorlage",
-    copyIntroText: dedent`**Alternativ** können Sie das Ergebnis der Vorprüfung einfach als Text kopieren und manuell an den NKR schicken oder bei Ihren Dokumenten speichern.`,
+    copyIntroText: dedent`**Alternativ** können Sie das Ergebnis der Vorprüfung einfach als Text kopieren und manuell an die zuständige Prüfstelle schicken oder bei Ihren Dokumenten speichern.`,
     vorhabenTitleLabel: "Vorläufiger Arbeitstitel des Vorhabens",
     vorhabenTitleRequired: "Bitte geben Sie einen Titel für Ihr Vorhaben an.",
     vorhabenTitleTooLong:
@@ -153,10 +153,6 @@ export const preCheckResult = {
             - Nutzen Sie, falls vorhanden, die direkte Veraktungsfunktion in Outlook.
           `,
         },
-        {
-          label: "Warum die Vorprüfung an den NKR schicken?",
-          text: "Erfahrungswerte zeigen, dass ein frühzeitiger Austausch mit dem NKR oder dem DigitalService das Erarbeiten für Sie vereinfacht und die Prüfung beschleunigt. So können Sie von den Erfahrungen in anderen Vorhaben profitieren – wenn Sie dies wünschen.",
-        },
       ],
     },
     downloadPdfButton: {
@@ -165,10 +161,6 @@ export const preCheckResult = {
     copyMailButton: {
       text: "E-Mail-Text kopieren",
       textCopied: "Text Kopiert!",
-    },
-    copyAddressButton: {
-      text: "Empfängeradresse kopieren",
-      textCopied: "Adresse kopiert!",
     },
     sendEmailButton: {
       text: "E-Mail erstellen",
@@ -191,10 +183,7 @@ export const preCheckResult = {
     downloadStarted: "Vorprüfung wird heruntergeladen",
     outro: {
       title: "Darum ist es wichtig",
-      text: dedent`
-      - Je **früher** Sie sich mit dem NKR zu Digitalbezug austauschen, desto schneller ist die Prüfung abgeschlossen.
-      - Bei Interoperabilitätsbezug unterstützt Sie das Digitalcheck-Team gezielt bei der Umsetzung der EU-Anforderungen.
-    `,
+      text: "Bei Interoperabilitätsbezug unterstützt Sie das Digitalcheck-Team gezielt bei der Umsetzung der EU-Anforderungen.",
     },
   },
   print: {

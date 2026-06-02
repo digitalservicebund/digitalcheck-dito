@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { useLoaderData, useOutletContext } from "react-router";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
@@ -13,16 +13,17 @@ import RichText from "~/components/RichText.tsx";
 import TabGroup from "~/components/Tabs/Tabs";
 import VisualisationItem from "~/components/VisualisationItem";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
-import { ROUTE_REGELUNGEN } from "~/resources/staticRoutes";
 import getFeatureFlag from "~/utils/featureFlags.server.ts";
 import {
-  Beispielvorhaben,
   fetchStrapiData,
   paragraphFields,
   prinzipCoreFields,
-  PrinzipWithBeispielvorhaben,
   visualisationFields,
 } from "~/utils/strapiData.server";
+import type {
+  Beispielvorhaben,
+  PrinzipWithBeispielvorhaben,
+} from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
 import type { Route } from "./+types/beispiele.regelungen.$regelung";
 
@@ -82,10 +83,13 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
   return regelungData.beispielvorhabens[0];
 };
 
-export default function Gesetz() {
-  const regelung = useLoaderData<typeof loader>();
-  const principles = useOutletContext<PrinzipWithBeispielvorhaben[]>();
-
+export function Gesetz({
+  regelung,
+  principles,
+}: Readonly<{
+  regelung: Beispielvorhaben;
+  principles: PrinzipWithBeispielvorhaben[];
+}>) {
   const tabsData: {
     label: string;
     content: React.ReactNode;
@@ -204,7 +208,7 @@ export default function Gesetz() {
 
   return (
     <>
-      <MetaTitle prefix={ROUTE_REGELUNGEN.title} />
+      <MetaTitle prefix={"Regelungsbeispiel"} />
       <Hero
         className="bg-gray-100"
         title={regelung.Titel}
@@ -228,4 +232,10 @@ export default function Gesetz() {
       </ContentWrapper>
     </>
   );
+}
+
+export default function Route() {
+  const regelung = useLoaderData<typeof loader>();
+  const principles = useOutletContext<PrinzipWithBeispielvorhaben[]>();
+  return <Gesetz regelung={regelung} principles={principles} />;
 }

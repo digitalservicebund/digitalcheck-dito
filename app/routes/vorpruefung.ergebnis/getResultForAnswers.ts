@@ -1,6 +1,7 @@
 import { preCheck } from "~/resources/content/vorpruefung";
-import { PreCheckAnswerSchema } from "../vorpruefung/preCheckDataSchema";
-import { PreCheckResult, ResultType } from "./PreCheckResult";
+import type { PreCheckAnswerSchema } from "../vorpruefung/preCheckDataSchema";
+import type { PreCheckResult } from "./PreCheckResult";
+import { ResultType } from "./PreCheckResult";
 
 const { questions } = preCheck;
 

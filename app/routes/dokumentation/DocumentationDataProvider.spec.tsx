@@ -16,12 +16,12 @@ import {
   STORAGE_KEY,
   useDocumentationDataService,
 } from "./DocumentationDataProvider";
-import {
-  DATA_SCHEMA_VERSION_V2,
+import type {
+  DocumentationData,
   Principle,
-  type DocumentationData,
-  type V2,
+  V2,
 } from "./documentationDataSchema";
+import { DATA_SCHEMA_VERSION_V2 } from "./documentationDataSchema";
 
 vi.mock("~/contexts/FeatureFlagContext", async (importOriginal) => {
   const actual =
@@ -54,7 +54,7 @@ describe("DocumentationDataProvider", () => {
     it("returns data from localStorage on mount", async () => {
       const storedData: DocumentationData<V2> = {
         version: DATA_SCHEMA_VERSION_V2,
-        policyTitle: { title: "Stored Title", publicationStatus: "" },
+        policyTitle: { title: "Stored Title" },
       };
       mockRead.mockReturnValue(storedData);
 
@@ -94,8 +94,8 @@ describe("DocumentationDataProvider", () => {
   describe("createOrUpdateDocumentationData", () => {
     it("writes single field data to localStorage", async () => {
       const data: DocumentationData<V2> = {
-        version: DATA_SCHEMA_VERSION_V2,
-        policyTitle: { title: "My Policy", publicationStatus: "" },
+        ...emptyData,
+        policyTitle: { title: "My Policy" },
       };
 
       const { result } = renderHook(() => useDocumentationDataService(), {
@@ -110,8 +110,8 @@ describe("DocumentationDataProvider", () => {
 
     it("writes complete data object to localStorage", async () => {
       const data: DocumentationData<V2> = {
-        version: DATA_SCHEMA_VERSION_V2,
-        policyTitle: { title: "My Policy", publicationStatus: "" },
+        ...emptyData,
+        policyTitle: { title: "My Policy" },
         participation: { formats: "Workshops", results: "Results" },
         principles: [{ id: "p1", answer: "Nein", reasoning: "", aspects: [] }],
       };
@@ -139,14 +139,13 @@ describe("DocumentationDataProvider", () => {
       act(() =>
         result.current.setPolicyTitle({
           title: "New Title",
-          publicationStatus: "",
         }),
       );
 
       expect(mockWrite).toHaveBeenCalledWith(
         {
           ...emptyData,
-          policyTitle: { title: "New Title", publicationStatus: "" },
+          ...emptyData,
         },
         STORAGE_KEY,
       );
@@ -155,7 +154,7 @@ describe("DocumentationDataProvider", () => {
     it("updates policyTitle while preserving existing data", async () => {
       const existingData: DocumentationData<V2> = {
         version: DATA_SCHEMA_VERSION_V2,
-        policyTitle: { title: "Old Title", publicationStatus: "" },
+        policyTitle: { title: "Old Title" },
         participation: { formats: "Online", results: "Some results" },
       };
       mockRead.mockReturnValue(existingData);
@@ -168,14 +167,13 @@ describe("DocumentationDataProvider", () => {
       act(() =>
         result.current.setPolicyTitle({
           title: "Updated Title",
-          publicationStatus: "",
         }),
       );
 
       expect(mockWrite).toHaveBeenCalledWith(
         {
           ...existingData,
-          policyTitle: { title: "Updated Title", publicationStatus: "" },
+          policyTitle: { title: "Updated Title" },
         },
         STORAGE_KEY,
       );
@@ -203,7 +201,7 @@ describe("DocumentationDataProvider", () => {
     it("updates participation while preserving existing data", async () => {
       const existingData: DocumentationData<V2> = {
         version: DATA_SCHEMA_VERSION_V2,
-        policyTitle: { title: "My Policy", publicationStatus: "" },
+        policyTitle: { title: "My Policy" },
         participation: { formats: "Old format", results: "Old results" },
       };
       mockRead.mockReturnValue(existingData);
@@ -255,7 +253,7 @@ describe("DocumentationDataProvider", () => {
 
     it("adds principle to an empty principles array", async () => {
       const existingData: DocumentationData<V2> = {
-        version: DATA_SCHEMA_VERSION_V2,
+        ...emptyData,
         principles: [],
       };
       mockRead.mockReturnValue(existingData);
@@ -275,7 +273,7 @@ describe("DocumentationDataProvider", () => {
 
     it("appends principle to existing principles array", async () => {
       const existingData: DocumentationData<V2> = {
-        version: DATA_SCHEMA_VERSION_V2,
+        ...emptyData,
         principles: [principle1],
       };
       mockRead.mockReturnValue(existingData);
@@ -295,7 +293,7 @@ describe("DocumentationDataProvider", () => {
 
     it("updates principle with matching id in-place, preserving other principles", async () => {
       const existingData: DocumentationData<V2> = {
-        version: DATA_SCHEMA_VERSION_V2,
+        ...emptyData,
         principles: [principle1, principle2],
       };
       mockRead.mockReturnValue(existingData);
@@ -309,6 +307,7 @@ describe("DocumentationDataProvider", () => {
         id: "p1",
         answer: "Nicht relevant",
         reasoning: "Updated reasoning",
+        aspects: undefined,
       } as const;
       act(() => result.current.addOrUpdatePrinciple(updatedPrinciple1));
 

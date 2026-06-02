@@ -1,18 +1,12 @@
-import {
-  ROUTE_DOCUMENTATION,
-  ROUTE_METHODS,
-  ROUTE_PRECHECK,
-} from "~/resources/staticRoutes";
-import { Step } from "~/utils/contentTypes.ts";
-import { dedent } from "~/utils/dedentMultilineStrings";
-import { contact } from "./contact";
+import { dokumentation, methoden, vorpruefung } from "@/config/routes";
+import type { Step } from "~/utils/contentTypes.ts";
 
-const stepNKR: Step = {
+const stepPruefstelle: Step = {
   headline: {
-    text: "Prüfen durch den NKR",
+    text: "Prüfen durch zuständige Prüfstelle",
   },
   content:
-    "Der NKR (Nationaler Normenkontrollrat) prüft Ihr Vorhaben hinsichtlich der Berücksichtigung der Prinzipien digitaltauglicher Gesetzgebung. Bei Fragen wird der NKR auf Sie zukommen.",
+    "Ihre Prüfstelle untersucht ihr Vorhaben hinsichtlich der Berücksichtigung der Prinzipien digitaltauglicher Gesetzgebung. Senden Sie die von Ihnen erstelle Dokumentation per E-Mail an Ihre Prüfstelle. Die E-Mail-Adresse finden Sie am Ende der Dokumentationserstellung. Damit ist der Digitacheck für Sie beendet. Wenn Sie keine Prüfstelle haben, dient die Dokumentation zur Selbstprüfung.",
   isDisabled: false,
 };
 export const steps = {
@@ -24,7 +18,7 @@ export const steps = {
       "Finden Sie heraus, ob Sie in Ihrem Regelungsvorhaben Aspekte der digitalen Umsetzung und EU-Anforderungen an Interoperabilität beachten müssen. Danach entscheidet sich, ob die weiteren Schritte für Sie relevant sind.",
     link: {
       text: "Digitalbezug einschätzen",
-      to: ROUTE_PRECHECK.url,
+      to: vorpruefung.path,
     },
     finished: {
       headline: {
@@ -41,7 +35,7 @@ export const steps = {
       "Nutzen Sie passende Methoden und Werkzeuge, um Digitaltauglichkeit und Interoperabilität in Ihrer Regelung sicherzustellen. Das Digitalcheck-Team steht Ihnen bei der Erarbeitung zur Verfügung.",
     link: {
       text: "Zu „Erarbeiten“",
-      to: ROUTE_METHODS.url,
+      to: methoden.path,
     },
     isDisabled: false,
     finished: {
@@ -59,7 +53,7 @@ export const steps = {
       "Dokumentieren Sie in einem Fragebogen, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben. Beschreiben Sie, wie Sie diese in das Regelungsvorhaben einfließen lassen. Die Erkenntnisse der vorigen Schritte helfen Ihnen beim Ausfüllen.",
     link: {
       text: "Zu „Dokumentieren“",
-      to: ROUTE_DOCUMENTATION.url,
+      to: dokumentation.path,
     },
     isDisabled: false,
     finished: {
@@ -69,16 +63,10 @@ export const steps = {
       isDisabled: true,
     },
   },
-  nkr: stepNKR,
+  nkr: stepPruefstelle,
   nkrFinal: {
-    ...stepNKR,
+    ...stepPruefstelle,
     isDisabled: false,
-    content:
-      stepNKR.content +
-      dedent`
-        <p>Senden Sie die von Ihnen erstellte Dokumentation per E-Mail an folgende Adresse: <a href="mailto:${contact.nkrEmail}" class="plausible-event-name=Content.Steps.Link+BMJ+Email underline hover:no-underline text-blue-700 font-bold">${contact.nkrEmail}</a></p>
-
-        Damit ist der Digitalcheck für Sie beendet.
-      `,
+    content: stepPruefstelle.content,
   },
 } satisfies { [key: string]: Step };

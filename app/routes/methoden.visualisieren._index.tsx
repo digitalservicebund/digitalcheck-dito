@@ -1,3 +1,4 @@
+import { methoden_visualisieren } from "@/config/routes";
 import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";
@@ -9,13 +10,12 @@ import InfoBoxList from "~/components/InfoBoxList";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { methodsTasksProcesses } from "~/resources/content/methode-visualisieren.ts";
-import { ROUTE_METHODS_VISUALIZE } from "~/resources/staticRoutes.ts";
 import { assetPath } from "~/utils/assetPath";
 
 export default function Visualization() {
   return (
     <>
-      <MetaTitle prefix={ROUTE_METHODS_VISUALIZE.title} />
+      <MetaTitle prefix={methoden_visualisieren.title} />
       <main>
         <Hero
           subtitle={methodsTasksProcesses.subtitle}

@@ -1,5 +1,6 @@
 import fs from "node:fs";
-import { FeatureFlag, FeatureFlags, features } from "~/utils/featureFlags.ts";
+import type { FeatureFlag, FeatureFlags } from "~/utils/featureFlags.ts";
+import { features } from "~/utils/featureFlags.ts";
 import { isPreview } from "./preview";
 
 const FEATURE_FLAGS_PATH =
