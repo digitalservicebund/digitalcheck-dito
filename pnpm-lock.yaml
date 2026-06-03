@@ -20,43 +20,43 @@ importers:
         specifier: ^2.2.10
         version: 2.2.10(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       "@posthog/core":
-        specifier: ^1.29.12
+        specifier: ^1.27.7
         version: 1.29.12
       "@react-router/node":
-        specifier: ^7.15.1
+        specifier: ^7.14.2
         version: 7.15.1(react-router@7.15.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(typescript@6.0.3)
       "@react-router/serve":
-        specifier: ^7.15.1
+        specifier: ^7.14.2
         version: 7.15.1(react-router@7.15.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(typescript@6.0.3)
       "@rvf/react":
-        specifier: ^8.1.2
+        specifier: ^8.1.1
         version: 8.1.2(@types/react@19.2.15)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.6))
       "@rvf/react-router":
-        specifier: ^8.1.2
+        specifier: ^8.1.1
         version: 8.1.2(@types/react@19.2.15)(react-dom@19.2.6(react@19.2.6))(react-router@7.15.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react@19.2.6)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.6))
       "@rvf/zod":
-        specifier: ^7.0.5
-        version: 7.0.5(@types/react@19.2.15)(react@19.2.6)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.6))(zod@4.4.3)
+        specifier: ^7.0.4
+        version: 7.0.5(@types/react@19.2.15)(react@19.2.6)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.6))(zod@4.2.1)
       "@tailwindcss/vite":
-        specifier: ^4.3.0
+        specifier: ^4.2.4
         version: 4.3.0(vite@8.0.14(@types/node@25.9.1)(esbuild@0.27.7)(jiti@2.7.0))
       docx:
-        specifier: ^9.7.1
+        specifier: ^9.6.1
         version: 9.7.1
       file-saver:
         specifier: ^2.0.5
         version: 2.0.5
       isbot:
-        specifier: ^5.1.40
+        specifier: ^5.1.39
         version: 5.1.40
       marked:
-        specifier: ^18.0.4
+        specifier: ^18.0.2
         version: 18.0.4
       mime-types:
         specifier: ^3.0.2
         version: 3.0.2
       msw:
-        specifier: ^2.14.6
+        specifier: ^2.13.6
         version: 2.14.6(@types/node@25.9.1)(typescript@6.0.3)
       node-cache:
         specifier: ^5.1.2
@@ -68,47 +68,47 @@ importers:
         specifier: ^4.0.4
         version: 4.0.4
       posthog-js:
-        specifier: ^1.376.0
+        specifier: ^1.372.3
         version: 1.376.0
       react:
-        specifier: ^19.2.6
+        specifier: ^19.2.5
         version: 19.2.6
       react-dom:
-        specifier: ^19.2.6
+        specifier: ^19.2.5
         version: 19.2.6(react@19.2.6)
       react-router:
-        specifier: ^7.15.1
+        specifier: ^7.14.2
         version: 7.15.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       tailwind-merge:
-        specifier: ^3.6.0
+        specifier: ^3.5.0
         version: 3.6.0
       zod:
-        specifier: ~4.4.3
-        version: 4.4.3
+        specifier: ~4.2.1
+        version: 4.2.1
     devDependencies:
       "@axe-core/playwright":
-        specifier: ^4.11.3
+        specifier: ^4.11.2
         version: 4.11.3(playwright-core@1.60.0)
       "@commitlint/config-conventional":
-        specifier: ^21.0.1
-        version: 21.0.1
+        specifier: ^20.5.0
+        version: 20.5.3
       "@commitlint/types":
-        specifier: ^21.0.1
-        version: 21.0.1
+        specifier: ^20.5.0
+        version: 20.5.0
       "@eslint/compat":
-        specifier: ^2.1.0
+        specifier: ^2.0.5
         version: 2.1.0(eslint@9.39.4(jiti@2.7.0))
       "@eslint/js":
         specifier: ^10.0.1
         version: 10.0.1(eslint@9.39.4(jiti@2.7.0))
       "@playwright/test":
-        specifier: ^1.60.0
+        specifier: ^1.59.1
         version: 1.60.0
       "@react-router/dev":
-        specifier: ^7.15.1
+        specifier: ^7.14.2
         version: 7.15.1(@react-router/serve@7.15.1(react-router@7.15.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(typescript@6.0.3))(@types/node@25.9.1)(jiti@2.7.0)(lightningcss@1.32.0)(react-router@7.15.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(typescript@6.0.3)(vite@8.0.14(@types/node@25.9.1)(esbuild@0.27.7)(jiti@2.7.0))
       "@react-router/fs-routes":
-        specifier: ^7.15.1
+        specifier: ^7.14.2
         version: 7.15.1(@react-router/dev@7.15.1(@react-router/serve@7.15.1(react-router@7.15.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(typescript@6.0.3))(@types/node@25.9.1)(jiti@2.7.0)(lightningcss@1.32.0)(react-router@7.15.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(typescript@6.0.3)(vite@8.0.14(@types/node@25.9.1)(esbuild@0.27.7)(jiti@2.7.0)))(typescript@6.0.3)
       "@standard-schema/spec":
         specifier: ^1.1.0
@@ -129,10 +129,10 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1
       "@types/node":
-        specifier: ^25.9.1
+        specifier: ^25.6.0
         version: 25.9.1
       "@types/react":
-        specifier: ^19.2.15
+        specifier: ^19.2.14
         version: 19.2.15
       "@types/react-dom":
         specifier: ^19.2.3
@@ -159,7 +159,7 @@ importers:
         specifier: ^6.10.2
         version: 6.10.2(eslint@9.39.4(jiti@2.7.0))
       eslint-plugin-playwright:
-        specifier: ^2.10.4
+        specifier: ^2.10.2
         version: 2.10.4(eslint@9.39.4(jiti@2.7.0))
       eslint-plugin-prettier:
         specifier: ^5.5.5
@@ -177,10 +177,10 @@ importers:
         specifier: ^7.16.2
         version: 7.16.2(eslint@9.39.4(jiti@2.7.0))(typescript@6.0.3)
       globals:
-        specifier: ^17.6.0
+        specifier: ^17.5.0
         version: 17.6.0
       jsdom:
-        specifier: ^29.1.1
+        specifier: ^29.1.0
         version: 29.1.1
       license-checker-rseidelsohn:
         specifier: ^4.4.2
@@ -189,7 +189,7 @@ importers:
         specifier: ^1.12.0
         version: 1.12.0
       playwright-core:
-        specifier: ^1.60.0
+        specifier: ^1.59.1
         version: 1.60.0
       prettier:
         specifier: ^3.8.3
@@ -201,7 +201,7 @@ importers:
         specifier: ^0.8.0
         version: 0.8.0(prettier-plugin-organize-imports@4.3.0(prettier@3.8.3)(typescript@6.0.3))(prettier@3.8.3)
       tailwindcss:
-        specifier: ^4.3.0
+        specifier: ^4.2.4
         version: 4.3.0
       ts-node:
         specifier: ^10.9.2
@@ -210,19 +210,19 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
       typescript-eslint:
-        specifier: ^8.60.0
+        specifier: ^8.59.1
         version: 8.60.0(eslint@9.39.4(jiti@2.7.0))(typescript@6.0.3)
       undici:
-        specifier: ^8.3.0
+        specifier: ^8.1.0
         version: 8.3.0
       vite:
-        specifier: ^8.0.14
+        specifier: ^8.0.10
         version: 8.0.14(@types/node@25.9.1)(esbuild@0.27.7)(jiti@2.7.0)
       vite-plugin-devtools-json:
         specifier: ^1.0.0
         version: 1.0.0(vite@8.0.14(@types/node@25.9.1)(esbuild@0.27.7)(jiti@2.7.0))
       vitest:
-        specifier: ^4.1.7
+        specifier: ^4.1.5
         version: 4.1.7(@opentelemetry/api@1.9.1)(@types/node@25.9.1)(jsdom@29.1.1)(msw@2.14.6(@types/node@25.9.1)(typescript@6.0.3))(vite@8.0.14(@types/node@25.9.1)(esbuild@0.27.7)(jiti@2.7.0))
 
 packages:
@@ -494,19 +494,19 @@ packages:
       }
     hasBin: true
 
-  "@commitlint/config-conventional@21.0.1":
+  "@commitlint/config-conventional@20.5.3":
     resolution:
       {
-        integrity: sha512-gRorrkfWOh/+V5X8GYWWbQvrzPczopGMS4CCNrQdHkK4xWElv82BDvIsDhJZWTlI7TazOlYea6VATufCsFs+sw==,
+        integrity: sha512-j34Qqeaa152chJgz2ysyk0BCpHenJn1lV0Rx0VXf8k3ccQcED+48EZrzMvo9jLmJUyBrrBwvu89I+2er4gW7QQ==,
       }
-    engines: { node: ">=22.12.0" }
+    engines: { node: ">=v18" }
 
-  "@commitlint/types@21.0.1":
+  "@commitlint/types@20.5.0":
     resolution:
       {
-        integrity: sha512-4u7w8jcoCUFWhjWnASYzZHAP34OqOtuFBN87nQmFvqda03YU0T6z+yB4w0gSAMpekiRqqGk5rt+qSlW+a2vSEg==,
+        integrity: sha512-ZJoS8oSq2CAZEpc/YI9SulLrdiIyXeHb/OGqGrkUP6Q7YV+0ouNAa7GjqRdXeQPncHQIDz/jbCTlHScvYvO/gA==,
       }
-    engines: { node: ">=22.12.0" }
+    engines: { node: ">=v18" }
 
   "@cspotcode/source-map-support@0.8.1":
     resolution:
@@ -6845,10 +6845,10 @@ packages:
     peerDependencies:
       zod: ^3.25.0 || ^4.0.0
 
-  zod@4.4.3:
+  zod@4.2.1:
     resolution:
       {
-        integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==,
+        integrity: sha512-0wZ1IRqGGhMP76gLqz8EyfBXKk0J2qo2+H3fi4mcUP/KtTocoX08nmIAHl1Z2kJIZbZee8KOpBCSNPRgauucjw==,
       }
 
   zustand@5.0.13:
@@ -7092,12 +7092,12 @@ snapshots:
     dependencies:
       css-tree: 3.2.1
 
-  "@commitlint/config-conventional@21.0.1":
+  "@commitlint/config-conventional@20.5.3":
     dependencies:
-      "@commitlint/types": 21.0.1
+      "@commitlint/types": 20.5.0
       conventional-changelog-conventionalcommits: 9.3.1
 
-  "@commitlint/types@21.0.1":
+  "@commitlint/types@20.5.0":
     dependencies:
       conventional-commits-parser: 6.4.0
       picocolors: 1.1.1
@@ -7852,11 +7852,11 @@ snapshots:
 
   "@rvf/set-get@7.0.2": {}
 
-  "@rvf/zod@7.0.5(@types/react@19.2.15)(react@19.2.6)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.6))(zod@4.4.3)":
+  "@rvf/zod@7.0.5(@types/react@19.2.15)(react@19.2.6)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.6))(zod@4.2.1)":
     dependencies:
       "@rvf/core": 8.1.1(@types/react@19.2.15)(react@19.2.6)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.6))
       "@rvf/set-get": 7.0.2
-      zod: 4.4.3
+      zod: 4.2.1
     transitivePeerDependencies:
       - "@types/react"
       - react
@@ -8961,8 +8961,8 @@ snapshots:
       "@babel/parser": 7.29.7
       eslint: 9.39.4(jiti@2.7.0)
       hermes-parser: 0.25.1
-      zod: 4.4.3
-      zod-validation-error: 4.0.2(zod@4.4.3)
+      zod: 4.2.1
+      zod-validation-error: 4.0.2(zod@4.2.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -10946,11 +10946,11 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zod-validation-error@4.0.2(zod@4.4.3):
+  zod-validation-error@4.0.2(zod@4.2.1):
     dependencies:
-      zod: 4.4.3
+      zod: 4.2.1
 
-  zod@4.4.3: {}
+  zod@4.2.1: {}
 
   zustand@5.0.13(@types/react@19.2.15)(immer@10.2.0)(react@19.2.6)(use-sync-external-store@1.6.0(react@19.2.6)):
     optionalDependencies:
