@@ -1,28 +1,24 @@
-import { dokumentation_beteiligungsformate } from "@/config/routes.ts";
-import { useOutletContext } from "react-router";
+import { dokumentation_beteiligungsformate } from "@/config/routes";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
-import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
   defaultParticipationValues,
   participationSchema,
 } from "~/routes/dokumentation/documentationDataSchema";
-import { features } from "~/utils/featureFlags";
-import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
+import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
 const { participation } = digitalDocumentation;
 
-export default function DocumentationParticipation() {
-  const simplifiedFlow = useFeatureFlag(features.simplifiedPrincipleFlow);
-  const { currentUrl, nextUrl, previousUrl } =
-    useOutletContext<NavigationContext>();
+export function DocumentationParticipation() {
+  const { currentUrl, nextUrl, previousUrl, prinzips } =
+    useDocumentationNavigation();
   const { setParticipation, documentationData } = useDocumentationDataService();
 
   const form = useSyncedForm({
@@ -55,19 +51,12 @@ export default function DocumentationParticipation() {
             </legend>
 
             <Textarea
-              description={
-                simplifiedFlow
-                  ? undefined
-                  : participation.formats.textField.description
-              }
               placeholder={participation.formats.textField.placeholder}
               scope={form.scope("formats")}
               data-testid="schritte"
               warningInsteadOfError
             >
-              {simplifiedFlow
-                ? "Erklärung"
-                : participation.formats.textField.label}
+              Erklärung
               <HelpButton sectionId="formats" title="Hinweis zur Erklärung">
                 Beschreiben Sie stichpunktartig, wie Sie die Bedürfnisse der
                 Betroffenen erhoben haben – z. B. durch Befragungen, Gesprächen
@@ -82,18 +71,11 @@ export default function DocumentationParticipation() {
               {participation.results.heading}
             </legend>
             <Textarea
-              description={
-                simplifiedFlow
-                  ? undefined
-                  : participation.results.textField.description
-              }
               scope={form.scope("results")}
               data-testid="erkenntnisse"
               warningInsteadOfError
             >
-              {simplifiedFlow
-                ? "Erkenntnisse"
-                : participation.results.textField.label}
+              Erkenntnisse
               <HelpButton sectionId="results" title="Hinweis zu Erkenntnissen">
                 Bitte listen Sie stichpunktartig auf, welche Erkenntnisse
                 eingearbeitet wurden und geben Sie Hinweise auf Paragrafen, die
@@ -107,9 +89,32 @@ export default function DocumentationParticipation() {
             submit
             showDownloadDraftButton
             showSavingTip
+            prinzips={prinzips}
           />
         </form>
       </div>
     </>
+  );
+}
+
+export default function Route() {
+  return <DocumentationParticipation />;
+}
+
+// Astro page export
+import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
+
+export function BeteiligungsformatePage({
+  prinzips,
+  currentUrl,
+}: Readonly<{
+  prinzips: PrinzipWithAspekteAndExample[];
+  currentUrl: string;
+}>) {
+  return (
+    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
+      <DocumentationParticipation />
+    </DocumentationPageShell>
   );
 }
