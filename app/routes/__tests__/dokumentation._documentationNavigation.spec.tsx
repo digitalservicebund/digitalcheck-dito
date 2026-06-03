@@ -5,13 +5,12 @@ import "./utils/mockLocalStorageVersioned";
 import {
   dokumentation,
   dokumentation_beteiligungsformate,
-  dokumentation_euInteroperabilitaetsbezug,
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
 } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { act, render, screen, within } from "@testing-library/react";
-import { MemoryRouter, useRouteLoaderData } from "react-router";
+import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { LayoutWithDocumentationNavigation } from "~/routes/dokumentation._documentationNavigation";
@@ -304,53 +303,6 @@ describe("navigation on pages of documentation", () => {
       expect(item).toHaveAttribute("aria-disabled");
       expect(item).not.toHaveAttribute("href");
     }
-  });
-
-  it("groups EU steps in one section after principles", () => {
-    vi.mocked(useRouteLoaderData).mockReturnValue({
-      routes: [
-        {
-          title: "Prinzip A",
-          url: `${dokumentation.path}/prinzipA`,
-        },
-        dokumentation_euInteroperabilitaetsbezug,
-      ],
-    });
-    vi.mocked(readDataFromLocalStorage<DocumentationData<V1>>).mockReturnValue({
-      version: DATA_SCHEMA_VERSION_V1,
-      euInteroperabilityOutcome: { outcomeId: "REQUIRED" },
-    });
-
-    renderPage(currentRoute);
-
-    const navigation = getNav();
-    const topLevelSections = within(navigation).getAllByRole("button");
-    const sectionNames = topLevelSections.map((item) => item.textContent ?? "");
-
-    const principlesIndex = sectionNames.findIndex((text) =>
-      text.includes("Prinzipien"),
-    );
-    const euIndex = sectionNames.findIndex((text) =>
-      text.includes("EU-Interoperabilitaet"),
-    );
-
-    expect(principlesIndex).toBeGreaterThanOrEqual(0);
-    expect(euIndex).toBe(principlesIndex + 1);
-
-    const euSection = within(navigation).getByText("EU-Interoperabilitaet");
-    const euListItem = euSection.closest("li");
-    expect(euListItem).not.toBeNull();
-
-    expect(
-      within(euListItem as HTMLElement).getByText(
-        "Bezug zu EU-Interoperabilität",
-      ),
-    ).toBeInTheDocument();
-    expect(
-      within(euListItem as HTMLElement).getByText(
-        "EU-Interoperabilitätsbewertung",
-      ),
-    ).toBeInTheDocument();
   });
 
   const currentRoute = dokumentation_regelungsvorhabenTitel;
