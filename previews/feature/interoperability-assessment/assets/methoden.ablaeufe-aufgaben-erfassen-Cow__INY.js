@@ -1,0 +1,1 @@
+import{c as e,t,z as n}from"./jsx-runtime-CWlP0OyB.js";import{F as r}from"./routes-BpXvYPA_.js";var i=t(),a=r.path,o=n(function(){return(0,i.jsx)(e,{to:a,replace:!0})});export{o as default};

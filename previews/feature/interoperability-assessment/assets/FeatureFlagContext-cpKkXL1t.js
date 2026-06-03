@@ -1,0 +1,1 @@
+import{V as e,W as t}from"./jsx-runtime-CWlP0OyB.js";var n=t(e(),1),r=(0,n.createContext)({});function i(e){return(0,n.useContext)(r)[e]}export{i as n,r as t};

@@ -1,0 +1,1 @@
+var e=(e,t)=>t?`?tab=${e}#${t}`:`?tab=${e}`;export{e as t};

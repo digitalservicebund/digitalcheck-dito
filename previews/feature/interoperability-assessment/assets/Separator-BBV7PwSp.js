@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CWlP0OyB.js";import{t}from"./tailwindMerge-C7i4L8O4.js";var n=e();function r({className:e}){return(0,n.jsx)(`hr`,{className:t(`border-0 border-b-2 border-solid border-gray-400`,e)})}export{r as t};
