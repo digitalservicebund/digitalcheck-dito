@@ -1,7 +1,6 @@
 // Import mocks first
 import "./utils/mockLocalStorageVersioned";
 // End of mocks
-
 import {
   dokumentation,
   dokumentation_beteiligungsformate,
@@ -13,6 +12,7 @@ import { act, render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { stubResizingFunctionality } from "~/routes/__tests__/utils/stubResizingFunctionality.ts";
 import { LayoutWithDocumentationNavigation } from "~/routes/dokumentation._documentationNavigation";
 import {
   type Route,
@@ -41,6 +41,15 @@ const mockRoutes: (RouteGroup | Route)[] = [
       {
         title: "Prinzip A",
         path: `${dokumentation.path}/prinzipA`,
+      },
+    ],
+  },
+  {
+    title: "EU-Interoperabilität",
+    routes: [
+      {
+        title: "Interoperabilität A",
+        path: `${dokumentation.path}/interoperabilitaet`,
       },
     ],
   },
@@ -235,27 +244,7 @@ const expectNotWarning = (element: HTMLElement) => {
 
 describe("navigation on pages of documentation", () => {
   beforeEach(() => {
-    Object.defineProperty(globalThis, "matchMedia", {
-      writable: true,
-      value: vi.fn().mockImplementation((query: string) => ({
-        matches: false,
-        media: query,
-        onchange: null,
-        addListener: vi.fn(),
-        removeListener: vi.fn(),
-        addEventListener: vi.fn(),
-        removeEventListener: vi.fn(),
-        dispatchEvent: vi.fn(),
-      })),
-    });
-    vi.stubGlobal(
-      "ResizeObserver",
-      class {
-        observe = vi.fn();
-        unobserve = vi.fn();
-        disconnect = vi.fn();
-      },
-    );
+    stubResizingFunctionality();
   });
 
   afterEach(() => {
@@ -297,7 +286,7 @@ describe("navigation on pages of documentation", () => {
       dokumentation_regelungsvorhabenTitel.title,
       dokumentation_beteiligungsformate.title,
       "Prinzipien",
-      "EU-Interoperabilitaet",
+      "EU-Interoperabilität",
     ]) {
       const item = within(navigation).getByText(title);
       expect(item).toHaveAttribute("aria-disabled");

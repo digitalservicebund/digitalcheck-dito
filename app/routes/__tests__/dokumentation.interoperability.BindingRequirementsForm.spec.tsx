@@ -1,13 +1,42 @@
+import { dokumentation_verbindlicheAnforderungen } from "@/config/routes.ts";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it } from "vitest";
+import { MemoryRouter } from "react-router";
+import { beforeEach, describe, expect, it } from "vitest";
+import { stubResizingFunctionality } from "~/routes/__tests__/utils/stubResizingFunctionality.ts";
+import { LayoutWithDocumentationNavigation } from "~/routes/dokumentation._documentationNavigation.tsx";
+import {
+  DocumentationDataProvider,
+  STORAGE_KEY,
+} from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import BindingRequirementsForm from "~/routes/dokumentation/interoperability/BindingRequirementsForm";
 
+function renderPage() {
+  const routes = [dokumentation_verbindlicheAnforderungen];
+  return render(
+    <MemoryRouter initialEntries={routes}>
+      <DocumentationDataProvider>
+        <LayoutWithDocumentationNavigation
+          routes={routes}
+          prinzips={[]}
+          currentUrl={routes[0].path}
+        >
+          <BindingRequirementsForm />
+        </LayoutWithDocumentationNavigation>
+      </DocumentationDataProvider>
+    </MemoryRouter>,
+  );
+}
+
 describe("BindingRequirementsForm", () => {
+  beforeEach(() => {
+    stubResizingFunctionality();
+    localStorage.removeItem(STORAGE_KEY);
+  });
   it("adds an additional requirement", async () => {
     const user = userEvent.setup();
-    render(<BindingRequirementsForm />);
+    renderPage();
 
     const addButton = screen.getByRole("button", {
       name: "Verbindliche Anforderung hinzufügen",
@@ -22,27 +51,28 @@ describe("BindingRequirementsForm", () => {
 
   it("removes a single requirement when more than one exists", async () => {
     const user = userEvent.setup();
-    render(<BindingRequirementsForm />);
+    renderPage();
 
     const addButton = screen.getByRole("button", {
       name: "Verbindliche Anforderung hinzufügen",
     });
 
+    expect(
+      screen.queryByRole("button", { name: "Anforderung 1 entfernen" }),
+    ).not.toBeInTheDocument();
+
+    await user.click(addButton);
+
     const removeFirstButton = screen.getByRole("button", {
       name: "Anforderung 1 entfernen",
     });
-
-    expect(removeFirstButton).toBeDisabled();
-
-    await user.click(addButton);
-    expect(removeFirstButton).toBeEnabled();
+    expect(removeFirstButton).toBeVisible();
 
     await user.click(removeFirstButton);
     expect(screen.queryByText("Anforderung 2")).not.toBeInTheDocument();
-
     expect(
-      screen.getByRole("button", { name: "Anforderung 1 entfernen" }),
-    ).toBeDisabled();
+      screen.queryByRole("button", { name: "Anforderung 1 entfernen" }),
+    ).not.toBeInTheDocument();
 
     await user.click(addButton);
     expect(screen.getByText("Anforderung 2")).toBeVisible();
