@@ -1,7 +1,6 @@
 import { vorpruefung_hinweise } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import type React from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { readVersionedDataFromLocalStorage } from "~/utils/localStorageVersioned";
@@ -20,14 +19,10 @@ vi.mock("~/utils/localStorageVersioned", async (importOriginal) => {
 
 const { questions } = preCheck;
 
-const renderWithRouter = (component: React.ReactElement) => {
-  return render(component);
-};
-
 describe("Vorpruefung Index Route - Integration Tests", () => {
   describe("with no existing data", () => {
     beforeEach(() => {
-      renderWithRouter(<Index />);
+      render(<Index />);
     });
 
     it("renders the Hero section with the correct title", () => {
@@ -66,7 +61,7 @@ describe("Vorpruefung Index Route - Integration Tests", () => {
         ssr: false,
       } as PreCheckData);
 
-      renderWithRouter(<Index />);
+      render(<Index />);
     });
 
     it("renders the CTA button to continue vorpruefung at question 0", () => {
@@ -97,7 +92,7 @@ describe("Vorpruefung Index Route - Integration Tests", () => {
         ssr: false,
       } as PreCheckData);
 
-      renderWithRouter(<Index />);
+      render(<Index />);
     });
 
     it("renders the CTA button to continue vorpruefung", () => {
