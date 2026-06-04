@@ -81,13 +81,19 @@ export default function DocumentationInteroperabilityAssessmentSemantic() {
             verarbeiten können.
           </p>
           <DetailsSummary title={"Beispiel"}>
-            Das Datenfeld für „Wohnsitz“ wird in ganz Europa nach demselben
-            Standard (z. B. den{" "}
-            <NewTabLink to={interoperabel_loesungen_coreVocabularies.path}>
-              <i>Semantic Core Vocabularies</i>
-            </NewTabLink>
-            ) definiert. So verstehen das spanische System und das deutsche
-            System dasselbe.
+            <p>
+              Das Datenfeld für „Wohnsitz“ wird in ganz Europa nach demselben
+              Standard (z. B. den{" "}
+              <NewTabLink to={interoperabel_loesungen_coreVocabularies.path}>
+                <i>Semantic Core Vocabularies</i>
+              </NewTabLink>
+              ) definiert. So verstehen das spanische System und das deutsche
+              System dasselbe.
+            </p>
+            <p>
+              Dieser Standard wird im Gesetz / in der Verordnung referenziert
+              oder im Vollzug genutzt.
+            </p>
           </DetailsSummary>
         </div>
         <SkipNoticeWrapper>

@@ -37,7 +37,7 @@ function DetailFormElement({
   return (
     <Textarea
       description={
-        "Tragen Sie Ihre Erläuterung ein, z. B.: „Anträge müssen innerhalb von 3 Tagen an die zuständige Stelle weitergeleitet werden.“ und Benennung der Stelle."
+        "Tragen Sie Ihre Erläuterung ein, z. B.: „Anträge müssen innerhalb von 3 Tagen an die zuständige Stelle weitergeleitet werden. Zuständig ist Behörde [X].“"
       }
       scope={scope.scope("detail")}
       rows={5}
@@ -77,11 +77,14 @@ export default function DocumentationInteroperabilityAssessment() {
             Behördengrenzen zu stocken.
           </p>
           <DetailsSummary title={"Beispiel"}>
-            Wenn ein Unternehmen seinen Standort von Deutschland nach Spanien
-            verlegt, sind die beteiligten Behörden beider Länder (z. B. über das
-            Single Digital Gateway) miteinander verknüpft, um die
-            Gewerbeummeldung abzuwickeln. Auch Zuständigkeiten müssen dazu
-            geklärt sein.
+            <b>Szenario: internationale Gewerbeummeldung</b>
+            <p>
+              Wenn ein Unternehmen seinen Standort von Deutschland nach Spanien
+              verlegt, sollten die beteiligten Behörden beider Länder (z. B.
+              über das Single Digital Gateway) so miteinander verknüpft sein,
+              das die Gewerbeummeldung reibungslos abgewickelt werden kann. Auch
+              Zuständigkeiten müssen dazu geklärt sein.
+            </p>
           </DetailsSummary>
         </div>
         <SkipNoticeWrapper>

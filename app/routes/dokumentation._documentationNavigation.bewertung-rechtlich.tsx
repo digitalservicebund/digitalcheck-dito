@@ -36,9 +36,8 @@ function DetailFormElement({
   }
   return (
     <Textarea
-      description={`Tragen Sie Ihre Erläuterung ein, z. B.: „Die Datenübermittlung erfolgt
-          ausschließlich nach dem Verfahren X.“ oder „Behörde A darf Daten von
-          Behörde B abrufen.“`}
+      description={`Tragen Sie Ihre Erläuterung ein, z. B.: „Behörde A darf Daten von
+          von Behörde B abrufen.“`}
       scope={scope.scope("detail")}
       rows={5}
       warningInsteadOfError
@@ -77,9 +76,11 @@ export default function DocumentationInteroperabilityAssessment() {
             dürfen einen digitalen Austausch blockieren.
           </p>
           <DetailsSummary title={"Beispiel"}>
-            Eine Verordnung erlaubt es einer deutschen Behörde,
-            Bildungsabschlüsse direkt digital bei einer Behörde in Frankreich zu
-            verifizieren.
+            Der Gesetzesentwurf ermächtigt die zuständige deutsche Behörde [X],
+            Nachweise zu Bildungsabschlüssen direkt bei den zuständigen Stellen
+            anderer EU-Mitgliedstaaten zu überprüfen. Den ausländischen Behörden
+            wird spiegelbildlich das Recht eingeräumt, entsprechende
+            Überprüfungsanfragen an die deutsche Behörde zu richten.
           </DetailsSummary>
         </div>
         <SkipNoticeWrapper>
