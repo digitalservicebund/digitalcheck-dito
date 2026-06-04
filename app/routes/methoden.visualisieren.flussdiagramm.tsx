@@ -689,7 +689,6 @@ export default function Visualization() {
                   }
                   type="video/mp4"
                 />
-                {/* TODO: test */}
                 <a
                   href={
                     STRAPI_MEDIA_URL +
