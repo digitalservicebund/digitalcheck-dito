@@ -28,18 +28,6 @@ export type LinkProps = Omit<
 > & {
   /** Destination URL (mirrors react-router's `to` prop). */
   to: string;
-  /** Unused in static mode; kept for API compatibility. */
-  prefetch?: string;
-  /** Unused in static mode; kept for API compatibility. */
-  replace?: boolean;
-  /** Unused in static mode; kept for API compatibility. */
-  state?: unknown;
-  /** Unused in static mode; kept for API compatibility. */
-  relative?: string;
-  /** Unused in static mode; kept for API compatibility. */
-  reloadDocument?: boolean;
-  /** Unused in static mode; kept for API compatibility. */
-  unstable_viewTransition?: boolean;
 };
 
 /**
@@ -48,18 +36,7 @@ export type LinkProps = Omit<
  * clicks to update in-memory location instead of navigating the page.
  * Hash-only hrefs are resolved relative to the current pathname.
  */
-export function Link({
-  to,
-  prefetch: _prefetch,
-  replace: _replace,
-  state: _state,
-  relative: _relative,
-  reloadDocument: _reloadDocument,
-  unstable_viewTransition: _vt,
-  children,
-  onClick,
-  ...rest
-}: LinkProps) {
+export function Link({ to, children, onClick, ...rest }: LinkProps) {
   const ctx = useContext(LocationContext);
   const loc = useLocation();
   // Resolve hash-only hrefs (e.g. "#section") relative to current pathname

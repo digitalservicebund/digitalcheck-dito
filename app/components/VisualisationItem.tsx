@@ -38,7 +38,6 @@ export default function VisualisationItem({
           <strong>Kontext: </strong>
           <Link
             to={`${ROUTE_REGELUNGEN}/${visualisierung.Beispielvorhaben.URLBezeichnung}`}
-            prefetch="viewport"
             className="text-link"
           >
             {visualisierung.Beispielvorhaben.Titel}
