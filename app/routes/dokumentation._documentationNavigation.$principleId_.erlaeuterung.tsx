@@ -167,7 +167,7 @@ export function DocumentationPrincipleErlaeuterung({
   // If no answer saved yet, redirect to answer page
   useEffect(() => {
     if (documentationData.initialized && !principleData?.answer)
-      window.location.href = navigationBaseUrl;
+      globalThis.location.href = navigationBaseUrl;
   }, [documentationData, principleData, navigationBaseUrl]);
 
   if (!principleData?.answer) return null;

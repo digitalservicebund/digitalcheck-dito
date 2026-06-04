@@ -24,7 +24,7 @@ type SetSearchParams = (
 
 function useSearchParams(): [URLSearchParams, SetSearchParams] {
   const getSearch = () =>
-    typeof window === "undefined" ? "" : window.location.search;
+    typeof window === "undefined" ? "" : globalThis.location.search;
   const [search, setSearch] = useState<string>(getSearch);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ function useSearchParams(): [URLSearchParams, SetSearchParams] {
 
   const setSearchParams: SetSearchParams = (updater) => {
     const next = updater(new URLSearchParams(getSearch()));
-    const url = new URL(window.location.href);
+    const url = new URL(globalThis.location.href);
     url.search = next.toString();
     window.history.pushState({}, "", url);
     window.dispatchEvent(new PopStateEvent("popstate", { state: {} }));
@@ -167,7 +167,7 @@ const SearchParamTabsComponent = ({ children }: SearchParamTabsProps) => {
   );
 
   useEffect(() => {
-    const { hash } = window.location;
+    const { hash } = globalThis.location;
     if (!hash) return;
     document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
   }, []);

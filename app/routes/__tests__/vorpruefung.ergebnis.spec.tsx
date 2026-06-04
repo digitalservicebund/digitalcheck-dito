@@ -449,7 +449,7 @@ describe("Vorprüfung Ergebnis Page", () => {
 
   describe("Redirect Guard", () => {
     it("redirects to start if questions are unanswered", async () => {
-      window.location.href = "/vorpruefung/ergebnis";
+      globalThis.location.href = "/vorpruefung/ergebnis";
       vi.mocked(readVersionedDataFromLocalStorage).mockReturnValue({
         version: DATA_SCHEMA_VERSION,
         answers: [{ questionId: questions[0].id, answer: "yes" }], // Only 1 answered
@@ -459,14 +459,14 @@ describe("Vorprüfung Ergebnis Page", () => {
       render(<Result />);
 
       await waitFor(() => {
-        expect(window.location.href).toBe("/vorpruefung");
+        expect(globalThis.location.href).toBe("/vorpruefung");
       });
     });
 
     it("does not redirect when all questions are answered", () => {
-      window.location.href = "/vorpruefung/ergebnis";
+      globalThis.location.href = "/vorpruefung/ergebnis";
       setup(() => "Ja");
-      expect(window.location.href).toBe("/vorpruefung/ergebnis");
+      expect(globalThis.location.href).toBe("/vorpruefung/ergebnis");
     });
   });
 });

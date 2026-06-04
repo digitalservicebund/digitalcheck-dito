@@ -47,7 +47,7 @@ function StartOverDialog({
             type="button"
             onClick={() => {
               deleteDocumentationData();
-              window.location.href = dokumentation_hinweise.path;
+              globalThis.location.href = dokumentation_hinweise.path;
             }}
           >
             {start.startOverDialog.actions.confirm}

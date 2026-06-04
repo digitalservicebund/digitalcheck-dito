@@ -43,7 +43,7 @@ const SearchParamExample = () => {
 
 function setSearch(search: string) {
   const normalized = search.startsWith("?") ? search : `?${search}`;
-  const pathname = window.location.pathname || "/";
+  const pathname = globalThis.location.pathname || "/";
   window.history.replaceState({}, "", `${pathname}${normalized}`);
   window.dispatchEvent(new PopStateEvent("popstate", { state: {} }));
 }
@@ -213,7 +213,7 @@ describe("Tabs component", () => {
 
     await user.click(screen.getByRole("tab", { name: "Tab 1" }));
 
-    const searchParams = new URLSearchParams(window.location.search);
+    const searchParams = new URLSearchParams(globalThis.location.search);
     expect(searchParams.get("foo")).toBe("bar");
     expect(searchParams.get("tab")).toBe("tab-1");
   });

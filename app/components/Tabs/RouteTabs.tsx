@@ -24,7 +24,7 @@ export default function RouteTabs({ activeKey, tabs }: RouteTabsProps) {
 
   const onChange = (index: number) => {
     const tab = tabs[index];
-    if (tab) window.location.href = tab.to;
+    if (tab) globalThis.location.href = tab.to;
   };
 
   return (

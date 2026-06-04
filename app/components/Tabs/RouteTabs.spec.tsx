@@ -49,6 +49,6 @@ describe("RouteTabs component", () => {
     await user.click(screen.getByRole("button", { name: "Tab 1" }));
     await user.click(screen.getByRole("option", { name: "Tab 2" }));
 
-    expect(window.location.href).toBe("/zwei");
+    expect(globalThis.location.href).toBe("/zwei");
   });
 });

@@ -106,20 +106,20 @@ describe("PreCheck", () => {
 
   describe("redirect guard", () => {
     beforeEach(() => {
-      window.location.href = "/vorpruefung";
+      globalThis.location.href = "/vorpruefung";
     });
 
     it("redirects to last unanswered question", () => {
       render(<PreCheckQuestion questionIdx={2} question={questions[2]} />);
 
-      expect(window.location.href).toBe("/vorpruefung/it-system");
+      expect(globalThis.location.href).toBe("/vorpruefung/it-system");
     });
 
     it("does not redirect when all questions are answered", async () => {
       render(<PreCheckQuestion questionIdx={0} question={questions[0]} />);
 
       await waitFor(() => {
-        expect(window.location.href).toBe("/vorpruefung");
+        expect(globalThis.location.href).toBe("/vorpruefung");
       });
     });
   });

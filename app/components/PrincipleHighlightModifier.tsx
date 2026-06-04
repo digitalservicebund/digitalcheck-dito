@@ -48,7 +48,7 @@ export default function PrincipleHighlightModifier({
     <button
       onClick={() => {
         setActiveHighlight(highlightID);
-        window.location.hash = explanationID(absatzId, principle.Nummer);
+        globalThis.location.hash = explanationID(absatzId, principle.Nummer);
       }}
       className="cursor-help text-left no-underline hover:underline"
     >

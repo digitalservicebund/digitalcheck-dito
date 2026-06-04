@@ -108,7 +108,7 @@ export default function Result() {
       firstUnansweredQuestionIndex !== null &&
       firstUnansweredQuestionIndex < preCheck.questions.length - 1
     ) {
-      window.location.href = vorpruefung.path;
+      globalThis.location.href = vorpruefung.path;
     }
   }, [firstUnansweredQuestionIndex]);
 

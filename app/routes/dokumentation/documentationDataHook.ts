@@ -41,10 +41,10 @@ export const useSyncedForm = <
     onBeforeSubmit: ({ unvalidatedData }) => {
       if (!storedData) setDataCallback(unvalidatedData);
       // bypass submission
-      if (nextUrl) window.location.href = nextUrl;
+      if (nextUrl) globalThis.location.href = nextUrl;
     },
     handleSubmit: () => {
-      if (nextUrl) window.location.href = nextUrl;
+      if (nextUrl) globalThis.location.href = nextUrl;
     },
   });
 

@@ -134,7 +134,7 @@ export function PrincipleExplanation({
             className="ds-link-01-bold hidden"
             aria-label={absatz.backLinkAriaLabel}
             onClick={() => {
-              window.location.hash = activeHighlight;
+              globalThis.location.hash = activeHighlight;
               setActiveHighlight(null);
             }}
           >

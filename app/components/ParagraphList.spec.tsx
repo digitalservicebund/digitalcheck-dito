@@ -184,12 +184,12 @@ const PARAGRAPHS: Paragraph[] = [
 describe("ParagraphList", () => {
   beforeAll(() => {
     // set isMobile to true
-    Object.defineProperty(globalThis.window, "innerWidth", {
+    Object.defineProperty(globalThis, "innerWidth", {
       writable: true,
       configurable: true,
       value: 500,
     });
-    globalThis.window.dispatchEvent(new Event("resize"));
+    globalThis.dispatchEvent(new Event("resize"));
   });
 
   describe("Highlighting", () => {

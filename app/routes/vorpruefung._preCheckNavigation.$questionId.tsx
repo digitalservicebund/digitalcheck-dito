@@ -87,7 +87,7 @@ export function PreCheckQuestion({
     initialValidate: true,
     handleSubmit: (data: PreCheckAnswerSchema) => {
       addOrUpdateAnswer(data);
-      window.location.href = nextLink;
+      globalThis.location.href = nextLink;
     },
   });
 
@@ -97,7 +97,7 @@ export function PreCheckQuestion({
       firstUnansweredQuestionIndex !== null &&
       questionIdx > firstUnansweredQuestionIndex
     ) {
-      window.location.href = questions[firstUnansweredQuestionIndex].path;
+      globalThis.location.href = questions[firstUnansweredQuestionIndex].path;
     }
   }, [firstUnansweredQuestionIndex, questionIdx]);
 

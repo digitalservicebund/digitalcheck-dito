@@ -30,7 +30,7 @@ function StartOverDialog() {
             type="button"
             onClick={() => {
               deletePreCheckData();
-              window.location.href = vorpruefung_hinweise.path;
+              globalThis.location.href = vorpruefung_hinweise.path;
             }}
           >
             {preCheck.startOver.confirm}

@@ -111,7 +111,7 @@ describe("DocumentationContinueActions", () => {
       act(() => confirmButton.click());
 
       expect(vi.mocked(removeFromLocalStorage)).toHaveBeenCalled();
-      expect(window.location.href).toBe(dokumentation_hinweise.path);
+      expect(globalThis.location.href).toBe(dokumentation_hinweise.path);
     });
   });
 

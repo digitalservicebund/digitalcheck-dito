@@ -57,7 +57,7 @@ export function DocumentationHinweise() {
           look={"primary"}
           disabled={!checked}
           type={"button"}
-          onClick={() => (window.location.href = nextUrl)}
+          onClick={() => (globalThis.location.href = nextUrl)}
         >
           Verstanden und weiter
         </Button>
