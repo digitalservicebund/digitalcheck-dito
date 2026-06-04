@@ -7,7 +7,6 @@ import {
   TabPanels,
 } from "@headlessui/react";
 import React, { useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "react-router";
 import { twJoin } from "tailwind-merge";
 import { tabSearchParam } from "~/utils/tabs";
 import { prettySlugify } from "~/utils/utilFunctions";
@@ -17,6 +16,35 @@ import {
   getSelectedIndexByKey,
   selectedDesktopTabClassName,
 } from "./tabUtils";
+
+type SetSearchParams = (
+  updater: (prev: URLSearchParams) => URLSearchParams,
+  options?: { preventScrollReset?: boolean },
+) => void;
+
+function useSearchParams(): [URLSearchParams, SetSearchParams] {
+  const getSearch = () =>
+    typeof window === "undefined" ? "" : window.location.search;
+  const [search, setSearch] = useState<string>(getSearch);
+
+  useEffect(() => {
+    const update = () => setSearch(getSearch());
+    window.addEventListener("popstate", update);
+    return () => window.removeEventListener("popstate", update);
+  }, []);
+
+  const params = new URLSearchParams(search);
+
+  const setSearchParams: SetSearchParams = (updater) => {
+    const next = updater(new URLSearchParams(getSearch()));
+    const url = new URL(window.location.href);
+    url.search = next.toString();
+    window.history.pushState({}, "", url);
+    window.dispatchEvent(new PopStateEvent("popstate", { state: {} }));
+  };
+
+  return [params, setSearchParams];
+}
 
 type TabProps = Omit<
   React.ComponentProps<typeof HeadlessTabPanel>,

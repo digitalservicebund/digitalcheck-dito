@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter, useLocation } from "react-router";
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import type { TabGroupProps } from "~/components/Tabs/Tabs";
 import TabGroup, { SearchParamTabs } from "~/components/Tabs/Tabs";
 
@@ -25,8 +24,6 @@ const Example = (props: ExampleProps) => (
 );
 
 const SearchParamExample = () => {
-  const location = useLocation();
-
   return (
     <>
       <SearchParamTabs>
@@ -40,10 +37,16 @@ const SearchParamExample = () => {
           Tab panel 2
         </SearchParamTabs.Tab>
       </SearchParamTabs>
-      <output data-testid="search">{location.search}</output>
     </>
   );
 };
+
+function setSearch(search: string) {
+  const normalized = search.startsWith("?") ? search : `?${search}`;
+  const pathname = window.location.pathname || "/";
+  window.history.replaceState({}, "", `${pathname}${normalized}`);
+  window.dispatchEvent(new PopStateEvent("popstate", { state: {} }));
+}
 
 function assertSelectedState(expectedIndex: number, container: HTMLElement) {
   // 1: assert that the correct tab is selected
@@ -81,10 +84,8 @@ function assertSelectedState(expectedIndex: number, container: HTMLElement) {
 }
 
 describe("Tabs component", () => {
-  it("renders without router context", () => {
-    const { container } = render(<Example />);
-
-    assertSelectedState(0, container);
+  beforeEach(() => {
+    setSearch("");
   });
 
   it("Renders correctly with default index", () => {
@@ -157,25 +158,21 @@ describe("Tabs component", () => {
   });
 
   it("uses state from the `tab` search parameter", () => {
-    const { container } = render(
-      <MemoryRouter initialEntries={["/?tab=tab-2"]}>
-        <SearchParamExample />
-      </MemoryRouter>,
-    );
+    setSearch("?tab=tab-2");
+    const { container } = render(<SearchParamExample />);
 
     assertSelectedState(2, container);
   });
 
   it("uses slugified label values for search-param state", () => {
+    setSearch("?tab=ueberblick");
     const { container } = render(
-      <MemoryRouter initialEntries={["/?tab=ueberblick"]}>
-        <SearchParamTabs>
-          <SearchParamTabs.Tab label="Überblick">Panel 0</SearchParamTabs.Tab>
-          <SearchParamTabs.Tab label="Häufige Fragen">
-            Panel 1
-          </SearchParamTabs.Tab>
-        </SearchParamTabs>
-      </MemoryRouter>,
+      <SearchParamTabs>
+        <SearchParamTabs.Tab label="Überblick">Panel 0</SearchParamTabs.Tab>
+        <SearchParamTabs.Tab label="Häufige Fragen">
+          Panel 1
+        </SearchParamTabs.Tab>
+      </SearchParamTabs>,
     );
 
     expect(screen.getByRole("tab", { name: "Überblick" })).toHaveAttribute(
@@ -188,17 +185,16 @@ describe("Tabs component", () => {
   });
 
   it("prefers stable tab ids over label-derived slugs", () => {
+    setSearch("?tab=background");
     const { container } = render(
-      <MemoryRouter initialEntries={["/?tab=background"]}>
-        <SearchParamTabs>
-          <SearchParamTabs.Tab tabId="overview" label="Einleitung">
-            Panel 0
-          </SearchParamTabs.Tab>
-          <SearchParamTabs.Tab tabId="background" label="Grundlagen">
-            Panel 1
-          </SearchParamTabs.Tab>
-        </SearchParamTabs>
-      </MemoryRouter>,
+      <SearchParamTabs>
+        <SearchParamTabs.Tab tabId="overview" label="Einleitung">
+          Panel 0
+        </SearchParamTabs.Tab>
+        <SearchParamTabs.Tab tabId="background" label="Grundlagen">
+          Panel 1
+        </SearchParamTabs.Tab>
+      </SearchParamTabs>,
     );
 
     expect(screen.getByRole("tab", { name: "Grundlagen" })).toHaveAttribute(
@@ -212,17 +208,12 @@ describe("Tabs component", () => {
 
   it("updates the `tab` search parameter and preserves others", async () => {
     const user = userEvent.setup();
-    render(
-      <MemoryRouter initialEntries={["/?foo=bar"]}>
-        <SearchParamExample />
-      </MemoryRouter>,
-    );
+    setSearch("?foo=bar");
+    render(<SearchParamExample />);
 
     await user.click(screen.getByRole("tab", { name: "Tab 1" }));
 
-    const searchParams = new URLSearchParams(
-      screen.getByTestId("search").textContent ?? "",
-    );
+    const searchParams = new URLSearchParams(window.location.search);
     expect(searchParams.get("foo")).toBe("bar");
     expect(searchParams.get("tab")).toBe("tab-1");
   });

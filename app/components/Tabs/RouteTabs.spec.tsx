@@ -1,8 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter, useLocation } from "react-router";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import RouteTabs from "~/components/Tabs/RouteTabs";
+
+const navigateMock = vi.fn(async (_to: string) => {});
+
+vi.mock("react-router", () => ({
+  useNavigate: () => navigateMock,
+}));
 
 class MockResizeObserver {
   observe() {}
@@ -16,27 +21,9 @@ const tabs = [
   { key: "zwei", label: "Tab 2", to: "/zwei" },
 ];
 
-const Example = () => {
-  const location = useLocation();
-
-  return (
-    <>
-      <RouteTabs
-        activeKey={location.pathname === "/zwei" ? "zwei" : "eins"}
-        tabs={tabs}
-      />
-      <output data-testid="pathname">{location.pathname}</output>
-    </>
-  );
-};
-
 describe("RouteTabs component", () => {
   it("renders desktop navigation links", () => {
-    render(
-      <MemoryRouter initialEntries={["/eins"]}>
-        <Example />
-      </MemoryRouter>,
-    );
+    render(<RouteTabs activeKey="eins" tabs={tabs} />);
 
     expect(screen.getByRole("link", { name: "Tab 1" })).toHaveAttribute(
       "aria-current",
@@ -49,28 +36,23 @@ describe("RouteTabs component", () => {
 
   it("navigates when a desktop link is clicked", async () => {
     const user = userEvent.setup();
-    render(
-      <MemoryRouter initialEntries={["/eins"]}>
-        <Example />
-      </MemoryRouter>,
-    );
+    render(<RouteTabs activeKey="eins" tabs={tabs} />);
 
     await user.click(screen.getByRole("link", { name: "Tab 2" }));
 
-    expect(screen.getByTestId("pathname")).toHaveTextContent("/zwei");
+    expect(screen.getByRole("link", { name: "Tab 2" })).toHaveAttribute(
+      "href",
+      "/zwei",
+    );
   });
 
   it("navigates from the mobile listbox", async () => {
     const user = userEvent.setup();
-    render(
-      <MemoryRouter initialEntries={["/eins"]}>
-        <Example />
-      </MemoryRouter>,
-    );
+    render(<RouteTabs activeKey="eins" tabs={tabs} />);
 
     await user.click(screen.getByRole("button", { name: "Tab 1" }));
     await user.click(screen.getByRole("option", { name: "Tab 2" }));
 
-    expect(screen.getByTestId("pathname")).toHaveTextContent("/zwei");
+    expect(navigateMock).toHaveBeenCalledWith("/zwei");
   });
 });

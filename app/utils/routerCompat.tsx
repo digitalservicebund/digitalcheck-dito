@@ -87,39 +87,6 @@ export function useNavigate() {
   );
 }
 
-// ── useSearchParams ──────────────────────────────────────────────────────────
-
-type SetSearchParams = (
-  updater: (prev: URLSearchParams) => URLSearchParams,
-  options?: { preventScrollReset?: boolean },
-) => void;
-
-/**
- * Drop-in replacement for react-router's `useSearchParams`.
- * In MemoryRouter context, reads/writes the in-memory location.
- * Otherwise reads/writes `window.location`.
- */
-export function useSearchParams(): [URLSearchParams, SetSearchParams] {
-  const ctx = useContext(LocationContext);
-  const loc = useLocation();
-  const params = new URLSearchParams(loc.search);
-
-  const setSearchParams: SetSearchParams = (updater) => {
-    const next = updater(new URLSearchParams(loc.search));
-    const search = next.toString() ? `?${next.toString()}` : "";
-    if (ctx) {
-      void ctx.navigate(loc.pathname + search + loc.hash);
-    } else {
-      const url = new URL(window.location.href);
-      url.search = next.toString();
-      window.history.pushState({}, "", url);
-      window.dispatchEvent(new PopStateEvent("popstate", { state: {} }));
-    }
-  };
-
-  return [params, setSearchParams];
-}
-
 // ── Testing shims ─────────────────────────────────────────────────────────────
 // These exports allow test files that previously imported from "react-router"
 // to continue working without the package installed.
