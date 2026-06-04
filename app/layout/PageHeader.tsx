@@ -14,7 +14,6 @@ import DropdownMenu from "~/layout/DropdownMenu.tsx";
 import { header } from "~/resources/content/shared/header.ts";
 
 import { assetPath } from "~/utils/assetPath";
-import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import twMerge from "~/utils/tailwindMerge.ts";
 import { normalizePathname } from "~/utils/utilFunctions.ts";
 
@@ -22,12 +21,10 @@ interface SubItem {
   title: string;
   content?: string;
   href: string;
-  plausibleEventName: string;
 }
 
 interface HeaderItem {
   text: string;
-  plausibleEventName: string;
   href?: string;
   overlayContent: SubItem[];
   hasSupport?: boolean;
@@ -126,11 +123,11 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
     <DropdownMenu
       key={`${item.text}-${variant}`}
       label={item.text}
-      plausibleEventName={item.plausibleEventName}
       hasSupport={item.hasSupport}
       data={item.overlayContent}
       isOrderedList={item.isOrderedList}
       variant={variant}
+      currentPath={currentPath}
       isActiveParent={isParentItemActive(item, currentPath)}
       isExpanded={activeDropdownId === item.text}
       onToggle={() => toggleDropdown(item.text)}
@@ -144,10 +141,7 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
   ) => {
     const isMobile = variant === "mobile";
     const isActive = isParentItemActive(item, currentPath);
-    const plausibleClass = getPlausibleEventClassName(
-      `Nav+Bar.${item.plausibleEventName}.Link`,
-    );
-    // TODO: test
+
     return (
       <a
         key={`${item.text}-${variant}`}
@@ -159,7 +153,6 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
             ? "ds-label-01-bold w-full border-l-4 border-transparent p-16"
             : "ds-label-01-reg h-full border-b-4 border-transparent px-16 whitespace-nowrap",
           isActive && "border-blue-800 bg-blue-100",
-          plausibleClass,
         )}
       >
         {item.text}
@@ -193,10 +186,7 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
         <Kopfzeile className="relative" />
         <div className="relative flex h-[70px] justify-between pl-16 lg:container">
           {/* Logo and title */}
-          <a
-            href={home.path}
-            className="plausible-event-name=Nav+Bar.Home flex items-center space-x-8"
-          >
+          <a href={home.path} className="flex items-center space-x-8">
             <img
               src={assetPath("/logo/bund-logo.png")}
               alt="Logo des Bundes"
@@ -225,7 +215,7 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
           {/* Mobile View Controls */}
           <div className="flex items-center space-x-16 lg:hidden">
             <a
-              className="plausible-event-name=Nav+Bar.Mobile+Phone+Icon border-b-4 border-transparent"
+              className="border-b-4 border-transparent"
               href={`tel:${header.contactTel.number.replaceAll(/\s/g, "")}`}
               aria-label={header.contactTel.msg}
             >
@@ -250,7 +240,7 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
         <nav
           id="mobile-menu"
           className={twJoin(
-            "plausible-event-name=Nav+Bar.Burger+Menu+Icon+Mobile.Open+Close absolute right-0 left-0 z-40 rounded-b-md border-t border-gray-600 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]",
+            "absolute right-0 left-0 z-40 rounded-b-md border-t border-gray-600 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]",
             mobileMenuOpen ? "overflow-y-auto" : "invisible",
           )}
           aria-hidden={!mobileMenuOpen}

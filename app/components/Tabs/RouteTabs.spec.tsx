@@ -3,14 +3,14 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import RouteTabs from "~/components/Tabs/RouteTabs";
 
-const navigateMock = vi.fn(async (_to: string) => {});
-
 class MockResizeObserver {
   observe() {}
   unobserve() {}
   disconnect() {}
 }
 globalThis.ResizeObserver = MockResizeObserver;
+
+vi.stubGlobal("location", { href: "/" });
 
 const tabs = [
   { key: "eins", label: "Tab 1", to: "/eins" },
@@ -49,6 +49,6 @@ describe("RouteTabs component", () => {
     await user.click(screen.getByRole("button", { name: "Tab 1" }));
     await user.click(screen.getByRole("option", { name: "Tab 2" }));
 
-    expect(navigateMock).toHaveBeenCalledWith("/zwei");
+    expect(window.location.href).toBe("/zwei");
   });
 });

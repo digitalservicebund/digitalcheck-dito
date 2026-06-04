@@ -2,7 +2,6 @@ import { vorpruefung_hinweise } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import type React from "react";
-import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { readVersionedDataFromLocalStorage } from "~/utils/localStorageVersioned";
@@ -22,7 +21,7 @@ vi.mock("~/utils/localStorageVersioned", async (importOriginal) => {
 const { questions } = preCheck;
 
 const renderWithRouter = (component: React.ReactElement) => {
-  return render(<MemoryRouter>{component}</MemoryRouter>);
+  return render(component);
 };
 
 describe("Vorpruefung Index Route - Integration Tests", () => {

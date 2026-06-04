@@ -16,6 +16,8 @@ const { mockNavigate, mockNavigationContext } = vi.hoisted(() => {
   };
 });
 
+export { mockNavigate, mockNavigationContext };
+
 vi.mock(
   "~/routes/dokumentation/DocumentationNavigationContext",
   async (importOriginal) => {

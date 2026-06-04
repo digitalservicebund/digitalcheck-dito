@@ -5,10 +5,7 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 import type { ReactNode } from "react";
-import { useLocation } from "react-router";
-import { twJoin } from "tailwind-merge";
 import RichText from "~/components/RichText";
-import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import twMerge from "~/utils/tailwindMerge";
 
 export type AccordionItemProps = {
@@ -27,27 +24,13 @@ export default function AccordionItem({
   headline,
   children,
   id,
-  plausibleEventName,
   className,
 }: Readonly<AccordionItemProps>) {
-  const plausibleEvent = getPlausibleEventClassName(plausibleEventName);
-
-  const location = useLocation();
-  const defaultOpen = location.hash ? location.hash.slice(1) === id : false;
-
   return (
-    <div
-      className={twMerge("border-b-2 border-blue-400", className)}
-      suppressHydrationWarning={
-        true
-      } /* if a hash is set, the panel will only be open client-side */
-    >
-      <Disclosure defaultOpen={defaultOpen}>
+    <div className={twMerge("border-b-2 border-blue-400", className)}>
+      <Disclosure>
         <DisclosureButton
-          className={twJoin(
-            plausibleEvent,
-            "group flex w-full items-center justify-between p-24 hover:bg-blue-200 focus-visible:bg-blue-200 focus-visible:outline-4 focus-visible:outline-blue-800 data-open:bg-blue-200",
-          )}
+          className="group flex w-full items-center justify-between p-24 hover:bg-blue-200 focus-visible:bg-blue-200 focus-visible:outline-4 focus-visible:outline-blue-800 data-open:bg-blue-200"
           id={id}
         >
           <div className="pr-10 text-left font-bold text-blue-800">
@@ -56,12 +39,7 @@ export default function AccordionItem({
           <Add className="size-24 shrink-0 fill-blue-800 group-data-open:hidden" />
           <Remove className="hidden size-24 shrink-0 fill-blue-800 group-data-open:block" />
         </DisclosureButton>
-        <DisclosurePanel
-          className={twJoin(
-            plausibleEvent,
-            "flex w-full items-center justify-between p-24",
-          )}
-        >
+        <DisclosurePanel className="flex w-full items-center justify-between p-24">
           {typeof children === "string" ? (
             <RichText markdown={children} className="space-y-28" />
           ) : (

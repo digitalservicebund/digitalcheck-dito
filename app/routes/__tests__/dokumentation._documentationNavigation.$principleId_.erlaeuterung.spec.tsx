@@ -16,7 +16,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import type { digitalDocumentation } from "~/resources/content/dokumentation";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
-import { MemoryRouter } from "~/utils/routerCompat";
 import type {
   PrinzipAspekt,
   PrinzipWithAspekteAndExample,
@@ -100,13 +99,11 @@ const prinzips: PrinzipWithAspekteAndExample[] = [
 
 const renderWithRouter = () => {
   return render(
-    <MemoryRouter initialEntries={["/"]}>
-      <HelpPanelProvider>
-        <DocumentationDataProvider>
-          <DocumentationPrincipleErlaeuterung principleId="prinzip-1-digitale-angebote" />
-        </DocumentationDataProvider>
-      </HelpPanelProvider>
-    </MemoryRouter>,
+    <HelpPanelProvider currentPath="/dokumentation/prinzip-1-digitale-angebote/erlaeuterung">
+      <DocumentationDataProvider>
+        <DocumentationPrincipleErlaeuterung principleId="prinzip-1-digitale-angebote" />
+      </DocumentationDataProvider>
+    </HelpPanelProvider>,
   );
 };
 

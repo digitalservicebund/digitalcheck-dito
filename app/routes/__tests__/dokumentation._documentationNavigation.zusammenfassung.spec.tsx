@@ -10,7 +10,6 @@ import {
 } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
 import type {
@@ -65,11 +64,9 @@ function createDocumentationDataMock({
 describe("DocumentationSummary", () => {
   const renderWithRouter = () => {
     return render(
-      <MemoryRouter>
-        <DocumentationDataProvider>
-          <DocumentationSummary />
-        </DocumentationDataProvider>
-      </MemoryRouter>,
+      <DocumentationDataProvider>
+        <DocumentationSummary />
+      </DocumentationDataProvider>,
     );
   };
 

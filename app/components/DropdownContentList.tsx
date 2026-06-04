@@ -1,4 +1,3 @@
-import { useLocation } from "react-router";
 import twMerge from "~/utils/tailwindMerge";
 import { normalizePathname } from "~/utils/utilFunctions";
 import Badge from "./Badge";
@@ -13,42 +12,38 @@ export type DropdownItemProps = {
   className?: string;
   href?: string;
   isNewTitle?: boolean;
-  plausibleEventName: string;
   activeBehavior?: ActiveBehavior;
 };
 
 export type DropdownContentListProps = {
+  currentPath: string;
   data: DropdownItemProps[];
   isOrderedList?: boolean;
   onItemClick: () => void;
   isMobile?: boolean;
-  parentPlausibleEvent: string;
 };
 
 export default function DropdownContentList({
+  currentPath,
   data,
   isOrderedList = false,
   onItemClick,
   isMobile = false,
 }: Readonly<DropdownContentListProps>) {
-  const location = useLocation();
   const listClasses = twMerge(
     "list-unstyled",
     isMobile && "py-8 pr-8 pl-16 border-b-[1px] border-gray-600",
   );
 
-  const { pathname } = useLocation();
-
   const mapDataToItems = (option: DropdownItemProps, index: number) => {
     const isActive =
-      pathname === option.href ||
-      pathname.startsWith(
+      currentPath === option.href ||
+      currentPath.startsWith(
         option.href!.endsWith("/") ? option.href! : option.href! + "/",
       );
     const checkExactMatchCriteria =
       option.activeBehavior === "exactMatch"
-        ? normalizePathname(location.pathname) ===
-          normalizePathname(option.href!)
+        ? normalizePathname(currentPath) === normalizePathname(option.href!)
         : true;
 
     const finalIsActive =

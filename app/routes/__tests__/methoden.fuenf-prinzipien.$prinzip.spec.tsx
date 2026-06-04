@@ -1,6 +1,5 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { getTextFromNodes } from "~/routes/__tests__/utils/strapiUtils.ts";
 import { Prinzip } from "~/routes/methoden.fuenf-prinzipien.$prinzip/route";
@@ -131,10 +130,8 @@ const mockPrinzipsList: PrinzipListItem[] = [];
 describe("FivePrinciples Route - Integration Tests", () => {
   beforeEach(() => {
     render(
-      <MemoryRouter>
-        {/* @ts-expect-error mock data does not fully satisfy PrinzipWithAspekteAndExample */}
-        <Prinzip prinzip={mockPrinzipData} prinzipList={mockPrinzipsList} />
-      </MemoryRouter>,
+      // @ts-expect-error mock data does not fully satisfy PrinzipWithAspekteAndExample
+      <Prinzip prinzip={mockPrinzipData} prinzipList={mockPrinzipsList} />,
     );
   });
 

@@ -1,7 +1,6 @@
 import "@testing-library/jest-dom";
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter } from "react-router";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { dokumentation, interoperabel, methoden } from "@/config/routes";
@@ -26,7 +25,7 @@ vi.mock("~/utils/localStorageVersioned", async (importOriginal) => {
 
 const mockAssign = vi.fn();
 vi.stubGlobal("location", {
-  href: "http://localhost:3000",
+  href: "/",
   assign: mockAssign,
 });
 
@@ -81,11 +80,7 @@ function setup(answers: Answers) {
   // Clear cache
   getPreCheckData();
 
-  const result = render(
-    <MemoryRouter>
-      <Result />
-    </MemoryRouter>,
-  );
+  const result = render(<Result />);
 
   return { user, ...result };
 }
@@ -453,25 +448,25 @@ describe("Vorprüfung Ergebnis Page", () => {
   });
 
   describe("Redirect Guard", () => {
-    it("redirects to start if questions are unanswered", () => {
+    it("redirects to start if questions are unanswered", async () => {
+      window.location.href = "/vorpruefung/ergebnis";
       vi.mocked(readVersionedDataFromLocalStorage).mockReturnValue({
         version: DATA_SCHEMA_VERSION,
         answers: [{ questionId: questions[0].id, answer: "yes" }], // Only 1 answered
         ssr: false,
       } as PreCheckData);
 
-      render(
-        <MemoryRouter>
-          <Result />
-        </MemoryRouter>,
-      );
+      render(<Result />);
 
-      expect(mockNavigate).toHaveBeenCalledWith("/vorpruefung");
+      await waitFor(() => {
+        expect(window.location.href).toBe("/vorpruefung");
+      });
     });
 
     it("does not redirect when all questions are answered", () => {
+      window.location.href = "/vorpruefung/ergebnis";
       setup(() => "Ja");
-      expect(mockNavigate).not.toHaveBeenCalled();
+      expect(window.location.href).toBe("/vorpruefung/ergebnis");
     });
   });
 });

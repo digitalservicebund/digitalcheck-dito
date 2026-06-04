@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import userEvent from "@testing-library/user-event";
@@ -7,6 +7,10 @@ import { preCheck } from "~/resources/content/vorpruefung";
 import { PreCheckQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { ResultType } from "../vorpruefung.ergebnis/PreCheckResult";
 import { usePreCheckData } from "../vorpruefung/preCheckDataHook";
+
+vi.stubGlobal("location", {
+  href: "/vorpruefung",
+});
 
 const { questions } = preCheck;
 
@@ -101,20 +105,22 @@ describe("PreCheck", () => {
   });
 
   describe("redirect guard", () => {
-    afterEach(() => {
-      mockNavigate.mockClear();
+    beforeEach(() => {
+      window.location.href = "/vorpruefung";
     });
 
     it("redirects to last unanswered question", () => {
       render(<PreCheckQuestion questionIdx={2} question={questions[2]} />);
 
-      expect(mockNavigate).toHaveBeenCalledWith("/vorpruefung/it-system");
+      expect(window.location.href).toBe("/vorpruefung/it-system");
     });
 
-    it("does not redirect when all questions are answered", () => {
+    it("does not redirect when all questions are answered", async () => {
       render(<PreCheckQuestion questionIdx={0} question={questions[0]} />);
 
-      expect(mockNavigate).not.toHaveBeenCalledWith("/vorpruefung");
+      await waitFor(() => {
+        expect(window.location.href).toBe("/vorpruefung");
+      });
     });
   });
 });

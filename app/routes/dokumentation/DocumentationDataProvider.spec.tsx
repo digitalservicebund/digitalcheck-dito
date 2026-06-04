@@ -5,7 +5,6 @@ import "@testing-library/jest-dom";
 import { act, renderHook } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { MemoryRouter } from "react-router";
 import {
   readDataFromLocalStorage,
   removeFromLocalStorage,
@@ -37,9 +36,7 @@ const mockWrite = vi.mocked(writeVersionedDataToLocalStorage);
 const mockRemove = vi.mocked(removeFromLocalStorage);
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <MemoryRouter>
-    <DocumentationDataProvider>{children}</DocumentationDataProvider>
-  </MemoryRouter>
+  <DocumentationDataProvider>{children}</DocumentationDataProvider>
 );
 
 const baseData: DocumentationData<V2> = {

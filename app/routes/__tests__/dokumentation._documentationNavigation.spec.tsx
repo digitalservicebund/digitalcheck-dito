@@ -11,7 +11,6 @@ import {
 } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { act, render, screen, within } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { LayoutWithDocumentationNavigation } from "~/routes/dokumentation._documentationNavigation";
@@ -170,17 +169,15 @@ function renderPage({ path }: Route) {
   }
 
   render(
-    <MemoryRouter initialEntries={[path]}>
-      <DocumentationDataProvider>
-        <LayoutWithDocumentationNavigation
-          routes={mockRoutes}
-          prinzips={[]}
-          currentUrl={path}
-        >
-          <DummyElement />
-        </LayoutWithDocumentationNavigation>
-      </DocumentationDataProvider>
-    </MemoryRouter>,
+    <DocumentationDataProvider>
+      <LayoutWithDocumentationNavigation
+        routes={mockRoutes}
+        prinzips={[]}
+        currentUrl={path}
+      >
+        <DummyElement />
+      </LayoutWithDocumentationNavigation>
+    </DocumentationDataProvider>,
   );
 }
 

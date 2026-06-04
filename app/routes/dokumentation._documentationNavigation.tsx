@@ -179,7 +179,7 @@ export function LayoutWithDocumentationNavigation({
 
   return (
     <DocumentationNavigationContext.Provider value={navigationContextValue}>
-      <HelpPanelProvider>
+      <HelpPanelProvider currentPath={currentUrl}>
         <div
           className={
             showHelpPanel

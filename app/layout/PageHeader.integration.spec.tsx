@@ -2,23 +2,14 @@ import { fireEvent, render, screen, within } from "@testing-library/react";
 import type { UserEvent } from "@testing-library/user-event";
 import { userEvent } from "@testing-library/user-event";
 import type React from "react";
-import { MemoryRouter } from "react-router";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { header } from "~/resources/content/shared/header.ts";
 import PageHeader from "./PageHeader";
-
-vi.mock("react-router", async (importOriginal) => {
-  const original = await importOriginal<typeof import("react-router")>();
-  return {
-    ...original,
-    useMatches: vi.fn(() => []),
-  };
-});
 
 describe("PageHeader", () => {
   const renderWithRouter = (ui: React.ReactElement, { route = "/" } = {}) => {
     globalThis.window.history.pushState({}, "Test page", route);
-    return render(ui, { wrapper: MemoryRouter });
+    return render(ui);
   };
 
   enum TestModes {
