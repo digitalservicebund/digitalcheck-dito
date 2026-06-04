@@ -1,6 +1,5 @@
 import { dokumentation_hinweise } from "@/config/routes";
 import { useState } from "react";
-import { useNavigate } from "react-router";
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Heading from "~/components/Heading";
@@ -26,8 +25,6 @@ Zur externen Weiterbearbeitung, internen Abstimmung oder für Änderungen könne
 
 export function DocumentationHinweise() {
   const { nextUrl, previousUrl } = useDocumentationNavigation();
-  const navigate = useNavigate();
-
   const [checked, setChecked] = useState<boolean>(false);
 
   return (
@@ -60,7 +57,7 @@ export function DocumentationHinweise() {
           look={"primary"}
           disabled={!checked}
           type={"button"}
-          onClick={() => navigate(nextUrl)}
+          onClick={() => (window.location.href = nextUrl)}
         >
           Verstanden und weiter
         </Button>

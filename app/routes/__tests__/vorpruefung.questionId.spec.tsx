@@ -10,18 +10,6 @@ import { usePreCheckData } from "../vorpruefung/preCheckDataHook";
 
 const { questions } = preCheck;
 
-const { mockNavigate } = vi.hoisted(() => ({
-  mockNavigate: vi.fn(),
-}));
-
-vi.mock("react-router", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("react-router")>();
-  return {
-    ...actual,
-    useNavigate: vi.fn(() => mockNavigate),
-  };
-});
-
 vi.mock("~/routes/vorpruefung/preCheckDataHook", async (importOriginal) => {
   const actual =
     await importOriginal<

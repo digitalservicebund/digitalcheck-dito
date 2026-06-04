@@ -5,10 +5,6 @@ import RouteTabs from "~/components/Tabs/RouteTabs";
 
 const navigateMock = vi.fn(async (_to: string) => {});
 
-vi.mock("react-router", () => ({
-  useNavigate: () => navigateMock,
-}));
-
 class MockResizeObserver {
   observe() {}
   unobserve() {}

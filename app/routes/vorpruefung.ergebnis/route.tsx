@@ -7,7 +7,6 @@ import {
   WarningAmberOutlined,
 } from "@digitalservicebund/icons";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 import { twJoin } from "tailwind-merge";
 
 import { vorpruefung, vorpruefung_ergebnis } from "@/config/routes";
@@ -89,7 +88,6 @@ function PrintTitle({ title }: Readonly<{ title: string }>) {
 export default function Result() {
   const [vorhabenTitle, setVorhabenTitle] = useState("");
   const { answers, firstUnansweredQuestionIndex, result } = usePreCheckData();
-  const navigate = useNavigate();
 
   const resultContent = getContentForResult(answers, result);
 
@@ -110,9 +108,9 @@ export default function Result() {
       firstUnansweredQuestionIndex !== null &&
       firstUnansweredQuestionIndex < preCheck.questions.length - 1
     ) {
-      void navigate(vorpruefung.path);
+      window.location.href = vorpruefung.path;
     }
-  }, [navigate, firstUnansweredQuestionIndex]);
+  }, [firstUnansweredQuestionIndex]);
 
   const resultHint =
     result?.digital === ResultType.UNSURE ? preCheckResult.unsure.hint : "";

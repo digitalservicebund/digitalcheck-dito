@@ -1,6 +1,5 @@
 import { methoden_fuenfPrinzipien } from "@/config/routes";
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
 import AspectPills from "~/components/AspectPills";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
@@ -153,8 +152,6 @@ export function DocumentationPrincipleErlaeuterung({
     ({ URLBezeichnung }) => URLBezeichnung === principleId,
   );
 
-  const navigate = useNavigate();
-
   if (!prinzip)
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw new Response("No Prinzip for slug found", { status: 404 });
@@ -170,8 +167,8 @@ export function DocumentationPrincipleErlaeuterung({
   // If no answer saved yet, redirect to answer page
   useEffect(() => {
     if (documentationData.initialized && !principleData?.answer)
-      void navigate(navigationBaseUrl);
-  }, [documentationData, principleData, navigate, navigationBaseUrl]);
+      window.location.href = navigationBaseUrl;
+  }, [documentationData, principleData, navigationBaseUrl]);
 
   if (!principleData?.answer) return null;
 

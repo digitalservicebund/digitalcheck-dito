@@ -61,30 +61,8 @@ export function useLocation(): Location {
   }, [ctx]);
 
   return ctx?.location ?? windowLocation;
-}
 
-// ── useNavigate ──────────────────────────────────────────────────────────────
-
-/**
- * Drop-in replacement for react-router's `useNavigate`.
- * In MemoryRouter context, updates the in-memory location.
- * Otherwise uses `window.location.href`.
- */
-export function useNavigate() {
-  const ctx = useContext(LocationContext);
-  return useCallback(
-    async (to: string): Promise<void> => {
-      if (ctx) {
-        await ctx.navigate(to);
-      } else {
-        window.location.href = to;
-        // Pseudo-await: the page navigates away before this resolves,
-        // but satisfies the async contract.
-        await Promise.resolve();
-      }
-    },
-    [ctx],
-  );
+  // ── useNavigate ──────────────────────────────────────────────────────────────
 }
 
 // ── Testing shims ─────────────────────────────────────────────────────────────

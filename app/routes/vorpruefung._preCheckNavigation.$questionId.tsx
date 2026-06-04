@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 
 import { vorpruefung } from "@/config/routes";
 import Button, { LinkButton } from "~/components/Button.tsx";
@@ -74,7 +73,6 @@ export function PreCheckQuestion({
 
   const { answerForQuestionId, answers, firstUnansweredQuestionIndex } =
     usePreCheckData();
-  const navigate = useNavigate();
   const storedAnswer = answerForQuestionId(question.id);
   const nextLink =
     questions.find((q) => q.id === question.id)?.nextLink ?? vorpruefung.path;
@@ -87,9 +85,9 @@ export function PreCheckQuestion({
     },
     storedData: storedAnswer,
     initialValidate: true,
-    handleSubmit: async (data: PreCheckAnswerSchema) => {
+    handleSubmit: (data: PreCheckAnswerSchema) => {
       addOrUpdateAnswer(data);
-      await navigate(nextLink);
+      window.location.href = nextLink;
     },
   });
 
@@ -99,9 +97,9 @@ export function PreCheckQuestion({
       firstUnansweredQuestionIndex !== null &&
       questionIdx > firstUnansweredQuestionIndex
     ) {
-      void navigate(questions[firstUnansweredQuestionIndex].path);
+      window.location.href = questions[firstUnansweredQuestionIndex].path;
     }
-  }, [firstUnansweredQuestionIndex, navigate, questionIdx]);
+  }, [firstUnansweredQuestionIndex, questionIdx]);
 
   useEffect(() => {
     if (question.id !== "eu-bezug") return;

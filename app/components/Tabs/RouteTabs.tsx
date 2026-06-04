@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { useNavigate } from "react-router";
 import { twJoin } from "tailwind-merge";
 import MobileTabPicker from "./MobileTabPicker";
 import {
@@ -21,16 +20,11 @@ export type RouteTabsProps = Readonly<{
 
 // Renders a list of tabs as links and navigates to the corresponding route when a tab is selected.
 export default function RouteTabs({ activeKey, tabs }: RouteTabsProps) {
-  const navigate = useNavigate();
   const selectedIndex = getSelectedIndexByKey(tabs, activeKey);
 
   const onChange = (index: number) => {
     const tab = tabs[index];
-    if (!tab) {
-      return;
-    }
-
-    void navigate(tab.to);
+    if (tab) window.location.href = tab.to;
   };
 
   return (
