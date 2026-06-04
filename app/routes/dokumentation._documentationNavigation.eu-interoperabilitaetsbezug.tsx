@@ -9,6 +9,7 @@ import MetaTitle from "~/components/Meta";
 import NewTabLink from "~/components/NewTabLink.tsx";
 import RichText from "~/components/RichText.tsx";
 import EuInteroperabilityOutcomeForm from "~/routes/dokumentation/interoperability/EuInteroperabilityOutcomeForm.tsx";
+import { IEAContactBanner } from "~/routes/dokumentation/interoperability/IEAContactBanner.tsx";
 import { markdownLinkIEA } from "~/routes/dokumentation/interoperability/markdownLinkIEA.tsx";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
@@ -56,6 +57,7 @@ export default function DocumentationEuInteroperabilityRequirements() {
             <RichText markdown={secondaryHelpText} className="mt-8" />
           </HelpButton>
         </p>
+
         <EuInteroperabilityOutcomeForm />
 
         <DocumentationActions
@@ -64,6 +66,8 @@ export default function DocumentationEuInteroperabilityRequirements() {
           showDownloadDraftButton
           showSavingTip
         />
+
+        <IEAContactBanner />
       </div>
     </>
   );

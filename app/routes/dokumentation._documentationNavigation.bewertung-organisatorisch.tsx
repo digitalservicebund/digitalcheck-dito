@@ -15,6 +15,7 @@ import {
   interoperabilityAssessmentLevelSchema,
   interoperabilityAssessmentSchema,
 } from "~/routes/dokumentation/documentationDataSchema.ts";
+import { IEAContactBanner } from "~/routes/dokumentation/interoperability/IEAContactBanner.tsx";
 import SkipNoticeWrapper from "~/routes/dokumentation/interoperability/SkipNoticeWrapper.tsx";
 import {
   defaultAssessmentValues,
@@ -102,6 +103,7 @@ export default function DocumentationInteroperabilityAssessment() {
           showDownloadDraftButton
           showSavingTip
         />
+        <IEAContactBanner />
       </div>
     </>
   );

@@ -6,6 +6,7 @@ import {
 import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import MetaTitle from "~/components/Meta";
+import { IEAContactBanner } from "~/routes/dokumentation/interoperability/IEAContactBanner.tsx";
 import SkipNoticeWrapper from "~/routes/dokumentation/interoperability/SkipNoticeWrapper.tsx";
 import { NavigationContext } from "./dokumentation._documentationNavigation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
@@ -41,6 +42,7 @@ export default function DocumentationInteroperabilityAssessment() {
           showDownloadDraftButton
           showSavingTip
         />
+        <IEAContactBanner />
       </div>
     </>
   );
