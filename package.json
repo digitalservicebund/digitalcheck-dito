@@ -40,7 +40,7 @@
     "@digitalservice4germany/style-dictionary": "^2.0.0",
     "@digitalservicebund/icons": "^2.1.0",
     "@headlessui/react": "^2.2.10",
-    "@posthog/core": "^1.29.12",
+    "@posthog/core": "^1.29.13",
     "@rvf/react": "^8.1.2",
     "@rvf/zod": "^7.0.5",
     "@tailwindcss/vite": "^4.3.0",

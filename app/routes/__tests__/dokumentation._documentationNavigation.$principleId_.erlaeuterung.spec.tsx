@@ -32,22 +32,30 @@ vi.mock("~/contexts/FeatureFlagContext", () => ({
   useFeatureFlag: vi.fn().mockReturnValue(true),
 }));
 
-const routes: (Route[] | Route)[] = [
+type RouteGroup = {
+  title: string;
+  routes: Route[];
+};
+
+const routes: (RouteGroup | Route)[] = [
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
   dokumentation_beteiligungsformate,
-  [
-    {
-      title: "Prinzip: Digitale Angebote",
-      path: "/dokumentation/prinzip-1-digitale-angebote",
-      key: "prinzipA",
-      parent: null,
-      sitemap: false,
-      isStagingOnly: false,
-      navOrder: null,
-      navLabel: null,
-    },
-  ],
+  {
+    title: "Prinzipien",
+    routes: [
+      {
+        title: "Prinzip: Digitale Angebote",
+        path: "/dokumentation/prinzip-1-digitale-angebote",
+        key: "prinzipA",
+        parent: null,
+        sitemap: false,
+        isStagingOnly: false,
+        navOrder: null,
+        navLabel: null,
+      },
+    ],
+  },
 ];
 
 const aspekte: PrinzipAspekt[] = [

@@ -29,7 +29,7 @@ importers:
         specifier: ^2.2.10
         version: 2.2.10(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       "@posthog/core":
-        specifier: ^1.29.12
+        specifier: ^1.29.13
         version: 1.29.15
       "@rvf/react":
         specifier: ^8.1.2

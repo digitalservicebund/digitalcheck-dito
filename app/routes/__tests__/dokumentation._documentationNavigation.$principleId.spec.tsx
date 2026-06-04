@@ -2,7 +2,6 @@
 import "./utils/mockLocalStorageVersioned";
 import { mockNavigationContext } from "./utils/mockRouter";
 // End of mocks
-import type { Route } from "@/config/routes";
 import {
   dokumentation_beteiligungsformate,
   dokumentation_hinweise,
@@ -14,6 +13,10 @@ import type { UserEvent } from "@testing-library/user-event";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
+import type {
+  Route,
+  RouteGroup,
+} from "~/routes/dokumentation/DocumentationNavigationContext.tsx";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import type {
   PrinzipAspekt,
@@ -27,22 +30,19 @@ import type {
 } from "../dokumentation/documentationDataSchema";
 import { DATA_SCHEMA_VERSION_V2 } from "../dokumentation/documentationDataSchema";
 
-const routes: (Route[] | Route)[] = [
+const routes: (RouteGroup | Route)[] = [
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
   dokumentation_beteiligungsformate,
-  [
-    {
-      title: "Prinzip: Digitale Angebote",
-      path: "/dokumentation/prinzip-1-digitale-angebote",
-      key: "prinzipA",
-      parent: null,
-      sitemap: false,
-      isStagingOnly: false,
-      navOrder: null,
-      navLabel: null,
-    },
-  ],
+  {
+    title: "Prinzipien",
+    routes: [
+      {
+        title: "Prinzip: Digitale Angebote",
+        path: "/dokumentation/prinzip-1-digitale-angebote",
+      },
+    ],
+  },
 ];
 
 const aspekte: PrinzipAspekt[] = [

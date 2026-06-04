@@ -3,7 +3,7 @@ import Button, { DownloadButton, LinkButton } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general";
-import type { NavigationContext } from "~/routes/dokumentation._documentationNavigation";
+import type { DocumentationNavigationContextType } from "~/routes/dokumentation/DocumentationNavigationContext";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
 
 type SubmitType = {
@@ -20,7 +20,7 @@ type DocumentationActionsProps = {
   previousUrl?: string;
   showDownloadDraftButton?: boolean;
   showSavingTip?: boolean;
-  prinzips?: NavigationContext["prinzips"];
+  prinzips?: DocumentationNavigationContextType["prinzips"];
 } & (SubmitType | NextType);
 
 export default function DocumentationActions({

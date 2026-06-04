@@ -252,7 +252,7 @@ export function DocumentationSummary() {
     }),
     ...prinzips.map((prinzip) => {
       const principleRoute = routes
-        .flat()
+        .flatMap((route) => ("routes" in route ? route.routes : route))
         .find((route) => route.path.endsWith(prinzip.URLBezeichnung));
       if (!principleRoute)
         throw new Error(
