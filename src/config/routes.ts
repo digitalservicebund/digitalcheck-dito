@@ -154,17 +154,6 @@ export const dokumentation_zusammenfassung = {
   navLabel: null,
 } as const;
 
-export const gesetzgebungsprozess = {
-  key: "gesetzgebungsprozess",
-  path: "/gesetzgebungsprozess",
-  title: "Der Digitalcheck im Gesetzgebungsprozess",
-  parent: null,
-  sitemap: true,
-  isStagingOnly: true,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
 export const grundlagen = {
   key: "grundlagen",
   path: "/grundlagen",
@@ -531,7 +520,6 @@ export const allRoutes = [
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
   dokumentation_zusammenfassung,
-  gesetzgebungsprozess,
   grundlagen,
   grundlagen_digitaltauglichkeit,
   grundlagen_normenkontrollrat,
