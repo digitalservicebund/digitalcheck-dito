@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { twJoin } from "tailwind-merge";
 import MobileTabPicker from "./MobileTabPicker";
 import {
@@ -43,9 +43,9 @@ export default function RouteTabs({ activeKey, tabs }: RouteTabsProps) {
           const isActive = tab.key === activeKey;
 
           return (
-            <Link
+            <a
               key={tab.key}
-              to={tab.to}
+              href={tab.to}
               aria-current={isActive ? "page" : undefined}
               className={twJoin(
                 desktopTabClassName,
@@ -53,7 +53,7 @@ export default function RouteTabs({ activeKey, tabs }: RouteTabsProps) {
               )}
             >
               {tab.label}
-            </Link>
+            </a>
           );
         })}
       </nav>

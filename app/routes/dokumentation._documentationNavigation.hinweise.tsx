@@ -64,7 +64,7 @@ export function DocumentationHinweise() {
         >
           Verstanden und weiter
         </Button>
-        <LinkButton to={previousUrl} look="tertiary">
+        <LinkButton href={previousUrl} look="tertiary">
           {general.buttonBack.text}
         </LinkButton>
       </ButtonContainer>

@@ -7,7 +7,7 @@ import {
   WarningAmberOutlined,
 } from "@digitalservicebund/icons";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { twJoin } from "tailwind-merge";
 
 import { vorpruefung, vorpruefung_ergebnis } from "@/config/routes";
@@ -254,9 +254,9 @@ export default function Result() {
                       <RichText markdown={item.content as string} />
                     )}
                     {item.link && (
-                      <Link to={item.link.to} className="text-link">
+                      <a href={item.link.to} className="text-link">
                         {item.link.text}
-                      </Link>
+                      </a>
                     )}
                   </NumberedList.Item>
                 ))}

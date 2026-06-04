@@ -3,7 +3,6 @@ import {
   methoden_fuenfPrinzipien,
 } from "@/config/routes";
 import type { ReactNode } from "react";
-import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import AccordionItem from "~/components/AccordionItem.tsx";
 import Badge from "~/components/Badge.tsx";
@@ -107,12 +106,12 @@ function Textbeispiel({
           underline: PrincipleHightlightNullModifier,
         }}
       />
-      <Link
+      <a
         className="text-link"
-        to={`${beispiele_prinzipien.path}/${prinzip.URLBezeichnung}#${absatzIdTag(beispiel.documentId)}`}
+        href={`${beispiele_prinzipien.path}/${prinzip.URLBezeichnung}#${absatzIdTag(beispiel.documentId)}`}
       >
         {methodsFivePrinciples.exampleLinkText}
-      </Link>
+      </a>
     </div>
   );
 }
@@ -204,9 +203,9 @@ function PrincipleNavigation({
           Prinzipien-Übersicht
         </h2>
         {principles.map((principle) => (
-          <Link
+          <a
             key={principle.order}
-            to={`${methoden_fuenfPrinzipien.path}/${principle.URLBezeichnung}`}
+            href={`${methoden_fuenfPrinzipien.path}/${principle.URLBezeichnung}`}
             className={twJoin(
               "block",
               principle.order === current.order
@@ -215,7 +214,7 @@ function PrincipleNavigation({
             )}
           >
             Prinzip {principle.order}: {principle.Name}
-          </Link>
+          </a>
         ))}
       </nav>
 
@@ -223,7 +222,7 @@ function PrincipleNavigation({
         {prev ? (
           <LinkButton
             look="link"
-            to={methoden_fuenfPrinzipien.path + "/" + prev.URLBezeichnung}
+            href={methoden_fuenfPrinzipien.path + "/" + prev.URLBezeichnung}
             className="ds-link-01-bold"
           >
             Zurück zu Prinzip {prev.order}
@@ -234,7 +233,7 @@ function PrincipleNavigation({
         {next ? (
           <LinkButton
             look="tertiary"
-            to={methoden_fuenfPrinzipien.path + "/" + next.URLBezeichnung}
+            href={methoden_fuenfPrinzipien.path + "/" + next.URLBezeichnung}
             className="flex justify-center"
           >
             Zum nächsten Prinzip

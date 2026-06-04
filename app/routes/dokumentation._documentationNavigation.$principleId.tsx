@@ -1,5 +1,4 @@
 import { methoden_fuenfPrinzipien } from "@/config/routes";
-import { Link } from "react-router";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import Heading from "~/components/Heading";
@@ -67,14 +66,14 @@ export function DocumentationPrinciple({
               className="h-28 w-28"
             >
               <BlocksRenderer content={prinzip.Hilfetext!} />
-              <Link
-                to={
+              <a
+                href={
                   methoden_fuenfPrinzipien.path + "/" + prinzip.URLBezeichnung
                 }
                 className="ds-link-01-reg"
               >
                 Mehr zum Prinzip
-              </Link>
+              </a>
             </HelpButton>
           </Heading>
 

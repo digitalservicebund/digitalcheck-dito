@@ -1,5 +1,4 @@
 import { useContext, useId } from "react";
-import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import PrincipleHighlightContext from "~/contexts/PrincipleHighlightContext";
 import { useIsMobileSize } from "~/hooks/deviceHook";
@@ -44,15 +43,14 @@ export default function PrincipleHighlightModifier({
         {text}
       </PrincipleHighlight>
     );
-
+  // TODO: test
   return (
-    <Link
-      replace
-      to={`#${explanationID(absatzId, principle.Nummer)}`}
+    <button
       onClick={() => {
         setActiveHighlight(highlightID);
+        window.location.hash = explanationID(absatzId, principle.Nummer);
       }}
-      className="cursor-help no-underline hover:underline"
+      className="cursor-help text-left no-underline hover:underline"
     >
       <PrincipleHighlight
         id={highlightID}
@@ -61,7 +59,7 @@ export default function PrincipleHighlightModifier({
       >
         {text}
       </PrincipleHighlight>
-    </Link>
+    </button>
   );
 }
 

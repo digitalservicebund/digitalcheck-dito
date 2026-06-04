@@ -5,13 +5,7 @@
  * Route-specific hooks are NOT included here — those are replaced by props in Astro page components.
  */
 
-import type {
-  AnchorHTMLAttributes,
-  ComponentType,
-  DetailedHTMLProps,
-  MouseEvent,
-  ReactNode,
-} from "react";
+import type { ComponentType, ReactNode } from "react";
 import {
   createContext,
   useCallback,
@@ -19,41 +13,6 @@ import {
   useEffect,
   useState,
 } from "react";
-
-// ── Link ────────────────────────────────────────────────────────────────────
-
-export type LinkProps = Omit<
-  DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>,
-  "href"
-> & {
-  /** Destination URL (mirrors react-router's `to` prop). */
-  to: string;
-};
-
-/**
- * Drop-in replacement for react-router's `<Link>`.
- * Renders a plain `<a>` tag. In MemoryRouter context (tests), intercepts
- * clicks to update in-memory location instead of navigating the page.
- * Hash-only hrefs are resolved relative to the current pathname.
- */
-export function Link({ to, children, onClick, ...rest }: LinkProps) {
-  const ctx = useContext(LocationContext);
-  const loc = useLocation();
-  // Resolve hash-only hrefs (e.g. "#section") relative to current pathname
-  const resolvedHref = to.startsWith("#") ? loc.pathname + to : to;
-  const handleClick = ctx
-    ? (e: MouseEvent<HTMLAnchorElement>) => {
-        e.preventDefault();
-        void ctx.navigate(to);
-        onClick?.(e);
-      }
-    : onClick;
-  return (
-    <a href={resolvedHref} onClick={handleClick} {...rest}>
-      {children}
-    </a>
-  );
-}
 
 // ── Location context (for MemoryRouter / test environment) ───────────────────
 

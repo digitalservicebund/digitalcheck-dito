@@ -1,6 +1,5 @@
 import { ArrowUpwardOutlined } from "@digitalservicebund/icons";
 import { useContext } from "react";
-import { Link, useLocation } from "react-router";
 import { twJoin } from "tailwind-merge";
 import PrincipleHighlightContext from "~/contexts/PrincipleHighlightContext";
 import PrincipleHighlightProvider from "~/providers/PrincipleHighlightProvider";
@@ -107,23 +106,17 @@ export function PrincipleExplanation({
   erfuellung,
   showPrincipleTitle,
 }: Readonly<PrincipleExplanationProps>) {
-  const location = useLocation();
   const { activeHighlight, setActiveHighlight, absatzId } = useContext(
     PrincipleHighlightContext,
   );
   if (!absatzId || !erfuellung.Prinzip) return null;
   const id = explanationID(absatzId, erfuellung.Prinzip.Nummer);
 
-  // NOTE: The CSS target pseudo-class doesn't work here due to the client side navigation: https://github.com/remix-run/remix/issues/6432.
-  // Using the hash also leads to a hydration mismatch due to the location hash only being available on the client.
-  const shouldHighlight = location.hash === `#${id}`;
   const color = PRINCIPLE_COLORS[erfuellung.Prinzip.Nummer];
   const explanationClasses = twJoin(
-    "w-fit max-w-[642px] px-8 space-y-4",
+    "w-fit max-w-[642px] p-8 pl-4 space-y-4 border-l-4 target:border-4 target:p-4 target:[&_button]:flex",
     color.border,
-    shouldHighlight ? "border-4 p-4" : "border-l-4 p-8",
   );
-
   return (
     <div
       id={id}
@@ -136,16 +129,17 @@ export function PrincipleExplanation({
           className="ds-label-02-reg"
           content={erfuellung.Erklaerung}
         />
-        {shouldHighlight && activeHighlight && (
-          <Link
-            to={`#${activeHighlight}`}
-            className="ds-link-01-bold"
+        {activeHighlight && (
+          <button
+            className="ds-link-01-bold hidden"
             aria-label={absatz.backLinkAriaLabel}
-            onClick={() => setActiveHighlight(null)}
-            replace
+            onClick={() => {
+              window.location.hash = activeHighlight;
+              setActiveHighlight(null);
+            }}
           >
             <ArrowUpwardOutlined className="fill-blue-800" />
-          </Link>
+          </button>
         )}
       </div>
       {showPrincipleTitle && (

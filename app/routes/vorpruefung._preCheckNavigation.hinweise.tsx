@@ -30,12 +30,12 @@ export default function GeneralInfo() {
           <RichText markdown={hint.text} />
         </InlineNotice>
         <ButtonContainer>
-          <LinkButton id={"generalInfo-next-button"} to={questions[0].path}>
+          <LinkButton id={"generalInfo-next-button"} href={questions[0].path}>
             {nextButton}
           </LinkButton>
           <LinkButton
             id={"generalInfo-back-button"}
-            to={vorpruefung.path}
+            href={vorpruefung.path}
             look={"tertiary"}
           >
             {general.buttonBack.text}

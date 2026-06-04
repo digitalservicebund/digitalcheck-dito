@@ -1,6 +1,6 @@
 ---
-import Layout from "@/layouts/Layout.astro";
 import { methoden_interviewLeitfadenSchritte } from "@/config/routes";
+import Layout from "@/layouts/Layout.astro";
 import {
   AnnouncementOutlined,
   MergeTypeOutlined,
@@ -183,7 +183,7 @@ export const frontmatter = {
               `}
         />
         <LinkButton
-          to={methoden_interviewLeitfadenSchritte.path}
+          href={methoden_interviewLeitfadenSchritte.path}
           look="tertiary"
           className="self-start"
         >

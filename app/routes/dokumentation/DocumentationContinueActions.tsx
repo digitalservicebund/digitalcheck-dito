@@ -84,7 +84,7 @@ export function DocumentationContinueActions({
       {hasSavedDocumentation ? (
         <>
           <LinkButton
-            to={dokumentation_regelungsvorhabenTitel.path}
+            href={dokumentation_regelungsvorhabenTitel.path}
             className="js-only"
           >
             {start.actions.resume.buttonText}
@@ -95,7 +95,7 @@ export function DocumentationContinueActions({
           />
         </>
       ) : (
-        <LinkButton to={dokumentation_hinweise.path} className="js-only">
+        <LinkButton href={dokumentation_hinweise.path} className="js-only">
           {start.actions.startInitial.buttonText}
         </LinkButton>
       )}

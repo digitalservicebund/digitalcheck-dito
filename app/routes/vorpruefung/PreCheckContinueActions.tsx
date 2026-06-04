@@ -66,7 +66,7 @@ export function PreCheckContinueActions() {
     <ButtonContainer>
       {hasData ? (
         <>
-          <LinkButton to={resumeLink} className="js-only">
+          <LinkButton href={resumeLink} className="js-only">
             {preCheck.resume.buttonText}
           </LinkButton>
           <StartOverDialog />
@@ -75,7 +75,7 @@ export function PreCheckContinueActions() {
         <LinkButton
           className="js-only"
           id={PRE_CHECK_START_BUTTON_ID}
-          to={vorpruefung_hinweise.path}
+          href={vorpruefung_hinweise.path}
         >
           {preCheck.start.buttonText}
         </LinkButton>

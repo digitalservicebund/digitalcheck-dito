@@ -5,7 +5,6 @@ import {
   PhoneOutlined,
 } from "@digitalservicebund/icons";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Container from "~/components/Container";
 import { Kopfzeile } from "~/components/kern-preview/Kopfzeile.tsx";
@@ -148,11 +147,11 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
     const plausibleClass = getPlausibleEventClassName(
       `Nav+Bar.${item.plausibleEventName}.Link`,
     );
-
+    // TODO: test
     return (
-      <Link
+      <a
         key={`${item.text}-${variant}`}
-        to={item.href}
+        href={item.href}
         onClick={closeOpenDropdowns}
         className={twMerge(
           "flex items-center hover:bg-blue-100",
@@ -164,7 +163,7 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
         )}
       >
         {item.text}
-      </Link>
+      </a>
     );
   };
 
@@ -194,8 +193,8 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
         <Kopfzeile className="relative" />
         <div className="relative flex h-[70px] justify-between pl-16 lg:container">
           {/* Logo and title */}
-          <Link
-            to={home.path}
+          <a
+            href={home.path}
             className="plausible-event-name=Nav+Bar.Home flex items-center space-x-8"
           >
             <img
@@ -213,7 +212,7 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
             <p className="ds-label-01-bold ml-16 flex flex-col text-xl max-lg:hidden">
               {header.title}
             </p>
-          </Link>
+          </a>
 
           {/* Desktop Navigation */}
           <nav

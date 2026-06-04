@@ -1,6 +1,5 @@
 import { interoperabel, interoperabel_faq } from "@/config/routes";
 import { QuizOutlined as QuizIcon } from "@digitalservicebund/icons";
-import { Link } from "react-router";
 import { LinkButton } from "~/components/Button";
 import Container from "~/components/Container";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
@@ -124,20 +123,20 @@ export default function Interoperability() {
             </p>
             <p>
               Wenn Sie weitere Fragen haben, dann kontaktieren Sie uns unter:{" "}
-              <Link
+              <a
+                href={`mailto:${contact.interoperabilityEmail}`}
                 className="text-link"
-                to={`mailto:${contact.interoperabilityEmail}`}
               >
                 {contact.interoperabilityEmail}
-              </Link>{" "}
+              </a>{" "}
               oder unter{" "}
-              <Link className="text-link" to={contact.phone}>
+              <a className="text-link" href={`tel:${contact.phone}`}>
                 {contact.phoneDisplay}
-              </Link>
+              </a>
               .
             </p>
             <div className="mt-24">
-              <LinkButton to={interoperabel_faq.path} look="tertiary">
+              <LinkButton href={interoperabel_faq.path} look="tertiary">
                 Zu Fragen und Antworten{" "}
               </LinkButton>
             </div>

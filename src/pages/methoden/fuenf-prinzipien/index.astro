@@ -1,13 +1,9 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import {
-  fetchStrapiData,
-  GET_PRINZIPS_WITH_EXAMPLES_QUERY,
-} from "~/utils/strapiData.server";
 import {
   methoden_fuenfPrinzipien,
   methoden_visualisieren,
 } from "@/config/routes";
+import Layout from "@/layouts/Layout.astro";
 import {
   EmojiObjectsOutlined,
   ShareOutlined,
@@ -24,6 +20,10 @@ import InfoBox from "~/components/InfoBox.tsx";
 import { PrinciplePosterBox } from "~/components/PrinciplePosterBox";
 import RichText from "~/components/RichText.tsx";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
+import {
+  fetchStrapiData,
+  GET_PRINZIPS_WITH_EXAMPLES_QUERY,
+} from "~/utils/strapiData.server";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
 export const frontmatter = {
@@ -111,7 +111,7 @@ const prinzips = result.prinzips;
                   />
                 </div>
                 <LinkButton
-                  to={
+                  href={
                     methoden_fuenfPrinzipien.path + "/" + prinzip.URLBezeichnung
                   }
                   look={"tertiary"}

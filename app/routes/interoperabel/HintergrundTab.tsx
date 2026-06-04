@@ -3,7 +3,6 @@ import {
   methoden_fuenfPrinzipien,
   vorpruefung,
 } from "@/config/routes";
-import { Link } from "react-router";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import Image from "~/components/Image";
@@ -23,7 +22,7 @@ export const HintergrundTab = () => (
       </Heading>
       <p>
         Das Ziel der{" "}
-        <NewTabLink to="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903">
+        <NewTabLink href="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903">
           Verordnung für ein interoperables Europa (EU) 2024/903
         </NewTabLink>{" "}
         ist es, digitale öffentliche Dienste zu verbessern. Die Dienste
@@ -46,12 +45,12 @@ export const HintergrundTab = () => (
           <p>Quellen:</p>
           <ul>
             <li>
-              <NewTabLink to="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903">
+              <NewTabLink href="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903">
                 EUR Lex - Verordnung für ein interoperables Europa (EU) 2024/903
               </NewTabLink>
             </li>
             <li>
-              <NewTabLink to="https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs">
+              <NewTabLink href="https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs">
                 Interoperable Europe Portal - FAQs
               </NewTabLink>
             </li>
@@ -95,9 +94,9 @@ export const HintergrundTab = () => (
       </p>
       <p>
         Hier gelangen Sie zur{" "}
-        <Link className="text-link" to={vorpruefung.path}>
+        <a className="text-link" href={vorpruefung.path}>
           Vorprüfung
-        </Link>
+        </a>
         .
       </p>
     </div>
@@ -108,7 +107,7 @@ export const HintergrundTab = () => (
       </Heading>
       <p>
         Die{" "}
-        <NewTabLink to="https://interoperable-europe.ec.europa.eu/collection/assessments/submission">
+        <NewTabLink href="https://interoperable-europe.ec.europa.eu/collection/assessments/submission">
           Interoperabilitäts-Bewertung
         </NewTabLink>{" "}
         ist wie auch die Digitalcheck-Dokumentation ein formeller, letzter
@@ -122,46 +121,44 @@ export const HintergrundTab = () => (
       </p>
       <p>
         Dabei helfen Ihnen die{" "}
-        <Link className="text-link" to={methoden_fuenfPrinzipien.path}>
+        <a className="text-link" href={methoden_fuenfPrinzipien.path}>
           5 Prinzipien für digitaltaugliche, interoperable Regelungen
-        </Link>
+        </a>
         . Auch{" "}
-        <Link className="text-link" to={beispiele_visualisierungen.path}>
+        <a className="text-link" href={beispiele_visualisierungen.path}>
           Prozessvisualisierungen
-        </Link>{" "}
+        </a>{" "}
         sind hilfreich, z.B. um grenzüberschreitende Datenflüsse zu
         identifizieren. Die Vorgehensweise ist also ganz ähnlich zur bekannten
         Arbeit an digitaltauglichen Regelungen.
       </p>
       <p>
         Die Interoperabilitäts-Bewertung ist schließlich ein Online-Formular auf{" "}
-        <NewTabLink to="https://interoperable-europe.ec.europa.eu/">
+        <NewTabLink href="https://interoperable-europe.ec.europa.eu/">
           interoperable Europe-Portal
         </NewTabLink>{" "}
         in dem Sie darzulegen, wie sich Ihre Regelung auf die EU-weite
         Interoperabilität auswirkt: Der wesentliche Inhalt besteht aus fünf
         Fragen. Die Bewertung fragt nach sogenannten „
-        <Link
+        <a
           className="text-link"
-          to={getTabAnchorLink(
+          href={getTabAnchorLink(
             tabIds.backgroundTabId,
             "verbindliche-anforderungen",
           )}
-          reloadDocument
         >
           verbindlichen Anforderungen
-        </Link>
+        </a>
         “ und prüft deren Einfluss auf die{" "}
-        <Link
+        <a
           className="text-link"
-          to={getTabAnchorLink(
+          href={getTabAnchorLink(
             tabIds.backgroundTabId,
             "vier-ebenen-der-interoperabilitaet",
           )}
-          reloadDocument
         >
           vier Ebenen der Interoperabilität
-        </Link>
+        </a>
         .
       </p>
       <DetailsSummary title="Wie sind die Inhalte der Interoperabilitäts-Bewertung?">
@@ -207,28 +204,28 @@ export const HintergrundTab = () => (
     <div>
       <p className="mb-24">
         Wenn Sie weitere Fragen haben, dann kontaktieren Sie uns unter:{" "}
-        <Link
-          to={`mailto:${contact.interoperabilityEmail}?subject=Supportanfrage:%20digitalcheck.bund.de`}
+        <a
+          href={`mailto:${contact.interoperabilityEmail}?subject=Supportanfrage:%20digitalcheck.bund.de`}
           className="ds-link-01-bold"
         >
           {contact.interoperabilityEmail}
-        </Link>{" "}
+        </a>{" "}
         oder rufen Sie uns an unter{" "}
-        <Link to={contact.phone} className="ds-link-01-bold">
+        <a href={contact.phone} className="ds-link-01-bold">
           {contact.phoneDisplay}
-        </Link>
+        </a>
         .
       </p>
 
       <p>Weitere Quellen:</p>
       <ul>
         <li>
-          <NewTabLink to="https://ec.europa.eu/isa2/eif_en/">
+          <NewTabLink href="https://ec.europa.eu/isa2/eif_en/">
             European Commission - European Interoperability Framework
           </NewTabLink>
         </li>
         <li>
-          <NewTabLink to="https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs">
+          <NewTabLink href="https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs">
             Interoperable Europe Portal - FAQs
           </NewTabLink>
         </li>
@@ -270,7 +267,7 @@ export const HintergrundTab = () => (
             verpflichtende Regel. Das kann z.B. eine Definition, ein Standard,
             eine Richtlinie, ein Verbot oder eine Beschränkung sein. Eine exakte
             Definition finden Sie in der{" "}
-            <NewTabLink to="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903">
+            <NewTabLink href="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903">
               Verordnung in der Präambel, Erwägungsgrund 18
             </NewTabLink>
             .
@@ -284,12 +281,12 @@ export const HintergrundTab = () => (
           <p>Weitere Quellen:</p>
           <ul>
             <li>
-              <NewTabLink to="https://ec.europa.eu/isa2/eif_en/">
+              <NewTabLink href="https://ec.europa.eu/isa2/eif_en/">
                 European Commission - European Interoperability Framework
               </NewTabLink>
             </li>
             <li>
-              <NewTabLink to="https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs">
+              <NewTabLink href="https://interoperable-europe.ec.europa.eu/interoperable-europe/faqs">
                 Interoperable Europe Portal - FAQs
               </NewTabLink>
             </li>
@@ -313,7 +310,7 @@ export const HintergrundTab = () => (
       </Heading>
       <p>
         Der{" "}
-        <NewTabLink to="https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail">
+        <NewTabLink href="https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail">
           Europäische Interoperabilitäts-Rahmen (EIF)
         </NewTabLink>{" "}
         definiert vier Ebenen der Interoperabilität, die bei der Gesetzgebung

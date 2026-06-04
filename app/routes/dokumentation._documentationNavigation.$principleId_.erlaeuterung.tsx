@@ -1,6 +1,6 @@
 import { methoden_fuenfPrinzipien } from "@/config/routes";
 import { useEffect } from "react";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import AspectPills from "~/components/AspectPills";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
@@ -197,14 +197,14 @@ export function DocumentationPrincipleErlaeuterung({
               className="h-24 w-24"
             >
               <BlocksRenderer content={prinzip.Hilfetext!} />
-              <Link
-                to={
+              <a
+                href={
                   methoden_fuenfPrinzipien.path + "/" + prinzip.URLBezeichnung
                 }
                 className="ds-link-01-reg"
               >
                 Mehr zum Prinzip
-              </Link>
+              </a>
             </HelpButton>
           </Heading>
 
@@ -214,12 +214,12 @@ export function DocumentationPrincipleErlaeuterung({
 
           <div className="rounded-lg bg-blue-300 p-24">
             <p>{changeAnswerTitle}</p>
-            <Link
-              to={currentUrl.replace("/erlaeuterung", "")}
+            <a
+              href={currentUrl.replace("/erlaeuterung", "")}
               className="text-link"
             >
               Angaben ändern
-            </Link>
+            </a>
           </div>
         </div>
 

@@ -5,7 +5,6 @@ import {
   dokumentation_zusammenfassung,
 } from "@/config/routes";
 import { type ReactNode } from "react";
-import { Link } from "react-router";
 import type { BadgeProps } from "~/components/Badge";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
@@ -63,13 +62,13 @@ const createInfoBoxItem = ({
           heading={summary.warnings.missing}
         />
       )}
-      <Link
-        to={route.path}
+      <a
+        href={route.path}
         className="text-link mt-24 block"
         aria-label={`${route.title} ${summary.buttonEdit.ariaLabelSuffix}`}
       >
         {summary.buttonEdit.text}
-      </Link>
+      </a>
     </div>
   ),
   look: "highlight",

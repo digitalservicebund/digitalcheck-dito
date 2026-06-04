@@ -1,7 +1,6 @@
 import { ROUTE_REGELUNGEN } from "@/config/additionalRoutes";
 import { getImagePath } from "@/utils/images";
 import { ZoomInOutlined } from "@digitalservicebund/icons";
-import { Link } from "react-router";
 import Heading from "~/components/Heading";
 import Image from "~/components/Image";
 import type { Visualisierung } from "~/utils/strapiData.types";
@@ -36,19 +35,19 @@ export default function VisualisationItem({
       {showContext && visualisierung.Beispielvorhaben && (
         <div>
           <strong>Kontext: </strong>
-          <Link
-            to={`${ROUTE_REGELUNGEN}/${visualisierung.Beispielvorhaben.URLBezeichnung}`}
+          <a
+            href={`${ROUTE_REGELUNGEN}/${visualisierung.Beispielvorhaben.URLBezeichnung}`}
             className="text-link"
           >
             {visualisierung.Beispielvorhaben.Titel}
-          </Link>
+          </a>
         </div>
       )}
 
       <div className="flex gap-16 max-sm:flex-col sm:gap-24">
         <div className="sm:w-1/2">
-          <Link
-            to={getImagePath(visualisierung)}
+          <a
+            href={getImagePath(visualisierung)}
             target="_blank"
             rel="noreferrer"
             className="relative block aspect-square cursor-zoom-in overflow-hidden border border-blue-500"
@@ -62,7 +61,7 @@ export default function VisualisationItem({
               className="absolute bottom-16 left-16 bg-blue-800 p-1 shadow-sm"
               fill="white"
             />
-          </Link>
+          </a>
 
           <div className="bg-gray-100 p-12">
             <LabelValuePair

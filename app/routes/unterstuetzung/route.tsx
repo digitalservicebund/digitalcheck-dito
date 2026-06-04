@@ -117,7 +117,7 @@ export default function Index() {
                 <RichText markdown={supportHow.text} />
               </InfoBox>
               <ButtonContainer>
-                <LinkButton look="tertiary" to={supportHow.link.to}>
+                <LinkButton look="tertiary" href={supportHow.link.to}>
                   {supportHow.link.text}
                 </LinkButton>
               </ButtonContainer>
@@ -246,7 +246,7 @@ export default function Index() {
                 `}
               />
               <LinkButton
-                to="https://zfl.bund.de"
+                href="https://zfl.bund.de"
                 look="tertiary"
                 className="self-start"
                 target="_blank"

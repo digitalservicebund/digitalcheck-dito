@@ -1,8 +1,6 @@
-import { Link } from "react-router";
 import Image from "~/components/Image";
 import { OpenInNewIcon } from "~/components/OpenInNewIcon.tsx";
 import { footer } from "~/resources/content/shared/footer";
-import { general } from "~/resources/content/shared/general.ts";
 import { assetPath } from "~/utils/assetPath";
 import tailwindMerge from "~/utils/tailwindMerge";
 
@@ -17,19 +15,17 @@ type LinkProps = {
 const FooterLink = ({ link }: { link: LinkProps }) => (
   <>
     {link?.preText}{" "}
-    <Link
-      to={link.url}
+    <a
+      href={link.url}
       className="text-link increase-tap-area"
       target={link.openInNewTab ? "_blank" : undefined}
       rel={link.openInNewTab ? "noreferrer" : undefined}
-      aria-description={
-        link.openInNewTab ? general.a11yMessageNewWindow : undefined
-      }
     >
       <span className="flex items-center">
         {link.text} {link.openInNewTab && <OpenInNewIcon />}
       </span>
-    </Link>
+      <span className="sr-only"> (öffnet in neuem Tab)</span>
+    </a>
     {link?.postText && <> {link.postText}</>}
   </>
 );

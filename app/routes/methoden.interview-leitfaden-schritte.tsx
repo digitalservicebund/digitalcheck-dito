@@ -131,7 +131,7 @@ export default function InterviewMethods() {
                     />
                     <DownloadLinkButton
                       look="link"
-                      to={assetPath(
+                      href={assetPath(
                         "/documents/interview-leitfaden/Akteurlandschaft_Analyse.pptx",
                       )}
                     >
@@ -196,7 +196,7 @@ export default function InterviewMethods() {
                       />
                       <DownloadLinkButton
                         look="link"
-                        to={assetPath(
+                        href={assetPath(
                           "/documents/interview-leitfaden/Umsetzung_verstehen.docx",
                         )}
                       >
@@ -235,7 +235,7 @@ export default function InterviewMethods() {
                       />
                       <DownloadLinkButton
                         look="link"
-                        to={assetPath(
+                        href={assetPath(
                           "/documents/interview-leitfaden/Zielgruppenanaylse-Buergercheck.pptx",
                         )}
                       >
@@ -290,7 +290,7 @@ export default function InterviewMethods() {
                 <br></br>
                 <p>
                   Weiterführende Quelle:{" "}
-                  <NewTabLink to="https://www.orghandbuch.de/SharedDocs/faqs/Webs/OHB/DE/Methoden_Befragung/13_Durchfuehrung_muendliches_Interview.html">
+                  <NewTabLink href="https://www.orghandbuch.de/SharedDocs/faqs/Webs/OHB/DE/Methoden_Befragung/13_Durchfuehrung_muendliches_Interview.html">
                     Orghandbuch des BMI 2026
                   </NewTabLink>
                 </p>
@@ -430,7 +430,7 @@ export default function InterviewMethods() {
               />
               <DownloadLinkButton
                 look="link"
-                to={assetPath(
+                href={assetPath(
                   "/documents/interview-leitfaden/Ablaufplan_Interviewführung.docx",
                 )}
               >
@@ -445,24 +445,24 @@ export default function InterviewMethods() {
             <Heading tagName="h2">Relevante Quellen</Heading>
             <ul>
               <li>
-                <NewTabLink to="https://www.oeffentliches-gestalten.de">
+                <NewTabLink href="https://www.oeffentliches-gestalten.de">
                   Öffentliches Gestalten
                 </NewTabLink>
               </li>
               <li>
-                <NewTabLink to="https://www.digitale-verwaltung.de/SharedDocs/downloads/Webs/DV/DE/servicehandbuch.pdf?__blob=publicationFile&v=5#page=18">
+                <NewTabLink href="https://www.digitale-verwaltung.de/SharedDocs/downloads/Webs/DV/DE/servicehandbuch.pdf?__blob=publicationFile&v=5#page=18">
                   Servicehandbuch
                 </NewTabLink>
               </li>
               <li>
-                <NewTabLink to="https://servicestandard.gov.de/handbuch/#aus-der-praxis">
+                <NewTabLink href="https://servicestandard.gov.de/handbuch/#aus-der-praxis">
                   Servicestandard - Handbuch
                 </NewTabLink>
               </li>
               <li>
                 <DownloadLinkButton
                   look="link"
-                  to={assetPath(
+                  href={assetPath(
                     "/documents/interview-leitfaden/Buergercheck.pdf",
                   )}
                 >

@@ -20,7 +20,6 @@ import {
   methoden_fuenfPrinzipien,
   methoden_visualisieren_flussdiagramm,
 } from "@/config/routes";
-import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import BackToTopButton from "~/components/BackToTopButton.tsx";
 import Container from "~/components/Container.tsx";
@@ -690,9 +689,9 @@ export default function Visualization() {
                   }
                   type="video/mp4"
                 />
-
-                <Link
-                  to={
+                {/* TODO: test */}
+                <a
+                  href={
                     STRAPI_MEDIA_URL +
                     "/Flussdiagramm_erstellen_live_9d1e3de185.mp4"
                   }
@@ -701,7 +700,7 @@ export default function Visualization() {
                   className="ds-link-01-reg"
                 >
                   Video herunterladen
-                </Link>
+                </a>
               </video>
             </section>
           </div>

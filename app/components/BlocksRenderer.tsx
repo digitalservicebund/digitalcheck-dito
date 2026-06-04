@@ -1,5 +1,4 @@
 import type { JSX } from "react";
-import { Link } from "react-router";
 import { nestListInListItems } from "~/utils/blocksRendererUtils";
 import type { Node } from "~/utils/paragraphUtils";
 import { isExternalUrl } from "~/utils/utilFunctions";
@@ -47,7 +46,7 @@ export function RecursiveRenderer({
 
         if (externalUrl)
           return (
-            <NewTabLink key={index} to={node.url}>
+            <NewTabLink key={index} href={node.url}>
               <RecursiveRenderer content={node.children} />
             </NewTabLink>
           );
@@ -58,9 +57,9 @@ export function RecursiveRenderer({
         const url = node.url.replace(/^\//, "");
 
         return (
-          <Link key={index} to={url} className="text-link inline-flex">
+          <a key={index} href={url} className="text-link inline-flex">
             <RecursiveRenderer content={node.children} />
-          </Link>
+          </a>
         );
       }
 

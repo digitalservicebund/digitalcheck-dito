@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { act } from "react";
 import { createRoutesStub } from "react-router";
 import { beforeAll, describe, test } from "vitest";
@@ -346,23 +346,18 @@ describe("ParagraphList", () => {
       render(<RouterStubAllPrinciples />);
       const id = "explanation-abc-1-1";
       const firstHighlight = screen.getByText("Text mit 1Markierung");
-      expect(firstHighlight.closest("a")).toHaveAttribute("href", `/#${id}`);
 
       // clicking on highlight removes highlighting and backlink
-      act(() => {
-        firstHighlight?.click();
-      });
-      expect(screen.getByTestId(id)).toHaveClass("border-4");
-      const backlink = screen.getByLabelText("Zurück zum Text");
-      expect(backlink).toHaveAttribute("href", `/#${firstHighlight?.id}`);
+      act(() => firstHighlight?.click());
+      expect(screen.getByTestId(id).matches(":target")).toBeTruthy();
+      const backlink = within(screen.getByTestId(id)).getByLabelText(
+        "Zurück zum Text",
+      );
       expect(backlink).toBeVisible();
 
       // clicking on backlink removes highlighting and backlink
-      act(() => {
-        screen.getByLabelText("Zurück zum Text").click();
-      });
-      expect(screen.getByTestId(id)).toHaveClass("border-l-4");
-      expect(screen.getByTestId(id)).not.toHaveClass("border-4");
+      act(() => backlink.click());
+      expect(screen.getByTestId(id).matches(":target")).toBeFalsy();
       expect(
         screen.queryByLabelText("Zurück zum Text"),
       ).not.toBeInTheDocument();
@@ -374,21 +369,22 @@ describe("ParagraphList", () => {
         screen.getByText("Text mit 1Markierung").click();
         screen.getByText("Text mit 2Markierung").click();
       });
-      expect(screen.getByTestId("explanation-abc-1-1")).not.toHaveClass(
-        "border-4",
-      );
-      expect(screen.getByTestId("explanation-abc-1-2")).toHaveClass("border-4");
-      expect(screen.getAllByLabelText("Zurück zum Text")).toHaveLength(1);
-      act(() => {
-        screen.getByLabelText("Zurück zum Text").click();
-      });
+      expect(
+        screen.getByTestId("explanation-abc-1-1").matches(":target"),
+      ).toBeFalsy();
+      expect(
+        screen.getByTestId("explanation-abc-1-2").matches(":target"),
+      ).toBeTruthy();
+
+      const backButton = within(
+        screen.getByTestId("explanation-abc-1-2"),
+      ).getByLabelText("Zurück zum Text");
+      expect(backButton).toBeVisible();
+      act(() => backButton.click());
       // clicking on backlink removes highlighting and backlink
-      expect(screen.getByTestId("explanation-abc-1-2")).toHaveClass(
-        "border-l-4",
-      );
-      expect(screen.getByTestId("explanation-abc-1-2")).not.toHaveClass(
-        "border-4",
-      );
+      expect(
+        screen.getByTestId("explanation-abc-1-2").matches(":target"),
+      ).toBeFalsy();
       expect(
         screen.queryByLabelText("Zurück zum Text"),
       ).not.toBeInTheDocument();

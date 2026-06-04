@@ -189,7 +189,7 @@ export function PreCheckQuestion({
           </Button>
           <LinkButton
             id={"preCheck-back-button"}
-            to={question.prevLink}
+            href={question.prevLink}
             look={"tertiary"}
           >
             {general.buttonBack.text}

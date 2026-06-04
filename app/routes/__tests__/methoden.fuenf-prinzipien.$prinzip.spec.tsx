@@ -130,7 +130,6 @@ const mockPrinzipsList: PrinzipListItem[] = [];
 
 describe("FivePrinciples Route - Integration Tests", () => {
   beforeEach(() => {
-    // Render the component within a router to handle <Link> components
     render(
       <MemoryRouter>
         {/* @ts-expect-error mock data does not fully satisfy PrinzipWithAspekteAndExample */}

@@ -1,5 +1,4 @@
 ---
-import Layout from "@/layouts/Layout.astro";
 import {
   beispiele_prinzipien,
   beispiele_visualisierungen,
@@ -12,6 +11,7 @@ import {
   unterstuetzung,
   vorpruefung,
 } from "@/config/routes";
+import Layout from "@/layouts/Layout.astro";
 import {
   ContactPhoneOutlined as ContactPhoneOutlinedIcon,
   Dvr as DvrIcon,
@@ -120,7 +120,7 @@ const steps = [
                 />
                 <div class="mt-40 self-center">
                   <LinkButton
-                    to={step.link.to}
+                    href={step.link.to}
                     look={step.link.look}
                     plausibleEventName={step.link.plausibleEventName}
                   >

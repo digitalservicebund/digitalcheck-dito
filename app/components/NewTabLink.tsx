@@ -1,5 +1,3 @@
-import type { LinkProps } from "react-router";
-import { Link } from "react-router";
 import { OpenInNewIcon } from "~/components/OpenInNewIcon.tsx";
 import twMerge from "~/utils/tailwindMerge";
 
@@ -10,15 +8,17 @@ export default function NewTabLink({
   children,
   className,
   ...props
-}: Readonly<Omit<LinkProps, "target">>) {
+}: Readonly<Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "target">>) {
   return (
-    <Link
+    <a
+      href={props.href}
       {...props}
       target="_blank"
+      rel="noreferrer"
       className={twMerge("text-link", className)}
     >
       {children}
       <OpenInNewIcon />
-    </Link>
+    </a>
   );
 }

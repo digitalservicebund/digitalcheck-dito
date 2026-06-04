@@ -133,7 +133,7 @@ export function Gesetz({
           {regelung.NKRStellungnahmeLink && (
             <div>
               {examplesRegelungen.nkr.linkText}
-              <NewTabLink to={regelung.NKRStellungnahmeLink}>
+              <NewTabLink href={regelung.NKRStellungnahmeLink}>
                 NKR-Stellungnahme
               </NewTabLink>
             </div>
