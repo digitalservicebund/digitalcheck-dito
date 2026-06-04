@@ -149,7 +149,7 @@ export default function BindingRequirementsForm({
                   <div className="space-y-24">
                     <Textarea
                       scope={requirement.scope("services")}
-                      description="Einen Eintrag pro Zeile"
+                      description="Einen Eintrag pro Zeile. Abkürzungen bitte ausschreiben."
                     >
                       Betroffene transeuropäische Dienste
                       <HelpButton
