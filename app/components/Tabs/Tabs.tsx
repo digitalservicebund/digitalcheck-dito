@@ -39,8 +39,8 @@ function useSearchParams(): [URLSearchParams, SetSearchParams] {
     const next = updater(new URLSearchParams(getSearch()));
     const url = new URL(globalThis.location.href);
     url.search = next.toString();
-    window.history.pushState({}, "", url);
-    window.dispatchEvent(new PopStateEvent("popstate", { state: {} }));
+    globalThis.history.pushState({}, "", url);
+    globalThis.dispatchEvent(new PopStateEvent("popstate", { state: {} }));
   };
 
   return [params, setSearchParams];

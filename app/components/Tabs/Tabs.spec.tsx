@@ -42,8 +42,8 @@ const SearchParamExample = () => {
 function setSearch(search: string) {
   const normalized = search.startsWith("?") ? search : `?${search}`;
   const pathname = globalThis.location.pathname || "/";
-  window.history.replaceState({}, "", `${pathname}${normalized}`);
-  window.dispatchEvent(new PopStateEvent("popstate", { state: {} }));
+  globalThis.history.replaceState({}, "", `${pathname}${normalized}`);
+  globalThis.dispatchEvent(new PopStateEvent("popstate", { state: {} }));
 }
 
 function assertSelectedState(expectedIndex: number, container: HTMLElement) {
