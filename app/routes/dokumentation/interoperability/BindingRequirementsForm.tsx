@@ -79,7 +79,7 @@ export default function BindingRequirementsForm({
               {
                 article: 2,
                 paragraph: 15,
-                format: "long",
+                format: "short",
               },
             )} und die digitalen transeuropäischen Dienste, die davon betroffen sind.
         `}
@@ -168,7 +168,7 @@ export default function BindingRequirementsForm({
                           - Digitale Führerscheine
                           - Handelsregister
                           
-                          Siehe ${markdownLinkIEA({ recital: 6, format: "long" })}.
+                          Siehe ${markdownLinkIEA({ recital: 6, format: "short" })}.
                           
                           **Was ist hier zu dokumentieren?**
                           
