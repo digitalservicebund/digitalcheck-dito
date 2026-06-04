@@ -43,7 +43,6 @@ export default function PrincipleHighlightModifier({
         {text}
       </PrincipleHighlight>
     );
-  // TODO: test
   return (
     <button
       onClick={() => {

@@ -177,7 +177,6 @@ export function DownloadButton(
   );
 }
 
-// TODO: test
 /**
  * A link to a file that looks like a button.
  */
