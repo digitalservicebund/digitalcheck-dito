@@ -114,7 +114,7 @@ export function PrincipleExplanation({
 
   const color = PRINCIPLE_COLORS[erfuellung.Prinzip.Nummer];
   const explanationClasses = twJoin(
-    "w-fit max-w-[642px] p-8 pl-4 space-y-4 border-l-4 target:border-4 target:p-4 target:[&_button]:flex",
+    "w-fit max-w-[642px] p-12 pl-8 space-y-4 border-l-4 target:border-4 target:p-8 target:[&_button]:flex",
     color.border,
   );
   return (
