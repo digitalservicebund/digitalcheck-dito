@@ -63,7 +63,7 @@ export default function DetailsSummary({
     };
 
     // initial check
-    openIfMatches(globalThis.globalThis.location.hash);
+    openIfMatches(globalThis.location.hash);
   }, [identifier]);
 
   return (

@@ -24,13 +24,13 @@ type SetSearchParams = (
 
 function useSearchParams(): [URLSearchParams, SetSearchParams] {
   const getSearch = () =>
-    typeof window === "undefined" ? "" : globalThis.location.search;
+    typeof globalThis.window === "undefined" ? "" : globalThis.location.search;
   const [search, setSearch] = useState<string>(getSearch);
 
   useEffect(() => {
     const update = () => setSearch(getSearch());
-    window.addEventListener("popstate", update);
-    return () => window.removeEventListener("popstate", update);
+    globalThis.addEventListener("popstate", update);
+    return () => globalThis.removeEventListener("popstate", update);
   }, []);
 
   const params = new URLSearchParams(search);

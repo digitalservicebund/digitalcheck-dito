@@ -25,19 +25,17 @@ const Example = (props: ExampleProps) => (
 
 const SearchParamExample = () => {
   return (
-    <>
-      <SearchParamTabs>
-        <SearchParamTabs.Tab tabId="tab-0" label={tabs[0]}>
-          Tab panel 0
-        </SearchParamTabs.Tab>
-        <SearchParamTabs.Tab tabId="tab-1" label={tabs[1]}>
-          Tab panel 1
-        </SearchParamTabs.Tab>
-        <SearchParamTabs.Tab tabId="tab-2" label={tabs[2]}>
-          Tab panel 2
-        </SearchParamTabs.Tab>
-      </SearchParamTabs>
-    </>
+    <SearchParamTabs>
+      <SearchParamTabs.Tab tabId="tab-0" label={tabs[0]}>
+        Tab panel 0
+      </SearchParamTabs.Tab>
+      <SearchParamTabs.Tab tabId="tab-1" label={tabs[1]}>
+        Tab panel 1
+      </SearchParamTabs.Tab>
+      <SearchParamTabs.Tab tabId="tab-2" label={tabs[2]}>
+        Tab panel 2
+      </SearchParamTabs.Tab>
+    </SearchParamTabs>
   );
 };
 
