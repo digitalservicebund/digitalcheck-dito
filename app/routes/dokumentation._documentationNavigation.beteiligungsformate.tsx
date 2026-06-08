@@ -89,7 +89,6 @@ export function DocumentationParticipation() {
             submit
             showDownloadDraftButton
             showSavingTip
-            prinzips={prinzips}
           />
         </form>
       </div>

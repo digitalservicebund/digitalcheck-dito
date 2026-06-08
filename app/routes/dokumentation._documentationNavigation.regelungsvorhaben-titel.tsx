@@ -101,7 +101,6 @@ export function DocumentationTitle() {
             submit
             showDownloadDraftButton
             showSavingTip
-            prinzips={prinzips}
           />
         </form>
       </div>
