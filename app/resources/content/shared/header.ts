@@ -3,6 +3,7 @@ import {
   beispiele_prinzipien,
   beispiele_visualisierungen,
   bundeslaender,
+  bundeslaender_hessen,
   dokumentation,
   grundlagen_digitaltauglichkeit,
   grundlagen_normenkontrollrat,
@@ -109,8 +110,22 @@ export const header = {
     },
     {
       text: "Bundesländer",
-      href: bundeslaender.path,
-      overlayContent: [],
+      overlayContent: [
+        {
+          title: "Bund und Länder",
+          href: bundeslaender.path,
+          content: "Alles über den Digitalcheck für Bund und Länder",
+          image: "/images/bund-laender-kommunen.svg",
+          imageAlt: "Logo Bund, Länder, Kommunen",
+        },
+        {
+          title: "Hessen",
+          href: bundeslaender_hessen.path,
+          content: "Alles über den Digitalcheck in Hessen",
+          image: "/images/bund-laender-kommunen.svg",
+          imageAlt: "Logo Hessen",
+        },
+      ],
     },
     {
       text: "Kontakt und Support",
