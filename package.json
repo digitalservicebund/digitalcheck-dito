@@ -57,6 +57,7 @@
     "posthog-js": "^1.379.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "sharp": "^0.34.5",
     "tailwind-merge": "^3.6.0",
     "zod": "~4.4.3"
   },
