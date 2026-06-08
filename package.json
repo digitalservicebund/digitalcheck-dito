@@ -49,7 +49,7 @@
     "@tailwindcss/vite": "^4.3.0",
     "docx": "^9.7.1",
     "file-saver": "^2.0.5",
-    "isbot": "^5.1.40",
+    "isbot": "^5.1.41",
     "marked": "^18.0.4",
     "mime-types": "^3.0.2",
     "msw": "^2.14.6",
