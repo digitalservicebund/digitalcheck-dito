@@ -1,10 +1,8 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import Hero from "@/components/Hero.astro";
+import LaenderLayout from "@/layouts/LaenderLayout.astro";
 import AccordionItem from "~/components/AccordionItem";
-import { Image } from "astro:assets";
 import { LinkButton } from "~/components/Button";
-import hessenMap from "./_assets/hessen-map.svg";
+import { Image } from "astro:assets";
 import hessenLogo from "./_assets/hessen-logo.jpg";
 
 export const frontmatter = {
@@ -13,101 +11,75 @@ export const frontmatter = {
 };
 ---
 
-<Layout title={frontmatter.title}>
-  <main class="breakout-grid">
-    <Hero>
-      <h1>Land Hessen</h1>
-      <p slot="subtitle">
-        Die Landesregierung Hessen verfolgt das Ziel, bürokratische Belastungen
-        für Bürgerinnen und Bürger, Unternehmen sowie die Verwaltung auf das
-        zwingend erforderliche Maß zu reduzieren.
-      </p>
-    </Hero>
-    <div class="breakout bg-blue-300">
-      <div class="flex flex-col lg:flex-row">
-        <div class="py-32 sm:py-48 lg:w-1/2 lg:self-center lg:pr-48">
-          <h2>Überblick</h2>
-          <p>
-            Die Landesregierung Hessen verfolgt das Ziel, bürokratische
-            Belastungen für Bürgerinnen und Bürger, Unternehmen sowie die
-            Verwaltung auf das zwingend erforderliche Maß zu reduzieren.
-          </p>
-          <div class="mt-[18px]">
-            <LinkButton>Mehr dazu erfahren</LinkButton>
-          </div>
-        </div>
-        <div class="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">
-          <div
-            class="bg-ds-blue-500 flex h-full w-[630px] flex-col justify-center align-middle lg:w-[50vw] [&>img]:object-contain lg:[&>img]:h-[550px]"
-          >
-            <Image
-              src={hessenMap}
-              alt="Eine stilisierte Karte von Deutschland mit Hervorhebung von Hessen"
-              class="mx-auto"
-            />
-          </div>
-        </div>
+<LaenderLayout title={frontmatter.title}>
+  <p slot="subtitle">
+    Die Landesregierung {frontmatter.title} verfolgt das Ziel, bürokratische Belastungen
+    für Bürgerinnen und Bürger, Unternehmen sowie die Verwaltung auf das zwingend
+    erforderliche Maß zu reduzieren.
+  </p>
+  <div slot="intro" class="space-y-16">
+    <h2>Überblick</h2>
+    <p>
+      Die Landesregierung {frontmatter.title} verfolgt das Ziel, bürokratische Belastungen
+      für Bürgerinnen und Bürger, Unternehmen sowie die Verwaltung auf das zwingend
+      erforderliche Maß zu reduzieren.
+    </p>
+    <div class="mt-[18px]">
+      <LinkButton>Mehr dazu erfahren</LinkButton>
+    </div>
+  </div>
+  <section class="py-80 space-y-40">
+    <div class="flex gap-32 items-center">
+      <Image src={hessenLogo} alt="Logo von Hessen" class="w-[268px]" />
+      <div>
+        <h2>Zentralstelle Hessen</h2>
+        <p>
+          Der bestehende Normenbestand soll verschlankt, Personal-, Sach- und
+          Verfahrensstandards sollen flexibilisiert und die digitale
+          Transformation der Verwaltung soll aktiv unterstützt werden.
+        </p>
       </div>
     </div>
-    <section class="py-80 space-y-40">
-      <div class="flex gap-32 items-center">
-        <Image src={hessenLogo} alt="Logo von Hessen" class="w-[268px]" />
-        <div>
-          <h2>Zentralstelle Hessen</h2>
-          <p>
-            Der bestehende Normenbestand soll verschlankt, Personal-, Sach- und
-            Verfahrensstandards sollen flexibilisiert und die digitale
-            Transformation der Verwaltung soll aktiv unterstützt werden.
-          </p>
-        </div>
-      </div>
-      <div>
-        <h2>Supportangebote</h2>
+    <div>
+      <h2>Supportangebote</h2>
+      <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry. Lorem Ipsum has been the industry's standard dummy text ever
+        since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book.
+      </p>
+      <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry. Lorem Ipsum has been the industry's standard dummy text ever
+        since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book.
+      </p>
+    </div>
+    <div>
+      <AccordionItem headline="Umsetzbarkeit" client:load>
         <p>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
           since the 1500s, when an unknown printer took a galley of type and
           scrambled it to make a type specimen book.
         </p>
+      </AccordionItem>
+      <AccordionItem headline="Digitale Relevanz" client:load>
         <p>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
           since the 1500s, when an unknown printer took a galley of type and
           scrambled it to make a type specimen book.
         </p>
-      </div>
-      <div>
-        <AccordionItem headline="Umsetzbarkeit" client:load>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
-          </p>
-        </AccordionItem>
-        <AccordionItem headline="Digitale Relevanz" client:load>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
-          </p>
-        </AccordionItem>
-        <AccordionItem headline="Digitaltauglichkeit" client:load>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
-          </p>
-        </AccordionItem>
-      </div>
-    </section>
-  </main>
-</Layout>
-
-<style>
-  h2 {
-    margin-bottom: 16px;
-  }
-</style>
+      </AccordionItem>
+      <AccordionItem headline="Digitaltauglichkeit" client:load>
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book.
+        </p>
+      </AccordionItem>
+    </div>
+  </section>
+</LaenderLayout>

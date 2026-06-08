@@ -1,0 +1,28 @@
+---
+import LaenderLayout from "@/layouts/LaenderLayout.astro";
+import { LinkButton } from "~/components/Button";
+
+export const frontmatter = {
+  title: "Brandenburg",
+  isStagingOnly: true,
+};
+---
+
+<LaenderLayout title={frontmatter.title}>
+  <p slot="subtitle">
+    Die Landesregierung Brandenburg verfolgt das Ziel, bürokratische Belastungen
+    für Bürgerinnen und Bürger, Unternehmen sowie die Verwaltung auf das
+    zwingend erforderliche Maß zu reduzieren.
+  </p>
+  <div slot="intro" class="space-y-16">
+    <h2>Überblick</h2>
+    <p>
+      Die Landesregierung {frontmatter.title} verfolgt das Ziel, bürokratische Belastungen
+      für Bürgerinnen und Bürger, Unternehmen sowie die Verwaltung auf das zwingend
+      erforderliche Maß zu reduzieren.
+    </p>
+    <div class="mt-[18px]">
+      <LinkButton>Mehr dazu erfahren</LinkButton>
+    </div>
+  </div>
+</LaenderLayout>

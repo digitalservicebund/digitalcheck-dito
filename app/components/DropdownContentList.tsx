@@ -72,7 +72,7 @@ export default function DropdownContentList({
             )}
           >
             {option.image && (
-              <div className="flex h-[45px] w-[45px] items-center justify-center">
+              <div className="flex h-[64px] w-[64px] items-center justify-center p-8">
                 <Image
                   url={withBase(option.image)}
                   alternativeText={option.imageAlt}

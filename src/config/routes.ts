@@ -66,10 +66,32 @@ export const bundeslaender = {
   navLabel: null,
 } as const;
 
+export const bundeslaender_brandenburg = {
+  key: "bundeslaender_brandenburg",
+  path: "/bundeslaender/brandenburg",
+  title: "Brandenburg",
+  parent: bundeslaender,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const bundeslaender_hessen = {
   key: "bundeslaender_hessen",
   path: "/bundeslaender/hessen",
   title: "Hessen",
+  parent: bundeslaender,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const bundeslaender_nordrheinWestfalen = {
+  key: "bundeslaender_nordrheinWestfalen",
+  path: "/bundeslaender/nordrhein-westfalen",
+  title: "Nordrhein-Westfalen",
   parent: bundeslaender,
   sitemap: true,
   isStagingOnly: true,
@@ -457,7 +479,9 @@ export const allRoutes = [
   beispiele_prinzipien,
   beispiele_visualisierungen,
   bundeslaender,
+  bundeslaender_brandenburg,
   bundeslaender_hessen,
+  bundeslaender_nordrheinWestfalen,
   dasIstNeu,
   datenschutz,
   dokumentation,
