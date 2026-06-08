@@ -16,3 +16,7 @@ jobs:
           SITEMAP_URL: "https://digitalcheck.bund.de/sitemap.xml"
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+          CHECK_ARGS: >-
+            --exclude .js|/api/
+            --exclude /grundlagen
+            --exclude /interoperabel/loesungen
