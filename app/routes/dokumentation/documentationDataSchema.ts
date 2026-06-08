@@ -20,10 +20,16 @@ const { principlePages, participation, info } = digitalDocumentation;
 
 export const policyHeaderSchema = z.object({
   title: z.string().min(1, { message: info.inputTitle.error }),
-  organization: z.string().optional(),
-  publicationStatus: z.enum(["published", "planned"]).optional(),
-  publicationDate: z.string().optional(),
-  publicationLink: z.string().optional(),
+  organization: z
+    .string()
+    .min(1, { message: "Bitte geben Sie eine Organisation ein." }),
+  publicationStatus: z
+    .enum(["published", "planned", ""])
+    .refine(Boolean, { message: "Bitte wählen Sie eine Option" }),
+  publicationDate: z
+    .string()
+    .min(1, { message: "Bitte machen Sie eine Datumsangabe." }),
+  publicationLink: z.string(),
 });
 
 export const participationSchema = z.object({
@@ -107,8 +113,8 @@ export const principleSchemaV2 = principleAnswerSchemaV2.and(
 
 export const defaultTitleValues: PolicyTitle = {
   title: "",
-  organization: undefined,
-  publicationStatus: "published",
+  organization: "",
+  publicationStatus: "",
   publicationDate: "",
   publicationLink: "",
 };

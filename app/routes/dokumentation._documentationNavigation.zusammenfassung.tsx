@@ -118,30 +118,29 @@ function Answer({
 function PolicyTitleContent({
   policyTitle,
 }: Readonly<{ policyTitle: PolicyTitle }>) {
-  const publicationAnswer =
-    policyTitle.publicationDate || policyTitle.publicationLink;
-  const publicationPrefix = policyTitle.publicationDate
-    ? "Voraussichtliches Veröffentlichungsdatum"
-    : "Link zum Referentenentwurf";
-
-  return (
-    <Answer
-      answers={[
-        {
-          prefix: "Vorläufiger Arbeitstitel des Vorhabens",
-          answer: policyTitle.title,
-        },
-        {
-          prefix: "Ministerium / Organisation",
-          answer: policyTitle.organization,
-        },
-        {
-          prefix: publicationPrefix,
-          answer: publicationAnswer,
-        },
-      ]}
-    />
-  );
+  const answers = [
+    {
+      prefix: "Vorläufiger Arbeitstitel des Vorhabens",
+      answer: policyTitle.title,
+    },
+    {
+      prefix: "Ministerium / Organisation",
+      answer: policyTitle.organization,
+    },
+  ];
+  if (policyTitle.publicationLink) {
+    answers.push({
+      prefix: "Link zum Referentenentwurf",
+      answer: policyTitle.publicationLink,
+    });
+  }
+  if (policyTitle.publicationDate) {
+    answers.push({
+      prefix: "Voraussichtliches Veröffentlichungsdatum",
+      answer: policyTitle.publicationDate,
+    });
+  }
+  return <Answer answers={answers} />;
 }
 
 function ParticipationContent({
@@ -311,7 +310,7 @@ export function DocumentationSummary() {
     createInfoBoxItem({
       heading: "Informationen zum Regelungsvorhaben",
       route: dokumentation_regelungsvorhabenTitel,
-      content: documentationData.policyTitle?.title ? (
+      content: documentationData.policyTitle ? (
         <PolicyTitleContent policyTitle={documentationData.policyTitle} />
       ) : null,
     }),

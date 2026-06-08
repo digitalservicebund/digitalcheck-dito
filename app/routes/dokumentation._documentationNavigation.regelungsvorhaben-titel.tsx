@@ -31,8 +31,6 @@ export function DocumentationTitle() {
   });
 
   const publicationStatusField = useField(form.scope("publicationStatus"));
-  const publicationDateField = useField(form.scope("publicationDate"));
-  const publicationLinkField = useField(form.scope("publicationLink"));
 
   return (
     <>
@@ -49,13 +47,6 @@ export function DocumentationTitle() {
         <form {...form.getFormProps()} className="space-y-32">
           <Input scope={form.scope("title")} warningInsteadOfError>
             {info.inputTitle.label}
-            <HelpButton
-              sectionId="title"
-              title="Hinweis zu Titel des Regelungsvorhabens"
-            >
-              Geben Sie hier den offiziellen Titel Ihres Regelungsvorhabens ein.
-              Dieser Titel wird in der fertigen Dokumentation verwendet.
-            </HelpButton>
           </Input>
           <Input scope={form.scope("organization")} warningInsteadOfError>
             Ministerium / Organisation
@@ -70,19 +61,21 @@ export function DocumentationTitle() {
           </legend>
           <div className="space-y-24">
             <div>
-              <label className="flex items-center gap-12">
-                <input
-                  type="radio"
-                  name="publicationStatus"
-                  value="planned"
-                  {...publicationStatusField.getInputProps({
-                    type: "radio",
-                    onChange: () => publicationLinkField.setValue(""),
-                  })}
-                  className="ds-radio"
-                />
-                <span>Die Veröffentlichung ist geplant am...</span>
-              </label>
+              <RadioGroup
+                scope={form.scope("publicationStatus")}
+                options={[
+                  {
+                    label: "Die Veröffentlichung ist geplant am...",
+                    value: "planned",
+                  },
+                  {
+                    label: "Der Referentenentwurf ist bereits veröffentlicht",
+                    value: "published",
+                  },
+                ]}
+                warningInsteadOfError
+              />
+
               {publicationStatusField.value() === "planned" && (
                 <div className="mt-16 ml-28">
                   <Input
@@ -93,22 +86,7 @@ export function DocumentationTitle() {
                   </Input>
                 </div>
               )}
-            </div>
 
-            <div>
-              <label className="flex items-center gap-12">
-                <input
-                  type="radio"
-                  name="publicationStatus"
-                  value="published"
-                  {...publicationStatusField.getInputProps({
-                    type: "radio",
-                    onChange: () => publicationDateField.setValue(""),
-                  })}
-                  className="ds-radio"
-                />
-                <span>Der Referentenentwurf ist bereits veröffentlicht</span>
-              </label>
               {publicationStatusField.value() === "published" && (
                 <div className="mt-16 ml-28">
                   <Input scope={form.scope("publicationLink")}>
@@ -137,6 +115,7 @@ export default function Route() {
 
 // Astro page export
 import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
+import RadioGroup from "~/components/RadioGroup.tsx";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
 export function TitelPage({

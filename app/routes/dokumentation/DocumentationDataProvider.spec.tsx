@@ -57,7 +57,13 @@ describe("DocumentationDataProvider", () => {
     it("returns data from localStorage on mount", async () => {
       const storedData: DocumentationData<V2> = {
         ...baseData,
-        policyTitle: { title: "Stored Title" },
+        policyTitle: {
+          title: "Stored Title",
+          organization: "",
+          publicationStatus: "",
+          publicationDate: "",
+          publicationLink: "",
+        },
       };
       mockRead.mockReturnValue(storedData);
 
@@ -98,7 +104,13 @@ describe("DocumentationDataProvider", () => {
     it("writes single field data to localStorage", async () => {
       const data: DocumentationData<V2> = {
         ...baseData,
-        policyTitle: { title: "My Policy" },
+        policyTitle: {
+          title: "My Policy",
+          organization: "",
+          publicationStatus: "",
+          publicationDate: "",
+          publicationLink: "",
+        },
       };
 
       const { result } = renderHook(() => useDocumentationDataService(), {
@@ -114,7 +126,13 @@ describe("DocumentationDataProvider", () => {
     it("writes complete data object to localStorage", async () => {
       const data: DocumentationData<V2> = {
         ...baseData,
-        policyTitle: { title: "My Policy" },
+        policyTitle: {
+          title: "My Policy",
+          organization: "",
+          publicationStatus: "",
+          publicationDate: "",
+          publicationLink: "",
+        },
         participation: { formats: "Workshops", results: "Results" },
         principles: [{ id: "p1", answer: "Nein", reasoning: "", aspects: [] }],
       };
@@ -139,18 +157,63 @@ describe("DocumentationDataProvider", () => {
       });
       await act(async () => {});
 
-      act(() => result.current.setPolicyTitle({ title: "New Title" }));
+      const policyTitle = {
+        title: "New Title",
+        organization: "",
+        publicationLink: "",
+        publicationDate: "",
+        publicationStatus: "" as "",
+      };
+      act(() => result.current.setPolicyTitle(policyTitle));
 
       expect(mockWrite).toHaveBeenCalledWith(
-        { ...baseData, policyTitle: { title: "New Title" } },
+        { ...baseData, policyTitle },
         STORAGE_KEY,
       );
     });
 
+    it.each([
+      ["published", { publicationDate: "", publicationLink: "link" }],
+      ["planned", { publicationDate: "date", publicationLink: "" }],
+    ] as const)(
+      "erases dependent values for %s status",
+      (publicationStatus, expected) => {
+        const { result } = renderHook(() => useDocumentationDataService(), {
+          wrapper,
+        });
+
+        const base = {
+          title: "New Title",
+          organization: "organization",
+          publicationDate: "date",
+          publicationLink: "link",
+        };
+
+        act(() =>
+          result.current.setPolicyTitle({ ...base, publicationStatus }),
+        );
+
+        expect(mockWrite).toHaveBeenCalledWith(
+          {
+            ...baseData,
+            policyTitle: { ...base, publicationStatus, ...expected },
+          },
+          expect.any(String),
+        );
+      },
+    );
+
     it("updates policyTitle while preserving existing data", async () => {
+      const policyTitle = {
+        title: "Old Title",
+        organization: "",
+        publicationStatus: "" as "",
+        publicationDate: "",
+        publicationLink: "",
+      };
       const existingData: DocumentationData<V2> = {
         ...baseData,
-        policyTitle: { title: "Old Title" },
+        policyTitle,
         participation: { formats: "Online", results: "Some results" },
       };
       mockRead.mockReturnValue(existingData);
@@ -160,10 +223,18 @@ describe("DocumentationDataProvider", () => {
       });
       await act(async () => {});
 
-      act(() => result.current.setPolicyTitle({ title: "Updated Title" }));
+      act(() =>
+        result.current.setPolicyTitle({
+          ...policyTitle,
+          title: "Updated Title",
+        }),
+      );
 
       expect(mockWrite).toHaveBeenCalledWith(
-        { ...existingData, policyTitle: { title: "Updated Title" } },
+        {
+          ...existingData,
+          policyTitle: { ...policyTitle, title: "Updated Title" },
+        },
         STORAGE_KEY,
       );
     });
@@ -190,7 +261,13 @@ describe("DocumentationDataProvider", () => {
     it("updates participation while preserving existing data", async () => {
       const existingData: DocumentationData<V2> = {
         ...baseData,
-        policyTitle: { title: "My Policy" },
+        policyTitle: {
+          title: "My Policy",
+          organization: "",
+          publicationStatus: "",
+          publicationDate: "",
+          publicationLink: "",
+        },
         participation: { formats: "Old format", results: "Old results" },
       };
       mockRead.mockReturnValue(existingData);

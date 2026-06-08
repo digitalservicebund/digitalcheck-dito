@@ -182,6 +182,11 @@ export function DocumentationDataProvider({
   const setPolicyTitle = useCallback(
     (policyTitle?: PolicyTitle) => {
       if (!policyTitle) return;
+      if (policyTitle.publicationStatus === "published") {
+        policyTitle.publicationDate = "";
+      } else if (policyTitle.publicationStatus === "planned") {
+        policyTitle.publicationLink = "";
+      }
 
       createOrUpdateDocumentationData({
         ...documentationData,
