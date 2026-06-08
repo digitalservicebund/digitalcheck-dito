@@ -66,6 +66,17 @@ export const bundeslaender = {
   navLabel: null,
 } as const;
 
+export const bundeslaender_hessen = {
+  key: "bundeslaender_hessen",
+  path: "/bundeslaender/hessen",
+  title: "Hessen",
+  parent: bundeslaender,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const dasIstNeu = {
   key: "dasIstNeu",
   path: "/das-ist-neu",
@@ -446,6 +457,7 @@ export const allRoutes = [
   beispiele_prinzipien,
   beispiele_visualisierungen,
   bundeslaender,
+  bundeslaender_hessen,
   dasIstNeu,
   datenschutz,
   dokumentation,
