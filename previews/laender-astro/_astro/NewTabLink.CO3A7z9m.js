@@ -1,0 +1,1 @@
+import{j as r,c as s}from"./tailwindMerge.gN6BWK24.js";import{O as a}from"./RichText.BhR-Aseg.js";function m({children:n,className:t,...e}){return r.jsxs("a",{href:e.href,...e,target:"_blank",rel:"noreferrer",className:s("text-link",t),children:[n,r.jsx(a,{})]})}export{m as N};
