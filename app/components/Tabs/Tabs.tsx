@@ -23,8 +23,7 @@ type SetSearchParams = (
 ) => void;
 
 function useSearchParams(): [URLSearchParams, SetSearchParams] {
-  const getSearch = () =>
-    typeof globalThis.window === "undefined" ? "" : globalThis.location.search;
+  const getSearch = () => globalThis.location?.search ?? "";
   const [search, setSearch] = useState<string>(getSearch);
 
   useEffect(() => {
