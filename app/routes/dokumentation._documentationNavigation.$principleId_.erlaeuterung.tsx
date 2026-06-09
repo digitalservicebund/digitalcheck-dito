@@ -1,5 +1,5 @@
-import { methoden_fuenfPrinzipien } from "@/config/routes.ts";
-import { Link, redirect, useOutletContext, useParams } from "react-router";
+import { dokumentation, methoden_fuenfPrinzipien } from "@/config/routes.ts";
+import { Link, Navigate, useOutletContext, useParams } from "react-router";
 import AspectPills from "~/components/AspectPills";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
@@ -173,8 +173,7 @@ export default function DocumentationPrincipleErlaeuterung() {
 
   // If no answer saved yet, redirect to answer page
   if (!principleData?.answer) {
-    redirect(previousUrl);
-    return null;
+    return <Navigate to={dokumentation.path + "/" + principleId} replace />;
   }
 
   const changeAnswerTitle = isPositive
