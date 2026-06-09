@@ -4,17 +4,19 @@ import { usePostHog } from "posthog-js/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ActionFunctionArgs } from "react-router";
 import { useFetcher } from "react-router";
+import { twJoin } from "tailwind-merge";
 import Alert from "~/components/Alert.tsx";
 import Button from "~/components/Button.tsx";
 import Container from "~/components/Container.tsx";
 import Hero from "~/components/Hero.tsx";
 import MetaTitle from "~/components/Meta.tsx";
+import { dedent } from "~/utils/dedentMultilineStrings.ts";
 
 const testFiles = [
   { name: "PNG-Bilddatei", path: "/images/beispielflussdiagram.png" },
   {
     name: "JPG-Bilddatei",
-    path: "/public/images/ablaufdiagramm-v3-deutsch.jpg",
+    path: "/images/ablaufdiagramm-v3-deutsch.jpg",
   },
   {
     name: "Word-Datei",
@@ -115,11 +117,13 @@ function UploadDropzoneCard({
       <p className="ds-label-01-bold block">{file.name} hochladen</p>
       <label
         htmlFor={file.path}
-        className={`rounded-8 block cursor-pointer border-2 border-dashed p-24 text-center transition-colors ${
+        className={twJoin(
+          "rounded-8 block cursor-pointer border-2 border-dashed p-24 text-center transition-colors",
           isDragOver
             ? "border-blue-700 bg-blue-100"
-            : "border-gray-500 bg-gray-50 hover:bg-gray-100"
-        }`}
+            : "border-gray-500 bg-gray-50 hover:bg-gray-100",
+          cannotUpload && "cursor-not-allowed bg-gray-100",
+        )}
         onDragOver={(event) => {
           event.preventDefault();
           setIsDragOver(true);
@@ -164,14 +168,14 @@ function UploadDropzoneCard({
                 checked
                   ? {
                       contentMatch: false,
-                      error: "Kann nicht hochgeladen werden",
+                      error: "Konnte nicht hochgeladen werden",
                     }
                   : undefined,
               );
               setCannotUpload((value) => !value);
             }}
           />
-          <span>Die Datei kann nicht hochgeladen werden.</span>
+          <span>Die Datei konnte nicht hochgeladen werden.</span>
         </label>
       )}
       {fileResult && (
@@ -198,6 +202,8 @@ export default function UploadTest() {
   const posthog = usePostHog();
 
   const [organization, setOrganization] = useState("");
+  const [system, setSystem] = useState("");
+  const [comment, setComment] = useState("");
 
   const handleComplete = useCallback(
     (fileName: string, result?: UploadResult) => {
@@ -212,9 +218,10 @@ export default function UploadTest() {
   const submitFeedback = useCallback(() => {
     const payload = {
       organization,
+      system,
+      comment,
       results,
     };
-    console.log(payload);
 
     const captureResult = posthog?.capture(
       "upload_test_feedback_submitted",
@@ -229,8 +236,15 @@ export default function UploadTest() {
       <main>
         <Hero
           title={"Upload-Test"}
-          subtitle="Bitte geben Sie uns Feedback, ob Sie Anhänge (z. B. Visualisierungen) über Ihren Browser hochladen können.
-          Laden Sie in jedem Schritt die Datei herunter und anschließend direkt wieder hoch. Sie können die Datei per Drag-and-Drop ablegen; der Upload startet sofort."
+          subtitle={dedent`
+          Das Digitalcheck-Team testet aktuell, ob Anhänge wie Visualisierungen über den Browser hochgeladen werden können – über die Systeme verschiedener Ressorts.
+
+          **Gehen Sie so vor:**
+          1. Laden Sie die Datei herunter.
+          2. Laden Sie dieselbe Datei direkt wieder hoch.
+          3. Wiederholen Sie dies für jeden Dateityp.
+          
+          Vielen Dank für Ihre Unterstützung!`}
         />
         <Container className="mb-80 space-y-40">
           <div className="max-w-a11y space-y-8">
@@ -248,10 +262,19 @@ export default function UploadTest() {
               value={organization}
               onChange={(event) => setOrganization(event.currentTarget.value)}
             />
-            <p className="ds-body-02-reg text-gray-700">
-              Diese Angabe wird zusammen mit den Dateiergebnissen an das
-              Digitalcheck-Team übermittelt.
-            </p>
+          </div>
+          <div className="max-w-a11y space-y-8">
+            <label htmlFor="sender-system" className="ds-label-01-reg block">
+              System (z. B. SINA)
+            </label>
+            <input
+              id="sender-system"
+              name="system"
+              type="text"
+              className="ds-input"
+              value={system}
+              onChange={(event) => setSystem(event.currentTarget.value)}
+            />
           </div>
           {testFiles.map((file) => (
             <section key={file.path} className="space-y-24">
@@ -266,8 +289,18 @@ export default function UploadTest() {
             </section>
           ))}
 
+          <label className="ds-label-01-reg block">
+            <span>Weitere Kommentare (optional)</span>
+            <textarea
+              className={"ds-textarea max-w-a11y"}
+              rows={6}
+              value={comment}
+              onChange={(event) => setComment(event.currentTarget.value)}
+            />
+          </label>
+
           <Button type={"button"} onClick={submitFeedback}>
-            Ergebnis übermitteln
+            Ergebnis absenden
           </Button>
           {captureResult === "failure" && (
             <Alert
