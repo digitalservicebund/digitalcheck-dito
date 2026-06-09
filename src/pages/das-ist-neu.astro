@@ -11,15 +11,6 @@ export const frontmatter = {
 };
 
 const TimelineItem = Timeline.Item;
-
-const historyItems = news.items.map((item, index) => ({
-  ...item,
-  hasBullet: true,
-  key: index,
-  badge: {
-    children: item.badge.text,
-  },
-}));
 ---
 
 <Layout title={frontmatter.title}>
@@ -43,9 +34,9 @@ const historyItems = news.items.map((item, index) => ({
     </Hero>
     <Timeline className="my-80">
       {
-        historyItems.map(({ key, ...item }) => (
-          <TimelineItem bullet key={key}>
-            <TimelineItemContent {...item} />
+        news.items.map((item) => (
+          <TimelineItem bullet>
+            <TimelineItemContent {...item} badge={{ children: item.badge.text }} />
           </TimelineItem>
         ))
       }
