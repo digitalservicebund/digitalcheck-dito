@@ -17,8 +17,6 @@ export async function getStaticPaths() {
   const listResult = await fetchStrapiData<PrinzipListQueryReturnType>(
     `query PrinzipList { prinzips(sort: "order") { Name URLBezeichnung order } }`,
   );
-  if ("error" in listResult)
-    throw new Error(`Failed to fetch Strapi data: ${listResult.error}`);
 
   return Promise.all(
     listResult.prinzips.map(async (p: PrinzipListItem) => {
@@ -48,8 +46,6 @@ export async function getStaticPaths() {
         }`,
         { URLBezeichnung: p.URLBezeichnung },
       );
-      if ("error" in detail)
-        throw new Error(`Failed to fetch Strapi data: ${detail.error}`);
       const prinzip = detail.prinzips[0];
       return {
         params: { prinzip: p.URLBezeichnung },

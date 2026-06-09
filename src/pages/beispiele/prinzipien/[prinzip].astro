@@ -48,9 +48,6 @@ query GetAllPrinzipsWithBeispiele {
   const result = await fetchStrapiData<{
     prinzips: PrinzipWithBeispielvorhaben[];
   }>(query);
-  if ("error" in result)
-    throw new Error(`Failed to fetch Strapi data: ${result.error}`);
-
   const prinzips = result.prinzips.toSorted((a, b) => a.order - b.order);
 
   return prinzips.map((prinzip) => ({

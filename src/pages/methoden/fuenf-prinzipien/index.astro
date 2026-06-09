@@ -33,8 +33,6 @@ export const frontmatter = {
 const result = await fetchStrapiData<{
   prinzips: PrinzipWithAspekteAndExample[];
 }>(GET_PRINZIPS_WITH_EXAMPLES_QUERY);
-if ("error" in result)
-  throw new Error(`Failed to fetch Strapi data: ${result.error}`);
 const prinzips = result.prinzips;
 ---
 

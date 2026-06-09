@@ -161,14 +161,10 @@ type GraphQLResponse<DataType> = {
   }[];
 };
 
-type errorResponse = {
-  error: string;
-};
-
 export async function fetchStrapiData<DataType>(
   query: string,
   variables?: object,
-): Promise<DataType | errorResponse> {
+): Promise<DataType> {
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -185,18 +181,18 @@ export async function fetchStrapiData<DataType>(
       response.statusText,
       errorDetails,
     );
-    return {
-      error: `Failed to fetch: ${response.status} ${response.statusText}`,
-    };
+    throw new Error(
+      `Failed to fetch Strapi data: ${response.status} ${response.statusText}`,
+    );
   }
 
   const responseData = (await response.json()) as GraphQLResponse<DataType>;
 
   if (responseData.errors) {
     console.error("GraphQL errors:", responseData.errors);
-    return {
-      error: responseData.errors[0].message,
-    };
+    throw new Error(
+      `Failed to fetch Strapi data: ${responseData.errors[0].message}`,
+    );
   }
   return responseData.data;
 }

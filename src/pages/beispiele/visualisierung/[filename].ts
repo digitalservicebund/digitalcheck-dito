@@ -19,9 +19,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     visualisierungen: Visualisierung[];
   }>(GET_VISUALISATIONS_QUERY, { status: "PUBLISHED" });
 
-  if ("error" in result)
-    throw new Error(`Failed to fetch Strapi data: ${result.error}`);
-
   return result.visualisierungen.map((v) => ({
     params: { filename: getImageFilename(v) },
     props: { url: v.Bild.url },
