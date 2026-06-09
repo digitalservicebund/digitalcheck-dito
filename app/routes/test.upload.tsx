@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
+import { useState } from "react";
 import type { ActionFunctionArgs } from "react-router";
-import { Form, useActionData } from "react-router";
-import Button from "~/components/Button.tsx";
+import { useFetcher } from "react-router";
 import Container from "~/components/Container.tsx";
 import Hero from "~/components/Hero.tsx";
 import MetaTitle from "~/components/Meta.tsx";
@@ -91,12 +91,96 @@ ${filesMarkdown}
 const step2 = `
 ## 2. Schritt
 
-Laden Sie die eben heruntergeladenen Dateien hier wieder hoch, um den Upload zu testen:
+Laden Sie die eben heruntergeladenen Dateien hier wieder hoch, um den Upload zu testen. Sie können Dateien pro Feld per Drag-and-Drop ablegen. Der Upload startet sofort.
 `;
 
-export default function UploadTest() {
-  const actionData = useActionData<typeof action>();
+function UploadDropzoneCard({
+  file,
+}: Readonly<{ file: (typeof testFiles)[number] }>) {
+  const fetcher = useFetcher<typeof action>();
+  const [isDragOver, setIsDragOver] = useState(false);
+  const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
 
+  const submitFile = (uploadedFile: File | null) => {
+    if (!uploadedFile) {
+      return;
+    }
+
+    const formData = new FormData();
+    formData.set(file.path, uploadedFile);
+    setSelectedFileName(uploadedFile.name);
+    void fetcher.submit(formData, {
+      method: "post",
+      encType: "multipart/form-data",
+    });
+  };
+
+  const fileResult = fetcher.data?.[file.path];
+
+  return (
+    <div className="rounded-8 space-y-16 border border-gray-400 p-24">
+      <p className="ds-label-01-bold block">{file.name} hochladen</p>
+      <label
+        htmlFor={file.path}
+        className={`rounded-8 block cursor-pointer border-2 border-dashed p-24 text-center transition-colors ${
+          isDragOver
+            ? "border-blue-700 bg-blue-100"
+            : "border-gray-500 bg-gray-50 hover:bg-gray-100"
+        }`}
+        onDragOver={(event) => {
+          event.preventDefault();
+          setIsDragOver(true);
+        }}
+        onDragLeave={() => setIsDragOver(false)}
+        onDrop={(event) => {
+          event.preventDefault();
+          setIsDragOver(false);
+          submitFile(event.dataTransfer.files[0] ?? null);
+        }}
+      >
+        <input
+          type="file"
+          id={file.path}
+          name={file.path}
+          className="sr-only"
+          onChange={(event) =>
+            submitFile(event.currentTarget.files?.[0] ?? null)
+          }
+        />
+        <p className="ds-body-01-reg">
+          Datei hier ablegen oder klicken, um auszuwählen
+        </p>
+        {selectedFileName && (
+          <p className="ds-body-02-reg mt-8 text-gray-700">
+            Ausgewählt: {selectedFileName}
+          </p>
+        )}
+        {fetcher.state !== "idle" && (
+          <p className="ds-body-02-reg mt-8 text-gray-700">Upload läuft...</p>
+        )}
+      </label>
+      {fileResult && (
+        <div className="mt-8 space-y-4">
+          <p className="flex items-center gap-8">
+            {fileResult.sizeMatch
+              ? "✅ Größe stimmt überein"
+              : "❌ Größe stimmt nicht überein"}
+          </p>
+          <p className="flex items-center gap-8">
+            {fileResult.contentMatch
+              ? "✅ Inhalt stimmt überein"
+              : "❌ Inhalt stimmt nicht überein"}
+          </p>
+          {fileResult.error && (
+            <p className="text-sm text-red-600">{fileResult.error}</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function UploadTest() {
   return (
     <>
       <MetaTitle prefix="Upload-Test" />
@@ -112,52 +196,11 @@ export default function UploadTest() {
 
           <section className="space-y-24">
             <RichText markdown={step2} />
-
-            <Form
-              method="post"
-              encType="multipart/form-data"
-              className="space-y-32"
-            >
-              <div className="grid grid-cols-1 gap-24 md:grid-cols-2">
-                {testFiles.map((file) => (
-                  <div
-                    key={file.path}
-                    className="rounded-8 space-y-16 border border-gray-400 p-24"
-                  >
-                    <label
-                      htmlFor={file.path}
-                      className="ds-label-01-bold block"
-                    >
-                      {file.name} hochladen
-                    </label>
-                    <input
-                      type="file"
-                      id={file.path}
-                      name={file.path}
-                      className="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none"
-                    />
-                    {actionData?.[file.path] && (
-                      <div className="mt-8 space-y-4">
-                        <p className="flex items-center gap-8">
-                          {actionData[file.path].sizeMatch ? "✅" : "❌"} Größe
-                          stimmt überein
-                        </p>
-                        <p className="flex items-center gap-8">
-                          {actionData[file.path].contentMatch ? "✅" : "❌"}{" "}
-                          Inhalt stimmt überein
-                        </p>
-                        {actionData[file.path].error && (
-                          <p className="text-sm text-red-600">
-                            {actionData[file.path].error}
-                          </p>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <Button type="submit">Dateien prüfen</Button>
-            </Form>
+            <div className="grid grid-cols-1 gap-24 md:grid-cols-2">
+              {testFiles.map((file) => (
+                <UploadDropzoneCard key={file.path} file={file} />
+              ))}
+            </div>
           </section>
         </Container>
       </main>
