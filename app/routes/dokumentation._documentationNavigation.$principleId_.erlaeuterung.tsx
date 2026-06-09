@@ -1,5 +1,5 @@
-import { dokumentation, methoden_fuenfPrinzipien } from "@/config/routes.ts";
-import { Link, Navigate, useOutletContext, useParams } from "react-router";
+import { methoden_fuenfPrinzipien } from "@/config/routes.ts";
+import { Link, redirect, useOutletContext, useParams } from "react-router";
 import AspectPills from "~/components/AspectPills";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
@@ -15,7 +15,6 @@ import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 import {
-  DocumentationData,
   Principle,
   principleAnswerSchemaV2,
 } from "./dokumentation/documentationDataSchema";
@@ -163,9 +162,9 @@ export default function DocumentationPrincipleErlaeuterung() {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw new Response("No Prinzip for slug found", { status: 404 });
 
-  const principleData = (
-    documentationData as DocumentationData
-  )?.principles?.find((p) => p.id === prinzip.documentId);
+  const principleData = documentationData?.principles?.find(
+    (p) => p.id === prinzip.documentId,
+  );
 
   const answer = principleData?.answer ?? "";
   const isPositive = answer === radioOptions[0];
@@ -173,7 +172,8 @@ export default function DocumentationPrincipleErlaeuterung() {
 
   // If no answer saved yet, redirect to answer page
   if (!principleData?.answer) {
-    return <Navigate to={dokumentation.path + "/" + principleId} replace />;
+    redirect(previousUrl);
+    return null;
   }
 
   const changeAnswerTitle = isPositive

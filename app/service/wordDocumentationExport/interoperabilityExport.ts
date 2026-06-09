@@ -1,5 +1,5 @@
 import { FileChild, IPatch, Paragraph, PatchType } from "docx";
-import {
+import type {
   DocumentationData,
   InteroperabilityAssessmentData,
   PolicyTitle,

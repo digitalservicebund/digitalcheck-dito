@@ -162,7 +162,7 @@ describe("DocumentationDataProvider", () => {
         organization: "",
         publicationLink: "",
         publicationDate: "",
-        publicationStatus: "" as "",
+        publicationStatus: "" as const,
       };
       act(() => result.current.setPolicyTitle(policyTitle));
 
@@ -207,7 +207,7 @@ describe("DocumentationDataProvider", () => {
       const policyTitle = {
         title: "Old Title",
         organization: "",
-        publicationStatus: "" as "",
+        publicationStatus: "" as const,
         publicationDate: "",
         publicationLink: "",
       };

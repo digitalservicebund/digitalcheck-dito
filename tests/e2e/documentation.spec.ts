@@ -482,7 +482,7 @@ test.describe("with partial documentation started", () => {
   });
 });
 
-test.describe("interoperability", async () => {
+test.describe("interoperability", () => {
   test("the link for an already-published path is displayed in the summary and export", async ({
     page,
   }, testInfo) => {

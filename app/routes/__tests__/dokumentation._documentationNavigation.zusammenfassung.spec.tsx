@@ -20,7 +20,7 @@ import type {
   Principle,
   V2,
 } from "~/routes/dokumentation/documentationDataSchema";
-import { RouteGroup } from "~/routes/dokumentation/DocumentationNavigationContext.tsx";
+import type { RouteGroup } from "~/routes/dokumentation/DocumentationNavigationContext.tsx";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import type { AbsatzWithParagraph } from "~/utils/strapiData.types";
 import { DocumentationSummary } from "../dokumentation._documentationNavigation.zusammenfassung";

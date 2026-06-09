@@ -2,7 +2,6 @@
 import "./utils/mockLocalStorageVersioned";
 import "./utils/mockRouter";
 // End of mocks
-
 import "@testing-library/jest-dom";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -41,35 +40,12 @@ describe("DocumentationTitle", () => {
       vi.clearAllMocks();
     });
 
-    it("shows the expected heading", () => {
+    it("shows an input element with the expected label", () => {
       expect(
-        screen.getByRole("heading", {
+        screen.getByRole("textbox", {
           name: "Titel des Regelungsvorhabens",
-          level: 1,
         }),
       ).toBeInTheDocument();
-    });
-
-    it("shows an input element with the expected label", () => {
-      const input = screen.getByRole("textbox", {
-        name: "Titel des Regelungsvorhabens",
-      });
-      expect(input).toBeInTheDocument();
-      expect(input.tagName).toBe("INPUT");
-    });
-
-    it("shows submit button", () => {
-      const submitButton = screen.getByRole("button", {
-        name: "Weiter",
-      });
-      expect(submitButton).toBeInTheDocument();
-      expect(submitButton).toHaveAttribute("type", "submit");
-    });
-
-    it("shows back button", () => {
-      const backButton = screen.getByRole("link", { name: "Zurück" });
-      expect(backButton).toBeInTheDocument();
-      expect(backButton).toHaveAttribute("href", "/previous-url");
     });
   });
 

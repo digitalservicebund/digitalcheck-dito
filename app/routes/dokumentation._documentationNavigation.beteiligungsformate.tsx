@@ -17,8 +17,7 @@ import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigat
 const { participation } = digitalDocumentation;
 
 export function DocumentationParticipation() {
-  const { currentUrl, nextUrl, previousUrl, prinzips } =
-    useDocumentationNavigation();
+  const { currentUrl, nextUrl, previousUrl } = useDocumentationNavigation();
   const { setParticipation, documentationData } = useDocumentationDataService();
 
   const form = useSyncedForm({

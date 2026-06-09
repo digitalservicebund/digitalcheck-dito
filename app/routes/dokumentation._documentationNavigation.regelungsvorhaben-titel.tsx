@@ -16,9 +16,8 @@ import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigat
 
 const { info } = digitalDocumentation;
 
-export function DocumentationTitle() {
-  const { currentUrl, nextUrl, previousUrl, prinzips } =
-    useDocumentationNavigation();
+export default function DocumentationTitle() {
+  const { currentUrl, nextUrl, previousUrl } = useDocumentationNavigation();
   const { documentationData, setPolicyTitle } = useDocumentationDataService();
 
   const form = useSyncedForm({
@@ -106,10 +105,6 @@ export function DocumentationTitle() {
       </div>
     </>
   );
-}
-
-export default function Route() {
-  return <DocumentationTitle />;
 }
 
 // Astro page export

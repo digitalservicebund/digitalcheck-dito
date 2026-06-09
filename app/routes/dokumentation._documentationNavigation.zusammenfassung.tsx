@@ -17,12 +17,12 @@ import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import {
+import type {
   BindingRequirementsData,
   DocumentationData,
-  type Participation,
-  type PolicyTitle,
-  type Principle,
+  Participation,
+  PolicyTitle,
+  Principle,
 } from "~/routes/dokumentation/documentationDataSchema";
 import type {
   PrinzipWithAspekte,
@@ -301,6 +301,17 @@ function createInteroperabilityInfoBoxItems(
   ].filter(Boolean) as InfoBoxProps[];
 }
 
+/**
+ * Checks if the given object contains at least one truthy value.
+ *
+ * @param item - An object with string keys and unknown values to check
+ * @returns true if at least one value in the object is truthy, false otherwise
+ */
+function hasTruthyValue(item?: Record<string, unknown>) {
+  if (!item) return false;
+  return Object.values(item).some(Boolean);
+}
+
 export function DocumentationSummary() {
   const { routes, previousUrl, nextUrl, prinzips } =
     useDocumentationNavigation();
@@ -310,9 +321,11 @@ export function DocumentationSummary() {
     createInfoBoxItem({
       heading: "Informationen zum Regelungsvorhaben",
       route: dokumentation_regelungsvorhabenTitel,
-      content: documentationData.policyTitle ? (
-        <PolicyTitleContent policyTitle={documentationData.policyTitle} />
-      ) : null,
+      content:
+        documentationData.policyTitle &&
+        hasTruthyValue(documentationData.policyTitle) ? (
+          <PolicyTitleContent policyTitle={documentationData.policyTitle} />
+        ) : null,
     }),
     createInfoBoxItem({
       route: dokumentation_beteiligungsformate,
@@ -350,9 +363,7 @@ export function DocumentationSummary() {
         },
       });
     }),
-    ...createInteroperabilityInfoBoxItems(
-      documentationData as DocumentationData<"2">,
-    ),
+    ...createInteroperabilityInfoBoxItems(documentationData),
   ];
 
   return (
