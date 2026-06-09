@@ -14,49 +14,48 @@ export const frontmatter = {
   sitemap: false,
 };
 
-// Like GET_PRINZIPS_WITH_EXAMPLES_QUERY, but additionally fetches the Aspekt
-// Nummer and the Anwendung subtree which only this page renders. Kept here
-// (rather than shared) so the documentation pages don't ship Anwendung data to
-// the client during hydration.
-const PRINZIPS_ASPEKTE_QUERY = `
-query Prinzips {
-  prinzips(sort: "order") {
-    documentId
-    Name
-    Beschreibung
-    order
-    Nummer
-    URLBezeichnung
-    Beispiel {
-      ${prinzipBeispielFields}
-    }
-    Aspekte {
+export async function getStaticPaths() {
+  // Like GET_PRINZIPS_WITH_EXAMPLES_QUERY, but additionally fetches the Aspekt
+  // Nummer and the Anwendung subtree which only this page renders. Kept here
+  // (rather than shared) so the documentation pages don't ship Anwendung data to
+  // the client during hydration.
+  const PRINZIPS_ASPEKTE_QUERY = `
+  query Prinzips {
+    prinzips(sort: "order") {
+      documentId
+      Name
+      Beschreibung
+      order
       Nummer
-      ${aspektCommonFields}
-      Anwendung {
-        Titel
-        Erklaerung
-        Formulierungsbeispiel
-        Beispiel {
-          documentId
-          Nummer
-          Text
-          Auszug
-          Paragraph {
+      URLBezeichnung
+      Beispiel {
+        ${prinzipBeispielFields}
+      }
+      Aspekte {
+        Nummer
+        ${aspektCommonFields}
+        Anwendung {
+          Titel
+          Erklaerung
+          Formulierungsbeispiel
+          Beispiel {
+            documentId
             Nummer
-            Gesetz
-            Titel
+            Text
+            Auszug
+            Paragraph {
+              Nummer
+              Gesetz
+              Titel
+            }
           }
         }
-      }
-      Beispiel {
-        ${aspektBeispielFields}
+        Beispiel {
+          ${aspektBeispielFields}
+        }
       }
     }
-  }
-}`;
-
-export async function getStaticPaths() {
+  }`;
   const { prinzips } = await fetchStrapiData<{
     prinzips: PrinzipWithAspekteAndExample[];
   }>(PRINZIPS_ASPEKTE_QUERY);
