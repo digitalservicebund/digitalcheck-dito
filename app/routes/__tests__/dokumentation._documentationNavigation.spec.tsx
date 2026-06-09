@@ -88,6 +88,9 @@ const validationScenarios: ValidationScenario[] = [
       policyTitle: {
         title: "Valid Title",
         publicationStatus: "published",
+        organization: "",
+        publicationDate: "",
+        publicationLink: "",
       },
       participation: {
         formats: "Valid Formats",
@@ -140,6 +143,9 @@ const validationScenarios: ValidationScenario[] = [
       policyTitle: {
         title: "",
         publicationStatus: "planned",
+        organization: "",
+        publicationDate: "",
+        publicationLink: "",
       },
       participation: {
         formats: "Valid Formats",
@@ -355,6 +361,10 @@ describe("navigation on pages of documentation", () => {
           version: DATA_SCHEMA_VERSION_V2,
           policyTitle: {
             title: "Valid Title",
+            organization: "",
+            publicationStatus: "",
+            publicationDate: "",
+            publicationLink: "",
           },
           participation: {
             formats: "Valid Formats",
@@ -401,6 +411,9 @@ describe("navigation on pages of documentation", () => {
           policyTitle: {
             title: "",
             publicationStatus: "published",
+            organization: "",
+            publicationDate: "",
+            publicationLink: "",
           },
           participation: {
             formats: "Valid Formats",
