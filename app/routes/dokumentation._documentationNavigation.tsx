@@ -6,6 +6,7 @@ import {
 } from "@/config/routes";
 import type { ReactNode } from "react";
 import { useMemo } from "react";
+import { twJoin } from "tailwind-merge";
 import HelpSidepanel from "~/components/HelpSidepanel";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
@@ -175,11 +176,10 @@ export function LayoutWithDocumentationNavigation({
     <DocumentationNavigationContext.Provider value={navigationContextValue}>
       <HelpPanelProvider currentPath={currentUrl}>
         <div
-          className={
-            showHelpPanel
-              ? "parent-bg-blue breakout-grid-form-steps grow bg-blue-100"
-              : "parent-bg-blue breakout-grid-form-steps grow bg-blue-100 [--content-max-width:750px] [--help-width:0]"
-          }
+          className={twJoin(
+            "breakout-grid-form-steps grow bg-blue-100",
+            !showHelpPanel && "[--content-max-width:750px] [--help-width:0]",
+          )}
         >
           <Nav
             className="sticky top-0 hidden self-start py-80 lg:block"

@@ -1,10 +1,10 @@
 ---
+import Posthog from "@/components/global/Posthog.astro";
+import ProgressBar from "@/components/global/ProgressBar.astro";
+import "@/styles/globals.css";
 import Footer from "~/layout/Footer";
 import PageHeader from "~/layout/PageHeader";
 import { siteMeta } from "~/resources/content/shared/meta";
-import "@/styles/globals.css";
-import Posthog from "@/components/global/Posthog.astro";
-import ProgressBar from "@/components/global/ProgressBar.astro";
 
 interface Props {
   title?: string;
@@ -28,7 +28,6 @@ const pageTitle = title
 const canonicalUrl = Astro.url.href.replace(/\/$/, "");
 const ogImage = `${Astro.url.origin}/images/og-image.png`;
 
-const plausibleEnabled = import.meta.env.PUBLIC_TRACKING_ENABLED === "true";
 const posthogEnabled = !!import.meta.env.PUBLIC_POSTHOG_KEY;
 
 const jsonLdMetadata = {
@@ -75,27 +74,11 @@ const jsonLdMetadata = {
       type="application/ld+json"
       set:html={JSON.stringify(jsonLdMetadata)}
     />
-
-    {
-      plausibleEnabled && (
-        <script
-          is:inline
-          defer
-          data-domain="digitalcheck.bund.de"
-          src="https://plausible.io/js/script.tagged-events.outbound-links.js"
-        />
-      )
-    }
-    <!-- <ClientRouter /> -->
   </head>
   <body class="flex min-h-screen flex-col">
     <PageHeader client:load currentPath={currentPath} />
     {showProgressBar && <ProgressBar />}
-    <div
-      class="grow [&:has(.parent-bg-blue)]:flex [&:has(.parent-bg-blue)]:flex-col [&:has(.parent-bg-blue)]:bg-blue-100"
-    >
-      <slot />
-    </div>
+    <slot />
     <Footer />
     {posthogEnabled && <Posthog />}
   </body>
