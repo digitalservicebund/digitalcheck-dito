@@ -9,10 +9,10 @@ const { questions } = preCheck;
 export default function VorpruefungNavigation({
   children,
   pathname,
-}: {
+}: Readonly<{
   children: ReactNode;
   pathname: string;
-}) {
+}>) {
   const { answers, firstUnansweredQuestionIndex } = usePreCheckData();
 
   return (
