@@ -1,7 +1,7 @@
 ---
 import { ROUTE_REGELUNGEN } from "@/config/additionalRoutes";
 import { beispiele_prinzipien } from "@/config/routes";
-import Layout from "@/layouts/BeispieleLayout.astro";
+import BeispieleLayout from "@/layouts/BeispieleLayout.astro";
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Heading from "~/components/Heading";
@@ -65,7 +65,7 @@ const tabs = prinzips.map((principle) => ({
 }));
 ---
 
-<Layout title={frontmatter.title}>
+<BeispieleLayout title={frontmatter.title}>
   <main>
     <Hero
       title={examplesRegelungen.principles.hero.title}
@@ -124,4 +124,4 @@ const tabs = prinzips.map((principle) => ({
       }
     </ContentWrapper>
   </main>
-</Layout>
+</BeispieleLayout>

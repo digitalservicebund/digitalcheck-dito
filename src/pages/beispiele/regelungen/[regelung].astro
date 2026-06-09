@@ -1,5 +1,5 @@
 ---
-import Layout from "@/layouts/BeispieleLayout.astro";
+import BeispieleLayout from "@/layouts/BeispieleLayout.astro";
 import { Gesetz } from "~/routes/beispiele.regelungen.$regelung";
 import {
   fetchStrapiData,
@@ -69,8 +69,8 @@ query GetAllBeispielvorhaben {
 const { regelung: regelungData, principles } = Astro.props;
 ---
 
-<Layout title={frontmatter.title}>
+<BeispieleLayout title={frontmatter.title}>
   <main>
-    <Gesetz regelung={regelungData!} principles={principles} client:load />
+    <Gesetz regelung={regelungData} principles={principles} client:load />
   </main>
-</Layout>
+</BeispieleLayout>

@@ -1,5 +1,5 @@
 ---
-import Layout from "@/layouts/BeispieleLayout.astro";
+import BeispieleLayout from "@/layouts/BeispieleLayout.astro";
 import BeispieleIndexPage from "~/routes/beispiele._index";
 
 export const frontmatter = {
@@ -7,8 +7,8 @@ export const frontmatter = {
 };
 ---
 
-<Layout title={frontmatter.title}>
+<BeispieleLayout title={frontmatter.title}>
   <main>
     <BeispieleIndexPage client:load />
   </main>
-</Layout>
+</BeispieleLayout>

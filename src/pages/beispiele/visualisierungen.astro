@@ -1,5 +1,5 @@
 ---
-import Layout from "@/layouts/BeispieleLayout.astro";
+import BeispieleLayout from "@/layouts/BeispieleLayout.astro";
 import Container from "~/components/Container";
 import Hero from "~/components/Hero";
 import VisualisationItem from "~/components/VisualisationItem";
@@ -28,7 +28,7 @@ const visualisationsResult = await fetchStrapiData<{
 const visualisationsData = visualisationsResult.visualisierungen;
 ---
 
-<Layout title={frontmatter.title}>
+<BeispieleLayout title={frontmatter.title}>
   <main>
     <Hero
       title={examplesVisualisations.title}
@@ -42,4 +42,4 @@ const visualisationsData = visualisationsResult.visualisierungen;
       }
     </Container>
   </main>
-</Layout>
+</BeispieleLayout>
