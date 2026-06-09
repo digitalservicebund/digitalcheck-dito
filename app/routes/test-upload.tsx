@@ -7,6 +7,7 @@ import { useFetcher } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Alert from "~/components/Alert.tsx";
 import Button from "~/components/Button.tsx";
+import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container.tsx";
 import Hero from "~/components/Hero.tsx";
 import MetaTitle from "~/components/Meta.tsx";
@@ -30,7 +31,48 @@ const testFiles = [
   { name: "CSV-Datei", path: "/documents/upload-test.csv" },
 ];
 
-type UploadResult = { contentMatch: boolean; error?: string };
+type UploadResult = {
+  contentMatch?: boolean;
+  didUpload?: boolean;
+  error?: string;
+  userCannotUpload?: boolean;
+};
+
+const localStorageLabel = "upload-test-feedback";
+
+type SavedUploadTestState = {
+  organization: string;
+  system: string;
+  comment: string;
+  results: Record<string, UploadResult | undefined>;
+};
+
+function loadFromStorage(): SavedUploadTestState {
+  const defaults: SavedUploadTestState = {
+    organization: "",
+    system: "",
+    comment: "",
+    results: {},
+  };
+  if (globalThis.window === undefined) return defaults;
+  try {
+    const saved = localStorage.getItem(localStorageLabel);
+    if (!saved) return defaults;
+    const parsed = JSON.parse(saved) as Partial<SavedUploadTestState>;
+    return {
+      organization:
+        typeof parsed.organization === "string" ? parsed.organization : "",
+      system: typeof parsed.system === "string" ? parsed.system : "",
+      comment: typeof parsed.comment === "string" ? parsed.comment : "",
+      results:
+        parsed.results && typeof parsed.results === "object"
+          ? parsed.results
+          : {},
+    };
+  } catch {
+    return defaults;
+  }
+}
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
@@ -77,40 +119,38 @@ export async function action({ request }: ActionFunctionArgs) {
 
 function UploadDropzoneCard({
   file,
+  status,
   onComplete,
 }: Readonly<{
   file: (typeof testFiles)[number];
+  status: UploadResult;
   onComplete: (result: UploadResult | undefined) => void;
 }>) {
   const fetcher = useFetcher<typeof action>();
+  const fetchResult = fetcher.data?.[file.path];
   const [isDragOver, setIsDragOver] = useState(false);
   const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
-  const [cannotUpload, setCannotUpload] = useState(false);
-  const notifiedRef = useRef(false);
 
+  const notifiedRef = useRef<UploadResult | undefined>(undefined);
   const submitFile = (uploadedFile: File | null) => {
     if (!uploadedFile) {
       return;
     }
-
     const formData = new FormData();
     formData.set(file.path, uploadedFile);
     setSelectedFileName(uploadedFile.name);
-    notifiedRef.current = false; // Reset notification flag for new upload
     void fetcher.submit(formData, {
       method: "post",
       encType: "multipart/form-data",
     });
   };
 
-  const fileResult = fetcher.data?.[file.path];
-
   useEffect(() => {
-    if (fileResult && !notifiedRef.current) {
-      notifiedRef.current = true;
-      onComplete(fileResult);
+    if (fetchResult && notifiedRef.current !== fetchResult) {
+      notifiedRef.current = fetchResult;
+      onComplete({ ...fetchResult, didUpload: true });
     }
-  }, [fileResult, onComplete]);
+  }, [fetchResult, onComplete]);
 
   return (
     <div className="rounded-8 max-w-a11y space-y-16 border border-gray-400 p-24">
@@ -122,7 +162,7 @@ function UploadDropzoneCard({
           isDragOver
             ? "border-blue-700 bg-blue-100"
             : "border-gray-500 bg-gray-50 hover:bg-gray-100",
-          cannotUpload && "cursor-not-allowed bg-gray-100",
+          status.userCannotUpload && "cursor-not-allowed bg-gray-100",
         )}
         onDragOver={(event) => {
           event.preventDefault();
@@ -156,54 +196,56 @@ function UploadDropzoneCard({
           <p className="ds-body-02-reg mt-8 text-gray-700">Upload läuft...</p>
         )}
       </label>
-      {!fileResult && (
+
+      {status.didUpload ? (
+        <div className="mt-8 space-y-4">
+          <p className="flex items-center gap-8">
+            {status.contentMatch
+              ? "✅ Inhalt stimmt überein"
+              : "❌ Inhalt stimmt nicht überein"}
+          </p>
+          {status.error && (
+            <p className="text-sm text-red-600">{status.error}</p>
+          )}
+        </div>
+      ) : (
         <label className="ds-label-01-reg flex flex-row items-center gap-16">
           <input
             type="checkbox"
             className="ds-checkbox"
-            checked={cannotUpload}
+            checked={status.userCannotUpload}
             onChange={(event) => {
               const checked = event.target.checked;
               onComplete(
                 checked
                   ? {
-                      contentMatch: false,
                       error: "Konnte nicht hochgeladen werden",
+                      userCannotUpload: true,
                     }
                   : undefined,
               );
-              setCannotUpload((value) => !value);
             }}
           />
           <span>Die Datei konnte nicht hochgeladen werden.</span>
         </label>
-      )}
-      {fileResult && (
-        <div className="mt-8 space-y-4">
-          <p className="flex items-center gap-8">
-            {fileResult.contentMatch
-              ? "✅ Inhalt stimmt überein"
-              : "❌ Inhalt stimmt nicht überein"}
-          </p>
-          {fileResult.error && (
-            <p className="text-sm text-red-600">{fileResult.error}</p>
-          )}
-        </div>
       )}
     </div>
   );
 }
 
 export default function UploadTest() {
-  const [results, setResults] = useState(
-    {} as Record<string, UploadResult | undefined>,
-  );
+  const savedUploadTestState = loadFromStorage();
+  const [results, setResults] = useState<
+    Record<string, UploadResult | undefined>
+  >(savedUploadTestState.results);
   const [captureResult, setCaptureResult] = useState("");
   const posthog = usePostHog();
 
-  const [organization, setOrganization] = useState("");
-  const [system, setSystem] = useState("");
-  const [comment, setComment] = useState("");
+  const [organization, setOrganization] = useState(
+    savedUploadTestState.organization,
+  );
+  const [system, setSystem] = useState(savedUploadTestState.system);
+  const [comment, setComment] = useState(savedUploadTestState.comment);
 
   const handleComplete = useCallback(
     (fileName: string, result?: UploadResult) => {
@@ -214,6 +256,16 @@ export default function UploadTest() {
     },
     [],
   );
+
+  useEffect(() => {
+    const valuesToStore: SavedUploadTestState = {
+      organization,
+      system,
+      comment,
+      results,
+    };
+    localStorage.setItem(localStorageLabel, JSON.stringify(valuesToStore));
+  }, [comment, organization, results, system]);
 
   const submitFeedback = useCallback(() => {
     const payload = {
@@ -228,7 +280,16 @@ export default function UploadTest() {
       payload,
     );
     setCaptureResult(captureResult === undefined ? "failure" : "success");
-  }, [organization, posthog, results]);
+  }, [comment, organization, posthog, results, system]);
+
+  const clearSavedValues = useCallback(() => {
+    localStorage.removeItem(localStorageLabel);
+    setOrganization("");
+    setSystem("");
+    setComment("");
+    setResults({});
+    setCaptureResult("");
+  }, []);
 
   return (
     <>
@@ -284,6 +345,7 @@ export default function UploadTest() {
               </a>
               <UploadDropzoneCard
                 file={file}
+                status={results[file.name] ?? { didUpload: false }}
                 onComplete={(result) => handleComplete(file.name, result)}
               />
             </section>
@@ -299,9 +361,14 @@ export default function UploadTest() {
             />
           </label>
 
-          <Button type={"button"} onClick={submitFeedback}>
-            Ergebnis absenden
-          </Button>
+          <ButtonContainer>
+            <Button type={"button"} onClick={submitFeedback}>
+              Ergebnis absenden
+            </Button>
+            <Button type="button" look="link" onClick={clearSavedValues}>
+              Gespeicherte Werte entfernen
+            </Button>
+          </ButtonContainer>
           {captureResult === "failure" && (
             <Alert
               title="Ergebnis konnte nicht übermittelt werden"
