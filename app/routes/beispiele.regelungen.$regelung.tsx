@@ -5,7 +5,6 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
-import NewTabLink from "~/components/NewTabLink.tsx";
 import ParagraphList from "~/components/ParagraphList";
 import RegulationMetadata from "~/components/RegulationMetadata";
 import RichText from "~/components/RichText.tsx";
@@ -133,9 +132,7 @@ export function Gesetz({
           {regelung.NKRStellungnahmeLink && (
             <div>
               {examplesRegelungen.nkr.linkText}
-              <NewTabLink href={regelung.NKRStellungnahmeLink}>
-                NKR-Stellungnahme
-              </NewTabLink>
+              <a href={regelung.NKRStellungnahmeLink}>NKR-Stellungnahme</a>
             </div>
           )}
         </>

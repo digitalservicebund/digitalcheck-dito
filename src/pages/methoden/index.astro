@@ -8,8 +8,8 @@ import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import SupportBanner from "~/components/SupportBanner";
 import Timeline from "~/components/Timeline.tsx";
-import { supportBanner } from "~/resources/content/shared/support-banner";
 import { methods } from "~/resources/content/methoden";
+import { supportBanner } from "~/resources/content/shared/support-banner";
 
 export const frontmatter = {
   title: "Regelung erarbeiten",
@@ -130,9 +130,7 @@ export const frontmatter = {
                 <RichText markdown={item.content as string} />
               )}
               {item.link && "to" in item.link && (
-                <a href={item.link.to} class="text-link">
-                  {item.link.text}
-                </a>
+                <a href={item.link.to}>{item.link.text}</a>
               )}
             </NumberedList.Item>
           ))

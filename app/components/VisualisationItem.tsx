@@ -37,7 +37,6 @@ export default function VisualisationItem({
           <strong>Kontext: </strong>
           <a
             href={`${ROUTE_REGELUNGEN}/${visualisierung.Beispielvorhaben.URLBezeichnung}`}
-            className="text-link"
           >
             {visualisierung.Beispielvorhaben.Titel}
           </a>
@@ -50,7 +49,7 @@ export default function VisualisationItem({
             href={getImagePath(visualisierung)}
             target="_blank"
             rel="noreferrer"
-            className="relative block aspect-square cursor-zoom-in overflow-hidden border border-blue-500"
+            className="link-unstyled relative block aspect-square cursor-zoom-in overflow-hidden border border-blue-500"
           >
             <Image
               url={getImagePath(visualisierung)}

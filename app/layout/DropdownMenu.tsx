@@ -104,12 +104,15 @@ export default function DropdownMenu({
                 {isMobile ? header.contactTel.msgMobile : header.contactTel.msg}
                 <a
                   href={`tel:${header.contactTel.number.replaceAll(/\s/g, "")}`}
-                  className="ds-link-02-reg ml-8"
+                  className="link-unstyled ds-link-02-reg ml-8"
                 >
                   {header.contactTel.number}
                 </a>{" "}
                 {header.contactMail.msg}{" "}
-                <a className="ds-link-02-reg" href={header.contactMail.url}>
+                <a
+                  className="link-unstyled ds-link-02-reg"
+                  href={header.contactMail.url}
+                >
                   {header.contactMail.text}
                 </a>
               </div>

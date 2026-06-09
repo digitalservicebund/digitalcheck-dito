@@ -42,6 +42,7 @@ export default function RouteTabs({ activeKey, tabs }: RouteTabsProps) {
               href={tab.to}
               aria-current={isActive ? "page" : undefined}
               className={twJoin(
+                "link-unstyled",
                 desktopTabClassName,
                 isActive && selectedDesktopTabClassName,
               )}

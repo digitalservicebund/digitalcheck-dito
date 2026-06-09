@@ -148,7 +148,7 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
         href={item.href}
         onClick={closeOpenDropdowns}
         className={twMerge(
-          "flex items-center hover:bg-blue-100",
+          "link-unstyled flex items-center hover:bg-blue-100",
           isMobile
             ? "ds-label-01-bold w-full border-l-4 border-transparent p-16"
             : "ds-label-01-reg h-full border-b-4 border-transparent px-16 whitespace-nowrap",
@@ -186,7 +186,10 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
         <Kopfzeile className="relative" />
         <div className="relative flex h-[70px] justify-between pl-16 lg:container">
           {/* Logo and title */}
-          <a href={home.path} className="flex items-center space-x-8">
+          <a
+            href={home.path}
+            className="link-unstyled flex items-center space-x-8"
+          >
             <img
               src={assetPath("/logo/bund-logo.png")}
               alt="Logo des Bundes"
@@ -215,7 +218,7 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
           {/* Mobile View Controls */}
           <div className="flex items-center space-x-16 lg:hidden">
             <a
-              className="border-b-4 border-transparent"
+              className="link-unstyled border-b-4 border-transparent"
               href={`tel:${header.contactTel.number.replaceAll(/\s/g, "")}`}
               aria-label={header.contactTel.msg}
             >

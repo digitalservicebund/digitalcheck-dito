@@ -198,7 +198,6 @@ export function DocumentationPrincipleErlaeuterung({
                 href={
                   methoden_fuenfPrinzipien.path + "/" + prinzip.URLBezeichnung
                 }
-                className="ds-link-01-reg"
               >
                 Mehr zum Prinzip
               </a>
@@ -211,12 +210,7 @@ export function DocumentationPrincipleErlaeuterung({
 
           <div className="rounded-lg bg-blue-300 p-24">
             <p>{changeAnswerTitle}</p>
-            <a
-              href={currentUrl.replace("/erlaeuterung", "")}
-              className="text-link"
-            >
-              Angaben ändern
-            </a>
+            <a href={currentUrl.replace("/erlaeuterung", "")}>Angaben ändern</a>
           </div>
         </div>
 

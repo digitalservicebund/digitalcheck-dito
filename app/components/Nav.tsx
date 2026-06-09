@@ -200,6 +200,7 @@ function NavItemLink({
         title={getTitle()}
         className={twMerge(
           classes.base,
+          "link-unstyled",
           error ? "border-l-yellow-200 bg-yellow-200" : "border-l-blue-100",
           error ? classes.hoverError : classes.hover,
           classes.focus,

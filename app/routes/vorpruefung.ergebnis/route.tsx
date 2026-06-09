@@ -251,11 +251,7 @@ export default function Result() {
                     {"content" in item && (
                       <RichText markdown={item.content as string} />
                     )}
-                    {item.link && (
-                      <a href={item.link.to} className="text-link">
-                        {item.link.text}
-                      </a>
-                    )}
+                    {item.link && <a href={item.link.to}>{item.link.text}</a>}
                   </NumberedList.Item>
                 ))}
               </NumberedList>

@@ -70,7 +70,6 @@ export function DocumentationPrinciple({
                 href={
                   methoden_fuenfPrinzipien.path + "/" + prinzip.URLBezeichnung
                 }
-                className="ds-link-01-reg"
               >
                 Mehr zum Prinzip
               </a>

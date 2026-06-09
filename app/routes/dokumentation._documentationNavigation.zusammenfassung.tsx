@@ -64,7 +64,7 @@ const createInfoBoxItem = ({
       )}
       <a
         href={route.path}
-        className="text-link mt-24 block"
+        className="mt-24 block"
         aria-label={`${route.title} ${summary.buttonEdit.ariaLabelSuffix}`}
       >
         {summary.buttonEdit.text}

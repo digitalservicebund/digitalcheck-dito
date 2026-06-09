@@ -7,7 +7,6 @@ import { ContactPhoneOutlined } from "@digitalservicebund/icons";
 import { LinkButton } from "~/components/Button";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox.tsx";
-import NewTabLink from "~/components/NewTabLink";
 import Timeline from "~/components/Timeline";
 import { contact } from "~/resources/content/shared/contact";
 import { getTabAnchorLink } from "~/utils/tabs";
@@ -50,9 +49,9 @@ export const UeberblickTab = () => (
         auszutauschen und funktionierende, grenzüberschreitende
         Verwaltungsleistungen anzubieten. Abschließend dokumentieren Sie in
         einem Fragebogen auf dem{" "}
-        <NewTabLink href="https://interoperable-europe.ec.europa.eu/collection/assessments/submission">
+        <a href="https://interoperable-europe.ec.europa.eu/collection/assessments/submission">
           interoperable Europe-Portal
-        </NewTabLink>
+        </a>
         , wie sich die Regelungsinhalte sich auf die Interoperabilität
         auswirken.
       </p>
@@ -75,9 +74,9 @@ export const UeberblickTab = () => (
       <Heading tagName="h3">Die Interoperabilitäts-Bewertung</Heading>
       <p>
         Die{" "}
-        <NewTabLink href="https://interoperable-europe.ec.europa.eu/collection/assessments/submission">
+        <a href="https://interoperable-europe.ec.europa.eu/collection/assessments/submission">
           Interoperabilitäts-Bewertung
-        </NewTabLink>{" "}
+        </a>{" "}
         ist wie auch die Digitalcheck-Dokumentation ein formeller, letzter
         Schritt, in dem Sie einige Fragen zu Inhalten der Regelung beantworten.
         Es geht darum, darzulegen, wie sich Ihre Regelung auf die EU-weite
@@ -85,7 +84,6 @@ export const UeberblickTab = () => (
         Fragen. Die Bewertung fragt nach sogenannten „
         {/* TODO: helper function for links */}
         <a
-          className="text-link"
           href={getTabAnchorLink(
             tabIds.backgroundTabId,
             "verbindliche-anforderungen",
@@ -97,7 +95,6 @@ export const UeberblickTab = () => (
         </a>
         “ und prüft deren Einfluss auf die{" "}
         <a
-          className="text-link"
           href={getTabAnchorLink(
             tabIds.backgroundTabId,
             "vier-ebenen-der-interoperabilitaet",
@@ -129,11 +126,8 @@ export const UeberblickTab = () => (
             Führen Sie die Vorprüfung durch
           </Heading>
           <p>
-            Finden Sie in der{" "}
-            <a className="text-link" href={vorpruefung.path}>
-              Vorprüfung
-            </a>{" "}
-            in 6 Fragen heraus, ob Sie in Ihrem Regelungsvorhaben Aspekte der
+            Finden Sie in der <a href={vorpruefung.path}>Vorprüfung</a> in 6
+            Fragen heraus, ob Sie in Ihrem Regelungsvorhaben Aspekte der
             digitalen Umsetzung und EU-Anforderungen an Interoperabilität
             beachten müssen.
           </p>
@@ -152,7 +146,7 @@ export const UeberblickTab = () => (
           </Heading>
           <p>
             Erarbeiten Sie Ihre Regelung anhand der{" "}
-            <a className="text-link" href={methoden_fuenfPrinzipien.path}>
+            <a href={methoden_fuenfPrinzipien.path}>
               Fünf Prinzipien für digitaltaugliche Gesetzgebung
             </a>
             . Diese enthalten die Anforderungen an die Interoperabilität. So
@@ -185,12 +179,9 @@ export const UeberblickTab = () => (
           </Heading>
           <p>
             Sie dokumentieren in einem Fragebogen auf dem{" "}
-            <NewTabLink
-              className="text-link"
-              href="https://interoperable-europe.ec.europa.eu/collection/assessments/submission"
-            >
+            <a href="https://interoperable-europe.ec.europa.eu/collection/assessments/submission">
               interoperable Europe-Portal
-            </NewTabLink>
+            </a>
             , wie sich die Regelungsinhalte sich auf die Interoperabilität
             auswirken.
           </p>
@@ -211,10 +202,7 @@ export const UeberblickTab = () => (
         Das Digitalcheck-Team unterstützt Sie im gesamten Prozess. Wir helfen
         bei Fragen zur Interoperabilität, beim Ausfüllen der Bewertung und beim
         Identifizieren{" "}
-        <a
-          href={getTabAnchorLink("hintergrund", "verbindliche-anforderungen")}
-          className="text-link"
-        >
+        <a href={getTabAnchorLink("hintergrund", "verbindliche-anforderungen")}>
           verbindlicher Anforderungen
         </a>{" "}
         – inklusive ihrer Auswirkungen auf die vier{" "}
@@ -223,7 +211,6 @@ export const UeberblickTab = () => (
             "hintergrund",
             "vier-ebenen-der-interoperabilitaet",
           )}
-          className="text-link"
         >
           Interoperabilitätsebenen
         </a>
@@ -231,15 +218,10 @@ export const UeberblickTab = () => (
       </p>
       <p>
         <strong>Rufen Sie uns an:</strong>{" "}
-        <a className="text-link" href={`tel:${contact.phone}`}>
-          {contact.phoneDisplay}
-        </a>
+        <a href={`tel:${contact.phone}`}>{contact.phoneDisplay}</a>
         <br />
         Schreiben Sie uns - egal ob Legist oder Institution:{" "}
-        <a
-          className="text-link"
-          href={`mailto:${contact.interoperabilityEmail}`}
-        >
+        <a href={`mailto:${contact.interoperabilityEmail}`}>
           {contact.interoperabilityEmail}
         </a>
       </p>

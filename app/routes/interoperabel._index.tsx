@@ -123,17 +123,11 @@ export default function Interoperability() {
             </p>
             <p>
               Wenn Sie weitere Fragen haben, dann kontaktieren Sie uns unter:{" "}
-              <a
-                href={`mailto:${contact.interoperabilityEmail}`}
-                className="text-link"
-              >
+              <a href={`mailto:${contact.interoperabilityEmail}`}>
                 {contact.interoperabilityEmail}
               </a>{" "}
               oder unter{" "}
-              <a className="text-link" href={`tel:${contact.phone}`}>
-                {contact.phoneDisplay}
-              </a>
-              .
+              <a href={`tel:${contact.phone}`}>{contact.phoneDisplay}</a>.
             </p>
             <div className="mt-24">
               <LinkButton href={interoperabel_faq.path} look="tertiary">

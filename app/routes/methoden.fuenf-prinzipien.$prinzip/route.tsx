@@ -107,7 +107,6 @@ function Textbeispiel({
         }}
       />
       <a
-        className="text-link"
         href={`${beispiele_prinzipien.path}/${prinzip.URLBezeichnung}#${absatzIdTag(beispiel.documentId)}`}
       >
         {methodsFivePrinciples.exampleLinkText}
@@ -207,7 +206,7 @@ function PrincipleNavigation({
             key={principle.order}
             href={`${methoden_fuenfPrinzipien.path}/${principle.URLBezeichnung}`}
             className={twJoin(
-              "block",
+              "link-unstyled block",
               principle.order === current.order
                 ? "ds-body-01-reg"
                 : "ds-link-01-reg",
@@ -223,7 +222,6 @@ function PrincipleNavigation({
           <LinkButton
             look="link"
             href={methoden_fuenfPrinzipien.path + "/" + prev.URLBezeichnung}
-            className="ds-link-01-bold"
           >
             Zurück zu Prinzip {prev.order}
           </LinkButton>

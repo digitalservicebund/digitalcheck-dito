@@ -696,7 +696,6 @@ export default function Visualization() {
                   }
                   target="_blank"
                   rel="noreferrer"
-                  className="ds-link-01-reg"
                 >
                   Video herunterladen
                 </a>

@@ -17,7 +17,7 @@ const { routes } = Astro.props;
   {
     routes.map((route) => (
       <li class="mb-4 [&_li]:my-8">
-        <a href={route.path} class="text-link hover:underline">
+        <a href={route.path} class="hover:underline">
           {route.title}
         </a>
         {route.children.length > 0 && (

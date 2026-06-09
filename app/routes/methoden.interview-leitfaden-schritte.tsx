@@ -11,7 +11,6 @@ import Hero from "~/components/Hero";
 import ImageBox from "~/components/ImageBox";
 import InfoBox from "~/components/InfoBox";
 import MetaTitle from "~/components/Meta";
-import NewTabLink from "~/components/NewTabLink";
 import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
@@ -290,9 +289,9 @@ export default function InterviewMethods() {
                 <br></br>
                 <p>
                   Weiterführende Quelle:{" "}
-                  <NewTabLink href="https://www.orghandbuch.de/SharedDocs/faqs/Webs/OHB/DE/Methoden_Befragung/13_Durchfuehrung_muendliches_Interview.html">
+                  <a href="https://www.orghandbuch.de/SharedDocs/faqs/Webs/OHB/DE/Methoden_Befragung/13_Durchfuehrung_muendliches_Interview.html">
                     Orghandbuch des BMI 2026
-                  </NewTabLink>
+                  </a>
                 </p>
 
                 <Heading tagName="h4" className="ds-body-01-bold my-40">
@@ -445,19 +444,19 @@ export default function InterviewMethods() {
             <Heading tagName="h2">Relevante Quellen</Heading>
             <ul>
               <li>
-                <NewTabLink href="https://www.oeffentliches-gestalten.de">
+                <a href="https://www.oeffentliches-gestalten.de">
                   Öffentliches Gestalten
-                </NewTabLink>
+                </a>
               </li>
               <li>
-                <NewTabLink href="https://www.digitale-verwaltung.de/SharedDocs/downloads/Webs/DV/DE/servicehandbuch.pdf?__blob=publicationFile&v=5#page=18">
+                <a href="https://www.digitale-verwaltung.de/SharedDocs/downloads/Webs/DV/DE/servicehandbuch.pdf?__blob=publicationFile&v=5#page=18">
                   Servicehandbuch
-                </NewTabLink>
+                </a>
               </li>
               <li>
-                <NewTabLink href="https://servicestandard.gov.de/handbuch/#aus-der-praxis">
+                <a href="https://servicestandard.gov.de/handbuch/#aus-der-praxis">
                   Servicestandard - Handbuch
-                </NewTabLink>
+                </a>
               </li>
               <li>
                 <DownloadLinkButton

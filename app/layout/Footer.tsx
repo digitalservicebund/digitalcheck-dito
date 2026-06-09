@@ -1,5 +1,4 @@
 import Image from "~/components/Image";
-import { OpenInNewIcon } from "~/components/OpenInNewIcon.tsx";
 import { footer } from "~/resources/content/shared/footer";
 import { assetPath } from "~/utils/assetPath";
 import tailwindMerge from "~/utils/tailwindMerge";
@@ -9,22 +8,13 @@ type LinkProps = {
   postText?: string;
   url: string;
   text: string;
-  openInNewTab?: boolean;
 };
 
 const FooterLink = ({ link }: { link: LinkProps }) => (
   <>
     {link?.preText}{" "}
-    <a
-      href={link.url}
-      className="text-link increase-tap-area"
-      target={link.openInNewTab ? "_blank" : undefined}
-      rel={link.openInNewTab ? "noreferrer" : undefined}
-    >
-      <span className="flex items-center">
-        {link.text} {link.openInNewTab && <OpenInNewIcon />}
-      </span>
-      <span className="sr-only"> (öffnet in neuem Tab)</span>
+    <a href={link.url} className="increase-tap-area">
+      {link.text}
     </a>
     {link?.postText && <> {link.postText}</>}
   </>

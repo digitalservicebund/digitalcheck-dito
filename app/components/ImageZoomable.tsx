@@ -28,7 +28,7 @@ function ImageZoomable({
       target="_blank"
       rel="noreferrer"
       className={twJoin(
-        "relative block cursor-zoom-in",
+        "link-unstyled relative block cursor-zoom-in",
         plausibleEvent,
         square && "after:block after:pb-[100%] after:content-['']",
       )}

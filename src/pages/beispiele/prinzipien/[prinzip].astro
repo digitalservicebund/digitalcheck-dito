@@ -1,11 +1,7 @@
 ---
-import Layout from "@/layouts/BeispieleLayout.astro";
-import {
-  fetchStrapiData,
-  paragraphFields,
-  prinzipCoreFields,
-} from "~/utils/strapiData.server";
+import { ROUTE_REGELUNGEN } from "@/config/additionalRoutes";
 import { beispiele_prinzipien } from "@/config/routes";
+import Layout from "@/layouts/BeispieleLayout.astro";
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Heading from "~/components/Heading";
@@ -16,7 +12,11 @@ import RegulationMetadata from "~/components/RegulationMetadata";
 import Separator from "~/components/Separator";
 import RouteTabs from "~/components/Tabs/RouteTabs";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
-import { ROUTE_REGELUNGEN } from "@/config/additionalRoutes";
+import {
+  fetchStrapiData,
+  paragraphFields,
+  prinzipCoreFields,
+} from "~/utils/strapiData.server";
 import type { PrinzipWithBeispielvorhaben } from "~/utils/strapiData.types";
 
 export const frontmatter = {
@@ -108,7 +108,6 @@ const tabs = prinzips.map((principle) => ({
                     <a
                       href={`${ROUTE_REGELUNGEN}/${exampleProject.URLBezeichnung}`}
                       data-astro-prefetch="viewport"
-                      class="text-link"
                     >
                       {examplesRegelungen.exampleLinkText}
                     </a>

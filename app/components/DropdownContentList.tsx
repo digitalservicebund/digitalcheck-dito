@@ -55,6 +55,7 @@ export default function DropdownContentList({
       <li key={option.href || option.title || index}>
         <a
           href={option.href}
+          className="link-unstyled"
           aria-current={isActive ? "page" : undefined}
           onClick={onItemClick}
           aria-label={option.title}

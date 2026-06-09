@@ -2,7 +2,6 @@ import type { JSX } from "react";
 import { nestListInListItems } from "~/utils/blocksRendererUtils";
 import type { Node } from "~/utils/paragraphUtils";
 import { isExternalUrl } from "~/utils/utilFunctions";
-import NewTabLink from "./NewTabLink.tsx";
 
 const getElement = (node: Node): keyof JSX.IntrinsicElements => {
   switch (node.type) {
@@ -46,9 +45,9 @@ export function RecursiveRenderer({
 
         if (externalUrl)
           return (
-            <NewTabLink key={index} href={node.url}>
+            <a key={index} href={node.url}>
               <RecursiveRenderer content={node.children} />
-            </NewTabLink>
+            </a>
           );
         // NOTE: In strapi a url has to start with "/", "#" will not be registered as valid url
         // So if you want to use anchor tags, you would have to define them like this:
@@ -57,7 +56,7 @@ export function RecursiveRenderer({
         const url = node.url.replace(/^\//, "");
 
         return (
-          <a key={index} href={url} className="text-link inline-flex">
+          <a key={index} href={url} className="inline-flex">
             <RecursiveRenderer content={node.children} />
           </a>
         );

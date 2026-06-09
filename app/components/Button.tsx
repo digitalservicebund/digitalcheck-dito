@@ -152,7 +152,7 @@ export function LinkButton({
       href={props.href}
       id={id}
       data-testid={id}
-      className={twJoin(buttonClasses, plausibleEventClass)}
+      className={twJoin("link-unstyled", buttonClasses, plausibleEventClass)}
       onKeyDown={onKeyDown}
       {...props}
     >
