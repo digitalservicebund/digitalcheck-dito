@@ -15,6 +15,8 @@ import { waitForHydration } from "./helpers";
 
 const testData = {
   title: "E2E V2 Titel des Regelungsvorhabens",
+  organization: "DG E2E",
+  publicationDate: "Q4 2027",
   participationFormats: "E2E V2 Formate Input",
   participationResults: "E2E V2 Ergebnisse Input",
   positiveReasoning: "E2E V2 Erklärung positiv",
@@ -94,6 +96,18 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
     await page
       .getByLabel(digitalDocumentation.info.inputTitle.label)
       .fill(testData.title);
+    await page.getByText("Die Veröffentlichung ist geplant").click();
+
+    await page
+      .getByRole("textbox", {
+        name: "Organisation",
+      })
+      .fill(testData.organization);
+    await page
+      .getByRole("textbox", {
+        name: "Voraussichtliches Veröffentlichungsdatum",
+      })
+      .fill(testData.publicationDate);
     await page.getByRole("button", { name: "Weiter" }).click();
 
     await expect(page).toHaveURL(dokumentation_beteiligungsformate.path);
@@ -272,8 +286,10 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
 
   await test.step("summary page shows entered data and navigate to absenden", async () => {
     const main = page.getByRole("main");
-    await expect(main).toContainText(testData.title);
     await expect(main).toContainText(testData.positiveReasoning);
+    await expect(main).toContainText(testData.title);
+    await expect(main).toContainText(testData.organization);
+    await expect(main).toContainText(testData.publicationDate);
     await expect(main).toContainText(testData.lastPrincipleReasoning);
     await expect(main).toContainText(testData.negativeReasoning);
     await expect(main).toContainText(testData.irrelevantReasoning);
@@ -463,5 +479,53 @@ test.describe("with partial documentation started", () => {
         page.getByLabel(digitalDocumentation.info.inputTitle.label),
       ).toBeEmpty();
     });
+  });
+});
+
+test.describe("interoperability", async () => {
+  test("the link for an already-published path is displayed in the summary and export", async ({
+    page,
+  }, testInfo) => {
+    await page.goto(dokumentation.path);
+    await page.getByRole("link", { name: "Dokumentation starten" }).click();
+    await page
+      .getByRole("checkbox", { name: "Ich habe die oberen Hinweise" })
+      .check();
+    await page.getByRole("button", { name: "Verstanden und weiter" }).click();
+    await page
+      .getByText("Der Referentenentwurf ist bereits veröffentlicht")
+      .click();
+    const draftPageUrl = "https://ministerium.bund.de/entwuerfe/entwurf";
+    await page
+      .getByRole("textbox", {
+        name: "Link zum Referentenentwurf",
+      })
+      .fill(draftPageUrl);
+
+    await page.getByRole("link", { name: "Zusammenfassung" }).click();
+    await expect(
+      page.getByRole("heading", {
+        name: "Link zum Referentenentwurf",
+      }),
+    ).toBeVisible();
+    await expect(page.getByText(draftPageUrl)).toBeVisible();
+
+    const docText = await downloadDocumentAndGetText(
+      page,
+      page.getByRole("button", { name: "Word-Datei herunterladen (.docx)" }),
+      testInfo.outputPath(`${testInfo.testId}.docx`),
+    );
+    expectStringsOrderedInText(
+      docText,
+      [
+        "Status",
+        "bereits veröffentlicht",
+        "Voraussichtliches Veröffentlichungsdatum",
+        "Link zum Referentenentwurf",
+        draftPageUrl,
+      ],
+      [],
+    );
+    expectDocumentToNotContainTags(docText);
   });
 });
