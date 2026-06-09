@@ -18,25 +18,12 @@ export const frontmatter = {
 };
 
 export async function getStaticPaths() {
-  const slugsResult = await fetchStrapiData<{
-    beispielvorhabens: { URLBezeichnung: string }[];
-  }>(
-    `query GetAllRegelungSlugs { beispielvorhabens(status: PUBLISHED) { URLBezeichnung } }`,
-  );
-
-  return slugsResult.beispielvorhabens.map((r) => ({
-    params: { regelung: r.URLBezeichnung },
-  }));
-}
-
-const { regelung } = Astro.params;
-
-const regelungQuery = `
+  const regelungQuery = `
 ${prinzipCoreFields}
 ${paragraphFields}
 ${visualisationFields}
-query GetBeispielvorhaben($slug: String!) {
-  beispielvorhabens(filters: { URLBezeichnung: { eq: $slug } }, status: PUBLISHED) {
+query GetAllBeispielvorhaben {
+  beispielvorhabens(status: PUBLISHED) {
     documentId
     Titel
     NKRNummer
@@ -62,20 +49,24 @@ query GetBeispielvorhaben($slug: String!) {
   }
 }`;
 
-const [regelungResult, prinzipsResult] = await Promise.all([
-  fetchStrapiData<{ beispielvorhabens: Beispielvorhaben[] }>(regelungQuery, {
-    slug: regelung,
-  }),
-  fetchStrapiData<{ prinzips: PrinzipWithBeispielvorhaben[] }>(
-    GET_PRINZIPS_QUERY,
-  ),
-]);
-if (!regelungResult.beispielvorhabens.length)
-  throw new Error(`Strapi data regelungResult has no beispielvorhabens`);
-const regelungData = regelungResult.beispielvorhabens[0];
-const principles = prinzipsResult.prinzips.toSorted(
-  (a, b) => a.order - b.order,
-);
+  const [regelungResult, prinzipsResult] = await Promise.all([
+    fetchStrapiData<{ beispielvorhabens: Beispielvorhaben[] }>(regelungQuery),
+    fetchStrapiData<{ prinzips: PrinzipWithBeispielvorhaben[] }>(
+      GET_PRINZIPS_QUERY,
+    ),
+  ]);
+
+  const principles = prinzipsResult.prinzips.toSorted(
+    (a, b) => a.order - b.order,
+  );
+
+  return regelungResult.beispielvorhabens.map((regelung) => ({
+    params: { regelung: regelung.URLBezeichnung },
+    props: { regelung, principles },
+  }));
+}
+
+const { regelung: regelungData, principles } = Astro.props;
 ---
 
 <Layout title={frontmatter.title}>
