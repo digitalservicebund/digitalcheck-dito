@@ -50,6 +50,17 @@ export function useWordDocumentation() {
   return { downloadDocumentation };
 }
 
+function formatPublicationStatus(header?: DocumentationData["policyTitle"]) {
+  switch (header?.publicationStatus) {
+    case "planned":
+      return "geplant";
+    case "published":
+      return "bereits veröffentlicht";
+    default:
+      return "geplant / bereits veröffentlicht (nicht zutreffendes bitte löschen)";
+  }
+}
+
 export const createDoc = async (
   templateData: ArrayBuffer | Uint8Array,
   {
@@ -58,34 +69,41 @@ export const createDoc = async (
     principles: principleAnswers,
     bindingRequirements,
     interoperabilityAssessment,
+    euInteroperabilityOutcome,
   }: DocumentationData,
   prinzips: PrinzipWithAspekte[],
 ) => {
   const date = new Date().toLocaleDateString("de-DE");
 
+  const patches = {
+    TIMESTAMP: toParagraphPatch(date),
+    NKR_CONTACT_EMAIL: toMailtoHyperlinkPatch(contact.nkrEmail),
+    INTEROPS_EMAIL: toMailtoHyperlinkPatch(contact.interoperabilityEmail),
+    DS_EMAIL: toMailtoHyperlinkPatch(contact.email),
+    DS_PHONE: toParagraphPatch(contact.phoneDisplay),
+    POLICY_TITLE: toParagraphPatch(answerOrPlaceholder(policyTitle?.title)),
+    PUBLICATION_STATUS: toParagraphPatch(formatPublicationStatus(policyTitle)),
+    PUBLICATION_DATE: toParagraphPatch(policyTitle?.publicationDate ?? ""),
+    PUBLICATION_LINK: toParagraphPatch(policyTitle?.publicationLink ?? ""),
+    PARTICIPATION_FORMATS: toParagraphPatch(
+      answerOrPlaceholder(participation?.formats),
+    ),
+    PARTICIPATION_RESULTS: toParagraphPatch(
+      answerOrPlaceholder(participation?.results),
+    ),
+    ...buildPrinciplePatches(prinzips, principleAnswers),
+    APPENDICES: buildAppendixPatch({
+      policyTitle,
+      interoperabilityAssessment,
+      bindingRequirements,
+      euInteroperabilityOutcome,
+    }),
+  };
+
   return patchDocument({
     data: templateData,
     outputType: "blob",
-    patches: {
-      TIMESTAMP: toParagraphPatch(date),
-      NKR_CONTACT_EMAIL: toMailtoHyperlinkPatch(contact.nkrEmail),
-      INTEROPS_EMAIL: toMailtoHyperlinkPatch(contact.interoperabilityEmail),
-      DS_EMAIL: toMailtoHyperlinkPatch(contact.email),
-      DS_PHONE: toParagraphPatch(contact.phoneDisplay),
-      POLICY_TITLE: toParagraphPatch(answerOrPlaceholder(policyTitle?.title)),
-      PARTICIPATION_FORMATS: toParagraphPatch(
-        answerOrPlaceholder(participation?.formats),
-      ),
-      PARTICIPATION_RESULTS: toParagraphPatch(
-        answerOrPlaceholder(participation?.results),
-      ),
-      ...buildPrinciplePatches(prinzips, principleAnswers),
-      APPENDICES: buildAppendixPatch({
-        policyTitle,
-        interoperabilityAssessment,
-        bindingRequirements,
-      }),
-    },
+    patches,
     keepOriginalStyles: true,
   });
 };

@@ -16,19 +16,25 @@ export function buildAppendixPatch({
   policyTitle,
   interoperabilityAssessment,
   bindingRequirements,
+  euInteroperabilityOutcome,
 }: Pick<
   DocumentationData,
-  "interoperabilityAssessment" | "bindingRequirements" | "policyTitle"
+  | "interoperabilityAssessment"
+  | "bindingRequirements"
+  | "policyTitle"
+  | "euInteroperabilityOutcome"
 >): IPatch {
   const hasEuData =
+    euInteroperabilityOutcome?.outcomeId === "REQUIRED" ||
     interoperabilityAssessment !== undefined ||
     Boolean(bindingRequirements?.requirements.length);
 
-  if (!hasEuData)
+  if (!hasEuData) {
     return {
       type: PatchType.PARAGRAPH,
       children: [],
     };
+  }
   const children: FileChild[] = [
     new Paragraph({
       text: "Anhang 1: EU-Interoperabilität",
