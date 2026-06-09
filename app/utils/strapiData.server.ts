@@ -1,3 +1,5 @@
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
+
 const url =
   process.env.STRAPI_URL ??
   "https://secure-dinosaurs-1a634d1a3d.strapiapp.com/graphql";
@@ -195,4 +197,22 @@ export async function fetchStrapiData<DataType>(
     );
   }
   return responseData.data;
+}
+
+export async function fetchPrinzipsWithExamples(): Promise<
+  PrinzipWithAspekteAndExample[]
+> {
+  const result = await fetchStrapiData<{
+    prinzips: PrinzipWithAspekteAndExample[];
+  }>(GET_PRINZIPS_WITH_EXAMPLES_QUERY);
+  return result.prinzips;
+}
+
+export async function getPrincipleIdStaticPaths() {
+  const prinzips = await fetchPrinzipsWithExamples();
+
+  return prinzips.map((p) => ({
+    params: { principleId: p.URLBezeichnung },
+    props: { prinzips },
+  }));
 }

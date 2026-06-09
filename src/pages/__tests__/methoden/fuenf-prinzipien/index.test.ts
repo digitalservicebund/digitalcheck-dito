@@ -99,8 +99,7 @@ const mockPrinzipsData = vi.hoisted(() => [
 ]);
 
 vi.mock("~/utils/strapiData.server", () => ({
-  GET_PRINZIPS_WITH_EXAMPLES_QUERY: "MOCK_QUERY_STRING",
-  fetchStrapiData: vi.fn().mockResolvedValue({ prinzips: mockPrinzipsData }),
+  fetchPrinzipsWithExamples: vi.fn().mockResolvedValue(mockPrinzipsData),
 }));
 
 describe("FivePrinciples Route - Integration Tests", () => {

@@ -1,20 +1,13 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { AbsendenPage } from "~/routes/dokumentation._documentationNavigation.absenden";
-import {
-  fetchStrapiData,
-  GET_PRINZIPS_WITH_EXAMPLES_QUERY,
-} from "~/utils/strapiData.server";
-import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
+import { fetchPrinzipsWithExamples } from "~/utils/strapiData.server";
 
 export const frontmatter = {
   title: "Absenden",
 };
 
-const result = await fetchStrapiData<{
-  prinzips: PrinzipWithAspekteAndExample[];
-}>(GET_PRINZIPS_WITH_EXAMPLES_QUERY);
-const prinzips = result.prinzips;
+const prinzips = await fetchPrinzipsWithExamples();
 ---
 
 <Layout title={frontmatter.title} showProgressBar>
