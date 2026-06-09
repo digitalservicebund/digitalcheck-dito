@@ -6,11 +6,9 @@ import ButtonContainer from "~/components/ButtonContainer";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import InlineNotice from "~/components/InlineNotice";
-import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
-import { preCheckQuestions } from "~/resources/content/shared/pre-check-questions";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { usePreCheckData, useSyncedForm } from "./vorpruefung/preCheckDataHook";
 import type { PreCheckAnswerSchema } from "./vorpruefung/preCheckDataSchema";
@@ -18,11 +16,6 @@ import { answerSchema } from "./vorpruefung/preCheckDataSchema";
 import { addOrUpdateAnswer } from "./vorpruefung/preCheckDataService";
 
 // data fetching moved to @/src/pages/vorpruefung/
-
-const ROUTES_PRECHECK_QUESTIONS = Object.values(preCheckQuestions).map((q) => ({
-  path: q.path,
-  title: `${q.title} — Vorprüfung`,
-}));
 
 const { questions, answerOptions, nextButton } = preCheck;
 
@@ -131,13 +124,6 @@ export function PreCheckQuestion({
 
   return (
     <form {...form.getFormProps()} className="space-y-40">
-      <MetaTitle
-        prefix={
-          ROUTES_PRECHECK_QUESTIONS.find((route) =>
-            route.path.endsWith(question.id),
-          )?.title
-        }
-      />
       <input {...form.getHiddenInputProps("questionId")} />
       <section className="space-y-32">
         <div className="space-y-16">

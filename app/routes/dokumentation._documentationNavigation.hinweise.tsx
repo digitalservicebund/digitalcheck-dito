@@ -1,9 +1,7 @@
-import { dokumentation_hinweise } from "@/config/routes";
 import { useState } from "react";
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Heading from "~/components/Heading";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText.tsx";
 import { general } from "~/resources/content/shared/general.ts";
 import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
@@ -29,7 +27,6 @@ export function DocumentationHinweise() {
 
   return (
     <>
-      <MetaTitle prefix={`Dokumentation: ${dokumentation_hinweise.title}`} />
       <Heading
         text="Wichtige Hinweise"
         tagName="h1"

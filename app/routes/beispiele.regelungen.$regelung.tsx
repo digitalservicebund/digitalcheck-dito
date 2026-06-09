@@ -4,7 +4,6 @@ import ContentWrapper from "~/components/ContentWrapper.tsx";
 import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import InlineNotice from "~/components/InlineNotice";
-import MetaTitle from "~/components/Meta";
 import ParagraphList from "~/components/ParagraphList";
 import RegulationMetadata from "~/components/RegulationMetadata";
 import RichText from "~/components/RichText.tsx";
@@ -142,7 +141,6 @@ export function Gesetz({
 
   return (
     <>
-      <MetaTitle prefix={"Regelungsbeispiel"} />
       <Hero
         className="bg-gray-100"
         title={regelung.Titel}

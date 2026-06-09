@@ -9,7 +9,6 @@ import Badge from "~/components/Badge.tsx";
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
 import { LinkButton } from "~/components/Button.tsx";
 import { BreakoutHero } from "~/components/Hero.tsx";
-import MetaTitle from "~/components/Meta.tsx";
 import { PrincipleHightlightNullModifier } from "~/components/PrincipleHighlightModifier.tsx";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer";
@@ -253,7 +252,6 @@ export function Prinzip({
 }>) {
   return (
     <>
-      <MetaTitle prefix={`Prinzip: ${prinzip.Name}`} />
       <main>
         <div className="breakout-grid-toc">
           <BreakoutHero

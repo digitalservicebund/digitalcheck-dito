@@ -1,4 +1,3 @@
-import { dokumentation } from "@/config/routes";
 import {
   SimCardDownloadTwoTone,
   TipsAndUpdatesOutlined,
@@ -12,7 +11,6 @@ import Heading from "~/components/Heading.tsx";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox.tsx";
 import InlineNotice from "~/components/InlineNotice";
-import MetaTitle from "~/components/Meta";
 import NumberedList from "~/components/NumberedList.tsx";
 import RichText from "~/components/RichText.tsx";
 import SupportBanner from "~/components/SupportBanner";
@@ -36,7 +34,6 @@ export function DokumentationIndexPage({
 
   return (
     <>
-      <MetaTitle prefix={dokumentation.title} />
       <main>
         <Hero title={start.title} subtitle={start.subtitle}>
           <div className="mt-40 space-y-40">

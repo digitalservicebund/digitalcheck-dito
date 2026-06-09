@@ -9,7 +9,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { twJoin } from "tailwind-merge";
 
-import { vorpruefung, vorpruefung_ergebnis } from "@/config/routes";
+import { vorpruefung } from "@/config/routes";
 import { marked } from "marked";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -17,7 +17,6 @@ import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
 import InfoTooltip from "~/components/InfoTooltip";
 import InlineNotice from "~/components/InlineNotice";
-import MetaTitle from "~/components/Meta";
 import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import { preCheck } from "~/resources/content/vorpruefung";
@@ -116,7 +115,6 @@ export default function Result() {
     result?.digital === ResultType.UNSURE ? preCheckResult.unsure.hint : "";
   return (
     <>
-      <MetaTitle prefix={vorpruefung_ergebnis.title} />
       <main>
         <div className="bg-blue-100 py-40 print:pb-0">
           <div className="px-16">

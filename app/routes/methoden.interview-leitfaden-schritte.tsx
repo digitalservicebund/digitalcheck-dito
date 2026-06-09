@@ -1,4 +1,3 @@
-import { methoden_interviewLeitfadenSchritte } from "@/config/routes";
 import {
   DriveFileRenameOutline,
   FeedOutlined,
@@ -10,7 +9,6 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import ImageBox from "~/components/ImageBox";
 import InfoBox from "~/components/InfoBox";
-import MetaTitle from "~/components/Meta";
 import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
@@ -23,7 +21,6 @@ export default function InterviewMethods() {
 
   return (
     <>
-      <MetaTitle prefix={methoden_interviewLeitfadenSchritte.title} />
       <main className="space-y-80">
         <Hero
           className="mb-0 lg:mb-80"
