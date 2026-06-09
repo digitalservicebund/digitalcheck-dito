@@ -1,58 +1,76 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { Prinzip } from "~/routes/methoden.fuenf-prinzipien.$prinzip/route";
-import { fetchStrapiData } from "~/utils/strapiData.server";
+import {
+  aspektBeispielFields,
+  aspektCommonFields,
+  fetchStrapiData,
+  prinzipBeispielFields,
+} from "~/utils/strapiData.server";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
-import type {
-  PrinzipListItem,
-  PrinzipListQueryReturnType,
-} from "~/routes/methoden.fuenf-prinzipien.$prinzip/query";
 
 export const frontmatter = {
   title: "Fünf Prinzipien",
   sitemap: false,
 };
 
-export async function getStaticPaths() {
-  const listResult = await fetchStrapiData<PrinzipListQueryReturnType>(
-    `query PrinzipList { prinzips(sort: "order") { Name URLBezeichnung order } }`,
-  );
-
-  return Promise.all(
-    listResult.prinzips.map(async (p: PrinzipListItem) => {
-      const detail = await fetchStrapiData<{
-        prinzips: PrinzipWithAspekteAndExample[];
-      }>(
-        `query Prinzip($URLBezeichnung: String!) {
-          prinzips(filters: { URLBezeichnung: { eq: $URLBezeichnung } }) {
-            documentId Name Beschreibung order Nummer URLBezeichnung
-            Beispiel {
-              documentId Nummer Text
-              Paragraph { Nummer Gesetz Titel Beispielvorhaben { URLBezeichnung Titel } }
-              PrinzipErfuellungen { id Erklaerung Prinzip { Nummer Name } }
-            }
-            Aspekte {
-              Nummer Titel Kurzbezeichnung Beschreibung Text Leitfragen Formulierungsbeispiel
-              Anwendung {
-                Titel Erklaerung Formulierungsbeispiel
-                Beispiel { documentId Nummer Text Auszug Paragraph { Nummer Gesetz Titel } }
-              }
-              Beispiel {
-                documentId Nummer Text
-                Paragraph { Nummer Gesetz Titel Beispielvorhaben { URLBezeichnung Titel } }
-              }
-            }
+// Like GET_PRINZIPS_WITH_EXAMPLES_QUERY, but additionally fetches the Aspekt
+// Nummer and the Anwendung subtree which only this page renders. Kept here
+// (rather than shared) so the documentation pages don't ship Anwendung data to
+// the client during hydration.
+const PRINZIPS_ASPEKTE_QUERY = `
+query Prinzips {
+  prinzips(sort: "order") {
+    documentId
+    Name
+    Beschreibung
+    order
+    Nummer
+    URLBezeichnung
+    Beispiel {
+      ${prinzipBeispielFields}
+    }
+    Aspekte {
+      Nummer
+      ${aspektCommonFields}
+      Anwendung {
+        Titel
+        Erklaerung
+        Formulierungsbeispiel
+        Beispiel {
+          documentId
+          Nummer
+          Text
+          Auszug
+          Paragraph {
+            Nummer
+            Gesetz
+            Titel
           }
-        }`,
-        { URLBezeichnung: p.URLBezeichnung },
-      );
-      const prinzip = detail.prinzips[0];
-      return {
-        params: { prinzip: p.URLBezeichnung },
-        props: { prinzip, prinzipList: listResult.prinzips },
-      };
-    }),
-  );
+        }
+      }
+      Beispiel {
+        ${aspektBeispielFields}
+      }
+    }
+  }
+}`;
+
+export async function getStaticPaths() {
+  const { prinzips } = await fetchStrapiData<{
+    prinzips: PrinzipWithAspekteAndExample[];
+  }>(PRINZIPS_ASPEKTE_QUERY);
+
+  const prinzipList = prinzips.map(({ Name, URLBezeichnung, order }) => ({
+    Name,
+    URLBezeichnung,
+    order,
+  }));
+
+  return prinzips.map((prinzip) => ({
+    params: { prinzip: prinzip.URLBezeichnung },
+    props: { prinzip, prinzipList },
+  }));
 }
 
 const { prinzip, prinzipList } = Astro.props;

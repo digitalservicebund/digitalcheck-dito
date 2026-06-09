@@ -21,10 +21,10 @@ import type {
   AbsatzWithParagraph,
   BasePrinzip,
   PrinzipAspekt,
+  PrinzipListItem,
   PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions.ts";
-import type { PrinzipListItem } from "./query";
 
 // data fetching moved to @/src/pages/methoden/fuenf-prinzipien/[prinzip].astro
 

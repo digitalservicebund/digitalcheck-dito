@@ -115,6 +115,11 @@ export type PrinzipWithAspekteAndExample = PrinzipWithAspekte & {
   Beispiel: AbsatzWithParagraph;
 };
 
+export type PrinzipListItem = Pick<
+  BasePrinzip,
+  "Name" | "URLBezeichnung" | "order"
+>;
+
 export type PrinzipWithBeispielvorhaben = BasePrinzip & {
   Beispielvorhaben: Beispielvorhaben[];
 };

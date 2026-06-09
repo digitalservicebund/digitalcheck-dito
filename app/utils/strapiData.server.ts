@@ -87,6 +87,66 @@ query GetPrinzipsWithAspects {
   }
 }`;
 
+/**
+ * Selection set for a Prinzip's top-level `Beispiel` (Absatz) including the
+ * principle fulfilment annotations. Shared by every query that renders a
+ * principle's headline example.
+ */
+export const prinzipBeispielFields = `
+  documentId
+  Nummer
+  Text
+  Paragraph {
+    Nummer
+    Gesetz
+    Titel
+    Beispielvorhaben {
+      URLBezeichnung
+      Titel
+    }
+  }
+  PrinzipErfuellungen {
+    id
+    Erklaerung
+    Prinzip {
+      Nummer
+      Name
+    }
+  }
+`;
+
+/**
+ * Selection set for an Aspekt's `Beispiel` (Absatz). Same shape as
+ * `prinzipBeispielFields` minus the PrinzipErfuellungen.
+ */
+export const aspektBeispielFields = `
+  documentId
+  Nummer
+  Text
+  Paragraph {
+    Nummer
+    Gesetz
+    Titel
+    Beispielvorhaben {
+      URLBezeichnung
+      Titel
+    }
+  }
+`;
+
+/**
+ * Scalar fields of an Aspekt shared across the documentation and the
+ * fünf-Prinzipien method pages.
+ */
+export const aspektCommonFields = `
+  Titel
+  Kurzbezeichnung
+  Beschreibung
+  Text
+  Leitfragen
+  Formulierungsbeispiel
+`;
+
 export const GET_PRINZIPS_WITH_EXAMPLES_QUERY = `
 query GetPrinzips {
   prinzips(sort: "order") {
@@ -100,47 +160,12 @@ query GetPrinzips {
     Nummer
     URLBezeichnung
     Beispiel {
-      documentId
-      Nummer
-      Text
-      Paragraph {
-        Nummer
-        Gesetz
-        Titel
-        Beispielvorhaben {
-          URLBezeichnung
-          Titel
-        }
-      }
-      PrinzipErfuellungen {
-        id
-        Erklaerung
-        Prinzip {
-          Nummer
-          Name
-        }
-      }
+      ${prinzipBeispielFields}
     }
     Aspekte {
-      Titel
-      Kurzbezeichnung
-      Beschreibung
-      Text
-      Leitfragen
-      Formulierungsbeispiel
+      ${aspektCommonFields}
       Beispiel {
-        documentId
-        Nummer
-        Text
-        Paragraph {
-          Nummer
-          Gesetz
-          Titel
-          Beispielvorhaben {
-            URLBezeichnung
-            Titel
-          }
-        }
+        ${aspektBeispielFields}
       }
     }
   }
