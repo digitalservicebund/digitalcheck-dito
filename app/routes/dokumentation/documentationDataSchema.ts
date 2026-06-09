@@ -200,6 +200,10 @@ export const interoperabilityAssessmentLevelSchema = z.object({
   rating: z.union([interoperabilityRatingSchema, z.literal("")]).optional(),
 });
 
+export type InteroperabilityAssessmentLevel = z.infer<
+  typeof interoperabilityAssessmentLevelSchema
+>;
+
 export const interoperabilityAssessmentSchema = z.object({
   legal: interoperabilityAssessmentLevelSchema,
   organizational: interoperabilityAssessmentLevelSchema,

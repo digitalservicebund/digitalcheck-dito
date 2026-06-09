@@ -1,10 +1,14 @@
-import type { Route } from "@/config/routes";
 import {
   dokumentation_beteiligungsformate,
+  dokumentation_bewertungOrganisatorisch,
+  dokumentation_bewertungRechtlich,
+  dokumentation_bewertungSemantisch,
+  dokumentation_bewertungTechnisch,
   dokumentation_euInteroperabilitaetsbezug,
   dokumentation_regelungsvorhabenTitel,
   dokumentation_verbindlicheAnforderungen,
   dokumentation_zusammenfassung,
+  type Route,
 } from "@/config/routes";
 import { type ReactNode } from "react";
 import { Link } from "react-router";
@@ -17,9 +21,10 @@ import InlineNotice from "~/components/InlineNotice";
 import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import type {
+import {
   BindingRequirementsData,
   DocumentationData,
+  InteroperabilityAssessmentLevel,
   Participation,
   PolicyTitle,
   Principle,
@@ -278,11 +283,48 @@ function BindingRequirementSummary(
   });
 }
 
+const ratingMap = keyValueToMap(interoperabilityRatingOptions);
+function formatRating(rating?: InteroperabilityAssessmentLevel["rating"]) {
+  if (!rating) {
+    return undefined;
+  }
+  return ratingMap.get(rating);
+}
+
 function createInteroperabilityInfoBoxItems(
   documentationData: DocumentationData<"2">,
 ): InfoBoxProps[] {
   const detailsRequired =
     documentationData.euInteroperabilityOutcome?.outcomeId === "REQUIRED";
+
+  const assessmentItems = [
+    {
+      heading: "Rechtliche Bewertung",
+      route: dokumentation_bewertungRechtlich,
+      rating: documentationData.interoperabilityAssessment?.legal.rating,
+      detail: documentationData.interoperabilityAssessment?.legal.detail,
+    },
+    {
+      heading: "Organisatorische Bewertung",
+      route: dokumentation_bewertungOrganisatorisch,
+      rating:
+        documentationData.interoperabilityAssessment?.organizational.rating,
+      detail:
+        documentationData.interoperabilityAssessment?.organizational.detail,
+    },
+    {
+      heading: "Semantische Bewertung",
+      route: dokumentation_bewertungSemantisch,
+      rating: documentationData.interoperabilityAssessment?.semantic.rating,
+      detail: documentationData.interoperabilityAssessment?.semantic.detail,
+    },
+    {
+      heading: "Technische Bewertung",
+      route: dokumentation_bewertungTechnisch,
+      rating: documentationData.interoperabilityAssessment?.technical.rating,
+      detail: documentationData.interoperabilityAssessment?.technical.detail,
+    },
+  ] as const;
 
   return [
     createInfoBoxItem({
@@ -298,6 +340,28 @@ function createInteroperabilityInfoBoxItems(
           documentationData.bindingRequirements,
         ),
       }),
+    ...(detailsRequired
+      ? assessmentItems.map(({ heading, route, rating, detail }) =>
+          createInfoBoxItem({
+            heading,
+            route,
+            content: (
+              <Answer
+                answers={[
+                  {
+                    prefix: "Einordnung",
+                    answer: formatRating(rating),
+                  },
+                  {
+                    prefix: "Begründung",
+                    answer: detail,
+                  },
+                ]}
+              />
+            ),
+          }),
+        )
+      : []),
   ].filter(Boolean) as InfoBoxProps[];
 }
 
@@ -395,6 +459,8 @@ export default function Route() {
 // Astro page export
 import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
 import RequirementDetail from "~/routes/dokumentation/interoperability/RequirementDetail.tsx";
+import { interoperabilityRatingOptions } from "~/routes/dokumentation/interoperability/values.ts";
+import { keyValueToMap } from "~/utils/keyValue.ts";
 
 export function ZusammenfassungPage({
   prinzips,
