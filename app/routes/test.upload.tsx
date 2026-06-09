@@ -6,7 +6,6 @@ import { useFetcher } from "react-router";
 import Container from "~/components/Container.tsx";
 import Hero from "~/components/Hero.tsx";
 import MetaTitle from "~/components/Meta.tsx";
-import RichText from "~/components/RichText.tsx";
 
 const testFiles = [
   { name: "PNG-Bilddatei", path: "/images/beispielflussdiagram.png" },
@@ -23,14 +22,12 @@ const testFiles = [
     path: "/documents/interview-leitfaden/Akteurlandschaft_Analyse.pptx",
   },
   { name: "JSON-Datei", path: "/documents/upload-test.json" },
+  { name: "CSV-Datei", path: "/documents/upload-test.csv" },
 ];
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
-  const results: Record<
-    string,
-    { sizeMatch: boolean; contentMatch: boolean; error?: string }
-  > = {};
+  const results: Record<string, { contentMatch: boolean; error?: string }> = {};
 
   for (const fileInfo of testFiles) {
     const uploadedFile = formData.get(fileInfo.path) as File | null;
@@ -47,7 +44,6 @@ export async function action({ request }: ActionFunctionArgs) {
 
       if (!fs.existsSync(diskPath)) {
         results[fileInfo.path] = {
-          sizeMatch: false,
           contentMatch: false,
           error: "Referenzdatei nicht gefunden",
         };
@@ -57,14 +53,12 @@ export async function action({ request }: ActionFunctionArgs) {
       const referenceFileContent = fs.readFileSync(diskPath);
       const uploadedFileContent = Buffer.from(await uploadedFile.arrayBuffer());
 
-      const sizeMatch = uploadedFile.size === referenceFileContent.length;
       const contentMatch = uploadedFileContent.equals(referenceFileContent);
 
-      results[fileInfo.path] = { sizeMatch, contentMatch };
+      results[fileInfo.path] = { contentMatch };
     } catch (error) {
       console.error(error);
       results[fileInfo.path] = {
-        sizeMatch: false,
         contentMatch: false,
         error: "Fehler beim Vergleich",
       };
@@ -73,26 +67,6 @@ export async function action({ request }: ActionFunctionArgs) {
 
   return results;
 }
-
-const filesMarkdown = testFiles
-  .map(
-    (file) =>
-      `1. <a class="external-link" href="${file.path}" download>${file.name}</a>`,
-  )
-  .join("\n");
-
-const step1 = `
-## 1. Schritt
-
-Laden Sie die folgenden Dateien herunter:
-${filesMarkdown}
-`;
-
-const step2 = `
-## 2. Schritt
-
-Laden Sie die eben heruntergeladenen Dateien hier wieder hoch, um den Upload zu testen. Sie können Dateien pro Feld per Drag-and-Drop ablegen. Der Upload startet sofort.
-`;
 
 function UploadDropzoneCard({
   file,
@@ -118,7 +92,7 @@ function UploadDropzoneCard({
   const fileResult = fetcher.data?.[file.path];
 
   return (
-    <div className="rounded-8 space-y-16 border border-gray-400 p-24">
+    <div className="rounded-8 max-w-a11y space-y-16 border border-gray-400 p-24">
       <p className="ds-label-01-bold block">{file.name} hochladen</p>
       <label
         htmlFor={file.path}
@@ -162,11 +136,6 @@ function UploadDropzoneCard({
       {fileResult && (
         <div className="mt-8 space-y-4">
           <p className="flex items-center gap-8">
-            {fileResult.sizeMatch
-              ? "✅ Größe stimmt überein"
-              : "❌ Größe stimmt nicht überein"}
-          </p>
-          <p className="flex items-center gap-8">
             {fileResult.contentMatch
               ? "✅ Inhalt stimmt überein"
               : "❌ Inhalt stimmt nicht überein"}
@@ -187,21 +156,19 @@ export default function UploadTest() {
       <main>
         <Hero
           title={"Upload-Test"}
-          subtitle="Geben Sie uns Feedback, ob Sie Anhänge (z. B. Visualisierungen) an die Dokumentation der Digitaltauglichkeit anhängen können."
+          subtitle="Geben Sie uns Feedback, ob Sie Anhänge (z. B. Visualisierungen) an die Dokumentation der Digitaltauglichkeit anhängen können.
+          Laden Sie die Datei herunter und laden Sie sie anschließend direkt hier wieder hoch. Sie können die Datei per Drag-and-Drop ablegen; der Upload startet sofort."
         />
         <Container className="mb-80 space-y-40">
-          <section>
-            <RichText markdown={step1} />
-          </section>
-
-          <section className="space-y-24">
-            <RichText markdown={step2} />
-            <div className="grid grid-cols-1 gap-24 md:grid-cols-2">
-              {testFiles.map((file) => (
-                <UploadDropzoneCard key={file.path} file={file} />
-              ))}
-            </div>
-          </section>
+          {testFiles.map((file, index) => (
+            <section key={file.path} className="space-y-24">
+              <h2>{file.name}</h2>
+              <a className="text-link block" href={file.path} download>
+                {file.name} herunterladen
+              </a>
+              <UploadDropzoneCard file={file} />
+            </section>
+          ))}
         </Container>
       </main>
     </>
