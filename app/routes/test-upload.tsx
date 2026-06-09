@@ -233,18 +233,6 @@ export default function UploadTest() {
           Laden Sie in jedem Schritt die Datei herunter und anschließend direkt wieder hoch. Sie können die Datei per Drag-and-Drop ablegen; der Upload startet sofort."
         />
         <Container className="mb-80 space-y-40">
-          {testFiles.map((file) => (
-            <section key={file.path} className="space-y-24">
-              <h2>{file.name}</h2>
-              <a className="text-link block" href={file.path} download>
-                {file.name} herunterladen
-              </a>
-              <UploadDropzoneCard
-                file={file}
-                onComplete={(result) => handleComplete(file.name, result)}
-              />
-            </section>
-          ))}
           <div className="max-w-a11y space-y-8">
             <label
               htmlFor="sender-organization"
@@ -265,6 +253,18 @@ export default function UploadTest() {
               Digitalcheck-Team übermittelt.
             </p>
           </div>
+          {testFiles.map((file) => (
+            <section key={file.path} className="space-y-24">
+              <h2>{file.name}</h2>
+              <a className="text-link block" href={file.path} download>
+                {file.name} herunterladen
+              </a>
+              <UploadDropzoneCard
+                file={file}
+                onComplete={(result) => handleComplete(file.name, result)}
+              />
+            </section>
+          ))}
 
           <Button type={"button"} onClick={submitFeedback}>
             Ergebnis übermitteln
