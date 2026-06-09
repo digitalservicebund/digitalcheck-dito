@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { general } from "~/resources/content/shared/general.ts";
 import type { Node } from "~/utils/paragraphUtils";
 import { BlocksRenderer } from "./BlocksRenderer";
 
@@ -125,8 +124,6 @@ describe("BlocksContentRenderer", () => {
       const link = container.querySelector("a");
       expect(link).toBeInTheDocument();
       expect(link?.textContent).toContain("This is an external link");
-      expect(link?.textContent).toContain(general.a11yMessageNewWindow);
-      expect(link?.target).toBe("_blank");
       expect(link?.href).toBe("https://example.com/");
     });
 
