@@ -1,6 +1,12 @@
 import {
   dokumentation_beteiligungsformate,
+  dokumentation_bewertungOrganisatorisch,
+  dokumentation_bewertungRechtlich,
+  dokumentation_bewertungSemantisch,
+  dokumentation_bewertungTechnisch,
+  dokumentation_euInteroperabilitaetsbezug,
   dokumentation_regelungsvorhabenTitel,
+  dokumentation_verbindlicheAnforderungen,
 } from "@/config/routes";
 import { z } from "zod";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
@@ -137,11 +143,30 @@ export const documentationSchemaV2 = z.object({
   principles: z.array(principleSchemaV2).optional(),
 });
 
+const euInteroperabilityOutcomeNavigationSchema =
+  euInteroperabilityOutcomeSchema
+    .extend({
+      outcomeId: z.enum(EU_INTEROPERABILITY_OUTCOME_IDS),
+    })
+    .strict();
+
 export const getDocumentationSchemaFormUrl = (url: string) => {
   if (url === dokumentation_regelungsvorhabenTitel.path)
     return policyHeaderSchema;
   else if (url === dokumentation_beteiligungsformate.path)
     return participationSchema;
+  else if (url === dokumentation_euInteroperabilitaetsbezug.path)
+    return euInteroperabilityOutcomeNavigationSchema;
+  else if (url === dokumentation_verbindlicheAnforderungen.path)
+    return bindingRequirementsNavigationSchema;
+  else if (url === dokumentation_bewertungRechtlich.path)
+    return interoperabilityAssessmentLevelNavigationSchema;
+  else if (url === dokumentation_bewertungOrganisatorisch.path)
+    return interoperabilityAssessmentLevelNavigationSchema;
+  else if (url === dokumentation_bewertungSemantisch.path)
+    return interoperabilityAssessmentLevelNavigationSchema;
+  else if (url === dokumentation_bewertungTechnisch.path)
+    return interoperabilityAssessmentLevelNavigationSchema;
   else return principleSchemaV2;
 };
 
@@ -188,6 +213,30 @@ export const bindingRequirementsSchema = z.object({
   ),
 });
 
+const bindingRequirementNavigationSchema = z
+  .object({
+    legalReference: z.string().optional(),
+    description: z.string().optional(),
+    services: z.string().optional(),
+    serviceAreas: z.array(z.string()).default([]),
+    stakeholderGroups: z.array(z.string()).default([]),
+  })
+  .refine(
+    (entry) =>
+      Boolean(
+        entry.legalReference?.trim() ||
+        entry.description?.trim() ||
+        entry.services?.trim() ||
+        entry.serviceAreas.length ||
+        entry.stakeholderGroups.length,
+      ),
+    { message: "Bitte vervollständigen Sie die Anforderung." },
+  );
+
+export const bindingRequirementsNavigationSchema = z.object({
+  requirements: z.array(bindingRequirementNavigationSchema).min(1),
+});
+
 const interoperabilityRatingSchema = z.enum([
   "positive",
   "neutral",
@@ -199,6 +248,19 @@ export const interoperabilityAssessmentLevelSchema = z.object({
   detail: z.string().optional(),
   rating: z.union([interoperabilityRatingSchema, z.literal("")]).optional(),
 });
+
+export const interoperabilityAssessmentLevelNavigationSchema =
+  interoperabilityAssessmentLevelSchema
+    .extend({ rating: interoperabilityRatingSchema })
+    .superRefine((value, ctx) => {
+      if (value.rating !== "not-applicable" && !value.detail?.trim()) {
+        ctx.addIssue({
+          code: "custom",
+          message: "Bitte geben Sie eine Erklärung an.",
+          path: ["detail"],
+        });
+      }
+    });
 
 export type InteroperabilityAssessmentLevel = z.infer<
   typeof interoperabilityAssessmentLevelSchema

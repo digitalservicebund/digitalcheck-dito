@@ -4,6 +4,7 @@ import "./utils/mockLocalStorageVersioned";
 import {
   dokumentation,
   dokumentation_beteiligungsformate,
+  dokumentation_bewertungRechtlich,
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
 } from "@/config/routes";
@@ -48,8 +49,8 @@ const mockRoutes: (RouteGroup | Route)[] = [
     title: "EU-Interoperabilität",
     routes: [
       {
-        title: "Interoperabilität A",
-        path: `${dokumentation.path}/interoperabilitaet`,
+        title: dokumentation_bewertungRechtlich.title,
+        path: dokumentation_bewertungRechtlich.path,
       },
     ],
   },
@@ -73,10 +74,12 @@ type ValidationScenario = {
     completedTitle: boolean;
     completedParticipation: boolean;
     completedPrinciples: boolean;
+    completedInteroperability: boolean;
 
     warningTitle: boolean;
     warningParticipation: boolean;
     warningPrinciples: boolean;
+    warningInteroperability: boolean;
   };
 };
 
@@ -96,6 +99,12 @@ const validationScenarios: ValidationScenario[] = [
         formats: "Valid Formats",
         results: "Valid Results",
       },
+      interoperabilityAssessment: {
+        legal: { rating: "positive", detail: "Valid legal detail" },
+        organizational: { rating: "", detail: "" },
+        semantic: { rating: "", detail: "" },
+        technical: { rating: "", detail: "" },
+      },
       principles: [
         {
           answer: "Ja, gänzlich oder teilweise",
@@ -112,13 +121,14 @@ const validationScenarios: ValidationScenario[] = [
       ],
     },
     expected: {
-      completedTitle: false, // is current route so no states are shown
+      completedTitle: false,
       completedParticipation: true,
       completedPrinciples: true,
-
+      completedInteroperability: true,
       warningTitle: false,
       warningParticipation: false,
       warningPrinciples: false,
+      warningInteroperability: false,
     },
   },
   {
@@ -127,13 +137,14 @@ const validationScenarios: ValidationScenario[] = [
       version: DATA_SCHEMA_VERSION_V1,
     },
     expected: {
-      completedTitle: false, // is current route so no states are shown
+      completedTitle: false,
       completedParticipation: false,
       completedPrinciples: false,
-
+      completedInteroperability: false,
       warningTitle: false,
       warningParticipation: false,
       warningPrinciples: false,
+      warningInteroperability: false,
     },
   },
   {
@@ -151,6 +162,12 @@ const validationScenarios: ValidationScenario[] = [
         formats: "Valid Formats",
         results: "Valid Results",
       },
+      interoperabilityAssessment: {
+        legal: { rating: "positive", detail: "" },
+        organizational: { rating: "", detail: "" },
+        semantic: { rating: "", detail: "" },
+        technical: { rating: "", detail: "" },
+      },
       principles: [
         {
           answer: "Ja, gänzlich oder teilweise",
@@ -167,13 +184,14 @@ const validationScenarios: ValidationScenario[] = [
       ],
     },
     expected: {
-      completedTitle: false, // is current route so no states are shown
+      completedTitle: false,
       completedParticipation: true,
       completedPrinciples: false,
-
+      completedInteroperability: false,
       warningTitle: false,
       warningParticipation: false,
       warningPrinciples: true,
+      warningInteroperability: true,
     },
   },
 ];
@@ -215,6 +233,11 @@ const getBeteiligungsformate = () =>
 
 const getPrinzipA = () =>
   within(getNav()).getByRole("link", { name: "Prinzip A" });
+
+const getRechtlicheInteroperabilitaet = () =>
+  within(getNav()).getByRole("link", {
+    name: dokumentation_bewertungRechtlich.title,
+  });
 
 const expectCompleted = (element: HTMLElement) => {
   expect(element).toHaveAccessibleDescription(
@@ -336,6 +359,9 @@ describe("navigation on pages of documentation", () => {
           if (expected.completedParticipation)
             expectCompleted(getBeteiligungsformate());
           else expectNotCompleted(getBeteiligungsformate());
+          if (expected.completedInteroperability)
+            expectCompleted(getRechtlicheInteroperabilitaet());
+          else expectNotCompleted(getRechtlicheInteroperabilitaet());
           if (expected.completedPrinciples) expectCompleted(getPrinzipA());
           else expectNotCompleted(getPrinzipA());
         });
@@ -346,6 +372,9 @@ describe("navigation on pages of documentation", () => {
           if (expected.warningParticipation)
             expectWarning(getBeteiligungsformate());
           else expectNotWarning(getBeteiligungsformate());
+          if (expected.warningInteroperability)
+            expectWarning(getRechtlicheInteroperabilitaet());
+          else expectNotWarning(getRechtlicheInteroperabilitaet());
           if (expected.warningPrinciples) expectWarning(getPrinzipA());
           else expectNotWarning(getPrinzipA());
         });
@@ -370,6 +399,15 @@ describe("navigation on pages of documentation", () => {
             formats: "Valid Formats",
             results: "Valid Results",
           },
+          interoperabilityAssessment: {
+            legal: { rating: "positive", detail: "Valid legal detail" },
+            organizational: {
+              rating: "positive",
+              detail: "Valid organizational detail",
+            },
+            semantic: { rating: "positive", detail: "Valid semantic detail" },
+            technical: { rating: "positive", detail: "Valid technical detail" },
+          },
           principles: [
             {
               answer: "Ja, gänzlich oder teilweise",
@@ -380,13 +418,14 @@ describe("navigation on pages of documentation", () => {
           ],
         },
         expected: {
-          completedTitle: false, // is current route so no states are shown
+          completedTitle: false,
           completedParticipation: true,
           completedPrinciples: true,
-
+          completedInteroperability: true,
           warningTitle: false,
           warningParticipation: false,
           warningPrinciples: false,
+          warningInteroperability: false,
         },
       },
       {
@@ -398,10 +437,11 @@ describe("navigation on pages of documentation", () => {
           completedTitle: false,
           completedParticipation: false,
           completedPrinciples: false,
-
+          completedInteroperability: false,
           warningTitle: false,
           warningParticipation: false,
           warningPrinciples: false,
+          warningInteroperability: false,
         },
       },
       {
@@ -419,23 +459,30 @@ describe("navigation on pages of documentation", () => {
             formats: "Valid Formats",
             results: "Valid Results",
           },
+          interoperabilityAssessment: {
+            legal: { rating: "positive", detail: "legal detail" },
+            organizational: { rating: "", detail: "" },
+            semantic: { rating: "", detail: "" },
+            technical: { rating: "", detail: "" },
+          },
           principles: [
             {
               answer: "Ja, gänzlich oder teilweise",
               id: `${dokumentation.path}/prinzipA`,
               reasoning: "Some reasoning",
-              aspects: [], // empty aspects fails V2 validation
+              aspects: [],
             },
           ],
         },
         expected: {
-          completedTitle: false, // is current route so no states are shown
+          completedTitle: false,
           completedParticipation: true,
-          completedPrinciples: false, // aspects empty -> invalid in V2
-
+          completedPrinciples: false,
+          completedInteroperability: false,
           warningTitle: false,
           warningParticipation: false,
-          warningPrinciples: true, // data exists but invalid
+          warningPrinciples: true,
+          warningInteroperability: true,
         },
       },
     ];
@@ -459,6 +506,9 @@ describe("navigation on pages of documentation", () => {
           if (expected.completedParticipation)
             expectCompleted(getBeteiligungsformate());
           else expectNotCompleted(getBeteiligungsformate());
+          if (expected.completedInteroperability)
+            expectCompleted(getRechtlicheInteroperabilitaet());
+          else expectNotCompleted(getRechtlicheInteroperabilitaet());
           if (expected.completedPrinciples) expectCompleted(getPrinzipA());
           else expectNotCompleted(getPrinzipA());
         });
@@ -469,6 +519,9 @@ describe("navigation on pages of documentation", () => {
           if (expected.warningParticipation)
             expectWarning(getBeteiligungsformate());
           else expectNotWarning(getBeteiligungsformate());
+          if (expected.warningInteroperability)
+            expectWarning(getRechtlicheInteroperabilitaet());
+          else expectNotWarning(getRechtlicheInteroperabilitaet());
           if (expected.warningPrinciples) expectWarning(getPrinzipA());
           else expectNotWarning(getPrinzipA());
         });

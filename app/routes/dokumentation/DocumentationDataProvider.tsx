@@ -1,6 +1,12 @@
 import {
   dokumentation_beteiligungsformate,
+  dokumentation_bewertungOrganisatorisch,
+  dokumentation_bewertungRechtlich,
+  dokumentation_bewertungSemantisch,
+  dokumentation_bewertungTechnisch,
+  dokumentation_euInteroperabilitaetsbezug,
   dokumentation_regelungsvorhabenTitel,
+  dokumentation_verbindlicheAnforderungen,
 } from "@/config/routes";
 import type { ReactNode } from "react";
 import {
@@ -17,6 +23,7 @@ import type {
   DocumentationData,
   EuInteroperabilityOutcome,
   InteroperabilityAssessmentData,
+  InteroperabilityAssessmentLevel,
   Participation,
   PolicyTitle,
   Principle,
@@ -73,6 +80,8 @@ type DocumentationDataContextType = {
     | PolicyTitle
     | Participation
     | EuInteroperabilityOutcome
+    | BindingRequirementsData
+    | InteroperabilityAssessmentLevel
     | Principle
     | undefined;
 };
@@ -123,6 +132,8 @@ function migrateV1ToV2(v1: DocumentationData<V1>): DocumentationData<V2> {
     policyTitle: v1.policyTitle,
     participation: v1.participation,
     euInteroperabilityOutcome: v1.euInteroperabilityOutcome,
+    bindingRequirements: v1.bindingRequirements,
+    interoperabilityAssessment: v1.interoperabilityAssessment,
     principles: principles as Principle[],
   };
 
@@ -364,12 +375,26 @@ export function DocumentationDataProvider({
       | PolicyTitle
       | Participation
       | EuInteroperabilityOutcome
+      | BindingRequirementsData
+      | InteroperabilityAssessmentLevel
       | Principle
       | undefined => {
       if (url === dokumentation_regelungsvorhabenTitel.path)
         return documentationData.policyTitle;
       else if (url === dokumentation_beteiligungsformate.path)
         return documentationData.participation;
+      else if (url === dokumentation_euInteroperabilitaetsbezug.path)
+        return documentationData.euInteroperabilityOutcome;
+      else if (url === dokumentation_verbindlicheAnforderungen.path)
+        return documentationData.bindingRequirements;
+      else if (url === dokumentation_bewertungRechtlich.path)
+        return documentationData.interoperabilityAssessment?.legal;
+      else if (url === dokumentation_bewertungOrganisatorisch.path)
+        return documentationData.interoperabilityAssessment?.organizational;
+      else if (url === dokumentation_bewertungSemantisch.path)
+        return documentationData.interoperabilityAssessment?.semantic;
+      else if (url === dokumentation_bewertungTechnisch.path)
+        return documentationData.interoperabilityAssessment?.technical;
 
       return documentationData.principles?.find(({ id }) => id === url);
     },
