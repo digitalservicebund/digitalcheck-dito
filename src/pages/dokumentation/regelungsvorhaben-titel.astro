@@ -10,6 +10,6 @@ export const frontmatter = {
 const prinzips = await fetchPrinzipsWithExamples();
 ---
 
-<Layout title={frontmatter.title} showProgressBar>
+<Layout title={`Dokumentation: ${frontmatter.title}`} showProgressBar>
   <TitelPage client:load prinzips={prinzips} currentUrl={Astro.url.pathname} />
 </Layout>

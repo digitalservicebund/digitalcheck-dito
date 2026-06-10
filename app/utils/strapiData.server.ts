@@ -238,6 +238,6 @@ export async function getPrincipleIdStaticPaths() {
 
   return prinzips.map((p) => ({
     params: { principleId: p.URLBezeichnung },
-    props: { prinzips },
+    props: { prinzips, principleName: p.Name },
   }));
 }

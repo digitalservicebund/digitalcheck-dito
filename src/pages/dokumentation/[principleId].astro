@@ -3,17 +3,13 @@ import Layout from "@/layouts/Layout.astro";
 import { PrinciplePage } from "~/routes/dokumentation._documentationNavigation.$principleId";
 import { getPrincipleIdStaticPaths } from "~/utils/strapiData.server";
 
-export const frontmatter = {
-  title: "Dokumentation",
-};
-
 export const getStaticPaths = getPrincipleIdStaticPaths;
 
-const { prinzips } = Astro.props;
+const { prinzips, principleName } = Astro.props;
 const { principleId } = Astro.params;
 ---
 
-<Layout title={frontmatter.title} showProgressBar>
+<Layout title={`Dokumentation: ${principleName}`} showProgressBar>
   <PrinciplePage
     client:load
     prinzips={prinzips}

@@ -10,7 +10,7 @@ export const frontmatter = {
 const prinzips = await fetchPrinzipsWithExamples();
 ---
 
-<Layout title={frontmatter.title} showProgressBar>
+<Layout title={`Dokumentation: ${frontmatter.title}`} showProgressBar>
   <ZusammenfassungPage
     client:load
     prinzips={prinzips}
