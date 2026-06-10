@@ -1,12 +1,12 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+import VorpruefungLayout from "@/layouts/VorpruefungLayout.astro";
 import ErgebnisPage from "~/routes/vorpruefung.ergebnis/route";
 
 export const frontmatter = {
-  title: "Ergebnis der Vorprüfung",
+  title: "Ergebnis",
 };
 ---
 
-<Layout title={frontmatter.title} showProgressBar>
+<VorpruefungLayout title={`Vorprüfung: ${frontmatter.title}`} hideNav>
   <ErgebnisPage client:load />
-</Layout>
+</VorpruefungLayout>

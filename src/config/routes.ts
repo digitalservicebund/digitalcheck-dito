@@ -399,7 +399,7 @@ export const unterstuetzung = {
 export const vorpruefung = {
   key: "vorpruefung",
   path: "/vorpruefung",
-  title: "Vorprüfung: Digitalbezug einschätzen",
+  title: "Digitalbezug einschätzen",
   parent: null,
   sitemap: true,
   isStagingOnly: false,
@@ -410,7 +410,7 @@ export const vorpruefung = {
 export const vorpruefung_automatisierung = {
   key: "vorpruefung_automatisierung",
   path: "/vorpruefung/automatisierung",
-  title: "Automatisierung — Vorprüfung",
+  title: "Automatisierung",
   parent: vorpruefung,
   sitemap: true,
   isStagingOnly: false,
@@ -421,7 +421,7 @@ export const vorpruefung_automatisierung = {
 export const vorpruefung_datenaustausch = {
   key: "vorpruefung_datenaustausch",
   path: "/vorpruefung/datenaustausch",
-  title: "Datenaustausch — Vorprüfung",
+  title: "Datenaustausch",
   parent: vorpruefung,
   sitemap: true,
   isStagingOnly: false,
@@ -432,7 +432,7 @@ export const vorpruefung_datenaustausch = {
 export const vorpruefung_ergebnis = {
   key: "vorpruefung_ergebnis",
   path: "/vorpruefung/ergebnis",
-  title: "Ergebnis der Vorprüfung",
+  title: "Ergebnis",
   parent: vorpruefung,
   sitemap: true,
   isStagingOnly: false,
@@ -443,7 +443,7 @@ export const vorpruefung_ergebnis = {
 export const vorpruefung_euBezug = {
   key: "vorpruefung_euBezug",
   path: "/vorpruefung/eu-bezug",
-  title: "EU-Bezug — Vorprüfung",
+  title: "EU-Bezug",
   parent: vorpruefung,
   sitemap: true,
   isStagingOnly: false,
@@ -454,7 +454,7 @@ export const vorpruefung_euBezug = {
 export const vorpruefung_hinweise = {
   key: "vorpruefung_hinweise",
   path: "/vorpruefung/hinweise",
-  title: "Allgemeine Hinweise zur Vorprüfung",
+  title: "Allgemeine Hinweise",
   parent: vorpruefung,
   sitemap: true,
   isStagingOnly: false,
@@ -465,7 +465,7 @@ export const vorpruefung_hinweise = {
 export const vorpruefung_itSystem = {
   key: "vorpruefung_itSystem",
   path: "/vorpruefung/it-system",
-  title: "IT-System — Vorprüfung",
+  title: "IT-System",
   parent: vorpruefung,
   sitemap: true,
   isStagingOnly: false,
@@ -476,7 +476,7 @@ export const vorpruefung_itSystem = {
 export const vorpruefung_kommunikation = {
   key: "vorpruefung_kommunikation",
   path: "/vorpruefung/kommunikation",
-  title: "Digitale Kommunikation — Vorprüfung",
+  title: "Digitale Kommunikation",
   parent: vorpruefung,
   sitemap: true,
   isStagingOnly: false,
@@ -487,7 +487,7 @@ export const vorpruefung_kommunikation = {
 export const vorpruefung_verpflichtungenFuerBeteiligte = {
   key: "vorpruefung_verpflichtungenFuerBeteiligte",
   path: "/vorpruefung/verpflichtungen-fuer-beteiligte",
-  title: "Verpflichtungen für Beteiligte — Vorprüfung",
+  title: "Verpflichtungen für Beteiligte",
   parent: vorpruefung,
   sitemap: true,
   isStagingOnly: false,

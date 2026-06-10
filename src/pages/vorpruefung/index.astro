@@ -1,12 +1,12 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+import VorpruefungLayout from "@/layouts/VorpruefungLayout.astro";
 import VorpruefungIndexPage from "~/routes/vorpruefung._index";
 
 export const frontmatter = {
-  title: "Vorprüfung: Digitalbezug einschätzen",
+  title: "Digitalbezug einschätzen",
 };
 ---
 
-<Layout title={frontmatter.title} showProgressBar>
+<VorpruefungLayout title={`Vorprüfung: ${frontmatter.title}`} hideNav>
   <VorpruefungIndexPage client:load />
-</Layout>
+</VorpruefungLayout>

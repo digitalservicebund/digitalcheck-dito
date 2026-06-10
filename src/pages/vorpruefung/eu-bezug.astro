@@ -1,22 +1,15 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import VorpruefungNavigation from "@/pages/vorpruefung/_VorpruefungNavigation";
+import VorpruefungLayout from "@/layouts/VorpruefungLayout.astro";
 import { PreCheckQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { getQuestion } from "./_getQuestion";
 
 export const frontmatter = {
-  title: "EU-Bezug — Vorprüfung",
+  title: "EU-Bezug",
 };
 
 const { questionIdx, question } = getQuestion("eu-bezug");
 ---
 
-<Layout title={frontmatter.title} showProgressBar>
-  <VorpruefungNavigation client:load pathname={Astro.url.pathname}>
-    <PreCheckQuestion
-      client:load
-      questionIdx={questionIdx}
-      question={question}
-    />
-  </VorpruefungNavigation>
-</Layout>
+<VorpruefungLayout title={`Vorprüfung: ${frontmatter.title}`}>
+  <PreCheckQuestion client:load questionIdx={questionIdx} question={question} />
+</VorpruefungLayout>

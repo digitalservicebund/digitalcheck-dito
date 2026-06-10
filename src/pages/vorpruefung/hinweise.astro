@@ -1,15 +1,12 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import VorpruefungNavigation from "@/pages/vorpruefung/_VorpruefungNavigation";
+import VorpruefungLayout from "@/layouts/VorpruefungLayout.astro";
 import HinweisePage from "~/routes/vorpruefung._preCheckNavigation.hinweise";
 
 export const frontmatter = {
-  title: "Allgemeine Hinweise zur Vorprüfung",
+  title: "Allgemeine Hinweise",
 };
 ---
 
-<Layout title={frontmatter.title} showProgressBar>
-  <VorpruefungNavigation client:load pathname={Astro.url.pathname}>
-    <HinweisePage client:load />
-  </VorpruefungNavigation>
-</Layout>
+<VorpruefungLayout title={frontmatter.title}>
+  <HinweisePage client:load />
+</VorpruefungLayout>
