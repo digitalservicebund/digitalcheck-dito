@@ -5,7 +5,7 @@ import type {
   PolicyTitle,
 } from "~/routes/dokumentation/documentationDataSchema.ts";
 import {
-  interoperabilityRatingOptions,
+  formatRating,
   serviceAreaOptions,
   stakeholderOptions,
 } from "~/routes/dokumentation/interoperability/values.ts";
@@ -71,7 +71,6 @@ export function formatInteroperabilityAssessment(
     technical: "Technische",
     organizational: "Organisatorische",
   };
-  const ratingMap = keyValueToMap(interoperabilityRatingOptions);
 
   return Object.entries(assessment).flatMap(([level, data]) => {
     const levelLabel = levelMap[level as keyof typeof assessment];
@@ -83,7 +82,7 @@ export function formatInteroperabilityAssessment(
       }),
       metadataTable([
         ["Erklärung", data.detail ?? ""],
-        ["Bewertung", (data.rating ? ratingMap.get(data.rating) : "") ?? ""],
+        ["Bewertung", formatRating(data.rating) ?? ""],
       ]),
     ];
   });

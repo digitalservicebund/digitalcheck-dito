@@ -24,7 +24,6 @@ import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
   BindingRequirementsData,
   DocumentationData,
-  InteroperabilityAssessmentLevel,
   Participation,
   PolicyTitle,
   Principle,
@@ -37,6 +36,10 @@ import { slugify } from "~/utils/utilFunctions";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
+// Astro page export
+import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
+import RequirementDetail from "~/routes/dokumentation/interoperability/RequirementDetail.tsx";
+import { formatRating } from "~/routes/dokumentation/interoperability/values.ts";
 
 const {
   summary,
@@ -283,14 +286,6 @@ function BindingRequirementSummary(
   });
 }
 
-const ratingMap = keyValueToMap(interoperabilityRatingOptions);
-function formatRating(rating?: InteroperabilityAssessmentLevel["rating"]) {
-  if (!rating) {
-    return undefined;
-  }
-  return ratingMap.get(rating);
-}
-
 function createInteroperabilityInfoBoxItems(
   documentationData: DocumentationData<"2">,
 ): InfoBoxProps[] {
@@ -301,12 +296,16 @@ function createInteroperabilityInfoBoxItems(
     {
       heading: "Rechtliche Bewertung",
       route: dokumentation_bewertungRechtlich,
+      ratingTitle:
+        "Schafft das Regelungsvorhaben die rechtlichen Voraussetzungen für einen Datenaustausch innerhalb der EU?",
       rating: documentationData.interoperabilityAssessment?.legal.rating,
       detail: documentationData.interoperabilityAssessment?.legal.detail,
     },
     {
       heading: "Organisatorische Bewertung",
       route: dokumentation_bewertungOrganisatorisch,
+      ratingTitle:
+        "Schafft das Regelungsvorhaben die organisatorischen Voraussetzungen für einen Datenaustausch innerhalb der EU?",
       rating:
         documentationData.interoperabilityAssessment?.organizational.rating,
       detail:
@@ -315,12 +314,16 @@ function createInteroperabilityInfoBoxItems(
     {
       heading: "Semantische Bewertung",
       route: dokumentation_bewertungSemantisch,
+      ratingTitle:
+        "Stellt das Regelungsvorhaben sicher, dass semantische Definitionen von Begriffen und Datenfeldern den Datenaustausch über EU-Grenzen ermöglichen?",
       rating: documentationData.interoperabilityAssessment?.semantic.rating,
       detail: documentationData.interoperabilityAssessment?.semantic.detail,
     },
     {
       heading: "Technische Bewertung",
       route: dokumentation_bewertungTechnisch,
+      ratingTitle:
+        "Schafft das Regelungsvorhaben die technischen Voraussetzungen für einen Datenaustausch innerhalb der EU?",
       rating: documentationData.interoperabilityAssessment?.technical.rating,
       detail: documentationData.interoperabilityAssessment?.technical.detail,
     },
@@ -341,7 +344,7 @@ function createInteroperabilityInfoBoxItems(
         ),
       }),
     ...(detailsRequired
-      ? assessmentItems.map(({ heading, route, rating, detail }) =>
+      ? assessmentItems.map(({ heading, route, ratingTitle, rating, detail }) =>
           createInfoBoxItem({
             heading,
             route,
@@ -349,7 +352,7 @@ function createInteroperabilityInfoBoxItems(
               <Answer
                 answers={[
                   {
-                    prefix: "Einordnung",
+                    prefix: ratingTitle,
                     answer: formatRating(rating),
                   },
                   {
@@ -455,12 +458,6 @@ export function DocumentationSummary() {
 export default function Route() {
   return <DocumentationSummary />;
 }
-
-// Astro page export
-import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
-import RequirementDetail from "~/routes/dokumentation/interoperability/RequirementDetail.tsx";
-import { interoperabilityRatingOptions } from "~/routes/dokumentation/interoperability/values.ts";
-import { keyValueToMap } from "~/utils/keyValue.ts";
 
 export function ZusammenfassungPage({
   prinzips,

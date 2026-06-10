@@ -1,4 +1,8 @@
-import type { InteroperabilityAssessmentData } from "~/routes/dokumentation/documentationDataSchema.ts";
+import {
+  InteroperabilityAssessmentData,
+  InteroperabilityAssessmentLevel,
+} from "~/routes/dokumentation/documentationDataSchema.ts";
+import { keyValueToMap } from "~/utils/keyValue.ts";
 
 export type Option = {
   value: string;
@@ -70,10 +74,6 @@ export const interoperabilityRatingOptions2: Option[] = [
     label: "Ja, gänzlich oder teilweise",
     value: "positive",
   },
-  // {
-  //   label: "neutral",
-  //   value: "neutral",
-  // },
   {
     label: "Nein",
     value: "risky",
@@ -83,6 +83,16 @@ export const interoperabilityRatingOptions2: Option[] = [
     value: "not-applicable",
   },
 ];
+const ratingMap = keyValueToMap(interoperabilityRatingOptions2);
+
+export function formatRating(
+  rating?: InteroperabilityAssessmentLevel["rating"],
+) {
+  if (!rating) {
+    return undefined;
+  }
+  return ratingMap.get(rating);
+}
 export const defaultAssessmentValues: InteroperabilityAssessmentData = {
   legal: { detail: "", rating: "" },
   organizational: { detail: "", rating: "" },
