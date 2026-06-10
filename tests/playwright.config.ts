@@ -95,8 +95,8 @@ const config: PlaywrightTestConfig = {
     // We're testing the built code, but set the NODE_ENV to enable mocks.
     // Use `start:test` (does not source .env) so inline env here wins; load
     // test env from .env.test, which sets FEATURE_FLAGS_PATH to the tests file.
-    command: "pnpm astro build && pnpm astro preview",
-    port: 4321,
+    command: "pnpm astro build && pnpm astro preview --port 4399",
+    port: 4399,
     cwd: path.resolve(__dirname, ".."),
   },
 };
