@@ -61,11 +61,23 @@ export const preCheck = {
           text: "Warum ist die Vorprüfung relevant für mein Vorhaben?",
         },
         content: dedent`
-          <ul class="space-y-24">
-            <li><strong>Digitalisierungsbezug frühzeitig erkennen:</strong> Setzen Sie sich frühzeitig mit Chancen der Digitalisierung auseinander, um den Regelungstext so zu gestalten, dass er die praxisnahe Umsetzung ermöglicht.</li>
-            <li><strong>EU-Anforderungen identifizieren:</strong> Im Rahmen der Vorprüfung ermitteln Sie, ob grenzüberschreitende Interoperabilität für Ihr Vorhaben relevant ist. Regelungen, die Interoperabilität fördern, ermöglichen technische Standardisierung, rechtliche Harmonisierung und digitale bürgerzentrierte Dienste innerhalb der EU.</li>
-            <li><strong>Rechtliche Grundlage:</strong> Seit Juni 2024 ist es verpflichtend Regelungsvorhaben auf Bundesebene auf Digitaltauglichkeit zu prüfen. Die Grundlage dafür ist das Onlinezugangsgesetz (OZG) von 2017. Zusätzlich müssen ab Januar 2025 bestimmte Regelungsvorhaben die Anforderungen an Interoperabilität auf EU-Ebene unterstützen. Dies ergibt sich aus der <a href="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903" >EU-Verordnung für ein interoperable Europa (EU) 2024/903</a>.</li>
-          </ul>
+          - **Digitalisierungsbezug frühzeitig erkennen:** Setzen Sie sich
+            frühzeitig mit Chancen der Digitalisierung auseinander, um den
+            Regelungstext so zu gestalten, dass er die praxisnahe Umsetzung
+            ermöglicht.
+          - **EU-Anforderungen identifizieren:** Im Rahmen der Vorprüfung
+            ermitteln Sie, ob grenzüberschreitende Interoperabilität für Ihr
+            Vorhaben relevant ist. Regelungen, die Interoperabilität fördern,
+            ermöglichen technische Standardisierung, rechtliche Harmonisierung und
+            digitale bürgerzentrierte Dienste innerhalb der EU.
+          - **Rechtliche Grundlage:** Seit Juni 2024 ist es verpflichtend,
+            Regelungsvorhaben auf Bundesebene auf Digitaltauglichkeit zu prüfen.
+            Der Normenkontrollrat prüft die Durchführung auf Grundlage von [§ 4
+            Abs. 3 NKRG](https://www.gesetze-im-internet.de/nkrg/__4.html).
+            Zusätzlich müssen ab Januar 2025 bestimmte Regelungsvorhaben die
+            Anforderungen an Interoperabilität auf EU-Ebene unterstützen. Dies
+            ergibt sich aus der [EU-Verordnung für ein interoperables Europa (EU)
+            2024/903](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903).
           `,
       },
     },
