@@ -79,7 +79,7 @@ type ValidationScenario = {
     warningTitle: boolean;
     warningParticipation: boolean;
     warningPrinciples: boolean;
-    warningInteroperability: boolean;
+    warningInteroperabilityLevelLegal: boolean;
   };
 };
 
@@ -128,7 +128,7 @@ const validationScenarios: ValidationScenario[] = [
       warningTitle: false,
       warningParticipation: false,
       warningPrinciples: false,
-      warningInteroperability: false,
+      warningInteroperabilityLevelLegal: false,
     },
   },
   {
@@ -144,7 +144,7 @@ const validationScenarios: ValidationScenario[] = [
       warningTitle: false,
       warningParticipation: false,
       warningPrinciples: false,
-      warningInteroperability: false,
+      warningInteroperabilityLevelLegal: false,
     },
   },
   {
@@ -191,7 +191,7 @@ const validationScenarios: ValidationScenario[] = [
       warningTitle: false,
       warningParticipation: false,
       warningPrinciples: true,
-      warningInteroperability: true,
+      warningInteroperabilityLevelLegal: true,
     },
   },
 ];
@@ -372,7 +372,7 @@ describe("navigation on pages of documentation", () => {
           if (expected.warningParticipation)
             expectWarning(getBeteiligungsformate());
           else expectNotWarning(getBeteiligungsformate());
-          if (expected.warningInteroperability)
+          if (expected.warningInteroperabilityLevelLegal)
             expectWarning(getRechtlicheInteroperabilitaet());
           else expectNotWarning(getRechtlicheInteroperabilitaet());
           if (expected.warningPrinciples) expectWarning(getPrinzipA());
@@ -390,10 +390,10 @@ describe("navigation on pages of documentation", () => {
           version: DATA_SCHEMA_VERSION_V2,
           policyTitle: {
             title: "Valid Title",
-            organization: "",
-            publicationStatus: "",
+            organization: "Organization",
+            publicationStatus: "published",
             publicationDate: "",
-            publicationLink: "",
+            publicationLink: "https://example.com",
           },
           participation: {
             formats: "Valid Formats",
@@ -425,7 +425,7 @@ describe("navigation on pages of documentation", () => {
           warningTitle: false,
           warningParticipation: false,
           warningPrinciples: false,
-          warningInteroperability: false,
+          warningInteroperabilityLevelLegal: false,
         },
       },
       {
@@ -441,7 +441,7 @@ describe("navigation on pages of documentation", () => {
           warningTitle: false,
           warningParticipation: false,
           warningPrinciples: false,
-          warningInteroperability: false,
+          warningInteroperabilityLevelLegal: false,
         },
       },
       {
@@ -460,7 +460,7 @@ describe("navigation on pages of documentation", () => {
             results: "Valid Results",
           },
           interoperabilityAssessment: {
-            legal: { rating: "positive", detail: "legal detail" },
+            legal: { rating: "positive", detail: "" },
             organizational: { rating: "", detail: "" },
             semantic: { rating: "", detail: "" },
             technical: { rating: "", detail: "" },
@@ -482,7 +482,7 @@ describe("navigation on pages of documentation", () => {
           warningTitle: false,
           warningParticipation: false,
           warningPrinciples: true,
-          warningInteroperability: true,
+          warningInteroperabilityLevelLegal: true,
         },
       },
     ];
@@ -519,7 +519,7 @@ describe("navigation on pages of documentation", () => {
           if (expected.warningParticipation)
             expectWarning(getBeteiligungsformate());
           else expectNotWarning(getBeteiligungsformate());
-          if (expected.warningInteroperability)
+          if (expected.warningInteroperabilityLevelLegal)
             expectWarning(getRechtlicheInteroperabilitaet());
           else expectNotWarning(getRechtlicheInteroperabilitaet());
           if (expected.warningPrinciples) expectWarning(getPrinzipA());
