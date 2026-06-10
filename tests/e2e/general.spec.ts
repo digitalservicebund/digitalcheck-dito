@@ -60,6 +60,9 @@ function getExpectedTitle(route: Route) {
     // subpages of documentation
     return `Dokumentation: ${route.title}${titleSuffix}`;
   }
+  if (route.path.startsWith(vorpruefung.path)) {
+    return `Vorprüfung: ${route.title}${titleSuffix}`;
+  }
 
   return `${route.title}${titleSuffix}`;
 }
