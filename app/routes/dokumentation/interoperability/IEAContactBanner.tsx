@@ -1,9 +1,11 @@
 import { interoperabel_nationaleKontaktstelle } from "@/config/routes.ts";
+import { QuestionMarkOutlined } from "@digitalservicebund/icons";
 import { Link } from "react-router";
 
 export function IEAContactBanner() {
   return (
-    <div className="mt-8 border-2 border-blue-800 bg-blue-300 p-16">
+    <div className="mt-8 flex gap-16 bg-blue-300 p-16">
+      <QuestionMarkOutlined className="size-80 fill-blue-800" />
       <p>
         <span className="ds-label-01-bold block">
           Bei Fragen und Rückmeldungen
