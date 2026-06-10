@@ -5,11 +5,11 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN npm install -g pnpm
 
+FROM base AS build
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 WORKDIR /src
-COPY ./package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile --ignore-scripts
 
-FROM base AS build
 
 COPY tsconfig.json astro.config.mjs ./
 # perspektivisch wird app nicht mehr gebraucht bei abgeschlossener Migration
@@ -22,7 +22,6 @@ RUN PUBLIC_STAGE=production pnpm run build --outDir dist_production
 RUN PUBLIC_STAGE=staging    pnpm run build --outDir dist_staging
 
 FROM nginx:1.31.0-alpine AS runtime
-
 COPY ./nginx.template.conf /etc/nginx/nginx.template.conf
 COPY --from=build /src/dist_production /usr/share/nginx/production
 COPY --from=build /src/dist_staging /usr/share/nginx/staging
