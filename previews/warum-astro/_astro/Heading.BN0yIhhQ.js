@@ -1,0 +1,1 @@
+import{c as g,j as m}from"./tailwindMerge.gN6BWK24.js";function j({tagName:o="h1",text:s,className:l,look:u,id:e,children:n,ariaLabel:a,...r}){const t=o,c=g("sm:hyphens-none",u,l);return n?m.jsx(t,{id:e,className:c,"aria-label":a,...r,children:n??s}):m.jsx(t,{id:e,className:c,"aria-label":a,...r,dangerouslySetInnerHTML:{__html:s??""}})}export{j as H};

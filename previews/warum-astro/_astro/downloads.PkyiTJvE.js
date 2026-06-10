@@ -1,0 +1,1 @@
+const a="/digitalcheck-dito/previews/warum-astro",t=a.replace(/\/$/,""),e={path:`${t}/documents/Anleitung_Flussdiagramm_erstellen.pptx`},i={path:`${t}/documents/TEMPLATE_Dokumentation_der_Digitaltauglichkeit.docx`,filename:"Dokumentation_der_Digitaltauglichkeit.docx"};export{e as a,i as d};
