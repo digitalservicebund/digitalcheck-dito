@@ -1,0 +1,78 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import {
+  GradingOutlined,
+  HistoryToggleOffOutlined,
+  WidgetsOutlined,
+} from "@digitalservicebund/icons";
+
+const title = "Modernisierung der Architektur";
+---
+
+<Layout title={title}>
+  <main>
+    <div class="bg-blue-100">
+      <div class="container py-40 ds-stack ds-stack-16 pb-48">
+        <h1 class="ds-heading-01-reg">{title}</h1>
+        <ol>
+          <li>Migration der Digitalcheck-Website von React Router zu Astro.</li>
+          <li>Migration der Contents von Strapi in die Codebase</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="container py-80">
+      <section class="ds-stack ds-stack-8">
+        <ul class="list-unstyled info-box ds-stack ds-stack-32 mt-32">
+          <li class="border-0 border-b-2 border-solid border-gray-400 pb-40">
+            <div class="flex scroll-my-40 flex-col gap-32 md:flex-row">
+              <WidgetsOutlined
+                className="hidden size-80 fill-blue-500 sm:block"
+              />
+              <div class="ds-stack ds-stack-16 grow wrap-break-word">
+                <h3 class="ds-heading-03-reg">
+                  Austauschbare Komponenten zwischen ZfL und DC
+                </h3>
+                <p>
+                  ZfL und DC verwenden die gleiche Architektur: Für ZfL
+                  entwickelte Komponenten können problemlos im DC verwendet
+                  werden und umgekehrt. Eine zukünftige Zusammenführung beider
+                  Websites wird erheblich erleichtert.
+                </p>
+              </div>
+            </div>
+          </li>
+
+          <li class="border-0 border-b-2 border-solid border-gray-400 pb-40">
+            <div class="flex scroll-my-40 flex-col gap-32 md:flex-row">
+              <HistoryToggleOffOutlined
+                className="hidden size-80 fill-blue-500 sm:block"
+              />
+              <div class="ds-stack ds-stack-16 grow wrap-break-word">
+                <h3 class="ds-heading-03-reg">Developer Experience</h3>
+                <p>
+                  Code ist übersichtlicher und einfacher zu warten.
+                  Neuentwicklungen können schneller umgesetzt werden.
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="pb-40">
+            <div class="flex scroll-my-40 flex-col gap-32 md:flex-row">
+              <GradingOutlined
+                className="hidden size-80 fill-blue-500 sm:block"
+              />
+              <div class="ds-stack ds-stack-16 grow wrap-break-word">
+                <h3 class="ds-heading-03-reg">Ausfallsicherheit</h3>
+                <p>
+                  Statisch vorgerenderte Seite: Inhalte sind immer verfügbar,
+                  auch wenn Strapi CMS ausfällt.
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</Layout>
