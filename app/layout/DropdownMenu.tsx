@@ -44,7 +44,7 @@ export default function DropdownMenu({
     "flex cursor-pointer items-center hover:bg-blue-100",
     isMobile
       ? "ds-label-01-bold w-full justify-between border-l-[4px] border-transparent p-16"
-      : "ds-label-01-reg h-full border-b-[4px] border-transparent pr-8 pl-16 whitespace-nowrap",
+      : "ds-label-01-reg h-full border-b-4 border-transparent pr-8 pl-16 whitespace-nowrap",
     isActiveParent && "border-blue-800 bg-blue-100",
     isExpanded && "bg-blue-100",
   );

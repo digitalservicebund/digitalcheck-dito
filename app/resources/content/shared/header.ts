@@ -117,7 +117,7 @@ export const header = {
           title: "Bund und Länder",
           href: bundeslaender.path,
           content: "Alles über den Digitalcheck für Bund und Länder",
-          image: "/images/bundeslaender/bund-laender-kommunen-adler.svg",
+          image: "/logo/bund-laender-kommunen-adler.svg",
           imageAlt: "Logo Bund, Länder, Kommunen",
         },
         {

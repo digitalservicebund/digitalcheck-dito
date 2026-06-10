@@ -58,6 +58,8 @@ fileignoreconfig:
     allowed_patterns: [proxy_pass]
   - filename: public/images/bundeslaender/brandenburg-logo.svg
     checksum: a5ca79178f2063553ddce1e52b9ed85d3cd2f25f107b94683e653394b1e62ef7
+  - filename: public/logo/bund-laender-kommunen.svg
+    checksum: ef753ce53aca393a68d4652135f9c15ed058382e7aa6283385107f2a2d9cd9bb
 
 allowed_patterns:
   - key
