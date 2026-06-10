@@ -6,8 +6,8 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN npm install -g pnpm
 
 FROM base AS build
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 WORKDIR /src
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile --ignore-scripts
 
 
