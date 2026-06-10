@@ -51,7 +51,7 @@ query GetAllPrinzipsWithBeispiele {
   const prinzips = result.prinzips.toSorted((a, b) => a.order - b.order);
 
   return prinzips.map((prinzip) => ({
-    params: { prinzip: prinzip.URLBezeichnung },
+    params: { principleId: prinzip.URLBezeichnung },
     props: { prinzip, prinzips },
   }));
 }
