@@ -7,6 +7,6 @@ export const frontmatter = {
 };
 ---
 
-<VorpruefungLayout title={`Vorprüfung: ${frontmatter.title}`} hideNav>
+<VorpruefungLayout title={frontmatter.title} hideNav>
   <VorpruefungIndexPage client:load />
 </VorpruefungLayout>

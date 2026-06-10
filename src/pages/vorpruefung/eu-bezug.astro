@@ -10,6 +10,6 @@ export const frontmatter = {
 const { questionIdx, question } = getQuestion("eu-bezug");
 ---
 
-<VorpruefungLayout title={`Vorprüfung: ${frontmatter.title}`}>
+<VorpruefungLayout title={frontmatter.title}>
   <PreCheckQuestion client:load questionIdx={questionIdx} question={question} />
 </VorpruefungLayout>
