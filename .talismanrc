@@ -52,6 +52,8 @@ fileignoreconfig:
     checksum: 957c92add9454aefd5145b48757ce39e277819d9775c68fe3e6dc1a73226db3e
   - filename: public/documents/BundeslaenderInfoPage.pdf
     checksum: b5034dcbaa91c8cddcb4d75843b211b4a4cea87fb78b64ad327705d1f91b25cf
+  - filename: nginx.template.conf
+    allowed_patterns: [proxy_pass]
 
 allowed_patterns:
   - key
