@@ -119,6 +119,7 @@ export const header = {
           content: "Alles über den Digitalcheck für Bund und Länder",
           image: "/logo/bund-laender-kommunen-adler.svg",
           imageAlt: "Logo Bund, Länder, Kommunen",
+          activeBehavior: "exactMatch" as ActiveBehavior,
         },
         {
           title: "Brandenburg",
