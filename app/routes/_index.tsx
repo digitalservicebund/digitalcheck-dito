@@ -146,8 +146,8 @@ export default function Index() {
                     <RichText markdown={step.result} />
                     {step.number === 1 && (
                       <p className="mt-16">
-                        * Auf Bundesebene ist zum Beispiel der Normen
-                        Kontrollrat (NKR) die zuständige Prüfstelle.
+                        * Auf Bundesebene ist zum Beispiel der
+                        Normenkontrollrat (NKR) die zuständige Prüfstelle.
                       </p>
                     )}
                   </div>
