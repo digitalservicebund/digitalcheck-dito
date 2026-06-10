@@ -51,7 +51,7 @@ export default function RequirementDetail({ requirement }: Readonly<Props>) {
   );
 }
 
-function Label({ keyName }: { keyName: keyof Requirement }) {
+function Label({ keyName }: Readonly<{ keyName: keyof Requirement }>) {
   return <dt className="ds-label-01-bold">{labels[keyName]}</dt>;
 }
 

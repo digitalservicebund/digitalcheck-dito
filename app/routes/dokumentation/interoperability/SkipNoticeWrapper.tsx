@@ -5,9 +5,9 @@ import { useDocumentationDataService } from "~/routes/dokumentation/Documentatio
 
 export default function SkipNoticeWrapper({
   children,
-}: {
+}: Readonly<{
   children?: ReactNode;
-}) {
+}>) {
   const { documentationData } = useDocumentationDataService();
   const [showAnyway, setShowAnyway] = useState(false);
 

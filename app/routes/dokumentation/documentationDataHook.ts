@@ -21,7 +21,7 @@ export const useSyncedForm = <
   SchemaOutput,
   SubmitResponseData,
 >({
-  currentUrl /* TODO remove, unused */,
+  currentUrl,
   storedData,
   schema,
   defaultValues,
