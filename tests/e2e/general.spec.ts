@@ -159,12 +159,17 @@ test.describe("links", () => {
     await expect(page).toHaveURL(methoden.path);
   });
 
-  test("links leading to external pages open in new tab", async ({ page }) => {
+  test("links leading to external pages have icon", async ({ page }) => {
     await page.goto(home.path, { waitUntil: "domcontentloaded" });
     const linkLocator = page.getByRole("link", {
       name: "DigitalService GmbH des Bundes",
     });
-    await expect(linkLocator).toHaveAttribute("target", "_blank");
+    const afterBackgroundColor = await linkLocator.evaluate((el) => {
+      return globalThis
+        .getComputedStyle(el, "::after")
+        .getPropertyValue("background-color");
+    });
+    expect(afterBackgroundColor).toBeTruthy();
   });
 });
 
