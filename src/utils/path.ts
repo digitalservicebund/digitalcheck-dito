@@ -1,7 +1,6 @@
 export const removeTrailingSlash = (path: string) =>
   path.replace(/\/$/, "").replace(/^$/, "/");
 
-export const buildRoutePath = (href: string, baseUrl = ""): string => {
-  const normalizedBaseUrl = removeTrailingSlash(baseUrl);
-  return normalizedBaseUrl === "/" ? href : `${normalizedBaseUrl}${href}`;
-};
+/** Prefix a URL path with the site’s base path if set. */
+export const withBase = (path: string) =>
+  import.meta.env.BASE_URL.replace(/\/$/, "") + path;
