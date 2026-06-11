@@ -5,18 +5,19 @@ import laenderMapUrl from "@/pages/bundeslaender/_assets/laender-map.svg?url";
 
 interface Props {
   title: string;
-  noHighlight?: boolean;
+  isParent?: boolean;
 }
 
-const { title, noHighlight } = Astro.props;
+const { title, isParent } = Astro.props;
+const displayTitle = isParent ? title : `Land ${title}`;
 
 // named slots: `subtitle`, `intro`
 ---
 
-<Layout title={title}>
+<Layout title={displayTitle}>
   <main class="breakout-grid">
     <Hero>
-      <h1>{title}</h1>
+      <h1>{displayTitle}</h1>
       <slot name="subtitle" />
     </Hero>
     <div class="breakout bg-blue-300">
@@ -35,7 +36,7 @@ const { title, noHighlight } = Astro.props;
                 class="h-full w-auto object-contain"
               />
               {
-                !noHighlight && (
+                !isParent && (
                   <svg
                     viewBox="0 0 592 801"
                     class="absolute inset-0 h-full w-full"
