@@ -1,0 +1,18 @@
+---
+import VorpruefungLayout from "@/layouts/VorpruefungLayout.astro";
+import { preCheck } from "~/resources/content/vorpruefung";
+import { PreCheckQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
+
+export function getStaticPaths() {
+  return preCheck.questions.map((question, questionIdx) => ({
+    params: { questionId: question.id },
+    props: { question, questionIdx },
+  }));
+}
+
+const { question, questionIdx } = Astro.props;
+---
+
+<VorpruefungLayout title={question.title}>
+  <PreCheckQuestion client:load questionIdx={questionIdx} question={question} />
+</VorpruefungLayout>

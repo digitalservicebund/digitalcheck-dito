@@ -1,14 +1,19 @@
 import {
   interoperabel,
+  vorpruefung,
   vorpruefung_ergebnis,
   vorpruefung_hinweise,
 } from "@/config/routes";
-import { preCheckQuestions } from "~/resources/content/shared/pre-check-questions";
 import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { assetPath } from "~/utils/assetPath";
 import type { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
+
+// Question pages are rendered by the dynamic route src/pages/vorpruefung/[questionId].astro,
+// so their paths are derived from the question ids instead of generated route objects.
+const questionPath = (questionId: string) =>
+  `${vorpruefung.path}/${questionId}`;
 
 export const preCheck = {
   preCheckName: "Vorprüfung",
@@ -214,13 +219,14 @@ export const preCheck = {
         
         Bitte überprüfen Sie ihre Angaben.
 
-        [Frage 3 zum Datenaustausch überprüfen](${preCheckQuestions.datenaustausch.path})
+        [Frage 3 zum Datenaustausch überprüfen](${questionPath("datenaustausch")})
       `,
     },
   },
   questions: [
     {
-      ...preCheckQuestions.itSystem,
+      id: "it-system",
+      title: "IT-System",
       question:
         "Muss durch die Regelung ein IT-System angepasst oder neu entwickelt werden?",
       positiveResult: "einer Anpassung oder Neuentwicklung einer IT-Lösung.",
@@ -236,7 +242,8 @@ export const preCheck = {
       },
     },
     {
-      ...preCheckQuestions.verpflichtungenFuerBeteiligte,
+      id: "verpflichtungen-fuer-beteiligte",
+      title: "Verpflichtungen für Beteiligte",
       question:
         "Entstehen durch die Regelung Mitwirkungspflichten für Akteurinnen und Akteure?",
       positiveResult:
@@ -260,7 +267,8 @@ export const preCheck = {
       },
     },
     {
-      ...preCheckQuestions.datenaustausch,
+      id: "datenaustausch",
+      title: "Datenaustausch",
       question:
         "Soll ein Datenaustausch stattfinden bspw. weil durch die Regelung Daten erhoben werden, die der Verwaltung bereits vorliegen?",
       positiveResult: "einem Austausch von Daten.",
@@ -272,7 +280,8 @@ export const preCheck = {
       },
     },
     {
-      ...preCheckQuestions.kommunikation,
+      id: "kommunikation",
+      title: "Digitale Kommunikation",
       question:
         "Führt die Regelung zu einer Interaktion zwischen Behörden und Bürgerinnen und Bürger bzw. Unternehmen?",
       positiveResult:
@@ -282,7 +291,8 @@ export const preCheck = {
       text: "**Praxisbeispiel**: Ein Antrag für Steuerentlastung muss gestellt und abgeschickt werden — dies kann digital, ohne händische Unterschrift oder analoge Nachweise geschehen. Es können z.B. Unternehmen, Bürgerinnen und Bürger oder Organisationen den Antrag einreichen.",
     },
     {
-      ...preCheckQuestions.automatisierung,
+      id: "automatisierung",
+      title: "Automatisierung",
       question:
         "Kann die Umsetzung der Regelung verbessert werden, indem man Schritte automatisiert?",
       positiveResult:
@@ -292,7 +302,8 @@ export const preCheck = {
       text: "**Praxisbeispiel**: Durch die automatisierte Auszahlung der Energiepreispauschale entfällt sowohl das Errechnen eines Leistungsanspruchs als auch die manuelle Antragstellung durch Leistungsberechtigte.",
     },
     {
-      ...preCheckQuestions.euBezug,
+      id: "eu-bezug",
+      title: "EU-Bezug",
       question:
         "Ist durch die Regelung vorgesehen, dass Daten und Informationen zwischen Verwaltungen von EU-Mitgliedsstaaten ausgetauscht werden?",
       positiveResult:
@@ -320,11 +331,14 @@ export const preCheck = {
   ].map((question, index, questions) => ({
     // generate list from the questions such that each list has a path, a previous link and a next link
     ...question,
+    path: questionPath(question.id),
     prevLink:
-      index === 0 ? vorpruefung_hinweise.path : questions[index - 1].path,
+      index === 0
+        ? vorpruefung_hinweise.path
+        : questionPath(questions[index - 1].id),
     nextLink:
       index === questions.length - 1
         ? vorpruefung_ergebnis.path
-        : questions[index + 1].path,
+        : questionPath(questions[index + 1].id),
   })) as TQuestion[],
 };
