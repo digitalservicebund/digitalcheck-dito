@@ -187,16 +187,21 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
           {/* Logo and title */}
           <a
             href={home.path}
-            className="link-unstyled flex items-center space-x-16"
+            className="link-unstyled flex items-center space-x-24"
           >
-            <div className="forced-colors:dark:bg-white">
-              <img
-                src={withBase("/logo/bund-laender-kommunen.svg")}
-                alt="Logo des Bundes"
-                width={72}
-              />
-            </div>
-            <p className="ds-label-01-bold flex flex-col text-xl max-lg:hidden">
+            <img
+              src={withBase("/logo/bund-laender-kommunen.svg")}
+              alt="Logo des Bundes"
+              width={72}
+              className="forced-colors:dark:hidden"
+            />
+            <img
+              src={withBase("/logo/bund-laender-kommunen-dark.svg")}
+              alt="Logo des Bundes"
+              width={72}
+              className="hidden forced-colors:dark:block"
+            />
+            <p className="ds-label-01-bold flex flex-col text-xl max-[1096px]:hidden">
               {header.title}
             </p>
           </a>
