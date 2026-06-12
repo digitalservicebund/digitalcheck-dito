@@ -228,14 +228,17 @@ describe("DropdownMenu Component", () => {
   });
 
   describe("Active Item highlighting", () => {
+    const getHighlightContainer = (title: string) =>
+      screen.getByRole("menuitem", { name: title }).firstElementChild!;
+
     it("highlights an item when the url matches the page", () => {
       renderDropdown({ isExpanded: true, isOrderedList: false });
-      const activeLink = screen.getByText("Link1").parentElement!;
+      const activeLink = getHighlightContainer("Link1");
 
       expect(activeLink.classList).toContain("border-blue-800");
       expect(activeLink.classList).toContain("bg-blue-100");
 
-      const inActiveLink = screen.getByText("Link2").parentElement!;
+      const inActiveLink = getHighlightContainer("Link2");
 
       expect(inActiveLink.classList).not.toContain("border-blue-800");
       expect(inActiveLink.classList).not.toContain("bg-blue-100");
@@ -261,7 +264,7 @@ describe("DropdownMenu Component", () => {
         data: newMockDropdownData,
       });
 
-      const activeLink = screen.getByText("Link1").parentElement!;
+      const activeLink = getHighlightContainer("Link1");
 
       expect(activeLink.classList).not.toContain("border-blue-800");
       expect(activeLink.classList).not.toContain("bg-blue-100");
@@ -290,12 +293,12 @@ describe("DropdownMenu Component", () => {
         ["/Link1/Link2"],
       );
 
-      const inActiveLink = screen.getByText("Link1").parentElement!;
+      const inActiveLink = getHighlightContainer("Link1");
 
       expect(inActiveLink.classList).not.toContain("border-blue-800");
       expect(inActiveLink.classList).not.toContain("bg-blue-100");
 
-      const activeLink = screen.getByText("Link2").parentElement!;
+      const activeLink = getHighlightContainer("Link2");
 
       expect(activeLink.classList).toContain("border-blue-800");
       expect(activeLink.classList).toContain("bg-blue-100");
