@@ -1,0 +1,1 @@
+function e(e){return`/digitalcheck-dito/previews/nkr-mail/`.replace(/\/$/,``)+e}export{e as t};

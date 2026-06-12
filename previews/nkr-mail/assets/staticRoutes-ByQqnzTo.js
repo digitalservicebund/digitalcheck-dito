@@ -1,0 +1,1 @@
+import{N as e,n as t}from"./routes-Cj4mu4DZ.js";import{t as n}from"./tabs-lhkPe3aT.js";var r=`/handle-client-side-error`,i=e.path+n(`online-schulungen`,`angebote`),a=t.path+`/regelungen`,o=t.path+`/visualisierung`;export{o as i,a as n,i as r,r as t};
