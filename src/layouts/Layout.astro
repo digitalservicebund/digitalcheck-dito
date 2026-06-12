@@ -6,6 +6,7 @@ import Footer from "~/layout/Footer";
 import PageHeader from "~/layout/PageHeader";
 import { siteMeta } from "~/resources/content/shared/meta";
 import { isProduction } from "@/config/stage";
+import { withBase } from "@/utils/path";
 
 interface Props {
   title?: string;
@@ -64,9 +65,21 @@ const jsonLdMetadata = {
     <meta property="twitter:card" content="summary_large_image" />
     <link rel="canonical" href={canonicalUrl} />
 
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon_32.png" type="image/png" sizes="32x32" />
-    <link rel="icon" href="/favicon_64.png" type="image/png" sizes="64x64" />
+    <link
+      rel="icon"
+      type="image/png"
+      href={withBase("/favicon-96x96.png")}
+      sizes="96x96"
+    />
+    <link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")} />
+    <link rel="shortcut icon" href={withBase("/favicon.ico")} />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href={withBase("/apple-touch-icon.png")}
+    />
+    <meta name="apple-mobile-web-app-title" content="Digitalcheck" />
+    <link rel="manifest" href={withBase("/site.webmanifest")} />
 
     <script
       is:inline
