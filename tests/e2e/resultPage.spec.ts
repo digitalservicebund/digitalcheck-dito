@@ -101,7 +101,7 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
 
     expect(mailUri).toContain("Digitalcheck Vorprüfung: „Vorhaben ABC“");
 
-    expect(mailUri).toContain("nkr@bmjv.bund.de");
+    expect(mailUri).toContain("poststelle@nkr.bund.de");
     expect(mailUri).toContain("interoperabel@digitalservice.bund.de");
 
     expect(mailUri).toContain(
