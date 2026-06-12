@@ -192,16 +192,16 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
             <img
               src={withBase("/logo/bund-laender-kommunen.svg")}
               alt="Logo des Bundes"
-              width={72}
+              width={80}
               className="forced-colors:dark:hidden"
             />
             <img
               src={withBase("/logo/bund-laender-kommunen-dark.svg")}
               alt="Logo des Bundes"
-              width={72}
+              width={80}
               className="hidden forced-colors:dark:block"
             />
-            <p className="ds-label-01-bold flex flex-col text-xl max-[1096px]:hidden">
+            <p className="ds-label-01-bold flex flex-col text-xl lg:max-[1096px]:hidden">
               {header.title}
             </p>
           </a>
