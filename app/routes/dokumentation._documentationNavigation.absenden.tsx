@@ -42,6 +42,7 @@ export function DocumentationSend() {
           }}
         >
           <RichText
+            className="space-y-32"
             markdown={
               hasPruefstelle
                 ? finish.download.content
@@ -67,6 +68,7 @@ export function DocumentationSend() {
             }}
           >
             <RichText
+              className="space-y-32"
               markdown={
                 isBund
                   ? finish.send.content(pruefstelleMail)
