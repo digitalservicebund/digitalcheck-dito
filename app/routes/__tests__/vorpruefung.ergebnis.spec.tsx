@@ -384,7 +384,7 @@ describe("Vorprüfung Ergebnis Page", () => {
           const subject = params.get("subject") || "";
 
           if (expected.includesNkrRecipient)
-            expect(recipients).toContain("nkr@bmjv.bund.de");
+            expect(recipients).toContain("poststelle@nkr.bund.de");
           if (expected.includesDigitalcheckTeam)
             expect(recipients).toContain(
               "interoperabel@digitalservice.bund.de",
