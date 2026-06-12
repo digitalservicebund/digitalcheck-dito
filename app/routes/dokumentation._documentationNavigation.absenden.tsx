@@ -6,7 +6,9 @@ import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxList from "~/components/InfoBoxList";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
+import { pruefstelleMails } from "~/resources/content/shared/bundeslaender";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
+import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
 const { finish } = digitalDocumentation;
@@ -14,7 +16,12 @@ const { finish } = digitalDocumentation;
 export function DocumentationSend() {
   const { prinzips } = useDocumentationNavigation();
   const { downloadDocumentation } = useWordDocumentation();
+  const { documentationData } = useDocumentationDataService();
 
+  const bundesland = documentationData.policyTitle?.bundesland || undefined;
+  const isBund = bundesland === "Bund";
+  const pruefstelleMail = bundesland && pruefstelleMails.get(bundesland);
+  const hasPruefstelle = !!pruefstelleMail;
   return (
     <>
       <Heading
@@ -34,7 +41,13 @@ export function DocumentationSend() {
             text: finish.download.heading,
           }}
         >
-          <RichText markdown={finish.download.content} />
+          <RichText
+            markdown={
+              hasPruefstelle
+                ? finish.download.content
+                : finish.download.contentNoPruefstelle(bundesland)
+            }
+          />
           <ButtonContainer>
             <DownloadButton
               onClick={() => void downloadDocumentation(prinzips)}
@@ -43,17 +56,25 @@ export function DocumentationSend() {
             </DownloadButton>
           </ButtonContainer>
         </InfoBox>
-        <InfoBox
-          look="highlight"
-          className="bg-white"
-          heading={{
-            tagName: "h2",
-            look: "ds-heading-03-reg",
-            text: finish.send.heading,
-          }}
-        >
-          <RichText markdown={finish.send.content} />
-        </InfoBox>
+        {hasPruefstelle && (
+          <InfoBox
+            look="highlight"
+            className="bg-white"
+            heading={{
+              tagName: "h2",
+              look: "ds-heading-03-reg",
+              text: finish.send.heading,
+            }}
+          >
+            <RichText
+              markdown={
+                isBund
+                  ? finish.send.content(pruefstelleMail)
+                  : finish.send.contentBundesland(pruefstelleMail)
+              }
+            />
+          </InfoBox>
+        )}
         <InfoBox
           heading={{
             tagName: "h2",

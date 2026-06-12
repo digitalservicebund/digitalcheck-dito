@@ -1,5 +1,6 @@
 import { TipsAndUpdatesOutlined } from "@digitalservicebund/icons";
 import { dedent } from "~/utils/dedentMultilineStrings";
+import { bundeslaender } from "./shared/bundeslaender";
 import { contact } from "./shared/contact";
 
 export const digitalDocumentation = {
@@ -141,7 +142,8 @@ export const digitalDocumentation = {
     inputBundesland: {
       label: "Wählen Sie Ihr Bundesland oder den Bund aus",
       error: "Bitte wählen Sie Ihr Bundesland oder den Bund aus.",
-      options: ["Bund", "Brandenburg", "Hessen", "Nordrhein-Westfalen"],
+      // widen to string so the empty form default "" stays assignable
+      options: bundeslaender.map((b): string => b.name),
     },
   },
   navigation: {
@@ -299,17 +301,26 @@ export const digitalDocumentation = {
       heading: "Dokumentation herunterladen",
       content:
         "Laden Sie die ausgefüllte Dokumentation herunter, um sie abzustimmen oder an Ihre Prüfstelle zu senden.",
+      contentNoPruefstelle: (bundesland = "Ihr Bundesland") => dedent`
+        Jetzt laden Sie die ausgefüllte Dokumentation herunter. 
+
+        **Hinweis**: Da es für ${bundesland} **keine Prüfstelle** gibt, dient Ihnen die Dokumentation zur Selbstprüfung.
+      `,
       buttonText: "Word-Datei herunterladen (.docx)",
     },
     send: {
       heading: "Fertige Dokumentation an Prüfstelle senden",
-      content: dedent`
-        Senden Sie die Dokumentation als PDF per E-Mail an den Nationalen Normenkontrollrat (NKR): ${contact.mdMailToLink(contact.nkrEmail)}.
+      content: (nkrMail: string) => dedent`
+        Senden Sie die Dokumentation als PDF per E-Mail an den Nationalen Normenkontrollrat (NKR): ${contact.mdMailToLink(nkrMail)}.
 
         - **Visualisierungen** und Skizzen sind gern gesehen. Hängen Sie diese formlos als PDF oder als Screenshot an.
         - Bei **Interoperabilitätsbezug** senden Sie eine Kopie der E-Mail mit der Dokumentation an ${contact.mdMailToLink(contact.interoperabilityEmail)}.
 
         Der NKR prüft die methodische und inhaltliche Nachvollziehbarkeit. Bei Fragen wird der NKR auf Sie zukommen. Das Ziel ist eine digital- und praxistaugliche Umsetzung.`,
+      contentBundesland: (pruefstelleMail: string) => dedent`
+        Senden Sie die Dokumentation als PDF per E-Mail an Ihre zuständige Prüfstelle: ${contact.mdMailToLink(pruefstelleMail)}.
+
+        **Zudem sind Visualisierungen** und Skizzen gern gesehen. Hängen Sie diese formlos als PDF oder als Screenshot an.`,
     },
     done: "Damit ist der Digitalcheck für Sie beendet.",
   },
