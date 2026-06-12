@@ -225,7 +225,8 @@
   .ds-input,
   .ds-checkbox,
   .ds-textarea,
-  .ds-radio {
+  .ds-radio,
+  .ds-select {
     &,
     &:hover {
       background-color: white !important;
