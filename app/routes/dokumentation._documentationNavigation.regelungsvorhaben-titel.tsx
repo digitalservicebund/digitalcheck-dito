@@ -1,6 +1,7 @@
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
 import Input from "~/components/Input";
+import Select from "~/components/Select";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
   defaultTitleValues,
@@ -36,7 +37,7 @@ export function DocumentationTitle() {
           look="ds-heading-02-reg"
           className="mb-40"
         />
-        <form {...form.getFormProps()}>
+        <form className="space-y-40" {...form.getFormProps()}>
           <Input scope={form.scope("title")} warningInsteadOfError>
             {info.inputTitle.label}
             <HelpButton
@@ -47,6 +48,14 @@ export function DocumentationTitle() {
               Dieser Titel wird in der fertigen Dokumentation verwendet.
             </HelpButton>
           </Input>
+
+          <Select
+            scope={form.scope("bundesland")}
+            options={info.inputBundesland.options}
+            warningInsteadOfError
+          >
+            {info.inputBundesland.label}
+          </Select>
 
           <DocumentationActions
             previousUrl={previousUrl}

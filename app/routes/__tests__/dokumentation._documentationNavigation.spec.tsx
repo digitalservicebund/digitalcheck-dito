@@ -77,6 +77,7 @@ const validationScenarios: ValidationScenario[] = [
       version: DATA_SCHEMA_VERSION_V1,
       policyTitle: {
         title: "Valid Title",
+        bundesland: "Bund",
       },
       participation: {
         formats: "Valid Formats",
@@ -128,6 +129,7 @@ const validationScenarios: ValidationScenario[] = [
       version: DATA_SCHEMA_VERSION_V1,
       policyTitle: {
         title: "",
+        bundesland: "",
       },
       participation: {
         formats: "Valid Formats",
@@ -360,6 +362,7 @@ describe("navigation on pages of documentation", () => {
           version: DATA_SCHEMA_VERSION_V2,
           policyTitle: {
             title: "Valid Title",
+            bundesland: "Bund",
           },
           participation: {
             formats: "Valid Formats",
@@ -405,6 +408,7 @@ describe("navigation on pages of documentation", () => {
           version: DATA_SCHEMA_VERSION_V2,
           policyTitle: {
             title: "",
+            bundesland: "",
           },
           participation: {
             formats: "Valid Formats",

@@ -20,6 +20,9 @@ const { principlePages, participation, info } = digitalDocumentation;
 
 export const policyTitleSchema = z.object({
   title: z.string().min(1, { message: info.inputTitle.error }),
+  bundesland: z.enum(info.inputBundesland.options, {
+    message: info.inputBundesland.error,
+  }),
 });
 
 export const participationSchema = z.object({
@@ -89,6 +92,7 @@ export const principleSchemaV2 = principleAnswerSchemaV2.and(
 
 export const defaultTitleValues: PolicyTitle = {
   title: "",
+  bundesland: "",
 };
 
 export const defaultParticipationValues: Participation = {

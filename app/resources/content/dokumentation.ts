@@ -138,6 +138,11 @@ export const digitalDocumentation = {
       label: "Titel des Regelungsvorhabens",
       error: "Bitte geben Sie einen Titel ein.",
     },
+    inputBundesland: {
+      label: "Wählen Sie Ihr Bundesland oder den Bund aus",
+      error: "Bitte wählen Sie Ihr Bundesland oder den Bund aus.",
+      options: ["Bund", "Brandenburg", "Hessen", "Nordrhein-Westfalen"],
+    },
   },
   navigation: {
     ariaLabel: "Seitennavigation",

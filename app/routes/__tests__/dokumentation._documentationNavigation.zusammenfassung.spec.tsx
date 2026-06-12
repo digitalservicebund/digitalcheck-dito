@@ -73,7 +73,7 @@ describe("DocumentationSummary", () => {
 
   const mockDocumentationData: DocumentationData<V2> = {
     version: "2",
-    policyTitle: { title: "Titel des Vorhabens" },
+    policyTitle: { title: "Titel des Vorhabens", bundesland: "Bund" },
     participation: {
       formats: "Format 1",
       results: "Auswirkung auf die Regelung",
@@ -438,7 +438,10 @@ describe("DocumentationSummary", () => {
 
   test.each([
     [dokumentation_regelungsvorhabenTitel.path, { policyTitle: undefined }],
-    [dokumentation_regelungsvorhabenTitel.path, { policyTitle: { title: "" } }],
+    [
+      dokumentation_regelungsvorhabenTitel.path,
+      { policyTitle: { title: "", bundesland: "" } },
+    ],
     [dokumentation_beteiligungsformate.path, { participation: undefined }],
     [
       dokumentation_beteiligungsformate.path,
