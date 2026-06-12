@@ -294,21 +294,22 @@ export const digitalDocumentation = {
   finish: {
     heading: {
       text: "Dokumentation abschließen",
-      markdown:
-        "Laden Sie die ausgefüllte Dokumentation herunter und leiten Sie diese an den NKR weiter. Optional können Sie das Dokument vorab zur Abstimmung versenden.",
     },
     download: {
       heading: "Dokumentation herunterladen",
       content:
-        "Laden Sie die ausgefüllte Dokumentation herunter, um sie zu verakten und an den NKR zu senden.",
+        "Laden Sie die ausgefüllte Dokumentation herunter, um sie abzustimmen oder an Ihre Prüfstelle zu senden.",
       buttonText: "Word-Datei herunterladen (.docx)",
     },
     send: {
-      heading: "Fertige Dokumentation an den NKR senden",
+      heading: "Fertige Dokumentation an Prüfstelle senden",
       content: dedent`
-        - Senden Sie die Dokumentation **als PDF per E-Mail** an folgende Adresse: ${contact.mdMailToLink(contact.nkrEmail)}. Der NKR prüft die methodische und inhaltliche Nachvollziehbarkeit. Bei Fragen wird der NKR auf Sie zukommen. Das Ziel ist eine digital- und praxistaugliche Umsetzung.
+        Senden Sie die Dokumentation als PDF per E-Mail an den Nationalen Normenkontrollrat (NKR): ${contact.mdMailToLink(contact.nkrEmail)}.
+
+        - **Visualisierungen** und Skizzen sind gern gesehen. Hängen Sie diese formlos als PDF oder als Screenshot an.
         - Bei **Interoperabilitätsbezug** senden Sie eine Kopie der E-Mail mit der Dokumentation an ${contact.mdMailToLink(contact.interoperabilityEmail)}.
-        - Der NKR empfiehlt, **Visualisierungen** und Skizzen als ergänzende Dokumente beizufügen – formlos als PDF oder Screenshot.`,
+
+        Der NKR prüft die methodische und inhaltliche Nachvollziehbarkeit. Bei Fragen wird der NKR auf Sie zukommen. Das Ziel ist eine digital- und praxistaugliche Umsetzung.`,
     },
     done: "Damit ist der Digitalcheck für Sie beendet.",
   },

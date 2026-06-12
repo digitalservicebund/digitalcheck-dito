@@ -135,7 +135,7 @@ export const dokumentation = {
 export const dokumentation_absenden = {
   key: "dokumentation_absenden",
   path: "/dokumentation/absenden",
-  title: "Absenden",
+  title: "Herunterladen & Absenden",
   parent: dokumentation,
   sitemap: false,
   isStagingOnly: false,
