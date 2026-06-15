@@ -1,5 +1,5 @@
 # Download and install the dependencies for building the app
-FROM node:26.1.0-alpine3.23 AS base 
+FROM node:26.1.0-alpine3.23 AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
