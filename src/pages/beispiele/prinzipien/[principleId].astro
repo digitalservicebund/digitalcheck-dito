@@ -73,7 +73,7 @@ const tabs = prinzips.map((principle) => ({
     />
 
     <ContentWrapper compactTopSpacing className="space-y-80">
-      <RouteTabs activeKey={prinzip.URLBezeichnung} tabs={tabs} />
+      <RouteTabs activeKey={prinzip.URLBezeichnung} tabs={tabs} client:load />
 
       <InfoBox
         heading={{ text: prinzip.Name, tagName: "h2" }}
