@@ -22,12 +22,6 @@ vi.mock("~/service/wordDocumentationExport/wordDocumentation", () => ({
   })),
 }));
 
-vi.mock("~/contexts/FeatureFlagContext", () => {
-  return {
-    useFeatureFlag: vi.fn(),
-  };
-});
-
 describe("Dokumentation Index Route - Integration Tests", () => {
   const renderWithRouter = (component: React.ReactElement) => {
     return render(

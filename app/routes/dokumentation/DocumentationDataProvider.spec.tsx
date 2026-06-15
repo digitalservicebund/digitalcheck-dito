@@ -22,15 +22,6 @@ import type {
 } from "./documentationDataSchema";
 import { DATA_SCHEMA_VERSION_V2 } from "./documentationDataSchema";
 
-vi.mock("~/contexts/FeatureFlagContext", async (importOriginal) => {
-  const actual =
-    await importOriginal<typeof import("~/contexts/FeatureFlagContext")>();
-  return {
-    ...actual,
-    useFeatureFlag: vi.fn().mockReturnValue(true),
-  };
-});
-
 const mockRead = vi.mocked(readDataFromLocalStorage);
 const mockWrite = vi.mocked(writeVersionedDataToLocalStorage);
 const mockRemove = vi.mocked(removeFromLocalStorage);

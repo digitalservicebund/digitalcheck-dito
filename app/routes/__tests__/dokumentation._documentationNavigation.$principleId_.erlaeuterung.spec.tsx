@@ -28,10 +28,6 @@ import type {
 } from "../dokumentation/documentationDataSchema";
 import { DATA_SCHEMA_VERSION_V2 } from "../dokumentation/documentationDataSchema";
 
-vi.mock("~/contexts/FeatureFlagContext", () => ({
-  useFeatureFlag: vi.fn().mockReturnValue(true),
-}));
-
 type RouteGroup = {
   title: string;
   routes: Route[];
