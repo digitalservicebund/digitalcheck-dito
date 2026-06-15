@@ -6,7 +6,7 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable pnpm
 
 WORKDIR /src
-COPY ./package.json pnpm-lock.yaml pnpm-workspace.yaml /src/
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml /src/
 RUN pnpm install --frozen-lockfile --ignore-scripts
 
 # Download and install the dependencies for running the app
@@ -18,7 +18,7 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable pnpm
 
 WORKDIR /src
-COPY ./package.json pnpm-lock.yaml pnpm-workspace.yaml /src/
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml /src/
 RUN pnpm install --frozen-lockfile --ignore-scripts --prod
 
 # Build the app
@@ -35,7 +35,7 @@ WORKDIR /src
 COPY --from=build-dependencies /src/node_modules node_modules/
 
 # Copy root level files
-COPY package.json pnpm-lock.yaml tsconfig.json vite.config.ts ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml tsconfig.json vite.config.ts ./
 COPY app/ app/
 COPY src/ src/
 COPY public/ public/
@@ -49,7 +49,7 @@ ENV NODE_ENV=production
 
 WORKDIR /home/node/src
 # Move only the files to the final image that are really needed
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY --from=production-dependencies /src/node_modules/ ./node_modules/
 COPY --from=build /src/build/ ./build/
 COPY --from=build /src/public/ ./public/
