@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-CR6XPXrn.js";var t=e();function n({children:e}){return(0,t.jsx)(`div`,{className:`grid grid-cols-1 gap-x-24 gap-y-40 sm:grid-cols-2`,children:e})}export{n as t};
