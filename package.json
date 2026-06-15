@@ -5,7 +5,7 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "audit:licences": "license-checker-rseidelsohn --production --excludePrivatePackages --onlyAllow 'MIT;BSD-3-Clause;BSD-2-Clause;0BSD;ISC;Apache-2.0;MPL-2.0;BlueOak-1.0.0;Custom: LICENSE;Unlicense' --summary",
+    "audit:licences": "license-checker-rseidelsohn --production --excludePrivatePackages --onlyAllow 'MIT;BSD-3-Clause;BSD-2-Clause;0BSD;ISC;Apache-2.0;MPL-2.0;BlueOak-1.0.0;Custom: LICENSE;Unlicense;Python-2.0' --summary",
     "build": "astro build",
     "dev": "PUBLIC_STAGE=development pnpm astro dev",
     "dev:preview": "PUBLIC_STAGE=preview PREVIEW_BASE_PATH=/preview astro dev",
