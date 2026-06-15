@@ -21,6 +21,7 @@ const config: PlaywrightTestConfig = {
   webServer: {
     command: "pnpm build && pnpm preview --port 5174",
     port: 5174,
+    cwd: path.resolve(__dirname, ".."),
   },
   projects: [
     {
