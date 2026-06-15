@@ -1,1 +1,0 @@
-import{i as e,t}from"./jsx-runtime-BDid30Hj.js";import{t as n}from"./OpenInNewIcon-Cg5F74TN.js";import{t as r}from"./tailwindMerge-DcUQ_2bF.js";var i=t();function a({children:t,className:a,...o}){return(0,i.jsxs)(e,{...o,target:`_blank`,className:r(`text-link`,a),children:[t,(0,i.jsx)(n,{})]})}export{a as t};

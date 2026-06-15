@@ -1,1 +1,0 @@
-import{V as e,W as t}from"./jsx-runtime-BDid30Hj.js";import{P as n}from"./open-closed-BICWxOHk.js";var r=t(e(),1);function i(){let e=(0,r.useRef)(!1);return n(()=>(e.current=!0,()=>{e.current=!1}),[]),e}export{i as t};
