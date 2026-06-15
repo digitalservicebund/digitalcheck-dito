@@ -12,6 +12,8 @@ fileignoreconfig:
     ignore_detectors: [filename]
   - filename: src/env.d.ts
     ignore_detectors: [filename]
+  - filename: src/config/posthog.ts
+    checksum: bfa6e5b573b6a00e9ca64d34be9c4cc9e35d91cf6753d751a3f4df7f334ea9c3
   - filename: app/root.tsx
     allowed_patterns: [posthogKey]
   - filename: app/providers/PosthogProvider.tsx

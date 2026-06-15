@@ -5,6 +5,7 @@ import "@/styles/globals.css";
 import Footer from "~/layout/Footer";
 import PageHeader from "~/layout/PageHeader";
 import { siteMeta } from "~/resources/content/shared/meta";
+import { isProduction } from "@/config/stage";
 
 interface Props {
   title?: string;
@@ -27,8 +28,6 @@ const pageTitle = title
 
 const canonicalUrl = Astro.url.href.replace(/\/$/, "");
 const ogImage = `${Astro.url.origin}/images/og-image.png`;
-
-const posthogEnabled = !!import.meta.env.PUBLIC_POSTHOG_KEY;
 
 const jsonLdMetadata = {
   "@context": "https://schema.org",
@@ -80,6 +79,6 @@ const jsonLdMetadata = {
     {showProgressBar && <ProgressBar />}
     <slot />
     <Footer />
-    {posthogEnabled && <Posthog />}
+    {isProduction && <Posthog />}
   </body>
 </html>
