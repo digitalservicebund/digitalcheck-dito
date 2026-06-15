@@ -156,14 +156,7 @@ export default function ResultForm({
                     {preCheckResult.form.sendEmailButton.text}
                   </LinkButton>
                 ) : (
-                  <Button
-                    id={"result-email-button"}
-                    look={"primary"}
-                    className={
-                      "plausible-event-name=Content.Send+Result.Button+Create+Email"
-                    }
-                    type={"submit"}
-                  >
+                  <Button id="result-email-button" look="primary" type="submit">
                     {preCheckResult.form.sendEmailButton.text}
                   </Button>
                 )}
@@ -193,7 +186,6 @@ export default function ResultForm({
           <DetailsSummary
             showVerticalLine
             title={preCheckResult.form.previewLabel}
-            className="plausible-event-name=Content.Send+Result.Accordion+Preview+Email+Text"
           >
             <div data-testid="emailPreview" className="whitespace-pre-wrap">
               {emailPreviewBody}
@@ -203,7 +195,6 @@ export default function ResultForm({
             <Button
               type="button"
               look="tertiary"
-              className="plausible-event-name=Content.Send+Result.Button+Copy+Email"
               onClick={() => {
                 void handleCopyEmailBody();
               }}
@@ -232,12 +223,8 @@ export default function ResultForm({
           className="ds-label-section"
           text={preCheckResult.form.faqs.title}
         />
-        {preCheckResult.form.faqs.details.map((detail, index) => (
-          <DetailsSummary
-            className={`plausible-event-name=Content.Content+Info.Accordion+FAQ${index + 1}`}
-            key={detail.label}
-            title={detail.label}
-          >
+        {preCheckResult.form.faqs.details.map((detail) => (
+          <DetailsSummary key={detail.label} title={detail.label}>
             <RichText markdown={detail.text} />
           </DetailsSummary>
         ))}

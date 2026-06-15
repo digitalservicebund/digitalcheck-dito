@@ -6,11 +6,7 @@ export function PreCheckFAQ() {
   return (
     <>
       {preCheck.faq.items.map((item) => (
-        <AccordionItem
-          key={item.headline}
-          headline={item.headline}
-          plausibleEventName={item.plausibleEventName}
-        >
+        <AccordionItem key={item.headline} headline={item.headline}>
           <RichText markdown={item.content} />
         </AccordionItem>
       ))}

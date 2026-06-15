@@ -172,7 +172,6 @@ export default function Result() {
                 <DetailsSummary
                   data-testid="result-details"
                   title={preCheckResult.detailsTitle}
-                  className="plausible-event-name=Content.Result.Accordion+Result+Detail"
                 >
                   {resultContent.reasoningList
                     .filter(({ reasons }) => reasons.length > 0)

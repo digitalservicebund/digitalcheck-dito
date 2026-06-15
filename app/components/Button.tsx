@@ -4,7 +4,6 @@ import type { ReactElement } from "react";
 import { cloneElement } from "react";
 import { twJoin } from "tailwind-merge";
 import { getDownloadableExtensionName } from "~/utils/fileExtensionUtils";
-import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import twMerge from "~/utils/tailwindMerge";
 
 export type ButtonBaseProps = {
@@ -12,7 +11,6 @@ export type ButtonBaseProps = {
   iconLeft?: ReactElementWithClassname;
   iconRight?: ReactElementWithClassname;
   look?: "primary" | "secondary" | "tertiary" | "ghost" | "link";
-  plausibleEventName?: string;
   size?: "large" | "medium" | "small";
 };
 
@@ -77,7 +75,6 @@ function Button({
   fullWidth,
   look,
   size,
-  plausibleEventName,
   className,
   ...props
 }: ButtonProps) {
@@ -90,15 +87,8 @@ function Button({
     className,
   });
 
-  const plausibleEventClass = getPlausibleEventClassName(plausibleEventName);
-
   return (
-    <button
-      {...props}
-      id={id}
-      data-testid={id}
-      className={twJoin(buttonClasses, plausibleEventClass)}
-    >
+    <button {...props} id={id} data-testid={id} className={buttonClasses}>
       {formatIcon(iconLeft)}
       <span className="ds-button-label">{children}</span>
       {formatIcon(iconRight)}
@@ -119,7 +109,6 @@ export function LinkButton({
   fullWidth,
   look,
   size,
-  plausibleEventName,
   className,
   ...props
 }: Readonly<LinkButtonProps>) {
@@ -134,8 +123,6 @@ export function LinkButton({
 
   iconLeft = formatIcon(iconLeft);
   iconRight = formatIcon(iconRight);
-
-  const plausibleEventClass = getPlausibleEventClassName(plausibleEventName);
 
   // for links that have role="button" we need to add an event handler so that it can
   // be activated with the space bar
@@ -152,7 +139,7 @@ export function LinkButton({
       href={props.href}
       id={id}
       data-testid={id}
-      className={twJoin("link-unstyled", buttonClasses, plausibleEventClass)}
+      className={twJoin("link-unstyled", buttonClasses)}
       onKeyDown={onKeyDown}
       {...props}
     >

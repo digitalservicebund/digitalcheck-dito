@@ -40,7 +40,6 @@ const steps = [
       text: "Digitalbezug einschätzen",
       to: vorpruefung.path,
       look: "primary" as const,
-      plausibleEventName: "Content.Schritte.Button+Vorprüfung",
     },
     procedure:
       "Sie identifizieren Digitalbezug und Inter&shy;operabilitäts&shy;an&shy;for&shy;der&shy;un&shy;gen für Ihr Vorhaben.",
@@ -57,7 +56,6 @@ const steps = [
       text: "Regelung erarbeiten",
       to: methoden.path,
       look: "tertiary" as const,
-      plausibleEventName: "Content.Schritte.Link+Erarbeiten",
     },
     procedure:
       "Bei einer positiven Vorprüfung wenden Sie die Werkzeuge und Methoden an, die die Digitaltauglichkeit Ihres Vorhabens sicherstellen.",
@@ -74,7 +72,6 @@ const steps = [
       text: "Dokumentation erstellen",
       to: dokumentation.path,
       look: "tertiary" as const,
-      plausibleEventName: "Content.Schritte.Link+Dokumentieren",
     },
     procedure:
       "Sie dokumentieren, wie Sie Digitaltauglichkeit in Ihrer Regelung sichergestellt haben.",
@@ -119,11 +116,7 @@ const steps = [
                   className="ds-heading-03-bold lg:mt-40"
                 />
                 <div class="mt-40 self-center">
-                  <LinkButton
-                    href={step.link.to}
-                    look={step.link.look}
-                    plausibleEventName={step.link.plausibleEventName}
-                  >
+                  <LinkButton href={step.link.to} look={step.link.look}>
                     {step.link.text}
                   </LinkButton>
                 </div>
@@ -180,7 +173,6 @@ const steps = [
             {
               text: "Mehr zur Digitaltauglichkeit erfahren",
               to: grundlagen_digitaltauglichkeit.path,
-              plausibleEventName: "Content.Grundlagen.Link+Digitaltauglichkeit",
               look: "link",
             },
           ]}
@@ -204,7 +196,6 @@ const steps = [
             {
               text: "Mehr zum NKR erfahren",
               to: grundlagen_normenkontrollrat.path,
-              plausibleEventName: "Content.Grundlagen.Link+NKR",
               look: "link",
             },
           ]}
@@ -233,15 +224,11 @@ const steps = [
                   text: "Zu Visualisierungen",
                   to: methoden_visualisieren.path,
                   look: "tertiary",
-                  plausibleEventName:
-                    "Content.Teaser+Visualisierungen.Link+Visualisierungen",
                 },
                 {
                   text: "Beispiele",
                   to: beispiele_visualisierungen.path,
                   look: "ghost",
-                  plausibleEventName:
-                    "Content.Teaser+Visualisierungen.Link+Beispiele",
                 },
               ]}
             />
@@ -260,15 +247,11 @@ const steps = [
                   text: "Zu den Prinzipien",
                   to: methoden_fuenfPrinzipien.path,
                   look: "tertiary",
-                  plausibleEventName:
-                    "Content.Teaser+Prinzipien.Link+Prinzipien",
                 },
                 {
                   text: "Beispiele",
                   to: beispiele_prinzipien.path,
                   look: "ghost",
-                  plausibleEventName:
-                    "Content.Teaser+Prinzipien.Link+Beispiele",
                 },
               ]}
             />
@@ -291,7 +274,6 @@ const steps = [
               text: "Angebote kennenlernen",
               to: unterstuetzung.path,
               look: "tertiary",
-              plausibleEventName: "Content.Support.Button+Support",
             },
           ]}
         />

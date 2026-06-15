@@ -11,7 +11,6 @@ export type ImageBoxProps = {
   title?: string;
   className?: string;
   tagName?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "div";
-  plausibleEventName?: string;
   zoomable?: boolean;
   border?: boolean;
   background?: boolean;
@@ -22,7 +21,6 @@ function ImageBox({
   title,
   className,
   tagName,
-  plausibleEventName,
   border,
   zoomable = true,
   background = false,
@@ -42,11 +40,7 @@ function ImageBox({
         </Heading>
       )}
       {zoomable ? (
-        <ImageZoomable
-          image={imageForZoomable}
-          plausibleEventName={plausibleEventName}
-          className="object-cover"
-        />
+        <ImageZoomable image={imageForZoomable} className="object-cover" />
       ) : (
         <Image {...image} className="object-contain" />
       )}

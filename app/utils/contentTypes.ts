@@ -6,7 +6,6 @@ export type ContentLink = {
   to: string;
   target?: string;
   download?: boolean;
-  plausibleEventName?: string;
 } & Pick<LinkButtonProps, "look" | "className" | "iconLeft">;
 
 export type Step = {

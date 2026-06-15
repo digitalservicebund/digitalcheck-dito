@@ -141,7 +141,6 @@ export const methodsTasksProcesses = {
       {
         to: grundlagen_normenkontrollrat.path,
         text: "Mehr dazu erfahren",
-        plausibleEventName: "Content.Link+NKR+Kriterien",
         look: "tertiary" as const,
       },
     ] satisfies ContentLink[],
@@ -149,7 +148,6 @@ export const methodsTasksProcesses = {
 
   intro: {
     title: "Intro",
-    plausibleEventName: "Tab+Bar.Intro",
     visibility: {
       heading: "Prozesse sichtbar machen",
       content: dedent`
@@ -160,13 +158,11 @@ export const methodsTasksProcesses = {
     },
     example: {
       documentId: "qyh09ifld7r3a8z8h2pyhgom",
-      plausibleEventName: "Content.Intro.Beispiel+Entscheidungsbaum",
     },
   },
 
   anleitung: {
     title: "Anleitung",
-    plausibleEventName: "Tab+Bar.Anleitung",
 
     ablaufe: {
       heading: "Abläufe mit dem Flussdiagramm erfassen",
@@ -208,14 +204,12 @@ export const methodsTasksProcesses = {
         {
           to: anleitungFlussdiagramm.path,
           text: "PPT-Vorlage runterladen",
-          plausibleEventName: "Content.Anleitung.Link+Powerpoint+Vorlage",
           download: true,
         },
         {
           to: "https://bmas.de.conceptboard.com/board/qh33-xcny-usde-7nc6-82cy",
           text: "Zur Conceptboard-Vorlage",
           look: "ghost",
-          plausibleEventName: "Content.Anleitung.Link+Conceptboard+Vorlage",
           target: "_blank",
         },
       ] satisfies ContentLink[],
@@ -238,7 +232,6 @@ export const methodsTasksProcesses = {
         to: methoden_fuenfPrinzipien.path,
         text: "Prinzipien nutzen",
         look: "tertiary",
-        plausibleEventName: "Content.Link+Prinzipien+Nutzen",
       },
     ] satisfies ContentLink[],
   },

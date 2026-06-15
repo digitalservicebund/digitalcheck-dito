@@ -2,25 +2,20 @@ import { ZoomInOutlined } from "@digitalservicebund/icons";
 import { twJoin } from "tailwind-merge";
 import type { ImageProps } from "~/components/Image";
 import Image from "~/components/Image";
-import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import twMerge from "~/utils/tailwindMerge";
 
 type ImageZoomableComponentProps = {
   image: Readonly<ImageProps>;
-  plausibleEventName?: string;
   className?: string;
   square?: boolean;
 };
 
 function ImageZoomable({
   image,
-  plausibleEventName,
   className,
   square,
 }: Readonly<ImageZoomableComponentProps>) {
   if (!image.url) return null;
-
-  const plausibleEvent = getPlausibleEventClassName(plausibleEventName);
 
   return (
     <a
@@ -29,7 +24,6 @@ function ImageZoomable({
       rel="noreferrer"
       className={twJoin(
         "link-unstyled relative block cursor-zoom-in",
-        plausibleEvent,
         square && "after:block after:pb-[100%] after:content-['']",
       )}
     >

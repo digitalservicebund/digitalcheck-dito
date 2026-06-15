@@ -12,7 +12,6 @@ export type AccordionItemProps = {
   headline: ReactNode;
   children?: ReactNode;
   id?: string;
-  plausibleEventName?: string;
   className?: string;
 };
 

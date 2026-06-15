@@ -9,7 +9,6 @@ import { BlocksRenderer } from "./BlocksRenderer";
 
 export type VisualisationItemProps = {
   visualisierung: Visualisierung;
-  plausibleEventName?: string;
   showContext?: boolean;
 };
 

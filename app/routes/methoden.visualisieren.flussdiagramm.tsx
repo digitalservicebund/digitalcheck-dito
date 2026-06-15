@@ -18,7 +18,6 @@ import RichText from "~/components/RichText.tsx";
 import { anleitungFlussdiagramm } from "@/config/downloads";
 import { methoden_fuenfPrinzipien } from "@/config/routes";
 import { withBase } from "@/utils/path";
-import { twJoin } from "tailwind-merge";
 import BackToTopButton from "~/components/BackToTopButton.tsx";
 import Container from "~/components/Container.tsx";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
@@ -26,7 +25,6 @@ import SidebarContainer from "~/layout/SidebarContainer.tsx";
 import { STRAPI_MEDIA_URL } from "~/resources/constants.ts";
 import { contact } from "~/resources/content/shared/contact";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
-import { getPlausibleEventClassName } from "~/utils/plausibleUtils.ts";
 
 const diagramElements = [
   {
@@ -666,10 +664,7 @@ export default function Visualization() {
                 controls
                 muted
                 width="100%"
-                className={twJoin(
-                  "max-w-a11y",
-                  getPlausibleEventClassName("Content.Steps.5.Video+View"),
-                )}
+                className="max-w-a11y"
                 preload="none"
                 poster={
                   STRAPI_MEDIA_URL +

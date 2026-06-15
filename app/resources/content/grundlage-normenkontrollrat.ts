@@ -104,6 +104,5 @@ export const fundamentalsNKR = {
         Sie zeigt, wie der Digitalcheck in die Phasen des Regelungsentwurfs integriert ist.
       `,
     },
-    plausibleEventName: "Content.Process+Vis",
   },
 };
