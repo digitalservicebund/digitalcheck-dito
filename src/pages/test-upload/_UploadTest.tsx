@@ -1,3 +1,4 @@
+import { withBase } from "@/utils/path";
 import { usePostHog } from "posthog-js/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { twJoin } from "tailwind-merge";
@@ -114,7 +115,10 @@ function UploadDropzoneCard({
       if (!uploadedFile) return;
       setSelectedFileName(uploadedFile.name);
       setIsUploading(true);
-      const result = await compareWithReference(uploadedFile, file.path);
+      const result = await compareWithReference(
+        uploadedFile,
+        withBase(file.path),
+      );
       setIsUploading(false);
       if (notifiedRef.current !== result) {
         notifiedRef.current = result;
@@ -311,7 +315,11 @@ export default function UploadTest() {
           {testFiles.map((file) => (
             <section key={file.path} className="space-y-24">
               <h2>{file.name}</h2>
-              <a className="text-link block" href={file.path} download>
+              <a
+                className="text-link block"
+                href={withBase(file.path)}
+                download
+              >
                 {file.name} herunterladen
               </a>
               <UploadDropzoneCard
