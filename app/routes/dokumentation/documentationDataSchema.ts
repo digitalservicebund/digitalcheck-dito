@@ -151,23 +151,7 @@ const euInteroperabilityOutcomeNavigationSchema =
     .strict();
 
 export const getDocumentationSchemaFormUrl = (url: string) => {
-  if (url === dokumentation_regelungsvorhabenTitel.path)
-    return policyHeaderSchema;
-  else if (url === dokumentation_beteiligungsformate.path)
-    return participationSchema;
-  else if (url === dokumentation_euInteroperabilitaetsbezug.path)
-    return euInteroperabilityOutcomeNavigationSchema;
-  else if (url === dokumentation_verbindlicheAnforderungen.path)
-    return bindingRequirementsNavigationSchema;
-  else if (url === dokumentation_bewertungRechtlich.path)
-    return interoperabilityAssessmentLevelNavigationSchema;
-  else if (url === dokumentation_bewertungOrganisatorisch.path)
-    return interoperabilityAssessmentLevelNavigationSchema;
-  else if (url === dokumentation_bewertungSemantisch.path)
-    return interoperabilityAssessmentLevelNavigationSchema;
-  else if (url === dokumentation_bewertungTechnisch.path)
-    return interoperabilityAssessmentLevelNavigationSchema;
-  else return principleSchemaV2;
+  return navigationSchemaByRoute[url] ?? principleSchemaV2;
 };
 
 // V1 types are kept solely so migrateV1ToV2 (in DocumentationDataProvider) can
@@ -261,6 +245,23 @@ export const interoperabilityAssessmentLevelNavigationSchema =
         });
       }
     });
+
+const navigationSchemaByRoute: Record<string, z.ZodTypeAny> = {
+  [dokumentation_regelungsvorhabenTitel.path]: policyHeaderSchema,
+  [dokumentation_beteiligungsformate.path]: participationSchema,
+  [dokumentation_euInteroperabilitaetsbezug.path]:
+    euInteroperabilityOutcomeNavigationSchema,
+  [dokumentation_verbindlicheAnforderungen.path]:
+    bindingRequirementsNavigationSchema,
+  [dokumentation_bewertungRechtlich.path]:
+    interoperabilityAssessmentLevelNavigationSchema,
+  [dokumentation_bewertungOrganisatorisch.path]:
+    interoperabilityAssessmentLevelNavigationSchema,
+  [dokumentation_bewertungSemantisch.path]:
+    interoperabilityAssessmentLevelNavigationSchema,
+  [dokumentation_bewertungTechnisch.path]:
+    interoperabilityAssessmentLevelNavigationSchema,
+};
 
 export type InteroperabilityAssessmentLevel = z.infer<
   typeof interoperabilityAssessmentLevelSchema

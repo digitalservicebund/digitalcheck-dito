@@ -127,7 +127,7 @@ export function LayoutWithDocumentationNavigation({
     ? currentUrl.replace("/erlaeuterung", "")
     : currentUrl;
 
-  const { findDocumentationDataForUrl, getDocumentationSchemaFormUrl } =
+  const { findDocumentationDataForUrl, validateDocumentationDataForRoute } =
     useDocumentationDataService();
 
   const flatRoutes = routes.flatMap((route) =>
@@ -174,11 +174,10 @@ export function LayoutWithDocumentationNavigation({
   );
 
   const getNavItem = (route: Route) => {
-    const formData = findDocumentationDataForUrl(
-      route.principleId || route.path,
+    const { formData, isValid, hasData } = validateDocumentationDataForRoute(
+      route.path,
+      route.principleId,
     );
-    const schema = getDocumentationSchemaFormUrl(route.path);
-    const valid = schema.safeParse(formData);
 
     const navUrl =
       route.principleId && (formData as { answer?: string } | undefined)?.answer
@@ -194,8 +193,8 @@ export function LayoutWithDocumentationNavigation({
             ? [route.path, `${route.path}/erlaeuterung`]
             : undefined
         }
-        error={formData && !valid.success}
-        completed={formData && valid.success}
+        error={hasData && !isValid}
+        completed={hasData && isValid}
         disabled={isNavigationDisabled}
       >
         {route.title}

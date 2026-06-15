@@ -84,6 +84,21 @@ type DocumentationDataContextType = {
     | InteroperabilityAssessmentLevel
     | Principle
     | undefined;
+  validateDocumentationDataForRoute: (
+    routePath: string,
+    dataIdentifier?: string,
+  ) => {
+    formData:
+      | PolicyTitle
+      | Participation
+      | EuInteroperabilityOutcome
+      | BindingRequirementsData
+      | InteroperabilityAssessmentLevel
+      | Principle
+      | undefined;
+    isValid: boolean;
+    hasData: boolean;
+  };
 };
 
 const DocumentationDataContext =
@@ -106,6 +121,57 @@ type DocumentationDataProviderProps = {
 
 function writeToStorage(data: DocumentationData): void {
   writeVersionedDataToLocalStorage(data, STORAGE_KEY);
+}
+
+type RouteFormData =
+  | PolicyTitle
+  | Participation
+  | EuInteroperabilityOutcome
+  | BindingRequirementsData
+  | InteroperabilityAssessmentLevel
+  | Principle
+  | undefined;
+
+type RouteDefinition = {
+  getData: (data: DocumentationData) => RouteFormData;
+};
+
+const routeDefinitions: Record<string, RouteDefinition> = {
+  [dokumentation_regelungsvorhabenTitel.path]: {
+    getData: (data) => data.policyTitle,
+  },
+  [dokumentation_beteiligungsformate.path]: {
+    getData: (data) => data.participation,
+  },
+  [dokumentation_euInteroperabilitaetsbezug.path]: {
+    getData: (data) => data.euInteroperabilityOutcome,
+  },
+  [dokumentation_verbindlicheAnforderungen.path]: {
+    getData: (data) => data.bindingRequirements,
+  },
+  [dokumentation_bewertungRechtlich.path]: {
+    getData: (data) => data.interoperabilityAssessment?.legal,
+  },
+  [dokumentation_bewertungOrganisatorisch.path]: {
+    getData: (data) => data.interoperabilityAssessment?.organizational,
+  },
+  [dokumentation_bewertungSemantisch.path]: {
+    getData: (data) => data.interoperabilityAssessment?.semantic,
+  },
+  [dokumentation_bewertungTechnisch.path]: {
+    getData: (data) => data.interoperabilityAssessment?.technical,
+  },
+};
+
+function getRouteData(
+  routeOrDataIdentifier: string,
+  documentationData: DocumentationData,
+): RouteFormData {
+  const routeDefinition = routeDefinitions[routeOrDataIdentifier];
+  if (routeDefinition) return routeDefinition.getData(documentationData);
+  return documentationData.principles?.find(
+    ({ id }) => id === routeOrDataIdentifier,
+  );
 }
 
 const { radioOptions } = digitalDocumentation.principlePages;
@@ -176,6 +242,24 @@ export function DocumentationDataProvider({
   const getDocumentationSchemaFormUrl = useCallback((url: string) => {
     return _getDocumentationSchemaFormUrl(url);
   }, []);
+
+  const validateDocumentationDataForRoute = useCallback(
+    (routePath: string, dataIdentifier?: string) => {
+      const formData = getRouteData(
+        dataIdentifier ?? routePath,
+        documentationData,
+      );
+      const schema = getDocumentationSchemaFormUrl(routePath);
+      const validationResult = schema.safeParse(formData);
+
+      return {
+        formData,
+        isValid: validationResult.success,
+        hasData: formData !== undefined,
+      };
+    },
+    [documentationData, getDocumentationSchemaFormUrl],
+  );
 
   const createOrUpdateDocumentationData = useCallback(
     (data: DocumentationData): void => {
@@ -369,35 +453,7 @@ export function DocumentationDataProvider({
   );
 
   const findDocumentationDataForUrl = useCallback(
-    (
-      url: string,
-    ):
-      | PolicyTitle
-      | Participation
-      | EuInteroperabilityOutcome
-      | BindingRequirementsData
-      | InteroperabilityAssessmentLevel
-      | Principle
-      | undefined => {
-      if (url === dokumentation_regelungsvorhabenTitel.path)
-        return documentationData.policyTitle;
-      else if (url === dokumentation_beteiligungsformate.path)
-        return documentationData.participation;
-      else if (url === dokumentation_euInteroperabilitaetsbezug.path)
-        return documentationData.euInteroperabilityOutcome;
-      else if (url === dokumentation_verbindlicheAnforderungen.path)
-        return documentationData.bindingRequirements;
-      else if (url === dokumentation_bewertungRechtlich.path)
-        return documentationData.interoperabilityAssessment?.legal;
-      else if (url === dokumentation_bewertungOrganisatorisch.path)
-        return documentationData.interoperabilityAssessment?.organizational;
-      else if (url === dokumentation_bewertungSemantisch.path)
-        return documentationData.interoperabilityAssessment?.semantic;
-      else if (url === dokumentation_bewertungTechnisch.path)
-        return documentationData.interoperabilityAssessment?.technical;
-
-      return documentationData.principles?.find(({ id }) => id === url);
-    },
+    (url: string): RouteFormData => getRouteData(url, documentationData),
     [documentationData],
   );
 
@@ -424,6 +480,7 @@ export function DocumentationDataProvider({
       addOrUpdatePrincipleAnswer,
       addOrUpdatePrincipleReasoning,
       findDocumentationDataForUrl,
+      validateDocumentationDataForRoute,
     }),
     [
       documentationData,
@@ -440,6 +497,7 @@ export function DocumentationDataProvider({
       addOrUpdatePrincipleAnswer,
       addOrUpdatePrincipleReasoning,
       findDocumentationDataForUrl,
+      validateDocumentationDataForRoute,
     ],
   );
   return (
