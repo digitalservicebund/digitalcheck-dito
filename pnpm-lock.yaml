@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  esbuild: 0.28.1
+  esbuild@<0.28.1: ^0.28.1
 
 importers:
   .:
@@ -226,7 +226,7 @@ importers:
         version: 1.0.0(vite@8.0.16(@types/node@25.9.3)(esbuild@0.28.1)(jiti@2.7.0))
       vitest:
         specifier: ^4.1.8
-        version: 4.1.8(@opentelemetry/api@1.9.1)(@types/node@25.9.3)(jsdom@29.1.1)(msw@2.14.6(@types/node@25.9.3)(typescript@6.0.3))(vite@8.0.16(@types/node@25.9.3)(esbuild@0.28.1)(jiti@2.7.0))
+        version: 4.1.8(@types/node@25.9.3)(jsdom@29.1.1)(msw@2.14.6(@types/node@25.9.3)(typescript@6.0.3))(vite@8.0.16(@types/node@25.9.3)(esbuild@0.28.1)(jiti@2.7.0))
 
 packages:
   "@adobe/css-tools@4.5.0":
@@ -1198,13 +1198,6 @@ packages:
       {
         integrity: sha512-U69T3ItWHvLwGg5eJ0n3I62nWuE6ilHlmz7zM0npLBRvPRd7e6NYmg54vvRtP5mZG7kZqZCFVdsTWo7BPtBujg==,
       }
-
-  "@opentelemetry/api@1.9.1":
-    resolution:
-      {
-        integrity: sha512-gLyJlPHPZYdAk1JENA9LeHejZe1Ti77/pTeFm/nMXmQH/HFZlcS/O2XJB+L8fkbrNSqhdtlvjBVjxwUYanNH5Q==,
-      }
-    engines: { node: ">=8.0.0" }
 
   "@oxc-project/types@0.133.0":
     resolution:
@@ -6399,7 +6392,7 @@ packages:
     peerDependencies:
       "@types/node": ^20.19.0 || >=22.12.0
       "@vitejs/devtools": ^0.1.18
-      esbuild: 0.28.1
+      esbuild: ^0.28.1
       jiti: ">=1.21.0"
       less: ^4.0.0
       sass: ^1.70.0
@@ -7263,9 +7256,6 @@ snapshots:
       outvariant: 1.4.3
 
   "@open-draft/until@2.1.0": {}
-
-  "@opentelemetry/api@1.9.1":
-    optional: true
 
   "@oxc-project/types@0.133.0": {}
 
@@ -10500,7 +10490,7 @@ snapshots:
       fsevents: 2.3.3
       jiti: 2.7.0
 
-  vitest@4.1.8(@opentelemetry/api@1.9.1)(@types/node@25.9.3)(jsdom@29.1.1)(msw@2.14.6(@types/node@25.9.3)(typescript@6.0.3))(vite@8.0.16(@types/node@25.9.3)(esbuild@0.28.1)(jiti@2.7.0)):
+  vitest@4.1.8(@types/node@25.9.3)(jsdom@29.1.1)(msw@2.14.6(@types/node@25.9.3)(typescript@6.0.3))(vite@8.0.16(@types/node@25.9.3)(esbuild@0.28.1)(jiti@2.7.0)):
     dependencies:
       "@vitest/expect": 4.1.8
       "@vitest/mocker": 4.1.8(msw@2.14.6(@types/node@25.9.3)(typescript@6.0.3))(vite@8.0.16(@types/node@25.9.3)(esbuild@0.28.1)(jiti@2.7.0))
@@ -10523,7 +10513,6 @@ snapshots:
       vite: 8.0.16(@types/node@25.9.3)(esbuild@0.28.1)(jiti@2.7.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      "@opentelemetry/api": 1.9.1
       "@types/node": 25.9.3
       jsdom: 29.1.1
     transitivePeerDependencies:
