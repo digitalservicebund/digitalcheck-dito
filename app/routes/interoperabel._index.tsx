@@ -1,6 +1,5 @@
-import { interoperabel, interoperabel_faq } from "@/config/routes";
+import { interoperabel_faq } from "@/config/routes";
 import { QuizOutlined as QuizIcon } from "@digitalservicebund/icons";
-import { Link } from "react-router";
 import { LinkButton } from "~/components/Button";
 import Container from "~/components/Container";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
@@ -8,7 +7,6 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image";
 import InfoBox from "~/components/InfoBox.tsx";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { SearchParamTabs } from "~/components/Tabs/Tabs";
 import { interoperability } from "~/resources/content/interoperabel";
@@ -25,7 +23,6 @@ const { overviewTabId, backgroundTabId, euLawTabId, interoperableSolutionsId } =
 export default function Interoperability() {
   return (
     <>
-      <MetaTitle prefix={interoperabel.title} />
       <main>
         <Hero
           title={interoperability.headline}
@@ -124,20 +121,14 @@ export default function Interoperability() {
             </p>
             <p>
               Wenn Sie weitere Fragen haben, dann kontaktieren Sie uns unter:{" "}
-              <Link
-                className="text-link"
-                to={`mailto:${contact.interoperabilityEmail}`}
-              >
+              <a href={`mailto:${contact.interoperabilityEmail}`}>
                 {contact.interoperabilityEmail}
-              </Link>{" "}
+              </a>{" "}
               oder unter{" "}
-              <Link className="text-link" to={contact.phone}>
-                {contact.phoneDisplay}
-              </Link>
-              .
+              <a href={`tel:${contact.phone}`}>{contact.phoneDisplay}</a>.
             </p>
             <div className="mt-24">
-              <LinkButton to={interoperabel_faq.path} look="tertiary">
+              <LinkButton href={interoperabel_faq.path} look="tertiary">
                 Zu Fragen und Antworten{" "}
               </LinkButton>
             </div>

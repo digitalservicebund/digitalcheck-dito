@@ -1,10 +1,7 @@
-import { dokumentation_hinweise } from "@/config/routes";
 import { useState } from "react";
-import { useNavigate } from "react-router";
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Heading from "~/components/Heading";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText.tsx";
 import { general } from "~/resources/content/shared/general.ts";
 import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
@@ -26,13 +23,10 @@ Zur externen Weiterbearbeitung, internen Abstimmung oder für Änderungen könne
 
 export function DocumentationHinweise() {
   const { nextUrl, previousUrl } = useDocumentationNavigation();
-  const navigate = useNavigate();
-
   const [checked, setChecked] = useState<boolean>(false);
 
   return (
     <>
-      <MetaTitle prefix={`Dokumentation: ${dokumentation_hinweise.title}`} />
       <Heading
         text="Wichtige Hinweise"
         tagName="h1"
@@ -60,11 +54,11 @@ export function DocumentationHinweise() {
           look={"primary"}
           disabled={!checked}
           type={"button"}
-          onClick={() => navigate(nextUrl)}
+          onClick={() => (globalThis.location.href = nextUrl)}
         >
           Verstanden und weiter
         </Button>
-        <LinkButton to={previousUrl} look="tertiary">
+        <LinkButton href={previousUrl} look="tertiary">
           {general.buttonBack.text}
         </LinkButton>
       </ButtonContainer>
@@ -77,7 +71,7 @@ export default function Route() {
 }
 
 // Astro page export
-import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
+import { DocumentationPageShell } from "@/components/DocumentationPageShell";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
 export function HinweisePage({

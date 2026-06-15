@@ -21,14 +21,6 @@ Hier können sie die [Powerpoint-Datei herunterladen](/documents/digitalcheck-do
 `;
 
 describe("RichText", () => {
-  it("renders external links with target blank", async () => {
-    render(<RichText markdown={EXAMPLE_MARKDOWN} data-testid="rich-text" />);
-    const links = await screen.findAllByRole("link");
-    expect(links[0]).not.toHaveAttribute("target", "_blank");
-    expect(links[1]).toHaveAttribute("target", "_blank");
-    expect(links[2]).toHaveAttribute("target", "_blank");
-  });
-
   it("renders links to download files with download attribute", async () => {
     render(<RichText markdown={EXAMPLE_MARKDOWN} data-testid="rich-text" />);
     const links = await screen.findAllByRole("link");
@@ -53,11 +45,25 @@ describe("RichText", () => {
     expect(links[6].title).contains("(PPTX-Datei)");
   });
 
-  it("renders external and document links with icons", async () => {
+  it("renders external links with CSS icons and document links with download icons", async () => {
     render(<RichText markdown={EXAMPLE_MARKDOWN} data-testid="rich-text" />);
     const links = await screen.findAllByRole("link");
+
+    // Internal link – no icon markup (styled via globals.css only for http links)
     expect(links[0].querySelector("svg")).toBeNull();
-    for (const link of links.slice(1)) {
+    expect(links[0]).not.toHaveAttribute("download");
+    expect(links[0].getAttribute("href")).not.toMatch(/^https?:/);
+
+    // External links – icon via CSS ::after (a:not([download])[href^="http"]::after)
+    for (const link of links.slice(1, 3)) {
+      expect(link.getAttribute("href")).toMatch(/^https?:/);
+      expect(link).not.toHaveAttribute("download");
+      expect(link.querySelector("svg")).toBeNull();
+    }
+
+    // Document download links – inline SVG icon
+    for (const link of links.slice(3)) {
+      expect(link).toHaveAttribute("download");
       expect(link.querySelector("svg")).not.toBeNull();
     }
   });

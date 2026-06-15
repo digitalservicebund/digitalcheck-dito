@@ -10,7 +10,6 @@ import {
 } from "@headlessui/react";
 import type { ReactElement, ReactNode } from "react";
 import { createContext, isValidElement, useContext, useMemo } from "react";
-import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import { general } from "~/resources/content/shared/general";
 import twMerge from "~/utils/tailwindMerge";
@@ -196,11 +195,12 @@ function NavItemLink({
 
   return (
     <li className={classes.wrapper}>
-      <Link
-        to={url}
+      <a
+        href={url}
         title={getTitle()}
         className={twMerge(
           classes.base,
+          "link-unstyled",
           error ? "border-l-yellow-200 bg-yellow-200" : "border-l-blue-100",
           error ? classes.hoverError : classes.hover,
           classes.focus,
@@ -209,7 +209,7 @@ function NavItemLink({
       >
         {statusElements}
         {children}
-      </Link>
+      </a>
     </li>
   );
 }

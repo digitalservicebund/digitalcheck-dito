@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 
 const Stepper = <T extends { path: string; title: string }>({
@@ -32,22 +31,22 @@ const Stepper = <T extends { path: string; title: string }>({
               role="link"
               key={el.path}
               aria-disabled="true"
-              className={"h-6 flex-1 bg-blue-300 transition-all duration-300"}
+              className="link-unstyled h-6 flex-1 bg-blue-300 transition-all duration-300"
             >
               <span className="sr-only">{el.title}</span>
             </a>
           );
         return (
-          <Link
+          <a
             key={el.path}
-            to={el.path}
+            href={el.path}
             className={twJoin(
-              "h-6 flex-1 transition-all duration-300",
+              "link-unstyled h-6 flex-1 transition-all duration-300",
               index <= currentIndex ? "bg-blue-800" : "bg-blue-600",
             )}
           >
             <span className="sr-only">{el.title}</span>
-          </Link>
+          </a>
         );
       })}
     </nav>

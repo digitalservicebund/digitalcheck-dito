@@ -1,19 +1,10 @@
 import { render, screen } from "@testing-library/react";
-import { createRoutesStub } from "react-router";
 import { describe, expect, it } from "vitest";
-import { general } from "~/resources/content/shared/general.ts";
 import type { Node } from "~/utils/paragraphUtils";
 import { BlocksRenderer } from "./BlocksRenderer";
 
 const renderBlocksRenderer = (content: Node[]) => {
-  const RouterStubBlocksRenderer = createRoutesStub([
-    {
-      path: "/",
-      Component: () => BlocksRenderer({ content }),
-    },
-  ]);
-
-  return render(<RouterStubBlocksRenderer />);
+  return render(<BlocksRenderer content={content} />);
 };
 
 describe("BlocksContentRenderer", () => {
@@ -133,8 +124,6 @@ describe("BlocksContentRenderer", () => {
       const link = container.querySelector("a");
       expect(link).toBeInTheDocument();
       expect(link?.textContent).toContain("This is an external link");
-      expect(link?.textContent).toContain(general.a11yMessageNewWindow);
-      expect(link?.target).toBe("_blank");
       expect(link?.href).toBe("https://example.com/");
     });
 

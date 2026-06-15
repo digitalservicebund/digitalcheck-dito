@@ -1,5 +1,4 @@
 import { ZoomInOutlined } from "@digitalservicebund/icons";
-import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import type { ImageProps } from "~/components/Image";
 import Image from "~/components/Image";
@@ -24,13 +23,12 @@ function ImageZoomable({
   const plausibleEvent = getPlausibleEventClassName(plausibleEventName);
 
   return (
-    <Link
-      to={image.url}
-      reloadDocument
+    <a
+      href={image.url}
       target="_blank"
       rel="noreferrer"
       className={twJoin(
-        "relative block cursor-zoom-in",
+        "link-unstyled relative block cursor-zoom-in",
         plausibleEvent,
         square && "after:block after:pb-[100%] after:content-['']",
       )}
@@ -48,7 +46,7 @@ function ImageZoomable({
         className="absolute bottom-16 left-16 size-24 rounded-xs border-4 border-blue-800 bg-blue-800 p-1 shadow-sm"
         fill="white"
       />
-    </Link>
+    </a>
   );
 }
 

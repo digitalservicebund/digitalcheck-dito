@@ -1,0 +1,33 @@
+---
+import Hero from "@/components/Hero.astro";
+import type { MarkdownLayoutProps } from "astro";
+import Layout from "./Layout.astro";
+
+type Props = MarkdownLayoutProps<{
+  title: string;
+  heroTitle?: string;
+}>;
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>{frontmatter.heroTitle ?? frontmatter.title}</h1>
+    </Hero>
+    <div class="content-wrapper space-y-8 py-40 lg:py-80">
+      <slot />
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .content-wrapper {
+    h2:not(:first-child) {
+      margin-top: 40px;
+    }
+    h3 {
+      margin-top: 32px;
+    }
+  }
+</style>

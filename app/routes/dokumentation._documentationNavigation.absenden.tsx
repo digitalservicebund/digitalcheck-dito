@@ -1,11 +1,9 @@
-import { dokumentation_absenden } from "@/config/routes";
 import { EmojiEventsOutlined as EmojiEventsOutlinedIcon } from "@digitalservicebund/icons";
 import { DownloadButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxList from "~/components/InfoBoxList";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
@@ -19,7 +17,6 @@ export function DocumentationSend() {
 
   return (
     <>
-      <MetaTitle prefix={`Dokumentation: ${dokumentation_absenden.title}`} />
       <Heading
         text={finish.heading.text}
         tagName="h1"
@@ -82,7 +79,7 @@ export default function Route() {
 }
 
 // Astro page export
-import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
+import { DocumentationPageShell } from "@/components/DocumentationPageShell";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
 export function AbsendenPage({

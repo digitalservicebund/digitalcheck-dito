@@ -146,7 +146,7 @@ export default function ResultForm({
               <ButtonContainer>
                 {isValid ? (
                   <LinkButton
-                    to={buildMailtoUri(
+                    href={buildMailtoUri(
                       result,
                       resultContent,
                       form.value("title"),

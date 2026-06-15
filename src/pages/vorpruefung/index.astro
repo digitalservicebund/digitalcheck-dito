@@ -1,0 +1,12 @@
+---
+import VorpruefungLayout from "@/layouts/VorpruefungLayout.astro";
+import VorpruefungIndexPage from "~/routes/vorpruefung._index";
+
+export const frontmatter = {
+  title: "Digitalbezug einschätzen",
+};
+---
+
+<VorpruefungLayout title={frontmatter.title} hideNav>
+  <VorpruefungIndexPage client:load />
+</VorpruefungLayout>

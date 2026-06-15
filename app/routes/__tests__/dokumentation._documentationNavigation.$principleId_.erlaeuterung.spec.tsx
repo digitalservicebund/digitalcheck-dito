@@ -12,7 +12,6 @@ import "@testing-library/jest-dom";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import type { UserEvent } from "@testing-library/user-event";
 import userEvent from "@testing-library/user-event";
-import { createBrowserRouter, RouterProvider, useParams } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import type { digitalDocumentation } from "~/resources/content/dokumentation";
@@ -21,7 +20,7 @@ import type {
   PrinzipAspekt,
   PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.types";
-import DocumentationPrincipleErlaeuterung from "../dokumentation._documentationNavigation.$principleId_.erlaeuterung";
+import { DocumentationPrincipleErlaeuterung } from "../dokumentation._documentationNavigation.$principleId_.erlaeuterung";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import type {
   DocumentationData,
@@ -106,23 +105,14 @@ const prinzips: PrinzipWithAspekteAndExample[] = [
   },
 ];
 
-const mockedUseParams = vi.mocked(useParams);
-
 const renderWithRouter = () => {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: (
-        <HelpPanelProvider>
-          <DocumentationDataProvider>
-            <DocumentationPrincipleErlaeuterung />
-          </DocumentationDataProvider>
-        </HelpPanelProvider>
-      ),
-    },
-  ]);
-
-  return render(<RouterProvider router={router} />);
+  return render(
+    <HelpPanelProvider currentPath="/dokumentation/prinzip-1-digitale-angebote/erlaeuterung">
+      <DocumentationDataProvider>
+        <DocumentationPrincipleErlaeuterung principleId="prinzip-1-digitale-angebote" />
+      </DocumentationDataProvider>
+    </HelpPanelProvider>,
+  );
 };
 
 const mockStoredData = (
@@ -154,9 +144,6 @@ describe("DocumentationPrincipleErlaeuterung", () => {
       "/dokumentation/prinzip-1-digitale-angebote";
     mockNavigationContext.routes = routes;
     mockNavigationContext.prinzips = prinzips;
-    mockedUseParams.mockReturnValue({
-      principleId: "prinzip-1-digitale-angebote",
-    });
   });
 
   afterEach(() => {

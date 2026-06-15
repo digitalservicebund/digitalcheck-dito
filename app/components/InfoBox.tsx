@@ -123,12 +123,12 @@ const LinkList = ({ links }: { links: ContentLink[] }) => (
       const { to, text, ...rest } = link;
       if (link.download)
         return (
-          <DownloadLinkButton key={to} to={to} omitIcon {...rest}>
+          <DownloadLinkButton key={to} href={to} omitIcon {...rest}>
             {text}
           </DownloadLinkButton>
         );
       return (
-        <LinkButton key={to} to={to} {...rest}>
+        <LinkButton key={to} href={to} {...rest}>
           {text}
         </LinkButton>
       );

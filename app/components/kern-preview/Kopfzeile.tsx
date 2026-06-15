@@ -1,7 +1,6 @@
+import { isProduction, stage } from "@/config/stage";
 import { twJoin } from "tailwind-merge";
 import "./Kopfzeile.css";
-
-const isPreview = import.meta.env?.PREVIEW_BUILD;
 
 /**
  * The "Official Website" banner, extracted from the web component provided by
@@ -36,7 +35,7 @@ export function Kopfzeile({ className }: Readonly<{ className?: string }>) {
           <span className="kern-kopfzeile__label">
             <slot>
               Offizielle Website – Bundesrepublik Deutschland
-              {isPreview ? " (PREVIEW)" : ""}
+              {!isProduction && ` (${stage.toUpperCase()})`}
             </slot>
           </span>
         </div>

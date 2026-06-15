@@ -1,27 +1,18 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import userEvent from "@testing-library/user-event";
-import { BrowserRouter } from "react-router";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { PreCheckQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
 import { ResultType } from "../vorpruefung.ergebnis/PreCheckResult";
 import { usePreCheckData } from "../vorpruefung/preCheckDataHook";
 
-const { questions } = preCheck;
-
-const { mockNavigate } = vi.hoisted(() => ({
-  mockNavigate: vi.fn(),
-}));
-
-vi.mock("react-router", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("react-router")>();
-  return {
-    ...actual,
-    useNavigate: vi.fn(() => mockNavigate),
-  };
+vi.stubGlobal("location", {
+  href: "/vorpruefung",
 });
+
+const { questions } = preCheck;
 
 vi.mock("~/routes/vorpruefung/preCheckDataHook", async (importOriginal) => {
   const actual =
@@ -33,11 +24,6 @@ vi.mock("~/routes/vorpruefung/preCheckDataHook", async (importOriginal) => {
     ...actual,
     usePreCheckData: vi.fn(),
   };
-});
-
-vi.mock("@rvf/react-router", async () => {
-  const rvfReact = await import("@rvf/react");
-  return rvfReact;
 });
 
 describe("PreCheck", () => {
@@ -65,11 +51,7 @@ describe("PreCheck", () => {
 
   describe("PreCheck validation", () => {
     beforeEach(() => {
-      render(
-        <BrowserRouter>
-          <PreCheckQuestion questionIdx={0} question={questions[0]} />
-        </BrowserRouter>,
-      );
+      render(<PreCheckQuestion questionIdx={0} question={questions[0]} />);
     });
 
     it("shows error when trying to click next without selecting an answer", async () => {
@@ -123,28 +105,22 @@ describe("PreCheck", () => {
   });
 
   describe("redirect guard", () => {
-    afterEach(() => {
-      mockNavigate.mockClear();
+    beforeEach(() => {
+      globalThis.location.href = "/vorpruefung";
     });
 
     it("redirects to last unanswered question", () => {
-      render(
-        <BrowserRouter>
-          <PreCheckQuestion questionIdx={2} question={questions[2]} />
-        </BrowserRouter>,
-      );
+      render(<PreCheckQuestion questionIdx={2} question={questions[2]} />);
 
-      expect(mockNavigate).toHaveBeenCalledWith("/vorpruefung/it-system");
+      expect(globalThis.location.href).toBe("/vorpruefung/it-system");
     });
 
-    it("does not redirect when all questions are answered", () => {
-      render(
-        <BrowserRouter>
-          <PreCheckQuestion questionIdx={0} question={questions[0]} />
-        </BrowserRouter>,
-      );
+    it("does not redirect when all questions are answered", async () => {
+      render(<PreCheckQuestion questionIdx={0} question={questions[0]} />);
 
-      expect(mockNavigate).not.toHaveBeenCalledWith("/vorpruefung");
+      await waitFor(() => {
+        expect(globalThis.location.href).toBe("/vorpruefung");
+      });
     });
   });
 });

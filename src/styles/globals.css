@@ -1,0 +1,396 @@
+@import "@digitalservice4germany/angie/fonts.css" layer(base);
+
+@import "tailwindcss" source("../../app"); /* keep source to explicitly tell Tailwind where to scan for classes in your source files to prevent hydration issues */
+@source "../../src";
+
+@config "@digitalservice4germany/style-dictionary/tailwind";
+@plugin "@digitalservice4germany/angie";
+
+@theme {
+  --font-sans: BundesSansWeb;
+
+  --color-principle-1: #fce4b1; /* order 1 */
+  --color-principle-2: #f5dcd7; /* order 2 */
+  --color-principle-6: #dfd6e2; /* order 3 */
+  --color-principle-5: #cce7db; /* order 4 */
+  --color-principle-3: #cce4f0; /* order 5 */
+
+  --color-ds-success: #005f34;
+  --color-ds-error: #8e001b;
+  --color-ds-warning: #f5e05d;
+  --color-ds-feature: #f5e05d;
+
+  --color-ds-red-200: #f9e5ec;
+  --color-ds-yellow-700: #e5ce5c;
+
+  --color-ds-blue-500: #b3c9d6;
+  --color-ds-blue-700: #336f91;
+  --color-ds-blue-800: #004b76;
+
+  --color-ds-green-700: #01854a;
+  --color-ds-green-900: #005e34;
+
+  --color-ds-gray-400: #dcdee1;
+  --color-ds-gray-600: #b8bdc3;
+  --color-ds-violet: #4c2c92;
+
+  --container-padding-inline: clamp(1rem, 5vw, 3rem);
+  --max-content-width: 76rem; /* 1216px */
+  --max-width-a11y: 630px;
+}
+
+@layer base {
+  html {
+    /* Keep 16px, don't change! (e.g. angie library depends on it) */
+    font-size: 16px;
+  }
+
+  body {
+    /* By default, text is 16px * 1.125 = 18px and line height is 150% of that (27px). */
+    @apply text-lg leading-[1.5em] antialiased;
+  }
+
+  h1 {
+    @apply ds-heading-01-reg;
+  }
+
+  h2 {
+    @apply ds-heading-02-reg;
+  }
+
+  h3 {
+    @apply ds-heading-03-reg;
+  }
+
+  a:not(.link-unstyled) {
+    @apply text-link;
+
+    &:not([download])[href^="http"]::after {
+      content: "";
+      display: inline-block;
+      width: 1.25em;
+      height: 1.25em;
+      margin-inline-start: 0.125em;
+      margin-bottom: -0.25em;
+      background-color: currentColor;
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z'/%3E%3C/svg%3E");
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+    }
+  }
+  a[href^="tel:"] {
+    @apply whitespace-nowrap;
+  }
+
+  a,
+  button {
+    @apply cursor-pointer;
+  }
+
+  blockquote {
+    @apply border-l-4 border-l-blue-600 italic;
+    margin: 1em 10px;
+    padding: 0.5em 20px;
+  }
+
+  ul:not(.list-unstyled),
+  ol:not(.list-unstyled) {
+    @apply space-y-8 pl-24;
+  }
+
+  li > ul:not(.list-unstyled),
+  li > ol:not(.list-unstyled) {
+    @apply mt-8;
+  }
+
+  ul:not(.list-unstyled) {
+    @apply list-disc;
+  }
+
+  ol:not(.list-unstyled) {
+    @apply list-decimal;
+  }
+
+  h1,
+  h2,
+  .ds-heading-01-reg,
+  .ds-heading-02-reg,
+  .ds-heading-01-bold,
+  .ds-heading-02-bold {
+    /* 80ch @ 18px font size = 720px */
+    max-width: 720px;
+  }
+
+  h3,
+  .ds-heading-03-reg,
+  .ds-heading-03-bold,
+  p,
+  ul:not(.list-unstyled),
+  ol:not(.list-unstyled) {
+    @apply max-w-a11y;
+  }
+
+  *:focus-visible {
+    @apply no-underline outline-2 outline-offset-1 outline-blue-800;
+  }
+}
+
+@utility container {
+  @apply mx-auto;
+  max-width: var(--max-content-width);
+  padding-inline: var(--container-padding-inline);
+}
+
+@utility container-overhanging-background {
+  @apply mx-auto;
+  max-width: 63rem;
+  padding: 2.5rem 3rem 3rem;
+
+  margin-inline: var(--container-padding-inline);
+}
+
+@utility ds-button {
+  @apply max-sm:ds-button-full-width sm:ds-button-large;
+}
+
+@utility text-link {
+  @apply visited:text-ds-violet fill-blue-800 text-blue-800 underline decoration-1 underline-offset-4 active:text-black;
+
+  &:focus-visible {
+    @apply text-blue-800! no-underline!;
+  }
+
+  &:hover {
+    @apply decoration-[3px];
+  }
+
+  .text-white & {
+    @apply text-gray-100 visited:text-gray-300;
+  }
+}
+
+@utility increase-tap-area {
+  @apply relative inline-block;
+
+  &::before {
+    @apply absolute -top-12 -right-12 -bottom-12 -left-12 content-[''];
+  }
+}
+
+@utility max-w-a11y {
+  /* 70ch @ 18px font size = 630px */
+  max-width: var(--max-width-a11y);
+}
+
+@layer components {
+  .dc-comparison-table {
+    @apply min-w-full overflow-auto;
+
+    & th,
+    & td {
+      @apply w-1/4 p-16 pr-32;
+    }
+
+    & thead tr {
+      @apply bg-blue-400 text-left;
+    }
+
+    & tbody {
+      @apply divide-y divide-gray-200;
+    }
+
+    & tbody tr {
+      @apply hover:bg-gray-100;
+    }
+  }
+
+  .summary-content {
+    .details & {
+      background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M9.5 17L14.5 12L9.5 7V17Z' fill='%23004B76'/%3E%3C/svg%3E%0A");
+      background-position: 0 calc(50% - 1px);
+    }
+
+    .details[open] & {
+      background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M7 9.5L12 14.5L17 9.5H7Z' fill='%23005576'/%3E%3C/svg%3E%0A");
+      background-position: 0 calc(50% - 1px);
+    }
+    &:hover {
+      @apply underline! decoration-2 underline-offset-2;
+    }
+  }
+}
+
+@layer utilities {
+  .ds-input,
+  .ds-checkbox,
+  .ds-textarea,
+  .ds-radio {
+    &,
+    &:hover {
+      background-color: white !important;
+    }
+
+    &.has-warning {
+      box-shadow: inset 0 0 0 0.125rem var(--color-ds-warning);
+
+      &:hover,
+      &:focus {
+        box-shadow: inset 0 0 0 0.25rem var(--color-ds-warning);
+      }
+    }
+
+    &.has-error {
+      box-shadow: inset 0 0 0 2px var(--color-ds-error);
+      &:hover,
+      &:focus {
+        box-shadow: inset 0 0 0 0.25rem var(--color-ds-error);
+      }
+    }
+  }
+}
+
+/*
+  Creates a 3-column grid to center main content while allowing some elements to "break out" to full width.
+  The layout is: [gutter] [main content] [gutter].
+  - The grid lines are named: `full-start`, `content-start`, `content-end`, `full-end`.
+  - The center `content` column is fluid but capped at `--max-content-width`.
+  - By default, direct children are placed in the `content` column.
+  - Use the `breakout` utility on a child to make it span the full width (e.g., for banners).
+*/
+@utility breakout-grid {
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(var(--container-padding-inline), 1fr)
+    [content-start] min(
+      100% - (var(--container-padding-inline) * 2),
+      var(--max-content-width) - 2 * var(--container-padding-inline)
+    )
+    [content-end]
+    minmax(var(--container-padding-inline), 1fr) [full-end];
+
+  & > *:not([class*="breakout"]) {
+    grid-column: content;
+  }
+}
+
+/*
+  Extends `breakout-grid` to create a 4-column layout for pages with a sidebar/Table of Contents (TOC).
+  The layout is: [gutter] [main content] [TOC] [gutter].
+  - The combined width of [main content] + [TOC] (including their gutter) aligns with `.container`:
+    it never exceeds `--max-content-width - 2 × --container-padding-inline`.
+  - A child element with the `.toc` class is placed in the dedicated TOC column.
+  - As seen in `SidebarContainer.tsx`, this is used for desktop layouts.
+*/
+@utility breakout-grid-toc {
+  --toc-min-width: 200px;
+  --toc-max-width: 300px;
+  --toc-gutter: 2.5rem; /* 40px */
+
+  @apply breakout-grid;
+
+  @media (width >= 64rem) {
+    /* breakpoint lg, 1024px */
+    grid-template-columns:
+      [full-start] minmax(var(--container-padding-inline), 1fr)
+      [content-start] min(
+        100% - (var(--container-padding-inline) * 2) - var(--toc-gutter) -
+          var(--toc-min-width),
+        var(--max-content-width) - (var(--container-padding-inline) * 2) -
+          var(--toc-max-width) - var(--toc-gutter)
+      )
+      [content-end]
+      var(--toc-gutter) /* Gutter column */
+      [toc] minmax(var(--toc-min-width), var(--toc-max-width)) /* TOC column */
+      minmax(var(--container-padding-inline), 1fr) [full-end];
+
+    & > .toc {
+      grid-column: toc;
+    }
+  }
+}
+
+/*
+  Extends `breakout-grid` to create a 3-column layout for pages with a Nav, Main, and Help section.
+  The layout is: [gutter] [Nav] [gutter] [main content] [gutter] [Help].
+  - It adjusts the main content width to make space for the Nav and Help components.
+  - As seen in `_documentationNavigation.tsx`, this is used for desktop layouts.
+*/
+@utility breakout-grid-form-steps {
+  --nav-min-width: 250px;
+  --nav-max-width: 300px;
+  --content-max-width: var(--max-width-a11y);
+
+  --help-width: 0px;
+  --gutter: 5rem; /* 80px */
+
+  @apply breakout-grid;
+
+  @media (width >= 80rem) {
+    --help-width: 300px;
+  }
+
+  @media (width >= 94rem) {
+    --help-width: 350px;
+  }
+
+  @media (width >= 64rem) {
+    /* breakpoint lg, 1024px */
+    grid-template-columns:
+      [full-start] minmax(var(--container-padding-inline), 1fr)
+      [nav-start] minmax(var(--nav-min-width), var(--nav-max-width))
+      [nav-end] var(--gutter)
+      [content-start] minmax(min-content, var(--content-max-width))
+      [content-end] minmax(var(--gutter), 1fr)
+      [help-start] var(--help-width)
+      [help-end full-end];
+
+    & > .nav {
+      grid-column: nav;
+    }
+
+    & > .help {
+      grid-column: help;
+    }
+
+    & > main {
+      grid-column: content;
+    }
+  }
+}
+
+/*
+  Utility to make a grid item span the full width of a `breakout-grid` parent (from `full-start` to `full-end`).
+  It also establishes a subgrid, allowing its children to align with the parent grid's columns.
+*/
+@utility breakout {
+  grid-column: full;
+
+  display: grid;
+  grid-template-columns: subgrid;
+
+  /*
+    By default, children of a `breakout` element are placed back into the central `content` column of the parent grid.
+    To make a child of a `breakout` element also span the full width, apply `grid-column: full` to it.
+  */
+  & > * {
+    grid-column: content;
+  }
+}
+
+/*
+ * Windows High Contrast mode
+ */
+@media (forced-colors: active) {
+  :is(button, a) svg {
+    forced-color-adjust: auto;
+  }
+  input {
+    @apply outline;
+  }
+}
+
+@utility vertical-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}

@@ -1,0 +1,76 @@
+---
+import BeispieleLayout from "@/layouts/BeispieleLayout.astro";
+import { Gesetz } from "~/routes/beispiele.regelungen.$regelung";
+import {
+  fetchStrapiData,
+  GET_PRINZIPS_QUERY,
+  paragraphFields,
+  prinzipCoreFields,
+  visualisationFields,
+} from "~/utils/strapiData.server";
+import type {
+  Beispielvorhaben,
+  PrinzipWithBeispielvorhaben,
+} from "~/utils/strapiData.types";
+
+export const frontmatter = {
+  title: "Regelungsbeispiel",
+};
+
+export async function getStaticPaths() {
+  const regelungQuery = `
+${prinzipCoreFields}
+${paragraphFields}
+${visualisationFields}
+query GetAllBeispielvorhaben {
+  beispielvorhabens(status: PUBLISHED) {
+    documentId
+    Titel
+    NKRNummer
+    Rechtsgebiet
+    Ressort
+    URLBezeichnung
+    VeroeffentlichungsDatum
+    LinkRegelungstext
+    NKRStellungnahmeLink
+    GesetzStatus
+    Paragraphen { ...ParagraphFields }
+    Visualisierungen { ...VisualisationFields }
+    Digitalchecks {
+      documentId
+      Titel
+      EinschaetzungAutomatisierung
+      EinschaetzungDatenschutz
+      EinschaetzungKlareRegelungen
+      EinschaetzungKommunikation
+      EinschaetzungWiederverwendung
+      NKRStellungnahmeDCText
+    }
+  }
+}`;
+
+  const [regelungResult, prinzipsResult] = await Promise.all([
+    fetchStrapiData<{ beispielvorhabens: Beispielvorhaben[] }>(regelungQuery),
+    fetchStrapiData<{ prinzips: PrinzipWithBeispielvorhaben[] }>(
+      GET_PRINZIPS_QUERY,
+    ),
+  ]);
+
+  const principles = prinzipsResult.prinzips.toSorted(
+    (a, b) => a.order - b.order,
+  );
+
+  return regelungResult.beispielvorhabens.map((regelung) => ({
+    params: { regelung: regelung.URLBezeichnung },
+    props: { regelung, principles },
+  }));
+}
+
+const { regelung: regelungData, principles } = Astro.props;
+---
+
+<BeispieleLayout title={frontmatter.title}>
+  <main>
+    <Gesetz regelung={regelungData} principles={principles} client:load />
+  </main>
+</BeispieleLayout>

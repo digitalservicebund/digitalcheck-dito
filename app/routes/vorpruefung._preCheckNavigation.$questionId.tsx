@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useLoaderData, useNavigate } from "react-router";
 
 import { vorpruefung } from "@/config/routes";
 import Button, { LinkButton } from "~/components/Button.tsx";
@@ -7,41 +6,18 @@ import ButtonContainer from "~/components/ButtonContainer";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import InlineNotice from "~/components/InlineNotice";
-import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup";
 import RichText from "~/components/RichText";
 import { general } from "~/resources/content/shared/general";
-import { preCheckQuestions } from "~/resources/content/shared/pre-check-questions";
 import { preCheck } from "~/resources/content/vorpruefung";
-import type { Route } from "./+types/vorpruefung._preCheckNavigation.$questionId";
 import { usePreCheckData, useSyncedForm } from "./vorpruefung/preCheckDataHook";
 import type { PreCheckAnswerSchema } from "./vorpruefung/preCheckDataSchema";
 import { answerSchema } from "./vorpruefung/preCheckDataSchema";
 import { addOrUpdateAnswer } from "./vorpruefung/preCheckDataService";
 
-const ROUTES_PRECHECK_QUESTIONS = Object.values(preCheckQuestions).map((q) => ({
-  path: q.path,
-  title: `${q.title} — Vorprüfung`,
-}));
+// data fetching moved to @/src/pages/vorpruefung/
 
 const { questions, answerOptions, nextButton } = preCheck;
-
-export function loader({ params }: Route.LoaderArgs) {
-  const questionIdx = questions.findIndex((q) => q.id === params.questionId);
-  // return 404 if the question is not found
-  if (questionIdx === -1) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("Question not found", {
-      status: 404,
-      statusText: "Not Found",
-    });
-  }
-
-  return {
-    questionIdx,
-    question: questions[questionIdx],
-  };
-}
 
 export type TQuestion = {
   id: string;
@@ -90,7 +66,6 @@ export function PreCheckQuestion({
 
   const { answerForQuestionId, answers, firstUnansweredQuestionIndex } =
     usePreCheckData();
-  const navigate = useNavigate();
   const storedAnswer = answerForQuestionId(question.id);
   const nextLink =
     questions.find((q) => q.id === question.id)?.nextLink ?? vorpruefung.path;
@@ -103,9 +78,9 @@ export function PreCheckQuestion({
     },
     storedData: storedAnswer,
     initialValidate: true,
-    handleSubmit: async (data: PreCheckAnswerSchema) => {
+    handleSubmit: (data: PreCheckAnswerSchema) => {
       addOrUpdateAnswer(data);
-      await navigate(nextLink);
+      globalThis.location.href = nextLink;
     },
   });
 
@@ -115,9 +90,9 @@ export function PreCheckQuestion({
       firstUnansweredQuestionIndex !== null &&
       questionIdx > firstUnansweredQuestionIndex
     ) {
-      void navigate(questions[firstUnansweredQuestionIndex].path);
+      globalThis.location.href = questions[firstUnansweredQuestionIndex].path;
     }
-  }, [firstUnansweredQuestionIndex, navigate, questionIdx]);
+  }, [firstUnansweredQuestionIndex, questionIdx]);
 
   useEffect(() => {
     if (question.id !== "eu-bezug") return;
@@ -149,13 +124,6 @@ export function PreCheckQuestion({
 
   return (
     <form {...form.getFormProps()} className="space-y-40">
-      <MetaTitle
-        prefix={
-          ROUTES_PRECHECK_QUESTIONS.find((route) =>
-            route.path.endsWith(question.id),
-          )?.title
-        }
-      />
       <input {...form.getHiddenInputProps("questionId")} />
       <section className="space-y-32">
         <div className="space-y-16">
@@ -205,7 +173,7 @@ export function PreCheckQuestion({
           </Button>
           <LinkButton
             id={"preCheck-back-button"}
-            to={question.prevLink}
+            href={question.prevLink}
             look={"tertiary"}
           >
             {general.buttonBack.text}
@@ -214,9 +182,4 @@ export function PreCheckQuestion({
       </div>
     </form>
   );
-}
-
-export default function Route() {
-  const { questionIdx, question } = useLoaderData<typeof loader>();
-  return <PreCheckQuestion questionIdx={questionIdx} question={question} />;
 }

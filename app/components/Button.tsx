@@ -2,8 +2,6 @@ import { SaveAltOutlined as SaveAltOutlinedIcon } from "@digitalservicebund/icon
 import type React from "react";
 import type { ReactElement } from "react";
 import { cloneElement } from "react";
-import type { LinkProps } from "react-router";
-import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import { getDownloadableExtensionName } from "~/utils/fileExtensionUtils";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
@@ -27,7 +25,8 @@ export type ButtonProps = React.ComponentPropsWithoutRef<"button"> &
   ExplicitButtonType &
   ButtonBaseProps;
 
-export type LinkButtonProps = LinkProps & ButtonBaseProps;
+export type LinkButtonProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
+  ButtonBaseProps;
 
 type ReactElementWithClassname = ReactElement<{ className: string }>;
 
@@ -110,7 +109,7 @@ function Button({
 export default Button;
 
 /**
- * A react-router <Link> that looks like a button.
+ * An anchor that looks like a button.
  */
 export function LinkButton({
   children,
@@ -149,16 +148,16 @@ export function LinkButton({
   };
 
   return (
-    <Link
-      {...props}
+    <a
+      href={props.href}
       id={id}
       data-testid={id}
-      className={twJoin(buttonClasses, plausibleEventClass)}
+      className={twJoin("link-unstyled", buttonClasses, plausibleEventClass)}
       onKeyDown={onKeyDown}
       {...props}
     >
       {iconLeft} <span className="ds-button-label">{children}</span> {iconRight}
-    </Link>
+    </a>
   );
 }
 
@@ -186,8 +185,8 @@ export function DownloadLinkButton({
   ...props
 }: Readonly<Omit<LinkButtonProps, "iconLeft"> & { omitIcon?: boolean }>) {
   const extension =
-    typeof props.to === "string"
-      ? getDownloadableExtensionName(props.to)
+    typeof props.href === "string"
+      ? getDownloadableExtensionName(props.href)
       : null;
 
   const iconLeft = omitIcon ? undefined : (
@@ -197,7 +196,6 @@ export function DownloadLinkButton({
     <LinkButton
       iconLeft={iconLeft}
       download
-      reloadDocument
       title={extension ? `${extension}-Datei` : undefined}
       {...props}
     />

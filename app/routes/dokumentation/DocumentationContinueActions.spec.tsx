@@ -1,6 +1,5 @@
 // Import mocks first
 import "~/routes/__tests__/utils/mockLocalStorageVersioned";
-import { mockNavigate } from "~/routes/__tests__/utils/mockRouter";
 // End of mocks
 import "@testing-library/jest-dom";
 import { act, render, screen } from "@testing-library/react";
@@ -8,7 +7,6 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { dokumentation_hinweise } from "@/config/routes";
 import type React from "react";
-import { MemoryRouter } from "react-router";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general.ts";
 import {
@@ -19,7 +17,6 @@ import { DocumentationContinueActions } from "./DocumentationContinueActions";
 import { DocumentationDataProvider } from "./DocumentationDataProvider";
 import type { DocumentationData, V1 } from "./documentationDataSchema";
 import { DATA_SCHEMA_VERSION_V1 } from "./documentationDataSchema";
-const ROUTES_DOCUMENTATION_INTRO = [{ path: dokumentation_hinweise.path }];
 
 const { mockDownloadDocumentation } = vi.hoisted(() => ({
   mockDownloadDocumentation: vi.fn(),
@@ -42,9 +39,7 @@ async function triggerStartOverDialog() {
 describe("DocumentationContinueActions", () => {
   const renderWithRouter = (component: React.ReactElement) => {
     return render(
-      <MemoryRouter>
-        <DocumentationDataProvider>{component}</DocumentationDataProvider>
-      </MemoryRouter>,
+      <DocumentationDataProvider>{component}</DocumentationDataProvider>,
     );
   };
 
@@ -107,16 +102,16 @@ describe("DocumentationContinueActions", () => {
     });
 
     it("clears the documentation data and navigates to the first step when the start-over button is clicked", async () => {
+      vi.stubGlobal("location", { href: "" });
+
       await triggerStartOverDialog();
       const confirmButton = await screen.findByRole("button", {
         name: digitalDocumentation.start.startOverDialog.actions.confirm,
       });
-      confirmButton.click();
+      act(() => confirmButton.click());
 
       expect(vi.mocked(removeFromLocalStorage)).toHaveBeenCalled();
-      expect(mockNavigate).toHaveBeenCalledWith(
-        ROUTES_DOCUMENTATION_INTRO[0].path,
-      );
+      expect(globalThis.location.href).toBe(dokumentation_hinweise.path);
     });
   });
 

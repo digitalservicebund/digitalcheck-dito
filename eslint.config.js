@@ -1,5 +1,5 @@
-import { includeIgnoreFile } from "@eslint/compat";
 import eslint from "@eslint/js";
+import eslintPluginAstro from "eslint-plugin-astro";
 import importPlugin from "eslint-plugin-import";
 import jsxA11y from "eslint-plugin-jsx-a11y";
 import playwright from "eslint-plugin-playwright";
@@ -8,7 +8,7 @@ import reactPlugin from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import testingLibrary from "eslint-plugin-testing-library";
-import { defineConfig } from "eslint/config";
+import { defineConfig, globalIgnores } from "eslint/config";
 import globals from "globals";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -18,8 +18,16 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default defineConfig(
-  // Global ignores
-  includeIgnoreFile(fileURLToPath(new URL(".gitignore", import.meta.url))),
+  eslintPluginAstro.configs.recommended,
+  globalIgnores([
+    ".astro/",
+    "dist/",
+    "doc/",
+    "playwright-report/",
+    "test-results/",
+    "README.md",
+    "AGENTS.md",
+  ]),
   // Global settings
   {
     languageOptions: {
@@ -36,7 +44,7 @@ export default defineConfig(
   },
   // React & Typescript
   {
-    files: ["app/**/*.{ts,tsx}", "tests/**/*.{ts,tsx}"],
+    files: ["app/**/*.{ts,tsx}", "src/**/*.{ts,tsx}", "tests/**/*.{ts,tsx}"],
     extends: [
       eslint.configs.recommended,
       tseslint.configs.recommendedTypeChecked,
@@ -139,6 +147,21 @@ export default defineConfig(
         },
       ],
       quotes: ["error", "double", { avoidEscape: true }],
+
+      // Astro virtual modules (e.g. astro:middleware, astro:content) are
+      // injected at build time and cannot be resolved statically.
+      "import/no-unresolved": ["error", { ignore: ["^astro:"] }],
+    },
+  },
+  // Spec/test files are excluded from the default tsconfig.json, so the
+  // type-aware parser needs the test tsconfig to resolve them.
+  {
+    files: ["**/*.{spec,test}.{ts,tsx}"],
+    languageOptions: {
+      parserOptions: {
+        project: ["./tsconfig.test.json"],
+        tsconfigRootDir: __dirname,
+      },
     },
   },
   // Additional Rules for test files

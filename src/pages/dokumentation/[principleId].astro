@@ -1,0 +1,19 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { PrinciplePage } from "~/routes/dokumentation._documentationNavigation.$principleId";
+import { getPrincipleIdStaticPaths } from "~/utils/strapiData.server";
+
+export const getStaticPaths = getPrincipleIdStaticPaths;
+
+const { prinzips, principleName } = Astro.props;
+const { principleId } = Astro.params;
+---
+
+<Layout title={`Dokumentation: ${principleName}`} showProgressBar>
+  <PrinciplePage
+    client:load
+    prinzips={prinzips}
+    currentUrl={Astro.url.pathname}
+    principleId={principleId}
+  />
+</Layout>

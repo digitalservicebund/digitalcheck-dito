@@ -1,0 +1,23 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import VorpruefungNavigation from "@/pages/vorpruefung/_VorpruefungNavigation";
+
+interface Props {
+  title: string;
+  hideNav?: boolean;
+}
+
+const { title, hideNav } = Astro.props;
+---
+
+<Layout title={`Vorprüfung: ${title}`} showProgressBar>
+  {
+    hideNav ? (
+      <slot />
+    ) : (
+      <VorpruefungNavigation client:load pathname={Astro.url.pathname}>
+        <slot />
+      </VorpruefungNavigation>
+    )
+  }
+</Layout>

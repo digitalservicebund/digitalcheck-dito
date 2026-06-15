@@ -1,0 +1,10 @@
+---
+import MethodenLayout from "@/layouts/MethodenLayout.astro";
+import { methodsResponsibleActors } from "~/resources/content/methode-zustaendige-akteurinnen-auflisten";
+
+export const frontmatter = {
+  title: "Akteure auflisten",
+};
+---
+
+<MethodenLayout title={frontmatter.title} content={methodsResponsibleActors} />

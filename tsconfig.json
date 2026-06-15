@@ -1,39 +1,12 @@
 {
-  "include": [
-    "**/*",
-    "**/.server/**/*",
-    "**/.client/**/*",
-    ".react-router/types/**/*"
-  ],
+  "extends": "astro/tsconfigs/strict",
+  "exclude": ["dist", "build", "tests/playwright-report"],
+  "include": [".astro/types.d.ts", "**/*"],
   "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "ES2022", "ES2023"],
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "jsx": "react-jsx",
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "target": "ES2022",
-    "module": "ES2022",
-    "strict": true,
-    "allowJs": true,
-    "forceConsistentCasingInFileNames": true,
-    "useUnknownInCatchVariables": false,
-    "noEmit": true,
-    "skipLibCheck": true,
-    "rootDirs": [".", "./.react-router/types"],
-    "types": [
-      "@react-router/node",
-      "vite/client",
-      "vitest/globals",
-      "@testing-library/react"
-    ],
+    "typeRoots": ["./node_modules/@types", "./src/types"],
     "paths": {
       "@/*": ["./src/*"],
-      "~/*": ["./app/*"],
-      "@digitalservicebund/icons/*": [
-        "./node_modules/@digitalservicebund/icons/*"
-      ]
+      "~/*": ["./app/*"]
     }
   }
 }

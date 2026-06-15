@@ -2,17 +2,14 @@ import type { Route } from "@/config/routes";
 import {
   dokumentation_beteiligungsformate,
   dokumentation_regelungsvorhabenTitel,
-  dokumentation_zusammenfassung,
 } from "@/config/routes";
 import { type ReactNode } from "react";
-import { Link } from "react-router";
 import type { BadgeProps } from "~/components/Badge";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
 import InlineNotice from "~/components/InlineNotice";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
@@ -63,13 +60,13 @@ const createInfoBoxItem = ({
           heading={summary.warnings.missing}
         />
       )}
-      <Link
-        to={route.path}
-        className="text-link mt-24 block"
+      <a
+        href={route.path}
+        className="mt-24 block"
         aria-label={`${route.title} ${summary.buttonEdit.ariaLabelSuffix}`}
       >
         {summary.buttonEdit.text}
-      </Link>
+      </a>
     </div>
   ),
   look: "highlight",
@@ -280,9 +277,6 @@ export function DocumentationSummary() {
 
   return (
     <>
-      <MetaTitle
-        prefix={`Dokumentation: ${dokumentation_zusammenfassung.title}`}
-      />
       <Heading
         text={summary.headline}
         tagName="h1"
@@ -305,7 +299,7 @@ export default function Route() {
 }
 
 // Astro page export
-import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
+import { DocumentationPageShell } from "@/components/DocumentationPageShell";
 
 export function ZusammenfassungPage({
   prinzips,

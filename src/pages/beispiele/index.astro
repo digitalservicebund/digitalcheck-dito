@@ -1,0 +1,14 @@
+---
+import BeispieleLayout from "@/layouts/BeispieleLayout.astro";
+import BeispieleIndexPage from "~/routes/beispiele._index";
+
+export const frontmatter = {
+  title: "Beispiele für Digitaltauglichkeit",
+};
+---
+
+<BeispieleLayout title={frontmatter.title}>
+  <main>
+    <BeispieleIndexPage client:load />
+  </main>
+</BeispieleLayout>

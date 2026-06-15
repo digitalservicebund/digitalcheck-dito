@@ -1,13 +1,11 @@
 import { methoden_fuenfPrinzipien } from "@/config/routes";
 import { useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router";
 import AspectPills from "~/components/AspectPills";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
-import MetaTitle from "~/components/Meta";
 import Textarea from "~/components/Textarea";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
@@ -153,8 +151,6 @@ export function DocumentationPrincipleErlaeuterung({
     ({ URLBezeichnung }) => URLBezeichnung === principleId,
   );
 
-  const navigate = useNavigate();
-
   if (!prinzip)
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw new Response("No Prinzip for slug found", { status: 404 });
@@ -170,8 +166,8 @@ export function DocumentationPrincipleErlaeuterung({
   // If no answer saved yet, redirect to answer page
   useEffect(() => {
     if (documentationData.initialized && !principleData?.answer)
-      void navigate(navigationBaseUrl);
-  }, [documentationData, principleData, navigate, navigationBaseUrl]);
+      globalThis.location.href = navigationBaseUrl;
+  }, [documentationData, principleData, navigationBaseUrl]);
 
   if (!principleData?.answer) return null;
 
@@ -183,7 +179,6 @@ export function DocumentationPrincipleErlaeuterung({
 
   return (
     <>
-      <MetaTitle prefix={`Dokumentation: ${prinzip.Name} – Erläuterung`} />
       <div className="space-y-48">
         <div className="space-y-24">
           <Badge principleNumber={prinzip.Nummer} className="mb-8">
@@ -197,14 +192,13 @@ export function DocumentationPrincipleErlaeuterung({
               className="h-24 w-24"
             >
               <BlocksRenderer content={prinzip.Hilfetext!} />
-              <Link
-                to={
+              <a
+                href={
                   methoden_fuenfPrinzipien.path + "/" + prinzip.URLBezeichnung
                 }
-                className="ds-link-01-reg"
               >
                 Mehr zum Prinzip
-              </Link>
+              </a>
             </HelpButton>
           </Heading>
 
@@ -214,12 +208,7 @@ export function DocumentationPrincipleErlaeuterung({
 
           <div className="rounded-lg bg-blue-300 p-24">
             <p>{changeAnswerTitle}</p>
-            <Link
-              to={currentUrl.replace("/erlaeuterung", "")}
-              className="text-link"
-            >
-              Angaben ändern
-            </Link>
+            <a href={currentUrl.replace("/erlaeuterung", "")}>Angaben ändern</a>
           </div>
         </div>
 
@@ -235,16 +224,8 @@ export function DocumentationPrincipleErlaeuterung({
   );
 }
 
-export default function Route() {
-  const { principleId } = useParams();
-  if (!principleId)
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("No principleId provided", { status: 404 });
-  return <DocumentationPrincipleErlaeuterung principleId={principleId} />;
-}
-
 // Astro page export
-import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
+import { DocumentationPageShell } from "@/components/DocumentationPageShell";
 
 export function ErlaeuterungPage({
   prinzips,

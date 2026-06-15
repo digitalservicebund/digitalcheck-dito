@@ -1,65 +1,42 @@
 # Download and install the dependencies for building the app
-FROM node:24.11.0-alpine3.22 AS build-dependencies
+FROM node:26.1.0-alpine3.23 AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable pnpm
+RUN npm install -g pnpm
 
+FROM base AS build
 WORKDIR /src
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml /src/
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile --ignore-scripts
 
-# Download and install the dependencies for running the app
-FROM node:24.11.0-alpine3.22 AS production-dependencies
 
-ENV NODE_ENV=production
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable pnpm
-
-WORKDIR /src
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml /src/
-RUN pnpm install --frozen-lockfile --ignore-scripts --prod
-
-# Build the app
-FROM node:24.11.0-alpine3.22 AS build
-
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable pnpm
-
-# Create app directory
-WORKDIR /src
-
-# Copy the build dependencies
-COPY --from=build-dependencies /src/node_modules node_modules/
-
-# Copy root level files
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml tsconfig.json vite.config.ts ./
+COPY tsconfig.json astro.config.mjs ./
+# perspektivisch wird app nicht mehr gebraucht bei abgeschlossener Migration
 COPY app/ app/
 COPY src/ src/
 COPY public/ public/
 
-RUN pnpm run build
 
-# Final image that runs the app
-FROM node:24.11.0-alpine3.22
+RUN PUBLIC_STAGE=production pnpm run build --outDir dist_production
+RUN PUBLIC_STAGE=staging    pnpm run build --outDir dist_staging
 
-ENV NODE_ENV=production
+FROM nginx:1.31.0-alpine AS runtime
+COPY ./nginx.template.conf /etc/nginx/nginx.template.conf
+COPY --from=build /src/dist_production /usr/share/nginx/production
+COPY --from=build /src/dist_staging /usr/share/nginx/staging
 
-WORKDIR /home/node/src
-# Move only the files to the final image that are really needed
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-COPY --from=production-dependencies /src/node_modules/ ./node_modules/
-COPY --from=build /src/build/ ./build/
-COPY --from=build /src/public/ ./public/
+# assign privileges and switch to non-root user
+RUN mkdir /etc/nginx/sites-enabled \
+	&& touch /run/nginx.pid \
+	&& chown -R nginx /etc/nginx/sites-enabled /var/cache/nginx /run/nginx.pid \
+	&& chmod -R o+w /etc/nginx/sites-enabled /var/cache/nginx /run/nginx.pid \
+	&& echo 'include /etc/nginx/sites-enabled/*;' > /etc/nginx/nginx.conf
+USER nginx
 
-# Ensure the node user owns all files in the working directory
-RUN chown -R node:node /home/node/src
+# Default values - get overwritten by kubernetes manifests
+ENV NGINX_DIR=production
+ENV RESOLVER=1.1.1.1
 
-# Switch to non-root user
-USER node
-
-EXPOSE 3000
-
-CMD ["node_modules/.bin/react-router-serve", "build/server/index.js"]
+EXPOSE 8080
+CMD ["sh", "-c", "envsubst '$NGINX_DIR $RESOLVER' < /etc/nginx/nginx.template.conf > /etc/nginx/sites-enabled/nginx.conf && nginx -g 'daemon off;'"]

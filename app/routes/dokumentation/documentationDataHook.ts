@@ -2,7 +2,6 @@ import type { FieldValues, FormOpts } from "@rvf/react";
 import { useForm } from "@rvf/react";
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 
 type UseSyncedFormParams<
   SchemaInput extends FieldValues,
@@ -30,7 +29,6 @@ export const useSyncedForm = <
   nextUrl,
 }: UseSyncedFormParams<SchemaInput, SchemaOutput, SubmitResponseData>) => {
   const [formTouched, setFormTouched] = useState(false);
-  const navigate = useNavigate();
 
   const form = useForm({
     schema,
@@ -40,13 +38,13 @@ export const useSyncedForm = <
       whenTouched: "onSubmit",
       initial: "onSubmit",
     },
-    onBeforeSubmit: async ({ unvalidatedData }) => {
+    onBeforeSubmit: ({ unvalidatedData }) => {
       if (!storedData) setDataCallback(unvalidatedData);
       // bypass submission
-      if (nextUrl) await navigate(nextUrl);
+      if (nextUrl) globalThis.location.href = nextUrl;
     },
-    handleSubmit: async () => {
-      if (nextUrl) await navigate(nextUrl);
+    handleSubmit: () => {
+      if (nextUrl) globalThis.location.href = nextUrl;
     },
   });
 

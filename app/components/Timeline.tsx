@@ -73,7 +73,7 @@ export function TimelineItemContent({
           {links.map((link) => {
             const { to, text, ...rest } = link;
             return (
-              <LinkButton key={to} to={to} {...rest}>
+              <LinkButton key={to} href={to} {...rest}>
                 {text}
               </LinkButton>
             );

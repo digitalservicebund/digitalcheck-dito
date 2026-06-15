@@ -13,28 +13,13 @@ import {
   methoden_fuenfPrinzipien,
   type Route,
   vorpruefung,
-  vorpruefung_automatisierung,
-  vorpruefung_datenaustausch,
   vorpruefung_ergebnis,
-  vorpruefung_euBezug,
   vorpruefung_hinweise,
-  vorpruefung_itSystem,
-  vorpruefung_kommunikation,
-  vorpruefung_verpflichtungenFuerBeteiligte,
 } from "@/config/routes";
+import { preCheck } from "~/resources/content/vorpruefung";
 import { waitForHydration } from "./helpers";
 
-// Order matches the content-defined question sequence in pre-check-questions.ts
-const ROUTES_PRECHECK_QUESTIONS = [
-  vorpruefung_itSystem,
-  vorpruefung_verpflichtungenFuerBeteiligte,
-  vorpruefung_datenaustausch,
-  vorpruefung_kommunikation,
-  vorpruefung_automatisierung,
-  vorpruefung_euBezug,
-];
-
-function getExpectedTitle(route: Route) {
+function getExpectedTitle(route: Pick<Route, "path" | "title">) {
   const titleSuffix = " — Digitalcheck";
 
   if (route.path === home.path)
@@ -59,6 +44,9 @@ function getExpectedTitle(route: Route) {
   ) {
     // subpages of documentation
     return `Dokumentation: ${route.title}${titleSuffix}`;
+  }
+  if (route.path.startsWith(vorpruefung.path)) {
+    return `Vorprüfung: ${route.title}${titleSuffix}`;
   }
 
   return `${route.title}${titleSuffix}`;
@@ -87,11 +75,11 @@ test.describe("page titles", () => {
     await page.goto(vorpruefung_hinweise.path);
     await expect(page).toHaveTitle(getExpectedTitle(vorpruefung_hinweise));
 
-    await page.goto(ROUTES_PRECHECK_QUESTIONS[0].path);
-    for (const route of ROUTES_PRECHECK_QUESTIONS) {
-      await page.waitForURL(route.path);
+    await page.goto(preCheck.questions[0].path);
+    for (const question of preCheck.questions) {
+      await page.waitForURL(question.path);
       await waitForHydration(page);
-      await expect(page).toHaveTitle(getExpectedTitle(route));
+      await expect(page).toHaveTitle(getExpectedTitle(question));
       await page.getByLabel("Ja").click();
       await page.getByRole("button", { name: "Übernehmen" }).click();
     }
@@ -159,12 +147,17 @@ test.describe("links", () => {
     await expect(page).toHaveURL(methoden.path);
   });
 
-  test("links leading to external pages open in new tab", async ({ page }) => {
+  test("links leading to external pages have icon", async ({ page }) => {
     await page.goto(home.path, { waitUntil: "domcontentloaded" });
     const linkLocator = page.getByRole("link", {
       name: "DigitalService GmbH des Bundes",
     });
-    await expect(linkLocator).toHaveAttribute("target", "_blank");
+    const afterBackgroundColor = await linkLocator.evaluate((el) => {
+      return globalThis
+        .getComputedStyle(el, "::after")
+        .getPropertyValue("background-color");
+    });
+    expect(afterBackgroundColor).toBeTruthy();
   });
 });
 
@@ -229,7 +222,7 @@ test.describe("error pages", () => {
     const response = await page.goto("/does-not-exist");
     expect(response?.status()).toBe(404);
     await expect(page.getByRole("main")).toContainText(
-      "404Seite konnte nicht gefunden werden",
+      "404 Seite konnte nicht gefunden werden",
     );
   });
 

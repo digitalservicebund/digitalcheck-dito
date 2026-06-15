@@ -1,0 +1,16 @@
+<script>
+  import posthog from "posthog-js";
+  import { apiHost, posthogKey, uiHost } from "@/config/posthog";
+
+  if (posthogKey && apiHost && uiHost) {
+    posthog.init(posthogKey, {
+      api_host: apiHost,
+      ui_host: uiHost,
+      defaults: "2025-05-24",
+      persistence: "memory",
+      cookieless_mode: "always",
+      enable_heatmaps: true,
+      capture_dead_clicks: true,
+    });
+  }
+</script>

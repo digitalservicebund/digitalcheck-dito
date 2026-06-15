@@ -1,7 +1,5 @@
-import { dokumentation_beteiligungsformate } from "@/config/routes";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
@@ -32,9 +30,6 @@ export function DocumentationParticipation() {
 
   return (
     <>
-      <MetaTitle
-        prefix={`Dokumentation: ${dokumentation_beteiligungsformate.title}`}
-      />
       <div className="space-y-40">
         <Heading
           text={participation.headline}
@@ -102,7 +97,7 @@ export default function Route() {
 }
 
 // Astro page export
-import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
+import { DocumentationPageShell } from "@/components/DocumentationPageShell";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
 export function BeteiligungsformatePage({

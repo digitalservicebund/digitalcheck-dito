@@ -1,3 +1,4 @@
+import { ROUTE_SUPPORT_TRAININGS } from "@/config/additionalRoutes";
 import {
   beispiele_prinzipien,
   beispiele_visualisierungen,
@@ -14,7 +15,6 @@ import {
 } from "@/config/routes";
 import type { ActiveBehavior } from "~/components/DropdownContentList";
 import { contact } from "~/resources/content/shared/contact";
-import { ROUTE_SUPPORT_TRAININGS } from "~/resources/staticRoutes";
 
 export const header = {
   title: "Digitalcheck",
@@ -71,7 +71,7 @@ export const header = {
           title: "Digitaltauglichkeit im Regelungstext",
           content:
             "So wurden die 5 Prinzipien von Ihren Kolleginnen und Kollegen in Regelungen ausformuliert.",
-          href: beispiele_prinzipien.path,
+          href: `${beispiele_prinzipien.path}/digitale-angebote-fuer-alle-nutzbar-gestalten`,
         },
         {
           plausibleEventName: "Link+Visualisierungen",

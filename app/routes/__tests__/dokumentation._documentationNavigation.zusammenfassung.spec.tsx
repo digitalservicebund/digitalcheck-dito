@@ -10,7 +10,6 @@ import {
 } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
 import type {
@@ -20,7 +19,7 @@ import type {
   Principle,
   V2,
 } from "~/routes/dokumentation/documentationDataSchema";
-import { RouteGroup } from "~/routes/dokumentation/DocumentationNavigationContext.tsx";
+import type { RouteGroup } from "~/routes/dokumentation/DocumentationNavigationContext.tsx";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import type { AbsatzWithParagraph } from "~/utils/strapiData.types";
 import { DocumentationSummary } from "../dokumentation._documentationNavigation.zusammenfassung";
@@ -66,11 +65,9 @@ function createDocumentationDataMock({
 describe("DocumentationSummary", () => {
   const renderWithRouter = () => {
     return render(
-      <MemoryRouter>
-        <DocumentationDataProvider>
-          <DocumentationSummary />
-        </DocumentationDataProvider>
-      </MemoryRouter>,
+      <DocumentationDataProvider>
+        <DocumentationSummary />
+      </DocumentationDataProvider>,
     );
   };
 

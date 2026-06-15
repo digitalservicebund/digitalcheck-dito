@@ -92,11 +92,11 @@ import PrincipleHighlightModifier from "./PrincipleHighlightModifier";
  ┌─────────────────────────────────────────────────────────────────┐
  │  1. User clicks highlighted link (PrincipleHighlight)           │
  │  2. setActiveHighlight() in PrincipleHighlightModifier          │
- │  3. Navigate to #explanationID (soft scroll)                    │
- │  4. PrincipleExplanation detects shouldHighlight = true         │
+ │  3. Hash set to #explanationID (soft scroll)                    │
+ │  4. Detecs highlighting via CSS target selector                 │
  │  5. Gets border and shows arrow back button                     │
  │  6. User clicks back button                                     │
- │  7. setActiveHighlight(null) + navigate to #activeHighlight     │
+ │  7. setActiveHighlight(null) + hash set to #activeHighlight     │
  │  8. Soft scroll back to original highlighted text               │
  └─────────────────────────────────────────────────────────────────┘
  */
