@@ -1,0 +1,1 @@
+import{V as e,W as t}from"./jsx-runtime-BDid30Hj.js";var n=t(e(),1);function r(){(0,n.useEffect)(()=>{document.body.dataset.hydrated=`true`},[])}export{r as t};

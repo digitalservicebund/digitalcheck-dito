@@ -1,0 +1,1 @@
+import{V as e,W as t,t as n,z as r}from"./jsx-runtime-BDid30Hj.js";var i=t(e(),1),a=n(),o=r(function(){return(0,i.useEffect)(()=>{throw Error(`test error`)}),(0,a.jsx)(`p`,{children:`Test error`})});export{o as default};

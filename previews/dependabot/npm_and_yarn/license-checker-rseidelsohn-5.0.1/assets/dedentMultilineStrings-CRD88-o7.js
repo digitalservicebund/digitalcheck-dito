@@ -1,0 +1,1 @@
+var e=(e,...t)=>{let n=e.reduce((e,n,r)=>e+n+(t[r]||``),``),r=(n.match(/^[ \t]*(?=\S)/gm)||[``]).map(e=>e.length),i=Math.min(...r),a=RegExp(`^ {${i}}`,`gm`);return n.replace(a,``).trim()};export{e as t};

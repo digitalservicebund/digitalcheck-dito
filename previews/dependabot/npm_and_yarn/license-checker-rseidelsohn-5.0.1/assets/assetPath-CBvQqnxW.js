@@ -1,0 +1,1 @@
+function e(e){return`/digitalcheck-dito/previews/dependabot/npm_and_yarn/license-checker-rseidelsohn-5.0.1/`.replace(/\/$/,``)+e}export{e as t};
