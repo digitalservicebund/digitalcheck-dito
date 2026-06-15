@@ -4,6 +4,7 @@ import {
   methoden_fuenfPrinzipien,
   methoden_visualisieren_flussdiagramm,
 } from "@/config/routes";
+import { withBase } from "@/utils/path";
 import {
   ArrowCircleRightOutlined,
   DateRangeOutlined,
@@ -16,7 +17,6 @@ import {
   SupportOutlined,
   VisibilityTwoTone,
 } from "@digitalservicebund/icons";
-import { assetPath } from "~/utils/assetPath";
 import type { ContentLink } from "~/utils/contentTypes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
@@ -65,7 +65,7 @@ export const methodsTasksProcesses = {
       {
         visual: {
           image: {
-            url: assetPath("/images/flussdiagramm.png"),
+            url: withBase("/images/flussdiagramm.png"),
             width: 200,
             size: "medium" as const,
             alternativeText:
@@ -87,7 +87,7 @@ export const methodsTasksProcesses = {
       {
         visual: {
           image: {
-            url: assetPath("/images/entscheidungsbaum.png"),
+            url: withBase("/images/entscheidungsbaum.png"),
             width: 200,
             size: "medium" as const,
             alternativeText:
@@ -107,7 +107,7 @@ export const methodsTasksProcesses = {
       {
         visual: {
           image: {
-            url: assetPath("/images/schaubild.png"),
+            url: withBase("/images/schaubild.png"),
             width: 200,
             size: "medium" as const,
             alternativeText:
@@ -220,7 +220,7 @@ export const methodsTasksProcesses = {
         },
       ] satisfies ContentLink[],
       image: {
-        url: assetPath("/images/beispielflussdiagram.png"),
+        url: withBase("/images/beispielflussdiagram.png"),
       },
     },
   },

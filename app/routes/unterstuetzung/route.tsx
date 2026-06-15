@@ -1,3 +1,4 @@
+import { withBase } from "@/utils/path";
 import { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";
@@ -8,7 +9,6 @@ import InfoBox from "~/components/InfoBox";
 import RichText from "~/components/RichText";
 import { SearchParamTabs } from "~/components/Tabs/Tabs";
 import { support } from "~/resources/content/unterstuetzung";
-import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 const {
@@ -226,7 +226,7 @@ export default function Index() {
               visual={{
                 type: "image",
                 image: {
-                  url: assetPath("/images/zfl-preview.png"),
+                  url: withBase("/images/zfl-preview.png"),
                   alternativeText:
                     "Screenshot der Website des Zentrum für Legistik",
                   size: "medium",

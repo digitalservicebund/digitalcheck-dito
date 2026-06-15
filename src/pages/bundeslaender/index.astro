@@ -8,7 +8,7 @@ import Hero from "~/components/Hero";
 import Image from "~/components/Image";
 import Timeline from "~/components/Timeline";
 import { contact } from "~/resources/content/shared/contact";
-import { assetPath } from "~/utils/assetPath";
+import { withBase } from "@/utils/path";
 
 export const frontmatter = {
   title: "Gemeinsamer Digitalcheck für Bund und Länder",
@@ -55,7 +55,7 @@ export const frontmatter = {
             class="bg-ds-blue-500 flex h-full w-[630px] flex-col justify-center align-middle lg:w-[50vw] [&>img]:object-contain lg:[&>img]:h-[550px]"
           >
             <Image
-              url={assetPath("/images/bundeslaender.png")}
+              url={withBase("/images/bundeslaender.png")}
               alternativeText="Eine stilisierte Karte von Deutschland mit den Grenzen der Bundesländer auf blauem Hintergrund."
             />
           </div>
@@ -96,7 +96,7 @@ export const frontmatter = {
           </li>
         </ul>
         <Image
-          url={assetPath("/images/example-laender-page.png")}
+          url={withBase("/images/example-laender-page.png")}
           alternativeText="Ein Laptop auf hellblauem Hintergrund zeigt den grafischen Entwurf einer Webseite der hessischen Landesregierung."
           className="h-340 w-630 pt-40"
         />
@@ -201,7 +201,7 @@ export const frontmatter = {
           <p>Ansprechpartnerin: Katharina Berndt</p>
         </div>
         <a
-          href={assetPath("/documents/BundeslaenderInfoPage.pdf")}
+          href={withBase("/documents/BundeslaenderInfoPage.pdf")}
           download
           class="inline-flex items-center gap-8"
         >

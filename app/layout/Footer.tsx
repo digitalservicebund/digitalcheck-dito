@@ -1,6 +1,6 @@
+import { withBase } from "@/utils/path";
 import Image from "~/components/Image";
 import { footer } from "~/resources/content/shared/footer";
-import { assetPath } from "~/utils/assetPath";
 import tailwindMerge from "~/utils/tailwindMerge";
 
 type LinkProps = {
@@ -98,13 +98,13 @@ export default function Footer() {
 
           <div className="space-y-16 sm:flex sm:flex-row sm:items-center sm:gap-48 sm:space-y-0">
             <Image
-              url={assetPath("/logo/bmds-logo.svg")}
+              url={withBase("/logo/bmds-logo.svg")}
               width={120}
               alternativeText="Logo des Bundesministerium für Digitales und Staatsmodernisierung"
               className="forced-colors:dark:hidden"
             />
             <Image
-              url={assetPath("/logo/bmds-logo-white.svg")}
+              url={withBase("/logo/bmds-logo-white.svg")}
               width={120}
               alternativeText="Logo des Bundesministerium für Digitales und Staatsmodernisierung"
               className="hidden forced-colors:dark:block"

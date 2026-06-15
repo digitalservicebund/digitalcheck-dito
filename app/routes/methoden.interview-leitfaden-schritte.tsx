@@ -1,3 +1,4 @@
+import { withBase } from "@/utils/path";
 import {
   DriveFileRenameOutline,
   FeedOutlined,
@@ -13,7 +14,6 @@ import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer";
-import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export default function InterviewMethods() {
@@ -108,7 +108,7 @@ export default function InterviewMethods() {
                         <ImageBox
                           image={{
                             className: "min-w-208",
-                            url: assetPath(
+                            url: withBase(
                               "/images/interview-leitfaden-vorlage.png",
                             ),
                             alternativeText:
@@ -127,7 +127,7 @@ export default function InterviewMethods() {
                     />
                     <DownloadLinkButton
                       look="link"
-                      href={assetPath(
+                      href={withBase(
                         "/documents/interview-leitfaden/Akteurlandschaft_Analyse.pptx",
                       )}
                     >
@@ -175,7 +175,7 @@ export default function InterviewMethods() {
                           <ImageBox
                             image={{
                               className: "min-w-208",
-                              url: assetPath(
+                              url: withBase(
                                 "/images/interview-leitfaden-vorlage-schritt-2.png",
                               ),
                               alternativeText:
@@ -192,7 +192,7 @@ export default function InterviewMethods() {
                       />
                       <DownloadLinkButton
                         look="link"
-                        href={assetPath(
+                        href={withBase(
                           "/documents/interview-leitfaden/Umsetzung_verstehen.docx",
                         )}
                       >
@@ -214,7 +214,7 @@ export default function InterviewMethods() {
                           <ImageBox
                             image={{
                               className: "min-w-208",
-                              url: assetPath(
+                              url: withBase(
                                 "/images/interview-leitfaden-vorlage-buergercheck.png",
                               ),
                               alternativeText:
@@ -231,7 +231,7 @@ export default function InterviewMethods() {
                       />
                       <DownloadLinkButton
                         look="link"
-                        href={assetPath(
+                        href={withBase(
                           "/documents/interview-leitfaden/Zielgruppenanaylse-Buergercheck.pptx",
                         )}
                       >
@@ -409,7 +409,7 @@ export default function InterviewMethods() {
                   <ImageBox
                     image={{
                       className: "min-w-208",
-                      url: assetPath(
+                      url: withBase(
                         "/images/interview-leitfaden-checkliste.png",
                       ),
                       alternativeText:
@@ -426,7 +426,7 @@ export default function InterviewMethods() {
               />
               <DownloadLinkButton
                 look="link"
-                href={assetPath(
+                href={withBase(
                   "/documents/interview-leitfaden/Ablaufplan_Interviewführung.docx",
                 )}
               >
@@ -458,7 +458,7 @@ export default function InterviewMethods() {
               <li>
                 <DownloadLinkButton
                   look="link"
-                  href={assetPath(
+                  href={withBase(
                     "/documents/interview-leitfaden/Buergercheck.pdf",
                   )}
                 >

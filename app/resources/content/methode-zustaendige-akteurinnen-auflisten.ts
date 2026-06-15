@@ -1,10 +1,10 @@
 import { zustaendigeAkteureXlsx } from "@/config/downloads";
+import { withBase } from "@/utils/path";
 import {
   DrawOutlined,
   LightbulbOutlined,
   StickyNote2Outlined,
 } from "@digitalservicebund/icons";
-import { assetPath } from "~/utils/assetPath";
 import type { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
@@ -35,7 +35,7 @@ export const methodsResponsibleActors = {
   boxes: [
     {
       image: {
-        src: assetPath(
+        src: withBase(
           "/images/ebenen-auswaehlen-und-ansprechpersonen-sammeln.png",
         ),
         alt: 'Eine Excel-Tabelle mit dem Titel "Beteiligte Ebenen auswählen und Ansprechpersonen sammeln für [ARBEITSTITEL]" enthält Spalten für Name, Zuständigkeit, Akteursgruppe, Kontaktdaten und Bemerkungen. Der erste Eintrag listet als Beispiel "Maria Muster" als Referentin für das Statistische Bundesamt, zugehörig zur Akteursgruppe "Bund" mit ihren Kontaktdaten.',

@@ -4,7 +4,7 @@ import {
   methoden_fuenfPrinzipien,
   unterstuetzung,
 } from "@/config/routes";
-import { assetPath } from "~/utils/assetPath";
+import { withBase } from "@/utils/path";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { getTabAnchorLink } from "~/utils/tabs";
 import { contact } from "./shared/contact";
@@ -31,7 +31,7 @@ export const spoc = {
       In Deutschland bettet sich diese Anforderung in die föderale Zusammenarbeit wie folgt ein:
     `,
     image: {
-      url: assetPath("/images/prozess-nationale-kontaktstelle.png"),
+      url: withBase("/images/prozess-nationale-kontaktstelle.png"),
       alternativeText:
         "Netzwerkdiagramm, das die Interaktionen verschiedener deutscher und EU-Behörden im Kontext der EU-Interoperabilitätsverordnung zeigt. Es verdeutlicht, wie Akteurinnen und Akteure wie der IT-Planungsrat, die Nationale Kontaktstelle, das BMDS und die EU-Kommission bei der Umsetzung, Koordination und dem Reporting zusammenarbeiten.",
     },
@@ -135,7 +135,7 @@ export const spoc = {
           Die inhaltlichen Schnittmengen zwischen dem Erarbeitungsprozess für digitaltaugliche Regelungen und dem Interoperabilitäts-Assessment sind identifiziert und analysiert. Der daraus entstandene Prozess wird in den Digitalcheck-Kontaktpunkten umgesetzt. Darauf aufbauend passen wir die Erarbeitungsmethoden an. Ziel ist es, den gesamten Entwicklungsprozess effizienter und zielgerichteter zu gestalten.
         `,
         image: {
-          url: assetPath(
+          url: withBase(
             "/images/synthese-prozess-digitalcheck-und-interoperabilitaet.png",
           ),
           alternativeText:
@@ -164,7 +164,7 @@ export const spoc = {
           Die Bedeutung des IEA für das föderale IT-Architekturboard sowie Unterstützungsmöglichkeiten durch die Nationale Kontaktstelle wurden vorgestellt. 
         `,
         image: {
-          url: assetPath("/images/interoperabilitaet-it-planungsrat.png"),
+          url: withBase("/images/interoperabilitaet-it-planungsrat.png"),
           alternativeText:
             "Die Abbildung zeigt ein strukturiertes Vorgehensmodell für die Interoperabilitätsbewertung. Alle Steckbriefe werden von der FITKO überprüft, die letztendliche Entscheidung trifft der IT-Planungsrat. Die Dokumentation bei Interoperabilitätsbezug muss bei der EU-Kommission eingereicht werden. Die Nationale Kontaktstelle steht während des gesamten Prozesses unterstützend zur Verfügung.",
         },

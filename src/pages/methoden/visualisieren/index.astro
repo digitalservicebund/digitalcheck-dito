@@ -10,7 +10,7 @@ import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "@/components/InfoBoxList.astro";
 import RichText from "~/components/RichText";
 import { methodsTasksProcesses } from "~/resources/content/methode-visualisieren.ts";
-import { assetPath } from "~/utils/assetPath";
+import { withBase } from "@/utils/path";
 
 export const frontmatter = {
   title: "Visualisieren",
@@ -47,7 +47,7 @@ export const frontmatter = {
         </Heading>
         <ImageBox
           image={{
-            url: assetPath("/images/von-schriftform-zur-visualisierung.png"),
+            url: withBase("/images/von-schriftform-zur-visualisierung.png"),
             caption: methodsTasksProcesses.usage.visualization.caption,
             alternativeText: methodsTasksProcesses.usage.visualization.altText,
           }}

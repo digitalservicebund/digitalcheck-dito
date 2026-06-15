@@ -13,7 +13,7 @@ import { useResize } from "~/hooks/deviceHook";
 import DropdownMenu from "~/layout/DropdownMenu.tsx";
 import { header } from "~/resources/content/shared/header.ts";
 
-import { assetPath } from "~/utils/assetPath";
+import { withBase } from "@/utils/path";
 import twMerge from "~/utils/tailwindMerge.ts";
 import { normalizePathname } from "~/utils/utilFunctions.ts";
 
@@ -191,13 +191,13 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
             className="link-unstyled flex items-center space-x-8"
           >
             <img
-              src={assetPath("/logo/bund-logo.png")}
+              src={withBase("/logo/bund-logo.png")}
               alt="Logo des Bundes"
               width={54}
               className="forced-colors:dark:hidden"
             />
             <img
-              src={assetPath("/logo/bund-logo-white.svg")}
+              src={withBase("/logo/bund-logo-white.svg")}
               alt="Logo des Bundes"
               width={54}
               className="hidden forced-colors:dark:block"

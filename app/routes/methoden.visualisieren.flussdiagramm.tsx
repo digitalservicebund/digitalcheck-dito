@@ -17,6 +17,7 @@ import RichText from "~/components/RichText.tsx";
 
 import { anleitungFlussdiagramm } from "@/config/downloads";
 import { methoden_fuenfPrinzipien } from "@/config/routes";
+import { withBase } from "@/utils/path";
 import { twJoin } from "tailwind-merge";
 import BackToTopButton from "~/components/BackToTopButton.tsx";
 import Container from "~/components/Container.tsx";
@@ -24,13 +25,12 @@ import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer.tsx";
 import { STRAPI_MEDIA_URL } from "~/resources/constants.ts";
 import { contact } from "~/resources/content/shared/contact";
-import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import { getPlausibleEventClassName } from "~/utils/plausibleUtils.ts";
 
 const diagramElements = [
   {
-    iconUrl: assetPath("/icons/DiagramStartNode.svg"),
+    iconUrl: withBase("/icons/DiagramStartNode.svg"),
     title: "Start-/Endsymbol",
     description: dedent`
         **Start-/Endsymbol**
@@ -38,7 +38,7 @@ const diagramElements = [
         Der Kreis stellt den Beginn oder das Ende eines Prozesses dar (z.B. Antrag wird gestellt).`,
   },
   {
-    iconUrl: assetPath("/icons/DiagramDecision.svg"),
+    iconUrl: withBase("/icons/DiagramDecision.svg"),
     title: "Entscheidungssymbol",
     description: dedent`
         **Entscheidungssymbol**
@@ -46,7 +46,7 @@ const diagramElements = [
         Eine Raute steht für eine Abfrage mit mindestens zwei möglichen Ausgängen (z.B. Antrag vollständig? – ja/nein).`,
   },
   {
-    iconUrl: assetPath("/icons/DiagramActor.svg"),
+    iconUrl: withBase("/icons/DiagramActor.svg"),
     title: "Akteurin/Akteur",
     description: dedent`
       **Akteurin/Akteur**
@@ -54,7 +54,7 @@ const diagramElements = [
       Ein Rechteck mit Symbol steht für eine beteiligte Person oder Institution im Prozess (z.B. Meldebehörde oder Fahrschülerin).`,
   },
   {
-    iconUrl: assetPath("/icons/DiagramData.svg"),
+    iconUrl: withBase("/icons/DiagramData.svg"),
     title: "Datensymbol (Eingabe/Ausgabe)",
     description: dedent`
     **Datensymbol (Eingabe/Ausgabe)**
@@ -62,7 +62,7 @@ const diagramElements = [
     Dieses Symbol zeigt genutzte oder erzeugte Daten oder Ressourcen (z.B. Melderegister).`,
   },
   {
-    iconUrl: assetPath("/icons/DiagramActivity.svg"),
+    iconUrl: withBase("/icons/DiagramActivity.svg"),
     title: "Prozess-/Aktivitätssymbol",
     description: dedent`
     **Prozess-/Aktivitätssymbol**
@@ -70,7 +70,7 @@ const diagramElements = [
     Das Rechteck stellt eine Aktivität oder einen Arbeitsschritt dar (z.B. Antrag prüfen).`,
   },
   {
-    iconUrl: assetPath("/icons/DiagramConnector.svg"),
+    iconUrl: withBase("/icons/DiagramConnector.svg"),
     title: "Verbindungspfeil",
     description: dedent`
     **Verbindungspfeil**
@@ -224,7 +224,7 @@ export default function Visualization() {
               <ImageBox
                 title="Beispiel eines Flussdiagramms"
                 image={{
-                  url: assetPath(
+                  url: withBase(
                     "/images/methoden/flussdiagramme/flussdiagramm-beispiel.png",
                   ),
                   caption:
@@ -322,7 +322,7 @@ export default function Visualization() {
                         Component: (
                           <ImageBox
                             image={{
-                              url: assetPath(
+                              url: withBase(
                                 "/images/methoden/flussdiagramme/2/relevante-akteure.png",
                               ),
                               alternativeText:
@@ -376,7 +376,7 @@ export default function Visualization() {
                         Component: (
                           <ImageBox
                             image={{
-                              url: assetPath(
+                              url: withBase(
                                 "/images/methoden/flussdiagramme/3/ziel-perspektive-visualisierung.png",
                               ),
                               alternativeText:
@@ -420,7 +420,7 @@ export default function Visualization() {
 
                       <ImageBox
                         image={{
-                          url: assetPath(
+                          url: withBase(
                             "/images/methoden/flussdiagramme/4/start-ende.png",
                           ),
                           caption:
@@ -443,7 +443,7 @@ export default function Visualization() {
                         Component: (
                           <ImageBox
                             image={{
-                              url: assetPath(
+                              url: withBase(
                                 "/images/methoden/flussdiagramme/4/beispiel-fahrschule-start-ende.png",
                               ),
                               alternativeText:
@@ -480,7 +480,7 @@ export default function Visualization() {
 
                       <ImageBox
                         image={{
-                          url: assetPath(
+                          url: withBase(
                             "/images/methoden/flussdiagramme/5/schwimmbahnen.png",
                           ),
                           alternativeText:
@@ -506,7 +506,7 @@ export default function Visualization() {
                       </p>
                       <ImageBox
                         image={{
-                          url: assetPath(
+                          url: withBase(
                             "/images/methoden/flussdiagramme/5/aktivitäten-mit-pfeilen.png",
                           ),
                           alternativeText:
@@ -549,7 +549,7 @@ export default function Visualization() {
                         Component: (
                           <ImageBox
                             image={{
-                              url: assetPath(
+                              url: withBase(
                                 "/images/methoden/flussdiagramme/5/beispiel-fahrschule-kombiniert.png",
                               ),
                               alternativeText:
@@ -587,7 +587,7 @@ export default function Visualization() {
 
                       <ImageBox
                         image={{
-                          url: assetPath(
+                          url: withBase(
                             "/images/methoden/flussdiagramme/6/legende.png",
                           ),
                           alternativeText:
@@ -629,7 +629,7 @@ export default function Visualization() {
                         Component: (
                           <ImageBox
                             image={{
-                              url: assetPath(
+                              url: withBase(
                                 "/images/methoden/flussdiagramme/6/vollständiges-beispiel.jpg",
                               ),
                               alternativeText:

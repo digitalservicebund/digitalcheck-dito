@@ -25,7 +25,7 @@ import { BreakoutHero } from "~/components/Hero";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxSideBySide from "~/components/InfoBoxSideBySide";
 import RichText from "~/components/RichText";
-import { assetPath } from "~/utils/assetPath";
+import { withBase } from "@/utils/path";
 import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const frontmatter = {
@@ -215,7 +215,7 @@ const steps = [
     <div
       class="breakout bg-cover bg-center"
       style={{
-        backgroundImage: `url(${assetPath("/images/trainings.jpg")})`,
+        backgroundImage: `url(${withBase("/images/trainings.jpg")})`,
       }}
     >
       <div class="py-40 lg:py-80">

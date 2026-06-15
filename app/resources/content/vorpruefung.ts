@@ -4,8 +4,8 @@ import {
   vorpruefung_ergebnis,
   vorpruefung_hinweise,
 } from "@/config/routes";
+import { withBase } from "@/utils/path";
 import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
-import { assetPath } from "~/utils/assetPath";
 import type { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
@@ -52,7 +52,7 @@ export const preCheck = {
       process: {
         heading: "So gehen Sie vor:",
         image: {
-          url: assetPath(
+          url: withBase(
             "/images/prozess-vorpruefung-mit-interoperabilitaet.jpg",
           ),
           caption:
@@ -96,7 +96,7 @@ export const preCheck = {
         <p class="mt-24">Wenn ein Vorhaben die EU-Anforderungen für Interoperabilität erfüllen muss, hat es automatisch auch einen Digitalbezug.</p>
       `,
       image: {
-        src: assetPath("/images/digital-readiness-meets-interop.svg"),
+        src: withBase("/images/digital-readiness-meets-interop.svg"),
         alt: "Illustration von Datenaustausch zwischen zwei Computer-Systemen mit EU-Flagge, symbolisiert europäische digitale Zusammenarbeit.",
       },
       action: {
