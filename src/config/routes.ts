@@ -157,7 +157,7 @@ export const dokumentation_zusammenfassung = {
 export const dokumentation_euInteroperabilitaetsbezug = {
   key: "dokumentation_euInteroperabilitaetsbezug",
   path: "/dokumentation/eu-interoperabilitaetsbezug",
-  title: "Interoperabilität",
+  title: "Interoperabilitäts-Bezug",
   parent: dokumentation,
   sitemap: true,
   isStagingOnly: false,
