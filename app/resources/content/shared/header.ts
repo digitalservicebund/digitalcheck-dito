@@ -71,7 +71,7 @@ export const header = {
           title: "Digitaltauglichkeit im Regelungstext",
           content:
             "So wurden die 5 Prinzipien von Ihren Kolleginnen und Kollegen in Regelungen ausformuliert.",
-          href: beispiele_prinzipien.path,
+          href: `${beispiele_prinzipien.path}/digitale-angebote-fuer-alle-nutzbar-gestalten`,
         },
         {
           plausibleEventName: "Link+Visualisierungen",
