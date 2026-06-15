@@ -18,7 +18,7 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable pnpm
 
 WORKDIR /src
-COPY ./package.json pnpm-lock.yaml /src/
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml /src/
 RUN pnpm install --frozen-lockfile --ignore-scripts --prod
 
 # Build the app
