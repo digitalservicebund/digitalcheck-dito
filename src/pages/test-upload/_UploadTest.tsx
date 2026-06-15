@@ -1,16 +1,11 @@
-import fs from "node:fs";
-import path from "node:path";
 import { usePostHog } from "posthog-js/react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { ActionFunctionArgs } from "react-router";
-import { useFetcher } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Alert from "~/components/Alert.tsx";
 import Button from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container.tsx";
 import Hero from "~/components/Hero.tsx";
-import MetaTitle from "~/components/Meta.tsx";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 
 const testFiles = [
@@ -74,47 +69,30 @@ function loadFromStorage(): SavedUploadTestState {
   }
 }
 
-export async function action({ request }: ActionFunctionArgs) {
-  const formData = await request.formData();
-  const results: Record<string, UploadResult> = {};
+async function compareWithReference(
+  uploadedFile: File,
+  referencePath: string,
+): Promise<UploadResult> {
+  try {
+    const response = await fetch(referencePath);
+    if (!response.ok) {
+      return { contentMatch: false, error: "Referenzdatei nicht gefunden" };
+    }
+    const referenceBuffer = await response.arrayBuffer();
+    const uploadedBuffer = await uploadedFile.arrayBuffer();
 
-  for (const fileInfo of testFiles) {
-    const uploadedFile = formData.get(fileInfo.path) as File | null;
-    if (!uploadedFile || uploadedFile.size === 0) {
-      continue;
+    if (referenceBuffer.byteLength !== uploadedBuffer.byteLength) {
+      return { contentMatch: false };
     }
 
-    try {
-      const diskPath = path.join(
-        process.cwd(),
-        "public",
-        fileInfo.path.replace(/^\/public/, ""),
-      );
+    const ref = new Uint8Array(referenceBuffer);
+    const uploaded = new Uint8Array(uploadedBuffer);
+    const contentMatch = ref.every((byte, i) => byte === uploaded[i]);
 
-      if (!fs.existsSync(diskPath)) {
-        results[fileInfo.path] = {
-          contentMatch: false,
-          error: "Referenzdatei nicht gefunden",
-        };
-        continue;
-      }
-
-      const referenceFileContent = fs.readFileSync(diskPath);
-      const uploadedFileContent = Buffer.from(await uploadedFile.arrayBuffer());
-
-      const contentMatch = uploadedFileContent.equals(referenceFileContent);
-
-      results[fileInfo.path] = { contentMatch };
-    } catch (error) {
-      console.error(error);
-      results[fileInfo.path] = {
-        contentMatch: false,
-        error: "Fehler beim Vergleich",
-      };
-    }
+    return { contentMatch };
+  } catch {
+    return { contentMatch: false, error: "Fehler beim Vergleich" };
   }
-
-  return results;
 }
 
 function UploadDropzoneCard({
@@ -126,31 +104,25 @@ function UploadDropzoneCard({
   status: UploadResult;
   onComplete: (result: UploadResult | undefined) => void;
 }>) {
-  const fetcher = useFetcher<typeof action>();
-  const fetchResult = fetcher.data?.[file.path];
   const [isDragOver, setIsDragOver] = useState(false);
   const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
-
+  const [isUploading, setIsUploading] = useState(false);
   const notifiedRef = useRef<UploadResult | undefined>(undefined);
-  const submitFile = (uploadedFile: File | null) => {
-    if (!uploadedFile) {
-      return;
-    }
-    const formData = new FormData();
-    formData.set(file.path, uploadedFile);
-    setSelectedFileName(uploadedFile.name);
-    void fetcher.submit(formData, {
-      method: "post",
-      encType: "multipart/form-data",
-    });
-  };
 
-  useEffect(() => {
-    if (fetchResult && notifiedRef.current !== fetchResult) {
-      notifiedRef.current = fetchResult;
-      onComplete({ ...fetchResult, didUpload: true });
-    }
-  }, [fetchResult, onComplete]);
+  const submitFile = useCallback(
+    async (uploadedFile: File | null) => {
+      if (!uploadedFile) return;
+      setSelectedFileName(uploadedFile.name);
+      setIsUploading(true);
+      const result = await compareWithReference(uploadedFile, file.path);
+      setIsUploading(false);
+      if (notifiedRef.current !== result) {
+        notifiedRef.current = result;
+        onComplete({ ...result, didUpload: true });
+      }
+    },
+    [file.path, onComplete],
+  );
 
   return (
     <div className="rounded-8 max-w-a11y space-y-16 border border-gray-400 p-24">
@@ -172,7 +144,7 @@ function UploadDropzoneCard({
         onDrop={(event) => {
           event.preventDefault();
           setIsDragOver(false);
-          submitFile(event.dataTransfer.files[0] ?? null);
+          void submitFile(event.dataTransfer.files[0] ?? null);
         }}
       >
         <input
@@ -181,7 +153,7 @@ function UploadDropzoneCard({
           name={file.path}
           className="sr-only"
           onChange={(event) =>
-            submitFile(event.currentTarget.files?.[0] ?? null)
+            void submitFile(event.currentTarget.files?.[0] ?? null)
           }
         />
         <p className="ds-body-01-reg">
@@ -192,7 +164,7 @@ function UploadDropzoneCard({
             Ausgewählt: {selectedFileName}
           </p>
         )}
-        {fetcher.state !== "idle" && (
+        {isUploading && (
           <p className="ds-body-02-reg mt-8 text-gray-700">Upload läuft...</p>
         )}
       </label>
@@ -293,7 +265,6 @@ export default function UploadTest() {
 
   return (
     <>
-      <MetaTitle prefix="Upload-Test" />
       <main>
         <Hero
           title={"Upload-Test"}
@@ -304,7 +275,7 @@ export default function UploadTest() {
           1. Laden Sie die Datei herunter.
           2. Laden Sie dieselbe Datei direkt wieder hoch.
           3. Wiederholen Sie dies für jeden Dateityp.
-          
+
           Vielen Dank für Ihre Unterstützung!`}
         />
         <Container className="mb-80 space-y-40">
