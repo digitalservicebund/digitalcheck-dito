@@ -31,9 +31,14 @@ import type {
   V2,
 } from "~/routes/dokumentation/documentationDataSchema";
 import {
-  getDocumentationSchemaFormUrl as _getDocumentationSchemaFormUrl,
+  bindingRequirementsNavigationSchema,
   DATA_SCHEMA_VERSION_V1,
   DATA_SCHEMA_VERSION_V2,
+  euInteroperabilityOutcomeNavigationSchema,
+  interoperabilityAssessmentLevelNavigationSchema,
+  participationSchema,
+  policyHeaderSchema,
+  principleSchemaV2,
 } from "~/routes/dokumentation/documentationDataSchema";
 
 import {
@@ -48,9 +53,6 @@ export const STORAGE_KEY = "documentationData";
 type DocumentationDataContextType = {
   documentationData: DocumentationData;
   hasSavedDocumentation: boolean;
-  getDocumentationSchemaFormUrl: (
-    url: string,
-  ) => ReturnType<typeof _getDocumentationSchemaFormUrl>;
   createOrUpdateDocumentationData: (data: DocumentationData) => void;
   deleteDocumentationData: () => void;
   setPolicyTitle: (policyTitle?: PolicyTitle) => void;
@@ -88,16 +90,8 @@ type DocumentationDataContextType = {
     routePath: string,
     dataIdentifier?: string,
   ) => {
-    formData:
-      | PolicyTitle
-      | Participation
-      | EuInteroperabilityOutcome
-      | BindingRequirementsData
-      | InteroperabilityAssessmentLevel
-      | Principle
-      | undefined;
-    isValid: boolean;
-    hasData: boolean;
+    formData: DocumentationDataType | undefined;
+    validationResult: ValidationResult;
   };
 };
 
@@ -123,7 +117,7 @@ function writeToStorage(data: DocumentationData): void {
   writeVersionedDataToLocalStorage(data, STORAGE_KEY);
 }
 
-type RouteFormData =
+type DocumentationDataType =
   | PolicyTitle
   | Participation
   | EuInteroperabilityOutcome
@@ -132,46 +126,91 @@ type RouteFormData =
   | Principle
   | undefined;
 
+export enum ValidationResult {
+  missingData,
+  completed,
+  neutral,
+}
 type RouteDefinition = {
-  getData: (data: DocumentationData) => RouteFormData;
+  getData: (data: DocumentationData) => DocumentationDataType;
+  schema: RouteSchema;
+  /**
+   * Custom validation. Return `null` to use default validation.
+   */
+  validate?: (data: DocumentationData) => ValidationResult | null;
 };
 
+type RouteSchema =
+  | typeof policyHeaderSchema
+  | typeof participationSchema
+  | typeof euInteroperabilityOutcomeNavigationSchema
+  | typeof bindingRequirementsNavigationSchema
+  | typeof interoperabilityAssessmentLevelNavigationSchema
+  | typeof principleSchemaV2;
+
+const skipIfNoInteroperabilityRequired = (data: DocumentationData) => {
+  if (data.euInteroperabilityOutcome?.outcomeId !== "REQUIRED")
+    return ValidationResult.neutral;
+  return null; // keep default behavior
+};
 const routeDefinitions: Record<string, RouteDefinition> = {
   [dokumentation_regelungsvorhabenTitel.path]: {
     getData: (data) => data.policyTitle,
+    schema: policyHeaderSchema,
   },
   [dokumentation_beteiligungsformate.path]: {
     getData: (data) => data.participation,
+    schema: participationSchema,
   },
   [dokumentation_euInteroperabilitaetsbezug.path]: {
     getData: (data) => data.euInteroperabilityOutcome,
+    schema: euInteroperabilityOutcomeNavigationSchema,
   },
   [dokumentation_verbindlicheAnforderungen.path]: {
     getData: (data) => data.bindingRequirements,
+    schema: bindingRequirementsNavigationSchema,
+    validate: skipIfNoInteroperabilityRequired,
   },
   [dokumentation_bewertungRechtlich.path]: {
     getData: (data) => data.interoperabilityAssessment?.legal,
+    schema: interoperabilityAssessmentLevelNavigationSchema,
+    validate: skipIfNoInteroperabilityRequired,
   },
   [dokumentation_bewertungOrganisatorisch.path]: {
     getData: (data) => data.interoperabilityAssessment?.organizational,
+    schema: interoperabilityAssessmentLevelNavigationSchema,
+    validate: skipIfNoInteroperabilityRequired,
   },
   [dokumentation_bewertungSemantisch.path]: {
     getData: (data) => data.interoperabilityAssessment?.semantic,
+    schema: interoperabilityAssessmentLevelNavigationSchema,
+    validate: skipIfNoInteroperabilityRequired,
   },
   [dokumentation_bewertungTechnisch.path]: {
     getData: (data) => data.interoperabilityAssessment?.technical,
+    schema: interoperabilityAssessmentLevelNavigationSchema,
+    validate: skipIfNoInteroperabilityRequired,
   },
 };
 
 function getRouteData(
   routeOrDataIdentifier: string,
   documentationData: DocumentationData,
-): RouteFormData {
+): {
+  formData: DocumentationDataType;
+  schema: RouteSchema;
+  validate: RouteDefinition["validate"];
+} {
   const routeDefinition = routeDefinitions[routeOrDataIdentifier];
-  if (routeDefinition) return routeDefinition.getData(documentationData);
-  return documentationData.principles?.find(
-    ({ id }) => id === routeOrDataIdentifier,
-  );
+  const formData = routeDefinition
+    ? routeDefinition.getData(documentationData)
+    : documentationData.principles?.find(
+        ({ id }) => id === routeOrDataIdentifier,
+      );
+  const schema =
+    routeDefinitions[routeOrDataIdentifier]?.schema ?? principleSchemaV2;
+
+  return { formData, schema, validate: routeDefinition?.validate };
 }
 
 const { radioOptions } = digitalDocumentation.principlePages;
@@ -239,27 +278,41 @@ export function DocumentationDataProvider({
     setDocumentationData(getInitialState());
   }, []);
 
-  const getDocumentationSchemaFormUrl = useCallback((url: string) => {
-    return _getDocumentationSchemaFormUrl(url);
-  }, []);
+  const validateDocumentationDataForRoute: DocumentationDataContextType["validateDocumentationDataForRoute"] =
+    useCallback(
+      (routePath: string, dataIdentifier?: string) => {
+        const { formData, schema, validate } = getRouteData(
+          dataIdentifier ?? routePath,
+          documentationData,
+        );
 
-  const validateDocumentationDataForRoute = useCallback(
-    (routePath: string, dataIdentifier?: string) => {
-      const formData = getRouteData(
-        dataIdentifier ?? routePath,
-        documentationData,
-      );
-      const schema = getDocumentationSchemaFormUrl(routePath);
-      const validationResult = schema.safeParse(formData);
+        if (validate) {
+          const result = validate(documentationData);
+          if (result !== null) {
+            return {
+              formData,
+              validationResult: result,
+            };
+          }
+        }
 
-      return {
-        formData,
-        isValid: validationResult.success,
-        hasData: formData !== undefined,
-      };
-    },
-    [documentationData, getDocumentationSchemaFormUrl],
-  );
+        if (formData === undefined) {
+          return { formData, validationResult: ValidationResult.neutral };
+        }
+
+        const parseResult = schema.safeParse(formData);
+
+        const validationResult = parseResult.success
+          ? ValidationResult.completed
+          : ValidationResult.missingData;
+
+        return {
+          formData,
+          validationResult,
+        };
+      },
+      [documentationData],
+    );
 
   const createOrUpdateDocumentationData = useCallback(
     (data: DocumentationData): void => {
@@ -453,7 +506,8 @@ export function DocumentationDataProvider({
   );
 
   const findDocumentationDataForUrl = useCallback(
-    (url: string): RouteFormData => getRouteData(url, documentationData),
+    (url: string): DocumentationDataType =>
+      getRouteData(url, documentationData).formData,
     [documentationData],
   );
 
@@ -468,7 +522,6 @@ export function DocumentationDataProvider({
     () => ({
       documentationData,
       hasSavedDocumentation,
-      getDocumentationSchemaFormUrl,
       createOrUpdateDocumentationData,
       deleteDocumentationData,
       setPolicyTitle,
@@ -485,7 +538,6 @@ export function DocumentationDataProvider({
     [
       documentationData,
       hasSavedDocumentation,
-      getDocumentationSchemaFormUrl,
       createOrUpdateDocumentationData,
       deleteDocumentationData,
       setPolicyTitle,

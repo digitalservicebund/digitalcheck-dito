@@ -21,7 +21,10 @@ import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { loader } from "~/routes/dokumentation/route.tsx";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
-import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
+import {
+  useDocumentationDataService,
+  ValidationResult,
+} from "./dokumentation/DocumentationDataProvider";
 import type {
   Route,
   RouteGroup,
@@ -114,21 +117,21 @@ export function LayoutWithDocumentationNavigation({
   children?: ReactNode;
   currentUrl: string;
 }>) {
+  const { findDocumentationDataForUrl, validateDocumentationDataForRoute } =
+    useDocumentationDataService();
+
   // exclude documentation notes
   const displayedRoutes = routes.filter((route) => {
     if ("routes" in route) return true; // RouteGroup
     return route.path !== dokumentation_hinweise.path;
   });
-
   // Detect erlaeuterung sub-page
   const isErlaeuterungPage = currentUrl.endsWith("/erlaeuterung");
   // For nav/stepper index lookups, use principle URL when on erlaeuterung page
+
   const navigationBaseUrl = isErlaeuterungPage
     ? currentUrl.replace("/erlaeuterung", "")
     : currentUrl;
-
-  const { findDocumentationDataForUrl, validateDocumentationDataForRoute } =
-    useDocumentationDataService();
 
   const flatRoutes = routes.flatMap((route) =>
     "routes" in route ? route.routes : route,
@@ -174,11 +177,10 @@ export function LayoutWithDocumentationNavigation({
   );
 
   const getNavItem = (route: Route) => {
-    const { formData, isValid, hasData } = validateDocumentationDataForRoute(
+    const { formData, validationResult } = validateDocumentationDataForRoute(
       route.path,
       route.principleId,
     );
-
     const navUrl =
       route.principleId && (formData as { answer?: string } | undefined)?.answer
         ? `${route.path}/erlaeuterung`
@@ -193,8 +195,8 @@ export function LayoutWithDocumentationNavigation({
             ? [route.path, `${route.path}/erlaeuterung`]
             : undefined
         }
-        error={hasData && !isValid}
-        completed={hasData && isValid}
+        error={validationResult === ValidationResult.missingData}
+        completed={validationResult === ValidationResult.completed}
         disabled={isNavigationDisabled}
       >
         {route.title}
@@ -280,8 +282,12 @@ export function LayoutWithDocumentationNavigation({
 export default function Route() {
   const data = useRouteLoaderData<typeof loader>("routes/dokumentation");
   const location = useLocation();
+  const { documentationData } = useDocumentationDataService();
   const currentUrl = location.pathname;
   if (!data) return null;
+
+  const hasInteroperabilityRequirement =
+    documentationData.euInteroperabilityOutcome?.outcomeId === "REQUIRED";
 
   const routes: (Route | RouteGroup)[] = [
     ...ROUTES_DOCUMENTATION_INTRO,
@@ -297,14 +303,16 @@ export default function Route() {
     },
     {
       title: "EU-Interoperabilität",
-      routes: [
-        dokumentation_euInteroperabilitaetsbezug,
-        dokumentation_verbindlicheAnforderungen,
-        dokumentation_bewertungRechtlich,
-        dokumentation_bewertungOrganisatorisch,
-        dokumentation_bewertungSemantisch,
-        dokumentation_bewertungTechnisch,
-      ],
+      routes: hasInteroperabilityRequirement
+        ? [
+            dokumentation_euInteroperabilitaetsbezug,
+            dokumentation_verbindlicheAnforderungen,
+            dokumentation_bewertungRechtlich,
+            dokumentation_bewertungOrganisatorisch,
+            dokumentation_bewertungSemantisch,
+            dokumentation_bewertungTechnisch,
+          ]
+        : [dokumentation_euInteroperabilitaetsbezug],
     },
     ...ROUTES_DOCUMENTATION_FINALIZE,
   ];

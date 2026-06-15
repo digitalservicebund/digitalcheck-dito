@@ -1,13 +1,3 @@
-import {
-  dokumentation_beteiligungsformate,
-  dokumentation_bewertungOrganisatorisch,
-  dokumentation_bewertungRechtlich,
-  dokumentation_bewertungSemantisch,
-  dokumentation_bewertungTechnisch,
-  dokumentation_euInteroperabilitaetsbezug,
-  dokumentation_regelungsvorhabenTitel,
-  dokumentation_verbindlicheAnforderungen,
-} from "@/config/routes";
 import { z } from "zod";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import type { VersionedData } from "~/utils/localStorageVersioned";
@@ -143,16 +133,12 @@ export const documentationSchemaV2 = z.object({
   principles: z.array(principleSchemaV2).optional(),
 });
 
-const euInteroperabilityOutcomeNavigationSchema =
+export const euInteroperabilityOutcomeNavigationSchema =
   euInteroperabilityOutcomeSchema
     .extend({
       outcomeId: z.enum(EU_INTEROPERABILITY_OUTCOME_IDS),
     })
     .strict();
-
-export const getDocumentationSchemaFormUrl = (url: string) => {
-  return navigationSchemaByRoute[url] ?? principleSchemaV2;
-};
 
 // V1 types are kept solely so migrateV1ToV2 (in DocumentationDataProvider) can
 // type its input. V1 data may still exist in users' localStorage from before
@@ -245,23 +231,6 @@ export const interoperabilityAssessmentLevelNavigationSchema =
         });
       }
     });
-
-const navigationSchemaByRoute: Record<string, z.ZodTypeAny> = {
-  [dokumentation_regelungsvorhabenTitel.path]: policyHeaderSchema,
-  [dokumentation_beteiligungsformate.path]: participationSchema,
-  [dokumentation_euInteroperabilitaetsbezug.path]:
-    euInteroperabilityOutcomeNavigationSchema,
-  [dokumentation_verbindlicheAnforderungen.path]:
-    bindingRequirementsNavigationSchema,
-  [dokumentation_bewertungRechtlich.path]:
-    interoperabilityAssessmentLevelNavigationSchema,
-  [dokumentation_bewertungOrganisatorisch.path]:
-    interoperabilityAssessmentLevelNavigationSchema,
-  [dokumentation_bewertungSemantisch.path]:
-    interoperabilityAssessmentLevelNavigationSchema,
-  [dokumentation_bewertungTechnisch.path]:
-    interoperabilityAssessmentLevelNavigationSchema,
-};
 
 export type InteroperabilityAssessmentLevel = z.infer<
   typeof interoperabilityAssessmentLevelSchema
