@@ -46,13 +46,6 @@ export const gesetzStatusMap = {
   Text_im_Parlament: "Text im Parlament",
 };
 
-const removeTrailingSlash = (url: string) => url.replace(/\/$/, "");
-
-// Ignore / and # for path comparison
-export const normalizePathname = (path: string) => {
-  return removeTrailingSlash(path).split("#")[0];
-};
-
 export const isExternalUrl = (url: string) => url.startsWith("http");
 
 export const idFromText = (text: string, preText?: string) =>

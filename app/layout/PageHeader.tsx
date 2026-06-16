@@ -13,9 +13,8 @@ import { useResize } from "~/hooks/deviceHook";
 import DropdownMenu from "~/layout/DropdownMenu.tsx";
 import { header } from "~/resources/content/shared/header.ts";
 
-import { withBase } from "@/utils/path";
+import { normalizePathname, withBase } from "@/utils/path";
 import twMerge from "~/utils/tailwindMerge.ts";
-import { normalizePathname } from "~/utils/utilFunctions.ts";
 
 interface SubItem {
   title: string;

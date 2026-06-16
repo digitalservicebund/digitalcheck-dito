@@ -1,5 +1,5 @@
+import { normalizePathname } from "@/utils/path";
 import twMerge from "~/utils/tailwindMerge";
-import { normalizePathname } from "~/utils/utilFunctions";
 import Badge from "./Badge";
 
 export type ActiveBehavior = "noHighlight" | "exactMatch";
