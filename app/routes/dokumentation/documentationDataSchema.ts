@@ -4,6 +4,7 @@ import {
 } from "@/config/routes";
 import { z } from "zod";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
+import { bundeslandSchema } from "~/resources/content/shared/bundeslaender";
 import type { VersionedData } from "~/utils/localStorageVersioned";
 
 export const DATA_SCHEMA_VERSION_V1 = "1";
@@ -20,9 +21,7 @@ const { principlePages, participation, info } = digitalDocumentation;
 
 export const policyTitleSchema = z.object({
   title: z.string().min(1, { message: info.inputTitle.error }),
-  bundesland: z.enum(info.inputBundesland.options, {
-    message: info.inputBundesland.error,
-  }),
+  bundesland: bundeslandSchema,
 });
 
 export const participationSchema = z.object({
@@ -92,7 +91,7 @@ export const principleSchemaV2 = principleAnswerSchemaV2.and(
 
 export const defaultTitleValues: PolicyTitle = {
   title: "",
-  bundesland: "",
+  bundesland: "Bund",
 };
 
 export const defaultParticipationValues: Participation = {

@@ -1,6 +1,5 @@
 import { TipsAndUpdatesOutlined } from "@digitalservicebund/icons";
 import { dedent } from "~/utils/dedentMultilineStrings";
-import { bundeslaender } from "./shared/bundeslaender";
 import { contact } from "./shared/contact";
 
 export const digitalDocumentation = {
@@ -138,12 +137,6 @@ export const digitalDocumentation = {
     inputTitle: {
       label: "Titel des Regelungsvorhabens",
       error: "Bitte geben Sie einen Titel ein.",
-    },
-    inputBundesland: {
-      label: "Wählen Sie Ihr Bundesland oder den Bund aus",
-      error: "Bitte wählen Sie Ihr Bundesland oder den Bund aus.",
-      // widen to string so the empty form default "" stays assignable
-      options: bundeslaender.map((b): string => b.name),
     },
   },
   navigation: {

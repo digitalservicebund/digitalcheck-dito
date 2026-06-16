@@ -55,7 +55,6 @@ function Select({
           ...rest,
         })}
       >
-        <option value="" />
         {options.map((option) => (
           <option key={option} value={option}>
             {option}

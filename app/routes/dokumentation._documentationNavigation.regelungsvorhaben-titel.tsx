@@ -51,10 +51,10 @@ export function DocumentationTitle() {
 
           <Select
             scope={form.scope("bundesland")}
-            options={info.inputBundesland.options}
+            options={bundeslaender.map((b) => b.name)}
             warningInsteadOfError
           >
-            {info.inputBundesland.label}
+            Wählen Sie Ihr Bundesland oder den Bund aus
           </Select>
 
           <DocumentationActions
@@ -76,6 +76,7 @@ export default function Route() {
 
 // Astro page export
 import { DocumentationPageShell } from "@/components/DocumentationPageShell";
+import { bundeslaender } from "~/resources/content/shared/bundeslaender";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
 export function TitelPage({
