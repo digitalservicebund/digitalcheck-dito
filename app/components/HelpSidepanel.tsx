@@ -62,8 +62,7 @@ export default function HelpSidepanel() {
     const el = scrollableRef.current;
     if (!el) return;
 
-    if (!window.matchMedia(`(min-width: ${BREAKPOINT})`).matches) {
-      el.style.maxHeight = "100vh";
+    if (!globalThis.matchMedia(`(min-width: ${BREAKPOINT})`).matches) {
       return;
     }
 
@@ -80,7 +79,10 @@ export default function HelpSidepanel() {
   useElResize("main", adjustSize, true);
 
   useEffect(() => {
-    if (isOpen && !window.matchMedia(`(min-width: ${BREAKPOINT})`).matches) {
+    if (
+      isOpen &&
+      !globalThis.matchMedia(`(min-width: ${BREAKPOINT})`).matches
+    ) {
       document.body.style.overflow = "hidden";
     }
     return () => {
@@ -133,7 +135,7 @@ export default function HelpSidepanel() {
           >
             <div
               ref={scrollableRef}
-              className="max-h-screen overflow-x-hidden overflow-y-hidden pt-80 pb-40 wrap-break-word [scrollbar-gutter:stable] hover:overflow-y-auto max-lg:overflow-y-auto max-lg:[scrollbar-gutter:auto]"
+              className="max-h-screen [scrollbar-gutter:stable] overflow-x-hidden overflow-y-hidden pt-80 pb-40 wrap-break-word hover:overflow-y-auto max-lg:[scrollbar-gutter:auto] max-lg:overflow-y-auto"
             >
               <div className="w-full space-y-32 pr-16 pl-32">
                 {sections.map((section) => (

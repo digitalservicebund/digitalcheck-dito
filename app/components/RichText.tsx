@@ -1,9 +1,8 @@
-import { marked, Marked, type Renderer, type Tokens } from "marked";
+import type { Renderer, Tokens } from "marked";
+import { marked, Marked } from "marked";
 import { getDownloadableExtensionName } from "~/utils/fileExtensionUtils";
 import twMerge from "~/utils/tailwindMerge";
-import { isExternalUrl } from "~/utils/utilFunctions";
 import { dowloadIconString } from "./downloadIcon";
-import { openInNewIconString } from "./OpenInNewIcon.tsx";
 
 export type RichTextProps = {
   markdown: string;
@@ -27,26 +26,12 @@ const RichText = ({
         const { href } = token;
         // render the link with the default renderer or a renderer that has overridden it
         const linkHtml = marked.parseInline(token.raw) as string;
-
-        // Force external links to open in a new window
-        if (isExternalUrl(href)) {
-          return linkHtml
-            .replace(/^<a /, '<a target="_blank" class="group"')
-            .replace(
-              `>${token.text}<`,
-              `>${token.text}${openInNewIconString}<`,
-            );
-        }
-
         const ext = getDownloadableExtensionName(href);
 
         // Force the browser to download links to PDF/Excel files
         if (ext) {
           return linkHtml
-            .replace(
-              /^<a /,
-              `<a download title="${token.text} (${ext}-Datei)" class="group inline-flex items-center" `,
-            )
+            .replace(/^<a /, `<a download title="${token.text} (${ext}-Datei)"`)
             .replace(`>${token.text}<`, `>${token.text}${dowloadIconString}<`);
         }
 
@@ -62,7 +47,7 @@ const RichText = ({
   return html ? (
     <Tag
       {...props}
-      className={twMerge("[&_a]:text-link space-y-8", className)}
+      className={twMerge("space-y-8", className)}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   ) : null;

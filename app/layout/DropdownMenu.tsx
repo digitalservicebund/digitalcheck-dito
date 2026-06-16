@@ -6,7 +6,6 @@ import type { PointerEvent } from "react";
 import type { DropdownItemProps } from "~/components/DropdownContentList";
 import DropdownContentList from "~/components/DropdownContentList";
 import { header } from "~/resources/content/shared/header.ts";
-import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import twMerge from "~/utils/tailwindMerge";
 
 export type DropdownProps = {
@@ -15,13 +14,13 @@ export type DropdownProps = {
   data: DropdownItemProps[];
   hasSupport?: boolean;
   isOrderedList?: boolean;
+  currentPath: string;
   onOpenChange?: (isOpen: boolean) => void;
   variant?: "desktop" | "mobile";
   isExpanded: boolean;
   onToggle: () => void;
   onItemClick: () => void;
   isActiveParent: boolean;
-  plausibleEventName: string;
 };
 
 export default function DropdownMenu({
@@ -34,14 +33,11 @@ export default function DropdownMenu({
   isExpanded,
   onToggle,
   onItemClick,
+  currentPath,
   isActiveParent,
-  plausibleEventName,
 }: Readonly<DropdownProps>) {
   const isMobile = variant === "mobile";
   const elementId = `dropdown-${encodeURIComponent(label)}-${variant}`;
-  const plausibleTrackingClass = getPlausibleEventClassName(
-    `Nav+Bar.${plausibleEventName}.Open+Close`,
-  );
 
   // Transparent borders to avoid layout shifts
   const buttonClasses = twMerge(
@@ -51,7 +47,6 @@ export default function DropdownMenu({
       : "ds-label-01-reg h-full border-b-[4px] border-transparent pr-8 pl-16 whitespace-nowrap",
     isActiveParent && "border-blue-800 bg-blue-100",
     isExpanded && "bg-blue-100",
-    plausibleTrackingClass,
   );
 
   const panelClasses = isMobile
@@ -109,23 +104,23 @@ export default function DropdownMenu({
                 {isMobile ? header.contactTel.msgMobile : header.contactTel.msg}
                 <a
                   href={`tel:${header.contactTel.number.replaceAll(/\s/g, "")}`}
-                  className="plausible-event-name=Nav+Bar.Kontakt+Support+Layer.Link+Telefon ds-link-02-reg ml-8"
+                  className="link-unstyled ds-link-02-reg ml-8"
                 >
                   {header.contactTel.number}
                 </a>{" "}
                 {header.contactMail.msg}{" "}
                 <a
-                  className="plausible-event-name=Nav+Bar.Kontakt+Support+Layer.Link+Email ds-link-02-reg"
+                  className="link-unstyled ds-link-02-reg"
                   href={header.contactMail.url}
                 >
                   {header.contactMail.text}
                 </a>
               </div>
-              <div className="border-b-1 border-gray-600" />
+              <div className="border-b border-gray-600" />
             </div>
           )}
           <DropdownContentList
-            parentPlausibleEvent={plausibleEventName}
+            currentPath={currentPath}
             data={data}
             isOrderedList={isOrderedList}
             onItemClick={onItemClick}

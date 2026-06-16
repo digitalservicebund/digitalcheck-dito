@@ -1,0 +1,133 @@
+---
+import Layout from "./Layout.astro";
+import Container from "~/components/Container";
+import ContentWrapper from "~/components/ContentWrapper.tsx";
+import DetailsSummary from "~/components/DetailsSummary";
+import Hero from "~/components/Hero";
+import Image from "~/components/Image.tsx";
+import InfoBox from "~/components/InfoBox";
+import MethodCard from "@/components/MethodCard.astro";
+import MethodCardReact from "~/components/MethodCard.tsx";
+import RichText from "~/components/RichText.tsx";
+import { methodsITSystems } from "~/resources/content/methode-it-systeme-erfassen";
+import { methodsTechnicalFeasibility } from "~/resources/content/methode-technische-umsetzbarkeit";
+import { methodsResponsibleActors } from "~/resources/content/methode-zustaendige-akteurinnen-auflisten";
+import { interviewBanner } from "~/resources/content/shared/interview-banner";
+
+const contents = [
+  methodsITSystems,
+  methodsTechnicalFeasibility,
+  methodsResponsibleActors,
+];
+
+interface Props {
+  title: string;
+  content: (typeof contents)[number];
+}
+const { title, content } = Astro.props;
+---
+
+<Layout title={title} showProgressBar>
+  <main>
+    <Hero subtitle={content.subtitle} title={content.title} />
+
+    <ContentWrapper>
+      {
+        "accordion" in content && (
+          <div class="pb-0">
+            <DetailsSummary title={content.accordion.title}>
+              <RichText markdown={content.accordion.text} />
+            </DetailsSummary>
+          </div>
+        )
+      }
+      <div class="mb-40 space-y-40 lg:space-y-80">
+        <InfoBox
+          heading={{
+            text: content.content.title,
+            look: "ds-heading-03-reg",
+            tagName: "h2",
+          }}
+          badge={{
+            children: content.content.label,
+            Icon: content.content.icon,
+          }}
+        >
+          <RichText markdown={content.content.text} />
+          {
+            "links" in content.content && (
+              <InfoBox.LinkList links={content.content.links} />
+            )
+          }
+        </InfoBox>
+
+        {
+          content.boxes.map((box) => (
+            <MethodCard>
+              <Image
+                slot="image"
+                url={box.image.src}
+                alternativeText={box.image.alt}
+              />
+              <MethodCardReact.InfoBox
+                heading={{ text: box.title, look: "ds-heading-03-reg" }}
+                badge={{ children: box.label, Icon: box.icon }}
+              >
+                {box.text && <RichText markdown={box.text} />}
+                {"links" in box && box.links && box.links.length > 0 && (
+                  <InfoBox.LinkList links={box.links} />
+                )}
+              </MethodCardReact.InfoBox>
+            </MethodCard>
+          ))
+        }
+      </div>
+    </ContentWrapper>
+    {
+      "tip" in content && (
+        <div class="bg-yellow-300">
+          <Container>
+            <InfoBox
+              heading={{ text: content.tip.title, tagName: "h3" }}
+              badge={{ children: content.tip.label, Icon: content.tip.icon }}
+            >
+              <RichText markdown={content.tip.text} />
+            </InfoBox>
+          </Container>
+        </div>
+      )
+    }
+
+    <Container className="mt-40 lg:pb-80">
+      <InfoBox
+        heading={{ tagName: "h2", text: interviewBanner.title }}
+        look="highlight"
+      >
+        <RichText markdown={interviewBanner.text} />
+      </InfoBox>
+    </Container>
+
+    {
+      "support" in content && (
+        <div class="bg-blue-100">
+          <Container>
+            <InfoBox
+              heading={{
+                text: content.support.title,
+                look: "ds-heading-03-reg",
+                tagName: "h2",
+              }}
+              badge={{
+                children: content.support.label,
+                Icon: content.support.icon,
+              }}
+            >
+              <RichText markdown={content.support.text} />
+              <InfoBox.LinkList links={content.support.links} />
+            </InfoBox>
+          </Container>
+        </div>
+      )
+    }
+  </main>
+</Layout>

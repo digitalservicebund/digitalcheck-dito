@@ -1,4 +1,4 @@
-import {
+import type {
   InteroperabilityAssessmentData,
   InteroperabilityAssessmentLevel,
 } from "~/routes/dokumentation/documentationDataSchema.ts";

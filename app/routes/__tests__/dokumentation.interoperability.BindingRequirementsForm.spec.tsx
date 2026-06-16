@@ -2,7 +2,6 @@ import { dokumentation_verbindlicheAnforderungen } from "@/config/routes.ts";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it } from "vitest";
 import { stubResizingFunctionality } from "~/routes/__tests__/utils/stubResizingFunctionality.ts";
 import { LayoutWithDocumentationNavigation } from "~/routes/dokumentation._documentationNavigation.tsx";
@@ -13,19 +12,15 @@ import {
 import BindingRequirementsForm from "~/routes/dokumentation/interoperability/BindingRequirementsForm";
 
 function renderPage() {
-  const routes = [dokumentation_verbindlicheAnforderungen];
   return render(
-    <MemoryRouter initialEntries={routes}>
-      <DocumentationDataProvider>
-        <LayoutWithDocumentationNavigation
-          routes={routes}
-          prinzips={[]}
-          currentUrl={routes[0].path}
-        >
-          <BindingRequirementsForm />
-        </LayoutWithDocumentationNavigation>
-      </DocumentationDataProvider>
-    </MemoryRouter>,
+    <DocumentationDataProvider>
+      <LayoutWithDocumentationNavigation
+        prinzips={[]}
+        currentUrl={dokumentation_verbindlicheAnforderungen.path}
+      >
+        <BindingRequirementsForm />
+      </LayoutWithDocumentationNavigation>
+    </DocumentationDataProvider>,
   );
 }
 

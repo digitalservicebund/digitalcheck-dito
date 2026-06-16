@@ -4,6 +4,7 @@ import {
   methoden_fuenfPrinzipien,
   methoden_visualisieren_flussdiagramm,
 } from "@/config/routes";
+import { withBase } from "@/utils/path";
 import {
   ArrowCircleRightOutlined,
   DateRangeOutlined,
@@ -16,7 +17,6 @@ import {
   SupportOutlined,
   VisibilityTwoTone,
 } from "@digitalservicebund/icons";
-import { assetPath } from "~/utils/assetPath";
 import type { ContentLink } from "~/utils/contentTypes";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
@@ -65,7 +65,7 @@ export const methodsTasksProcesses = {
       {
         visual: {
           image: {
-            url: assetPath("/images/flussdiagramm.png"),
+            url: withBase("/images/flussdiagramm.png"),
             width: 200,
             size: "medium" as const,
             alternativeText:
@@ -87,7 +87,7 @@ export const methodsTasksProcesses = {
       {
         visual: {
           image: {
-            url: assetPath("/images/entscheidungsbaum.png"),
+            url: withBase("/images/entscheidungsbaum.png"),
             width: 200,
             size: "medium" as const,
             alternativeText:
@@ -107,7 +107,7 @@ export const methodsTasksProcesses = {
       {
         visual: {
           image: {
-            url: assetPath("/images/schaubild.png"),
+            url: withBase("/images/schaubild.png"),
             width: 200,
             size: "medium" as const,
             alternativeText:
@@ -141,7 +141,6 @@ export const methodsTasksProcesses = {
       {
         to: grundlagen_normenkontrollrat.path,
         text: "Mehr dazu erfahren",
-        plausibleEventName: "Content.Link+NKR+Kriterien",
         look: "tertiary" as const,
       },
     ] satisfies ContentLink[],
@@ -149,7 +148,6 @@ export const methodsTasksProcesses = {
 
   intro: {
     title: "Intro",
-    plausibleEventName: "Tab+Bar.Intro",
     visibility: {
       heading: "Prozesse sichtbar machen",
       content: dedent`
@@ -160,13 +158,11 @@ export const methodsTasksProcesses = {
     },
     example: {
       documentId: "qyh09ifld7r3a8z8h2pyhgom",
-      plausibleEventName: "Content.Intro.Beispiel+Entscheidungsbaum",
     },
   },
 
   anleitung: {
     title: "Anleitung",
-    plausibleEventName: "Tab+Bar.Anleitung",
 
     ablaufe: {
       heading: "Abläufe mit dem Flussdiagramm erfassen",
@@ -208,19 +204,17 @@ export const methodsTasksProcesses = {
         {
           to: anleitungFlussdiagramm.path,
           text: "PPT-Vorlage runterladen",
-          plausibleEventName: "Content.Anleitung.Link+Powerpoint+Vorlage",
           download: true,
         },
         {
           to: "https://bmas.de.conceptboard.com/board/qh33-xcny-usde-7nc6-82cy",
           text: "Zur Conceptboard-Vorlage",
           look: "ghost",
-          plausibleEventName: "Content.Anleitung.Link+Conceptboard+Vorlage",
           target: "_blank",
         },
       ] satisfies ContentLink[],
       image: {
-        url: assetPath("/images/beispielflussdiagram.png"),
+        url: withBase("/images/beispielflussdiagram.png"),
       },
     },
   },
@@ -238,7 +232,6 @@ export const methodsTasksProcesses = {
         to: methoden_fuenfPrinzipien.path,
         text: "Prinzipien nutzen",
         look: "tertiary",
-        plausibleEventName: "Content.Link+Prinzipien+Nutzen",
       },
     ] satisfies ContentLink[],
   },

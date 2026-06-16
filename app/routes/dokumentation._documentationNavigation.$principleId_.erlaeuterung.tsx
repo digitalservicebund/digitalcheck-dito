@@ -1,36 +1,30 @@
-import { methoden_fuenfPrinzipien } from "@/config/routes.ts";
-import { Link, redirect, useOutletContext, useParams } from "react-router";
+import { methoden_fuenfPrinzipien } from "@/config/routes";
+import { useEffect } from "react";
 import AspectPills from "~/components/AspectPills";
 import Badge from "~/components/Badge";
 import { BlocksRenderer } from "~/components/BlocksRenderer";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton";
-import MetaTitle from "~/components/Meta";
 import Textarea from "~/components/Textarea";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import { PrinzipWithAspekte } from "~/utils/strapiData.types";
-import { NavigationContext } from "./dokumentation._documentationNavigation";
+import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
-import {
-  Principle,
-  principleAnswerSchemaV2,
-} from "./dokumentation/documentationDataSchema";
+import type { Principle } from "./dokumentation/documentationDataSchema";
+import { principleAnswerSchemaV2 } from "./dokumentation/documentationDataSchema";
+import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
 const { radioOptions } = digitalDocumentation.principlePages;
 
-type DocumentationPrincipleErlaeuterungFormProps = {
+type DocumentationPrincipleErlaeuterungFormProps = Readonly<{
   answer: string;
   prinzip: PrinzipWithAspekte;
   principleData: Principle;
   isPositive: boolean;
   isIrrelevant: boolean;
-  currentUrl: string;
-  nextUrl: string;
-  previousUrl: string;
-};
+}>;
 
 function DocumentationPrincipleErlaeuterungForm({
   answer,
@@ -38,10 +32,9 @@ function DocumentationPrincipleErlaeuterungForm({
   principleData,
   isPositive,
   isIrrelevant,
-  currentUrl,
-  nextUrl,
-  previousUrl,
 }: DocumentationPrincipleErlaeuterungFormProps) {
+  const { currentUrl, nextUrl, previousUrl, prinzips } =
+    useDocumentationNavigation();
   const { addOrUpdatePrincipleReasoning } = useDocumentationDataService();
 
   const form = useSyncedForm({
@@ -139,20 +132,20 @@ function DocumentationPrincipleErlaeuterungForm({
         submit
         showDownloadDraftButton
         showSavingTip
+        prinzips={prinzips}
       />
     </form>
   );
 }
 
-export default function DocumentationPrincipleErlaeuterung() {
-  const { principleId } = useParams();
-  const { currentUrl, nextUrl, previousUrl, prinzips } =
-    useOutletContext<NavigationContext>();
+export function DocumentationPrincipleErlaeuterung({
+  principleId,
+}: Readonly<{
+  principleId: string;
+}>) {
+  const { currentUrl, navigationBaseUrl, prinzips } =
+    useDocumentationNavigation();
   const { documentationData } = useDocumentationDataService();
-
-  if (!principleId)
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("No principleId provided", { status: 404 });
 
   const prinzip = prinzips.find(
     ({ URLBezeichnung }) => URLBezeichnung === principleId,
@@ -171,10 +164,12 @@ export default function DocumentationPrincipleErlaeuterung() {
   const isIrrelevant = answer === radioOptions[2];
 
   // If no answer saved yet, redirect to answer page
-  if (!principleData?.answer) {
-    redirect(previousUrl);
-    return null;
-  }
+  useEffect(() => {
+    if (documentationData.initialized && !principleData?.answer)
+      globalThis.location.href = navigationBaseUrl;
+  }, [documentationData, principleData, navigationBaseUrl]);
+
+  if (!principleData?.answer) return null;
 
   const changeAnswerTitle = isPositive
     ? "Sie haben angegeben, dass das Prinzip auf ihr Vorhaben zutrifft."
@@ -184,7 +179,6 @@ export default function DocumentationPrincipleErlaeuterung() {
 
   return (
     <>
-      <MetaTitle prefix={`Dokumentation: ${prinzip.Name} – Erläuterung`} />
       <div className="space-y-48">
         <div className="space-y-24">
           <Badge principleNumber={prinzip.Nummer} className="mb-8">
@@ -198,14 +192,13 @@ export default function DocumentationPrincipleErlaeuterung() {
               className="h-24 w-24"
             >
               <BlocksRenderer content={prinzip.Hilfetext!} />
-              <Link
-                to={
+              <a
+                href={
                   methoden_fuenfPrinzipien.path + "/" + prinzip.URLBezeichnung
                 }
-                className="ds-link-01-reg"
               >
                 Mehr zum Prinzip
-              </Link>
+              </a>
             </HelpButton>
           </Heading>
 
@@ -215,12 +208,7 @@ export default function DocumentationPrincipleErlaeuterung() {
 
           <div className="rounded-lg bg-blue-300 p-24">
             <p>{changeAnswerTitle}</p>
-            <Link
-              to={currentUrl.replace("/erlaeuterung", "")}
-              className="text-link"
-            >
-              Angaben ändern
-            </Link>
+            <a href={currentUrl.replace("/erlaeuterung", "")}>Angaben ändern</a>
           </div>
         </div>
 
@@ -230,11 +218,27 @@ export default function DocumentationPrincipleErlaeuterung() {
           principleData={principleData}
           isPositive={isPositive}
           isIrrelevant={isIrrelevant}
-          currentUrl={currentUrl}
-          nextUrl={nextUrl}
-          previousUrl={previousUrl}
         />
       </div>
     </>
+  );
+}
+
+// Astro page export
+import { DocumentationPageShell } from "@/components/DocumentationPageShell";
+
+export function ErlaeuterungPage({
+  prinzips,
+  currentUrl,
+  principleId,
+}: Readonly<{
+  prinzips: PrinzipWithAspekte[];
+  currentUrl: string;
+  principleId: string;
+}>) {
+  return (
+    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
+      <DocumentationPrincipleErlaeuterung principleId={principleId} />
+    </DocumentationPageShell>
   );
 }

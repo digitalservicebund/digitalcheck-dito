@@ -1,0 +1,127 @@
+---
+import { ROUTE_REGELUNGEN } from "@/config/additionalRoutes";
+import { beispiele_prinzipien } from "@/config/routes";
+import BeispieleLayout from "@/layouts/BeispieleLayout.astro";
+import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
+import ContentWrapper from "~/components/ContentWrapper.tsx";
+import Heading from "~/components/Heading";
+import Hero from "~/components/Hero";
+import InfoBox from "~/components/InfoBox";
+import ParagraphList from "~/components/ParagraphList";
+import RegulationMetadata from "~/components/RegulationMetadata";
+import Separator from "~/components/Separator";
+import RouteTabs from "~/components/Tabs/RouteTabs";
+import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
+import {
+  fetchStrapiData,
+  paragraphFields,
+  prinzipCoreFields,
+} from "~/utils/strapiData.server";
+import type { PrinzipWithBeispielvorhaben } from "~/utils/strapiData.types";
+
+export const frontmatter = {
+  title: "Die Prinzipien im Regelungstext",
+  sitemap: false,
+};
+
+export async function getStaticPaths() {
+  const query = `
+${paragraphFields}
+${prinzipCoreFields}
+query GetAllPrinzipsWithBeispiele {
+  prinzips {
+    ...PrinzipCoreFields
+    Beispielvorhaben {
+      documentId
+      Ressort
+      Rechtsgebiet
+      Titel
+      URLBezeichnung
+      LinkRegelungstext
+      VeroeffentlichungsDatum
+      GesetzStatus
+      Paragraphen { ...ParagraphFields }
+    }
+  }
+}`;
+
+  const result = await fetchStrapiData<{
+    prinzips: PrinzipWithBeispielvorhaben[];
+  }>(query);
+  const prinzips = result.prinzips.toSorted((a, b) => a.order - b.order);
+
+  return prinzips.map((prinzip) => ({
+    params: { principleId: prinzip.URLBezeichnung },
+    props: { prinzip, prinzips },
+  }));
+}
+
+const { prinzip, prinzips } = Astro.props;
+const { Beispielvorhaben } = prinzip;
+const tabs = prinzips.map((principle) => ({
+  key: principle.URLBezeichnung,
+  label: principle.Kurzbezeichnung,
+  to: `${beispiele_prinzipien.path}/${principle.URLBezeichnung}`,
+}));
+---
+
+<BeispieleLayout title={frontmatter.title}>
+  <main>
+    <Hero
+      title={examplesRegelungen.principles.hero.title}
+      subtitle={examplesRegelungen.principles.hero.subtitle}
+    />
+
+    <ContentWrapper compactTopSpacing className="space-y-80">
+      <RouteTabs activeKey={prinzip.URLBezeichnung} tabs={tabs} client:load />
+
+      <InfoBox
+        heading={{ text: prinzip.Name, tagName: "h2" }}
+        badge={{
+          children: examplesRegelungen.principles.prinzipBadge,
+          principleNumber: prinzip.Nummer,
+        }}
+      >
+        <div>
+          <BlocksRenderer content={prinzip.Beschreibung} />
+        </div>
+      </InfoBox>
+
+      {
+        Beispielvorhaben.length > 0 && (
+          <>
+            <Separator />
+            <div class="space-y-80">
+              {Beispielvorhaben.map((exampleProject) => (
+                <div data-testid="regelung-on-prinzip" class="space-y-80">
+                  <div class="space-y-16">
+                    <Heading
+                      tagName="h3"
+                      text={exampleProject.Titel}
+                      look="ds-heading-03-bold"
+                      className="max-w-full"
+                    />
+
+                    <a
+                      href={`${ROUTE_REGELUNGEN}/${exampleProject.URLBezeichnung}`}
+                      data-astro-prefetch="viewport"
+                    >
+                      {examplesRegelungen.exampleLinkText}
+                    </a>
+                  </div>
+
+                  <ParagraphList
+                    paragraphs={exampleProject.Paragraphen}
+                    principlesToShow={[prinzip]}
+                  />
+
+                  <RegulationMetadata exampleProject={exampleProject} />
+                </div>
+              ))}
+            </div>
+          </>
+        )
+      }
+    </ContentWrapper>
+  </main>
+</BeispieleLayout>

@@ -1,9 +1,7 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter, Route, Routes } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import type { ReactNode } from "react";
 import type { DropdownItemProps } from "~/components/DropdownContentList";
 import type { DropdownProps } from "~/layout/DropdownMenu";
 import DropdownMenu from "~/layout/DropdownMenu";
@@ -23,19 +21,17 @@ vi.mock("~/resources/content/shared/header.ts", () => ({
 }));
 
 const mockDropdownData: DropdownItemProps[] = [
-  { title: "Link1", href: "/", plausibleEventName: "event1" },
+  { title: "Link1", href: "/" },
   {
     title: "Link2",
     href: "/link2",
     content: "Description for Link2",
-    plausibleEventName: "event2",
   },
   {
     title: "Link3",
     href: "/link3",
     isNewTitle: true,
     newContent: "New content",
-    plausibleEventName: "event3",
   },
 ];
 
@@ -50,24 +46,10 @@ const defaultTestProps: DropdownProps = {
   onToggle: mockOnToggle,
   onItemClick: mockOnItemClick,
   onOpenChange: mockOnOpenChange,
+  currentPath: "/",
   isActiveParent: false,
   variant: "desktop",
-  plausibleEventName: "",
 };
-
-const RouterWrapper = ({
-  children,
-  initialEntries,
-}: {
-  children: ReactNode;
-  initialEntries: string[];
-}) => (
-  <MemoryRouter initialEntries={initialEntries}>
-    <Routes>
-      <Route path="*" element={children} />
-    </Routes>
-  </MemoryRouter>
-);
 
 describe("DropdownMenu Component", () => {
   beforeEach(() => {
@@ -78,13 +60,13 @@ describe("DropdownMenu Component", () => {
     props: Partial<DropdownProps> = {},
     initialEntries: string[] = ["/"],
   ) => {
-    const mergedProps = { ...defaultTestProps, ...props };
+    const mergedProps = {
+      ...defaultTestProps,
+      currentPath: initialEntries[0] ?? "/",
+      ...props,
+    };
 
-    return render(
-      <RouterWrapper initialEntries={initialEntries}>
-        <DropdownMenu {...mergedProps} />
-      </RouterWrapper>,
-    );
+    return render(<DropdownMenu {...mergedProps} />);
   };
 
   it("has correct ARIA attributes when closed", () => {
@@ -264,13 +246,12 @@ describe("DropdownMenu Component", () => {
         {
           title: "Link1",
           href: "/",
-          plausibleEventName: "event1",
+
           activeBehavior: "noHighlight",
         },
         {
           title: "Link2",
           href: "/Link2",
-          plausibleEventName: "event2",
         },
       ];
 
@@ -291,13 +272,12 @@ describe("DropdownMenu Component", () => {
         {
           title: "Link1",
           href: "/Link1",
-          plausibleEventName: "event1",
+
           activeBehavior: "exactMatch",
         },
         {
           title: "Link2",
           href: "/Link1/Link2",
-          plausibleEventName: "event2",
         },
       ];
 

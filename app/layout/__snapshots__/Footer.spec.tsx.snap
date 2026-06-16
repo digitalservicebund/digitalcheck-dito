@@ -29,73 +29,45 @@ exports[`Footer Component > Renders correctly 1`] = `
               Support:
                
               <a
-                class="text-link increase-tap-area"
+                class="increase-tap-area"
                 href="tel:+4915140767839"
               >
-                <span
-                  class="flex items-center"
-                >
-                  0151/40 76 78 39
-                   
-                </span>
+                0151/40 76 78 39
               </a>
                oder
                
               <a
-                class="text-link increase-tap-area"
+                class="increase-tap-area"
                 href="mailto:digitalcheck@digitalservice.bund.de"
               >
-                <span
-                  class="flex items-center"
-                >
-                  digitalcheck@digitalservice.bund.de
-                   
-                </span>
+                digitalcheck@digitalservice.bund.de
               </a>
             </li>
             <li>
                
               <a
-                class="text-link increase-tap-area"
-                data-discover="true"
+                class="increase-tap-area"
                 href="/unterstuetzung"
               >
-                <span
-                  class="flex items-center"
-                >
-                  Alle Unterstützungsangebote
-                   
-                </span>
+                Alle Unterstützungsangebote
               </a>
             </li>
             <li>
                
               <a
-                class="text-link increase-tap-area"
-                data-discover="true"
+                class="increase-tap-area"
                 href="/unterstuetzung?tab=online-schulungen#angebote"
               >
-                <span
-                  class="flex items-center"
-                >
-                  Schulungen
-                   
-                </span>
+                Schulungen
               </a>
             </li>
             <li>
                
               <a
-                class="text-link increase-tap-area"
-                data-discover="true"
+                class="increase-tap-area"
                 href="/interoperabel/nationale-kontaktstelle"
               >
-                <span
-                  class="flex items-center"
-                >
-                  Nationale Kontaktstelle für ein interoperables Europa (2024/903 Art. 17)
-                   
-                </span>
+                Nationale Kontaktstelle für ein interoperables Europa (2024/903 Art. 17)
               </a>
             </li>
           </ul>
@@ -114,46 +86,28 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="text-link increase-tap-area"
-                data-discover="true"
+                class="increase-tap-area"
                 href="/vorpruefung"
               >
-                <span
-                  class="flex items-center"
-                >
-                  1. Vorprüfung: Digitalbezug einschätzen
-                   
-                </span>
+                1. Vorprüfung: Digitalbezug einschätzen
               </a>
             </li>
             <li>
                
               <a
-                class="text-link increase-tap-area"
-                data-discover="true"
+                class="increase-tap-area"
                 href="/methoden"
               >
-                <span
-                  class="flex items-center"
-                >
-                  2. Digitaltauglichkeit der Regelung sicherstellen
-                   
-                </span>
+                2. Digitaltauglichkeit der Regelung sicherstellen
               </a>
             </li>
             <li>
                
               <a
-                class="text-link increase-tap-area"
-                data-discover="true"
+                class="increase-tap-area"
                 href="/dokumentation"
               >
-                <span
-                  class="flex items-center"
-                >
-                  3. Dokumentieren der Digitaltauglichkeit
-                   
-                </span>
+                3. Dokumentieren der Digitaltauglichkeit
               </a>
             </li>
           </ul>
@@ -172,61 +126,37 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="text-link increase-tap-area"
-                data-discover="true"
+                class="increase-tap-area"
                 href="/methoden/fuenf-prinzipien"
               >
-                <span
-                  class="flex items-center"
-                >
-                  Prinzipien der Digitaltauglichkeit
-                   
-                </span>
+                Prinzipien der Digitaltauglichkeit
               </a>
             </li>
             <li>
                
               <a
-                class="text-link increase-tap-area"
-                data-discover="true"
+                class="increase-tap-area"
                 href="/interoperabel"
               >
-                <span
-                  class="flex items-center"
-                >
-                  EU-Interoperabilität
-                   
-                </span>
+                EU-Interoperabilität
               </a>
             </li>
             <li>
                
               <a
-                class="text-link increase-tap-area"
-                data-discover="true"
+                class="increase-tap-area"
                 href="/grundlagen/digitaltauglichkeit"
               >
-                <span
-                  class="flex items-center"
-                >
-                  Was ist Digitaltauglichkeit?
-                   
-                </span>
+                Was ist Digitaltauglichkeit?
               </a>
             </li>
             <li>
                
               <a
-                class="text-link increase-tap-area"
-                data-discover="true"
+                class="increase-tap-area"
                 href="/grundlagen/normenkontrollrat"
               >
-                <span
-                  class="flex items-center"
-                >
-                  NKR und Digitalcheck
-                   
-                </span>
+                NKR und Digitalcheck
               </a>
             </li>
           </ul>
@@ -245,31 +175,19 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="text-link increase-tap-area"
-                data-discover="true"
+                class="increase-tap-area"
                 href="/beispiele/prinzipien"
               >
-                <span
-                  class="flex items-center"
-                >
-                  Digitaltauglichkeit im Regelungstext
-                   
-                </span>
+                Digitaltauglichkeit im Regelungstext
               </a>
             </li>
             <li>
                
               <a
-                class="text-link increase-tap-area"
-                data-discover="true"
+                class="increase-tap-area"
                 href="/beispiele/visualisierungen"
               >
-                <span
-                  class="flex items-center"
-                >
-                  Visualisierungen
-                   
-                </span>
+                Visualisierungen
               </a>
             </li>
           </ul>
@@ -286,16 +204,10 @@ exports[`Footer Component > Renders correctly 1`] = `
           >
              
             <a
-              class="text-link increase-tap-area"
-              data-discover="true"
+              class="increase-tap-area"
               href="/impressum"
             >
-              <span
-                class="flex items-center"
-              >
-                Impressum
-                 
-              </span>
+              Impressum
             </a>
           </li>
           <li
@@ -303,16 +215,10 @@ exports[`Footer Component > Renders correctly 1`] = `
           >
              
             <a
-              class="text-link increase-tap-area"
-              data-discover="true"
+              class="increase-tap-area"
               href="/datenschutz"
             >
-              <span
-                class="flex items-center"
-              >
-                Datenschutzerklärung
-                 
-              </span>
+              Datenschutzerklärung
             </a>
           </li>
           <li
@@ -320,16 +226,10 @@ exports[`Footer Component > Renders correctly 1`] = `
           >
              
             <a
-              class="text-link increase-tap-area"
-              data-discover="true"
+              class="increase-tap-area"
               href="/barrierefreiheit"
             >
-              <span
-                class="flex items-center"
-              >
-                Barrierefreiheit
-                 
-              </span>
+              Barrierefreiheit
             </a>
           </li>
           <li
@@ -337,16 +237,10 @@ exports[`Footer Component > Renders correctly 1`] = `
           >
              
             <a
-              class="text-link increase-tap-area"
-              data-discover="true"
+              class="increase-tap-area"
               href="/sitemap"
             >
-              <span
-                class="flex items-center"
-              >
-                Sitemap
-                 
-              </span>
+              Sitemap
             </a>
           </li>
           <li
@@ -354,16 +248,10 @@ exports[`Footer Component > Renders correctly 1`] = `
           >
              
             <a
-              class="text-link increase-tap-area"
-              data-discover="true"
+              class="increase-tap-area"
               href="/das-ist-neu"
             >
-              <span
-                class="flex items-center"
-              >
-                Das ist neu
-                 
-              </span>
+              Das ist neu
             </a>
           </li>
           <li
@@ -371,16 +259,10 @@ exports[`Footer Component > Renders correctly 1`] = `
           >
              
             <a
-              class="text-link increase-tap-area"
-              data-discover="true"
+              class="increase-tap-area"
               href="/zahlen-und-fakten"
             >
-              <span
-                class="flex items-center"
-              >
-                Zahlen und Fakten
-                 
-              </span>
+              Zahlen und Fakten
             </a>
           </li>
           <li
@@ -388,42 +270,10 @@ exports[`Footer Component > Renders correctly 1`] = `
           >
              
             <a
-              aria-description="(öffnet in neuem Fenster)"
-              class="text-link increase-tap-area"
+              class="increase-tap-area"
               href="https://github.com/digitalservicebund/digitalcheck-dito"
-              rel="noreferrer"
-              target="_blank"
             >
-              <span
-                class="flex items-center"
-              >
-                Open Source Code
-                 
-                <svg
-                  aria-hidden="true"
-                  class="ml-2 inline pb-2"
-                  data-testid="OpenInNewIcon"
-                  focusable="false"
-                  height="1.4rem"
-                  viewBox="0 0 24 24"
-                  width="1.4rem"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M0 0h24v24H0z"
-                    fill="none"
-                  />
-                  <path
-                    d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
-                  />
-                </svg>
-                <span
-                  class="sr-only"
-                >
-                   
-                  (öffnet in neuem Fenster)
-                </span>
-              </span>
+              Open Source Code
             </a>
           </li>
         </ul>
@@ -438,42 +288,10 @@ exports[`Footer Component > Renders correctly 1`] = `
         Ein Angebot der
          
         <a
-          aria-description="(öffnet in neuem Fenster)"
-          class="text-link increase-tap-area"
+          class="increase-tap-area"
           href="https://digitalservice.bund.de/"
-          rel="noreferrer"
-          target="_blank"
         >
-          <span
-            class="flex items-center"
-          >
-            DigitalService GmbH des Bundes
-             
-            <svg
-              aria-hidden="true"
-              class="ml-2 inline pb-2"
-              data-testid="OpenInNewIcon"
-              focusable="false"
-              height="1.4rem"
-              viewBox="0 0 24 24"
-              width="1.4rem"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0 0h24v24H0z"
-                fill="none"
-              />
-              <path
-                d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
-              />
-            </svg>
-            <span
-              class="sr-only"
-            >
-               
-              (öffnet in neuem Fenster)
-            </span>
-          </span>
+          DigitalService GmbH des Bundes
         </a>
         <div
           class="space-y-16 sm:flex sm:flex-row sm:items-center sm:gap-48 sm:space-y-0"
@@ -508,84 +326,20 @@ exports[`Footer Component > Renders correctly 1`] = `
                   Der Digitalcheck entsteht im Auftrag des
                    
                   <a
-                    aria-description="(öffnet in neuem Fenster)"
-                    class="text-link increase-tap-area"
+                    class="increase-tap-area"
                     href="https://bmds.bund.de/"
-                    rel="noreferrer"
-                    target="_blank"
                   >
-                    <span
-                      class="flex items-center"
-                    >
-                      Bundesministerium für Digitales und Staatsmodernisierung
-                       
-                      <svg
-                        aria-hidden="true"
-                        class="ml-2 inline pb-2"
-                        data-testid="OpenInNewIcon"
-                        focusable="false"
-                        height="1.4rem"
-                        viewBox="0 0 24 24"
-                        width="1.4rem"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M0 0h24v24H0z"
-                          fill="none"
-                        />
-                        <path
-                          d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
-                        />
-                      </svg>
-                      <span
-                        class="sr-only"
-                      >
-                         
-                        (öffnet in neuem Fenster)
-                      </span>
-                    </span>
+                    Bundesministerium für Digitales und Staatsmodernisierung
                   </a>
                 </li>
                 <li>
                   Mehr über den politischen Auftrag und die Entstehung des Digitalcheck finden Sie auf der
                    
                   <a
-                    aria-description="(öffnet in neuem Fenster)"
-                    class="text-link increase-tap-area"
+                    class="increase-tap-area"
                     href="https://www.digitale-verwaltung.de/Webs/DV/DE/transformation/digitalcheck/digitalcheck-node.html"
-                    rel="noreferrer"
-                    target="_blank"
                   >
-                    <span
-                      class="flex items-center"
-                    >
-                      Projektseite
-                       
-                      <svg
-                        aria-hidden="true"
-                        class="ml-2 inline pb-2"
-                        data-testid="OpenInNewIcon"
-                        focusable="false"
-                        height="1.4rem"
-                        viewBox="0 0 24 24"
-                        width="1.4rem"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M0 0h24v24H0z"
-                          fill="none"
-                        />
-                        <path
-                          d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
-                        />
-                      </svg>
-                      <span
-                        class="sr-only"
-                      >
-                         
-                        (öffnet in neuem Fenster)
-                      </span>
-                    </span>
+                    Projektseite
                   </a>
                    
                   des Bundesministeriums für Digitales und Staatsmodernisierung.

@@ -1,10 +1,8 @@
-import { dokumentation } from "@/config/routes";
 import {
   SimCardDownloadTwoTone,
   TipsAndUpdatesOutlined,
   ViewListTwoTone,
 } from "@digitalservicebund/icons";
-import { useRouteLoaderData } from "react-router";
 import { DownloadButton } from "~/components/Button";
 import Container from "~/components/Container.tsx";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
@@ -13,14 +11,12 @@ import Heading from "~/components/Heading.tsx";
 import Hero from "~/components/Hero";
 import InfoBox from "~/components/InfoBox.tsx";
 import InlineNotice from "~/components/InlineNotice";
-import MetaTitle from "~/components/Meta";
 import NumberedList from "~/components/NumberedList.tsx";
 import RichText from "~/components/RichText.tsx";
 import SupportBanner from "~/components/SupportBanner";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { supportBanner } from "~/resources/content/shared/support-banner";
 import { DocumentationContinueActions } from "~/routes/dokumentation/DocumentationContinueActions.tsx";
-import type { DocumentationRouteData } from "~/routes/dokumentation/route.tsx";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
 import type {
   PrinzipWithAspekte,
@@ -38,7 +34,6 @@ export function DokumentationIndexPage({
 
   return (
     <>
-      <MetaTitle prefix={dokumentation.title} />
       <main>
         <Hero title={start.title} subtitle={start.subtitle}>
           <div className="mt-40 space-y-40">
@@ -163,13 +158,6 @@ export function DokumentationIndexPage({
       <SupportBanner {...supportBanner} />
     </>
   );
-}
-
-export default function Route() {
-  const { prinzips } = useRouteLoaderData<DocumentationRouteData>(
-    "routes/dokumentation",
-  )!;
-  return <DokumentationIndexPage prinzips={prinzips} />;
 }
 
 // Astro page export

@@ -14,7 +14,7 @@ import Textarea from "~/components/Textarea.tsx";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import {
-  BindingRequirementsData,
+  type BindingRequirementsData,
   bindingRequirementsSchema,
 } from "~/routes/dokumentation/documentationDataSchema.ts";
 import { markdownLinkIEA } from "~/routes/dokumentation/interoperability/markdownLinkIEA.tsx";

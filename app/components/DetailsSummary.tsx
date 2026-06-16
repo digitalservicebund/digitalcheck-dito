@@ -1,4 +1,5 @@
-import { ComponentProps, ReactNode, useEffect, useRef, useState } from "react";
+import type { ComponentProps, ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 import { twJoin } from "tailwind-merge";
 
 export type DetailsSummaryProps = ComponentProps<"details"> & {
@@ -51,7 +52,7 @@ export default function DetailsSummary({
       if (matchesHash(hash)) {
         setIsOpen(true);
 
-        globalThis.window.requestAnimationFrame(() => {
+        globalThis.requestAnimationFrame(() => {
           detailsRef.current?.scrollIntoView({
             behavior: "smooth",
             block: "start",
@@ -62,7 +63,7 @@ export default function DetailsSummary({
     };
 
     // initial check
-    openIfMatches(globalThis.window.location.hash);
+    openIfMatches(globalThis.location.hash);
   }, [identifier]);
 
   return (

@@ -1,9 +1,6 @@
-import { Link } from "react-router";
+import { withBase } from "@/utils/path";
 import Image from "~/components/Image";
-import { OpenInNewIcon } from "~/components/OpenInNewIcon.tsx";
 import { footer } from "~/resources/content/shared/footer";
-import { general } from "~/resources/content/shared/general.ts";
-import { assetPath } from "~/utils/assetPath";
 import tailwindMerge from "~/utils/tailwindMerge";
 
 type LinkProps = {
@@ -11,25 +8,14 @@ type LinkProps = {
   postText?: string;
   url: string;
   text: string;
-  openInNewTab?: boolean;
 };
 
 const FooterLink = ({ link }: { link: LinkProps }) => (
   <>
     {link?.preText}{" "}
-    <Link
-      to={link.url}
-      className="text-link increase-tap-area"
-      target={link.openInNewTab ? "_blank" : undefined}
-      rel={link.openInNewTab ? "noreferrer" : undefined}
-      aria-description={
-        link.openInNewTab ? general.a11yMessageNewWindow : undefined
-      }
-    >
-      <span className="flex items-center">
-        {link.text} {link.openInNewTab && <OpenInNewIcon />}
-      </span>
-    </Link>
+    <a href={link.url} className="increase-tap-area">
+      {link.text}
+    </a>
     {link?.postText && <> {link.postText}</>}
   </>
 );
@@ -112,13 +98,13 @@ export default function Footer() {
 
           <div className="space-y-16 sm:flex sm:flex-row sm:items-center sm:gap-48 sm:space-y-0">
             <Image
-              url={assetPath("/logo/bmds-logo.svg")}
+              url={withBase("/logo/bmds-logo.svg")}
               width={120}
               alternativeText="Logo des Bundesministerium für Digitales und Staatsmodernisierung"
               className="forced-colors:dark:hidden"
             />
             <Image
-              url={assetPath("/logo/bmds-logo-white.svg")}
+              url={withBase("/logo/bmds-logo-white.svg")}
               width={120}
               alternativeText="Logo des Bundesministerium für Digitales und Staatsmodernisierung"
               className="hidden forced-colors:dark:block"

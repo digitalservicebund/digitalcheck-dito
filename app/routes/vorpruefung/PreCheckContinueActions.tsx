@@ -1,5 +1,4 @@
 import { vorpruefung_hinweise } from "@/config/routes";
-import { useNavigate } from "react-router";
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Dialog from "~/components/Dialog.tsx";
@@ -12,8 +11,6 @@ import { usePreCheckData } from "./preCheckDataHook";
 import { deletePreCheckData } from "./preCheckDataService";
 
 function StartOverDialog() {
-  const navigate = useNavigate();
-
   return (
     <Dialog
       title={preCheck.startOver.title}
@@ -31,9 +28,9 @@ function StartOverDialog() {
         <div className="flex flex-row gap-12">
           <Button
             type="button"
-            onClick={async () => {
+            onClick={() => {
               deletePreCheckData();
-              await navigate(vorpruefung_hinweise.path);
+              globalThis.location.href = vorpruefung_hinweise.path;
             }}
           >
             {preCheck.startOver.confirm}
@@ -66,7 +63,7 @@ export function PreCheckContinueActions() {
     <ButtonContainer>
       {hasData ? (
         <>
-          <LinkButton to={resumeLink} className="js-only">
+          <LinkButton href={resumeLink} className="js-only">
             {preCheck.resume.buttonText}
           </LinkButton>
           <StartOverDialog />
@@ -75,7 +72,7 @@ export function PreCheckContinueActions() {
         <LinkButton
           className="js-only"
           id={PRE_CHECK_START_BUTTON_ID}
-          to={vorpruefung_hinweise.path}
+          href={vorpruefung_hinweise.path}
         >
           {preCheck.start.buttonText}
         </LinkButton>

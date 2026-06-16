@@ -1,4 +1,3 @@
-import { vorpruefung } from "@/config/routes";
 import Badge from "~/components/Badge";
 import Container from "~/components/Container";
 import { PreCheckFAQ } from "~/components/content/PreCheckFAQ.tsx";
@@ -9,7 +8,6 @@ import Image from "~/components/Image";
 import ImageBox from "~/components/ImageBox";
 import InfoBox from "~/components/InfoBox.tsx";
 import InlineNotice from "~/components/InlineNotice";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText.tsx";
 import SupportBanner from "~/components/SupportBanner";
 import TabGroup from "~/components/Tabs/Tabs";
@@ -20,7 +18,6 @@ import { PreCheckContinueActions } from "./vorpruefung/PreCheckContinueActions";
 export default function Index() {
   return (
     <>
-      <MetaTitle prefix={vorpruefung.title} />
       <main>
         <Hero title={preCheck.start.title} subtitle={preCheck.start.subtitle}>
           <div className="ds-stack ds-stack-16 mb-40">

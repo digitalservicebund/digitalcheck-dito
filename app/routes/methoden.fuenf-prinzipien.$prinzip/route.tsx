@@ -3,14 +3,12 @@ import {
   methoden_fuenfPrinzipien,
 } from "@/config/routes";
 import type { ReactNode } from "react";
-import { Link, useLoaderData } from "react-router";
 import { twJoin } from "tailwind-merge";
 import AccordionItem from "~/components/AccordionItem.tsx";
 import Badge from "~/components/Badge.tsx";
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
 import { LinkButton } from "~/components/Button.tsx";
 import { BreakoutHero } from "~/components/Hero.tsx";
-import MetaTitle from "~/components/Meta.tsx";
 import { PrincipleHightlightNullModifier } from "~/components/PrincipleHighlightModifier.tsx";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "~/layout/SidebarContainer";
@@ -19,17 +17,16 @@ import { PRINCIPLE_COLORS } from "~/resources/constants.ts";
 import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien.ts";
 import type { Node } from "~/utils/paragraphUtils";
 import { absatzIdTag } from "~/utils/paragraphUtils";
-import { fetchStrapiData } from "~/utils/strapiData.server.ts";
 import type {
   AbsatzWithParagraph,
   BasePrinzip,
   PrinzipAspekt,
+  PrinzipListItem,
   PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions.ts";
-import type { Route } from "../../../.react-router/types/app/routes/+types/beispiele.prinzipien.$prinzip.ts";
-import type { PrinzipListItem, PrinzipListQueryReturnType } from "./query";
-import { PRINZIP_ASPEKTE_QUERY, PRINZIP_LIST_QUERY } from "./query";
+
+// data fetching moved to @/src/pages/methoden/fuenf-prinzipien/[prinzip].astro
 
 function AspectHeader({
   children,
@@ -71,36 +68,6 @@ function Formulierungsbeispiel({
   );
 }
 
-export async function loader({ params }: Route.LoaderArgs) {
-  const prinzipData = await fetchStrapiData<{
-    prinzips: PrinzipWithAspekteAndExample[];
-  }>(PRINZIP_ASPEKTE_QUERY, {
-    URLBezeichnung: params.prinzip,
-  });
-
-  if ("error" in prinzipData) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(prinzipData.error, { status: 400 });
-  }
-
-  const prinzipListData =
-    await fetchStrapiData<PrinzipListQueryReturnType>(PRINZIP_LIST_QUERY);
-  if ("error" in prinzipListData) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(prinzipListData.error, { status: 400 });
-  }
-
-  if (prinzipData.prinzips.length === 0) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response("Not found", { status: 404 });
-  }
-
-  return {
-    prinzip: prinzipData.prinzips[0],
-    prinzipList: prinzipListData.prinzips,
-  };
-}
-
 function ItalicModifier({ node }: Readonly<{ node: Node }>) {
   if (node.bold) return <strong className={"italic"}>{node.text}</strong>;
   return <i>{node.text}</i>;
@@ -138,12 +105,11 @@ function Textbeispiel({
           underline: PrincipleHightlightNullModifier,
         }}
       />
-      <Link
-        className="text-link"
-        to={`${beispiele_prinzipien.path}/${prinzip.URLBezeichnung}#${absatzIdTag(beispiel.documentId)}`}
+      <a
+        href={`${beispiele_prinzipien.path}/${prinzip.URLBezeichnung}#${absatzIdTag(beispiel.documentId)}`}
       >
         {methodsFivePrinciples.exampleLinkText}
-      </Link>
+      </a>
     </div>
   );
 }
@@ -235,18 +201,18 @@ function PrincipleNavigation({
           Prinzipien-Übersicht
         </h2>
         {principles.map((principle) => (
-          <Link
+          <a
             key={principle.order}
-            to={`${methoden_fuenfPrinzipien.path}/${principle.URLBezeichnung}`}
+            href={`${methoden_fuenfPrinzipien.path}/${principle.URLBezeichnung}`}
             className={twJoin(
-              "block",
+              "link-unstyled block",
               principle.order === current.order
                 ? "ds-body-01-reg"
                 : "ds-link-01-reg",
             )}
           >
             Prinzip {principle.order}: {principle.Name}
-          </Link>
+          </a>
         ))}
       </nav>
 
@@ -254,8 +220,7 @@ function PrincipleNavigation({
         {prev ? (
           <LinkButton
             look="link"
-            to={methoden_fuenfPrinzipien.path + "/" + prev.URLBezeichnung}
-            className="ds-link-01-bold"
+            href={methoden_fuenfPrinzipien.path + "/" + prev.URLBezeichnung}
           >
             Zurück zu Prinzip {prev.order}
           </LinkButton>
@@ -265,7 +230,7 @@ function PrincipleNavigation({
         {next ? (
           <LinkButton
             look="tertiary"
-            to={methoden_fuenfPrinzipien.path + "/" + next.URLBezeichnung}
+            href={methoden_fuenfPrinzipien.path + "/" + next.URLBezeichnung}
             className="flex justify-center"
           >
             Zum nächsten Prinzip
@@ -287,7 +252,6 @@ export function Prinzip({
 }>) {
   return (
     <>
-      <MetaTitle prefix={`Prinzip: ${prinzip.Name}`} />
       <main>
         <div className="breakout-grid-toc">
           <BreakoutHero
@@ -335,9 +299,4 @@ export function Prinzip({
       </main>
     </>
   );
-}
-
-export default function Route() {
-  const { prinzip, prinzipList } = useLoaderData<typeof loader>();
-  return <Prinzip prinzip={prinzip} prinzipList={prinzipList} />;
 }

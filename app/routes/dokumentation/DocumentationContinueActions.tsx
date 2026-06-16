@@ -2,7 +2,6 @@ import {
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
 } from "@/config/routes";
-import { useNavigate } from "react-router";
 import Button, { DownloadButton, LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Dialog from "~/components/Dialog.tsx";
@@ -23,7 +22,6 @@ function StartOverDialog({
   deleteDocumentationData: () => void;
   prinzips: PrinzipWithAspekte[];
 }>) {
-  const navigate = useNavigate();
   const { downloadDocumentation } = useWordDocumentation();
 
   const downloadDraft = async () => {
@@ -47,9 +45,9 @@ function StartOverDialog({
         <div className="flex flex-row gap-12">
           <Button
             type="button"
-            onClick={async () => {
+            onClick={() => {
               deleteDocumentationData();
-              await navigate(dokumentation_hinweise.path);
+              globalThis.location.href = dokumentation_hinweise.path;
             }}
           >
             {start.startOverDialog.actions.confirm}
@@ -84,7 +82,7 @@ export function DocumentationContinueActions({
       {hasSavedDocumentation ? (
         <>
           <LinkButton
-            to={dokumentation_regelungsvorhabenTitel.path}
+            href={dokumentation_regelungsvorhabenTitel.path}
             className="js-only"
           >
             {start.actions.resume.buttonText}
@@ -95,7 +93,7 @@ export function DocumentationContinueActions({
           />
         </>
       ) : (
-        <LinkButton to={dokumentation_hinweise.path} className="js-only">
+        <LinkButton href={dokumentation_hinweise.path} className="js-only">
           {start.actions.startInitial.buttonText}
         </LinkButton>
       )}

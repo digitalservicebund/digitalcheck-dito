@@ -1,4 +1,5 @@
-import { FormScope, useField, ValueOfInputType } from "@rvf/react";
+import type { FormScope, ValueOfInputType } from "@rvf/react";
+import { useField } from "@rvf/react";
 import { useId } from "react";
 import { interoperabilityRatingOptions } from "~/routes/dokumentation/interoperability/values.ts";
 

@@ -1,11 +1,5 @@
-import {
-  createContext,
-  ReactNode,
-  useCallback,
-  useContext,
-  useState,
-} from "react";
-import { useLocation } from "react-router";
+import type { ReactNode } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 
 export type HelpSection = { id: string; title: string; content: ReactNode };
 
@@ -32,7 +26,8 @@ export function useHelpPanel(): HelpPanelContextType {
 
 export function HelpPanelProvider({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+  currentPath,
+}: Readonly<{ children: React.ReactNode; currentPath: string }>) {
   const [isOpen, setIsOpen] = useState(false);
   const [staticSections, setStaticSections] = useState<{
     pathname: string;
@@ -40,11 +35,10 @@ export function HelpPanelProvider({
   }>({ pathname: "", sections: [] });
   const [dynamicSections, setDynamicSections] = useState<HelpSection[]>([]);
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const { pathname } = useLocation();
-  const [dynamicPathname, setDynamicPathname] = useState(pathname);
+  const [dynamicPathname, setDynamicPathname] = useState(currentPath);
 
-  if (dynamicPathname !== pathname) {
-    setDynamicPathname(pathname);
+  if (dynamicPathname !== currentPath) {
+    setDynamicPathname(currentPath);
     setDynamicSections([]);
   }
 
@@ -60,9 +54,9 @@ export function HelpPanelProvider({
 
   const setHelpSections = useCallback(
     (newSections: HelpSection[]) => {
-      setStaticSections({ pathname, sections: newSections });
+      setStaticSections({ pathname: currentPath, sections: newSections });
     },
-    [pathname],
+    [currentPath],
   );
 
   const registerSection = useCallback((section: HelpSection) => {
@@ -82,7 +76,7 @@ export function HelpPanelProvider({
       value={{
         isOpen,
         sections: [
-          ...(staticSections.pathname === pathname
+          ...(staticSections.pathname === currentPath
             ? staticSections.sections
             : []),
           ...dynamicSections,

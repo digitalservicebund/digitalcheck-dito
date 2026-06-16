@@ -1,0 +1,20 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { BewertungTechnischPage } from "~/routes/dokumentation._documentationNavigation.bewertung-technisch";
+import { fetchPrinzipsWithExamples } from "~/utils/strapiData.server";
+
+export const frontmatter = {
+  title: "Technische Interoperabilität",
+  sitemap: false,
+};
+
+const prinzips = await fetchPrinzipsWithExamples();
+---
+
+<Layout title={`Dokumentation: ${frontmatter.title}`} showProgressBar>
+  <BewertungTechnischPage
+    client:load
+    prinzips={prinzips}
+    currentUrl={Astro.url.pathname}
+  />
+</Layout>

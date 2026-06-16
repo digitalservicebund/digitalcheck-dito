@@ -19,9 +19,9 @@ const mobileHeight = 3200;
 const config: PlaywrightTestConfig = {
   ...configDefault,
   webServer: {
-    // We're testing the built code, but set the NODE_ENV to enable mocks
-    command: "npm run build && NODE_ENV=development PORT=5174 npm run start",
+    command: "pnpm build && pnpm preview --port 5174",
     port: 5174,
+    cwd: path.resolve(__dirname, ".."),
   },
   projects: [
     {

@@ -1,9 +1,9 @@
 import { SaveAltOutlined as SaveAltOutlinedIcon } from "@digitalservicebund/icons";
-import React, { cloneElement, type ReactElement } from "react";
-import { Link, LinkProps } from "react-router";
+import type React from "react";
+import type { ReactElement } from "react";
+import { cloneElement } from "react";
 import { twJoin } from "tailwind-merge";
 import { getDownloadableExtensionName } from "~/utils/fileExtensionUtils";
-import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
 import twMerge from "~/utils/tailwindMerge";
 
 export type ButtonBaseProps = {
@@ -11,7 +11,6 @@ export type ButtonBaseProps = {
   iconLeft?: ReactElementWithClassname;
   iconRight?: ReactElementWithClassname;
   look?: "primary" | "secondary" | "tertiary" | "ghost" | "link";
-  plausibleEventName?: string;
   size?: "large" | "medium" | "small";
 };
 
@@ -24,7 +23,8 @@ export type ButtonProps = React.ComponentPropsWithoutRef<"button"> &
   ExplicitButtonType &
   ButtonBaseProps;
 
-export type LinkButtonProps = LinkProps & ButtonBaseProps;
+export type LinkButtonProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
+  ButtonBaseProps;
 
 type ReactElementWithClassname = ReactElement<{ className: string }>;
 
@@ -75,7 +75,6 @@ function Button({
   fullWidth,
   look,
   size,
-  plausibleEventName,
   className,
   ...props
 }: ButtonProps) {
@@ -88,15 +87,8 @@ function Button({
     className,
   });
 
-  const plausibleEventClass = getPlausibleEventClassName(plausibleEventName);
-
   return (
-    <button
-      {...props}
-      id={id}
-      data-testid={id}
-      className={twJoin(buttonClasses, plausibleEventClass)}
-    >
+    <button {...props} id={id} data-testid={id} className={buttonClasses}>
       {formatIcon(iconLeft)}
       <span className="ds-button-label">{children}</span>
       {formatIcon(iconRight)}
@@ -107,7 +99,7 @@ function Button({
 export default Button;
 
 /**
- * A react-router <Link> that looks like a button.
+ * An anchor that looks like a button.
  */
 export function LinkButton({
   children,
@@ -117,7 +109,6 @@ export function LinkButton({
   fullWidth,
   look,
   size,
-  plausibleEventName,
   className,
   ...props
 }: Readonly<LinkButtonProps>) {
@@ -133,8 +124,6 @@ export function LinkButton({
   iconLeft = formatIcon(iconLeft);
   iconRight = formatIcon(iconRight);
 
-  const plausibleEventClass = getPlausibleEventClassName(plausibleEventName);
-
   // for links that have role="button" we need to add an event handler so that it can
   // be activated with the space bar
   // see: https://github.com/alphagov/govuk_elements/pull/272#issuecomment-233028270
@@ -146,16 +135,16 @@ export function LinkButton({
   };
 
   return (
-    <Link
-      {...props}
+    <a
+      href={props.href}
       id={id}
       data-testid={id}
-      className={twJoin(buttonClasses, plausibleEventClass)}
+      className={twJoin("link-unstyled", buttonClasses)}
       onKeyDown={onKeyDown}
       {...props}
     >
       {iconLeft} <span className="ds-button-label">{children}</span> {iconRight}
-    </Link>
+    </a>
   );
 }
 
@@ -183,8 +172,8 @@ export function DownloadLinkButton({
   ...props
 }: Readonly<Omit<LinkButtonProps, "iconLeft"> & { omitIcon?: boolean }>) {
   const extension =
-    typeof props.to === "string"
-      ? getDownloadableExtensionName(props.to)
+    typeof props.href === "string"
+      ? getDownloadableExtensionName(props.href)
       : null;
 
   const iconLeft = omitIcon ? undefined : (
@@ -194,7 +183,6 @@ export function DownloadLinkButton({
     <LinkButton
       iconLeft={iconLeft}
       download
-      reloadDocument
       title={extension ? `${extension}-Datei` : undefined}
       {...props}
     />

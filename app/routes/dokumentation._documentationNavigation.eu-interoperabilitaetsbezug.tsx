@@ -1,22 +1,20 @@
-import {
-  dokumentation_verbindlicheAnforderungen,
-  interoperabel,
-} from "@/config/routes.ts";
+import { interoperabel } from "@/config/routes.ts";
 import { useId } from "react";
-import { useOutletContext } from "react-router";
 import Heading from "~/components/Heading";
 import HelpButton from "~/components/HelpButton.tsx";
-import MetaTitle from "~/components/Meta";
-import NewTabLink from "~/components/NewTabLink.tsx";
 import RadioGroup from "~/components/RadioGroup.tsx";
 import RichText from "~/components/RichText.tsx";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
-import { euInteroperabilityOutcomeSchema } from "~/routes/dokumentation/documentationDataSchema.ts";
+import {
+  euInteroperabilityOutcomeSchema,
+  type EuInteroperabilityOutcome,
+} from "~/routes/dokumentation/documentationDataSchema.ts";
 import { IEAContactBanner } from "~/routes/dokumentation/interoperability/IEAContactBanner.tsx";
 import { markdownLinkIEA } from "~/routes/dokumentation/interoperability/markdownLinkIEA.tsx";
-import { NavigationContext } from "./dokumentation._documentationNavigation";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import DocumentationActions from "./dokumentation/DocumentationActions";
+import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
 const helpText = `
 **Was bedeutet das?**
@@ -28,8 +26,6 @@ eine Interoperabilitätsbewertung durchgeführt werden.`;
 
 const secondaryHelpText = `
 Sollte sich nach den Bestimmungen der Verordnung dennoch keine Verpflichtung zu einer Bewertung ergeben und Sie möchten auch keine frewillige Bewertung durchführen, wählen Sie die Option "Nein, es ist kein Bezug vorhanden".`;
-
-import { type EuInteroperabilityOutcome } from "~/routes/dokumentation/documentationDataSchema.ts";
 
 const defaultValues: EuInteroperabilityOutcome = {
   outcomeId: "NOT_REQUIRED_INDICATES_PRECHECK",
@@ -46,8 +42,8 @@ const options = [
   },
 ] as const;
 
-export default function DocumentationEuInteroperabilityRequirements() {
-  const { previousUrl, nextUrl } = useOutletContext<NavigationContext>();
+export function DocumentationEuInteroperabilityRequirements() {
+  const { previousUrl, nextUrl } = useDocumentationNavigation();
   const labelId = useId();
   const { documentationData, setEuInteroperabilityOutcome } =
     useDocumentationDataService();
@@ -56,59 +52,80 @@ export default function DocumentationEuInteroperabilityRequirements() {
     schema: euInteroperabilityOutcomeSchema,
     defaultValues,
     storedData: documentationData.euInteroperabilityOutcome,
-    setDataCallback: (data) => setEuInteroperabilityOutcome(data ?? undefined),
+    setDataCallback: (data) => {
+      setEuInteroperabilityOutcome(data ?? undefined);
+    },
   });
 
   return (
-    <>
-      <MetaTitle
-        prefix={`Dokumentation: ${dokumentation_verbindlicheAnforderungen.title}`}
+    <div className="space-y-40">
+      <Heading
+        text="Bezug zu EU-Interoperabilität"
+        tagName="h1"
+        look="ds-heading-02-reg"
+        className="mb-16"
       />
-      <div className="space-y-40">
-        <Heading
-          text="Bezug zu EU-Interoperabilität"
-          tagName="h1"
-          look="ds-heading-02-reg"
-          className="mb-16"
-        />
-        <form {...form.getFormProps()} className="space-y-20">
-          <div>
-            <p className="inline" id={labelId}>
-              Ergab die Vorprüfung Bezug zu EU-Interoperabilität?
-            </p>
-            <HelpButton
-              sectionId="bezug-interoperabilität"
-              title={"Bezug zu EU-Interoperabilität"}
+      <form {...form.getFormProps()} className="space-y-20">
+        <div>
+          <p className="inline" id={labelId}>
+            Ergab die Vorprüfung Bezug zu EU-Interoperabilität?
+          </p>
+          <HelpButton
+            sectionId="bezug-interoperabilität"
+            title={"Bezug zu EU-Interoperabilität"}
+          >
+            <RichText markdown={helpText} />
+            <a
+              href={
+                interoperabel.path +
+                "?tab=hintergrund#verbindliche-anforderungen"
+              }
+              target="_blank"
+              rel="noreferrer"
+              className="underline"
             >
-              <RichText markdown={helpText} />
-              <NewTabLink
-                to={
-                  interoperabel.path +
-                  "?tab=hintergrund#verbindliche-anforderungen"
-                }
-              >
-                Wann ist eine Interoperabilitäts-Bewertung verpflichtend?
-              </NewTabLink>
-              <RichText markdown={secondaryHelpText} className="mt-8" />
-            </HelpButton>
-          </div>
+              Wann ist eine Interoperabilitäts-Bewertung verpflichtend?
+            </a>
+            <RichText markdown={secondaryHelpText} className="mt-8" />
+          </HelpButton>
+        </div>
 
-          <RadioGroup
-            scope={form.scope("outcomeId")}
-            options={options}
-            aria-labelledby={labelId}
-          />
-        </form>
-
-        <DocumentationActions
-          previousUrl={previousUrl}
-          nextUrl={nextUrl}
-          showDownloadDraftButton
-          showSavingTip
+        <RadioGroup
+          scope={form.scope("outcomeId")}
+          options={options}
+          aria-labelledby={labelId}
         />
+      </form>
 
-        <IEAContactBanner />
-      </div>
-    </>
+      <DocumentationActions
+        previousUrl={previousUrl}
+        nextUrl={nextUrl}
+        showDownloadDraftButton
+        showSavingTip
+      />
+
+      <IEAContactBanner />
+    </div>
+  );
+}
+
+export default function Route() {
+  return <DocumentationEuInteroperabilityRequirements />;
+}
+
+// Astro page export
+import { DocumentationPageShell } from "@/components/DocumentationPageShell";
+
+export function EuInteroperabilitaetsbezugPage({
+  prinzips,
+  currentUrl,
+}: Readonly<{
+  prinzips: PrinzipWithAspekteAndExample[];
+  currentUrl: string;
+}>) {
+  return (
+    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
+      <DocumentationEuInteroperabilityRequirements />
+    </DocumentationPageShell>
   );
 }

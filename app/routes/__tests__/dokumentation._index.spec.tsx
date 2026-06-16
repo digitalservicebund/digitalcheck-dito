@@ -7,7 +7,6 @@ import { dokumentation_hinweise } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import type React from "react";
-import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { DokumentationIndexPage } from "~/routes/dokumentation._index";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
@@ -23,18 +22,10 @@ vi.mock("~/service/wordDocumentationExport/wordDocumentation", () => ({
   })),
 }));
 
-vi.mock("~/contexts/FeatureFlagContext", () => {
-  return {
-    useFeatureFlag: vi.fn(),
-  };
-});
-
 describe("Dokumentation Index Route - Integration Tests", () => {
   const renderWithRouter = (component: React.ReactElement) => {
     return render(
-      <MemoryRouter>
-        <DocumentationDataProvider>{component}</DocumentationDataProvider>
-      </MemoryRouter>,
+      <DocumentationDataProvider>{component}</DocumentationDataProvider>,
     );
   };
 

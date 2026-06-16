@@ -10,7 +10,6 @@ import {
 } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
 import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
 import type {
@@ -66,23 +65,15 @@ function createDocumentationDataMock({
 describe("DocumentationSummary", () => {
   const renderWithRouter = () => {
     return render(
-      <MemoryRouter>
-        <DocumentationDataProvider>
-          <DocumentationSummary />
-        </DocumentationDataProvider>
-      </MemoryRouter>,
+      <DocumentationDataProvider>
+        <DocumentationSummary />
+      </DocumentationDataProvider>,
     );
   };
 
   const mockDocumentationData: DocumentationData<V2> = {
     version: "2",
-    policyTitle: {
-      title: "Titel des Vorhabens",
-      organization: "",
-      publicationStatus: "",
-      publicationDate: "",
-      publicationLink: "",
-    },
+    policyTitle: { title: "Titel des Vorhabens" },
     participation: {
       formats: "Format 1",
       results: "Auswirkung auf die Regelung",
@@ -447,18 +438,7 @@ describe("DocumentationSummary", () => {
 
   test.each([
     [dokumentation_regelungsvorhabenTitel.path, { policyTitle: undefined }],
-    [
-      dokumentation_regelungsvorhabenTitel.path,
-      {
-        policyTitle: {
-          title: "",
-          publicationStatus: "",
-          organization: "",
-          publicationDate: "",
-          publicationLink: "",
-        } satisfies PolicyTitle,
-      },
-    ],
+    [dokumentation_regelungsvorhabenTitel.path, { policyTitle: { title: "" } }],
     [dokumentation_beteiligungsformate.path, { participation: undefined }],
     [
       dokumentation_beteiligungsformate.path,

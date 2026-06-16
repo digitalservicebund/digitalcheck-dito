@@ -1,14 +1,19 @@
 import {
   interoperabel,
+  vorpruefung,
   vorpruefung_ergebnis,
   vorpruefung_hinweise,
 } from "@/config/routes";
-import { preCheckQuestions } from "~/resources/content/shared/pre-check-questions";
+import { withBase } from "@/utils/path";
 import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
-import { assetPath } from "~/utils/assetPath";
 import type { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
+
+// Question pages are rendered by the dynamic route src/pages/vorpruefung/[questionId].astro,
+// so their paths are derived from the question ids instead of generated route objects.
+const questionPath = (questionId: string) =>
+  `${vorpruefung.path}/${questionId}`;
 
 export const preCheck = {
   preCheckName: "Vorprüfung",
@@ -47,7 +52,7 @@ export const preCheck = {
       process: {
         heading: "So gehen Sie vor:",
         image: {
-          url: assetPath(
+          url: withBase(
             "/images/prozess-vorpruefung-mit-interoperabilitaet.jpg",
           ),
           caption:
@@ -61,11 +66,23 @@ export const preCheck = {
           text: "Warum ist die Vorprüfung relevant für mein Vorhaben?",
         },
         content: dedent`
-          <ul class="space-y-24">
-            <li><strong>Digitalisierungsbezug frühzeitig erkennen:</strong> Setzen Sie sich frühzeitig mit Chancen der Digitalisierung auseinander, um den Regelungstext so zu gestalten, dass er die praxisnahe Umsetzung ermöglicht.</li>
-            <li><strong>EU-Anforderungen identifizieren:</strong> Im Rahmen der Vorprüfung ermitteln Sie, ob grenzüberschreitende Interoperabilität für Ihr Vorhaben relevant ist. Regelungen, die Interoperabilität fördern, ermöglichen technische Standardisierung, rechtliche Harmonisierung und digitale bürgerzentrierte Dienste innerhalb der EU.</li>
-            <li><strong>Rechtliche Grundlage:</strong> Seit Juni 2024 ist es verpflichtend Regelungsvorhaben auf Bundesebene auf Digitaltauglichkeit zu prüfen. Die Grundlage dafür ist das Onlinezugangsgesetz (OZG) von 2017. Zusätzlich müssen ab Januar 2025 bestimmte Regelungsvorhaben die Anforderungen an Interoperabilität auf EU-Ebene unterstützen. Dies ergibt sich aus der <a href="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903" class="ds-link-01-bold" target="blank">EU-Verordnung für ein interoperable Europa (EU) 2024/903</a>.</li>
-          </ul>
+          - **Digitalisierungsbezug frühzeitig erkennen:** Setzen Sie sich
+            frühzeitig mit Chancen der Digitalisierung auseinander, um den
+            Regelungstext so zu gestalten, dass er die praxisnahe Umsetzung
+            ermöglicht.
+          - **EU-Anforderungen identifizieren:** Im Rahmen der Vorprüfung
+            ermitteln Sie, ob grenzüberschreitende Interoperabilität für Ihr
+            Vorhaben relevant ist. Regelungen, die Interoperabilität fördern,
+            ermöglichen technische Standardisierung, rechtliche Harmonisierung und
+            digitale bürgerzentrierte Dienste innerhalb der EU.
+          - **Rechtliche Grundlage:** Seit Juni 2024 ist es verpflichtend,
+            Regelungsvorhaben auf Bundesebene auf Digitaltauglichkeit zu prüfen.
+            Der Normenkontrollrat prüft die Durchführung auf Grundlage von [§ 4
+            Abs. 3 NKRG](https://www.gesetze-im-internet.de/nkrg/__4.html).
+            Zusätzlich müssen ab Januar 2025 bestimmte Regelungsvorhaben die
+            Anforderungen an Interoperabilität auf EU-Ebene unterstützen. Dies
+            ergibt sich aus der [EU-Verordnung für ein interoperables Europa (EU)
+            2024/903](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903).
           `,
       },
     },
@@ -79,7 +96,7 @@ export const preCheck = {
         <p class="mt-24">Wenn ein Vorhaben die EU-Anforderungen für Interoperabilität erfüllen muss, hat es automatisch auch einen Digitalbezug.</p>
       `,
       image: {
-        src: assetPath("/images/digital-readiness-meets-interop.svg"),
+        src: withBase("/images/digital-readiness-meets-interop.svg"),
         alt: "Illustration von Datenaustausch zwischen zwei Computer-Systemen mit EU-Flagge, symbolisiert europäische digitale Zusammenarbeit.",
       },
       action: {
@@ -111,7 +128,6 @@ export const preCheck = {
     title: "Häufige Fragen",
     items: [
       {
-        plausibleEventName: "Content.FAQs.FAQ1",
         headline: "Was ist Interoperabilität im EU-Kontext?",
         content: dedent`
           Interoperabilität bedeutet, dass Verwaltungen und öffentliche Einrichtungen in der EU zusammenarbeiten und Informationen austauschen können. So können digitale Dienstleistungen, wie z. B. das Beantragen von Dokumenten oder der Austausch von Gesundheitsdaten, über Länder- und Organisationsgrenzen hinweg einfach bereitgestellt werden.
@@ -120,13 +136,11 @@ export const preCheck = {
         `,
       },
       {
-        plausibleEventName: "Content.FAQs.FAQ2",
         headline: "Was bedeutet Interoperabilität in meinem Vorhaben?",
         content:
           "Wenn Gesetze und Regelungen die Interoperabilität berücksichtigen, fördern sie die Zusammenarbeit zwischen den EU-Mitgliedsstaaten und ihren Verwaltungen. Einheitliche Standards sorgen dafür, dass digitale Dienste bürgerfreundlich, effizient und sicher sind. Gleichzeitig werden einheitliche Regeln geschaffen, die die grenzüberschreitende Zusammenarbeit in der EU erleichtern und eine harmonische Entwicklung der Rechtsvorschriften fördern.",
       },
       {
-        plausibleEventName: "Content.FAQs.FAQ3",
         headline:
           "Welche Rolle spielt der Digitalcheck bei interoperablen Regelungsvorhaben?",
         content: dedent`
@@ -136,7 +150,6 @@ export const preCheck = {
         `,
       },
       {
-        plausibleEventName: "Content.FAQs.FAQ4",
         headline: "Was ist Digitalbezug?",
         content: dedent`
           Digitalbezug im Kontext der Umsetzung bedeutet, dass ein Prozess zumindest teilweise durch ein IT-System abgebildet wird. Beispiele sind:
@@ -146,7 +159,6 @@ export const preCheck = {
         `,
       },
       {
-        plausibleEventName: "Content.FAQs.FAQ5",
         headline: "Warum digitaltaugliche Regelungen schreiben?",
         content: dedent`
           <p><strong>Digitaltaugliche Regelungen sparen Ressourcen</strong></p>
@@ -157,13 +169,11 @@ export const preCheck = {
         `,
       },
       {
-        plausibleEventName: "Content.FAQs.FAQ6",
         headline: "Was ist, wenn ich mehrere Regelungen habe?",
         content:
           "Füllen Sie eine gemeinsame Vorprüfung für alle inhaltlich zusammenhängenden Regelungen eines Vorhabens aus. So viele wie nötig, so wenige wie möglich.",
       },
       {
-        plausibleEventName: "Content.FAQs.FAQ7",
         headline: "Kann ich das PDF für die Vorprüfung weiterhin verwenden?",
         content:
           "Sie können weiterhin das PDF-Dokument zur Vorprüfung verwenden, um den digitalen Aspekt Ihres Vorhabens zu bewerten. Bitte beachten Sie jedoch, dass die PDF-Version nicht geeignet ist, um Anforderungen zur Interoperabilität zu identifizieren.",
@@ -202,13 +212,14 @@ export const preCheck = {
         
         Bitte überprüfen Sie ihre Angaben.
 
-        [Frage 3 zum Datenaustausch überprüfen](${preCheckQuestions.datenaustausch.path})
+        [Frage 3 zum Datenaustausch überprüfen](${questionPath("datenaustausch")})
       `,
     },
   },
   questions: [
     {
-      ...preCheckQuestions.itSystem,
+      id: "it-system",
+      title: "IT-System",
       question:
         "Muss durch die Regelung ein IT-System angepasst oder neu entwickelt werden?",
       positiveResult: "einer Anpassung oder Neuentwicklung einer IT-Lösung.",
@@ -224,7 +235,8 @@ export const preCheck = {
       },
     },
     {
-      ...preCheckQuestions.verpflichtungenFuerBeteiligte,
+      id: "verpflichtungen-fuer-beteiligte",
+      title: "Verpflichtungen für Beteiligte",
       question:
         "Entstehen durch die Regelung Mitwirkungspflichten für Akteurinnen und Akteure?",
       positiveResult:
@@ -248,7 +260,8 @@ export const preCheck = {
       },
     },
     {
-      ...preCheckQuestions.datenaustausch,
+      id: "datenaustausch",
+      title: "Datenaustausch",
       question:
         "Soll ein Datenaustausch stattfinden bspw. weil durch die Regelung Daten erhoben werden, die der Verwaltung bereits vorliegen?",
       positiveResult: "einem Austausch von Daten.",
@@ -260,7 +273,8 @@ export const preCheck = {
       },
     },
     {
-      ...preCheckQuestions.kommunikation,
+      id: "kommunikation",
+      title: "Digitale Kommunikation",
       question:
         "Führt die Regelung zu einer Interaktion zwischen Behörden und Bürgerinnen und Bürger bzw. Unternehmen?",
       positiveResult:
@@ -270,7 +284,8 @@ export const preCheck = {
       text: "**Praxisbeispiel**: Ein Antrag für Steuerentlastung muss gestellt und abgeschickt werden — dies kann digital, ohne händische Unterschrift oder analoge Nachweise geschehen. Es können z.B. Unternehmen, Bürgerinnen und Bürger oder Organisationen den Antrag einreichen.",
     },
     {
-      ...preCheckQuestions.automatisierung,
+      id: "automatisierung",
+      title: "Automatisierung",
       question:
         "Kann die Umsetzung der Regelung verbessert werden, indem man Schritte automatisiert?",
       positiveResult:
@@ -280,7 +295,8 @@ export const preCheck = {
       text: "**Praxisbeispiel**: Durch die automatisierte Auszahlung der Energiepreispauschale entfällt sowohl das Errechnen eines Leistungsanspruchs als auch die manuelle Antragstellung durch Leistungsberechtigte.",
     },
     {
-      ...preCheckQuestions.euBezug,
+      id: "eu-bezug",
+      title: "EU-Bezug",
       question:
         "Ist durch die Regelung vorgesehen, dass Daten und Informationen zwischen Verwaltungen von EU-Mitgliedsstaaten ausgetauscht werden?",
       positiveResult:
@@ -308,11 +324,14 @@ export const preCheck = {
   ].map((question, index, questions) => ({
     // generate list from the questions such that each list has a path, a previous link and a next link
     ...question,
+    path: questionPath(question.id),
     prevLink:
-      index === 0 ? vorpruefung_hinweise.path : questions[index - 1].path,
+      index === 0
+        ? vorpruefung_hinweise.path
+        : questionPath(questions[index - 1].id),
     nextLink:
       index === questions.length - 1
         ? vorpruefung_ergebnis.path
-        : questions[index + 1].path,
+        : questionPath(questions[index + 1].id),
   })) as TQuestion[],
 };

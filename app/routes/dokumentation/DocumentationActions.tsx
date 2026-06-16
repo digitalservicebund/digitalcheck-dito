@@ -3,7 +3,7 @@ import Button, { DownloadButton, LinkButton } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general";
-import { useDocumentationNavigation } from "~/routes/dokumentation/DocumentationNavigationContext.tsx";
+import type { DocumentationNavigationContextType } from "~/routes/dokumentation/DocumentationNavigationContext";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
 
 type SubmitType = {
@@ -20,28 +20,31 @@ type DocumentationActionsProps = {
   previousUrl?: string;
   showDownloadDraftButton?: boolean;
   showSavingTip?: boolean;
+  prinzips?: DocumentationNavigationContextType["prinzips"];
 } & (SubmitType | NextType);
 
 export default function DocumentationActions({
   submit,
+  previousUrl,
+  nextUrl,
   showDownloadDraftButton = false,
   showSavingTip = false,
+  prinzips,
 }: Readonly<DocumentationActionsProps>) {
   const { downloadDocumentation } = useWordDocumentation();
-  const { prinzips, previousUrl, nextUrl } = useDocumentationNavigation();
 
   return (
     <div className="mt-80 space-y-40">
       <ButtonContainer>
         {previousUrl && (
-          <LinkButton to={previousUrl} look="tertiary">
+          <LinkButton href={previousUrl} look="tertiary">
             {general.buttonBack.text}
           </LinkButton>
         )}
 
         {submit && <Button type="submit">{general.buttonNext.text}</Button>}
-        {!submit && nextUrl && (
-          <LinkButton to={nextUrl}>{general.buttonNext.text}</LinkButton>
+        {nextUrl && (
+          <LinkButton href={nextUrl}>{general.buttonNext.text}</LinkButton>
         )}
 
         {showDownloadDraftButton && prinzips && (

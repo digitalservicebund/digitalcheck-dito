@@ -7,10 +7,9 @@ import {
   WarningAmberOutlined,
 } from "@digitalservicebund/icons";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router";
 import { twJoin } from "tailwind-merge";
 
-import { vorpruefung, vorpruefung_ergebnis } from "@/config/routes";
+import { vorpruefung } from "@/config/routes";
 import { marked } from "marked";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
@@ -18,7 +17,6 @@ import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
 import InfoTooltip from "~/components/InfoTooltip";
 import InlineNotice from "~/components/InlineNotice";
-import MetaTitle from "~/components/Meta";
 import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import { preCheck } from "~/resources/content/vorpruefung";
@@ -89,7 +87,6 @@ function PrintTitle({ title }: Readonly<{ title: string }>) {
 export default function Result() {
   const [vorhabenTitle, setVorhabenTitle] = useState("");
   const { answers, firstUnansweredQuestionIndex, result } = usePreCheckData();
-  const navigate = useNavigate();
 
   const resultContent = getContentForResult(answers, result);
 
@@ -110,15 +107,14 @@ export default function Result() {
       firstUnansweredQuestionIndex !== null &&
       firstUnansweredQuestionIndex < preCheck.questions.length - 1
     ) {
-      void navigate(vorpruefung.path);
+      globalThis.location.href = vorpruefung.path;
     }
-  }, [navigate, firstUnansweredQuestionIndex]);
+  }, [firstUnansweredQuestionIndex]);
 
   const resultHint =
     result?.digital === ResultType.UNSURE ? preCheckResult.unsure.hint : "";
   return (
     <>
-      <MetaTitle prefix={vorpruefung_ergebnis.title} />
       <main>
         <div className="bg-blue-100 py-40 print:pb-0">
           <div className="px-16">
@@ -176,7 +172,6 @@ export default function Result() {
                 <DetailsSummary
                   data-testid="result-details"
                   title={preCheckResult.detailsTitle}
-                  className="plausible-event-name=Content.Result.Accordion+Result+Detail"
                 >
                   {resultContent.reasoningList
                     .filter(({ reasons }) => reasons.length > 0)
@@ -253,11 +248,7 @@ export default function Result() {
                     {"content" in item && (
                       <RichText markdown={item.content as string} />
                     )}
-                    {item.link && (
-                      <Link to={item.link.to} className="text-link">
-                        {item.link.text}
-                      </Link>
-                    )}
+                    {item.link && <a href={item.link.to}>{item.link.text}</a>}
                   </NumberedList.Item>
                 ))}
               </NumberedList>

@@ -1,3 +1,13 @@
+import {
+  dokumentation_beteiligungsformate,
+  dokumentation_bewertungOrganisatorisch,
+  dokumentation_bewertungRechtlich,
+  dokumentation_bewertungSemantisch,
+  dokumentation_bewertungTechnisch,
+  dokumentation_euInteroperabilitaetsbezug,
+  dokumentation_regelungsvorhabenTitel,
+  dokumentation_verbindlicheAnforderungen,
+} from "@/config/routes";
 import { z } from "zod";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import type { VersionedData } from "~/utils/localStorageVersioned";
@@ -8,24 +18,12 @@ export const DATA_SCHEMA_VERSION_V2 = "2";
 export type V1 = typeof DATA_SCHEMA_VERSION_V1;
 export type V2 = typeof DATA_SCHEMA_VERSION_V2;
 
-export type DataSchemaVersion =
-  | typeof DATA_SCHEMA_VERSION_V1
-  | typeof DATA_SCHEMA_VERSION_V2;
+export type DataSchemaVersion = V1 | V2;
 
 const { principlePages, participation, info } = digitalDocumentation;
 
-export const policyHeaderSchema = z.object({
+export const policyTitleSchema = z.object({
   title: z.string().min(1, { message: info.inputTitle.error }),
-  organization: z
-    .string()
-    .min(1, { message: "Bitte geben Sie eine Organisation ein." }),
-  publicationStatus: z
-    .enum(["published", "planned", ""])
-    .refine(Boolean, { message: "Bitte wählen Sie eine Option" }),
-  publicationDate: z
-    .string()
-    .min(1, { message: "Bitte machen Sie eine Datumsangabe." }),
-  publicationLink: z.string(),
 });
 
 export const participationSchema = z.object({
@@ -50,6 +48,13 @@ export const EU_INTEROPERABILITY_OUTCOME_IDS = [
 export const euInteroperabilityOutcomeSchema = z.object({
   outcomeId: z.enum(EU_INTEROPERABILITY_OUTCOME_IDS).optional(),
 });
+
+export const euInteroperabilityOutcomeNavigationSchema =
+  euInteroperabilityOutcomeSchema
+    .extend({
+      outcomeId: z.enum(EU_INTEROPERABILITY_OUTCOME_IDS),
+    })
+    .strict();
 
 export const principleAnswerOnlySchema = z.object({
   answer: z.enum(
@@ -106,69 +111,6 @@ export const principleSchemaV2 = principleAnswerSchemaV2.and(
     id: z.string(),
   }),
 );
-
-export const defaultTitleValues: PolicyTitle = {
-  title: "",
-  organization: "",
-  publicationStatus: "",
-  publicationDate: "",
-  publicationLink: "",
-};
-
-export const defaultParticipationValues: Participation = {
-  formats: "",
-  results: "",
-};
-
-export const defaultValues: DocumentationSchemaV2 = {
-  policyTitle: defaultTitleValues,
-  participation: defaultParticipationValues,
-  principles: [],
-};
-
-export const documentationSchemaV2 = z.object({
-  policyTitle: policyHeaderSchema.optional(),
-  participation: participationSchema.optional(),
-  euInteroperabilityOutcome: euInteroperabilityOutcomeSchema.optional(),
-  principles: z.array(principleSchemaV2).optional(),
-});
-
-export const euInteroperabilityOutcomeNavigationSchema =
-  euInteroperabilityOutcomeSchema
-    .extend({
-      outcomeId: z.enum(EU_INTEROPERABILITY_OUTCOME_IDS),
-    })
-    .strict();
-
-// V1 types are kept solely so migrateV1ToV2 (in DocumentationDataProvider) can
-// type its input. V1 data may still exist in users' localStorage from before
-// the simplifiedPrincipleFlow rollout.
-export type PrincipleReasoningV1 = {
-  aspect?: string;
-  checkbox?: "on" | true;
-  paragraphs?: string;
-  reason?: string;
-};
-
-type PrincipleV1 = {
-  id: string;
-  answer: (typeof principlePages.radioOptions)[number];
-  reasoning?: PrincipleReasoningV1[] | string;
-};
-
-type PrincipleV2 = z.infer<typeof principleSchemaV2>;
-
-export type Principle<V extends DataSchemaVersion = V2> = V extends V1
-  ? PrincipleV1
-  : PrincipleV2;
-
-export type PolicyTitle = z.infer<typeof policyHeaderSchema>;
-export type Participation = z.infer<typeof participationSchema>;
-export type EuInteroperabilityOutcome = z.infer<
-  typeof euInteroperabilityOutcomeSchema
->;
-
-type DocumentationSchemaV2 = z.infer<typeof documentationSchemaV2>;
 
 export const bindingRequirementsSchema = z.object({
   functions: z.array(z.string()),
@@ -232,10 +174,6 @@ export const interoperabilityAssessmentLevelNavigationSchema =
       }
     });
 
-export type InteroperabilityAssessmentLevel = z.infer<
-  typeof interoperabilityAssessmentLevelSchema
->;
-
 export const interoperabilityAssessmentSchema = z.object({
   legal: interoperabilityAssessmentLevelSchema,
   organizational: interoperabilityAssessmentLevelSchema,
@@ -243,10 +181,87 @@ export const interoperabilityAssessmentSchema = z.object({
   technical: interoperabilityAssessmentLevelSchema,
 });
 
+export const defaultTitleValues: PolicyTitle = {
+  title: "",
+};
+
+export const defaultParticipationValues: Participation = {
+  formats: "",
+  results: "",
+};
+
+export const defaultValues: DocumentationSchemaV2 = {
+  policyTitle: defaultTitleValues,
+  participation: defaultParticipationValues,
+  principles: [],
+};
+
+export const documentationSchemaV2 = z.object({
+  policyTitle: policyTitleSchema.optional(),
+  participation: participationSchema.optional(),
+  euInteroperabilityOutcome: euInteroperabilityOutcomeSchema.optional(),
+  bindingRequirements: bindingRequirementsSchema.optional(),
+  interoperabilityAssessment: interoperabilityAssessmentSchema.optional(),
+  principles: z.array(principleSchemaV2).optional(),
+});
+
+export const getDocumentationSchemaFormUrl = (url: string) => {
+  if (url === dokumentation_regelungsvorhabenTitel.path)
+    return policyTitleSchema;
+  if (url === dokumentation_beteiligungsformate.path)
+    return participationSchema;
+  if (url === dokumentation_euInteroperabilitaetsbezug.path)
+    return euInteroperabilityOutcomeNavigationSchema;
+  if (url === dokumentation_verbindlicheAnforderungen.path)
+    return bindingRequirementsNavigationSchema;
+  if (
+    url === dokumentation_bewertungRechtlich.path ||
+    url === dokumentation_bewertungOrganisatorisch.path ||
+    url === dokumentation_bewertungSemantisch.path ||
+    url === dokumentation_bewertungTechnisch.path
+  ) {
+    return interoperabilityAssessmentLevelNavigationSchema;
+  }
+
+  return principleSchemaV2;
+};
+
+// V1 types are kept solely so migrateV1ToV2 (in DocumentationDataProvider) can
+// type its input. V1 data may still exist in users' localStorage from before
+// the simplifiedPrincipleFlow rollout.
+export type PrincipleReasoningV1 = {
+  aspect?: string;
+  checkbox?: "on" | true;
+  paragraphs?: string;
+  reason?: string;
+};
+
+type PrincipleV1 = {
+  id: string;
+  answer: (typeof principlePages.radioOptions)[number];
+  reasoning?: PrincipleReasoningV1[] | string;
+};
+
+type PrincipleV2 = z.infer<typeof principleSchemaV2>;
+
+export type Principle<V extends DataSchemaVersion = V2> = V extends V1
+  ? PrincipleV1
+  : PrincipleV2;
+
+export type PolicyTitle = z.infer<typeof policyTitleSchema>;
+export type Participation = z.infer<typeof participationSchema>;
+export type EuInteroperabilityOutcome = z.infer<
+  typeof euInteroperabilityOutcomeSchema
+>;
 export type BindingRequirementsData = z.infer<typeof bindingRequirementsSchema>;
+export type InteroperabilityAssessmentLevel = z.infer<
+  typeof interoperabilityAssessmentLevelSchema
+>;
 export type InteroperabilityAssessmentData = z.infer<
   typeof interoperabilityAssessmentSchema
 >;
+
+type DocumentationSchemaV2 = z.infer<typeof documentationSchemaV2>;
 
 export type DocumentationData<V extends DataSchemaVersion = V2> = {
   policyTitle?: PolicyTitle;

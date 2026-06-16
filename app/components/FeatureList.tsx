@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import twMerge from "~/utils/tailwindMerge";
 
 export type FeatureListProps = {
@@ -13,7 +13,7 @@ export const FeatureList = ({
   return (
     <ul
       className={twMerge(
-        "list-unstyled grid auto-cols-fr gap-40 md:grid-flow-col md:gap-y-16",
+        "list-unstyled grid max-w-[848px] auto-cols-fr gap-40 md:grid-flow-col md:gap-y-16",
         className,
       )}
     >

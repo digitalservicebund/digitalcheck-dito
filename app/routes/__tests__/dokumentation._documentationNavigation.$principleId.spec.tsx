@@ -11,7 +11,6 @@ import "@testing-library/jest-dom";
 import { act, render, screen } from "@testing-library/react";
 import type { UserEvent } from "@testing-library/user-event";
 import userEvent from "@testing-library/user-event";
-import { createBrowserRouter, RouterProvider, useParams } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import type {
@@ -23,7 +22,7 @@ import type {
   PrinzipAspekt,
   PrinzipWithAspekteAndExample,
 } from "~/utils/strapiData.types";
-import DocumentationPrinciple from "../dokumentation._documentationNavigation.$principleId";
+import { DocumentationPrinciple } from "../dokumentation._documentationNavigation.$principleId";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import type {
   DocumentationData,
@@ -95,23 +94,14 @@ const prinzips: PrinzipWithAspekteAndExample[] = [
   },
 ];
 
-const mockedUseParams = vi.mocked(useParams);
-
 const renderWithRouter = () => {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: (
-        <HelpPanelProvider>
-          <DocumentationDataProvider>
-            <DocumentationPrinciple />
-          </DocumentationDataProvider>
-        </HelpPanelProvider>
-      ),
-    },
-  ]);
-
-  return render(<RouterProvider router={router} />);
+  return render(
+    <HelpPanelProvider currentPath="/dokumentation/prinzip-1-digitale-angebote">
+      <DocumentationDataProvider>
+        <DocumentationPrinciple principleId="prinzip-1-digitale-angebote" />
+      </DocumentationDataProvider>
+    </HelpPanelProvider>,
+  );
 };
 
 describe("DocumentationPrincipleV2", () => {
@@ -122,9 +112,6 @@ describe("DocumentationPrincipleV2", () => {
     mockNavigationContext.previousUrl = "/previous-url";
     mockNavigationContext.routes = routes;
     mockNavigationContext.prinzips = prinzips;
-    mockedUseParams.mockReturnValue({
-      principleId: "prinzip-1-digitale-angebote",
-    });
   });
 
   afterEach(() => {

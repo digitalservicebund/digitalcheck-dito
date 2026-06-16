@@ -1,7 +1,7 @@
 commit-msg:
   commands:
     lint-commit-msg:
-      run: npx --yes commitlint --edit
+      run: pnpm dlx commitlint --edit
 pre-commit:
   parallel: true
   commands:
@@ -19,7 +19,7 @@ pre-push:
   commands:
     lint:
       tags: lint
-      run: pnpm lint:check {push_files}
+      run: pnpm lint {push_files}
       glob: "*.{js,cjs,mjs,ts,jsx,tsx}"
     typecheck:
       tags: typecheck

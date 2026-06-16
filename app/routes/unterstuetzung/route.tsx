@@ -1,4 +1,4 @@
-import { unterstuetzung } from "@/config/routes";
+import { withBase } from "@/utils/path";
 import { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Container from "~/components/Container";
@@ -6,13 +6,10 @@ import Heading from "~/components/Heading";
 import Hero from "~/components/Hero";
 import Image from "~/components/Image";
 import InfoBox from "~/components/InfoBox";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { SearchParamTabs } from "~/components/Tabs/Tabs";
 import { support } from "~/resources/content/unterstuetzung";
-import { assetPath } from "~/utils/assetPath";
 import { dedent } from "~/utils/dedentMultilineStrings";
-import { useHydrationMarker } from "~/utils/useHydrationMarker";
 
 const {
   socialProof,
@@ -50,10 +47,8 @@ function SocialProofImage() {
 }
 
 export default function Index() {
-  useHydrationMarker();
   return (
     <>
-      <MetaTitle prefix={unterstuetzung.title} />
       <main>
         <Hero title={title} subtitle={subtitle} />
 
@@ -119,7 +114,7 @@ export default function Index() {
                 <RichText markdown={supportHow.text} />
               </InfoBox>
               <ButtonContainer>
-                <LinkButton look="tertiary" to={supportHow.link.to}>
+                <LinkButton look="tertiary" href={supportHow.link.to}>
                   {supportHow.link.text}
                 </LinkButton>
               </ButtonContainer>
@@ -231,7 +226,7 @@ export default function Index() {
               visual={{
                 type: "image",
                 image: {
-                  url: assetPath("/images/zfl-preview.png"),
+                  url: withBase("/images/zfl-preview.png"),
                   alternativeText:
                     "Screenshot der Website des Zentrum für Legistik",
                   size: "medium",
@@ -248,7 +243,7 @@ export default function Index() {
                 `}
               />
               <LinkButton
-                to="https://zfl.bund.de"
+                href="https://zfl.bund.de"
                 look="tertiary"
                 className="self-start"
                 target="_blank"

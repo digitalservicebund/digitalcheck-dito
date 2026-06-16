@@ -1,5 +1,4 @@
 import { render, screen, within } from "@testing-library/react";
-import { createRoutesStub } from "react-router";
 import { describe, expect, it } from "vitest";
 import Nav from "./Nav";
 
@@ -9,38 +8,30 @@ const renderNav = (
   withErrorElements = false,
   withDisabledElements = false,
 ) => {
-  // Stubbing the router is needed because Nav uses Links
-  const RouterStub = createRoutesStub([
-    {
-      path: "/",
-      Component: () => (
-        <Nav activeElementUrl={activeElementUrl} ariaLabel="Label Text">
-          <Nav.Items>
-            <Nav.Item url="/example1">Navigation Item 1</Nav.Item>
-            <Nav.Item url="/example2" disabled={withDisabledElements}>
-              Navigation Item 2
-            </Nav.Item>
-            <Nav.Item
-              subItems={
-                <Nav.Items>
-                  <Nav.Item url="/example3-1" completed={withCompletedElements}>
-                    Navigation SubItem 1
-                  </Nav.Item>
-                  <Nav.Item url="/example3-2" error={withErrorElements}>
-                    Navigation SubItem 2
-                  </Nav.Item>
-                </Nav.Items>
-              }
-            >
-              Navigation Item 3 with SubItems
-            </Nav.Item>
-          </Nav.Items>
-        </Nav>
-      ),
-    },
-  ]);
-
-  return render(<RouterStub />);
+  return render(
+    <Nav activeElementUrl={activeElementUrl} ariaLabel="Label Text">
+      <Nav.Items>
+        <Nav.Item url="/example1">Navigation Item 1</Nav.Item>
+        <Nav.Item url="/example2" disabled={withDisabledElements}>
+          Navigation Item 2
+        </Nav.Item>
+        <Nav.Item
+          subItems={
+            <Nav.Items>
+              <Nav.Item url="/example3-1" completed={withCompletedElements}>
+                Navigation SubItem 1
+              </Nav.Item>
+              <Nav.Item url="/example3-2" error={withErrorElements}>
+                Navigation SubItem 2
+              </Nav.Item>
+            </Nav.Items>
+          }
+        >
+          Navigation Item 3 with SubItems
+        </Nav.Item>
+      </Nav.Items>
+    </Nav>,
+  );
 };
 
 describe("Nav", () => {
@@ -165,53 +156,38 @@ describe("Nav", () => {
   });
 
   it("activeUrls highlights item for alias URL", () => {
-    const RouterStub = createRoutesStub([
-      {
-        path: "/",
-        Component: () => (
-          <Nav activeElementUrl="/p1/erlaeuterung" ariaLabel="Label Text">
-            <Nav.Items>
-              <Nav.Item url="/p1" activeUrls={["/p1", "/p1/erlaeuterung"]}>
-                Principle 1
-              </Nav.Item>
-            </Nav.Items>
-          </Nav>
-        ),
-      },
-    ]);
-    render(<RouterStub />);
+    render(
+      <Nav activeElementUrl="/p1/erlaeuterung" ariaLabel="Label Text">
+        <Nav.Items>
+          <Nav.Item url="/p1" activeUrls={["/p1", "/p1/erlaeuterung"]}>
+            Principle 1
+          </Nav.Item>
+        </Nav.Items>
+      </Nav>,
+    );
 
     const item = screen.getByText("Principle 1");
     expect(item).toHaveClass("ds-label-02-bold");
   });
 
   it("activeUrls opens parent disclosure for alias URL", () => {
-    const RouterStub = createRoutesStub([
-      {
-        path: "/",
-        Component: () => (
-          <Nav activeElementUrl="/p1/erlaeuterung" ariaLabel="Label Text">
-            <Nav.Items>
-              <Nav.Item
-                subItems={
-                  <Nav.Items>
-                    <Nav.Item
-                      url="/p1"
-                      activeUrls={["/p1", "/p1/erlaeuterung"]}
-                    >
-                      Principle 1
-                    </Nav.Item>
-                  </Nav.Items>
-                }
-              >
-                Principles
-              </Nav.Item>
-            </Nav.Items>
-          </Nav>
-        ),
-      },
-    ]);
-    render(<RouterStub />);
+    render(
+      <Nav activeElementUrl="/p1/erlaeuterung" ariaLabel="Label Text">
+        <Nav.Items>
+          <Nav.Item
+            subItems={
+              <Nav.Items>
+                <Nav.Item url="/p1" activeUrls={["/p1", "/p1/erlaeuterung"]}>
+                  Principle 1
+                </Nav.Item>
+              </Nav.Items>
+            }
+          >
+            Principles
+          </Nav.Item>
+        </Nav.Items>
+      </Nav>,
+    );
 
     expect(screen.getByRole("button", { name: "Principles" })).toHaveAttribute(
       "aria-expanded",

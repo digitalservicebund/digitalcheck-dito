@@ -1,0 +1,16 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { TitelPage } from "~/routes/dokumentation._documentationNavigation.regelungsvorhaben-titel";
+import { fetchPrinzipsWithExamples } from "~/utils/strapiData.server";
+
+export const frontmatter = {
+  title: "Regelungsvorhaben Titel",
+  sitemap: false,
+};
+
+const prinzips = await fetchPrinzipsWithExamples();
+---
+
+<Layout title={`Dokumentation: ${frontmatter.title}`} showProgressBar>
+  <TitelPage client:load prinzips={prinzips} currentUrl={Astro.url.pathname} />
+</Layout>

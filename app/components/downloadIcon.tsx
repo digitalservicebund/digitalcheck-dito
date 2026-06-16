@@ -5,7 +5,7 @@ export const downloadIconElement = (
   <FileDownloadOutlined
     height="1.5em"
     width="1.5em"
-    className="ml-2 fill-current"
+    className="ml-2 inline fill-current"
   />
 );
 

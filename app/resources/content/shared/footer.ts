@@ -1,3 +1,4 @@
+import { ROUTE_SUPPORT_TRAININGS } from "@/config/additionalRoutes";
 import {
   barrierefreiheit,
   beispiele_prinzipien,
@@ -17,7 +18,6 @@ import {
   vorpruefung,
   zahlenUndFakten,
 } from "@/config/routes";
-import { ROUTE_SUPPORT_TRAININGS } from "~/resources/staticRoutes";
 import { contact } from "./contact";
 
 export const footer = {

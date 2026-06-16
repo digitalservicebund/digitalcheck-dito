@@ -1,13 +1,10 @@
-import { dokumentation_beteiligungsformate } from "@/config/routes.ts";
 import { useState } from "react";
-import { useNavigate, useOutletContext } from "react-router";
 import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Heading from "~/components/Heading";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText.tsx";
 import { general } from "~/resources/content/shared/general.ts";
-import { NavigationContext } from "./dokumentation._documentationNavigation";
+import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
 const notes = `
 ## Datenspeicherung
@@ -24,17 +21,12 @@ b) Ihr SINA-Rechner die Daten löscht (falls das bei Ihnen voreingestellt ist)
 Zur externen Weiterbearbeitung, internen Abstimmung oder für Änderungen können Sie den aktuellen Stand Ihrer Angaben als Word-Dokument exportieren und lokal speichern. Die finale Datei können Sie zu jedem Zeitpunkt per E-Mail an den NKR versenden.
 `;
 
-export default function DocumentationParticipation() {
-  const { nextUrl, previousUrl } = useOutletContext<NavigationContext>();
-  const navigate = useNavigate();
-
+export function DocumentationHinweise() {
+  const { nextUrl, previousUrl } = useDocumentationNavigation();
   const [checked, setChecked] = useState<boolean>(false);
 
   return (
     <>
-      <MetaTitle
-        prefix={`Dokumentation: ${dokumentation_beteiligungsformate.title}`}
-      />
       <Heading
         text="Wichtige Hinweise"
         tagName="h1"
@@ -62,14 +54,36 @@ export default function DocumentationParticipation() {
           look={"primary"}
           disabled={!checked}
           type={"button"}
-          onClick={() => navigate(nextUrl)}
+          onClick={() => (globalThis.location.href = nextUrl)}
         >
           Verstanden und weiter
         </Button>
-        <LinkButton to={previousUrl} look="tertiary">
+        <LinkButton href={previousUrl} look="tertiary">
           {general.buttonBack.text}
         </LinkButton>
       </ButtonContainer>
     </>
+  );
+}
+
+export default function Route() {
+  return <DocumentationHinweise />;
+}
+
+// Astro page export
+import { DocumentationPageShell } from "@/components/DocumentationPageShell";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
+
+export function HinweisePage({
+  prinzips,
+  currentUrl,
+}: Readonly<{
+  prinzips: PrinzipWithAspekteAndExample[];
+  currentUrl: string;
+}>) {
+  return (
+    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
+      <DocumentationHinweise />
+    </DocumentationPageShell>
   );
 }

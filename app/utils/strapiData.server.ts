@@ -1,5 +1,4 @@
-import NodeCache from "node-cache";
-import crypto from "node:crypto";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
 const url =
   process.env.STRAPI_URL ??
@@ -88,6 +87,66 @@ query GetPrinzipsWithAspects {
   }
 }`;
 
+/**
+ * Selection set for a Prinzip's top-level `Beispiel` (Absatz) including the
+ * principle fulfilment annotations. Shared by every query that renders a
+ * principle's headline example.
+ */
+export const prinzipBeispielFields = `
+  documentId
+  Nummer
+  Text
+  Paragraph {
+    Nummer
+    Gesetz
+    Titel
+    Beispielvorhaben {
+      URLBezeichnung
+      Titel
+    }
+  }
+  PrinzipErfuellungen {
+    id
+    Erklaerung
+    Prinzip {
+      Nummer
+      Name
+    }
+  }
+`;
+
+/**
+ * Selection set for an Aspekt's `Beispiel` (Absatz). Same shape as
+ * `prinzipBeispielFields` minus the PrinzipErfuellungen.
+ */
+export const aspektBeispielFields = `
+  documentId
+  Nummer
+  Text
+  Paragraph {
+    Nummer
+    Gesetz
+    Titel
+    Beispielvorhaben {
+      URLBezeichnung
+      Titel
+    }
+  }
+`;
+
+/**
+ * Scalar fields of an Aspekt shared across the documentation and the
+ * fünf-Prinzipien method pages.
+ */
+export const aspektCommonFields = `
+  Titel
+  Kurzbezeichnung
+  Beschreibung
+  Text
+  Leitfragen
+  Formulierungsbeispiel
+`;
+
 export const GET_PRINZIPS_WITH_EXAMPLES_QUERY = `
 query GetPrinzips {
   prinzips(sort: "order") {
@@ -101,47 +160,12 @@ query GetPrinzips {
     Nummer
     URLBezeichnung
     Beispiel {
-      documentId
-      Nummer
-      Text
-      Paragraph {
-        Nummer
-        Gesetz
-        Titel
-        Beispielvorhaben {
-          URLBezeichnung
-          Titel
-        }
-      }
-      PrinzipErfuellungen {
-        id
-        Erklaerung
-        Prinzip {
-          Nummer
-          Name
-        }
-      }
+      ${prinzipBeispielFields}
     }
     Aspekte {
-      Titel
-      Kurzbezeichnung
-      Beschreibung
-      Text
-      Leitfragen
-      Formulierungsbeispiel
+      ${aspektCommonFields}
       Beispiel {
-        documentId
-        Nummer
-        Text
-        Paragraph {
-          Nummer
-          Gesetz
-          Titel
-          Beispielvorhaben {
-            URLBezeichnung
-            Titel
-          }
-        }
+        ${aspektBeispielFields}
       }
     }
   }
@@ -164,41 +188,10 @@ type GraphQLResponse<DataType> = {
   }[];
 };
 
-type errorResponse = {
-  error: string;
-};
-
-function generateCacheKey(query: string, variables?: object): string {
-  const variablesString = variables
-    ? JSON.stringify(
-        variables,
-        Object.keys(variables).sort((a, b) => a.localeCompare(b)),
-      )
-    : "";
-  const hash = crypto
-    .createHash("md5")
-    .update(query + variablesString)
-    .digest("hex");
-  return `cache:${hash}`;
-}
-
-const isDevelopment = process.env.NODE_ENV === "development";
-const options = isDevelopment
-  ? { stdTTL: 10 }
-  : { stdTTL: 300, checkperiod: 30 };
-const cache = new NodeCache(options);
-
 export async function fetchStrapiData<DataType>(
   query: string,
   variables?: object,
-): Promise<DataType | errorResponse> {
-  const cacheKey = generateCacheKey(query, variables);
-  const cachedData = cache.get<DataType>(cacheKey);
-
-  if (cachedData) {
-    return cachedData;
-  }
-
+): Promise<DataType> {
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -215,20 +208,36 @@ export async function fetchStrapiData<DataType>(
       response.statusText,
       errorDetails,
     );
-    return {
-      error: `Failed to fetch: ${response.status} ${response.statusText}`,
-    };
+    throw new Error(
+      `Failed to fetch Strapi data: ${response.status} ${response.statusText}`,
+    );
   }
 
   const responseData = (await response.json()) as GraphQLResponse<DataType>;
 
   if (responseData.errors) {
     console.error("GraphQL errors:", responseData.errors);
-    return {
-      error: responseData.errors[0].message,
-    };
+    throw new Error(
+      `Failed to fetch Strapi data: ${responseData.errors[0].message}`,
+    );
   }
-  cache.set(cacheKey, responseData.data);
-
   return responseData.data;
+}
+
+export async function fetchPrinzipsWithExamples(): Promise<
+  PrinzipWithAspekteAndExample[]
+> {
+  const result = await fetchStrapiData<{
+    prinzips: PrinzipWithAspekteAndExample[];
+  }>(GET_PRINZIPS_WITH_EXAMPLES_QUERY);
+  return result.prinzips;
+}
+
+export async function getPrincipleIdStaticPaths() {
+  const prinzips = await fetchPrinzipsWithExamples();
+
+  return prinzips.map((p) => ({
+    params: { principleId: p.URLBezeichnung },
+    props: { prinzips, principleName: p.Name },
+  }));
 }

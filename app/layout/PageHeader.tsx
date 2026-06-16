@@ -5,34 +5,25 @@ import {
   PhoneOutlined,
 } from "@digitalservicebund/icons";
 import { useEffect, useRef, useState } from "react";
-import type { UIMatch } from "react-router";
-import { Link, useLocation, useMatches } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Container from "~/components/Container";
 import { Kopfzeile } from "~/components/kern-preview/Kopfzeile.tsx";
 import RichText from "~/components/RichText";
 import { useResize } from "~/hooks/deviceHook";
 import DropdownMenu from "~/layout/DropdownMenu.tsx";
-import ProgressBar from "~/layout/ProgressBar";
 import { header } from "~/resources/content/shared/header.ts";
 
-import { assetPath } from "~/utils/assetPath";
-import type { MatchWithHandle } from "~/utils/handles";
-import { matchHasHandle } from "~/utils/handles";
-import { getPlausibleEventClassName } from "~/utils/plausibleUtils";
+import { normalizePathname, withBase } from "@/utils/path";
 import twMerge from "~/utils/tailwindMerge.ts";
-import { normalizePathname } from "~/utils/utilFunctions.ts";
 
 interface SubItem {
   title: string;
   content?: string;
   href: string;
-  plausibleEventName: string;
 }
 
 interface HeaderItem {
   text: string;
-  plausibleEventName: string;
   href?: string;
   overlayContent: SubItem[];
   hasSupport?: boolean;
@@ -79,19 +70,7 @@ const isParentItemActive = (item: HeaderItem, path: string): boolean => {
   });
 };
 
-// Check if a feature on a handle is enabled for a match
-const getFeatureForMatches = (
-  matches: UIMatch[],
-  feature: keyof MatchWithHandle["handle"],
-) =>
-  matches.some(
-    (match) =>
-      matchHasHandle(match) && feature in match.handle && match.handle[feature],
-  );
-
-const PageHeader = () => {
-  const location = useLocation();
-  const currentPath = location.pathname;
+const PageHeader = ({ currentPath }: { currentPath: string }) => {
   const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -143,11 +122,11 @@ const PageHeader = () => {
     <DropdownMenu
       key={`${item.text}-${variant}`}
       label={item.text}
-      plausibleEventName={item.plausibleEventName}
       hasSupport={item.hasSupport}
       data={item.overlayContent}
       isOrderedList={item.isOrderedList}
       variant={variant}
+      currentPath={currentPath}
       isActiveParent={isParentItemActive(item, currentPath)}
       isExpanded={activeDropdownId === item.text}
       onToggle={() => toggleDropdown(item.text)}
@@ -161,26 +140,22 @@ const PageHeader = () => {
   ) => {
     const isMobile = variant === "mobile";
     const isActive = isParentItemActive(item, currentPath);
-    const plausibleClass = getPlausibleEventClassName(
-      `Nav+Bar.${item.plausibleEventName}.Link`,
-    );
 
     return (
-      <Link
+      <a
         key={`${item.text}-${variant}`}
-        to={item.href}
+        href={item.href}
         onClick={closeOpenDropdowns}
         className={twMerge(
-          "flex items-center hover:bg-blue-100",
+          "link-unstyled flex items-center hover:bg-blue-100",
           isMobile
             ? "ds-label-01-bold w-full border-l-4 border-transparent p-16"
             : "ds-label-01-reg h-full border-b-4 border-transparent px-16 whitespace-nowrap",
           isActive && "border-blue-800 bg-blue-100",
-          plausibleClass,
         )}
       >
         {item.text}
-      </Link>
+      </a>
     );
   };
 
@@ -193,9 +168,6 @@ const PageHeader = () => {
   };
 
   const showOverlay = activeDropdownId !== null || mobileMenuOpen;
-
-  const matches = useMatches();
-  const showProgressBar = getFeatureForMatches(matches, "hasProgressBar");
 
   return (
     <>
@@ -213,18 +185,18 @@ const PageHeader = () => {
         <Kopfzeile className="relative" />
         <div className="relative flex h-[70px] justify-between pl-16 lg:container">
           {/* Logo and title */}
-          <Link
-            to={home.path}
-            className="plausible-event-name=Nav+Bar.Home flex items-center space-x-8"
+          <a
+            href={home.path}
+            className="link-unstyled flex items-center space-x-8"
           >
             <img
-              src={assetPath("/logo/bund-logo.png")}
+              src={withBase("/logo/bund-logo.png")}
               alt="Logo des Bundes"
               width={54}
               className="forced-colors:dark:hidden"
             />
             <img
-              src={assetPath("/logo/bund-logo-white.svg")}
+              src={withBase("/logo/bund-logo-white.svg")}
               alt="Logo des Bundes"
               width={54}
               className="hidden forced-colors:dark:block"
@@ -232,7 +204,7 @@ const PageHeader = () => {
             <p className="ds-label-01-bold ml-16 flex flex-col text-xl max-lg:hidden">
               {header.title}
             </p>
-          </Link>
+          </a>
 
           {/* Desktop Navigation */}
           <nav
@@ -245,7 +217,7 @@ const PageHeader = () => {
           {/* Mobile View Controls */}
           <div className="flex items-center space-x-16 lg:hidden">
             <a
-              className="plausible-event-name=Nav+Bar.Mobile+Phone+Icon border-b-4 border-transparent"
+              className="link-unstyled border-b-4 border-transparent"
               href={`tel:${header.contactTel.number.replaceAll(/\s/g, "")}`}
               aria-label={header.contactTel.msg}
             >
@@ -270,7 +242,7 @@ const PageHeader = () => {
         <nav
           id="mobile-menu"
           className={twJoin(
-            "plausible-event-name=Nav+Bar.Burger+Menu+Icon+Mobile.Open+Close absolute right-0 left-0 z-40 rounded-b-md border-t border-gray-600 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]",
+            "absolute right-0 left-0 z-40 rounded-b-md border-t border-gray-600 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]",
             mobileMenuOpen ? "overflow-y-auto" : "invisible",
           )}
           aria-hidden={!mobileMenuOpen}
@@ -285,7 +257,6 @@ const PageHeader = () => {
           </div>
         </noscript>
       </header>
-      {showProgressBar && <ProgressBar />}
     </>
   );
 };

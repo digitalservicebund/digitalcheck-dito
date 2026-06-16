@@ -10,7 +10,7 @@ import type { FormScope } from "@rvf/react";
 import { useField } from "@rvf/react";
 import { Fragment, type ReactNode, useId } from "react";
 import InputError from "~/components/InputError";
-import { Option } from "~/utils/keyValue.ts";
+import type { Option } from "~/utils/keyValue.ts";
 
 export type ComboboxProps = {
   options: Readonly<Option[]>;

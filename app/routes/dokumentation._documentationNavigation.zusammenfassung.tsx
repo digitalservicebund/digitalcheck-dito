@@ -1,32 +1,21 @@
+import type { Route } from "@/config/routes";
 import {
   dokumentation_beteiligungsformate,
-  dokumentation_bewertungOrganisatorisch,
-  dokumentation_bewertungRechtlich,
-  dokumentation_bewertungSemantisch,
-  dokumentation_bewertungTechnisch,
-  dokumentation_euInteroperabilitaetsbezug,
   dokumentation_regelungsvorhabenTitel,
-  dokumentation_verbindlicheAnforderungen,
-  dokumentation_zusammenfassung,
-  type Route,
 } from "@/config/routes";
-import { type ReactNode } from "react";
-import { Link } from "react-router";
+import type { ReactNode } from "react";
 import type { BadgeProps } from "~/components/Badge";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
 import InfoBox from "~/components/InfoBox";
 import InfoBoxList from "~/components/InfoBoxList";
 import InlineNotice from "~/components/InlineNotice";
-import MetaTitle from "~/components/Meta";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
-  BindingRequirementsData,
-  DocumentationData,
-  Participation,
-  PolicyTitle,
-  Principle,
+  type Participation,
+  type PolicyTitle,
+  type Principle,
 } from "~/routes/dokumentation/documentationDataSchema";
 import type {
   PrinzipWithAspekte,
@@ -36,10 +25,6 @@ import { slugify } from "~/utils/utilFunctions";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
 import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
-// Astro page export
-import { DocumentationPageShell } from "@/components/dokumentation/DocumentationPageShell";
-import RequirementDetail from "~/routes/dokumentation/interoperability/RequirementDetail.tsx";
-import { formatRating } from "~/routes/dokumentation/interoperability/values.ts";
 
 const {
   summary,
@@ -75,13 +60,13 @@ const createInfoBoxItem = ({
           heading={summary.warnings.missing}
         />
       )}
-      <Link
-        to={route.path}
-        className="text-link mt-24 block"
+      <a
+        href={route.path}
+        className="mt-24 block"
         aria-label={`${route.title} ${summary.buttonEdit.ariaLabelSuffix}`}
       >
         {summary.buttonEdit.text}
-      </Link>
+      </a>
     </div>
   ),
   look: "highlight",
@@ -126,29 +111,16 @@ function Answer({
 function PolicyTitleContent({
   policyTitle,
 }: Readonly<{ policyTitle: PolicyTitle }>) {
-  const answers = [
-    {
-      prefix: "Vorläufiger Arbeitstitel des Vorhabens",
-      answer: policyTitle.title,
-    },
-    {
-      prefix: "Ministerium / Organisation",
-      answer: policyTitle.organization,
-    },
-  ];
-  if (policyTitle.publicationLink) {
-    answers.push({
-      prefix: "Link zum Referentenentwurf",
-      answer: policyTitle.publicationLink,
-    });
-  }
-  if (policyTitle.publicationDate) {
-    answers.push({
-      prefix: "Voraussichtliches Veröffentlichungsdatum",
-      answer: policyTitle.publicationDate,
-    });
-  }
-  return <Answer answers={answers} />;
+  return (
+    <Answer
+      answers={[
+        {
+          prefix: "Vorläufiger Arbeitstitel des Vorhabens",
+          answer: policyTitle.title,
+        },
+      ]}
+    />
+  );
 }
 
 function ParticipationContent({
@@ -252,133 +224,6 @@ function PrincipleContent({
   );
 }
 
-function InteroperabilityContent({
-  data,
-}: Readonly<{ data: DocumentationData<"2"> }>) {
-  if (!data.euInteroperabilityOutcome?.outcomeId) return null;
-  const outcome =
-    data.euInteroperabilityOutcome?.outcomeId === "REQUIRED" ? "Ja" : "Nein";
-  return (
-    <Answer
-      answers={[
-        {
-          prefix: "Ergab die Vorprüfung Bezug zu EU-Interoperabilität?",
-          answer: outcome,
-        },
-      ]}
-    />
-  );
-}
-
-function BindingRequirementSummary(
-  bindingRequirements: BindingRequirementsData | undefined,
-) {
-  if (!bindingRequirements) return null;
-  return bindingRequirements.requirements.map((bindingRequirement, index) => {
-    return (
-      <>
-        {index > 0 && <hr className="text-gray-700" />}
-        <div key={bindingRequirement.description}>
-          <RequirementDetail requirement={bindingRequirement} />
-        </div>
-      </>
-    );
-  });
-}
-
-function createInteroperabilityInfoBoxItems(
-  documentationData: DocumentationData<"2">,
-): InfoBoxProps[] {
-  const detailsRequired =
-    documentationData.euInteroperabilityOutcome?.outcomeId === "REQUIRED";
-
-  const assessmentItems = [
-    {
-      heading: "Rechtliche Bewertung",
-      route: dokumentation_bewertungRechtlich,
-      ratingTitle:
-        "Schafft das Regelungsvorhaben die rechtlichen Voraussetzungen für einen Datenaustausch innerhalb der EU?",
-      rating: documentationData.interoperabilityAssessment?.legal.rating,
-      detail: documentationData.interoperabilityAssessment?.legal.detail,
-    },
-    {
-      heading: "Organisatorische Bewertung",
-      route: dokumentation_bewertungOrganisatorisch,
-      ratingTitle:
-        "Schafft das Regelungsvorhaben die organisatorischen Voraussetzungen für einen Datenaustausch innerhalb der EU?",
-      rating:
-        documentationData.interoperabilityAssessment?.organizational.rating,
-      detail:
-        documentationData.interoperabilityAssessment?.organizational.detail,
-    },
-    {
-      heading: "Semantische Bewertung",
-      route: dokumentation_bewertungSemantisch,
-      ratingTitle:
-        "Stellt das Regelungsvorhaben sicher, dass semantische Definitionen von Begriffen und Datenfeldern den Datenaustausch über EU-Grenzen ermöglichen?",
-      rating: documentationData.interoperabilityAssessment?.semantic.rating,
-      detail: documentationData.interoperabilityAssessment?.semantic.detail,
-    },
-    {
-      heading: "Technische Bewertung",
-      route: dokumentation_bewertungTechnisch,
-      ratingTitle:
-        "Schafft das Regelungsvorhaben die technischen Voraussetzungen für einen Datenaustausch innerhalb der EU?",
-      rating: documentationData.interoperabilityAssessment?.technical.rating,
-      detail: documentationData.interoperabilityAssessment?.technical.detail,
-    },
-  ] as const;
-
-  return [
-    createInfoBoxItem({
-      heading: "EU-Interoperabilität",
-      route: dokumentation_euInteroperabilitaetsbezug,
-      content: <InteroperabilityContent data={documentationData} />,
-    }),
-    detailsRequired &&
-      createInfoBoxItem({
-        heading: "Verbindliche Anforderungen",
-        route: dokumentation_verbindlicheAnforderungen,
-        content: BindingRequirementSummary(
-          documentationData.bindingRequirements,
-        ),
-      }),
-    ...(detailsRequired
-      ? assessmentItems.map(({ heading, route, ratingTitle, rating, detail }) =>
-          createInfoBoxItem({
-            heading,
-            route,
-            content: (
-              <Answer
-                answers={[
-                  {
-                    prefix: ratingTitle,
-                    answer: formatRating(rating),
-                  },
-                  {
-                    prefix: "Begründung",
-                    answer: detail,
-                  },
-                ]}
-              />
-            ),
-          }),
-        )
-      : []),
-  ].filter(Boolean) as InfoBoxProps[];
-}
-
-/**
- * Checks if the given object contains at least one truthy value.
- *
- * @param item - An object with string keys and unknown values to check
- * @returns true if at least one value in the object is truthy, false otherwise
- */
-function hasTruthyValue(item?: Record<string, unknown>) {
-  if (!item) return false;
-  return Object.values(item).some(Boolean);
-}
-
 export function DocumentationSummary() {
   const { routes, previousUrl, nextUrl, prinzips } =
     useDocumentationNavigation();
@@ -388,11 +233,9 @@ export function DocumentationSummary() {
     createInfoBoxItem({
       heading: "Informationen zum Regelungsvorhaben",
       route: dokumentation_regelungsvorhabenTitel,
-      content:
-        documentationData.policyTitle &&
-        hasTruthyValue(documentationData.policyTitle) ? (
-          <PolicyTitleContent policyTitle={documentationData.policyTitle} />
-        ) : null,
+      content: documentationData.policyTitle?.title ? (
+        <PolicyTitleContent policyTitle={documentationData.policyTitle} />
+      ) : null,
     }),
     createInfoBoxItem({
       route: dokumentation_beteiligungsformate,
@@ -430,14 +273,10 @@ export function DocumentationSummary() {
         },
       });
     }),
-    ...createInteroperabilityInfoBoxItems(documentationData),
   ];
 
   return (
     <>
-      <MetaTitle
-        prefix={`Dokumentation: ${dokumentation_zusammenfassung.title}`}
-      />
       <Heading
         text={summary.headline}
         tagName="h1"
@@ -458,6 +297,9 @@ export function DocumentationSummary() {
 export default function Route() {
   return <DocumentationSummary />;
 }
+
+// Astro page export
+import { DocumentationPageShell } from "@/components/DocumentationPageShell";
 
 export function ZusammenfassungPage({
   prinzips,

@@ -1,27 +1,21 @@
 import { dokumentation_zusammenfassung } from "@/config/routes.ts";
-import { FormScope, useField } from "@rvf/react";
-import { useOutletContext } from "react-router";
+import type { FormScope } from "@rvf/react";
+import { useField } from "@rvf/react";
 import { z } from "zod";
 import Badge from "~/components/Badge.tsx";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Heading from "~/components/Heading";
-import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup.tsx";
 import Textarea from "~/components/Textarea.tsx";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
-import {
-  interoperabilityAssessmentLevelSchema,
-  interoperabilityAssessmentSchema,
-} from "~/routes/dokumentation/documentationDataSchema.ts";
+import { interoperabilityAssessmentLevelSchema } from "~/routes/dokumentation/documentationDataSchema.ts";
 import { IEAContactBanner } from "~/routes/dokumentation/interoperability/IEAContactBanner.tsx";
 import SkipNoticeWrapper from "~/routes/dokumentation/interoperability/SkipNoticeWrapper.tsx";
-import {
-  defaultAssessmentValues,
-  interoperabilityRatingOptions2,
-} from "~/routes/dokumentation/interoperability/values.ts";
-import { NavigationContext } from "./dokumentation._documentationNavigation";
+import { interoperabilityRatingOptions2 } from "~/routes/dokumentation/interoperability/values.ts";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import DocumentationActions from "./dokumentation/DocumentationActions";
+import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
 function DetailFormElement({
   scope,
@@ -48,23 +42,34 @@ function DetailFormElement({
   );
 }
 
-export default function DocumentationInteroperabilityAssessmentTechnical() {
-  const { previousUrl, nextUrl } = useOutletContext<NavigationContext>();
+export function DocumentationInteroperabilityAssessmentTechnical() {
+  const { previousUrl, nextUrl } = useDocumentationNavigation();
 
   const { documentationData, setInteroperabilityAssessmentData } =
     useDocumentationDataService();
 
   const form = useSyncedForm({
-    schema: interoperabilityAssessmentSchema,
-    defaultValues: defaultAssessmentValues,
-    storedData: documentationData.interoperabilityAssessment,
+    schema: interoperabilityAssessmentLevelSchema,
+    defaultValues: { detail: "", rating: "" },
+    storedData: documentationData.interoperabilityAssessment?.technical,
     setDataCallback: (data) =>
-      setInteroperabilityAssessmentData(data ?? undefined),
+      setInteroperabilityAssessmentData({
+        legal: documentationData.interoperabilityAssessment?.legal ?? {
+          detail: "",
+          rating: "",
+        },
+        organizational: documentationData.interoperabilityAssessment
+          ?.organizational ?? { detail: "", rating: "" },
+        semantic: documentationData.interoperabilityAssessment?.semantic ?? {
+          detail: "",
+          rating: "",
+        },
+        technical: data ?? { detail: "", rating: "" },
+      }),
   });
 
   return (
     <>
-      <MetaTitle prefix={"Dokumentation: Technische Interoperabilität"} />
       <div className="space-y-40">
         <div className={"space-y-8"}>
           <Badge look="hint">Technische Interoperabilität</Badge>
@@ -75,7 +80,7 @@ export default function DocumentationInteroperabilityAssessmentTechnical() {
             Die technische Ebene der Interoperabilität sorgt dafür, dass
             verschiedene Verwaltungen über kompatible IT-Systeme, Datenstandards
             und Schnittstellen (APIs) tatsächlich miteinander kommunizieren
-            können – ohne manuelle Anpassungen pro Fall.
+            können - ohne manuelle Anpassungen pro Fall.
           </p>
           <DetailsSummary title={"Beispiel"}>
             Der Austausch von Nachweisen zwischen Behörden erfolgt
@@ -90,12 +95,12 @@ export default function DocumentationInteroperabilityAssessmentTechnical() {
           </h2>
           <RadioGroup
             aria-labelledby="question-label"
-            scope={form.scope("technical.rating")}
+            scope={form.scope("rating")}
             options={interoperabilityRatingOptions2}
             warningInsteadOfError
           />
 
-          <DetailFormElement scope={form.scope("technical")} />
+          <DetailFormElement scope={form.scope()} />
         </SkipNoticeWrapper>
         <DocumentationActions
           previousUrl={previousUrl}
@@ -106,5 +111,26 @@ export default function DocumentationInteroperabilityAssessmentTechnical() {
         <IEAContactBanner />
       </div>
     </>
+  );
+}
+
+export default function Route() {
+  return <DocumentationInteroperabilityAssessmentTechnical />;
+}
+
+// Astro page export
+import { DocumentationPageShell } from "@/components/DocumentationPageShell";
+
+export function BewertungTechnischPage({
+  prinzips,
+  currentUrl,
+}: Readonly<{
+  prinzips: PrinzipWithAspekteAndExample[];
+  currentUrl: string;
+}>) {
+  return (
+    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
+      <DocumentationInteroperabilityAssessmentTechnical />
+    </DocumentationPageShell>
   );
 }

@@ -1,28 +1,22 @@
-import { FormScope, useField } from "@rvf/react";
-import { useOutletContext } from "react-router";
+import type { FormScope } from "@rvf/react";
+import { useField } from "@rvf/react";
 import { z } from "zod";
 import Badge from "~/components/Badge.tsx";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Heading from "~/components/Heading";
-import MetaTitle from "~/components/Meta";
 import RadioGroup from "~/components/RadioGroup.tsx";
 import Textarea from "~/components/Textarea.tsx";
 
 import { dokumentation_zusammenfassung } from "@/config/routes.ts";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
-import {
-  interoperabilityAssessmentLevelSchema,
-  interoperabilityAssessmentSchema,
-} from "~/routes/dokumentation/documentationDataSchema.ts";
+import { interoperabilityAssessmentLevelSchema } from "~/routes/dokumentation/documentationDataSchema.ts";
 import { IEAContactBanner } from "~/routes/dokumentation/interoperability/IEAContactBanner.tsx";
 import SkipNoticeWrapper from "~/routes/dokumentation/interoperability/SkipNoticeWrapper.tsx";
-import {
-  defaultAssessmentValues,
-  interoperabilityRatingOptions2,
-} from "~/routes/dokumentation/interoperability/values.ts";
-import { NavigationContext } from "./dokumentation._documentationNavigation";
+import { interoperabilityRatingOptions2 } from "~/routes/dokumentation/interoperability/values.ts";
+import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import DocumentationActions from "./dokumentation/DocumentationActions";
+import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
 function DetailFormElement({
   scope,
@@ -36,8 +30,7 @@ function DetailFormElement({
   }
   return (
     <Textarea
-      description={`Tragen Sie Ihre Erläuterung ein, z. B.: „Behörde A darf Daten von
-          von Behörde B abrufen.“`}
+      description={`Tragen Sie Ihre Erläuterung ein, z. B.: „Behörde A darf Daten von Behörde B abrufen.“`}
       scope={scope.scope("detail")}
       rows={5}
       warningInsteadOfError
@@ -47,23 +40,34 @@ function DetailFormElement({
   );
 }
 
-export default function DocumentationInteroperabilityAssessment() {
-  const { previousUrl, nextUrl } = useOutletContext<NavigationContext>();
+export function DocumentationInteroperabilityAssessmentLegal() {
+  const { previousUrl, nextUrl } = useDocumentationNavigation();
 
   const { documentationData, setInteroperabilityAssessmentData } =
     useDocumentationDataService();
 
   const form = useSyncedForm({
-    schema: interoperabilityAssessmentSchema,
-    defaultValues: defaultAssessmentValues,
-    storedData: documentationData.interoperabilityAssessment,
+    schema: interoperabilityAssessmentLevelSchema,
+    defaultValues: { detail: "", rating: "" },
+    storedData: documentationData.interoperabilityAssessment?.legal,
     setDataCallback: (data) =>
-      setInteroperabilityAssessmentData(data ?? undefined),
+      setInteroperabilityAssessmentData({
+        legal: data ?? { detail: "", rating: "" },
+        organizational: documentationData.interoperabilityAssessment
+          ?.organizational ?? { detail: "", rating: "" },
+        semantic: documentationData.interoperabilityAssessment?.semantic ?? {
+          detail: "",
+          rating: "",
+        },
+        technical: documentationData.interoperabilityAssessment?.technical ?? {
+          detail: "",
+          rating: "",
+        },
+      }),
   });
 
   return (
     <>
-      <MetaTitle prefix={"Dokumentation: Rechtliche Interoperabilität"} />
       <div className="space-y-40">
         <div className={"space-y-8"}>
           <Badge look="hint">Rechtliche Interoperabilität</Badge>
@@ -90,12 +94,12 @@ export default function DocumentationInteroperabilityAssessment() {
           </h2>
           <RadioGroup
             aria-labelledby="question-label"
-            scope={form.scope("legal.rating")}
+            scope={form.scope("rating")}
             options={interoperabilityRatingOptions2}
             warningInsteadOfError
           />
 
-          <DetailFormElement scope={form.scope("legal")} />
+          <DetailFormElement scope={form.scope()} />
         </SkipNoticeWrapper>
         <DocumentationActions
           previousUrl={previousUrl}
@@ -106,5 +110,26 @@ export default function DocumentationInteroperabilityAssessment() {
         <IEAContactBanner />
       </div>
     </>
+  );
+}
+
+export default function Route() {
+  return <DocumentationInteroperabilityAssessmentLegal />;
+}
+
+// Astro page export
+import { DocumentationPageShell } from "@/components/DocumentationPageShell";
+
+export function BewertungRechtlichPage({
+  prinzips,
+  currentUrl,
+}: Readonly<{
+  prinzips: PrinzipWithAspekteAndExample[];
+  currentUrl: string;
+}>) {
+  return (
+    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
+      <DocumentationInteroperabilityAssessmentLegal />
+    </DocumentationPageShell>
   );
 }

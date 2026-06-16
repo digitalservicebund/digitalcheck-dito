@@ -1,12 +1,16 @@
-import React from "react";
+import type React from "react";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
-import { ContentLink } from "~/utils/contentTypes";
+import type { ContentLink } from "~/utils/contentTypes";
 import twMerge from "~/utils/tailwindMerge";
-import Badge, { type BadgeProps } from "./Badge";
+import type { BadgeProps } from "./Badge";
+import Badge from "./Badge";
 import { DownloadLinkButton, LinkButton } from "./Button";
-import DetailsSummary, { DetailsSummaryProps } from "./DetailsSummary";
-import Heading, { HeadingProps } from "./Heading";
-import Image, { type ImageProps } from "./Image";
+import type { DetailsSummaryProps } from "./DetailsSummary";
+import DetailsSummary from "./DetailsSummary";
+import type { HeadingProps } from "./Heading";
+import Heading from "./Heading";
+import type { ImageProps } from "./Image";
+import Image from "./Image";
 
 export type InfoImageProps = ImageProps & {
   size: "icon" | "small" | "medium" | "large";
@@ -119,12 +123,12 @@ const LinkList = ({ links }: { links: ContentLink[] }) => (
       const { to, text, ...rest } = link;
       if (link.download)
         return (
-          <DownloadLinkButton key={to} to={to} omitIcon {...rest}>
+          <DownloadLinkButton key={to} href={to} omitIcon {...rest}>
             {text}
           </DownloadLinkButton>
         );
       return (
-        <LinkButton key={to} to={to} {...rest}>
+        <LinkButton key={to} href={to} {...rest}>
           {text}
         </LinkButton>
       );

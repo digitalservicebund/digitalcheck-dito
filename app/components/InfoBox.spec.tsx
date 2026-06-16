@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import { createRoutesStub } from "react-router";
 import { describe, expect, it } from "vitest";
-import InfoBox, { DetailsSummaryListProps } from "./InfoBox";
+import type { DetailsSummaryListProps } from "./InfoBox";
+import InfoBox from "./InfoBox";
 import RichText from "./RichText";
 
 describe("InfoBox", () => {
@@ -53,29 +53,23 @@ describe("InfoBox", () => {
 
   describe("LinkList", () => {
     it("shows links", () => {
-      const RouterStubInfoBoxItem = createRoutesStub([
-        {
-          path: "/",
-          Component: () => (
-            <InfoBox>
-              <InfoBox.LinkList
-                links={[
-                  {
-                    text: "Link 1",
-                    to: "example.com",
-                  },
-                  {
-                    text: "Link 2",
-                    to: "example2.com",
-                    download: true,
-                  },
-                ]}
-              />
-            </InfoBox>
-          ),
-        },
-      ]);
-      render(<RouterStubInfoBoxItem />);
+      render(
+        <InfoBox>
+          <InfoBox.LinkList
+            links={[
+              {
+                text: "Link 1",
+                to: "example.com",
+              },
+              {
+                text: "Link 2",
+                to: "example2.com",
+                download: true,
+              },
+            ]}
+          />
+        </InfoBox>,
+      );
 
       const links = screen.getAllByRole("link");
       expect(links).toHaveLength(2);

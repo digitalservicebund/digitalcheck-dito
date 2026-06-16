@@ -1,6 +1,5 @@
 import { interoperabel_nationaleKontaktstelle } from "@/config/routes.ts";
 import { QuestionMarkOutlined } from "@digitalservicebund/icons";
-import { Link } from "react-router";
 
 export function IEAContactBanner() {
   return (
@@ -11,12 +10,9 @@ export function IEAContactBanner() {
           Bei Fragen und Rückmeldungen
         </span>
         wenden Sie sich an die{" "}
-        <Link
-          className="text-link"
-          to={interoperabel_nationaleKontaktstelle.path}
-        >
+        <a href={interoperabel_nationaleKontaktstelle.path}>
           nationale Kontaktstelle für ein interoperables Europa
-        </Link>
+        </a>
         .
       </p>
     </div>

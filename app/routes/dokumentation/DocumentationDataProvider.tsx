@@ -37,7 +37,7 @@ import {
   euInteroperabilityOutcomeNavigationSchema,
   interoperabilityAssessmentLevelNavigationSchema,
   participationSchema,
-  policyHeaderSchema,
+  policyTitleSchema,
   principleSchemaV2,
 } from "~/routes/dokumentation/documentationDataSchema";
 
@@ -46,7 +46,6 @@ import {
   removeFromLocalStorage,
   writeVersionedDataToLocalStorage,
 } from "~/utils/localStorageVersioned";
-import { useHydrationMarker } from "~/utils/useHydrationMarker";
 
 export const STORAGE_KEY = "documentationData";
 
@@ -81,10 +80,10 @@ type DocumentationDataContextType = {
   ) =>
     | PolicyTitle
     | Participation
+    | Principle
     | EuInteroperabilityOutcome
     | BindingRequirementsData
     | InteroperabilityAssessmentLevel
-    | Principle
     | undefined;
   validateDocumentationDataForRoute: (
     routePath: string,
@@ -130,6 +129,7 @@ export enum ValidationResult {
   missingData,
   completed,
   neutral,
+  disabled,
 }
 type RouteDefinition = {
   getData: (data: DocumentationData) => DocumentationDataType;
@@ -141,7 +141,7 @@ type RouteDefinition = {
 };
 
 type RouteSchema =
-  | typeof policyHeaderSchema
+  | typeof policyTitleSchema
   | typeof participationSchema
   | typeof euInteroperabilityOutcomeNavigationSchema
   | typeof bindingRequirementsNavigationSchema
@@ -150,13 +150,13 @@ type RouteSchema =
 
 const skipIfNoInteroperabilityRequired = (data: DocumentationData) => {
   if (data.euInteroperabilityOutcome?.outcomeId !== "REQUIRED")
-    return ValidationResult.neutral;
+    return ValidationResult.disabled;
   return null; // keep default behavior
 };
 const routeDefinitions: Record<string, RouteDefinition> = {
   [dokumentation_regelungsvorhabenTitel.path]: {
     getData: (data) => data.policyTitle,
-    schema: policyHeaderSchema,
+    schema: policyTitleSchema,
   },
   [dokumentation_beteiligungsformate.path]: {
     getData: (data) => data.participation,
@@ -169,7 +169,7 @@ const routeDefinitions: Record<string, RouteDefinition> = {
   [dokumentation_verbindlicheAnforderungen.path]: {
     getData: (data) => data.bindingRequirements,
     schema: bindingRequirementsNavigationSchema,
-    validate: skipIfNoInteroperabilityRequired,
+    validate: skipIfNoInteroperabilityRequired, // TODO remove
   },
   [dokumentation_bewertungRechtlich.path]: {
     getData: (data) => data.interoperabilityAssessment?.legal,
@@ -264,7 +264,6 @@ function getInitialState(): DocumentationData {
 export function DocumentationDataProvider({
   children,
 }: Readonly<DocumentationDataProviderProps>) {
-  useHydrationMarker();
   const [documentationData, setDocumentationData] = useState<DocumentationData>(
     { version: DATA_SCHEMA_VERSION_V2, initialized: false },
   );
@@ -330,11 +329,12 @@ export function DocumentationDataProvider({
   const setPolicyTitle = useCallback(
     (policyTitle?: PolicyTitle) => {
       if (!policyTitle) return;
-      if (policyTitle.publicationStatus === "published") {
-        policyTitle.publicationDate = "";
-      } else if (policyTitle.publicationStatus === "planned") {
-        policyTitle.publicationLink = "";
-      }
+      // TODO move
+      // if (policyTitle.publicationStatus === "published") {
+      //   policyTitle.publicationDate = "";
+      // } else if (policyTitle.publicationStatus === "planned") {
+      //   policyTitle.publicationLink = "";
+      // }
 
       createOrUpdateDocumentationData({
         ...documentationData,
@@ -365,6 +365,8 @@ export function DocumentationDataProvider({
 
       if (!euInteroperabilityOutcome)
         delete updatedDocumentationData.euInteroperabilityOutcome;
+
+      console.log({ updatedDocumentationData });
 
       createOrUpdateDocumentationData(updatedDocumentationData);
     },

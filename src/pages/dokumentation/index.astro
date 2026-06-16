@@ -1,0 +1,15 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { DokumentationIndexPageWithProvider } from "~/routes/dokumentation._index";
+import { fetchPrinzipsWithExamples } from "~/utils/strapiData.server";
+
+export const frontmatter = {
+  title: "Dokumentation",
+};
+
+const prinzips = await fetchPrinzipsWithExamples();
+---
+
+<Layout title={frontmatter.title} showProgressBar>
+  <DokumentationIndexPageWithProvider client:load prinzips={prinzips} />
+</Layout>

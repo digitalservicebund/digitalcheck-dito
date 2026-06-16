@@ -75,7 +75,7 @@ export const InteroperableLoesungenTab = () => {
               <p>{text}</p>
               <ButtonContainer className="mt-auto pt-24">
                 {href ? (
-                  <LinkButton to={href} look="tertiary">
+                  <LinkButton href={href} look="tertiary">
                     Mehr zu dieser Lösung
                   </LinkButton>
                 ) : (

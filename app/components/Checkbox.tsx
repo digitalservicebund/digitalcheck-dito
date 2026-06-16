@@ -1,10 +1,11 @@
-import { FormScope, useField } from "@rvf/react";
-import {
+import type { FormScope } from "@rvf/react";
+import { useField } from "@rvf/react";
+import type {
   ChangeEventHandler,
   ComponentPropsWithRef,
   ReactNode,
-  useId,
 } from "react";
+import { useId } from "react";
 import { twJoin } from "tailwind-merge";
 import InputError from "./InputError";
 

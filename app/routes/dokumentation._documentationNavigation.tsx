@@ -12,14 +12,14 @@ import {
   dokumentation_verbindlicheAnforderungen,
   dokumentation_zusammenfassung,
 } from "@/config/routes";
-import { ReactNode, useMemo } from "react";
-import { Outlet, useLocation, useRouteLoaderData } from "react-router";
+import type { ReactNode } from "react";
+import { useMemo } from "react";
+import { twJoin } from "tailwind-merge";
 import HelpSidepanel from "~/components/HelpSidepanel";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import { loader } from "~/routes/dokumentation/route.tsx";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import {
   useDocumentationDataService,
@@ -31,63 +31,27 @@ import type {
 } from "./dokumentation/DocumentationNavigationContext";
 import { DocumentationNavigationContext } from "./dokumentation/DocumentationNavigationContext";
 
-const ROUTE_DOCUMENTATION = {
-  path: dokumentation.path,
-  title: dokumentation.title,
-};
-const ROUTES_DOCUMENTATION_INTRO: Route[] = [
-  { path: dokumentation_hinweise.path, title: dokumentation_hinweise.title },
-  {
-    path: dokumentation_regelungsvorhabenTitel.path,
-    title: dokumentation_regelungsvorhabenTitel.title,
-  },
-  {
-    path: dokumentation_beteiligungsformate.path,
-    title: dokumentation_beteiligungsformate.title,
-  },
-];
-
-const ROUTES_DOCUMENTATION_FINALIZE: Route[] = [
-  {
-    path: dokumentation_zusammenfassung.path,
-    title: dokumentation_zusammenfassung.title,
-  },
-  { path: dokumentation_absenden.path, title: dokumentation_absenden.title },
-];
-const getUrlForSlug = (slug: string) => `${ROUTE_DOCUMENTATION.path}/${slug}`;
-
-export type OnNavigateCallback = () => Promise<boolean>;
-export type NavigationContext = {
-  currentUrl: string;
-  navigationBaseUrl: string;
-  nextUrl: string;
-  previousUrl: string;
-  routes: (Route | RouteGroup)[];
-  prinzips: PrinzipWithAspekte[];
-};
-
-function findIndexForRoute(routes: Route[], currentUrl: string) {
+function findIndexForRoute(routes: Route[], currentUrl: string): number {
   const index = routes.findIndex((route) => route.path === currentUrl);
 
   if (index === -1) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(`Could not find route with url ${currentUrl}`, {
+    throw Error(`Could not find route with url ${currentUrl}`, {
       status: 404,
     });
   }
   return index;
 }
 
-function getPreviousUrl(routes: Route[], currentUrl: string): string {
-  return findIndexForRoute(routes, currentUrl) > 0
-    ? routes[findIndexForRoute(routes, currentUrl) - 1].path
-    : dokumentation.path;
+function getPreviousUrl(routes: Route[], currentUrl: string): string | null {
+  const index = routes.findIndex((route) => route.path === currentUrl);
+  if (index === -1) return null;
+  return index > 0 ? routes[index - 1].path : dokumentation.path;
 }
 
 function getNextUrl(routes: Route[], currentUrl: string): string | null {
-  return findIndexForRoute(routes, currentUrl) < routes.length - 1
-    ? routes[findIndexForRoute(routes, currentUrl) + 1].path
-    : null;
+  const index = routes.findIndex((route) => route.path === currentUrl);
+  if (index === -1) return null;
+  return index < routes.length - 1 ? routes[index + 1].path : null;
 }
 
 function resolveAdjacentUrl(
@@ -107,63 +71,130 @@ function resolveAdjacentUrl(
 }
 
 export function LayoutWithDocumentationNavigation({
-  routes,
   prinzips,
   children,
   currentUrl,
 }: Readonly<{
-  routes: (Route | RouteGroup)[];
   prinzips: PrinzipWithAspekte[];
   children?: ReactNode;
   currentUrl: string;
 }>) {
-  const { findDocumentationDataForUrl, validateDocumentationDataForRoute } =
-    useDocumentationDataService();
+  const ROUTES_DOCUMENTATION_INTRO: Route[] = [
+    dokumentation_hinweise,
+    dokumentation_regelungsvorhabenTitel,
+    dokumentation_beteiligungsformate,
+  ];
+
+  const ROUTES_DOCUMENTATION_FINALIZE: Route[] = [
+    dokumentation_zusammenfassung,
+    dokumentation_absenden,
+  ];
+
+  const {
+    documentationData,
+    findDocumentationDataForUrl,
+    validateDocumentationDataForRoute,
+  } = useDocumentationDataService();
+
+  const routes: (Route | RouteGroup)[] = [
+    ...ROUTES_DOCUMENTATION_INTRO,
+    {
+      title: "Prinzipien",
+      routes: prinzips.map<Route>(({ Name, URLBezeichnung, documentId }) => ({
+        title: Name,
+        path: `${dokumentation.path}/${URLBezeichnung}`,
+        principleId: documentId,
+      })),
+    },
+    {
+      title: "EU-Interoperabilität",
+      routes: [
+        dokumentation_euInteroperabilitaetsbezug,
+        dokumentation_verbindlicheAnforderungen,
+        dokumentation_bewertungRechtlich,
+        dokumentation_bewertungOrganisatorisch,
+        dokumentation_bewertungSemantisch,
+        dokumentation_bewertungTechnisch,
+      ],
+    },
+    ...ROUTES_DOCUMENTATION_FINALIZE,
+  ];
 
   // exclude documentation notes
-  const displayedRoutes = routes.filter((route) => {
-    if ("routes" in route) return true; // RouteGroup
-    return route.path !== dokumentation_hinweise.path;
-  });
+  const displayedRoutes = useMemo(
+    () =>
+      routes.filter((route) => {
+        if ("routes" in route) return true; // RouteGroup
+        return route.path !== dokumentation_hinweise.path;
+      }),
+    [routes],
+  );
+
   // Detect erlaeuterung sub-page
   const isErlaeuterungPage = currentUrl.endsWith("/erlaeuterung");
   // For nav/stepper index lookups, use principle URL when on erlaeuterung page
-
   const navigationBaseUrl = isErlaeuterungPage
     ? currentUrl.replace("/erlaeuterung", "")
     : currentUrl;
 
-  const flatRoutes = routes.flatMap((route) =>
-    "routes" in route ? route.routes : route,
+  const flatRoutes = useMemo(
+    () => routes.flatMap((route) => ("routes" in route ? route.routes : route)),
+    [routes],
   );
-  const currentRoute = flatRoutes.find((r) => r.path === navigationBaseUrl);
-  const currentPrincipleFormData = currentRoute?.principleId
-    ? findDocumentationDataForUrl(currentRoute.principleId)
-    : undefined;
 
-  const nextUrl = isErlaeuterungPage
-    ? resolveAdjacentUrl(
-        flatRoutes,
-        navigationBaseUrl,
-        getNextUrl,
-        findDocumentationDataForUrl,
-      )
-    : currentRoute?.principleId &&
-        (currentPrincipleFormData as { answer?: string } | undefined)?.answer
-      ? `${currentUrl}/erlaeuterung`
-      : resolveAdjacentUrl(
-          flatRoutes,
-          currentUrl,
-          getNextUrl,
-          findDocumentationDataForUrl,
-        );
-  const previousUrl =
-    resolveAdjacentUrl(
+  const currentRoute = useMemo(
+    () => flatRoutes.find((r) => r.path === navigationBaseUrl),
+    [flatRoutes, navigationBaseUrl],
+  );
+
+  const currentPrincipleFormData = useMemo(
+    () =>
+      currentRoute?.principleId
+        ? findDocumentationDataForUrl(currentRoute.principleId)
+        : undefined,
+    [currentRoute?.principleId, findDocumentationDataForUrl],
+  );
+
+  const nextUrl = useMemo(
+    () =>
+      isErlaeuterungPage
+        ? resolveAdjacentUrl(
+            flatRoutes,
+            navigationBaseUrl,
+            getNextUrl,
+            findDocumentationDataForUrl,
+          )
+        : currentRoute?.principleId &&
+            (currentPrincipleFormData as { answer?: string } | undefined)
+              ?.answer
+          ? `${currentUrl}/erlaeuterung`
+          : resolveAdjacentUrl(
+              flatRoutes,
+              currentUrl,
+              getNextUrl,
+              findDocumentationDataForUrl,
+            ),
+    [
+      isErlaeuterungPage,
       flatRoutes,
       navigationBaseUrl,
-      getPreviousUrl,
+      currentRoute?.principleId,
+      currentPrincipleFormData,
+      currentUrl,
       findDocumentationDataForUrl,
-    ) ?? dokumentation.path;
+    ],
+  );
+
+  const previousUrl = useMemo(
+    () =>
+      resolveAdjacentUrl(
+        flatRoutes,
+        navigationBaseUrl,
+        getPreviousUrl,
+        findDocumentationDataForUrl,
+      ) ?? dokumentation.path,
+    [flatRoutes, navigationBaseUrl, findDocumentationDataForUrl],
+  );
 
   const isNavigationDisabled = currentUrl === dokumentation_hinweise.path;
 
@@ -197,7 +228,9 @@ export function LayoutWithDocumentationNavigation({
         }
         error={validationResult === ValidationResult.missingData}
         completed={validationResult === ValidationResult.completed}
-        disabled={isNavigationDisabled}
+        disabled={
+          isNavigationDisabled || validationResult == ValidationResult.disabled
+        }
       >
         {route.title}
       </Nav.Item>
@@ -218,13 +251,12 @@ export function LayoutWithDocumentationNavigation({
 
   return (
     <DocumentationNavigationContext.Provider value={navigationContextValue}>
-      <HelpPanelProvider>
+      <HelpPanelProvider currentPath={currentUrl}>
         <div
-          className={
-            showHelpPanel
-              ? "parent-bg-blue breakout-grid-form-steps grow bg-blue-100"
-              : "parent-bg-blue breakout-grid-form-steps grow bg-blue-100 [--content-max-width:750px] [--help-width:0]"
-          }
+          className={twJoin(
+            "breakout-grid-form-steps grow bg-blue-100",
+            !showHelpPanel && "[--content-max-width:750px] [--help-width:0]",
+          )}
         >
           <Nav
             className="sticky top-0 hidden self-start py-80 lg:block"
@@ -258,70 +290,11 @@ export function LayoutWithDocumentationNavigation({
                 elements={flatRoutes}
               />
             </div>
-            {/* force remount for different principles with key={currentUrl} */}
-            <Outlet
-              key={currentUrl}
-              context={{
-                currentUrl,
-                navigationBaseUrl,
-                nextUrl,
-                previousUrl,
-                routes,
-                prinzips,
-              }}
-            />
             {children}
           </main>
           {showHelpPanel && <HelpSidepanel />}
         </div>
       </HelpPanelProvider>
     </DocumentationNavigationContext.Provider>
-  );
-}
-
-export default function Route() {
-  const data = useRouteLoaderData<typeof loader>("routes/dokumentation");
-  const location = useLocation();
-  const { documentationData } = useDocumentationDataService();
-  const currentUrl = location.pathname;
-  if (!data) return null;
-
-  const hasInteroperabilityRequirement =
-    documentationData.euInteroperabilityOutcome?.outcomeId === "REQUIRED";
-
-  const routes: (Route | RouteGroup)[] = [
-    ...ROUTES_DOCUMENTATION_INTRO,
-    {
-      title: "Prinzipien",
-      routes: data.prinzips.map<Route>(
-        ({ Name, URLBezeichnung, documentId }) => ({
-          title: Name,
-          path: getUrlForSlug(URLBezeichnung),
-          principleId: documentId,
-        }),
-      ),
-    },
-    {
-      title: "EU-Interoperabilität",
-      routes: hasInteroperabilityRequirement
-        ? [
-            dokumentation_euInteroperabilitaetsbezug,
-            dokumentation_verbindlicheAnforderungen,
-            dokumentation_bewertungRechtlich,
-            dokumentation_bewertungOrganisatorisch,
-            dokumentation_bewertungSemantisch,
-            dokumentation_bewertungTechnisch,
-          ]
-        : [dokumentation_euInteroperabilitaetsbezug],
-    },
-    ...ROUTES_DOCUMENTATION_FINALIZE,
-  ];
-
-  return (
-    <LayoutWithDocumentationNavigation
-      routes={routes}
-      prinzips={data.prinzips}
-      currentUrl={currentUrl}
-    />
   );
 }

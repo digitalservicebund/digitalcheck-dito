@@ -18,22 +18,6 @@ const { mockNavigate, mockNavigationContext } = vi.hoisted(() => {
 
 export { mockNavigate, mockNavigationContext };
 
-vi.mock("react-router", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("react-router")>();
-
-  return {
-    ...actual,
-    useOutletContext: vi.fn().mockReturnValue(mockNavigationContext),
-    useNavigate: vi.fn(() => mockNavigate),
-    useLoaderData: vi.fn(),
-    useParams: vi.fn(),
-    useRouteLoaderData: vi.fn().mockReturnValue({
-      routes: mockNavigationContext.routes,
-      prinzips: mockNavigationContext.prinzips,
-    }),
-  };
-});
-
 vi.mock(
   "~/routes/dokumentation/DocumentationNavigationContext",
   async (importOriginal) => {
