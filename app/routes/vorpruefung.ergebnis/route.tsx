@@ -220,27 +220,29 @@ export default function Result() {
                   <ResultForm
                     resultContent={resultContent}
                     setVorhabenTitle={setVorhabenTitle}
+                    isBund={isBund}
+                    pruefstelleMail={pruefstelleMail}
                   />
                 </Container>
-                <Container className="rounded-lg bg-white print:hidden">
-                  <InfoBox
-                    heading={{
-                      text: preCheckResult.form.outro.title,
-                      tagName: "h3",
-                    }}
-                  >
-                    <RichText
-                      markdown={
-                        isBund
-                          ? preCheckResult.form.outro.textBund
-                          : hasPruefstelle
-                            ? preCheckResult.form.outro
+                <Container className="space-y-40 rounded-lg bg-white print:hidden">
+                  {hasPruefstelle && (
+                    <InfoBox
+                      heading={{
+                        text: preCheckResult.form.outro.title,
+                        tagName: "h3",
+                      }}
+                    >
+                      <RichText
+                        markdown={
+                          isBund
+                            ? preCheckResult.form.outro.textBund
+                            : preCheckResult.form.outro
                                 .textBundeslandWithPruefstelle
-                            : ""
-                      }
-                    />
-                  </InfoBox>
-                  <div className="ds-stack ds-stack-16 mt-40">
+                        }
+                      />
+                    </InfoBox>
+                  )}
+                  <div className="ds-stack ds-stack-16">
                     <Heading
                       tagName="h3"
                       className="ds-label-section"

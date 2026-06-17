@@ -107,13 +107,23 @@ export const preCheckResult = {
     },
   },
   form: {
-    formLegend: "Ergebnis absenden und Prüfstelle frühzeitig einbinden",
-    instructions: dedent`
+    title: "Ergebnis direkt per E-Mail versenden",
+    titleNoPruefstelle:
+      "Optional: Sie können das Ergebnis auch per Mail senden",
+    instructionsBund: dedent`
       Wir erstellen für Sie eine E-Mail mit dem Ergebnis der Vorprüfung, die sich in Ihrem E-Mail-Programm öffnet.
 
-      - Schicken Sie das Ergebnis an Ihre Prüfstelle (wenn keine Prüfstelle vorhanden ist, dient das Ergebnis als Dokumentation und zur Selbstprüfung)
+      - Schicken Sie das Ergebnis an den Nationalen Normenkontrollrat (NKR)
       - **Bei Anforderungen an Interoperabilität** erhält das Digitalcheck-Team automatisch eine Kopie und meldet sich bei Ihnen.
     `,
+    instructionsBundeslandWithPruefstelle: (pruefstelleMail: string) => dedent`
+      Wir erstellen für Sie eine E-Mail mit dem Ergebnis der Vorprüfung, die sich in Ihrem E-Mail-Programm öffnet.
+
+      - Schicken Sie das Ergebnis an Ihre Prüfstelle: ${pruefstelleMail}
+      - Falls **Anforderungen zur Interoperabilität** bestehen, leiten Sie die E-Mail bitte ebenfalls an die Prüfstelle weiter. Das Digitalcheck-Team übernimmt hierfür **keine** Zuständigkeit.
+    `,
+    instructionsBundeslandWithoutPruefstelle:
+      "Wir erstellen für Sie eine E-Mail mit dem Ergebnis der Vorprüfung, die sich in Ihrem E-Mail-Programm öffnet. Dort können Sie Ihre eigenen Empfänger angeben.",
     previewLabel: "Vorschau der E-Mail-Vorlage",
     copyIntroText: dedent`**Alternativ** können Sie das Ergebnis der Vorprüfung einfach als Text kopieren und manuell an Ihre eigenen Empfänger schicken`,
     vorhabenTitleLabel: "Vorläufiger Arbeitstitel des Vorhabens",

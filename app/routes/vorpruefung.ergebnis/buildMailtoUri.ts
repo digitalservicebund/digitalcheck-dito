@@ -1,17 +1,7 @@
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
 import type { ResultContent } from "~/routes/vorpruefung.ergebnis/getContentForResult";
-import type { PreCheckResult } from "./PreCheckResult";
-import { ResultType } from "./PreCheckResult";
 
 const { emailTemplate } = preCheckResult.form;
-
-function resolveRecipients(result?: PreCheckResult) {
-  const additionalRecipient =
-    result?.interoperability === ResultType.NEGATIVE
-      ? ""
-      : `; ${emailTemplate.toDC}`;
-  return `${emailTemplate.toNkr}${additionalRecipient}`;
-}
 
 export function buildEmailBody(
   resultContent: ResultContent,
@@ -54,14 +44,13 @@ export function buildEmailBody(
 }
 
 export function buildMailtoUri(
-  result: PreCheckResult | undefined,
+  recipients: string[],
   resultContent: ResultContent,
   vorhabenTitle: string,
   negativeReasoning?: string,
 ) {
   const subject = `${emailTemplate.subject}: „${vorhabenTitle}“`;
-  const recipients = encodeURIComponent(resolveRecipients(result));
   const body = buildEmailBody(resultContent, negativeReasoning);
 
-  return `mailto:${recipients}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  return `mailto:${encodeURIComponent(recipients.join("; "))}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }

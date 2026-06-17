@@ -14,6 +14,7 @@ import Input from "~/components/Input";
 import InputError from "~/components/InputError";
 import RichText from "~/components/RichText";
 import Textarea from "~/components/Textarea";
+import { contact } from "~/resources/content/shared/contact";
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
 import {
   buildEmailBody,
@@ -30,9 +31,13 @@ import type { ResultContent } from "./getContentForResult";
 export default function ResultForm({
   resultContent,
   setVorhabenTitle,
+  isBund,
+  pruefstelleMail,
 }: Readonly<{
   resultContent: ResultContent;
   setVorhabenTitle: Dispatch<SetStateAction<string>>;
+  isBund: boolean;
+  pruefstelleMail?: string;
 }>) {
   const [showEmailAlert, setShowEmailAlert] = useState<boolean>(false);
   const [warning, setWarning] = useState<string | null>(null);
@@ -109,6 +114,16 @@ export default function ResultForm({
 
   const resultField = useField(form.scope("result"));
 
+  const hasPruefstelle = !!pruefstelleMail;
+  const hasInteropsDemand = result?.interoperability !== ResultType.NEGATIVE;
+
+  const mailRecipients: string[] = [];
+  if (pruefstelleMail) mailRecipients.push(pruefstelleMail);
+  if (isBund && hasInteropsDemand)
+    mailRecipients.push(contact.interoperabilityEmail);
+
+  console.log({ hasInteropsDemand, pruefstelleMail, mailRecipients });
+
   return (
     <>
       <form {...form.getFormProps()} data-testid="result-form">
@@ -117,7 +132,11 @@ export default function ResultForm({
           <Heading
             tagName="h2"
             className="ds-heading-03-reg"
-            text={preCheckResult.form.formLegend}
+            text={
+              hasPruefstelle
+                ? preCheckResult.form.title
+                : preCheckResult.form.titleNoPruefstelle
+            }
           />
 
           <div className="flex items-start pb-[40px]">
@@ -125,7 +144,18 @@ export default function ResultForm({
               <EmailOutlined className="h-40 w-40 fill-blue-800" />
             </div>
             <div className="ds-stack ds-stack-16 grow">
-              <RichText markdown={preCheckResult.form.instructions} />
+              <RichText
+                markdown={
+                  isBund
+                    ? preCheckResult.form.instructionsBund
+                    : hasPruefstelle
+                      ? preCheckResult.form.instructionsBundeslandWithPruefstelle(
+                          pruefstelleMail,
+                        )
+                      : preCheckResult.form
+                          .instructionsBundeslandWithoutPruefstelle
+                }
+              />
               <div className="max-w-a11y">
                 <Input scope={form.scope("title")}>
                   {preCheckResult.form.vorhabenTitleLabel}
@@ -146,16 +176,21 @@ export default function ResultForm({
                 {isValid ? (
                   <LinkButton
                     href={buildMailtoUri(
-                      result,
+                      mailRecipients,
                       resultContent,
                       form.value("title"),
                       form.value("negativeReasoning"),
                     )}
+                    look={hasPruefstelle ? "primary" : "tertiary"}
                   >
                     {preCheckResult.form.sendEmailButton.text}
                   </LinkButton>
                 ) : (
-                  <Button id="result-email-button" look="primary" type="submit">
+                  <Button
+                    id="result-email-button"
+                    look={hasPruefstelle ? "primary" : "tertiary"}
+                    type="submit"
+                  >
                     {preCheckResult.form.sendEmailButton.text}
                   </Button>
                 )}
