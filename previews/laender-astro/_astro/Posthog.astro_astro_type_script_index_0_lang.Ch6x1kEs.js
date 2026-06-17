@@ -1,0 +1,1 @@
+import{i as t}from"./module.DVY5bDzd.js";const o="phc_72Ugpht0HD8AP1SvBcXoFXUT92tHPLrG89dChxfjKTN",s="/ph-relay",e="https://eu.posthog.com";t.init(o,{api_host:s,ui_host:e,defaults:"2025-05-24",persistence:"memory",cookieless_mode:"always",enable_heatmaps:!0,capture_dead_clicks:!0});

@@ -1,0 +1,1 @@
+import{j as e}from"./bundle-mjs.DBvd4n8_.js";import{c as t}from"./tailwindMerge.BdJWFCAR.js";function i({overhangingBackground:n,children:o,className:r}){const s=t("container py-40",n&&"rounded-lg container-overhanging-background",r);return e.jsx("div",{className:s,children:o})}export{i as C};
