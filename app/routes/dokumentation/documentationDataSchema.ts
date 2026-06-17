@@ -1,13 +1,3 @@
-import {
-  dokumentation_beteiligungsformate,
-  dokumentation_bewertungOrganisatorisch,
-  dokumentation_bewertungRechtlich,
-  dokumentation_bewertungSemantisch,
-  dokumentation_bewertungTechnisch,
-  dokumentation_euInteroperabilitaetsbezug,
-  dokumentation_regelungsvorhabenTitel,
-  dokumentation_verbindlicheAnforderungen,
-} from "@/config/routes";
 import { z } from "zod";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import type { VersionedData } from "~/utils/localStorageVersioned";
@@ -204,27 +194,6 @@ export const documentationSchemaV2 = z.object({
   interoperabilityAssessment: interoperabilityAssessmentSchema.optional(),
   principles: z.array(principleSchemaV2).optional(),
 });
-
-export const getDocumentationSchemaFormUrl = (url: string) => {
-  if (url === dokumentation_regelungsvorhabenTitel.path)
-    return policyTitleSchema;
-  if (url === dokumentation_beteiligungsformate.path)
-    return participationSchema;
-  if (url === dokumentation_euInteroperabilitaetsbezug.path)
-    return euInteroperabilityOutcomeNavigationSchema;
-  if (url === dokumentation_verbindlicheAnforderungen.path)
-    return bindingRequirementsNavigationSchema;
-  if (
-    url === dokumentation_bewertungRechtlich.path ||
-    url === dokumentation_bewertungOrganisatorisch.path ||
-    url === dokumentation_bewertungSemantisch.path ||
-    url === dokumentation_bewertungTechnisch.path
-  ) {
-    return interoperabilityAssessmentLevelNavigationSchema;
-  }
-
-  return principleSchemaV2;
-};
 
 // V1 types are kept solely so migrateV1ToV2 (in DocumentationDataProvider) can
 // type its input. V1 data may still exist in users' localStorage from before
