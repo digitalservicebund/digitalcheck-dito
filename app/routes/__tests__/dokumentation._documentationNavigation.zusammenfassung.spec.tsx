@@ -440,7 +440,7 @@ describe("DocumentationSummary", () => {
     [dokumentation_regelungsvorhabenTitel.path, { policyTitle: undefined }],
     [
       dokumentation_regelungsvorhabenTitel.path,
-      { policyTitle: { title: "", bundesland: "" } },
+      { policyTitle: { title: "", bundesland: "Bund" as const } },
     ],
     [dokumentation_beteiligungsformate.path, { participation: undefined }],
     [

@@ -91,6 +91,7 @@ describe("DocumentationSend", () => {
   });
 
   it("falls back to a generic self-check hint for drafts without a bundesland selection", () => {
+    // @ts-expect-error bundesland is not set
     renderWithPolicyTitle({ title: "Titel", bundesland: "" });
 
     expect(screen.getByText(/Da es für Ihr Bundesland/)).toBeInTheDocument();
