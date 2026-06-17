@@ -10,7 +10,6 @@ import Button, { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
-import InfoBox from "~/components/InfoBox.tsx";
 import Input from "~/components/Input";
 import InputError from "~/components/InputError";
 import RichText from "~/components/RichText";
@@ -205,29 +204,6 @@ export default function ResultForm({
             </Button>
           </ButtonContainer>
         </div>
-      </div>
-      <hr className="mt-40 mb-32 border-t-2 border-gray-400" />
-
-      <InfoBox
-        heading={{
-          text: preCheckResult.form.outro.title,
-          tagName: "h3",
-        }}
-      >
-        <RichText markdown={preCheckResult.form.outro.text} />
-      </InfoBox>
-
-      <div className="ds-stack ds-stack-16 mt-40">
-        <Heading
-          tagName="h3"
-          className="ds-label-section"
-          text={preCheckResult.form.faqs.title}
-        />
-        {preCheckResult.form.faqs.details.map((detail) => (
-          <DetailsSummary key={detail.label} title={detail.label}>
-            <RichText markdown={detail.text} />
-          </DetailsSummary>
-        ))}
       </div>
     </>
   );
