@@ -12,8 +12,7 @@ import {
   dokumentation_verbindlicheAnforderungen,
   dokumentation_zusammenfassung,
 } from "@/config/routes";
-import type { ReactNode } from "react";
-import { useMemo } from "react";
+import { type ReactNode, useCallback, useMemo } from "react";
 import { twJoin } from "tailwind-merge";
 import HelpSidepanel from "~/components/HelpSidepanel";
 import Nav from "~/components/Nav";
@@ -30,17 +29,6 @@ import type {
   RouteGroup,
 } from "./dokumentation/DocumentationNavigationContext";
 import { DocumentationNavigationContext } from "./dokumentation/DocumentationNavigationContext";
-
-function findIndexForRoute(routes: Route[], currentUrl: string): number {
-  const index = routes.findIndex((route) => route.path === currentUrl);
-
-  if (index === -1) {
-    throw Error(`Could not find route with url ${currentUrl}`, {
-      status: 404,
-    });
-  }
-  return index;
-}
 
 function getPreviousUrl(routes: Route[], currentUrl: string): string | null {
   const index = routes.findIndex((route) => route.path === currentUrl);
@@ -59,15 +47,31 @@ function resolveAdjacentUrl(
   fromUrl: string,
   getAdjacent: (routes: Route[], path: string) => string | null,
   findData: (id: string) => unknown,
+  isDisabled: (route: Route) => boolean, // <-- new parameter
 ): string | null {
-  const rawUrl = getAdjacent(flatRoutes, fromUrl);
-  if (!rawUrl) return rawUrl;
-  const route = flatRoutes.find((r) => r.path === rawUrl);
-  if (route?.principleId) {
-    const data = findData(route.principleId) as { answer?: string } | undefined;
-    if (data?.answer) return `${rawUrl}/erlaeuterung`;
+  let currentFrom = fromUrl;
+
+  // Loop until we find a non-disabled route or run out
+  while (true) {
+    const rawUrl = getAdjacent(flatRoutes, currentFrom);
+    if (!rawUrl) return rawUrl; // end of list
+
+    const route = flatRoutes.find((r) => r.path === rawUrl);
+
+    // Skip disabled routes
+    if (route && isDisabled(route)) {
+      currentFrom = rawUrl; // advance past the disabled route and try again
+      continue;
+    }
+
+    if (route?.principleId) {
+      const data = findData(route.principleId) as
+        | { answer?: string }
+        | undefined;
+      if (data?.answer) return `${rawUrl}/erlaeuterung`;
+    }
+    return rawUrl;
   }
-  return rawUrl;
 }
 
 export function LayoutWithDocumentationNavigation({
@@ -90,11 +94,8 @@ export function LayoutWithDocumentationNavigation({
     dokumentation_absenden,
   ];
 
-  const {
-    documentationData,
-    findDocumentationDataForUrl,
-    validateDocumentationDataForRoute,
-  } = useDocumentationDataService();
+  const { findDocumentationDataForUrl, validateDocumentationDataForRoute } =
+    useDocumentationDataService();
 
   const routes: (Route | RouteGroup)[] = [
     ...ROUTES_DOCUMENTATION_INTRO,
@@ -155,6 +156,17 @@ export function LayoutWithDocumentationNavigation({
     [currentRoute?.principleId, findDocumentationDataForUrl],
   );
 
+  const isRouteDisabled = useCallback(
+    (route: Route) => {
+      const { validationResult } = validateDocumentationDataForRoute(
+        route.path,
+        route.principleId,
+      );
+      return validationResult === ValidationResult.disabled;
+    },
+    [validateDocumentationDataForRoute],
+  );
+
   const nextUrl = useMemo(
     () =>
       isErlaeuterungPage
@@ -163,6 +175,7 @@ export function LayoutWithDocumentationNavigation({
             navigationBaseUrl,
             getNextUrl,
             findDocumentationDataForUrl,
+            isRouteDisabled,
           )
         : currentRoute?.principleId &&
             (currentPrincipleFormData as { answer?: string } | undefined)
@@ -173,6 +186,7 @@ export function LayoutWithDocumentationNavigation({
               currentUrl,
               getNextUrl,
               findDocumentationDataForUrl,
+              isRouteDisabled,
             ),
     [
       isErlaeuterungPage,
@@ -192,6 +206,7 @@ export function LayoutWithDocumentationNavigation({
         navigationBaseUrl,
         getPreviousUrl,
         findDocumentationDataForUrl,
+        isRouteDisabled,
       ) ?? dokumentation.path,
     [flatRoutes, navigationBaseUrl, findDocumentationDataForUrl],
   );
