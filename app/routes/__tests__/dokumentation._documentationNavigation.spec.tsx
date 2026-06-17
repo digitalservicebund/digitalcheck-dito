@@ -81,6 +81,7 @@ type ValidationScenario = {
     completedParticipation: boolean;
     completedPrinciples: boolean;
     completedInteroperability: boolean;
+    enabledInteroperability: boolean;
 
     warningTitle: boolean;
     warningParticipation: boolean;
@@ -128,6 +129,7 @@ const validationScenarios: ValidationScenario[] = [
       completedParticipation: true,
       completedPrinciples: true,
       completedInteroperability: true,
+      enabledInteroperability: true,
       warningTitle: false,
       warningParticipation: false,
       warningPrinciples: false,
@@ -144,6 +146,7 @@ const validationScenarios: ValidationScenario[] = [
       completedParticipation: false,
       completedPrinciples: false,
       completedInteroperability: false,
+      enabledInteroperability: false,
       warningTitle: false,
       warningParticipation: false,
       warningPrinciples: false,
@@ -188,6 +191,7 @@ const validationScenarios: ValidationScenario[] = [
       completedParticipation: true,
       completedPrinciples: false,
       completedInteroperability: false,
+      enabledInteroperability: true,
       warningTitle: false,
       warningParticipation: false,
       warningPrinciples: true,
@@ -356,9 +360,12 @@ describe("navigation on pages of documentation", () => {
           if (expected.completedParticipation)
             expectCompleted(getBeteiligungsformate());
           else expectNotCompleted(getBeteiligungsformate());
-          if (expected.completedInteroperability)
-            expectCompleted(getRechtlicheInteroperabilitaet());
-          else expectNotCompleted(getRechtlicheInteroperabilitaet());
+          if (expected.enabledInteroperability) {
+            if (expected.completedInteroperability)
+              expectCompleted(getRechtlicheInteroperabilitaet());
+            else expectNotCompleted(getRechtlicheInteroperabilitaet());
+          }
+
           if (expected.completedPrinciples) expectCompleted(getPrinzipA());
           else expectNotCompleted(getPrinzipA());
         });
@@ -369,9 +376,11 @@ describe("navigation on pages of documentation", () => {
           if (expected.warningParticipation)
             expectWarning(getBeteiligungsformate());
           else expectNotWarning(getBeteiligungsformate());
-          if (expected.warningInteroperabilityLevelLegal)
-            expectWarning(getRechtlicheInteroperabilitaet());
-          else expectNotWarning(getRechtlicheInteroperabilitaet());
+          if (expected.enabledInteroperability) {
+            if (expected.warningInteroperabilityLevelLegal)
+              expectWarning(getRechtlicheInteroperabilitaet());
+            else expectNotWarning(getRechtlicheInteroperabilitaet());
+          }
           if (expected.warningPrinciples) expectWarning(getPrinzipA());
           else expectNotWarning(getPrinzipA());
         });
@@ -416,6 +425,7 @@ describe("navigation on pages of documentation", () => {
           completedParticipation: true,
           completedPrinciples: true,
           completedInteroperability: true,
+          enabledInteroperability: true,
           warningTitle: false,
           warningParticipation: false,
           warningPrinciples: false,
@@ -432,6 +442,7 @@ describe("navigation on pages of documentation", () => {
           completedParticipation: false,
           completedPrinciples: false,
           completedInteroperability: false,
+          enabledInteroperability: false,
           warningTitle: false,
           warningParticipation: false,
           warningPrinciples: false,
@@ -470,6 +481,7 @@ describe("navigation on pages of documentation", () => {
           completedParticipation: true,
           completedPrinciples: false,
           completedInteroperability: false,
+          enabledInteroperability: true,
           warningTitle: false,
           warningParticipation: false,
           warningPrinciples: true,
@@ -497,9 +509,11 @@ describe("navigation on pages of documentation", () => {
           if (expected.completedParticipation)
             expectCompleted(getBeteiligungsformate());
           else expectNotCompleted(getBeteiligungsformate());
-          if (expected.completedInteroperability)
-            expectCompleted(getRechtlicheInteroperabilitaet());
-          else expectNotCompleted(getRechtlicheInteroperabilitaet());
+          if (expected.enabledInteroperability) {
+            if (expected.completedInteroperability)
+              expectCompleted(getRechtlicheInteroperabilitaet());
+            else expectNotCompleted(getRechtlicheInteroperabilitaet());
+          }
           if (expected.completedPrinciples) expectCompleted(getPrinzipA());
           else expectNotCompleted(getPrinzipA());
         });
@@ -510,9 +524,11 @@ describe("navigation on pages of documentation", () => {
           if (expected.warningParticipation)
             expectWarning(getBeteiligungsformate());
           else expectNotWarning(getBeteiligungsformate());
-          if (expected.warningInteroperabilityLevelLegal)
-            expectWarning(getRechtlicheInteroperabilitaet());
-          else expectNotWarning(getRechtlicheInteroperabilitaet());
+          if (expected.enabledInteroperability) {
+            if (expected.warningInteroperabilityLevelLegal)
+              expectWarning(getRechtlicheInteroperabilitaet());
+            else expectNotWarning(getRechtlicheInteroperabilitaet());
+          }
           if (expected.warningPrinciples) expectWarning(getPrinzipA());
           else expectNotWarning(getPrinzipA());
         });
