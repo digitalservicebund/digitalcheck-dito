@@ -30,7 +30,7 @@
     "test:update-snapshots": "playwright test tests/snapshots --config=tests/playwright-snapshots.config.ts --update-snapshots",
     "tests": "vitest run && pnpm run test:e2e && pnpm run test:a11y",
     "tests-nightly": "vitest run && pnpm run test:e2e-nightly && pnpm run test:a11y-nightly",
-    "typecheck": "astro check --config tsconfig.test.json"
+    "typecheck": "astro check"
   },
   "dependencies": {
     "@astrojs/mdx": "^6.0.1",

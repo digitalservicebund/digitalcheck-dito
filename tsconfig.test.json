@@ -2,16 +2,11 @@
   "extends": "./tsconfig.json",
   "include": [
     ".astro/types.d.ts",
-    "src/**/*",
-    "app/**/*",
-    "src/**/*.spec.ts",
-    "app/**/*.spec.ts",
-    "src/**/*.spec.tsx",
-    "app/**/*.spec.tsx",
-    "src/**/*.test.ts",
-    "app/**/*.test.ts",
-    "src/**/*.test.tsx",
-    "app/**/*.test.tsx"
+    "**/*",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/*.test.ts",
+    "**/*.test.tsx"
   ],
   "exclude": ["dist", "build", "tests/playwright-report"],
   "files": ["vitest.d.ts"]

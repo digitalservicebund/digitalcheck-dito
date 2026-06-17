@@ -1,16 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "exclude": [
-    "dist",
-    "build",
-    "tests/playwright-report",
-    // exclude spec files since they use vitest globals
-    "**/*.spec.ts",
-    "**/*.spec.tsx",
-    "**/*.test.ts",
-    "**/*.test.tsx"
-  ],
-  "include": [".astro/types.d.ts", "src/**/*", "app/**/*"],
+  "exclude": ["dist", "build", "tests/playwright-report"],
+  "include": [".astro/types.d.ts", "**/*"],
   "compilerOptions": {
     "typeRoots": ["./node_modules/@types", "./src/types"],
     "paths": {
