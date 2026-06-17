@@ -1,0 +1,1 @@
+import{j as m}from"./bundle-mjs.DBvd4n8_.js";function a({url:r,width:t,height:n,alternativeText:s,className:e,...i}){return r?m.jsx("img",{...i,src:r,alt:s,width:t,height:n,className:e}):null}export{a as I};
