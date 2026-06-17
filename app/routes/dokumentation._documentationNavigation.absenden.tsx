@@ -14,6 +14,7 @@ const { finish } = digitalDocumentation;
 export function DocumentationSend() {
   const { prinzips } = useDocumentationNavigation();
   const { downloadDocumentation } = useWordDocumentation();
+  const { documentationData } = useDocumentationDataService();
 
   return (
     <>
@@ -56,6 +57,29 @@ export function DocumentationSend() {
           <RichText markdown={finish.send.content} />
         </InfoBox>
         <InfoBox
+          look="highlight"
+          className="bg-white"
+          heading={{
+            tagName: "h2",
+            look: "ds-heading-03-reg",
+            text: "Interoperabilitätsbewertung herunterladen",
+          }}
+        >
+          <RichText
+            markdown={dedent`
+            Laden Sie die Interoperabilitätsbewertung herunter, um sie zu verakten
+            und an die nationale Kontaktstelle zu senden.
+          `}
+          />
+          <ButtonContainer>
+            <DownloadButton
+              onClick={() => void downloadAssessment(documentationData)}
+            >
+              Bewertung herunterladen (.docx)
+            </DownloadButton>
+          </ButtonContainer>
+        </InfoBox>
+        <InfoBox
           heading={{
             tagName: "h2",
             look: "ds-heading-03-reg",
@@ -80,6 +104,9 @@ export default function Route() {
 
 // Astro page export
 import { DocumentationPageShell } from "@/components/DocumentationPageShell";
+import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
+import { downloadAssessment } from "~/service/wordDocumentationExport/wordInteroperabilityAssessment.ts";
+import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
 export function AbsendenPage({

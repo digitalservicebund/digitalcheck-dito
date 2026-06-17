@@ -14,6 +14,9 @@ const { principlePages, participation, info } = digitalDocumentation;
 
 export const policyTitleSchema = z.object({
   title: z.string().min(1, { message: info.inputTitle.error }),
+  organization: z
+    .string()
+    .min(1, { message: "Bitte geben Sie eine Organisation ein." }),
 });
 
 export const participationSchema = z.object({

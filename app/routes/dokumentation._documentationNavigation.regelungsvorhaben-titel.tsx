@@ -28,15 +28,15 @@ export function DocumentationTitle() {
   });
 
   return (
-    <>
-      <div className="space-y-40">
-        <Heading
-          text={info.headline}
-          tagName="h1"
-          look="ds-heading-02-reg"
-          className="mb-40"
-        />
-        <form {...form.getFormProps()}>
+    <div className="space-y-40">
+      <Heading
+        text={info.headline}
+        tagName="h1"
+        look="ds-heading-02-reg"
+        className="mb-40"
+      />
+      <form {...form.getFormProps()}>
+        <div className="space-y-32">
           <Input scope={form.scope("title")} warningInsteadOfError>
             {info.inputTitle.label}
             <HelpButton
@@ -48,16 +48,20 @@ export function DocumentationTitle() {
             </HelpButton>
           </Input>
 
-          <DocumentationActions
-            previousUrl={previousUrl}
-            submit
-            showDownloadDraftButton
-            showSavingTip
-            prinzips={prinzips}
-          />
-        </form>
-      </div>
-    </>
+          <Input scope={form.scope("organization")} warningInsteadOfError>
+            Ministerium / Organisation
+          </Input>
+        </div>
+
+        <DocumentationActions
+          previousUrl={previousUrl}
+          submit
+          showDownloadDraftButton
+          showSavingTip
+          prinzips={prinzips}
+        />
+      </form>
+    </div>
   );
 }
 
