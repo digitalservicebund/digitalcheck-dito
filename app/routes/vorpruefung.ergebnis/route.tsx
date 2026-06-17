@@ -27,6 +27,7 @@ import ResultForm from "~/routes/vorpruefung.ergebnis/ResultForm";
 import { ResultType } from "./PreCheckResult";
 
 import { PreCheckFAQ } from "~/components/content/PreCheckFAQ.tsx";
+import { pruefstelleMails } from "~/resources/content/shared/bundeslaender";
 import type { Step } from "~/utils/contentTypes.ts";
 import { usePreCheckData } from "../vorpruefung/preCheckDataHook";
 
@@ -86,7 +87,8 @@ function PrintTitle({ title }: Readonly<{ title: string }>) {
 
 export default function Result() {
   const [vorhabenTitle, setVorhabenTitle] = useState("");
-  const { answers, firstUnansweredQuestionIndex, result } = usePreCheckData();
+  const { answers, bundesland, firstUnansweredQuestionIndex, result } =
+    usePreCheckData();
 
   const resultContent = getContentForResult(answers, result);
 
@@ -113,6 +115,9 @@ export default function Result() {
 
   const resultHint =
     result?.digital === ResultType.UNSURE ? preCheckResult.unsure.hint : "";
+  const isBund = bundesland === "Bund";
+  const pruefstelleMail = bundesland && pruefstelleMails.get(bundesland);
+  const hasPruefstelle = !!pruefstelleMail;
   return (
     <>
       <main>
@@ -224,7 +229,16 @@ export default function Result() {
                       tagName: "h3",
                     }}
                   >
-                    <RichText markdown={preCheckResult.form.outro.text} />
+                    <RichText
+                      markdown={
+                        isBund
+                          ? preCheckResult.form.outro.textBund
+                          : hasPruefstelle
+                            ? preCheckResult.form.outro
+                                .textBundeslandWithPruefstelle
+                            : ""
+                      }
+                    />
                   </InfoBox>
                   <div className="ds-stack ds-stack-16 mt-40">
                     <Heading
@@ -232,11 +246,15 @@ export default function Result() {
                       className="ds-label-section"
                       text={preCheckResult.form.faqs.title}
                     />
-                    {preCheckResult.form.faqs.details.map((detail) => (
-                      <DetailsSummary key={detail.label} title={detail.label}>
-                        <RichText markdown={detail.text} />
-                      </DetailsSummary>
-                    ))}
+                    {preCheckResult.form.faqs.details
+                      .filter(
+                        (d) => !("pruefstelleOnly" in d) || hasPruefstelle,
+                      )
+                      .map((detail) => (
+                        <DetailsSummary key={detail.label} title={detail.label}>
+                          <RichText markdown={detail.text} />
+                        </DetailsSummary>
+                      ))}
                   </div>
                 </Container>
               </>

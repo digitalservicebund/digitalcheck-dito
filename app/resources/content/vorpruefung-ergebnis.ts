@@ -115,7 +115,7 @@ export const preCheckResult = {
       - **Bei Anforderungen an Interoperabilität** erhält das Digitalcheck-Team automatisch eine Kopie und meldet sich bei Ihnen.
     `,
     previewLabel: "Vorschau der E-Mail-Vorlage",
-    copyIntroText: dedent`**Alternativ** können Sie das Ergebnis der Vorprüfung einfach als Text kopieren und manuell an die zuständige Prüfstelle schicken oder bei Ihren Dokumenten speichern.`,
+    copyIntroText: dedent`**Alternativ** können Sie das Ergebnis der Vorprüfung einfach als Text kopieren und manuell an Ihre eigenen Empfänger schicken`,
     vorhabenTitleLabel: "Vorläufiger Arbeitstitel des Vorhabens",
     vorhabenTitleRequired: "Bitte geben Sie einen Titel für Ihr Vorhaben an.",
     vorhabenTitleTooLong:
@@ -153,6 +153,11 @@ export const preCheckResult = {
             - Nutzen Sie, falls vorhanden, die direkte Veraktungsfunktion in Outlook.
           `,
         },
+        {
+          label: "Warum die Vorprüfung an die zuständigen Prüftselle schicken?",
+          pruefstelleOnly: true,
+          text: "Erfahrungswerte zeigen, dass ein frühzeitiger Austausch mit den Prüfstellen oder dem DigitalService das Erarbeiten für Sie vereinfacht und die Prüfung beschleunigt. So können Sie von den Erfahrungen in anderen Vorhaben profitieren – wenn Sie dies wünschen.",
+        },
       ],
     },
     downloadPdfButton: {
@@ -183,7 +188,13 @@ export const preCheckResult = {
     downloadStarted: "Vorprüfung wird heruntergeladen",
     outro: {
       title: "Darum ist es wichtig",
-      text: "Bei Interoperabilitätsbezug unterstützt Sie das Digitalcheck-Team gezielt bei der Umsetzung der EU-Anforderungen.",
+      textBund: dedent`
+        - Je **früher** Sie sich mit dem NKR zu Digitalbezug austauschen desto schneller ist die Prüfung abgeschlossen.
+        - Bei Interoperabilitätsbezug unterstützt Sie das Digitalcheck-Team gezielt bei der Umsetzung der EU-Anforderungen.
+      `,
+      textBundeslandWithPruefstelle: dedent`
+        Je **früher** Sie sich mit Ihrer zuständigen Prüfstelle austauschen desto schneller ist die Vorprüfung abgeschlossen.
+      `,
     },
   },
   print: {
