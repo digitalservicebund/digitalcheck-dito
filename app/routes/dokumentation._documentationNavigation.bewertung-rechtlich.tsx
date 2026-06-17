@@ -52,20 +52,7 @@ export function DocumentationInteroperabilityAssessmentLegal() {
     schema: interoperabilityAssessmentLevelSchema,
     defaultValues: { detail: "", rating: "" },
     storedData: documentationData.interoperabilityAssessment?.legal,
-    setDataCallback: (data) =>
-      setInteroperabilityAssessmentData({
-        legal: data ?? { detail: "", rating: "" },
-        organizational: documentationData.interoperabilityAssessment
-          ?.organizational ?? { detail: "", rating: "" },
-        semantic: documentationData.interoperabilityAssessment?.semantic ?? {
-          detail: "",
-          rating: "",
-        },
-        technical: documentationData.interoperabilityAssessment?.technical ?? {
-          detail: "",
-          rating: "",
-        },
-      }),
+    setDataCallback: (data) => setInteroperabilityAssessmentData("legal", data),
   });
 
   return (

@@ -52,22 +52,10 @@ export function DocumentationInteroperabilityAssessmentSemantic() {
 
   const form = useSyncedForm({
     schema: interoperabilityAssessmentLevelSchema,
-    defaultValues: { detail: "", rating: "" },
+    defaultValues: {},
     storedData: documentationData.interoperabilityAssessment?.semantic,
     setDataCallback: (data) =>
-      setInteroperabilityAssessmentData({
-        legal: documentationData.interoperabilityAssessment?.legal ?? {
-          detail: "",
-          rating: "",
-        },
-        organizational: documentationData.interoperabilityAssessment
-          ?.organizational ?? { detail: "", rating: "" },
-        semantic: data ?? { detail: "", rating: "" },
-        technical: documentationData.interoperabilityAssessment?.technical ?? {
-          detail: "",
-          rating: "",
-        },
-      }),
+      setInteroperabilityAssessmentData("semantic", data),
   });
 
   return (

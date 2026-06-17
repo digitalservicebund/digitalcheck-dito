@@ -63,7 +63,8 @@ type DocumentationDataContextType = {
     bindingRequirements?: BindingRequirementsData,
   ) => void;
   setInteroperabilityAssessmentData: (
-    interoperabilityAssessment?: InteroperabilityAssessmentData,
+    level: keyof InteroperabilityAssessmentData,
+    data?: InteroperabilityAssessmentLevel,
   ) => void;
   addOrUpdatePrinciple: (newPrinciple?: Principle) => void;
   addOrUpdatePrincipleAnswer: (
@@ -169,7 +170,7 @@ const routeDefinitions: Record<string, RouteDefinition> = {
   [dokumentation_verbindlicheAnforderungen.path]: {
     getData: (data) => data.bindingRequirements,
     schema: bindingRequirementsNavigationSchema,
-    validate: skipIfNoInteroperabilityRequired, // TODO remove
+    validate: skipIfNoInteroperabilityRequired,
   },
   [dokumentation_bewertungRechtlich.path]: {
     getData: (data) => data.interoperabilityAssessment?.legal,
@@ -252,7 +253,7 @@ function getInitialState(): DocumentationData {
     DocumentationData<V1> | DocumentationData
   >(STORAGE_KEY);
 
-  if (storedData && storedData.version === DATA_SCHEMA_VERSION_V1) {
+  if (storedData?.version === DATA_SCHEMA_VERSION_V1) {
     storedData = migrateV1ToV2(storedData);
   }
 
@@ -389,14 +390,18 @@ export function DocumentationDataProvider({
   );
 
   const setInteroperabilityAssessmentData = useCallback(
-    (interoperabilityAssessment?: InteroperabilityAssessmentData) => {
+    (
+      level: keyof InteroperabilityAssessmentData,
+      data?: InteroperabilityAssessmentLevel,
+    ) => {
+      const assessmentData: Partial<InteroperabilityAssessmentData> = {
+        ...documentationData.interoperabilityAssessment,
+      };
+      if (data) assessmentData[level] = data;
       const updatedDocumentationData = {
         ...documentationData,
-        interoperabilityAssessment,
+        interoperabilityAssessment: assessmentData,
       };
-
-      if (!interoperabilityAssessment)
-        delete updatedDocumentationData.interoperabilityAssessment;
 
       createOrUpdateDocumentationData(updatedDocumentationData);
     },

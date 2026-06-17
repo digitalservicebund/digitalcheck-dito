@@ -237,7 +237,7 @@ export type DocumentationData<V extends DataSchemaVersion = V2> = {
   participation?: Participation;
   euInteroperabilityOutcome?: EuInteroperabilityOutcome;
   bindingRequirements?: BindingRequirementsData;
-  interoperabilityAssessment?: InteroperabilityAssessmentData;
+  interoperabilityAssessment?: Partial<InteroperabilityAssessmentData>;
   principles?: Principle<V>[];
   initialized?: boolean;
 } & VersionedData;

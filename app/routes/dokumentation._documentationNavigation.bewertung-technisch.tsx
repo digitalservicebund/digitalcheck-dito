@@ -53,19 +53,7 @@ export function DocumentationInteroperabilityAssessmentTechnical() {
     defaultValues: { detail: "", rating: "" },
     storedData: documentationData.interoperabilityAssessment?.technical,
     setDataCallback: (data) =>
-      setInteroperabilityAssessmentData({
-        legal: documentationData.interoperabilityAssessment?.legal ?? {
-          detail: "",
-          rating: "",
-        },
-        organizational: documentationData.interoperabilityAssessment
-          ?.organizational ?? { detail: "", rating: "" },
-        semantic: documentationData.interoperabilityAssessment?.semantic ?? {
-          detail: "",
-          rating: "",
-        },
-        technical: data ?? { detail: "", rating: "" },
-      }),
+      setInteroperabilityAssessmentData("technical", data),
   });
 
   return (

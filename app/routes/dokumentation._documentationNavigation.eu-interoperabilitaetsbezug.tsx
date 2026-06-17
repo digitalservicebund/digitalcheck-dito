@@ -28,7 +28,7 @@ const secondaryHelpText = `
 Sollte sich nach den Bestimmungen der Verordnung dennoch keine Verpflichtung zu einer Bewertung ergeben und Sie möchten auch keine frewillige Bewertung durchführen, wählen Sie die Option "Nein, es ist kein Bezug vorhanden".`;
 
 const defaultValues: EuInteroperabilityOutcome = {
-  outcomeId: "NOT_REQUIRED_INDICATES_PRECHECK",
+  outcomeId: undefined,
 };
 
 const options = [
@@ -53,7 +53,7 @@ export function DocumentationEuInteroperabilityRequirements() {
     defaultValues,
     storedData: documentationData.euInteroperabilityOutcome,
     setDataCallback: (data) => {
-      setEuInteroperabilityOutcome(data ?? undefined);
+      setEuInteroperabilityOutcome(data ?? {});
     },
   });
 
