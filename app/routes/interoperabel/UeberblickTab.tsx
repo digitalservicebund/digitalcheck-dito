@@ -82,7 +82,6 @@ export const UeberblickTab = () => (
         Es geht darum, darzulegen, wie sich Ihre Regelung auf die EU-weite
         Interoperabilität auswirkt. Der wesentliche Inhalt besteht aus fünf
         Fragen. Die Bewertung fragt nach sogenannten „
-        {/* TODO: helper function for links */}
         <a
           href={getTabAnchorLink(
             tabIds.backgroundTabId,
@@ -90,7 +89,6 @@ export const UeberblickTab = () => (
           )}
         >
           {" "}
-          {/* TODO: add link */}
           verbindlichen Anforderungen
         </a>
         “ und prüft deren Einfluss auf die{" "}
@@ -101,7 +99,6 @@ export const UeberblickTab = () => (
           )}
         >
           {" "}
-          {/* TODO: add link */}
           vier Ebenen der Interoperabilität
         </a>
         .
