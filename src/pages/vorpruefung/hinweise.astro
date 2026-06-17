@@ -1,6 +1,6 @@
 ---
 import VorpruefungLayout from "@/layouts/VorpruefungLayout.astro";
-import { vorpruefung } from "@/config/routes";
+import { vorpruefung, vorpruefung_bundesland } from "@/config/routes";
 import { LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer";
 import InlineNotice from "~/components/InlineNotice";
@@ -13,7 +13,7 @@ export const frontmatter = {
   sitemap: false,
 };
 
-const { questions, generalInfo } = preCheck;
+const { generalInfo } = preCheck;
 const { headline, text, nextButton, hint } = generalInfo;
 ---
 
@@ -25,7 +25,10 @@ const { headline, text, nextButton, hint } = generalInfo;
       <RichText markdown={hint.text} />
     </InlineNotice>
     <ButtonContainer>
-      <LinkButton id={"generalInfo-next-button"} href={questions[0].path}>
+      <LinkButton
+        id={"generalInfo-next-button"}
+        href={vorpruefung_bundesland.path}
+      >
         {nextButton}
       </LinkButton>
       <LinkButton

@@ -440,6 +440,17 @@ export const vorpruefung = {
   navLabel: null,
 } as const;
 
+export const vorpruefung_bundesland = {
+  key: "vorpruefung_bundesland",
+  path: "/vorpruefung/bundesland",
+  title: "Bundesland",
+  parent: vorpruefung,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const vorpruefung_ergebnis = {
   key: "vorpruefung_ergebnis",
   path: "/vorpruefung/ergebnis",
@@ -513,6 +524,7 @@ export const allRoutes = [
   sitemap,
   unterstuetzung,
   vorpruefung,
+  vorpruefung_bundesland,
   vorpruefung_ergebnis,
   vorpruefung_hinweise,
   zahlenUndFakten,

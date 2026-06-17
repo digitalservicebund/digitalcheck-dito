@@ -78,6 +78,7 @@ export const usePreCheckData = () => {
 
   if (preCheckData?.ssr)
     return {
+      bundesland: undefined,
       resultData: undefined,
       firstUnansweredQuestionIndex: null,
       answerForQuestionId: () => undefined,
@@ -104,6 +105,7 @@ export const usePreCheckData = () => {
   } as PreCheckResultSchema;
 
   return {
+    bundesland: preCheckData.bundesland,
     resultData,
     firstUnansweredQuestionIndex,
     answerForQuestionId,

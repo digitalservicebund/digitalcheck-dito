@@ -1,0 +1,18 @@
+---
+import VorpruefungLayout from "@/layouts/VorpruefungLayout.astro";
+import { VorpruefungBundesland } from "~/routes/vorpruefung._bundesland";
+import { preCheck } from "~/resources/content/vorpruefung";
+import { vorpruefung_hinweise } from "@/config/routes";
+
+export const frontmatter = {
+  title: "Bundesland",
+};
+---
+
+<VorpruefungLayout title={frontmatter.title}>
+  <VorpruefungBundesland
+    prevPath={vorpruefung_hinweise.path}
+    nextPath={preCheck.questions[0].path}
+    client:load
+  />
+</VorpruefungLayout>

@@ -1,8 +1,8 @@
 import {
   interoperabel,
   vorpruefung,
+  vorpruefung_bundesland,
   vorpruefung_ergebnis,
-  vorpruefung_hinweise,
 } from "@/config/routes";
 import { withBase } from "@/utils/path";
 import type { TQuestion } from "~/routes/vorpruefung._preCheckNavigation.$questionId";
@@ -327,7 +327,7 @@ export const preCheck = {
     path: questionPath(question.id),
     prevLink:
       index === 0
-        ? vorpruefung_hinweise.path
+        ? vorpruefung_bundesland.path
         : questionPath(questions[index - 1].id),
     nextLink:
       index === questions.length - 1

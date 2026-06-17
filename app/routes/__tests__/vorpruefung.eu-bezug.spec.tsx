@@ -114,6 +114,7 @@ describe.each(scenarios)("test $name", ({ answers, expected }) => {
     const preCheckAnswers = mapUserAnswersToMockAnswers(answers);
 
     vi.mocked(usePreCheckData).mockReturnValue({
+      bundesland: undefined,
       answerForQuestionId: vi.fn().mockReturnValue({
         questionId: questions[questionIdx].id,
         answer: preCheckAnswers[questionIdx]?.answer,

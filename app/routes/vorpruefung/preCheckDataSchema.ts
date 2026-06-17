@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { bundeslandSchema } from "~/resources/content/shared/bundeslaender";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
 import { ResultType } from "../vorpruefung.ergebnis/PreCheckResult";
@@ -47,9 +48,13 @@ export const resultSchema = z.discriminatedUnion("result", [
 
 export const schema = z
   .object({
+    bundesland: bundeslandSchema.optional(),
     answers: z.array(answerSchema),
   })
   .and(resultSchema);
+
+export const landFormSchema = z.object({ bundesland: bundeslandSchema });
+export type LandFormSchema = z.infer<typeof landFormSchema>;
 
 export type PreCheckAnswerSchema = z.infer<typeof answerSchema>;
 export type PreCheckResultSchema = z.infer<typeof resultSchema>;
