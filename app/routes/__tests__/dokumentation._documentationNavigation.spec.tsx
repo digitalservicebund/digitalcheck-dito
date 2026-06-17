@@ -569,15 +569,15 @@ describe("navigation on pages of documentation", () => {
     }
 
     describe("when interoperability is NOT required (disabled routes)", () => {
-      beforeEach(async () => {
+      beforeEach(() => {
         // No euInteroperabilityOutcome set → all bewertung routes are disabled
         vi.mocked(
           readDataFromLocalStorage<DocumentationData<V2>>,
         ).mockReturnValue({ version: DATA_SCHEMA_VERSION_V2 });
       });
 
-      it("nextUrl skips all disabled EU routes when on euInteroperabilitaetsbezug", async () => {
-        await act(async () => {
+      it("nextUrl skips all disabled EU routes when on euInteroperabilitaetsbezug", () => {
+        act(() => {
           renderPageWithRoutes(dokumentation_euInteroperabilitaetsbezug.path);
         });
         expect(screen.getByRole("link", { name: "Weiter" })).toHaveAttribute(
@@ -586,8 +586,8 @@ describe("navigation on pages of documentation", () => {
         );
       });
 
-      it("previousUrl skips all disabled EU routes when on zusammenfassung", async () => {
-        await act(async () => {
+      it("previousUrl skips all disabled EU routes when on zusammenfassung", () => {
+        act(() => {
           renderPageWithRoutes(dokumentation_zusammenfassung.path);
         });
         expect(screen.getByRole("link", { name: "Zurück" })).toHaveAttribute(
@@ -596,8 +596,8 @@ describe("navigation on pages of documentation", () => {
         );
       });
 
-      it("nextUrl is not affected for routes before the disabled block", async () => {
-        await act(async () => {
+      it("nextUrl is not affected for routes before the disabled block", () => {
+        act(() => {
           renderPageWithRoutes(dokumentation_beteiligungsformate.path);
         });
         // beteiligungsformate is the last route before the EU group;
@@ -610,7 +610,7 @@ describe("navigation on pages of documentation", () => {
     });
 
     describe("when interoperability IS required (routes enabled)", () => {
-      beforeEach(async () => {
+      beforeEach(() => {
         vi.mocked(
           readDataFromLocalStorage<DocumentationData<V2>>,
         ).mockReturnValue({
@@ -619,8 +619,8 @@ describe("navigation on pages of documentation", () => {
         });
       });
 
-      it("nextUrl does NOT skip disabled EU routes — goes to verbindlicheAnforderungen", async () => {
-        await act(async () => {
+      it("nextUrl does NOT skip disabled EU routes — goes to verbindlicheAnforderungen", () => {
+        act(() => {
           renderPageWithRoutes(dokumentation_euInteroperabilitaetsbezug.path);
         });
         expect(screen.getByRole("link", { name: "Weiter" })).toHaveAttribute(
@@ -629,8 +629,8 @@ describe("navigation on pages of documentation", () => {
         );
       });
 
-      it("previousUrl does NOT skip — goes to bewertungTechnisch from zusammenfassung", async () => {
-        await act(async () => {
+      it("previousUrl does NOT skip — goes to bewertungTechnisch from zusammenfassung", () => {
+        act(() => {
           renderPageWithRoutes(dokumentation_zusammenfassung.path);
         });
         expect(screen.getByRole("link", { name: "Zurück" })).toHaveAttribute(

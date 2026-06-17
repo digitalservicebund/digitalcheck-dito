@@ -1,6 +1,6 @@
 import type { FormScope } from "@rvf/react";
 import { useField } from "@rvf/react";
-import { z } from "zod";
+import type { z } from "zod";
 import Badge from "~/components/Badge.tsx";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Heading from "~/components/Heading";
@@ -30,7 +30,9 @@ function DetailFormElement({
   }
   return (
     <Textarea
-      description={`Tragen Sie Ihre Erläuterung ein, z. B.: „Behörde A darf Daten von Behörde B abrufen.“`}
+      description={
+        "Tragen Sie Ihre Erläuterung ein, z. B.: „Behörde A darf Daten von Behörde B abrufen.“"
+      }
       scope={scope.scope("detail")}
       rows={5}
       warningInsteadOfError

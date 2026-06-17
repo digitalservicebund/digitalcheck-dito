@@ -97,29 +97,32 @@ export function LayoutWithDocumentationNavigation({
   const { findDocumentationDataForUrl, validateDocumentationDataForRoute } =
     useDocumentationDataService();
 
-  const routes: (Route | RouteGroup)[] = [
-    ...ROUTES_DOCUMENTATION_INTRO,
-    {
-      title: "Prinzipien",
-      routes: prinzips.map<Route>(({ Name, URLBezeichnung, documentId }) => ({
-        title: Name,
-        path: `${dokumentation.path}/${URLBezeichnung}`,
-        principleId: documentId,
-      })),
-    },
-    {
-      title: "EU-Interoperabilität",
-      routes: [
-        dokumentation_euInteroperabilitaetsbezug,
-        dokumentation_verbindlicheAnforderungen,
-        dokumentation_bewertungRechtlich,
-        dokumentation_bewertungOrganisatorisch,
-        dokumentation_bewertungSemantisch,
-        dokumentation_bewertungTechnisch,
-      ],
-    },
-    ...ROUTES_DOCUMENTATION_FINALIZE,
-  ];
+  const routes: (Route | RouteGroup)[] = useMemo(
+    () => [
+      ...ROUTES_DOCUMENTATION_INTRO,
+      {
+        title: "Prinzipien",
+        routes: prinzips.map<Route>(({ Name, URLBezeichnung, documentId }) => ({
+          title: Name,
+          path: `${dokumentation.path}/${URLBezeichnung}`,
+          principleId: documentId,
+        })),
+      },
+      {
+        title: "EU-Interoperabilität",
+        routes: [
+          dokumentation_euInteroperabilitaetsbezug,
+          dokumentation_verbindlicheAnforderungen,
+          dokumentation_bewertungRechtlich,
+          dokumentation_bewertungOrganisatorisch,
+          dokumentation_bewertungSemantisch,
+          dokumentation_bewertungTechnisch,
+        ],
+      },
+      ...ROUTES_DOCUMENTATION_FINALIZE,
+    ],
+    [prinzips],
+  );
 
   // exclude documentation notes
   const displayedRoutes = useMemo(
@@ -153,7 +156,7 @@ export function LayoutWithDocumentationNavigation({
       currentRoute?.principleId
         ? findDocumentationDataForUrl(currentRoute.principleId)
         : undefined,
-    [currentRoute?.principleId, findDocumentationDataForUrl],
+    [currentRoute, findDocumentationDataForUrl],
   );
 
   const isRouteDisabled = useCallback(
@@ -196,6 +199,7 @@ export function LayoutWithDocumentationNavigation({
       currentPrincipleFormData,
       currentUrl,
       findDocumentationDataForUrl,
+      isRouteDisabled,
     ],
   );
 
@@ -208,7 +212,12 @@ export function LayoutWithDocumentationNavigation({
         findDocumentationDataForUrl,
         isRouteDisabled,
       ) ?? dokumentation.path,
-    [flatRoutes, navigationBaseUrl, findDocumentationDataForUrl],
+    [
+      flatRoutes,
+      navigationBaseUrl,
+      findDocumentationDataForUrl,
+      isRouteDisabled,
+    ],
   );
 
   const isNavigationDisabled = currentUrl === dokumentation_hinweise.path;

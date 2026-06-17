@@ -3,7 +3,7 @@ import {
   DeleteOutlineTwoTone,
 } from "@digitalservicebund/icons";
 import { useFieldArray } from "@rvf/react";
-import React from "react";
+import type React from "react";
 import Badge from "~/components/Badge.tsx";
 import Button from "~/components/Button";
 import Combobox from "~/components/ComboBox.tsx";

@@ -1,6 +1,6 @@
 import type { FormScope } from "@rvf/react";
 import { useField } from "@rvf/react";
-import { z } from "zod";
+import type { z } from "zod";
 import Badge from "~/components/Badge.tsx";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Heading from "~/components/Heading";
