@@ -85,8 +85,8 @@ export function formatInteroperabilityAssessment(
         text: `${levelLabel} Interoperabilität`,
       }),
       metadataTable([
+        ["Voraussetzungen geschaffen", formatRating(data?.rating) ?? ""],
         ["Erklärung", data?.detail ?? ""],
-        ["Bewertung", formatRating(data?.rating) ?? ""],
       ]),
     ];
   });
