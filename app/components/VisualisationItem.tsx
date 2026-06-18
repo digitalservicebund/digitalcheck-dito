@@ -1,4 +1,4 @@
-import { ROUTE_REGELUNGEN } from "@/config/additionalRoutes";
+import { beispiele } from "@/config/routes";
 import { getImagePath } from "@/utils/images";
 import { ZoomInOutlined } from "@digitalservicebund/icons";
 import Heading from "~/components/Heading";
@@ -35,7 +35,7 @@ export default function VisualisationItem({
         <div>
           <strong>Kontext: </strong>
           <a
-            href={`${ROUTE_REGELUNGEN}/${visualisierung.Beispielvorhaben.URLBezeichnung}`}
+            href={`${beispiele.path}/regelungen/${visualisierung.Beispielvorhaben.URLBezeichnung}`}
           >
             {visualisierung.Beispielvorhaben.Titel}
           </a>

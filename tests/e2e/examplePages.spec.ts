@@ -1,7 +1,7 @@
-import { ROUTE_REGELUNGEN } from "@/config/additionalRoutes";
-import { beispiele_visualisierungen } from "@/config/routes";
+import { beispiele, beispiele_visualisierungen } from "@/config/routes";
 import { expect, test } from "@playwright/test";
 
+const ROUTE_REGELUNGEN = beispiele.path + "/regelungen";
 const ROUTE_EXAMPLES_DIGITAL_COMMUNICATION =
   "/beispiele/prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten";
 const ROUTE_EXAMPLES_REUSE_DATA_AND_STANDARDS =

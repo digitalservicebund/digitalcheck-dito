@@ -1,6 +1,5 @@
 ---
-import { ROUTE_REGELUNGEN } from "@/config/additionalRoutes";
-import { beispiele_prinzipien } from "@/config/routes";
+import { beispiele, beispiele_prinzipien } from "@/config/routes";
 import BeispieleLayout from "@/layouts/BeispieleLayout.astro";
 import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
 import ContentWrapper from "~/components/ContentWrapper.tsx";
@@ -103,7 +102,7 @@ const tabs = prinzips.map((principle) => ({
                     />
 
                     <a
-                      href={`${ROUTE_REGELUNGEN}/${exampleProject.URLBezeichnung}`}
+                      href={`${beispiele.path}/regelungen/${exampleProject.URLBezeichnung}`}
                       data-astro-prefetch="viewport"
                     >
                       {examplesRegelungen.exampleLinkText}
