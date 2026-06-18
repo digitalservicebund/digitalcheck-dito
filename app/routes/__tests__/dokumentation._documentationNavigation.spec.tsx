@@ -126,7 +126,7 @@ const validationScenarios: ValidationScenario[] = [
       ],
     },
     expected: {
-      completedTitle: false,
+      completedTitle: false, // is current route so no states are shown
       completedParticipation: true,
       completedPrinciples: true,
       completedInteroperability: true,
@@ -143,7 +143,7 @@ const validationScenarios: ValidationScenario[] = [
       version: DATA_SCHEMA_VERSION_V1,
     },
     expected: {
-      completedTitle: false,
+      completedTitle: false, // is current route so no states are shown
       completedParticipation: false,
       completedPrinciples: false,
       completedInteroperability: false,
@@ -189,7 +189,7 @@ const validationScenarios: ValidationScenario[] = [
       ],
     },
     expected: {
-      completedTitle: false,
+      completedTitle: false, // is current route so no states are shown
       completedParticipation: true,
       completedPrinciples: false,
       completedInteroperability: false,
@@ -424,7 +424,7 @@ describe("navigation on pages of documentation", () => {
           ],
         },
         expected: {
-          completedTitle: false,
+          completedTitle: false, // is current route so no states are shown
           completedParticipation: true,
           completedPrinciples: true,
           completedInteroperability: true,
@@ -476,19 +476,19 @@ describe("navigation on pages of documentation", () => {
               answer: "Ja, gänzlich oder teilweise",
               id: `${dokumentation.path}/prinzipA`,
               reasoning: "Some reasoning",
-              aspects: [],
+              aspects: [], // empty aspects fails V2 validation
             },
           ],
         },
         expected: {
-          completedTitle: false,
+          completedTitle: false, // is current route so no states are shown
           completedParticipation: true,
-          completedPrinciples: false,
+          completedPrinciples: false, // aspects empty -> invalid in V2
           completedInteroperability: false,
           enabledInteroperability: true,
           warningTitle: false,
           warningParticipation: false,
-          warningPrinciples: true,
+          warningPrinciples: true, // data exists but invalid
           warningInteroperabilityLevelLegal: true,
         },
       },

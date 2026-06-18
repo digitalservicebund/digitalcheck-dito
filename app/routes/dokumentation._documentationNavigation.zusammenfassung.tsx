@@ -1,3 +1,4 @@
+import { DocumentationPageShell } from "@/components/DocumentationPageShell";
 import {
   dokumentation_beteiligungsformate,
   dokumentation_bewertungOrganisatorisch,
@@ -27,6 +28,14 @@ import {
   type PolicyTitle,
   type Principle,
 } from "~/routes/dokumentation/documentationDataSchema";
+import RequirementDetail from "~/routes/dokumentation/interoperability/RequirementDetail.tsx";
+import {
+  formatRating,
+  publicationDateQuestion,
+  publicationLinkQuestion,
+  publicationStatusQuestion,
+} from "~/routes/dokumentation/interoperability/values.ts";
+import { keyValueToMap } from "~/utils/keyValue.ts";
 import type {
   PrinzipWithAspekte,
   PrinzipWithAspekteAndExample,
@@ -462,16 +471,6 @@ export default function Route() {
 }
 
 // Astro page export
-import { DocumentationPageShell } from "@/components/DocumentationPageShell";
-import RequirementDetail from "~/routes/dokumentation/interoperability/RequirementDetail.tsx";
-import {
-  formatRating,
-  publicationDateQuestion,
-  publicationLinkQuestion,
-  publicationStatusQuestion,
-} from "~/routes/dokumentation/interoperability/values.ts";
-import { keyValueToMap } from "~/utils/keyValue.ts";
-
 export function ZusammenfassungPage({
   prinzips,
   currentUrl,
