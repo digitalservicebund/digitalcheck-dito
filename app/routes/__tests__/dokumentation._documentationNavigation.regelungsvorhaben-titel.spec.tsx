@@ -74,7 +74,7 @@ describe("DocumentationTitle", () => {
     beforeEach(() => {
       mockedReadDataFromLocalStorage.mockReturnValue({
         ...{ version: DATA_SCHEMA_VERSION_V1 },
-        policyTitle: { title: "" },
+        policyTitle: { title: "", organization: "" },
       });
 
       act(() => {

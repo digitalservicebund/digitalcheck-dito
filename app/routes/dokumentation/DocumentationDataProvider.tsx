@@ -42,7 +42,7 @@ import {
   type V2,
 } from "~/routes/dokumentation/documentationDataSchema";
 
-import type { $ZodLooseShape } from "zod/v4/core";
+import type { ZodType } from "zod";
 import {
   readDataFromLocalStorage,
   removeFromLocalStorage,
@@ -131,7 +131,7 @@ export enum ValidationResult {
 }
 type RouteDefinition = {
   getData: (data: DocumentationData) => DocumentationDataType;
-  schema: $ZodLooseShape;
+  schema: ZodType;
   /**
    * Custom validation. Return `null` to use default validation.
    */
@@ -193,7 +193,7 @@ function getRouteData(
   documentationData: DocumentationData,
 ): {
   formData: DocumentationDataType;
-  schema: $ZodLooseShape;
+  schema: ZodType;
   validate: RouteDefinition["validate"];
 } {
   const routeDefinition = routeDefinitions[routeOrDataIdentifier];
