@@ -114,6 +114,7 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
       page,
       page.getByRole("button", { name: "Zwischenstand herunterladen (.docx)" }),
       testInfo.outputPath("documentation-v2-draft.docx"),
+      "Dokumentation_der_Digitaltauglichkeit.docx",
     );
     expectStringsOrderedInText(
       docText,
@@ -250,6 +251,7 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
       page,
       page.getByRole("button", { name: "Word-Datei herunterladen (.docx)" }),
       testInfo.outputPath("documentation-v2-final.docx"),
+      "Dokumentation_der_Digitaltauglichkeit.docx",
     );
     expectStringsOrderedInText(
       docText,
@@ -282,6 +284,7 @@ test("go to landing page and download empty V2 document template", async ({
     page,
     page.getByRole("button", { name: "Word-Vorlage herunterladen (.docx)" }),
     testInfo.outputPath("documentation-v2-template.docx"),
+    "Dokumentation_der_Digitaltauglichkeit.docx",
   );
   expectStringsOrderedInText(
     docText,
@@ -388,6 +391,7 @@ test.describe("with partial documentation started", () => {
           name: "Zwischenstand herunterladen (.docx)",
         }),
         testInfo.outputPath("documentation-v2-draft.docx"),
+        "Dokumentation_der_Digitaltauglichkeit.docx",
       );
       expectStringsOrderedInText(
         docText,

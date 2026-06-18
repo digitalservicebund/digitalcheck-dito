@@ -16,13 +16,12 @@ export async function downloadDocumentAndGetText(
   page: Page,
   button: Locator,
   filePath: string,
+  expectedSuggestedFilename: string,
 ) {
   const downloadPromise = page.waitForEvent("download");
   await button.click();
   const download = await downloadPromise;
-  expect(download.suggestedFilename()).toBe(
-    "Dokumentation_der_Digitaltauglichkeit.docx",
-  );
+  expect(download.suggestedFilename()).toBe(expectedSuggestedFilename);
 
   await download.saveAs(filePath);
   const { value: docText } = await extractRawText({ path: filePath });
@@ -37,13 +36,19 @@ export function expectStringsOrderedInText(
   let expectedLastIdx = -1;
   for (const expectedText of expectedStringsOrdered) {
     const searchIdx = text.indexOf(expectedText, expectedLastIdx + 1);
-    expect(searchIdx, expectedText).toBeGreaterThan(expectedLastIdx);
+    expect(
+      searchIdx,
+      `Expected string "${expectedText}" not found after position ${expectedLastIdx}`,
+    ).toBeGreaterThan(expectedLastIdx);
     expectedLastIdx = searchIdx;
   }
 
   for (const notExpectedText of notExpectedStrings) {
     const searchIdx = text.indexOf(notExpectedText);
-    expect(searchIdx, notExpectedText).toBe(-1);
+    expect(
+      searchIdx,
+      `String "${notExpectedText}" should not be present in text`,
+    ).toBe(-1);
   }
 }
 
