@@ -39,7 +39,6 @@ export const useSyncedForm = <
       initial: "onSubmit",
     },
     onBeforeSubmit: ({ unvalidatedData }) => {
-      console.log({ unvalidatedData });
       if (!storedData) setDataCallback(unvalidatedData);
       // bypass submission
       if (nextUrl) globalThis.location.href = nextUrl;

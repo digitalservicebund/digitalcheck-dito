@@ -1,6 +1,6 @@
 import { render, screen, within } from "@testing-library/react";
 import { act } from "react";
-import { beforeAll, describe, expect, test } from "vitest";
+import { beforeAll, describe, test } from "vitest";
 import type {
   BaseAbsatz,
   Paragraph,
