@@ -12,11 +12,11 @@ type Props = {
 };
 
 const labels: Record<keyof Requirement, string> = {
+  description: "Kurzbeschreibung oder Titel",
   legalReference: "Rechtsgrundlage",
-  description: "Beschreibung",
-  services: "Leistungen",
-  serviceAreas: "Leistungsbereiche",
-  stakeholderGroups: "Betroffene Gruppen",
+  services: "Betroffene transeuropäische Dienste",
+  serviceAreas: "Für welche Bereiche sind diese Dienste relevant?",
+  stakeholderGroups: "Für wen gilt diese verbindliche Anforderung?",
 };
 
 export default function RequirementDetail({ requirement }: Readonly<Props>) {

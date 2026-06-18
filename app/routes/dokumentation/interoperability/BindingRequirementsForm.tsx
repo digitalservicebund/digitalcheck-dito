@@ -115,7 +115,11 @@ export default function BindingRequirementsForm({
           >
             {requirements.map((key, requirement, index) => {
               return (
-                <div className="space-y-16 rounded border p-16" key={key}>
+                <div
+                  className="space-y-16 rounded border p-16"
+                  key={key}
+                  data-testid={"requirement-" + index}
+                >
                   <div className={"flex w-full justify-between"}>
                     <Badge look={"hint"}>Anforderung {index + 1}</Badge>
 

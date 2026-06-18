@@ -2,7 +2,6 @@ import { interoperabilityTemplateWord } from "@/config/downloads";
 import {
   convertInchesToTwip,
   FileChild,
-  type IPatch,
   Paragraph,
   patchDocument,
   PatchType,
@@ -45,41 +44,6 @@ export async function downloadAssessment(documentationData: DocumentationData) {
   }
 }
 
-export function buildAppendixPatch({
-  policyTitle,
-  interoperabilityAssessment,
-  bindingRequirements,
-  euInteroperabilityOutcome,
-}: Pick<
-  DocumentationData,
-  | "interoperabilityAssessment"
-  | "bindingRequirements"
-  | "policyTitle"
-  | "euInteroperabilityOutcome"
->): IPatch {
-  const hasEuData =
-    euInteroperabilityOutcome?.outcomeId === "REQUIRED" ||
-    interoperabilityAssessment !== undefined ||
-    Boolean(bindingRequirements?.requirements.length);
-
-  if (!hasEuData) {
-    return {
-      type: PatchType.PARAGRAPH,
-      children: [],
-    };
-  }
-  const children: FileChild[] = [
-    new Paragraph(`Erstellt am ${new Date().toLocaleDateString("de-DE")}`),
-    ...formatInteroperabilityMeta(policyTitle),
-    ...formatBindingRequirements(bindingRequirements),
-    ...formatInteroperabilityAssessment(interoperabilityAssessment),
-  ];
-  return {
-    type: PatchType.DOCUMENT,
-    children: children.filter((child) => child !== null),
-  };
-}
-
 export function formatInteroperabilityMeta(
   policyTitle?: PolicyTitle,
   meta?: InteroperabilityMeta,
@@ -88,7 +52,6 @@ export function formatInteroperabilityMeta(
   const publicationPlan =
     publicationOptions.get(meta?.publicationStatus ?? "") ??
     "geplant / bereits veröffentlicht (nicht zutreffendes bitte löschen)";
-
   const table = metadataTable([
     ["Titel des Vorhabens", policyTitle?.title ?? ""],
     ["Ministerium oder Organisation", policyTitle?.organization ?? ""],
@@ -178,26 +141,32 @@ export function formatBindingRequirements(
 
 export const createDoc = async (
   templateData: ArrayBuffer | Uint8Array,
-  {
-    policyTitle,
-    bindingRequirements,
-    interoperabilityAssessment,
-    euInteroperabilityOutcome,
-  }: DocumentationData,
+  documentationData: DocumentationData,
 ) => {
   const date = new Date().toLocaleDateString("de-DE");
 
+  const children: FileChild[] = [
+    new Paragraph(`Erstellt am ${new Date().toLocaleDateString("de-DE")}`),
+    ...formatInteroperabilityMeta(
+      documentationData.policyTitle,
+      documentationData.interoperabilityMeta,
+    ),
+    ...formatBindingRequirements(documentationData.bindingRequirements),
+    ...formatInteroperabilityAssessment(
+      documentationData.interoperabilityAssessment,
+    ),
+  ];
   const patches = {
     TIMESTAMP: toParagraphPatch(date),
     INTEROPS_EMAIL: toMailtoHyperlinkPatch(contact.interoperabilityEmail),
     DS_PHONE: toParagraphPatch(contact.phoneDisplay),
-    POLICY_TITLE: toParagraphPatch(answerOrPlaceholder(policyTitle?.title)),
-    CONTENT: buildAppendixPatch({
-      policyTitle,
-      interoperabilityAssessment,
-      bindingRequirements,
-      euInteroperabilityOutcome,
-    }),
+    POLICY_TITLE: toParagraphPatch(
+      answerOrPlaceholder(documentationData.policyTitle?.title),
+    ),
+    CONTENT: {
+      type: PatchType.DOCUMENT,
+      children: children.filter((child) => child !== null),
+    },
   };
 
   return patchDocument({
