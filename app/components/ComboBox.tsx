@@ -1,14 +1,17 @@
-import { ChevronLeft } from "@digitalservicebund/icons";
+import { Check, ChevronLeft } from "@digitalservicebund/icons";
 import {
   ComboboxButton,
   ComboboxInput,
   ComboboxOption,
   ComboboxOptions,
+  Description,
+  Field,
   Combobox as HeadlessCombobox,
+  Label,
 } from "@headlessui/react";
 import type { FormScope } from "@rvf/react";
 import { useField } from "@rvf/react";
-import { Fragment, type ReactNode, useId } from "react";
+import { type ReactNode, useId } from "react";
 import InputError from "~/components/InputError";
 import type { Option } from "~/utils/keyValue.ts";
 
@@ -50,16 +53,12 @@ export default function Combobox({
     .join(", ");
 
   return (
-    <fieldset className="space-y-8">
-      {children && (
-        <legend className="ds-label-01-reg" id={legendId}>
-          {children}
-        </legend>
-      )}
+    <Field className="space-y-8">
+      {children && <Label className="ds-label-01-reg">{children}</Label>}
       {description && (
-        <span className="ds-body-02-reg block text-gray-900" id={descriptionId}>
+        <Description className="ds-body-02-reg block text-gray-900">
           {description}
-        </span>
+        </Description>
       )}
 
       <HeadlessCombobox
@@ -70,13 +69,13 @@ export default function Combobox({
       >
         <div className={"h-auto"}>
           <div className={"relative"}>
-            <ComboboxInput as={Fragment}>
-              <input
-                className={"ds-textarea pr-32 data-multiple:text-sm"}
-                data-multiple={selectedValues.length > 1 ? true : undefined}
-                value={displayValue}
-              ></input>
-            </ComboboxInput>
+            <ComboboxInput
+              data-multiple={selectedValues.length > 1 ? true : undefined}
+              value={displayValue}
+              className={"ds-textarea pr-32 data-multiple:text-sm"}
+              aria-labelledby={children ? legendId : undefined}
+              aria-describedby={description ? descriptionId : undefined}
+            ></ComboboxInput>
             <ComboboxButton className="group absolute inset-y-0 right-0 px-8">
               <ChevronLeft className="size-24 rotate-270 fill-black/60 transition-transform group-data-hover:fill-black group-data-open:rotate-90" />
             </ComboboxButton>
@@ -84,29 +83,17 @@ export default function Combobox({
         </div>
         <ComboboxOptions
           anchor="bottom"
-          className="w-(--input-width) space-y-8 border border-gray-400 bg-white p-8 shadow-lg empty:invisible"
+          className="w-(--input-width) space-y-8 border border-gray-400 bg-white shadow-lg empty:invisible"
         >
           {options.map((option) => {
             return (
               <ComboboxOption
                 key={option.value}
                 value={option.value}
-                className={"flex"}
+                className="group flex p-8 data-focus:bg-blue-200"
               >
-                {({ selected }) => (
-                  <>
-                    <input
-                      id={legendId + option.value}
-                      type="checkbox"
-                      checked={selected}
-                      onChange={() => undefined}
-                      className="ds-checkbox ds-checkbox-small"
-                    />
-                    <label htmlFor={legendId + option.value}>
-                      {option.label}
-                    </label>
-                  </>
-                )}
+                <div className="grow">{option.label}</div>
+                <Check className={"hidden group-data-selected:block"} />
               </ComboboxOption>
             );
           })}
@@ -121,6 +108,6 @@ export default function Combobox({
           {error || field.error()}
         </InputError>
       )}
-    </fieldset>
+    </Field>
   );
 }
