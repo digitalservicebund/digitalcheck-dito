@@ -8,8 +8,8 @@ interface Bundesland {
 
 export const bundeslaender = [
   { name: "Bund", pruefstelleMail: contact.nkrEmail },
-  { name: "Hessen" },
   { name: "Brandenburg", pruefstelleMail: "TESTTESTTEST@brandenburg.de" },
+  { name: "Hessen" },
   { name: "Nordrhein-Westfalen" },
 ] as const satisfies Bundesland[];
 
