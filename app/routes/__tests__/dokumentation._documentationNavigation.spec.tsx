@@ -6,11 +6,11 @@ import {
   dokumentation_absenden,
   dokumentation_beteiligungsformate,
   dokumentation_bewertungRechtlich,
-  dokumentation_bewertungTechnisch,
   dokumentation_euInteroperabilitaetsbezug,
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
   dokumentation_verbindlicheAnforderungen,
+  dokumentation_veroeffentlichung,
   dokumentation_zusammenfassung,
 } from "@/config/routes";
 import "@testing-library/jest-dom";
@@ -633,13 +633,13 @@ describe("navigation on pages of documentation", () => {
         );
       });
 
-      it("previousUrl does NOT skip — goes to bewertungTechnisch from zusammenfassung", () => {
+      it("previousUrl does NOT skip — goes from zusammenfassung to the last interoperability step", () => {
         act(() => {
           renderPageWithRoutes(dokumentation_zusammenfassung.path);
         });
         expect(screen.getByRole("link", { name: "Zurück" })).toHaveAttribute(
           "href",
-          dokumentation_bewertungTechnisch.path,
+          dokumentation_veroeffentlichung.path,
         );
       });
     });

@@ -138,7 +138,10 @@ describe("DocumentationDataProvider", () => {
       );
 
       expect(mockWrite).toHaveBeenCalledWith(
-        { ...baseData, policyTitle: { title: "New Title" } },
+        {
+          ...baseData,
+          policyTitle: { title: "New Title", organization: "My Organization" },
+        },
         STORAGE_KEY,
       );
     });
