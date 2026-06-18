@@ -1,0 +1,1 @@
+import{j as o}from"./bundle-mjs.DBvd4n8_.js";import{c as s}from"./tailwindMerge.BdJWFCAR.js";const m=({className:r,children:t})=>o.jsx("div",{className:s("flex flex-wrap gap-16",r),children:t});export{m as B};
