@@ -1,11 +1,6 @@
 import { interoperabilityTemplateWord } from "@/config/downloads";
-import {
-  convertInchesToTwip,
-  FileChild,
-  Paragraph,
-  patchDocument,
-  PatchType,
-} from "docx";
+import type { FileChild } from "docx";
+import { convertInchesToTwip, Paragraph, patchDocument, PatchType } from "docx";
 import fileSaver from "file-saver";
 import { documentationDocument } from "~/resources/content/documentation-document";
 import { contact } from "~/resources/content/shared/contact";
