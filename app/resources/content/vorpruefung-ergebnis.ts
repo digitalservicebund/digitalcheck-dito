@@ -4,8 +4,7 @@ import {
   vorpruefung,
   vorpruefung_hinweise,
 } from "@/config/routes";
-import { steps } from "~/resources/content/shared/naechste-schritte";
-import type { ContentLink, Step } from "~/utils/contentTypes.ts";
+import type { ContentLink } from "~/utils/contentTypes.ts";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
 
@@ -29,17 +28,6 @@ export const preCheckResult = {
     actionButton: {
       text: "Vorprüfung herunterladen",
     },
-    nextSteps: {
-      title: "So machen Sie weiter",
-      steps: [
-        steps.preCheck.finished,
-        {
-          ...steps.methods,
-        },
-        steps.documentation,
-        steps.nkrFinal,
-      ] satisfies Step[],
-    },
   },
   unsure: {
     title: "Sie haben mehrere Aussagen mit „Ich bin unsicher“ beantwortet.",
@@ -60,10 +48,6 @@ export const preCheckResult = {
   },
   negative: {
     title: "Das Regelungsvorhaben hat **keinen Digitalbezug** und ",
-    nextSteps: {
-      title: "So machen Sie weiter",
-      steps: [steps.preCheck.finished, steps.nkrFinal] satisfies Step[],
-    },
   },
   infoBox: {
     title: "Was bedeutet das für mein Vorhaben?",

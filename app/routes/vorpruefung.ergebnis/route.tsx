@@ -18,7 +18,6 @@ import Heading from "~/components/Heading";
 import InfoBox from "~/components/InfoBox";
 import InfoTooltip from "~/components/InfoTooltip";
 import InlineNotice from "~/components/InlineNotice";
-import NumberedList from "~/components/NumberedList";
 import RichText from "~/components/RichText";
 import { preCheck } from "~/resources/content/vorpruefung";
 import { preCheckResult } from "~/resources/content/vorpruefung-ergebnis";
@@ -29,13 +28,8 @@ import { ResultType } from "./PreCheckResult";
 
 import { PreCheckFAQ } from "~/components/content/PreCheckFAQ.tsx";
 import { pruefstelleMails } from "~/resources/content/shared/bundeslaender";
-import type { Step } from "~/utils/contentTypes.ts";
 import { usePreCheckData } from "../vorpruefung/preCheckDataHook";
-
-const nextSteps = {
-  [ResultType.POSITIVE as string]: preCheckResult.positive.nextSteps,
-  [ResultType.NEGATIVE as string]: preCheckResult.negative.nextSteps,
-} satisfies { [key: string]: { steps: Step[] } };
+import { NextSteps } from "./NextSteps";
 
 function getIconForReason(reason: Reason) {
   const defaultClasses = "w-28 h-auto shrink-0";
@@ -293,25 +287,12 @@ export default function Result() {
               />
             </InfoBox>
           )}
-          {result && result.digital !== ResultType.UNSURE && nextSteps && (
-            <>
-              <Heading tagName="h2">{nextSteps[result.digital].title}</Heading>
-              <NumberedList>
-                {(nextSteps[result.digital].steps as Step[]).map((item) => (
-                  <NumberedList.Item
-                    className="space-y-16"
-                    key={item.headline.text}
-                    disabled={item.isDisabled}
-                  >
-                    <p className="ds-heading-03-reg">{item.headline.text}</p>
-                    {"content" in item && (
-                      <RichText markdown={item.content as string} />
-                    )}
-                    {item.link && <a href={item.link.to}>{item.link.text}</a>}
-                  </NumberedList.Item>
-                ))}
-              </NumberedList>
-            </>
+          {result && result.digital !== ResultType.UNSURE && (
+            <NextSteps
+              hasDigitalbezug={result.digital === ResultType.POSITIVE}
+              isBund={isBund}
+              hasPruefstelle={hasPruefstelle}
+            />
           )}
         </Container>
         <Container className="my-80 py-0 print:hidden">

@@ -85,9 +85,9 @@ export const methods = {
     title: "So machen Sie weiter",
     items: [
       steps.preCheck.finished,
-      steps.methods.finished,
+      steps.methodsGeneric.finished,
       steps.documentation,
-      steps.nkr,
+      steps.pruefstelleGeneric,
     ] as Step[],
   },
   furtherMethods: {

@@ -74,6 +74,7 @@ function setup(answers: Answers) {
     answers: preCheckAnswers,
     title: "",
     negativeReasoning: "",
+    bundesland: "Bund", // TODO: test other scenarios
     ssr: false,
   } as PreCheckData);
 
@@ -263,7 +264,9 @@ describe("Vorprüfung Ergebnis Page", () => {
       it(`should ${expected.includesInterop ? "show" : "hide"} the interoperability link`, () => {
         setup(answers);
         const link = screen.queryByRole("link", { name: "Übersichtsseite" });
-        const text = screen.queryByText(
+        // Scope to result-details to avoid matching the aria-hidden print copy
+        const resultDetails = screen.getByTestId("result-details");
+        const text = within(resultDetails).queryByText(
           "Erfahren Sie mehr über Interoperabilität",
         );
 
@@ -305,7 +308,7 @@ describe("Vorprüfung Ergebnis Page", () => {
       it(`should ${expected.formIsVisible ? "show" : "hide"} the contact form`, () => {
         setup(answers);
         const formHeader = screen.queryByText(
-          "Ergebnis absenden und Prüfstelle frühzeitig einbinden",
+          "Ergebnis direkt per E-Mail versenden",
         );
         const titleInput = screen.queryByRole("textbox", {
           name: "Vorläufiger Arbeitstitel des Vorhabens",
