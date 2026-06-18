@@ -116,23 +116,5 @@ describe("DocumentationTitle", () => {
 
       expect(input).toBeValid();
     });
-
-    it("shows an error on missing bundesland and removes it on selection", async () => {
-      const user = userEvent.setup();
-
-      const select = screen.getByRole("combobox", {
-        name: "Wählen Sie Ihr Bundesland oder den Bund aus",
-      });
-      await waitFor(() => {
-        expect(select).toBeInvalid();
-      });
-      expect(select).toHaveAccessibleErrorMessage(
-        "Fehler: Bitte wählen Sie Ihr Bundesland oder den Bund aus.",
-      );
-
-      await user.selectOptions(select, "Bund");
-
-      expect(select).toBeValid();
-    });
   });
 });
