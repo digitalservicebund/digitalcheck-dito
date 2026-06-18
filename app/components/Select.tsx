@@ -1,4 +1,5 @@
 import {
+  Label,
   Listbox,
   ListboxButton,
   ListboxOption,
@@ -32,13 +33,11 @@ function Select({
 }: Readonly<SelectProps>) {
   const field = useField(scope);
   const {
-    ref: fieldRef,
     value: fieldValue,
     onChange: fieldOnChange,
     onBlur: fieldOnBlur,
     name: fieldName,
   } = field.getControlProps();
-  const labelId = useId();
   const errorId = useId();
   const descriptionId = useId();
   const hasError = !!(error || field.error()) && !warningInsteadOfError;
@@ -46,22 +45,18 @@ function Select({
 
   return (
     <div className={twMerge("space-y-8", className)}>
-      <label id={labelId} className="ds-label-01-reg block">
-        {children}
-      </label>
-      {description && (
-        <p className="ds-body-02-reg block text-gray-900" id={descriptionId}>
-          {description}
-        </p>
-      )}
       <Listbox
         value={fieldValue ?? ""}
         onChange={fieldOnChange}
         name={fieldName}
       >
+        <Label className="ds-label-01-reg block">{children}</Label>
+        {description && (
+          <p className="ds-body-02-reg block text-gray-900" id={descriptionId}>
+            {description}
+          </p>
+        )}
         <ListboxButton
-          ref={fieldRef}
-          aria-labelledby={labelId}
           aria-describedby={description ? descriptionId : undefined}
           aria-invalid={hasError || hasWarning}
           aria-errormessage={hasError || hasWarning ? errorId : undefined}
