@@ -6,7 +6,7 @@ import "./utils/mockRouter";
 const mockPruefstelleMails = vi.hoisted(
   () =>
     new Map<string, string>([
-      ["Bund", "nkr@example.com"],
+      ["Bund", "poststelle@nkr.bund.de"],
       ["Brandenburg", "pruefstelle-brandenburg@example.com"],
     ]),
 );
