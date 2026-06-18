@@ -122,8 +122,6 @@ export default function ResultForm({
   if (isBund && hasInteropsDemand)
     mailRecipients.push(contact.interoperabilityEmail);
 
-  console.log({ hasInteropsDemand, pruefstelleMail, mailRecipients });
-
   return (
     <>
       <form {...form.getFormProps()} data-testid="result-form">
