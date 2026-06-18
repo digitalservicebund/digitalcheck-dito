@@ -37,7 +37,9 @@ function InteroperabilitySteps() {
           `}
         />
         <ButtonContainer>
-          <DownloadButton onClick={void downloadAssessment(documentationData)}>
+          <DownloadButton
+            onClick={() => void downloadAssessment(documentationData)}
+          >
             Bewertung herunterladen (.docx)
           </DownloadButton>
         </ButtonContainer>

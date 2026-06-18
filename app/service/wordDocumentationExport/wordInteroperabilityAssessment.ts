@@ -69,6 +69,7 @@ export function buildAppendixPatch({
     };
   }
   const children: FileChild[] = [
+    new Paragraph(`Erstellt am ${new Date().toLocaleDateString("de-DE")}`),
     ...formatInteroperabilityMeta(policyTitle),
     ...formatBindingRequirements(bindingRequirements),
     ...formatInteroperabilityAssessment(interoperabilityAssessment),
