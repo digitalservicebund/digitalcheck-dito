@@ -2,7 +2,7 @@ import {
   interoperabel,
   interoperabel_nationaleKontaktstelle,
 } from "@/config/routes";
-import { withBase } from "@/utils/path";
+import rulemapImg from "@/images/rulemap.jpg";
 import {
   AdsClickOutlined,
   CheckCircleOutlined,
@@ -16,29 +16,7 @@ import { dedent } from "~/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
 
 export const support = {
-  title: "Hilfe für digitaltaugliche Regelungsvorhaben",
-  subtitle:
-    "Nutzen Sie unsere digitale Expertise, um Ihr Regelungsvorhaben digitaltauglich zu gestalten und den Digitalcheck erfolgreich zu erfüllen.",
-  socialProof: {
-    text: 'Wir, die Digital-Expert:innen des DigitalService,<br class="sm:max-lg:hidden" /> haben bereits über <span class="text-[65px] -top-[11px] h-[30px] inline-block relative overflow-visible align-top">70</span> **Regelungsvorhaben** unterstützt.',
-
-    image: {
-      src: withBase("/images/support.png"),
-      alt: "Ein Flussdiagramm mit der Überschrift „Rulemap § 9b 2023“. Es zeigt die verschiedenen Bedingungen, unter denen eine Steuerentlastung gewährt wird, und ihre Abhängigkeiten.",
-    },
-    testimonials: [
-      {
-        quote:
-          "Die gründliche Analyse von Vollzugsprozessen hat uns geholfen, das Zusammenspiel zwischen den Regelungen und der Administration besser zu verstehen und so den digitalen Vollzug zu gestalten. Die gemeinsame Arbeit mit dem Team des DigitalService war intensiv, hat uns im Ergebnis jedoch viel Zeit für weitere Absprachen gespart.",
-        position: "Projektpartnerin",
-        ministry: "im Bundesministerium der Finanzen",
-      },
-    ],
-  },
   supportWhat: {
-    title: "So unterstützen wir Sie",
-    subtitle:
-      "Legistinnen und Legisten stehen oft vor der Herausforderung, Regelungen unter erheblichem Zeitdruck erarbeiten zu müssen. Genau hier kommen wir ins Spiel: Wir unterstützen Sie in jeder Phase des Vorhabens und sorgen dafür, dass Ihr Vorhaben eine einfache und wirkungsorientierte Umsetzung, unter Ausschöpfung der digitalen Möglichkeiten zum Nutzen aller Beteiligten ermöglicht.",
     supportTypes: [
       {
         icon: DrawOutlined,
@@ -192,7 +170,7 @@ export const support = {
             examples: [
               {
                 image: {
-                  src: withBase("/images/rulemap.jpg"),
+                  src: rulemapImg,
                   alt: "Eine Rulemap mit der Überschrift „Rulemap § 9b 2023“. Es zeigt die verschiedenen Bedingungen, unter denen eine Steuerentlastung gewährt wird, und ihre Abhängigkeiten.",
                 },
                 text: "**Beispiel-Visualisierung:** [Gesetz zur Modernisierung und zum Bürokratieabbau im Strom- und Energiesteuerrecht](https://dserver.bundestag.de/btd/20/123/2012351.pdf) (Seite 110 ff.)",
@@ -241,128 +219,6 @@ export const support = {
             examples: [
               {
                 text: "Lesen Sie sich das Beispiel durch: [„Begleitung des Stromsteuergesetz“](https://digitalservice.bund.de/blog/aktuelles-beispiel-fuer-digitaltaugliche-regelungen-das-stromsteuerrecht)",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: "online-schulungen",
-        title: "Online-Schulungen",
-        offerings: [
-          {
-            title:
-              "Regelungen digitaltauglich gestalten – praktische Tipps für den Digitalcheck",
-            text: dedent`
-              Fast alles, was wir heutzutage in der Verwaltung tun, hat einen Daten- oder Digitalbezug. Regelungsvorhaben sind daher die zentrale Voraussetzung für digitale Leistungen und Prozesse und schaffen die Grundlage für einen digitalen Staat.
-
-              In dieser Online-Schulung erfahren Sie, wie Sie Regelungen so formulieren, dass Sie den **Digitalcheck erfolgreich bestehen**. Wir zeigen an **Beispielen**, wie Sie Ihre Regelungen digitaltauglich schreiben können. Anhand der fünf bewährten **Prinzipien für Digitaltauglichkeit** erläutern wir, wie Sie Begriffe und Konzepte wie Automatisierung und Standardisierung optimal nutzen, um Ihre Vorhaben fit für die digitale Zukunft zu machen.
-
-              Das Angebot richtet sich an alle, die in den Bundesministerien Regelungen erarbeiten. Vorkenntnisse sind nicht erforderlich.
-            `,
-            link: {
-              text: "Für Schulung anmelden",
-              to: encodeURI(dedent`
-                mailto:${contact.email}?subject=[Digitalcheck Schulung] Anmeldung digitaltaugliche Regelungen&body=Guten Tag,
-
-                ich möchte mich gerne für die Online-Schulung anmelden:
-
-                Regelungen digitaltauglich gestalten – praktische Tipps für den Digitalcheck
-
-                Mit freundlichen Grüßen
-                `),
-              look: "tertiary" as const,
-            },
-            sellingPoints: "Alle Informationen auf einen Blick",
-            details: [
-              {
-                icon: TimerOutlined,
-                title: "Nächste Termine",
-                text: [
-                  {
-                    date: "Mittwoch, 01.04.2026",
-                    time: "10:30 - 12:00 Uhr",
-                    location: "online",
-                  },
-                  {
-                    date: "Montag, 15.04.2026",
-                    time: "10:00 - 11:30 Uhr",
-                    location: "online",
-                  },
-                  {
-                    date: "Montag, 20.04.2026",
-                    time: "13:00 - 14:30 Uhr",
-                    location: "online",
-                  },
-                  {
-                    date: "Mittwoch, 06.05.2026",
-                    time: "10:00 - 11:30 Uhr",
-                    location: "online",
-                  },
-                  {
-                    date: "Mittwoch, 13.05.2026",
-                    time: "10:00 - 11:30 Uhr",
-                    location: "online",
-                  },
-                  {
-                    date: "Montag, 18.05.2026",
-                    time: "13:00 - 14:30 Uhr",
-                    location: "online",
-                  },
-                ]
-                  .map((appointment) => {
-                    return `- **${appointment.date}**<br>${appointment.time}, ${appointment.location}`;
-                  })
-                  .join("\n"),
-              },
-              {
-                icon: CheckCircleOutlined,
-                title: "Was Sie bekommen",
-                text: dedent`
-                  - Tipps für einen erfolgreichen Digitalcheck
-                  - Beispiele für digitaltaugliche Formulierungen
-                  - Einführung zum Anwenden der Prinzipien für Digitaltauglichkeit
-                  - Einführung in die EU-Interoperabilität
-
-                  Sie können sich bis dahin das [Schulungsmaterial ansehen](https://github.com/digitalservicebund/digitalcheck-content/tree/main/src/online-schulungen).
-                `,
-              },
-            ],
-          },
-          {
-            title: "Visualisierungen – Komplexes einfach darstellen",
-            text: dedent`
-              Digitaltaugliche Regelungen müssen von Beginn an aus der Umsetzungsperspektive gedacht werden. Visualisierungsmethoden bieten dafür wertvolle Unterstützung: Mit ihrer Hilfe lassen sich einzelne **Prozessschritte, Zielgruppen und beteiligte Akteure** darstellen. **Mögliche Hindernisse** für eine digitale Umsetzung werden sicht- und bearbeitbar.
-
-              In unserer interaktiven Online-Schulung erfahren Sie, wie Sie Visualisierungen gezielt für Ihr Regelungsvorhaben nutzen können. Anhand konkreter Beispiele lernen Sie, **eigene Visualisierungen zu erstellen** und so komplexe Vorhaben klar und verständlich zu präsentieren.
-
-              Das Angebot richtet sich an alle, die in den Bundesministerien Regelungen erarbeiten. Vorkenntnisse sind nicht erforderlich.
-            `,
-            link: {
-              text: "Auf Warteliste setzen",
-              to: encodeURI(
-                dedent`mailto:${contact.email}?subject=[Digitalcheck Schulung] Anmeldung Visualisierungen&body=
-Guten Tag,
-
-ich möchte mich gerne auf die Warteliste setzen lassen für die Online-Schulung:
-
-Visualisierungen – Komplexes einfach darstellen
-
-Mit freundlichen Grüßen
-                `,
-              ),
-              look: "tertiary" as const,
-            } satisfies ContentLink,
-            sellingPoints: "Alle Informationen auf einen Blick",
-            details: [
-              {
-                icon: TimerOutlined,
-                title: "Nächste Termine",
-                text: dedent`
-                  Wir planen bald neue Termine. Schreiben Sie uns eine E-Mail und wir setzen Sie auf die Warteliste.
-
-                  Sie können sich bis dahin das [Schulungsmaterial ansehen](https://github.com/digitalservicebund/digitalcheck-content/tree/main/src/online-schulungen).
-                `,
               },
             ],
           },

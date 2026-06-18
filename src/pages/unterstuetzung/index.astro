@@ -1,0 +1,229 @@
+---
+import { Image } from "astro:assets";
+import Layout from "@/layouts/Layout.astro";
+import { LinkButton } from "~/components/Button.tsx";
+import ButtonContainer from "~/components/ButtonContainer.tsx";
+import Container from "~/components/Container";
+import Heading from "~/components/Heading";
+import Hero from "@/components/Hero.astro";
+import InfoBox from "~/components/InfoBox";
+import RichText from "~/components/RichText";
+import { support } from "~/resources/content/unterstuetzung";
+import { dedent } from "~/utils/dedentMultilineStrings";
+import { withBase } from "@/utils/path";
+import supportImg from "@/images/support.jpg";
+
+export const frontmatter = {
+  title: "Unterstützungsangebote",
+};
+const { supportHow, supportWhat, supportOfferings, kontaktstelle } = support;
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>Hilfe für digitaltaugliche Regelungsvorhaben</h1>
+      <p slot="subtitle">
+        Nutzen Sie unsere digitale Expertise, um Ihr Regelungsvorhaben
+        digitaltauglich zu gestalten
+      </p>
+    </Hero>
+
+    <div class="breakout bg-blue-300">
+      <div class="flex flex-col py-0 lg:h-[420px] lg:flex-row">
+        <div class="py-32 sm:py-40 sm:pr-48 lg:w-1/2 lg:self-center">
+          <h2 class="mb-16">Unterstützung für Bund und Länder</h2>
+          <p>
+            Der Digitalcheck unterstützt{" "}
+            <strong>Bundes- und Länderministerien dabei</strong>, den
+            Digitalbezug neuer Regelungsvorhaben frühzeitig zu erkennen und
+            deren praxistaugliche Umsetzung sicherzustellen. Basis dafür sind
+            die 5 Prinzipien für digitaltaugliche Gesetzgebung und anschauliche
+            Visualisierungen.
+          </p>
+        </div>
+        <div class="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">
+          <div
+            class="w-[630px] lg:w-[50vw] lg:[&>img]:h-[420px] lg:[&>img]:w-full lg:[&>img]:object-none lg:[&>img]:object-[10%_75%]"
+          >
+            <Image
+              src={supportImg}
+              alt="Eine Arbeitsgruppe in der Diskussion"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="py-40 lg:py-80">
+      <div class="space-y-16">
+        <h2>Unser Unterstützungsangebot</h2>
+        <p>
+          Legistinnen und Legisten stehen oft vor der Herausforderung,
+          Regelungen unter erheblichem Zeitdruck erarbeiten zu müssen. Genau
+          hier kommen wir ins Spiel: Wir unterstützen Sie in jeder Phase des
+          Vorhabens und sorgen dafür, dass Ihr Vorhaben eine einfache und
+          wirkungsorientierte Umsetzung, unter Ausschöpfung der digitalen
+          Möglichkeiten zum Nutzen aller Beteiligten ermöglicht.
+          <br /><br />
+          Je nachdem ob Sie im Auftrag des <strong>Bundes oder Länder</strong> handeln,
+          gibt es verschiedene Unterstützungsangebote:
+        </p>
+      </div>
+      <div class="mt-40 flex gap-32 max-sm:flex-col">
+        {
+          supportWhat.supportTypes.length > 0 &&
+            supportWhat.supportTypes.map((supportType) => (
+              <div class="space-y-16">
+                <supportType.icon className="size-80 flex-none fill-ds-yellow-700" />
+                <h3 class="font-bold max-w-[250px]">{supportType.title}</h3>
+                <p>{supportType.text}</p>
+              </div>
+            ))
+        }
+      </div>
+    </div>
+    <div class="bg-blue-100">
+      <Container>
+        <Heading id="hilfe" tagName="h2" text={supportHow.title} />
+        <div class="ds-stack ds-stack-16 pt-32">
+          <InfoBox>
+            <RichText markdown={supportHow.text} />
+          </InfoBox>
+          <ButtonContainer>
+            <LinkButton look="tertiary" href={supportHow.link.to}>
+              {supportHow.link.text}
+            </LinkButton>
+          </ButtonContainer>
+        </div>
+      </Container>
+    </div>
+    <div id="angebote">
+      <div class="space-y-40 pb-40 mt-80">
+        <div class="space-y-16">
+          <h2>Unterstützungsangebote im Überblick</h2>
+          <p>
+            Nach einem erstem Austausch finden wir gemeinsam die richtige
+            Unterstützung für Ihre Herausforderung und Ihren Zeitplan.
+          </p>
+        </div>
+        <div id="SEARCH_PARAM_TABS">
+          {
+            supportOfferings.tabs.map((tab) => (
+              <div
+                class="TAB divide-y divide-gray-700 space-y-40"
+                data-tabId={tab.id}
+                data-label={tab.title}
+              >
+                {tab.offerings.map((offering) => (
+                  <div class="space-y-16">
+                    <h3>{offering.title}</h3>
+                    <RichText markdown={offering.text} />
+
+                    <div class="flex-none space-y-20">
+                      <div class="bg-white">
+                        <div class="p-28">
+                          <h3 class="text-lg">{offering.sellingPoints}</h3>
+                          <div class="max-w-a11y grid grid-cols-1 md:grid-cols-2 gap-16">
+                            {offering.details.map((detail) => (
+                              <div class="py-16">
+                                <div class="flex items-center gap-8 pb-8">
+                                  {detail.icon && (
+                                    <detail.icon className="size-24 fill-gray-800" />
+                                  )}
+                                  <p class="ds-label-01-bold">{detail.title}</p>
+                                </div>
+                                <RichText
+                                  markdown={detail.text}
+                                  className="text-base"
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                      {"examples" in offering && (
+                        <div>
+                          <div class="divide-y divide-gray-700">
+                            {offering.examples.map((example) => (
+                              <div>
+                                {"image" in example && (
+                                  <Image
+                                    src={example.image.src}
+                                    alt={example.image.alt}
+                                    inferSize={true}
+                                  />
+                                )}
+                                <RichText
+                                  markdown={example.text}
+                                  className="p-20 text-base"
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="breakout bg-blue-400">
+      <div class="py-80">
+        <InfoBox
+          badge={{
+            look: "hint",
+            text: "NEU",
+          }}
+          heading={{
+            text: "Unterstützung in allen Phasen Ihres Vorhabens",
+          }}
+          look="white"
+          visual={{
+            type: "image",
+            image: {
+              url: withBase("/images/zfl-preview.png"),
+              alternativeText:
+                "Screenshot der Website des Zentrum für Legistik",
+              size: "medium",
+            },
+          }}
+        >
+          <RichText
+            markdown={dedent`
+                  Das Zentrum für Legistik unterstützt Sie bereits in der frühen
+                  Konzeptionsphase. Sie stellen damit sicher, dass Ihr Vorhaben
+                  betroffenenzentriert, praxistauglich und digital umsetzbar ist.
+
+                  Mehr zu den Angeboten des Zentrums für Legistik erfahren:
+                `}
+          />
+          <LinkButton
+            href="https://zfl.bund.de"
+            look="tertiary"
+            className="self-start"
+            target="_blank"
+          >
+            Zum Zentrum für Legistik{" "}
+            <span class="sr-only">(öffnet in einem neuen Tab)</span>
+          </LinkButton>
+        </InfoBox>
+      </div>
+    </div>
+
+    <Container className="py-80">
+      <InfoBox
+        heading={{
+          tagName: "h2",
+          text: kontaktstelle.title,
+        }}
+      >
+        <RichText markdown={kontaktstelle.text} />
+      </InfoBox>
+    </Container>
+  </main>
+</Layout>
