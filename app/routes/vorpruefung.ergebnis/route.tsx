@@ -11,6 +11,7 @@ import { twJoin } from "tailwind-merge";
 
 import { vorpruefung } from "@/config/routes";
 import { marked } from "marked";
+import Button, { LinkButton } from "~/components/Button.tsx";
 import Container from "~/components/Container";
 import DetailsSummary from "~/components/DetailsSummary";
 import Heading from "~/components/Heading";
@@ -118,6 +119,7 @@ export default function Result() {
   const isBund = bundesland === "Bund";
   const pruefstelleMail = bundesland && pruefstelleMails.get(bundesland);
   const hasPruefstelle = !!pruefstelleMail;
+
   return (
     <>
       <main>
@@ -176,41 +178,48 @@ export default function Result() {
                     />
                   </InlineNotice>
                 )}
-                <div className="border-b-2 border-solid border-gray-400 pb-40 last:border-0 last:pb-0 print:border-0 print:pb-0">
-                  <DetailsSummary
-                    data-testid="result-details"
-                    title={preCheckResult.detailsTitle}
-                  >
-                    {resultContent.reasoningList
-                      .filter(({ reasons }) => reasons.length > 0)
-                      .map(({ intro, reasons }) => (
-                        <React.Fragment key={intro}>
-                          <RichText markdown={intro} className="first:mt-16" />
-                          <ul className="ds-stack ds-stack-16 mt-16 mb-40 pl-0">
-                            {reasons
-                              .toSorted((a, b) => {
-                                if (a.answer === b.answer) {
-                                  return 0; // Keep the original order
-                                }
-                                return a.answer === "yes" ? -1 : 1; // "yes" comes before "no"
-                              })
-                              .map((reason) => getReasonListItem(reason))}
-                          </ul>
-                        </React.Fragment>
-                      ))}
+                <DetailsSummary
+                  data-testid="result-details"
+                  title={preCheckResult.detailsTitle}
+                  expandInPrint
+                >
+                  {resultContent.reasoningList
+                    .filter(({ reasons }) => reasons.length > 0)
+                    .map(({ intro, reasons }) => (
+                      <React.Fragment key={intro}>
+                        <RichText markdown={intro} className="first:mt-16" />
+                        <ul className="ds-stack ds-stack-16 mt-16 mb-40 pl-0">
+                          {reasons
+                            .toSorted((a, b) => {
+                              if (a.answer === b.answer) {
+                                return 0; // Keep the original order
+                              }
+                              return a.answer === "yes" ? -1 : 1; // "yes" comes before "no"
+                            })
+                            .map((reason) => getReasonListItem(reason))}
+                        </ul>
+                      </React.Fragment>
+                    ))}
 
-                    {result?.euBezug !== ResultType.NEGATIVE && (
-                      <div className="mt-40">
-                        <b>{preCheckResult.interoperability.info.title}</b>
-                        <RichText
-                          className="mt-8 mb-20"
-                          markdown={
-                            preCheckResult.interoperability.info.content
-                          }
-                        />
-                      </div>
-                    )}
-                  </DetailsSummary>
+                  {result?.euBezug !== ResultType.NEGATIVE && (
+                    <div className="mt-40 print:hidden">
+                      <b>{preCheckResult.interoperability.info.title}</b>
+                      <RichText
+                        className="mt-8 mb-20"
+                        markdown={preCheckResult.interoperability.info.content}
+                      />
+                    </div>
+                  )}
+                </DetailsSummary>
+                <div className="flex gap-8 print:hidden">
+                  {!pruefstelleMail && (
+                    <Button onClick={() => globalThis.print()} type="button">
+                      Ergebnis herunterladen
+                    </Button>
+                  )}
+                  <LinkButton href={preCheck.questions[0].path} look="ghost">
+                    Vorprüfung bearbeiten
+                  </LinkButton>
                 </div>
               </Container>
             </div>
