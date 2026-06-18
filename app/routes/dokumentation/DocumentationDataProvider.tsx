@@ -7,6 +7,7 @@ import {
   dokumentation_euInteroperabilitaetsbezug,
   dokumentation_regelungsvorhabenTitel,
   dokumentation_verbindlicheAnforderungen,
+  dokumentation_veroeffentlichung,
 } from "@/config/routes";
 import type { ReactNode } from "react";
 import {
@@ -18,29 +19,30 @@ import {
   useState,
 } from "react";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import type {
-  BindingRequirementsData,
-  DocumentationData,
-  EuInteroperabilityOutcome,
-  InteroperabilityAssessmentData,
-  InteroperabilityAssessmentLevel,
-  Participation,
-  PolicyTitle,
-  Principle,
-  V1,
-  V2,
-} from "~/routes/dokumentation/documentationDataSchema";
 import {
+  type BindingRequirementsData,
   bindingRequirementsNavigationSchema,
   DATA_SCHEMA_VERSION_V1,
   DATA_SCHEMA_VERSION_V2,
+  type DocumentationData,
+  type EuInteroperabilityOutcome,
   euInteroperabilityOutcomeNavigationSchema,
+  type InteroperabilityAssessmentData,
+  type InteroperabilityAssessmentLevel,
   interoperabilityAssessmentLevelNavigationSchema,
+  type InteroperabilityMeta,
+  interoperabilityMetaSchema,
+  type Participation,
   participationSchema,
+  type PolicyTitle,
   policyTitleSchema,
+  type Principle,
   principleSchemaV2,
+  type V1,
+  type V2,
 } from "~/routes/dokumentation/documentationDataSchema";
 
+import type { $ZodLooseShape } from "zod/v4/core";
 import {
   readDataFromLocalStorage,
   removeFromLocalStorage,
@@ -66,6 +68,7 @@ type DocumentationDataContextType = {
     level: keyof InteroperabilityAssessmentData,
     data?: InteroperabilityAssessmentLevel,
   ) => void;
+  setInteroperabilityMeta: (data?: InteroperabilityMeta) => void;
   addOrUpdatePrinciple: (newPrinciple?: Principle) => void;
   addOrUpdatePrincipleAnswer: (
     principleId: string,
@@ -78,14 +81,7 @@ type DocumentationDataContextType = {
   ) => void;
   findDocumentationDataForUrl: (
     url: string,
-  ) =>
-    | PolicyTitle
-    | Participation
-    | Principle
-    | EuInteroperabilityOutcome
-    | BindingRequirementsData
-    | InteroperabilityAssessmentLevel
-    | undefined;
+  ) => DocumentationDataType | undefined;
   validateDocumentationDataForRoute: (
     routePath: string,
     dataIdentifier?: string,
@@ -123,6 +119,7 @@ type DocumentationDataType =
   | EuInteroperabilityOutcome
   | BindingRequirementsData
   | InteroperabilityAssessmentLevel
+  | InteroperabilityMeta
   | Principle
   | undefined;
 
@@ -134,20 +131,12 @@ export enum ValidationResult {
 }
 type RouteDefinition = {
   getData: (data: DocumentationData) => DocumentationDataType;
-  schema: RouteSchema;
+  schema: $ZodLooseShape;
   /**
    * Custom validation. Return `null` to use default validation.
    */
   validate?: (data: DocumentationData) => ValidationResult | null;
 };
-
-type RouteSchema =
-  | typeof policyTitleSchema
-  | typeof participationSchema
-  | typeof euInteroperabilityOutcomeNavigationSchema
-  | typeof bindingRequirementsNavigationSchema
-  | typeof interoperabilityAssessmentLevelNavigationSchema
-  | typeof principleSchemaV2;
 
 const skipIfNoInteroperabilityRequired = (data: DocumentationData) => {
   if (data.euInteroperabilityOutcome?.outcomeId !== "REQUIRED")
@@ -192,6 +181,11 @@ const routeDefinitions: Record<string, RouteDefinition> = {
     schema: interoperabilityAssessmentLevelNavigationSchema,
     validate: skipIfNoInteroperabilityRequired,
   },
+  [dokumentation_veroeffentlichung.path]: {
+    getData: (data) => data.interoperabilityMeta,
+    schema: interoperabilityMetaSchema,
+    validate: skipIfNoInteroperabilityRequired,
+  },
 };
 
 function getRouteData(
@@ -199,7 +193,7 @@ function getRouteData(
   documentationData: DocumentationData,
 ): {
   formData: DocumentationDataType;
-  schema: RouteSchema;
+  schema: $ZodLooseShape;
   validate: RouteDefinition["validate"];
 } {
   const routeDefinition = routeDefinitions[routeOrDataIdentifier];
@@ -330,12 +324,6 @@ export function DocumentationDataProvider({
   const setPolicyTitle = useCallback(
     (policyTitle?: PolicyTitle) => {
       if (!policyTitle) return;
-      // TODO move
-      // if (policyTitle.publicationStatus === "published") {
-      //   policyTitle.publicationDate = "";
-      // } else if (policyTitle.publicationStatus === "planned") {
-      //   policyTitle.publicationLink = "";
-      // }
 
       createOrUpdateDocumentationData({
         ...documentationData,
@@ -404,6 +392,16 @@ export function DocumentationDataProvider({
       };
 
       createOrUpdateDocumentationData(updatedDocumentationData);
+    },
+    [documentationData, createOrUpdateDocumentationData],
+  );
+
+  const setInteroperabilityMeta = useCallback(
+    (interoperabilityMeta?: InteroperabilityMeta) => {
+      createOrUpdateDocumentationData({
+        ...documentationData,
+        interoperabilityMeta,
+      });
     },
     [documentationData, createOrUpdateDocumentationData],
   );
@@ -526,22 +524,24 @@ export function DocumentationDataProvider({
     !!documentationData.interoperabilityAssessment;
 
   const value = useMemo(
-    () => ({
-      documentationData,
-      hasSavedDocumentation,
-      createOrUpdateDocumentationData,
-      deleteDocumentationData,
-      setPolicyTitle,
-      setParticipation,
-      setEuInteroperabilityOutcome,
-      setBindingRequirementsData,
-      setInteroperabilityAssessmentData,
-      addOrUpdatePrinciple,
-      addOrUpdatePrincipleAnswer,
-      addOrUpdatePrincipleReasoning,
-      findDocumentationDataForUrl,
-      validateDocumentationDataForRoute,
-    }),
+    () =>
+      ({
+        documentationData,
+        hasSavedDocumentation,
+        createOrUpdateDocumentationData,
+        deleteDocumentationData,
+        setPolicyTitle,
+        setParticipation,
+        setEuInteroperabilityOutcome,
+        setBindingRequirementsData,
+        setInteroperabilityAssessmentData,
+        setInteroperabilityMeta,
+        addOrUpdatePrinciple,
+        addOrUpdatePrincipleAnswer,
+        addOrUpdatePrincipleReasoning,
+        findDocumentationDataForUrl,
+        validateDocumentationDataForRoute,
+      }) satisfies DocumentationDataContextType,
     [
       documentationData,
       hasSavedDocumentation,
@@ -552,6 +552,7 @@ export function DocumentationDataProvider({
       setEuInteroperabilityOutcome,
       setBindingRequirementsData,
       setInteroperabilityAssessmentData,
+      setInteroperabilityMeta,
       addOrUpdatePrinciple,
       addOrUpdatePrincipleAnswer,
       addOrUpdatePrincipleReasoning,

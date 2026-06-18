@@ -10,6 +10,7 @@ import {
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
   dokumentation_verbindlicheAnforderungen,
+  dokumentation_veroeffentlichung,
   dokumentation_zusammenfassung,
 } from "@/config/routes";
 import { type ReactNode, useCallback, useMemo } from "react";
@@ -117,6 +118,7 @@ export function LayoutWithDocumentationNavigation({
           dokumentation_bewertungOrganisatorisch,
           dokumentation_bewertungSemantisch,
           dokumentation_bewertungTechnisch,
+          dokumentation_veroeffentlichung,
         ],
       },
       ...ROUTES_DOCUMENTATION_FINALIZE,

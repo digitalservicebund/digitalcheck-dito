@@ -99,3 +99,27 @@ export const defaultAssessmentValues: InteroperabilityAssessmentData = {
   semantic: { detail: "", rating: "" },
   technical: { detail: "", rating: "" },
 };
+
+export const publicationStatusQuestion = {
+  questionLabel:
+    "Wann soll der Referentenentwurf voraussichtlich auf der Webseite Ihres Ministeriums veröffentlicht werden?",
+  questionLabelShort: "Geplante Veröffentlichung",
+  options: [
+    {
+      label: "Die Veröffentlichung ist geplant am...",
+      value: "planned",
+    },
+    {
+      label: "Der Referentenentwurf ist bereits veröffentlicht",
+      value: "published",
+    },
+  ] satisfies Option[],
+};
+
+export const publicationDateQuestion = {
+  questionLabel: "Voraussichtliches Veröffentlichungsdatum",
+};
+
+export const publicationLinkQuestion = {
+  questionLabel: "Link zum Referentenentwurf",
+};

@@ -209,6 +209,17 @@ export const dokumentation_verbindlicheAnforderungen = {
   navLabel: null,
 } as const;
 
+export const dokumentation_veroeffentlichung = {
+  key: "dokumentation_veroeffentlichung",
+  path: "/dokumentation/veroeffentlichung",
+  title: "Veröffentlichung",
+  parent: dokumentation,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const dokumentation_zusammenfassung = {
   key: "dokumentation_zusammenfassung",
   path: "/dokumentation/zusammenfassung",
@@ -525,6 +536,7 @@ export const allRoutes = [
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
   dokumentation_verbindlicheAnforderungen,
+  dokumentation_veroeffentlichung,
   dokumentation_zusammenfassung,
   grundlagen,
   grundlagen_digitaltauglichkeit,

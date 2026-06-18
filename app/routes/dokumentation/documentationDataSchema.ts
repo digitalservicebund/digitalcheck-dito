@@ -49,6 +49,16 @@ export const euInteroperabilityOutcomeNavigationSchema =
     })
     .strict();
 
+export const interoperabilityMetaSchema = z.object({
+  publicationStatus: z
+    .enum(["published", "planned", ""])
+    .refine(Boolean, { message: "Bitte wählen Sie eine Option" }),
+  publicationDate: z.string().optional(),
+  publicationLink: z.string().optional(),
+});
+
+export type InteroperabilityMeta = z.infer<typeof interoperabilityMetaSchema>;
+
 export const principleAnswerOnlySchema = z.object({
   answer: z.enum(
     [
@@ -176,6 +186,7 @@ export const interoperabilityAssessmentSchema = z.object({
 
 export const defaultTitleValues: PolicyTitle = {
   title: "",
+  organization: "",
 };
 
 export const defaultParticipationValues: Participation = {
@@ -195,6 +206,7 @@ export const documentationSchemaV2 = z.object({
   euInteroperabilityOutcome: euInteroperabilityOutcomeSchema.optional(),
   bindingRequirements: bindingRequirementsSchema.optional(),
   interoperabilityAssessment: interoperabilityAssessmentSchema.optional(),
+  interoperabilityMeta: interoperabilityMetaSchema.optional(),
   principles: z.array(principleSchemaV2).optional(),
 });
 
@@ -241,6 +253,7 @@ export type DocumentationData<V extends DataSchemaVersion = V2> = {
   euInteroperabilityOutcome?: EuInteroperabilityOutcome;
   bindingRequirements?: BindingRequirementsData;
   interoperabilityAssessment?: Partial<InteroperabilityAssessmentData>;
+  interoperabilityMeta?: InteroperabilityMeta;
   principles?: Principle<V>[];
   initialized?: boolean;
 } & VersionedData;
