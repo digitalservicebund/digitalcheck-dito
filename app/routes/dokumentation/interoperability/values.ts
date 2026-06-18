@@ -53,24 +53,6 @@ export const stakeholderOptions: readonly Option[] = [
 
 export const interoperabilityRatingOptions: Option[] = [
   {
-    label: "förderlich",
-    value: "positive",
-  },
-  {
-    label: "neutral",
-    value: "neutral",
-  },
-  {
-    label: "negativ oder nicht förderlich",
-    value: "risky",
-  },
-  {
-    label: "nicht anwendbar",
-    value: "not-applicable",
-  },
-];
-export const interoperabilityRatingOptions2: Option[] = [
-  {
     label: "Ja, gänzlich oder teilweise",
     value: "positive",
   },
@@ -83,7 +65,7 @@ export const interoperabilityRatingOptions2: Option[] = [
     value: "not-applicable",
   },
 ];
-const ratingMap = keyValueToMap(interoperabilityRatingOptions2);
+const ratingMap = keyValueToMap(interoperabilityRatingOptions);
 
 export function formatRating(
   rating?: InteroperabilityAssessmentLevel["rating"],

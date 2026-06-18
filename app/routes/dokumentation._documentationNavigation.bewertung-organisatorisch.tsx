@@ -13,7 +13,7 @@ import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
 import { interoperabilityAssessmentLevelSchema } from "~/routes/dokumentation/documentationDataSchema.ts";
 import { IEAContactBanner } from "~/routes/dokumentation/interoperability/IEAContactBanner.tsx";
 import SkipNoticeWrapper from "~/routes/dokumentation/interoperability/SkipNoticeWrapper.tsx";
-import { interoperabilityRatingOptions2 } from "~/routes/dokumentation/interoperability/values.ts";
+import { interoperabilityRatingOptions } from "~/routes/dokumentation/interoperability/values.ts";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
@@ -88,7 +88,7 @@ export function DocumentationInteroperabilityAssessmentOrganizational() {
           <RadioGroup
             aria-labelledby="question-label"
             scope={form.scope("rating")}
-            options={interoperabilityRatingOptions2}
+            options={interoperabilityRatingOptions}
             warningInsteadOfError
           />
           <DetailFormElement scope={form.scope()} />
