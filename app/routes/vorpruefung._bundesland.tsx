@@ -36,6 +36,7 @@ export function VorpruefungBundesland({
         scope={form.scope("bundesland")}
         options={bundeslaender.map((b) => b.name)}
         warningInsteadOfError
+        className="max-w-a11y"
       >
         Wählen Sie Ihr Bundesland oder den Bund aus
       </Select>
