@@ -1,4 +1,4 @@
-import { vorpruefung_ergebnis } from "@/config/routes";
+import { vorpruefung_bundesland, vorpruefung_ergebnis } from "@/config/routes";
 import type { Page } from "@playwright/test";
 import { expect, test } from "@playwright/test";
 import { preCheck } from "~/resources/content/vorpruefung";
@@ -22,6 +22,9 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
 
   test.beforeAll("answer all questions with yes", async ({ browser }) => {
     page = await browser.newPage();
+    await page.goto(vorpruefung_bundesland.path);
+    await waitForHydration(page);
+    await page.getByRole("button", { name: "Übernehmen" }).click(); // default Bundesland = "Bund" selected
     await page.goto(questions[0].path);
     for (const question of questions) {
       await page.waitForURL(question.path);
@@ -54,21 +57,23 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
   });
 
   test("details summary shows correct content", async () => {
-    const summaryElement = page.getByText("Aufschlüsselung Ihres Ergebnisses", {
-      exact: true,
-    });
+    const detailsElement = page.getByTestId("result-details");
+    const summaryElement = detailsElement.getByText(
+      "Aufschlüsselung Ihres Ergebnisses",
+      { exact: true },
+    );
     await expect(summaryElement).toBeVisible();
     await summaryElement.click();
 
     await expect(
-      page.getByText(
+      detailsElement.getByText(
         "In Bezug auf digitale Aspekte führt ihr Regelungsvorhaben zu...",
         { exact: true },
       ),
     ).toBeVisible();
 
     await expect(
-      page.getByText(
+      detailsElement.getByText(
         "In Bezug auf Interoperabilität führt ihr Regelungsvorhaben zu...",
         { exact: true },
       ),
@@ -76,7 +81,7 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
 
     for (const resultText of positiveResultContent) {
       await expect(
-        page.getByText(resultText, {
+        detailsElement.getByText(resultText, {
           exact: true,
         }),
       ).toBeVisible();
