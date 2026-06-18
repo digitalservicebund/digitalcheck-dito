@@ -2,6 +2,7 @@ import { normalizePathname, withBase } from "@/utils/path";
 import twMerge from "~/utils/tailwindMerge";
 import Badge from "./Badge";
 import Image from "./Image";
+import { OpenInNewIcon } from "./OpenInNewIcon";
 
 export type ActiveBehavior = "noHighlight" | "exactMatch";
 
@@ -54,6 +55,7 @@ export default function DropdownContentList({
       option.activeBehavior !== "noHighlight" &&
       checkExactMatchCriteria;
     const itemNumber = isOrderedList ? index + 1 : undefined;
+    const isExternal = option.href?.startsWith("http");
     return (
       <li key={option.href || option.title || index}>
         <a
@@ -88,7 +90,8 @@ export default function DropdownContentList({
                   </Badge>
                 )}
                 {itemNumber && <span className="mr-4">{itemNumber}. </span>}
-                {option.title}
+                {option.title}{" "}
+                {isExternal && <OpenInNewIcon className="fill-ds-blue-800" />}
               </div>
               {option.content && (
                 <span className="hidden lg:inline">{option.content}</span>

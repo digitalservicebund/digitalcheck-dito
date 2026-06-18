@@ -1,4 +1,3 @@
-import { ROUTE_SUPPORT_TRAININGS } from "@/config/additionalRoutes";
 import {
   beispiele_prinzipien,
   beispiele_visualisierungen,
@@ -153,14 +152,12 @@ export const header = {
           content:
             "Nutzen Sie unsere persönliche Hilfestellungen bei der Regelungsarbeit.",
           href: unterstuetzung.path,
-          activeBehavior: "noHighlight" as ActiveBehavior,
         },
         {
           title: "Schulungen",
           content:
             "In dieser Online-Schulung bekommen Sie praktische Tipps für den Digitalcheck.",
-          href: ROUTE_SUPPORT_TRAININGS,
-          activeBehavior: "noHighlight" as ActiveBehavior,
+          href: "https://zfl.bund.de/schulungen",
         },
         {
           title: "Nationale Kontaktstelle",
