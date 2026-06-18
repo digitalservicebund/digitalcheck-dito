@@ -91,7 +91,7 @@ export default function DetailsSummary({
         <div className={contentWrapperClasses}>{children}</div>
       </details>
       {expandInPrint && (
-        <div className="hidden print:block">
+        <div className="hidden print:block" aria-hidden="true">
           <span className={summaryClasses}>{title}</span>
           <div className={contentWrapperClasses}>{children}</div>
         </div>
