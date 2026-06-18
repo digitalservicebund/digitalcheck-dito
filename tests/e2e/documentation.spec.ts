@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { test } from "@playwright/test";
 import { documentationDocument } from "~/resources/content/documentation-document";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 
@@ -12,9 +12,10 @@ import {
 } from "@/config/routes";
 import {
   downloadDocumentAndGetText,
+  expect,
   expectAndSkipNotice,
   expectDocumentToNotContainTags,
-  expectStringsOrderedInText,
+  skipUntil,
   waitForHydration,
 } from "./helpers";
 
@@ -116,18 +117,14 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
       testInfo.outputPath("documentation-v2-draft.docx"),
       "Dokumentation_der_Digitaltauglichkeit.docx",
     );
-    expectStringsOrderedInText(
-      docText,
-      [
-        testData.title,
-        testData.participationFormats,
-        testData.participationResults,
-        "Digitale Angebote",
-        "Ja, gänzlich oder teilweise",
-        testData.positiveReasoning,
-      ],
-      [],
-    );
+    expect(docText).toHaveStringsOrdered([
+      testData.title,
+      testData.participationFormats,
+      testData.participationResults,
+      "Digitale Angebote",
+      "Ja, gänzlich oder teilweise",
+      testData.positiveReasoning,
+    ]);
     expectDocumentToNotContainTags(docText);
 
     await page.getByRole("button", { name: "Weiter" }).click();
@@ -223,6 +220,9 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
   });
 
   await test.step("navigate to summary", async () => {
+    await skipUntil(page, dokumentation_zusammenfassung.path, {
+      name: "Zusammenfassung",
+    });
     await expect(page).toHaveURL(dokumentation_zusammenfassung.path);
   });
 
@@ -253,23 +253,19 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
       testInfo.outputPath("documentation-v2-final.docx"),
       "Dokumentation_der_Digitaltauglichkeit.docx",
     );
-    expectStringsOrderedInText(
-      docText,
-      [
-        testData.title,
-        testData.participationFormats,
-        testData.participationResults,
-        "Digitale Angebote",
-        "Ja, gänzlich oder teilweise",
-        testData.positiveReasoning,
-        "Nein",
-        testData.negativeReasoning,
-        "Nicht relevant",
-        testData.irrelevantReasoning,
-        testData.lastPrincipleReasoning,
-      ],
-      [],
-    );
+    expect(docText).toHaveStringsOrdered([
+      testData.title,
+      testData.participationFormats,
+      testData.participationResults,
+      "Digitale Angebote",
+      "Ja, gänzlich oder teilweise",
+      testData.positiveReasoning,
+      "Nein",
+      testData.negativeReasoning,
+      "Nicht relevant",
+      testData.irrelevantReasoning,
+      testData.lastPrincipleReasoning,
+    ]);
     expectDocumentToNotContainTags(docText);
   });
 });
@@ -286,8 +282,7 @@ test("go to landing page and download empty V2 document template", async ({
     testInfo.outputPath("documentation-v2-template.docx"),
     "Dokumentation_der_Digitaltauglichkeit.docx",
   );
-  expectStringsOrderedInText(
-    docText,
+  expect(docText).toHaveStringsOrdered(
     [
       "Titel Ihres Regelungsvorhaben",
       documentationDocument.placeholder,
@@ -393,11 +388,10 @@ test.describe("with partial documentation started", () => {
         testInfo.outputPath("documentation-v2-draft.docx"),
         "Dokumentation_der_Digitaltauglichkeit.docx",
       );
-      expectStringsOrderedInText(
-        docText,
-        ["Titel Ihres Regelungsvorhaben", testData.title],
-        [],
-      );
+      expect(docText).toHaveStringsOrdered([
+        "Titel Ihres Regelungsvorhaben",
+        testData.title,
+      ]);
     });
 
     await test.step("confirm start over", async () => {

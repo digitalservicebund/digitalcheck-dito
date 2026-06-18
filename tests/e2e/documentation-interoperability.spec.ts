@@ -1,4 +1,4 @@
-import { expect, type Locator, type Page, test } from "@playwright/test";
+import { type Locator, test } from "@playwright/test";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 
 import {
@@ -15,10 +15,12 @@ import {
   dokumentation_zusammenfassung,
 } from "@/config/routes";
 import {
+  clickNext,
   downloadDocumentAndGetText,
+  expect,
   expectAndSkipNotice,
   expectDocumentToNotContainTags,
-  expectStringsOrderedInText,
+  skipUntil,
   waitForHydration,
 } from "./helpers";
 
@@ -116,10 +118,6 @@ const testData = {
   },
 };
 
-async function clickNext(page: Page) {
-  await page.getByText("Weiter", { exact: true }).click();
-}
-
 test("interoperability documentation happy path", async ({
   page,
 }, testInfo) => {
@@ -147,27 +145,10 @@ test("interoperability documentation happy path", async ({
       .getByLabel("Ministerium / Organisation")
       .fill(testData.organization);
 
-    if (await page.getByTestId("stepper").isVisible()) {
-      let previousUrl = page.url();
-      while (
-        !page.url().includes(dokumentation_euInteroperabilitaetsbezug.path)
-      ) {
-        await clickNext(page);
-        await page.waitForURL((url) => url.href !== previousUrl, {
-          timeout: 5_000,
-        });
-        previousUrl = page.url();
-        await waitForHydration(page);
-      }
-    } else {
-      // open the interoperability group
-      await page.getByRole("button", { name: "EU-Interoperabilität" }).click();
-      await page
-        .getByRole("link", { name: "Interoperabilitäts-Bezug" })
-        .click();
-    }
-
-    await expect(page).toHaveURL(dokumentation_euInteroperabilitaetsbezug.path);
+    await skipUntil(page, dokumentation_euInteroperabilitaetsbezug.path, {
+      name: "Interoperabilitäts-Bezug",
+      groupName: "Interoperabilität",
+    });
   });
 
   await test.step("select bezug", async () => {
@@ -293,31 +274,24 @@ test("interoperability documentation happy path", async ({
       testInfo.outputPath("interoperability-assessment.docx"),
       "Interoperabilitaetsbewertung.docx",
     );
-    expectStringsOrderedInText(
-      docText,
-      [
-        testData.title,
-        testData.organization,
-        testData.publicationStatus.shortValue,
-        testData.publicationDate.value,
-        "Verbindliche Anforderung",
-        testData.requirementA.answers.title.value,
-        testData.requirementA.answers.rechtsgrundlage.value,
-        ...testData.requirementA.answers.dienste.value.split("\n"),
-        ...testData.requirementA.answers.bereiche.values,
-        ...testData.requirementA.answers.betroffene.values,
-        testData.requirementB.answers.title.value,
-        testData.requirementB.answers.rechtsgrundlage.value,
-        ...testData.requirementB.answers.dienste.value.split("\n"),
-        ...testData.requirementB.answers.bereiche.values,
-        ...testData.requirementB.answers.betroffene.values,
-        ...testData.levels.flatMap((level) => [
-          level.answer,
-          level.detail ?? "",
-        ]),
-      ],
-      [],
-    );
+    expect(docText).toHaveStringsOrdered([
+      testData.title,
+      testData.organization,
+      testData.publicationStatus.shortValue,
+      testData.publicationDate.value,
+      "Verbindliche Anforderung",
+      testData.requirementA.answers.title.value,
+      testData.requirementA.answers.rechtsgrundlage.value,
+      ...testData.requirementA.answers.dienste.value.split("\n"),
+      ...testData.requirementA.answers.bereiche.values,
+      ...testData.requirementA.answers.betroffene.values,
+      testData.requirementB.answers.title.value,
+      testData.requirementB.answers.rechtsgrundlage.value,
+      ...testData.requirementB.answers.dienste.value.split("\n"),
+      ...testData.requirementB.answers.bereiche.values,
+      ...testData.requirementB.answers.betroffene.values,
+      ...testData.levels.flatMap((level) => [level.answer, level.detail ?? ""]),
+    ]);
     expectDocumentToNotContainTags(docText);
   });
 });
