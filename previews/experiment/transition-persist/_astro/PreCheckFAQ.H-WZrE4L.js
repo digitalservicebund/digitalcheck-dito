@@ -1,0 +1,1 @@
+import{j as r}from"./bundle-mjs.DBvd4n8_.js";import o from"./AccordionItem.Wz_3C_fV.js";import{R as n}from"./RichText.B7nGq-0T.js";import{p as t}from"./preCheckDataHook.TaxPRj2Y.js";function c(){return r.jsx(r.Fragment,{children:t.faq.items.map(e=>r.jsx(o,{headline:e.headline,children:r.jsx(n,{markdown:e.content})},e.headline))})}export{c as P};

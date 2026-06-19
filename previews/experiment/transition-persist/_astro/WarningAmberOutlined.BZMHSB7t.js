@@ -1,0 +1,1 @@
+import{j as t}from"./bundle-mjs.DBvd4n8_.js";const i=e=>t.jsx("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",height:24,viewBox:"0 0 24 24",width:24,"data-testid":"WarningAmberOutlinedIcon",focusable:"false","aria-hidden":"true"},e,{children:t.jsx("path",{d:"M12 5.99 19.53 19H4.47L12 5.99M12 2 1 21h22L12 2zm1 14h-2v2h2v-2zm0-6h-2v4h2v-4z"})}));export{i as S};
