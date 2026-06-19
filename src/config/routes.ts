@@ -121,6 +121,17 @@ export const datenschutz = {
   navLabel: null,
 } as const;
 
+export const dev = {
+  key: "dev",
+  path: "/dev",
+  title: "Astro Komponenten",
+  parent: null,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const dokumentation = {
   key: "dokumentation",
   path: "/dokumentation",
@@ -495,6 +506,7 @@ export const allRoutes = [
   bundeslaender_nordrheinWestfalen,
   dasIstNeu,
   datenschutz,
+  dev,
   dokumentation,
   dokumentation_absenden,
   dokumentation_beteiligungsformate,

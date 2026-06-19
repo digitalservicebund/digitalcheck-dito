@@ -1,0 +1,49 @@
+---
+interface Item {
+  value: string;
+  label: string;
+  selected?: boolean;
+}
+
+interface Props {
+  items: Item[];
+  /** `navigate`: <select> change will trigger navigation (RouteTabs) */
+  navigate?: boolean;
+  label?: string;
+  class?: string;
+}
+
+const { items, navigate = false, label, class: className } = Astro.props;
+---
+
+<div class={className}>
+  <div class="relative">
+    <select
+      data-tab-select={navigate ? undefined : ""}
+      onchange={navigate ? "location.href = this.value" : undefined}
+      aria-label={label}
+      class="ds-label-02-bold h-[70px] w-full cursor-pointer appearance-none border-4 border-transparent bg-blue-100 pr-[48px] pl-[16px] text-blue-800 hover:bg-blue-300 focus:border-blue-800 focus:outline-none"
+    >
+      {
+        items.map((item) => (
+          <option value={item.value} selected={item.selected}>
+            {item.label}
+          </option>
+        ))
+      }
+    </select>
+    <span
+      class="pointer-events-none absolute inset-y-0 right-[16px] flex items-center"
+      aria-hidden="true"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+      >
+        <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path>
+      </svg>
+    </span>
+  </div>
+</div>

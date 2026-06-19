@@ -1,0 +1,106 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import RouteTabs from "@/components/tabs/RouteTabs.astro";
+import Tabs from "@/components/tabs/Tabs.astro";
+import Hero from "@/components/Hero.astro";
+import { withBase } from "@/utils/path";
+
+export const frontmatter = {
+  title: "Astro Komponenten",
+  isStagingOnly: true,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>{frontmatter.title}</h1>
+    </Hero>
+    <div class="py-80 space-y-64">
+      <h2>Tabs</h2>
+      <section>
+        <h3>Tabs (Standard)</h3>
+        <Tabs tabs={["Übersicht", "Details", "Dokumente"]}>
+          <div data-tab-panel="Übersicht">
+            <p>Inhalt der Übersicht.</p>
+          </div>
+          <div data-tab-panel="Details">
+            <p>Inhalt der Details.</p>
+          </div>
+          <div data-tab-panel="Dokumente">
+            <p>Inhalt der Dokumente.</p>
+          </div>
+        </Tabs>
+      </section>
+
+      <section>
+        <h3>Tabs mit searchParams</h3>
+        <Tabs tabs={["Erster Tab", "Zweiter Tab", "Dritter Tab"]} searchParams>
+          <div data-tab-panel="Erster Tab">
+            <p>
+              Inhalt des ersten Tabs. URL enthält <code>?tab=erster-tab</code>.
+            </p>
+          </div>
+          <div data-tab-panel="Zweiter Tab">
+            <p>
+              Inhalt des zweiten Tabs. URL enthält <code>?tab=zweiter-tab</code
+              >.
+            </p>
+          </div>
+          <div data-tab-panel="Dritter Tab">
+            <p>
+              Inhalt des dritten Tabs. URL enthält <code>?tab=dritter-tab</code
+              >.
+            </p>
+          </div>
+        </Tabs>
+      </section>
+
+      <section>
+        <h3>Chips</h3>
+        <Tabs tabs={["Alle", "Entwürfe", "Veröffentlicht"]} look="chips">
+          <div data-tab-panel="Alle">
+            <p>Alle Einträge.</p>
+          </div>
+          <div data-tab-panel="Entwürfe">
+            <p>Nur Entwürfe.</p>
+          </div>
+          <div data-tab-panel="Veröffentlicht">
+            <p>Nur veröffentlichte Einträge.</p>
+          </div>
+        </Tabs>
+      </section>
+
+      <section>
+        <h3>RouteTabs (Standard)</h3>
+        <RouteTabs
+          tabs={[
+            { label: "Startseite", path: withBase("/") },
+            { label: "Diese Seite", path: withBase("/dev") },
+            { label: "Nicht vorhanden", path: withBase("/existiert-nicht") },
+          ]}
+        />
+      </section>
+
+      <section>
+        <h3>RouteTabs (Chips)</h3>
+        <RouteTabs
+          tabs={[
+            { label: "Startseite", path: withBase("/") },
+            { label: "Diese Seite", path: withBase("/dev") },
+            { label: "Nicht vorhanden", path: withBase("/existiert-nicht") },
+          ]}
+          look="chips"
+        />
+      </section>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  @reference "../../styles/globals.css";
+
+  section {
+    @apply space-y-24;
+  }
+</style>
