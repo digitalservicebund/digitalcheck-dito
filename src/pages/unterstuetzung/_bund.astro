@@ -14,54 +14,52 @@ import { supportTabs } from "./_supportTabs";
 type Props = HTMLAttributes<"section">;
 ---
 
-<section class="space-y-80" {...Astro.props}>
-  <div class="space-y-40">
-    <FeatureSet>
-      <FeatureItem
-        icon="ic:outline-draw"
-        title="Visualisierungen erstellen"
-        body="Wir erstellen in wenigen Tagen eine Visualisierung für Sie — hilfreich um Sachverhalte abzustimmen, Zusammenhänge zu verstehen und für Abstimmungen im Haus und zwischen Ressorts."
-      />
-      <FeatureItem
-        icon="ic:outline-playlist-add-check"
-        title="Schnelle Hilfe für den Digitalcheck"
-        body="Wir erklären, welche Schritte es gibt, welche Dokumente Sie wann benötigen und schätzen den Digitalbezug mit Ihnen ein (Vorprüfung ausfüllen)."
-      />
-      <FeatureItem
-        icon="ic:outline-ads-click"
-        title="Digitales Potenzial ausschöpfen"
-        body="Wir unterstützen Sie dabei die digitalen Potenziale Ihres Vorhabens auszuschöpfen, zu verbessern oder neu zu gestalten."
-      />
-    </FeatureSet>
-    <div class="bg-blue-100 rounded-xl p-40 md:px-80">
-      <h2 id="hilfe">Schnelle Hilfe und individuelle Beratung</h2>
-      <div class="ds-stack ds-stack-16 pt-32">
-        <InfoBox>
-          <p>
-            Sie können uns für dringende Anliegen unter <a href={contact.phone}
-              >{contact.phoneDisplay}</a
-            > anrufen oder uns eine <strong>E-Mail</strong> senden. Wir beantworten
-            Ihnen alle wichtigen Fragen zum Vorgehen und Anwenden des Digitalchecks
-            sowie allgemeine Fragen rund um das Erarbeiten digitaltauglicher Regelungen
-          </p>
-          <p>
-            Darüber hinaus bieten wir individuelle Beratungsgespräche an.
-            Gemeinsam klären wir, welche Unterstützungsangebote am besten zu
-            Ihren Bedürfnissen passen.
-          </p>
-        </InfoBox>
-        <ButtonContainer>
-          <LinkButton
-            look="tertiary"
-            href={`mailto:${contact.email}?subject=Unterstützungsangebote:%20digitalcheck.bund.de`}
-          >
-            E-Mail senden
-          </LinkButton>
-        </ButtonContainer>
-      </div>
+<section class="my-80 space-y-80" {...Astro.props}>
+  <FeatureSet>
+    <FeatureItem
+      icon="ic:outline-draw"
+      title="Visualisierungen erstellen"
+      body="Wir erstellen in wenigen Tagen eine Visualisierung für Sie — hilfreich um Sachverhalte abzustimmen, Zusammenhänge zu verstehen und für Abstimmungen im Haus und zwischen Ressorts."
+    />
+    <FeatureItem
+      icon="ic:outline-playlist-add-check"
+      title="Schnelle Hilfe für den Digitalcheck"
+      body="Wir erklären, welche Schritte es gibt, welche Dokumente Sie wann benötigen und schätzen den Digitalbezug mit Ihnen ein (Vorprüfung ausfüllen)."
+    />
+    <FeatureItem
+      icon="ic:outline-ads-click"
+      title="Digitales Potenzial ausschöpfen"
+      body="Wir unterstützen Sie dabei die digitalen Potenziale Ihres Vorhabens auszuschöpfen, zu verbessern oder neu zu gestalten."
+    />
+  </FeatureSet>
+  <div class="bg-blue-100 rounded-xl p-40 md:px-80">
+    <h2 id="hilfe">Schnelle Hilfe und individuelle Beratung</h2>
+    <div class="ds-stack ds-stack-16 pt-32">
+      <InfoBox>
+        <p>
+          Sie können uns für dringende Anliegen unter <a href={contact.phone}
+            >{contact.phoneDisplay}</a
+          > anrufen oder uns eine <strong>E-Mail</strong> senden. Wir beantworten
+          Ihnen alle wichtigen Fragen zum Vorgehen und Anwenden des Digitalchecks
+          sowie allgemeine Fragen rund um das Erarbeiten digitaltauglicher Regelungen
+        </p>
+        <p>
+          Darüber hinaus bieten wir individuelle Beratungsgespräche an.
+          Gemeinsam klären wir, welche Unterstützungsangebote am besten zu Ihren
+          Bedürfnissen passen.
+        </p>
+      </InfoBox>
+      <ButtonContainer>
+        <LinkButton
+          look="tertiary"
+          href={`mailto:${contact.email}?subject=Unterstützungsangebote:%20digitalcheck.bund.de`}
+        >
+          E-Mail senden
+        </LinkButton>
+      </ButtonContainer>
     </div>
   </div>
-  <div id="angebote" class="mt-80 space-y-40 pb-40">
+  <div id="angebote" class="space-y-40">
     <div class="space-y-16">
       <h2>Unterstützungsangebote im Überblick</h2>
       <p>
