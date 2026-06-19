@@ -57,51 +57,49 @@ export function DocumentationInteroperabilityAssessmentOrganizational() {
   });
 
   return (
-    <>
-      <div className="space-y-40">
-        <div className={"space-y-8"}>
-          <Badge look="hint">Organisatorische Interoperabilität</Badge>
-          <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
-            Organisatorische Strukturen für Interoperabilität
-          </Heading>
+    <div className="space-y-40">
+      <div className={"space-y-8"}>
+        <Badge look="hint">Organisatorische Interoperabilität</Badge>
+        <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
+          Organisatorische Strukturen für Interoperabilität
+        </Heading>
+        <p>
+          Zuständigkeiten und Prozesse müssen so abgestimmt sein, dass die
+          Zusammenarbeit reibungslos funktionieren kann, anstatt an
+          Behördengrenzen zu stocken.
+        </p>
+        <DetailsSummary title={"Beispiel"}>
+          <b>Szenario: internationale Gewerbeummeldung</b>
           <p>
-            Zuständigkeiten und Prozesse müssen so abgestimmt sein, dass die
-            Zusammenarbeit reibungslos funktionieren kann, anstatt an
-            Behördengrenzen zu stocken.
+            Wenn ein Unternehmen seinen Standort von Deutschland nach Spanien
+            verlegt, sollten die beteiligten Behörden beider Länder (z. B. über
+            das Single Digital Gateway) so miteinander verknüpft sein, das die
+            Gewerbeummeldung reibungslos abgewickelt werden kann. Auch
+            Zuständigkeiten müssen dazu geklärt sein.
           </p>
-          <DetailsSummary title={"Beispiel"}>
-            <b>Szenario: internationale Gewerbeummeldung</b>
-            <p>
-              Wenn ein Unternehmen seinen Standort von Deutschland nach Spanien
-              verlegt, sollten die beteiligten Behörden beider Länder (z. B.
-              über das Single Digital Gateway) so miteinander verknüpft sein,
-              das die Gewerbeummeldung reibungslos abgewickelt werden kann. Auch
-              Zuständigkeiten müssen dazu geklärt sein.
-            </p>
-          </DetailsSummary>
-        </div>
-        <SkipNoticeWrapper>
-          <h2 id="question-label" className="ds-heading-03-reg mb-16">
-            Schafft das Regelungsvorhaben die <strong>organisatorischen</strong>{" "}
-            Voraussetzungen für einen Datenaustausch innerhalb der EU?
-          </h2>
-          <RadioGroup
-            aria-labelledby="question-label"
-            scope={form.scope("rating")}
-            options={interoperabilityRatingOptions}
-            warningInsteadOfError
-          />
-          <DetailFormElement scope={form.scope()} />
-        </SkipNoticeWrapper>
-        <DocumentationActions
-          previousUrl={previousUrl}
-          nextUrl={nextUrl ?? dokumentation_zusammenfassung.path}
-          showDownloadDraftButton
-          showSavingTip
-        />
-        <IEAContactBanner />
+        </DetailsSummary>
       </div>
-    </>
+      <SkipNoticeWrapper>
+        <h2 id="question-label" className="ds-heading-03-reg mb-16">
+          Schafft das Regelungsvorhaben die <strong>organisatorischen</strong>{" "}
+          Voraussetzungen für einen Datenaustausch innerhalb der EU?
+        </h2>
+        <RadioGroup
+          aria-labelledby="question-label"
+          scope={form.scope("rating")}
+          options={interoperabilityRatingOptions}
+          warningInsteadOfError
+        />
+        <DetailFormElement scope={form.scope()} />
+      </SkipNoticeWrapper>
+      <DocumentationActions
+        previousUrl={previousUrl}
+        nextUrl={nextUrl ?? dokumentation_zusammenfassung.path}
+        showDownloadDraftButton
+        showSavingTip
+      />
+      <IEAContactBanner />
+    </div>
   );
 }
 

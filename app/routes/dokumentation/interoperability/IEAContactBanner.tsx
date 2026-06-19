@@ -13,7 +13,7 @@ export function IEAContactBanner() {
         <a href={interoperabel_nationaleKontaktstelle.path}>
           nationale Kontaktstelle für ein interoperables Europa
         </a>
-        .
+        {"."}
       </p>
     </div>
   );

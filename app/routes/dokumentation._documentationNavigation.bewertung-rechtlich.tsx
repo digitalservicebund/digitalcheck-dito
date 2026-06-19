@@ -56,49 +56,47 @@ export function DocumentationInteroperabilityAssessmentLegal() {
   });
 
   return (
-    <>
-      <div className="space-y-40">
-        <div className={"space-y-8"}>
-          <Badge look="hint">Rechtliche Interoperabilität</Badge>
-          <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
-            Rechtliche Grundlage für den Datenaustausch schaffen
-          </Heading>
-          <p>
-            Eine Regelung sollte so gestaltet sein, dass Behörden Daten über
-            Grenzen hinweg austauschen dürfen. Keine rechtlichen Barrieren
-            dürfen einen digitalen Austausch blockieren.
-          </p>
-          <DetailsSummary title={"Beispiel"}>
-            Der Gesetzesentwurf ermächtigt die zuständige deutsche Behörde [X],
-            Nachweise zu Bildungsabschlüssen direkt bei den zuständigen Stellen
-            anderer EU-Mitgliedstaaten zu überprüfen. Den ausländischen Behörden
-            wird spiegelbildlich das Recht eingeräumt, entsprechende
-            Überprüfungsanfragen an die deutsche Behörde zu richten.
-          </DetailsSummary>
-        </div>
-        <SkipNoticeWrapper>
-          <h2 id="question-label" className="ds-heading-03-reg mb-16">
-            Schafft das Regelungsvorhaben die <strong>rechtlichen</strong>{" "}
-            Voraussetzungen für einen Datenaustausch innerhalb der EU?
-          </h2>
-          <RadioGroup
-            aria-labelledby="question-label"
-            scope={form.scope("rating")}
-            options={interoperabilityRatingOptions}
-            warningInsteadOfError
-          />
-
-          <DetailFormElement scope={form.scope()} />
-        </SkipNoticeWrapper>
-        <DocumentationActions
-          previousUrl={previousUrl}
-          nextUrl={nextUrl ?? dokumentation_zusammenfassung.path}
-          showDownloadDraftButton
-          showSavingTip
-        />
-        <IEAContactBanner />
+    <div className="space-y-40">
+      <div className={"space-y-8"}>
+        <Badge look="hint">Rechtliche Interoperabilität</Badge>
+        <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
+          Rechtliche Grundlage für den Datenaustausch schaffen
+        </Heading>
+        <p>
+          Eine Regelung sollte so gestaltet sein, dass Behörden Daten über
+          Grenzen hinweg austauschen dürfen. Keine rechtlichen Barrieren dürfen
+          einen digitalen Austausch blockieren.
+        </p>
+        <DetailsSummary title={"Beispiel"}>
+          Der Gesetzesentwurf ermächtigt die zuständige deutsche Behörde [X],
+          Nachweise zu Bildungsabschlüssen direkt bei den zuständigen Stellen
+          anderer EU-Mitgliedstaaten zu überprüfen. Den ausländischen Behörden
+          wird spiegelbildlich das Recht eingeräumt, entsprechende
+          Überprüfungsanfragen an die deutsche Behörde zu richten.
+        </DetailsSummary>
       </div>
-    </>
+      <SkipNoticeWrapper>
+        <h2 id="question-label" className="ds-heading-03-reg mb-16">
+          Schafft das Regelungsvorhaben die <strong>rechtlichen</strong>{" "}
+          Voraussetzungen für einen Datenaustausch innerhalb der EU?
+        </h2>
+        <RadioGroup
+          aria-labelledby="question-label"
+          scope={form.scope("rating")}
+          options={interoperabilityRatingOptions}
+          warningInsteadOfError
+        />
+
+        <DetailFormElement scope={form.scope()} />
+      </SkipNoticeWrapper>
+      <DocumentationActions
+        previousUrl={previousUrl}
+        nextUrl={nextUrl ?? dokumentation_zusammenfassung.path}
+        showDownloadDraftButton
+        showSavingTip
+      />
+      <IEAContactBanner />
+    </div>
   );
 }
 

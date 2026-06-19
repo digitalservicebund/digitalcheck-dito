@@ -57,48 +57,46 @@ export function DocumentationInteroperabilityAssessmentTechnical() {
   });
 
   return (
-    <>
-      <div className="space-y-40">
-        <div className={"space-y-8"}>
-          <Badge look="hint">Technische Interoperabilität</Badge>
-          <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
-            Technische Voraussetzungen für den Datenaustausch schaffen
-          </Heading>
-          <p>
-            Die technische Ebene der Interoperabilität sorgt dafür, dass
-            verschiedene Verwaltungen über kompatible IT-Systeme, Datenstandards
-            und Schnittstellen (APIs) tatsächlich miteinander kommunizieren
-            können - ohne manuelle Anpassungen pro Fall.
-          </p>
-          <DetailsSummary title={"Beispiel"}>
-            Der Austausch von Nachweisen zwischen Behörden erfolgt
-            vollautomatisch im Hintergrund über standardisierte Schnittstellen
-            (APIs) und gesicherte europäische Netze.
-          </DetailsSummary>
-        </div>
-        <SkipNoticeWrapper>
-          <h2 id="question-label" className="ds-heading-03-reg mb-16">
-            Schafft das Regelungsvorhaben die <strong>technischen</strong>{" "}
-            Voraussetzungen für einen Datenaustausch innerhalb der EU?
-          </h2>
-          <RadioGroup
-            aria-labelledby="question-label"
-            scope={form.scope("rating")}
-            options={interoperabilityRatingOptions}
-            warningInsteadOfError
-          />
-
-          <DetailFormElement scope={form.scope()} />
-        </SkipNoticeWrapper>
-        <DocumentationActions
-          previousUrl={previousUrl}
-          nextUrl={nextUrl ?? dokumentation_zusammenfassung.path}
-          showDownloadDraftButton
-          showSavingTip
-        />
-        <IEAContactBanner />
+    <div className="space-y-40">
+      <div className={"space-y-8"}>
+        <Badge look="hint">Technische Interoperabilität</Badge>
+        <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
+          Technische Voraussetzungen für den Datenaustausch schaffen
+        </Heading>
+        <p>
+          Die technische Ebene der Interoperabilität sorgt dafür, dass
+          verschiedene Verwaltungen über kompatible IT-Systeme, Datenstandards
+          und Schnittstellen (APIs) tatsächlich miteinander kommunizieren können
+          - ohne manuelle Anpassungen pro Fall.
+        </p>
+        <DetailsSummary title={"Beispiel"}>
+          Der Austausch von Nachweisen zwischen Behörden erfolgt vollautomatisch
+          im Hintergrund über standardisierte Schnittstellen (APIs) und
+          gesicherte europäische Netze.
+        </DetailsSummary>
       </div>
-    </>
+      <SkipNoticeWrapper>
+        <h2 id="question-label" className="ds-heading-03-reg mb-16">
+          Schafft das Regelungsvorhaben die <strong>technischen</strong>{" "}
+          Voraussetzungen für einen Datenaustausch innerhalb der EU?
+        </h2>
+        <RadioGroup
+          aria-labelledby="question-label"
+          scope={form.scope("rating")}
+          options={interoperabilityRatingOptions}
+          warningInsteadOfError
+        />
+
+        <DetailFormElement scope={form.scope()} />
+      </SkipNoticeWrapper>
+      <DocumentationActions
+        previousUrl={previousUrl}
+        nextUrl={nextUrl ?? dokumentation_zusammenfassung.path}
+        showDownloadDraftButton
+        showSavingTip
+      />
+      <IEAContactBanner />
+    </div>
   );
 }
 
