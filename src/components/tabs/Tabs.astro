@@ -20,6 +20,7 @@ interface Props {
   tabs: string[];
   look?: Look;
   searchParams?: boolean;
+  class?: string;
 }
 
 const { tabs, look = "tabs", searchParams = false } = Astro.props;
@@ -29,7 +30,11 @@ const { tabListClass, mobilePickerClass, buttonClass } = getTabClasses(look);
 const uid = `tabs-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
-<div data-tabs data-search-params={searchParams ? "" : undefined}>
+<div
+  data-tabs
+  data-search-params={searchParams ? "" : undefined}
+  class={Astro.props.class}
+>
   <nav class={tabListClass} role="tablist" aria-label="Seitenabschnitte">
     {
       tabs.map((tabLabel, i) => {
