@@ -50,6 +50,11 @@ const DC_MAIL = "interoperabel@digitalservice.bund.de";
 const NKR_MAIL = mockPruefstelleMails.get("Bund")!;
 const BB_MAIL = mockPruefstelleMails.get("Brandenburg")!;
 
+const UNSURE_HEADLINE =
+  "Sie haben mehrere Aussagen mit „Ich bin unsicher“ beantwortet.";
+const UNSURE_HINT_BUND = "Wir helfen Ihnen, die Vorprüfung auszufüllen.";
+const UNSURE_HINT_NO_PRUEFSTELLE = "Vorprüfung zu wiederholen";
+
 const { questions } = preCheck;
 
 // all true
@@ -61,7 +66,7 @@ const DEFAULT_EXPECTATIONS = {
   includesInterop: true,
   furtherStepsVisible: true,
   showsAnswerConflictWarning: true,
-  showsUnsureHint: true,
+  unsureHintSubstring: null as string | null,
   allPositive: true,
   dcPositiveIOunsure: true,
   emailRecipients: [NKR_MAIL, DC_MAIL],
@@ -214,9 +219,9 @@ const scenarios: TestScenario[] = [
       hasInputArbeitstitel: false,
       showsNegativeReasoning: false,
       furtherStepsVisible: false,
+      unsureHintSubstring: UNSURE_HINT_BUND,
 
-      headline:
-        "Sie haben mehrere Aussagen mit „Ich bin unsicher“ beantwortet.",
+      headline: UNSURE_HEADLINE,
     },
   },
   {
@@ -231,9 +236,9 @@ const scenarios: TestScenario[] = [
       showsNegativeReasoning: false,
       includesInterop: false,
       furtherStepsVisible: false,
+      unsureHintSubstring: UNSURE_HINT_BUND,
 
-      headline:
-        "Sie haben mehrere Aussagen mit „Ich bin unsicher“ beantwortet.",
+      headline: UNSURE_HEADLINE,
     },
   },
   {
@@ -246,9 +251,45 @@ const scenarios: TestScenario[] = [
       hasInputArbeitstitel: false,
       showsNegativeReasoning: false,
       furtherStepsVisible: false,
+      unsureHintSubstring: UNSURE_HINT_BUND,
 
-      headline:
-        "Sie haben mehrere Aussagen mit „Ich bin unsicher“ beantwortet.",
+      headline: UNSURE_HEADLINE,
+    },
+  },
+  {
+    name: "unsure result for Bundesland with Pruefstelle",
+    answers: () => "Ich bin unsicher",
+    bundesland: "Brandenburg",
+    expected: {
+      ...DEFAULT_EXPECTATIONS,
+      showsAnswerConflictWarning: false,
+      formIsVisible: false,
+      hasInputArbeitstitel: false,
+      showsNegativeReasoning: false,
+      furtherStepsVisible: false,
+      emailRecipients: [BB_MAIL],
+      unsureHintSubstring: BB_MAIL,
+
+      headline: UNSURE_HEADLINE,
+    },
+  },
+  {
+    name: "unsure result for Bundesland without Pruefstelle",
+    answers: () => "Ich bin unsicher",
+    bundesland: "Hessen",
+    expected: {
+      ...DEFAULT_EXPECTATIONS,
+      showsAnswerConflictWarning: false,
+      formIsVisible: false,
+      hasInputArbeitstitel: false,
+      showsNegativeReasoning: false,
+      furtherStepsVisible: false,
+      emailRecipients: [],
+      hasDownloadButton: true,
+      expectedPruefstelleStep: null,
+      unsureHintSubstring: UNSURE_HINT_NO_PRUEFSTELLE,
+
+      headline: UNSURE_HEADLINE,
     },
   },
   {
@@ -396,6 +437,16 @@ describe("Vorprüfung Ergebnis Page", () => {
             name: "Ergebnis herunterladen",
           });
           expect(downloadBtn).toBeInTheDocument();
+        },
+      );
+
+      it.runIf(expected.unsureHintSubstring)(
+        "shows the correct unsure hint",
+        () => {
+          setup(answers, bundesland);
+          expect(
+            screen.getByText(expected.unsureHintSubstring!, { exact: false }),
+          ).toBeInTheDocument();
         },
       );
 

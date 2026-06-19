@@ -31,7 +31,10 @@ export const preCheckResult = {
   },
   unsure: {
     title: "Sie haben mehrere Aussagen mit „Ich bin unsicher“ beantwortet.",
-    hint: `Bitte kontaktieren Sie den Digitalcheck-Support unter: ${contact.mdPhoneLink()} oder schreiben Sie uns eine E-Mail an ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")} mit Ihren Fragen. Wir helfen Ihnen, die Vorprüfung auszufüllen.`,
+    hintBund: `Bitte kontaktieren Sie den Digitalcheck-Support unter: ${contact.mdPhoneLink()} oder schreiben Sie uns eine E-Mail an ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")} mit Ihren Fragen. Wir helfen Ihnen, die Vorprüfung auszufüllen.`,
+    hintBundelandWithoutPruefstelle: `Da sich einige Punkte aktuell noch nicht eindeutig beantworten lassen, empfehlen wir, die Vorprüfung zu wiederholen oder ggf. hier zu beenden und direkt in die [Erarbeitung](${methoden.path}) zu starten.`,
+    hintBundeslandWithPruefstelle: (pruefstelleMail: string) =>
+      `Bitte kontaktieren Sie Ihre Prüfstelle ${pruefstelleMail} mit Ihren Fragen. Dort wird man helfen Ihnen, die Vorprüfung auszufüllen.`,
     actionButton: {
       text: "Vorprüfung wiederholen",
       to: vorpruefung.path,

@@ -107,12 +107,21 @@ export default function Result() {
       globalThis.location.href = vorpruefung.path;
     }
   }, [firstUnansweredQuestionIndex]);
-
-  const resultHint =
-    result?.digital === ResultType.UNSURE ? preCheckResult.unsure.hint : "";
   const isBund = bundesland === "Bund";
   const pruefstelleMail = bundesland && pruefstelleMails.get(bundesland);
   const hasPruefstelle = !!pruefstelleMail;
+
+  let unsureHint: string | undefined = undefined;
+  if (result?.digital === ResultType.UNSURE) {
+    if (isBund) {
+      unsureHint = preCheckResult.unsure.hintBund;
+    } else if (hasPruefstelle) {
+      unsureHint =
+        preCheckResult.unsure.hintBundeslandWithPruefstelle(pruefstelleMail);
+    } else {
+      unsureHint = preCheckResult.unsure.hintBundelandWithoutPruefstelle;
+    }
+  }
 
   return (
     <>
@@ -140,9 +149,9 @@ export default function Result() {
                       className="mb-0"
                       text={marked.parseInline(resultContent.title) as string}
                     />
-                    {resultHint && (
+                    {unsureHint && (
                       <RichText
-                        markdown={resultHint}
+                        markdown={unsureHint}
                         className="ds-subhead mt-16"
                       />
                     )}
