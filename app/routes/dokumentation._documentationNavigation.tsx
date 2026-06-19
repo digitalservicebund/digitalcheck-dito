@@ -20,6 +20,7 @@ import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
+import { isIeaAssessmentEnabled } from "~/utils/features.ts";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import {
   useDocumentationDataService,
@@ -99,30 +100,33 @@ export function LayoutWithDocumentationNavigation({
     useDocumentationDataService();
 
   const routes: (Route | RouteGroup)[] = useMemo(
-    () => [
-      ...ROUTES_DOCUMENTATION_INTRO,
-      {
-        title: "Prinzipien",
-        routes: prinzips.map<Route>(({ Name, URLBezeichnung, documentId }) => ({
-          title: Name,
-          path: `${dokumentation.path}/${URLBezeichnung}`,
-          principleId: documentId,
-        })),
-      },
-      {
-        title: "EU-Interoperabilität",
-        routes: [
-          dokumentation_euInteroperabilitaetsbezug,
-          dokumentation_verbindlicheAnforderungen,
-          dokumentation_bewertungRechtlich,
-          dokumentation_bewertungOrganisatorisch,
-          dokumentation_bewertungSemantisch,
-          dokumentation_bewertungTechnisch,
-          dokumentation_veroeffentlichung,
-        ],
-      },
-      ...ROUTES_DOCUMENTATION_FINALIZE,
-    ],
+    () =>
+      [
+        ...ROUTES_DOCUMENTATION_INTRO,
+        {
+          title: "Prinzipien",
+          routes: prinzips.map<Route>(
+            ({ Name, URLBezeichnung, documentId }) => ({
+              title: Name,
+              path: `${dokumentation.path}/${URLBezeichnung}`,
+              principleId: documentId,
+            }),
+          ),
+        },
+        isIeaAssessmentEnabled && {
+          title: "EU-Interoperabilität",
+          routes: [
+            dokumentation_euInteroperabilitaetsbezug,
+            dokumentation_verbindlicheAnforderungen,
+            dokumentation_bewertungRechtlich,
+            dokumentation_bewertungOrganisatorisch,
+            dokumentation_bewertungSemantisch,
+            dokumentation_bewertungTechnisch,
+            dokumentation_veroeffentlichung,
+          ],
+        },
+        ...ROUTES_DOCUMENTATION_FINALIZE,
+      ].filter((route): route is Route | RouteGroup => !!route),
     [prinzips],
   );
 

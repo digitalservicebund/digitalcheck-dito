@@ -35,6 +35,7 @@ import {
   publicationLinkQuestion,
   publicationStatusQuestion,
 } from "~/routes/dokumentation/interoperability/values.ts";
+import { isIeaAssessmentEnabled } from "~/utils/features.ts";
 import { keyValueToMap } from "~/utils/keyValue.ts";
 import type {
   PrinzipWithAspekte,
@@ -305,6 +306,7 @@ function BindingRequirementSummary({
 function createInteroperabilityInfoBoxItems(
   documentationData: DocumentationData<"2">,
 ): InfoBoxProps[] {
+  if (!isIeaAssessmentEnabled) return [];
   const detailsRequired =
     documentationData.euInteroperabilityOutcome?.outcomeId === "REQUIRED";
 

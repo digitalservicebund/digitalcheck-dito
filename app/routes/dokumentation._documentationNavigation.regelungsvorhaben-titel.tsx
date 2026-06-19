@@ -48,9 +48,11 @@ export function DocumentationTitle() {
             </HelpButton>
           </Input>
 
-          <Input scope={form.scope("organization")} warningInsteadOfError>
-            Ministerium / Organisation
-          </Input>
+          {isIeaAssessmentEnabled && (
+            <Input scope={form.scope("organization")} warningInsteadOfError>
+              Ministerium / Organisation
+            </Input>
+          )}
         </div>
 
         <DocumentationActions
@@ -71,6 +73,7 @@ export default function Route() {
 
 // Astro page export
 import { DocumentationPageShell } from "@/components/DocumentationPageShell";
+import { isIeaAssessmentEnabled } from "~/utils/features.ts";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
 export function TitelPage({

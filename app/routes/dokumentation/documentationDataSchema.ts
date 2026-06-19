@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
+import { isIeaAssessmentEnabled } from "~/utils/features.ts";
 import type { VersionedData } from "~/utils/localStorageVersioned";
 
 export const DATA_SCHEMA_VERSION_V1 = "1";
@@ -14,9 +15,9 @@ const { principlePages, participation, info } = digitalDocumentation;
 
 export const policyTitleSchema = z.object({
   title: z.string().min(1, { message: info.inputTitle.error }),
-  organization: z
-    .string()
-    .min(1, { message: "Bitte geben Sie eine Organisation ein." }),
+  organization: z.string().min(isIeaAssessmentEnabled ? 1 : 0, {
+    message: "Bitte geben Sie eine Organisation ein.",
+  }),
 });
 
 export const participationSchema = z.object({

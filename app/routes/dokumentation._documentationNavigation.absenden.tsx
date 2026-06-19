@@ -74,6 +74,7 @@ export function DocumentationSend() {
   const { documentationData } = useDocumentationDataService();
 
   const interoperabilityRequired =
+    isIeaAssessmentEnabled &&
     documentationData.euInteroperabilityOutcome?.outcomeId === "REQUIRED";
 
   const firstStepPrefix = interoperabilityRequired ? "Schritt 1: " : "";
@@ -148,6 +149,7 @@ import { contact } from "~/resources/content/shared/contact.ts";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import { downloadAssessment } from "~/service/wordDocumentationExport/wordInteroperabilityAssessment.ts";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
+import { isIeaAssessmentEnabled } from "~/utils/features.ts";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
 export function AbsendenPage({
