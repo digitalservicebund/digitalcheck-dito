@@ -1,0 +1,137 @@
+---
+import { Image } from "astro:assets";
+import type { HTMLAttributes } from "astro/types";
+import FeatureSet from "@/components/FeatureSet.astro";
+import FeatureItem from "@/components/FeatureItem.astro";
+import Tabs from "@/components/tabs/Tabs.astro";
+import { LinkButton } from "~/components/Button.tsx";
+import ButtonContainer from "~/components/ButtonContainer.tsx";
+import InfoBox from "~/components/InfoBox";
+import RichText from "~/components/RichText";
+import { contact } from "~/resources/content/shared/contact";
+import { supportTabs } from "./_supportTabs";
+
+type Props = HTMLAttributes<"section">;
+---
+
+<section class="space-y-80" {...Astro.props}>
+  <div class="space-y-40">
+    <FeatureSet>
+      <FeatureItem
+        icon="ic:outline-draw"
+        title="Visualisierungen erstellen"
+        body="Wir erstellen in wenigen Tagen eine Visualisierung für Sie — hilfreich um Sachverhalte abzustimmen, Zusammenhänge zu verstehen und für Abstimmungen im Haus und zwischen Ressorts."
+      />
+      <FeatureItem
+        icon="ic:outline-playlist-add-check"
+        title="Schnelle Hilfe für den Digitalcheck"
+        body="Wir erklären, welche Schritte es gibt, welche Dokumente Sie wann benötigen und schätzen den Digitalbezug mit Ihnen ein (Vorprüfung ausfüllen)."
+      />
+      <FeatureItem
+        icon="ic:outline-ads-click"
+        title="Digitales Potenzial ausschöpfen"
+        body="Wir unterstützen Sie dabei die digitalen Potenziale Ihres Vorhabens auszuschöpfen, zu verbessern oder neu zu gestalten."
+      />
+    </FeatureSet>
+    <div class="bg-blue-100 rounded-xl p-40 md:px-80">
+      <h2 id="hilfe">Schnelle Hilfe und individuelle Beratung</h2>
+      <div class="ds-stack ds-stack-16 pt-32">
+        <InfoBox>
+          <p>
+            Sie können uns für dringende Anliegen unter <a href={contact.phone}
+              >{contact.phoneDisplay}</a
+            > anrufen oder uns eine <strong>E-Mail</strong> senden. Wir beantworten
+            Ihnen alle wichtigen Fragen zum Vorgehen und Anwenden des Digitalchecks
+            sowie allgemeine Fragen rund um das Erarbeiten digitaltauglicher Regelungen
+          </p>
+          <p>
+            Darüber hinaus bieten wir individuelle Beratungsgespräche an.
+            Gemeinsam klären wir, welche Unterstützungsangebote am besten zu
+            Ihren Bedürfnissen passen.
+          </p>
+        </InfoBox>
+        <ButtonContainer>
+          <LinkButton
+            look="tertiary"
+            href={`mailto:${contact.email}?subject=Unterstützungsangebote:%20digitalcheck.bund.de`}
+          >
+            E-Mail senden
+          </LinkButton>
+        </ButtonContainer>
+      </div>
+    </div>
+  </div>
+  <div id="angebote" class="mt-80 space-y-40 pb-40">
+    <div class="space-y-16">
+      <h2>Unterstützungsangebote im Überblick</h2>
+      <p>
+        Nach einem erstem Austausch finden wir gemeinsam die richtige
+        Unterstützung für Ihre Herausforderung und Ihren Zeitplan.
+      </p>
+    </div>
+    <Tabs tabs={supportTabs.map((tab) => tab.title)} look="chips">
+      {
+        supportTabs.map((tab) => (
+          <div class="space-y-40" data-tab-panel={tab.title}>
+            {tab.offerings.map((offering) => (
+              <div class="p-40 md:px-80 mb-32 flex justify-between gap-32 rounded-xl bg-blue-100 max-md:flex-col">
+                <InfoBox
+                  heading={{
+                    tagName: "h2",
+                    text: offering.title,
+                  }}
+                >
+                  <RichText markdown={offering.text} />
+                </InfoBox>
+
+                <div class="flex-none space-y-20 md:w-[310px] lg:w-[364px]">
+                  <div class="bg-white">
+                    <div class="p-28">
+                      <h3 class="text-lg">{offering.sellingPoints}</h3>
+                      <div class="divide-y divide-gray-700">
+                        {offering.details.map((detail) => (
+                          <div class="py-16">
+                            <div class="flex items-center gap-8 pb-8">
+                              {detail.icon && (
+                                <detail.icon className="size-24 fill-gray-800" />
+                              )}
+                              <p class="ds-label-01-bold">{detail.title}</p>
+                            </div>
+                            <RichText
+                              markdown={detail.text}
+                              className="text-base"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  {"examples" in offering && (
+                    <div>
+                      <div class="divide-y divide-gray-700">
+                        {offering.examples.map((example) => (
+                          <div>
+                            {"image" in example && (
+                              <Image
+                                src={example.image.src}
+                                alt={example.image.alt}
+                              />
+                            )}
+                            <RichText
+                              markdown={example.text}
+                              className="p-20 text-base"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        ))
+      }
+    </Tabs>
+  </div>
+</section>

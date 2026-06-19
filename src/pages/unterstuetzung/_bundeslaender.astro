@@ -1,0 +1,61 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import InfoBox from "~/components/InfoBox";
+import InfoBoxList from "@/components/InfoBoxList.astro";
+import { LinkButton } from "~/components/Button";
+import {
+  bundeslaender_hessen,
+  bundeslaender_brandenburg,
+  bundeslaender_nordrheinWestfalen,
+} from "@/config/routes";
+import { withBase } from "@/utils/path";
+
+type Props = HTMLAttributes<"section">;
+const anlaufstellen = [
+  {
+    title: "Brandenburg",
+    logo: withBase("/images/bundeslaender/brandenburg-logo.svg"),
+    path: bundeslaender_brandenburg.path,
+  },
+  {
+    title: "Hessen",
+    logo: withBase("/images/bundeslaender/hessen-logo.svg"),
+    path: bundeslaender_hessen.path,
+  },
+  {
+    title: "Nordrhein-Westfalen",
+    logo: withBase("/images/bundeslaender/nrw-wappen.svg"),
+    path: bundeslaender_nordrheinWestfalen.path,
+  },
+];
+---
+
+<section class="pb-80" {...Astro.props}>
+  <h2 class="pb-8">Übersicht zu den Anlaufstellen</h2>
+  <p>Hier finden Sie weitere Informationen zu Ihrem jeweiligen Bundesland.</p>
+  <InfoBoxList class="mt-40">
+    {
+      anlaufstellen.map((a) => (
+        <InfoBox
+          visual={{
+            type: "image",
+            image: {
+              url: a.logo,
+              size: "medium",
+              className: "object-contain mx-32",
+            },
+          }}
+        >
+          <h3>{a.title}</h3>
+          <p>
+            Sehen Sie sich die Details für {a.title} an und welche Punkte für
+            die Prüfung besonders relevant sind.
+          </p>
+          <LinkButton href={a.path} look="tertiary" className="self-start">
+            Mehr erfahren
+          </LinkButton>
+        </InfoBox>
+      ))
+    }
+  </InfoBoxList>
+</section>
