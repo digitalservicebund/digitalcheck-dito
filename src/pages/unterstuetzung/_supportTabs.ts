@@ -23,7 +23,7 @@ export const supportTabs = [
               z. B. bei folgenden Zielen einer Regelung:
               
               - Voraussetzungen für eine Digitalisierung schaffen
-              - bestehenden Umsetzungsprozesse verbessern oder neu aufsetzen
+              - bestehende Umsetzungsprozesse verbessern oder neu aufsetzen
               
               **Beispiele für einen leichten bis mittleren Digitalbezug: bestehenden Prozess anpassen**
               
