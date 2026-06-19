@@ -10,7 +10,7 @@ import { InteroperableSolutionBanner } from "~/components/InteroperableSolutionB
 import RichText from "~/components/RichText";
 import ToC from "~/components/TableOfContentsInteractive.tsx";
 import Timeline from "~/components/Timeline";
-import { directLinks } from "~/routes/interoperabel/UeberblickTab.tsx";
+import { interopsAssessment } from "@/pages/interoperabel/_tabs";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { slugify } from "~/utils/utilFunctions.ts";
 import ChapterBadge from "./_ChapterBadge.astro";
@@ -384,7 +384,7 @@ const sections = {
             <RichText
               markdown={dedent`
                 Übermitteln Sie vor der Entscheidung über den Entwurf eine
-                [Interoperabilitätsbewertung](${directLinks.assessment}),
+                [Interoperabilitätsbewertung](${interopsAssessment.path}),
                 falls erforderlich.
                 `}
             />
