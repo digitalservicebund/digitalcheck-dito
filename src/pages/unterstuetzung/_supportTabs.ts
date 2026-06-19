@@ -46,7 +46,7 @@ export const supportTabs = [
             icon: CheckCircleOutlined,
             title: "Was Sie bekommen",
             text: dedent`
-                  - Expert:innen-Einschätzung zum Digitalbezug des Regelungsverfahrens: Grundlage für Planung des Regelungsvorhabens
+                  - Experten-Einschätzung zum Digitalbezug des Regelungsverfahrens: Grundlage für Planung des Regelungsvorhabens
                 `,
           },
         ],
@@ -54,9 +54,9 @@ export const supportTabs = [
       {
         title: "IT-Wissen einfach erklärt",
         text: dedent`
-              Im geschützten Rahmen eines Gesprächs beantworten unsere Expert:innen Ihnen alle **Fragen zur IT**. 
+              Im geschützten Rahmen eines Gesprächs beantworten unsere Expertinnen und Experten Ihnen alle **Fragen zur IT**.
 
-              Jede Frage ist berechtigt — jede verstandene Antwort wird die Regelung digitaltauglicher machen.  
+              Jede Frage ist berechtigt — jede verstandene Antwort wird die Regelung digitaltauglicher machen.
 
               Beispiele für Fragen:
               
