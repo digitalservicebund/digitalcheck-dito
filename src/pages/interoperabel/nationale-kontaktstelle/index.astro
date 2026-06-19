@@ -1,0 +1,67 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Tabs from "@/components/tabs/Tabs.astro";
+import Ueberblick from "./_Ueberblick.astro";
+import Heading from "~/components/Heading";
+import Hero from "@/components/Hero.astro";
+import RichText from "~/components/RichText";
+import { spoc } from "./_content";
+
+export const frontmatter = {
+  title: "Nationale Kontaktstelle",
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>{spoc.headline}</h1>
+      <RichText slot="subtitle" markdown={spoc.content} />
+    </Hero>
+    <div class="mt-40">
+      <Tabs
+        tabs={[
+          spoc.landscape.tabName,
+          spoc.states.tabName,
+          spoc.contact.tabName,
+        ]}
+      >
+        <div data-tab-panel={spoc.landscape.tabName}>
+          <Ueberblick />
+        </div>
+
+        <div data-tab-panel={spoc.states.tabName} class="container">
+          <Heading tagName="h2" text={spoc.states.headline} />
+          {
+            spoc.states.sections.map((section) => (
+              <div class="last:mb-48">
+                <Heading
+                  tagName="h3"
+                  text={section.headline}
+                  className="mt-32 mb-8"
+                />
+                <RichText markdown={section.content} />
+              </div>
+            ))
+          }
+        </div>
+
+        <div data-tab-panel={spoc.contact.tabName} class="container">
+          <Heading tagName="h2" text={spoc.contact.headline} />
+          {
+            spoc.contact.sections.map((section) => (
+              <div class="last:mb-48">
+                <Heading
+                  tagName="h3"
+                  text={section.headline}
+                  className="mt-32 mb-8"
+                />
+                <RichText markdown={section.content} className="ds-stack-24" />
+              </div>
+            ))
+          }
+        </div>
+      </Tabs>
+    </div>
+  </main>
+</Layout>

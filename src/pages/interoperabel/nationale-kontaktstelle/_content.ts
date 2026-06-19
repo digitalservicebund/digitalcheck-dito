@@ -5,9 +5,9 @@ import {
   unterstuetzung,
 } from "@/config/routes";
 import { withBase } from "@/utils/path";
+import { contact } from "~/resources/content/shared/contact";
 import { dedent } from "~/utils/dedentMultilineStrings";
 import { getTabAnchorLink } from "~/utils/tabs";
-import { contact } from "./shared/contact";
 
 export const spoc = {
   headline: "Nationale Kontaktstelle für ein interoperables Europa",
