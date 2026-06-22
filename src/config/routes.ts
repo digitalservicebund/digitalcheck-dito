@@ -132,6 +132,61 @@ export const dokumentation_beteiligungsformate = {
   navLabel: null,
 } as const;
 
+export const dokumentation_bewertungOrganisatorisch = {
+  key: "dokumentation_bewertungOrganisatorisch",
+  path: "/dokumentation/bewertung-organisatorisch",
+  title: "Organisatorische Interoperabilität",
+  parent: dokumentation,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const dokumentation_bewertungRechtlich = {
+  key: "dokumentation_bewertungRechtlich",
+  path: "/dokumentation/bewertung-rechtlich",
+  title: "Rechtliche Interoperabilität",
+  parent: dokumentation,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const dokumentation_bewertungSemantisch = {
+  key: "dokumentation_bewertungSemantisch",
+  path: "/dokumentation/bewertung-semantisch",
+  title: "Semantische Interoperabilität",
+  parent: dokumentation,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const dokumentation_bewertungTechnisch = {
+  key: "dokumentation_bewertungTechnisch",
+  path: "/dokumentation/bewertung-technisch",
+  title: "Technische Interoperabilität",
+  parent: dokumentation,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const dokumentation_euInteroperabilitaetsbezug = {
+  key: "dokumentation_euInteroperabilitaetsbezug",
+  path: "/dokumentation/eu-interoperabilitaetsbezug",
+  title: "Interoperabilitäts-Bezug",
+  parent: dokumentation,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const dokumentation_hinweise = {
   key: "dokumentation_hinweise",
   path: "/dokumentation/hinweise",
@@ -146,7 +201,29 @@ export const dokumentation_hinweise = {
 export const dokumentation_regelungsvorhabenTitel = {
   key: "dokumentation_regelungsvorhabenTitel",
   path: "/dokumentation/regelungsvorhaben-titel",
-  title: "Regelungsvorhaben Titel",
+  title: "Regelungsvorhaben",
+  parent: dokumentation,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const dokumentation_verbindlicheAnforderungen = {
+  key: "dokumentation_verbindlicheAnforderungen",
+  path: "/dokumentation/verbindliche-anforderungen",
+  title: "Verbindliche Anforderungen",
+  parent: dokumentation,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const dokumentation_veroeffentlichung = {
+  key: "dokumentation_veroeffentlichung",
+  path: "/dokumentation/veroeffentlichung",
+  title: "Veröffentlichung",
   parent: dokumentation,
   sitemap: false,
   isStagingOnly: false,
@@ -463,8 +540,15 @@ export const allRoutes = [
   dokumentation,
   dokumentation_absenden,
   dokumentation_beteiligungsformate,
+  dokumentation_bewertungOrganisatorisch,
+  dokumentation_bewertungRechtlich,
+  dokumentation_bewertungSemantisch,
+  dokumentation_bewertungTechnisch,
+  dokumentation_euInteroperabilitaetsbezug,
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
+  dokumentation_verbindlicheAnforderungen,
+  dokumentation_veroeffentlichung,
   dokumentation_zusammenfassung,
   grundlagen,
   grundlagen_digitaltauglichkeit,

@@ -312,7 +312,7 @@ function NavItem({
               </span>
             </DisclosureButton>
 
-            <DisclosurePanel className="[&_a]:pl-32">
+            <DisclosurePanel className="**:aria-disabled:ml-16 **:aria-[current=page]:ml-16 [&_a]:ml-16 [&_a]:pl-16">
               {subItems}
             </DisclosurePanel>
 

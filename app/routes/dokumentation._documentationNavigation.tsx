@@ -1,47 +1,47 @@
 import {
   dokumentation,
   dokumentation_absenden,
+  dokumentation_beteiligungsformate,
+  dokumentation_bewertungOrganisatorisch,
+  dokumentation_bewertungRechtlich,
+  dokumentation_bewertungSemantisch,
+  dokumentation_bewertungTechnisch,
+  dokumentation_euInteroperabilitaetsbezug,
   dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+  dokumentation_verbindlicheAnforderungen,
+  dokumentation_veroeffentlichung,
   dokumentation_zusammenfassung,
 } from "@/config/routes";
-import type { ReactNode } from "react";
-import { useMemo } from "react";
+import { type ReactNode, useCallback, useMemo } from "react";
 import { twJoin } from "tailwind-merge";
 import HelpSidepanel from "~/components/HelpSidepanel";
 import Nav from "~/components/Nav";
 import Stepper from "~/components/Stepper";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
+import { isIeaAssessmentEnabled } from "~/utils/features.ts";
 import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
-import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
+import {
+  useDocumentationDataService,
+  ValidationResult,
+} from "./dokumentation/DocumentationDataProvider";
 import type {
   Route,
   RouteGroup,
 } from "./dokumentation/DocumentationNavigationContext";
 import { DocumentationNavigationContext } from "./dokumentation/DocumentationNavigationContext";
 
-function findIndexForRoute(routes: Route[], currentUrl: string) {
+function getPreviousUrl(routes: Route[], currentUrl: string): string | null {
   const index = routes.findIndex((route) => route.path === currentUrl);
-
-  if (index === -1) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw new Response(`Could not find route with url ${currentUrl}`, {
-      status: 404,
-    });
-  }
-  return index;
-}
-
-function getPreviousUrl(routes: Route[], currentUrl: string): string {
-  return findIndexForRoute(routes, currentUrl) > 0
-    ? routes[findIndexForRoute(routes, currentUrl) - 1].path
-    : dokumentation.path;
+  if (index === -1) return null;
+  return index > 0 ? routes[index - 1].path : dokumentation.path;
 }
 
 function getNextUrl(routes: Route[], currentUrl: string): string | null {
-  return findIndexForRoute(routes, currentUrl) < routes.length - 1
-    ? routes[findIndexForRoute(routes, currentUrl) + 1].path
-    : null;
+  const index = routes.findIndex((route) => route.path === currentUrl);
+  if (index === -1) return null;
+  return index < routes.length - 1 ? routes[index + 1].path : null;
 }
 
 function resolveAdjacentUrl(
@@ -49,33 +49,96 @@ function resolveAdjacentUrl(
   fromUrl: string,
   getAdjacent: (routes: Route[], path: string) => string | null,
   findData: (id: string) => unknown,
+  isDisabled: (route: Route) => boolean, // <-- new parameter
 ): string | null {
-  const rawUrl = getAdjacent(flatRoutes, fromUrl);
-  if (!rawUrl) return rawUrl;
-  const route = flatRoutes.find((r) => r.path === rawUrl);
-  if (route?.principleId) {
-    const data = findData(route.principleId) as { answer?: string } | undefined;
-    if (data?.answer) return `${rawUrl}/erlaeuterung`;
+  let currentFrom = fromUrl;
+
+  // Loop until we find a non-disabled route or run out
+  while (true) {
+    const rawUrl = getAdjacent(flatRoutes, currentFrom);
+    if (!rawUrl) return rawUrl; // end of list
+
+    const route = flatRoutes.find((r) => r.path === rawUrl);
+
+    // Skip disabled routes
+    if (route && isDisabled(route)) {
+      currentFrom = rawUrl; // advance past the disabled route and try again
+      continue;
+    }
+
+    if (route?.principleId) {
+      const data = findData(route.principleId) as
+        | { answer?: string }
+        | undefined;
+      if (data?.answer) return `${rawUrl}/erlaeuterung`;
+    }
+    return rawUrl;
   }
-  return rawUrl;
 }
 
 export function LayoutWithDocumentationNavigation({
-  routes,
   prinzips,
   children,
   currentUrl,
 }: Readonly<{
-  routes: (Route | RouteGroup)[];
   prinzips: PrinzipWithAspekte[];
   children?: ReactNode;
   currentUrl: string;
 }>) {
+  const ROUTES_DOCUMENTATION_INTRO: Route[] = [
+    dokumentation_hinweise,
+    dokumentation_regelungsvorhabenTitel,
+    dokumentation_beteiligungsformate,
+  ];
+
+  const ROUTES_DOCUMENTATION_FINALIZE: Route[] = [
+    dokumentation_zusammenfassung,
+    dokumentation_absenden,
+  ];
+
+  const { findDocumentationDataForUrl, validateDocumentationDataForRoute } =
+    useDocumentationDataService();
+
+  const routes: (Route | RouteGroup)[] = useMemo(
+    () =>
+      [
+        ...ROUTES_DOCUMENTATION_INTRO,
+        {
+          title: "Prinzipien",
+          routes: prinzips.map<Route>(
+            ({ Name, URLBezeichnung, documentId }) => ({
+              title: Name,
+              path: `${dokumentation.path}/${URLBezeichnung}`,
+              principleId: documentId,
+            }),
+          ),
+        },
+        isIeaAssessmentEnabled && {
+          title: "EU-Interoperabilität",
+          routes: [
+            dokumentation_euInteroperabilitaetsbezug,
+            dokumentation_verbindlicheAnforderungen,
+            dokumentation_bewertungRechtlich,
+            dokumentation_bewertungOrganisatorisch,
+            dokumentation_bewertungSemantisch,
+            dokumentation_bewertungTechnisch,
+            dokumentation_veroeffentlichung,
+          ],
+        },
+        ...ROUTES_DOCUMENTATION_FINALIZE,
+      ].filter((route): route is Route | RouteGroup => !!route),
+    [prinzips],
+  );
+
   // exclude documentation notes
-  const displayedRoutes = routes.filter((route) => {
-    if ("routes" in route) return true; // RouteGroup
-    return route.path !== dokumentation_hinweise.path;
-  });
+  const displayedRoutes = useMemo(
+    () =>
+      routes.filter((route) => {
+        if ("routes" in route) return true; // RouteGroup
+        return route.path !== dokumentation_hinweise.path;
+      }),
+    [routes],
+  );
 
   // Detect erlaeuterung sub-page
   const isErlaeuterungPage = currentUrl.endsWith("/erlaeuterung");
@@ -84,40 +147,84 @@ export function LayoutWithDocumentationNavigation({
     ? currentUrl.replace("/erlaeuterung", "")
     : currentUrl;
 
-  const { findDocumentationDataForUrl, getDocumentationSchemaFormUrl } =
-    useDocumentationDataService();
-
-  const flatRoutes = routes.flatMap((route) =>
-    "routes" in route ? route.routes : route,
+  const flatRoutes = useMemo(
+    () => routes.flatMap((route) => ("routes" in route ? route.routes : route)),
+    [routes],
   );
-  const currentRoute = flatRoutes.find((r) => r.path === navigationBaseUrl);
-  const currentPrincipleFormData = currentRoute?.principleId
-    ? findDocumentationDataForUrl(currentRoute.principleId)
-    : undefined;
 
-  const nextUrl = isErlaeuterungPage
-    ? resolveAdjacentUrl(
-        flatRoutes,
-        navigationBaseUrl,
-        getNextUrl,
-        findDocumentationDataForUrl,
-      )
-    : currentRoute?.principleId &&
-        (currentPrincipleFormData as { answer?: string } | undefined)?.answer
-      ? `${currentUrl}/erlaeuterung`
-      : resolveAdjacentUrl(
-          flatRoutes,
-          currentUrl,
-          getNextUrl,
-          findDocumentationDataForUrl,
-        );
-  const previousUrl =
-    resolveAdjacentUrl(
+  const currentRoute = useMemo(
+    () => flatRoutes.find((r) => r.path === navigationBaseUrl),
+    [flatRoutes, navigationBaseUrl],
+  );
+
+  const currentPrincipleFormData = useMemo(
+    () =>
+      currentRoute?.principleId
+        ? findDocumentationDataForUrl(currentRoute.principleId)
+        : undefined,
+    [currentRoute, findDocumentationDataForUrl],
+  );
+
+  const isRouteDisabled = useCallback(
+    (route: Route) => {
+      const { validationResult } = validateDocumentationDataForRoute(
+        route.path,
+        route.principleId,
+      );
+      return validationResult === ValidationResult.disabled;
+    },
+    [validateDocumentationDataForRoute],
+  );
+
+  const nextUrl = useMemo(
+    () =>
+      isErlaeuterungPage
+        ? resolveAdjacentUrl(
+            flatRoutes,
+            navigationBaseUrl,
+            getNextUrl,
+            findDocumentationDataForUrl,
+            isRouteDisabled,
+          )
+        : currentRoute?.principleId &&
+            (currentPrincipleFormData as { answer?: string } | undefined)
+              ?.answer
+          ? `${currentUrl}/erlaeuterung`
+          : resolveAdjacentUrl(
+              flatRoutes,
+              currentUrl,
+              getNextUrl,
+              findDocumentationDataForUrl,
+              isRouteDisabled,
+            ),
+    [
+      isErlaeuterungPage,
       flatRoutes,
       navigationBaseUrl,
-      getPreviousUrl,
+      currentRoute?.principleId,
+      currentPrincipleFormData,
+      currentUrl,
       findDocumentationDataForUrl,
-    ) ?? dokumentation.path;
+      isRouteDisabled,
+    ],
+  );
+
+  const previousUrl = useMemo(
+    () =>
+      resolveAdjacentUrl(
+        flatRoutes,
+        navigationBaseUrl,
+        getPreviousUrl,
+        findDocumentationDataForUrl,
+        isRouteDisabled,
+      ) ?? dokumentation.path,
+    [
+      flatRoutes,
+      navigationBaseUrl,
+      findDocumentationDataForUrl,
+      isRouteDisabled,
+    ],
+  );
 
   const isNavigationDisabled = currentUrl === dokumentation_hinweise.path;
 
@@ -131,12 +238,10 @@ export function LayoutWithDocumentationNavigation({
   );
 
   const getNavItem = (route: Route) => {
-    const formData = findDocumentationDataForUrl(
-      route.principleId || route.path,
+    const { formData, validationResult } = validateDocumentationDataForRoute(
+      route.path,
+      route.principleId,
     );
-    const schema = getDocumentationSchemaFormUrl(route.path);
-    const valid = schema.safeParse(formData);
-
     const navUrl =
       route.principleId && (formData as { answer?: string } | undefined)?.answer
         ? `${route.path}/erlaeuterung`
@@ -151,9 +256,11 @@ export function LayoutWithDocumentationNavigation({
             ? [route.path, `${route.path}/erlaeuterung`]
             : undefined
         }
-        error={formData && !valid.success}
-        completed={formData && valid.success}
-        disabled={isNavigationDisabled}
+        error={validationResult === ValidationResult.missingData}
+        completed={validationResult === ValidationResult.completed}
+        disabled={
+          isNavigationDisabled || validationResult == ValidationResult.disabled
+        }
       >
         {route.title}
       </Nav.Item>

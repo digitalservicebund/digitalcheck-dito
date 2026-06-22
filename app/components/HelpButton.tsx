@@ -11,6 +11,11 @@ type HelpButtonProps = {
   children?: ReactNode;
 };
 
+/**
+ * Renders an inline help icon for a section.
+ * Pass a stable `sectionId` and provide `title` + `children` to register the section's help
+ * content; clicking the icon opens the help panel for that section.
+ */
 export default function HelpButton({
   sectionId,
   className,

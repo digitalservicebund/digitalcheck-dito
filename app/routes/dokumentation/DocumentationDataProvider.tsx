@@ -1,6 +1,13 @@
 import {
   dokumentation_beteiligungsformate,
+  dokumentation_bewertungOrganisatorisch,
+  dokumentation_bewertungRechtlich,
+  dokumentation_bewertungSemantisch,
+  dokumentation_bewertungTechnisch,
+  dokumentation_euInteroperabilitaetsbezug,
   dokumentation_regelungsvorhabenTitel,
+  dokumentation_verbindlicheAnforderungen,
+  dokumentation_veroeffentlichung,
 } from "@/config/routes";
 import type { ReactNode } from "react";
 import {
@@ -12,20 +19,30 @@ import {
   useState,
 } from "react";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
-import type {
-  DocumentationData,
-  Participation,
-  PolicyTitle,
-  Principle,
-  V1,
-  V2,
-} from "~/routes/dokumentation/documentationDataSchema";
 import {
-  getDocumentationSchemaFormUrl as _getDocumentationSchemaFormUrl,
+  type BindingRequirementsData,
+  bindingRequirementsNavigationSchema,
   DATA_SCHEMA_VERSION_V1,
   DATA_SCHEMA_VERSION_V2,
+  type DocumentationData,
+  type EuInteroperabilityOutcome,
+  euInteroperabilityOutcomeNavigationSchema,
+  type InteroperabilityAssessmentData,
+  type InteroperabilityAssessmentLevel,
+  interoperabilityAssessmentLevelNavigationSchema,
+  type InteroperabilityMeta,
+  interoperabilityMetaSchema,
+  type Participation,
+  participationSchema,
+  type PolicyTitle,
+  policyTitleSchema,
+  type Principle,
+  principleSchemaV2,
+  type V1,
+  type V2,
 } from "~/routes/dokumentation/documentationDataSchema";
 
+import type { ZodType } from "zod";
 import {
   readDataFromLocalStorage,
   removeFromLocalStorage,
@@ -37,13 +54,21 @@ export const STORAGE_KEY = "documentationData";
 type DocumentationDataContextType = {
   documentationData: DocumentationData;
   hasSavedDocumentation: boolean;
-  getDocumentationSchemaFormUrl: (
-    url: string,
-  ) => ReturnType<typeof _getDocumentationSchemaFormUrl>;
   createOrUpdateDocumentationData: (data: DocumentationData) => void;
   deleteDocumentationData: () => void;
   setPolicyTitle: (policyTitle?: PolicyTitle) => void;
   setParticipation: (participation?: Participation) => void;
+  setEuInteroperabilityOutcome: (
+    euInteroperabilityOutcome?: EuInteroperabilityOutcome,
+  ) => void;
+  setBindingRequirementsData: (
+    bindingRequirements?: BindingRequirementsData,
+  ) => void;
+  setInteroperabilityAssessmentData: (
+    level: keyof InteroperabilityAssessmentData,
+    data?: InteroperabilityAssessmentLevel,
+  ) => void;
+  setInteroperabilityMeta: (data?: InteroperabilityMeta) => void;
   addOrUpdatePrinciple: (newPrinciple?: Principle) => void;
   addOrUpdatePrincipleAnswer: (
     principleId: string,
@@ -56,7 +81,14 @@ type DocumentationDataContextType = {
   ) => void;
   findDocumentationDataForUrl: (
     url: string,
-  ) => PolicyTitle | Participation | Principle | undefined;
+  ) => DocumentationDataType | undefined;
+  validateDocumentationDataForRoute: (
+    routePath: string,
+    dataIdentifier?: string,
+  ) => {
+    formData: DocumentationDataType | undefined;
+    validationResult: ValidationResult;
+  };
 };
 
 const DocumentationDataContext =
@@ -79,6 +111,101 @@ type DocumentationDataProviderProps = {
 
 function writeToStorage(data: DocumentationData): void {
   writeVersionedDataToLocalStorage(data, STORAGE_KEY);
+}
+
+type DocumentationDataType =
+  | PolicyTitle
+  | Participation
+  | EuInteroperabilityOutcome
+  | BindingRequirementsData
+  | InteroperabilityAssessmentLevel
+  | InteroperabilityMeta
+  | Principle
+  | undefined;
+
+export enum ValidationResult {
+  missingData,
+  completed,
+  neutral,
+  disabled,
+}
+type RouteDefinition = {
+  getData: (data: DocumentationData) => DocumentationDataType;
+  schema: ZodType;
+  /**
+   * Custom validation. Return `null` to use default validation.
+   */
+  validate?: (data: DocumentationData) => ValidationResult | null;
+};
+
+const skipIfNoInteroperabilityRequired = (data: DocumentationData) => {
+  if (data.euInteroperabilityOutcome?.outcomeId !== "REQUIRED")
+    return ValidationResult.disabled;
+  return null; // keep default behavior
+};
+const routeDefinitions: Record<string, RouteDefinition> = {
+  [dokumentation_regelungsvorhabenTitel.path]: {
+    getData: (data) => data.policyTitle,
+    schema: policyTitleSchema,
+  },
+  [dokumentation_beteiligungsformate.path]: {
+    getData: (data) => data.participation,
+    schema: participationSchema,
+  },
+  [dokumentation_euInteroperabilitaetsbezug.path]: {
+    getData: (data) => data.euInteroperabilityOutcome,
+    schema: euInteroperabilityOutcomeNavigationSchema,
+  },
+  [dokumentation_verbindlicheAnforderungen.path]: {
+    getData: (data) => data.bindingRequirements,
+    schema: bindingRequirementsNavigationSchema,
+    validate: skipIfNoInteroperabilityRequired,
+  },
+  [dokumentation_bewertungRechtlich.path]: {
+    getData: (data) => data.interoperabilityAssessment?.legal,
+    schema: interoperabilityAssessmentLevelNavigationSchema,
+    validate: skipIfNoInteroperabilityRequired,
+  },
+  [dokumentation_bewertungOrganisatorisch.path]: {
+    getData: (data) => data.interoperabilityAssessment?.organizational,
+    schema: interoperabilityAssessmentLevelNavigationSchema,
+    validate: skipIfNoInteroperabilityRequired,
+  },
+  [dokumentation_bewertungSemantisch.path]: {
+    getData: (data) => data.interoperabilityAssessment?.semantic,
+    schema: interoperabilityAssessmentLevelNavigationSchema,
+    validate: skipIfNoInteroperabilityRequired,
+  },
+  [dokumentation_bewertungTechnisch.path]: {
+    getData: (data) => data.interoperabilityAssessment?.technical,
+    schema: interoperabilityAssessmentLevelNavigationSchema,
+    validate: skipIfNoInteroperabilityRequired,
+  },
+  [dokumentation_veroeffentlichung.path]: {
+    getData: (data) => data.interoperabilityMeta,
+    schema: interoperabilityMetaSchema,
+    validate: skipIfNoInteroperabilityRequired,
+  },
+};
+
+function getRouteData(
+  routeOrDataIdentifier: string,
+  documentationData: DocumentationData,
+): {
+  formData: DocumentationDataType;
+  schema: ZodType;
+  validate: RouteDefinition["validate"];
+} {
+  const routeDefinition = routeDefinitions[routeOrDataIdentifier];
+  const formData = routeDefinition
+    ? routeDefinition.getData(documentationData)
+    : documentationData.principles?.find(
+        ({ id }) => id === routeOrDataIdentifier,
+      );
+  const schema =
+    routeDefinitions[routeOrDataIdentifier]?.schema ?? principleSchemaV2;
+
+  return { formData, schema, validate: routeDefinition?.validate };
 }
 
 const { radioOptions } = digitalDocumentation.principlePages;
@@ -104,6 +231,9 @@ function migrateV1ToV2(v1: DocumentationData<V1>): DocumentationData<V2> {
     version: DATA_SCHEMA_VERSION_V2,
     policyTitle: v1.policyTitle,
     participation: v1.participation,
+    euInteroperabilityOutcome: v1.euInteroperabilityOutcome,
+    bindingRequirements: v1.bindingRequirements,
+    interoperabilityAssessment: v1.interoperabilityAssessment,
     principles: principles as Principle[],
   };
 
@@ -117,7 +247,7 @@ function getInitialState(): DocumentationData {
     DocumentationData<V1> | DocumentationData
   >(STORAGE_KEY);
 
-  if (storedData && storedData.version === DATA_SCHEMA_VERSION_V1) {
+  if (storedData?.version === DATA_SCHEMA_VERSION_V1) {
     storedData = migrateV1ToV2(storedData);
   }
 
@@ -142,9 +272,41 @@ export function DocumentationDataProvider({
     setDocumentationData(getInitialState());
   }, []);
 
-  const getDocumentationSchemaFormUrl = useCallback((url: string) => {
-    return _getDocumentationSchemaFormUrl(url);
-  }, []);
+  const validateDocumentationDataForRoute: DocumentationDataContextType["validateDocumentationDataForRoute"] =
+    useCallback(
+      (routePath: string, dataIdentifier?: string) => {
+        const { formData, schema, validate } = getRouteData(
+          dataIdentifier ?? routePath,
+          documentationData,
+        );
+
+        if (validate) {
+          const result = validate(documentationData);
+          if (result !== null) {
+            return {
+              formData,
+              validationResult: result,
+            };
+          }
+        }
+
+        if (formData === undefined) {
+          return { formData, validationResult: ValidationResult.neutral };
+        }
+
+        const parseResult = schema.safeParse(formData);
+
+        const validationResult = parseResult.success
+          ? ValidationResult.completed
+          : ValidationResult.missingData;
+
+        return {
+          formData,
+          validationResult,
+        };
+      },
+      [documentationData],
+    );
 
   const createOrUpdateDocumentationData = useCallback(
     (data: DocumentationData): void => {
@@ -178,6 +340,67 @@ export function DocumentationDataProvider({
       createOrUpdateDocumentationData({
         ...documentationData,
         participation,
+      });
+    },
+    [documentationData, createOrUpdateDocumentationData],
+  );
+
+  const setEuInteroperabilityOutcome = useCallback(
+    (euInteroperabilityOutcome?: EuInteroperabilityOutcome) => {
+      const updatedDocumentationData = {
+        ...documentationData,
+        euInteroperabilityOutcome,
+      };
+
+      if (!euInteroperabilityOutcome)
+        delete updatedDocumentationData.euInteroperabilityOutcome;
+
+      console.log({ updatedDocumentationData });
+
+      createOrUpdateDocumentationData(updatedDocumentationData);
+    },
+    [documentationData, createOrUpdateDocumentationData],
+  );
+
+  const setBindingRequirementsData = useCallback(
+    (bindingRequirements?: BindingRequirementsData) => {
+      const updatedDocumentationData = {
+        ...documentationData,
+        bindingRequirements,
+      };
+
+      if (!bindingRequirements)
+        delete updatedDocumentationData.bindingRequirements;
+
+      createOrUpdateDocumentationData(updatedDocumentationData);
+    },
+    [documentationData, createOrUpdateDocumentationData],
+  );
+
+  const setInteroperabilityAssessmentData = useCallback(
+    (
+      level: keyof InteroperabilityAssessmentData,
+      data?: InteroperabilityAssessmentLevel,
+    ) => {
+      const assessmentData: Partial<InteroperabilityAssessmentData> = {
+        ...documentationData.interoperabilityAssessment,
+      };
+      if (data) assessmentData[level] = data;
+      const updatedDocumentationData = {
+        ...documentationData,
+        interoperabilityAssessment: assessmentData,
+      };
+
+      createOrUpdateDocumentationData(updatedDocumentationData);
+    },
+    [documentationData, createOrUpdateDocumentationData],
+  );
+
+  const setInteroperabilityMeta = useCallback(
+    (interoperabilityMeta?: InteroperabilityMeta) => {
+      createOrUpdateDocumentationData({
+        ...documentationData,
+        interoperabilityMeta,
       });
     },
     [documentationData, createOrUpdateDocumentationData],
@@ -288,48 +511,53 @@ export function DocumentationDataProvider({
   );
 
   const findDocumentationDataForUrl = useCallback(
-    (url: string): PolicyTitle | Participation | Principle | undefined => {
-      if (url === dokumentation_regelungsvorhabenTitel.path)
-        return documentationData.policyTitle;
-      else if (url === dokumentation_beteiligungsformate.path)
-        return documentationData.participation;
-
-      return documentationData.principles?.find(({ id }) => id === url);
-    },
+    (url: string): DocumentationDataType =>
+      getRouteData(url, documentationData).formData,
     [documentationData],
   );
 
   const hasSavedDocumentation =
     !!documentationData.principles ||
     !!documentationData.participation ||
-    !!documentationData.policyTitle;
+    !!documentationData.policyTitle ||
+    !!documentationData.euInteroperabilityOutcome ||
+    !!documentationData.interoperabilityAssessment;
 
   const value = useMemo(
-    () => ({
-      documentationData,
-      hasSavedDocumentation,
-      getDocumentationSchemaFormUrl,
-      createOrUpdateDocumentationData,
-      deleteDocumentationData,
-      setPolicyTitle,
-      setParticipation,
-      addOrUpdatePrinciple,
-      addOrUpdatePrincipleAnswer,
-      addOrUpdatePrincipleReasoning,
-      findDocumentationDataForUrl,
-    }),
+    () =>
+      ({
+        documentationData,
+        hasSavedDocumentation,
+        createOrUpdateDocumentationData,
+        deleteDocumentationData,
+        setPolicyTitle,
+        setParticipation,
+        setEuInteroperabilityOutcome,
+        setBindingRequirementsData,
+        setInteroperabilityAssessmentData,
+        setInteroperabilityMeta,
+        addOrUpdatePrinciple,
+        addOrUpdatePrincipleAnswer,
+        addOrUpdatePrincipleReasoning,
+        findDocumentationDataForUrl,
+        validateDocumentationDataForRoute,
+      }) satisfies DocumentationDataContextType,
     [
       documentationData,
       hasSavedDocumentation,
-      getDocumentationSchemaFormUrl,
       createOrUpdateDocumentationData,
       deleteDocumentationData,
       setPolicyTitle,
       setParticipation,
+      setEuInteroperabilityOutcome,
+      setBindingRequirementsData,
+      setInteroperabilityAssessmentData,
+      setInteroperabilityMeta,
       addOrUpdatePrinciple,
       addOrUpdatePrincipleAnswer,
       addOrUpdatePrincipleReasoning,
       findDocumentationDataForUrl,
+      validateDocumentationDataForRoute,
     ],
   );
   return (

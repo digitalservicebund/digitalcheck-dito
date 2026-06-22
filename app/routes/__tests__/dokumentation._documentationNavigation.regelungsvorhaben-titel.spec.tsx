@@ -8,7 +8,7 @@ import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { HelpPanelProvider } from "~/contexts/HelpPanelContext";
-import DocumentationTitle from "~/routes/dokumentation._documentationNavigation.regelungsvorhaben-titel";
+import { DocumentationTitle } from "~/routes/dokumentation._documentationNavigation.regelungsvorhaben-titel";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import type { DocumentationData } from "../dokumentation/documentationDataSchema";
@@ -41,7 +41,7 @@ describe("DocumentationTitle", () => {
     it("shows the expected heading", () => {
       expect(
         screen.getByRole("heading", {
-          name: "Tragen Sie den Titel Ihres Regelungsvorhabens ein",
+          name: "Tragen Sie Daten zu Ihrem Regelungsvorhaben ein",
           level: 1,
         }),
       ).toBeInTheDocument();
@@ -74,7 +74,7 @@ describe("DocumentationTitle", () => {
     beforeEach(() => {
       mockedReadDataFromLocalStorage.mockReturnValue({
         ...{ version: DATA_SCHEMA_VERSION_V1 },
-        policyTitle: { title: "" },
+        policyTitle: { title: "", organization: "" },
       });
 
       act(() => {

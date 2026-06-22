@@ -1,12 +1,12 @@
 import type { FormScope } from "@rvf/react";
 import { useField } from "@rvf/react";
-import type { ComponentPropsWithRef } from "react";
+import type { ComponentPropsWithRef, ReactNode } from "react";
 import { useId } from "react";
 import twMerge from "~/utils/tailwindMerge";
 import InputError from "./InputError";
 
-type Option<Value extends string | number> = {
-  label: string;
+export type Option<Value extends string | number> = {
+  label: ReactNode;
   value: Value;
   subText?: string;
   id?: string;
@@ -19,7 +19,7 @@ interface RadioGroupProps<
   Value extends string | number = string,
 > extends BaseInputProps {
   scope: FormScope<FormData>;
-  options: Option<Value>[];
+  options: readonly Option<Value>[];
   className?: string;
   error?: string | null;
   warningInsteadOfError?: boolean;

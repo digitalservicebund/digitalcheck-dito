@@ -92,10 +92,6 @@ export function DocumentationParticipation() {
   );
 }
 
-export default function Route() {
-  return <DocumentationParticipation />;
-}
-
 // Astro page export
 import { DocumentationPageShell } from "@/components/DocumentationPageShell";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";

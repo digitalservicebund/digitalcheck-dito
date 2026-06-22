@@ -9,9 +9,9 @@ type UseSyncedFormParams<
   SubmitResponseData,
   T = FormOpts<SchemaInput, SchemaOutput, SubmitResponseData>["defaultValues"],
 > = FormOpts<SchemaInput, SchemaOutput, SubmitResponseData> & {
-  currentUrl: string;
+  currentUrl?: string;
   setDataCallback: (data: T) => void;
-  nextUrl: string;
+  nextUrl?: string;
   storedData?: T;
   schema: StandardSchemaV1<SchemaInput, SchemaOutput>;
 };

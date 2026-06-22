@@ -1,5 +1,4 @@
-import { expect, type Locator, type Page, test } from "@playwright/test";
-import { extractRawText } from "mammoth";
+import { test } from "@playwright/test";
 import { documentationDocument } from "~/resources/content/documentation-document";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 
@@ -11,7 +10,14 @@ import {
   dokumentation_regelungsvorhabenTitel,
   dokumentation_zusammenfassung,
 } from "@/config/routes";
-import { waitForHydration } from "./helpers";
+import {
+  downloadDocumentAndGetText,
+  expect,
+  expectAndSkipNotice,
+  expectDocumentToNotContainTags,
+  skipUntil,
+  waitForHydration,
+} from "./helpers";
 
 const testData = {
   title: "E2E V2 Titel des Regelungsvorhabens",
@@ -22,46 +28,6 @@ const testData = {
   irrelevantReasoning: "E2E V2 Erklärung nicht relevant",
   lastPrincipleReasoning: "E2E V2 Erklärung letztes Prinzip",
 };
-
-async function downloadDocumentAndGetText(
-  page: Page,
-  button: Locator,
-  filePath: string,
-) {
-  const downloadPromise = page.waitForEvent("download");
-  await button.click();
-  const download = await downloadPromise;
-  expect(download.suggestedFilename()).toBe(
-    "Dokumentation_der_Digitaltauglichkeit.docx",
-  );
-
-  await download.saveAs(filePath);
-  const { value: docText } = await extractRawText({ path: filePath });
-  return docText;
-}
-
-function expectStringsOrderedInText(
-  text: string,
-  expectedStringsOrdered: string[],
-  notExpectedStrings: string[],
-) {
-  let expectedLastIdx = -1;
-  for (const expectedText of expectedStringsOrdered) {
-    const searchIdx = text.indexOf(expectedText, expectedLastIdx + 1);
-    expect(searchIdx, expectedText).toBeGreaterThan(expectedLastIdx);
-    expectedLastIdx = searchIdx;
-  }
-
-  for (const notExpectedText of notExpectedStrings) {
-    const searchIdx = text.indexOf(notExpectedText);
-    expect(searchIdx, notExpectedText).toBe(-1);
-  }
-}
-
-function expectDocumentToNotContainTags(text: string) {
-  const tagsIdx = /{{}}/g.exec(text);
-  expect(tagsIdx).toBeNull();
-}
 
 test("documentation V2 flow happy path", async ({ page }, testInfo) => {
   test.setTimeout(60_000);
@@ -75,17 +41,7 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
   });
 
   await test.step("see the notice, confirm, and continue", async () => {
-    await expect(page).toHaveURL(dokumentation_hinweise.path);
-    await waitForHydration(page);
-    await expect(
-      page.getByRole("heading", { name: "Wichtige Hinweise" }),
-    ).toBeVisible();
-    const continueButton = page.getByRole("button", { name: "Weiter" });
-    await expect(continueButton).toBeDisabled();
-
-    await page.getByRole("checkbox", { name: "gelesen", exact: false }).check();
-    await expect(continueButton).toBeEnabled();
-    await continueButton.click();
+    await expectAndSkipNotice(page);
   });
 
   await test.step("fill title page and navigate to participation", async () => {
@@ -159,19 +115,16 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
       page,
       page.getByRole("button", { name: "Zwischenstand herunterladen (.docx)" }),
       testInfo.outputPath("documentation-v2-draft.docx"),
+      "Dokumentation_der_Digitaltauglichkeit.docx",
     );
-    expectStringsOrderedInText(
-      docText,
-      [
-        testData.title,
-        testData.participationFormats,
-        testData.participationResults,
-        "Digitale Angebote",
-        "Ja, gänzlich oder teilweise",
-        testData.positiveReasoning,
-      ],
-      [],
-    );
+    expect(docText).toHaveStringsOrdered([
+      testData.title,
+      testData.participationFormats,
+      testData.participationResults,
+      "Digitale Angebote",
+      "Ja, gänzlich oder teilweise",
+      testData.positiveReasoning,
+    ]);
     expectDocumentToNotContainTags(docText);
 
     await page.getByRole("button", { name: "Weiter" }).click();
@@ -267,6 +220,11 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
   });
 
   await test.step("navigate to summary", async () => {
+    if (!page.url().includes(dokumentation_zusammenfassung.path)) {
+      await skipUntil(page, dokumentation_zusammenfassung.path, {
+        name: "Zusammenfassung",
+      });
+    }
     await expect(page).toHaveURL(dokumentation_zusammenfassung.path);
   });
 
@@ -295,24 +253,21 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
       page,
       page.getByRole("button", { name: "Word-Datei herunterladen (.docx)" }),
       testInfo.outputPath("documentation-v2-final.docx"),
+      "Dokumentation_der_Digitaltauglichkeit.docx",
     );
-    expectStringsOrderedInText(
-      docText,
-      [
-        testData.title,
-        testData.participationFormats,
-        testData.participationResults,
-        "Digitale Angebote",
-        "Ja, gänzlich oder teilweise",
-        testData.positiveReasoning,
-        "Nein",
-        testData.negativeReasoning,
-        "Nicht relevant",
-        testData.irrelevantReasoning,
-        testData.lastPrincipleReasoning,
-      ],
-      [],
-    );
+    expect(docText).toHaveStringsOrdered([
+      testData.title,
+      testData.participationFormats,
+      testData.participationResults,
+      "Digitale Angebote",
+      "Ja, gänzlich oder teilweise",
+      testData.positiveReasoning,
+      "Nein",
+      testData.negativeReasoning,
+      "Nicht relevant",
+      testData.irrelevantReasoning,
+      testData.lastPrincipleReasoning,
+    ]);
     expectDocumentToNotContainTags(docText);
   });
 });
@@ -327,9 +282,9 @@ test("go to landing page and download empty V2 document template", async ({
     page,
     page.getByRole("button", { name: "Word-Vorlage herunterladen (.docx)" }),
     testInfo.outputPath("documentation-v2-template.docx"),
+    "Dokumentation_der_Digitaltauglichkeit.docx",
   );
-  expectStringsOrderedInText(
-    docText,
+  expect(docText).toHaveStringsOrdered(
     [
       "Titel Ihres Regelungsvorhaben",
       documentationDocument.placeholder,
@@ -359,16 +314,6 @@ test("redirects to answer page when navigating directly to erläuterung without 
   await page.goto(`${principlePageUrl}/erlaeuterung`);
   await expect(page).toHaveURL(principlePageUrl);
 });
-
-async function expectAndSkipNotice(page: Page) {
-  await page.waitForURL(dokumentation_hinweise.path);
-  await waitForHydration(page);
-  await expect(
-    page.getByRole("heading", { name: "Wichtige Hinweise" }),
-  ).toBeVisible();
-  await page.getByRole("checkbox", { name: "gelesen", exact: false }).check();
-  await page.getByRole("button", { name: "Weiter" }).click();
-}
 
 test.describe("with partial documentation started", () => {
   test.beforeEach(async ({ page }) => {
@@ -443,12 +388,12 @@ test.describe("with partial documentation started", () => {
           name: "Zwischenstand herunterladen (.docx)",
         }),
         testInfo.outputPath("documentation-v2-draft.docx"),
+        "Dokumentation_der_Digitaltauglichkeit.docx",
       );
-      expectStringsOrderedInText(
-        docText,
-        ["Titel Ihres Regelungsvorhaben", testData.title],
-        [],
-      );
+      expect(docText).toHaveStringsOrdered([
+        "Titel Ihres Regelungsvorhaben",
+        testData.title,
+      ]);
     });
 
     await test.step("confirm start over", async () => {
