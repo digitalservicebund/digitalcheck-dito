@@ -91,15 +91,18 @@ const config: PlaywrightTestConfig = {
     ],
   ],
   projects: allProjects,
-  webServer: {
-    // We're testing the built code, but set the NODE_ENV to enable mocks.
-    // Use `start:test` (does not source .env) so inline env here wins; load
-    // test env from .env.test, which sets FEATURE_FLAGS_PATH to the tests file.
-    command:
+  webServer: process.env.PLAYWRIGHT_USE_DOCKER
+    ? {
+        command: `docker run --rm -p 8080:8080 -e NGINX_DIR=staging ${process.env.PLAYWRIGHT_DOCKER_IMAGE ?? "digitalcheck-dito:local"}`,
+        url: "http://localhost:8080/health-check",
+        reuseExistingServer: false,
+      }
+    : {
+        command:
       "PUBLIC_E2E=true pnpm astro build && pnpm astro preview --port 4399",
-    port: 4399,
-    cwd: path.resolve(__dirname, ".."),
-  },
+        port: 4399,
+        cwd: path.resolve(__dirname, ".."),
+      },
 };
 
 export default config;

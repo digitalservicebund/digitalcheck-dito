@@ -77,6 +77,9 @@ allowed_patterns:
   - https://ec.europa.eu/.* # URL misidentified as secret pattern
   - posthogKey
   - POSTHOG_KEY
+  - firstKey
+  - tabKey
+  - btnKey
 
 scopeconfig:
   - scope: node # ignores files such as package-lock.json

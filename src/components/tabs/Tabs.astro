@@ -1,0 +1,145 @@
+---
+/**
+ * Experimental Astro rewrite of app/components/Tabs/Tabs.tsx (React/Headless UI).
+ * Renders a tab list + slotted panels with no client-side JS framework dependency.
+ *
+ * Usage:
+ *   <Tabs tabs={["Tab A", "Tab B"]}>
+ *     <div data-tab-panel="Tab A">Content A</div>
+ *     <div data-tab-panel="Tab B">Content B</div>
+ *   </Tabs>
+ *
+ *   Add `searchParams` to sync the active tab with `?tab=<slugified-label>` in the URL.
+ *   Default `look` is `tabs`, can also be `chips`.
+ */
+import { prettySlugify } from "~/utils/utilFunctions";
+import { getTabClasses, type Look } from "./tabStyles";
+import MobileTabPicker from "./MobileTabPicker.astro";
+
+interface Props {
+  tabs: string[];
+  look?: Look;
+  searchParams?: boolean;
+  class?: string;
+}
+
+const { tabs, look = "tabs", searchParams = false } = Astro.props;
+const { tabListClass, mobilePickerClass, buttonClass } = getTabClasses(look);
+
+// Unique per instance so tab/panel ids don't collide when multiple Tabs (incl. nested) render.
+const uid = `tabs-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<div
+  data-tabs
+  data-search-params={searchParams ? "" : undefined}
+  class={Astro.props.class}
+>
+  <nav class={tabListClass} role="tablist" aria-label="Seitenabschnitte">
+    {
+      tabs.map((tabLabel, i) => {
+        const tabSlug = prettySlugify(tabLabel);
+        return (
+          <button
+            type="button"
+            role="tab"
+            id={`${uid}-tab-${tabSlug}`}
+            data-tab-key={tabLabel}
+            data-tab-slug={tabSlug}
+            aria-controls={`${uid}-panel-${tabSlug}`}
+            aria-selected={i === 0 ? "true" : "false"}
+            class={buttonClass}
+          >
+            {tabLabel}
+          </button>
+        );
+      })
+    }
+  </nav>
+  {
+    mobilePickerClass && (
+      <MobileTabPicker
+        items={tabs.map((tabLabel) => ({ value: tabLabel, label: tabLabel }))}
+        label="Seitenabschnitte"
+        class={mobilePickerClass}
+      />
+    )
+  }
+
+  <div data-tab-panels>
+    <slot />
+  </div>
+</div>
+
+<script>
+  function initTabs(container: HTMLElement) {
+    const own = <T extends Element>(sel: string) =>
+      Array.from(container.querySelectorAll<T>(sel)).filter(
+        (el) => el.closest("[data-tabs]") === container,
+      );
+    const buttons = own<HTMLButtonElement>("[data-tab-key]");
+    const panels = own<HTMLElement>("[data-tab-panel]");
+    const select =
+      container.querySelector<HTMLSelectElement>("[data-tab-select]");
+    const firstKey = buttons[0]?.dataset.tabKey ?? "";
+    const useSearchParams = container.hasAttribute("data-search-params");
+
+    // Link each panel back to its tab so assistive tech announces the relationship.
+    buttons.forEach((btn) => {
+      const btnKey = btn.dataset.tabKey;
+      const panel = panels.find((p) => p.dataset.tabPanel === btnKey);
+      if (!panel) return;
+      panel.setAttribute("role", "tabpanel");
+      panel.id = btn.getAttribute("aria-controls") ?? panel.id;
+      panel.setAttribute("aria-labelledby", btn.id);
+      panel.tabIndex = 0;
+    });
+
+    function activate(key: string) {
+      buttons.forEach((btn) => {
+        const isSelected = btn.dataset.tabKey === key;
+        btn.setAttribute("aria-selected", isSelected ? "true" : "false");
+      });
+      panels.forEach((panel) => {
+        panel.hidden = panel.dataset.tabPanel !== key;
+      });
+      if (select) select.value = key;
+    }
+
+    // Active tab from the URL (when enabled), falling back to the first tab.
+    function currentKey() {
+      if (useSearchParams) {
+        const slug = new URLSearchParams(location.search).get("tab");
+        return (
+          buttons.find((btn) => btn.dataset.tabSlug === slug)?.dataset.tabKey ??
+          firstKey
+        );
+      }
+      return firstKey;
+    }
+
+    function setTab(key: string) {
+      if (useSearchParams) {
+        const url = new URL(location.href);
+        const slug =
+          buttons.find((btn) => btn.dataset.tabKey === key)?.dataset.tabSlug ??
+          key;
+        url.searchParams.set("tab", slug);
+        history.pushState({}, "", url);
+      }
+      activate(key);
+    }
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => setTab(btn.dataset.tabKey!));
+    });
+    select?.addEventListener("change", () => setTab(select.value));
+    if (useSearchParams) {
+      window.addEventListener("popstate", () => activate(currentKey()));
+    }
+
+    activate(currentKey());
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-tabs]").forEach(initTabs);
+</script>
