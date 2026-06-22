@@ -94,8 +94,9 @@ const config: PlaywrightTestConfig = {
   webServer: process.env.PLAYWRIGHT_USE_DOCKER
     ? {
         command: `docker run --rm -p 8080:8080 -e NGINX_DIR=staging ${process.env.PLAYWRIGHT_DOCKER_IMAGE ?? "digitalcheck-dito:local"}`,
-        url: "http://localhost:8080/health-check",
-        reuseExistingServer: false,
+        port: 8080,
+        timeout: 120 * 1000,
+        reuseExistingServer: !process.env.CI,
       }
     : {
         command: "pnpm astro build && pnpm astro preview --port 4399",
