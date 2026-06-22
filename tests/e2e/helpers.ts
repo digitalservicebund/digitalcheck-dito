@@ -15,6 +15,21 @@ declare module "@playwright/test" {
   }
 }
 
+// Helper function to extract a readable snippet around an index
+const getContextSnippet = (text: string, idx: number, length: number = 0) => {
+  const padding = 40; // Number of characters to show before and after
+  const start = Math.max(0, idx - padding);
+  const end = Math.min(text.length, idx + length + padding);
+
+  let snippet = text.slice(start, end).replaceAll("\n", String.raw`\n`); // Escape newlines for readability
+
+  // Add visual ellipsis if truncated
+  if (start > 0) snippet = "..." + snippet;
+  if (end < text.length) snippet = snippet + "...";
+
+  return snippet;
+};
+
 export const expect = baseExpect.extend({
   toHaveStringsOrdered(
     text: string,
@@ -25,10 +40,17 @@ export const expect = baseExpect.extend({
     for (const expectedText of expectedStringsOrdered) {
       const searchIdx = text.indexOf(expectedText, expectedLastIdx + 1);
       if (searchIdx <= expectedLastIdx) {
+        // Fallback to searching from 0 just to find where it actually is (if it exists at all)
+        const absoluteIdx = text.indexOf(expectedText);
+        const contextIdx =
+          absoluteIdx === -1 ? Math.max(0, expectedLastIdx) : absoluteIdx;
+
         return {
           pass: false,
           message: () =>
-            `Expected string "${expectedText}" not found after position ${expectedLastIdx}`,
+            `Expected string "${expectedText}" not found in correct order.\n` +
+            `Last found match ended around index: ${expectedLastIdx}\n` +
+            `Context: "${getContextSnippet(text, contextIdx, expectedText.length)}"`,
         };
       }
       expectedLastIdx = searchIdx;
@@ -40,7 +62,8 @@ export const expect = baseExpect.extend({
         return {
           pass: false,
           message: () =>
-            `String "${notExpectedText}" should not be present in text`,
+            `String "${notExpectedText}" should not be present in text.\n` +
+            `Context: "${getContextSnippet(text, searchIdx, notExpectedText.length)}"`,
         };
       }
     }
