@@ -14,6 +14,7 @@ import {
   dokumentation_veroeffentlichung,
   dokumentation_zusammenfassung,
 } from "@/config/routes";
+import { isIeaAssessmentEnabled } from "~/utils/features";
 import {
   clickNext,
   downloadDocumentAndGetText,
@@ -121,6 +122,10 @@ const testData = {
 test("interoperability documentation happy path", async ({
   page,
 }, testInfo) => {
+  test.fixme(
+    !isIeaAssessmentEnabled,
+    "should be enabled once the isIeaAssessmentEnabled flag is enabled / removed",
+  );
   test.setTimeout(60_000);
 
   await test.step("start documentation flow from landing page", async () => {
