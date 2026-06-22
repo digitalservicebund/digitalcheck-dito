@@ -229,7 +229,7 @@ function renderPage({ path }: Route) {
 const getNav = () =>
   screen.getByRole("navigation", { name: "Seitennavigation" });
 
-const getTitel = () => within(getNav()).getByText("Regelungsvorhaben Titel");
+const getTitel = () => within(getNav()).getByText("Regelungsvorhaben");
 
 const getBeteiligungsformate = () =>
   within(getNav()).getByRole("link", { name: "Beteiligungsformate" });

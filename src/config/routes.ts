@@ -190,7 +190,7 @@ export const dokumentation_hinweise = {
 export const dokumentation_regelungsvorhabenTitel = {
   key: "dokumentation_regelungsvorhabenTitel",
   path: "/dokumentation/regelungsvorhaben-titel",
-  title: "Regelungsvorhaben Titel",
+  title: "Regelungsvorhaben",
   parent: dokumentation,
   sitemap: false,
   isStagingOnly: false,

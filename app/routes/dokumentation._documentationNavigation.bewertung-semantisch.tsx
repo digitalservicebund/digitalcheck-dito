@@ -33,7 +33,7 @@ function DetailFormElement({
   return (
     <Textarea
       description={
-        "Tragen Sie Ihre Erläuterung ein, z. B.: „Datenbegriffe werden gemäß dem Vokabular X einheitlich definiert.” oder „Es wird das Datenmodell Y verwendet.”"
+        "Tragen Sie Ihre Erläuterung ein, z. B.: „Datenbegriffe werden gemäß dem Vokabular X einheitlich definiert.”"
       }
       scope={scope.scope("detail")}
       rows={5}
@@ -80,7 +80,7 @@ export function DocumentationInteroperabilityAssessmentSemantic() {
               definiert. So verstehen das spanische System und das deutsche
               System dasselbe.
               
-              Dieser Standard wird im Gesetz / in der Verordnung referenziert oder
+              Dieser Standard wird in der Regelung referenziert und
               im Vollzug genutzt.
             `}
           />

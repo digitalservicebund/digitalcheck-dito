@@ -31,7 +31,7 @@ function DetailFormElement({
   return (
     <Textarea
       description={
-        "Tragen Sie Ihre Erläuterung ein, z. B.: „Behörde A darf Daten von Behörde B abrufen.“"
+        "Tragen Sie Ihre Erläuterung ein, z. B.: „Behörde A wird ermächtigt, Daten von Behörde B abzurufen.“"
       }
       scope={scope.scope("detail")}
       rows={5}
@@ -68,9 +68,9 @@ export function DocumentationInteroperabilityAssessmentLegal() {
           einen digitalen Austausch blockieren.
         </p>
         <DetailsSummary title={"Beispiel"}>
-          Der Gesetzesentwurf ermächtigt die zuständige deutsche Behörde [X],
+          Eine Regelung sieht vor, dass eine zuständige deutsche Behörde
           Nachweise zu Bildungsabschlüssen direkt bei den zuständigen Stellen
-          anderer EU-Mitgliedstaaten zu überprüfen. Den ausländischen Behörden
+          anderer EU-Mitgliedstaaten überprüfen kann. Den ausländischen Behörden
           wird spiegelbildlich das Recht eingeräumt, entsprechende
           Überprüfungsanfragen an die deutsche Behörde zu richten.
         </DetailsSummary>

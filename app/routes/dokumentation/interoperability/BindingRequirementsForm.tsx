@@ -153,7 +153,7 @@ export default function BindingRequirementsForm({
                   <div className="space-y-24">
                     <Textarea
                       scope={requirement.scope("services")}
-                      description="Einen Eintrag pro Zeile. Abkürzungen bitte ausschreiben."
+                      description="Abkürzungen bitte ausschreiben."
                     >
                       Betroffene transeuropäische Dienste
                       <HelpButton
@@ -162,9 +162,10 @@ export default function BindingRequirementsForm({
                       >
                         <RichText
                           markdown={dedent`
-                          Beispiele können Dinge sein wie ein Austausch von Dokumenten zu internationalen Warenlieferungen, Meldung von Statistikdaten oder die Kommunikation zwischen involvierten Behörden.
-
-                          Die Verordnung nennt folgende Beispiele:
+                          Digitale transeuropäische Dienste sind digitale Dienste und IT-Systeme,
+                          bei denen Daten zwischen Verwaltungen von EU-Mitgliedstaaten ausgetauscht werden.
+                          
+                          Das können grenzüberschreitende Registerabfragen oder Meldungen sein. Die Verordnung nennt folgende Beispiele:
                           - Gegenseitige Anerkennung akademischer Diplome oder Berufsqualifikationen
                           - Austausch von Fahrzeugdaten für die Verkehrssicherheit
                           - Zugang zu Sozialversicherungs- und Gesundheitsdaten – darunter Pandemie- und Impfbescheinigungen
