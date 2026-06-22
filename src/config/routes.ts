@@ -88,6 +88,17 @@ export const datenschutz = {
   navLabel: null,
 } as const;
 
+export const dev = {
+  key: "dev",
+  path: "/dev",
+  title: "Astro Komponenten",
+  parent: null,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const dokumentation = {
   key: "dokumentation",
   path: "/dokumentation",
@@ -190,7 +201,7 @@ export const dokumentation_hinweise = {
 export const dokumentation_regelungsvorhabenTitel = {
   key: "dokumentation_regelungsvorhabenTitel",
   path: "/dokumentation/regelungsvorhaben-titel",
-  title: "Regelungsvorhaben Titel",
+  title: "Regelungsvorhaben",
   parent: dokumentation,
   sitemap: false,
   isStagingOnly: false,
@@ -525,6 +536,7 @@ export const allRoutes = [
   bundeslaender,
   dasIstNeu,
   datenschutz,
+  dev,
   dokumentation,
   dokumentation_absenden,
   dokumentation_beteiligungsformate,

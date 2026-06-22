@@ -31,7 +31,7 @@ function DetailFormElement({
   return (
     <Textarea
       description={
-        "Tragen Sie Ihre Erläuterung ein, z. B.: „Anträge müssen innerhalb von 3 Tagen an die zuständige Stelle weitergeleitet werden. Zuständig ist Behörde [X].“"
+        "Tragen Sie Ihre Erläuterung ein, z. B.: „Anträge müssen innerhalb von 3 Tagen an die zuständige Stelle weitergeleitet werden.“ und Benennung der zuständigen Behörden."
       }
       scope={scope.scope("detail")}
       rows={5}
@@ -64,9 +64,9 @@ export function DocumentationInteroperabilityAssessmentOrganizational() {
           Organisatorische Strukturen für Interoperabilität
         </Heading>
         <p>
-          Zuständigkeiten und Prozesse müssen so abgestimmt sein, dass die
-          Zusammenarbeit reibungslos funktionieren kann, anstatt an
-          Behördengrenzen zu stocken.
+          Zuständigkeiten und Prozesse müssen so ausgestaltet sein, dass die
+          Zusammenarbeit zwischen Behörden unterschiedlicher EU-Mitgliedstaaten
+          reibungslos funktionieren kann.
         </p>
         <DetailsSummary title={"Beispiel"}>
           <b>Szenario: internationale Gewerbeummeldung</b>

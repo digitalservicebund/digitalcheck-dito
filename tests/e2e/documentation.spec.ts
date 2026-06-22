@@ -220,9 +220,11 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
   });
 
   await test.step("navigate to summary", async () => {
-    await skipUntil(page, dokumentation_zusammenfassung.path, {
-      name: "Zusammenfassung",
-    });
+    if (!page.url().includes(dokumentation_zusammenfassung.path)) {
+      await skipUntil(page, dokumentation_zusammenfassung.path, {
+        name: "Zusammenfassung",
+      });
+    }
     await expect(page).toHaveURL(dokumentation_zusammenfassung.path);
   });
 

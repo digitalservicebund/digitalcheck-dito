@@ -1,14 +1,87 @@
 ---
 import BeispieleLayout from "@/layouts/BeispieleLayout.astro";
-import BeispieleIndexPage from "~/routes/beispiele._index";
+import Tabs from "@/components/tabs/Tabs.astro";
+import {
+  beispiele_prinzipien,
+  beispiele_visualisierungen,
+  methoden_fuenfPrinzipien,
+  methoden_visualisieren,
+} from "@/config/routes";
+import ButtonContainer from "~/components/ButtonContainer";
+import { LinkButton } from "~/components/Button";
+import Hero from "@/components/Hero.astro";
+import InfoBox from "~/components/InfoBox.tsx";
 
 export const frontmatter = {
   title: "Beispiele für Digitaltauglichkeit",
 };
+
+const principleTabLabel = "5 Prinzipien";
+const visualizationTabLabel = "Visualisierungen";
 ---
 
 <BeispieleLayout title={frontmatter.title}>
-  <main>
-    <BeispieleIndexPage client:load />
+  <main class="breakout-grid">
+    <Hero>
+      <h1>Beispiele für Digitaltauglichkeit</h1>
+      <p slot="subtitle">
+        Hier finden Sie Beispiele für digitaltaugliche Regelungen, sowie aus
+        deren Erarbeitungsprozess. Lassen Sie sich inspirieren, wie in
+        Regelungsvorhaben Digitaltauglichkeit beachtet wurde.
+      </p>
+    </Hero>
+
+    <Tabs class="mt-40" tabs={[principleTabLabel, visualizationTabLabel]}>
+      <div data-tab-panel={principleTabLabel}>
+        <InfoBox>
+          <h2>Die 5 Prinzipien im Regelungstext</h2>
+          <p>
+            Die 5 Prinzipien für Digitaltaugliche Gesetzgebung dienen Ihnen als
+            Inspiration und gemeinsame Sprache für die Erarbeitung und
+            Begleitung der Regelungsarbeit. Sie geben Anhaltspunkte wie Ihnen
+            Digitalisierung beim Design der Wirklogik Ihrer Regelung helfen
+            kann.
+          </p>
+          <p>
+            Hier finden Sie Formulierungen, wie Ihre Kolleginnen und Kollegen
+            die Prinzipien für Digitaltaugliche Gesetzgebung genutzt haben um
+            den Regelungstext digitaltauglich zu formulieren.
+          </p>
+          <ButtonContainer>
+            <LinkButton href={beispiele_prinzipien.path}
+              >Zu den Beispielen</LinkButton
+            >
+            <LinkButton href={methoden_fuenfPrinzipien.path} look="tertiary"
+              >Prinzipien nutzen</LinkButton
+            >
+          </ButtonContainer>
+        </InfoBox>
+      </div>
+
+      <div data-tab-panel={visualizationTabLabel}>
+        <InfoBox>
+          <h2>Visualisierungen</h2>
+          <p>
+            Visualisierungen helfen, komplexe Sachverhalte zu strukturieren und
+            dadurch schneller und intuitiver erfassbar zu machen – Zusammenhänge
+            werden sichtbar und Möglichkeiten der Digitalisierung können einfach
+            identifiziert werden.
+          </p>
+          <p>
+            Hier finden Sie Visualisierungen, welche Legistinnen und Legisten
+            beim Erarbeiten der Digitaltauglichkeit geholfen haben und
+            veröffentlicht wurden.
+          </p>
+          <ButtonContainer>
+            <LinkButton href={beispiele_visualisierungen.path}
+              >Zu den Beispielen</LinkButton
+            >
+            <LinkButton href={methoden_visualisieren.path} look="tertiary"
+              >Anleitung zur Visualisierung</LinkButton
+            >
+          </ButtonContainer>
+        </InfoBox>
+      </div>
+    </Tabs>
   </main>
 </BeispieleLayout>

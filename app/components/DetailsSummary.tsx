@@ -9,6 +9,7 @@ export type DetailsSummaryProps = ComponentProps<"details"> & {
   showVerticalLine?: boolean;
   className?: string;
   children?: ReactNode;
+  expandInPrint?: boolean;
 };
 
 export default function DetailsSummary({
@@ -18,6 +19,7 @@ export default function DetailsSummary({
   showVerticalLine = true,
   className,
   children,
+  expandInPrint = false,
   ...rest
 }: Readonly<DetailsSummaryProps>) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -67,24 +69,33 @@ export default function DetailsSummary({
   }, [identifier]);
 
   return (
-    <details
-      {...rest}
-      id={identifier}
-      ref={detailsRef}
-      onToggle={({ currentTarget }) => {
-        setIsOpen(currentTarget.open);
-      }}
-      open={isOpen}
-      className={twJoin(
-        "details scroll-mt-64 text-blue-800 has-focus-visible:outline-4 has-focus-visible:outline-offset-4 has-focus-visible:outline-blue-800",
-        className,
-      )}
-    >
-      <summary ref={summaryRef} className={summaryClasses} tabIndex={0}>
-        {title}
-      </summary>
+    <>
+      <details
+        {...rest}
+        id={identifier}
+        ref={detailsRef}
+        onToggle={({ currentTarget }) => {
+          setIsOpen(currentTarget.open);
+        }}
+        open={isOpen}
+        className={twJoin(
+          "details scroll-mt-64 text-blue-800 has-focus-visible:outline-4 has-focus-visible:outline-offset-4 has-focus-visible:outline-blue-800",
+          expandInPrint && "print:hidden",
+          className,
+        )}
+      >
+        <summary ref={summaryRef} className={summaryClasses} tabIndex={0}>
+          {title}
+        </summary>
 
-      <div className={contentWrapperClasses}>{children}</div>
-    </details>
+        <div className={contentWrapperClasses}>{children}</div>
+      </details>
+      {expandInPrint && (
+        <div className="hidden print:block" aria-hidden="true">
+          <span className={summaryClasses}>{title}</span>
+          <div className={contentWrapperClasses}>{children}</div>
+        </div>
+      )}
+    </>
   );
 }

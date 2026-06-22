@@ -1,0 +1,44 @@
+---
+import { getTabClasses, type Look } from "./tabStyles";
+import MobileTabPicker from "./MobileTabPicker.astro";
+
+type RouteTab = { label: string; path: string };
+
+interface Props {
+  tabs: RouteTab[];
+  look?: Look;
+}
+
+const { tabs, look = "tabs" } = Astro.props;
+const { tabListClass, mobilePickerClass, buttonClass } = getTabClasses(look);
+const isActive = (tab: RouteTab) => tab.path === Astro.url.pathname;
+---
+
+<nav aria-label="Seitenabschnitte" role="tablist" class={tabListClass}>
+  {
+    tabs.map((tab) => (
+      <a
+        href={tab.path}
+        role="tab"
+        aria-selected={isActive(tab) ? "true" : undefined}
+        class={buttonClass}
+      >
+        {tab.label}
+      </a>
+    ))
+  }
+</nav>
+{
+  mobilePickerClass && (
+    <MobileTabPicker
+      items={tabs.map((t) => ({
+        value: t.path,
+        label: t.label,
+        selected: isActive(t),
+      }))}
+      navigate
+      label="Seitenabschnitte"
+      class={mobilePickerClass}
+    />
+  )
+}
