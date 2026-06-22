@@ -113,9 +113,9 @@ export const header = {
       text: "Bundesländer",
       overlayContent: [
         {
-          title: "Bund und Länder",
+          title: "Informationen für Bundesländer",
           href: bundeslaender.path,
-          content: "Alles über den Digitalcheck für Bund und Länder",
+          content: "Alles über den Digitalcheck für Länder",
           image: "/logo/bund-laender-kommunen-adler.svg",
           imageAlt: "Logo Bund, Länder, Kommunen",
           activeBehavior: "exactMatch" as ActiveBehavior,
