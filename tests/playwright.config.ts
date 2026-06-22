@@ -96,7 +96,7 @@ const config: PlaywrightTestConfig = {
         command: `docker run --rm -p 8080:8080 -e NGINX_DIR=staging ${process.env.PLAYWRIGHT_DOCKER_IMAGE ?? "digitalcheck-dito:local"}`,
         port: 8080,
         timeout: 120 * 1000,
-        reuseExistingServer: !process.env.CI,
+        reuseExistingServer: true,
       }
     : {
         command: "pnpm astro build && pnpm astro preview --port 4399",
