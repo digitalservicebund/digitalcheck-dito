@@ -6,10 +6,10 @@ import RadioGroup from "~/components/RadioGroup.tsx";
 import RichText from "~/components/RichText.tsx";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
+import type { EuInteroperabilityOutcome } from "~/routes/dokumentation/documentationDataSchema.ts";
 import {
   EU_INTEROPERABILITY_OUTCOME_IDS,
   euInteroperabilityOutcomeSchema,
-  type EuInteroperabilityOutcome,
 } from "~/routes/dokumentation/documentationDataSchema.ts";
 import { IEAContactBanner } from "~/routes/dokumentation/interoperability/IEAContactBanner.tsx";
 import { markdownLinkIEA } from "~/routes/dokumentation/interoperability/markdownLinkIEA.tsx";
