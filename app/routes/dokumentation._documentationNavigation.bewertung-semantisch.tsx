@@ -9,6 +9,7 @@ import Badge from "~/components/Badge.tsx";
 import DetailsSummary from "~/components/DetailsSummary.tsx";
 import Heading from "~/components/Heading";
 import RadioGroup from "~/components/RadioGroup.tsx";
+import RichText from "~/components/RichText.tsx";
 import Textarea from "~/components/Textarea.tsx";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
@@ -16,6 +17,7 @@ import { interoperabilityAssessmentLevelSchema } from "~/routes/dokumentation/do
 import { IEAContactBanner } from "~/routes/dokumentation/interoperability/IEAContactBanner.tsx";
 import SkipNoticeWrapper from "~/routes/dokumentation/interoperability/SkipNoticeWrapper.tsx";
 import { interoperabilityRatingOptions } from "~/routes/dokumentation/interoperability/values.ts";
+import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 

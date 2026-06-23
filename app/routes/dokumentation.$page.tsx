@@ -71,7 +71,7 @@ const fixedRoutes = {
 
 type DocumentationRouterProps = {
   prinzips: PrinzipWithAspekteAndExample[];
-  path: keyof typeof fixedRoutes | string;
+  path: string;
   principleId?: string;
   isErlaeuterung?: boolean;
 };

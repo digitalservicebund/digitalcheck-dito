@@ -6,7 +6,12 @@ import InfoBox from "~/components/InfoBox.tsx";
 import InfoBoxList from "~/components/InfoBoxList";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
+import { contact } from "~/resources/content/shared/contact.ts";
+import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
+import { downloadAssessment } from "~/service/wordDocumentationExport/wordInteroperabilityAssessment.ts";
+import { dedent } from "~/utils/dedentMultilineStrings.ts";
+import { isIeaAssessmentEnabled } from "~/utils/features.ts";
 import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
 const { finish } = digitalDocumentation;

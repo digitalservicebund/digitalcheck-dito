@@ -129,7 +129,7 @@ function DocumentationPrincipleErlaeuterungForm({
 
       <DocumentationActions
         previousUrl={previousUrl}
-        nextUrl={nextUrl}
+        submit
         showDownloadDraftButton
         showSavingTip
         prinzips={prinzips}

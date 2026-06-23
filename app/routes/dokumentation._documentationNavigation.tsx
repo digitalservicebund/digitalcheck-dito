@@ -127,7 +127,7 @@ export function LayoutWithDocumentationNavigation({
         },
         ...ROUTES_DOCUMENTATION_FINALIZE,
       ].filter((route): route is Route | RouteGroup => !!route),
-    [prinzips],
+    [prinzips, ROUTES_DOCUMENTATION_INTRO, ROUTES_DOCUMENTATION_FINALIZE],
   );
 
   // exclude documentation notes
