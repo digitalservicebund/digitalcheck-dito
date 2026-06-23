@@ -2,6 +2,7 @@ import {
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
 } from "@/config/routes";
+import { navigate } from "astro:transitions/client";
 import Button, { DownloadButton, LinkButton } from "~/components/Button.tsx";
 import ButtonContainer from "~/components/ButtonContainer.tsx";
 import Dialog from "~/components/Dialog.tsx";
@@ -45,9 +46,9 @@ function StartOverDialog({
         <div className="flex flex-row gap-12">
           <Button
             type="button"
-            onClick={() => {
+            onClick={async () => {
               deleteDocumentationData();
-              globalThis.location.href = dokumentation_hinweise.path;
+              await navigate(dokumentation_hinweise.path);
             }}
           >
             {start.startOverDialog.actions.confirm}

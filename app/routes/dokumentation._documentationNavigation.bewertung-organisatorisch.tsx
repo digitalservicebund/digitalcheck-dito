@@ -14,7 +14,6 @@ import { interoperabilityAssessmentLevelSchema } from "~/routes/dokumentation/do
 import { IEAContactBanner } from "~/routes/dokumentation/interoperability/IEAContactBanner.tsx";
 import SkipNoticeWrapper from "~/routes/dokumentation/interoperability/SkipNoticeWrapper.tsx";
 import { interoperabilityRatingOptions } from "~/routes/dokumentation/interoperability/values.ts";
-import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
@@ -100,22 +99,5 @@ export function DocumentationInteroperabilityAssessmentOrganizational() {
       />
       <IEAContactBanner />
     </div>
-  );
-}
-
-// Astro page export
-import { DocumentationPageShell } from "@/components/DocumentationPageShell";
-
-export function BewertungOrganisatorischPage({
-  prinzips,
-  currentUrl,
-}: Readonly<{
-  prinzips: PrinzipWithAspekteAndExample[];
-  currentUrl: string;
-}>) {
-  return (
-    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
-      <DocumentationInteroperabilityAssessmentOrganizational />
-    </DocumentationPageShell>
   );
 }

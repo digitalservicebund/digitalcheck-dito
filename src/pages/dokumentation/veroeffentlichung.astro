@@ -1,20 +1,10 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import { fetchPrinzipsWithExamples } from "~/utils/strapiData.server";
-import { VeroeffentlichungPage } from "~/routes/dokumentation._documentationNavigation.veroeffentlichung.tsx";
+import DocumentationWizard from "@/components/DocumentationWizard.astro";
 
 export const frontmatter = {
   title: "Veröffentlichung",
   sitemap: false,
 };
-
-const prinzips = await fetchPrinzipsWithExamples();
 ---
 
-<Layout title={`Dokumentation: ${frontmatter.title}`} showProgressBar>
-  <VeroeffentlichungPage
-    client:load
-    prinzips={prinzips}
-    currentUrl={Astro.url.pathname}
-  />
-</Layout>
+<DocumentationWizard stepTitle={frontmatter.title} />

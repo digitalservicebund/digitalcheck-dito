@@ -6,14 +6,13 @@ import RadioGroup from "~/components/RadioGroup.tsx";
 import RichText from "~/components/RichText.tsx";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
-import type { EuInteroperabilityOutcome } from "~/routes/dokumentation/documentationDataSchema.ts";
-import {
+import type {
   EU_INTEROPERABILITY_OUTCOME_IDS,
-  euInteroperabilityOutcomeSchema,
+  EuInteroperabilityOutcome,
 } from "~/routes/dokumentation/documentationDataSchema.ts";
+import { euInteroperabilityOutcomeSchema } from "~/routes/dokumentation/documentationDataSchema.ts";
 import { IEAContactBanner } from "~/routes/dokumentation/interoperability/IEAContactBanner.tsx";
 import { markdownLinkIEA } from "~/routes/dokumentation/interoperability/markdownLinkIEA.tsx";
-import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
@@ -110,26 +109,5 @@ export function DocumentationEuInteroperabilityRequirements() {
 
       <IEAContactBanner />
     </div>
-  );
-}
-
-export default function Route() {
-  return <DocumentationEuInteroperabilityRequirements />;
-}
-
-// Astro page export
-import { DocumentationPageShell } from "@/components/DocumentationPageShell";
-
-export function EuInteroperabilitaetsbezugPage({
-  prinzips,
-  currentUrl,
-}: Readonly<{
-  prinzips: PrinzipWithAspekteAndExample[];
-  currentUrl: string;
-}>) {
-  return (
-    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
-      <DocumentationEuInteroperabilityRequirements />
-    </DocumentationPageShell>
   );
 }

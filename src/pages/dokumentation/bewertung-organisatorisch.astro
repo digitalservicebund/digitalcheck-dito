@@ -1,20 +1,10 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import { BewertungOrganisatorischPage } from "~/routes/dokumentation._documentationNavigation.bewertung-organisatorisch";
-import { fetchPrinzipsWithExamples } from "~/utils/strapiData.server";
+import DocumentationWizard from "@/components/DocumentationWizard.astro";
 
 export const frontmatter = {
   title: "Organisatorische Interoperabilität",
   sitemap: false,
 };
-
-const prinzips = await fetchPrinzipsWithExamples();
 ---
 
-<Layout title={`Dokumentation: ${frontmatter.title}`} showProgressBar>
-  <BewertungOrganisatorischPage
-    client:load
-    prinzips={prinzips}
-    currentUrl={Astro.url.pathname}
-  />
-</Layout>
+<DocumentationWizard stepTitle={frontmatter.title} />

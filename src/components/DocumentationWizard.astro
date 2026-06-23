@@ -1,0 +1,28 @@
+---
+import { DocumentationRouter } from "~/routes/dokumentation.$page.tsx";
+import LoadingPage from "@/components/LoadingPage.astro";
+import { fetchPrinzipsWithExamples } from "~/utils/strapiData.server.ts";
+import { ClientRouter } from "astro:transitions";
+import Layout from "@/layouts/Layout.astro";
+interface Props {
+  stepTitle: string;
+  principleId?: string;
+  isErlaeuterung?: boolean;
+}
+
+const { principleId, stepTitle, isErlaeuterung } = Astro.props;
+const prinzips = await fetchPrinzipsWithExamples();
+---
+
+<Layout title={`Dokumentation: ${stepTitle}`} showProgressBar>
+  <ClientRouter />
+  <DocumentationRouter
+    client:only="react"
+    transition:persist={"documentation"}
+    prinzips={prinzips}
+    path={Astro.url.pathname}
+    principleId={principleId}
+    isErlaeuterung={isErlaeuterung}
+    ><LoadingPage slot="fallback">Lade Dokumentation…</LoadingPage>
+  </DocumentationRouter>
+</Layout>

@@ -76,6 +76,17 @@ function resolveAdjacentUrl(
   }
 }
 
+const ROUTES_DOCUMENTATION_INTRO: Route[] = [
+  dokumentation_hinweise,
+  dokumentation_regelungsvorhabenTitel,
+  dokumentation_beteiligungsformate,
+];
+
+const ROUTES_DOCUMENTATION_FINALIZE: Route[] = [
+  dokumentation_zusammenfassung,
+  dokumentation_absenden,
+];
+
 export function LayoutWithDocumentationNavigation({
   prinzips,
   children,
@@ -85,17 +96,6 @@ export function LayoutWithDocumentationNavigation({
   children?: ReactNode;
   currentUrl: string;
 }>) {
-  const ROUTES_DOCUMENTATION_INTRO: Route[] = [
-    dokumentation_hinweise,
-    dokumentation_regelungsvorhabenTitel,
-    dokumentation_beteiligungsformate,
-  ];
-
-  const ROUTES_DOCUMENTATION_FINALIZE: Route[] = [
-    dokumentation_zusammenfassung,
-    dokumentation_absenden,
-  ];
-
   const { findDocumentationDataForUrl, validateDocumentationDataForRoute } =
     useDocumentationDataService();
 
@@ -176,38 +176,41 @@ export function LayoutWithDocumentationNavigation({
     [validateDocumentationDataForRoute],
   );
 
-  const nextUrl = useMemo(
-    () =>
-      isErlaeuterungPage
-        ? resolveAdjacentUrl(
-            flatRoutes,
-            navigationBaseUrl,
-            getNextUrl,
-            findDocumentationDataForUrl,
-            isRouteDisabled,
-          )
-        : currentRoute?.principleId &&
-            (currentPrincipleFormData as { answer?: string } | undefined)
-              ?.answer
-          ? `${currentUrl}/erlaeuterung`
-          : resolveAdjacentUrl(
-              flatRoutes,
-              currentUrl,
-              getNextUrl,
-              findDocumentationDataForUrl,
-              isRouteDisabled,
-            ),
-    [
-      isErlaeuterungPage,
+  const nextUrl = useMemo(() => {
+    if (isErlaeuterungPage) {
+      return resolveAdjacentUrl(
+        flatRoutes,
+        navigationBaseUrl,
+        getNextUrl,
+        findDocumentationDataForUrl,
+        isRouteDisabled,
+      );
+    }
+    const isPrinciplePage = Boolean(currentRoute?.principleId);
+    const isPrincipleRequiringExplanation = Boolean(
+      isPrinciplePage &&
+      (currentPrincipleFormData as { answer?: string } | undefined)?.answer,
+    );
+    if (isPrincipleRequiringExplanation) {
+      return `${currentUrl}/erlaeuterung`;
+    }
+    return resolveAdjacentUrl(
       flatRoutes,
-      navigationBaseUrl,
-      currentRoute?.principleId,
-      currentPrincipleFormData,
       currentUrl,
+      getNextUrl,
       findDocumentationDataForUrl,
       isRouteDisabled,
-    ],
-  );
+    );
+  }, [
+    isErlaeuterungPage,
+    flatRoutes,
+    navigationBaseUrl,
+    currentRoute?.principleId,
+    currentPrincipleFormData,
+    currentUrl,
+    findDocumentationDataForUrl,
+    isRouteDisabled,
+  ]);
 
   const previousUrl = useMemo(
     () =>

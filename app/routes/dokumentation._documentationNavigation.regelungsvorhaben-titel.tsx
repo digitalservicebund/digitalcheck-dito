@@ -6,6 +6,7 @@ import {
   defaultTitleValues,
   policyTitleSchema,
 } from "~/routes/dokumentation/documentationDataSchema";
+import { isIeaAssessmentEnabled } from "~/utils/features.ts";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
@@ -69,23 +70,4 @@ export function DocumentationTitle() {
 
 export default function Route() {
   return <DocumentationTitle />;
-}
-
-// Astro page export
-import { DocumentationPageShell } from "@/components/DocumentationPageShell";
-import { isIeaAssessmentEnabled } from "~/utils/features.ts";
-import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
-
-export function TitelPage({
-  prinzips,
-  currentUrl,
-}: Readonly<{
-  prinzips: PrinzipWithAspekteAndExample[];
-  currentUrl: string;
-}>) {
-  return (
-    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
-      <DocumentationTitle />
-    </DocumentationPageShell>
-  );
 }

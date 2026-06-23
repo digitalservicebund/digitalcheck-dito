@@ -111,23 +111,3 @@ export function DocumentationPrinciple({
     </>
   );
 }
-
-// Astro page export
-import { DocumentationPageShell } from "@/components/DocumentationPageShell";
-import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
-
-export function PrinciplePage({
-  prinzips,
-  currentUrl,
-  principleId,
-}: Readonly<{
-  prinzips: PrinzipWithAspekteAndExample[];
-  currentUrl: string;
-  principleId: string;
-}>) {
-  return (
-    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
-      <DocumentationPrinciple principleId={principleId} />
-    </DocumentationPageShell>
-  );
-}
