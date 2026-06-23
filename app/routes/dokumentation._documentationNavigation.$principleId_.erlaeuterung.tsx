@@ -223,22 +223,3 @@ export function DocumentationPrincipleErlaeuterung({
     </>
   );
 }
-
-// Astro page export
-import { DocumentationPageShell } from "@/components/DocumentationPageShell";
-
-export function ErlaeuterungPage({
-  prinzips,
-  currentUrl,
-  principleId,
-}: Readonly<{
-  prinzips: PrinzipWithAspekte[];
-  currentUrl: string;
-  principleId: string;
-}>) {
-  return (
-    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
-      <DocumentationPrincipleErlaeuterung principleId={principleId} />
-    </DocumentationPageShell>
-  );
-}

@@ -2,19 +2,12 @@
 import Layout from "@/layouts/Layout.astro";
 import { BewertungRechtlichPage } from "~/routes/dokumentation._documentationNavigation.bewertung-rechtlich";
 import { fetchPrinzipsWithExamples } from "~/utils/strapiData.server";
+import DocumentationWizard from "@/components/DocumentationWizard.astro";
 
 export const frontmatter = {
   title: "Rechtliche Interoperabilität",
   sitemap: false,
 };
-
-const prinzips = await fetchPrinzipsWithExamples();
 ---
 
-<Layout title={`Dokumentation: ${frontmatter.title}`} showProgressBar>
-  <BewertungRechtlichPage
-    client:load
-    prinzips={prinzips}
-    currentUrl={Astro.url.pathname}
-  />
-</Layout>
+<DocumentationWizard stepTitle={frontmatter.title} />

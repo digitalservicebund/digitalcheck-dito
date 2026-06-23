@@ -9,23 +9,12 @@ import {
 import { DocumentationRouter } from "~/routes/dokumentation.$page.tsx";
 import { ClientRouter } from "astro:transitions";
 import ClientRouterLayout from "@/layouts/ClientRouterLayout.astro";
+import DocumentationWizard from "@/components/DocumentationWizard.astro";
 
 export const frontmatter = {
   title: "Regelungsvorhaben",
   sitemap: false,
 };
-
-const prinzips = await fetchPrinzipsWithExamples();
 ---
 
-<ClientRouterLayout
-  title={`Dokumentation: ${frontmatter.title}`}
-  showProgressBar
->
-  <DocumentationRouter
-    client:only="react"
-    prinzips={prinzips}
-    path={dokumentation_regelungsvorhabenTitel.path}
-    transition:persist={"documentation"}
-  />
-</ClientRouterLayout>
+<DocumentationWizard stepTitle={frontmatter.title} />

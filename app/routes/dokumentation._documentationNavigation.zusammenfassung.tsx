@@ -1,4 +1,3 @@
-import { DocumentationPageShell } from "@/components/DocumentationPageShell";
 import {
   dokumentation_beteiligungsformate,
   dokumentation_bewertungOrganisatorisch,
@@ -37,10 +36,7 @@ import {
 } from "~/routes/dokumentation/interoperability/values.ts";
 import { isIeaAssessmentEnabled } from "~/utils/features.ts";
 import { keyValueToMap } from "~/utils/keyValue.ts";
-import type {
-  PrinzipWithAspekte,
-  PrinzipWithAspekteAndExample,
-} from "~/utils/strapiData.types";
+import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
@@ -465,24 +461,5 @@ export function DocumentationSummary() {
       </InfoBoxList>
       <DocumentationActions previousUrl={previousUrl} nextUrl={nextUrl} />
     </>
-  );
-}
-
-export default function Route() {
-  return <DocumentationSummary />;
-}
-
-// Astro page export
-export function ZusammenfassungPage({
-  prinzips,
-  currentUrl,
-}: Readonly<{
-  prinzips: PrinzipWithAspekteAndExample[];
-  currentUrl: string;
-}>) {
-  return (
-    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
-      <DocumentationSummary />
-    </DocumentationPageShell>
   );
 }

@@ -138,30 +138,3 @@ export function DocumentationSend() {
     </>
   );
 }
-
-export default function Route() {
-  return <DocumentationSend />;
-}
-
-// Astro page export
-import { DocumentationPageShell } from "@/components/DocumentationPageShell";
-import { contact } from "~/resources/content/shared/contact.ts";
-import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
-import { downloadAssessment } from "~/service/wordDocumentationExport/wordInteroperabilityAssessment.ts";
-import { dedent } from "~/utils/dedentMultilineStrings.ts";
-import { isIeaAssessmentEnabled } from "~/utils/features.ts";
-import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
-
-export function AbsendenPage({
-  prinzips,
-  currentUrl,
-}: Readonly<{
-  prinzips: PrinzipWithAspekteAndExample[];
-  currentUrl: string;
-}>) {
-  return (
-    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
-      <DocumentationSend />
-    </DocumentationPageShell>
-  );
-}

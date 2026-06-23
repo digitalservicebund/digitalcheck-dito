@@ -4,11 +4,9 @@ import { useDocumentationDataService } from "~/routes/dokumentation/Documentatio
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook";
 import { interoperabilityMetaSchema } from "~/routes/dokumentation/documentationDataSchema";
 import SkipNoticeWrapper from "~/routes/dokumentation/interoperability/SkipNoticeWrapper";
-import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 // Astro page export
-import { DocumentationPageShell } from "@/components/DocumentationPageShell";
 import { useField } from "@rvf/react";
 import RadioGroup from "~/components/RadioGroup";
 import {
@@ -82,19 +80,5 @@ export function DocumentationVeroeffentlichung() {
       </SkipNoticeWrapper>
       <DocumentationActions previousUrl={previousUrl} nextUrl={nextUrl ?? ""} />
     </div>
-  );
-}
-
-export function VeroeffentlichungPage({
-  prinzips,
-  currentUrl,
-}: Readonly<{
-  prinzips: PrinzipWithAspekteAndExample[];
-  currentUrl: string;
-}>) {
-  return (
-    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
-      <DocumentationVeroeffentlichung />
-    </DocumentationPageShell>
   );
 }

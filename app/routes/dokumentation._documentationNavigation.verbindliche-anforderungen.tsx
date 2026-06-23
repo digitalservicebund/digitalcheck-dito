@@ -1,4 +1,3 @@
-import { DocumentationPageShell } from "@/components/DocumentationPageShell";
 import {
   dokumentation_bewertungRechtlich,
   dokumentation_verbindlicheAnforderungen,
@@ -7,7 +6,6 @@ import {
 import Heading from "~/components/Heading";
 import { IEAContactBanner } from "~/routes/dokumentation/interoperability/IEAContactBanner.tsx";
 import SkipNoticeWrapper from "~/routes/dokumentation/interoperability/SkipNoticeWrapper.tsx";
-import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 import BindingRequirementsForm from "./dokumentation/interoperability/BindingRequirementsForm";
@@ -40,19 +38,5 @@ export function DocumentationBindingRequirements() {
       />
       <IEAContactBanner />
     </div>
-  );
-}
-
-export function VerbindlicheAnforderungenPage({
-  prinzips,
-  currentUrl,
-}: Readonly<{
-  prinzips: PrinzipWithAspekteAndExample[];
-  currentUrl: string;
-}>) {
-  return (
-    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
-      <DocumentationBindingRequirements />
-    </DocumentationPageShell>
   );
 }

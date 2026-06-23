@@ -2,28 +2,12 @@
 import Layout from "@/layouts/Layout.astro";
 import { ClientRouter } from "astro:transitions";
 import { fetchPrinzipsWithExamples } from "~/utils/strapiData.server";
-import { DocumentationRouter } from "~/routes/dokumentation.$page.tsx";
-import { dokumentation_hinweise } from "@/config/routes.ts";
-import ClientRouterLayout from "@/layouts/ClientRouterLayout.astro";
-import LoadingPage from "@/components/LoadingPage.astro";
+import DocumentationWizard from "@/components/DocumentationWizard.astro";
 
 export const frontmatter = {
   title: "Hinweise",
   sitemap: false,
 };
-
-const prinzips = await fetchPrinzipsWithExamples();
 ---
 
-<ClientRouterLayout
-  title={`Dokumentation: ${frontmatter.title}`}
-  showProgressBar
->
-  <DocumentationRouter
-    client:only="react"
-    prinzips={prinzips}
-    path={dokumentation_hinweise.path}
-    transition:persist={"documentation"}
-    ><LoadingPage slot="fallback" />
-  </DocumentationRouter>
-</ClientRouterLayout>
+<DocumentationWizard stepTitle={frontmatter.title} />
