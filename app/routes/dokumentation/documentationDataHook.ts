@@ -1,6 +1,7 @@
 import type { FieldValues, FormOpts } from "@rvf/react";
 import { useForm } from "@rvf/react";
 import type { StandardSchemaV1 } from "@standard-schema/spec";
+import { navigate } from "astro:transitions/client";
 import { useEffect, useState } from "react";
 
 type UseSyncedFormParams<
@@ -41,10 +42,10 @@ export const useSyncedForm = <
     onBeforeSubmit: ({ unvalidatedData }) => {
       if (!storedData) setDataCallback(unvalidatedData);
       // bypass submission
-      if (nextUrl) globalThis.location.href = nextUrl;
+      if (nextUrl) void navigate(nextUrl);
     },
     handleSubmit: () => {
-      if (nextUrl) globalThis.location.href = nextUrl;
+      if (nextUrl) void navigate(nextUrl);
     },
   });
 
