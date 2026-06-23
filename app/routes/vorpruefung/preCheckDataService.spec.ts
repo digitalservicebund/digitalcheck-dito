@@ -140,11 +140,9 @@ describe("PreCheck Data Service", () => {
 
       setResult(newResult);
 
-      expect(
-        expect(writeVersionedDataToLocalStorage).toHaveBeenCalledWith(
-          { ...mockData, ...newResult },
-          STORAGE_KEY,
-        ),
+      expect(writeVersionedDataToLocalStorage).toHaveBeenCalledWith(
+        { ...mockData, ...newResult },
+        STORAGE_KEY,
       );
       expect(mockSubscribeListener).toHaveBeenCalledTimes(2);
       expect(getPreCheckDataSnapshot()).toMatchObject({
@@ -165,11 +163,9 @@ describe("PreCheck Data Service", () => {
 
       addOrUpdateAnswer(newAnswer);
 
-      expect(
-        expect(writeVersionedDataToLocalStorage).toHaveBeenCalledWith(
-          { ...mockData, answers: [...mockData.answers, newAnswer] },
-          STORAGE_KEY,
-        ),
+      expect(writeVersionedDataToLocalStorage).toHaveBeenCalledWith(
+        { ...mockData, answers: [...mockData.answers, newAnswer] },
+        STORAGE_KEY,
       );
       expect(mockSubscribeListener).toHaveBeenCalledTimes(2);
 
@@ -189,11 +185,9 @@ describe("PreCheck Data Service", () => {
 
       addOrUpdateAnswer(updatedAnswer);
 
-      expect(
-        expect(writeVersionedDataToLocalStorage).toHaveBeenCalledWith(
-          { ...mockData, answers: [updatedAnswer] },
-          STORAGE_KEY,
-        ),
+      expect(writeVersionedDataToLocalStorage).toHaveBeenCalledWith(
+        { ...mockData, answers: [updatedAnswer] },
+        STORAGE_KEY,
       );
       expect(mockSubscribeListener).toHaveBeenCalledTimes(2);
 
