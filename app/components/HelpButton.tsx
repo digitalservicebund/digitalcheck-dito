@@ -37,7 +37,7 @@ export default function HelpButton({
         type="button"
         aria-label="Hilfe anzeigen"
         className={customTwMerge(
-          "inline-flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-800",
+          "inline items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-800",
           "h-20 w-20 fill-blue-800",
           "translate-y-4",
           className,
