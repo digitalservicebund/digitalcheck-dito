@@ -10,6 +10,7 @@ import {
   dokumentation_regelungsvorhabenTitel,
   dokumentation_zusammenfassung,
 } from "@/config/routes";
+import { isIeaAssessmentEnabled } from "~/utils/features.ts";
 import {
   downloadDocumentAndGetText,
   expect,
@@ -220,7 +221,7 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
   });
 
   await test.step("navigate to summary", async () => {
-    if (!page.url().includes(dokumentation_zusammenfassung.path)) {
+    if (isIeaAssessmentEnabled) {
       await skipUntil(page, dokumentation_zusammenfassung.path, {
         name: "Zusammenfassung",
       });
