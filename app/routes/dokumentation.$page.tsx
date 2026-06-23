@@ -1,5 +1,6 @@
 import { DocumentationPageShell } from "@/components/DocumentationPageShell.tsx";
 import {
+  dokumentation_absenden,
   dokumentation_beteiligungsformate,
   dokumentation_bewertungOrganisatorisch,
   dokumentation_bewertungRechtlich,
@@ -14,6 +15,7 @@ import {
 } from "@/config/routes.ts";
 import { DocumentationPrinciple } from "~/routes/dokumentation._documentationNavigation.$principleId.tsx";
 import { DocumentationPrincipleErlaeuterung } from "~/routes/dokumentation._documentationNavigation.$principleId_.erlaeuterung.tsx";
+import { DocumentationSend } from "~/routes/dokumentation._documentationNavigation.absenden.tsx";
 import { DocumentationParticipation } from "~/routes/dokumentation._documentationNavigation.beteiligungsformate.tsx";
 import { DocumentationInteroperabilityAssessmentOrganizational } from "~/routes/dokumentation._documentationNavigation.bewertung-organisatorisch.tsx";
 import { DocumentationInteroperabilityAssessmentLegal } from "~/routes/dokumentation._documentationNavigation.bewertung-rechtlich.tsx";
@@ -61,6 +63,9 @@ const staticRoutes = {
   },
   [dokumentation_zusammenfassung.path]: {
     Component: DocumentationSummary,
+  },
+  [dokumentation_absenden.path]: {
+    Component: DocumentationSend,
   },
 };
 
