@@ -12,9 +12,6 @@ import {
   dokumentation_veroeffentlichung,
   dokumentation_zusammenfassung,
 } from "@/config/routes.ts";
-import { RefreshTwoTone } from "@digitalservicebund/icons";
-import React, { useEffect } from "react";
-import { twJoin } from "tailwind-merge";
 import { DocumentationPrinciple } from "~/routes/dokumentation._documentationNavigation.$principleId.tsx";
 import { DocumentationPrincipleErlaeuterung } from "~/routes/dokumentation._documentationNavigation.$principleId_.erlaeuterung.tsx";
 import { DocumentationParticipation } from "~/routes/dokumentation._documentationNavigation.beteiligungsformate.tsx";
@@ -30,7 +27,7 @@ import { DocumentationVeroeffentlichung } from "~/routes/dokumentation._document
 import { DocumentationSummary } from "~/routes/dokumentation._documentationNavigation.zusammenfassung.tsx";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
-const fixedRoutes = {
+const staticRoutes = {
   [dokumentation_hinweise.path]: {
     Component: DocumentationHinweise,
   },
@@ -67,9 +64,7 @@ const fixedRoutes = {
   },
 };
 
-// Astro page export
-
-type DocumentationRouterProps = {
+export type DocumentationRouterProps = {
   prinzips: PrinzipWithAspekteAndExample[];
   path: string;
   principleId?: string;
@@ -82,35 +77,25 @@ export function DocumentationRouter({
   principleId,
   isErlaeuterung = false,
 }: Readonly<DocumentationRouterProps>) {
-  let Component: (() => React.JSX.Element) | null = null;
-  const [didLoad, setDidLoad] = React.useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setDidLoad(false);
-    }, 1000);
-  });
+  const RouteComponent =
+    staticRoutes[path as keyof typeof staticRoutes]?.Component;
 
-  const route = fixedRoutes[path as keyof typeof fixedRoutes];
-  if (route) {
-    Component = route.Component;
-  }
+  const renderContent = () => {
+    if (RouteComponent) {
+      return <RouteComponent />;
+    }
+    if (!principleId) return null;
+
+    return isErlaeuterung ? (
+      <DocumentationPrincipleErlaeuterung principleId={principleId} />
+    ) : (
+      <DocumentationPrinciple principleId={principleId} />
+    );
+  };
 
   return (
     <DocumentationPageShell prinzips={prinzips} currentUrl={path}>
-      <div className={"flex gap-8"}>
-        Wizard
-        <div className={twJoin(didLoad ? "" : "invisible", "flex gap-8")}>
-          <RefreshTwoTone className={"fill-blue-900"} />
-          Neu geladen
-        </div>
-      </div>
-      {Component && <Component />}
-      {principleId &&
-        (isErlaeuterung ? (
-          <DocumentationPrincipleErlaeuterung principleId={principleId} />
-        ) : (
-          <DocumentationPrinciple principleId={principleId} />
-        ))}
+      {renderContent()}
     </DocumentationPageShell>
   );
 }
