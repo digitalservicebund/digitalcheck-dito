@@ -13,6 +13,7 @@ import {
   dokumentation_veroeffentlichung,
   dokumentation_zusammenfassung,
 } from "@/config/routes.ts";
+import type { ComponentType } from "react";
 import { DocumentationPrinciple } from "~/routes/dokumentation._documentationNavigation.$principleId.tsx";
 import { DocumentationPrincipleErlaeuterung } from "~/routes/dokumentation._documentationNavigation.$principleId_.erlaeuterung.tsx";
 import { DocumentationSend } from "~/routes/dokumentation._documentationNavigation.absenden.tsx";
@@ -29,44 +30,26 @@ import { DocumentationVeroeffentlichung } from "~/routes/dokumentation._document
 import { DocumentationSummary } from "~/routes/dokumentation._documentationNavigation.zusammenfassung.tsx";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
-const staticRoutes = {
-  [dokumentation_hinweise.path]: {
-    Component: DocumentationHinweise,
-  },
-  [dokumentation_regelungsvorhabenTitel.path]: {
-    Component: DocumentationTitle,
-  },
-  [dokumentation_beteiligungsformate.path]: {
-    Component: DocumentationParticipation,
-  },
+const staticRoutes: Record<string, ComponentType> = {
+  [dokumentation_hinweise.path]: DocumentationHinweise,
+  [dokumentation_regelungsvorhabenTitel.path]: DocumentationTitle,
+  [dokumentation_beteiligungsformate.path]: DocumentationParticipation,
   // "Prinzipien" steps handled dynamically below
-  [dokumentation_euInteroperabilitaetsbezug.path]: {
-    Component: DocumentationEuInteroperabilityRequirements,
-  },
-  [dokumentation_verbindlicheAnforderungen.path]: {
-    Component: DocumentationBindingRequirements,
-  },
-  [dokumentation_bewertungRechtlich.path]: {
-    Component: DocumentationInteroperabilityAssessmentLegal,
-  },
-  [dokumentation_bewertungOrganisatorisch.path]: {
-    Component: DocumentationInteroperabilityAssessmentOrganizational,
-  },
-  [dokumentation_bewertungSemantisch.path]: {
-    Component: DocumentationInteroperabilityAssessmentSemantic,
-  },
-  [dokumentation_bewertungTechnisch.path]: {
-    Component: DocumentationInteroperabilityAssessmentTechnical,
-  },
-  [dokumentation_veroeffentlichung.path]: {
-    Component: DocumentationVeroeffentlichung,
-  },
-  [dokumentation_zusammenfassung.path]: {
-    Component: DocumentationSummary,
-  },
-  [dokumentation_absenden.path]: {
-    Component: DocumentationSend,
-  },
+  [dokumentation_euInteroperabilitaetsbezug.path]:
+    DocumentationEuInteroperabilityRequirements,
+  [dokumentation_verbindlicheAnforderungen.path]:
+    DocumentationBindingRequirements,
+  [dokumentation_bewertungRechtlich.path]:
+    DocumentationInteroperabilityAssessmentLegal,
+  [dokumentation_bewertungOrganisatorisch.path]:
+    DocumentationInteroperabilityAssessmentOrganizational,
+  [dokumentation_bewertungSemantisch.path]:
+    DocumentationInteroperabilityAssessmentSemantic,
+  [dokumentation_bewertungTechnisch.path]:
+    DocumentationInteroperabilityAssessmentTechnical,
+  [dokumentation_veroeffentlichung.path]: DocumentationVeroeffentlichung,
+  [dokumentation_zusammenfassung.path]: DocumentationSummary,
+  [dokumentation_absenden.path]: DocumentationSend,
 };
 
 export type DocumentationRouterProps = {
@@ -82,25 +65,16 @@ export function DocumentationRouter({
   principleId,
   isErlaeuterung = false,
 }: Readonly<DocumentationRouterProps>) {
-  const RouteComponent =
-    staticRoutes[path as keyof typeof staticRoutes]?.Component;
+  const StaticComponent = staticRoutes[path];
 
-  const renderContent = () => {
-    if (RouteComponent) {
-      return <RouteComponent />;
-    }
-    if (!principleId) return null;
-
-    return isErlaeuterung ? (
-      <DocumentationPrincipleErlaeuterung principleId={principleId} />
-    ) : (
-      <DocumentationPrinciple principleId={principleId} />
-    );
-  };
+  const PrincipleComponent = isErlaeuterung
+    ? DocumentationPrincipleErlaeuterung
+    : DocumentationPrinciple;
 
   return (
     <DocumentationPageShell prinzips={prinzips} currentUrl={path}>
-      {renderContent()}
+      {StaticComponent && <StaticComponent />}
+      {principleId && <PrincipleComponent principleId={principleId} />}
     </DocumentationPageShell>
   );
 }
