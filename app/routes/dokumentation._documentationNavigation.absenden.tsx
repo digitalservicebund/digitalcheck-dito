@@ -42,9 +42,7 @@ function InteroperabilitySteps() {
           `}
         />
         <ButtonContainer>
-          <DownloadButton
-            onClick={() => void downloadAssessment(documentationData)}
-          >
+          <DownloadButton onClick={() => downloadAssessment(documentationData)}>
             Bewertung herunterladen (.docx)
           </DownloadButton>
         </ButtonContainer>
@@ -106,9 +104,7 @@ export function DocumentationSend() {
         >
           <RichText markdown={finish.download.content} />
           <ButtonContainer>
-            <DownloadButton
-              onClick={() => void downloadDocumentation(prinzips)}
-            >
+            <DownloadButton onClick={() => downloadDocumentation(prinzips)}>
               {finish.download.buttonText}
             </DownloadButton>
           </ButtonContainer>

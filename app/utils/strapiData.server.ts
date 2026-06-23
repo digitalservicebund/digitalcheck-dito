@@ -1,3 +1,5 @@
+import NodeCache from "node-cache";
+import crypto from "node:crypto";
 import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
 
 const url =
@@ -188,10 +190,36 @@ type GraphQLResponse<DataType> = {
   }[];
 };
 
+function generateCacheKey(query: string, variables?: object): string {
+  const variablesString = variables
+    ? JSON.stringify(
+        variables,
+        Object.keys(variables).sort((a, b) => a.localeCompare(b)),
+      )
+    : "";
+  const hash = crypto
+    .createHash("md5")
+    .update(query + variablesString)
+    .digest("hex");
+  return `cache:${hash}`;
+}
+
+const isDevelopment = process.env.NODE_ENV === "development";
+const options = isDevelopment
+  ? { stdTTL: 10 }
+  : { stdTTL: 300, checkperiod: 30 };
+const cache = new NodeCache(options);
+
 export async function fetchStrapiData<DataType>(
   query: string,
   variables?: object,
 ): Promise<DataType> {
+  const cacheKey = generateCacheKey(query, variables);
+  const cachedData = cache.get<DataType>(cacheKey);
+
+  if (cachedData) {
+    return cachedData;
+  }
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -221,6 +249,8 @@ export async function fetchStrapiData<DataType>(
       `Failed to fetch Strapi data: ${responseData.errors[0].message}`,
     );
   }
+  cache.set(cacheKey, responseData.data);
+
   return responseData.data;
 }
 

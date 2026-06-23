@@ -10,6 +10,7 @@ on:
         required: false
         type: string
         default: docker-image
+        description: "The name of the Docker image artifact to upload."
     secrets:
       SLACK_BOT_TOKEN:
         required: true
@@ -42,7 +43,9 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Save Docker image as artifact
-        run: docker save ${{ inputs.dockerImage }} | gzip > /tmp/docker-image.tar.gz
+        env:
+          DOCKER_IMAGE: ${{ inputs.dockerImage }}
+        run: docker save "$DOCKER_IMAGE" | gzip > /tmp/docker-image.tar.gz
 
       - name: Upload Docker image artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7

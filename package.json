@@ -57,7 +57,7 @@
     "posthog-js": "^1.390.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "sharp": "^0.35.1",
+    "sharp": "^0.35.2",
     "tailwind-merge": "^3.6.0",
     "zod": "~4.4.3"
   },
@@ -100,6 +100,7 @@
     "jsdom": "^29.1.1",
     "license-checker-rseidelsohn": "^5.0.1",
     "mammoth": "^1.12.0",
+    "node-cache": "^5.1.2",
     "playwright-core": "^1.61.0",
     "prettier": "^3.8.4",
     "prettier-plugin-astro": "^0.14.1",

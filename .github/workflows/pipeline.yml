@@ -17,7 +17,7 @@ permissions:
 
 env:
   PACKAGE_NAME: digitalcheck-dito
-  IMAGE_REPOSITORY: ghcr.io/digitalservicebund/digitalcheck-dito
+  IMAGE_REF: ghcr.io/digitalservicebund/digitalcheck-dito
   ENVIRONMENT: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
 
 jobs:
@@ -105,9 +105,9 @@ jobs:
         if: ${{ github.event_name != 'pull_request' && ( github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/staging/'))}}
         run: |
           docker load < /tmp/docker-image.tar.gz
-          docker tag ${{ env.IMAGE_REPOSITORY }}:${{ github.sha }} ${{ env.IMAGE_REPOSITORY }}
-          docker push ${{ env.IMAGE_REPOSITORY }}
-          docker push ${{ env.IMAGE_REPOSITORY }}:${{ github.sha }}
+          docker tag ${{ env.IMAGE_REF }}:${{ github.sha }} ${{ env.IMAGE_REF }}
+          docker push ${{ env.IMAGE_REF }}
+          docker push ${{ env.IMAGE_REF }}:${{ github.sha }}
 
       - name: Load Docker image (pull request)
         if: ${{ github.event_name == 'pull_request' }}
@@ -120,7 +120,7 @@ jobs:
         env:
           TRIVY_DB_REPOSITORY: ghcr.io/aquasecurity/trivy-db,public.ecr.aws/aquasecurity/trivy-db
         with:
-          image-ref: ${{ env.IMAGE_REPOSITORY }}:${{ github.sha }}
+          image-ref: ${{ env.IMAGE_REF }}:${{ github.sha }}
           format: "cosign-vuln"
           output: "${{ env.PACKAGE_NAME }}-vulnerabilities.json"
 
@@ -142,11 +142,11 @@ jobs:
 
       - name: Sign the published Docker image
         if: ${{ github.event_name != 'pull_request' && ( github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/staging/')) }}
-        run: cosign sign --yes ${{ env.IMAGE_REPOSITORY }}:${{ github.sha }}
+        run: cosign sign --yes ${{ env.IMAGE_REF }}:${{ github.sha }}
 
       - name: Attest the vulnerability scan
         if: ${{ github.event_name != 'pull_request' && ( github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/staging/')) }}
-        run: cosign attest --yes --replace --predicate ${{ env.PACKAGE_NAME }}-vulnerabilities.json --type vuln ${{ env.IMAGE_REPOSITORY }}:${{ github.sha }}
+        run: cosign attest --yes --replace --predicate ${{ env.PACKAGE_NAME }}-vulnerabilities.json --type vuln ${{ env.IMAGE_REF }}:${{ github.sha }}
 
       - name: Send failure to Slack
         uses: digitalservicebund/notify-on-failure-gha@8570032b46ae9c2b976ec41567f595746fa44b4e # v1.6.1
