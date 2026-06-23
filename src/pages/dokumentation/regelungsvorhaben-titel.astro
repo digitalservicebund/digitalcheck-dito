@@ -1,14 +1,4 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import { TitelPage } from "~/routes/dokumentation._documentationNavigation.regelungsvorhaben-titel";
-import { fetchPrinzipsWithExamples } from "~/utils/strapiData.server";
-import {
-  dokumentation_hinweise,
-  dokumentation_regelungsvorhabenTitel,
-} from "@/config/routes.ts";
-import { DocumentationRouter } from "~/routes/dokumentation.$page.tsx";
-import { ClientRouter } from "astro:transitions";
-import ClientRouterLayout from "@/layouts/ClientRouterLayout.astro";
 import DocumentationWizard from "@/components/DocumentationWizard.astro";
 
 export const frontmatter = {
