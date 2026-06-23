@@ -17,7 +17,10 @@ import {
   type BindingRequirementsData,
   bindingRequirementsSchema,
 } from "~/routes/dokumentation/documentationDataSchema.ts";
-import { markdownLinkIEA } from "~/routes/dokumentation/interoperability/markdownLinkIEA.tsx";
+import {
+  linkToIEAArticle,
+  markdownLinkIEA,
+} from "~/routes/dokumentation/interoperability/markdownLinkIEA.tsx";
 import {
   serviceAreaOptions,
   stakeholderOptions,
@@ -69,30 +72,19 @@ export default function BindingRequirementsForm({
       id: "intro",
       isEnabled: () => true,
       render: () => (
-        <RichText
-          markdown={dedent`
-            Eine Regelung ist förderlich für die Interoperabilität, wenn sie es ermöglicht, dass Daten in der EU grenzüberschreitend verarbeitet werden können.
-
-            In diesem Schritt wird gefragt, ob Ihre Regelung verbindliche Anforderungen enthält, die sich auf digitale transeuropäische Dienste auswirken:
-
-            Bitte dokumentieren Sie alle verbindlichen Anforderungen im Sinne von ${markdownLinkIEA(
-              {
-                article: 2,
-                paragraph: 15,
-                format: "short",
-              },
-            )} und die digitalen transeuropäischen Dienste, die davon betroffen sind.
-        `}
-        />
-      ),
-    },
-    {
-      id: "bindingRequirements",
-      isEnabled: () => true,
-      render: () => (
-        <div className="space-y-24">
-          <h2 className="ds-heading-03-reg">
-            In der Regelung enthaltene verbindliche Anforderungen
+        <>
+          <p>
+            In diesem Schritt wird gefragt, welche verbindlichen Anforderungen
+            im Sinne von{" "}
+            {/* eslint-disable-next-line react/jsx-no-target-blank */}
+            <a
+              href={linkToIEAArticle({ article: 2 })}
+              target="_blank"
+              rel="noopener"
+            >
+              Art. 2 Nr. 15 der Verordnung (EU) 2024/903
+            </a>{" "}
+            von Ihrer Regelung betroffen sind.
             <HelpButton
               sectionId={"verbindliche-anforderungen"}
               title={"Was ist eine verbindliche Anforderung?"}
@@ -106,6 +98,52 @@ export default function BindingRequirementsForm({
             `}
               />
             </HelpButton>
+          </p>
+          <p>
+            Geben Sie außerdem an, auf welche transeuropäischen digitalen
+            öffentlichen Dienste sich diese Anforderungen auswirken. Dies
+            betrifft sowohl von der Regelung benannte Dienste als auch den
+            Vollzug.
+            <HelpButton
+              sectionId={"transeuropean_services"}
+              title={"Was sind digitale transeuropäische Dienste?"}
+            >
+              <RichText
+                markdown={dedent`
+                          Digitale transeuropäische Dienste sind digitale Dienste und IT-Systeme,
+                          bei denen Daten zwischen Verwaltungen von EU-Mitgliedstaaten ausgetauscht werden.
+                          
+                          Das können grenzüberschreitende Registerabfragen oder Meldungen sein. Die Verordnung nennt folgende Beispiele:
+                          - Gegenseitige Anerkennung akademischer Diplome oder Berufsqualifikationen
+                          - Austausch von Fahrzeugdaten für die Verkehrssicherheit
+                          - Zugang zu Sozialversicherungs- und Gesundheitsdaten – darunter Pandemie- und Impfbescheinigungen
+                          - Informationsaustausch in Bezug auf Steuern, Zölle, Vergabe öffentlicher Aufträge
+                          - Digitale Führerscheine
+                          - Handelsregister
+                          
+                          Siehe ${markdownLinkIEA({ recital: 6, format: "short" })}.
+                          
+                          **Was ist hier zu dokumentieren?**
+                          
+                          *Bevor* Sie neue oder wesentlich veränderte verbindliche Anforderungen festschreiben, die das Design, die Beschaffung, die Entwicklung oder die Implementierung solcher digitalen transeuropäischen Dienste betreffen, müssen Sie deren eine Auswirkungen auf die Interoperabilität bewerten.
+                        `}
+              />
+            </HelpButton>
+          </p>
+        </>
+      ),
+    },
+    {
+      id: "bindingRequirements",
+      isEnabled: () => true,
+      render: () => (
+        <div className="space-y-24">
+          <h2 className="ds-heading-03-reg">
+            In der Regelung enthaltene verbindliche Anforderungen
+            <HelpButton
+              sectionId={"verbindliche-anforderungen"}
+              title={"Was ist eine verbindliche Anforderung?"}
+            ></HelpButton>
           </h2>
 
           <div
@@ -159,28 +197,7 @@ export default function BindingRequirementsForm({
                       <HelpButton
                         sectionId={"transeuropean_services"}
                         title={"Was sind digitale transeuropäische Dienste?"}
-                      >
-                        <RichText
-                          markdown={dedent`
-                          Digitale transeuropäische Dienste sind digitale Dienste und IT-Systeme,
-                          bei denen Daten zwischen Verwaltungen von EU-Mitgliedstaaten ausgetauscht werden.
-                          
-                          Das können grenzüberschreitende Registerabfragen oder Meldungen sein. Die Verordnung nennt folgende Beispiele:
-                          - Gegenseitige Anerkennung akademischer Diplome oder Berufsqualifikationen
-                          - Austausch von Fahrzeugdaten für die Verkehrssicherheit
-                          - Zugang zu Sozialversicherungs- und Gesundheitsdaten – darunter Pandemie- und Impfbescheinigungen
-                          - Informationsaustausch in Bezug auf Steuern, Zölle, Vergabe öffentlicher Aufträge
-                          - Digitale Führerscheine
-                          - Handelsregister
-                          
-                          Siehe ${markdownLinkIEA({ recital: 6, format: "short" })}.
-                          
-                          **Was ist hier zu dokumentieren?**
-                          
-                          *Bevor* Sie neue oder wesentlich veränderte verbindliche Anforderungen festschreiben, die das Design, die Beschaffung, die Entwicklung oder die Implementierung solcher digitalen transeuropäischen Dienste betreffen, müssen Sie deren eine Auswirkungen auf die Interoperabilität bewerten.
-                        `}
-                        />
-                      </HelpButton>
+                      ></HelpButton>
                     </Textarea>
 
                     <Combobox

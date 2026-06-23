@@ -19,7 +19,8 @@ export function markdownLinkIEA({
     format === "long"
       ? " der Verordnung für ein interoperables Europa (EU) 2024/903"
       : " der Verordnung (EU) 2024/903";
-  return `[${text}](${linkToIEAArticle({ article, recital })})`;
+  const href = linkToIEAArticle({ article, recital });
+  return `<a href="${href}" target="_blank" rel="noopener">${text}</a>`;
 }
 
 export function linkToIEAArticle({
