@@ -157,7 +157,7 @@ function UploadDropzoneCard({
           name={file.path}
           className="sr-only"
           onChange={(event) =>
-            void submitFile(event.currentTarget.files?.[0] ?? null)
+            submitFile(event.currentTarget.files?.[0] ?? null)
           }
         />
         <p className="ds-body-01-reg">

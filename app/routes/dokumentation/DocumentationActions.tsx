@@ -50,7 +50,7 @@ export default function DocumentationActions({
         {showDownloadDraftButton && prinzips && (
           <DownloadButton
             look="ghost"
-            onClick={() => void downloadDocumentation(prinzips)}
+            onClick={() => downloadDocumentation(prinzips)}
           >
             {digitalDocumentation.actions.saveDraft.title}
           </DownloadButton>
