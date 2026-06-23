@@ -2,6 +2,9 @@
 import Layout from "@/layouts/Layout.astro";
 import { PrinciplePage } from "~/routes/dokumentation._documentationNavigation.$principleId";
 import { getPrincipleIdStaticPaths } from "~/utils/strapiData.server";
+import { DocumentationRouter } from "~/routes/dokumentation.$page.tsx";
+import LoadingPage from "@/components/LoadingPage.astro";
+import ClientRouterLayout from "@/layouts/ClientRouterLayout.astro";
 
 export const getStaticPaths = getPrincipleIdStaticPaths;
 
@@ -9,11 +12,13 @@ const { prinzips, principleName } = Astro.props;
 const { principleId } = Astro.params;
 ---
 
-<Layout title={`Dokumentation: ${principleName}`} showProgressBar>
-  <PrinciplePage
-    client:load
+<ClientRouterLayout title={`Dokumentation: ${principleName}`} showProgressBar>
+  <DocumentationRouter
+    client:only="react"
     prinzips={prinzips}
-    currentUrl={Astro.url.pathname}
+    path={Astro.url.pathname}
+    transition:persist={"documentation"}
     principleId={principleId}
-  />
-</Layout>
+    ><LoadingPage slot="fallback" />
+  </DocumentationRouter>
+</ClientRouterLayout>
