@@ -354,9 +354,6 @@ export function DocumentationDataProvider({
 
       if (!euInteroperabilityOutcome)
         delete updatedDocumentationData.euInteroperabilityOutcome;
-
-      console.log({ updatedDocumentationData });
-
       createOrUpdateDocumentationData(updatedDocumentationData);
     },
     [documentationData, createOrUpdateDocumentationData],
