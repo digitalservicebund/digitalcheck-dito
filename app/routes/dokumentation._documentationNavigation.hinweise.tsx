@@ -65,25 +65,3 @@ export function DocumentationHinweise() {
     </>
   );
 }
-
-export default function Route() {
-  return <DocumentationHinweise />;
-}
-
-// Astro page export
-import { DocumentationPageShell } from "@/components/DocumentationPageShell";
-import type { PrinzipWithAspekteAndExample } from "~/utils/strapiData.types";
-
-export function HinweisePage({
-  prinzips,
-  currentUrl,
-}: Readonly<{
-  prinzips: PrinzipWithAspekteAndExample[];
-  currentUrl: string;
-}>) {
-  return (
-    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
-      <DocumentationHinweise />
-    </DocumentationPageShell>
-  );
-}

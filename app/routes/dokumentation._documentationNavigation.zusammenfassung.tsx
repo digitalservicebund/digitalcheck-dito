@@ -1,9 +1,16 @@
-import type { Route } from "@/config/routes";
 import {
   dokumentation_beteiligungsformate,
+  dokumentation_bewertungOrganisatorisch,
+  dokumentation_bewertungRechtlich,
+  dokumentation_bewertungSemantisch,
+  dokumentation_bewertungTechnisch,
+  dokumentation_euInteroperabilitaetsbezug,
   dokumentation_regelungsvorhabenTitel,
+  dokumentation_verbindlicheAnforderungen,
+  dokumentation_veroeffentlichung,
+  type Route,
 } from "@/config/routes";
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
 import type { BadgeProps } from "~/components/Badge";
 import Heading from "~/components/Heading";
 import type { InfoBoxProps } from "~/components/InfoBox";
@@ -13,14 +20,23 @@ import InlineNotice from "~/components/InlineNotice";
 import RichText from "~/components/RichText";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import {
+  type BindingRequirementsData,
+  type DocumentationData,
+  type InteroperabilityMeta,
   type Participation,
   type PolicyTitle,
   type Principle,
 } from "~/routes/dokumentation/documentationDataSchema";
-import type {
-  PrinzipWithAspekte,
-  PrinzipWithAspekteAndExample,
-} from "~/utils/strapiData.types";
+import RequirementDetail from "~/routes/dokumentation/interoperability/RequirementDetail.tsx";
+import {
+  formatRating,
+  publicationDateQuestion,
+  publicationLinkQuestion,
+  publicationStatusQuestion,
+} from "~/routes/dokumentation/interoperability/values.ts";
+import { isIeaAssessmentEnabled } from "~/utils/features.ts";
+import { keyValueToMap } from "~/utils/keyValue.ts";
+import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { slugify } from "~/utils/utilFunctions";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useDocumentationDataService } from "./dokumentation/DocumentationDataProvider";
@@ -224,6 +240,159 @@ function PrincipleContent({
   );
 }
 
+function InteroperabilityMetaContent({
+  interoperabilityMeta,
+}: Readonly<{ interoperabilityMeta: InteroperabilityMeta }>) {
+  const labels = keyValueToMap(publicationStatusQuestion.options);
+  const answers = [
+    {
+      prefix: publicationStatusQuestion.questionLabel,
+      answer: labels.get(interoperabilityMeta.publicationStatus),
+    },
+  ];
+  if (interoperabilityMeta.publicationLink) {
+    answers.push({
+      prefix: publicationLinkQuestion.questionLabel,
+      answer: interoperabilityMeta.publicationLink,
+    });
+  }
+  if (interoperabilityMeta.publicationDate) {
+    answers.push({
+      prefix: publicationDateQuestion.questionLabel,
+      answer: interoperabilityMeta.publicationDate,
+    });
+  }
+  return <Answer answers={answers} />;
+}
+
+function InteroperabilityContent({
+  data,
+}: Readonly<{ data: DocumentationData<"2"> }>) {
+  if (!data.euInteroperabilityOutcome?.outcomeId) return null;
+  const outcome =
+    data.euInteroperabilityOutcome?.outcomeId === "REQUIRED" ? "Ja" : "Nein";
+  return (
+    <Answer
+      answers={[
+        {
+          prefix: "Ergab die Vorprüfung Bezug zu EU-Interoperabilität?",
+          answer: outcome,
+        },
+      ]}
+    />
+  );
+}
+
+function BindingRequirementSummary({
+  bindingRequirements,
+}: Readonly<{ bindingRequirements?: BindingRequirementsData }>) {
+  if (!bindingRequirements) return null;
+  return bindingRequirements.requirements.map((bindingRequirement, index) => {
+    return (
+      <>
+        {index > 0 && <hr className="text-gray-700" />}
+        <div key={bindingRequirement.description}>
+          <RequirementDetail requirement={bindingRequirement} />
+        </div>
+      </>
+    );
+  });
+}
+
+function createInteroperabilityInfoBoxItems(
+  documentationData: DocumentationData<"2">,
+): InfoBoxProps[] {
+  if (!isIeaAssessmentEnabled) return [];
+  const detailsRequired =
+    documentationData.euInteroperabilityOutcome?.outcomeId === "REQUIRED";
+
+  const assessmentItems = [
+    {
+      heading: "Rechtliche Bewertung",
+      route: dokumentation_bewertungRechtlich,
+      ratingTitle:
+        "Schafft das Regelungsvorhaben die rechtlichen Voraussetzungen für einen Datenaustausch innerhalb der EU?",
+      rating: documentationData.interoperabilityAssessment?.legal?.rating,
+      detail: documentationData.interoperabilityAssessment?.legal?.detail,
+    },
+    {
+      heading: "Organisatorische Bewertung",
+      route: dokumentation_bewertungOrganisatorisch,
+      ratingTitle:
+        "Schafft das Regelungsvorhaben die organisatorischen Voraussetzungen für einen Datenaustausch innerhalb der EU?",
+      rating:
+        documentationData.interoperabilityAssessment?.organizational?.rating,
+      detail:
+        documentationData.interoperabilityAssessment?.organizational?.detail,
+    },
+    {
+      heading: "Semantische Bewertung",
+      route: dokumentation_bewertungSemantisch,
+      ratingTitle:
+        "Stellt das Regelungsvorhaben sicher, dass semantische Definitionen von Begriffen und Datenfeldern den Datenaustausch über EU-Grenzen ermöglichen?",
+      rating: documentationData.interoperabilityAssessment?.semantic?.rating,
+      detail: documentationData.interoperabilityAssessment?.semantic?.detail,
+    },
+    {
+      heading: "Technische Bewertung",
+      route: dokumentation_bewertungTechnisch,
+      ratingTitle:
+        "Schafft das Regelungsvorhaben die technischen Voraussetzungen für einen Datenaustausch innerhalb der EU?",
+      rating: documentationData.interoperabilityAssessment?.technical?.rating,
+      detail: documentationData.interoperabilityAssessment?.technical?.detail,
+    },
+  ] as const;
+
+  return [
+    createInfoBoxItem({
+      heading: "EU-Interoperabilität",
+      route: dokumentation_euInteroperabilitaetsbezug,
+      content: <InteroperabilityContent data={documentationData} />,
+    }),
+    detailsRequired &&
+      createInfoBoxItem({
+        heading: "Verbindliche Anforderungen",
+        route: dokumentation_verbindlicheAnforderungen,
+        content: (
+          <BindingRequirementSummary
+            bindingRequirements={documentationData.bindingRequirements}
+          />
+        ),
+      }),
+    ...(detailsRequired
+      ? assessmentItems.map(({ heading, route, ratingTitle, rating, detail }) =>
+          createInfoBoxItem({
+            heading,
+            route,
+            content: (
+              <Answer
+                answers={[
+                  {
+                    prefix: ratingTitle,
+                    answer: formatRating(rating),
+                  },
+                  {
+                    prefix: "Begründung",
+                    answer: detail,
+                  },
+                ]}
+              />
+            ),
+          }),
+        )
+      : []),
+    detailsRequired &&
+      createInfoBoxItem({
+        route: dokumentation_veroeffentlichung,
+        content: documentationData.interoperabilityMeta ? (
+          <InteroperabilityMetaContent
+            interoperabilityMeta={documentationData.interoperabilityMeta}
+          />
+        ) : null,
+      }),
+  ].filter(Boolean) as InfoBoxProps[];
+}
+
 export function DocumentationSummary() {
   const { routes, previousUrl, nextUrl, prinzips } =
     useDocumentationNavigation();
@@ -273,6 +442,7 @@ export function DocumentationSummary() {
         },
       });
     }),
+    ...createInteroperabilityInfoBoxItems(documentationData),
   ];
 
   return (
@@ -291,26 +461,5 @@ export function DocumentationSummary() {
       </InfoBoxList>
       <DocumentationActions previousUrl={previousUrl} nextUrl={nextUrl} />
     </>
-  );
-}
-
-export default function Route() {
-  return <DocumentationSummary />;
-}
-
-// Astro page export
-import { DocumentationPageShell } from "@/components/DocumentationPageShell";
-
-export function ZusammenfassungPage({
-  prinzips,
-  currentUrl,
-}: Readonly<{
-  prinzips: PrinzipWithAspekteAndExample[];
-  currentUrl: string;
-}>) {
-  return (
-    <DocumentationPageShell prinzips={prinzips} currentUrl={currentUrl}>
-      <DocumentationSummary />
-    </DocumentationPageShell>
   );
 }

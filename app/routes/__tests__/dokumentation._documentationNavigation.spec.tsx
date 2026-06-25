@@ -1,24 +1,31 @@
 // Import mocks first
 import "./utils/mockLocalStorageVersioned";
 // End of mocks
-
 import {
   dokumentation,
+  dokumentation_absenden,
   dokumentation_beteiligungsformate,
+  dokumentation_bewertungRechtlich,
+  dokumentation_euInteroperabilitaetsbezug,
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
+  dokumentation_verbindlicheAnforderungen,
+  dokumentation_veroeffentlichung,
+  dokumentation_zusammenfassung,
 } from "@/config/routes";
 import "@testing-library/jest-dom";
 import { act, render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { stubResizingFunctionality } from "~/routes/__tests__/utils/stubResizingFunctionality.ts";
 import { LayoutWithDocumentationNavigation } from "~/routes/dokumentation._documentationNavigation";
 import {
   type Route,
-  type RouteGroup,
   useDocumentationNavigation,
 } from "~/routes/dokumentation/DocumentationNavigationContext";
+import { isIeaAssessmentEnabled } from "~/utils/features.ts";
 import { readDataFromLocalStorage } from "~/utils/localStorageVersioned";
+import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import type {
   DocumentationData,
@@ -30,27 +37,47 @@ import {
   DATA_SCHEMA_VERSION_V2,
 } from "../dokumentation/documentationDataSchema";
 
-const mockRoutes: (RouteGroup | Route)[] = [
-  dokumentation_hinweise,
-  dokumentation_regelungsvorhabenTitel,
-  dokumentation_beteiligungsformate,
-  {
-    title: "Prinzipien",
-    routes: [
-      {
-        title: "Prinzip A",
-        path: `${dokumentation.path}/prinzipA`,
-      },
-    ],
-  },
-];
+/**
+ * A minimal prinzip stub so the nav renders a "Prinzip A" entry,
+ * matching the `id: "${dokumentation.path}/prinzipA"` used in test data below.
+ */
+const mockPrinzip: PrinzipWithAspekte = {
+  documentId: `${dokumentation.path}/prinzipA`,
+  Name: "Prinzip A",
+  URLBezeichnung: "prinzipA",
+  Kurzbezeichnung: "P1",
+  Beschreibung: [],
+  Nummer: 1,
+  order: 1,
+  Aspekte: [],
+};
 
 /**
- * Routes that are relevant for forms interaction, excluding the notes page, and summary/send steps.
+ * Flat list of routes the component renders in its default state
+ * (prinzips=[mockPrinzip], no EU interoperability data → all Bewertung routes disabled/skipped).
  */
-const flattenedMockRoutes = mockRoutes.flatMap((route) =>
-  "routes" in route ? route.routes : route,
-);
+const flattenedMockRoutes: Route[] = isIeaAssessmentEnabled
+  ? [
+      dokumentation_hinweise,
+      dokumentation_regelungsvorhabenTitel,
+      dokumentation_beteiligungsformate,
+      { title: "Prinzip A", path: `${dokumentation.path}/prinzipA` },
+      dokumentation_euInteroperabilitaetsbezug,
+      dokumentation_zusammenfassung,
+      dokumentation_absenden,
+    ]
+  : [
+      dokumentation_hinweise,
+      dokumentation_regelungsvorhabenTitel,
+      dokumentation_beteiligungsformate,
+      { title: "Prinzip A", path: `${dokumentation.path}/prinzipA` },
+      dokumentation_zusammenfassung,
+      dokumentation_absenden,
+    ];
+
+/**
+ * Routes that are relevant for forms interaction, excluding the notes page.
+ */
 
 const documentationFormRoutes = flattenedMockRoutes.filter(
   (route) => route.path !== dokumentation_hinweise.path,
@@ -63,10 +90,13 @@ type ValidationScenario = {
     completedTitle: boolean;
     completedParticipation: boolean;
     completedPrinciples: boolean;
+    completedInteroperability: boolean;
+    enabledInteroperability: boolean;
 
     warningTitle: boolean;
     warningParticipation: boolean;
     warningPrinciples: boolean;
+    warningInteroperabilityLevelLegal: boolean;
   };
 };
 
@@ -77,10 +107,18 @@ const validationScenarios: ValidationScenario[] = [
       version: DATA_SCHEMA_VERSION_V1,
       policyTitle: {
         title: "Valid Title",
+        organization: "Valid Organization",
       },
       participation: {
         formats: "Valid Formats",
         results: "Valid Results",
+      },
+      euInteroperabilityOutcome: { outcomeId: "REQUIRED" },
+      interoperabilityAssessment: {
+        legal: { rating: "positive", detail: "Valid legal detail" },
+        organizational: { rating: "", detail: "" },
+        semantic: { rating: "", detail: "" },
+        technical: { rating: "", detail: "" },
       },
       principles: [
         {
@@ -101,10 +139,12 @@ const validationScenarios: ValidationScenario[] = [
       completedTitle: false, // is current route so no states are shown
       completedParticipation: true,
       completedPrinciples: true,
-
+      completedInteroperability: true,
+      enabledInteroperability: isIeaAssessmentEnabled,
       warningTitle: false,
       warningParticipation: false,
       warningPrinciples: false,
+      warningInteroperabilityLevelLegal: false,
     },
   },
   {
@@ -116,10 +156,12 @@ const validationScenarios: ValidationScenario[] = [
       completedTitle: false, // is current route so no states are shown
       completedParticipation: false,
       completedPrinciples: false,
-
+      completedInteroperability: false,
+      enabledInteroperability: false,
       warningTitle: false,
       warningParticipation: false,
       warningPrinciples: false,
+      warningInteroperabilityLevelLegal: false,
     },
   },
   {
@@ -128,10 +170,18 @@ const validationScenarios: ValidationScenario[] = [
       version: DATA_SCHEMA_VERSION_V1,
       policyTitle: {
         title: "",
+        organization: "",
       },
       participation: {
         formats: "Valid Formats",
         results: "Valid Results",
+      },
+      euInteroperabilityOutcome: { outcomeId: "REQUIRED" },
+      interoperabilityAssessment: {
+        legal: { rating: "positive", detail: "" },
+        organizational: { rating: "", detail: "" },
+        semantic: { rating: "", detail: "" },
+        technical: { rating: "", detail: "" },
       },
       principles: [
         {
@@ -152,10 +202,12 @@ const validationScenarios: ValidationScenario[] = [
       completedTitle: false, // is current route so no states are shown
       completedParticipation: true,
       completedPrinciples: false,
-
+      completedInteroperability: false,
+      enabledInteroperability: isIeaAssessmentEnabled,
       warningTitle: false,
       warningParticipation: false,
       warningPrinciples: true,
+      warningInteroperabilityLevelLegal: true,
     },
   },
 ];
@@ -175,8 +227,7 @@ function renderPage({ path }: Route) {
   render(
     <DocumentationDataProvider>
       <LayoutWithDocumentationNavigation
-        routes={mockRoutes}
-        prinzips={[]}
+        prinzips={[mockPrinzip]}
         currentUrl={path}
       >
         <DummyElement />
@@ -188,13 +239,18 @@ function renderPage({ path }: Route) {
 const getNav = () =>
   screen.getByRole("navigation", { name: "Seitennavigation" });
 
-const getTitel = () => within(getNav()).getByText("Regelungsvorhaben Titel");
+const getTitel = () => within(getNav()).getByText("Regelungsvorhaben");
 
 const getBeteiligungsformate = () =>
   within(getNav()).getByRole("link", { name: "Beteiligungsformate" });
 
 const getPrinzipA = () =>
   within(getNav()).getByRole("link", { name: "Prinzip A" });
+
+const getRechtlicheInteroperabilitaet = () =>
+  within(getNav()).getByRole("link", {
+    name: dokumentation_bewertungRechtlich.title,
+  });
 
 const expectCompleted = (element: HTMLElement) => {
   expect(element).toHaveAccessibleDescription(
@@ -230,27 +286,7 @@ const expectNotWarning = (element: HTMLElement) => {
 
 describe("navigation on pages of documentation", () => {
   beforeEach(() => {
-    Object.defineProperty(globalThis, "matchMedia", {
-      writable: true,
-      value: vi.fn().mockImplementation((query: string) => ({
-        matches: false,
-        media: query,
-        onchange: null,
-        addListener: vi.fn(),
-        removeListener: vi.fn(),
-        addEventListener: vi.fn(),
-        removeEventListener: vi.fn(),
-        dispatchEvent: vi.fn(),
-      })),
-    });
-    vi.stubGlobal(
-      "ResizeObserver",
-      class {
-        observe = vi.fn();
-        unobserve = vi.fn();
-        disconnect = vi.fn();
-      },
-    );
+    stubResizingFunctionality();
   });
 
   afterEach(() => {
@@ -288,11 +324,19 @@ describe("navigation on pages of documentation", () => {
     const navigation = screen.getByRole("navigation", {
       name: "Seitennavigation",
     });
-    for (const title of [
-      dokumentation_regelungsvorhabenTitel.title,
-      dokumentation_beteiligungsformate.title,
-      "Prinzipien",
-    ]) {
+    const topLevelItems = isIeaAssessmentEnabled
+      ? [
+          dokumentation_regelungsvorhabenTitel.title,
+          dokumentation_beteiligungsformate.title,
+          "Prinzipien",
+          "EU-Interoperabilität",
+        ]
+      : [
+          dokumentation_regelungsvorhabenTitel.title,
+          dokumentation_beteiligungsformate.title,
+          "Prinzipien",
+        ];
+    for (const title of topLevelItems) {
       const item = within(navigation).getByText(title);
       expect(item).toHaveAttribute("aria-disabled");
       expect(item).not.toHaveAttribute("href");
@@ -335,6 +379,12 @@ describe("navigation on pages of documentation", () => {
           if (expected.completedParticipation)
             expectCompleted(getBeteiligungsformate());
           else expectNotCompleted(getBeteiligungsformate());
+          if (expected.enabledInteroperability) {
+            if (expected.completedInteroperability)
+              expectCompleted(getRechtlicheInteroperabilitaet());
+            else expectNotCompleted(getRechtlicheInteroperabilitaet());
+          }
+
           if (expected.completedPrinciples) expectCompleted(getPrinzipA());
           else expectNotCompleted(getPrinzipA());
         });
@@ -345,6 +395,11 @@ describe("navigation on pages of documentation", () => {
           if (expected.warningParticipation)
             expectWarning(getBeteiligungsformate());
           else expectNotWarning(getBeteiligungsformate());
+          if (expected.enabledInteroperability) {
+            if (expected.warningInteroperabilityLevelLegal)
+              expectWarning(getRechtlicheInteroperabilitaet());
+            else expectNotWarning(getRechtlicheInteroperabilitaet());
+          }
           if (expected.warningPrinciples) expectWarning(getPrinzipA());
           else expectNotWarning(getPrinzipA());
         });
@@ -360,10 +415,21 @@ describe("navigation on pages of documentation", () => {
           version: DATA_SCHEMA_VERSION_V2,
           policyTitle: {
             title: "Valid Title",
+            organization: "Valid Organization",
           },
           participation: {
             formats: "Valid Formats",
             results: "Valid Results",
+          },
+          euInteroperabilityOutcome: { outcomeId: "REQUIRED" },
+          interoperabilityAssessment: {
+            legal: { rating: "positive", detail: "Valid legal detail" },
+            organizational: {
+              rating: "positive",
+              detail: "Valid organizational detail",
+            },
+            semantic: { rating: "positive", detail: "Valid semantic detail" },
+            technical: { rating: "positive", detail: "Valid technical detail" },
           },
           principles: [
             {
@@ -378,10 +444,12 @@ describe("navigation on pages of documentation", () => {
           completedTitle: false, // is current route so no states are shown
           completedParticipation: true,
           completedPrinciples: true,
-
+          completedInteroperability: true,
+          enabledInteroperability: isIeaAssessmentEnabled,
           warningTitle: false,
           warningParticipation: false,
           warningPrinciples: false,
+          warningInteroperabilityLevelLegal: false,
         },
       },
       {
@@ -393,10 +461,12 @@ describe("navigation on pages of documentation", () => {
           completedTitle: false,
           completedParticipation: false,
           completedPrinciples: false,
-
+          completedInteroperability: false,
+          enabledInteroperability: false,
           warningTitle: false,
           warningParticipation: false,
           warningPrinciples: false,
+          warningInteroperabilityLevelLegal: false,
         },
       },
       {
@@ -405,10 +475,18 @@ describe("navigation on pages of documentation", () => {
           version: DATA_SCHEMA_VERSION_V2,
           policyTitle: {
             title: "",
+            organization: "",
           },
           participation: {
             formats: "Valid Formats",
             results: "Valid Results",
+          },
+          euInteroperabilityOutcome: { outcomeId: "REQUIRED" },
+          interoperabilityAssessment: {
+            legal: { rating: "positive", detail: "" },
+            organizational: { rating: "", detail: "" },
+            semantic: { rating: "", detail: "" },
+            technical: { rating: "", detail: "" },
           },
           principles: [
             {
@@ -423,10 +501,12 @@ describe("navigation on pages of documentation", () => {
           completedTitle: false, // is current route so no states are shown
           completedParticipation: true,
           completedPrinciples: false, // aspects empty -> invalid in V2
-
+          completedInteroperability: false,
+          enabledInteroperability: isIeaAssessmentEnabled,
           warningTitle: false,
           warningParticipation: false,
           warningPrinciples: true, // data exists but invalid
+          warningInteroperabilityLevelLegal: true,
         },
       },
     ];
@@ -450,6 +530,11 @@ describe("navigation on pages of documentation", () => {
           if (expected.completedParticipation)
             expectCompleted(getBeteiligungsformate());
           else expectNotCompleted(getBeteiligungsformate());
+          if (expected.enabledInteroperability) {
+            if (expected.completedInteroperability)
+              expectCompleted(getRechtlicheInteroperabilitaet());
+            else expectNotCompleted(getRechtlicheInteroperabilitaet());
+          }
           if (expected.completedPrinciples) expectCompleted(getPrinzipA());
           else expectNotCompleted(getPrinzipA());
         });
@@ -460,8 +545,124 @@ describe("navigation on pages of documentation", () => {
           if (expected.warningParticipation)
             expectWarning(getBeteiligungsformate());
           else expectNotWarning(getBeteiligungsformate());
+          if (expected.enabledInteroperability) {
+            if (expected.warningInteroperabilityLevelLegal)
+              expectWarning(getRechtlicheInteroperabilitaet());
+            else expectNotWarning(getRechtlicheInteroperabilitaet());
+          }
           if (expected.warningPrinciples) expectWarning(getPrinzipA());
           else expectNotWarning(getPrinzipA());
+        });
+      },
+    );
+  });
+
+  describe("skips disabled routes in nextUrl and previousUrl", () => {
+    /**
+     * Routes that have `validate: skipIfNoInteroperabilityRequired` in routeDefinitions:
+     * verbindlicheAnforderungen, bewertungRechtlich, bewertungOrganisatorisch,
+     * bewertungSemantisch, bewertungTechnisch.
+     *
+     * When euInteroperabilityOutcome is absent (or not "REQUIRED"), all of these
+     * should be skipped — so next from euInteroperabilitaetsbezug goes straight
+     * to zusammenfassung, and previous from zusammenfassung goes straight back
+     * to euInteroperabilitaetsbezug.
+     */
+
+    function renderPageWithRoutes(path: string) {
+      function DummyElement() {
+        const { nextUrl, previousUrl } = useDocumentationNavigation();
+        return (
+          <>
+            <a href={previousUrl}>Zurück</a>
+            <a href={nextUrl}>Weiter</a>
+          </>
+        );
+      }
+
+      render(
+        <DocumentationDataProvider>
+          <LayoutWithDocumentationNavigation prinzips={[]} currentUrl={path}>
+            <DummyElement />
+          </LayoutWithDocumentationNavigation>
+        </DocumentationDataProvider>,
+      );
+    }
+
+    describe.runIf(isIeaAssessmentEnabled)(
+      "when interoperability is NOT required (disabled routes)",
+      () => {
+        beforeEach(() => {
+          // No euInteroperabilityOutcome set → all bewertung routes are disabled
+          vi.mocked(
+            readDataFromLocalStorage<DocumentationData<V2>>,
+          ).mockReturnValue({ version: DATA_SCHEMA_VERSION_V2 });
+        });
+
+        it("nextUrl skips all disabled EU routes when on euInteroperabilitaetsbezug", () => {
+          act(() => {
+            renderPageWithRoutes(dokumentation_euInteroperabilitaetsbezug.path);
+          });
+          expect(screen.getByRole("link", { name: "Weiter" })).toHaveAttribute(
+            "href",
+            dokumentation_zusammenfassung.path,
+          );
+        });
+
+        it("previousUrl skips all disabled EU routes when on zusammenfassung", () => {
+          act(() => {
+            renderPageWithRoutes(dokumentation_zusammenfassung.path);
+          });
+          expect(screen.getByRole("link", { name: "Zurück" })).toHaveAttribute(
+            "href",
+            dokumentation_euInteroperabilitaetsbezug.path,
+          );
+        });
+
+        it("nextUrl is not affected for routes before the disabled block", () => {
+          act(() => {
+            renderPageWithRoutes(dokumentation_beteiligungsformate.path);
+          });
+          // beteiligungsformate is the last route before the EU group;
+          // euInteroperabilitaetsbezug is NOT disabled, so it is navigated to normally
+          expect(screen.getByRole("link", { name: "Weiter" })).toHaveAttribute(
+            "href",
+            dokumentation_euInteroperabilitaetsbezug.path,
+          );
+        });
+      },
+    );
+
+    describe.runIf(isIeaAssessmentEnabled)(
+      "when interoperability IS required (routes enabled)",
+      () => {
+        beforeEach(() => {
+          vi.mocked(
+            readDataFromLocalStorage<DocumentationData<V2>>,
+          ).mockReturnValue({
+            version: DATA_SCHEMA_VERSION_V2,
+            euInteroperabilityOutcome: { outcomeId: "REQUIRED" },
+          });
+        });
+
+        it("nextUrl does NOT skip disabled EU routes — goes to verbindlicheAnforderungen", () => {
+          act(() => {
+            renderPageWithRoutes(dokumentation_euInteroperabilitaetsbezug.path);
+          });
+          expect(screen.getByRole("link", { name: "Weiter" })).toHaveAttribute(
+            "href",
+            dokumentation_verbindlicheAnforderungen.path,
+          );
+        });
+
+        it("previousUrl does NOT skip — goes from zusammenfassung to the last interoperability step", () => {
+          act(() => {
+            renderPageWithRoutes(dokumentation_zusammenfassung.path);
+          });
+          expect(screen.getByRole("link", { name: "Zurück" })).toHaveAttribute(
+            "href",
+            dokumentation_veroeffentlichung.path,
+          );
         });
       },
     );

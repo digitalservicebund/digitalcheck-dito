@@ -36,7 +36,10 @@ const TimelineItem = Timeline.Item;
       {
         news.items.map((item) => (
           <TimelineItem bullet>
-            <TimelineItemContent {...item} badge={{ children: item.badge.text }} />
+            <TimelineItemContent
+              {...item}
+              badge={{ children: item.badge.text }}
+            />
           </TimelineItem>
         ))
       }

@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react";
-import { it, vi } from "vitest";
+import { expect, it, vi } from "vitest";
 import { readVersionedDataFromLocalStorage } from "~/utils/localStorageVersioned";
 import { ResultType } from "../vorpruefung.ergebnis/PreCheckResult";
 import { usePreCheckData } from "./preCheckDataHook";

@@ -1,12 +1,143 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import InteroperabelIndexPage from "~/routes/interoperabel._index";
+import Tabs from "@/components/tabs/Tabs.astro";
+import { interoperabel_faq } from "@/config/routes";
+import { QuizOutlined as QuizIcon } from "@digitalservicebund/icons";
+import { LinkButton } from "~/components/Button";
+import Container from "~/components/Container";
+import ContentWrapper from "~/components/ContentWrapper.tsx";
+import Heading from "~/components/Heading";
+import Hero from "~/components/Hero";
+import Image from "~/components/Image";
+import InfoBox from "~/components/InfoBox.tsx";
+import RichText from "~/components/RichText";
+import { interoperability } from "~/resources/content/interoperabel";
+import { contact } from "~/resources/content/shared/contact";
+import EuRechtTab from "./_EuRechtTab.astro";
+import HintergrundTab from "./_HintergrundTab.astro";
+import InteroperableLoesungenTab from "./_InteroperableLoesungenTab.astro";
+import UeberblickTab from "./_UeberblickTab.astro";
+import { tabLabels } from "./_tabs";
 
 export const frontmatter = {
   title: "Interoperable Lösungen",
 };
+
+const {
+  overviewTabLabel,
+  backgroundTabLabel,
+  euLawTabLabel,
+  interoperableSolutionsTabLabel,
+} = tabLabels;
 ---
 
 <Layout title={frontmatter.title}>
-  <InteroperabelIndexPage client:load />
+  <main>
+    <Hero
+      title={interoperability.headline}
+      subtitle={interoperability.content}
+    />
+
+    <div class="bg-blue-300">
+      <Container className="flex flex-col py-0 lg:h-[626px] lg:flex-row">
+        <div class="py-32 sm:py-48 lg:w-1/2 lg:self-center lg:pr-48">
+          <Heading
+            tagName="h2"
+            text={interoperability.andDigitalReadiness.headline}
+            className="mb-8"
+          />
+          <RichText markdown={interoperability.andDigitalReadiness.content} />
+        </div>
+        <div class="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">
+          <div
+            class="flex h-full w-[630px] flex-col justify-center bg-[#9FB6C6] align-middle lg:w-[50vw] [&>img]:object-contain lg:[&>img]:h-[550px]"
+          >
+            <Image
+              url={interoperability.andDigitalReadiness.image.url}
+              alternativeText={interoperability.andDigitalReadiness.image
+                .alternativeText}
+            />
+          </div>
+        </div>
+      </Container>
+      <div class="sm:hidden">
+        <Image
+          url={interoperability.andDigitalReadiness.image.url}
+          alternativeText={interoperability.andDigitalReadiness.image
+            .alternativeText}
+        />
+      </div>
+    </div>
+    <ContentWrapper compactTopSpacing className="mb-80">
+      <Tabs
+        tabs={[
+          overviewTabLabel,
+          backgroundTabLabel,
+          euLawTabLabel,
+          interoperableSolutionsTabLabel,
+        ]}
+        searchParams
+      >
+        <UeberblickTab data-tab-panel={overviewTabLabel} />
+        <HintergrundTab data-tab-panel={backgroundTabLabel} />
+        <EuRechtTab data-tab-panel={euLawTabLabel} />
+        <InteroperableLoesungenTab
+          data-tab-panel={interoperableSolutionsTabLabel}
+        />
+      </Tabs>
+    </ContentWrapper>
+
+    <div class="px-[clamp(1rem, 5vw, 3rem)] bg-blue-100 py-48">
+      <Container>
+        <Container overhangingBackground className="bg-white">
+          <Heading
+            tagName="h2"
+            text={interoperability.resources.headline}
+            className="mb-8"
+          />
+          <p>{interoperability.resources.subtitle}</p>
+          {
+            interoperability.resources.groups.map((group) => (
+              <div class="mt-10 p-24 pl-0">
+                <div class="mb-10 flex items-center">
+                  <group.icon className="mr-10 size-32" />
+                  <Heading
+                    tagName="h3"
+                    look="ds-label-01-bold"
+                    text={group.title}
+                  />
+                </div>
+                <p class="mb-20">{group.subtitle}</p>
+                <RichText markdown={group.content} />
+              </div>
+            ))
+          }
+        </Container>
+      </Container>
+    </div>
+
+    <Container className="py-80">
+      <InfoBox visual={{ type: "icon", Icon: QuizIcon }}>
+        <Heading tagName="h3">Häufig gestellte Fragen</Heading>
+        <p>
+          Weitere Informationen zur Umsetzung der EU-Interoperabilitäts-Vorgaben
+          und zur Erarbeitung von Regelungen finden Sie in unseren Bereich
+          “Fragen und Antworten”.
+        </p>
+        <p>
+          Wenn Sie weitere Fragen haben, dann kontaktieren Sie uns unter:{" "}
+          <a href={`mailto:${contact.interoperabilityEmail}`}>
+            {contact.interoperabilityEmail}
+          </a>{" "}
+          oder unter{" "}
+          <a href={`tel:${contact.phone}`}>{contact.phoneDisplay}</a>.
+        </p>
+        <div class="mt-24">
+          <LinkButton href={interoperabel_faq.path} look="tertiary">
+            Zu Fragen und Antworten{" "}
+          </LinkButton>
+        </div>
+      </InfoBox>
+    </Container>
+  </main>
 </Layout>

@@ -17,7 +17,7 @@ permissions:
 
 env:
   PACKAGE_NAME: digitalcheck-dito
-  IMAGE_NAME: digitalservicebund/digitalcheck-dito
+  IMAGE_REF: ghcr.io/digitalservicebund/digitalcheck-dito
   ENVIRONMENT: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
 
 jobs:
@@ -46,8 +46,23 @@ jobs:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
 
+  build-docker:
+    uses: ./.github/workflows/build-docker.yml
+    with:
+      # env context is unavailable in with: when calling a reusable workflow
+      dockerImage: ghcr.io/digitalservicebund/digitalcheck-dito:${{ github.sha }}
+      dockerImageArtifact: docker-image
+    secrets:
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+
   run-e2e-a11y-tests:
+    needs: [build-docker]
     uses: ./.github/workflows/run-e2e-a11y-tests.yml
+    with:
+      # env context is unavailable in with: when calling a reusable workflow
+      dockerImage: ghcr.io/digitalservicebund/digitalcheck-dito:${{ github.sha }}
+      dockerImageArtifact: docker-image
     secrets:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
@@ -62,7 +77,7 @@ jobs:
       pages: write
       id-token: write
 
-  build-and-push-image:
+  push-image:
     needs: [vulnerability-scan, secret-scan, check-and-test, run-e2e-a11y-tests]
     runs-on: ubuntu-latest
     permissions:
@@ -80,21 +95,23 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@d7f5e7f509e45cec5c76c4d5afdd7de93d0b3df5 # v4.1.0
-
-      - name: Build and push
-        uses: docker/build-push-action@f9f3042f7e2789586610d6e8b85c8f03e5195baf # v7.2.0
+      - name: Download Docker image
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
-          context: .
-          push: ${{ github.event_name != 'pull_request' && ( github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/staging/'))}}
-          tags: |
-            ghcr.io/${{ env.IMAGE_NAME }}
-            ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          build-args: COMMIT_SHA=${{ github.sha }}
-          sbom: true
+          name: docker-image
+          path: /tmp
+
+      - name: Load and push Docker image
+        if: ${{ github.event_name != 'pull_request' && ( github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/staging/'))}}
+        run: |
+          docker load < /tmp/docker-image.tar.gz
+          docker tag ${{ env.IMAGE_REF }}:${{ github.sha }} ${{ env.IMAGE_REF }}
+          docker push ${{ env.IMAGE_REF }}
+          docker push ${{ env.IMAGE_REF }}:${{ github.sha }}
+
+      - name: Load Docker image (pull request)
+        if: ${{ github.event_name == 'pull_request' }}
+        run: docker load < /tmp/docker-image.tar.gz
 
       - name: Generate cosign vulnerability scan record
         # Third-party action, pin to commit SHA
@@ -103,7 +120,7 @@ jobs:
         env:
           TRIVY_DB_REPOSITORY: ghcr.io/aquasecurity/trivy-db,public.ecr.aws/aquasecurity/trivy-db
         with:
-          image-ref: ghcr.io/${{ env.IMAGE_NAME }}
+          image-ref: ${{ env.IMAGE_REF }}:${{ github.sha }}
           format: "cosign-vuln"
           output: "${{ env.PACKAGE_NAME }}-vulnerabilities.json"
 
@@ -125,11 +142,11 @@ jobs:
 
       - name: Sign the published Docker image
         if: ${{ github.event_name != 'pull_request' && ( github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/staging/')) }}
-        run: cosign sign --yes ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+        run: cosign sign --yes ${{ env.IMAGE_REF }}:${{ github.sha }}
 
       - name: Attest the vulnerability scan
         if: ${{ github.event_name != 'pull_request' && ( github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/staging/')) }}
-        run: cosign attest --yes --replace --predicate ${{ env.PACKAGE_NAME }}-vulnerabilities.json --type vuln ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+        run: cosign attest --yes --replace --predicate ${{ env.PACKAGE_NAME }}-vulnerabilities.json --type vuln ${{ env.IMAGE_REF }}:${{ github.sha }}
 
       - name: Send failure to Slack
         uses: digitalservicebund/notify-on-failure-gha@8570032b46ae9c2b976ec41567f595746fa44b4e # v1.6.1
@@ -139,7 +156,7 @@ jobs:
           SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
 
   deploy-to-staging-stackit:
-    needs: [build-and-push-image]
+    needs: [push-image]
     if: github.ref == 'refs/heads/main'
     permissions:
       packages: read
@@ -159,7 +176,7 @@ jobs:
       SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
 
   deploy-to-production-stackit:
-    needs: [build-and-push-image]
+    needs: [push-image]
     if: github.ref == 'refs/heads/main'
     permissions:
       packages: read

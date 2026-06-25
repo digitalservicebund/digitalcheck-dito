@@ -1,0 +1,62 @@
+name: Build Docker
+
+on:
+  workflow_call:
+    inputs:
+      dockerImage:
+        required: true
+        type: string
+      dockerImageArtifact:
+        required: false
+        type: string
+        default: docker-image
+        description: "The name of the Docker image artifact to upload."
+    secrets:
+      SLACK_BOT_TOKEN:
+        required: true
+      SLACK_CHANNEL_ID:
+        required: true
+
+env:
+  PACKAGE_NAME: digitalcheck-dito
+
+permissions:
+  contents: read
+
+jobs:
+  build-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@d7f5e7f509e45cec5c76c4d5afdd7de93d0b3df5 # v4.1.0
+
+      - name: Build app Docker container
+        uses: docker/build-push-action@f9f3042f7e2789586610d6e8b85c8f03e5195baf # v7.2.0
+        with:
+          context: .
+          load: true
+          tags: ${{ inputs.dockerImage }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Save Docker image as artifact
+        env:
+          DOCKER_IMAGE: ${{ inputs.dockerImage }}
+        run: docker save "$DOCKER_IMAGE" | gzip > /tmp/docker-image.tar.gz
+
+      - name: Upload Docker image artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: ${{ inputs.dockerImageArtifact }}
+          path: /tmp/docker-image.tar.gz
+          retention-days: 1
+
+      - name: Send failure to Slack
+        uses: digitalservicebund/notify-on-failure-gha@8570032b46ae9c2b976ec41567f595746fa44b4e # v1.6.1
+        if: failure()
+        with:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}

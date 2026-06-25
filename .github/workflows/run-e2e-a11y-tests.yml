@@ -3,6 +3,14 @@ name: Run E2E and A11y Tests
 on:
   workflow_call:
     inputs:
+      dockerImage:
+        required: true
+        type: string
+      dockerImageArtifact:
+        required: false
+        type: string
+        default: docker-image
+        description: "The name of the Docker image artifact to download."
       nightlyTests:
         required: false
         type: boolean
@@ -48,7 +56,7 @@ jobs:
 
       - name: Cache Playwright dependencies
         id: cache-playwright-deps
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
+        uses: actions/cache@2c8a9bd7457de244a408f35966fab2fb45fda9c8 # v6.0.0
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -60,12 +68,24 @@ jobs:
           'false'
         run: pnpm exec playwright install --with-deps
 
+      - name: Download Docker image
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: ${{ inputs.dockerImageArtifact }}
+          path: /tmp
+
+      - name: Load Docker image
+        run: docker load < /tmp/docker-image.tar.gz
+
       - name: Run nightly E2E tests
         if: inputs.nightlyTests
         id: e2e-nightly
         run: pnpm exec playwright test tests/e2e/
           --config=tests/playwright-nightly.config.ts --shard=${{
           matrix.shardIndex }}/${{ matrix.shardTotal }}
+        env:
+          PLAYWRIGHT_USE_DOCKER: "true"
+          PLAYWRIGHT_DOCKER_IMAGE: ${{ inputs.dockerImage }}
 
       - name: Run E2E tests
         if: ${{ !inputs.nightlyTests }}
@@ -76,6 +96,8 @@ jobs:
           matrix.shardTotal }}
         env:
           NODE_OPTIONS: --trace-warnings
+          PLAYWRIGHT_USE_DOCKER: "true"
+          PLAYWRIGHT_DOCKER_IMAGE: ${{ inputs.dockerImage }}
 
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         if:
@@ -93,11 +115,8 @@ jobs:
           --config=tests/playwright-nightly.config.ts --shard=${{
           matrix.shardIndex }}/${{ matrix.shardTotal }}
         env:
-          # Use a different port (from the one used with E2E tests) to workaround problem in CI/GitHub Actions,
-          # starting to occur with playwright/test 1.28.0:
-          # Error: http://localhost:4173 is already used ...
-          # See https://github.com/digitalservicebund/typescript-vite-application-template/actions/runs/3486985178/jobs/5834089375
-          VITE_PORT: 4183
+          PLAYWRIGHT_USE_DOCKER: "true"
+          PLAYWRIGHT_DOCKER_IMAGE: ${{ inputs.dockerImage }}
 
       - name: Run A11y tests
         if: ${{ !inputs.nightlyTests }}
@@ -107,7 +126,8 @@ jobs:
           --project="Desktop Chrome" --shard=${{ matrix.shardIndex }}/${{
           matrix.shardTotal }}
         env:
-          VITE_PORT: 4183
+          PLAYWRIGHT_USE_DOCKER: "true"
+          PLAYWRIGHT_DOCKER_IMAGE: ${{ inputs.dockerImage }}
 
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         if:

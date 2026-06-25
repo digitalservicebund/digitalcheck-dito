@@ -6,6 +6,7 @@ import { act, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { dokumentation_hinweise } from "@/config/routes";
+import { navigate } from "astro:transitions/client";
 import type React from "react";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general.ts";
@@ -17,6 +18,10 @@ import { DocumentationContinueActions } from "./DocumentationContinueActions";
 import { DocumentationDataProvider } from "./DocumentationDataProvider";
 import type { DocumentationData, V1 } from "./documentationDataSchema";
 import { DATA_SCHEMA_VERSION_V1 } from "./documentationDataSchema";
+
+vi.mock("astro:transitions/client", () => ({
+  navigate: vi.fn(),
+}));
 
 const { mockDownloadDocumentation } = vi.hoisted(() => ({
   mockDownloadDocumentation: vi.fn(),
@@ -53,7 +58,7 @@ describe("DocumentationContinueActions", () => {
         readDataFromLocalStorage<DocumentationData<V1>>,
       ).mockReturnValue({
         version: DATA_SCHEMA_VERSION_V1,
-        policyTitle: { title: "Test" },
+        policyTitle: { title: "Test", organization: "Organization" },
       });
       renderWithRouter(<DocumentationContinueActions prinzips={[]} />);
     });
@@ -111,7 +116,9 @@ describe("DocumentationContinueActions", () => {
       act(() => confirmButton.click());
 
       expect(vi.mocked(removeFromLocalStorage)).toHaveBeenCalled();
-      expect(globalThis.location.href).toBe(dokumentation_hinweise.path);
+      expect(vi.mocked(navigate)).toHaveBeenCalledWith(
+        dokumentation_hinweise.path,
+      );
     });
   });
 
