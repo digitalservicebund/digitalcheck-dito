@@ -50,64 +50,59 @@ export function DocumentationPrinciple({
   });
 
   return (
-    <>
-      <div className="max-w-a11y space-y-40">
-        <div className="space-y-8">
-          <Badge principleNumber={prinzip.Nummer}>
-            Prinzip {prinzip.order}
-          </Badge>
-          <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
-            {prinzip.Name}
-            <HelpButton
-              sectionId="1-prinzip"
-              title={`Hinweis zu „${prinzip.Name}“`}
-              className="h-28 w-28"
-            >
-              <BlocksRenderer content={prinzip.Hilfetext!} />
-              <a
-                href={
-                  methoden_fuenfPrinzipien.path + "/" + prinzip.URLBezeichnung
-                }
-              >
-                Mehr zum Prinzip
-              </a>
-            </HelpButton>
-          </Heading>
-
-          {prinzip.Kurzbeschreibung && (
-            <BlocksRenderer content={prinzip.Kurzbeschreibung} />
-          )}
-        </div>
-
-        <form {...form.getFormProps()} className="space-y-40">
-          <Heading
-            id="question-label"
-            tagName="h2"
-            look="ds-heading-03-reg"
-            className="mb-16"
+    <div className="max-w-a11y space-y-40">
+      <div className="space-y-8">
+        <Badge principleNumber={prinzip.Nummer}>Prinzip {prinzip.order}</Badge>
+        <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
+          {prinzip.Name}
+          <HelpButton
+            sectionId="1-prinzip"
+            title={`Hinweis zu „${prinzip.Name}“`}
           >
-            Schafft das Regelungsvorhaben die rechtlichen Voraussetzungen für
-            die Umsetzung des Prinzips?
-          </Heading>
-          <RadioGroup
-            aria-labelledby="question-label"
-            scope={form.scope("answer")}
-            options={radioOptions.map((option) => ({
-              value: option,
-              label: option,
-            }))}
-            warningInsteadOfError
-          />
+            <BlocksRenderer content={prinzip.Hilfetext!} />
+            <a
+              href={
+                methoden_fuenfPrinzipien.path + "/" + prinzip.URLBezeichnung
+              }
+            >
+              Mehr zum Prinzip
+            </a>
+          </HelpButton>
+        </Heading>
 
-          <DocumentationActions
-            previousUrl={previousUrl}
-            submit
-            showDownloadDraftButton
-            showSavingTip
-            prinzips={prinzips}
-          />
-        </form>
+        {prinzip.Kurzbeschreibung && (
+          <BlocksRenderer content={prinzip.Kurzbeschreibung} />
+        )}
       </div>
-    </>
+
+      <form {...form.getFormProps()} className="space-y-40">
+        <Heading
+          id="question-label"
+          tagName="h2"
+          look="ds-heading-03-reg"
+          className="mb-16"
+        >
+          Schafft das Regelungsvorhaben die rechtlichen Voraussetzungen für die
+          Umsetzung des Prinzips?
+        </Heading>
+        <RadioGroup
+          aria-labelledby="question-label"
+          scope={form.scope("answer")}
+          options={radioOptions.map((option) => ({
+            value: option,
+            label: option,
+          }))}
+          warningInsteadOfError
+        />
+
+        <DocumentationActions
+          previousUrl={previousUrl}
+          submit
+          showDownloadDraftButton
+          showSavingTip
+          prinzips={prinzips}
+        />
+      </form>
+    </div>
   );
 }

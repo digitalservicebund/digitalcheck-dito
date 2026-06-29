@@ -85,11 +85,7 @@ function DocumentationPrincipleErlaeuterungForm({
               warningInsteadOfError
             >
               Schwerpunkte auswählen
-              <HelpButton
-                sectionId="aspects"
-                title="Hinweis zu Schwerpunkten"
-                className="h-24 w-24"
-              >
+              <HelpButton sectionId="aspects" title="Hinweis zu Schwerpunkten">
                 <p>
                   Wählen Sie aus, welche Schwerpunkte für Ihr Vorhaben relevant
                   sind.
@@ -178,48 +174,45 @@ export function DocumentationPrincipleErlaeuterung({
       : "Sie haben angegeben, dass das Prinzip nicht auf ihr Vorhaben zutrifft.";
 
   return (
-    <>
-      <div className="space-y-48">
-        <div className="space-y-24">
-          <Badge principleNumber={prinzip.Nummer} className="mb-8">
-            Prinzip {prinzip.order}
-          </Badge>
-          <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
-            {prinzip.Name}
-            <HelpButton
-              sectionId="prinzip"
-              title={`Hinweis zu „${prinzip.Name}“`}
-              className="h-24 w-24"
+    <div className="space-y-48">
+      <div className="space-y-24">
+        <Badge principleNumber={prinzip.Nummer} className="mb-8">
+          Prinzip {prinzip.order}
+        </Badge>
+        <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
+          {prinzip.Name}
+          <HelpButton
+            sectionId="prinzip"
+            title={`Hinweis zu „${prinzip.Name}“`}
+          >
+            <BlocksRenderer content={prinzip.Hilfetext!} />
+            <a
+              href={
+                methoden_fuenfPrinzipien.path + "/" + prinzip.URLBezeichnung
+              }
             >
-              <BlocksRenderer content={prinzip.Hilfetext!} />
-              <a
-                href={
-                  methoden_fuenfPrinzipien.path + "/" + prinzip.URLBezeichnung
-                }
-              >
-                Mehr zum Prinzip
-              </a>
-            </HelpButton>
-          </Heading>
+              Mehr zum Prinzip
+            </a>
+          </HelpButton>
+        </Heading>
 
-          {prinzip.Kurzbeschreibung && (
-            <BlocksRenderer content={prinzip.Kurzbeschreibung} />
-          )}
+        {prinzip.Kurzbeschreibung && (
+          <BlocksRenderer content={prinzip.Kurzbeschreibung} />
+        )}
 
-          <div className="rounded-lg bg-blue-300 p-24">
-            <p>{changeAnswerTitle}</p>
-            <a href={currentUrl.replace("/erlaeuterung", "")}>Angaben ändern</a>
-          </div>
+        <div className="rounded-lg bg-blue-300 p-24">
+          <p>{changeAnswerTitle}</p>
+          <a href={currentUrl.replace("/erlaeuterung", "")}>Angaben ändern</a>
         </div>
-
-        <DocumentationPrincipleErlaeuterungForm
-          answer={answer}
-          prinzip={prinzip}
-          principleData={principleData}
-          isPositive={isPositive}
-          isIrrelevant={isIrrelevant}
-        />
       </div>
-    </>
+
+      <DocumentationPrincipleErlaeuterungForm
+        answer={answer}
+        prinzip={prinzip}
+        principleData={principleData}
+        isPositive={isPositive}
+        isIrrelevant={isIrrelevant}
+      />
+    </div>
   );
 }
