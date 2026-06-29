@@ -69,9 +69,9 @@ export function DocumentationInteroperabilityAssessmentLegal() {
         <DetailsSummary title={"Beispiel"}>
           Eine Regelung sieht vor, dass eine zuständige deutsche Behörde
           Nachweise zu Bildungsabschlüssen direkt bei den zuständigen Stellen
-          anderer EU-Mitgliedstaaten überprüfen kann. Den ausländischen Behörden
-          wird spiegelbildlich das Recht eingeräumt, entsprechende
-          Überprüfungsanfragen an die deutsche Behörde zu richten.
+          anderer EU-Mitgliedstaaten überprüfen kann. Gleichzeitig wird den
+          ausländischen Behörden das Recht eingeräumt, Abschlüsse bei deutschen
+          Behörden zu verifizieren.
         </DetailsSummary>
       </div>
       <SkipNoticeWrapper>

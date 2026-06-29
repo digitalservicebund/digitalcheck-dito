@@ -74,8 +74,8 @@ export default function BindingRequirementsForm({
       render: () => (
         <>
           <p>
-            In diesem Schritt wird gefragt, welche verbindlichen Anforderungen
-            im Sinne von{" "}
+            In diesem Schritt wird gefragt, welche verbindlichen Anforderungen,
+            d. h. Festlegungen im Sinne von{" "}
             {/* eslint-disable-next-line react/jsx-no-target-blank */}
             <a
               href={linkToIEAArticle({ article: 2 })}
@@ -83,7 +83,8 @@ export default function BindingRequirementsForm({
               rel="noopener"
             >
               Art. 2 Nr. 15 der Verordnung (EU) 2024/903
-            </a>{" "}
+            </a>
+            {", "}
             von Ihrer Regelung betroffen sind.
             <HelpButton
               sectionId={"verbindliche-anforderungen"}
@@ -100,18 +101,20 @@ export default function BindingRequirementsForm({
             </HelpButton>
           </p>
           <p>
-            Geben Sie außerdem an, auf welche transeuropäischen digitalen
-            öffentlichen Dienste sich diese Anforderungen auswirken. Dies
-            betrifft sowohl von der Regelung benannte Dienste als auch den
-            Vollzug.
+            Geben Sie außerdem an, auf welche grenzüberschreitenden digitalen
+            Verwaltungsdienste sich diese Anforderungen auswirken. Dies betrifft
+            sowohl von der Regelung benannte Dienste als auch den Vollzug.
             <HelpButton
               sectionId={"transeuropean_services"}
-              title={"Was sind digitale transeuropäische Dienste?"}
+              title={
+                "Was sind grenzüberschreitende digitale Verwaltungsdienste?"
+              }
             >
               <RichText
                 markdown={dedent`
-                          Digitale transeuropäische Dienste sind digitale Dienste und IT-Systeme,
-                          bei denen Daten zwischen Verwaltungen von EU-Mitgliedstaaten ausgetauscht werden.
+                          Die Verordnung spricht wörtlich von "transeuropäischen digitalen öffentlichen Diensten".
+                          Gemeint sind digitale Dienste und IT-Systeme, bei denen Daten zwischen Verwaltungen von
+                          EU-Mitgliedstaaten ausgetauscht werden.
                           
                           Das können grenzüberschreitende Registerabfragen oder Meldungen sein. Die Verordnung nennt folgende Beispiele:
                           - Gegenseitige Anerkennung akademischer Diplome oder Berufsqualifikationen
@@ -139,11 +142,14 @@ export default function BindingRequirementsForm({
       render: () => (
         <div className="space-y-24">
           <h2 className="ds-heading-03-reg">
-            In der Regelung enthaltene verbindliche Anforderungen
-            <HelpButton
-              sectionId={"verbindliche-anforderungen"}
-              title={"Was ist eine verbindliche Anforderung?"}
-            ></HelpButton>
+            In der Regelung enthaltene verbindliche{" "}
+            <span className="text-nowrap">
+              Anforderungen
+              <HelpButton
+                sectionId={"verbindliche-anforderungen"}
+                title={"Was ist eine verbindliche Anforderung?"}
+              ></HelpButton>
+            </span>
           </h2>
 
           <div
@@ -193,7 +199,8 @@ export default function BindingRequirementsForm({
                       scope={requirement.scope("services")}
                       description="Abkürzungen bitte ausschreiben."
                     >
-                      Betroffene transeuropäische Dienste
+                      Betroffene grenzüberschreitende digitale
+                      Verwaltungsdienste
                       <HelpButton
                         sectionId={"transeuropean_services"}
                         title={"Was sind digitale transeuropäische Dienste?"}
