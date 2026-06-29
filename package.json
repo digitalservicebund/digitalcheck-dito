@@ -64,7 +64,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "@axe-core/playwright": "^4.11.3",
-    "@commitlint/config-conventional": "^21.0.2",
+    "@commitlint/config-conventional": "^21.1.0",
     "@commitlint/types": "^21.0.1",
     "@eslint/compat": "^2.1.0",
     "@eslint/js": "^10.0.1",
