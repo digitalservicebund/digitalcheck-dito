@@ -1,9 +1,10 @@
 ---
 import LaenderLayout from "@/layouts/LaenderLayout.astro";
-import AccordionItem from "~/components/AccordionItem";
-import { LinkButton } from "~/components/Button";
+import Timeline from "~/components/Timeline";
 import { Image } from "astro:assets";
-import hessenLogo from "./_assets/hessen-logo.jpg";
+import hessenLogo from "./_assets/HESSEN_Logo_stacked.png";
+import Heading from "~/components/Heading";
+import { methoden } from "@/config/routes";
 
 export const frontmatter = {
   title: "Hessen",
@@ -13,73 +14,144 @@ export const frontmatter = {
 
 <LaenderLayout title={frontmatter.title}>
   <p slot="subtitle">
-    Die Landesregierung {frontmatter.title} verfolgt das Ziel, bürokratische Belastungen
-    für Bürgerinnen und Bürger, Unternehmen sowie die Verwaltung auf das zwingend
-    erforderliche Maß zu reduzieren.
+    Herzlich Willkommen beim Digitalcheck für das Land Hessen. Auf dieser Seite
+    finden Sie nützliche Informationen und Hilfestellungen für eine
+    digitaltaugliche Gestaltung Ihrer Rechtsnormen.
   </p>
   <div slot="intro" class="space-y-16">
     <h2>Überblick</h2>
     <p>
-      Die Landesregierung {frontmatter.title} verfolgt das Ziel, bürokratische Belastungen
-      für Bürgerinnen und Bürger, Unternehmen sowie die Verwaltung auf das zwingend
-      erforderliche Maß zu reduzieren.
+      Gesetze, Rechtsverordnungen und Förderrichtlinien sind in Hessen so zu
+      gestalten, dass der spätere Vollzug möglichst einfach und wirtschaftlich
+      erfolgen kann. Digitale Fachverfahren und eine medienbruchfreie digitale
+      Abwicklung von Prozessen können dazu in vielen Fällen einen wertvollen
+      Beitrag leisten und Bürgerinnen und Bürger, Unternehmen und staatliche
+      Stellen entlasten. § 18 HEGovG bündelt dieses im Koalitionsvertrag
+      niedergelegte Ziel in Form einer gesetzlichen Verpflichtung.
     </p>
-    <div class="mt-[18px]">
-      <LinkButton>Mehr dazu erfahren</LinkButton>
-    </div>
   </div>
-  <section class="py-80 space-y-40">
-    <div class="flex gap-32 items-center">
-      <Image src={hessenLogo} alt="Logo von Hessen" class="w-[268px]" />
+  <section class="space-y-40 py-80">
+    <div class="flex items-center gap-32 pb-40">
+      <Image src={hessenLogo} alt="Logo von Hessen" class="h-auto w-[136px]" />
       <div>
-        <h2>Zentralstelle Hessen</h2>
         <p>
-          Der bestehende Normenbestand soll verschlankt, Personal-, Sach- und
-          Verfahrensstandards sollen flexibilisiert und die digitale
-          Transformation der Verwaltung soll aktiv unterstützt werden.
+          Der Digitalcheck des Landes ist ein Werkzeug, das Sie bei der
+          Erarbeitung eines digitaltauglichen Regelungsvorhaben unterstützt.
+          Anstelle einer abstrakten Checkliste erhalten Sie eine interaktive
+          Schritt - für - Schritt - Unterstützung für die Visualisierung,
+          Einschätzung, Gestaltung und Dokumentation ihres Regelungsvorhabens.
         </p>
       </div>
     </div>
     <div>
-      <h2>Supportangebote</h2>
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book.
-      </p>
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book.
-      </p>
+      <h2>Wie läuft der Prozess ab?</h2>
+      <Timeline>
+        <Timeline.Item bullet className="w-full max-w-[694px]">
+          <Timeline.ItemContent
+            backgroundClasses="bg-blue-100 px-16 py-32 sm:px-80 sm:pt-40 sm:pb-48"
+          >
+            <Heading tagName="h3">Schritt 1: Vorprüfung durchführen</Heading>
+            <p>
+              Starten Sie die zunächst die <b>Vorprüfung</b>, um herauszufinden,
+              ob bei Ihrem Regelungsvorhaben überhaupt ein Digitalbezug oder
+              eine Anforderung an die EU-Interoperabilität besteht.
+            </p>
+          </Timeline.ItemContent>
+        </Timeline.Item>
+        <Timeline.Item bullet className="w-full max-w-[694px]">
+          <Timeline.ItemContent
+            backgroundClasses="bg-blue-100 px-16 py-32 sm:px-80 sm:pt-40 sm:pb-48"
+          >
+            <Heading tagName="h3"
+              >Schritt 2: Ihr Ergebnis der Vorprüfung</Heading
+            >
+            <p><b>Bei keinem Digitalbezug:</b></p>
+            <p>
+              Besteht kein Digitalbezug und keine Anforderung an die
+              EU-Interoperabilität, ist der Digitalcheck für Sie bereits
+              abgeschlossen. Laden Sie hierzu die Dokumentation für interne
+              Rückfragen herunter und nehmen Sie diese zu den Akten.
+            </p>
+            <br />
+            <p><b>Bei vorhandenen Digitalbezug:</b></p>
+            <p>
+              Besteht ein Digitalbezug oder eine Anforderung an
+              EU-Interoperabilität, folgen Sie dem Digitalcheck mit <a
+                href={methoden.path}
+                >Schritt 2 (Erarbeitung des Regelungsvorhabens)</a
+              >. Hier finden Sie weitere Hilfestellungen wie Anleitungen zur
+              Visualisierung und die fünf grundlegenden Prinzipien des
+              Digitalchecks.
+            </p>
+          </Timeline.ItemContent>
+        </Timeline.Item>
+        <Timeline.Item bullet className="w-full max-w-[694px]">
+          <Timeline.ItemContent
+            backgroundClasses="bg-blue-100 px-16 py-32 sm:px-80 sm:pt-40 sm:pb-48"
+          >
+            <Heading tagName="h3"> Schritt 3: Regelung schreiben </Heading>
+            <p>
+              Verfassen Sie Ihren <b>Normtext</b> unter Berücksichtigung der <u
+                >zur Verfügung gestellten Hilfestellungen</u
+              >.
+            </p>
+          </Timeline.ItemContent>
+        </Timeline.Item>
+        <Timeline.Item bullet className="w-full max-w-[694px]">
+          <Timeline.ItemContent
+            backgroundClasses="bg-blue-100 px-16 py-32 sm:px-80 sm:pt-40 sm:pb-48"
+          >
+            <Heading tagName="h3">Schritt 4: Dokumentieren</Heading>
+            <p>
+              Dokumentieren Sie, auf welche Aspekte der Digitaltauglichkeit Sie
+              besonders geachtet haben. Sie werden durch diesen Prozess geführt.
+              Das Ergebnis können Sie herunterladen oder wahlweise eine
+              Word-Vorlage nutzen. Die Dokumentation hilft Ihnen zum Beispiel
+              beim <a
+                href="https://www.rv.hessenrecht.hessen.de/bshe/search"
+                target="_blank"
+                >Ausfüllen der Prüfliste zur Begleitenden Vorschriftenkontrolle</a
+              > der AVV(Arbeitsgruppe Verwaltungsvereinfachung).
+            </p>
+          </Timeline.ItemContent>
+        </Timeline.Item>
+      </Timeline>
     </div>
-    <div>
-      <AccordionItem headline="Umsetzbarkeit" client:load>
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
-        </p>
-      </AccordionItem>
-      <AccordionItem headline="Digitale Relevanz" client:load>
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
-        </p>
-      </AccordionItem>
-      <AccordionItem headline="Digitaltauglichkeit" client:load>
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
-        </p>
-      </AccordionItem>
+  </section>
+  <section class="breakout bg-blue-300 px-80 py-40">
+    <div class="px-80 py-40">
+      <h2>Links und Ansprechpartner von A - Z</h2>
+      <p>
+        Nachfolgend finden Sie einige nützliche Links und Ansprechpartner, die
+        Sie im Prozess nicht unbedingt benötigen, hier aber bei Bedarf einmal
+        aufgelistet zur Verfügung haben.
+      </p>
+      <div>
+        <a href="#" target="_blank"
+          >Arbeitsgruppe Verwaltungsvereinfachung (Dokumente)</a
+        ><br />
+        <a href="#" target="_blank"
+          >eGesetz Hessen (Konzept und Arbeitshilfen)</a
+        ><br />
+        <a href="#" target="_blank">Europäische Interoperabilitätsverordnung</a
+        ><br />
+        <a href="#" target="_blank">FIM Portal</a><br />
+        <a href="#" target="_blank"
+          >Hessischer Beauftragter für Datenschutz und Informationsfreiheit</a
+        ><br />
+        <a href="#" target="_blank">Hessisches E-Government-Gesetz (§ 18)</a><br
+        />
+        <a href="#" target="_blank"
+          >Hessischer Koalitionsvertrag 2024 – 2029 (Auszug)</a
+        ><br />
+        <a href="#" target="_blank">Interoperable Europe Portal</a><br />
+        <a href="#" target="_blank">OZG - Informationsplattform</a><br />
+        <a href="#" target="_blank">Zentrum für Legistik</a><br />
+      </div>
     </div>
+  </section>
+  <section class="py-80">
+    <h2>Schulungen</h2>
+    <p>Schulungsangebote folgen.</p>
   </section>
 </LaenderLayout>
