@@ -33,7 +33,7 @@ function Heading({
         aria-label={ariaLabel}
         {...additionalProps}
       >
-        {children ?? text}
+        {children}
       </Tag>
     );
   }

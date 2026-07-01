@@ -71,7 +71,7 @@ const Alert = ({
           </Heading>
           {content && (
             <div className="leading-[26px] tracking-[0.16px]">
-              {content && <RichText markdown={content} />}
+              <RichText markdown={content} />
             </div>
           )}
         </div>
