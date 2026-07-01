@@ -1,6 +1,7 @@
 ---
 import LaenderLayout from "@/layouts/LaenderLayout.astro";
 import Timeline from "~/components/Timeline";
+import NumberedList from "~/components/NumberedList";
 import { Image } from "astro:assets";
 import hessenLogo from "./_assets/HESSEN_Logo_stacked.png";
 import Heading from "~/components/Heading";
@@ -31,40 +32,33 @@ export const frontmatter = {
     </p>
   </div>
   <section class="space-y-40 py-80">
-    <div class="flex items-center gap-32 pb-40">
+    <div class="flex items-center gap-48 pb-40">
       <Image src={hessenLogo} alt="Logo von Hessen" class="h-auto w-[136px]" />
-      <div>
-        <p>
-          Der Digitalcheck des Landes ist ein Werkzeug, das Sie bei der
-          Erarbeitung eines digitaltauglichen Regelungsvorhaben unterstützt.
-          Anstelle einer abstrakten Checkliste erhalten Sie eine interaktive
-          Schritt - für - Schritt - Unterstützung für die Visualisierung,
-          Einschätzung, Gestaltung und Dokumentation ihres Regelungsvorhabens.
-        </p>
-      </div>
+      <p>
+        Der Digitalcheck des Landes ist ein Werkzeug, das Sie bei der
+        Erarbeitung eines digitaltauglichen Regelungsvorhaben unterstützt.
+        Anstelle einer abstrakten Checkliste erhalten Sie eine interaktive
+        Schritt - für - Schritt - Unterstützung für die Visualisierung,
+        Einschätzung, Gestaltung und Dokumentation ihres Regelungsvorhabens.
+      </p>
     </div>
     <div>
       <h2>Wie läuft der Prozess ab?</h2>
-      <Timeline>
-        <Timeline.Item bullet className="w-full max-w-[694px]">
-          <Timeline.ItemContent
-            backgroundClasses="bg-blue-100 px-16 py-32 sm:px-80 sm:pt-40 sm:pb-48"
-          >
-            <Heading tagName="h3">Schritt 1: Vorprüfung durchführen</Heading>
+      <div>
+        <NumberedList>
+          <NumberedList.Item>
+            <p class="ds-heading-03-reg">Schritt 1: Vorprüfung durchführen</p>
             <p>
               Starten Sie die zunächst die <b>Vorprüfung</b>, um herauszufinden,
               ob bei Ihrem Regelungsvorhaben überhaupt ein Digitalbezug oder
               eine Anforderung an die EU-Interoperabilität besteht.
             </p>
-          </Timeline.ItemContent>
-        </Timeline.Item>
-        <Timeline.Item bullet className="w-full max-w-[694px]">
-          <Timeline.ItemContent
-            backgroundClasses="bg-blue-100 px-16 py-32 sm:px-80 sm:pt-40 sm:pb-48"
-          >
-            <Heading tagName="h3"
-              >Schritt 2: Ihr Ergebnis der Vorprüfung</Heading
-            >
+          </NumberedList.Item>
+          <hr class="kern-divider border-blue-300" aria-hidden="true" />
+          <NumberedList.Item>
+            <p class="ds-heading-03-reg">
+              Schritt 2: Ihr Ergebnis der Vorprüfung
+            </p>
             <p><b>Bei keinem Digitalbezug:</b></p>
             <p>
               Besteht kein Digitalbezug und keine Anforderung an die
@@ -83,25 +77,19 @@ export const frontmatter = {
               Visualisierung und die fünf grundlegenden Prinzipien des
               Digitalchecks.
             </p>
-          </Timeline.ItemContent>
-        </Timeline.Item>
-        <Timeline.Item bullet className="w-full max-w-[694px]">
-          <Timeline.ItemContent
-            backgroundClasses="bg-blue-100 px-16 py-32 sm:px-80 sm:pt-40 sm:pb-48"
-          >
-            <Heading tagName="h3"> Schritt 3: Regelung schreiben </Heading>
+          </NumberedList.Item>
+          <hr class="kern-divider border-blue-300" aria-hidden="true" />
+          <NumberedList.Item>
+            <p class="ds-heading-03-reg">Schritt 3: Regelung schreiben</p>
             <p>
               Verfassen Sie Ihren <b>Normtext</b> unter Berücksichtigung der <u
                 >zur Verfügung gestellten Hilfestellungen</u
               >.
             </p>
-          </Timeline.ItemContent>
-        </Timeline.Item>
-        <Timeline.Item bullet className="w-full max-w-[694px]">
-          <Timeline.ItemContent
-            backgroundClasses="bg-blue-100 px-16 py-32 sm:px-80 sm:pt-40 sm:pb-48"
-          >
-            <Heading tagName="h3">Schritt 4: Dokumentieren</Heading>
+          </NumberedList.Item>
+          <hr class="kern-divider border-blue-300" aria-hidden="true" />
+          <NumberedList.Item>
+            <p class="ds-heading-03-reg">Schritt 4: Dokumentieren</p>
             <p>
               Dokumentieren Sie, auf welche Aspekte der Digitaltauglichkeit Sie
               besonders geachtet haben. Sie werden durch diesen Prozess geführt.
@@ -111,14 +99,13 @@ export const frontmatter = {
                 href="https://www.rv.hessenrecht.hessen.de/bshe/search"
                 target="_blank"
                 >Ausfüllen der Prüfliste zur Begleitenden Vorschriftenkontrolle</a
-              > der AVV(Arbeitsgruppe Verwaltungsvereinfachung).
+              > der AVV (Arbeitsgruppe Verwaltungsvereinfachung).
             </p>
-          </Timeline.ItemContent>
-        </Timeline.Item>
-      </Timeline>
+          </NumberedList.Item>
+        </NumberedList>
+      </div>
     </div>
-  </section>
-  <section class="breakout bg-blue-300 px-80 py-40">
+  </section><section class="breakout bg-blue-300 px-80 py-40">
     <div class="px-80 py-40">
       <h2>Links und Ansprechpartner von A - Z</h2>
       <p>
