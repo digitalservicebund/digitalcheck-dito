@@ -8,12 +8,14 @@ import RadioGroup from "~/components/RadioGroup.tsx";
 import Textarea from "~/components/Textarea.tsx";
 
 import { dokumentation_zusammenfassung } from "@/config/routes.ts";
+import RichText from "~/components/RichText.tsx";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
 import { interoperabilityAssessmentLevelSchema } from "~/routes/dokumentation/documentationDataSchema.ts";
 import { IEAContactBanner } from "~/routes/dokumentation/interoperability/IEAContactBanner.tsx";
 import SkipNoticeWrapper from "~/routes/dokumentation/interoperability/SkipNoticeWrapper.tsx";
 import { interoperabilityRatingOptions } from "~/routes/dokumentation/interoperability/values.ts";
+import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
@@ -68,14 +70,16 @@ export function DocumentationInteroperabilityAssessmentOrganizational() {
           reibungslos funktionieren kann.
         </p>
         <DetailsSummary title={"Beispiel"}>
-          <b>Szenario: internationale Gewerbeummeldung</b>
-          <p>
-            Wenn ein Unternehmen seinen Standort von Deutschland nach Spanien
-            verlegt, sollten die beteiligten Behörden beider Länder (z. B. über
-            das Single Digital Gateway) so miteinander verknüpft sein, das die
-            Gewerbeummeldung reibungslos abgewickelt werden kann. Auch
-            Zuständigkeiten müssen dazu geklärt sein.
-          </p>
+          <RichText
+            markdown={dedent`
+          **Szenario: internationale Gewerbeummeldung**
+          
+          Wenn ein Unternehmen seinen Standort von Deutschland nach Spanien verlegt,
+          sollten die beteiligten Behörden beider Länder (z. B. über das **Single Digital Gateway**)
+          **zusammenarbeiten** können, damit die Gewerbeummeldung abgewickelt werden kann.
+          Dazu müssen die organisatorischen Prozesse und Zuständigkeiten vorhanden sein.
+          `}
+          />
         </DetailsSummary>
       </div>
       <SkipNoticeWrapper>
