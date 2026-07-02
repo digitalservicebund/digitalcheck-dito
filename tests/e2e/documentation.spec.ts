@@ -389,7 +389,7 @@ test.describe("with partial documentation started", () => {
         "Dokumentation_der_Digitaltauglichkeit.docx",
       );
       expect(docText).toHaveStringsOrdered([
-        "Titel Ihres Regelungsvorhaben",
+        "Titel Ihres Regelungsvorhabens",
         testData.title,
       ]);
     });
