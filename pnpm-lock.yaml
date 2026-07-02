@@ -33,8 +33,8 @@ importers:
         specifier: ^2.2.10
         version: 2.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@posthog/core':
-        specifier: ^1.38.0
-        version: 1.38.0
+        specifier: ^1.38.1
+        version: 1.38.1
       '@rvf/react':
         specifier: ^8.1.2
         version: 8.1.2(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.7))
@@ -1312,8 +1312,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@posthog/core@1.38.0':
-    resolution: {integrity: sha512-QLrJh0hMVpEJXHNyiJR9YhvIO5tzLDedw4UHdvB+ub4fXHMtHCA8H44qgl11HWR3ajpjxtJ8hs3HyOGVF3Zc1w==}
+  '@posthog/core@1.38.1':
+    resolution: {integrity: sha512-tsJTugsKzx47eRMjNfG272/GFf0FF0LeI+gyJ/anibpbYAzdNuX5kr6enpmJrhdgLESqzJGH8QF0+I9075Xr1Q==}
 
   '@posthog/types@1.391.1':
     resolution: {integrity: sha512-ASwd7Nf4pViqdYRYaNRyPYRVKWa1CcHUAUWR0XeQJLGdNnsWACBwe0sSieb/cHnKsRXjRwO/23KIY83lm/Ccpw==}
@@ -6642,7 +6642,7 @@ snapshots:
     dependencies:
       playwright: 1.61.1
 
-  '@posthog/core@1.38.0':
+  '@posthog/core@1.38.1':
     dependencies:
       '@posthog/types': 1.392.0
 
@@ -10279,7 +10279,7 @@ snapshots:
 
   posthog-js@1.395.0:
     dependencies:
-      '@posthog/core': 1.38.0
+      '@posthog/core': 1.38.1
       '@posthog/types': 1.391.1
       core-js: 3.49.0
       dompurify: 3.4.11
