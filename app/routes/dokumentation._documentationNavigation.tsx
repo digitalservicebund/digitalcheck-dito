@@ -68,8 +68,7 @@ function resolveAdjacentUrl(
 
     if (route?.principleId) {
       const data = findData(route.principleId) as
-        | { answer?: string }
-        | undefined;
+        { answer?: string } | undefined;
       if (data?.answer) return `${rawUrl}/erlaeuterung`;
     }
     return rawUrl;

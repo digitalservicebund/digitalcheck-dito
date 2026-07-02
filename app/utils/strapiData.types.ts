@@ -2,10 +2,7 @@ import type { PrincipleNumber } from "~/resources/constants";
 import type { Node } from "~/utils/paragraphUtils";
 
 export type EinschaetzungReferat =
-  | "Ja"
-  | "Nein"
-  | "Teilweise"
-  | "Nicht relevant";
+  "Ja" | "Nein" | "Teilweise" | "Nicht relevant";
 
 export type Ressort =
   | "AA"
