@@ -102,7 +102,7 @@
     "mammoth": "^1.12.0",
     "node-cache": "^5.1.2",
     "playwright-core": "^1.61.1",
-    "prettier": "^3.9.1",
+    "prettier": "^3.9.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-organize-imports": "^4.3.0",
     "prettier-plugin-tailwindcss": "^0.8.0",
