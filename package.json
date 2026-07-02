@@ -48,7 +48,7 @@
     "astro-route-generator": "github:digitalservicebund/astro-route-generator",
     "docx": "^9.7.1",
     "file-saver": "^2.0.5",
-    "isbot": "^5.1.43",
+    "isbot": "^5.1.44",
     "marked": "^18.0.5",
     "mime-types": "^3.0.2",
     "msw": "^2.14.6",
