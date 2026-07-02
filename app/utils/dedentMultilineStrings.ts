@@ -7,7 +7,8 @@ export const dedent = (strings: TemplateStringsArray, ...values: string[]) => {
   const numberOfWhiteSpaces = (content.match(leadingIndentation) || [""]) // create array of whitespaces leading each line
     .map((el) => el.length); // count whitespaces leading each line
   const numberOfWhitespacesLeadingAllLines = Math.min(...numberOfWhiteSpaces); // find smallest number of whitespaces -> shared indent of all lines
-  const leadingWhitespaces = new RegExp( // match leading whitespaces in each line
+  const leadingWhitespaces = new RegExp(
+    // match leading whitespaces in each line
     `^ {${numberOfWhitespacesLeadingAllLines}}`,
     "gm",
   );
