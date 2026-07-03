@@ -6,44 +6,32 @@ import RadioGroup from "~/components/RadioGroup.tsx";
 import RichText from "~/components/RichText.tsx";
 import { useSyncedForm } from "~/routes/dokumentation/documentationDataHook.ts";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
-import type {
-  EU_INTEROPERABILITY_OUTCOME_IDS,
-  EuInteroperabilityOutcome,
-} from "~/routes/dokumentation/documentationDataSchema.ts";
+import type { EuInteroperabilityOutcome } from "~/routes/dokumentation/documentationDataSchema.ts";
 import { euInteroperabilityOutcomeSchema } from "~/routes/dokumentation/documentationDataSchema.ts";
 import { IEAContactBanner } from "~/routes/dokumentation/interoperability/IEAContactBanner.tsx";
 import { markdownLinkIEA } from "~/routes/dokumentation/interoperability/markdownLinkIEA.tsx";
+import { euInteroperabilityQuestion } from "~/routes/dokumentation/interoperability/values.ts";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
-const helpText = `
+export const helpText = `
 **Was bedeutet das?**
 
 Sofern durch Ihre Regelung vorgesehen ist, dass Daten und Informationen zwischen
 Verwaltungen von EU-Mitgliedsstaaten ausgetauscht werden, muss nach
 ${markdownLinkIEA({ article: 3, format: "long" })} in der Regel
-eine Interoperabilitätsbewertung durchgeführt werden.`;
+eine Interoperabilitätsbewertung durchgeführt werden.
 
-const secondaryHelpText = `
-Sollte sich nach den Bestimmungen der Verordnung dennoch keine Verpflichtung zu einer Bewertung ergeben und Sie möchten auch keine frewillige Bewertung durchführen, wählen Sie die Option "Nein, es ist kein Bezug vorhanden".`;
+<p><a class="mb-8" href="${interoperabel.path}?tab=hintergrund#verbindliche-anforderungen" target="_blank" rel="noreferrer">
+Wann ist eine Interoperabilitäts-Bewertung verpflichtend?
+</a></p>
+
+Sollte sich nach den Bestimmungen der Verordnung dennoch keine Verpflichtung zu einer Bewertung ergeben und Sie möchten auch keine frewillige Bewertung durchführen, wählen Sie die Option "Nein, es ist kein Bezug vorhanden".
+`;
 
 const defaultValues: EuInteroperabilityOutcome = {
   outcomeId: undefined,
 };
-
-const options = [
-  {
-    value: "REQUIRED",
-    label: "Ja, Bezug zu EU-Interoperabilität ist vorhanden.",
-  },
-  {
-    value: "NOT_REQUIRED",
-    label: "Nein, es ist kein Bezug vorhanden.",
-  },
-] as const satisfies {
-  label: string;
-  value: (typeof EU_INTEROPERABILITY_OUTCOME_IDS)[number];
-}[];
 
 export function DocumentationEuInteroperabilityRequirements() {
   const { previousUrl, nextUrl } = useDocumentationNavigation();
@@ -71,31 +59,19 @@ export function DocumentationEuInteroperabilityRequirements() {
       <form {...form.getFormProps()} className="space-y-20">
         <div>
           <p className="inline" id={labelId}>
-            Ergab die Vorprüfung Bezug zu EU-Interoperabilität?
+            {euInteroperabilityQuestion.label}
           </p>
           <HelpButton
             sectionId="bezug-interoperabilität"
             title={"Bezug zu EU-Interoperabilität"}
           >
             <RichText markdown={helpText} />
-            <a
-              href={
-                interoperabel.path +
-                "?tab=hintergrund#verbindliche-anforderungen"
-              }
-              target="_blank"
-              rel="noreferrer"
-              className="underline"
-            >
-              Wann ist eine Interoperabilitäts-Bewertung verpflichtend?
-            </a>
-            <RichText markdown={secondaryHelpText} className="mt-8" />
           </HelpButton>
         </div>
 
         <RadioGroup
           scope={form.scope("outcomeId")}
-          options={options}
+          options={euInteroperabilityQuestion.options}
           aria-labelledby={labelId}
         />
       </form>

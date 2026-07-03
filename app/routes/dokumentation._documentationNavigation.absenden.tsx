@@ -9,7 +9,6 @@ import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { contact } from "~/resources/content/shared/contact.ts";
 import { useDocumentationDataService } from "~/routes/dokumentation/DocumentationDataProvider.tsx";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
-import { downloadAssessment } from "~/service/wordDocumentationExport/wordInteroperabilityAssessment.ts";
 import { dedent } from "~/utils/dedentMultilineStrings.ts";
 import { isIeaAssessmentEnabled } from "~/utils/features.ts";
 import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
@@ -17,8 +16,6 @@ import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigat
 const { finish } = digitalDocumentation;
 
 function InteroperabilitySteps() {
-  const { documentationData } = useDocumentationDataService();
-
   return (
     <>
       <Heading
@@ -32,31 +29,12 @@ function InteroperabilitySteps() {
         heading={{
           tagName: "h2",
           look: "ds-heading-03-reg",
-          text: "Interoperabilitätsbewertung herunterladen",
+          text: "An die Nationale Kontaktstelle senden",
         }}
       >
         <RichText
           markdown={dedent`
-            Laden Sie die Interoperabilitätsbewertung herunter, um sie zu verakten
-            und an die nationale Kontaktstelle zu senden.
-          `}
-        />
-        <ButtonContainer>
-          <DownloadButton onClick={() => downloadAssessment(documentationData)}>
-            Bewertung herunterladen (.docx)
-          </DownloadButton>
-        </ButtonContainer>
-      </InfoBox>
-      <InfoBox
-        look="white"
-        heading={{
-          tagName: "h2",
-          look: "ds-heading-03-reg",
-          text: "An die nationale Kontaktstelle senden",
-        }}
-      >
-        <RichText
-          markdown={dedent`
+            Schicken Sie die ausgefüllte Dokumentation aus Schritt 1 an die Nationale Kontaktstelle.
             Die Interoperabilitäts-Bewertung wird auf dem Portal ["Interoperable
             Europe"](https://interoperable-europe.ec.europa.eu/collection/assessments)
             veröffentlicht, sofern der Referentenentwurf bereits öffentlich

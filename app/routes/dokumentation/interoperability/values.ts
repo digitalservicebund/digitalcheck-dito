@@ -1,4 +1,5 @@
 import type {
+  EU_INTEROPERABILITY_OUTCOME_IDS,
   InteroperabilityAssessmentData,
   InteroperabilityAssessmentLevel,
 } from "~/routes/dokumentation/documentationDataSchema.ts";
@@ -67,6 +68,10 @@ export const interoperabilityRatingOptions: Option[] = [
 ];
 const ratingMap = keyValueToMap(interoperabilityRatingOptions);
 
+export const interoperabilityRatingPlaceholder = interoperabilityRatingOptions
+  .map((option) => option.label)
+  .join(" | ");
+
 export function formatRating(
   rating?: InteroperabilityAssessmentLevel["rating"],
 ) {
@@ -75,6 +80,7 @@ export function formatRating(
   }
   return ratingMap.get(rating);
 }
+
 export const defaultAssessmentValues: InteroperabilityAssessmentData = {
   legal: { detail: "", rating: "" },
   organizational: { detail: "", rating: "" },
@@ -104,4 +110,21 @@ export const publicationDateQuestion = {
 
 export const publicationLinkQuestion = {
   questionLabel: "Link zum Referentenentwurf",
+};
+
+export const euInteroperabilityQuestion = {
+  label: "Ergab die Vorprüfung Bezug zu EU-Interoperabilität?",
+  options: [
+    {
+      value: "REQUIRED",
+      label: "Ja, Bezug zu EU-Interoperabilität ist vorhanden.",
+    },
+    {
+      value: "NOT_REQUIRED",
+      label: "Nein, es ist kein Bezug vorhanden.",
+    },
+  ] as const satisfies {
+    label: string;
+    value: (typeof EU_INTEROPERABILITY_OUTCOME_IDS)[number];
+  }[],
 };
