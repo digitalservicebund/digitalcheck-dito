@@ -38,7 +38,7 @@ jobs:
         with:
           fetch-depth: 0 # Ensure Talisman can operate on a valid revision range
       - name: Detect secrets with Talisman in incoming commits
-        uses: digitalservicebund/talisman-secrets-scan-action@dd7513defb21028835988b40e89f7d10b3f66ed5
+        uses: digitalservicebund/talisman-secrets-scan-action@550e4a1e0aee7921b5df1fc0f02bc6adfa784bd2
 
   check-and-test:
     uses: ./.github/workflows/check-and-test.yml
