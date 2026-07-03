@@ -15,8 +15,7 @@ import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigat
 const { participation } = digitalDocumentation;
 
 export function DocumentationParticipation() {
-  const { currentUrl, nextUrl, previousUrl, prinzips } =
-    useDocumentationNavigation();
+  const { currentUrl, nextUrl, previousUrl } = useDocumentationNavigation();
   const { setParticipation, documentationData } = useDocumentationDataService();
 
   const form = useSyncedForm({
@@ -83,7 +82,6 @@ export function DocumentationParticipation() {
           submit
           showDownloadDraftButton
           showSavingTip
-          prinzips={prinzips}
         />
       </form>
     </div>

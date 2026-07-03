@@ -3,7 +3,7 @@ import Button, { DownloadButton, LinkButton } from "~/components/Button";
 import ButtonContainer from "~/components/ButtonContainer";
 import { digitalDocumentation } from "~/resources/content/dokumentation";
 import { general } from "~/resources/content/shared/general";
-import type { DocumentationNavigationContextType } from "~/routes/dokumentation/DocumentationNavigationContext";
+import { useDocumentationNavigation } from "~/routes/dokumentation/DocumentationNavigationContext";
 import { useWordDocumentation } from "~/service/wordDocumentationExport/wordDocumentation";
 
 type SubmitType = {
@@ -20,7 +20,6 @@ type DocumentationActionsProps = {
   previousUrl?: string;
   showDownloadDraftButton?: boolean;
   showSavingTip?: boolean;
-  prinzips?: DocumentationNavigationContextType["prinzips"];
 } & (SubmitType | NextType);
 
 export default function DocumentationActions({
@@ -29,9 +28,9 @@ export default function DocumentationActions({
   nextUrl,
   showDownloadDraftButton = false,
   showSavingTip = false,
-  prinzips,
 }: Readonly<DocumentationActionsProps>) {
   const { downloadDocumentation } = useWordDocumentation();
+  const { prinzips } = useDocumentationNavigation();
 
   return (
     <div className="mt-80 space-y-40">
@@ -47,7 +46,7 @@ export default function DocumentationActions({
           <LinkButton href={nextUrl}>{general.buttonNext.text}</LinkButton>
         )}
 
-        {showDownloadDraftButton && prinzips && (
+        {showDownloadDraftButton && (
           <DownloadButton
             look="ghost"
             onClick={() => downloadDocumentation(prinzips)}

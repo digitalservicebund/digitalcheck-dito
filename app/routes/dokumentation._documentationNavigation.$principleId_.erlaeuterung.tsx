@@ -33,8 +33,7 @@ function DocumentationPrincipleErlaeuterungForm({
   isPositive,
   isIrrelevant,
 }: DocumentationPrincipleErlaeuterungFormProps) {
-  const { currentUrl, nextUrl, previousUrl, prinzips } =
-    useDocumentationNavigation();
+  const { currentUrl, nextUrl, previousUrl } = useDocumentationNavigation();
   const { addOrUpdatePrincipleReasoning } = useDocumentationDataService();
 
   const form = useSyncedForm({
@@ -128,7 +127,6 @@ function DocumentationPrincipleErlaeuterungForm({
         submit
         showDownloadDraftButton
         showSavingTip
-        prinzips={prinzips}
       />
     </form>
   );
