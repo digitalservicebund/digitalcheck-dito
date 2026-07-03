@@ -284,7 +284,7 @@ test("go to landing page and download empty V2 document template", async ({
   );
   expect(docText).toHaveStringsOrdered(
     [
-      "Titel Ihres Regelungsvorhaben",
+      "Titel Ihres Regelungsvorhabens",
       documentationDocument.placeholder,
       "Auswirkungen auf Betroffene",
       documentationDocument.placeholder,
@@ -389,7 +389,7 @@ test.describe("with partial documentation started", () => {
         "Dokumentation_der_Digitaltauglichkeit.docx",
       );
       expect(docText).toHaveStringsOrdered([
-        "Titel Ihres Regelungsvorhaben",
+        "Titel Ihres Regelungsvorhabens",
         testData.title,
       ]);
     });
