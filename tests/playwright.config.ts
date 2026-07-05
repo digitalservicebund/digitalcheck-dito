@@ -99,7 +99,8 @@ const config: PlaywrightTestConfig = {
         reuseExistingServer: true,
       }
     : {
-        command: "pnpm astro build && pnpm astro preview --port 4399",
+        command:
+          "PUBLIC_STAGE=staging pnpm astro build && pnpm astro preview --port 4399",
         port: 4399,
         cwd: path.resolve(__dirname, ".."),
       },
