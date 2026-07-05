@@ -1,3 +1,4 @@
+import { stage } from "@/config/stage";
 import type { PlaywrightTestConfig } from "@playwright/test";
 import { devices } from "@playwright/test";
 import dotenv from "dotenv";
@@ -64,12 +65,6 @@ export const allProjects: PlaywrightTestConfig["projects"] = [
   },
 ];
 
-function parseStage(): "staging" | "production" {
-  if (process.env.PUBLIC_STAGE === "production") return "production";
-  return "staging";
-}
-
-const stage = parseStage();
 const config: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI, // Fail the build on CI if test.only is present
   retries: process.env.CI ? 1 : 0, // Retry on CI only
