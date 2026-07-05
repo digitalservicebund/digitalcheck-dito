@@ -15,8 +15,7 @@ import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigat
 const { info } = digitalDocumentation;
 
 export function DocumentationTitle() {
-  const { currentUrl, nextUrl, previousUrl, prinzips } =
-    useDocumentationNavigation();
+  const { currentUrl, nextUrl, previousUrl } = useDocumentationNavigation();
   const { documentationData, setPolicyTitle } = useDocumentationDataService();
 
   const form = useSyncedForm({
@@ -61,7 +60,6 @@ export function DocumentationTitle() {
           submit
           showDownloadDraftButton
           showSavingTip
-          prinzips={prinzips}
         />
       </form>
     </div>
