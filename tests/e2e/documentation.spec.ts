@@ -10,6 +10,7 @@ import {
   dokumentation_regelungsvorhabenTitel,
   dokumentation_zusammenfassung,
 } from "@/config/routes";
+import { isIeaAssessmentEnabled } from "~/utils/features.ts";
 import {
   downloadDocumentAndGetText,
   expect,
@@ -21,6 +22,7 @@ import {
 
 const testData = {
   title: "E2E V2 Titel des Regelungsvorhabens",
+  organization: "E2E Organisation",
   participationFormats: "E2E V2 Formate Input",
   participationResults: "E2E V2 Ergebnisse Input",
   positiveReasoning: "E2E V2 Erklärung positiv",
@@ -117,14 +119,16 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
       testInfo.outputPath("documentation-v2-draft.docx"),
       "Dokumentation_der_Digitaltauglichkeit.docx",
     );
-    expect(docText).toHaveStringsOrdered([
+    const expectedStrings = [
       testData.title,
+      isIeaAssessmentEnabled && testData.organization,
       testData.participationFormats,
       testData.participationResults,
       "Digitale Angebote",
       "Ja, gänzlich oder teilweise",
       testData.positiveReasoning,
-    ]);
+    ].filter((value): value is string => !!value);
+    expect(docText).toHaveStringsOrdered(expectedStrings);
     expectDocumentToNotContainTags(docText);
 
     await page.getByRole("button", { name: "Weiter" }).click();
@@ -253,7 +257,8 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
       testInfo.outputPath("documentation-v2-final.docx"),
       "Dokumentation_der_Digitaltauglichkeit.docx",
     );
-    expect(docText).toHaveStringsOrdered([
+    const expectedStrings = [
+      isIeaAssessmentEnabled && "Version Online-Dokumentation", // as opposed to "Word-Dokumentation"
       testData.title,
       testData.participationFormats,
       testData.participationResults,
@@ -265,7 +270,8 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
       "Nicht relevant",
       testData.irrelevantReasoning,
       testData.lastPrincipleReasoning,
-    ]);
+    ].filter((value): value is string => !!value);
+    expect(docText).toHaveStringsOrdered(expectedStrings);
     expectDocumentToNotContainTags(docText);
   });
 });
@@ -282,25 +288,25 @@ test("go to landing page and download empty V2 document template", async ({
     testInfo.outputPath("documentation-v2-template.docx"),
     "Dokumentation_der_Digitaltauglichkeit.docx",
   );
-  expect(docText).toHaveStringsOrdered(
-    [
-      "Titel Ihres Regelungsvorhabens",
-      documentationDocument.placeholder,
-      "Auswirkungen auf Betroffene",
-      documentationDocument.placeholder,
-      documentationDocument.placeholder,
-      "Digitale Angebote",
-      "Ja, gänzlich oder teilweise | Nein | Nicht relevant",
-    ],
-    [
-      testData.title,
-      testData.participationFormats,
-      testData.participationResults,
-      testData.positiveReasoning,
-      testData.negativeReasoning,
-      testData.irrelevantReasoning,
-    ],
-  );
+  const expectedStrings = [
+    isIeaAssessmentEnabled && "Version Word-Dokumentation", // as opposed to "Online-Dokumentation"
+    "Titel Ihres Regelungsvorhabens",
+    documentationDocument.placeholder,
+    "Auswirkungen auf Betroffene",
+    documentationDocument.placeholder,
+    documentationDocument.placeholder,
+    "Digitale Angebote",
+    "Ja, gänzlich oder teilweise | Nein | Nicht relevant",
+  ].filter((value): value is string => !!value);
+
+  expect(docText).toHaveStringsOrdered(expectedStrings, [
+    testData.title,
+    testData.participationFormats,
+    testData.participationResults,
+    testData.positiveReasoning,
+    testData.negativeReasoning,
+    testData.irrelevantReasoning,
+  ]);
   expectDocumentToNotContainTags(docText);
 });
 

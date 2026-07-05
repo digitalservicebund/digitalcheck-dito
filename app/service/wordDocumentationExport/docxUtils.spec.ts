@@ -2,6 +2,7 @@ import "./mockDocx.ts"; // set up mocks first
 
 import { PatchType, TextRun } from "docx";
 import { describe, expect, it, vi } from "vitest";
+import { linkColor } from "~/service/wordDocumentationExport/styles.ts";
 import {
   stringToTextRuns,
   toMailtoHyperlinkPatch,
@@ -47,11 +48,13 @@ describe("mailto hyperlinks", () => {
       text: "email1@test.com",
       break: 0,
       style: "Hyperlink",
+      color: linkColor,
     });
     expect(TextRun).toHaveBeenCalledWith({
       text: "email2@test.com",
       break: 1,
       style: "Hyperlink",
+      color: linkColor,
     });
   });
 });

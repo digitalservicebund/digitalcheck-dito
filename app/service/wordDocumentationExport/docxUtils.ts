@@ -9,6 +9,7 @@ import {
   TextRun,
   WidthType,
 } from "docx";
+import { linkColor } from "~/service/wordDocumentationExport/styles.ts";
 
 export function metadataTable(rows: string[][]) {
   return new Table({
@@ -35,11 +36,15 @@ export const toParagraphPatch = (content: string): IPatch => ({
   type: PatchType.PARAGRAPH,
   children: stringToTextRuns(content),
 });
+
 export const toMailtoHyperlinkPatch = (content: string): IPatch => ({
   type: PatchType.PARAGRAPH,
   children: [
     new ExternalHyperlink({
-      children: stringToTextRuns(content, { style: "Hyperlink" }),
+      children: stringToTextRuns(content, {
+        style: "Hyperlink",
+        color: linkColor,
+      }),
       link: "mailto:" + content,
     }),
   ],

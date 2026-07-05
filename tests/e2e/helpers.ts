@@ -50,7 +50,8 @@ export const expect = baseExpect.extend({
           message: () =>
             `Expected string "${expectedText}" not found in correct order.\n` +
             `Last found match ended around index: ${expectedLastIdx}\n` +
-            `Context: "${getContextSnippet(text, contextIdx, expectedText.length)}"`,
+            `Context: "${getContextSnippet(text, contextIdx, expectedText.length)}"\n\n` +
+            text,
         };
       }
       expectedLastIdx = searchIdx;
@@ -128,6 +129,8 @@ export async function skipUntil(
   wantedUrl: string,
   options: { name: string; groupName?: string },
 ): Promise<void> {
+  await waitForHydration(page);
+  if (page.url().endsWith(wantedUrl)) return;
   if (await page.getByTestId("stepper").isVisible()) {
     // use mobile navigation buttons, click next repeatedly
     let previousUrl = page.url();

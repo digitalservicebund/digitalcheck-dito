@@ -6,6 +6,7 @@ import {
   TextRun,
 } from "docx";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { linkColor } from "~/service/wordDocumentationExport/styles.ts";
 import type { Node } from "~/utils/paragraphUtils";
 import strapiBlocksToDocx from "./strapiBlocksToWord";
 
@@ -116,12 +117,24 @@ describe("strapiBlocksToDocx", () => {
       expect(Paragraph).toHaveBeenCalledWith({
         children: [
           new ExternalHyperlink({
-            children: [new TextRun({ text: "Google", style: "Hyperlink" })],
+            children: [
+              new TextRun({
+                text: "Google",
+                style: "Hyperlink",
+                color: linkColor,
+              }),
+            ],
             link: "https://google.com",
           }),
           new TextRun(" and "),
           new ExternalHyperlink({
-            children: [new TextRun({ text: "GitHub", style: "Hyperlink" })],
+            children: [
+              new TextRun({
+                text: "GitHub",
+                style: "Hyperlink",
+                color: linkColor,
+              }),
+            ],
             link: "https://github.com",
           }),
         ],
@@ -269,7 +282,13 @@ describe("strapiBlocksToDocx", () => {
           new TextRun({ text: "• " }),
           new TextRun("Visit "),
           new ExternalHyperlink({
-            children: [new TextRun({ text: "Google", style: "Hyperlink" })],
+            children: [
+              new TextRun({
+                text: "Google",
+                style: "Hyperlink",
+                color: linkColor,
+              }),
+            ],
             link: "https://google.com",
           }),
         ],
@@ -358,7 +377,11 @@ describe("strapiBlocksToDocx", () => {
           new TextRun("Erste Aufgabe: Lesen Sie die "),
           new ExternalHyperlink({
             children: [
-              new TextRun({ text: "Dokumentation", style: "Hyperlink" }),
+              new TextRun({
+                text: "Dokumentation",
+                style: "Hyperlink",
+                color: linkColor,
+              }),
             ],
             link: "https://example.com",
           }),
@@ -370,7 +393,11 @@ describe("strapiBlocksToDocx", () => {
           new TextRun("Weitere Informationen finden Sie auf "),
           new ExternalHyperlink({
             children: [
-              new TextRun({ text: "unserer Website", style: "Hyperlink" }),
+              new TextRun({
+                text: "unserer Website",
+                style: "Hyperlink",
+                color: linkColor,
+              }),
             ],
             link: "https://example.com",
           }),

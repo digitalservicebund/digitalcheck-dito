@@ -6,6 +6,7 @@ import {
   Paragraph,
   TextRun,
 } from "docx";
+import { linkColor } from "~/service/wordDocumentationExport/styles.ts";
 import type { Node } from "~/utils/paragraphUtils";
 import { isExternalUrl } from "~/utils/utilFunctions";
 
@@ -74,13 +75,25 @@ const processChildren = (
         if (!isExternal && normalizedUrl.startsWith("#")) {
           // Internal hyperlink targeting a bookmark in the same document
           return new InternalHyperlink({
-            children: [new TextRun({ text: linkText, style: "Hyperlink" })],
+            children: [
+              new TextRun({
+                text: linkText,
+                style: "Hyperlink",
+                color: linkColor,
+              }),
+            ],
             anchor: normalizedUrl.slice(1),
           });
         }
 
         return new ExternalHyperlink({
-          children: [new TextRun({ text: linkText, style: "Hyperlink" })],
+          children: [
+            new TextRun({
+              text: linkText,
+              style: "Hyperlink",
+              color: linkColor,
+            }),
+          ],
           link: normalizedUrl,
         });
       } else if (child.children) {

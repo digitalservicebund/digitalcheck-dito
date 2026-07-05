@@ -275,16 +275,14 @@ test("interoperability documentation happy path", async ({
     await expect(page).toHaveURL(dokumentation_absenden.path);
     const docText = await downloadDocumentAndGetText(
       page,
-      page.getByRole("button", { name: "Bewertung herunterladen (.docx)" }),
+      page.getByRole("button", { name: "Word-Datei herunterladen (.docx)" }),
       testInfo.outputPath("interoperability-assessment.docx"),
-      "Interoperabilitaetsbewertung.docx",
+      "Dokumentation_der_Digitaltauglichkeit.docx",
     );
     expect(docText).toHaveStringsOrdered([
       testData.title,
       testData.organization,
-      testData.publicationStatus.shortValue,
-      testData.publicationDate.value,
-      "Verbindliche Anforderung",
+      "enthaltene verbindliche Anforderungen",
       testData.requirementA.answers.title.value,
       testData.requirementA.answers.rechtsgrundlage.value,
       ...testData.requirementA.answers.dienste.value.split("\n"),
@@ -296,6 +294,8 @@ test("interoperability documentation happy path", async ({
       ...testData.requirementB.answers.bereiche.values,
       ...testData.requirementB.answers.betroffene.values,
       ...testData.levels.flatMap((level) => [level.answer, level.detail ?? ""]),
+      "Die Veröffentlichung ist geplant",
+      testData.publicationDate.value,
     ]);
     expectDocumentToNotContainTags(docText);
   });
