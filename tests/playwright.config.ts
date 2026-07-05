@@ -64,6 +64,12 @@ export const allProjects: PlaywrightTestConfig["projects"] = [
   },
 ];
 
+function parseStage(): "staging" | "production" {
+  if (process.env.PUBLIC_STAGE === "production") return "production";
+  return "staging";
+}
+
+const stage = parseStage();
 const config: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI, // Fail the build on CI if test.only is present
   retries: process.env.CI ? 1 : 0, // Retry on CI only
@@ -93,14 +99,13 @@ const config: PlaywrightTestConfig = {
   projects: allProjects,
   webServer: process.env.PLAYWRIGHT_USE_DOCKER
     ? {
-        command: `docker run --rm -p 8080:8080 -e NGINX_DIR=staging ${process.env.PLAYWRIGHT_DOCKER_IMAGE ?? "digitalcheck-dito:local"}`,
+        command: `docker run --rm -p 8080:8080 -e NGINX_DIR=${stage} ${process.env.PLAYWRIGHT_DOCKER_IMAGE ?? "digitalcheck-dito:local"}`,
         port: 8080,
         timeout: 120 * 1000,
         reuseExistingServer: true,
       }
     : {
-        command:
-          "PUBLIC_STAGE=staging pnpm astro build && pnpm astro preview --port 4399",
+        command: `PUBLIC_STAGE=${stage} pnpm astro build && pnpm astro preview --port 4399`,
         port: 4399,
         cwd: path.resolve(__dirname, ".."),
       },
