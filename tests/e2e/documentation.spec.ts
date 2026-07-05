@@ -52,6 +52,10 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
     await page
       .getByLabel(digitalDocumentation.info.inputTitle.label)
       .fill(testData.title);
+    if (isIeaAssessmentEnabled)
+      await page
+        .getByLabel("Ministerium / Organisation")
+        .fill(testData.organization);
     await page.getByRole("button", { name: "Weiter" }).click();
 
     await expect(page).toHaveURL(dokumentation_beteiligungsformate.path);

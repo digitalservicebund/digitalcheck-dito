@@ -47,7 +47,7 @@ const testData = {
         value: "Rechtsgrundlage A",
       },
       dienste: {
-        label: "Betroffene transeuropäische Dienste",
+        label: "Betroffene grenzüberschreitende digitale Verwaltungsdienste",
         value: "Dienst A1\nDienst A2",
       },
       bereiche: {
@@ -73,7 +73,7 @@ const testData = {
         value: "Rechtsgrundlage B",
       },
       dienste: {
-        label: "Betroffene transeuropäische Dienste",
+        label: "Betroffene grenzüberschreitende digitale Verwaltungsdienste",
         value: "Dienst B1\nDienst B2",
       },
       bereiche: {
@@ -111,7 +111,6 @@ const testData = {
   publicationStatus: {
     label: "Wann soll der",
     value: "Die Veröffentlichung ist geplant am...",
-    shortValue: "geplant",
   },
   publicationDate: {
     label: "Voraussichtliches Veröffentlichungsdatum",

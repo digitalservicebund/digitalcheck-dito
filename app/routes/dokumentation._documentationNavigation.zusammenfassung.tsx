@@ -127,16 +127,18 @@ function Answer({
 function PolicyTitleContent({
   policyTitle,
 }: Readonly<{ policyTitle: PolicyTitle }>) {
-  return (
-    <Answer
-      answers={[
-        {
-          prefix: "Vorläufiger Arbeitstitel des Vorhabens",
-          answer: policyTitle.title,
-        },
-      ]}
-    />
-  );
+  const titleAnswer = {
+    prefix: "Vorläufiger Arbeitstitel des Vorhabens",
+    answer: policyTitle.title,
+  };
+  const ministryAnswer = {
+    prefix: "Ministerium / Organisation",
+    answer: policyTitle.organization,
+  };
+  const answers = isIeaAssessmentEnabled
+    ? [titleAnswer, ministryAnswer]
+    : [titleAnswer];
+  return <Answer answers={answers} />;
 }
 
 function ParticipationContent({

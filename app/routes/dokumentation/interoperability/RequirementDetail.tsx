@@ -14,7 +14,7 @@ type Props = {
 const labels: Record<keyof Requirement, string> = {
   description: "Kurzbeschreibung oder Titel",
   legalReference: "Rechtsgrundlage",
-  services: "Betroffene transeuropäische Dienste",
+  services: "Betroffene grenzüberschreitende digitale Verwaltungsdienste",
   serviceAreas: "Für welche Bereiche sind diese Dienste relevant?",
   stakeholderGroups: "Für wen gilt diese verbindliche Anforderung?",
 };
