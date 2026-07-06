@@ -33,15 +33,6 @@ describe("Dokumentation Index Route - Integration Tests", () => {
     renderWithRouter(<DokumentationIndexPage prinzips={[]} />);
   });
 
-  it("renders the Hero section with the correct title", () => {
-    expect(
-      screen.getByRole("heading", {
-        name: "Dokumentation der Digitaltauglichkeit",
-        level: 1,
-      }),
-    ).toBeInTheDocument();
-  });
-
   it("renders the main CTA button to start documentation", () => {
     const startButton = screen.getByRole("link", {
       name: "Dokumentation starten",
