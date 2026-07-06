@@ -262,7 +262,6 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
       "Dokumentation_der_Digitaltauglichkeit.docx",
     );
     const expectedStrings = [
-      isIeaAssessmentEnabled && "Version Online-Dokumentation", // as opposed to "Word-Dokumentation"
       testData.title,
       testData.participationFormats,
       testData.participationResults,
@@ -293,7 +292,6 @@ test("go to landing page and download empty V2 document template", async ({
     "Dokumentation_der_Digitaltauglichkeit.docx",
   );
   const expectedStrings = [
-    isIeaAssessmentEnabled && "Version Word-Dokumentation", // as opposed to "Online-Dokumentation"
     "Titel Ihres Regelungsvorhabens",
     documentationDocument.placeholder,
     "Auswirkungen auf Betroffene",
