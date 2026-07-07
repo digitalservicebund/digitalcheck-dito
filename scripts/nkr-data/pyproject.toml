@@ -8,8 +8,8 @@ dependencies = [
     "jupyter>=1.1.1",
     "openpyxl>=3.1.5",
     "pandas>=3.0.1",
-    "python-dotenv>=1.2.1",
-    "requests>=2.32.5",
+    "python-dotenv>=1.2.2",
+    "requests>=2.33.0",
 ]
 
 [dependency-groups]
