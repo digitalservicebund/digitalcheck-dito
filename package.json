@@ -14,7 +14,7 @@
     "docker:stop": "docker stop digitalcheck-dito || true && docker rm digitalcheck-dito",
     "docker:dev": "pnpm run docker:build && npm run docker:run",
     "docker:logs": "docker logs -f digitalcheck-dito",
-    "format": "prettier --check",
+    "format": "prettier --check .",
     "format:fix": "pnpm run format:fix-selected .",
     "format:fix-selected": "prettier --write --ignore-unknown",
     "lint": "eslint --cache",
