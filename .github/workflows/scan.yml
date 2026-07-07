@@ -35,7 +35,7 @@ jobs:
           limit-severities-for-sarif: true
           exit-code: 2 # Fail the build!
           version: "v0.67.2"
-          skip-dirs: "scripts"
+          skip-dirs: "scripts/nkr-data"
       - name: Check trivy results
         if: always() # Bypass non-zero exit code
         run: |
