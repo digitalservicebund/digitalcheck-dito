@@ -11,7 +11,7 @@ pre-commit:
     fix-format:
       tags: style
       run: pnpm format:fix-selected {staged_files}
-      glob: "*.{js,cjs,mjs,ts,jsx,tsx,json,css,md,yml,yaml,html}"
+      glob: "*.{js,cjs,mjs,ts,jsx,tsx,json,css,md,yml,yaml,html,astro}"
       stage_fixed: true
 pre-push:
   # parallel to false, because lint and typecheck run react-router typegen and this sometimes fails because they override each other
