@@ -115,13 +115,24 @@ export const spoc = {
     items: [
       {
         headline: {
-          text: 'Prüfung der "Lösungen für ein interoperables Europa"',
+          text: "Interoperabilitäts-Bewertung vollständig in den Digitalcheck integriert",
         },
         badge: {
-          text: "Aktuell", // 30.03.2026
+          text: "03.07.2026", // 03.07.2026
         },
         content: dedent`
-          Die inhaltlichen Schnittmengen zwischen dem Erarbeitungsprozess für digitaltaugliche Regelungen und dem Interoperabilitäts-Assessment sind identifiziert und analysiert. Der daraus entstandene Prozess wird in den Digitalcheck-Kontaktpunkten umgesetzt. Darauf aufbauend passen wir die Erarbeitungsmethoden an. Ziel ist es, den gesamten Entwicklungsprozess effizienter und zielgerichteter zu gestalten.
+          Die Prinzipien für digitaltaugliche Gesetzgebung beinhalten die EU-Anforderungen an die Interoperabilität, auch die Erarbeitungs-Prozesse sind angeglichen. Dennoch musste die Interoperabilitäts-Bewertung bisher auf einem separaten Portal dokumentiert werden. Diese zwei Abläufe wurden nun zu einer einzigen, integrierten Dokumentation zusammengeführt. Die Zusammenlegung harmonisiert die nationalen und europäischen Prozesse und reduziert den administrativen Aufwand.
+        `,
+      },
+      {
+        headline: {
+          text: "Lösungen für ein interoperables Europa (nach Art. 7 (EU) 2024/903)",
+        },
+        badge: {
+          text: "30.03.2026", // 30.03.2026
+        },
+        content: dedent`
+          Wir haben die Lösungen für ein interoperables Europa aufbereitet und für die Nachnutzung im Digitalcheck unter EU-Interoperabilität integriert. Legistinnen und Legisten können sich bei der Erarbeitung digitaltauglicher Regelungen ab sofort direkt über die Lösungen informieren und diese für ihre Vorhaben nutzen. Das macht eine bessere Rechtssetzung effizienter und stellt von Anfang an sicher, dass neue Gesetze und Vorgaben europaweit interoperabel gestaltet sind. Der Interoperable Europe Act (EU) 2024/903 verpflichtet Legistinnen und Legisten zu einer Prüfung: Hat ein Regelungsvorhaben Bezug zur EU-Interoperabilität? Dann muss geprüft werden, ob eine bestehende „Lösung für ein interoperables Europa“ eingesetzt werden kann. Wird die Lösung nicht genutzt, ist eine kurze Begründung nötig.
         `,
       },
       {
