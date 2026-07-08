@@ -1,5 +1,10 @@
 ---
-import { methoden_fuenfPrinzipien, vorpruefung } from "@/config/routes";
+import {
+  dokumentation,
+  interoperabel,
+  methoden_fuenfPrinzipien,
+  vorpruefung,
+} from "@/config/routes";
 import { ContactPhoneOutlined } from "@digitalservicebund/icons";
 import { LinkButton } from "~/components/Button";
 import Heading from "~/components/Heading";
@@ -119,9 +124,12 @@ import { getTabAnchorLinkFromLabel } from "~/utils/tabs";
             " "
           }
           <a
-            href="https://digitalcheck.bund.de/interoperabel?tab=interoperable-loesungen"
+            href={getTabAnchorLinkFromLabel(
+              tabLabels.InteroperableLoesungenTabLabel,
+              "tabs-tbyyc2-tab-interoperable-loesungen",
+            )}
           >
-            Interoperable Lösungen.
+            interoperable Lösungen
           </a>
           .
         </p>
