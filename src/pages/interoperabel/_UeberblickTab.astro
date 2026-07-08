@@ -56,40 +56,11 @@ import { getTabAnchorLinkFromLabel } from "~/utils/tabs";
   <div class="scroll-my-40 space-y-8" id={interopsAssessment.anchor}>
     <Heading tagName="h3">Die Interoperabilitäts-Bewertung</Heading>
     <p>
-      Die Interoperabilitäts-Bewertung ist zusammen mit der Dokumentation der
-      Digitaltauglichkeit ein formeller, letzter Schritt, in dem Sie Fragen zu
-      Inhalten der Regelung beantworten. Es geht darum, darzulegen, wie sich
-      Ihre Regelung auf die EU-weite Interoperabilität auswirkt. Der wesentliche
-      Inhalt besteht aus fünf Fragen. Die Bewertung fragt nach sogenannten „
-      <a
-        href={getTabAnchorLinkFromLabel(
-          tabLabels.backgroundTabLabel,
-          "verbindliche-anforderungen",
-        )}
-      >
-        {" "}
-        verbindlichen Anforderungen
-      </a>
-      “ und prüft deren Einfluss auf die{" "}
-      <a
-        href={getTabAnchorLinkFromLabel(
-          tabLabels.backgroundTabLabel,
-          "vier-ebenen-der-interoperabilitaet",
-        )}
-      >
-        {" "}
-        vier Ebenen der Interoperabilität
-      </a>
-      .
+      Die Interoperabilitäts-Bewertung und die Dokumenation der
+      Digitaltauglichkeit sind in einem zusammenhängenden Prozess konsolidiert.
+      Die Bewertung ist ein formeller, letzter Schritt, in dem Sie Fragen zu
+      Interoperabilitäts-Aspekten der Regelung beantworten.
     </p>
-    <LinkButton
-      look="tertiary"
-      href="https://interoperable-europe.ec.europa.eu/collection/assessments/submission"
-      target="_blank"
-      className="mt-16"
-    >
-      Zur Interoperabilitäts-Bewertung
-    </LinkButton>
   </div>
 
   <Heading tagName="h3" className="mt-80"> Der Ablauf im Überblick </Heading>
@@ -138,7 +109,7 @@ import { getTabAnchorLinkFromLabel } from "~/utils/tabs";
         backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
       >
         <Heading tagName="h4" className="ds-heading-03-reg">
-          Optional: Lösungen für ein interoperables Europa nutzen
+          Optional: Lösungen für ein interoperables Europa integrieren
         </Heading>
         <p>
           Lösungen für ein interoperables Europa (Art. 7 EU 2024/903) sind
@@ -147,7 +118,12 @@ import { getTabAnchorLinkFromLabel } from "~/utils/tabs";
           Board legt fest, welche Lösungen zu prüfen sind. Mehr dazu im Reiter{
             " "
           }
-          <strong>„Interoperable Lösungen”</strong>
+          <a
+            href="https://digitalcheck.bund.de/interoperabel?tab=interoperable-loesungen"
+          >
+            Interoperable Lösungen.
+          </a>
+          .
         </p>
       </Timeline.ItemContent>
     </Timeline.Item>
@@ -160,19 +136,18 @@ import { getTabAnchorLinkFromLabel } from "~/utils/tabs";
           Reichen Sie die Interoperabilitäts-Bewertung ein
         </Heading>
         <p>
-          Sie dokumentieren in einem Fragebogen auf dem{" "}
-          <a
-            href="https://interoperable-europe.ec.europa.eu/collection/assessments/submission"
-          >
-            interoperable Europe-Portal
+          Sie dokumentieren{" "}
+          <a href="https://digitalcheck.bund.de/dokumentation">
+            im gemeinsamen Fragebogen
           </a>
-          , wie sich die Regelungsinhalte sich auf die Interoperabilität auswirken.
+          mit dem Digitalcheck, wie sich die Regelungsinhalte auf die Interoperabilität
+          auswirken.
         </p>
       </Timeline.ItemContent>
     </Timeline.Item>
   </Timeline>
 
-  <LinkButton href={vorpruefung.path}>Anforderungen prüfen</LinkButton>
+  <LinkButton href={vorpruefung.path}>Jetzt Vorprüfung durchführen</LinkButton>
 
   <InfoBox
     look="highlight"
@@ -193,14 +168,14 @@ import { getTabAnchorLinkFromLabel } from "~/utils/tabs";
       >
         verbindlicher Anforderungen
       </a>{" "}
-      – inklusive ihrer Auswirkungen auf die vier{" "}
+      – inklusive ihrer Auswirkungen auf die{" "}
       <a
         href={getTabAnchorLinkFromLabel(
           tabLabels.backgroundTabLabel,
           "vier-ebenen-der-interoperabilitaet",
         )}
       >
-        Interoperabilitätsebenen
+        vier Ebenen der Interoperabilität
       </a>
       .
     </p>
