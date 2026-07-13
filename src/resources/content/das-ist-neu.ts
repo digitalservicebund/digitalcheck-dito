@@ -28,6 +28,15 @@ export const news = {
   items: [
     {
       badge: {
+        text: "13.07.2026",
+      },
+      content: dedent`
+        Neue FAQ ergänzt: Vorteile des gemeinsamen Digitalchecks für Bund und Länder.
+        
+        [Hier ansehen](${bundeslaender.path})`,
+    },
+    {
+      badge: {
         text: "20.05.2026",
       },
       content: dedent`

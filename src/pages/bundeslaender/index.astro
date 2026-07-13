@@ -7,6 +7,7 @@ import Heading from "@/components/Heading";
 import Hero from "@/components/Hero";
 import Image from "@/components/Image";
 import Timeline from "@/components/Timeline";
+import AccordionItem from "@/components/AccordionItem";
 import { contact } from "@/resources/content/shared/contact";
 import { withBase } from "@/utils/path";
 
@@ -100,6 +101,88 @@ export const frontmatter = {
           alternativeText="Ein Laptop auf hellblauem Hintergrund zeigt den grafischen Entwurf einer Webseite der hessischen Landesregierung."
           className="h-340 w-630 pt-40"
         />
+      </div>
+      <div>
+        <Heading tagName="h2" className="pb-40"
+          >Vorteile der Kooperation auf einen Blick</Heading
+        >
+        <AccordionItem
+          headline="
+            Gemeinsamer Standard und Nachnutzung erprobter Prozesse"
+          client:load
+        >
+          <span>
+            Als methodische Prozessbegleitung sichert der Digitalcheck auf
+            Bundesebene die Digitaltauglichkeit von Regelungsvorhaben.
+            Bundesländer können diesen bewährten Prozess für ihre
+            Regelungsvorhaben auf Landesebene nutzen, statt ihn selbst neu zu
+            entwickeln. Der Bund stellt dafür seine digitale Infrastruktur auf
+            digitalcheck.bund.de zur Verfügung.
+          </span>
+        </AccordionItem>
+        <AccordionItem
+          headline="Gemeinsamer Standard und Nachnutzung erprobter Prozesse"
+          client:load
+        >
+          <span>
+            Als methodische Prozessbegleitung sichert der Digitalcheck auf
+            Bundesebene die Digitaltauglichkeit von Regelungsvorhaben.
+            Bundesländer können diesen bewährten Prozess für ihre
+            Regelungsvorhaben auf Landesebene nutzen, statt ihn selbst neu zu
+            entwickeln. Der Bund stellt dafür seine digitale Infrastruktur auf
+            digitalcheck.bund.de zur Verfügung.
+          </span>
+        </AccordionItem>
+        <AccordionItem
+          headline="Eigener Auftritt auf digitalcheck.bund.de"
+          client:load
+        >
+          <span>
+            Sie erhalten eine eigene Unterseite auf digitalcheck.bund.de. Die
+            Inhalte der Seite werden individuell auf Ihren Landes-Digitalcheck
+            zugeschnitten, etwa durch die Hinterlegung der zuständigen
+            Prüfstelle des Landes. Bei der Erstellung stehen wir Ihnen
+            unterstützend zur Seite.</span
+          >
+        </AccordionItem>
+        <AccordionItem
+          headline="Umfangreiche Arbeitshilfen und Werkzeuge für Regelungsvorhaben"
+          client:load
+        >
+          <span>
+            Auf digitalcheck.bund.de stehen Legistinnen und Legisten Werkzeuge
+            und Vorlagen für die Erarbeitung von digitaltauglichen und
+            praxisnahen Regelungen zur Verfügung. Vom Bund erprobte
+            Vorgehensweisen und Best Practises wie die <a
+              href="https://zfl.bund.de/begleitungen"
+              target="_blank">Regelungsbegleitung</a
+            > oder Schulungsformate können von den Ländern übernommen und als Grundlage
+            für eigene Prozesse genutzt werden.
+          </span>
+        </AccordionItem>
+        <AccordionItem
+          headline="Unterstützung bei der Erfüllung der EU-Interoperabilitätsverordnung"
+          client:load
+        >
+          <span>
+            Der Digitalcheck integriert die Anforderungen der
+            EU-Interoperabilitätsverordnung und stellt Legistinnen und Legisten
+            gezielte Arbeitshilfen zur Verfügung, um Regelungen so zu schreiben,
+            dass sie Grundlage für gut funktionierende, grenzüberschreitende
+            Verwaltungsleistungen sind.
+          </span>
+        </AccordionItem>
+        <AccordionItem
+          headline="Keine eigenen Entwicklungsaufwände, kein eigenes Hosting"
+          client:load
+        >
+          <span>
+            Sämtliche Arbeitshilfen und Services werden laufend evaluiert und
+            auf Grundlage von Feedback weiterentwickelt. Somit bleiben sie
+            aktuell und neue Entwicklungen werden ohne eigenen Aufwand direkt in
+            das Angebot integriert.
+          </span>
+        </AccordionItem>
       </div>
       <div>
         <Heading tagName="h2" className="max-w-[800px] pb-40">
