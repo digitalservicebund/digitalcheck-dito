@@ -6,7 +6,6 @@ import {
   StarOutlineOutlined,
   VolunteerActivismOutlined,
 } from "@digitalservicebund/icons";
-import { Fragment } from "react";
 import Badge from "~/components/Badge";
 import ContentWrapper from "~/components/ContentWrapper";
 import Heading from "~/components/Heading";
@@ -138,7 +137,7 @@ const dsData = [
     <ContentWrapper className="space-y-80">
       {
         dsData.map(({ title, elements }) => (
-          <Fragment>
+          <>
             <Heading tagName="h2" className="mb-40">
               {title}
             </Heading>
@@ -155,7 +154,7 @@ const dsData = [
                 </li>
               ))}
             </ul>
-          </Fragment>
+          </>
         ))
       }
     </ContentWrapper>

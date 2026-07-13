@@ -1,4 +1,4 @@
-import { getContainerRenderer } from "@astrojs/react";
+import { getContainerRenderer } from "@astrojs/react/container-renderer";
 import {
   type ContainerRenderOptions,
   experimental_AstroContainer as AstroContainer,
