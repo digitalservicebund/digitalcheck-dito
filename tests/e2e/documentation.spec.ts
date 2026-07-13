@@ -1,6 +1,6 @@
+import { documentationDocument } from "@/resources/content/documentation-document";
+import { digitalDocumentation } from "@/resources/content/dokumentation";
 import { test } from "@playwright/test";
-import { documentationDocument } from "~/resources/content/documentation-document";
-import { digitalDocumentation } from "~/resources/content/dokumentation";
 
 import {
   dokumentation,
@@ -10,7 +10,7 @@ import {
   dokumentation_regelungsvorhabenTitel,
   dokumentation_zusammenfassung,
 } from "@/config/routes";
-import { isIeaAssessmentEnabled } from "~/utils/features.ts";
+import { isIeaAssessmentEnabled } from "@/utils/features.ts";
 import {
   downloadDocumentAndGetText,
   expect,

@@ -3,9 +3,9 @@ import {
   vorpruefung_ergebnis,
   vorpruefung_hinweise,
 } from "@/config/routes";
+import { PRE_CHECK_START_BUTTON_ID } from "@/resources/constants";
+import { preCheck } from "@/resources/content/vorpruefung";
 import { expect, test } from "@playwright/test";
-import { PRE_CHECK_START_BUTTON_ID } from "~/resources/constants";
-import { preCheck } from "~/resources/content/vorpruefung";
 import { waitForHydration } from "./helpers";
 
 const { questions } = preCheck;

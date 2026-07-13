@@ -1,4 +1,4 @@
-import twMerge from "~/utils/tailwindMerge";
+import twMerge from "@/utils/tailwindMerge";
 
 export type Look = "tabs" | "chips";
 

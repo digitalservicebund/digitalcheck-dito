@@ -1,9 +1,9 @@
 "use client";
 
+import { LayoutWithDocumentationNavigation } from "@/routes/dokumentation._documentationNavigation";
+import { DocumentationDataProvider } from "@/routes/dokumentation/DocumentationDataProvider";
+import type { PrinzipWithAspekte } from "@/utils/strapiData.types";
 import type { ReactNode } from "react";
-import { LayoutWithDocumentationNavigation } from "~/routes/dokumentation._documentationNavigation";
-import { DocumentationDataProvider } from "~/routes/dokumentation/DocumentationDataProvider";
-import type { PrinzipWithAspekte } from "~/utils/strapiData.types";
 
 export function DocumentationPageShell({
   prinzips,

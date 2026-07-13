@@ -16,7 +16,7 @@ import {
   vorpruefung_ergebnis,
   vorpruefung_hinweise,
 } from "@/config/routes";
-import { preCheck } from "~/resources/content/vorpruefung";
+import { preCheck } from "@/resources/content/vorpruefung";
 import { waitForHydration } from "./helpers";
 
 function getExpectedTitle(route: Pick<Route, "path" | "title">) {

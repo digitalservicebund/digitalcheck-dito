@@ -142,7 +142,7 @@ export default defineConfig(
               name: "tailwind-merge",
               importNames: ["twMerge"],
               message:
-                "Please import { twMerge } from '~/utils/tailwindMerge'.",
+                "Please import { twMerge } from '@/utils/tailwindMerge'.",
             },
             {
               name: "@digitalservicebund/icons/index",

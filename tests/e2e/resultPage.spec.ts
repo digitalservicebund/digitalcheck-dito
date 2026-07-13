@@ -1,7 +1,7 @@
 import { vorpruefung_ergebnis } from "@/config/routes";
+import { preCheck } from "@/resources/content/vorpruefung";
 import type { Page } from "@playwright/test";
 import { expect, test } from "@playwright/test";
-import { preCheck } from "~/resources/content/vorpruefung";
 import { waitForHydration } from "./helpers";
 
 const { questions } = preCheck;

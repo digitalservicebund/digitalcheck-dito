@@ -1,13 +1,13 @@
+import Alert from "@/components/Alert.tsx";
+import Button from "@/components/Button.tsx";
+import ButtonContainer from "@/components/ButtonContainer.tsx";
+import Container from "@/components/Container.tsx";
+import Hero from "@/components/Hero.tsx";
+import { dedent } from "@/utils/dedentMultilineStrings";
 import { withBase } from "@/utils/path";
 import { usePostHog } from "posthog-js/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { twJoin } from "tailwind-merge";
-import Alert from "~/components/Alert.tsx";
-import Button from "~/components/Button.tsx";
-import ButtonContainer from "~/components/ButtonContainer.tsx";
-import Container from "~/components/Container.tsx";
-import Hero from "~/components/Hero.tsx";
-import { dedent } from "~/utils/dedentMultilineStrings.ts";
 
 const testFiles = [
   { name: "PNG-Bilddatei", path: "/images/beispielflussdiagram.png" },

@@ -1,12 +1,12 @@
 // @vitest-environment node
 import FivePrinciples from "@/pages/methoden/fuenf-prinzipien/index.astro";
+import { methodsFivePrinciples } from "@/resources/content/methode-fuenf-prinzipien";
+import type { Node } from "@/utils/paragraphUtils";
 import { renderToDOM } from "@/utils/testUtils";
 import type { BoundFunctions, queries } from "@testing-library/dom";
 import { within } from "@testing-library/dom";
 import type { AstroComponentFactory } from "astro/runtime/server/index.js";
 import { beforeEach, describe, expect, it } from "vitest";
-import { methodsFivePrinciples } from "~/resources/content/methode-fuenf-prinzipien";
-import type { Node } from "~/utils/paragraphUtils";
 
 // Create mock data that simulates the data structure returned by the loader.
 // This includes a principle with a full example and one without to test conditional rendering.
@@ -98,7 +98,7 @@ const mockPrinzipsData = vi.hoisted(() => [
   },
 ]);
 
-vi.mock("~/utils/strapiData.server", () => ({
+vi.mock("@/utils/strapiData.server", () => ({
   fetchPrinzipsWithExamples: vi.fn().mockResolvedValue(mockPrinzipsData),
 }));
 

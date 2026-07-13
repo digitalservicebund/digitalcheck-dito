@@ -1,10 +1,10 @@
 import { getImageFilename } from "@/utils/images";
-import type { APIRoute, GetStaticPaths } from "astro";
 import {
   fetchStrapiData,
   visualisationFields,
-} from "~/utils/strapiData.server";
-import type { Visualisierung } from "~/utils/strapiData.types";
+} from "@/utils/strapiData.server";
+import type { Visualisierung } from "@/utils/strapiData.types";
+import type { APIRoute, GetStaticPaths } from "astro";
 
 const GET_VISUALISATIONS_QUERY = `
 ${visualisationFields}

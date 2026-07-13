@@ -8,7 +8,7 @@ import {
   methoden_fuenfPrinzipien,
   vorpruefung_ergebnis,
 } from "@/config/routes";
-import { preCheck } from "~/resources/content/vorpruefung";
+import { preCheck } from "@/resources/content/vorpruefung";
 import { waitForHydration } from "../e2e/helpers";
 import { checkHeadingsForFlowContent } from "./utils.ts";
 

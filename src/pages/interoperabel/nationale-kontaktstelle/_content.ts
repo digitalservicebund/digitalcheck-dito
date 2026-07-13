@@ -4,10 +4,10 @@ import {
   methoden_fuenfPrinzipien,
   unterstuetzung,
 } from "@/config/routes";
+import { contact } from "@/resources/content/shared/contact";
+import { dedent } from "@/utils/dedentMultilineStrings";
 import { withBase } from "@/utils/path";
-import { contact } from "~/resources/content/shared/contact";
-import { dedent } from "~/utils/dedentMultilineStrings";
-import { getTabAnchorLink } from "~/utils/tabs";
+import { getTabAnchorLink } from "@/utils/tabs";
 
 export const spoc = {
   headline: "Nationale Kontaktstelle für ein interoperables Europa",

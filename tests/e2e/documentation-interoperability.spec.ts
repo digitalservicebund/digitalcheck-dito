@@ -1,5 +1,5 @@
+import { digitalDocumentation } from "@/resources/content/dokumentation";
 import { type Locator, test } from "@playwright/test";
-import { digitalDocumentation } from "~/resources/content/dokumentation";
 
 import {
   dokumentation,
@@ -14,7 +14,7 @@ import {
   dokumentation_veroeffentlichung,
   dokumentation_zusammenfassung,
 } from "@/config/routes";
-import { isIeaAssessmentEnabled } from "~/utils/features";
+import { isIeaAssessmentEnabled } from "@/utils/features";
 import {
   clickNext,
   downloadDocumentAndGetText,
