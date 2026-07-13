@@ -1,0 +1,45 @@
+---
+import { BlocksRenderer } from "@/components/BlocksRenderer";
+import Heading from "@/components/Heading";
+import RichText from "@/components/RichText.tsx";
+import { slugify } from "@/utils/utilFunctions";
+import type { Beispielvorhaben } from "@/utils/strapiData.types";
+
+interface Props {
+  regelung: Beispielvorhaben;
+}
+const { regelung, ...otherProps } = Astro.props;
+---
+
+<section {...otherProps}>
+  <div class="mb-16 space-y-16">
+    <Heading
+      id={slugify("NKR-Stellungnahme")}
+      tagName="h2"
+      look="ds-heading-02-bold"
+    >
+      NKR-Stellungnahme
+    </Heading>
+    <RichText
+      markdown="Diese Ausführungen sind der Stellungnahme des NKR entnommen."
+      className="ds-subhead"
+    />
+  </div>
+  {
+    regelung.Digitalchecks.filter(
+      ({ NKRStellungnahmeDCText }) => !!NKRStellungnahmeDCText,
+    ).map((digitalcheck) => (
+      <div class="my-32 border-l-4 border-gray-400 pl-8 italic">
+        <BlocksRenderer content={digitalcheck.NKRStellungnahmeDCText!} />
+      </div>
+    ))
+  }
+  {
+    regelung.NKRStellungnahmeLink && (
+      <div>
+        Die ganze Stellungnahme können Sie hier finden:{" "}
+        <a href={regelung.NKRStellungnahmeLink}>NKR-Stellungnahme</a>
+      </div>
+    )
+  }
+</section>

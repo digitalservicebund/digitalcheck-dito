@@ -1,0 +1,33 @@
+---
+import Heading from "@/components/Heading";
+import RichText from "@/components/RichText.tsx";
+import VisualisationItem from "@/components/VisualisationItem";
+import { slugify } from "@/utils/utilFunctions";
+import type { Beispielvorhaben } from "@/utils/strapiData.types";
+
+interface Props {
+  regelung: Beispielvorhaben;
+}
+const { regelung, ...otherProps } = Astro.props;
+---
+
+<section class="ds-stack ds-stack-32" {...otherProps}>
+  <div class="mb-40 space-y-16">
+    <Heading
+      id={slugify("Visualisierungen")}
+      tagName="h2"
+      look="ds-heading-02-bold"
+    >
+      Visualisierungen
+    </Heading>
+    <RichText
+      markdown="Diese Visualisierungen haben dem Referat geholfen, Digitaltauglichkeit zu prüfen und den Sachverhalt zu kommunizieren."
+      className="ds-subhead"
+    />
+  </div>
+  {
+    regelung.Visualisierungen.map((visualisierung) => (
+      <VisualisationItem visualisierung={visualisierung} />
+    ))
+  }
+</section>

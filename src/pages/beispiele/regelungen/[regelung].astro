@@ -1,6 +1,5 @@
 ---
 import BeispieleLayout from "@/layouts/BeispieleLayout.astro";
-import { Gesetz } from "@/routes/beispiele.regelungen.$regelung";
 import {
   fetchStrapiData,
   GET_PRINZIPS_QUERY,
@@ -12,6 +11,13 @@ import type {
   Beispielvorhaben,
   PrinzipWithBeispielvorhaben,
 } from "@/utils/strapiData.types";
+import ContentWrapper from "@/components/ContentWrapper.tsx";
+import Hero from "@/components/Hero";
+import RegulationMetadata from "@/components/RegulationMetadata";
+import Tabs from "@/components/tabs/Tabs.astro";
+import FormulierungenTab from "./_FormulierungenTab.astro";
+import VisualisierungTab from "./_VisualisierungTab.astro";
+import NKRStellungnahmeTab from "./_NKRStellungnahmeTab.astro";
 
 export const frontmatter = {
   title: "Regelungsbeispiel",
@@ -66,11 +72,67 @@ query GetAllBeispielvorhaben {
   }));
 }
 
-const { regelung: regelungData, principles } = Astro.props;
+const { regelung, principles } = Astro.props;
+
+const hasFormulierungen = regelung.Paragraphen.length > 0;
+const hasVisualierungen = regelung.Visualisierungen.length > 0;
+const hasNKRStellungnahme = regelung.Digitalchecks.some(
+  (d) => !!d.NKRStellungnahmeDCText,
+);
+
+const FORMULIERUNGEN = "Formulierungen";
+const VISUALISIERUNG = "Visualisierung";
+const NKR_STELLUNGNAHME = "NKR-Stellungnahme";
 ---
 
 <BeispieleLayout title={frontmatter.title}>
   <main>
-    <Gesetz regelung={regelungData} principles={principles} client:load />
+    <Hero
+      className="bg-gray-100"
+      title={regelung.Titel}
+      subtitle="Hier finden Sie alles zur Digitaltauglichkeit dieser Regelung."
+    />
+
+    <div class="bg-gray-100">
+      <div class="container">
+        <RegulationMetadata exampleProject={regelung} />
+      </div>
+    </div>
+
+    <ContentWrapper compactTopSpacing>
+      <Tabs
+        tabs={[
+          hasFormulierungen && FORMULIERUNGEN,
+          hasVisualierungen && VISUALISIERUNG,
+          hasNKRStellungnahme && NKR_STELLUNGNAHME,
+        ].filter(Boolean) as string[]}
+      >
+        {
+          hasFormulierungen && (
+            <FormulierungenTab
+              data-tab-panel={FORMULIERUNGEN}
+              regelung={regelung}
+              principles={principles}
+            />
+          )
+        }
+        {
+          hasVisualierungen && (
+            <VisualisierungTab
+              data-tab-panel={VISUALISIERUNG}
+              regelung={regelung}
+            />
+          )
+        }
+        {
+          hasNKRStellungnahme && (
+            <NKRStellungnahmeTab
+              data-tab-panel={NKR_STELLUNGNAHME}
+              regelung={regelung}
+            />
+          )
+        }
+      </Tabs>
+    </ContentWrapper>
   </main>
 </BeispieleLayout>
