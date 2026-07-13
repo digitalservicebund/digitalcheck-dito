@@ -1,0 +1,92 @@
+---
+import AccordionItem from "@/components/AccordionItem.tsx";
+import Badge from "@/components/Badge.tsx";
+import { BlocksRenderer } from "@/components/BlocksRenderer.tsx";
+import { PRINCIPLE_COLORS } from "@/resources/constants.ts";
+import type {
+  PrinzipAspekt,
+  PrinzipWithAspekteAndExample,
+} from "@/utils/strapiData.types";
+import { slugify } from "@/utils/utilFunctions";
+import { twJoin } from "tailwind-merge";
+import Textbeispiel from "./_Textbeispiel.astro";
+import { textModifiers } from "./_textModifiers.tsx";
+
+interface Props {
+  aspect: PrinzipAspekt;
+  prinzip: PrinzipWithAspekteAndExample;
+}
+
+const { aspect, prinzip } = Astro.props;
+---
+
+<section class="my-80" id={slugify(aspect.Kurzbezeichnung)}>
+  <div class="space-y-40">
+    <div>
+      <Badge
+        className={twJoin(PRINCIPLE_COLORS[prinzip.Nummer].background, "mb-16")}
+      >
+        Schwerpunkt
+      </Badge>
+      <h2 class="mb-40">
+        {aspect.Nummer}{" "}
+        {aspect.Titel}
+      </h2>
+    </div>
+    {
+      aspect.Text && (
+        <BlocksRenderer
+          content={aspect.Text}
+          className={"space-y-16"}
+          modifiers={textModifiers}
+        />
+      )
+    }
+    {
+      !!aspect.Anwendung.length && (
+        <>
+          <h3>So wenden Sie den Aspekt an</h3>
+          <div>
+            {aspect.Anwendung.map((anwendung) => (
+              <AccordionItem client:load headline={anwendung.Titel}>
+                <div class="space-y-40">
+                  <BlocksRenderer
+                    className="space-y-16"
+                    content={anwendung.Erklaerung}
+                  />
+                  {anwendung.Formulierungsbeispiel && (
+                    <div class="space-y-16 border border-gray-600 bg-green-200 p-40">
+                      <h4 class="ds-heading-02-reg">Formulierungsbeispiel</h4>
+                      <div>
+                        <BlocksRenderer
+                          content={anwendung.Formulierungsbeispiel}
+                          modifiers={textModifiers}
+                        />
+                      </div>
+                    </div>
+                  )}
+                  {anwendung.Beispiel && (
+                    <Textbeispiel
+                      beispiel={anwendung.Beispiel}
+                      prinzip={prinzip}
+                      headingTag="h4"
+                    />
+                  )}
+                </div>
+              </AccordionItem>
+            ))}
+          </div>
+        </>
+      )
+    }
+    {
+      aspect.Beispiel && (
+        <Textbeispiel
+          beispiel={aspect.Beispiel}
+          prinzip={prinzip}
+          headingTag="h3"
+        />
+      )
+    }
+  </div>
+</section>

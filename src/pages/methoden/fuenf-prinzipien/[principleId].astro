@@ -1,13 +1,20 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { Prinzip } from "@/routes/methoden.fuenf-prinzipien.$prinzip/route";
 import {
   aspektBeispielFields,
   aspektCommonFields,
   fetchStrapiData,
   prinzipBeispielFields,
 } from "@/utils/strapiData.server";
+import Badge from "@/components/Badge.tsx";
+import { BlocksRenderer } from "@/components/BlocksRenderer.tsx";
+import Hero from "@/components/Hero.astro";
+import ToC from "@/components/TableOfContentsInteractive.tsx";
+import SidebarContainer from "@/components/SidebarContainer.astro";
 import type { PrinzipWithAspekteAndExample } from "@/utils/strapiData.types";
+import { slugify } from "@/utils/utilFunctions";
+import Aspect from "./_Aspect.astro";
+import PrincipleNavigation from "./_PrincipleNavigation.astro";
 
 export const frontmatter = {
   title: "Fünf Prinzipien",
@@ -78,5 +85,42 @@ const title = prinzip ? `Prinzip: ${prinzip.Name}` : "Fünf Prinzipien";
 ---
 
 <Layout title={title} showProgressBar>
-  <Prinzip prinzip={prinzip} prinzipList={prinzipList} client:load />
+  <main>
+    <div class="breakout-grid-toc">
+      <Hero>
+        <div>
+          <Badge className={`bg-principle-${prinzip.Nummer} -mb-16`}>
+            Prinzip {prinzip.order}
+          </Badge>
+        </div>
+        <h1>{prinzip.Name}</h1>
+        <BlocksRenderer
+          className="ds-subhead mt-16 space-y-16"
+          content={prinzip.Beschreibung}
+        />
+      </Hero>
+    </div>
+    <SidebarContainer>
+      <ToC slot="sidebar" client:load title={"Inhalt"} selector="section[id]">
+        <ToC.List className="list-unstyled list-none">
+          {
+            prinzip.Aspekte.map((aspect) => (
+              <ToC.Item
+                href={`#${slugify(aspect.Kurzbezeichnung)}`}
+                title={(aspect.Nummer ?? "") + " " + aspect.Kurzbezeichnung}
+              />
+            ))
+          }
+        </ToC.List>
+      </ToC>
+      {
+        prinzip.Aspekte.map((aspect) => (
+          <Aspect aspect={aspect} prinzip={prinzip} />
+        ))
+      }
+    </SidebarContainer>
+    <div class="breakout-grid-toc my-80">
+      <PrincipleNavigation principles={prinzipList} current={prinzip} />
+    </div>
+  </main>
 </Layout>
