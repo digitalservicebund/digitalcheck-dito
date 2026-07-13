@@ -18,7 +18,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default defineConfig(
+  // Astro
   eslintPluginAstro.configs.recommended,
+  {
+    files: ["src/pages/**/*.astro"],
+    rules: {
+      "astro/no-exports-from-components": "off", // to use `export const frontmatter` w/ astro-route-generator
+    },
+  },
+  // Global settings
   globalIgnores([
     ".astro/",
     "dist/",
@@ -28,7 +36,6 @@ export default defineConfig(
     "README.md",
     "AGENTS.md",
   ]),
-  // Global settings
   {
     languageOptions: {
       ecmaVersion: "latest",
