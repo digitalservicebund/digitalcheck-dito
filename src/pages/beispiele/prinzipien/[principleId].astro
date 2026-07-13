@@ -10,7 +10,7 @@ import InfoBox from "~/components/InfoBox";
 import ParagraphList from "~/components/ParagraphList";
 import RegulationMetadata from "~/components/RegulationMetadata";
 import Separator from "~/components/Separator";
-import RouteTabs from "~/components/Tabs/RouteTabs";
+import RouteTabs from "@/components/tabs/RouteTabs.astro";
 import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
 import {
   fetchStrapiData,
@@ -59,9 +59,8 @@ query GetAllPrinzipsWithBeispiele {
 const { prinzip, prinzips } = Astro.props;
 const { Beispielvorhaben } = prinzip;
 const tabs = prinzips.map((principle) => ({
-  key: principle.URLBezeichnung,
   label: principle.Kurzbezeichnung,
-  to: `${beispiele_prinzipien.path}/${principle.URLBezeichnung}`,
+  path: `${beispiele_prinzipien.path}/${principle.URLBezeichnung}`,
 }));
 ---
 
@@ -73,7 +72,7 @@ const tabs = prinzips.map((principle) => ({
     />
 
     <ContentWrapper compactTopSpacing className="space-y-80">
-      <RouteTabs activeKey={prinzip.URLBezeichnung} tabs={tabs} client:load />
+      <RouteTabs tabs={tabs} />
 
       <InfoBox
         heading={{ text: prinzip.Name, tagName: "h2" }}
