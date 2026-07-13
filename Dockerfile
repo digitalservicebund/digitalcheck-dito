@@ -12,8 +12,6 @@ RUN pnpm install --frozen-lockfile --ignore-scripts
 
 
 COPY tsconfig.json astro.config.mjs ./
-# perspektivisch wird app nicht mehr gebraucht bei abgeschlossener Migration
-COPY app/ app/
 COPY src/ src/
 COPY public/ public/
 
