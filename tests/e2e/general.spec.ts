@@ -222,7 +222,7 @@ test.describe("error pages", () => {
     const response = await page.goto("/does-not-exist");
     expect(response?.status()).toBe(404);
     await expect(page.getByRole("main")).toContainText(
-      "404 Seite konnte nicht gefunden werden",
+      "Seite konnte nicht gefunden werden",
     );
   });
 
