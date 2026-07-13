@@ -8,7 +8,6 @@ import RegulationMetadata from "@/components/RegulationMetadata";
 import RichText from "@/components/RichText.tsx";
 import TabGroup from "@/components/tabs/Tabs";
 import VisualisationItem from "@/components/VisualisationItem";
-import { examplesRegelungen } from "@/resources/content/beispiele-regelungen";
 import type {
   Beispielvorhaben,
   PrinzipWithBeispielvorhaben,
@@ -25,35 +24,38 @@ export function Gesetz({
   regelung: Beispielvorhaben;
   principles: PrinzipWithBeispielvorhaben[];
 }>) {
+  const hasFormulierungen = regelung.Paragraphen.length > 0;
+  const hasVisualierungen = regelung.Visualisierungen.length > 0;
+  const hasNKRStellungnahme = regelung.Digitalchecks.some(
+    (d) => !!d.NKRStellungnahmeDCText,
+  );
   const tabsData: {
     label: string;
     content: React.ReactNode;
   }[] = [];
 
   // ----- Formulierungen / Prinziperfüllungen -----
-  if (regelung.Paragraphen.length > 0) {
+  if (hasFormulierungen) {
     tabsData.push({
-      label: examplesRegelungen.principles.tabName,
+      label: "Formulierungen",
       content: (
         <>
           {regelung.GesetzStatus !== "Verkuendetes_Gesetz_aktuelle_Fassung" && (
-            <InlineNotice
-              className="mb-40"
-              look="tips"
-              heading={
-                <Heading tagName="h2">{examplesRegelungen.infoTitle}</Heading>
-              }
-            >
-              <RichText markdown={examplesRegelungen.infoText} />
+            <InlineNotice className="mb-40" look="tips" heading="Hinweis">
+              <p>
+                Markierte Formulierungen sind gute Beispiele für die
+                Ermöglichung digitaler Umsetzung, trotz ausstehender
+                Verabschiedung.
+              </p>
             </InlineNotice>
           )}
           <Heading
-            id={slugify(examplesRegelungen.principles.title)}
+            id={slugify("Formulierungen aus der Regelung")}
             tagName="h2"
             look="ds-heading-02-bold"
             className="pb-40"
           >
-            {examplesRegelungen.principles.title}
+            Formulierungen aus der Regelung
           </Heading>
           <ParagraphList
             paragraphs={regelung.Paragraphen}
@@ -65,7 +67,7 @@ export function Gesetz({
   }
 
   // ----- Visualisierungen -----
-  if (regelung.Visualisierungen.length > 0) {
+  if (hasVisualierungen) {
     tabsData.push({
       label: "Visualisierung",
       content: (
@@ -96,25 +98,21 @@ export function Gesetz({
   }
 
   // ----- NKR Stellungnahme -----
-  if (
-    regelung.Digitalchecks.some(
-      ({ NKRStellungnahmeDCText }) => !!NKRStellungnahmeDCText,
-    )
-  ) {
+  if (hasNKRStellungnahme) {
     tabsData.push({
-      label: examplesRegelungen.nkr.tabName,
+      label: "NKR-Stellungnahme",
       content: (
         <>
           <div className="mb-16 space-y-16">
             <Heading
-              id={slugify(examplesRegelungen.nkr.title)}
+              id={slugify("NKR-Stellungnahme")}
               tagName="h2"
               look="ds-heading-02-bold"
             >
-              {examplesRegelungen.nkr.title}
+              NKR-Stellungnahme
             </Heading>
             <RichText
-              markdown={examplesRegelungen.nkr.subtitle}
+              markdown="Diese Ausführungen sind der Stellungnahme des NKR entnommen."
               className="ds-subhead"
             />
           </div>
@@ -130,7 +128,7 @@ export function Gesetz({
           ))}
           {regelung.NKRStellungnahmeLink && (
             <div>
-              {examplesRegelungen.nkr.linkText}
+              Die ganze Stellungnahme können Sie hier finden:{" "}
               <a href={regelung.NKRStellungnahmeLink}>NKR-Stellungnahme</a>
             </div>
           )}
@@ -144,7 +142,7 @@ export function Gesetz({
       <Hero
         className="bg-gray-100"
         title={regelung.Titel}
-        subtitle={examplesRegelungen.subtitle[0]}
+        subtitle="Hier finden Sie alles zur Digitaltauglichkeit dieser Regelung."
       />
 
       <div className="bg-gray-100">

@@ -11,7 +11,6 @@ import ParagraphList from "@/components/ParagraphList";
 import RegulationMetadata from "@/components/RegulationMetadata";
 import Separator from "@/components/Separator";
 import RouteTabs from "@/components/tabs/RouteTabs.astro";
-import { examplesRegelungen } from "@/resources/content/beispiele-regelungen";
 import {
   fetchStrapiData,
   paragraphFields,
@@ -67,8 +66,8 @@ const tabs = prinzips.map((principle) => ({
 <BeispieleLayout title={frontmatter.title}>
   <main>
     <Hero
-      title={examplesRegelungen.principles.hero.title}
-      subtitle={examplesRegelungen.principles.hero.subtitle}
+      title="Die Prinzipien im Regelungstext"
+      subtitle="Hier finden Sie Regelungsbeispiele zur Anwendung der Prinzipien."
     />
 
     <ContentWrapper compactTopSpacing className="space-y-80">
@@ -77,7 +76,7 @@ const tabs = prinzips.map((principle) => ({
       <InfoBox
         heading={{ text: prinzip.Name, tagName: "h2" }}
         badge={{
-          children: examplesRegelungen.principles.prinzipBadge,
+          children: "Prinzip",
           principleNumber: prinzip.Nummer,
         }}
       >
@@ -105,7 +104,7 @@ const tabs = prinzips.map((principle) => ({
                       href={`${ROUTE_REGELUNGEN}/${exampleProject.URLBezeichnung}`}
                       data-astro-prefetch="viewport"
                     >
-                      {examplesRegelungen.exampleLinkText}
+                      Alle Beispiele zu dieser Regelung
                     </a>
                   </div>
 

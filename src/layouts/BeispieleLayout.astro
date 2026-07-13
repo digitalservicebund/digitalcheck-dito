@@ -3,9 +3,10 @@ import Container from "@/components/Container";
 import InfoBox from "@/components/InfoBox";
 import RichText from "@/components/RichText";
 import SupportBanner from "@/components/SupportBanner";
-import { examplesRegelungen } from "@/resources/content/beispiele-regelungen";
 import { supportBanner } from "@/resources/content/shared/support-banner";
 import Layout from "./Layout.astro";
+import { dedent } from "@/utils/dedentMultilineStrings";
+import { contact } from "@/resources/content/shared/contact";
 
 interface Props {
   title?: string;
@@ -26,12 +27,19 @@ const { title, description, showProgressBar } = Astro.props;
     <Container className="mt-80 mb-80 bg-blue-100" overhangingBackground>
       <InfoBox
         heading={{
-          text: examplesRegelungen.yourExample.title,
+          text: "Sie möchten Ihr Beispiel hier sehen?",
           tagName: "h2",
           id: "your-example-heading",
         }}
       >
-        <RichText markdown={examplesRegelungen.yourExample.text} />
+        <RichText
+          markdown={dedent`
+          Wir nehmen gerne Vorschläge für Beispiele entgegen. Wenn Sie einen digitaltauglichen Regelungstext oder eine Visualisierung haben, nutzen Sie ganz einfach unser Formular. Dort können Sie Beispiele schnell selbst übermitteln.
+          [Vorschlag übermitteln](https://docs.google.com/forms/d/e/1FAIpQLSc05P6MW3FdFPDuTW5ToPGQQYuT1bkx5qeth7eLW5Yu7V8A5A/viewform)
+
+          Oder schreiben Sie uns eine E-Mail an ${contact.mdMailToLink(contact.email, "Beispiel: Digitaltauglichkeit")}. Wir melden uns zeitnah bei Ihnen.
+          `}
+        />
       </InfoBox>
     </Container>
   </aside>
