@@ -252,11 +252,11 @@ export const support = {
         offerings: [
           {
             title:
-              "Regelungen digitaltauglich gestalten – praktische Tipps für den Digitalcheck",
+              "Regelungen digital- und praxistauglich gestalten – Tipps für den Digitalcheck",
             text: dedent`
               Fast alles, was wir heutzutage in der Verwaltung tun, hat einen Daten- oder Digitalbezug. Regelungsvorhaben sind daher die zentrale Voraussetzung für digitale Leistungen und Prozesse und schaffen die Grundlage für einen digitalen Staat.
 
-              In dieser Online-Schulung erfahren Sie, wie Sie Regelungen so formulieren, dass Sie den **Digitalcheck erfolgreich bestehen**. Wir zeigen an **Beispielen**, wie Sie Ihre Regelungen digitaltauglich schreiben können. Anhand der fünf bewährten **Prinzipien für Digitaltauglichkeit** erläutern wir, wie Sie Begriffe und Konzepte wie Automatisierung und Standardisierung optimal nutzen, um Ihre Vorhaben fit für die digitale Zukunft zu machen.
+              Erfahren Sie, wie Sie Ihr Vorhaben digital- und praxistauglich, adressatenorientiert und bürokratiearm gestalten. In dieser kompakten 90-minütigen Online-Schulung erhalten Sie eine umfassende Einführung zu den folgenden Inhalten: Digitalcheck erfolgreich bearbeiten, digitaltaugliche Formulierungen, Anwenden der Prinzipien für Digitaltauglichkeit, Praxistauglichkeit berücksichtigen und EU-Interoperabilität.
 
               Das Angebot richtet sich an alle, die in den Bundesministerien Regelungen erarbeiten. Vorkenntnisse sind nicht erforderlich.
             `,
