@@ -75,8 +75,8 @@ importers:
         specifier: ^4.0.5
         version: 4.0.5
       posthog-js:
-        specifier: ^1.399.2
-        version: 1.399.2
+        specifier: ^1.399.4
+        version: 1.399.4
       react:
         specifier: ^19.2.7
         version: 19.2.7
@@ -1277,8 +1277,14 @@ packages:
   '@posthog/core@1.40.2':
     resolution: {integrity: sha512-H12j7O9iHGvpK9t2ko8W4pvfbV1pBDxrsWC1LA6yp2RhzwvC4T3sWhu+AekDQJSRSrJEWlB0t/Ueq9QhPSq7FQ==}
 
+  '@posthog/core@1.42.0':
+    resolution: {integrity: sha512-ojUHAt3/y28OsAbJ5S+dTYDiVCmNtagWsZEBZJ8vcXeugRSGrGfv3dDsyr5BJoBBMhv0MNCSm0wMlUzI2vYTGQ==}
+
   '@posthog/types@1.393.0':
     resolution: {integrity: sha512-vzWeEJZ7ERQhFRoQYaP5jzN1JvIu46UJyHXsuv+dTGW2r3sMgREOhNxXLZjmFHwZ8/FOHQoyqqQmXTCXZSfMSg==}
+
+  '@posthog/types@1.395.0':
+    resolution: {integrity: sha512-Ty0gbVc6d9ku9H3caF54PmEfu4PHUGpJKTriMyDb4rjCTsEYOOjD4r6Fw/UMYSSWg8Ls3KnCtTow8LL6ciqNDg==}
 
   '@react-aria/focus@3.22.1':
     resolution: {integrity: sha512-CPxtkyrBi/HYY5P3lE/57sQ6qfa0lN8E55TOm89H0kNGv0lKt+/0zP7lWERzBjRr5IxBVrQX4gFEowBN52LPaA==}
@@ -4084,8 +4090,8 @@ packages:
     resolution: {integrity: sha512-J7EF+8X+CzRPaJPOv9Ck2wNWJvGnnl3PcNPAdGg6GTLjyVpyQ0yATMSXRFRV01BviT/9Gwuc3rjEyJbDJG9a4w==}
     engines: {node: ^10 || ^12 || >=14}
 
-  posthog-js@1.399.2:
-    resolution: {integrity: sha512-xcvrGEgUYtIVcWPRlVfc/NkMo0IP9nwnM/dzJIAzjDOSewkdDk/9T4Vz1+gooEhXdQCPfG44jSK95mVJsoySqA==}
+  posthog-js@1.399.4:
+    resolution: {integrity: sha512-gl2/MxF1SsA7Jtg7EwlJJynQMYhaSRmfXqn3FA3LQKiGJaS7F4F0u4L04lYmJtZTmOWb/tC73YQahgRKhZDK1A==}
 
   preact@10.29.7:
     resolution: {integrity: sha512-DCHYrK/B10yUD3ZjLfhZ3WIE/9Vf9VFUODcRE2dRomTYDpJk6z6L9wecSfhfE6M9ZTHUdyQkoC46arIDhEV84Q==}
@@ -6452,7 +6458,13 @@ snapshots:
     dependencies:
       '@posthog/types': 1.393.0
 
+  '@posthog/core@1.42.0':
+    dependencies:
+      '@posthog/types': 1.395.0
+
   '@posthog/types@1.393.0': {}
+
+  '@posthog/types@1.395.0': {}
 
   '@react-aria/focus@3.22.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
@@ -9908,10 +9920,10 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  posthog-js@1.399.2:
+  posthog-js@1.399.4:
     dependencies:
-      '@posthog/core': 1.40.2
-      '@posthog/types': 1.393.0
+      '@posthog/core': 1.42.0
+      '@posthog/types': 1.395.0
       core-js: 3.49.0
       dompurify: 3.4.12
       fflate: 0.4.8
