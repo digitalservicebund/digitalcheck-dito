@@ -29,8 +29,12 @@ const LinkList = ({
   links: (LinkProps | LinkProps[])[];
   className?: string;
 }) => (
-  <div className={tailwindMerge("ds-stack ds-stack-8", className)}>
-    {header && <h2 className="ds-label-section">{header}</h2>}
+  <div className={tailwindMerge("kern-stack kern-stack-sm", className)}>
+    {header && (
+      <h2 className="ds-label-section kern-label kern-label--large">
+        {header}
+      </h2>
+    )}
     <ul className="list-unstyled flex flex-col gap-8">
       {links.map((link) => {
         const subLinks = Array.isArray(link) ? link : [link];
@@ -53,7 +57,7 @@ export default function Footer() {
       className="ds-label-03-reg flex w-full flex-row justify-center border-t-2 border-blue-300 leading-snug text-gray-900 print:hidden"
       aria-label={footer.navLabel}
     >
-      <div className="ds-stack ds-stack-32 sm:ds-stack-40 w-full max-w-6xl px-16 py-40">
+      <div className="kern-stack kern-stack-xl sm:kern-stack-2xl w-full max-w-6xl px-16 py-40">
         <nav
           className="grid grid-cols-1 justify-between gap-32 sm:grid-cols-[repeat(3,minmax(0,18rem))] sm:grid-rows-2"
           aria-label={footer.top.navLabel}

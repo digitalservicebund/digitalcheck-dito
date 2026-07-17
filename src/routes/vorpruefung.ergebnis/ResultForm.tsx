@@ -113,7 +113,7 @@ export default function ResultForm({
     <>
       <form {...form.getFormProps()} data-testid="result-form">
         <input {...resultField.getHiddenInputProps()} />
-        <div className="ds-stack ds-stack-24">
+        <div className="kern-stack kern-stack-lg">
           <Heading
             tagName="h2"
             className="ds-heading-03-reg"
@@ -124,7 +124,7 @@ export default function ResultForm({
             <div className="mr-[16px] shrink-0">
               <EmailOutlined className="h-40 w-40 fill-blue-800" />
             </div>
-            <div className="ds-stack ds-stack-16 grow">
+            <div className="kern-stack kern-stack-md grow">
               <RichText markdown={preCheckResult.form.instructions} />
               <div className="max-w-a11y">
                 <Input scope={form.scope("title")}>
@@ -180,7 +180,7 @@ export default function ResultForm({
         <div className="mr-[16px] shrink-0">
           <DriveFileRenameOutline className="h-40 w-40 fill-blue-800" />
         </div>
-        <div className="ds-stack ds-stack-24 grow">
+        <div className="kern-stack kern-stack-lg grow">
           <RichText markdown={preCheckResult.form.copyIntroText}></RichText>
           <DetailsSummary
             showVerticalLine
