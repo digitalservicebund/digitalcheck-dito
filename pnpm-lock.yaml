@@ -33,8 +33,8 @@ importers:
         specifier: ^2.2.10
         version: 2.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@posthog/core':
-        specifier: ^1.40.2
-        version: 1.40.2
+        specifier: ^1.41.0
+        version: 1.42.0
       '@rvf/react':
         specifier: ^8.1.3
         version: 8.1.3(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.7))
@@ -1274,17 +1274,14 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@posthog/core@1.40.2':
-    resolution: {integrity: sha512-H12j7O9iHGvpK9t2ko8W4pvfbV1pBDxrsWC1LA6yp2RhzwvC4T3sWhu+AekDQJSRSrJEWlB0t/Ueq9QhPSq7FQ==}
-
   '@posthog/core@1.42.0':
     resolution: {integrity: sha512-ojUHAt3/y28OsAbJ5S+dTYDiVCmNtagWsZEBZJ8vcXeugRSGrGfv3dDsyr5BJoBBMhv0MNCSm0wMlUzI2vYTGQ==}
 
-  '@posthog/types@1.393.0':
-    resolution: {integrity: sha512-vzWeEJZ7ERQhFRoQYaP5jzN1JvIu46UJyHXsuv+dTGW2r3sMgREOhNxXLZjmFHwZ8/FOHQoyqqQmXTCXZSfMSg==}
-
   '@posthog/types@1.395.0':
     resolution: {integrity: sha512-Ty0gbVc6d9ku9H3caF54PmEfu4PHUGpJKTriMyDb4rjCTsEYOOjD4r6Fw/UMYSSWg8Ls3KnCtTow8LL6ciqNDg==}
+
+  '@posthog/types@1.396.0':
+    resolution: {integrity: sha512-S0izvq+Hqvz2GPoYJO4x7fAtlCSHNN+JiugpBmQRdG7RrYW7kZ+GipmbTItjPSKuXoJx4KbEnxBvr6NHhoZV4w==}
 
   '@react-aria/focus@3.22.1':
     resolution: {integrity: sha512-CPxtkyrBi/HYY5P3lE/57sQ6qfa0lN8E55TOm89H0kNGv0lKt+/0zP7lWERzBjRr5IxBVrQX4gFEowBN52LPaA==}
@@ -6455,17 +6452,13 @@ snapshots:
     dependencies:
       playwright: 1.61.1
 
-  '@posthog/core@1.40.2':
-    dependencies:
-      '@posthog/types': 1.393.0
-
   '@posthog/core@1.42.0':
     dependencies:
-      '@posthog/types': 1.395.0
-
-  '@posthog/types@1.393.0': {}
+      '@posthog/types': 1.396.0
 
   '@posthog/types@1.395.0': {}
+
+  '@posthog/types@1.396.0': {}
 
   '@react-aria/focus@3.22.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
