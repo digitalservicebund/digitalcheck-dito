@@ -1,14 +1,16 @@
-@import "@digitalservice4germany/angie/fonts.css" layer(base);
+@import "@kern-ux/native/dist/kern.min.css" layer(base);
+@import "@kern-ux/native/dist/fonts/fira-sans.css";
+@import "./kern-utils.css";
 
 @import "tailwindcss";
 /* keep source to explicitly tell Tailwind where to scan for classes in your source files to prevent hydration issues */
 @source "../../src";
 
 @config "@digitalservice4germany/style-dictionary/tailwind";
-@plugin "@digitalservice4germany/angie";
+/* @plugin "@digitalservice4germany/angie"; */
 
 @theme {
-  --font-sans: BundesSansWeb;
+  --font-sans: var(--kern-typography-font-family-default);
 
   --color-principle-1: #fce4b1; /* order 1 */
   --color-principle-2: #f5dcd7; /* order 2 */
@@ -40,9 +42,14 @@
   --max-width-a11y: 630px;
 }
 
+:root {
+  --kern-color-action-default: var(--color-ds-blue-800);
+  --kern-color-action-visited: var(--color-ds-violet);
+}
+
 @layer base {
   html {
-    /* Keep 16px, don't change! (e.g. angie library depends on it) */
+    /* Keep 16px, don't change! */
     font-size: 16px;
   }
 
@@ -52,18 +59,22 @@
   }
 
   h1 {
-    @apply ds-heading-01-reg;
+    @apply kern-heading-x-large;
   }
 
   h2 {
-    @apply ds-heading-02-reg;
+    @apply kern-heading-large;
   }
 
   h3 {
-    @apply ds-heading-03-reg;
+    @apply kern-heading-medium;
   }
 
-  a:not(.link-unstyled) {
+  h4 {
+    @apply kern-heading-small;
+  }
+
+  a:not(.link-unstyled, .kern-link) {
     @apply text-link;
 
     &:not([download])[href^="http"]::after {
@@ -82,11 +93,6 @@
   }
   a[href^="tel:"] {
     @apply whitespace-nowrap;
-  }
-
-  a,
-  button {
-    @apply cursor-pointer;
   }
 
   blockquote {
@@ -115,9 +121,7 @@
 
   h1,
   h2,
-  .ds-heading-01-reg,
   .ds-heading-02-reg,
-  .ds-heading-01-bold,
   .ds-heading-02-bold {
     /* 80ch @ 18px font size = 720px */
     max-width: 720px;
@@ -149,10 +153,6 @@
   padding: 2.5rem 3rem 3rem;
 
   margin-inline: var(--container-padding-inline);
-}
-
-@utility ds-button {
-  @apply max-sm:ds-button-full-width sm:ds-button-large;
 }
 
 @utility text-link {

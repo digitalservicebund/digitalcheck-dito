@@ -1,8 +1,5 @@
-import tailwindPreset from "@digitalservice4germany/style-dictionary/tailwind";
 import { extendTailwindMerge } from "tailwind-merge";
 
-// eslint-disable-next-line import/no-named-as-default-member
-const spacing = Object.keys(tailwindPreset.theme.spacing);
 const typographyVariants = [
   "01-reg",
   "01-bold",
@@ -19,7 +16,7 @@ const customTwMerge = extendTailwindMerge<
   | "dsInput"
   | "dsRadio"
   | "dsSelect"
-  | "dsStack"
+  | "kernStack"
   | "dsTypography"
 >({
   extend: {
@@ -30,7 +27,10 @@ const customTwMerge = extendTailwindMerge<
       dsInput: [{ "ds-input": ["medium", "small"] }],
       dsRadio: [{ "ds-radio": ["small", "mini"] }],
       dsSelect: [{ "ds-input": ["medium", "small"] }],
-      dsStack: [{ "ds-stack": spacing }],
+      kernStack: [
+        "kern-stack",
+        { "kern-stack": ["xxs", "xs", "sm", "md", "lg", "xl", "2xl", "3xl"] },
+      ],
       dsTypography: [
         "ds-title-reg",
         { "ds-heading": typographyVariants },

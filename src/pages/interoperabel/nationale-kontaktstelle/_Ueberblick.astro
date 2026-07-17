@@ -13,7 +13,10 @@ import { spoc } from "./_content";
 <>
   <div class="container">
     <Heading tagName="h2" text={spoc.landscape.headline} className="mb-8" />
-    <RichText markdown={spoc.landscape.content} className="ds-stack-24 mb-40" />
+    <RichText
+      markdown={spoc.landscape.content}
+      className="kern-stack-lg mb-40"
+    />
     <ImageZoomable image={spoc.landscape.image} />
     <RichText
       className="mt-16 mb-32"

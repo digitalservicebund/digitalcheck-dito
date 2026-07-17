@@ -1,0 +1,77 @@
+@utility kern-heading-x-large {
+  letter-spacing: var(--kern-metric-space-none, 0px);
+  padding-top: var(--kern-metric-baseline-heading-x-large-padding-top);
+  padding-bottom: var(--kern-metric-baseline-heading-x-large-padding-bottom);
+  font-size: var(--kern-typography-font-size-adaptive-x-large, 48px);
+  font-weight: var(--kern-typography-font-weight-medium, 500);
+  line-height: var(--kern-typography-line-height-adaptive-x-large, 56px);
+}
+
+@utility kern-heading-large {
+  letter-spacing: var(--kern-metric-space-none, 0px);
+  padding: var(--kern-metric-baseline-heading-large-padding-top, 7px)
+    var(--kern-metric-space-none, 0px)
+    var(--kern-metric-baseline-heading-large-padding-bottom, 9px)
+    var(--kern-metric-space-none, 0px);
+  font-size: var(--kern-typography-font-size-large-adaptive, 26px);
+  font-weight: var(--kern-typography-font-weight-heading-default, 600);
+  line-height: var(--kern-typography-line-height-large-adaptive, 32px);
+}
+
+@utility kern-heading-medium {
+  letter-spacing: var(--kern-metric-space-none, 0px);
+  padding-top: var(--kern-metric-baseline-heading-medium-padding-top, 5px);
+  padding-bottom: var(
+    --kern-metric-baseline-heading-medium-padding-bottom,
+    3px
+  );
+  font-size: var(--kern-typography-font-size-medium-adaptive, 21px);
+  font-weight: var(--kern-typography-font-weight-heading-default, 600);
+  line-height: var(--kern-typography-line-height-medium-adaptive, 24px);
+}
+
+@utility kern-heading-small {
+  letter-spacing: var(--kern-metric-space-none, 0px);
+  padding-top: var(--kern-metric-baseline-heading-small-padding-top, 6px);
+  padding-bottom: var(--kern-metric-baseline-heading-small-padding-bottom, 2px);
+  font-size: var(--kern-typography-font-size-medium-static, 18px);
+  font-weight: var(--kern-typography-font-weight-heading-default, 600);
+  line-height: var(--kern-typography-line-height-medium-static, 24px);
+}
+
+@utility kern-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+@utility kern-stack-xxs {
+  row-gap: var(--kern-metric-space-2x-small);
+}
+
+@utility kern-stack-xs {
+  row-gap: var(--kern-metric-space-x-small);
+}
+
+@utility kern-stack-sm {
+  row-gap: var(--kern-metric-space-small);
+}
+
+@utility kern-stack-md {
+  row-gap: var(--kern-metric-space-default);
+}
+
+@utility kern-stack-lg {
+  row-gap: var(--kern-metric-space-large);
+}
+
+@utility kern-stack-xl {
+  row-gap: var(--kern-metric-space-x-large);
+}
+
+@utility kern-stack-2xl {
+  row-gap: var(--kern-metric-space-2x-large);
+}
+
+@utility kern-stack-3xl {
+  row-gap: var(--kern-metric-space-3x-large);
+}

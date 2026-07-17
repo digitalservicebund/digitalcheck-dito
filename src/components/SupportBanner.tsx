@@ -13,7 +13,7 @@ export default function SupportBanner({
 }: Readonly<SupportBannerProps>) {
   return (
     <aside className="bg-blue-300" aria-labelledby="support-banner-heading">
-      <Container className="ds-stack ds-stack-16">
+      <Container className="kern-stack kern-stack-md">
         <InfoBox
           heading={{
             tagName: "h2",

@@ -93,7 +93,7 @@ const InfoBox = ({
       {visual?.type === "component" && visual.Component}
       <div
         data-testid="info-box-content"
-        className={"ds-stack ds-stack-16 grow wrap-break-word"}
+        className={"kern-stack kern-stack-md grow wrap-break-word"}
       >
         {badge && <Badge className="self-start" {...badge} />}
         {heading && <Heading tagName="h3" {...heading} />}
@@ -108,7 +108,7 @@ export type DetailsSummaryListProps = {
 };
 
 const DetailsSummaryList = ({ title, items }: DetailsSummaryListProps) => (
-  <div className="ds-stack ds-stack-8 mt-16">
+  <div className="kern-stack kern-stack-sm mt-16">
     {title && <Heading {...title} className="ds-label-02-bold" />}
     {items?.map(({ title, ...details }) => (
       <DetailsSummary key={title} title={title} {...details} />

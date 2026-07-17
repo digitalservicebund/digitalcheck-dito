@@ -25,7 +25,7 @@ export default function VisualisationItem({
   showContext,
 }: Readonly<VisualisationItemProps>) {
   return (
-    <div className="ds-stack ds-stack-32">
+    <div className="kern-stack kern-stack-xl">
       <Heading
         tagName="h2"
         text={visualisierung.Titel}

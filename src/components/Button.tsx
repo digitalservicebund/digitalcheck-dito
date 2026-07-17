@@ -26,12 +26,16 @@ export type ButtonProps = React.ComponentPropsWithoutRef<"button"> &
 export type LinkButtonProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
   ButtonBaseProps;
 
-type ReactElementWithClassname = ReactElement<{ className: string }>;
+type ReactElementWithClassname = ReactElement<{
+  className?: string;
+  "aria-hidden"?: boolean;
+}>;
 
+// ToDo change ds-button-icon to kern-icon
 function formatIcon(icon?: ReactElementWithClassname) {
   if (!icon) return undefined;
   const className = `ds-button-icon ${icon.props.className ?? ""}`;
-  return cloneElement(icon, { className });
+  return cloneElement(icon, { className, "aria-hidden": true });
 }
 
 function createButtonClasses({
@@ -47,17 +51,17 @@ function createButtonClasses({
 >) {
   if (look === "link") {
     return twMerge(
-      "text-link inline-flex items-center text-left space-x-8",
+      "kern-link inline-flex items-center text-left space-x-8",
       className,
     );
   }
+
   return twMerge(
-    "ds-button",
-    look == "secondary" && "ds-button-secondary",
-    look == "tertiary" && "ds-button-tertiary",
-    look == "ghost" && "ds-button-ghost",
-    size == "large" && "ds-button-large",
-    size == "small" && "ds-button-small",
+    "kern-btn",
+    look == "primary" && "kern-btn--primary",
+    (look === "secondary" || look === "tertiary") && "kern-btn--secondary",
+    look === "ghost" && "kern-btn--tertiary",
+    size == "small" && "kern-btn--x-small",
     (iconLeft ?? iconRight) && ["ds-button-with-icon"],
     fullWidth && "ds-button-full-width",
     className,
@@ -73,7 +77,7 @@ function Button({
   iconLeft,
   iconRight,
   fullWidth,
-  look,
+  look = "primary",
   size,
   className,
   type,
@@ -97,7 +101,7 @@ function Button({
       className={buttonClasses}
     >
       {formatIcon(iconLeft)}
-      <span className="ds-button-label">{children}</span>
+      <span className="kern-label">{children}</span>
       {formatIcon(iconRight)}
     </button>
   );
@@ -150,7 +154,11 @@ export function LinkButton({
       onKeyDown={onKeyDown}
       {...props}
     >
-      {iconLeft} <span className="ds-button-label">{children}</span> {iconRight}
+      {iconLeft}{" "}
+      <span className={look === "link" ? undefined : "kern-label"}>
+        {children}
+      </span>{" "}
+      {iconRight}
     </a>
   );
 }
