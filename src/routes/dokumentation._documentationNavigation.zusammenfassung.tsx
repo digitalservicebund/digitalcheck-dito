@@ -202,7 +202,7 @@ function SimplifiedAspectsContent({
               return (
                 <span
                   key={aspect}
-                  className="rounded-full border border-blue-400 bg-blue-400 px-16 py-6 text-sm font-medium"
+                  className="border-ds-blue-400 bg-ds-blue-400 rounded-full border px-16 py-6 text-sm font-medium"
                 >
                   {aspekt ? aspekt.Kurzbezeichnung : aspect}
                 </span>
@@ -292,7 +292,7 @@ function BindingRequirementSummary({
   return bindingRequirements.requirements.map((bindingRequirement, index) => {
     return (
       <>
-        {index > 0 && <hr className="text-gray-700" />}
+        {index > 0 && <hr className="text-ds-gray-700" />}
         <div key={bindingRequirement.description}>
           <RequirementDetail requirement={bindingRequirement} />
         </div>

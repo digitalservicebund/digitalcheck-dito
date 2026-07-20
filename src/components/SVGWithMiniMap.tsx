@@ -56,7 +56,7 @@ export default function SVGWithMinimap({
   return (
     <div
       className={twMerge(
-        "flex flex-row items-start fill-blue-700/20 stroke-blue-700/90 px-8",
+        "fill-ds-blue-700/20 stroke-ds-blue-700/90 flex flex-row items-start px-8",
         className,
       )}
     >

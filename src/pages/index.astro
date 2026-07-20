@@ -90,7 +90,7 @@ const steps = [
     <BreakoutHero
       title="Digitaltaugliche Regelungen erarbeiten"
       subtitle="Der Digitalcheck ist eine Prozessbegleitung für Ihr Regelungsvorhaben. Sie stellen damit Digitaltauglichkeit sicher."
-      className="bg-blue-800 text-white"
+      className="bg-ds-blue-800 text-white"
     />
 
     <div class="py-40 lg:py-80">
@@ -98,7 +98,7 @@ const steps = [
 
       <div class="relative">
         <div
-          class="absolute h-16 w-16 rounded-full bg-blue-300 max-lg:-bottom-8 max-lg:left-10 lg:-top-6 lg:-right-1"
+          class="bg-ds-blue-300 absolute h-16 w-16 rounded-full max-lg:-bottom-8 max-lg:left-10 lg:-top-6 lg:-right-1"
         >
         </div>
         <ol
@@ -106,8 +106,8 @@ const steps = [
         >
           {
             steps.map((step) => (
-              <li class="relative border-blue-300 max-lg:border-l-3 max-lg:pb-40 max-lg:pl-40 lg:row-span-6 lg:grid lg:grid-rows-subgrid lg:border-t-3 lg:pr-40">
-                <div class="absolute flex h-40 w-40 items-center justify-center rounded-full bg-blue-800 font-bold text-white max-lg:left-[-22px] lg:-top-20">
+              <li class="border-ds-blue-300 relative max-lg:border-l-3 max-lg:pb-40 max-lg:pl-40 lg:row-span-6 lg:grid lg:grid-rows-subgrid lg:border-t-3 lg:pr-40">
+                <div class="bg-ds-blue-800 absolute flex h-40 w-40 items-center justify-center rounded-full font-bold text-white max-lg:left-[-22px] lg:-top-20">
                   {step.number}
                 </div>
                 <Heading
@@ -153,7 +153,7 @@ const steps = [
       </div>
     </div>
 
-    <div class="breakout space-y-40 bg-blue-100 py-40 lg:py-80">
+    <div class="breakout bg-ds-blue-100 space-y-40 py-40 lg:py-80">
       <Heading tagName="h2" text="Einführung zum Digitalcheck" />
       <InfoBox
         visual={{ type: "icon", Icon: WidgetsOutlinedIcon }}
@@ -280,7 +280,7 @@ const steps = [
 
       <InfoBox
         look="highlight"
-        className="bg-blue-100"
+        className="bg-ds-blue-100"
         visual={{ type: "icon", Icon: ContactPhoneOutlinedIcon }}
       >
         <Heading tagName="h3" className="ds-heading-03-reg mb-16">
@@ -292,9 +292,9 @@ const steps = [
     </div>
   </main>
   <aside
-    class="relative flex items-center justify-center gap-40 bg-yellow-200 p-24"
+    class="bg-ds-yellow-200 relative flex items-center justify-center gap-40 p-24"
   >
-    <DvrIcon className="size-96 fill-yellow-300 max-md:hidden" />
+    <DvrIcon className="fill-ds-yellow-300 size-96 max-md:hidden" />
     <div class="space-y-8">
       <Heading
         tagName="h2"

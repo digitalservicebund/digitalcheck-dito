@@ -18,8 +18,8 @@ export function Pill({ label, value, selected, onClick }: PillProps) {
       className={twJoin(
         "flex flex-row items-center gap-8 rounded-full border py-6 text-sm font-medium transition-colors",
         selected
-          ? "border-blue-400 bg-blue-400 pr-12 pl-16 hover:bg-blue-500"
-          : "border-gray-400 bg-white px-16 hover:bg-blue-100",
+          ? "border-ds-blue-400 bg-ds-blue-400 hover:bg-ds-blue-500 pr-12 pl-16"
+          : "border-ds-gray-400 hover:bg-ds-blue-100 bg-white px-16",
       )}
     >
       {label}

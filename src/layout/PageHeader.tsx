@@ -147,11 +147,11 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
         href={item.href}
         onClick={closeOpenDropdowns}
         className={twMerge(
-          "link-unstyled flex items-center hover:bg-blue-100",
+          "link-unstyled hover:bg-ds-blue-100 flex items-center",
           isMobile
             ? "ds-label-01-bold w-full border-l-4 border-transparent p-16"
             : "ds-label-01-reg h-full border-y-4 border-transparent px-16 whitespace-nowrap",
-          isActive && "border-blue-800 border-t-transparent bg-blue-100",
+          isActive && "border-ds-blue-800 bg-ds-blue-100 border-t-transparent",
         )}
       >
         {item.text}
@@ -179,7 +179,7 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
         />
       )}
       <header
-        className="relative z-30 border-b-2 border-blue-300 bg-white"
+        className="border-ds-blue-300 relative z-30 border-b-2 bg-white"
         ref={headerRef}
       >
         <Kopfzeile className="relative" />
@@ -217,7 +217,7 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
           {/* Mobile View Controls */}
           <div className="flex items-center space-x-16 lg:hidden">
             <a
-              className="link-unstyled border-y-4 border-transparent"
+              className="link-unstyled border-ds-blue-100 border-y-4"
               href={`tel:${header.contactTel.number.replaceAll(/\s/g, "")}`}
               aria-label={header.contactTel.msg}
             >
@@ -226,9 +226,9 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
             <button
               type="button"
               className={twMerge(
-                "h-full cursor-pointer border-y-4 border-transparent px-16 hover:bg-blue-100",
+                "hover:bg-ds-blue-100 h-full cursor-pointer border-y-4 border-transparent px-16",
                 mobileMenuOpen &&
-                  "border-blue-800 border-t-transparent bg-blue-100",
+                  "border-ds-blue-800 bg-ds-blue-100 border-t-transparent",
               )}
               onClick={toggleMobileMenu}
               aria-label="Menü öffnen/schließen"
@@ -244,7 +244,7 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
         <nav
           id="mobile-menu"
           className={twJoin(
-            "absolute right-0 left-0 z-40 rounded-b-md border-t border-gray-600 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]",
+            "border-ds-gray-600 absolute right-0 left-0 z-40 rounded-b-md border-t bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]",
             mobileMenuOpen ? "overflow-y-auto" : "invisible",
           )}
           aria-hidden={!mobileMenuOpen}
@@ -252,7 +252,7 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
           {header.items.map((item) => renderNavItem(item, "mobile"))}
         </nav>
         <noscript>
-          <div className="bg-yellow-200">
+          <div className="bg-ds-yellow-200">
             <Container className="py-4">
               <RichText markdown={header.noscript.text} />
             </Container>

@@ -24,7 +24,7 @@ const {
 function Testimonial() {
   return (
     <>
-      <p className="-mb-20 text-6xl text-blue-600">&ldquo;</p>
+      <p className="text-ds-blue-600 -mb-20 text-6xl">&ldquo;</p>
       <RichText
         markdown={socialProof.testimonials[0].quote}
         className="text-base"
@@ -35,7 +35,7 @@ function Testimonial() {
       />
       <RichText
         markdown={socialProof.testimonials[0].ministry}
-        className="text-base font-bold text-gray-800"
+        className="text-ds-gray-800 text-base font-bold"
       />
     </>
   );
@@ -52,7 +52,7 @@ export default function Index() {
       <main>
         <Hero title={title} subtitle={subtitle} />
 
-        <div className="bg-blue-300">
+        <div className="bg-ds-blue-300">
           <Container className="flex flex-col py-0 lg:h-[420px] lg:flex-row">
             <div className="py-32 sm:py-48 lg:w-1/2 lg:self-center">
               <RichText
@@ -93,7 +93,7 @@ export default function Index() {
                   key={supportType.title}
                   className="flex gap-16 max-lg:flex-col"
                 >
-                  <supportType.icon className="size-48 flex-none fill-blue-800" />
+                  <supportType.icon className="fill-ds-blue-800 size-48 flex-none" />
                   <InfoBox
                     heading={{
                       tagName: "h3",
@@ -106,7 +106,7 @@ export default function Index() {
               ))}
           </div>
         </Container>
-        <div className="bg-blue-100">
+        <div className="bg-ds-blue-100">
           <Container>
             <Heading id="hilfe" tagName="h2" text={supportHow.title} />
             <div className="kern-stack kern-stack-md pt-32">
@@ -141,7 +141,7 @@ export default function Index() {
                   {tab.offerings.map((offering) => (
                     <Container
                       key={offering.title}
-                      className="mb-32 flex justify-between gap-32 rounded-xl bg-blue-100 px-40 max-md:flex-col"
+                      className="bg-ds-blue-100 mb-32 flex justify-between gap-32 rounded-xl px-40 max-md:flex-col"
                     >
                       <InfoBox
                         heading={{
@@ -161,12 +161,12 @@ export default function Index() {
                             <h3 className="text-lg">
                               {offering.sellingPoints}
                             </h3>
-                            <div className="divide-y divide-gray-700">
+                            <div className="divide-ds-gray-700 divide-y">
                               {offering.details.map((detail) => (
                                 <div key={detail.title} className="py-16">
                                   <div className="flex items-center gap-8 pb-8">
                                     {detail.icon && (
-                                      <detail.icon className="size-24 fill-gray-800" />
+                                      <detail.icon className="fill-ds-gray-800 size-24" />
                                     )}
                                     <Heading
                                       tagName="p"
@@ -185,7 +185,7 @@ export default function Index() {
                         </div>
                         {"examples" in offering && (
                           <div className="bg-white">
-                            <div className="divide-y divide-gray-700">
+                            <div className="divide-ds-gray-700 divide-y">
                               {offering.examples.map((example, idx) => (
                                 <div key={`${offering.title}-example-${idx}`}>
                                   {"image" in example && (
@@ -212,7 +212,7 @@ export default function Index() {
           </Container>
         </div>
 
-        <div className="bg-blue-400">
+        <div className="bg-ds-blue-400">
           <Container className="py-80">
             <InfoBox
               badge={{

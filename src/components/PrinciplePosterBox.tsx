@@ -11,7 +11,7 @@ export function PrinciplePosterBox({
   const { principlePosterBox } = methodsFivePrinciples;
 
   return (
-    <div className={twJoin(hasBlueBackground && "bg-blue-100")}>
+    <div className={twJoin(hasBlueBackground && "bg-ds-blue-100")}>
       <Container>
         <InfoBox
           look="highlight"

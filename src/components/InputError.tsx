@@ -16,7 +16,7 @@ const InputError = ({ id, children, look = "error" }: InputErrorProps) => {
       data-testid={id}
       className={twMerge(
         "text-ds-error flex items-center gap-x-4",
-        look === "warning" && "inline-flex bg-yellow-300 px-4 text-black",
+        look === "warning" && "bg-ds-yellow-300 inline-flex px-4 text-black",
       )}
     >
       {look === "error" && (

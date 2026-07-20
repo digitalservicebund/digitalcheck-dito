@@ -20,7 +20,7 @@ export default function Hero({
   className,
 }: Readonly<HeroProps>) {
   return (
-    <div className={twMerge("bg-blue-100", className)}>
+    <div className={twMerge("bg-ds-blue-100", className)}>
       <Container className="kern-stack kern-stack-md pb-48">
         <Heading tagName="h1">{title}</Heading>
         {subtitle && (
@@ -44,7 +44,7 @@ export function BreakoutHero({
   className,
 }: Readonly<HeroProps>) {
   return (
-    <div className={twMerge("breakout bg-blue-100 pt-40 pb-48", className)}>
+    <div className={twMerge("breakout bg-ds-blue-100 pt-40 pb-48", className)}>
       {preline}
       <Heading tagName="h1">{title}</Heading>
       {subtitle && (

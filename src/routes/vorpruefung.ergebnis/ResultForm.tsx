@@ -122,7 +122,7 @@ export default function ResultForm({
 
           <div className="flex items-start pb-[40px]">
             <div className="mr-[16px] shrink-0">
-              <EmailOutlined className="h-40 w-40 fill-blue-800" />
+              <EmailOutlined className="fill-ds-blue-800 h-40 w-40" />
             </div>
             <div className="kern-stack kern-stack-md grow">
               <RichText markdown={preCheckResult.form.instructions} />
@@ -178,7 +178,7 @@ export default function ResultForm({
 
       <div className="flex items-start">
         <div className="mr-[16px] shrink-0">
-          <DriveFileRenameOutline className="h-40 w-40 fill-blue-800" />
+          <DriveFileRenameOutline className="fill-ds-blue-800 h-40 w-40" />
         </div>
         <div className="kern-stack kern-stack-lg grow">
           <RichText markdown={preCheckResult.form.copyIntroText}></RichText>

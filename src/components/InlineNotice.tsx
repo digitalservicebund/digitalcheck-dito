@@ -13,32 +13,32 @@ import { twJoin } from "tailwind-merge";
 // Therefore, it's set in the config.
 const lookConfig = {
   success: {
-    backgroundColor: "bg-green-100",
+    backgroundColor: "bg-ds-green-100",
     borderColor: "border-ds-success",
     IconComponent: CheckCircleOutlinedIcon,
   },
   info: {
-    backgroundColor: "bg-blue-300",
-    borderColor: "border-blue-700",
+    backgroundColor: "bg-ds-blue-300",
+    borderColor: "border-ds-blue-700",
     IconComponent: InfoOutlinedIcon,
   },
   warning: {
-    backgroundColor: "bg-yellow-200",
+    backgroundColor: "bg-ds-yellow-200",
     borderColor: "border-ds-yellow-700",
     IconComponent: WarningAmberIcon,
   },
   missingOrIncomplete: {
-    backgroundColor: "bg-yellow-200",
+    backgroundColor: "bg-ds-yellow-200",
     borderColor: "border-ds-yellow-700",
     IconComponent: LightbulbOutlinedIcon,
   },
   support: {
-    backgroundColor: "bg-yellow-200",
+    backgroundColor: "bg-ds-yellow-200",
     borderColor: "border-ds-yellow-700",
     IconComponent: ContactSupportOutlinedIcon,
   },
   tips: {
-    backgroundColor: "bg-gray-100",
+    backgroundColor: "bg-ds-gray-100",
     borderColor: "border-ds-gray-600",
     IconComponent: LightbulbOutlinedIcon,
   },

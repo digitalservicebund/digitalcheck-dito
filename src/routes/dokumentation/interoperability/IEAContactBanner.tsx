@@ -3,8 +3,8 @@ import { QuestionMarkOutlined } from "@digitalservicebund/icons";
 
 export function IEAContactBanner() {
   return (
-    <div className="mt-8 flex gap-16 bg-blue-300 p-16">
-      <QuestionMarkOutlined className="size-80 fill-blue-800" />
+    <div className="bg-ds-blue-300 mt-8 flex gap-16 p-16">
+      <QuestionMarkOutlined className="fill-ds-blue-800 size-80" />
       <p>
         <span className="ds-label-01-bold block">
           Bei Fragen und Rückmeldungen

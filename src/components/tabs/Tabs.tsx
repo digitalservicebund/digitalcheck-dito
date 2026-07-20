@@ -124,7 +124,7 @@ const TabsComponent = ({
       onChange={handleChange}
       {...props}
     >
-      <HeadlessTabList className="mb-40 box-border flex items-stretch border-b-[3px] border-blue-500 max-lg:hidden">
+      <HeadlessTabList className="border-ds-blue-500 mb-40 box-border flex items-stretch border-b-[3px] max-lg:hidden">
         {resolvedTabs.map((tab) => (
           <HeadlessTab
             key={tab.key}

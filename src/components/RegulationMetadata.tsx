@@ -6,7 +6,7 @@ export default function RegulationMetadata({
   exampleProject,
 }: Readonly<{ exampleProject: Beispielvorhaben }>) {
   return (
-    <Metadata className="bg-gray-100 px-16 py-8">
+    <Metadata className="bg-ds-gray-100 px-16 py-8">
       {exampleProject.VeroeffentlichungsDatum && (
         <Metadata.Item
           label="Fassung vom"

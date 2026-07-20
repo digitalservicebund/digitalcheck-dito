@@ -116,15 +116,15 @@ export default function Result() {
   return (
     <>
       <main>
-        <div className="bg-blue-100 py-40 print:pb-0">
+        <div className="bg-ds-blue-100 py-40 print:pb-0">
           <div className="space-y-40 px-16">
             <div>
               <Container
                 className={twJoin(
                   "rounded-t-lg py-32",
                   result?.digital === ResultType.UNSURE
-                    ? "bg-yellow-200"
-                    : "bg-blue-300",
+                    ? "bg-ds-yellow-200"
+                    : "bg-ds-blue-300",
                 )}
               >
                 {vorhabenTitle && <PrintTitle title={vorhabenTitle} />}
@@ -171,7 +171,7 @@ export default function Result() {
                     />
                   </InlineNotice>
                 )}
-                <div className="border-b-2 border-solid border-gray-400 pb-40 last:border-0 last:pb-0 print:border-0 print:pb-0">
+                <div className="border-ds-gray-400 border-b-2 border-solid pb-40 last:border-0 last:pb-0 print:border-0 print:pb-0">
                   <DetailsSummary
                     data-testid="result-details"
                     title={preCheckResult.detailsTitle}

@@ -71,7 +71,7 @@ export default function Index() {
             </TabGroup.Tab>
             <TabGroup.Tab
               label={preCheck.start.info.tabName}
-              className="flex flex-col-reverse items-center gap-48 bg-blue-100 px-16 py-40 md:flex-row md:gap-64 md:px-64"
+              className="bg-ds-blue-100 flex flex-col-reverse items-center gap-48 px-16 py-40 md:flex-row md:gap-64 md:px-64"
             >
               <Image
                 url={preCheck.start.info.image.src}

@@ -54,7 +54,7 @@ export default function Footer() {
   return (
     <footer
       id="footer"
-      className="ds-label-03-reg flex w-full flex-row justify-center border-t-2 border-blue-300 leading-snug text-gray-900 print:hidden"
+      className="ds-label-03-reg border-ds-blue-300 text-ds-gray-900 flex w-full flex-row justify-center border-t-2 leading-snug print:hidden"
       aria-label={footer.navLabel}
     >
       <div className="kern-stack kern-stack-xl sm:kern-stack-2xl w-full max-w-6xl px-16 py-40">
@@ -95,7 +95,7 @@ export default function Footer() {
           </ul>
         </nav>
 
-        <hr className="mt-16 w-full border-t-2 border-blue-300" />
+        <hr className="border-ds-blue-300 mt-16 w-full border-t-2" />
 
         <nav aria-label={footer.bottom.navLabel} className="space-y-40">
           <FooterLink link={footer.bottom.digitalserviceLink} />

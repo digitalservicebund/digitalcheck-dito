@@ -37,7 +37,7 @@ function Input({
         {children}
       </label>
       {description && (
-        <p className="ds-body-02-reg block text-gray-900" id={descriptionId}>
+        <p className="ds-body-02-reg text-ds-gray-900 block" id={descriptionId}>
           {description}
         </p>
       )}
@@ -49,7 +49,7 @@ function Input({
           "aria-invalid": hasError || hasWarning,
           "aria-errormessage": hasError || hasWarning ? errorId : undefined,
           className: twMerge(
-            "ds-input placeholder-gray-800",
+            "ds-input placeholder-ds-gray-800",
             hasError && "has-error",
             hasWarning && "has-warning",
           ),

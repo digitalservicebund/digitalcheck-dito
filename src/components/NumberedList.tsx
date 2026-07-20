@@ -41,9 +41,12 @@ function ListItem({
   return (
     <li
       id={id}
-      className={twJoin("scroll-my-40 space-y-40", disabled && "text-gray-800")}
+      className={twJoin(
+        "scroll-my-40 space-y-40",
+        disabled && "text-ds-gray-800",
+      )}
     >
-      <div className="flex flex-col items-start gap-16 before:flex before:size-40 before:shrink-0 before:items-center before:justify-center before:rounded-full before:border-2 before:border-solid before:border-gray-400 before:content-[counter(list-item)] sm:flex-row">
+      <div className="before:border-ds-gray-400 flex flex-col items-start gap-16 before:flex before:size-40 before:shrink-0 before:items-center before:justify-center before:rounded-full before:border-2 before:border-solid before:content-[counter(list-item)] sm:flex-row">
         <div className={twMerge("mt-4", className)}>{children}</div>
       </div>
       {after}
@@ -64,7 +67,7 @@ function NumberedList({
   ...props
 }: NumberedListProps) {
   const separatorClass = separator
-    ? "[&>li]:border-b-2 [&>li]:border-blue-300 [&>li]:pb-80 [&>li]:last:border-none [&>li]:last:pb-0 space-y-80"
+    ? "[&>li]:border-b-2 [&>li]:border-ds-blue-300 [&>li]:pb-80 [&>li]:last:border-none [&>li]:last:pb-0 space-y-80"
     : "space-y-32";
 
   return (
