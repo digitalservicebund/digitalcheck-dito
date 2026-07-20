@@ -3,13 +3,10 @@
 @import "./kern-utils.css";
 
 @import "tailwindcss";
-/* keep source to explicitly tell Tailwind where to scan for classes in your source files to prevent hydration issues */
-@source "../../src";
-
-/* @config "@digitalservice4germany/style-dictionary/tailwind"; */
-/* @plugin "@digitalservice4germany/angie"; */
 
 @theme {
+  --spacing: 1px; /* 1 unit = 1px, so py-8 = 8px (matches previous pixel-based spacing) */
+
   --font-sans: var(--kern-typography-font-family-default);
 
   --color-principle-1: #fce4b1; /* order 1 */
