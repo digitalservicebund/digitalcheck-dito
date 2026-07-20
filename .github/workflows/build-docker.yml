@@ -55,7 +55,7 @@ jobs:
           retention-days: 1
 
       - name: Send failure to Slack
-        uses: digitalservicebund/notify-on-failure-gha@8570032b46ae9c2b976ec41567f595746fa44b4e # v1.6.1
+        uses: digitalservicebund/notify-on-failure-gha@5973d82d62439ebd6f0cf73d6836e6a81782e419 # v1.6.1
         if: failure()
         with:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
