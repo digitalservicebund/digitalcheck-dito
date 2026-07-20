@@ -41,17 +41,17 @@ export default function DropdownMenu({
 
   // Transparent borders to avoid layout shifts
   const buttonClasses = twMerge(
-    "flex cursor-pointer items-center hover:bg-blue-100",
+    "flex cursor-pointer items-center hover:bg-ds-blue-100",
     isMobile
       ? "ds-label-01-bold w-full justify-between border-l-4 border-transparent p-16"
       : "ds-label-01-reg h-full border-y-4 border-transparent pr-8 pl-16 whitespace-nowrap",
-    isActiveParent && "border-blue-800 border-t-transparent bg-blue-100",
-    isExpanded && "bg-blue-100",
+    isActiveParent && "border-ds-blue-800 border-t-transparent bg-ds-blue-100",
+    isExpanded && "bg-ds-blue-100",
   );
 
   const panelClasses = isMobile
     ? ""
-    : "absolute right-0 z-30 w-[512px] rounded-b-md border-t border-gray-600 bg-white pt-8 pb-16 drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]";
+    : "absolute right-0 z-30 w-[512px] rounded-b-md border-t border-ds-gray-600 bg-white pt-8 pb-16 drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]";
 
   const containerClasses = twMerge(
     "relative",
@@ -100,7 +100,7 @@ export default function DropdownMenu({
         >
           {hasSupport && (
             <div className="px-16 lg:px-56">
-              <div className="ds-label-02-reg px-16 pt-8 pb-16 text-gray-900 lg:px-8 lg:pt-16 lg:pb-24">
+              <div className="ds-label-02-reg text-ds-gray-900 px-16 pt-8 pb-16 lg:px-8 lg:pt-16 lg:pb-24">
                 {isMobile ? header.contactTel.msgMobile : header.contactTel.msg}
                 <a
                   href={`tel:${header.contactTel.number.replaceAll(/\s/g, "")}`}
@@ -116,7 +116,7 @@ export default function DropdownMenu({
                   {header.contactMail.text}
                 </a>
               </div>
-              <div className="border-b border-gray-600" />
+              <div className="border-ds-gray-600 border-b" />
             </div>
           )}
           <DropdownContentList

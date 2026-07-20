@@ -57,7 +57,10 @@ export default function AspectPills({
     >
       <legend className="ds-label-01-reg">{children}</legend>
       {description && (
-        <span className="ds-body-02-reg block text-gray-900" id={descriptionId}>
+        <span
+          className="ds-body-02-reg text-ds-gray-900 block"
+          id={descriptionId}
+        >
           {description}
         </span>
       )}

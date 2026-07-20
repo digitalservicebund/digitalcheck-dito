@@ -75,7 +75,7 @@ describe("Nav", () => {
 
     const disabledElement = screen.getByText("Navigation Item 2");
 
-    expect(disabledElement).toHaveClass("text-gray-800");
+    expect(disabledElement).toHaveClass("text-ds-gray-800");
   });
 
   it("highlights the current element", () => {
@@ -86,8 +86,8 @@ describe("Nav", () => {
     expect(activeElement).toHaveClass(
       "ds-label-02-bold",
       "pointer-events-none",
-      "border-l-blue-800",
-      "bg-blue-400",
+      "border-l-ds-blue-800",
+      "bg-ds-blue-400",
     );
   });
 

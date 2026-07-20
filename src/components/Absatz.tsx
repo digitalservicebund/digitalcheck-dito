@@ -139,12 +139,12 @@ export function PrincipleExplanation({
               setActiveHighlight(null);
             }}
           >
-            <ArrowUpwardOutlined className="fill-blue-800" />
+            <ArrowUpwardOutlined className="fill-ds-blue-800" />
           </button>
         )}
       </div>
       {showPrincipleTitle && (
-        <p className="ds-label-03-reg text-gray-900">
+        <p className="ds-label-03-reg text-ds-gray-900">
           {`(Prinzip: ${erfuellung.Prinzip.Name})`}
         </p>
       )}

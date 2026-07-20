@@ -6,7 +6,7 @@
 /* keep source to explicitly tell Tailwind where to scan for classes in your source files to prevent hydration issues */
 @source "../../src";
 
-@config "@digitalservice4germany/style-dictionary/tailwind";
+/* @config "@digitalservice4germany/style-dictionary/tailwind"; */
 /* @plugin "@digitalservice4germany/angie"; */
 
 @theme {
@@ -19,22 +19,47 @@
   --color-principle-3: #cce4f0; /* order 5 */
 
   --color-ds-success: #005f34;
-  --color-ds-error: #8e001b;
-  --color-ds-warning: #f5e05d;
+  --color-ds-error: #8e001b; /* red 900 */
+  --color-ds-warning: #f5e05d; /* yellow 500 */
   --color-ds-feature: #f5e05d;
 
   --color-ds-red-200: #f9e5ec;
-  --color-ds-yellow-700: #e5ce5c;
+  --color-ds-red-600: #d9668b;
+  --color-ds-red-800: #b0243f;
 
+  --color-ds-yellow-200: #fff9d2;
+  --color-ds-yellow-300: #f9ec9e;
+  --color-ds-yellow-500: #f5e05d;
+  --color-ds-yellow-700: #e5ce5c;
+  --color-ds-yellow-800: #dac23c;
+
+  --color-ds-blue-100: #f2f6f8;
+  --color-ds-blue-200: #ecf1f4;
+  --color-ds-blue-300: #dce8ef;
+  --color-ds-blue-400: #b8d7e8;
   --color-ds-blue-500: #b3c9d6;
+  --color-ds-blue-600: #7ba4bf;
   --color-ds-blue-700: #336f91;
   --color-ds-blue-800: #004b76;
+  --color-ds-blue-900: #003350;
 
+  --color-ds-green-100: #e8f7f0;
+  --color-ds-green-200: #ccebdd;
   --color-ds-green-700: #01854a;
+  --color-ds-green-800: #006b3c; /* Added: missing color from Angie palette */
   --color-ds-green-900: #005e34;
 
+  --color-ds-gray-50: #fcfcfd;
+  --color-ds-gray-100: #f6f7f8;
+  --color-ds-gray-200: #f0f1f3;
+  --color-ds-gray-300: #edeef0;
   --color-ds-gray-400: #dcdee1;
+  --color-ds-gray-500: #c9cdd2;
   --color-ds-gray-600: #b8bdc3;
+  --color-ds-gray-700: #a0a7b1;
+  --color-ds-gray-800: #6f7785;
+  --color-ds-gray-900: #4e596a;
+
   --color-ds-violet: #4c2c92;
 
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
@@ -96,7 +121,7 @@
   }
 
   blockquote {
-    @apply border-l-4 border-l-blue-600 italic;
+    @apply border-l-ds-blue-600 border-l-4 italic;
     margin: 1em 10px;
     padding: 0.5em 20px;
   }
@@ -137,7 +162,7 @@
   }
 
   *:focus-visible {
-    @apply no-underline outline-2 outline-offset-1 outline-blue-800;
+    @apply outline-ds-blue-800 no-underline outline-2 outline-offset-1;
   }
 }
 
@@ -156,10 +181,10 @@
 }
 
 @utility text-link {
-  @apply visited:text-ds-violet fill-blue-800 text-blue-800 underline decoration-1 underline-offset-4 active:text-black;
+  @apply visited:text-ds-violet fill-ds-blue-800 text-ds-blue-800 underline decoration-1 underline-offset-4 active:text-black;
 
   &:focus-visible {
-    @apply text-blue-800! no-underline!;
+    @apply text-ds-blue-800! no-underline!;
   }
 
   &:hover {
@@ -167,7 +192,7 @@
   }
 
   .text-white & {
-    @apply text-gray-100 visited:text-gray-300;
+    @apply text-ds-gray-100 visited:text-ds-gray-300;
   }
 }
 
@@ -194,15 +219,15 @@
     }
 
     & thead tr {
-      @apply bg-blue-400 text-left;
+      @apply bg-ds-blue-400 text-left;
     }
 
     & tbody {
-      @apply divide-y divide-gray-200;
+      @apply divide-ds-gray-200 divide-y;
     }
 
     & tbody tr {
-      @apply hover:bg-gray-100;
+      @apply hover:bg-ds-gray-100;
     }
   }
 

@@ -56,7 +56,7 @@ export default function Combobox({
     <Field className="space-y-8">
       {children && <Label className="ds-label-01-reg">{children}</Label>}
       {description && (
-        <Description className="ds-body-02-reg block text-gray-900">
+        <Description className="ds-body-02-reg text-ds-gray-900 block">
           {description}
         </Description>
       )}
@@ -83,14 +83,14 @@ export default function Combobox({
         </div>
         <ComboboxOptions
           anchor="bottom"
-          className="w-(--input-width) space-y-8 border border-gray-400 bg-white shadow-lg empty:invisible"
+          className="border-ds-gray-400 w-(--input-width) space-y-8 border bg-white shadow-lg empty:invisible"
         >
           {options.map((option) => {
             return (
               <ComboboxOption
                 key={option.value}
                 value={option.value}
-                className="group flex p-8 data-focus:bg-blue-200"
+                className="group data-focus:bg-ds-blue-200 flex p-8"
               >
                 <div className="grow">{option.label}</div>
                 <Check className={"hidden group-data-selected:block"} />

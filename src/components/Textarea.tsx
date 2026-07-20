@@ -36,7 +36,10 @@ function Textarea({
         {children}
       </label>
       {description && (
-        <div className="ds-body-02-reg block text-gray-900" id={descriptionId}>
+        <div
+          className="ds-body-02-reg text-ds-gray-900 block"
+          id={descriptionId}
+        >
           {description}
         </div>
       )}
@@ -47,7 +50,7 @@ function Textarea({
           "aria-invalid": hasError || hasWarning,
           "aria-errormessage": hasError || hasWarning ? errorId : undefined,
           className: twMerge(
-            "ds-textarea placeholder-gray-800",
+            "ds-textarea placeholder-ds-gray-800",
             hasError && "has-error",
             hasWarning && "has-warning",
           ),

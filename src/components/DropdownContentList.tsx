@@ -32,7 +32,7 @@ export default function DropdownContentList({
 }: Readonly<DropdownContentListProps>) {
   const listClasses = twMerge(
     "list-unstyled",
-    isMobile && "py-8 pr-8 pl-16 border-b-[1px] border-gray-600",
+    isMobile && "py-8 pr-8 pl-16 border-b-[1px] border-ds-gray-600",
   );
 
   const mapDataToItems = (option: DropdownItemProps, index: number) => {
@@ -63,8 +63,8 @@ export default function DropdownContentList({
         >
           <div
             className={twMerge(
-              "kern-stack kern-stack-xs cursor-pointer border-l-4 border-l-transparent py-8 pr-8 pl-16 text-left hover:bg-blue-100 lg:border-l-8 lg:px-56 lg:py-24",
-              finalIsActive && "border-blue-800 bg-blue-100",
+              "kern-stack kern-stack-xs hover:bg-ds-blue-100 cursor-pointer border-l-4 border-l-transparent py-8 pr-8 pl-16 text-left lg:border-l-8 lg:px-56 lg:py-24",
+              finalIsActive && "border-ds-blue-800 bg-ds-blue-100",
               option.className,
             )}
           >

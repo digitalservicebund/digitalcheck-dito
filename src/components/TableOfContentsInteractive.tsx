@@ -31,7 +31,7 @@ function Item({ title, href, after, numbered }: Readonly<ItemProps>) {
         href={href}
         className={twMerge(
           "link-unstyled",
-          "ds-link-02-reg block cursor-pointer border-l-4 border-transparent p-8 text-blue-800 no-underline hover:bg-blue-300 focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-blue-800 data-active:border-l-blue-800 data-active:bg-blue-200 data-active:hover:bg-blue-300",
+          "ds-link-02-reg text-ds-blue-800 hover:bg-ds-blue-300 focus-visible:outline-ds-blue-800 data-active:border-l-ds-blue-800 data-active:bg-ds-blue-200 data-active:hover:bg-ds-blue-300 block cursor-pointer border-l-4 border-transparent p-8 no-underline focus-visible:outline-4 focus-visible:outline-offset-4",
           numberClass,
         )}
       >

@@ -122,13 +122,13 @@ export function DokumentationIndexPage({
             </NumberedList>
           </section>
         </ContentWrapper>
-        <div className="bg-blue-100 py-80 max-lg:px-16">
+        <div className="bg-ds-blue-100 py-80 max-lg:px-16">
           <Container className="bg-white">
             <InfoBox
               visual={{
                 type: "icon",
                 Icon: TipsAndUpdatesOutlined,
-                className: "fill-blue-300",
+                className: "fill-ds-blue-300",
               }}
               heading={{
                 tagName: "h2",

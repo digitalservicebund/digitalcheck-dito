@@ -31,7 +31,7 @@ export default function RouteTabs({ activeKey, tabs }: RouteTabsProps) {
     <>
       <nav
         aria-label="Seitenabschnitte"
-        className="mb-40 box-border hidden items-stretch border-b-[3px] border-blue-500 lg:flex"
+        className="border-ds-blue-500 mb-40 box-border hidden items-stretch border-b-[3px] lg:flex"
       >
         {tabs.map((tab) => {
           const isActive = tab.key === activeKey;

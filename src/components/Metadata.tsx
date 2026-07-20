@@ -9,7 +9,7 @@ function MetadataItem({ key, label, value }: Readonly<MetadataItem>) {
       key={key ?? label}
       className="inline-flex flex-row items-center gap-4 md:flex-col md:items-start"
     >
-      <dt className="ds-label-03-reg text-gray-900">{label}</dt>
+      <dt className="ds-label-03-reg text-ds-gray-900">{label}</dt>
       <dd className="ds-label-03-bold flex flex-col md:h-24 md:justify-center">
         {value}
       </dd>

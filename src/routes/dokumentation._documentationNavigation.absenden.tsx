@@ -107,10 +107,10 @@ export function DocumentationSend() {
           visual={{
             type: "icon",
             Icon: EmojiEventsOutlinedIcon,
-            className: "size-80 fill-green-800",
+            className: "size-80 fill-ds-green-800",
           }}
           look="highlight"
-          className="items-center bg-green-200"
+          className="bg-ds-green-200 items-center"
         />
       </InfoBoxList>
       {interoperabilityRequired && <InteroperabilitySteps />}

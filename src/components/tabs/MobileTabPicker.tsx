@@ -52,7 +52,7 @@ export default function MobileTabPicker({
               className={({ focus, selected }) =>
                 twJoin(
                   mobileTabPickerOptionClassName,
-                  focus ? "bg-blue-300" : "bg-blue-100",
+                  focus ? "bg-ds-blue-300" : "bg-ds-blue-100",
                   selected && "hidden",
                 )
               }

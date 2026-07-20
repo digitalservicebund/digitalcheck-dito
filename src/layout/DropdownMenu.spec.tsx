@@ -232,13 +232,13 @@ describe("DropdownMenu Component", () => {
       renderDropdown({ isExpanded: true, isOrderedList: false });
       const activeLink = screen.getByText("Link1").parentElement!;
 
-      expect(activeLink.classList).toContain("border-blue-800");
-      expect(activeLink.classList).toContain("bg-blue-100");
+      expect(activeLink.classList).toContain("border-ds-blue-800");
+      expect(activeLink.classList).toContain("bg-ds-blue-100");
 
       const inActiveLink = screen.getByText("Link2").parentElement!;
 
-      expect(inActiveLink.classList).not.toContain("border-blue-800");
-      expect(inActiveLink.classList).not.toContain("bg-blue-100");
+      expect(inActiveLink.classList).not.toContain("border-ds-blue-800");
+      expect(inActiveLink.classList).not.toContain("bg-ds-blue-100");
     });
 
     it("does not highlight when the noHighlight option is set", () => {
@@ -263,8 +263,8 @@ describe("DropdownMenu Component", () => {
 
       const activeLink = screen.getByText("Link1").parentElement!;
 
-      expect(activeLink.classList).not.toContain("border-blue-800");
-      expect(activeLink.classList).not.toContain("bg-blue-100");
+      expect(activeLink.classList).not.toContain("border-ds-blue-800");
+      expect(activeLink.classList).not.toContain("bg-ds-blue-100");
     });
 
     it("does only highlight exact path matches when the exactMatch option is set", () => {
@@ -292,13 +292,13 @@ describe("DropdownMenu Component", () => {
 
       const inActiveLink = screen.getByText("Link1").parentElement!;
 
-      expect(inActiveLink.classList).not.toContain("border-blue-800");
-      expect(inActiveLink.classList).not.toContain("bg-blue-100");
+      expect(inActiveLink.classList).not.toContain("border-ds-blue-800");
+      expect(inActiveLink.classList).not.toContain("bg-ds-blue-100");
 
       const activeLink = screen.getByText("Link2").parentElement!;
 
-      expect(activeLink.classList).toContain("border-blue-800");
-      expect(activeLink.classList).toContain("bg-blue-100");
+      expect(activeLink.classList).toContain("border-ds-blue-800");
+      expect(activeLink.classList).toContain("bg-ds-blue-100");
     });
   });
 });
