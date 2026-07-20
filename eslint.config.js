@@ -35,6 +35,10 @@ export default defineConfig(
     "test-results/",
     "README.md",
     "AGENTS.md",
+    // Python virtualenvs (e.g. scripts/nkr-data/.venv) bundle huge minified
+    // JS assets that aren't part of this project and are extremely slow to lint.
+    "**/.venv/",
+    "**/venv/",
   ]),
   {
     languageOptions: {
