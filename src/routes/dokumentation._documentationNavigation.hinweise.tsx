@@ -38,17 +38,19 @@ export function DocumentationHinweise() {
         markdown={notes}
       />
 
-      <label className="ds-label-01-reg flex flex-row items-center gap-16">
+      <div className="kern-form-check">
         <input
+          id="datenspeicherung"
+          name="datenspeicherung"
           type="checkbox"
-          className="ds-checkbox"
+          className="kern-form-check__checkbox"
           checked={checked}
           onChange={(e) => setChecked(e.target.checked)}
         />
-        {/* silence warning about ambiguous spacing
-         */}
-        Ich habe die oberen Hinweise gelesen.
-      </label>
+        <label className="kern-label" htmlFor="datenspeicherung">
+          Ich habe die oberen Hinweise gelesen.
+        </label>
+      </div>
       <ButtonContainer>
         <Button
           look={"primary"}
