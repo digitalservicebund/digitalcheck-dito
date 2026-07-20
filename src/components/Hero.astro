@@ -7,7 +7,7 @@ const { class: className } = Astro.props;
 const hasSubtitle = Astro.slots.has("subtitle");
 ---
 
-<div class:list={["breakout bg-blue-100", className]}>
+<div class:list={["breakout bg-ds-blue-100", className]}>
   <div class="space-y-16 py-40 pb-48 [&_h1]:sm:hyphens-none">
     <slot />
     {

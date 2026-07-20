@@ -10,7 +10,7 @@ const { pathname } = Astro.url;
 >
   <div
     aria-hidden="true"
-    class="absolute top-[calc(anchor(--progress-start_center)-1px)] right-[anchor(--progress-end_center)] left-[anchor(--progress-start_center)] -z-10 h-[2px] bg-blue-500"
+    class="bg-ds-blue-500 absolute top-[calc(anchor(--progress-start_center)-1px)] right-[anchor(--progress-end_center)] left-[anchor(--progress-start_center)] -z-10 h-[2px]"
   >
   </div>
   <ol
@@ -31,10 +31,12 @@ const { pathname } = Astro.url;
           >
             <span
               class:list={[
-                "ds-label-02-bold mr-8 flex h-24 w-24 items-center justify-center rounded-full border-2 border-blue-800",
+                "ds-label-02-bold border-ds-blue-800 mr-8 flex h-24 w-24 items-center justify-center rounded-full border-2",
                 { "[anchor-name:--progress-start]": isFirst },
                 { "[anchor-name:--progress-end]": isLast },
-                isActive ? "bg-blue-800 text-white" : "bg-white text-blue-800",
+                isActive
+                  ? "bg-ds-blue-800 text-white"
+                  : "text-ds-blue-800 bg-white",
               ]}
             >
               {index + 1}
