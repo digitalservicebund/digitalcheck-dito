@@ -290,8 +290,8 @@ const sections = {
             headline={"Open-Data-Gesetz & Datennutzungsgesetz (DNG)"}
             client:load
           >
-            {
-              dedent`
+            <RichText
+              markdown={dedent`
                 Mit der Umsetzung der EU-Richtlinie über offene Daten (2019/1024) wurde
                 in Deutschland das Datennutzungsgesetz (DNG) geschaffen. Dieses
                 verpflichtet die Verwaltung, hochwertige Datensätze (High-Value
@@ -301,7 +301,7 @@ const sections = {
                 
                 Damit diese Daten nicht nur lesbar, sondern auch
                 EU-weit auffindbar und nutzbar sind, braucht es eine einheitliche
-                Beschreibung -- das „digitale Etikett". Hier setzt der Standard DCAT-AP
+                Beschreibung – das „digitale Etikett”. Hier setzt der Standard DCAT-AP
                 (in Deutschland: DCAT-AP.de) an:
                 1. **Vom Datensatz zur Auffindbarkeit:** 
                 Während das DNG
@@ -326,15 +326,15 @@ const sections = {
                 3. Der Wissenschaft: Durch europaweit einheitliche Metadaten können
                 Forschende hochwertige Verwaltungsdaten über Fach- und Ländergrenzen
                 hinweg effizient identifizieren, automatisiert zusammenführen und als
-                verlässliche Basis nachnutzen.`
-            }
+                verlässliche Basis nachnutzen.`}
+            />
           </AccordionItem>
           <AccordionItem
             headline={"Die INSPIRE-Richtlinie (Geodateninfrastruktur in Europa)"}
             client:load
           >
-            {
-              dedent`
+            <RichText
+              markdown={dedent`
                 Ein Meilenstein der rechtlich verankerten Interoperabilität. Die Richtlinie verpflichtete die
                 Mitgliedstaaten, Geodaten (z. B. zu Schutzgebieten oder Gewässernetzen) interoperabel
                 bereitzustellen.
@@ -351,8 +351,8 @@ const sections = {
                 **Wem nützt das?**
                 - **Bürgerinnen und Bürgern:** Sie können sich grenzübergreifend über Umweltbelastungen informieren.
                 - **Legistinnen und Legisten & Politik:** Sie erhalten eine verlässliche Datenbasis für grenzüberschreitende Infrastrukturprojekte und Klimaschutzmaßnahmen.
-                `
-            }
+                `}
+            />
           </AccordionItem>
         </div>
       </section>

@@ -426,8 +426,8 @@ const sections = {
             headline={"XHochschule - Grenzüberschreitender Austausch von Bildungsnachweisen"}
             client:load
           >
-            {
-              dedent`
+            <RichText
+              markdown={dedent`
                 Der nationale Standard [„XHochschule"](https://www.xhochschule.de/web/vorgehen) (ein Standard der
                 Koordinierungsstelle für IT-Standards, KoSIT, für das Hochschulwesen)
                 bindet explizit das [Core Location Vocabulary](https://interoperable-europe.ec.europa.eu/collection/semic-support-centre/solution/core-location-vocabulary) als externes Datenschema
@@ -460,8 +460,8 @@ const sections = {
                   ein, da ausländische Nachweise künftig digital automatisiert
                   ausgelesen werden können, statt sie manuell und aufwendig prüfen oder
                   übersetzen zu müssen.
-                `
-            }
+                `}
+            />
           </AccordionItem>
           <AccordionItem
             headline="BRIS (Business Registers Interconnection System)"
