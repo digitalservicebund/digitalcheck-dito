@@ -1,8 +1,7 @@
 import InputError from "@/components/InputError";
 import type { Option } from "@/utils/keyValue.ts";
-import { Check, ChevronLeft } from "@digitalservicebund/icons";
+import { Check } from "@digitalservicebund/icons";
 import {
-  ComboboxButton,
   ComboboxInput,
   ComboboxOption,
   ComboboxOptions,
@@ -54,11 +53,9 @@ export default function Combobox({
 
   return (
     <Field className="space-y-8">
-      {children && <Label className="ds-label-01-reg">{children}</Label>}
+      {children && <Label className="kern-label">{children}</Label>}
       {description && (
-        <Description className="ds-body-02-reg text-ds-gray-900 block">
-          {description}
-        </Description>
+        <Description className="kern-body block">{description}</Description>
       )}
 
       <HeadlessCombobox
@@ -68,17 +65,14 @@ export default function Combobox({
         onChange={control.onChange}
       >
         <div className={"h-auto"}>
-          <div className={"relative"}>
+          <div className={"kern-form-input__select-wrapper relative"}>
             <ComboboxInput
               data-multiple={selectedValues.length > 1 ? true : undefined}
               value={displayValue}
-              className={"ds-textarea pr-32 data-multiple:text-sm"}
+              className={"kern-form-input__select pr-32 data-multiple:text-sm"}
               aria-labelledby={children ? legendId : undefined}
               aria-describedby={description ? descriptionId : undefined}
             ></ComboboxInput>
-            <ComboboxButton className="group absolute inset-y-0 right-0 px-8">
-              <ChevronLeft className="size-24 rotate-270 fill-black/60 transition-transform group-data-hover:fill-black group-data-open:rotate-90" />
-            </ComboboxButton>
           </div>
         </div>
         <ComboboxOptions
