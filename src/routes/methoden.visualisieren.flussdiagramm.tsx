@@ -8,7 +8,6 @@ import NumberedList from "@/components/NumberedList.tsx";
 import RichText from "@/components/RichText.tsx";
 import {
   ArrowCircleRightOutlined,
-  ArrowDownwardOutlined,
   DriveFileRenameOutline,
   LayersOutlined,
 } from "@digitalservicebund/icons";
@@ -88,7 +87,7 @@ function NextStepButton() {
       <Button
         onClick={onClick}
         size={"small"}
-        iconLeft={<ArrowDownwardOutlined />}
+        iconLeft="kern-icon--arrow-down"
         type={"button"}
       >
         Nächster Schritt

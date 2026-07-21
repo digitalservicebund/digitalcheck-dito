@@ -1,7 +1,7 @@
 import RichText from "@/components/RichText.tsx";
 import { methodsFivePrinciples } from "@/resources/content/methode-fuenf-prinzipien";
-import { FileDownloadOutlined as FileDownloadOutlinedIcon } from "@digitalservicebund/icons";
 import { twJoin } from "tailwind-merge";
+import { DownloadLinkButton } from "./Button";
 import Container from "./Container";
 import InfoBox from "./InfoBox";
 
@@ -34,16 +34,9 @@ export function PrinciplePosterBox({
           }}
         >
           <RichText markdown={principlePosterBox.content} />
-          <InfoBox.LinkList
-            links={[
-              {
-                text: principlePosterBox.downloadTitle,
-                to: principlePosterBox.downloadUrl,
-                look: "link" as const,
-                iconLeft: <FileDownloadOutlinedIcon className="fill-current" />,
-              },
-            ]}
-          />
+          <DownloadLinkButton href={principlePosterBox.downloadUrl}>
+            {principlePosterBox.downloadTitle}
+          </DownloadLinkButton>
         </InfoBox>
       </Container>
     </div>

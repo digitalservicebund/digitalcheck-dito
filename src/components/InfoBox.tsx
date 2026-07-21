@@ -4,7 +4,7 @@ import twMerge from "@/utils/tailwindMerge";
 import type React from "react";
 import type { BadgeProps } from "./Badge";
 import Badge from "./Badge";
-import { DownloadLinkButton, LinkButton } from "./Button";
+import { LinkButton } from "./Button";
 import type { DetailsSummaryProps } from "./DetailsSummary";
 import DetailsSummary from "./DetailsSummary";
 import type { HeadingProps } from "./Heading";
@@ -122,12 +122,12 @@ const LinkList = ({ links }: { links: ContentLink[] }) => (
   <ButtonContainer className="mt-auto pt-24">
     {links.map((link) => {
       const { to, text, ...rest } = link;
-      if (link.download)
-        return (
-          <DownloadLinkButton key={to} href={to} omitIcon {...rest}>
-            {text}
-          </DownloadLinkButton>
-        );
+      // if (link.download)
+      //   return (
+      //     <DownloadLinkButton key={to} href={to} {...rest}>
+      //       {text}
+      //     </DownloadLinkButton>
+      //   );
       return (
         <LinkButton key={to} href={to} {...rest}>
           {text}
