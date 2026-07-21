@@ -20,10 +20,7 @@ import {
   stakeholderOptions,
 } from "@/routes/dokumentation/interoperability/values.ts";
 import { dedent } from "@/utils/dedentMultilineStrings";
-import {
-  AddCircleOutlineOutlined,
-  DeleteOutlineTwoTone,
-} from "@digitalservicebund/icons";
+import { DeleteOutlineTwoTone } from "@digitalservicebund/icons";
 import { useFieldArray } from "@rvf/react";
 import type React from "react";
 
@@ -229,7 +226,7 @@ export default function BindingRequirementsForm({
           <Button
             type="button"
             look="ghost"
-            iconLeft={<AddCircleOutlineOutlined />}
+            iconLeft="kern-icon--add"
             onClick={async () => {
               await requirements.push(defaultRequirementValue);
             }}

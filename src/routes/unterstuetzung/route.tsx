@@ -212,7 +212,7 @@ export default function Index() {
           </Container>
         </div>
 
-        <div className="bg-ds-blue-400">
+        <div className="bg-ds-blue-100">
           <Container className="py-80">
             <InfoBox
               badge={{
