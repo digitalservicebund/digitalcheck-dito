@@ -60,7 +60,7 @@ describe("InfoBoxList", () => {
         </InfoBoxList>,
       );
 
-      expect(screen.getAllByRole("listitem").length).toBe(2);
+      expect(screen.getAllByRole("listitem")).toHaveLength(2);
     });
   });
 });

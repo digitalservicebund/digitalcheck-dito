@@ -44,7 +44,7 @@ describe("InfoBox", () => {
       expect(screen.getByRole("heading", { level: 3 })).toHaveTextContent(
         "List Title",
       );
-      expect(screen.getAllByRole("group").length).toBe(2);
+      expect(screen.getAllByRole("group")).toHaveLength(2);
       expect(screen.getAllByRole("group").at(0)).toHaveTextContent(
         "Test Detail 1Test Content 1",
       );

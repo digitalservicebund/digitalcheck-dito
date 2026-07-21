@@ -38,8 +38,8 @@ describe("Nav", () => {
   it("creates a navigation with 4 elements one of which is disabled", () => {
     renderNav();
 
-    expect(screen.getAllByRole("list").length).toBe(2);
-    expect(screen.getAllByRole("listitem").length).toBe(5);
+    expect(screen.getAllByRole("list")).toHaveLength(2);
+    expect(screen.getAllByRole("listitem")).toHaveLength(5);
 
     expect(
       screen.getByRole("link", {
