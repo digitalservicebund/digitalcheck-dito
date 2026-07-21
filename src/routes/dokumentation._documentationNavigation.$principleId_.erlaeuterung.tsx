@@ -8,6 +8,7 @@ import Textarea from "@/components/Textarea";
 import { methoden_fuenfPrinzipien } from "@/config/routes";
 import { digitalDocumentation } from "@/resources/content/dokumentation";
 import type { PrinzipWithAspekte } from "@/utils/strapiData.types";
+import type { ReactNode } from "react";
 import { useEffect } from "react";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
@@ -54,19 +55,25 @@ function DocumentationPrincipleErlaeuterungForm({
     nextUrl,
   });
 
-  const explanationTitle = isPositive ? (
-    "Erklären Sie, inwiefern Sie auf dieses Prinzip eingegangen sind"
-  ) : isIrrelevant ? (
-    <>
-      Erklären Sie, warum das Prinzip <strong>nicht relevant</strong> für Ihr
-      Vorhaben ist
-    </>
-  ) : (
-    <>
-      Erklären Sie, warum das Prinzip <strong>nicht</strong> auf Ihr Vorhaben
-      zutrifft
-    </>
-  );
+  let explanationTitle: ReactNode;
+  if (isPositive) {
+    explanationTitle =
+      "Erklären Sie, inwiefern Sie auf dieses Prinzip eingegangen sind";
+  } else if (isIrrelevant) {
+    explanationTitle = (
+      <>
+        Erklären Sie, warum das Prinzip <strong>nicht relevant</strong> für Ihr
+        Vorhaben ist
+      </>
+    );
+  } else {
+    explanationTitle = (
+      <>
+        Erklären Sie, warum das Prinzip <strong>nicht</strong> auf Ihr Vorhaben
+        zutrifft
+      </>
+    );
+  }
 
   return (
     <form {...form.getFormProps()} className="space-y-80">
@@ -165,11 +172,17 @@ export function DocumentationPrincipleErlaeuterung({
 
   if (!principleData?.answer) return null;
 
-  const changeAnswerTitle = isPositive
-    ? "Sie haben angegeben, dass das Prinzip auf ihr Vorhaben zutrifft."
-    : isIrrelevant
-      ? "Sie haben angegeben, dass das Prinzip nicht relevant für Ihr Vorhaben ist."
-      : "Sie haben angegeben, dass das Prinzip nicht auf ihr Vorhaben zutrifft.";
+  let changeAnswerTitle: string;
+  if (isPositive) {
+    changeAnswerTitle =
+      "Sie haben angegeben, dass das Prinzip auf ihr Vorhaben zutrifft.";
+  } else if (isIrrelevant) {
+    changeAnswerTitle =
+      "Sie haben angegeben, dass das Prinzip nicht relevant für Ihr Vorhaben ist.";
+  } else {
+    changeAnswerTitle =
+      "Sie haben angegeben, dass das Prinzip nicht auf ihr Vorhaben zutrifft.";
+  }
 
   return (
     <div className="space-y-48">

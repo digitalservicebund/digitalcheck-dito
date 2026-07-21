@@ -268,11 +268,10 @@ export default function UploadTest() {
   }, []);
 
   return (
-    <>
-      <main>
-        <Hero
-          title={"Upload-Test"}
-          subtitle={dedent`
+    <main>
+      <Hero
+        title={"Upload-Test"}
+        subtitle={dedent`
           Das Digitalcheck-Team testet aktuell, ob Anhänge wie Visualisierungen über den Browser hochgeladen werden können – über die Systeme verschiedener Ressorts.
 
           **Gehen Sie so vor:**
@@ -281,93 +280,88 @@ export default function UploadTest() {
           3. Wiederholen Sie dies für jeden Dateityp.
 
           Vielen Dank für Ihre Unterstützung!`}
-        />
-        <Container className="mb-80 space-y-40">
-          <div className="max-w-a11y space-y-8">
-            <label
-              htmlFor="sender-organization"
-              className="ds-label-01-reg block"
-            >
-              Ministerium
-            </label>
-            <input
-              id="sender-organization"
-              name="organization"
-              type="text"
-              className="ds-input"
-              value={organization}
-              onChange={(event) => setOrganization(event.currentTarget.value)}
-            />
-          </div>
-          <div className="max-w-a11y space-y-8">
-            <label htmlFor="sender-system" className="ds-label-01-reg block">
-              System (z. B. SINA)
-            </label>
-            <input
-              id="sender-system"
-              name="system"
-              type="text"
-              className="ds-input"
-              value={system}
-              onChange={(event) => setSystem(event.currentTarget.value)}
-            />
-          </div>
-          {testFiles.map((file) => (
-            <section key={file.path} className="space-y-24">
-              <h2>{file.name}</h2>
-              <a
-                className="text-link block"
-                href={withBase(file.path)}
-                download
-              >
-                {file.name} herunterladen
-              </a>
-              <UploadDropzoneCard
-                file={file}
-                status={results[file.name] ?? { didUpload: false }}
-                onComplete={(result) => handleComplete(file.name, result)}
-              />
-            </section>
-          ))}
-
-          <label className="ds-label-01-reg block">
-            <span>Weitere Kommentare (optional)</span>
-            <textarea
-              className={"ds-textarea max-w-a11y"}
-              rows={6}
-              value={comment}
-              onChange={(event) => setComment(event.currentTarget.value)}
-            />
+      />
+      <Container className="mb-80 space-y-40">
+        <div className="max-w-a11y space-y-8">
+          <label
+            htmlFor="sender-organization"
+            className="ds-label-01-reg block"
+          >
+            Ministerium
           </label>
+          <input
+            id="sender-organization"
+            name="organization"
+            type="text"
+            className="ds-input"
+            value={organization}
+            onChange={(event) => setOrganization(event.currentTarget.value)}
+          />
+        </div>
+        <div className="max-w-a11y space-y-8">
+          <label htmlFor="sender-system" className="ds-label-01-reg block">
+            System (z. B. SINA)
+          </label>
+          <input
+            id="sender-system"
+            name="system"
+            type="text"
+            className="ds-input"
+            value={system}
+            onChange={(event) => setSystem(event.currentTarget.value)}
+          />
+        </div>
+        {testFiles.map((file) => (
+          <section key={file.path} className="space-y-24">
+            <h2>{file.name}</h2>
+            <a className="text-link block" href={withBase(file.path)} download>
+              {file.name} herunterladen
+            </a>
+            <UploadDropzoneCard
+              file={file}
+              status={results[file.name] ?? { didUpload: false }}
+              onComplete={(result) => handleComplete(file.name, result)}
+            />
+          </section>
+        ))}
 
-          <ButtonContainer>
-            <Button type={"button"} onClick={submitFeedback}>
-              Ergebnis absenden
-            </Button>
-            <Button type="button" look="link" onClick={clearSavedValues}>
-              Gespeicherte Werte entfernen
-            </Button>
-          </ButtonContainer>
-          {captureResult === "failure" && (
-            <Alert
-              title="Ergebnis konnte nicht übermittelt werden"
-              content="Beim Übermitteln des Feedbacks ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schicken Sie uns das Ergebnis per E-Mail."
-              tagName="h2"
-              look="error"
-              setShowAlert={() => setCaptureResult("")}
-            />
-          )}
-          {captureResult === "success" && (
-            <Alert
-              title="Ergebnis erfolgreich übermittelt"
-              content="Vielen Dank!"
-              tagName="h2"
-              look="success"
-              setShowAlert={() => setCaptureResult("")}
-            />
-          )}
-        </Container>
-      </main>
-    </>
+        <label className="ds-label-01-reg block">
+          <span>Weitere Kommentare (optional)</span>
+          <textarea
+            className={"ds-textarea max-w-a11y"}
+            rows={6}
+            value={comment}
+            onChange={(event) => setComment(event.currentTarget.value)}
+          />
+        </label>
+
+        <ButtonContainer>
+          <Button type={"button"} onClick={submitFeedback}>
+            Ergebnis absenden
+          </Button>
+          <Button type="button" look="link" onClick={clearSavedValues}>
+            Gespeicherte Werte entfernen
+          </Button>
+        </ButtonContainer>
+        {captureResult === "failure" && (
+          <Alert
+            title="Ergebnis konnte nicht übermittelt werden"
+            content="Beim Übermitteln des Feedbacks ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schicken Sie uns das Ergebnis per E-Mail."
+            tagName="h2"
+            look="error"
+            setShowAlert={() => setCaptureResult("")}
+          />
+        )}
+        {captureResult === "success" && (
+          <Alert
+            title="Ergebnis erfolgreich übermittelt"
+            content="Vielen Dank!"
+            tagName="h2"
+            look="success"
+            setShowAlert={() => setCaptureResult("")}
+          />
+        )}
+      </Container>
+    </main>
   );
 }

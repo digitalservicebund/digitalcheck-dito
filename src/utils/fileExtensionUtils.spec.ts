@@ -15,11 +15,11 @@ describe("fileExtensionUtils", () => {
         getFileExtension("https://example.com/path/to/archive.tar.gz"),
       ).toBe("gz");
 
-      expect(getFileExtension("https://example.com/path/to/file")).toBe(null);
+      expect(getFileExtension("https://example.com/path/to/file")).toBeNull();
 
-      expect(getFileExtension("https://example.com/path.with.dots/")).toBe(
-        null,
-      );
+      expect(
+        getFileExtension("https://example.com/path.with.dots/"),
+      ).toBeNull();
     });
   });
 
@@ -27,7 +27,7 @@ describe("fileExtensionUtils", () => {
     it("returns the correct extension", () => {
       expect(
         getDownloadableExtensionName("https://example.com/path/to/file.txt"),
-      ).toBe(undefined);
+      ).toBeUndefined();
 
       expect(
         getDownloadableExtensionName("https://example.com/path/to/file.pdf"),
@@ -51,7 +51,7 @@ describe("fileExtensionUtils", () => {
 
       expect(
         getDownloadableExtensionName("https://example.com/path/to/file/pptx"),
-      ).toBe(undefined);
+      ).toBeUndefined();
     });
   });
 });

@@ -1,5 +1,11 @@
 import type { ReactNode } from "react";
-import { createContext, useCallback, useContext, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 
 export type HelpSection = { id: string; title: string; content: ReactNode };
 
@@ -42,15 +48,15 @@ export function HelpPanelProvider({
     setDynamicSections([]);
   }
 
-  const openPanel = (sectionId?: string) => {
+  const openPanel = useCallback((sectionId?: string) => {
     setIsOpen(true);
     if (sectionId) setActiveSection(sectionId);
-  };
+  }, []);
 
-  const closePanel = () => {
+  const closePanel = useCallback(() => {
     setIsOpen(false);
     setActiveSection(null);
-  };
+  }, []);
 
   const setHelpSections = useCallback(
     (newSections: HelpSection[]) => {
@@ -71,23 +77,36 @@ export function HelpPanelProvider({
     });
   }, []);
 
+  const contextValue = useMemo(
+    () => ({
+      isOpen,
+      sections: [
+        ...(staticSections.pathname === currentPath
+          ? staticSections.sections
+          : []),
+        ...dynamicSections,
+      ],
+      activeSection,
+      openPanel,
+      closePanel,
+      setHelpSections,
+      registerSection,
+    }),
+    [
+      isOpen,
+      staticSections,
+      currentPath,
+      dynamicSections,
+      activeSection,
+      openPanel,
+      closePanel,
+      setHelpSections,
+      registerSection,
+    ],
+  );
+
   return (
-    <HelpPanelContext.Provider
-      value={{
-        isOpen,
-        sections: [
-          ...(staticSections.pathname === currentPath
-            ? staticSections.sections
-            : []),
-          ...dynamicSections,
-        ],
-        activeSection,
-        openPanel,
-        closePanel,
-        setHelpSections,
-        registerSection,
-      }}
-    >
+    <HelpPanelContext.Provider value={contextValue}>
       {children}
     </HelpPanelContext.Provider>
   );
