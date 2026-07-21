@@ -240,7 +240,6 @@ export default function BindingRequirementsForm({
       ),
     },
   ];
-
   return (
     <form className="space-y-32" {...form.getFormProps()}>
       {tree
