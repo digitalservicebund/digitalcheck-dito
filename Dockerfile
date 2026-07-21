@@ -3,11 +3,13 @@ FROM node:26.1.0-alpine3.23 AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN npm install -g pnpm
+RUN npm install -g corepack@0.35.0
 
 FROM base AS build
 WORKDIR /src
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+# Installs the exact pnpm version pinned in package.json's "packageManager" field
+RUN corepack enable && corepack install
 RUN pnpm install --frozen-lockfile --ignore-scripts
 
 
@@ -28,7 +30,6 @@ COPY --from=build /src/dist_staging /usr/share/nginx/staging
 RUN mkdir /etc/nginx/sites-enabled \
 	&& touch /run/nginx.pid \
 	&& chown -R nginx /etc/nginx/sites-enabled /var/cache/nginx /run/nginx.pid \
-	&& chmod -R o+w /etc/nginx/sites-enabled /var/cache/nginx /run/nginx.pid \
 	&& echo 'include /etc/nginx/sites-enabled/*;' > /etc/nginx/nginx.conf
 USER nginx
 
