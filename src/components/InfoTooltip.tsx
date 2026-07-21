@@ -40,6 +40,7 @@ export default function InfoTooltip({ children }: Readonly<InfoTooltipProps>) {
   return (
     <div className="relative mb-4 ml-4 inline-flex flex-row items-center align-middle">
       <button
+        type="button"
         ref={tooltipRef}
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}

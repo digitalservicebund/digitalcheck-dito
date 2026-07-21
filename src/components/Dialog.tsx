@@ -55,8 +55,12 @@ function Dialog({
               renderActionButtons({ closeDialog: () => handleToggle(false) })
             ) : (
               <div className="flex gap-4">
-                <button onClick={() => handleToggle(false)}>Cancel</button>
-                <button onClick={() => handleToggle(false)}>Deactivate</button>
+                <button type="button" onClick={() => handleToggle(false)}>
+                  Cancel
+                </button>
+                <button type="button" onClick={() => handleToggle(false)}>
+                  Deactivate
+                </button>
               </div>
             )}
           </DialogPanel>

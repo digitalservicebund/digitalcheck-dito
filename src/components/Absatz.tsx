@@ -131,6 +131,7 @@ export function PrincipleExplanation({
         />
         {activeHighlight && (
           <button
+            type="button"
             className="ds-link-01-bold hidden"
             aria-label={absatz.backLinkAriaLabel}
             onClick={() => {

@@ -45,6 +45,7 @@ export default function PrincipleHighlightModifier({
     );
   return (
     <button
+      type="button"
       onClick={() => {
         setActiveHighlight(highlightID);
         globalThis.location.hash = explanationID(absatzId, principle.Nummer);

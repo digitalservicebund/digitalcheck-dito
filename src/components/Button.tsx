@@ -76,6 +76,7 @@ function Button({
   look,
   size,
   className,
+  type,
   ...props
 }: ButtonProps) {
   const buttonClasses = createButtonClasses({
@@ -88,7 +89,13 @@ function Button({
   });
 
   return (
-    <button {...props} id={id} data-testid={id} className={buttonClasses}>
+    <button
+      {...props}
+      type={type}
+      id={id}
+      data-testid={id}
+      className={buttonClasses}
+    >
       {formatIcon(iconLeft)}
       <span className="ds-button-label">{children}</span>
       {formatIcon(iconRight)}

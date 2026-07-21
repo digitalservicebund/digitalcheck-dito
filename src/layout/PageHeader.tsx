@@ -224,6 +224,7 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
               <PhoneOutlined />
             </a>
             <button
+              type="button"
               className={twMerge(
                 "h-full cursor-pointer border-y-4 border-transparent px-16 hover:bg-blue-100",
                 mobileMenuOpen &&

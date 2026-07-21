@@ -29,6 +29,7 @@ export default function BackToTopButton() {
 
   return (
     <button
+      type="button"
       onClick={scrollToTop}
       className={twJoin(
         "ds-label-03-reg fixed right-16 bottom-16 z-50 flex items-center gap-8 rounded-full bg-blue-800 p-8 pr-16 text-white shadow-md outline-2 outline-blue-500 transition-opacity duration-150 sm:right-24 sm:bottom-24",
