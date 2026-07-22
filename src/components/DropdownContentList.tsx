@@ -68,7 +68,7 @@ export default function DropdownContentList({
               option.className,
             )}
           >
-            <div className="ds-label-02-reg lg:ds-label-01-bold">
+            <div className="kern-label">
               {option.isNewTitle && (
                 <Badge className="mr-8" look="hint">
                   NEU
