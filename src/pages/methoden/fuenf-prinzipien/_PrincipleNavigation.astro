@@ -27,10 +27,8 @@ const next = index < principles.length - 1 ? principles[index + 1] : null;
       <a
         href={`${methoden_fuenfPrinzipien.path}/${principle.URLBezeichnung}`}
         class={twJoin(
-          "link-unstyled block",
-          principle.order === current.order
-            ? "ds-body-01-reg"
-            : "ds-link-01-reg",
+          "block",
+          principle.order === current.order ? "link-unstyled" : "kern-link",
         )}
       >
         Prinzip {principle.order}: {principle.Name}
