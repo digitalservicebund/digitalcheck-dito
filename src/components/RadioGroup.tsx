@@ -68,8 +68,9 @@ function RadioGroup<FormData, Value extends string | number = string>({
                 "aria-required": required,
                 className: twMerge(
                   "kern-form-check__radio self-start",
-                  hasError && "has-error",
-                  hasWarning && "has-warning",
+                  hasError && "kern-form-check__radio--error",
+                  hasWarning &&
+                    "bg-ds-yellow-200 border-ds-yellow-700 text-black focus:border-4 focus:border-ds-yellow-700 focus:outline-none",
                 ),
                 value: opt.value,
                 ...rest,

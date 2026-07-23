@@ -51,7 +51,8 @@ function Input({
           className: twMerge(
             "kern-form-input__input",
             hasError && "kern-form-input__input--error",
-            hasWarning && "has-warning",
+            hasWarning &&
+              "bg-white border-ds-yellow-700 text-black focus:border-4 focus:border-ds-yellow-700 focus:outline-none",
           ),
           ...rest,
         })}
