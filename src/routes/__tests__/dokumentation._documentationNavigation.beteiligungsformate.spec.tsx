@@ -111,10 +111,10 @@ describe("DocumentationParticipation", () => {
         expect(input2).toBeInvalid();
       });
       expect(input1).toHaveAccessibleErrorMessage(
-        "Fehler: Bitte geben Sie eine Antwort.",
+        "Bitte geben Sie eine Antwort.",
       );
       expect(input2).toHaveAccessibleErrorMessage(
-        "Fehler: Bitte geben Sie eine Antwort.",
+        "Bitte geben Sie eine Antwort.",
       );
     });
 

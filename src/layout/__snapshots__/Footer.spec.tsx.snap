@@ -4,21 +4,21 @@ exports[`Footer Component > Renders correctly 1`] = `
 <div>
   <footer
     aria-label="Seitenfußbereich"
-    class="ds-label-03-reg flex w-full flex-row justify-center border-t-2 border-blue-300 leading-snug text-gray-900 print:hidden"
+    class="ds-label-03-reg border-ds-blue-300 text-ds-gray-900 flex w-full flex-row justify-center border-t-2 leading-snug print:hidden"
     id="footer"
   >
     <div
-      class="ds-stack ds-stack-32 sm:ds-stack-40 w-full max-w-6xl px-16 py-40"
+      class="kern-stack kern-stack-xl sm:kern-stack-2xl w-full max-w-6xl px-16 py-40"
     >
       <nav
         aria-label="Schnellübersicht"
         class="grid grid-cols-1 justify-between gap-32 sm:grid-cols-[repeat(3,minmax(0,18rem))] sm:grid-rows-2"
       >
         <div
-          class="ds-stack ds-stack-8 row-span-2"
+          class="kern-stack-sm row-span-2"
         >
           <h2
-            class="ds-label-section"
+            class="ds-label-section kern-label kern-label--large"
           >
             Unterstützungsangebote Für bund, Länder, Kommunen und EU-Staaten
           </h2>
@@ -73,10 +73,10 @@ exports[`Footer Component > Renders correctly 1`] = `
           </ul>
         </div>
         <div
-          class="ds-stack ds-stack-8 row-span-2"
+          class="kern-stack-sm row-span-2"
         >
           <h2
-            class="ds-label-section"
+            class="ds-label-section kern-label kern-label--large"
           >
             Schritt für Schritt
           </h2>
@@ -113,10 +113,10 @@ exports[`Footer Component > Renders correctly 1`] = `
           </ul>
         </div>
         <div
-          class="ds-stack ds-stack-8"
+          class="kern-stack-sm"
         >
           <h2
-            class="ds-label-section"
+            class="ds-label-section kern-label kern-label--large"
           >
             Grundlagen
           </h2>
@@ -162,10 +162,10 @@ exports[`Footer Component > Renders correctly 1`] = `
           </ul>
         </div>
         <div
-          class="ds-stack ds-stack-8"
+          class="kern-stack-sm"
         >
           <h2
-            class="ds-label-section"
+            class="ds-label-section kern-label kern-label--large"
           >
             Beispiele
           </h2>
@@ -279,7 +279,7 @@ exports[`Footer Component > Renders correctly 1`] = `
         </ul>
       </nav>
       <hr
-        class="mt-16 w-full border-t-2 border-blue-300"
+        class="border-ds-blue-300 mt-16 w-full border-t-2"
       />
       <nav
         aria-label="Externe Verlinkungen"
@@ -317,7 +317,7 @@ exports[`Footer Component > Renders correctly 1`] = `
               Federführung
             </h3>
             <div
-              class="ds-stack ds-stack-8"
+              class="kern-stack-sm"
             >
               <ul
                 class="list-unstyled flex flex-col gap-8"

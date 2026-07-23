@@ -425,7 +425,7 @@ describe("Vorprüfung Ergebnis Page", () => {
           const reasonInput = screen.queryByLabelText("Begründung");
           if (expected.showsNegativeReasoning && reasonInput) {
             expect(reasonInput).toHaveAccessibleErrorMessage(
-              "Fehler: Bitte geben Sie eine Begründung für den fehlenden Digitalbezug an.",
+              "Bitte geben Sie eine Begründung für den fehlenden Digitalbezug an.",
             );
           }
         });

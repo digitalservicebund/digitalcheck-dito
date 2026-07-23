@@ -29,8 +29,6 @@ function Textarea({
   const hasError = !!(error || field.error()) && !warningInsteadOfError;
   const hasWarning = !!(error || field.error()) && warningInsteadOfError;
 
-  console.log("error " + hasError);
-  console.log("warning " + hasWarning);
   return (
     <div className="kern-form-input space-y-8">
       <label htmlFor={inputId} className="kern-label">
@@ -61,7 +59,7 @@ function Textarea({
       />
 
       {(hasError || hasWarning) && (
-        <p className="kern-error" id={inputId}>
+        <p className="kern-error" id={errorId}>
           <span
             className={twMerge(
               "kern-icon kern-icon--warning kern-icon--md",
