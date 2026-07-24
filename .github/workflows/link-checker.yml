@@ -13,7 +13,7 @@ jobs:
       - name: Link Checker
         uses: digitalservicebund/link-checker-gha@c183e258e7cde51abc9375c2a993e34b59ca0c79 # v2.1.0
         with:
-          SITEMAP_URL: "https://digitalcheck.bund.de/sitemap.xml"
+          SITEMAP_URL: "https://digitalcheck.bund.de/sitemap-0.xml"
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
           # exclude page-internal redirects, these are expected
