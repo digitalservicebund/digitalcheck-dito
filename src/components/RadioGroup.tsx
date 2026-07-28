@@ -49,7 +49,7 @@ function RadioGroup<FormData, Value extends string | number = string>({
   return (
     <div
       role="radiogroup"
-      className={twMerge("kern-fieldset__body space-y-16", className)}
+      className={twMerge("kern-fieldset__body", className)}
       aria-labelledby={ariaLabelledby}
       aria-errormessage={hasError ? errorId : undefined}
       aria-invalid={field.error() ? "true" : undefined}
