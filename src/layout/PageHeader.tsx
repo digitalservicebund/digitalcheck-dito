@@ -217,7 +217,7 @@ const PageHeader = ({ currentPath }: { currentPath: string }) => {
           {/* Mobile View Controls */}
           <div className="flex items-center space-x-16 lg:hidden">
             <a
-              className="link-unstyled border-ds-blue-100 border-y-4"
+              className="link-unstyled border-y-4 border-transparent"
               href={`tel:${header.contactTel.number.replaceAll(/\s/g, "")}`}
               aria-label={header.contactTel.msg}
             >
