@@ -10,7 +10,7 @@ const { pathname } = Astro.url;
 >
   <div
     aria-hidden="true"
-    class="bg-ds-blue-500 absolute top-[calc(anchor(--progress-start_center)-1px)] right-[anchor(--progress-end_center)] left-[anchor(--progress-start_center)] -z-10 h-[2px]"
+    class="bg-ds-blue-500 absolute top-[calc(anchor(--progress-start_center)-1px)] right-[anchor(--progress-end_center)] left-[anchor(--progress-start_center)] h-[2px]"
   >
   </div>
   <ol
@@ -25,7 +25,7 @@ const { pathname } = Astro.url;
           <li
             aria-current={isActive ? "step" : undefined}
             class:list={[
-              "ds-label-02-reg mb-0 flex flex-col items-center gap-8 py-14",
+              "ds-label-02-reg z-1 mb-0 flex flex-col items-center gap-8 py-14",
               { "font-bold": isActive },
             ]}
           >
