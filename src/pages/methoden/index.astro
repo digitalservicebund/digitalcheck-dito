@@ -125,7 +125,7 @@ export const frontmatter = {
               className="space-y-16"
               disabled={item.isDisabled}
             >
-              <p class="ds-heading-03-reg">{item.headline.text}</p>
+              <p class="kern-body kern-body--large">{item.headline.text}</p>
               {"content" in item && (
                 <RichText markdown={item.content as string} />
               )}
