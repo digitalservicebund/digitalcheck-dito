@@ -129,7 +129,7 @@ export default function Result() {
               >
                 {vorhabenTitle && <PrintTitle title={vorhabenTitle} />}
                 <div className="flex flex-col gap-16 sm:flex-row">
-                  <div className="flex size-36 flex-none items-center justify-center">
+                  <div className="mt-18 flex size-36 flex-none items-center justify-center">
                     {getHeaderIcon()}
                   </div>
                   <div>
