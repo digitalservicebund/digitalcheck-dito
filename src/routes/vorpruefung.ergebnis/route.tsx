@@ -59,7 +59,7 @@ function getReasonListItem(reason: Reason) {
   return (
     <li key={reason.text} className="flex items-start gap-12">
       {getIconForReason(reason)}
-      <div>
+      <div className="max-sm:hyphens-auto">
         {reason.text}
         {reason.tooltip && <InfoTooltip>{reason.tooltip}</InfoTooltip>}
         {reason.hint && <RichText markdown={reason.hint} />}

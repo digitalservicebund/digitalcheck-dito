@@ -186,7 +186,10 @@ export default function ResultForm({
             showVerticalLine
             title={preCheckResult.form.previewLabel}
           >
-            <div data-testid="emailPreview" className="whitespace-pre-wrap">
+            <div
+              data-testid="emailPreview"
+              className="whitespace-pre-wrap max-sm:hyphens-auto"
+            >
               {emailPreviewBody}
             </div>
           </DetailsSummary>
