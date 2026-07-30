@@ -18,7 +18,15 @@
   font-display: swap;
 }
 
-/* Add italic variants only if needed */
+@font-face {
+  font-family: "Fira Sans";
+  src: url("@kern-ux/native/dist/fonts/fira-sans/FiraSans-SemiBold.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 @font-face {
   font-family: "Fira Sans";
   src: url("@kern-ux/native/dist/fonts/fira-sans/FiraSans-Italic.woff2")

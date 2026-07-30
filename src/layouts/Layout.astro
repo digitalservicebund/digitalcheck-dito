@@ -8,6 +8,7 @@ import { siteMeta } from "@/resources/content/shared/meta";
 import { isProduction } from "@/config/stage";
 import firaSansRegularUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Regular.woff2?url";
 import firaSansMediumUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Medium.woff2?url";
+import firaSansSemiBoldUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-SemiBold.woff2?url";
 
 interface Props {
   title?: string;
@@ -76,6 +77,13 @@ const jsonLdMetadata = {
     <link
       rel="preload"
       href={firaSansMediumUrl}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={firaSansSemiBoldUrl}
       as="font"
       type="font/woff2"
       crossorigin
