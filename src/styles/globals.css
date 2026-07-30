@@ -91,11 +91,15 @@
     @apply kern-heading-x-large;
   }
 
-  h2 {
+  h2,
+  .ds-heading-02-reg,
+  .ds-heading-02-bold {
     @apply kern-heading-large;
   }
 
-  h3 {
+  h3,
+  .ds-heading-03-reg,
+  .ds-heading-03-bold {
     @apply kern-heading-medium;
   }
 

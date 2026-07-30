@@ -1,41 +1,24 @@
 @utility kern-heading-x-large {
-  letter-spacing: var(--kern-metric-space-none, 0px);
-  padding-top: var(--kern-metric-baseline-heading-x-large-padding-top);
-  padding-bottom: var(--kern-metric-baseline-heading-x-large-padding-bottom);
-  font-size: var(--kern-typography-font-size-adaptive-x-large, 48px);
+  font-size: var(--kern-typography-font-size-x-large-adaptive, 32px);
   font-weight: var(--kern-typography-font-weight-medium, 500);
-  line-height: var(--kern-typography-line-height-adaptive-x-large, 56px);
+  line-height: var(--kern-typography-line-height-x-large-adaptive, 40px);
 }
 
 @utility kern-heading-large {
-  letter-spacing: var(--kern-metric-space-none, 0px);
-  padding: var(--kern-metric-baseline-heading-large-padding-top, 7px)
-    var(--kern-metric-space-none, 0px)
-    var(--kern-metric-baseline-heading-large-padding-bottom, 9px)
-    var(--kern-metric-space-none, 0px);
   font-size: var(--kern-typography-font-size-large-adaptive, 26px);
-  font-weight: var(--kern-typography-font-weight-heading-default, 600);
+  font-weight: var(--kern-typography-font-weight-semi-bold, 600);
   line-height: var(--kern-typography-line-height-large-adaptive, 32px);
 }
 
 @utility kern-heading-medium {
-  letter-spacing: var(--kern-metric-space-none, 0px);
-  padding-top: var(--kern-metric-baseline-heading-medium-padding-top, 5px);
-  padding-bottom: var(
-    --kern-metric-baseline-heading-medium-padding-bottom,
-    3px
-  );
   font-size: var(--kern-typography-font-size-medium-adaptive, 21px);
-  font-weight: var(--kern-typography-font-weight-heading-default, 600);
+  font-weight: var(--kern-typography-font-weight-semi-bold, 600);
   line-height: var(--kern-typography-line-height-medium-adaptive, 24px);
 }
 
 @utility kern-heading-small {
-  letter-spacing: var(--kern-metric-space-none, 0px);
-  padding-top: var(--kern-metric-baseline-heading-small-padding-top, 6px);
-  padding-bottom: var(--kern-metric-baseline-heading-small-padding-bottom, 2px);
   font-size: var(--kern-typography-font-size-medium-static, 18px);
-  font-weight: var(--kern-typography-font-weight-heading-default, 600);
+  font-weight: var(--kern-typography-font-weight-semi-bold, 600);
   line-height: var(--kern-typography-line-height-medium-static, 24px);
 }
 
