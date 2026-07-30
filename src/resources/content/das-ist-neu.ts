@@ -35,6 +35,15 @@ export const news = {
         
         [Hier ansehen](${bundeslaender.path})`,
     },
+     {
+      badge: {
+        text: "06.07.2026",
+      },
+      content: dedent`
+        Erweiterung der Online-Dokumentation um Fragen zur EU-Interoperabilität
+        
+        [Hier ansehen](${dokumentation.path})`,
+    },
     {
       badge: {
         text: "20.05.2026",
