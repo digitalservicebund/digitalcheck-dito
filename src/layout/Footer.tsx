@@ -30,12 +30,8 @@ const LinkList = ({
   className?: string;
 }) => (
   <div className={tailwindMerge("kern-stack kern-stack-sm", className)}>
-    {header && (
-      <h2 className="ds-label-section kern-label kern-label--large">
-        {header}
-      </h2>
-    )}
-    <ul className="list-unstyled flex flex-col gap-8">
+    {header && <h2 className="kern-heading-medium">{header}</h2>}
+    <ul className="list-unstyled kern-link kern-link--small flex flex-col gap-8">
       {links.map((link) => {
         const subLinks = Array.isArray(link) ? link : [link];
         return (
@@ -83,7 +79,7 @@ export default function Footer() {
         </nav>
 
         <nav aria-label={footer.middle.navLabel}>
-          <ul className="list-unstyled flex flex-row flex-wrap items-baseline gap-8">
+          <ul className="list-unstyled kern-link kern-link--small flex flex-row flex-wrap items-baseline gap-8">
             {footer.middle.links.map((link) => (
               <li
                 key={link.url}
@@ -98,7 +94,12 @@ export default function Footer() {
         <hr className="border-ds-blue-300 mt-16 w-full border-t-2" />
 
         <nav aria-label={footer.bottom.navLabel} className="space-y-40">
-          <FooterLink link={footer.bottom.digitalserviceLink} />
+          <p className="kern-body kern-body--small">
+            {footer.bottom.digitalserviceLink.preText}{" "}
+            <a href={footer.bottom.digitalserviceLink.url}>
+              {footer.bottom.digitalserviceLink.text}
+            </a>
+          </p>
 
           <div className="space-y-16 sm:flex sm:flex-row sm:items-center sm:gap-48 sm:space-y-0">
             <Image
@@ -114,8 +115,31 @@ export default function Footer() {
               className="hidden forced-colors:dark:block"
             />
             <div className="max-w-2xl space-y-8">
-              <h3 className="ds-label-03-bold">{footer.bottom.title}</h3>
-              <LinkList links={footer.bottom.links} />
+              <h3 className="kern-label kern-label--small">
+                {footer.bottom.title}
+              </h3>
+              <p className="kern-body kern-body--small">
+                Der Digitalcheck entsteht im Auftrag des{" "}
+                <a
+                  href={footer.bottom.links[0].url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Bundesministerium für Digitales und Staatsmodernisierung
+                </a>
+              </p>
+              <p className="kern-body kern-body--small">
+                Mehr über den politischen Auftrag und die Entstehung des
+                Digitalcheck finden Sie auf der{" "}
+                <a
+                  href={footer.bottom.links[1].url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Projektseite
+                </a>
+                des Bundesministeriums für Digitales und Staatsmodernisierung.
+              </p>
             </div>
           </div>
         </nav>

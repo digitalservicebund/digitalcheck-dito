@@ -25,7 +25,7 @@ export const footer = {
   top: {
     navLabel: "Schnellübersicht",
     supportOffer: {
-      title: "Unterstützungsangebote Für bund, Länder, Kommunen und EU-Staaten",
+      title: "Unterstützungsangebote für Bund, Länder, Kommunen und EU-Staaten",
       links: [
         [
           {
