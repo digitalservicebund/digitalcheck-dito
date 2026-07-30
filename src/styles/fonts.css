@@ -1,0 +1,29 @@
+/* Custom font loading - only load the fonts we actually use */
+
+@font-face {
+  font-family: "Fira Sans";
+  src: url("@kern-ux/native/dist/fonts/fira-sans/FiraSans-Regular.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fira Sans";
+  src: url("@kern-ux/native/dist/fonts/fira-sans/FiraSans-Medium.woff2")
+    format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Add italic variants only if needed */
+@font-face {
+  font-family: "Fira Sans";
+  src: url("@kern-ux/native/dist/fonts/fira-sans/FiraSans-Italic.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}

@@ -6,6 +6,8 @@ import Footer from "@/layout/Footer";
 import PageHeader from "@/layout/PageHeader";
 import { siteMeta } from "@/resources/content/shared/meta";
 import { isProduction } from "@/config/stage";
+import firaSansRegularUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Regular.woff2?url";
+import firaSansMediumUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Medium.woff2?url";
 
 interface Props {
   title?: string;
@@ -64,7 +66,20 @@ const jsonLdMetadata = {
     <meta property="og:type" content="website" />
     <meta property="twitter:card" content="summary_large_image" />
     <link rel="canonical" href={canonicalUrl} />
-
+    <link
+      rel="preload"
+      href={firaSansRegularUrl}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={firaSansMediumUrl}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon_32.png" type="image/png" sizes="32x32" />
     <link rel="icon" href="/favicon_64.png" type="image/png" sizes="64x64" />
