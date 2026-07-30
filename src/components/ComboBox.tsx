@@ -69,7 +69,9 @@ export default function Combobox({
             <ComboboxInput
               data-multiple={selectedValues.length > 1 ? true : undefined}
               value={displayValue}
-              className={"kern-form-input__select pr-32 data-multiple:text-sm"}
+              className={
+                "kern-form-input__select bg-white pr-32 data-multiple:text-sm"
+              }
               aria-labelledby={children ? legendId : undefined}
               aria-describedby={description ? descriptionId : undefined}
             ></ComboboxInput>
