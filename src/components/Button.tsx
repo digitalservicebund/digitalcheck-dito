@@ -39,7 +39,7 @@ function createButtonClasses({
 >) {
   if (look === "link") {
     return twMerge(
-      "kern-link inline-flex items-center text-left space-x-8",
+      "inline-flex items-center text-left space-x-8 kern-btn kern-btn--tertiary",
       className,
     );
   }
