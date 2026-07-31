@@ -35,7 +35,7 @@ export const news = {
         
         [Hier ansehen](${bundeslaender.path})`,
     },
-     {
+    {
       badge: {
         text: "06.07.2026",
       },
