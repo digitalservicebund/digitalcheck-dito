@@ -68,14 +68,14 @@ export default function DropdownContentList({
               option.className,
             )}
           >
-            <div className="kern-label">
+            <div className="flex flex-row">
               {option.isNewTitle && (
                 <Badge className="mr-8" look="hint">
                   NEU
                 </Badge>
               )}
               {itemNumber && <span className="mr-4">{itemNumber}. </span>}
-              {option.title}
+              <div className="kern-label">{option.title}</div>
             </div>
             {option.content && (
               <span className="hidden lg:inline">{option.content}</span>
