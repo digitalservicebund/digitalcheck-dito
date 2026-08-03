@@ -35,13 +35,11 @@ const LinkList = ({
       {links.map((link) => {
         const subLinks = Array.isArray(link) ? link : [link];
         return (
-          <>
-            <li key={subLinks[0].url}>
-              {subLinks.map((subLink) => (
-                <FooterLink key={subLink.url} link={subLink} />
-              ))}
-            </li>
-          </>
+          <li key={subLinks[0].url}>
+            {subLinks.map((subLink) => (
+              <FooterLink key={subLink.url} link={subLink} />
+            ))}
+          </li>
         );
       })}
     </ul>
@@ -139,7 +137,7 @@ export default function Footer() {
                   rel="noreferrer"
                 >
                   Projektseite
-                </a>
+                </a>{" "}
                 des Bundesministeriums für Digitales und Staatsmodernisierung.
               </p>
             </div>
