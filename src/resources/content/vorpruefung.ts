@@ -162,10 +162,10 @@ export const preCheck = {
         headline: "Warum digitaltaugliche Regelungen schreiben?",
         content: dedent`
           <p><strong>Digitaltaugliche Regelungen sparen Ressourcen</strong></p>
-          Eine gute digitale Umsetzung spart langfristig Zeit und sorgt dafür, dass Ziel und Wirkung des Vorhabens erreicht werden - aufseiten der Normadressatinnen und Normadressaten und aufseiten der Verwaltung.
+          <p>Eine gute digitale Umsetzung spart langfristig Zeit und sorgt dafür, dass Ziel und Wirkung des Vorhabens erreicht werden - aufseiten der Normadressatinnen und Normadressaten und aufseiten der Verwaltung.</p
 
           <p><strong>Relevant für all Regelungsvorhaben</strong></p>
-          Der Digitalcheck gilt für alle Regelungsvorhaben auf Bundesebene - Gesetze, Verordnungen und Verwaltungsvorschriften. Es fallen sowohl neue Vorhaben, als auch Änderungen an bestehenden Regelungen darunter.
+          <p>Der Digitalcheck gilt für alle Regelungsvorhaben auf Bundesebene - Gesetze, Verordnungen und Verwaltungsvorschriften. Es fallen sowohl neue Vorhaben, als auch Änderungen an bestehenden Regelungen darunter.</p>
         `,
       },
       {
