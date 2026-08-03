@@ -13,7 +13,7 @@ type LinkProps = {
 const FooterLink = ({ link }: { link: LinkProps }) => (
   <>
     {link?.preText}{" "}
-    <a href={link.url} className="increase-tap-area">
+    <a href={link.url} className="increase-tap-area kern-link kern-link--small">
       {link.text}
     </a>
     {link?.postText && <> {link.postText}</>}
@@ -31,15 +31,17 @@ const LinkList = ({
 }) => (
   <div className={tailwindMerge("kern-stack kern-stack-sm", className)}>
     {header && <h2 className="kern-heading-medium">{header}</h2>}
-    <ul className="list-unstyled kern-link kern-link--small flex flex-col gap-8">
+    <ul className="list-unstyled kern-body kern-body--small kern-body--muted flex flex-col gap-8">
       {links.map((link) => {
         const subLinks = Array.isArray(link) ? link : [link];
         return (
-          <li key={subLinks[0].url}>
-            {subLinks.map((subLink) => (
-              <FooterLink key={subLink.url} link={subLink} />
-            ))}
-          </li>
+          <>
+            <li key={subLinks[0].url}>
+              {subLinks.map((subLink) => (
+                <FooterLink key={subLink.url} link={subLink} />
+              ))}
+            </li>
+          </>
         );
       })}
     </ul>
