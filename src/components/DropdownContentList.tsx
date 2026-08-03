@@ -74,7 +74,9 @@ export default function DropdownContentList({
                   NEU
                 </Badge>
               )}
-              {itemNumber && <span className="mr-4">{itemNumber}. </span>}
+              {itemNumber && (
+                <span className="kern-label mr-4">{itemNumber}. </span>
+              )}
               <div className="kern-label">{option.title}</div>
             </div>
             {option.content && (
