@@ -25,7 +25,7 @@ function ToggleTabButton({
       type="button"
       aria-label={ariaLabel}
       look="tertiary"
-      className={twJoin("fill-blue-800 w-auto p-6", className)}
+      className={twJoin("w-auto fill-blue-800 p-6", className)}
       onClick={onClick}
     >
       {children}
@@ -105,7 +105,7 @@ export default function HelpSidepanel() {
       <div
         className={customTwMerge(
           // Base (desktop grid)
-          "help border-blue-300 relative border-l bg-white",
+          "help relative border-l border-blue-300 bg-white",
           !isOpen && "hidden",
           // Mobile overlay (overrides grid behavior)
           "max-xl:fixed max-xl:inset-y-0 max-xl:right-0 max-xl:z-50 max-xl:w-[80vw] max-xl:max-w-[400px] max-xl:shadow-2xl",
@@ -144,7 +144,7 @@ export default function HelpSidepanel() {
                     id={`help-section-${section.id}`}
                     className="scroll-my-80"
                   >
-                    <h3 className="kern-title text-blue-800 mb-8 font-bold">
+                    <h3 className="kern-title mb-8 font-bold text-blue-800">
                       {section.title}
                     </h3>
                     {typeof section.content === "string" ? (

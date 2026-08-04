@@ -79,7 +79,7 @@ export default function DetailsSummary({
         }}
         open={isOpen}
         className={twJoin(
-          "details text-blue-800 has-focus-visible:outline-blue-800 scroll-mt-64 has-focus-visible:outline-4 has-focus-visible:outline-offset-4",
+          "details scroll-mt-64 text-blue-800 has-focus-visible:outline-4 has-focus-visible:outline-offset-4 has-focus-visible:outline-blue-800",
           expandInPrint && "print:hidden",
           className,
         )}

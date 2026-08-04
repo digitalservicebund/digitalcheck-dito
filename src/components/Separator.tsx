@@ -8,7 +8,7 @@ export default function Separator({ className }: Readonly<SeperatorProps>) {
   return (
     <hr
       className={customTwMerge(
-        "border-gray-400 border-0 border-b-2 border-solid",
+        "border-0 border-b-2 border-solid border-gray-400",
         className,
       )}
     />

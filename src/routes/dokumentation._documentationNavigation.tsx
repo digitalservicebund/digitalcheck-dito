@@ -286,7 +286,7 @@ export function LayoutWithDocumentationNavigation({
       <HelpPanelProvider currentPath={currentUrl}>
         <div
           className={twJoin(
-            "breakout-grid-form-steps bg-blue-100 grow",
+            "breakout-grid-form-steps grow bg-blue-100",
             !showHelpPanel && "[--content-max-width:750px] [--help-width:0]",
           )}
         >

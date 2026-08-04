@@ -47,7 +47,7 @@ function ImageBox({
       {image.caption && (
         <figcaption
           className={twJoin(
-            "ds-label-02-reg text-gray-900 pt-[24px] **:max-w-fit",
+            "ds-label-02-reg pt-[24px] text-gray-900 **:max-w-fit",
             background && "bg-blue-100 p-16",
           )}
         >
@@ -55,7 +55,7 @@ function ImageBox({
         </figcaption>
       )}
       {border && (
-        <hr className="border-blue-300 my-[16px] w-[120px] border-t-2" />
+        <hr className="my-[16px] w-[120px] border-t-2 border-blue-300" />
       )}
     </figure>
   );

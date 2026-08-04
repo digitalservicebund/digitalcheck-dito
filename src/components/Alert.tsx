@@ -78,10 +78,10 @@ const Alert = ({
         <div className="flex grow items-start justify-end self-stretch">
           <button
             type="button"
-            className="focus-visible:outline-blue-800 flex size-24 cursor-pointer items-center justify-center rounded-[20px] outline-offset-2 hover:bg-white/50 focus-visible:bg-white/50 focus-visible:outline-4 active:bg-white/50"
+            className="flex size-24 cursor-pointer items-center justify-center rounded-[20px] outline-offset-2 hover:bg-white/50 focus-visible:bg-white/50 focus-visible:outline-4 focus-visible:outline-blue-800 active:bg-white/50"
             onClick={handleCloseButtonClick}
           >
-            <Clear className="fill-blue-800 size-16" />
+            <Clear className="size-16 fill-blue-800" />
           </button>
         </div>
       </div>

@@ -202,7 +202,7 @@ function SimplifiedAspectsContent({
               return (
                 <span
                   key={aspect}
-                  className="border-blue-400 bg-blue-400 rounded-full border px-16 py-6 text-sm font-medium"
+                  className="rounded-full border border-blue-400 bg-blue-400 px-16 py-6 text-sm font-medium"
                 >
                   {aspekt ? aspekt.Kurzbezeichnung : aspect}
                 </span>

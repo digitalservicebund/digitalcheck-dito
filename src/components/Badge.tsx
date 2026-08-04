@@ -37,12 +37,12 @@ function Badge({
         look === "gray" && "bg-gray-300",
         look === "white" && "bg-white",
         look === "success" && "bg-green-200 text-green-700",
-        look === "danger" && "bg-red-200 text-ds-error",
+        look === "danger" && "text-ds-error bg-red-200",
         highContrastDarkStyle,
         className,
       )}
     >
-      {Icon && <Icon className="fill-gray-800 size-16" />}
+      {Icon && <Icon className="size-16 fill-gray-800" />}
       {children || text}
     </mark>
   );

@@ -110,7 +110,7 @@ export function DocumentationSend() {
             className: "size-80 fill-green-800",
           }}
           look="highlight"
-          className="bg-green-200 items-center"
+          className="items-center bg-green-200"
         />
       </InfoBoxList>
       {interoperabilityRequired && <InteroperabilitySteps />}

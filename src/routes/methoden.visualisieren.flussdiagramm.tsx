@@ -693,7 +693,7 @@ export default function Visualization() {
           </div>
         </SidebarContainer>
         <Container className="mb-80 py-0">
-          <hr className="border-blue-300 mb-80 border-0 border-b-2 border-solid" />
+          <hr className="mb-80 border-0 border-b-2 border-solid border-blue-300" />
           <InfoBox
             badge={{
               Icon: ArrowCircleRightOutlined,

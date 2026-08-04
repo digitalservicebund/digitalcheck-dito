@@ -106,17 +106,14 @@ const containsMatchingAttr = (
 
 const classes = {
   hover: "hover:border-l-blue-300 hover:bg-blue-300 hover:underline",
-  hoverError:
-    "hover:border-l-yellow-300 hover:bg-yellow-300 hover:underline",
+  hoverError: "hover:border-l-yellow-300 hover:bg-yellow-300 hover:underline",
   focus:
     "focus-visible:outline-4 focus-visible:-outline-offset-4 focus-visible:outline-blue-800",
-  active:
-    "ds-label-02-bold pointer-events-none border-l-blue-800 bg-blue-400",
+  active: "ds-label-02-bold pointer-events-none border-l-blue-800 bg-blue-400",
   activeError:
     "ds-label-02-bold pointer-events-none border-l-yellow-800 bg-yellow-300",
   activeOpen: "pointer-events-none border-l-blue-400 bg-blue-400",
-  activeOpenError:
-    "pointer-events-none border-l-yellow-200 bg-yellow-200",
+  activeOpenError: "pointer-events-none border-l-yellow-200 bg-yellow-200",
   wrapper: "border-b border-b-white",
   base: "m-0 flex flex-row items-center gap-8 border-l-4 p-16 text-black",
 };
@@ -133,7 +130,7 @@ function DisabledItem({
       <div
         className={twMerge(
           classes.base,
-          "text-gray-800 justify-between border-l-transparent",
+          "justify-between border-l-transparent text-gray-800",
         )}
         aria-disabled
       >
@@ -204,9 +201,7 @@ function NavItemLink({
         className={twMerge(
           classes.base,
           "link-unstyled",
-          error
-            ? "border-l-yellow-200 bg-yellow-200"
-            : "border-l-blue-100",
+          error ? "border-l-yellow-200 bg-yellow-200" : "border-l-blue-100",
           error ? classes.hoverError : classes.hover,
           classes.focus,
           isActive && (error ? classes.activeError : classes.active),
@@ -339,7 +334,7 @@ function NavItem({
 
 function NavItems({ children }: Readonly<NavItemsProps>) {
   return (
-    <ul className="ds-label-02-reg bg-blue-100 list-none space-y-0 p-0">
+    <ul className="ds-label-02-reg list-none space-y-0 bg-blue-100 p-0">
       {children}
     </ul>
   );

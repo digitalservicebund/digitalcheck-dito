@@ -100,7 +100,7 @@ export default function DropdownMenu({
         >
           {hasSupport && (
             <div className="px-16 lg:px-56">
-              <div className="ds-label-02-reg text-gray-900 px-16 pt-8 pb-16 lg:px-8 lg:pt-16 lg:pb-24">
+              <div className="ds-label-02-reg px-16 pt-8 pb-16 text-gray-900 lg:px-8 lg:pt-16 lg:pb-24">
                 {isMobile ? header.contactTel.msgMobile : header.contactTel.msg}
                 <a
                   href={`tel:${header.contactTel.number.replaceAll(/\s/g, "")}`}
@@ -113,7 +113,7 @@ export default function DropdownMenu({
                   {header.contactMail.text}
                 </a>
               </div>
-              <div className="border-gray-600 border-b" />
+              <div className="border-b border-gray-600" />
             </div>
           )}
           <DropdownContentList

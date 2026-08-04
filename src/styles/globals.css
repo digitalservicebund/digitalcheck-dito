@@ -133,7 +133,7 @@
   }
 
   blockquote {
-    @apply border-l-blue-600 border-l-4 italic;
+    @apply border-l-4 border-l-blue-600 italic;
     margin: 1em 10px;
     padding: 0.5em 20px;
   }
@@ -174,7 +174,7 @@
   }
 
   *:focus-visible {
-    @apply outline-blue-800 no-underline outline-2 outline-offset-1;
+    @apply no-underline outline-2 outline-offset-1 outline-blue-800;
   }
 }
 
@@ -235,7 +235,7 @@
     }
 
     & tbody {
-      @apply divide-gray-200 divide-y;
+      @apply divide-y divide-gray-200;
     }
 
     & tbody tr {

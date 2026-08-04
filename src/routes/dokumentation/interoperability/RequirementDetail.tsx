@@ -59,9 +59,7 @@ function Value({ value }: Readonly<{ value: string | string[] | undefined }>) {
   const valueMissing = !value || (Array.isArray(value) && value.length === 0);
 
   if (valueMissing)
-    return (
-      <dd className="ds-label-01-reg text-gray-900">nicht angegeben</dd>
-    );
+    return <dd className="ds-label-01-reg text-gray-900">nicht angegeben</dd>;
 
   return (
     <dd className="ds-label-01-reg">

@@ -129,7 +129,7 @@ function UploadDropzoneCard({
   );
 
   return (
-    <div className="rounded-8 max-w-a11y border-gray-400 space-y-16 border p-24">
+    <div className="rounded-8 max-w-a11y space-y-16 border border-gray-400 p-24">
       <p className="ds-label-01-bold block">{file.name} hochladen</p>
       <label
         htmlFor={file.path}
@@ -138,7 +138,7 @@ function UploadDropzoneCard({
           isDragOver
             ? "border-blue-700 bg-blue-100"
             : "border-gray-500 bg-gray-50 hover:bg-gray-100",
-          status.userCannotUpload && "bg-gray-100 cursor-not-allowed",
+          status.userCannotUpload && "cursor-not-allowed bg-gray-100",
         )}
         onDragOver={(event) => {
           event.preventDefault();
@@ -164,14 +164,12 @@ function UploadDropzoneCard({
           Datei hier ablegen oder klicken, um auszuwählen
         </p>
         {selectedFileName && (
-          <p className="ds-body-02-reg text-gray-700 mt-8">
+          <p className="ds-body-02-reg mt-8 text-gray-700">
             Ausgewählt: {selectedFileName}
           </p>
         )}
         {isUploading && (
-          <p className="ds-body-02-reg text-gray-700 mt-8">
-            Upload läuft...
-          </p>
+          <p className="ds-body-02-reg mt-8 text-gray-700">Upload läuft...</p>
         )}
       </label>
 

@@ -168,7 +168,7 @@ export default function Result() {
                   <RichText markdown={resultContent.inlineNoticeContent.text} />
                 </InlineNotice>
               )}
-              <div className="border-gray-400 border-b-2 border-solid pb-40 last:border-0 last:pb-0 print:border-0 print:pb-0">
+              <div className="border-b-2 border-solid border-gray-400 pb-40 last:border-0 last:pb-0 print:border-0 print:pb-0">
                 <DetailsSummary
                   data-testid="result-details"
                   title={preCheckResult.detailsTitle}

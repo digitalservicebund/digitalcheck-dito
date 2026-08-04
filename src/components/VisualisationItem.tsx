@@ -48,7 +48,7 @@ export default function VisualisationItem({
             href={getImagePath(visualisierung)}
             target="_blank"
             rel="noreferrer"
-            className="link-unstyled border-blue-500 relative block aspect-square cursor-zoom-in overflow-hidden border"
+            className="link-unstyled relative block aspect-square cursor-zoom-in overflow-hidden border border-blue-500"
           >
             <Image
               url={getImagePath(visualisierung)}
@@ -56,7 +56,7 @@ export default function VisualisationItem({
               className="size-full object-cover"
             />
             <ZoomInOutlined
-              className="bg-blue-800 absolute bottom-16 left-16 p-1 shadow-sm"
+              className="absolute bottom-16 left-16 bg-blue-800 p-1 shadow-sm"
               fill="white"
             />
           </a>

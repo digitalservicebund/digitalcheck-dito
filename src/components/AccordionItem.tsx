@@ -26,17 +26,17 @@ export default function AccordionItem({
   className,
 }: Readonly<AccordionItemProps>) {
   return (
-    <div className={twMerge("border-blue-400 border-b-2", className)}>
+    <div className={twMerge("border-b-2 border-blue-400", className)}>
       <Disclosure>
         <DisclosureButton
-          className="group hover:bg-blue-200 focus-visible:bg-blue-200 focus-visible:outline-blue-800 data-open:bg-blue-200 flex w-full items-center justify-between p-24 focus-visible:outline-4"
+          className="group flex w-full items-center justify-between p-24 hover:bg-blue-200 focus-visible:bg-blue-200 focus-visible:outline-4 focus-visible:outline-blue-800 data-open:bg-blue-200"
           id={id}
         >
-          <div className="text-blue-800 pr-10 text-left font-bold">
+          <div className="pr-10 text-left font-bold text-blue-800">
             {headline}
           </div>
-          <Add className="fill-blue-800 size-24 shrink-0 group-data-open:hidden" />
-          <Remove className="fill-blue-800 hidden size-24 shrink-0 group-data-open:block" />
+          <Add className="size-24 shrink-0 fill-blue-800 group-data-open:hidden" />
+          <Remove className="hidden size-24 shrink-0 fill-blue-800 group-data-open:block" />
         </DisclosureButton>
         <DisclosurePanel className="flex w-full items-center justify-between p-24">
           {typeof children === "string" ? (
