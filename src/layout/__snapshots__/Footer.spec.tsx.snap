@@ -4,7 +4,7 @@ exports[`Footer Component > Renders correctly 1`] = `
 <div>
   <footer
     aria-label="Seitenfußbereich"
-    class="ds-label-03-reg border-ds-blue-300 text-ds-gray-900 flex w-full flex-row justify-center border-t-2 leading-snug print:hidden"
+    class="ds-label-03-reg border-blue-300 text-gray-900 flex w-full flex-row justify-center border-t-2 leading-snug print:hidden"
     id="footer"
   >
     <div
@@ -279,7 +279,7 @@ exports[`Footer Component > Renders correctly 1`] = `
         </ul>
       </nav>
       <hr
-        class="border-ds-blue-300 mt-16 w-full border-t-2"
+        class="border-blue-300 mt-16 w-full border-t-2"
       />
       <nav
         aria-label="Externe Verlinkungen"

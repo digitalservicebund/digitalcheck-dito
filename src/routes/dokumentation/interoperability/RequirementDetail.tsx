@@ -60,7 +60,7 @@ function Value({ value }: Readonly<{ value: string | string[] | undefined }>) {
 
   if (valueMissing)
     return (
-      <dd className="ds-label-01-reg text-ds-gray-900">nicht angegeben</dd>
+      <dd className="ds-label-01-reg text-gray-900">nicht angegeben</dd>
     );
 
   return (

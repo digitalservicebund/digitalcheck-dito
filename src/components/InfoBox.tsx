@@ -65,17 +65,17 @@ const InfoBox = ({
         "flex scroll-my-40 flex-col gap-32 md:flex-row",
         // visual?.type === "image" ? "flex-col-reverse" : "flex-col",
         look === "highlight" &&
-          "bg-ds-blue-100 rounded-lg px-16 py-40 sm:px-80",
+          "bg-blue-100 rounded-lg px-16 py-40 sm:px-80",
         look === "white" && "rounded-lg bg-white px-16 py-40 sm:px-80",
         look === "method" &&
-          "bg-ds-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48",
+          "bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48",
         className,
       )}
     >
       {visual?.type === "icon" && (
         <visual.Icon
           className={twMerge(
-            "fill-ds-blue-500 hidden sm:block",
+            "fill-blue-500 hidden sm:block",
             imageSizes["icon"],
             visual.className,
           )}

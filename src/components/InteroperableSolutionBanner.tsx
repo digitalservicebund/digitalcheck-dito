@@ -7,7 +7,7 @@ export function InteroperableSolutionBanner() {
   return (
     <>
       {showBanner && (
-        <aside className="breakout-grid-toc bg-ds-yellow-200 relative py-24">
+        <aside className="breakout-grid-toc bg-yellow-200 relative py-24">
           <div className="row-1 space-y-8">
             <p className="ds-body-01-bold">
               <b>
@@ -27,7 +27,7 @@ export function InteroperableSolutionBanner() {
             aria-label="Schließen"
             type="button"
           >
-            <CloseIcon className="fill-ds-blue-800" />
+            <CloseIcon className="fill-blue-800" />
           </Button>
         </aside>
       )}

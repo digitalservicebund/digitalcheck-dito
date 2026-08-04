@@ -34,7 +34,7 @@ export default function InfoBoxList({
             <li
               className={twJoin(
                 separator &&
-                  "border-ds-gray-400 border-0 border-b-2 border-solid pb-40 last:border-none last:pb-0",
+                  "border-gray-400 border-0 border-b-2 border-solid pb-40 last:border-none last:pb-0",
               )}
             >
               {child}

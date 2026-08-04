@@ -68,7 +68,7 @@ function RadioGroup<FormData, Value extends string | number = string>({
                 className: twMerge(
                   "kern-form-check__radio self-start",
                   (hasError || hasWarning) &&
-                    "bg-ds-yellow-200 border-ds-yellow-700 text-black focus:border-4 focus:border-ds-yellow-700 focus:outline-none",
+                    "bg-yellow-200 border-yellow-700 text-black focus:border-4 focus:border-yellow-700 focus:outline-none",
                 ),
                 value: opt.value,
                 ...rest,
@@ -77,7 +77,7 @@ function RadioGroup<FormData, Value extends string | number = string>({
             <label htmlFor={id} className="kern-label">
               {opt.label}
               {opt.subText && (
-                <span className="text-ds-gray-800">{opt.subText}</span>
+                <span className="text-gray-800">{opt.subText}</span>
               )}
             </label>
           </p>
@@ -89,7 +89,7 @@ function RadioGroup<FormData, Value extends string | number = string>({
           <span
             className={twMerge(
               "kern-icon kern-icon--warning kern-icon--md",
-              (hasWarning || hasError) && "!bg-ds-yellow-700",
+              (hasWarning || hasError) && "!bg-yellow-700",
             )}
             aria-hidden="true"
           ></span>

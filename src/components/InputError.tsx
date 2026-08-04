@@ -15,7 +15,7 @@ const InputError = ({ id, children, look = "error" }: InputErrorProps) => {
           <span
             className={twMerge(
               "kern-icon kern-icon--warning kern-icon--md",
-              "!bg-ds-yellow-700",
+              "!bg-yellow-700",
             )}
             aria-hidden="true"
           ></span>
@@ -36,7 +36,7 @@ const InputError = ({ id, children, look = "error" }: InputErrorProps) => {
     //   data-testid={id}
     //   className={twMerge(
     //     "text-ds-error flex items-center gap-x-4",
-    //     look === "warning" && "bg-ds-yellow-300 inline-flex px-4 text-black",
+    //     look === "warning" && "bg-yellow-300 inline-flex px-4 text-black",
     //   )}
     // >
     // {look === "error" && (

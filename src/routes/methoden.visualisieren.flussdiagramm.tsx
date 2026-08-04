@@ -135,7 +135,7 @@ export default function Visualization() {
   return (
     <>
       <main>
-        <div className="breakout-grid-toc bg-ds-blue-100 pt-40 pb-48">
+        <div className="breakout-grid-toc bg-blue-100 pt-40 pb-48">
           <div>
             <Heading tagName="h1">Erstellung von Flussdiagrammen</Heading>
             <p className="ds-subhead mt-16">
@@ -484,7 +484,7 @@ export default function Visualization() {
                             "Fragment eines Flussdiagramms mit drei horizontalen, länglichen Kästen, die am Anfang mit einer Platzhalter-Box “Akteurin/Akteur” markiert sind.",
                           caption:
                             "Akteure können alle Normenadressaten oder Institutionen sein.",
-                          className: "border border-ds-blue-800",
+                          className: "border border-blue-800",
                         }}
                         className="md:max-w-2/3 lg:max-w-1/2"
                         zoomable={false}
@@ -528,7 +528,7 @@ export default function Visualization() {
                       />
 
                       <p
-                        className="ds-label-02-reg text-ds-gray-900"
+                        className="ds-label-02-reg text-gray-900"
                         id="flussdiagramm-erstellen-live-desc"
                       >
                         Ein Beispielvideo zeigt das Entstehen eines
@@ -693,7 +693,7 @@ export default function Visualization() {
           </div>
         </SidebarContainer>
         <Container className="mb-80 py-0">
-          <hr className="border-ds-blue-300 mb-80 border-0 border-b-2 border-solid" />
+          <hr className="border-blue-300 mb-80 border-0 border-b-2 border-solid" />
           <InfoBox
             badge={{
               Icon: ArrowCircleRightOutlined,

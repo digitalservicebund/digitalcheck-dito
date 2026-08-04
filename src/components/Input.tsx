@@ -52,7 +52,7 @@ function Input({
             "kern-form-input__input bg-white",
             hasError && "kern-form-input__input--error",
             hasWarning &&
-              "bg-white border-ds-yellow-700 text-black focus:border-4 focus:border-ds-yellow-700 focus:outline-none",
+              "bg-white border-yellow-700 text-black focus:border-4 focus:border-yellow-700 focus:outline-none",
           ),
           ...rest,
         })}

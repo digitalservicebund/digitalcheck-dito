@@ -216,7 +216,7 @@ export function DocumentationPrincipleErlaeuterung({
           <BlocksRenderer content={prinzip.Kurzbeschreibung} />
         )}
 
-        <div className="bg-ds-blue-300 rounded-lg p-24">
+        <div className="bg-blue-300 rounded-lg p-24">
           <p>{changeAnswerTitle}</p>
           <a href={currentUrl.replace("/erlaeuterung", "")}>Angaben ändern</a>
         </div>

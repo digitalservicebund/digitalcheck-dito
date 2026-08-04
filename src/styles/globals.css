@@ -20,42 +20,46 @@
   --color-ds-warning: #f5e05d; /* yellow 500 */
   --color-ds-feature: #f5e05d;
 
-  --color-ds-red-200: #f9e5ec;
-  --color-ds-red-600: #d9668b;
-  --color-ds-red-800: #b0243f;
+  --color-red-*: initial;
+  --color-red-200: #f9e5ec;
+  --color-red-800: #b0243f;
 
-  --color-ds-yellow-200: #fff9d2;
-  --color-ds-yellow-300: #f9ec9e;
-  --color-ds-yellow-500: #f5e05d;
-  --color-ds-yellow-700: #e5ce5c;
-  --color-ds-yellow-800: #dac23c;
+  --color-yellow-*: initial;
+  --color-yellow-200: #fff9d2;
+  --color-yellow-300: #f9ec9e;
+  --color-yellow-500: #f5e05d;
+  --color-yellow-700: #e5ce5c;
+  --color-yellow-800: #dac23c;
 
-  --color-ds-blue-100: #f2f6f8;
-  --color-ds-blue-200: #ecf1f4;
-  --color-ds-blue-300: #dce8ef;
-  --color-ds-blue-400: #b8d7e8;
-  --color-ds-blue-500: #b3c9d6;
-  --color-ds-blue-600: #7ba4bf;
-  --color-ds-blue-700: #336f91;
-  --color-ds-blue-800: #004b76;
-  --color-ds-blue-900: #003350;
+  --color-blue-*: initial;
+  --color-blue-100: #f2f6f8;
+  --color-blue-200: #ecf1f4;
+  --color-blue-300: #dce8ef;
+  --color-blue-400: #b8d7e8;
+  --color-blue-500: #b3c9d6;
+  --color-blue-600: #7ba4bf;
+  --color-blue-700: #336f91;
+  --color-blue-800: #004b76;
+  --color-blue-900: #003350;
 
-  --color-ds-green-100: #e8f7f0;
-  --color-ds-green-200: #ccebdd;
-  --color-ds-green-700: #01854a;
-  --color-ds-green-800: #006b3c; /* Added: missing color from Angie palette */
-  --color-ds-green-900: #005e34;
+  --color-green-*: initial;
+  --color-green-100: #e8f7f0;
+  --color-green-200: #ccebdd;
+  --color-green-700: #01854a;
+  --color-green-800: #006b3c;
+  --color-green-900: #005e34;
 
-  --color-ds-gray-50: #fcfcfd;
-  --color-ds-gray-100: #f6f7f8;
-  --color-ds-gray-200: #f0f1f3;
-  --color-ds-gray-300: #edeef0;
-  --color-ds-gray-400: #dcdee1;
-  --color-ds-gray-500: #c9cdd2;
-  --color-ds-gray-600: #b8bdc3;
-  --color-ds-gray-700: #a0a7b1;
-  --color-ds-gray-800: #6f7785;
-  --color-ds-gray-900: #4e596a;
+  --color-gray-*: initial;
+  --color-gray-50: #fcfcfd;
+  --color-gray-100: #f6f7f8;
+  --color-gray-200: #f0f1f3;
+  --color-gray-300: #edeef0;
+  --color-gray-400: #dcdee1;
+  --color-gray-500: #c9cdd2;
+  --color-gray-600: #b8bdc3;
+  --color-gray-700: #a0a7b1;
+  --color-gray-800: #6f7785;
+  --color-gray-900: #4e596a;
 
   --color-ds-violet: #4c2c92;
 
@@ -65,7 +69,7 @@
 }
 
 :root {
-  --kern-color-action-default: var(--color-ds-blue-800);
+  --kern-color-action-default: var(--color-blue-800);
   --kern-color-action-visited: var(--color-ds-violet);
 }
 
@@ -129,7 +133,7 @@
   }
 
   blockquote {
-    @apply border-l-ds-blue-600 border-l-4 italic;
+    @apply border-l-blue-600 border-l-4 italic;
     margin: 1em 10px;
     padding: 0.5em 20px;
   }
@@ -170,7 +174,7 @@
   }
 
   *:focus-visible {
-    @apply outline-ds-blue-800 no-underline outline-2 outline-offset-1;
+    @apply outline-blue-800 no-underline outline-2 outline-offset-1;
   }
 }
 
@@ -189,10 +193,10 @@
 }
 
 @utility text-link {
-  @apply visited:text-ds-violet fill-ds-blue-800 text-ds-blue-800 underline decoration-1 underline-offset-4 active:text-black;
+  @apply visited:text-ds-violet fill-blue-800 text-blue-800 underline decoration-1 underline-offset-4 active:text-black;
 
   &:focus-visible {
-    @apply text-ds-blue-800! no-underline!;
+    @apply text-blue-800! no-underline!;
   }
 
   &:hover {
@@ -200,7 +204,7 @@
   }
 
   .text-white & {
-    @apply text-ds-gray-100 visited:text-ds-gray-300;
+    @apply text-gray-100 visited:text-gray-300;
   }
 }
 
@@ -227,15 +231,15 @@
     }
 
     & thead tr {
-      @apply bg-ds-blue-400 text-left;
+      @apply bg-blue-400 text-left;
     }
 
     & tbody {
-      @apply divide-ds-gray-200 divide-y;
+      @apply divide-gray-200 divide-y;
     }
 
     & tbody tr {
-      @apply hover:bg-ds-gray-100;
+      @apply hover:bg-gray-100;
     }
   }
 
