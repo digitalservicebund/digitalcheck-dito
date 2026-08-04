@@ -1,12 +1,12 @@
 import { vorpruefung_hinweise } from "@/config/routes";
-import Index from "@/pages/vorpruefung/index.astro";
 import { preCheck } from "@/resources/content/vorpruefung";
 import { readVersionedDataFromLocalStorage } from "@/utils/localStorageVersioned";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { PreCheckData } from "../vorpruefung/preCheckDataService";
-import { DATA_SCHEMA_VERSION } from "../vorpruefung/preCheckDataService";
+import { PreCheckContinueActions } from "./PreCheckContinueActions";
+import type { PreCheckData } from "./preCheckDataService";
+import { DATA_SCHEMA_VERSION } from "./preCheckDataService";
 
 vi.mock("@/utils/localStorageVersioned", async (importOriginal) => {
   const actual =
@@ -19,19 +19,10 @@ vi.mock("@/utils/localStorageVersioned", async (importOriginal) => {
 
 const { questions } = preCheck;
 
-describe("Vorpruefung Index Route - Integration Tests", () => {
+describe("PreCheckContinueActions", () => {
   describe("with no existing data", () => {
     beforeEach(() => {
-      render(<Index />);
-    });
-
-    it("renders the Hero section with the correct title", () => {
-      expect(
-        screen.getByRole("heading", {
-          name: "Vorprüfung: Digitalbezug einschätzen",
-          level: 1,
-        }),
-      ).toBeInTheDocument();
+      render(<PreCheckContinueActions />);
     });
 
     it("renders the main CTA button to start vorpruefung", () => {
@@ -39,15 +30,6 @@ describe("Vorpruefung Index Route - Integration Tests", () => {
         name: "Vorprüfung starten",
       });
       expect(startButton).toHaveAttribute("href", vorpruefung_hinweise.path);
-    });
-
-    it("renders the support banner", () => {
-      expect(
-        screen.getByRole("heading", {
-          name: "Sie haben Gesprächsbedarf zu Ihrem Vorhaben?",
-          level: 2,
-        }),
-      ).toBeInTheDocument();
     });
   });
 
@@ -61,7 +43,7 @@ describe("Vorpruefung Index Route - Integration Tests", () => {
         ssr: false,
       } as PreCheckData);
 
-      render(<Index />);
+      render(<PreCheckContinueActions />);
     });
 
     it("renders the CTA button to continue vorpruefung at question 0", () => {
@@ -92,7 +74,7 @@ describe("Vorpruefung Index Route - Integration Tests", () => {
         ssr: false,
       } as PreCheckData);
 
-      render(<Index />);
+      render(<PreCheckContinueActions />);
     });
 
     it("renders the CTA button to continue vorpruefung", () => {

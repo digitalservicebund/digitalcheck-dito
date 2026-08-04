@@ -166,3 +166,5 @@ lefthook-local.yml
 
 # Astro
 .astro
+
+.pnpm-store
