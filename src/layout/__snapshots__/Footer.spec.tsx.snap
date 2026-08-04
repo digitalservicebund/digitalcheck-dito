@@ -18,18 +18,18 @@ exports[`Footer Component > Renders correctly 1`] = `
           class="kern-stack-sm row-span-2"
         >
           <h2
-            class="ds-label-section kern-label kern-label--large"
+            class="kern-heading-medium"
           >
-            Unterstützungsangebote Für bund, Länder, Kommunen und EU-Staaten
+            Unterstützungsangebote für Bund, Länder, Kommunen und EU-Staaten
           </h2>
           <ul
-            class="list-unstyled flex flex-col gap-8"
+            class="list-unstyled kern-body kern-body--small kern-body--muted flex flex-col gap-8"
           >
             <li>
               Support:
                
               <a
-                class="increase-tap-area"
+                class="increase-tap-area kern-link kern-link--small"
                 href="tel:+4915140767839"
               >
                 0151/40 76 78 39
@@ -37,7 +37,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                oder
                
               <a
-                class="increase-tap-area"
+                class="increase-tap-area kern-link kern-link--small"
                 href="mailto:digitalcheck@digitalservice.bund.de"
               >
                 digitalcheck@digitalservice.bund.de
@@ -46,7 +46,7 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="increase-tap-area"
+                class="increase-tap-area kern-link kern-link--small"
                 href="/unterstuetzung"
               >
                 Alle Unterstützungsangebote
@@ -55,7 +55,7 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="increase-tap-area"
+                class="increase-tap-area kern-link kern-link--small"
                 href="/unterstuetzung?tab=online-schulungen#angebote"
               >
                 Schulungen
@@ -64,7 +64,7 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="increase-tap-area"
+                class="increase-tap-area kern-link kern-link--small"
                 href="/interoperabel/nationale-kontaktstelle"
               >
                 Nationale Kontaktstelle für ein interoperables Europa (2024/903 Art. 17)
@@ -76,17 +76,17 @@ exports[`Footer Component > Renders correctly 1`] = `
           class="kern-stack-sm row-span-2"
         >
           <h2
-            class="ds-label-section kern-label kern-label--large"
+            class="kern-heading-medium"
           >
             Schritt für Schritt
           </h2>
           <ul
-            class="list-unstyled flex flex-col gap-8"
+            class="list-unstyled kern-body kern-body--small kern-body--muted flex flex-col gap-8"
           >
             <li>
                
               <a
-                class="increase-tap-area"
+                class="increase-tap-area kern-link kern-link--small"
                 href="/vorpruefung"
               >
                 1. Vorprüfung: Digitalbezug einschätzen
@@ -95,7 +95,7 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="increase-tap-area"
+                class="increase-tap-area kern-link kern-link--small"
                 href="/methoden"
               >
                 2. Digitaltauglichkeit der Regelung sicherstellen
@@ -104,7 +104,7 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="increase-tap-area"
+                class="increase-tap-area kern-link kern-link--small"
                 href="/dokumentation"
               >
                 3. Dokumentieren der Digitaltauglichkeit
@@ -116,17 +116,17 @@ exports[`Footer Component > Renders correctly 1`] = `
           class="kern-stack-sm"
         >
           <h2
-            class="ds-label-section kern-label kern-label--large"
+            class="kern-heading-medium"
           >
             Grundlagen
           </h2>
           <ul
-            class="list-unstyled flex flex-col gap-8"
+            class="list-unstyled kern-body kern-body--small kern-body--muted flex flex-col gap-8"
           >
             <li>
                
               <a
-                class="increase-tap-area"
+                class="increase-tap-area kern-link kern-link--small"
                 href="/methoden/fuenf-prinzipien"
               >
                 Prinzipien der Digitaltauglichkeit
@@ -135,7 +135,7 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="increase-tap-area"
+                class="increase-tap-area kern-link kern-link--small"
                 href="/interoperabel"
               >
                 EU-Interoperabilität
@@ -144,7 +144,7 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="increase-tap-area"
+                class="increase-tap-area kern-link kern-link--small"
                 href="/grundlagen/digitaltauglichkeit"
               >
                 Was ist Digitaltauglichkeit?
@@ -153,7 +153,7 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="increase-tap-area"
+                class="increase-tap-area kern-link kern-link--small"
                 href="/grundlagen/normenkontrollrat"
               >
                 NKR und Digitalcheck
@@ -165,17 +165,17 @@ exports[`Footer Component > Renders correctly 1`] = `
           class="kern-stack-sm"
         >
           <h2
-            class="ds-label-section kern-label kern-label--large"
+            class="kern-heading-medium"
           >
             Beispiele
           </h2>
           <ul
-            class="list-unstyled flex flex-col gap-8"
+            class="list-unstyled kern-body kern-body--small kern-body--muted flex flex-col gap-8"
           >
             <li>
                
               <a
-                class="increase-tap-area"
+                class="increase-tap-area kern-link kern-link--small"
                 href="/beispiele/prinzipien"
               >
                 Digitaltauglichkeit im Regelungstext
@@ -184,7 +184,7 @@ exports[`Footer Component > Renders correctly 1`] = `
             <li>
                
               <a
-                class="increase-tap-area"
+                class="increase-tap-area kern-link kern-link--small"
                 href="/beispiele/visualisierungen"
               >
                 Visualisierungen
@@ -197,14 +197,14 @@ exports[`Footer Component > Renders correctly 1`] = `
         aria-label="Sitemap"
       >
         <ul
-          class="list-unstyled flex flex-row flex-wrap items-baseline gap-8"
+          class="list-unstyled kern-link kern-link--small flex flex-row flex-wrap items-baseline gap-8"
         >
           <li
             class="after:ml-8 after:inline-block after:content-['•'] last:after:content-['']"
           >
              
             <a
-              class="increase-tap-area"
+              class="increase-tap-area kern-link kern-link--small"
               href="/impressum"
             >
               Impressum
@@ -215,7 +215,7 @@ exports[`Footer Component > Renders correctly 1`] = `
           >
              
             <a
-              class="increase-tap-area"
+              class="increase-tap-area kern-link kern-link--small"
               href="/datenschutz"
             >
               Datenschutzerklärung
@@ -226,7 +226,7 @@ exports[`Footer Component > Renders correctly 1`] = `
           >
              
             <a
-              class="increase-tap-area"
+              class="increase-tap-area kern-link kern-link--small"
               href="/barrierefreiheit"
             >
               Barrierefreiheit
@@ -237,7 +237,7 @@ exports[`Footer Component > Renders correctly 1`] = `
           >
              
             <a
-              class="increase-tap-area"
+              class="increase-tap-area kern-link kern-link--small"
               href="/sitemap"
             >
               Sitemap
@@ -248,7 +248,7 @@ exports[`Footer Component > Renders correctly 1`] = `
           >
              
             <a
-              class="increase-tap-area"
+              class="increase-tap-area kern-link kern-link--small"
               href="/das-ist-neu"
             >
               Das ist neu
@@ -259,7 +259,7 @@ exports[`Footer Component > Renders correctly 1`] = `
           >
              
             <a
-              class="increase-tap-area"
+              class="increase-tap-area kern-link kern-link--small"
               href="/zahlen-und-fakten"
             >
               Zahlen und Fakten
@@ -270,7 +270,7 @@ exports[`Footer Component > Renders correctly 1`] = `
           >
              
             <a
-              class="increase-tap-area"
+              class="increase-tap-area kern-link kern-link--small"
               href="https://github.com/digitalservicebund/digitalcheck-dito"
             >
               Open Source Code
@@ -285,14 +285,17 @@ exports[`Footer Component > Renders correctly 1`] = `
         aria-label="Externe Verlinkungen"
         class="space-y-40"
       >
-        Ein Angebot der
-         
-        <a
-          class="increase-tap-area"
-          href="https://digitalservice.bund.de/"
+        <p
+          class="kern-body kern-body--small"
         >
-          DigitalService GmbH des Bundes
-        </a>
+          Ein Angebot der
+           
+          <a
+            href="https://digitalservice.bund.de/"
+          >
+            DigitalService GmbH des Bundes
+          </a>
+        </p>
         <div
           class="space-y-16 sm:flex sm:flex-row sm:items-center sm:gap-48 sm:space-y-0"
         >
@@ -312,40 +315,38 @@ exports[`Footer Component > Renders correctly 1`] = `
             class="max-w-2xl space-y-8"
           >
             <h3
-              class="ds-label-03-bold"
+              class="kern-label kern-label--small"
             >
               Federführung
             </h3>
-            <div
-              class="kern-stack-sm"
+            <p
+              class="kern-body kern-body--small"
             >
-              <ul
-                class="list-unstyled flex flex-col gap-8"
+              Der Digitalcheck entsteht im Auftrag des
+               
+              <a
+                href="https://bmds.bund.de/"
+                rel="noreferrer"
+                target="_blank"
               >
-                <li>
-                  Der Digitalcheck entsteht im Auftrag des
-                   
-                  <a
-                    class="increase-tap-area"
-                    href="https://bmds.bund.de/"
-                  >
-                    Bundesministerium für Digitales und Staatsmodernisierung
-                  </a>
-                </li>
-                <li>
-                  Mehr über den politischen Auftrag und die Entstehung des Digitalcheck finden Sie auf der
-                   
-                  <a
-                    class="increase-tap-area"
-                    href="https://www.digitale-verwaltung.de/Webs/DV/DE/transformation/digitalcheck/digitalcheck-node.html"
-                  >
-                    Projektseite
-                  </a>
-                   
-                  des Bundesministeriums für Digitales und Staatsmodernisierung.
-                </li>
-              </ul>
-            </div>
+                Bundesministerium für Digitales und Staatsmodernisierung
+              </a>
+            </p>
+            <p
+              class="kern-body kern-body--small"
+            >
+              Mehr über den politischen Auftrag und die Entstehung des Digitalcheck finden Sie auf der
+               
+              <a
+                href="https://www.digitale-verwaltung.de/Webs/DV/DE/transformation/digitalcheck/digitalcheck-node.html"
+                rel="noreferrer"
+                target="_blank"
+              >
+                Projektseite
+              </a>
+               
+              des Bundesministeriums für Digitales und Staatsmodernisierung.
+            </p>
           </div>
         </div>
       </nav>
