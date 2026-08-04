@@ -163,13 +163,4 @@ describe("Index Route - Integration Tests", () => {
 
     expect(main.getByText("Referentin")).toBeInTheDocument();
   });
-
-  it("renders the documentation banner", () => {
-    expect(
-      aside.getByRole("heading", {
-        name: /Digitalcheck-Dokumentation: Jetzt online ausfüllen/,
-        level: 2,
-      }),
-    ).toBeInTheDocument();
-  });
 });

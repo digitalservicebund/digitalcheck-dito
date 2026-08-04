@@ -230,12 +230,16 @@ describe("DropdownMenu Component", () => {
   describe("Active Item highlighting", () => {
     it("highlights an item when the url matches the page", () => {
       renderDropdown({ isExpanded: true, isOrderedList: false });
-      const activeLink = screen.getByText("Link1").parentElement!;
+      const activeLink = screen.getByRole("menuitem", {
+        name: "Link1",
+      }).firstElementChild!;
 
       expect(activeLink.classList).toContain("border-ds-blue-800");
       expect(activeLink.classList).toContain("bg-ds-blue-100");
 
-      const inActiveLink = screen.getByText("Link2").parentElement!;
+      const inActiveLink = screen.getByRole("menuitem", {
+        name: "Link2",
+      }).firstElementChild!;
 
       expect(inActiveLink.classList).not.toContain("border-ds-blue-800");
       expect(inActiveLink.classList).not.toContain("bg-ds-blue-100");
@@ -290,12 +294,16 @@ describe("DropdownMenu Component", () => {
         ["/Link1/Link2"],
       );
 
-      const inActiveLink = screen.getByText("Link1").parentElement!;
+      const inActiveLink = screen.getByRole("menuitem", {
+        name: "Link1",
+      }).firstElementChild!;
 
       expect(inActiveLink.classList).not.toContain("border-ds-blue-800");
       expect(inActiveLink.classList).not.toContain("bg-ds-blue-100");
 
-      const activeLink = screen.getByText("Link2").parentElement!;
+      const activeLink = screen.getByRole("menuitem", {
+        name: "Link2",
+      }).firstElementChild!;
 
       expect(activeLink.classList).toContain("border-ds-blue-800");
       expect(activeLink.classList).toContain("bg-ds-blue-100");

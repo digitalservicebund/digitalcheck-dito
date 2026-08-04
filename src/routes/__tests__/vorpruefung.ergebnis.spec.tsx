@@ -419,7 +419,7 @@ describe("Vorprüfung Ergebnis Page", () => {
           expect(
             screen.getByLabelText("Vorläufiger Arbeitstitel des Vorhabens"),
           ).toHaveAccessibleErrorMessage(
-            "Fehler: Bitte geben Sie einen Titel für Ihr Vorhaben an.",
+            "Bitte geben Sie einen Titel für Ihr Vorhaben an.",
           );
 
           const reasonInput = screen.queryByLabelText("Begründung");

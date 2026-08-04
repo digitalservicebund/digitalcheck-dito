@@ -1,10 +1,10 @@
 import { vorpruefung_hinweise } from "@/config/routes";
+import Index from "@/pages/vorpruefung/index.astro";
 import { preCheck } from "@/resources/content/vorpruefung";
 import { readVersionedDataFromLocalStorage } from "@/utils/localStorageVersioned";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import Index from "../vorpruefung._index";
 import type { PreCheckData } from "../vorpruefung/preCheckDataService";
 import { DATA_SCHEMA_VERSION } from "../vorpruefung/preCheckDataService";
 
