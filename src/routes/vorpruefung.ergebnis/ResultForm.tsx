@@ -127,14 +127,17 @@ export default function ResultForm({
             <div className="kern-stack kern-stack-md grow">
               <RichText markdown={preCheckResult.form.instructions} />
               <div className="max-w-a11y">
-                <Input scope={form.scope("title")}>
+                <Input scope={form.scope("title")} warningInsteadOfError>
                   {preCheckResult.form.vorhabenTitleLabel}
                 </Input>
               </div>
 
               {result?.digital === ResultType.NEGATIVE && (
                 <div className="max-w-a11y">
-                  <Textarea scope={form.scope("negativeReasoning")}>
+                  <Textarea
+                    scope={form.scope("negativeReasoning")}
+                    warningInsteadOfError
+                  >
                     {preCheckResult.form.reasonLabel}
                   </Textarea>
                   {warning && (
