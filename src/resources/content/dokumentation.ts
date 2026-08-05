@@ -298,10 +298,8 @@ export const digitalDocumentation = {
       heading: "Dokumentation herunterladen",
       content:
         "Laden Sie die ausgefüllte Dokumentation herunter, um sie abzustimmen oder an Ihre Prüfstelle zu senden.",
-      contentNoPruefstelle: (bundesland = "Ihr Bundesland") => dedent`
-        Jetzt laden Sie die ausgefüllte Dokumentation herunter. 
-
-        **Hinweis**: Da es für ${bundesland} **keine Prüfstelle** gibt, dient Ihnen die Dokumentation zur Selbstprüfung.
+      contentNoPruefstelle: (_bundesland = "Ihr Bundesland") => dedent`
+        Laden Sie Ihre Dokumentation zur weiteren Verwendung herunter.
       `,
       buttonText: "Word-Datei herunterladen (.docx)",
     },
