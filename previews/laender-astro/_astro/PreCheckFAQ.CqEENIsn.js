@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime.GHtbkLbk.js";import{t}from"./RichText._k789fmu.js";import n from"./AccordionItem.Dttm40oj.js";import{s as r}from"./preCheckDataHook.CzSuxmsz.js";var i=e();function a(){return(0,i.jsx)(i.Fragment,{children:r.faq.items.map(e=>(0,i.jsx)(n,{headline:e.headline,children:(0,i.jsx)(t,{markdown:e.content})},e.headline))})}export{a as t};

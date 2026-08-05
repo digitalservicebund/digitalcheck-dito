@@ -1,0 +1,1 @@
+import{n as e,t}from"./jsx-runtime.GHtbkLbk.js";var n=t(),r=({className:t,children:r})=>(0,n.jsx)(`div`,{className:e(`flex flex-wrap gap-16`,t),children:r});export{r as t};
