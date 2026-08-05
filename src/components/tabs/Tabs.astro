@@ -1,6 +1,6 @@
 ---
 /**
- * Experimental Astro rewrite of app/components/Tabs/Tabs.tsx (React/Headless UI).
+ * Experimental Astro rewrite of Tabs.tsx (React/Headless UI).
  * Renders a tab list + slotted panels with no client-side JS framework dependency.
  *
  * Usage:
@@ -12,7 +12,7 @@
  *   Add `searchParams` to sync the active tab with `?tab=<slugified-label>` in the URL.
  *   Default `look` is `tabs`, can also be `chips`.
  */
-import { prettySlugify } from "~/utils/utilFunctions";
+import { prettySlugify } from "@/utils/utilFunctions";
 import { getTabClasses, type Look } from "./tabStyles";
 import MobileTabPicker from "./MobileTabPicker.astro";
 

@@ -1,22 +1,21 @@
 ---
 import { beispiele, beispiele_prinzipien } from "@/config/routes";
 import BeispieleLayout from "@/layouts/BeispieleLayout.astro";
-import { BlocksRenderer } from "~/components/BlocksRenderer.tsx";
-import ContentWrapper from "~/components/ContentWrapper.tsx";
-import Heading from "~/components/Heading";
-import Hero from "~/components/Hero";
-import InfoBox from "~/components/InfoBox";
-import ParagraphList from "~/components/ParagraphList";
-import RegulationMetadata from "~/components/RegulationMetadata";
-import Separator from "~/components/Separator";
-import RouteTabs from "~/components/Tabs/RouteTabs";
-import { examplesRegelungen } from "~/resources/content/beispiele-regelungen";
+import { BlocksRenderer } from "@/components/BlocksRenderer.tsx";
+import ContentWrapper from "@/components/ContentWrapper.tsx";
+import Heading from "@/components/Heading";
+import Hero from "@/components/Hero";
+import InfoBox from "@/components/InfoBox";
+import ParagraphList from "@/components/ParagraphList";
+import RegulationMetadata from "@/components/RegulationMetadata";
+import Separator from "@/components/Separator";
+import RouteTabs from "@/components/tabs/RouteTabs.astro";
 import {
   fetchStrapiData,
   paragraphFields,
   prinzipCoreFields,
-} from "~/utils/strapiData.server";
-import type { PrinzipWithBeispielvorhaben } from "~/utils/strapiData.types";
+} from "@/utils/strapiData.server";
+import type { PrinzipWithBeispielvorhaben } from "@/utils/strapiData.types";
 
 export const frontmatter = {
   title: "Die Prinzipien im Regelungstext",
@@ -58,26 +57,25 @@ query GetAllPrinzipsWithBeispiele {
 const { prinzip, prinzips } = Astro.props;
 const { Beispielvorhaben } = prinzip;
 const tabs = prinzips.map((principle) => ({
-  key: principle.URLBezeichnung,
   label: principle.Kurzbezeichnung,
-  to: `${beispiele_prinzipien.path}/${principle.URLBezeichnung}`,
+  path: `${beispiele_prinzipien.path}/${principle.URLBezeichnung}`,
 }));
 ---
 
 <BeispieleLayout title={frontmatter.title}>
   <main>
     <Hero
-      title={examplesRegelungen.principles.hero.title}
-      subtitle={examplesRegelungen.principles.hero.subtitle}
+      title="Die Prinzipien im Regelungstext"
+      subtitle="Hier finden Sie Regelungsbeispiele zur Anwendung der Prinzipien."
     />
 
     <ContentWrapper compactTopSpacing className="space-y-80">
-      <RouteTabs activeKey={prinzip.URLBezeichnung} tabs={tabs} client:load />
+      <RouteTabs tabs={tabs} />
 
       <InfoBox
         heading={{ text: prinzip.Name, tagName: "h2" }}
         badge={{
-          children: examplesRegelungen.principles.prinzipBadge,
+          children: "Prinzip",
           principleNumber: prinzip.Nummer,
         }}
       >
@@ -105,7 +103,7 @@ const tabs = prinzips.map((principle) => ({
                       href={`${beispiele.path}/regelungen/${exampleProject.URLBezeichnung}`}
                       data-astro-prefetch="viewport"
                     >
-                      {examplesRegelungen.exampleLinkText}
+                      Alle Beispiele zu dieser Regelung
                     </a>
                   </div>
 

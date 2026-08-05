@@ -1,0 +1,44 @@
+---
+import { BlocksRenderer } from "@/components/BlocksRenderer.tsx";
+import { PrincipleHightlightNullModifier } from "@/components/PrincipleHighlightModifier.tsx";
+import { beispiele_prinzipien } from "@/config/routes";
+import { methodsFivePrinciples } from "@/resources/content/methode-fuenf-prinzipien.ts";
+import { absatzIdTag } from "@/utils/paragraphUtils";
+import type {
+  AbsatzWithParagraph,
+  BasePrinzip,
+} from "@/utils/strapiData.types";
+import { textModifiers } from "./_textModifiers.tsx";
+
+interface Props {
+  beispiel: AbsatzWithParagraph;
+  prinzip: BasePrinzip;
+  headingTag: "h3" | "h4";
+}
+
+const { beispiel, prinzip, headingTag: HeadingTag } = Astro.props;
+
+const isExcerpt = !!beispiel.Auszug;
+const content = (isExcerpt ? beispiel.Auszug : null) ?? beispiel.Text;
+---
+
+<div class="space-y-16 border border-gray-600 bg-gray-100 p-24">
+  <HeadingTag class="ds-heading-02-reg">Ein Textbeispiel</HeadingTag>
+  <div class="ds-label-02-bold">
+    § {beispiel.Paragraph.Nummer}{" "}
+    {beispiel.Paragraph.Gesetz}
+    {isExcerpt && " (Auszug)"}
+  </div>
+  <BlocksRenderer
+    content={content}
+    modifiers={{
+      ...textModifiers,
+      underline: PrincipleHightlightNullModifier,
+    }}
+  />
+  <a
+    href={`${beispiele_prinzipien.path}/${prinzip.URLBezeichnung}#${absatzIdTag(beispiel.documentId)}`}
+  >
+    {methodsFivePrinciples.exampleLinkText}
+  </a>
+</div>

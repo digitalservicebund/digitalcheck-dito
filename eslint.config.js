@@ -18,7 +18,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default defineConfig(
+  // Astro
   eslintPluginAstro.configs.recommended,
+  {
+    files: ["src/pages/**/*.astro"],
+    rules: {
+      "astro/no-exports-from-components": "off", // to use `export const frontmatter` w/ astro-route-generator
+    },
+  },
+  // Global settings
   globalIgnores([
     ".astro/",
     "dist/",
@@ -27,8 +35,11 @@ export default defineConfig(
     "test-results/",
     "README.md",
     "AGENTS.md",
+    // Python virtualenvs (e.g. scripts/nkr-data/.venv) bundle huge minified
+    // JS assets that aren't part of this project and are extremely slow to lint.
+    "**/.venv/",
+    "**/venv/",
   ]),
-  // Global settings
   {
     languageOptions: {
       ecmaVersion: "latest",
@@ -44,7 +55,7 @@ export default defineConfig(
   },
   // React & Typescript
   {
-    files: ["app/**/*.{ts,tsx}", "src/**/*.{ts,tsx}", "tests/**/*.{ts,tsx}"],
+    files: ["src/**/*.{ts,tsx}", "tests/**/*.{ts,tsx}"],
     extends: [
       eslint.configs.recommended,
       tseslint.configs.recommendedTypeChecked,
@@ -66,13 +77,12 @@ export default defineConfig(
         { name: "NavLink", linkAttribute: "to" },
       ],
 
-      "import/internal-regex": "^~/",
       "import/resolver": {
         node: { extensions: [".ts", ".tsx"] },
         typescript: {
           alwaysTryTypes: true,
           tsconfigRootDir: __dirname,
-          project: ["**/tsconfig.json"],
+          project: ["tsconfig.json"],
         },
       },
     },
@@ -135,7 +145,7 @@ export default defineConfig(
               name: "tailwind-merge",
               importNames: ["twMerge"],
               message:
-                "Please import { twMerge } from '~/utils/tailwindMerge'.",
+                "Please import { twMerge } from '@/utils/tailwindMerge'.",
             },
             {
               name: "@digitalservicebund/icons/index",

@@ -1,5 +1,5 @@
 import { interoperabel } from "@/config/routes";
-import { getTabAnchorLinkFromLabel } from "~/utils/tabs";
+import { getTabAnchorLinkFromLabel } from "@/utils/tabs";
 
 export const tabLabels = {
   overviewTabLabel: "Überblick",

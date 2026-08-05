@@ -51,7 +51,6 @@ export default defineConfig({
     plugins: [tailwindcss()],
     resolve: {
       alias: {
-        "~/": new URL("./app/", import.meta.url).pathname,
         "@/": new URL("./src/", import.meta.url).pathname,
       },
     },

@@ -1,7 +1,7 @@
+import DetailsSummary from "@/components/DetailsSummary";
+import InfoBox from "@/components/InfoBox";
+import customTwMerge from "@/utils/tailwindMerge";
 import type { ReactNode } from "react";
-import DetailsSummary from "~/components/DetailsSummary";
-import InfoBox from "~/components/InfoBox";
-import customTwMerge from "~/utils/tailwindMerge";
 
 type SectionInlineComponentProps = {
   batchTitle: string;

@@ -4,11 +4,11 @@ import type { HTMLAttributes } from "astro/types";
 import FeatureSet from "@/components/FeatureSet.astro";
 import FeatureItem from "@/components/FeatureItem.astro";
 import Tabs from "@/components/tabs/Tabs.astro";
-import { LinkButton } from "~/components/Button.tsx";
-import ButtonContainer from "~/components/ButtonContainer.tsx";
-import InfoBox from "~/components/InfoBox";
-import RichText from "~/components/RichText";
-import { contact } from "~/resources/content/shared/contact";
+import { LinkButton } from "@/components/Button.tsx";
+import ButtonContainer from "@/components/ButtonContainer.tsx";
+import InfoBox from "@/components/InfoBox";
+import RichText from "@/components/RichText";
+import { contact } from "@/resources/content/shared/contact";
 import { supportTabs } from "./_supportTabs";
 
 type Props = HTMLAttributes<"section">;
@@ -32,7 +32,7 @@ type Props = HTMLAttributes<"section">;
       body="Wir unterstützen Sie dabei die digitalen Potenziale Ihres Vorhabens auszuschöpfen, zu verbessern oder neu zu gestalten."
     />
   </FeatureSet>
-  <div class="bg-blue-100 rounded-xl p-40 md:px-80">
+  <div class="rounded-xl bg-blue-100 p-40 md:px-80">
     <h2 id="hilfe">Schnelle Hilfe und individuelle Beratung</h2>
     <div class="ds-stack ds-stack-16 pt-32">
       <InfoBox>
@@ -72,7 +72,7 @@ type Props = HTMLAttributes<"section">;
         supportTabs.map((tab) => (
           <div class="space-y-40" data-tab-panel={tab.title}>
             {tab.offerings.map((offering) => (
-              <div class="p-40 md:px-80 mb-32 flex justify-between gap-32 rounded-xl bg-blue-100 max-md:flex-col">
+              <div class="mb-32 flex justify-between gap-32 rounded-xl bg-blue-100 p-40 max-md:flex-col md:px-80">
                 <InfoBox
                   heading={{
                     tagName: "h2",

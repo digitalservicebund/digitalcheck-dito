@@ -16,9 +16,19 @@ jobs:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
 
+  build-docker:
+    uses: ./.github/workflows/build-docker.yml
+    with:
+      dockerImage: ghcr.io/digitalservicebund/digitalcheck-dito:nightly
+    secrets:
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+
   run-e2e-a11y-tests:
+    needs: [build-docker]
     uses: ./.github/workflows/run-e2e-a11y-tests.yml
     with:
+      dockerImage: ghcr.io/digitalservicebund/digitalcheck-dito:nightly
       nightlyTests: true
     secrets:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}

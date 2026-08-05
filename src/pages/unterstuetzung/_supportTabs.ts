@@ -1,10 +1,10 @@
 import rulemapImg from "@/images/rulemap.jpg";
+import { dedent } from "@/utils/dedentMultilineStrings";
 import {
   CheckCircleOutlined,
   FormatListBulletedOutlined,
   TimerOutlined,
 } from "@digitalservicebund/icons";
-import { dedent } from "~/utils/dedentMultilineStrings";
 
 export const supportTabs = [
   {

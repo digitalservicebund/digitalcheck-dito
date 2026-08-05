@@ -1,5 +1,5 @@
 import { beispiele } from "@/config/routes";
-import type { Visualisierung } from "~/utils/strapiData.types";
+import type { Visualisierung } from "@/utils/strapiData.types";
 
 export function getImageFilename(v: Visualisierung): string {
   const fn = new URL(v.Bild.url).pathname.split("/").pop();

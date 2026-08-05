@@ -19,7 +19,7 @@ jobs:
       packages: read
       security-events: write
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
@@ -35,6 +35,7 @@ jobs:
           limit-severities-for-sarif: true
           exit-code: 2 # Fail the build!
           version: "v0.67.2"
+          skip-dirs: "scripts/nkr-data"
       - name: Check trivy results
         if: always() # Bypass non-zero exit code
         run: |
@@ -48,13 +49,13 @@ jobs:
           fi
       # Upload SARIF results to GitHub Security tab
       - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@8aad20d150bbac5944a9f9d289da16a4b0d87c1e # v4.36.2
+        uses: github/codeql-action/upload-sarif@f205ea1c3313d32999d8d6a48b4f6530d4437b38 # v4.37.4
         if: always() # Bypass non-zero exit code
         with:
           sarif_file: "trivy-results.sarif"
 
       - name: Send failure to Slack
-        uses: digitalservicebund/notify-on-failure-gha@8570032b46ae9c2b976ec41567f595746fa44b4e # v1.6.1
+        uses: digitalservicebund/notify-on-failure-gha@5973d82d62439ebd6f0cf73d6836e6a81782e419 # v1.6.1
         if: failure()
         with:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}

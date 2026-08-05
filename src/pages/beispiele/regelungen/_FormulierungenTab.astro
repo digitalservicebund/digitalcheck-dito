@@ -1,0 +1,42 @@
+---
+import InlineNotice from "@/components/InlineNotice";
+import ParagraphList from "@/components/ParagraphList";
+import Heading from "@/components/Heading";
+import { slugify } from "@/utils/utilFunctions";
+import type {
+  Beispielvorhaben,
+  PrinzipWithBeispielvorhaben,
+} from "@/utils/strapiData.types";
+
+interface Props {
+  regelung: Beispielvorhaben;
+  principles: PrinzipWithBeispielvorhaben[];
+}
+
+const { regelung, principles, ...otherProps } = Astro.props;
+---
+
+<section {...otherProps}>
+  {
+    regelung.GesetzStatus !== "Verkuendetes_Gesetz_aktuelle_Fassung" && (
+      <InlineNotice className="mb-40" look="tips" heading="Hinweis">
+        <p>
+          Markierte Formulierungen sind gute Beispiele für die Ermöglichung
+          digitaler Umsetzung, trotz ausstehender Verabschiedung.
+        </p>
+      </InlineNotice>
+    )
+  }
+  <Heading
+    id={slugify("Formulierungen aus der Regelung")}
+    tagName="h2"
+    look="ds-heading-02-bold"
+    className="pb-40"
+  >
+    Formulierungen aus der Regelung
+  </Heading>
+  <ParagraphList
+    paragraphs={regelung.Paragraphen}
+    principlesToShow={principles}
+  />
+</section>

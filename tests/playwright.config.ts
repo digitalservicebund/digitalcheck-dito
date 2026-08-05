@@ -1,3 +1,4 @@
+import { stage } from "@/config/stage";
 import type { PlaywrightTestConfig } from "@playwright/test";
 import { devices } from "@playwright/test";
 import dotenv from "dotenv";
@@ -91,14 +92,18 @@ const config: PlaywrightTestConfig = {
     ],
   ],
   projects: allProjects,
-  webServer: {
-    // We're testing the built code, but set the NODE_ENV to enable mocks.
-    // Use `start:test` (does not source .env) so inline env here wins; load
-    // test env from .env.test, which sets FEATURE_FLAGS_PATH to the tests file.
-    command: "pnpm astro build && pnpm astro preview --port 4399",
-    port: 4399,
-    cwd: path.resolve(__dirname, ".."),
-  },
+  webServer: process.env.PLAYWRIGHT_USE_DOCKER
+    ? {
+        command: `docker run --rm -p 8080:8080 -e NGINX_DIR=${stage} ${process.env.PLAYWRIGHT_DOCKER_IMAGE ?? "digitalcheck-dito:local"}`,
+        port: 8080,
+        timeout: 120 * 1000,
+        reuseExistingServer: true,
+      }
+    : {
+        command: `PUBLIC_STAGE=${stage} pnpm astro build && pnpm astro preview --port 4399`,
+        port: 4399,
+        cwd: path.resolve(__dirname, ".."),
+      },
 };
 
 export default config;

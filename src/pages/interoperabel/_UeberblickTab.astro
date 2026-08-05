@@ -1,13 +1,17 @@
 ---
-import { methoden_fuenfPrinzipien, vorpruefung } from "@/config/routes";
+import {
+  dokumentation,
+  methoden_fuenfPrinzipien,
+  vorpruefung,
+} from "@/config/routes";
 import { ContactPhoneOutlined } from "@digitalservicebund/icons";
-import { LinkButton } from "~/components/Button";
-import Heading from "~/components/Heading";
-import InfoBox from "~/components/InfoBox.tsx";
-import Timeline from "~/components/Timeline";
-import { contact } from "~/resources/content/shared/contact";
+import { LinkButton } from "@/components/Button";
+import Heading from "@/components/Heading";
+import InfoBox from "@/components/InfoBox.tsx";
+import Timeline from "@/components/Timeline";
+import { contact } from "@/resources/content/shared/contact";
 import { tabLabels, interopsAssessment } from "./_tabs";
-import { getTabAnchorLinkFromLabel } from "~/utils/tabs";
+import { getTabAnchorLinkFromLabel } from "@/utils/tabs";
 ---
 
 <section class="space-y-40" {...Astro.props}>
@@ -17,10 +21,11 @@ import { getTabAnchorLinkFromLabel } from "~/utils/tabs";
     <Heading tagName="h3">Koordination ist der Schlüssel</Heading>
     <p>
       Damit ein digitales Europa ohne Grenzen Wirklichkeit wird, müssen die
-      Mitgliedsstaaten verbindlich koordiniert zusammenarbeiten. Die Verordnung
-      soll Insellösungen verhindern und schafft deshalb einen gemeinsamen Rahmen
-      für die Zusammenarbeit. Seit Anfang 2025 sind die Mitgliedsstaaten
-      verpflichtet, Anforderungen an die Interoperabilität zu berücksichtigen.
+      Verwaltungen der Mitgliedsstaaten zusammenarbeiten können. Die Verordnung
+      soll Insellösungen, Parallel- und Doppelentwicklungen verhindern und
+      schafft einen gemeinsamen verbindlichen Rahmen für die Zusammenarbeit.
+      Seit Anfang 2025 sind die Mitgliedsstaaten verpflichtet, Anforderungen an
+      die Interoperabilität zu berücksichtigen.
     </p>
   </div>
 
@@ -35,13 +40,9 @@ import { getTabAnchorLinkFromLabel } from "~/utils/tabs";
       schaffen Sie die rechtliche Grundlage für Behörden, um europaweit Daten
       auszutauschen und funktionierende, grenzüberschreitende
       Verwaltungsleistungen anzubieten. Abschließend dokumentieren Sie in einem
-      Fragebogen auf dem{" "}
-      <a
-        href="https://interoperable-europe.ec.europa.eu/collection/assessments/submission"
-      >
-        interoperable Europe-Portal
-      </a>
-      , wie sich die Regelungsinhalte sich auf die Interoperabilität auswirken.
+      zusammenhängenden Prozess mit der Dokumentation der Digitaltauglichkeit in
+      einem Fragebogen, wie Sie sichergestellt haben, dass Ihre Regelungsinhalte
+      förderlich für die EU-weite Interoperabilität sind.
     </p>
   </div>
 
@@ -59,46 +60,11 @@ import { getTabAnchorLinkFromLabel } from "~/utils/tabs";
   <div class="scroll-my-40 space-y-8" id={interopsAssessment.anchor}>
     <Heading tagName="h3">Die Interoperabilitäts-Bewertung</Heading>
     <p>
-      Die{" "}
-      <a
-        href="https://interoperable-europe.ec.europa.eu/collection/assessments/submission"
-      >
-        Interoperabilitäts-Bewertung
-      </a>{" "}
-      ist wie auch die Digitalcheck-Dokumentation ein formeller, letzter Schritt,
-      in dem Sie einige Fragen zu Inhalten der Regelung beantworten. Es geht darum,
-      darzulegen, wie sich Ihre Regelung auf die EU-weite Interoperabilität auswirkt.
-      Der wesentliche Inhalt besteht aus fünf Fragen. Die Bewertung fragt nach sogenannten
-      „
-      <a
-        href={getTabAnchorLinkFromLabel(
-          tabLabels.backgroundTabLabel,
-          "verbindliche-anforderungen",
-        )}
-      >
-        {" "}
-        verbindlichen Anforderungen
-      </a>
-      “ und prüft deren Einfluss auf die{" "}
-      <a
-        href={getTabAnchorLinkFromLabel(
-          tabLabels.backgroundTabLabel,
-          "vier-ebenen-der-interoperabilitaet",
-        )}
-      >
-        {" "}
-        vier Ebenen der Interoperabilität
-      </a>
-      .
+      Die Interoperabilitäts-Bewertung und die Dokumenation der
+      Digitaltauglichkeit sind in einem zusammenhängenden Prozess konsolidiert.
+      Die Bewertung ist ein formeller, letzter Schritt, in dem Sie Fragen zu
+      Interoperabilitäts-Aspekten der Regelung beantworten.
     </p>
-    <LinkButton
-      look="tertiary"
-      href="https://interoperable-europe.ec.europa.eu/collection/assessments/submission"
-      target="_blank"
-      className="mt-16"
-    >
-      Zur Interoperabilitäts-Bewertung
-    </LinkButton>
   </div>
 
   <Heading tagName="h3" className="mt-80"> Der Ablauf im Überblick </Heading>
@@ -116,9 +82,9 @@ import { getTabAnchorLinkFromLabel } from "~/utils/tabs";
           und EU-Anforderungen an Interoperabilität beachten müssen.
         </p>
         <p>
-          Wenn Sie EU-Anforderungen an Interoperabilität beachten müssen, meldet
-          sich das Digitalcheck-Team bei Ihnen für kostenlose, vertrauliche
-          Unterstützung.
+          Wenn Sie EU-Anforderungen an Interoperabilität beachten müssen und
+          Fragen haben, kontaktieren Sie jederzeit das Digitalcheck-Team für
+          kostenlose, vertrauliche Unterstützung!
         </p>
       </Timeline.ItemContent>
     </Timeline.Item>
@@ -135,8 +101,8 @@ import { getTabAnchorLinkFromLabel } from "~/utils/tabs";
           <a href={methoden_fuenfPrinzipien.path}>
             Fünf Prinzipien für digitaltaugliche Gesetzgebung
           </a>
-          . Diese enthalten die Anforderungen an die Interoperabilität. So stellen
-          Sie sicher, dass Ihre Regelung sowohl digitaltauglich als auch interoperabel
+          . Diese enthalten die Anforderungen an die Interoperabilität und helfen
+          Ihnen dabei, dass Ihre Regelung sowohl digitaltauglich als auch interoperabel
           ist. Kostenlose, vertrauliche Unterstützung erhalten Sie vom Digitalcheck-Team.
         </p>
       </Timeline.ItemContent>
@@ -147,14 +113,23 @@ import { getTabAnchorLinkFromLabel } from "~/utils/tabs";
         backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
       >
         <Heading tagName="h4" className="ds-heading-03-reg">
-          Optional: Lösungen für ein interoperables Europa nutzen
+          Optional: Lösungen für ein interoperables Europa integrieren
         </Heading>
         <p>
           Lösungen für ein interoperables Europa (Art. 7 EU 2024/903) sind
-          technische Standards für den grenzüberschreitenden Datenaustausch
-          zwischen Verwaltungseinheiten. Das Interoperable Europe Board legt
-          fest, welche Lösungen zu prüfen sind. Mehr dazu im Reiter{" "}
-          <strong>„Interoperable Lösungen”</strong>
+          wiederverwendbare Standards für den grenzüberschreitenden
+          Datenaustausch zwischen Verwaltungseinheiten. Das Interoperable Europe
+          Board legt fest, welche Lösungen zu prüfen sind. Mehr dazu im Reiter{
+            " "
+          }
+          <a
+            href={getTabAnchorLinkFromLabel(
+              tabLabels.interoperableSolutionsTabLabel,
+            )}
+          >
+            interoperable Lösungen
+          </a>
+          .
         </p>
       </Timeline.ItemContent>
     </Timeline.Item>
@@ -167,19 +142,16 @@ import { getTabAnchorLinkFromLabel } from "~/utils/tabs";
           Reichen Sie die Interoperabilitäts-Bewertung ein
         </Heading>
         <p>
-          Sie dokumentieren in einem Fragebogen auf dem{" "}
-          <a
-            href="https://interoperable-europe.ec.europa.eu/collection/assessments/submission"
-          >
-            interoperable Europe-Portal
-          </a>
-          , wie sich die Regelungsinhalte sich auf die Interoperabilität auswirken.
+          Sie dokumentieren{" "}
+          <a href={dokumentation.path}> im gemeinsamen Fragebogen</a>
+          mit dem Digitalcheck, wie sich die Regelungsinhalte auf die Interoperabilität
+          auswirken.
         </p>
       </Timeline.ItemContent>
     </Timeline.Item>
   </Timeline>
 
-  <LinkButton href={vorpruefung.path}>Anforderungen prüfen</LinkButton>
+  <LinkButton href={vorpruefung.path}>Jetzt Vorprüfung durchführen</LinkButton>
 
   <InfoBox
     look="highlight"
@@ -200,14 +172,14 @@ import { getTabAnchorLinkFromLabel } from "~/utils/tabs";
       >
         verbindlicher Anforderungen
       </a>{" "}
-      – inklusive ihrer Auswirkungen auf die vier{" "}
+      – inklusive ihrer Auswirkungen auf die{" "}
       <a
         href={getTabAnchorLinkFromLabel(
           tabLabels.backgroundTabLabel,
           "vier-ebenen-der-interoperabilitaet",
         )}
       >
-        Interoperabilitätsebenen
+        vier Ebenen der Interoperabilität
       </a>
       .
     </p>

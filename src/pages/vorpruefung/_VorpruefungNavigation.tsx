@@ -1,8 +1,8 @@
+import Nav from "@/components/Nav";
+import Stepper from "@/components/Stepper";
+import { preCheck } from "@/resources/content/vorpruefung";
+import { usePreCheckData } from "@/routes/vorpruefung/preCheckDataHook";
 import type { ReactNode } from "react";
-import Nav from "~/components/Nav";
-import Stepper from "~/components/Stepper";
-import { preCheck } from "~/resources/content/vorpruefung";
-import { usePreCheckData } from "~/routes/vorpruefung/preCheckDataHook";
 
 const { questions } = preCheck;
 
