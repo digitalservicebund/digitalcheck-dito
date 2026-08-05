@@ -1,6 +1,6 @@
 import Heading from "@/components/Heading";
 import Image from "@/components/Image";
-import { ROUTE_REGELUNGEN } from "@/config/additionalRoutes";
+import { beispiele } from "@/config/routes";
 import { getImagePath } from "@/utils/images";
 import type { Visualisierung } from "@/utils/strapiData.types";
 import { formatDate } from "@/utils/utilFunctions";
@@ -35,7 +35,7 @@ export default function VisualisationItem({
         <div>
           <strong>Kontext: </strong>
           <a
-            href={`${ROUTE_REGELUNGEN}/${visualisierung.Beispielvorhaben.URLBezeichnung}`}
+            href={`${beispiele.path}/regelungen/${visualisierung.Beispielvorhaben.URLBezeichnung}`}
           >
             {visualisierung.Beispielvorhaben.Titel}
           </a>

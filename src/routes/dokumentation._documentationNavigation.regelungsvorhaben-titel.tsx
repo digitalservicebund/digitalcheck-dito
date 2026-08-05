@@ -1,7 +1,9 @@
 import Heading from "@/components/Heading";
 import HelpButton from "@/components/HelpButton";
 import Input from "@/components/Input";
+import Select from "@/components/Select";
 import { digitalDocumentation } from "@/resources/content/dokumentation";
+import { bundeslaender } from "@/resources/content/shared/bundeslaender";
 import {
   defaultTitleValues,
   policyTitleSchema,
@@ -47,6 +49,14 @@ export function DocumentationTitle() {
               Dieser Titel wird in der fertigen Dokumentation verwendet.
             </HelpButton>
           </Input>
+
+          <Select
+            scope={form.scope("bundesland")}
+            options={bundeslaender.map((b) => b.name)}
+            warningInsteadOfError
+          >
+            Wählen Sie Ihr Bundesland oder den Bund aus
+          </Select>
 
           {isIeaAssessmentEnabled && (
             <Input scope={form.scope("organization")} warningInsteadOfError>

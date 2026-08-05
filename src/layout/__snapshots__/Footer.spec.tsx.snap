@@ -56,7 +56,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                
               <a
                 class="increase-tap-area"
-                href="/unterstuetzung?tab=online-schulungen#angebote"
+                href="https://zfl.bund.de/schulungen"
               >
                 Schulungen
               </a>

@@ -1,4 +1,5 @@
 import { digitalDocumentation } from "@/resources/content/dokumentation";
+import { bundeslandSchema } from "@/resources/content/shared/bundeslaender";
 import { isIeaAssessmentEnabled } from "@/utils/features.ts";
 import type { VersionedData } from "@/utils/localStorageVersioned";
 import { z } from "zod";
@@ -15,6 +16,7 @@ const { principlePages, participation, info } = digitalDocumentation;
 
 export const policyTitleSchema = z.object({
   title: z.string().min(1, { message: info.inputTitle.error }),
+  bundesland: bundeslandSchema,
   organization: z.string().min(isIeaAssessmentEnabled ? 1 : 0, {
     message: "Bitte geben Sie eine Organisation ein.",
   }),
@@ -182,6 +184,7 @@ export const interoperabilityAssessmentSchema = z.object({
 
 export const defaultTitleValues: PolicyTitle = {
   title: "",
+  bundesland: "Bund",
   organization: "",
 };
 

@@ -52,8 +52,22 @@ fileignoreconfig:
     checksum: b5034dcbaa91c8cddcb4d75843b211b4a4cea87fb78b64ad327705d1f91b25cf
   - filename: nginx.template.conf
     allowed_patterns: [proxy_pass]
+  - filename: public/images/bundeslaender/brandenburg-logo.svg
+    checksum: a5ca79178f2063553ddce1e52b9ed85d3cd2f25f107b94683e653394b1e62ef7
+  - filename: public/logo/bund-laender-kommunen.svg
+    checksum: ef753ce53aca393a68d4652135f9c15ed058382e7aa6283385107f2a2d9cd9bb
   - filename: src/pages/interoperabel/nationale-kontaktstelle/_content.ts
     ignore_detectors: [filename]
+  - filename: src/images/support.jpg
+    checksum: 189aa082ef7a6d64fc73447d456ff76aa4af9cd69eb4b204635b4d8fa96f956f
+  - filename: src/pages/bundeslaender/_assets/hessen-logo.jpg
+    checksum: f0c6434b9706aa2cde87e206e4b5a324a85a29cccb609221142ff0a0cf1c8080
+  - filename: src/pages/bundeslaender/_assets/HESSEN_Logo_stacked.png
+    checksum: 177695ec813e3e103b23acfbd978205178c3ff6c227859b7f8a623257c2257ba
+  - filename: src/resources/content/vorpruefung-ergebnis.ts
+    ignore_detectors: [filecontent]
+  - filename: src/images/rulemap.jpg
+    checksum: f0689a0156be077a2345fbf579cc1d69b2ea14ef84f62966ea77eb5ebe6345f2
 
 allowed_patterns:
   - key

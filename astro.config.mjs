@@ -3,6 +3,7 @@ import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
+import icon from "astro-icon";
 import { generateRoutes } from "astro-route-generator";
 import { defineConfig } from "astro/config";
 import process from "node:process";
@@ -44,6 +45,7 @@ export default defineConfig({
       pagesDir: "src/pages",
       output: "src/config/routes.ts",
     }),
+    icon(),
   ],
   vite: {
     plugins: [tailwindcss()],

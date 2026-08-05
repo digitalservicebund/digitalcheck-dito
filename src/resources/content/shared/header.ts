@@ -1,9 +1,11 @@
 import type { ActiveBehavior } from "@/components/DropdownContentList";
-import { ROUTE_SUPPORT_TRAININGS } from "@/config/additionalRoutes";
 import {
   beispiele_prinzipien,
   beispiele_visualisierungen,
   bundeslaender,
+  bundeslaender_brandenburg,
+  bundeslaender_hessen,
+  bundeslaender_nordrheinWestfalen,
   dokumentation,
   grundlagen_digitaltauglichkeit,
   grundlagen_normenkontrollrat,
@@ -109,8 +111,37 @@ export const header = {
     },
     {
       text: "Bundesländer",
-      href: bundeslaender.path,
-      overlayContent: [],
+      overlayContent: [
+        {
+          title: "Informationen für Bundesländer",
+          href: bundeslaender.path,
+          content: "Alles über den Digitalcheck für Länder",
+          image: "/logo/bund-laender-kommunen-adler.svg",
+          imageAlt: "Logo Bund, Länder, Kommunen",
+          activeBehavior: "exactMatch" as ActiveBehavior,
+        },
+        {
+          title: "Brandenburg",
+          href: bundeslaender_brandenburg.path,
+          content: "Alles über den Digitalcheck in Brandenburg",
+          image: "/images/bundeslaender/brandenburg-logo.svg",
+          imageAlt: "Logo Brandenburg",
+        },
+        {
+          title: "Hessen",
+          href: bundeslaender_hessen.path,
+          content: "Alles über den Digitalcheck in Hessen",
+          image: "/images/bundeslaender/hessen-wappen.svg",
+          imageAlt: "Logo Hessen",
+        },
+        {
+          title: "Nordrhein-Westfalen",
+          href: bundeslaender_nordrheinWestfalen.path,
+          content: "Alles über den Digitalcheck in Nordrhein-Westfalen",
+          image: "/images/bundeslaender/nrw-wappen.svg",
+          imageAlt: "Logo Nordrhein-Westfalen",
+        },
+      ],
     },
     {
       text: "Kontakt und Support",
@@ -121,14 +152,12 @@ export const header = {
           content:
             "Nutzen Sie unsere persönliche Hilfestellungen bei der Regelungsarbeit.",
           href: unterstuetzung.path,
-          activeBehavior: "noHighlight" as ActiveBehavior,
         },
         {
           title: "Schulungen",
           content:
             "In dieser Online-Schulung bekommen Sie praktische Tipps für den Digitalcheck.",
-          href: ROUTE_SUPPORT_TRAININGS,
-          activeBehavior: "noHighlight" as ActiveBehavior,
+          href: "https://zfl.bund.de/schulungen",
         },
         {
           title: "Nationale Kontaktstelle",

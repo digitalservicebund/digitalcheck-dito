@@ -1,4 +1,3 @@
-import { ROUTE_SUPPORT_TRAININGS } from "@/config/additionalRoutes";
 import {
   barrierefreiheit,
   beispiele_prinzipien,
@@ -46,7 +45,7 @@ export const footer = {
         },
         {
           text: "Schulungen",
-          url: ROUTE_SUPPORT_TRAININGS,
+          url: "https://zfl.bund.de/schulungen",
         },
         {
           text: "Nationale Kontaktstelle für ein interoperables Europa (2024/903 Art. 17)",

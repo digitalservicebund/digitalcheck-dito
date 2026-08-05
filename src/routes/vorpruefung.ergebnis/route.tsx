@@ -9,13 +9,13 @@ import {
 import React, { useEffect, useState } from "react";
 import { twJoin } from "tailwind-merge";
 
+import Button, { LinkButton } from "@/components/Button.tsx";
 import Container from "@/components/Container";
 import DetailsSummary from "@/components/DetailsSummary";
 import Heading from "@/components/Heading";
 import InfoBox from "@/components/InfoBox";
 import InfoTooltip from "@/components/InfoTooltip";
 import InlineNotice from "@/components/InlineNotice";
-import NumberedList from "@/components/NumberedList";
 import RichText from "@/components/RichText";
 import { vorpruefung } from "@/config/routes";
 import { preCheck } from "@/resources/content/vorpruefung";
@@ -27,13 +27,9 @@ import { marked } from "marked";
 import { ResultType } from "./PreCheckResult";
 
 import { PreCheckFAQ } from "@/components/content/PreCheckFAQ.tsx";
-import type { Step } from "@/utils/contentTypes.ts";
+import { pruefstelleMails } from "@/resources/content/shared/bundeslaender";
 import { usePreCheckData } from "../vorpruefung/preCheckDataHook";
-
-const nextSteps = {
-  [ResultType.POSITIVE as string]: preCheckResult.positive.nextSteps,
-  [ResultType.NEGATIVE as string]: preCheckResult.negative.nextSteps,
-} satisfies { [key: string]: { steps: Step[] } };
+import { NextSteps } from "./NextSteps";
 
 function getIconForReason(reason: Reason) {
   const defaultClasses = "w-28 h-auto shrink-0";
@@ -86,7 +82,8 @@ function PrintTitle({ title }: Readonly<{ title: string }>) {
 
 export default function Result() {
   const [vorhabenTitle, setVorhabenTitle] = useState("");
-  const { answers, firstUnansweredQuestionIndex, result } = usePreCheckData();
+  const { answers, bundesland, firstUnansweredQuestionIndex, result } =
+    usePreCheckData();
 
   const resultContent = getContentForResult(answers, result);
 
@@ -110,9 +107,22 @@ export default function Result() {
       globalThis.location.href = vorpruefung.path;
     }
   }, [firstUnansweredQuestionIndex]);
+  const isBund = bundesland === "Bund";
+  const pruefstelleMail = bundesland && pruefstelleMails.get(bundesland);
+  const hasPruefstelle = !!pruefstelleMail;
 
-  const resultHint =
-    result?.digital === ResultType.UNSURE ? preCheckResult.unsure.hint : "";
+  let unsureHint: string | undefined = undefined;
+  if (result?.digital === ResultType.UNSURE) {
+    if (isBund) {
+      unsureHint = preCheckResult.unsure.hintBund;
+    } else if (hasPruefstelle) {
+      unsureHint =
+        preCheckResult.unsure.hintBundeslandWithPruefstelle(pruefstelleMail);
+    } else {
+      unsureHint = preCheckResult.unsure.hintBundelandWithoutPruefstelle;
+    }
+  }
+
   return (
     <main>
       <div className="bg-blue-100 py-40 print:pb-0">
@@ -138,9 +148,9 @@ export default function Result() {
                     className="mb-0"
                     text={marked.parseInline(resultContent.title) as string}
                   />
-                  {resultHint && (
+                  {unsureHint && (
                     <RichText
-                      markdown={resultHint}
+                      markdown={unsureHint}
                       className="ds-subhead mt-16"
                     />
                   )}
@@ -168,39 +178,48 @@ export default function Result() {
                   <RichText markdown={resultContent.inlineNoticeContent.text} />
                 </InlineNotice>
               )}
-              <div className="border-b-2 border-solid border-gray-400 pb-40 last:border-0 last:pb-0 print:border-0 print:pb-0">
-                <DetailsSummary
-                  data-testid="result-details"
-                  title={preCheckResult.detailsTitle}
-                >
-                  {resultContent.reasoningList
-                    .filter(({ reasons }) => reasons.length > 0)
-                    .map(({ intro, reasons }) => (
-                      <React.Fragment key={intro}>
-                        <RichText markdown={intro} className="first:mt-16" />
-                        <ul className="ds-stack ds-stack-16 mt-16 mb-40 pl-0">
-                          {reasons
-                            .toSorted((a, b) => {
-                              if (a.answer === b.answer) {
-                                return 0; // Keep the original order
-                              }
-                              return a.answer === "yes" ? -1 : 1; // "yes" comes before "no"
-                            })
-                            .map((reason) => getReasonListItem(reason))}
-                        </ul>
-                      </React.Fragment>
-                    ))}
+              <DetailsSummary
+                data-testid="result-details"
+                title={preCheckResult.detailsTitle}
+                expandInPrint
+              >
+                {resultContent.reasoningList
+                  .filter(({ reasons }) => reasons.length > 0)
+                  .map(({ intro, reasons }) => (
+                    <React.Fragment key={intro}>
+                      <RichText markdown={intro} className="first:mt-16" />
+                      <ul className="ds-stack ds-stack-16 mt-16 mb-40 pl-0">
+                        {reasons
+                          .toSorted((a, b) => {
+                            if (a.answer === b.answer) {
+                              return 0; // Keep the original order
+                            }
+                            return a.answer === "yes" ? -1 : 1; // "yes" comes before "no"
+                          })
+                          .map((reason) => getReasonListItem(reason))}
+                      </ul>
+                    </React.Fragment>
+                  ))}
 
-                  {result?.euBezug !== ResultType.NEGATIVE && (
-                    <div className="mt-40">
-                      <b>{preCheckResult.interoperability.info.title}</b>
-                      <RichText
-                        className="mt-8 mb-20"
-                        markdown={preCheckResult.interoperability.info.content}
-                      />
-                    </div>
-                  )}
-                </DetailsSummary>
+                {result?.euBezug !== ResultType.NEGATIVE && (
+                  <div className="mt-40 print:hidden">
+                    <b>{preCheckResult.interoperability.info.title}</b>
+                    <RichText
+                      className="mt-8 mb-20"
+                      markdown={preCheckResult.interoperability.info.content}
+                    />
+                  </div>
+                )}
+              </DetailsSummary>
+              <div className="flex gap-8 print:hidden">
+                {!pruefstelleMail && (
+                  <Button onClick={() => globalThis.print()} type="button">
+                    Ergebnis herunterladen
+                  </Button>
+                )}
+                <LinkButton href={preCheck.questions[0].path} look="ghost">
+                  Vorprüfung bearbeiten
+                </LinkButton>
               </div>
             </Container>
           </div>
@@ -210,28 +229,41 @@ export default function Result() {
                 <ResultForm
                   resultContent={resultContent}
                   setVorhabenTitle={setVorhabenTitle}
+                  isBund={isBund}
+                  pruefstelleMail={pruefstelleMail}
                 />
               </Container>
-              <Container className="rounded-lg bg-white print:hidden">
-                <InfoBox
-                  heading={{
-                    text: preCheckResult.form.outro.title,
-                    tagName: "h3",
-                  }}
-                >
-                  <RichText markdown={preCheckResult.form.outro.text} />
-                </InfoBox>
-                <div className="ds-stack ds-stack-16 mt-40">
+              <Container className="space-y-40 rounded-lg bg-white print:hidden">
+                {hasPruefstelle && (
+                  <InfoBox
+                    heading={{
+                      text: preCheckResult.form.outro.title,
+                      tagName: "h3",
+                    }}
+                  >
+                    <RichText
+                      markdown={
+                        isBund
+                          ? preCheckResult.form.outro.textBund
+                          : preCheckResult.form.outro
+                              .textBundeslandWithPruefstelle
+                      }
+                    />
+                  </InfoBox>
+                )}
+                <div className="ds-stack ds-stack-16">
                   <Heading
                     tagName="h3"
                     className="ds-label-section"
                     text={preCheckResult.form.faqs.title}
                   />
-                  {preCheckResult.form.faqs.details.map((detail) => (
-                    <DetailsSummary key={detail.label} title={detail.label}>
-                      <RichText markdown={detail.text} />
-                    </DetailsSummary>
-                  ))}
+                  {preCheckResult.form.faqs.details
+                    .filter((d) => !("pruefstelleOnly" in d) || hasPruefstelle)
+                    .map((detail) => (
+                      <DetailsSummary key={detail.label} title={detail.label}>
+                        <RichText markdown={detail.text} />
+                      </DetailsSummary>
+                    ))}
                 </div>
               </Container>
             </>
@@ -259,25 +291,12 @@ export default function Result() {
             />
           </InfoBox>
         )}
-        {result && result.digital !== ResultType.UNSURE && nextSteps && (
-          <>
-            <Heading tagName="h2">{nextSteps[result.digital].title}</Heading>
-            <NumberedList>
-              {(nextSteps[result.digital].steps as Step[]).map((item) => (
-                <NumberedList.Item
-                  className="space-y-16"
-                  key={item.headline.text}
-                  disabled={item.isDisabled}
-                >
-                  <p className="ds-heading-03-reg">{item.headline.text}</p>
-                  {"content" in item && (
-                    <RichText markdown={item.content as string} />
-                  )}
-                  {item.link && <a href={item.link.to}>{item.link.text}</a>}
-                </NumberedList.Item>
-              ))}
-            </NumberedList>
-          </>
+        {result && result.digital !== ResultType.UNSURE && (
+          <NextSteps
+            hasDigitalbezug={result.digital === ResultType.POSITIVE}
+            isBund={isBund}
+            hasPruefstelle={hasPruefstelle}
+          />
         )}
       </Container>
       <Container className="my-80 py-0 print:hidden">
