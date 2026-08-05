@@ -77,13 +77,12 @@ export default defineConfig(
         { name: "NavLink", linkAttribute: "to" },
       ],
 
-      "import/internal-regex": "^~/",
       "import/resolver": {
         node: { extensions: [".ts", ".tsx"] },
         typescript: {
           alwaysTryTypes: true,
           tsconfigRootDir: __dirname,
-          project: ["**/tsconfig.json"],
+          project: ["tsconfig.json"],
         },
       },
     },
