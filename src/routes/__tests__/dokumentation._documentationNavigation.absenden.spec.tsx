@@ -44,6 +44,9 @@ const renderWithPolicyTitle = (policyTitle?: PolicyTitle) => {
   );
 };
 
+const noPruefstelleFinish =
+  /Laden Sie Ihre Dokumentation zur weiteren Verwendung herunter/;
+
 const querySendHeading = () =>
   screen.queryByRole("heading", {
     name: "Fertige Dokumentation an Prüfstelle senden",
@@ -91,14 +94,14 @@ describe("DocumentationSend", () => {
       organization: "xyz",
     });
 
-    expect(screen.getByText(/Da es für Hessen/)).toBeInTheDocument();
+    expect(screen.getByText(noPruefstelleFinish)).toBeInTheDocument();
     expect(querySendHeading()).not.toBeInTheDocument();
   });
 
   it("falls back to a generic self-check hint when no data is stored", () => {
     renderWithPolicyTitle(undefined);
 
-    expect(screen.getByText(/Da es für Ihr Bundesland/)).toBeInTheDocument();
+    expect(screen.getByText(noPruefstelleFinish)).toBeInTheDocument();
     expect(querySendHeading()).not.toBeInTheDocument();
   });
 
@@ -106,7 +109,7 @@ describe("DocumentationSend", () => {
     // @ts-expect-error bundesland is not set
     renderWithPolicyTitle({ title: "Titel", bundesland: "" });
 
-    expect(screen.getByText(/Da es für Ihr Bundesland/)).toBeInTheDocument();
+    expect(screen.getByText(noPruefstelleFinish)).toBeInTheDocument();
     expect(querySendHeading()).not.toBeInTheDocument();
   });
 });
