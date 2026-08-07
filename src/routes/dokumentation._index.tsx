@@ -96,7 +96,7 @@ export function DokumentationIndexPage({
             <Heading tagName="h2">So funktioniert es</Heading>
             <NumberedList>
               <NumberedList.Item className={"space-y-8"}>
-                <p className="ds-heading-03-reg">
+                <p className="kern-body kern-body--large">
                   Bearbeiten Sie die Dokumentation online
                 </p>
                 <p>
@@ -107,7 +107,7 @@ export function DokumentationIndexPage({
                 </p>
               </NumberedList.Item>
               <NumberedList.Item className={"space-y-8"}>
-                <p className="ds-heading-03-reg">
+                <p className="kern-body kern-body--large">
                   Senden Sie die ausgefüllte Dokumentation an Ihre Prüfstelle
                   oder speichern Sie Sie das Dokument ab
                 </p>

@@ -62,23 +62,19 @@ describe("PreCheck", () => {
       );
 
       expect(screen.getByLabelText("Ja")).toHaveAccessibleErrorMessage(
-        "Fehler: Bitte wählen Sie eine Option aus.",
+        "Bitte wählen Sie eine Option aus.",
       );
       expect(screen.getByLabelText("Nein")).toHaveAccessibleErrorMessage(
-        "Fehler: Bitte wählen Sie eine Option aus.",
+        "Bitte wählen Sie eine Option aus.",
       );
       expect(
         screen.getByLabelText("Ich bin unsicher"),
-      ).toHaveAccessibleErrorMessage(
-        "Fehler: Bitte wählen Sie eine Option aus.",
-      );
+      ).toHaveAccessibleErrorMessage("Bitte wählen Sie eine Option aus.");
 
       // error message on fieldset
       expect(
         screen.getByLabelText("Ja").parentElement?.parentElement,
-      ).toHaveAccessibleErrorMessage(
-        "Fehler: Bitte wählen Sie eine Option aus.",
-      );
+      ).toHaveAccessibleErrorMessage("Bitte wählen Sie eine Option aus.");
     });
 
     it("allows next when selecting an answer", async () => {
@@ -89,7 +85,7 @@ describe("PreCheck", () => {
       );
 
       expect(screen.getByLabelText("Ja")).toHaveAccessibleErrorMessage(
-        "Fehler: Bitte wählen Sie eine Option aus.",
+        "Bitte wählen Sie eine Option aus.",
       );
 
       await user.click(screen.getByLabelText("Ja"));
@@ -99,7 +95,7 @@ describe("PreCheck", () => {
       );
 
       expect(screen.getByLabelText("Ja")).not.toHaveAccessibleErrorMessage(
-        "Fehler: Bitte wählen Sie eine Option aus.",
+        "Bitte wählen Sie eine Option aus.",
       );
     });
   });

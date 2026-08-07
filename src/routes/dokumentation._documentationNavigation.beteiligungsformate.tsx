@@ -41,6 +41,12 @@ export function DocumentationParticipation() {
         <fieldset>
           <legend className="ds-heading-03-reg mb-16">
             {participation.formats.heading}
+            <HelpButton sectionId="formats" title="Hinweis zur Erklärung">
+              Beschreiben Sie stichpunktartig, wie Sie die Bedürfnisse der
+              Betroffenen erhoben haben – z. B. durch Befragungen, Gesprächen
+              mit Vollzugsakteurinnen und -akteuren oder formelle
+              Beteiligungsverfahren.
+            </HelpButton>
           </legend>
 
           <Textarea
@@ -50,18 +56,17 @@ export function DocumentationParticipation() {
             warningInsteadOfError
           >
             Erklärung
-            <HelpButton sectionId="formats" title="Hinweis zur Erklärung">
-              Beschreiben Sie stichpunktartig, wie Sie die Bedürfnisse der
-              Betroffenen erhoben haben – z. B. durch Befragungen, Gesprächen
-              mit Vollzugsakteurinnen und -akteuren oder formelle
-              Beteiligungsverfahren.
-            </HelpButton>
           </Textarea>
         </fieldset>
 
         <fieldset>
           <legend className="ds-heading-03-reg mb-16">
             {participation.results.heading}
+            <HelpButton sectionId="results" title="Hinweis zu Erkenntnissen">
+              Bitte listen Sie stichpunktartig auf, welche Erkenntnisse
+              eingearbeitet wurden und geben Sie Hinweise auf Paragrafen, die
+              besonders umsetzungsrelevant sind.
+            </HelpButton>
           </legend>
           <Textarea
             scope={form.scope("results")}
@@ -69,11 +74,6 @@ export function DocumentationParticipation() {
             warningInsteadOfError
           >
             Erkenntnisse
-            <HelpButton sectionId="results" title="Hinweis zu Erkenntnissen">
-              Bitte listen Sie stichpunktartig auf, welche Erkenntnisse
-              eingearbeitet wurden und geben Sie Hinweise auf Paragrafen, die
-              besonders umsetzungsrelevant sind.
-            </HelpButton>
           </Textarea>
         </fieldset>
 

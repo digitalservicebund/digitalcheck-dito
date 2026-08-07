@@ -19,12 +19,12 @@ export default function InfoBoxList({
   children,
 }: Readonly<InfoBoxListProps>) {
   return (
-    <section className="ds-stack ds-stack-8">
+    <section className="kern-stack kern-stack-sm">
       {heading && <Heading tagName="h2" {...heading} />}
       <ul
         className={twMerge(
-          "list-unstyled info-box ds-stack mt-32",
-          separator ? "ds-stack-32" : "ds-stack-48",
+          "list-unstyled info-box kern-stack mt-32",
+          separator ? "kern-stack-xl" : "kern-stack-3xl",
           className,
         )}
       >

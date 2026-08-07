@@ -13,7 +13,7 @@ type LinkProps = {
 const FooterLink = ({ link }: { link: LinkProps }) => (
   <>
     {link?.preText}{" "}
-    <a href={link.url} className="increase-tap-area">
+    <a href={link.url} className="increase-tap-area kern-link kern-link--small">
       {link.text}
     </a>
     {link?.postText && <> {link.postText}</>}
@@ -29,9 +29,9 @@ const LinkList = ({
   links: (LinkProps | LinkProps[])[];
   className?: string;
 }) => (
-  <div className={tailwindMerge("ds-stack ds-stack-8", className)}>
-    {header && <h2 className="ds-label-section">{header}</h2>}
-    <ul className="list-unstyled flex flex-col gap-8">
+  <div className={tailwindMerge("kern-stack kern-stack-sm", className)}>
+    {header && <h2 className="kern-heading-medium">{header}</h2>}
+    <ul className="list-unstyled kern-body kern-body--small kern-body--muted flex flex-col gap-8">
       {links.map((link) => {
         const subLinks = Array.isArray(link) ? link : [link];
         return (
@@ -53,7 +53,7 @@ export default function Footer() {
       className="ds-label-03-reg flex w-full flex-row justify-center border-t-2 border-blue-300 leading-snug text-gray-900 print:hidden"
       aria-label={footer.navLabel}
     >
-      <div className="ds-stack ds-stack-32 sm:ds-stack-40 w-full max-w-6xl px-16 py-40">
+      <div className="kern-stack kern-stack-xl sm:kern-stack-2xl w-full max-w-6xl px-16 py-40">
         <nav
           className="grid grid-cols-1 justify-between gap-32 sm:grid-cols-[repeat(3,minmax(0,18rem))] sm:grid-rows-2"
           aria-label={footer.top.navLabel}
@@ -79,7 +79,7 @@ export default function Footer() {
         </nav>
 
         <nav aria-label={footer.middle.navLabel}>
-          <ul className="list-unstyled flex flex-row flex-wrap items-baseline gap-8">
+          <ul className="list-unstyled kern-link kern-link--small flex flex-row flex-wrap items-baseline gap-8">
             {footer.middle.links.map((link) => (
               <li
                 key={link.url}
@@ -94,7 +94,12 @@ export default function Footer() {
         <hr className="mt-16 w-full border-t-2 border-blue-300" />
 
         <nav aria-label={footer.bottom.navLabel} className="space-y-40">
-          <FooterLink link={footer.bottom.digitalserviceLink} />
+          <p className="kern-body kern-body--small">
+            {footer.bottom.digitalserviceLink.preText}{" "}
+            <a href={footer.bottom.digitalserviceLink.url}>
+              {footer.bottom.digitalserviceLink.text}
+            </a>
+          </p>
 
           <div className="space-y-16 sm:flex sm:flex-row sm:items-center sm:gap-48 sm:space-y-0">
             <Image
@@ -110,8 +115,31 @@ export default function Footer() {
               className="hidden forced-colors:dark:block"
             />
             <div className="max-w-2xl space-y-8">
-              <h3 className="ds-label-03-bold">{footer.bottom.title}</h3>
-              <LinkList links={footer.bottom.links} />
+              <h3 className="kern-label kern-label--small">
+                {footer.bottom.title}
+              </h3>
+              <p className="kern-body kern-body--small">
+                Der Digitalcheck entsteht im Auftrag des{" "}
+                <a
+                  href={footer.bottom.links[0].url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Bundesministerium für Digitales und Staatsmodernisierung
+                </a>
+              </p>
+              <p className="kern-body kern-body--small">
+                Mehr über den politischen Auftrag und die Entstehung des
+                Digitalcheck finden Sie auf der{" "}
+                <a
+                  href={footer.bottom.links[1].url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Projektseite
+                </a>{" "}
+                des Bundesministeriums für Digitales und Staatsmodernisierung.
+              </p>
             </div>
           </div>
         </nav>

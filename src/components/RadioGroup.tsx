@@ -3,7 +3,6 @@ import type { FormScope } from "@rvf/react";
 import { useField } from "@rvf/react";
 import type { ComponentPropsWithRef, ReactNode } from "react";
 import { useId } from "react";
-import InputError from "./InputError";
 
 export type Option<Value extends string | number> = {
   label: ReactNode;
@@ -49,7 +48,7 @@ function RadioGroup<FormData, Value extends string | number = string>({
   return (
     <div
       role="radiogroup"
-      className={twMerge("space-y-16", className)}
+      className={twMerge("kern-fieldset__body", className)}
       aria-labelledby={ariaLabelledby}
       aria-errormessage={hasError ? errorId : undefined}
       aria-invalid={field.error() ? "true" : undefined}
@@ -58,7 +57,7 @@ function RadioGroup<FormData, Value extends string | number = string>({
         const id = opt.id ?? `${String(field.name())}-${idx}`;
 
         return (
-          <p key={id}>
+          <p className="kern-form-check" key={id}>
             <input
               {...field.getInputProps({
                 type: "radio",
@@ -67,20 +66,18 @@ function RadioGroup<FormData, Value extends string | number = string>({
                 "aria-invalid": hasError || hasWarning,
                 "aria-required": required,
                 className: twMerge(
-                  "ds-radio self-start",
-                  hasError && "has-error",
-                  hasWarning && "has-warning",
+                  "kern-form-check__radio self-start",
+                  (hasError || hasWarning) &&
+                    "bg-yellow-200 border-yellow-700 text-black focus:border-4 focus:border-yellow-700 focus:outline-none",
                 ),
                 value: opt.value,
                 ...rest,
               })}
             />
-            <label htmlFor={id}>
+            <label htmlFor={id} className="kern-label">
               {opt.label}
               {opt.subText && (
-                <span className="ds-body-02-reg text-gray-800">
-                  {opt.subText}
-                </span>
+                <span className="text-gray-800">{opt.subText}</span>
               )}
             </label>
           </p>
@@ -88,12 +85,16 @@ function RadioGroup<FormData, Value extends string | number = string>({
       })}
 
       {(hasError || hasWarning) && (
-        <InputError
-          id={errorId}
-          look={warningInsteadOfError ? "warning" : "error"}
-        >
-          {error || field.error()}
-        </InputError>
+        <p className="kern-error" id={errorId}>
+          <span
+            className={twMerge(
+              "kern-icon kern-icon--warning kern-icon--md",
+              (hasWarning || hasError) && "!bg-yellow-700",
+            )}
+            aria-hidden="true"
+          ></span>
+          <span className="kern-body">{error || field.error()}</span>
+        </p>
       )}
     </div>
   );

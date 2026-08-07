@@ -37,7 +37,7 @@ function Badge({
         look === "gray" && "bg-gray-300",
         look === "white" && "bg-white",
         look === "success" && "bg-green-200 text-green-700",
-        look === "danger" && "bg-ds-red-200 text-ds-error",
+        look === "danger" && "text-ds-error bg-red-200",
         highContrastDarkStyle,
         className,
       )}

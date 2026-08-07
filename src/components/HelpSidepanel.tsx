@@ -144,7 +144,7 @@ export default function HelpSidepanel() {
                     id={`help-section-${section.id}`}
                     className="scroll-my-80"
                   >
-                    <h3 className="ds-subhead mb-8 font-bold text-blue-800">
+                    <h3 className="kern-title mb-8 font-bold text-blue-800">
                       {section.title}
                     </h3>
                     {typeof section.content === "string" ? (

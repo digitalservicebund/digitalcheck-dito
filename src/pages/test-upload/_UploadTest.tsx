@@ -181,7 +181,7 @@ function UploadDropzoneCard({
               : "❌ Inhalt stimmt nicht überein"}
           </p>
           {status.error && (
-            <p className="text-sm text-red-600">{status.error}</p>
+            <p className="text-ds-error text-sm">{status.error}</p>
           )}
         </div>
       ) : (

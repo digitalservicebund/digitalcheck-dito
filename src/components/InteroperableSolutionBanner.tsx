@@ -10,8 +10,10 @@ export function InteroperableSolutionBanner() {
         <aside className="breakout-grid-toc relative bg-yellow-200 py-24">
           <div className="row-1 space-y-8">
             <p className="ds-body-01-bold">
-              „Lösung für ein interoperables Europa“ nach Art. 7 der Verordnung
-              (EU) 2024/903
+              <b>
+                „Lösung für ein interoperables Europa“ nach Art. 7 der
+                Verordnung (EU) 2024/903
+              </b>
             </p>
             <p>
               Eine Prüfung, ob diese Lösung genutzt werden kann, ist bei

@@ -25,15 +25,15 @@ const { headline, text, nextButton, hint } = generalInfo;
       <RichText markdown={hint.text} />
     </InlineNotice>
     <ButtonContainer>
-      <LinkButton id={"generalInfo-next-button"} href={questions[0].path}>
-        {nextButton}
-      </LinkButton>
       <LinkButton
         id={"generalInfo-back-button"}
         href={vorpruefung.path}
-        look={"tertiary"}
+        look={"secondary"}
       >
         {general.buttonBack.text}
+      </LinkButton>
+      <LinkButton id={"generalInfo-next-button"} href={questions[0].path}>
+        {nextButton}
       </LinkButton>
     </ButtonContainer>
   </div>

@@ -3,7 +3,6 @@ import type { FormScope, ValueOfInputType } from "@rvf/react";
 import { useField } from "@rvf/react";
 import type { ComponentPropsWithRef, ReactNode } from "react";
 import { useId } from "react";
-import InputError from "./InputError";
 
 type BaseTextareaProps = ComponentPropsWithRef<"textarea">;
 
@@ -31,8 +30,8 @@ function Textarea({
   const hasWarning = !!(error || field.error()) && warningInsteadOfError;
 
   return (
-    <div className="space-y-8">
-      <label htmlFor={inputId} className="ds-label-01-reg block">
+    <div className="kern-form-input space-y-8">
+      <label htmlFor={inputId} className="kern-label">
         {children}
       </label>
       {description && (
@@ -47,21 +46,26 @@ function Textarea({
           "aria-invalid": hasError || hasWarning,
           "aria-errormessage": hasError || hasWarning ? errorId : undefined,
           className: twMerge(
-            "ds-textarea placeholder-gray-800",
-            hasError && "has-error",
-            hasWarning && "has-warning",
+            "kern-form-input__input bg-white",
+            hasError && "kern-form-input__input--error",
+            hasWarning &&
+              "bg-white border-yellow-700 text-black focus:border-4 focus:border-yellow-700 focus:outline-none",
           ),
           ...rest,
         })}
       />
 
       {(hasError || hasWarning) && (
-        <InputError
-          id={errorId}
-          look={warningInsteadOfError ? "warning" : "error"}
-        >
-          {error || field.error()}
-        </InputError>
+        <p className="kern-error" id={errorId}>
+          <span
+            className={twMerge(
+              "kern-icon kern-icon--warning kern-icon--md",
+              (hasWarning || hasError) && "!bg-yellow-700",
+            )}
+            aria-hidden="true"
+          ></span>
+          <span className="kern-body">{error || field.error()}</span>
+        </p>
       )}
     </div>
   );

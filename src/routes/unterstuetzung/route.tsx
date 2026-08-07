@@ -108,7 +108,7 @@ export default function Index() {
       <div className="bg-blue-100">
         <Container>
           <Heading id="hilfe" tagName="h2" text={supportHow.title} />
-          <div className="ds-stack ds-stack-16 pt-32">
+          <div className="kern-stack kern-stack-md pt-32">
             <InfoBox>
               <RichText markdown={supportHow.text} />
             </InfoBox>
@@ -121,7 +121,7 @@ export default function Index() {
         </Container>
       </div>
       <div id="angebote">
-        <Container className="ds-stack ds-stack-40 pb-40">
+        <Container className="kern-stack kern-stack-2xl pb-40">
           <InfoBox
             heading={{
               tagName: "h2",
@@ -130,86 +130,90 @@ export default function Index() {
           >
             <RichText markdown={supportOfferings.text} />
           </InfoBox>
-          <SearchParamTabs>
-            {supportOfferings.tabs.map((tab) => (
-              <SearchParamTabs.Tab
-                key={tab.id}
-                tabId={tab.id}
-                label={tab.title}
-              >
-                {tab.offerings.map((offering) => (
-                  <Container
-                    key={offering.title}
-                    className="mb-32 flex justify-between gap-32 rounded-xl bg-blue-100 px-40 max-md:flex-col"
-                  >
-                    <InfoBox
-                      heading={{
-                        tagName: "h2",
-                        text: offering.title,
-                      }}
+          <div className="my-40">
+            <SearchParamTabs>
+              {supportOfferings.tabs.map((tab) => (
+                <SearchParamTabs.Tab
+                  key={tab.id}
+                  tabId={tab.id}
+                  label={tab.title}
+                >
+                  {tab.offerings.map((offering) => (
+                    <Container
+                      key={offering.title}
+                      className="mb-32 flex justify-between gap-32 rounded-xl bg-blue-100 px-40 max-md:flex-col"
                     >
-                      <RichText markdown={offering.text} />
-                      {"link" in offering && (
-                        <InfoBox.LinkList links={[offering.link]} />
-                      )}
-                    </InfoBox>
+                      <InfoBox
+                        heading={{
+                          tagName: "h2",
+                          text: offering.title,
+                        }}
+                      >
+                        <RichText markdown={offering.text} />
+                        {"link" in offering && (
+                          <InfoBox.LinkList links={[offering.link]} />
+                        )}
+                      </InfoBox>
 
-                    <div className="flex-none space-y-20 md:w-[310px] lg:w-[364px]">
-                      <div className="bg-white">
-                        <div className="p-28">
-                          <h3 className="text-lg">{offering.sellingPoints}</h3>
-                          <div className="divide-y divide-gray-700">
-                            {offering.details.map((detail) => (
-                              <div key={detail.title} className="py-16">
-                                <div className="flex items-center gap-8 pb-8">
-                                  {detail.icon && (
-                                    <detail.icon className="size-24 fill-gray-800" />
-                                  )}
-                                  <Heading
-                                    tagName="p"
-                                    look="ds-label-01-bold"
-                                    text={detail.title}
+                      <div className="flex-none space-y-20 md:w-[310px] lg:w-[364px]">
+                        <div className="bg-white">
+                          <div className="p-28">
+                            <h3 className="text-lg">
+                              {offering.sellingPoints}
+                            </h3>
+                            <div className="divide-y divide-gray-700">
+                              {offering.details.map((detail) => (
+                                <div key={detail.title} className="py-16">
+                                  <div className="flex items-center gap-8 pb-8">
+                                    {detail.icon && (
+                                      <detail.icon className="size-24 fill-gray-800" />
+                                    )}
+                                    <Heading
+                                      tagName="p"
+                                      look="ds-label-01-bold"
+                                      text={detail.title}
+                                    />
+                                  </div>
+                                  <RichText
+                                    markdown={detail.text}
+                                    className="text-base"
                                   />
                                 </div>
-                                <RichText
-                                  markdown={detail.text}
-                                  className="text-base"
-                                />
-                              </div>
-                            ))}
+                              ))}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      {"examples" in offering && (
-                        <div className="bg-white">
-                          <div className="divide-y divide-gray-700">
-                            {offering.examples.map((example, idx) => (
-                              <div key={`${offering.title}-example-${idx}`}>
-                                {"image" in example && (
-                                  <Image
-                                    url={example.image.src}
-                                    alternativeText={example.image.alt}
+                        {"examples" in offering && (
+                          <div className="bg-white">
+                            <div className="divide-y divide-gray-700">
+                              {offering.examples.map((example, idx) => (
+                                <div key={`${offering.title}-example-${idx}`}>
+                                  {"image" in example && (
+                                    <Image
+                                      url={example.image.src}
+                                      alternativeText={example.image.alt}
+                                    />
+                                  )}
+                                  <RichText
+                                    markdown={example.text}
+                                    className="p-20 text-base"
                                   />
-                                )}
-                                <RichText
-                                  markdown={example.text}
-                                  className="p-20 text-base"
-                                />
-                              </div>
-                            ))}
+                                </div>
+                              ))}
+                            </div>
                           </div>
-                        </div>
-                      )}
-                    </div>
-                  </Container>
-                ))}
-              </SearchParamTabs.Tab>
-            ))}
-          </SearchParamTabs>
+                        )}
+                      </div>
+                    </Container>
+                  ))}
+                </SearchParamTabs.Tab>
+              ))}
+            </SearchParamTabs>
+          </div>
         </Container>
       </div>
 
-      <div className="bg-blue-400">
+      <div className="bg-blue-100">
         <Container className="py-80">
           <InfoBox
             badge={{

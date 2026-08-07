@@ -4,7 +4,7 @@ import twMerge from "@/utils/tailwindMerge";
 import type React from "react";
 import type { BadgeProps } from "./Badge";
 import Badge from "./Badge";
-import { DownloadLinkButton, LinkButton } from "./Button";
+import { LinkButton } from "./Button";
 import type { DetailsSummaryProps } from "./DetailsSummary";
 import DetailsSummary from "./DetailsSummary";
 import type { HeadingProps } from "./Heading";
@@ -93,7 +93,7 @@ const InfoBox = ({
       {visual?.type === "component" && visual.Component}
       <div
         data-testid="info-box-content"
-        className={"ds-stack ds-stack-16 grow wrap-break-word"}
+        className={"kern-stack kern-stack-md grow wrap-break-word"}
       >
         {badge && <Badge className="self-start" {...badge} />}
         {heading && <Heading tagName="h3" {...heading} />}
@@ -108,7 +108,7 @@ export type DetailsSummaryListProps = {
 };
 
 const DetailsSummaryList = ({ title, items }: DetailsSummaryListProps) => (
-  <div className="ds-stack ds-stack-8 mt-16">
+  <div className="kern-stack kern-stack-sm mt-16">
     {title && <Heading {...title} className="ds-label-02-bold" />}
     {items?.map(({ title, ...details }) => (
       <DetailsSummary key={title} title={title} {...details} />
@@ -121,12 +121,12 @@ const LinkList = ({ links }: { links: ContentLink[] }) => (
   <ButtonContainer className="mt-auto pt-24">
     {links.map((link) => {
       const { to, text, ...rest } = link;
-      if (link.download)
-        return (
-          <DownloadLinkButton key={to} href={to} omitIcon {...rest}>
-            {text}
-          </DownloadLinkButton>
-        );
+      // if (link.download)
+      //   return (
+      //     <DownloadLinkButton key={to} href={to} {...rest}>
+      //       {text}
+      //     </DownloadLinkButton>
+      //   );
       return (
         <LinkButton key={to} href={to} {...rest}>
           {text}
