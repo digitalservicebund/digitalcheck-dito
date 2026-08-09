@@ -3,6 +3,7 @@ import type { FormScope, ValueOfInputType } from "@rvf/react";
 import { useField } from "@rvf/react";
 import type { ComponentPropsWithRef, ReactNode } from "react";
 import { useId } from "react";
+import InputError from "./InputError";
 
 type BaseTextareaProps = ComponentPropsWithRef<"textarea">;
 
@@ -54,18 +55,13 @@ function Textarea({
           ...rest,
         })}
       />
-
       {(hasError || hasWarning) && (
-        <p className="kern-error" id={errorId}>
-          <span
-            className={twMerge(
-              "kern-icon kern-icon--warning kern-icon--md",
-              (hasWarning || hasError) && "!bg-yellow-700",
-            )}
-            aria-hidden="true"
-          ></span>
-          <span className="kern-body">{error || field.error()}</span>
-        </p>
+        <InputError
+          id={errorId}
+          look={warningInsteadOfError ? "warning" : "error"}
+        >
+          {error || field.error()}
+        </InputError>
       )}
     </div>
   );

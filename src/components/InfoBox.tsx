@@ -121,12 +121,6 @@ const LinkList = ({ links }: { links: ContentLink[] }) => (
   <ButtonContainer className="mt-auto pt-24">
     {links.map((link) => {
       const { to, text, ...rest } = link;
-      // if (link.download)
-      //   return (
-      //     <DownloadLinkButton key={to} href={to} {...rest}>
-      //       {text}
-      //     </DownloadLinkButton>
-      //   );
       return (
         <LinkButton key={to} href={to} {...rest}>
           {text}

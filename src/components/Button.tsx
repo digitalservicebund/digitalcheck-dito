@@ -67,6 +67,7 @@ function Button({
   look = "primary",
   size,
   className,
+  type,
   ...props
 }: ButtonProps) {
   const buttonClasses = createButtonClasses({
@@ -79,7 +80,13 @@ function Button({
   });
 
   return (
-    <button {...props} id={id} data-testid={id} className={buttonClasses}>
+    <button
+      {...props}
+      id={id}
+      data-testid={id}
+      className={buttonClasses}
+      type={type}
+    >
       {iconLeft && (
         <span className={`kern-icon ${iconLeft}`} aria-hidden="true"></span>
       )}
