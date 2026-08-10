@@ -63,19 +63,21 @@ export default function DropdownContentList({
         >
           <div
             className={twMerge(
-              "ds-stack ds-stack-4 cursor-pointer border-l-4 border-l-transparent py-8 pr-8 pl-16 text-left hover:bg-blue-100 lg:border-l-8 lg:px-56 lg:py-24",
+              "kern-stack kern-stack-xs cursor-pointer border-l-4 border-l-transparent py-8 pr-8 pl-16 text-left hover:bg-blue-100 lg:border-l-8 lg:px-56 lg:py-24",
               finalIsActive && "border-blue-800 bg-blue-100",
               option.className,
             )}
           >
-            <div className="ds-label-02-reg lg:ds-label-01-bold">
+            <div className="flex flex-row">
               {option.isNewTitle && (
                 <Badge className="mr-8" look="hint">
                   NEU
                 </Badge>
               )}
-              {itemNumber && <span className="mr-4">{itemNumber}. </span>}
-              {option.title}
+              {itemNumber && (
+                <span className="kern-label mr-4">{itemNumber}. </span>
+              )}
+              <div className="kern-label">{option.title}</div>
             </div>
             {option.content && (
               <span className="hidden lg:inline">{option.content}</span>

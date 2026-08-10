@@ -90,26 +90,31 @@ function DocumentationPrincipleErlaeuterungForm({
               error={form.error("aspects")}
               warningInsteadOfError
             >
-              Schwerpunkte auswählen
-              <HelpButton sectionId="aspects" title="Hinweis zu Schwerpunkten">
-                <p>
-                  Wählen Sie aus, welche Schwerpunkte für Ihr Vorhaben relevant
-                  sind.
-                </p>
-                <p>
-                  Diese dienen Ihnen als roter Faden für Ihre Erklärung. So
-                  formulieren Sie präzise und stellen sicher, dass Ihre Regelung
-                  das Prinzip erfüllt.
-                </p>
-                {prinzip.Aspekte.map((aspect) => (
-                  <DetailsSummary
-                    key={aspect.Kurzbezeichnung}
-                    title={aspect.Kurzbezeichnung}
-                  >
-                    {aspect.Text && <BlocksRenderer content={aspect.Text} />}
-                  </DetailsSummary>
-                ))}
-              </HelpButton>
+              <p className="kern-label">
+                Schwerpunkte auswählen
+                <HelpButton
+                  sectionId="aspects"
+                  title="Hinweis zu Schwerpunkten"
+                >
+                  <p>
+                    Wählen Sie aus, welche Schwerpunkte für Ihr Vorhaben
+                    relevant sind.
+                  </p>
+                  <p>
+                    Diese dienen Ihnen als roter Faden für Ihre Erklärung. So
+                    formulieren Sie präzise und stellen sicher, dass Ihre
+                    Regelung das Prinzip erfüllt.
+                  </p>
+                  {prinzip.Aspekte.map((aspect) => (
+                    <DetailsSummary
+                      key={aspect.Kurzbezeichnung}
+                      title={aspect.Kurzbezeichnung}
+                    >
+                      {aspect.Text && <BlocksRenderer content={aspect.Text} />}
+                    </DetailsSummary>
+                  ))}
+                </HelpButton>
+              </p>
             </AspectPills>
           )}
 

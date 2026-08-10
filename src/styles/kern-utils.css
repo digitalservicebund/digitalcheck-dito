@@ -1,0 +1,60 @@
+@utility kern-heading-x-large {
+  font-size: var(--kern-typography-font-size-x-large-adaptive, 32px);
+  font-weight: var(--kern-typography-font-weight-medium, 500);
+  line-height: var(--kern-typography-line-height-x-large-adaptive, 40px);
+}
+
+@utility kern-heading-large {
+  font-size: var(--kern-typography-font-size-large-adaptive, 26px);
+  font-weight: var(--kern-typography-font-weight-semi-bold, 600);
+  line-height: var(--kern-typography-line-height-large-adaptive, 32px);
+}
+
+@utility kern-heading-medium {
+  font-size: var(--kern-typography-font-size-medium-adaptive, 21px);
+  font-weight: var(--kern-typography-font-weight-semi-bold, 600);
+  line-height: var(--kern-typography-line-height-medium-adaptive, 24px);
+}
+
+@utility kern-heading-small {
+  font-size: var(--kern-typography-font-size-medium-static, 18px);
+  font-weight: var(--kern-typography-font-weight-semi-bold, 600);
+  line-height: var(--kern-typography-line-height-medium-static, 24px);
+}
+
+@utility kern-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+@utility kern-stack-xxs {
+  row-gap: var(--kern-metric-space-2x-small);
+}
+
+@utility kern-stack-xs {
+  row-gap: var(--kern-metric-space-x-small);
+}
+
+@utility kern-stack-sm {
+  row-gap: var(--kern-metric-space-small);
+}
+
+@utility kern-stack-md {
+  row-gap: var(--kern-metric-space-default);
+}
+
+@utility kern-stack-lg {
+  row-gap: var(--kern-metric-space-large);
+}
+
+@utility kern-stack-xl {
+  row-gap: var(--kern-metric-space-x-large);
+}
+
+@utility kern-stack-2xl {
+  row-gap: var(--kern-metric-space-2x-large);
+}
+
+@utility kern-stack-3xl {
+  row-gap: var(--kern-metric-space-3x-large);
+}

@@ -1,15 +1,11 @@
-import { getDownloadableExtensionName } from "@/utils/fileExtensionUtils";
 import twMerge from "@/utils/tailwindMerge";
-import { SaveAltOutlined as SaveAltOutlinedIcon } from "@digitalservicebund/icons";
 import type React from "react";
-import type { ReactElement } from "react";
-import { cloneElement } from "react";
 import { twJoin } from "tailwind-merge";
 
 export type ButtonBaseProps = {
   fullWidth?: boolean;
-  iconLeft?: ReactElementWithClassname;
-  iconRight?: ReactElementWithClassname;
+  iconLeft?: string;
+  iconRight?: string;
   look?: "primary" | "secondary" | "tertiary" | "ghost" | "link";
   size?: "large" | "medium" | "small";
 };
@@ -26,19 +22,15 @@ export type ButtonProps = React.ComponentPropsWithoutRef<"button"> &
 export type LinkButtonProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
   ButtonBaseProps;
 
-type ReactElementWithClassname = ReactElement<{ className: string }>;
-
-function formatIcon(icon?: ReactElementWithClassname) {
-  if (!icon) return undefined;
-  const className = `ds-button-icon ${icon.props.className ?? ""}`;
-  return cloneElement(icon, { className });
-}
+export type DownloadLinkButtonProps = {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+};
 
 function createButtonClasses({
   look,
   size,
-  iconLeft,
-  iconRight,
   fullWidth,
   className,
 }: Pick<
@@ -47,19 +39,18 @@ function createButtonClasses({
 >) {
   if (look === "link") {
     return twMerge(
-      "text-link inline-flex items-center text-left space-x-8",
+      "inline-flex items-center text-left space-x-8 kern-btn kern-btn--tertiary",
       className,
     );
   }
+
   return twMerge(
-    "ds-button",
-    look == "secondary" && "ds-button-secondary",
-    look == "tertiary" && "ds-button-tertiary",
-    look == "ghost" && "ds-button-ghost",
-    size == "large" && "ds-button-large",
-    size == "small" && "ds-button-small",
-    (iconLeft ?? iconRight) && ["ds-button-with-icon"],
-    fullWidth && "ds-button-full-width",
+    "kern-btn",
+    look == "primary" && "kern-btn--primary",
+    (look === "secondary" || look === "tertiary") && "kern-btn--secondary",
+    look === "ghost" && "kern-btn--tertiary",
+    size == "small" && "kern-btn--x-small",
+    fullWidth && "kern-btn--block",
     className,
   );
 }
@@ -73,7 +64,7 @@ function Button({
   iconLeft,
   iconRight,
   fullWidth,
-  look,
+  look = "primary",
   size,
   className,
   type,
@@ -91,14 +82,18 @@ function Button({
   return (
     <button
       {...props}
-      type={type}
       id={id}
       data-testid={id}
       className={buttonClasses}
+      type={type}
     >
-      {formatIcon(iconLeft)}
-      <span className="ds-button-label">{children}</span>
-      {formatIcon(iconRight)}
+      {iconLeft && (
+        <span className={`kern-icon ${iconLeft}`} aria-hidden="true"></span>
+      )}
+      <span className="kern-label">{children}</span>
+      {iconRight && (
+        <span className={`kern-icon ${iconRight}`} aria-hidden="true"></span>
+      )}
     </button>
   );
 }
@@ -111,8 +106,6 @@ export default Button;
 export function LinkButton({
   children,
   id,
-  iconLeft,
-  iconRight,
   fullWidth,
   look,
   size,
@@ -122,14 +115,9 @@ export function LinkButton({
   const buttonClasses = createButtonClasses({
     look: look ?? "primary",
     size,
-    iconRight,
-    iconLeft,
     fullWidth,
     className,
   });
-
-  iconLeft = formatIcon(iconLeft);
-  iconRight = formatIcon(iconRight);
 
   // for links that have role="button" we need to add an event handler so that it can
   // be activated with the space bar
@@ -150,7 +138,9 @@ export function LinkButton({
       onKeyDown={onKeyDown}
       {...props}
     >
-      {iconLeft} <span className="ds-button-label">{children}</span> {iconRight}
+      <span className={look === "link" ? undefined : "kern-label"}>
+        {children}
+      </span>
     </a>
   );
 }
@@ -162,36 +152,27 @@ export function LinkButton({
 export function DownloadButton(
   props: Readonly<Omit<ButtonProps, "iconLeft" | "type">>,
 ) {
-  return (
-    <Button
-      type="button"
-      iconLeft={<SaveAltOutlinedIcon className="fill-current" />}
-      {...props}
-    />
-  );
+  return <Button type="button" iconLeft="kern-icon--download" {...props} />;
 }
 
 /**
  * A link to a file that looks like a button.
  */
 export function DownloadLinkButton({
-  omitIcon,
-  ...props
-}: Readonly<Omit<LinkButtonProps, "iconLeft"> & { omitIcon?: boolean }>) {
-  const extension =
-    typeof props.href === "string"
-      ? getDownloadableExtensionName(props.href)
-      : null;
-
-  const iconLeft = omitIcon ? undefined : (
-    <SaveAltOutlinedIcon className="fill-current" />
-  );
+  href,
+  children,
+  className,
+}: Readonly<DownloadLinkButtonProps>) {
   return (
-    <LinkButton
-      iconLeft={iconLeft}
-      download
-      title={extension ? `${extension}-Datei` : undefined}
-      {...props}
-    />
+    <a
+      href={href}
+      className={twMerge("inline-flex items-center gap-8", className)}
+    >
+      <span
+        className="kern-icon kern-icon--download kern-icon--default bg-blue-800"
+        aria-hidden="true"
+      ></span>
+      {children}
+    </a>
   );
 }

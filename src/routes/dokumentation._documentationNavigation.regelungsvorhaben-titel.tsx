@@ -1,4 +1,3 @@
-import Heading from "@/components/Heading";
 import HelpButton from "@/components/HelpButton";
 import Input from "@/components/Input";
 import { digitalDocumentation } from "@/resources/content/dokumentation";
@@ -29,23 +28,21 @@ export function DocumentationTitle() {
 
   return (
     <div className="space-y-40">
-      <Heading
-        text={info.headline}
-        tagName="h1"
-        look="ds-heading-02-reg"
-        className="mb-40"
-      />
+      <h1 className="ds-heading-02-reg mb-40">
+        {info.headline}
+        <HelpButton
+          sectionId="title"
+          title="Hinweis zu Titel des Regelungsvorhabens"
+        >
+          Geben Sie hier den offiziellen Titel Ihres Regelungsvorhabens ein.
+          Dieser Titel wird in der fertigen Dokumentation verwendet.
+        </HelpButton>
+      </h1>
+
       <form {...form.getFormProps()}>
         <div className="space-y-32">
           <Input scope={form.scope("title")} warningInsteadOfError>
             {info.inputTitle.label}
-            <HelpButton
-              sectionId="title"
-              title="Hinweis zu Titel des Regelungsvorhabens"
-            >
-              Geben Sie hier den offiziellen Titel Ihres Regelungsvorhabens ein.
-              Dieser Titel wird in der fertigen Dokumentation verwendet.
-            </HelpButton>
           </Input>
 
           {isIeaAssessmentEnabled && (

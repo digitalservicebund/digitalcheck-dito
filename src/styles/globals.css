@@ -1,14 +1,13 @@
-@import "@digitalservice4germany/angie/fonts.css" layer(base);
+@import "@kern-ux/native/dist/kern.min.css" layer(base);
+@import "./fonts.css";
+@import "./kern-utils.css";
 
 @import "tailwindcss";
-/* keep source to explicitly tell Tailwind where to scan for classes in your source files to prevent hydration issues */
-@source "../../src";
-
-@config "@digitalservice4germany/style-dictionary/tailwind";
-@plugin "@digitalservice4germany/angie";
 
 @theme {
-  --font-sans: BundesSansWeb;
+  --spacing: 1px; /* 1 unit = 1px, so py-8 = 8px (matches previous pixel-based spacing) */
+
+  --font-sans: var(--kern-typography-font-family-default);
 
   --color-principle-1: #fce4b1; /* order 1 */
   --color-principle-2: #f5dcd7; /* order 2 */
@@ -17,22 +16,51 @@
   --color-principle-3: #cce4f0; /* order 5 */
 
   --color-ds-success: #005f34;
-  --color-ds-error: #8e001b;
-  --color-ds-warning: #f5e05d;
+  --color-ds-error: #8e001b; /* red 900 */
+  --color-ds-warning: #f5e05d; /* yellow 500 */
   --color-ds-feature: #f5e05d;
 
-  --color-ds-red-200: #f9e5ec;
-  --color-ds-yellow-700: #e5ce5c;
+  --color-red-*: initial;
+  --color-red-200: #f9e5ec;
+  --color-red-800: #b0243f;
 
-  --color-ds-blue-500: #b3c9d6;
-  --color-ds-blue-700: #336f91;
-  --color-ds-blue-800: #004b76;
+  --color-yellow-*: initial;
+  --color-yellow-200: #fff9d2;
+  --color-yellow-300: #f9ec9e;
+  --color-yellow-500: #f5e05d;
+  --color-yellow-700: #e5ce5c;
+  --color-yellow-800: #dac23c;
 
-  --color-ds-green-700: #01854a;
-  --color-ds-green-900: #005e34;
+  --color-blue-*: initial;
+  --color-blue-100: #f2f6f8;
+  --color-blue-200: #ecf1f4;
+  --color-blue-300: #dce8ef;
+  --color-blue-400: #b8d7e8;
+  --color-blue-500: #b3c9d6;
+  --color-blue-600: #7ba4bf;
+  --color-blue-700: #336f91;
+  --color-blue-800: #004b76;
+  --color-blue-900: #003350;
 
-  --color-ds-gray-400: #dcdee1;
-  --color-ds-gray-600: #b8bdc3;
+  --color-green-*: initial;
+  --color-green-100: #e8f7f0;
+  --color-green-200: #ccebdd;
+  --color-green-700: #01854a;
+  --color-green-800: #006b3c;
+  --color-green-900: #005e34;
+
+  --color-gray-*: initial;
+  --color-gray-50: #fcfcfd;
+  --color-gray-100: #f6f7f8;
+  --color-gray-200: #f0f1f3;
+  --color-gray-300: #edeef0;
+  --color-gray-400: #dcdee1;
+  --color-gray-500: #c9cdd2;
+  --color-gray-600: #b8bdc3;
+  --color-gray-700: #a0a7b1;
+  --color-gray-800: #6f7785;
+  --color-gray-900: #4e596a;
+
   --color-ds-violet: #4c2c92;
 
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
@@ -40,9 +68,14 @@
   --max-width-a11y: 630px;
 }
 
+:root {
+  --kern-color-action-default: var(--color-blue-800);
+  --kern-color-action-visited: var(--color-ds-violet);
+}
+
 @layer base {
   html {
-    /* Keep 16px, don't change! (e.g. angie library depends on it) */
+    /* Keep 16px, don't change! */
     font-size: 16px;
   }
 
@@ -51,19 +84,34 @@
     @apply text-lg leading-[1.5em] antialiased;
   }
 
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply max-sm:hyphens-auto;
+  }
+
   h1 {
-    @apply ds-heading-01-reg;
+    @apply kern-heading-x-large;
   }
 
-  h2 {
-    @apply ds-heading-02-reg;
+  h2,
+  .ds-heading-02-reg,
+  .ds-heading-02-bold {
+    @apply kern-heading-large;
   }
 
-  h3 {
-    @apply ds-heading-03-reg;
+  h3,
+  .ds-heading-03-reg,
+  .ds-heading-03-bold {
+    @apply kern-heading-medium;
   }
 
-  a:not(.link-unstyled) {
+  h4 {
+    @apply kern-heading-small;
+  }
+
+  a:not(.link-unstyled, .kern-link) {
     @apply text-link;
 
     &:not([download])[href^="http"]::after {
@@ -82,11 +130,6 @@
   }
   a[href^="tel:"] {
     @apply whitespace-nowrap;
-  }
-
-  a,
-  button {
-    @apply cursor-pointer;
   }
 
   blockquote {
@@ -115,9 +158,7 @@
 
   h1,
   h2,
-  .ds-heading-01-reg,
   .ds-heading-02-reg,
-  .ds-heading-01-bold,
   .ds-heading-02-bold {
     /* 80ch @ 18px font size = 720px */
     max-width: 720px;
@@ -149,10 +190,6 @@
   padding: 2.5rem 3rem 3rem;
 
   margin-inline: var(--container-padding-inline);
-}
-
-@utility ds-button {
-  @apply max-sm:ds-button-full-width sm:ds-button-large;
 }
 
 @utility text-link {
