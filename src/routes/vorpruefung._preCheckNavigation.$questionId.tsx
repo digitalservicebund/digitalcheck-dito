@@ -149,7 +149,6 @@ export function PreCheckQuestion({
           scope={form.scope("answer")}
           options={options}
           aria-labelledby={questionLabelId}
-          warningInsteadOfError
         />
       </section>
       <div className="space-y-40">
