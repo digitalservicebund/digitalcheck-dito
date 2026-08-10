@@ -1,1 +1,0 @@
-import{t as e}from"./prefetch.Ck96Boje.js";e();

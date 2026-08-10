@@ -1,1 +1,0 @@
-import{n as e,t}from"./jsx-runtime.Dpp4ZezC.js";var n=t();function r({overhangingBackground:t,children:r,className:i}){return(0,n.jsx)(`div`,{className:e(`container py-40`,t&&`rounded-lg container-overhanging-background`,i),children:r})}export{r as t};
