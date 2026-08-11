@@ -6,7 +6,7 @@ type InputErrorProps = PropsWithChildren<{
   look?: "error" | "warning";
 }>;
 
-const InputError = ({ id, children, look = "error" }: InputErrorProps) => {
+const InputError = ({ id, children }: InputErrorProps) => {
   return (
     <p className="kern-error" id={id}>
       {

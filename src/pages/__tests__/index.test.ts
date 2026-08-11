@@ -8,12 +8,10 @@ import { beforeAll, describe, expect, it } from "vitest";
 
 describe("Index Route - Integration Tests", () => {
   let main: BoundFunctions<typeof queries>;
-  let aside: BoundFunctions<typeof queries>;
 
   beforeAll(async () => {
     const { dom } = await renderToDOM(Index as AstroComponentFactory);
     main = within(dom.querySelector("main")!);
-    aside = within(dom.querySelector("aside")!);
   });
 
   it("renders the Hero section with the correct title", () => {
