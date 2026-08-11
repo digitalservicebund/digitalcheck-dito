@@ -195,7 +195,7 @@ function AbsatzGroupWithoutErfuellungen({
       bold={false}
       className="italic"
     >
-      <div className="ds-stack ds-stack-8">
+      <div className="kern-stack kern-stack-sm">
         {absatzGroup.map((absatz) => (
           <BlocksRenderer
             key={absatz.documentId}

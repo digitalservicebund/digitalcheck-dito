@@ -98,7 +98,7 @@ describe("DocumentationTitle", () => {
         expect(input).toBeInvalid();
       });
       expect(input).toHaveAccessibleErrorMessage(
-        "Fehler: Bitte geben Sie einen Titel ein.",
+        "Bitte geben Sie einen Titel ein.",
       );
     });
 

@@ -28,7 +28,7 @@ export function NextSteps(props: Readonly<StepConditionProps>) {
             key={item.headline.text}
             disabled={item.isDisabled}
           >
-            <p className="ds-heading-03-reg">{item.headline.text}</p>
+            <p className="kern-body kern-body--large">{item.headline.text}</p>
             {"content" in item && (
               <RichText markdown={item.content as string} />
             )}

@@ -12,7 +12,7 @@ describe("InfoBoxList", () => {
           <InfoBox>Lorem2</InfoBox>
         </InfoBoxList>,
       );
-      expect(screen.getByRole("list")).toHaveClass("ds-stack-32");
+      expect(screen.getByRole("list")).toHaveClass("kern-stack-xl");
     });
 
     it("has expected padding when the separator is disabled", () => {
@@ -22,7 +22,7 @@ describe("InfoBoxList", () => {
           <InfoBox>Lorem2</InfoBox>
         </InfoBoxList>,
       );
-      expect(screen.getByRole("list")).toHaveClass("ds-stack-48");
+      expect(screen.getByRole("list")).toHaveClass("kern-stack-3xl");
     });
 
     it("has expected padding when the separator is unset", () => {
@@ -32,7 +32,7 @@ describe("InfoBoxList", () => {
           <InfoBox>Lorem2</InfoBox>
         </InfoBoxList>,
       );
-      expect(screen.getByRole("list")).toHaveClass("ds-stack-48");
+      expect(screen.getByRole("list")).toHaveClass("kern-stack-3xl");
     });
   });
 

@@ -74,7 +74,7 @@ export default function DropdownContentList({
             )}
           >
             {option.image && (
-              <div className="flex h-[64px] w-[64px] items-center justify-center p-8">
+              <div className="flex size-64 items-center justify-center p-8">
                 <Image
                   url={withBase(option.image)}
                   alternativeText={option.imageAlt}
@@ -82,16 +82,20 @@ export default function DropdownContentList({
                 />
               </div>
             )}
-            <div className="ds-stack ds-stack-4">
-              <div className="ds-label-02-reg lg:ds-label-01-bold">
+            <div className="kern-stack kern-stack-xs">
+              <div className="flex flex-row">
                 {option.isNewTitle && (
                   <Badge className="mr-8" look="hint">
                     NEU
                   </Badge>
                 )}
-                {itemNumber && <span className="mr-4">{itemNumber}. </span>}
-                {option.title}{" "}
-                {isExternal && <OpenInNewIcon className="fill-ds-blue-800" />}
+                {itemNumber && (
+                  <span className="kern-label mr-4">{itemNumber}. </span>
+                )}
+                <div className="kern-label">
+                  {option.title}{" "}
+                  {isExternal && <OpenInNewIcon className="fill-ds-blue-800" />}
+                </div>
               </div>
               {option.content && (
                 <span className="hidden lg:inline">{option.content}</span>

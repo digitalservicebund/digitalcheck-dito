@@ -8,12 +8,10 @@ import { beforeAll, describe, expect, it } from "vitest";
 
 describe("Index Route - Integration Tests", () => {
   let main: BoundFunctions<typeof queries>;
-  let aside: BoundFunctions<typeof queries>;
 
   beforeAll(async () => {
     const { dom } = await renderToDOM(Index as AstroComponentFactory);
     main = within(dom.querySelector("main")!);
-    aside = within(dom.querySelector("aside")!);
   });
 
   it("renders the Hero section with the correct title", () => {
@@ -162,14 +160,5 @@ describe("Index Route - Integration Tests", () => {
     expect(main.getByText(/Digitalcheck erscheint/)).toBeInTheDocument();
 
     expect(main.getByText("Referentin")).toBeInTheDocument();
-  });
-
-  it("renders the documentation banner", () => {
-    expect(
-      aside.getByRole("heading", {
-        name: /Digitalcheck-Dokumentation: Jetzt online ausfüllen/,
-        level: 2,
-      }),
-    ).toBeInTheDocument();
   });
 });

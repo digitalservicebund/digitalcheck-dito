@@ -31,8 +31,8 @@ function Textarea({
   const hasWarning = !!(error || field.error()) && warningInsteadOfError;
 
   return (
-    <div className="space-y-8">
-      <label htmlFor={inputId} className="ds-label-01-reg block">
+    <div className="kern-form-input space-y-8">
+      <label htmlFor={inputId} className="kern-label">
         {children}
       </label>
       {description && (
@@ -47,14 +47,14 @@ function Textarea({
           "aria-invalid": hasError || hasWarning,
           "aria-errormessage": hasError || hasWarning ? errorId : undefined,
           className: twMerge(
-            "ds-textarea placeholder-gray-800",
-            hasError && "has-error",
-            hasWarning && "has-warning",
+            "kern-form-input__input bg-white",
+            hasError && "kern-form-input__input--error",
+            hasWarning &&
+              "bg-white border-yellow-700 text-black focus:border-4 focus:border-yellow-700 focus:outline-none",
           ),
           ...rest,
         })}
       />
-
       {(hasError || hasWarning) && (
         <InputError
           id={errorId}

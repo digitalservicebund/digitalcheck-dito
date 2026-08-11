@@ -1,5 +1,4 @@
 import twMerge from "@/utils/tailwindMerge";
-import { ErrorOutline } from "@digitalservicebund/icons";
 import type { PropsWithChildren } from "react";
 
 type InputErrorProps = PropsWithChildren<{
@@ -7,25 +6,20 @@ type InputErrorProps = PropsWithChildren<{
   look?: "error" | "warning";
 }>;
 
-const InputError = ({ id, children, look = "error" }: InputErrorProps) => {
+const InputError = ({ id, children }: InputErrorProps) => {
   return (
-    <div
-      aria-live="assertive"
-      role="alert"
-      id={id}
-      data-testid={id}
-      className={twMerge(
-        "text-ds-error flex items-center gap-x-4",
-        look === "warning" && "inline-flex bg-yellow-300 px-4 text-black",
-      )}
-    >
-      {look === "error" && (
-        <div className="shrink-0">
-          <ErrorOutline className="fill-ds-error" />
-        </div>
-      )}
-      <span className="sr-only">Fehler:</span> {children}
-    </div>
+    <p className="kern-error" id={id}>
+      {
+        <span
+          className={twMerge(
+            "kern-icon kern-icon--warning kern-icon--md",
+            "!bg-yellow-700",
+          )}
+          aria-hidden="true"
+        ></span>
+      }
+      <span className="kern-body">{children}</span>
+    </p>
   );
 };
 

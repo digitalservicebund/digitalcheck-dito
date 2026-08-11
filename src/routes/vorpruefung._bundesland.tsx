@@ -41,6 +41,9 @@ export function VorpruefungBundesland({
         Wählen Sie Ihr Bundesland oder den Bund aus
       </Select>
       <ButtonContainer>
+        <LinkButton href={prevPath} look="tertiary" id="land-back-button">
+          {general.buttonBack.text}
+        </LinkButton>
         <Button
           type="submit"
           disabled={form.formState.isSubmitting}
@@ -48,9 +51,6 @@ export function VorpruefungBundesland({
         >
           {preCheck.nextButton}
         </Button>
-        <LinkButton href={prevPath} look="tertiary" id="land-back-button">
-          {general.buttonBack.text}
-        </LinkButton>
       </ButtonContainer>
     </form>
   );

@@ -37,7 +37,7 @@ function getIconForReason(reason: Reason) {
     case "yes":
       return (
         <ControlPointOutlined
-          className={twJoin(defaultClasses, "fill-ds-green-900")}
+          className={twJoin(defaultClasses, "fill-green-900")}
         ></ControlPointOutlined>
       );
     case "no":
@@ -55,7 +55,7 @@ function getReasonListItem(reason: Reason) {
   return (
     <li key={reason.text} className="flex items-start gap-12">
       {getIconForReason(reason)}
-      <div>
+      <div className="max-sm:hyphens-auto">
         {reason.text}
         {reason.tooltip && <InfoTooltip>{reason.tooltip}</InfoTooltip>}
         {reason.hint && <RichText markdown={reason.hint} />}
@@ -138,7 +138,7 @@ export default function Result() {
             >
               {vorhabenTitle && <PrintTitle title={vorhabenTitle} />}
               <div className="flex flex-col gap-16 sm:flex-row">
-                <div className="flex size-36 flex-none items-center justify-center">
+                <div className="mt-18 flex size-36 flex-none items-center justify-center">
                   {getHeaderIcon()}
                 </div>
                 <div>
@@ -178,6 +178,7 @@ export default function Result() {
                   <RichText markdown={resultContent.inlineNoticeContent.text} />
                 </InlineNotice>
               )}
+              {/* <div className="border-b-2 border-solid border-gray-400 pb-40 last:border-0 last:pb-0 print:border-0 print:pb-0"> */}
               <DetailsSummary
                 data-testid="result-details"
                 title={preCheckResult.detailsTitle}
@@ -188,7 +189,7 @@ export default function Result() {
                   .map(({ intro, reasons }) => (
                     <React.Fragment key={intro}>
                       <RichText markdown={intro} className="first:mt-16" />
-                      <ul className="ds-stack ds-stack-16 mt-16 mb-40 pl-0">
+                      <ul className="kern-stack kern-stack-md mt-16 mb-40 pl-0">
                         {reasons
                           .toSorted((a, b) => {
                             if (a.answer === b.answer) {
@@ -251,7 +252,7 @@ export default function Result() {
                     />
                   </InfoBox>
                 )}
-                <div className="ds-stack ds-stack-16">
+                <div className="kern-stack kern-stack-md">
                   <Heading
                     tagName="h3"
                     className="ds-label-section"

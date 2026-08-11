@@ -32,12 +32,12 @@ function Input({
   const hasWarning = !!(error || field.error()) && warningInsteadOfError;
 
   return (
-    <div className="space-y-8">
-      <label htmlFor={inputId} className="ds-label-01-reg block">
+    <div className="kern-form-input">
+      <label htmlFor={inputId} className="kern-label">
         {children}
       </label>
       {description && (
-        <p className="ds-body-02-reg block text-gray-900" id={descriptionId}>
+        <p className="kern-hint" id={descriptionId}>
           {description}
         </p>
       )}
@@ -49,9 +49,10 @@ function Input({
           "aria-invalid": hasError || hasWarning,
           "aria-errormessage": hasError || hasWarning ? errorId : undefined,
           className: twMerge(
-            "ds-input placeholder-gray-800",
-            hasError && "has-error",
-            hasWarning && "has-warning",
+            "kern-form-input__input bg-white",
+            hasError && "kern-form-input__input--error",
+            hasWarning &&
+              "bg-white border-yellow-700 text-black focus:border-4 focus:border-yellow-700 focus:outline-none",
           ),
           ...rest,
         })}

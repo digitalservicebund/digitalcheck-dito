@@ -26,17 +26,17 @@ const { headline, text, nextButton, hint } = generalInfo;
     </InlineNotice>
     <ButtonContainer>
       <LinkButton
+        id={"generalInfo-back-button"}
+        href={vorpruefung.path}
+        look={"secondary"}
+      >
+        {general.buttonBack.text}
+      </LinkButton>
+      <LinkButton
         id={"generalInfo-next-button"}
         href={vorpruefung_bundesland.path}
       >
         {nextButton}
-      </LinkButton>
-      <LinkButton
-        id={"generalInfo-back-button"}
-        href={vorpruefung.path}
-        look={"tertiary"}
-      >
-        {general.buttonBack.text}
       </LinkButton>
     </ButtonContainer>
   </div>

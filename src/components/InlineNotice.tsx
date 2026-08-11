@@ -24,22 +24,22 @@ const lookConfig = {
   },
   warning: {
     backgroundColor: "bg-yellow-200",
-    borderColor: "border-ds-yellow-700",
+    borderColor: "border-yellow-700",
     IconComponent: WarningAmberIcon,
   },
   missingOrIncomplete: {
     backgroundColor: "bg-yellow-200",
-    borderColor: "border-ds-yellow-700",
+    borderColor: "border-yellow-700",
     IconComponent: LightbulbOutlinedIcon,
   },
   support: {
     backgroundColor: "bg-yellow-200",
-    borderColor: "border-ds-yellow-700",
+    borderColor: "border-yellow-700",
     IconComponent: ContactSupportOutlinedIcon,
   },
   tips: {
     backgroundColor: "bg-gray-100",
-    borderColor: "border-ds-gray-600",
+    borderColor: "border-gray-600",
     IconComponent: LightbulbOutlinedIcon,
   },
 };

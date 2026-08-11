@@ -1,0 +1,13 @@
+---
+import AccordionItem from "@/components/AccordionItem.tsx";
+import RichText from "@/components/RichText.tsx";
+import { preCheck } from "@/resources/content/vorpruefung.ts";
+---
+
+{
+  preCheck.faq.items.map((item) => (
+    <AccordionItem headline={item.headline} client:load>
+      <RichText markdown={item.content} />
+    </AccordionItem>
+  ))
+}

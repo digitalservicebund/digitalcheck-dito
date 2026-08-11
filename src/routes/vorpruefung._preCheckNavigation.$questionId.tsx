@@ -164,6 +164,13 @@ export function PreCheckQuestion({
           </InlineNotice>
         )}
         <ButtonContainer>
+          <LinkButton
+            id={"preCheck-back-button"}
+            href={question.prevLink}
+            look={"secondary"}
+          >
+            {general.buttonBack.text}
+          </LinkButton>
           <Button
             type="submit"
             disabled={form.formState.isSubmitting}
@@ -171,13 +178,6 @@ export function PreCheckQuestion({
           >
             {nextButton}
           </Button>
-          <LinkButton
-            id={"preCheck-back-button"}
-            href={question.prevLink}
-            look={"tertiary"}
-          >
-            {general.buttonBack.text}
-          </LinkButton>
         </ButtonContainer>
       </div>
     </form>

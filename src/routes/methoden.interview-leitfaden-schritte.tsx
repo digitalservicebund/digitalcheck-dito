@@ -122,7 +122,6 @@ export default function InterviewMethods() {
                     `}
                   />
                   <DownloadLinkButton
-                    look="link"
                     href={withBase(
                       "/documents/interview-leitfaden/Akteurlandschaft_Analyse.pptx",
                     )}
@@ -187,7 +186,6 @@ export default function InterviewMethods() {
                     `}
                     />
                     <DownloadLinkButton
-                      look="link"
                       href={withBase(
                         "/documents/interview-leitfaden/Umsetzung_verstehen.docx",
                       )}
@@ -226,7 +224,6 @@ export default function InterviewMethods() {
                     `}
                     />
                     <DownloadLinkButton
-                      look="link"
                       href={withBase(
                         "/documents/interview-leitfaden/Zielgruppenanaylse-Buergercheck.pptx",
                       )}
@@ -418,7 +415,6 @@ export default function InterviewMethods() {
               `}
             />
             <DownloadLinkButton
-              look="link"
               href={withBase(
                 "/documents/interview-leitfaden/Ablaufplan_Interviewführung.docx",
               )}
@@ -450,7 +446,6 @@ export default function InterviewMethods() {
             </li>
             <li>
               <DownloadLinkButton
-                look="link"
                 href={withBase(
                   "/documents/interview-leitfaden/Buergercheck.pdf",
                 )}

@@ -28,6 +28,15 @@ export const news = {
   items: [
     {
       badge: {
+        text: "10.08.2026",
+      },
+      content: dedent`
+        Umstellung auf KERN Design System.
+        
+        [KERN UX Standard]("https://www.kern-ux.de/")`,
+    },
+    {
+      badge: {
         text: "13.07.2026",
       },
       content: dedent`
