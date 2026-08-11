@@ -1,0 +1,1 @@
+var e=e=>e.toLowerCase().replaceAll(/[^a-zA-Z0-9]+/g,`-`),t=e=>e.startsWith(`http`),n=(e,t)=>(t?`${t}-`:``)+e.split(``).reduce((e,t)=>e+(t.codePointAt(0)??0),0);export{t as n,e as r,n as t};
