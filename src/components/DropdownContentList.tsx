@@ -94,7 +94,7 @@ export default function DropdownContentList({
                 )}
                 <div className="kern-label">
                   {option.title}{" "}
-                  {isExternal && <OpenInNewIcon className="fill-ds-blue-800" />}
+                  {isExternal && <OpenInNewIcon className="fill-blue-800" />}
                 </div>
               </div>
               {option.content && (
