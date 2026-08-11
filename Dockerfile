@@ -2,14 +2,20 @@
 FROM node:26.1.0-alpine3.23 AS base
 
 ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN npm install --ignore-scripts -g corepack@0.35.0
+ENV MISE_DATA_DIR="/mise"
+ENV PATH="$PNPM_HOME:/mise/shims:$PATH"
+# Alpine v3.23's own community repo ships mise 2025.8.20, which predates aqua
+# libc-variant support (https://github.com/jdx/mise/pull/9652) and fails to
+# install musl-aware tools like pnpm. Pull mise from edge instead, keeping the
+# rest of the base image on v3.23.
+RUN apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community mise
 
 FROM base AS build
 WORKDIR /src
+COPY mise.toml ./
+# Installs the exact pnpm version pinned in mise.toml
+RUN mise trust && mise install pnpm
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-# Installs the exact pnpm version pinned in package.json's "packageManager" field
-RUN corepack enable && corepack install
 RUN pnpm install --frozen-lockfile --ignore-scripts
 
 

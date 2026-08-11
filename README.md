@@ -24,25 +24,15 @@ cp ./tests/feature-flags.json ./feature-flags.json
 
 ### 2. Node.js & Dependencies
 
-We aim to use the current active [LTS version of nodejs](https://nodejs.dev/en/about/releases/) (>=20.19.0). The `.node-version` file simplifies setup when using a version manager like [nodenv](https://github.com/nodenv/nodenv).
+We aim to use the current active [LTS version of nodejs](https://nodejs.dev/en/about/releases/). We use [mise](https://mise.jdx.dev/) to manage the runtimes and tools for development.
 
-Install the dependencies using [pnpm](https://pnpm.io/).
-
-```bash
-pnpm install --frozen-lockfile --ignore-scripts
-```
+Install the dependencies by [integrating mise into your shell](https://mise.jdx.dev/getting-started.html#activate-mise).
 
 ### 3. Git Hooks
 
 The project uses [Lefthook](https://github.com/evilmartians/lefthook) to manage Git hooks. These hooks help ensure code quality and security before you commit and push.
 
-First, install the required command-line tools:
-
-```bash
-brew install lefthook talisman gitleaks
-```
-
-Then, activate the hooks:
+To activate the hooks, run:
 
 ```bash
 ./run.sh init
