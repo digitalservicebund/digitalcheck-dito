@@ -1,11 +1,4 @@
 import twMerge from "@/utils/tailwindMerge";
-import {
-  Label,
-  Listbox,
-  ListboxButton,
-  ListboxOption,
-  ListboxOptions,
-} from "@headlessui/react";
 import type { FormScope } from "@rvf/react";
 import { useField } from "@rvf/react";
 import type { ReactNode } from "react";
@@ -32,58 +25,49 @@ function Select({
   className,
 }: Readonly<SelectProps>) {
   const field = useField(scope);
-  const {
-    value: fieldValue,
-    onChange: fieldOnChange,
-    onBlur: fieldOnBlur,
-    name: fieldName,
-  } = field.getControlProps();
+  const inputId = useId();
   const errorId = useId();
   const descriptionId = useId();
   const hasError = !!(error || field.error()) && !warningInsteadOfError;
   const hasWarning = !!(error || field.error()) && warningInsteadOfError;
 
   return (
-    <div className={twMerge("space-y-8", className)}>
-      <Listbox
-        value={fieldValue ?? ""}
-        onChange={fieldOnChange}
-        name={fieldName}
-      >
-        <Label className="ds-label-01-reg block">{children}</Label>
-        {description && (
-          <p className="ds-body-02-reg block text-gray-900" id={descriptionId}>
-            {description}
-          </p>
+    <div className={twMerge("kern-form-input", className)}>
+      <label htmlFor={inputId} className="kern-label">
+        {children}
+      </label>
+      {description && (
+        <p className="kern-hint" id={descriptionId}>
+          {description}
+        </p>
+      )}
+      <div
+        className={twMerge(
+          "kern-form-input__select-wrapper",
+          hasWarning &&
+            "border-yellow-700 focus-within:border-4 focus-within:border-yellow-700",
         )}
-        <ListboxButton
-          aria-describedby={description ? descriptionId : undefined}
-          aria-invalid={hasError || hasWarning}
-          aria-errormessage={hasError || hasWarning ? errorId : undefined}
-          className={twMerge(
-            "ds-select w-full text-left",
-            hasError && "has-error",
-            hasWarning && "has-warning",
-          )}
-          onBlur={fieldOnBlur}
+      >
+        <select
+          {...field.getInputProps({
+            id: inputId,
+            "aria-describedby": description ? descriptionId : undefined,
+            "aria-invalid": hasError || hasWarning,
+            "aria-errormessage": hasError || hasWarning ? errorId : undefined,
+            className: twMerge(
+              "kern-form-input__select bg-white",
+              hasError && "kern-form-input__select--error",
+            ),
+          })}
         >
-          {fieldValue ?? ""}
-        </ListboxButton>
-        <ListboxOptions
-          anchor="bottom start"
-          className="z-10 w-(--button-width) border border-gray-300 bg-white shadow-md focus:outline-none"
-        >
+          <option value="">Bitte auswählen</option>
           {options.map((option) => (
-            <ListboxOption
-              key={option}
-              value={option}
-              className="data-active:border-ds-blue-800 cursor-default border-l-4 border-transparent px-16 py-8 data-active:bg-blue-100 data-selected:font-bold"
-            >
+            <option key={option} value={option}>
               {option}
-            </ListboxOption>
+            </option>
           ))}
-        </ListboxOptions>
-      </Listbox>
+        </select>
+      </div>
 
       {(hasError || hasWarning) && (
         <InputError

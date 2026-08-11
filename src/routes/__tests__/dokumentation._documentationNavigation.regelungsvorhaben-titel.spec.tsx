@@ -56,11 +56,11 @@ describe("DocumentationTitle", () => {
     });
 
     it("shows a select element with the expected label", () => {
-      const select = screen.getByRole("button", {
+      const select = screen.getByRole("combobox", {
         name: "Wählen Sie Ihr Bundesland oder den Bund aus",
       });
       expect(select).toBeInTheDocument();
-      expect(select).toHaveAttribute("aria-haspopup", "listbox");
+      expect(select.tagName).toBe("SELECT");
     });
 
     it("shows submit button", () => {
