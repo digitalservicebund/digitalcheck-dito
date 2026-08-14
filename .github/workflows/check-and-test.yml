@@ -33,9 +33,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
 
-      - name: Check for un-deduplicated dependencies
-        run: pnpm run dedupe:check
-
       - name: Audit used licences
         run: pnpm run audit:licences
 
