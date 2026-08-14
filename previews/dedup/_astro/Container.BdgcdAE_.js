@@ -1,1 +1,0 @@
-import{n as e,t}from"./jsx-runtime.C_nfB65q.js";var n=t();function r({overhangingBackground:t,children:r,className:i}){let a=e(`container py-40`,t&&`rounded-lg container-overhanging-background`,i);return(0,n.jsx)(`div`,{className:a,children:r})}export{r as t};
