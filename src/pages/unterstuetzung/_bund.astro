@@ -10,6 +10,9 @@ import InfoBox from "@/components/InfoBox";
 import RichText from "@/components/RichText";
 import { contact } from "@/resources/content/shared/contact";
 import { supportTabs } from "./_supportTabs";
+import IconOutlineDraw from "~icons/ic/outline-draw";
+import IconOutlinePlaylistAddCheck from "~icons/ic/outline-playlist-add-check";
+import IconOutlineAdsClick from "~icons/ic/outline-ads-click";
 
 type Props = HTMLAttributes<"section">;
 ---
@@ -17,20 +20,23 @@ type Props = HTMLAttributes<"section">;
 <section class="my-80 space-y-80" {...Astro.props}>
   <FeatureSet>
     <FeatureItem
-      icon="ic:outline-draw"
       title="Visualisierungen erstellen"
       body="Wir erstellen in wenigen Tagen eine Visualisierung für Sie — hilfreich um Sachverhalte abzustimmen, Zusammenhänge zu verstehen und für Abstimmungen im Haus und zwischen Ressorts."
-    />
+    >
+      <IconOutlineDraw slot="icon" />
+    </FeatureItem>
     <FeatureItem
-      icon="ic:outline-playlist-add-check"
       title="Schnelle Hilfe für den Digitalcheck"
       body="Wir erklären, welche Schritte es gibt, welche Dokumente Sie wann benötigen und schätzen den Digitalbezug mit Ihnen ein (Vorprüfung ausfüllen)."
-    />
+    >
+      <IconOutlinePlaylistAddCheck slot="icon" />
+    </FeatureItem>
     <FeatureItem
-      icon="ic:outline-ads-click"
       title="Digitales Potenzial ausschöpfen"
       body="Wir unterstützen Sie dabei die digitalen Potenziale Ihres Vorhabens auszuschöpfen, zu verbessern oder neu zu gestalten."
-    />
+    >
+      <IconOutlineAdsClick slot="icon" />
+    </FeatureItem>
   </FeatureSet>
   <div class="rounded-xl bg-blue-100 p-40 md:px-80">
     <h2 id="hilfe">Schnelle Hilfe und individuelle Beratung</h2>
