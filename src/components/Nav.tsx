@@ -1,10 +1,6 @@
 import { general } from "@/resources/content/shared/general";
 import twMerge from "@/utils/tailwindMerge";
-import {
-  Check,
-  ChevronLeft,
-  WarningAmberOutlined,
-} from "@digitalservicebund/icons";
+import { Check, WarningAmberOutlined } from "@digitalservicebund/icons";
 import {
   Disclosure,
   DisclosureButton,
@@ -253,7 +249,10 @@ function NavItem({
       <DisabledItem>
         {children}
         {subItems && (
-          <ChevronLeft className="w-5 rotate-270 group-data-open:rotate-90" />
+          <span
+            className="kern-icon kern-icon--chevron-right kern-icon--default group-data-open:rotate-90"
+            aria-hidden="true"
+          ></span>
         )}
       </DisabledItem>
     );
@@ -308,7 +307,10 @@ function NavItem({
                   {hasError && <WarningAmberOutlined className="shrink-0" />}
                   {children}
                 </span>
-                <ChevronLeft className="w-5 rotate-270 group-data-open:rotate-90" />
+                <span
+                  className="kern-icon kern-icon--chevron-right kern-icon--default group-data-open:rotate-90"
+                  aria-hidden="true"
+                ></span>
               </span>
             </DisclosureButton>
 

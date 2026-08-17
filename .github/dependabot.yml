@@ -35,6 +35,15 @@ updates:
         patterns:
           - "playwright-core"
           - "@playwright/*"
+      astro:
+        patterns:
+          - "astro"
+          - "@astrojs/*"
+          - "astro-route-generator"
+          - "vite"
+          - "vite-plugin-*"
+          - "vitest"
+          - "@vitejs/*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
