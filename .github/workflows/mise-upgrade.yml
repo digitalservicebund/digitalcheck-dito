@@ -1,0 +1,46 @@
+name: Upgrade mise-managed tool versions
+
+# Dependabot does not support the mise ecosystem yet
+# (https://github.com/dependabot/dependabot-core/pull/14500), so this workflow
+# keeps the versions pinned in mise.toml from going stale silently.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * *" # Runs every day at 6am
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Setup mise
+        uses: jdx/mise-action@7e36c90d9ab29c415a2384db3006f3ec8a8cc654 # v4.2.4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upgrade pinned tool versions
+        # node is excluded: its version bumps have a bigger blast radius and
+        # deserve deliberate review rather than an automated PR.
+        run: mise upgrade --bump --exclude node
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          commit-message: "chore(mise): bump pinned tool versions"
+          title: "chore(mise): bump pinned tool versions"
+          body: >
+            Automated upgrade of the tool versions pinned in `mise.toml`
+            (all except node). Dependabot does not currently support the
+            mise ecosystem, so this workflow keeps these pins from going
+            stale.
+          branch: chore/mise-upgrade
+          labels: dependencies
