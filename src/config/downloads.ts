@@ -28,11 +28,6 @@ export const zustaendigeAkteureXlsx: DownloadRoute = {
   filename: "Vorlage - Zuständige Akteurinnen und Akteure.xlsx",
 };
 
-export const dokumentationTemplateWord: DownloadRoute = {
-  path: `${basePath}/documents/TEMPLATE_Dokumentation_der_Digitaltauglichkeit.docx`,
-  filename: "Dokumentation_der_Digitaltauglichkeit.docx",
-};
-
 export const dokumentationTemplateWordInterops: DownloadRoute = {
   path: `${basePath}/documents/TEMPLATE_Dokumentation_der_Digitaltauglichkeit_Interoperabilitaet.docx`,
   filename: "Dokumentation_der_Digitaltauglichkeit.docx",
