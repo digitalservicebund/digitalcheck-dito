@@ -1,16 +1,12 @@
 import { dedent } from "@/utils/dedentMultilineStrings";
-import { isIeaAssessmentEnabled } from "@/utils/features.ts";
 import { TipsAndUpdatesOutlined } from "@digitalservicebund/icons";
 import { contact } from "./shared/contact";
 
 export const digitalDocumentation = {
   start: {
-    title: isIeaAssessmentEnabled
-      ? "Dokumentation der Digitaltauglichkeit und EU-Interoperabilität"
-      : "Dokumentation der Digitaltauglichkeit",
-    subtitle: isIeaAssessmentEnabled
-      ? "Die Dokumentation der Digitaltauglichkeit und ggf. EU-Interoperabilität (nach Verordnung (EU) 2024/903) ist ein formeller, letzter Schritt. Sie dokumentieren, auf welche Aspekte Sie besonders geachtet haben und wie diese ins Regelungsvorhaben eingeflossen sind, damit digitale Potenziale genutzt werden und europaweite Interoperabilität gelingen kann."
-      : "Die Dokumentation der Digitaltauglichkeit ist ein formeller, letzter Schritt. Sie dokumentieren, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben und wie diese ins Regelungsvorhaben eingeflossen sind.",
+    title: "Dokumentation der Digitaltauglichkeit und EU-Interoperabilität",
+    subtitle:
+      "Die Dokumentation der Digitaltauglichkeit und ggf. EU-Interoperabilität (nach Verordnung (EU) 2024/903) ist ein formeller, letzter Schritt. Sie dokumentieren, auf welche Aspekte Sie besonders geachtet haben und wie diese ins Regelungsvorhaben eingeflossen sind, damit digitale Potenziale genutzt werden und europaweite Interoperabilität gelingen kann.",
     actions: {
       startInitial: {
         buttonText: "Dokumentation starten",

@@ -10,7 +10,6 @@ import {
   dokumentation_regelungsvorhabenTitel,
   dokumentation_zusammenfassung,
 } from "@/config/routes";
-import { isIeaAssessmentEnabled } from "@/utils/features.ts";
 import {
   downloadDocumentAndGetText,
   expect,
@@ -52,10 +51,9 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
     await page
       .getByLabel(digitalDocumentation.info.inputTitle.label)
       .fill(testData.title);
-    if (isIeaAssessmentEnabled)
-      await page
-        .getByLabel("Ministerium / Organisation")
-        .fill(testData.organization);
+    await page
+      .getByLabel("Ministerium / Organisation")
+      .fill(testData.organization);
     await page.getByRole("button", { name: "Weiter" }).click();
 
     await expect(page).toHaveURL(dokumentation_beteiligungsformate.path);
@@ -125,13 +123,13 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
     );
     const expectedStrings = [
       testData.title,
-      isIeaAssessmentEnabled && testData.organization,
+      testData.organization,
       testData.participationFormats,
       testData.participationResults,
       "Digitale Angebote",
       "Ja, gänzlich oder teilweise",
       testData.positiveReasoning,
-    ].filter((value): value is string => !!value);
+    ];
     expect(docText).toHaveStringsOrdered(expectedStrings);
     expectDocumentToNotContainTags(docText);
 
