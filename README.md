@@ -26,6 +26,8 @@ cp ./tests/feature-flags.json ./feature-flags.json
 
 We aim to use the current active [LTS version of nodejs](https://nodejs.dev/en/about/releases/). We use [mise](https://mise.jdx.dev/) to manage the runtimes and tools for development.
 
+You need to have mise installed on your computer; see the [mise installation docs](https://mise.jdx.dev/installing-mise.html) for the available options.
+
 Install the dependencies by [integrating mise into your shell](https://mise.jdx.dev/getting-started.html#activate-mise).
 
 ### 3. Git Hooks

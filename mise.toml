@@ -5,6 +5,9 @@ lefthook = '2.1.10'
 "github:thoughtworks/talisman" = '1.37.0'
 pnpm = '11.22.0'
 
+[settings]
+lockfile = true
+
 [env]
 _.path = ['{{config_root}}/node_modules/.bin']
 
