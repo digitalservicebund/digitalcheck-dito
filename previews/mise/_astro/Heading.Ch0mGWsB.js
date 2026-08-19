@@ -1,1 +1,0 @@
-import{n as e,t}from"./jsx-runtime.C_nfB65q.js";var n=t();function r({tagName:t=`h1`,text:r,className:i,look:a,id:o,children:s,ariaLabel:c,...l}){let u=t,d=e(`sm:hyphens-none`,a,i);return s?(0,n.jsx)(u,{id:o,className:d,"aria-label":c,...l,children:s}):(0,n.jsx)(u,{id:o,className:d,"aria-label":c,...l,dangerouslySetInnerHTML:{__html:r??``}})}export{r as t};
