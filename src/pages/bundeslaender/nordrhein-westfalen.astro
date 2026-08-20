@@ -1,5 +1,11 @@
 ---
 import LaenderLayout from "@/layouts/LaenderLayout.astro";
+import {
+  vorpruefung,
+  methoden,
+  methoden_fuenfPrinzipien,
+  dokumentation,
+} from "@/config/routes";
 
 export const frontmatter = {
   title: "Digitalcheck NRW",
@@ -14,7 +20,9 @@ export const frontmatter = {
     digitaltauglich zu gestalten und den späteren Vollzug effizient zu
     ermöglichen.
   </p>
-  <div slot="intro" class="space-y-16">
+  <section
+    class="breakout space-y-16 bg-(--kern-color-layout-layer-surface-contextual)"
+  >
     <h2>Ziel und Nutzen</h2>
     <p>
       Digitale Fachverfahren und eine medienbruchfreie Abwicklung tragen dazu
@@ -23,9 +31,46 @@ export const frontmatter = {
       strukturiert durch die wichtigsten Schritte für eine digitaltaugliche
       Ausgestaltung Ihrer Rechtsnormen.
     </p>
-  </div>
-  <section>
+  </section>
+  <section class="space-y-32!">
     <h2>So führen Sie Ihren Digitalcheck durch:</h2>
+    <div class="space-y-16">
+      <p><span class="kern-number">1</span></p>
+      <h3>Vorprüfung</h3>
+      <p>
+        <a href={vorpruefung.path}>Prüfen</a> Sie zunächst, ob Ihr Vorhaben einen
+        Digitalbezug hat oder Anforderungen an die EU‑Interoperabilität bestehen.
+        Falls keiner der beiden Punkte gegeben ist, halten Sie dies im Gesetzesvorblatt
+        fest.
+      </p>
+    </div>
+    <div class="space-y-16">
+      <p><span class="kern-number">2</span></p>
+      <h3>Ausarbeitung</h3>
+      <p>
+        <a href={methoden.path}>Entwickeln</a> Sie ein Zielbild, indem Sie den Vollzug
+        Ihrer Norm frühzeitig durchdenken und den <a
+          href="https://zfl.bund.de/werkzeuge/">Ablaufprozess skizzieren</a
+        >. Nutzen Sie dazu die unten aufgeführten allgemeinen und
+        NRW-spezifischen Hilfestellungen. Formulieren Sie anschließend den
+        Normtext und berücksichtigen Sie dabei die <a
+          href={methoden_fuenfPrinzipien.path}
+          >Anforderungen der Digitaltauglichkeit</a
+        >.
+      </p>
+    </div>
+    <div class="space-y-16">
+      <p><span class="kern-number">3</span></p>
+      <h3>Dokumentation</h3>
+      <p>
+        <a href={dokumentation.path}>Dokumentieren</a> Sie, welche Aspekte Sie berücksichtigt
+        und ins Regelungsvorhaben integriert haben, wie dadurch Digitaltauglichkeit
+        und EU‑Interoperabilität sichergestellt werden, und welche digitalen Kriterien
+        Sie adressiert haben; laden Sie die Ergebnisse herunter oder nutzen Sie die
+        Word‑Vorlage. Das Ergebnis der Dokumentation kann als Anlage dem Gesetzesvorhaben
+        beigefügt werden.
+      </p>
+    </div>
   </section>
   <section class="breakout bg-darkblue-100">
     <h2>Nützliche Links und Hilfestellungen</h2>
@@ -69,9 +114,8 @@ export const frontmatter = {
 </LaenderLayout>
 
 <style>
-  @reference "../../styles/globals.css";
-
-  section {
-    @apply py-40 md:py-64;
+  .kern-number {
+    color: var(--kern-color-action-default-contextual, #2044aa);
+    border-color: var(--kern-color-action-default-contextual, #2044aa);
   }
 </style>
