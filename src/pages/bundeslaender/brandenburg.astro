@@ -3,12 +3,12 @@ import LaenderLayout from "@/layouts/LaenderLayout.astro";
 import { LinkButton } from "@/components/Button";
 
 export const frontmatter = {
-  title: "Brandenburg",
+  title: "Digitalcheck Brandenburg",
   isStagingOnly: true,
 };
 ---
 
-<LaenderLayout title={frontmatter.title}>
+<LaenderLayout title={frontmatter.title} bundesland="Brandenburg">
   <p slot="subtitle">
     Die Landesregierung Brandenburg verfolgt das Ziel, bürokratische Belastungen
     für Bürgerinnen und Bürger, Unternehmen sowie die Verwaltung auf das

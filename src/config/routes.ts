@@ -69,7 +69,7 @@ export const bundeslaender = {
 export const bundeslaender_brandenburg = {
   key: "bundeslaender_brandenburg",
   path: "/bundeslaender/brandenburg",
-  title: "Brandenburg",
+  title: "Digitalcheck Brandenburg",
   parent: bundeslaender,
   sitemap: true,
   isStagingOnly: true,
@@ -80,7 +80,7 @@ export const bundeslaender_brandenburg = {
 export const bundeslaender_hessen = {
   key: "bundeslaender_hessen",
   path: "/bundeslaender/hessen",
-  title: "Hessen",
+  title: "Digitalcheck Hessen",
   parent: bundeslaender,
   sitemap: true,
   isStagingOnly: true,
@@ -91,7 +91,7 @@ export const bundeslaender_hessen = {
 export const bundeslaender_nordrheinWestfalen = {
   key: "bundeslaender_nordrheinWestfalen",
   path: "/bundeslaender/nordrhein-westfalen",
-  title: "Nordrhein-Westfalen",
+  title: "Digitalcheck NRW",
   parent: bundeslaender,
   sitemap: true,
   isStagingOnly: true,

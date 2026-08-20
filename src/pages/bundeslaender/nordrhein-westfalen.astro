@@ -1,28 +1,77 @@
 ---
 import LaenderLayout from "@/layouts/LaenderLayout.astro";
-import { LinkButton } from "@/components/Button";
 
 export const frontmatter = {
-  title: "Nordrhein-Westfalen",
+  title: "Digitalcheck NRW",
   isStagingOnly: true,
 };
 ---
 
-<LaenderLayout title={frontmatter.title}>
+<LaenderLayout title={frontmatter.title} bundesland="Nordrhein-Westfalen">
   <p slot="subtitle">
-    Die Landesregierung Nordrhein-Westfalen verfolgt das Ziel, bürokratische
-    Belastungen für Bürgerinnen und Bürger, Unternehmen sowie die Verwaltung auf
-    das zwingend erforderliche Maß zu reduzieren.
+    Willkommen beim Digitalcheck für das Land Nordrhein-Westfalen. Diese Seite
+    bietet Ihnen kompakte Unterstützung, um Ihr Regelungsvorhaben
+    digitaltauglich zu gestalten und den späteren Vollzug effizient zu
+    ermöglichen.
   </p>
   <div slot="intro" class="space-y-16">
-    <h2>Überblick</h2>
+    <h2>Ziel und Nutzen</h2>
     <p>
-      Die Landesregierung {frontmatter.title} verfolgt das Ziel, bürokratische Belastungen
-      für Bürgerinnen und Bürger, Unternehmen sowie die Verwaltung auf das zwingend
-      erforderliche Maß zu reduzieren.
+      Digitale Fachverfahren und eine medienbruchfreie Abwicklung tragen dazu
+      bei, Prozesse zu vereinfachen und Bürgerinnen und Bürger, Unternehmen
+      sowie staatliche Stellen spürbar zu entlasten. Der Digitalcheck führt Sie
+      strukturiert durch die wichtigsten Schritte für eine digitaltaugliche
+      Ausgestaltung Ihrer Rechtsnormen.
     </p>
-    <div class="mt-[18px]">
-      <LinkButton>Mehr dazu erfahren</LinkButton>
-    </div>
   </div>
+  <section>
+    <h2>So führen Sie Ihren Digitalcheck durch:</h2>
+  </section>
+  <section class="breakout bg-darkblue-100">
+    <h2>Nützliche Links und Hilfestellungen</h2>
+    <p class="mb-16">
+      Diese Anlaufstellen und Materialien unterstützen Sie bei Visualisierung,
+      Einschätzung, Gestaltung und Dokumentation Ihres Vorhabens:
+    </p>
+    <ul>
+      <li>
+        <a
+          href="https://recht.nrw.de/lrgv/gesetz/17072025-gesetz-zur-foerderung-der-elektronischen-verwaltung-nordrhein-westfalen-e/"
+          >E-Government-Gesetz NRW</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903"
+          >Europäische Interoperabilitätsverordnung</a
+        >
+      </li>
+      <li>
+        <a href="https://interoperable-europe.ec.europa.eu/"
+          >Interoperable Europe Portal</a
+        >
+      </li>
+      <li><a href="https://fimportal.de/">FIM Portal</a></li>
+      <li>
+        <a href="https://informationsplattform.ozg-umsetzung.de/iNG/app/intro"
+          >OZG - Informationsplattform</a
+        >
+      </li>
+      <li>
+        <a href="https://zfl.bund.de/">Zentrum für Legistik des Bundes</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>Schulungen</h2>
+    <p>Schulungsangebote folgen.</p>
+  </section>
 </LaenderLayout>
+
+<style>
+  @reference "../../styles/globals.css";
+
+  section {
+    @apply py-40 md:py-64;
+  }
+</style>

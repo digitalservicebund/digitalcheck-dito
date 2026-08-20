@@ -12,18 +12,20 @@ import {
 } from "@/config/routes";
 
 export const frontmatter = {
-  title: "Hessen",
+  title: "Digitalcheck Hessen",
   isStagingOnly: true,
 };
 ---
 
-<LaenderLayout title={frontmatter.title}>
+<LaenderLayout title={frontmatter.title} bundesland="Hessen">
   <p slot="subtitle">
     Herzlich Willkommen beim Digitalcheck für das Land Hessen. Auf dieser Seite
     finden Sie nützliche Informationen und Hilfestellungen für eine
     digitaltaugliche Gestaltung Ihrer Rechtsnormen.
   </p>
-  <div slot="intro" class="space-y-16">
+  <section
+    class="breakout space-y-16 bg-(--kern-color-layout-layer-surface-contextual)"
+  >
     <h2>Überblick</h2>
     <p>
       Gesetze, Rechtsverordnungen und Förderrichtlinien sind in Hessen so zu
@@ -34,10 +36,10 @@ export const frontmatter = {
       Stellen entlasten. § 18 HEGovG bündelt dieses im Koalitionsvertrag
       niedergelegte Ziel in Form einer gesetzlichen Verpflichtung.
     </p>
-  </div>
-  <section class="space-y-40 py-80">
+  </section>
+  <section class="space-y-40">
     <div class="flex items-center gap-48 pb-40">
-      <Image src={hessenLogo} alt="Logo von Hessen" class="h-auto w-[136px]" />
+      <Image src={hessenLogo} alt="Logo von Hessen" class="h-auto w-136" />
       <p>
         Der Digitalcheck des Landes ist ein Werkzeug, das Sie bei der
         Erarbeitung eines digitaltauglichen Regelungsvorhaben unterstützt.
@@ -107,71 +109,68 @@ export const frontmatter = {
         </NumberedList>
       </div>
     </div>
-  </section><section class="breakout bg-blue-300 px-80 py-40">
-    <div class="space-y-24 px-80 py-40">
-      <h2>Links und Ansprechpartner von A - Z</h2>
-      <p>
-        Nachfolgend finden Sie einige nützliche Links und Ansprechpartner, die
-        Sie im Prozess nicht unbedingt benötigen, hier aber bei Bedarf einmal
-        aufgelistet zur Verfügung haben.
-      </p>
-      <ul>
-        <li>
-          <a
-            href="https://map.intern.hessen.de/irj/go/hessen/startseite/fachinformationen/recht/normgebung-und-pruumlfung/vorschriftencontrolling?area=Land-Hessen"
-            target="_blank"
-            >Arbeitsgruppe Verwaltungsvereinfachung (Dokumente)</a
-          ><br />
-        </li>
-        <li>
-          <a
-            href="https://map.intern.hessen.de/irj/go/hessen/startseite/fachinformationen/recht/hessen-norm/egesetz/konzept-und-arbeitshilfen"
-            target="_blank">eGesetz Hessen (Konzept und Arbeitshilfen)</a
-          >
-        </li>
-        <li>
-          <a
-            href="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903"
-            target="_blank">Europäische Interoperabilitätsverordnung</a
-          >
-        </li>
-        <li><a href="https://fimportal.de/" target="_blank">FIM Portal</a></li>
-        <li>
-          <a href="https://datenschutz.hessen.de/" target="_blank"
-            >Hessischer Beauftragter für Datenschutz und Informationsfreiheit</a
-          >
-        </li>
-        <li>
-          <a
-            href="https://www.rv.hessenrecht.hessen.de/bshe/document/jlr-NNLHE000053F5NN00000000029"
-            target="_blank">Hessisches E-Government-Gesetz (§ 18)</a
-          >
-        </li>
-        <li>
-          <a
-            href="https://hessen.de/sites/hessen.hessen.de/files/2024-01/koalitionsvertrag_fuer_die_21._legislaturperiode.pdf"
-            target="_blank">Hessischer Koalitionsvertrag 2024 – 2029 (Auszug)</a
-          >
-        </li>
-        <li>
-          <a href="https://interoperable-europe.ec.europa.eu/" target="_blank"
-            >Interoperable Europe Portal</a
-          >
-        </li>
-        <li>
-          <a
-            href="https://informationsplattform.ozg-umsetzung.de/iNG/app/intro"
-            target="_blank">OZG - Informationsplattform</a
-          >
-        </li>
-        <li>
-          <a href="https://zfl.bund.de/" target="_blank">Zentrum für Legistik</a
-          >
-        </li>
-      </ul>
-    </div>
   </section>
-  <section class="py-80">
+  <section class="breakout bg-darkblue-100 space-y-24">
+    <h2>Links und Ansprechpartner von A - Z</h2>
+    <p>
+      Nachfolgend finden Sie einige nützliche Links und Ansprechpartner, die Sie
+      im Prozess nicht unbedingt benötigen, hier aber bei Bedarf einmal
+      aufgelistet zur Verfügung haben.
+    </p>
+    <ul>
+      <li>
+        <a
+          href="https://map.intern.hessen.de/irj/go/hessen/startseite/fachinformationen/recht/normgebung-und-pruumlfung/vorschriftencontrolling?area=Land-Hessen"
+          target="_blank">Arbeitsgruppe Verwaltungsvereinfachung (Dokumente)</a
+        ><br />
+      </li>
+      <li>
+        <a
+          href="https://map.intern.hessen.de/irj/go/hessen/startseite/fachinformationen/recht/hessen-norm/egesetz/konzept-und-arbeitshilfen"
+          target="_blank">eGesetz Hessen (Konzept und Arbeitshilfen)</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903"
+          target="_blank">Europäische Interoperabilitätsverordnung</a
+        >
+      </li>
+      <li><a href="https://fimportal.de/" target="_blank">FIM Portal</a></li>
+      <li>
+        <a href="https://datenschutz.hessen.de/" target="_blank"
+          >Hessischer Beauftragter für Datenschutz und Informationsfreiheit</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.rv.hessenrecht.hessen.de/bshe/document/jlr-NNLHE000053F5NN00000000029"
+          target="_blank">Hessisches E-Government-Gesetz (§ 18)</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://hessen.de/sites/hessen.hessen.de/files/2024-01/koalitionsvertrag_fuer_die_21._legislaturperiode.pdf"
+          target="_blank">Hessischer Koalitionsvertrag 2024 – 2029 (Auszug)</a
+        >
+      </li>
+      <li>
+        <a href="https://interoperable-europe.ec.europa.eu/" target="_blank"
+          >Interoperable Europe Portal</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://informationsplattform.ozg-umsetzung.de/iNG/app/intro"
+          target="_blank">OZG - Informationsplattform</a
+        >
+      </li>
+      <li>
+        <a href="https://zfl.bund.de/" target="_blank">Zentrum für Legistik</a>
+      </li>
+    </ul>
+  </section>
+  <section>
     <h2>Schulungen</h2>
     <p>Schulungsangebote folgen.</p>
   </section>

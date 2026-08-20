@@ -1,52 +1,45 @@
 ---
 import Layout from "./Layout.astro";
-import Hero from "@/components/Hero.astro";
 import laenderMapUrl from "@/pages/bundeslaender/_assets/laender-map.svg?url";
 
 interface Props {
   title: string;
-  isParent?: boolean;
+  bundesland?: string;
 }
 
-const { title, isParent } = Astro.props;
-const displayTitle = isParent ? title : `Der Digitalcheck ${title}`;
-
-// named slots: `subtitle`, `intro`
+const { title, bundesland } = Astro.props;
 ---
 
-<Layout title={displayTitle}>
+<Layout title={title}>
   <main class="breakout-grid">
-    <Hero>
-      <h1>{displayTitle}</h1>
-      <slot name="subtitle" />
-    </Hero>
-    <div class="breakout bg-blue-300">
+    <div class="breakout bg-darkblue-100">
       <div class="flex flex-col lg:flex-row">
-        <div class="py-32 sm:py-48 lg:w-1/2 lg:self-center lg:pr-48">
-          <slot name="intro" />
+        <div class="space-y-24 py-32 sm:py-48 lg:w-1/2 lg:self-center lg:pr-48">
+          <h1>{title}</h1>
+          <slot name="subtitle" />
         </div>
         <div class="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">
           <div
-            class="flex h-full w-[630px] flex-col justify-center bg-blue-500 align-middle lg:w-[50vw]"
+            class="flex h-full w-630 flex-col justify-center align-middle lg:w-[50vw]"
           >
-            <div class="relative mx-auto h-[400px] lg:h-[550px]">
+            <div class="relative mx-auto h-400 py-24 lg:h-450">
               <img
                 src={laenderMapUrl}
                 alt="Eine stilisierte Karte von Deutschland"
                 class="h-full w-auto object-contain"
               />
               {
-                !isParent && (
+                bundesland && (
                   <svg
                     viewBox="0 0 592 801"
                     class="absolute inset-0 h-full w-full"
                     aria-hidden="true"
                   >
                     <use
-                      href={`${laenderMapUrl}#${title}`}
-                      fill="#DCE8EF"
-                      stroke="#336F91"
-                      stroke-width="3.5"
+                      href={`${laenderMapUrl}#${bundesland}`}
+                      fill="#a5b7e1"
+                      stroke="#0e2792"
+                      stroke-width="1.5"
                     />
                   </svg>
                 )
@@ -61,9 +54,15 @@ const displayTitle = isParent ? title : `Der Digitalcheck ${title}`;
 </Layout>
 
 <style>
+  @reference "../styles/globals.css";
+
   main {
     h2 {
       margin-bottom: 1rem;
+    }
+
+    section {
+      @apply py-40 md:py-64;
     }
   }
 </style>
