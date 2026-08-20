@@ -33,7 +33,6 @@ import {
   publicationLinkQuestion,
   publicationStatusQuestion,
 } from "@/routes/dokumentation/interoperability/values.ts";
-import { isIeaAssessmentEnabled } from "@/utils/features.ts";
 import { keyValueToMap } from "@/utils/keyValue.ts";
 import type { PrinzipWithAspekte } from "@/utils/strapiData.types";
 import { slugify } from "@/utils/utilFunctions";
@@ -135,10 +134,7 @@ function PolicyTitleContent({
     prefix: "Ministerium / Organisation",
     answer: policyTitle.organization,
   };
-  const answers = isIeaAssessmentEnabled
-    ? [titleAnswer, ministryAnswer]
-    : [titleAnswer];
-  return <Answer answers={answers} />;
+  return <Answer answers={[titleAnswer, ministryAnswer]} />;
 }
 
 function ParticipationContent({
@@ -304,7 +300,6 @@ function BindingRequirementSummary({
 function createInteroperabilityInfoBoxItems(
   documentationData: DocumentationData<"2">,
 ): InfoBoxProps[] {
-  if (!isIeaAssessmentEnabled) return [];
   const detailsRequired =
     documentationData.euInteroperabilityOutcome?.outcomeId === "REQUIRED";
 

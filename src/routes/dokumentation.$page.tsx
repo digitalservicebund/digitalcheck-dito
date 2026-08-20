@@ -74,7 +74,9 @@ export function DocumentationRouter({
   return (
     <DocumentationPageShell prinzips={prinzips} currentUrl={path}>
       {StaticComponent && <StaticComponent />}
-      {principleId && <PrincipleComponent principleId={principleId} />}
+      {principleId && (
+        <PrincipleComponent key={principleId} principleId={principleId} />
+      )}
     </DocumentationPageShell>
   );
 }

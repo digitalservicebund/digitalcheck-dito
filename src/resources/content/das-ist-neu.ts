@@ -33,7 +33,7 @@ export const news = {
       content: dedent`
         Umstellung auf KERN Design System.
         
-        [KERN UX Standard]("https://www.kern-ux.de/")`,
+        [KERN UX Standard](https://www.kern-ux.de/)`,
     },
     {
       badge: {

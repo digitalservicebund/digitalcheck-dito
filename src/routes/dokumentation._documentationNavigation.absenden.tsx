@@ -10,7 +10,6 @@ import { contact } from "@/resources/content/shared/contact.ts";
 import { useDocumentationDataService } from "@/routes/dokumentation/DocumentationDataProvider.tsx";
 import { useWordDocumentation } from "@/service/wordDocumentationExport/wordDocumentation";
 import { dedent } from "@/utils/dedentMultilineStrings";
-import { isIeaAssessmentEnabled } from "@/utils/features.ts";
 import { EmojiEventsOutlined as EmojiEventsOutlinedIcon } from "@digitalservicebund/icons";
 import { useDocumentationNavigation } from "./dokumentation/DocumentationNavigationContext";
 
@@ -56,7 +55,6 @@ export function DocumentationSend() {
   const { documentationData } = useDocumentationDataService();
 
   const interoperabilityRequired =
-    isIeaAssessmentEnabled &&
     documentationData.euInteroperabilityOutcome?.outcomeId === "REQUIRED";
 
   const firstStepPrefix = interoperabilityRequired ? "Schritt 1: " : "";

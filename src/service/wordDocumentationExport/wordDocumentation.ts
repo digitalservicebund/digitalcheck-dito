@@ -1,7 +1,4 @@
-import {
-  dokumentationTemplateWord,
-  dokumentationTemplateWordInterops,
-} from "@/config/downloads";
+import { dokumentationTemplateWordInterops } from "@/config/downloads";
 import { documentationDocument } from "@/resources/content/documentation-document";
 import { digitalDocumentation } from "@/resources/content/dokumentation";
 import { contact } from "@/resources/content/shared/contact";
@@ -18,7 +15,6 @@ import {
   toParagraphPatch,
 } from "@/service/wordDocumentationExport/docxUtils.ts";
 import { formatBindingRequirements } from "@/service/wordDocumentationExport/wordInteroperabilityAssessment.ts";
-import { isIeaAssessmentEnabled } from "@/utils/features.ts";
 import type { PrinzipWithAspekte } from "@/utils/strapiData.types";
 import { slugify } from "@/utils/utilFunctions";
 import type { IPatch } from "docx";
@@ -39,10 +35,7 @@ export function useWordDocumentation() {
       { templateOnly = false }: { templateOnly?: boolean } = {},
     ) => {
       try {
-        const path = isIeaAssessmentEnabled
-          ? dokumentationTemplateWordInterops.path
-          : dokumentationTemplateWord.path;
-        const template = await fetch(path);
+        const template = await fetch(dokumentationTemplateWordInterops.path);
         const templateData = await template.arrayBuffer();
         const doc = await createDoc(
           templateData,
