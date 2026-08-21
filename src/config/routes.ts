@@ -66,6 +66,39 @@ export const bundeslaender = {
   navLabel: null,
 } as const;
 
+export const bundeslaender_brandenburg = {
+  key: "bundeslaender_brandenburg",
+  path: "/bundeslaender/brandenburg",
+  title: "Digitalcheck Brandenburg",
+  parent: bundeslaender,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const bundeslaender_hessen = {
+  key: "bundeslaender_hessen",
+  path: "/bundeslaender/hessen",
+  title: "Digitalcheck Hessen",
+  parent: bundeslaender,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const bundeslaender_nordrheinWestfalen = {
+  key: "bundeslaender_nordrheinWestfalen",
+  path: "/bundeslaender/nordrhein-westfalen",
+  title: "Digitalcheck NRW",
+  parent: bundeslaender,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const dasIstNeu = {
   key: "dasIstNeu",
   path: "/das-ist-neu",
@@ -113,7 +146,7 @@ export const dokumentation = {
 export const dokumentation_absenden = {
   key: "dokumentation_absenden",
   path: "/dokumentation/absenden",
-  title: "Absenden",
+  title: "Herunterladen & Absenden",
   parent: dokumentation,
   sitemap: false,
   isStagingOnly: false,
@@ -495,6 +528,17 @@ export const vorpruefung = {
   navLabel: null,
 } as const;
 
+export const vorpruefung_bundesland = {
+  key: "vorpruefung_bundesland",
+  path: "/vorpruefung/bundesland",
+  title: "Bundesland",
+  parent: vorpruefung,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const vorpruefung_ergebnis = {
   key: "vorpruefung_ergebnis",
   path: "/vorpruefung/ergebnis",
@@ -534,6 +578,9 @@ export const allRoutes = [
   beispiele_prinzipien,
   beispiele_visualisierungen,
   bundeslaender,
+  bundeslaender_brandenburg,
+  bundeslaender_hessen,
+  bundeslaender_nordrheinWestfalen,
   dasIstNeu,
   datenschutz,
   dev,
@@ -573,6 +620,7 @@ export const allRoutes = [
   sitemap,
   unterstuetzung,
   vorpruefung,
+  vorpruefung_bundesland,
   vorpruefung_ergebnis,
   vorpruefung_hinweise,
   zahlenUndFakten,

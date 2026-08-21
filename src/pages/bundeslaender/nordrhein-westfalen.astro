@@ -1,0 +1,133 @@
+---
+import LaenderLayout from "@/layouts/LaenderLayout.astro";
+import { Image } from "astro:assets";
+import nrwLogo from "./_assets/nrw-logo.png";
+
+import {
+  vorpruefung,
+  methoden,
+  methoden_fuenfPrinzipien,
+  dokumentation,
+} from "@/config/routes";
+
+export const frontmatter = {
+  title: "Digitalcheck NRW",
+  isStagingOnly: true,
+};
+---
+
+<LaenderLayout title={frontmatter.title} bundesland="Nordrhein-Westfalen">
+  <p slot="subtitle">
+    Willkommen beim Digitalcheck für das Land Nordrhein-Westfalen. Diese Seite
+    bietet Ihnen kompakte Unterstützung, um Ihr Regelungsvorhaben
+    digitaltauglich zu gestalten und den späteren Vollzug effizient zu
+    ermöglichen.
+  </p>
+  <section class="breakout bg-(--kern-color-layout-layer-surface-contextual)">
+    <div
+      class="lg:flex lg:flex-row-reverse lg:items-center lg:justify-between lg:gap-32"
+    >
+      <Image
+        src={nrwLogo}
+        alt="NRW Logo"
+        class="h-170 w-sm shrink-0 object-contain"
+      />
+      <div class="space-y-16">
+        <h2>Ziel und Nutzen</h2>
+        <p>
+          Digitale Fachverfahren und eine medienbruchfreie Abwicklung tragen
+          dazu bei, Prozesse zu vereinfachen und Bürgerinnen und Bürger,
+          Unternehmen sowie staatliche Stellen spürbar zu entlasten. Der
+          Digitalcheck führt Sie strukturiert durch die wichtigsten Schritte für
+          eine digitaltaugliche Ausgestaltung Ihrer Rechtsnormen.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="space-y-32!">
+    <h2>So führen Sie Ihren Digitalcheck durch:</h2>
+    <div class="space-y-16">
+      <p><span class="kern-number">1</span></p>
+      <h3>Vorprüfung</h3>
+      <p>
+        <a href={vorpruefung.path}>Prüfen</a> Sie zunächst, ob Ihr Vorhaben einen
+        Digitalbezug hat oder Anforderungen an die EU‑Interoperabilität bestehen.
+        Falls keiner der beiden Punkte gegeben ist, halten Sie dies im Gesetzesvorblatt
+        fest.
+      </p>
+    </div>
+    <div class="space-y-16">
+      <p><span class="kern-number">2</span></p>
+      <h3>Ausarbeitung</h3>
+      <p>
+        <a href={methoden.path}>Entwickeln</a> Sie ein Zielbild, indem Sie den Vollzug
+        Ihrer Norm frühzeitig durchdenken und den <a
+          href="https://zfl.bund.de/werkzeuge/">Ablaufprozess skizzieren</a
+        >. Nutzen Sie dazu die unten aufgeführten allgemeinen und
+        NRW-spezifischen Hilfestellungen. Formulieren Sie anschließend den
+        Normtext und berücksichtigen Sie dabei die <a
+          href={methoden_fuenfPrinzipien.path}
+          >Anforderungen der Digitaltauglichkeit</a
+        >.
+      </p>
+    </div>
+    <div class="space-y-16">
+      <p><span class="kern-number">3</span></p>
+      <h3>Dokumentation</h3>
+      <p>
+        <a href={dokumentation.path}>Dokumentieren</a> Sie, welche Aspekte Sie berücksichtigt
+        und ins Regelungsvorhaben integriert haben, wie dadurch Digitaltauglichkeit
+        und EU‑Interoperabilität sichergestellt werden, und welche digitalen Kriterien
+        Sie adressiert haben; laden Sie die Ergebnisse herunter oder nutzen Sie die
+        Word‑Vorlage. Das Ergebnis der Dokumentation kann als Anlage dem Gesetzesvorhaben
+        beigefügt werden.
+      </p>
+    </div>
+  </section>
+  <section class="breakout bg-darkblue-100">
+    <h2>Nützliche Links und Hilfestellungen</h2>
+    <p class="mb-16">
+      Diese Anlaufstellen und Materialien unterstützen Sie bei Visualisierung,
+      Einschätzung, Gestaltung und Dokumentation Ihres Vorhabens:
+    </p>
+    <ul>
+      <li>
+        <a
+          href="https://recht.nrw.de/lrgv/gesetz/17072025-gesetz-zur-foerderung-der-elektronischen-verwaltung-nordrhein-westfalen-e/"
+          >E-Government-Gesetz NRW</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903"
+          >Europäische Interoperabilitätsverordnung</a
+        >
+      </li>
+      <li>
+        <a href="https://interoperable-europe.ec.europa.eu/"
+          >Interoperable Europe Portal</a
+        >
+      </li>
+      <li><a href="https://fimportal.de/">FIM Portal</a></li>
+      <li>
+        <a href="https://informationsplattform.ozg-umsetzung.de/iNG/app/intro"
+          >OZG - Informationsplattform</a
+        >
+      </li>
+      <li>
+        <a href="https://zfl.bund.de/">Zentrum für Legistik des Bundes</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>Schulungen</h2>
+    <p>Schulungsangebote folgen.</p>
+  </section>
+</LaenderLayout>
+
+<style>
+  .kern-number {
+    color: var(--kern-color-action-default-contextual, #2044aa);
+    border-color: var(--kern-color-action-default-contextual, #2044aa);
+  }
+</style>

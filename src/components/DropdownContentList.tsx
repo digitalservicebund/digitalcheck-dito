@@ -1,6 +1,8 @@
-import { normalizePathname } from "@/utils/path";
+import { normalizePathname, withBase } from "@/utils/path";
 import twMerge from "@/utils/tailwindMerge";
 import Badge from "./Badge";
+import Image from "./Image";
+import { OpenInNewIcon } from "./OpenInNewIcon";
 
 export type ActiveBehavior = "noHighlight" | "exactMatch";
 
@@ -13,6 +15,8 @@ export type DropdownItemProps = {
   href?: string;
   isNewTitle?: boolean;
   activeBehavior?: ActiveBehavior;
+  image?: string;
+  imageAlt?: string;
 };
 
 export type DropdownContentListProps = {
@@ -51,6 +55,7 @@ export default function DropdownContentList({
       option.activeBehavior !== "noHighlight" &&
       checkExactMatchCriteria;
     const itemNumber = isOrderedList ? index + 1 : undefined;
+    const isExternal = option.href?.startsWith("http");
     return (
       <li key={option.href || option.title || index}>
         <a
@@ -63,33 +68,47 @@ export default function DropdownContentList({
         >
           <div
             className={twMerge(
-              "kern-stack kern-stack-xs cursor-pointer border-l-4 border-l-transparent py-8 pr-8 pl-16 text-left hover:bg-blue-100 lg:border-l-8 lg:px-56 lg:py-24",
+              "flex cursor-pointer items-center gap-16 border-l-4 border-l-transparent py-8 pr-8 pl-16 text-left hover:bg-blue-100 lg:border-l-8 lg:px-56 lg:py-24",
               finalIsActive && "border-blue-800 bg-blue-100",
               option.className,
             )}
           >
-            <div className="flex flex-row">
-              {option.isNewTitle && (
-                <Badge className="mr-8" look="hint">
-                  NEU
-                </Badge>
-              )}
-              {itemNumber && (
-                <span className="kern-label mr-4">{itemNumber}. </span>
-              )}
-              <div className="kern-label">{option.title}</div>
-            </div>
-            {option.content && (
-              <span className="hidden lg:inline">{option.content}</span>
-            )}
-            {option.newContent && (
-              <div className="max-lg:hidden">
-                <Badge className="mr-8" look="hint">
-                  NEU
-                </Badge>
-                <span>{option.newContent}</span>
+            {option.image && (
+              <div className="flex size-64 items-center justify-center p-8">
+                <Image
+                  url={withBase(option.image)}
+                  alternativeText={option.imageAlt}
+                  className="grayscale-100"
+                />
               </div>
             )}
+            <div className="kern-stack kern-stack-xs">
+              <div className="flex flex-row">
+                {option.isNewTitle && (
+                  <Badge className="mr-8" look="hint">
+                    NEU
+                  </Badge>
+                )}
+                {itemNumber && (
+                  <span className="kern-label mr-4">{itemNumber}. </span>
+                )}
+                <div className="kern-label">
+                  {option.title}{" "}
+                  {isExternal && <OpenInNewIcon className="fill-blue-800" />}
+                </div>
+              </div>
+              {option.content && (
+                <span className="hidden lg:inline">{option.content}</span>
+              )}
+              {option.newContent && (
+                <div className="max-lg:hidden">
+                  <Badge className="mr-8" look="hint">
+                    NEU
+                  </Badge>
+                  <span>{option.newContent}</span>
+                </div>
+              )}
+            </div>
           </div>
         </a>
       </li>

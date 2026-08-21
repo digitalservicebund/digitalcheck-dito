@@ -6,6 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { generateRoutes } from "astro-route-generator";
 import { defineConfig } from "astro/config";
 import process from "node:process";
+import Icons from "unplugin-icons/vite";
 
 const isPreview = process.env.PUBLIC_STAGE === "preview";
 const PREVIEW_BASE_PATH = process.env.PREVIEW_BASE_PATH;
@@ -46,7 +47,7 @@ export default defineConfig({
     }),
   ],
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), Icons({ compiler: "astro" })],
     resolve: {
       alias: {
         "@/": new URL("./src/", import.meta.url).pathname,

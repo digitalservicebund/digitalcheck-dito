@@ -1,0 +1,130 @@
+---
+import { Image } from "astro:assets";
+import Layout from "@/layouts/Layout.astro";
+import Tabs from "@/components/tabs/Tabs.astro";
+import { LinkButton } from "@/components/Button.tsx";
+import Hero from "@/components/Hero.astro";
+import InfoBox from "@/components/InfoBox";
+import { withBase } from "@/utils/path";
+import supportImg from "@/images/support.jpg";
+import BundTab from "./_bund.astro";
+import BundeslaenderTab from "./_bundeslaender.astro";
+import {
+  interoperabel,
+  interoperabel_nationaleKontaktstelle,
+} from "@/config/routes";
+
+export const frontmatter = {
+  title: "Unterstützungsangebote",
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>Hilfe für digitaltaugliche Regelungsvorhaben</h1>
+      <p slot="subtitle">
+        Nutzen Sie unsere digitale Expertise, um Ihr Regelungsvorhaben
+        digitaltauglich zu gestalten
+      </p>
+    </Hero>
+
+    <div class="breakout bg-blue-300">
+      <div class="flex flex-col py-0 lg:h-[420px] lg:flex-row">
+        <div class="py-32 sm:py-40 sm:pr-48 lg:w-1/2 lg:self-center">
+          <h2 class="mb-16">Unterstützung für Bund und Länder</h2>
+          <p>
+            Der Digitalcheck unterstützt{" "}
+            <strong>Bundes- und Länderministerien dabei</strong>, den
+            Digitalbezug neuer Regelungsvorhaben frühzeitig zu erkennen und
+            deren praxistaugliche Umsetzung sicherzustellen. Basis dafür sind
+            die 5 Prinzipien für digitaltaugliche Gesetzgebung und anschauliche
+            Visualisierungen.
+          </p>
+        </div>
+        <div class="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">
+          <div
+            class="w-[630px] lg:w-[50vw] lg:[&>img]:h-[420px] lg:[&>img]:w-full lg:[&>img]:object-none lg:[&>img]:object-[10%_75%]"
+          >
+            <Image
+              src={supportImg}
+              alt="Eine Arbeitsgruppe in der Diskussion"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="space-y-16 py-40 lg:pt-80">
+      <h2>Unser Unterstützungsangebot</h2>
+      <p>
+        Legistinnen und Legisten stehen oft vor der Herausforderung, Regelungen
+        unter erheblichem Zeitdruck erarbeiten zu müssen. Genau hier kommen wir
+        ins Spiel: Wir unterstützen Sie in jeder Phase des Vorhabens und sorgen
+        dafür, dass Ihr Vorhaben eine einfache und wirkungsorientierte
+        Umsetzung, unter Ausschöpfung der digitalen Möglichkeiten zum Nutzen
+        aller Beteiligten ermöglicht.
+        <br /><br />
+        Je nachdem, ob Sie im Auftrag des <strong
+          >Bundes oder eines Bundeslandes</strong
+        > handeln, gibt es verschiedene Unterstützungsangebote:
+      </p>
+    </div>
+
+    <Tabs tabs={["Bund", "Bundesländer"]} searchParams>
+      <BundTab data-tab-panel="Bund" />
+      <BundeslaenderTab data-tab-panel="Bundesländer" />
+    </Tabs>
+
+    <div class="breakout bg-blue-400">
+      <div class="py-80">
+        <InfoBox
+          badge={{ look: "hint", text: "NEU" }}
+          look="white"
+          visual={{
+            type: "image",
+            image: {
+              url: withBase("/images/zfl-preview.png"),
+              alternativeText:
+                "Screenshot der Website des Zentrum für Legistik",
+              size: "medium",
+            },
+          }}
+        >
+          <h2>Unterstützung in allen Phasen Ihres Vorhabens</h2>
+          <p>
+            Das Zentrum für Legistik unterstützt Sie bereits in der frühen
+            Konzeptionsphase. Sie stellen damit sicher, dass Ihr Vorhaben
+            betroffenenzentriert, praxistauglich und digital umsetzbar ist.
+          </p>
+          <p>Mehr zu den Angeboten des Zentrums für Legistik erfahren:</p>
+          <LinkButton
+            href="https://zfl.bund.de"
+            look="tertiary"
+            className="self-start"
+          >
+            Zum Zentrum für Legistik
+          </LinkButton>
+        </InfoBox>
+      </div>
+    </div>
+
+    <div class="py-80">
+      <InfoBox>
+        <h2>Haben Sie Fragen zu EU-Anforderungen an Interoperabilität?</h2>
+        <p>
+          Weitere Informationen zu den EU-Anforderungen für Interoperabilität in
+          der Regelung finden Sie in unserer <a href={interoperabel.path}
+            >Übersicht</a
+          >
+        </p>
+        <p>
+          Weitere Informationen zu Governance, Zusammenarbeit und Nutzung
+          unserer Inhalte finden Sie unter <a
+            href={interoperabel_nationaleKontaktstelle.path}
+            >Nationale Kontaktstelle</a
+          > für ein interoperables Europa.
+        </p>
+      </InfoBox>
+    </div>
+  </main>
+</Layout>
