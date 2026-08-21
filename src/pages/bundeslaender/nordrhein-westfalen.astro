@@ -1,5 +1,8 @@
 ---
 import LaenderLayout from "@/layouts/LaenderLayout.astro";
+import { Image } from "astro:assets";
+import nrwLogo from "./_assets/nrw-logo.png";
+
 import {
   vorpruefung,
   methoden,
@@ -20,17 +23,26 @@ export const frontmatter = {
     digitaltauglich zu gestalten und den späteren Vollzug effizient zu
     ermöglichen.
   </p>
-  <section
-    class="breakout space-y-16 bg-(--kern-color-layout-layer-surface-contextual)"
-  >
-    <h2>Ziel und Nutzen</h2>
-    <p>
-      Digitale Fachverfahren und eine medienbruchfreie Abwicklung tragen dazu
-      bei, Prozesse zu vereinfachen und Bürgerinnen und Bürger, Unternehmen
-      sowie staatliche Stellen spürbar zu entlasten. Der Digitalcheck führt Sie
-      strukturiert durch die wichtigsten Schritte für eine digitaltaugliche
-      Ausgestaltung Ihrer Rechtsnormen.
-    </p>
+  <section class="breakout bg-(--kern-color-layout-layer-surface-contextual)">
+    <div
+      class="lg:flex lg:flex-row-reverse lg:items-center lg:justify-between lg:gap-32"
+    >
+      <Image
+        src={nrwLogo}
+        alt="NRW Logo"
+        class="h-170 w-sm shrink-0 object-contain"
+      />
+      <div class="space-y-16">
+        <h2>Ziel und Nutzen</h2>
+        <p>
+          Digitale Fachverfahren und eine medienbruchfreie Abwicklung tragen
+          dazu bei, Prozesse zu vereinfachen und Bürgerinnen und Bürger,
+          Unternehmen sowie staatliche Stellen spürbar zu entlasten. Der
+          Digitalcheck führt Sie strukturiert durch die wichtigsten Schritte für
+          eine digitaltaugliche Ausgestaltung Ihrer Rechtsnormen.
+        </p>
+      </div>
+    </div>
   </section>
   <section class="space-y-32!">
     <h2>So führen Sie Ihren Digitalcheck durch:</h2>
