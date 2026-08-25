@@ -164,8 +164,8 @@ nkr_nrs = set(record["NKRNr"] for record in records)
 for item in payload_full:
     print(item["NKRNr"], end=": ")
     if item["NKRNr"] in nkr_nrs:
-        print(f"Record with NKRNr {item['NKRNr']} already exists in NocoDB.")
-        continue
+        print("Record already exists in NocoDB, updating ...")
+        # continue
         candidates = [record for record in records if record["NKRNr"] == item["NKRNr"]]
         candidates_sorted = sorted(
             candidates, key=lambda record: record["UpdatedAt"], reverse=False
@@ -176,6 +176,7 @@ for item in payload_full:
         res.raise_for_status()
         print(res.status_code)
     else:
+        print("Uploading new record ...")
         res = requests.post(url, headers={"xc-token": nocodb_token}, json=item)
         res.raise_for_status()
         print(res.status_code)
