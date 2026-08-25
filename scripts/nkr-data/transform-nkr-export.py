@@ -98,7 +98,10 @@ for col in date_cols:
 
 # %%
 # Alternative A: Save to CSV and load into NocoDB manually
-out.to_csv(input_path.replace(".xlsx", ".csv"), index=False)
+from pathlib import Path
+
+output_path = str(Path(input_path).with_suffix(".csv"))
+out.to_csv(output_path, index=False)
 
 # %%
 # Alternative B: Upload to NocoDB via API
@@ -152,7 +155,7 @@ df_nrs = df["A_NKR-Nr"].to_list()
 # replace nan with None
 payload_full = out.replace({np.nan: None}).to_dict(orient="records")
 payload = [item for item in payload_full if str(item["NKRNr"]) not in nkr_nrs]
-print(f"Will ignore {len(records) - len(payload)} records that are already in NocoDB")
+print(f"Will update {len(records) - len(payload)} records that are already in NocoDB")
 print(f"Will upload {len(payload)} records to NocoDB")
 
 # %%
