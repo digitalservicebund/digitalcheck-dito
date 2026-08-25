@@ -13,15 +13,9 @@ import pandas as pd
 import numpy as np
 
 # Change this path as required
-input_path = "input/2026-07-17.xlsx"
+input_path = "input/2026-08-24.xls"
 df = pd.read_excel(input_path)
 df
-
-# %%
-df.columns
-
-# %%
-df.columns
 
 # %%
 # NKRNr	Regelungsart	Ressort	Titel	EingangVP	EingangED	Erledigungsdatum	VP1_ITLösung	VP2_Verpflichtungen	VP3_Datenaustausch	VP4_Interaktion	VP5_Automatisierung	ED1_Kommunikation	ED2_Daten	ED3_Datenschutz	ED4_Klarheit	ED5_Automatisierung	EDDarstellung
@@ -81,6 +75,9 @@ ed_map = {
 
 
 for out_col, source_col in ed_map.items():
+    if source_col not in df.columns:
+        print(f"Column '{source_col}' not in source dataframe, skipping")
+        continue
     values = set(df[source_col].dropna().unique())
     unexpected = values.difference(expected_values)
     assert not unexpected, f"Unexpected items {unexpected} column {source_col}"
