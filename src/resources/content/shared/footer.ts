@@ -115,17 +115,10 @@ export const footer = {
     },
     links: [
       {
-        preText: "Der Digitalcheck entsteht im Auftrag des",
-        text: "Bundesministerium für Digitales und Staatsmodernisierung",
         url: "https://bmds.bund.de/",
         openInNewTab: true,
       },
       {
-        preText:
-          "Mehr über den politischen Auftrag und die Entstehung des Digitalcheck finden Sie auf der",
-        text: "Projektseite",
-        postText:
-          "des Bundesministeriums für Digitales und Staatsmodernisierung.",
         url: "https://www.digitale-verwaltung.de/Webs/DV/DE/transformation/digitalcheck/digitalcheck-node.html",
         openInNewTab: true,
       },

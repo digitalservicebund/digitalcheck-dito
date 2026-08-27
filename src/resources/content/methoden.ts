@@ -23,11 +23,9 @@ export const methods = {
       },
       {
         isSubstep: true,
-        label: { text: "Visualisierung" },
         headline: {
           text: "Visualisieren Sie die aktuellen Abläufe",
         },
-        info: [],
         text: "Damit Ihre Regelung wirkungsvoll in die Praxis kommt, müssen Sie die aktuellen Abläufe verstehen. In diesem Schritt müssen Sie noch nicht auf geplante Neuerungen eingehen. Konzentrieren Sie sich auf den Status Quo.",
         links: [
           {
@@ -43,7 +41,6 @@ export const methods = {
       },
       {
         isSubstep: true,
-        label: { text: "5 Prinzipien" },
         headline: {
           text: "Finden Sie konkrete Möglichkeiten der Digitalisierung",
         },

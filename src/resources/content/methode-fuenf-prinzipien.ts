@@ -10,25 +10,9 @@ export const methodsFivePrinciples = {
   subtitle: dedent`
   Die folgenden Prinzipien helfen Ihnen dabei, Chancen der digitalen Umsetzung auszuschöpfen und Hindernisse zu erkennen. Nutzen Sie die Prinzipien auch, um mit beteiligten Akteurinnen und Akteuren über die Umsetzung zu sprechen.
   `,
-  grundlagenTitle: "Prinzipien für digitaltaugliche Gesetzgebung",
-  grundlagenSubtitle:
-    "Die Prinzipien für digitaltaugliche Gesetzgebung bilden die Basis der Instrumente des Digitalcheck. Werden sie beachtet, ist eine Regelung mit hoher Wahrscheinlichkeit digitaltauglich und folgt den Vorgaben für EU-Interoperabilität.",
-  buttonText: "Beispiele betrachten",
-  wordingExampleTitle: "Formulierungsbeispiel:",
-  questionsTitle: "Fragen Sie sich:",
-  contentOverviewTitle: "Inhalt",
-  exampleTitle: "Beispiel aus",
-  exampleLinkText: "Ganzes Beispiel zeigen",
-  anchor: {
-    principle: "Prinzip:",
-    instruction:
-      "Anleitung: So nutzen Sie die fünf Prinzipien für Ihr Regelungsvorhaben",
-  },
   instruction: {
     title: "So nutzen Sie die fünf Prinzipien für Ihr Regelungsvorhaben",
   },
-  principleLabel: "Prinzip",
-  detailsSummaryTitle: "So wenden Sie das Prinzip an",
   nextStep: {
     label: "So geht es weiter:",
     icon: ArrowCircleRightOutlined,

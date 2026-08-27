@@ -1,5 +1,4 @@
 import { dedent } from "@/utils/dedentMultilineStrings";
-import { TipsAndUpdatesOutlined } from "@digitalservicebund/icons";
 import { contact } from "./shared/contact";
 
 export const digitalDocumentation = {
@@ -30,26 +29,6 @@ export const digitalDocumentation = {
       text: "**Alternativ** können Sie die Dokumentation als Word-Datei herunterladen und bearbeiten. Folgen Sie dann den Anweisungen in der Datei.",
       buttonText: "Word-Vorlage herunterladen (.docx)",
     },
-    description: {
-      title: "So funktioniert es",
-      items: [
-        {
-          title: "Starten Sie die Dokumentation online",
-          content:
-            "Alternativ können sie die Dokumentation in einer Word-Datei erstellen. Folgen Sie dann den Anweisungen in der Datei.",
-        },
-        {
-          title: "Beantworten Sie Fragen in der angeleiteten Dokumentation",
-          content: dedent`
-          Der Kern der Dokumentation sind die fünf Prinzipien für digitaltaugliche Gesetzgebung. Diese kennen Sie bereits aus Prozessschritt 2 – Digitaltauglichkeit erarbeiten.
-
-          Während des gesamten Prozesses werden Ihre Daten vertraulich behandelt. Nur Sie können sie sehen.`,
-        },
-        {
-          title: "Senden Sie die ausgefüllte Dokumentation an den NKR",
-        },
-      ],
-    },
     noscript: {
       headline: "Erlauben Sie die Nutzung von JavaScript",
       content: dedent`
@@ -57,79 +36,6 @@ export const digitalDocumentation = {
         
         **So geht es:** Suchen Sie in den Einstellungen Ihres Browsers nach JavaScript und erlauben Sie die Nutzung.
       `,
-    },
-    tips: {
-      title: "Tipps",
-      items: [
-        {
-          heading: {
-            text: "Füllen Sie eine Dokumentation für alle inhaltlich zusammenhängenden Regelungen eines Vorhabens aus.",
-          },
-          content:
-            "Ganz nach dem Prinzip: so viele wie nötig, so wenige wie möglich. Damit sparen Sie sich Zeit und der NKR kann Zusammenhänge besser erkennen.",
-          visual: { type: "icon" as const, Icon: TipsAndUpdatesOutlined },
-        },
-        {
-          heading: { text: "Holen Sie sich eine zweite Meinung ein" },
-          content:
-            "Sie müssen nicht alleine an der Dokumentation arbeiten. Laden Sie das fertige Dokument oder einen Zwischenstand als Word-Dokument herunter und senden Sie es an eine Kollegin oder einen Kollegen.",
-          visual: { type: "icon" as const, Icon: TipsAndUpdatesOutlined },
-        },
-        {
-          heading: { text: "Nehmen Sie Ihre Visualisierung als Grundlage" },
-          content: dedent`
-            Wenn Sie in Ihrer Visualisierung die Fünf Prinzipien bereits angewendet haben, können Sie diese Punkte als Ausgangslage für die Beantwortung der Fragen nutzen.
-
-            Senden Sie die Visualisierung zum Schluss mit an den NKR.`,
-          visual: { type: "icon" as const, Icon: TipsAndUpdatesOutlined },
-        },
-      ],
-    },
-    faq: {
-      title: "Häufige Fragen",
-      questions: [
-        {
-          title: "Muss ich eine Dokumentation für meine Regelungsart machen?",
-          content: "",
-        },
-        {
-          title:
-            "Soll ich pro Vorhaben eine oder mehrere Dokumentationen ausfüllen?",
-          content: "",
-        },
-        {
-          title: "Wie gehe ich mit Mantelgesetzen um?",
-          content: "",
-        },
-        {
-          title: "Muss ich die Dokumentation online ausfüllen?",
-          content: "",
-        },
-        {
-          title: "Was passiert mit meinen Daten?",
-          content: "",
-        },
-        {
-          title: "Wie lange werden meine Daten gespeichert?",
-          content: "",
-        },
-        {
-          title: "Kann ich mehrere Dokumentationen gleichzeitig bearbeiten?",
-          content: "",
-        },
-        {
-          title: "Kann ich mit jemandem zusammen daran arbeiten?",
-          content: "",
-        },
-        {
-          title: "Was prüft der Nationale Normenkontrollrat (NKR)?",
-          content: "",
-        },
-        {
-          title: "Sind Visualisierungen verpflichtend?",
-          content: "",
-        },
-      ],
     },
   },
   info: {
@@ -175,92 +81,9 @@ export const digitalDocumentation = {
     },
   },
   principlePages: {
-    badge: "Prinzipien",
-    moreButton: "Mehr dazu",
-    moreInfoButton: "Mehr erfahren",
-    question:
-      "Schafft das Regelungsvorhaben die rechtlichen Voraussetzungen für die Umsetzung des Prinzips?",
     radioOptions: ["Ja, gänzlich oder teilweise", "Nein", "Nicht relevant"],
-    textFieldExplanationLabel: "Erklärung:",
-    textFieldNegativeReasoningLabel: "Begründung:",
-    buttonAdd: "Weitere Referenz hinzufügen",
-    buttonRemove: "Referenz entfernen",
-    inputs: {
-      paragraph: {
-        label: "Referenz (Paragraphen oder Artikel):",
-      },
-      text: {
-        label: "Entsprechender Regelungstext hier einfügen:",
-      },
-      explanation: {
-        label: "Erklärung:",
-      },
-    },
-    positivePrinciple: {
-      title: "Erläuterung angeben",
-      description: dedent`
-        Bitte wählen Sie, auf welchen **Schwerpunkt** dieses Prinzips Ihr Vorhaben zutrifft.
-        Zu jedem Schwerpunkt finden Sie eine kurze Beschreibung, wenn Sie ihn auswählen.
-        Falls keiner zutrifft, wählen Sie **„Eigene Erklärung hinzufügen“**.
-        
-        Sie können Ihre Angaben als Word-Dokument exportieren und später in der Word Datei Ihre Dokumentation fortführen.`,
-      actions: {
-        addOwnExplanation: {
-          title: "Eigene Erklärung hinzufügen",
-        },
-      },
-    },
-    negativePrinciple: {
-      title: "Erläuterung angeben",
-      description: dedent`
-        Bitte erläutern Sie, warum das Prinzip “Digitale Angebote für alle nutzbar gestalten” **nicht** auf Ihr Vorhaben zutrifft.
-
-        Sie können Ihre Angaben als Word-Dokument exportieren und später in der Word Datei Ihre Dokumentation fortführen.`,
-      label: "Begründung",
-      placeholder:
-        "Begründung warum das Prinzip nicht auf Ihr Regelungsvorhaben zutrifft.",
-    },
-    irrelevantPrinciple: {
-      title: "Erläuterung angeben",
-      description: dedent`
-        Bitte erläutern Sie, warum das Prinzip “Digitale Angebote für alle nutzbar gestalten” **nicht relevant** für Ihr Vorhaben ist.
-
-        Sie können Ihre Angaben als Word-Dokument exportieren und später in der Word Datei Ihre Dokumentation fortführen.`,
-      label: "Begründung",
-      placeholder:
-        "Begründung warum das Prinzip nicht relevant für Ihr Regelungsvorhaben ist.",
-    },
-    explanationFields: {
-      title: "Ihre Erläuterung",
-      ownExplanationTitle: "Eigener Punkt",
-      ownExplanationDescription:
-        "Beschreiben Sie, wie Sie in Ihren Vorhaben das Prinzip “Digitale Angebote für alle nutzbar gestalten” umgesetzt haben.",
-      paragraphInput: {
-        label: "Paragrafen",
-        description:
-          "Paragrafen, in denen sich das Regelungsvorhaben auf den ausgewählten Schwerpunkt bezieht.",
-      },
-      reasoningInput: {
-        label: "Begründung mit Textreferenz (empfohlen für bessere Zuordnung)",
-        placeholder:
-          "Begründung und/oder Ausschnitt aus Ihrer Regelung als Kopie (Paragraf)",
-      },
-    },
-    dialog: {
-      deleteButton: "Löschen bestätigen",
-      cancelButton: "Abbrechen",
-      title: "Erläuterung löschen",
-      description: dedent`
-        Die Erläuterung wird entfernt und das Eingabefeld zurückgesetzt. 
-        
-        Sie können jederzeit eine neue Erläuterung eintragen.`,
-    },
     errors: {
       answerError: "Bitte wählen Sie eine Option aus.",
-      reasoningError: "Bitte geben Sie mindestens eine Erläuterung an.",
-      errorHint: "Bitte beachten Sie den oberen Hinweis.",
-      paragraphsError: "Bitte geben Sie einen Paragrafen an.",
-      reasonError: "Bitte geben Sie eine Begründung an.",
     },
   },
   summary: {
@@ -270,17 +93,6 @@ export const digitalDocumentation = {
       text: "Bearbeiten",
       ariaLabelSuffix: " bearbeiten",
     },
-    buttonEditNow: {
-      text: "Jetzt bearbeiten",
-      ariaLabelSuffix: "jetzt bearbeiten",
-    },
-    principleBadge: "Prinzip",
-    principleAnswerTitle:
-      "Lässt sich das Vorhaben im Sinne des Prinzips umsetzen?",
-    answerPrefix: "Antwort",
-    paragraphsPrefix: "Paragrafen",
-    reasonPrefix: "Begründung",
-    explanationHeading: "Erläuterung",
     warnings: {
       missing: "Sie haben diesen Punkt noch nicht bearbeitet.",
       incomplete: "Sie haben diesen Punkt noch nicht vollständig bearbeitet.",
