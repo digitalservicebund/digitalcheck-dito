@@ -15,7 +15,7 @@ WORKDIR /src
 COPY mise.toml ./
 # Installs the exact pnpm version pinned in mise.toml
 RUN mise trust && mise install pnpm
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile --ignore-scripts
 
 
