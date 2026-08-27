@@ -80,7 +80,7 @@
     "@types/mime-types": "^3.0.1",
     "@types/node": "^26.2.0",
     "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.4",
+    "@types/react-dom": "^19.2.5",
     "@typescript-eslint/parser": "^8.67.0",
     "astro-eslint-parser": "^3.1.0",
     "autoprefixer": "^10.5.4",
