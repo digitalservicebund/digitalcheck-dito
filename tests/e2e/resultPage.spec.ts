@@ -10,7 +10,7 @@ const positiveResultContent = [
   "einer Anpassung oder Neuentwicklung einer IT-Lösung.",
   "einer Festlegung von Mitwirkungspflichten für Akteurinnen und Akteure.",
   "einem Austausch von Daten.",
-  "einer Interaktion zwischen Behörden und Bürgerinnen und Bürger bzw. Unternehmen.",
+  "einer Interaktion zwischen Behörden und Bürgerinnen und Bürgern bzw. Unternehmen.",
   "einer Verbesserung der Umsetzung der Regelung durch die Automatisierung von Schritten.",
   "einem Daten- und Informationsaustausch zwischen EU-Mitgliedsstaaten.",
 ];
