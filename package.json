@@ -54,7 +54,7 @@
     "mime-types": "^3.0.2",
     "msw": "^2.15.0",
     "pdf-lib": "^1.17.1",
-    "picomatch": "^4.0.5",
+    "picomatch": "^4.0.7",
     "posthog-js": "^1.418.10",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
