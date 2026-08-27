@@ -1,11 +1,8 @@
 import type { ActiveBehavior } from "@/components/DropdownContentList";
 import { ROUTE_SUPPORT_TRAININGS } from "@/config/additionalRoutes";
 import {
-  beispiele_prinzipien,
-  beispiele_visualisierungen,
   bundeslaender,
   dokumentation,
-  grundlagen_digitaltauglichkeit,
   grundlagen_normenkontrollrat,
   interoperabel,
   interoperabel_nationaleKontaktstelle,
@@ -14,6 +11,7 @@ import {
   unterstuetzung,
   vorpruefung,
 } from "@/config/routes";
+import { ZFL_BASE_URL } from "@/resources/constants";
 import { contact } from "@/resources/content/shared/contact";
 
 export const header = {
@@ -65,13 +63,13 @@ export const header = {
           title: "Digitaltauglichkeit im Regelungstext",
           content:
             "So wurden die 5 Prinzipien von Ihren Kolleginnen und Kollegen in Regelungen ausformuliert.",
-          href: `${beispiele_prinzipien.path}/digitale-angebote-fuer-alle-nutzbar-gestalten`,
+          href: `${ZFL_BASE_URL}/werkzeuge/digitaltauglichkeit/beispiele`,
         },
         {
           title: "Visualisierungen",
           content:
             "Veröffentliche Visualisierungen, welche Referaten beim Erarbeiten der Digitaltauglichkeit geholfen haben.",
-          href: beispiele_visualisierungen.path,
+          href: ZFL_BASE_URL + "/werkzeuge/ressourcen/visualisierungen",
         },
       ],
     },
@@ -96,7 +94,8 @@ export const header = {
           title: "Was ist Digitaltauglichkeit?",
           content:
             "Welche Relevanz Digitaltauglichkeit hat und wie Ihre Regelung davon profitiert.",
-          href: grundlagen_digitaltauglichkeit.path,
+          href: "https://zfl.bund.de",
+          isExternal: true,
         },
         {
           title: "NKR und Digitalcheck",

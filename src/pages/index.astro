@@ -1,13 +1,9 @@
 ---
 import {
-  beispiele_prinzipien,
-  beispiele_visualisierungen,
   dokumentation,
-  grundlagen_digitaltauglichkeit,
   grundlagen_normenkontrollrat,
   methoden,
   methoden_fuenfPrinzipien,
-  methoden_visualisieren,
   unterstuetzung,
   vorpruefung,
 } from "@/config/routes";
@@ -26,6 +22,7 @@ import InfoBoxSideBySide from "@/components/InfoBoxSideBySide";
 import RichText from "@/components/RichText";
 import { withBase } from "@/utils/path";
 import { dedent } from "@/utils/dedentMultilineStrings";
+import { ZFL_BASE_URL } from "@/resources/constants";
 
 export const frontmatter = {
   title: "Startseite",
@@ -74,7 +71,6 @@ const steps = [
     },
     procedure:
       "Sie dokumentieren, wie Sie Digitaltauglichkeit in Ihrer Regelung sichergestellt haben.",
-    procedureHighlight: { badge: "NEU", text: "Jetzt auch online ausfüllbar." },
     duration: "Ein bis zwei Stunden",
     result: dedent`
       - Ausgefülltes Word-Dokument - welches Sie an Ihre jeweilige Prüfstelle* senden
@@ -122,14 +118,6 @@ const steps = [
                 <div class="mt-40">
                   <p class="font-bold">Vorgehen:</p>
                   <RichText markdown={step.procedure} />
-                  {step.procedureHighlight && (
-                    <div class="ds-label-02-reg mt-16">
-                      <Badge look="hint" className="mr-8">
-                        {step.procedureHighlight.badge}
-                      </Badge>
-                      {step.procedureHighlight.text}
-                    </div>
-                  )}
                 </div>
                 <div class="mt-24 border-t-2 border-gray-400 pt-16">
                   <p class="font-bold">Dauer:</p>
@@ -159,10 +147,7 @@ const steps = [
         look="highlight"
         className="bg-white"
       >
-        <Heading tagName="h3">
-          Was ist Digitaltauglichkeit? Und wie unterstützt Sie der Digitalcheck
-          dabei?
-        </Heading>
+        <Heading tagName="h3"> Was ist Digitaltauglichkeit? </Heading>
         <RichText
           markdown="Digitaltaugliche Regelungen ermöglichen eine rechtlich und technisch reibungslose digitale Umsetzung und fördern die automatisierte Bearbeitung von Verfahrensschritten."
         />
@@ -170,7 +155,7 @@ const steps = [
           links={[
             {
               text: "Mehr zur Digitaltauglichkeit erfahren",
-              to: grundlagen_digitaltauglichkeit.path,
+              to: "https://zfl.bund.de/werkzeuge/digitaltauglichkeit",
               look: "ghost",
             },
           ]}
@@ -192,7 +177,7 @@ const steps = [
         <InfoBox.LinkList
           links={[
             {
-              text: "Mehr zum NKR erfahren",
+              text: `Mehr zum NKR erfahren`,
               to: grundlagen_normenkontrollrat.path,
               look: "ghost",
             },
@@ -220,13 +205,15 @@ const steps = [
               links={[
                 {
                   text: "Zu Visualisierungen",
-                  to: methoden_visualisieren.path,
+                  to: ZFL_BASE_URL + "/werkzeuge/ressourcen/flussdiagramm",
                   look: "tertiary",
+                  externalLink: true,
                 },
                 {
                   text: "Beispiele",
-                  to: beispiele_visualisierungen.path,
+                  to: ZFL_BASE_URL + "/werkzeuge/ressourcen/visualisierungen",
                   look: "ghost",
+                  externalLink: true,
                 },
               ]}
             />
@@ -248,8 +235,11 @@ const steps = [
                 },
                 {
                   text: "Beispiele",
-                  to: beispiele_prinzipien.path,
+                  to:
+                    ZFL_BASE_URL +
+                    "/werkzeuge/digitaltauglichkeit/beispiele-im-regelungstex",
                   look: "ghost",
+                  externalLink: true,
                 },
               ]}
             />

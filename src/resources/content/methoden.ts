@@ -1,19 +1,13 @@
-import {
-  methoden_fuenfPrinzipien,
-  methoden_interviewLeitfaden,
-  methoden_itSystemeErfassen,
-  methoden_technischeUmsetzbarkeit,
-  methoden_visualisieren,
-} from "@/config/routes";
+import { methoden_fuenfPrinzipien } from "@/config/routes";
 import { steps } from "@/resources/content/shared/naechste-schritte";
 import type { ContentLink, Step } from "@/utils/contentTypes.ts";
 import { dedent } from "@/utils/dedentMultilineStrings";
+import { ZFL_BASE_URL } from "../constants";
 
 export const methods = {
   title: "Erarbeiten eines digitaltauglichen Regelungsvorhabens",
   subtitle: dedent`
     Hier finden Sie passende Methoden und Werkzeuge, um Digitaltauglichkeit in Ihrer Regelung sicherzustellen.
-
     Gehen Sie am besten in der vorgeschlagenen Reihenfolge vor.
   `,
   steps: {
@@ -38,7 +32,8 @@ export const methods = {
         links: [
           {
             text: "Anleitung zur Visualisierung",
-            to: methoden_visualisieren.path,
+            to: ZFL_BASE_URL + "/werkzeuge/ressourcen/flussdiagramm",
+            externalLink: true,
           },
         ] satisfies ContentLink[],
       },
@@ -103,7 +98,8 @@ export const methods = {
     links: [
       {
         text: "IT-Landschaft verstehen",
-        to: methoden_itSystemeErfassen.path,
+        to: ZFL_BASE_URL + "/werkzeuge/ressourcen/it-systeme",
+        externalLink: true,
       },
     ] satisfies ContentLink[],
   },
@@ -115,7 +111,8 @@ export const methods = {
     links: [
       {
         text: "IT-Auswirkungen prüfen",
-        to: methoden_technischeUmsetzbarkeit.path,
+        to: ZFL_BASE_URL + "/werkzeuge/ressourcen/technische-umsetzbarkeit",
+        externalLink: true,
       },
     ] satisfies ContentLink[],
   },
@@ -127,7 +124,8 @@ export const methods = {
     links: [
       {
         text: "Akteure identifizieren",
-        to: methoden_interviewLeitfaden.path,
+        to: ZFL_BASE_URL + "/werkzeuge/ressourcen/interview-leitfaden",
+        externalLink: true,
       },
     ] satisfies ContentLink[],
   },

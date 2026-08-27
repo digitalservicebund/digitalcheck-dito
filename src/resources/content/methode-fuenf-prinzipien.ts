@@ -1,5 +1,5 @@
 import { prinzipienPoster } from "@/config/downloads";
-import { methoden, methoden_technischeUmsetzbarkeit } from "@/config/routes";
+import { methoden } from "@/config/routes";
 import type { ContentLink } from "@/utils/contentTypes.ts";
 import { dedent } from "@/utils/dedentMultilineStrings";
 import { withBase } from "@/utils/path";
@@ -29,19 +29,6 @@ export const methodsFivePrinciples = {
   },
   principleLabel: "Prinzip",
   detailsSummaryTitle: "So wenden Sie das Prinzip an",
-  nextStepMethods: {
-    label: "So geht es weiter:",
-    icon: ArrowCircleRightOutlined,
-    title: "2.5. Technische Umsetzbarkeit sicherstellen",
-    text: "Analysieren Sie die Auswirkungen Ihres Regelungsvorhabens auf bestehende und neue Abläufe und IT-Systeme. Damit stellen Sie die technische Machbarkeit sicher. Greifen Sie dafür auf das Fachwissen der umsetzenden Akteurinnen und Akteure zurück.",
-    links: [
-      {
-        look: "tertiary" as const,
-        text: "IT-Auswirkungen prüfen",
-        to: methoden_technischeUmsetzbarkeit.path,
-      },
-    ] satisfies ContentLink[],
-  },
   nextStep: {
     label: "So geht es weiter:",
     icon: ArrowCircleRightOutlined,

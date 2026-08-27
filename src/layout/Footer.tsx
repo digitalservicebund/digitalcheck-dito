@@ -72,12 +72,7 @@ export default function Footer() {
             header={footer.top.basics.title}
             links={footer.top.basics.links}
           />
-          <LinkList
-            header={footer.top.examples.title}
-            links={footer.top.examples.links}
-          />
         </nav>
-
         <nav aria-label={footer.middle.navLabel}>
           <ul className="list-unstyled kern-link kern-link--small flex flex-row flex-wrap items-baseline gap-8">
             {footer.middle.links.map((link) => (
@@ -90,9 +85,7 @@ export default function Footer() {
             ))}
           </ul>
         </nav>
-
         <hr className="mt-16 w-full border-t-2 border-blue-300" />
-
         <nav aria-label={footer.bottom.navLabel} className="space-y-40">
           <p className="kern-body kern-body--small">
             {footer.bottom.digitalserviceLink.preText}{" "}

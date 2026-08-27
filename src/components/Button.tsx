@@ -110,6 +110,8 @@ export function LinkButton({
   look,
   size,
   className,
+  iconLeft,
+  iconRight,
   ...props
 }: Readonly<LinkButtonProps>) {
   const buttonClasses = createButtonClasses({
@@ -138,9 +140,15 @@ export function LinkButton({
       onKeyDown={onKeyDown}
       {...props}
     >
+      {iconLeft && (
+        <span className={`kern-icon ${iconLeft}`} aria-hidden="true"></span>
+      )}
       <span className={look === "link" ? undefined : "kern-label"}>
         {children}
       </span>
+      {iconRight && (
+        <span className={`kern-icon ${iconRight}`} aria-hidden="true"></span>
+      )}
     </a>
   );
 }
