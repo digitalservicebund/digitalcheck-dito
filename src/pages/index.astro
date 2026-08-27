@@ -23,6 +23,7 @@ import RichText from "@/components/RichText";
 import { withBase } from "@/utils/path";
 import { dedent } from "@/utils/dedentMultilineStrings";
 import { ZFL_BASE_URL } from "@/resources/constants";
+import SupportBanner from "@/components/SupportBanner";
 
 export const frontmatter = {
   title: "Startseite",
@@ -87,10 +88,15 @@ const steps = [
       subtitle="Der Digitalcheck ist eine Prozessbegleitung für Ihr Regelungsvorhaben. Sie stellen damit Digitaltauglichkeit sicher."
       className="bg-blue-800 text-white"
     />
-
+    <div class="breakout bg-yellow-300 py-8">
+      <p class="breakout">
+        Der Digitalcheck und das Zentrum für Legistik rücken näher zusammen.
+        Deshalb finden Sie ab jetzt bekannte Inhalte aus dem Digitalcheck im
+        Zentrum für Legistik.
+      </p>
+    </div>
     <div class="py-40 lg:py-80">
       <Heading tagName="h2" text="Schritt für Schritt" className="mb-40" />
-
       <div class="relative">
         <div
           class="absolute h-16 w-16 rounded-full bg-blue-300 max-lg:-bottom-8 max-lg:left-10 lg:-top-6 lg:-right-1"
