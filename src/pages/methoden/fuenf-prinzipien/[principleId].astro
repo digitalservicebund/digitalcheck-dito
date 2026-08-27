@@ -1,17 +1,15 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import {
-  aspektBeispielFields,
   aspektCommonFields,
   fetchStrapiData,
-  prinzipBeispielFields,
 } from "@/utils/strapiData.server";
 import Badge from "@/components/Badge.tsx";
 import { BlocksRenderer } from "@/components/BlocksRenderer.tsx";
 import Hero from "@/components/Hero.astro";
 import ToC from "@/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "@/components/SidebarContainer.astro";
-import type { PrinzipWithAspekteAndExample } from "@/utils/strapiData.types";
+import type { PrinzipWithAspekte } from "@/utils/strapiData.types";
 import { slugify } from "@/utils/utilFunctions";
 import Aspect from "./_Aspect.astro";
 import PrincipleNavigation from "./_PrincipleNavigation.astro";
@@ -35,9 +33,6 @@ export async function getStaticPaths() {
       order
       Nummer
       URLBezeichnung
-      Beispiel {
-        ${prinzipBeispielFields}
-      }
       Aspekte {
         Nummer
         ${aspektCommonFields}
@@ -45,26 +40,12 @@ export async function getStaticPaths() {
           Titel
           Erklaerung
           Formulierungsbeispiel
-          Beispiel {
-            documentId
-            Nummer
-            Text
-            Auszug
-            Paragraph {
-              Nummer
-              Gesetz
-              Titel
-            }
-          }
-        }
-        Beispiel {
-          ${aspektBeispielFields}
         }
       }
     }
   }`;
   const { prinzips } = await fetchStrapiData<{
-    prinzips: PrinzipWithAspekteAndExample[];
+    prinzips: PrinzipWithAspekte[];
   }>(PRINZIPS_ASPEKTE_QUERY);
 
   const prinzipList = prinzips.map(({ Name, URLBezeichnung, order }) => ({

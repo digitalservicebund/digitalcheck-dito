@@ -5,7 +5,7 @@ import { BlocksRenderer } from "@/components/BlocksRenderer.tsx";
 import { PRINCIPLE_COLORS } from "@/resources/constants.ts";
 import type {
   PrinzipAspekt,
-  PrinzipWithAspekteAndExample,
+  PrinzipWithAspekte,
 } from "@/utils/strapiData.types";
 import { slugify } from "@/utils/utilFunctions";
 import { twJoin } from "tailwind-merge";
@@ -13,7 +13,7 @@ import { textModifiers } from "./_textModifiers.tsx";
 
 interface Props {
   aspect: PrinzipAspekt;
-  prinzip: PrinzipWithAspekteAndExample;
+  prinzip: PrinzipWithAspekte;
 }
 
 const { aspect, prinzip } = Astro.props;

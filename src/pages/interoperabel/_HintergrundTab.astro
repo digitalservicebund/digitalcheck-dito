@@ -1,7 +1,6 @@
 ---
 import {
   dokumentation,
-  beispiele_visualisierungen,
   methoden_fuenfPrinzipien,
   vorpruefung,
 } from "@/config/routes";
@@ -13,6 +12,7 @@ import ImageZoomable from "@/components/ImageZoomable";
 import { contact } from "@/resources/content/shared/contact";
 import { getTabAnchorLinkFromLabel } from "@/utils/tabs";
 import { tabLabels } from "./_tabs";
+import { ZFL_BASE_URL } from "@/resources/constants";
 ---
 
 <section class="space-y-40" {...Astro.props}>
@@ -128,7 +128,9 @@ import { tabLabels } from "./_tabs";
         5 Prinzipien für digitaltaugliche, interoperable Regelungen
       </a>
       . Auch{" "}
-      <a href={beispiele_visualisierungen.path}>Prozessvisualisierungen</a>{" "}
+      <a href={ZFL_BASE_URL + "/werkzeuge/ressourcen/visualisierungen"}
+        >Prozessvisualisierungen</a
+      >{" "}
       sind hilfreich, z.B. um grenzüberschreitende Datenflüsse zu identifizieren.
       Die Vorgehensweise ist also ganz ähnlich zur bekannten Arbeit an digitaltauglichen
       Regelungen.

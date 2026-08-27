@@ -8,6 +8,7 @@ import { describe, expect, it } from "vitest";
 
 describe("Methoden Route - Integration Tests", () => {
   let screen: BoundFunctions<typeof queries>;
+  const ZFL_BASE_PATH = "https://zfl.bund.de";
 
   beforeEach(async () => {
     const { dom } = await renderToDOM(Methoden as AstroComponentFactory);
@@ -38,7 +39,7 @@ describe("Methoden Route - Integration Tests", () => {
 
     expect(within(visualisationItem).getByRole("link")).toHaveAttribute(
       "href",
-      "/methoden/visualisieren",
+      ZFL_BASE_PATH + "/werkzeuge/ressourcen/flussdiagramm",
     );
 
     expect(
@@ -86,7 +87,7 @@ describe("Methoden Route - Integration Tests", () => {
     }).parentElement!;
     expect(within(itSystemsBox).getByRole("link")).toHaveAttribute(
       "href",
-      "/methoden/it-systeme-erfassen",
+      ZFL_BASE_PATH + "/werkzeuge/ressourcen/it-systeme",
     );
 
     const technicalFeasibilityBox = screen.getByRole("heading", {
@@ -95,7 +96,7 @@ describe("Methoden Route - Integration Tests", () => {
     }).parentElement!;
     expect(within(technicalFeasibilityBox).getByRole("link")).toHaveAttribute(
       "href",
-      "/methoden/technische-umsetzbarkeit",
+      ZFL_BASE_PATH + "/werkzeuge/ressourcen/technische-umsetzbarkeit",
     );
   });
 

@@ -24,7 +24,6 @@ const IntersectionObserverMock = vi.fn(
 vi.stubGlobal("IntersectionObserver", IntersectionObserverMock);
 
 // Create mock data that simulates the data structure returned by the loader.
-// This includes a principle with a full example and one without to test conditional rendering.
 const mockAspectApplication1_1 = {
   Titel: "1.1a",
   Erklaerung: [],
@@ -34,27 +33,6 @@ const mockAspectApplication1_1 = {
       children: [{ type: "text", text: "Ein Formulierungsbeispiel für 1.1a" }],
     },
   ] as Node[],
-  Beispiel: {
-    documentId: "def-1",
-    Nummer: 1,
-    Text: [
-      {
-        type: "paragraph",
-        children: [{ type: "text", text: "1.1a Beispieltext." }],
-      },
-    ],
-    PrinzipErfuellungen: [],
-
-    Paragraph: {
-      Nummer: 1,
-      Gesetz: "AspAnwG",
-      Titel: "Titel des Anwendungsparagraphen",
-      Beispielvorhaben: {
-        URLBezeichnung: "anwendung-beispielvorhaben",
-        Titel: "Anwendung-Beispielvorhaben",
-      },
-    },
-  },
 };
 
 const mockAspect1 = {
@@ -66,27 +44,6 @@ const mockAspect1 = {
       children: [{ type: "text", text: "Aspekt 1.1 Text" }],
     },
   ] as Node[],
-  Beispiel: {
-    documentId: "abc-1",
-    Nummer: 1,
-    Text: [
-      {
-        type: "paragraph",
-        children: [{ type: "text", text: "Aspekt 1.1 Beispieltext." }],
-      },
-    ],
-    PrinzipErfuellungen: [],
-
-    Paragraph: {
-      Nummer: 11,
-      Gesetz: "AspG",
-      Titel: "Titel des Aspekt-Paragraphen",
-      Beispielvorhaben: {
-        URLBezeichnung: "aspekt-beispielvorhaben",
-        Titel: "Aspekt-Beispielvorhaben",
-      },
-    },
-  },
   Anwendung: [mockAspectApplication1_1],
   Kurzbezeichnung: "A1",
   Beschreibung: "",
@@ -121,13 +78,11 @@ const mockPrinzipData: PrinzipWithAspekte = {
           children: [{ type: "text", text: "Anwendung Text 1.2" }],
         },
       ] as Node[],
-      Beispiel: undefined,
       Anwendung: [],
       Kurzbezeichnung: "A2",
       Beschreibung: "",
     },
   ],
-  Beispiel: undefined, // not supported at the moment
 };
 
 const mockPrinzipsList: PrinzipListItem[] = [];
@@ -172,60 +127,7 @@ describe("FivePrinciples Route - Integration Tests", () => {
     expect(screen.queryByText("Kurzbeschreibung")).not.toBeInTheDocument();
   });
 
-  it("renders the aspect example", () => {
-    const sectionHeading = screen.getByRole("heading", {
-      name: `${mockAspect1.Nummer} ${mockAspect1.Titel}`,
-      level: 2,
-    });
-    const section = sectionHeading.closest("section") as HTMLElement;
-
-    const aspectParagraphTitle = `§ ${mockAspect1.Beispiel.Paragraph.Nummer} ${mockAspect1.Beispiel.Paragraph.Gesetz}`;
-    expect(within(section).getByText(aspectParagraphTitle)).toBeInTheDocument();
-    expect(
-      within(section).getByText(getTextFromNodes(mockAspect1.Beispiel.Text)),
-    ).toBeInTheDocument();
-
-    const link = within(section).getByRole("link", {
-      name: /Ganzes Beispiel zeigen/i,
-    });
-    expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute(
-      "href",
-      `/beispiele/prinzipien/nutzerfreundlichkeit#absatz-${mockAspect1.Beispiel.documentId}`,
-    );
-  });
-
   // Note: userEvent doesn't work with the current Astro test setup
-
-  // it("renders the aspect > application example", async () => {
-  //   const detailsHeading = screen.getByRole("button", {
-  //     name: "1.1a",
-  //   });
-  //
-  //   // Click to expand the details section
-  //   await userEvent.click(detailsHeading);
-  //
-  //   const exampleSection = screen
-  //     .getByText("1.1a Beispieltext.")
-  //     .closest("div[data-open]") as HTMLElement;
-  //
-  //   expect(
-  //     within(exampleSection).getByRole("heading", {
-  //       level: 4,
-  //       name: "Ein Textbeispiel",
-  //     }),
-  //   ).toBeInTheDocument();
-  //   expect(within(exampleSection).getByText("§ 1 AspAnwG")).toBeInTheDocument();
-  //
-  //   const link = within(exampleSection).getByRole("link", {
-  //     name: "Ganzes Beispiel zeigen",
-  //   });
-  //   expect(link).toBeInTheDocument();
-  //   expect(link).toHaveAttribute(
-  //     "href",
-  //     `/beispiele/prinzipien/nutzerfreundlichkeit#absatz-${mockAspectApplication1_1.Beispiel.documentId}`,
-  //   );
-  // });
 
   // it("renders the aspect > application Formulierungsbeispiel", async () => {
   //   const expectedText = getTextFromNodes(

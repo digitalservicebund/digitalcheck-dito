@@ -22,28 +22,6 @@ export const barrierefreiheit = {
   navLabel: null,
 } as const;
 
-export const beispiele = {
-  key: "beispiele",
-  path: "/beispiele",
-  title: "Beispiele für Digitaltauglichkeit",
-  parent: null,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
-export const beispiele_visualisierungen = {
-  key: "beispiele_visualisierungen",
-  path: "/beispiele/visualisierungen",
-  title: "Beispiele für Visualisierungen",
-  parent: beispiele,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
 export const bundeslaender = {
   key: "bundeslaender",
   path: "/bundeslaender",
@@ -431,8 +409,6 @@ export const zahlenUndFakten = {
 
 export const allRoutes = [
   barrierefreiheit,
-  beispiele,
-  beispiele_visualisierungen,
   bundeslaender,
   dasIstNeu,
   datenschutz,

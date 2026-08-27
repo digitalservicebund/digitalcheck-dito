@@ -8,6 +8,7 @@ import { beforeAll, describe, expect, it } from "vitest";
 
 describe("Index Route - Integration Tests", () => {
   let main: BoundFunctions<typeof queries>;
+  const ZFL_BASE_PATH = "https://zfl.bund.de";
 
   beforeAll(async () => {
     const { dom } = await renderToDOM(Index as AstroComponentFactory);
@@ -89,7 +90,7 @@ describe("Index Route - Integration Tests", () => {
       within(digitalTauglichkeitBox).getByRole("link", {
         name: /Digitaltauglichkeit/,
       }),
-    ).toHaveAttribute("href", "/grundlagen/digitaltauglichkeit");
+    ).toHaveAttribute("href", ZFL_BASE_PATH + "/werkzeuge/digitaltauglichkeit");
 
     // Second InfoBox
     const nkrBox = main.getByRole("heading", {
@@ -115,13 +116,19 @@ describe("Index Route - Integration Tests", () => {
       within(visualizationsBox).getByRole("link", {
         name: /Visualisierungen/,
       }),
-    ).toHaveAttribute("href", "/methoden/visualisieren");
+    ).toHaveAttribute(
+      "href",
+      ZFL_BASE_PATH + "/werkzeuge/ressourcen/flussdiagramm",
+    );
 
     expect(
       within(visualizationsBox).getByRole("link", {
         name: "Beispiele",
       }),
-    ).toHaveAttribute("href", "/beispiele/visualisierungen");
+    ).toHaveAttribute(
+      "href",
+      ZFL_BASE_PATH + "/werkzeuge/ressourcen/visualisierungen",
+    );
 
     // Principles InfoBox
     const principlesBox = main.getByRole("heading", {
@@ -139,7 +146,11 @@ describe("Index Route - Integration Tests", () => {
       within(principlesBox).getByRole("link", {
         name: "Beispiele",
       }),
-    ).toHaveAttribute("href", "/beispiele/prinzipien");
+    ).toHaveAttribute(
+      "href",
+      ZFL_BASE_PATH +
+        "/werkzeuge/digitaltauglichkeit/beispiele-im-regelungstext",
+    );
   });
 
   it("renders the individual support section", () => {

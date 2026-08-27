@@ -145,49 +145,9 @@ exports[`Footer Component > Renders correctly 1`] = `
                
               <a
                 class="increase-tap-area kern-link kern-link--small"
-                href="/grundlagen/digitaltauglichkeit"
-              >
-                Was ist Digitaltauglichkeit?
-              </a>
-            </li>
-            <li>
-               
-              <a
-                class="increase-tap-area kern-link kern-link--small"
                 href="/grundlagen/normenkontrollrat"
               >
                 NKR und Digitalcheck
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div
-          class="kern-stack-sm"
-        >
-          <h2
-            class="kern-heading-medium"
-          >
-            Beispiele
-          </h2>
-          <ul
-            class="list-unstyled kern-body kern-body--small kern-body--muted flex flex-col gap-8"
-          >
-            <li>
-               
-              <a
-                class="increase-tap-area kern-link kern-link--small"
-                href="/beispiele/prinzipien"
-              >
-                Digitaltauglichkeit im Regelungstext
-              </a>
-            </li>
-            <li>
-               
-              <a
-                class="increase-tap-area kern-link kern-link--small"
-                href="/beispiele/visualisierungen"
-              >
-                Visualisierungen
               </a>
             </li>
           </ul>

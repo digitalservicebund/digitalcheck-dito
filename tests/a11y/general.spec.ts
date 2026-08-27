@@ -4,7 +4,6 @@ import { expect, test } from "@playwright/test";
 
 import {
   allRoutes,
-  beispiele_prinzipien,
   methoden_fuenfPrinzipien,
   vorpruefung_ergebnis,
 } from "@/config/routes";
@@ -45,25 +44,6 @@ test.describe("basic example a11y test", () => {
         await checkPage(page);
       });
     });
-
-  test("check a11y of example pages", async ({ page }) => {
-    await page.goto(beispiele_prinzipien.path);
-
-    await checkPage(page);
-
-    // get URL of first regelung from page
-    const regelungUrl = await page.getAttribute(
-      '[data-testid="regelung-on-prinzip"] a',
-      "href",
-    );
-    expect(regelungUrl).not.toBeNull();
-
-    if (regelungUrl !== null) {
-      await page.goto(regelungUrl);
-
-      await checkPage(page);
-    }
-  });
 
   test("check a11y of principle pages", async ({ page }) => {
     const principlesUrl = methoden_fuenfPrinzipien.path;
