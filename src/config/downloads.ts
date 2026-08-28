@@ -37,3 +37,8 @@ export const interoperabilityTemplateWord: DownloadRoute = {
   path: `${basePath}/documents/TEMPLATE_Interoperabilitaetsbewertung.docx`,
   filename: "Vorlage – Interoperabilitaetsbewertung.docx",
 };
+
+export const bundeslaenderLeitfadenPdf: DownloadRoute = {
+  path: `${basePath}/documents/Leitfaden_DigitalcheckAlsBundeslandEinfuehren_Aug2026.pdf`,
+  filename: "Leitfaden_DigitalcheckAlsBundeslandEinfuehren_Aug2026.pdf",
+};
