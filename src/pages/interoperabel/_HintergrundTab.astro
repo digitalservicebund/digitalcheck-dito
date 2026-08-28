@@ -12,7 +12,7 @@ import ImageZoomable from "@/components/ImageZoomable";
 import { contact } from "@/resources/content/shared/contact";
 import { getTabAnchorLinkFromLabel } from "@/utils/tabs";
 import { tabLabels } from "./_tabs";
-import { ZFL_BASE_URL } from "@/resources/constants";
+import { ZFL_BASE_URL, ZFL_PATH_VISUALISIERUNGEN } from "@/resources/constants";
 ---
 
 <section class="space-y-40" {...Astro.props}>
@@ -128,7 +128,7 @@ import { ZFL_BASE_URL } from "@/resources/constants";
         5 Prinzipien für digitaltaugliche, interoperable Regelungen
       </a>
       . Auch{" "}
-      <a href={ZFL_BASE_URL + "/werkzeuge/ressourcen/visualisierungen"}
+      <a href={ZFL_BASE_URL + ZFL_PATH_VISUALISIERUNGEN}
         >Prozessvisualisierungen</a
       >{" "}
       sind hilfreich, z.B. um grenzüberschreitende Datenflüsse zu identifizieren.

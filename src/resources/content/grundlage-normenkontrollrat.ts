@@ -1,6 +1,6 @@
 import { dokumentation, vorpruefung } from "@/config/routes";
 import { dedent } from "@/utils/dedentMultilineStrings";
-import { ZFL_BASE_URL } from "../constants";
+import { ZFL_BASE_URL, ZFL_PATH_VISUALISIERUNGEN } from "../constants";
 
 export const fundamentalsNKR = {
   title:
@@ -62,7 +62,7 @@ export const fundamentalsNKR = {
         
         Auch wenn Visualisierungen nicht verpflichtend sind, **erleichtern und beschleunigen** sie die NKR-Prüfung Ihres Vorhabens.
 
-        [Mehr zu Visualisierungen](${ZFL_BASE_URL + "/werkzeuge/ressourcen/visualisierungen"})
+        [Mehr zu Visualisierungen](${ZFL_BASE_URL + ZFL_PATH_VISUALISIERUNGEN})
       `,
     },
     infoBox2: {

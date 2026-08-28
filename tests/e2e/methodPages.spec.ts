@@ -1,12 +1,15 @@
 import { methoden, methoden_fuenfPrinzipien } from "@/config/routes";
-import { ZFL_BASE_URL } from "@/resources/constants";
+import {
+  ZFL_BASE_URL,
+  ZFL_PATH_TECHNISCHE_UMSETZBARKEIT,
+} from "@/resources/constants";
 import { expect, test } from "@playwright/test";
 
 const ROUTE_LANDING = "/";
 const ROUTE_METHODS = methoden.path;
 const ROUTE_METHODS_PRINCIPLES = methoden_fuenfPrinzipien.path;
 const ROUTE_METHODS_TECHNICAL_FEASIBILITY =
-  ZFL_BASE_URL + "/werkzeuge/ressourcen/technische-umsetzbarkeit";
+  ZFL_BASE_URL + ZFL_PATH_TECHNISCHE_UMSETZBARKEIT;
 
 test.describe("five principles page", () => {
   test.fixme("five principles conditional next step is accurate", async ({

@@ -9,7 +9,10 @@ import { interoperabel } from "@/config/routes";
 import { contact } from "@/resources/content/shared/contact";
 import { dedent } from "@/utils/dedentMultilineStrings";
 import { getTabAnchorLink } from "@/utils/tabs";
-import { ZFL_BASE_URL } from "@/resources/constants";
+import {
+  ZFL_BASE_URL,
+  ZFL_PATH_DIGITALTAUGLICHKEIT,
+} from "@/resources/constants";
 
 export const frontmatter = {
   title: "Fragen und Antworten",
@@ -23,7 +26,7 @@ const faqItems = [
           
           Im Ergebnis bedeutet ein hoher Grad an Interoperabilität, dass digitale öffentliche Dienste über Länder- und Sektorgrenzen funktionieren - Bürgerinnen und Bürger sowie Unternehmen haben eine bessere Nutzendenerfahrung und sparen Zeit und Kosten.
           
-          Die Grundlage bilden hierfür [digitaltaugliche Gesetze](${ZFL_BASE_URL + "/werkzeuge/digitaltauglichkeit"}), die Interoperabilität unterstützen. Für Ihre Arbeit an Vorhaben sollte Interoperabilität in unterschiedlichen Dimensionen bewertet werden. Diese Dimensionen werden im European Interoperability Framework (EIF) definiert.
+          Die Grundlage bilden hierfür [digitaltaugliche Gesetze](${ZFL_BASE_URL + ZFL_PATH_DIGITALTAUGLICHKEIT}), die Interoperabilität unterstützen. Für Ihre Arbeit an Vorhaben sollte Interoperabilität in unterschiedlichen Dimensionen bewertet werden. Diese Dimensionen werden im European Interoperability Framework (EIF) definiert.
         `,
   },
   {

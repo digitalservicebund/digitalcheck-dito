@@ -1,5 +1,12 @@
 // @vitest-environment node
 import Index from "@/pages/index.astro";
+import {
+  ZFL_BASE_URL,
+  ZFL_PATH_BEISPIELE,
+  ZFL_PATH_DIGITALTAUGLICHKEIT,
+  ZFL_PATH_FLUSSDIAGRAMME,
+  ZFL_PATH_VISUALISIERUNGEN,
+} from "@/resources/constants";
 import { renderToDOM } from "@/utils/testUtils";
 import type { BoundFunctions, queries } from "@testing-library/dom";
 import { within } from "@testing-library/dom";
@@ -8,7 +15,6 @@ import { beforeAll, describe, expect, it } from "vitest";
 
 describe("Index Route - Integration Tests", () => {
   let main: BoundFunctions<typeof queries>;
-  const ZFL_BASE_PATH = "https://zfl.bund.de";
 
   beforeAll(async () => {
     const { dom } = await renderToDOM(Index as AstroComponentFactory);
@@ -90,7 +96,7 @@ describe("Index Route - Integration Tests", () => {
       within(digitalTauglichkeitBox).getByRole("link", {
         name: /Digitaltauglichkeit/,
       }),
-    ).toHaveAttribute("href", ZFL_BASE_PATH + "/werkzeuge/digitaltauglichkeit");
+    ).toHaveAttribute("href", ZFL_BASE_URL + ZFL_PATH_DIGITALTAUGLICHKEIT);
 
     // Second InfoBox
     const nkrBox = main.getByRole("heading", {
@@ -116,19 +122,13 @@ describe("Index Route - Integration Tests", () => {
       within(visualizationsBox).getByRole("link", {
         name: /Visualisierungen/,
       }),
-    ).toHaveAttribute(
-      "href",
-      ZFL_BASE_PATH + "/werkzeuge/ressourcen/flussdiagramm",
-    );
+    ).toHaveAttribute("href", ZFL_BASE_URL + ZFL_PATH_FLUSSDIAGRAMME);
 
     expect(
       within(visualizationsBox).getByRole("link", {
         name: "Beispiele",
       }),
-    ).toHaveAttribute(
-      "href",
-      ZFL_BASE_PATH + "/werkzeuge/ressourcen/visualisierungen",
-    );
+    ).toHaveAttribute("href", ZFL_BASE_URL + ZFL_PATH_VISUALISIERUNGEN);
 
     // Principles InfoBox
     const principlesBox = main.getByRole("heading", {
@@ -146,11 +146,7 @@ describe("Index Route - Integration Tests", () => {
       within(principlesBox).getByRole("link", {
         name: "Beispiele",
       }),
-    ).toHaveAttribute(
-      "href",
-      ZFL_BASE_PATH +
-        "/werkzeuge/digitaltauglichkeit/beispiele-im-regelungstext",
-    );
+    ).toHaveAttribute("href", ZFL_BASE_URL + ZFL_PATH_BEISPIELE);
   });
 
   it("renders the individual support section", () => {

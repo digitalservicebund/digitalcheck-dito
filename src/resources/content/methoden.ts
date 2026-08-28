@@ -2,7 +2,13 @@ import { methoden_fuenfPrinzipien } from "@/config/routes";
 import { steps } from "@/resources/content/shared/naechste-schritte";
 import type { ContentLink, Step } from "@/utils/contentTypes.ts";
 import { dedent } from "@/utils/dedentMultilineStrings";
-import { ZFL_BASE_URL } from "../constants";
+import {
+  ZFL_BASE_URL,
+  ZFL_PATH_FLUSSDIAGRAMME,
+  ZFL_PATH_INTERVIEW_LEITFADEN,
+  ZFL_PATH_IT_SYSTEME,
+  ZFL_PATH_TECHNISCHE_UMSETZBARKEIT,
+} from "../constants";
 
 export const methods = {
   title: "Erarbeiten eines digitaltauglichen Regelungsvorhabens",
@@ -30,7 +36,7 @@ export const methods = {
         links: [
           {
             text: "Anleitung zur Visualisierung",
-            to: ZFL_BASE_URL + "/werkzeuge/ressourcen/flussdiagramm",
+            to: ZFL_BASE_URL + ZFL_PATH_FLUSSDIAGRAMME,
             externalLink: true,
           },
         ] satisfies ContentLink[],
@@ -95,7 +101,7 @@ export const methods = {
     links: [
       {
         text: "IT-Landschaft verstehen",
-        to: ZFL_BASE_URL + "/werkzeuge/ressourcen/it-systeme",
+        to: ZFL_BASE_URL + ZFL_PATH_IT_SYSTEME,
         externalLink: true,
       },
     ] satisfies ContentLink[],
@@ -108,7 +114,7 @@ export const methods = {
     links: [
       {
         text: "IT-Auswirkungen prüfen",
-        to: ZFL_BASE_URL + "/werkzeuge/ressourcen/technische-umsetzbarkeit",
+        to: ZFL_BASE_URL + ZFL_PATH_TECHNISCHE_UMSETZBARKEIT,
         externalLink: true,
       },
     ] satisfies ContentLink[],
@@ -121,7 +127,7 @@ export const methods = {
     links: [
       {
         text: "Akteure identifizieren",
-        to: ZFL_BASE_URL + "/werkzeuge/ressourcen/interview-leitfaden",
+        to: ZFL_BASE_URL + ZFL_PATH_INTERVIEW_LEITFADEN,
         externalLink: true,
       },
     ] satisfies ContentLink[],

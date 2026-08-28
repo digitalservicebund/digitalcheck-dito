@@ -22,7 +22,13 @@ import InfoBoxSideBySide from "@/components/InfoBoxSideBySide";
 import RichText from "@/components/RichText";
 import { withBase } from "@/utils/path";
 import { dedent } from "@/utils/dedentMultilineStrings";
-import { ZFL_BASE_URL } from "@/resources/constants";
+import {
+  ZFL_BASE_URL,
+  ZFL_PATH_BEISPIELE,
+  ZFL_PATH_DIGITALTAUGLICHKEIT,
+  ZFL_PATH_FLUSSDIAGRAMME,
+  ZFL_PATH_VISUALISIERUNGEN,
+} from "@/resources/constants";
 import SupportBanner from "@/components/SupportBanner";
 
 export const frontmatter = {
@@ -170,7 +176,7 @@ const steps = [
           links={[
             {
               text: "Mehr zur Digitaltauglichkeit erfahren",
-              to: ZFL_BASE_URL + "/werkzeuge/digitaltauglichkeit",
+              to: ZFL_BASE_URL + ZFL_PATH_DIGITALTAUGLICHKEIT,
               look: "ghost",
             },
           ]}
@@ -220,13 +226,13 @@ const steps = [
               links={[
                 {
                   text: "Zu Visualisierungen",
-                  to: ZFL_BASE_URL + "/werkzeuge/ressourcen/flussdiagramm",
+                  to: ZFL_BASE_URL + ZFL_PATH_FLUSSDIAGRAMME,
                   look: "tertiary",
                   externalLink: true,
                 },
                 {
                   text: "Beispiele",
-                  to: ZFL_BASE_URL + "/werkzeuge/ressourcen/visualisierungen",
+                  to: ZFL_BASE_URL + ZFL_PATH_VISUALISIERUNGEN,
                   look: "ghost",
                   externalLink: true,
                 },
@@ -250,9 +256,7 @@ const steps = [
                 },
                 {
                   text: "Beispiele",
-                  to:
-                    ZFL_BASE_URL +
-                    "/werkzeuge/digitaltauglichkeit/beispiele-im-regelungstext",
+                  to: ZFL_BASE_URL + ZFL_PATH_BEISPIELE,
                   look: "ghost",
                   externalLink: true,
                 },

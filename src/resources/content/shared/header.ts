@@ -11,7 +11,12 @@ import {
   unterstuetzung,
   vorpruefung,
 } from "@/config/routes";
-import { ZFL_BASE_URL } from "@/resources/constants";
+import {
+  ZFL_BASE_URL,
+  ZFL_PATH_BEISPIELE,
+  ZFL_PATH_DIGITALTAUGLICHKEIT,
+  ZFL_PATH_VISUALISIERUNGEN,
+} from "@/resources/constants";
 import { contact } from "@/resources/content/shared/contact";
 
 export const header = {
@@ -62,7 +67,7 @@ export const header = {
         {
           title: "Digitaltauglichkeit im Regelungstext",
           content: "So wurden die 5 Prinzipien in Regelungen ausformuliert.",
-          href: `${ZFL_BASE_URL}/werkzeuge/digitaltauglichkeit/beispiele`,
+          href: `${ZFL_BASE_URL}${ZFL_PATH_BEISPIELE}`,
           externalLink: true,
           newContent: "Jetzt im Zentrum für Legistik",
         },
@@ -70,7 +75,7 @@ export const header = {
           title: "Visualisierungen",
           content:
             "Veröffentliche Visualisierungen, welche Referaten beim Erarbeiten der Digitaltauglichkeit geholfen haben.",
-          href: `${ZFL_BASE_URL}/werkzeuge/ressourcen/visualisierungen`,
+          href: `${ZFL_BASE_URL}${ZFL_PATH_VISUALISIERUNGEN}`,
           externalLink: true,
           newContent: "Jetzt im Zentrum für Legistik",
         },
@@ -96,7 +101,7 @@ export const header = {
           title: "Was ist Digitaltauglichkeit?",
           content:
             "Welche Relevanz Digitaltauglichkeit hat und wie Ihre Regelung davon profitiert.",
-          href: `${ZFL_BASE_URL}/werkzeuge/digitaltauglichkeit`,
+          href: `${ZFL_BASE_URL}${ZFL_PATH_DIGITALTAUGLICHKEIT}`,
           externalLink: true,
           newContent: "Jetzt im Zentrum für Legistik",
         },

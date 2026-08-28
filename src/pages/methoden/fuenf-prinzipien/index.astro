@@ -18,7 +18,7 @@ import { PrinciplePosterBox } from "@/components/PrinciplePosterBox";
 import RichText from "@/components/RichText.tsx";
 import { methodsFivePrinciples } from "@/resources/content/methode-fuenf-prinzipien";
 import { fetchPrinzipsWithExamples } from "@/utils/strapiData.server";
-import { ZFL_BASE_URL } from "@/resources/constants";
+import { ZFL_BASE_URL, ZFL_PATH_FLUSSDIAGRAMME } from "@/resources/constants";
 
 export const frontmatter = {
   title: "Fünf Prinzipien",
@@ -51,7 +51,7 @@ const prinzips = await fetchPrinzipsWithExamples();
               Umsetzungsprozesses an. So lokalisieren Sie relevante
               Schnittstellen Schritt für Schritt.
             </p>
-            <a href={ZFL_BASE_URL + "/werkzeuge/ressourcen/flussdiagramm"}>
+            <a href={ZFL_BASE_URL + ZFL_PATH_FLUSSDIAGRAMME}>
               Zur Methode Visualisieren
             </a>
           </div>
