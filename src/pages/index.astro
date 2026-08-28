@@ -88,12 +88,21 @@ const steps = [
       subtitle="Der Digitalcheck ist eine Prozessbegleitung für Ihr Regelungsvorhaben. Sie stellen damit Digitaltauglichkeit sicher."
       className="bg-blue-800 text-white"
     />
-    <div class="breakout bg-yellow-300 py-8">
-      <p class="breakout">
-        Der Digitalcheck und das Zentrum für Legistik rücken näher zusammen.
-        Deshalb finden Sie ab jetzt bekannte Inhalte aus dem Digitalcheck im
-        Zentrum für Legistik.
-      </p>
+    <div class="breakout bg-yellow-300 py-24">
+      <div>
+        <div class="flex items-center">
+          <Badge className="mr-8" look="hint">NEU</Badge>
+          <p class="kern-heading-small">
+            Digitalcheck und das Zentrum für Legistik wachsen zusammen.
+          </p>
+        </div>
+        <p class="kern-body kern-body--medium">
+          Erste Inhalte finden Sie ab sofort dort. <a
+            href={ZFL_BASE_URL + "/werkzeuge"}
+            class="link-unstyled kern-link kern-link">Jetzt ansehen</a
+          >
+        </p>
+      </div>
     </div>
     <div class="py-40 lg:py-80">
       <Heading tagName="h2" text="Schritt für Schritt" className="mb-40" />
