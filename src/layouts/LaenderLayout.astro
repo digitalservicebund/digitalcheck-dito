@@ -57,11 +57,12 @@ const { title, bundesland } = Astro.props;
   @reference "../styles/globals.css";
 
   main {
-    h2 {
-      margin-bottom: 1rem;
-    }
-    section {
+    section:not(.kern-card__body) {
       @apply py-40 md:py-64;
+
+      h2 {
+        @apply mb-16;
+      }
     }
   }
 </style>

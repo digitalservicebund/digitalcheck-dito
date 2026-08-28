@@ -214,7 +214,7 @@
   @apply relative inline-block;
 
   &::before {
-    @apply absolute -top-12 -right-12 -bottom-12 -left-12 content-[''];
+    @apply absolute -top-3 -right-12 -bottom-9 -left-12 content-[''];
   }
 }
 

@@ -269,18 +269,18 @@ export const preCheck = {
       text: "**Praxisbeispiel**: Arbeitnehmende müssen ihr Gehalt in der Einkommenssteuererklärung angeben. Diese Information liegt der Sozialversicherung bereits vor. Eine Wiederverwendung dieser Daten ist bürokratiearm und sollte bei der Erarbeitung der Regelung angestrebt werden.",
       hint: {
         title: "Was ist mit „Daten erheben“ gemeint?",
-        text: "Einige Informationen liegen in der Verwaltung bereits vor: Dies können Daten von Bürgerinnen und Bürger, Unternehmen und Organisationen, z.B. von Vereinen, sein. Im besten Fall werden diese Daten automatisiert zwischen den Behörden ausgetauscht.",
+        text: "Einige Informationen liegen in der Verwaltung bereits vor: Dies können Daten von Bürgerinnen und Bürgern, Unternehmen und Organisationen, z.B. von Vereinen, sein. Im besten Fall werden diese Daten automatisiert zwischen den Behörden ausgetauscht.",
       },
     },
     {
       id: "kommunikation",
       title: "Digitale Kommunikation",
       question:
-        "Führt die Regelung zu einer Interaktion zwischen Behörden und Bürgerinnen und Bürger bzw. Unternehmen?",
+        "Führt die Regelung zu einer Interaktion zwischen Behörden und Bürgerinnen und Bürgern bzw. Unternehmen?",
       positiveResult:
-        "einer Interaktion zwischen Behörden und Bürgerinnen und Bürger bzw. Unternehmen.",
+        "einer Interaktion zwischen Behörden und Bürgerinnen und Bürgern bzw. Unternehmen.",
       negativeResult:
-        "keiner Interaktion zwischen Behörden und Bürgerinnen und Bürger bzw. Unternehmen.",
+        "keiner Interaktion zwischen Behörden und Bürgerinnen und Bürgern bzw. Unternehmen.",
       text: "**Praxisbeispiel**: Ein Antrag für Steuerentlastung muss gestellt und abgeschickt werden — dies kann digital, ohne händische Unterschrift oder analoge Nachweise geschehen. Es können z.B. Unternehmen, Bürgerinnen und Bürger oder Organisationen den Antrag einreichen.",
     },
     {

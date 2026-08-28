@@ -1,0 +1,106 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import { tv, type VariantProps } from "tailwind-variants";
+
+const cardStyles = tv({
+  base: "kern-card",
+  variants: {
+    background: {
+      lavender: "bg-lavender-200",
+      white: "bg-white",
+    },
+  },
+  defaultVariants: {
+    background: "lavender",
+  },
+});
+
+interface Props extends VariantProps<typeof cardStyles> {
+  title: string;
+  target_option?: "_blank" | "_self";
+  href?: string;
+  preline?: string;
+  body?: string;
+  subline?: string;
+  background?: "lavender" | "white";
+  image?: ImageMetadata;
+  imageAlt?: string | null;
+  imageSource?: string;
+  interactive?: boolean;
+}
+
+const {
+  preline,
+  title,
+  target_option = "_self",
+  href,
+  subline,
+  body,
+  background,
+  image,
+  imageAlt,
+  imageSource,
+  interactive = !!href,
+} = Astro.props;
+
+const hasFooter = Astro.slots.has("footer");
+---
+
+<article
+  class={cardStyles({
+    background,
+    class: interactive ? "kern-card--interactive" : undefined,
+  })}
+>
+  {
+    image && imageAlt !== undefined && (
+      <div class="kern-card__media relative">
+        <Image
+          src={image}
+          alt={imageAlt}
+          class="h-208 object-cover"
+          densities={[1, 2]}
+          width="382"
+          height="208"
+          quality={100}
+        />
+        {imageSource && (
+          <p class="absolute right-0 bottom-0 w-auto! rounded-none! bg-black/40 px-4 text-xs text-white">
+            Quelle: {imageSource}
+          </p>
+        )}
+      </div>
+    )
+  }
+  <div class="kern-card__container">
+    <header class="kern-card__header">
+      <slot name="pre-header" />
+      <hgroup>
+        {preline && <p class="kern-preline">{preline}</p>}
+        <h2 class="kern-title">
+          {
+            href ? (
+              /* prettier-ignore */ <a href={href} class="kern-link--stretched hyphens-auto [word-break:break-word]" target={target_option}>{title}
+              </a>
+            ) : (
+              title
+            )
+          }
+        </h2>
+        {subline && <p class="kern-subline">{subline}</p>}
+      </hgroup>
+    </header>
+    <section class="kern-card__body">
+      {body && <p class="kern-body">{body}</p>}
+      <slot />
+    </section>
+    {
+      hasFooter && (
+        <footer class="kern-card__footer">
+          <slot name="footer" />
+        </footer>
+      )
+    }
+  </div>
+</article>

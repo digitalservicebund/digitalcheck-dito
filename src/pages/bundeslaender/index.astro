@@ -5,9 +5,11 @@ import Heading from "@/components/Heading";
 import Image from "@/components/Image";
 import AccordionItem from "@/components/AccordionItem";
 import Timeline from "@/components/Timeline";
+import KernCard from "@/components/KernCard.astro";
 import { contact } from "@/resources/content/shared/contact";
-
 import { withBase } from "@/utils/path";
+import { bundeslaenderLeitfadenPdf } from "@/config/downloads";
+import leitfadenImg from "./_leitfaden.png";
 
 export const frontmatter = {
   title: "Gemeinsamer Digitalcheck für Bund und Länder",
@@ -235,6 +237,30 @@ export const frontmatter = {
           </Timeline.ItemContent>
         </Timeline.Item>
       </Timeline>
+    </div>
+    <div class="space-y-32">
+      <h2>Ihr Land hat noch keinen Digitalcheck?</h2>
+      <div class="sm:w-380">
+        <KernCard
+          preline="Leitfaden"
+          title="Digitalcheck als Bundesland einführen"
+          body="Die Checkliste bündelt die wichtigsten Handlungsempfehlungen für Vorbereitung, Durchführung und Nachbereitung."
+          image={leitfadenImg}
+          imageAlt="Symbolbild Leitfaden"
+        >
+          <p></p>
+          <a
+            slot="footer"
+            href={bundeslaenderLeitfadenPdf.path}
+            class="link-unstyled kern-btn kern-btn--secondary"
+          >
+            <span
+              class="kern-icon kern-icon--download kern-icon--default"
+              aria-hidden="true"></span>
+            <span class="kern-label">Leitfaden herunterladen (PDF)</span>
+          </a>
+        </KernCard>
+      </div>
     </div>
   </section>
   <section class="breakout bg-blue-300 py-32 sm:py-80">
