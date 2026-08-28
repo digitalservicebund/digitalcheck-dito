@@ -127,6 +127,7 @@ const LinkList = ({ links }: { links: ContentLink[] }) => (
           href={to}
           iconRight={externalLink ? "kern-icon--open-in-new" : undefined}
           {...rest}
+          target={externalLink ? "_blank" : "_self"}
         >
           {text}
         </LinkButton>

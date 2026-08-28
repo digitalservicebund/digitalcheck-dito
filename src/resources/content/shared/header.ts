@@ -138,7 +138,6 @@ export const header = {
         },
         {
           title: "Nationale Kontaktstelle",
-          isNewTitle: true,
           content:
             "Nationale Kontaktstelle für ein interoperables Europa (2024/903 Art. 17).",
           href: interoperabel_nationaleKontaktstelle.path,
