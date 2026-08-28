@@ -61,8 +61,7 @@ export const header = {
       overlayContent: [
         {
           title: "Digitaltauglichkeit im Regelungstext",
-          content:
-            "So wurden die 5 Prinzipien von Ihren Kolleginnen und Kollegen in Regelungen ausformuliert.",
+          content: "So wurden die 5 Prinzipien in Regelungen ausformuliert.",
           href: `${ZFL_BASE_URL}/werkzeuge/digitaltauglichkeit/beispiele`,
           externalLink: true,
           newContent: "Jetzt im Zentrum für Legistik",

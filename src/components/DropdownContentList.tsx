@@ -107,7 +107,7 @@ export default function DropdownContentList({
                 <Badge className="mr-8" look="hint">
                   NEU
                 </Badge>
-                <span>{option.newContent}</span>
+                <span className="kern-preline">{option.newContent}</span>
               </div>
             )}
           </div>
