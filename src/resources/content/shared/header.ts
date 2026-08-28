@@ -64,12 +64,16 @@ export const header = {
           content:
             "So wurden die 5 Prinzipien von Ihren Kolleginnen und Kollegen in Regelungen ausformuliert.",
           href: `${ZFL_BASE_URL}/werkzeuge/digitaltauglichkeit/beispiele`,
+          externalLink: true,
+          newContent: "Jetzt im Zentrum für Legistik",
         },
         {
           title: "Visualisierungen",
           content:
             "Veröffentliche Visualisierungen, welche Referaten beim Erarbeiten der Digitaltauglichkeit geholfen haben.",
-          href: ZFL_BASE_URL + "/werkzeuge/ressourcen/visualisierungen",
+          href: `${ZFL_BASE_URL}/werkzeuge/ressourcen/visualisierungen`,
+          externalLink: true,
+          newContent: "Jetzt im Zentrum für Legistik",
         },
       ],
     },
@@ -84,7 +88,6 @@ export const header = {
         },
         {
           title: "EU-Interoperabilität",
-          isNewTitle: true,
           content:
             "Verstehen Sie, was es mit EU-Interoperabilität auf sich hat.",
           href: interoperabel.path,
@@ -94,12 +97,12 @@ export const header = {
           title: "Was ist Digitaltauglichkeit?",
           content:
             "Welche Relevanz Digitaltauglichkeit hat und wie Ihre Regelung davon profitiert.",
-          href: "https://zfl.bund.de",
-          isExternal: true,
+          href: `${ZFL_BASE_URL}/werkzeuge/digitaltauglichkeit`,
+          externalLink: true,
+          newContent: "Jetzt im Zentrum für Legistik",
         },
         {
           title: "NKR und Digitalcheck",
-          isNewTitle: true,
           content:
             "Aufgaben und Vorgehensweise des Nationalen Normenkontrollrat im Kontext des Digitalcheck.",
           href: grundlagen_normenkontrollrat.path,
