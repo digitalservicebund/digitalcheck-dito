@@ -3,7 +3,6 @@ import { expect, test } from "@playwright/test";
 import {
   allRoutes,
   barrierefreiheit,
-  beispiele_prinzipien,
   datenschutz,
   dokumentation,
   grundlagen,
@@ -24,13 +23,6 @@ function getExpectedTitle(route: Pick<Route, "path" | "title">) {
 
   if (route.path === home.path)
     return "Digitalcheck: Digitaltaugliche Regelungen erarbeiten";
-  if (
-    route.path.startsWith(beispiele_prinzipien.path) &&
-    !route.path.endsWith(beispiele_prinzipien.path)
-  ) {
-    // All tabs (and their routes) on the principle example pages have the same page title
-    return `${beispiele_prinzipien.title}${titleSuffix}`;
-  }
   if (
     route.path === grundlagen.path ||
     route.path === "/grundlagen/fuenf-prinzipien"

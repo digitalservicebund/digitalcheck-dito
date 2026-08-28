@@ -71,9 +71,14 @@ export function TimelineItemContent({
       {links && links.length > 0 && (
         <ButtonContainer>
           {links.map((link) => {
-            const { to, text, ...rest } = link;
+            const { to, text, externalLink = false, ...rest } = link;
             return (
-              <LinkButton key={to} href={to} {...rest}>
+              <LinkButton
+                key={to}
+                href={to}
+                iconRight={externalLink ? "kern-icon--open-in-new" : undefined}
+                {...rest}
+              >
                 {text}
               </LinkButton>
             );

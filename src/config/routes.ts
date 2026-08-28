@@ -22,39 +22,6 @@ export const barrierefreiheit = {
   navLabel: null,
 } as const;
 
-export const beispiele = {
-  key: "beispiele",
-  path: "/beispiele",
-  title: "Beispiele für Digitaltauglichkeit",
-  parent: null,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
-export const beispiele_prinzipien = {
-  key: "beispiele_prinzipien",
-  path: "/beispiele/prinzipien",
-  title: "Die Prinzipien im Regelungstext",
-  parent: beispiele,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
-export const beispiele_visualisierungen = {
-  key: "beispiele_visualisierungen",
-  path: "/beispiele/visualisierungen",
-  title: "Beispiele für Visualisierungen",
-  parent: beispiele,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
 export const bundeslaender = {
   key: "bundeslaender",
   path: "/bundeslaender",
@@ -253,17 +220,6 @@ export const grundlagen = {
   navLabel: null,
 } as const;
 
-export const grundlagen_digitaltauglichkeit = {
-  key: "grundlagen_digitaltauglichkeit",
-  path: "/grundlagen/digitaltauglichkeit",
-  title: "Digitaltauglichkeit",
-  parent: grundlagen,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
 export const grundlagen_normenkontrollrat = {
   key: "grundlagen_normenkontrollrat",
   path: "/grundlagen/normenkontrollrat",
@@ -385,83 +341,6 @@ export const methoden_fuenfPrinzipien = {
   navLabel: null,
 } as const;
 
-export const methoden_interviewLeitfaden = {
-  key: "methoden_interviewLeitfaden",
-  path: "/methoden/interview-leitfaden",
-  title: "Interview Leitfaden",
-  parent: methoden,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
-export const methoden_interviewLeitfadenSchritte = {
-  key: "methoden_interviewLeitfadenSchritte",
-  path: "/methoden/interview-leitfaden-schritte",
-  title: "Interview Leitfaden Schritte",
-  parent: methoden,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
-export const methoden_itSystemeErfassen = {
-  key: "methoden_itSystemeErfassen",
-  path: "/methoden/it-systeme-erfassen",
-  title: "IT-Systeme erfassen",
-  parent: methoden,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
-export const methoden_technischeUmsetzbarkeit = {
-  key: "methoden_technischeUmsetzbarkeit",
-  path: "/methoden/technische-umsetzbarkeit",
-  title: "Technische Umsetzbarkeit sicherstellen",
-  parent: methoden,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
-export const methoden_visualisieren = {
-  key: "methoden_visualisieren",
-  path: "/methoden/visualisieren",
-  title: "Visualisieren",
-  parent: methoden,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
-export const methoden_visualisieren_flussdiagramm = {
-  key: "methoden_visualisieren_flussdiagramm",
-  path: "/methoden/visualisieren/flussdiagramm",
-  title: "Anleitung Flussdiagramme",
-  parent: methoden_visualisieren,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
-export const methoden_zustaendigeAkteurinnenAuflisten = {
-  key: "methoden_zustaendigeAkteurinnenAuflisten",
-  path: "/methoden/zustaendige-akteurinnen-auflisten",
-  title: "Akteure auflisten",
-  parent: methoden,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
 export const sitemap = {
   key: "sitemap",
   path: "/sitemap",
@@ -530,9 +409,6 @@ export const zahlenUndFakten = {
 
 export const allRoutes = [
   barrierefreiheit,
-  beispiele,
-  beispiele_prinzipien,
-  beispiele_visualisierungen,
   bundeslaender,
   dasIstNeu,
   datenschutz,
@@ -551,7 +427,6 @@ export const allRoutes = [
   dokumentation_veroeffentlichung,
   dokumentation_zusammenfassung,
   grundlagen,
-  grundlagen_digitaltauglichkeit,
   grundlagen_normenkontrollrat,
   home,
   impressum,
@@ -563,13 +438,6 @@ export const allRoutes = [
   interoperabel_nationaleKontaktstelle,
   methoden,
   methoden_fuenfPrinzipien,
-  methoden_interviewLeitfaden,
-  methoden_interviewLeitfadenSchritte,
-  methoden_itSystemeErfassen,
-  methoden_technischeUmsetzbarkeit,
-  methoden_visualisieren,
-  methoden_visualisieren_flussdiagramm,
-  methoden_zustaendigeAkteurinnenAuflisten,
   sitemap,
   unterstuetzung,
   vorpruefung,

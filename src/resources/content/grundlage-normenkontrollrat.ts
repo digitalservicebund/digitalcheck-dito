@@ -1,10 +1,6 @@
-import {
-  dokumentation,
-  methoden_visualisieren,
-  vorpruefung,
-} from "@/config/routes";
+import { dokumentation, vorpruefung } from "@/config/routes";
 import { dedent } from "@/utils/dedentMultilineStrings";
-import { withBase } from "@/utils/path";
+import { ZFL_BASE_URL, ZFL_PATH_VISUALISIERUNGEN } from "../constants";
 
 export const fundamentalsNKR = {
   title:
@@ -66,7 +62,7 @@ export const fundamentalsNKR = {
         
         Auch wenn Visualisierungen nicht verpflichtend sind, **erleichtern und beschleunigen** sie die NKR-Prüfung Ihres Vorhabens.
 
-        [Mehr zu Visualisierungen](${methoden_visualisieren.path})
+        [Mehr zu Visualisierungen](${ZFL_BASE_URL + ZFL_PATH_VISUALISIERUNGEN})
       `,
     },
     infoBox2: {
@@ -76,32 +72,6 @@ export const fundamentalsNKR = {
         - Hilft die Visualisierung dabei, den Regelungsinhalt **besser zu verstehen**?
         - Ist die Visualisierung **verständlich und lesbar**? 
         - Sind die **Quellen** der Visualisierung korrekt **angegeben**? 
-      `,
-    },
-  },
-  // Still needed?
-  policyMaking: {
-    heading: {
-      text: "Wie funktioniert der Digitalcheck als Prozessbegleitung bei Ihrer Regelungsarbeit?",
-    },
-    content:
-      "Der Digitalcheck begleitet Sie in den unterschiedlichen Phasen Ihrer Regelungsarbeit mit passenden Methoden und Werkzeugen, um Digitaltauglichkeit herzustellen.",
-  },
-  phases: {
-    heading: {
-      text: "So setzen Sie den Digitalcheck in den Phasen Ihres Vorhabens ein",
-    },
-    content:
-      "Die untenstehende Service Landschaft bildet den Entstehungsprozess ab, den Gesetze von der Interessensermittlung bis zum Vollzug durchlaufen. Sie zeigt, wann und wie der Digitalcheck in den unterschiedlichen Phasen zum Einsatz kommt. Der Fokus liegt dabei auf der ministeriellen Gesetzesvorbereitung bis zur Kabinettvorlage.",
-  },
-  phasesImage: {
-    img: {
-      url: withBase("/images/ablaufdiagramm-v3-deutsch.jpg"),
-      alternativeText:
-        "Flussdiagramm, das drei Pfade nach einer Vorprüfung zum Digitalbezug zeigt: 1. Kein Digitalbezug: Ergebnis-E-Mail. 2. Digitalbezug: E-Mail, Anleitung, Dokumentation, Prüfung. 3. Digitalbezug & Interoperabilität: E-Mail an zwei Stellen, Anleitung mit Support, Dokumentation, Bereitstellung auf EU-Portal.",
-      caption: dedent`
-        Digitalcheck Service Landschaft:  
-        Sie zeigt, wie der Digitalcheck in die Phasen des Regelungsentwurfs integriert ist.
       `,
     },
   },

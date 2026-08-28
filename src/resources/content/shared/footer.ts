@@ -1,12 +1,9 @@
 import { ROUTE_SUPPORT_TRAININGS } from "@/config/additionalRoutes";
 import {
   barrierefreiheit,
-  beispiele_prinzipien,
-  beispiele_visualisierungen,
   dasIstNeu,
   datenschutz,
   dokumentation,
-  grundlagen_digitaltauglichkeit,
   grundlagen_normenkontrollrat,
   impressum,
   interoperabel,
@@ -85,26 +82,8 @@ export const footer = {
           url: interoperabel.path,
         },
         {
-          text: "Was ist Digitaltauglichkeit?",
-          url: grundlagen_digitaltauglichkeit.path,
-        },
-        {
           text: "NKR und Digitalcheck",
           url: grundlagen_normenkontrollrat.path,
-        },
-      ],
-    },
-
-    examples: {
-      title: "Beispiele",
-      links: [
-        {
-          text: "Digitaltauglichkeit im Regelungstext",
-          url: beispiele_prinzipien.path,
-        },
-        {
-          text: "Visualisierungen",
-          url: beispiele_visualisierungen.path,
         },
       ],
     },
@@ -136,17 +115,10 @@ export const footer = {
     },
     links: [
       {
-        preText: "Der Digitalcheck entsteht im Auftrag des",
-        text: "Bundesministerium für Digitales und Staatsmodernisierung",
         url: "https://bmds.bund.de/",
         openInNewTab: true,
       },
       {
-        preText:
-          "Mehr über den politischen Auftrag und die Entstehung des Digitalcheck finden Sie auf der",
-        text: "Projektseite",
-        postText:
-          "des Bundesministeriums für Digitales und Staatsmodernisierung.",
         url: "https://www.digitale-verwaltung.de/Webs/DV/DE/transformation/digitalcheck/digitalcheck-node.html",
         openInNewTab: true,
       },

@@ -1,19 +1,19 @@
-import {
-  methoden_fuenfPrinzipien,
-  methoden_interviewLeitfaden,
-  methoden_itSystemeErfassen,
-  methoden_technischeUmsetzbarkeit,
-  methoden_visualisieren,
-} from "@/config/routes";
+import { methoden_fuenfPrinzipien } from "@/config/routes";
 import { steps } from "@/resources/content/shared/naechste-schritte";
 import type { ContentLink, Step } from "@/utils/contentTypes.ts";
 import { dedent } from "@/utils/dedentMultilineStrings";
+import {
+  ZFL_BASE_URL,
+  ZFL_PATH_FLUSSDIAGRAMME,
+  ZFL_PATH_INTERVIEW_LEITFADEN,
+  ZFL_PATH_IT_SYSTEME,
+  ZFL_PATH_TECHNISCHE_UMSETZBARKEIT,
+} from "../constants";
 
 export const methods = {
   title: "Erarbeiten eines digitaltauglichen Regelungsvorhabens",
   subtitle: dedent`
     Hier finden Sie passende Methoden und Werkzeuge, um Digitaltauglichkeit in Ihrer Regelung sicherzustellen.
-
     Gehen Sie am besten in der vorgeschlagenen Reihenfolge vor.
   `,
   steps: {
@@ -29,16 +29,15 @@ export const methods = {
       },
       {
         isSubstep: true,
-        label: { text: "Visualisierung" },
         headline: {
           text: "Visualisieren Sie die aktuellen Abläufe",
         },
-        info: [],
         text: "Damit Ihre Regelung wirkungsvoll in die Praxis kommt, müssen Sie die aktuellen Abläufe verstehen. In diesem Schritt müssen Sie noch nicht auf geplante Neuerungen eingehen. Konzentrieren Sie sich auf den Status Quo.",
         links: [
           {
             text: "Anleitung zur Visualisierung",
-            to: methoden_visualisieren.path,
+            to: ZFL_BASE_URL + ZFL_PATH_FLUSSDIAGRAMME,
+            externalLink: true,
           },
         ] satisfies ContentLink[],
       },
@@ -48,7 +47,6 @@ export const methods = {
       },
       {
         isSubstep: true,
-        label: { text: "5 Prinzipien" },
         headline: {
           text: "Finden Sie konkrete Möglichkeiten der Digitalisierung",
         },
@@ -103,7 +101,8 @@ export const methods = {
     links: [
       {
         text: "IT-Landschaft verstehen",
-        to: methoden_itSystemeErfassen.path,
+        to: ZFL_BASE_URL + ZFL_PATH_IT_SYSTEME,
+        externalLink: true,
       },
     ] satisfies ContentLink[],
   },
@@ -115,7 +114,8 @@ export const methods = {
     links: [
       {
         text: "IT-Auswirkungen prüfen",
-        to: methoden_technischeUmsetzbarkeit.path,
+        to: ZFL_BASE_URL + ZFL_PATH_TECHNISCHE_UMSETZBARKEIT,
+        externalLink: true,
       },
     ] satisfies ContentLink[],
   },
@@ -127,7 +127,8 @@ export const methods = {
     links: [
       {
         text: "Akteure identifizieren",
-        to: methoden_interviewLeitfaden.path,
+        to: ZFL_BASE_URL + ZFL_PATH_INTERVIEW_LEITFADEN,
+        externalLink: true,
       },
     ] satisfies ContentLink[],
   },

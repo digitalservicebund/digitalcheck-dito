@@ -13,6 +13,7 @@ export type DropdownItemProps = {
   href?: string;
   isNewTitle?: boolean;
   activeBehavior?: ActiveBehavior;
+  externalLink?: boolean;
 };
 
 export type DropdownContentListProps = {
@@ -51,6 +52,17 @@ export default function DropdownContentList({
       option.activeBehavior !== "noHighlight" &&
       checkExactMatchCriteria;
     const itemNumber = isOrderedList ? index + 1 : undefined;
+    // aria-label overrides the link's accessible name (the visible content
+    // differs by breakpoint), so any info that should reach screen reader
+    // users - e.g. the "moved to Zentrum für Legistik" hint or a
+    // new-tab warning for external links - must be folded in here.
+    const accessibleLabel = [
+      option.title,
+      option.newContent,
+      option.externalLink && "öffnet in neuem Tab",
+    ]
+      .filter(Boolean)
+      .join(", ");
     return (
       <li key={option.href || option.title || index}>
         <a
@@ -58,8 +70,10 @@ export default function DropdownContentList({
           className="link-unstyled"
           aria-current={isActive ? "page" : undefined}
           onClick={onItemClick}
-          aria-label={option.title}
+          aria-label={accessibleLabel}
           role="menuitem"
+          target={option.externalLink ? "_blank" : "_self"}
+          rel={option.externalLink ? "noreferrer" : undefined}
         >
           <div
             className={twMerge(
@@ -68,7 +82,7 @@ export default function DropdownContentList({
               option.className,
             )}
           >
-            <div className="flex flex-row">
+            <div className="flex flex-row items-center">
               {option.isNewTitle && (
                 <Badge className="mr-8" look="hint">
                   NEU
@@ -78,6 +92,12 @@ export default function DropdownContentList({
                 <span className="kern-label mr-4">{itemNumber}. </span>
               )}
               <div className="kern-label">{option.title}</div>
+              {option.externalLink && (
+                <span
+                  className="kern-icon kern-icon--open-in-new kern-icon--default ml-4"
+                  aria-hidden="true"
+                ></span>
+              )}
             </div>
             {option.content && (
               <span className="hidden lg:inline">{option.content}</span>
@@ -87,7 +107,7 @@ export default function DropdownContentList({
                 <Badge className="mr-8" look="hint">
                   NEU
                 </Badge>
-                <span>{option.newContent}</span>
+                <span className="kern-preline">{option.newContent}</span>
               </div>
             )}
           </div>

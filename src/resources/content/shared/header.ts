@@ -1,11 +1,8 @@
 import type { ActiveBehavior } from "@/components/DropdownContentList";
 import { ROUTE_SUPPORT_TRAININGS } from "@/config/additionalRoutes";
 import {
-  beispiele_prinzipien,
-  beispiele_visualisierungen,
   bundeslaender,
   dokumentation,
-  grundlagen_digitaltauglichkeit,
   grundlagen_normenkontrollrat,
   interoperabel,
   interoperabel_nationaleKontaktstelle,
@@ -14,6 +11,12 @@ import {
   unterstuetzung,
   vorpruefung,
 } from "@/config/routes";
+import {
+  ZFL_BASE_URL,
+  ZFL_PATH_BEISPIELE,
+  ZFL_PATH_DIGITALTAUGLICHKEIT,
+  ZFL_PATH_VISUALISIERUNGEN,
+} from "@/resources/constants";
 import { contact } from "@/resources/content/shared/contact";
 
 export const header = {
@@ -63,15 +66,18 @@ export const header = {
       overlayContent: [
         {
           title: "Digitaltauglichkeit im Regelungstext",
-          content:
-            "So wurden die 5 Prinzipien von Ihren Kolleginnen und Kollegen in Regelungen ausformuliert.",
-          href: `${beispiele_prinzipien.path}/digitale-angebote-fuer-alle-nutzbar-gestalten`,
+          content: "So wurden die 5 Prinzipien in Regelungen ausformuliert.",
+          href: `${ZFL_BASE_URL}${ZFL_PATH_BEISPIELE}`,
+          externalLink: true,
+          newContent: "Jetzt im Zentrum für Legistik",
         },
         {
           title: "Visualisierungen",
           content:
             "Veröffentliche Visualisierungen, welche Referaten beim Erarbeiten der Digitaltauglichkeit geholfen haben.",
-          href: beispiele_visualisierungen.path,
+          href: `${ZFL_BASE_URL}${ZFL_PATH_VISUALISIERUNGEN}`,
+          externalLink: true,
+          newContent: "Jetzt im Zentrum für Legistik",
         },
       ],
     },
@@ -86,7 +92,6 @@ export const header = {
         },
         {
           title: "EU-Interoperabilität",
-          isNewTitle: true,
           content:
             "Verstehen Sie, was es mit EU-Interoperabilität auf sich hat.",
           href: interoperabel.path,
@@ -96,11 +101,12 @@ export const header = {
           title: "Was ist Digitaltauglichkeit?",
           content:
             "Welche Relevanz Digitaltauglichkeit hat und wie Ihre Regelung davon profitiert.",
-          href: grundlagen_digitaltauglichkeit.path,
+          href: `${ZFL_BASE_URL}${ZFL_PATH_DIGITALTAUGLICHKEIT}`,
+          externalLink: true,
+          newContent: "Jetzt im Zentrum für Legistik",
         },
         {
           title: "NKR und Digitalcheck",
-          isNewTitle: true,
           content:
             "Aufgaben und Vorgehensweise des Nationalen Normenkontrollrat im Kontext des Digitalcheck.",
           href: grundlagen_normenkontrollrat.path,
@@ -132,7 +138,6 @@ export const header = {
         },
         {
           title: "Nationale Kontaktstelle",
-          isNewTitle: true,
           content:
             "Nationale Kontaktstelle für ein interoperables Europa (2024/903 Art. 17).",
           href: interoperabel_nationaleKontaktstelle.path,

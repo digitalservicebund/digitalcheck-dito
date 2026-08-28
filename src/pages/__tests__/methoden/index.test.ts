@@ -1,5 +1,11 @@
 // @vitest-environment node
 import Methoden from "@/pages/methoden/index.astro"; // The component to test
+import {
+  ZFL_BASE_URL,
+  ZFL_PATH_FLUSSDIAGRAMME,
+  ZFL_PATH_IT_SYSTEME,
+  ZFL_PATH_TECHNISCHE_UMSETZBARKEIT,
+} from "@/resources/constants";
 import { renderToDOM } from "@/utils/testUtils";
 import type { BoundFunctions, queries } from "@testing-library/dom";
 import { within } from "@testing-library/dom";
@@ -38,7 +44,7 @@ describe("Methoden Route - Integration Tests", () => {
 
     expect(within(visualisationItem).getByRole("link")).toHaveAttribute(
       "href",
-      "/methoden/visualisieren",
+      ZFL_BASE_URL + ZFL_PATH_FLUSSDIAGRAMME,
     );
 
     expect(
@@ -86,7 +92,7 @@ describe("Methoden Route - Integration Tests", () => {
     }).parentElement!;
     expect(within(itSystemsBox).getByRole("link")).toHaveAttribute(
       "href",
-      "/methoden/it-systeme-erfassen",
+      ZFL_BASE_URL + ZFL_PATH_IT_SYSTEME,
     );
 
     const technicalFeasibilityBox = screen.getByRole("heading", {
@@ -95,7 +101,7 @@ describe("Methoden Route - Integration Tests", () => {
     }).parentElement!;
     expect(within(technicalFeasibilityBox).getByRole("link")).toHaveAttribute(
       "href",
-      "/methoden/technische-umsetzbarkeit",
+      ZFL_BASE_URL + ZFL_PATH_TECHNISCHE_UMSETZBARKEIT,
     );
   });
 

@@ -1,17 +1,11 @@
 import {
-  beispiele,
-  beispiele_visualisierungen,
   bundeslaender,
   dasIstNeu,
   dokumentation,
-  grundlagen_digitaltauglichkeit,
   grundlagen_normenkontrollrat,
   interoperabel,
   interoperabel_nationaleKontaktstelle,
   methoden_fuenfPrinzipien,
-  methoden_interviewLeitfaden,
-  methoden_visualisieren,
-  methoden_visualisieren_flussdiagramm,
   zahlenUndFakten,
 } from "@/config/routes";
 import { dedent } from "@/utils/dedentMultilineStrings";
@@ -97,8 +91,6 @@ export const news = {
        - Titel zeigen nun die Alleinstellungsmerkmale der Visualisierungen (z. B. *Grenzüberschreitender Ablauf*).
        - Neues Feld *Aufwand für das Referat*.
        - Neuer Inhalt: Beratungs- und Erfassungsprozess.
-       
-        [Hier ansehen](${beispiele_visualisierungen.path})
       `,
     },
     {
@@ -120,9 +112,7 @@ export const news = {
       content: dedent`
        Neuer Leitfaden: Praxis-Perspektive in Ihr Vorhaben einbinden
          - Was sind Vorteile der Praxis-Perspektive und welche Interview-Methoden gibt es?
-         - Schritt-für-Schritt-Anleitung: Akteurinnen und Akteure identifizieren und Interviews vorbereiten
-       
-        [Hier ansehen](${methoden_interviewLeitfaden.path})
+         - Schritt-für-Schritt-Anleitung: Akteurinnen und Akteure identifizieren und Interviews vorbereiten       
       `,
     },
     {
@@ -153,8 +143,6 @@ export const news = {
       Fünf neue Visualisierungen wurden auf unserer "Beispiele für Visualisierungen"-Seite veröffentlicht.
       Diese Visualisierungen wurden von Legist:innen erarbeitet und dienen als Inspiration bzw. Positiv-Beispiele, wie
       Veranschaulichungen helfen, den Ablauf des Regelungsvorhaben noch besser greifen zu können.
-      
-      [Hier ansehen](${beispiele_visualisierungen.path})
       `,
     },
     {
@@ -188,13 +176,15 @@ export const news = {
       badge: {
         text: "01.10.2025",
       },
-      content: `Neues Beispiel ergänzt: SGB VI-Anpassungsgesetz (Einführung Fallmanagement DRV) [Hier ansehen](${beispiele.path}/regelungen/sgb-vi-anpassungsgesetz-einfuehrung-fallmanagement-drv)`,
+      content:
+        "Neues Beispiel ergänzt: SGB VI-Anpassungsgesetz Einführung Fallmanagement DRV",
     },
     {
       badge: {
         text: "12.09.2025",
       },
-      content: `Anleitungs-Seite für Flussdiagramme: Video bei Schritt 5 ergänzt: Entstehen eines Flussdiagramms. [Hier ansehen](${methoden_visualisieren_flussdiagramm.path}#video-anleitung)`,
+      content:
+        "Anleitungs-Seite für Flussdiagramme: Video bei Schritt 5 ergänzt: Entstehen eines Flussdiagramms.",
     },
     {
       badge: {
@@ -225,7 +215,6 @@ export const news = {
         - Verständlichkeit der Inhalte verbessert
         - Navigation innerhalb der Seite verbessert: Buttons “nächster Schritt“ + vertikale Navigations-Element auf rechter Seite
         
-        [Hier ansehen](${methoden_visualisieren_flussdiagramm.path})
       `,
     },
     {
@@ -251,7 +240,7 @@ export const news = {
           - vorher: erarbeiten.digitalcheck.bund.de → leitet jetzt weiter zu:
           - neu: digitalcheck.bund.de
         - Link zu [Digitale Verwaltung Projektseite](https://www.digitale-verwaltung.de/Webs/DV/DE/transformation/digitalcheck/digitalcheck-node.html) im Footer ergänzt
-        - Neue [Einstiegseite / Landingpage für Visualisierungen](${methoden_visualisieren.path}) gelauncht
+        - Neue Einstiegseite / Landingpage für Visualisierungen gelauncht
         - [NKR Infoseite](${grundlagen_normenkontrollrat.path}) aktualisiert
       `,
     },
@@ -274,7 +263,7 @@ export const news = {
       },
       content: dedent`
         - Neue [Startseite](/)
-        - Neue Grundlagen-Seite: Was ist [Digitaltauglichkeit](${grundlagen_digitaltauglichkeit.path})?
+        - Neue Grundlagen-Seite: Was ist Digitaltauglichkeit?
         - Neue Grundlagen-Seite: [NKR und Digitalcheck](${grundlagen_normenkontrollrat.path})
         - Neue Dokumentation als Word-Datei v1.5.1 aktualisiert auf Digitalcheck Website, Github und DV
         - Beispiele sind wieder im Footer verlinkt
