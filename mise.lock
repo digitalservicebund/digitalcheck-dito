@@ -159,3 +159,39 @@ url = "https://nodejs.org/dist/v24.13.0/node-v24.13.0-win-x64.zip"
 [[tools.pnpm]]
 version = "12.1.0"
 backend = "aqua:pnpm/pnpm"
+
+[tools.pnpm."platforms.linux-arm64"]
+checksum = "sha256:24b202af01579ae885c8b3dc39a29c03d418a0c85eea274a969b216612abcd07"
+url = "https://github.com/pnpm/pnpm/releases/download/v12.1.0/pnpm-linux-arm64.tar.gz"
+url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/535294455"
+provenance = "github-attestations"
+
+[tools.pnpm."platforms.linux-arm64-musl"]
+checksum = "sha256:3915f1d07d0fa4331b2d16582610027ff313c5c4c71e4ce3c50551abb96228b4"
+url = "https://github.com/pnpm/pnpm/releases/download/v12.1.0/pnpm-linux-arm64-musl.tar.gz"
+url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/535294453"
+provenance = "github-attestations"
+
+[tools.pnpm."platforms.linux-x64"]
+checksum = "sha256:ef4c3e31c8f6e587c9f04ca4b42b63d47f331247930617304ffa63354c11db79"
+url = "https://github.com/pnpm/pnpm/releases/download/v12.1.0/pnpm-linux-x64.tar.gz"
+url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/535294449"
+provenance = "github-attestations"
+
+[tools.pnpm."platforms.linux-x64-musl"]
+checksum = "sha256:177e01657b485c5af47d50469efb2fae7ad43461f6157755d3dbef9aa44ebf3d"
+url = "https://github.com/pnpm/pnpm/releases/download/v12.1.0/pnpm-linux-x64-musl.tar.gz"
+url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/535294454"
+provenance = "github-attestations"
+
+[tools.pnpm."platforms.macos-arm64"]
+checksum = "sha256:927542783706b6966b6792f263b9b958dcd9909c5174965cd1aae0f4ab7f613c"
+url = "https://github.com/pnpm/pnpm/releases/download/v12.1.0/pnpm-darwin-arm64.tar.gz"
+url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/535294450"
+provenance = "github-attestations"
+
+[tools.pnpm."platforms.windows-x64"]
+checksum = "sha256:69c0d1d46cdc12bbefad653e859636179927aed292f9af286460a0d38d1d99d2"
+url = "https://github.com/pnpm/pnpm/releases/download/v12.1.0/pnpm-win32-x64.zip"
+url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/535294452"
+provenance = "github-attestations"
