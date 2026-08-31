@@ -43,8 +43,6 @@ export const header = {
           title: "Vorprüfung: Digitalbezug einschätzen",
           content:
             "Anhand von 6 Fragen lernen Sie, in welchem Umfang Sie Digitaltauglichkeit beachten müssen.",
-          newContent: "Mit europäischem Interoperabilitätsbezug",
-
           href: vorpruefung.path,
         },
         {
