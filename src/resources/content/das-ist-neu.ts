@@ -22,6 +22,15 @@ export const news = {
   items: [
     {
       badge: {
+        text: "28.08.2026",
+      },
+      content: dedent`
+        Neuer Leitfaden zur Einführung eines Digitalcheck im Bundesland
+
+       [Hier ansehen](${bundeslaender.path}#leitfaden)`,
+    },
+    {
+      badge: {
         text: "10.08.2026",
       },
       content: dedent`
