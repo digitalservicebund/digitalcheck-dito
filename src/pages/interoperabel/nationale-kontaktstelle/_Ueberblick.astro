@@ -1,6 +1,5 @@
 ---
 import AccordionItem from "@/components/AccordionItem";
-import Badge from "@/components/Badge.tsx";
 import Container from "@/components/Container";
 import ContentWrapper from "@/components/ContentWrapper.tsx";
 import Heading from "@/components/Heading";
@@ -52,8 +51,14 @@ import { spoc } from "./_content";
     <Timeline>
       {
         spoc.timeline.items.map((timelineItem) => (
-          <Timeline.Item bullet className="mt-4 flex flex-col gap-16">
-            <Badge look="gray">{timelineItem.badge.text}</Badge>
+          <Timeline.Item bullet className="flex flex-col gap-16">
+            <div>
+              <span class="kern-badge kern-badge--small border-0 bg-[#F3F4F7]">
+                <span class="kern-label font-normal">
+                  {timelineItem.badge.text}
+                </span>
+              </span>
+            </div>
             <h3 class="ds-subhead hyphens-none">
               {timelineItem.headline.text}
             </h3>
