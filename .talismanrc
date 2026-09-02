@@ -57,7 +57,7 @@ fileignoreconfig:
   - filename: nginx.template.conf
     allowed_patterns: [proxy_pass]
   - filename: src/pages/interoperabel/nationale-kontaktstelle/_content.ts
-    ignore_detectors: [filename]
+    ignore_detectors: [filename, filecontent] # German text content misidentified as secret pattern
 
 allowed_patterns:
   - key
