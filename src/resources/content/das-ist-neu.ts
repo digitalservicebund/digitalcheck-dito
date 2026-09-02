@@ -21,6 +21,9 @@ export const news = {
   `,
   items: [
     {
+      year: "2026",
+    },
+    {
       badge: {
         text: "28.08.2026",
       },
@@ -163,8 +166,10 @@ export const news = {
          - Übersicht auf der Prinzipien-Startseite klarer strukturiert
          - Darstellung auf den Detailseiten der Prinzipien übersichtlicher gestaltet, einfacher navigierbar und durch Handlungsempfehlungen ergänzt
          
-        [Hier ansehen](${methoden_fuenfPrinzipien.path})
-      `,
+        [Hier ansehen](${methoden_fuenfPrinzipien.path})`,
+    },
+    {
+      year: "2025",
     },
     {
       badge: { text: "18.12.2025" },
@@ -396,6 +401,9 @@ export const news = {
       `,
     },
     {
+      year: "2024",
+    },
+    {
       badge: {
         text: "21.05.2024",
       },
@@ -407,6 +415,9 @@ export const news = {
         - **Links und Verweise aktualisiert** (Bsp: digitalcheck.bund.de).
         - **In einzelne Dokumente aufgeteilt:** Vorprüfung, Prinzipienposter: 5 Prinzipien für digitaltaugliche Gesetzgebung, Hilfestellungen und begleitende Dokumentation sind jetzt als einzelne Dokumente als Download verfügbar.
       `,
+    },
+    {
+      year: "2023",
     },
     {
       badge: {
@@ -436,6 +447,9 @@ export const news = {
         - Das Vorblatt enthält jetzt einen Hinweis auf die Übergangsregelung.
         - Neben dem Komplettpaket werden die ausfüllbaren Dokumente (Vorprüfung, Dokumentation und Arbeitsblatt) zusätzlich gesondert zum Download bereitgestellt. Das ermöglicht ein schnelleres Bearbeiten des Digitalchecks bei wiederholter Nutzung.
       `,
+    },
+    {
+      year: "2022",
     },
     {
       badge: {

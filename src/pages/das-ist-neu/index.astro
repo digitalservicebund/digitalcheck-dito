@@ -2,7 +2,8 @@
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
 import Metadata from "./_Metadata.astro";
-import Timeline, { TimelineItemContent } from "@/components/Timeline";
+import Timeline from "@/components/Timeline";
+import RichText from "@/components/RichText.tsx";
 import { news } from "@/resources/content/das-ist-neu";
 import { contact } from "@/resources/content/shared/contact";
 import { mailto } from "@/utils/mailtoHelper";
@@ -38,14 +39,34 @@ const TimelineItem = Timeline.Item;
         nextUpdate="September 2026"
       />
     </Hero>
-    <Timeline className="my-80">
-      {
-        news.items.map((item) => (
-          <TimelineItem bullet>
-            <TimelineItemContent {...item} parentHasHeading />
-          </TimelineItem>
-        ))
-      }
-    </Timeline>
+    <section class="py-80">
+      <Timeline>
+        {
+          news.items.map((item) =>
+            item.year ? (
+              <TimelineItem year={item.year} />
+            ) : (
+              <TimelineItem bullet>
+                {"badge" in item && (
+                  <div>
+                    <span class="kern-badge kern-badge--small border-0 bg-[#F3F4F7]">
+                      <span class="kern-label font-normal">
+                        {item.badge!.text}
+                      </span>
+                    </span>
+                  </div>
+                )}
+                {item.headline && (
+                  <h2 class="kern-heading-medium py-16">
+                    {item.headline.text}
+                  </h2>
+                )}
+                {item.content && <RichText markdown={item.content} />}
+              </TimelineItem>
+            ),
+          )
+        }
+      </Timeline>
+    </section>
   </main>
 </Layout>
