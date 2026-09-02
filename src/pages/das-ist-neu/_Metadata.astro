@@ -1,0 +1,12 @@
+---
+interface Props {
+  lastUpdate: string;
+  nextUpdate: string;
+}
+const { lastUpdate, nextUpdate } = Astro.props;
+---
+
+<div class="grid max-w-480 grid-cols-2 gap-32 pt-24 [&_p]:mb-0">
+  <p><strong>Zuletzt aktualisiert am</strong><br />{lastUpdate}</p>
+  <p><strong>Nächstes Update</strong><br />{nextUpdate}</p>
+</div>

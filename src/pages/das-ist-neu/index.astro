@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
+import Metadata from "./_Metadata.astro";
 import Timeline, { TimelineItemContent } from "@/components/Timeline";
 import { news } from "@/resources/content/das-ist-neu";
 import { contact } from "@/resources/content/shared/contact";
@@ -31,6 +32,11 @@ const TimelineItem = Timeline.Item;
           >{contact.email}
         </a>.
       </p>
+      <Metadata
+        slot="subtitle"
+        lastUpdate="31.08.2026"
+        nextUpdate="September 2026"
+      />
     </Hero>
     <Timeline className="my-80">
       {
