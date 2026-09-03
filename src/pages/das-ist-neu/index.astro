@@ -20,8 +20,10 @@ const TimelineItem = Timeline.Item;
     <Hero>
       <h1>Das ist neu</h1>
       <p slot="subtitle">
-        Das Digitalcheck-Angebot wird kontinuierlich weiterentwickelt.
-        Bedürfnisse und Rückmeldungen von Nutzenden werden kurzfristig
+        Das Digitalcheck-Angebot wird kontinuierlich <a
+          href="https://zfl.bund.de/ueber/daran-arbeiten-wir"
+          >weiterentwickelt</a
+        >. Bedürfnisse und Rückmeldungen von Nutzenden werden kurzfristig
         eingearbeitet. Auch geänderte und neue rechtliche Anforderungen führen
         zu Anpassungen. Unten finden Sie eine chronologische Übersicht der
         Ergänzungen und Änderungen auf der Website.
@@ -33,11 +35,7 @@ const TimelineItem = Timeline.Item;
           >{contact.email}
         </a>.
       </p>
-      <Metadata
-        slot="subtitle"
-        lastUpdate="31.08.2026"
-        nextUpdate="September 2026"
-      />
+      <Metadata slot="subtitle" lastUpdate="31.08.2026" />
     </Hero>
     <section class="py-80">
       <Timeline>
