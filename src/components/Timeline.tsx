@@ -22,7 +22,7 @@ function Bullet() {
   return (
     <div
       className={
-        "mt-4 flex size-20 shrink-0 items-center justify-center rounded-full bg-blue-800 outline-4 outline-white"
+        "mt-6 ml-2 flex size-16 shrink-0 items-center justify-center rounded-full bg-blue-800 outline-4 outline-white"
       }
       role="none"
     ></div>
@@ -131,7 +131,7 @@ function TimelineItem({
 
 function Timeline({ className, children, ...restProps }: BulletListProps) {
   return (
-    <div className={twMerge("relative scroll-my-40", className)}>
+    <div className={twMerge("relative ml-24 scroll-my-40", className)}>
       <div className="absolute top-0 bottom-0 left-9.5 w-1 bg-blue-800"></div>
       <ul className="list-unstyled relative space-y-40" {...restProps}>
         {children}
