@@ -7,14 +7,16 @@ import {
   dokumentation,
   methoden,
   vorpruefung,
-  methoden_visualisieren,
   methoden_fuenfPrinzipien,
 } from "@/config/routes";
+import { ZFL_BASE_URL, ZFL_PATH_FLUSSDIAGRAMME } from "@/resources/constants";
 
 export const frontmatter = {
   title: "Digitalcheck Hessen",
   isStagingOnly: true,
 };
+
+const visualisierenPath = ZFL_BASE_URL + ZFL_PATH_FLUSSDIAGRAMME;
 ---
 
 <LaenderLayout title={frontmatter.title} bundesland="Hessen">
@@ -80,8 +82,7 @@ export const frontmatter = {
                 href={methoden.path}
                 >Schritt 2 (Erarbeitung des Regelungsvorhabens)</a
               >. Hier finden Sie weitere Hilfestellungen wie <a
-                href={methoden_visualisieren.path}
-                >Anleitungen zur Visualisierung</a
+                href={visualisierenPath}>Anleitungen zur Visualisierung</a
               > und die <a href={methoden_fuenfPrinzipien.path}
                 >fünf Prinzipien des Digitalchecks</a
               >.
