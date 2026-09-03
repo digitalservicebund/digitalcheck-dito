@@ -1,0 +1,178 @@
+---
+import LaenderLayout from "@/layouts/LaenderLayout.astro";
+import NumberedList from "@/components/NumberedList";
+import { Image } from "astro:assets";
+import hessenLogo from "./_assets/HESSEN_Logo_stacked.png";
+import {
+  dokumentation,
+  methoden,
+  vorpruefung,
+  methoden_fuenfPrinzipien,
+} from "@/config/routes";
+import { ZFL_BASE_URL, ZFL_PATH_FLUSSDIAGRAMME } from "@/resources/constants";
+
+export const frontmatter = {
+  title: "Digitalcheck Hessen",
+  isStagingOnly: true,
+};
+
+const visualisierenPath = ZFL_BASE_URL + ZFL_PATH_FLUSSDIAGRAMME;
+---
+
+<LaenderLayout title={frontmatter.title} bundesland="Hessen">
+  <p slot="subtitle">
+    Herzlich Willkommen beim Digitalcheck für das Land Hessen. Auf dieser Seite
+    finden Sie nützliche Informationen und Hilfestellungen für eine
+    digitaltaugliche Gestaltung Ihrer Rechtsnormen.
+  </p>
+  <section
+    class="breakout space-y-16 bg-(--kern-color-layout-layer-surface-contextual)"
+  >
+    <h2>Überblick</h2>
+    <p>
+      Gesetze, Rechtsverordnungen und Förderrichtlinien sind in Hessen so zu
+      gestalten, dass der spätere Vollzug möglichst einfach und wirtschaftlich
+      erfolgen kann. Digitale Fachverfahren und eine medienbruchfreie digitale
+      Abwicklung von Prozessen können dazu in vielen Fällen einen wertvollen
+      Beitrag leisten und Bürgerinnen und Bürger, Unternehmen und staatliche
+      Stellen entlasten. § 18 HEGovG bündelt dieses im Koalitionsvertrag
+      niedergelegte Ziel in Form einer gesetzlichen Verpflichtung.
+    </p>
+  </section>
+  <section class="space-y-40">
+    <div class="flex items-center gap-48 pb-40">
+      <Image src={hessenLogo} alt="Logo von Hessen" class="h-auto w-136" />
+      <p>
+        Der Digitalcheck des Landes ist ein Werkzeug, das Sie bei der
+        Erarbeitung eines digitaltauglichen Regelungsvorhaben unterstützt.
+        Anstelle einer abstrakten Checkliste erhalten Sie eine interaktive
+        Schritt - für - Schritt - Unterstützung für die Visualisierung,
+        Einschätzung, Gestaltung und Dokumentation ihres Regelungsvorhabens.
+      </p>
+    </div>
+    <div class="[&_h2]:mb-40! [&_h3]:mb-16">
+      <h2>Wie läuft der Prozess ab?</h2>
+      <div>
+        <NumberedList>
+          <NumberedList.Item>
+            <h3>Vorprüfung durchführen</h3>
+            <p>
+              Starten Sie mit <a href={vorpruefung.path}
+                >Schritt 1 (Vorprüfung: Digitalbezug einschätzen)</a
+              >, um herauszufinden, ob bei Ihrem Regelungsvorhaben ein
+              Digitalbezug oder eine Anforderung an die EU-Interoperabilität
+              besteht.
+            </p>
+          </NumberedList.Item>
+          <hr class="kern-divider border-blue-300" aria-hidden="true" />
+          <NumberedList.Item>
+            <h3>Ihr Ergebnis der Vorprüfung</h3>
+            <p><b>Bei keinem Digitalbezug:</b></p>
+            <p>
+              Besteht kein Digitalbezug und keine Anforderung an die
+              EU-Interoperabilität, ist der Digitalcheck für Sie bereits
+              abgeschlossen. Laden Sie die Dokumentation für interne Rückfragen
+              herunter und nehmen Sie diese zu den Akten.
+            </p>
+            <br />
+            <p><b>Bei vorhandenen Digitalbezug:</b></p>
+            <p>
+              Besteht ein Digitalbezug oder eine Anforderung an
+              EU-Interoperabilität, folgen Sie dem Digitalcheck mit <a
+                href={methoden.path}
+                >Schritt 2 (Erarbeitung des Regelungsvorhabens)</a
+              >. Hier finden Sie weitere Hilfestellungen wie <a
+                href={visualisierenPath}>Anleitungen zur Visualisierung</a
+              > und die <a href={methoden_fuenfPrinzipien.path}
+                >fünf Prinzipien des Digitalchecks</a
+              >.
+            </p>
+          </NumberedList.Item>
+          <hr class="kern-divider border-blue-300" aria-hidden="true" />
+          <NumberedList.Item>
+            <h3>Regelung schreiben</h3>
+            <p>
+              Verfassen Sie die Regelung mit Ihren gewohnten Programmen und
+              Arbeitshilfen und greifen Sie dabei auf die hier gewonnenen
+              Erkenntnisse zurück.
+            </p>
+          </NumberedList.Item>
+          <hr class="kern-divider border-blue-300" aria-hidden="true" />
+          <NumberedList.Item>
+            <h3>Dokumentieren</h3>
+            <p>
+              In <a href={dokumentation.path}>Schritt 3 (Dokumentation)</a> halten
+              Sie fest, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet
+              haben. Laden Sie die Dokumentation anschließend herunter und nehmen
+              Sie diese zu den Akten.
+            </p>
+          </NumberedList.Item>
+        </NumberedList>
+      </div>
+    </div>
+  </section>
+  <section class="breakout bg-darkblue-100 space-y-16">
+    <h2>Links und Ansprechpartner von A - Z</h2>
+    <p>
+      Nachfolgend finden Sie einige nützliche Links und Ansprechpartner, die Sie
+      im Prozess nicht unbedingt benötigen, hier aber bei Bedarf einmal
+      aufgelistet zur Verfügung haben.
+    </p>
+    <ul>
+      <li>
+        <a
+          href="https://map.intern.hessen.de/irj/go/hessen/startseite/fachinformationen/recht/normgebung-und-pruumlfung/vorschriftencontrolling?area=Land-Hessen"
+          target="_blank">Arbeitsgruppe Verwaltungsvereinfachung (Dokumente)</a
+        ><br />
+      </li>
+      <li>
+        <a
+          href="https://map.intern.hessen.de/irj/go/hessen/startseite/fachinformationen/recht/hessen-norm/egesetz/konzept-und-arbeitshilfen"
+          target="_blank">eGesetz Hessen (Konzept und Arbeitshilfen)</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903"
+          target="_blank">Europäische Interoperabilitätsverordnung</a
+        >
+      </li>
+      <li><a href="https://fimportal.de/" target="_blank">FIM Portal</a></li>
+      <li>
+        <a href="https://datenschutz.hessen.de/" target="_blank"
+          >Hessischer Beauftragter für Datenschutz und Informationsfreiheit</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.rv.hessenrecht.hessen.de/bshe/document/jlr-NNLHE000053F5NN00000000029"
+          target="_blank">Hessisches E-Government-Gesetz (§ 18)</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://hessen.de/sites/hessen.hessen.de/files/2024-01/koalitionsvertrag_fuer_die_21._legislaturperiode.pdf"
+          target="_blank">Hessischer Koalitionsvertrag 2024 – 2029 (Auszug)</a
+        >
+      </li>
+      <li>
+        <a href="https://interoperable-europe.ec.europa.eu/" target="_blank"
+          >Interoperable Europe Portal</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://informationsplattform.ozg-umsetzung.de/iNG/app/intro"
+          target="_blank">OZG - Informationsplattform</a
+        >
+      </li>
+      <li>
+        <a href="https://zfl.bund.de/" target="_blank">Zentrum für Legistik</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>Schulungen</h2>
+    <p>Schulungsangebote folgen.</p>
+  </section>
+</LaenderLayout>
