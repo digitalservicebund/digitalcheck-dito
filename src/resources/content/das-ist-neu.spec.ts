@@ -31,7 +31,9 @@ expect.extend({
 
 describe("das-ist-neu", () => {
   it("contains dated items in descending order", () => {
-    const dateStrings = news.items.map((item) => item.badge.text);
+    const dateStrings = news.items
+      .map((item) => item.badge?.text)
+      .filter((text): text is string => text !== undefined);
 
     expect(dateStrings).toBeSortedDates();
   });

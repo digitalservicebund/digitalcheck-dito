@@ -79,49 +79,49 @@ url = "https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8
 url_api = "https://api.github.com/repos/gitleaks/gitleaks/releases/assets/378333178"
 
 [[tools.lefthook]]
-version = "2.1.10"
+version = "2.1.12"
 backend = "aqua:evilmartians/lefthook"
 
 [tools.lefthook."platforms.linux-arm64"]
-checksum = "sha256:6380a6ad6dd484466fd69bd83f24491d6ec27dc0b84e837be025620f7c4e11e3"
-url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.10/lefthook_2.1.10_Linux_aarch64.gz"
-url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/470227512"
+checksum = "sha256:d96ac16753f6d3d69b92098621c2a2427522a9c2c3e78cd7c9b4a9790b0b8f17"
+url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.12/lefthook_2.1.12_Linux_aarch64.gz"
+url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/533627819"
 provenance = "github-attestations"
 
 [tools.lefthook."platforms.linux-arm64-musl"]
-checksum = "sha256:6380a6ad6dd484466fd69bd83f24491d6ec27dc0b84e837be025620f7c4e11e3"
-url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.10/lefthook_2.1.10_Linux_aarch64.gz"
-url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/470227512"
+checksum = "sha256:d96ac16753f6d3d69b92098621c2a2427522a9c2c3e78cd7c9b4a9790b0b8f17"
+url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.12/lefthook_2.1.12_Linux_aarch64.gz"
+url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/533627819"
 provenance = "github-attestations"
 
 [tools.lefthook."platforms.linux-x64"]
-checksum = "sha256:0b14162a0bb2f0c64ae0759f6102f6e19c4d00981666a8ac73d4f5a6878ada4f"
-url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.10/lefthook_2.1.10_Linux_x86_64.gz"
-url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/470227493"
+checksum = "sha256:dad908593c859d139b886c14913a44401d95288aa7642d9bdf6f3bd36bd788ff"
+url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.12/lefthook_2.1.12_Linux_x86_64.gz"
+url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/533627780"
 provenance = "github-attestations"
 
 [tools.lefthook."platforms.linux-x64-musl"]
-checksum = "sha256:0b14162a0bb2f0c64ae0759f6102f6e19c4d00981666a8ac73d4f5a6878ada4f"
-url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.10/lefthook_2.1.10_Linux_x86_64.gz"
-url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/470227493"
+checksum = "sha256:dad908593c859d139b886c14913a44401d95288aa7642d9bdf6f3bd36bd788ff"
+url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.12/lefthook_2.1.12_Linux_x86_64.gz"
+url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/533627780"
 provenance = "github-attestations"
 
 [tools.lefthook."platforms.macos-arm64"]
-checksum = "sha256:1dd4dc7b4c50efb1f9d9122cd6535c793738d6e59751c228d49f768ec9dbb604"
-url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.10/lefthook_2.1.10_MacOS_arm64.gz"
-url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/470227499"
+checksum = "sha256:f23eac328ca50c7b775dc24dc275cdeacb65e16cf8bd1745d18e3c563f704f94"
+url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.12/lefthook_2.1.12_MacOS_arm64.gz"
+url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/533627758"
 provenance = "github-attestations"
 
 [tools.lefthook."platforms.macos-x64"]
-checksum = "sha256:49d905f28ca46442cb236060058b252da650b5f7b864bd275b61aa46945e8c4a"
-url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.10/lefthook_2.1.10_MacOS_x86_64.gz"
-url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/470227495"
+checksum = "sha256:83c8591d338b1b789944480d9effe2807adc903cf27e4a16ab013e39d7723c31"
+url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.12/lefthook_2.1.12_MacOS_x86_64.gz"
+url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/533627775"
 provenance = "github-attestations"
 
 [tools.lefthook."platforms.windows-x64"]
-checksum = "sha256:beabbce824641ae71229ed11dd8634f47148921cb649d25c90441b737481494a"
-url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.10/lefthook_2.1.10_Windows_x86_64.gz"
-url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/470227505"
+checksum = "sha256:c642d9ad8818faff1379e1b72321b4baddd0d6f20ffd7303f59386bb6abfd6e9"
+url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.12/lefthook_2.1.12_Windows_x86_64.gz"
+url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/533627801"
 provenance = "github-attestations"
 
 [[tools.node]]
@@ -157,41 +157,41 @@ checksum = "sha256:ca2742695be8de44027d71b3f53a4bdb36009b95575fe1ae6f7f0b5ce091c
 url = "https://nodejs.org/dist/v24.13.0/node-v24.13.0-win-x64.zip"
 
 [[tools.pnpm]]
-version = "11.22.0"
+version = "12.1.0"
 backend = "aqua:pnpm/pnpm"
 
 [tools.pnpm."platforms.linux-arm64"]
-checksum = "sha256:f1426231f365bdfd46c15fa3d1211c3936ee2c4e557afd304f6c66dbf1b2a8bf"
-url = "https://github.com/pnpm/pnpm/releases/download/v11.22.0/pnpm-linux-arm64.tar.gz"
-url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/515895951"
+checksum = "sha256:24b202af01579ae885c8b3dc39a29c03d418a0c85eea274a969b216612abcd07"
+url = "https://github.com/pnpm/pnpm/releases/download/v12.1.0/pnpm-linux-arm64.tar.gz"
+url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/535294455"
 provenance = "github-attestations"
 
 [tools.pnpm."platforms.linux-arm64-musl"]
-checksum = "sha256:6e53557024be48e59ab8760f9117c0e5c0e0a37ab420f71f302d86216970d28f"
-url = "https://github.com/pnpm/pnpm/releases/download/v11.22.0/pnpm-linux-arm64-musl.tar.gz"
-url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/515895950"
+checksum = "sha256:3915f1d07d0fa4331b2d16582610027ff313c5c4c71e4ce3c50551abb96228b4"
+url = "https://github.com/pnpm/pnpm/releases/download/v12.1.0/pnpm-linux-arm64-musl.tar.gz"
+url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/535294453"
 provenance = "github-attestations"
 
 [tools.pnpm."platforms.linux-x64"]
-checksum = "sha256:4c592fa410eb23b69691a9efb9bf21c87c15b3e9d88c6ec8acdd354a0eb8de71"
-url = "https://github.com/pnpm/pnpm/releases/download/v11.22.0/pnpm-linux-x64.tar.gz"
-url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/515895948"
+checksum = "sha256:ef4c3e31c8f6e587c9f04ca4b42b63d47f331247930617304ffa63354c11db79"
+url = "https://github.com/pnpm/pnpm/releases/download/v12.1.0/pnpm-linux-x64.tar.gz"
+url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/535294449"
 provenance = "github-attestations"
 
 [tools.pnpm."platforms.linux-x64-musl"]
-checksum = "sha256:45425b06e747cbcaff4940d7b4a55e694645f15f9339dbf7f2601cfb21400545"
-url = "https://github.com/pnpm/pnpm/releases/download/v11.22.0/pnpm-linux-x64-musl.tar.gz"
-url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/515895945"
+checksum = "sha256:177e01657b485c5af47d50469efb2fae7ad43461f6157755d3dbef9aa44ebf3d"
+url = "https://github.com/pnpm/pnpm/releases/download/v12.1.0/pnpm-linux-x64-musl.tar.gz"
+url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/535294454"
 provenance = "github-attestations"
 
 [tools.pnpm."platforms.macos-arm64"]
-checksum = "sha256:2000dcc8f0718852c2806ba4dca1edaedf18a4a39264474d5a1c8fcee250adfd"
-url = "https://github.com/pnpm/pnpm/releases/download/v11.22.0/pnpm-darwin-arm64.tar.gz"
-url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/515895947"
+checksum = "sha256:927542783706b6966b6792f263b9b958dcd9909c5174965cd1aae0f4ab7f613c"
+url = "https://github.com/pnpm/pnpm/releases/download/v12.1.0/pnpm-darwin-arm64.tar.gz"
+url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/535294450"
 provenance = "github-attestations"
 
 [tools.pnpm."platforms.windows-x64"]
-checksum = "sha256:1de83ad5100acfd2adb5c8bc6f8a428cee9ff4e365deff57c22bfc0cccaa4ddb"
-url = "https://github.com/pnpm/pnpm/releases/download/v11.22.0/pnpm-win32-x64.zip"
-url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/515895946"
+checksum = "sha256:69c0d1d46cdc12bbefad653e859636179927aed292f9af286460a0d38d1d99d2"
+url = "https://github.com/pnpm/pnpm/releases/download/v12.1.0/pnpm-win32-x64.zip"
+url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/535294452"
 provenance = "github-attestations"

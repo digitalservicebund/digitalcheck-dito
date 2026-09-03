@@ -120,9 +120,15 @@ InfoBox.DetailsSummaryList = DetailsSummaryList;
 const LinkList = ({ links }: { links: ContentLink[] }) => (
   <ButtonContainer className="mt-auto pt-24">
     {links.map((link) => {
-      const { to, text, ...rest } = link;
+      const { to, text, externalLink = false, ...rest } = link;
       return (
-        <LinkButton key={to} href={to} {...rest}>
+        <LinkButton
+          key={to}
+          href={to}
+          iconRight={externalLink ? "kern-icon--open-in-new" : undefined}
+          {...rest}
+          target={externalLink ? "_blank" : "_self"}
+        >
           {text}
         </LinkButton>
       );

@@ -5,16 +5,15 @@ import { BlocksRenderer } from "@/components/BlocksRenderer.tsx";
 import { PRINCIPLE_COLORS } from "@/resources/constants.ts";
 import type {
   PrinzipAspekt,
-  PrinzipWithAspekteAndExample,
+  PrinzipWithAspekte,
 } from "@/utils/strapiData.types";
 import { slugify } from "@/utils/utilFunctions";
 import { twJoin } from "tailwind-merge";
-import Textbeispiel from "./_Textbeispiel.astro";
 import { textModifiers } from "./_textModifiers.tsx";
 
 interface Props {
   aspect: PrinzipAspekt;
-  prinzip: PrinzipWithAspekteAndExample;
+  prinzip: PrinzipWithAspekte;
 }
 
 const { aspect, prinzip } = Astro.props;
@@ -65,27 +64,11 @@ const { aspect, prinzip } = Astro.props;
                       </div>
                     </div>
                   )}
-                  {anwendung.Beispiel && (
-                    <Textbeispiel
-                      beispiel={anwendung.Beispiel}
-                      prinzip={prinzip}
-                      headingTag="h4"
-                    />
-                  )}
                 </div>
               </AccordionItem>
             ))}
           </div>
         </>
-      )
-    }
-    {
-      aspect.Beispiel && (
-        <Textbeispiel
-          beispiel={aspect.Beispiel}
-          prinzip={prinzip}
-          headingTag="h3"
-        />
       )
     }
   </div>

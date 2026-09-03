@@ -113,6 +113,7 @@ export const spoc = {
     id: "verlauf",
     headline: "Aktueller Stand der Integration in den Digitalcheck",
     items: [
+      { year: 2026 },
       {
         headline: {
           text: "Interoperabilitäts-Bewertung vollständig in den Digitalcheck integriert",
@@ -135,6 +136,7 @@ export const spoc = {
           Wir haben die Lösungen für ein interoperables Europa aufbereitet und für die Nachnutzung im Digitalcheck unter EU-Interoperabilität integriert. Legistinnen und Legisten können sich bei der Erarbeitung digitaltauglicher Regelungen ab sofort direkt über die Lösungen informieren und diese für ihre Vorhaben nutzen. Das macht eine bessere Rechtssetzung effizienter und stellt von Anfang an sicher, dass neue Gesetze und Vorgaben europaweit interoperabel gestaltet sind. Der Interoperable Europe Act (EU) 2024/903 verpflichtet Legistinnen und Legisten zu einer Prüfung: Hat ein Regelungsvorhaben Bezug zur EU-Interoperabilität? Dann muss geprüft werden, ob eine bestehende „Lösung für ein interoperables Europa“ eingesetzt werden kann. Wird die Lösung nicht genutzt, ist eine kurze Begründung nötig.
         `,
       },
+      { year: 2025 },
       {
         headline: {
           text: "Methoden für Digitaltauglichkeit und Interoperabilität",
@@ -206,6 +208,7 @@ export const spoc = {
           - Bereitstellung einer [Informationsseite](${interoperabel.path}) zum Thema Interoperabilität für Legistinnen und Legisten.
         `,
       },
+      { year: 2024 },
       {
         headline: {
           text: "Verordnung für ein interoperables Europa wird vom europäischen Parlament verabschiedet",

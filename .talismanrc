@@ -61,7 +61,7 @@ fileignoreconfig:
   - filename: public/logo/bund-laender-kommunen.svg
     checksum: ef753ce53aca393a68d4652135f9c15ed058382e7aa6283385107f2a2d9cd9bb
   - filename: src/pages/interoperabel/nationale-kontaktstelle/_content.ts
-    ignore_detectors: [filename]
+    ignore_detectors: [filename, filecontent] # German text content misidentified as secret pattern
   - filename: src/images/support.jpg
     checksum: 189aa082ef7a6d64fc73447d456ff76aa4af9cd69eb4b204635b4d8fa96f956f
   - filename: src/pages/bundeslaender/_assets/hessen-logo.jpg

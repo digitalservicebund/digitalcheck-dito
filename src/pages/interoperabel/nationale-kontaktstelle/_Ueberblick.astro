@@ -1,6 +1,5 @@
 ---
 import AccordionItem from "@/components/AccordionItem";
-import Badge from "@/components/Badge.tsx";
 import Container from "@/components/Container";
 import ContentWrapper from "@/components/ContentWrapper.tsx";
 import Heading from "@/components/Heading";
@@ -44,33 +43,39 @@ import { spoc } from "./_content";
     </Container>
   </div>
   <ContentWrapper className="lg:mt-40">
-    <Heading
-      tagName="h2"
-      text="Aktueller Stand der Integration in den Digitalcheck"
-      className="mb-8"
-    />
+    <h2>Aktueller Stand der Integration in den Digitalcheck</h2>
     <Timeline>
       {
-        spoc.timeline.items.map((timelineItem) => (
-          <Timeline.Item bullet className="mt-4 flex flex-col gap-16">
-            <Badge look="gray">{timelineItem.badge.text}</Badge>
-            <h3 class="ds-subhead hyphens-none">
-              {timelineItem.headline.text}
-            </h3>
-            {timelineItem.content && (
-              <RichText markdown={timelineItem.content} />
-            )}
-            {timelineItem.image && (
-              <ImageZoomable
-                image={{
-                  url: timelineItem.image.url,
-                  alternativeText: timelineItem.image.alternativeText,
-                  className: "max-w-a11y",
-                }}
-              />
-            )}
-          </Timeline.Item>
-        ))
+        spoc.timeline.items.map((timelineItem) =>
+          timelineItem.year ? (
+            <Timeline.Item year={`${timelineItem.year}`} />
+          ) : (
+            <Timeline.Item bullet className="flex flex-col gap-16">
+              {timelineItem.badge && (
+                <div>
+                  <span class="kern-badge kern-badge--small border-0 bg-[#F3F4F7]">
+                    <span class="kern-label font-normal">
+                      {timelineItem.badge.text}
+                    </span>
+                  </span>
+                </div>
+              )}
+              {timelineItem.headline && <h3>{timelineItem.headline.text}</h3>}
+              {timelineItem.content && (
+                <RichText markdown={timelineItem.content} />
+              )}
+              {timelineItem.image && (
+                <ImageZoomable
+                  image={{
+                    url: timelineItem.image.url,
+                    alternativeText: timelineItem.image.alternativeText,
+                    className: "max-w-a11y",
+                  }}
+                />
+              )}
+            </Timeline.Item>
+          ),
+        )
       }
     </Timeline>
   </ContentWrapper>

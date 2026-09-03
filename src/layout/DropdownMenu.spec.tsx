@@ -213,7 +213,7 @@ describe("DropdownMenu Component", () => {
       });
       expect(secondLinkItem).toHaveTextContent(/2\.\s*Link2/);
       const thirdLinkItem = screen.getByRole("menuitem", {
-        name: "Link3",
+        name: "Link3, New content",
       });
       expect(thirdLinkItem).toHaveTextContent(/NEU\s*3\.\s*Link3/);
     });

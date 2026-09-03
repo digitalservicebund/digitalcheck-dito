@@ -1,5 +1,4 @@
 import type { BadgeProps } from "@/components/Badge.tsx";
-import Badge from "@/components/Badge.tsx";
 import { LinkButton } from "@/components/Button.tsx";
 import type { HeadingProps } from "@/components/Heading.tsx";
 import Heading from "@/components/Heading.tsx";
@@ -23,7 +22,7 @@ function Bullet() {
   return (
     <div
       className={
-        "mt-10 flex size-[20px] shrink-0 items-center justify-center rounded-full bg-blue-900"
+        "mt-4 flex size-20 shrink-0 items-center justify-center rounded-full bg-blue-800 outline-4 outline-white"
       }
       role="none"
     ></div>
@@ -32,9 +31,17 @@ function Bullet() {
 
 function BulletWrapper({ children }: Readonly<{ children?: React.ReactNode }>) {
   return (
-    <div role="none" className="w-[20px] shrink-0 md:w-[40px]">
+    <div role="none" className="w-20 shrink-0 md:w-40">
       {children}
     </div>
+  );
+}
+
+function YearBadge({ children }: Readonly<{ children?: React.ReactNode }>) {
+  return (
+    <span className="kern-badge ml-10 w-fit -translate-x-1/2 border border-blue-800 bg-white outline-4 outline-white">
+      <span className="kern-label">{children}</span>
+    </span>
   );
 }
 
@@ -61,7 +68,13 @@ export function TimelineItemContent({
 }: Readonly<TimelineItemContentProps>) {
   return (
     <div className={twJoin("flex flex-col gap-16", backgroundClasses)}>
-      {badge && <Badge look="gray" {...badge} />}
+      {badge && (
+        <div>
+          <span className="kern-badge kern-badge--small border-0 bg-[#F3F4F7]">
+            <span className="kern-label font-normal">{badge.text}</span>
+          </span>
+        </div>
+      )}
       {headline && (
         <Heading tagName={parentHasHeading ? "h3" : "h2"} {...headline} />
       )}
@@ -71,9 +84,14 @@ export function TimelineItemContent({
       {links && links.length > 0 && (
         <ButtonContainer>
           {links.map((link) => {
-            const { to, text, ...rest } = link;
+            const { to, text, externalLink = false, ...rest } = link;
             return (
-              <LinkButton key={to} href={to} {...rest}>
+              <LinkButton
+                key={to}
+                href={to}
+                iconRight={externalLink ? "kern-icon--open-in-new" : undefined}
+                {...rest}
+              >
                 {text}
               </LinkButton>
             );
@@ -86,6 +104,7 @@ export function TimelineItemContent({
 
 type TimelineItemProps = React.PropsWithChildren<{
   bullet?: boolean;
+  year?: string;
   className?: string;
 }> &
   React.HTMLProps<HTMLLIElement>;
@@ -93,6 +112,7 @@ type TimelineItemProps = React.PropsWithChildren<{
 function TimelineItem({
   children,
   bullet,
+  year,
   className,
   ...restProps
 }: TimelineItemProps) {
@@ -101,8 +121,10 @@ function TimelineItem({
       className="flex scroll-my-40 flex-row items-start gap-16 first:mt-16"
       {...restProps}
     >
-      <BulletWrapper>{bullet && <Bullet />}</BulletWrapper>
-      <div className={className}>{children}</div>
+      <BulletWrapper>
+        {year ? <YearBadge>{year}</YearBadge> : bullet && <Bullet />}
+      </BulletWrapper>
+      {children && <div className={className}>{children}</div>}
     </li>
   );
 }
@@ -110,8 +132,8 @@ function TimelineItem({
 function Timeline({ className, children, ...restProps }: BulletListProps) {
   return (
     <div className={twMerge("relative scroll-my-40", className)}>
-      <div className="absolute top-0 bottom-0 left-8 w-4 bg-blue-300"></div>
-      <ul className="list-unstyled relative space-y-32" {...restProps}>
+      <div className="absolute top-0 bottom-0 left-9.5 w-1 bg-blue-800"></div>
+      <ul className="list-unstyled relative space-y-40" {...restProps}>
         {children}
       </ul>
     </div>

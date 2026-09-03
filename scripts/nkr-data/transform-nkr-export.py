@@ -38,6 +38,8 @@ vp_map = {
     "VP3_Datenaustausch": "I_VPDatenaustausch",
     "VP4_Interaktion": "I_VPInteraktion",
     "VP5_Automatisierung": "I_VPAutomatisierung",
+    # visualization
+    "ED_Darstellung": "I_EDDarstellung",
 }
 
 for out_col, source_col in vp_map.items():
@@ -154,8 +156,8 @@ df_nrs = df["A_NKR-Nr"].to_list()
 
 # replace nan with None
 payload_full = out.replace({np.nan: None}).to_dict(orient="records")
-payload = [item for item in payload_full if str(item["NKRNr"]) not in nkr_nrs]
-print(f"Will update {len(records) - len(payload)} records that are already in NocoDB")
+payload = [item for item in payload_full if item["NKRNr"] not in nkr_nrs]
+print(f"Will update {len(payload_full) - len(payload)} records that are already in NocoDB")
 print(f"Will upload {len(payload)} records to NocoDB")
 
 # %%

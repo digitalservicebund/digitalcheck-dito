@@ -1,17 +1,11 @@
 import {
-  beispiele,
-  beispiele_visualisierungen,
   bundeslaender,
   dasIstNeu,
   dokumentation,
-  grundlagen_digitaltauglichkeit,
   grundlagen_normenkontrollrat,
   interoperabel,
   interoperabel_nationaleKontaktstelle,
   methoden_fuenfPrinzipien,
-  methoden_interviewLeitfaden,
-  methoden_visualisieren,
-  methoden_visualisieren_flussdiagramm,
   zahlenUndFakten,
 } from "@/config/routes";
 import { dedent } from "@/utils/dedentMultilineStrings";
@@ -27,11 +21,29 @@ export const news = {
   `,
   items: [
     {
+      year: "2026",
+    },
+    {
+      badge: {
+        text: "28.08.2026",
+      },
+      headline: {
+        text: "Leitfaden Bundesländer-Digitalcheck",
+      },
+      content: dedent`
+        Neuer Leitfaden zur Einführung eines Digitalcheck im Bundesland
+
+       [Hier ansehen](${bundeslaender.path}#leitfaden)`,
+    },
+    {
       badge: {
         text: "10.08.2026",
       },
+      headline: {
+        text: "Neues Design der Website",
+      },
       content: dedent`
-        Umstellung auf KERN Design System.
+        Umstellung auf das KERN-Design-System
         
         [KERN UX Standard](https://www.kern-ux.de/)`,
     },
@@ -39,14 +51,20 @@ export const news = {
       badge: {
         text: "13.07.2026",
       },
+      headline: {
+        text: "Neue FAQ ergänzt",
+      },
       content: dedent`
-        Neue FAQ ergänzt: Vorteile des gemeinsamen Digitalchecks für Bund und Länder.
+        Vorteile des gemeinsamen Digitalchecks für Bund und Länder.
         
         [Hier ansehen](${bundeslaender.path})`,
     },
     {
       badge: {
         text: "06.07.2026",
+      },
+      headline: {
+        text: "Erweiterung der Online-Dokumentation",
       },
       content: dedent`
         Erweiterung der Online-Dokumentation um Fragen zur EU-Interoperabilität
@@ -57,6 +75,9 @@ export const news = {
       badge: {
         text: "20.05.2026",
       },
+      headline: {
+        text: "Neue Seite",
+      },
       content: dedent`
         Neue Seite: Gemeinsamer Digitalcheck für Bund und Länder
         
@@ -65,6 +86,9 @@ export const news = {
     {
       badge: {
         text: "11.05.2026",
+      },
+      headline: {
+        text: "Anpassung der Online-Dokumentation",
       },
       content: dedent`
         Anpassung der Online Dokumentation für eine intuitivere Nutzbarkeit:
@@ -80,6 +104,9 @@ export const news = {
       badge: {
         text: "30.03.2026",
       },
+      headline: {
+        text: "Informationen über EU-Interoperabilität",
+      },
       content: dedent`
         Informationen und Umsetzungsvorlage zur verpflichtenden Prüfung von „Lösungen für ein interoperables Europa“ nach Art. 7 der europäischen Interoperabilitätsverordnung (EU) 2024/903. Legistinnen und Legisten erfahren,
         - welche Lösungen für ein interoperables Europa es aktuell gibt,
@@ -92,18 +119,21 @@ export const news = {
       badge: {
         text: "26.03.2026",
       },
+      headline: {
+        text: "Anpassung der Visualisierungs-Beispiele",
+      },
       content: dedent`
-       Anpassung der Visualisierungs-Beispiele
        - Titel zeigen nun die Alleinstellungsmerkmale der Visualisierungen (z. B. *Grenzüberschreitender Ablauf*).
        - Neues Feld *Aufwand für das Referat*.
        - Neuer Inhalt: Beratungs- und Erfassungsprozess.
-       
-        [Hier ansehen](${beispiele_visualisierungen.path})
       `,
     },
     {
       badge: {
         text: "16.03.2026",
+      },
+      headline: {
+        text: "Informationen zu angrenzendem EU-Recht",
       },
       content: dedent`
        Zusammenfassungen zu angrenzendem EU-Recht im Kontext des Interoperable Europe Act. Als Legist oder Legistin erfahren Sie: 
@@ -117,28 +147,35 @@ export const news = {
       badge: {
         text: "13.02.2026",
       },
+      headline: {
+        text: "Leitfaden für Praxis-Perspektiven ergänzt",
+      },
       content: dedent`
-       Neuer Leitfaden: Praxis-Perspektive in Ihr Vorhaben einbinden
          - Was sind Vorteile der Praxis-Perspektive und welche Interview-Methoden gibt es?
-         - Schritt-für-Schritt-Anleitung: Akteurinnen und Akteure identifizieren und Interviews vorbereiten
-       
-        [Hier ansehen](${methoden_interviewLeitfaden.path})
+         - Schritt-für-Schritt-Anleitung: Akteurinnen und Akteure identifizieren und Interviews vorbereiten       
       `,
     },
     {
       badge: {
         text: "28.01.2026",
       },
+      headline: {
+        text: "Struktur der Prinzipien-Seite verbessert",
+      },
       content: dedent`
-       Prinzipien der Digitaltauglichkeit:
          - Übersicht auf der Prinzipien-Startseite klarer strukturiert
          - Darstellung auf den Detailseiten der Prinzipien übersichtlicher gestaltet, einfacher navigierbar und durch Handlungsempfehlungen ergänzt
          
-        [Hier ansehen](${methoden_fuenfPrinzipien.path})
-      `,
+        [Hier ansehen](${methoden_fuenfPrinzipien.path})`,
+    },
+    {
+      year: "2025",
     },
     {
       badge: { text: "18.12.2025" },
+      headline: {
+        text: "Neue Übersicht: Der Digitalcheck in Zahlen",
+      },
       content: dedent`
       "Der Digitalcheck in Zahlen" gibt eine Übersicht, was mit dem Digitalcheck bisher erreicht wurde.
       Dazu zählen durchgeführte Digitalbezugsprüfungen, Regelungsbegleitungen durch das Team, Schulungen,
@@ -149,20 +186,19 @@ export const news = {
     },
     {
       badge: { text: "17.12.2025" },
+      headline: { text: "Neue Visualisierungsbeispiele ergänzt" },
       content: dedent`
       Fünf neue Visualisierungen wurden auf unserer "Beispiele für Visualisierungen"-Seite veröffentlicht.
       Diese Visualisierungen wurden von Legist:innen erarbeitet und dienen als Inspiration bzw. Positiv-Beispiele, wie
       Veranschaulichungen helfen, den Ablauf des Regelungsvorhaben noch besser greifen zu können.
-      
-      [Hier ansehen](${beispiele_visualisierungen.path})
       `,
     },
     {
       badge: {
         text: "05.12.2025",
       },
+      headline: { text: "Informationen zur Interoperabilität ergänzt" },
       content: dedent`
-      Neue Inhalte zum Bereich Interoperabilität:
       - Prozess für Regelungsvorhaben mit grenzüberschreitenden Auswirkungen innerhalb der EU
       - Klare Anforderungen für Interoperabilitätsbewertungen
       - Hintergründe und Ziele der neuen EU-Verordnung
@@ -173,6 +209,9 @@ export const news = {
     {
       badge: {
         text: "11.11.2025",
+      },
+      headline: {
+        text: "Neue Funktion: Online-Formular für die Dokumentation",
       },
       content: dedent`
         Die Dokumentation kann nun direkt online in einem Formular ausgefüllt werden.
@@ -188,17 +227,22 @@ export const news = {
       badge: {
         text: "01.10.2025",
       },
-      content: `Neues Beispiel ergänzt: SGB VI-Anpassungsgesetz (Einführung Fallmanagement DRV) [Hier ansehen](${beispiele.path}/regelungen/sgb-vi-anpassungsgesetz-einfuehrung-fallmanagement-drv)`,
+      headline: { text: "Neues Regelungsbeispiel ergänzt" },
+      content: "SGB VI-Anpassungsgesetz Einführung Fallmanagement DRV",
     },
     {
       badge: {
         text: "12.09.2025",
       },
-      content: `Anleitungs-Seite für Flussdiagramme: Video bei Schritt 5 ergänzt: Entstehen eines Flussdiagramms. [Hier ansehen](${methoden_visualisieren_flussdiagramm.path}#video-anleitung)`,
+      headline: { text: "Video-Anleitung für Flussdiagramme ergänzt" },
+      content: "Video bei Schritt 5 ergänzt: Entstehen eines Flussdiagramms.",
     },
     {
       badge: {
         text: "12.09.2025",
+      },
+      headline: {
+        text: "Hinweis bei widersprüchlichen Ergebnissen der Vorprüfung",
       },
       content: dedent`
         - Neuer Hinweis auf Ergebnisseite der Vorprüfung, wenn
@@ -211,27 +255,28 @@ export const news = {
       badge: {
         text: "11.09.2025",
       },
+      headline: { text: "Design-Änderungen" },
       content: "Darstellung der Progress-Bar an Style der Startseite angepasst",
     },
     {
-      headline: {
-        text: "Anleitungs-Seite für Flussdiagramme überarbeitet",
-      },
       badge: {
         text: "04.09.2025",
+      },
+      headline: {
+        text: "Anleitung für Flussdiagramme überarbeitet",
       },
       content: dedent`
         - Einstieg in Methode vereinfacht (Erklärung zur Methode ergänzt)
         - Verständlichkeit der Inhalte verbessert
         - Navigation innerhalb der Seite verbessert: Buttons “nächster Schritt“ + vertikale Navigations-Element auf rechter Seite
         
-        [Hier ansehen](${methoden_visualisieren_flussdiagramm.path})
       `,
     },
     {
       badge: {
         text: "01.09.2025",
       },
+      headline: { text: "Hinweis in Fragestrecke der Vorprüfung ergänzt" },
       content: dedent`
         Neuer Hinweis in Fragestrecke der Vorprüfung, wenn
         - die Angaben der Vorprüfung ergeben: Kein Digitalbezug
@@ -244,6 +289,9 @@ export const news = {
       badge: {
         text: "26.08.2025",
       },
+      headline: {
+        text: "Domain-Umzug und neue Landingpage für Visualisierungen",
+      },
       content: dedent`
         - [digitalcheck.bund.de](https://digitalcheck.bund.de/) führt jetzt zur Digitalcheck Website und nicht mehr zur 
         [Digitale Verwaltung Projektseite](https://www.digitale-verwaltung.de/Webs/DV/DE/transformation/digitalcheck/digitalcheck-node.html)
@@ -251,30 +299,34 @@ export const news = {
           - vorher: erarbeiten.digitalcheck.bund.de → leitet jetzt weiter zu:
           - neu: digitalcheck.bund.de
         - Link zu [Digitale Verwaltung Projektseite](https://www.digitale-verwaltung.de/Webs/DV/DE/transformation/digitalcheck/digitalcheck-node.html) im Footer ergänzt
-        - Neue [Einstiegseite / Landingpage für Visualisierungen](${methoden_visualisieren.path}) gelauncht
-        - [NKR Infoseite](${grundlagen_normenkontrollrat.path}) aktualisiert
+        - Neue Einstiegsseite / Landingpage für Visualisierungen gelauncht
+        - [NKR-Infoseite](${grundlagen_normenkontrollrat.path}) aktualisiert
       `,
     },
     {
       badge: {
         text: "14.08.2025",
       },
+      headline: { text: "Beispiele auf der Prinzipien-Seite ergänzt" },
       content: dedent`
-        - Prinzipien-Seite
-          - für jedes Prinzip ein Beispiel ergänzt
-          - wenn sinnvoll: für Aspekte je ein Beispiel ergänzt
-          - Kontextinfo “Warum ist dieses Beispiel gut“ näher an Regelungsbeispiel-Text platziert
-        
-        [hier ansehen](${methoden_fuenfPrinzipien.path})
+
+- für jedes Prinzip ein Beispiel ergänzt
+- wenn sinnvoll: für Aspekte je ein Beispiel ergänzt
+- Kontextinfo “Warum ist dieses Beispiel gut“ näher an Regelungsbeispiel-Text platziert
+
+[hier ansehen](${methoden_fuenfPrinzipien.path})
       `,
     },
     {
       badge: {
         text: "05.08.2025",
       },
+      headline: {
+        text: "Umfangreiches Struktur- und Inhalts-Update (neue Startseite)",
+      },
       content: dedent`
         - Neue [Startseite](/)
-        - Neue Grundlagen-Seite: Was ist [Digitaltauglichkeit](${grundlagen_digitaltauglichkeit.path})?
+        - Neue Grundlagen-Seite: Was ist Digitaltauglichkeit?
         - Neue Grundlagen-Seite: [NKR und Digitalcheck](${grundlagen_normenkontrollrat.path})
         - Neue Dokumentation als Word-Datei v1.5.1 aktualisiert auf Digitalcheck Website, Github und DV
         - Beispiele sind wieder im Footer verlinkt
@@ -284,11 +336,11 @@ export const news = {
       `,
     },
     {
-      headline: {
-        text: "V1.5.1",
-      },
       badge: {
         text: "31.07.2025",
+      },
+      headline: {
+        text: "Update V1.5.1: Dokumentation optimiert",
       },
       content: dedent`
         Kleine Anpassungen an Formatierung und Formulierungen an der Dokumentation, um das Dokument besser lesbar und verständlicher zu machen.
@@ -300,21 +352,21 @@ export const news = {
       `,
     },
     {
-      headline: {
-        text: "Beispiele-Seite wieder online",
-      },
       badge: {
         text: "12.06.2025",
+      },
+      headline: {
+        text: "Beispiele-Seite wieder verfügbar",
       },
       content:
         "Die Beispiele wurden an die überarbeiteten Prinzipien angepasst und die Beispiel-Seite wieder online genommen.",
     },
     {
-      headline: {
-        text: "V1.5",
-      },
       badge: {
         text: "02.06.2025",
+      },
+      headline: {
+        text: "Update V1.5: Prinzipien neu strukturiert",
       },
       content: dedent`
         Die fünf Prinzipien für digitaltaugliche Gesetzgebung wurden neu strukturiert und um Aspekte der vier Ebenen für Interoperabilität (EU 2024/903) ergänzt.
@@ -335,11 +387,11 @@ export const news = {
       `,
     },
     {
-      headline: {
-        text: "V1.4",
-      },
       badge: {
         text: "10.01.2025",
+      },
+      headline: {
+        text: "Update V1.4: Interoperabilitäts-Anforderungen ergänzt",
       },
       content: dedent`
         Die Inhalte der Vorprüfung wurden um Anforderungen erweitert, die sich aus der Verordnung für ein interoperables Europa (EU 2024/903) ergeben.
@@ -355,11 +407,14 @@ export const news = {
       `,
     },
     {
-      headline: {
-        text: "V1.3",
-      },
+      year: "2024",
+    },
+    {
       badge: {
         text: "21.05.2024",
+      },
+      headline: {
+        text: "Update V1.3: Sprachliche Anpassungen und Dokumenten-Splitting",
       },
       content: dedent`
         - Basierend auf Feedback, Evaluation und Rückmeldungen **sprachliche Anpassungen und Ausführungen eingearbeitet** (Bsp: Regelungsvorhaben anstatt Regelung, um den Sinnzusammenhang herzustellen; Umsetzung anstatt Vollzug, um die breitere Bedeutung der Digitaltauglichkeit klar herauszustellen).
@@ -368,11 +423,14 @@ export const news = {
       `,
     },
     {
-      headline: {
-        text: "V1.2",
-      },
+      year: "2023",
+    },
+    {
       badge: {
         text: "30.06.2023",
+      },
+      headline: {
+        text: "Update V1.2: Prozess- und Dokumentations-Update",
       },
       content: dedent`
         - Sprachliche Anpassungen und Ausführungen.
@@ -384,11 +442,11 @@ export const news = {
       `,
     },
     {
-      headline: {
-        text: "V1.1",
-      },
       badge: {
         text: "27.01.2023",
+      },
+      headline: {
+        text: "Update V1.1: Barrierefreiheit und Einzeldokumente",
       },
       content: dedent`
         - Das PDF ist jetzt barrierefrei/barrierearm.
@@ -397,11 +455,14 @@ export const news = {
       `,
     },
     {
-      headline: {
-        text: "V1.0",
-      },
+      year: "2022",
+    },
+    {
       badge: {
         text: "27.12.2022",
+      },
+      headline: {
+        text: "Release V1.0",
       },
       content: dedent`
         - Das PDF ist jetzt interaktiv ausfüllbar.
@@ -409,13 +470,12 @@ export const news = {
       `,
     },
     {
-      headline: {
-        text: "V0.9",
-      },
       badge: {
         text: "18.11.2022",
       },
-      content: "Erste Version",
+      headline: {
+        text: "Erste Version (V0.9) veröffentlicht",
+      },
     },
   ],
 };

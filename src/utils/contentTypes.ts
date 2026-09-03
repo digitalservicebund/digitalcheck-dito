@@ -6,6 +6,7 @@ export type ContentLink = {
   to: string;
   target?: string;
   download?: boolean;
+  externalLink?: boolean;
 } & Pick<LinkButtonProps, "look" | "className" | "iconLeft">;
 
 export type StepConditionProps = {
