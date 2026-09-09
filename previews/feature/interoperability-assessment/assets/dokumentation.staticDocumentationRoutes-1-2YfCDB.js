@@ -1,1 +1,0 @@
-import{a as e,c as t,f as n,l as r,m as i,o as a,s as o,u as s}from"./staticRoutes-BIXt463u.js";var c=[t,i,r,e,o,a,n,s];export{c as t};

@@ -1,1 +1,0 @@
-import{L as e}from"./jsx-runtime-qDrv0oV-.js";function t(){return e(`routes/dokumentation`)}export{t};
