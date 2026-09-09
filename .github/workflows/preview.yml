@@ -27,6 +27,9 @@ jobs:
       GH_PAGES_BASE_URL: https://${{ github.event.repository.owner.login }}.github.io # https://digitalservicebund.github.io
       PREVIEW_BRANCH: ${{ github.head_ref || github.ref_name }} # e.g. my-feature-branch
       PREVIEW_BASE_PATH: /${{ github.event.repository.name }}/previews/${{ github.head_ref || github.ref_name }} # e.g. /digitalcheck-dito/previews/my-feature-branch
+    environment:
+      name: preview
+      url: https://${{ github.event.repository.owner.login }}.github.io/${{ github.event.repository.name }}/previews/${{ github.head_ref || github.ref_name }}
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
