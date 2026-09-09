@@ -1,1 +1,0 @@
-var e={showGesetzgebungsprozessOverview:`showGesetzgebungsprozessOverview`,showInterviewLeitfaden:`showInterviewLeitfaden`,showIOEuRechtContent:`showIOEuRechtContent`,simplifiedPrincipleFlow:`simplifiedPrincipleFlow`,showStrapiDrafts:`showStrapiDrafts`};export{e as t};

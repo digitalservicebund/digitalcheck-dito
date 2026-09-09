@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-BDid30Hj.js";import{t}from"./tailwindMerge-DcUQ_2bF.js";var n=e(),r=({className:e,children:r})=>(0,n.jsx)(`div`,{className:t(`flex flex-wrap gap-16`,e),children:r});export{r as t};

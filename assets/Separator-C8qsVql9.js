@@ -1,1 +1,0 @@
-import{j as o}from"./chunk-UVKPFVEO-DaV-egx2.js";import{c as e}from"./tailwindMerge-djQsV2ED.js";function a({className:r}){return o.jsx("hr",{className:e("border-0 border-b-2 border-solid border-gray-400",r)})}export{a as S};

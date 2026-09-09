@@ -1,1 +1,0 @@
-var e=e=>e?`plausible-event-name=${e}`:``;export{e as t};

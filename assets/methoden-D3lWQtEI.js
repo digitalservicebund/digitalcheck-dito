@@ -1,1 +1,0 @@
-import{l as e,t,z as n}from"./jsx-runtime-BDid30Hj.js";var r=t(),i={hasProgressBar:!0},a=n(function(){return(0,r.jsx)(e,{})});export{a as default,i as handle};

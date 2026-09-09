@@ -1,1 +1,0 @@
-const n={email:"digitalcheck@digitalservice.bund.de",interoperabilityEmail:"interoperabel@digitalservice.bund.de",nkrEmail:"nkr@bmjv.bund.de",mdMailToLink:(e,i)=>i?`[${e}](mailto:${e}?subject=${encodeURIComponent(i)})`:`[${e}](mailto:${e})`,phoneDisplay:"0151/40 76 78 39",phone:"tel:+4915140767839",mdPhoneLink:()=>`[${n.phoneDisplay}](${n.phone})`};export{n as c};
