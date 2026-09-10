@@ -14,6 +14,23 @@ import {
   getPreCheckData,
 } from "../vorpruefung/preCheckDataService";
 
+// mock pruefstelleMails since the real data is not stable yet and would break tests
+const mockPruefstelleMails = vi.hoisted(
+  () =>
+    new Map<string, string>([
+      ["Bund", "poststelle@nkr.bund.de"],
+      ["Brandenburg", "pruefstelle-brandenburg@example.com"],
+    ]),
+);
+
+vi.mock("@/resources/content/shared/bundeslaender", async (importOriginal) => {
+  const actual =
+    await importOriginal<
+      typeof import("@/resources/content/shared/bundeslaender")
+    >();
+  return { ...actual, pruefstelleMails: mockPruefstelleMails };
+});
+
 vi.mock("@/utils/localStorageVersioned", async (importOriginal) => {
   const actual =
     await importOriginal<typeof import("@/utils/localStorageVersioned")>();
@@ -29,6 +46,15 @@ vi.stubGlobal("location", {
   assign: mockAssign,
 });
 
+const DC_MAIL = "interoperabel@digitalservice.bund.de";
+const NKR_MAIL = mockPruefstelleMails.get("Bund")!;
+const BB_MAIL = mockPruefstelleMails.get("Brandenburg")!;
+
+const UNSURE_HEADLINE =
+  "Sie haben mehrere Aussagen mit „Ich bin unsicher“ beantwortet.";
+const UNSURE_HINT_BUND = "Wir helfen Ihnen, die Vorprüfung auszufüllen.";
+const UNSURE_HINT_NO_PRUEFSTELLE = "Vorprüfung zu wiederholen";
+
 const { questions } = preCheck;
 
 // all true
@@ -40,14 +66,15 @@ const DEFAULT_EXPECTATIONS = {
   includesInterop: true,
   furtherStepsVisible: true,
   showsAnswerConflictWarning: true,
-  showsUnsureHint: true,
+  unsureHintSubstring: null as string | null,
   allPositive: true,
   dcPositiveIOunsure: true,
-  includesNkrRecipient: true,
-  includesDigitalcheckTeam: true,
+  emailRecipients: [NKR_MAIL, DC_MAIL],
   emailBodyContains: [] as string[],
   inlineNoticeText: undefined as string | undefined,
   infoTooltip: undefined as string | undefined,
+  hasDownloadButton: false, // Bundesland without Prüfstelle only
+  expectedPruefstelleStep: "Prüfen durch den NKR" as string | null,
 };
 
 type ExpectedResult = typeof DEFAULT_EXPECTATIONS & { headline: string };
@@ -57,9 +84,10 @@ interface TestScenario {
   name: string;
   answers: Answers;
   expected: ExpectedResult;
+  bundesland?: string;
 }
 
-function setup(answers: Answers) {
+function setup(answers: Answers, bundesland = "Bund") {
   const user = userEvent.setup();
 
   const preCheckAnswers = questions.map((q) => {
@@ -74,6 +102,7 @@ function setup(answers: Answers) {
     answers: preCheckAnswers,
     title: "",
     negativeReasoning: "",
+    bundesland,
     ssr: false,
   } as PreCheckData);
 
@@ -112,7 +141,7 @@ const scenarios: TestScenario[] = [
       showsNegativeReasoning: false,
       showsUnsureHeading: false,
       includesInterop: false,
-      includesDigitalcheckTeam: false,
+      emailRecipients: [NKR_MAIL], // no DC_MAIL
 
       headline:
         "Das Regelungsvorhaben hat einen Digitalbezug und keine Anforderungen der Interoperabilität.",
@@ -143,7 +172,7 @@ const scenarios: TestScenario[] = [
       showsAnswerConflictWarning: false,
       showsUnsureHeading: false,
       includesInterop: false,
-      includesDigitalcheckTeam: false,
+      emailRecipients: [NKR_MAIL], // no DC_MAIL
 
       headline:
         "Das Regelungsvorhaben hat keinen Digitalbezug und keine Anforderungen der Interoperabilität.",
@@ -159,7 +188,7 @@ const scenarios: TestScenario[] = [
     expected: {
       ...DEFAULT_EXPECTATIONS,
       showsUnsureHeading: false,
-      includesDigitalcheckTeam: false,
+      emailRecipients: [NKR_MAIL], // no DC_MAIL
 
       headline:
         "Das Regelungsvorhaben hat keinen Digitalbezug und keine eindeutigen Anforderungen der Interoperabilität.",
@@ -173,7 +202,7 @@ const scenarios: TestScenario[] = [
       ...DEFAULT_EXPECTATIONS,
       showsAnswerConflictWarning: false,
       showsUnsureHeading: false,
-      includesDigitalcheckTeam: false,
+      emailRecipients: [NKR_MAIL], // no DC_MAIL
 
       headline:
         "Das Regelungsvorhaben hat keinen Digitalbezug und keine Anforderungen der Interoperabilität.",
@@ -190,9 +219,9 @@ const scenarios: TestScenario[] = [
       hasInputArbeitstitel: false,
       showsNegativeReasoning: false,
       furtherStepsVisible: false,
+      unsureHintSubstring: UNSURE_HINT_BUND,
 
-      headline:
-        "Sie haben mehrere Aussagen mit „Ich bin unsicher“ beantwortet.",
+      headline: UNSURE_HEADLINE,
     },
   },
   {
@@ -207,9 +236,9 @@ const scenarios: TestScenario[] = [
       showsNegativeReasoning: false,
       includesInterop: false,
       furtherStepsVisible: false,
+      unsureHintSubstring: UNSURE_HINT_BUND,
 
-      headline:
-        "Sie haben mehrere Aussagen mit „Ich bin unsicher“ beantwortet.",
+      headline: UNSURE_HEADLINE,
     },
   },
   {
@@ -222,9 +251,45 @@ const scenarios: TestScenario[] = [
       hasInputArbeitstitel: false,
       showsNegativeReasoning: false,
       furtherStepsVisible: false,
+      unsureHintSubstring: UNSURE_HINT_BUND,
 
-      headline:
-        "Sie haben mehrere Aussagen mit „Ich bin unsicher“ beantwortet.",
+      headline: UNSURE_HEADLINE,
+    },
+  },
+  {
+    name: "unsure result for Bundesland with Pruefstelle",
+    answers: () => "Ich bin unsicher",
+    bundesland: "Brandenburg",
+    expected: {
+      ...DEFAULT_EXPECTATIONS,
+      showsAnswerConflictWarning: false,
+      formIsVisible: false,
+      hasInputArbeitstitel: false,
+      showsNegativeReasoning: false,
+      furtherStepsVisible: false,
+      emailRecipients: [BB_MAIL],
+      unsureHintSubstring: BB_MAIL,
+
+      headline: UNSURE_HEADLINE,
+    },
+  },
+  {
+    name: "unsure result for Bundesland without Pruefstelle",
+    answers: () => "Ich bin unsicher",
+    bundesland: "Hessen",
+    expected: {
+      ...DEFAULT_EXPECTATIONS,
+      showsAnswerConflictWarning: false,
+      formIsVisible: false,
+      hasInputArbeitstitel: false,
+      showsNegativeReasoning: false,
+      furtherStepsVisible: false,
+      emailRecipients: [],
+      hasDownloadButton: true,
+      expectedPruefstelleStep: null,
+      unsureHintSubstring: UNSURE_HINT_NO_PRUEFSTELLE,
+
+      headline: UNSURE_HEADLINE,
     },
   },
   {
@@ -244,6 +309,66 @@ const scenarios: TestScenario[] = [
         "Das Regelungsvorhaben hat einen Digitalbezug und enthält Anforderungen der Interoperabilität.",
     },
   },
+  // Bundesländer
+  {
+    name: "Bundesland without Prüfstelle",
+    answers: () => "Ja",
+    bundesland: "Hessen",
+    expected: {
+      ...DEFAULT_EXPECTATIONS,
+      showsAnswerConflictWarning: false,
+      showsNegativeReasoning: false,
+      showsUnsureHeading: false,
+
+      headline:
+        "Das Regelungsvorhaben hat einen Digitalbezug und enthält Anforderungen der Interoperabilität.",
+      emailBodyContains: [
+        "In Bezug auf digitale Aspekte führt ihr Regelungsvorhaben zu...",
+        "In Bezug auf Interoperabilität führt ihr Regelungsvorhaben zu...",
+      ],
+
+      emailRecipients: [],
+      hasDownloadButton: true,
+      expectedPruefstelleStep: null,
+    },
+  },
+  {
+    name: "Bundesland with Prüfstelle",
+    answers: () => "Ja",
+    bundesland: "Brandenburg",
+    expected: {
+      ...DEFAULT_EXPECTATIONS,
+      showsAnswerConflictWarning: false,
+      showsNegativeReasoning: false,
+      showsUnsureHeading: false,
+
+      headline:
+        "Das Regelungsvorhaben hat einen Digitalbezug und enthält Anforderungen der Interoperabilität.",
+      emailBodyContains: [
+        "In Bezug auf digitale Aspekte führt ihr Regelungsvorhaben zu...",
+        "In Bezug auf Interoperabilität führt ihr Regelungsvorhaben zu...",
+      ],
+
+      emailRecipients: [BB_MAIL],
+      expectedPruefstelleStep: "Prüfen durch zuständige Prüfstelle",
+    },
+  },
+  {
+    name: "negative result for Bundesland with Prüfstelle",
+    answers: () => "Nein",
+    bundesland: "Brandenburg",
+    expected: {
+      ...DEFAULT_EXPECTATIONS,
+      showsAnswerConflictWarning: false,
+      showsUnsureHeading: false,
+      includesInterop: false,
+
+      headline:
+        "Das Regelungsvorhaben hat keinen Digitalbezug und keine Anforderungen der Interoperabilität.",
+      emailRecipients: [BB_MAIL],
+      expectedPruefstelleStep: "Prüfen durch zuständige Prüfstelle",
+    },
+  },
 ];
 
 describe("Vorprüfung Ergebnis Page", () => {
@@ -252,18 +377,20 @@ describe("Vorprüfung Ergebnis Page", () => {
   });
 
   describe("Scenario-based Rendering", () => {
-    describe.each(scenarios)("$name", ({ answers, expected }) => {
+    describe.each(scenarios)("$name", ({ answers, bundesland, expected }) => {
       it("displays the correct headline", () => {
-        setup(answers);
+        setup(answers, bundesland);
         expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
           expected.headline,
         );
       });
 
       it(`should ${expected.includesInterop ? "show" : "hide"} the interoperability link`, () => {
-        setup(answers);
+        setup(answers, bundesland);
         const link = screen.queryByRole("link", { name: "Übersichtsseite" });
-        const text = screen.queryByText(
+        // Scope to result-details to avoid matching the aria-hidden print copy
+        const resultDetails = screen.getByTestId("result-details");
+        const text = within(resultDetails).queryByText(
           "Erfahren Sie mehr über Interoperabilität",
         );
 
@@ -277,7 +404,7 @@ describe("Vorprüfung Ergebnis Page", () => {
       });
 
       it(`should ${expected.showsAnswerConflictWarning ? "show" : "hide"} answer conflict warning`, () => {
-        setup(answers);
+        setup(answers, bundesland);
         const warning = screen.queryByText(
           "Es liegt ein Widerspruch in Ihren Angaben vor.",
         );
@@ -289,7 +416,7 @@ describe("Vorprüfung Ergebnis Page", () => {
       });
 
       it("renders correct details summary based on answers", () => {
-        setup(answers);
+        setup(answers, bundesland);
         const detailsSummary = screen.getByTestId("result-details");
         questions.forEach((question) => {
           const expectedText =
@@ -302,20 +429,39 @@ describe("Vorprüfung Ergebnis Page", () => {
         });
       });
 
+      it.runIf(expected.hasDownloadButton)(
+        "should show download button",
+        () => {
+          setup(answers, bundesland);
+          const downloadBtn = screen.queryByRole("button", {
+            name: "Ergebnis herunterladen",
+          });
+          expect(downloadBtn).toBeInTheDocument();
+        },
+      );
+
+      it.runIf(expected.unsureHintSubstring)(
+        "shows the correct unsure hint",
+        () => {
+          setup(answers, bundesland);
+          expect(
+            screen.getByText(expected.unsureHintSubstring!, { exact: false }),
+          ).toBeInTheDocument();
+        },
+      );
+
       it(`should ${expected.formIsVisible ? "show" : "hide"} the contact form`, () => {
-        setup(answers);
-        const formHeader = screen.queryByText(
-          "Ergebnis absenden und Prüfstelle frühzeitig einbinden",
-        );
+        setup(answers, bundesland);
+        const formElement = screen.queryByTestId("result-form");
         const titleInput = screen.queryByRole("textbox", {
           name: "Vorläufiger Arbeitstitel des Vorhabens",
         });
 
         if (expected.formIsVisible) {
-          expect(formHeader).toBeInTheDocument();
+          expect(formElement).toBeInTheDocument();
           expect(titleInput).toBeInTheDocument();
         } else {
-          expect(formHeader).not.toBeInTheDocument();
+          expect(formElement).not.toBeInTheDocument();
           expect(titleInput).not.toBeInTheDocument();
         }
       });
@@ -323,7 +469,7 @@ describe("Vorprüfung Ergebnis Page", () => {
       it.runIf(expected.formIsVisible)(
         `should ${expected.showsNegativeReasoning ? "show" : "hide"} the reasoning input`,
         () => {
-          setup(answers);
+          setup(answers, bundesland);
           const reasoningInput = screen.queryByRole("textbox", {
             name: "Begründung",
           });
@@ -336,7 +482,7 @@ describe("Vorprüfung Ergebnis Page", () => {
       );
 
       it("handles further steps visibility", () => {
-        setup(answers);
+        setup(answers, bundesland);
         const heading = screen.queryByRole("heading", {
           level: 2,
           name: "So machen Sie weiter",
@@ -353,6 +499,19 @@ describe("Vorprüfung Ergebnis Page", () => {
               screen.getByRole("link", { name: "Zu „Dokumentieren“" }),
             ).toHaveAttribute("href", dokumentation.path);
           }
+
+          if (expected.expectedPruefstelleStep) {
+            expect(
+              screen.getByText(expected.expectedPruefstelleStep),
+            ).toBeInTheDocument();
+          } else {
+            expect(
+              screen.queryByText("Prüfen durch den NKR"),
+            ).not.toBeInTheDocument();
+            expect(
+              screen.queryByText("Prüfen durch zuständige Prüfstelle"),
+            ).not.toBeInTheDocument();
+          }
         } else {
           expect(heading).not.toBeInTheDocument();
         }
@@ -360,7 +519,7 @@ describe("Vorprüfung Ergebnis Page", () => {
 
       describe.runIf(expected.formIsVisible)("Email Generation", () => {
         it("generates the correct mailto link", async () => {
-          const { user } = setup(answers);
+          const { user } = setup(answers, bundesland);
 
           await user.type(
             screen.getByLabelText("Vorläufiger Arbeitstitel des Vorhabens"),
@@ -375,20 +534,24 @@ describe("Vorprüfung Ergebnis Page", () => {
           const href = link.getAttribute("href") || "";
           expect(href).toMatch(/^mailto:/);
 
-          const [recipients, queryString] = href
+          const [recipientsStr, queryString] = href
             .replace("mailto:", "")
             .split("?")
             .map((part) => decodeURIComponent(part));
+          const recipients = recipientsStr
+            .split(";")
+            .map((s) => s.trim())
+            .filter(Boolean);
           const params = new URLSearchParams(queryString);
           const body = params.get("body") || "";
           const subject = params.get("subject") || "";
 
-          if (expected.includesNkrRecipient)
-            expect(recipients).toContain("poststelle@nkr.bund.de");
-          if (expected.includesDigitalcheckTeam)
-            expect(recipients).toContain(
-              "interoperabel@digitalservice.bund.de",
+          if (expected.emailRecipients) {
+            expect(recipients).toHaveLength(expected.emailRecipients.length);
+            expect(recipients).toEqual(
+              expect.arrayContaining(expected.emailRecipients),
             );
+          }
 
           expect(subject).toContain("Test Projekt");
 
@@ -409,7 +572,7 @@ describe("Vorprüfung Ergebnis Page", () => {
 
       describe.runIf(expected.formIsVisible)("Form Validation", () => {
         it("validates required fields", async () => {
-          const { user } = setup(answers);
+          const { user } = setup(answers, bundesland);
           const submitBtn = screen.getByRole("button", {
             name: "E-Mail erstellen",
           });
@@ -431,7 +594,7 @@ describe("Vorprüfung Ergebnis Page", () => {
         });
 
         it("clears error when field is filled", async () => {
-          const { user } = setup(answers);
+          const { user } = setup(answers, bundesland);
           await user.click(
             screen.getByRole("button", { name: "E-Mail erstellen" }),
           );

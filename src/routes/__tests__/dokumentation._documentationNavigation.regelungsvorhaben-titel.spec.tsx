@@ -55,6 +55,14 @@ describe("DocumentationTitle", () => {
       expect(input.tagName).toBe("INPUT");
     });
 
+    it("shows a select element with the expected label", () => {
+      const select = screen.getByRole("combobox", {
+        name: "Wählen Sie Ihr Bundesland oder den Bund aus",
+      });
+      expect(select).toBeInTheDocument();
+      expect(select.tagName).toBe("SELECT");
+    });
+
     it("shows submit button", () => {
       const submitButton = screen.getByRole("button", {
         name: "Weiter",
@@ -74,7 +82,7 @@ describe("DocumentationTitle", () => {
     beforeEach(() => {
       mockedReadDataFromLocalStorage.mockReturnValue({
         ...{ version: DATA_SCHEMA_VERSION_V1 },
-        policyTitle: { title: "", organization: "" },
+        policyTitle: { title: "", bundesland: "Bund", organization: "" },
       });
 
       act(() => {

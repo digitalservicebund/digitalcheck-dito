@@ -74,6 +74,13 @@ export function setResult(result?: PreCheckResultSchema): void {
   });
 }
 
+export function setBundesland(
+  bundesland: NonNullable<PreCheckDataSchema["bundesland"]>,
+): void {
+  const data = getPreCheckData();
+  createOrUpdatePreCheckData({ ...data, bundesland });
+}
+
 export function addOrUpdateAnswer(newAnswer?: PreCheckAnswerSchema): void {
   if (!newAnswer) return;
 

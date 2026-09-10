@@ -4,8 +4,7 @@ import {
   vorpruefung,
   vorpruefung_hinweise,
 } from "@/config/routes";
-import { steps } from "@/resources/content/shared/naechste-schritte";
-import type { ContentLink, Step } from "@/utils/contentTypes.ts";
+import type { ContentLink } from "@/utils/contentTypes.ts";
 import { dedent } from "@/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
 
@@ -29,21 +28,13 @@ export const preCheckResult = {
     actionButton: {
       text: "Vorprüfung herunterladen",
     },
-    nextSteps: {
-      title: "So machen Sie weiter",
-      steps: [
-        steps.preCheck.finished,
-        {
-          ...steps.methods,
-        },
-        steps.documentation,
-        steps.nkrFinal,
-      ] satisfies Step[],
-    },
   },
   unsure: {
     title: "Sie haben mehrere Aussagen mit „Ich bin unsicher“ beantwortet.",
-    hint: `Bitte kontaktieren Sie den Digitalcheck-Support unter: ${contact.mdPhoneLink()} oder schreiben Sie uns eine E-Mail an ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")} mit Ihren Fragen. Wir helfen Ihnen, die Vorprüfung auszufüllen.`,
+    hintBund: `Bitte kontaktieren Sie den Digitalcheck-Support unter: ${contact.mdPhoneLink()} oder schreiben Sie uns eine E-Mail an ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")} mit Ihren Fragen. Wir helfen Ihnen, die Vorprüfung auszufüllen.`,
+    hintBundelandWithoutPruefstelle: `Da sich einige Punkte aktuell noch nicht eindeutig beantworten lassen, empfehlen wir, die Vorprüfung zu wiederholen oder ggf. hier zu beenden und direkt in die [Erarbeitung](${methoden.path}) zu starten.`,
+    hintBundeslandWithPruefstelle: (pruefstelleMail: string) =>
+      `Bitte kontaktieren Sie Ihre Prüfstelle ${pruefstelleMail} mit Ihren Fragen. Dort wird man helfen Ihnen, die Vorprüfung auszufüllen.`,
     actionButton: {
       text: "Vorprüfung wiederholen",
       to: vorpruefung.path,
@@ -60,10 +51,6 @@ export const preCheckResult = {
   },
   negative: {
     title: "Das Regelungsvorhaben hat **keinen Digitalbezug** und ",
-    nextSteps: {
-      title: "So machen Sie weiter",
-      steps: [steps.preCheck.finished, steps.nkrFinal] satisfies Step[],
-    },
   },
   infoBox: {
     title: "Was bedeutet das für mein Vorhaben?",
@@ -107,15 +94,25 @@ export const preCheckResult = {
     },
   },
   form: {
-    formLegend: "Ergebnis absenden und Prüfstelle frühzeitig einbinden",
-    instructions: dedent`
+    title: "Ergebnis direkt per E-Mail versenden",
+    titleNoPruefstelle:
+      "Optional: Sie können das Ergebnis auch per Mail senden",
+    instructionsBund: dedent`
       Wir erstellen für Sie eine E-Mail mit dem Ergebnis der Vorprüfung, die sich in Ihrem E-Mail-Programm öffnet.
 
-      - Schicken Sie das Ergebnis an Ihre Prüfstelle (wenn keine Prüfstelle vorhanden ist, dient das Ergebnis als Dokumentation und zur Selbstprüfung)
+      - Schicken Sie das Ergebnis an den Nationalen Normenkontrollrat (NKR)
       - **Bei Anforderungen an Interoperabilität** erhält das Digitalcheck-Team automatisch eine Kopie und meldet sich bei Ihnen.
     `,
+    instructionsBundeslandWithPruefstelle: (pruefstelleMail: string) => dedent`
+      Wir erstellen für Sie eine E-Mail mit dem Ergebnis der Vorprüfung, die sich in Ihrem E-Mail-Programm öffnet.
+
+      - Schicken Sie das Ergebnis an Ihre Prüfstelle: ${pruefstelleMail}
+      - Falls **Anforderungen zur Interoperabilität** bestehen, leiten Sie die E-Mail bitte ebenfalls an die Prüfstelle weiter. Das Digitalcheck-Team übernimmt hierfür **keine** Zuständigkeit.
+    `,
+    instructionsBundeslandWithoutPruefstelle:
+      "Wir erstellen für Sie eine E-Mail mit dem Ergebnis der Vorprüfung, die sich in Ihrem E-Mail-Programm öffnet. Dort können Sie Ihre eigenen Empfänger angeben.",
     previewLabel: "Vorschau der E-Mail-Vorlage",
-    copyIntroText: dedent`**Alternativ** können Sie das Ergebnis der Vorprüfung einfach als Text kopieren und manuell an die zuständige Prüfstelle schicken oder bei Ihren Dokumenten speichern.`,
+    copyIntroText: dedent`**Alternativ** können Sie das Ergebnis der Vorprüfung einfach als Text kopieren und manuell an Ihre eigenen Empfänger schicken`,
     vorhabenTitleLabel: "Vorläufiger Arbeitstitel des Vorhabens",
     vorhabenTitleRequired: "Bitte geben Sie einen Titel für Ihr Vorhaben an.",
     vorhabenTitleTooLong:
@@ -153,6 +150,11 @@ export const preCheckResult = {
             - Nutzen Sie, falls vorhanden, die direkte Veraktungsfunktion in Outlook.
           `,
         },
+        {
+          label: "Warum die Vorprüfung an die zuständigen Prüftselle schicken?",
+          pruefstelleOnly: true,
+          text: "Erfahrungswerte zeigen, dass ein frühzeitiger Austausch mit den Prüfstellen oder dem DigitalService das Erarbeiten für Sie vereinfacht und die Prüfung beschleunigt. So können Sie von den Erfahrungen in anderen Vorhaben profitieren – wenn Sie dies wünschen.",
+        },
       ],
     },
     downloadPdfButton: {
@@ -183,7 +185,13 @@ export const preCheckResult = {
     downloadStarted: "Vorprüfung wird heruntergeladen",
     outro: {
       title: "Darum ist es wichtig",
-      text: "Bei Interoperabilitätsbezug unterstützt Sie das Digitalcheck-Team gezielt bei der Umsetzung der EU-Anforderungen.",
+      textBund: dedent`
+        - Je **früher** Sie sich mit dem NKR zu Digitalbezug austauschen desto schneller ist die Prüfung abgeschlossen.
+        - Bei Interoperabilitätsbezug unterstützt Sie das Digitalcheck-Team gezielt bei der Umsetzung der EU-Anforderungen.
+      `,
+      textBundeslandWithPruefstelle: dedent`
+        Je **früher** Sie sich mit Ihrer zuständigen Prüfstelle austauschen desto schneller ist die Vorprüfung abgeschlossen.
+      `,
     },
   },
   print: {

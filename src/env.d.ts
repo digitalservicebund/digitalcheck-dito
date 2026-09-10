@@ -1,4 +1,5 @@
 /// <reference types="astro/client" />
+/// <reference types="unplugin-icons/types/astro" />
 
 interface ImportMetaEnv {
   readonly PUBLIC_STAGE: string;
