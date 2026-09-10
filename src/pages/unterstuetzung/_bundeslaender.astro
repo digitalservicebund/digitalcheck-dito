@@ -34,28 +34,26 @@ const anlaufstellen = [
   <h2 class="pb-8">Übersicht zu den Anlaufstellen</h2>
   <p>Hier finden Sie weitere Informationen zu Ihrem jeweiligen Bundesland.</p>
   <InfoBoxList class="mt-40">
-    {
-      anlaufstellen.map((a) => (
-        <InfoBox
-          visual={{
-            type: "image",
-            image: {
-              url: a.logo,
-              size: "medium",
-              className: "object-contain mx-32",
-            },
-          }}
-        >
-          <h3>{a.title}</h3>
-          <p>
-            Sehen Sie sich die Details für {a.title} an und welche Punkte für
-            die Prüfung besonders relevant sind.
-          </p>
-          <LinkButton href={a.path} look="tertiary" className="self-start">
-            Mehr erfahren
-          </LinkButton>
-        </InfoBox>
-      ))
-    }
+    {anlaufstellen.map((a) => (
+      <InfoBox
+        visual={{
+          type: "image",
+          image: {
+            url: a.logo,
+            size: "medium",
+            className: "object-contain mx-32",
+          },
+        }}
+      >
+        <h3>{a.title}</h3>
+        <p>
+          Sehen Sie sich die Details für {a.title} an und welche Punkte für die
+          Prüfung besonders relevant sind.
+        </p>
+        <LinkButton href={a.path} look="tertiary" className="self-start">
+          Mehr erfahren
+        </LinkButton>
+      </InfoBox>
+    ))}
   </InfoBoxList>
 </section>

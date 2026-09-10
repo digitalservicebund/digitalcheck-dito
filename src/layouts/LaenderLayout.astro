@@ -19,31 +19,27 @@ const { title, bundesland } = Astro.props;
           <slot name="subtitle" />
         </div>
         <div class="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">
-          <div
-            class="flex h-full w-630 flex-col justify-center align-middle lg:w-[50vw]"
-          >
+          <div class="flex h-full w-630 flex-col justify-center align-middle lg:w-[50vw]">
             <div class="relative mx-auto h-400 py-24 lg:h-450">
               <img
                 src={laenderMapUrl}
                 alt="Eine stilisierte Karte von Deutschland"
                 class="h-full w-auto object-contain"
               />
-              {
-                bundesland && (
-                  <svg
-                    viewBox="0 0 592 801"
-                    class="absolute inset-0 h-full w-full"
-                    aria-hidden="true"
-                  >
-                    <use
-                      href={`${laenderMapUrl}#${bundesland}`}
-                      fill="#a5b7e1"
-                      stroke="#0e2792"
-                      stroke-width="1.5"
-                    />
-                  </svg>
-                )
-              }
+              {bundesland && (
+                <svg
+                  viewBox="0 0 592 801"
+                  class="absolute inset-0 h-full w-full"
+                  aria-hidden="true"
+                >
+                  <use
+                    href={`${laenderMapUrl}#${bundesland}`}
+                    fill="#a5b7e1"
+                    stroke="#0e2792"
+                    stroke-width="1.5"
+                  />
+                </svg>
+              )}
             </div>
           </div>
         </div>
