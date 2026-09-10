@@ -81,21 +81,17 @@ const title = prinzip ? `Prinzip: ${prinzip.Name}` : "Fünf Prinzipien";
     <SidebarContainer>
       <ToC slot="sidebar" client:load title={"Inhalt"} selector="section[id]">
         <ToC.List className="list-unstyled list-none">
-          {
-            prinzip.Aspekte.map((aspect) => (
-              <ToC.Item
-                href={`#${slugify(aspect.Kurzbezeichnung)}`}
-                title={(aspect.Nummer ?? "") + " " + aspect.Kurzbezeichnung}
-              />
-            ))
-          }
+          {prinzip.Aspekte.map((aspect) => (
+            <ToC.Item
+              href={`#${slugify(aspect.Kurzbezeichnung)}`}
+              title={(aspect.Nummer ?? "") + " " + aspect.Kurzbezeichnung}
+            />
+          ))}
         </ToC.List>
       </ToC>
-      {
-        prinzip.Aspekte.map((aspect) => (
-          <Aspect aspect={aspect} prinzip={prinzip} />
-        ))
-      }
+      {prinzip.Aspekte.map((aspect) => (
+        <Aspect aspect={aspect} prinzip={prinzip} />
+      ))}
     </SidebarContainer>
     <div class="breakout-grid-toc my-80">
       <PrincipleNavigation principles={prinzipList} current={prinzip} />

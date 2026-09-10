@@ -22,29 +22,29 @@ export const frontmatter = {
   <main>
     <Hero title={fundamentalsNKR.title} subtitle={fundamentalsNKR.subtitle}>
       <RichText
-        markdown={"Diese Seite richtet sich **ausschließlich** an Bundesministerien."}
+        markdown={
+          "Diese Seite richtet sich **ausschließlich** an Bundesministerien."
+        }
         className="ds-subhead"
       />
     </Hero>
 
     <Container className="space-y-40 py-40 md:py-80">
       <InfoBoxList separator class="mt-0 space-y-80 *:pb-80">
-        {
-          fundamentalsNKR.summary.items.map((item) => (
-            <InfoBox
-              heading={{
-                ...item.heading,
-                tagName: "h2",
-                look: "ds-heading-03-reg",
-              }}
-            >
-              <RichText
-                markdown={item.content}
-                className="kern-stack-lg [&>ul]:space-y-24"
-              />
-            </InfoBox>
-          ))
-        }
+        {fundamentalsNKR.summary.items.map((item) => (
+          <InfoBox
+            heading={{
+              ...item.heading,
+              tagName: "h2",
+              look: "ds-heading-03-reg",
+            }}
+          >
+            <RichText
+              markdown={item.content}
+              className="kern-stack-lg [&>ul]:space-y-24"
+            />
+          </InfoBox>
+        ))}
       </InfoBoxList>
 
       <section class="space-y-40">

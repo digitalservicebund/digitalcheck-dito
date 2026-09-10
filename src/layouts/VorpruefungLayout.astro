@@ -11,13 +11,11 @@ const { title, hideNav } = Astro.props;
 ---
 
 <Layout title={`Vorprüfung: ${title}`} showProgressBar>
-  {
-    hideNav ? (
+  {hideNav ? (
+    <slot />
+  ) : (
+    <VorpruefungNavigation client:load pathname={Astro.url.pathname}>
       <slot />
-    ) : (
-      <VorpruefungNavigation client:load pathname={Astro.url.pathname}>
-        <slot />
-      </VorpruefungNavigation>
-    )
-  }
+    </VorpruefungNavigation>
+  )}
 </Layout>

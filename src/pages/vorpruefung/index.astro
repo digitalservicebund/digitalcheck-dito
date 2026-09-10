@@ -27,13 +27,11 @@ export const frontmatter = {
   <main>
     <Hero title={preCheck.start.title} subtitle={preCheck.start.subtitle}>
       <div class="kern-stack kern-stack-md mb-40">
-        {
-          preCheck.start.hints.map((hint) => (
-            <DetailsSummary key={hint.title} title={hint.title}>
-              <RichText markdown={hint.text} />
-            </DetailsSummary>
-          ))
-        }
+        {preCheck.start.hints.map((hint) => (
+          <DetailsSummary key={hint.title} title={hint.title}>
+            <RichText markdown={hint.text} />
+          </DetailsSummary>
+        ))}
       </div>
 
       <PreCheckContinueActions client:load />
@@ -54,9 +52,7 @@ export const frontmatter = {
         ]}
       >
         <div data-tab-panel={preCheck.start.summary.tabName} class="space-y-40">
-          <Heading tagName="h2">
-            {preCheck.start.summary.heading.text}
-          </Heading>
+          <Heading tagName="h2">{preCheck.start.summary.heading.text}</Heading>
           <InfoBox heading={preCheck.start.summary.start.heading}>
             <RichText markdown={preCheck.start.summary.start.content} />
           </InfoBox>

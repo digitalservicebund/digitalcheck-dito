@@ -23,6 +23,7 @@ const prinzips = await fetchPrinzipsWithExamples();
     path={Astro.url.pathname}
     principleId={principleId}
     isErlaeuterung={isErlaeuterung}
-    ><LoadingPage slot="fallback">Lade Dokumentation…</LoadingPage>
+  >
+    <LoadingPage slot="fallback">Lade Dokumentation…</LoadingPage>
   </DocumentationRouter>
 </Layout>

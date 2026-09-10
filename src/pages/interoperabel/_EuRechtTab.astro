@@ -46,11 +46,9 @@ const tableOfContents: TableContent = [
   <SidebarContainer>
     <ToC slot="sidebar" title={"Inhalt"} selector="section[id]" client:load>
       <ToC.List className="list-unstyled list-none">
-        {
-          tableOfContents.map((section) => (
-            <ToC.Item href={`#${slugify(section.id)}`} title={section.title} />
-          ))
-        }
+        {tableOfContents.map((section) => (
+          <ToC.Item href={`#${slugify(section.id)}`} title={section.title} />
+        ))}
       </ToC.List>
     </ToC>
 

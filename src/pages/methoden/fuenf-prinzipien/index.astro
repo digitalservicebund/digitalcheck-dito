@@ -45,7 +45,9 @@ const prinzips = await fetchPrinzipsWithExamples();
         <Feature>
           <ShareOutlined className="fill-ds-feature size-80" />
           <div>
-            <p class="ds-body-01-bold"><b>Den Gesamtprozess überprüfen</b></p>
+            <p class="ds-body-01-bold">
+              <b>Den Gesamtprozess überprüfen</b>
+            </p>
             <p>
               Wenden Sie die fünf Prinzipien direkt auf eine Skizze Ihres
               Umsetzungsprozesses an. So lokalisieren Sie relevante
@@ -72,7 +74,9 @@ const prinzips = await fetchPrinzipsWithExamples();
         <Feature>
           <VisibilityTwoTone className="fill-ds-feature size-80" />
           <div>
-            <p class="ds-body-01-bold"><b>Impulse für die Umsetzung</b></p>
+            <p class="ds-body-01-bold">
+              <b>Impulse für die Umsetzung</b>
+            </p>
             <p>
               Nutzen Sie konkrete Tipps, um die digitalen Potenziale Ihres
               Regelungsvorhabens voll auszuschöpfen und Hürden frühzeitig zu
@@ -89,30 +93,28 @@ const prinzips = await fetchPrinzipsWithExamples();
           class="grid grid-cols-1 gap-40 md:grid-cols-2"
           data-testid="prinzipien"
         >
-          {
-            prinzips.map((prinzip) => (
-              <div class="flex flex-col justify-between gap-16 bg-white px-32 pt-40 pb-48">
-                <div class="space-y-16">
-                  <Badge className={`bg-principle-${prinzip.Nummer}`}>
-                    Prinzip {prinzip.order}
-                  </Badge>
-                  <h2 class="ds-heading-03-reg">{prinzip.Name}</h2>
-                  <BlocksRenderer
-                    content={prinzip.Kurzbeschreibung ?? prinzip.Beschreibung}
-                  />
-                </div>
-                <LinkButton
-                  href={
-                    methoden_fuenfPrinzipien.path + "/" + prinzip.URLBezeichnung
-                  }
-                  look={"secondary"}
-                  className={"self-start"}
-                >
-                  Mehr zum Prinzip
-                </LinkButton>
+          {prinzips.map((prinzip) => (
+            <div class="flex flex-col justify-between gap-16 bg-white px-32 pt-40 pb-48">
+              <div class="space-y-16">
+                <Badge className={`bg-principle-${prinzip.Nummer}`}>
+                  Prinzip {prinzip.order}
+                </Badge>
+                <h2 class="ds-heading-03-reg">{prinzip.Name}</h2>
+                <BlocksRenderer
+                  content={prinzip.Kurzbeschreibung ?? prinzip.Beschreibung}
+                />
               </div>
-            ))
-          }
+              <LinkButton
+                href={
+                  methoden_fuenfPrinzipien.path + "/" + prinzip.URLBezeichnung
+                }
+                look={"secondary"}
+                className={"self-start"}
+              >
+                Mehr zum Prinzip
+              </LinkButton>
+            </div>
+          ))}
         </div>
       </div>
     </div>

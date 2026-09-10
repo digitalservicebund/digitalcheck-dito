@@ -49,13 +49,12 @@ const {
           <RichText markdown={interoperability.andDigitalReadiness.content} />
         </div>
         <div class="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">
-          <div
-            class="flex h-full w-[630px] flex-col justify-center bg-[#9FB6C6] align-middle lg:w-[50vw] [&>img]:object-contain lg:[&>img]:h-[550px]"
-          >
+          <div class="flex h-full w-[630px] flex-col justify-center bg-[#9FB6C6] align-middle lg:w-[50vw] [&>img]:object-contain lg:[&>img]:h-[550px]">
             <Image
               url={interoperability.andDigitalReadiness.image.url}
-              alternativeText={interoperability.andDigitalReadiness.image
-                .alternativeText}
+              alternativeText={
+                interoperability.andDigitalReadiness.image.alternativeText
+              }
             />
           </div>
         </div>
@@ -63,8 +62,9 @@ const {
       <div class="sm:hidden">
         <Image
           url={interoperability.andDigitalReadiness.image.url}
-          alternativeText={interoperability.andDigitalReadiness.image
-            .alternativeText}
+          alternativeText={
+            interoperability.andDigitalReadiness.image.alternativeText
+          }
         />
       </div>
     </div>
@@ -96,22 +96,20 @@ const {
             className="mb-8"
           />
           <p>{interoperability.resources.subtitle}</p>
-          {
-            interoperability.resources.groups.map((group) => (
-              <div class="mt-10 p-24 pl-0">
-                <div class="mb-10 flex items-center">
-                  <group.icon className="mr-10 size-32" />
-                  <Heading
-                    tagName="h3"
-                    look="ds-label-01-bold"
-                    text={group.title}
-                  />
-                </div>
-                <p class="mb-20">{group.subtitle}</p>
-                <RichText markdown={group.content} />
+          {interoperability.resources.groups.map((group) => (
+            <div class="mt-10 p-24 pl-0">
+              <div class="mb-10 flex items-center">
+                <group.icon className="mr-10 size-32" />
+                <Heading
+                  tagName="h3"
+                  look="ds-label-01-bold"
+                  text={group.title}
+                />
               </div>
-            ))
-          }
+              <p class="mb-20">{group.subtitle}</p>
+              <RichText markdown={group.content} />
+            </div>
+          ))}
         </Container>
       </Container>
     </div>
@@ -129,8 +127,8 @@ const {
           <a href={`mailto:${contact.interoperabilityEmail}`}>
             {contact.interoperabilityEmail}
           </a>{" "}
-          oder unter{" "}
-          <a href={`tel:${contact.phone}`}>{contact.phoneDisplay}</a>.
+          oder unter <a href={`tel:${contact.phone}`}>{contact.phoneDisplay}</a>
+          .
         </p>
         <div class="mt-24">
           <LinkButton href={interoperabel_faq.path} look="tertiary">

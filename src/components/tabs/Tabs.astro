@@ -36,35 +36,31 @@ const uid = `tabs-${Math.random().toString(36).slice(2, 8)}`;
   class={Astro.props.class}
 >
   <nav class={tabListClass} role="tablist" aria-label="Seitenabschnitte">
-    {
-      tabs.map((tabLabel, i) => {
-        const tabSlug = prettySlugify(tabLabel);
-        return (
-          <button
-            type="button"
-            role="tab"
-            id={`${uid}-tab-${tabSlug}`}
-            data-tab-key={tabLabel}
-            data-tab-slug={tabSlug}
-            aria-controls={`${uid}-panel-${tabSlug}`}
-            aria-selected={i === 0 ? "true" : "false"}
-            class={buttonClass}
-          >
-            {tabLabel}
-          </button>
-        );
-      })
-    }
+    {tabs.map((tabLabel, i) => {
+      const tabSlug = prettySlugify(tabLabel);
+      return (
+        <button
+          type="button"
+          role="tab"
+          id={`${uid}-tab-${tabSlug}`}
+          data-tab-key={tabLabel}
+          data-tab-slug={tabSlug}
+          aria-controls={`${uid}-panel-${tabSlug}`}
+          aria-selected={i === 0 ? "true" : "false"}
+          class={buttonClass}
+        >
+          {tabLabel}
+        </button>
+      );
+    })}
   </nav>
-  {
-    mobilePickerClass && (
-      <MobileTabPicker
-        items={tabs.map((tabLabel) => ({ value: tabLabel, label: tabLabel }))}
-        label="Seitenabschnitte"
-        class={mobilePickerClass}
-      />
-    )
-  }
+  {mobilePickerClass && (
+    <MobileTabPicker
+      items={tabs.map((tabLabel) => ({ value: tabLabel, label: tabLabel }))}
+      label="Seitenabschnitte"
+      class={mobilePickerClass}
+    />
+  )}
 
   <div data-tab-panels>
     <slot />

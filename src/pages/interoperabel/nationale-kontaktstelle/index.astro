@@ -32,37 +32,30 @@ export const frontmatter = {
 
         <div data-tab-panel={spoc.states.tabName} class="container">
           <Heading tagName="h2" text={spoc.states.headline} />
-          {
-            spoc.states.sections.map((section) => (
-              <div class="last:mb-48">
-                <Heading
-                  tagName="h3"
-                  text={section.headline}
-                  className="mt-32 mb-8"
-                />
-                <RichText markdown={section.content} />
-              </div>
-            ))
-          }
+          {spoc.states.sections.map((section) => (
+            <div class="last:mb-48">
+              <Heading
+                tagName="h3"
+                text={section.headline}
+                className="mt-32 mb-8"
+              />
+              <RichText markdown={section.content} />
+            </div>
+          ))}
         </div>
 
         <div data-tab-panel={spoc.contact.tabName} class="container">
           <Heading tagName="h2" text={spoc.contact.headline} />
-          {
-            spoc.contact.sections.map((section) => (
-              <div class="last:mb-48">
-                <Heading
-                  tagName="h3"
-                  text={section.headline}
-                  className="mt-32 mb-8"
-                />
-                <RichText
-                  markdown={section.content}
-                  className="kern-stack-lg"
-                />
-              </div>
-            ))
-          }
+          {spoc.contact.sections.map((section) => (
+            <div class="last:mb-48">
+              <Heading
+                tagName="h3"
+                text={section.headline}
+                className="mt-32 mb-8"
+              />
+              <RichText markdown={section.content} className="kern-stack-lg" />
+            </div>
+          ))}
         </div>
       </Tabs>
     </div>

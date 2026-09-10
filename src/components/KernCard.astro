@@ -53,40 +53,36 @@ const hasFooter = Astro.slots.has("footer");
     class: interactive ? "kern-card--interactive" : undefined,
   })}
 >
-  {
-    image && imageAlt !== undefined && (
-      <div class="kern-card__media relative">
-        <Image
-          src={image}
-          alt={imageAlt}
-          class="h-208 object-cover"
-          densities={[1, 2]}
-          width="382"
-          height="208"
-          quality={100}
-        />
-        {imageSource && (
-          <p class="absolute right-0 bottom-0 w-auto! rounded-none! bg-black/40 px-4 text-xs text-white">
-            Quelle: {imageSource}
-          </p>
-        )}
-      </div>
-    )
-  }
+  {image && imageAlt !== undefined && (
+    <div class="kern-card__media relative">
+      <Image
+        src={image}
+        alt={imageAlt}
+        class="h-208 object-cover"
+        densities={[1, 2]}
+        width="382"
+        height="208"
+        quality={100}
+      />
+      {imageSource && (
+        <p class="absolute right-0 bottom-0 w-auto! rounded-none! bg-black/40 px-4 text-xs text-white">
+          Quelle: {imageSource}
+        </p>
+      )}
+    </div>
+  )}
   <div class="kern-card__container">
     <header class="kern-card__header">
       <slot name="pre-header" />
       <hgroup>
         {preline && <p class="kern-preline">{preline}</p>}
         <h2 class="kern-title">
-          {
-            href ? (
-              /* prettier-ignore */ <a href={href} class="kern-link--stretched hyphens-auto [word-break:break-word]" target={target_option}>{title}
+          {href ? (
+            /* prettier-ignore */ <a href={href} class="kern-link--stretched hyphens-auto [word-break:break-word]" target={target_option}>{title}
               </a>
-            ) : (
-              title
-            )
-          }
+          ) : (
+            title
+          )}
         </h2>
         {subline && <p class="kern-subline">{subline}</p>}
       </hgroup>
@@ -95,12 +91,10 @@ const hasFooter = Astro.slots.has("footer");
       {body && <p class="kern-body">{body}</p>}
       <slot />
     </section>
-    {
-      hasFooter && (
-        <footer class="kern-card__footer">
-          <slot name="footer" />
-        </footer>
-      )
-    }
+    {hasFooter && (
+      <footer class="kern-card__footer">
+        <slot name="footer" />
+      </footer>
+    )}
   </div>
 </article>

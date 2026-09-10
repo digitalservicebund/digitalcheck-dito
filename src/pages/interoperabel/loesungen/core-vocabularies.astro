@@ -54,11 +54,9 @@ const sections = {
     <SidebarContainer class={"space-y-80"}>
       <ToC slot="sidebar" title={"Inhalt"} selector="section[id]" client:load>
         <ToC.List className="list-unstyled list-none">
-          {
-            Object.entries(sections).map(([, { id, title }]) => (
-              <ToC.Item href={`#${slugify(id)}`} title={title} />
-            ))
-          }
+          {Object.entries(sections).map(([, { id, title }]) => (
+            <ToC.Item href={`#${slugify(id)}`} title={title} />
+          ))}
         </ToC.List>
       </ToC>
       <section
@@ -66,9 +64,7 @@ const sections = {
         class={"mt-80 scroll-my-40 space-y-40"}
       >
         <div class="space-y-8">
-          <ChapterBadge>
-            {sections.einfuehrung.title}
-          </ChapterBadge>
+          <ChapterBadge>{sections.einfuehrung.title}</ChapterBadge>
           <h2>Betrifft mich dieses Thema als Legist oder Legistin?</h2>
           <p>
             Wenn Ihr Regelungsvorhaben die Erfassung, die Verarbeitung oder den
@@ -84,9 +80,9 @@ const sections = {
         <p>
           <strong>Warum?</strong>
           <br />
-          Im Rahmen des Digitalchecks und der Interoperabilitätsbewertung klären Sie,
-          ob Ihr Vorhaben die nahtlose und automatisierte grenzüberschreitende Verarbeitung
-          von Daten im Vollzug fördert.
+          Im Rahmen des Digitalchecks und der Interoperabilitätsbewertung klären
+          Sie, ob Ihr Vorhaben die nahtlose und automatisierte
+          grenzüberschreitende Verarbeitung von Daten im Vollzug fördert.
         </p>
         <InfoBox
           visual={{
@@ -96,9 +92,9 @@ const sections = {
           }}
         >
           <p>
-            Wenn Ihr Vorhaben{" "}
-            <strong class="text-red-800">keinen Bezug</strong> dazu hat, ist diese
-            Seite für Sie derzeit nicht zwingend handlungsrelevant.
+            Wenn Ihr Vorhaben <strong class="text-red-800">keinen Bezug</strong>{" "}
+            dazu hat, ist diese Seite für Sie derzeit nicht zwingend
+            handlungsrelevant.
           </p>
         </InfoBox>
         <InfoBox
@@ -122,24 +118,26 @@ const sections = {
         >
           <ul class="space-y-32">
             <li>
-              <strong>Was sind Core Vocabularies?</strong> Core Vocabularies sind
-              vereinfachte, wiederverwendbare und erweiterbare &quot;Austausch-Sprache&quot;,
-              welche die grundlegenden Merkmale einer Daten-Entität kontextneutral
-              erfassen. Sie dienen als standardisierte Basisbausteine für europäische
-              digitale Dienste.
+              <strong>Was sind Core Vocabularies?</strong> Core Vocabularies
+              sind vereinfachte, wiederverwendbare und erweiterbare
+              &quot;Austausch-Sprache&quot;, welche die grundlegenden Merkmale
+              einer Daten-Entität kontextneutral erfassen. Sie dienen als
+              standardisierte Basisbausteine für europäische digitale Dienste.
             </li>
             <li>
-              <strong>Warum ist das wichtig?</strong> Um die reibungslose Kommunikation
-              zwischen Behörden zu gewährleisten, schlagen diese Modelle eine Brücke
-              zwischen länderübergreifend unterschiedlich lautenden Begriffsdefinitionen.
-              So werden semantische Interoperabilitätskonflikte gelöst und damit Datenabgleiche
-              zwischen Registern (z.B. verschiedener Länder) ermöglicht, ohne, dass
-              verschiedene Register jeweils verändert werden müssen.
+              <strong>Warum ist das wichtig?</strong> Um die reibungslose
+              Kommunikation zwischen Behörden zu gewährleisten, schlagen diese
+              Modelle eine Brücke zwischen länderübergreifend unterschiedlich
+              lautenden Begriffsdefinitionen. So werden semantische
+              Interoperabilitätskonflikte gelöst und damit Datenabgleiche
+              zwischen Registern (z.B. verschiedener Länder) ermöglicht, ohne,
+              dass verschiedene Register jeweils verändert werden müssen.
             </li>
             <li>
-              <strong>Was kostet mich das?</strong> Für Sie als Legistin oder Legist
-              bedarf es lediglich einer verankerten Vorgabe in Ihrem Regelungsvorhaben.
-              Die technische Ausgestaltung obliegt dem IT-Vollzug.
+              <strong>Was kostet mich das?</strong> Für Sie als Legistin oder
+              Legist bedarf es lediglich einer verankerten Vorgabe in Ihrem
+              Regelungsvorhaben. Die technische Ausgestaltung obliegt dem
+              IT-Vollzug.
             </li>
 
             <li>
@@ -154,20 +152,17 @@ const sections = {
       </section>
 
       <section class="scroll-my-40 space-y-8" id={sections.erklaerung.id}>
-        <ChapterBadge>
-          {sections.erklaerung.title}
-        </ChapterBadge>
+        <ChapterBadge>{sections.erklaerung.title}</ChapterBadge>
         <h2>Worum geht es bei Core Vocabularies genau?</h2>
         <p>
           Regelungsvorhaben im Bereich der Verwaltungsdigitalisierung (wie das
           OZG oder die Umsetzung der europäischen Single Digital Gateway
-          Verordnung) fordern häufig das sogenannte <i>Once-Only-Prinzip</i>{
-            " "
-          }
-          – also die nur einmalige Erfassung von Daten. Als Legistin oder Legist fragen
-          Sie sich im Digitalcheck: Wie stellen wir sicher, dass dieses Prinzip auch
-          grenzüberschreitend technisch umsetzbar ist? Durch die Einbindung von Core
-          Vocabularies in nationale Standards legen Sie die Grundlage dafür.
+          Verordnung) fordern häufig das sogenannte <i>Once-Only-Prinzip</i> –
+          also die nur einmalige Erfassung von Daten. Als Legistin oder Legist
+          fragen Sie sich im Digitalcheck: Wie stellen wir sicher, dass dieses
+          Prinzip auch grenzüberschreitend technisch umsetzbar ist? Durch die
+          Einbindung von Core Vocabularies in nationale Standards legen Sie die
+          Grundlage dafür.
         </p>
         <p>
           Core Vocabularies fungieren als universelles „Puzzleteil“, das den
@@ -207,9 +202,7 @@ const sections = {
   `}
           />
         </DetailsSummary>
-        <table
-          class="dc-comparison-table mt-64 [&_td:nth-child(2)]:bg-blue-200"
-        >
+        <table class="dc-comparison-table mt-64 [&_td:nth-child(2)]:bg-blue-200">
           <thead>
             <tr>
               <th scope="col">Deutsches Register</th>
@@ -249,9 +242,7 @@ const sections = {
         </table>
       </section>
       <section class="scroll-my-40 space-y-8" id={sections.umsetzung.id}>
-        <ChapterBadge>
-          {sections.umsetzung.title}
-        </ChapterBadge>
+        <ChapterBadge>{sections.umsetzung.title}</ChapterBadge>
         <h2>So stellen Sie die Nutzung sicher</h2>
         <p>
           Fragen Sie sich als Legistin oder Legist im Vorfeld des Vollzugs: Wie
@@ -278,18 +269,19 @@ const sections = {
             </p>
             <ul>
               <li>
-                <strong>Sicherheit & Geheimhaltung:</strong> Erfordert die Struktur
-                der Daten die Preisgabe von Informationen, die den Staats- oder Datenschutz
-                gefährden?
+                <strong>Sicherheit & Geheimhaltung:</strong> Erfordert die
+                Struktur der Daten die Preisgabe von Informationen, die den
+                Staats- oder Datenschutz gefährden?
               </li>
               <li>
-                <strong>Rechte Dritter:</strong> Verhindern Lizenzen die Nutzung dieser
-                offenen Standards?
+                <strong>Rechte Dritter:</strong> Verhindern Lizenzen die Nutzung
+                dieser offenen Standards?
               </li>
               <li>
-                <strong>Unverhältnismäßigkeit:</strong> Übersteigt der Aufwand für
-                die Anpassung von etablierten Altsystemen (sog. Legacy-Systemen) den
-                Nutzen für den grenzüberschreitenden digitalen Binnenmarkt deutlich?
+                <strong>Unverhältnismäßigkeit:</strong> Übersteigt der Aufwand
+                für die Anpassung von etablierten Altsystemen (sog.
+                Legacy-Systemen) den Nutzen für den grenzüberschreitenden
+                digitalen Binnenmarkt deutlich?
               </li>
             </ul>
           </AccordionItem>
@@ -344,9 +336,7 @@ const sections = {
         </div>
         <Timeline className={"mt-80"}>
           <Timeline.Item bullet>
-            <Timeline.ItemContent
-              backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
-            >
+            <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48">
               <Heading tagName="h3" className="ds-heading-03-reg">
                 Schritt 1: Bedarf & Prüfung (Ihre Domäne)
               </Heading>
@@ -366,17 +356,15 @@ const sections = {
           </Timeline.Item>
 
           <Timeline.Item bullet>
-            <Timeline.ItemContent
-              backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
-            >
+            <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48">
               <Heading tagName="h3" className="ds-heading-03-reg">
                 Schritt 2: Technische Vorgabe
               </Heading>
               <p>
                 Sie legen im Entwurf fest, dass für die Strukturierung der
                 Datenobjekte die entsprechenden{" "}
-                <strong>Core Vocabularies</strong> als Grundlage zu nutzen sind. Der
-                IT-Vollzug setzt dies im Nachgang technisch um.
+                <strong>Core Vocabularies</strong> als Grundlage zu nutzen sind.
+                Der IT-Vollzug setzt dies im Nachgang technisch um.
               </p>
             </Timeline.ItemContent>
           </Timeline.Item>
@@ -391,9 +379,7 @@ const sections = {
           </Timeline.Item>
 
           <Timeline.Item bullet>
-            <Timeline.ItemContent
-              backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
-            >
+            <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48">
               <Heading tagName="h3" className="ds-heading-03-reg">
                 Schritt 3: Der Dienst geht live
               </Heading>
@@ -410,9 +396,7 @@ const sections = {
         </Timeline>
       </section>
       <section class="scroll-my-40 space-y-8" id={sections.beispiele.id}>
-        <ChapterBadge>
-          {sections.beispiele.title}
-        </ChapterBadge>
+        <ChapterBadge>{sections.beispiele.title}</ChapterBadge>
         <h2>
           Semantic Core Vocabularies in Anwendung bei bestehenden Gesetzen und
           Richtlinien
@@ -423,7 +407,9 @@ const sections = {
         </p>
         <div class={"mt-40"}>
           <AccordionItem
-            headline={"XHochschule - Grenzüberschreitender Austausch von Bildungsnachweisen"}
+            headline={
+              "XHochschule - Grenzüberschreitender Austausch von Bildungsnachweisen"
+            }
             client:load
           >
             <RichText
@@ -508,9 +494,7 @@ const sections = {
         id={sections.ressourcen.id}
       >
         <InfoBox look="white">
-          <ChapterBadge>
-            {sections.ressourcen.title}
-          </ChapterBadge>
+          <ChapterBadge>{sections.ressourcen.title}</ChapterBadge>
           <RichText
             className="[&_h3]:mt-24"
             markdown={dedent`

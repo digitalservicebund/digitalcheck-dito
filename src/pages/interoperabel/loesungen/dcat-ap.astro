@@ -54,11 +54,9 @@ const sections = {
     <SidebarContainer class="space-y-80">
       <ToC slot="sidebar" title="Inhalt" selector="section[id]" client:load>
         <ToC.List className="list-unstyled list-none">
-          {
-            Object.entries(sections).map(([, { id, title }]) => (
-              <ToC.Item href={`#${slugify(id)}`} title={title} />
-            ))
-          }
+          {Object.entries(sections).map(([, { id, title }]) => (
+            <ToC.Item href={`#${slugify(id)}`} title={title} />
+          ))}
         </ToC.List>
       </ToC>
       <section
@@ -81,8 +79,8 @@ const sections = {
           <strong>Warum?</strong>
           <br />
           Im Rahmen des <strong>Digitalchecks</strong> und der{" "}
-          <strong>Interoperabilitätsprüfung</strong> klären Sie, ob Ihr Vorhaben die
-          EU-weite Auffindbarkeit von offenen Daten fördert.
+          <strong>Interoperabilitätsprüfung</strong> klären Sie, ob Ihr Vorhaben
+          die EU-weite Auffindbarkeit von offenen Daten fördert.
         </p>
         <InfoBox
           visual={{
@@ -92,9 +90,9 @@ const sections = {
           }}
         >
           <p>
-            Wenn Ihr Vorhaben{" "}
-            <strong class="text-red-800">keinen Bezug</strong> dazu hat, ist diese
-            Seite für Sie derzeit nicht zwingend handlungsrelevant.
+            Wenn Ihr Vorhaben <strong class="text-red-800">keinen Bezug</strong>{" "}
+            dazu hat, ist diese Seite für Sie derzeit nicht zwingend
+            handlungsrelevant.
           </p>
         </InfoBox>
         <InfoBox
@@ -118,25 +116,26 @@ const sections = {
         >
           <ul class="space-y-32">
             <li>
-              <strong>Was ist DCAT-AP?</strong> DCAT-AP ist ein Standard für die Beschreibung
-              (nicht den Inhalt!) von offenen Datensätzen. Der europäische Metadatenstandard
-              hat ein deutsches Profil, das DCAT-AP.de heißt. Es sorgt dafür, dass
-              deutsche Spezifika berücksichtigt werden – bei voller Kompatibilität
-              zur EU. Der IT-Planungsrat empfiehlt diesen Standard verbindlich für
-              den Austausch offener Verwaltungsdaten. Das deutsche Profil ist frei
+              <strong>Was ist DCAT-AP?</strong> DCAT-AP ist ein Standard für die
+              Beschreibung (nicht den Inhalt!) von offenen Datensätzen. Der
+              europäische Metadatenstandard hat ein deutsches Profil, das
+              DCAT-AP.de heißt. Es sorgt dafür, dass deutsche Spezifika
+              berücksichtigt werden – bei voller Kompatibilität zur EU. Der
+              IT-Planungsrat empfiehlt diesen Standard verbindlich für den
+              Austausch offener Verwaltungsdaten. Das deutsche Profil ist frei
               verfügbar unter{" "}
-              <a href={"https://www.dcat-ap.de"}> www.dcat-ap.de </a>
-              .
+              <a href={"https://www.dcat-ap.de"}> www.dcat-ap.de </a>.
             </li>
             <li>
-              <strong>Warum ist das wichtig?</strong> Damit Ihr Gesetz im digitalen
-              Zeitalter funktioniert und offene Daten für Bürgerinnen und Bürger,
-              Wirtschaft und Wissenschaft in der EU auffindbar werden.
+              <strong>Warum ist das wichtig?</strong> Damit Ihr Gesetz im
+              digitalen Zeitalter funktioniert und offene Daten für Bürgerinnen
+              und Bürger, Wirtschaft und Wissenschaft in der EU auffindbar
+              werden.
             </li>
             <li>
-              <strong>Was kostet mich das?</strong> Als Legist oder Legistin nur einen
-              Textbaustein in Ihrem Regelungsvorhaben. Die technische Arbeit leisten
-              dann die IT-Experten.
+              <strong>Was kostet mich das?</strong> Als Legist oder Legistin nur
+              einen Textbaustein in Ihrem Regelungsvorhaben. Die technische
+              Arbeit leisten dann die IT-Experten.
             </li>
             <li>
               <strong>Wo gibt es Hilfe?</strong> Bei der{" "}
@@ -219,9 +218,7 @@ const sections = {
 
         <Timeline>
           <Timeline.Item bullet>
-            <Timeline.ItemContent
-              backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
-            >
+            <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48">
               <Heading tagName="h3" className="ds-heading-03-reg">
                 Schritt 1: Bedarf & Prüfung (Ihre Domäne)
               </Heading>
@@ -237,17 +234,15 @@ const sections = {
           </Timeline.Item>
 
           <Timeline.Item bullet>
-            <Timeline.ItemContent
-              backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
-            >
+            <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48">
               <Heading tagName="h3" className="ds-heading-03-reg">
                 Schritt 2: Technische Vorgabe
               </Heading>
               <p>
                 Sie legen im Entwurf fest, dass für die Beschreibung der Daten
-                der Standard <strong>DCAT-AP.de</strong> zu nutzen ist. IT-Experten
-                setzen dies dann technisch um, indem sie die Metadaten entsprechend
-                strukturieren.
+                der Standard <strong>DCAT-AP.de</strong> zu nutzen ist.
+                IT-Experten setzen dies dann technisch um, indem sie die
+                Metadaten entsprechend strukturieren.
               </p>
             </Timeline.ItemContent>
           </Timeline.Item>
@@ -261,9 +256,7 @@ const sections = {
             />
           </Timeline.Item>
           <Timeline.Item bullet>
-            <Timeline.ItemContent
-              backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
-            >
+            <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48">
               <Heading tagName="h3" className="ds-heading-03-reg">
                 Schritt 3: Der Dienst geht live
               </Heading>
@@ -330,7 +323,9 @@ const sections = {
             />
           </AccordionItem>
           <AccordionItem
-            headline={"Die INSPIRE-Richtlinie (Geodateninfrastruktur in Europa)"}
+            headline={
+              "Die INSPIRE-Richtlinie (Geodateninfrastruktur in Europa)"
+            }
             client:load
           >
             <RichText
