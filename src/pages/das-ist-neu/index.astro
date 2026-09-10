@@ -20,50 +20,48 @@ const TimelineItem = Timeline.Item;
     <Hero>
       <h1>Das ist neu</h1>
       <p slot="subtitle">
-        Das Digitalcheck-Angebot wird kontinuierlich <a
-          href="https://zfl.bund.de/ueber/daran-arbeiten-wir"
-          >weiterentwickelt</a
-        >. Bedürfnisse und Rückmeldungen von Nutzenden werden kurzfristig
+        Das Digitalcheck-Angebot wird kontinuierlich{" "}
+        <a href="https://zfl.bund.de/ueber/daran-arbeiten-wir">
+          weiterentwickelt
+        </a>
+        . Bedürfnisse und Rückmeldungen von Nutzenden werden kurzfristig
         eingearbeitet. Auch geänderte und neue rechtliche Anforderungen führen
         zu Anpassungen. Unten finden Sie eine chronologische Übersicht der
         Ergänzungen und Änderungen auf der Website.
       </p>
       <p slot="subtitle">
         Haben Sie Anregungen oder Wünsche? Kontaktieren Sie uns jederzeit gerne
-        unter <a href={contact.phone}>{contact.phoneDisplay}</a> oder <a
-          href={mailto(contact.email, "Supportanfrage: digitalcheck.bund.de")}
-          >{contact.email}
-        </a>.
+        unter <a href={contact.phone}>{contact.phoneDisplay}</a> oder{" "}
+        <a href={mailto(contact.email, "Supportanfrage: digitalcheck.bund.de")}>
+          {contact.email}
+        </a>
+        .
       </p>
       <Metadata slot="subtitle" lastUpdate="31.08.2026" />
     </Hero>
     <section class="py-80">
       <Timeline>
-        {
-          news.items.map((item) =>
-            item.year ? (
-              <TimelineItem year={item.year} />
-            ) : (
-              <TimelineItem bullet>
-                {"badge" in item && (
-                  <div>
-                    <span class="kern-badge kern-badge--small border-0 bg-[#F3F4F7]">
-                      <span class="kern-label font-normal">
-                        {item.badge!.text}
-                      </span>
+        {news.items.map((item) =>
+          item.year ? (
+            <TimelineItem year={item.year} />
+          ) : (
+            <TimelineItem bullet>
+              {"badge" in item && (
+                <div>
+                  <span class="kern-badge kern-badge--small border-0 bg-[#F3F4F7]">
+                    <span class="kern-label font-normal">
+                      {item.badge!.text}
                     </span>
-                  </div>
-                )}
-                {item.headline && (
-                  <h2 class="kern-heading-medium py-16">
-                    {item.headline.text}
-                  </h2>
-                )}
-                {item.content && <RichText markdown={item.content} />}
-              </TimelineItem>
-            ),
-          )
-        }
+                  </span>
+                </div>
+              )}
+              {item.headline && (
+                <h2 class="kern-heading-medium py-16">{item.headline.text}</h2>
+              )}
+              {item.content && <RichText markdown={item.content} />}
+            </TimelineItem>
+          ),
+        )}
       </Timeline>
     </section>
   </main>

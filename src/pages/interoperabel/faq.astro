@@ -170,13 +170,11 @@ const faqItems = [
       </p>
     </Hero>
     <div class="container mb-40 py-80">
-      {
-        faqItems.map((item) => (
-          <AccordionItem headline={item.headline} client:load>
-            <RichText markdown={item.content} />
-          </AccordionItem>
-        ))
-      }
+      {faqItems.map((item) => (
+        <AccordionItem headline={item.headline} client:load>
+          <RichText markdown={item.content} />
+        </AccordionItem>
+      ))}
     </div>
   </main>
 </Layout>

@@ -96,67 +96,65 @@ const steps = [
     <div class="breakout bg-yellow-300 py-24">
       <div>
         <div class="flex items-center">
-          <Badge className="mr-8" look="hint">NEU</Badge>
+          <Badge className="mr-8" look="hint">
+            NEU
+          </Badge>
           <p>
             <b>Digitalcheck und das Zentrum für Legistik wachsen zusammen.</b>
           </p>
         </div>
         <p class="kern-body kern-body--medium">
-          Erste Inhalte finden Sie ab sofort dort. <a
+          Erste Inhalte finden Sie ab sofort dort.{" "}
+          <a
             href={ZFL_BASE_URL + "/werkzeuge"}
             target="_blank"
-            class="link-unstyled kern-link kern-link">Jetzt ansehen</a
+            class="link-unstyled kern-link kern-link"
           >
+            Jetzt ansehen
+          </a>
         </p>
       </div>
     </div>
     <div class="py-40 lg:py-80">
       <Heading tagName="h2" text="Schritt für Schritt" className="mb-40" />
       <div class="relative">
-        <div
-          class="absolute h-16 w-16 rounded-full bg-blue-300 max-lg:-bottom-8 max-lg:left-10 lg:-top-6 lg:-right-1"
-        >
-        </div>
-        <ol
-          class="list-unstyled max-w-none max-lg:mx-16 lg:grid lg:grid-flow-col lg:grid-cols-3 lg:grid-rows-[repeat(6,auto)]"
-        >
-          {
-            steps.map((step) => (
-              <li class="relative border-blue-300 max-lg:border-l-3 max-lg:pb-40 max-lg:pl-40 lg:row-span-6 lg:grid lg:grid-rows-subgrid lg:border-t-3 lg:pr-40">
-                <div class="absolute flex h-40 w-40 items-center justify-center rounded-full bg-blue-800 font-bold text-white max-lg:left-[-22px] lg:-top-20">
-                  {step.number}
-                </div>
-                <Heading
-                  tagName="h3"
-                  text={step.title}
-                  className="ds-heading-03-bold lg:mt-40"
-                />
-                <div class="mt-40 self-center">
-                  <LinkButton href={step.link.to} look={step.link.look}>
-                    {step.link.text}
-                  </LinkButton>
-                </div>
-                <div class="mt-40">
-                  <p class="font-bold">Vorgehen:</p>
-                  <RichText markdown={step.procedure} />
-                </div>
-                <div class="mt-24 border-t-2 border-gray-400 pt-16">
-                  <p class="font-bold">Dauer:</p>
-                  <RichText markdown={step.duration} />
-                </div>
-                <div class="mt-24">
-                  <p class="font-bold">Ergebnis:</p>
-                  <RichText markdown={step.result} />
-                  {step.number === 1 && (
-                    <p class="mt-16">
-                      * Auf Bundesebene ist zum Beispiel der Normenkontrollrat
-                      (NKR) die zuständige Prüfstelle.
-                    </p>
-                  )}
-                </div>
-              </li>
-            ))
-          }
+        <div class="absolute h-16 w-16 rounded-full bg-blue-300 max-lg:-bottom-8 max-lg:left-10 lg:-top-6 lg:-right-1"></div>
+        <ol class="list-unstyled max-w-none max-lg:mx-16 lg:grid lg:grid-flow-col lg:grid-cols-3 lg:grid-rows-[repeat(6,auto)]">
+          {steps.map((step) => (
+            <li class="relative border-blue-300 max-lg:border-l-3 max-lg:pb-40 max-lg:pl-40 lg:row-span-6 lg:grid lg:grid-rows-subgrid lg:border-t-3 lg:pr-40">
+              <div class="absolute flex h-40 w-40 items-center justify-center rounded-full bg-blue-800 font-bold text-white max-lg:left-[-22px] lg:-top-20">
+                {step.number}
+              </div>
+              <Heading
+                tagName="h3"
+                text={step.title}
+                className="ds-heading-03-bold lg:mt-40"
+              />
+              <div class="mt-40 self-center">
+                <LinkButton href={step.link.to} look={step.link.look}>
+                  {step.link.text}
+                </LinkButton>
+              </div>
+              <div class="mt-40">
+                <p class="font-bold">Vorgehen:</p>
+                <RichText markdown={step.procedure} />
+              </div>
+              <div class="mt-24 border-t-2 border-gray-400 pt-16">
+                <p class="font-bold">Dauer:</p>
+                <RichText markdown={step.duration} />
+              </div>
+              <div class="mt-24">
+                <p class="font-bold">Ergebnis:</p>
+                <RichText markdown={step.result} />
+                {step.number === 1 && (
+                  <p class="mt-16">
+                    * Auf Bundesebene ist zum Beispiel der Normenkontrollrat
+                    (NKR) die zuständige Prüfstelle.
+                  </p>
+                )}
+              </div>
+            </li>
+          ))}
         </ol>
       </div>
     </div>
@@ -169,9 +167,7 @@ const steps = [
         className="bg-white"
       >
         <Heading tagName="h3"> Was ist Digitaltauglichkeit? </Heading>
-        <RichText
-          markdown="Digitaltaugliche Regelungen ermöglichen eine rechtlich und technisch reibungslose digitale Umsetzung und fördern die automatisierte Bearbeitung von Verfahrensschritten."
-        />
+        <RichText markdown="Digitaltaugliche Regelungen ermöglichen eine rechtlich und technisch reibungslose digitale Umsetzung und fördern die automatisierte Bearbeitung von Verfahrensschritten." />
         <InfoBox.LinkList
           links={[
             {
@@ -193,9 +189,7 @@ const steps = [
         <Heading tagName="h3">
           Worauf achtet der Nationale Normenkontrollrat?
         </Heading>
-        <RichText
-          markdown="Der Nationale Normenkontrollrat (NKR) prüft das Vorhaben auf Digitaltauglichkeit. Mit der Anwendung der **Prinzipien** und Erstellung von **Visualisierungen** kann der Nationale Normenkontrollrat die Digitaltauglichkeit besser und schneller nachvollziehen."
-        />
+        <RichText markdown="Der Nationale Normenkontrollrat (NKR) prüft das Vorhaben auf Digitaltauglichkeit. Mit der Anwendung der **Prinzipien** und Erstellung von **Visualisierungen** kann der Nationale Normenkontrollrat die Digitaltauglichkeit besser und schneller nachvollziehen." />
         <InfoBox.LinkList
           links={[
             {
@@ -220,9 +214,7 @@ const steps = [
             <Heading tagName="h3">
               Das Potenzial von Visualisierungen nutzen
             </Heading>
-            <RichText
-              markdown="Visualisierungen helfen bestehende Abläufe Ihrer Regelung einfach sichtbar zu machen und Digitaltauglichkeit einzuschätzen."
-            />
+            <RichText markdown="Visualisierungen helfen bestehende Abläufe Ihrer Regelung einfach sichtbar zu machen und Digitaltauglichkeit einzuschätzen." />
             <InfoBox.LinkList
               links={[
                 {
@@ -245,9 +237,7 @@ const steps = [
             <Heading tagName="h3">
               Prinzipien als Grundlage für Digitaltauglichkeit einsetzen
             </Heading>
-            <RichText
-              markdown="Fünf Prinzipien helfen Ihnen dabei, Chancen der digitalen Umsetzung auszuschöpfen und Hindernisse zu erkennen."
-            />
+            <RichText markdown="Fünf Prinzipien helfen Ihnen dabei, Chancen der digitalen Umsetzung auszuschöpfen und Hindernisse zu erkennen." />
             <InfoBox.LinkList
               links={[
                 {
@@ -273,9 +263,7 @@ const steps = [
         <Heading tagName="h2">
           Individuelle Unterstützung für Ihr Vorhaben
         </Heading>
-        <RichText
-          markdown="Nutzen Sie unsere persönlichen Unterstützungsangebote, um Ihr Regelungsvorhaben digitaltauglich zu gestalten und den Prozess erfolgreich zu durchlaufen."
-        />
+        <RichText markdown="Nutzen Sie unsere persönlichen Unterstützungsangebote, um Ihr Regelungsvorhaben digitaltauglich zu gestalten und den Prozess erfolgreich zu durchlaufen." />
         <InfoBox.LinkList
           links={[
             {

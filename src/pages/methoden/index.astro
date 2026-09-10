@@ -22,44 +22,42 @@ export const frontmatter = {
 
     <div class="container my-40 space-y-40 lg:my-80 lg:space-y-80">
       <Timeline>
-        {
-          methods.steps.items.map((step, index) => {
-            const headingId = `step-h-${index}`;
+        {methods.steps.items.map((step, index) => {
+          const headingId = `step-h-${index}`;
 
-            if (step.isSubstep)
-              return (
-                <Timeline.Item
-                  key={step.headline.text}
-                  bullet
-                  aria-labelledby={headingId}
-                >
-                  <Timeline.ItemContent
-                    backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
-                    headline={{
-                      text: step.headline.text,
-                      look: "ds-heading-03-bold",
-                      tagName: "h3",
-                      id: headingId,
-                    }}
-                    links={step.links}
-                    content={step.text}
-                  />
-                </Timeline.Item>
-              );
+          if (step.isSubstep)
             return (
               <Timeline.Item
-                className="mt-4 space-y-16"
                 key={step.headline.text}
+                bullet
                 aria-labelledby={headingId}
               >
                 <Timeline.ItemContent
+                  backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
+                  headline={{
+                    text: step.headline.text,
+                    look: "ds-heading-03-bold",
+                    tagName: "h3",
+                    id: headingId,
+                  }}
+                  links={step.links}
                   content={step.text}
-                  headline={{ ...step.headline, id: headingId }}
                 />
               </Timeline.Item>
             );
-          })
-        }
+          return (
+            <Timeline.Item
+              className="mt-4 space-y-16"
+              key={step.headline.text}
+              aria-labelledby={headingId}
+            >
+              <Timeline.ItemContent
+                content={step.text}
+                headline={{ ...step.headline, id: headingId }}
+              />
+            </Timeline.Item>
+          );
+        })}
       </Timeline>
 
       <section class="space-y-40">
@@ -119,22 +117,17 @@ export const frontmatter = {
     <section class="container my-40 space-y-32 lg:my-80">
       <Heading tagName="h2">{methods.nextSteps.title}</Heading>
       <NumberedList>
-        {
-          methods.nextSteps.items.map((item) => (
-            <NumberedList.Item
-              className="space-y-16"
-              disabled={item.isDisabled}
-            >
-              <p class="kern-body kern-body--large">{item.headline.text}</p>
-              {"content" in item && (
-                <RichText markdown={item.content as string} />
-              )}
-              {item.link && "to" in item.link && (
-                <a href={item.link.to}>{item.link.text}</a>
-              )}
-            </NumberedList.Item>
-          ))
-        }
+        {methods.nextSteps.items.map((item) => (
+          <NumberedList.Item className="space-y-16" disabled={item.isDisabled}>
+            <p class="kern-body kern-body--large">{item.headline.text}</p>
+            {"content" in item && (
+              <RichText markdown={item.content as string} />
+            )}
+            {item.link && "to" in item.link && (
+              <a href={item.link.to}>{item.link.text}</a>
+            )}
+          </NumberedList.Item>
+        ))}
       </NumberedList>
     </section>
   </main>

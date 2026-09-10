@@ -47,7 +47,10 @@ import { getTabAnchorLinkFromLabel } from "@/utils/tabs";
   </div>
 
   <div class="space-y-8">
-    <Heading tagName="h4" className="font-bold"> Fragen sie sich: </Heading>
+    <Heading tagName="h4" className="font-bold">
+      {" "}
+      Fragen sie sich:{" "}
+    </Heading>
     <ul>
       <li>
         Können nach der aktuellen Rechtslage andere EU-Bürgerinnen und -Bürger
@@ -67,19 +70,20 @@ import { getTabAnchorLinkFromLabel } from "@/utils/tabs";
     </p>
   </div>
 
-  <Heading tagName="h3" className="mt-80"> Der Ablauf im Überblick </Heading>
+  <Heading tagName="h3" className="mt-80">
+    {" "}
+    Der Ablauf im Überblick{" "}
+  </Heading>
   <Timeline>
     <Timeline.Item bullet>
-      <Timeline.ItemContent
-        backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
-      >
+      <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48">
         <Heading tagName="h4" className="ds-heading-03-reg">
           Führen Sie die Vorprüfung durch
         </Heading>
         <p>
-          Finden Sie in der <a href={vorpruefung.path}>Vorprüfung</a> in 6 Fragen
-          heraus, ob Sie in Ihrem Regelungsvorhaben Aspekte der digitalen Umsetzung
-          und EU-Anforderungen an Interoperabilität beachten müssen.
+          Finden Sie in der <a href={vorpruefung.path}>Vorprüfung</a> in 6
+          Fragen heraus, ob Sie in Ihrem Regelungsvorhaben Aspekte der digitalen
+          Umsetzung und EU-Anforderungen an Interoperabilität beachten müssen.
         </p>
         <p>
           Wenn Sie EU-Anforderungen an Interoperabilität beachten müssen und
@@ -90,9 +94,7 @@ import { getTabAnchorLinkFromLabel } from "@/utils/tabs";
     </Timeline.Item>
 
     <Timeline.Item bullet>
-      <Timeline.ItemContent
-        backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
-      >
+      <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48">
         <Heading tagName="h4" className="ds-heading-03-reg">
           Erarbeiten Sie die Regelung
         </Heading>
@@ -101,17 +103,16 @@ import { getTabAnchorLinkFromLabel } from "@/utils/tabs";
           <a href={methoden_fuenfPrinzipien.path}>
             Fünf Prinzipien für digitaltaugliche Gesetzgebung
           </a>
-          . Diese enthalten die Anforderungen an die Interoperabilität und helfen
-          Ihnen dabei, dass Ihre Regelung sowohl digitaltauglich als auch interoperabel
-          ist. Kostenlose, vertrauliche Unterstützung erhalten Sie vom Digitalcheck-Team.
+          . Diese enthalten die Anforderungen an die Interoperabilität und
+          helfen Ihnen dabei, dass Ihre Regelung sowohl digitaltauglich als auch
+          interoperabel ist. Kostenlose, vertrauliche Unterstützung erhalten Sie
+          vom Digitalcheck-Team.
         </p>
       </Timeline.ItemContent>
     </Timeline.Item>
 
     <Timeline.Item bullet>
-      <Timeline.ItemContent
-        backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
-      >
+      <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48">
         <Heading tagName="h4" className="ds-heading-03-reg">
           Optional: Lösungen für ein interoperables Europa integrieren
         </Heading>
@@ -119,9 +120,7 @@ import { getTabAnchorLinkFromLabel } from "@/utils/tabs";
           Lösungen für ein interoperables Europa (Art. 7 EU 2024/903) sind
           wiederverwendbare Standards für den grenzüberschreitenden
           Datenaustausch zwischen Verwaltungseinheiten. Das Interoperable Europe
-          Board legt fest, welche Lösungen zu prüfen sind. Mehr dazu im Reiter{
-            " "
-          }
+          Board legt fest, welche Lösungen zu prüfen sind. Mehr dazu im Reiter{" "}
           <a
             href={getTabAnchorLinkFromLabel(
               tabLabels.interoperableSolutionsTabLabel,
@@ -135,17 +134,15 @@ import { getTabAnchorLinkFromLabel } from "@/utils/tabs";
     </Timeline.Item>
 
     <Timeline.Item bullet>
-      <Timeline.ItemContent
-        backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48"
-      >
+      <Timeline.ItemContent backgroundClasses="bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48">
         <Heading tagName="h4" className="ds-heading-03-reg">
           Reichen Sie die Interoperabilitäts-Bewertung ein
         </Heading>
         <p>
           Sie dokumentieren{" "}
           <a href={dokumentation.path}> im gemeinsamen Fragebogen</a>
-          mit dem Digitalcheck, wie sich die Regelungsinhalte auf die Interoperabilität
-          auswirken.
+          mit dem Digitalcheck, wie sich die Regelungsinhalte auf die
+          Interoperabilität auswirken.
         </p>
       </Timeline.ItemContent>
     </Timeline.Item>

@@ -22,13 +22,11 @@ import { spoc } from "./_content";
       markdown={spoc.landscape.contentAfter.content}
     />
     <div class="my-40">
-      {
-        spoc.landscape.contentAfter.items.map((item) => (
-          <AccordionItem client:load headline={item.title}>
-            <RichText markdown={item.content} />
-          </AccordionItem>
-        ))
-      }
+      {spoc.landscape.contentAfter.items.map((item) => (
+        <AccordionItem client:load headline={item.title}>
+          <RichText markdown={item.content} />
+        </AccordionItem>
+      ))}
     </div>
     <RichText className="mb-48" markdown={spoc.landscape.contentAfter.outro} />
   </div>
@@ -45,38 +43,36 @@ import { spoc } from "./_content";
   <ContentWrapper className="lg:mt-40">
     <h2>Aktueller Stand der Integration in den Digitalcheck</h2>
     <Timeline>
-      {
-        spoc.timeline.items.map((timelineItem) =>
-          timelineItem.year ? (
-            <Timeline.Item year={`${timelineItem.year}`} />
-          ) : (
-            <Timeline.Item bullet className="flex flex-col gap-16">
-              {timelineItem.badge && (
-                <div>
-                  <span class="kern-badge kern-badge--small border-0 bg-[#F3F4F7]">
-                    <span class="kern-label font-normal">
-                      {timelineItem.badge.text}
-                    </span>
+      {spoc.timeline.items.map((timelineItem) =>
+        timelineItem.year ? (
+          <Timeline.Item year={`${timelineItem.year}`} />
+        ) : (
+          <Timeline.Item bullet className="flex flex-col gap-16">
+            {timelineItem.badge && (
+              <div>
+                <span class="kern-badge kern-badge--small border-0 bg-[#F3F4F7]">
+                  <span class="kern-label font-normal">
+                    {timelineItem.badge.text}
                   </span>
-                </div>
-              )}
-              {timelineItem.headline && <h3>{timelineItem.headline.text}</h3>}
-              {timelineItem.content && (
-                <RichText markdown={timelineItem.content} />
-              )}
-              {timelineItem.image && (
-                <ImageZoomable
-                  image={{
-                    url: timelineItem.image.url,
-                    alternativeText: timelineItem.image.alternativeText,
-                    className: "max-w-a11y",
-                  }}
-                />
-              )}
-            </Timeline.Item>
-          ),
-        )
-      }
+                </span>
+              </div>
+            )}
+            {timelineItem.headline && <h3>{timelineItem.headline.text}</h3>}
+            {timelineItem.content && (
+              <RichText markdown={timelineItem.content} />
+            )}
+            {timelineItem.image && (
+              <ImageZoomable
+                image={{
+                  url: timelineItem.image.url,
+                  alternativeText: timelineItem.image.alternativeText,
+                  className: "max-w-a11y",
+                }}
+              />
+            )}
+          </Timeline.Item>
+        ),
+      )}
     </Timeline>
   </ContentWrapper>
 </>
