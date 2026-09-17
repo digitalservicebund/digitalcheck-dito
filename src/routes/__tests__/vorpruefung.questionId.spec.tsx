@@ -30,6 +30,7 @@ describe("PreCheck", () => {
   beforeEach(() => {
     const answers = [{ questionId: questions[0].id, answer: "yes" }];
     vi.mocked(usePreCheckData).mockReturnValue({
+      bundesland: undefined,
       answerForQuestionId: vi.fn().mockReturnValue({
         answers,
       }),
