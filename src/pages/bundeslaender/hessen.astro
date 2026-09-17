@@ -1,6 +1,5 @@
 ---
 import LaenderLayout from "@/layouts/LaenderLayout.astro";
-import NumberedList from "@/components/NumberedList";
 import { Image } from "astro:assets";
 import hessenLogo from "./_assets/HESSEN_Logo_stacked.png";
 import {
@@ -9,14 +8,11 @@ import {
   vorpruefung,
   methoden_fuenfPrinzipien,
 } from "@/config/routes";
-import { ZFL_BASE_URL, ZFL_PATH_FLUSSDIAGRAMME } from "@/resources/constants";
 
 export const frontmatter = {
   title: "Digitalcheck Hessen",
   isStagingOnly: true,
 };
-
-const visualisierenPath = ZFL_BASE_URL + ZFL_PATH_FLUSSDIAGRAMME;
 ---
 
 <LaenderLayout title={frontmatter.title} bundesland="Hessen">
@@ -37,7 +33,7 @@ const visualisierenPath = ZFL_BASE_URL + ZFL_PATH_FLUSSDIAGRAMME;
       niedergelegte Ziel in Form einer gesetzlichen Verpflichtung.
     </p>
   </section>
-  <section class="space-y-40">
+  <section>
     <div class="flex items-center gap-48 pb-40">
       <Image src={hessenLogo} alt="Logo von Hessen" class="h-auto w-136" />
       <p>
@@ -48,74 +44,52 @@ const visualisierenPath = ZFL_BASE_URL + ZFL_PATH_FLUSSDIAGRAMME;
         Einschätzung, Gestaltung und Dokumentation ihres Regelungsvorhabens.
       </p>
     </div>
-    <div class="[&_h2]:mb-40! [&_h3]:mb-16">
-      <h2>Wie läuft der Prozess ab?</h2>
-      <div>
-        <NumberedList>
-          <NumberedList.Item>
-            <h3>Vorprüfung durchführen</h3>
-            <p>
-              Starten Sie mit{" "}
-              <a href={vorpruefung.path}>
-                Schritt 1 (Vorprüfung: Digitalbezug einschätzen)
-              </a>
-              , um herauszufinden, ob bei Ihrem Regelungsvorhaben ein
-              Digitalbezug oder eine Anforderung an die EU-Interoperabilität
-              besteht.
-            </p>
-          </NumberedList.Item>
-          <hr class="kern-divider border-blue-300" aria-hidden="true" />
-          <NumberedList.Item>
-            <h3>Ihr Ergebnis der Vorprüfung</h3>
-            <p>
-              <b>Bei keinem Digitalbezug:</b>
-            </p>
-            <p>
-              Besteht kein Digitalbezug und keine Anforderung an die
-              EU-Interoperabilität, ist der Digitalcheck für Sie bereits
-              abgeschlossen. Laden Sie die Dokumentation für interne Rückfragen
-              herunter und nehmen Sie diese zu den Akten.
-            </p>
-            <br />
-            <p>
-              <b>Bei vorhandenen Digitalbezug:</b>
-            </p>
-            <p>
-              Besteht ein Digitalbezug oder eine Anforderung an
-              EU-Interoperabilität, folgen Sie dem Digitalcheck mit{" "}
-              <a href={methoden.path}>
-                Schritt 2 (Erarbeitung des Regelungsvorhabens)
-              </a>
-              . Hier finden Sie weitere Hilfestellungen wie{" "}
-              <a href={visualisierenPath}>Anleitungen zur Visualisierung</a> und
-              die{" "}
-              <a href={methoden_fuenfPrinzipien.path}>
-                fünf Prinzipien des Digitalchecks
-              </a>
-              .
-            </p>
-          </NumberedList.Item>
-          <hr class="kern-divider border-blue-300" aria-hidden="true" />
-          <NumberedList.Item>
-            <h3>Regelung schreiben</h3>
-            <p>
-              Verfassen Sie die Regelung mit Ihren gewohnten Programmen und
-              Arbeitshilfen und greifen Sie dabei auf die hier gewonnenen
-              Erkenntnisse zurück.
-            </p>
-          </NumberedList.Item>
-          <hr class="kern-divider border-blue-300" aria-hidden="true" />
-          <NumberedList.Item>
-            <h3>Dokumentieren</h3>
-            <p>
-              In <a href={dokumentation.path}>Schritt 3 (Dokumentation)</a>{" "}
-              halten Sie fest, auf welche Aspekte der Digitaltauglichkeit Sie
-              besonders geachtet haben. Laden Sie die Dokumentation anschließend
-              herunter und nehmen Sie diese zu den Akten.
-            </p>
-          </NumberedList.Item>
-        </NumberedList>
-      </div>
+  </section>
+  <section class="space-y-32!">
+    <h2>So führen Sie Ihren Digitalcheck durch:</h2>
+    <div class="space-y-16">
+      <p>
+        <span class="kern-number">1</span>
+      </p>
+      <h3>Vorprüfung</h3>
+      <p>
+        <a href={vorpruefung.path}>Prüfen</a> Sie zunächst, ob Ihr Vorhaben
+        einen Digitalbezug hat oder Anforderungen an die EU‑Interoperabilität
+        bestehen. Falls keiner der beiden Punkte gegeben ist, halten Sie dies im
+        Gesetzesvorblatt fest.
+      </p>
+    </div>
+    <div class="space-y-16">
+      <p>
+        <span class="kern-number">2</span>
+      </p>
+      <h3>Ausarbeitung</h3>
+      <p>
+        <a href={methoden.path}>Entwickeln</a> Sie ein Zielbild, indem Sie den
+        Vollzug Ihrer Norm frühzeitig durchdenken und den{" "}
+        <a href="https://zfl.bund.de/werkzeuge/">Ablaufprozess skizzieren</a>.
+        Nutzen Sie dazu die unten aufgeführten allgemeinen und
+        Hessen-spezifischen Hilfestellungen. Formulieren Sie anschließend den
+        Normtext und berücksichtigen Sie dabei die{" "}
+        <a href={methoden_fuenfPrinzipien.path}>
+          Anforderungen der Digitaltauglichkeit
+        </a>
+        .
+      </p>
+    </div>
+    <div class="space-y-16">
+      <p>
+        <span class="kern-number">3</span>
+      </p>
+      <h3>Dokumentation</h3>
+      <p>
+        <a href={dokumentation.path}>Dokumentieren</a> Sie, welche Aspekte Sie
+        berücksichtigt und ins Regelungsvorhaben integriert haben, wie dadurch
+        Digitaltauglichkeit und EU‑Interoperabilität sichergestellt werden, und
+        welche digitalen Kriterien Sie adressiert haben; laden Sie die
+        Ergebnisse herunter oder nutzen Sie die Word‑Vorlage. Das Ergebnis der
+        Dokumentation kann als Anlage dem Gesetzesvorhaben beigefügt werden.
+      </p>
     </div>
   </section>
   <section class="breakout bg-darkblue-100 space-y-16">

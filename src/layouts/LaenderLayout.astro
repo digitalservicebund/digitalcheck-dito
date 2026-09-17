@@ -56,6 +56,11 @@ const { title, bundesland } = Astro.props;
     section:not(.kern-card__body) {
       @apply py-40 md:py-64;
 
+      /* collapse padding for consecutive sections with no background */
+      &:not(.breakout) + &:not(.breakout) {
+        @apply pt-0;
+      }
+
       h2 {
         @apply mb-16;
       }
