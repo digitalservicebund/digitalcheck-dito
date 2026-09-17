@@ -17,7 +17,7 @@ import { useRef } from "react";
 import BackToTopButton from "@/components/BackToTopButton.tsx";
 import Container from "@/components/Container.tsx";
 import ToC from "@/components/TableOfContentsInteractive.tsx";
-import { anleitungFlussdiagramm } from "@/config/downloads";
+import { anleitungFlussdiagrammErstellen_pptx } from "@/config/downloads";
 import { methoden_fuenfPrinzipien } from "@/config/routes";
 import SidebarContainer from "@/layout/SidebarContainer.tsx";
 import { STRAPI_MEDIA_URL } from "@/resources/constants.ts";
@@ -284,7 +284,7 @@ export default function Visualization() {
                     
                     [Conceptboard-Vorlage](https://bmas.de.conceptboard.com/board/qh33-xcny-usde-7nc6-82cy)
                     
-                    [Powerpoint-Vorlage](${anleitungFlussdiagramm.path})
+                    [Powerpoint-Vorlage](${anleitungFlussdiagrammErstellen_pptx.path})
                     
                     Sie wünschen sich ein anderes Medium?
                     Schicken Sie uns eine E-Mail an ${contact.email}.

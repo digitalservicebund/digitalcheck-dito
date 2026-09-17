@@ -11,7 +11,7 @@ import AccordionItem from "@/components/AccordionItem";
 import KernCard from "@/components/KernCard.astro";
 import { contact } from "@/resources/content/shared/contact";
 import { withBase } from "@/utils/path";
-import { bundeslaenderLeitfadenPdf } from "@/config/downloads";
+import { leitfadenDigitalcheckBundeslandAug2026_pdf } from "@/config/downloads";
 import leitfadenImg from "./_leitfaden.png";
 
 export const frontmatter = {
@@ -256,7 +256,7 @@ export const frontmatter = {
             <p></p>
             <a
               slot="footer"
-              href={bundeslaenderLeitfadenPdf.path}
+              href={leitfadenDigitalcheckBundeslandAug2026_pdf.path}
               class="link-unstyled kern-btn kern-btn--secondary"
             >
               <span

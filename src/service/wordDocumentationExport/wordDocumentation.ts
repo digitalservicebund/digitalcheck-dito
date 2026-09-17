@@ -1,4 +1,4 @@
-import { dokumentationTemplateWordInterops } from "@/config/downloads";
+import { templateDokumentationDerDigitaltauglichkeitInteroperabilitaet_docx } from "@/config/downloads";
 import { documentationDocument } from "@/resources/content/documentation-document";
 import { digitalDocumentation } from "@/resources/content/dokumentation";
 import { contact } from "@/resources/content/shared/contact";
@@ -35,7 +35,9 @@ export function useWordDocumentation() {
       { templateOnly = false }: { templateOnly?: boolean } = {},
     ) => {
       try {
-        const template = await fetch(dokumentationTemplateWordInterops.path);
+        const template = await fetch(
+          templateDokumentationDerDigitaltauglichkeitInteroperabilitaet_docx.path,
+        );
         const templateData = await template.arrayBuffer();
         const doc = await createDoc(
           templateData,

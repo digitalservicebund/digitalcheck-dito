@@ -51,8 +51,8 @@ importers:
         specifier: ^7.3.2
         version: 7.3.2(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.6.1)(jiti@2.7.0)(yaml@2.9.1)
       astro-route-generator:
-        specifier: github:digitalservicebund/astro-route-generator#0.1.15
-        version: https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/0e1013ca03cf3d5855dee7fdb45ec3b8f75828d4(astro@7.3.2(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.6.1)(jiti@2.7.0)(yaml@2.9.1))
+        specifier: github:digitalservicebund/astro-route-generator#0.2.5
+        version: https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/562ef932cbeb40d16f9a2ae23b70474ded331968(astro@7.3.2(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.6.1)(jiti@2.7.0)(yaml@2.9.1))
       docx:
         specifier: ^9.7.1
         version: 9.7.1
@@ -2147,9 +2147,9 @@ packages:
     resolution: {integrity: sha512-lS5qlx401Q1ZUhQ44XQnM4uT2qI6hA0H+vstrd841xGVxunFOs0ut3DWJGYHK1l7mxRxQdDi1j53pfE7/AyGlA==}
     engines: {node: ^22.22.3 || ^24.16.0 || >=26.3.0}
 
-  astro-route-generator@https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/0e1013ca03cf3d5855dee7fdb45ec3b8f75828d4:
-    resolution: {gitHosted: true, integrity: sha512-85m0KFCeAqikhSyys6kHAOb7nsMYghndNxPGkR7FjQY075S53Qr2ctHTgdBFUbIofNYKvpTw4/u2Yh8fmKSJ9w==, tarball: https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/0e1013ca03cf3d5855dee7fdb45ec3b8f75828d4}
-    version: 0.1.15
+  astro-route-generator@https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/562ef932cbeb40d16f9a2ae23b70474ded331968:
+    resolution: {gitHosted: true, integrity: sha512-in+oYou4a7gbYbEWl07lFZKcxV11vHsFQa9S/g2wBzm/CWD44DTERQA0WbcmE0sutjiarPrYik3gjsRCXXYY6A==, tarball: https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/562ef932cbeb40d16f9a2ae23b70474ded331968}
+    version: 0.2.5
     peerDependencies:
       astro: '>=4.0.0'
 
@@ -7060,7 +7060,7 @@ snapshots:
       - '@emnapi/runtime'
       - supports-color
 
-  astro-route-generator@https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/0e1013ca03cf3d5855dee7fdb45ec3b8f75828d4(astro@7.3.2(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.6.1)(jiti@2.7.0)(yaml@2.9.1)):
+  astro-route-generator@https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/562ef932cbeb40d16f9a2ae23b70474ded331968(astro@7.3.2(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.6.1)(jiti@2.7.0)(yaml@2.9.1)):
     dependencies:
       astro: 7.3.2(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.6.1)(jiti@2.7.0)(yaml@2.9.1)
       js-yaml: 5.4.2
