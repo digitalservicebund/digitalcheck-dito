@@ -85,7 +85,7 @@
     "@typescript-eslint/parser": "^8.70.0",
     "astro-eslint-parser": "^3.1.0",
     "autoprefixer": "^10.6.1",
-    "dotenv": "^17.4.2",
+    "dotenv": "^18.0.0",
     "eslint": "^9.39.5",
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.5",
