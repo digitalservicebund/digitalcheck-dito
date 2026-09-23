@@ -165,7 +165,7 @@ export const preCheck = {
           <p>Eine gute digitale Umsetzung spart langfristig Zeit und sorgt dafür, dass Ziel und Wirkung des Vorhabens erreicht werden - aufseiten der Normadressatinnen und Normadressaten und aufseiten der Verwaltung.</p>
 
           <p><strong>Relevant für alle Regelungsvorhaben</strong></p>
-          <p>Der Digitalcheck gilt für alle Regelungsvorhaben auf Bundesebene - Gesetze, Verordnungen und Verwaltungsvorschriften. Es fallen sowohl neue Vorhaben, als auch Änderungen an bestehenden Regelungen darunter.</p>
+          <p>Der Digitalcheck gilt für alle Regelungsvorhaben auf Bundesebene – Gesetze, Verordnungen und Verwaltungsvorschriften. Es fallen sowohl neue Vorhaben, als auch Änderungen an bestehenden Regelungen darunter.</p>
         `,
       },
       {
@@ -243,7 +243,7 @@ export const preCheck = {
         "einer Festlegung von Mitwirkungspflichten für Akteurinnen und Akteure.",
       negativeResult:
         "keiner Festlegung von Mitwirkungspflichten für Akteurinnen und Akteure.",
-      text: "**Praxisbeispiel**: Für eine staatliche Förderung ist neben der Land- und Forstwirtschaft nun auch das produzierende Gewerbe berechtigt. Der Anspruch dieser Unternehmen kann nicht nach denselben Kriterien geprüft werden. Vorhalte-/Nachweispflichten müssen auf diese Gruppe angepasst werden. Dabei müssen die für die Beteiligten üblichen digitalen Möglichkeiten mitgedacht bzw. geschaffen werden.",
+      text: "**Praxisbeispiel**: Für eine staatliche Förderung ist neben der Land- und Forstwirtschaft nun auch das produzierende Gewerbe berechtigt. Der Anspruch dieser Unternehmen kann nicht nach denselben Kriterien geprüft werden. Die Vorhalte-/Nachweispflichten müssen auf diese Gruppe angepasst werden. Dabei müssen die für die Beteiligten üblichen digitalen Möglichkeiten mitgedacht bzw. geschaffen werden.",
       hint: {
         title: "Wer sind Akteurinnen und Akteure?",
         text: dedent`
@@ -263,7 +263,7 @@ export const preCheck = {
       id: "datenaustausch",
       title: "Datenaustausch",
       question:
-        "Soll ein Datenaustausch stattfinden, z. B weil durch die Regelung Daten erhoben werden, die der Verwaltung bereits vorliegen?",
+        "Soll ein Datenaustausch stattfinden, z. B. weil durch die Regelung Daten erhoben werden, die der Verwaltung bereits vorliegen?",
       positiveResult: "einem Austausch von Daten.",
       negativeResult: "keinem Austausch von Daten.",
       text: "**Praxisbeispiel**: Arbeitnehmende müssen ihr Gehalt in der Einkommenssteuererklärung angeben. Diese Information liegt der Sozialversicherung bereits vor. Eine Wiederverwendung dieser Daten ist bürokratiearm und sollte bei der Erarbeitung der Regelung angestrebt werden.",
