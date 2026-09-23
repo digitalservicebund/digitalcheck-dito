@@ -34,7 +34,7 @@ function DetailFormElement({
   return (
     <Textarea
       description={
-        "Tragen Sie Ihre Erläuterung ein, z. B.: „Datenbegriffe werden gemäß dem Vokabular X einheitlich definiert.”"
+        "Tragen Sie Ihre Erläuterung ein, z. B.: „Datenbegriffe werden gemäß dem Vokabular X einheitlich definiert“."
       }
       scope={scope.scope("detail")}
       rows={5}

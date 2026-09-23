@@ -32,7 +32,7 @@ type Answer = {
 const testData = {
   title: "E2E V2 Titel des Regelungsvorhabens",
   organization: "E2E-Organisation",
-  bezug: "Ja, Bezug zu EU-Interoperabilität ist vorhanden.",
+  bezug: "Ja, Bezug zur EU-Interoperabilität ist vorhanden.",
   requirementA: {
     testId: "requirement-0",
     addNext: true,
@@ -98,7 +98,7 @@ const testData = {
     },
     {
       route: dokumentation_bewertungSemantisch,
-      answer: "nicht relevant",
+      answer: "Nicht relevant",
       detail: null,
     },
     {

@@ -26,7 +26,7 @@ eine Interoperabilitätsbewertung durchgeführt werden.
 Wann ist eine Interoperabilitäts-Bewertung verpflichtend?
 </a></p>
 
-Sollte sich nach den Bestimmungen der Verordnung dennoch keine Verpflichtung zu einer Bewertung ergeben und Sie möchten auch keine frewillige Bewertung durchführen, wählen Sie die Option "Nein, es ist kein Bezug vorhanden".
+Sollte sich nach den Bestimmungen der Verordnung dennoch keine Verpflichtung zu einer Bewertung ergeben und Sie möchten auch keine freiwillige Bewertung durchführen, wählen Sie die Option „Nein, es ist kein Bezug vorhanden“.
 `;
 
 const defaultValues: EuInteroperabilityOutcome = {
@@ -51,7 +51,7 @@ export function DocumentationEuInteroperabilityRequirements() {
   return (
     <div className="space-y-40">
       <Heading
-        text="Bezug zu EU-Interoperabilität"
+        text="Bezug zur EU-Interoperabilität"
         tagName="h1"
         look="ds-heading-02-reg"
         className="mb-16"

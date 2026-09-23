@@ -69,10 +69,10 @@ const principlePositiveAnswerSchemaV2 = z.object({
   answer: z.literal(principlePages.radioOptions[0]),
   aspects: z
     .array(z.string(), {
-      message: "Bitte geben Sie mindestens einen Schwerpunkt an",
+      message: "Bitte geben Sie mindestens einen Schwerpunkt an.",
     })
     .min(1, {
-      message: "Bitte geben Sie mindestens einen Schwerpunkt an",
+      message: "Bitte geben Sie mindestens einen Schwerpunkt an.",
     }),
 });
 

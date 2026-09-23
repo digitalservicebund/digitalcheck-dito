@@ -335,7 +335,7 @@ describe("DocumentationPrincipleErlaeuterung", () => {
 
       // Aspects are selected, so no aspects error should show
       expect(
-        screen.queryByText("Bitte geben Sie mindestens einen Schwerpunkt an"),
+        screen.queryByText("Bitte geben Sie mindestens einen Schwerpunkt an."),
       ).not.toBeInTheDocument();
     });
   });
