@@ -20,7 +20,7 @@ export const digitalDocumentation = {
     startOverDialog: {
       title: "Neue Dokumentation beginnen",
       bodyMarkdown:
-        "Mit einer neuen Dokumentation werden die Daten der begonnenen Dokumentation **gelöscht**. Diese können nicht wieder hergestellt werden.",
+        "Mit einer neuen Dokumentation werden die Daten der begonnenen Dokumentation **gelöscht**. Diese können nicht wiederhergestellt werden.",
       actions: {
         confirm: "Neu beginnen",
       },

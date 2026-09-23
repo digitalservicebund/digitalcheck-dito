@@ -74,6 +74,8 @@ export default defineConfig({
     generateRoutes({
       pagesDir: "src/pages",
       output: "src/config/routes.ts",
+      downloadsDir: "public/documents",
+      downloadsOutput: "src/config/downloads.ts",
     }),
   ],
   vite: {

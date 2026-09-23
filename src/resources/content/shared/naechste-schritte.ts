@@ -73,7 +73,7 @@ export const steps = {
       text: "Prüfen durch zuständige Prüfstelle",
     },
     content: dedent`
-        Ihre Prüfstelle untersucht ihr Vorhaben hinsichtlich der Berücksichtigung der Prinzipien digitaltauglicher Gesetzgebung. Senden Sie die von Ihnen erstelle Dokumentation per E-Mail an Ihre Prüfstelle. Die E-Mail-Adresse finden Sie am Ende der Dokumentationserstellung. 
+        Ihre Prüfstelle untersucht Ihr Vorhaben hinsichtlich der Berücksichtigung der Prinzipien digitaltauglicher Gesetzgebung. Senden Sie die von Ihnen erstelle Dokumentation per E-Mail an Ihre Prüfstelle. Die E-Mail-Adresse finden Sie am Ende der Dokumentationserstellung. 
 
         Damit ist der Digitacheck für Sie beendet. 
 

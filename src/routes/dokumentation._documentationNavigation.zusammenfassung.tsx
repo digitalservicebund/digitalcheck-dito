@@ -273,7 +273,7 @@ function InteroperabilityContent({
     <Answer
       answers={[
         {
-          prefix: "Ergab die Vorprüfung Bezug zu EU-Interoperabilität?",
+          prefix: "Ergab die Vorprüfung Bezug zur EU-Interoperabilität?",
           answer: outcome,
         },
       ]}

@@ -35,8 +35,8 @@ function InteroperabilitySteps() {
         <RichText
           markdown={dedent`
             Schicken Sie die ausgefüllte Dokumentation aus Schritt 1 an die Nationale Kontaktstelle.
-            Die Interoperabilitäts-Bewertung wird auf dem Portal ["Interoperable
-            Europe"](https://interoperable-europe.ec.europa.eu/collection/assessments)
+            Die Interoperabilitäts-Bewertung wird auf dem Portal [„Interoperable
+            Europe“](https://interoperable-europe.ec.europa.eu/collection/assessments)
             veröffentlicht, sofern der Referentenentwurf bereits öffentlich
             ist. Falls die Veröffentlichung noch aussteht, wird sich die Nationale
             Kontaktstelle zum von Ihnen angegebenen Zeitpunkt bei Ihnen melden.

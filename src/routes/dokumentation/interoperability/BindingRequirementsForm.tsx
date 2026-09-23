@@ -125,7 +125,7 @@ export default function BindingRequirementsForm({
                           
                           **Was ist hier zu dokumentieren?**
                           
-                          *Bevor* Sie neue oder wesentlich veränderte verbindliche Anforderungen festschreiben, die das Design, die Beschaffung, die Entwicklung oder die Implementierung solcher digitalen transeuropäischen Dienste betreffen, müssen Sie deren eine Auswirkungen auf die Interoperabilität bewerten.
+                          *Bevor* Sie neue oder wesentlich veränderte verbindliche Anforderungen festschreiben, die das Design, die Beschaffung, die Entwicklung oder die Implementierung solcher digitalen transeuropäischen Dienste betreffen, müssen Sie deren Auswirkungen auf die Interoperabilität bewerten.
                         `}
               />
             </HelpButton>

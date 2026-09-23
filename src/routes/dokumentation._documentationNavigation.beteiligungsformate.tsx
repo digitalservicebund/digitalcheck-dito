@@ -43,8 +43,8 @@ export function DocumentationParticipation() {
             {participation.formats.heading}
             <HelpButton sectionId="formats" title="Hinweis zur Erklärung">
               Beschreiben Sie stichpunktartig, wie Sie die Bedürfnisse der
-              Betroffenen erhoben haben – z. B. durch Befragungen, Gesprächen
-              mit Vollzugsakteurinnen und -akteuren oder formelle
+              Betroffenen erhoben haben – z. B. durch Befragungen, Gespräche mit
+              Vollzugsakteurinnen und -akteuren oder formelle
               Beteiligungsverfahren.
             </HelpButton>
           </legend>
@@ -64,7 +64,7 @@ export function DocumentationParticipation() {
             {participation.results.heading}
             <HelpButton sectionId="results" title="Hinweis zu Erkenntnissen">
               Bitte listen Sie stichpunktartig auf, welche Erkenntnisse
-              eingearbeitet wurden und geben Sie Hinweise auf Paragrafen, die
+              eingearbeitet wurden, und geben Sie Hinweise auf Paragrafen, die
               besonders umsetzungsrelevant sind.
             </HelpButton>
           </legend>

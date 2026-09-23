@@ -62,7 +62,7 @@ export const interoperabilityRatingOptions: Option[] = [
     value: "risky",
   },
   {
-    label: "nicht relevant",
+    label: "Nicht relevant",
     value: "not-applicable",
   },
 ];
@@ -113,11 +113,11 @@ export const publicationLinkQuestion = {
 };
 
 export const euInteroperabilityQuestion = {
-  label: "Ergab die Vorprüfung Bezug zu EU-Interoperabilität?",
+  label: "Ergab die Vorprüfung Bezug zur EU-Interoperabilität?",
   options: [
     {
       value: "REQUIRED",
-      label: "Ja, Bezug zu EU-Interoperabilität ist vorhanden.",
+      label: "Ja, Bezug zur EU-Interoperabilität ist vorhanden.",
     },
     {
       value: "NOT_REQUIRED",

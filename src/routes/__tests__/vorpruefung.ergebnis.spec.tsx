@@ -127,8 +127,8 @@ const scenarios: TestScenario[] = [
       headline:
         "Das Regelungsvorhaben hat einen Digitalbezug und enthält Anforderungen der Interoperabilität.",
       emailBodyContains: [
-        "In Bezug auf digitale Aspekte führt ihr Regelungsvorhaben zu...",
-        "In Bezug auf Interoperabilität führt ihr Regelungsvorhaben zu...",
+        "In Bezug auf digitale Aspekte führt Ihr Regelungsvorhaben zu...",
+        "In Bezug auf Interoperabilität führt Ihr Regelungsvorhaben zu...",
       ],
     },
   },
@@ -177,8 +177,8 @@ const scenarios: TestScenario[] = [
       headline:
         "Das Regelungsvorhaben hat keinen Digitalbezug und keine Anforderungen der Interoperabilität.",
       emailBodyContains: [
-        "In Bezug auf digitale Aspekte führt ihr Regelungsvorhaben zu...",
-        "In Bezug auf Interoperabilität führt ihr Regelungsvorhaben zu...",
+        "In Bezug auf digitale Aspekte führt Ihr Regelungsvorhaben zu...",
+        "In Bezug auf Interoperabilität führt Ihr Regelungsvorhaben zu...",
       ],
     },
   },

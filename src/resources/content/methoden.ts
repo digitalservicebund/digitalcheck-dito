@@ -19,10 +19,10 @@ export const methods = {
   steps: {
     items: [
       {
-        headline: { text: "Erfassen des Status Quo" },
+        headline: { text: "Erfassen des Status quo" },
         text: dedent`
           Ein solides Verständnis über den Ist-Zustand ist ein sinnvoller und sicherer Einstieg. Tauschen Sie sich mit den umsetzenden Akteurinnen und Akteuren aus. Bei dieser Gelegenheit können Sie auch nach Problemen in der aktuellen Praxis fragen.
-          Wenn Sie in den Gesprächen nichts Neues mehr erfahren, haben Sie den Status Quo erfasst.
+          Wenn Sie in den Gesprächen nichts Neues mehr erfahren, haben Sie den Status quo erfasst.
           
           **Ein Austausch über die aktuelle Praxis darf auch während des Entwurfsprozesses stattfinden.**
         `,
@@ -32,7 +32,7 @@ export const methods = {
         headline: {
           text: "Visualisieren Sie die aktuellen Abläufe",
         },
-        text: "Damit Ihre Regelung wirkungsvoll in die Praxis kommt, müssen Sie die aktuellen Abläufe verstehen. In diesem Schritt müssen Sie noch nicht auf geplante Neuerungen eingehen. Konzentrieren Sie sich auf den Status Quo.",
+        text: "Damit Ihre Regelung wirkungsvoll in die Praxis kommt, müssen Sie die aktuellen Abläufe verstehen. In diesem Schritt müssen Sie noch nicht auf geplante Neuerungen eingehen. Konzentrieren Sie sich auf den Status quo.",
         links: [
           {
             text: "Anleitung zur Visualisierung",
@@ -74,7 +74,7 @@ export const methods = {
         label: { text: "Textarbeit" },
         headline: { text: "Schreiben Sie die Regelung" },
         text: dedent`
-          Nutzen Sie die gewonnen Ideen, um die Regelung zu schreiben. Dafür nehmen Sie ganz einfach Ihre gewohnten Programme und Arbeitshilfen – z. B. eNorm und das Handbuch der Rechtsförmlichkeit.
+          Nutzen Sie die gewonnenen Ideen, um die Regelung zu schreiben. Dafür nehmen Sie ganz einfach Ihre gewohnten Programme und Arbeitshilfen – z. B. eNorm und das Handbuch der Rechtsförmlichkeit.
         `,
       },
     ],

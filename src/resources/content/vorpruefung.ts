@@ -47,7 +47,7 @@ export const preCheck = {
           text: "Beginnen Sie so früh wie möglich",
         },
         content:
-          "Führen Sie die Vorprüfung zu Beginn Ihrer Arbeit an einem Regelungsvorhaben durch. Das heißt bevor Sie den Regelungstext formulieren.",
+          "Führen Sie die Vorprüfung zu Beginn Ihrer Arbeit an einem Regelungsvorhaben durch. Das heißt, bevor Sie den Regelungstext formulieren.",
       },
       process: {
         heading: "So gehen Sie vor:",
@@ -118,7 +118,7 @@ export const preCheck = {
     buttonText: "Neue Vorprüfung beginnen",
     confirm: "Neu beginnen",
     bodyMarkdown:
-      "Mit einer neuen Vorprüfung werden die Daten der begonnenen Vorprüfung gelöscht. Diese können nicht wieder hergestellt werden.",
+      "Mit einer neuen Vorprüfung werden die Daten der begonnenen Vorprüfung gelöscht. Diese können nicht wiederhergestellt werden.",
   },
   resume: {
     buttonText: "Vorprüfung fortsetzen",
@@ -138,13 +138,13 @@ export const preCheck = {
       {
         headline: "Was bedeutet Interoperabilität in meinem Vorhaben?",
         content:
-          "Wenn Gesetze und Regelungen die Interoperabilität berücksichtigen, fördern sie die Zusammenarbeit zwischen den EU-Mitgliedsstaaten und ihren Verwaltungen. Einheitliche Standards sorgen dafür, dass digitale Dienste bürgerfreundlich, effizient und sicher sind. Gleichzeitig werden einheitliche Regeln geschaffen, die die grenzüberschreitende Zusammenarbeit in der EU erleichtern und eine harmonische Entwicklung der Rechtsvorschriften fördern.",
+          "Wenn Gesetze und Regelungen die Interoperabilität berücksichtigen, fördern sie die Zusammenarbeit zwischen den EU-Mitgliedstaaten und ihren Verwaltungen. Einheitliche Standards sorgen dafür, dass digitale Dienste bürgerfreundlich, effizient und sicher sind. Gleichzeitig werden einheitliche Regeln geschaffen, die die grenzüberschreitende Zusammenarbeit in der EU erleichtern und eine harmonische Entwicklung der Rechtsvorschriften fördern.",
       },
       {
         headline:
           "Welche Rolle spielt der Digitalcheck bei interoperablen Regelungsvorhaben?",
         content: dedent`
-          Der Digitalcheck begleitet Sie bei der Erarbeitung für digitaltaugliche und ab Januar 2025 interoperable Regelungsvorhaben. Dieser Auftrag wurde dem Digitalcheck vom BMDS erteilt.
+          Der Digitalcheck begleitet Sie bei der Erarbeitung von digitaltauglichen und ab Januar 2025 interoperablen Regelungsvorhaben. Dieser Auftrag wurde dem Digitalcheck vom BMDS erteilt.
 
           Wenn Ihr Regelungsvorhaben Anforderungen an Interoperabilität beinhaltet, unterstützen wir Sie dabei, diese optimal umzusetzen. In diesem Fall wird das Digitalcheck-Team automatisch über das Ergebnis informiert, sobald Sie es per E-Mail absenden. Wir setzen uns dann mit Ihnen in Verbindung, um gemeinsam die weiteren Schritte zu planen und umzusetzen. Sollten Sie vorab Fragen haben, können Sie sich jederzeit direkt an uns wenden - telefonisch unter ${contact.mdPhoneLink()} oder per E-Mail an ${contact.mdMailToLink(contact.interoperabilityEmail, "Supportanfrage: digitalcheck.bund.de")}.
         `,
@@ -164,8 +164,8 @@ export const preCheck = {
           <p><strong>Digitaltaugliche Regelungen sparen Ressourcen</strong></p>
           <p>Eine gute digitale Umsetzung spart langfristig Zeit und sorgt dafür, dass Ziel und Wirkung des Vorhabens erreicht werden - aufseiten der Normadressatinnen und Normadressaten und aufseiten der Verwaltung.</p>
 
-          <p><strong>Relevant für all Regelungsvorhaben</strong></p>
-          <p>Der Digitalcheck gilt für alle Regelungsvorhaben auf Bundesebene - Gesetze, Verordnungen und Verwaltungsvorschriften. Es fallen sowohl neue Vorhaben, als auch Änderungen an bestehenden Regelungen darunter.</p>
+          <p><strong>Relevant für alle Regelungsvorhaben</strong></p>
+          <p>Der Digitalcheck gilt für alle Regelungsvorhaben auf Bundesebene – Gesetze, Verordnungen und Verwaltungsvorschriften. Es fallen sowohl neue Vorhaben, als auch Änderungen an bestehenden Regelungen darunter.</p>
         `,
       },
       {
@@ -224,11 +224,11 @@ export const preCheck = {
         "Muss durch die Regelung ein IT-System angepasst oder neu entwickelt werden?",
       positiveResult: "einer Anpassung oder Neuentwicklung einer IT-Lösung.",
       negativeResult: "keiner Anpassung oder Neuentwicklung einer IT-Lösung.",
-      text: "**Praxisbeispiel**: Eine Regelung schreibt vor, dass eine Datenbank potentielle Schadstoffe in Lebensmitteln erfasst. Nun kommen neue Inhaltsstoffe dazu. Oder pro Inhaltsstoff müssen weitere Daten zur langfristigen Schädlichkeit erfasst werden. Dafür muss die Datenbank (das IT-System) angepasst werden.",
+      text: "**Praxisbeispiel**: Eine Regelung schreibt vor, dass eine Datenbank potenzielle Schadstoffe in Lebensmitteln erfasst. Nun kommen neue Inhaltsstoffe dazu. Oder pro Inhaltsstoff müssen weitere Daten zur langfristigen Schädlichkeit erfasst werden. Dafür muss die Datenbank (das IT-System) angepasst werden.",
       hint: {
         title: "Was ist ein IT-System?",
         text: dedent`
-          IT-Systeme sind technische Lösungen, die aus Hardware (wie Computer, Kartenlesegeräte, Router) oder Software (Programme wie ELSTER und Word, Websiten, Apps) bestehen, um Informationen zu speichern, zu verarbeiten und zu übertragen. 
+          IT-Systeme sind technische Lösungen, die aus Hardware (wie Computern, Kartenlesegeräten, Routern) oder Software (Programmen wie ELSTER und Word, Websites, Apps) bestehen, um Informationen zu speichern, zu verarbeiten und zu übertragen. 
 
           Mit ihnen können Aufgaben ausgeführt werden, wie das Übermitteln der Einkommenssteuererklärung mit ELSTER.
         `,
@@ -243,19 +243,19 @@ export const preCheck = {
         "einer Festlegung von Mitwirkungspflichten für Akteurinnen und Akteure.",
       negativeResult:
         "keiner Festlegung von Mitwirkungspflichten für Akteurinnen und Akteure.",
-      text: "**Praxisbeispiel**: Für eine staatliche Förderung ist neben der Land- und Forstwirtschaft nun auch das produzierende Gewerbe berechtigt. Der Anspruch dieser Unternehmen kann nicht nach denselben Kriterien geprüft werden. Die Vorhalte-/Nachweispflichten müssen auf diese Gruppe angepasst werden, dabei müssen die für die Beteiligten üblichen digitalen Möglichkeiten mitgedacht, bzw. geschaffen werden.",
+      text: "**Praxisbeispiel**: Für eine staatliche Förderung ist neben der Land- und Forstwirtschaft nun auch das produzierende Gewerbe berechtigt. Der Anspruch dieser Unternehmen kann nicht nach denselben Kriterien geprüft werden. Die Vorhalte-/Nachweispflichten müssen auf diese Gruppe angepasst werden. Dabei müssen die für die Beteiligten üblichen digitalen Möglichkeiten mitgedacht bzw. geschaffen werden.",
       hint: {
-        title: "Wer sind Akteurinnen und Akteurinnen und Akteure?",
+        title: "Wer sind Akteurinnen und Akteure?",
         text: dedent`
           Akteurinnen und Akteure sind in diesem Zusammenhang all diejenigen, die an der Umsetzung des Regelungsvorhabens beteiligt sind. Das können sowohl Vollzugsakteurinnen und -akteure als auch Betroffene sein.
           
           Beispiele für Akteurinnen und Akteure sind:
           - Bürgerinnen und Bürger, 
           - Einwohnende, 
-          - Kommunen, Verwaltungen und Behörden, deren IT- oder Rechtsabteilungen
+          - Kommunen, Verwaltungen und Behörden, deren IT- oder Rechtsabteilungen,
           - IT-Dienstleistende,
           - Unternehmen und 
-          - weitere Organisationen wie z.B. Vereine.
+          - weitere Organisationen wie z. B. Vereine.
         `,
       },
     },
@@ -263,7 +263,7 @@ export const preCheck = {
       id: "datenaustausch",
       title: "Datenaustausch",
       question:
-        "Soll ein Datenaustausch stattfinden bspw. weil durch die Regelung Daten erhoben werden, die der Verwaltung bereits vorliegen?",
+        "Soll ein Datenaustausch stattfinden, z. B. weil durch die Regelung Daten erhoben werden, die der Verwaltung bereits vorliegen?",
       positiveResult: "einem Austausch von Daten.",
       negativeResult: "keinem Austausch von Daten.",
       text: "**Praxisbeispiel**: Arbeitnehmende müssen ihr Gehalt in der Einkommenssteuererklärung angeben. Diese Information liegt der Sozialversicherung bereits vor. Eine Wiederverwendung dieser Daten ist bürokratiearm und sollte bei der Erarbeitung der Regelung angestrebt werden.",
@@ -281,7 +281,7 @@ export const preCheck = {
         "einer Interaktion zwischen Behörden und Bürgerinnen und Bürgern bzw. Unternehmen.",
       negativeResult:
         "keiner Interaktion zwischen Behörden und Bürgerinnen und Bürgern bzw. Unternehmen.",
-      text: "**Praxisbeispiel**: Ein Antrag für Steuerentlastung muss gestellt und abgeschickt werden — dies kann digital, ohne händische Unterschrift oder analoge Nachweise geschehen. Es können z.B. Unternehmen, Bürgerinnen und Bürger oder Organisationen den Antrag einreichen.",
+      text: "**Praxisbeispiel**: Ein Antrag für Steuerentlastung muss gestellt und abgeschickt werden. Dies kann digital, ohne händische Unterschrift oder analoge Nachweise geschehen. Es können z. B. Unternehmen, Bürgerinnen und Bürger oder Organisationen den Antrag einreichen.",
     },
     {
       id: "automatisierung",
@@ -298,11 +298,11 @@ export const preCheck = {
       id: "eu-bezug",
       title: "EU-Bezug",
       question:
-        "Ist durch die Regelung vorgesehen, dass Daten und Informationen zwischen Verwaltungen von EU-Mitgliedsstaaten ausgetauscht werden?",
+        "Ist durch die Regelung vorgesehen, dass Daten und Informationen zwischen Verwaltungen von EU-Mitgliedstaaten ausgetauscht werden?",
       positiveResult:
-        "einem Daten- und Informationsaustausch zwischen EU-Mitgliedsstaaten.",
+        "einem Daten- und Informationsaustausch zwischen EU-Mitgliedstaaten.",
       negativeResult:
-        "keinem Daten- und Informationsaustausch zwischen EU-Mitgliedsstaaten.",
+        "keinem Daten- und Informationsaustausch zwischen EU-Mitgliedstaaten.",
       resultHint: {
         unsureResult: `**Das können Sie tun:** Kontaktieren Sie uns unter ${contact.mdPhoneLink()} oder per E-Mail an ${contact.mdMailToLink(contact.interoperabilityEmail, "Supportanfrage: digitalcheck.bund.de")}. Wir unterstützen Sie gerne bei der Beantwortung dieser Frage.`,
       },

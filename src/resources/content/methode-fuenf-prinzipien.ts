@@ -1,4 +1,4 @@
-import { prinzipienPoster } from "@/config/downloads";
+import { prinzipienPoster_pdf } from "@/config/downloads";
 import { methoden } from "@/config/routes";
 import type { ContentLink } from "@/utils/contentTypes.ts";
 import { dedent } from "@/utils/dedentMultilineStrings";
@@ -35,6 +35,6 @@ export const methodsFivePrinciples = {
     imageUrl: withBase("/images/Poster_5Prinzipien.jpg"),
     imageAlt: "Poster der 5 Prinzipien",
     downloadTitle: "Poster herunterladen",
-    downloadUrl: prinzipienPoster.path,
+    downloadUrl: prinzipienPoster_pdf.path,
   },
 };

@@ -30,7 +30,7 @@ function DetailFormElement({
   return (
     <Textarea
       description={
-        "Tragen Sie Ihre Erläuterung ein, z. B.: „Die Schnittstellen entsprechen dem Standard X.” oder „Das System nutzt das Protokoll Y.”"
+        "Tragen Sie Ihre Erläuterung ein, z. B.: „Die Schnittstellen entsprechen dem Standard X“ oder „Das System nutzt das Protokoll Y“."
       }
       scope={scope.scope("detail")}
       rows={5}

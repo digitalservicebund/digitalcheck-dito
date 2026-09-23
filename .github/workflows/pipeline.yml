@@ -81,8 +81,6 @@ jobs:
     uses: ./.github/workflows/create-unified-test-report.yml
     permissions:
       contents: read
-      pages: write
-      id-token: write
 
   push-image:
     needs: [vulnerability-scan, secret-scan, check-and-test, run-e2e-a11y-tests]

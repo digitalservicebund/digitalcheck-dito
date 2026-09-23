@@ -92,7 +92,7 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
     // Verify confirmation text for positive answer
     await expect(
       page.getByText(
-        "Sie haben angegeben, dass das Prinzip auf ihr Vorhaben zutrifft.",
+        "Sie haben angegeben, dass das Prinzip auf Ihr Vorhaben zutrifft.",
       ),
     ).toBeVisible();
 
@@ -152,7 +152,7 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
     // Verify negative confirmation text
     await expect(
       page.getByText(
-        "Sie haben angegeben, dass das Prinzip nicht auf ihr Vorhaben zutrifft.",
+        "Sie haben angegeben, dass das Prinzip nicht auf Ihr Vorhaben zutrifft.",
       ),
     ).toBeVisible();
 

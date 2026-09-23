@@ -180,13 +180,13 @@ export function DocumentationPrincipleErlaeuterung({
   let changeAnswerTitle: string;
   if (isPositive) {
     changeAnswerTitle =
-      "Sie haben angegeben, dass das Prinzip auf ihr Vorhaben zutrifft.";
+      "Sie haben angegeben, dass das Prinzip auf Ihr Vorhaben zutrifft.";
   } else if (isIrrelevant) {
     changeAnswerTitle =
       "Sie haben angegeben, dass das Prinzip nicht relevant für Ihr Vorhaben ist.";
   } else {
     changeAnswerTitle =
-      "Sie haben angegeben, dass das Prinzip nicht auf ihr Vorhaben zutrifft.";
+      "Sie haben angegeben, dass das Prinzip nicht auf Ihr Vorhaben zutrifft.";
   }
 
   return (
