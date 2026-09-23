@@ -118,7 +118,7 @@ export const preCheck = {
     buttonText: "Neue Vorprüfung beginnen",
     confirm: "Neu beginnen",
     bodyMarkdown:
-      "Mit einer neuen Vorprüfung werden die Daten der begonnenen Vorprüfung gelöscht. Diese können nicht wieder hergestellt werden.",
+      "Mit einer neuen Vorprüfung werden die Daten der begonnenen Vorprüfung gelöscht. Diese können nicht wiederhergestellt werden.",
   },
   resume: {
     buttonText: "Vorprüfung fortsetzen",
