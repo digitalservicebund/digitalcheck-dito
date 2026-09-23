@@ -102,7 +102,9 @@ export default function DropdownContentList({
                   </Badge>
                 )}
                 {itemNumber && (
-                  <span className="kern-label mr-4">{itemNumber}. </span>
+                  <span className="kern-label mr-4 self-start">
+                    {itemNumber}.{" "}
+                  </span>
                 )}
                 <div className="kern-label">{option.title}</div>
                 {option.externalLink && (
