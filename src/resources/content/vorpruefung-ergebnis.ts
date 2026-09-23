@@ -13,12 +13,12 @@ export const preCheckResult = {
   title: "Ergebnis der Vorprüfung",
   reasoningIntro: {
     digital: {
-      sure: "In Bezug auf **digitale Aspekte** führt ihr Regelungsvorhaben zu...",
+      sure: "In Bezug auf **digitale Aspekte** führt Ihr Regelungsvorhaben zu...",
       unsure:
         "In Bezug auf **digitale Aspekte** ist nicht sicher, ob Ihr Regelungsvorhaben zu Folgendem führt...",
     },
     interoperability: {
-      sure: "In Bezug auf **Interoperabilität** führt ihr Regelungsvorhaben zu...",
+      sure: "In Bezug auf **Interoperabilität** führt Ihr Regelungsvorhaben zu...",
       unsure:
         "In Bezug auf **Interoperabilität** ist nicht sicher, ob Ihr Regelungsvorhaben zu Folgendem führt...",
     },
@@ -89,7 +89,7 @@ export const preCheckResult = {
   interoperability: {
     info: {
       title: "Erfahren Sie mehr über Interoperabilität",
-      content: dedent`Was bedeutet Interoperabilität für Regelungen, und wie beeinflusst sie deren Erarbeitung? Auf unserer [Übersichtsseite](${interoperabel.path}) finden Sie alle wichtigen Informationen dazu.`,
+      content: dedent`Was bedeutet Interoperabilität für Regelungen und wie beeinflusst sie deren Erarbeitung? Auf unserer [Übersichtsseite](${interoperabel.path}) finden Sie alle wichtigen Informationen dazu.`,
       button: {
         text: "Mehr zu Interoperabilität",
         to: interoperabel.path,
@@ -137,7 +137,7 @@ export const preCheckResult = {
       details: [
         {
           label: "Was passiert, wenn ich auf „E-Mail erstellen“ klicke?",
-          text: "In Ihrem E-Mail-Programm öffnet sich eine neue E-Mail. Diese enthält das Vorprüfungs-Ergebnis in Textform mit Ergebnissen zum Digitalbezug und EU-Interoperabilität. Sie haben die Möglichkeit, den Text und Empfänger individuell anzupassen und zusätzliche Dokumente anzufügen. Den Zeitpunkt des Versands wählen Sie selbst.",
+          text: "In Ihrem E-Mail-Programm öffnet sich eine neue E-Mail. Diese enthält das Vorprüfungs-Ergebnis in Textform mit Ergebnissen zum Digitalbezug und zur EU-Interoperabilität. Sie haben die Möglichkeit, den Text und Empfänger individuell anzupassen und zusätzliche Dokumente anzufügen. Den Zeitpunkt des Versands wählen Sie selbst.",
         },
         {
           label: "Wie wird das Ergebnis der Vorprüfung dokumentiert?",

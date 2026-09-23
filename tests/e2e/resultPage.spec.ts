@@ -12,7 +12,7 @@ const positiveResultContent = [
   "einem Austausch von Daten.",
   "einer Interaktion zwischen Behörden und Bürgerinnen und Bürgern bzw. Unternehmen.",
   "einer Verbesserung der Umsetzung der Regelung durch die Automatisierung von Schritten.",
-  "einem Daten- und Informationsaustausch zwischen EU-Mitgliedsstaaten.",
+  "einem Daten- und Informationsaustausch zwischen EU-Mitgliedstaaten.",
 ];
 
 test.describe("Vorprüfung Ergebnis happy path", () => {
@@ -62,14 +62,14 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
 
     await expect(
       page.getByText(
-        "In Bezug auf digitale Aspekte führt ihr Regelungsvorhaben zu...",
+        "In Bezug auf digitale Aspekte führt Ihr Regelungsvorhaben zu...",
         { exact: true },
       ),
     ).toBeVisible();
 
     await expect(
       page.getByText(
-        "In Bezug auf Interoperabilität führt ihr Regelungsvorhaben zu...",
+        "In Bezug auf Interoperabilität führt Ihr Regelungsvorhaben zu...",
         { exact: true },
       ),
     ).toBeVisible();
@@ -108,10 +108,10 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
       "Das Regelungsvorhaben hat einen Digitalbezug und enthält Anforderungen der Interoperabilität.",
     );
     expect(mailUri).toContain(
-      "In Bezug auf digitale Aspekte führt ihr Regelungsvorhaben zu...",
+      "In Bezug auf digitale Aspekte führt Ihr Regelungsvorhaben zu...",
     );
     expect(mailUri).toContain(
-      "In Bezug auf Interoperabilität führt ihr Regelungsvorhaben zu...",
+      "In Bezug auf Interoperabilität führt Ihr Regelungsvorhaben zu...",
     );
 
     for (const resultText of positiveResultContent) {
@@ -149,10 +149,10 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
       "Das Regelungsvorhaben hat einen Digitalbezug und enthält Anforderungen der Interoperabilität.",
     );
     expect(clipboardText).toContain(
-      "In Bezug auf digitale Aspekte führt ihr Regelungsvorhaben zu...",
+      "In Bezug auf digitale Aspekte führt Ihr Regelungsvorhaben zu...",
     );
     expect(clipboardText).toContain(
-      "In Bezug auf Interoperabilität führt ihr Regelungsvorhaben zu...",
+      "In Bezug auf Interoperabilität führt Ihr Regelungsvorhaben zu...",
     );
 
     for (const resultText of positiveResultContent) {

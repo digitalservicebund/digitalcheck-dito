@@ -168,7 +168,7 @@ describe("DocumentationPrincipleErlaeuterung", () => {
     it("shows the positive answer confirmation message", () => {
       expect(
         screen.getByText(
-          "Sie haben angegeben, dass das Prinzip auf ihr Vorhaben zutrifft.",
+          "Sie haben angegeben, dass das Prinzip auf Ihr Vorhaben zutrifft.",
         ),
       ).toBeInTheDocument();
     });
@@ -221,7 +221,7 @@ describe("DocumentationPrincipleErlaeuterung", () => {
     it("shows the negative answer confirmation message", () => {
       expect(
         screen.getByText(
-          "Sie haben angegeben, dass das Prinzip nicht auf ihr Vorhaben zutrifft.",
+          "Sie haben angegeben, dass das Prinzip nicht auf Ihr Vorhaben zutrifft.",
         ),
       ).toBeInTheDocument();
     });

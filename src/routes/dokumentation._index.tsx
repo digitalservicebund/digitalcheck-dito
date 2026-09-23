@@ -86,8 +86,9 @@ export function DokumentationIndexPage({
                   Bearbeiten Sie die Dokumentation{" "}
                   <strong>flexibel im Formular</strong> oder speichern Sie sie
                   als <strong>Word-Datei</strong>. Abschließend senden Sie die
-                  Angaben an Ihre zuständige Prüfstelle (z.B. auf Bundesebene an
-                  den NKR.) Ansonsten dient die Dokumentation zur Selbstprüfung.
+                  Angaben an Ihre zuständige Prüfstelle (z. B. auf Bundesebene
+                  an den NKR). Ansonsten dient die Dokumentation zur
+                  Selbstprüfung.
                 </p>
               </Feature>
             </FeatureList>
@@ -109,7 +110,7 @@ export function DokumentationIndexPage({
               <NumberedList.Item className={"space-y-8"}>
                 <p className="kern-body kern-body--large">
                   Senden Sie die ausgefüllte Dokumentation an Ihre Prüfstelle
-                  oder speichern Sie Sie das Dokument ab
+                  oder speichern Sie das Dokument ab
                 </p>
                 <p>
                   Exportieren Sie Ihre Eingaben als Word-Datei und schicken Sie

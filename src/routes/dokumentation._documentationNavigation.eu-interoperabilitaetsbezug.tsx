@@ -18,7 +18,7 @@ export const helpText = `
 **Was bedeutet das?**
 
 Sofern durch Ihre Regelung vorgesehen ist, dass Daten und Informationen zwischen
-Verwaltungen von EU-Mitgliedsstaaten ausgetauscht werden, muss nach
+Verwaltungen von EU-Mitgliedstaaten ausgetauscht werden, muss nach
 ${markdownLinkIEA({ article: 3, format: "long" })} in der Regel
 eine Interoperabilitätsbewertung durchgeführt werden.
 

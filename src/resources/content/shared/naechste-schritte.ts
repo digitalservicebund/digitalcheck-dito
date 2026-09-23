@@ -6,7 +6,7 @@ const stepPruefstelle: Step = {
     text: "Prüfen durch zuständige Prüfstelle",
   },
   content:
-    "Ihre Prüfstelle untersucht ihr Vorhaben hinsichtlich der Berücksichtigung der Prinzipien digitaltauglicher Gesetzgebung. Senden Sie die von Ihnen erstelle Dokumentation per E-Mail an Ihre Prüfstelle. Die E-Mail-Adresse finden Sie am Ende der Dokumentationserstellung. Damit ist der Digitacheck für Sie beendet. Wenn Sie keine Prüfstelle haben, dient die Dokumentation zur Selbstprüfung.",
+    "Ihre Prüfstelle untersucht Ihr Vorhaben hinsichtlich der Berücksichtigung der Prinzipien digitaltauglicher Gesetzgebung. Senden Sie die von Ihnen erstellte Dokumentation per E-Mail an Ihre Prüfstelle. Die E-Mail-Adresse finden Sie am Ende der Dokumentationserstellung. Damit ist der Digitacheck für Sie beendet. Wenn Sie keine Prüfstelle haben, dient die Dokumentation zur Selbstprüfung.",
   isDisabled: false,
 };
 export const steps = {

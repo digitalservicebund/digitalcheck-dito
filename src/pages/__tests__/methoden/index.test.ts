@@ -32,7 +32,7 @@ describe("Methoden Route - Integration Tests", () => {
   it("renders the Timeline with all methods", () => {
     expect(
       screen.getByRole("heading", {
-        name: "Erfassen des Status Quo",
+        name: "Erfassen des Status quo",
         level: 2,
       }),
     ).toBeInTheDocument();
