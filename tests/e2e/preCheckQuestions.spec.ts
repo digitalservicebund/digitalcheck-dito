@@ -1,5 +1,6 @@
 import {
   vorpruefung,
+  vorpruefung_bundesland,
   vorpruefung_ergebnis,
   vorpruefung_hinweise,
 } from "@/config/routes";
@@ -32,6 +33,9 @@ test.describe("test questions form", () => {
     await page.waitForURL(vorpruefung_hinweise.path);
     await waitForHydration(page);
     await page.getByRole("link", { name: "Okay & weiter" }).click();
+    await page.waitForURL(vorpruefung_bundesland.path);
+    await waitForHydration(page);
+    await page.getByRole("button", { name: "Übernehmen" }).click();
     for (const element of questions) {
       await page.waitForURL(element.path);
       await waitForHydration(page);
@@ -61,6 +65,8 @@ test.describe("test questions form", () => {
   test("back button works", async ({ page }) => {
     await page.goto(questions[0].path);
     await waitForHydration(page);
+    await page.getByRole("link", { name: "Zurück" }).click();
+    await expect(page).toHaveURL(vorpruefung_bundesland.path);
     await page.getByRole("link", { name: "Zurück" }).click();
     await expect(page).toHaveURL(vorpruefung_hinweise.path);
     await page.getByRole("link", { name: "Zurück" }).click();

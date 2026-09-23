@@ -6,6 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { generateRoutes } from "astro-route-generator";
 import { defineConfig } from "astro/config";
 import process from "node:process";
+import Icons from "unplugin-icons/vite";
 import {
   ZFL_BASE_URL,
   ZFL_PATH_BEISPIELE,
@@ -78,7 +79,7 @@ export default defineConfig({
     }),
   ],
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), Icons({ compiler: "astro" })],
     resolve: {
       alias: {
         "@/": new URL("./src/", import.meta.url).pathname,

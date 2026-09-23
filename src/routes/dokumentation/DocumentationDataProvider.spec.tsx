@@ -47,6 +47,7 @@ describe("DocumentationDataProvider", () => {
         ...baseData,
         policyTitle: {
           title: "Stored Title",
+          bundesland: "Bund",
           organization: "Stored organization",
         },
       };
@@ -89,7 +90,11 @@ describe("DocumentationDataProvider", () => {
     it("writes single field data to localStorage", async () => {
       const data: DocumentationData<V2> = {
         ...baseData,
-        policyTitle: { title: "My Policy", organization: "My Organization" },
+        policyTitle: {
+          title: "My Policy",
+          bundesland: "Bund",
+          organization: "My Organization",
+        },
       };
 
       const { result } = renderHook(() => useDocumentationDataService(), {
@@ -105,7 +110,11 @@ describe("DocumentationDataProvider", () => {
     it("writes complete data object to localStorage", async () => {
       const data: DocumentationData<V2> = {
         ...baseData,
-        policyTitle: { title: "My Policy", organization: "My organization" },
+        policyTitle: {
+          title: "My Policy",
+          bundesland: "Bund",
+          organization: "My organization",
+        },
         participation: { formats: "Workshops", results: "Results" },
         principles: [{ id: "p1", answer: "Nein", reasoning: "", aspects: [] }],
       };
@@ -133,6 +142,7 @@ describe("DocumentationDataProvider", () => {
       act(() =>
         result.current.setPolicyTitle({
           title: "New Title",
+          bundesland: "Bund",
           organization: "My Organization",
         }),
       );
@@ -140,7 +150,11 @@ describe("DocumentationDataProvider", () => {
       expect(mockWrite).toHaveBeenCalledWith(
         {
           ...baseData,
-          policyTitle: { title: "New Title", organization: "My Organization" },
+          policyTitle: {
+            title: "New Title",
+            bundesland: "Bund",
+            organization: "My Organization",
+          },
         },
         STORAGE_KEY,
       );
@@ -149,7 +163,11 @@ describe("DocumentationDataProvider", () => {
     it("updates policyTitle while preserving existing data", async () => {
       const existingData: DocumentationData<V2> = {
         ...baseData,
-        policyTitle: { title: "Old Title", organization: "Old Organization" },
+        policyTitle: {
+          title: "Old Title",
+          bundesland: "Bund",
+          organization: "Old Organization",
+        },
         participation: { formats: "Online", results: "Some results" },
       };
       mockRead.mockReturnValue(existingData);
@@ -162,6 +180,7 @@ describe("DocumentationDataProvider", () => {
       act(() =>
         result.current.setPolicyTitle({
           title: "Updated Title",
+          bundesland: "Bund",
           organization: "Updated Organization",
         }),
       );
@@ -171,6 +190,7 @@ describe("DocumentationDataProvider", () => {
           ...existingData,
           policyTitle: {
             title: "Updated Title",
+            bundesland: "Bund",
             organization: "Updated Organization",
           },
         },
@@ -200,7 +220,11 @@ describe("DocumentationDataProvider", () => {
     it("updates participation while preserving existing data", async () => {
       const existingData: DocumentationData<V2> = {
         ...baseData,
-        policyTitle: { title: "My Policy", organization: "My Organization" },
+        policyTitle: {
+          title: "My Policy",
+          bundesland: "Bund",
+          organization: "My Organization",
+        },
         participation: { formats: "Old format", results: "Old results" },
       };
       mockRead.mockReturnValue(existingData);

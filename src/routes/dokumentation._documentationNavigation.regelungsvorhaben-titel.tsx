@@ -1,6 +1,8 @@
 import HelpButton from "@/components/HelpButton";
 import Input from "@/components/Input";
+import Select from "@/components/Select";
 import { digitalDocumentation } from "@/resources/content/dokumentation";
+import { bundeslaender } from "@/resources/content/shared/bundeslaender";
 import {
   defaultTitleValues,
   policyTitleSchema,
@@ -43,6 +45,14 @@ export function DocumentationTitle() {
           <Input scope={form.scope("title")} warningInsteadOfError>
             {info.inputTitle.label}
           </Input>
+
+          <Select
+            scope={form.scope("bundesland")}
+            options={bundeslaender.map((b) => b.name)}
+            warningInsteadOfError
+          >
+            Wählen Sie Ihr Bundesland oder den Bund aus
+          </Select>
 
           <Input scope={form.scope("organization")} warningInsteadOfError>
             Ministerium / Organisation
