@@ -62,7 +62,7 @@ export const interoperabilityRatingOptions: Option[] = [
     value: "risky",
   },
   {
-    label: "nicht relevant",
+    label: "Nicht relevant",
     value: "not-applicable",
   },
 ];
