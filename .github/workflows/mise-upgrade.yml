@@ -25,22 +25,107 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Sync node version with Dockerfile
+        # node is excluded from the upgrade step below: its version bumps have
+        # a bigger blast radius and deserve deliberate review rather than mise
+        # picking its own "latest". Dependabot already bumps the Dockerfile's
+        # node version (and gets reviewed via its own PR), so once that lands
+        # on main, mirror it into mise.toml/mise.lock instead of drifting.
+        run: |
+          NODE_VERSION=$(sed -n "s/^FROM node:\([0-9.]*\)-.*/\1/p" Dockerfile)
+          CURRENT=$(sed -n "s/^node = '\(.*\)'/\1/p" mise.toml)
+          if [ -n "$NODE_VERSION" ] && [ "$NODE_VERSION" != "$CURRENT" ]; then
+            sed -i "s/^node = '.*'/node = '$NODE_VERSION'/" mise.toml
+            mise lock node
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Upgrade pinned tool versions
-        # node is excluded: its version bumps have a bigger blast radius and
-        # deserve deliberate review rather than an automated PR.
-        run: mise upgrade --bump --exclude node
+        # node is excluded here too: it's kept in sync with the Dockerfile by
+        # the step above, not by mise's own "latest" resolution.
+        # minimum-release-age holds back versions released in the last 3 days,
+        # giving newly-published releases time to surface problems before we
+        # pick them up automatically.
+        run: |
+          mise upgrade --bump --exclude node --minimum-release-age 3d
+          # Saved so the cooldown-detection step below can compare against
+          # what actually got proposed, without redoing this resolution.
+          cp mise.toml mise.lock "$RUNNER_TEMP/"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
+          sign-commits: true
+          delete-branch: true
           commit-message: "chore(mise): bump pinned tool versions"
           title: "chore(mise): bump pinned tool versions"
           body: >
-            Automated upgrade of the tool versions pinned in `mise.toml`
-            (all except node). Dependabot does not currently support the
-            mise ecosystem, so this workflow keeps these pins from going
-            stale.
+            Automated upgrade of the tool versions pinned in `mise.toml`.
+            Dependabot does not currently support the mise ecosystem, so this
+            workflow keeps these pins from going stale. node is kept in sync
+            with the Dockerfile's version rather than upgraded independently.
+            Versions released in the last 3 days are held back; see the draft
+            "bump tool versions still in cooldown" PR for those.
+          base: main
           branch: chore/mise-upgrade
+          labels: dependencies
+
+      - name: Detect updates still held back by the cooldown
+        id: cooldown-pending
+        run: |
+          # peter-evans/create-pull-request resets the working tree back to a
+          # clean, pre-upgrade origin/main once it's done pushing the branch
+          # above. Restore the upgraded files saved by the previous step so
+          # the `mise outdated` check below compares against what that step
+          # actually proposed, rather than re-reporting everything as still
+          # outdated.
+          cp "$RUNNER_TEMP/mise.toml" "$RUNNER_TEMP/mise.lock" .
+
+          outdated_json="$RUNNER_TEMP/outdated.json"
+          mise outdated --bump --json | jq 'del(.node)' > "$outdated_json"
+
+          # Reset to main's actual mise.toml/mise.lock: this PR must be an
+          # independent, minimal diff from main, not stacked on the restored
+          # upgrade above.
+          git fetch origin main
+          git checkout origin/main -- mise.toml mise.lock
+
+          # Explicit tool@version pins bypass minimum-release-age entirely (mise
+          # only filters fuzzy/latest lookups), so this applies just the still-
+          # cooling-down versions without waiting out the cooldown.
+          args=$(jq -r 'to_entries | map("\(.key)@\(.value.latest)") | join(" ")' "$outdated_json")
+          if [ -n "$args" ]; then
+            mise upgrade --bump $args
+          fi
+
+          body=$(jq -r '
+            if length == 0 then
+              "Nothing is currently being held back by the cooldown."
+            else
+              "The following updates are still inside the 3-day upgrade cooldown. Check the release notes before merging this early — only do so if one is a security fix:\n\n" +
+              (to_entries | map("- **\(.key)** \(.value.current // "?") → \(.value.latest)" + (if .value.release_url then " — [release notes](\(.value.release_url))" else "" end)) | join("\n"))
+            end
+          ' "$outdated_json")
+
+          delimiter="$(openssl rand -hex 8)"
+          echo "body<<$delimiter" >> "$GITHUB_OUTPUT"
+          echo "$body" >> "$GITHUB_OUTPUT"
+          echo "$delimiter" >> "$GITHUB_OUTPUT"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create draft pull request for cooldown-pending updates
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          sign-commits: true
+          delete-branch: true
+          base: main
+          commit-message: "chore(mise): bump tool versions still in cooldown"
+          title: "chore(mise): bump tool versions still in cooldown"
+          body: ${{ steps.cooldown-pending.outputs.body }}
+          branch: chore/mise-upgrade-cooldown-pending
+          draft: true
           labels: dependencies
