@@ -47,7 +47,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.4",
     "astro-route-generator": "github:digitalservicebund/astro-route-generator#0.2.5",
-    "docx": "^9.7.1",
+    "docx": "^9.7.2",
     "file-saver": "^2.0.5",
     "isbot": "^5.2.2",
     "marked": "^18.0.14",
