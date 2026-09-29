@@ -15,13 +15,13 @@ import {
   toParagraphPatch,
 } from "@/service/wordDocumentationExport/docxUtils.ts";
 import { formatBindingRequirements } from "@/service/wordDocumentationExport/wordInteroperabilityAssessment.ts";
-import type { PrinzipWithAspekte } from "@/utils/strapiData.types";
+import type { Prinzip } from "@/content.config";
 import { slugify } from "@/utils/utilFunctions";
 import type { IPatch } from "docx";
 import { convertInchesToTwip, patchDocument, PatchType } from "docx";
 import fileSaver from "file-saver";
 import { useCallback } from "react";
-import strapiBlocksToDocx from "./strapiBlocksToWord";
+import markdownBlocksToDocx from "./markdownBlocksToWord";
 
 const { saveAs } = fileSaver;
 const { principlePages } = digitalDocumentation;
@@ -31,7 +31,7 @@ export function useWordDocumentation() {
 
   const downloadDocumentation = useCallback(
     async (
-      prinzips: PrinzipWithAspekte[],
+      prinzips: Prinzip[],
       { templateOnly = false }: { templateOnly?: boolean } = {},
     ) => {
       try {
@@ -77,7 +77,7 @@ function getInteroperabilityOutcomeValue(documentationData: DocumentationData) {
 export const createDoc = async (
   templateData: ArrayBuffer | Uint8Array,
   documentationData: DocumentationData,
-  prinzips: PrinzipWithAspekte[],
+  prinzips: Prinzip[],
   { templateOnly }: { templateOnly?: boolean },
 ) => {
   const {
@@ -184,14 +184,14 @@ const answerOrPlaceholderOptional = (answer?: string) =>
 // - Reasoning (in case of a negative answer)
 // - Aspects and own explanation (partially filled in case of a positive answer)
 export const buildPrinciplePatches = (
-  prinzips: PrinzipWithAspekte[],
+  prinzips: Prinzip[],
   answers: DocumentationData["principles"],
 ): Record<string, IPatch> =>
   prinzips.reduce((acc, prinzip, prinzipIndex) => {
     const answer = answers?.find((answer) => answer.id === prinzip.documentId);
     const hasPositivePrincipleAnswer = answer?.answer?.includes("Ja");
 
-    // Build the aspects content from Strapi and user answers (if positive)
+    // Build the aspects content from the Content Collection and user answers (if positive)
     const aspectsContent = prinzip.Aspekte.flatMap((aspekt) => {
       // Find the reasoning entry where the aspect matches
       const matchingReasoning = Array.isArray(answer?.aspects)
@@ -210,7 +210,7 @@ export const buildPrinciplePatches = (
       [`PRINCIPLE_${prinzipIndex + 1}_TITLE`]: toParagraphPatch(prinzip.Name),
       [`PRINCIPLE_${prinzipIndex + 1}_DESCRIPTION`]: {
         type: PatchType.DOCUMENT,
-        children: strapiBlocksToDocx(prinzip.Hilfetext!),
+        children: markdownBlocksToDocx(prinzip.Hilfetext),
       },
       [`PRINCIPLE_${prinzipIndex + 1}_ANSWER`]: toParagraphPatch(
         answer?.answer ?? principlePages.radioOptions.join(" | "),
