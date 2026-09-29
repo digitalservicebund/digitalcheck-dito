@@ -1,4 +1,3 @@
-import type { Node } from "@/utils/paragraphUtils";
 import type { IRunOptions } from "docx";
 
 export type TextRunOptions = {
@@ -45,8 +44,3 @@ export const getTextFromHyperlink = (hyperlink: unknown): string => {
     asExternalHyperlinkLike(asParagraphLike(hyperlink).children[0]),
   );
 };
-
-export const makeNode = (text: string): Node => ({
-  type: "paragraph",
-  children: [{ type: "text", text }],
-});

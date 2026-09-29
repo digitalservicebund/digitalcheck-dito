@@ -1,11 +1,6 @@
 // @vitest-environment node
 import Prinzip from "@/pages/methoden/fuenf-prinzipien/[principleId].astro";
-import { getTextFromNodes } from "@/routes/__tests__/utils/strapiUtils.ts";
-import type { Node } from "@/utils/paragraphUtils";
-import type {
-  PrinzipListItem,
-  PrinzipWithAspekte,
-} from "@/utils/strapiData.types";
+import type { Prinzip as PrinzipData } from "@/content.config";
 import { renderToDOM } from "@/utils/testUtils";
 import type { BoundFunctions, queries } from "@testing-library/dom";
 import { within } from "@testing-library/dom";
@@ -23,69 +18,43 @@ const IntersectionObserverMock = vi.fn(
 
 vi.stubGlobal("IntersectionObserver", IntersectionObserverMock);
 
-// Create mock data that simulates the data structure returned by the loader.
+// Create mock data that simulates the data structure returned by the collection.
 const mockAspectApplication1_1 = {
   Titel: "1.1a",
-  Erklaerung: [],
-  Formulierungsbeispiel: [
-    {
-      type: "paragraph",
-      children: [{ type: "text", text: "Ein Formulierungsbeispiel für 1.1a" }],
-    },
-  ] as Node[],
+  Erklaerung: "",
+  Formulierungsbeispiel: "Ein Formulierungsbeispiel für 1.1a",
 };
 
 const mockAspect1 = {
-  Nummer: "1.1",
   Titel: "Aspekt1",
-  Text: [
-    {
-      type: "paragraph",
-      children: [{ type: "text", text: "Aspekt 1.1 Text" }],
-    },
-  ] as Node[],
+  Text: "Aspekt 1.1 Text",
   Anwendung: [mockAspectApplication1_1],
   Kurzbezeichnung: "A1",
-  Beschreibung: "",
 };
-const mockPrinzipData: PrinzipWithAspekte = {
+
+const mockPrinzipData: PrinzipData & { Beschreibung: string } = {
   documentId: "id",
-  Kurzbezeichnung: "Nutzerfreundlichkeit",
   URLBezeichnung: "nutzerfreundlichkeit",
   Name: "Prinzip Test 1: Nutzerfreundlichkeit",
-  Beschreibung: [
-    {
-      type: "paragraph",
-      children: [{ type: "text", text: "Beschreibung für Prinzip 1." }],
-    },
-  ] as Node[],
-  Kurzbeschreibung: [
-    {
-      type: "paragraph",
-      children: [{ type: "text", text: "Kurzbeschreibung" }],
-    },
-  ] as Node[],
+  Beschreibung: "Beschreibung für Prinzip 1.",
+  Kurzbeschreibung: "Kurzbeschreibung",
+  Hilfetext: "",
+  Erklaerungshilfe: "",
   order: 1,
-  Nummer: 1 as const,
+  Nummer: 1,
   Aspekte: [
     mockAspect1,
     {
-      Nummer: "1.2",
       Titel: "Aspekt2",
-      Text: [
-        {
-          type: "paragraph",
-          children: [{ type: "text", text: "Anwendung Text 1.2" }],
-        },
-      ] as Node[],
+      Text: "Anwendung Text 1.2",
       Anwendung: [],
       Kurzbezeichnung: "A2",
-      Beschreibung: "",
     },
   ],
 };
 
-const mockPrinzipsList: PrinzipListItem[] = [];
+const mockPrinzipsList: Pick<PrinzipData, "Name" | "URLBezeichnung" | "order">[] =
+  [];
 
 describe("FivePrinciples Route - Integration Tests", () => {
   let screen: BoundFunctions<typeof queries>;
@@ -105,7 +74,7 @@ describe("FivePrinciples Route - Integration Tests", () => {
       }),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(getTextFromNodes(mockPrinzipData.Beschreibung)),
+      screen.getByText(mockPrinzipData.Beschreibung),
     ).toBeInTheDocument();
   });
 
@@ -113,12 +82,8 @@ describe("FivePrinciples Route - Integration Tests", () => {
     const main = screen.getByRole("main");
     const toc = within(main).getByRole("navigation", { name: "Inhalt" });
 
-    expect(
-      within(toc).getByRole("link", { name: "1.1 A1" }),
-    ).toBeInTheDocument();
-    expect(
-      within(toc).getByRole("link", { name: "1.2 A2" }),
-    ).toBeInTheDocument();
+    expect(within(toc).getByRole("link", { name: "A1" })).toBeInTheDocument();
+    expect(within(toc).getByRole("link", { name: "A2" })).toBeInTheDocument();
   });
 
   it("renders the description, not the short description", () => {
@@ -130,9 +95,7 @@ describe("FivePrinciples Route - Integration Tests", () => {
   // Note: userEvent doesn't work with the current Astro test setup
 
   // it("renders the aspect > application Formulierungsbeispiel", async () => {
-  //   const expectedText = getTextFromNodes(
-  //     mockAspectApplication1_1.Formulierungsbeispiel,
-  //   );
+  //   const expectedText = mockAspectApplication1_1.Formulierungsbeispiel;
   //   expect(screen.queryByText(expectedText)).not.toBeInTheDocument();
   //
   //   const detailsHeading = screen.getByRole("button", {

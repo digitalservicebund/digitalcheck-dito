@@ -1,9 +1,9 @@
 ---
 import { DocumentationRouter } from "@/routes/dokumentation.$page.tsx";
 import LoadingPage from "@/components/LoadingPage.astro";
-import { fetchPrinzipsWithExamples } from "@/utils/strapiData.server.ts";
 import { ClientRouter } from "astro:transitions";
 import Layout from "@/layouts/Layout.astro";
+import { getCollection } from "astro:content";
 interface Props {
   stepTitle: string;
   principleId?: string;
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { principleId, stepTitle, isErlaeuterung } = Astro.props;
-const prinzips = await fetchPrinzipsWithExamples();
+const prinzips = (await getCollection("prinzipien")).map((entry) => entry.data).sort((a,b) => a.order - b.order);
 ---
 
 <Layout title={`Dokumentation: ${stepTitle}`} showProgressBar>

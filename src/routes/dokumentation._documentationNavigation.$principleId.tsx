@@ -1,9 +1,10 @@
 import Badge from "@/components/Badge";
-import { BlocksRenderer } from "@/components/BlocksRenderer";
+import RichText from "@/components/RichText";
 import Heading from "@/components/Heading";
 import HelpButton from "@/components/HelpButton";
 import RadioGroup from "@/components/RadioGroup";
 import { methoden_fuenfPrinzipien } from "@/config/routes";
+import type { PrincipleNumber } from "@/resources/constants";
 import { digitalDocumentation } from "@/resources/content/dokumentation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
 import { useSyncedForm } from "./dokumentation/documentationDataHook";
@@ -52,14 +53,16 @@ export function DocumentationPrinciple({
   return (
     <div className="max-w-a11y space-y-40">
       <div className="space-y-8">
-        <Badge principleNumber={prinzip.Nummer}>Prinzip {prinzip.order}</Badge>
+        <Badge principleNumber={prinzip.Nummer as PrincipleNumber}>
+          Prinzip {prinzip.order}
+        </Badge>
         <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
           {prinzip.Name}
           <HelpButton
             sectionId="1-prinzip"
             title={`Hinweis zu „${prinzip.Name}“`}
           >
-            <BlocksRenderer content={prinzip.Hilfetext!} />
+            <RichText markdown={prinzip.Hilfetext} />
             <a
               href={
                 methoden_fuenfPrinzipien.path + "/" + prinzip.URLBezeichnung
@@ -71,7 +74,7 @@ export function DocumentationPrinciple({
         </Heading>
 
         {prinzip.Kurzbeschreibung && (
-          <BlocksRenderer content={prinzip.Kurzbeschreibung} />
+          <RichText markdown={prinzip.Kurzbeschreibung} />
         )}
       </div>
 

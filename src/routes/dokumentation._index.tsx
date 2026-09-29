@@ -13,10 +13,7 @@ import { digitalDocumentation } from "@/resources/content/dokumentation";
 import { supportBanner } from "@/resources/content/shared/support-banner";
 import { DocumentationContinueActions } from "@/routes/dokumentation/DocumentationContinueActions.tsx";
 import { useWordDocumentation } from "@/service/wordDocumentationExport/wordDocumentation";
-import type {
-  PrinzipWithAspekte,
-  PrinzipWithAspekteAndExample,
-} from "@/utils/strapiData.types";
+import type { Prinzip } from "@/content.config";
 import {
   SimCardDownloadTwoTone,
   TipsAndUpdatesOutlined,
@@ -28,7 +25,7 @@ const { start } = digitalDocumentation;
 export function DokumentationIndexPage({
   prinzips,
 }: Readonly<{
-  prinzips: PrinzipWithAspekte[];
+  prinzips: Prinzip[];
 }>) {
   const { downloadDocumentation } = useWordDocumentation();
 
@@ -167,7 +164,7 @@ import { DocumentationDataProvider } from "@/routes/dokumentation/DocumentationD
 export function DokumentationIndexPageWithProvider({
   prinzips,
 }: Readonly<{
-  prinzips: PrinzipWithAspekteAndExample[];
+  prinzips: Prinzip[];
 }>) {
   return (
     <DocumentationDataProvider>

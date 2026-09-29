@@ -11,10 +11,7 @@ import {
 import { HelpPanelProvider } from "@/contexts/HelpPanelContext";
 import type { digitalDocumentation } from "@/resources/content/dokumentation";
 import { readDataFromLocalStorage } from "@/utils/localStorageVersioned";
-import type {
-  PrinzipAspekt,
-  PrinzipWithAspekteAndExample,
-} from "@/utils/strapiData.types";
+import type { Prinzip, PrinzipAspekt } from "@/content.config";
 import "@testing-library/jest-dom";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import type { UserEvent } from "@testing-library/user-event";
@@ -57,47 +54,29 @@ const routes: (RouteGroup | Route)[] = [
 const aspekte: PrinzipAspekt[] = [
   {
     Titel: "Aspekt 1",
-    Beschreibung: "Aspekt 1 Beschreibung",
     Kurzbezeichnung: "A1",
-    Text: [],
-    Nummer: "",
+    Text: "",
     Anwendung: [],
   },
   {
     Titel: "Aspekt 2",
-    Beschreibung: "Aspekt 2 Beschreibung",
     Kurzbezeichnung: "A2",
-    Text: [],
-    Nummer: "",
+    Text: "",
     Anwendung: [],
   },
 ];
 
-const prinzips: PrinzipWithAspekteAndExample[] = [
+const prinzips: Prinzip[] = [
   {
     Name: "Prinzip 1: Digitale Angebote",
-    Kurzbezeichnung: "Prinzip 1",
     URLBezeichnung: "prinzip-1-digitale-angebote",
     documentId: "1",
     Nummer: 1,
     order: 1,
-    Beschreibung: [],
+    Kurzbeschreibung: "",
+    Hilfetext: "",
+    Erklaerungshilfe: "",
     Aspekte: aspekte,
-    Beispiel: {
-      documentId: "abc-2",
-      Nummer: 2,
-      Text: [],
-      PrinzipErfuellungen: [],
-      Paragraph: {
-        Nummer: 42,
-        Gesetz: "TestG",
-        Titel: "Titel",
-        Beispielvorhaben: {
-          URLBezeichnung: "test",
-          Titel: "Test",
-        },
-      },
-    },
   },
 ];
 

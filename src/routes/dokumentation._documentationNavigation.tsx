@@ -18,7 +18,7 @@ import {
 } from "@/config/routes";
 import { HelpPanelProvider } from "@/contexts/HelpPanelContext";
 import { digitalDocumentation } from "@/resources/content/dokumentation";
-import type { PrinzipWithAspekte } from "@/utils/strapiData.types";
+import type { Prinzip } from "@/content.config";
 import { type ReactNode, useCallback, useMemo } from "react";
 import { twJoin } from "tailwind-merge";
 import {
@@ -90,7 +90,7 @@ export function LayoutWithDocumentationNavigation({
   children,
   currentUrl,
 }: Readonly<{
-  prinzips: PrinzipWithAspekte[];
+  prinzips: Prinzip[];
   children?: ReactNode;
   currentUrl: string;
 }>) {

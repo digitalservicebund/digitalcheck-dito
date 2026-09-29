@@ -1,8 +1,8 @@
 ---
-import { getPrincipleIdStaticPaths } from "@/utils/strapiData.server";
 import DocumentationWizard from "@/components/DocumentationWizard.astro";
+import { getPrinzipienStaticPaths } from "@/content.config";
 
-export const getStaticPaths = getPrincipleIdStaticPaths;
+export const getStaticPaths = getPrinzipienStaticPaths;
 
 const { principleName } = Astro.props;
 const { principleId } = Astro.params;

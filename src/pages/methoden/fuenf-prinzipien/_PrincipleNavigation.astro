@@ -1,12 +1,12 @@
 ---
 import { LinkButton } from "@/components/Button.tsx";
 import { methoden_fuenfPrinzipien } from "@/config/routes";
-import type { BasePrinzip, PrinzipListItem } from "@/utils/strapiData.types";
+import type { Prinzip } from "@/content.config";
 import { twJoin } from "tailwind-merge";
 
 interface Props {
-  principles: PrinzipListItem[];
-  current: BasePrinzip;
+  principles: Pick<Prinzip, "Name" | "URLBezeichnung" | "order">[];
+  current: Pick<Prinzip, "order">;
 }
 
 const { principles, current } = Astro.props;
