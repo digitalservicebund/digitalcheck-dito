@@ -310,8 +310,12 @@
 @theme {
   /* Action */
   --color-kern-action-default: var(--kern-color-action-default-contextual);
-  --color-kern-action-focus-default: var(--kern-color-action-focus-default-contextual);
-  --color-kern-action-on-default: var(--kern-color-action-on-default-contextual);
+  --color-kern-action-focus-default: var(
+    --kern-color-action-focus-default-contextual
+  );
+  --color-kern-action-on-default: var(
+    --kern-color-action-on-default-contextual
+  );
   --color-kern-action-visited: var(--kern-color-action-visited-contextual);
   --color-kern-action-state-indicator-default: var(
     --kern-color-action-state-indicator-default-contextual
@@ -336,9 +340,15 @@
   );
 
   /* Decorative */
-  --color-kern-decorative-border: var(--kern-color-decorative-border-contextual);
-  --color-kern-decorative-border-level-1: var(--kern-color-decorative-border-level-1);
-  --color-kern-decorative-border-level-2: var(--kern-color-decorative-border-level-2);
+  --color-kern-decorative-border: var(
+    --kern-color-decorative-border-contextual
+  );
+  --color-kern-decorative-border-level-1: var(
+    --kern-color-decorative-border-level-1
+  );
+  --color-kern-decorative-border-level-2: var(
+    --kern-color-decorative-border-level-2
+  );
   --color-kern-decorative-brand: var(--kern-color-decorative-brand-contextual);
 
   /* Feedback */
@@ -365,7 +375,9 @@
 
   /* Form */
   --color-kern-form-input-background: var(--kern-color-form-input-background);
-  --color-kern-form-input-border: var(--kern-color-form-input-border-contextual);
+  --color-kern-form-input-border: var(
+    --kern-color-form-input-border-contextual
+  );
 
   /* Layout */
   --color-kern-layout-background-default: var(
@@ -374,24 +386,40 @@
   --color-kern-layout-background-default-surface: var(
     --kern-color-layout-background-default-surface
   );
-  --color-kern-layout-background-level-1: var(--kern-color-layout-background-level-1);
+  --color-kern-layout-background-level-1: var(
+    --kern-color-layout-background-level-1
+  );
   --color-kern-layout-background-level-1-surface: var(
     --kern-color-layout-background-level-1-surface
   );
-  --color-kern-layout-background-level-2: var(--kern-color-layout-background-level-2);
+  --color-kern-layout-background-level-2: var(
+    --kern-color-layout-background-level-2
+  );
   --color-kern-layout-background-level-2-surface: var(
     --kern-color-layout-background-level-2-surface
   );
   --color-kern-layout-background-hued: var(--kern-color-layout-background-hued);
-  --color-kern-layout-background-inverted: var(--kern-color-layout-background-inverted);
-  --color-kern-layout-background-overlay: var(--kern-color-layout-background-overlay);
-  --color-kern-layout-layer-surface: var(--kern-color-layout-layer-surface-contextual);
+  --color-kern-layout-background-inverted: var(
+    --kern-color-layout-background-inverted
+  );
+  --color-kern-layout-background-overlay: var(
+    --kern-color-layout-background-overlay
+  );
+  --color-kern-layout-layer-surface: var(
+    --kern-color-layout-layer-surface-contextual
+  );
   --color-kern-layout-border: var(--kern-color-layout-border-contextual);
   --color-kern-layout-border-level-1: var(--kern-color-layout-border-level-1);
   --color-kern-layout-border-level-2: var(--kern-color-layout-border-level-2);
-  --color-kern-layout-text-default: var(--kern-color-layout-text-default-contextual);
-  --color-kern-layout-text-inverse: var(--kern-color-layout-text-inverse-contextual);
-  --color-kern-layout-text-muted: var(--kern-color-layout-text-muted-contextual);
+  --color-kern-layout-text-default: var(
+    --kern-color-layout-text-default-contextual
+  );
+  --color-kern-layout-text-inverse: var(
+    --kern-color-layout-text-inverse-contextual
+  );
+  --color-kern-layout-text-muted: var(
+    --kern-color-layout-text-muted-contextual
+  );
 }
 
 /*
