@@ -5,10 +5,16 @@ import "@/styles/globals.css";
 import Footer from "@/layout/Footer";
 import PageHeader from "@/layout/PageHeader";
 import { siteMeta } from "@/resources/content/shared/meta";
-import { isProduction } from "@/config/stage";
+import { isDevelopment, isProduction } from "@/config/stage";
 import firaSansRegularUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Regular.woff2?url";
 import firaSansMediumUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Medium.woff2?url";
 import firaSansSemiBoldUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-SemiBold.woff2?url";
+import {
+  getRouteByPath,
+  getRouteChain,
+  hasVisibleChildren,
+} from "@/utils/navigation/routeUtils";
+import SectionSidebar from "@/components/global/SectionSidebar.astro";
 
 interface Props {
   title?: string;
@@ -39,6 +45,10 @@ const jsonLdMetadata = {
   alternateName: siteMeta.alternateName,
   url: siteMeta.siteURL,
 };
+
+const currentRoute = getRouteByPath(Astro.url.pathname);
+const [sectionRoot] = currentRoute ? getRouteChain(currentRoute) : [];
+const showSectionSidebar = !!sectionRoot && hasVisibleChildren(sectionRoot);
 ---
 
 <!doctype html>
@@ -100,8 +110,21 @@ const jsonLdMetadata = {
   </head>
   <body class="flex min-h-screen flex-col">
     <PageHeader client:load currentPath={currentPath} />
-    {showProgressBar && <ProgressBar />}
-    <slot />
+
+    {isDevelopment && showSectionSidebar ? (
+      <div class="h-full min-[900px]:grid min-[900px]:grid-cols-[264px_minmax(0,1fr)]">
+        <SectionSidebar />
+        <div>
+          {showProgressBar && <ProgressBar />}
+          <slot />
+        </div>
+      </div>
+    ) : (
+      <>
+        {showProgressBar && <ProgressBar />}
+        <slot />
+      </>
+    )}
     <Footer />
     {isProduction && <Posthog />}
   </body>

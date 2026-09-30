@@ -1,0 +1,51 @@
+---
+import type { DrilldownEntry } from "@/utils/navigation/drilldown";
+import { twMerge } from "tailwind-merge";
+import IconChevronRight from "~icons/ic/outline-chevron-right";
+
+type DrilldownNavigationItemData = Omit<DrilldownEntry, "isVisible">;
+
+interface Props {
+  item: DrilldownNavigationItemData;
+  currentPath: string;
+  panelElementId?: string;
+}
+
+const { item, currentPath, panelElementId } = Astro.props;
+const isCurrent = currentPath === item.path;
+
+function itemStyle(active = false, hasChildren = false) {
+  return twMerge(
+    "w-full link-unstyled flex items-center gap-4 rounded-sm p-8 hover:bg-kern-darkblue-750 hover:text-white",
+    "justify-between",
+    active && "bg-(--active-item-bg-color,white) font-bold",
+    active &&
+      !hasChildren &&
+      "hover:text-initial hover:bg-surface-highlight cursor-default", // disable active styles for leaf nodes
+  );
+}
+---
+
+<li>
+  {item.panelId ? (
+    <button
+      type="button"
+      class={itemStyle(isCurrent, true)}
+      @click={`currentPanel = "${item.panelId}"; currentDepth++`}
+      aria-label={`${item.label} Untermenü öffnen`}
+      aria-controls={panelElementId}
+      x-bind:aria-expanded={`currentPanel === "${item.panelId}"`}
+    >
+      <span>{item.label}</span>
+      <IconChevronRight class="size-20" aria-hidden="true" />
+    </button>
+  ) : (
+    <a
+      href={item.path}
+      class={itemStyle(isCurrent, false)}
+      aria-current={isCurrent ? "page" : undefined}
+    >
+      <span>{item.label}</span>
+    </a>
+  )}
+</li>

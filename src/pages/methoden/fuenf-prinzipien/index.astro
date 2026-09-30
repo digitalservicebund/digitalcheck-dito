@@ -120,25 +120,25 @@ const prinzips = await fetchPrinzipsWithExamples();
     </div>
 
     <PrinciplePosterBox />
-  </main>
 
-  <section aria-labelledby="nextStepHeading">
-    <Container>
-      <InfoBox
-        heading={{
-          text: methodsFivePrinciples.nextStep.title,
-          look: "ds-heading-03-reg",
-          tagName: "h2",
-          id: "nextStepHeading",
-        }}
-        badge={{
-          children: methodsFivePrinciples.nextStep.label,
-          Icon: methodsFivePrinciples.nextStep.icon,
-        }}
-      >
-        <RichText markdown={methodsFivePrinciples.nextStep.text} />
-        <InfoBox.LinkList links={methodsFivePrinciples.nextStep.links} />
-      </InfoBox>
-    </Container>
-  </section>
+    <section aria-labelledby="nextStepHeading">
+      <Container>
+        <InfoBox
+          heading={{
+            text: methodsFivePrinciples.nextStep.title,
+            look: "ds-heading-03-reg",
+            tagName: "h2",
+            id: "nextStepHeading",
+          }}
+          badge={{
+            children: methodsFivePrinciples.nextStep.label,
+            Icon: methodsFivePrinciples.nextStep.icon,
+          }}
+        >
+          <RichText markdown={methodsFivePrinciples.nextStep.text} />
+          <InfoBox.LinkList links={methodsFivePrinciples.nextStep.links} />
+        </InfoBox>
+      </Container>
+    </section>
+  </main>
 </Layout>

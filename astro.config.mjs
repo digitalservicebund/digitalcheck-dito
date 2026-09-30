@@ -1,4 +1,5 @@
 // @ts-check
+import alpinejs from "@astrojs/alpinejs";
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
@@ -6,6 +7,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { generateRoutes } from "astro-route-generator";
 import { defineConfig } from "astro/config";
 import process from "node:process";
+import Icons from "unplugin-icons/vite";
 import {
   ZFL_BASE_URL,
   ZFL_PATH_BEISPIELE,
@@ -68,6 +70,7 @@ export default defineConfig({
   publicDir: "public",
   integrations: [
     react(),
+    alpinejs(),
     mdx(),
     sitemap(),
     generateRoutes({
@@ -78,7 +81,11 @@ export default defineConfig({
     }),
   ],
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      // Renders Iconify icons (e.g. from @iconify-json/ic) as Astro components
+      Icons({ compiler: "astro" }),
+    ],
     resolve: {
       alias: {
         "@/": new URL("./src/", import.meta.url).pathname,

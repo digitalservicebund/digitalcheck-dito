@@ -1,0 +1,17 @@
+---
+import AccordeonMenuLevel from "@/components/global/AccordionMenuLevel.astro";
+import type { Route } from "@/config/routes";
+import { buildAccordeonEntries } from "@/utils/navigation/accordion";
+
+interface Props {
+  sectionRoot: Route;
+  currentPath: string;
+}
+
+const { sectionRoot, currentPath } = Astro.props;
+const entries = buildAccordeonEntries(sectionRoot, currentPath);
+---
+
+<div class="overflow-auto px-16 py-24" data-pagefind-ignore>
+  <AccordeonMenuLevel entries={entries} currentPath={currentPath} />
+</div>
