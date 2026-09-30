@@ -27,6 +27,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
 
+      - name: Generating TypeScript types for all Astro modules
+        run: pnpm astro sync
+
       - name: Audit used licences
         run: pnpm run audit:licences
 
