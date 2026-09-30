@@ -1,6 +1,6 @@
 // @vitest-environment node
-import Prinzip from "@/pages/methoden/fuenf-prinzipien/[principleId].astro";
 import type { Prinzip as PrinzipData } from "@/content.config";
+import Prinzip from "@/pages/methoden/fuenf-prinzipien/[principleId].astro";
 import { renderToDOM } from "@/utils/testUtils";
 import type { BoundFunctions, queries } from "@testing-library/dom";
 import { within } from "@testing-library/dom";
@@ -53,8 +53,10 @@ const mockPrinzipData: PrinzipData & { Beschreibung: string } = {
   ],
 };
 
-const mockPrinzipsList: Pick<PrinzipData, "Name" | "URLBezeichnung" | "order">[] =
-  [];
+const mockPrinzipsList: Pick<
+  PrinzipData,
+  "Name" | "URLBezeichnung" | "order"
+>[] = [];
 
 describe("FivePrinciples Route - Integration Tests", () => {
   let screen: BoundFunctions<typeof queries>;
@@ -73,9 +75,7 @@ describe("FivePrinciples Route - Integration Tests", () => {
         level: 1,
       }),
     ).toBeInTheDocument();
-    expect(
-      screen.getByText(mockPrinzipData.Beschreibung),
-    ).toBeInTheDocument();
+    expect(screen.getByText(mockPrinzipData.Beschreibung)).toBeInTheDocument();
   });
 
   it("renders the Table of Contents with links to aspects", () => {

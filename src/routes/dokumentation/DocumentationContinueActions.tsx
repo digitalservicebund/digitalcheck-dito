@@ -6,11 +6,11 @@ import {
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
 } from "@/config/routes";
+import type { Prinzip } from "@/content.config";
 import { digitalDocumentation } from "@/resources/content/dokumentation.ts";
 import { general } from "@/resources/content/shared/general.ts";
 import { useWordDocumentation } from "@/service/wordDocumentationExport/wordDocumentation";
 import { useNonce } from "@/utils/nonce.ts";
-import type { Prinzip } from "@/content.config";
 import { navigate } from "astro:transitions/client";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
 

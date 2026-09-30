@@ -17,6 +17,8 @@ import {
   dokumentation_veroeffentlichung,
   type Route,
 } from "@/config/routes";
+import type { Prinzip } from "@/content.config";
+import type { PrincipleNumber } from "@/resources/constants";
 import { digitalDocumentation } from "@/resources/content/dokumentation";
 import {
   type BindingRequirementsData,
@@ -34,8 +36,6 @@ import {
   publicationStatusQuestion,
 } from "@/routes/dokumentation/interoperability/values.ts";
 import { keyValueToMap } from "@/utils/keyValue.ts";
-import type { Prinzip } from "@/content.config";
-import type { PrincipleNumber } from "@/resources/constants";
 import { slugify } from "@/utils/utilFunctions";
 import type { ReactNode } from "react";
 import DocumentationActions from "./dokumentation/DocumentationActions";

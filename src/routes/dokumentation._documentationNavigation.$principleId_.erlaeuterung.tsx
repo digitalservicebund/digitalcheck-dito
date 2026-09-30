@@ -1,14 +1,14 @@
 import AspectPills from "@/components/AspectPills";
 import Badge from "@/components/Badge";
-import RichText from "@/components/RichText";
 import DetailsSummary from "@/components/DetailsSummary";
 import Heading from "@/components/Heading";
 import HelpButton from "@/components/HelpButton";
+import RichText from "@/components/RichText";
 import Textarea from "@/components/Textarea";
 import { methoden_fuenfPrinzipien } from "@/config/routes";
+import type { Prinzip } from "@/content.config";
 import type { PrincipleNumber } from "@/resources/constants";
 import { digitalDocumentation } from "@/resources/content/dokumentation";
-import type { Prinzip } from "@/content.config";
 import type { ReactNode } from "react";
 import { useEffect } from "react";
 import DocumentationActions from "./dokumentation/DocumentationActions";

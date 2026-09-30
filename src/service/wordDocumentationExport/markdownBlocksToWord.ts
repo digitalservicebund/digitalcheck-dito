@@ -8,8 +8,8 @@ import {
   Paragraph,
   TextRun,
 } from "docx";
-import { marked } from "marked";
 import type { Token, Tokens } from "marked";
+import { marked } from "marked";
 
 /**
  * Renders Markdown content into an array of Paragraph objects for docx.
@@ -20,9 +20,7 @@ export default function markdownBlocksToDocx(
   markdown: string,
   options?: Partial<IParagraphOptions>,
 ): Paragraph[] {
-  return marked
-    .lexer(markdown)
-    .flatMap((token) => blockToDocx(token, options));
+  return marked.lexer(markdown).flatMap((token) => blockToDocx(token, options));
 }
 
 const blockToDocx = (
@@ -85,7 +83,11 @@ const inlineToDocx = (
       if (!isExternal && normalizedUrl.startsWith("#")) {
         return new InternalHyperlink({
           children: [
-            new TextRun({ text: linkText, style: "Hyperlink", color: linkColor }),
+            new TextRun({
+              text: linkText,
+              style: "Hyperlink",
+              color: linkColor,
+            }),
           ],
           anchor: normalizedUrl.slice(1),
         });
@@ -104,7 +106,8 @@ const inlineToDocx = (
 const extractText = (tokens: Token[]): string =>
   tokens.reduce((acc, token) => {
     if (token.type === "link") return acc + extractText(token.tokens ?? []);
-    if ("tokens" in token && token.tokens) return acc + extractText(token.tokens);
+    if ("tokens" in token && token.tokens)
+      return acc + extractText(token.tokens);
     if ("text" in token) return acc + token.text;
     return acc;
   }, "");

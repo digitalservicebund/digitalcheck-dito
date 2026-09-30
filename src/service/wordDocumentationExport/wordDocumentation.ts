@@ -1,4 +1,5 @@
 import { templateDokumentationDerDigitaltauglichkeitInteroperabilitaet_docx } from "@/config/downloads";
+import type { Prinzip } from "@/content.config";
 import { documentationDocument } from "@/resources/content/documentation-document";
 import { digitalDocumentation } from "@/resources/content/dokumentation";
 import { contact } from "@/resources/content/shared/contact";
@@ -15,7 +16,6 @@ import {
   toParagraphPatch,
 } from "@/service/wordDocumentationExport/docxUtils.ts";
 import { formatBindingRequirements } from "@/service/wordDocumentationExport/wordInteroperabilityAssessment.ts";
-import type { Prinzip } from "@/content.config";
 import { slugify } from "@/utils/utilFunctions";
 import type { IPatch } from "docx";
 import { convertInchesToTwip, patchDocument, PatchType } from "docx";

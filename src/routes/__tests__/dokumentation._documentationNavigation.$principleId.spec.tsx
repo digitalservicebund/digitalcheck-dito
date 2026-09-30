@@ -7,13 +7,13 @@ import {
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
 } from "@/config/routes";
+import type { Prinzip, PrinzipAspekt } from "@/content.config";
 import { HelpPanelProvider } from "@/contexts/HelpPanelContext";
 import type {
   Route,
   RouteGroup,
 } from "@/routes/dokumentation/DocumentationNavigationContext.tsx";
 import { readDataFromLocalStorage } from "@/utils/localStorageVersioned";
-import type { Prinzip, PrinzipAspekt } from "@/content.config";
 import "@testing-library/jest-dom";
 import { act, render, screen } from "@testing-library/react";
 import type { UserEvent } from "@testing-library/user-event";

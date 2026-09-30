@@ -1,7 +1,7 @@
-import { defineCollection, getCollection } from "astro:content";
-import type { CollectionEntry } from "astro:content";
 import { glob } from "astro/loaders";
-import { z } from 'astro/zod'
+import { z } from "astro/zod";
+import type { CollectionEntry } from "astro:content";
+import { defineCollection, getCollection } from "astro:content";
 
 const prinzipAnwendungSchema = z.object({
   Titel: z.string(),
@@ -29,7 +29,7 @@ const prinzipSchema = z.object({
 });
 
 const prinzipien = defineCollection({
-  loader: glob({pattern:"**/*.md", base: "src/content/prinzipien/"}),
+  loader: glob({ pattern: "**/*.md", base: "src/content/prinzipien/" }),
   schema: prinzipSchema,
 });
 

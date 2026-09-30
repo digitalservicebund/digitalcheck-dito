@@ -9,11 +9,11 @@ import InlineNotice from "@/components/InlineNotice";
 import NumberedList from "@/components/NumberedList.tsx";
 import RichText from "@/components/RichText.tsx";
 import SupportBanner from "@/components/SupportBanner";
+import type { Prinzip } from "@/content.config";
 import { digitalDocumentation } from "@/resources/content/dokumentation";
 import { supportBanner } from "@/resources/content/shared/support-banner";
 import { DocumentationContinueActions } from "@/routes/dokumentation/DocumentationContinueActions.tsx";
 import { useWordDocumentation } from "@/service/wordDocumentationExport/wordDocumentation";
-import type { Prinzip } from "@/content.config";
 import {
   SimCardDownloadTwoTone,
   TipsAndUpdatesOutlined,

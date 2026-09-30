@@ -10,7 +10,6 @@ export const frontmatter = {
 const prinzips = (await getCollection("prinzipien"))
   .map((entry) => entry.data)
   .sort((a, b) => a.order - b.order);
-
 ---
 
 <Layout title={frontmatter.title} showProgressBar>

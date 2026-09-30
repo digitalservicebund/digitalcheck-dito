@@ -16,9 +16,9 @@ import {
   dokumentation_veroeffentlichung,
   dokumentation_zusammenfassung,
 } from "@/config/routes";
+import type { Prinzip } from "@/content.config";
 import { HelpPanelProvider } from "@/contexts/HelpPanelContext";
 import { digitalDocumentation } from "@/resources/content/dokumentation";
-import type { Prinzip } from "@/content.config";
 import { type ReactNode, useCallback, useMemo } from "react";
 import { twJoin } from "tailwind-merge";
 import {

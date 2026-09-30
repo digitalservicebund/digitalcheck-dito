@@ -11,7 +11,9 @@ interface Props {
 }
 
 const { principleId, stepTitle, isErlaeuterung } = Astro.props;
-const prinzips = (await getCollection("prinzipien")).map((entry) => entry.data).sort((a,b) => a.order - b.order);
+const prinzips = (await getCollection("prinzipien"))
+  .map((entry) => entry.data)
+  .sort((a, b) => a.order - b.order);
 ---
 
 <Layout title={`Dokumentation: ${stepTitle}`} showProgressBar>

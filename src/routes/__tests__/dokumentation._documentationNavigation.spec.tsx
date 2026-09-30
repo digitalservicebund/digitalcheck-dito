@@ -17,6 +17,7 @@ import "@testing-library/jest-dom";
 import { act, render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import type { Prinzip } from "@/content.config";
 import { stubResizingFunctionality } from "@/routes/__tests__/utils/stubResizingFunctionality.ts";
 import { LayoutWithDocumentationNavigation } from "@/routes/dokumentation._documentationNavigation";
 import {
@@ -24,7 +25,6 @@ import {
   useDocumentationNavigation,
 } from "@/routes/dokumentation/DocumentationNavigationContext";
 import { readDataFromLocalStorage } from "@/utils/localStorageVersioned";
-import type { Prinzip } from "@/content.config";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import type {
   DocumentationData,

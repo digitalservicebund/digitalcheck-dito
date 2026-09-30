@@ -1,8 +1,8 @@
 import Badge from "@/components/Badge";
-import RichText from "@/components/RichText";
 import Heading from "@/components/Heading";
 import HelpButton from "@/components/HelpButton";
 import RadioGroup from "@/components/RadioGroup";
+import RichText from "@/components/RichText";
 import { methoden_fuenfPrinzipien } from "@/config/routes";
 import type { PrincipleNumber } from "@/resources/constants";
 import { digitalDocumentation } from "@/resources/content/dokumentation";

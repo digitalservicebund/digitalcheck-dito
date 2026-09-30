@@ -8,10 +8,10 @@ import {
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
 } from "@/config/routes";
+import type { Prinzip, PrinzipAspekt } from "@/content.config";
 import { HelpPanelProvider } from "@/contexts/HelpPanelContext";
 import type { digitalDocumentation } from "@/resources/content/dokumentation";
 import { readDataFromLocalStorage } from "@/utils/localStorageVersioned";
-import type { Prinzip, PrinzipAspekt } from "@/content.config";
 import "@testing-library/jest-dom";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import type { UserEvent } from "@testing-library/user-event";
