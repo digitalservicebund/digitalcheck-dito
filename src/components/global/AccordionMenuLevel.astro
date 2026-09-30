@@ -21,19 +21,19 @@ function isFirstLevelChildWithChildren(
 function arrowHoverStyle(isCurrent = false) {
   return isCurrent
     ? "hover:bg-(--kern-color-white)"
-    : "hover:bg-(--kern-color-action-pressed) hover:[&>.kern-icon]:bg-(--kern-color-white) peer-hover:[&>.kern-icon]:bg-(--kern-color-white)";
+    : "hover:bg-kern-darkblue-900 hover:[&>.kern-icon]:bg-(--kern-color-white) peer-hover:[&>.kern-icon]:bg-(--kern-color-white)";
 }
 
 function linkHoverStyle(isCurrent = false) {
   return isCurrent
-    ? "bg-blue-300 font-bold"
-    : "hover:bg-kern-darkblue-750 hover:text-white";
+    ? "bg-kern-darkblue-050 font-bold"
+    : "hover:bg-kern-darkblue-800 hover:text-white";
 }
 
 function headerStyle(isCurrent = false) {
   return isCurrent
     ? "bg-blue-300 font-bold"
-    : "has-[>button:hover]:bg-kern-darkblue-750 has-[>button:hover]:[&>a]:text-white has-[>a:hover]:bg-kern-darkblue-750 has-[>a:hover]:text-white";
+    : "has-[>button:hover]:bg-kern-darkblue-800 has-[>button:hover]:[&>a]:text-white has-[>a:hover]:bg-kern-darkblue-800 has-[>a:hover]:text-white";
 }
 
 function indentStyle(currentLevel: number) {
