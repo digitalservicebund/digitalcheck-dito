@@ -30,7 +30,7 @@ export const bundeslaender = {
   sitemap: true,
   isStagingOnly: false,
   navOrder: null,
-  navLabel: null,
+  navLabel: "Bundesländer",
 } as const;
 
 export const dasIstNeu = {
@@ -228,7 +228,7 @@ export const grundlagen_normenkontrollrat = {
   sitemap: true,
   isStagingOnly: false,
   navOrder: null,
-  navLabel: null,
+  navLabel: "NKR",
 } as const;
 
 export const home = {
@@ -261,7 +261,7 @@ export const interoperabel = {
   sitemap: true,
   isStagingOnly: false,
   navOrder: null,
-  navLabel: null,
+  navLabel: "EU-Interoperabilität",
 } as const;
 
 export const interoperabel_faq = {
@@ -315,6 +315,17 @@ export const interoperabel_nationaleKontaktstelle = {
   parent: interoperabel,
   sitemap: true,
   isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const kontakt = {
+  key: "kontakt",
+  path: "/kontakt",
+  title: "Kontakt",
+  parent: null,
+  sitemap: true,
+  isStagingOnly: true,
   navOrder: null,
   navLabel: null,
 } as const;
@@ -436,6 +447,7 @@ export const allRoutes = [
   interoperabel_loesungen_coreVocabularies,
   interoperabel_loesungen_dcatAp,
   interoperabel_nationaleKontaktstelle,
+  kontakt,
   methoden,
   methoden_fuenfPrinzipien,
   sitemap,

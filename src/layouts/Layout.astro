@@ -4,6 +4,7 @@ import ProgressBar from "@/components/global/ProgressBar.astro";
 import "@/styles/globals.css";
 import Footer from "@/layout/Footer";
 import PageHeader from "@/layout/PageHeader";
+import NewPageHeader from "@/components/global/PageHeader.astro";
 import { siteMeta } from "@/resources/content/shared/meta";
 import { isDevelopment, isProduction } from "@/config/stage";
 import firaSansRegularUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Regular.woff2?url";
@@ -109,7 +110,11 @@ const showSectionSidebar = !!sectionRoot && hasVisibleChildren(sectionRoot);
     ></script>
   </head>
   <body class="flex min-h-screen flex-col">
-    <PageHeader client:load currentPath={currentPath} />
+    {isDevelopment ? (
+      <NewPageHeader />
+    ) : (
+      <PageHeader client:load currentPath={currentPath} />
+    )}
 
     {isDevelopment && showSectionSidebar ? (
       <div class="h-full min-[900px]:grid min-[900px]:grid-cols-[264px_minmax(0,1fr)]">

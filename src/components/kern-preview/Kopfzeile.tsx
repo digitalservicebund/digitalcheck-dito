@@ -1,6 +1,5 @@
 import { isProduction, stage } from "@/config/stage";
 import { twJoin } from "tailwind-merge";
-import "./Kopfzeile.css";
 
 /**
  * The "Official Website" banner, extracted from the web component provided by
