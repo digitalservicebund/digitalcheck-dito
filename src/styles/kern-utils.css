@@ -58,3 +58,364 @@
 @utility kern-stack-3xl {
   row-gap: var(--kern-metric-space-3x-large);
 }
+
+/*
+  Exposes the KERN design system's color palette as Tailwind utilities
+  (e.g. bg-kern-red-500, text-kern-grey-800, border-kern-violet-300).
+*/
+@theme {
+  --color-kern-black: var(--kern-color-black);
+  --color-kern-white: var(--kern-color-white);
+
+  --color-kern-grey-025: var(--kern-color-grey-025);
+  --color-kern-grey-050: var(--kern-color-grey-050);
+  --color-kern-grey-100: var(--kern-color-grey-100);
+  --color-kern-grey-150: var(--kern-color-grey-150);
+  --color-kern-grey-200: var(--kern-color-grey-200);
+  --color-kern-grey-250: var(--kern-color-grey-250);
+  --color-kern-grey-300: var(--kern-color-grey-300);
+  --color-kern-grey-350: var(--kern-color-grey-350);
+  --color-kern-grey-400: var(--kern-color-grey-400);
+  --color-kern-grey-450: var(--kern-color-grey-450);
+  --color-kern-grey-500: var(--kern-color-grey-500);
+  --color-kern-grey-550: var(--kern-color-grey-550);
+  --color-kern-grey-600: var(--kern-color-grey-600);
+  --color-kern-grey-650: var(--kern-color-grey-650);
+  --color-kern-grey-700: var(--kern-color-grey-700);
+  --color-kern-grey-750: var(--kern-color-grey-750);
+  --color-kern-grey-800: var(--kern-color-grey-800);
+  --color-kern-grey-850: var(--kern-color-grey-850);
+  --color-kern-grey-900: var(--kern-color-grey-900);
+  --color-kern-grey-950: var(--kern-color-grey-950);
+
+  --color-kern-red-025: var(--kern-color-red-025);
+  --color-kern-red-050: var(--kern-color-red-050);
+  --color-kern-red-100: var(--kern-color-red-100);
+  --color-kern-red-150: var(--kern-color-red-150);
+  --color-kern-red-200: var(--kern-color-red-200);
+  --color-kern-red-250: var(--kern-color-red-250);
+  --color-kern-red-300: var(--kern-color-red-300);
+  --color-kern-red-350: var(--kern-color-red-350);
+  --color-kern-red-400: var(--kern-color-red-400);
+  --color-kern-red-450: var(--kern-color-red-450);
+  --color-kern-red-500: var(--kern-color-red-500);
+  --color-kern-red-550: var(--kern-color-red-550);
+  --color-kern-red-600: var(--kern-color-red-600);
+  --color-kern-red-650: var(--kern-color-red-650);
+  --color-kern-red-700: var(--kern-color-red-700);
+  --color-kern-red-750: var(--kern-color-red-750);
+  --color-kern-red-800: var(--kern-color-red-800);
+  --color-kern-red-850: var(--kern-color-red-850);
+  --color-kern-red-900: var(--kern-color-red-900);
+  --color-kern-red-950: var(--kern-color-red-950);
+
+  --color-kern-orange-025: var(--kern-color-orange-025);
+  --color-kern-orange-050: var(--kern-color-orange-050);
+  --color-kern-orange-100: var(--kern-color-orange-100);
+  --color-kern-orange-150: var(--kern-color-orange-150);
+  --color-kern-orange-200: var(--kern-color-orange-200);
+  --color-kern-orange-250: var(--kern-color-orange-250);
+  --color-kern-orange-300: var(--kern-color-orange-300);
+  --color-kern-orange-350: var(--kern-color-orange-350);
+  --color-kern-orange-400: var(--kern-color-orange-400);
+  --color-kern-orange-450: var(--kern-color-orange-450);
+  --color-kern-orange-500: var(--kern-color-orange-500);
+  --color-kern-orange-550: var(--kern-color-orange-550);
+  --color-kern-orange-600: var(--kern-color-orange-600);
+  --color-kern-orange-650: var(--kern-color-orange-650);
+  --color-kern-orange-700: var(--kern-color-orange-700);
+  --color-kern-orange-750: var(--kern-color-orange-750);
+  --color-kern-orange-800: var(--kern-color-orange-800);
+  --color-kern-orange-850: var(--kern-color-orange-850);
+  --color-kern-orange-900: var(--kern-color-orange-900);
+  --color-kern-orange-950: var(--kern-color-orange-950);
+
+  --color-kern-yellow-025: var(--kern-color-yellow-025);
+  --color-kern-yellow-050: var(--kern-color-yellow-050);
+  --color-kern-yellow-100: var(--kern-color-yellow-100);
+  --color-kern-yellow-150: var(--kern-color-yellow-150);
+  --color-kern-yellow-200: var(--kern-color-yellow-200);
+  --color-kern-yellow-250: var(--kern-color-yellow-250);
+  --color-kern-yellow-300: var(--kern-color-yellow-300);
+  --color-kern-yellow-350: var(--kern-color-yellow-350);
+  --color-kern-yellow-400: var(--kern-color-yellow-400);
+  --color-kern-yellow-450: var(--kern-color-yellow-450);
+  --color-kern-yellow-500: var(--kern-color-yellow-500);
+  --color-kern-yellow-550: var(--kern-color-yellow-550);
+  --color-kern-yellow-600: var(--kern-color-yellow-600);
+  --color-kern-yellow-650: var(--kern-color-yellow-650);
+  --color-kern-yellow-700: var(--kern-color-yellow-700);
+  --color-kern-yellow-750: var(--kern-color-yellow-750);
+  --color-kern-yellow-800: var(--kern-color-yellow-800);
+  --color-kern-yellow-850: var(--kern-color-yellow-850);
+  --color-kern-yellow-900: var(--kern-color-yellow-900);
+  --color-kern-yellow-950: var(--kern-color-yellow-950);
+
+  --color-kern-green-025: var(--kern-color-green-025);
+  --color-kern-green-050: var(--kern-color-green-050);
+  --color-kern-green-100: var(--kern-color-green-100);
+  --color-kern-green-150: var(--kern-color-green-150);
+  --color-kern-green-200: var(--kern-color-green-200);
+  --color-kern-green-250: var(--kern-color-green-250);
+  --color-kern-green-300: var(--kern-color-green-300);
+  --color-kern-green-350: var(--kern-color-green-350);
+  --color-kern-green-400: var(--kern-color-green-400);
+  --color-kern-green-450: var(--kern-color-green-450);
+  --color-kern-green-500: var(--kern-color-green-500);
+  --color-kern-green-550: var(--kern-color-green-550);
+  --color-kern-green-600: var(--kern-color-green-600);
+  --color-kern-green-650: var(--kern-color-green-650);
+  --color-kern-green-700: var(--kern-color-green-700);
+  --color-kern-green-750: var(--kern-color-green-750);
+  --color-kern-green-800: var(--kern-color-green-800);
+  --color-kern-green-850: var(--kern-color-green-850);
+  --color-kern-green-900: var(--kern-color-green-900);
+  --color-kern-green-950: var(--kern-color-green-950);
+
+  --color-kern-turquois-025: var(--kern-color-turquois-025);
+  --color-kern-turquois-050: var(--kern-color-turquois-050);
+  --color-kern-turquois-100: var(--kern-color-turquois-100);
+  --color-kern-turquois-150: var(--kern-color-turquois-150);
+  --color-kern-turquois-200: var(--kern-color-turquois-200);
+  --color-kern-turquois-250: var(--kern-color-turquois-250);
+  --color-kern-turquois-300: var(--kern-color-turquois-300);
+  --color-kern-turquois-350: var(--kern-color-turquois-350);
+  --color-kern-turquois-400: var(--kern-color-turquois-400);
+  --color-kern-turquois-450: var(--kern-color-turquois-450);
+  --color-kern-turquois-500: var(--kern-color-turquois-500);
+  --color-kern-turquois-550: var(--kern-color-turquois-550);
+  --color-kern-turquois-600: var(--kern-color-turquois-600);
+  --color-kern-turquois-650: var(--kern-color-turquois-650);
+  --color-kern-turquois-700: var(--kern-color-turquois-700);
+  --color-kern-turquois-750: var(--kern-color-turquois-750);
+  --color-kern-turquois-800: var(--kern-color-turquois-800);
+  --color-kern-turquois-850: var(--kern-color-turquois-850);
+  --color-kern-turquois-900: var(--kern-color-turquois-900);
+  --color-kern-turquois-950: var(--kern-color-turquois-950);
+
+  --color-kern-lightblue-025: var(--kern-color-lightblue-025);
+  --color-kern-lightblue-050: var(--kern-color-lightblue-050);
+  --color-kern-lightblue-100: var(--kern-color-lightblue-100);
+  --color-kern-lightblue-150: var(--kern-color-lightblue-150);
+  --color-kern-lightblue-200: var(--kern-color-lightblue-200);
+  --color-kern-lightblue-250: var(--kern-color-lightblue-250);
+  --color-kern-lightblue-300: var(--kern-color-lightblue-300);
+  --color-kern-lightblue-350: var(--kern-color-lightblue-350);
+  --color-kern-lightblue-400: var(--kern-color-lightblue-400);
+  --color-kern-lightblue-450: var(--kern-color-lightblue-450);
+  --color-kern-lightblue-500: var(--kern-color-lightblue-500);
+  --color-kern-lightblue-550: var(--kern-color-lightblue-550);
+  --color-kern-lightblue-600: var(--kern-color-lightblue-600);
+  --color-kern-lightblue-650: var(--kern-color-lightblue-650);
+  --color-kern-lightblue-700: var(--kern-color-lightblue-700);
+  --color-kern-lightblue-750: var(--kern-color-lightblue-750);
+  --color-kern-lightblue-800: var(--kern-color-lightblue-800);
+  --color-kern-lightblue-850: var(--kern-color-lightblue-850);
+  --color-kern-lightblue-900: var(--kern-color-lightblue-900);
+  --color-kern-lightblue-950: var(--kern-color-lightblue-950);
+
+  --color-kern-darkblue-025: var(--kern-color-darkblue-025);
+  --color-kern-darkblue-050: var(--kern-color-darkblue-050);
+  --color-kern-darkblue-100: var(--kern-color-darkblue-100);
+  --color-kern-darkblue-150: var(--kern-color-darkblue-150);
+  --color-kern-darkblue-200: var(--kern-color-darkblue-200);
+  --color-kern-darkblue-250: var(--kern-color-darkblue-250);
+  --color-kern-darkblue-300: var(--kern-color-darkblue-300);
+  --color-kern-darkblue-350: var(--kern-color-darkblue-350);
+  --color-kern-darkblue-400: var(--kern-color-darkblue-400);
+  --color-kern-darkblue-450: var(--kern-color-darkblue-450);
+  --color-kern-darkblue-500: var(--kern-color-darkblue-500);
+  --color-kern-darkblue-550: var(--kern-color-darkblue-550);
+  --color-kern-darkblue-600: var(--kern-color-darkblue-600);
+  --color-kern-darkblue-650: var(--kern-color-darkblue-650);
+  --color-kern-darkblue-700: var(--kern-color-darkblue-700);
+  --color-kern-darkblue-750: var(--kern-color-darkblue-750);
+  --color-kern-darkblue-800: var(--kern-color-darkblue-800);
+  --color-kern-darkblue-850: var(--kern-color-darkblue-850);
+  --color-kern-darkblue-900: var(--kern-color-darkblue-900);
+  --color-kern-darkblue-950: var(--kern-color-darkblue-950);
+
+  --color-kern-violet-025: var(--kern-color-violet-025);
+  --color-kern-violet-050: var(--kern-color-violet-050);
+  --color-kern-violet-100: var(--kern-color-violet-100);
+  --color-kern-violet-150: var(--kern-color-violet-150);
+  --color-kern-violet-200: var(--kern-color-violet-200);
+  --color-kern-violet-250: var(--kern-color-violet-250);
+  --color-kern-violet-300: var(--kern-color-violet-300);
+  --color-kern-violet-350: var(--kern-color-violet-350);
+  --color-kern-violet-400: var(--kern-color-violet-400);
+  --color-kern-violet-450: var(--kern-color-violet-450);
+  --color-kern-violet-500: var(--kern-color-violet-500);
+  --color-kern-violet-550: var(--kern-color-violet-550);
+  --color-kern-violet-600: var(--kern-color-violet-600);
+  --color-kern-violet-650: var(--kern-color-violet-650);
+  --color-kern-violet-700: var(--kern-color-violet-700);
+  --color-kern-violet-750: var(--kern-color-violet-750);
+  --color-kern-violet-800: var(--kern-color-violet-800);
+  --color-kern-violet-850: var(--kern-color-violet-850);
+  --color-kern-violet-900: var(--kern-color-violet-900);
+  --color-kern-violet-950: var(--kern-color-violet-950);
+
+  --color-kern-limette-025: var(--kern-color-limette-025);
+  --color-kern-limette-050: var(--kern-color-limette-050);
+  --color-kern-limette-100: var(--kern-color-limette-100);
+  --color-kern-limette-150: var(--kern-color-limette-150);
+  --color-kern-limette-200: var(--kern-color-limette-200);
+  --color-kern-limette-250: var(--kern-color-limette-250);
+  --color-kern-limette-300: var(--kern-color-limette-300);
+  --color-kern-limette-350: var(--kern-color-limette-350);
+  --color-kern-limette-400: var(--kern-color-limette-400);
+  --color-kern-limette-450: var(--kern-color-limette-450);
+  --color-kern-limette-500: var(--kern-color-limette-500);
+  --color-kern-limette-550: var(--kern-color-limette-550);
+  --color-kern-limette-600: var(--kern-color-limette-600);
+  --color-kern-limette-650: var(--kern-color-limette-650);
+  --color-kern-limette-700: var(--kern-color-limette-700);
+  --color-kern-limette-750: var(--kern-color-limette-750);
+  --color-kern-limette-800: var(--kern-color-limette-800);
+  --color-kern-limette-850: var(--kern-color-limette-850);
+  --color-kern-limette-900: var(--kern-color-limette-900);
+  --color-kern-limette-950: var(--kern-color-limette-950);
+
+  --color-kern-neutral-025: var(--kern-color-neutral-025);
+  --color-kern-neutral-050: var(--kern-color-neutral-050);
+  --color-kern-neutral-100: var(--kern-color-neutral-100);
+  --color-kern-neutral-150: var(--kern-color-neutral-150);
+  --color-kern-neutral-200: var(--kern-color-neutral-200);
+  --color-kern-neutral-250: var(--kern-color-neutral-250);
+  --color-kern-neutral-300: var(--kern-color-neutral-300);
+  --color-kern-neutral-350: var(--kern-color-neutral-350);
+  --color-kern-neutral-400: var(--kern-color-neutral-400);
+  --color-kern-neutral-450: var(--kern-color-neutral-450);
+  --color-kern-neutral-500: var(--kern-color-neutral-500);
+  --color-kern-neutral-550: var(--kern-color-neutral-550);
+  --color-kern-neutral-600: var(--kern-color-neutral-600);
+  --color-kern-neutral-650: var(--kern-color-neutral-650);
+  --color-kern-neutral-700: var(--kern-color-neutral-700);
+  --color-kern-neutral-750: var(--kern-color-neutral-750);
+  --color-kern-neutral-800: var(--kern-color-neutral-800);
+  --color-kern-neutral-850: var(--kern-color-neutral-850);
+  --color-kern-neutral-900: var(--kern-color-neutral-900);
+  --color-kern-neutral-950: var(--kern-color-neutral-950);
+}
+
+/*
+  Exposes the KERN design system's contextual/semantic colors as Tailwind
+  utilities (e.g. bg-kern-feedback-danger, text-kern-layout-text-muted).
+  See: https://www.kern-ux.de/design-system/foundations/farbe/kontextuell
+  Where a "-contextual" variant exists, it's used as the source (it adapts
+  automatically to the surrounding contextual scope) and the "-contextual"
+  suffix is dropped from the utility name.
+*/
+@theme {
+  /* Action */
+  --color-kern-action-default: var(--kern-color-action-default-contextual);
+  --color-kern-action-focus-default: var(--kern-color-action-focus-default-contextual);
+  --color-kern-action-on-default: var(--kern-color-action-on-default-contextual);
+  --color-kern-action-visited: var(--kern-color-action-visited-contextual);
+  --color-kern-action-state-indicator-default: var(
+    --kern-color-action-state-indicator-default-contextual
+  );
+  --color-kern-action-state-indicator-tint: var(
+    --kern-color-action-state-indicator-tint-contextual
+  );
+  --color-kern-action-state-indicator-shade: var(
+    --kern-color-action-state-indicator-shade
+  );
+  --color-kern-action-state-indicator-shade-active: var(
+    --kern-color-action-state-indicator-shade-active
+  );
+  --color-kern-action-state-indicator-shade-hover: var(
+    --kern-color-action-state-indicator-shade-hover
+  );
+  --color-kern-action-state-indicator-tint-active: var(
+    --kern-color-action-state-indicator-tint-active-opacity
+  );
+  --color-kern-action-state-indicator-tint-hover: var(
+    --kern-color-action-state-indicator-tint-hover-opacity
+  );
+
+  /* Decorative */
+  --color-kern-decorative-border: var(--kern-color-decorative-border-contextual);
+  --color-kern-decorative-border-level-1: var(--kern-color-decorative-border-level-1);
+  --color-kern-decorative-border-level-2: var(--kern-color-decorative-border-level-2);
+  --color-kern-decorative-brand: var(--kern-color-decorative-brand-contextual);
+
+  /* Feedback */
+  --color-kern-feedback-default: var(--kern-color-feedback-default-contextual);
+  --color-kern-feedback-default-background: var(
+    --kern-color-feedback-default-background-contextual
+  );
+  --color-kern-feedback-danger: var(--kern-color-feedback-danger-contextual);
+  --color-kern-feedback-danger-background: var(
+    --kern-color-feedback-danger-background-contextual
+  );
+  --color-kern-feedback-info: var(--kern-color-feedback-info-contextual);
+  --color-kern-feedback-info-background: var(
+    --kern-color-feedback-info-background-contextual
+  );
+  --color-kern-feedback-success: var(--kern-color-feedback-success-contextual);
+  --color-kern-feedback-success-background: var(
+    --kern-color-feedback-success-background-contextual
+  );
+  --color-kern-feedback-warning: var(--kern-color-feedback-warning-contextual);
+  --color-kern-feedback-warning-background: var(
+    --kern-color-feedback-warning-background-contextual
+  );
+
+  /* Form */
+  --color-kern-form-input-background: var(--kern-color-form-input-background);
+  --color-kern-form-input-border: var(--kern-color-form-input-border-contextual);
+
+  /* Layout */
+  --color-kern-layout-background-default: var(
+    --kern-color-layout-background-default-contextual
+  );
+  --color-kern-layout-background-default-surface: var(
+    --kern-color-layout-background-default-surface
+  );
+  --color-kern-layout-background-level-1: var(--kern-color-layout-background-level-1);
+  --color-kern-layout-background-level-1-surface: var(
+    --kern-color-layout-background-level-1-surface
+  );
+  --color-kern-layout-background-level-2: var(--kern-color-layout-background-level-2);
+  --color-kern-layout-background-level-2-surface: var(
+    --kern-color-layout-background-level-2-surface
+  );
+  --color-kern-layout-background-hued: var(--kern-color-layout-background-hued);
+  --color-kern-layout-background-inverted: var(--kern-color-layout-background-inverted);
+  --color-kern-layout-background-overlay: var(--kern-color-layout-background-overlay);
+  --color-kern-layout-layer-surface: var(--kern-color-layout-layer-surface-contextual);
+  --color-kern-layout-border: var(--kern-color-layout-border-contextual);
+  --color-kern-layout-border-level-1: var(--kern-color-layout-border-level-1);
+  --color-kern-layout-border-level-2: var(--kern-color-layout-border-level-2);
+  --color-kern-layout-text-default: var(--kern-color-layout-text-default-contextual);
+  --color-kern-layout-text-inverse: var(--kern-color-layout-text-inverse-contextual);
+  --color-kern-layout-text-muted: var(--kern-color-layout-text-muted-contextual);
+}
+
+/*
+  Exposes the KERN design system's spacing scale as Tailwind spacing tokens
+  (e.g. p-kern-md, gap-kern-lg, m-kern-3xl). Since Tailwind derives padding,
+  margin and gap utilities from the same `--spacing-*` theme namespace, this
+  also makes the scale available to width/height/inset/etc. utilities.
+*/
+@theme {
+  --spacing-kern-none: var(--kern-metric-space-none);
+  --spacing-kern-xxs: var(--kern-metric-space-2x-small);
+  --spacing-kern-xs: var(--kern-metric-space-x-small);
+  --spacing-kern-sm: var(--kern-metric-space-small);
+  --spacing-kern-md: var(--kern-metric-space-default);
+  --spacing-kern-lg: var(--kern-metric-space-large);
+  --spacing-kern-xl: var(--kern-metric-space-x-large);
+  --spacing-kern-2xl: var(--kern-metric-space-2x-large);
+  --spacing-kern-3xl: var(--kern-metric-space-3x-large);
+  --spacing-kern-4xl: var(--kern-metric-space-4x-large);
+  --spacing-kern-5xl: var(--kern-metric-space-5x-large);
+  --spacing-kern-6xl: var(--kern-metric-space-6x-large);
+  --spacing-kern-7xl: var(--kern-metric-space-7x-large);
+  --spacing-kern-8xl: var(--kern-metric-space-8x-large);
+  --spacing-kern-9xl: var(--kern-metric-space-9x-large);
+  --spacing-kern-10xl: var(--kern-metric-space-10x-large);
+  --spacing-kern-11xl: var(--kern-metric-space-11x-large);
+}
