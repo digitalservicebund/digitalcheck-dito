@@ -47,24 +47,6 @@ exports[`Footer Component > Renders correctly 1`] = `
                
               <a
                 class="increase-tap-area kern-link kern-link--small"
-                href="/unterstuetzung"
-              >
-                Alle Unterstützungsangebote
-              </a>
-            </li>
-            <li>
-               
-              <a
-                class="increase-tap-area kern-link kern-link--small"
-                href="/unterstuetzung?tab=online-schulungen#angebote"
-              >
-                Schulungen
-              </a>
-            </li>
-            <li>
-               
-              <a
-                class="increase-tap-area kern-link kern-link--small"
                 href="/interoperabel/nationale-kontaktstelle"
               >
                 Nationale Kontaktstelle für ein interoperables Europa (2024/903 Art. 17)
