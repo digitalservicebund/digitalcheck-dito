@@ -111,6 +111,16 @@
     @apply kern-heading-small;
   }
 
+  /* default padding for sections */
+  section {
+    padding-block: var(--kern-metric-dimension-3x-large);
+
+    /* collapse padding for consecutive sections with no background */
+    &:not(.breakout) + &:not(.breakout) {
+      padding-top: 0;
+    }
+  }
+
   a:not(.link-unstyled, .kern-link) {
     @apply text-link;
 
