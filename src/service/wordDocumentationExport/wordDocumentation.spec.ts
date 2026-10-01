@@ -1,12 +1,12 @@
 import "./mockDocx.ts"; // set up mocks first
 
+import type { Prinzip } from "@/content.config";
 import { documentationDocument } from "@/resources/content/documentation-document";
 import { digitalDocumentation } from "@/resources/content/dokumentation";
 import type { DocumentationData } from "@/routes/dokumentation/documentationDataSchema";
-import type { PrinzipWithAspekte } from "@/utils/strapiData.types";
 import { PatchType } from "docx";
 import { describe, expect, it, vi } from "vitest";
-import { getTextFromTextRun, makeNode } from "./testUtils.ts";
+import { getTextFromTextRun } from "./testUtils.ts";
 import { buildPrinciplePatches } from "./wordDocumentation.ts";
 
 const { placeholderOptional } = documentationDocument;
@@ -14,31 +14,27 @@ const { principlePages } = digitalDocumentation;
 const [POSITIVE_ANSWER, NEGATIVE_ANSWER, IRRELEVANT_ANSWER] =
   principlePages.radioOptions;
 
-const prinzips: PrinzipWithAspekte[] = [
+const prinzips: Prinzip[] = [
   {
     documentId: "p1",
     Name: "Principle One",
-    Beschreibung: [makeNode("DESC1")],
-    Hilfetext: [makeNode("DESC1")],
+    Kurzbeschreibung: "",
+    Hilfetext: "DESC1",
+    Erklaerungshilfe: "",
     Nummer: 1,
     order: 1,
     URLBezeichnung: "principle-one",
-    Kurzbezeichnung: "P1",
     Aspekte: [
       {
         Titel: "Aspect P1A1",
         Kurzbezeichnung: "P1A1",
-        Beschreibung: "",
-        Text: [makeNode("P1A1 TEXT")],
-        Nummer: "",
+        Text: "P1A1 TEXT",
         Anwendung: [],
       },
       {
         Titel: "Aspect P1A2",
         Kurzbezeichnung: "P1A2",
-        Beschreibung: "",
-        Text: [makeNode("P1A2 TEXT")],
-        Nummer: "",
+        Text: "P1A2 TEXT",
         Anwendung: [],
       },
     ],
@@ -46,27 +42,23 @@ const prinzips: PrinzipWithAspekte[] = [
   {
     documentId: "p2",
     Name: "Principle Two",
-    Beschreibung: [makeNode("DESC2")],
-    Hilfetext: [makeNode("DESC2")],
+    Kurzbeschreibung: "",
+    Hilfetext: "DESC2",
+    Erklaerungshilfe: "",
     Nummer: 2,
     order: 2,
     URLBezeichnung: "principle-two",
-    Kurzbezeichnung: "P2",
     Aspekte: [
       {
         Titel: "Aspect P2A1",
         Kurzbezeichnung: "P2A1",
-        Beschreibung: "",
-        Text: [makeNode("P2A1 TEXT")],
-        Nummer: "",
+        Text: "P2A1 TEXT",
         Anwendung: [],
       },
       {
         Titel: "Aspect P2A2",
         Kurzbezeichnung: "P2A2",
-        Beschreibung: "",
-        Text: [makeNode("P2A2 TEXT")],
-        Nummer: "",
+        Text: "P2A2 TEXT",
         Anwendung: [],
       },
     ],

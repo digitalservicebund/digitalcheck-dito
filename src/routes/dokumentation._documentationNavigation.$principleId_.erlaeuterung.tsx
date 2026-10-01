@@ -1,13 +1,14 @@
 import AspectPills from "@/components/AspectPills";
 import Badge from "@/components/Badge";
-import { BlocksRenderer } from "@/components/BlocksRenderer";
 import DetailsSummary from "@/components/DetailsSummary";
 import Heading from "@/components/Heading";
 import HelpButton from "@/components/HelpButton";
+import RichText from "@/components/RichText";
 import Textarea from "@/components/Textarea";
 import { methoden_fuenfPrinzipien } from "@/config/routes";
+import type { Prinzip } from "@/content.config";
+import type { PrincipleNumber } from "@/resources/constants";
 import { digitalDocumentation } from "@/resources/content/dokumentation";
-import type { PrinzipWithAspekte } from "@/utils/strapiData.types";
 import type { ReactNode } from "react";
 import { useEffect } from "react";
 import DocumentationActions from "./dokumentation/DocumentationActions";
@@ -21,7 +22,7 @@ const { radioOptions } = digitalDocumentation.principlePages;
 
 type DocumentationPrincipleErlaeuterungFormProps = Readonly<{
   answer: string;
-  prinzip: PrinzipWithAspekte;
+  prinzip: Prinzip;
   principleData: Principle;
   isPositive: boolean;
   isIrrelevant: boolean;
@@ -110,7 +111,7 @@ function DocumentationPrincipleErlaeuterungForm({
                       key={aspect.Kurzbezeichnung}
                       title={aspect.Kurzbezeichnung}
                     >
-                      {aspect.Text && <BlocksRenderer content={aspect.Text} />}
+                      {aspect.Text && <RichText markdown={aspect.Text} />}
                     </DetailsSummary>
                   ))}
                 </HelpButton>
@@ -124,7 +125,7 @@ function DocumentationPrincipleErlaeuterungForm({
             description={
               isPositive &&
               prinzip.Erklaerungshilfe && (
-                <BlocksRenderer content={prinzip.Erklaerungshilfe} />
+                <RichText markdown={prinzip.Erklaerungshilfe} />
               )
             }
             warningInsteadOfError
@@ -192,7 +193,10 @@ export function DocumentationPrincipleErlaeuterung({
   return (
     <div className="space-y-48">
       <div className="space-y-24">
-        <Badge principleNumber={prinzip.Nummer} className="mb-8">
+        <Badge
+          principleNumber={prinzip.Nummer as PrincipleNumber}
+          className="mb-8"
+        >
           Prinzip {prinzip.order}
         </Badge>
         <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
@@ -201,7 +205,7 @@ export function DocumentationPrincipleErlaeuterung({
             sectionId="prinzip"
             title={`Hinweis zu „${prinzip.Name}“`}
           >
-            <BlocksRenderer content={prinzip.Hilfetext!} />
+            <RichText markdown={prinzip.Hilfetext} />
             <a
               href={
                 methoden_fuenfPrinzipien.path + "/" + prinzip.URLBezeichnung
@@ -213,7 +217,7 @@ export function DocumentationPrincipleErlaeuterung({
         </Heading>
 
         {prinzip.Kurzbeschreibung && (
-          <BlocksRenderer content={prinzip.Kurzbeschreibung} />
+          <RichText markdown={prinzip.Kurzbeschreibung} />
         )}
 
         <div className="rounded-lg bg-blue-300 p-24">

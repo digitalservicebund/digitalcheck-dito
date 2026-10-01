@@ -7,7 +7,7 @@ import {
   VisibilityTwoTone,
 } from "@digitalservicebund/icons";
 import Badge from "@/components/Badge.tsx";
-import { BlocksRenderer } from "@/components/BlocksRenderer.tsx";
+import RichText from "@/components/RichText.tsx";
 import { LinkButton } from "@/components/Button.tsx";
 import Container from "@/components/Container";
 import { Feature, FeatureList } from "@/components/FeatureList.tsx";
@@ -15,16 +15,17 @@ import Heading from "@/components/Heading";
 import Hero from "@/components/Hero";
 import InfoBox from "@/components/InfoBox.tsx";
 import { PrinciplePosterBox } from "@/components/PrinciplePosterBox";
-import RichText from "@/components/RichText.tsx";
 import { methodsFivePrinciples } from "@/resources/content/methode-fuenf-prinzipien";
-import { fetchPrinzipsWithExamples } from "@/utils/strapiData.server";
 import { ZFL_BASE_URL, ZFL_PATH_FLUSSDIAGRAMME } from "@/resources/constants";
+import { getCollection } from "astro:content";
 
 export const frontmatter = {
   title: "Fünf Prinzipien",
 };
 
-const prinzips = await fetchPrinzipsWithExamples();
+const prinzips = (await getCollection("prinzipien"))
+  .map((entry) => entry.data)
+  .sort((a, b) => a.order - b.order);
 ---
 
 <Layout title={frontmatter.title} showProgressBar>
@@ -100,9 +101,7 @@ const prinzips = await fetchPrinzipsWithExamples();
                   Prinzip {prinzip.order}
                 </Badge>
                 <h2 class="ds-heading-03-reg">{prinzip.Name}</h2>
-                <BlocksRenderer
-                  content={prinzip.Kurzbeschreibung ?? prinzip.Beschreibung}
-                />
+                <p>{prinzip.Kurzbeschreibung}</p>
               </div>
               <LinkButton
                 href={

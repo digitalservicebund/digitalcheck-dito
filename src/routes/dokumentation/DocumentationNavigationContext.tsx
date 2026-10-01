@@ -1,5 +1,5 @@
 "use client";
-import type { PrinzipWithAspekte } from "@/utils/strapiData.types";
+import type { Prinzip } from "@/content.config";
 import { createContext, useContext } from "react";
 
 export type Route = { path: string; title: string; principleId?: string };
@@ -15,7 +15,7 @@ export type DocumentationNavigationContextType = {
   nextUrl: string;
   previousUrl: string;
   routes: (Route | RouteGroup)[];
-  prinzips: PrinzipWithAspekte[];
+  prinzips: Prinzip[];
 };
 
 export const DocumentationNavigationContext =

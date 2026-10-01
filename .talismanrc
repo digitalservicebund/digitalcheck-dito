@@ -58,6 +58,10 @@ fileignoreconfig:
     allowed_patterns: [proxy_pass]
   - filename: src/pages/interoperabel/nationale-kontaktstelle/_content.ts
     ignore_detectors: [filename, filecontent] # German text content misidentified as secret pattern
+  - filename: src/content/prinzipien/etablierte-technologien-ermoeglichen-effiziente-umsetzung.md 
+    ignore_detectors: [filecontent]
+  - filename: src/content/prinzipien/etablierte-technologien-ermoeglichen-effiziente-umsetzung.md
+    ignore_detectors: [filecontent]
 
 allowed_patterns:
   - key

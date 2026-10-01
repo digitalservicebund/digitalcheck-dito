@@ -17,6 +17,8 @@ import {
   dokumentation_veroeffentlichung,
   type Route,
 } from "@/config/routes";
+import type { Prinzip } from "@/content.config";
+import type { PrincipleNumber } from "@/resources/constants";
 import { digitalDocumentation } from "@/resources/content/dokumentation";
 import {
   type BindingRequirementsData,
@@ -34,7 +36,6 @@ import {
   publicationStatusQuestion,
 } from "@/routes/dokumentation/interoperability/values.ts";
 import { keyValueToMap } from "@/utils/keyValue.ts";
-import type { PrinzipWithAspekte } from "@/utils/strapiData.types";
 import { slugify } from "@/utils/utilFunctions";
 import type { ReactNode } from "react";
 import DocumentationActions from "./dokumentation/DocumentationActions";
@@ -172,7 +173,7 @@ function SimplifiedAspectsContent({
 }: Readonly<{
   explanation: Principle["reasoning"];
   aspects: Principle["aspects"];
-  prinzip: PrinzipWithAspekte;
+  prinzip: Prinzip;
   needsAspects: boolean;
 }>) {
   if ((needsAspects && (!aspects || aspects.length === 0)) || !explanation) {
@@ -217,7 +218,7 @@ function PrincipleContent({
   prinzip,
 }: Readonly<{
   principle: Principle;
-  prinzip: PrinzipWithAspekte;
+  prinzip: Prinzip;
   simplified?: boolean;
 }>) {
   return (
@@ -435,7 +436,7 @@ export function DocumentationSummary() {
         ) : null,
         badge: {
           text: `Prinzip ${prinzip.order}`,
-          principleNumber: prinzip.Nummer,
+          principleNumber: prinzip.Nummer as PrincipleNumber,
         },
       });
     }),

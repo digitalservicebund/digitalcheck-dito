@@ -13,7 +13,7 @@ import pandas as pd
 import numpy as np
 
 # Change this path as required
-input_path = "input/2026-08-24.xls"
+input_path = "input/2026-09-30.xlsx"
 df = pd.read_excel(input_path)
 df
 
@@ -119,6 +119,7 @@ nocodb_token = subprocess.run(
 ).stdout.strip()
 
 # %%
+# GET EXISTING RECORDS
 import requests
 import os
 from dotenv import load_dotenv
@@ -157,7 +158,9 @@ df_nrs = df["A_NKR-Nr"].to_list()
 # replace nan with None
 payload_full = out.replace({np.nan: None}).to_dict(orient="records")
 payload = [item for item in payload_full if item["NKRNr"] not in nkr_nrs]
-print(f"Will update {len(payload_full) - len(payload)} records that are already in NocoDB")
+print(
+    f"Will update {len(payload_full) - len(payload)} records that are already in NocoDB"
+)
 print(f"Will upload {len(payload)} records to NocoDB")
 
 # %%
@@ -188,6 +191,7 @@ for item in payload_full:
 
 # %%
 # UPLOAD VALIDATION: has everything been uploaded correctly?
+# Re-run "GET EXISTING RECORDS" cell before
 
 for df_item in payload_full:
     record = next(
