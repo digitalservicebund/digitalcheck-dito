@@ -13,6 +13,7 @@ import {
   dokumentation_veroeffentlichung,
   dokumentation_zusammenfassung,
 } from "@/config/routes.ts";
+import type { Prinzip } from "@/content.config";
 import { DocumentationPrinciple } from "@/routes/dokumentation._documentationNavigation.$principleId.tsx";
 import { DocumentationPrincipleErlaeuterung } from "@/routes/dokumentation._documentationNavigation.$principleId_.erlaeuterung.tsx";
 import { DocumentationSend } from "@/routes/dokumentation._documentationNavigation.absenden.tsx";
@@ -27,7 +28,6 @@ import { DocumentationTitle } from "@/routes/dokumentation._documentationNavigat
 import { DocumentationBindingRequirements } from "@/routes/dokumentation._documentationNavigation.verbindliche-anforderungen.tsx";
 import { DocumentationVeroeffentlichung } from "@/routes/dokumentation._documentationNavigation.veroeffentlichung.tsx";
 import { DocumentationSummary } from "@/routes/dokumentation._documentationNavigation.zusammenfassung.tsx";
-import type { PrinzipWithAspekteAndExample } from "@/utils/strapiData.types";
 import type { ComponentType } from "react";
 
 const staticRoutes: Record<string, ComponentType> = {
@@ -53,7 +53,7 @@ const staticRoutes: Record<string, ComponentType> = {
 };
 
 export type DocumentationRouterProps = {
-  prinzips: PrinzipWithAspekteAndExample[];
+  prinzips: Prinzip[];
   path: string;
   principleId?: string;
   isErlaeuterung?: boolean;

@@ -1,8 +1,8 @@
 "use client";
 
+import type { Prinzip } from "@/content.config";
 import { LayoutWithDocumentationNavigation } from "@/routes/dokumentation._documentationNavigation";
 import { DocumentationDataProvider } from "@/routes/dokumentation/DocumentationDataProvider";
-import type { PrinzipWithAspekte } from "@/utils/strapiData.types";
 import type { ReactNode } from "react";
 
 export function DocumentationPageShell({
@@ -10,7 +10,7 @@ export function DocumentationPageShell({
   currentUrl,
   children,
 }: Readonly<{
-  prinzips: PrinzipWithAspekte[];
+  prinzips: Prinzip[];
   currentUrl: string;
   children: ReactNode;
 }>) {

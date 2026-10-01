@@ -6,11 +6,11 @@ import {
   dokumentation_hinweise,
   dokumentation_regelungsvorhabenTitel,
 } from "@/config/routes";
+import type { Prinzip } from "@/content.config";
 import { digitalDocumentation } from "@/resources/content/dokumentation.ts";
 import { general } from "@/resources/content/shared/general.ts";
 import { useWordDocumentation } from "@/service/wordDocumentationExport/wordDocumentation";
 import { useNonce } from "@/utils/nonce.ts";
-import type { PrinzipWithAspekte } from "@/utils/strapiData.types";
 import { navigate } from "astro:transitions/client";
 import { useDocumentationDataService } from "./DocumentationDataProvider";
 
@@ -21,7 +21,7 @@ function StartOverDialog({
   prinzips,
 }: Readonly<{
   deleteDocumentationData: () => void;
-  prinzips: PrinzipWithAspekte[];
+  prinzips: Prinzip[];
 }>) {
   const { downloadDocumentation } = useWordDocumentation();
 
@@ -73,7 +73,7 @@ function StartOverDialog({
 export function DocumentationContinueActions({
   prinzips,
 }: Readonly<{
-  prinzips: PrinzipWithAspekte[];
+  prinzips: Prinzip[];
 }>) {
   const { hasSavedDocumentation, deleteDocumentationData } =
     useDocumentationDataService();
