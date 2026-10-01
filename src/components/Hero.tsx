@@ -1,6 +1,5 @@
 import twMerge from "@/utils/tailwindMerge";
 import type { ReactNode } from "react";
-import Container from "./Container";
 import Heading from "./Heading";
 import RichText from "./RichText";
 
@@ -20,15 +19,15 @@ export default function Hero({
   className,
 }: Readonly<HeroProps>) {
   return (
-    <div className={twMerge("bg-blue-100", className)}>
-      <Container className="kern-stack kern-stack-md pb-48">
+    <section className={twMerge("bg-kern-darkblue-100 py-kern-4xl", className)}>
+      <div className="kern-stack kern-stack-md container">
         <Heading tagName="h1">{title}</Heading>
         {subtitle && (
           <RichText markdown={subtitle} className="ds-subhead mt-16" />
         )}
         {children}
-      </Container>
-    </div>
+      </div>
+    </section>
   );
 }
 

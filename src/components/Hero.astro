@@ -7,13 +7,16 @@ const { class: className } = Astro.props;
 const hasSubtitle = Astro.slots.has("subtitle");
 ---
 
-<div class:list={["breakout bg-blue-100", className]}>
-  <div class="space-y-16 py-40 pb-48 [&_h1]:sm:hyphens-none">
-    <slot />
-    {hasSubtitle && (
-      <div class="ds-subhead mt-16 space-y-8">
-        <slot name="subtitle" />
-      </div>
-    )}
-  </div>
-</div>
+<section
+  class:list={[
+    "breakout bg-kern-darkblue-100 space-y-16 py-kern-4xl [&_h1]:sm:hyphens-none",
+    className,
+  ]}
+>
+  <slot />
+  {hasSubtitle && (
+    <div class="ds-subhead mt-16 space-y-8">
+      <slot name="subtitle" />
+    </div>
+  )}
+</section>
