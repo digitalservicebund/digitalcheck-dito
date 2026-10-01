@@ -363,17 +363,6 @@ export const sitemap = {
   navLabel: null,
 } as const;
 
-export const unterstuetzung = {
-  key: "unterstuetzung",
-  path: "/unterstuetzung",
-  title: "Unterstützungsangebote",
-  parent: null,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
 export const vorpruefung = {
   key: "vorpruefung",
   path: "/vorpruefung",
@@ -451,7 +440,6 @@ export const allRoutes = [
   methoden,
   methoden_fuenfPrinzipien,
   sitemap,
-  unterstuetzung,
   vorpruefung,
   vorpruefung_ergebnis,
   vorpruefung_hinweise,

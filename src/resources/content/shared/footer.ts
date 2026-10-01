@@ -1,4 +1,3 @@
-import { ROUTE_SUPPORT_TRAININGS } from "@/config/additionalRoutes";
 import {
   barrierefreiheit,
   dasIstNeu,
@@ -11,7 +10,6 @@ import {
   methoden,
   methoden_fuenfPrinzipien,
   sitemap,
-  unterstuetzung,
   vorpruefung,
   zahlenUndFakten,
 } from "@/config/routes";
@@ -37,14 +35,6 @@ export const footer = {
             url: `mailto:${contact.email}`,
           },
         ],
-        {
-          text: "Alle Unterstützungsangebote",
-          url: unterstuetzung.path,
-        },
-        {
-          text: "Schulungen",
-          url: ROUTE_SUPPORT_TRAININGS,
-        },
         {
           text: "Nationale Kontaktstelle für ein interoperables Europa (2024/903 Art. 17)",
           url: interoperabel_nationaleKontaktstelle.path,

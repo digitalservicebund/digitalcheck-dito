@@ -1,5 +1,4 @@
 import type { ActiveBehavior } from "@/components/DropdownContentList";
-import { ROUTE_SUPPORT_TRAININGS } from "@/config/additionalRoutes";
 import {
   bundeslaender,
   dokumentation,
@@ -8,7 +7,6 @@ import {
   interoperabel_nationaleKontaktstelle,
   methoden,
   methoden_fuenfPrinzipien,
-  unterstuetzung,
   vorpruefung,
 } from "@/config/routes";
 import {
@@ -120,20 +118,6 @@ export const header = {
       text: "Kontakt und Support",
       hasSupport: true,
       overlayContent: [
-        {
-          title: "Individuelle Unterstützung für Ihr Vorhaben",
-          content:
-            "Nutzen Sie unsere persönliche Hilfestellungen bei der Regelungsarbeit.",
-          href: unterstuetzung.path,
-          activeBehavior: "noHighlight" as ActiveBehavior,
-        },
-        {
-          title: "Schulungen",
-          content:
-            "In dieser Online-Schulung bekommen Sie praktische Tipps für den Digitalcheck.",
-          href: ROUTE_SUPPORT_TRAININGS,
-          activeBehavior: "noHighlight" as ActiveBehavior,
-        },
         {
           title: "Nationale Kontaktstelle",
           content:
