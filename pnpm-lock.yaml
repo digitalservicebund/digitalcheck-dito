@@ -42,8 +42,8 @@ importers:
         specifier: ^2.8.2
         version: 2.8.2
       '@posthog/core':
-        specifier: ^1.55.1
-        version: 1.55.1
+        specifier: ^1.55.2
+        version: 1.55.2
       '@rvf/react':
         specifier: ^8.1.3
         version: 8.1.3(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(scheduler@0.28.0)(use-sync-external-store@1.7.0(react@19.3.0))
@@ -1394,9 +1394,6 @@ packages:
 
   '@posthog/browser-common@0.9.0':
     resolution: {integrity: sha512-EWoVzs1vVY7ihpn8yOjj3jyjriHUEEMVSBNL/TW3hk09fTriWRe76vJXrRg0G0yjTYxHmtlSkNn4mOV24ZEzzA==}
-
-  '@posthog/core@1.55.1':
-    resolution: {integrity: sha512-S76bSbCHGVC8oQa1zyue6A6WzkNf1Ue4oRvfvBNLRnFM3UoWnpWnQ4T/4IzrIEtVCQYv1OI7gk8uL8/U6Tuu7w==}
 
   '@posthog/core@1.55.2':
     resolution: {integrity: sha512-2mYxGbDmTLUs096VbcZqSWo0lrI48/BrX65r54NynxxFq409BOx9w73HxOAtOKZ1vblkdV6/GxQTe7KDcIQidg==}
@@ -6499,10 +6496,6 @@ snapshots:
   '@posthog/browser-common@0.9.0':
     dependencies:
       '@posthog/core': 1.55.2
-      '@posthog/types': 1.412.4
-
-  '@posthog/core@1.55.1':
-    dependencies:
       '@posthog/types': 1.412.4
 
   '@posthog/core@1.55.2':
