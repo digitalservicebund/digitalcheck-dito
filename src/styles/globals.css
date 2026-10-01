@@ -289,22 +289,26 @@
 }
 
 /*
-  Creates a 3-column grid to center main content while allowing some elements to "break out" to full width.
-  The layout is: [gutter] [main content] [gutter].
-  - The grid lines are named: `full-start`, `content-start`, `content-end`, `full-end`.
+  Creates a 5-column grid to center main content while allowing some elements to "break out" to a wider or the full width.
+  The layout is: [gutter] [wide] [main content] [wide] [gutter].
+  - The grid lines are named: `full-start`, `wide-start`, `content-start`, `content-end`, `wide-end`, `full-end`.
   - The center `content` column is fluid but capped at `--max-content-width`.
+  - The `wide` columns share the remaining space with the gutters, so `wide` reaches about halfway into the side margins.
   - By default, direct children are placed in the `content` column.
   - Use the `breakout` utility on a child to make it span the full width (e.g., for banners).
+  - Use the `breakout-wide` utility to make a child wider, without expanding to the full width.
 */
 @utility breakout-grid {
   display: grid;
   grid-template-columns:
     [full-start] minmax(var(--container-padding-inline), 1fr)
+    [wide-start] minmax(0, 1fr)
     [content-start] min(
       100% - (var(--container-padding-inline) * 2),
       var(--max-content-width) - 2 * var(--container-padding-inline)
     )
     [content-end]
+    minmax(0, 1fr) [wide-end]
     minmax(var(--container-padding-inline), 1fr) [full-end];
 
   & > *:not([class*="breakout"]) {
@@ -409,11 +413,20 @@
 
   /*
     By default, children of a `breakout` element are placed back into the central `content` column of the parent grid.
-    To make a child of a `breakout` element also span the full width, apply `grid-column: full` to it.
+    To make a child of a `breakout` element also span the full width, apply `grid-column: full` to it (or nest another `.breakout`).
   */
-  & > * {
+  & > *:not([class*="breakout"]) {
     grid-column: content;
   }
+}
+
+@utility breakout-subgrid {
+  grid-template-columns: subgrid;
+  display: grid;
+}
+
+@utility breakout-wide {
+  grid-column: wide;
 }
 
 /*
