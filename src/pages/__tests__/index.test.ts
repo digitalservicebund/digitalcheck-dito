@@ -160,7 +160,7 @@ describe("Index Route - Integration Tests", () => {
     const supportButton = main.getByRole("link", {
       name: /Angebote/,
     });
-    expect(supportButton).toHaveAttribute("href", "/unterstuetzung");
+    expect(supportButton).toHaveAttribute("href", "/kontakt");
   });
 
   it("renders the quote section", () => {
