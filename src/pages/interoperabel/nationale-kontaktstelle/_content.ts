@@ -1,9 +1,5 @@
-import {
-  home,
-  interoperabel,
-  methoden_fuenfPrinzipien,
-  unterstuetzung,
-} from "@/config/routes";
+import { home, interoperabel, methoden_fuenfPrinzipien } from "@/config/routes";
+import { ZFL_BASE_URL } from "@/resources/constants";
 import { contact } from "@/resources/content/shared/contact";
 import { dedent } from "@/utils/dedentMultilineStrings";
 import { withBase } from "@/utils/path";
@@ -99,7 +95,7 @@ export const spoc = {
       
       **Bereitstellung von Informationen und Austauschformaten:**  
       
-      Wir stellen Wissen bereit und bereiten das Thema verständlich auf. Dazu zählen [Schulungen](${unterstuetzung.path}?tab=online-schulungen#angebote) und verschiedene [Unterstützungsangebote](${unterstuetzung.path}).
+      Wir stellen Wissen bereit und bereiten das Thema verständlich auf. Dazu zählen [Schulungen](${ZFL_BASE_URL}/schulungen) und verschiedene [Unterstützungsangebote](${ZFL_BASE_URL}).
 
 
       **Förderung von Nachnutzung, Kooperation und Zusammenarbeit:**  
