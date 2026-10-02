@@ -44,6 +44,7 @@ const {
   interactive = !!href,
 } = Astro.props;
 
+const hasIcon = Astro.slots.has("icon");
 const hasFooter = Astro.slots.has("footer");
 ---
 
@@ -74,6 +75,11 @@ const hasFooter = Astro.slots.has("footer");
   <div class="kern-card__container">
     <header class="kern-card__header">
       <slot name="pre-header" />
+      {hasIcon && (
+        <div class="mb-24" aria-hidden="true">
+          <slot name="icon" />
+        </div>
+      )}
       <hgroup>
         {preline && <p class="kern-preline">{preline}</p>}
         <h2 class="kern-title">
