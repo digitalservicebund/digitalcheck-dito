@@ -62,6 +62,8 @@ fileignoreconfig:
     ignore_detectors: [filecontent]
   - filename: src/content/prinzipien/etablierte-technologien-ermoeglichen-effiziente-umsetzung.md
     ignore_detectors: [filecontent]
+  - filename: src/utils/toc.ts
+    checksum: c42cc97d54c05462c2ea418168ff32af5da6951e9d4cfe33af1518a29f44dca6
 
 allowed_patterns:
   - key

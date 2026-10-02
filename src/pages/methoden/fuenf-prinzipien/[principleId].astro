@@ -3,10 +3,8 @@ import Layout from "@/layouts/Layout.astro";
 import KernBadge from "@/components/KernBadge.astro";
 import RichText from "@/components/RichText.tsx";
 import Hero from "@/components/Hero.astro";
-import ToC from "@/components/TableOfContentsInteractive.tsx";
-import SidebarContainer from "@/components/SidebarContainer.astro";
+import TocContainer from "@/components/TocContainer.astro";
 import type { Prinzip } from "@/content.config";
-import { slugify } from "@/utils/utilFunctions";
 import { getCollection } from "astro:content";
 import Aspect from "./_Aspect.astro";
 import PrincipleNavigation from "./_PrincipleNavigation.astro";
@@ -64,17 +62,7 @@ const title = prinzip ? `Prinzip: ${prinzip.Name}` : "Fünf Prinzipien";
         />
       </Hero>
     </div>
-    <SidebarContainer>
-      <ToC slot="sidebar" client:load title={"Inhalt"} selector="section[id]">
-        <ToC.List className="list-unstyled list-none">
-          {prinzip.Aspekte.map((aspect) => (
-            <ToC.Item
-              href={`#${slugify(aspect.Kurzbezeichnung)}`}
-              title={aspect.Kurzbezeichnung}
-            />
-          ))}
-        </ToC.List>
-      </ToC>
+    <TocContainer>
       {prinzip.Aspekte.map((aspect, index) => (
         <Aspect
           aspect={aspect}
@@ -82,7 +70,7 @@ const title = prinzip ? `Prinzip: ${prinzip.Name}` : "Fünf Prinzipien";
           class={index % 2 === 1 ? "bg-kern-darkblue-025" : undefined}
         />
       ))}
-    </SidebarContainer>
+    </TocContainer>
     <div class="breakout-grid-toc my-80">
       <PrincipleNavigation principles={prinzipList} current={prinzip} />
     </div>

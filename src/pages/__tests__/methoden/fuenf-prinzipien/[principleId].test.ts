@@ -78,12 +78,12 @@ describe("FivePrinciples Route - Integration Tests", () => {
     expect(screen.getByText(mockPrinzipData.Beschreibung)).toBeInTheDocument();
   });
 
-  it("renders the Table of Contents with links to aspects", () => {
-    const main = screen.getByRole("main");
-    const toc = within(main).getByRole("navigation", { name: "Inhalt" });
-
-    expect(within(toc).getByRole("link", { name: "A1" })).toBeInTheDocument();
-    expect(within(toc).getByRole("link", { name: "A2" })).toBeInTheDocument();
+  it("marks aspect headings as ToC entries with their short label", () => {
+    for (const { Titel, Kurzbezeichnung } of mockPrinzipData.Aspekte) {
+      const heading = screen.getByRole("heading", { name: Titel, level: 2 });
+      expect(heading).toHaveAttribute("id", Kurzbezeichnung.toLowerCase());
+      expect(heading).toHaveAttribute("data-toc-label", Kurzbezeichnung);
+    }
   });
 
   it("renders the description, not the short description", () => {

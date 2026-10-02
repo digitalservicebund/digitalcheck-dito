@@ -14,23 +14,26 @@ interface Props {
 const { aspect, prinzip, class: className } = Astro.props;
 ---
 
-<section
-  class:list={["breakout", className]}
-  id={slugify(aspect.Kurzbezeichnung)}
->
+<section class:list={["breakout", className]}>
   <div class="space-y-40">
     <div>
       <KernBadge variant={`prinzip-${prinzip.order}`} showIcon={false}>
         Schwerpunkt
       </KernBadge>
-      <h2 class="mb-40">{aspect.Titel}</h2>
+      <h2
+        class="mb-40"
+        id={slugify(aspect.Kurzbezeichnung)}
+        data-toc-label={aspect.Kurzbezeichnung}
+      >
+        {aspect.Titel}
+      </h2>
     </div>
     {aspect.Text && (
       <RichText markdown={aspect.Text} className={"space-y-16"} />
     )}
     {!!aspect.Anwendung.length && (
       <>
-        <h3>So wenden Sie den Aspekt an</h3>
+        <h3 data-toc-ignore>So wenden Sie den Aspekt an</h3>
         <div>
           {aspect.Anwendung.map((anwendung) => (
             <AccordionItem client:load headline={anwendung.Titel}>
