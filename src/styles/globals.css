@@ -111,6 +111,29 @@
     @apply kern-heading-small;
   }
 
+  h2 {
+    @apply mt-40 md:mt-64;
+  }
+
+  h3 {
+    @apply mt-32;
+  }
+
+  h4 {
+    @apply mt-20;
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin-bottom: 1rem;
+    word-break: auto-phrase;
+  }
+
+  :is(h2, h3, h4):first-child {
+    margin-top: 0;
+  }
+
   /* default padding for sections */
   section {
     padding-block: var(--kern-metric-dimension-3x-large);
@@ -181,6 +204,14 @@
   ul:not(.list-unstyled),
   ol:not(.list-unstyled) {
     @apply max-w-a11y;
+  }
+
+  p:not(.kern-card__header *):not(li p),
+  ul:not(.list-unstyled),
+  ol:not(.list-unstyled) {
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
   }
 
   *:focus-visible {
