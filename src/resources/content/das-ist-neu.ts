@@ -2,10 +2,10 @@ import {
   bundeslaender,
   dasIstNeu,
   dokumentation,
-  grundlagen_normenkontrollrat,
   interoperabel,
   interoperabel_nationaleKontaktstelle,
   methoden_fuenfPrinzipien,
+  normenkontrollrat,
   zahlenUndFakten,
 } from "@/config/routes";
 import { dedent } from "@/utils/dedentMultilineStrings";
@@ -300,7 +300,7 @@ export const news = {
           - neu: digitalcheck.bund.de
         - Link zu [Digitale Verwaltung Projektseite](https://www.digitale-verwaltung.de/Webs/DV/DE/transformation/digitalcheck/digitalcheck-node.html) im Footer ergänzt
         - Neue Einstiegsseite / Landingpage für Visualisierungen gelauncht
-        - [NKR-Infoseite](${grundlagen_normenkontrollrat.path}) aktualisiert
+        - [NKR-Infoseite](${normenkontrollrat.path}) aktualisiert
       `,
     },
     {
