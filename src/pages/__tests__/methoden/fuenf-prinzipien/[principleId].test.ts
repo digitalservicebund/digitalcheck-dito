@@ -117,19 +117,17 @@ describe("FivePrinciples Route - Integration Tests", () => {
     expect(sections[1]).toHaveClass("bg-kern-darkblue-025");
   });
 
-  // Note: userEvent doesn't work with the current Astro test setup
+  it("renders each application as a collapsed accordion", () => {
+    const accordion = screen
+      .getByText(mockAspectApplication1_1.Titel)
+      .closest("details");
 
-  // it("renders the aspect > application Formulierungsbeispiel", async () => {
-  //   const expectedText = mockAspectApplication1_1.Formulierungsbeispiel;
-  //   expect(screen.queryByText(expectedText)).not.toBeInTheDocument();
-  //
-  //   const detailsHeading = screen.getByRole("button", {
-  //     name: "1.1a",
-  //   });
-  //
-  //   // Click to expand the details section
-  //   await userEvent.click(detailsHeading);
-  //
-  //   expect(screen.getByText(expectedText)).toBeInTheDocument();
-  // });
+    expect(accordion).toHaveClass("kern-accordion");
+    expect(accordion).not.toHaveAttribute("open");
+    expect(
+      within(accordion!).getByText(
+        mockAspectApplication1_1.Formulierungsbeispiel,
+      ),
+    ).toBeInTheDocument();
+  });
 });
