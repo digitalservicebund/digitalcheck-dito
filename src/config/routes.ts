@@ -220,17 +220,6 @@ export const grundlagen = {
   navLabel: null,
 } as const;
 
-export const grundlagen_normenkontrollrat = {
-  key: "grundlagen_normenkontrollrat",
-  path: "/grundlagen/normenkontrollrat",
-  title: "Die Rolle des Nationalen Normenkontrollrats",
-  parent: grundlagen,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: "NKR",
-} as const;
-
 export const home = {
   key: "home",
   path: "/",
@@ -352,6 +341,17 @@ export const methoden_fuenfPrinzipien = {
   navLabel: null,
 } as const;
 
+export const normenkontrollrat = {
+  key: "normenkontrollrat",
+  path: "/normenkontrollrat",
+  title: "Die Rolle des Nationalen Normenkontrollrats",
+  parent: null,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: "NKR",
+} as const;
+
 export const sitemap = {
   key: "sitemap",
   path: "/sitemap",
@@ -427,7 +427,6 @@ export const allRoutes = [
   dokumentation_veroeffentlichung,
   dokumentation_zusammenfassung,
   grundlagen,
-  grundlagen_normenkontrollrat,
   home,
   impressum,
   interoperabel,
@@ -439,6 +438,7 @@ export const allRoutes = [
   kontakt,
   methoden,
   methoden_fuenfPrinzipien,
+  normenkontrollrat,
   sitemap,
   vorpruefung,
   vorpruefung_ergebnis,
