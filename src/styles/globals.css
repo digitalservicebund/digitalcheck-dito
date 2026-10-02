@@ -69,7 +69,7 @@
 }
 
 :root {
-  --kern-color-action-default: var(--color-blue-800);
+  /* --kern-color-action-default: var(--color-blue-800); */
   --kern-color-action-visited: var(--color-ds-violet);
 }
 
