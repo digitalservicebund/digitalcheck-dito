@@ -1,6 +1,7 @@
 // @vitest-environment node
+import { prinzipienPoster_pdf } from "@/config/downloads";
+import { methoden_fuenfPrinzipien } from "@/config/routes";
 import FivePrinciples from "@/pages/methoden/fuenf-prinzipien/index.astro";
-import { methodsFivePrinciples } from "@/resources/content/methode-fuenf-prinzipien";
 import { renderToDOM } from "@/utils/testUtils";
 import type { BoundFunctions, queries } from "@testing-library/dom";
 import { within } from "@testing-library/dom";
@@ -61,7 +62,7 @@ describe("FivePrinciples Route - Integration Tests", () => {
   it("renders the Hero section with the correct title and subtitle", () => {
     expect(
       screen.getByRole("heading", {
-        name: methodsFivePrinciples.title,
+        name: "Die fünf Prinzipien",
         level: 1,
       }),
     ).toBeInTheDocument();
@@ -70,37 +71,51 @@ describe("FivePrinciples Route - Integration Tests", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders the list of principles", () => {
+  it("renders the instruction section with its features", () => {
+    expect(
+      screen.getByRole("heading", {
+        name: "So nutzen Sie die fünf Prinzipien für Ihr Regelungsvorhaben",
+        level: 2,
+      }),
+    ).toBeInTheDocument();
+    for (const name of [
+      "Den Gesamtprozess überprüfen",
+      "Starthilfe für den Regelungstext",
+      "Unterstützung durch Schulungsangebote und Praxistipps",
+    ]) {
+      expect(
+        screen.getByRole("heading", { name, level: 3 }),
+      ).toBeInTheDocument();
+    }
+  });
+
+  it("renders a card per principle, linked via its title", () => {
     const list = screen.getByTestId("prinzipien");
-    expect(list).toBeInTheDocument();
-    expect(
-      within(list).getAllByRole("link", { name: "Mehr zum Prinzip" }),
-    ).toHaveLength(mockPrinzipsData.length);
+    expect(within(list).getAllByRole("article")).toHaveLength(
+      mockPrinzipsData.length,
+    );
+
+    for (const { data } of mockPrinzipsData) {
+      const heading = within(list).getByRole("heading", {
+        name: data.Name,
+        level: 2,
+      });
+      expect(within(heading).getByRole("link")).toHaveAttribute(
+        "href",
+        `${methoden_fuenfPrinzipien.path}/${data.URLBezeichnung}`,
+      );
+    }
   });
 
-  it("renders the instruction section", () => {
-    expect(
-      screen.getByRole("heading", {
-        name: methodsFivePrinciples.instruction.title,
-        level: 2,
-      }),
-    ).toBeInTheDocument();
-  });
+  it("renders a principle-colored badge on each card", () => {
+    const list = screen.getByTestId("prinzipien");
 
-  it("renders each principle from the loader data", () => {
-    expect(
-      screen.getByRole("heading", {
-        name: "Prinzip Test 1: Nutzerfreundlichkeit",
-        level: 2,
-      }),
-    ).toBeInTheDocument();
-
-    expect(
-      screen.getByRole("heading", {
-        name: "Prinzip Test 2: Datenminimierung",
-        level: 2,
-      }),
-    ).toBeInTheDocument();
+    for (const { data } of mockPrinzipsData) {
+      const badge = within(list)
+        .getByText(`Prinzip ${data.order}`)
+        .closest(".kern-badge");
+      expect(badge).toHaveClass(`kern-badge--prinzip-${data.order}`);
+    }
   });
 
   it("renders each principle's short description", () => {
@@ -110,26 +125,15 @@ describe("FivePrinciples Route - Integration Tests", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders the PrinciplePosterBox component", () => {
+  it("renders the poster section", () => {
     expect(
       screen.getByRole("heading", {
-        name: methodsFivePrinciples.principlePosterBox.heading,
+        name: "Die Prinzipien als Poster",
         level: 2,
       }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("link", {
-        name: methodsFivePrinciples.principlePosterBox.downloadTitle,
-      }),
-    ).toBeInTheDocument();
-  });
-
-  it("renders the 'Next Step' box", () => {
-    expect(
-      screen.getByRole("heading", {
-        name: methodsFivePrinciples.nextStep.title,
-        level: 2,
-      }),
-    ).toBeInTheDocument();
+      screen.getByRole("link", { name: "Poster herunterladen" }),
+    ).toHaveAttribute("href", prinzipienPoster_pdf.path);
   });
 });

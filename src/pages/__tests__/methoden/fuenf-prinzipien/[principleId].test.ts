@@ -92,6 +92,31 @@ describe("FivePrinciples Route - Integration Tests", () => {
     expect(screen.queryByText("Kurzbeschreibung")).not.toBeInTheDocument();
   });
 
+  it("renders a principle-colored badge in the Hero", () => {
+    const badge = screen
+      .getByText(`Prinzip ${mockPrinzipData.order}`)
+      .closest(".kern-badge");
+    expect(badge).toHaveClass(`kern-badge--prinzip-${mockPrinzipData.order}`);
+  });
+
+  it("renders a principle-colored 'Schwerpunkt' badge per aspect", () => {
+    const badges = screen
+      .getAllByText("Schwerpunkt")
+      .map((label) => label.closest(".kern-badge"));
+    expect(badges).toHaveLength(mockPrinzipData.Aspekte.length);
+    for (const badge of badges) {
+      expect(badge).toHaveClass(`kern-badge--prinzip-${mockPrinzipData.order}`);
+    }
+  });
+
+  it("highlights every second aspect section", () => {
+    const sections = mockPrinzipData.Aspekte.map(({ Titel }) =>
+      screen.getByRole("heading", { name: Titel, level: 2 }).closest("section"),
+    );
+    expect(sections[0]).not.toHaveClass("bg-kern-darkblue-025");
+    expect(sections[1]).toHaveClass("bg-kern-darkblue-025");
+  });
+
   // Note: userEvent doesn't work with the current Astro test setup
 
   // it("renders the aspect > application Formulierungsbeispiel", async () => {

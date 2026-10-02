@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import Badge from "@/components/Badge.tsx";
+import KernBadge from "@/components/KernBadge.astro";
 import RichText from "@/components/RichText.tsx";
 import Hero from "@/components/Hero.astro";
 import ToC from "@/components/TableOfContentsInteractive.tsx";
@@ -44,14 +44,18 @@ const { prinzip, prinzipList } = Astro.props;
 const title = prinzip ? `Prinzip: ${prinzip.Name}` : "Fünf Prinzipien";
 ---
 
-<Layout title={title} showProgressBar>
+<Layout title={title}>
   <main>
     <div class="breakout-grid-toc">
       <Hero>
         <div>
-          <Badge className={`bg-principle-${prinzip.Nummer} -mb-16`}>
+          <KernBadge
+            class="-mb-16"
+            variant={`prinzip-${prinzip.order}`}
+            showIcon={false}
+          >
             Prinzip {prinzip.order}
-          </Badge>
+          </KernBadge>
         </div>
         <h1>{prinzip.Name}</h1>
         <RichText
@@ -71,8 +75,12 @@ const title = prinzip ? `Prinzip: ${prinzip.Name}` : "Fünf Prinzipien";
           ))}
         </ToC.List>
       </ToC>
-      {prinzip.Aspekte.map((aspect) => (
-        <Aspect aspect={aspect} prinzip={prinzip} />
+      {prinzip.Aspekte.map((aspect, index) => (
+        <Aspect
+          aspect={aspect}
+          prinzip={prinzip}
+          class={index % 2 === 1 ? "bg-kern-darkblue-025" : undefined}
+        />
       ))}
     </SidebarContainer>
     <div class="breakout-grid-toc my-80">

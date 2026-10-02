@@ -1,6 +1,7 @@
 @import "@kern-ux/native/dist/kern.min.css" layer(base);
 @import "./fonts.css";
 @import "./kern-utils.css";
+@import "./badges.css";
 
 @import "tailwindcss";
 

@@ -1,22 +1,17 @@
 ---
 import { methoden_fuenfPrinzipien } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
-import {
-  EmojiObjectsOutlined,
-  ShareOutlined,
-  VisibilityTwoTone,
-} from "@digitalservicebund/icons";
-import Badge from "@/components/Badge.tsx";
-import RichText from "@/components/RichText.tsx";
-import { LinkButton } from "@/components/Button.tsx";
-import Container from "@/components/Container";
-import { Feature, FeatureList } from "@/components/FeatureList.tsx";
-import Heading from "@/components/Heading";
-import Hero from "@/components/Hero";
-import InfoBox from "@/components/InfoBox.tsx";
-import { PrinciplePosterBox } from "@/components/PrinciplePosterBox";
-import { methodsFivePrinciples } from "@/resources/content/methode-fuenf-prinzipien";
-import { ZFL_BASE_URL, ZFL_PATH_FLUSSDIAGRAMME } from "@/resources/constants";
+import FeatureSet from "@/components/FeatureSet.astro";
+import FeatureItem from "@/components/FeatureItem.astro";
+import Hero from "@/components/Hero.astro";
+import KernBadge from "@/components/KernBadge.astro";
+import KernCard from "@/components/KernCard.astro";
+import IconComputer from "~icons/ic/outline-computer";
+import IconWatch from "~icons/ic/outline-watch-later";
+import IconCheck from "~icons/ic/outline-playlist-add-check";
+import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
+import posterImage from "@/assets/images/Poster_5Prinzipien.jpg";
+import { prinzipienPoster_pdf } from "@/config/downloads";
 import { getCollection } from "astro:content";
 
 export const frontmatter = {
@@ -28,116 +23,90 @@ const prinzips = (await getCollection("prinzipien"))
   .sort((a, b) => a.order - b.order);
 ---
 
-<Layout title={frontmatter.title} showProgressBar>
-  <main>
-    <Hero
-      title={methodsFivePrinciples.title}
-      subtitle={methodsFivePrinciples.subtitle}
-    />
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>Die fünf Prinzipien</h1>
+      <p class="kern-subline kern-subline--large">
+        Chancen und Hindernisse der digitalen Umsetzung identifizieren
+      </p>
+      <p>
+        Die folgenden Prinzipien helfen Ihnen dabei, Chancen der digitalen
+        Umsetzung auszuschöpfen und Hindernisse zu erkennen. Nutzen Sie die
+        Prinzipien auch, um mit beteiligten Akteurinnen und Akteuren über die
+        Umsetzung zu sprechen.
+      </p>
+    </Hero>
 
-    <Container className="space-y-40 pb-0">
-      <div id="instruction">
-        <Heading tagName="h2">
-          {methodsFivePrinciples.instruction.title}
-        </Heading>
+    <section id="instruction">
+      <h2>So nutzen Sie die fünf Prinzipien für Ihr Regelungsvorhaben</h2>
+      <FeatureSet>
+        <FeatureItem title="Den Gesamtprozess überprüfen">
+          <IconComputer slot="icon" class="size-75" />
+          <p>
+            Wenden Sie die fünf Prinzipien direkt auf eine Skizze Ihres
+            Umsetzungsprozesses an. So lokalisieren Sie relevante Schnittstellen
+            Schritt für Schritt.
+          </p>
+        </FeatureItem>
+        <FeatureItem title="Starthilfe für den Regelungstext">
+          <IconWatch slot="icon" class="size-75" />
+          <p>
+            Verwenden Sie erprobte Praxisbeispiele als Fundament für Ihre
+            eigenen Formulierungen und profitieren Sie von der Wirklogik bereits
+            bestehender Lösungen.
+          </p>
+        </FeatureItem>
+        <FeatureItem title="Unterstützung durch Schulungsangebote und Praxistipps">
+          <IconCheck slot="icon" class="size-75" />
+          <p>
+            Nutzen Sie konkrete Tipps, um die digitalen Potenziale Ihres
+            Regelungsvorhabens voll auszuschöpfen und Hürden frühzeitig zu
+            identifizieren.
+          </p>
+        </FeatureItem>
+      </FeatureSet>
+    </section>
+
+    <section class="breakout bg-kern-layout-layer-surface">
+      <div
+        class="grid grid-cols-1 gap-32 md:grid-cols-2 lg:grid-cols-3"
+        data-testid="prinzipien"
+      >
+        {prinzips.map((prinzip) => (
+          <KernCard
+            title={prinzip.Name}
+            body={prinzip.Kurzbeschreibung}
+            href={`${methoden_fuenfPrinzipien.path}/${prinzip.URLBezeichnung}`}
+            background="white"
+          >
+            <KernBadge
+              slot="pre-header"
+              variant={`prinzip-${prinzip.order}`}
+              showIcon={false}
+            >
+              Prinzip {prinzip.order}
+            </KernBadge>
+          </KernCard>
+        ))}
       </div>
+    </section>
 
-      <FeatureList>
-        <Feature>
-          <ShareOutlined className="fill-ds-feature size-80" />
-          <div>
-            <p class="ds-body-01-bold">
-              <b>Den Gesamtprozess überprüfen</b>
-            </p>
-            <p>
-              Wenden Sie die fünf Prinzipien direkt auf eine Skizze Ihres
-              Umsetzungsprozesses an. So lokalisieren Sie relevante
-              Schnittstellen Schritt für Schritt.
-            </p>
-            <a href={ZFL_BASE_URL + ZFL_PATH_FLUSSDIAGRAMME}>
-              Zur Methode Visualisieren
-            </a>
-          </div>
-        </Feature>
-        <Feature>
-          <EmojiObjectsOutlined className="fill-ds-feature size-80" />
-          <div>
-            <p class="ds-body-01-bold">
-              <b>Starthilfe für den Regelungstext</b>
-            </p>
-            <p>
-              Verwenden Sie erprobte Praxisbeispiele als Fundament für Ihre
-              eigenen Formulierungen und profitieren Sie von der Wirklogik
-              bereits bestehender Lösungen.
-            </p>
-          </div>
-        </Feature>
-        <Feature>
-          <VisibilityTwoTone className="fill-ds-feature size-80" />
-          <div>
-            <p class="ds-body-01-bold">
-              <b>Impulse für die Umsetzung</b>
-            </p>
-            <p>
-              Nutzen Sie konkrete Tipps, um die digitalen Potenziale Ihres
-              Regelungsvorhabens voll auszuschöpfen und Hürden frühzeitig zu
-              identifizieren.
-            </p>
-          </div>
-        </Feature>
-      </FeatureList>
-    </Container>
-
-    <div class="my-40 bg-blue-100 lg:mt-80">
-      <div class="container space-y-96 py-80 lg:mt-80">
-        <div
-          class="grid grid-cols-1 gap-40 md:grid-cols-2"
-          data-testid="prinzipien"
-        >
-          {prinzips.map((prinzip) => (
-            <div class="flex flex-col justify-between gap-16 bg-white px-32 pt-40 pb-48">
-              <div class="space-y-16">
-                <Badge className={`bg-principle-${prinzip.Nummer}`}>
-                  Prinzip {prinzip.order}
-                </Badge>
-                <h2 class="ds-heading-03-reg">{prinzip.Name}</h2>
-                <p>{prinzip.Kurzbeschreibung}</p>
-              </div>
-              <LinkButton
-                href={
-                  methoden_fuenfPrinzipien.path + "/" + prinzip.URLBezeichnung
-                }
-                look={"secondary"}
-                className={"self-start"}
-              >
-                Mehr zum Prinzip
-              </LinkButton>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-
-    <PrinciplePosterBox />
-
-    <section aria-labelledby="nextStepHeading">
-      <Container>
-        <InfoBox
-          heading={{
-            text: methodsFivePrinciples.nextStep.title,
-            look: "ds-heading-03-reg",
-            tagName: "h2",
-            id: "nextStepHeading",
-          }}
-          badge={{
-            children: methodsFivePrinciples.nextStep.label,
-            Icon: methodsFivePrinciples.nextStep.icon,
-          }}
-        >
-          <RichText markdown={methodsFivePrinciples.nextStep.text} />
-          <InfoBox.LinkList links={methodsFivePrinciples.nextStep.links} />
-        </InfoBox>
-      </Container>
+    <section>
+      <ImageTextOverlay
+        image={posterImage}
+        imageAlt="Poster der 5 Prinzipien"
+        linkHref={prinzipienPoster_pdf.path}
+        linkText="Poster herunterladen"
+        icon="download"
+      >
+        <p class="kern-preline">Download</p>
+        <h2 class="mt-0">Die Prinzipien als Poster</h2>
+        <p>
+          Drucken Sie sich das Poster in A4 oder A3 aus, um die Prinzipien für
+          digitaltaugliche Gesetzgebung immer im Blick zu haben.
+        </p>
+      </ImageTextOverlay>
     </section>
   </main>
 </Layout>
