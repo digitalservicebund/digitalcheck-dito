@@ -1,13 +1,14 @@
 ---
+import { methoden_fuenfPrinzipien } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
 import KernBadge from "@/components/KernBadge.astro";
+import KernCard from "@/components/KernCard.astro";
 import RichText from "@/components/RichText.tsx";
 import Hero from "@/components/Hero.astro";
 import TocContainer from "@/components/TocContainer.astro";
 import type { Prinzip } from "@/content.config";
 import { getCollection } from "astro:content";
 import Aspect from "./_Aspect.astro";
-import PrincipleNavigation from "./_PrincipleNavigation.astro";
 
 export const frontmatter = {
   title: "Fünf Prinzipien",
@@ -25,41 +26,32 @@ export async function getStaticPaths() {
     .map((entry) => ({ ...entry.data, Beschreibung: entry.body ?? "" }))
     .sort((a, b) => a.order - b.order);
 
-  const prinzipList = prinzips.map(({ Name, URLBezeichnung, order }) => ({
-    Name,
-    URLBezeichnung,
-    order,
-  }));
-
-  return prinzips.map((prinzip) => ({
+  return prinzips.map((prinzip, index) => ({
     params: { principleId: prinzip.URLBezeichnung },
-    props: { prinzip, prinzipList },
+    // The last principle wraps around to the first one.
+    props: { prinzip, next: prinzips[(index + 1) % prinzips.length] },
   }));
 }
 
-const { prinzip, prinzipList } = Astro.props;
+const { prinzip, next } = Astro.props;
 
 const title = prinzip ? `Prinzip: ${prinzip.Name}` : "Fünf Prinzipien";
+
+// Alternating backgrounds are only used for principles with 3+ aspects.
+const striped = prinzip.Aspekte.length >= 3;
 ---
 
 <Layout title={title}>
   <main>
     <div class="breakout-grid-toc">
       <Hero>
-        <div>
-          <KernBadge
-            class="-mb-16"
-            variant={`prinzip-${prinzip.order}`}
-            showIcon={false}
-          >
+        <div class="flex flex-col items-start gap-24">
+          <KernBadge variant={`prinzip-${prinzip.order}`} showIcon={false}>
             Prinzip {prinzip.order}
           </KernBadge>
+          <h1 class="m-0">{prinzip.Name}</h1>
+          <RichText className="space-y-16" markdown={prinzip.Beschreibung} />
         </div>
-        <h1>{prinzip.Name}</h1>
-        <RichText
-          className="ds-subhead mt-16 space-y-16"
-          markdown={prinzip.Beschreibung}
-        />
       </Hero>
     </div>
     <TocContainer>
@@ -67,12 +59,34 @@ const title = prinzip ? `Prinzip: ${prinzip.Name}` : "Fünf Prinzipien";
         <Aspect
           aspect={aspect}
           prinzip={prinzip}
-          class={index % 2 === 1 ? "bg-kern-darkblue-025" : undefined}
+          index={index}
+          class={
+            striped && index % 2 === 1
+              ? "breakout bg-kern-darkblue-025"
+              : undefined
+          }
         />
       ))}
+      <section class="breakout bg-kern-layout-layer-surface space-y-32">
+        <h2>Zum nächsten Prinzip</h2>
+        <div class="md:max-w-sm">
+          <KernCard
+            title={next.Name}
+            body={next.Kurzbeschreibung}
+            href={`${methoden_fuenfPrinzipien.path}/${next.URLBezeichnung}`}
+            background="white"
+          >
+            <KernBadge
+              slot="pre-header"
+              variant={`prinzip-${next.order}`}
+              showIcon={false}
+              class="mb-16"
+            >
+              Prinzip {next.order}
+            </KernBadge>
+          </KernCard>
+        </div>
+      </section>
     </TocContainer>
-    <div class="breakout-grid-toc my-80">
-      <PrincipleNavigation principles={prinzipList} current={prinzip} />
-    </div>
   </main>
 </Layout>
