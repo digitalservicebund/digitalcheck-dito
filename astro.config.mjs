@@ -28,6 +28,7 @@ const PREVIEW_SITE = "https://digitalservicebund.github.io";
 const base = isPreview ? PREVIEW_BASE_PATH : undefined;
 
 const rawRedirects = {
+  "/interoperabel/faq": "/interoperabel",
   "/grundlagen": "/prinzipien",
   "/grundlagen/fuenf-prinzipien": "/prinzipien",
   "/methoden/fuenf-prinzipien": "/prinzipien",

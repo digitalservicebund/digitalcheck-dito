@@ -264,17 +264,6 @@ export const interoperabel_angrenzendesEuRecht = {
   navLabel: null,
 } as const;
 
-export const interoperabel_faq = {
-  key: "interoperabel_faq",
-  path: "/interoperabel/faq",
-  title: "Fragen und Antworten",
-  parent: interoperabel,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
 export const interoperabel_loesungen = {
   key: "interoperabel_loesungen",
   path: "/interoperabel/loesungen",
@@ -442,7 +431,6 @@ export const allRoutes = [
   impressum,
   interoperabel,
   interoperabel_angrenzendesEuRecht,
-  interoperabel_faq,
   interoperabel_loesungen,
   interoperabel_loesungen_coreVocabularies,
   interoperabel_loesungen_dcatAp,
