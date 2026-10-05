@@ -14,7 +14,6 @@ import RichText from "@/components/RichText";
 import { interoperability } from "@/resources/content/interoperabel";
 import { contact } from "@/resources/content/shared/contact";
 import HintergrundTab from "./_HintergrundTab.astro";
-import InteroperableLoesungenTab from "./_InteroperableLoesungenTab.astro";
 import UeberblickTab from "./_UeberblickTab.astro";
 import { tabLabels } from "./_tabs";
 
@@ -23,8 +22,7 @@ export const frontmatter = {
   navLabel: "EU-Interoperabilität",
 };
 
-const { overviewTabLabel, backgroundTabLabel, interoperableSolutionsTabLabel } =
-  tabLabels;
+const { overviewTabLabel, backgroundTabLabel } = tabLabels;
 ---
 
 <Layout title={frontmatter.title}>
@@ -65,19 +63,9 @@ const { overviewTabLabel, backgroundTabLabel, interoperableSolutionsTabLabel } =
       </div>
     </div>
     <ContentWrapper compactTopSpacing className="mb-80">
-      <Tabs
-        tabs={[
-          overviewTabLabel,
-          backgroundTabLabel,
-          interoperableSolutionsTabLabel,
-        ]}
-        searchParams
-      >
+      <Tabs tabs={[overviewTabLabel, backgroundTabLabel]} searchParams>
         <UeberblickTab data-tab-panel={overviewTabLabel} />
         <HintergrundTab data-tab-panel={backgroundTabLabel} />
-        <InteroperableLoesungenTab
-          data-tab-panel={interoperableSolutionsTabLabel}
-        />
       </Tabs>
     </ContentWrapper>
 

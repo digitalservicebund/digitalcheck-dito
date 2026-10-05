@@ -4,6 +4,7 @@ import {
   dokumentation,
   interoperabel,
   interoperabel_angrenzendesEuRecht,
+  interoperabel_loesungen,
   interoperabel_nationaleKontaktstelle,
   normenkontrollrat,
   prinzipien,
@@ -114,7 +115,7 @@ export const news = {
         - warum das relevant ist,
         - welchen Mehrwert die verbindliche Festschreibung zur Nutzung stiftet.
 
-        [Hier ansehen](${interoperabel.path}${getTabAnchorLink("interoperable-loesungen", "interoperable-loesungen")})`,
+        [Hier ansehen](${interoperabel_loesungen.path})`,
     },
     {
       badge: {

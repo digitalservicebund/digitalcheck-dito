@@ -4,7 +4,6 @@ import { getTabAnchorLinkFromLabel } from "@/utils/tabs";
 export const tabLabels = {
   overviewTabLabel: "Überblick",
   backgroundTabLabel: "Hintergrund",
-  interoperableSolutionsTabLabel: "Interoperable Lösungen",
 } as const;
 
 const ASSESSMENT_ANCHOR = "bewertung";

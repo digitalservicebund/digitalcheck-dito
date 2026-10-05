@@ -2,13 +2,13 @@ import {
   home,
   interoperabel,
   interoperabel_angrenzendesEuRecht,
+  interoperabel_loesungen,
   prinzipien,
 } from "@/config/routes";
 import { ZFL_BASE_URL } from "@/resources/constants";
 import { contact } from "@/resources/content/shared/contact";
 import { dedent } from "@/utils/dedentMultilineStrings";
 import { withBase } from "@/utils/path";
-import { getTabAnchorLink } from "@/utils/tabs";
 
 export const spoc = {
   headline: "Nationale Kontaktstelle für ein interoperables Europa",
@@ -65,7 +65,7 @@ export const spoc = {
           content: dedent`
             Die "Lösungen für ein interoperables Europa" (Art. 7 EU 2024/903) sind etablierte technische Standards, die es ermöglichen, dass Verwaltungseinheiten effizient und sicher Daten über Ländergrenzen hinweg austauschen können. Das Interoperable Europe Board legt die von Legistinnen und Legisten zu prüfenden Lösungen fest. Das Ziel der EU ist es, unionsweit die Nutzung bewährter interoperabler Standard zu fördern und anzuregen.
 
-            Detaillierte Informationen zu den Lösungen finden Sie [hier](${interoperabel.path}${getTabAnchorLink("interoperable-loesungen", "interoperable-loesungen")}).
+            Detaillierte Informationen zu den Lösungen finden Sie [hier](${interoperabel_loesungen.path}).
           `,
         },
       ],

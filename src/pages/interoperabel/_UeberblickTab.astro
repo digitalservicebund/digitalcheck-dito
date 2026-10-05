@@ -1,5 +1,10 @@
 ---
-import { dokumentation, prinzipien, vorpruefung } from "@/config/routes";
+import {
+  dokumentation,
+  interoperabel_loesungen,
+  prinzipien,
+  vorpruefung,
+} from "@/config/routes";
 import { ContactPhoneOutlined } from "@digitalservicebund/icons";
 import { LinkButton } from "@/components/Button";
 import Heading from "@/components/Heading";
@@ -116,15 +121,8 @@ import { getTabAnchorLinkFromLabel } from "@/utils/tabs";
           Lösungen für ein interoperables Europa (Art. 7 EU 2024/903) sind
           wiederverwendbare Standards für den grenzüberschreitenden
           Datenaustausch zwischen Verwaltungseinheiten. Das Interoperable Europe
-          Board legt fest, welche Lösungen zu prüfen sind. Mehr dazu im Reiter{" "}
-          <a
-            href={getTabAnchorLinkFromLabel(
-              tabLabels.interoperableSolutionsTabLabel,
-            )}
-          >
-            interoperable Lösungen
-          </a>
-          .
+          Board legt fest, welche Lösungen zu prüfen sind. Mehr dazu unter{" "}
+          <a href={interoperabel_loesungen.path}>interoperable Lösungen</a>.
         </p>
       </Timeline.ItemContent>
     </Timeline.Item>
