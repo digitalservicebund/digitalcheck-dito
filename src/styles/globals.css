@@ -225,10 +225,10 @@
 }
 
 @utility text-link {
-  @apply visited:text-ds-violet fill-blue-800 text-blue-800 underline decoration-1 underline-offset-4 active:text-black;
+  @apply visited:text-ds-violet fill-(--kern-color-action-default-contextual) text-(--kern-color-action-default-contextual) underline decoration-1 underline-offset-4 active:text-black;
 
   &:focus-visible {
-    @apply text-blue-800! no-underline!;
+    @apply text-(--kern-color-action-default-contextual)! no-underline!;
   }
 
   &:hover {

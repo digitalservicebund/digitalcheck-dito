@@ -10,6 +10,7 @@ import {
   prinzipien,
   zahlenUndFakten,
 } from "@/config/routes";
+import { ZFL_BASE_URL, ZFL_PATH_VISUALISIERUNGEN } from "@/resources/constants";
 import { dedent } from "@/utils/dedentMultilineStrings";
 import { contact } from "./shared/contact";
 
@@ -80,7 +81,7 @@ export const news = {
         text: "Neue Seite",
       },
       content: dedent`
-        Neue Seite: Gemeinsamer Digitalcheck für Bund und Länder
+        Gemeinsamer Digitalcheck für Bund und Länder
         
         [Hier ansehen](${bundeslaender.path})`,
     },
@@ -127,6 +128,8 @@ export const news = {
        - Titel zeigen nun die Alleinstellungsmerkmale der Visualisierungen (z. B. *Grenzüberschreitender Ablauf*).
        - Neues Feld *Aufwand für das Referat*.
        - Neuer Inhalt: Beratungs- und Erfassungsprozess.
+
+       [Hier ansehen](${ZFL_BASE_URL + ZFL_PATH_VISUALISIERUNGEN})
       `,
     },
     {
@@ -161,7 +164,7 @@ export const news = {
         text: "28.01.2026",
       },
       headline: {
-        text: "Struktur der Prinzipien-Seite verbessert",
+        text: "Struktur der Prinzipien-Seiten verbessert",
       },
       content: dedent`
          - Übersicht auf der Prinzipien-Startseite klarer strukturiert
@@ -256,7 +259,7 @@ export const news = {
       badge: {
         text: "11.09.2025",
       },
-      headline: { text: "Design-Änderungen" },
+      headline: { text: "Design der Progress-Bar angepasst" },
       content: "Darstellung der Progress-Bar an Style der Startseite angepasst",
     },
     {
@@ -323,7 +326,7 @@ export const news = {
         text: "05.08.2025",
       },
       headline: {
-        text: "Umfangreiches Struktur- und Inhalts-Update (neue Startseite)",
+        text: "Umfangreiches Struktur- und Inhalts-Update (Neue Startseite)",
       },
       content: dedent`
         - Neue [Startseite](/)
