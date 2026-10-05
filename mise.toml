@@ -1,9 +1,9 @@
 [tools]
 node = '26.1.0'
 gitleaks = '8.30.1'
-lefthook = "2.1.14"
+lefthook = "2.1.16"
 "github:thoughtworks/talisman" = '1.37.0'
-pnpm = "12.8.1"
+pnpm = "12.8.2"
 
 [settings]
 lockfile = true
