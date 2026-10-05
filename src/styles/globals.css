@@ -191,16 +191,6 @@
   }
 
   h1,
-  h2,
-  .ds-heading-02-reg,
-  .ds-heading-02-bold {
-    /* 80ch @ 18px font size = 720px */
-    max-width: 720px;
-  }
-
-  h3,
-  .ds-heading-03-reg,
-  .ds-heading-03-bold,
   p,
   ul:not(.list-unstyled),
   ol:not(.list-unstyled) {
