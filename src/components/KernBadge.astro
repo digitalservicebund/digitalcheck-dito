@@ -1,7 +1,8 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 
-type Variant = "info" | "success" | "warning" | "danger" | `prinzip-${number}`;
+type Variant =
+  "info" | "success" | "warning" | "danger" | "rechtsakt" | `prinzip-${number}`;
 
 interface Props extends HTMLAttributes<"span"> {
   class?: string;

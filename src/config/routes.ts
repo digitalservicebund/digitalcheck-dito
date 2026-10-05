@@ -253,6 +253,17 @@ export const interoperabel = {
   navLabel: "EU-Interoperabilität",
 } as const;
 
+export const interoperabel_angrenzendesEuRecht = {
+  key: "interoperabel_angrenzendesEuRecht",
+  path: "/interoperabel/angrenzendes-eu-recht",
+  title: "Angrenzendes EU-Recht",
+  parent: interoperabel,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const interoperabel_faq = {
   key: "interoperabel_faq",
   path: "/interoperabel/faq",
@@ -430,6 +441,7 @@ export const allRoutes = [
   home,
   impressum,
   interoperabel,
+  interoperabel_angrenzendesEuRecht,
   interoperabel_faq,
   interoperabel_loesungen,
   interoperabel_loesungen_coreVocabularies,

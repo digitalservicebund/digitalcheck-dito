@@ -1,4 +1,9 @@
-import { home, interoperabel, prinzipien } from "@/config/routes";
+import {
+  home,
+  interoperabel,
+  interoperabel_angrenzendesEuRecht,
+  prinzipien,
+} from "@/config/routes";
 import { ZFL_BASE_URL } from "@/resources/constants";
 import { contact } from "@/resources/content/shared/contact";
 import { dedent } from "@/utils/dedentMultilineStrings";
@@ -53,7 +58,7 @@ export const spoc = {
           content: dedent`
                   Der Interoperable Europe Act und der Europäische Interoperabilitätsrahmen (EIF) sind Teil des Ökosystems der EU-Rechtsakte für den digitalen Binnenmarkt. Weitere zentrale Verordnungen, Richtlinien und Frameworks sind darin verankert.
                   
-                  Übersichten zu den EU-Rechtsakten finden Sie [hier](${interoperabel.path}${getTabAnchorLink("angrenzendes-eu-recht", "angrenzendes-eu-recht")})`,
+                  Übersichten zu den EU-Rechtsakten finden Sie [hier](${interoperabel_angrenzendesEuRecht.path})`,
         },
         {
           title: "Lösungen für ein interoperables Europa",

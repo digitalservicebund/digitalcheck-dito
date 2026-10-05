@@ -3,6 +3,7 @@ import {
   dasIstNeu,
   dokumentation,
   interoperabel,
+  interoperabel_angrenzendesEuRecht,
   interoperabel_nationaleKontaktstelle,
   normenkontrollrat,
   prinzipien,
@@ -140,7 +141,7 @@ export const news = {
           - Welche EU-Rechtsakte könnten für Ihr Vorhaben relevant sein?
           - Was sind die wichtigsten Punkte bezüglich Interoperabilität in dem jeweiligen Rechtsakt?
        
-        [Hier ansehen](${interoperabel.path}${getTabAnchorLink("angrenzendes-eu-recht", "angrenzendes-eu-recht")})
+        [Hier ansehen](${interoperabel_angrenzendesEuRecht.path})
       `,
     },
     {

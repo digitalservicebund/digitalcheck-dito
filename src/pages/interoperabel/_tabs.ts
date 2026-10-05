@@ -4,7 +4,6 @@ import { getTabAnchorLinkFromLabel } from "@/utils/tabs";
 export const tabLabels = {
   overviewTabLabel: "Überblick",
   backgroundTabLabel: "Hintergrund",
-  euLawTabLabel: "Angrenzendes EU-Recht",
   interoperableSolutionsTabLabel: "Interoperable Lösungen",
 } as const;
 

@@ -13,7 +13,6 @@ import InfoBox from "@/components/InfoBox.tsx";
 import RichText from "@/components/RichText";
 import { interoperability } from "@/resources/content/interoperabel";
 import { contact } from "@/resources/content/shared/contact";
-import EuRechtTab from "./_EuRechtTab.astro";
 import HintergrundTab from "./_HintergrundTab.astro";
 import InteroperableLoesungenTab from "./_InteroperableLoesungenTab.astro";
 import UeberblickTab from "./_UeberblickTab.astro";
@@ -24,12 +23,8 @@ export const frontmatter = {
   navLabel: "EU-Interoperabilität",
 };
 
-const {
-  overviewTabLabel,
-  backgroundTabLabel,
-  euLawTabLabel,
-  interoperableSolutionsTabLabel,
-} = tabLabels;
+const { overviewTabLabel, backgroundTabLabel, interoperableSolutionsTabLabel } =
+  tabLabels;
 ---
 
 <Layout title={frontmatter.title}>
@@ -74,14 +69,12 @@ const {
         tabs={[
           overviewTabLabel,
           backgroundTabLabel,
-          euLawTabLabel,
           interoperableSolutionsTabLabel,
         ]}
         searchParams
       >
         <UeberblickTab data-tab-panel={overviewTabLabel} />
         <HintergrundTab data-tab-panel={backgroundTabLabel} />
-        <EuRechtTab data-tab-panel={euLawTabLabel} />
         <InteroperableLoesungenTab
           data-tab-panel={interoperableSolutionsTabLabel}
         />

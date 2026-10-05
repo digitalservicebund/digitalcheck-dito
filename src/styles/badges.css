@@ -23,6 +23,11 @@
   border: 1px solid #8f7400;
   --kern-color-layout-text-default: #645000;
 }
+.kern-badge--rechtsakt {
+  background-color: var(--color-kern-orange-100);
+  border: 1px solid #8f7400;
+  --kern-color-layout-text-default: #645000;
+}
 .kern-badge--ressource {
   background-color: #e5cbf4;
   border: 1px solid #8412af;
