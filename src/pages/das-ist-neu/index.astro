@@ -40,12 +40,12 @@ const TimelineItem = Timeline.Item;
       <Metadata slot="subtitle" lastUpdate="31.08.2026" />
     </Hero>
     <section class="py-80">
-      <Timeline>
+      <Timeline className="pl-26">
         {news.items.map((item) =>
           item.year ? (
             <TimelineItem year={item.year} />
           ) : (
-            <TimelineItem bullet>
+            <TimelineItem bullet className="pt-0">
               {"badge" in item && (
                 <div>
                   <span class="kern-badge kern-badge--small border-0 bg-[#F3F4F7]">
