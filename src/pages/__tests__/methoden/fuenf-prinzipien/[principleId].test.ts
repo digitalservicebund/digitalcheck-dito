@@ -50,20 +50,30 @@ const mockPrinzipData: PrinzipData & { Beschreibung: string } = {
       Anwendung: [],
       Kurzbezeichnung: "A2",
     },
+    {
+      Titel: "Aspekt3",
+      Text: "Anwendung Text 1.3",
+      Anwendung: [],
+      Kurzbezeichnung: "A3",
+    },
   ],
 };
 
-const mockPrinzipsList: Pick<
+const mockNextPrinzip: Pick<
   PrinzipData,
-  "Name" | "URLBezeichnung" | "order"
->[] = [];
+  "Name" | "URLBezeichnung" | "Kurzbeschreibung"
+> = {
+  Name: "Prinzip Test 2",
+  URLBezeichnung: "prinzip-2",
+  Kurzbeschreibung: "Kurzbeschreibung 2",
+};
 
 describe("FivePrinciples Route - Integration Tests", () => {
   let screen: BoundFunctions<typeof queries>;
 
   beforeEach(async () => {
     const { dom } = await renderToDOM(Prinzip as AstroComponentFactory, {
-      props: { prinzip: mockPrinzipData, prinzipList: mockPrinzipsList },
+      props: { prinzip: mockPrinzipData, next: mockNextPrinzip },
     });
     screen = within(dom.body);
   });
@@ -79,11 +89,18 @@ describe("FivePrinciples Route - Integration Tests", () => {
   });
 
   it("marks aspect headings as ToC entries with their short label", () => {
-    for (const { Titel, Kurzbezeichnung } of mockPrinzipData.Aspekte) {
-      const heading = screen.getByRole("heading", { name: Titel, level: 2 });
+    mockPrinzipData.Aspekte.forEach(({ Titel, Kurzbezeichnung }, index) => {
+      const number = `${mockPrinzipData.order}.${index + 1}`;
+      const heading = screen.getByRole("heading", {
+        name: `${number} ${Titel}`,
+        level: 2,
+      });
       expect(heading).toHaveAttribute("id", Kurzbezeichnung.toLowerCase());
-      expect(heading).toHaveAttribute("data-toc-label", Kurzbezeichnung);
-    }
+      expect(heading).toHaveAttribute(
+        "data-toc-label",
+        `${number} ${Kurzbezeichnung}`,
+      );
+    });
   });
 
   it("renders the description, not the short description", () => {
@@ -111,7 +128,9 @@ describe("FivePrinciples Route - Integration Tests", () => {
 
   it("highlights every second aspect section", () => {
     const sections = mockPrinzipData.Aspekte.map(({ Titel }) =>
-      screen.getByRole("heading", { name: Titel, level: 2 }).closest("section"),
+      screen
+        .getByRole("heading", { name: new RegExp(`${Titel}$`), level: 2 })
+        .closest("section"),
     );
     expect(sections[0]).not.toHaveClass("bg-kern-darkblue-025");
     expect(sections[1]).toHaveClass("bg-kern-darkblue-025");
