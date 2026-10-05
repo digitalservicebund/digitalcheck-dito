@@ -16,7 +16,7 @@ import {
 import Badge from "@/components/Badge";
 import { LinkButton } from "@/components/Button";
 import Heading from "@/components/Heading";
-import { BreakoutHero } from "@/components/Hero";
+import Hero from "@/components/Hero.astro";
 import InfoBox from "@/components/InfoBox";
 import InfoBoxSideBySide from "@/components/InfoBoxSideBySide";
 import RichText from "@/components/RichText";
@@ -88,11 +88,22 @@ const steps = [
 
 <Layout>
   <main class="breakout-grid">
-    <BreakoutHero
-      title="Digitaltaugliche Regelungen erarbeiten"
-      subtitle="Der Digitalcheck ist eine Prozessbegleitung für Ihr Regelungsvorhaben. Sie stellen damit Digitaltauglichkeit sicher."
-      className="bg-blue-800 text-white"
-    />
+    <Hero variant="dark">
+      <h1>Digitaltaugliche Regelungen erarbeiten</h1>
+      <p slot="subtitle">
+        Der Digitalcheck ist eine Prozessbegleitung für Ihr Regelungsvorhaben.
+        Sie stellen damit Digitaltauglichkeit sicher.
+      </p>
+      <div class="flex flex-wrap gap-24 pt-8">
+        <LinkButton href={vorpruefung.path}>Digitalcheck starten</LinkButton>
+        <LinkButton
+          href={`${ZFL_BASE_URL}${ZFL_PATH_DIGITALTAUGLICHKEIT}`}
+          look="secondary"
+        >
+          Was ist Digitaltauglichkeit?
+        </LinkButton>
+      </div>
+    </Hero>
     <div class="breakout bg-yellow-300 py-24">
       <div>
         <div class="flex items-center">
