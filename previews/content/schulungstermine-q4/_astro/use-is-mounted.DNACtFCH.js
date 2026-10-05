@@ -1,1 +1,0 @@
-import{i as e,t}from"./react.DmeiICsC.js";import{P as n}from"./open-closed.BCLyNYFX.js";var r=e(t(),1);function i(){let e=(0,r.useRef)(!1);return n(()=>(e.current=!0,()=>{e.current=!1}),[]),e}export{i as t};
