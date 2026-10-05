@@ -280,22 +280,22 @@ export const support = {
                 title: "Nächste Termine",
                 text: [
                   {
-                    date: "Montag, 10.08.2026",
+                    date: "Montag, 26.10.2026",
                     time: "10:00 - 11:30 Uhr",
                     location: "online",
                   },
                   {
-                    date: "Donnerstag, 27.08.2026",
-                    time: "14:00 - 15:30 Uhr",
-                    location: "online",
-                  },
-                  {
-                    date: "Dienstag, 08.09.2026",
+                    date: "Dienstag, 17.11.2026",
                     time: "13:00 - 14:30 Uhr",
                     location: "online",
                   },
                   {
-                    date: "Montag, 21.09.2026",
+                    date: "Mittwoch, 02.12.2026",
+                    time: "13:00 - 14:30 Uhr",
+                    location: "online",
+                  },
+                  {
+                    date: "Montag, 14.12.2026",
                     time: "10:00 - 11:30 Uhr",
                     location: "online",
                   },
