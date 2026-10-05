@@ -65,7 +65,7 @@
   --color-ds-violet: #4c2c92;
 
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
-  --max-content-width: 76rem; /* 1216px */
+  --max-content-width: 82rem; /* 1216px + container padding (2 x 48px) = 1312px or 82rem */
   --max-width-a11y: 630px;
 }
 
