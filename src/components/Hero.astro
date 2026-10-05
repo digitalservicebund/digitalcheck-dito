@@ -1,15 +1,18 @@
 ---
 interface Props {
   class?: string;
+  variant?: "default" | "plain" | "dark";
 }
 
-const { class: className } = Astro.props;
+const { class: className, variant = "default" } = Astro.props;
 const hasSubtitle = Astro.slots.has("subtitle");
 ---
 
 <section
   class:list={[
-    "breakout bg-kern-darkblue-100 space-y-16 py-(--kern-metric-dimension-4x-large) [&_h1]:sm:hyphens-none",
+    "breakout space-y-16 py-(--kern-metric-dimension-4x-large) [&_h1]:sm:hyphens-none",
+    variant === "default" && "bg-kern-darkblue-100",
+    variant === "dark" && "hero-dark bg-kern-darkblue-800",
     className,
   ]}
 >
@@ -20,3 +23,16 @@ const hasSubtitle = Astro.slots.has("subtitle");
     </div>
   )}
 </section>
+
+<style>
+  /* Re-map KERN's contextual colors so text and buttons render light-on-dark. */
+  .hero-dark {
+    --kern-color-layout-text-default-contextual: var(
+      --kern-color-layout-text-inverse
+    );
+    --kern-color-action-default-contextual: var(--kern-color-white);
+    --kern-color-action-on-default-contextual: var(--kern-color-darkblue-800);
+    --kern-color-action-focus-default-contextual: var(--kern-color-white);
+    color: var(--kern-color-layout-text-inverse);
+  }
+</style>
