@@ -80,11 +80,11 @@ const hasFooter = Astro.slots.has("footer");
           <slot name="icon" />
         </div>
       )}
-      <hgroup>
+      <hgroup class="max-w-full">
         {preline && <p class="kern-preline">{preline}</p>}
-        <h2 class="kern-title">
+        <h2 class="kern-title hyphens-auto wrap-break-word">
           {href ? (
-            /* prettier-ignore */ <a href={href} class="kern-link--stretched hyphens-auto [word-break:break-word]" target={target_option}>{title}
+            /* prettier-ignore */ <a href={href} class="kern-link--stretched" target={target_option}>{title}
               </a>
           ) : (
             title
