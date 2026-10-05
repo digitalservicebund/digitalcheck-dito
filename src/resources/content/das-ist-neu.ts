@@ -11,7 +11,6 @@ import {
   zahlenUndFakten,
 } from "@/config/routes";
 import { dedent } from "@/utils/dedentMultilineStrings";
-import { getTabAnchorLink } from "@/utils/tabs";
 import { contact } from "./shared/contact";
 
 export const news = {
@@ -205,7 +204,7 @@ export const news = {
       - Klare Anforderungen für Interoperabilitätsbewertungen
       - Hintergründe und Ziele der neuen EU-Verordnung
       
-      [Hier ansehen](${interoperabel.path}${getTabAnchorLink("hintergrund")})
+      [Hier ansehen](${interoperabel.path})
       `,
     },
     {

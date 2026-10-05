@@ -22,7 +22,7 @@ Verwaltungen von EU-Mitgliedstaaten ausgetauscht werden, muss nach
 ${markdownLinkIEA({ article: 3, format: "long" })} in der Regel
 eine Interoperabilitätsbewertung durchgeführt werden.
 
-<p><a class="mb-8" href="${interoperabel.path}?tab=hintergrund#verbindliche-anforderungen" target="_blank" rel="noreferrer">
+<p><a class="mb-8" href="${interoperabel.path}#verbindliche-anforderungen" target="_blank" rel="noreferrer">
 Wann ist eine Interoperabilitäts-Bewertung verpflichtend?
 </a></p>
 
