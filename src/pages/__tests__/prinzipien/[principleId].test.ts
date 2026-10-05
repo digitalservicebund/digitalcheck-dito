@@ -1,6 +1,6 @@
 // @vitest-environment node
 import type { Prinzip as PrinzipData } from "@/content.config";
-import Prinzip from "@/pages/methoden/fuenf-prinzipien/[principleId].astro";
+import Prinzip from "@/pages/prinzipien/[principleId].astro";
 import { renderToDOM } from "@/utils/testUtils";
 import type { BoundFunctions, queries } from "@testing-library/dom";
 import { within } from "@testing-library/dom";

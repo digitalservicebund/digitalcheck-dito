@@ -109,7 +109,7 @@ exports[`Footer Component > Renders correctly 1`] = `
                
               <a
                 class="increase-tap-area kern-link kern-link--small"
-                href="/methoden/fuenf-prinzipien"
+                href="/prinzipien"
               >
                 Prinzipien der Digitaltauglichkeit
               </a>

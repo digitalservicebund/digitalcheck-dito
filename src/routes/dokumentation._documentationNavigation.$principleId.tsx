@@ -3,7 +3,7 @@ import Heading from "@/components/Heading";
 import HelpButton from "@/components/HelpButton";
 import RadioGroup from "@/components/RadioGroup";
 import RichText from "@/components/RichText";
-import { methoden_fuenfPrinzipien } from "@/config/routes";
+import { prinzipien } from "@/config/routes";
 import type { PrincipleNumber } from "@/resources/constants";
 import { digitalDocumentation } from "@/resources/content/dokumentation";
 import DocumentationActions from "./dokumentation/DocumentationActions";
@@ -63,11 +63,7 @@ export function DocumentationPrinciple({
             title={`Hinweis zu „${prinzip.Name}“`}
           >
             <RichText markdown={prinzip.Hilfetext} />
-            <a
-              href={
-                methoden_fuenfPrinzipien.path + "/" + prinzip.URLBezeichnung
-              }
-            >
+            <a href={prinzipien.path + "/" + prinzip.URLBezeichnung}>
               Mehr zum Prinzip
             </a>
           </HelpButton>

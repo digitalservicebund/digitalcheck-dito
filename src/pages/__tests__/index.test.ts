@@ -140,7 +140,7 @@ describe("Index Route - Integration Tests", () => {
       within(principlesBox).getByRole("link", {
         name: /Prinzipien/,
       }),
-    ).toHaveAttribute("href", "/methoden/fuenf-prinzipien");
+    ).toHaveAttribute("href", "/prinzipien");
 
     expect(
       within(principlesBox).getByRole("link", {

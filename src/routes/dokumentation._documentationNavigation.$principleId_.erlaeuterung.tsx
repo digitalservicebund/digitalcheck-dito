@@ -5,7 +5,7 @@ import Heading from "@/components/Heading";
 import HelpButton from "@/components/HelpButton";
 import RichText from "@/components/RichText";
 import Textarea from "@/components/Textarea";
-import { methoden_fuenfPrinzipien } from "@/config/routes";
+import { prinzipien } from "@/config/routes";
 import type { Prinzip } from "@/content.config";
 import type { PrincipleNumber } from "@/resources/constants";
 import { digitalDocumentation } from "@/resources/content/dokumentation";
@@ -206,11 +206,7 @@ export function DocumentationPrincipleErlaeuterung({
             title={`Hinweis zu „${prinzip.Name}“`}
           >
             <RichText markdown={prinzip.Hilfetext} />
-            <a
-              href={
-                methoden_fuenfPrinzipien.path + "/" + prinzip.URLBezeichnung
-              }
-            >
+            <a href={prinzipien.path + "/" + prinzip.URLBezeichnung}>
               Mehr zum Prinzip
             </a>
           </HelpButton>

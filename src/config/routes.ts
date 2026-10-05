@@ -330,17 +330,6 @@ export const methoden = {
   navLabel: null,
 } as const;
 
-export const methoden_fuenfPrinzipien = {
-  key: "methoden_fuenfPrinzipien",
-  path: "/methoden/fuenf-prinzipien",
-  title: "Fünf Prinzipien",
-  parent: methoden,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
 export const normenkontrollrat = {
   key: "normenkontrollrat",
   path: "/normenkontrollrat",
@@ -350,6 +339,17 @@ export const normenkontrollrat = {
   isStagingOnly: false,
   navOrder: null,
   navLabel: "NKR",
+} as const;
+
+export const prinzipien = {
+  key: "prinzipien",
+  path: "/prinzipien",
+  title: "Fünf Prinzipien",
+  parent: null,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
 } as const;
 
 export const sitemap = {
@@ -437,8 +437,8 @@ export const allRoutes = [
   interoperabel_nationaleKontaktstelle,
   kontakt,
   methoden,
-  methoden_fuenfPrinzipien,
   normenkontrollrat,
+  prinzipien,
   sitemap,
   vorpruefung,
   vorpruefung_ergebnis,

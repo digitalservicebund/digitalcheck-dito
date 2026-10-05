@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { prinzipienPoster_pdf } from "@/config/downloads";
-import { methoden_fuenfPrinzipien } from "@/config/routes";
-import FivePrinciples from "@/pages/methoden/fuenf-prinzipien/index.astro";
+import { prinzipien } from "@/config/routes";
+import FivePrinciples from "@/pages/prinzipien/index.astro";
 import { renderToDOM } from "@/utils/testUtils";
 import type { BoundFunctions, queries } from "@testing-library/dom";
 import { within } from "@testing-library/dom";
@@ -102,7 +102,7 @@ describe("FivePrinciples Route - Integration Tests", () => {
       });
       expect(within(heading).getByRole("link")).toHaveAttribute(
         "href",
-        `${methoden_fuenfPrinzipien.path}/${data.URLBezeichnung}`,
+        `${prinzipien.path}/${data.URLBezeichnung}`,
       );
     }
   });

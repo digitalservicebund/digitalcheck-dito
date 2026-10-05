@@ -30,8 +30,10 @@ const base = isPreview ? PREVIEW_BASE_PATH : undefined;
 const rawRedirects = {
   "/interoperabel/loesungen":
     "/interoperabel?tab=interoperable-loesungen#interoperable-loesungen",
-  "/grundlagen": "/methoden/fuenf-prinzipien",
-  "/grundlagen/fuenf-prinzipien": "/methoden/fuenf-prinzipien",
+  "/grundlagen": "/prinzipien",
+  "/grundlagen/fuenf-prinzipien": "/prinzipien",
+  "/methoden/fuenf-prinzipien": "/prinzipien",
+  "/methoden/fuenf-prinzipien/[principleId]": "/prinzipien/[principleId]",
   "/methoden/ablaeufe-aufgaben-erfassen": `${ZFL_BASE_URL}/werkzeuge/ressourcen/flussdiagramm`,
 };
 

@@ -1,9 +1,5 @@
 ---
-import {
-  dokumentation,
-  methoden_fuenfPrinzipien,
-  vorpruefung,
-} from "@/config/routes";
+import { dokumentation, prinzipien, vorpruefung } from "@/config/routes";
 import { ContactPhoneOutlined } from "@digitalservicebund/icons";
 import { LinkButton } from "@/components/Button";
 import Heading from "@/components/Heading";
@@ -100,7 +96,7 @@ import { getTabAnchorLinkFromLabel } from "@/utils/tabs";
         </Heading>
         <p>
           Erarbeiten Sie Ihre Regelung anhand der{" "}
-          <a href={methoden_fuenfPrinzipien.path}>
+          <a href={prinzipien.path}>
             Fünf Prinzipien für digitaltaugliche Gesetzgebung
           </a>
           . Diese enthalten die Anforderungen an die Interoperabilität und

@@ -1,5 +1,5 @@
 ---
-import { methoden_fuenfPrinzipien } from "@/config/routes";
+import { prinzipien } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
 import FeatureSet from "@/components/FeatureSet.astro";
 import FeatureItem from "@/components/FeatureItem.astro";
@@ -78,7 +78,7 @@ const prinzips = (await getCollection("prinzipien"))
           <KernCard
             title={prinzip.Name}
             body={prinzip.Kurzbeschreibung}
-            href={`${methoden_fuenfPrinzipien.path}/${prinzip.URLBezeichnung}`}
+            href={`${prinzipien.path}/${prinzip.URLBezeichnung}`}
             background="white"
           >
             <KernBadge

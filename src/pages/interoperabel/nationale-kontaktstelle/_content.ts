@@ -1,4 +1,4 @@
-import { home, interoperabel, methoden_fuenfPrinzipien } from "@/config/routes";
+import { home, interoperabel, prinzipien } from "@/config/routes";
 import { ZFL_BASE_URL } from "@/resources/constants";
 import { contact } from "@/resources/content/shared/contact";
 import { dedent } from "@/utils/dedentMultilineStrings";
@@ -186,7 +186,7 @@ export const spoc = {
           text: "15.05.2025",
         },
         content: dedent`
-          Die [5 Prinzipien für digitaltaugliche Gesetzgebung](${methoden_fuenfPrinzipien.path}) sind überarbeitet und entsprechen sowohl den Anforderungen der Digitaltauglichkeit als auch der Interoperabilität.
+          Die [5 Prinzipien für digitaltaugliche Gesetzgebung](${prinzipien.path}) sind überarbeitet und entsprechen sowohl den Anforderungen der Digitaltauglichkeit als auch der Interoperabilität.
         `,
       },
       {

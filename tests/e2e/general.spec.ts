@@ -9,7 +9,7 @@ import {
   home,
   impressum,
   methoden,
-  methoden_fuenfPrinzipien,
+  prinzipien,
   type Route,
   vorpruefung,
   vorpruefung_ergebnis,
@@ -28,7 +28,7 @@ function getExpectedTitle(route: Pick<Route, "path" | "title">) {
     route.path === "/grundlagen/fuenf-prinzipien"
   ) {
     // this page does not exist and redirects to the sub-page
-    return `${methoden_fuenfPrinzipien.title}${titleSuffix}`;
+    return `${prinzipien.title}${titleSuffix}`;
   }
   if (
     route.path.startsWith(dokumentation.path) &&

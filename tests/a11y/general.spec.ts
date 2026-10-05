@@ -2,11 +2,7 @@ import { AxeBuilder } from "@axe-core/playwright";
 import type { Page } from "@playwright/test";
 import { expect, test } from "@playwright/test";
 
-import {
-  allRoutes,
-  methoden_fuenfPrinzipien,
-  vorpruefung_ergebnis,
-} from "@/config/routes";
+import { allRoutes, prinzipien, vorpruefung_ergebnis } from "@/config/routes";
 import { preCheck } from "@/resources/content/vorpruefung";
 import { waitForHydration } from "../e2e/helpers";
 import { checkHeadingsForFlowContent } from "./utils.ts";
@@ -46,7 +42,7 @@ test.describe("basic example a11y test", () => {
     });
 
   test("check a11y of principle pages", async ({ page }) => {
-    const principlesUrl = methoden_fuenfPrinzipien.path;
+    const principlesUrl = prinzipien.path;
     await page.goto(principlesUrl);
 
     const principleLinks = page.locator(`a[href^="${principlesUrl}/"]`); // all URLs starting with current URL

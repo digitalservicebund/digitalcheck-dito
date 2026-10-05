@@ -7,8 +7,8 @@ import {
   interoperabel,
   interoperabel_nationaleKontaktstelle,
   methoden,
-  methoden_fuenfPrinzipien,
   normenkontrollrat,
+  prinzipien,
   sitemap,
   vorpruefung,
   zahlenUndFakten,
@@ -65,7 +65,7 @@ export const footer = {
       links: [
         {
           text: "Prinzipien der Digitaltauglichkeit",
-          url: methoden_fuenfPrinzipien.path,
+          url: prinzipien.path,
         },
         {
           text: "EU-Interoperabilität",

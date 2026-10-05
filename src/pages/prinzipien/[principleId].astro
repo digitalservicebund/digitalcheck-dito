@@ -1,5 +1,5 @@
 ---
-import { methoden_fuenfPrinzipien } from "@/config/routes";
+import { prinzipien } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
 import KernBadge from "@/components/KernBadge.astro";
 import KernCard from "@/components/KernCard.astro";
@@ -73,7 +73,7 @@ const striped = prinzip.Aspekte.length >= 3;
           <KernCard
             title={next.Name}
             body={next.Kurzbeschreibung}
-            href={`${methoden_fuenfPrinzipien.path}/${next.URLBezeichnung}`}
+            href={`${prinzipien.path}/${next.URLBezeichnung}`}
             background="white"
           >
             <KernBadge

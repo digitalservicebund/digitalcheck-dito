@@ -1,9 +1,5 @@
 ---
-import {
-  dokumentation,
-  methoden_fuenfPrinzipien,
-  vorpruefung,
-} from "@/config/routes";
+import { dokumentation, prinzipien, vorpruefung } from "@/config/routes";
 import { withBase } from "@/utils/path";
 import DetailsSummary from "@/components/DetailsSummary";
 import Heading from "@/components/Heading";
@@ -116,7 +112,7 @@ import { ZFL_BASE_URL, ZFL_PATH_VISUALISIERUNGEN } from "@/resources/constants";
     </p>
     <p>
       Dabei helfen Ihnen die{" "}
-      <a href={methoden_fuenfPrinzipien.path}>
+      <a href={prinzipien.path}>
         5 Prinzipien für digitaltaugliche, interoperable Regelungen
       </a>
       . Auch{" "}

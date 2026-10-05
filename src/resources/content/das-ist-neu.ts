@@ -4,8 +4,8 @@ import {
   dokumentation,
   interoperabel,
   interoperabel_nationaleKontaktstelle,
-  methoden_fuenfPrinzipien,
   normenkontrollrat,
+  prinzipien,
   zahlenUndFakten,
 } from "@/config/routes";
 import { dedent } from "@/utils/dedentMultilineStrings";
@@ -166,7 +166,7 @@ export const news = {
          - Übersicht auf der Prinzipien-Startseite klarer strukturiert
          - Darstellung auf den Detailseiten der Prinzipien übersichtlicher gestaltet, einfacher navigierbar und durch Handlungsempfehlungen ergänzt
          
-        [Hier ansehen](${methoden_fuenfPrinzipien.path})`,
+        [Hier ansehen](${prinzipien.path})`,
     },
     {
       year: "2025",
@@ -314,7 +314,7 @@ export const news = {
 - wenn sinnvoll: für Aspekte je ein Beispiel ergänzt
 - Kontextinfo “Warum ist dieses Beispiel gut“ näher an Regelungsbeispiel-Text platziert
 
-[hier ansehen](${methoden_fuenfPrinzipien.path})
+[hier ansehen](${prinzipien.path})
       `,
     },
     {
