@@ -11,7 +11,7 @@ const { title, body } = Astro.props;
   <div class="text-kern-action-default bg-lavender-400 flex size-110 flex-none items-center justify-center px-18 py-22">
     <slot name="icon" />
   </div>
-  {title && <h3 class="kern-heading-medium m-0">{title}</h3>}
+  {title && <h3 class="m-0">{title}</h3>}
   {body && <p>{body}</p>}
   <slot />
 </div>

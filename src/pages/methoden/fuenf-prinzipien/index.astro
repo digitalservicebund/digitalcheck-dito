@@ -38,7 +38,7 @@ const prinzips = (await getCollection("prinzipien"))
       </p>
     </Hero>
 
-    <section id="instruction">
+    <section id="instruction" class="space-y-32">
       <h2>So nutzen Sie die fünf Prinzipien für Ihr Regelungsvorhaben</h2>
       <FeatureSet>
         <FeatureItem title="Den Gesamtprozess überprüfen">
@@ -84,6 +84,7 @@ const prinzips = (await getCollection("prinzipien"))
               slot="pre-header"
               variant={`prinzip-${prinzip.order}`}
               showIcon={false}
+              class="mb-16"
             >
               Prinzip {prinzip.order}
             </KernBadge>
