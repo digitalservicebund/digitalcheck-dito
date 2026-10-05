@@ -127,9 +127,9 @@ exports[`Footer Component > Renders correctly 1`] = `
                
               <a
                 class="increase-tap-area kern-link kern-link--small"
-                href="/grundlagen/normenkontrollrat"
+                href="/normenkontrollrat"
               >
-                NKR und Digitalcheck
+                NKR 
               </a>
             </li>
           </ul>

@@ -108,7 +108,7 @@ describe("Index Route - Integration Tests", () => {
       within(nkrBox).getByRole("link", {
         name: /NKR/,
       }),
-    ).toHaveAttribute("href", "/grundlagen/normenkontrollrat");
+    ).toHaveAttribute("href", "/normenkontrollrat");
   });
 
   it("renders the visualizations and principles InfoBoxes with correct links", () => {
