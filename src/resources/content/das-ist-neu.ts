@@ -327,7 +327,7 @@ export const news = {
       content: dedent`
         - Neue [Startseite](/)
         - Neue Grundlagen-Seite: Was ist Digitaltauglichkeit?
-        - Neue Grundlagen-Seite: [NKR und Digitalcheck](${grundlagen_normenkontrollrat.path})
+        - Neue Grundlagen-Seite: [NKR und Digitalcheck](${normenkontrollrat.path})
         - Neue Dokumentation als Word-Datei v1.5.1 aktualisiert auf Digitalcheck Website, Github und DV
         - Beispiele sind wieder im Footer verlinkt
         - [Nationale Kontaktstelle-Seite](${interoperabel_nationaleKontaktstelle.path}): Zeitleiste neu sortiert (Aktuelles oben)
