@@ -125,13 +125,13 @@ const showSectionSidebar = !!sectionRoot && hasVisibleChildren(sectionRoot);
     ></script>
   </head>
   <body class="flex min-h-screen flex-col">
-    {isDevelopment ? (
+    {false && isDevelopment ? (
       <NewPageHeader />
     ) : (
       <PageHeader client:load currentPath={currentPath} />
     )}
 
-    {isDevelopment && showSectionSidebar ? (
+    {false && isDevelopment && showSectionSidebar ? (
       <div class="h-full min-[900px]:grid min-[900px]:grid-cols-[264px_minmax(0,1fr)]">
         <SectionSidebar />
         <div>
