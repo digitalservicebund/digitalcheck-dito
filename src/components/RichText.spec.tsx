@@ -54,7 +54,7 @@ describe("RichText", () => {
     expect(links[0]).not.toHaveAttribute("download");
     expect(links[0].getAttribute("href")).not.toMatch(/^https?:/);
 
-    // External links – icon via CSS ::after (a:not([download])[href^="http"]::after)
+    // External links – icon via CSS ::before (a:not([download])[href^="http"]::before)
     for (const link of links.slice(1, 3)) {
       expect(link.getAttribute("href")).toMatch(/^https?:/);
       expect(link).not.toHaveAttribute("download");
