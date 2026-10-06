@@ -17,8 +17,8 @@ import { twJoin } from "tailwind-merge";
 export function Kopfzeile({ className }: Readonly<{ className?: string }>) {
   return (
     <div className={twJoin("kern-kopfzeile print:hidden", className)}>
-      <div className="kern-container-fluid">
-        <div className="kern-kopfzeile__content lg:container!">
+      <div className="kern-container-fluid lg:px-0">
+        <div className="kern-kopfzeile__content lg:container">
           <span className="kern-kopfzeile__flagge" aria-hidden="true">
             <svg
               xmlns="http://www.w3.org/2000/svg"

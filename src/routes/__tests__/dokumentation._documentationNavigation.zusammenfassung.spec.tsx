@@ -72,7 +72,11 @@ describe("DocumentationSummary", () => {
 
   const mockDocumentationData: DocumentationData<V2> = {
     version: "2",
-    policyTitle: { title: "Titel des Vorhabens", organization: "Organisation" },
+    policyTitle: {
+      title: "Titel des Vorhabens",
+      bundesland: "Bund",
+      organization: "Organisation",
+    },
     participation: {
       formats: "Format 1",
       results: "Auswirkung auf die Regelung",
@@ -435,7 +439,13 @@ describe("DocumentationSummary", () => {
     [dokumentation_regelungsvorhabenTitel.path, { policyTitle: undefined }],
     [
       dokumentation_regelungsvorhabenTitel.path,
-      { policyTitle: { title: "", organization: "" } },
+      {
+        policyTitle: {
+          title: "",
+          bundesland: "Bund" as const,
+          organization: "",
+        },
+      },
     ],
     [dokumentation_beteiligungsformate.path, { participation: undefined }],
     [

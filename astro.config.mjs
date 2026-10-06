@@ -81,11 +81,7 @@ export default defineConfig({
     }),
   ],
   vite: {
-    plugins: [
-      tailwindcss(),
-      // Renders Iconify icons (e.g. from @iconify-json/ic) as Astro components
-      Icons({ compiler: "astro" }),
-    ],
+    plugins: [tailwindcss(), Icons({ compiler: "astro" })],
     resolve: {
       alias: {
         "@/": new URL("./src/", import.meta.url).pathname,
