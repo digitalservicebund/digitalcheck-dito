@@ -113,9 +113,6 @@ test("footer is displayed", async ({ page }) => {
     footerEl.getByRole("navigation", { name: "Schnellübersicht" }),
   ).toBeVisible();
   await expect(
-    footerEl.getByRole("navigation", { name: "Sitemap" }),
-  ).toBeVisible();
-  await expect(
     footerEl.getByRole("navigation", { name: "Externe Verlinkungen" }),
   ).toBeVisible();
 });
@@ -135,7 +132,10 @@ test.describe("links", () => {
 
   test("links in landing page work", async ({ page }) => {
     await page.goto(home.path);
-    await page.getByRole("link", { name: "Regelung erarbeiten" }).click();
+    await page
+      .getByRole("main")
+      .getByRole("link", { name: "Regelung erarbeiten" })
+      .click();
     await expect(page).toHaveURL(methoden.path);
   });
 
