@@ -17,6 +17,7 @@ import "@testing-library/jest-dom";
 import { act, render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import type { Prinzip } from "@/content.config";
 import { stubResizingFunctionality } from "@/routes/__tests__/utils/stubResizingFunctionality.ts";
 import { LayoutWithDocumentationNavigation } from "@/routes/dokumentation._documentationNavigation";
 import {
@@ -24,7 +25,6 @@ import {
   useDocumentationNavigation,
 } from "@/routes/dokumentation/DocumentationNavigationContext";
 import { readDataFromLocalStorage } from "@/utils/localStorageVersioned";
-import type { PrinzipWithAspekte } from "@/utils/strapiData.types";
 import { DocumentationDataProvider } from "../dokumentation/DocumentationDataProvider";
 import type {
   DocumentationData,
@@ -40,12 +40,13 @@ import {
  * A minimal prinzip stub so the nav renders a "Prinzip A" entry,
  * matching the `id: "${dokumentation.path}/prinzipA"` used in test data below.
  */
-const mockPrinzip: PrinzipWithAspekte = {
+const mockPrinzip: Prinzip = {
   documentId: `${dokumentation.path}/prinzipA`,
   Name: "Prinzip A",
   URLBezeichnung: "prinzipA",
-  Kurzbezeichnung: "P1",
-  Beschreibung: [],
+  Kurzbeschreibung: "",
+  Hilfetext: "",
+  Erklaerungshilfe: "",
   Nummer: 1,
   order: 1,
   Aspekte: [],

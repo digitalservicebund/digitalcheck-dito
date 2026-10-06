@@ -1,0 +1,17 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+
+export const frontmatter = {
+  title: "Kontakt",
+  isStagingOnly: true,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main>
+    <Hero>
+      <h1>Sprechen Sie uns an</h1>
+    </Hero>
+  </main>
+</Layout>

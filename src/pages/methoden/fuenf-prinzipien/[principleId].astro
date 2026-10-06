@@ -1,13 +1,13 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { aspektCommonFields, fetchStrapiData } from "@/utils/strapiData.server";
 import Badge from "@/components/Badge.tsx";
-import { BlocksRenderer } from "@/components/BlocksRenderer.tsx";
+import RichText from "@/components/RichText.tsx";
 import Hero from "@/components/Hero.astro";
 import ToC from "@/components/TableOfContentsInteractive.tsx";
 import SidebarContainer from "@/components/SidebarContainer.astro";
-import type { PrinzipWithAspekte } from "@/utils/strapiData.types";
+import type { Prinzip } from "@/content.config";
 import { slugify } from "@/utils/utilFunctions";
+import { getCollection } from "astro:content";
 import Aspect from "./_Aspect.astro";
 import PrincipleNavigation from "./_PrincipleNavigation.astro";
 
@@ -16,34 +16,16 @@ export const frontmatter = {
   sitemap: false,
 };
 
+type PrinzipWithBeschreibung = Prinzip & { Beschreibung: string };
+
 export async function getStaticPaths() {
-  // Like GET_PRINZIPS_WITH_EXAMPLES_QUERY, but additionally fetches the Aspekt
-  // Nummer and the Anwendung subtree which only this page renders. Kept here
-  // (rather than shared) so the documentation pages don't ship Anwendung data to
-  // the client during hydration.
-  const PRINZIPS_ASPEKTE_QUERY = `
-  query Prinzips {
-    prinzips(sort: "order") {
-      documentId
-      Name
-      Beschreibung
-      order
-      Nummer
-      URLBezeichnung
-      Aspekte {
-        Nummer
-        ${aspektCommonFields}
-        Anwendung {
-          Titel
-          Erklaerung
-          Formulierungsbeispiel
-        }
-      }
-    }
-  }`;
-  const { prinzips } = await fetchStrapiData<{
-    prinzips: PrinzipWithAspekte[];
-  }>(PRINZIPS_ASPEKTE_QUERY);
+  const entries = await getCollection("prinzipien");
+
+  // The overview description (`Beschreibung`) lives in the Markdown body,
+  // not the frontmatter `data`, so it has to be pulled in separately here.
+  const prinzips: PrinzipWithBeschreibung[] = entries
+    .map((entry) => ({ ...entry.data, Beschreibung: entry.body ?? "" }))
+    .sort((a, b) => a.order - b.order);
 
   const prinzipList = prinzips.map(({ Name, URLBezeichnung, order }) => ({
     Name,
@@ -72,9 +54,9 @@ const title = prinzip ? `Prinzip: ${prinzip.Name}` : "Fünf Prinzipien";
           </Badge>
         </div>
         <h1>{prinzip.Name}</h1>
-        <BlocksRenderer
+        <RichText
           className="ds-subhead mt-16 space-y-16"
-          content={prinzip.Beschreibung}
+          markdown={prinzip.Beschreibung}
         />
       </Hero>
     </div>
@@ -84,7 +66,7 @@ const title = prinzip ? `Prinzip: ${prinzip.Name}` : "Fünf Prinzipien";
           {prinzip.Aspekte.map((aspect) => (
             <ToC.Item
               href={`#${slugify(aspect.Kurzbezeichnung)}`}
-              title={(aspect.Nummer ?? "") + " " + aspect.Kurzbezeichnung}
+              title={aspect.Kurzbezeichnung}
             />
           ))}
         </ToC.List>

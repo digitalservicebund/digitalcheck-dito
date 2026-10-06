@@ -18,7 +18,6 @@ import type {
 } from "@/routes/dokumentation/documentationDataSchema";
 import type { RouteGroup } from "@/routes/dokumentation/DocumentationNavigationContext.tsx";
 import { readDataFromLocalStorage } from "@/utils/localStorageVersioned";
-import type { AbsatzWithParagraph } from "@/utils/strapiData.types";
 import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
@@ -90,31 +89,27 @@ describe("DocumentationSummary", () => {
     mockNavigationContext.prinzips = [
       {
         Name: "Digitale Angebote für alle nutzbar gestalten",
-        Kurzbezeichnung: "Digitale Angebote",
         URLBezeichnung: "prinzip-digitale-angebote",
         documentId: "1",
         Nummer: 1,
         order: 1,
-        Beschreibung: [],
+        Kurzbeschreibung: "",
+        Hilfetext: "",
+        Erklaerungshilfe: "",
         Aspekte: [
           {
             Titel: "Aspekt 1",
             Kurzbezeichnung: "A1",
-            Beschreibung: "",
-            Text: [],
-            Nummer: "",
+            Text: "",
             Anwendung: [],
           },
           {
             Titel: "Aspekt 2",
             Kurzbezeichnung: "A2",
-            Beschreibung: "",
-            Text: [],
-            Nummer: "",
+            Text: "",
             Anwendung: [],
           },
         ],
-        Beispiel: {} as AbsatzWithParagraph,
       },
     ];
   });

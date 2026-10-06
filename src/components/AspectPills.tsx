@@ -1,5 +1,5 @@
 import InputError from "@/components/InputError";
-import type { PrinzipAspekt } from "@/utils/strapiData.types";
+import type { PrinzipAspekt } from "@/content.config";
 import { slugify } from "@/utils/utilFunctions";
 import type { FormScope } from "@rvf/react";
 import { useField } from "@rvf/react";

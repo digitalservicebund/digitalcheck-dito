@@ -1,0 +1,150 @@
+---
+import DrilldownNavigation from "@/components/global/DrilldownNavigation.astro";
+import Kopfzeile from "@/components/global/Kopfzeile.astro";
+import {
+  bundeslaender,
+  grundlagen_normenkontrollrat,
+  home,
+  interoperabel,
+  methoden_fuenfPrinzipien,
+  kontakt,
+  type Route,
+} from "@/config/routes";
+import { contact } from "@/resources/content/shared/contact";
+import { header } from "@/resources/content/shared/header";
+import { getMobileMenuNavigation } from "@/utils/navigation/drilldown";
+import { getRouteLabel, isRouteVisible } from "@/utils/navigation/routeUtils";
+import { removeTrailingSlash, withBase } from "@/utils/path";
+import { twMerge } from "tailwind-merge";
+import IconClose from "~icons/ic/outline-close";
+import IconMenu from "~icons/ic/twotone-menu";
+import IconPhoneEnabled from "~icons/ic/twotone-phone-enabled";
+
+const currentPath = removeTrailingSlash(Astro.url.pathname);
+
+const HEADER_ROUTES: Route[] = [
+  methoden_fuenfPrinzipien,
+  interoperabel,
+  bundeslaender,
+  grundlagen_normenkontrollrat,
+  kontakt,
+];
+const headerNavigation = HEADER_ROUTES.filter(isRouteVisible);
+const mobileMenu = getMobileMenuNavigation(currentPath, headerNavigation);
+const mobileMenuInitialDepth = mobileMenu.activePanel.depth;
+
+const mobileMenuId = "page-header-mobile-menu";
+
+function navItemStyle(active = false) {
+  return twMerge(
+    "link-unstyled flex h-full items-center border-b-4 border-transparent px-16 pt-4 hover:bg-kern-darkblue-025",
+    active && "border-kern-darkblue-800 bg-kern-darkblue-025",
+  );
+}
+---
+
+<header
+  class="relative z-30 border-b-2 border-kern-darkblue-100 bg-white"
+  x-data="{ mobileMenuOpen: false }"
+  @resize.window="mobileMenuOpen = false"
+  @keydown.escape.window="mobileMenuOpen = false"
+>
+  <Kopfzeile />
+  <div class="flex h-72 justify-between pl-16">
+    <!-- Logo and title -->
+    <a href={home.path} class="link-unstyled flex items-center gap-24">
+      <img
+        src={withBase("/logo/bund-logo.png")}
+        alt="Logo des Bundes"
+        class="w-54 forced-colors:dark:hidden"
+      />
+      <img
+        src={withBase("/logo/bund-logo-white.svg")}
+        alt="Logo des Bundes"
+        class="hidden w-54 forced-colors:dark:block"
+      />
+      <p class="text-xl font-bold max-lg:hidden">{header.title}</p>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden h-full lg:flex" aria-label="Hauptnavigation">
+      {headerNavigation.map((route) => {
+        const isActive =
+          currentPath === route.path ||
+          currentPath.startsWith(route.path + "/");
+        return (
+          <a
+            href={route.path}
+            class={navItemStyle(isActive)}
+            aria-current={isActive ? "page" : undefined}
+          >
+            {getRouteLabel(route)}
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- Mobile Menu Toggle -->
+    <div class="flex h-full lg:hidden">
+      <a
+        href={contact.phone}
+        class={navItemStyle()}
+        aria-label={`${header.contactTel.msg} ${contact.phoneDisplay}`}
+      >
+        <IconPhoneEnabled class="size-24 -scale-x-100" />
+      </a>
+      <button
+        type="button"
+        class={navItemStyle()}
+        aria-label="Menü öffnen / schließen"
+        aria-controls={mobileMenuId}
+        :aria-expanded="mobileMenuOpen"
+        @click="mobileMenuOpen = !mobileMenuOpen; if (mobileMenuOpen) $dispatch('page-header-mobile-menu-opened')"
+      >
+        <IconMenu x-show="!mobileMenuOpen" class="size-24" />
+        <IconClose x-show="mobileMenuOpen" class="size-24" />
+      </button>
+    </div>
+  </div>
+  <div
+    x-cloak
+    x-show="mobileMenuOpen"
+    class="absolute inset-x-0 top-full h-screen bg-black/40 lg:hidden"
+    @click="mobileMenuOpen = false"
+    aria-hidden="true"
+  ></div>
+  <!-- Mobile Navigation -->
+  <nav
+    id={mobileMenuId}
+    class="mobile-menu-popover absolute inset-x-0 top-full border-t-2 border-blue-300 lg:hidden"
+    x-data={`{ currentPanel: "${mobileMenu.activePanel.id}", initialPanel: "${mobileMenu.activePanel.id}", currentDepth: ${mobileMenuInitialDepth}, initialDepth: ${mobileMenuInitialDepth} }`}
+    x-cloak
+    x-show="mobileMenuOpen"
+    :aria-hidden="!mobileMenuOpen"
+    @page-header-mobile-menu-opened.window="currentPanel = initialPanel; currentDepth = initialDepth"
+    x-bind:data-depth="currentDepth"
+  >
+    <DrilldownNavigation
+      navigation={mobileMenu}
+      panelIdPrefix="mobile-menu"
+      rootPanelId="root"
+    />
+  </nav>
+</header>
+
+<style>
+  @reference "@/styles/globals.css";
+
+  .mobile-menu-popover {
+    @apply bg-blue-200;
+    --active-item-bg-color: var(--color-blue-300);
+  }
+
+  .mobile-menu-popover[data-depth="0"] {
+    @apply bg-white;
+  }
+
+  [x-cloak] {
+    display: none !important;
+  }
+</style>

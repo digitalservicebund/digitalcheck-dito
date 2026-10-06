@@ -72,6 +72,10 @@ fileignoreconfig:
     ignore_detectors: [filecontent]
   - filename: src/images/rulemap.jpg
     checksum: f0689a0156be077a2345fbf579cc1d69b2ea14ef84f62966ea77eb5ebe6345f2
+  - filename: src/content/prinzipien/etablierte-technologien-ermoeglichen-effiziente-umsetzung.md 
+    ignore_detectors: [filecontent]
+  - filename: src/content/prinzipien/etablierte-technologien-ermoeglichen-effiziente-umsetzung.md
+    ignore_detectors: [filecontent]
 
 allowed_patterns:
   - key

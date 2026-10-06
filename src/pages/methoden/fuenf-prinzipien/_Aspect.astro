@@ -1,19 +1,16 @@
 ---
 import AccordionItem from "@/components/AccordionItem.tsx";
 import Badge from "@/components/Badge.tsx";
-import { BlocksRenderer } from "@/components/BlocksRenderer.tsx";
+import RichText from "@/components/RichText.tsx";
 import { PRINCIPLE_COLORS } from "@/resources/constants.ts";
-import type {
-  PrinzipAspekt,
-  PrinzipWithAspekte,
-} from "@/utils/strapiData.types";
+import type { PrincipleNumber } from "@/resources/constants.ts";
+import type { Prinzip, PrinzipAspekt } from "@/content.config";
 import { slugify } from "@/utils/utilFunctions";
 import { twJoin } from "tailwind-merge";
-import { textModifiers } from "./_textModifiers.tsx";
 
 interface Props {
   aspect: PrinzipAspekt;
-  prinzip: PrinzipWithAspekte;
+  prinzip: Prinzip;
 }
 
 const { aspect, prinzip } = Astro.props;
@@ -23,20 +20,17 @@ const { aspect, prinzip } = Astro.props;
   <div class="space-y-40">
     <div>
       <Badge
-        className={twJoin(PRINCIPLE_COLORS[prinzip.Nummer].background, "mb-16")}
+        className={twJoin(
+          PRINCIPLE_COLORS[prinzip.Nummer as PrincipleNumber].background,
+          "mb-16",
+        )}
       >
         Schwerpunkt
       </Badge>
-      <h2 class="mb-40">
-        {aspect.Nummer} {aspect.Titel}
-      </h2>
+      <h2 class="mb-40">{aspect.Titel}</h2>
     </div>
     {aspect.Text && (
-      <BlocksRenderer
-        content={aspect.Text}
-        className={"space-y-16"}
-        modifiers={textModifiers}
-      />
+      <RichText markdown={aspect.Text} className={"space-y-16"} />
     )}
     {!!aspect.Anwendung.length && (
       <>
@@ -45,18 +39,15 @@ const { aspect, prinzip } = Astro.props;
           {aspect.Anwendung.map((anwendung) => (
             <AccordionItem client:load headline={anwendung.Titel}>
               <div class="space-y-40">
-                <BlocksRenderer
+                <RichText
                   className="space-y-16"
-                  content={anwendung.Erklaerung}
+                  markdown={anwendung.Erklaerung}
                 />
                 {anwendung.Formulierungsbeispiel && (
                   <div class="space-y-16 border border-gray-600 bg-green-200 p-40">
                     <h4 class="ds-heading-02-reg">Formulierungsbeispiel</h4>
                     <div>
-                      <BlocksRenderer
-                        content={anwendung.Formulierungsbeispiel}
-                        modifiers={textModifiers}
-                      />
+                      <RichText markdown={anwendung.Formulierungsbeispiel} />
                     </div>
                   </div>
                 )}

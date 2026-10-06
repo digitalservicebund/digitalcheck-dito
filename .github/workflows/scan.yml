@@ -49,13 +49,13 @@ jobs:
           fi
       # Upload SARIF results to GitHub Security tab
       - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@1c5b675653bb5c22dbe9b12b556ec555138e09fd # v4.38.1
+        uses: github/codeql-action/upload-sarif@2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2 # v4.38.2
         if: always() # Bypass non-zero exit code
         with:
           sarif_file: "trivy-results.sarif"
 
       - name: Send failure to Slack
-        uses: digitalservicebund/notify-on-failure-gha@5b80a7c2dbe1198cae75c9f64708600bf2d9bc0c # v1.6.1
+        uses: digitalservicebund/notify-on-failure-gha@b8fdda76a38fa8e94cf623ebdd03e4570bc4ceb0 # v1.6.1
         if: failure()
         with:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}

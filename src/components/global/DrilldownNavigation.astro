@@ -1,0 +1,69 @@
+---
+import DrilldownNavigationItem from "@/components/global/DrilldownNavigationItem.astro";
+import type { DrilldownNavigationData } from "@/utils/navigation/drilldown";
+import IconChevronLeft from "~icons/ic/outline-chevron-left";
+
+interface Props {
+  navigation: DrilldownNavigationData;
+  panelIdPrefix: string;
+  rootPanelId?: string;
+}
+
+const { navigation, panelIdPrefix, rootPanelId } = Astro.props;
+const { panels, currentPath, activePanel } = navigation;
+
+function getPanelElementId(panelId: string) {
+  return `${panelIdPrefix}-panel-${panelId}`;
+}
+---
+
+{
+  /* Hide inactive panels in SSR with style=... so they do not all flash before Alpine applies x-show. */
+  panels.map((panel) => (
+    <div
+      id={getPanelElementId(panel.id)}
+      x-show={`currentPanel === "${panel.id}"`}
+      style={panel.id === activePanel.id ? undefined : "display: none;"}
+      class="flex flex-col gap-8 px-16 py-24"
+      data-panel={panel.id}
+      data-pagefind-ignore
+    >
+      {/* Child-panel back button */}
+      {panel.parent && (
+        <button
+          type="button"
+          class={
+            "link-unstyled hover:bg-kern-darkblue-750 kern-body--muted flex w-full items-center gap-4 rounded-sm px-16 py-8 underline underline-offset-2 hover:text-white"
+          }
+          @click={`currentPanel = "${panel.parent.id}"; currentDepth--`}
+          aria-controls={getPanelElementId(panel.parent.id)}
+        >
+          <IconChevronLeft class="size-24" aria-hidden="true" />
+          <span>{panel.parent.label}</span>
+        </button>
+      )}
+      <ul class="list-unstyled max-w-none space-y-4 p-0">
+        {/* Parent section entry */}
+        {panel.sectionRoute && (
+          <DrilldownNavigationItem
+            item={panel.sectionRoute}
+            currentPath={currentPath}
+          />
+        )}
+        {panel.items
+          .filter((item) => item.isVisible)
+          .map((item) => (
+            <DrilldownNavigationItem
+              item={item}
+              currentPath={currentPath}
+              panelElementId={
+                item.panelId ? getPanelElementId(item.panelId) : undefined
+              }
+            />
+          ))}
+      </ul>
+      {/* Root-panel footer slot */}
+      {panel.id === rootPanelId && <slot name="root-footer" />}
+    </div>
+  ))
+}
