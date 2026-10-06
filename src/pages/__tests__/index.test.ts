@@ -2,10 +2,8 @@
 import Index from "@/pages/index.astro";
 import {
   ZFL_BASE_URL,
-  ZFL_PATH_BEISPIELE,
-  ZFL_PATH_DIGITALTAUGLICHKEIT,
-  ZFL_PATH_FLUSSDIAGRAMME,
-  ZFL_PATH_VISUALISIERUNGEN,
+  ZFL_PATH_RESSOURCEN,
+  ZFL_PATH_SCHULUNGEN,
 } from "@/resources/constants";
 import { renderToDOM } from "@/utils/testUtils";
 import type { BoundFunctions, queries } from "@testing-library/dom";
@@ -21,151 +19,103 @@ describe("Index Route - Integration Tests", () => {
     main = within(dom.querySelector("main")!);
   });
 
-  it("renders the Hero section with the correct title", () => {
+  it("renders the Hero section with title and calls to action", () => {
     expect(
       main.getByRole("heading", {
         name: "Digitaltaugliche Regelungen erarbeiten",
         level: 1,
       }),
     ).toBeInTheDocument();
+
+    expect(
+      main.getByRole("link", { name: "Digitalcheck starten" }),
+    ).toHaveAttribute("href", "/vorpruefung");
+    expect(
+      main.getByRole("link", { name: "Was ist Digitaltauglichkeit?" }),
+    ).toHaveAttribute("href", "#was-ist-digitaltauglichkeit");
   });
 
-  it("renders the step-by-step section with all three steps", () => {
+  it("renders the three steps with their links", () => {
     expect(
       main.getByRole("heading", {
-        name: "Schritt für Schritt",
+        name: "Der Digitalcheck in drei Schritten",
         level: 2,
       }),
     ).toBeInTheDocument();
 
-    // Step 1
-    expect(
-      main.getByRole("heading", {
-        name: /Digitalbezug/,
-        level: 3,
-      }),
-    ).toBeInTheDocument();
-
-    const step1Button = main.getByRole("link", {
-      name: /Digitalbezug/,
+    [
+      ["Vorprüfung durchlaufen", "Vorprüfung starten", "/vorpruefung"],
+      ["Regelung erarbeiten", "Zur Erarbeitung", "/methoden"],
+      [
+        "Digitalcheck dokumentieren",
+        "Dokumentation erstellen",
+        "/dokumentation",
+      ],
+    ].forEach(([heading, link, href]) => {
+      expect(
+        main.getByRole("heading", { name: heading, level: 3 }),
+      ).toBeInTheDocument();
+      expect(main.getByRole("link", { name: link })).toHaveAttribute(
+        "href",
+        href,
+      );
     });
-    expect(step1Button).toHaveAttribute("href", "/vorpruefung");
 
-    // Step 2
-    expect(
-      main.getByRole("heading", {
-        name: /Digitaltauglichkeit der Regelung/,
-        level: 3,
-      }),
-    ).toBeInTheDocument();
-
-    const step2Button = main.getByRole("link", {
-      name: "Regelung erarbeiten",
-    });
-    expect(step2Button).toHaveAttribute("href", "/methoden");
-
-    // Step 3
-    expect(
-      main.getByRole("heading", {
-        name: /Dokumentieren/,
-        level: 3,
-      }),
-    ).toBeInTheDocument();
-
-    const step3Button = main.getByRole("link", {
-      name: /Dokumentation erstellen/,
-    });
-    expect(step3Button).toHaveAttribute("href", "/dokumentation");
+    expect(main.getByRole("link", { name: "Ressourcen" })).toHaveAttribute(
+      "href",
+      ZFL_BASE_URL + ZFL_PATH_RESSOURCEN,
+    );
   });
 
-  it("renders the Grundlagen section with correct InfoBoxes", () => {
+  it("renders the Digitaltauglichkeit section as jump target", () => {
+    const heading = main.getByRole("heading", {
+      name: "Was ist Digitaltauglichkeit?",
+      level: 2,
+    });
+    expect(heading.closest("section")).toHaveAttribute(
+      "id",
+      "was-ist-digitaltauglichkeit",
+    );
+  });
+
+  it("renders the five principles", () => {
     expect(
       main.getByRole("heading", {
-        name: "Einführung zum Digitalcheck",
+        name: "Fünf Prinzipien der Digitaltauglichkeit",
         level: 2,
       }),
     ).toBeInTheDocument();
-
-    // First InfoBox
-    const digitalTauglichkeitBox = main.getByRole("heading", {
-      name: /Was ist Digitaltauglichkeit?/,
-      level: 3,
-    }).parentElement!;
-
     expect(
-      within(digitalTauglichkeitBox).getByRole("link", {
-        name: /Digitaltauglichkeit/,
-      }),
-    ).toHaveAttribute("href", ZFL_BASE_URL + ZFL_PATH_DIGITALTAUGLICHKEIT);
-
-    // Second InfoBox
-    const nkrBox = main.getByRole("heading", {
-      name: /Nationale Normenkontrollrat/,
-      level: 3,
-    }).parentElement!;
-
+      main.getByText("Digitale Angebote für alle nutzbar gestalten"),
+    ).toBeInTheDocument();
     expect(
-      within(nkrBox).getByRole("link", {
-        name: /NKR/,
-      }),
-    ).toHaveAttribute("href", "/normenkontrollrat");
-  });
-
-  it("renders the visualizations and principles InfoBoxes with correct links", () => {
-    // Visualizations InfoBox
-    const visualizationsBox = main.getByRole("heading", {
-      name: /Visualisierungen/,
-      level: 3,
-    }).parentElement!;
-
-    expect(
-      within(visualizationsBox).getByRole("link", {
-        name: /Visualisierungen/,
-      }),
-    ).toHaveAttribute("href", ZFL_BASE_URL + ZFL_PATH_FLUSSDIAGRAMME);
-
-    expect(
-      within(visualizationsBox).getByRole("link", {
-        name: "Beispiele",
-      }),
-    ).toHaveAttribute("href", ZFL_BASE_URL + ZFL_PATH_VISUALISIERUNGEN);
-
-    // Principles InfoBox
-    const principlesBox = main.getByRole("heading", {
-      name: /Prinzipien/,
-      level: 3,
-    }).parentElement!;
-
-    expect(
-      within(principlesBox).getByRole("link", {
-        name: /Prinzipien/,
-      }),
+      main.getByRole("link", { name: "Zu den Prinzipien" }),
     ).toHaveAttribute("href", "/prinzipien");
-
-    expect(
-      within(principlesBox).getByRole("link", {
-        name: "Beispiele",
-      }),
-    ).toHaveAttribute("href", ZFL_BASE_URL + ZFL_PATH_BEISPIELE);
   });
 
-  it("renders the individual support section", () => {
+  it("renders the EU-Interoperabilität and Bundesländer cards", () => {
     expect(
-      main.getByRole("heading", {
-        name: /Unterstützung/,
-        level: 2,
-      }),
+      main.getByRole("link", { name: "Zu EU-Interoperabilität" }),
+    ).toHaveAttribute("href", "/interoperabel");
+    expect(
+      main.getByRole("link", { name: "Nationale Kontaktstelle" }),
+    ).toHaveAttribute("href", "/interoperabel/nationale-kontaktstelle");
+    expect(main.getByRole("link", { name: "Zur Übersicht" })).toHaveAttribute(
+      "href",
+      "/bundeslaender",
+    );
+  });
+
+  it("renders the support section", () => {
+    expect(
+      main.getByRole("heading", { name: "Unterstützungsangebote", level: 2 }),
     ).toBeInTheDocument();
-
-    const supportButton = main.getByRole("link", {
-      name: /Angebote/,
-    });
-    expect(supportButton).toHaveAttribute("href", "/kontakt");
-  });
-
-  it("renders the quote section", () => {
-    expect(main.getByText(/Digitalcheck erscheint/)).toBeInTheDocument();
-
-    expect(main.getByText("Referentin")).toBeInTheDocument();
+    expect(
+      main.getByRole("link", { name: "Zum Zentrum für Legistik" }),
+    ).toHaveAttribute("href", ZFL_BASE_URL);
+    expect(main.getByRole("link", { name: "Schulungen" })).toHaveAttribute(
+      "href",
+      ZFL_BASE_URL + ZFL_PATH_SCHULUNGEN,
+    );
   });
 });

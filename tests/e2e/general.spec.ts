@@ -98,7 +98,7 @@ test.describe("landing page", () => {
   test("CTA on landing works", async ({ page }) => {
     await page.goto(home.path);
     await page
-      .getByRole("link", { name: "Digitalbezug einschätzen" })
+      .getByRole("link", { name: "Digitalcheck starten" })
       .first()
       .click();
     await expect(page).toHaveURL(vorpruefung.path);
@@ -134,7 +134,7 @@ test.describe("links", () => {
     await page.goto(home.path);
     await page
       .getByRole("main")
-      .getByRole("link", { name: "Regelung erarbeiten" })
+      .getByRole("link", { name: "Zur Erarbeitung" })
       .click();
     await expect(page).toHaveURL(methoden.path);
   });
