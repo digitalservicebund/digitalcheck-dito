@@ -43,7 +43,6 @@ const rawRedirects = {
     "/prinzipien/automatisierung-basiert-auf-eindeutigen-regelungen",
   "/methoden/fuenf-prinzipien/datenschutz-und-informationssicherheit-schaffen-vertrauen":
     "/prinzipien/datenschutz-und-informationssicherheit-schaffen-vertrauen",
-  "/methoden/ablaeufe-aufgaben-erfassen": `${ZFL_BASE_URL}/werkzeuge/ressourcen/flussdiagramm`,
 };
 
 // Some pages were moved to the Zentrum für Legistik
@@ -63,6 +62,7 @@ const zflRedirects = {
   "/methoden/technische-umsetzbarkeit": `${ZFL_BASE_URL}${ZFL_PATH_TECHNISCHE_UMSETZBARKEIT}`,
   "/methoden/visualisieren": `${ZFL_BASE_URL}${ZFL_PATH_FLUSSDIAGRAMME}`,
   "/methoden/visualisieren/flussdiagramm": `${ZFL_BASE_URL}${ZFL_PATH_FLUSSDIAGRAMME}`,
+  "/methoden/ablaeufe-aufgaben-erfassen": `${ZFL_BASE_URL}/werkzeuge/ressourcen/flussdiagramm`,
 };
 
 const redirects = {
