@@ -3,6 +3,7 @@
 ## Status
 
 - 2024-12-05: Accepted
+- 2026-06-19: Superseded by [ADR 27](./0027-migrate-to-astro.md)
 
 ## Context
 
