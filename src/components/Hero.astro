@@ -33,6 +33,23 @@ const hasSubtitle = Astro.slots.has("subtitle");
     --kern-color-action-default-contextual: var(--kern-color-white);
     --kern-color-action-on-default-contextual: var(--kern-color-darkblue-800);
     --kern-color-action-focus-default-contextual: var(--kern-color-white);
+    /* KERN derives hover/active states from the non-contextual action color at :root, so re-derive them from white. */
+    --kern-color-action-state-indicator-shade-hover: var(
+      --kern-color-darkblue-050
+    );
+    --kern-color-action-state-indicator-shade-active: var(
+      --kern-color-darkblue-100
+    );
+    --kern-color-action-state-indicator-tint-hover-opacity: color-mix(
+      in oklab,
+      var(--kern-color-white),
+      transparent var(--kern-color-action-state-opacity-hover)
+    );
+    --kern-color-action-state-indicator-tint-active-opacity: color-mix(
+      in oklab,
+      var(--kern-color-white),
+      transparent var(--kern-color-action-state-opacity-active)
+    );
     color: var(--kern-color-layout-text-inverse);
   }
 </style>
