@@ -21,9 +21,7 @@ type BulletListProps = React.PropsWithChildren<{
 function Bullet() {
   return (
     <div
-      className={
-        "bg-kern-darkblue-850 mt-6 ml-2 flex size-16 shrink-0 items-center justify-center rounded-full outline-4 outline-white"
-      }
+      className="bg-kern-darkblue-850 size-16 shrink-0 rounded-full"
       role="none"
     ></div>
   );
@@ -31,7 +29,7 @@ function Bullet() {
 
 function YearBadge({ children }: Readonly<{ children?: React.ReactNode }>) {
   return (
-    <span className="kern-badge border-kern-darkblue-850 ml-10 w-fit -translate-x-1/2 border bg-white outline-4 outline-white">
+    <span className="kern-badge border-kern-darkblue-850 w-max shrink-0 border">
       <span className="kern-label">{children}</span>
     </span>
   );
@@ -61,7 +59,7 @@ export function TimelineItemContent({
   return (
     <div className={twJoin("flex flex-col gap-16", backgroundClasses)}>
       {badge && (
-        <div>
+        <div className="flex">
           <span className="kern-badge kern-badge--small border-0 bg-[#F3F4F7]">
             <span className="kern-label font-normal">{badge.text}</span>
           </span>
@@ -129,7 +127,7 @@ function TimelineItem({
           )}
         />
       </div>
-      <div className={twMerge("min-w-0 flex-1 pt-4 pb-24", className)}>
+      <div className={twMerge("min-w-0 flex-1 pb-24", className)}>
         {children}
       </div>
     </li>
@@ -138,12 +136,12 @@ function TimelineItem({
 
 function Timeline({ className, children, ...restProps }: BulletListProps) {
   return (
-    <div className={twMerge("relative ml-24 scroll-my-40", className)}>
-      <div className="bg-kern-darkblue-850 absolute top-0 bottom-0 left-9.5 w-1"></div>
-      <ul className="list-unstyled relative space-y-40" {...restProps}>
-        {children}
-      </ul>
-    </div>
+    <ul
+      className={twMerge("list-unstyled scroll-my-40", className)}
+      {...restProps}
+    >
+      {children}
+    </ul>
   );
 }
 
