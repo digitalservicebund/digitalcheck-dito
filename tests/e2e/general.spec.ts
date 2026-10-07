@@ -153,62 +153,6 @@ test.describe("links", () => {
   });
 });
 
-test.describe("progress bar", () => {
-  const routesWithProgressBarOrRedirects = allRoutes.filter(
-    (route) =>
-      route.path.startsWith(vorpruefung.path) ||
-      route.path.startsWith(methoden.path) ||
-      route.path.startsWith(dokumentation.path) ||
-      route.path === grundlagen.path,
-  );
-  routesWithProgressBarOrRedirects.forEach((route) => {
-    test(`${route.title} has progress bar`, async ({ page }) => {
-      await page.goto(route.path);
-      await expect(page.getByLabel("Digitalcheck-Fortschritt")).toBeVisible();
-    });
-  });
-
-  allRoutes.forEach((route) => {
-    if (routesWithProgressBarOrRedirects.includes(route)) {
-      return;
-    }
-
-    test(`${route.path} has no progress bar`, async ({ page }) => {
-      await page.goto(route.path);
-      await expect(page.getByLabel("Digitalcheck-Fortschritt")).toBeHidden();
-    });
-  });
-
-  test("Correct step is highlighted in progress bar", async ({ page }) => {
-    const navigation = page.getByRole("navigation", {
-      name: "Digitalcheck-Fortschritt",
-    });
-
-    const step1 = navigation.getByRole("listitem").filter({ hasText: "1" });
-    const step2 = navigation.getByRole("listitem").filter({ hasText: "2" });
-    const step3 = navigation.getByRole("listitem").filter({ hasText: "3" });
-
-    await page.goto(vorpruefung.path);
-    await expect(navigation).toBeVisible();
-    await expect(step1).toContainClass("font-bold");
-    await expect(step1).toHaveAttribute("aria-current", "step");
-    await expect(step2).not.toContainClass("font-bold");
-    await expect(step2).not.toHaveAttribute("aria-current", "step");
-
-    await page.goto(methoden.path);
-    await expect(step2).toContainClass("font-bold");
-    await expect(step2).toHaveAttribute("aria-current", "step");
-    await expect(step1).not.toContainClass("font-bold");
-    await expect(step1).not.toHaveAttribute("aria-current", "step");
-
-    await page.goto(dokumentation.path);
-    await expect(step3).toContainClass("font-bold");
-    await expect(step3).toHaveAttribute("aria-current", "step");
-    await expect(step2).not.toContainClass("font-bold");
-    await expect(step2).not.toHaveAttribute("aria-current", "step");
-  });
-});
-
 test.describe("error pages", () => {
   test("error page is displayed for 404s", async ({ page }) => {
     const response = await page.goto("/does-not-exist");

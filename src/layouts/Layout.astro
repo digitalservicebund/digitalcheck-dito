@@ -1,11 +1,10 @@
 ---
 import Posthog from "@/components/global/Posthog.astro";
-import ProgressBar from "@/components/global/ProgressBar.astro";
 import "@/styles/globals.css";
 import Footer from "@/layout/Footer.astro";
 import PageHeader from "@/components/global/PageHeader.astro";
 import { siteMeta } from "@/resources/content/shared/meta";
-import { isDevelopment, isProduction } from "@/config/stage";
+import { isProduction } from "@/config/stage";
 import firaSansRegularUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Regular.woff2?url";
 import firaSansMediumUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Medium.woff2?url";
 import firaSansSemiBoldUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-SemiBold.woff2?url";
@@ -19,17 +18,9 @@ import SectionSidebar from "@/components/global/SectionSidebar.astro";
 interface Props {
   title?: string;
   description?: string;
-  /** Pass true for routes that have a progress bar (vorpruefung, dokumentation). */
-  showProgressBar?: boolean;
 }
 
-const currentPath = Astro.url.pathname;
-
-const {
-  title,
-  description = siteMeta.description,
-  showProgressBar = false,
-} = Astro.props;
+const { title, description = siteMeta.description } = Astro.props;
 
 const pageTitle = title
   ? `${title} — ${siteMeta.siteName}`
@@ -114,15 +105,11 @@ const showSectionSidebar = !!sectionRoot && hasVisibleChildren(sectionRoot);
       <div class="h-full min-[900px]:grid min-[900px]:grid-cols-[264px_minmax(0,1fr)]">
         <SectionSidebar />
         <div>
-          {showProgressBar && <ProgressBar />}
           <slot />
         </div>
       </div>
     ) : (
-      <>
-        {showProgressBar && <ProgressBar />}
-        <slot />
-      </>
+      <slot />
     )}
     <Footer />
     {isProduction && <Posthog />}
