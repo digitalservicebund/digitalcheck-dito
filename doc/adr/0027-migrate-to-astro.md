@@ -8,7 +8,7 @@
 
 ## Context
 
-The main driver is alignment with `zfl-website` (zfl.bund.de), which already uses Astro. A common framework lets both sites reuse components, patterns and libraries (e.g. `KernCard`, the sidebar layout, `astro-route-generator`) and is a prerequisite for the long-term goal of merging them.
+The main driver is alignment with [`zfl-website`](https://github.com/digitalservicebund/zfl-website) (zfl.bund.de), which already uses Astro. A common framework lets both sites reuse components, patterns and libraries (e.g. `KernCard`, the sidebar layout, `astro-route-generator`) and is a prerequisite for the long-term goal of merging them.
 
 The switch is possible because we no longer need an application server. ADR 3 chose a server-side framework for emails and PDF generation, neither of which is needed anymore. User data lives in `localStorage` (ADR 24), Word documents are generated in the browser, and the server's only remaining job was fetching and caching Strapi content (ADR 17). What remains is a content site with a few interactive forms, a good fit for Astro's static pages with interactive islands.
 
