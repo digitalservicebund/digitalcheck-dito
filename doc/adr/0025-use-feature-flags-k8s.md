@@ -1,8 +1,9 @@
-# 24. Use Kubernetes configMap to set feature flags
+# 25. Use Kubernetes ConfigMaps to set feature flags
 
 ## Status
 
 - 2025-11-24: Accepted
+- 2026-06-19: Superseded by [ADR 28](./0028-stage-based-feature-flags.md)
 
 ## Context
 
