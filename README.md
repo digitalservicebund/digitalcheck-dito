@@ -4,19 +4,11 @@
 [![Scan](https://github.com/digitalservicebund/digitalcheck-dito/actions/workflows/scan.yml/badge.svg)](https://github.com/digitalservicebund/digitalcheck-dito/actions/workflows/scan.yml)
 
 The website code for [_Digitalcheck: Digitaltaugliche Regelung erarbeiten_](https://digitalcheck.bund.de).
-Contains the React Router application.
+Built with [Astro](https://astro.build/) as a static site, with React for interactive parts (see [ADR 27](./doc/adr/0027-migrate-to-astro.md)).
 
 ## Setup
 
-### 1. Environment
-
-The application requires a `.env` file for environment variables. You can copy the example file to get started:
-
-```bash
-cp .env.example .env
-```
-
-### 2. Node.js & Dependencies
+### 1. Node.js & Dependencies
 
 We aim to use the current active [LTS version of nodejs](https://nodejs.dev/en/about/releases/). We use [mise](https://mise.jdx.dev/) to manage the runtimes and tools for development.
 
@@ -24,7 +16,7 @@ You need to have mise installed on your computer; see the [mise installation doc
 
 Install the dependencies by [integrating mise into your shell](https://mise.jdx.dev/getting-started.html#activate-mise).
 
-### 3. Git Hooks
+### 2. Git Hooks
 
 The project uses [Lefthook](https://github.com/evilmartians/lefthook) to manage Git hooks. These hooks help ensure code quality and security before you commit and push.
 
@@ -44,7 +36,7 @@ The following hooks are configured in `lefthook.yml`:
 - **On `git push`**:
   - `licenses-audit`: Verifies that dependency licenses comply with the project's policy.
 
-### 4. Playwright Browsers
+### 3. Playwright Browsers
 
 For end-to-end (E2E) and accessibility (a11y) testing with [Playwright](https://playwright.dev/docs/intro), you need to install the required browser binaries:
 
@@ -86,7 +78,7 @@ This package supports snapshot testing via [Playwright](https://playwright.dev/d
 
 ##### Playwright Snapshot Testing
 
-The snapshot tests capture screenshots of static routes across different devices, as defined in `tests/playwright-snapshot.config.ts`.
+The snapshot tests capture screenshots of static routes across different devices, as defined in `tests/playwright-snapshots.config.ts`.
 
 - Create initial snapshots: `pnpm test:snapshots`. On the first run, this command generates the baseline snapshots.
 - If you've made intentional changes and need to update the snapshots: `pnpm test:update-snapshots`.
@@ -102,8 +94,8 @@ The snapshot tests capture screenshots of static routes across different devices
 To create a component snapshot with Vitest, use `toMatchSnapshot()` in your test file. For example:
 
 ```ts
-// In a test like app/components/Footer.spec.tsx
-const { container } = render(<RouterStubFooter />);
+// In a test like src/layout/Footer.spec.tsx
+const { container } = render(<Footer />);
 expect(container).toMatchSnapshot();
 ```
 
@@ -117,14 +109,13 @@ For more details, see the [Vitest Snapshot documentation](https://vitest.dev/gui
 
 ### Code Quality (Linting & Formatting)
 
-The project uses [ESLint](https://eslint.org/docs/latest/) for linting and [Prettier](https://prettier.io/docs/en/) for formatting. It's recommended to set up the [Git Hooks](#3-git-hooks) to automate this process.
+The project uses [ESLint](https://eslint.org/docs/latest/) for linting and [Prettier](https://prettier.io/docs/en/) for formatting. It's recommended to set up the [Git Hooks](#2-git-hooks) to automate this process.
 
-- Check formatting: `pnpm format:check`
+- Check formatting: `pnpm format`
 - Autofix formatting issues: `pnpm format:fix`
-- Check for linting errors: `pnpm lint:check`
+- Check for linting errors: `pnpm lint`
 - Autofix linting issues: `pnpm lint:fix`
-- Run all style checks: `pnpm style:check`
-- Autofix all style issues: `pnpm style:fix`
+- Check types: `pnpm typecheck`
 
 ## Build for Production
 
@@ -134,30 +125,29 @@ To build the application for production:
 pnpm build
 ```
 
-This will create optimized assets in the `build/` and `public/build/` directories.
+This creates a static site in the `dist/` directory.
 
 To preview the production build locally:
 
 ```sh
-pnpm start
+pnpm preview
 ```
 
 ## Deployment
 
 ### Docker
 
-You can build and run the application in a Docker container to simulate the production environment.
+You can build and run the application in a Docker container to simulate the production environment. The image serves the static build with nginx on http://localhost:8080.
 
 ```sh
-pnpm docker
+pnpm docker:dev
 ```
+
+Stop the container with `pnpm docker:stop`.
 
 ### DIY
 
-The built-in server is production-ready. If you are deploying manually, make sure to deploy the output of `pnpm build`:
-
-- `build/`
-- `public/build/`
+The output of `pnpm build` in `dist/` is a static site that can be served by any web server.
 
 ## Contributing
 
