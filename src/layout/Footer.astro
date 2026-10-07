@@ -55,12 +55,12 @@ const bmdsName = "Bundesministerium für Digitales und Staatsmodernisierung";
 
 <footer
   id="footer"
-  class="flex w-full flex-col print:hidden"
+  class="breakout-grid print:hidden"
   aria-label="Seitenfußbereich"
 >
   <!-- Re-map KERN's contextual colors so text and links render light-on-dark. -->
-  <div class="bg-kern-darkblue-800 flex justify-center border-t-2 border-blue-300 [--kern-color-action-default-contextual:var(--kern-color-white)] [--kern-color-action-focus-default-contextual:var(--kern-color-white)] [--kern-color-action-visited:var(--kern-color-white)] [--kern-color-layout-text-default-contextual:var(--kern-color-layout-text-inverse)]">
-    <div class="flex w-full max-w-6xl flex-col gap-40 px-16 pt-72 pb-40">
+  <div class="bg-kern-darkblue-800 breakout border-t-2 border-blue-300 [--kern-color-action-default-contextual:var(--kern-color-white)] [--kern-color-action-focus-default-contextual:var(--kern-color-white)] [--kern-color-action-visited:var(--kern-color-white)] [--kern-color-layout-text-default-contextual:var(--kern-color-layout-text-inverse)]">
+    <div class="flex flex-col gap-40 pt-72 pb-40">
       <nav
         class="grid grid-cols-1 gap-32 sm:grid-cols-3"
         aria-label="Schnellübersicht"
@@ -117,8 +117,8 @@ const bmdsName = "Bundesministerium für Digitales und Staatsmodernisierung";
     </div>
   </div>
 
-  <nav aria-label="Externe Verlinkungen" class="flex justify-center bg-white">
-    <div class="flex w-full max-w-6xl flex-col gap-16 px-16 py-40 sm:flex-row sm:gap-48">
+  <nav aria-label="Externe Verlinkungen" class="breakout bg-white">
+    <div class="flex flex-col gap-16 py-40 sm:flex-row sm:gap-48">
       <img
         src={withBase("/logo/bmds-logo.svg")}
         width="137"
