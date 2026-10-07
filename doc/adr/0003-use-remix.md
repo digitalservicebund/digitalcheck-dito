@@ -4,6 +4,7 @@
 
 - 2024-05-17: Accepted
 - 2025-03-20: Updated (see final section)
+- 2026-06-19: Superseded by [ADR 27](./0027-migrate-to-astro.md)
 
 ## Context
 

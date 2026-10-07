@@ -161,9 +161,6 @@ lefthook-local.yml
 # Playwright snapshot testing
 *-snapshots/
 
-# Feature flags
-/feature-flags.json
-
 # Astro
 .astro
 

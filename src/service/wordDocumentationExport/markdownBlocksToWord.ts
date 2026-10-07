@@ -13,8 +13,8 @@ import { marked } from "marked";
 
 /**
  * Renders Markdown content into an array of Paragraph objects for docx.
- * Mirrors strapiBlocksToWord.ts's scope (paragraphs, lists, links; inline
- * formatting like bold/italic is dropped, same as the Strapi blocks version).
+ * Supports paragraphs, lists and links; inline formatting like bold/italic
+ * is dropped.
  */
 export default function markdownBlocksToDocx(
   markdown: string,

@@ -4,25 +4,11 @@
 [![Scan](https://github.com/digitalservicebund/digitalcheck-dito/actions/workflows/scan.yml/badge.svg)](https://github.com/digitalservicebund/digitalcheck-dito/actions/workflows/scan.yml)
 
 The website code for [_Digitalcheck: Digitaltaugliche Regelung erarbeiten_](https://digitalcheck.bund.de).
-Contains the React Router application.
+Built with [Astro](https://astro.build/) as a static site, with React for interactive parts (see [ADR 27](./doc/adr/0027-migrate-to-astro.md)).
 
 ## Setup
 
-### 1. Environment
-
-The application requires a `.env` file for environment variables. You can copy the example file to get started:
-
-```bash
-cp .env.example .env
-```
-
-To test features hidden behind feature flags, you also need a `feature-flags.json` file. You can copy the test configuration for this:
-
-```bash
-cp ./tests/feature-flags.json ./feature-flags.json
-```
-
-### 2. Node.js & Dependencies
+### 1. Node.js & Dependencies
 
 We aim to use the current active [LTS version of nodejs](https://nodejs.dev/en/about/releases/). We use [mise](https://mise.jdx.dev/) to manage the runtimes and tools for development.
 
@@ -30,7 +16,7 @@ You need to have mise installed on your computer; see the [mise installation doc
 
 Install the dependencies by [integrating mise into your shell](https://mise.jdx.dev/getting-started.html#activate-mise).
 
-### 3. Git Hooks
+### 2. Git Hooks
 
 The project uses [Lefthook](https://github.com/evilmartians/lefthook) to manage Git hooks. These hooks help ensure code quality and security before you commit and push.
 
@@ -50,7 +36,7 @@ The following hooks are configured in `lefthook.yml`:
 - **On `git push`**:
   - `licenses-audit`: Verifies that dependency licenses comply with the project's policy.
 
-### 4. Playwright Browsers
+### 3. Playwright Browsers
 
 For end-to-end (E2E) and accessibility (a11y) testing with [Playwright](https://playwright.dev/docs/intro), you need to install the required browser binaries:
 
@@ -58,75 +44,14 @@ For end-to-end (E2E) and accessibility (a11y) testing with [Playwright](https://
 pnpm exec playwright install
 ```
 
-## Feature Flags
+## Staging-only Features
 
-Feature flags allow you to toggle functionality in the application without changing the code. This is useful for developing new features, A/B testing, or gradually rolling out changes.
+Unreleased features are shown on staging and locally, but hidden in production (see [ADR 28](./doc/adr/0028-stage-based-feature-flags.md)):
 
-The feature flag system relies on three main parts:
+- **Parts of a page:** check `isProduction` from `src/config/stage.ts`.
+- **Whole pages:** set `isStagingOnly: true` in the page's route metadata.
 
-- `feature-flags.json`: A file in the root directory that defines the state of each flag (either `true` or `false`).
-- `app/utils/featureFlags.ts`: A file that exports a type-safe list of all available feature flags.
-- `app/contexts/FeatureFlagContext.ts`: A React context that provides a `useFeatureFlag` hook to access the value of a flag within any component.
-
-### How to Add a New Feature Flag
-
-Here is a step-by-step guide to adding a new feature flag called `myNewFeature`.
-
-#### 1. Define the flag
-
-Add the new flag to the `features` object in `app/utils/featureFlags.ts`. This makes the flag available to the type system.
-
-```ts
-// app/utils/featureFlags.ts
-export const features = {
-  myNewFeature: "myNewFeature", // Add your new flag here
-} as const;
-
-export type FeatureFlag = keyof typeof features;
-export type FeatureFlags = Record<FeatureFlag, boolean>;
-```
-
-#### 2. Set the flag's value
-
-Add the flag to your local `feature-flags.json` file and set its initial value. Remember to also add it to `tests/feature-flags.json` for testing.
-
-```json
-// feature-flags.json
-{
-  "myNewFeature": false
-}
-```
-
-#### 3. Use the flag in a component
-
-Import the `useFeatureFlag` hook and use it to conditionally render a component or change behavior. The hook is type-safe and will only accept valid flag names.
-
-```tsx
-import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
-import { NewComponent } from "./NewComponent";
-import { OldComponent } from "./OldComponent";
-
-export default function MyComponent() {
-  const myNewFeatureEnabled = useFeatureFlag("myNewFeature");
-
-  return myNewFeatureEnabled ? <NewComponent /> : <OldComponent />;
-}
-```
-
-Now you can toggle `myNewFeature` in `feature-flags.json` to switch between the `NewComponent` and `OldComponent` without needing to restart the development server.
-
-#### 4. Enable the feature flag for the staging and production environment
-
-Switch to the [infrastructure repo](https://github.com/digitalservicebund/digitalcheck-dito-infra) and enable the feature flag in `manifests/overlays/<overlay>/feature-flags.json` like this:
-
-```json
-// manifests/overlays/<overlay>/feature-flags.json
-{
-  "myNewFeature": true
-}
-```
-
-Commit your changes and push them. Our pipeline automatically applies the new feature flag after a few moments.
+To release a feature, remove the check.
 
 ## Development
 
@@ -153,7 +78,7 @@ This package supports snapshot testing via [Playwright](https://playwright.dev/d
 
 ##### Playwright Snapshot Testing
 
-The snapshot tests capture screenshots of static routes across different devices, as defined in `tests/playwright-snapshot.config.ts`.
+The snapshot tests capture screenshots of static routes across different devices, as defined in `tests/playwright-snapshots.config.ts`.
 
 - Create initial snapshots: `pnpm test:snapshots`. On the first run, this command generates the baseline snapshots.
 - If you've made intentional changes and need to update the snapshots: `pnpm test:update-snapshots`.
@@ -169,8 +94,8 @@ The snapshot tests capture screenshots of static routes across different devices
 To create a component snapshot with Vitest, use `toMatchSnapshot()` in your test file. For example:
 
 ```ts
-// In a test like app/components/Footer.spec.tsx
-const { container } = render(<RouterStubFooter />);
+// In a test like src/layout/Footer.spec.tsx
+const { container } = render(<Footer />);
 expect(container).toMatchSnapshot();
 ```
 
@@ -184,14 +109,13 @@ For more details, see the [Vitest Snapshot documentation](https://vitest.dev/gui
 
 ### Code Quality (Linting & Formatting)
 
-The project uses [ESLint](https://eslint.org/docs/latest/) for linting and [Prettier](https://prettier.io/docs/en/) for formatting. It's recommended to set up the [Git Hooks](#3-git-hooks) to automate this process.
+The project uses [ESLint](https://eslint.org/docs/latest/) for linting and [Prettier](https://prettier.io/docs/en/) for formatting. It's recommended to set up the [Git Hooks](#2-git-hooks) to automate this process.
 
-- Check formatting: `pnpm format:check`
+- Check formatting: `pnpm format`
 - Autofix formatting issues: `pnpm format:fix`
-- Check for linting errors: `pnpm lint:check`
+- Check for linting errors: `pnpm lint`
 - Autofix linting issues: `pnpm lint:fix`
-- Run all style checks: `pnpm style:check`
-- Autofix all style issues: `pnpm style:fix`
+- Check types: `pnpm typecheck`
 
 ## Build for Production
 
@@ -201,30 +125,29 @@ To build the application for production:
 pnpm build
 ```
 
-This will create optimized assets in the `build/` and `public/build/` directories.
+This creates a static site in the `dist/` directory.
 
 To preview the production build locally:
 
 ```sh
-pnpm start
+pnpm preview
 ```
 
 ## Deployment
 
 ### Docker
 
-You can build and run the application in a Docker container to simulate the production environment.
+You can build and run the application in a Docker container to simulate the production environment. The image serves the static build with nginx on http://localhost:8080.
 
 ```sh
-pnpm docker
+pnpm docker:dev
 ```
+
+Stop the container with `pnpm docker:stop`.
 
 ### DIY
 
-The built-in server is production-ready. If you are deploying manually, make sure to deploy the output of `pnpm build`:
-
-- `build/`
-- `public/build/`
+The output of `pnpm build` in `dist/` is a static site that can be served by any web server.
 
 ## Contributing
 
