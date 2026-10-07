@@ -16,12 +16,6 @@ The application requires a `.env` file for environment variables. You can copy t
 cp .env.example .env
 ```
 
-To test features hidden behind feature flags, you also need a `feature-flags.json` file. You can copy the test configuration for this:
-
-```bash
-cp ./tests/feature-flags.json ./feature-flags.json
-```
-
 ### 2. Node.js & Dependencies
 
 We aim to use the current active [LTS version of nodejs](https://nodejs.dev/en/about/releases/). We use [mise](https://mise.jdx.dev/) to manage the runtimes and tools for development.
@@ -58,75 +52,14 @@ For end-to-end (E2E) and accessibility (a11y) testing with [Playwright](https://
 pnpm exec playwright install
 ```
 
-## Feature Flags
+## Staging-only Features
 
-Feature flags allow you to toggle functionality in the application without changing the code. This is useful for developing new features, A/B testing, or gradually rolling out changes.
+Unreleased features are shown on staging and locally, but hidden in production (see [ADR 28](./doc/adr/0028-stage-based-feature-flags.md)):
 
-The feature flag system relies on three main parts:
+- **Parts of a page:** check `isProduction` from `src/config/stage.ts`.
+- **Whole pages:** set `isStagingOnly: true` in the page's route metadata.
 
-- `feature-flags.json`: A file in the root directory that defines the state of each flag (either `true` or `false`).
-- `app/utils/featureFlags.ts`: A file that exports a type-safe list of all available feature flags.
-- `app/contexts/FeatureFlagContext.ts`: A React context that provides a `useFeatureFlag` hook to access the value of a flag within any component.
-
-### How to Add a New Feature Flag
-
-Here is a step-by-step guide to adding a new feature flag called `myNewFeature`.
-
-#### 1. Define the flag
-
-Add the new flag to the `features` object in `app/utils/featureFlags.ts`. This makes the flag available to the type system.
-
-```ts
-// app/utils/featureFlags.ts
-export const features = {
-  myNewFeature: "myNewFeature", // Add your new flag here
-} as const;
-
-export type FeatureFlag = keyof typeof features;
-export type FeatureFlags = Record<FeatureFlag, boolean>;
-```
-
-#### 2. Set the flag's value
-
-Add the flag to your local `feature-flags.json` file and set its initial value. Remember to also add it to `tests/feature-flags.json` for testing.
-
-```json
-// feature-flags.json
-{
-  "myNewFeature": false
-}
-```
-
-#### 3. Use the flag in a component
-
-Import the `useFeatureFlag` hook and use it to conditionally render a component or change behavior. The hook is type-safe and will only accept valid flag names.
-
-```tsx
-import { useFeatureFlag } from "~/contexts/FeatureFlagContext";
-import { NewComponent } from "./NewComponent";
-import { OldComponent } from "./OldComponent";
-
-export default function MyComponent() {
-  const myNewFeatureEnabled = useFeatureFlag("myNewFeature");
-
-  return myNewFeatureEnabled ? <NewComponent /> : <OldComponent />;
-}
-```
-
-Now you can toggle `myNewFeature` in `feature-flags.json` to switch between the `NewComponent` and `OldComponent` without needing to restart the development server.
-
-#### 4. Enable the feature flag for the staging and production environment
-
-Switch to the [infrastructure repo](https://github.com/digitalservicebund/digitalcheck-dito-infra) and enable the feature flag in `manifests/overlays/<overlay>/feature-flags.json` like this:
-
-```json
-// manifests/overlays/<overlay>/feature-flags.json
-{
-  "myNewFeature": true
-}
-```
-
-Commit your changes and push them. Our pipeline automatically applies the new feature flag after a few moments.
+To release a feature, remove the check.
 
 ## Development
 
