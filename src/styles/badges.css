@@ -52,12 +52,17 @@
 }
 
 [class*="kern-badge--prinzip"] {
-  border: 1px solid var(--kern-color-layout-text-default-contextual);
+  border: 1px solid
+    var(
+      --prinzip-badge-border,
+      var(--kern-color-layout-text-default-contextual)
+    );
 }
 
 .kern-badge--prinzip-1 {
   background-color: var(--color-kern-orange-050);
-  --kern-color-layout-text-default-contextual: var(--color-kern-yellow-900);
+  --kern-color-layout-text-default-contextual: #645000;
+  --prinzip-badge-border: #8f7400;
 }
 .kern-badge--prinzip-2 {
   background-color: var(--color-kern-red-050);
@@ -68,8 +73,9 @@
   --kern-color-layout-text-default-contextual: #8412af;
 }
 .kern-badge--prinzip-4 {
-  background-color: var(--color-kern-green-050);
+  background-color: var(--color-kern-green-100);
   --kern-color-layout-text-default-contextual: #3d4d00;
+  --prinzip-badge-border: #5d7200;
 }
 .kern-badge--prinzip-5 {
   background-color: var(--color-kern-lightblue-025);
