@@ -1,8 +1,7 @@
 ---
 import { allRoutes, type Route } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
-import ContentWrapper from "@/components/ContentWrapper.tsx";
-import Hero from "@/components/Hero";
+import Hero from "@/components/Hero.astro";
 import SitemapList from "./_SitemapList.astro";
 
 export const frontmatter = {
@@ -35,10 +34,12 @@ const routes = groupRoutesByParent(allRoutes);
 ---
 
 <Layout title={frontmatter.title}>
-  <main>
-    <Hero title={frontmatter.title} />
-    <ContentWrapper>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>{frontmatter.title}</h1>
+    </Hero>
+    <section>
       <SitemapList routes={routes} />
-    </ContentWrapper>
+    </section>
   </main>
 </Layout>
