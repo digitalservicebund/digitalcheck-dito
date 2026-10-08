@@ -15,10 +15,13 @@ import {
   sitemap,
   vorpruefung,
 } from "@/config/routes";
+import { ZFL_BASE_URL } from "@/resources/constants";
 import { contact } from "@/resources/content/shared/contact";
 import { withBase } from "@/utils/path";
 
-const columns = [
+type FooterLink = { text: string; url: string; external?: boolean };
+
+const columns: { title: string; links: FooterLink[] }[] = [
   {
     title: "Digitalcheck machen",
     links: [
@@ -35,6 +38,11 @@ const columns = [
       { text: "EU-Interoperabilität", url: interoperabel.path },
       { text: "Bundesländer", url: bundeslaender.path },
       { text: "Normenkontrollrat", url: normenkontrollrat.path },
+      {
+        text: "Zahlen und Fakten",
+        url: `${ZFL_BASE_URL}/ueber/zahlen-und-fakten`,
+        external: true,
+      },
       { text: "Kontakt", url: kontakt.path },
     ],
   },
@@ -73,6 +81,8 @@ const bmdsName = "Bundesministerium für Digitales und Staatsmodernisierung";
                 <li>
                   <a
                     href={link.url}
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noreferrer" : undefined}
                     class="increase-tap-area kern-link kern-link--small"
                   >
                     {link.text}

@@ -234,7 +234,8 @@
 @utility increase-tap-area {
   @apply relative inline-block;
 
-  &::before {
+  /* ::after, as ::before is used for the external link icon */
+  &::after {
     @apply absolute -top-3 -right-12 -bottom-9 -left-12 content-[''];
   }
 }
