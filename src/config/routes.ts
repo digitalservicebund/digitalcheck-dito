@@ -396,17 +396,6 @@ export const vorpruefung_hinweise = {
   navLabel: null,
 } as const;
 
-export const zahlenUndFakten = {
-  key: "zahlenUndFakten",
-  path: "/zahlen-und-fakten",
-  title: "Zahlen und Fakten",
-  parent: null,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
 export const allRoutes = [
   barrierefreiheit,
   bundeslaender,
@@ -443,5 +432,4 @@ export const allRoutes = [
   vorpruefung,
   vorpruefung_ergebnis,
   vorpruefung_hinweise,
-  zahlenUndFakten,
 ] as const;

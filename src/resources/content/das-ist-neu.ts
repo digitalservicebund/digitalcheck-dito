@@ -8,7 +8,6 @@ import {
   interoperabel_nationaleKontaktstelle,
   normenkontrollrat,
   prinzipien,
-  zahlenUndFakten,
 } from "@/config/routes";
 import { ZFL_BASE_URL, ZFL_PATH_VISUALISIERUNGEN } from "@/resources/constants";
 import { dedent } from "@/utils/dedentMultilineStrings";
@@ -184,8 +183,6 @@ export const news = {
       "Der Digitalcheck in Zahlen" gibt eine Übersicht, was mit dem Digitalcheck bisher erreicht wurde.
       Dazu zählen durchgeführte Digitalbezugsprüfungen, Regelungsbegleitungen durch das Team, Schulungen,
       Interoperabilitätsberatungen und Vernetzungsangebote.
-      
-      [Hier ansehen](${zahlenUndFakten.path})
       `,
     },
     {
