@@ -18,9 +18,10 @@ import SectionSidebar from "@/components/global/SectionSidebar.astro";
 interface Props {
   title?: string;
   description?: string;
+  noMenu?: boolean;
 }
 
-const { title, description = siteMeta.description } = Astro.props;
+const { title, description = siteMeta.description, noMenu } = Astro.props;
 
 const pageTitle = title
   ? `${title} — ${siteMeta.siteName}`
@@ -39,7 +40,8 @@ const jsonLdMetadata = {
 
 const currentRoute = getRouteByPath(Astro.url.pathname);
 const [sectionRoot] = currentRoute ? getRouteChain(currentRoute) : [];
-const showSectionSidebar = !!sectionRoot && hasVisibleChildren(sectionRoot);
+const showSectionSidebar =
+  !!sectionRoot && hasVisibleChildren(sectionRoot) && !noMenu;
 ---
 
 <!doctype html>
