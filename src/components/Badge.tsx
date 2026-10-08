@@ -33,16 +33,18 @@ function Badge({
       className={twMerge(
         badgeStyle,
         principleStyle,
-        look === "hint" && "bg-blue-300 text-blue-800",
-        look === "gray" && "bg-gray-300",
+        look === "hint" && "bg-kern-darkblue-100 text-kern-darkblue-800",
+        look === "gray" && "bg-kern-neutral-050",
         look === "white" && "bg-white",
-        look === "success" && "bg-green-200 text-green-700",
-        look === "danger" && "text-ds-error bg-red-200",
+        look === "success" &&
+          "bg-kern-feedback-success-background text-kern-feedback-success",
+        look === "danger" &&
+          "text-kern-feedback-danger bg-kern-feedback-danger-background",
         highContrastDarkStyle,
         className,
       )}
     >
-      {Icon && <Icon className="size-16 fill-gray-800" />}
+      {Icon && <Icon className="fill-kern-layout-text-muted size-16" />}
       {children || text}
     </mark>
   );

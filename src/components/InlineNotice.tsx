@@ -13,33 +13,33 @@ import { twJoin } from "tailwind-merge";
 // Therefore, it's set in the config.
 const lookConfig = {
   success: {
-    backgroundColor: "bg-green-100",
-    borderColor: "border-ds-success",
+    backgroundColor: "bg-kern-feedback-success-background",
+    borderColor: "border-kern-feedback-success",
     IconComponent: CheckCircleOutlinedIcon,
   },
   info: {
-    backgroundColor: "bg-blue-300",
-    borderColor: "border-blue-700",
+    backgroundColor: "bg-kern-feedback-info-background",
+    borderColor: "border-kern-feedback-info",
     IconComponent: InfoOutlinedIcon,
   },
   warning: {
-    backgroundColor: "bg-yellow-200",
-    borderColor: "border-yellow-700",
+    backgroundColor: "bg-kern-feedback-warning-background",
+    borderColor: "border-kern-feedback-warning",
     IconComponent: WarningAmberIcon,
   },
   missingOrIncomplete: {
-    backgroundColor: "bg-yellow-200",
-    borderColor: "border-yellow-700",
+    backgroundColor: "bg-kern-feedback-warning-background",
+    borderColor: "border-kern-feedback-warning",
     IconComponent: LightbulbOutlinedIcon,
   },
   support: {
-    backgroundColor: "bg-yellow-200",
-    borderColor: "border-yellow-700",
+    backgroundColor: "bg-kern-feedback-warning-background",
+    borderColor: "border-kern-feedback-warning",
     IconComponent: ContactSupportOutlinedIcon,
   },
   tips: {
-    backgroundColor: "bg-gray-100",
-    borderColor: "border-gray-600",
+    backgroundColor: "bg-kern-neutral-025",
+    borderColor: "border-kern-neutral-300",
     IconComponent: LightbulbOutlinedIcon,
   },
 };

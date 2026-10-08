@@ -177,7 +177,7 @@ export function DownloadLinkButton({
       className={twMerge("inline-flex items-center gap-8", className)}
     >
       <span
-        className="kern-icon kern-icon--download kern-icon--default bg-blue-800"
+        className="kern-icon kern-icon--download kern-icon--default bg-kern-action-default"
         aria-hidden="true"
       ></span>
       {children}

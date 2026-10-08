@@ -36,7 +36,10 @@ function Textarea({
         {children}
       </label>
       {description && (
-        <div className="ds-body-02-reg block text-gray-900" id={descriptionId}>
+        <div
+          className="ds-body-02-reg text-kern-layout-text-default block"
+          id={descriptionId}
+        >
           {description}
         </div>
       )}

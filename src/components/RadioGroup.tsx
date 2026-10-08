@@ -78,7 +78,9 @@ function RadioGroup<FormData, Value extends string | number = string>({
             <label htmlFor={id} className="kern-label">
               {opt.label}
               {opt.subText && (
-                <span className="text-gray-800">{opt.subText}</span>
+                <span className="text-kern-layout-text-muted">
+                  {opt.subText}
+                </span>
               )}
             </label>
           </p>

@@ -216,7 +216,7 @@ export function DocumentationPrincipleErlaeuterung({
           <RichText markdown={prinzip.Kurzbeschreibung} />
         )}
 
-        <div className="rounded-lg bg-blue-300 p-24">
+        <div className="bg-kern-darkblue-100 rounded-lg p-24">
           <p>{changeAnswerTitle}</p>
           <a href={currentUrl.replace("/erlaeuterung", "")}>Angaben ändern</a>
         </div>

@@ -41,13 +41,13 @@ function getIconForReason(reason: Reason) {
     case "yes":
       return (
         <ControlPointOutlined
-          className={twJoin(defaultClasses, "fill-green-900")}
+          className={twJoin(defaultClasses, "fill-kern-feedback-success")}
         ></ControlPointOutlined>
       );
     case "no":
       return (
         <RemoveCircleOutline
-          className={twJoin(defaultClasses, "fill-ds-error")}
+          className={twJoin(defaultClasses, "fill-kern-feedback-danger")}
         ></RemoveCircleOutline>
       );
     case "unsure":
@@ -115,15 +115,15 @@ export default function Result() {
     result?.digital === ResultType.UNSURE ? preCheckResult.unsure.hint : "";
   return (
     <main>
-      <div className="bg-blue-100 py-40 print:pb-0">
+      <div className="bg-kern-darkblue-025 py-40 print:pb-0">
         <div className="space-y-40 px-16">
           <div>
             <Container
               className={twJoin(
                 "rounded-t-lg py-32",
                 result?.digital === ResultType.UNSURE
-                  ? "bg-yellow-200"
-                  : "bg-blue-300",
+                  ? "bg-kern-feedback-warning-background"
+                  : "bg-kern-darkblue-100",
               )}
             >
               {vorhabenTitle && <PrintTitle title={vorhabenTitle} />}
@@ -168,7 +168,7 @@ export default function Result() {
                   <RichText markdown={resultContent.inlineNoticeContent.text} />
                 </InlineNotice>
               )}
-              <div className="border-b-2 border-solid border-gray-400 pb-40 last:border-0 last:pb-0 print:border-0 print:pb-0">
+              <div className="border-kern-decorative-border border-b-2 border-solid pb-40 last:border-0 last:pb-0 print:border-0 print:pb-0">
                 <DetailsSummary
                   data-testid="result-details"
                   title={preCheckResult.detailsTitle}

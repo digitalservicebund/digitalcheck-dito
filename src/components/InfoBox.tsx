@@ -64,17 +64,18 @@ const InfoBox = ({
       className={twMerge(
         "flex scroll-my-40 flex-col gap-32 md:flex-row",
         // visual?.type === "image" ? "flex-col-reverse" : "flex-col",
-        look === "highlight" && "rounded-lg bg-blue-100 px-16 py-40 sm:px-80",
+        look === "highlight" &&
+          "bg-kern-darkblue-025 rounded-lg px-16 py-40 sm:px-80",
         look === "white" && "rounded-lg bg-white px-16 py-40 sm:px-80",
         look === "method" &&
-          "bg-blue-100 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48",
+          "bg-kern-darkblue-025 px-16 py-32 sm:px-32 sm:pt-40 sm:pb-48",
         className,
       )}
     >
       {visual?.type === "icon" && (
         <visual.Icon
           className={twMerge(
-            "hidden fill-blue-500 sm:block",
+            "fill-kern-darkblue-300 hidden sm:block",
             imageSizes["icon"],
             visual.className,
           )}

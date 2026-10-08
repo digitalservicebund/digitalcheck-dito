@@ -12,7 +12,10 @@ export default function SupportBanner({
   text,
 }: Readonly<SupportBannerProps>) {
   return (
-    <aside className="bg-blue-300" aria-labelledby="support-banner-heading">
+    <aside
+      className="bg-kern-darkblue-100"
+      aria-labelledby="support-banner-heading"
+    >
       <Container className="kern-stack kern-stack-md">
         <InfoBox
           heading={{

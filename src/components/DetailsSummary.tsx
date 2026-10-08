@@ -34,7 +34,7 @@ export default function DetailsSummary({
   const contentWrapperClasses = twJoin(
     "block pt-4 pl-[24px] text-black",
     showVerticalLine &&
-      "relative before:absolute before:top-0 before:bottom-0 before:w-px before:bg-blue-500 before:left-[11px]",
+      "relative before:absolute before:top-0 before:bottom-0 before:w-px before:bg-kern-darkblue-200 before:left-[11px]",
   );
 
   useEffect(() => {
@@ -79,7 +79,7 @@ export default function DetailsSummary({
         }}
         open={isOpen}
         className={twJoin(
-          "details scroll-mt-64 text-blue-800 has-focus-visible:outline-4 has-focus-visible:outline-offset-4 has-focus-visible:outline-blue-800",
+          "details text-kern-action-default scroll-mt-64 has-focus-visible:outline-4 has-focus-visible:outline-offset-4 has-focus-visible:outline-blue-800",
           expandInPrint && "print:hidden",
           className,
         )}
