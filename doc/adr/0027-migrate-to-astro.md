@@ -34,5 +34,5 @@ We migrate from React Router to Astro with static site generation. In production
 **Trade-offs:**
 
 - **Content changes need a deploy:** Edits go through pull requests again, as before Strapi (ADR 7). This is acceptable because the content (Prinzipien) rarely changes.
-- **Temporary component duplication:** Some components exist in both a React and an Astro version (e.g. `Tabs`, `Hero`, `MethodCard`), because React islands cannot render Astro components. This should shrink as the migration continues.
+- **Temporary component duplication:** Some components exist in both a React and an Astro version (e.g. `Tabs`, `Hero`), because React islands cannot render Astro components. This should shrink as the migration continues.
 - **Full page loads between form steps:** Each step is a separate page (ADR 6), so navigating can feel less smooth than in a single-page app. `/dokumentation` mitigates this with Astro's `<ClientRouter />`.
