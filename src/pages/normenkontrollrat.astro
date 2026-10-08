@@ -12,6 +12,7 @@ import {
   dokumentation,
   interoperabel,
   methoden,
+  prinzipien,
   vorpruefung,
 } from "@/config/routes";
 import { ZFL_BASE_URL, ZFL_PATH_FLUSSDIAGRAMME } from "@/resources/constants";
@@ -25,25 +26,26 @@ export const frontmatter = {
 const documents = [
   {
     icon: LaptopOutlined,
-    title: "Ergebnis der Vorprüfung als E-Mail",
+    title: "Ergebnis der Vorprüfung",
     content: "Einschätzung zur Digitaltauglichkeit des Vorhabens",
-    relevance: "frühe Kenntnisnahme der zu überprüfenden Vorhaben",
+    relevance: "Frühe Kenntnisnahme der zu überprüfenden Vorhaben",
     link: { label: "Zur Vorprüfung", href: vorpruefung.path },
   },
   {
     icon: EditNote,
-    title: "Dokumentation der Digitaltauglichkeit",
+    title: "Digitalcheck Dokumentation",
     content:
       "Nutzung der Prinzipien digitaltauglicher Gesetzgebung und von Visualisierungen",
     relevance:
-      "Prüfung, inwieweit die Digitalisierung bei der Erarbeitung mitgedacht wird",
+      "Damit kann der NKR nachvollziehen, wie Sie die Digitaltauglichkeit Ihres Vorhabens sicherstellen.",
     link: { label: "Zur Dokumentation", href: dokumentation.path },
   },
   {
     icon: Description,
-    title: "Ihr Regelungsvorhaben",
+    title: "Regelungsentwurf",
     content: "Regelungstext für die Ressortabstimmung",
-    relevance: "Prüfung auf digitale Umsetzbarkeit und Erfüllungsaufwand",
+    relevance:
+      "Der NKR prüft die Umsetzbarkeit und den Erfüllungsaufwand Ihres Vorhabens anhand des Referentenentwurfs.",
     link: { label: "Regelung erarbeiten", href: methoden.path },
   },
   {
@@ -79,45 +81,44 @@ const documents = [
         <a href="https://www.gesetze-im-internet.de/nkrg/__4.html">
           gesetzlichen Auftrag
         </a>
-        , sicherzustellen, dass Digitalisierung bei der Ausarbeitung von
-        Gesetzesentwürfen berücksichtigt wird.
-      </p>
-      <p>
-        Seit April 2023 fließen die Ergebnisse und Bewertungen des Digitalchecks
-        in die Stellungnahmen des NKR ein und sind{" "}
+        , sicherzustellen, dass Digitalisierung bei der Erarbeitung neuer
+        Regelungsvorhaben berücksichtigt wird. Seit April 2023 fließen die
+        Ergebnisse des Digitalcheck in die Stellungnahmen des NKR ein und sind{" "}
         <a href="https://www.normenkontrollrat.bund.de/Webs/NKR/DE/veroeffentlichungen/nkr-stellungnahmen/nkr-stellungnahmen_node.html">
           öffentlich einsehbar
         </a>
         .
       </p>
       <p>
-        <b>Beachten Sie:</b>
+        <b>Dabei gilt:</b>
       </p>
       <ul>
         <li>
-          Der NKR prüft die Berücksichtigung der <a href="#">Prinzipien</a>{" "}
-          digitaltauglicher Gesetzgebung, jedoch nicht die Erfüllung von
-          Anforderungen der{" "}
-          <a href={interoperabel.path}>EU-Interoperabilität</a> nach der
-          EU-Verordnung.
+          Der NKR prüft die Berücksichtigung der{" "}
+          <a href={prinzipien.path}>fünf Prinzipien</a> digitaltauglicher
+          Gesetzgebung.
         </li>
         <li>
-          Es erfolgt nicht zu jedem Regelungsvorhaben eine Stellungnahme des
-          NKR.
+          Die Anforderungen der Verordnung für ein{" "}
+          <a href={interoperabel.path}>interoperables Europa</a> (EU) 2024/903
+          werden nicht vom NKR geprüft.
+        </li>
+        <li>
+          Der NKR gibt nicht zu jedem Regelungsvorhaben eine Stellungnahme ab.
         </li>
       </ul>
       <p>
-        Bei weiteren Fragen wenden Sie sich bitte an die{" "}
+        Bei weiteren Fragen wenden Sie sich bitte an die für Ihr Haus{" "}
         <a href="https://www.normenkontrollrat.bund.de/Webs/NKR/DE/der-nkr/sekretariat/sekretariat_node.html">
-          zuständigen Ansprechpartnerinnen und Ansprechpartner
+          zuständigen Ansprechpartner
         </a>{" "}
-        in Ihrem Haus.
+        beim NKR.
       </p>
     </section>
     <section class="bg-kern-layout-layer-surface breakout">
-      <h2>Relevante Dokumente für den NKR</h2>
+      <h2>Relevante Dokumente</h2>
       <p>
-        Diese Unterlagen betrachtet der NKR unter anderem im Kontext Ihres
+        Auf diese Unterlagen achtet der NKR beim Digitalcheck Ihres
         Regelungsvorhabens.
       </p>
       <div class="mt-32 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-kern-xl">
