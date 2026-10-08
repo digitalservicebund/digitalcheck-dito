@@ -16,19 +16,13 @@
   --color-principle-5: #cce7db; /* order 4 */
   --color-principle-3: #cce4f0; /* order 5 */
 
-  --color-ds-success: #005f34;
-  --color-ds-error: #8e001b; /* red 900 */
-  --color-ds-warning: #f5e05d; /* yellow 500 */
   --color-ds-feature: #f5e05d;
 
   --color-red-*: initial;
-  --color-red-200: #f9e5ec;
-  --color-red-800: #b0243f;
 
   --color-yellow-*: initial;
   --color-yellow-200: #fff9d2;
   --color-yellow-300: #f9ec9e;
-  --color-yellow-500: #f5e05d;
   --color-yellow-700: #e5ce5c;
   --color-yellow-800: #dac23c;
 
@@ -39,28 +33,17 @@
   --color-blue-400: #b8d7e8;
   --color-blue-500: #b3c9d6;
   --color-blue-600: #7ba4bf;
-  --color-blue-700: #336f91;
   --color-blue-800: #004b76;
-  --color-blue-900: #003350;
 
   --color-green-*: initial;
-  --color-green-100: #e8f7f0;
   --color-green-200: #ccebdd;
-  --color-green-700: #01854a;
-  --color-green-800: #006b3c;
-  --color-green-900: #005e34;
 
   --color-gray-*: initial;
-  --color-gray-50: #fcfcfd;
   --color-gray-100: #f6f7f8;
   --color-gray-200: #f0f1f3;
   --color-gray-300: #edeef0;
   --color-gray-400: #dcdee1;
-  --color-gray-500: #c9cdd2;
   --color-gray-600: #b8bdc3;
-  --color-gray-700: #a0a7b1;
-  --color-gray-800: #6f7785;
-  --color-gray-900: #4e596a;
 
   --color-ds-violet: #4c2c92;
 
@@ -274,35 +257,6 @@
     }
     &:hover {
       @apply underline! decoration-2 underline-offset-2;
-    }
-  }
-}
-
-@layer utilities {
-  .ds-input,
-  .ds-checkbox,
-  .ds-textarea,
-  .ds-radio {
-    &,
-    &:hover {
-      background-color: white !important;
-    }
-
-    &.has-warning {
-      box-shadow: inset 0 0 0 0.125rem var(--color-ds-warning);
-
-      &:hover,
-      &:focus {
-        box-shadow: inset 0 0 0 0.25rem var(--color-ds-warning);
-      }
-    }
-
-    &.has-error {
-      box-shadow: inset 0 0 0 2px var(--color-ds-error);
-      &:hover,
-      &:focus {
-        box-shadow: inset 0 0 0 0.25rem var(--color-ds-error);
-      }
     }
   }
 }
