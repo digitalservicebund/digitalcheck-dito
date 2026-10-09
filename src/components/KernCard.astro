@@ -18,6 +18,7 @@ const cardStyles = tv({
 
 interface Props extends VariantProps<typeof cardStyles> {
   title: string;
+  headingLevel?: 2 | 3;
   target_option?: "_blank" | "_self";
   href?: string;
   preline?: string;
@@ -33,6 +34,7 @@ interface Props extends VariantProps<typeof cardStyles> {
 const {
   preline,
   title,
+  headingLevel = 2,
   target_option = "_self",
   href,
   subline,
@@ -44,6 +46,8 @@ const {
   interactive = !!href,
 } = Astro.props;
 
+const Heading = `h${headingLevel}` as const;
+const hasImage = Astro.slots.has("image") || (image && imageAlt !== undefined);
 const hasIcon = Astro.slots.has("icon");
 const hasFooter = Astro.slots.has("footer");
 ---
@@ -54,17 +58,20 @@ const hasFooter = Astro.slots.has("footer");
     class: interactive ? "kern-card--interactive" : undefined,
   })}
 >
-  {image && imageAlt !== undefined && (
+  {hasImage && (
     <div class="kern-card__media relative">
-      <Image
-        src={image}
-        alt={imageAlt}
-        class="h-208 object-cover"
-        densities={[1, 2]}
-        width="382"
-        height="208"
-        quality={100}
-      />
+      <slot name="image" />
+      {image && imageAlt && (
+        <Image
+          src={image!}
+          alt={imageAlt!}
+          class="h-208 object-cover"
+          densities={[1, 2]}
+          width="382"
+          height="208"
+          quality={100}
+        />
+      )}
       {imageSource && (
         <p class="absolute right-0 bottom-0 w-auto! rounded-none! bg-black/40 px-4 text-xs text-white">
           Quelle: {imageSource}
@@ -82,14 +89,14 @@ const hasFooter = Astro.slots.has("footer");
       )}
       <hgroup class="max-w-full">
         {preline && <p class="kern-preline">{preline}</p>}
-        <h2 class="kern-title hyphens-auto wrap-break-word">
+        <Heading class="kern-title hyphens-auto wrap-break-word">
           {href ? (
             /* prettier-ignore */ <a href={href} class="kern-link--stretched" target={target_option}>{title}
               </a>
           ) : (
             title
           )}
-        </h2>
+        </Heading>
         {subline && <p class="kern-subline">{subline}</p>}
       </hgroup>
     </header>
