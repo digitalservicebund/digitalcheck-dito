@@ -63,8 +63,8 @@
   }
 
   body {
-    /* By default, text is 16px * 1.125 = 18px and line height is 150% of that (27px). */
-    @apply text-lg leading-[1.5em] antialiased;
+    /* KERN body default: 18px font size, 24px line height */
+    @apply text-(length:--kern-typography-font-size-medium-static) leading-(--kern-typography-line-height-medium-static) antialiased;
   }
 
   h1,
