@@ -9,7 +9,15 @@ import { renderToDOM } from "@/utils/testUtils";
 import type { BoundFunctions, queries } from "@testing-library/dom";
 import { within } from "@testing-library/dom";
 import type { AstroComponentFactory } from "astro/runtime/server/index.js";
-import { beforeAll, describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it, vi } from "vitest";
+
+// The content data store isn't populated in CI, so mock the collection.
+const principle = vi.hoisted(() => ({
+  data: { Name: "Digitale Angebote für alle nutzbar gestalten", order: 1 },
+}));
+vi.mock("astro:content", () => ({
+  getCollection: vi.fn().mockResolvedValue([principle]),
+}));
 
 describe("Index Route - Integration Tests", () => {
   let main: BoundFunctions<typeof queries>;
