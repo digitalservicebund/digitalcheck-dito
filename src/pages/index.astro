@@ -105,13 +105,13 @@ const principles = (await getCollection("prinzipien"))
 <Layout>
   <main class="breakout-grid">
     <Hero variant="dark">
-      <h1>Digitaltaugliche Regelungen erarbeiten</h1>
-      <p>
+      <h1 class="mb-24">Digitaltaugliche Regelungen erarbeiten</h1>
+      <p class="kern-body py-0">
         Der Digitalcheck sorgt dafür, dass Regelungen digitaltauglich umsetzbar
         sind – für praxistaugliche Abläufe und weniger Bürokratie in Bund und
         Ländern.
       </p>
-      <div class="flex flex-wrap gap-24 pt-8">
+      <div class="flex flex-wrap gap-24 pt-24 pb-16">
         <LinkButton href={vorpruefung.path} iconLeft="kern-icon--arrow-forward">
           Digitalcheck starten
         </LinkButton>
@@ -206,7 +206,7 @@ const principles = (await getCollection("prinzipien"))
     </section>
 
     <section class="breakout py-64">
-      <div class="flex flex-col gap-32 lg:flex-row lg:justify-between">
+      <div class="flex flex-col gap-32 lg:flex-row lg:justify-between lg:gap-16">
         <div class="space-y-16 lg:max-w-488">
           <h2>Fünf Prinzipien der Digitaltauglichkeit</h2>
           <p class="kern-body">
@@ -217,7 +217,7 @@ const principles = (await getCollection("prinzipien"))
             <LinkButton href={prinzipien.path}>Zu den Prinzipien</LinkButton>
           </div>
         </div>
-        <ol class="list-unstyled flex flex-col gap-8 lg:w-728">
+        <ol class="list-unstyled flex flex-col gap-8 lg:w-712">
           {principles.map((principle, index) => (
             <li class="flex items-baseline gap-12 py-4">
               <span
