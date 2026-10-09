@@ -27,9 +27,10 @@ import { getCollection } from "astro:content";
 import IconArrowDownward from "~icons/ic/baseline-arrow-downward";
 import IconMail from "~icons/ic/baseline-mail";
 import IconPhone from "~icons/ic/baseline-phone";
-import IconComputer from "~icons/ic/outline-computer";
-import IconPlaylistAddCheck from "~icons/ic/outline-playlist-add-check";
-import IconQueryBuilder from "~icons/ic/outline-query-builder";
+import IconAddLocationAlt from "~icons/ic/round-add-location-alt";
+import IconComputer from "~icons/ic/round-computer";
+import IconEditNote from "~icons/ic/round-edit-note";
+import IconQueryBuilder from "~icons/ic/round-query-builder";
 
 export const frontmatter = {
   title: "Startseite",
@@ -195,11 +196,19 @@ const principles = (await getCollection("prinzipien"))
           >
             <IconQueryBuilder slot="icon" class="size-74" />
           </FeatureItem>
+        </FeatureSet>
+        <FeatureSet>
           <FeatureItem
-            title="Gilt für alle Bundesregelungen"
-            body="Der Digitalcheck gilt für alle Regelungsvorhaben auf Bundesebene – Gesetze, Verordnungen und Verwaltungsvorschriften, neu und bestehend. Nach und nach auch für die Länder."
+            title="Gilt für alle Bundesregelungen ..."
+            body="Der Digitalcheck gilt für alle Regelungsvorhaben auf Bundesebene – Gesetze, Verordnungen und Verwaltungsvorschriften, neu und bestehend."
           >
-            <IconPlaylistAddCheck slot="icon" class="size-74" />
+            <IconEditNote slot="icon" class="size-74" />
+          </FeatureItem>
+          <FeatureItem
+            title="... und für die Länder"
+            body="Immer mehr Länder prüfen ihre Regelungen verbindlich auf Digitaltauglichkeit. Mit unseren Kooperationspartnern verfolgen wir dasselbe Ziel: Regelungen, die von Anfang an digital umsetzbar sind."
+          >
+            <IconAddLocationAlt slot="icon" class="size-74" />
           </FeatureItem>
         </FeatureSet>
       </div>
@@ -254,7 +263,7 @@ const principles = (await getCollection("prinzipien"))
           <Image
             slot="image"
             src={euInteroperabilitaetImage}
-            alt=""
+            alt="Eine stilisierte Karte von Europa. Die EU-Mitgliedstaaten sind heller markiert und durch überlappende, gestrichelte Linien miteinander vernetzt."
             widths={[600, 1200]}
             sizes="(min-width: 64rem) 592px, 100vw"
             class="aspect-video w-full object-cover"
@@ -281,7 +290,7 @@ const principles = (await getCollection("prinzipien"))
             <Image
               slot="image"
               src={bundeslaenderImage}
-              alt=""
+              alt="Eine stilisierte Karte von Deutschland mit den Grenzen der 16 Bundesländer."
               widths={[600, 1200]}
               sizes="(min-width: 64rem) 592px, 100vw"
               class="aspect-video w-full object-cover"
