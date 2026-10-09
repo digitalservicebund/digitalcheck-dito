@@ -50,9 +50,10 @@ test.describe("basic example a11y test", () => {
     const urlPromises = (await principleLinks.all()).map((element) =>
       element.getAttribute("href"),
     );
-    const urls = (await Promise.all(urlPromises)).filter(
-      (url) => !!url,
-    ) as string[];
+    // dedupe, as the overview links each principle multiple times
+    const urls = [
+      ...new Set((await Promise.all(urlPromises)).filter((url) => !!url)),
+    ] as string[];
 
     expect(urls.length).toBeGreaterThanOrEqual(5);
 
