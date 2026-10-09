@@ -60,7 +60,8 @@ const items = news.items.map((item) => ({
         },
       }`}
     >
-      <Timeline>
+      {/* Indent so year badges, centered on the line, don't overhang the content column */}
+      <Timeline className="pl-28">
         {items.map((item) =>
           item.year ? (
             <TimelineItem year={item.year} x-show={`visible > ${item.index}`} />
