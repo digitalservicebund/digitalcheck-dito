@@ -20,7 +20,7 @@ export function DocumentationBindingRequirements() {
         <Heading
           text={dokumentation_verbindlicheAnforderungen.title}
           tagName="h1"
-          look="ds-heading-02-reg"
+          look="kern-heading-large"
           className="mb-16"
         />
       </div>

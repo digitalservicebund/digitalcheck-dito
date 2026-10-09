@@ -131,7 +131,7 @@ export function DokumentationIndexPage({
               heading={{
                 tagName: "h2",
                 text: "Hilfreiche Tipps zum Ausfüllen der Dokumentation",
-                look: "ds-heading-03-reg",
+                look: "kern-heading-medium",
               }}
             >
               <p>

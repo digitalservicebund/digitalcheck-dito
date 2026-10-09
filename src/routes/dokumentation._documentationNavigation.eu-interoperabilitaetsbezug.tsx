@@ -53,7 +53,7 @@ export function DocumentationEuInteroperabilityRequirements() {
       <Heading
         text="Bezug zur EU-Interoperabilität"
         tagName="h1"
-        look="ds-heading-02-reg"
+        look="kern-heading-large"
         className="mb-16"
       />
       <form {...form.getFormProps()} className="space-y-20">

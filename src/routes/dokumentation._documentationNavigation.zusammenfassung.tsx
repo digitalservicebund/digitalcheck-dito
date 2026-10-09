@@ -63,7 +63,7 @@ const createInfoBoxItem = ({
   heading: {
     text: heading ?? route.title,
     tagName: "h2",
-    look: "ds-heading-03-reg",
+    look: "kern-heading-medium",
   },
   badge: badge,
   children: (
@@ -448,7 +448,7 @@ export function DocumentationSummary() {
       <Heading
         text={summary.headline}
         tagName="h1"
-        look="ds-heading-02-reg"
+        look="kern-heading-large"
         className="mb-16"
       />
       <RichText markdown={summary.text} />

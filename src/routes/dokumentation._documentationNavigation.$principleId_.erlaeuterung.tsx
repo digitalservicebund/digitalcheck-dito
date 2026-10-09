@@ -81,7 +81,7 @@ function DocumentationPrincipleErlaeuterungForm({
       <input {...form.getHiddenInputProps("answer")} />
 
       <fieldset className="space-y-24">
-        <legend className="ds-heading-03-reg">{explanationTitle}</legend>
+        <legend className="kern-heading-medium">{explanationTitle}</legend>
 
         <div className="space-y-48">
           {isPositive && (
@@ -199,7 +199,7 @@ export function DocumentationPrincipleErlaeuterung({
         >
           Prinzip {prinzip.order}
         </Badge>
-        <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
+        <Heading tagName="h1" look="kern-heading-large" className="mb-16">
           {prinzip.Name}
           <HelpButton
             sectionId="prinzip"

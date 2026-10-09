@@ -56,7 +56,7 @@ export function DocumentationPrinciple({
         <Badge principleNumber={prinzip.Nummer as PrincipleNumber}>
           Prinzip {prinzip.order}
         </Badge>
-        <Heading tagName="h1" look="ds-heading-02-reg" className="mb-16">
+        <Heading tagName="h1" look="kern-heading-large" className="mb-16">
           {prinzip.Name}
           <HelpButton
             sectionId="1-prinzip"
@@ -78,7 +78,7 @@ export function DocumentationPrinciple({
         <Heading
           id="question-label"
           tagName="h2"
-          look="ds-heading-03-reg"
+          look="kern-heading-medium"
           className="mb-16"
         >
           Schafft das Regelungsvorhaben die rechtlichen Voraussetzungen für die

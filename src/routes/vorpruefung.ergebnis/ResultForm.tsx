@@ -116,7 +116,7 @@ export default function ResultForm({
         <div className="kern-stack kern-stack-lg">
           <Heading
             tagName="h2"
-            className="ds-heading-03-reg"
+            className="kern-heading-medium"
             text={preCheckResult.form.formLegend}
           />
 

@@ -35,7 +35,7 @@ function ImageBox({
   return (
     <figure className={twMerge(className, "w-full")}>
       {title && (
-        <Heading className="ds-heading-03-reg pb-[24px]" tagName={headingTag}>
+        <Heading className="kern-heading-medium pb-[24px]" tagName={headingTag}>
           {title}
         </Heading>
       )}

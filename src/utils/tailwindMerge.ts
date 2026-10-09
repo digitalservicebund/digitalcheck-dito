@@ -33,7 +33,6 @@ const customTwMerge = extendTailwindMerge<
       ],
       dsTypography: [
         "ds-title-reg",
-        { "ds-heading": typographyVariants },
         "ds-subhead",
         { "ds-label": typographyVariants },
         "ds-label-section",

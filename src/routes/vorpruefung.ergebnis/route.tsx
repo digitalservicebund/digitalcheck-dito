@@ -75,7 +75,7 @@ function PrintTitle({ title }: Readonly<{ title: string }>) {
   return (
     <Heading
       tagName="h2"
-      look="ds-heading-03-reg"
+      look="kern-heading-medium"
       className="hidden pb-24 font-bold print:block"
     >
       {preCheckResult.print.titlePrefix}
@@ -134,7 +134,7 @@ export default function Result() {
                 <div>
                   <Heading
                     tagName="h1"
-                    look="ds-heading-02-reg"
+                    look="kern-heading-large"
                     className="mb-0"
                     text={marked.parseInline(resultContent.title) as string}
                   />
@@ -153,7 +153,7 @@ export default function Result() {
                   heading={{
                     text: resultContent.infoboxContent.title,
                     tagName: "h2",
-                    look: "ds-heading-03-reg",
+                    look: "kern-heading-medium",
                   }}
                 >
                   <RichText markdown={resultContent.infoboxContent.text} />
@@ -285,7 +285,7 @@ export default function Result() {
       <Container className="my-80 py-0 print:hidden">
         <Heading
           tagName="h2"
-          look="ds-heading-02-reg mb-64 max-sm:mb-56"
+          look="kern-heading-large mb-64 max-sm:mb-56"
           text={preCheck.faq.title}
         />
         <PreCheckFAQ />

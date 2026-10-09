@@ -20,14 +20,14 @@ function InteroperabilitySteps() {
       <Heading
         text={"Schritt 2: Interoperabilitäts-Bewertung abschließen"}
         tagName="h2"
-        look="ds-heading-02-reg"
+        look="kern-heading-large"
         className="mt-64 mb-32"
       />
       <InfoBox
         look="white"
         heading={{
           tagName: "h2",
-          look: "ds-heading-03-reg",
+          look: "kern-heading-medium",
           text: "An die Nationale Kontaktstelle senden",
         }}
       >
@@ -63,7 +63,7 @@ export function DocumentationSend() {
       <Heading
         text={firstStepPrefix + finish.heading.text}
         tagName="h1"
-        look="ds-heading-02-reg"
+        look="kern-heading-large"
         className="mb-16"
       />
       <RichText markdown={finish.heading.markdown} />
@@ -74,7 +74,7 @@ export function DocumentationSend() {
           className="bg-white"
           heading={{
             tagName: "h2",
-            look: "ds-heading-03-reg",
+            look: "kern-heading-medium",
             text: finish.download.heading,
           }}
         >
@@ -90,7 +90,7 @@ export function DocumentationSend() {
           className="bg-white"
           heading={{
             tagName: "h2",
-            look: "ds-heading-03-reg",
+            look: "kern-heading-medium",
             text: finish.send.heading,
           }}
         >
@@ -99,7 +99,7 @@ export function DocumentationSend() {
         <InfoBox
           heading={{
             tagName: "h2",
-            look: "ds-heading-03-reg",
+            look: "kern-heading-medium",
             text: finish.done,
           }}
           visual={{
