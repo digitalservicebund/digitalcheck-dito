@@ -5,6 +5,7 @@ import { LinkButton } from "@/components/Button";
 import FeatureItem from "@/components/FeatureItem.astro";
 import FeatureSet from "@/components/FeatureSet.astro";
 import Hero from "@/components/Hero.astro";
+import KernCard from "@/components/KernCard.astro";
 import {
   bundeslaender,
   dokumentation,
@@ -132,26 +133,26 @@ const principles = (await getCollection("prinzipien"))
         </p>
         <ol class="list-unstyled grid gap-32 lg:grid-cols-3">
           {steps.map((step, index) => (
-            <li class="kern-card">
-              <div class="kern-card__container">
+            <li class="[&_.kern-btn]:flex-none">
+              <KernCard
+                title={step.title}
+                headingLevel={3}
+                body={step.subline}
+                background="white"
+              >
                 <span
-                  class="kern-number border-kern-action-default text-kern-action-default"
+                  slot="pre-header"
+                  class="kern-number border-kern-action-default text-kern-action-default mb-16"
                   aria-hidden="true"
                 >
                   {index + 1}
                 </span>
-                <div class="kern-card__header">
-                  <h3 class="kern-title m-0">{step.title}</h3>
-                  <p class="kern-body">{step.subline}</p>
-                </div>
-                <div class="kern-card__body">
-                  {step.facts.map((fact) => (
-                    <p class="kern-body kern-body--muted">
-                      <b>{fact.label}</b>: {fact.text}
-                    </p>
-                  ))}
-                </div>
-                <div class="kern-card__footer [&_.kern-btn]:flex-none">
+                {step.facts.map((fact) => (
+                  <p class="kern-body kern-body--muted">
+                    <b>{fact.label}</b>: {fact.text}
+                  </p>
+                ))}
+                <Fragment slot="footer">
                   <LinkButton href={step.link.href} look="secondary">
                     {step.link.text}
                   </LinkButton>
@@ -167,8 +168,8 @@ const principles = (await getCollection("prinzipien"))
                       {step.externalLink.text}
                     </LinkButton>
                   )}
-                </div>
-              </div>
+                </Fragment>
+              </KernCard>
             </li>
           ))}
         </ol>
@@ -245,73 +246,55 @@ const principles = (await getCollection("prinzipien"))
 
     <section class="breakout bg-kern-layout-layer-surface py-64">
       <div class="grid gap-32 lg:grid-cols-2">
-        <article class="kern-card kern-card--large">
-          <div class="kern-card__media">
-            <Image
-              src={euInteroperabilitaetImage}
-              alt=""
-              widths={[600, 1200]}
-              sizes="(min-width: 64rem) 592px, 100vw"
-              class="aspect-video w-full object-cover"
-            />
-          </div>
-          <div class="kern-card__container">
-            <div class="kern-card__header">
-              <h2 class="kern-title kern-title--large m-0">
-                EU-Interoperabilität
-              </h2>
-            </div>
-            <div class="kern-card__body">
-              <p class="kern-body">
-                Neben der Digitaltauglichkeit prüft der Digitalcheck auch die
-                Interoperabilitätsanforderungen gemäß EU-Verordnung 2024/903
-                (Interoperables Europa).
-              </p>
-            </div>
-            <div class="kern-card__footer">
-              <LinkButton href={interoperabel.path}>
-                Zu EU-Interoperabilität
-              </LinkButton>
-              <LinkButton
-                href={interoperabel_nationaleKontaktstelle.path}
-                look="secondary"
-              >
-                Nationale Kontaktstelle
-              </LinkButton>
-            </div>
-          </div>
-        </article>
+        <KernCard
+          title="EU-Interoperabilität"
+          body="Neben der Digitaltauglichkeit prüft der Digitalcheck auch die Interoperabilitätsanforderungen gemäß EU-Verordnung 2024/903 (Interoperables Europa)."
+          background="white"
+        >
+          <Image
+            slot="image"
+            src={euInteroperabilitaetImage}
+            alt=""
+            widths={[600, 1200]}
+            sizes="(min-width: 64rem) 592px, 100vw"
+            class="aspect-video w-full object-cover"
+          />
+          <Fragment slot="footer">
+            <LinkButton href={interoperabel.path}>
+              Zu EU-Interoperabilität
+            </LinkButton>
+            <LinkButton
+              href={interoperabel_nationaleKontaktstelle.path}
+              look="secondary"
+            >
+              Nationale Kontaktstelle
+            </LinkButton>
+          </Fragment>
+        </KernCard>
 
-        <article class="kern-card kern-card--large">
-          <div class="kern-card__media">
+        <div class="[&_.kern-btn]:flex-none">
+          <KernCard
+            title="Digitalcheck für Bundesländer"
+            body="Durch eine Kooperation mit dem Bund können Sie den Digitalcheck für Ihr Bundesland direkt auf der Webseite des Digitalcheck Bund integrieren."
+            background="white"
+          >
             <Image
+              slot="image"
               src={bundeslaenderImage}
               alt=""
               widths={[600, 1200]}
               sizes="(min-width: 64rem) 592px, 100vw"
               class="aspect-video w-full object-cover"
             />
-          </div>
-          <div class="kern-card__container">
-            <div class="kern-card__header">
-              <h2 class="kern-title kern-title--large m-0">
-                Digitalcheck für Bundesländer
-              </h2>
-            </div>
-            <div class="kern-card__body">
-              <p class="kern-body">
-                Durch eine Kooperation mit dem Bund können Sie den Digitalcheck
-                für Ihr Bundesland direkt auf der Webseite des Digitalcheck Bund
-                integrieren.
-              </p>
-            </div>
-            <div class="kern-card__footer [&_.kern-btn]:flex-none">
-              <LinkButton href={bundeslaender.path} look="secondary">
-                Zur Übersicht
-              </LinkButton>
-            </div>
-          </div>
-        </article>
+            <LinkButton
+              slot="footer"
+              href={bundeslaender.path}
+              look="secondary"
+            >
+              Zur Übersicht
+            </LinkButton>
+          </KernCard>
+        </div>
       </div>
     </section>
 
