@@ -1,8 +1,7 @@
 import type { ImageProps } from "@/components/Image";
 import Image from "@/components/Image";
-import twMerge from "@/utils/tailwindMerge";
 import { ZoomInOutlined } from "@digitalservicebund/icons";
-import { twJoin } from "tailwind-merge";
+import { twJoin, twMerge } from "tailwind-merge";
 
 type ImageZoomableComponentProps = {
   image: Readonly<ImageProps>;

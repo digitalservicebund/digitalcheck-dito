@@ -5,11 +5,10 @@ import Heading from "@/components/Heading.tsx";
 import type { ImageProps } from "@/components/Image.tsx";
 import ImageZoomable from "@/components/ImageZoomable.tsx";
 import RichText from "@/components/RichText.tsx";
-import { twJoin } from "tailwind-merge";
+import { twJoin, twMerge } from "tailwind-merge";
 
 import ButtonContainer from "@/components/ButtonContainer.tsx";
 import type { ContentLink } from "@/utils/contentTypes";
-import twMerge from "@/utils/tailwindMerge";
 import type React from "react";
 import type { ReactNode } from "react";
 

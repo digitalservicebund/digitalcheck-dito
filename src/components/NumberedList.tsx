@@ -1,7 +1,6 @@
-import twMerge from "@/utils/tailwindMerge.ts";
 import type React from "react";
 import type { ReactElement } from "react";
-import { twJoin } from "tailwind-merge";
+import { twJoin, twMerge } from "tailwind-merge";
 
 /*
  * NumberedList renders long-form content as a series of steps, placing a counter

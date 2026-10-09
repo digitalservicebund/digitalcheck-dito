@@ -1,7 +1,7 @@
 import ButtonContainer from "@/components/ButtonContainer.tsx";
 import type { ContentLink } from "@/utils/contentTypes";
-import twMerge from "@/utils/tailwindMerge";
 import type React from "react";
+import { twMerge } from "tailwind-merge";
 import type { BadgeProps } from "./Badge";
 import Badge from "./Badge";
 import { LinkButton } from "./Button";

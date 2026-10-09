@@ -1,6 +1,6 @@
-import twMerge from "@/utils/tailwindMerge";
 import type React from "react";
 import { useEffect, useRef } from "react";
+import { twMerge } from "tailwind-merge";
 
 export type TableOfContentsInteractiveProps = {
   selector: string;

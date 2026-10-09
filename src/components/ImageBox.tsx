@@ -2,8 +2,7 @@ import Heading from "@/components/Heading.tsx";
 import type { ImageProps } from "@/components/Image.tsx";
 import Image from "@/components/Image.tsx";
 import ImageZoomable from "@/components/ImageZoomable.tsx";
-import twMerge from "@/utils/tailwindMerge";
-import { twJoin } from "tailwind-merge";
+import { twJoin, twMerge } from "tailwind-merge";
 import RichText from "./RichText";
 
 export type ImageBoxProps = {

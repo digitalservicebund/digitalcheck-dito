@@ -1,9 +1,8 @@
 import { useHelpPanel } from "@/contexts/HelpPanelContext";
 import { useElResize, useScroll } from "@/hooks/deviceHook";
-import customTwMerge from "@/utils/tailwindMerge";
 import { ChevronLeftOutlined, CloseOutlined } from "@digitalservicebund/icons";
 import { useEffect, useRef } from "react";
-import { twJoin } from "tailwind-merge";
+import { twJoin, twMerge } from "tailwind-merge";
 import Button from "./Button";
 import RichText from "./RichText";
 
@@ -103,7 +102,7 @@ export default function HelpSidepanel() {
 
       {/* Main panel — desktop: grid item; mobile: fixed overlay */}
       <div
-        className={customTwMerge(
+        className={twMerge(
           // Base (desktop grid)
           "help border-kern-darkblue-100 relative border-l bg-white",
           !isOpen && "hidden",

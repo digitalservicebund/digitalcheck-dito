@@ -1,6 +1,5 @@
-import twMerge from "@/utils/tailwindMerge";
 import type React from "react";
-import { twJoin } from "tailwind-merge";
+import { twJoin, twMerge } from "tailwind-merge";
 
 export type ButtonBaseProps = {
   fullWidth?: boolean;

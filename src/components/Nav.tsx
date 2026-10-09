@@ -1,5 +1,4 @@
 import { general } from "@/resources/content/shared/general";
-import twMerge from "@/utils/tailwindMerge";
 import { Check, WarningAmberOutlined } from "@digitalservicebund/icons";
 import {
   Disclosure,
@@ -8,7 +7,7 @@ import {
 } from "@headlessui/react";
 import type { ReactElement, ReactNode } from "react";
 import { createContext, isValidElement, useContext, useMemo } from "react";
-import { twJoin } from "tailwind-merge";
+import { twJoin, twMerge } from "tailwind-merge";
 
 const NavContext = createContext<{
   activeElementUrl?: string;
