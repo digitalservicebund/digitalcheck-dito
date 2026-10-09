@@ -20,7 +20,6 @@ function InteroperabilitySteps() {
       <Heading
         text={"Schritt 2: Interoperabilitäts-Bewertung abschließen"}
         tagName="h2"
-        look="kern-heading-large"
         className="mt-64 mb-32"
       />
       <InfoBox
