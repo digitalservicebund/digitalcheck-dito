@@ -70,6 +70,7 @@ const items = news.items.map((item) => ({
               x-show={`visible > ${item.index}`}
               data-entry-index={item.index}
               tabIndex={-1}
+              className="pb-40 pl-8"
             >
               {"badge" in item && (
                 <div class="flex">
@@ -81,7 +82,9 @@ const items = news.items.map((item) => ({
                 </div>
               )}
               {item.headline && (
-                <h2 class="kern-heading-medium py-16">{item.headline.text}</h2>
+                <h2 class="kern-heading-medium pt-24 pb-16">
+                  {item.headline.text}
+                </h2>
               )}
               {item.content && <RichText markdown={item.content} />}
             </TimelineItem>
