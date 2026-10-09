@@ -78,7 +78,7 @@ const InlineNotice = ({
     >
       <div className="flex flex-row items-center gap-4">
         {showIcon && <IconComponent className="mr-4 flex-none self-start" />}
-        <div className="ds-label-01-bold *:ds-label-01-bold">{heading}</div>
+        <div>{heading}</div>
       </div>
       {children && (
         <div className="leading-[26px] tracking-[0.16px]">{children}</div>

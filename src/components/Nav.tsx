@@ -106,10 +106,8 @@ const classes = {
   hoverError: "hover:border-l-yellow-300 hover:bg-yellow-300 hover:underline",
   focus:
     "focus-visible:outline-4 focus-visible:-outline-offset-4 focus-visible:outline-blue-800",
-  active:
-    "ds-label-02-bold pointer-events-none border-l-kern-darkblue-800 bg-kern-darkblue-150",
-  activeError:
-    "ds-label-02-bold pointer-events-none border-l-yellow-800 bg-yellow-300",
+  active: "pointer-events-none border-l-kern-darkblue-800 bg-kern-darkblue-150",
+  activeError: "pointer-events-none border-l-yellow-800 bg-yellow-300",
   activeOpen:
     "pointer-events-none border-l-kern-darkblue-150 bg-kern-darkblue-150",
   activeOpenError: "pointer-events-none border-l-yellow-200 bg-yellow-200",
@@ -341,9 +339,7 @@ function NavItem({
 
 function NavItems({ children }: Readonly<NavItemsProps>) {
   return (
-    <ul className="ds-label-02-reg bg-kern-darkblue-025 list-none space-y-0 p-0">
-      {children}
-    </ul>
+    <ul className="bg-kern-darkblue-025 list-none space-y-0 p-0">{children}</ul>
   );
 }
 

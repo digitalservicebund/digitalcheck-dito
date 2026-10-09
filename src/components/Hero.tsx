@@ -22,9 +22,7 @@ export default function Hero({
     <section className={twMerge("bg-kern-darkblue-100 py-kern-4xl", className)}>
       <div className="kern-stack kern-stack-md container">
         <Heading tagName="h1">{title}</Heading>
-        {subtitle && (
-          <RichText markdown={subtitle} className="ds-subhead mt-16" />
-        )}
+        {subtitle && <RichText markdown={subtitle} className="mt-16" />}
         {children}
       </div>
     </section>

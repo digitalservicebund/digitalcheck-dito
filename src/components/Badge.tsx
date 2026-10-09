@@ -21,7 +21,7 @@ function Badge({
   look = "default",
 }: Readonly<BadgeProps>) {
   const badgeStyle =
-    "ds-label-02-reg inline-flex flex-row items-center gap-4 self-start rounded-md bg-transparent p-4";
+    "inline-flex flex-row items-center gap-4 self-start rounded-md bg-transparent p-4";
   const highContrastDarkStyle =
     "forced-colors:dark:[forced-color-adjust:none] forced-colors:dark:bg-transparent forced-colors:dark:text-white";
   const principleStyle = principleNumber

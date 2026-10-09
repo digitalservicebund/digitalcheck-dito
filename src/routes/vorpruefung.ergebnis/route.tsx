@@ -139,10 +139,7 @@ export default function Result() {
                     text={marked.parseInline(resultContent.title) as string}
                   />
                   {resultHint && (
-                    <RichText
-                      markdown={resultHint}
-                      className="ds-subhead mt-16"
-                    />
+                    <RichText markdown={resultHint} className="mt-16" />
                   )}
                 </div>
               </div>
@@ -224,7 +221,7 @@ export default function Result() {
                 <div className="kern-stack kern-stack-md mt-40">
                   <Heading
                     tagName="h3"
-                    className="ds-label-section"
+
                     text={preCheckResult.form.faqs.title}
                   />
                   {preCheckResult.form.faqs.details.map((detail) => (

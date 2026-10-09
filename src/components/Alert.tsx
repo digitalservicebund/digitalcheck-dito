@@ -66,9 +66,7 @@ const Alert = ({
           <IconComponent className={twJoin("mr-4 flex-none", iconColor)} />
         )}
         <div className="pr-32">
-          <Heading tagName={tagName} look="ds-label-01-bold">
-            {title}
-          </Heading>
+          <Heading tagName={tagName}>{title}</Heading>
           {content && (
             <div className="leading-[26px] tracking-[0.16px]">
               <RichText markdown={content} />

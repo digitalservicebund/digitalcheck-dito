@@ -55,10 +55,10 @@ export default function AspectPills({
       aria-invalid={!hasError || hasWarning}
       aria-errormessage={hasError || hasWarning ? errorId : undefined}
     >
-      <legend className="ds-label-01-reg">{children}</legend>
+      <legend>{children}</legend>
       {description && (
         <span
-          className="ds-body-02-reg text-kern-layout-text-default block"
+          className="text-kern-layout-text-default block"
           id={descriptionId}
         >
           {description}

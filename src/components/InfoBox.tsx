@@ -110,7 +110,7 @@ export type DetailsSummaryListProps = {
 
 const DetailsSummaryList = ({ title, items }: DetailsSummaryListProps) => (
   <div className="kern-stack kern-stack-sm mt-16">
-    {title && <Heading {...title} className="ds-label-02-bold" />}
+    {title && <Heading {...title} />}
     {items?.map(({ title, ...details }) => (
       <DetailsSummary key={title} title={title} {...details} />
     ))}

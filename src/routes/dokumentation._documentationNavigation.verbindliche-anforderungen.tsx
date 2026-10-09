@@ -16,7 +16,7 @@ export function DocumentationBindingRequirements() {
   return (
     <div className="space-y-40">
       <div className={"space-y-8"}>
-        <p className={"ds-subhead"}>EU-Interoperabilität</p>
+        <p>EU-Interoperabilität</p>
         <Heading
           text={dokumentation_verbindlicheAnforderungen.title}
           tagName="h1"

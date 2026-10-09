@@ -31,7 +31,7 @@ function Item({ title, href, after, numbered }: Readonly<ItemProps>) {
         href={href}
         className={twMerge(
           "link-unstyled",
-          "ds-link-02-reg block cursor-pointer border-l-4 border-transparent p-8 text-blue-800 no-underline hover:bg-blue-300 focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-blue-800 data-active:border-l-blue-800 data-active:bg-blue-200 data-active:hover:bg-blue-300",
+          "block cursor-pointer border-l-4 border-transparent p-8 text-blue-800 no-underline hover:bg-blue-300 focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-blue-800 data-active:border-l-blue-800 data-active:bg-blue-200 data-active:hover:bg-blue-300",
           numberClass,
         )}
       >
@@ -84,9 +84,7 @@ function TableOfContentsInteractive({
 
   return (
     <nav ref={navRef} aria-labelledby="toc-label" className="space-y-16">
-      <div id="toc-label" className="ds-label-01-bold">
-        {title}
-      </div>
+      <div id="toc-label">{title}</div>
       {children}
     </nav>
   );

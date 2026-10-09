@@ -98,18 +98,12 @@ function Answer({
 }>) {
   return (
     <div className="space-y-24">
-      {heading && (
-        <Heading tagName="h3" look="ds-subhead">
-          {heading}
-        </Heading>
-      )}
+      {heading && <Heading tagName="h3">{heading}</Heading>}
       {answers
         .filter(({ answer }) => answer)
         .map(({ answer, prefix }) => (
           <div className="space-y-8" key={prefix + answer}>
-            <Heading tagName="h4" className="ds-body-01-bold">
-              {prefix}
-            </Heading>
+            <Heading tagName="h4">{prefix}</Heading>
             <p>{answer}</p>
           </div>
         ))}
@@ -188,9 +182,7 @@ function SimplifiedAspectsContent({
     <>
       {aspects?.length && (
         <div className="space-y-8">
-          <Heading tagName="h4" className="ds-body-01-bold">
-            Schwerpunkte
-          </Heading>
+          <Heading tagName="h4">Schwerpunkte</Heading>
           <div className="flex flex-wrap gap-16">
             {aspects.map((aspect) => {
               const aspekt = prinzip.Aspekte.find(

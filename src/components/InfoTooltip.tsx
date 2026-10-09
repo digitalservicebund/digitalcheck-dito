@@ -56,7 +56,7 @@ export default function InfoTooltip({ children }: Readonly<InfoTooltipProps>) {
         id={id}
         role="tooltip"
         className={twJoin(
-          "ds-label-03-reg border-kern-darkblue-100 bg-kern-darkblue-025 text-kern-layout-text-default absolute w-160 rounded-sm border px-12 py-8 transition-opacity duration-300",
+          "border-kern-darkblue-100 bg-kern-darkblue-025 text-kern-layout-text-default absolute w-160 rounded-sm border px-12 py-8 transition-opacity duration-300",
           position === "left" ? "right-full mr-10" : "left-full ml-10",
           open ? "opacity-100" : "opacity-0",
         )}

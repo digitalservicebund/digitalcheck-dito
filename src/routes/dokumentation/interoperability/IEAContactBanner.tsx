@@ -6,9 +6,7 @@ export function IEAContactBanner() {
     <div className="bg-kern-darkblue-100 mt-8 flex gap-16 p-16">
       <QuestionMarkOutlined className="fill-kern-action-default size-80" />
       <p>
-        <span className="ds-label-01-bold block">
-          Bei Fragen und Rückmeldungen
-        </span>
+        <span className="block">Bei Fragen und Rückmeldungen</span>
         wenden Sie sich an die{" "}
         <a href={interoperabel_nationaleKontaktstelle.path}>
           nationale Kontaktstelle für ein interoperables Europa

@@ -5,7 +5,6 @@ import { twJoin } from "tailwind-merge";
 export type DetailsSummaryProps = ComponentProps<"details"> & {
   identifier?: string;
   title?: string;
-  bold?: boolean;
   showVerticalLine?: boolean;
   className?: string;
   children?: ReactNode;
@@ -15,7 +14,6 @@ export type DetailsSummaryProps = ComponentProps<"details"> & {
 export default function DetailsSummary({
   identifier,
   title,
-  bold = true,
   showVerticalLine = true,
   className,
   children,
@@ -26,10 +24,8 @@ export default function DetailsSummary({
   const detailsRef = useRef<HTMLDetailsElement | null>(null);
   const summaryRef = useRef<HTMLElement | null>(null);
 
-  const summaryClasses = twJoin(
-    "summary-content inline-flex focus:outline-hidden cursor-pointer bg-no-repeat pl-[24px] [&::-webkit-details-marker]:hidden",
-    bold ? "ds-label-01-bold" : "ds-label-01-reg",
-  );
+  const summaryClasses =
+    "summary-content inline-flex focus:outline-hidden cursor-pointer bg-no-repeat pl-[24px] [&::-webkit-details-marker]:hidden";
 
   const contentWrapperClasses = twJoin(
     "block pt-4 pl-[24px] text-black",
