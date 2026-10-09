@@ -6,9 +6,9 @@ import FeatureItem from "@/components/FeatureItem.astro";
 import Hero from "@/components/Hero.astro";
 import KernBadge from "@/components/KernBadge.astro";
 import KernCard from "@/components/KernCard.astro";
-import IconComputer from "~icons/ic/outline-computer";
-import IconWatch from "~icons/ic/outline-watch-later";
-import IconCheck from "~icons/ic/outline-playlist-add-check";
+import IconComputer from "~icons/ic/round-computer";
+import IconQueryBuilder from "~icons/ic/round-query-builder";
+import IconPlaylistAddCheck from "~icons/ic/round-playlist-add-check";
 import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
 import posterImage from "@/assets/images/Poster_5Prinzipien.jpg";
 import { prinzipienPoster_pdf } from "@/config/downloads";
@@ -42,7 +42,7 @@ const prinzips = (await getCollection("prinzipien"))
       <h2>So nutzen Sie die fünf Prinzipien für Ihr Regelungsvorhaben</h2>
       <FeatureSet>
         <FeatureItem title="Den Gesamtprozess überprüfen">
-          <IconComputer slot="icon" class="size-75" />
+          <IconComputer slot="icon" class="size-74" />
           <p>
             Wenden Sie die fünf Prinzipien direkt auf eine Skizze Ihres
             Umsetzungsprozesses an. So lokalisieren Sie relevante Schnittstellen
@@ -50,7 +50,7 @@ const prinzips = (await getCollection("prinzipien"))
           </p>
         </FeatureItem>
         <FeatureItem title="Starthilfe für den Regelungstext">
-          <IconWatch slot="icon" class="size-75" />
+          <IconQueryBuilder slot="icon" class="size-74" />
           <p>
             Verwenden Sie erprobte Praxisbeispiele als Fundament für Ihre
             eigenen Formulierungen und profitieren Sie von der Wirklogik bereits
@@ -58,7 +58,7 @@ const prinzips = (await getCollection("prinzipien"))
           </p>
         </FeatureItem>
         <FeatureItem title="Unterstützung durch Schulungsangebote und Praxistipps">
-          <IconCheck slot="icon" class="size-75" />
+          <IconPlaylistAddCheck slot="icon" class="size-74" />
           <p>
             Nutzen Sie konkrete Tipps, um die digitalen Potenziale Ihres
             Regelungsvorhabens voll auszuschöpfen und Hürden frühzeitig zu
