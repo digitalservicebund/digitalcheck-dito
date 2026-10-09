@@ -3,30 +3,27 @@ import DrilldownNavigation from "@/components/global/DrilldownNavigation.astro";
 import Kopfzeile from "@/components/global/Kopfzeile.astro";
 import {
   bundeslaender,
-  grundlagen_normenkontrollrat,
+  normenkontrollrat,
   home,
   interoperabel,
-  methoden_fuenfPrinzipien,
+  prinzipien,
   kontakt,
   type Route,
 } from "@/config/routes";
-import { contact } from "@/resources/content/shared/contact";
-import { header } from "@/resources/content/shared/header";
 import { getMobileMenuNavigation } from "@/utils/navigation/drilldown";
 import { getRouteLabel, isRouteVisible } from "@/utils/navigation/routeUtils";
 import { removeTrailingSlash, withBase } from "@/utils/path";
 import { twMerge } from "tailwind-merge";
 import IconClose from "~icons/ic/outline-close";
 import IconMenu from "~icons/ic/twotone-menu";
-import IconPhoneEnabled from "~icons/ic/twotone-phone-enabled";
 
 const currentPath = removeTrailingSlash(Astro.url.pathname);
 
 const HEADER_ROUTES: Route[] = [
-  methoden_fuenfPrinzipien,
+  prinzipien,
   interoperabel,
   bundeslaender,
-  grundlagen_normenkontrollrat,
+  normenkontrollrat,
   kontakt,
 ];
 const headerNavigation = HEADER_ROUTES.filter(isRouteVisible);
@@ -50,7 +47,7 @@ function navItemStyle(active = false) {
   @keydown.escape.window="mobileMenuOpen = false"
 >
   <Kopfzeile />
-  <div class="flex h-72 justify-between pl-16">
+  <div class="flex h-72 justify-between px-kern-lg">
     <!-- Logo and title -->
     <a href={home.path} class="link-unstyled flex items-center gap-24">
       <img
@@ -63,7 +60,7 @@ function navItemStyle(active = false) {
         alt="Logo des Bundes"
         class="hidden w-54 forced-colors:dark:block"
       />
-      <p class="text-xl font-bold max-lg:hidden">{header.title}</p>
+      <p class="text-xl font-bold max-lg:hidden">Digitalcheck</p>
     </a>
 
     <!-- Desktop Navigation -->
@@ -86,13 +83,6 @@ function navItemStyle(active = false) {
 
     <!-- Mobile Menu Toggle -->
     <div class="flex h-full lg:hidden">
-      <a
-        href={contact.phone}
-        class={navItemStyle()}
-        aria-label={`${header.contactTel.msg} ${contact.phoneDisplay}`}
-      >
-        <IconPhoneEnabled class="size-24 -scale-x-100" />
-      </a>
       <button
         type="button"
         class={navItemStyle()}

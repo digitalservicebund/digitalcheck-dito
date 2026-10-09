@@ -1,7 +1,7 @@
 import { getDownloadableExtensionName } from "@/utils/fileExtensionUtils";
-import twMerge from "@/utils/tailwindMerge";
 import type { Renderer, Tokens } from "marked";
 import { marked, Marked } from "marked";
+import { twMerge } from "tailwind-merge";
 import { dowloadIconString } from "./downloadIcon";
 
 export type RichTextProps = {

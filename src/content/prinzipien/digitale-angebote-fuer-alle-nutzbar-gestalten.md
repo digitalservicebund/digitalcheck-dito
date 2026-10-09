@@ -37,7 +37,7 @@
       {
         "Titel": "Formulieren Sie die Regelung technologieoffen",
         "Kurzbezeichnung": "Technologieoffenheit",
-        "Text": "**Prüfen Sie, ob die Nennung spezifischer Technologien notwendig bzw. gerechtfertigt ist.**\n\nWenn Sie Übertragungswege – wie DE-Mail oder PDF – festlegen, riskieren Sie, dass Ihre Regelung bald nicht mehr dem Stand der Technik entspricht.\n\nAndererseits kann die Nutzung etablierter Basisdienste die Umsetzung erleichtern und die Anwendung für Nutzende vereinfachen – im Sinne des Prinzips „[Etablierte Technologien ermöglichen effiziente Umsetzung](https://digitalcheck.bund.de/methoden/fuenf-prinzipien/etablierte-technologien-ermoeglichen-effiziente-umsetzung)“. Ob das sinnvoll ist, hängt vom konkreten Einzelfall ab.",
+        "Text": "**Prüfen Sie, ob die Nennung spezifischer Technologien notwendig bzw. gerechtfertigt ist.**\n\nWenn Sie Übertragungswege – wie DE-Mail oder PDF – festlegen, riskieren Sie, dass Ihre Regelung bald nicht mehr dem Stand der Technik entspricht.\n\nAndererseits kann die Nutzung etablierter Basisdienste die Umsetzung erleichtern und die Anwendung für Nutzende vereinfachen – im Sinne des Prinzips „[Etablierte Technologien ermöglichen effiziente Umsetzung](https://digitalcheck.bund.de/prinzipien/etablierte-technologien-ermoeglichen-effiziente-umsetzung)“. Ob das sinnvoll ist, hängt vom konkreten Einzelfall ab.",
         "Anwendung": [],
       },
       {

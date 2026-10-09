@@ -28,11 +28,21 @@ const PREVIEW_SITE = "https://digitalservicebund.github.io";
 const base = isPreview ? PREVIEW_BASE_PATH : undefined;
 
 const rawRedirects = {
-  "/interoperabel/loesungen":
-    "/interoperabel?tab=interoperable-loesungen#interoperable-loesungen",
-  "/grundlagen": "/methoden/fuenf-prinzipien",
-  "/grundlagen/fuenf-prinzipien": "/methoden/fuenf-prinzipien",
-  "/methoden/ablaeufe-aufgaben-erfassen": `${ZFL_BASE_URL}/werkzeuge/ressourcen/flussdiagramm`,
+  "/interoperabel/faq": "/interoperabel",
+  "/grundlagen": "/prinzipien",
+  "/grundlagen/fuenf-prinzipien": "/prinzipien",
+  "/methoden/fuenf-prinzipien": "/prinzipien",
+  // Not a dynamic [principleId] redirect, as Astro drops `base` from those
+  "/methoden/fuenf-prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten":
+    "/prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten",
+  "/methoden/fuenf-prinzipien/datenwiederverwendung-benoetigt-einheitliches-recht":
+    "/prinzipien/datenwiederverwendung-benoetigt-einheitliches-recht",
+  "/methoden/fuenf-prinzipien/etablierte-technologien-ermoeglichen-effiziente-umsetzung":
+    "/prinzipien/etablierte-technologien-ermoeglichen-effiziente-umsetzung",
+  "/methoden/fuenf-prinzipien/automatisierung-basiert-auf-eindeutigen-regelungen":
+    "/prinzipien/automatisierung-basiert-auf-eindeutigen-regelungen",
+  "/methoden/fuenf-prinzipien/datenschutz-und-informationssicherheit-schaffen-vertrauen":
+    "/prinzipien/datenschutz-und-informationssicherheit-schaffen-vertrauen",
 };
 
 // Some pages were moved to the Zentrum für Legistik
@@ -52,6 +62,7 @@ const zflRedirects = {
   "/methoden/technische-umsetzbarkeit": `${ZFL_BASE_URL}${ZFL_PATH_TECHNISCHE_UMSETZBARKEIT}`,
   "/methoden/visualisieren": `${ZFL_BASE_URL}${ZFL_PATH_FLUSSDIAGRAMME}`,
   "/methoden/visualisieren/flussdiagramm": `${ZFL_BASE_URL}${ZFL_PATH_FLUSSDIAGRAMME}`,
+  "/methoden/ablaeufe-aufgaben-erfassen": `${ZFL_BASE_URL}/werkzeuge/ressourcen/flussdiagramm`,
 };
 
 const redirects = {
