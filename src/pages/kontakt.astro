@@ -1,12 +1,8 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { ArrowForward, Email, Phone } from "@digitalservicebund/icons";
 import Hero from "@/components/Hero.astro";
 import KernCard from "@/components/KernCard.astro";
-import {
-  interoperabel_nationaleKontaktstelle,
-  vorpruefung,
-} from "@/config/routes";
+import { interoperabel_nationaleKontaktstelle } from "@/config/routes";
 import {
   ZFL_BASE_URL,
   ZFL_PATH_DIGITALTAUGLICHKEIT,
@@ -16,68 +12,71 @@ import { withBase } from "@/utils/path";
 import regelungsbegleitungImage from "@/assets/images/regelungsbegleitung.png";
 import schulungenImage from "@/assets/images/schulungen.jpg";
 import werkzeugeImage from "@/assets/images/werkzeuge.jpg";
+import IconArrowForward from "~icons/ic/baseline-arrow-forward";
+import IconMail from "~icons/ic/baseline-mail";
+import IconPhone from "~icons/ic/baseline-phone";
 
 export const frontmatter = {
   title: "Kontakt",
   isStagingOnly: true,
 };
-
-const iconClass = "size-20 shrink-0 fill-blue-800";
 ---
 
 <Layout title={frontmatter.title}>
   <main class="breakout-grid">
     <Hero>
-      <h1>Sprechen Sie uns an</h1>
+      <h1>Kontakt</h1>
       <p>
-        Das Digitalcheck-Team beantwortet Ihre Fragen rund um das Thema
-        Digitaltauglichkeit in Regelungsvorhaben.
+        Das Digitalcheck-Team beantwortet gerne Ihre Fragen rund um das Thema
+        Digitaltauglichkeit und EU-Interoperabilität.
       </p>
-      <ul class="list-unstyled space-y-8">
-        <li class="flex items-center gap-8">
-          <Phone className={iconClass} />
-          <a href={contact.phone}>{contact.phoneDisplay}</a>
-        </li>
-        <li class="flex items-center gap-8">
-          <Email className={iconClass} />
-          <a href={`mailto:${contact.email}`}>{contact.email}</a>
-        </li>
-      </ul>
     </Hero>
     <section>
-      <h2>Wobei können wir Ihnen helfen?</h2>
-      <div class="mt-32 grid grid-cols-1 gap-24 md:grid-cols-2">
+      <div class="grid grid-cols-1 gap-24 md:grid-cols-2">
         <KernCard
-          title="Fragen zum Digitalcheck"
-          body="Vorprüfung, Digitaltauglichkeit, Dokumentation."
+          title="Digitalcheck"
+          body="Erfahren Sie mehr zur Vorprüfung, Digitaltauglichkeit und Dokumentation."
           background="white"
         >
           <ul class="list-unstyled space-y-8">
-            <li class="flex items-center gap-8">
-              <Phone className={iconClass} />
-              <a href={contact.phone}>{contact.phoneDisplay}</a>
+            <li>
+              <a class="kern-link items-center" href={contact.phone}>
+                <IconPhone class="size-24" aria-hidden="true" />
+                {contact.phoneDisplay}
+              </a>
             </li>
-            <li class="flex items-center gap-8">
-              <Email className={iconClass} />
-              <a href={`mailto:${contact.email}`}>{contact.email}</a>
+            <li>
+              <a
+                class="kern-link items-center"
+                href={`mailto:${contact.email}`}
+              >
+                <IconMail class="size-24" aria-hidden="true" />
+                {contact.email}
+              </a>
             </li>
           </ul>
         </KernCard>
         <KernCard
-          title="Fragen zur EU-Interoperabilität"
-          body="Interoperabilitätsbewertung, Verordnung (EU) 2024/903, Berichtspflichten."
+          title="EU-Interoperabilität"
+          body="Informationen zu Interoperabilitätsbewertung, Verordnung (EU) 2024/903 und Berichtspflichten."
           background="white"
         >
           <ul class="list-unstyled space-y-8">
-            <li class="flex items-center gap-8">
-              <Email className={iconClass} />
-              <a href={`mailto:${contact.interoperabilityEmail}`}>
+            <li>
+              <a
+                class="kern-link items-center"
+                href={`mailto:${contact.interoperabilityEmail}`}
+              >
+                <IconMail class="size-24" aria-hidden="true" />
                 {contact.interoperabilityEmail}
               </a>
             </li>
-            <li class="flex items-center gap-8">
-              <ArrowForward className={iconClass} />
-              <a href={withBase(interoperabel_nationaleKontaktstelle.path)}>
+            <li>
+              <a
+                class="kern-link items-center"
+                href={withBase(interoperabel_nationaleKontaktstelle.path)}
+              >
+                <IconArrowForward class="size-24" aria-hidden="true" />
                 Zur Nationalen Kontaktstelle
               </a>
             </li>
@@ -85,25 +84,26 @@ const iconClass = "size-20 shrink-0 fill-blue-800";
         </KernCard>
       </div>
     </section>
-    <section class="breakout bg-gray-200">
-      <h2>Angebote beim Zentrum für Legistik</h2>
+    <section class="breakout bg-kern-layout-layer-surface">
+      <h2>Weitere Unterstützungsangebote</h2>
       <p>
-        Schulungen, Werkzeuge und individuelle Unterstützung erhalten Sie beim
-        Zentrum für Legistik (ZfL).
+        Im <a href={ZFL_BASE_URL}>Zentrum für Legistik</a> finden Sie
+        Schulungen, Werkzeuge und individuelle Unterstützungsangebote für Ihr
+        Regelungsvorhaben.
       </p>
       <div class="mt-32 grid grid-cols-1 gap-24 md:grid-cols-2 lg:grid-cols-3">
         <KernCard
           title="Schulungen"
           href={`${ZFL_BASE_URL}/schulungen`}
-          body="Praxisnahe Schulungen zu Digitaltauglichkeit und den fünf Prinzipien."
+          body="Praxisnahe Schulungen zum Digitalcheck und zu modernen Methoden der Gesetzgebung."
           image={schulungenImage}
           imageAlt="Symbolbild: Ein Laptop zeigt die fünf Prinzipien des Digitalchecks"
           background="white"
         />
         <KernCard
-          title="Werkzeuge & Beispiele"
+          title="Werkzeuge"
           href={`${ZFL_BASE_URL}${ZFL_PATH_DIGITALTAUGLICHKEIT}`}
-          body="Methoden, Leitfäden und Beispiele zum direkten Nachnutzen."
+          body="Diverse Anleitungen und Hilfsmittel, die Sie bei Ihrer Regelungsarbeit unterstützen."
           image={werkzeugeImage}
           imageAlt="Symbolbild: Erstellung eines Flussdiagramms"
           background="white"
@@ -111,24 +111,12 @@ const iconClass = "size-20 shrink-0 fill-blue-800";
         <KernCard
           title="Regelungsbegleitung"
           href={`${ZFL_BASE_URL}/begleitungen`}
-          body="Individuelle Unterstützung durch interdisziplinäre Teams, u. a. zu Digitaltauglichkeit."
+          body="Ein interdisziplinäres Team begleitet Sie persönlich bei der Erarbeitung Ihres Regelungsvorhabens."
           image={regelungsbegleitungImage}
           imageAlt="Mehrere Personen vor einem großen Whiteboard, an dem sie Klebepunkte an bereits vorhandenen Papieren und Post-its anbringen."
           background="white"
         />
       </div>
-    </section>
-    <section>
-      <h2>Noch keine Vorprüfung gemacht?</h2>
-      <p>
-        In wenigen Minuten wissen Sie, ob ein Digitalbezug besteht oder nicht.
-      </p>
-      <a
-        href={withBase(vorpruefung.path)}
-        class="kern-btn kern-btn--primary link-unstyled mt-16"
-      >
-        <span class="kern-label">Zur Vorprüfung</span>
-      </a>
     </section>
   </main>
 </Layout>
