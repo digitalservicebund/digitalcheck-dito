@@ -7,6 +7,7 @@ import TocContainer from "@/components/TocContainer.astro";
 import { dedent } from "@/utils/dedentMultilineStrings";
 import Rechtsakt from "./_Rechtsakt.astro";
 import infographic from "@/assets/images/european-digital-single-market.png";
+import { interoperabel } from "@/config/routes";
 
 export const frontmatter = {
   title: "Angrenzendes EU-Recht",
@@ -60,7 +61,7 @@ export const frontmatter = {
             markdown={dedent`
                 **Im Detail**: Verordnung (EU) 2024/903 des Europäischen Parlaments und des Rates vom 13. März 2024 über Maßnahmen für ein hohes Maß an Interoperabilität des öffentlichen Sektors in der Union | [EUR-Lex](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32024R0903).
 
-                Was der Hintergrund der Verordnung ist, finden Sie auf der [Hauptseite](https://digitalcheck.bund.de/interoperabel) in dieser Sektion. Weitere Informationen finden Sie auf dem [Interoperable Europe Portal]() der Europäischen Kommission`}
+                Was der Hintergrund der Verordnung ist, finden Sie auf der [Hauptseite](${interoperabel.path}) in dieser Sektion. Weitere Informationen finden Sie auf dem [Interoperable Europe Portal](https://interoperable-europe.ec.europa.eu/) der Europäischen Kommission`}
           />
         </Rechtsakt>
         <Rechtsakt
@@ -196,7 +197,7 @@ export const frontmatter = {
                 **Die Richtlinie könnte für Ihr Vorhaben relevant sein, wenn im Rahmen der Regelung:**
 
                 - Handhabung, Bereitstellung oder Weiterverwendung von Informationen des öffentlichen Sektors oder öffentlich finanzierter Forschungsdaten betroffen ist.
-                - sich der Anwendungsbereich mit einem Eintrag in [Anhang I](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32019L1024&qid=1754909351558#anx_I)(Kategorien hochwertiger Datensätze) der Durchführungsverordnung über hochwertige Datensätze überschneidet.
+                - sich der Anwendungsbereich mit einem Eintrag in [Anhang I](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32019L1024&qid=1754909351558#anx_I) (Kategorien hochwertiger Datensätze) der Durchführungsverordnung über hochwertige Datensätze überschneidet.
 
                 **Schlüsselprinzip:**
                 Bestimmte Daten im Besitz öffentlicher Stellen, öffentlicher Unternehmen und Forschungsdaten sollen standardmäßig offen erstellt und grundsätzlich für kommerzielle und nichtkommerzielle Zwecke weiterverwendbar sein. Die Richtlinie legt die Bedingungen der Weiterverwendung von Daten fest, die als offene Daten bereitgestellt werden. Die rechtliche Verpflichtung zur Bereitstellung als offene Daten folgt aus § 12a EGovG und landesrechtlichen Normen.
@@ -205,8 +206,7 @@ export const frontmatter = {
                 - Offene Daten sollen kostenlos, maschinenlesbar und ggf. als Massen-Download weiterverwendbar sein.
                 - Obwohl nicht primär auf Interoperabilität als technisches Zusammenspiel von Systemen ausgerichtet, trägt die Forderung nach maschinenlesbaren, verfügbaren und offenen Formaten wesentlich zur semantischen und technischen Interoperabilität bei.
                 - Die Bedingungen für die Weiterverwendung von Daten müssen objektiv, verhältnismäßig, nichtdiskriminierend und gerechtfertigt sein. Sie dürfen den Wettbewerb nicht behindern und die Möglichkeiten der Weiterverwendung nicht unnötig einschränken.
-                - Durch die Durchführungsverordnung über hochwertige Datensätze werden die Anforderungen an bestimmte Kategorien hochwertiger Datensätze (z. B. Geodaten, Statistikdaten) näher bestimmt..
-                - Obwohl nicht primär auf Interoperabilität als technisches Zusammenspiel von Systemen ausgerichtet, trägt die Forderung nach maschinenlesbaren und offenen Formaten wesentlich zur semantischen und technischen Interoperabilität bei.`}
+                - Durch die Durchführungsverordnung über hochwertige Datensätze werden die Anforderungen an bestimmte Kategorien hochwertiger Datensätze (z. B. Geodaten, Statistikdaten) näher bestimmt.`}
           />
         </Rechtsakt>
         <Rechtsakt

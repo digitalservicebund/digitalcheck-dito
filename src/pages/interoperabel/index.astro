@@ -303,12 +303,21 @@ const dimensions = [
       </div>
       <div>
         <h3>Allgemein</h3>
-        <RichText
-          markdown={dedent`
-            - [Verordnung für ein interoperables Europa (EU) 2024/903](${IEA_URL})
-            - [Ressourcen auf dem Interoperable Europe Portal](https://interoperable-europe.ec.europa.eu/): Hier finden sich zusätzliche Informationen, Best Practices und Tools zur Unterstützung bei der Durchführung von Interoperabilitätsbewertungen.
-          `}
-        />
+        <ul>
+          <li>
+            <a href={IEA_URL}>
+              Verordnung für ein interoperables Europa (EU) 2024/903
+            </a>
+          </li>
+          <li>
+            <a href="https://interoperable-europe.ec.europa.eu/">
+              Ressourcen auf dem Interoperable Europe Portal
+            </a>
+            : Hier finden sich zusätzliche Informationen, Best Practices und
+            Tools zur Unterstützung bei der Durchführung von
+            Interoperabilitätsbewertungen.
+          </li>
+        </ul>
       </div>
       <div>
         <h3>Interoperabilitätsbewertungen</h3>
