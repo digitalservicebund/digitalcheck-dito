@@ -1,30 +1,42 @@
 ---
-interface Props {
+import { tv, type VariantProps } from "tailwind-variants";
+
+interface Props extends VariantProps<typeof styles> {
   class?: string;
-  variant?: "default" | "plain" | "dark";
 }
 
-const { class: className, variant = "default" } = Astro.props;
-const hasSubtitle = Astro.slots.has("subtitle");
+const styles = tv({
+  base: "breakout py-(--kern-metric-dimension-4x-large)",
+  variants: {
+    variant: {
+      default: "bg-kern-darkblue-100",
+      plain: "",
+      dark: "hero-dark bg-kern-darkblue-800",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
+
+const { class: className, variant } = Astro.props;
 ---
 
-<section
-  class:list={[
-    "breakout space-y-16 py-(--kern-metric-dimension-4x-large) [&_h1]:sm:hyphens-none",
-    variant === "default" && "bg-kern-darkblue-100",
-    variant === "dark" && "hero-dark bg-kern-darkblue-800",
-    className,
-  ]}
->
+<section class={styles({ variant, className })}>
   <slot />
-  {hasSubtitle && (
-    <div class="mt-16 space-y-8">
-      <slot name="subtitle" />
-    </div>
-  )}
 </section>
 
 <style>
+  section {
+    > :global(h1) {
+      margin-bottom: 24px;
+    }
+    :global(p, ul, ol) {
+      font-size: var(--kern-typography-font-size-large-static, 21px);
+      line-height: var(--kern-typography-line-height-large-static, 32px);
+    }
+  }
+
   /* Re-map KERN's contextual colors so text and buttons render light-on-dark. */
   .hero-dark {
     --kern-color-layout-text-default-contextual: var(

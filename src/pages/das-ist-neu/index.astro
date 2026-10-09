@@ -28,7 +28,7 @@ const items = news.items.map((item) => ({
   <main class="breakout-grid">
     <Hero>
       <h1>Das ist neu</h1>
-      <p slot="subtitle">
+      <p>
         Das Digitalcheck-Angebot wird kontinuierlich{" "}
         <a href="https://zfl.bund.de/ueber/daran-arbeiten-wir">
           weiterentwickelt
@@ -36,7 +36,7 @@ const items = news.items.map((item) => ({
         . Hier finden Sie eine Übersicht der neuesten Ergänzungen und
         Änderungen.
       </p>
-      <p slot="subtitle">
+      <p>
         Haben Sie Anregungen oder Wünsche? Schreiben Sie uns gerne eine E-Mail
         an{" "}
         <a href={mailto(contact.email, "Supportanfrage: digitalcheck.bund.de")}>
@@ -45,7 +45,7 @@ const items = news.items.map((item) => ({
         oder rufen Sie uns an unter{" "}
         <a href={contact.phone}>{contact.phoneDisplay}</a>.
       </p>
-      <Metadata slot="subtitle" lastUpdate="31.08.2026" />
+      <Metadata lastUpdate="31.08.2026" />
     </Hero>
     <section
       class="py-80"

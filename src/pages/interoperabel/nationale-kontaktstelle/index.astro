@@ -17,26 +17,24 @@ export const frontmatter = {
   <main class="breakout-grid">
     <Hero>
       <h1>{spoc.headline}</h1>
-      <div slot="subtitle" class="space-y-24">
-        <RichText markdown={spoc.content} />
-        <ul class="list-unstyled space-y-8">
-          <li>
-            <a class="kern-link items-center" href={contact.phone}>
-              <IconPhone class="size-24" aria-hidden="true" />
-              {contact.phoneDisplay}
-            </a>
-          </li>
-          <li>
-            <a
-              class="kern-link items-center"
-              href={`mailto:${contact.interoperabilityEmail}`}
-            >
-              <IconMail class="size-24" aria-hidden="true" />
-              {contact.interoperabilityEmail}
-            </a>
-          </li>
-        </ul>
-      </div>
+      <RichText markdown={spoc.content} />
+      <ul class="list-unstyled mt-24 space-y-8">
+        <li>
+          <a class="kern-link items-center" href={contact.phone}>
+            <IconPhone class="size-24" aria-hidden="true" />
+            {contact.phoneDisplay}
+          </a>
+        </li>
+        <li>
+          <a
+            class="kern-link items-center"
+            href={`mailto:${contact.interoperabilityEmail}`}
+          >
+            <IconMail class="size-24" aria-hidden="true" />
+            {contact.interoperabilityEmail}
+          </a>
+        </li>
+      </ul>
     </Hero>
 
     <section class="breakout bg-kern-layout-layer-surface">
