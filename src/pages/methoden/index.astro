@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Heading from "@/components/Heading";
-import Hero from "@/components/Hero";
+import Hero from "@/components/Hero.astro";
 import InfoBox from "@/components/InfoBox";
 import InfoBoxSideBySide from "@/components/InfoBoxSideBySide";
 import NumberedList from "@/components/NumberedList";
@@ -18,7 +18,12 @@ export const frontmatter = {
 
 <Layout title={frontmatter.title}>
   <main>
-    <Hero subtitle={methods.subtitle} title={methods.title} />
+    <div class="breakout-grid">
+      <Hero>
+        <h1>{methods.title}</h1>
+        <RichText markdown={methods.subtitle} />
+      </Hero>
+    </div>
 
     <div class="container my-40 space-y-40 lg:my-80 lg:space-y-80">
       <Timeline>
