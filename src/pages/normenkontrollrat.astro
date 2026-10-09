@@ -2,12 +2,10 @@
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
 import KernCard from "@/components/KernCard.astro";
-import {
-  Description,
-  EditNote,
-  LaptopOutlined,
-  SwapCalls,
-} from "@digitalservicebund/icons";
+import IconDescription from "~icons/ic/round-description";
+import IconEditNote from "~icons/ic/round-edit-note";
+import IconLaptop from "~icons/ic/round-laptop";
+import IconSwapCalls from "~icons/ic/round-swap-calls";
 import {
   dokumentation,
   interoperabel,
@@ -24,35 +22,28 @@ export const frontmatter = {
 
 const documents = [
   {
-    icon: LaptopOutlined,
+    icon: IconLaptop,
     title: "Ergebnis der Vorprüfung",
-    content: "Einschätzung zur Digitaltauglichkeit des Vorhabens",
-    relevance: "Frühe Kenntnisnahme der zu überprüfenden Vorhaben",
+    body: "Informieren Sie den NKR frühzeitig über Ihr Vorhaben und geben Sie an, ob ein Digitalbezug besteht.",
     link: { label: "Zur Vorprüfung", href: vorpruefung.path },
   },
   {
-    icon: EditNote,
+    icon: IconEditNote,
     title: "Digitalcheck Dokumentation",
-    content:
-      "Nutzung der Prinzipien digitaltauglicher Gesetzgebung und von Visualisierungen",
-    relevance:
-      "Damit kann der NKR nachvollziehen, wie Sie die Digitaltauglichkeit Ihres Vorhabens sicherstellen.",
+    body: "Damit kann der NKR nachvollziehen, wie Sie die Digitaltauglichkeit Ihres Vorhabens sicherstellen.",
     link: { label: "Zur Dokumentation", href: dokumentation.path },
   },
   {
-    icon: Description,
+    icon: IconDescription,
     title: "Regelungsentwurf",
-    content: "Regelungstext für die Ressortabstimmung",
-    relevance:
-      "Der NKR prüft die Umsetzbarkeit und den Erfüllungsaufwand Ihres Vorhabens anhand des Referentenentwurfs.",
+    body: "Der NKR prüft die Umsetzbarkeit und den Erfüllungsaufwand Ihres Vorhabens anhand des Referentenentwurfs.",
     link: { label: "Regelung erarbeiten", href: methoden.path },
   },
   {
-    icon: SwapCalls,
-    title: "Visualisierungen zu Ihrem Vorhaben",
+    icon: IconSwapCalls,
+    title: "Visualisierungen",
     subline: "Optional",
-    content: "Verständnis der Visualisierung im Kontext der Regelung",
-    relevance: "Beschleunigung der Prüfung",
+    body: "Visualisierungen wie Flussdiagramme helfen dem NKR, Ihre Überlegungen zur Digitaltauglichkeit nachzuvollziehen.",
     link: {
       label: "Zur Methode „Flussdiagramm“",
       href: `${ZFL_BASE_URL}${ZFL_PATH_FLUSSDIAGRAMME}`,
@@ -66,11 +57,13 @@ const documents = [
     <Hero>
       <h1>{frontmatter.title}</h1>
       <p>
-        Alles zu den Aufgaben und der Vorgehensweise des Nationalen
-        Normenkontrollrats (NKR) im Kontext des Digitalcheck
+        Hier erfahren Sie, worauf der Nationale Normenkontrollrat (NKR) beim
+        Digitalcheck Ihres Regelungsvorhabens achtet.
       </p>
       <p>
-        Diese Seite richtet sich <b>ausschließlich</b> an Bundesministerien.
+        <i>
+          Hinweis: Diese Seite richtet sich ausschließlich an Bundesministerien.
+        </i>
       </p>
     </Hero>
     <section>
@@ -121,30 +114,23 @@ const documents = [
         Regelungsvorhabens.
       </p>
       <div class="mt-32 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-kern-xl">
-        {documents.map(
-          ({ icon: Icon, title, subline, content, relevance, link }) => (
-            <KernCard title={title} subline={subline} background="white">
-              <Icon slot="icon" className="size-48 fill-kern-darkblue-800" />
-              <p>
-                <b>Inhalt:</b>
-                <br />
-                {content}
-              </p>
-              <p>
-                <b>Relevanz für den NKR:</b>
-                <br />
-                {relevance}
-              </p>
-              <a
-                slot="footer"
-                href={link.href}
-                class="kern-btn kern-btn--secondary link-unstyled"
-              >
-                <span class="kern-label">{link.label}</span>
-              </a>
-            </KernCard>
-          ),
-        )}
+        {documents.map(({ icon: Icon, title, subline, body, link }) => (
+          <KernCard
+            title={title}
+            subline={subline}
+            body={body}
+            background="white"
+          >
+            <Icon slot="icon" class="size-48 text-kern-darkblue-800" />
+            <a
+              slot="footer"
+              href={link.href}
+              class="kern-btn kern-btn--secondary link-unstyled"
+            >
+              <span class="kern-label">{link.label}</span>
+            </a>
+          </KernCard>
+        ))}
       </div>
     </section>
   </main>
