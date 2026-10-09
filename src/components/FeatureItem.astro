@@ -13,7 +13,7 @@ const { title, body } = Astro.props;
   </div>
   <div>
     {title && <h3>{title}</h3>}
-    {body && <p>{body}</p>}
+    {body && <p class="kern-body">{body}</p>}
     <slot />
   </div>
 </div>
