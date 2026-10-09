@@ -24,7 +24,7 @@ export default function InfoBoxList({
       <ul
         className={twMerge(
           "list-unstyled info-box kern-stack mt-32",
-          separator ? "kern-stack-xl" : "kern-stack-3xl",
+          separator ? "kern-stack-xl" : "gap-kern-3xl",
           className,
         )}
       >
