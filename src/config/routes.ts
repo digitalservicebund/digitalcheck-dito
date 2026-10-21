@@ -337,7 +337,6 @@ export const vorpruefung_automatisierung = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 5,
-  navLabel: null,
 } as const;
 
 export const vorpruefung_datenaustausch = {
@@ -348,7 +347,6 @@ export const vorpruefung_datenaustausch = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 3,
-  navLabel: null,
 } as const;
 
 export const vorpruefung_ergebnis = {
@@ -368,7 +366,6 @@ export const vorpruefung_euBezug = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 6,
-  navLabel: null,
 } as const;
 
 export const vorpruefung_itSystem = {
@@ -379,7 +376,6 @@ export const vorpruefung_itSystem = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 1,
-  navLabel: null,
 } as const;
 
 export const vorpruefung_kommunikation = {
@@ -390,7 +386,6 @@ export const vorpruefung_kommunikation = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 4,
-  navLabel: null,
 } as const;
 
 export const vorpruefung_verpflichtungenFuerBeteiligte = {
@@ -401,7 +396,6 @@ export const vorpruefung_verpflichtungenFuerBeteiligte = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 2,
-  navLabel: null,
 } as const;
 
 export const allRoutes = [
