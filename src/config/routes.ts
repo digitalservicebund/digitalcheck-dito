@@ -19,15 +19,19 @@ export const assistent = {
   parent: null,
   sitemap: false,
   isStagingOnly: false,
+  navOrder: null,
+  navLabel: "Übersicht",
 } as const;
 
 export const assistent_vorpruefung = {
   key: "assistent_vorpruefung",
   path: "/assistent/vorpruefung",
-  title: "Digitalbezug einschätzen",
+  title: "Vorprüfung",
   parent: assistent,
-  sitemap: true,
+  sitemap: false,
   isStagingOnly: false,
+  navOrder: null,
+  navLabel: "Vorprüfung",
 } as const;
 
 export const assistent_vorpruefung_automatisierung = {
