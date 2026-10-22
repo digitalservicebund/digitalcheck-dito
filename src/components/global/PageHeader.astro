@@ -9,6 +9,7 @@ import {
   prinzipien,
   kontakt,
   type Route,
+  assistent,
 } from "@/config/routes";
 import { isProduction } from "@/config/stage";
 import { getMobileMenuNavigation } from "@/utils/navigation/drilldown";
@@ -21,6 +22,7 @@ import IconMenu from "~icons/ic/twotone-menu";
 const currentPath = removeTrailingSlash(Astro.url.pathname);
 
 const HEADER_ROUTES: Route[] = [
+  assistent,
   prinzipien,
   interoperabel,
   bundeslaender,
