@@ -20,9 +20,15 @@ interface Props {
   title?: string;
   description?: string;
   noMenu?: boolean;
+  noFooter?: boolean;
 }
 
-const { title, description = siteMeta.description, noMenu } = Astro.props;
+const {
+  title,
+  description = siteMeta.description,
+  noMenu,
+  noFooter = false,
+} = Astro.props;
 
 const noIndex = isNoIndexPath(Astro.url.pathname);
 
@@ -120,7 +126,7 @@ const showSectionSidebar =
     ) : (
       <slot />
     )}
-    <Footer />
+    {!noFooter && <Footer />}
     {isProduction && <Posthog />}
   </body>
 </html>
