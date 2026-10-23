@@ -162,7 +162,7 @@ export const assistent_vorpruefung = {
   parent: assistent,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
+  navOrder: 1,
   navLabel: null,
 } as const;
 
