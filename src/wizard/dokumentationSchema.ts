@@ -239,14 +239,19 @@ export const euInteroperabilitaetSchema = z.object({
 const anforderungenMessage =
   "Bitte geben Sie mindestens eine verbindliche Anforderung an.";
 
+/** Whether any field of the box is filled, e.g. to skip empty boxes in the Zusammenfassung */
+export const isAnforderungFilled = (
+  anforderung: z.infer<typeof anforderungSchema>,
+) =>
+  Object.values(anforderung).some((value) =>
+    typeof value === "string" ? value.trim() : value.length,
+  );
+
 export const verbindlicheAnforderungenSchema = z.object({
   "verbindliche-anforderungen": z
     .array(
       anforderungSchema.refine(
-        (anforderung) =>
-          Object.values(anforderung).some((value) =>
-            typeof value === "string" ? value.trim() : value.length,
-          ),
+        isAnforderungFilled,
         "Bitte füllen Sie mindestens ein Feld der Anforderung aus.",
       ),
       anforderungenMessage,
