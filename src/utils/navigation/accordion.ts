@@ -4,6 +4,7 @@ import { getRouteLabel, getVisibleChildren } from "./routeUtils";
 export type AccordeonNavigationEntry = {
   path: string;
   label: string;
+  eyebrow?: string;
   children: AccordeonNavigationEntry[];
   isCurrent: boolean;
   isInCurrentBranch: boolean;
@@ -28,6 +29,7 @@ function buildEntry(
   return {
     path: route.path,
     label: getRouteLabel(route),
+    eyebrow: route.navEyebrow,
     children,
     isCurrent,
     isInCurrentBranch,
