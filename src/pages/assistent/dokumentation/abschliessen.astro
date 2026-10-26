@@ -1,4 +1,5 @@
 ---
+import Abschliessen from "./_Abschliessen";
 import StepPage from "./_StepPage.astro";
 
 export const frontmatter = {
@@ -8,7 +9,12 @@ export const frontmatter = {
 };
 ---
 
-<!-- TODO: implement step -->
-<StepPage title={frontmatter.title} showPruefbereichEditLink>
-  <h1 class="kern-heading-medium">{frontmatter.title}</h1>
+<StepPage
+  title={frontmatter.title}
+  isWide
+  showProgressBar={false}
+  showPruefbereichEditLink
+>
+  {/* Depends on the stored Prüfbereich and EU-Bezug */}
+  <Abschliessen client:only="react" />
 </StepPage>
