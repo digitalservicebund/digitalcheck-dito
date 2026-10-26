@@ -26,30 +26,35 @@ import markdownBlocksToDocx from "./markdownBlocksToWord";
 const { saveAs } = fileSaver;
 const { principlePages } = digitalDocumentation;
 
+/** Fills the Word template with the answers (unless templateOnly) and downloads it */
+export async function downloadWordDocumentation(
+  documentationData: DocumentationData,
+  prinzips: Prinzip[],
+  { templateOnly = false }: { templateOnly?: boolean } = {},
+) {
+  try {
+    const template = await fetch(
+      templateDokumentationDerDigitaltauglichkeitInteroperabilitaet_docx.path,
+    );
+    const templateData = await template.arrayBuffer();
+    const doc = await createDoc(
+      templateData,
+      templateOnly ? { version: DATA_SCHEMA_VERSION } : documentationData,
+      prinzips,
+      { templateOnly },
+    );
+    saveAs(doc, documentationDocument.filename);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 export function useWordDocumentation() {
   const { documentationData } = useDocumentationDataService();
 
   const downloadDocumentation = useCallback(
-    async (
-      prinzips: Prinzip[],
-      { templateOnly = false }: { templateOnly?: boolean } = {},
-    ) => {
-      try {
-        const template = await fetch(
-          templateDokumentationDerDigitaltauglichkeitInteroperabilitaet_docx.path,
-        );
-        const templateData = await template.arrayBuffer();
-        const doc = await createDoc(
-          templateData,
-          templateOnly ? { version: DATA_SCHEMA_VERSION } : documentationData,
-          prinzips,
-          { templateOnly },
-        );
-        saveAs(doc, documentationDocument.filename);
-      } catch (e) {
-        console.error(e);
-      }
-    },
+    (prinzips: Prinzip[], options?: { templateOnly?: boolean }) =>
+      downloadWordDocumentation(documentationData, prinzips, options),
     [documentationData],
   );
 

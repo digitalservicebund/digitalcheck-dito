@@ -19,7 +19,7 @@ describe("Abschliessen", () => {
 
   it("adds the NKR and the Nationale Kontaktstelle for the Bund with EU-Bezug", () => {
     store.save({ pruefbereich: "Bund", "eu-interoperabilitaet-bezug": "yes" });
-    render(<Abschliessen />);
+    render(<Abschliessen prinzipien={[]} />);
 
     expect(stepHeadings()).toEqual([
       "Dokumentation herunterladen",
@@ -34,7 +34,7 @@ describe("Abschliessen", () => {
 
   it("only adds the NKR for the Bund without EU-Bezug", () => {
     store.save({ pruefbereich: "Bund", "eu-interoperabilitaet-bezug": "no" });
-    render(<Abschliessen />);
+    render(<Abschliessen prinzipien={[]} />);
 
     expect(stepHeadings()).toEqual([
       "Dokumentation herunterladen",
@@ -47,7 +47,7 @@ describe("Abschliessen", () => {
   });
 
   it("assumes the Bund without a stored Prüfbereich", () => {
-    render(<Abschliessen />);
+    render(<Abschliessen prinzipien={[]} />);
 
     expect(stepHeadings()).toContain("Fertige Dokumentation an den NKR senden");
   });
@@ -57,7 +57,7 @@ describe("Abschliessen", () => {
       pruefbereich: "Hessen",
       "eu-interoperabilitaet-bezug": "yes",
     });
-    render(<Abschliessen />);
+    render(<Abschliessen prinzipien={[]} />);
 
     expect(stepHeadings()).toEqual([
       "Dokumentation herunterladen",
@@ -68,7 +68,7 @@ describe("Abschliessen", () => {
 
   it("doesn't number the only step for a Land without EU-Bezug", () => {
     store.save({ pruefbereich: "Hessen" });
-    render(<Abschliessen />);
+    render(<Abschliessen prinzipien={[]} />);
 
     expect(stepHeadings()).toEqual(["Dokumentation herunterladen"]);
     expect(screen.queryByText("Schritt 1")).not.toBeInTheDocument();
