@@ -1,0 +1,34 @@
+---
+import { LinkButton } from "@/components/Button";
+import Hero from "@/components/Hero.astro";
+import { assistent_erarbeitung_ablaufVerstehen } from "@/config/routes";
+import Layout from "@/layouts/Layout.astro";
+
+export const frontmatter = {
+  title: "Erarbeitung",
+  navOrder: 2,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <!-- h-full stretches the Hero to the sidebar's height, as in the design -->
+  <main class="breakout-grid h-full">
+    <Hero class="content-start space-y-24" largeText={false}>
+      <h1>Erarbeitung</h1>
+      <p>
+        In diesem Schritt gestalten Sie Ihre Regelung digitaltauglich. Wir
+        führen Sie durch die wichtigsten Phasen: vom Verstehen des Ablaufs, über
+        den Einbezug Betroffener und der Anwendung der Prinzipien bis zur
+        Prüfung der EU-Interoperabilität.
+      </p>
+      <div>
+        <LinkButton
+          href={assistent_erarbeitung_ablaufVerstehen.path}
+          iconRight="kern-icon--arrow-forward"
+        >
+          Erarbeitung starten
+        </LinkButton>
+      </div>
+    </Hero>
+  </main>
+</Layout>

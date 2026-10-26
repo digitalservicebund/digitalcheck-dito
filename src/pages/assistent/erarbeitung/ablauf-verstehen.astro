@@ -1,0 +1,44 @@
+---
+import {
+  ZFL_BASE_URL,
+  ZFL_PATH_FLUSSDIAGRAMME,
+  ZFL_PATH_SCHULUNGEN,
+  ZFL_PATH_VISUALISIERUNGEN,
+} from "@/resources/constants";
+import StepPage from "./_StepPage.astro";
+
+export const frontmatter = {
+  title: "Ablauf verstehen",
+  sitemap: false,
+  navOrder: 1,
+};
+---
+
+<StepPage
+  title={frontmatter.title}
+  subline="Beteiligte, Datenflüsse und Medienbrücke sichtbar machen."
+  steps={[
+    "Skizzieren Sie, wie das Verfahren heute abläuft und künftig ablaufen soll.",
+    "Markieren Sie Beteiligte, Datenflüsse und Stellen, an denen das Medium wechselt.",
+    "Nutzen Sie die Skizze als Grundlage für Abstimmungen im Haus.",
+  ]}
+  result="Ein Ablaufbild, das Lücken in der Regelung sichtbar macht."
+  tools={[
+    {
+      preline: "Methode",
+      title: "Flussdiagramm",
+      href: ZFL_BASE_URL + ZFL_PATH_FLUSSDIAGRAMME,
+    },
+    {
+      preline: "Beispiele",
+      title: "Visualisierungen aus der Praxis",
+      href: ZFL_BASE_URL + ZFL_PATH_VISUALISIERUNGEN,
+    },
+  ]}
+  support={{
+    text: "Visualisierungsschulungen – Abläufe am eigenen Vorhaben visualisieren.",
+    links: [
+      { label: "Zu den Schulungen", href: ZFL_BASE_URL + ZFL_PATH_SCHULUNGEN },
+    ],
+  }}
+/>
