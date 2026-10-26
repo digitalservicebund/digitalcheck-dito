@@ -5,7 +5,7 @@ type Props = {
   /** Content of the Prinzipien, passed from the page as islands can't read collections */
   prinzipien: Prinzip[];
   label: string;
-  look: "primary" | "secondary";
+  look: "primary" | "secondary" | "tertiary";
   /** Without the stored answers, to fill in the Word file instead */
   templateOnly?: boolean;
 };
