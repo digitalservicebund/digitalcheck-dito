@@ -30,6 +30,7 @@ export const assistent_dokumentation = {
   sitemap: true,
   isStagingOnly: false,
   navOrder: 3,
+  navEyebrow: "Schritt 3",
 } as const;
 
 export const assistent_dokumentation_abschliessen = {
@@ -150,7 +151,7 @@ export const assistent_erarbeitung = {
   sitemap: true,
   isStagingOnly: false,
   navOrder: 2,
-  navLabel: null,
+  navEyebrow: "Schritt 2",
 } as const;
 
 export const assistent_erarbeitung_ablaufVerstehen = {
@@ -161,7 +162,6 @@ export const assistent_erarbeitung_ablaufVerstehen = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 1,
-  navLabel: null,
 } as const;
 
 export const assistent_erarbeitung_betroffeneEinbeziehen = {
@@ -172,7 +172,6 @@ export const assistent_erarbeitung_betroffeneEinbeziehen = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 2,
-  navLabel: null,
 } as const;
 
 export const assistent_erarbeitung_euInteroperabilitaetPruefen = {
@@ -183,7 +182,6 @@ export const assistent_erarbeitung_euInteroperabilitaetPruefen = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 4,
-  navLabel: null,
 } as const;
 
 export const assistent_erarbeitung_prinzipienAnwenden = {
@@ -194,7 +192,6 @@ export const assistent_erarbeitung_prinzipienAnwenden = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 3,
-  navLabel: null,
 } as const;
 
 export const assistent_erarbeitung_ueberlegungenDokumentieren = {
@@ -205,7 +202,6 @@ export const assistent_erarbeitung_ueberlegungenDokumentieren = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 5,
-  navLabel: null,
 } as const;
 
 export const assistent_vorpruefung = {
@@ -216,6 +212,7 @@ export const assistent_vorpruefung = {
   sitemap: true,
   isStagingOnly: false,
   navOrder: 1,
+  navEyebrow: "Schritt 1",
 } as const;
 
 export const assistent_vorpruefung_automatisierung = {

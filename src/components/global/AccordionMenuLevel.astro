@@ -63,11 +63,15 @@ function panelId(path: string) {
 
 {entries.map((entry) =>
   isCollapsible(entry, level) ? (
-    <div class="accordion-item" x-data={`{ open: ${entry.isInCurrentBranch} }`}>
+    <div
+      class:list={["accordion-item", entry.eyebrow && "with-eyebrow"]}
+      x-data={`{ open: ${entry.isInCurrentBranch} }`}
+    >
       <div
         class={twMerge(
           headerStyle(entry.isCurrent),
-          "kern-accordion__header rounded-sm",
+          // bottom-aligned, so the toggle stays next to the label below an eyebrow
+          "kern-accordion__header items-end rounded-sm",
         )}
       >
         <a
@@ -79,13 +83,18 @@ function panelId(path: string) {
           )}
           aria-current={entry.isCurrent ? "page" : undefined}
         >
+          {entry.eyebrow && (
+            <span class="eyebrow block text-(length:--kern-typography-font-size-small-static) font-normal italic">
+              {entry.eyebrow}
+            </span>
+          )}
           {entry.label}
         </a>
         <button
           type="button"
           class={twMerge(
             arrowHoverStyle(entry.isCurrent),
-            "mr-3 flex h-32 w-32 shrink-0 items-center justify-center rounded-sm cursor-pointer",
+            "mr-3 mb-4 flex h-32 w-32 shrink-0 items-center justify-center rounded-sm cursor-pointer",
           )}
           aria-label={`Untermenü ${entry.label} ein-/ausklappen`}
           aria-controls={panelId(entry.path)}
@@ -129,6 +138,7 @@ function panelId(path: string) {
         class={twMerge(
           linkHoverStyle(currentPath === entry.path),
           "accordion-item link-unstyled kern-body relative block rounded-sm",
+          entry.eyebrow && "with-eyebrow",
           "aria-disabled:text-kern-layout-text-muted aria-disabled:cursor-not-allowed aria-disabled:hover:bg-transparent aria-disabled:hover:text-kern-layout-text-muted",
         )}
         style={indentStyle(level)}
@@ -148,6 +158,11 @@ function panelId(path: string) {
               aria-hidden="true"
             />
             <span class="sr-only">Beantwortet:</span>
+          </span>
+        )}
+        {entry.eyebrow && (
+          <span class="eyebrow block text-(length:--kern-typography-font-size-small-static) font-normal italic">
+            {entry.eyebrow}
           </span>
         )}
         {entry.label}
@@ -205,5 +220,21 @@ function panelId(path: string) {
 
   .accordion-item {
     margin-top: 8px;
+  }
+
+  .accordion-item.with-eyebrow {
+    margin-top: 24px;
+  }
+
+  /* Muted, unless the link turns white on hover (see linkHoverStyle, headerStyle) */
+  .eyebrow {
+    color: var(--kern-color-layout-text-muted);
+  }
+
+  a:not([aria-current]):hover > .eyebrow,
+  .kern-accordion__header:has(> button:hover)
+    > a:not([aria-current])
+    > .eyebrow {
+    color: inherit;
   }
 </style>
