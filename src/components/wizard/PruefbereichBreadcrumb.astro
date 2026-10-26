@@ -5,7 +5,7 @@ import {
   assistent_vorpruefung,
 } from "@/config/routes";
 import { pruefbereichOptions } from "@/wizard/pruefbereichSchema";
-import type { WizardId } from "@/wizard/session";
+import { wizardStorageKeys, type WizardId } from "@/wizard/session";
 import { Image } from "astro:assets";
 
 interface Props {
@@ -30,9 +30,9 @@ const startRoute = startRoutes[wizardId];
 <!--
   Shows the Prüfbereich for the context slot of WizardLayout. One variant per
   option, as the stored one is only known in the browser; the Bund is shown
-  until then.
+  without one.
 -->
-<div data-pruefbereich-breadcrumb={wizardId}>
+<div>
   {pruefbereichOptions.map(({ value, label }) => {
     const logo = pruefbereichLogos[value];
     return (
@@ -78,22 +78,36 @@ const startRoute = startRoutes[wizardId];
   })}
 </div>
 
-<script>
-  import type { WizardId } from "@/wizard/session";
-  import { wizardStores } from "@/wizard/stores";
-
-  document
-    .querySelectorAll<HTMLElement>("[data-pruefbereich-breadcrumb]")
-    .forEach((breadcrumb) => {
-      const wizardId = breadcrumb.dataset.pruefbereichBreadcrumb as WizardId;
-      // Without a stored Prüfbereich, the Bund is assumed
-      wizardStores[wizardId].$data.subscribe(({ pruefbereich = "Bund" }) => {
-        breadcrumb
-          .querySelectorAll<HTMLElement>("[data-pruefbereich]")
-          .forEach(
-            (variant) =>
-              (variant.hidden = variant.dataset.pruefbereich !== pruefbereich),
-          );
-      });
-    });
+<!--
+  Inline instead of bundled, so the stored Prüfbereich is shown before the
+  page is painted. Reads localStorage like the wizard store, also after changes
+  in another tab and when coming back via the browser history. An unknown one
+  (e.g. a Land without the feature flag) shows the Bund, like the store's decoding.
+-->
+<script is:inline define:vars={{ storageKey: wizardStorageKeys[wizardId] }}>
+  const variants = Array.from(
+    document.currentScript.previousElementSibling.querySelectorAll(
+      "[data-pruefbereich]",
+    ),
+  );
+  const showStored = () => {
+    let pruefbereich;
+    try {
+      ({ pruefbereich } = JSON.parse(localStorage.getItem(storageKey)) ?? {});
+    } catch {
+      // Unreadable storage counts as none
+    }
+    if (
+      !variants.some((variant) => variant.dataset.pruefbereich === pruefbereich)
+    ) {
+      pruefbereich = "Bund";
+    }
+    variants.forEach(
+      (variant) =>
+        (variant.hidden = variant.dataset.pruefbereich !== pruefbereich),
+    );
+  };
+  showStored();
+  addEventListener("storage", showStored);
+  addEventListener("pageshow", showStored);
 </script>

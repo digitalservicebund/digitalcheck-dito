@@ -96,6 +96,8 @@ allowed_patterns:
   - STORAGE_KEY
   - getNodeKeyFromPath
   - nodeKey
+  - storageKey
+  - wizardStorageKeys
 
 scopeconfig:
   - scope: node # ignores files such as package-lock.json
