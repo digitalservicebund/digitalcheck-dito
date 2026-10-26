@@ -4,15 +4,19 @@ import WizardButtonBar from "@/components/wizard/WizardButtonBar.astro";
 import { assistent_dokumentation } from "@/config/routes";
 import WizardLayout from "@/layouts/WizardLayout.astro";
 import { getWizardSession } from "@/wizard/session";
+import type { ComponentProps } from "astro/types";
 
-interface Props {
+interface Props extends Pick<
+  ComponentProps<typeof WizardLayout>,
+  "isWide" | "showProgressBar"
+> {
   /** Short page title, used in the document title */
   title: string;
   /** Lets the user change the Prüfbereich, e.g. on the final page */
   showPruefbereichEditLink?: boolean;
 }
 
-const { title, showPruefbereichEditLink = false } = Astro.props;
+const { title, showPruefbereichEditLink = false, ...layoutProps } = Astro.props;
 
 const session = getWizardSession("dokumentation", Astro.url.pathname);
 const { steps } = session.progress;
@@ -30,6 +34,7 @@ const { steps } = session.progress;
   title={`Dokumentation: ${title}`}
   pageNumber={steps.current}
   totalPages={steps.total}
+  {...layoutProps}
 >
   {session.pageSchema ? (
     <form
