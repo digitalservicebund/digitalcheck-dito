@@ -4,19 +4,12 @@ import Layout from "@/layouts/Layout.astro";
 
 type Props = {
   title: string;
-  pageNumber: number;
-  totalPages: number;
+  /** Shown as progress bar, e.g. "Prinzipien · Schritt 4 von 7" */
+  progress?: { label?: string; current: number; total: number };
   isWide?: boolean;
-  showProgressBar?: boolean;
 };
 
-const {
-  title,
-  pageNumber,
-  totalPages,
-  isWide = false,
-  showProgressBar = true,
-} = Astro.props;
+const { title, progress, isWide = false } = Astro.props;
 ---
 
 <!--
@@ -43,15 +36,16 @@ const {
             isWide ? "max-w-[1248px]" : "max-w-[736px]",
           ]}
         >
-          {showProgressBar && (
+          {progress && (
             <div class="kern-progress">
               <label for="wizard-progress" class="kern-label">
-                Schritt {pageNumber} von {totalPages}
+                {progress.label && `${progress.label} · `}Schritt{" "}
+                {progress.current} von {progress.total}
               </label>
               <progress
                 id="wizard-progress"
-                value={pageNumber}
-                max={totalPages}
+                value={progress.current}
+                max={progress.total}
               />
             </div>
           )}
