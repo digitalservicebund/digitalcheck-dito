@@ -155,6 +155,72 @@ export const assistent_dokumentation_zusammenfassung = {
   navLabel: null,
 } as const;
 
+export const assistent_erarbeitung = {
+  key: "assistent_erarbeitung",
+  path: "/assistent/erarbeitung",
+  title: "Erarbeitung",
+  parent: assistent,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 2,
+  navLabel: null,
+} as const;
+
+export const assistent_erarbeitung_ablaufVerstehen = {
+  key: "assistent_erarbeitung_ablaufVerstehen",
+  path: "/assistent/erarbeitung/ablauf-verstehen",
+  title: "Ablauf verstehen",
+  parent: assistent_erarbeitung,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 1,
+  navLabel: null,
+} as const;
+
+export const assistent_erarbeitung_betroffeneEinbeziehen = {
+  key: "assistent_erarbeitung_betroffeneEinbeziehen",
+  path: "/assistent/erarbeitung/betroffene-einbeziehen",
+  title: "Betroffene einbeziehen",
+  parent: assistent_erarbeitung,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 2,
+  navLabel: null,
+} as const;
+
+export const assistent_erarbeitung_euInteroperabilitaetPruefen = {
+  key: "assistent_erarbeitung_euInteroperabilitaetPruefen",
+  path: "/assistent/erarbeitung/eu-interoperabilitaet-pruefen",
+  title: "EU-Interoperabilität prüfen",
+  parent: assistent_erarbeitung,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 4,
+  navLabel: null,
+} as const;
+
+export const assistent_erarbeitung_prinzipienAnwenden = {
+  key: "assistent_erarbeitung_prinzipienAnwenden",
+  path: "/assistent/erarbeitung/prinzipien-anwenden",
+  title: "Prinzipien anwenden",
+  parent: assistent_erarbeitung,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 3,
+  navLabel: null,
+} as const;
+
+export const assistent_erarbeitung_ueberlegungenDokumentieren = {
+  key: "assistent_erarbeitung_ueberlegungenDokumentieren",
+  path: "/assistent/erarbeitung/ueberlegungen-dokumentieren",
+  title: "Überlegungen dokumentieren",
+  parent: assistent_erarbeitung,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 5,
+  navLabel: null,
+} as const;
+
 export const assistent_vorpruefung = {
   key: "assistent_vorpruefung",
   path: "/assistent/vorpruefung",
@@ -557,6 +623,12 @@ export const allRoutes = [
   assistent_dokumentation_euInteroperabilitaet_veroeffentlichung,
   assistent_dokumentation_regelungsvorhaben,
   assistent_dokumentation_zusammenfassung,
+  assistent_erarbeitung,
+  assistent_erarbeitung_ablaufVerstehen,
+  assistent_erarbeitung_betroffeneEinbeziehen,
+  assistent_erarbeitung_euInteroperabilitaetPruefen,
+  assistent_erarbeitung_prinzipienAnwenden,
+  assistent_erarbeitung_ueberlegungenDokumentieren,
   assistent_vorpruefung,
   assistent_vorpruefung_automatisierung,
   assistent_vorpruefung_datenaustausch,

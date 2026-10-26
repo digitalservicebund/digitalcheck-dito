@@ -1,0 +1,166 @@
+---
+import KernCard from "@/components/KernCard.astro";
+import {
+  assistent_dokumentation,
+  assistent_erarbeitung,
+} from "@/config/routes";
+import WizardLayout from "@/layouts/WizardLayout.astro";
+import { getVisibleChildren } from "@/utils/navigation/routeUtils";
+import { removeTrailingSlash } from "@/utils/path";
+import IconMail from "~icons/ic/baseline-mail";
+import IconPhone from "~icons/ic/baseline-phone";
+import IconConstruction from "~icons/ic/outline-construction";
+import IconVolunteerActivism from "~icons/ic/outline-volunteer-activism";
+
+interface Props {
+  title: string;
+  preline?: string;
+  subline?: string;
+  /** "So gehen Sie vor", as HTML to allow inline links */
+  steps?: string[];
+  /** Shown below the steps */
+  result?: string;
+  tools?: { preline: string; title: string; href: string }[];
+  support?: { text: string; links: { label: string; href: string }[] };
+}
+
+const { title, preline, subline, steps, result, tools, support } = Astro.props;
+
+// Without user data or conditions, the pages are just the subpages in nav order
+const pages = getVisibleChildren(assistent_erarbeitung);
+const index = pages.findIndex(
+  (page) => page.path === removeTrailingSlash(Astro.url.pathname),
+);
+const backHref = pages[index - 1]?.path ?? assistent_erarbeitung.path;
+const next = pages[index + 1];
+
+const isExternal = (href: string) => href.startsWith("http");
+// External links get their icon from global.css
+const linkIcon = (href: string) =>
+  href.startsWith("mailto:")
+    ? IconMail
+    : href.startsWith("tel:")
+      ? IconPhone
+      : undefined;
+---
+
+<!-- Slot: text below the heading -->
+<WizardLayout
+  title={`Erarbeitung: ${title}`}
+  progress={{ current: index + 1, total: pages.length }}
+>
+  <div class="space-y-48">
+    <div class="space-y-16">
+      {preline && <p class="kern-preline">{preline}</p>}
+      <h1 class="kern-heading-large">{title}</h1>
+      {subline && <p class="kern-subline">{subline}</p>}
+      <slot />
+    </div>
+
+    {steps && (
+      <div class="space-y-16 rounded-sm bg-kern-darkblue-025 px-16 py-32 sm:px-64">
+        <h2 class="kern-heading-medium">So gehen Sie vor</h2>
+        <ol class="list-unstyled space-y-16">
+          {steps.map((step, i) => (
+            <li class="flex items-center gap-16">
+              <span
+                class="kern-number border-kern-action-default text-kern-action-default"
+                aria-hidden="true"
+              >
+                {i + 1}
+              </span>
+              <span set:html={step} />
+            </li>
+          ))}
+        </ol>
+        {result && (
+          <p class="flex items-center gap-16">
+            <span
+              class="kern-icon kern-icon--check kern-icon--x-large bg-kern-feedback-success"
+              aria-hidden="true"
+            />
+            <span>
+              <b>Ergebnis:</b> {result}
+            </span>
+          </p>
+        )}
+      </div>
+    )}
+
+    {tools && (
+      <div class="space-y-16">
+        <h2 class="kern-heading-medium flex items-center gap-8">
+          <IconConstruction
+            class="size-32 shrink-0 text-kern-darkblue-800"
+            aria-hidden="true"
+          />
+          Werkzeuge und Links
+        </h2>
+        <ul class="list-unstyled grid gap-8 sm:grid-cols-2">
+          {tools.map((tool) => (
+            <li>
+              <KernCard
+                small
+                headingLevel={3}
+                preline={tool.preline}
+                title={tool.title}
+                href={tool.href}
+                target_option={isExternal(tool.href) ? "_blank" : "_self"}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    {support && (
+      <div class="space-y-16">
+        <h2 class="kern-heading-medium flex items-center gap-8">
+          <IconVolunteerActivism
+            class="size-32 shrink-0 text-kern-darkblue-800"
+            aria-hidden="true"
+          />
+          Unterstützung
+        </h2>
+        <p>{support.text}</p>
+        <ul class="list-unstyled space-y-4">
+          {support.links.map(({ label, href }) => {
+            const Icon = linkIcon(href);
+            return (
+              <li>
+                <a
+                  class="kern-link items-center"
+                  href={href}
+                  {...(isExternal(href) && {
+                    target: "_blank",
+                    rel: "noreferrer",
+                  })}
+                >
+                  {Icon && <Icon class="size-24 shrink-0" aria-hidden="true" />}
+                  {label}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    )}
+  </div>
+
+  <div
+    slot="button-bar"
+    class="bg-kern-layout-background-default sticky bottom-0 z-10 flex flex-wrap justify-end gap-kern-md border-t border-kern-layout-border px-kern-md py-kern-md min-[900px]:px-64"
+  >
+    <a href={backHref} class="kern-btn kern-btn--secondary link-unstyled">
+      <span class="kern-label">Zurück</span>
+    </a>
+    <a
+      href={next?.path ?? assistent_dokumentation.path}
+      class="kern-btn kern-btn--primary link-unstyled"
+    >
+      <span class="kern-label">
+        {next ? "Weiter" : "Weiter zur Dokumentation"}
+      </span>
+    </a>
+  </div>
+</WizardLayout>
