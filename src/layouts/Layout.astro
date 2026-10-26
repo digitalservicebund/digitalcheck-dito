@@ -5,6 +5,7 @@ import Footer from "@/components/global/Footer.astro";
 import PageHeader from "@/components/global/PageHeader.astro";
 import { siteMeta } from "@/resources/content/shared/meta";
 import { isProduction } from "@/config/stage";
+import { isNoIndexPath } from "@/config/seo";
 import firaSansRegularUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Regular.woff2?url";
 import firaSansMediumUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Medium.woff2?url";
 import firaSansSemiBoldUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-SemiBold.woff2?url";
@@ -22,6 +23,8 @@ interface Props {
 }
 
 const { title, description = siteMeta.description, noMenu } = Astro.props;
+
+const noIndex = isNoIndexPath(Astro.url.pathname);
 
 const pageTitle = title
   ? `${title} — ${siteMeta.siteName}`
@@ -69,7 +72,11 @@ const showSectionSidebar =
     <meta property="twitter:image" content={ogImage} />
     <meta property="og:type" content="website" />
     <meta property="twitter:card" content="summary_large_image" />
-    <link rel="canonical" href={canonicalUrl} />
+    {noIndex ? (
+      <meta name="robots" content="noindex" />
+    ) : (
+      <link rel="canonical" href={canonicalUrl} />
+    )}
     <link
       rel="preload"
       href={firaSansRegularUrl}

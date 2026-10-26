@@ -8,6 +8,7 @@ import { generateRoutes } from "astro-route-generator";
 import { defineConfig } from "astro/config";
 import process from "node:process";
 import Icons from "unplugin-icons/vite";
+import { isNoIndexPath } from "./src/config/seo.ts";
 import {
   ZFL_BASE_URL,
   ZFL_PATH_BEISPIELE,
@@ -86,7 +87,9 @@ export default defineConfig({
     react(),
     alpinejs(),
     mdx(),
-    sitemap(),
+    sitemap({
+      filter: (page) => !isNoIndexPath(new URL(page).pathname),
+    }),
     generateRoutes({
       pagesDir: "src/pages",
       output: "src/config/routes.ts",
