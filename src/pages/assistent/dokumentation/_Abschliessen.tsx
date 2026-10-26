@@ -1,9 +1,16 @@
+import type { Prinzip } from "@/content.config";
 import { contact } from "@/resources/content/shared/contact";
 import { wizardStores } from "@/wizard/stores";
 import { useStore } from "@nanostores/react";
+import WordDownloadButton from "./_WordDownloadButton";
 
 /** What to do with the finished Dokumentation, depending on Prüfbereich and EU-Bezug */
-export default function Abschliessen() {
+export default function Abschliessen({
+  prinzipien,
+}: {
+  /** For the Word file, see WordDownloadButton */
+  prinzipien: Prinzip[];
+}) {
   // Rendered client-only (no HTML from the build), so the stored data is known
   const data = useStore(wizardStores.dokumentation.$data);
   // Without a stored Prüfbereich, the Bund is assumed (as in the breadcrumb)
@@ -21,16 +28,11 @@ export default function Abschliessen() {
             {isBund && " und an den NKR zu senden"}.
           </p>
           <div className="pt-16">
-            {/* TODO: wire docx generation (see useWordDocumentation in old wizard) */}
-            <button type="button" className="kern-btn kern-btn--primary">
-              <span
-                className="kern-icon kern-icon--download"
-                aria-hidden="true"
-              />
-              <span className="kern-label">
-                Word-Datei herunterladen (.docx)
-              </span>
-            </button>
+            <WordDownloadButton
+              prinzipien={prinzipien}
+              label="Word-Datei herunterladen (.docx)"
+              look="primary"
+            />
           </div>
         </>
       ),

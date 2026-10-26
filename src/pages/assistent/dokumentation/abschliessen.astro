@@ -1,4 +1,5 @@
 ---
+import { getCollection } from "astro:content";
 import Abschliessen from "./_Abschliessen";
 import StepPage from "./_StepPage.astro";
 
@@ -7,11 +8,15 @@ export const frontmatter = {
   sitemap: false,
   navOrder: 10,
 };
+
+const prinzipien = (await getCollection("prinzipien"))
+  .map(({ data }) => data)
+  .toSorted((a, b) => a.order - b.order);
 ---
 
 <StepPage title={frontmatter.title} isWide showPruefbereichEditLink>
   {/* Depends on the stored Prüfbereich and EU-Bezug */}
-  <Abschliessen client:only="react" />
+  <Abschliessen client:only="react" prinzipien={prinzipien} />
 </StepPage>
 
 <script>
