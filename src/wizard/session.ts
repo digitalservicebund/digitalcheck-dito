@@ -13,6 +13,13 @@ export const wizardFlows = {
 
 export type WizardId = keyof typeof wizardFlows;
 
+// localStorage keys of the user data, see stores.ts. New keys: the flat data
+// doesn't match the legacy "preCheckData" and "documentationData".
+export const wizardStorageKeys = {
+  vorpruefung: "vorpruefungData",
+  dokumentation: "dokumentationData",
+} as const satisfies Record<WizardId, string>;
+
 // Field schemas per wizard, so generic form components can look up their
 // field by name. Requires unique field names within a wizard.
 export const wizardFields = {

@@ -1,20 +1,18 @@
 import { createWizardStore } from "./createWizardStore";
 import { dokumentationFlow } from "./dokumentationFlow";
 import { dokumentationFields } from "./dokumentationSchema";
-import type { WizardId } from "./session";
+import { wizardStorageKeys, type WizardId } from "./session";
 import { vorpruefungFlow } from "./vorpruefungFlow";
 import { vorpruefungFields } from "./vorpruefungSchema";
 
-// New storage keys: the flat data doesn't match the legacy "preCheckData"
-// and "documentationData".
 export const wizardStores = {
   vorpruefung: createWizardStore(
-    "vorpruefungData",
+    wizardStorageKeys.vorpruefung,
     vorpruefungFlow,
     vorpruefungFields,
   ),
   dokumentation: createWizardStore(
-    "dokumentationData",
+    wizardStorageKeys.dokumentation,
     dokumentationFlow,
     dokumentationFields,
   ),
