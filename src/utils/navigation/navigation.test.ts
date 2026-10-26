@@ -6,8 +6,6 @@ function createRoute(overrides: Partial<Route>): Route {
     key: "route",
     path: "/route",
     title: "Route",
-    navLabel: null,
-    navOrder: null,
     parent: null,
     sitemap: true,
     isStagingOnly: false,

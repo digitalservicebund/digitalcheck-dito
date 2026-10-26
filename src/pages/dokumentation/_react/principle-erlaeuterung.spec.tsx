@@ -40,8 +40,6 @@ const routes: (RouteGroup | Route)[] = [
         parent: null,
         sitemap: false,
         isStagingOnly: false,
-        navOrder: null,
-        navLabel: null,
       },
     ],
   },

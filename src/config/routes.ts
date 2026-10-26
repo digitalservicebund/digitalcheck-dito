@@ -7,8 +7,9 @@ export type Route = {
   readonly parent: Route | null;
   readonly sitemap: boolean;
   readonly isStagingOnly: boolean;
-  readonly navOrder: number | null;
-  readonly navLabel: string | null;
+  readonly navOrder?: number;
+  readonly navLabel?: string;
+  readonly navEyebrow?: string;
 };
 
 export const barrierefreiheit = {
@@ -18,8 +19,6 @@ export const barrierefreiheit = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const bundeslaender = {
@@ -29,7 +28,6 @@ export const bundeslaender = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
   navLabel: "Bundesländer",
 } as const;
 
@@ -40,8 +38,6 @@ export const dasIstNeu = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const datenschutz = {
@@ -51,8 +47,6 @@ export const datenschutz = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const dev = {
@@ -62,8 +56,6 @@ export const dev = {
   parent: null,
   sitemap: true,
   isStagingOnly: true,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const dokumentation = {
@@ -73,8 +65,6 @@ export const dokumentation = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const dokumentation_absenden = {
@@ -84,8 +74,6 @@ export const dokumentation_absenden = {
   parent: dokumentation,
   sitemap: false,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const dokumentation_beteiligungsformate = {
@@ -95,8 +83,6 @@ export const dokumentation_beteiligungsformate = {
   parent: dokumentation,
   sitemap: false,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const dokumentation_bewertungOrganisatorisch = {
@@ -106,8 +92,6 @@ export const dokumentation_bewertungOrganisatorisch = {
   parent: dokumentation,
   sitemap: false,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const dokumentation_bewertungRechtlich = {
@@ -117,8 +101,6 @@ export const dokumentation_bewertungRechtlich = {
   parent: dokumentation,
   sitemap: false,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const dokumentation_bewertungSemantisch = {
@@ -128,8 +110,6 @@ export const dokumentation_bewertungSemantisch = {
   parent: dokumentation,
   sitemap: false,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const dokumentation_bewertungTechnisch = {
@@ -139,8 +119,6 @@ export const dokumentation_bewertungTechnisch = {
   parent: dokumentation,
   sitemap: false,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const dokumentation_euInteroperabilitaetsbezug = {
@@ -150,8 +128,6 @@ export const dokumentation_euInteroperabilitaetsbezug = {
   parent: dokumentation,
   sitemap: false,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const dokumentation_hinweise = {
@@ -161,8 +137,6 @@ export const dokumentation_hinweise = {
   parent: dokumentation,
   sitemap: false,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const dokumentation_regelungsvorhabenTitel = {
@@ -172,8 +146,6 @@ export const dokumentation_regelungsvorhabenTitel = {
   parent: dokumentation,
   sitemap: false,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const dokumentation_verbindlicheAnforderungen = {
@@ -183,8 +155,6 @@ export const dokumentation_verbindlicheAnforderungen = {
   parent: dokumentation,
   sitemap: false,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const dokumentation_veroeffentlichung = {
@@ -194,8 +164,6 @@ export const dokumentation_veroeffentlichung = {
   parent: dokumentation,
   sitemap: false,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const dokumentation_zusammenfassung = {
@@ -205,8 +173,6 @@ export const dokumentation_zusammenfassung = {
   parent: dokumentation,
   sitemap: false,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const grundlagen = {
@@ -216,8 +182,6 @@ export const grundlagen = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const home = {
@@ -227,8 +191,6 @@ export const home = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const impressum = {
@@ -238,8 +200,6 @@ export const impressum = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const interoperabel = {
@@ -249,7 +209,6 @@ export const interoperabel = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
   navLabel: "EU-Interoperabilität",
 } as const;
 
@@ -260,8 +219,6 @@ export const interoperabel_angrenzendesEuRecht = {
   parent: interoperabel,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const interoperabel_loesungen = {
@@ -271,8 +228,6 @@ export const interoperabel_loesungen = {
   parent: interoperabel,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const interoperabel_loesungen_coreVocabularies = {
@@ -282,8 +237,6 @@ export const interoperabel_loesungen_coreVocabularies = {
   parent: interoperabel_loesungen,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const interoperabel_loesungen_dcatAp = {
@@ -293,8 +246,6 @@ export const interoperabel_loesungen_dcatAp = {
   parent: interoperabel_loesungen,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const interoperabel_nationaleKontaktstelle = {
@@ -304,8 +255,6 @@ export const interoperabel_nationaleKontaktstelle = {
   parent: interoperabel,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const kontakt = {
@@ -315,8 +264,6 @@ export const kontakt = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const methoden = {
@@ -326,8 +273,6 @@ export const methoden = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const normenkontrollrat = {
@@ -337,7 +282,6 @@ export const normenkontrollrat = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
   navLabel: "NKR",
 } as const;
 
@@ -348,8 +292,6 @@ export const prinzipien = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const sitemap = {
@@ -359,8 +301,6 @@ export const sitemap = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const vorpruefung = {
@@ -370,8 +310,6 @@ export const vorpruefung = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const vorpruefung_ergebnis = {
@@ -381,8 +319,6 @@ export const vorpruefung_ergebnis = {
   parent: vorpruefung,
   sitemap: false,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const vorpruefung_hinweise = {
@@ -392,8 +328,6 @@ export const vorpruefung_hinweise = {
   parent: vorpruefung,
   sitemap: false,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const allRoutes = [

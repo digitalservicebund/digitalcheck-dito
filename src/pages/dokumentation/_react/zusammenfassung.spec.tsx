@@ -29,8 +29,6 @@ const MOCK_ROUTE_PRINCIPLE = {
   parent: null,
   sitemap: false,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 };
 const routes: (RouteGroup | Route)[] = [
   dokumentation_hinweise,
