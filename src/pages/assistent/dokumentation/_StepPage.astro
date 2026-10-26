@@ -5,6 +5,8 @@ import { assistent_dokumentation } from "@/config/routes";
 import WizardLayout from "@/layouts/WizardLayout.astro";
 import { getSectionProgress } from "@/wizard/dokumentationFlow";
 import { getWizardSession } from "@/wizard/session";
+import { getCollection } from "astro:content";
+import WordDownloadButton from "./_WordDownloadButton";
 
 interface Props {
   /** Short page title, used in the document title */
@@ -17,6 +19,10 @@ interface Props {
 const { title, showPruefbereichEditLink = false, isWide } = Astro.props;
 
 const session = getWizardSession("dokumentation", Astro.url.pathname);
+
+const prinzipien = (await getCollection("prinzipien"))
+  .map(({ data }) => data)
+  .toSorted((a, b) => a.order - b.order);
 ---
 
 <!--
@@ -54,7 +60,14 @@ const session = getWizardSession("dokumentation", Astro.url.pathname);
     slot="button-bar"
     wizardId="dokumentation"
     fallbackBackHref={assistent_dokumentation.path}
-  />
+  >
+    <WordDownloadButton
+      client:load
+      prinzipien={prinzipien}
+      label="Zwischenstand herunterladen"
+      look="tertiary"
+    />
+  </WizardButtonBar>
 </WizardLayout>
 
 <script>
