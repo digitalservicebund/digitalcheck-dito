@@ -1,4 +1,5 @@
 ---
+import PruefbereichBreadcrumb from "@/components/wizard/PruefbereichBreadcrumb.astro";
 import WizardButtonBar from "@/components/wizard/WizardButtonBar.astro";
 import WizardLayout from "@/layouts/WizardLayout.astro";
 import { getWizardSession } from "@/wizard/session";
@@ -25,6 +26,7 @@ const { steps } = getWizardSession("vorpruefung", Astro.url.pathname).progress;
     </h2>
     <ResultTable client:load />
   </section>
+  <PruefbereichBreadcrumb slot="context" wizardId="vorpruefung" showEditLink />
   <WizardButtonBar slot="button-bar" wizardId="vorpruefung" />
 </WizardLayout>
 

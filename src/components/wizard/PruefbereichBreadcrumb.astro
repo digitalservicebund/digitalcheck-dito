@@ -1,0 +1,99 @@
+---
+import { pruefbereichLogos } from "@/assets/pruefbereich/logos";
+import {
+  assistent_dokumentation,
+  assistent_vorpruefung,
+} from "@/config/routes";
+import { pruefbereichOptions } from "@/wizard/pruefbereichSchema";
+import type { WizardId } from "@/wizard/session";
+import { Image } from "astro:assets";
+
+interface Props {
+  wizardId: WizardId;
+  /** Links to the start page to change the Prüfbereich, e.g. on the final page */
+  showEditLink?: boolean;
+}
+
+const { wizardId, showEditLink = false } = Astro.props;
+
+// Without Länder, there's nothing to change to
+const isEditable = showEditLink && pruefbereichOptions.length > 1;
+
+// The Prüfbereich is chosen on the start page
+const startRoutes = {
+  vorpruefung: assistent_vorpruefung,
+  dokumentation: assistent_dokumentation,
+} as const satisfies Record<WizardId, unknown>;
+const startRoute = startRoutes[wizardId];
+---
+
+<!--
+  Shows the Prüfbereich for the context slot of WizardLayout. One variant per
+  option, as the stored one is only known in the browser; the Bund is shown
+  until then.
+-->
+<div data-pruefbereich-breadcrumb={wizardId}>
+  {pruefbereichOptions.map(({ value, label }) => {
+    const logo = pruefbereichLogos[value];
+    return (
+      <div
+        class="flex flex-wrap items-center gap-x-kern-sm"
+        data-pruefbereich={value}
+        hidden={value !== "Bund"}
+      >
+        {logo && (
+          <Image
+            src={logo.image}
+            alt=""
+            width={logo.width}
+            height={logo.height}
+            densities={[1, 2]}
+          />
+        )}
+        <p class="kern-body kern-body--small py-0 my-0">
+          {startRoute.title} für:{" "}
+          {isEditable ? (
+            <a
+              class="kern-link kern-link--small py-0 font-bold"
+              href={startRoute.path}
+            >
+              {label}
+              <span class="sr-only">ändern</span>
+              <span
+                class="kern-icon kern-icon--edit kern-icon--small"
+                aria-hidden="true"
+              />
+            </a>
+          ) : (
+            <b>{label}</b>
+          )}
+        </p>
+        {isEditable && (
+          <p class="kern-preline kern-preline--small py-0">
+            (Bisherige Angaben bleiben beim Wechsel erhalten)
+          </p>
+        )}
+      </div>
+    );
+  })}
+</div>
+
+<script>
+  import type { WizardId } from "@/wizard/session";
+  import { wizardStores } from "@/wizard/stores";
+
+  document
+    .querySelectorAll<HTMLElement>("[data-pruefbereich-breadcrumb]")
+    .forEach((breadcrumb) => {
+      const wizardId = breadcrumb.dataset.pruefbereichBreadcrumb as WizardId;
+      // Without a stored Prüfbereich, the Bund is assumed
+      wizardStores[wizardId].$data.subscribe(({ pruefbereich = "Bund" }) => {
+        breadcrumb
+          .querySelectorAll<HTMLElement>("[data-pruefbereich]")
+          .forEach(
+            (variant) =>
+              (variant.hidden = variant.dataset.pruefbereich !== pruefbereich),
+          );
+      });
+    });
+</script>

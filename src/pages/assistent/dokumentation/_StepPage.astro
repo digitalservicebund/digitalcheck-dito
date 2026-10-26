@@ -1,4 +1,5 @@
 ---
+import PruefbereichBreadcrumb from "@/components/wizard/PruefbereichBreadcrumb.astro";
 import WizardButtonBar from "@/components/wizard/WizardButtonBar.astro";
 import { assistent_dokumentation } from "@/config/routes";
 import WizardLayout from "@/layouts/WizardLayout.astro";
@@ -7,9 +8,11 @@ import { getWizardSession } from "@/wizard/session";
 interface Props {
   /** Short page title, used in the document title */
   title: string;
+  /** Lets the user change the Prüfbereich, e.g. on the final page */
+  showPruefbereichEditLink?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, showPruefbereichEditLink = false } = Astro.props;
 
 const session = getWizardSession("dokumentation", Astro.url.pathname);
 const { steps } = session.progress;
@@ -39,6 +42,11 @@ const { steps } = session.progress;
   ) : (
     <slot />
   )}
+  <PruefbereichBreadcrumb
+    slot="context"
+    wizardId="dokumentation"
+    showEditLink={showPruefbereichEditLink}
+  />
   <slot name="help" slot="help" />
   <WizardButtonBar
     slot="button-bar"

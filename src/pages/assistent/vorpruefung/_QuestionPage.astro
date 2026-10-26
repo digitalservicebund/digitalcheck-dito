@@ -1,5 +1,6 @@
 ---
 import RadioStepForm from "@/components/wizard/RadioStepForm";
+import PruefbereichBreadcrumb from "@/components/wizard/PruefbereichBreadcrumb.astro";
 import WizardButtonBar from "@/components/wizard/WizardButtonBar.astro";
 import WizardLayout from "@/layouts/WizardLayout.astro";
 import { assistent_vorpruefung } from "@/config/routes";
@@ -56,6 +57,7 @@ const labelId = "question-label";
       name={questionId}
     />
   </div>
+  <PruefbereichBreadcrumb slot="context" wizardId="vorpruefung" />
   <slot name="help" slot="help" />
   <WizardButtonBar
     slot="button-bar"
