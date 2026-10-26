@@ -13,3 +13,16 @@ export const frontmatter = {
   {/* Depends on the stored Prüfbereich and EU-Bezug */}
   <Abschliessen client:only="react" />
 </StepPage>
+
+<script>
+  import { assistent_dokumentation_abschliessen } from "@/config/routes";
+  import { wizardStores } from "@/wizard/stores";
+
+  // Only reachable once all pages are answered, e.g. not via a bookmark
+  const { $isReachable, $resumePath } = wizardStores.dokumentation;
+  $isReachable.subscribe((isReachable) => {
+    if (!isReachable(assistent_dokumentation_abschliessen.path)) {
+      globalThis.location.replace($resumePath.get());
+    }
+  });
+</script>

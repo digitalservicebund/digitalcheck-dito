@@ -22,7 +22,8 @@ const session = getWizardSession("dokumentation", Astro.url.pathname);
 <!--
   Shell shared by all Dokumentation steps, the content differs per step.
   Fields are plain markup (e.g. <RadioField />), wired to the store by bindStepForm.
-  Answers are never required to continue, so "Weiter" always links to the next page.
+  Answers are only required for Abschließen (see dokumentationFlow), so "Weiter"
+  links to the next page otherwise.
   Slots:
   - default: step content (heading, text, fields)
   - help: <HelpSection />s shown in the help panel

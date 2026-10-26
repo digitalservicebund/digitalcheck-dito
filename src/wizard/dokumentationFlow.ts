@@ -100,13 +100,39 @@ export const dokumentationFlow = compileFlowConfig({
     semantisch: "technisch",
     technisch: "veroeffentlichung",
     veroeffentlichung: "zusammenfassung",
-    zusammenfassung: "abschliessen",
+    zusammenfassung: [{ guard: isComplete, target: "abschliessen" }],
     abschliessen: null,
   },
   initialStep: "regelungsvorhaben",
 });
 
 type DokumentationStep = NodeKey<typeof dokumentationFlow.pages>;
+
+// The steps that only apply with EU-Bezug
+const euSteps: DokumentationStep[] = [
+  "verbindlicheAnforderungen",
+  "rechtlich",
+  "organisatorisch",
+  "semantisch",
+  "technisch",
+  "veroeffentlichung",
+];
+
+/**
+ * Guard of Abschließen: all pages with a schema are answered, the EU steps only
+ * with EU-Bezug. Declared after the flow, as it reads the flow's pages; it's
+ * hoisted and only called by sessions, once the flow exists.
+ */
+function isComplete(data: { "eu-interoperabilitaet-bezug"?: string }): boolean {
+  const hasEuBezug = data["eu-interoperabilitaet-bezug"] === "yes";
+  return (Object.keys(dokumentationFlow.pages) as DokumentationStep[])
+    .filter((step) => hasEuBezug || !euSteps.includes(step))
+    .every(
+      (step) =>
+        dokumentationFlow.getSchemaFromNodeKey(step)?.safeParse(data).success ??
+        true,
+    );
+}
 
 // Progress is counted per section instead of the whole flow, as the EU steps
 // only apply with EU-Bezug. Other pages (e.g. Zusammenfassung) show none.
@@ -123,17 +149,7 @@ const progressSections: { label: string; steps: DokumentationStep[] }[] = [
       "prinzip5",
     ],
   },
-  {
-    label: "EU-Interoperabilität",
-    steps: [
-      "verbindlicheAnforderungen",
-      "rechtlich",
-      "organisatorisch",
-      "semantisch",
-      "technisch",
-      "veroeffentlichung",
-    ],
-  },
+  { label: "EU-Interoperabilität", steps: euSteps },
 ];
 
 /** Progress within the page's section, e.g. "Prinzipien · Schritt 4 von 7" */
