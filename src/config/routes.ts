@@ -205,11 +205,10 @@ export const impressum = {
 export const interoperabel = {
   key: "interoperabel",
   path: "/interoperabel",
-  title: "Interoperable Lösungen",
+  title: "EU-Interoperabilität",
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navLabel: "EU-Interoperabilität",
 } as const;
 
 export const interoperabel_angrenzendesEuRecht = {
