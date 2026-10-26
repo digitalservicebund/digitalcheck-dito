@@ -6,8 +6,8 @@ import Hero from "@/components/Hero.astro";
 import TimelineList from "@/components/TimelineList.astro";
 import WizardStartActions from "@/components/wizard/WizardStartActions.astro";
 import {
+  assistent_dokumentation,
   assistent_vorpruefung,
-  dokumentation,
   methoden,
 } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
@@ -145,14 +145,21 @@ export const frontmatter = {
               Sie dokumentieren, wie Sie Digitaltauglichkeit in Ihrer Regelung
               sichergestellt haben.
             </p>
-            <div>
-              <LinkButton
-                href={dokumentation.path}
-                iconRight="kern-icon--arrow-forward"
-              >
-                Zu diesem Schritt
-              </LinkButton>
-            </div>
+            <WizardStartActions
+              wizardId="dokumentation"
+              href={assistent_dokumentation.path}
+            >
+              <Fragment slot="startLabel">Zu diesem Schritt</Fragment>
+              <Fragment slot="continueLabel">Dokumentation fortsetzen</Fragment>
+              <Fragment slot="restartLabel">
+                Neue Dokumentation beginnen
+              </Fragment>
+              <Fragment slot="modalBody">
+                Mit einer neuen Dokumentation werden die Daten der begonnenen
+                Dokumentation gelöscht. Diese können nicht wiederhergestellt
+                werden.
+              </Fragment>
+            </WizardStartActions>
           </div>
         </li>
       </TimelineList>

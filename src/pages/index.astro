@@ -8,11 +8,12 @@ import Hero from "@/components/Hero.astro";
 import KernCard from "@/components/KernCard.astro";
 import {
   bundeslaender,
-  dokumentation,
   interoperabel,
   interoperabel_nationaleKontaktstelle,
   methoden,
   prinzipien,
+  assistent,
+  assistent_dokumentation,
   assistent_vorpruefung,
 } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
@@ -85,7 +86,10 @@ const steps = [
         text: "Abgeschlossene Dokumentation der Digitaltauglichkeit",
       },
     ],
-    link: { text: "Dokumentation erstellen", href: dokumentation.path },
+    link: {
+      text: "Dokumentation erstellen",
+      href: assistent_dokumentation.path,
+    },
   },
 ];
 
@@ -113,10 +117,7 @@ const principles = (await getCollection("prinzipien"))
         Ländern.
       </p>
       <div class="flex flex-wrap gap-24 pt-24 pb-16">
-        <LinkButton
-          href={assistent_vorpruefung.path}
-          iconLeft="kern-icon--arrow-forward"
-        >
+        <LinkButton href={assistent.path} iconLeft="kern-icon--arrow-forward">
           Digitalcheck starten
         </LinkButton>
         <a

@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 
 import {
   allRoutes,
+  assistent,
   assistent_vorpruefung,
   assistent_vorpruefung_ergebnis,
   barrierefreiheit,
@@ -99,7 +100,7 @@ test.describe("landing page", () => {
       .getByRole("link", { name: "Digitalcheck starten" })
       .first()
       .click();
-    await expect(page).toHaveURL(assistent_vorpruefung.path);
+    await expect(page).toHaveURL(assistent.path);
   });
 });
 
