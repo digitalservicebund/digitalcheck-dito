@@ -89,22 +89,11 @@ const faqItems = [
         </div>
       </noscript>
 
-      <div class="kern-form-input max-w-400">
-        <label class="kern-label" for="pruefbereich">
-          Für welchen Bereich prüfen Sie?
-        </label>
-        <div class="kern-form-input__select-wrapper">
-          <select class="kern-form-input__select" id="pruefbereich">
-            <option value="bund" selected>
-              Bund
-            </option>
-          </select>
-        </div>
-      </div>
       <WizardStartActions
         wizardId="dokumentation"
         href={dokumentationFlow.initialPath}
         showAutosaveHint
+        showPruefbereich
       >
         <Fragment slot="startLabel">Dokumentation starten</Fragment>
         <Fragment slot="continueLabel">Dokumentation fortsetzen</Fragment>

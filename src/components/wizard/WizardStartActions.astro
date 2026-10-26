@@ -1,5 +1,6 @@
 ---
 import Modal from "@/components/Modal.astro";
+import { pruefbereichOptions } from "@/wizard/pruefbereichSchema";
 import type { WizardId } from "@/wizard/session";
 import IconPublishedWithChanges from "~icons/ic/outline-published-with-changes";
 
@@ -14,12 +15,34 @@ interface Props {
   href: string;
   /** Shows the autosave hint while no answers are stored */
   showAutosaveHint?: boolean;
+  /** Shows the select of the Prüfbereich above, which is stored when the wizard is started */
+  showPruefbereich?: boolean;
 }
 
-const { wizardId, href, showAutosaveHint = false } = Astro.props;
+const {
+  wizardId,
+  href,
+  showAutosaveHint = false,
+  showPruefbereich = false,
+} = Astro.props;
 
 const modalId = `${wizardId}-start-over-modal`;
 ---
+
+{showPruefbereich && (
+  <div class="kern-form-input max-w-400">
+    <label class="kern-label" for={`${wizardId}-pruefbereich`}>
+      Für welchen Bereich prüfen Sie?
+    </label>
+    <div class="kern-form-input__select-wrapper">
+      <select class="kern-form-input__select" id={`${wizardId}-pruefbereich`}>
+        {pruefbereichOptions.map(({ value, label }) => (
+          <option value={value}>{label}</option>
+        ))}
+      </select>
+    </div>
+  </div>
+)}
 
 <div data-wizard-start-actions={wizardId} class="flex items-center gap-24">
   {/* Hidden until the script below knows whether answers are stored */}
@@ -87,6 +110,7 @@ const modalId = `${wizardId}-start-over-modal`;
 </div>
 
 <script>
+  import { pruefbereich } from "@/wizard/pruefbereichSchema";
   import type { WizardId } from "@/wizard/session";
   import { wizardStores } from "@/wizard/stores";
 
@@ -94,9 +118,14 @@ const modalId = `${wizardId}-start-over-modal`;
     .querySelectorAll<HTMLElement>("[data-wizard-start-actions]")
     .forEach((container) => {
       const wizardId = container.dataset.wizardStartActions as WizardId;
-      const { $hasAnswers, $resumePath, reset } = wizardStores[wizardId];
+      const { $data, $hasAnswers, $resumePath, save, reset } =
+        wizardStores[wizardId];
       const startLink =
         container.querySelector<HTMLAnchorElement>("[data-start-link]");
+      // A sibling of the container, if shown
+      const pruefbereichSelect = document.getElementById(
+        `${wizardId}-pruefbereich`,
+      ) as HTMLSelectElement | null;
       const startHref = startLink?.getAttribute("href") ?? "";
 
       // Also updates when the answers change later, e.g. in another tab
@@ -118,6 +147,22 @@ const modalId = `${wizardId}-start-over-modal`;
         );
       });
 
+      // Shows the stored Prüfbereich, otherwise keeps the preselected Bund
+      $data.subscribe((data) => {
+        if (pruefbereichSelect && data.pruefbereich) {
+          pruefbereichSelect.value = data.pruefbereich;
+        }
+      });
+
+      // Stored only when starting, so choosing it doesn't count as an answer
+      const savePruefbereich = () => {
+        if (!pruefbereichSelect) return;
+        save({
+          pruefbereich: pruefbereich.safeParse(pruefbereichSelect.value).data,
+        });
+      };
+      startLink?.addEventListener("click", savePruefbereich);
+
       // Buttons starts hidden until html is hydrated,
       // to avoid flashing the wrong state.
       startLink?.removeAttribute("hidden");
@@ -125,6 +170,9 @@ const modalId = `${wizardId}-start-over-modal`;
       // Clears the answers once the user confirms the dialog, before the link navigates to the first question
       container
         .querySelector("[data-reset-wizard]")
-        ?.addEventListener("click", () => reset());
+        ?.addEventListener("click", () => {
+          reset();
+          savePruefbereich();
+        });
     });
 </script>

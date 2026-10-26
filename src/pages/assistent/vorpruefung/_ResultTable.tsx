@@ -10,9 +10,9 @@ import {
 import { wizardStores } from "@/wizard/stores";
 import {
   answerOptions,
-  vorpruefungFields,
+  questionFields,
   type Answer,
-  type VorpruefungField,
+  type VorpruefungQuestion,
 } from "@/wizard/vorpruefungSchema";
 import { useStore } from "@nanostores/react";
 
@@ -75,20 +75,17 @@ const rows = {
     },
   },
 } as const satisfies Record<
-  VorpruefungField,
+  VorpruefungQuestion,
   { route: Route; explanations: Record<Answer, string> }
 >;
 
 // Same order as the questions in the flow
-const fieldNames = Object.keys(vorpruefungFields) as VorpruefungField[];
+const fieldNames = Object.keys(questionFields) as VorpruefungQuestion[];
 
 /** Lists every answer with its effect on the result and a link to change it */
 export default function ResultTable() {
   // Empty during hydration, matching the HTML from the build, then the stored data
-  const data: Partial<Record<string, Answer>> = useStore(
-    wizardStores.vorpruefung.$data,
-    { ssr: () => ({}) },
-  );
+  const data = useStore(wizardStores.vorpruefung.$data, { ssr: () => ({}) });
 
   return (
     <div className="kern-table-responsive">
