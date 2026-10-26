@@ -29,7 +29,7 @@ const [prinzip1, prinzip2, prinzip3, prinzip4, prinzip5] =
   dokumentationPrinzipienRoutes;
 
 // Page schemas live in dokumentationSchema.ts, so steps can use them too (see stepFields).
-// TODO: add remaining page schemas and guards (e.g. skip EU steps without EU-Bezug)
+// TODO: add remaining page schemas
 export const dokumentationFlow = compileFlowConfig({
   pages: {
     regelungsvorhaben: {
@@ -84,7 +84,15 @@ export const dokumentationFlow = compileFlowConfig({
     prinzip3: "prinzip4",
     prinzip4: "prinzip5",
     prinzip5: "euInteroperabilitaet",
-    euInteroperabilitaet: "verbindlicheAnforderungen",
+    // The EU sub-steps only apply with EU-Bezug. Zusammenfassung stays
+    // reachable without an answer, to show what's missing.
+    euInteroperabilitaet: [
+      {
+        guard: (data) => data["eu-interoperabilitaet-bezug"] === "yes",
+        target: "verbindlicheAnforderungen",
+      },
+      { target: "zusammenfassung" },
+    ],
     verbindlicheAnforderungen: "rechtlich",
     rechtlich: "organisatorisch",
     organisatorisch: "semantisch",
