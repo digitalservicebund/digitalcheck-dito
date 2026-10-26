@@ -33,8 +33,7 @@ const labelId = "question-label";
 -->
 <WizardLayout
   title={`Vorprüfung: ${title}`}
-  pageNumber={steps.current}
-  totalPages={totalPages}
+  progress={{ current: steps.current, total: totalPages }}
 >
   <div class="space-y-32">
     <div class="space-y-16">

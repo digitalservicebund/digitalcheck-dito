@@ -12,7 +12,8 @@ import {
   assistent_dokumentation_regelungsvorhaben,
   assistent_dokumentation_zusammenfassung,
 } from "@/config/routes";
-import { compileFlowConfig } from "form-graph-engine";
+import { removeTrailingSlash } from "@/utils/path";
+import { compileFlowConfig, type NodeKey } from "form-graph-engine";
 import {
   beteiligungsformateSchema,
   ebeneSchemas,
@@ -104,3 +105,46 @@ export const dokumentationFlow = compileFlowConfig({
   },
   initialStep: "regelungsvorhaben",
 });
+
+type DokumentationStep = NodeKey<typeof dokumentationFlow.pages>;
+
+// Progress is counted per section instead of the whole flow, as the EU steps
+// only apply with EU-Bezug. Other pages (e.g. Zusammenfassung) show none.
+const progressSections: { label: string; steps: DokumentationStep[] }[] = [
+  {
+    label: "Prinzipien",
+    steps: [
+      "regelungsvorhaben",
+      "beteiligungsformate",
+      "prinzip1",
+      "prinzip2",
+      "prinzip3",
+      "prinzip4",
+      "prinzip5",
+    ],
+  },
+  {
+    label: "EU-Interoperabilität",
+    steps: [
+      "verbindlicheAnforderungen",
+      "rechtlich",
+      "organisatorisch",
+      "semantisch",
+      "technisch",
+      "veroeffentlichung",
+    ],
+  },
+];
+
+/** Progress within the page's section, e.g. "Prinzipien · Schritt 4 von 7" */
+export const getSectionProgress = (pathname: string) => {
+  const step = dokumentationFlow.getNodeKeyFromPath(
+    removeTrailingSlash(pathname),
+  );
+  if (!step) return undefined;
+  for (const { label, steps } of progressSections) {
+    const index = steps.indexOf(step);
+    if (index !== -1) return { label, current: index + 1, total: steps.length };
+  }
+  return undefined;
+};

@@ -9,12 +9,7 @@ export const frontmatter = {
 };
 ---
 
-<StepPage
-  title={frontmatter.title}
-  isWide
-  showProgressBar={false}
-  showPruefbereichEditLink
->
+<StepPage title={frontmatter.title} isWide showPruefbereichEditLink>
   {/* Depends on the stored Prüfbereich and EU-Bezug */}
   <Abschliessen client:only="react" />
 </StepPage>
