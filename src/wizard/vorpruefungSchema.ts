@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { pruefbereich } from "./pruefbereichSchema";
 
 // Single source of truth for the fields of the Vorprüfung: used by the flow
 // (page schemas, guards) and by the form components (validation).
@@ -18,7 +19,7 @@ export const answerValues = answerOptions.map((option) => option.value);
 const answer = z.enum(answerValues, "Bitte wählen Sie eine Option aus.");
 
 // Field names are the question ids: user data is one flat object across all pages.
-export const vorpruefungFields = {
+export const questionFields = {
   "it-system": answer,
   "verpflichtungen-fuer-beteiligte": answer,
   datenaustausch: answer,
@@ -27,6 +28,10 @@ export const vorpruefungFields = {
   "eu-bezug": answer,
 } as const;
 
-export type VorpruefungField = keyof typeof vorpruefungFields;
+export type VorpruefungQuestion = keyof typeof questionFields;
 
-export const vorpruefungSchema = z.object(vorpruefungFields);
+// The Prüfbereich is chosen on the start page, outside the flow's pages
+export const vorpruefungFields = { pruefbereich, ...questionFields } as const;
+
+// All questions answered. Without a Prüfbereich, the Bund is assumed.
+export const vorpruefungSchema = z.object(questionFields);

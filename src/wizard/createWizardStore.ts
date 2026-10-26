@@ -29,12 +29,18 @@ type CompiledFlow<C extends PageConfigMap> = ReturnType<
  * - $isAnswered: whether all questions of a page are answered with $data,
  *   e.g. to mark them in the sidebar. Pages without questions never are.
  */
-export const createWizardStore = <C extends PageConfigMap>(
+export const createWizardStore = <
+  C extends PageConfigMap,
+  F extends Readonly<Record<string, z.ZodType>>,
+>(
   storageKey: string,
   flow: CompiledFlow<C>,
-  fields: Readonly<Record<string, z.ZodType>>,
+  fields: F,
 ) => {
-  type UserData = InferredUserData<C>;
+  // Also fields outside the flow's pages, e.g. the Prüfbereich of the start page
+  type UserData = InferredUserData<C> & {
+    [Name in keyof F]?: z.output<F[Name]>;
+  };
 
   // Keeps only known fields with valid values, so outdated or edited
   // storage can't break the flow.

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { pruefbereich } from "./pruefbereichSchema";
 
 // Single source of truth for the fields of the Dokumentation: used by the flow
 // (page schemas, guards) and by the form components (validation).
@@ -155,6 +156,8 @@ const prinzipFields = Object.fromEntries(
 // Field names are prefixed with their page: user data is one flat object across all pages.
 // TODO: add fields of the remaining pages
 export const dokumentationFields = {
+  // Chosen on the start page, outside the flow's pages
+  pruefbereich,
   "regelungsvorhaben-titel": text("Bitte geben Sie einen Titel ein."),
   "regelungsvorhaben-organisation": text(
     "Bitte geben Sie eine Organisation ein.",
