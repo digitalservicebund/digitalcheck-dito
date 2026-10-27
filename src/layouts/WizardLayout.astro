@@ -29,7 +29,9 @@ const { title, progress, isWide = false } = Astro.props;
           <slot name="context" />
         </div>
       )}
-      <main class:list={["flex-1 pt-64 pb-80", !isWide && "px-kern-md"]}>
+      <main
+        class:list={["flex-1 pt-64 pb-80 print:pb-0", !isWide && "px-kern-md"]}
+      >
         <!-- breakout-grid brings its own gutters and lets content span the full width -->
         <div
           class:list={[

@@ -26,7 +26,7 @@ export default function ResultTable() {
               Auswirkung
             </th>
             <th
-              className="kern-table__header kern-table__header--action"
+              className="kern-table__header kern-table__header--action print:hidden"
               scope="col"
             >
               Aktion
@@ -48,7 +48,7 @@ export default function ResultTable() {
                 <td className="kern-table__cell">
                   {answer ? explanations[answer] : "Noch nicht beantwortet."}
                 </td>
-                <td className="kern-table__cell kern-table__cell--action">
+                <td className="kern-table__cell kern-table__cell--action print:hidden">
                   <a href={route.path} className="kern-link">
                     <span
                       className="kern-icon kern-icon--edit"
