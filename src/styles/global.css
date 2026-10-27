@@ -265,7 +265,9 @@
     minmax(0, 1fr) [wide-end]
     minmax(var(--container-padding-inline), 1fr) [full-end];
 
-  & > *:not([class*="breakout"]) {
+  /* Islands have `display: contents`, so their root elements are the grid items */
+  & > *:not([class*="breakout"]),
+  & > astro-island > *:not([class*="breakout"]) {
     grid-column: content;
   }
 }
@@ -323,10 +325,6 @@
   --gutter: 5rem; /* 80px */
 
   @apply breakout-grid;
-
-  & > astro-island > * {
-    grid-column: content;
-  }
 
   @media (width >= 80rem) {
     --help-width: 300px;

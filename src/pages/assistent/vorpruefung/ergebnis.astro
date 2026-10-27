@@ -1,8 +1,9 @@
 ---
 import PruefbereichBreadcrumb from "@/components/wizard/PruefbereichBreadcrumb.astro";
 import WizardButtonBar from "@/components/wizard/WizardButtonBar.astro";
+import { assistent_erarbeitung } from "@/config/routes";
 import WizardLayout from "@/layouts/WizardLayout.astro";
-import ResultTable from "./_ResultTable";
+import Ergebnis from "./_Ergebnis";
 
 export const frontmatter = {
   title: "Ergebnis",
@@ -10,16 +11,20 @@ export const frontmatter = {
 };
 ---
 
-<WizardLayout title={`Vorprüfung: ${frontmatter.title}`}>
-  <h1 class="kern-heading-large">{frontmatter.title}</h1>
-  <section class="space-y-16">
-    <h2 class="kern-heading-small">
-      So kommt das Ergebnis zustande – jede Antwort einzeln korrigierbar:
-    </h2>
-    <ResultTable client:load />
-  </section>
+<WizardLayout title={`Vorprüfung: ${frontmatter.title}`} isWide>
+  {/* The design starts with the result box, which differs per result */}
+  <h1 class="sr-only">{frontmatter.title}</h1>
+  {/* Depends on the stored answers and Prüfbereich */}
+  <Ergebnis client:only="react" />
   <PruefbereichBreadcrumb slot="context" wizardId="vorpruefung" showEditLink />
-  <WizardButtonBar slot="button-bar" wizardId="vorpruefung" />
+  <WizardButtonBar
+    slot="button-bar"
+    wizardId="vorpruefung"
+    finalNext={{
+      href: assistent_erarbeitung.path,
+      label: "Weiter zur Erarbeitung",
+    }}
+  />
 </WizardLayout>
 
 <script>

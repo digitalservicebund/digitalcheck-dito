@@ -13,6 +13,8 @@ interface Props {
   /** Used for "Zurück" on the first step, which has no previous page in the flow */
   fallbackBackHref?: string;
   showAutosaveHint?: boolean;
+  /** "Weiter" on the last page, which has no next page in the flow, e.g. to the next wizard */
+  finalNext?: { href: string; label: string };
 }
 
 const {
@@ -20,6 +22,7 @@ const {
   formId,
   fallbackBackHref,
   showAutosaveHint = true,
+  finalNext,
 } = Astro.props;
 
 // Without user data at build time; the script below recalculates the
@@ -60,15 +63,22 @@ const isFinal = wizardFlows[wizardId].isFinal(
       <button type="submit" form={formId} class="kern-btn kern-btn--primary">
         <span class="kern-label">Weiter</span>
       </button>
+    ) : !isFinal ? (
+      <a
+        data-wizard-next
+        href={nextHref}
+        aria-disabled={nextHref ? undefined : "true"}
+        class="kern-btn kern-btn--primary link-unstyled"
+      >
+        <span class="kern-label">Weiter</span>
+      </a>
     ) : (
-      !isFinal && (
+      finalNext && (
         <a
-          data-wizard-next
-          href={nextHref}
-          aria-disabled={nextHref ? undefined : "true"}
+          href={finalNext.href}
           class="kern-btn kern-btn--primary link-unstyled"
         >
-          <span class="kern-label">Weiter</span>
+          <span class="kern-label">{finalNext.label}</span>
         </a>
       )
     )}
