@@ -50,6 +50,7 @@ const rawRedirects = {
     "/prinzipien/datenschutz-und-informationssicherheit-schaffen-vertrauen",
   "/unterstuetzung": "/kontakt",
   "/vorpruefung": "/assistent/vorpruefung",
+  "/dokumentation": "/assistent/dokumentation",
 };
 
 // Some pages were moved to the Zentrum für Legistik
