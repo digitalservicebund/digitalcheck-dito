@@ -555,15 +555,6 @@ export const kontakt = {
   isStagingOnly: false,
 } as const;
 
-export const methoden = {
-  key: "methoden",
-  path: "/methoden",
-  title: "Regelung erarbeiten",
-  parent: null,
-  sitemap: true,
-  isStagingOnly: false,
-} as const;
-
 export const normenkontrollrat = {
   key: "normenkontrollrat",
   path: "/normenkontrollrat",
@@ -650,7 +641,6 @@ export const allRoutes = [
   interoperabel_loesungen_dcatAp,
   interoperabel_nationaleKontaktstelle,
   kontakt,
-  methoden,
   normenkontrollrat,
   prinzipien,
   sitemap,

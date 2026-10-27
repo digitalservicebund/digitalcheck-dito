@@ -57,7 +57,7 @@ describe("Index Route - Integration Tests", () => {
         "Vorprüfung starten",
         "/assistent/vorpruefung",
       ],
-      ["Regelung erarbeiten", "Zur Erarbeitung", "/methoden"],
+      ["Regelung erarbeiten", "Zur Erarbeitung", "/assistent/erarbeitung"],
       [
         "Digitalcheck dokumentieren",
         "Dokumentation erstellen",

@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test";
 import {
   allRoutes,
   assistent,
+  assistent_erarbeitung,
   assistent_vorpruefung,
   assistent_vorpruefung_ergebnis,
   barrierefreiheit,
@@ -11,7 +12,6 @@ import {
   grundlagen,
   home,
   impressum,
-  methoden,
   prinzipien,
   type Route,
 } from "@/config/routes";
@@ -135,7 +135,7 @@ test.describe("links", () => {
       .getByRole("main")
       .getByRole("link", { name: "Zur Erarbeitung" })
       .click();
-    await expect(page).toHaveURL(methoden.path);
+    await expect(page).toHaveURL(assistent_erarbeitung.path);
   });
 
   test("links leading to external pages have icon", async ({ page }) => {
