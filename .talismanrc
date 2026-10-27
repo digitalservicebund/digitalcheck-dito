@@ -78,6 +78,7 @@ allowed_patterns:
   - CacheKey
   - passen
   - Anpassungen
+  - passiert
   - Pass\s # Allow "Pass " followed by a space
   - \@[a-z0-9]{40} # Allow fixing action hashes
   - "secrets: inherit"
