@@ -52,8 +52,12 @@ const modalId = `${wizardId}-start-over-modal`;
           </select>
         </div>
       </div>
-      {/* Positioned for its menu on mobile */}
-      <div class="relative" data-show-if-pruefbereich="stored" hidden>
+      {/* Positioned for its menu on mobile. */}
+      <div
+        class="relative pt-kern-md pb-kern-sm"
+        data-show-if-pruefbereich="stored"
+        hidden
+      >
         <PruefbereichBreadcrumb wizardId={wizardId} canEdit />
       </div>
     </>
