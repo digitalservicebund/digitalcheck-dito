@@ -1,0 +1,1 @@
+import{n as e}from"./stores._nflom98.js";import{n as t}from"./routes.DIknjMf8.js";var{$isReachable:n,$resumePath:r}=e.dokumentation;n.subscribe(e=>{e(t.path)||globalThis.location.replace(r.get())});
