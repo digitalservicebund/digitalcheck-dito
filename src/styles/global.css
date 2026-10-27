@@ -280,7 +280,8 @@
   - As seen in `SidebarContainer.tsx`, this is used for desktop layouts.
 */
 @utility breakout-grid-toc {
-  --toc-min-width: 200px;
+  /* Grows with the viewport, so the content keeps its width next to the section sidebar on small screens */
+  --toc-min-width: clamp(200px, 20vw, 256px);
   --toc-max-width: 300px;
   --toc-gutter: 2.5rem; /* 40px */
 
