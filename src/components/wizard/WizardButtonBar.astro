@@ -40,17 +40,22 @@ const isFinal = wizardFlows[wizardId].isFinal(
 <div
   data-wizard-button-bar={wizardId}
   data-fallback-back-href={fallbackBackHref}
-  class="bg-kern-layout-background-default sticky bottom-0 z-10 flex flex-wrap items-center gap-kern-md border-t border-kern-layout-border px-kern-md py-kern-md min-[900px]:px-64 print:hidden"
+  class="bg-kern-layout-background-default flex flex-col gap-kern-sm px-kern-md py-kern-md min-[900px]:px-64 sm:sticky sm:bottom-0 sm:z-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-kern-md sm:border-t sm:border-kern-layout-border print:hidden"
 >
   {showAutosaveHint && (
-    <p class="flex flex-1 items-center gap-kern-sm text-kern-layout-text-muted my-0">
+    <p class="order-last flex items-center gap-kern-sm text-kern-layout-text-muted my-0 sm:order-none sm:flex-1">
       <IconPublishedWithChanges class="size-22 shrink-0" aria-hidden="true" />
       Ihre Daten werden automatisch im Browser gespeichert.
     </p>
   )}
-  <div class="ml-auto flex flex-wrap justify-end gap-kern-md">
-    {/* additional actions, e.g. "Zwischenstand herunterladen" */}
-    <slot />
+  {/* On mobile: "Zurück" and "Weiter" share the first row, the additional actions go below */}
+  <div class="flex flex-wrap justify-end gap-kern-md *:flex-1 sm:ml-auto sm:*:flex-none">
+    {Astro.slots.has("default") && (
+      <div class="order-last w-full sm:order-none sm:w-auto">
+        {/* additional actions, e.g. "Zwischenstand herunterladen" */}
+        <slot />
+      </div>
+    )}
     <a
       data-wizard-back
       href={backHref}
