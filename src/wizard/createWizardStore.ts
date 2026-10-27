@@ -26,8 +26,9 @@ type CompiledFlow<C extends PageConfigMap> = ReturnType<
  * - $isReachable: whether a page can be opened with $data, e.g. the result
  *   page only once all questions are answered. Independent of $path, so
  *   it's also known outside the flow (e.g. in the sidebar of the start page).
- * - $isAnswered: whether all questions of a page are answered with $data,
- *   e.g. to mark them in the sidebar. Pages without questions never are.
+ * - $answerStatus: whether all ("answered"), some ("incomplete") or none
+ *   ("unanswered") of a page's questions are answered with $data, e.g. to mark
+ *   them in the sidebar. Pages without questions are always unanswered.
  */
 export const createWizardStore = <
   C extends PageConfigMap,
@@ -96,10 +97,18 @@ export const createWizardStore = <
     (data) => createFlowSession(flow, data, flow.initialPath).isReachable,
   );
 
-  const $isAnswered = computed($data, (data) => (path: string) => {
+  const $answerStatus = computed($data, (data) => (path: string) => {
     const nodeKey = flow.getNodeKeyFromPath(removeTrailingSlash(path));
     const pageSchema = nodeKey && flow.getSchemaFromNodeKey(nodeKey);
-    return !!pageSchema && pageSchema.safeParse(data).success;
+    if (!pageSchema) return "unanswered";
+    if (pageSchema.safeParse(data).success) return "answered";
+    // Only valid values are stored, invalid ones are removed (see bindStepForm)
+    const values: Record<string, unknown> = data;
+    return Object.keys(pageSchema.shape).some(
+      (name) => values[name] !== undefined,
+    )
+      ? "incomplete"
+      : "unanswered";
   });
 
   const save = (values: UserData) => {
@@ -117,7 +126,7 @@ export const createWizardStore = <
     $hasAnswers,
     $resumePath,
     $isReachable,
-    $isAnswered,
+    $answerStatus,
     save,
     reset,
   };

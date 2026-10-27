@@ -145,20 +145,35 @@ function panelId(path: string) {
         aria-current={currentPath === entry.path ? "page" : undefined}
       >
         {/* Placed in the left padding, so the label doesn't shift when the
-            script reveals the icon after loading the stored answers */}
-        {getWizardIdForPath(entry.path) && (
-          <span
-            data-wizard-answered
-            data-testid="CheckIcon"
-            class="absolute top-kern-sm left-kern-xxs flex"
-            hidden
-          >
+            script reveals an icon after loading the stored answers.
+            Not on the current page, which would warn as soon as one types. */}
+        {getWizardIdForPath(entry.path) && currentPath !== entry.path && (
+          <>
             <span
-              class="kern-icon kern-icon--check kern-icon--default bg-kern-feedback-success"
-              aria-hidden="true"
-            />
-            <span class="sr-only">Beantwortet:</span>
-          </span>
+              data-wizard-status="answered"
+              data-testid="CheckIcon"
+              class="absolute top-kern-sm left-kern-xxs flex"
+              hidden
+            >
+              <span
+                class="kern-icon kern-icon--check kern-icon--default bg-kern-feedback-success"
+                aria-hidden="true"
+              />
+              <span class="sr-only">Beantwortet:</span>
+            </span>
+            <span
+              data-wizard-status="incomplete"
+              data-testid="WarningIcon"
+              class="absolute top-kern-sm left-kern-xxs flex"
+              hidden
+            >
+              <span
+                class="kern-icon kern-icon--warning kern-icon--default bg-kern-feedback-warning"
+                aria-hidden="true"
+              />
+              <span class="sr-only">Unvollständig:</span>
+            </span>
+          </>
         )}
         {entry.eyebrow && (
           <span class="eyebrow block text-(length:--kern-typography-font-size-small-static) font-normal italic">
@@ -189,11 +204,12 @@ function panelId(path: string) {
       const path = link.dataset.path ?? "";
 
       // Also update when the answers change later, e.g. in another tab
-      wizardStores[wizardId].$isAnswered.subscribe((isAnswered) => {
-        const answeredMark = link.querySelector<HTMLElement>(
-          "[data-wizard-answered]",
-        );
-        if (answeredMark) answeredMark.hidden = !isAnswered(path);
+      wizardStores[wizardId].$answerStatus.subscribe((answerStatus) => {
+        link
+          .querySelectorAll<HTMLElement>("[data-wizard-status]")
+          .forEach((mark) => {
+            mark.hidden = mark.dataset.wizardStatus !== answerStatus(path);
+          });
       });
 
       wizardStores[wizardId].$isReachable.subscribe((isReachable) => {

@@ -148,13 +148,37 @@ describe("createWizardStore", () => {
   });
 
   it("knows which pages are answered, also outside the flow", () => {
-    const { save, $isAnswered } = createStore("/elsewhere");
-    expect($isAnswered.get()("/test/first")).toBe(false);
+    const { save, $answerStatus } = createStore("/elsewhere");
+    expect($answerStatus.get()("/test/first")).toBe("unanswered");
 
     save({ second: "text" });
-    expect($isAnswered.get()("/test/first")).toBe(false);
-    expect($isAnswered.get()("/test/second/")).toBe(true);
+    expect($answerStatus.get()("/test/first")).toBe("unanswered");
+    expect($answerStatus.get()("/test/second/")).toBe("answered");
     // Pages without questions are never answered
-    expect($isAnswered.get()("/test/end")).toBe(false);
+    expect($answerStatus.get()("/test/end")).toBe("unanswered");
+  });
+
+  it("knows which pages are only partly answered", () => {
+    const pairFields = { left: z.string(), right: z.string() };
+    const pairFlow = compileFlowConfig({
+      pages: { pair: { path: "/pair", pageSchema: pairFields } },
+      transitions: { pair: null },
+      initialStep: "pair",
+    });
+    const { save, $answerStatus } = createWizardStore(
+      STORAGE_KEY,
+      pairFlow,
+      pairFields,
+    );
+
+    save({ left: "a" });
+    expect($answerStatus.get()("/pair")).toBe("incomplete");
+
+    save({ right: "b" });
+    expect($answerStatus.get()("/pair")).toBe("answered");
+
+    // Invalid values are saved as undefined, see bindStepForm
+    save({ left: undefined, right: undefined });
+    expect($answerStatus.get()("/pair")).toBe("unanswered");
   });
 });
