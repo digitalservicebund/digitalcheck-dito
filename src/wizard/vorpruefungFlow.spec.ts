@@ -1,7 +1,7 @@
 import { preCheck } from "@/resources/content/vorpruefung";
 import { createFlowSession } from "form-graph-engine";
 import { vorpruefungFlow } from "./vorpruefungFlow";
-import { questionFields, vorpruefungFields } from "./vorpruefungSchema";
+import { vorpruefungFields } from "./vorpruefungSchema";
 
 const questionPaths = preCheck.questions.map((question) => question.path);
 const allYes = Object.fromEntries(
@@ -94,7 +94,7 @@ describe("vorpruefungFlow", () => {
   });
 
   it("has a field for every question of the content", () => {
-    expect(Object.keys(questionFields)).toEqual(
+    expect(Object.keys(vorpruefungFields)).toEqual(
       preCheck.questions.map((question) => question.id),
     );
   });

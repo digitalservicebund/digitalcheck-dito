@@ -1,4 +1,4 @@
-import { wizardStores } from "@/wizard/stores";
+import { $pruefbereich, wizardStores } from "@/wizard/stores";
 import "@testing-library/jest-dom";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it } from "vitest";
@@ -26,10 +26,12 @@ const emailLink = () =>
 describe("Ergebnis", () => {
   beforeEach(() => {
     store.reset();
+    $pruefbereich.set(undefined);
   });
 
   it("sends the result to the NKR with a copy for Interoperabilität", () => {
-    store.save({ pruefbereich: "Bund", ...withInteroperability });
+    $pruefbereich.set("Bund");
+    store.save({ ...withInteroperability });
     render(<Ergebnis />);
 
     expect(
@@ -57,7 +59,8 @@ describe("Ergebnis", () => {
   });
 
   it("sends the result to the Digitalcheck team for a Land with Interoperabilität", () => {
-    store.save({ pruefbereich: "Hessen", ...withInteroperability });
+    $pruefbereich.set("Hessen");
+    store.save({ ...withInteroperability });
     render(<Ergebnis />);
 
     expect(
@@ -71,7 +74,8 @@ describe("Ergebnis", () => {
   });
 
   it("only offers the download for a Land without Interoperabilität", () => {
-    store.save({ pruefbereich: "Hessen", ...allNo });
+    $pruefbereich.set("Hessen");
+    store.save({ ...allNo });
     render(<Ergebnis />);
 
     expect(screen.getByText("keinen Digitalbezug")).toBeVisible();

@@ -20,6 +20,9 @@ export const wizardStorageKeys = {
   dokumentation: "dokumentationData",
 } as const satisfies Record<WizardId, string>;
 
+// The Prüfbereich is stored once for both wizards, see stores.ts
+export const pruefbereichStorageKey = "pruefbereich";
+
 // Field schemas per wizard, so generic form components can look up their
 // field by name. Requires unique field names within a wizard.
 export const wizardFields = {

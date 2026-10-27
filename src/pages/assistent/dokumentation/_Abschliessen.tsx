@@ -1,6 +1,6 @@
 import type { Prinzip } from "@/content.config";
 import { contact } from "@/resources/content/shared/contact";
-import { wizardStores } from "@/wizard/stores";
+import { $pruefbereich, wizardStores } from "@/wizard/stores";
 import { useStore } from "@nanostores/react";
 import WordDownloadButton from "./_WordDownloadButton";
 
@@ -14,7 +14,7 @@ export default function Abschliessen({
   // Rendered client-only (no HTML from the build), so the stored data is known
   const data = useStore(wizardStores.dokumentation.$data);
   // Without a stored Prüfbereich, the Bund is assumed (as in the breadcrumb)
-  const isBund = (data.pruefbereich ?? "Bund") === "Bund";
+  const isBund = (useStore($pruefbereich) ?? "Bund") === "Bund";
   // The EU steps only apply with EU-Bezug, see dokumentationFlow
   const hasEuBezug = data["eu-interoperabilitaet-bezug"] === "yes";
 

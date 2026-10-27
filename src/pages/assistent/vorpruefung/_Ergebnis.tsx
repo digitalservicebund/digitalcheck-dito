@@ -1,7 +1,8 @@
 import { assistent_vorpruefung_datenaustausch } from "@/config/routes";
 import { contact } from "@/resources/content/shared/contact";
 import { mailto } from "@/utils/mailtoHelper";
-import { wizardStores } from "@/wizard/stores";
+import type { Pruefbereich } from "@/wizard/pruefbereichSchema";
+import { $pruefbereich, wizardStores } from "@/wizard/stores";
 import {
   answerLabels,
   getVorpruefungResult,
@@ -47,14 +48,16 @@ const statements = (result: ClearResult) => {
   ];
 };
 
-const emailBody = (result: ClearResult, data: VorpruefungData, title: string) =>
+const emailBody = (
+  result: ClearResult,
+  data: VorpruefungData,
+  pruefbereich: Pruefbereich,
+  title: string,
+) =>
   [
     "Guten Tag,",
     "hiermit sende ich Ihnen das Ergebnis der Vorprüfung des Digitalchecks.",
-    [
-      title && `Vorhaben: ${title}`,
-      `Vorprüfung für: ${data.pruefbereich ?? "Bund"}`,
-    ]
+    [title && `Vorhaben: ${title}`, `Vorprüfung für: ${pruefbereich}`]
       .filter(Boolean)
       .join("\n"),
     [
@@ -227,14 +230,15 @@ function EmailForm({
 function Steps({
   result,
   data,
-  isBund,
+  pruefbereich,
 }: {
   result: ClearResult;
   data: VorpruefungData;
-  isBund: boolean;
+  pruefbereich: Pruefbereich;
 }) {
+  const isBund = pruefbereich === "Bund";
   const hasInteroperability = result === "digitalAndInteroperability";
-  const body = (title: string) => emailBody(result, data, title);
+  const body = (title: string) => emailBody(result, data, pruefbereich, title);
   const sendNote = (
     <p>
       Eine vorbereitete E-Mail wird geöffnet – Sie prüfen und senden selbst.
@@ -361,7 +365,8 @@ export default function Ergebnis() {
   const result = getVorpruefungResult(data);
   const isClear = result !== "contradiction" && result !== "unsure";
   // Without a stored Prüfbereich, the Bund is assumed (as in the breadcrumb)
-  const isBund = (data.pruefbereich ?? "Bund") === "Bund";
+  const pruefbereich = useStore($pruefbereich) ?? "Bund";
+  const isBund = pruefbereich === "Bund";
   // Same condition as the e-mail steps in <Steps>
   const hasEmail = isBund || result === "digitalAndInteroperability";
 
@@ -412,7 +417,7 @@ export default function Ergebnis() {
       {isClear && (
         <>
           <ResultAlert result={result} />
-          <Steps result={result} data={data} isBund={isBund} />
+          <Steps result={result} data={data} pruefbereich={pruefbereich} />
         </>
       )}
 
