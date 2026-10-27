@@ -1,5 +1,6 @@
 ---
 import Modal from "@/components/Modal.astro";
+import PruefbereichBreadcrumb from "@/components/wizard/PruefbereichBreadcrumb.astro";
 import { pruefbereichOptions } from "@/wizard/pruefbereichSchema";
 import type { WizardId } from "@/wizard/session";
 import IconPublishedWithChanges from "~icons/ic/outline-published-with-changes";
@@ -15,7 +16,7 @@ interface Props {
   href: string;
   /** Shows the autosave hint while no answers are stored */
   showAutosaveHint?: boolean;
-  /** Shows the select of the Prüfbereich above, which is stored when the wizard is started */
+  /** Shows the select of the Prüfbereich above, which is stored when the wizard is started. Afterwards it can be changed via the breadcrumb. */
   showPruefbereich?: boolean;
 }
 
@@ -29,91 +30,109 @@ const {
 const modalId = `${wizardId}-start-over-modal`;
 ---
 
-{showPruefbereich && (
-  <div class="kern-form-input max-w-400">
-    <label class="kern-label" for={`${wizardId}-pruefbereich`}>
-      Für welchen Bereich prüfen Sie?
-    </label>
-    <div class="kern-form-input__select-wrapper">
-      <select class="kern-form-input__select" id={`${wizardId}-pruefbereich`}>
-        {pruefbereichOptions.map(({ value, label }) => (
-          <option value={value}>{label}</option>
-        ))}
-      </select>
-    </div>
-  </div>
-)}
+<div data-wizard-start-actions={wizardId} class="space-y-24">
+  {showPruefbereich && (
+    <>
+      <div
+        class="kern-form-input max-w-400"
+        data-show-if="no-answers-stored"
+        hidden
+      >
+        <label class="kern-label" for={`${wizardId}-pruefbereich`}>
+          Für welchen Bereich prüfen Sie?
+        </label>
+        <div class="kern-form-input__select-wrapper">
+          <select
+            class="kern-form-input__select"
+            id={`${wizardId}-pruefbereich`}
+          >
+            {pruefbereichOptions.map(({ value, label }) => (
+              <option value={value}>{label}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+      {/* Once started, the Prüfbereich is stored and changed like on the final page. Positioned for its menu on mobile. */}
+      <div class="relative" data-show-if="answers-stored" hidden>
+        <PruefbereichBreadcrumb wizardId={wizardId} canEdit />
+      </div>
+    </>
+  )}
 
-<div data-wizard-start-actions={wizardId} class="flex items-center gap-24">
-  {/* Hidden until the script below knows whether answers are stored */}
-  <a class="kern-btn kern-btn--primary" href={href} data-start-link hidden>
-    <span class="kern-label" data-show-if="no-answers-stored">
-      <slot name="startLabel" />
-    </span>
-    <span class="kern-label" data-show-if="answers-stored" hidden>
-      <slot name="continueLabel" />
-    </span>
-    <span class="kern-icon kern-icon--arrow-forward" aria-hidden="true"></span>
-  </a>
-  <button
-    type="button"
-    class="kern-btn kern-btn--tertiary"
-    data-show-if="answers-stored"
-    popovertarget={modalId}
-    hidden
-  >
-    <span class="kern-label">
-      <slot name="restartLabel" />
-    </span>
-    <span
-      class="kern-icon kern-icon--autorenew kern-icon--default"
-      aria-hidden="true"
-    ></span>
-  </button>
-  <Modal id={modalId} contentClass="max-w-600 max-h-screen">
-    <h2 slot="heading" class="kern-title kern-title--large mt-0">
-      <slot name="restartLabel" />
-    </h2>
-    <p slot="body">
-      <slot name="modalBody" />
-    </p>
+  <div class="flex items-center gap-24">
+    {/* Hidden until the script below knows whether answers are stored */}
+    <a class="kern-btn kern-btn--primary" href={href} data-start-link hidden>
+      <span class="kern-label" data-show-if="no-answers-stored">
+        <slot name="startLabel" />
+      </span>
+      <span class="kern-label" data-show-if="answers-stored" hidden>
+        <slot name="continueLabel" />
+      </span>
+      <span
+        class="kern-icon kern-icon--arrow-forward"
+        aria-hidden="true"
+      ></span>
+    </a>
     <button
       type="button"
-      class="kern-btn kern-btn--secondary"
+      class="kern-btn kern-btn--tertiary"
+      data-show-if="answers-stored"
       popovertarget={modalId}
-      popovertargetaction="hide"
-      slot="buttonLeft"
-    >
-      <span class="kern-label">Abbrechen</span>
-    </button>
-    <button
-      type="button"
-      class="kern-btn kern-btn--primary"
-      popovertarget={modalId}
-      popovertargetaction="hide"
-      data-reset-wizard
-      slot="buttonRight"
-    >
-      <span class="kern-label">Neu beginnen</span>
-    </button>
-  </Modal>
-  {showAutosaveHint && (
-    <div
-      class="flex items-center gap-8"
-      data-show-if="no-answers-stored"
       hidden
     >
-      <IconPublishedWithChanges
-        class="size-22 shrink-0 text-kern-layout-text-muted"
+      <span class="kern-label">
+        <slot name="restartLabel" />
+      </span>
+      <span
+        class="kern-icon kern-icon--autorenew kern-icon--default"
         aria-hidden="true"
-      />
-      <p class="kern-body kern-body--small py-0 text-kern-layout-text-muted">
-        Ihre Angaben werden automatisch gespeichert.
-        <br />
-        Sie können die Seite jederzeit schließen und später fortfahren.
+      ></span>
+    </button>
+    <Modal id={modalId} contentClass="max-w-600 max-h-screen">
+      <h2 slot="heading" class="kern-title kern-title--large mt-0">
+        <slot name="restartLabel" />
+      </h2>
+      <p slot="body">
+        <slot name="modalBody" />
       </p>
-    </div>
-  )}
+      <button
+        type="button"
+        class="kern-btn kern-btn--secondary"
+        popovertarget={modalId}
+        popovertargetaction="hide"
+        slot="buttonLeft"
+      >
+        <span class="kern-label">Abbrechen</span>
+      </button>
+      <button
+        type="button"
+        class="kern-btn kern-btn--primary"
+        popovertarget={modalId}
+        popovertargetaction="hide"
+        data-reset-wizard
+        slot="buttonRight"
+      >
+        <span class="kern-label">Neu beginnen</span>
+      </button>
+    </Modal>
+    {showAutosaveHint && (
+      <div
+        class="flex items-center gap-8"
+        data-show-if="no-answers-stored"
+        hidden
+      >
+        <IconPublishedWithChanges
+          class="size-22 shrink-0 text-kern-layout-text-muted"
+          aria-hidden="true"
+        />
+        <p class="kern-body kern-body--small py-0 text-kern-layout-text-muted">
+          Ihre Angaben werden automatisch gespeichert.
+          <br />
+          Sie können die Seite jederzeit schließen und später fortfahren.
+        </p>
+      </div>
+    )}
+  </div>
 </div>
 
 <script>
@@ -129,7 +148,6 @@ const modalId = `${wizardId}-start-over-modal`;
         wizardStores[wizardId];
       const startLink =
         container.querySelector<HTMLAnchorElement>("[data-start-link]");
-      // A sibling of the container, if shown
       const pruefbereichSelect = document.getElementById(
         `${wizardId}-pruefbereich`,
       ) as HTMLSelectElement | null;
