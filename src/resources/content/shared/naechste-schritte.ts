@@ -1,7 +1,7 @@
 import {
+  assistent_erarbeitung,
   assistent_vorpruefung,
   dokumentation,
-  methoden,
 } from "@/config/routes";
 import type { Step } from "@/utils/contentTypes.ts";
 
@@ -39,7 +39,7 @@ export const steps = {
       "Nutzen Sie passende Methoden und Werkzeuge, um Digitaltauglichkeit und Interoperabilität in Ihrer Regelung sicherzustellen. Das Digitalcheck-Team steht Ihnen bei der Erarbeitung zur Verfügung.",
     link: {
       text: "Zu „Erarbeiten“",
-      to: methoden.path,
+      to: assistent_erarbeitung.path,
     },
     isDisabled: false,
     finished: {

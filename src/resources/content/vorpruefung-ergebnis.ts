@@ -1,7 +1,7 @@
 import {
+  assistent_erarbeitung,
   assistent_vorpruefung,
   interoperabel,
-  methoden,
 } from "@/config/routes";
 import { steps } from "@/resources/content/shared/naechste-schritte";
 import type { ContentLink, Step } from "@/utils/contentTypes.ts";
@@ -53,7 +53,7 @@ export const preCheckResult = {
       text: "Wenn digitale Umsetzung für Ihr Regelungsvorhaben wichtig ist, finden Sie hier passende Methoden und Werkzeuge. Sie erfahren, wie Sie den Prozess darstellen und durchdenken, mit Beteiligten ins Gespräch kommen und die fünf Prinzipien anwenden.",
       link: {
         text: "Zu „Erarbeiten“",
-        to: methoden.path,
+        to: assistent_erarbeitung.path,
       } satisfies ContentLink,
     },
   },

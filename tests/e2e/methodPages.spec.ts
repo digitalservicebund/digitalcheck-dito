@@ -1,4 +1,4 @@
-import { methoden, prinzipien } from "@/config/routes";
+import { assistent_erarbeitung, prinzipien } from "@/config/routes";
 import {
   ZFL_BASE_URL,
   ZFL_PATH_TECHNISCHE_UMSETZBARKEIT,
@@ -6,7 +6,7 @@ import {
 import { expect, test } from "@playwright/test";
 
 const ROUTE_LANDING = "/";
-const ROUTE_METHODS = methoden.path;
+const ROUTE_METHODS = assistent_erarbeitung.path;
 const ROUTE_METHODS_PRINCIPLES = prinzipien.path;
 const ROUTE_METHODS_TECHNICAL_FEASIBILITY =
   ZFL_BASE_URL + ZFL_PATH_TECHNISCHE_UMSETZBARKEIT;
