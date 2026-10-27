@@ -1,4 +1,5 @@
 ---
+import { assistent } from "@/config/routes";
 import { getCollection } from "astro:content";
 import Abschliessen from "./_Abschliessen";
 import StepPage from "./_StepPage.astro";
@@ -14,7 +15,12 @@ const prinzipien = (await getCollection("prinzipien"))
   .toSorted((a, b) => a.order - b.order);
 ---
 
-<StepPage title={frontmatter.title} isWide canEditPruefbereich>
+<StepPage
+  title={frontmatter.title}
+  isWide
+  canEditPruefbereich
+  finalNext={{ href: assistent.path, label: "Zurück zur Übersicht" }}
+>
   {/* Depends on the stored Prüfbereich and EU-Bezug */}
   <Abschliessen client:only="react" prinzipien={prinzipien} />
 </StepPage>

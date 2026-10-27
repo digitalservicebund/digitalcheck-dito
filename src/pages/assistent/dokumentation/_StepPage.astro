@@ -14,9 +14,11 @@ interface Props {
   /** Lets the user change the Prüfbereich, e.g. on the final page */
   canEditPruefbereich?: boolean;
   isWide?: boolean;
+  /** See WizardButtonBar */
+  finalNext?: { href: string; label: string };
 }
 
-const { title, canEditPruefbereich = false, isWide } = Astro.props;
+const { title, canEditPruefbereich = false, isWide, finalNext } = Astro.props;
 
 const session = getWizardSession("dokumentation", Astro.url.pathname);
 
@@ -60,13 +62,16 @@ const prinzipien = (await getCollection("prinzipien"))
     slot="button-bar"
     wizardId="dokumentation"
     fallbackBackHref={assistent_dokumentation.path}
+    finalNext={finalNext}
   >
-    <WordDownloadButton
-      client:load
-      prinzipien={prinzipien}
-      label="Zwischenstand herunterladen"
-      look="tertiary"
-    />
+    {!finalNext && (
+      <WordDownloadButton
+        client:load
+        prinzipien={prinzipien}
+        label="Zwischenstand herunterladen"
+        look="tertiary"
+      />
+    )}
   </WizardButtonBar>
 </WizardLayout>
 
