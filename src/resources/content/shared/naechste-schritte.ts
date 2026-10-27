@@ -1,7 +1,7 @@
 import {
+  assistent_dokumentation,
   assistent_erarbeitung,
   assistent_vorpruefung,
-  dokumentation,
 } from "@/config/routes";
 import type { Step } from "@/utils/contentTypes.ts";
 
@@ -57,7 +57,7 @@ export const steps = {
       "Dokumentieren Sie in einem Fragebogen, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben. Beschreiben Sie, wie Sie diese in das Regelungsvorhaben einfließen lassen. Die Erkenntnisse der vorigen Schritte helfen Ihnen beim Ausfüllen.",
     link: {
       text: "Zu „Dokumentieren“",
-      to: dokumentation.path,
+      to: assistent_dokumentation.path,
     },
     isDisabled: false,
     finished: {

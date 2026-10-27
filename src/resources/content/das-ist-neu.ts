@@ -1,7 +1,7 @@
 import {
+  assistent_dokumentation,
   bundeslaender,
   dasIstNeu,
-  dokumentation,
   interoperabel,
   interoperabel_angrenzendesEuRecht,
   interoperabel_loesungen,
@@ -81,7 +81,7 @@ export const news = {
       content: dedent`
         Erweiterung der Online-Dokumentation um Fragen zur EU-Interoperabilität
         
-        [Hier ansehen](${dokumentation.path})`,
+        [Hier ansehen](${assistent_dokumentation.path})`,
     },
     {
       badge: {
@@ -110,7 +110,7 @@ export const news = {
         - Kürzere und übersichtlichere Word-Dokumentation
         - Verbesserte Screenreader-Unterstützung
 
-        [Hier ansehen](${dokumentation.path})`,
+        [Hier ansehen](${assistent_dokumentation.path})`,
     },
     {
       badge: {
@@ -232,7 +232,7 @@ export const news = {
           - Immer aktuell: Sie nutzen automatisch die neueste Fassung. Veraltete Word-Dokumente und Abstimmungsaufwand entfallen.
           - Flexibel bearbeiten: Sie können jederzeit unterbrechen und die Arbeit ohne Datenverlust später fortsetzen.
        Das fertige Ergebnis (wie bisher als Word-Datei) übermitteln Sie direkt an den NKR.
-       [Hier ansehen](${dokumentation.path})
+       [Hier ansehen](${assistent_dokumentation.path})
       `,
     },
     {
