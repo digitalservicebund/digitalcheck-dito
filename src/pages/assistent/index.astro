@@ -7,8 +7,8 @@ import TimelineList from "@/components/TimelineList.astro";
 import WizardStartActions from "@/components/wizard/WizardStartActions.astro";
 import {
   assistent_dokumentation,
+  assistent_erarbeitung,
   assistent_vorpruefung,
-  methoden,
 } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
 
@@ -109,7 +109,7 @@ export const frontmatter = {
             </p>
             <div>
               <LinkButton
-                href={methoden.path}
+                href={assistent_erarbeitung.path}
                 iconRight="kern-icon--arrow-forward"
               >
                 Zu diesem Schritt

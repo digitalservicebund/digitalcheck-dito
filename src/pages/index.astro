@@ -10,10 +10,10 @@ import {
   bundeslaender,
   interoperabel,
   interoperabel_nationaleKontaktstelle,
-  methoden,
   prinzipien,
   assistent,
   assistent_dokumentation,
+  assistent_erarbeitung,
   assistent_vorpruefung,
 } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
@@ -68,7 +68,7 @@ const steps = [
         text: "Digitaltaugliche Regelung und Visualisierungen",
       },
     ],
-    link: { text: "Zur Erarbeitung", href: methoden.path },
+    link: { text: "Zur Erarbeitung", href: assistent_erarbeitung.path },
     externalLink: {
       text: "Ressourcen",
       href: ZFL_BASE_URL + ZFL_PATH_RESSOURCEN,
