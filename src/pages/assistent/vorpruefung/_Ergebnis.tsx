@@ -248,11 +248,11 @@ function Steps({
         <>
           <p>Laden Sie Ihr Vorprüfungsergebnis herunter, um es zu verakten.</p>
           <div className="pt-16">
-            {/* TODO: Generate the PDF */}
+            {/* TODO: Generate the PDF, until then the print dialog can save one */}
             <button
               type="button"
               className="kern-btn kern-btn--primary"
-              disabled
+              onClick={() => globalThis.print()}
             >
               <span
                 className="kern-icon kern-icon--download"
@@ -306,7 +306,7 @@ function Steps({
   const isSingleStep = steps.length === 1;
 
   return (
-    <div className="breakout space-y-32">
+    <div className="breakout space-y-32 print:hidden">
       {steps.map(({ heading, content }, index) => (
         <section
           key={heading}
@@ -336,7 +336,7 @@ function Faq({ hasEmail }: { hasEmail: boolean }) {
   ].filter((item) => item !== false);
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-16 print:hidden">
       <h2 className="kern-heading-medium">Häufige Fragen zum Ergebnis</h2>
       <div>
         {items.map(({ question, answer }) => (
@@ -417,7 +417,7 @@ export default function Ergebnis() {
       )}
 
       <div className="space-y-16">
-        <h2 className="kern-heading-medium">
+        <h2 className="kern-heading-medium print:hidden">
           So kommt das Ergebnis zustande – jede Antwort einzeln korrigierbar:
         </h2>
         <ResultTable />
