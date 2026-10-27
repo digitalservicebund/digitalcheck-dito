@@ -217,7 +217,7 @@ export default function Zusammenfassung({
                 antwort === "yes" && [
                   "Schwerpunkte",
                   selected.length > 0 ? (
-                    <ul className="flex flex-wrap gap-8">
+                    <ul className="list-unstyled flex flex-wrap gap-8">
                       {selected.map((slug) => (
                         <li
                           key={slug}
