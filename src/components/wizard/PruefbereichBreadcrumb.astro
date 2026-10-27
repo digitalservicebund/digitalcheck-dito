@@ -24,6 +24,13 @@ const startRoutes = {
   dokumentation: assistent_dokumentation,
 } as const satisfies Record<WizardId, unknown>;
 const startRoute = startRoutes[wizardId];
+
+// The tallest logo of the offered options, so switching doesn't shift the layout
+const minHeight = Math.max(
+  ...pruefbereichOptions.map(
+    ({ value }) => pruefbereichLogos[value]?.height ?? 0,
+  ),
+);
 ---
 
 <!--
@@ -31,7 +38,10 @@ const startRoute = startRoutes[wizardId];
   exist once per option, as the stored one is only known in the browser; the
   Bund is shown without one.
 -->
-<div class="flex flex-wrap items-center gap-x-kern-sm">
+<div
+  class="flex flex-wrap items-center gap-x-kern-sm"
+  style={{ minHeight: `${minHeight}px` }}
+>
   {pruefbereichOptions.map(({ value }) => {
     const logo = pruefbereichLogos[value];
     return (
