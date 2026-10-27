@@ -16,7 +16,7 @@ export const frontmatter = {
   <h1 class="sr-only">{frontmatter.title}</h1>
   {/* Depends on the stored answers and Prüfbereich */}
   <Ergebnis client:only="react" />
-  <PruefbereichBreadcrumb slot="context" wizardId="vorpruefung" showEditLink />
+  <PruefbereichBreadcrumb slot="context" wizardId="vorpruefung" canEdit />
   <WizardButtonBar
     slot="button-bar"
     wizardId="vorpruefung"

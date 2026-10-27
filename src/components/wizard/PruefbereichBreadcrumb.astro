@@ -10,16 +10,15 @@ import { Image } from "astro:assets";
 
 interface Props {
   wizardId: WizardId;
-  /** Links to the start page to change the Prüfbereich, e.g. on the final page */
-  showEditLink?: boolean;
+  /** Shows a menu to change the Prüfbereich, e.g. on the final page */
+  canEdit?: boolean;
 }
 
-const { wizardId, showEditLink = false } = Astro.props;
+const { wizardId, canEdit = false } = Astro.props;
 
 // Without Länder, there's nothing to change to
-const isEditable = showEditLink && pruefbereichOptions.length > 1;
+const isEditable = canEdit && pruefbereichOptions.length > 1;
 
-// The Prüfbereich is chosen on the start page
 const startRoutes = {
   vorpruefung: assistent_vorpruefung,
   dokumentation: assistent_dokumentation,
@@ -28,68 +27,97 @@ const startRoute = startRoutes[wizardId];
 ---
 
 <!--
-  Shows the Prüfbereich for the context slot of WizardLayout. One variant per
-  option, as the stored one is only known in the browser; the Bund is shown
-  without one.
+  Shows the Prüfbereich for the context slot of WizardLayout. Logo and label
+  exist once per option, as the stored one is only known in the browser; the
+  Bund is shown without one.
 -->
-<div>
-  {pruefbereichOptions.map(({ value, label }) => {
+<div class="flex flex-wrap items-center gap-x-kern-sm">
+  {pruefbereichOptions.map(({ value }) => {
     const logo = pruefbereichLogos[value];
     return (
-      <div
-        class="flex flex-wrap items-center gap-x-kern-sm"
-        data-pruefbereich={value}
-        hidden={value !== "Bund"}
-      >
-        {logo && (
-          <Image
-            src={logo.image}
-            alt=""
-            width={logo.width}
-            height={logo.height}
-            densities={[1, 2]}
-          />
-        )}
-        <p class="kern-body kern-body--small py-0 my-0">
-          {startRoute.title} für:{" "}
-          {isEditable ? (
-            <a
-              class="kern-link kern-link--small py-0 font-bold"
-              href={startRoute.path}
-            >
-              {label}
-              <span class="sr-only">ändern</span>
-              <span
-                class="kern-icon kern-icon--edit kern-icon--small"
-                aria-hidden="true"
-              />
-            </a>
-          ) : (
-            <b>{label}</b>
-          )}
-        </p>
-        {isEditable && (
-          <p class="kern-preline kern-preline--small py-0 print:hidden">
-            (Bisherige Angaben bleiben beim Wechsel erhalten)
-          </p>
-        )}
-      </div>
+      logo && (
+        <Image
+          src={logo.image}
+          alt=""
+          width={logo.width}
+          height={logo.height}
+          densities={[1, 2]}
+          data-pruefbereich={value}
+          hidden={value !== "Bund"}
+        />
+      )
     );
   })}
+  <div class="kern-body kern-body--small py-0 my-0">
+    {startRoute.title} für:{" "}
+    {isEditable ? (
+      <details
+        class="inline-block md:relative"
+        data-pruefbereich-dropdown={wizardId}
+      >
+        <summary class="kern-link kern-link--small py-0 font-bold cursor-pointer [&::-webkit-details-marker]:hidden">
+          {pruefbereichOptions.map(({ value, label }) => (
+            <span data-pruefbereich={value} hidden={value !== "Bund"}>
+              {label}
+            </span>
+          ))}
+          <span class="sr-only">ändern</span>
+          <span
+            class="kern-icon kern-icon--edit kern-icon--small print:hidden"
+            aria-hidden="true"
+          />
+        </summary>
+        {/* On mobile across the full width of the next positioned ancestor (the context bar of WizardLayout), below the summary */}
+        <fieldset
+          aria-label="Prüfbereich"
+          class="absolute inset-x-0 z-20 mt-kern-xs overflow-clip md:top-full md:right-auto md:w-max md:min-w-sm rounded-(--kern-metric-border-radius-small) border-(length:--kern-metric-border-width-default) border-kern-layout-text-default bg-kern-layout-layer-surface"
+        >
+          {pruefbereichOptions.map(({ value, label }) => (
+            <label class="flex cursor-pointer items-center gap-kern-sm px-kern-md py-12 hover:bg-(--kern-color-action-state-indicator-tint-hover-opacity) has-checked:bg-(--kern-color-action-state-indicator-default)/12 has-focus-visible:outline-4 has-focus-visible:-outline-offset-4 has-focus-visible:outline-blue-800">
+              <input
+                type="radio"
+                name={`${wizardId}-pruefbereich-menu`}
+                value={value}
+                checked={value === "Bund"}
+                class="peer sr-only"
+              />
+              <span
+                class="kern-icon kern-icon--check invisible bg-kern-layout-text-default peer-checked:visible"
+                aria-hidden="true"
+              />
+              <span class="kern-body py-0">{label}</span>
+            </label>
+          ))}
+        </fieldset>
+      </details>
+    ) : (
+      <b>
+        {pruefbereichOptions.map(({ value, label }) => (
+          <span data-pruefbereich={value} hidden={value !== "Bund"}>
+            {label}
+          </span>
+        ))}
+      </b>
+    )}
+  </div>
+  {isEditable && (
+    <p class="kern-preline kern-preline--small py-0 print:hidden">
+      (Bisherige Angaben bleiben beim Wechsel erhalten)
+    </p>
+  )}
 </div>
 
 <!--
   Inline instead of bundled, so the stored Prüfbereich is shown before the
   page is painted. Reads localStorage like the wizard store, also after changes
-  in another tab and when coming back via the browser history. An unknown one
-  (e.g. a Land without the feature flag) shows the Bund, like the store's decoding.
+  in another tab, in the menu and when coming back via the browser history. An
+  unknown one (e.g. a Land without the feature flag) shows the Bund, like the
+  store's decoding.
 -->
 <script is:inline define:vars={{ storageKey: wizardStorageKeys[wizardId] }}>
-  const variants = Array.from(
-    document.currentScript.previousElementSibling.querySelectorAll(
-      "[data-pruefbereich]",
-    ),
-  );
+  const root = document.currentScript.previousElementSibling;
+  const variants = Array.from(root.querySelectorAll("[data-pruefbereich]"));
+  const radios = Array.from(root.querySelectorAll("input[type=radio]"));
   const showStored = () => {
     let pruefbereich;
     try {
@@ -106,8 +134,50 @@ const startRoute = startRoutes[wizardId];
       (variant) =>
         (variant.hidden = variant.dataset.pruefbereich !== pruefbereich),
     );
+    radios.forEach((radio) => (radio.checked = radio.value === pruefbereich));
   };
   showStored();
   addEventListener("storage", showStored);
   addEventListener("pageshow", showStored);
+  // Bubbles up from the menu after the script below has saved the change
+  root.addEventListener("change", showStored);
+</script>
+
+<script>
+  import { pruefbereich } from "@/wizard/pruefbereichSchema";
+  import type { WizardId } from "@/wizard/session";
+  import { wizardStores } from "@/wizard/stores";
+
+  // Saves via the store, so islands depending on the Prüfbereich update
+  document
+    .querySelectorAll<HTMLDetailsElement>("[data-pruefbereich-dropdown]")
+    .forEach((dropdown) => {
+      const { save } =
+        wizardStores[dropdown.dataset.pruefbereichDropdown as WizardId];
+      const summary = dropdown.querySelector("summary");
+      const close = () => {
+        dropdown.open = false;
+        summary?.focus();
+      };
+
+      dropdown.addEventListener("change", (event) => {
+        const { value } = event.target as HTMLInputElement;
+        save({ pruefbereich: pruefbereich.parse(value) });
+      });
+      // Arrow keys also select an option, so only clicks on one close the menu
+      dropdown.addEventListener("click", (event) => {
+        const target = event.target as Element;
+        if (target.closest("label") && !(target instanceof HTMLInputElement)) {
+          close();
+        }
+      });
+      dropdown.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && dropdown.open) close();
+      });
+      const closeIfOutside = (event: Event) => {
+        if (!dropdown.contains(event.target as Node)) dropdown.open = false;
+      };
+      document.addEventListener("click", closeIfOutside);
+      document.addEventListener("focusin", closeIfOutside);
+    });
 </script>

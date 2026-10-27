@@ -12,11 +12,11 @@ interface Props {
   /** Short page title, used in the document title */
   title: string;
   /** Lets the user change the Prüfbereich, e.g. on the final page */
-  showPruefbereichEditLink?: boolean;
+  canEditPruefbereich?: boolean;
   isWide?: boolean;
 }
 
-const { title, showPruefbereichEditLink = false, isWide } = Astro.props;
+const { title, canEditPruefbereich = false, isWide } = Astro.props;
 
 const session = getWizardSession("dokumentation", Astro.url.pathname);
 
@@ -53,7 +53,7 @@ const prinzipien = (await getCollection("prinzipien"))
   <PruefbereichBreadcrumb
     slot="context"
     wizardId="dokumentation"
-    showEditLink={showPruefbereichEditLink}
+    canEdit={canEditPruefbereich}
   />
   <slot name="help" slot="help" />
   <WizardButtonBar
