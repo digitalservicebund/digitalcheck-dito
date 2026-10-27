@@ -5,7 +5,7 @@ import {
   assistent_vorpruefung,
 } from "@/config/routes";
 import { pruefbereichOptions } from "@/wizard/pruefbereichSchema";
-import { wizardStorageKeys, type WizardId } from "@/wizard/session";
+import { pruefbereichStorageKey, type WizardId } from "@/wizard/session";
 import { Image } from "astro:assets";
 
 interface Props {
@@ -51,10 +51,7 @@ const startRoute = startRoutes[wizardId];
   <div class="kern-body kern-body--small py-0 my-0">
     {startRoute.title} für:{" "}
     {isEditable ? (
-      <details
-        class="inline-block md:relative"
-        data-pruefbereich-dropdown={wizardId}
-      >
+      <details class="inline-block md:relative" data-pruefbereich-dropdown>
         <summary class="kern-link kern-link--small py-0 font-bold cursor-pointer [&::-webkit-details-marker]:hidden">
           {pruefbereichOptions.map(({ value, label }) => (
             <span data-pruefbereich={value} hidden={value !== "Bund"}>
@@ -100,8 +97,12 @@ const startRoute = startRoutes[wizardId];
       </b>
     )}
   </div>
+  {/* Toggled on the start pages by WizardStartActions. The final pages are only reached with answers. */}
   {isEditable && (
-    <p class="kern-preline kern-preline--small py-0 print:hidden">
+    <p
+      class="kern-preline kern-preline--small py-0 print:hidden"
+      data-show-if="answers-stored"
+    >
       (Bisherige Angaben bleiben beim Wechsel erhalten)
     </p>
   )}
@@ -109,22 +110,17 @@ const startRoute = startRoutes[wizardId];
 
 <!--
   Inline instead of bundled, so the stored Prüfbereich is shown before the
-  page is painted. Reads localStorage like the wizard store, also after changes
+  page is painted. Reads localStorage like $pruefbereich, also after changes
   in another tab, in the menu and when coming back via the browser history. An
   unknown one (e.g. a Land without the feature flag) shows the Bund, like the
   store's decoding.
 -->
-<script is:inline define:vars={{ storageKey: wizardStorageKeys[wizardId] }}>
+<script is:inline define:vars={{ storageKey: pruefbereichStorageKey }}>
   const root = document.currentScript.previousElementSibling;
   const variants = Array.from(root.querySelectorAll("[data-pruefbereich]"));
   const radios = Array.from(root.querySelectorAll("input[type=radio]"));
   const showStored = () => {
-    let pruefbereich;
-    try {
-      ({ pruefbereich } = JSON.parse(localStorage.getItem(storageKey)) ?? {});
-    } catch {
-      // Unreadable storage counts as none
-    }
+    let pruefbereich = localStorage.getItem(storageKey);
     if (
       !variants.some((variant) => variant.dataset.pruefbereich === pruefbereich)
     ) {
@@ -145,15 +141,12 @@ const startRoute = startRoutes[wizardId];
 
 <script>
   import { pruefbereich } from "@/wizard/pruefbereichSchema";
-  import type { WizardId } from "@/wizard/session";
-  import { wizardStores } from "@/wizard/stores";
+  import { $pruefbereich } from "@/wizard/stores";
 
   // Saves via the store, so islands depending on the Prüfbereich update
   document
     .querySelectorAll<HTMLDetailsElement>("[data-pruefbereich-dropdown]")
     .forEach((dropdown) => {
-      const { save } =
-        wizardStores[dropdown.dataset.pruefbereichDropdown as WizardId];
       const summary = dropdown.querySelector("summary");
       const close = () => {
         dropdown.open = false;
@@ -162,7 +155,7 @@ const startRoute = startRoutes[wizardId];
 
       dropdown.addEventListener("change", (event) => {
         const { value } = event.target as HTMLInputElement;
-        save({ pruefbereich: pruefbereich.parse(value) });
+        $pruefbereich.set(pruefbereich.parse(value));
       });
       // Arrow keys also select an option, so only clicks on one close the menu
       dropdown.addEventListener("click", (event) => {

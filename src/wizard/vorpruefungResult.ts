@@ -9,7 +9,7 @@ import {
 } from "@/config/routes";
 import {
   answerOptions,
-  questionFields,
+  vorpruefungFields,
   type Answer,
   type VorpruefungQuestion,
 } from "./vorpruefungSchema";
@@ -112,5 +112,5 @@ export const resultRows = {
 
 // Same order as the questions in the flow
 export const questionNames = Object.keys(
-  questionFields,
+  vorpruefungFields,
 ) as VorpruefungQuestion[];

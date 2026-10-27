@@ -1,4 +1,4 @@
-import { wizardStores } from "@/wizard/stores";
+import { $pruefbereich, wizardStores } from "@/wizard/stores";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it } from "vitest";
@@ -15,10 +15,12 @@ const stepHeadings = () =>
 describe("Abschliessen", () => {
   beforeEach(() => {
     store.reset();
+    $pruefbereich.set(undefined);
   });
 
   it("adds the NKR and the Nationale Kontaktstelle for the Bund with EU-Bezug", () => {
-    store.save({ pruefbereich: "Bund", "eu-interoperabilitaet-bezug": "yes" });
+    $pruefbereich.set("Bund");
+    store.save({ "eu-interoperabilitaet-bezug": "yes" });
     render(<Abschliessen prinzipien={[]} />);
 
     expect(stepHeadings()).toEqual([
@@ -33,7 +35,8 @@ describe("Abschliessen", () => {
   });
 
   it("only adds the NKR for the Bund without EU-Bezug", () => {
-    store.save({ pruefbereich: "Bund", "eu-interoperabilitaet-bezug": "no" });
+    $pruefbereich.set("Bund");
+    store.save({ "eu-interoperabilitaet-bezug": "no" });
     render(<Abschliessen prinzipien={[]} />);
 
     expect(stepHeadings()).toEqual([
@@ -53,10 +56,8 @@ describe("Abschliessen", () => {
   });
 
   it("skips the NKR for a Land with EU-Bezug", () => {
-    store.save({
-      pruefbereich: "Hessen",
-      "eu-interoperabilitaet-bezug": "yes",
-    });
+    $pruefbereich.set("Hessen");
+    store.save({ "eu-interoperabilitaet-bezug": "yes" });
     render(<Abschliessen prinzipien={[]} />);
 
     expect(stepHeadings()).toEqual([
@@ -67,7 +68,7 @@ describe("Abschliessen", () => {
   });
 
   it("doesn't number the only step for a Land without EU-Bezug", () => {
-    store.save({ pruefbereich: "Hessen" });
+    $pruefbereich.set("Hessen");
     render(<Abschliessen prinzipien={[]} />);
 
     expect(stepHeadings()).toEqual(["Dokumentation herunterladen"]);

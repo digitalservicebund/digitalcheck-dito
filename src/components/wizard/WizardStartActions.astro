@@ -16,7 +16,7 @@ interface Props {
   href: string;
   /** Shows the autosave hint while no answers are stored */
   showAutosaveHint?: boolean;
-  /** Shows the select of the Prüfbereich above, which is stored when the wizard is started. Afterwards it can be changed via the breadcrumb. */
+  /** Shows the select of the Prüfbereich above, which is stored when the wizard is started. Once stored (also by the other wizard), it's changed via the breadcrumb instead. */
   showPruefbereich?: boolean;
 }
 
@@ -35,7 +35,7 @@ const modalId = `${wizardId}-start-over-modal`;
     <>
       <div
         class="kern-form-input max-w-400"
-        data-show-if="no-answers-stored"
+        data-show-if-pruefbereich="none"
         hidden
       >
         <label class="kern-label" for={`${wizardId}-pruefbereich`}>
@@ -52,8 +52,8 @@ const modalId = `${wizardId}-start-over-modal`;
           </select>
         </div>
       </div>
-      {/* Once started, the Prüfbereich is stored and changed like on the final page. Positioned for its menu on mobile. */}
-      <div class="relative" data-show-if="answers-stored" hidden>
+      {/* Positioned for its menu on mobile */}
+      <div class="relative" data-show-if-pruefbereich="stored" hidden>
         <PruefbereichBreadcrumb wizardId={wizardId} canEdit />
       </div>
     </>
@@ -138,14 +138,13 @@ const modalId = `${wizardId}-start-over-modal`;
 <script>
   import { pruefbereich } from "@/wizard/pruefbereichSchema";
   import type { WizardId } from "@/wizard/session";
-  import { wizardStores } from "@/wizard/stores";
+  import { $pruefbereich, wizardStores } from "@/wizard/stores";
 
   document
     .querySelectorAll<HTMLElement>("[data-wizard-start-actions]")
     .forEach((container) => {
       const wizardId = container.dataset.wizardStartActions as WizardId;
-      const { $data, $hasAnswers, $resumePath, save, reset } =
-        wizardStores[wizardId];
+      const { $hasAnswers, $resumePath, reset } = wizardStores[wizardId];
       const startLink =
         container.querySelector<HTMLAnchorElement>("[data-start-link]");
       const pruefbereichSelect = document.getElementById(
@@ -172,28 +171,33 @@ const modalId = `${wizardId}-start-over-modal`;
         );
       });
 
-      // Shows the stored Prüfbereich, otherwise keeps the preselected Bund
-      $data.subscribe((data) => {
-        if (pruefbereichSelect && data.pruefbereich) {
-          pruefbereichSelect.value = data.pruefbereich;
-        }
+      // Shows the select until a Prüfbereich is stored, then the breadcrumb.
+      // Also updates when it's stored later, e.g. by the other wizard in another tab.
+      $pruefbereich.subscribe((stored) => {
+        const visibleIf = stored ? "stored" : "none";
+        container
+          .querySelectorAll<HTMLElement>("[data-show-if-pruefbereich]")
+          .forEach(
+            (element) =>
+              (element.hidden =
+                element.dataset.showIfPruefbereich !== visibleIf),
+          );
       });
 
-      // Stored only when starting, so choosing it doesn't count as an answer
-      const savePruefbereich = () => {
-        if (!pruefbereichSelect) return;
-        save({
-          pruefbereich: pruefbereich.safeParse(pruefbereichSelect.value).data,
-        });
-      };
-      startLink?.addEventListener("click", savePruefbereich);
+      // Stored when starting, unless it's already stored and shown in the breadcrumb
+      startLink?.addEventListener("click", () => {
+        if (!pruefbereichSelect || $pruefbereich.get()) return;
+        $pruefbereich.set(
+          pruefbereich.safeParse(pruefbereichSelect.value).data,
+        );
+      });
 
       // Buttons starts hidden until html is hydrated,
       // to avoid flashing the wrong state.
       startLink?.removeAttribute("hidden");
 
-      // Clears the answers once the user confirms the dialog and stays on the page,
-      // so the Prüfbereich can be chosen again before starting.
+      // Clears the answers once the user confirms the dialog and stays on the page.
+      // Keeps the Prüfbereich, as it's shared with the other wizard.
       // Focuses the start link, as the restart button that opened the dialog is hidden now.
       container
         .querySelector("[data-reset-wizard]")
