@@ -22,7 +22,7 @@ export default function ResultTable() {
             <th className="kern-table__header" scope="col">
               Antwort
             </th>
-            <th className="kern-table__header" scope="col">
+            <th className="kern-table__header max-sm:hidden" scope="col">
               Auswirkung
             </th>
             <th
@@ -45,7 +45,7 @@ export default function ResultTable() {
                 <td className="kern-table__cell">
                   {answer ? answerLabels[answer] : "–"}
                 </td>
-                <td className="kern-table__cell">
+                <td className="kern-table__cell max-sm:hidden">
                   {answer ? explanations[answer] : "Noch nicht beantwortet."}
                 </td>
                 <td className="kern-table__cell kern-table__cell--action print:hidden">

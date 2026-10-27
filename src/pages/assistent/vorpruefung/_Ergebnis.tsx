@@ -366,7 +366,7 @@ export default function Ergebnis() {
   const hasEmail = isBund || result === "digitalAndInteroperability";
 
   return (
-    <div className="breakout space-y-64">
+    <div className="breakout space-y-48 sm:space-y-64">
       {result === "contradiction" && (
         <WarningAlert title="Widerspruch in Ihren Angaben">
           <p className="kern-body">

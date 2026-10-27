@@ -88,7 +88,7 @@ export default function Abschliessen({
   ].filter((step) => step !== false);
 
   return (
-    <div className="space-y-64">
+    <div className="space-y-48 sm:space-y-64">
       <div className="space-y-16">
         <h1 className="kern-heading-large">Dokumentation abschließen</h1>
         {isBund && (
