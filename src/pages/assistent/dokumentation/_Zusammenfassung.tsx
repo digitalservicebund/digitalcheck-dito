@@ -142,7 +142,7 @@ function Summary({
           ) : (
             <Missing>Sie haben diesen Punkt noch nicht bearbeitet.</Missing>
           ))}
-        <div className="kern-summary__actions">
+        <div className="kern-summary__actions print:hidden">
           <a href={path} className="kern-link">
             <span className="kern-icon kern-icon--edit" aria-hidden="true" />
             Bearbeiten<span className="sr-only">: {title}</span>
