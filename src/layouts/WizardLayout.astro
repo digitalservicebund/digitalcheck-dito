@@ -15,7 +15,8 @@ const { title, progress, isWide = false } = Astro.props;
 <!--
   Slots:
   - default: step content (heading, text, form)
-  - context: context bar, e.g. "Vorprüfung für: Bund"
+  - context: context bar, e.g. "Vorprüfung für: Bund". Positioned, so menus
+    in it can span its full width on mobile.
   - button-bar: <WizardButtonBar />
   - help: <HelpSection />s, shown in the help panel next to the content
   The section sidebar is rendered by Layout.astro.
@@ -25,7 +26,7 @@ const { title, progress, isWide = false } = Astro.props;
   <div class="flex h-full min-w-0 flex-1">
     <div class="flex min-w-0 flex-1 flex-col">
       {Astro.slots.has("context") && (
-        <div class="px-kern-md pt-kern-md pb-kern-sm">
+        <div class="relative px-kern-md pt-kern-md pb-kern-sm">
           <slot name="context" />
         </div>
       )}
