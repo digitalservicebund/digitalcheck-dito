@@ -48,7 +48,7 @@ export default function ResultTable() {
                 <td className="kern-table__cell max-sm:hidden">
                   {answer ? explanations[answer] : "Noch nicht beantwortet."}
                 </td>
-                <td className="kern-table__cell kern-table__cell--action print:hidden">
+                <td className="kern-table__cell kern-table__cell--action py-8 print:hidden">
                   <a href={route.path} className="kern-link">
                     <span
                       className="kern-icon kern-icon--edit"
