@@ -17,7 +17,7 @@ const { title, progress, isWide = false } = Astro.props;
   - default: step content (heading, text, form)
   - context: context bar, e.g. "Vorprüfung für: Bund". Positioned, so menus
     in it can span its full width on mobile.
-  - button-bar: <WizardButtonBar />
+  - button-bar: <WizardButtonBar />, at the end of the content
   - help: <HelpSection />s, shown in the help panel next to the content
   The section sidebar is rendered by Layout.astro.
 -->
@@ -57,9 +57,14 @@ const { title, progress, isWide = false } = Astro.props;
             </div>
           )}
           <slot />
+          {/* pt + space-y: 64px between the content and the buttons */}
+          {Astro.slots.has("button-bar") && (
+            <div class="pt-kern-xl">
+              <slot name="button-bar" />
+            </div>
+          )}
         </div>
       </main>
-      <slot name="button-bar" />
     </div>
     {Astro.slots.has("help") && (
       <HelpSidepanel class="xl:w-300 xl:shrink-0 min-[94rem]:w-384">

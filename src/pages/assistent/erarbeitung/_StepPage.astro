@@ -147,9 +147,10 @@ const linkIcon = (href: string) =>
     )}
   </div>
 
+  <!-- Looks like WizardButtonBar, without stored data or autosave hint -->
   <div
     slot="button-bar"
-    class="bg-kern-layout-background-default sticky bottom-0 z-10 flex flex-wrap justify-end gap-kern-md border-t border-kern-layout-border px-kern-md py-kern-md min-[900px]:px-64"
+    class="flex flex-wrap items-center justify-end gap-kern-md *:flex-1 sm:*:flex-none print:hidden"
   >
     <a href={backHref} class="kern-btn kern-btn--secondary link-unstyled">
       <span class="kern-label">Zurück</span>
