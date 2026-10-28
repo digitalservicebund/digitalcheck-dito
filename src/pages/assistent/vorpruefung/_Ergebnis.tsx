@@ -429,8 +429,7 @@ export default function Ergebnis() {
       </div>
 
       {result === "unsure" && (
-        // Full width and flush with the button bar (pb-80 of WizardLayout)
-        <section className="breakout bg-kern-darkblue-025 -mb-80 space-y-16">
+        <section className="breakout bg-kern-darkblue-025 space-y-16">
           <h2 className="kern-heading-medium">
             Sie können auch ohne positive Vorprüfung die Digitaltauglichkeit
             Ihres Regelungsvorhabens sicherstellen.
