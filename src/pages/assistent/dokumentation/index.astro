@@ -105,8 +105,16 @@ const faqItems = [
         <Fragment slot="continueLabel">Dokumentation fortsetzen</Fragment>
         <Fragment slot="restartLabel">Neue Dokumentation beginnen</Fragment>
         <Fragment slot="modalBody">
-          Mit einer neuen Dokumentation werden die Daten der begonnenen
-          Dokumentation gelöscht. Diese können nicht wiederhergestellt werden.
+          <p>
+            Mit einer neuen Dokumentation werden die Daten der begonnenen
+            Dokumentation gelöscht. Diese können nicht wiederhergestellt werden.
+          </p>
+          <WordDownloadButton
+            client:load
+            prinzipien={prinzipien}
+            label="Zwischenstand herunterladen"
+            look="tertiary"
+          />
         </Fragment>
       </WizardStartActions>
     </Hero>
