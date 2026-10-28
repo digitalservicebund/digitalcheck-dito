@@ -43,10 +43,10 @@ const selectionId = `${field.name}-selection`;
     </summary>
     <fieldset
       aria-labelledby={field.labelId}
-      class="absolute inset-x-0 top-full z-20 mt-4 min-w-0 rounded border border-kern-layout-border bg-white py-8 shadow-lg"
+      class="absolute inset-x-0 top-full z-20 mt-kern-xs min-w-0 overflow-clip rounded-(--kern-metric-border-radius-small) border-(length:--kern-metric-border-width-default) border-kern-layout-text-default bg-kern-layout-layer-surface"
     >
       {options.map((option, index) => (
-        <label class="flex cursor-pointer items-center justify-between gap-16 px-16 py-12 hover:bg-kern-layout-background-hued has-focus-visible:outline-4 has-focus-visible:-outline-offset-4 has-focus-visible:outline-blue-800">
+        <label class="flex cursor-pointer items-center gap-kern-sm px-kern-md py-12 hover:bg-(--kern-color-action-state-indicator-tint-hover-opacity) has-checked:bg-(--kern-color-action-state-indicator-default)/12 has-focus-visible:outline-4 has-focus-visible:-outline-offset-4 has-focus-visible:outline-blue-800">
           <input
             type="checkbox"
             id={`${field.name}-${index}`}
@@ -55,11 +55,11 @@ const selectionId = `${field.name}-selection`;
             aria-errormessage={field.errorId}
             class="peer sr-only"
           />
-          <span class="kern-body">{option.label}</span>
           <span
-            class="kern-icon kern-icon--check invisible m-0 bg-kern-layout-text-default peer-checked:visible"
+            class="kern-icon kern-icon--check invisible bg-kern-layout-text-default peer-checked:visible"
             aria-hidden="true"
           />
+          <span class="kern-body py-0">{option.label}</span>
         </label>
       ))}
     </fieldset>
