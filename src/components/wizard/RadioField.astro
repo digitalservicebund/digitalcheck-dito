@@ -23,7 +23,7 @@ const { field, options } = Astro.props;
   data-wizard-field={field.name}
 >
   {options.map((option, index) => (
-    <p class="kern-form-check">
+    <p class="kern-form-check mb-0">
       <input
         type="radio"
         id={`${field.name}-${index}`}
