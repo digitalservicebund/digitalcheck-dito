@@ -58,7 +58,7 @@ function RadioGroup<FormData, Value extends string | number = string>({
         const id = opt.id ?? `${String(field.name())}-${idx}`;
 
         return (
-          <p className="kern-form-check" key={id}>
+          <p className="kern-form-check mb-0" key={id}>
             <input
               {...field.getInputProps({
                 type: "radio",
