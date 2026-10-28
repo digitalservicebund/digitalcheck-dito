@@ -40,13 +40,13 @@ const erklaerung = fields[names.erklaerung] as StepField<string>;
 <StepPage title={title}>
   <div class="space-y-48">
     <div class="space-y-16">
-      <h1 class="kern-heading-large">
+      <h1 class="kern-heading-medium">
         <slot name="heading" />
       </h1>
       <slot />
     </div>
     <div class="space-y-16">
-      <h2 id={bewertung.labelId} class="kern-heading-medium">
+      <h2 id={bewertung.labelId} class="kern-heading-small">
         <slot name="question" />
       </h2>
       <RadioField field={bewertung} options={bewertungOptions} />

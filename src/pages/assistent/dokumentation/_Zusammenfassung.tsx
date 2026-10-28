@@ -173,7 +173,7 @@ export default function Zusammenfassung({
     <div className="space-y-32">
       <div className="kern-summary-group">
         <div className="kern-summary-group__header">
-          <h2 className="kern-heading-medium">Prinzipien</h2>
+          <h2 className="kern-heading-small">Prinzipien</h2>
         </div>
         <Summary
           number={1}
@@ -240,7 +240,7 @@ export default function Zusammenfassung({
 
       <div className="kern-summary-group">
         <div className="kern-summary-group__header">
-          <h2 className="kern-heading-medium">EU-Interoperabilität</h2>
+          <h2 className="kern-heading-small">EU-Interoperabilität</h2>
         </div>
         <Summary
           title="Bezug zu EU-Interoperabilität"

@@ -15,9 +15,9 @@ const fields = stepFields(beteiligungsformateSchema);
 
 <!-- The question is the fieldset's legend, so it's announced with the field -->
 <StepPage title={frontmatter.title}>
-  <h1 class="kern-heading-large">{frontmatter.title}</h1>
+  <h1 class="kern-heading-medium">{frontmatter.title}</h1>
   <fieldset>
-    <legend class="kern-heading-medium mb-16">
+    <legend class="kern-heading-small mb-16">
       Entspricht die Umsetzung des Regelungsvorhabens den Bedürfnissen der
       Betroffenen? Wie haben Sie das überprüft?
     </legend>
@@ -31,7 +31,7 @@ const fields = stepFields(beteiligungsformateSchema);
     </TextareaField>
   </fieldset>
   <fieldset>
-    <legend class="kern-heading-medium mb-16">
+    <legend class="kern-heading-small mb-16">
       Wie spiegeln sich die Erkenntnisse, die durch die oben genannten Schritte
       gewonnen wurden, im Regelungsvorhaben wider?
     </legend>

@@ -90,7 +90,7 @@ export default function Abschliessen({
   return (
     <div className="space-y-48 sm:space-y-64">
       <div className="space-y-16">
-        <h1 className="kern-heading-large">Dokumentation abschließen</h1>
+        <h1 className="kern-heading-medium">Dokumentation abschließen</h1>
         {isBund && (
           <p>
             Laden Sie die ausgefüllte Dokumentation herunter und leiten Sie
@@ -109,7 +109,7 @@ export default function Abschliessen({
             {steps.length > 1 && (
               <p className="kern-preline">Schritt {index + 1}</p>
             )}
-            <h2 className="kern-heading-medium">{heading}</h2>
+            <h2 className="kern-heading-small">{heading}</h2>
             {content}
           </section>
         ))}

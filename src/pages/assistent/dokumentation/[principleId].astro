@@ -45,13 +45,13 @@ const schwerpunkteOptions = prinzip.Aspekte.map((aspekt) => ({
       <KernBadge variant={`prinzip-${prinzip.order}`} showIcon={false}>
         Prinzip {prinzip.order}
       </KernBadge>
-      <h1 class="kern-heading-large">
+      <h1 class="kern-heading-medium">
         {prinzip.Name}
         <HelpButton sectionId="prinzip" />
       </h1>
     </div>
     <div class="space-y-24">
-      <h2 id={answer.labelId} class="kern-heading-medium">
+      <h2 id={answer.labelId} class="kern-heading-small">
         Schafft das Regelungsvorhaben die rechtlichen Voraussetzungen für die
         Umsetzung des Prinzips?
       </h2>
@@ -61,7 +61,7 @@ const schwerpunkteOptions = prinzip.Aspekte.map((aspekt) => ({
       <div class="space-y-16">
         <ShowIf field={answer} is={["yes"]}>
           <div class="space-y-16 pb-16">
-            <h2 class="kern-heading-medium">
+            <h2 class="kern-heading-small">
               Erklären Sie, inwiefern Sie auf dieses Prinzip eingegangen sind
             </h2>
             <CheckboxPillsField
@@ -75,12 +75,12 @@ const schwerpunkteOptions = prinzip.Aspekte.map((aspekt) => ({
           </div>
         </ShowIf>
         <ShowIf field={answer} is={["no"]}>
-          <h2 class="kern-heading-medium">
+          <h2 class="kern-heading-small">
             Erklären Sie, warum das Prinzip nicht auf Ihr Vorhaben zutrifft
           </h2>
         </ShowIf>
         <ShowIf field={answer} is={["not-relevant"]}>
-          <h2 class="kern-heading-medium">
+          <h2 class="kern-heading-small">
             Erklären Sie, warum das Prinzip nicht relevant für Ihr Vorhaben ist
           </h2>
         </ShowIf>
