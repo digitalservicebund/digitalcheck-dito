@@ -19,7 +19,10 @@ const { field, options, variant } = Astro.props;
   - default: legend
   Wired up by bindStepForm via `name`.
 -->
-<fieldset class="min-w-0" data-wizard-field={field.name}>
+<fieldset
+  class="min-w-0 has-[[aria-invalid=true]]:border-l-4 has-[[aria-invalid=true]]:border-l-kern-feedback-warning has-[[aria-invalid=true]]:pl-16"
+  data-wizard-field={field.name}
+>
   <legend class="kern-heading-small mb-16">
     <slot />
   </legend>
