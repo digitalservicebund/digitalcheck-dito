@@ -108,16 +108,14 @@ const modalId = `${wizardId}-start-over-modal`;
       >
         <span class="kern-label">Abbrechen</span>
       </button>
-      <button
-        type="button"
+      <a
         class="kern-btn kern-btn--primary"
-        popovertarget={modalId}
-        popovertargetaction="hide"
+        href={href}
         data-reset-wizard
         slot="buttonRight"
       >
         <span class="kern-label">Neu beginnen</span>
-      </button>
+      </a>
     </Modal>
     {showAutosaveHint && (
       <div
@@ -199,14 +197,10 @@ const modalId = `${wizardId}-start-over-modal`;
       // to avoid flashing the wrong state.
       startLink?.removeAttribute("hidden");
 
-      // Clears the answers once the user confirms the dialog and stays on the page.
+      // Clears the answers once the user confirms the dialog, before the link navigates to the first question.
       // Keeps the Prüfbereich, as it's shared with the other wizard.
-      // Focuses the start link, as the restart button that opened the dialog is hidden now.
       container
         .querySelector("[data-reset-wizard]")
-        ?.addEventListener("click", () => {
-          reset();
-          startLink?.focus();
-        });
+        ?.addEventListener("click", reset);
     });
 </script>
