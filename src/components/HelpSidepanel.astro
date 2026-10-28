@@ -51,6 +51,11 @@ const { class: className } = Astro.props;
 <style is:global>
   #help-panel {
     --helppanel-bg: var(--kern-color-layout-background-hued);
+    p,
+    a,
+    li {
+      font-size: var(--kern-typography-font-size-small-static, 16px);
+    }
   }
 
   @media (width < 80rem) {
