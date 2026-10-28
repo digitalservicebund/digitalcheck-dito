@@ -11,12 +11,18 @@ import {
   assistent_vorpruefung,
 } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import WordDownloadButton from "./dokumentation/_WordDownloadButton";
 
 export const frontmatter = {
   title: "Drei Schritte zur Digitaltauglichkeit",
   navLabel: "Übersicht",
   sitemap: false,
 };
+
+const prinzipien = (await getCollection("prinzipien"))
+  .map(({ data }) => data)
+  .toSorted((a, b) => a.order - b.order);
 ---
 
 <Layout title={frontmatter.title}>
@@ -155,9 +161,17 @@ export const frontmatter = {
                 Neue Dokumentation beginnen
               </Fragment>
               <Fragment slot="modalBody">
-                Mit einer neuen Dokumentation werden die Daten der begonnenen
-                Dokumentation gelöscht. Diese können nicht wiederhergestellt
-                werden.
+                <p>
+                  Mit einer neuen Dokumentation werden die Daten der begonnenen
+                  Dokumentation gelöscht. Diese können nicht wiederhergestellt
+                  werden.
+                </p>
+                <WordDownloadButton
+                  client:load
+                  prinzipien={prinzipien}
+                  label="Zwischenstand herunterladen"
+                  look="tertiary"
+                />
               </Fragment>
             </WizardStartActions>
           </div>

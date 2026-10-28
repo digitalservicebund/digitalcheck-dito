@@ -93,12 +93,12 @@ const modalId = `${wizardId}-start-over-modal`;
       ></span>
     </button>
     <Modal id={modalId} contentClass="max-w-600 max-h-screen">
-      <h2 slot="heading" class="kern-title kern-title--large mt-0">
+      <h2 slot="heading" class="kern-title kern-title--large mt-8">
         <slot name="restartLabel" />
       </h2>
-      <p slot="body">
+      <div slot="body" class="space-y-16">
         <slot name="modalBody" />
-      </p>
+      </div>
       <button
         type="button"
         class="kern-btn kern-btn--secondary"
