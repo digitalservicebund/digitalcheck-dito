@@ -344,11 +344,16 @@ export default function Zusammenfassung({
                   "Wann soll der Referentenentwurf voraussichtlich auf der Webseite Ihres Ministeriums veröffentlicht werden?",
                   status && veroeffentlichungLabels[status],
                 ],
-                // The date is optional, so it's only listed when given
+                // The date and link are optional, so they're only listed when given
                 status === "planned" &&
                   !!filled(data["veroeffentlichung-datum"]) && [
                     "Voraussichtliches Veröffentlichungsdatum",
                     data["veroeffentlichung-datum"],
+                  ],
+                status === "published" &&
+                  !!filled(data["veroeffentlichung-link"]) && [
+                    "Link zum Referentenentwurf",
+                    data["veroeffentlichung-link"],
                   ],
               ]}
             />

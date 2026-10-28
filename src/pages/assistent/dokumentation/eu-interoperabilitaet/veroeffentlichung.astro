@@ -35,5 +35,10 @@ const status = fields["veroeffentlichung-status"];
         </Fragment>
       </InputField>
     </ShowIf>
+    <ShowIf field={status} is={["published"]}>
+      <InputField field={fields["veroeffentlichung-link"]}>
+        Link zum Referentenentwurf
+      </InputField>
+    </ShowIf>
   </div>
 </StepPage>
