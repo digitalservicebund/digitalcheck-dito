@@ -29,6 +29,7 @@ const euAnswers: Parameters<typeof toDocumentationData>[0] = {
   "technisch-bewertung": "not-relevant",
   "veroeffentlichung-status": "published",
   "veroeffentlichung-datum": "März 2026",
+  "veroeffentlichung-link": "https://www.bmi.bund.de/referentenentwurf",
 };
 
 describe("toDocumentationData", () => {
@@ -91,10 +92,11 @@ describe("toDocumentationData", () => {
     expect(data.interoperabilityAssessment?.technical?.rating).toBe(
       "not-applicable",
     );
-    // The date is only asked for "planned"
+    // The date is only asked for "planned", the link for "published"
     expect(data.interoperabilityMeta).toEqual({
       publicationStatus: "published",
       publicationDate: undefined,
+      publicationLink: "https://www.bmi.bund.de/referentenentwurf",
     });
   });
 

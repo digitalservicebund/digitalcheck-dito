@@ -353,7 +353,7 @@ describe("Dokumentation steps of the levels of interoperability", () => {
 });
 
 describe("Dokumentation step Veröffentlichung", () => {
-  it("asks for the date only if the publication is planned", async () => {
+  it("asks for the date if planned and the link if published", async () => {
     const { screen, names } = await renderStep(
       Veroeffentlichung,
       assistent_dokumentation_euInteroperabilitaet_veroeffentlichung.path,
@@ -381,6 +381,14 @@ describe("Dokumentation step Veröffentlichung", () => {
     expect(datum.closest("[data-wizard-show-if]")).toHaveAttribute(
       "data-wizard-show-is",
       '["planned"]',
+    );
+    const link = screen.getByRole("textbox", {
+      name: "Link zum Referentenentwurf",
+      hidden: true,
+    });
+    expect(link.closest("[data-wizard-show-if]")).toHaveAttribute(
+      "data-wizard-show-is",
+      '["published"]',
     );
   });
 });

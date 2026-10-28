@@ -173,6 +173,7 @@ export const dokumentationFields = {
     "Bitte wählen Sie eine Option aus.",
   ),
   "veroeffentlichung-datum": text("Bitte geben Sie ein Datum an."),
+  "veroeffentlichung-link": text("Bitte geben Sie einen Link an."),
 } as const;
 
 export type DokumentationField = keyof typeof dokumentationFields;
@@ -292,9 +293,10 @@ export const ebeneSchemas = Object.fromEntries(
   ebenen.map((ebene) => [ebene, ebeneSchema(ebene)]),
 ) as unknown as { [E in Ebene]: ReturnType<typeof ebeneSchema<E>> };
 
-// The date is optional, as in the old Dokumentation: an approximate one is
-// enough, and only asked for "planned"
+// The date and link are optional, as in the old Dokumentation: an approximate
+// date is enough. The date is only asked for "planned", the link for "published".
 export const veroeffentlichungSchema = z.object({
   "veroeffentlichung-status": dokumentationFields["veroeffentlichung-status"],
   "veroeffentlichung-datum": z.string().optional(),
+  "veroeffentlichung-link": z.string().optional(),
 });

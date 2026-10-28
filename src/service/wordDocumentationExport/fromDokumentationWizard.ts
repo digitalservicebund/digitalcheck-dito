@@ -110,9 +110,12 @@ export const toDocumentationData = (
       ),
       interoperabilityMeta: {
         publicationStatus: status ?? "",
-        // The date is only asked for "planned", like in the Zusammenfassung
+        // The date is only asked for "planned" and the link for "published",
+        // like in the Zusammenfassung
         publicationDate:
           status === "planned" ? data["veroeffentlichung-datum"] : undefined,
+        publicationLink:
+          status === "published" ? data["veroeffentlichung-link"] : undefined,
       },
     }),
   };
