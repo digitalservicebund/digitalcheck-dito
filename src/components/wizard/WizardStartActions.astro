@@ -2,7 +2,7 @@
 import Modal from "@/components/Modal.astro";
 import PruefbereichBreadcrumb from "@/components/wizard/PruefbereichBreadcrumb.astro";
 import { pruefbereichOptions } from "@/wizard/pruefbereichSchema";
-import type { WizardId } from "@/wizard/session";
+import { type WizardId, wizardFlows } from "@/wizard/session";
 import IconPublishedWithChanges from "~icons/ic/outline-published-with-changes";
 
 // Slots:
@@ -12,7 +12,7 @@ import IconPublishedWithChanges from "~icons/ic/outline-published-with-changes";
 
 interface Props {
   wizardId: WizardId;
-  /** Target of the start link. The continue link goes to the first unanswered question instead. */
+  /** Target of the start link. The continue link goes to the first unanswered question, "Neu beginnen" to the first question instead. */
   href: string;
   /** Shows the autosave hint while no answers are stored */
   showAutosaveHint?: boolean;
@@ -110,7 +110,7 @@ const modalId = `${wizardId}-start-over-modal`;
       </button>
       <a
         class="kern-btn kern-btn--primary"
-        href={href}
+        href={wizardFlows[wizardId].initialPath}
         data-reset-wizard
         slot="buttonRight"
       >
