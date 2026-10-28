@@ -17,7 +17,10 @@ const hasDescription = Astro.slots.has("description");
   - description: hint below the label
   Wired up by bindStepForm via `name`.
 -->
-<div class="kern-form-input" data-wizard-field={field.name}>
+<div
+  class="kern-form-input has-[[aria-invalid=true]]:border-l-4 has-[[aria-invalid=true]]:border-l-kern-feedback-warning has-[[aria-invalid=true]]:pl-16"
+  data-wizard-field={field.name}
+>
   <label for={field.name} class="kern-label">
     <slot />
   </label>
@@ -32,7 +35,7 @@ const hasDescription = Astro.slots.has("description");
     name={field.name}
     aria-describedby={hasDescription ? field.descriptionId : undefined}
     aria-errormessage={field.errorId}
-    class="kern-form-input__input aria-invalid:border-yellow-700 aria-invalid:text-black aria-invalid:focus:border-4 aria-invalid:focus:border-yellow-700 aria-invalid:focus:outline-none"
+    class="kern-form-input__input aria-invalid:border-kern-feedback-warning aria-invalid:text-black aria-invalid:focus:border-4 aria-invalid:focus:border-kern-feedback-warning aria-invalid:focus:outline-none"
   />
   <FieldError id={field.errorId} />
 </div>

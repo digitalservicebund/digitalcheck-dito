@@ -23,14 +23,17 @@ const selectionId = `${field.name}-selection`;
   renders it where the component first appears, which can be a ListField's
   <template>, whose scripts never run.
 -->
-<div class="kern-form-input" data-wizard-field={field.name}>
+<div
+  class="kern-form-input has-[[aria-invalid=true]]:border-l-4 has-[[aria-invalid=true]]:border-l-kern-feedback-warning has-[[aria-invalid=true]]:pl-16"
+  data-wizard-field={field.name}
+>
   <span id={field.labelId} class="kern-label">
     <slot />
   </span>
   <details class="relative w-full" data-multiselect>
     <summary
       aria-labelledby={`${field.labelId} ${selectionId}`}
-      class="kern-form-input__select-wrapper cursor-pointer list-none focus:outline-none focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-blue-800 has-[~fieldset_[aria-invalid=true]]:border-b-yellow-700 [&::-webkit-details-marker]:hidden"
+      class="kern-form-input__select-wrapper cursor-pointer list-none focus:outline-none focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-blue-800 has-[~fieldset_[aria-invalid=true]]:border-b-kern-feedback-warning [&::-webkit-details-marker]:hidden"
     >
       <span
         id={selectionId}

@@ -18,7 +18,7 @@ const { field, options } = Astro.props;
 -->
 <div
   role="radiogroup"
-  class="kern-fieldset__body"
+  class="kern-fieldset__body has-[[aria-invalid=true]]:border-l-4 has-[[aria-invalid=true]]:border-l-kern-feedback-warning has-[[aria-invalid=true]]:pl-16"
   aria-labelledby={field.labelId}
   data-wizard-field={field.name}
 >
@@ -31,7 +31,7 @@ const { field, options } = Astro.props;
         value={option.value}
         aria-required="true"
         aria-errormessage={field.errorId}
-        class="kern-form-check__radio self-start aria-invalid:border-yellow-700 aria-invalid:bg-yellow-200 aria-invalid:text-black"
+        class="kern-form-check__radio self-start aria-invalid:border-kern-feedback-warning aria-invalid:text-black"
       />
       <label for={`${field.name}-${index}`} class="kern-label">
         {option.label}
