@@ -74,11 +74,11 @@ const { title, progress, isWide = false } = Astro.props;
   </div>
   <!-- Inline, so it scrolls before the first paint -->
   <script is:inline>
-    // Keeps the page header scrolled out between steps, so the sticky
-    // sidebar and help panel don't jump on every step change.
+    // Scrolls the page header out when coming from another step, so the
+    // sticky sidebar and help panel don't jump on every step change.
     // Back/forward and reload are left to the browser's scroll restoration.
     {
-      const key = "wizard-header-scrolled-out-from";
+      const key = "wizard-step-left";
       const header = document.querySelector(".page-header");
       const [navigation] = performance.getEntriesByType("navigation");
       if (
@@ -88,9 +88,9 @@ const { title, progress, isWide = false } = Astro.props;
       ) {
         window.scrollTo({ top: header.offsetHeight, behavior: "instant" });
       }
+      // On pagehide, not on load: pages restored from the bfcache don't rerun this
       addEventListener("pagehide", () => {
-        const isScrolledOut = window.scrollY >= header.offsetHeight;
-        sessionStorage.setItem(key, isScrolledOut ? location.href : "");
+        sessionStorage.setItem(key, location.href);
       });
     }
   </script>
