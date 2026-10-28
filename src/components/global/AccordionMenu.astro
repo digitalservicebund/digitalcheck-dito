@@ -15,3 +15,17 @@ const entries = buildAccordeonEntries(sectionRoot, currentPath);
 <div class="overflow-auto px-16 py-24" data-pagefind-ignore>
   <AccordeonMenuLevel entries={entries} currentPath={currentPath} />
 </div>
+<!-- Inline, so it scrolls before the first paint -->
+<script is:inline>
+  // Centers the current page in the menu. Not with scrollIntoView, which
+  // would also scroll the page.
+  {
+    const menu = document.currentScript.previousElementSibling;
+    const current = menu.querySelector('[aria-current="page"]');
+    if (current) {
+      const offset =
+        current.getBoundingClientRect().top - menu.getBoundingClientRect().top;
+      menu.scrollTop += offset - (menu.clientHeight - current.offsetHeight) / 2;
+    }
+  }
+</script>
