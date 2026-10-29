@@ -1,5 +1,5 @@
 # Download and install the dependencies for building the app
-FROM node:26.1.0-alpine3.23 AS base
+FROM node:26.12.1-alpine3.23 AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV MISE_DATA_DIR="/mise"
