@@ -1,0 +1,1 @@
+import{n as e}from"./stores.D58xpRyj.js";document.querySelectorAll(`a[data-wizard-resume-link]`).forEach(t=>{let n=t.dataset.wizardResumeLink;e[n].$resumePath.subscribe(e=>{t.href=e})});
