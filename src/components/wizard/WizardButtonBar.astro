@@ -1,4 +1,5 @@
 ---
+import WizardLockedModal from "@/components/wizard/WizardLockedModal.astro";
 import { removeTrailingSlash } from "@/utils/path";
 import { getWizardSession, wizardFlows, type WizardId } from "@/wizard/session";
 import IconPublishedWithChanges from "~icons/ic/baseline-published-with-changes";
@@ -30,11 +31,14 @@ const {
 const session = getWizardSession(wizardId, Astro.url.pathname);
 const backHref = session.prevPath ?? fallbackBackHref;
 const nextHref = session.nextPath();
-// The last page has no "Weiter". On other pages it's disabled while a guard
+// The last page has no "Weiter". On other pages it opens a modal while a guard
 // blocks the next page, e.g. the result until all questions are answered.
+// Without user data at build time, such guards block, so only these pages
+// get the modal.
 const isFinal = wizardFlows[wizardId].isFinal(
   removeTrailingSlash(Astro.url.pathname),
 );
+const lockedModalId = `${wizardId}-next-locked-modal`;
 ---
 
 <!-- At the end of the page content, see WizardLayout.astro -->
@@ -64,14 +68,29 @@ const isFinal = wizardFlows[wizardId].isFinal(
         <span class="kern-label">Weiter</span>
       </button>
     ) : !isFinal ? (
-      <a
-        data-wizard-next
-        href={nextHref}
-        aria-disabled={nextHref ? undefined : "true"}
-        class="kern-btn kern-btn--primary link-unstyled"
-      >
-        <span class="kern-label">Weiter</span>
-      </a>
+      <>
+        <a
+          data-wizard-next
+          href={nextHref}
+          hidden={!nextHref}
+          class="kern-btn kern-btn--primary link-unstyled"
+        >
+          <span class="kern-label">Weiter</span>
+        </a>
+        {!nextHref && (
+          <>
+            <button
+              type="button"
+              data-wizard-next-locked
+              popovertarget={lockedModalId}
+              class="kern-btn kern-btn--primary"
+            >
+              <span class="kern-label">Weiter</span>
+            </button>
+            <WizardLockedModal id={lockedModalId} wizardId={wizardId} />
+          </>
+        )}
+      </>
     ) : (
       finalNext && (
         <a
@@ -103,16 +122,13 @@ const isFinal = wizardFlows[wizardId].isFinal(
     else link.removeAttribute("href");
   };
 
-  // Keeps the link visible, but without href while there is no next page
-  const setNextLink = (link: HTMLAnchorElement | null, path?: string) => {
-    if (!link) return;
-    if (path) {
-      link.href = path;
-      link.removeAttribute("aria-disabled");
-    } else {
-      link.removeAttribute("href");
-      link.setAttribute("aria-disabled", "true");
-    }
+  // While there is no next page, the button opening the modal replaces the link
+  const setNextLink = (bar: HTMLElement, path?: string) => {
+    setLink(bar.querySelector("[data-wizard-next]"), path);
+    const lockedButton = bar.querySelector<HTMLElement>(
+      "[data-wizard-next-locked]",
+    );
+    if (lockedButton) lockedButton.hidden = !!path;
   };
 
   document
@@ -128,10 +144,7 @@ const isFinal = wizardFlows[wizardId].isFinal(
           bar.querySelector("[data-wizard-back]"),
           session.prevPath ?? bar.dataset.fallbackBackHref,
         );
-        setNextLink(
-          bar.querySelector("[data-wizard-next]"),
-          session.nextPath(),
-        );
+        setNextLink(bar, session.nextPath());
       });
     });
 </script>

@@ -48,10 +48,13 @@ test.describe("test questions form", () => {
       await page.waitForURL(questions[i + 1].path);
       await waitForHydration(page);
     }
-    const next = page.getByRole("link", { name: "Weiter", exact: true });
-    await expect(next).toHaveAttribute("aria-disabled", "true");
+    // "Weiter" opens a modal, which links the first unanswered question
     await page.getByLabel("Ja").click();
-    await expect(next).toHaveAttribute("aria-disabled", "true");
+    await page.getByRole("button", { name: "Weiter", exact: true }).click();
+    const modal = page.getByRole("dialog");
+    await expect(modal).toContainText("Bitte beantworten Sie alle Fragen");
+    await modal.getByRole("link", { name: "Zur offenen Frage" }).click();
+    await expect(page).toHaveURL(questions[0].path);
 
     await page.goto(assistent_vorpruefung_ergebnis.path);
     await expect(page).toHaveURL(questions[0].path);
