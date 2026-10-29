@@ -1,0 +1,65 @@
+---
+import Modal from "@/components/Modal.astro";
+import { type WizardId, wizardFlows } from "@/wizard/session";
+
+// Opened instead of the final page of a wizard (e.g. the Ergebnis) while it
+// isn't reachable, i.e. until all questions are answered.
+// Usage: <button popovertarget={id}>…</button>
+
+interface Props {
+  /** Unique per page, as the button bar and the sidebar each render one */
+  id: string;
+  wizardId: WizardId;
+}
+
+const { id, wizardId } = Astro.props;
+
+const bodies: Record<WizardId, string> = {
+  vorpruefung:
+    "Bevor Sie ein Ergebnis erhalten, müssen Sie zunächst alle Fragen der Vorprüfung beantworten.",
+  dokumentation:
+    "Bevor Sie die Dokumentation abschließen, müssen Sie zunächst alle Fragen der Dokumentation beantworten.",
+};
+---
+
+<Modal id={id} contentClass="max-w-600 max-h-screen">
+  <h2 slot="heading" class="kern-title kern-title--large mt-8">
+    Bitte beantworten Sie alle Fragen
+  </h2>
+  <p slot="body" class="kern-body kern-body--large">
+    {bodies[wizardId]}
+  </p>
+  <button
+    type="button"
+    class="kern-btn kern-btn--secondary"
+    popovertarget={id}
+    popovertargetaction="hide"
+    slot="buttonLeft"
+  >
+    <span class="kern-label">Schließen</span>
+  </button>
+  {/* The script below links the first unanswered question */}
+  <a
+    class="kern-btn kern-btn--primary link-unstyled"
+    href={wizardFlows[wizardId].initialPath}
+    data-wizard-resume-link={wizardId}
+    slot="buttonRight"
+  >
+    <span class="kern-label">Zur offenen Frage</span>
+  </a>
+</Modal>
+
+<script>
+  import type { WizardId } from "@/wizard/session";
+  import { wizardStores } from "@/wizard/stores";
+
+  document
+    .querySelectorAll<HTMLAnchorElement>("a[data-wizard-resume-link]")
+    .forEach((link) => {
+      const wizardId = link.dataset.wizardResumeLink as WizardId;
+      // Also updates when the answers change later, e.g. in another tab
+      wizardStores[wizardId].$resumePath.subscribe((resumePath) => {
+        link.href = resumePath;
+      });
+    });
+</script>

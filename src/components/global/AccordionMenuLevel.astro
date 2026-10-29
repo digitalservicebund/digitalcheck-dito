@@ -1,5 +1,6 @@
 ---
 import Self from "@/components/global/AccordionMenuLevel.astro";
+import WizardLockedModal from "@/components/wizard/WizardLockedModal.astro";
 import { twMerge } from "tailwind-merge";
 import type { AccordeonNavigationEntry } from "@/utils/navigation/accordion";
 import {
@@ -56,12 +57,30 @@ function isLockedWizardPage(path: string) {
   return !getWizardSession(wizardId, initialPath).isReachable(path);
 }
 
+// The final page of a wizard (e.g. the Ergebnis) opens a modal instead while
+// it's locked, which links the first unanswered question. Other locked pages
+// (e.g. the EU steps without EU-Bezug) stay disabled. Returns its wizard.
+function lockedFinalPageWizard(entry: AccordeonNavigationEntry) {
+  const wizardId = getWizardIdForPath(entry.path);
+  return wizardId &&
+    !entry.isCurrent &&
+    wizardFlows[wizardId].isFinal(entry.path) &&
+    isLockedWizardPage(entry.path)
+    ? wizardId
+    : undefined;
+}
+
 function panelId(path: string) {
   return `accordion-panel-${path.replace(/[^a-zA-Z0-9]+/g, "-").replace(/^-+|-+$/g, "")}`;
 }
+
+const items = entries.map((entry) => ({
+  ...entry,
+  lockedWizard: lockedFinalPageWizard(entry),
+}));
 ---
 
-{entries.map((entry) =>
+{items.map((entry) =>
   isCollapsible(entry, level) ? (
     <div
       class:list={["accordion-item", entry.eyebrow && "with-eyebrow"]}
@@ -130,8 +149,35 @@ function panelId(path: string) {
     </div>
   ) : (
     <>
+      {entry.lockedWizard && (
+        <>
+          <button
+            type="button"
+            data-wizard-locked-link={entry.path}
+            popovertarget={`${entry.lockedWizard}-menu-locked-modal`}
+            class={twMerge(
+              linkHoverStyle(),
+              "accordion-item kern-body block w-full cursor-pointer rounded-sm text-left",
+              entry.eyebrow && "with-eyebrow",
+            )}
+            style={indentStyle(level)}
+          >
+            {entry.eyebrow && (
+              <span class="eyebrow block text-(length:--kern-typography-font-size-small-static) font-normal italic">
+                {entry.eyebrow}
+              </span>
+            )}
+            {entry.label}
+          </button>
+          <WizardLockedModal
+            id={`${entry.lockedWizard}-menu-locked-modal`}
+            wizardId={entry.lockedWizard}
+          />
+        </>
+      )}
       <a
         href={isLockedWizardPage(entry.path) ? undefined : entry.path}
+        hidden={!!entry.lockedWizard}
         data-wizard-link={getWizardIdForPath(entry.path)}
         data-path={entry.path}
         aria-disabled={isLockedWizardPage(entry.path) ? "true" : undefined}
@@ -212,6 +258,11 @@ function panelId(path: string) {
           });
       });
 
+      // A locked final page has a button opening the modal, which replaces the link
+      const lockedButton = document.querySelector<HTMLElement>(
+        `[data-wizard-locked-link="${path}"]`,
+      );
+
       wizardStores[wizardId].$isReachable.subscribe((isReachable) => {
         if (isReachable(path)) {
           link.href = path;
@@ -219,6 +270,10 @@ function panelId(path: string) {
         } else {
           link.removeAttribute("href");
           link.setAttribute("aria-disabled", "true");
+        }
+        if (lockedButton) {
+          link.hidden = !isReachable(path);
+          lockedButton.hidden = isReachable(path);
         }
       });
     });
