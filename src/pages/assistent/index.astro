@@ -25,7 +25,7 @@ const prinzipien = (await getCollection("prinzipien"))
   .toSorted((a, b) => a.order - b.order);
 ---
 
-<Layout title={frontmatter.title}>
+<Layout title={frontmatter.title} noFooter>
   <main class="breakout-grid">
     <Hero variant="plain">
       <h1>{frontmatter.title}</h1>
