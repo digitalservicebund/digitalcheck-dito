@@ -70,6 +70,8 @@ fileignoreconfig:
     checksum: 27bd925f90d37e2319f107d5f89c39da159281d6ac750b575a00044d165383e4
   - filename: src/assets/images/europa-karte.png
     checksum: 50db3636fffb722578351d3a4143955566e2ed90b8735907d64d67e260ae2014
+  - filename: src/pages/bundeslaender/_assets/HESSEN_Logo_stacked.png
+    checksum: 177695ec813e3e103b23acfbd978205178c3ff6c227859b7f8a623257c2257ba
 
 allowed_patterns:
   - key
