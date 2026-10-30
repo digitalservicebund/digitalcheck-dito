@@ -31,6 +31,24 @@ export const bundeslaender = {
   navLabel: "Bundesländer",
 } as const;
 
+export const bundeslaender_hessen = {
+  key: "bundeslaender_hessen",
+  path: "/bundeslaender/hessen",
+  title: "Digitalcheck Hessen",
+  parent: bundeslaender,
+  sitemap: false,
+  isStagingOnly: true,
+} as const;
+
+export const bundeslaender_nordrheinWestfalen = {
+  key: "bundeslaender_nordrheinWestfalen",
+  path: "/bundeslaender/nordrhein-westfalen",
+  title: "Digitalcheck NRW",
+  parent: bundeslaender,
+  sitemap: false,
+  isStagingOnly: true,
+} as const;
+
 export const dasIstNeu = {
   key: "dasIstNeu",
   path: "/das-ist-neu",
@@ -332,6 +350,8 @@ export const vorpruefung_hinweise = {
 export const allRoutes = [
   barrierefreiheit,
   bundeslaender,
+  bundeslaender_hessen,
+  bundeslaender_nordrheinWestfalen,
   dasIstNeu,
   datenschutz,
   dev,
