@@ -19,11 +19,12 @@ export default function ResultTable() {
             <th className="kern-table__header" scope="col">
               Frage
             </th>
+            <th className="kern-table__header max-sm:hidden" scope="col">
+              Frage
+            </th>
+
             <th className="kern-table__header" scope="col">
               Antwort
-            </th>
-            <th className="kern-table__header max-sm:hidden" scope="col">
-              Auswirkung
             </th>
             <th
               className="kern-table__header kern-table__header--action print:hidden"
@@ -35,18 +36,18 @@ export default function ResultTable() {
         </thead>
         <tbody className="kern-table__body">
           {questionNames.map((name) => {
-            const { route, explanations } = resultRows[name];
+            const { route, explanation } = resultRows[name];
             const answer = data[name];
             return (
               <tr key={name} className="kern-table__row">
                 <th className="kern-table__header" scope="row">
                   {route.title}
                 </th>
+                <td className="kern-table__cell max-sm:hidden">
+                  {explanation}
+                </td>
                 <td className="kern-table__cell">
                   {answer ? answerLabels[answer] : "–"}
-                </td>
-                <td className="kern-table__cell max-sm:hidden">
-                  {answer ? explanations[answer] : "Noch nicht beantwortet."}
                 </td>
                 <td className="kern-table__cell kern-table__cell--action py-8 print:hidden">
                   <a href={route.path} className="kern-link">

@@ -51,63 +51,38 @@ export const answerLabels = Object.fromEntries(
   answerOptions.map(({ value, label }) => [value, label]),
 ) as Record<Answer, string>;
 
-const noDigitalReference = "Kein Digitalbezug aus dieser Frage.";
-const unsure = "Noch offen – prüfen Sie diese Antwort.";
-
-// Title and path come from the question page, the explanations per answer
-// describe its effect on the result.
+// Title and path come from the question page, the explanation summarizes the
+// question and is the same for every answer.
 export const resultRows = {
   "it-system": {
     route: assistent_vorpruefung_itSystem,
-    explanations: {
-      yes: "Neues oder angepasstes IT-System – direkter Digitalbezug.",
-      no: noDigitalReference,
-      unsure,
-    },
+    explanation: "Muss ein IT-System angepasst oder neu entwickelt werden?",
   },
   "verpflichtungen-fuer-beteiligte": {
     route: assistent_vorpruefung_verpflichtungenFuerBeteiligte,
-    explanations: {
-      yes: "Mitwirkungspflichten sollten digital erfüllbar sein.",
-      no: noDigitalReference,
-      unsure,
-    },
+    explanation: "Entstehen durch die Regelung Mitwirkungspflichten?",
   },
   datenaustausch: {
     route: assistent_vorpruefung_datenaustausch,
-    explanations: {
-      yes: "Datenwiederverwendung braucht digitale Schnittstellen.",
-      no: noDigitalReference,
-      unsure,
-    },
+    explanation: "Soll ein Datenaustausch stattfinden?",
   },
   kommunikation: {
     route: assistent_vorpruefung_kommunikation,
-    explanations: {
-      yes: "Interaktion mit Behörden sollte digital möglich sein.",
-      no: noDigitalReference,
-      unsure,
-    },
+    explanation:
+      "Kommt es zu einer Interaktion zwischen Adressatinnen und Adressaten?",
   },
   automatisierung: {
     route: assistent_vorpruefung_automatisierung,
-    explanations: {
-      yes: "Schritte der Umsetzung lassen sich digital automatisieren.",
-      no: noDigitalReference,
-      unsure,
-    },
+    explanation: "Können Schritte automatisiert werden?",
   },
   "eu-bezug": {
     route: assistent_vorpruefung_euBezug,
-    explanations: {
-      yes: "Löst die Anforderungen der Verordnung (EU) 2024/903 aus.",
-      no: "Keine Anforderungen aus der Verordnung (EU) 2024/903.",
-      unsure,
-    },
+    explanation:
+      "Sollen Daten zwischen EU-Mitgliedstaaten ausgetauscht werden?",
   },
 } as const satisfies Record<
   VorpruefungQuestion,
-  { route: Route; explanations: Record<Answer, string> }
+  { route: Route; explanation: string }
 >;
 
 // Same order as the questions in the flow
