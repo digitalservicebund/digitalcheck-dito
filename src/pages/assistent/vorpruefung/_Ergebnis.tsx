@@ -70,10 +70,8 @@ const emailBody = (
       "So kommt das Ergebnis zustande:",
       ...questionNames.map((name) => {
         const answer = data[name];
-        const { route, explanations } = resultRows[name];
-        return answer
-          ? `- ${route.title}: ${answerLabels[answer]} – ${explanations[answer]}`
-          : `- ${route.title}: –`;
+        const { route, explanation } = resultRows[name];
+        return `- ${route.title} (${explanation}): ${answer ? answerLabels[answer] : "–"}`;
       }),
     ].join("\n"),
     "Mit freundlichen Grüßen",
@@ -423,7 +421,7 @@ export default function Ergebnis() {
 
       <div className="space-y-16">
         <h2 className="kern-heading-medium print:hidden">
-          So kommt das Ergebnis zustande – jede Antwort einzeln korrigierbar:
+          Übersicht Ihrer Antworten
         </h2>
         <ResultTable />
       </div>
